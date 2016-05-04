@@ -313,6 +313,12 @@
     <Compile Include="FormAccountingJournalDet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormAccountingLedger.Designer.vb">
+      <DependentUpon>FormAccountingLedger.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormAccountingLedger.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormAccountingListPR.designer.vb">
       <DependentUpon>FormAccountingListPR.vb</DependentUpon>
     </Compile>
@@ -4126,6 +4132,9 @@
     <EmbeddedResource Include="FormAccountingJournalDet.resx">
       <DependentUpon>FormAccountingJournalDet.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAccountingLedger.resx">
+      <DependentUpon>FormAccountingLedger.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormAccountingListPR.resx">
       <DependentUpon>FormAccountingListPR.vb</DependentUpon>

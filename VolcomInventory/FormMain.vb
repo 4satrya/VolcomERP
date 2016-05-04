@@ -9466,4 +9466,17 @@ Public Class FormMain
         End Try
         Cursor = Cursors.Default
     End Sub
+
+    Private Sub NBActLedger_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBActLedger.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormAccountingLedger.MdiParent = Me
+            FormAccountingLedger.Show()
+            FormAccountingLedger.WindowState = FormWindowState.Maximized
+            FormAccountingLedger.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
 End Class

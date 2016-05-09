@@ -5,6 +5,7 @@
     Public id_ref As String = "-1"
     Public id_cc As String = "-1"
     Public report_mark_typex As String = "-1"
+
     Public report_numberx As String = "-1"
 
     Private Sub FormAccountingJournalBill_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -525,6 +526,79 @@
                     infoCustom("Refference not found.")
                 End If
             ElseIf LEBilling.EditValue.ToString = "4" Then 'Promo
+                Dim query As String = ""
+                Dim id_ref As String = ""
+                Dim id_acc As String = ""
+                Dim acc_name As String = ""
+                Dim acc_desc As String = ""
+                Dim debit, credit As Decimal
+                Dim report_mark_type As String = ""
+                Dim report_number As String = ""
+                Dim comp_name As String = ""
+
+                query = "SELECT s_p.id_sales_pos,comp_c.id_comp,comp.comp_name,s_p.sales_pos_number, s_p.sales_pos_total,s_p.sales_pos_discount,s_p.sales_pos_vat,(s_p.sales_pos_total*((100-s_p.sales_pos_discount)/100) ) AS netto, (((100+s_p.sales_pos_vat)/100)*(s_p.sales_pos_total*((100-s_p.sales_pos_discount)/100))) AS kena_ppn,((s_p.sales_pos_vat/100)*(s_p.sales_pos_total*((100-s_p.sales_pos_discount)/100))) AS ppn"
+                query += " FROM tb_sales_pos s_p INNER JOIN tb_m_comp_contact comp_c ON comp_c.id_comp_contact=s_p.id_store_contact_from "
+                query += " INNER JOIN tb_m_comp comp ON comp.id_comp=comp_c.id_comp "
+                query += " WHERE sales_pos_number = '" + TEReffNumber.Text + "' AND id_memo_type='5'"
+                Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+                If data.Rows.Count > 0 Then
+                    report_mark_type = "76"
+                    report_mark_typex = "76"
+
+                    report_numberx = TEReffNumber.Text
+                    id_cc = data.Rows(0)("id_comp").ToString
+                    report_number = data.Rows(0)("sales_pos_number").ToString
+                    id_ref = data.Rows(0)("id_sales_pos").ToString
+                    comp_name = data.Rows(0)("comp_name").ToString
+
+                    query = "SELECT coa_map_d.id_coa_map_det,comp_coa.id_acc,acc.acc_name,acc.acc_description "
+                    query += " FROM tb_m_comp_coa comp_coa "
+                    query += " INNER JOIN tb_coa_map_det coa_map_d ON coa_map_d.id_coa_map_det=comp_coa.id_coa_map_det"
+                    query += " INNER JOIN tb_coa_map coa_map ON coa_map_d.id_coa_map=coa_map.id_coa_map"
+                    query += " INNER JOIN tb_a_acc acc ON acc.id_acc=comp_coa.id_acc"
+                    query += " WHERE comp_coa.id_comp='" + id_cc + "' AND coa_map.id_coa_map='2'"
+                    Dim data_acc As DataTable = execute_query(query, -1, True, "", "", "", "")
+
+                    If data_acc.Rows.Count > 0 Then 'id_coa_map = 1
+                        'id_acc piutang dagang
+                        Dim data_filter As DataRow() = data_acc.Select("[id_coa_map_det]='4'")
+                        id_acc = data_filter(0)("id_acc").ToString
+                        acc_name = data_filter(0)("acc_name").ToString
+                        acc_desc = data_filter(0)("acc_description").ToString
+
+                        debit = 0
+                        credit = data.Rows(0)("netto")
+
+                        add_journal(id_acc, acc_name, acc_desc, debit, credit, id_cc, report_mark_type, id_ref, report_number)
+                        'end id_acc piutang dagang
+
+                        'id_acc PPN
+                        data_filter = data_acc.Select("[id_coa_map_det]='5'")
+                        id_acc = data_filter(0)("id_acc").ToString
+                        acc_name = data_filter(0)("acc_name").ToString
+                        acc_desc = data_filter(0)("acc_description").ToString
+
+                        debit = data.Rows(0)("ppn")
+                        credit = 0
+                        add_journal(id_acc, acc_name, acc_desc, debit, credit, id_cc, report_mark_type, id_ref, report_number)
+                        'end id_acc PPN
+
+                        'id_acc penjualan
+                        data_filter = data_acc.Select("[id_coa_map_det]='6'")
+                        id_acc = data_filter(0)("id_acc").ToString
+                        acc_name = data_filter(0)("acc_name").ToString
+                        acc_desc = data_filter(0)("acc_description").ToString
+
+                        debit = data.Rows(0)("kena_ppn")
+                        credit = 0
+                        add_journal(id_acc, acc_name, acc_desc, debit, credit, id_cc, report_mark_type, id_ref, report_number)
+                    Else
+                        stopCustom("Store account not registered")
+                    End If
+                Else
+                    infoCustom("Refference not found.")
+                End If
+            ElseIf LEBilling.EditValue.ToString = "5" Then 'Adjustment
                 Dim query As String = ""
                 Dim id_ref As String = ""
                 Dim id_acc As String = ""

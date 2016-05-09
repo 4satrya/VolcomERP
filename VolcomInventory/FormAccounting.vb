@@ -92,11 +92,6 @@ Public Class FormAccounting
 
         Next
 
-        ' Create a child node for the node1            
-        'tl.AppendNode(New Object() {"Suyama, Michael", "Obere Str. 55", "030-0074263"}, rootNode)
-        ' Creating more nodes
-        ' ...
-
         tl.EndUnboundLoad()
         tl.ExpandAll()
     End Sub

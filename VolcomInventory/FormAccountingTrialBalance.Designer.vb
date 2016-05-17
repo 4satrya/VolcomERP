@@ -49,6 +49,7 @@ Partial Class FormAccountingTrialBalance
         Me.GCAccTrans.Location = New System.Drawing.Point(0, 44)
         Me.GCAccTrans.MainView = Me.GVAccTrans
         Me.GCAccTrans.Name = "GCAccTrans"
+        Me.GCAccTrans.Size = New System.Drawing.Size(817, 290)
         Me.GCAccTrans.TabIndex = 10
         Me.GCAccTrans.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVAccTrans})
         '
@@ -138,11 +139,12 @@ Partial Class FormAccountingTrialBalance
         Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl2.Location = New System.Drawing.Point(0, 0)
         Me.PanelControl2.Name = "PanelControl2"
+        Me.PanelControl2.Size = New System.Drawing.Size(817, 44)
         Me.PanelControl2.TabIndex = 11
         '
         'BViewJournal
         '
-        Me.BViewJournal.Location = New System.Drawing.Point(440, 12)
+        Me.BViewJournal.Location = New System.Drawing.Point(434, 11)
         Me.BViewJournal.Name = "BViewJournal"
         Me.BViewJournal.Size = New System.Drawing.Size(119, 22)
         Me.BViewJournal.TabIndex = 152
@@ -192,6 +194,7 @@ Partial Class FormAccountingTrialBalance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(817, 334)
         Me.Controls.Add(Me.GCAccTrans)
         Me.Controls.Add(Me.PanelControl2)
         Me.Name = "FormAccountingTrialBalance"

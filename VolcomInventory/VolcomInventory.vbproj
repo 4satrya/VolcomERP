@@ -253,6 +253,12 @@
     <Compile Include="FormAccountingAcc.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormAccountingAsset.Designer.vb">
+      <DependentUpon>FormAccountingAsset.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormAccountingAsset.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormAccountingFakturScan.Designer.vb">
       <DependentUpon>FormAccountingFakturScan.vb</DependentUpon>
     </Compile>
@@ -4100,6 +4106,9 @@
     <EmbeddedResource Include="FormAccountingAcc.resx">
       <DependentUpon>FormAccountingAcc.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAccountingAsset.resx">
+      <DependentUpon>FormAccountingAsset.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormAccountingFakturScan.resx">
       <DependentUpon>FormAccountingFakturScan.vb</DependentUpon>

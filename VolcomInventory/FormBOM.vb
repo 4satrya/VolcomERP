@@ -370,9 +370,25 @@
     End Sub
 
     Private Sub BPrint_Click(sender As Object, e As EventArgs) Handles BPrint.Click
-        print(GCPerDesign, "List Design " + SLESeason.Text)
+        'print(GCPerDesign, "List Design " + SLESeason.Text)
+        print_bom(GCPerDesign, "List Design " + SLESeason.Text)
     End Sub
+    Sub print_bom(ByVal GridControlHere As DevExpress.XtraGrid.GridControl, ByVal title_here As String)
+        'change BOM column
 
+        '
+        title_print = ""
+        title_print = title_here
+        Dim componentLink As New DevExpress.XtraPrinting.PrintableComponentLink(New DevExpress.XtraPrinting.PrintingSystem())
+        componentLink.Component = GridControlHere
+        componentLink.Landscape = True
+        AddHandler componentLink.CreateMarginalHeaderArea, AddressOf CreateMarginalHeaderArea
+        AddHandler componentLink.CreateReportHeaderArea, AddressOf CreateReportHeaderArea
+        Dim phf As DevExpress.XtraPrinting.PageHeaderFooter = TryCast(componentLink.PageHeaderFooter, DevExpress.XtraPrinting.PageHeaderFooter)
+
+        componentLink.CreateDocument()
+        componentLink.ShowPreview()
+    End Sub
     Private Sub GVPerDesign_ColumnFilterChanged(sender As Object, e As EventArgs) Handles GVPerDesign.ColumnFilterChanged
         If Not GVPerDesign.FocusedRowHandle < 0 Then
             show_bom_per_design(GVPerDesign.GetFocusedRowCellValue("id_design").ToString)

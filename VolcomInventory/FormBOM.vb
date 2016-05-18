@@ -382,8 +382,8 @@
         Dim componentLink As New DevExpress.XtraPrinting.PrintableComponentLink(New DevExpress.XtraPrinting.PrintingSystem())
         componentLink.Component = GridControlHere
         componentLink.Landscape = True
-        AddHandler componentLink.CreateMarginalHeaderArea, AddressOf CreateMarginalHeaderArea
-        AddHandler componentLink.CreateReportHeaderArea, AddressOf CreateReportHeaderArea
+        'AddHandler componentLink.CreateMarginalHeaderArea, AddressOf CreateMarginalHeaderArea
+        'AddHandler componentLink.CreateReportHeaderArea, AddressOf CreateReportHeaderArea
         Dim phf As DevExpress.XtraPrinting.PageHeaderFooter = TryCast(componentLink.PageHeaderFooter, DevExpress.XtraPrinting.PageHeaderFooter)
 
         componentLink.CreateDocument()

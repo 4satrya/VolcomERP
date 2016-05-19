@@ -146,7 +146,7 @@ Public Class FormBarcodeProductPrint
                         print_command += "" & vbNewLine
                     Next
                 Next
-                print_command = print_command.ToString().Replace("<ESC>", (ChrW(27)).ToString())
+                'print_command = print_command.ToString().Replace("<ESC>", (ChrW(27)).ToString())
             ElseIf LEPrinter.EditValue.ToString = "2" 'zebra
                 For j As Integer = 1 To SEQtyPrint.EditValue
                     For i As Integer = SEPrintFrom.EditValue To SEPrintTo.EditValue
@@ -201,12 +201,14 @@ Public Class FormBarcodeProductPrint
                 print_command = print_command.ToString()
             End If
 
-            Dim pd As New PrintDialog()
+            Console.WriteLine(print_command)
 
-            pd.PrinterSettings = New PrinterSettings()
-            If (pd.ShowDialog() = DialogResult.OK) Then
-                RawPrinterHelper.SendStringToPrinter(pd.PrinterSettings.PrinterName, print_command)
-            End If
+            'Dim pd As New PrintDialog()
+
+            'pd.PrinterSettings = New PrinterSettings()
+            'If (pd.ShowDialog() = DialogResult.OK) Then
+            'RawPrinterHelper.SendStringToPrinter(pd.PrinterSettings.PrinterName, print_command)
+            'End If
         End If
     End Sub
 

@@ -22,6 +22,7 @@ Partial Class FormBarcodeProductPrint
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormBarcodeProductPrint))
         Me.GroupGeneralHeader = New DevExpress.XtraEditors.GroupControl()
+        Me.LabelControl14 = New DevExpress.XtraEditors.LabelControl()
         Me.TEPrice = New DevExpress.XtraEditors.TextEdit()
         Me.TECurPrice = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl12 = New DevExpress.XtraEditors.LabelControl()
@@ -57,6 +58,7 @@ Partial Class FormBarcodeProductPrint
         Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
         Me.BtnPrintBack = New DevExpress.XtraEditors.SimpleButton()
         Me.BPrint = New DevExpress.XtraEditors.SimpleButton()
+        Me.TELastUnique = New DevExpress.XtraEditors.TextEdit()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
         CType(Me.TEPrice.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -80,11 +82,14 @@ Partial Class FormBarcodeProductPrint
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TELastUnique.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupGeneralHeader
         '
         Me.GroupGeneralHeader.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupGeneralHeader.Controls.Add(Me.TELastUnique)
+        Me.GroupGeneralHeader.Controls.Add(Me.LabelControl14)
         Me.GroupGeneralHeader.Controls.Add(Me.TEPrice)
         Me.GroupGeneralHeader.Controls.Add(Me.TECurPrice)
         Me.GroupGeneralHeader.Controls.Add(Me.LabelControl12)
@@ -104,8 +109,16 @@ Partial Class FormBarcodeProductPrint
         Me.GroupGeneralHeader.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupGeneralHeader.Location = New System.Drawing.Point(0, 0)
         Me.GroupGeneralHeader.Name = "GroupGeneralHeader"
-        Me.GroupGeneralHeader.Size = New System.Drawing.Size(752, 201)
+        Me.GroupGeneralHeader.Size = New System.Drawing.Size(752, 207)
         Me.GroupGeneralHeader.TabIndex = 34
+        '
+        'LabelControl14
+        '
+        Me.LabelControl14.Location = New System.Drawing.Point(559, 161)
+        Me.LabelControl14.Name = "LabelControl14"
+        Me.LabelControl14.Size = New System.Drawing.Size(81, 13)
+        Me.LabelControl14.TabIndex = 173
+        Me.LabelControl14.Text = "Last Unique Print"
         '
         'TEPrice
         '
@@ -263,7 +276,7 @@ Partial Class FormBarcodeProductPrint
         Me.PEView.Properties.LookAndFeel.SkinName = "Office 2010 Silver"
         Me.PEView.Properties.ShowMenu = False
         Me.PEView.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch
-        Me.PEView.Size = New System.Drawing.Size(169, 197)
+        Me.PEView.Size = New System.Drawing.Size(169, 203)
         Me.PEView.TabIndex = 4
         '
         'GroupControl1
@@ -283,7 +296,7 @@ Partial Class FormBarcodeProductPrint
         Me.GroupControl1.Controls.Add(Me.TEProdBarcode)
         Me.GroupControl1.Controls.Add(Me.LabelControl1)
         Me.GroupControl1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.GroupControl1.Location = New System.Drawing.Point(0, 201)
+        Me.GroupControl1.Location = New System.Drawing.Point(0, 207)
         Me.GroupControl1.Name = "GroupControl1"
         Me.GroupControl1.Size = New System.Drawing.Size(752, 106)
         Me.GroupControl1.TabIndex = 35
@@ -449,9 +462,9 @@ Partial Class FormBarcodeProductPrint
         Me.PanelControl1.Controls.Add(Me.BtnPrintBack)
         Me.PanelControl1.Controls.Add(Me.BPrint)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PanelControl1.Location = New System.Drawing.Point(0, 307)
+        Me.PanelControl1.Location = New System.Drawing.Point(0, 313)
         Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(752, 41)
+        Me.PanelControl1.Size = New System.Drawing.Size(752, 35)
         Me.PanelControl1.TabIndex = 36
         '
         'BtnPrintFront
@@ -461,7 +474,7 @@ Partial Class FormBarcodeProductPrint
         Me.BtnPrintFront.ImageList = Me.LargeImageCollection
         Me.BtnPrintFront.Location = New System.Drawing.Point(445, 2)
         Me.BtnPrintFront.Name = "BtnPrintFront"
-        Me.BtnPrintFront.Size = New System.Drawing.Size(114, 37)
+        Me.BtnPrintFront.Size = New System.Drawing.Size(114, 31)
         Me.BtnPrintFront.TabIndex = 14
         Me.BtnPrintFront.Text = "Print Front Only"
         '
@@ -488,7 +501,7 @@ Partial Class FormBarcodeProductPrint
         Me.BtnPrintBack.ImageList = Me.LargeImageCollection
         Me.BtnPrintBack.Location = New System.Drawing.Point(559, 2)
         Me.BtnPrintBack.Name = "BtnPrintBack"
-        Me.BtnPrintBack.Size = New System.Drawing.Size(109, 37)
+        Me.BtnPrintBack.Size = New System.Drawing.Size(109, 31)
         Me.BtnPrintBack.TabIndex = 13
         Me.BtnPrintBack.Text = "Print Back Only"
         '
@@ -499,9 +512,20 @@ Partial Class FormBarcodeProductPrint
         Me.BPrint.ImageList = Me.LargeImageCollection
         Me.BPrint.Location = New System.Drawing.Point(668, 2)
         Me.BPrint.Name = "BPrint"
-        Me.BPrint.Size = New System.Drawing.Size(82, 37)
+        Me.BPrint.Size = New System.Drawing.Size(82, 31)
         Me.BPrint.TabIndex = 12
         Me.BPrint.Text = "Print"
+        '
+        'TELastUnique
+        '
+        Me.TELastUnique.EditValue = ""
+        Me.TELastUnique.Location = New System.Drawing.Point(559, 180)
+        Me.TELastUnique.Name = "TELastUnique"
+        Me.TELastUnique.Properties.EditValueChangedDelay = 1
+        Me.TELastUnique.Properties.ReadOnly = True
+        Me.TELastUnique.Size = New System.Drawing.Size(181, 20)
+        Me.TELastUnique.TabIndex = 174
+        Me.TELastUnique.TabStop = False
         '
         'FormBarcodeProductPrint
         '
@@ -543,6 +567,7 @@ Partial Class FormBarcodeProductPrint
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TELastUnique.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -582,4 +607,6 @@ Partial Class FormBarcodeProductPrint
     Friend WithEvents BtnPrintBack As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents LabelControl13 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LEPrinter As DevExpress.XtraEditors.LookUpEdit
+    Friend WithEvents LabelControl14 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents TELastUnique As DevExpress.XtraEditors.TextEdit
 End Class

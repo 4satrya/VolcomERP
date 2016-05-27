@@ -19,31 +19,32 @@ Partial Class FormBarcodeProduct
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.GCProdList = New DevExpress.XtraGrid.GridControl
-        Me.GVProdList = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.GridColumnDesignCode = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnDesignDisplayName = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnProductCode = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnVendorCode = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnProductOrigin = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnDivision = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnProdSize = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnColod = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.PanelControlNavLineList = New DevExpress.XtraEditors.PanelControl
-        Me.PCNavLineList = New DevExpress.XtraEditors.PanelControl
-        Me.SLESeason = New DevExpress.XtraEditors.SearchLookUpEdit
-        Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.GridColumnIdSeason = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnRange = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnSeason = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl
-        Me.BtnView = New DevExpress.XtraEditors.SimpleButton
+        Me.GCProdList = New DevExpress.XtraGrid.GridControl()
+        Me.GVProdList = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumnDesignCode = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnDesignDisplayName = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnProductCode = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnVendorCode = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnProductOrigin = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnDivision = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnProdSize = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnColod = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.PanelControlNavLineList = New DevExpress.XtraEditors.PanelControl()
+        Me.PCNavLineList = New DevExpress.XtraEditors.PanelControl()
+        Me.SLESeason = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumnIdSeason = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnRange = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnSeason = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
+        Me.BtnView = New DevExpress.XtraEditors.SimpleButton()
+        Me.GridColumnlastUnique = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GCProdList, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVProdList, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControlNavLineList, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -66,7 +67,7 @@ Partial Class FormBarcodeProduct
         '
         'GVProdList
         '
-        Me.GVProdList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnDesignCode, Me.GridColumnDesignDisplayName, Me.GridColumnProductCode, Me.GridColumnVendorCode, Me.GridColumnProductOrigin, Me.GridColumnDivision, Me.GridColumnProdSize, Me.GridColumnColod, Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6})
+        Me.GVProdList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnDesignCode, Me.GridColumnDesignDisplayName, Me.GridColumnProductCode, Me.GridColumnVendorCode, Me.GridColumnProductOrigin, Me.GridColumnDivision, Me.GridColumnProdSize, Me.GridColumnColod, Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumnlastUnique})
         Me.GVProdList.GridControl = Me.GCProdList
         Me.GVProdList.GroupCount = 1
         Me.GVProdList.Name = "GVProdList"
@@ -241,7 +242,7 @@ Partial Class FormBarcodeProduct
         'SLESeason
         '
         Me.SLESeason.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.SLESeason.Location = New System.Drawing.Point(55, 7)
         Me.SLESeason.Name = "SLESeason"
         Me.SLESeason.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -299,6 +300,12 @@ Partial Class FormBarcodeProduct
         Me.BtnView.TabIndex = 94
         Me.BtnView.Text = "View List"
         '
+        'GridColumnlastUnique
+        '
+        Me.GridColumnlastUnique.Caption = "Last Unique"
+        Me.GridColumnlastUnique.FieldName = "last_unique"
+        Me.GridColumnlastUnique.Name = "GridColumnlastUnique"
+        '
         'FormBarcodeProduct
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -348,4 +355,5 @@ Partial Class FormBarcodeProduct
     Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnlastUnique As DevExpress.XtraGrid.Columns.GridColumn
 End Class

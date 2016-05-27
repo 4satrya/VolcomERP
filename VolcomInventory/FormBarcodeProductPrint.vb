@@ -12,6 +12,11 @@ Public Class FormBarcodeProductPrint
         If Not id_product = "-1" Then
             Dim id_design As String = FormBarcodeProduct.GVProdList.GetFocusedRowCellValue("id_design").ToString
 
+            TELastUnique.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+            TELastUnique.Properties.DisplayFormat.FormatString = "{0:d4}"
+            TELastUnique.EditValue = FormBarcodeProduct.GVProdList.GetFocusedRowCellValue("last_unique")
+
+
             TEDesignCode.EditValue = FormBarcodeProduct.GVProdList.GetFocusedRowCellValue("design_code").ToString
             TEDesignName.EditValue = FormBarcodeProduct.GVProdList.GetFocusedRowCellValue("design_display_name").ToString
             TEProdCode.EditValue = FormBarcodeProduct.GVProdList.GetFocusedRowCellValue("product_full_code").ToString
@@ -201,14 +206,21 @@ Public Class FormBarcodeProductPrint
                 print_command = print_command.ToString()
             End If
 
-            Console.WriteLine(print_command)
+            Dim pd As New PrintDialog()
 
-            'Dim pd As New PrintDialog()
-
-            'pd.PrinterSettings = New PrinterSettings()
-            'If (pd.ShowDialog() = DialogResult.OK) Then
-            'RawPrinterHelper.SendStringToPrinter(pd.PrinterSettings.PrinterName, print_command)
-            'End If
+            pd.PrinterSettings = New PrinterSettings()
+            If (pd.ShowDialog() = DialogResult.OK) Then
+                RawPrinterHelper.SendStringToPrinter(pd.PrinterSettings.PrinterName, print_command)
+                'update last unique
+                Dim query_upd As String = ""
+                query_upd = String.Format("UPDATE tb_m_product SET last_print_unique='{1}' WHERE id_product='{0}'", id_product, SEPrintTo.EditValue.ToString)
+                execute_non_query(query_upd, True, "", "", "", "")
+                '
+                TELastUnique.EditValue = SEPrintTo.Text
+                '
+                FormBarcodeProduct.viewProd()
+                FormBarcodeProduct.GVProdList.FocusedRowHandle = find_row(FormBarcodeProduct.GVProdList, "id_product", id_product)
+            End If
         End If
     End Sub
 

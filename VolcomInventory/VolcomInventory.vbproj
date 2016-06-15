@@ -622,6 +622,18 @@
     <Compile Include="FormGuide.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormHRDPO.Designer.vb">
+      <DependentUpon>FormHRDPO.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormHRDPO.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormHRDPODet.Designer.vb">
+      <DependentUpon>FormHRDPODet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormHRDPODet.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormMasterComnputerDet.Designer.vb">
       <DependentUpon>FormMasterComnputerDet.vb</DependentUpon>
     </Compile>
@@ -4341,6 +4353,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormGuide.resx">
       <DependentUpon>FormGuide.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormHRDPO.resx">
+      <DependentUpon>FormHRDPO.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormHRDPODet.resx">
+      <DependentUpon>FormHRDPODet.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMasterComnputerDet.resx">
       <DependentUpon>FormMasterComnputerDet.vb</DependentUpon>

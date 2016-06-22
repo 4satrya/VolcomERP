@@ -1419,6 +1419,10 @@ Public Class FormMain
             FormMasterDesignSingle.form_name = "FormFGDesignList"
             FormMasterDesignSingle.WindowState = FormWindowState.Maximized
             FormMasterDesignSingle.ShowDialog()
+        ElseIf formName = "FormEmpHoliday" Then
+            'Holiday Employee
+            FormEmpHolidayDet.id_emp_holiday = "-1"
+            FormEmpHolidayDet.ShowDialog()
         Else
             RPSubMenu.Visible = False
         End If
@@ -9530,6 +9534,19 @@ Public Class FormMain
             FormFGDesignList.Show()
             FormFGDesignList.WindowState = FormWindowState.Maximized
             FormFGDesignList.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBEmpHoliday_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBEmpHoliday.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormEmpHoliday.MdiParent = Me
+            FormEmpHoliday.Show()
+            FormEmpHoliday.WindowState = FormWindowState.Maximized
+            FormEmpHoliday.Focus()
         Catch ex As Exception
             errorProcess()
         End Try

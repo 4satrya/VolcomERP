@@ -464,6 +464,12 @@
     <Compile Include="FormEmpHoliday.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormEmpHolidayDet.Designer.vb">
+      <DependentUpon>FormEmpHolidayDet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormEmpHolidayDet.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormEmpLeave.Designer.vb">
       <DependentUpon>FormEmpLeave.vb</DependentUpon>
     </Compile>
@@ -4268,6 +4274,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormEmpHoliday.resx">
       <DependentUpon>FormEmpHoliday.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmpHolidayDet.resx">
+      <DependentUpon>FormEmpHolidayDet.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormEmpLeave.resx">
       <DependentUpon>FormEmpLeave.vb</DependentUpon>

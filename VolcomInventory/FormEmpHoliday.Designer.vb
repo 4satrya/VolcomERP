@@ -30,8 +30,8 @@ Partial Class FormEmpHoliday
         Me.GVSLEDesgSearch = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumnYear = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl9 = New DevExpress.XtraEditors.LabelControl()
-        Me.GCProd = New DevExpress.XtraGrid.GridControl()
-        Me.GVProd = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GCHoliday = New DevExpress.XtraGrid.GridControl()
+        Me.GVHoliday = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumnIdHoliday = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdReligion = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnReligion = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -44,8 +44,8 @@ Partial Class FormEmpHoliday
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLEYear.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVSLEDesgSearch, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GCProd, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GVProd, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GCHoliday, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVHoliday, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RIPictureEdit, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -144,25 +144,25 @@ Partial Class FormEmpHoliday
         Me.LabelControl9.TabIndex = 8897
         Me.LabelControl9.Text = "Year"
         '
-        'GCProd
+        'GCHoliday
         '
-        Me.GCProd.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCProd.Location = New System.Drawing.Point(0, 47)
-        Me.GCProd.MainView = Me.GVProd
-        Me.GCProd.Name = "GCProd"
-        Me.GCProd.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RIPictureEdit})
-        Me.GCProd.Size = New System.Drawing.Size(641, 279)
-        Me.GCProd.TabIndex = 3
-        Me.GCProd.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVProd})
+        Me.GCHoliday.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCHoliday.Location = New System.Drawing.Point(0, 47)
+        Me.GCHoliday.MainView = Me.GVHoliday
+        Me.GCHoliday.Name = "GCHoliday"
+        Me.GCHoliday.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RIPictureEdit})
+        Me.GCHoliday.Size = New System.Drawing.Size(641, 279)
+        Me.GCHoliday.TabIndex = 3
+        Me.GCHoliday.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVHoliday})
         '
-        'GVProd
+        'GVHoliday
         '
-        Me.GVProd.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdHoliday, Me.GridColumnIdReligion, Me.GridColumnReligion, Me.GridColumnDate, Me.GridColumnDesc})
-        Me.GVProd.GridControl = Me.GCProd
-        Me.GVProd.Name = "GVProd"
-        Me.GVProd.OptionsBehavior.Editable = False
-        Me.GVProd.OptionsFind.AlwaysVisible = True
-        Me.GVProd.OptionsView.ShowGroupPanel = False
+        Me.GVHoliday.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdHoliday, Me.GridColumnIdReligion, Me.GridColumnReligion, Me.GridColumnDate, Me.GridColumnDesc})
+        Me.GVHoliday.GridControl = Me.GCHoliday
+        Me.GVHoliday.Name = "GVHoliday"
+        Me.GVHoliday.OptionsBehavior.Editable = False
+        Me.GVHoliday.OptionsFind.AlwaysVisible = True
+        Me.GVHoliday.OptionsView.ShowGroupPanel = False
         '
         'GridColumnIdHoliday
         '
@@ -205,7 +205,7 @@ Partial Class FormEmpHoliday
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(641, 326)
-        Me.Controls.Add(Me.GCProd)
+        Me.Controls.Add(Me.GCHoliday)
         Me.Controls.Add(Me.PanelControl1)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -219,8 +219,8 @@ Partial Class FormEmpHoliday
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SLEYear.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVSLEDesgSearch, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GCProd, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GVProd, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GCHoliday, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVHoliday, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RIPictureEdit, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -234,8 +234,8 @@ Partial Class FormEmpHoliday
     Friend WithEvents GridView1 As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents BSearch As DevExpress.XtraEditors.SimpleButton
-    Friend WithEvents GCProd As DevExpress.XtraGrid.GridControl
-    Friend WithEvents GVProd As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GCHoliday As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVHoliday As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents RIPictureEdit As DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit
     Friend WithEvents GridColumnIdHoliday As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnIdReligion As DevExpress.XtraGrid.Columns.GridColumn

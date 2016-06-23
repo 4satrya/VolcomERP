@@ -59,7 +59,7 @@ Partial Class FormEmpHoliday
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl1.Location = New System.Drawing.Point(0, 0)
         Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(641, 47)
+        Me.PanelControl1.Size = New System.Drawing.Size(736, 47)
         Me.PanelControl1.TabIndex = 0
         '
         'BSearch
@@ -151,7 +151,7 @@ Partial Class FormEmpHoliday
         Me.GCHoliday.MainView = Me.GVHoliday
         Me.GCHoliday.Name = "GCHoliday"
         Me.GCHoliday.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RIPictureEdit})
-        Me.GCHoliday.Size = New System.Drawing.Size(641, 279)
+        Me.GCHoliday.Size = New System.Drawing.Size(736, 277)
         Me.GCHoliday.TabIndex = 3
         Me.GCHoliday.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVHoliday})
         '
@@ -167,16 +167,19 @@ Partial Class FormEmpHoliday
         'GridColumnIdHoliday
         '
         Me.GridColumnIdHoliday.Caption = "Id Holiday"
+        Me.GridColumnIdHoliday.FieldName = "id_emp_holiday"
         Me.GridColumnIdHoliday.Name = "GridColumnIdHoliday"
         '
         'GridColumnIdReligion
         '
         Me.GridColumnIdReligion.Caption = "Id Religion"
+        Me.GridColumnIdReligion.FieldName = "id_religion"
         Me.GridColumnIdReligion.Name = "GridColumnIdReligion"
         '
         'GridColumnReligion
         '
         Me.GridColumnReligion.Caption = "Religion"
+        Me.GridColumnReligion.FieldName = "religion"
         Me.GridColumnReligion.Name = "GridColumnReligion"
         Me.GridColumnReligion.Visible = True
         Me.GridColumnReligion.VisibleIndex = 0
@@ -184,6 +187,7 @@ Partial Class FormEmpHoliday
         'GridColumnDate
         '
         Me.GridColumnDate.Caption = "Holiday Date"
+        Me.GridColumnDate.FieldName = "emp_holiday_date"
         Me.GridColumnDate.Name = "GridColumnDate"
         Me.GridColumnDate.Visible = True
         Me.GridColumnDate.VisibleIndex = 1
@@ -191,6 +195,7 @@ Partial Class FormEmpHoliday
         'GridColumnDesc
         '
         Me.GridColumnDesc.Caption = "Holiday"
+        Me.GridColumnDesc.FieldName = "emp_holiday_desc"
         Me.GridColumnDesc.Name = "GridColumnDesc"
         Me.GridColumnDesc.Visible = True
         Me.GridColumnDesc.VisibleIndex = 2
@@ -204,7 +209,7 @@ Partial Class FormEmpHoliday
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(641, 326)
+        Me.ClientSize = New System.Drawing.Size(736, 324)
         Me.Controls.Add(Me.GCHoliday)
         Me.Controls.Add(Me.PanelControl1)
         Me.MaximizeBox = False

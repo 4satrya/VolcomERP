@@ -25,12 +25,12 @@ Partial Class FormEmpHolidayDet
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.SLEReligion = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.GridColumnIdReligionSLE = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnReligionSLE = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
-        Me.BSave = New DevExpress.XtraEditors.SimpleButton()
         Me.BClose = New DevExpress.XtraEditors.SimpleButton()
+        Me.BSave = New DevExpress.XtraEditors.SimpleButton()
+        Me.GridColumnIdReligionSLE = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnReligionSLE = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.DEDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.MEDesc.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -47,8 +47,11 @@ Partial Class FormEmpHolidayDet
         Me.DEDate.Name = "DEDate"
         Me.DEDate.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.DEDate.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEDate.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.DEDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEDate.Properties.Mask.EditMask = "dd-MM-yyyy"
         Me.DEDate.Size = New System.Drawing.Size(191, 20)
-        Me.DEDate.TabIndex = 99
+        Me.DEDate.TabIndex = 2
         '
         'LabelControl6
         '
@@ -63,7 +66,7 @@ Partial Class FormEmpHolidayDet
         Me.MEDesc.Location = New System.Drawing.Point(75, 65)
         Me.MEDesc.Name = "MEDesc"
         Me.MEDesc.Size = New System.Drawing.Size(364, 61)
-        Me.MEDesc.TabIndex = 100
+        Me.MEDesc.TabIndex = 3
         '
         'LabelControl1
         '
@@ -80,7 +83,7 @@ Partial Class FormEmpHolidayDet
         Me.SLEReligion.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.SLEReligion.Properties.View = Me.GridView1
         Me.SLEReligion.Size = New System.Drawing.Size(191, 20)
-        Me.SLEReligion.TabIndex = 8902
+        Me.SLEReligion.TabIndex = 1
         '
         'GridView1
         '
@@ -89,20 +92,6 @@ Partial Class FormEmpHolidayDet
         Me.GridView1.Name = "GridView1"
         Me.GridView1.OptionsSelection.EnableAppearanceFocusedCell = False
         Me.GridView1.OptionsView.ShowGroupPanel = False
-        '
-        'GridColumnIdReligionSLE
-        '
-        Me.GridColumnIdReligionSLE.Caption = "Id Religion"
-        Me.GridColumnIdReligionSLE.FieldName = "id_religion"
-        Me.GridColumnIdReligionSLE.Name = "GridColumnIdReligionSLE"
-        '
-        'GridColumnReligionSLE
-        '
-        Me.GridColumnReligionSLE.Caption = "Religion"
-        Me.GridColumnReligionSLE.FieldName = "religion"
-        Me.GridColumnReligionSLE.Name = "GridColumnReligionSLE"
-        Me.GridColumnReligionSLE.Visible = True
-        Me.GridColumnReligionSLE.VisibleIndex = 0
         '
         'LabelControl2
         '
@@ -123,23 +112,37 @@ Partial Class FormEmpHolidayDet
         Me.PanelControl1.Size = New System.Drawing.Size(459, 37)
         Me.PanelControl1.TabIndex = 8903
         '
-        'BSave
-        '
-        Me.BSave.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BSave.Location = New System.Drawing.Point(382, 2)
-        Me.BSave.Name = "BSave"
-        Me.BSave.Size = New System.Drawing.Size(75, 33)
-        Me.BSave.TabIndex = 0
-        Me.BSave.Text = "Save"
-        '
         'BClose
         '
         Me.BClose.Dock = System.Windows.Forms.DockStyle.Right
         Me.BClose.Location = New System.Drawing.Point(307, 2)
         Me.BClose.Name = "BClose"
         Me.BClose.Size = New System.Drawing.Size(75, 33)
-        Me.BClose.TabIndex = 1
+        Me.BClose.TabIndex = 5
         Me.BClose.Text = "Close"
+        '
+        'BSave
+        '
+        Me.BSave.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BSave.Location = New System.Drawing.Point(382, 2)
+        Me.BSave.Name = "BSave"
+        Me.BSave.Size = New System.Drawing.Size(75, 33)
+        Me.BSave.TabIndex = 4
+        Me.BSave.Text = "Save"
+        '
+        'GridColumnIdReligionSLE
+        '
+        Me.GridColumnIdReligionSLE.Caption = "Id Religion"
+        Me.GridColumnIdReligionSLE.FieldName = "id_religion"
+        Me.GridColumnIdReligionSLE.Name = "GridColumnIdReligionSLE"
+        '
+        'GridColumnReligionSLE
+        '
+        Me.GridColumnReligionSLE.Caption = "Religion"
+        Me.GridColumnReligionSLE.FieldName = "religion"
+        Me.GridColumnReligionSLE.Name = "GridColumnReligionSLE"
+        Me.GridColumnReligionSLE.Visible = True
+        Me.GridColumnReligionSLE.VisibleIndex = 0
         '
         'FormEmpHolidayDet
         '

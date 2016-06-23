@@ -2209,6 +2209,10 @@ Public Class FormMain
                 FormSampleReturnPLDet.action = "upd"
                 FormSampleReturnPLDet.id_sample_pl = FormSampleReturnPL.GVSamplePL.GetFocusedRowCellValue("id_sample_pl_ret").ToString
                 FormSampleReturnPLDet.ShowDialog()
+            ElseIf formName = "FormEmpHoliday" Then
+                'Holiday
+                FormEmpHolidayDet.id_emp_holiday = FormEmpHoliday.GVHoliday.GetFocusedRowCellValue("id_emp_holdiay").ToString
+                FormEmpHolidayDet.ShowDialog()
             Else
                 RPSubMenu.Visible = False
             End If

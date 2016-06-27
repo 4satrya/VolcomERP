@@ -187,6 +187,8 @@ Partial Class FormEmpHoliday
         'GridColumnDate
         '
         Me.GridColumnDate.Caption = "Holiday Date"
+        Me.GridColumnDate.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.GridColumnDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.GridColumnDate.FieldName = "emp_holiday_date"
         Me.GridColumnDate.Name = "GridColumnDate"
         Me.GridColumnDate.Visible = True

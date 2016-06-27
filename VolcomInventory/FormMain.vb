@@ -2211,7 +2211,7 @@ Public Class FormMain
                 FormSampleReturnPLDet.ShowDialog()
             ElseIf formName = "FormEmpHoliday" Then
                 'Holiday
-                FormEmpHolidayDet.id_emp_holiday = FormEmpHoliday.GVHoliday.GetFocusedRowCellValue("id_emp_holdiay").ToString
+                FormEmpHolidayDet.id_emp_holiday = FormEmpHoliday.GVHoliday.GetFocusedRowCellValue("id_emp_holiday").ToString
                 FormEmpHolidayDet.ShowDialog()
             Else
                 RPSubMenu.Visible = False

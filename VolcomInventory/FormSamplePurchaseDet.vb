@@ -9,7 +9,6 @@
 
     Private Sub FormSamplePurchaseDet_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         view_currency(LECurrency)
-        view_po_status(LEPOStatus)
         viewSeasonOrign(LESeason)
         view_payment_type(LEpayment)
 
@@ -43,9 +42,6 @@
             LEpayment.ItemIndex = LEpayment.Properties.GetDataSourceRowIndex("id_payment", data.Rows(0)("id_payment").ToString)
 
             LESeason.EditValue = data.Rows(0)("id_season_orign").ToString
-
-            LEPOStatus.ItemIndex = LEpayment.Properties.GetDataSourceRowIndex("id_status_doc", data.Rows(0)("id_status_doc").ToString)
-            id_status_doc = data.Rows(0)("id_status_doc").ToString
 
             id_report_status_g = data.Rows(0)("id_report_status").ToString
 
@@ -204,11 +200,8 @@
     End Sub
 
     Private Sub BSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BSave.Click
-        Dim err_txt, query, vat, po_status, po_number, lead_time, top, payment_type, id_season_orign, id_currency, notex As String
+        Dim err_txt, query, vat, po_number, lead_time, top, payment_type, id_season_orign, id_currency, notex As String
         err_txt = "-1"
-
-        po_status = LEPOStatus.EditValue
-        id_status_doc = LEPOStatus.EditValue.ToString
 
         payment_type = LEpayment.EditValue
         id_season_orign = LESeason.EditValue
@@ -226,7 +219,7 @@
             If Not formIsValidInGroup(EPSamplePurc, GroupGeneralHeader) Or id_comp_ship_to = "-1" Or id_comp_to = "-1" Then
                 errorInput()
             Else
-                query = String.Format("UPDATE tb_sample_purc SET id_season_orign='{0}',sample_purc_number='{1}',id_comp_contact_to='{2}',id_comp_contact_ship_to='{3}',id_status_doc='{4}',id_payment='{5}',sample_purc_lead_time='{6}',sample_purc_top='{7}',id_currency='{8}',sample_purc_note='{9}',sample_purc_vat='{10}',sample_purc_kurs='{12}' WHERE id_sample_purc='{11}'", id_season_orign, po_number, id_comp_to, id_comp_ship_to, po_status, payment_type, lead_time, top, id_currency, notex, vat, id_sample_purc, decimalSQL(TEKurs.EditValue.ToString))
+                query = String.Format("UPDATE tb_sample_purc SET id_season_orign='{0}',sample_purc_number='{1}',id_comp_contact_to='{2}',id_comp_contact_ship_to='{3}',id_payment='{5}',sample_purc_lead_time='{6}',sample_purc_top='{7}',id_currency='{8}',sample_purc_note='{9}',sample_purc_vat='{10}',sample_purc_kurs='{12}' WHERE id_sample_purc='{11}'", id_season_orign, po_number, id_comp_to, id_comp_ship_to, id_sample_plan, payment_type, lead_time, top, id_currency, notex, vat, id_sample_purc, decimalSQL(TEKurs.EditValue.ToString))
                 execute_non_query(query, True, "", "", "", "")
                 'detail
                 'delete first
@@ -279,7 +272,7 @@
             If Not formIsValidInGroup(EPSamplePurc, GroupGeneralHeader) Or id_comp_ship_to = "-1" Or id_comp_to = "-1" Then
                 errorInput()
             Else
-                query = String.Format("INSERT INTO tb_sample_purc(id_season_orign,sample_purc_number,id_comp_contact_to,id_comp_contact_ship_to,id_status_doc,id_payment,sample_purc_date,sample_purc_lead_time,sample_purc_top,id_currency,sample_purc_note,sample_purc_vat,sample_purc_kurs) VALUES('{0}','{1}','{2}','{3}','{4}','{5}',DATE(NOW()),'{6}','{7}','{8}','{9}','{10}','{11}');SELECT LAST_INSERT_ID()", id_season_orign, po_number, id_comp_to, id_comp_ship_to, po_status, payment_type, lead_time, top, id_currency, notex, vat, decimalSQL(TEKurs.EditValue.ToString))
+                query = String.Format("INSERT INTO tb_sample_purc(id_season_orign,sample_purc_number,id_comp_contact_to,id_comp_contact_ship_to,id_status_doc,id_payment,sample_purc_date,sample_purc_lead_time,sample_purc_top,id_currency,sample_purc_note,sample_purc_vat,sample_purc_kurs) VALUES('{0}','{1}','{2}','{3}','{4}','{5}',DATE(NOW()),'{6}','{7}','{8}','{9}','{10}','{11}');SELECT LAST_INSERT_ID()", id_season_orign, po_number, id_comp_to, id_comp_ship_to, id_sample_plan, payment_type, lead_time, top, id_currency, notex, vat, decimalSQL(TEKurs.EditValue.ToString))
                 Dim last_id As String = execute_query(query, 0, True, "", "", "", "")
 
                 If GVListPurchase.RowCount > 0 Then
@@ -490,5 +483,10 @@
         ' Show the report's preview. 
         Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
         Tool.ShowPreview()
+    End Sub
+
+    Private Sub BSampleProf_Click(sender As Object, e As EventArgs) Handles BSampleProf.Click
+        FormPopUpSamplePlan.id_sample_plan = id_sample_plan
+        FormPopUpSamplePlan.ShowDialog()
     End Sub
 End Class

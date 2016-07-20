@@ -288,7 +288,7 @@
         Tool.ShowPreview()
     End Sub
 
-    Private Sub BImport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BImport.Click
+    Private Sub BImport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         FormImportExcel.id_pop_up = "2"
         FormImportExcel.ShowDialog()
     End Sub

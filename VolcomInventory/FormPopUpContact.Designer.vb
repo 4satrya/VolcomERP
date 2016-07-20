@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FormPopUpContact
     Inherits DevExpress.XtraEditors.XtraForm
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         If disposing AndAlso components IsNot Nothing Then
             components.Dispose()
@@ -17,7 +17,7 @@ Partial Class FormPopUpContact
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormPopUpContact))
@@ -47,15 +47,15 @@ Partial Class FormPopUpContact
         Me.number = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.default_status = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemCheckEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.GridColumnDrawer = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnRack = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnLocaltor = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemCheckedComboBoxEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckedComboBoxEdit()
         Me.BCancel = New DevExpress.XtraEditors.SimpleButton()
         Me.BSave = New DevExpress.XtraEditors.SimpleButton()
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
         Me.BtnCancel = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnSave = New DevExpress.XtraEditors.SimpleButton()
-        Me.GridColumnDrawer = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnRack = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnLocaltor = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.SplitContainerControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainerControl1.SuspendLayout()
         CType(Me.GroupGeneral, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -87,7 +87,7 @@ Partial Class FormPopUpContact
         Me.SplitContainerControl1.Panel1.Text = "Panel1"
         Me.SplitContainerControl1.Panel2.Controls.Add(Me.GroupControl1)
         Me.SplitContainerControl1.Panel2.Text = "Panel2"
-        Me.SplitContainerControl1.Size = New System.Drawing.Size(829, 392)
+        Me.SplitContainerControl1.Size = New System.Drawing.Size(829, 434)
         Me.SplitContainerControl1.SplitterPosition = 257
         Me.SplitContainerControl1.TabIndex = 0
         Me.SplitContainerControl1.Text = "SplitContainerControl1"
@@ -265,7 +265,7 @@ Partial Class FormPopUpContact
         Me.GroupControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupControl1.Location = New System.Drawing.Point(0, 0)
         Me.GroupControl1.Name = "GroupControl1"
-        Me.GroupControl1.Size = New System.Drawing.Size(829, 130)
+        Me.GroupControl1.Size = New System.Drawing.Size(829, 172)
         Me.GroupControl1.TabIndex = 16
         Me.GroupControl1.Text = "Contact"
         '
@@ -276,7 +276,7 @@ Partial Class FormPopUpContact
         Me.GCCompanyContactList.MainView = Me.GVCompanyContactList
         Me.GCCompanyContactList.Name = "GCCompanyContactList"
         Me.GCCompanyContactList.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckedComboBoxEdit1, Me.RepositoryItemCheckEdit2})
-        Me.GCCompanyContactList.Size = New System.Drawing.Size(825, 108)
+        Me.GCCompanyContactList.Size = New System.Drawing.Size(825, 150)
         Me.GCCompanyContactList.TabIndex = 1
         Me.GCCompanyContactList.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVCompanyContactList})
         '
@@ -333,6 +333,27 @@ Partial Class FormPopUpContact
         Me.RepositoryItemCheckEdit2.AutoHeight = False
         Me.RepositoryItemCheckEdit2.Name = "RepositoryItemCheckEdit2"
         '
+        'GridColumnDrawer
+        '
+        Me.GridColumnDrawer.Caption = "Drawer"
+        Me.GridColumnDrawer.FieldName = "id_wh_drawer"
+        Me.GridColumnDrawer.Name = "GridColumnDrawer"
+        Me.GridColumnDrawer.OptionsColumn.AllowEdit = False
+        '
+        'GridColumnRack
+        '
+        Me.GridColumnRack.Caption = "Rack"
+        Me.GridColumnRack.FieldName = "id_wh_rack"
+        Me.GridColumnRack.Name = "GridColumnRack"
+        Me.GridColumnRack.OptionsColumn.AllowEdit = False
+        '
+        'GridColumnLocaltor
+        '
+        Me.GridColumnLocaltor.Caption = "Locator"
+        Me.GridColumnLocaltor.FieldName = "id_wh_locator"
+        Me.GridColumnLocaltor.Name = "GridColumnLocaltor"
+        Me.GridColumnLocaltor.OptionsColumn.AllowEdit = False
+        '
         'RepositoryItemCheckedComboBoxEdit1
         '
         Me.RepositoryItemCheckedComboBoxEdit1.AutoHeight = False
@@ -362,61 +383,41 @@ Partial Class FormPopUpContact
         Me.PanelControl2.Controls.Add(Me.BtnCancel)
         Me.PanelControl2.Controls.Add(Me.BtnSave)
         Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PanelControl2.Location = New System.Drawing.Point(0, 392)
+        Me.PanelControl2.Location = New System.Drawing.Point(0, 434)
         Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(829, 44)
+        Me.PanelControl2.Size = New System.Drawing.Size(829, 39)
         Me.PanelControl2.TabIndex = 27
         '
         'BtnCancel
         '
         Me.BtnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.BtnCancel.Location = New System.Drawing.Point(671, 9)
+        Me.BtnCancel.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnCancel.Location = New System.Drawing.Point(689, 0)
         Me.BtnCancel.Name = "BtnCancel"
-        Me.BtnCancel.Size = New System.Drawing.Size(70, 23)
+        Me.BtnCancel.Size = New System.Drawing.Size(70, 39)
         Me.BtnCancel.TabIndex = 2
         Me.BtnCancel.Text = "Cancel"
         '
         'BtnSave
         '
-        Me.BtnSave.Location = New System.Drawing.Point(747, 9)
+        Me.BtnSave.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnSave.Location = New System.Drawing.Point(759, 0)
         Me.BtnSave.Name = "BtnSave"
-        Me.BtnSave.Size = New System.Drawing.Size(70, 23)
+        Me.BtnSave.Size = New System.Drawing.Size(70, 39)
         Me.BtnSave.TabIndex = 1
         Me.BtnSave.Text = "Choose"
-        '
-        'GridColumnDrawer
-        '
-        Me.GridColumnDrawer.Caption = "Drawer"
-        Me.GridColumnDrawer.FieldName = "id_wh_drawer"
-        Me.GridColumnDrawer.Name = "GridColumnDrawer"
-        Me.GridColumnDrawer.OptionsColumn.AllowEdit = False
-        '
-        'GridColumnRack
-        '
-        Me.GridColumnRack.Caption = "Rack"
-        Me.GridColumnRack.FieldName = "id_wh_rack"
-        Me.GridColumnRack.Name = "GridColumnRack"
-        Me.GridColumnRack.OptionsColumn.AllowEdit = False
-        '
-        'GridColumnLocaltor
-        '
-        Me.GridColumnLocaltor.Caption = "Locator"
-        Me.GridColumnLocaltor.FieldName = "id_wh_locator"
-        Me.GridColumnLocaltor.Name = "GridColumnLocaltor"
-        Me.GridColumnLocaltor.OptionsColumn.AllowEdit = False
         '
         'FormPopUpContact
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(829, 436)
+        Me.ClientSize = New System.Drawing.Size(829, 473)
         Me.Controls.Add(Me.PanelControl2)
         Me.Controls.Add(Me.SplitContainerControl1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FormPopUpContact"
-        Me.ShowInTaskbar = False
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Pick Contact"

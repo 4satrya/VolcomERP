@@ -76,7 +76,9 @@ Partial Class FormSamplePurchaseDet
         Me.BEdit = New DevExpress.XtraEditors.SimpleButton()
         Me.BAdd = New DevExpress.XtraEditors.SimpleButton()
         Me.GroupGeneralHeader = New DevExpress.XtraEditors.GroupControl()
-        Me.LEPOStatus = New DevExpress.XtraEditors.LookUpEdit()
+        Me.BSampleProf = New DevExpress.XtraEditors.SimpleButton()
+        Me.TEProfPO = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.LEpayment = New DevExpress.XtraEditors.LookUpEdit()
         Me.LabelControl12 = New DevExpress.XtraEditors.LabelControl()
         Me.LESeason = New DevExpress.XtraEditors.SearchLookUpEdit()
@@ -96,7 +98,6 @@ Partial Class FormSamplePurchaseDet
         Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
-        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.BSearchCompTo = New DevExpress.XtraEditors.SimpleButton()
         Me.TECompAttn = New DevExpress.XtraEditors.TextEdit()
         Me.MECompAddress = New DevExpress.XtraEditors.MemoEdit()
@@ -133,7 +134,7 @@ Partial Class FormSamplePurchaseDet
         Me.PanelControl2.SuspendLayout()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
-        CType(Me.LEPOStatus.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TEProfPO.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LEpayment.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LESeason.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -768,7 +769,9 @@ Partial Class FormSamplePurchaseDet
         'GroupGeneralHeader
         '
         Me.GroupGeneralHeader.CaptionLocation = DevExpress.Utils.Locations.Left
-        Me.GroupGeneralHeader.Controls.Add(Me.LEPOStatus)
+        Me.GroupGeneralHeader.Controls.Add(Me.BSampleProf)
+        Me.GroupGeneralHeader.Controls.Add(Me.TEProfPO)
+        Me.GroupGeneralHeader.Controls.Add(Me.LabelControl1)
         Me.GroupGeneralHeader.Controls.Add(Me.LEpayment)
         Me.GroupGeneralHeader.Controls.Add(Me.LabelControl12)
         Me.GroupGeneralHeader.Controls.Add(Me.LESeason)
@@ -785,7 +788,6 @@ Partial Class FormSamplePurchaseDet
         Me.GroupGeneralHeader.Controls.Add(Me.LabelControl6)
         Me.GroupGeneralHeader.Controls.Add(Me.LabelControl5)
         Me.GroupGeneralHeader.Controls.Add(Me.LabelControl2)
-        Me.GroupGeneralHeader.Controls.Add(Me.LabelControl1)
         Me.GroupGeneralHeader.Controls.Add(Me.BSearchCompTo)
         Me.GroupGeneralHeader.Controls.Add(Me.TECompAttn)
         Me.GroupGeneralHeader.Controls.Add(Me.MECompAddress)
@@ -800,18 +802,31 @@ Partial Class FormSamplePurchaseDet
         Me.GroupGeneralHeader.Size = New System.Drawing.Size(909, 145)
         Me.GroupGeneralHeader.TabIndex = 33
         '
-        'LEPOStatus
+        'BSampleProf
         '
-        Me.LEPOStatus.Location = New System.Drawing.Point(72, 109)
-        Me.LEPOStatus.Name = "LEPOStatus"
-        Me.LEPOStatus.Properties.Appearance.Options.UseTextOptions = True
-        Me.LEPOStatus.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near
-        Me.LEPOStatus.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.LEPOStatus.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_status_doc", "Id Status", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("status_doc", "Status")})
-        Me.LEPOStatus.Properties.NullText = ""
-        Me.LEPOStatus.Properties.ShowFooter = False
-        Me.LEPOStatus.Size = New System.Drawing.Size(316, 20)
-        Me.LEPOStatus.TabIndex = 140
+        Me.BSampleProf.Location = New System.Drawing.Point(370, 12)
+        Me.BSampleProf.Name = "BSampleProf"
+        Me.BSampleProf.Size = New System.Drawing.Size(23, 20)
+        Me.BSampleProf.TabIndex = 142
+        Me.BSampleProf.Text = "..."
+        '
+        'TEProfPO
+        '
+        Me.TEProfPO.EditValue = ""
+        Me.TEProfPO.Location = New System.Drawing.Point(113, 12)
+        Me.TEProfPO.Name = "TEProfPO"
+        Me.TEProfPO.Properties.EditValueChangedDelay = 1
+        Me.TEProfPO.Properties.ReadOnly = True
+        Me.TEProfPO.Size = New System.Drawing.Size(251, 20)
+        Me.TEProfPO.TabIndex = 140
+        '
+        'LabelControl1
+        '
+        Me.LabelControl1.Location = New System.Drawing.Point(30, 15)
+        Me.LabelControl1.Name = "LabelControl1"
+        Me.LabelControl1.Size = New System.Drawing.Size(68, 13)
+        Me.LabelControl1.TabIndex = 141
+        Me.LabelControl1.Text = "Reff Proforma"
         '
         'LEpayment
         '
@@ -828,7 +843,7 @@ Partial Class FormSamplePurchaseDet
         '
         'LabelControl12
         '
-        Me.LabelControl12.Location = New System.Drawing.Point(690, 12)
+        Me.LabelControl12.Location = New System.Drawing.Point(690, 15)
         Me.LabelControl12.Name = "LabelControl12"
         Me.LabelControl12.Size = New System.Drawing.Size(64, 13)
         Me.LabelControl12.TabIndex = 139
@@ -836,7 +851,7 @@ Partial Class FormSamplePurchaseDet
         '
         'LESeason
         '
-        Me.LESeason.Location = New System.Drawing.Point(762, 9)
+        Me.LESeason.Location = New System.Drawing.Point(762, 12)
         Me.LESeason.Name = "LESeason"
         Me.LESeason.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.LESeason.Properties.NullText = ""
@@ -978,7 +993,7 @@ Partial Class FormSamplePurchaseDet
         '
         'LabelControl5
         '
-        Me.LabelControl5.Location = New System.Drawing.Point(25, 63)
+        Me.LabelControl5.Location = New System.Drawing.Point(30, 94)
         Me.LabelControl5.Name = "LabelControl5"
         Me.LabelControl5.Size = New System.Drawing.Size(39, 13)
         Me.LabelControl5.TabIndex = 123
@@ -986,23 +1001,15 @@ Partial Class FormSamplePurchaseDet
         '
         'LabelControl2
         '
-        Me.LabelControl2.Location = New System.Drawing.Point(25, 38)
+        Me.LabelControl2.Location = New System.Drawing.Point(30, 69)
         Me.LabelControl2.Name = "LabelControl2"
         Me.LabelControl2.Size = New System.Drawing.Size(25, 13)
         Me.LabelControl2.TabIndex = 122
         Me.LabelControl2.Text = "Attn."
         '
-        'LabelControl1
-        '
-        Me.LabelControl1.Location = New System.Drawing.Point(25, 112)
-        Me.LabelControl1.Name = "LabelControl1"
-        Me.LabelControl1.Size = New System.Drawing.Size(31, 13)
-        Me.LabelControl1.TabIndex = 121
-        Me.LabelControl1.Text = "Status"
-        '
         'BSearchCompTo
         '
-        Me.BSearchCompTo.Location = New System.Drawing.Point(365, 9)
+        Me.BSearchCompTo.Location = New System.Drawing.Point(370, 40)
         Me.BSearchCompTo.Name = "BSearchCompTo"
         Me.BSearchCompTo.Size = New System.Drawing.Size(23, 20)
         Me.BSearchCompTo.TabIndex = 1
@@ -1011,39 +1018,39 @@ Partial Class FormSamplePurchaseDet
         'TECompAttn
         '
         Me.TECompAttn.EditValue = ""
-        Me.TECompAttn.Location = New System.Drawing.Point(72, 35)
+        Me.TECompAttn.Location = New System.Drawing.Point(113, 66)
         Me.TECompAttn.Name = "TECompAttn"
         Me.TECompAttn.Properties.EditValueChangedDelay = 1
         Me.TECompAttn.Properties.ReadOnly = True
-        Me.TECompAttn.Size = New System.Drawing.Size(316, 20)
+        Me.TECompAttn.Size = New System.Drawing.Size(280, 20)
         Me.TECompAttn.TabIndex = 0
         Me.TECompAttn.TabStop = False
         '
         'MECompAddress
         '
-        Me.MECompAddress.Location = New System.Drawing.Point(72, 61)
+        Me.MECompAddress.Location = New System.Drawing.Point(113, 92)
         Me.MECompAddress.Name = "MECompAddress"
         Me.MECompAddress.Properties.MaxLength = 100
         Me.MECompAddress.Properties.ReadOnly = True
-        Me.MECompAddress.Size = New System.Drawing.Size(316, 41)
+        Me.MECompAddress.Size = New System.Drawing.Size(280, 41)
         Me.MECompAddress.TabIndex = 0
         Me.MECompAddress.TabStop = False
         '
         'TECompName
         '
         Me.TECompName.EditValue = ""
-        Me.TECompName.Location = New System.Drawing.Point(151, 9)
+        Me.TECompName.Location = New System.Drawing.Point(192, 40)
         Me.TECompName.Name = "TECompName"
         Me.TECompName.Properties.EditValueChangedDelay = 1
         Me.TECompName.Properties.ReadOnly = True
-        Me.TECompName.Size = New System.Drawing.Size(208, 20)
+        Me.TECompName.Size = New System.Drawing.Size(172, 20)
         Me.TECompName.TabIndex = 0
         Me.TECompName.TabStop = False
         '
         'TECompCode
         '
         Me.TECompCode.EditValue = ""
-        Me.TECompCode.Location = New System.Drawing.Point(72, 9)
+        Me.TECompCode.Location = New System.Drawing.Point(113, 40)
         Me.TECompCode.Name = "TECompCode"
         Me.TECompCode.Properties.EditValueChangedDelay = 1
         Me.TECompCode.Properties.ReadOnly = True
@@ -1053,7 +1060,7 @@ Partial Class FormSamplePurchaseDet
         '
         'LabelControl4
         '
-        Me.LabelControl4.Location = New System.Drawing.Point(25, 12)
+        Me.LabelControl4.Location = New System.Drawing.Point(30, 43)
         Me.LabelControl4.Name = "LabelControl4"
         Me.LabelControl4.Size = New System.Drawing.Size(12, 13)
         Me.LabelControl4.TabIndex = 88
@@ -1062,7 +1069,7 @@ Partial Class FormSamplePurchaseDet
         'TEPONumber
         '
         Me.TEPONumber.EditValue = ""
-        Me.TEPONumber.Location = New System.Drawing.Point(489, 9)
+        Me.TEPONumber.Location = New System.Drawing.Point(489, 12)
         Me.TEPONumber.Name = "TEPONumber"
         Me.TEPONumber.Properties.EditValueChangedDelay = 1
         Me.TEPONumber.Size = New System.Drawing.Size(179, 20)
@@ -1070,7 +1077,7 @@ Partial Class FormSamplePurchaseDet
         '
         'LabelControl3
         '
-        Me.LabelControl3.Location = New System.Drawing.Point(414, 12)
+        Me.LabelControl3.Location = New System.Drawing.Point(414, 15)
         Me.LabelControl3.Name = "LabelControl3"
         Me.LabelControl3.Size = New System.Drawing.Size(54, 13)
         Me.LabelControl3.TabIndex = 86
@@ -1122,7 +1129,7 @@ Partial Class FormSamplePurchaseDet
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupGeneralHeader.ResumeLayout(False)
         Me.GroupGeneralHeader.PerformLayout()
-        CType(Me.LEPOStatus.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TEProfPO.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LEpayment.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LESeason.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1208,7 +1215,6 @@ Partial Class FormSamplePurchaseDet
     Friend WithEvents LabelControl6 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LabelControl5 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
-    Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents BSearchCompTo As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents TECompAttn As DevExpress.XtraEditors.TextEdit
     Friend WithEvents MECompAddress As DevExpress.XtraEditors.MemoEdit
@@ -1222,5 +1228,7 @@ Partial Class FormSamplePurchaseDet
     Friend WithEvents GridColumnSize As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnColor As DevExpress.XtraGrid.Columns.GridColumn
     Public WithEvents LargeImageCollection As DevExpress.Utils.ImageCollection
-    Friend WithEvents LEPOStatus As DevExpress.XtraEditors.LookUpEdit
+    Friend WithEvents TEProfPO As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents BSampleProf As DevExpress.XtraEditors.SimpleButton
 End Class

@@ -1742,7 +1742,7 @@ Public Class FormMain
                 FormMarkAssignSingle.ShowDialog()
             ElseIf formName = "FormSamplePlan" Then
                 'Sample Plan
-                FormSamplePlanDet.id_sample_plan = FormSamplePlan.GVSamplePurchase.GetFocusedRowCellDisplayText("id_sample_plan")
+                FormSamplePlanDet.id_sample_plan = FormSamplePlan.GVSamplePrePO.GetFocusedRowCellDisplayText("id_sample_plan")
                 FormSamplePlanDet.ShowDialog()
             ElseIf formName = "FormMatPurchase" Then
                 'Material Purchase
@@ -3032,11 +3032,11 @@ Public Class FormMain
         ElseIf formName = "FormSamplePlan" Then
             '
             'check first
-            If check_edit_report_status(FormSamplePlan.GVSamplePurchase.GetFocusedRowCellDisplayText("id_report_status"), "12", FormSamplePlan.GVSamplePurchase.GetFocusedRowCellDisplayText("id_sample_plan")) Then
+            If check_edit_report_status(FormSamplePlan.GVSamplePrePO.GetFocusedRowCellDisplayText("id_report_status"), "12", FormSamplePlan.GVSamplePrePO.GetFocusedRowCellDisplayText("id_sample_plan")) Then
                 confirm = XtraMessageBox.Show("Are you sure want to delete this sample plan?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
                 If confirm = Windows.Forms.DialogResult.Yes Then
                     Try
-                        Dim id_sample_plan As String = FormSamplePlan.GVSamplePurchase.GetFocusedRowCellDisplayText("id_sample_plan")
+                        Dim id_sample_plan As String = FormSamplePlan.GVSamplePrePO.GetFocusedRowCellDisplayText("id_sample_plan")
                         query = String.Format("DELETE FROM tb_sample_plan WHERE id_sample_plan='{0}'", id_sample_plan)
                         execute_non_query(query, True, "", "", "", "")
 
@@ -5253,7 +5253,7 @@ Public Class FormMain
             print(FormMarkAssign.GCMarkAssign, "Mapping Approval System")
         ElseIf formName = "FormSamplePlan" Then
             'Planning Sample
-            print(FormSamplePlan.GCSamplePurchase, "List Planning Sample")
+            print(FormSamplePlan.GCSamplePrePO, "List Planning Sample")
         ElseIf formName = "FormMatPurchase" Then
             'Purchase Material
             print(FormMatPurchase.GCMatPurchase, "List Purchase Material")

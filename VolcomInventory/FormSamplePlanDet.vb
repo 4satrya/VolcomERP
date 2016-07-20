@@ -168,7 +168,7 @@
                         End If
                     Next
                     FormSamplePlan.view_sample_plan()
-                    FormSamplePlan.GVSamplePurchase.FocusedRowHandle = find_row(FormSamplePlan.GVSamplePurchase, "id_sample_plan", id_sp_new)
+                    FormSamplePlan.GVSamplePrePO.FocusedRowHandle = find_row(FormSamplePlan.GVSamplePrePO, "id_sample_plan", id_sp_new)
                     Close()
                 Catch ex As Exception
                     errorConnection()
@@ -217,7 +217,7 @@
                         End If
                     Next
                     FormSamplePlan.view_sample_plan()
-                    FormSamplePlan.GVSamplePurchase.FocusedRowHandle = find_row(FormSamplePlan.GVSamplePurchase, "id_sample_plan", id_sample_plan)
+                    FormSamplePlan.GVSamplePrePO.FocusedRowHandle = find_row(FormSamplePlan.GVSamplePrePO, "id_sample_plan", id_sample_plan)
                     Close()
                 Catch ex As Exception
                     errorConnection()

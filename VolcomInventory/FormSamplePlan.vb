@@ -10,7 +10,7 @@
         query += "INNER JOIN tb_m_comp d ON c.id_comp = d.id_comp "
         query += "INNER JOIN tb_lookup_report_status e ON e.id_report_status = a.id_report_status "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
-        GCSamplePurchase.DataSource = data
+        GCSamplePrePO.DataSource = data
     End Sub
 
     Private Sub FormSamplePlan_Activated(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Activated
@@ -22,7 +22,7 @@
         FormMain.hide_rb()
     End Sub
 
-    Private Sub GVSamplePurchase_FocusedRowChanged(ByVal sender As System.Object, ByVal e As DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs) Handles GVSamplePurchase.FocusedRowChanged
+    Private Sub GVSamplePurchase_FocusedRowChanged(ByVal sender As System.Object, ByVal e As DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs) Handles GVSamplePrePO.FocusedRowChanged
         no_focus_gv(sender, e)
     End Sub
     Sub no_focus_gv(ByVal sender As System.Object, ByVal e As DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs)

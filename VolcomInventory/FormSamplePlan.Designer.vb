@@ -19,38 +19,38 @@ Partial Class FormSamplePlan
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.GCSamplePurchase = New DevExpress.XtraGrid.GridControl
-        Me.GVSamplePurchase = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.ColIdSamplePurchase = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColSeason = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColSPNumber = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColSPTo = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColSamplePurcDate = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColStatus = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColIDStatus = New DevExpress.XtraGrid.Columns.GridColumn
-        CType(Me.GCSamplePurchase, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GVSamplePurchase, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GCSamplePrePO = New DevExpress.XtraGrid.GridControl()
+        Me.GVSamplePrePO = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.ColIdSamplePurchase = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColSeason = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColSPNumber = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColSPTo = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColSamplePurcDate = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColStatus = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColIDStatus = New DevExpress.XtraGrid.Columns.GridColumn()
+        CType(Me.GCSamplePrePO, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVSamplePrePO, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'GCSamplePurchase
+        'GCSamplePrePO
         '
-        Me.GCSamplePurchase.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCSamplePurchase.Location = New System.Drawing.Point(0, 0)
-        Me.GCSamplePurchase.MainView = Me.GVSamplePurchase
-        Me.GCSamplePurchase.Name = "GCSamplePurchase"
-        Me.GCSamplePurchase.Size = New System.Drawing.Size(825, 353)
-        Me.GCSamplePurchase.TabIndex = 4
-        Me.GCSamplePurchase.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVSamplePurchase})
+        Me.GCSamplePrePO.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCSamplePrePO.Location = New System.Drawing.Point(0, 0)
+        Me.GCSamplePrePO.MainView = Me.GVSamplePrePO
+        Me.GCSamplePrePO.Name = "GCSamplePrePO"
+        Me.GCSamplePrePO.Size = New System.Drawing.Size(825, 353)
+        Me.GCSamplePrePO.TabIndex = 4
+        Me.GCSamplePrePO.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVSamplePrePO})
         '
-        'GVSamplePurchase
+        'GVSamplePrePO
         '
-        Me.GVSamplePurchase.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ColIdSamplePurchase, Me.ColSeason, Me.ColSPNumber, Me.ColSPTo, Me.ColSamplePurcDate, Me.ColStatus, Me.ColIDStatus})
-        Me.GVSamplePurchase.GridControl = Me.GCSamplePurchase
-        Me.GVSamplePurchase.GroupCount = 1
-        Me.GVSamplePurchase.Name = "GVSamplePurchase"
-        Me.GVSamplePurchase.OptionsBehavior.Editable = False
-        Me.GVSamplePurchase.OptionsView.ShowGroupPanel = False
-        Me.GVSamplePurchase.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.ColSeason, DevExpress.Data.ColumnSortOrder.Ascending)})
+        Me.GVSamplePrePO.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ColIdSamplePurchase, Me.ColSeason, Me.ColSPNumber, Me.ColSPTo, Me.ColSamplePurcDate, Me.ColStatus, Me.ColIDStatus})
+        Me.GVSamplePrePO.GridControl = Me.GCSamplePrePO
+        Me.GVSamplePrePO.GroupCount = 1
+        Me.GVSamplePrePO.Name = "GVSamplePrePO"
+        Me.GVSamplePrePO.OptionsBehavior.Editable = False
+        Me.GVSamplePrePO.OptionsView.ShowGroupPanel = False
+        Me.GVSamplePrePO.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.ColSeason, DevExpress.Data.ColumnSortOrder.Ascending)})
         '
         'ColIdSamplePurchase
         '
@@ -110,20 +110,20 @@ Partial Class FormSamplePlan
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(825, 353)
-        Me.Controls.Add(Me.GCSamplePurchase)
+        Me.Controls.Add(Me.GCSamplePrePO)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FormSamplePlan"
         Me.ShowInTaskbar = False
-        Me.Text = "Sample Planning"
-        CType(Me.GCSamplePurchase, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GVSamplePurchase, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Text = "Proforma PO Sample"
+        CType(Me.GCSamplePrePO, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVSamplePrePO, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents GCSamplePurchase As DevExpress.XtraGrid.GridControl
-    Friend WithEvents GVSamplePurchase As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GCSamplePrePO As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVSamplePrePO As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents ColIdSamplePurchase As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ColSeason As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ColSPNumber As DevExpress.XtraGrid.Columns.GridColumn

@@ -5,10 +5,11 @@
     Public id_sample_plan As String = "-1"
     Public date_created As String = ""
     Public id_report_status_g As String = "1"
+    Public id_status_doc As String = "1"
 
     Private Sub FormSamplePurchaseDet_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         view_currency(LECurrency)
-        view_po_type(LEPOType)
+        view_po_status(LEPOStatus)
         viewSeasonOrign(LESeason)
         view_payment_type(LEpayment)
 
@@ -29,7 +30,7 @@
             BMark.Visible = False
             '
         Else
-            Dim query As String = String.Format("SELECT id_report_status,sample_purc_kurs,sample_purc_vat,id_season_orign,sample_purc_number,id_comp_contact_to,id_comp_contact_ship_to,id_po_type,id_payment,DATE_FORMAT(sample_purc_date,'%Y-%m-%d') as sample_purc_datex,sample_purc_lead_time,sample_purc_top,id_currency,sample_purc_note FROM tb_sample_purc WHERE id_sample_purc = '{0}'", id_sample_purc)
+            Dim query As String = String.Format("SELECT id_status_doc,id_report_status,sample_purc_kurs,sample_purc_vat,id_season_orign,sample_purc_number,id_comp_contact_to,id_comp_contact_ship_to,id_po_type,id_payment,DATE_FORMAT(sample_purc_date,'%Y-%m-%d') as sample_purc_datex,sample_purc_lead_time,sample_purc_top,id_currency,sample_purc_note FROM tb_sample_purc WHERE id_sample_purc = '{0}'", id_sample_purc)
             Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
             TEPONumber.Text = data.Rows(0)("sample_purc_number").ToString
@@ -42,7 +43,9 @@
             LEpayment.ItemIndex = LEpayment.Properties.GetDataSourceRowIndex("id_payment", data.Rows(0)("id_payment").ToString)
 
             LESeason.EditValue = data.Rows(0)("id_season_orign").ToString
-            LEPOType.EditValue = data.Rows(0)("id_po_type").ToString()
+
+            LEPOStatus.ItemIndex = LEpayment.Properties.GetDataSourceRowIndex("id_status_doc", data.Rows(0)("id_status_doc").ToString)
+            id_status_doc = data.Rows(0)("id_status_doc").ToString
 
             id_report_status_g = data.Rows(0)("id_report_status").ToString
 
@@ -121,6 +124,12 @@
             TEVat.Text = "0"
             calculate()
         End If
+
+        If id_status_doc = "1" Then
+            BMark.Visible = False
+        Else
+            BMark.Visible = True
+        End If
     End Sub
 
     Sub view_list_purchase()
@@ -160,16 +169,15 @@
         lookup.Properties.ValueMember = "id_payment"
         lookup.ItemIndex = 0
     End Sub
-    Private Sub view_po_type(ByVal lookup As DevExpress.XtraEditors.SearchLookUpEdit)
-        Dim query As String = "SELECT id_po_type,po_type FROM tb_lookup_po_type ORDER BY id_po_type DESC"
+    Private Sub view_po_status(ByVal lookup As DevExpress.XtraEditors.LookUpEdit)
+        Dim query As String = "SELECT id_status_doc,status_doc FROM tb_lookup_status_doc"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
-        lookup.Properties.DataSource = Nothing
         lookup.Properties.DataSource = data
 
-        lookup.Properties.DisplayMember = "po_type"
-        lookup.Properties.ValueMember = "id_po_type"
-        lookup.EditValue = data.Rows(0)("id_po_type").ToString
+        lookup.Properties.DisplayMember = "status_doc"
+        lookup.Properties.ValueMember = "id_status_doc"
+        lookup.ItemIndex = 0
     End Sub
     'View Season
     Private Sub viewSeasonOrign(ByVal lookup As DevExpress.XtraEditors.SearchLookUpEdit)
@@ -196,10 +204,12 @@
     End Sub
 
     Private Sub BSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BSave.Click
-        Dim err_txt, query, vat, po_typex, po_number, lead_time, top, payment_type, id_season_orign, id_currency, notex As String
+        Dim err_txt, query, vat, po_status, po_number, lead_time, top, payment_type, id_season_orign, id_currency, notex As String
         err_txt = "-1"
 
-        po_typex = LEPOType.EditValue
+        po_status = LEPOStatus.EditValue
+        id_status_doc = LEPOStatus.EditValue.ToString
+
         payment_type = LEpayment.EditValue
         id_season_orign = LESeason.EditValue
         id_currency = LECurrency.EditValue
@@ -216,7 +226,7 @@
             If Not formIsValidInGroup(EPSamplePurc, GroupGeneralHeader) Or id_comp_ship_to = "-1" Or id_comp_to = "-1" Then
                 errorInput()
             Else
-                query = String.Format("UPDATE tb_sample_purc SET id_season_orign='{0}',sample_purc_number='{1}',id_comp_contact_to='{2}',id_comp_contact_ship_to='{3}',id_po_type='{4}',id_payment='{5}',sample_purc_lead_time='{6}',sample_purc_top='{7}',id_currency='{8}',sample_purc_note='{9}',sample_purc_vat='{10}',sample_purc_kurs='{12}' WHERE id_sample_purc='{11}'", id_season_orign, po_number, id_comp_to, id_comp_ship_to, po_typex, payment_type, lead_time, top, id_currency, notex, vat, id_sample_purc, decimalSQL(TEKurs.EditValue.ToString))
+                query = String.Format("UPDATE tb_sample_purc SET id_season_orign='{0}',sample_purc_number='{1}',id_comp_contact_to='{2}',id_comp_contact_ship_to='{3}',id_status_doc='{4}',id_payment='{5}',sample_purc_lead_time='{6}',sample_purc_top='{7}',id_currency='{8}',sample_purc_note='{9}',sample_purc_vat='{10}',sample_purc_kurs='{12}' WHERE id_sample_purc='{11}'", id_season_orign, po_number, id_comp_to, id_comp_ship_to, po_status, payment_type, lead_time, top, id_currency, notex, vat, id_sample_purc, decimalSQL(TEKurs.EditValue.ToString))
                 execute_non_query(query, True, "", "", "", "")
                 'detail
                 'delete first
@@ -269,7 +279,7 @@
             If Not formIsValidInGroup(EPSamplePurc, GroupGeneralHeader) Or id_comp_ship_to = "-1" Or id_comp_to = "-1" Then
                 errorInput()
             Else
-                query = String.Format("INSERT INTO tb_sample_purc(id_season_orign,sample_purc_number,id_comp_contact_to,id_comp_contact_ship_to,id_po_type,id_payment,sample_purc_date,sample_purc_lead_time,sample_purc_top,id_currency,sample_purc_note,sample_purc_vat,sample_purc_kurs) VALUES('{0}','{1}','{2}','{3}','{4}','{5}',DATE(NOW()),'{6}','{7}','{8}','{9}','{10}','{11}');SELECT LAST_INSERT_ID()", id_season_orign, po_number, id_comp_to, id_comp_ship_to, po_typex, payment_type, lead_time, top, id_currency, notex, vat, decimalSQL(TEKurs.EditValue.ToString))
+                query = String.Format("INSERT INTO tb_sample_purc(id_season_orign,sample_purc_number,id_comp_contact_to,id_comp_contact_ship_to,id_status_doc,id_payment,sample_purc_date,sample_purc_lead_time,sample_purc_top,id_currency,sample_purc_note,sample_purc_vat,sample_purc_kurs) VALUES('{0}','{1}','{2}','{3}','{4}','{5}',DATE(NOW()),'{6}','{7}','{8}','{9}','{10}','{11}');SELECT LAST_INSERT_ID()", id_season_orign, po_number, id_comp_to, id_comp_ship_to, po_status, payment_type, lead_time, top, id_currency, notex, vat, decimalSQL(TEKurs.EditValue.ToString))
                 Dim last_id As String = execute_query(query, 0, True, "", "", "", "")
 
                 If GVListPurchase.RowCount > 0 Then

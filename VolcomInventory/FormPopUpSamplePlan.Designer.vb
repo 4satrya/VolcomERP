@@ -19,10 +19,11 @@ Partial Class FormPopUpSamplePlan
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.GroupGeneral = New DevExpress.XtraEditors.GroupControl()
         Me.PanelControlButton = New DevExpress.XtraEditors.PanelControl()
         Me.BCancel = New DevExpress.XtraEditors.SimpleButton()
         Me.BSave = New DevExpress.XtraEditors.SimpleButton()
+        Me.SplitContainerControl1 = New DevExpress.XtraEditors.SplitContainerControl()
+        Me.GroupGeneral = New DevExpress.XtraEditors.GroupControl()
         Me.GCSamplePrePO = New DevExpress.XtraGrid.GridControl()
         Me.GVSamplePrePO = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.ColIdSamplePurchase = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -32,24 +33,32 @@ Partial Class FormPopUpSamplePlan
         Me.ColSamplePurcDate = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ColStatus = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ColIDStatus = New DevExpress.XtraGrid.Columns.GridColumn()
-        CType(Me.GroupGeneral, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupGeneral.SuspendLayout()
+        Me.GCListPlan = New DevExpress.XtraGrid.GridControl()
+        Me.GVListPlan = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.ColNo = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColIdSamplePlanDet = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColIdSample = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColSampleCode = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColSampleName = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColSampleSize = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColSamplePlanQty = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.SEQty = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
+        Me.ColSamplePlanDetNote = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnColor = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnSamplePrice = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnIdPrice = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControlButton, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlButton.SuspendLayout()
+        CType(Me.SplitContainerControl1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SplitContainerControl1.SuspendLayout()
+        CType(Me.GroupGeneral, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupGeneral.SuspendLayout()
         CType(Me.GCSamplePrePO, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVSamplePrePO, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GCListPlan, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVListPlan, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SEQty, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'GroupGeneral
-        '
-        Me.GroupGeneral.CaptionLocation = DevExpress.Utils.Locations.Top
-        Me.GroupGeneral.Controls.Add(Me.GCSamplePrePO)
-        Me.GroupGeneral.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GroupGeneral.Location = New System.Drawing.Point(0, 0)
-        Me.GroupGeneral.Name = "GroupGeneral"
-        Me.GroupGeneral.Size = New System.Drawing.Size(703, 294)
-        Me.GroupGeneral.TabIndex = 36
-        Me.GroupGeneral.Text = "Sample Plan"
         '
         'PanelControlButton
         '
@@ -57,7 +66,7 @@ Partial Class FormPopUpSamplePlan
         Me.PanelControlButton.Controls.Add(Me.BCancel)
         Me.PanelControlButton.Controls.Add(Me.BSave)
         Me.PanelControlButton.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControlButton.Location = New System.Drawing.Point(0, 294)
+        Me.PanelControlButton.Location = New System.Drawing.Point(0, 370)
         Me.PanelControlButton.Name = "PanelControlButton"
         Me.PanelControlButton.Size = New System.Drawing.Size(703, 38)
         Me.PanelControlButton.TabIndex = 37
@@ -81,13 +90,39 @@ Partial Class FormPopUpSamplePlan
         Me.BSave.TabIndex = 1
         Me.BSave.Text = "Save"
         '
+        'SplitContainerControl1
+        '
+        Me.SplitContainerControl1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SplitContainerControl1.Horizontal = False
+        Me.SplitContainerControl1.Location = New System.Drawing.Point(0, 0)
+        Me.SplitContainerControl1.Name = "SplitContainerControl1"
+        Me.SplitContainerControl1.Panel1.Controls.Add(Me.GroupGeneral)
+        Me.SplitContainerControl1.Panel1.Text = "Panel1"
+        Me.SplitContainerControl1.Panel2.Controls.Add(Me.GCListPlan)
+        Me.SplitContainerControl1.Panel2.Text = "Panel2"
+        Me.SplitContainerControl1.Size = New System.Drawing.Size(703, 370)
+        Me.SplitContainerControl1.SplitterPosition = 184
+        Me.SplitContainerControl1.TabIndex = 38
+        Me.SplitContainerControl1.Text = "SplitContainerControl1"
+        '
+        'GroupGeneral
+        '
+        Me.GroupGeneral.CaptionLocation = DevExpress.Utils.Locations.Top
+        Me.GroupGeneral.Controls.Add(Me.GCSamplePrePO)
+        Me.GroupGeneral.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupGeneral.Location = New System.Drawing.Point(0, 0)
+        Me.GroupGeneral.Name = "GroupGeneral"
+        Me.GroupGeneral.Size = New System.Drawing.Size(703, 184)
+        Me.GroupGeneral.TabIndex = 37
+        Me.GroupGeneral.Text = "Sample Plan"
+        '
         'GCSamplePrePO
         '
         Me.GCSamplePrePO.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GCSamplePrePO.Location = New System.Drawing.Point(2, 20)
         Me.GCSamplePrePO.MainView = Me.GVSamplePrePO
         Me.GCSamplePrePO.Name = "GCSamplePrePO"
-        Me.GCSamplePrePO.Size = New System.Drawing.Size(699, 272)
+        Me.GCSamplePrePO.Size = New System.Drawing.Size(699, 162)
         Me.GCSamplePrePO.TabIndex = 5
         Me.GCSamplePrePO.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVSamplePrePO})
         '
@@ -154,12 +189,146 @@ Partial Class FormPopUpSamplePlan
         Me.ColIDStatus.FieldName = "id_report_status"
         Me.ColIDStatus.Name = "ColIDStatus"
         '
+        'GCListPlan
+        '
+        Me.GCListPlan.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCListPlan.Location = New System.Drawing.Point(0, 0)
+        Me.GCListPlan.MainView = Me.GVListPlan
+        Me.GCListPlan.Name = "GCListPlan"
+        Me.GCListPlan.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.SEQty})
+        Me.GCListPlan.Size = New System.Drawing.Size(703, 181)
+        Me.GCListPlan.TabIndex = 1
+        Me.GCListPlan.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVListPlan})
+        '
+        'GVListPlan
+        '
+        Me.GVListPlan.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ColNo, Me.ColIdSamplePlanDet, Me.ColIdSample, Me.ColSampleCode, Me.ColSampleName, Me.ColSampleSize, Me.ColSamplePlanQty, Me.GridColumnIdPrice, Me.GridColumnSamplePrice, Me.ColSamplePlanDetNote, Me.GridColumnColor})
+        Me.GVListPlan.GridControl = Me.GCListPlan
+        Me.GVListPlan.HorzScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always
+        Me.GVListPlan.Name = "GVListPlan"
+        Me.GVListPlan.OptionsView.ShowGroupPanel = False
+        '
+        'ColNo
+        '
+        Me.ColNo.Caption = "No."
+        Me.ColNo.FieldName = "no"
+        Me.ColNo.Name = "ColNo"
+        Me.ColNo.OptionsColumn.AllowEdit = False
+        Me.ColNo.Visible = True
+        Me.ColNo.VisibleIndex = 0
+        Me.ColNo.Width = 50
+        '
+        'ColIdSamplePlanDet
+        '
+        Me.ColIdSamplePlanDet.Caption = "Id Sample Plan Det"
+        Me.ColIdSamplePlanDet.FieldName = "id_sample_plan_det"
+        Me.ColIdSamplePlanDet.Name = "ColIdSamplePlanDet"
+        Me.ColIdSamplePlanDet.OptionsColumn.AllowEdit = False
+        '
+        'ColIdSample
+        '
+        Me.ColIdSample.Caption = "Id Sample"
+        Me.ColIdSample.FieldName = "id_sample"
+        Me.ColIdSample.Name = "ColIdSample"
+        Me.ColIdSample.OptionsColumn.AllowEdit = False
+        '
+        'ColSampleCode
+        '
+        Me.ColSampleCode.Caption = "Code"
+        Me.ColSampleCode.FieldName = "code"
+        Me.ColSampleCode.Name = "ColSampleCode"
+        Me.ColSampleCode.OptionsColumn.AllowEdit = False
+        Me.ColSampleCode.Visible = True
+        Me.ColSampleCode.VisibleIndex = 1
+        Me.ColSampleCode.Width = 150
+        '
+        'ColSampleName
+        '
+        Me.ColSampleName.Caption = "Description"
+        Me.ColSampleName.FieldName = "name"
+        Me.ColSampleName.Name = "ColSampleName"
+        Me.ColSampleName.OptionsColumn.AllowEdit = False
+        Me.ColSampleName.Visible = True
+        Me.ColSampleName.VisibleIndex = 2
+        Me.ColSampleName.Width = 192
+        '
+        'ColSampleSize
+        '
+        Me.ColSampleSize.AppearanceCell.Options.UseTextOptions = True
+        Me.ColSampleSize.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.ColSampleSize.AppearanceHeader.Options.UseTextOptions = True
+        Me.ColSampleSize.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.ColSampleSize.Caption = "Size"
+        Me.ColSampleSize.FieldName = "size"
+        Me.ColSampleSize.Name = "ColSampleSize"
+        Me.ColSampleSize.OptionsColumn.AllowEdit = False
+        Me.ColSampleSize.Visible = True
+        Me.ColSampleSize.VisibleIndex = 4
+        Me.ColSampleSize.Width = 100
+        '
+        'ColSamplePlanQty
+        '
+        Me.ColSamplePlanQty.AppearanceCell.Options.UseTextOptions = True
+        Me.ColSamplePlanQty.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.ColSamplePlanQty.AppearanceHeader.Options.UseTextOptions = True
+        Me.ColSamplePlanQty.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.ColSamplePlanQty.Caption = "Qty"
+        Me.ColSamplePlanQty.ColumnEdit = Me.SEQty
+        Me.ColSamplePlanQty.FieldName = "qty"
+        Me.ColSamplePlanQty.Name = "ColSamplePlanQty"
+        Me.ColSamplePlanQty.Visible = True
+        Me.ColSamplePlanQty.VisibleIndex = 5
+        Me.ColSamplePlanQty.Width = 100
+        '
+        'SEQty
+        '
+        Me.SEQty.AutoHeight = False
+        Me.SEQty.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.SEQty.Mask.EditMask = "f0"
+        Me.SEQty.MaxValue = New Decimal(New Integer() {-1530494977, 232830, 0, 0})
+        Me.SEQty.Name = "SEQty"
+        '
+        'ColSamplePlanDetNote
+        '
+        Me.ColSamplePlanDetNote.Caption = "Note"
+        Me.ColSamplePlanDetNote.FieldName = "sample_plan_det_note"
+        Me.ColSamplePlanDetNote.Name = "ColSamplePlanDetNote"
+        Me.ColSamplePlanDetNote.Visible = True
+        Me.ColSamplePlanDetNote.VisibleIndex = 6
+        Me.ColSamplePlanDetNote.Width = 202
+        '
+        'GridColumnColor
+        '
+        Me.GridColumnColor.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumnColor.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumnColor.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumnColor.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumnColor.Caption = "Color"
+        Me.GridColumnColor.FieldName = "color"
+        Me.GridColumnColor.Name = "GridColumnColor"
+        Me.GridColumnColor.Visible = True
+        Me.GridColumnColor.VisibleIndex = 3
+        '
+        'GridColumnSamplePrice
+        '
+        Me.GridColumnSamplePrice.Caption = "Price"
+        Me.GridColumnSamplePrice.FieldName = "sample_price"
+        Me.GridColumnSamplePrice.Name = "GridColumnSamplePrice"
+        Me.GridColumnSamplePrice.Visible = True
+        Me.GridColumnSamplePrice.VisibleIndex = 7
+        '
+        'GridColumnIdPrice
+        '
+        Me.GridColumnIdPrice.Caption = "Id Price"
+        Me.GridColumnIdPrice.FieldName = "id_sample_price"
+        Me.GridColumnIdPrice.Name = "GridColumnIdPrice"
+        '
         'FormPopUpSamplePlan
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(703, 332)
-        Me.Controls.Add(Me.GroupGeneral)
+        Me.ClientSize = New System.Drawing.Size(703, 408)
+        Me.Controls.Add(Me.SplitContainerControl1)
         Me.Controls.Add(Me.PanelControlButton)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
@@ -167,20 +336,25 @@ Partial Class FormPopUpSamplePlan
         Me.Name = "FormPopUpSamplePlan"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Sample Proforma PO List"
-        CType(Me.GroupGeneral, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupGeneral.ResumeLayout(False)
         CType(Me.PanelControlButton, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControlButton.ResumeLayout(False)
+        CType(Me.SplitContainerControl1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.SplitContainerControl1.ResumeLayout(False)
+        CType(Me.GroupGeneral, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupGeneral.ResumeLayout(False)
         CType(Me.GCSamplePrePO, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVSamplePrePO, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GCListPlan, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVListPlan, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SEQty, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
-
-    Friend WithEvents GroupGeneral As DevExpress.XtraEditors.GroupControl
     Friend WithEvents PanelControlButton As DevExpress.XtraEditors.PanelControl
     Friend WithEvents BCancel As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BSave As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents SplitContainerControl1 As DevExpress.XtraEditors.SplitContainerControl
+    Friend WithEvents GroupGeneral As DevExpress.XtraEditors.GroupControl
     Friend WithEvents GCSamplePrePO As DevExpress.XtraGrid.GridControl
     Friend WithEvents GVSamplePrePO As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents ColIdSamplePurchase As DevExpress.XtraGrid.Columns.GridColumn
@@ -190,4 +364,18 @@ Partial Class FormPopUpSamplePlan
     Friend WithEvents ColSamplePurcDate As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ColStatus As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ColIDStatus As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GCListPlan As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVListPlan As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents ColNo As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ColIdSamplePlanDet As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ColIdSample As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ColSampleCode As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ColSampleName As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ColSampleSize As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ColSamplePlanQty As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents SEQty As DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit
+    Friend WithEvents ColSamplePlanDetNote As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnColor As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnIdPrice As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnSamplePrice As DevExpress.XtraGrid.Columns.GridColumn
 End Class

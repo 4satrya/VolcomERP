@@ -65,7 +65,7 @@
                     id_sample_tersimpan = execute_query(query, 0, True, "", "", "", "")
 
                     'insert default price
-                    query = String.Format("INSERT INTO tb_m_sample_price(id_sample,sample_price_name,id_currency,id_comp_contact,sample_price,sample_price_date,is_default_cost) VALUES('{0}','Default Price','1',(SELECT id_comp_contact FROM tb_m_comp_contact LIMIT 1),'0',DATE(NOW()),'1')", id_sample_tersimpan)
+                    query = String.Format("INSERT INTO tb_m_sample_price(id_sample,sample_price_name,id_currency,id_comp_contact,sample_price,sample_price_date,is_default_cost,is_buy_price) VALUES('{0}','Default Price','1',(SELECT id_comp_contact FROM tb_m_comp_contact LIMIT 1),'0',DATE(NOW()),'1','1')", id_sample_tersimpan)
                     execute_non_query(query, True, "", "", "", "")
 
                     'insert default retail price
@@ -106,7 +106,7 @@
                 query = String.Format("INSERT INTO tb_m_sample(sample_name,sample_display_name,sample_code,sample_us_code,id_uom,id_season,id_season_orign, sample_fabrication) VALUES('{0}','{1}','{2}','{3}','{4}','{5}','{6}', '{7}');SELECT LAST_INSERT_ID()", sample_name, sample_display_name, sample_code, sample_us_code, sample_uom, sample_season, sample_season_orign, sample_fabrication)
                 id_sample_tersimpan = execute_query(query, 0, True, "", "", "", "")
                 'insert default price
-                query = String.Format("INSERT INTO tb_m_sample_price(id_sample,sample_price_name,id_currency,id_comp_contact,sample_price,sample_price_date,is_default_cost) VALUES('{0}','Default Price','1',(SELECT id_comp_contact FROM tb_m_comp_contact LIMIT 1),'0',DATE(NOW()),'1')", id_sample_tersimpan)
+                query = String.Format("INSERT INTO tb_m_sample_price(id_sample,sample_price_name,id_currency,id_comp_contact,sample_price,sample_price_date,is_default_cost,is_buy_price) VALUES('{0}','Default Price','1',(SELECT id_comp_contact FROM tb_m_comp_contact LIMIT 1),'0',DATE(NOW()),'1','1')", id_sample_tersimpan)
                 execute_non_query(query, True, "", "", "", "")
 
                 'insert default retail price

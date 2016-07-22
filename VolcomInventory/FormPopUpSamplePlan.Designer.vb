@@ -43,10 +43,10 @@ Partial Class FormPopUpSamplePlan
         Me.ColSampleSize = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ColSamplePlanQty = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.SEQty = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
+        Me.GridColumnIdPrice = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnSamplePrice = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ColSamplePlanDetNote = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnColor = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnSamplePrice = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnIdPrice = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControlButton, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlButton.SuspendLayout()
         CType(Me.SplitContainerControl1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -210,6 +210,10 @@ Partial Class FormPopUpSamplePlan
         '
         'ColNo
         '
+        Me.ColNo.AppearanceCell.Options.UseTextOptions = True
+        Me.ColNo.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.ColNo.AppearanceHeader.Options.UseTextOptions = True
+        Me.ColNo.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
         Me.ColNo.Caption = "No."
         Me.ColNo.FieldName = "no"
         Me.ColNo.Name = "ColNo"
@@ -288,6 +292,20 @@ Partial Class FormPopUpSamplePlan
         Me.SEQty.MaxValue = New Decimal(New Integer() {-1530494977, 232830, 0, 0})
         Me.SEQty.Name = "SEQty"
         '
+        'GridColumnIdPrice
+        '
+        Me.GridColumnIdPrice.Caption = "Id Price"
+        Me.GridColumnIdPrice.FieldName = "id_sample_price"
+        Me.GridColumnIdPrice.Name = "GridColumnIdPrice"
+        '
+        'GridColumnSamplePrice
+        '
+        Me.GridColumnSamplePrice.Caption = "Price"
+        Me.GridColumnSamplePrice.FieldName = "sample_price"
+        Me.GridColumnSamplePrice.Name = "GridColumnSamplePrice"
+        Me.GridColumnSamplePrice.Visible = True
+        Me.GridColumnSamplePrice.VisibleIndex = 7
+        '
         'ColSamplePlanDetNote
         '
         Me.ColSamplePlanDetNote.Caption = "Note"
@@ -308,20 +326,6 @@ Partial Class FormPopUpSamplePlan
         Me.GridColumnColor.Name = "GridColumnColor"
         Me.GridColumnColor.Visible = True
         Me.GridColumnColor.VisibleIndex = 3
-        '
-        'GridColumnSamplePrice
-        '
-        Me.GridColumnSamplePrice.Caption = "Price"
-        Me.GridColumnSamplePrice.FieldName = "sample_price"
-        Me.GridColumnSamplePrice.Name = "GridColumnSamplePrice"
-        Me.GridColumnSamplePrice.Visible = True
-        Me.GridColumnSamplePrice.VisibleIndex = 7
-        '
-        'GridColumnIdPrice
-        '
-        Me.GridColumnIdPrice.Caption = "Id Price"
-        Me.GridColumnIdPrice.FieldName = "id_sample_price"
-        Me.GridColumnIdPrice.Name = "GridColumnIdPrice"
         '
         'FormPopUpSamplePlan
         '

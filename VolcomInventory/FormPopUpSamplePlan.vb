@@ -11,6 +11,8 @@
 
     Private Sub BSave_Click(sender As Object, e As EventArgs) Handles BSave.Click
         If GVSamplePrePO.RowCount > 0 And Not GVSamplePrePO.FocusedRowHandle < 0 Then
+            FormSamplePurchaseDet.view_list_purchase()
+            '
             FormSamplePurchaseDet.TEProfPO.Text = GVSamplePrePO.GetFocusedRowCellValue("sample_plan_number").ToString
             FormSamplePurchaseDet.id_sample_plan = GVSamplePrePO.GetFocusedRowCellValue("id_sample_plan").ToString
             '
@@ -20,10 +22,28 @@
             FormSamplePurchaseDet.TECompAttn.Text = GVSamplePrePO.GetFocusedRowCellValue("contact_person_to").ToString
             FormSamplePurchaseDet.MECompAddress.Text = GVSamplePrePO.GetFocusedRowCellValue("address_primary_to").ToString
             'search detail plan 
-            Dim query As String = "SELECT plnd.*,sp.id_sample_price,sp.sample_price FROM tb_sample_plan_det plnd "
-            query += " INNER JOIN tb_m_sample_price sp ON sp.id_sample=plnd.id_sample AND sp.is_buy_price='1'"
-            query += " WHERE plnd.id_sample_plan='" & GVSamplePrePO.GetFocusedRowCellValue("id_sample_plan").ToString & "'"
+            If GVListPlan.RowCount > 0 Then
+                For i As Integer = 0 To GVListPlan.RowCount - 1
+                    'insert
+                    Dim newRow As DataRow = (TryCast(FormSamplePurchaseDet.GCListPurchase.DataSource, DataTable)).NewRow()
+                    newRow("id_sample_price") = GVListPlan.GetRowCellValue(i, "id_sample_price").ToString
+                    newRow("name") = GVListPlan.GetRowCellValue(i, "name").ToString
+                    newRow("code") = GVListPlan.GetRowCellValue(i, "code").ToString
+                    newRow("color") = GVListPlan.GetRowCellValue(i, "color").ToString
+                    newRow("size") = GVListPlan.GetRowCellValue(i, "size").ToString
+                    newRow("price") = GVListPlan.GetRowCellValue(i, "sample_price").ToString
+                    newRow("qty") = GVListPlan.GetRowCellValue(i, "qty").ToString
+                    newRow("discount") = 0
+                    newRow("tot_discount") = 0
+                    newRow("total") = GVListPlan.GetRowCellValue(i, "qty") * GVListPlan.GetRowCellValue(i, "sample_price")
+                    newRow("note") = GVListPlan.GetRowCellValue(i, "sample_plan_det_note").ToString
 
+                    TryCast(FormSamplePurchaseDet.GCListPurchase.DataSource, DataTable).Rows.Add(newRow)
+                    FormSamplePurchaseDet.GCListPurchase.RefreshDataSource()
+                Next
+                FormSamplePurchaseDet.calculate()
+                FormSamplePurchaseDet.show_but()
+            End If
             Close()
         Else
             stopCustom("Please select Sample Proforma PO first.")
@@ -34,9 +54,6 @@
         view_sample_plan()
         If id_sample_plan <> "-1" Then
             GVSamplePrePO.FocusedRowHandle = find_row(GVSamplePrePO, "id_sample_plan", id_sample_plan)
-        End If
-        If GVSamplePrePO.RowCount > 0 Then
-            view_sample_plan_det(GVSamplePrePO.GetFocusedRowCellValue("id_sample_plan").ToString)
         End If
     End Sub
     Sub view_sample_plan()
@@ -54,12 +71,19 @@
         Dim query As String = "CALL view_plan_sample_det('" & id_sample_plan & "')"
 
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
-        GCSamplePrePO.DataSource = data
+        GCListPlan.DataSource = data
     End Sub
 
     Private Sub GVSamplePrePO_FocusedRowChanged(sender As Object, e As DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs) Handles GVSamplePrePO.FocusedRowChanged
+
         If GVSamplePrePO.RowCount > 0 And Not GVSamplePrePO.FocusedRowHandle < 0 Then
             view_sample_plan_det(GVSamplePrePO.GetFocusedRowCellValue("id_sample_plan").ToString)
+        End If
+    End Sub
+
+    Private Sub GVListPlan_CustomColumnDisplayText(sender As Object, e As DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs) Handles GVListPlan.CustomColumnDisplayText
+        If e.Column.FieldName = "no" Then
+            e.DisplayText = (e.ListSourceRowIndex + 1).ToString()
         End If
     End Sub
 End Class

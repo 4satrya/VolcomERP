@@ -6,6 +6,7 @@
     Public date_created As String = ""
     Public id_report_status_g As String = "1"
     Public id_status_doc As String = "1"
+    '
 
     Private Sub FormSamplePurchaseDet_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         view_currency(LECurrency)
@@ -29,11 +30,11 @@
             BMark.Visible = False
             '
         Else
-            Dim query As String = String.Format("SELECT id_status_doc,id_report_status,sample_purc_kurs,sample_purc_vat,id_season_orign,sample_purc_number,id_comp_contact_to,id_comp_contact_ship_to,id_po_type,id_payment,DATE_FORMAT(sample_purc_date,'%Y-%m-%d') as sample_purc_datex,sample_purc_lead_time,sample_purc_top,id_currency,sample_purc_note FROM tb_sample_purc WHERE id_sample_purc = '{0}'", id_sample_purc)
+            Dim query As String = String.Format("SELECT IFNULL(id_sample_plan,'-1') as id_sample_plan,id_status_doc,id_report_status,sample_purc_kurs,sample_purc_vat,id_season_orign,sample_purc_number,id_comp_contact_to,id_comp_contact_ship_to,id_po_type,id_payment,DATE_FORMAT(sample_purc_date,'%Y-%m-%d') as sample_purc_datex,sample_purc_lead_time,sample_purc_top,id_currency,sample_purc_note FROM tb_sample_purc WHERE id_sample_purc = '{0}'", id_sample_purc)
             Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
             TEPONumber.Text = data.Rows(0)("sample_purc_number").ToString
-
+            id_sample_plan = data.Rows(0)("id_sample_plan").ToString
             TEKurs.EditValue = data.Rows(0)("sample_purc_kurs").ToString
 
             LECurrency.EditValue = Nothing
@@ -200,7 +201,7 @@
     End Sub
 
     Private Sub BSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BSave.Click
-        Dim err_txt, query, vat, po_number, lead_time, top, payment_type, id_season_orign, id_currency, notex As String
+        Dim id_sample_planx, err_txt, query, vat, po_number, lead_time, top, payment_type, id_season_orign, id_currency, notex As String
         err_txt = "-1"
 
         payment_type = LEpayment.EditValue
@@ -214,12 +215,18 @@
 
         ValidateChildren()
 
+        If Not id_sample_plan = "-1" Then
+            id_sample_planx = "'" & id_sample_plan & "'"
+        Else
+            id_sample_planx = "NULL"
+        End If
+
         If id_sample_purc <> "-1" Then
             'edit
             If Not formIsValidInGroup(EPSamplePurc, GroupGeneralHeader) Or id_comp_ship_to = "-1" Or id_comp_to = "-1" Then
                 errorInput()
             Else
-                query = String.Format("UPDATE tb_sample_purc SET id_season_orign='{0}',sample_purc_number='{1}',id_comp_contact_to='{2}',id_comp_contact_ship_to='{3}',id_payment='{5}',sample_purc_lead_time='{6}',sample_purc_top='{7}',id_currency='{8}',sample_purc_note='{9}',sample_purc_vat='{10}',sample_purc_kurs='{12}' WHERE id_sample_purc='{11}'", id_season_orign, po_number, id_comp_to, id_comp_ship_to, id_sample_plan, payment_type, lead_time, top, id_currency, notex, vat, id_sample_purc, decimalSQL(TEKurs.EditValue.ToString))
+                query = String.Format("UPDATE tb_sample_purc SET id_season_orign='{0}',sample_purc_number='{1}',id_comp_contact_to='{2}',id_comp_contact_ship_to='{3}',id_payment='{5}',sample_purc_lead_time='{6}',sample_purc_top='{7}',id_currency='{8}',sample_purc_note='{9}',sample_purc_vat='{10}',sample_purc_kurs='{12}',id_sample_plan={13} WHERE id_sample_purc='{11}'", id_season_orign, po_number, id_comp_to, id_comp_ship_to, id_sample_plan, payment_type, lead_time, top, id_currency, notex, vat, id_sample_purc, decimalSQL(TEKurs.EditValue.ToString), id_sample_planx)
                 execute_non_query(query, True, "", "", "", "")
                 'detail
                 'delete first
@@ -252,7 +259,7 @@
                     If Not GVListPurchase.GetRowCellValue(i, "id_sample_price").ToString = "" Then
                         If GVListPurchase.GetRowCellValue(i, "id_sample_purc_det").ToString = "" Then
                             'insert new
-                            query = String.Format("INSERT INTO tb_sample_purc_det(id_sample_purc,id_sample_price,sample_purc_det_kurs,sample_purc_det_price,sample_purc_det_qty,sample_purc_det_discount,sample_purc_det_note) VALUES('{0}','{1}','{2}','{3}','{4}','{5}','{6}')", id_sample_purc, GVListPurchase.GetRowCellValue(i, "id_sample_price").ToString(), decimalSQL(TEKurs.EditValue.ToString), decimalSQL(GVListPurchase.GetRowCellValue(i, "price").ToString()), decimalSQL(GVListPurchase.GetRowCellValue(i, "qty").ToString()), decimalSQL(GVListPurchase.GetRowCellValue(i, "discount").ToString()), GVListPurchase.GetRowCellValue(i, "note").ToString())
+                            query = String.Format("INSERT INTO tb_sample_purc_det(id_sample_purc,id_sample_price,sample_purc_det_kurs,sample_purc_det_price,sample_purc_det_qty,sample_purc_det_discount,sample_purc_det_note) VALUES('{0}','{1}','{2}','{3}','{4}','{5}','{6}')", id_sample_purc, GVListPurchase.GetRowCellValue(i, "id_sample_price").ToString(), decimalSQL(TEKurs.EditValue.ToString), decimalSQL(GVListPurchase.GetRowCellValue(i, "price").ToString()), decimalSQL(GVListPurchase.GetRowCellValue(i, "qty").ToString()), decimalSQL(GVListPurchase.GetRowCellValue(i, "discount").ToString()), GVListPurchase.GetRowCellValue(i, "note").ToString(), id_sample_planx)
                             execute_non_query(query, True, "", "", "", "")
                         Else
                             'update
@@ -272,7 +279,7 @@
             If Not formIsValidInGroup(EPSamplePurc, GroupGeneralHeader) Or id_comp_ship_to = "-1" Or id_comp_to = "-1" Then
                 errorInput()
             Else
-                query = String.Format("INSERT INTO tb_sample_purc(id_season_orign,sample_purc_number,id_comp_contact_to,id_comp_contact_ship_to,id_status_doc,id_payment,sample_purc_date,sample_purc_lead_time,sample_purc_top,id_currency,sample_purc_note,sample_purc_vat,sample_purc_kurs) VALUES('{0}','{1}','{2}','{3}','{4}','{5}',DATE(NOW()),'{6}','{7}','{8}','{9}','{10}','{11}');SELECT LAST_INSERT_ID()", id_season_orign, po_number, id_comp_to, id_comp_ship_to, id_sample_plan, payment_type, lead_time, top, id_currency, notex, vat, decimalSQL(TEKurs.EditValue.ToString))
+                query = String.Format("INSERT INTO tb_sample_purc(id_season_orign,sample_purc_number,id_comp_contact_to,id_comp_contact_ship_to,id_status_doc,id_payment,sample_purc_date,sample_purc_lead_time,sample_purc_top,id_currency,sample_purc_note,sample_purc_vat,sample_purc_kurs,id_sample_plan) VALUES('{0}','{1}','{2}','{3}','{4}','{5}',DATE(NOW()),'{6}','{7}','{8}','{9}','{10}','{11}',{12});SELECT LAST_INSERT_ID()", id_season_orign, po_number, id_comp_to, id_comp_ship_to, id_sample_plan, payment_type, lead_time, top, id_currency, notex, vat, decimalSQL(TEKurs.EditValue.ToString), id_sample_planx)
                 Dim last_id As String = execute_query(query, 0, True, "", "", "", "")
 
                 If GVListPurchase.RowCount > 0 Then

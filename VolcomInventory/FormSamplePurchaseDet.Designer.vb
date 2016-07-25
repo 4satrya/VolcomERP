@@ -699,6 +699,8 @@ Partial Class FormSamplePurchaseDet
         Me.ColIdSamplePrice.Caption = "Id Sample Price"
         Me.ColIdSamplePrice.FieldName = "id_sample_price"
         Me.ColIdSamplePrice.Name = "ColIdSamplePrice"
+        Me.ColIdSamplePrice.Visible = True
+        Me.ColIdSamplePrice.VisibleIndex = 10
         '
         'ColNote
         '

@@ -106,6 +106,9 @@ Partial Class FormSamplePurchaseDet
         Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
         Me.TEPONumber = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
+        Me.XtraTabControl1 = New DevExpress.XtraTab.XtraTabControl()
+        Me.XTPSamplePO = New DevExpress.XtraTab.XtraTabPage()
+        Me.XTPSampleWO = New DevExpress.XtraTab.XtraTabPage()
         CType(Me.EPSamplePurc, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl3.SuspendLayout()
@@ -148,6 +151,9 @@ Partial Class FormSamplePurchaseDet
         CType(Me.TECompName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TECompCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEPONumber.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XtraTabControl1.SuspendLayout()
+        Me.XTPSamplePO.SuspendLayout()
         Me.SuspendLayout()
         '
         'EPSamplePurc
@@ -162,10 +168,10 @@ Partial Class FormSamplePurchaseDet
         Me.GroupControl3.Controls.Add(Me.BPrint)
         Me.GroupControl3.Controls.Add(Me.BCancel)
         Me.GroupControl3.Controls.Add(Me.BSave)
-        Me.GroupControl3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GroupControl3.Location = New System.Drawing.Point(0, 514)
+        Me.GroupControl3.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.GroupControl3.Location = New System.Drawing.Point(0, 521)
         Me.GroupControl3.Name = "GroupControl3"
-        Me.GroupControl3.Size = New System.Drawing.Size(909, 38)
+        Me.GroupControl3.Size = New System.Drawing.Size(906, 38)
         Me.GroupControl3.TabIndex = 36
         '
         'BPrePrint
@@ -173,7 +179,7 @@ Partial Class FormSamplePurchaseDet
         Me.BPrePrint.Dock = System.Windows.Forms.DockStyle.Right
         Me.BPrePrint.ImageIndex = 6
         Me.BPrePrint.ImageList = Me.LargeImageCollection
-        Me.BPrePrint.Location = New System.Drawing.Point(571, 2)
+        Me.BPrePrint.Location = New System.Drawing.Point(568, 2)
         Me.BPrePrint.Name = "BPrePrint"
         Me.BPrePrint.Size = New System.Drawing.Size(111, 34)
         Me.BPrePrint.TabIndex = 6
@@ -218,7 +224,7 @@ Partial Class FormSamplePurchaseDet
         Me.BPrint.Enabled = False
         Me.BPrint.ImageIndex = 6
         Me.BPrint.ImageList = Me.LargeImageCollection
-        Me.BPrint.Location = New System.Drawing.Point(682, 2)
+        Me.BPrint.Location = New System.Drawing.Point(679, 2)
         Me.BPrint.Name = "BPrint"
         Me.BPrint.Size = New System.Drawing.Size(75, 34)
         Me.BPrint.TabIndex = 3
@@ -229,7 +235,7 @@ Partial Class FormSamplePurchaseDet
         Me.BCancel.Dock = System.Windows.Forms.DockStyle.Right
         Me.BCancel.ImageIndex = 5
         Me.BCancel.ImageList = Me.LargeImageCollection
-        Me.BCancel.Location = New System.Drawing.Point(757, 2)
+        Me.BCancel.Location = New System.Drawing.Point(754, 2)
         Me.BCancel.Name = "BCancel"
         Me.BCancel.Size = New System.Drawing.Size(75, 34)
         Me.BCancel.TabIndex = 2
@@ -241,7 +247,7 @@ Partial Class FormSamplePurchaseDet
         Me.BSave.Enabled = False
         Me.BSave.ImageIndex = 7
         Me.BSave.ImageList = Me.LargeImageCollection
-        Me.BSave.Location = New System.Drawing.Point(832, 2)
+        Me.BSave.Location = New System.Drawing.Point(829, 2)
         Me.BSave.Name = "BSave"
         Me.BSave.Size = New System.Drawing.Size(75, 34)
         Me.BSave.TabIndex = 1
@@ -274,10 +280,10 @@ Partial Class FormSamplePurchaseDet
         Me.GroupGeneralFooter.Controls.Add(Me.TECompShipToName)
         Me.GroupGeneralFooter.Controls.Add(Me.TECompShipTo)
         Me.GroupGeneralFooter.Controls.Add(Me.LabelControl23)
-        Me.GroupGeneralFooter.Dock = System.Windows.Forms.DockStyle.Top
-        Me.GroupGeneralFooter.Location = New System.Drawing.Point(0, 369)
+        Me.GroupGeneralFooter.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.GroupGeneralFooter.Location = New System.Drawing.Point(0, 376)
         Me.GroupGeneralFooter.Name = "GroupGeneralFooter"
-        Me.GroupGeneralFooter.Size = New System.Drawing.Size(909, 145)
+        Me.GroupGeneralFooter.Size = New System.Drawing.Size(906, 145)
         Me.GroupGeneralFooter.TabIndex = 35
         '
         'LabelControl21
@@ -533,10 +539,10 @@ Partial Class FormSamplePurchaseDet
         Me.GConListPurchase.CaptionLocation = DevExpress.Utils.Locations.Left
         Me.GConListPurchase.Controls.Add(Me.PanelControl1)
         Me.GConListPurchase.Controls.Add(Me.PanelControl2)
-        Me.GConListPurchase.Dock = System.Windows.Forms.DockStyle.Top
+        Me.GConListPurchase.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GConListPurchase.Location = New System.Drawing.Point(0, 145)
         Me.GConListPurchase.Name = "GConListPurchase"
-        Me.GConListPurchase.Size = New System.Drawing.Size(909, 224)
+        Me.GConListPurchase.Size = New System.Drawing.Size(906, 231)
         Me.GConListPurchase.TabIndex = 34
         Me.GConListPurchase.Text = "List Purchase"
         '
@@ -549,7 +555,7 @@ Partial Class FormSamplePurchaseDet
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelControl1.Location = New System.Drawing.Point(20, 40)
         Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(887, 182)
+        Me.PanelControl1.Size = New System.Drawing.Size(884, 189)
         Me.PanelControl1.TabIndex = 19
         '
         'GCListPurchase
@@ -558,7 +564,7 @@ Partial Class FormSamplePurchaseDet
         Me.GCListPurchase.Location = New System.Drawing.Point(0, 0)
         Me.GCListPurchase.MainView = Me.GVListPurchase
         Me.GCListPurchase.Name = "GCListPurchase"
-        Me.GCListPurchase.Size = New System.Drawing.Size(887, 182)
+        Me.GCListPurchase.Size = New System.Drawing.Size(884, 189)
         Me.GCListPurchase.TabIndex = 0
         Me.GCListPurchase.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVListPurchase})
         '
@@ -729,7 +735,7 @@ Partial Class FormSamplePurchaseDet
         Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl2.Location = New System.Drawing.Point(20, 2)
         Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(887, 38)
+        Me.PanelControl2.Size = New System.Drawing.Size(884, 38)
         Me.PanelControl2.TabIndex = 18
         '
         'Bdel
@@ -738,7 +744,7 @@ Partial Class FormSamplePurchaseDet
         Me.Bdel.Enabled = False
         Me.Bdel.ImageIndex = 1
         Me.Bdel.ImageList = Me.LargeImageCollection
-        Me.Bdel.Location = New System.Drawing.Point(614, 0)
+        Me.Bdel.Location = New System.Drawing.Point(611, 0)
         Me.Bdel.Name = "Bdel"
         Me.Bdel.Size = New System.Drawing.Size(91, 38)
         Me.Bdel.TabIndex = 17
@@ -750,7 +756,7 @@ Partial Class FormSamplePurchaseDet
         Me.BEdit.Enabled = False
         Me.BEdit.ImageIndex = 2
         Me.BEdit.ImageList = Me.LargeImageCollection
-        Me.BEdit.Location = New System.Drawing.Point(705, 0)
+        Me.BEdit.Location = New System.Drawing.Point(702, 0)
         Me.BEdit.Name = "BEdit"
         Me.BEdit.Size = New System.Drawing.Size(91, 38)
         Me.BEdit.TabIndex = 19
@@ -762,7 +768,7 @@ Partial Class FormSamplePurchaseDet
         Me.BAdd.Enabled = False
         Me.BAdd.ImageIndex = 0
         Me.BAdd.ImageList = Me.LargeImageCollection
-        Me.BAdd.Location = New System.Drawing.Point(796, 0)
+        Me.BAdd.Location = New System.Drawing.Point(793, 0)
         Me.BAdd.Name = "BAdd"
         Me.BAdd.Size = New System.Drawing.Size(91, 38)
         Me.BAdd.TabIndex = 18
@@ -801,7 +807,7 @@ Partial Class FormSamplePurchaseDet
         Me.GroupGeneralHeader.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupGeneralHeader.Location = New System.Drawing.Point(0, 0)
         Me.GroupGeneralHeader.Name = "GroupGeneralHeader"
-        Me.GroupGeneralHeader.Size = New System.Drawing.Size(909, 145)
+        Me.GroupGeneralHeader.Size = New System.Drawing.Size(906, 145)
         Me.GroupGeneralHeader.TabIndex = 33
         '
         'BSampleProf
@@ -1085,15 +1091,38 @@ Partial Class FormSamplePurchaseDet
         Me.LabelControl3.TabIndex = 86
         Me.LabelControl3.Text = "PO Number"
         '
+        'XtraTabControl1
+        '
+        Me.XtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.XtraTabControl1.Location = New System.Drawing.Point(0, 0)
+        Me.XtraTabControl1.Name = "XtraTabControl1"
+        Me.XtraTabControl1.SelectedTabPage = Me.XTPSamplePO
+        Me.XtraTabControl1.Size = New System.Drawing.Size(912, 587)
+        Me.XtraTabControl1.TabIndex = 37
+        Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPSamplePO, Me.XTPSampleWO})
+        '
+        'XTPSamplePO
+        '
+        Me.XTPSamplePO.Controls.Add(Me.GConListPurchase)
+        Me.XTPSamplePO.Controls.Add(Me.GroupGeneralFooter)
+        Me.XTPSamplePO.Controls.Add(Me.GroupGeneralHeader)
+        Me.XTPSamplePO.Controls.Add(Me.GroupControl3)
+        Me.XTPSamplePO.Name = "XTPSamplePO"
+        Me.XTPSamplePO.Size = New System.Drawing.Size(906, 559)
+        Me.XTPSamplePO.Text = "Purchase Order"
+        '
+        'XTPSampleWO
+        '
+        Me.XTPSampleWO.Name = "XTPSampleWO"
+        Me.XTPSampleWO.Size = New System.Drawing.Size(294, 272)
+        Me.XTPSampleWO.Text = "Work Order"
+        '
         'FormSamplePurchaseDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(909, 552)
-        Me.Controls.Add(Me.GroupControl3)
-        Me.Controls.Add(Me.GroupGeneralFooter)
-        Me.Controls.Add(Me.GConListPurchase)
-        Me.Controls.Add(Me.GroupGeneralHeader)
+        Me.ClientSize = New System.Drawing.Size(912, 587)
+        Me.Controls.Add(Me.XtraTabControl1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -1145,6 +1174,9 @@ Partial Class FormSamplePurchaseDet
         CType(Me.TECompName.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TECompCode.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEPONumber.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XtraTabControl1.ResumeLayout(False)
+        Me.XTPSamplePO.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -1233,4 +1265,7 @@ Partial Class FormSamplePurchaseDet
     Friend WithEvents TEProfPO As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents BSampleProf As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents XtraTabControl1 As DevExpress.XtraTab.XtraTabControl
+    Friend WithEvents XTPSamplePO As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents XTPSampleWO As DevExpress.XtraTab.XtraTabPage
 End Class

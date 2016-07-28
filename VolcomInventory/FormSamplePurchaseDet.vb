@@ -17,6 +17,7 @@
         TEKurs.EditValue = default_kurs
 
         If id_sample_purc = "-1" Then
+            XTPSampleWO.Visible = False
             'new
             TEDate.Text = view_date(0)
             TERecDate.Text = view_date(0)
@@ -30,6 +31,8 @@
             BMark.Visible = False
             '
         Else
+            XTPSampleWO.Visible = True
+
             Dim query As String = String.Format("SELECT IFNULL(id_sample_plan,'-1') as id_sample_plan,id_status_doc,id_report_status,sample_purc_kurs,sample_purc_vat,id_season_orign,sample_purc_number,id_comp_contact_to,id_comp_contact_ship_to,id_po_type,id_payment,DATE_FORMAT(sample_purc_date,'%Y-%m-%d') as sample_purc_datex,sample_purc_lead_time,sample_purc_top,id_currency,sample_purc_note FROM tb_sample_purc WHERE id_sample_purc = '{0}'", id_sample_purc)
             Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 

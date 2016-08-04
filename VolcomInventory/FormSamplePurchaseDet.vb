@@ -7,7 +7,6 @@
     Public id_report_status_g As String = "1"
     Public id_status_doc As String = "1"
     '
-
     Private Sub FormSamplePurchaseDet_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         view_currency(LECurrency)
         viewSeasonOrign(LESeason)
@@ -16,8 +15,9 @@
         Dim default_kurs As Decimal = 1.0
         TEKurs.EditValue = default_kurs
 
+        view_wo()
+
         If id_sample_purc = "-1" Then
-            XTPSampleWO.Visible = False
             'new
             TEDate.Text = view_date(0)
             TERecDate.Text = view_date(0)
@@ -29,10 +29,7 @@
             BPrePrint.Visible = False
             BPrint.Visible = False
             BMark.Visible = False
-            '
         Else
-            XTPSampleWO.Visible = True
-
             Dim query As String = String.Format("SELECT IFNULL(id_sample_plan,'-1') as id_sample_plan,id_status_doc,id_report_status,sample_purc_kurs,sample_purc_vat,id_season_orign,sample_purc_number,id_comp_contact_to,id_comp_contact_ship_to,id_po_type,id_payment,DATE_FORMAT(sample_purc_date,'%Y-%m-%d') as sample_purc_datex,sample_purc_lead_time,sample_purc_top,id_currency,sample_purc_note FROM tb_sample_purc WHERE id_sample_purc = '{0}'", id_sample_purc)
             Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
@@ -46,7 +43,6 @@
             LEpayment.ItemIndex = LEpayment.Properties.GetDataSourceRowIndex("id_payment", data.Rows(0)("id_payment").ToString)
 
             LESeason.EditValue = data.Rows(0)("id_season_orign").ToString
-
             id_report_status_g = data.Rows(0)("id_report_status").ToString
 
             id_comp_to = data.Rows(0)("id_comp_contact_to").ToString
@@ -68,7 +64,6 @@
             TERecDate.Text = view_date_from(date_created, Integer.Parse(data.Rows(0)("sample_purc_lead_time").ToString))
             TETOP.Text = data.Rows(0)("sample_purc_top").ToString
             TEDueDate.Text = view_date_from(date_created, (Integer.Parse(data.Rows(0)("sample_purc_lead_time").ToString) + Integer.Parse(data.Rows(0)("sample_purc_top").ToString)))
-
             '
             GConListPurchase.Enabled = True
             TEVat.Properties.ReadOnly = False
@@ -77,7 +72,8 @@
             calculate()
         End If
         allow_status()
-        ' begin here sample plan
+
+        'begin here sample plan
         If id_sample_plan <> "-1" Then
             BAdd.Enabled = False
             BEdit.Enabled = False
@@ -131,7 +127,27 @@
             BMark.Visible = True
         End If
     End Sub
-
+    Sub view_wo()
+        If id_sample_purc = "-1" Then
+            XTPSampleWO.PageVisible = False
+        Else
+            XTPSampleWO.PageVisible = True
+            '
+            load_wo()
+            If GVWOList.RowCount > 0 Then
+                BEditWO.Visible = True
+                BDelWO.Visible = True
+            Else
+                BEditWO.Visible = False
+                BDelWO.Visible = False
+            End If
+        End If
+    End Sub
+    Sub load_wo()
+        Dim query As String = "SELECT * FROM tb_sample_wo WHERE id_sample_purc='" & id_sample_purc & "'"
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCWOList.DataSource = data
+    End Sub
     Sub view_list_purchase()
         Dim query = "CALL view_purc_sample_det('" & id_sample_purc & "')"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
@@ -498,5 +514,25 @@
     Private Sub BSampleProf_Click(sender As Object, e As EventArgs) Handles BSampleProf.Click
         FormPopUpSamplePlan.id_sample_plan = id_sample_plan
         FormPopUpSamplePlan.ShowDialog()
+    End Sub
+
+    Private Sub BAddWO_Click(sender As Object, e As EventArgs) Handles BAddWO.Click
+        FormSampleWO.ShowDialog()
+    End Sub
+
+    Private Sub BEditWO_Click(sender As Object, e As EventArgs) Handles BEditWO.Click
+
+    End Sub
+
+    Private Sub BDelWO_Click(sender As Object, e As EventArgs) Handles BDelWO.Click
+        'delete
+        Dim confirm As DialogResult
+        confirm = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure want to delete this sample work order?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+
+        If confirm = DialogResult.Yes Then
+            Dim id_sample_wo As String = GVWOList.GetFocusedRowCellValue("id_sample_wo").ToString
+            Dim query As String = "DELETE FROM tb_sample_wo WHERE id_sample_wo='" & id_sample_wo & "'"
+            execute_non_query(query, True, "", "", "", "")
+        End If
     End Sub
 End Class

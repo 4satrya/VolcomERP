@@ -80,6 +80,7 @@ Module Common
         '17 = Delivery Order Sample
         '19 = SAMPLE PL
         '20 = SAMPLE PRICE
+        '22 = Sample WO
 
         Dim header_number_x As String
         header_number_x = ""
@@ -126,6 +127,8 @@ Module Common
             header_number_x = combine_header_number(get_setup_field("sample_price_code_head"), Integer.Parse(get_setup_field("sample_price_code_inc")), Integer.Parse(get_setup_field("sample_price_code_digit")))
         ElseIf opt = "21" Then
             header_number_x = combine_header_number(get_setup_field("sample_pl_ret_code_head"), Integer.Parse(get_setup_field("sample_pl_ret_code_inc")), Integer.Parse(get_setup_field("sample_pl_ret_code_digit")))
+        ElseIf opt = "22" Then
+            header_number_x = combine_header_number(get_setup_field("sample_wo_code_head"), Integer.Parse(get_setup_field("sample_wo_code_inc")), Integer.Parse(get_setup_field("sample_wo_code_digit")))
         End If
 
         Return header_number_x
@@ -197,6 +200,9 @@ Module Common
             execute_non_query(query, True, "", "", "", "")
         ElseIf opt = "21" Then
             query = "UPDATE tb_opt SET sample_pl_ret_code_inc=(tb_opt.sample_pl_ret_code_inc+1)"
+            execute_non_query(query, True, "", "", "", "")
+        ElseIf opt = "22" Then
+            query = "UPDATE tb_opt SET sample_wo_code_inc=(tb_opt.sample_wo_code_inc+1)"
             execute_non_query(query, True, "", "", "", "")
         End If
     End Sub

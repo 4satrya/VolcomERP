@@ -614,7 +614,7 @@ Partial Class FormSamplePurchaseDet
         '
         'ColCode
         '
-        Me.ColCode.Caption = "US Code"
+        Me.ColCode.Caption = "Code"
         Me.ColCode.FieldName = "code"
         Me.ColCode.Name = "ColCode"
         Me.ColCode.Visible = True

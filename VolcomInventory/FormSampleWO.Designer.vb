@@ -302,7 +302,7 @@ Partial Class FormSampleWO
         Me.ColSubtotal.FieldName = "total"
         Me.ColSubtotal.Name = "ColSubtotal"
         Me.ColSubtotal.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total", "{0:N2}")})
-        Me.ColSubtotal.UnboundExpression = "[price] * [qty]"
+        Me.ColSubtotal.UnboundExpression = "([price] - [discount]) * [qty]"
         Me.ColSubtotal.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
         Me.ColSubtotal.Visible = True
         Me.ColSubtotal.VisibleIndex = 8

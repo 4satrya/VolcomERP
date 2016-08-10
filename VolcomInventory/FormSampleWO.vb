@@ -113,4 +113,24 @@
             e.DisplayText = (e.ListSourceRowIndex + 1).ToString()
         End If
     End Sub
+    Sub calculate()
+        Dim total, sub_tot, gross_tot, vat, discount As Decimal
+
+        Try
+            sub_tot = GVListPurchase.Columns("total").SummaryItem.SummaryValue
+            vat = (TEVat.EditValue / 100) * GVListPurchase.Columns("total").SummaryItem.SummaryValue
+            discount = GVListPurchase.Columns("tot_discount").SummaryItem.SummaryValue
+        Catch ex As Exception
+        End Try
+
+        TEDiscount.Text = discount.ToString("0.00")
+        TEVatTot.Text = vat.ToString("0.00")
+
+        gross_tot = sub_tot + discount
+        TEGrossTot.Text = gross_tot.ToString("0.00")
+
+        total = sub_tot + vat
+        TETot.Text = total.ToString("0.00")
+        METotSay.Text = ConvertCurrencyToEnglish(Double.Parse(total.ToString), LECurrency.EditValue.ToString)
+    End Sub
 End Class

@@ -740,6 +740,20 @@
             FormMasterDesignCOPPD.id_comp_contact = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
             FormMasterDesignCOPPD.id_comp = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
             Close()
+        ElseIf id_pop_up = "69" Then
+            'Design COP PD
+            FormSampleWO.id_comp_to = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
+            FormSampleWO.TECompCode.Text = GVCompany.GetFocusedRowCellDisplayText("comp_number").ToString
+            FormSampleWO.TECompName.Text = GVCompany.GetFocusedRowCellDisplayText("comp_name").ToString
+            FormSampleWO.TECompAttn.Text = GVCompanyContactList.GetFocusedRowCellDisplayText("contact_person").ToString
+            FormSampleWO.MECompAddress.Text = GVCompany.GetFocusedRowCellDisplayText("address_primary").ToString
+            Close()
+        ElseIf id_pop_up = "70" Then
+            FormSampleWO.id_comp_ship_to = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
+            FormSampleWO.TECompShipTo.Text = GVCompany.GetFocusedRowCellDisplayText("comp_number").ToString
+            FormSampleWO.TECompShipToName.Text = GVCompany.GetFocusedRowCellDisplayText("comp_name").ToString
+            FormSampleWO.MECompShipToAddress.Text = GVCompany.GetFocusedRowCellDisplayText("address_primary").ToString
+            Close()
         End If
         Cursor = Cursors.Default
     End Sub

@@ -133,4 +133,20 @@
         TETot.Text = total.ToString("0.00")
         METotSay.Text = ConvertCurrencyToEnglish(Double.Parse(total.ToString), LECurrency.EditValue.ToString)
     End Sub
+
+    Private Sub BSearchCompTo_Click(sender As Object, e As EventArgs) Handles BSearchCompTo.Click
+        FormPopUpContact.id_pop_up = "69"
+        FormPopUpContact.id_comp_contact = id_comp_to
+        FormPopUpContact.ShowDialog()
+    End Sub
+
+    Private Sub BSearchCompShipTo_Click(sender As Object, e As EventArgs) Handles BSearchCompShipTo.Click
+        FormPopUpContact.id_pop_up = "70"
+        FormPopUpContact.id_comp_contact = id_comp_ship_to
+        FormPopUpContact.ShowDialog()
+    End Sub
+
+    Private Sub BCancel_Click(sender As Object, e As EventArgs) Handles BCancel.Click
+        Close()
+    End Sub
 End Class

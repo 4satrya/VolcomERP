@@ -1396,9 +1396,9 @@ Public Class FormMain
                 again_awb = "1"
                 While again_awb = "1"
                     again_awb = "2"
-                    FormWHAWBillIn.id_awb = "-1"
-                    FormWHAWBillIn.id_awb_type = "2"
-                    FormWHAWBillIn.ShowDialog()
+                    FormWHAWBillInb.id_awb = "-1"
+                    FormWHAWBillInb.id_awb_type = "2"
+                    FormWHAWBillInb.ShowDialog()
                 End While
             End If
         ElseIf formName = "FormMasterPrice" Then

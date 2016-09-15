@@ -53,7 +53,7 @@ Module Database
         Dim connection_string As String = String.Format("Data Source={0};User Id={1};Password={2};Database={3};Convert Zero Datetime=True", host, username, password, database)
 
         'Enable when developing
-        'Console.WriteLine(command_text)
+        Console.WriteLine(command_text)
 
         If col_index < 0 Then 'return data table
             Dim connection As New MySqlConnection(connection_string)

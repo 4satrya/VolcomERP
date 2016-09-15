@@ -18,7 +18,7 @@ Module Database
         End If
 
         'Enable when developing
-        'Console.WriteLine(command_text)
+        Console.WriteLine(command_text)
 
         Dim connection_string As String = String.Format("Data Source={0};User Id={1};Password={2};Database={3};Convert Zero Datetime=True; Allow User Variables=True;", host, username, password, database)
 

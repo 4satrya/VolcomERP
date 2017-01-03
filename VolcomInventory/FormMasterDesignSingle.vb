@@ -1155,15 +1155,15 @@
                         execute_non_query(query, True, "", "", "", "")
 
                         save_image_ori(PictureEdit1, product_image_path, id_design & ".jpg")
-                        query = String.Format("DELETE FROM tb_m_design_code WHERE id_design='" & id_design & "'")
-                        execute_non_query(query, True, "", "", "", "")
+                        query = String.Format("DELETE FROM tb_m_design_code WHERE id_design='" & id_design & "'; ")
+
 
                         'codefication
                         For i As Integer = 0 To GVCode.RowCount - 1
                             Try
                                 If Not GVCode.GetRowCellValue(i, "value").ToString = "" Or GVCode.GetRowCellValue(i, "value").ToString = "0" Then
-                                    query = String.Format("INSERT INTO tb_m_design_code(id_design,id_code_detail) VALUES('{0}','{1}')", id_design, GVCode.GetRowCellValue(i, "value").ToString)
-                                    execute_non_query(query, True, "", "", "", "")
+                                    query += String.Format("INSERT INTO tb_m_design_code(id_design,id_code_detail) VALUES('{0}','{1}'); ", id_design, GVCode.GetRowCellValue(i, "value").ToString)
+                                    'execute_non_query(query, True, "", "", "", "")
                                 End If
                             Catch ex As Exception
                             End Try
@@ -1173,8 +1173,8 @@
                         For i As Integer = 0 To GVCodeDsg.RowCount - 1
                             Try
                                 If Not GVCodeDsg.GetRowCellValue(i, "value").ToString = "" Or GVCodeDsg.GetRowCellValue(i, "value").ToString = "0" Then
-                                    query = String.Format("INSERT INTO tb_m_design_code(id_design,id_code_detail) VALUES('{0}','{1}')", id_design, GVCodeDsg.GetRowCellValue(i, "value").ToString)
-                                    execute_non_query(query, True, "", "", "", "")
+                                    query += String.Format("INSERT INTO tb_m_design_code(id_design,id_code_detail) VALUES('{0}','{1}'); ", id_design, GVCodeDsg.GetRowCellValue(i, "value").ToString)
+                                    'execute_non_query(query, True, "", "", "", "")
                                 End If
                             Catch ex As Exception
                             End Try
@@ -1184,12 +1184,13 @@
                         For i As Integer = 0 To GVCodeNonMD.RowCount - 1
                             Try
                                 If Not GVCodeNonMD.GetRowCellValue(i, "value").ToString = "" Or GVCodeNonMD.GetRowCellValue(i, "value").ToString = 0 Then
-                                    query = String.Format("INSERT INTO tb_m_design_code(id_design,id_code_detail) VALUES('{0}','{1}')", id_design, GVCodeNonMD.GetRowCellValue(i, "value").ToString)
-                                    execute_non_query(query, True, "", "", "", "")
+                                    query += String.Format("INSERT INTO tb_m_design_code(id_design,id_code_detail) VALUES('{0}','{1}');", id_design, GVCodeNonMD.GetRowCellValue(i, "value").ToString)
+                                    ' execute_non_query(query, True, "", "", "", "")
                                 End If
                             Catch ex As Exception
                             End Try
                         Next
+                        execute_non_query(query, True, "", "", "", "")
 
                         'pdate product code
                         updProductCode(id_design)

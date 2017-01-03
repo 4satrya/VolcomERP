@@ -195,7 +195,7 @@ Public Class FormBarcodeProductPrint
                         print_command += "<ESC>Q1" & vbNewLine
                         print_command += "<ESC>Z" & vbNewLine
                         print_command += "" & vbNewLine
-                        Console.WriteLine(print_command)
+                        'Console.WriteLine(print_command)
                     Next
                 Next
                 print_command = print_command.ToString().Replace("<ESC>", (ChrW(27)).ToString())

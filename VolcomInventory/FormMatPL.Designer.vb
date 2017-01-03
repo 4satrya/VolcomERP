@@ -55,7 +55,17 @@ Partial Class FormMatPL
         Me.GridColumnMRSNumber = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnMRSDesign = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn42 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RCIPLCreated = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.GridColumn43 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemProgressBar1 = New DevExpress.XtraEditors.Repository.RepositoryItemProgressBar()
+        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.BtnView = New DevExpress.XtraEditors.SimpleButton()
+        Me.SLESeason = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn51 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnSeason = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
         Me.XTPWOMat = New DevExpress.XtraTab.XtraTabPage()
         Me.XTCPLWO = New DevExpress.XtraTab.XtraTabControl()
         Me.XtraTabPage3 = New DevExpress.XtraTab.XtraTabPage()
@@ -126,7 +136,12 @@ Partial Class FormMatPL
         Me.XTPListProdMRS.SuspendLayout()
         CType(Me.GCMRS, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVMRS, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RCIPLCreated, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemProgressBar1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl1.SuspendLayout()
+        CType(Me.SLESeason.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTPWOMat.SuspendLayout()
         CType(Me.XTCPLWO, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCPLWO.SuspendLayout()
@@ -321,6 +336,7 @@ Partial Class FormMatPL
         'XTPListProdMRS
         '
         Me.XTPListProdMRS.Controls.Add(Me.GCMRS)
+        Me.XTPListProdMRS.Controls.Add(Me.PanelControl1)
         Me.XTPListProdMRS.Name = "XTPListProdMRS"
         Me.XTPListProdMRS.Size = New System.Drawing.Size(721, 338)
         Me.XTPListProdMRS.Text = "List Material Requisition"
@@ -328,17 +344,17 @@ Partial Class FormMatPL
         'GCMRS
         '
         Me.GCMRS.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCMRS.Location = New System.Drawing.Point(0, 0)
+        Me.GCMRS.Location = New System.Drawing.Point(0, 44)
         Me.GCMRS.MainView = Me.GVMRS
         Me.GCMRS.Name = "GCMRS"
-        Me.GCMRS.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemProgressBar1})
-        Me.GCMRS.Size = New System.Drawing.Size(721, 338)
+        Me.GCMRS.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemProgressBar1, Me.RCIPLCreated})
+        Me.GCMRS.Size = New System.Drawing.Size(721, 294)
         Me.GCMRS.TabIndex = 9
         Me.GCMRS.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVMRS})
         '
         'GVMRS
         '
-        Me.GVMRS.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdMRS, Me.GridColumnIdWO, Me.GridColumnIdCompReqFrom, Me.GridColumnCompReqFrom, Me.GridColumnIdCompReqTo, Me.GridColumnCompReqTo, Me.GridColumnDate, Me.GridColumn1, Me.GridColumnWONumber, Me.GridColumnMRSNumber, Me.GridColumn2, Me.GridColumnMRSDesign})
+        Me.GVMRS.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdMRS, Me.GridColumnIdWO, Me.GridColumnIdCompReqFrom, Me.GridColumnCompReqFrom, Me.GridColumnIdCompReqTo, Me.GridColumnCompReqTo, Me.GridColumnDate, Me.GridColumn1, Me.GridColumnWONumber, Me.GridColumnMRSNumber, Me.GridColumn2, Me.GridColumnMRSDesign, Me.GridColumn42, Me.GridColumn43})
         Me.GVMRS.GridControl = Me.GCMRS
         Me.GVMRS.Name = "GVMRS"
         Me.GVMRS.OptionsBehavior.Editable = False
@@ -441,6 +457,32 @@ Partial Class FormMatPL
         Me.GridColumnMRSDesign.VisibleIndex = 2
         Me.GridColumnMRSDesign.Width = 100
         '
+        'GridColumn42
+        '
+        Me.GridColumn42.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn42.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn42.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn42.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn42.Caption = "PL Created"
+        Me.GridColumn42.ColumnEdit = Me.RCIPLCreated
+        Me.GridColumn42.FieldName = "pl_created"
+        Me.GridColumn42.Name = "GridColumn42"
+        Me.GridColumn42.Visible = True
+        Me.GridColumn42.VisibleIndex = 7
+        '
+        'RCIPLCreated
+        '
+        Me.RCIPLCreated.AutoHeight = False
+        Me.RCIPLCreated.Name = "RCIPLCreated"
+        Me.RCIPLCreated.ValueChecked = "yes"
+        Me.RCIPLCreated.ValueUnchecked = "no"
+        '
+        'GridColumn43
+        '
+        Me.GridColumn43.Caption = "PL Created Qty"
+        Me.GridColumn43.FieldName = "jum_pl"
+        Me.GridColumn43.Name = "GridColumn43"
+        '
         'RepositoryItemProgressBar1
         '
         Me.RepositoryItemProgressBar1.Appearance.BackColor = System.Drawing.Color.Lime
@@ -452,6 +494,68 @@ Partial Class FormMatPL
         Me.RepositoryItemProgressBar1.ShowTitle = True
         Me.RepositoryItemProgressBar1.StartColor = System.Drawing.Color.Green
         Me.RepositoryItemProgressBar1.Step = 1
+        '
+        'PanelControl1
+        '
+        Me.PanelControl1.Controls.Add(Me.BtnView)
+        Me.PanelControl1.Controls.Add(Me.SLESeason)
+        Me.PanelControl1.Controls.Add(Me.LabelControl4)
+        Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelControl1.Location = New System.Drawing.Point(0, 0)
+        Me.PanelControl1.Name = "PanelControl1"
+        Me.PanelControl1.Size = New System.Drawing.Size(721, 44)
+        Me.PanelControl1.TabIndex = 10
+        '
+        'BtnView
+        '
+        Me.BtnView.ImageIndex = 15
+        Me.BtnView.Location = New System.Drawing.Point(276, 10)
+        Me.BtnView.Name = "BtnView"
+        Me.BtnView.Size = New System.Drawing.Size(83, 24)
+        Me.BtnView.TabIndex = 101
+        Me.BtnView.Text = "View"
+        '
+        'SLESeason
+        '
+        Me.SLESeason.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.SLESeason.Location = New System.Drawing.Point(69, 12)
+        Me.SLESeason.Name = "SLESeason"
+        Me.SLESeason.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SLESeason.Properties.Appearance.Options.UseFont = True
+        Me.SLESeason.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLESeason.Properties.View = Me.SearchLookUpEdit1View
+        Me.SLESeason.Size = New System.Drawing.Size(201, 20)
+        Me.SLESeason.TabIndex = 100
+        '
+        'SearchLookUpEdit1View
+        '
+        Me.SearchLookUpEdit1View.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn51, Me.GridColumnSeason})
+        Me.SearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.SearchLookUpEdit1View.Name = "SearchLookUpEdit1View"
+        Me.SearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.SearchLookUpEdit1View.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn51
+        '
+        Me.GridColumn51.Caption = "Id Status"
+        Me.GridColumn51.FieldName = "id_statusmrs"
+        Me.GridColumn51.Name = "GridColumn51"
+        '
+        'GridColumnSeason
+        '
+        Me.GridColumnSeason.Caption = "Status Packing List"
+        Me.GridColumnSeason.FieldName = "status_mrs"
+        Me.GridColumnSeason.Name = "GridColumnSeason"
+        Me.GridColumnSeason.Visible = True
+        Me.GridColumnSeason.VisibleIndex = 0
+        '
+        'LabelControl4
+        '
+        Me.LabelControl4.Location = New System.Drawing.Point(10, 15)
+        Me.LabelControl4.Name = "LabelControl4"
+        Me.LabelControl4.Size = New System.Drawing.Size(53, 13)
+        Me.LabelControl4.TabIndex = 99
+        Me.LabelControl4.Text = "PL Created"
         '
         'XTPWOMat
         '
@@ -954,7 +1058,13 @@ Partial Class FormMatPL
         Me.XTPListProdMRS.ResumeLayout(False)
         CType(Me.GCMRS, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVMRS, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RCIPLCreated, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemProgressBar1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl1.ResumeLayout(False)
+        Me.PanelControl1.PerformLayout()
+        CType(Me.SLESeason.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XTPWOMat.ResumeLayout(False)
         CType(Me.XTCPLWO, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XTCPLWO.ResumeLayout(False)
@@ -1073,4 +1183,14 @@ Partial Class FormMatPL
     Friend WithEvents GridColumn20 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnIdReport As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RepositoryItemProgressBar2 As DevExpress.XtraEditors.Repository.RepositoryItemProgressBar
+    Friend WithEvents GridColumn42 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RCIPLCreated As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+    Friend WithEvents GridColumn43 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents PanelControl1 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents BtnView As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents SLESeason As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents SearchLookUpEdit1View As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn51 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnSeason As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LabelControl4 As DevExpress.XtraEditors.LabelControl
 End Class

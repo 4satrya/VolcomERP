@@ -6,8 +6,10 @@
     Private Sub FormMatPL_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Cursor = Cursors.WaitCursor
         Try
+
             viewPL()
-            viewMRS()
+            viewStatusMRS()
+
             viewPLOther()
             view_mrs_other()
             viewPLWO()
@@ -19,7 +21,14 @@
         End Try
         Cursor = Cursors.Default
     End Sub
-
+    Sub viewStatusMRS()
+        Dim query As String = "SELECT '0' as id_statusmrs, 'All' as status_mrs 
+                                UNION
+                              SELECT '1' as id_statusmrs, 'Already Created' as status_mrs 
+                                UNION
+                              SELECT '2' as id_statusmrs, 'Not yet created' as status_mrs"
+        viewSearchLookupQuery(SLESeason, query, "id_statusmrs", "status_mrs", "id_statusmrs")
+    End Sub
     Private Sub FormMatPL_Activated(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Activated
         FormMain.show_rb(Name)
         checkFormAccess(Name)
@@ -81,21 +90,36 @@
         GCPLWO.DataSource = data
     End Sub
     Sub viewMRS()
-        Dim query = "SELECT a.id_prod_order_mrs,m.design_name,m.design_display_name,k.prod_order_number,a.prod_order_mrs_number,a.id_report_status,h.report_status,a.id_prod_order_wo,b.prod_order_wo_number, "
-        query += "d.comp_name AS comp_name_req_from,c.id_comp_contact AS id_comp_name_req_from, "
-        query += "f.comp_name AS comp_name_req_to,e.id_comp_contact AS id_comp_name_req_to, "
-        query += "a.prod_order_mrs_date "
-        query += "FROM tb_prod_order_mrs a "
-        query += "LEFT JOIN tb_prod_order_wo b ON a.id_prod_order_wo = b.id_prod_order_wo "
-        query += "INNER JOIN tb_m_comp_contact c ON a.id_comp_contact_req_from = c.id_comp_contact "
-        query += "INNER JOIN tb_m_comp d ON c.id_comp = d.id_comp "
-        query += "INNER JOIN tb_m_comp_contact e ON a.id_comp_contact_req_to = e.id_comp_contact "
-        query += "INNER JOIN tb_m_comp f ON e.id_comp = f.id_comp "
-        query += "INNER JOIN tb_lookup_report_status h ON h.id_report_status = a.id_report_status "
-        query += "INNER JOIN tb_prod_order k ON a.id_prod_order = k.id_prod_order "
-        query += "INNER JOIN tb_prod_demand_design l ON k.id_prod_demand_design = l.id_prod_demand_design "
-        query += "INNER JOIN tb_m_design m ON m.id_design = l.id_design "
-        query += "WHERE (a.id_report_status = '3' OR a.id_report_status='4') AND NOT ISNULL(a.id_prod_order)"
+        Dim status_mrs As String = SLESeason.EditValue.ToString
+        Dim query_status As String = ""
+        If status_mrs = "0" Then
+            '
+        ElseIf status_mrs = "1" Then
+            query_status = "AND IFNULL(jum_pl.jum_pl,0)>0 "
+        ElseIf status_mrs = "2" Then
+            query_status = "AND IFNULL(jum_pl.jum_pl,0)<=0 "
+        End If
+
+        Dim query = "SELECT a.id_prod_order_mrs,m.design_name,m.design_display_name,k.prod_order_number,a.prod_order_mrs_number,a.id_report_status,h.report_status,a.id_prod_order_wo,b.prod_order_wo_number, 
+                    d.comp_name AS comp_name_req_from,c.id_comp_contact AS id_comp_name_req_from, 
+                    f.comp_name AS comp_name_req_to,e.id_comp_contact AS id_comp_name_req_to, 
+                    a.prod_order_mrs_date 
+                    ,IF(IFNULL(jum_pl.jum_pl,0)>0,'yes','no') AS pl_created,IFNULL(jum_pl.jum_pl,0) AS jum_pl
+                    FROM tb_prod_order_mrs a 
+                    LEFT JOIN tb_prod_order_wo b ON a.id_prod_order_wo = b.id_prod_order_wo 
+                    INNER JOIN tb_m_comp_contact c ON a.id_comp_contact_req_from = c.id_comp_contact 
+                    INNER JOIN tb_m_comp d ON c.id_comp = d.id_comp 
+                    INNER JOIN tb_m_comp_contact e ON a.id_comp_contact_req_to = e.id_comp_contact 
+                    INNER JOIN tb_m_comp f ON e.id_comp = f.id_comp 
+                    INNER JOIN tb_lookup_report_status h ON h.id_report_status = a.id_report_status 
+                    INNER JOIN tb_prod_order k ON a.id_prod_order = k.id_prod_order 
+                    INNER JOIN tb_prod_demand_design l ON k.id_prod_demand_design = l.id_prod_demand_design 
+                    INNER JOIN tb_m_design m ON m.id_design = l.id_design 
+                    LEFT JOIN 
+                    (
+	                    SELECT COUNT(id_pl_mrs) AS jum_pl,id_prod_order_mrs FROM tb_pl_mrs WHERE id_report_status!=5 GROUP BY id_prod_order_mrs
+                    ) AS jum_pl ON jum_pl.id_prod_order_mrs=a.id_prod_order_mrs
+                    WHERE (a.id_report_status = '3' OR a.id_report_status='4')  " & query_status & " AND NOT ISNULL(a.id_prod_order)"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCMRS.DataSource = data
     End Sub
@@ -217,5 +241,9 @@
 
     Private Sub XTCPLWO_SelectedPageChanged(ByVal sender As System.Object, ByVal e As DevExpress.XtraTab.TabPageChangedEventArgs) Handles XTCPLWO.SelectedPageChanged
         check_but()
+    End Sub
+
+    Private Sub BtnView_Click(sender As Object, e As EventArgs) Handles BtnView.Click
+        viewMRS()
     End Sub
 End Class

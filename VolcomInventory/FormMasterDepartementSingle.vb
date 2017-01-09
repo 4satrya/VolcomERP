@@ -50,7 +50,7 @@
                 If Not formIsValid(EPDepartement) Then
                     errorInput()
                 Else
-                    query = String.Format("UPDATE tb_m_departement SET departement='{0}',departement_code='{1}',description='{2}',id_user_head='{4}' WHERE id_departement='{3}'", departement, departement_code, description, id_departement, SLEHeadDept.EditValue.ToString)
+                    query = String.Format("UPDATE tb_m_departement SET departement='{0}',departement_code='{1}',description='{2}',id_user_head='{4}',id_user_asst_head='{5}' WHERE id_departement='{3}'", departement, departement_code, description, id_departement, SLEHeadDept.EditValue.ToString, SLEAsstHeadDept.EditValue.ToString)
                     execute_non_query(query, True, "", "", "", "")
                     FormMasterDepartement.view_department()
                     FormMasterDepartement.GVDepartment.FocusedRowHandle = find_row(FormMasterDepartement.GVDepartment, "id_departement", id_departement)
@@ -61,7 +61,7 @@
                 If Not formIsValid(EPDepartement) Then
                     errorInput()
                 Else
-                    query = String.Format("INSERT INTO tb_m_departement(departement,departement_code,description) VALUES('{0}','{1}','{2}'); SELECT LAST_INSERT_ID()", departement, departement_code, description)
+                    query = String.Format("INSERT INTO tb_m_departement(departement,departement_code,description,id_user_head,id_user_asst_head) VALUES('{0}','{1}','{2}','{3}','{4}'); SELECT LAST_INSERT_ID()", departement, departement_code, description, SLEHeadDept.EditValue.ToString, SLEAsstHeadDept.EditValue.ToString)
                     id_departement = execute_query(query, 0, True, "", "", "", "")
                     FormMasterDepartement.view_department()
                     FormMasterDepartement.GVDepartment.FocusedRowHandle = find_row(FormMasterDepartement.GVDepartment, "id_departement", id_departement)
@@ -74,7 +74,8 @@
         Cursor = Cursors.Default
     End Sub
     Private Sub FormMasterDepartementSingle_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        load_user()
+        load_user_head()
+        load_user_asst_head()
 
         If id_departement <> "-1" Then
             'update
@@ -87,7 +88,10 @@
 
             Dim id_user_head As String = data.Rows(0)("id_user_head").ToString
             SLEHeadDept.EditValue = id_user_head
-
+            '
+            Dim id_user_asst_head As String = data.Rows(0)("id_user_asst_head").ToString
+            SLEAsstHeadDept.EditValue = id_user_asst_head
+            '
             data.Dispose()
 
             TEDepartement.Text = departement
@@ -95,15 +99,23 @@
             MEDescription.Text = description
         End If
     End Sub
-    Sub load_user()
+    Sub load_user_head()
         Dim query As String = "SELECT usr.*,emp.*,dep.departement FROM tb_m_user usr INNER JOIN tb_m_employee emp ON usr.id_employee=emp.id_employee INNER JOIN tb_m_departement dep ON dep.id_departement=emp.id_departement"
         'AND emp.id_departement='" + id_departement + "'
         viewSearchLookupQuery(SLEHeadDept, query, "id_user", "employee_name", "id_user")
         SLEHeadDept.Properties.View.ActiveFilterString = "[id_departement]='" & id_departement & "'"
         SLEViewEmp.RefreshData()
     End Sub
+    Sub load_user_asst_head()
+        Dim query As String = "SELECT usr.*,emp.*,dep.departement FROM tb_m_user usr INNER JOIN tb_m_employee emp ON usr.id_employee=emp.id_employee INNER JOIN tb_m_departement dep ON dep.id_departement=emp.id_departement"
+        'AND emp.id_departement='" + id_departement + "'
+        viewSearchLookupQuery(SLEAsstHeadDept, query, "id_user", "employee_name", "id_user")
+        SLEAsstHeadDept.Properties.View.ActiveFilterString = "[id_departement]='" & id_departement & "'"
+        SLEViewEmp.RefreshData()
+    End Sub
     Private Sub FormMasterDepartementSingle_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
         Dispose()
         checkFormAccess("FormMasterDepartement")
     End Sub
+
 End Class

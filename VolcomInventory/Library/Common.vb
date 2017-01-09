@@ -2380,7 +2380,7 @@ Module Common
             execute_non_query(query, True, "", "", "", "")
         End If
 
-        Dim query_cek As String = "SELECT HOUR(a.lead_time) AS hourx,MINUTE(a.lead_time) AS minutex,SECOND(a.lead_time) AS secondx,a.lead_time,a.level,b.id_mark_asg,b.report_mark_type,b.id_report_status,a.id_user,a.is_head_dept "
+        Dim query_cek As String = "SELECT HOUR(a.lead_time) AS hourx,MINUTE(a.lead_time) AS minutex,SECOND(a.lead_time) AS secondx,a.lead_time,a.level,b.id_mark_asg,b.report_mark_type,b.id_report_status,a.id_user,a.is_head_dept,a.is_asst_head_dept "
         query_cek += "FROM tb_mark_asg_user a INNER JOIN tb_mark_asg b ON a.id_mark_asg=b.id_mark_asg "
         query_cek += "WHERE b.report_mark_type='" & report_mark_type & "' ORDER BY b.id_report_status,a.level"
         Dim data As DataTable = execute_query(query_cek, -1, True, "", "", "", "")
@@ -2389,6 +2389,10 @@ Module Common
             Dim id_user_mark As String = "-1"
             If data.Rows(i)("is_head_dept").ToString = "1" Then 'search head dept
                 Dim query_dept As String = "SELECT dept.id_user_head FROM tb_m_departement dept
+                                                WHERE dept.id_departement='" & id_departement_user & "'"
+                id_user_mark = execute_query(query_dept, 0, True, "", "", "", "")
+            ElseIf data.Rows(i)("is_asst_head_dept").ToString = "1" Then 'search asst head dept
+                Dim query_dept As String = "SELECT dept.id_user_asst_head FROM tb_m_departement dept
                                                 WHERE dept.id_departement='" & id_departement_user & "'"
                 id_user_mark = execute_query(query_dept, 0, True, "", "", "", "")
             Else

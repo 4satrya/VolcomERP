@@ -36,8 +36,12 @@
         query += "FROM tb_report_mark a "
         query += "INNER JOIN tb_lookup_report_mark_type b ON b.report_mark_type = a.report_mark_type "
         query += "INNER JOIN tb_lookup_report_status c ON c.id_report_status = a.id_report_status "
+        query += "LEFT JOIN 
+                    (
+	                    SELECT report_mark_type,id_report,id_mark_asg,COUNT(id_report_mark) AS jml FROM tb_report_mark WHERE id_mark!=1 GROUP BY report_mark_type,id_report,id_mark_asg
+                    ) mark ON  a.report_mark_type=mark.report_mark_type AND a.id_report=mark.id_report AND a.id_mark_asg=mark.id_mark_asg "
         query += "WHERE a.id_mark = 1 AND a.id_user ='" & id_user & "' AND NOW()>a.report_mark_start_datetime "
-        query += "HAVING (SELECT COUNT(d.id_report_mark) FROM tb_report_mark d WHERE d.id_mark != 1 AND d.id_mark_asg=a.id_mark_asg AND d.id_report=a.id_report) < 1 "
+        query += "AND IFNULL(mark.jml,0) < 1 "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
         GCMarkNeed.DataSource = data

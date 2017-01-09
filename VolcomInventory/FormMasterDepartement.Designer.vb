@@ -26,6 +26,7 @@ Partial Class FormMasterDepartement
         Me.departement_code = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.description = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnDeptHead = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GCDepartement, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVDepartment, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -42,7 +43,7 @@ Partial Class FormMasterDepartement
         '
         'GVDepartment
         '
-        Me.GVDepartment.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.id_departement, Me.departement, Me.departement_code, Me.description, Me.GridColumnDeptHead})
+        Me.GVDepartment.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.id_departement, Me.departement, Me.departement_code, Me.description, Me.GridColumnDeptHead, Me.GridColumn1})
         Me.GVDepartment.GridControl = Me.GCDepartement
         Me.GVDepartment.Name = "GVDepartment"
         Me.GVDepartment.OptionsBehavior.Editable = False
@@ -89,6 +90,14 @@ Partial Class FormMasterDepartement
         Me.GridColumnDeptHead.Visible = True
         Me.GridColumnDeptHead.VisibleIndex = 3
         '
+        'GridColumn1
+        '
+        Me.GridColumn1.Caption = "Departement Asst. Head"
+        Me.GridColumn1.FieldName = "employee_name_asst"
+        Me.GridColumn1.Name = "GridColumn1"
+        Me.GridColumn1.Visible = True
+        Me.GridColumn1.VisibleIndex = 4
+        '
         'FormMasterDepartement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -114,4 +123,5 @@ Partial Class FormMasterDepartement
     Friend WithEvents departement_code As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents description As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnDeptHead As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

@@ -37,12 +37,14 @@ Partial Class FormMarkAssignUserSingle
         Me.LabelRange = New DevExpress.XtraEditors.LabelControl()
         Me.TEMin = New DevExpress.XtraEditors.SpinEdit()
         Me.CEHeadDept = New DevExpress.XtraEditors.CheckEdit()
+        Me.CEAsstHeadDept = New DevExpress.XtraEditors.CheckEdit()
         CType(Me.GCUser, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVUser, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEHour.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TESec.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEMin.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CEHeadDept.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CEAsstHeadDept.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GCUser
@@ -134,7 +136,7 @@ Partial Class FormMarkAssignUserSingle
         'LabelControl3
         '
         Me.LabelControl3.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl3.Location = New System.Drawing.Point(348, 323)
+        Me.LabelControl3.Location = New System.Drawing.Point(448, 323)
         Me.LabelControl3.Name = "LabelControl3"
         Me.LabelControl3.Size = New System.Drawing.Size(3, 15)
         Me.LabelControl3.TabIndex = 158
@@ -143,7 +145,7 @@ Partial Class FormMarkAssignUserSingle
         'LabelControl2
         '
         Me.LabelControl2.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl2.Location = New System.Drawing.Point(271, 323)
+        Me.LabelControl2.Location = New System.Drawing.Point(371, 323)
         Me.LabelControl2.Name = "LabelControl2"
         Me.LabelControl2.Size = New System.Drawing.Size(3, 15)
         Me.LabelControl2.TabIndex = 157
@@ -152,7 +154,7 @@ Partial Class FormMarkAssignUserSingle
         'TEHour
         '
         Me.TEHour.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.TEHour.Location = New System.Drawing.Point(204, 320)
+        Me.TEHour.Location = New System.Drawing.Point(304, 320)
         Me.TEHour.Name = "TEHour"
         Me.TEHour.Properties.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TEHour.Properties.Appearance.Options.UseFont = True
@@ -166,7 +168,7 @@ Partial Class FormMarkAssignUserSingle
         'TESec
         '
         Me.TESec.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.TESec.Location = New System.Drawing.Point(358, 320)
+        Me.TESec.Location = New System.Drawing.Point(458, 320)
         Me.TESec.Name = "TESec"
         Me.TESec.Properties.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TESec.Properties.Appearance.Options.UseFont = True
@@ -180,7 +182,7 @@ Partial Class FormMarkAssignUserSingle
         'LabelRange
         '
         Me.LabelRange.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelRange.Location = New System.Drawing.Point(141, 323)
+        Me.LabelRange.Location = New System.Drawing.Point(241, 323)
         Me.LabelRange.Name = "LabelRange"
         Me.LabelRange.Size = New System.Drawing.Size(54, 15)
         Me.LabelRange.TabIndex = 154
@@ -189,7 +191,7 @@ Partial Class FormMarkAssignUserSingle
         'TEMin
         '
         Me.TEMin.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.TEMin.Location = New System.Drawing.Point(280, 320)
+        Me.TEMin.Location = New System.Drawing.Point(380, 320)
         Me.TEMin.Name = "TEMin"
         Me.TEMin.Properties.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TEMin.Properties.Appearance.Options.UseFont = True
@@ -204,15 +206,24 @@ Partial Class FormMarkAssignUserSingle
         '
         Me.CEHeadDept.Location = New System.Drawing.Point(12, 321)
         Me.CEHeadDept.Name = "CEHeadDept"
-        Me.CEHeadDept.Properties.Caption = "Head Departement"
-        Me.CEHeadDept.Size = New System.Drawing.Size(123, 19)
+        Me.CEHeadDept.Properties.Caption = "Head Dept."
+        Me.CEHeadDept.Size = New System.Drawing.Size(89, 19)
         Me.CEHeadDept.TabIndex = 161
+        '
+        'CEAsstHeadDept
+        '
+        Me.CEAsstHeadDept.Location = New System.Drawing.Point(107, 320)
+        Me.CEAsstHeadDept.Name = "CEAsstHeadDept"
+        Me.CEAsstHeadDept.Properties.Caption = "Asst Head Dept"
+        Me.CEAsstHeadDept.Size = New System.Drawing.Size(103, 19)
+        Me.CEAsstHeadDept.TabIndex = 162
         '
         'FormMarkAssignUserSingle
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(731, 354)
+        Me.Controls.Add(Me.CEAsstHeadDept)
         Me.Controls.Add(Me.CEHeadDept)
         Me.Controls.Add(Me.BCancel)
         Me.Controls.Add(Me.BSave)
@@ -236,6 +247,7 @@ Partial Class FormMarkAssignUserSingle
         CType(Me.TESec.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEMin.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CEHeadDept.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CEAsstHeadDept.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -258,4 +270,5 @@ Partial Class FormMarkAssignUserSingle
     Friend WithEvents LabelRange As DevExpress.XtraEditors.LabelControl
     Friend WithEvents TEMin As DevExpress.XtraEditors.SpinEdit
     Friend WithEvents CEHeadDept As DevExpress.XtraEditors.CheckEdit
+    Friend WithEvents CEAsstHeadDept As DevExpress.XtraEditors.CheckEdit
 End Class

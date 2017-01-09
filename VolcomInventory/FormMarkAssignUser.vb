@@ -17,7 +17,7 @@
         re_order()
     End Sub
     Sub view_user()
-        Dim query As String = "SELECT a.lead_time,a.id_mark_asg_user,a.id_user,a.level,iF(a.is_head_dept=1,'Head Dept',c.employee_name) as employee_name "
+        Dim query As String = "SELECT a.lead_time,a.id_mark_asg_user,a.id_user,a.level,iF(a.is_head_dept=1,'Head Dept',IF(a.is_asst_head_dept=1,'Asst Head Dept',c.employee_name)) as employee_name "
         query += "FROM tb_mark_asg_user a "
         query += "LEFT JOIN tb_m_user b ON a.id_user=b.id_user "
         query += "LEFT JOIN tb_m_employee c ON c.id_employee=b.id_employee "

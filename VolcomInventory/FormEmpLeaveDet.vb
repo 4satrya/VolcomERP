@@ -274,7 +274,7 @@
             If problem = False Then
                 ' add parent
                 Dim number As String = header_number_emp("1")
-                query = "INSERT INTO tb_emp_leave(emp_leave_number,id_emp,emp_leave_date,id_report_status,id_emp_change,leave_purpose,leave_remaining,leave_total,id_leave_type,id_form_dc) VALUES('" & number & "','" & id_employee & "',NOW(),1,'" & id_employee_change & "','" & MELeavePurpose.Text & "','" & (TERemainingLeave.EditValue * 60) & "','" & (TETotLeave.EditValue * 60) & "','" & LELeaveType.EditValue.ToString & "','" & LEFormDC.EditValue.ToString & "');SELECT LAST_INSERT_ID(); "
+                query = "INSERT INTO tb_emp_leave(emp_leave_number,id_emp,emp_leave_date,id_report_status,id_emp_change,leave_purpose,leave_remaining,leave_total,id_leave_type,id_form_dc,id_user_who_create) VALUES('" & number & "','" & id_employee & "',NOW(),1,'" & id_employee_change & "','" & MELeavePurpose.Text & "','" & (TERemainingLeave.EditValue * 60) & "','" & (TETotLeave.EditValue * 60) & "','" & LELeaveType.EditValue.ToString & "','" & LEFormDC.EditValue.ToString & "','" & id_user & "');SELECT LAST_INSERT_ID(); "
                 id_emp_leave = execute_query(query, 0, True, "", "", "", "")
                 'add detail
                 query = "INSERT INTO tb_emp_leave_det(id_emp_leave,id_schedule,datetime_start,datetime_until,is_full_day,minutes_total) VALUES"
@@ -317,12 +317,18 @@
                 jum_check = execute_query(query, 0, True, "", "", "", "")
 
                 If jum_check = "0" Then
-                    submit_who_prepared("95", id_emp_leave, id_user)
+                    submit_who_prepared("95", id_emp_leave, id_employee)
                     query = "UPDATE tb_emp_leave SET report_mark_type='95' WHERE id_emp_leave='" & id_emp_leave & "'"
                     execute_non_query(query, True, "", "", "", "")
+                    '
+                    query = "UPDATE tb_report_mark SET id_user='" & id_user & "' WHERE report_mark_type='95' AND id_report_status='1' AND id_report='" & id_emp_leave & "'"
+                    execute_non_query(query, True, "", "", "", "")
                 Else ' dept head
-                    submit_who_prepared("96", id_emp_leave, id_user)
+                    submit_who_prepared("96", id_emp_leave, id_employee)
                     query = "UPDATE tb_emp_leave SET report_mark_type='96' WHERE id_emp_leave='" & id_emp_leave & "'"
+                    execute_non_query(query, True, "", "", "", "")
+                    '
+                    query = "UPDATE tb_report_mark SET id_user='" & id_user & "' WHERE report_mark_type='96' AND id_report_status='1' AND id_report='" & id_emp_leave & "'"
                     execute_non_query(query, True, "", "", "", "")
                 End If
 

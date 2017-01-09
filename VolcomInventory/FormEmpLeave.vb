@@ -38,14 +38,16 @@
     Sub load_sum()
         Dim date_from As String = Date.Parse(DEStart.EditValue.ToString).ToString("yyyy-MM-dd")
         Dim date_end As String = Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd")
-        Dim query As String = "SELECT empl.*,empld.min_date,empld.max_date,status.report_status,emp.employee_name,emp.employee_code,empld.hours_total  FROM tb_emp_leave empl
+        Dim query As String = "SELECT empl.*,empx.employee_name as who_create,empld.min_date,empld.max_date,status.report_status,emp.employee_name,emp.employee_code,empld.hours_total  FROM tb_emp_leave empl
                                 INNER JOIN tb_lookup_report_status STATUS ON status.id_report_status=empl.id_report_status
                                 INNER JOIN tb_m_employee emp ON emp.id_employee=empl.id_emp
+                                LEFT JOIN tb_m_user usrx ON usrx.id_user=empl.id_user_who_create
+                                LEFT JOIN tb_m_employee empx ON empx.id_employee=usrx.id_employee
                                 INNER JOIN 
                                 (SELECT id_emp_leave,MIN(datetime_start) AS min_date,MAX(datetime_until) AS max_date,ROUND(SUM(minutes_total)/60) AS hours_total FROM tb_emp_leave_det GROUP BY id_emp_leave) empld ON empld.id_emp_leave=empl.id_emp_leave
                                 WHERE DATE(empl.emp_leave_date) >= DATE('" & date_from & "') AND DATE(empl.emp_leave_date) <= DATE('" & date_end & "')"
         If is_propose = "1" Then
-            query += " AND emp.id_employee='" & id_employee_user & "'"
+            query += " AND emp.id_departement='" & id_departement_user & "'"
         End If
         Dim data As DataTable = execute_query(query, "-1", True, "", "", "", "")
         GCLeave.DataSource = data

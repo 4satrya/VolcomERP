@@ -19,6 +19,8 @@ Partial Class FormProduction
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormProduction))
         Me.XTCTabProduction = New DevExpress.XtraTab.XtraTabControl()
         Me.XTPListProduction = New DevExpress.XtraTab.XtraTabPage()
         Me.GCProd = New DevExpress.XtraGrid.GridControl()
@@ -94,6 +96,77 @@ Partial Class FormProduction
         Me.ColNote = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ColColor = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ColSize = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.XTPListWO = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCProdWO = New DevExpress.XtraGrid.GridControl()
+        Me.GVProdWO = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.ColIdMatPurchase = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn21 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn13 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColWONumber = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColShipFrom = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColShipTo = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColSamplePurcDate = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColRecDate = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColDueDate = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColPayment = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColStatus = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColIDStatus = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColIdWoType = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColWoType = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnProgress = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.PGBProg = New DevExpress.XtraEditors.Repository.RepositoryItemProgressBar()
+        Me.GridColumnIsOVHMain = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RCIMainVendor = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.GridColumn25 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn26 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
+        Me.BEditWO = New DevExpress.XtraEditors.SimpleButton()
+        Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
+        Me.SLESeasonWO = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView3 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn35 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn36 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.BViewWO = New DevExpress.XtraEditors.SimpleButton()
+        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
+        Me.SLEDesignWO = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView5 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn37 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn38 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn39 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
+        Me.XTPListMRS = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCMRS = New DevExpress.XtraGrid.GridControl()
+        Me.GVMRS = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumnIdMRS = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnIdWO = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn22 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn15 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnIdCompReqFrom = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnCompReqFrom = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnIdCompReqTo = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnCompReqTo = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnDate = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnStatus = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnWONumber = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnMRSNumber = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn14 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn23 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn24 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemProgressBar1 = New DevExpress.XtraEditors.Repository.RepositoryItemProgressBar()
+        Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
+        Me.BEditMRS = New DevExpress.XtraEditors.SimpleButton()
+        Me.SLESeasonMRS = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView6 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn16 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn17 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.BViewMRS = New DevExpress.XtraEditors.SimpleButton()
+        Me.LabelControl7 = New DevExpress.XtraEditors.LabelControl()
+        Me.SLEDesignMRS = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView7 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn18 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn19 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn20 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl8 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.XTCTabProduction, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCTabProduction.SuspendLayout()
         Me.XTPListProduction.SuspendLayout()
@@ -116,6 +189,28 @@ Partial Class FormProduction
         CType(Me.GridView4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GCListProduct, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVListProduct, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTPListWO.SuspendLayout()
+        CType(Me.GCProdWO, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVProdWO, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PGBProg, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RCIMainVendor, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl2.SuspendLayout()
+        CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SLESeasonWO.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SLEDesignWO.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView5, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTPListMRS.SuspendLayout()
+        CType(Me.GCMRS, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVMRS, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemProgressBar1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl3.SuspendLayout()
+        CType(Me.SLESeasonMRS.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView6, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SLEDesignMRS.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView7, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'XTCTabProduction
@@ -127,7 +222,7 @@ Partial Class FormProduction
         Me.XTCTabProduction.SelectedTabPage = Me.XTPListProduction
         Me.XTCTabProduction.Size = New System.Drawing.Size(945, 355)
         Me.XTCTabProduction.TabIndex = 11
-        Me.XTCTabProduction.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPListProduction, Me.XTPListProductionDemand})
+        Me.XTCTabProduction.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPListProduction, Me.XTPListProductionDemand, Me.XTPListWO, Me.XTPListMRS})
         '
         'XTPListProduction
         '
@@ -834,6 +929,643 @@ Partial Class FormProduction
         Me.ColSize.Visible = True
         Me.ColSize.VisibleIndex = 4
         '
+        'XTPListWO
+        '
+        Me.XTPListWO.Controls.Add(Me.GCProdWO)
+        Me.XTPListWO.Controls.Add(Me.PanelControl2)
+        Me.XTPListWO.Name = "XTPListWO"
+        Me.XTPListWO.Size = New System.Drawing.Size(939, 327)
+        Me.XTPListWO.Text = "List Work Order"
+        '
+        'GCProdWO
+        '
+        Me.GCProdWO.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCProdWO.Location = New System.Drawing.Point(0, 38)
+        Me.GCProdWO.MainView = Me.GVProdWO
+        Me.GCProdWO.Name = "GCProdWO"
+        Me.GCProdWO.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.PGBProg, Me.RCIMainVendor})
+        Me.GCProdWO.Size = New System.Drawing.Size(939, 289)
+        Me.GCProdWO.TabIndex = 8
+        Me.GCProdWO.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVProdWO})
+        '
+        'GVProdWO
+        '
+        Me.GVProdWO.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ColIdMatPurchase, Me.GridColumn21, Me.GridColumn13, Me.ColWONumber, Me.ColShipFrom, Me.ColShipTo, Me.ColSamplePurcDate, Me.ColRecDate, Me.ColDueDate, Me.ColPayment, Me.ColStatus, Me.ColIDStatus, Me.ColIdWoType, Me.ColWoType, Me.GridColumnProgress, Me.GridColumnIsOVHMain, Me.GridColumn25, Me.GridColumn26})
+        Me.GVProdWO.GridControl = Me.GCProdWO
+        Me.GVProdWO.Name = "GVProdWO"
+        Me.GVProdWO.OptionsBehavior.Editable = False
+        Me.GVProdWO.OptionsFind.AlwaysVisible = True
+        Me.GVProdWO.OptionsView.ColumnAutoWidth = False
+        Me.GVProdWO.OptionsView.ShowGroupPanel = False
+        '
+        'ColIdMatPurchase
+        '
+        Me.ColIdMatPurchase.Caption = "ID Sample Purchase"
+        Me.ColIdMatPurchase.FieldName = "id_prod_order_wo"
+        Me.ColIdMatPurchase.Name = "ColIdMatPurchase"
+        '
+        'GridColumn21
+        '
+        Me.GridColumn21.Caption = "Id Prod Order"
+        Me.GridColumn21.FieldName = "id_prod_order"
+        Me.GridColumn21.Name = "GridColumn21"
+        '
+        'GridColumn13
+        '
+        Me.GridColumn13.Caption = "PO Number"
+        Me.GridColumn13.FieldName = "prod_order_number"
+        Me.GridColumn13.Name = "GridColumn13"
+        Me.GridColumn13.Visible = True
+        Me.GridColumn13.VisibleIndex = 5
+        '
+        'ColWONumber
+        '
+        Me.ColWONumber.Caption = "Number"
+        Me.ColWONumber.FieldName = "prod_order_wo_number"
+        Me.ColWONumber.Name = "ColWONumber"
+        Me.ColWONumber.Visible = True
+        Me.ColWONumber.VisibleIndex = 1
+        Me.ColWONumber.Width = 120
+        '
+        'ColShipFrom
+        '
+        Me.ColShipFrom.Caption = "To"
+        Me.ColShipFrom.FieldName = "comp_name_to"
+        Me.ColShipFrom.Name = "ColShipFrom"
+        Me.ColShipFrom.Visible = True
+        Me.ColShipFrom.VisibleIndex = 3
+        Me.ColShipFrom.Width = 107
+        '
+        'ColShipTo
+        '
+        Me.ColShipTo.Caption = "Ship To"
+        Me.ColShipTo.FieldName = "comp_name_ship_to"
+        Me.ColShipTo.Name = "ColShipTo"
+        Me.ColShipTo.Visible = True
+        Me.ColShipTo.VisibleIndex = 4
+        Me.ColShipTo.Width = 107
+        '
+        'ColSamplePurcDate
+        '
+        Me.ColSamplePurcDate.Caption = "Create Date"
+        Me.ColSamplePurcDate.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.ColSamplePurcDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.ColSamplePurcDate.FieldName = "prod_order_wo_date"
+        Me.ColSamplePurcDate.Name = "ColSamplePurcDate"
+        Me.ColSamplePurcDate.Visible = True
+        Me.ColSamplePurcDate.VisibleIndex = 8
+        Me.ColSamplePurcDate.Width = 99
+        '
+        'ColRecDate
+        '
+        Me.ColRecDate.Caption = "Est. Receive Date"
+        Me.ColRecDate.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.ColRecDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.ColRecDate.FieldName = "prod_order_wo_lead_time"
+        Me.ColRecDate.Name = "ColRecDate"
+        Me.ColRecDate.Visible = True
+        Me.ColRecDate.VisibleIndex = 9
+        Me.ColRecDate.Width = 99
+        '
+        'ColDueDate
+        '
+        Me.ColDueDate.Caption = "Due Date"
+        Me.ColDueDate.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.ColDueDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.ColDueDate.FieldName = "prod_order_wo_top"
+        Me.ColDueDate.Name = "ColDueDate"
+        Me.ColDueDate.Width = 109
+        '
+        'ColPayment
+        '
+        Me.ColPayment.Caption = "Payment"
+        Me.ColPayment.FieldName = "payment"
+        Me.ColPayment.Name = "ColPayment"
+        Me.ColPayment.Width = 80
+        '
+        'ColStatus
+        '
+        Me.ColStatus.Caption = "Status"
+        Me.ColStatus.FieldName = "report_status"
+        Me.ColStatus.Name = "ColStatus"
+        Me.ColStatus.Visible = True
+        Me.ColStatus.VisibleIndex = 10
+        Me.ColStatus.Width = 62
+        '
+        'ColIDStatus
+        '
+        Me.ColIDStatus.Caption = "ID Status"
+        Me.ColIDStatus.FieldName = "id_report_status"
+        Me.ColIDStatus.Name = "ColIDStatus"
+        '
+        'ColIdWoType
+        '
+        Me.ColIdWoType.Caption = "WO Type"
+        Me.ColIdWoType.FieldName = "id_ovh_price"
+        Me.ColIdWoType.Name = "ColIdWoType"
+        Me.ColIdWoType.Width = 80
+        '
+        'ColWoType
+        '
+        Me.ColWoType.Caption = "WO Type"
+        Me.ColWoType.FieldName = "overhead"
+        Me.ColWoType.Name = "ColWoType"
+        Me.ColWoType.Visible = True
+        Me.ColWoType.VisibleIndex = 2
+        '
+        'GridColumnProgress
+        '
+        Me.GridColumnProgress.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumnProgress.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumnProgress.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumnProgress.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumnProgress.Caption = "Progress"
+        Me.GridColumnProgress.ColumnEdit = Me.PGBProg
+        Me.GridColumnProgress.FieldName = "progress"
+        Me.GridColumnProgress.Name = "GridColumnProgress"
+        Me.GridColumnProgress.Visible = True
+        Me.GridColumnProgress.VisibleIndex = 11
+        '
+        'PGBProg
+        '
+        Me.PGBProg.Appearance.BackColor = System.Drawing.Color.Lime
+        Me.PGBProg.EndColor = System.Drawing.Color.Green
+        Me.PGBProg.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat
+        Me.PGBProg.LookAndFeel.UseDefaultLookAndFeel = False
+        Me.PGBProg.Name = "PGBProg"
+        Me.PGBProg.ProgressViewStyle = DevExpress.XtraEditors.Controls.ProgressViewStyle.Solid
+        Me.PGBProg.ShowTitle = True
+        Me.PGBProg.StartColor = System.Drawing.Color.Green
+        Me.PGBProg.Step = 1
+        '
+        'GridColumnIsOVHMain
+        '
+        Me.GridColumnIsOVHMain.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumnIsOVHMain.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumnIsOVHMain.Caption = "Main Vendor"
+        Me.GridColumnIsOVHMain.ColumnEdit = Me.RCIMainVendor
+        Me.GridColumnIsOVHMain.FieldName = "is_main_vendor"
+        Me.GridColumnIsOVHMain.Name = "GridColumnIsOVHMain"
+        Me.GridColumnIsOVHMain.Visible = True
+        Me.GridColumnIsOVHMain.VisibleIndex = 0
+        '
+        'RCIMainVendor
+        '
+        Me.RCIMainVendor.AutoHeight = False
+        Me.RCIMainVendor.Name = "RCIMainVendor"
+        Me.RCIMainVendor.ValueChecked = CType(1, Byte)
+        Me.RCIMainVendor.ValueUnchecked = CType(2, Byte)
+        '
+        'GridColumn25
+        '
+        Me.GridColumn25.Caption = "Design"
+        Me.GridColumn25.FieldName = "design_display_name"
+        Me.GridColumn25.Name = "GridColumn25"
+        Me.GridColumn25.Visible = True
+        Me.GridColumn25.VisibleIndex = 6
+        '
+        'GridColumn26
+        '
+        Me.GridColumn26.Caption = "Design Code"
+        Me.GridColumn26.FieldName = "design_code"
+        Me.GridColumn26.Name = "GridColumn26"
+        Me.GridColumn26.Visible = True
+        Me.GridColumn26.VisibleIndex = 7
+        '
+        'PanelControl2
+        '
+        Me.PanelControl2.Controls.Add(Me.BEditWO)
+        Me.PanelControl2.Controls.Add(Me.SLESeasonWO)
+        Me.PanelControl2.Controls.Add(Me.BViewWO)
+        Me.PanelControl2.Controls.Add(Me.LabelControl4)
+        Me.PanelControl2.Controls.Add(Me.SLEDesignWO)
+        Me.PanelControl2.Controls.Add(Me.LabelControl5)
+        Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelControl2.Location = New System.Drawing.Point(0, 0)
+        Me.PanelControl2.Name = "PanelControl2"
+        Me.PanelControl2.Size = New System.Drawing.Size(939, 38)
+        Me.PanelControl2.TabIndex = 5
+        '
+        'BEditWO
+        '
+        Me.BEditWO.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BEditWO.ImageIndex = 2
+        Me.BEditWO.ImageList = Me.LargeImageCollection
+        Me.BEditWO.Location = New System.Drawing.Point(846, 2)
+        Me.BEditWO.Name = "BEditWO"
+        Me.BEditWO.Size = New System.Drawing.Size(91, 34)
+        Me.BEditWO.TabIndex = 8905
+        Me.BEditWO.Text = "Edit"
+        Me.BEditWO.Visible = False
+        '
+        'LargeImageCollection
+        '
+        Me.LargeImageCollection.ImageSize = New System.Drawing.Size(24, 24)
+        Me.LargeImageCollection.ImageStream = CType(resources.GetObject("LargeImageCollection.ImageStream"), DevExpress.Utils.ImageCollectionStreamer)
+        Me.LargeImageCollection.Images.SetKeyName(0, "20_24x24.png")
+        Me.LargeImageCollection.Images.SetKeyName(1, "8_24x24.png")
+        Me.LargeImageCollection.Images.SetKeyName(2, "23_24x24.png")
+        Me.LargeImageCollection.Images.SetKeyName(3, "safari (4).png")
+        Me.LargeImageCollection.Images.SetKeyName(4, "31-Document_32x32.png")
+        '
+        'SLESeasonWO
+        '
+        Me.SLESeasonWO.Location = New System.Drawing.Point(303, 8)
+        Me.SLESeasonWO.Name = "SLESeasonWO"
+        Me.SLESeasonWO.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SLESeasonWO.Properties.Appearance.Options.UseFont = True
+        Me.SLESeasonWO.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLESeasonWO.Properties.View = Me.GridView3
+        Me.SLESeasonWO.Size = New System.Drawing.Size(163, 20)
+        Me.SLESeasonWO.TabIndex = 8904
+        '
+        'GridView3
+        '
+        Me.GridView3.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn35, Me.GridColumn36})
+        Me.GridView3.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView3.Name = "GridView3"
+        Me.GridView3.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView3.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn35
+        '
+        Me.GridColumn35.Caption = "Id Season"
+        Me.GridColumn35.FieldName = "id_season"
+        Me.GridColumn35.Name = "GridColumn35"
+        '
+        'GridColumn36
+        '
+        Me.GridColumn36.Caption = "Season"
+        Me.GridColumn36.FieldName = "season"
+        Me.GridColumn36.Name = "GridColumn36"
+        Me.GridColumn36.Visible = True
+        Me.GridColumn36.VisibleIndex = 0
+        '
+        'BViewWO
+        '
+        Me.BViewWO.Location = New System.Drawing.Point(472, 6)
+        Me.BViewWO.Name = "BViewWO"
+        Me.BViewWO.Size = New System.Drawing.Size(59, 23)
+        Me.BViewWO.TabIndex = 8903
+        Me.BViewWO.Text = "Search"
+        '
+        'LabelControl4
+        '
+        Me.LabelControl4.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl4.Location = New System.Drawing.Point(262, 11)
+        Me.LabelControl4.Name = "LabelControl4"
+        Me.LabelControl4.Size = New System.Drawing.Size(35, 13)
+        Me.LabelControl4.TabIndex = 8897
+        Me.LabelControl4.Text = "Season"
+        '
+        'SLEDesignWO
+        '
+        Me.SLEDesignWO.Location = New System.Drawing.Point(49, 8)
+        Me.SLEDesignWO.Name = "SLEDesignWO"
+        Me.SLEDesignWO.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEDesignWO.Properties.View = Me.GridView5
+        Me.SLEDesignWO.Size = New System.Drawing.Size(195, 20)
+        Me.SLEDesignWO.TabIndex = 8896
+        '
+        'GridView5
+        '
+        Me.GridView5.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn37, Me.GridColumn38, Me.GridColumn39})
+        Me.GridView5.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView5.Name = "GridView5"
+        Me.GridView5.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView5.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn37
+        '
+        Me.GridColumn37.Caption = "Code"
+        Me.GridColumn37.FieldName = "design_code"
+        Me.GridColumn37.Name = "GridColumn37"
+        Me.GridColumn37.Visible = True
+        Me.GridColumn37.VisibleIndex = 0
+        Me.GridColumn37.Width = 186
+        '
+        'GridColumn38
+        '
+        Me.GridColumn38.Caption = "Description"
+        Me.GridColumn38.FieldName = "display_name"
+        Me.GridColumn38.Name = "GridColumn38"
+        Me.GridColumn38.Visible = True
+        Me.GridColumn38.VisibleIndex = 1
+        Me.GridColumn38.Width = 360
+        '
+        'GridColumn39
+        '
+        Me.GridColumn39.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn39.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn39.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn39.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn39.Caption = "Color"
+        Me.GridColumn39.FieldName = "color"
+        Me.GridColumn39.Name = "GridColumn39"
+        Me.GridColumn39.Visible = True
+        Me.GridColumn39.VisibleIndex = 2
+        Me.GridColumn39.Width = 146
+        '
+        'LabelControl5
+        '
+        Me.LabelControl5.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl5.Location = New System.Drawing.Point(11, 11)
+        Me.LabelControl5.Name = "LabelControl5"
+        Me.LabelControl5.Size = New System.Drawing.Size(32, 13)
+        Me.LabelControl5.TabIndex = 8895
+        Me.LabelControl5.Text = "Design"
+        '
+        'XTPListMRS
+        '
+        Me.XTPListMRS.Controls.Add(Me.GCMRS)
+        Me.XTPListMRS.Controls.Add(Me.PanelControl3)
+        Me.XTPListMRS.Name = "XTPListMRS"
+        Me.XTPListMRS.Size = New System.Drawing.Size(939, 327)
+        Me.XTPListMRS.Text = "List MRS"
+        '
+        'GCMRS
+        '
+        Me.GCMRS.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCMRS.Location = New System.Drawing.Point(0, 38)
+        Me.GCMRS.MainView = Me.GVMRS
+        Me.GCMRS.Name = "GCMRS"
+        Me.GCMRS.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemProgressBar1})
+        Me.GCMRS.Size = New System.Drawing.Size(939, 289)
+        Me.GCMRS.TabIndex = 9
+        Me.GCMRS.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVMRS})
+        '
+        'GVMRS
+        '
+        Me.GVMRS.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdMRS, Me.GridColumnIdWO, Me.GridColumn22, Me.GridColumn15, Me.GridColumnIdCompReqFrom, Me.GridColumnCompReqFrom, Me.GridColumnIdCompReqTo, Me.GridColumnCompReqTo, Me.GridColumnDate, Me.GridColumnStatus, Me.GridColumnWONumber, Me.GridColumnMRSNumber, Me.GridColumn14, Me.GridColumn23, Me.GridColumn24})
+        Me.GVMRS.GridControl = Me.GCMRS
+        Me.GVMRS.Name = "GVMRS"
+        Me.GVMRS.OptionsBehavior.Editable = False
+        Me.GVMRS.OptionsFind.AlwaysVisible = True
+        Me.GVMRS.OptionsView.ColumnAutoWidth = False
+        Me.GVMRS.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumnIdMRS
+        '
+        Me.GridColumnIdMRS.Caption = "Id MRS"
+        Me.GridColumnIdMRS.FieldName = "id_prod_order_mrs"
+        Me.GridColumnIdMRS.Name = "GridColumnIdMRS"
+        '
+        'GridColumnIdWO
+        '
+        Me.GridColumnIdWO.Caption = "Id WO"
+        Me.GridColumnIdWO.FieldName = "id_prod_order_wo"
+        Me.GridColumnIdWO.Name = "GridColumnIdWO"
+        '
+        'GridColumn22
+        '
+        Me.GridColumn22.Caption = "ID Prod Order"
+        Me.GridColumn22.FieldName = "id_prod_order"
+        Me.GridColumn22.Name = "GridColumn22"
+        '
+        'GridColumn15
+        '
+        Me.GridColumn15.Caption = "PO Number"
+        Me.GridColumn15.FieldName = "prod_order_number"
+        Me.GridColumn15.Name = "GridColumn15"
+        Me.GridColumn15.Visible = True
+        Me.GridColumn15.VisibleIndex = 2
+        Me.GridColumn15.Width = 48
+        '
+        'GridColumnIdCompReqFrom
+        '
+        Me.GridColumnIdCompReqFrom.Caption = "Id Comp From"
+        Me.GridColumnIdCompReqFrom.FieldName = "id_comp_name_req_from"
+        Me.GridColumnIdCompReqFrom.Name = "GridColumnIdCompReqFrom"
+        '
+        'GridColumnCompReqFrom
+        '
+        Me.GridColumnCompReqFrom.Caption = "From"
+        Me.GridColumnCompReqFrom.FieldName = "comp_name_req_from"
+        Me.GridColumnCompReqFrom.Name = "GridColumnCompReqFrom"
+        Me.GridColumnCompReqFrom.Visible = True
+        Me.GridColumnCompReqFrom.VisibleIndex = 1
+        Me.GridColumnCompReqFrom.Width = 138
+        '
+        'GridColumnIdCompReqTo
+        '
+        Me.GridColumnIdCompReqTo.Caption = "Id Comp To"
+        Me.GridColumnIdCompReqTo.FieldName = "id_comp_name_req_to"
+        Me.GridColumnIdCompReqTo.Name = "GridColumnIdCompReqTo"
+        '
+        'GridColumnCompReqTo
+        '
+        Me.GridColumnCompReqTo.Caption = "To"
+        Me.GridColumnCompReqTo.FieldName = "comp_name_req_to"
+        Me.GridColumnCompReqTo.Name = "GridColumnCompReqTo"
+        Me.GridColumnCompReqTo.Visible = True
+        Me.GridColumnCompReqTo.VisibleIndex = 5
+        Me.GridColumnCompReqTo.Width = 112
+        '
+        'GridColumnDate
+        '
+        Me.GridColumnDate.Caption = "Date"
+        Me.GridColumnDate.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.GridColumnDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumnDate.FieldName = "prod_order_mrs_date"
+        Me.GridColumnDate.Name = "GridColumnDate"
+        Me.GridColumnDate.Visible = True
+        Me.GridColumnDate.VisibleIndex = 6
+        Me.GridColumnDate.Width = 66
+        '
+        'GridColumnStatus
+        '
+        Me.GridColumnStatus.Caption = "Status"
+        Me.GridColumnStatus.FieldName = "report_status"
+        Me.GridColumnStatus.Name = "GridColumnStatus"
+        Me.GridColumnStatus.Visible = True
+        Me.GridColumnStatus.VisibleIndex = 7
+        Me.GridColumnStatus.Width = 59
+        '
+        'GridColumnWONumber
+        '
+        Me.GridColumnWONumber.Caption = "WO Number"
+        Me.GridColumnWONumber.FieldName = "prod_order_wo_number"
+        Me.GridColumnWONumber.Name = "GridColumnWONumber"
+        Me.GridColumnWONumber.Width = 150
+        '
+        'GridColumnMRSNumber
+        '
+        Me.GridColumnMRSNumber.Caption = "Number"
+        Me.GridColumnMRSNumber.FieldName = "prod_order_mrs_number"
+        Me.GridColumnMRSNumber.Name = "GridColumnMRSNumber"
+        Me.GridColumnMRSNumber.Visible = True
+        Me.GridColumnMRSNumber.VisibleIndex = 0
+        Me.GridColumnMRSNumber.Width = 97
+        '
+        'GridColumn14
+        '
+        Me.GridColumn14.Caption = "Id Report Status"
+        Me.GridColumn14.FieldName = "id_report_status"
+        Me.GridColumn14.Name = "GridColumn14"
+        '
+        'GridColumn23
+        '
+        Me.GridColumn23.Caption = "Design"
+        Me.GridColumn23.FieldName = "design_display_name"
+        Me.GridColumn23.Name = "GridColumn23"
+        Me.GridColumn23.Visible = True
+        Me.GridColumn23.VisibleIndex = 4
+        Me.GridColumn23.Width = 64
+        '
+        'GridColumn24
+        '
+        Me.GridColumn24.Caption = "Design Code"
+        Me.GridColumn24.FieldName = "design_code"
+        Me.GridColumn24.Name = "GridColumn24"
+        Me.GridColumn24.Visible = True
+        Me.GridColumn24.VisibleIndex = 3
+        Me.GridColumn24.Width = 81
+        '
+        'RepositoryItemProgressBar1
+        '
+        Me.RepositoryItemProgressBar1.Appearance.BackColor = System.Drawing.Color.Lime
+        Me.RepositoryItemProgressBar1.EndColor = System.Drawing.Color.Green
+        Me.RepositoryItemProgressBar1.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat
+        Me.RepositoryItemProgressBar1.LookAndFeel.UseDefaultLookAndFeel = False
+        Me.RepositoryItemProgressBar1.Name = "RepositoryItemProgressBar1"
+        Me.RepositoryItemProgressBar1.ProgressViewStyle = DevExpress.XtraEditors.Controls.ProgressViewStyle.Solid
+        Me.RepositoryItemProgressBar1.ShowTitle = True
+        Me.RepositoryItemProgressBar1.StartColor = System.Drawing.Color.Green
+        Me.RepositoryItemProgressBar1.Step = 1
+        '
+        'PanelControl3
+        '
+        Me.PanelControl3.Controls.Add(Me.BEditMRS)
+        Me.PanelControl3.Controls.Add(Me.SLESeasonMRS)
+        Me.PanelControl3.Controls.Add(Me.BViewMRS)
+        Me.PanelControl3.Controls.Add(Me.LabelControl7)
+        Me.PanelControl3.Controls.Add(Me.SLEDesignMRS)
+        Me.PanelControl3.Controls.Add(Me.LabelControl8)
+        Me.PanelControl3.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelControl3.Location = New System.Drawing.Point(0, 0)
+        Me.PanelControl3.Name = "PanelControl3"
+        Me.PanelControl3.Size = New System.Drawing.Size(939, 38)
+        Me.PanelControl3.TabIndex = 4
+        '
+        'BEditMRS
+        '
+        Me.BEditMRS.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BEditMRS.ImageIndex = 2
+        Me.BEditMRS.ImageList = Me.LargeImageCollection
+        Me.BEditMRS.Location = New System.Drawing.Point(846, 2)
+        Me.BEditMRS.Name = "BEditMRS"
+        Me.BEditMRS.Size = New System.Drawing.Size(91, 34)
+        Me.BEditMRS.TabIndex = 8906
+        Me.BEditMRS.Text = "Edit"
+        Me.BEditMRS.Visible = False
+        '
+        'SLESeasonMRS
+        '
+        Me.SLESeasonMRS.Location = New System.Drawing.Point(291, 8)
+        Me.SLESeasonMRS.Name = "SLESeasonMRS"
+        Me.SLESeasonMRS.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SLESeasonMRS.Properties.Appearance.Options.UseFont = True
+        Me.SLESeasonMRS.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLESeasonMRS.Properties.View = Me.GridView6
+        Me.SLESeasonMRS.Size = New System.Drawing.Size(163, 20)
+        Me.SLESeasonMRS.TabIndex = 8904
+        '
+        'GridView6
+        '
+        Me.GridView6.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn16, Me.GridColumn17})
+        Me.GridView6.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView6.Name = "GridView6"
+        Me.GridView6.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView6.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn16
+        '
+        Me.GridColumn16.Caption = "Id Season"
+        Me.GridColumn16.FieldName = "id_season"
+        Me.GridColumn16.Name = "GridColumn16"
+        '
+        'GridColumn17
+        '
+        Me.GridColumn17.Caption = "Season"
+        Me.GridColumn17.FieldName = "season"
+        Me.GridColumn17.Name = "GridColumn17"
+        Me.GridColumn17.Visible = True
+        Me.GridColumn17.VisibleIndex = 0
+        '
+        'BViewMRS
+        '
+        Me.BViewMRS.Location = New System.Drawing.Point(460, 6)
+        Me.BViewMRS.Name = "BViewMRS"
+        Me.BViewMRS.Size = New System.Drawing.Size(59, 23)
+        Me.BViewMRS.TabIndex = 8903
+        Me.BViewMRS.Text = "Search"
+        '
+        'LabelControl7
+        '
+        Me.LabelControl7.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl7.Location = New System.Drawing.Point(250, 11)
+        Me.LabelControl7.Name = "LabelControl7"
+        Me.LabelControl7.Size = New System.Drawing.Size(35, 13)
+        Me.LabelControl7.TabIndex = 8897
+        Me.LabelControl7.Text = "Season"
+        '
+        'SLEDesignMRS
+        '
+        Me.SLEDesignMRS.Location = New System.Drawing.Point(49, 8)
+        Me.SLEDesignMRS.Name = "SLEDesignMRS"
+        Me.SLEDesignMRS.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEDesignMRS.Properties.View = Me.GridView7
+        Me.SLEDesignMRS.Size = New System.Drawing.Size(195, 20)
+        Me.SLEDesignMRS.TabIndex = 8896
+        '
+        'GridView7
+        '
+        Me.GridView7.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn18, Me.GridColumn19, Me.GridColumn20})
+        Me.GridView7.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView7.Name = "GridView7"
+        Me.GridView7.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView7.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn18
+        '
+        Me.GridColumn18.Caption = "Code"
+        Me.GridColumn18.FieldName = "design_code"
+        Me.GridColumn18.Name = "GridColumn18"
+        Me.GridColumn18.Visible = True
+        Me.GridColumn18.VisibleIndex = 0
+        Me.GridColumn18.Width = 186
+        '
+        'GridColumn19
+        '
+        Me.GridColumn19.Caption = "Description"
+        Me.GridColumn19.FieldName = "display_name"
+        Me.GridColumn19.Name = "GridColumn19"
+        Me.GridColumn19.Visible = True
+        Me.GridColumn19.VisibleIndex = 1
+        Me.GridColumn19.Width = 360
+        '
+        'GridColumn20
+        '
+        Me.GridColumn20.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn20.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn20.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn20.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn20.Caption = "Color"
+        Me.GridColumn20.FieldName = "color"
+        Me.GridColumn20.Name = "GridColumn20"
+        Me.GridColumn20.Visible = True
+        Me.GridColumn20.VisibleIndex = 2
+        Me.GridColumn20.Width = 146
+        '
+        'LabelControl8
+        '
+        Me.LabelControl8.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl8.Location = New System.Drawing.Point(11, 11)
+        Me.LabelControl8.Name = "LabelControl8"
+        Me.LabelControl8.Size = New System.Drawing.Size(32, 13)
+        Me.LabelControl8.TabIndex = 8895
+        Me.LabelControl8.Text = "Design"
+        '
         'FormProduction
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -870,6 +1602,30 @@ Partial Class FormProduction
         CType(Me.GridView4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GCListProduct, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVListProduct, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTPListWO.ResumeLayout(False)
+        CType(Me.GCProdWO, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVProdWO, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PGBProg, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RCIMainVendor, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl2.ResumeLayout(False)
+        Me.PanelControl2.PerformLayout()
+        CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SLESeasonWO.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SLEDesignWO.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView5, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTPListMRS.ResumeLayout(False)
+        CType(Me.GCMRS, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVMRS, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemProgressBar1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl3.ResumeLayout(False)
+        Me.PanelControl3.PerformLayout()
+        CType(Me.SLESeasonMRS.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView6, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SLEDesignMRS.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView7, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -948,4 +1704,75 @@ Partial Class FormProduction
     Friend WithEvents GridColumnOrderQty As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnDiff As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnDesignCOP As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents XTPListWO As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents PanelControl2 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents SLESeasonWO As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView3 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn35 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn36 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BViewWO As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents LabelControl4 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents SLEDesignWO As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView5 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn37 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn38 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn39 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LabelControl5 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents XTPListMRS As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents PanelControl3 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents SLESeasonMRS As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView6 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn16 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn17 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BViewMRS As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents LabelControl7 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents SLEDesignMRS As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView7 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn18 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn19 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn20 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LabelControl8 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents GCProdWO As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVProdWO As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents ColIdMatPurchase As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn13 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ColWONumber As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ColShipFrom As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ColShipTo As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ColSamplePurcDate As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ColRecDate As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ColDueDate As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ColPayment As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ColStatus As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ColIDStatus As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ColIdWoType As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ColWoType As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnProgress As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents PGBProg As DevExpress.XtraEditors.Repository.RepositoryItemProgressBar
+    Friend WithEvents GridColumnIsOVHMain As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RCIMainVendor As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+    Friend WithEvents GCMRS As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVMRS As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumnIdMRS As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnIdWO As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnIdCompReqFrom As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnCompReqFrom As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnIdCompReqTo As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnCompReqTo As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnDate As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnStatus As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnWONumber As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnMRSNumber As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn14 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RepositoryItemProgressBar1 As DevExpress.XtraEditors.Repository.RepositoryItemProgressBar
+    Friend WithEvents GridColumn15 As DevExpress.XtraGrid.Columns.GridColumn
+    Public WithEvents LargeImageCollection As DevExpress.Utils.ImageCollection
+    Friend WithEvents BEditWO As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BEditMRS As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GridColumn21 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn22 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn23 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn24 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn25 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn26 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

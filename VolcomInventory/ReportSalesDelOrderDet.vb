@@ -3,11 +3,6 @@
     Public Shared dt As DataTable
     Public Shared id_pre As String = "-1"
 
-    Private Sub GVItemList_CustomColumnDisplayText(ByVal sender As System.Object, ByVal e As DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs) Handles GVItemList.CustomColumnDisplayText
-        If e.Column.FieldName = "no" Then
-            e.DisplayText = (e.ListSourceRowIndex + 1).ToString()
-        End If
-    End Sub
 
     Private Sub ReportSalesDelOrderDet_BeforePrint(ByVal sender As System.Object, ByVal e As System.Drawing.Printing.PrintEventArgs) Handles MyBase.BeforePrint
         GCItemList.DataSource = dt
@@ -16,5 +11,9 @@
         Else
             pre_load_mark_horz("43", id_pl_sales_order_del, "2", "2", XrTable1)
         End If
+    End Sub
+
+    Private Sub GVItemList_CustomColumnDisplayText(sender As Object, e As DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs) Handles GVItemList.CustomColumnDisplayText
+
     End Sub
 End Class

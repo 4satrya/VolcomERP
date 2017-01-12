@@ -9,6 +9,7 @@
     Private Sub FormMasterRawMaterial_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         viewMat()
         viewMatDetail()
+        viewMatDetailList()
     End Sub
     'View Material Data
     Sub viewMat()
@@ -38,6 +39,17 @@
         GCMatDetail.DataSource = data
         pageChanged()
     End Sub
+    '
+    Sub viewMatDetailList()
+        Dim query As String = "SELECT * FROM tb_m_mat_det a  
+                                INNER JOIN tb_m_mat b ON a.id_mat = b.id_mat  
+                                LEFT JOIN tb_lookup_inventory_method c ON a.id_method = c.id_method  
+                                LEFT JOIN tb_m_mat_det_price mdp ON mdp.id_mat_det = a.id_mat_det AND mdp.is_default_cost='1'
+                                ORDER BY a.mat_det_date ASC, a.id_mat_det ASC"
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCListMat.DataSource = data
+        pageChanged()
+    End Sub
     'Activated Form
     Private Sub FormMasterRawMaterial_Activated(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Activated
         FormMain.show_rb(Name)
@@ -47,43 +59,54 @@
     Private Sub FormMasterRawMaterial_Deactivate(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Deactivate
         FormMain.hide_rb()
     End Sub
-    'Click Raw Mat
-    Private Sub GVRawMat_RowClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraGrid.Views.Grid.RowClickEventArgs) Handles GVRawMat.RowClick
-        viewMatDetail()
-    End Sub
+
     'Page Changed
     Private Sub XTCMaterialType_SelectedPageChanged(ByVal sender As System.Object, ByVal e As DevExpress.XtraTab.TabPageChangedEventArgs) Handles XTCMaterialType.SelectedPageChanged
         pageChanged()
     End Sub
     Sub pageChanged()
-        If XTCMaterialType.SelectedTabPageIndex = 0 Then
-            If GVRawMat.RowCount > 0 Then
-                'show all
-                bnew_active = "1"
+        If XTCList.SelectedTabPageIndex = 0 Then
+            If XTCMaterialType.SelectedTabPageIndex = 0 Then
+                If GVRawMat.RowCount > 0 Then
+                    'show all
+                    bnew_active = "1"
+                    bedit_active = "1"
+                    bdel_active = "1"
+                Else
+                    'hide all except new
+                    bnew_active = "1"
+                    bedit_active = "0"
+                    bdel_active = "0"
+                End If
+                checkFormAccess(Name)
+                button_main(bnew_active, bedit_active, bdel_active)
+            ElseIf XTCMaterialType.SelectedTabPageIndex = 1 Then
+                If GVMatDetail.RowCount > 0 Then
+                    'show all
+                    bnew_active2 = "1"
+                    bedit_active2 = "1"
+                    bdel_active2 = "1"
+                Else
+                    'hide all except new
+                    bnew_active2 = "1"
+                    bedit_active2 = "0"
+                    bdel_active2 = "0"
+                End If
+                checkFormAccess(Name)
+                button_main(bnew_active2, bedit_active2, bdel_active2)
+            End If
+        ElseIf XTCList.SelectedTabPageIndex = 1
+            If GVListMat.RowCount > 0 Then
+                bnew_active = "0"
                 bedit_active = "1"
-                bdel_active = "1"
+                bdel_active = "0"
             Else
-                'hide all except new
-                bnew_active = "1"
+                bnew_active = "0"
                 bedit_active = "0"
                 bdel_active = "0"
             End If
             checkFormAccess(Name)
             button_main(bnew_active, bedit_active, bdel_active)
-        ElseIf XTCMaterialType.SelectedTabPageIndex = 1 Then
-            If GVMatDetail.RowCount > 0 Then
-                'show all
-                bnew_active2 = "1"
-                bedit_active2 = "1"
-                bdel_active2 = "1"
-            Else
-                'hide all except new
-                bnew_active2 = "1"
-                bedit_active2 = "0"
-                bdel_active2 = "0"
-            End If
-            checkFormAccess(Name)
-            button_main(bnew_active2, bedit_active2, bdel_active2)
         End If
     End Sub
 
@@ -100,5 +123,16 @@
         FormImportExcel.id_pop_up = "12"
         FormImportExcel.ShowDialog()
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub GVRawMat_FocusedRowChanged(sender As Object, e As DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs) Handles GVRawMat.FocusedRowChanged
+        Try
+            viewMatDetail()
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Private Sub XTCList_SelectedPageChanged(sender As Object, e As DevExpress.XtraTab.TabPageChangedEventArgs) Handles XTCList.SelectedPageChanged
+        pageChanged()
     End Sub
 End Class

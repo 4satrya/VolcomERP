@@ -25,21 +25,23 @@ Partial Public Class ReportSalesDelOrderDet
         Me.GVItemList = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumnNo = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnCode = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnEanCode = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnName = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnSize = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnUOM = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnQtyWH = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnPrice = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnQty = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnQtyLimit = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnPrice = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnAmount = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnRemark = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnUOM = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnQtyWH = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnEanCode = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdSalesOrderDet = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdProduct = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdDesignPrice = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdDesign = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdSample = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdPlSalesOrderDel = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnStatus = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemSpinEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
         Me.TopMargin = New DevExpress.XtraReports.UI.TopMarginBand()
         Me.XrPanel1 = New DevExpress.XtraReports.UI.XRPanel()
@@ -65,7 +67,6 @@ Partial Public Class ReportSalesDelOrderDet
         Me.LTitle = New DevExpress.XtraReports.UI.XRLabel()
         Me.BottomMargin = New DevExpress.XtraReports.UI.BottomMarginBand()
         Me.XrPageInfo1 = New DevExpress.XtraReports.UI.XRPageInfo()
-        Me.PageFooter = New DevExpress.XtraReports.UI.PageFooterBand()
         Me.XrTable1 = New DevExpress.XtraReports.UI.XRTable()
         Me.XrTableRow1 = New DevExpress.XtraReports.UI.XRTableRow()
         Me.XrTableCell1 = New DevExpress.XtraReports.UI.XRTableCell()
@@ -73,6 +74,7 @@ Partial Public Class ReportSalesDelOrderDet
         Me.LabelNote = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel9 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel14 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.ReportFooter = New DevExpress.XtraReports.UI.ReportFooterBand()
         CType(Me.GCItemList, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVItemList, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemSpinEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -96,7 +98,7 @@ Partial Public Class ReportSalesDelOrderDet
         '
         'GCItemList
         '
-        Me.GCItemList.Location = New System.Drawing.Point(22, 2)
+        Me.GCItemList.Location = New System.Drawing.Point(21, 2)
         Me.GCItemList.LookAndFeel.SkinName = "Office 2010 Silver"
         Me.GCItemList.MainView = Me.GVItemList
         Me.GCItemList.Name = "GCItemList"
@@ -107,49 +109,23 @@ Partial Public Class ReportSalesDelOrderDet
         '
         'GVItemList
         '
-        Me.GVItemList.AppearancePrint.FooterPanel.BackColor = System.Drawing.Color.Transparent
-        Me.GVItemList.AppearancePrint.FooterPanel.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GVItemList.AppearancePrint.FooterPanel.ForeColor = System.Drawing.Color.Black
-        Me.GVItemList.AppearancePrint.FooterPanel.Options.UseBackColor = True
-        Me.GVItemList.AppearancePrint.FooterPanel.Options.UseFont = True
-        Me.GVItemList.AppearancePrint.FooterPanel.Options.UseForeColor = True
-        Me.GVItemList.AppearancePrint.GroupFooter.BackColor = System.Drawing.Color.Transparent
-        Me.GVItemList.AppearancePrint.GroupFooter.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GVItemList.AppearancePrint.GroupFooter.ForeColor = System.Drawing.Color.Black
-        Me.GVItemList.AppearancePrint.GroupFooter.Options.UseBackColor = True
-        Me.GVItemList.AppearancePrint.GroupFooter.Options.UseFont = True
-        Me.GVItemList.AppearancePrint.GroupFooter.Options.UseForeColor = True
-        Me.GVItemList.AppearancePrint.GroupRow.BackColor = System.Drawing.Color.Transparent
-        Me.GVItemList.AppearancePrint.GroupRow.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GVItemList.AppearancePrint.GroupRow.ForeColor = System.Drawing.Color.Black
-        Me.GVItemList.AppearancePrint.GroupRow.Options.UseBackColor = True
-        Me.GVItemList.AppearancePrint.GroupRow.Options.UseFont = True
-        Me.GVItemList.AppearancePrint.GroupRow.Options.UseForeColor = True
-        Me.GVItemList.AppearancePrint.HeaderPanel.BackColor = System.Drawing.Color.Transparent
-        Me.GVItemList.AppearancePrint.HeaderPanel.ForeColor = System.Drawing.Color.Black
-        Me.GVItemList.AppearancePrint.HeaderPanel.Options.UseBackColor = True
-        Me.GVItemList.AppearancePrint.HeaderPanel.Options.UseForeColor = True
-        Me.GVItemList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumnCode, Me.GridColumnEanCode, Me.GridColumnName, Me.GridColumnSize, Me.GridColumnUOM, Me.GridColumnQtyWH, Me.GridColumnPrice, Me.GridColumnQty, Me.GridColumnAmount, Me.GridColumnRemark, Me.GridColumnIdSalesOrderDet, Me.GridColumnIdProduct, Me.GridColumnIdDesignPrice, Me.GridColumnIdDesign, Me.GridColumnIdSample, Me.GridColumnIdPlSalesOrderDel})
+        Me.GVItemList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumnCode, Me.GridColumnName, Me.GridColumnSize, Me.GridColumnQty, Me.GridColumnQtyLimit, Me.GridColumnPrice, Me.GridColumnAmount, Me.GridColumnRemark, Me.GridColumnUOM, Me.GridColumnQtyWH, Me.GridColumnEanCode, Me.GridColumnIdSalesOrderDet, Me.GridColumnIdProduct, Me.GridColumnIdDesignPrice, Me.GridColumnIdDesign, Me.GridColumnIdSample, Me.GridColumnIdPlSalesOrderDel, Me.GridColumnStatus})
         Me.GVItemList.GridControl = Me.GCItemList
-        Me.GVItemList.GroupCount = 1
-        Me.GVItemList.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "pl_sales_order_del_det_qty", Me.GridColumnQty, "{0:f2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "pl_sales_order_del_det_amount", Me.GridColumnAmount, "{0:n2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "design_price", Me.GridColumnPrice, "Sub Total")})
+        Me.GVItemList.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_from_wh", Me.GridColumnQtyWH, "{0:n0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "pl_sales_order_del_det_qty", Me.GridColumnQty, "{0:n0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "pl_sales_order_del_det_amount", Me.GridColumnAmount, "{0:n0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_order_det_qty_limit", Me.GridColumnQtyLimit, "{0:n0}")})
+        Me.GVItemList.IndicatorWidth = 30
         Me.GVItemList.Name = "GVItemList"
         Me.GVItemList.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[True]
         Me.GVItemList.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.[True]
-        Me.GVItemList.OptionsCustomization.AllowGroup = False
-        Me.GVItemList.OptionsCustomization.AllowQuickHideColumns = False
+        Me.GVItemList.OptionsBehavior.AutoExpandAllGroups = True
         Me.GVItemList.OptionsView.ShowFooter = True
         Me.GVItemList.OptionsView.ShowGroupPanel = False
-        Me.GVItemList.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumnName, DevExpress.Data.ColumnSortOrder.Ascending)})
         '
         'GridColumnNo
         '
         Me.GridColumnNo.Caption = "No"
         Me.GridColumnNo.FieldName = "no"
         Me.GridColumnNo.Name = "GridColumnNo"
-        Me.GridColumnNo.OptionsColumn.AllowEdit = False
-        Me.GridColumnNo.Visible = True
-        Me.GridColumnNo.VisibleIndex = 0
+        Me.GridColumnNo.OptionsColumn.ReadOnly = True
         Me.GridColumnNo.Width = 47
         '
         'GridColumnCode
@@ -157,25 +133,20 @@ Partial Public Class ReportSalesDelOrderDet
         Me.GridColumnCode.Caption = "Code"
         Me.GridColumnCode.FieldName = "code"
         Me.GridColumnCode.Name = "GridColumnCode"
-        Me.GridColumnCode.OptionsColumn.AllowEdit = False
+        Me.GridColumnCode.OptionsColumn.ReadOnly = True
         Me.GridColumnCode.Visible = True
-        Me.GridColumnCode.VisibleIndex = 1
+        Me.GridColumnCode.VisibleIndex = 0
         Me.GridColumnCode.Width = 79
-        '
-        'GridColumnEanCode
-        '
-        Me.GridColumnEanCode.Caption = "EAN Code"
-        Me.GridColumnEanCode.FieldName = "ean_code"
-        Me.GridColumnEanCode.Name = "GridColumnEanCode"
-        Me.GridColumnEanCode.OptionsColumn.AllowEdit = False
         '
         'GridColumnName
         '
-        Me.GridColumnName.Caption = "Design"
-        Me.GridColumnName.FieldName = "design_display_name"
+        Me.GridColumnName.Caption = "Description"
+        Me.GridColumnName.FieldName = "name"
         Me.GridColumnName.FieldNameSortGroup = "id_design"
         Me.GridColumnName.Name = "GridColumnName"
-        Me.GridColumnName.OptionsColumn.AllowEdit = False
+        Me.GridColumnName.OptionsColumn.ReadOnly = True
+        Me.GridColumnName.Visible = True
+        Me.GridColumnName.VisibleIndex = 1
         Me.GridColumnName.Width = 142
         '
         'GridColumnSize
@@ -187,53 +158,10 @@ Partial Public Class ReportSalesDelOrderDet
         Me.GridColumnSize.Caption = "Size"
         Me.GridColumnSize.FieldName = "size"
         Me.GridColumnSize.Name = "GridColumnSize"
-        Me.GridColumnSize.OptionsColumn.AllowEdit = False
+        Me.GridColumnSize.OptionsColumn.ReadOnly = True
         Me.GridColumnSize.Visible = True
         Me.GridColumnSize.VisibleIndex = 2
         Me.GridColumnSize.Width = 61
-        '
-        'GridColumnUOM
-        '
-        Me.GridColumnUOM.AppearanceCell.Options.UseTextOptions = True
-        Me.GridColumnUOM.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.GridColumnUOM.AppearanceHeader.Options.UseTextOptions = True
-        Me.GridColumnUOM.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.GridColumnUOM.Caption = "UOM"
-        Me.GridColumnUOM.FieldName = "uom"
-        Me.GridColumnUOM.Name = "GridColumnUOM"
-        Me.GridColumnUOM.OptionsColumn.AllowEdit = False
-        Me.GridColumnUOM.Width = 71
-        '
-        'GridColumnQtyWH
-        '
-        Me.GridColumnQtyWH.AppearanceCell.Options.UseTextOptions = True
-        Me.GridColumnQtyWH.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumnQtyWH.AppearanceHeader.Options.UseTextOptions = True
-        Me.GridColumnQtyWH.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumnQtyWH.Caption = "Qty From WH"
-        Me.GridColumnQtyWH.DisplayFormat.FormatString = "F2"
-        Me.GridColumnQtyWH.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumnQtyWH.FieldName = "qty_from_wh"
-        Me.GridColumnQtyWH.Name = "GridColumnQtyWH"
-        Me.GridColumnQtyWH.OptionsColumn.AllowEdit = False
-        Me.GridColumnQtyWH.Width = 97
-        '
-        'GridColumnPrice
-        '
-        Me.GridColumnPrice.AppearanceCell.Options.UseTextOptions = True
-        Me.GridColumnPrice.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumnPrice.AppearanceHeader.Options.UseTextOptions = True
-        Me.GridColumnPrice.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumnPrice.Caption = "Price"
-        Me.GridColumnPrice.DisplayFormat.FormatString = "{0:n2}"
-        Me.GridColumnPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumnPrice.FieldName = "design_price"
-        Me.GridColumnPrice.Name = "GridColumnPrice"
-        Me.GridColumnPrice.OptionsColumn.AllowEdit = False
-        Me.GridColumnPrice.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "design_price", "Total    ")})
-        Me.GridColumnPrice.Visible = True
-        Me.GridColumnPrice.VisibleIndex = 3
-        Me.GridColumnPrice.Width = 124
         '
         'GridColumnQty
         '
@@ -242,29 +170,61 @@ Partial Public Class ReportSalesDelOrderDet
         Me.GridColumnQty.AppearanceHeader.Options.UseTextOptions = True
         Me.GridColumnQty.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GridColumnQty.Caption = "Qty"
-        Me.GridColumnQty.DisplayFormat.FormatString = "F2"
+        Me.GridColumnQty.DisplayFormat.FormatString = "N0"
         Me.GridColumnQty.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnQty.FieldName = "pl_sales_order_del_det_qty"
         Me.GridColumnQty.Name = "GridColumnQty"
-        Me.GridColumnQty.OptionsColumn.AllowEdit = False
         Me.GridColumnQty.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.[False]
-        Me.GridColumnQty.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "pl_sales_order_del_det_qty", "{0:f2}")})
+        Me.GridColumnQty.OptionsColumn.AllowShowHide = False
+        Me.GridColumnQty.OptionsColumn.ReadOnly = True
+        Me.GridColumnQty.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "pl_sales_order_del_det_qty", "{0:n0}")})
         Me.GridColumnQty.Visible = True
-        Me.GridColumnQty.VisibleIndex = 4
+        Me.GridColumnQty.VisibleIndex = 3
         Me.GridColumnQty.Width = 102
+        '
+        'GridColumnQtyLimit
+        '
+        Me.GridColumnQtyLimit.AppearanceCell.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.GridColumnQtyLimit.AppearanceCell.Options.UseFont = True
+        Me.GridColumnQtyLimit.AppearanceCell.Options.UseForeColor = True
+        Me.GridColumnQtyLimit.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumnQtyLimit.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumnQtyLimit.AppearanceHeader.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.GridColumnQtyLimit.AppearanceHeader.Options.UseFont = True
+        Me.GridColumnQtyLimit.AppearanceHeader.Options.UseForeColor = True
+        Me.GridColumnQtyLimit.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumnQtyLimit.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumnQtyLimit.Caption = "Qty Limit"
+        Me.GridColumnQtyLimit.DisplayFormat.FormatString = "N0"
+        Me.GridColumnQtyLimit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnQtyLimit.FieldName = "sales_order_det_qty_limit"
+        Me.GridColumnQtyLimit.Name = "GridColumnQtyLimit"
+        Me.GridColumnQtyLimit.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_order_det_qty_limit", "{0:n0}")})
+        '
+        'GridColumnPrice
+        '
+        Me.GridColumnPrice.Caption = "Price"
+        Me.GridColumnPrice.DisplayFormat.FormatString = "{0:n2}"
+        Me.GridColumnPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnPrice.FieldName = "design_price"
+        Me.GridColumnPrice.Name = "GridColumnPrice"
+        Me.GridColumnPrice.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.[False]
+        Me.GridColumnPrice.OptionsColumn.AllowShowHide = False
+        Me.GridColumnPrice.OptionsColumn.ReadOnly = True
+        Me.GridColumnPrice.Visible = True
+        Me.GridColumnPrice.VisibleIndex = 4
+        Me.GridColumnPrice.Width = 124
         '
         'GridColumnAmount
         '
-        Me.GridColumnAmount.AppearanceCell.Options.UseTextOptions = True
-        Me.GridColumnAmount.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumnAmount.AppearanceHeader.Options.UseTextOptions = True
-        Me.GridColumnAmount.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GridColumnAmount.Caption = "Amount"
         Me.GridColumnAmount.DisplayFormat.FormatString = "{0:n2}"
         Me.GridColumnAmount.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnAmount.FieldName = "pl_sales_order_del_det_amount"
         Me.GridColumnAmount.Name = "GridColumnAmount"
-        Me.GridColumnAmount.OptionsColumn.AllowEdit = False
+        Me.GridColumnAmount.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.[False]
+        Me.GridColumnAmount.OptionsColumn.AllowShowHide = False
+        Me.GridColumnAmount.OptionsColumn.ReadOnly = True
         Me.GridColumnAmount.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "pl_sales_order_del_det_amount", "{0:n2}")})
         Me.GridColumnAmount.Visible = True
         Me.GridColumnAmount.VisibleIndex = 5
@@ -279,12 +239,53 @@ Partial Public Class ReportSalesDelOrderDet
         Me.GridColumnRemark.VisibleIndex = 6
         Me.GridColumnRemark.Width = 263
         '
+        'GridColumnUOM
+        '
+        Me.GridColumnUOM.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumnUOM.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumnUOM.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumnUOM.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumnUOM.Caption = "UOM"
+        Me.GridColumnUOM.FieldName = "uom"
+        Me.GridColumnUOM.Name = "GridColumnUOM"
+        Me.GridColumnUOM.OptionsColumn.AllowEdit = False
+        Me.GridColumnUOM.OptionsColumn.ShowInCustomizationForm = False
+        Me.GridColumnUOM.Width = 71
+        '
+        'GridColumnQtyWH
+        '
+        Me.GridColumnQtyWH.AppearanceCell.ForeColor = System.Drawing.Color.Olive
+        Me.GridColumnQtyWH.AppearanceCell.Options.UseForeColor = True
+        Me.GridColumnQtyWH.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumnQtyWH.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumnQtyWH.AppearanceHeader.ForeColor = System.Drawing.Color.Olive
+        Me.GridColumnQtyWH.AppearanceHeader.Options.UseForeColor = True
+        Me.GridColumnQtyWH.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumnQtyWH.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumnQtyWH.Caption = "Qty From WH"
+        Me.GridColumnQtyWH.DisplayFormat.FormatString = "N0"
+        Me.GridColumnQtyWH.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnQtyWH.FieldName = "qty_from_wh"
+        Me.GridColumnQtyWH.Name = "GridColumnQtyWH"
+        Me.GridColumnQtyWH.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.[False]
+        Me.GridColumnQtyWH.OptionsColumn.ReadOnly = True
+        Me.GridColumnQtyWH.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_from_wh", "{0:n0}")})
+        Me.GridColumnQtyWH.Width = 97
+        '
+        'GridColumnEanCode
+        '
+        Me.GridColumnEanCode.Caption = "EAN Code"
+        Me.GridColumnEanCode.FieldName = "ean_code"
+        Me.GridColumnEanCode.Name = "GridColumnEanCode"
+        Me.GridColumnEanCode.OptionsColumn.AllowEdit = False
+        '
         'GridColumnIdSalesOrderDet
         '
         Me.GridColumnIdSalesOrderDet.Caption = "Id Sales Order Det"
         Me.GridColumnIdSalesOrderDet.FieldName = "id_sales_order_det"
         Me.GridColumnIdSalesOrderDet.Name = "GridColumnIdSalesOrderDet"
         Me.GridColumnIdSalesOrderDet.OptionsColumn.AllowEdit = False
+        Me.GridColumnIdSalesOrderDet.OptionsColumn.ShowInCustomizationForm = False
         '
         'GridColumnIdProduct
         '
@@ -292,6 +293,7 @@ Partial Public Class ReportSalesDelOrderDet
         Me.GridColumnIdProduct.FieldName = "id_product"
         Me.GridColumnIdProduct.Name = "GridColumnIdProduct"
         Me.GridColumnIdProduct.OptionsColumn.AllowEdit = False
+        Me.GridColumnIdProduct.OptionsColumn.ShowInCustomizationForm = False
         '
         'GridColumnIdDesignPrice
         '
@@ -299,6 +301,7 @@ Partial Public Class ReportSalesDelOrderDet
         Me.GridColumnIdDesignPrice.FieldName = "id_design_price"
         Me.GridColumnIdDesignPrice.Name = "GridColumnIdDesignPrice"
         Me.GridColumnIdDesignPrice.OptionsColumn.AllowEdit = False
+        Me.GridColumnIdDesignPrice.OptionsColumn.ShowInCustomizationForm = False
         '
         'GridColumnIdDesign
         '
@@ -306,6 +309,7 @@ Partial Public Class ReportSalesDelOrderDet
         Me.GridColumnIdDesign.FieldName = "id_design"
         Me.GridColumnIdDesign.Name = "GridColumnIdDesign"
         Me.GridColumnIdDesign.OptionsColumn.AllowEdit = False
+        Me.GridColumnIdDesign.OptionsColumn.ShowInCustomizationForm = False
         '
         'GridColumnIdSample
         '
@@ -313,12 +317,23 @@ Partial Public Class ReportSalesDelOrderDet
         Me.GridColumnIdSample.FieldName = "id_sample"
         Me.GridColumnIdSample.Name = "GridColumnIdSample"
         Me.GridColumnIdSample.OptionsColumn.AllowEdit = False
+        Me.GridColumnIdSample.OptionsColumn.ShowInCustomizationForm = False
         '
         'GridColumnIdPlSalesOrderDel
         '
         Me.GridColumnIdPlSalesOrderDel.Caption = "Id Pl Sales Order Del Det"
         Me.GridColumnIdPlSalesOrderDel.FieldName = "id_pl_sales_order_del_det"
         Me.GridColumnIdPlSalesOrderDel.Name = "GridColumnIdPlSalesOrderDel"
+        Me.GridColumnIdPlSalesOrderDel.OptionsColumn.ShowInCustomizationForm = False
+        '
+        'GridColumnStatus
+        '
+        Me.GridColumnStatus.Caption = "Diff"
+        Me.GridColumnStatus.FieldName = "status"
+        Me.GridColumnStatus.Name = "GridColumnStatus"
+        Me.GridColumnStatus.OptionsColumn.AllowEdit = False
+        Me.GridColumnStatus.Visible = True
+        Me.GridColumnStatus.VisibleIndex = 7
         '
         'RepositoryItemSpinEdit1
         '
@@ -587,12 +602,6 @@ Partial Public Class ReportSalesDelOrderDet
         Me.XrPageInfo1.StylePriority.UseTextAlignment = False
         Me.XrPageInfo1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
         '
-        'PageFooter
-        '
-        Me.PageFooter.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrTable1, Me.XrPanel2})
-        Me.PageFooter.HeightF = 72.29169!
-        Me.PageFooter.Name = "PageFooter"
-        '
         'XrTable1
         '
         Me.XrTable1.Font = New System.Drawing.Font("Consolas", 8.0!)
@@ -663,9 +672,15 @@ Partial Public Class ReportSalesDelOrderDet
         Me.XrLabel14.StylePriority.UseBorders = False
         Me.XrLabel14.Text = ":"
         '
+        'ReportFooter
+        '
+        Me.ReportFooter.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrPanel2, Me.XrTable1})
+        Me.ReportFooter.HeightF = 72.29169!
+        Me.ReportFooter.Name = "ReportFooter"
+        '
         'ReportSalesDelOrderDet
         '
-        Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.Detail, Me.TopMargin, Me.BottomMargin, Me.PageFooter})
+        Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.Detail, Me.TopMargin, Me.BottomMargin, Me.ReportFooter})
         Me.Margins = New System.Drawing.Printing.Margins(27, 25, 114, 19)
         Me.Version = "15.1"
         CType(Me.GCItemList, System.ComponentModel.ISupportInitialize).EndInit()
@@ -678,7 +693,6 @@ Partial Public Class ReportSalesDelOrderDet
     Friend WithEvents Detail As DevExpress.XtraReports.UI.DetailBand
     Friend WithEvents TopMargin As DevExpress.XtraReports.UI.TopMarginBand
     Friend WithEvents BottomMargin As DevExpress.XtraReports.UI.BottomMarginBand
-    Friend WithEvents PageFooter As DevExpress.XtraReports.UI.PageFooterBand
     Friend WithEvents XrPageInfo1 As DevExpress.XtraReports.UI.XRPageInfo
     Friend WithEvents XrPanel2 As DevExpress.XtraReports.UI.XRPanel
     Friend WithEvents LabelNote As DevExpress.XtraReports.UI.XRLabel
@@ -705,28 +719,31 @@ Partial Public Class ReportSalesDelOrderDet
     Friend WithEvents XrLabel6 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents LabelFrom As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel7 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents LabelCat As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents XrLabel13 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents XrLabel8 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents ReportFooter As DevExpress.XtraReports.UI.ReportFooterBand
     Friend WithEvents WinControlContainer1 As DevExpress.XtraReports.UI.WinControlContainer
     Friend WithEvents GCItemList As DevExpress.XtraGrid.GridControl
     Friend WithEvents GVItemList As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumnNo As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnCode As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumnEanCode As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnName As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnSize As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumnUOM As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumnQtyWH As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnQty As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnQtyLimit As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnPrice As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnAmount As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnRemark As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnUOM As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnQtyWH As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnEanCode As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnIdSalesOrderDet As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnIdProduct As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnIdDesignPrice As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnIdDesign As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnIdSample As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnIdPlSalesOrderDel As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnStatus As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RepositoryItemSpinEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit
-    Friend WithEvents LabelCat As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel13 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel8 As DevExpress.XtraReports.UI.XRLabel
 End Class

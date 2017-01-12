@@ -334,6 +334,9 @@
         ElseIf report_mark_type = "98" Then
             'Employee Change Schedule
             query = String.Format("SELECT id_report_status, emp_ch_schedule_number as report_number FROM tb_emp_ch_schedule WHERE id_emp_ch_schedule = '{0}'", id_report)
+        ElseIf report_mark_type = "99" Then
+            'Leave Propose Admin Management
+            query = String.Format("SELECT id_report_status, emp_leave_number as report_number FROM tb_emp_leave WHERE id_emp_leave = '{0}'", id_report)
         End If
 
         data = execute_query(query, -1, True, "", "", "", "")
@@ -365,7 +368,7 @@
         End If
     End Sub
     Sub view_mark()
-        Dim query As String = "SELECT a.id_mark_asg,a.id_report_status,a.report_mark_note,a.id_report_mark,b.report_status,a.id_user,d.employee_name,e.mark,CONCAT_WS(' ',DATE_FORMAT(a.report_mark_datetime,'%d %M %Y'),TIME(a.report_mark_datetime)) AS date_time,a.report_mark_note,a.is_use "
+        Dim query As String = "SELECT emp.employee_name,a.id_mark_asg,a.id_report_status,a.report_mark_note,a.id_report_mark,b.report_status,a.id_user,e.mark,CONCAT_WS(' ',DATE_FORMAT(a.report_mark_datetime,'%d %M %Y'),TIME(a.report_mark_datetime)) AS date_time,a.report_mark_note,a.is_use "
         query += ",CONCAT_WS(' ',DATE_FORMAT(a.report_mark_start_datetime,'%d %M %Y'),TIME(a.report_mark_start_datetime)) AS date_time_start "
         query += ",CONCAT_WS(' ',DATE_FORMAT((ADDTIME(report_mark_start_datetime,report_mark_lead_time)),'%d %M %Y'),TIME((ADDTIME(report_mark_start_datetime,report_mark_lead_time)))) AS lead_time "
         query += ",CONCAT_WS(' ',DATE(ADDTIME(report_mark_start_datetime,report_mark_lead_time)),TIME((ADDTIME(report_mark_start_datetime,report_mark_lead_time)))) AS raw_lead_time "
@@ -373,6 +376,7 @@
         query += "INNER JOIN tb_lookup_report_status b ON a.id_report_status=b.id_report_status "
         query += "LEFT JOIN tb_m_user c ON a.id_user=c.id_user "
         query += "LEFT JOIN tb_m_employee d ON d.id_employee=c.id_employee "
+        query += "LEFT JOIN tb_m_employee emp ON emp.id_employee=a.id_employee "
         query += "INNER JOIN tb_lookup_mark e ON e.id_mark=a.id_mark "
         query += "WHERE a.report_mark_type='" & report_mark_type & "' AND a.id_report='" & id_report & "' "
         query += "ORDER BY a.id_report_status,a.level"
@@ -3202,6 +3206,36 @@
                 id_status_reportx = "6"
             End If
             query = String.Format("UPDATE tb_emp_ch_schedule SET id_report_status='{0}' WHERE id_emp_ch_schedule ='{1}'", id_status_reportx, id_report)
+            execute_non_query(query, True, "", "", "", "")
+            infoCustom("Status changed.")
+        ElseIf report_mark_type = "99" Then
+            'LEAVE PROPOSE
+            If id_status_reportx = "3" Then
+                'update schedule to cuti
+                Dim query_upd As String = ""
+                query_upd = "UPDATE tb_emp_schedule emps
+                                INNER JOIN
+                                (SELECT empld.id_schedule,empl.leave_purpose,empl.id_leave_type FROM tb_emp_leave_det empld
+                                INNER JOIN tb_emp_leave empl ON empld.id_emp_leave=empl.id_emp_leave
+                                WHERE empld.id_emp_leave='" & id_report & "')
+                                a ON a.id_schedule=emps.id_schedule
+                                SET emps.id_leave_type=a.id_leave_type,emps.info_leave=a.leave_purpose"
+                execute_non_query(query_upd, True, "", "", "", "")
+                'add if advance
+                query_upd = "INSERT INTO tb_emp_stock_leave_adv(id_emp,id_emp_leave,qty,adv_datetime)
+                                SELECT lve.id_emp,ld.id_emp_leave,SUM(ld.minutes_total) AS qty,NOW()
+                                FROM tb_emp_leave_det ld
+                                INNER JOIN tb_emp_leave lve ON lve.id_emp_leave=ld.id_emp_leave
+                                WHERE ld.id_emp_leave='" & id_report & "' AND lve.id_leave_type='4'
+                                GROUP BY ld.id_emp_leave"
+                execute_non_query(query_upd, True, "", "", "", "")
+                'complete 
+                id_status_reportx = "6"
+            ElseIf id_status_reportx = "5" Then 'cancel
+                Dim query_del As String = "DELETE FROM tb_emp_stock_leave WHERE id_emp_leave='" & id_report & "'"
+                execute_non_query(query_del, True, "", "", "", "")
+            End If
+            query = String.Format("UPDATE tb_emp_leave SET id_report_status='{0}' WHERE id_emp_leave ='{1}'", id_status_reportx, id_report)
             execute_non_query(query, True, "", "", "", "")
             infoCustom("Status changed.")
         End If

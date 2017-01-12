@@ -1644,18 +1644,29 @@ Public Class FormMain
                 FormSetupRawMatCodeSingle.ShowDialog()
                 Cursor = Cursors.Default
             ElseIf formName = "FormMasterRawMaterial" Then 'EDIT MASTER RAW MATERIAL
-                If FormMasterRawMaterial.XTCMaterialType.SelectedTabPageIndex = 0 Then 'edit raw material
-                    FormMasterRawMaterialSingle.action = "upd"
-                    FormMasterRawMaterialSingle.id_mat = FormMasterRawMaterial.GVRawMat.GetFocusedRowCellDisplayText("id_mat").ToString
-                    FormMasterRawMaterialSingle.ShowDialog()
-                ElseIf FormMasterRawMaterial.XTCMaterialType.SelectedTabPageIndex = 1 Then 'edit raw material detail
+                If FormMasterRawMaterial.XTCList.SelectedTabPageIndex = 0 Then
+                    If FormMasterRawMaterial.XTCMaterialType.SelectedTabPageIndex = 0 Then 'edit raw material
+                        FormMasterRawMaterialSingle.action = "upd"
+                        FormMasterRawMaterialSingle.id_mat = FormMasterRawMaterial.GVRawMat.GetFocusedRowCellDisplayText("id_mat").ToString
+                        FormMasterRawMaterialSingle.ShowDialog()
+                    ElseIf FormMasterRawMaterial.XTCMaterialType.SelectedTabPageIndex = 1 Then 'edit raw material detail
+                        FormMasterRawMaterialDetSingle.action = "upd"
+
+                        FormMasterRawMaterialDetSingle.id_mat = FormMasterRawMaterial.GVRawMat.GetFocusedRowCellValue("id_mat").ToString
+                        FormMasterRawMaterialDetSingle.LabelPrintedName.Text = FormMasterRawMaterial.GVRawMat.GetFocusedRowCellDisplayText("mat_display_name").ToString
+                        FormMasterRawMaterialDetSingle.TxtMaterialTypeCode.Text = FormMasterRawMaterial.GVRawMat.GetFocusedRowCellDisplayText("mat_code").ToString
+
+                        FormMasterRawMaterialDetSingle.id_mat_det = FormMasterRawMaterial.GVMatDetail.GetFocusedRowCellDisplayText("id_mat_det").ToString
+                        FormMasterRawMaterialDetSingle.ShowDialog()
+                    End If
+                ElseIf FormMasterRawMaterial.XTCList.SelectedTabPageIndex = 1
                     FormMasterRawMaterialDetSingle.action = "upd"
 
-                    FormMasterRawMaterialDetSingle.id_mat = FormMasterRawMaterial.GVRawMat.GetFocusedRowCellValue("id_mat").ToString
-                    FormMasterRawMaterialDetSingle.LabelPrintedName.Text = FormMasterRawMaterial.GVRawMat.GetFocusedRowCellDisplayText("mat_display_name").ToString
-                    FormMasterRawMaterialDetSingle.TxtMaterialTypeCode.Text = FormMasterRawMaterial.GVRawMat.GetFocusedRowCellDisplayText("mat_code").ToString
+                    FormMasterRawMaterialDetSingle.id_mat = FormMasterRawMaterial.GVListMat.GetFocusedRowCellValue("id_mat").ToString
+                    FormMasterRawMaterialDetSingle.LabelPrintedName.Text = FormMasterRawMaterial.GVListMat.GetFocusedRowCellDisplayText("mat_display_name").ToString
+                    FormMasterRawMaterialDetSingle.TxtMaterialTypeCode.Text = FormMasterRawMaterial.GVListMat.GetFocusedRowCellDisplayText("mat_code").ToString
 
-                    FormMasterRawMaterialDetSingle.id_mat_det = FormMasterRawMaterial.GVMatDetail.GetFocusedRowCellDisplayText("id_mat_det").ToString
+                    FormMasterRawMaterialDetSingle.id_mat_det = FormMasterRawMaterial.GVListMat.GetFocusedRowCellDisplayText("id_mat_det").ToString
                     FormMasterRawMaterialDetSingle.ShowDialog()
                 End If
             ElseIf formName = "FormMasterOVH" Then
@@ -5407,11 +5418,16 @@ Public Class FormMain
                 print(FormMasterRawMat.GCSupplier, "Detail Supplier " + System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(FormMasterRawMat.GVLot.GetFocusedRowCellDisplayText("raw_mat_detail").ToString))
             End If
         ElseIf formName = "FormMasterRawMaterial" Then
-            If FormMasterRawMaterial.XTCMaterialType.SelectedTabPageIndex = 0 Then
-                print(FormMasterRawMaterial.GCRawMat, "List Raw Material")
-            ElseIf FormMasterRawMaterial.XTCMaterialType.SelectedTabPageIndex = 1 Then
-                print(FormMasterRawMaterial.GCMatDetail, "List Detail Material : " + FormMasterRawMaterial.GVRawMat.GetFocusedRowCellDisplayText("mat_name").ToString)
+            If FormMasterRawMaterial.XTCList.SelectedTabPageIndex = 0 Then
+                If FormMasterRawMaterial.XTCMaterialType.SelectedTabPageIndex = 0 Then
+                    print(FormMasterRawMaterial.GCRawMat, "List Raw Material")
+                ElseIf FormMasterRawMaterial.XTCMaterialType.SelectedTabPageIndex = 1 Then
+                    print(FormMasterRawMaterial.GCMatDetail, "List Detail Material : " + FormMasterRawMaterial.GVRawMat.GetFocusedRowCellDisplayText("mat_name").ToString)
+                End If
+            ElseIf FormMasterRawMaterial.XTCList.SelectedTabPageIndex = 1 Then
+                print(FormMasterRawMaterial.GCListMat, "List Raw Material")
             End If
+
         ElseIf formName = "FormMasterOVH" Then
             print(FormMasterOVH.GCOVH, "Overhead")
         ElseIf formName = "FormMasterCode" Then
@@ -5598,6 +5614,12 @@ Public Class FormMain
         ElseIf formName = "FormProduction" Then
             If FormProduction.XTCTabProduction.SelectedTabPageIndex = 0 Then
                 print(FormProduction.GCProd, "Production Order")
+            ElseIf FormProduction.XTCTabProduction.SelectedTabPageIndex = 1 Then
+
+            ElseIf FormProduction.XTCTabProduction.SelectedTabPageIndex = 2 Then
+                print(FormProduction.GCProdWO, "Production Order WO")
+            ElseIf FormProduction.XTCTabProduction.SelectedTabPageIndex = 3 Then
+                print(FormProduction.GCMRS, "Production Order MRS")
             End If
         ElseIf formName = "FormMatPL" Then
             'Packing list material
@@ -7305,6 +7327,10 @@ Public Class FormMain
                 FormProduction.view_production_order()
             ElseIf FormProduction.XTCTabProduction.SelectedTabPageIndex = 1 Then ' prod demand
                 FormProduction.viewProdDemand()
+            ElseIf FormProduction.XTCTabProduction.SelectedTabPageIndex = 2 Then ' prod WO
+                FormProduction.view_wo()
+            ElseIf FormProduction.XTCTabProduction.SelectedTabPageIndex = 3 Then ' prod MRS
+                FormProduction.view_mrs()
             End If
         ElseIf formName = "FormMatPL" Then
             If FormMatPL.XTCPL.SelectedTabPageIndex = 0 Then
@@ -7622,10 +7648,14 @@ Public Class FormMain
             'IMPORT DO
             FormWHImportDO.viewDOList()
         ElseIf formName = "FormMasterRawMaterial" Then
-            If FormMasterRawMaterial.XTCMaterialType.SelectedTabPageIndex = 0 Then
-                FormMasterRawMaterial.viewMat()
-            Else
-                FormMasterRawMaterial.viewMatDetail()
+            If FormMasterRawMaterial.XTCList.SelectedTabPageIndex = 0 Then
+                If FormMasterRawMaterial.XTCMaterialType.SelectedTabPageIndex = 0 Then
+                    FormMasterRawMaterial.viewMat()
+                Else
+                    FormMasterRawMaterial.viewMatDetail()
+                End If
+            ElseIf FormMasterRawMaterial.XTCList.SelectedTabPageIndex = 1 Then
+                FormMasterRawMaterial.viewMatDetailList()
             End If
         ElseIf formName = "FormFGDesignList" Then
             FormFGDesignList.viewData()

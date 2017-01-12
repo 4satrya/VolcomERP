@@ -49,7 +49,7 @@ Partial Class FormReportMarkDet
         Me.BRefuse.Name = "BRefuse"
         Me.BRefuse.Size = New System.Drawing.Size(128, 34)
         Me.BRefuse.TabIndex = 138
-        Me.BRefuse.Text = "Refuse"
+        Me.BRefuse.Text = "Not Approve"
         '
         'BAccept
         '
@@ -66,7 +66,7 @@ Partial Class FormReportMarkDet
         Me.BAccept.Name = "BAccept"
         Me.BAccept.Size = New System.Drawing.Size(137, 34)
         Me.BAccept.TabIndex = 136
-        Me.BAccept.Text = "Accept"
+        Me.BAccept.Text = "Approve"
         '
         'LabelControl1
         '
@@ -133,7 +133,6 @@ Partial Class FormReportMarkDet
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FormReportMarkDet"
-        Me.ShowInTaskbar = False
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Mark Detail"

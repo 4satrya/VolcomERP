@@ -376,6 +376,18 @@
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>46</value>
   </metadata>
+  <data name="BtnVerify.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAAAG3RFWHRUaXRsZQBGb3JjZSBU
+        ZXN0O1Rlc3Q7Q2hlY2tkM0CkAAABEklEQVRYR9WSPQ6CQBCFOZwV1/AOVpa0FFZW1N6G2mYrfxKvoMW6
+        jzDJurwsyOAQX/IF9gnMt0jhvV8VWlpCS0toaQktQVVV/ksugTKAewewGYCWINwUDtOD6+u6fjVNU4Zl
+        +qyPdQwtwRwB5xyVMBNAmISpAJJKmAsgvcQTEqsIICIRfht8mAItwRyBDPdwCZ1DS4Abc3GPm9+djt1x
+        LP2z6BxagpyADBfGohaId5sON3kD8cAYGd62LUWy2Btgw6dELYDEEulwtnsgWURAE7XA9bD35+2mX/nu
+        HN3UqAUwkDE1agEkN5z9/0Dyc4GxqAXS4YKE7R5I1AKrf4Ta/K/AkqTPF2hpCS0toaUltLTDF28Wo8nD
+        TPG4/QAAAABJRU5ErkJggg==
+</value>
+  </data>
   <metadata name="EPForm.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>24, 11</value>
   </metadata>

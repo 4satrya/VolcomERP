@@ -11,8 +11,17 @@
     Dim id_design As String = "0"
 
     Private Sub FormProd_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        RCIMainVendor.ValueChecked = Convert.ToSByte(1)
+        RCIMainVendor.ValueUnchecked = Convert.ToSByte(2)
+        '
         viewDesign()
+        viewDesignWO()
+        viewDesignMRS()
+        '
         viewSeason()
+        viewSeasonWO()
+        viewSeasonMRS()
+        '
         viewVendor()
 
         viewProdDemand()
@@ -42,6 +51,20 @@
         query += "ORDER BY b.range ASC)"
         viewSearchLookupQuery(SLESeason, query, "id_season", "season", "id_season")
     End Sub
+    Sub viewSeasonWO()
+        Dim query As String = "SELECT '-1' AS id_season, 'All Season' as season UNION "
+        query += "(SELECT id_season,season FROM tb_season a "
+        query += "INNER JOIN tb_range b ON a.id_range = b.id_range "
+        query += "ORDER BY b.range ASC)"
+        viewSearchLookupQuery(SLESeasonWO, query, "id_season", "season", "id_season")
+    End Sub
+    Sub viewSeasonMRS()
+        Dim query As String = "SELECT '-1' AS id_season, 'All Season' as season UNION "
+        query += "(SELECT id_season,season FROM tb_season a "
+        query += "INNER JOIN tb_range b ON a.id_range = b.id_range "
+        query += "ORDER BY b.range ASC)"
+        viewSearchLookupQuery(SLESeasonMRS, query, "id_season", "season", "id_season")
+    End Sub
     Sub viewDesign()
         Dim query As String = ""
         query += "CALL view_design_order(TRUE)"
@@ -52,6 +75,34 @@
         SLEDesignStockStore.Properties.ValueMember = "id_design"
         If data.Rows.Count.ToString >= 1 Then
             SLEDesignStockStore.EditValue = data.Rows(0)("id_design").ToString
+        Else
+            SLEDesignStockStore.EditValue = Nothing
+        End If
+    End Sub
+    Sub viewDesignWO()
+        Dim query As String = ""
+        query += "CALL view_design_order(TRUE)"
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        SLEDesignWO.Properties.DataSource = Nothing
+        SLEDesignWO.Properties.DataSource = data
+        SLEDesignWO.Properties.DisplayMember = "display_name"
+        SLEDesignWO.Properties.ValueMember = "id_design"
+        If data.Rows.Count.ToString >= 1 Then
+            SLEDesignWO.EditValue = data.Rows(0)("id_design").ToString
+        Else
+            SLEDesignWO.EditValue = Nothing
+        End If
+    End Sub
+    Sub viewDesignMRS()
+        Dim query As String = ""
+        query += "CALL view_design_order(TRUE)"
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        SLEDesignMRS.Properties.DataSource = Nothing
+        SLEDesignMRS.Properties.DataSource = data
+        SLEDesignMRS.Properties.DisplayMember = "display_name"
+        SLEDesignMRS.Properties.ValueMember = "id_design"
+        If data.Rows.Count.ToString >= 1 Then
+            SLEDesignMRS.EditValue = data.Rows(0)("id_design").ToString
         Else
             SLEDesignStockStore.EditValue = Nothing
         End If
@@ -214,6 +265,10 @@
                 bedit_active = "0"
                 bdel_active = "0"
             End If
+        Else
+            bnew_active = "0"
+            bedit_active = "0"
+            bdel_active = "0"
         End If
         checkFormAccess(Name)
         button_main(bnew_active, bedit_active, bdel_active)
@@ -265,5 +320,130 @@
 
     Private Sub BSearch_Click(sender As Object, e As EventArgs) Handles BSearch.Click
         view_production_order()
+    End Sub
+
+    Private Sub BViewWO_Click(sender As Object, e As EventArgs) Handles BViewWO.Click
+        view_wo()
+    End Sub
+
+    Sub view_wo()
+        Dim query_where As String = ""
+
+        If Not SLEDesignWO.EditValue.ToString = "0" Then
+            query_where += " AND mdesg.id_design='" & SLEDesignWO.EditValue.ToString & "'"
+        End If
+
+        If Not SLESeasonWO.EditValue.ToString = "-1" Then
+            query_where += " AND ssn.id_season='" & SLESeasonWO.EditValue.ToString & "'"
+        End If
+
+        Dim query = "SELECT po.id_prod_order,po.prod_order_number,mdesg.design_display_name,mdesg.design_code,a.id_report_status,h.report_status,a.id_prod_order_wo,a.id_ovh_price "
+        query += ",(SELECT IFNULL(MAX(prod_order_wo_prog_percent),0) FROM tb_prod_order_wo_prog WHERE id_prod_order_wo = a.id_prod_order_wo) as progress,"
+        query += "g.payment,a.is_main_vendor, "
+        query += "d.comp_name AS comp_name_to, "
+        query += "f.comp_name AS comp_name_ship_to, "
+        query += "a.prod_order_wo_number,a.id_ovh_price,j.overhead, "
+        query += "a.prod_order_wo_date, "
+        query += "DATE_ADD(a.prod_order_wo_date,INTERVAL a.prod_order_wo_lead_time DAY) AS prod_order_wo_lead_time, "
+        query += "DATE_ADD(a.prod_order_wo_date,INTERVAL (a.prod_order_wo_top+a.prod_order_wo_lead_time) DAY) AS prod_order_wo_top "
+        query += "FROM tb_prod_order_wo a INNER JOIN tb_m_ovh_price b ON a.id_ovh_price=b.id_ovh_price "
+        '
+        query += "INNER JOIN tb_prod_order po ON po.id_prod_order=a.id_prod_order "
+        query += "INNER JOIN tb_prod_demand_design pdd On po.id_prod_demand_design = pdd.id_prod_demand_design "
+        query += "INNER JOIN tb_m_design mdesg On mdesg.id_design = pdd.id_design "
+        query += "INNER JOIN tb_season_delivery sd On sd.id_delivery=pdd.id_delivery "
+        query += "INNER JOIN tb_season ssn On ssn.id_season=sd.id_season "
+        '
+        query += "INNER JOIN tb_m_comp_contact c ON b.id_comp_contact = c.id_comp_contact "
+        query += "INNER JOIN tb_m_comp d ON c.id_comp = d.id_comp "
+        query += "INNER JOIN tb_m_comp_contact e ON a.id_comp_contact_ship_to = e.id_comp_contact "
+        query += "INNER JOIN tb_m_comp f ON e.id_comp = f.id_comp "
+        query += "INNER JOIN tb_lookup_payment g ON a.id_payment = g.id_payment "
+        query += "INNER JOIN tb_lookup_report_status h ON h.id_report_status = a.id_report_status "
+        query += "INNER JOIN tb_m_ovh j ON b.id_ovh = j.id_ovh "
+        '
+        query += "WHERE 1=1 " & query_where
+
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCProdWO.DataSource = data
+        GVProdWO.BestFitColumns()
+        '
+        If GVProdWO.RowCount > 0 Then
+            BEditWO.Visible = True
+        Else
+            BEditWO.Visible = False
+        End If
+    End Sub
+
+    Private Sub BViewMRS_Click(sender As Object, e As EventArgs) Handles BViewMRS.Click
+        view_mrs()
+    End Sub
+
+    Sub view_mrs()
+        Dim query_where As String = ""
+
+        If Not SLEDesignMRS.EditValue.ToString = "0" Then
+            query_where += " AND mdesg.id_design='" & SLEDesignMRS.EditValue.ToString & "'"
+        End If
+
+        If Not SLESeasonMRS.EditValue.ToString = "-1" Then
+            query_where += " AND ssn.id_season='" & SLESeasonMRS.EditValue.ToString & "'"
+        End If
+
+        Dim query = "SELECT po.id_prod_order,po.prod_order_number,mdesg.design_display_name,mdesg.design_code,a.id_prod_order_mrs,a.prod_order_mrs_number,a.id_report_status,h.report_status,a.id_prod_order_wo,b.prod_order_wo_number, "
+        query += "d.comp_name AS comp_name_req_from,c.id_comp_contact AS id_comp_name_req_from, "
+        query += "f.comp_name AS comp_name_req_to,e.id_comp_contact AS id_comp_name_req_to, "
+        query += "a.prod_order_mrs_date "
+        query += "FROM tb_prod_order_mrs a "
+        query += "LEFT JOIN tb_prod_order_wo b ON a.id_prod_order_wo = b.id_prod_order_wo "
+        '
+        query += "INNER JOIN tb_prod_order po ON po.id_prod_order=a.id_prod_order "
+        query += "INNER JOIN tb_prod_demand_design pdd On po.id_prod_demand_design = pdd.id_prod_demand_design "
+        query += "INNER JOIN tb_m_design mdesg On mdesg.id_design = pdd.id_design "
+        query += "INNER JOIN tb_season_delivery sd On sd.id_delivery=pdd.id_delivery "
+        query += "INNER JOIN tb_season ssn On ssn.id_season=sd.id_season "
+        '
+        query += "INNER JOIN tb_m_comp_contact c ON a.id_comp_contact_req_from = c.id_comp_contact "
+        query += "INNER JOIN tb_m_comp d ON c.id_comp = d.id_comp "
+        query += "INNER JOIN tb_m_comp_contact e ON a.id_comp_contact_req_to = e.id_comp_contact "
+        query += "INNER JOIN tb_m_comp f ON e.id_comp = f.id_comp "
+        query += "INNER JOIN tb_lookup_report_status h ON h.id_report_status = a.id_report_status "
+        '
+        query += "WHERE 1=1 " & query_where
+
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCMRS.DataSource = data
+        GVMRS.BestFitColumns()
+        '
+        If GVMRS.RowCount > 0 Then
+            BEditMRS.Visible = True
+        Else
+            BEditMRS.Visible = False
+        End If
+    End Sub
+
+    Private Sub BEditMRS_Click(sender As Object, e As EventArgs) Handles BEditMRS.Click
+        edit_mrs()
+    End Sub
+
+    Private Sub BEditWO_Click(sender As Object, e As EventArgs) Handles BEditWO.Click
+        edit_wo()
+    End Sub
+    Sub edit_wo()
+        FormProductionWO.id_wo = GVProdWO.GetFocusedRowCellValue("id_prod_order_wo").ToString
+        FormProductionWO.id_po = GVProdWO.GetFocusedRowCellValue("id_prod_order").ToString
+        FormProductionWO.ShowDialog()
+    End Sub
+    Sub edit_mrs()
+        FormProductionMRS.id_prod_order = GVMRS.GetFocusedRowCellValue("id_prod_order").ToString
+        FormProductionMRS.id_mrs = GVMRS.GetFocusedRowCellValue("id_prod_order_mrs").ToString
+        FormProductionMRS.id_comp_req_from = GVMRS.GetFocusedRowCellValue("id_comp_name_req_from").ToString
+        FormProductionMRS.id_comp_req_to = GVMRS.GetFocusedRowCellValue("id_comp_name_req_to").ToString
+        FormProductionMRS.TEMRSNumber.Text = GVMRS.GetFocusedRowCellValue("prod_order_mrs_number").ToString
+        FormProductionMRS.TEWONumber.Text = GVMRS.GetFocusedRowCellValue("prod_order_wo_number").ToString
+        FormProductionMRS.TEPONumber.Text = GVMRS.GetFocusedRowCellValue("prod_order_number").ToString
+        FormProductionMRS.TEDesign.Text = GVMRS.GetFocusedRowCellValue("design_display_name").ToString
+        FormProductionMRS.TEDesignCode.Text = GVMRS.GetFocusedRowCellValue("design_code").ToString
+        FormProductionMRS.ShowDialog()
     End Sub
 End Class

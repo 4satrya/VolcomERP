@@ -49,8 +49,10 @@
 
         If report_mark_type = "95" Then
             load_mark_horz_side("95", id_report, "2", "1", XrTable1)
-        Else
+        ElseIf report_mark_type = "96" Then
             load_mark_horz_side("96", id_report, "2", "1", XrTable1)
+        ElseIf report_mark_type = "99" Then
+            load_mark_horz_side("99", id_report, "2", "1", XrTable1)
         End If
         BSideRight.HeightF = BSideRight.HeightF + (25.0F * 4)
         BSideLeft.HeightF = BSideLeft.HeightF + (25.0F * 4)

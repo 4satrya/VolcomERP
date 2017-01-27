@@ -40,6 +40,7 @@
         query += "SELECT del.id_sales_order, SUM(del_det.pl_sales_order_del_det_qty) AS `total_del` "
         query += "FROM tb_pl_sales_order_del del "
         query += "INNER JOIN tb_pl_sales_order_del_det del_det ON del_det.id_pl_sales_order_del=del.id_pl_sales_order_del "
+        query += "WHERE del.id_report_status!=5 "
         query += "GROUP BY del.id_sales_order "
         query += ") del ON del.id_sales_order = so.id_sales_order "
         query += "GROUP BY so.id_sales_order "

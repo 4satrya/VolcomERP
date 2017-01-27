@@ -49,6 +49,9 @@ Partial Class FormSalesDelOrder
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
         Me.XTPSOList = New DevExpress.XtraTab.XtraTabPage()
         Me.GCSalesOrder = New DevExpress.XtraGrid.GridControl()
+        Me.ViewMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.SMPrePrint = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SMPrint = New System.Windows.Forms.ToolStripMenuItem()
         Me.GVSalesOrder = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumnSalesTargetNumb = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnTo = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -74,10 +77,9 @@ Partial Class FormSalesDelOrder
         Me.TxtNoParam = New DevExpress.XtraEditors.ButtonEdit()
         Me.BtnViewNewPrepare = New DevExpress.XtraEditors.SimpleButton()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
-        Me.ViewMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.SMPrePrint = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SMPrint = New System.Windows.Forms.ToolStripMenuItem()
         Me.TimerMonitor = New System.Windows.Forms.Timer(Me.components)
+        Me.SMPrePrintUnique = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SMPrintUnique = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.XTCSalesDelOrder, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCSalesDelOrder.SuspendLayout()
         Me.XTPListDel.SuspendLayout()
@@ -95,6 +97,7 @@ Partial Class FormSalesDelOrder
         CType(Me.DEFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTPSOList.SuspendLayout()
         CType(Me.GCSalesOrder, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ViewMenu.SuspendLayout()
         CType(Me.GVSalesOrder, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemProgressBar1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -107,7 +110,6 @@ Partial Class FormSalesDelOrder
         CType(Me.PanelControlNavNewProd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlNavNewProd.SuspendLayout()
         CType(Me.TxtNoParam.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.ViewMenu.SuspendLayout()
         Me.SuspendLayout()
         '
         'XTCSalesDelOrder
@@ -388,6 +390,24 @@ Partial Class FormSalesDelOrder
         Me.GCSalesOrder.TabIndex = 5
         Me.GCSalesOrder.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVSalesOrder, Me.GridView2})
         '
+        'ViewMenu
+        '
+        Me.ViewMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SMPrePrint, Me.SMPrint, Me.SMPrePrintUnique, Me.SMPrintUnique})
+        Me.ViewMenu.Name = "ContextMenuStripYM"
+        Me.ViewMenu.Size = New System.Drawing.Size(178, 114)
+        '
+        'SMPrePrint
+        '
+        Me.SMPrePrint.Name = "SMPrePrint"
+        Me.SMPrePrint.Size = New System.Drawing.Size(177, 22)
+        Me.SMPrePrint.Text = "Pre Printing"
+        '
+        'SMPrint
+        '
+        Me.SMPrint.Name = "SMPrint"
+        Me.SMPrint.Size = New System.Drawing.Size(177, 22)
+        Me.SMPrint.Text = "Print"
+        '
         'GVSalesOrder
         '
         Me.GVSalesOrder.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnSalesTargetNumb, Me.GridColumnTo, Me.GridColumnSalesTargetDate, Me.GridColumnDSalesTargetNote, Me.GridColumnReportStatus, Me.GridColumnPrepareStatus, Me.GridColumn9, Me.GridColumnIdSalesOrder, Me.GridColumn1Category, Me.GridColumn10, Me.GridColumnReff, Me.GridColumnCreatedProcess, Me.GridColumnReference})
@@ -606,28 +626,22 @@ Partial Class FormSalesDelOrder
         Me.LabelControl1.TabIndex = 0
         Me.LabelControl1.Text = "Ref."
         '
-        'ViewMenu
-        '
-        Me.ViewMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SMPrePrint, Me.SMPrint})
-        Me.ViewMenu.Name = "ContextMenuStripYM"
-        Me.ViewMenu.Size = New System.Drawing.Size(137, 48)
-        '
-        'SMPrePrint
-        '
-        Me.SMPrePrint.Name = "SMPrePrint"
-        Me.SMPrePrint.Size = New System.Drawing.Size(136, 22)
-        Me.SMPrePrint.Text = "Pre Printing"
-        '
-        'SMPrint
-        '
-        Me.SMPrint.Name = "SMPrint"
-        Me.SMPrint.Size = New System.Drawing.Size(136, 22)
-        Me.SMPrint.Text = "Print"
-        '
         'TimerMonitor
         '
         Me.TimerMonitor.Enabled = True
         Me.TimerMonitor.Interval = 10000
+        '
+        'SMPrePrintUnique
+        '
+        Me.SMPrePrintUnique.Name = "SMPrePrintUnique"
+        Me.SMPrePrintUnique.Size = New System.Drawing.Size(177, 22)
+        Me.SMPrePrintUnique.Text = "Pre Printing Unique"
+        '
+        'SMPrintUnique
+        '
+        Me.SMPrintUnique.Name = "SMPrintUnique"
+        Me.SMPrintUnique.Size = New System.Drawing.Size(177, 22)
+        Me.SMPrintUnique.Text = "Print Unique"
         '
         'FormSalesDelOrder
         '
@@ -660,6 +674,7 @@ Partial Class FormSalesDelOrder
         CType(Me.DEFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XTPSOList.ResumeLayout(False)
         CType(Me.GCSalesOrder, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ViewMenu.ResumeLayout(False)
         CType(Me.GVSalesOrder, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemProgressBar1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
@@ -673,7 +688,6 @@ Partial Class FormSalesDelOrder
         Me.PanelControlNavNewProd.ResumeLayout(False)
         Me.PanelControlNavNewProd.PerformLayout()
         CType(Me.TxtNoParam.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ViewMenu.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -735,4 +749,6 @@ Partial Class FormSalesDelOrder
     Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LabelControl3 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents GridColumnTotal As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents SMPrePrintUnique As ToolStripMenuItem
+    Friend WithEvents SMPrintUnique As ToolStripMenuItem
 End Class

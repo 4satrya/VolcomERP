@@ -295,4 +295,18 @@
         viewSalesDelOrder()
         Cursor = Cursors.Default
     End Sub
+
+    Private Sub SMPrePrintUnique_Click(sender As Object, e As EventArgs) Handles SMPrePrintUnique.Click
+        Cursor = Cursors.WaitCursor
+        FormSalesDelOrderDet.id_pre = "3"
+        FormMain.but_edit()
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub SMPrintUnique_Click(sender As Object, e As EventArgs) Handles SMPrintUnique.Click
+        Cursor = Cursors.WaitCursor
+        FormSalesDelOrderDet.id_pre = "4"
+        FormMain.but_edit()
+        Cursor = Cursors.Default
+    End Sub
 End Class

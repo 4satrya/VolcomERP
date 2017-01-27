@@ -4324,6 +4324,12 @@
     <Compile Include="ReportSalesDelOrderDet.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ReportSalesDelOrderDetUnique.Designer.vb">
+      <DependentUpon>ReportSalesDelOrderDetUnique.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportSalesDelOrderDetUnique.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ReportSalesInvoice.designer.vb">
       <DependentUpon>ReportSalesInvoice.vb</DependentUpon>
     </Compile>
@@ -7135,6 +7141,9 @@
     <EmbeddedResource Include="ReportSalesDelOrderDet.resx">
       <DependentUpon>ReportSalesDelOrderDet.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportSalesDelOrderDetUnique.resx">
+      <DependentUpon>ReportSalesDelOrderDetUnique.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportSalesInvoice.resx">
       <DependentUpon>ReportSalesInvoice.vb</DependentUpon>

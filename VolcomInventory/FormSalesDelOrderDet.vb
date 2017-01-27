@@ -111,6 +111,12 @@ Public Class FormSalesDelOrderDet
             ElseIf id_pre = "2" Then
                 printing()
                 Close()
+            ElseIf id_pre = "3" Then
+                prePrintingUnique()
+                Close()
+            ElseIf id_pre = "4" Then
+                printingUnique()
+                Close()
             End If
         End If
     End Sub
@@ -1132,10 +1138,45 @@ Public Class FormSalesDelOrderDet
 
         'Show the report's preview. 
         Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
-        Tool.ShowPreview()
+        Tool.ShowPreviewDialog()
         GVItemList.ActiveFilterString = ""
         GridColumnNo.Visible = False
         GridColumnQtyLimit.Visible = True
+    End Sub
+
+    Sub getReportUnique()
+        GCBarcode.RefreshDataSource()
+        GVBarcode.RefreshData()
+        ReportSalesDelOrderDetUnique.dt = GCBarcode.DataSource
+        ReportSalesDelOrderDetUnique.id_pl_sales_order_del = id_pl_sales_order_del
+        Dim Report As New ReportSalesDelOrderDetUnique()
+
+        ' '... 
+        ' ' creating and saving the view's layout to a new memory stream 
+        Dim str As System.IO.Stream
+        str = New System.IO.MemoryStream()
+        GVBarcode.SaveLayoutToStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+        str.Seek(0, System.IO.SeekOrigin.Begin)
+        Report.GVBarcode.RestoreLayoutFromStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+        str.Seek(0, System.IO.SeekOrigin.Begin)
+
+        'Grid Detail
+        ReportStyleGridview(Report.GVBarcode)
+
+        'Parse val
+        Report.LabelTo.Text = TxtCodeCompTo.Text + "-" + TxtNameCompTo.Text
+        Report.LabelFrom.Text = TxtCodeCompFrom.Text + "-" + TxtNameCompFrom.Text
+        Report.LabelAddress.Text = MEAdrressCompTo.Text
+        Report.LRecDate.Text = DEForm.Text
+        Report.LRecNumber.Text = TxtSalesDelOrderNumber.Text
+        Report.LabelNote.Text = MENote.Text
+        Report.LabelPrepare.Text = TxtSalesOrder.Text
+        Report.LabelCat.Text = LEStatusSO.Text
+
+
+        'Show the report's preview. 
+        Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
+        Tool.ShowPreviewDialog()
     End Sub
 
     'Color Cell
@@ -1199,6 +1240,13 @@ Public Class FormSalesDelOrderDet
         Cursor = Cursors.Default
     End Sub
 
+    Sub prePrintingUnique()
+        Cursor = Cursors.WaitCursor
+        ReportSalesDelOrderDetUnique.id_pre = "1"
+        getReportUnique()
+        Cursor = Cursors.Default
+    End Sub
+
     Private Sub BtnPrint_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BtnPrint.ItemClick
         printing()
     End Sub
@@ -1207,6 +1255,13 @@ Public Class FormSalesDelOrderDet
         Cursor = Cursors.WaitCursor
         ReportSalesDelOrderDet.id_pre = "-1"
         getReport()
+        Cursor = Cursors.Default
+    End Sub
+
+    Sub printingUnique()
+        Cursor = Cursors.WaitCursor
+        ReportSalesDelOrderDetUnique.id_pre = "-1"
+        getReportUnique()
         Cursor = Cursors.Default
     End Sub
 
@@ -1423,5 +1478,13 @@ Public Class FormSalesDelOrderDet
         'cek qty limit SO di DB
         verifyTrans()
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnPrePrintingUnique_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BtnPrePrintingUnique.ItemClick
+        prePrintingUnique()
+    End Sub
+
+    Private Sub BtnPrintUnique_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BtnPrintUnique.ItemClick
+        printingUnique()
     End Sub
 End Class

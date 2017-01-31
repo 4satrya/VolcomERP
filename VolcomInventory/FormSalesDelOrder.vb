@@ -14,6 +14,8 @@
         Dim data As DataTable = execute_query("SELECT DATE(NOW()) AS `tgl`", -1, True, "", "", "", "")
         DEFrom.EditValue = data.Rows(0)("tgl")
         DEUntil.EditValue = data.Rows(0)("tgl")
+        DEFromDel.EditValue = data.Rows(0)("tgl")
+        DEUntilDel.EditValue = data.Rows(0)("tgl")
 
         'load prepare listt
         viewSalesOrder()
@@ -48,25 +50,61 @@
         check_menu()
     End Sub
 
+    Sub viewDel()
+        Dim date_from_selected As String = "0000-01-01"
+        Dim date_until_selected As String = "9999-01-01"
+        Try
+            date_from_selected = DateTime.Parse(DEFromDel.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+        Try
+            date_until_selected = DateTime.Parse(DEUntilDel.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+
+        Dim query_c As ClassSalesDelOrder = New ClassSalesDelOrder()
+        Dim query As String = query_c.queryMainHead("AND (a.pl_sales_order_del_slip_date>='" + date_from_selected + "' AND a.pl_sales_order_del_slip_date<='" + date_until_selected + "') ", "2")
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCDel.DataSource = data
+        check_menu()
+    End Sub
+
     Private Sub FormSalesDelOrder_Deactivate(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Deactivate
         FormMain.hide_rb()
     End Sub
 
     Sub noManipulating()
         If XTCDO.SelectedTabPageIndex = 0 Then
-            Dim indeks As Integer = 0
-            Try
-                indeks = GVSalesDelOrder.FocusedRowHandle
-            Catch ex As Exception
-            End Try
-            If indeks < 0 Then
-                bnew_active = "1"
-                bedit_active = "0"
-                bdel_active = "0"
+            If XTCDel.SelectedTabPageIndex = 0 Then
+                Dim indeks As Integer = 0
+                Try
+                    indeks = GVSalesDelOrder.FocusedRowHandle
+                Catch ex As Exception
+                End Try
+                If indeks < 0 Then
+                    bnew_active = "1"
+                    bedit_active = "0"
+                    bdel_active = "0"
+                Else
+                    bnew_active = "1"
+                    bedit_active = "1"
+                    bdel_active = "0"
+                End If
             Else
-                bnew_active = "1"
-                bedit_active = "1"
-                bdel_active = "1"
+                Dim indeks As Integer = 0
+                Try
+                    indeks = GVDel.FocusedRowHandle
+                Catch ex As Exception
+                End Try
+                If indeks < 0 Then
+                    bnew_active = "1"
+                    bedit_active = "0"
+                    bdel_active = "0"
+                Else
+                    bnew_active = "1"
+                    bedit_active = "1"
+                    bdel_active = "0"
+                End If
             End If
         ElseIf XTCDO.SelectedTabPageIndex = 1 Then
             Dim indeks As Integer = 0
@@ -90,23 +128,43 @@
 
     Sub check_menu()
         If XTCDO.SelectedTabPageIndex = 0 Then
-            'based on receive
-            If GVSalesDelOrder.RowCount < 1 Then
-                'hide all except new
-                bnew_active = "1"
-                bedit_active = "0"
-                bdel_active = "0"
-                checkFormAccess(Name)
-                button_main(bnew_active, bedit_active, bdel_active)
-                noManipulating()
+            If XTCDel.SelectedTabPageIndex = 0 Then
+                'based on receive
+                If GVSalesDelOrder.RowCount < 1 Then
+                    'hide all except new
+                    bnew_active = "1"
+                    bedit_active = "0"
+                    bdel_active = "0"
+                    checkFormAccess(Name)
+                    button_main(bnew_active, bedit_active, bdel_active)
+                    noManipulating()
+                Else
+                    'show all
+                    bnew_active = "1"
+                    bedit_active = "1"
+                    bdel_active = "0"
+                    checkFormAccess(Name)
+                    button_main(bnew_active, bedit_active, bdel_active)
+                    noManipulating()
+                End If
             Else
-                'show all
-                bnew_active = "1"
-                bedit_active = "1"
-                bdel_active = "1"
-                checkFormAccess(Name)
-                button_main(bnew_active, bedit_active, bdel_active)
-                noManipulating()
+                If GVDel.RowCount < 1 Then
+                    'hide all except new
+                    bnew_active = "1"
+                    bedit_active = "0"
+                    bdel_active = "0"
+                    checkFormAccess(Name)
+                    button_main(bnew_active, bedit_active, bdel_active)
+                    noManipulating()
+                Else
+                    'show all
+                    bnew_active = "1"
+                    bedit_active = "1"
+                    bdel_active = "0"
+                    checkFormAccess(Name)
+                    button_main(bnew_active, bedit_active, bdel_active)
+                    noManipulating()
+                End If
             End If
         ElseIf XTCDO.SelectedTabPageIndex = 1 Then
             'based on SO
@@ -293,6 +351,12 @@
     Private Sub BtnView_Click(sender As Object, e As EventArgs) Handles BtnView.Click
         Cursor = Cursors.WaitCursor
         viewSalesDelOrder()
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnViewDel_Click(sender As Object, e As EventArgs) Handles BtnViewDel.Click
+        Cursor = Cursors.WaitCursor
+        viewDel()
         Cursor = Cursors.Default
     End Sub
 End Class

@@ -735,12 +735,16 @@ Public Class FormSalesDelOrderDet
 
     Private Sub BMark_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BMark.Click
         Cursor = Cursors.WaitCursor
-        FormReportMark.id_report = id_pl_sales_order_del
-        FormReportMark.report_mark_type = "43"
-        FormReportMark.form_origin = Name
-        FormReportMark.is_disabled_set_stt = "1"
-        FormReportMark.is_view_finalize = "1"
-        FormReportMark.ShowDialog()
+        FormSalesDelOrderSlip.action = "ins"
+        FormSalesDelOrderSlip.direct_menu = True
+        FormSalesDelOrderSlip.ShowDialog()
+        Close()
+        'FormReportMark.id_report = id_pl_sales_order_del
+        'FormReportMark.report_mark_type = "43"
+        'FormReportMark.form_origin = Name
+        'FormReportMark.is_disabled_set_stt = "1"
+        'FormReportMark.is_view_finalize = "1"
+        'FormReportMark.ShowDialog()
         Cursor = Cursors.Default
     End Sub
 

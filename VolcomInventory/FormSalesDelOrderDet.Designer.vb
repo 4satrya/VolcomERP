@@ -577,7 +577,7 @@ Partial Class FormSalesDelOrderDet
         'BtnTest
         '
         Me.BtnTest.Dock = System.Windows.Forms.DockStyle.Left
-        Me.BtnTest.Location = New System.Drawing.Point(77, 2)
+        Me.BtnTest.Location = New System.Drawing.Point(143, 2)
         Me.BtnTest.Name = "BtnTest"
         Me.BtnTest.Size = New System.Drawing.Size(75, 36)
         Me.BtnTest.TabIndex = 12
@@ -587,13 +587,13 @@ Partial Class FormSalesDelOrderDet
         'BMark
         '
         Me.BMark.Dock = System.Windows.Forms.DockStyle.Left
-        Me.BMark.ImageIndex = 4
+        Me.BMark.Image = CType(resources.GetObject("BMark.Image"), System.Drawing.Image)
         Me.BMark.ImageList = Me.LargeImageCollection
         Me.BMark.Location = New System.Drawing.Point(2, 2)
         Me.BMark.Name = "BMark"
-        Me.BMark.Size = New System.Drawing.Size(75, 36)
+        Me.BMark.Size = New System.Drawing.Size(141, 36)
         Me.BMark.TabIndex = 24
-        Me.BMark.Text = "Mark"
+        Me.BMark.Text = "Create Delivery Slip"
         '
         'DDBPrint
         '

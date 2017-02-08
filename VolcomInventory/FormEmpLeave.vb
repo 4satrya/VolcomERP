@@ -5,6 +5,7 @@
     '
     Public is_propose As String = "-1"
     '
+    Public is_hrd As String = "-1"
     Private Sub FormEmpLeave_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         DEStart.EditValue = Now
         DEUntil.EditValue = Now

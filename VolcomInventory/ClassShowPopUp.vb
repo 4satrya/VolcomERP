@@ -392,6 +392,22 @@
             FormEmpLeaveDet.report_mark_type = "99"
             FormEmpLeaveDet.is_view = "1"
             FormEmpLeaveDet.ShowDialog()
+        ElseIf report_mark_type = "100" Then
+            'propose schedule with approval
+            FormEmpAttnAssignDet.id_emp_assign_sch = id_report
+            FormEmpAttnAssignDet.is_view = "1"
+            FormEmpAttnAssignDet.ShowDialog()
+        ElseIf report_mark_type = "101" Then
+            'air ways bill
+            FormWHAWBillDet.id_awb = id_report
+            FormWHAWBillDet.is_view = "1"
+            FormWHAWBillDet.ShowDialog()
+        ElseIf report_mark_type = "102" Then
+            'propose leave HRD
+            FormEmpLeaveDet.id_emp_leave = id_report
+            FormEmpLeaveDet.report_mark_type = "102"
+            FormEmpLeaveDet.is_view = "1"
+            FormEmpLeaveDet.ShowDialog()
         Else
             'MsgBox(id_report)
             stopCustom("Document Not Found")
@@ -929,6 +945,24 @@
             field_number = "emp_ch_schedule_number"
             field_date = "emp_ch_schedule_date"
         ElseIf report_mark_type = "99" Then
+            'Propose leave
+            table_name = "tb_emp_leave"
+            field_id = "id_emp_leave"
+            field_number = "emp_leave_number"
+            field_date = "emp_leave_date"
+        ElseIf report_mark_type = "100" Then
+            'Propose schedule with approval
+            table_name = "tb_emp_assign_sch"
+            field_id = "id_assign_sch"
+            field_number = "assign_sch_number"
+            field_date = "assign_sch_date"
+        ElseIf report_mark_type = "101" Then
+            'Air Ways Bill
+            table_name = "tb_wh_awbill"
+            field_id = "id_awbill"
+            field_number = "id_awbill"
+            field_date = "awbill_date"
+        ElseIf report_mark_type = "102" Then
             'Propose leave
             table_name = "tb_emp_leave"
             field_id = "id_emp_leave"

@@ -28,7 +28,6 @@
     Sub get_schedule(ByVal shift_code As String, ByVal date_var As String, ByVal id_employee_var As String)
         Dim id_shift = ""
         If Not shift_code = "" Then
-            MsgBox(id_employee_var & " - " & date_var & " - " & shift_code)
             If shift_code.ToUpper = "OFF" Then
                 Dim query_shift As String = "CALL add_shift(" & id_employee_var & ",1,'" & date_var & "','" & date_var & "',2)"
                 execute_non_query(query_shift, True, "", "", "", "")

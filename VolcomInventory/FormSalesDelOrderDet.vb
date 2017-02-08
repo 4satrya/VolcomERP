@@ -627,11 +627,11 @@ Public Class FormSalesDelOrderDet
                         execute_non_query(query_counting, True, "", "", "", "")
                     End If
 
-                    exportToBOF(False)
                     FormSalesDelOrder.viewSalesDelOrder()
                     FormSalesDelOrder.GVSalesDelOrder.FocusedRowHandle = find_row(FormSalesDelOrder.GVSalesDelOrder, "id_pl_sales_order_del", id_pl_sales_order_del)
                     action = "upd"
                     actionLoad()
+                    exportToBOF(False)
                     infoCustom("Delivery Order : " + pl_sales_order_del_number + " was created successfully.")
                 ElseIf action = "upd" Then
                     'update main table
@@ -720,11 +720,11 @@ Public Class FormSalesDelOrderDet
                         execute_non_query(query_counting, True, "", "", "", "")
                     End If
 
-                    exportToBOF(False)
                     FormSalesDelOrder.viewSalesDelOrder()
                     FormSalesDelOrder.GVSalesDelOrder.FocusedRowHandle = find_row(FormSalesDelOrder.GVSalesDelOrder, "id_pl_sales_order_del", id_pl_sales_order_del)
                     action = "upd"
                     actionLoad()
+                    exportToBOF(False)
                     infoCustom("Delivery Order : " + pl_sales_order_del_number + " was edited successfully.")
                 End If
                 Cursor = Cursors.Default
@@ -1298,12 +1298,18 @@ Public Class FormSalesDelOrderDet
         If bof_column = "1" Then
             Cursor = Cursors.WaitCursor
 
+            'fill remark
+            For r As Integer = 0 To ((GVItemList.RowCount - 1) - GetGroupRowCount(GVItemList))
+                GVItemList.SetRowCellValue(r, "pl_sales_order_del_det_note", TxtSalesDelOrderNumber.Text)
+            Next
+
             'hide column
             For c As Integer = 0 To GVItemList.Columns.Count - 1
                 GVItemList.Columns(c).Visible = False
             Next
             GridColumnCode.VisibleIndex = 0
             GridColumnQty.VisibleIndex = 1
+            GridColumnRemark.VisibleIndex = 2
             GVItemList.OptionsPrint.PrintFooter = False
             GVItemList.OptionsPrint.PrintHeader = False
 
@@ -1327,6 +1333,12 @@ Public Class FormSalesDelOrderDet
                 stopCustom("Please close your excel file first then try again later")
             End Try
 
+
+            'clear remark
+            For r As Integer = 0 To ((GVItemList.RowCount - 1) - GetGroupRowCount(GVItemList))
+                GVItemList.SetRowCellValue(r, "pl_sales_order_del_det_note", "")
+            Next
+
             'show column
             GridColumnCode.VisibleIndex = 0
             GridColumnName.VisibleIndex = 1
@@ -1337,6 +1349,7 @@ Public Class FormSalesDelOrderDet
             GridColumnAmount.VisibleIndex = 6
             GridColumnRemark.VisibleIndex = 7
             GridColumnStatus.VisibleIndex = 8
+            GridColumnStatus.Visible = False
             GVItemList.OptionsPrint.PrintFooter = True
             GVItemList.OptionsPrint.PrintHeader = True
             Cursor = Cursors.Default
@@ -1375,8 +1388,10 @@ Public Class FormSalesDelOrderDet
                 colIndex = colIndex + 1
                 If j = 0 Then
                     wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, "code").ToString
-                Else
+                ElseIf j = 1 Then
                     wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, "pl_sales_order_del_det_qty")
+                Else
+                    wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, "pl_sales_order_del_det_note")
                 End If
             Next
         Next

@@ -233,6 +233,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.GridColumnUpdatedBy = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnSelTrf = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemCheckEdit5 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.GridColumnTotalTrf = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GroupControl4 = New DevExpress.XtraEditors.GroupControl()
         Me.BtnUpdateTrf = New DevExpress.XtraEditors.SimpleButton()
         Me.SLEStatusTrf = New DevExpress.XtraEditors.SearchLookUpEdit()
@@ -2246,9 +2247,10 @@ Partial Class FormSalesOrderSvcLevel
         '
         'GVFGTrf
         '
-        Me.GVFGTrf.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnFGTrfNumber, Me.GridColumnCompNameFrom, Me.GridColumn41, Me.GridColumnFGTrfDate, Me.GridColumn42, Me.GridColumnPrepOrder, Me.GridColumnIdFgTrf, Me.GridColumn43, Me.GridColumnUpdatedBy, Me.GridColumnSelTrf})
+        Me.GVFGTrf.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnFGTrfNumber, Me.GridColumnCompNameFrom, Me.GridColumn41, Me.GridColumnFGTrfDate, Me.GridColumn42, Me.GridColumnPrepOrder, Me.GridColumnIdFgTrf, Me.GridColumn43, Me.GridColumnUpdatedBy, Me.GridColumnSelTrf, Me.GridColumnTotalTrf})
         Me.GVFGTrf.GridControl = Me.GCFGTrf
         Me.GVFGTrf.Name = "GVFGTrf"
+        Me.GVFGTrf.OptionsView.ShowFooter = True
         Me.GVFGTrf.OptionsView.ShowGroupPanel = False
         '
         'GridColumnFGTrfNumber
@@ -2263,7 +2265,7 @@ Partial Class FormSalesOrderSvcLevel
         'GridColumnCompNameFrom
         '
         Me.GridColumnCompNameFrom.Caption = "From"
-        Me.GridColumnCompNameFrom.FieldName = "comp_name_from"
+        Me.GridColumnCompNameFrom.FieldName = "from"
         Me.GridColumnCompNameFrom.Name = "GridColumnCompNameFrom"
         Me.GridColumnCompNameFrom.OptionsColumn.AllowEdit = False
         Me.GridColumnCompNameFrom.Visible = True
@@ -2272,7 +2274,7 @@ Partial Class FormSalesOrderSvcLevel
         'GridColumn41
         '
         Me.GridColumn41.Caption = "To"
-        Me.GridColumn41.FieldName = "comp_name_to"
+        Me.GridColumn41.FieldName = "to"
         Me.GridColumn41.Name = "GridColumn41"
         Me.GridColumn41.OptionsColumn.AllowEdit = False
         Me.GridColumn41.Visible = True
@@ -2296,7 +2298,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.GridColumn42.Name = "GridColumn42"
         Me.GridColumn42.OptionsColumn.AllowEdit = False
         Me.GridColumn42.Visible = True
-        Me.GridColumn42.VisibleIndex = 7
+        Me.GridColumn42.VisibleIndex = 8
         '
         'GridColumnPrepOrder
         '
@@ -2330,7 +2332,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.GridColumn43.Name = "GridColumn43"
         Me.GridColumn43.OptionsColumn.AllowEdit = False
         Me.GridColumn43.Visible = True
-        Me.GridColumn43.VisibleIndex = 5
+        Me.GridColumn43.VisibleIndex = 6
         '
         'GridColumnUpdatedBy
         '
@@ -2339,7 +2341,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.GridColumnUpdatedBy.Name = "GridColumnUpdatedBy"
         Me.GridColumnUpdatedBy.OptionsColumn.AllowEdit = False
         Me.GridColumnUpdatedBy.Visible = True
-        Me.GridColumnUpdatedBy.VisibleIndex = 6
+        Me.GridColumnUpdatedBy.VisibleIndex = 7
         '
         'GridColumnSelTrf
         '
@@ -2352,7 +2354,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.GridColumnSelTrf.FieldName = "is_select"
         Me.GridColumnSelTrf.Name = "GridColumnSelTrf"
         Me.GridColumnSelTrf.Visible = True
-        Me.GridColumnSelTrf.VisibleIndex = 8
+        Me.GridColumnSelTrf.VisibleIndex = 9
         '
         'RepositoryItemCheckEdit5
         '
@@ -2360,6 +2362,17 @@ Partial Class FormSalesOrderSvcLevel
         Me.RepositoryItemCheckEdit5.Name = "RepositoryItemCheckEdit5"
         Me.RepositoryItemCheckEdit5.ValueChecked = "Yes"
         Me.RepositoryItemCheckEdit5.ValueUnchecked = "No"
+        '
+        'GridColumnTotalTrf
+        '
+        Me.GridColumnTotalTrf.Caption = "Total"
+        Me.GridColumnTotalTrf.DisplayFormat.FormatString = "N0"
+        Me.GridColumnTotalTrf.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnTotalTrf.FieldName = "total_trf"
+        Me.GridColumnTotalTrf.Name = "GridColumnTotalTrf"
+        Me.GridColumnTotalTrf.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_trf", "{0:N0}")})
+        Me.GridColumnTotalTrf.Visible = True
+        Me.GridColumnTotalTrf.VisibleIndex = 5
         '
         'GroupControl4
         '
@@ -2839,4 +2852,5 @@ Partial Class FormSalesOrderSvcLevel
     Friend WithEvents GridColumnIsClosed As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RepositoryItemCheckEdit6 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
     Friend WithEvents GridColumnSORemainign As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnTotalTrf As DevExpress.XtraGrid.Columns.GridColumn
 End Class

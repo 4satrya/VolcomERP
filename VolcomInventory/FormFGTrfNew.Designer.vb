@@ -33,6 +33,7 @@ Partial Class FormFGTrfNew
         Me.GridColumnIdFgTrf = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnLastUpdate = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnUpdatedBy = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnTotalTrf = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ViewMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.SMPrePrint = New System.Windows.Forms.ToolStripMenuItem()
         Me.SMPrint = New System.Windows.Forms.ToolStripMenuItem()
@@ -121,10 +122,11 @@ Partial Class FormFGTrfNew
         '
         'GVFGTrf
         '
-        Me.GVFGTrf.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnFGTrfNumber, Me.GridColumnCompNameFrom, Me.GridColumnCompNameTo, Me.GridColumnFGTrfDate, Me.GridColumnStatus, Me.GridColumnPrepOrder, Me.GridColumnIdFgTrf, Me.GridColumnLastUpdate, Me.GridColumnUpdatedBy})
+        Me.GVFGTrf.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnFGTrfNumber, Me.GridColumnCompNameFrom, Me.GridColumnCompNameTo, Me.GridColumnFGTrfDate, Me.GridColumnStatus, Me.GridColumnPrepOrder, Me.GridColumnIdFgTrf, Me.GridColumnLastUpdate, Me.GridColumnUpdatedBy, Me.GridColumnTotalTrf})
         Me.GVFGTrf.GridControl = Me.GCFGTrf
         Me.GVFGTrf.Name = "GVFGTrf"
         Me.GVFGTrf.OptionsBehavior.ReadOnly = True
+        Me.GVFGTrf.OptionsView.ShowFooter = True
         Me.GVFGTrf.OptionsView.ShowGroupPanel = False
         Me.GVFGTrf.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumnIdFgTrf, DevExpress.Data.ColumnSortOrder.Descending)})
         '
@@ -139,7 +141,7 @@ Partial Class FormFGTrfNew
         'GridColumnCompNameFrom
         '
         Me.GridColumnCompNameFrom.Caption = "From"
-        Me.GridColumnCompNameFrom.FieldName = "comp_name_from"
+        Me.GridColumnCompNameFrom.FieldName = "from"
         Me.GridColumnCompNameFrom.Name = "GridColumnCompNameFrom"
         Me.GridColumnCompNameFrom.Visible = True
         Me.GridColumnCompNameFrom.VisibleIndex = 1
@@ -147,7 +149,7 @@ Partial Class FormFGTrfNew
         'GridColumnCompNameTo
         '
         Me.GridColumnCompNameTo.Caption = "To"
-        Me.GridColumnCompNameTo.FieldName = "comp_name_to"
+        Me.GridColumnCompNameTo.FieldName = "to"
         Me.GridColumnCompNameTo.Name = "GridColumnCompNameTo"
         Me.GridColumnCompNameTo.Visible = True
         Me.GridColumnCompNameTo.VisibleIndex = 2
@@ -168,7 +170,7 @@ Partial Class FormFGTrfNew
         Me.GridColumnStatus.FieldName = "report_status"
         Me.GridColumnStatus.Name = "GridColumnStatus"
         Me.GridColumnStatus.Visible = True
-        Me.GridColumnStatus.VisibleIndex = 7
+        Me.GridColumnStatus.VisibleIndex = 8
         '
         'GridColumnPrepOrder
         '
@@ -199,7 +201,7 @@ Partial Class FormFGTrfNew
         Me.GridColumnLastUpdate.FieldName = "last_update"
         Me.GridColumnLastUpdate.Name = "GridColumnLastUpdate"
         Me.GridColumnLastUpdate.Visible = True
-        Me.GridColumnLastUpdate.VisibleIndex = 5
+        Me.GridColumnLastUpdate.VisibleIndex = 6
         '
         'GridColumnUpdatedBy
         '
@@ -207,7 +209,18 @@ Partial Class FormFGTrfNew
         Me.GridColumnUpdatedBy.FieldName = "last_user"
         Me.GridColumnUpdatedBy.Name = "GridColumnUpdatedBy"
         Me.GridColumnUpdatedBy.Visible = True
-        Me.GridColumnUpdatedBy.VisibleIndex = 6
+        Me.GridColumnUpdatedBy.VisibleIndex = 7
+        '
+        'GridColumnTotalTrf
+        '
+        Me.GridColumnTotalTrf.Caption = "Total"
+        Me.GridColumnTotalTrf.DisplayFormat.FormatString = "N0"
+        Me.GridColumnTotalTrf.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnTotalTrf.FieldName = "total_trf"
+        Me.GridColumnTotalTrf.Name = "GridColumnTotalTrf"
+        Me.GridColumnTotalTrf.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_trf", "{0:N0}")})
+        Me.GridColumnTotalTrf.Visible = True
+        Me.GridColumnTotalTrf.VisibleIndex = 5
         '
         'ViewMenu
         '
@@ -663,4 +676,5 @@ Partial Class FormFGTrfNew
     Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents GCNewPrepare As DevExpress.XtraGrid.GridControl
     Friend WithEvents GVNewPrepare As DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView
+    Friend WithEvents GridColumnTotalTrf As DevExpress.XtraGrid.Columns.GridColumn
 End Class

@@ -479,7 +479,6 @@ Public Class FormSalesOrderDet
         Report.LabelNote.Text = MENote.Text
         Report.LabelType.Text = LETypeSO.Text
 
-
         'Show the report's preview. 
         Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
         Tool.ShowPreview()
@@ -840,12 +839,18 @@ Public Class FormSalesOrderDet
         If bof_column = "1" Then
             Cursor = Cursors.WaitCursor
 
+            'fill remark
+            For r As Integer = 0 To ((GVItemList.RowCount - 1) - GetGroupRowCount(GVItemList))
+                GVItemList.SetRowCellValue(r, "sales_order_det_note", TxtSalesOrderNumber.Text)
+            Next
+
             'hide column
             For c As Integer = 0 To GVItemList.Columns.Count - 1
                 GVItemList.Columns(c).Visible = False
             Next
             GridColumnCode.VisibleIndex = 0
             GridColumnQty.VisibleIndex = 1
+            GridColumnRemark.VisibleIndex = 2
             GVItemList.OptionsPrint.PrintFooter = False
             GVItemList.OptionsPrint.PrintHeader = False
 
@@ -868,6 +873,11 @@ Public Class FormSalesOrderDet
             Catch ex As Exception
                 stopCustom("Please close your excel file first then try again later")
             End Try
+
+            'clear remark
+            For r As Integer = 0 To ((GVItemList.RowCount - 1) - GetGroupRowCount(GVItemList))
+                GVItemList.SetRowCellValue(r, "sales_order_det_note", "")
+            Next
 
             'show column
             GridColumnNo.VisibleIndex = 0
@@ -914,8 +924,10 @@ Public Class FormSalesOrderDet
                 colIndex = colIndex + 1
                 If j = 0 Then
                     wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, "code").ToString
-                Else
+                ElseIf j = 1
                     wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, "sales_order_det_qty")
+                Else
+                    wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, "sales_order_det_note")
                 End If
             Next
         Next

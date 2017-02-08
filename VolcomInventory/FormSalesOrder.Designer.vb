@@ -234,9 +234,11 @@ Partial Class FormSalesOrder
         '
         'GridColumnPrepareStatus
         '
-        Me.GridColumnPrepareStatus.Caption = "Packing Status"
+        Me.GridColumnPrepareStatus.Caption = "Del. Process"
         Me.GridColumnPrepareStatus.FieldName = "prepare_status"
         Me.GridColumnPrepareStatus.Name = "GridColumnPrepareStatus"
+        Me.GridColumnPrepareStatus.Visible = True
+        Me.GridColumnPrepareStatus.VisibleIndex = 7
         '
         'GridColumn9
         '
@@ -245,7 +247,7 @@ Partial Class FormSalesOrder
         Me.GridColumn9.FieldName = "so_completness"
         Me.GridColumn9.Name = "GridColumn9"
         Me.GridColumn9.Visible = True
-        Me.GridColumn9.VisibleIndex = 7
+        Me.GridColumn9.VisibleIndex = 8
         Me.GridColumn9.Width = 85
         '
         'RepositoryItemProgressBar1

@@ -272,4 +272,50 @@
         FormDocumentUpload.ShowDialog()
         Cursor = Cursors.Default
     End Sub
+
+    Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles BtnPrint.Click
+        prePrinting()
+    End Sub
+
+    Sub prePrinting()
+        Cursor = Cursors.WaitCursor
+        ReportFGTrf.id_pre = "1"
+        getReport()
+        Cursor = Cursors.Default
+    End Sub
+
+    Sub getReport()
+        Cursor = Cursors.WaitCursor
+        ReportFGTrf.id_fg_trf = id_fg_trf
+        ReportFGTrf.id_type = id_type
+        ReportFGTrf.dt = GCItemList.DataSource
+        Dim Report As New ReportFGTrf()
+
+        ' '... 
+        ' ' creating and saving the view's layout to a new memory stream 
+        Dim str As System.IO.Stream
+        str = New System.IO.MemoryStream()
+        GVItemList.SaveLayoutToStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+        str.Seek(0, System.IO.SeekOrigin.Begin)
+        Report.GVItemList.RestoreLayoutFromStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+        str.Seek(0, System.IO.SeekOrigin.Begin)
+
+        'Grid Detail
+        ReportStyleGridview(Report.GVItemList)
+
+        'Parse val
+        Report.LabelFrom.Text = TxtCodeCompFrom.Text + " - " + TxtNameCompFrom.Text
+        Report.LabelTo.Text = TxtCodeCompTo.Text + " - " + TxtNameCompTo.Text
+        Report.LRecNumber.Text = TxtNumber.Text
+        Report.LRecDate.Text = DEForm.Text
+        Report.LabelNote.Text = MENote.Text
+        If id_type = "1" Then
+            Report.XrPanel2.Visible = False
+        End If
+
+        ' Show the report's preview. 
+        Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
+        Tool.ShowPreview()
+        Cursor = Cursors.Default
+    End Sub
 End Class

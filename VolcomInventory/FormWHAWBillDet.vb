@@ -4,6 +4,8 @@
 
     Public id_awb_type As String = "-1"
 
+    Public is_view As String = "-1"
+
     Private Sub FormWHAWBillDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         load_awb()
     End Sub
@@ -24,6 +26,7 @@
         TEPriceDiff.EditValue = 0
 
         DECreated.EditValue = Now
+        DEPickUp.EditValue = Now
 
         If Not id_awb = "-1" Then 'edit
             Dim query As String = "SELECT awb.*,IF(awb.awbill_type=1,'Outbound','Inbound') AS oi,comp_s.comp_name,comp_s.comp_number FROM tb_wh_awbill awb"
@@ -48,6 +51,8 @@
             TEWeight.EditValue = data.Rows(0)("weight")
 
             TEBeratTerpakai.EditValue = data.Rows(0)("weight_calc").ToString
+
+            TEMarkDifferent.Text = data.Rows(0)("mark_different").ToString
 
             rate_table()
 
@@ -84,6 +89,8 @@
             End If
 
             MENote.Text = data.Rows(0)("awbill_note").ToString
+
+            BMark.Visible = True
         End If
 
         If id_awb_type = "1" Then
@@ -103,6 +110,10 @@
             TEInvNo.Focus()
         Else
             TECompCode.Focus()
+        End If
+        '
+        If is_view = "1" Then
+            BSave.Visible = False
         End If
     End Sub
     Sub view_do()
@@ -241,6 +252,21 @@
         TEPriceAirport.EditValue = TEVolumeAirport.EditValue * TEChargeRate.EditValue
         TEVolumeDiff.EditValue = TEVolumeVolc.EditValue - TEVolumeAirport.EditValue
         TEPriceDiff.EditValue = TEChargeRate.EditValue * TEVolumeDiff.EditValue
+        '
+        Try
+            If GVCargoRate.RowCount > 0 And Not SLECargo.EditValue.ToString = "" Then
+                If Not GVCargoRate.GetRowCellValue(0, "id_cargo").ToString = SLECargo.EditValue.ToString Then
+                    LMarkDifferent.Visible = True
+                    TEMarkDifferent.Visible = True
+                Else
+                    LMarkDifferent.Visible = False
+                    TEMarkDifferent.Visible = False
+                End If
+            End If
+        Catch ex As Exception
+            LMarkDifferent.Visible = False
+            TEMarkDifferent.Visible = False
+        End Try
     End Sub
     Private Sub SLECargo_EditValueChanged(sender As Object, e As EventArgs) Handles SLECargo.EditValueChanged
         calculate_amount()
@@ -265,6 +291,20 @@
             Dim rec_store_by As String = ""
             Dim is_paid_by_store As String = "2"
             Dim vol_airport As String = "0"
+            Dim mark_diff As String = ""
+
+            Try
+                If GVCargoRate.RowCount > 0 And Not SLECargo.EditValue.ToString = "" Then
+                    If Not GVCargoRate.GetRowCellValue(0, "id_cargo").ToString = SLECargo.EditValue.ToString Then
+                        mark_diff = TEMarkDifferent.Text
+                    Else
+                        mark_diff = ""
+                    End If
+                End If
+            Catch ex As Exception
+
+            End Try
+
 
             If CEPaid.Checked = True Then
                 is_paid_by_store = "1"
@@ -295,8 +335,8 @@
             rec_store_by = TERecByPerson.Text
 
             If id_awb = "-1" Then 'new
-                query = "INSERT INTO tb_wh_awbill(is_paid_by_store,awbill_type,awbill_date,id_store,id_cargo,cargo_rate,cargo_lead_time,cargo_min_weight,weight,`length`,width,height,weight_calc,c_weight,c_tot_price,a_weight,a_tot_price,awbill_inv_no,pick_up_date,rec_by_store_date,rec_by_store_person,awbill_note,id_cargo_best,cargo_rate_best,cargo_lead_time_best,cargo_min_weight_best)"
-                query += " VALUES('" + is_paid_by_store + "','" + id_awb_type + "',NOW(),'" + id_comp + "','" + SLECargo.EditValue.ToString + "','" + decimalSQL(TEChargeRate.EditValue.ToString) + "','" + decimalSQL(TECargoLeadTime.EditValue.ToString) + "','" + decimalSQL(TECargoMinWeight.EditValue.ToString) + "','" + decimalSQL(TEWeight.EditValue.ToString) + "','" + decimalSQL(TELength.EditValue.ToString) + "','" + decimalSQL(TEWidth.EditValue.ToString) + "','" + decimalSQL(TEHeight.EditValue.ToString) + "','" + decimalSQL(TEBeratTerpakai.EditValue.ToString) + "','" + decimalSQL(TEVolumeVolc.EditValue.ToString) + "','" + decimalSQL(TEPriceVolcom.EditValue.ToString) + "','" + decimalSQL(vol_airport.ToString) + "','" + decimalSQL(TEPriceAirport.EditValue.ToString) + "','" + TEInvNo.Text.ToString + "'," + date_pickup + "," + date_store + ",'" + rec_store_by + "','" + MENote.Text + "','" + GVCargoRate.GetRowCellValue(0, "id_cargo").ToString + "','" + decimalSQL(GVCargoRate.GetRowCellValue(0, "cargo_rate").ToString) + "','" + decimalSQL(GVCargoRate.GetRowCellValue(0, "cargo_lead_time").ToString) + "','" + decimalSQL(GVCargoRate.GetRowCellValue(0, "cargo_min_weight").ToString) + "'); SELECT LAST_INSERT_ID(); "
+                query = "INSERT INTO tb_wh_awbill(is_paid_by_store,awbill_type,awbill_date,id_store,id_cargo,cargo_rate,cargo_lead_time,cargo_min_weight,weight,`length`,width,height,weight_calc,c_weight,c_tot_price,a_weight,a_tot_price,awbill_inv_no,pick_up_date,rec_by_store_date,rec_by_store_person,awbill_note,id_cargo_best,cargo_rate_best,cargo_lead_time_best,cargo_min_weight_best,mark_different)"
+                query += " VALUES('" + is_paid_by_store + "','" + id_awb_type + "',NOW(),'" + id_comp + "','" + SLECargo.EditValue.ToString + "','" + decimalSQL(TEChargeRate.EditValue.ToString) + "','" + decimalSQL(TECargoLeadTime.EditValue.ToString) + "','" + decimalSQL(TECargoMinWeight.EditValue.ToString) + "','" + decimalSQL(TEWeight.EditValue.ToString) + "','" + decimalSQL(TELength.EditValue.ToString) + "','" + decimalSQL(TEWidth.EditValue.ToString) + "','" + decimalSQL(TEHeight.EditValue.ToString) + "','" + decimalSQL(TEBeratTerpakai.EditValue.ToString) + "','" + decimalSQL(TEVolumeVolc.EditValue.ToString) + "','" + decimalSQL(TEPriceVolcom.EditValue.ToString) + "','" + decimalSQL(vol_airport.ToString) + "','" + decimalSQL(TEPriceAirport.EditValue.ToString) + "','" + TEInvNo.Text.ToString + "'," + date_pickup + "," + date_store + ",'" + rec_store_by + "','" + MENote.Text + "','" + GVCargoRate.GetRowCellValue(0, "id_cargo").ToString + "','" + decimalSQL(GVCargoRate.GetRowCellValue(0, "cargo_rate").ToString) + "','" + decimalSQL(GVCargoRate.GetRowCellValue(0, "cargo_lead_time").ToString) + "','" + decimalSQL(GVCargoRate.GetRowCellValue(0, "cargo_min_weight").ToString) + "','" & mark_diff & "'); SELECT LAST_INSERT_ID(); "
 
                 id_awb = execute_query(query, 0, True, "", "", "", "")
                 'detail do
@@ -333,7 +373,7 @@
                 End If
                 Close()
             Else 'edit
-                query = "UPDATE tb_wh_awbill SET is_paid_by_store='" + is_paid_by_store + "',id_store='" + id_comp + "',id_cargo='" + SLECargo.EditValue.ToString + "',cargo_rate='" + decimalSQL(TEChargeRate.EditValue.ToString) + "',cargo_lead_time='" + decimalSQL(TECargoLeadTime.EditValue.ToString) + "',cargo_min_weight='" + decimalSQL(TECargoMinWeight.EditValue.ToString) + "',weight='" + decimalSQL(TEWeight.EditValue.ToString) + "',`length`='" + decimalSQL(TELength.EditValue.ToString) + "',width='" + decimalSQL(TEWidth.EditValue.ToString) + "',height='" + decimalSQL(TEHeight.EditValue.ToString) + "',weight_calc='" + decimalSQL(TEBeratTerpakai.EditValue.ToString) + "',c_weight='" + decimalSQL(TEVolumeVolc.EditValue.ToString) + "',c_tot_price='" + decimalSQL(TEPriceVolcom.EditValue.ToString) + "',a_weight='" + decimalSQL(vol_airport.ToString) + "',a_tot_price='" + decimalSQL(TEPriceAirport.EditValue.ToString) + "',awbill_inv_no='" + TEInvNo.Text.ToString + "',pick_up_date=" + date_pickup + ",rec_by_store_date=" + date_store + ",rec_by_store_person='" + rec_store_by + "',awbill_note='" + MENote.Text + "',id_cargo_best='" + decimalSQL(GVCargoRate.GetRowCellValue(0, "id_cargo").ToString) + "',cargo_rate_best='" + decimalSQL(GVCargoRate.GetRowCellValue(0, "cargo_rate").ToString) + "',cargo_lead_time_best='" + decimalSQL(GVCargoRate.GetRowCellValue(0, "cargo_lead_time").ToString) + "',cargo_min_weight_best='" + decimalSQL(GVCargoRate.GetRowCellValue(0, "cargo_min_weight").ToString) + "' WHERE id_awbill='" + id_awb + "'"
+                query = "UPDATE tb_wh_awbill SET is_paid_by_store='" + is_paid_by_store + "',id_store='" + id_comp + "',id_cargo='" + SLECargo.EditValue.ToString + "',cargo_rate='" + decimalSQL(TEChargeRate.EditValue.ToString) + "',cargo_lead_time='" + decimalSQL(TECargoLeadTime.EditValue.ToString) + "',cargo_min_weight='" + decimalSQL(TECargoMinWeight.EditValue.ToString) + "',weight='" + decimalSQL(TEWeight.EditValue.ToString) + "',`length`='" + decimalSQL(TELength.EditValue.ToString) + "',width='" + decimalSQL(TEWidth.EditValue.ToString) + "',height='" + decimalSQL(TEHeight.EditValue.ToString) + "',weight_calc='" + decimalSQL(TEBeratTerpakai.EditValue.ToString) + "',c_weight='" + decimalSQL(TEVolumeVolc.EditValue.ToString) + "',c_tot_price='" + decimalSQL(TEPriceVolcom.EditValue.ToString) + "',a_weight='" + decimalSQL(vol_airport.ToString) + "',a_tot_price='" + decimalSQL(TEPriceAirport.EditValue.ToString) + "',awbill_inv_no='" + TEInvNo.Text.ToString + "',pick_up_date=" + date_pickup + ",rec_by_store_date=" + date_store + ",rec_by_store_person='" + rec_store_by + "',awbill_note='" + MENote.Text + "',id_cargo_best='" + decimalSQL(GVCargoRate.GetRowCellValue(0, "id_cargo").ToString) + "',cargo_rate_best='" + decimalSQL(GVCargoRate.GetRowCellValue(0, "cargo_rate").ToString) + "',cargo_lead_time_best='" + decimalSQL(GVCargoRate.GetRowCellValue(0, "cargo_lead_time").ToString) + "',cargo_min_weight_best='" + decimalSQL(GVCargoRate.GetRowCellValue(0, "cargo_min_weight").ToString) + "',mark_different='" & mark_diff & "' WHERE id_awbill='" + id_awb + "'"
                 execute_non_query(query, True, "", "", "", "")
                 '
                 query = "DELETE FROM tb_wh_awbill_det WHERE id_awbill='" + id_awb + "'"
@@ -464,7 +504,11 @@
         If id_awb_type = "1" Then 'outbound
             If (e.KeyData = Keys.Enter) Then
                 e.SuppressKeyPress = True
-                CEPaid.Focus()
+                If TEMarkDifferent.Visible = True Then
+                    TEMarkDifferent.Focus()
+                Else
+                    CEPaid.Focus()
+                End If
             End If
         Else
             If (e.KeyData = Keys.Enter) Then
@@ -519,6 +563,28 @@
         If (e.KeyData = Keys.Enter) Then
             e.SuppressKeyPress = True
             MENote.Focus()
+        End If
+    End Sub
+
+    Private Sub BMark_Click(sender As Object, e As EventArgs) Handles BMark.Click
+        FormReportMark.id_report = id_awb
+        FormReportMark.report_mark_type = "101"
+        FormReportMark.is_view = is_view
+        FormReportMark.ShowDialog()
+    End Sub
+
+    Private Sub TEMarkDifferent_KeyDown(sender As Object, e As KeyEventArgs) Handles TEMarkDifferent.KeyDown
+        If id_awb_type = "1" Then 'outbound
+            If (e.KeyData = Keys.Enter) Then
+                e.SuppressKeyPress = True
+                CEPaid.Focus()
+            End If
+        Else
+            If (e.KeyData = Keys.Enter) Then
+                e.SuppressKeyPress = True
+                XTCDetail.SelectedTabPageIndex = 1
+                TEInvNo.Focus()
+            End If
         End If
     End Sub
 End Class

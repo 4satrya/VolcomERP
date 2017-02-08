@@ -3,7 +3,6 @@
     Dim bedit_active As String = "1"
     Dim bdel_active As String = "1"
     '
-
     Private Sub FormEmpChSchedule_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
         FormMain.show_rb(Name)
         checkFormAccess(Name)

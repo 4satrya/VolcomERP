@@ -1096,6 +1096,12 @@
     <Compile Include="FormSalesCreditNoteDet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormSalesDelOrderSlip.Designer.vb">
+      <DependentUpon>FormSalesDelOrderSlip.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormSalesDelOrderSlip.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormSalesOrderCat.Designer.vb">
       <DependentUpon>FormSalesOrderCat.vb</DependentUpon>
     </Compile>
@@ -5070,6 +5076,9 @@
     <EmbeddedResource Include="FormSalesCreditNoteDet.resx">
       <DependentUpon>FormSalesCreditNoteDet.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSalesDelOrderSlip.resx">
+      <DependentUpon>FormSalesDelOrderSlip.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormSalesOrderCat.resx">
       <DependentUpon>FormSalesOrderCat.vb</DependentUpon>

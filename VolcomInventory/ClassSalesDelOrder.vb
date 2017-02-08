@@ -50,6 +50,49 @@
         query += "ORDER BY a.id_pl_sales_order_del " + order_type
         Return query
     End Function
+
+    Public Function queryMainHead(ByVal condition As String, ByVal order_type As String) As String
+        If order_type = "1" Then
+            order_type = "ASC "
+        ElseIf order_type = "2" Then
+            order_type = "DESC "
+        End If
+
+        If condition <> "-1" Then
+            condition = condition
+        Else
+            condition = ""
+        End If
+
+        Dim query As String = "SELECT a.id_pl_sales_order_del_slip, a.id_store_contact_to, (d.id_comp) AS `id_store`,(d.comp_name) AS store_name_to, (d.comp_number) AS store_number_to, CONCAT(d.comp_number, ' - ', d.comp_name) AS `store`, (d.address_primary) AS store_address_to, 
+        a.id_report_status, f.report_status, a.pl_sales_order_del_slip_note, a.pl_sales_order_del_slip_date, DATE_FORMAT(a.pl_sales_order_del_slip_date,'%Y-%m-%d') AS pl_sales_order_del_slip_datex, 
+        a.pl_sales_order_del_slip_number, DATE_FORMAT(a.pl_sales_order_del_slip_date,'%d %M %Y') AS pl_sales_order_del_slip_date, 
+        id_comp_contact_from,(wh.id_comp) AS `id_wh`, (wh.comp_number) AS `wh_number`,(wh.comp_name) AS `wh_name`, 
+        CONCAT(wh.comp_number, ' - ', wh.comp_name) AS `wh`, a.id_wh_drawer, drw.wh_drawer_code, drw.wh_drawer, 
+        a.last_update,  getUserEmp(a.last_update_by, 1) AS `last_user`, ('No') AS `is_select`, 
+        IFNULL(det.`total`,0) AS `total`  
+        FROM tb_pl_sales_order_del_slip a  
+        INNER JOIN tb_m_comp_contact c ON c.id_comp_contact = a.id_store_contact_to 
+        INNER JOIN tb_m_comp d ON c.id_comp = d.id_comp 
+        INNER JOIN tb_lookup_report_status f ON f.id_report_status = a.id_report_status 
+        INNER JOIN tb_m_comp_contact wh_cont ON wh_cont.id_comp_contact = a.id_comp_contact_from 
+        INNER JOIN tb_m_comp wh ON wh.id_comp = wh_cont.id_comp 
+        LEFT JOIN tb_m_wh_drawer drw ON drw.id_wh_drawer = a.id_wh_drawer 
+        LEFT JOIN( 
+	        SELECT del.id_pl_sales_order_del_slip, SUM(pdeldet.pl_sales_order_del_det_qty) AS `total` 
+	        FROM tb_pl_sales_order_del_slip del 
+	        INNER JOIN tb_pl_sales_order_del_slip_det det ON del.id_pl_sales_order_del_slip = det.id_pl_sales_order_del_slip
+	        INNER JOIN tb_pl_sales_order_del pdel ON pdel.id_pl_sales_order_del = det.id_pl_sales_order_del
+	        INNER JOIN tb_pl_sales_order_del_det pdeldet ON pdeldet.id_pl_sales_order_del = pdel.id_pl_sales_order_del
+	        GROUP BY del.id_pl_sales_order_del_slip
+        ) det ON det.id_pl_sales_order_del_slip = a.id_pl_sales_order_del_slip 
+        WHERE a.id_pl_sales_order_del_slip>0 "
+        query += condition + " "
+        query += "ORDER BY a.id_pl_sales_order_del_slip " + order_type
+        Return query
+    End Function
+
+
     Public Function queryMainInvoice(ByVal condition As String, ByVal order_type As String) As String
         If order_type = "1" Then
             order_type = "ASC "

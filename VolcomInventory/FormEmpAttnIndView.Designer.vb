@@ -70,6 +70,8 @@ Partial Class FormEmpAttnIndView
         Me.GridColumn21 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn23 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn20 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn25 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn26 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GCSchedule, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVSchedule, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -132,7 +134,7 @@ Partial Class FormEmpAttnIndView
         '
         'GVSchedule
         '
-        Me.GVSchedule.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn4, Me.GridColumn3, Me.GridColumn5, Me.GridColumn6, Me.GridColumn7, Me.GridColumn8, Me.GridColumn9, Me.GridColumn10, Me.GridColumn11, Me.GridColumn12, Me.GridColumn13, Me.GridColumn14, Me.GridColumn15, Me.GridColumn16, Me.GridColumn17, Me.GridColumn18, Me.GridColumn19})
+        Me.GVSchedule.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn4, Me.GridColumn3, Me.GridColumn5, Me.GridColumn6, Me.GridColumn7, Me.GridColumn8, Me.GridColumn9, Me.GridColumn10, Me.GridColumn11, Me.GridColumn12, Me.GridColumn13, Me.GridColumn14, Me.GridColumn15, Me.GridColumn16, Me.GridColumn17, Me.GridColumn18, Me.GridColumn19, Me.GridColumn25, Me.GridColumn26})
         Me.GVSchedule.GridControl = Me.GCSchedule
         Me.GVSchedule.Name = "GVSchedule"
         Me.GVSchedule.OptionsView.ShowFooter = True
@@ -148,6 +150,7 @@ Partial Class FormEmpAttnIndView
         Me.GridColumn1.Name = "GridColumn1"
         Me.GridColumn1.Visible = True
         Me.GridColumn1.VisibleIndex = 0
+        Me.GridColumn1.Width = 66
         '
         'GridColumn2
         '
@@ -196,6 +199,7 @@ Partial Class FormEmpAttnIndView
         Me.GridColumn7.Name = "GridColumn7"
         Me.GridColumn7.Visible = True
         Me.GridColumn7.VisibleIndex = 11
+        Me.GridColumn7.Width = 66
         '
         'GridColumn8
         '
@@ -204,6 +208,7 @@ Partial Class FormEmpAttnIndView
         Me.GridColumn8.Name = "GridColumn8"
         Me.GridColumn8.Visible = True
         Me.GridColumn8.VisibleIndex = 12
+        Me.GridColumn8.Width = 66
         '
         'GridColumn9
         '
@@ -214,6 +219,7 @@ Partial Class FormEmpAttnIndView
         Me.GridColumn9.Name = "GridColumn9"
         Me.GridColumn9.Visible = True
         Me.GridColumn9.VisibleIndex = 13
+        Me.GridColumn9.Width = 66
         '
         'GridColumn10
         '
@@ -224,6 +230,7 @@ Partial Class FormEmpAttnIndView
         Me.GridColumn10.Name = "GridColumn10"
         Me.GridColumn10.Visible = True
         Me.GridColumn10.VisibleIndex = 1
+        Me.GridColumn10.Width = 66
         '
         'GridColumn11
         '
@@ -234,6 +241,7 @@ Partial Class FormEmpAttnIndView
         Me.GridColumn11.Name = "GridColumn11"
         Me.GridColumn11.Visible = True
         Me.GridColumn11.VisibleIndex = 3
+        Me.GridColumn11.Width = 66
         '
         'GridColumn12
         '
@@ -244,6 +252,7 @@ Partial Class FormEmpAttnIndView
         Me.GridColumn12.Name = "GridColumn12"
         Me.GridColumn12.Visible = True
         Me.GridColumn12.VisibleIndex = 5
+        Me.GridColumn12.Width = 66
         '
         'GridColumn13
         '
@@ -254,6 +263,7 @@ Partial Class FormEmpAttnIndView
         Me.GridColumn13.Name = "GridColumn13"
         Me.GridColumn13.Visible = True
         Me.GridColumn13.VisibleIndex = 6
+        Me.GridColumn13.Width = 66
         '
         'GridColumn14
         '
@@ -263,6 +273,7 @@ Partial Class FormEmpAttnIndView
         Me.GridColumn14.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "work_hour", "{0:0.##}")})
         Me.GridColumn14.Visible = True
         Me.GridColumn14.VisibleIndex = 9
+        Me.GridColumn14.Width = 66
         '
         'GridColumn15
         '
@@ -272,6 +283,7 @@ Partial Class FormEmpAttnIndView
         Me.GridColumn15.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "actual_work_hour", "{0:0.##}")})
         Me.GridColumn15.Visible = True
         Me.GridColumn15.VisibleIndex = 10
+        Me.GridColumn15.Width = 66
         '
         'GridColumn16
         '
@@ -281,6 +293,7 @@ Partial Class FormEmpAttnIndView
         Me.GridColumn16.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "late", "{0:0.##}")})
         Me.GridColumn16.Visible = True
         Me.GridColumn16.VisibleIndex = 2
+        Me.GridColumn16.Width = 66
         '
         'GridColumn17
         '
@@ -290,6 +303,7 @@ Partial Class FormEmpAttnIndView
         Me.GridColumn17.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "over", "{0:0.##}")})
         Me.GridColumn17.Visible = True
         Me.GridColumn17.VisibleIndex = 4
+        Me.GridColumn17.Width = 66
         '
         'GridColumn18
         '
@@ -299,6 +313,7 @@ Partial Class FormEmpAttnIndView
         Me.GridColumn18.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "balance", "{0:0.##}")})
         Me.GridColumn18.Visible = True
         Me.GridColumn18.VisibleIndex = 8
+        Me.GridColumn18.Width = 66
         '
         'GridColumn19
         '
@@ -308,6 +323,7 @@ Partial Class FormEmpAttnIndView
         Me.GridColumn19.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "over_break", "{0:0.##}")})
         Me.GridColumn19.Visible = True
         Me.GridColumn19.VisibleIndex = 7
+        Me.GridColumn19.Width = 66
         '
         'PanelControl3
         '
@@ -569,6 +585,24 @@ Partial Class FormEmpAttnIndView
         Me.GridColumn20.VisibleIndex = 2
         Me.GridColumn20.Width = 112
         '
+        'GridColumn25
+        '
+        Me.GridColumn25.Caption = "Type Leave"
+        Me.GridColumn25.FieldName = "leave_type"
+        Me.GridColumn25.Name = "GridColumn25"
+        Me.GridColumn25.Visible = True
+        Me.GridColumn25.VisibleIndex = 14
+        Me.GridColumn25.Width = 69
+        '
+        'GridColumn26
+        '
+        Me.GridColumn26.Caption = "Leave Purpose"
+        Me.GridColumn26.FieldName = "info_leave"
+        Me.GridColumn26.Name = "GridColumn26"
+        Me.GridColumn26.Visible = True
+        Me.GridColumn26.VisibleIndex = 15
+        Me.GridColumn26.Width = 69
+        '
         'FormEmpAttnIndView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -662,4 +696,6 @@ Partial Class FormEmpAttnIndView
     Friend WithEvents GridColumn21 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn23 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn20 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn25 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn26 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

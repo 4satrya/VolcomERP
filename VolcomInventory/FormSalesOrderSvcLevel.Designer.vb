@@ -605,7 +605,7 @@ Partial Class FormSalesOrderSvcLevel
         'GridColumnReff
         '
         Me.GridColumnReff.Caption = "Reff"
-        Me.GridColumnReff.FieldName = "fg_so_reff_number"
+        Me.GridColumnReff.FieldName = "sales_order_gen_reff"
         Me.GridColumnReff.Name = "GridColumnReff"
         Me.GridColumnReff.OptionsColumn.ReadOnly = True
         Me.GridColumnReff.Visible = True

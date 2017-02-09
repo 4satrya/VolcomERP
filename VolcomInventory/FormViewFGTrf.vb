@@ -15,6 +15,7 @@
     Dim id_comp_cat_wh As String = "-1"
     Public id_type As String = "-1"
     Dim is_new_rec As Boolean = False
+    Dim is_only_for_alloc As String = "-1"
 
     Private Sub FormFGTrfDet_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         viewReportStatus()
@@ -39,7 +40,7 @@
         query += "trf.id_fg_trf, trf.fg_trf_number, DATE_FORMAT(trf.fg_trf_date_rec, '%Y-%m-%d') AS fg_trf_date_recx, DATE_FORMAT(trf.fg_trf_date, '%Y-%m-%d') AS fg_trf_datex, trf.fg_trf_note, trf.id_report_status, trf.id_report_status_rec, rep_status.report_status, "
         query += "IF(ISNULL(trf.fg_trf_date_rec), DATE_FORMAT(NOW(), '%Y-%m-%d'),  DATE_FORMAT(trf.fg_trf_date_rec, '%Y-%m-%d')) AS fg_trf_date_recx, "
         query += "(comp_from.id_comp) AS id_comp_from, (comp_from.comp_number) AS comp_number_from, (comp_from.comp_name) AS comp_name_from, "
-        query += "(comp_to.id_comp) AS id_comp_to, (comp_to.comp_number) AS comp_number_to, (comp_to.comp_name) AS comp_name_to, "
+        query += "(comp_to.id_comp) AS id_comp_to, (comp_to.comp_number) AS comp_number_to, (comp_to.comp_name) AS comp_name_to, comp_to.is_only_for_alloc, "
         query += "trf.id_comp_contact_from, trf.id_comp_contact_to "
         query += "FROM tb_fg_trf trf "
         query += "INNER JOIN tb_m_comp_contact comp_con_from ON trf.id_comp_contact_from = comp_con_from.id_comp_contact "
@@ -65,6 +66,7 @@
         TxtNumber.Text = data.Rows(0)("fg_trf_number").ToString
         DEForm.Text = view_date_from(data.Rows(0)("fg_trf_datex").ToString, 0)
         MENote.Text = data.Rows(0)("fg_trf_note").ToString
+        is_only_for_alloc = data.Rows(0)("is_only_for_alloc").ToString
 
         'Receive TRF
         If id_type = "1" Then
@@ -122,6 +124,13 @@
                 GVItemList.OptionsBehavior.Editable = False
             End If
 
+        End If
+
+        'mark button
+        If is_only_for_alloc = "1" Then
+            BMark.Enabled = False
+        Else
+            BMark.Enabled = True
         End If
         TxtNumber.Focus()
     End Sub

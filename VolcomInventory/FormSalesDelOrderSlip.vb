@@ -33,7 +33,10 @@
                 TxtNameCompTo.Text = FormSalesDelOrderDet.TxtNameCompTo.Text
                 TxtCodeCompTo.Text = FormSalesDelOrderDet.TxtCodeCompTo.Text
                 MEAdrressCompTo.Text = FormSalesDelOrderDet.MEAdrressCompTo.Text
+                TxtCodeCompFrom.Properties.ReadOnly = True
+                TxtCodeCompTo.Properties.ReadOnly = True
                 viewSalesDelOrder()
+                GCSalesDelOrder.Focus()
             End If
         ElseIf Action = "upd" Then
             GroupControlListItem.Enabled = True
@@ -66,7 +69,7 @@
             'id_wh_drawer = data.Rows(0)("id_wh_drawer").ToString
 
             'detail2
-            viewDetail()
+            'viewDetail()
             allow_status()
 
             If id_pre = "1" Then
@@ -82,7 +85,7 @@
 
     Sub viewSalesDelOrder()
         Dim query_c As ClassSalesDelOrder = New ClassSalesDelOrder()
-        Dim query As String = query_c.queryMain("AND a.id_store_contact_to='" + id_store_contact_to + "' AND a.id_comp_contact_from='" + id_comp_contact_from + "' ", "1")
+        Dim query As String = query_c.queryMain("AND a.id_store_contact_to='" + id_store_contact_to + "' AND a.id_comp_contact_from='" + id_comp_contact_from + "' AND a.id_report_status=1 AND a.last_update_by=" + id_user + " ", "1")
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCSalesDelOrder.DataSource = data
     End Sub
@@ -93,35 +96,10 @@
         viewLookupQuery(LEReportStatus, query, 0, "report_status", "id_report_status")
     End Sub
 
-    Sub viewDetail()
-        'If action = "ins" Then
-        '    'action
-        '    Dim query As String = "CALL view_sales_order_limit('" + id_sales_order + "', '0', '0')"
-        '    Dim data As DataTable = execute_query(query, "-1", True, "", "", "", "")
-        '    Dim id_product_param As String = ""
-        '    For i As Integer = 0 To (data.Rows.Count - 1)
-        '        id_product_param += data.Rows(i)("id_product").ToString
-        '        If i < (data.Rows.Count - 1) Then
-        '            id_product_param += ";"
-        '        End If
-        '    Next
-        '    GCItemList.DataSource = data
-        '    codeAvailableIns(id_product_param)
-        'ElseIf action = "upd" Then
-        '    id_pl_sales_order_del_det_list.Clear()
-        '    Dim query As String = "CALL view_pl_sales_order_del('" + id_pl_sales_order_del + "')"
-        '    Dim data As DataTable = execute_query(query, "-1", True, "", "", "", "")
-        '    Dim id_product_param As String = ""
-        '    For i As Integer = 0 To (data.Rows.Count - 1)
-        '        id_pl_sales_order_del_det_list.Add(data.Rows(i)("id_pl_sales_order_del_det").ToString)
-        '        id_product_param += data.Rows(i)("id_product").ToString
-        '        If i < (data.Rows.Count - 1) Then
-        '            id_product_param += ";"
-        '        End If
-        '    Next
-        '    GCItemList.DataSource = data
-        '    codeAvailableIns(id_product_param)
-        'End If
+    Sub viewDetail(ByVal pre_delivery As String)
+        Dim query As String = "CALL view_pl_sales_order_del_slip('" + pre_delivery + "') "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCItemList.DataSource = data
     End Sub
 
     Sub allow_status()
@@ -238,5 +216,35 @@
         ReportSalesDelOrderDet.id_pre = "-1"
         getReport()
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub CheckSelAll_CheckedChanged(sender As Object, e As EventArgs) Handles CheckSelAll.CheckedChanged
+        If GVSalesDelOrder.RowCount > 0 Then
+            Dim cek As String = CheckSelAll.EditValue.ToString
+            For i As Integer = 0 To ((GVSalesDelOrder.RowCount - 1) - GetGroupRowCount(GVSalesDelOrder))
+                If cek Then
+                    GVSalesDelOrder.SetRowCellValue(i, "is_select", "Yes")
+                Else
+                    GVSalesDelOrder.SetRowCellValue(i, "is_select", "No")
+                End If
+            Next
+        End If
+    End Sub
+
+    Private Sub BtnLoad_Click(sender As Object, e As EventArgs) Handles BtnLoad.Click
+        GCItemList.DataSource = Nothing
+        GVSalesDelOrder.ActiveFilterString = "[is_select]='Yes' "
+        If GVSalesDelOrder.RowCount > 0 Then
+            Dim predel As String = ""
+            For i As Integer = 0 To ((GVSalesDelOrder.RowCount - 1) - GetGroupRowCount(GVSalesDelOrder))
+                If i > 0 Then
+                    predel += "OR "
+                End If
+                predel += "k.id_pl_sales_order_del=" + GVSalesDelOrder.GetRowCellValue(i, "id_pl_sales_order_del").ToString + " "
+            Next
+            viewDetail(predel)
+            XTCDel.SelectedTabPageIndex = 1
+        End If
+        GVSalesDelOrder.ActiveFilterString = ""
     End Sub
 End Class

@@ -348,24 +348,14 @@ Public Class FormSalesDelOrderDet
     End Sub
 
     Sub allow_status()
-        If check_edit_report_status(id_report_status, "43", id_pl_sales_order_del) Then
-            PanelNavBarcode.Enabled = True
-            MENote.Properties.ReadOnly = False
-            BtnSave.Enabled = True
-            BtnVerify.Enabled = True
-            GVItemList.OptionsCustomization.AllowQuickHideColumns = False
-            GVItemList.OptionsCustomization.AllowGroup = False
-            GridColumnQtyLimit.Visible = True
-        Else
-            PanelNavBarcode.Enabled = False
-            MENote.Properties.ReadOnly = True
-            BtnSave.Enabled = False
-            BtnVerify.Enabled = False
-            GVItemList.OptionsCustomization.AllowQuickHideColumns = True
-            GVItemList.Columns("sales_order_det_qty_limit").Visible = False
-            GVItemList.OptionsCustomization.AllowGroup = True
-            GridColumnQtyLimit.Visible = False
-        End If
+        PanelNavBarcode.Enabled = False
+        MENote.Properties.ReadOnly = True
+        BtnSave.Enabled = False
+        BtnVerify.Enabled = False
+        GVItemList.OptionsCustomization.AllowQuickHideColumns = True
+        GVItemList.Columns("sales_order_det_qty_limit").Visible = False
+        GVItemList.OptionsCustomization.AllowGroup = True
+        GridColumnQtyLimit.Visible = False
 
         'attachment
         If check_attach_report_status(id_report_status, "43", id_pl_sales_order_del) Then
@@ -564,7 +554,7 @@ Public Class FormSalesDelOrderDet
                     increase_inc_sales("3")
 
                     'insert who prepared
-                    insert_who_prepared("43", id_pl_sales_order_del, id_user)
+                    submit_who_prepared("43", id_pl_sales_order_del, id_user)
 
                     'Detail return
                     Dim jum_ins_j As Integer = 0

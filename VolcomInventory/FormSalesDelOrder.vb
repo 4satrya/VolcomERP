@@ -360,4 +360,8 @@
         viewSalesDelSlip()
         Cursor = Cursors.Default
     End Sub
+
+    Private Sub XTCDel_SelectedPageChanged(sender As Object, e As DevExpress.XtraTab.TabPageChangedEventArgs) Handles XTCDel.SelectedPageChanged
+        check_menu()
+    End Sub
 End Class

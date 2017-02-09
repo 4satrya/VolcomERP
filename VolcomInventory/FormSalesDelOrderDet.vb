@@ -383,6 +383,13 @@ Public Class FormSalesDelOrderDet
         Else
             BtnXlsBOF.Visible = False
         End If
+
+        'create del slip
+        If id_report_status = "1" Then
+            BMark.Visible = True
+        Else
+            BMark.Visible = False
+        End If
         TxtSalesDelOrderNumber.Focus()
     End Sub
 

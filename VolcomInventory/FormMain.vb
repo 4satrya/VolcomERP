@@ -1171,8 +1171,13 @@ Public Class FormMain
         ElseIf formName = "FormSalesDelOrder" Then
             'SALES DELIVERY ORDER
             If FormSalesDelOrder.XTCDO.SelectedTabPageIndex = 0 Then
-                FormSalesDelOrderDet.action = "ins"
-                FormSalesDelOrderDet.ShowDialog()
+                If FormSalesDelOrder.XTCDel.SelectedTabPageIndex = 0 Then
+                    FormSalesDelOrderDet.action = "ins"
+                    FormSalesDelOrderDet.ShowDialog()
+                Else
+                    FormSalesDelOrderSlip.action = "ins"
+                    FormSalesDelOrderSlip.ShowDialog()
+                End If
             ElseIf FormSalesDelOrder.XTCDO.SelectedTabPageIndex = 1 Then
                 FormSalesDelOrderDet.id_sales_order = FormSalesDelOrder.GVSalesOrder.GetFocusedRowCellValue("id_sales_order").ToString
                 FormSalesDelOrderDet.action = "ins"
@@ -2020,9 +2025,15 @@ Public Class FormMain
                 End If
             ElseIf formName = "FormSalesDelOrder" Then
                 'SALES DELIVERY ORDER
-                FormSalesDelOrderDet.action = "upd"
-                FormSalesDelOrderDet.id_pl_sales_order_del = FormSalesDelOrder.GVSalesDelOrder.GetFocusedRowCellValue("id_pl_sales_order_del").ToString
-                FormSalesDelOrderDet.ShowDialog()
+                If FormSalesDelOrder.XTCDel.SelectedTabPageIndex = 0 Then
+                    FormSalesDelOrderDet.action = "upd"
+                    FormSalesDelOrderDet.id_pl_sales_order_del = FormSalesDelOrder.GVSalesDelOrder.GetFocusedRowCellValue("id_pl_sales_order_del").ToString
+                    FormSalesDelOrderDet.ShowDialog()
+                Else
+                    FormSalesDelOrderSlip.action = "upd"
+                    FormSalesDelOrderSlip.id_pl_sales_order_del_slip = FormSalesDelOrder.GVDel.GetFocusedRowCellValue("id_pl_sales_order_del_slip").ToString
+                    FormSalesDelOrderSlip.ShowDialog()
+                End If
             ElseIf formName = "FormSalesReturnOrder" Then
                 'SALES RETURN ORDER
                 FormSalesReturnOrderDet.action = "upd"

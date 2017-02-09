@@ -4,6 +4,7 @@
     Public id_pl_sales_order_del_slip As String = "-1"
     Public id_store_contact_to As String = "-1"
     Public id_comp_contact_from As String = "-1"
+    Public id_wh_drawer As String = "-1"
     Public id_report_status As String
     Public id_pl_sales_order_del_slip_det_list As New List(Of String)
     Public id_pre As String = "-1"
@@ -28,6 +29,7 @@
             If direct_menu Then
                 id_store_contact_to = FormSalesDelOrderDet.id_store_contact_to
                 id_comp_contact_from = FormSalesDelOrderDet.id_comp_contact_from
+                id_wh_drawer = FormSalesDelOrderDet.id_wh_drawer
                 TxtNameCompFrom.Text = FormSalesDelOrderDet.TxtNameCompFrom.Text
                 TxtCodeCompFrom.Text = FormSalesDelOrderDet.TxtCodeCompFrom.Text
                 TxtNameCompTo.Text = FormSalesDelOrderDet.TxtNameCompTo.Text
@@ -37,6 +39,8 @@
                 TxtCodeCompTo.Properties.ReadOnly = True
                 viewSalesDelOrder()
                 GCSalesDelOrder.Focus()
+            Else
+                TxtCodeCompFrom.Focus()
             End If
         ElseIf Action = "upd" Then
             GroupControlListItem.Enabled = True
@@ -246,5 +250,145 @@
             XTCDel.SelectedTabPageIndex = 1
         End If
         GVSalesDelOrder.ActiveFilterString = ""
+    End Sub
+
+    Private Sub TxtCodeCompFrom_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtCodeCompFrom.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            Dim query_cond As String = "AND (comp.id_comp_cat=5 AND comp.id_departement=6 AND comp.is_active=1) "
+            Dim data As DataTable = get_company_by_code(TxtCodeCompFrom.Text, query_cond)
+            If data.Rows.Count = 0 Then
+                stopCustom("Account not found!")
+                id_comp_contact_from = = "-1"
+                id_wh_drawer = "-1"
+                TxtCodeCompFrom.Text = ""
+                TxtNameCompFrom.Text = ""
+                TxtCodeCompFrom.Focus()
+            Else
+                Cursor = Cursors.WaitCursor
+                id_comp_contact_from = data.Rows(0)("id_comp_contact").ToString
+                id_wh_drawer = data.Rows(0)("id_wh_drawer").ToString
+                TxtCodeCompFrom.Text = data.Rows(0)("comp_number").ToString
+                TxtNameCompFrom.Text = data.Rows(0)("comp_name").ToString
+                TxtCodeCompTo.Focus()
+                Cursor = Cursors.Default
+            End If
+        Else
+            If Not direct_menu Then
+                GCSalesDelOrder.DataSource = Nothing
+                GCItemList.DataSource = Nothing
+            End If
+        End If
+    End Sub
+
+    Private Sub TxtCodeCompTo_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtCodeCompTo.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            Dim query_cond As String = "AND (comp.id_comp_cat=6 AND comp.is_active=1) "
+            Dim data As DataTable = get_company_by_code(TxtCodeCompTo.Text, query_cond)
+            If data.Rows.Count = 0 Then
+                stopCustom("Account not found!")
+                id_store_contact_to = "-1"
+                TxtCodeCompTo.Text = ""
+                TxtNameCompTo.Text = ""
+                MEAdrressCompTo.Text = ""
+                TxtCodeCompTo.Focus()
+            Else
+                Cursor = Cursors.WaitCursor
+                id_store_contact_to = data.Rows(0)("id_comp_contact").ToString
+                TxtCodeCompTo.Text = data.Rows(0)("comp_number").ToString
+                TxtNameCompTo.Text = data.Rows(0)("comp_name").ToString
+                MEAdrressCompTo.Text = data.Rows(0)("address_primary").ToString
+                viewSalesDelOrder()
+                GCSalesDelOrder.Focus()
+                Cursor = Cursors.Default
+            End If
+        Else
+            If Not direct_menu Then
+                GCSalesDelOrder.DataSource = Nothing
+                GCItemList.DataSource = Nothing
+            End If
+        End If
+    End Sub
+
+    Private Sub FormSalesDelOrderSlip_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        Dispose()
+    End Sub
+
+    Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles BtnCancel.Click
+        Close()
+    End Sub
+
+    Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles BtnSave.Click
+        makeSafeGV(GVSalesDelOrder)
+        makeSafeGV(GVItemList)
+        'makeSafeGV(GVBarcode)
+
+        If id_comp_contact_from = "-1" Or id_store_contact_to = "-1" Then
+            stopCustom("Warehouse or store can't blank")
+        ElseIf GVItemList.RowCount = 0 Then
+            errorCustom("Detail data can't blank")
+        Else
+            Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure you want to continue this process?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+            If confirm = Windows.Forms.DialogResult.Yes Then
+                Cursor = Cursors.WaitCursor
+                Dim pl_sales_order_del_slip_note As String = MENote.Text.ToString
+                If action = "ins" Then
+                    'query main table
+                    Dim pl_sales_order_del_slip_number As String = header_number_sales("31")
+                    Dim query_main As String = "INSERT tb_pl_sales_order_del_slip(pl_sales_order_del_slip_number, id_comp_contact_from, id_store_contact_to, pl_sales_order_del_slip_date, pl_sales_order_del_slip_note, id_report_status, last_update, last_update_by, id_wh_drawer) "
+                    query_main += "VALUES('" + pl_sales_order_del_slip_number + "', '" + id_comp_contact_from + "', '" + id_store_contact_to + "', NOW(), '" + pl_sales_order_del_slip_note + "', '1', NOW(), " + id_user + ", '" + id_wh_drawer + "'); SELECT LAST_INSERT_ID(); "
+                    id_pl_sales_order_del_slip = execute_query(query_main, 0, True, "", "", "", "")
+                    increase_inc_sales("31")
+
+                    'insert who prepared
+                    submit_who_prepared("103", id_pl_sales_order_del_slip, id_user)
+
+                    'Detail return
+                    Dim jum_ins_j As Integer = 0
+                    Dim query_detail As String = ""
+                    If GVSalesDelOrder.RowCount > 0 Then
+                        query_detail = "INSERT tb_pl_sales_order_del_slip_det(id_pl_sales_order_del_slip, id_pl_sales_order_del) VALUES "
+                    End If
+                    For j As Integer = 0 To ((GVSalesDelOrder.RowCount - 1) - GetGroupRowCount(GVSalesDelOrder))
+                        Try
+                            Dim id_pl_sales_order_del As String = GVSalesDelOrder.GetRowCellValue(j, "id_pl_sales_order_del").ToString
+
+                            If jum_ins_j > 0 Then
+                                query_detail += ", "
+                            End If
+                            query_detail += "('" + id_pl_sales_order_del + "') "
+                            jum_ins_j = jum_ins_j + 1
+                        Catch ex As Exception
+                        End Try
+                    Next
+                    If GVSalesDelOrder.RowCount > 0 Then
+                        execute_non_query(query_detail, True, "", "", "", "")
+                    End If
+
+                    FormSalesDelOrder.viewSalesDelSlip()
+                    FormSalesDelOrder.GVDel.FocusedRowHandle = find_row(FormSalesDelOrder.GVDel, "id_pl_sales_order_del_slip", id_pl_sales_order_del_slip)
+                    action = "upd"
+                    actionLoad()
+                    exportToBOF(False)
+                    infoCustom("Delivery Slip : " + pl_sales_order_del_slip_number + " was created successfully.")
+                ElseIf action = "upd" Then
+                    'update main table
+                    Dim pl_sales_order_del_slip_number As String = TxtSalesDelOrderNumber.Text
+                    Dim query_main As String = "UPDATE tb_pl_sales_order_del_slip SET pl_sales_order_del_slip_note = '" + pl_sales_order_del_slip_note + "', last_update=NOW(), last_update_by=" + id_user + " WHERE id_pl_sales_order_del_slip = '" + id_pl_sales_order_del_slip + "'"
+                    execute_non_query(query_main, True, "", "", "", "")
+
+                    FormSalesDelOrder.viewSalesDelSlip()
+                    FormSalesDelOrder.GVDel.FocusedRowHandle = find_row(FormSalesDelOrder.GVDel, "id_pl_sales_order_del_slip", id_pl_sales_order_del_slip)
+                    action = "upd"
+                    actionLoad()
+                    exportToBOF(False)
+                    infoCustom("Delivery Slip : " + pl_sales_order_del_slip_number + " was edited successfully.")
+                End If
+                Cursor = Cursors.Default
+            End If
+        End If
+    End Sub
+
+    Sub exportToBOF(a As Boolean)
+
     End Sub
 End Class

@@ -480,7 +480,7 @@ Partial Class FormSalesDelOrder
         Me.GridColumn11.FieldName = "pl_sales_order_del_slip_date"
         Me.GridColumn11.Name = "GridColumn11"
         Me.GridColumn11.Visible = True
-        Me.GridColumn11.VisibleIndex = 5
+        Me.GridColumn11.VisibleIndex = 4
         '
         'GridColumn12
         '
@@ -494,7 +494,7 @@ Partial Class FormSalesDelOrder
         Me.GridColumn13.FieldName = "report_status"
         Me.GridColumn13.Name = "GridColumn13"
         Me.GridColumn13.Visible = True
-        Me.GridColumn13.VisibleIndex = 9
+        Me.GridColumn13.VisibleIndex = 8
         '
         'GridColumn15
         '
@@ -519,7 +519,7 @@ Partial Class FormSalesDelOrder
         Me.GridColumn17.FieldNameSortGroup = "id_so_status"
         Me.GridColumn17.Name = "GridColumn17"
         Me.GridColumn17.Visible = True
-        Me.GridColumn17.VisibleIndex = 4
+        Me.GridColumn17.VisibleIndex = 3
         '
         'GridColumn18
         '
@@ -529,7 +529,7 @@ Partial Class FormSalesDelOrder
         Me.GridColumn18.FieldName = "last_update"
         Me.GridColumn18.Name = "GridColumn18"
         Me.GridColumn18.Visible = True
-        Me.GridColumn18.VisibleIndex = 7
+        Me.GridColumn18.VisibleIndex = 6
         '
         'GridColumn19
         '
@@ -537,7 +537,7 @@ Partial Class FormSalesDelOrder
         Me.GridColumn19.FieldName = "last_user"
         Me.GridColumn19.Name = "GridColumn19"
         Me.GridColumn19.Visible = True
-        Me.GridColumn19.VisibleIndex = 8
+        Me.GridColumn19.VisibleIndex = 7
         '
         'GridColumn20
         '

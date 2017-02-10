@@ -1,5 +1,6 @@
 ﻿Public Class FormSalesOrderSvcLevel
     Sub viewSalesOrder()
+        CheckSelAll.Checked = False
 
         'Prepare paramater
         Dim date_from_selected As String = "0000-01-01"
@@ -660,5 +661,19 @@
         End If
         GVSalesOrder.ActiveFilterString = ""
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub CheckSelAll_CheckedChanged(sender As Object, e As EventArgs) Handles CheckSelAll.CheckedChanged
+        If GVSalesOrder.RowCount > 0 Then
+            Dim cek As String = CheckSelAll.EditValue.ToString
+            For i As Integer = 0 To ((GVSalesOrder.RowCount - 1) - GetGroupRowCount(GVSalesOrder))
+                Dim id_prepare_status As String = GVSalesOrder.GetRowCellValue(i, "id_prepare_status").ToString
+                If cek And id_prepare_status = "1" Then
+                    GVSalesOrder.SetRowCellValue(i, "is_select", "Yes")
+                Else
+                    GVSalesOrder.SetRowCellValue(i, "is_select", "No")
+                End If
+            Next
+        End If
     End Sub
 End Class

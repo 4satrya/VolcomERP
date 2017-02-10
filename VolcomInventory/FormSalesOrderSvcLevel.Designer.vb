@@ -248,6 +248,8 @@ Partial Class FormSalesOrderSvcLevel
         Me.DEFromTrf = New DevExpress.XtraEditors.DateEdit()
         Me.LabelControl20 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl21 = New DevExpress.XtraEditors.LabelControl()
+        Me.PanelSelect = New DevExpress.XtraEditors.PanelControl()
+        Me.CheckSelAll = New DevExpress.XtraEditors.CheckEdit()
         CType(Me.GCFilter, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GCFilter.SuspendLayout()
         CType(Me.SLEPackingStatus.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -340,11 +342,15 @@ Partial Class FormSalesOrderSvcLevel
         CType(Me.DEUntilTrf.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEFromTrf.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEFromTrf.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelSelect, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelSelect.SuspendLayout()
+        CType(Me.CheckSelAll.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GCFilter
         '
         Me.GCFilter.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GCFilter.Controls.Add(Me.PanelSelect)
         Me.GCFilter.Controls.Add(Me.SimpleButton1)
         Me.GCFilter.Controls.Add(Me.SLEPackingStatus)
         Me.GCFilter.Controls.Add(Me.BtnView)
@@ -358,7 +364,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.GCFilter.Dock = System.Windows.Forms.DockStyle.Top
         Me.GCFilter.Location = New System.Drawing.Point(0, 0)
         Me.GCFilter.Name = "GCFilter"
-        Me.GCFilter.Size = New System.Drawing.Size(754, 39)
+        Me.GCFilter.Size = New System.Drawing.Size(783, 39)
         Me.GCFilter.TabIndex = 2
         '
         'SimpleButton1
@@ -487,7 +493,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.GCSalesOrder.MainView = Me.GVSalesOrder
         Me.GCSalesOrder.Name = "GCSalesOrder"
         Me.GCSalesOrder.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemProgressBar1, Me.RepositoryItemCheckEdit6})
-        Me.GCSalesOrder.Size = New System.Drawing.Size(754, 349)
+        Me.GCSalesOrder.Size = New System.Drawing.Size(783, 349)
         Me.GCSalesOrder.TabIndex = 3
         Me.GCSalesOrder.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVSalesOrder, Me.GridView2})
         '
@@ -680,7 +686,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.XTCSvcLevel.Location = New System.Drawing.Point(0, 0)
         Me.XTCSvcLevel.Name = "XTCSvcLevel"
         Me.XTCSvcLevel.SelectedTabPage = Me.XTPPrepareOrder
-        Me.XTCSvcLevel.Size = New System.Drawing.Size(760, 416)
+        Me.XTCSvcLevel.Size = New System.Drawing.Size(789, 416)
         Me.XTCSvcLevel.TabIndex = 4
         Me.XTCSvcLevel.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPPrepareOrder, Me.XTPReturnOrder, Me.XTPRec, Me.XTPDelOrder, Me.XTPReturn, Me.XTPReturnQC, Me.XTPTrf})
         '
@@ -689,7 +695,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.XTPPrepareOrder.Controls.Add(Me.GCSalesOrder)
         Me.XTPPrepareOrder.Controls.Add(Me.GCFilter)
         Me.XTPPrepareOrder.Name = "XTPPrepareOrder"
-        Me.XTPPrepareOrder.Size = New System.Drawing.Size(754, 388)
+        Me.XTPPrepareOrder.Size = New System.Drawing.Size(783, 388)
         Me.XTPPrepareOrder.Text = "Prepare Order"
         '
         'XTPReturnOrder
@@ -2512,11 +2518,33 @@ Partial Class FormSalesOrderSvcLevel
         Me.LabelControl21.TabIndex = 8892
         Me.LabelControl21.Text = "From"
         '
+        'PanelSelect
+        '
+        Me.PanelSelect.Appearance.BackColor = System.Drawing.Color.Transparent
+        Me.PanelSelect.Appearance.Options.UseBackColor = True
+        Me.PanelSelect.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelSelect.Controls.Add(Me.CheckSelAll)
+        Me.PanelSelect.Dock = System.Windows.Forms.DockStyle.Right
+        Me.PanelSelect.Location = New System.Drawing.Point(695, 2)
+        Me.PanelSelect.Name = "PanelSelect"
+        Me.PanelSelect.Size = New System.Drawing.Size(86, 35)
+        Me.PanelSelect.TabIndex = 8901
+        '
+        'CheckSelAll
+        '
+        Me.CheckSelAll.Location = New System.Drawing.Point(11, 6)
+        Me.CheckSelAll.Name = "CheckSelAll"
+        Me.CheckSelAll.Properties.Appearance.ForeColor = System.Drawing.Color.Black
+        Me.CheckSelAll.Properties.Appearance.Options.UseForeColor = True
+        Me.CheckSelAll.Properties.Caption = "Select All"
+        Me.CheckSelAll.Size = New System.Drawing.Size(72, 19)
+        Me.CheckSelAll.TabIndex = 0
+        '
         'FormSalesOrderSvcLevel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(760, 416)
+        Me.ClientSize = New System.Drawing.Size(789, 416)
         Me.Controls.Add(Me.XTCSvcLevel)
         Me.Name = "FormSalesOrderSvcLevel"
         Me.ShowInTaskbar = False
@@ -2621,6 +2649,9 @@ Partial Class FormSalesOrderSvcLevel
         CType(Me.DEUntilTrf.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEFromTrf.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEFromTrf.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelSelect, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelSelect.ResumeLayout(False)
+        CType(Me.CheckSelAll.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -2853,4 +2884,6 @@ Partial Class FormSalesOrderSvcLevel
     Friend WithEvents RepositoryItemCheckEdit6 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
     Friend WithEvents GridColumnSORemainign As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnTotalTrf As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents PanelSelect As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents CheckSelAll As DevExpress.XtraEditors.CheckEdit
 End Class

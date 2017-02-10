@@ -101,6 +101,7 @@ Partial Class FormSalesDelOrderSlip
         Me.DDBPrint = New DevExpress.XtraEditors.DropDownButton()
         Me.BtnCancel = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnSave = New DevExpress.XtraEditors.SimpleButton()
+        Me.GridColumnRemark = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
         CType(Me.PanelControlTopLeft, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -658,7 +659,7 @@ Partial Class FormSalesDelOrderSlip
         '
         Me.XTPDetail.Controls.Add(Me.GCItemList)
         Me.XTPDetail.Name = "XTPDetail"
-        Me.XTPDetail.Size = New System.Drawing.Size(926, 389)
+        Me.XTPDetail.Size = New System.Drawing.Size(925, 389)
         Me.XTPDetail.Text = "Detail Item"
         '
         'GCItemList
@@ -669,13 +670,13 @@ Partial Class FormSalesDelOrderSlip
         Me.GCItemList.MainView = Me.GVItemList
         Me.GCItemList.Name = "GCItemList"
         Me.GCItemList.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemSpinEdit1})
-        Me.GCItemList.Size = New System.Drawing.Size(926, 389)
+        Me.GCItemList.Size = New System.Drawing.Size(925, 389)
         Me.GCItemList.TabIndex = 4
         Me.GCItemList.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVItemList})
         '
         'GVItemList
         '
-        Me.GVItemList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumnCode, Me.GridColumnName, Me.GridColumnSize, Me.GridColumnQty, Me.GridColumnPrice, Me.GridColumnAmount, Me.GridColumnEanCode, Me.GridColumnIdProduct, Me.GridColumnIdDesignPrice, Me.GridColumnIdDesign, Me.GridColumnIdPlSalesOrderDel})
+        Me.GVItemList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumnCode, Me.GridColumnName, Me.GridColumnSize, Me.GridColumnQty, Me.GridColumnPrice, Me.GridColumnAmount, Me.GridColumnEanCode, Me.GridColumnIdProduct, Me.GridColumnIdDesignPrice, Me.GridColumnIdDesign, Me.GridColumnIdPlSalesOrderDel, Me.GridColumnRemark})
         Me.GVItemList.CustomizationFormBounds = New System.Drawing.Rectangle(958, 136, 216, 180)
         Me.GVItemList.GridControl = Me.GCItemList
         Me.GVItemList.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "pl_sales_order_del_det_qty", Me.GridColumnQty, "{0:n0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "pl_sales_order_del_det_amount", Me.GridColumnAmount, "{0:n0}")})
@@ -994,6 +995,12 @@ Partial Class FormSalesDelOrderSlip
         Me.BtnSave.TabIndex = 18
         Me.BtnSave.Text = "Save"
         '
+        'GridColumnRemark
+        '
+        Me.GridColumnRemark.Caption = "Remark"
+        Me.GridColumnRemark.FieldName = "remark"
+        Me.GridColumnRemark.Name = "GridColumnRemark"
+        '
         'FormSalesDelOrderSlip
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1148,4 +1155,5 @@ Partial Class FormSalesDelOrderSlip
     Friend WithEvents GridColumnIdDesign As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnIdPlSalesOrderDel As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RepositoryItemSpinEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit
+    Friend WithEvents GridColumnRemark As DevExpress.XtraGrid.Columns.GridColumn
 End Class

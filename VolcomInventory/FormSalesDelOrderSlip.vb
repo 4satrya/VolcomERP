@@ -514,4 +514,15 @@ Public Class FormSalesDelOrderSlip
             o = Nothing
         End Try
     End Sub
+
+    Private Sub BMark_Click(sender As Object, e As EventArgs) Handles BMark.Click
+        Cursor = Cursors.WaitCursor
+        FormReportMark.id_report = id_pl_sales_order_del_slip
+        FormReportMark.report_mark_type = "103"
+        FormReportMark.form_origin = Name
+        FormReportMark.is_disabled_set_stt = "1"
+        FormReportMark.is_view_finalize = "1"
+        FormReportMark.ShowDialog()
+        Cursor = Cursors.Default
+    End Sub
 End Class

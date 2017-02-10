@@ -82,6 +82,7 @@ Partial Class FormSalesDelOrderSlip
         Me.GridColumnIdDesignPrice = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdDesign = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdPlSalesOrderDel = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnRemark = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemSpinEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
         Me.EPForm = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
@@ -101,7 +102,6 @@ Partial Class FormSalesDelOrderSlip
         Me.DDBPrint = New DevExpress.XtraEditors.DropDownButton()
         Me.BtnCancel = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnSave = New DevExpress.XtraEditors.SimpleButton()
-        Me.GridColumnRemark = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
         CType(Me.PanelControlTopLeft, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -659,7 +659,7 @@ Partial Class FormSalesDelOrderSlip
         '
         Me.XTPDetail.Controls.Add(Me.GCItemList)
         Me.XTPDetail.Name = "XTPDetail"
-        Me.XTPDetail.Size = New System.Drawing.Size(925, 389)
+        Me.XTPDetail.Size = New System.Drawing.Size(926, 389)
         Me.XTPDetail.Text = "Detail Item"
         '
         'GCItemList
@@ -670,7 +670,7 @@ Partial Class FormSalesDelOrderSlip
         Me.GCItemList.MainView = Me.GVItemList
         Me.GCItemList.Name = "GCItemList"
         Me.GCItemList.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemSpinEdit1})
-        Me.GCItemList.Size = New System.Drawing.Size(925, 389)
+        Me.GCItemList.Size = New System.Drawing.Size(926, 389)
         Me.GCItemList.TabIndex = 4
         Me.GCItemList.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVItemList})
         '
@@ -819,6 +819,12 @@ Partial Class FormSalesDelOrderSlip
         Me.GridColumnIdPlSalesOrderDel.FieldName = "id_pl_sales_order_del_det"
         Me.GridColumnIdPlSalesOrderDel.Name = "GridColumnIdPlSalesOrderDel"
         Me.GridColumnIdPlSalesOrderDel.OptionsColumn.ShowInCustomizationForm = False
+        '
+        'GridColumnRemark
+        '
+        Me.GridColumnRemark.Caption = "Remark"
+        Me.GridColumnRemark.FieldName = "remark"
+        Me.GridColumnRemark.Name = "GridColumnRemark"
         '
         'RepositoryItemSpinEdit1
         '
@@ -994,12 +1000,6 @@ Partial Class FormSalesDelOrderSlip
         Me.BtnSave.Size = New System.Drawing.Size(75, 36)
         Me.BtnSave.TabIndex = 18
         Me.BtnSave.Text = "Save"
-        '
-        'GridColumnRemark
-        '
-        Me.GridColumnRemark.Caption = "Remark"
-        Me.GridColumnRemark.FieldName = "remark"
-        Me.GridColumnRemark.Name = "GridColumnRemark"
         '
         'FormSalesDelOrderSlip
         '

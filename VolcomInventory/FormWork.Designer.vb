@@ -628,9 +628,13 @@ Partial Class FormWork
         Me.GridColumn35 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnMarkDatetime = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridCol33 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn900 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GColMHYear = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn34 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn328 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn896 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn897 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn898 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControl11 = New DevExpress.XtraEditors.PanelControl()
         Me.DEUntil = New DevExpress.XtraEditors.DateEdit()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -1764,9 +1768,6 @@ Partial Class FormWork
         Me.SimpleButton1 = New DevExpress.XtraEditors.SimpleButton()
         Me.SimpleButton2 = New DevExpress.XtraEditors.SimpleButton()
         Me.GridBand1 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
-        Me.GridColumn896 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn897 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn898 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GVSalesPOSDet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GCSalesCreditNote, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVSalesCreditNote, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -8114,7 +8115,7 @@ Partial Class FormWork
         '
         'GVMarkHistory
         '
-        Me.GVMarkHistory.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn27, Me.GridColumn28, Me.GridColumn29, Me.GridColumn30, Me.GridColumn31, Me.GridColumn32, Me.GridColumn35, Me.GridColumnMarkDatetime, Me.GridCol33, Me.GColMHYear, Me.GridColumn34, Me.GridColumn328, Me.GridColumn896, Me.GridColumn897, Me.GridColumn898})
+        Me.GVMarkHistory.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn27, Me.GridColumn28, Me.GridColumn29, Me.GridColumn30, Me.GridColumn31, Me.GridColumn32, Me.GridColumn35, Me.GridColumnMarkDatetime, Me.GridCol33, Me.GridColumn900, Me.GColMHYear, Me.GridColumn34, Me.GridColumn328, Me.GridColumn896, Me.GridColumn897, Me.GridColumn898})
         Me.GVMarkHistory.GridControl = Me.GCMarkHistory
         Me.GVMarkHistory.GroupCount = 2
         Me.GVMarkHistory.Name = "GVMarkHistory"
@@ -8185,7 +8186,7 @@ Partial Class FormWork
         Me.GridColumnMarkDatetime.FieldName = "report_mark_datetime"
         Me.GridColumnMarkDatetime.Name = "GridColumnMarkDatetime"
         Me.GridColumnMarkDatetime.Visible = True
-        Me.GridColumnMarkDatetime.VisibleIndex = 5
+        Me.GridColumnMarkDatetime.VisibleIndex = 6
         '
         'GridCol33
         '
@@ -8194,6 +8195,14 @@ Partial Class FormWork
         Me.GridCol33.Name = "GridCol33"
         Me.GridCol33.Visible = True
         Me.GridCol33.VisibleIndex = 4
+        '
+        'GridColumn900
+        '
+        Me.GridColumn900.Caption = "Approval"
+        Me.GridColumn900.FieldName = "mark"
+        Me.GridColumn900.Name = "GridColumn900"
+        Me.GridColumn900.Visible = True
+        Me.GridColumn900.VisibleIndex = 5
         '
         'GColMHYear
         '
@@ -8222,6 +8231,30 @@ Partial Class FormWork
         Me.GridColumn328.Name = "GridColumn328"
         Me.GridColumn328.Visible = True
         Me.GridColumn328.VisibleIndex = 2
+        '
+        'GridColumn896
+        '
+        Me.GridColumn896.Caption = "Reff#"
+        Me.GridColumn896.FieldName = "info_report"
+        Me.GridColumn896.Name = "GridColumn896"
+        Me.GridColumn896.Visible = True
+        Me.GridColumn896.VisibleIndex = 7
+        '
+        'GridColumn897
+        '
+        Me.GridColumn897.Caption = "Design Code"
+        Me.GridColumn897.FieldName = "info_design_code"
+        Me.GridColumn897.Name = "GridColumn897"
+        Me.GridColumn897.Visible = True
+        Me.GridColumn897.VisibleIndex = 8
+        '
+        'GridColumn898
+        '
+        Me.GridColumn898.Caption = "Description"
+        Me.GridColumn898.FieldName = "info_design"
+        Me.GridColumn898.Name = "GridColumn898"
+        Me.GridColumn898.Visible = True
+        Me.GridColumn898.VisibleIndex = 9
         '
         'PanelControl11
         '
@@ -19641,30 +19674,6 @@ Partial Class FormWork
         Me.GridBand1.Name = "GridBand1"
         Me.GridBand1.VisibleIndex = -1
         '
-        'GridColumn896
-        '
-        Me.GridColumn896.Caption = "Reff#"
-        Me.GridColumn896.FieldName = "info_report"
-        Me.GridColumn896.Name = "GridColumn896"
-        Me.GridColumn896.Visible = True
-        Me.GridColumn896.VisibleIndex = 6
-        '
-        'GridColumn897
-        '
-        Me.GridColumn897.Caption = "Design Code"
-        Me.GridColumn897.FieldName = "info_design_code"
-        Me.GridColumn897.Name = "GridColumn897"
-        Me.GridColumn897.Visible = True
-        Me.GridColumn897.VisibleIndex = 7
-        '
-        'GridColumn898
-        '
-        Me.GridColumn898.Caption = "Description"
-        Me.GridColumn898.FieldName = "info_design"
-        Me.GridColumn898.Name = "GridColumn898"
-        Me.GridColumn898.Visible = True
-        Me.GridColumn898.VisibleIndex = 8
-        '
         'FormWork
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -22025,4 +22034,5 @@ Partial Class FormWork
     Friend WithEvents GridColumn896 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn897 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn898 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn900 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

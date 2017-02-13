@@ -227,7 +227,7 @@ Partial Class FormEmpDP
         Me.Controls.Add(Me.GCLeave)
         Me.Controls.Add(Me.PanelControl1)
         Me.Name = "FormEmpDP"
-        Me.Text = "Down Payment"
+        Me.Text = "Day Payment"
         CType(Me.GCLeave, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVLeave, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()

@@ -21,6 +21,8 @@ Partial Class FormSalesOrderSvcLevel
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.GCFilter = New DevExpress.XtraEditors.GroupControl()
+        Me.PanelSelect = New DevExpress.XtraEditors.PanelControl()
+        Me.CheckSelAll = New DevExpress.XtraEditors.CheckEdit()
         Me.SimpleButton1 = New DevExpress.XtraEditors.SimpleButton()
         Me.SLEPackingStatus = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -248,10 +250,12 @@ Partial Class FormSalesOrderSvcLevel
         Me.DEFromTrf = New DevExpress.XtraEditors.DateEdit()
         Me.LabelControl20 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl21 = New DevExpress.XtraEditors.LabelControl()
-        Me.PanelSelect = New DevExpress.XtraEditors.PanelControl()
-        Me.CheckSelAll = New DevExpress.XtraEditors.CheckEdit()
+        Me.GridColumn45 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GCFilter, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GCFilter.SuspendLayout()
+        CType(Me.PanelSelect, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelSelect.SuspendLayout()
+        CType(Me.CheckSelAll.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLEPackingStatus.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -342,9 +346,6 @@ Partial Class FormSalesOrderSvcLevel
         CType(Me.DEUntilTrf.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEFromTrf.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEFromTrf.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PanelSelect, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.PanelSelect.SuspendLayout()
-        CType(Me.CheckSelAll.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GCFilter
@@ -366,6 +367,28 @@ Partial Class FormSalesOrderSvcLevel
         Me.GCFilter.Name = "GCFilter"
         Me.GCFilter.Size = New System.Drawing.Size(783, 39)
         Me.GCFilter.TabIndex = 2
+        '
+        'PanelSelect
+        '
+        Me.PanelSelect.Appearance.BackColor = System.Drawing.Color.Transparent
+        Me.PanelSelect.Appearance.Options.UseBackColor = True
+        Me.PanelSelect.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelSelect.Controls.Add(Me.CheckSelAll)
+        Me.PanelSelect.Dock = System.Windows.Forms.DockStyle.Right
+        Me.PanelSelect.Location = New System.Drawing.Point(695, 2)
+        Me.PanelSelect.Name = "PanelSelect"
+        Me.PanelSelect.Size = New System.Drawing.Size(86, 35)
+        Me.PanelSelect.TabIndex = 8901
+        '
+        'CheckSelAll
+        '
+        Me.CheckSelAll.Location = New System.Drawing.Point(11, 6)
+        Me.CheckSelAll.Name = "CheckSelAll"
+        Me.CheckSelAll.Properties.Appearance.ForeColor = System.Drawing.Color.Black
+        Me.CheckSelAll.Properties.Appearance.Options.UseForeColor = True
+        Me.CheckSelAll.Properties.Caption = "Select All"
+        Me.CheckSelAll.Size = New System.Drawing.Size(72, 19)
+        Me.CheckSelAll.TabIndex = 0
         '
         'SimpleButton1
         '
@@ -499,7 +522,7 @@ Partial Class FormSalesOrderSvcLevel
         '
         'GVSalesOrder
         '
-        Me.GVSalesOrder.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnSalesTargetNumb, Me.GridColumnTo, Me.GridColumnSalesTargetDate, Me.GridColumnDSalesTargetNote, Me.GridColumnReportStatus, Me.GridColumn1, Me.GridColumn9, Me.GridColumnIdSalesOrder, Me.GridColumn1Category, Me.GridColumn10, Me.GridColumnReff, Me.GridColumn44, Me.GridColumnIsClosed})
+        Me.GVSalesOrder.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnSalesTargetNumb, Me.GridColumnTo, Me.GridColumnSalesTargetDate, Me.GridColumnDSalesTargetNote, Me.GridColumnReportStatus, Me.GridColumn1, Me.GridColumn9, Me.GridColumnIdSalesOrder, Me.GridColumn1Category, Me.GridColumn10, Me.GridColumnReff, Me.GridColumn44, Me.GridColumnIsClosed, Me.GridColumn45})
         Me.GVSalesOrder.GridControl = Me.GCSalesOrder
         Me.GVSalesOrder.Name = "GVSalesOrder"
         Me.GVSalesOrder.OptionsCustomization.AllowSort = False
@@ -571,7 +594,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.GridColumn9.Name = "GridColumn9"
         Me.GridColumn9.OptionsColumn.ReadOnly = True
         Me.GridColumn9.Visible = True
-        Me.GridColumn9.VisibleIndex = 8
+        Me.GridColumn9.VisibleIndex = 9
         Me.GridColumn9.Width = 85
         '
         'RepositoryItemProgressBar1
@@ -641,7 +664,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.GridColumnIsClosed.FieldName = "is_select"
         Me.GridColumnIsClosed.Name = "GridColumnIsClosed"
         Me.GridColumnIsClosed.Visible = True
-        Me.GridColumnIsClosed.VisibleIndex = 9
+        Me.GridColumnIsClosed.VisibleIndex = 10
         '
         'RepositoryItemCheckEdit6
         '
@@ -703,7 +726,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.XTPReturnOrder.Controls.Add(Me.GCSalesReturnOrder)
         Me.XTPReturnOrder.Controls.Add(Me.GCFilterRet)
         Me.XTPReturnOrder.Name = "XTPReturnOrder"
-        Me.XTPReturnOrder.Size = New System.Drawing.Size(754, 388)
+        Me.XTPReturnOrder.Size = New System.Drawing.Size(783, 388)
         Me.XTPReturnOrder.Text = "Return Order"
         '
         'GCSalesReturnOrder
@@ -713,7 +736,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.GCSalesReturnOrder.MainView = Me.GVSalesReturnOrder
         Me.GCSalesReturnOrder.Name = "GCSalesReturnOrder"
         Me.GCSalesReturnOrder.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemProgressBar2})
-        Me.GCSalesReturnOrder.Size = New System.Drawing.Size(754, 349)
+        Me.GCSalesReturnOrder.Size = New System.Drawing.Size(783, 349)
         Me.GCSalesReturnOrder.TabIndex = 4
         Me.GCSalesReturnOrder.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVSalesReturnOrder, Me.GridView3})
         '
@@ -854,7 +877,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.GCFilterRet.Dock = System.Windows.Forms.DockStyle.Top
         Me.GCFilterRet.Location = New System.Drawing.Point(0, 0)
         Me.GCFilterRet.Name = "GCFilterRet"
-        Me.GCFilterRet.Size = New System.Drawing.Size(754, 39)
+        Me.GCFilterRet.Size = New System.Drawing.Size(783, 39)
         Me.GCFilterRet.TabIndex = 3
         '
         'SLEPackingStatusRet
@@ -972,7 +995,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.XTPRec.Controls.Add(Me.GCPL)
         Me.XTPRec.Controls.Add(Me.GCFilterRec)
         Me.XTPRec.Name = "XTPRec"
-        Me.XTPRec.Size = New System.Drawing.Size(754, 388)
+        Me.XTPRec.Size = New System.Drawing.Size(783, 388)
         Me.XTPRec.Text = "Received Product"
         '
         'GCPL
@@ -982,7 +1005,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.GCPL.MainView = Me.GVPL
         Me.GCPL.Name = "GCPL"
         Me.GCPL.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckEdit1})
-        Me.GCPL.Size = New System.Drawing.Size(754, 349)
+        Me.GCPL.Size = New System.Drawing.Size(783, 349)
         Me.GCPL.TabIndex = 4
         Me.GCPL.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVPL})
         '
@@ -1234,7 +1257,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.GCFilterRec.Dock = System.Windows.Forms.DockStyle.Top
         Me.GCFilterRec.Location = New System.Drawing.Point(0, 0)
         Me.GCFilterRec.Name = "GCFilterRec"
-        Me.GCFilterRec.Size = New System.Drawing.Size(754, 39)
+        Me.GCFilterRec.Size = New System.Drawing.Size(783, 39)
         Me.GCFilterRec.TabIndex = 3
         '
         'BtnUpdateRec
@@ -1361,7 +1384,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.XTPDelOrder.Controls.Add(Me.GCSalesDelOrder)
         Me.XTPDelOrder.Controls.Add(Me.GroupControl1)
         Me.XTPDelOrder.Name = "XTPDelOrder"
-        Me.XTPDelOrder.Size = New System.Drawing.Size(754, 388)
+        Me.XTPDelOrder.Size = New System.Drawing.Size(783, 388)
         Me.XTPDelOrder.Text = "Delivery"
         '
         'GCSalesDelOrder
@@ -1371,7 +1394,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.GCSalesDelOrder.MainView = Me.GVSalesDelOrder
         Me.GCSalesDelOrder.Name = "GCSalesDelOrder"
         Me.GCSalesDelOrder.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckEdit2})
-        Me.GCSalesDelOrder.Size = New System.Drawing.Size(754, 349)
+        Me.GCSalesDelOrder.Size = New System.Drawing.Size(783, 349)
         Me.GCSalesDelOrder.TabIndex = 5
         Me.GCSalesDelOrder.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVSalesDelOrder, Me.GridView6})
         '
@@ -1572,7 +1595,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.GroupControl1.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupControl1.Location = New System.Drawing.Point(0, 0)
         Me.GroupControl1.Name = "GroupControl1"
-        Me.GroupControl1.Size = New System.Drawing.Size(754, 39)
+        Me.GroupControl1.Size = New System.Drawing.Size(783, 39)
         Me.GroupControl1.TabIndex = 4
         '
         'BtnUpdateDO
@@ -1699,7 +1722,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.XTPReturn.Controls.Add(Me.GCSalesReturn)
         Me.XTPReturn.Controls.Add(Me.GroupControl2)
         Me.XTPReturn.Name = "XTPReturn"
-        Me.XTPReturn.Size = New System.Drawing.Size(754, 388)
+        Me.XTPReturn.Size = New System.Drawing.Size(783, 388)
         Me.XTPReturn.Text = "Return"
         '
         'GCSalesReturn
@@ -1709,7 +1732,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.GCSalesReturn.MainView = Me.GVSalesReturn
         Me.GCSalesReturn.Name = "GCSalesReturn"
         Me.GCSalesReturn.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckEdit3})
-        Me.GCSalesReturn.Size = New System.Drawing.Size(754, 349)
+        Me.GCSalesReturn.Size = New System.Drawing.Size(783, 349)
         Me.GCSalesReturn.TabIndex = 6
         Me.GCSalesReturn.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVSalesReturn})
         '
@@ -1841,7 +1864,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.GroupControl2.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupControl2.Location = New System.Drawing.Point(0, 0)
         Me.GroupControl2.Name = "GroupControl2"
-        Me.GroupControl2.Size = New System.Drawing.Size(754, 39)
+        Me.GroupControl2.Size = New System.Drawing.Size(783, 39)
         Me.GroupControl2.TabIndex = 5
         '
         'BtnUpdateReturn
@@ -1968,7 +1991,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.XTPReturnQC.Controls.Add(Me.GCSalesReturnQC)
         Me.XTPReturnQC.Controls.Add(Me.GroupControl3)
         Me.XTPReturnQC.Name = "XTPReturnQC"
-        Me.XTPReturnQC.Size = New System.Drawing.Size(754, 388)
+        Me.XTPReturnQC.Size = New System.Drawing.Size(783, 388)
         Me.XTPReturnQC.Text = "Return QC"
         '
         'GCSalesReturnQC
@@ -1978,7 +2001,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.GCSalesReturnQC.MainView = Me.GVSalesReturnQC
         Me.GCSalesReturnQC.Name = "GCSalesReturnQC"
         Me.GCSalesReturnQC.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckEdit4})
-        Me.GCSalesReturnQC.Size = New System.Drawing.Size(754, 349)
+        Me.GCSalesReturnQC.Size = New System.Drawing.Size(783, 349)
         Me.GCSalesReturnQC.TabIndex = 7
         Me.GCSalesReturnQC.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVSalesReturnQC})
         '
@@ -2110,7 +2133,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.GroupControl3.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupControl3.Location = New System.Drawing.Point(0, 0)
         Me.GroupControl3.Name = "GroupControl3"
-        Me.GroupControl3.Size = New System.Drawing.Size(754, 39)
+        Me.GroupControl3.Size = New System.Drawing.Size(783, 39)
         Me.GroupControl3.TabIndex = 6
         '
         'BtnUpdateReturnQC
@@ -2237,7 +2260,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.XTPTrf.Controls.Add(Me.GCFGTrf)
         Me.XTPTrf.Controls.Add(Me.GroupControl4)
         Me.XTPTrf.Name = "XTPTrf"
-        Me.XTPTrf.Size = New System.Drawing.Size(754, 388)
+        Me.XTPTrf.Size = New System.Drawing.Size(783, 388)
         Me.XTPTrf.Text = "Transfer"
         '
         'GCFGTrf
@@ -2247,7 +2270,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.GCFGTrf.MainView = Me.GVFGTrf
         Me.GCFGTrf.Name = "GCFGTrf"
         Me.GCFGTrf.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepoTxtPrepOrder, Me.RepositoryItemCheckEdit5})
-        Me.GCFGTrf.Size = New System.Drawing.Size(754, 349)
+        Me.GCFGTrf.Size = New System.Drawing.Size(783, 349)
         Me.GCFGTrf.TabIndex = 8
         Me.GCFGTrf.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVFGTrf})
         '
@@ -2396,7 +2419,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.GroupControl4.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupControl4.Location = New System.Drawing.Point(0, 0)
         Me.GroupControl4.Name = "GroupControl4"
-        Me.GroupControl4.Size = New System.Drawing.Size(754, 39)
+        Me.GroupControl4.Size = New System.Drawing.Size(783, 39)
         Me.GroupControl4.TabIndex = 7
         '
         'BtnUpdateTrf
@@ -2518,27 +2541,13 @@ Partial Class FormSalesOrderSvcLevel
         Me.LabelControl21.TabIndex = 8892
         Me.LabelControl21.Text = "From"
         '
-        'PanelSelect
+        'GridColumn45
         '
-        Me.PanelSelect.Appearance.BackColor = System.Drawing.Color.Transparent
-        Me.PanelSelect.Appearance.Options.UseBackColor = True
-        Me.PanelSelect.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
-        Me.PanelSelect.Controls.Add(Me.CheckSelAll)
-        Me.PanelSelect.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PanelSelect.Location = New System.Drawing.Point(695, 2)
-        Me.PanelSelect.Name = "PanelSelect"
-        Me.PanelSelect.Size = New System.Drawing.Size(86, 35)
-        Me.PanelSelect.TabIndex = 8901
-        '
-        'CheckSelAll
-        '
-        Me.CheckSelAll.Location = New System.Drawing.Point(11, 6)
-        Me.CheckSelAll.Name = "CheckSelAll"
-        Me.CheckSelAll.Properties.Appearance.ForeColor = System.Drawing.Color.Black
-        Me.CheckSelAll.Properties.Appearance.Options.UseForeColor = True
-        Me.CheckSelAll.Properties.Caption = "Select All"
-        Me.CheckSelAll.Size = New System.Drawing.Size(72, 19)
-        Me.CheckSelAll.TabIndex = 0
+        Me.GridColumn45.Caption = "Note"
+        Me.GridColumn45.FieldName = "final_comment"
+        Me.GridColumn45.Name = "GridColumn45"
+        Me.GridColumn45.Visible = True
+        Me.GridColumn45.VisibleIndex = 8
         '
         'FormSalesOrderSvcLevel
         '
@@ -2553,6 +2562,9 @@ Partial Class FormSalesOrderSvcLevel
         CType(Me.GCFilter, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GCFilter.ResumeLayout(False)
         Me.GCFilter.PerformLayout()
+        CType(Me.PanelSelect, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelSelect.ResumeLayout(False)
+        CType(Me.CheckSelAll.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SLEPackingStatus.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -2649,9 +2661,6 @@ Partial Class FormSalesOrderSvcLevel
         CType(Me.DEUntilTrf.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEFromTrf.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEFromTrf.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PanelSelect, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.PanelSelect.ResumeLayout(False)
-        CType(Me.CheckSelAll.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -2886,4 +2895,5 @@ Partial Class FormSalesOrderSvcLevel
     Friend WithEvents GridColumnTotalTrf As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents PanelSelect As DevExpress.XtraEditors.PanelControl
     Friend WithEvents CheckSelAll As DevExpress.XtraEditors.CheckEdit
+    Friend WithEvents GridColumn45 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

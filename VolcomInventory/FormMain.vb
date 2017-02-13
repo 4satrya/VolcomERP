@@ -10307,4 +10307,18 @@ Public Class FormMain
         End Try
         Cursor = Cursors.Default
     End Sub
+
+    Private Sub NBAttnStore_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBAttnStore.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormEmpAttnSum.MdiParent = Me
+            FormEmpAttnSum.view_store = True
+            FormEmpAttnSum.Show()
+            FormEmpAttnSum.WindowState = FormWindowState.Maximized
+            FormEmpAttnSum.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
 End Class

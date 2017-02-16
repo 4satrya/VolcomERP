@@ -666,7 +666,7 @@
     Private Sub CheckSelAll_CheckedChanged(sender As Object, e As EventArgs) Handles CheckSelAll.CheckedChanged
         If GVSalesOrder.RowCount > 0 Then
             Dim cek As String = CheckSelAll.EditValue.ToString
-            For i As Integer = 0 To ((GVSalesOrder.RowCount - 1) - GetGroupRowCount(GVSalesOrder))
+            For i As Integer = ((GVSalesOrder.RowCount - 1) - GetGroupRowCount(GVSalesOrder)) To 0 Step -1
                 Dim id_prepare_status As String = GVSalesOrder.GetRowCellValue(i, "id_prepare_status").ToString
                 If cek And id_prepare_status = "1" Then
                     GVSalesOrder.SetRowCellValue(i, "is_select", "Yes")

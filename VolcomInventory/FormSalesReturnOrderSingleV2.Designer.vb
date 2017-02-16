@@ -37,6 +37,14 @@ Partial Class FormSalesReturnOrderSingleV2
         Me.GridColumnSelect = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.GridColumnSOH = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
+        Me.SLESeason = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumnIdSeason = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnRange = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnSeason = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
+        Me.BtnView = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.CheckEditSelAll.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -44,6 +52,10 @@ Partial Class FormSalesReturnOrderSingleV2
         CType(Me.GVProduct, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemSpinEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl2.SuspendLayout()
+        CType(Me.SLESeason.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl1
@@ -78,11 +90,11 @@ Partial Class FormSalesReturnOrderSingleV2
         'GCProduct
         '
         Me.GCProduct.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCProduct.Location = New System.Drawing.Point(0, 0)
+        Me.GCProduct.Location = New System.Drawing.Point(0, 41)
         Me.GCProduct.MainView = Me.GVProduct
         Me.GCProduct.Name = "GCProduct"
         Me.GCProduct.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemSpinEdit1, Me.RepositoryItemCheckEdit1})
-        Me.GCProduct.Size = New System.Drawing.Size(736, 320)
+        Me.GCProduct.Size = New System.Drawing.Size(736, 279)
         Me.GCProduct.TabIndex = 2
         Me.GCProduct.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVProduct})
         '
@@ -92,6 +104,7 @@ Partial Class FormSalesReturnOrderSingleV2
         Me.GVProduct.GridControl = Me.GCProduct
         Me.GVProduct.GroupCount = 2
         Me.GVProduct.Name = "GVProduct"
+        Me.GVProduct.OptionsBehavior.AutoExpandAllGroups = True
         Me.GVProduct.OptionsView.ShowGroupPanel = False
         Me.GVProduct.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumn2, DevExpress.Data.ColumnSortOrder.Ascending), New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumnDesign, DevExpress.Data.ColumnSortOrder.Ascending), New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumnCode, DevExpress.Data.ColumnSortOrder.Ascending)})
         '
@@ -224,12 +237,84 @@ Partial Class FormSalesReturnOrderSingleV2
         Me.GridColumnSOH.Visible = True
         Me.GridColumnSOH.VisibleIndex = 4
         '
+        'PanelControl2
+        '
+        Me.PanelControl2.Controls.Add(Me.SLESeason)
+        Me.PanelControl2.Controls.Add(Me.LabelControl4)
+        Me.PanelControl2.Controls.Add(Me.BtnView)
+        Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelControl2.Location = New System.Drawing.Point(0, 0)
+        Me.PanelControl2.LookAndFeel.SkinName = "Blue"
+        Me.PanelControl2.LookAndFeel.UseDefaultLookAndFeel = False
+        Me.PanelControl2.Name = "PanelControl2"
+        Me.PanelControl2.Size = New System.Drawing.Size(736, 41)
+        Me.PanelControl2.TabIndex = 3
+        '
+        'SLESeason
+        '
+        Me.SLESeason.Location = New System.Drawing.Point(52, 12)
+        Me.SLESeason.Name = "SLESeason"
+        Me.SLESeason.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SLESeason.Properties.Appearance.Options.UseFont = True
+        Me.SLESeason.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLESeason.Properties.View = Me.SearchLookUpEdit1View
+        Me.SLESeason.Size = New System.Drawing.Size(191, 20)
+        Me.SLESeason.TabIndex = 97
+        '
+        'SearchLookUpEdit1View
+        '
+        Me.SearchLookUpEdit1View.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdSeason, Me.GridColumnRange, Me.GridColumnSeason})
+        Me.SearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.SearchLookUpEdit1View.Name = "SearchLookUpEdit1View"
+        Me.SearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.SearchLookUpEdit1View.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumnIdSeason
+        '
+        Me.GridColumnIdSeason.Caption = "Id Season"
+        Me.GridColumnIdSeason.FieldName = "id_season"
+        Me.GridColumnIdSeason.Name = "GridColumnIdSeason"
+        '
+        'GridColumnRange
+        '
+        Me.GridColumnRange.Caption = "Range"
+        Me.GridColumnRange.FieldName = "range"
+        Me.GridColumnRange.Name = "GridColumnRange"
+        Me.GridColumnRange.Visible = True
+        Me.GridColumnRange.VisibleIndex = 0
+        '
+        'GridColumnSeason
+        '
+        Me.GridColumnSeason.Caption = "Season"
+        Me.GridColumnSeason.FieldName = "season"
+        Me.GridColumnSeason.Name = "GridColumnSeason"
+        Me.GridColumnSeason.Visible = True
+        Me.GridColumnSeason.VisibleIndex = 1
+        '
+        'LabelControl4
+        '
+        Me.LabelControl4.Location = New System.Drawing.Point(11, 15)
+        Me.LabelControl4.Name = "LabelControl4"
+        Me.LabelControl4.Size = New System.Drawing.Size(35, 13)
+        Me.LabelControl4.TabIndex = 99
+        Me.LabelControl4.Text = "Season"
+        '
+        'BtnView
+        '
+        Me.BtnView.Location = New System.Drawing.Point(248, 12)
+        Me.BtnView.Name = "BtnView"
+        Me.BtnView.Size = New System.Drawing.Size(70, 20)
+        Me.BtnView.TabIndex = 98
+        Me.BtnView.TabStop = False
+        Me.BtnView.Text = "View"
+        '
         'FormSalesReturnOrderSingleV2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(736, 357)
         Me.Controls.Add(Me.GCProduct)
+        Me.Controls.Add(Me.PanelControl2)
         Me.Controls.Add(Me.PanelControl1)
         Me.MinimizeBox = False
         Me.Name = "FormSalesReturnOrderSingleV2"
@@ -243,6 +328,11 @@ Partial Class FormSalesReturnOrderSingleV2
         CType(Me.GVProduct, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemSpinEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl2.ResumeLayout(False)
+        Me.PanelControl2.PerformLayout()
+        CType(Me.SLESeason.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -265,4 +355,12 @@ Partial Class FormSalesReturnOrderSingleV2
     Friend WithEvents GridColumnSOH As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RepositoryItemCheckEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
     Friend WithEvents CheckEditSelAll As DevExpress.XtraEditors.CheckEdit
+    Friend WithEvents PanelControl2 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents SLESeason As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents SearchLookUpEdit1View As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumnIdSeason As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnRange As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnSeason As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LabelControl4 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents BtnView As DevExpress.XtraEditors.SimpleButton
 End Class

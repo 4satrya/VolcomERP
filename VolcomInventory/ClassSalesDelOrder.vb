@@ -14,7 +14,7 @@
 
         Dim query As String = "SELECT a.id_pl_sales_order_del, a.id_sales_order, a.id_store_contact_to, (d.id_comp) AS `id_store`,(d.comp_name) AS store_name_to, (d.comp_number) AS store_number_to, CONCAT(d.comp_number, ' - ', d.comp_name) AS `store`, (d.address_primary) AS store_address_to, d.id_so_type, a.id_report_status, f.report_status, "
         query += "a.pl_sales_order_del_note, a.pl_sales_order_del_date, DATE_FORMAT(a.pl_sales_order_del_date,'%Y-%m-%d') AS pl_sales_order_del_datex, a.pl_sales_order_del_number, b.sales_order_number, "
-        query += "DATE_FORMAT(a.pl_sales_order_del_date,'%d %M %Y') AS pl_sales_order_del_date, id_comp_contact_from,(wh.id_comp) AS `id_wh`, (wh.comp_number) AS `wh_number`,(wh.comp_name) AS `wh_name`, CONCAT(wh.comp_number, ' - ', wh.comp_name) AS `wh`, a.id_wh_drawer, drw.wh_drawer_code, drw.wh_drawer, cat.id_so_status, cat.so_status, "
+        query += "DATE_FORMAT(a.pl_sales_order_del_date,'%d %M %Y') AS pl_sales_order_del_date, a.id_comp_contact_from,(wh.id_comp) AS `id_wh`, (wh.comp_number) AS `wh_number`,(wh.comp_name) AS `wh_name`, CONCAT(wh.comp_number, ' - ', wh.comp_name) AS `wh`, a.id_wh_drawer, drw.wh_drawer_code, drw.wh_drawer, cat.id_so_status, cat.so_status, "
         query += "a.last_update, getUserEmp(a.last_update_by, 1) AS `last_user`, ('No') AS `is_select`, IFNULL(det.`total`,0) AS `total`, rmg.`total_remaining`  "
         query += "FROM tb_pl_sales_order_del a "
         query += "INNER JOIN tb_sales_order b ON a.id_sales_order = b.id_sales_order "
@@ -45,6 +45,8 @@
         query += ") del ON del.id_sales_order = so.id_sales_order "
         query += "GROUP BY so.id_sales_order "
         query += ") rmg ON rmg.id_sales_order = a.id_sales_order "
+        query += "Left Join tb_pl_sales_order_del_slip_det sd ON sd.id_pl_sales_order_del = a.id_pl_sales_order_del "
+        query += "Left Join tb_pl_sales_order_del_slip sdm On sdm.id_pl_sales_order_del_slip = sd.id_pl_sales_order_del_slip And sdm.id_report_status!=5 "
         query += "WHERE a.id_pl_sales_order_del>0 "
         query += condition + " "
         query += "ORDER BY a.id_pl_sales_order_del " + order_type
@@ -64,10 +66,10 @@
             condition = ""
         End If
 
-        Dim query As String = "SELECT a.id_pl_sales_order_del_slip, a.id_store_contact_to, (d.id_comp) AS `id_store`,(d.comp_name) AS store_name_to, (d.comp_number) AS store_number_to, CONCAT(d.comp_number, ' - ', d.comp_name) AS `store`, (d.address_primary) AS store_address_to, 
+        Dim query As String = "Select a.id_pl_sales_order_del_slip, a.id_store_contact_to, (d.id_comp) As `id_store`, (d.comp_name) As store_name_to, (d.comp_number) As store_number_to, CONCAT(d.comp_number, ' - ', d.comp_name) AS `store`, (d.address_primary) AS store_address_to, 
         a.id_report_status, f.report_status, a.pl_sales_order_del_slip_note, a.pl_sales_order_del_slip_date, DATE_FORMAT(a.pl_sales_order_del_slip_date,'%Y-%m-%d') AS pl_sales_order_del_slip_datex, 
         a.pl_sales_order_del_slip_number, DATE_FORMAT(a.pl_sales_order_del_slip_date,'%d %M %Y') AS pl_sales_order_del_slip_date, 
-        id_comp_contact_from,(wh.id_comp) AS `id_wh`, (wh.comp_number) AS `wh_number`,(wh.comp_name) AS `wh_name`, 
+        id_comp_contact_from, (wh.id_comp) As `id_wh`, (wh.comp_number) As `wh_number`, (wh.comp_name) As `wh_name`, 
         CONCAT(wh.comp_number, ' - ', wh.comp_name) AS `wh`, a.id_wh_drawer, drw.wh_drawer_code, drw.wh_drawer, 
         a.last_update,  getUserEmp(a.last_update_by, 1) AS `last_user`, ('No') AS `is_select`, 
         IFNULL(det.`total`,0) AS `total`  

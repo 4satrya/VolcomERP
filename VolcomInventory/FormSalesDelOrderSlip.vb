@@ -333,9 +333,9 @@ Public Class FormSalesDelOrderSlip
                 Dim pl_sales_order_del_slip_note As String = MENote.Text.ToString
                 If action = "ins" Then
                     'query main table
-                    Dim pl_sales_order_del_slip_number As String = header_number_sales("31")
+                    Dim pl_sales_order_del_slip_number As String = ""
                     Dim query_main As String = "INSERT tb_pl_sales_order_del_slip(pl_sales_order_del_slip_number, id_comp_contact_from, id_store_contact_to, pl_sales_order_del_slip_date, pl_sales_order_del_slip_note, id_report_status, last_update, last_update_by, id_wh_drawer) "
-                    query_main += "VALUES('" + pl_sales_order_del_slip_number + "', '" + id_comp_contact_from + "', '" + id_store_contact_to + "', NOW(), '" + pl_sales_order_del_slip_note + "', '1', NOW(), " + id_user + ", '" + id_wh_drawer + "'); SELECT LAST_INSERT_ID(); "
+                    query_main += "VALUES('" + header_number_sales("31") + "', '" + id_comp_contact_from + "', '" + id_store_contact_to + "', NOW(), '" + pl_sales_order_del_slip_note + "', '1', NOW(), " + id_user + ", '" + id_wh_drawer + "'); SELECT LAST_INSERT_ID(); "
                     id_pl_sales_order_del_slip = execute_query(query_main, 0, True, "", "", "", "")
                     increase_inc_sales("31")
 

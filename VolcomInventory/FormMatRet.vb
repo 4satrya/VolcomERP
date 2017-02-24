@@ -14,7 +14,9 @@
 
     Private Sub FormMatRet_Activated(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Activated
         FormMain.show_rb(Name)
+        checkFormAccess(Name)
         pageChanged()
+        button_main(bnew_active, bedit_active, bdel_active)
     End Sub
 
     Private Sub FormMatRet_Deactivate(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Deactivate

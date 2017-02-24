@@ -408,6 +408,12 @@
             FormEmpLeaveDet.report_mark_type = "102"
             FormEmpLeaveDet.is_view = "1"
             FormEmpLeaveDet.ShowDialog()
+        ElseIf report_mark_type = "104" Then
+            'propose leave HRD
+            FormEmpLeaveDet.id_emp_leave = id_report
+            FormEmpLeaveDet.report_mark_type = "104"
+            FormEmpLeaveDet.is_view = "1"
+            FormEmpLeaveDet.ShowDialog()
         Else
             'MsgBox(id_report)
             stopCustom("Document Not Found")
@@ -968,6 +974,12 @@
             field_id = "id_emp_leave"
             field_number = "emp_leave_number"
             field_date = "emp_leave_date"
+        ElseIf report_mark_type = "104" Then
+            'Propose leave
+            table_name = "tb_emp_leave"
+            field_id = "id_emp_leave"
+            field_number = "emp_leave_number"
+            field_date = "emp_leave_date"
         Else
             query = "Select '-' AS report_number, NOW() as report_date"
         End If
@@ -1006,6 +1018,45 @@
                     info_report = datax.Rows(0)("prod_order_number").ToString
                     info_design_code = datax.Rows(0)("design_code").ToString
                     info_design = datax.Rows(0)("design_display_name").ToString
+                End If
+            ElseIf report_mark_type = "37" Then
+                'rec wh
+                query = "SELECT CONCAT(c.comp_number,' - ', c.comp_name) AS `info` 
+                FROM tb_pl_prod_order_rec rec
+                INNER JOIN tb_pl_prod_order pl ON pl.id_pl_prod_order = rec.id_pl_prod_order
+                INNER JOIN tb_prod_order po ON po.id_prod_order = pl.id_prod_order
+                LEFT JOIN tb_prod_order_wo wo ON wo.id_prod_order = po.id_prod_order AND wo.is_main_vendor=1
+                LEFT JOIN tb_m_ovh_price op ON op.id_ovh_price = wo.id_ovh_price
+                LEFT JOIN tb_m_comp_contact cc ON cc.id_comp_contact = op.id_comp_contact
+                LEFT JOIN tb_m_comp c ON c.id_comp = cc.id_comp 
+                WHERE rec.id_pl_prod_order_rec=" + id_report + " "
+                info_col = execute_query(query, 0, True, "", "", "", "")
+            ElseIf report_mark_type = "43" Then
+                'pre delivery
+                query = "SELECT CONCAT(c.comp_number,' - ', c.comp_name) AS `info` 
+                FROM tb_pl_sales_order_del del
+                INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = del.id_store_contact_to
+                INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp 
+                WHERE del.id_pl_sales_order_del=" + id_report + " "
+                info_col = execute_query(query, 0, True, "", "", "", "")
+            ElseIf report_mark_type = "46" Then
+                'return
+                query = "SELECT CONCAT(c.comp_number,' - ', c.comp_name) AS `info` FROM tb_sales_return r
+                INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = r.id_store_contact_from
+                INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp WHERE r.id_sales_return=" + id_report + " "
+                info_col = execute_query(query, 0, True, "", "", "", "")
+            ElseIf report_mark_type = "49" Then
+                'return transfer
+                query = "SELECT r.sales_return_number AS `info_report`, CONCAT(c.comp_number,' - ', c.comp_name) AS `info_col` 
+                FROM tb_sales_return_qc rt
+                INNER JOIN tb_sales_return r ON r.id_sales_return = rt.id_sales_return
+                INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = rt.id_store_contact_from
+                INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp 
+                WHERE rt.id_sales_return_qc=" + id_report + " "
+                Dim datax As DataTable = execute_query(query, -1, True, "", "", "", "")
+                If datax.Rows.Count > 0 Then
+                    info_col = datax.Rows(0)("info_col").ToString
+                    info_report = datax.Rows(0)("info_report").ToString
                 End If
             End If
         End If

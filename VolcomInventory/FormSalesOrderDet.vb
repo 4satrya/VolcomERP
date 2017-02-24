@@ -5,6 +5,7 @@ Public Class FormSalesOrderDet
     Public id_sales_order As String = "-1"
     Public id_store_contact_to As String = "-1"
     Public id_store As String = "-1"
+    Public id_store_cat As String = "-1"
     Public id_report_status As String
     Public id_sales_order_det_list As New List(Of String)
     Public id_so_type As String = "0"
@@ -171,12 +172,28 @@ Public Class FormSalesOrderDet
         GCItemList.RefreshDataSource()
         GVItemList.RefreshData()
 
+        'check account trf
+        Dim cond_cat_trf As Boolean = True
+        If id_store_cat = "5" And LEStatusSO.EditValue.ToString <> "5" Then
+            cond_cat_trf = False
+        End If
+
+        'check account store
+        Dim cond_cat_str As Boolean = True
+        If id_store_cat <> "5" And LEStatusSO.EditValue.ToString = "5" Then
+            cond_cat_str = False
+        End If
+
         If Not formIsValidInPanel(EPForm, PanelControlTopLeft) Or Not formIsValidInPanel(EPForm, PanelControlTopMain) Then
             errorInput()
         ElseIf Not cond_data Then
             stopCustom("Please see error log in item list !")
             GridColumnErr.Visible = True
             GridColumnErr.VisibleIndex = 100
+        ElseIf Not cond_cat_trf Then
+            stopCustom("Please select category 'Transfer' !")
+        ElseIf Not cond_cat_str Then
+            stopCustom("Transfer order can't process, please select another category !")
         Else
             Dim sales_order_note As String = MENote.Text
             Dim id_so_type As String = LETypeSO.EditValue.ToString
@@ -536,12 +553,19 @@ Public Class FormSalesOrderDet
             Dim data As DataTable = get_company_by_code(TxtCodeCompTo.Text, query_cond)
             If data.Rows.Count = 0 Then
                 stopCustom("Account not found!")
+                viewDetail("-1")
+                id_store = "-1"
+                id_store_cat = "-1"
+                id_store_contact_to = "-1"
+                TxtNameCompTo.Text = ""
+                MEAdrressCompTo.Text = ""
                 TxtCodeCompTo.Focus()
             Else
                 Cursor = Cursors.WaitCursor
                 viewDetail("-1")
                 noEdit()
                 id_store = data.Rows(0)("id_comp").ToString
+                id_store_cat = data.Rows(0)("id_comp_cat").ToString
                 id_store_contact_to = data.Rows(0)("id_comp_contact").ToString
                 TxtNameCompTo.Text = data.Rows(0)("comp_name").ToString
                 MEAdrressCompTo.Text = data.Rows(0)("address_primary").ToString
@@ -556,6 +580,10 @@ Public Class FormSalesOrderDet
             Dim data As DataTable = get_company_by_code(TxtWHCodeTo.Text, "AND id_comp_cat = '" + id_comp_cat_wh + "' ")
             If data.Rows.Count = 0 Then
                 stopCustom("Warehouse not found!")
+                viewDetail("-1")
+                id_comp_par = "-1"
+                id_comp_contact_par = "-1"
+                TxtWHNameTo.Text = ""
                 TxtWHCodeTo.Focus()
             Else
                 Cursor = Cursors.WaitCursor

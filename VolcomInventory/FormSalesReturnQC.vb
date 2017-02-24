@@ -4,7 +4,12 @@
     Dim bdel_active As String = "1"
 
     Private Sub FormSalesReturnQC_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        viewSalesReturnQC()
+        'date now
+        Dim data As DataTable = execute_query("SELECT DATE(NOW()) AS `tgl`", -1, True, "", "", "", "")
+        DEFrom.EditValue = data.Rows(0)("tgl")
+        DEUntil.EditValue = data.Rows(0)("tgl")
+
+        'return list
         viewSalesReturn()
     End Sub
 
@@ -18,8 +23,19 @@
     End Sub
 
     Sub viewSalesReturnQC()
+        Dim date_from_selected As String = "0000-01-01"
+        Dim date_until_selected As String = "9999-01-01"
+        Try
+            date_from_selected = DateTime.Parse(DEFrom.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+        Try
+            date_until_selected = DateTime.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+
         Dim query_c As ClassSalesReturnQC = New ClassSalesReturnQC()
-        Dim query As String = query_c.queryMain("-1", "2")
+        Dim query As String = query_c.queryMain("AND (a.sales_return_qc_date>='" + date_from_selected + "' AND a.sales_return_qc_date<='" + date_until_selected + "') ", "2")
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCSalesReturnQC.DataSource = data
         check_menu()
@@ -98,12 +114,6 @@
         query += "ORDER BY a.id_sales_return ASC "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCSalesReturn.DataSource = data
-        Dim id_ret As String = "-1"
-        Try
-            id_ret = GVSalesReturn.GetFocusedRowCellValue("id_sales_return").ToString
-        Catch ex As Exception
-        End Try
-        viewListSalesReturnDet(id_ret)
         check_menu()
     End Sub
 
@@ -120,24 +130,19 @@
         End If
     End Sub
 
-    Private Sub GVSalesReturnOrder_FocusedRowChanged(ByVal sender As System.Object, ByVal e As DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs) Handles GVSalesReturn.FocusedRowChanged
-        Dim id_sales_return As String = "0"
-        Try
-            id_sales_return = GVSalesReturn.GetFocusedRowCellValue("id_sales_return").ToString
-        Catch ex As Exception
-        End Try
+    Sub rowChanged()
+        Cursor = Cursors.WaitCursor
+        GCItemList.DataSource = Nothing
+        BtnPrintDetail.Visible = False
+        Cursor = Cursors.Default
+    End Sub
 
-        viewListSalesReturnDet(id_sales_return)
+    Private Sub GVSalesReturnOrder_FocusedRowChanged(ByVal sender As System.Object, ByVal e As DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs) Handles GVSalesReturn.FocusedRowChanged
+        rowChanged()
     End Sub
 
     Private Sub GVSalesReturn_ColumnFilterChanged(sender As Object, e As EventArgs) Handles GVSalesReturn.ColumnFilterChanged
-        Dim id_sales_return As String = "0"
-        Try
-            id_sales_return = GVSalesReturn.GetFocusedRowCellValue("id_sales_return").ToString
-        Catch ex As Exception
-        End Try
-
-        viewListSalesReturnDet(id_sales_return)
+        rowChanged()
     End Sub
 
     Sub check_menu()
@@ -216,5 +221,31 @@
 
     Private Sub XTCReturnQC_SelectedPageChanged(sender As Object, e As DevExpress.XtraTab.TabPageChangedEventArgs) Handles XTCReturnQC.SelectedPageChanged
         check_menu()
+    End Sub
+
+    Private Sub BtnView_Click(sender As Object, e As EventArgs) Handles BtnView.Click
+        Cursor = Cursors.WaitCursor
+        viewSalesReturnQC()
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BAccept_Click(sender As Object, e As EventArgs) Handles BAccept.Click
+        Dim id_ret As String = "-1"
+        Try
+            id_ret = GVSalesReturn.GetFocusedRowCellValue("id_sales_return").ToString
+        Catch ex As Exception
+        End Try
+        viewListSalesReturnDet(id_ret)
+        BtnPrintDetail.Visible = True
+    End Sub
+
+    Private Sub BtnPrintDetail_Click(sender As Object, e As EventArgs) Handles BtnPrintDetail.Click
+        Dim nbr As String = ""
+        Try
+            nbr = GVSalesReturn.GetFocusedRowCellValue("sales_return_number").ToString
+        Catch ex As Exception
+
+        End Try
+        print(GCItemList, nbr)
     End Sub
 End Class

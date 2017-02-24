@@ -64,7 +64,7 @@
         If id_pop_up = "1" Then 'ret in prod
             If GVProdWO.RowCount > 0 Then
                 FormMatRetInProd.id_prod_order_wo = GVProdWO.GetFocusedRowCellValue("id_prod_order_wo").ToString
-                FormMatRetInProd.TEWONumber.Text = GVProdWO.GetFocusedRowCellValue("prod_order_wo_number").ToString
+                'FormMatRetInProd.TEWONumber.Text = GVProdWO.GetFocusedRowCellValue("prod_order_wo_number").ToString
                 FormMatRetInProd.id_comp_contact_from = GVProdWO.GetFocusedRowCellValue("id_comp_contact").ToString
                 FormMatRetInProd.TxtNameCompFrom.Text = get_company_x(get_id_company(GVProdWO.GetFocusedRowCellValue("id_comp_contact").ToString), "1")
                 FormMatRetInProd.TxtCodeCompFrom.Text = get_company_x(get_id_company(GVProdWO.GetFocusedRowCellValue("id_comp_contact").ToString), "2")

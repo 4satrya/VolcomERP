@@ -29,7 +29,7 @@
     End Sub
     Sub view_holiday_sum()
         Dim date_search As String
-        If SLEYear.EditValue.ToString = "ALL" Then
+        If SLEYearSum.EditValue.ToString = "ALL" Then
             date_search = " LIKE '%%' "
         Else
             date_search = " = '" + SLEYearSum.EditValue.ToString + "'"

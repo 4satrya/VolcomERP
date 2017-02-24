@@ -345,6 +345,7 @@ Partial Class FormEmpLeavePick
         Me.DEUntilLeave.Location = New System.Drawing.Point(382, 9)
         Me.DEUntilLeave.Name = "DEUntilLeave"
         Me.DEUntilLeave.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEUntilLeave.Properties.CalendarTimeEditing = DevExpress.Utils.DefaultBoolean.[True]
         Me.DEUntilLeave.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.DEUntilLeave.Properties.DisplayFormat.FormatString = "dd MMM yyyy hh:mm:ss tt"
         Me.DEUntilLeave.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime

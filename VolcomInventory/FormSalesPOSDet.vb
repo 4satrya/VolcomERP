@@ -134,6 +134,20 @@
 
     Sub viewStockStore()
         dt_stock_store.Clear()
+        '
+        Try
+            Dim queryx As String = "SELECT dr.id_wh_drawer,rack.id_wh_rack,loc.id_wh_locator FROM tb_m_comp c
+                                INNER Join tb_m_wh_drawer dr On dr.id_wh_drawer=c.id_drawer_def
+                                INNER JOIN tb_m_wh_rack rack On rack.id_wh_rack=dr.id_wh_rack
+                                INNER Join tb_m_wh_locator loc On loc.id_wh_locator=rack.id_wh_locator
+                                WHERE c.id_comp='" & id_comp & "'"
+            Dim datax As DataTable = execute_query(queryx, -1, True, "", "", "", "")
+            id_wh_drawer = datax.Rows(0)("id_wh_drawer").ToString
+            id_wh_rack = datax.Rows(0)("id_wh_rack").ToString
+            id_wh_locator = datax.Rows(0)("id_wh_locator").ToString
+        Catch ex As Exception
+        End Try
+        '
         Dim end_period As String = "9999-12-01"
         Try
             end_period = DateTime.Parse(DEEnd.EditValue.ToString).ToString("yyyy-MM-dd")
@@ -606,9 +620,12 @@
     End Sub
     Private Sub TxtCodeCompFrom_KeyUp(sender As Object, e As KeyEventArgs) Handles TxtCodeCompFrom.KeyDown
         If e.KeyCode = Keys.Enter Then
-            Dim query As String = "select cc.id_comp_contact,cc.id_comp,c.npwp,c.comp_number,c.comp_name,c.comp_commission,c.address_primary,c.id_so_type "
+            Dim query As String = "SELECT dr.id_wh_drawer,rack.id_wh_rack,loc.id_wh_locator,cc.id_comp_contact,cc.id_comp,c.npwp,c.comp_number,c.comp_name,c.comp_commission,c.address_primary,c.id_so_type "
             query += " From tb_m_comp_contact cc "
-            query += " inner join tb_m_comp c On c.id_comp=cc.id_comp"
+            query += " INNER JOIN tb_m_comp c On c.id_comp=cc.id_comp"
+            query += " INNER JOIN tb_m_wh_drawer dr ON dr.id_wh_drawer=c.id_drawer_def"
+            query += " INNER JOIN tb_m_wh_rack rack ON rack.id_wh_rack=dr.id_wh_rack"
+            query += " INNER JOIN tb_m_wh_locator loc ON loc.id_wh_locator=rack.id_wh_locator"
             query += " where cc.is_default=1 and c.id_comp_cat='" + id_comp_cat_store + "' AND c.comp_number='" + TxtCodeCompFrom.Text + "'"
             Dim data As DataTable = execute_query(query, "-1", True, "", "", "", "")
 
@@ -621,28 +638,32 @@
                 FormPopUpContact.GVCompany.ActiveFilterString = "[comp_number]='" + TxtCodeCompFrom.Text + "'"
                 FormPopUpContact.ShowDialog()
             Else
-                If check_acc(data.Rows(0)("id_comp").ToString) Then
-                    SPDiscount.EditValue = data.Rows(0)("comp_commission")
-                    id_comp = data.Rows(0)("id_comp").ToString
-                    id_store_contact_from = data.Rows(0)("id_comp_contact").ToString
-                    TxtNameCompFrom.Text = data.Rows(0)("comp_name").ToString
-                    TxtCodeCompFrom.Text = data.Rows(0)("comp_number").ToString
-                    MEAdrressCompFrom.Text = data.Rows(0)("address_primary").ToString
-                    TENPWP.Text = data.Rows(0)("npwp").ToString
-                    '
-                    LETypeSO.ItemIndex = LETypeSO.Properties.GetDataSourceRowIndex("id_so_type", data.Rows(0)("id_so_type").ToString)
-                    '
-                    viewDetail()
-                    viewStockStore()
-                    check_but()
-                    GroupControlList.Enabled = True
-                    calculate()
-                    check_do()
-                    '
-                    LETypeSO.Focus()
-                Else
-                    stopCustom("Store not registered for auto posting journal.")
-                End If
+                'If check_acc(data.Rows(0)("id_comp").ToString) Then
+                SPDiscount.EditValue = data.Rows(0)("comp_commission")
+                id_comp = data.Rows(0)("id_comp").ToString
+                id_store_contact_from = data.Rows(0)("id_comp_contact").ToString
+                TxtNameCompFrom.Text = data.Rows(0)("comp_name").ToString
+                TxtCodeCompFrom.Text = data.Rows(0)("comp_number").ToString
+                MEAdrressCompFrom.Text = data.Rows(0)("address_primary").ToString
+                TENPWP.Text = data.Rows(0)("npwp").ToString
+                '
+                id_wh_drawer = data.Rows(0)("id_wh_drawer").ToString
+                id_wh_locator = data.Rows(0)("id_wh_locator").ToString
+                id_wh_rack = data.Rows(0)("id_wh_rack").ToString
+                '
+                LETypeSO.ItemIndex = LETypeSO.Properties.GetDataSourceRowIndex("id_so_type", data.Rows(0)("id_so_type").ToString)
+                '
+                viewDetail()
+                viewStockStore()
+                check_but()
+                GroupControlList.Enabled = True
+                calculate()
+                check_do()
+                '
+                LETypeSO.Focus()
+                'Else
+                '    stopCustom("Store not registered for auto posting journal.")
+                'End If
             End If
         End If
     End Sub

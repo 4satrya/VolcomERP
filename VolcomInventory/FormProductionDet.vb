@@ -226,6 +226,10 @@
                 query = String.Format("UPDATE tb_prod_order SET id_prod_demand_design='{0}',prod_order_number='{1}',id_po_type='{2}',id_term_production='{3}',prod_order_note='{4}',id_delivery='{6}',prod_order_lead_time='{7}' WHERE id_prod_order='{5}'", id_prod_demand_design, TEPONumber.Text, LEPOType.EditValue, LECategory.EditValue, MENote.Text, id_prod_order, id_delivery, TELeadTime.Text)
                 execute_non_query(query, True, "", "", "", "")
 
+                'update mark
+                query = String.Format("UPDATE tb_report_mark SET info='{0}' WHERE id_report='{1}' AND report_mark_type='22'", LEPOType.Text, id_prod_order)
+                execute_non_query(query, True, "", "", "", "")
+                '
                 FormProduction.XTCTabProduction.SelectedTabPageIndex = 0
                 FormProduction.view_production_order()
                 FormProduction.GVProd.FocusedRowHandle = find_row(FormProduction.GVProd, "id_prod_order", id_prod_order)

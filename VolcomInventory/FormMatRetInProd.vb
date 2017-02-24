@@ -11,6 +11,15 @@
     Private Sub FormMatRetInProd_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         viewReportStatus() 'get report status
         viewComp()
+        '
+        Try
+            SLEStorage.EditValue = get_opt_mat_field("id_wh_def")
+            SLELocator.EditValue = get_opt_mat_field("id_loc_def")
+            SLERack.EditValue = get_opt_mat_field("id_rack_def")
+            SLEDrawer.EditValue = get_opt_mat_field("id_drawer_def")
+        Catch ex As Exception
+        End Try
+        '
         actionLoad()
     End Sub
     Sub actionLoad()
@@ -56,7 +65,7 @@
 
                 id_prod_order = data.Rows(0)("id_prod_order").ToString
                 id_prod_order_wo = data.Rows(0)("id_prod_order_wo").ToString
-                TEWONumber.Text = data.Rows(0)("prod_order_number").ToString
+                'TEWONumber.Text = data.Rows(0)("prod_order_number").ToString
                 TEPONumber.Text = data.Rows(0)("prod_order_wo_number").ToString
                 id_comp_contact_from = data.Rows(0)("id_comp_contact_from").ToString
                 TxtCodeCompFrom.Text = data.Rows(0)("comp_number").ToString

@@ -54,6 +54,8 @@ Partial Class FormReportMark
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnReportMarkType = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnIdReport = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl1.SuspendLayout()
         CType(Me.GCMark, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -90,7 +92,7 @@ Partial Class FormReportMark
         '
         'GVMark
         '
-        Me.GVMark.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ColIdMark, Me.ColIdUser, Me.ColName, Me.ColMark, Me.ColReportStatus, Me.ColNote, Me.ColNo, Me.ColIDReportStatus, Me.ColDate, Me.ColDateStart, Me.ColLeadTime, Me.ColIdMarkAsg, Me.ColRawLeadTime, Me.GridColumnAssigned})
+        Me.GVMark.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ColIdMark, Me.ColIdUser, Me.ColName, Me.ColMark, Me.ColReportStatus, Me.ColNote, Me.ColNo, Me.ColIDReportStatus, Me.ColDate, Me.ColDateStart, Me.ColLeadTime, Me.ColIdMarkAsg, Me.ColRawLeadTime, Me.GridColumnAssigned, Me.GridColumnReportMarkType, Me.GridColumnIdReport})
         Me.GVMark.CustomizationFormBounds = New System.Drawing.Rectangle(974, 245, 216, 178)
         Me.GVMark.GridControl = Me.GCMark
         Me.GVMark.GroupCount = 2
@@ -396,6 +398,18 @@ Partial Class FormReportMark
         Me.GridColumn9.VisibleIndex = 2
         Me.GridColumn9.Width = 222
         '
+        'GridColumnReportMarkType
+        '
+        Me.GridColumnReportMarkType.Caption = "Report Mark Type"
+        Me.GridColumnReportMarkType.FieldName = "report_mark_type"
+        Me.GridColumnReportMarkType.Name = "GridColumnReportMarkType"
+        '
+        'GridColumnIdReport
+        '
+        Me.GridColumnIdReport.Caption = "Id Report"
+        Me.GridColumnIdReport.FieldName = "id_report"
+        Me.GridColumnIdReport.Name = "GridColumnIdReport"
+        '
         'FormReportMark
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -461,4 +475,6 @@ Partial Class FormReportMark
     Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn9 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnReportMarkType As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnIdReport As DevExpress.XtraGrid.Columns.GridColumn
 End Class

@@ -257,6 +257,25 @@
                 FormProdQCAdjOut.calculate()
             End If
             Close()
+        ElseIf id_pop_up = "8" Then 'ret in prod material
+            If GVProd.RowCount > 0 Then
+                FormMatRetInProd.id_prod_order = GVProd.GetFocusedRowCellDisplayText("id_prod_order").ToString
+                FormMatRetInProd.TEPONumber.Text = GVProd.GetFocusedRowCellDisplayText("prod_order_number").ToString
+
+                'FormMatRetInProd.id_comp_contact_from = GVProdWO.GetFocusedRowCellValue("id_comp_contact").ToString
+                'FormMatRetInProd.TxtNameCompFrom.Text = get_company_x(get_id_company(GVProdWO.GetFocusedRowCellValue("id_comp_contact").ToString), "1")
+                'FormMatRetInProd.TxtCodeCompFrom.Text = get_company_x(get_id_company(GVProdWO.GetFocusedRowCellValue("id_comp_contact").ToString), "2")
+                'FormMatRetInProd.MEAdrressCompFrom.Text = get_company_x(get_id_company(GVProdWO.GetFocusedRowCellValue("id_comp_contact").ToString), "3")
+                'FormMatRetInProd.TEPONumber.Text = GVProdWO.GetFocusedRowCellValue("prod_order_number").ToString
+                'FormMatRetInProd.TEDesign.Text = GVProdWO.GetFocusedRowCellValue("design_name").ToString
+
+                FormMatRetInProd.GroupControlRet.Enabled = True
+                FormMatRetInProd.viewDetailReturnExt("-1")
+                FormMatRetInProd.check_but()
+                Close()
+            Else
+                warningCustom("No data selected.")
+            End If
         End If
         Cursor = Cursors.Default
     End Sub

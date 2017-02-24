@@ -14,8 +14,8 @@
     End Sub
 
     Private Sub GridView1_CustomColumnDisplayText(ByVal sender As System.Object, ByVal e As DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs) Handles GridView1.CustomColumnDisplayText
-        If e.Column.FieldName = "no" Then
-            e.DisplayText = (e.ListSourceRowIndex + 1).ToString()
-        End If
+        'If e.Column.FieldName = "no" Then
+        '    e.DisplayText = (e.ListSourceRowIndex + 1).ToString()
+        'End If
     End Sub
 End Class

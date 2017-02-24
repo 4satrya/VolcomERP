@@ -4116,7 +4116,7 @@ Public Class FormMain
 
                         'cancel reserved
                         Dim stc_cancel As ClassSalesReturn = New ClassSalesReturn()
-                        stc_cancel.cancelReservedStock(id_sales_return, "46")
+                        stc_cancel.cancelReservedStock(id_sales_return)
 
                         'delete
                         query = String.Format("DELETE FROM tb_sales_return WHERE id_sales_return ='{0}'", id_sales_return)

@@ -9,22 +9,22 @@ Public Class ClassSendEmail
         If report_mark_type = "95" Then
             ' Create a new report. 
 
-            ReportEmpLeave.id_report = id_report
-            ReportEmpLeave.report_mark_type = report_mark_type
+            'ReportEmpLeave.id_report = id_report
+            'ReportEmpLeave.report_mark_type = report_mark_type
 
-            Dim Report As New ReportEmpLeave()
+            'Dim Report As New ReportEmpLeave()
 
             ' Create a new memory stream and export the report into it as PDF.
-            Dim Mem As New MemoryStream()
-            Report.ExportToPdf(Mem)
+            'Dim Mem As New MemoryStream()
+            'Report.ExportToPdf(Mem)
 
             ' Create a new attachment and put the PDF report into it.
-            Mem.Seek(0, System.IO.SeekOrigin.Begin)
+            'Mem.Seek(0, System.IO.SeekOrigin.Begin)
             '
-            Dim Att = New Attachment(Mem, "TestReport.pdf", "application/pdf")
+            'Dim Att = New Attachment(Mem, "TestReport.pdf", "application/pdf")
             '
             Dim mail As MailMessage = New MailMessage("septian@volcom.mail", email_to)
-            mail.Attachments.Add(Att)
+            'mail.Attachments.Add(Att)
             Dim client As SmtpClient = New SmtpClient()
             client.Port = 25
             client.DeliveryMethod = SmtpDeliveryMethod.Network
@@ -103,6 +103,363 @@ Public Class ClassSendEmail
             Next
         End If
     End Sub
+    Sub send_email_appr(ByVal report_mark_type As String, ByVal id_leave As String, ByVal is_appr As Boolean)
+        '
+        Dim query As String = ""
+        query = "SELECT empl.*,lt.leave_type,empl.leave_purpose,empx.email_lokal as dept_head_email,empx.id_employee as id_dep_head,empx.employee_name as dep_head,empld.min_date,empld.max_date,status.report_status,emp.employee_name,emp.employee_code,empld.hours_total,empl.report_mark_type 
+                FROM tb_emp_leave empl
+                INNER JOIN tb_lookup_leave_type lt ON lt.id_leave_type=empl.id_leave_type
+                INNER JOIN tb_lookup_report_status STATUS ON status.id_report_status=empl.id_report_status
+                INNER JOIN tb_m_employee emp ON emp.id_employee=empl.id_emp
+                INNER JOIN tb_lookup_employee_level lvl ON lvl.id_employee_level=emp.id_employee_level  
+                INNER JOIN tb_m_departement dep ON dep.id_departement=emp.id_departement
+                LEFT JOIN tb_m_user usrx ON usrx.id_user=dep.id_user_head
+                LEFT JOIN tb_m_employee empx ON empx.id_employee=usrx.id_employee
+                INNER JOIN 
+                (SELECT id_emp_leave,MIN(datetime_start) AS min_date,MAX(datetime_until) AS max_date,ROUND(SUM(minutes_total)/60) AS hours_total FROM tb_emp_leave_det GROUP BY id_emp_leave) empld ON empld.id_emp_leave=empl.id_emp_leave
+                WHERE empl.id_emp_leave='" & id_leave & "'"
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        Dim emp_leave_type As String = data.Rows(0)("leave_type").ToString
+        Dim dep_head As String = data.Rows(0)("dep_head").ToString
+        Dim dep_head_email As String = data.Rows(0)("dept_head_email").ToString
+        Dim emp_name As String = data.Rows(0)("employee_name").ToString
+        Dim leave_no As String = data.Rows(0)("emp_leave_number").ToString
+        'to list : dep head ; cc list : yg ada di mark semua
+        Dim to_mail As MailAddress = New MailAddress(dep_head_email, dep_head)
+        Dim from_mail As MailAddress = New MailAddress(get_setup_field("system_email").ToString, get_setup_field("app_name").ToString)
+        Dim mail As MailMessage = New MailMessage(from_mail, to_mail)
+
+        Dim querycc As String = "SELECT emp.email_lokal,emp.employee_name,rm.* FROM tb_report_mark rm 
+                                    INNER JOIN tb_m_user usr ON usr.id_user=rm.id_user
+                                    INNER JOIN tb_m_employee emp ON emp.id_employee=usr.id_employee
+                                    WHERE report_mark_type='" & report_mark_type & "' AND id_report='" & id_leave & "' AND id_report_status='3'"
+        Dim datacc As DataTable = execute_query(querycc, -1, True, "", "", "", "")
+        If datacc.Rows.Count > 0 Then
+            For i As Integer = 0 To datacc.Rows.Count - 1
+                Dim cc As MailAddress = New MailAddress(datacc.Rows(i)("email_lokal").ToString, datacc.Rows(i)("employee_name").ToString)
+                mail.CC.Add(cc)
+            Next
+        End If
+        '
+        'Dim to_mail As MailAddress = New MailAddress("septian@volcom.mail", "Septian Primadewa")
+        'Dim from_mail As MailAddress = New MailAddress("system@volcom.mail", "Volcom ERP")
+        'Dim mail As MailMessage = New MailMessage(from_mail, to_mail)
+        'Dim copy As MailAddress = New MailAddress("catur@volcom.mail", "Triya")
+        'mail.CC.Add(copy)
+        If is_appr = True Then
+            '-- start attachment 
+            'Create a New report. 
+            ReportEmpLeave.id_report = id_leave
+            ReportEmpLeave.report_mark_type = report_mark_type
+            Dim Report As New ReportEmpLeave()
+            ' Create a new memory stream and export the report into it as PDF.
+            Dim Mem As New MemoryStream()
+            Report.ExportToPdf(Mem)
+            ' Create a new attachment and put the PDF report into it.
+            Mem.Seek(0, System.IO.SeekOrigin.Begin)
+            Dim Att = New Attachment(Mem, leave_no & " - Request " & emp_leave_type & " - " & emp_name & ".pdf", "application/pdf")
+            mail.Attachments.Add(Att)
+            '-- end attachment
+        End If
+        Dim client As SmtpClient = New SmtpClient()
+        client.Port = 25
+        client.DeliveryMethod = SmtpDeliveryMethod.Network
+        client.UseDefaultCredentials = False
+        client.Host = get_setup_field("system_email_server").ToString
+        client.Credentials = New System.Net.NetworkCredential(get_setup_field("system_email").ToString, get_setup_field("system_email_pass").ToString)
+        If is_appr Then
+            mail.Subject = "Request " & emp_leave_type & " " & emp_name & " Approved"
+        Else
+            mail.Subject = "Request " & emp_leave_type & " " & emp_name & " Not Approved"
+        End If
+
+        mail.IsBodyHtml = True
+        mail.Body = email_appr_body(id_leave, is_appr)
+        client.Send(mail)
+    End Sub
+    Function email_appr_body(ByVal id_leave As String, ByVal is_appr As Boolean)
+        Dim query As String = ""
+        query = "SELECT empl.*,lt.leave_type,empl.leave_purpose,empx.email_lokal as dept_head_email,empx.id_employee as id_dep_head,empx.employee_name as dep_head,empld.min_date,empld.max_date,status.report_status,emp.employee_name,emp.employee_code,empld.hours_total,empl.report_mark_type 
+                FROM tb_emp_leave empl
+                INNER JOIN tb_lookup_leave_type lt ON lt.id_leave_type=empl.id_leave_type
+                INNER JOIN tb_lookup_report_status STATUS ON status.id_report_status=empl.id_report_status
+                INNER JOIN tb_m_employee emp ON emp.id_employee=empl.id_emp
+                INNER JOIN tb_lookup_employee_level lvl ON lvl.id_employee_level=emp.id_employee_level  
+                INNER JOIN tb_m_departement dep ON dep.id_departement=emp.id_departement
+                LEFT JOIN tb_m_user usrx ON usrx.id_user=dep.id_user_head
+                LEFT JOIN tb_m_employee empx ON empx.id_employee=usrx.id_employee
+                INNER JOIN 
+                (SELECT id_emp_leave,MIN(datetime_start) AS min_date,MAX(datetime_until) AS max_date,ROUND(SUM(minutes_total)/60) AS hours_total FROM tb_emp_leave_det GROUP BY id_emp_leave) empld ON empld.id_emp_leave=empl.id_emp_leave
+                WHERE empl.id_emp_leave='" & id_leave & "'"
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        Dim dept_head As String = data.Rows(0)("dep_head").ToString
+        Dim dept_head_email As String = data.Rows(0)("dept_head_email").ToString
+        'reject
+        Dim report_mark_type As String = data.Rows(0)("report_mark_type").ToString
+        Dim reject_by_user As String = ""
+        Dim reject_reason As String = ""
+        If is_appr = False Then
+            Dim query_appr As String = "SELECT rm.*,emp.employee_name FROM tb_report_mark rm INNER JOIN tb_m_user usr ON usr.id_user=rm.id_user INNER JOIN tb_m_employee emp ON emp.id_employee=usr.id_employee WHERE rm.report_mark_type='" & report_mark_type & "' AND rm.id_report='" & id_leave & "' AND rm.id_mark='3'"
+            Dim data_appr As DataTable = execute_query(query_appr, -1, True, "", "", "", "")
+            reject_by_user = data_appr.Rows(0)("employee_name").ToString
+            reject_reason = data_appr.Rows(0)("report_mark_note").ToString
+        End If
+        '
+        Dim leave_no As String = data.Rows(0)("emp_leave_number").ToString
+        Dim leave_datetime As String = Date.Parse(data.Rows(0)("min_date").ToString).ToString("dd MMMM yyyy HH:mm") & " until " & Date.Parse(data.Rows(0)("max_date").ToString).ToString("dd MMMM yyyy HH:mm")
+        Dim employee_name As String = data.Rows(0)("employee_name").ToString
+        Dim leave_purpose As String = data.Rows(0)("leave_purpose").ToString
+        Dim leave_type As String = data.Rows(0)("leave_type").ToString
+        '
+        Dim body_temp As String = ""
+        body_temp = "<table class='m_1811720018273078822MsoNormalTable' border='0' cellspacing='0' cellpadding='0' width='100%' style='width:100.0%;background:#eeeeee'>
+                     <tbody><tr>
+                      <td style='padding:30.0pt 30.0pt 30.0pt 30.0pt'>
+                      <div align='center'>
+
+                      <table class='m_1811720018273078822MsoNormalTable' border='0' cellspacing='0' cellpadding='0' width='600' style='width:6.25in;background:white'>
+                       <tbody><tr>
+                        <td style='padding:0in 0in 0in 0in'></td>
+                       </tr>
+                       <tr>
+                        <td style='padding:0in 0in 0in 0in'>
+                        <p class='MsoNormal' align='center' style='text-align:center'><a href='http://www.volcom.co.id/' title='Volcom' target='_blank' data-saferedirecturl='https://www.google.com/url?hl=en&amp;q=http://www.volcom.co.id/&amp;source=gmail&amp;ust=1480121870771000&amp;usg=AFQjCNEjXvEZWgDdR-Wlke7nn0fmc1ZUuA'><span style='text-decoration:none'><img border='0' width='180' id='m_1811720018273078822_x0000_i1025' src='https://ci3.googleusercontent.com/proxy/x-zXDZUS-2knkEkbTh3HzgyAAusw1Wz7dqV-lbnl39W_4F6T97fJ2_b9doP3nYi0B6KHstdb-tK8VAF_kOaLt2OH=s0-d-e1-ft#http://www.volcom.co.id/enews/img/volcom.jpg' alt='Volcom' class='CToWUd'></span></a><u></u><u></u></p>
+                        </td>
+                       </tr>
+                       <tr>
+                        <td style='padding:0in 0in 0in 0in'></td>
+                       </tr>
+                       <tr>
+                        <td style='padding:0in 0in 0in 0in'>
+                        <table class='m_1811720018273078822MsoNormalTable' border='0' cellspacing='0' cellpadding='0' width='600' style='width:6.25in;background:white'>
+                         <tbody><tr>
+                          <td style='padding:0in 0in 0in 0in'>
+      
+                          </td>
+                         </tr>
+                        </tbody></table>
+                        <p class='MsoNormal' style='background-color:#eff0f1'><span style='display:block;background-color:#eff0f1;height: 5px;'><u></u>&nbsp;<u></u></span></p>
+                        <p class='MsoNormal'><span style='display:none'><u></u>&nbsp;<u></u></span></p>
+                        <table class='m_1811720018273078822MsoNormalTable' border='0' cellspacing='0' cellpadding='0' style='background:white'>
+                         <tbody>
+                         <tr>
+                          <td style='padding:15.0pt 15.0pt 15.0pt 15.0pt' colspan='3'>
+                          <div>
+                          <p class='MsoNormal' style='line-height:14.25pt'><b><span style='font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060'>Dear " & dept_head & ",</span></b><span style='font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060;letter-spacing:.4pt'><u></u><u></u></span></p>
+                          </div>
+                          </td>
+                         </tr>
+                         <tr>
+                          <td style='padding:15.0pt 15.0pt 8.0pt 15.0pt' colspan='3'>
+                          <div>
+                          <p class='MsoNormal' style='line-height:14.25pt'><span style='font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060;letter-spacing:.4pt'>" & leave_type & " request with detail below, </span></b><span style='font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060;letter-spacing:.4pt'><u></u><u></u></span>
+                          </div>
+                          </td>
+                         </tr>
+                         <tr>
+                          <td style='padding:1.0pt 1.0pt 1.0pt 15.0pt'>
+                          <div>
+                          <p class='MsoNormal' style='line-height:14.25pt'>
+                            <span style='font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060;letter-spacing:.4pt'>Number
+                              
+                            </span>
+                          </p>
+
+                          </div>
+                          </td>
+                          <td style='padding:1.0pt 1.0pt 1.0pt 10.0pt'>
+                          <div>
+                          <p class='MsoNormal' style='line-height:14.25pt'>
+                            <span style='font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060;letter-spacing:.4pt'>:
+                              
+                            </span>
+                          </p>
+
+                          </div>
+                          </td>
+                          <td style='padding:1.0pt 1.0pt 1.0pt 10.0pt'>
+                          <div>
+                          <p class='MsoNormal' style='line-height:14.25pt'>
+                            <span style='font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060;letter-spacing:.4pt'>" & leave_no & "
+                              
+                            </span>
+                          </p>
+
+                          </div>
+                          </td>
+                         </tr>
+                         <tr>
+                          <td style='padding:1.0pt 1.0pt 1.0pt 15.0pt'>
+                            <span style='font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060;letter-spacing:.4pt'>Proposed By
+                            </span>
+                          </td>
+                          <td style='padding:1.0pt 1.0pt 1.0pt 10.0pt'>
+                          <div>
+                          <p class='MsoNormal' style='line-height:14.25pt'>
+                            <span style='font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060;letter-spacing:.4pt'>:
+                              
+                            </span>
+                          </p>
+
+                          </div>
+                          </td>
+                          <td style='padding:1.0pt 1.0pt 1.0pt 10.0pt'>
+                          <div>
+                          <p class='MsoNormal' style='line-height:14.25pt'>
+                            <span style='font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060;letter-spacing:.4pt'>" & employee_name & "
+                            </span>
+                          </p>
+                          </div>
+                          </td>
+                         </tr>
+                         <tr>
+                          <td style='padding:1.0pt 1.0pt 1.0pt 15.0pt'>
+                            <span style='font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060;letter-spacing:.4pt'>Periode
+                            </span>
+                          </td>
+                          <td style='padding:1.0pt 1.0pt 1.0pt 10.0pt'>
+                          <div>
+                          <p class='MsoNormal' style='line-height:14.25pt'>
+                            <span style='font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060;letter-spacing:.4pt'>:
+                              
+                            </span>
+                          </p>
+
+                          </div>
+                          </td>
+                          <td style='padding:1.0pt 1.0pt 1.0pt 10.0pt'>
+                          <div>
+                          <p class='MsoNormal' style='line-height:14.25pt'>
+                            <span style='font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060;letter-spacing:.4pt'>" & leave_datetime & "
+                            </span>
+                          </p>
+                          </div>
+                          </td>
+                         </tr>
+                         <tr>
+                          <td style='padding:1.0pt 1.0pt 1.0pt 15.0pt'>
+                            <span style='font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060;letter-spacing:.4pt'>Purpose
+                            </span>
+                          </td>
+                          <td style='padding:1.0pt 1.0pt 1.0pt 10.0pt'>
+                          <div>
+                          <p class='MsoNormal' style='line-height:14.25pt'>
+                            <span style='font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060;letter-spacing:.4pt'>:
+                              
+                            </span>
+                          </p>
+
+                          </div>
+                          </td>
+                          <td style='padding:1.0pt 1.0pt 1.0pt 10.0pt'>
+                          <div>
+                          <p class='MsoNormal' style='line-height:14.25pt'>
+                            <span style='font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060;letter-spacing:.4pt'>" & leave_purpose & "
+                            </span>
+                          </p>
+                          </div>
+                          </td>
+                         </tr>"
+        If is_appr = True Then
+            body_temp += "<tr>
+                          <td style='padding:15.0pt 15.0pt 8.0pt 15.0pt' colspan='3'>
+                          <div>
+                          <p class='MsoNormal' style='line-height:14.25pt'><span style='font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060;letter-spacing:.4pt'>The request has been <b><u>approved</u></b>.</span></b><span style='font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060;letter-spacing:.4pt'><u></u><u></u></span>
+                          </div>
+                          </td>
+                         </tr>"
+        Else
+            body_temp += "<tr>
+                              <td style='padding:15.0pt 15.0pt 8.0pt 15.0pt' colspan='3'>
+                              <div>
+                              <p class='MsoNormal' style='line-height:14.25pt'><span style='font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060;letter-spacing:.4pt'>The request <b><u>not approved</u></b>.</span></b><span style='font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060;letter-spacing:.4pt'><u></u><u></u></span>
+                              </div>
+                              </td>
+                         </tr>
+                         <tr>
+                             <td style='padding:1.0pt 1.0pt 1.0pt 15.0pt'>
+                                <span style='font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060;letter-spacing:.4pt'>By
+                                </span>
+                              </td>
+                              <td style='padding:1.0pt 1.0pt 1.0pt 10.0pt'>
+                              <div>
+                              <p class='MsoNormal' style='line-height:14.25pt'>
+                                <span style='font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060;letter-spacing:.4pt'>:
+                              
+                                </span>
+                              </p>
+
+                              </div>
+                              </td>
+                              <td style='padding:1.0pt 1.0pt 1.0pt 10.0pt'>
+                              <div>
+                              <p class='MsoNormal' style='line-height:14.25pt'>
+                                <span style='font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060;letter-spacing:.4pt'>" & reject_by_user & "
+                                </span>
+                              </p>
+                              </div>
+                             </td>
+                         </tr>
+                         <tr>
+                          <td style='padding:1.0pt 1.0pt 1.0pt 15.0pt'>
+                        
+                            <span style='font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060;letter-spacing:.4pt'>Note
+                              
+                            </span>
+
+                          
+                          </td>
+                          <td style='padding:1.0pt 1.0pt 1.0pt 10.0pt'>
+                          <div>
+                          <p class='MsoNormal' style='line-height:14.25pt'>
+                            <span style='font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060;letter-spacing:.4pt'>:
+                              
+                            </span>
+                          </p>
+
+                          </div>
+                          </td>
+                          <td style='padding:1.0pt 1.0pt 1.0pt 10.0pt'>
+                          <div>
+                          <p class='MsoNormal' style='line-height:14.25pt'>
+                            <span style='font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060;letter-spacing:.4pt'>" & reject_reason & "
+                            </span>
+                          </p>
+                          </div>
+                          </td>
+                         </tr>"
+        End If
+
+        body_temp += "<tr>
+                          <td style='padding:15.0pt 15.0pt 15.0pt 15.0pt' colspan='3'>
+                          <div>
+                          <p class='MsoNormal' style='line-height:14.25pt'><span style='font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060;letter-spacing:.4pt'>Thank you<br /><b>Volcom ERP</b><u></u><u></u></span></p>
+
+                          </div>
+                          </td>
+                         </tr>
+                        </tbody></table>
+                        <p class='MsoNormal' style='background-color:#eff0f1'><span style='display:block;height: 10px;'><u></u>&nbsp;<u></u></span></p>
+                        <p class='MsoNormal'><span style='display:none'><u></u>&nbsp;<u></u></span></p>
+                        <div align='center'>
+                        <table class='m_1811720018273078822MsoNormalTable' border='0' cellspacing='0' cellpadding='0' style='background:white'>
+                         <tbody><tr>
+                          <td style='padding:6.0pt 6.0pt 6.0pt 6.0pt;text-align:center;'>
+                            <span style='text-align:center;font-size:7.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#a0a0a0;letter-spacing:.4pt;'>This email send directly from system. Do not reply.</b><u></u><u></u></span>
+                          <p class='MsoNormal' align='center' style='margin-bottom:12.0pt;text-align:center;padding-top:0px;'><img border='0' width='300' id='m_1811720018273078822_x0000_i1028' src='https://ci6.googleusercontent.com/proxy/xq6o45mp_D9Z7DHCK5WT7GKuQ2QDaLg1hyMxoHX5ofUIv_m7GwasoczpbAOn6l6Ze-UfLuIUAndSokPvO633nnO9=s0-d-e1-ft#http://www.volcom.co.id/enews/img/footer.jpg' class='CToWUd'><u></u><u></u></p>
+                          </td>
+                         </tr>
+                        </tbody></table>
+                        </div>
+                        </td>
+                       </tr>
+                      </tbody></table>
+                      </div>
+                      </td>
+                     </tr>
+                    </tbody></table>"
+        Return body_temp
+    End Function
     Function email_temp(ByVal employee_name As String)
         Dim body_temp As String = ""
         body_temp = "<table class='m_1811720018273078822MsoNormalTable' border='0' cellspacing='0' cellpadding='0' width='100%' style='width:100.0%;background:#eeeeee'>

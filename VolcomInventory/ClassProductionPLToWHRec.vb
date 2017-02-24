@@ -60,7 +60,7 @@
             query_stc += "INNER JOIN tb_prod_demand_product pd_prod ON pd_prod.id_prod_demand_product = po_det.id_prod_demand_product "
             query_stc += "INNER JOIN tb_m_product prod ON prod.id_product = pd_prod.id_product "
             query_stc += "INNER JOIN tb_m_design dsg ON dsg.id_design = prod.id_design "
-            query_stc += "WHERE pl_det.id_pl_prod_order_rec = '" + id_report_par + "' "
+            query_stc += "WHERE pl_det.id_pl_prod_order_rec = '" + id_report_par + "' AND pl_det.pl_prod_order_rec_det_qty>0 "
             execute_non_query(query_stc, True, "", "", "", "")
 
             'first receiving

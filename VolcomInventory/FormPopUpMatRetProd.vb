@@ -1,5 +1,7 @@
 ﻿Public Class FormPopUpMatRetProd
     Public id_prod_order_wo As String = "-1"
+    Public id_prod_order As String = "-1"
+    '
     Public id_pl_mrs_det As String = "-1"
     Public id_pop_up As String = "-1"
     Dim material_image_path As String = get_setup_field("pic_path_mat") & "\"
@@ -24,7 +26,7 @@
     Sub view_mat_wo()
         Try
             Dim query As String
-            query = "CALL view_mat_prod_wo(" & id_prod_order_wo & ")"
+            query = "CALL view_mat_prod(" & id_prod_order & ")"
             Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
             GCMat.DataSource = data
             '

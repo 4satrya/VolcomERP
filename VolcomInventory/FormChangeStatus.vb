@@ -6,6 +6,7 @@
     '3 = RETURN
     '4 = RETURN QC
     '5 = TRF
+    '6 = Del Slip
 
     Sub viewReportStatus()
         Dim query As String = "SELECT id_report_status, report_status FROM tb_lookup_report_status WHERE id_report_status=5 OR id_report_status=6 ORDER BY id_report_status DESC "
@@ -45,6 +46,10 @@
             report_mark_type = "57"
             gv = FormSalesOrderSvcLevel.GVFGTrf
             id = "id_fg_trf"
+        ElseIf id_pop_up = "6" Then 'DS
+            report_mark_type = "103"
+            gv = FormSalesOrderSvcLevel.GVDel
+            id = "id_pl_sales_order_del_slip"
         Else
             gv = Nothing
         End If
@@ -219,6 +224,8 @@
                 FormSalesOrderSvcLevel.GVFGTrf.ActiveFilterString = ""
                 FormSalesOrderSvcLevel.viewTrf()
                 Close()
+            ElseIf id_pop_up = "6" Then
+                ' belum isi
             End If
         Else
             stopCustom("Unable change to this status, report doesn't meet requirement to this status.")

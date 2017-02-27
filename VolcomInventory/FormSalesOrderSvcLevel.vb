@@ -113,6 +113,34 @@
         GCSalesDelOrder.DataSource = data
     End Sub
 
+    Sub viewDS()
+        'Prepare paramater
+        Dim date_from_selected As String = "0000-01-01"
+        Dim date_until_selected As String = "9999-01-01"
+        Try
+            date_from_selected = DateTime.Parse(DEFromDS.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+
+        Try
+            date_until_selected = DateTime.Parse(DEUntilDS.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+
+        Dim cond_status As String = ""
+        If SLEStatusDS.EditValue.ToString = "0" Then
+            cond_status = "AND (a.id_report_status=1 OR a.id_report_status=3 OR a.id_report_status=5 OR a.id_report_status=6) "
+        Else
+            cond_status = "AND a.id_report_status='" + SLEStatusDS.EditValue.ToString + "' "
+        End If
+
+        'prepare query
+        Dim query_c As ClassSalesDelOrder = New ClassSalesDelOrder()
+        Dim query As String = query_c.queryMainHead("AND (a.pl_sales_order_del_slip_date>='" + date_from_selected + "' AND a.pl_sales_order_del_slip_date<='" + date_until_selected + "') " + cond_status, "1")
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCDel.DataSource = data
+    End Sub
+
     Sub viewReturn()
         'Prepare paramater
         Dim date_from_selected As String = "0000-01-01"
@@ -231,6 +259,8 @@
         DEUntilReturnQC.EditValue = data_dt.Rows(0)("dt")
         DEFromTrf.EditValue = data_dt.Rows(0)("dt")
         DEUntilTrf.EditValue = data_dt.Rows(0)("dt")
+        DEFromDS.EditValue = data_dt.Rows(0)("dt")
+        DEUntilDS.EditValue = data_dt.Rows(0)("dt")
     End Sub
 
     Sub viewPackingStatus()
@@ -465,6 +495,15 @@
                     GVSalesOrder.Columns("is_select").OptionsColumn.AllowEdit = True
                 End If
             End If
+        ElseIf type = "7" Then
+            If GVDel.FocusedRowHandle >= 0 Then
+                Dim alloc_cek As String = GVDel.GetFocusedRowCellValue("id_report_status").ToString
+                If alloc_cek = "5" Or alloc_cek = "6" Then
+                    GVDel.Columns("is_select").OptionsColumn.AllowEdit = False
+                Else
+                    GVDel.Columns("is_select").OptionsColumn.AllowEdit = True
+                End If
+            End If
         End If
     End Sub
 
@@ -675,5 +714,43 @@
                 End If
             Next
         End If
+    End Sub
+
+    Private Sub GVDel_DoubleClick(sender As Object, e As EventArgs) Handles GVDel.DoubleClick
+        If GVDel.FocusedRowHandle >= 0 And GVDel.RowCount > 0 Then
+            Cursor = Cursors.WaitCursor
+            FormSalesDelOrderSlip.action = "upd"
+            FormSalesDelOrderSlip.id_pl_sales_order_del_slip = GVDel.GetFocusedRowCellValue("id_pl_sales_order_del_slip").ToString
+            FormSalesDelOrderSlip.ShowDialog()
+            Cursor = Cursors.Default
+        End If
+    End Sub
+
+    Private Sub GVDel_FocusedRowChanged(sender As Object, e As DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs) Handles GVDel.FocusedRowChanged
+        Cursor = Cursors.WaitCursor
+        noEdit(7)
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnViewDS_Click(sender As Object, e As EventArgs) Handles BtnViewDS.Click
+        Cursor = Cursors.WaitCursor
+        GVDel.ActiveFilterString = ""
+        viewDS()
+        noEdit(7)
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnUpdateDS_Click(sender As Object, e As EventArgs) Handles BtnUpdateDS.Click
+        Cursor = Cursors.WaitCursor
+        GVDel.ActiveFilterString = ""
+        GVDel.ActiveFilterString = "[is_select]='Yes' "
+        If GVDel.RowCount = 0 Then
+            stopCustom("Please select document first.")
+            GVDel.ActiveFilterString = ""
+        Else
+            FormChangeStatus.id_pop_up = "6"
+            FormChangeStatus.ShowDialog()
+        End If
+        Cursor = Cursors.Default
     End Sub
 End Class

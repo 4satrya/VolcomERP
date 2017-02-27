@@ -12,6 +12,7 @@ Public Class FormSalesDelOrderSlip
     Public id_pre As String = "-1"
     Public bof_column As String = get_setup_field("bof_column")
     Public bof_xls_so As String = get_setup_field("bof_xls_do")
+    Public is_view As String = "-1"
 
     Private Sub FormSalesDelOrderSlip_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewReportStatus()
@@ -164,6 +165,15 @@ Public Class FormSalesDelOrderSlip
         Else
             BtnXlsBOF.Visible = False
         End If
+
+        'view form
+        If is_view Then
+            BtnSave.Visible = False
+            BtnCancel.Visible = False
+            BtnAttachment.Visible = False
+            BtnXlsBOF.Visible = False
+        End If
+
         TxtSalesDelOrderNumber.Focus()
     End Sub
 
@@ -528,8 +538,23 @@ Public Class FormSalesDelOrderSlip
         FormReportMark.report_mark_type = "103"
         FormReportMark.form_origin = Name
         FormReportMark.is_disabled_set_stt = "1"
+        FormReportMark.is_view = is_view
         FormReportMark.is_view_finalize = "1"
         FormReportMark.ShowDialog()
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnXlsBOF_Click(sender As Object, e As EventArgs) Handles BtnXlsBOF.Click
+        Cursor = Cursors.WaitCursor
+        exportToBOF(False)
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnAttachment_Click(sender As Object, e As EventArgs) Handles BtnAttachment.Click
+        Cursor = Cursors.WaitCursor
+        FormDocumentUpload.id_report = id_pl_sales_order_del_slip
+        FormDocumentUpload.report_mark_type = "103"
+        FormDocumentUpload.ShowDialog()
         Cursor = Cursors.Default
     End Sub
 End Class

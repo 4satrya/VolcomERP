@@ -22,6 +22,8 @@ Partial Class FormProductionRecDet
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormProductionRecDet))
         Me.GroupGeneralHeader = New DevExpress.XtraEditors.GroupControl()
+        Me.LERecType = New DevExpress.XtraEditors.LookUpEdit()
+        Me.LabelControl11 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl10 = New DevExpress.XtraEditors.LabelControl()
         Me.TxtPOType = New DevExpress.XtraEditors.TextEdit()
         Me.BtnInfoSrs = New DevExpress.XtraEditors.SimpleButton()
@@ -93,10 +95,9 @@ Partial Class FormProductionRecDet
         Me.BDelete = New DevExpress.XtraEditors.SimpleButton()
         Me.BStop = New DevExpress.XtraEditors.SimpleButton()
         Me.BScan = New DevExpress.XtraEditors.SimpleButton()
-        Me.LabelControl11 = New DevExpress.XtraEditors.LabelControl()
-        Me.LERecType = New DevExpress.XtraEditors.LookUpEdit()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
+        CType(Me.LERecType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtPOType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PEView.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEDesign.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -135,7 +136,6 @@ Partial Class FormProductionRecDet
         CType(Me.RepositoryItemSpinEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelNavBarcode, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelNavBarcode.SuspendLayout()
-        CType(Me.LERecType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupGeneralHeader
@@ -175,6 +175,23 @@ Partial Class FormProductionRecDet
         Me.GroupGeneralHeader.Name = "GroupGeneralHeader"
         Me.GroupGeneralHeader.Size = New System.Drawing.Size(909, 146)
         Me.GroupGeneralHeader.TabIndex = 38
+        '
+        'LERecType
+        '
+        Me.LERecType.Location = New System.Drawing.Point(555, 59)
+        Me.LERecType.Name = "LERecType"
+        Me.LERecType.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.LERecType.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_prod_rec_type", "ID"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("prod_rec_type", "Type")})
+        Me.LERecType.Size = New System.Drawing.Size(130, 20)
+        Me.LERecType.TabIndex = 165
+        '
+        'LabelControl11
+        '
+        Me.LabelControl11.Location = New System.Drawing.Point(483, 62)
+        Me.LabelControl11.Name = "LabelControl11"
+        Me.LabelControl11.Size = New System.Drawing.Size(49, 13)
+        Me.LabelControl11.TabIndex = 164
+        Me.LabelControl11.Text = "Rec. Type"
         '
         'LabelControl10
         '
@@ -252,7 +269,7 @@ Partial Class FormProductionRecDet
         'TEDODate
         '
         Me.TEDODate.EditValue = Nothing
-        Me.TEDODate.Location = New System.Drawing.Point(765, 63)
+        Me.TEDODate.Location = New System.Drawing.Point(765, 59)
         Me.TEDODate.Name = "TEDODate"
         Me.TEDODate.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.TEDODate.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
@@ -272,7 +289,7 @@ Partial Class FormProductionRecDet
         'TEOrderDate
         '
         Me.TEOrderDate.EditValue = ""
-        Me.TEOrderDate.Location = New System.Drawing.Point(558, 7)
+        Me.TEOrderDate.Location = New System.Drawing.Point(555, 7)
         Me.TEOrderDate.Name = "TEOrderDate"
         Me.TEOrderDate.Properties.EditValueChangedDelay = 1
         Me.TEOrderDate.Properties.ReadOnly = True
@@ -282,7 +299,7 @@ Partial Class FormProductionRecDet
         '
         'LabelControl8
         '
-        Me.LabelControl8.Location = New System.Drawing.Point(486, 10)
+        Me.LabelControl8.Location = New System.Drawing.Point(483, 10)
         Me.LabelControl8.Name = "LabelControl8"
         Me.LabelControl8.Size = New System.Drawing.Size(54, 13)
         Me.LabelControl8.TabIndex = 156
@@ -291,7 +308,7 @@ Partial Class FormProductionRecDet
         'TEEstRecDate
         '
         Me.TEEstRecDate.EditValue = ""
-        Me.TEEstRecDate.Location = New System.Drawing.Point(765, 11)
+        Me.TEEstRecDate.Location = New System.Drawing.Point(765, 7)
         Me.TEEstRecDate.Name = "TEEstRecDate"
         Me.TEEstRecDate.Properties.EditValueChangedDelay = 1
         Me.TEEstRecDate.Properties.ReadOnly = True
@@ -301,7 +318,7 @@ Partial Class FormProductionRecDet
         '
         'LabelControl7
         '
-        Me.LabelControl7.Location = New System.Drawing.Point(694, 14)
+        Me.LabelControl7.Location = New System.Drawing.Point(694, 10)
         Me.LabelControl7.Name = "LabelControl7"
         Me.LabelControl7.Size = New System.Drawing.Size(70, 13)
         Me.LabelControl7.TabIndex = 154
@@ -309,7 +326,7 @@ Partial Class FormProductionRecDet
         '
         'LabelControl5
         '
-        Me.LabelControl5.Location = New System.Drawing.Point(694, 66)
+        Me.LabelControl5.Location = New System.Drawing.Point(694, 62)
         Me.LabelControl5.Name = "LabelControl5"
         Me.LabelControl5.Size = New System.Drawing.Size(65, 13)
         Me.LabelControl5.TabIndex = 151
@@ -318,7 +335,7 @@ Partial Class FormProductionRecDet
         'TEDONumber
         '
         Me.TEDONumber.EditValue = ""
-        Me.TEDONumber.Location = New System.Drawing.Point(558, 85)
+        Me.TEDONumber.Location = New System.Drawing.Point(555, 85)
         Me.TEDONumber.Name = "TEDONumber"
         Me.TEDONumber.Properties.EditValueChangedDelay = 1
         Me.TEDONumber.Size = New System.Drawing.Size(130, 20)
@@ -326,7 +343,7 @@ Partial Class FormProductionRecDet
         '
         'LabelControl2
         '
-        Me.LabelControl2.Location = New System.Drawing.Point(486, 88)
+        Me.LabelControl2.Location = New System.Drawing.Point(483, 88)
         Me.LabelControl2.Name = "LabelControl2"
         Me.LabelControl2.Size = New System.Drawing.Size(55, 13)
         Me.LabelControl2.TabIndex = 149
@@ -335,7 +352,7 @@ Partial Class FormProductionRecDet
         'TERecDate
         '
         Me.TERecDate.EditValue = ""
-        Me.TERecDate.Location = New System.Drawing.Point(765, 37)
+        Me.TERecDate.Location = New System.Drawing.Point(765, 33)
         Me.TERecDate.Name = "TERecDate"
         Me.TERecDate.Properties.EditValueChangedDelay = 1
         Me.TERecDate.Properties.ReadOnly = True
@@ -345,7 +362,7 @@ Partial Class FormProductionRecDet
         '
         'LabelControl6
         '
-        Me.LabelControl6.Location = New System.Drawing.Point(694, 40)
+        Me.LabelControl6.Location = New System.Drawing.Point(694, 36)
         Me.LabelControl6.Name = "LabelControl6"
         Me.LabelControl6.Size = New System.Drawing.Size(64, 13)
         Me.LabelControl6.TabIndex = 147
@@ -354,7 +371,7 @@ Partial Class FormProductionRecDet
         'TERecNumber
         '
         Me.TERecNumber.EditValue = ""
-        Me.TERecNumber.Location = New System.Drawing.Point(558, 33)
+        Me.TERecNumber.Location = New System.Drawing.Point(555, 33)
         Me.TERecNumber.Name = "TERecNumber"
         Me.TERecNumber.Properties.EditValueChangedDelay = 1
         Me.TERecNumber.Properties.ReadOnly = True
@@ -364,7 +381,7 @@ Partial Class FormProductionRecDet
         '
         'LabelControl1
         '
-        Me.LabelControl1.Location = New System.Drawing.Point(487, 37)
+        Me.LabelControl1.Location = New System.Drawing.Point(484, 37)
         Me.LabelControl1.Name = "LabelControl1"
         Me.LabelControl1.Size = New System.Drawing.Size(58, 13)
         Me.LabelControl1.TabIndex = 146
@@ -372,6 +389,7 @@ Partial Class FormProductionRecDet
         '
         'BShowOrder
         '
+        Me.BShowOrder.Enabled = False
         Me.BShowOrder.Location = New System.Drawing.Point(410, 7)
         Me.BShowOrder.Name = "BShowOrder"
         Me.BShowOrder.Size = New System.Drawing.Size(23, 20)
@@ -901,23 +919,6 @@ Partial Class FormProductionRecDet
         Me.BScan.TabIndex = 6
         Me.BScan.Text = "Start Scan"
         '
-        'LabelControl11
-        '
-        Me.LabelControl11.Location = New System.Drawing.Point(487, 62)
-        Me.LabelControl11.Name = "LabelControl11"
-        Me.LabelControl11.Size = New System.Drawing.Size(49, 13)
-        Me.LabelControl11.TabIndex = 164
-        Me.LabelControl11.Text = "Rec. Type"
-        '
-        'LERecType
-        '
-        Me.LERecType.Location = New System.Drawing.Point(558, 59)
-        Me.LERecType.Name = "LERecType"
-        Me.LERecType.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.LERecType.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_prod_rec_type", "ID"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("prod_rec_type", "Type")})
-        Me.LERecType.Size = New System.Drawing.Size(130, 20)
-        Me.LERecType.TabIndex = 165
-        '
         'FormProductionRecDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -939,6 +940,7 @@ Partial Class FormProductionRecDet
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupGeneralHeader.ResumeLayout(False)
         Me.GroupGeneralHeader.PerformLayout()
+        CType(Me.LERecType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtPOType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PEView.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEDesign.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -978,7 +980,6 @@ Partial Class FormProductionRecDet
         CType(Me.RepositoryItemSpinEdit2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelNavBarcode, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelNavBarcode.ResumeLayout(False)
-        CType(Me.LERecType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

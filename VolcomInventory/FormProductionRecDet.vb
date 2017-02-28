@@ -10,7 +10,10 @@ Public Class FormProductionRecDet
     Dim is_start As Boolean = False
     Public bof_column As String = get_setup_field("bof_column")
     Public bof_xls As String = get_setup_field("bof_xls_rcvqc")
-
+    Dim total_min As Integer = 0
+    Dim total_max As Integer = 0
+    Dim total_rec As Integer = 0
+    Dim is_special_rec As String = "-1"
 
     Private Sub FormProductionRecDet_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         BShowOrder.Focus()
@@ -36,7 +39,6 @@ Public Class FormProductionRecDet
             TERecDate.Text = view_date(0)
             TERecNumber.Text = ""
 
-            BShowOrder.Enabled = True
             BPrint.Enabled = False
             BMark.Enabled = False
             BtnAttachment.Enabled = False
@@ -138,7 +140,7 @@ Public Class FormProductionRecDet
 
     Sub view_po()
         Dim query As String = "SELECT b.id_design,d.id_sample, d.design_name, d.design_display_name, a.id_report_status, a.prod_order_number, a.id_po_type, DATE_FORMAT(a.prod_order_date,'%Y-%m-%d') as prod_order_datex, "
-        query += "a.prod_order_lead_time, a.prod_order_note, g.po_type "
+        query += "a.prod_order_lead_time, a.prod_order_note, g.po_type, get_total_po(" + id_order + ", 2) AS `total_min`, g.po_type, get_total_po(" + id_order + ", 3) AS `total_max`, get_total_po(" + id_order + ", 4) AS `total_rec`, a.is_special_rec "
         query += "FROM tb_prod_order a "
         query += "INNER JOIN tb_prod_demand_design b ON a.id_prod_demand_design = b.id_prod_demand_design "
         query += "INNER JOIN tb_lookup_report_status c ON a.id_report_status = c.id_report_status "
@@ -157,9 +159,12 @@ Public Class FormProductionRecDet
         TEEstRecDate.Text = view_date_from(data.Rows(0)("prod_order_datex").ToString, Integer.Parse(data.Rows(0)("prod_order_lead_time").ToString))
         TEDesign.Text = data.Rows(0)("design_display_name").ToString
         TxtPOType.Text = data.Rows(0)("po_type").ToString
+        is_special_rec = data.Rows(0)("is_special_rec").ToString
+        total_min = Integer.Parse(data.Rows(0)("total_min").ToString)
+        total_max = Integer.Parse(data.Rows(0)("total_max").ToString)
+        total_rec = Integer.Parse(data.Rows(0)("total_rec").ToString)
         pre_viewImages("2", PEView, id_design, False)
         mainVendor()
-
     End Sub
 
     Sub mainVendor()
@@ -412,10 +417,10 @@ Public Class FormProductionRecDet
                     Try
                         'insert rec
                         If do_date = "0000-00-00" Then
-                            query = String.Format("INSERT INTO tb_prod_order_rec(id_prod_order, prod_order_rec_number, delivery_order_number, delivery_order_date, prod_order_rec_date, prod_order_rec_note ,id_report_status, id_comp_contact_to , id_comp_contact_from) VALUES('{0}','{1}','{2}',NULL,DATE(NOW()),'{3}','{4}','{5}', '{6}'); SELECT LAST_INSERT_ID(); ", id_order, rec_number, do_number, rec_note, rec_stats, id_comp_to, id_comp_from)
+                            query = String.Format("INSERT INTO tb_prod_order_rec(id_prod_order, prod_order_rec_number, delivery_order_number, delivery_order_date, prod_order_rec_date, prod_order_rec_note ,id_report_status, id_comp_contact_to , id_comp_contact_from, id_prod_rec_type) VALUES('{0}','{1}','{2}',NULL,DATE(NOW()),'{3}','{4}','{5}', '{6}', '{7}'); SELECT LAST_INSERT_ID(); ", id_order, rec_number, do_number, rec_note, rec_stats, id_comp_to, id_comp_from, id_prod_rec_type)
                             id_rec_new = execute_query(query, 0, True, "", "", "", "")
                         Else
-                            query = String.Format("INSERT INTO tb_prod_order_rec(id_prod_order, prod_order_rec_number, delivery_order_number, delivery_order_date, prod_order_rec_date, prod_order_rec_note ,id_report_status, id_comp_contact_to , id_comp_contact_from) VALUES('{0}','{1}','{2}','{3}',DATE(NOW()),'{4}','{5}','{6}', '{7}'); SELECT LAST_INSERT_ID(); ", id_order, rec_number, do_number, do_date, rec_note, rec_stats, id_comp_to, id_comp_from)
+                            query = String.Format("INSERT INTO tb_prod_order_rec(id_prod_order, prod_order_rec_number, delivery_order_number, delivery_order_date, prod_order_rec_date, prod_order_rec_note ,id_report_status, id_comp_contact_to , id_comp_contact_from, id_prod_rec_type) VALUES('{0}','{1}','{2}','{3}',DATE(NOW()),'{4}','{5}','{6}', '{7}', '{8}'); SELECT LAST_INSERT_ID(); ", id_order, rec_number, do_number, do_date, rec_note, rec_stats, id_comp_to, id_comp_from, id_prod_rec_type)
                             id_rec_new = execute_query(query, 0, True, "", "", "", "")
                         End If
 
@@ -637,6 +642,8 @@ Public Class FormProductionRecDet
         Dim code_check As String = GVBarcode.GetFocusedRowCellValue("ean_code").ToString
         Dim code_found As Boolean = False
         Dim id_prod_order_det As String = ""
+        Dim cur_total As Integer = Integer.Parse(GVListPurchase.Columns("prod_order_rec_det_qty").SummaryItem.SummaryValue.ToString)
+
         For i As Integer = 0 To (GVListPurchase.RowCount - 1)
             Dim code As String = GVListPurchase.GetRowCellValue(i, "ean_code").ToString
             id_prod_order_det = GVListPurchase.GetRowCellValue(i, "id_prod_order_det").ToString
@@ -649,11 +656,23 @@ Public Class FormProductionRecDet
             GVBarcode.SetFocusedRowCellValue("ean_code", "")
             stopCustom("Data not found !")
         Else
-            GVBarcode.SetFocusedRowCellValue("is_fix", "2")
-            GVBarcode.SetFocusedRowCellValue("id_prod_order_det", id_prod_order_det)
-            countQty(id_prod_order_det)
-            newRows()
-            'allowDelete()
+            If is_special_rec = "1" Then
+                GVBarcode.SetFocusedRowCellValue("is_fix", "2")
+                GVBarcode.SetFocusedRowCellValue("id_prod_order_det", id_prod_order_det)
+                countQty(id_prod_order_det)
+                newRows()
+                'allowDelete()
+            Else
+                If (total_rec + cur_total + 1) <= total_max Then
+                    GVBarcode.SetFocusedRowCellValue("is_fix", "2")
+                    GVBarcode.SetFocusedRowCellValue("id_prod_order_det", id_prod_order_det)
+                    countQty(id_prod_order_det)
+                    newRows()
+                    'allowDelete()
+                Else
+                    stopCustom("Tolerance receive maximum : " + total_max.ToString)
+                End If
+            End If
         End If
     End Sub
 

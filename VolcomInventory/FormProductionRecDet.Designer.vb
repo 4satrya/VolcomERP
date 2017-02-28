@@ -55,8 +55,9 @@ Partial Class FormProductionRecDet
         Me.MENote = New DevExpress.XtraEditors.MemoEdit()
         Me.LabelControl18 = New DevExpress.XtraEditors.LabelControl()
         Me.GroupControl1 = New DevExpress.XtraEditors.GroupControl()
-        Me.BtnAttachment = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnXlsBOF = New DevExpress.XtraEditors.SimpleButton()
         Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
+        Me.BtnAttachment = New DevExpress.XtraEditors.SimpleButton()
         Me.BPrint = New DevExpress.XtraEditors.SimpleButton()
         Me.BCancel = New DevExpress.XtraEditors.SimpleButton()
         Me.BSave = New DevExpress.XtraEditors.SimpleButton()
@@ -92,7 +93,8 @@ Partial Class FormProductionRecDet
         Me.BDelete = New DevExpress.XtraEditors.SimpleButton()
         Me.BStop = New DevExpress.XtraEditors.SimpleButton()
         Me.BScan = New DevExpress.XtraEditors.SimpleButton()
-        Me.BtnXlsBOF = New DevExpress.XtraEditors.SimpleButton()
+        Me.LabelControl11 = New DevExpress.XtraEditors.LabelControl()
+        Me.LERecType = New DevExpress.XtraEditors.LookUpEdit()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
         CType(Me.TxtPOType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -133,11 +135,14 @@ Partial Class FormProductionRecDet
         CType(Me.RepositoryItemSpinEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelNavBarcode, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelNavBarcode.SuspendLayout()
+        CType(Me.LERecType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupGeneralHeader
         '
         Me.GroupGeneralHeader.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupGeneralHeader.Controls.Add(Me.LERecType)
+        Me.GroupGeneralHeader.Controls.Add(Me.LabelControl11)
         Me.GroupGeneralHeader.Controls.Add(Me.LabelControl10)
         Me.GroupGeneralHeader.Controls.Add(Me.TxtPOType)
         Me.GroupGeneralHeader.Controls.Add(Me.BtnInfoSrs)
@@ -313,7 +318,7 @@ Partial Class FormProductionRecDet
         'TEDONumber
         '
         Me.TEDONumber.EditValue = ""
-        Me.TEDONumber.Location = New System.Drawing.Point(558, 63)
+        Me.TEDONumber.Location = New System.Drawing.Point(558, 85)
         Me.TEDONumber.Name = "TEDONumber"
         Me.TEDONumber.Properties.EditValueChangedDelay = 1
         Me.TEDONumber.Size = New System.Drawing.Size(130, 20)
@@ -321,7 +326,7 @@ Partial Class FormProductionRecDet
         '
         'LabelControl2
         '
-        Me.LabelControl2.Location = New System.Drawing.Point(486, 66)
+        Me.LabelControl2.Location = New System.Drawing.Point(486, 88)
         Me.LabelControl2.Name = "LabelControl2"
         Me.LabelControl2.Size = New System.Drawing.Size(55, 13)
         Me.LabelControl2.TabIndex = 149
@@ -496,17 +501,18 @@ Partial Class FormProductionRecDet
         Me.GroupControl1.Size = New System.Drawing.Size(909, 36)
         Me.GroupControl1.TabIndex = 41
         '
-        'BtnAttachment
+        'BtnXlsBOF
         '
-        Me.BtnAttachment.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BtnAttachment.Enabled = False
-        Me.BtnAttachment.ImageIndex = 10
-        Me.BtnAttachment.ImageList = Me.LargeImageCollection
-        Me.BtnAttachment.Location = New System.Drawing.Point(585, 2)
-        Me.BtnAttachment.Name = "BtnAttachment"
-        Me.BtnAttachment.Size = New System.Drawing.Size(97, 32)
-        Me.BtnAttachment.TabIndex = 12
-        Me.BtnAttachment.Text = "Attachment"
+        Me.BtnXlsBOF.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnXlsBOF.Image = CType(resources.GetObject("BtnXlsBOF.Image"), System.Drawing.Image)
+        Me.BtnXlsBOF.ImageIndex = 11
+        Me.BtnXlsBOF.ImageList = Me.LargeImageCollection
+        Me.BtnXlsBOF.Location = New System.Drawing.Point(470, 2)
+        Me.BtnXlsBOF.Name = "BtnXlsBOF"
+        Me.BtnXlsBOF.Size = New System.Drawing.Size(115, 32)
+        Me.BtnXlsBOF.TabIndex = 16
+        Me.BtnXlsBOF.Text = "Generate XLS"
+        Me.BtnXlsBOF.Visible = False
         '
         'LargeImageCollection
         '
@@ -523,6 +529,18 @@ Partial Class FormProductionRecDet
         Me.LargeImageCollection.Images.SetKeyName(8, "31_24x24.png")
         Me.LargeImageCollection.Images.SetKeyName(9, "18_24x24.png")
         Me.LargeImageCollection.Images.SetKeyName(10, "attachment-icon.png")
+        '
+        'BtnAttachment
+        '
+        Me.BtnAttachment.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnAttachment.Enabled = False
+        Me.BtnAttachment.ImageIndex = 10
+        Me.BtnAttachment.ImageList = Me.LargeImageCollection
+        Me.BtnAttachment.Location = New System.Drawing.Point(585, 2)
+        Me.BtnAttachment.Name = "BtnAttachment"
+        Me.BtnAttachment.Size = New System.Drawing.Size(97, 32)
+        Me.BtnAttachment.TabIndex = 12
+        Me.BtnAttachment.Text = "Attachment"
         '
         'BPrint
         '
@@ -883,18 +901,22 @@ Partial Class FormProductionRecDet
         Me.BScan.TabIndex = 6
         Me.BScan.Text = "Start Scan"
         '
-        'BtnXlsBOF
+        'LabelControl11
         '
-        Me.BtnXlsBOF.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BtnXlsBOF.Image = CType(resources.GetObject("BtnXlsBOF.Image"), System.Drawing.Image)
-        Me.BtnXlsBOF.ImageIndex = 11
-        Me.BtnXlsBOF.ImageList = Me.LargeImageCollection
-        Me.BtnXlsBOF.Location = New System.Drawing.Point(470, 2)
-        Me.BtnXlsBOF.Name = "BtnXlsBOF"
-        Me.BtnXlsBOF.Size = New System.Drawing.Size(115, 32)
-        Me.BtnXlsBOF.TabIndex = 16
-        Me.BtnXlsBOF.Text = "Generate XLS"
-        Me.BtnXlsBOF.Visible = False
+        Me.LabelControl11.Location = New System.Drawing.Point(487, 62)
+        Me.LabelControl11.Name = "LabelControl11"
+        Me.LabelControl11.Size = New System.Drawing.Size(49, 13)
+        Me.LabelControl11.TabIndex = 164
+        Me.LabelControl11.Text = "Rec. Type"
+        '
+        'LERecType
+        '
+        Me.LERecType.Location = New System.Drawing.Point(558, 59)
+        Me.LERecType.Name = "LERecType"
+        Me.LERecType.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.LERecType.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_prod_rec_type", "ID"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("prod_rec_type", "Type")})
+        Me.LERecType.Size = New System.Drawing.Size(130, 20)
+        Me.LERecType.TabIndex = 165
         '
         'FormProductionRecDet
         '
@@ -956,6 +978,7 @@ Partial Class FormProductionRecDet
         CType(Me.RepositoryItemSpinEdit2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelNavBarcode, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelNavBarcode.ResumeLayout(False)
+        CType(Me.LERecType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1031,4 +1054,6 @@ Partial Class FormProductionRecDet
     Friend WithEvents LabelControl10 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents TxtPOType As DevExpress.XtraEditors.TextEdit
     Friend WithEvents BtnXlsBOF As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents LERecType As DevExpress.XtraEditors.LookUpEdit
+    Friend WithEvents LabelControl11 As DevExpress.XtraEditors.LabelControl
 End Class

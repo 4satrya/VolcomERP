@@ -16,7 +16,7 @@
     Sub view_prod_order_rec()
         Dim query = "SELECT a.id_report_status,h.report_status, g.id_season,g.season,a.id_prod_order_rec,a.prod_order_rec_number, "
         query += "(a.delivery_order_date) AS delivery_order_date,a.delivery_order_number,b.prod_order_number, "
-        query += "(a.prod_order_rec_date) AS prod_order_rec_date, CONCAT(f.comp_number,' - ',f.comp_name) AS comp_from, CONCAT(d.comp_number,' - ',d.comp_name) AS comp_to, (dsg.design_display_name) AS name, po_type.po_type "
+        query += "(a.prod_order_rec_date) AS prod_order_rec_date, CONCAT(f.comp_number,' - ',f.comp_name) AS comp_from, CONCAT(d.comp_number,' - ',d.comp_name) AS comp_to, (dsg.design_display_name) AS name, po_type.po_type, rt.id_prod_rec_type, rt.prod_rec_type "
         query += "FROM tb_prod_order_rec a  "
         query += "INNER JOIN tb_prod_order b ON a.id_prod_order=b.id_prod_order "
         query += "INNER JOIN tb_m_comp_contact c ON c.id_comp_contact = a.id_comp_contact_to "
@@ -28,7 +28,8 @@
         query += "INNER JOIN tb_lookup_report_status h ON h.id_report_status = a.id_report_status "
         query += "INNER JOIN tb_prod_demand_design pd_dsg ON pd_dsg.id_prod_demand_design = b.id_prod_demand_design "
         query += "INNER JOIN tb_m_design dsg ON dsg.id_design = pd_dsg.id_design "
-        query += "INNER JOIN tb_lookup_po_type po_type ON po_type.id_po_type = b.id_po_type "
+        query += "INNER JOIN tb_lookup_po_type po_type ON po_type.id_po_type = b.id_po_type 
+                  LEFT JOIN tb_lookup_prod_rec_type rt ON rt.id_prod_rec_type = a.id_prod_rec_type "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCProdRec.DataSource = data
         If data.Rows.Count > 0 Then

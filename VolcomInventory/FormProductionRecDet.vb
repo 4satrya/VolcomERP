@@ -16,6 +16,7 @@ Public Class FormProductionRecDet
         BShowOrder.Focus()
         allowDelete()
         view_report_status(LEReportStatus)
+        view_prod_rec_type(LERecType)
         actionLoad()
     End Sub
 
@@ -66,7 +67,7 @@ Public Class FormProductionRecDet
             BMark.Enabled = True
 
             Dim order_created As String
-            Dim query = "SELECT j.id_design,IF(a.delivery_order_date<>'0000-00-00', 'date_normal','date_null') as del_date_type, i.id_sample, (i.design_display_name) AS `design_name`, a.id_report_status,a.prod_order_rec_note,a.id_comp_contact_from as id_comp_from,b.id_prod_order,a.id_comp_contact_to as id_comp_to,g.season,a.id_prod_order_rec,a.prod_order_rec_number,DATE_FORMAT(b.prod_order_date,'%Y-%m-%d') as prod_order_datex,b.prod_order_lead_time,a.delivery_order_date,a.delivery_order_number,b.prod_order_number,DATE_FORMAT(a.prod_order_rec_date,'%Y-%m-%d') AS prod_order_rec_date, f.comp_name AS comp_from, f.comp_number AS comp_from_number,d.comp_name AS comp_to, d.comp_number AS comp_to_number, i.id_sample, po_type.po_type "
+            Dim query = "SELECT j.id_design,IF(a.delivery_order_date<>'0000-00-00', 'date_normal','date_null') as del_date_type, i.id_sample, (i.design_display_name) AS `design_name`, a.id_report_status,a.prod_order_rec_note,a.id_comp_contact_from as id_comp_from,b.id_prod_order,a.id_comp_contact_to as id_comp_to,g.season,a.id_prod_order_rec,a.prod_order_rec_number,DATE_FORMAT(b.prod_order_date,'%Y-%m-%d') as prod_order_datex,b.prod_order_lead_time,a.delivery_order_date,a.delivery_order_number,b.prod_order_number,DATE_FORMAT(a.prod_order_rec_date,'%Y-%m-%d') AS prod_order_rec_date, f.comp_name AS comp_from, f.comp_number AS comp_from_number,d.comp_name AS comp_to, d.comp_number AS comp_to_number, i.id_sample, po_type.po_type, rt.id_prod_rec_type, rt.prod_rec_type "
             query += "FROM tb_prod_order_rec a "
             query += "INNER JOIN tb_prod_order b ON a.id_prod_order=b.id_prod_order "
             query += "INNER JOIN tb_m_comp_contact c ON c.id_comp_contact=a.id_comp_contact_to "
@@ -78,6 +79,7 @@ Public Class FormProductionRecDet
             query += "INNER JOIN tb_prod_demand_design j ON b.id_prod_demand_design = j.id_prod_demand_design "
             query += "INNER JOIN tb_m_design i ON j.id_design = i.id_design "
             query += "INNER JOIN tb_lookup_po_type po_type ON po_type.id_po_type = b.id_po_type "
+            query += "LEFT JOIN tb_lookup_prod_rec_type rt ON rt.id_prod_rec_type = a.id_prod_rec_type "
             query += " WHERE a.id_prod_order_rec='" & id_receive & "' "
             Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
@@ -222,6 +224,17 @@ Public Class FormProductionRecDet
         lookup.ItemIndex = 0
     End Sub
 
+    Sub view_prod_rec_type(ByVal lookup As DevExpress.XtraEditors.LookUpEdit)
+        Dim query As String = "SELECT * FROM tb_lookup_prod_rec_type rt "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+
+        lookup.Properties.DataSource = data
+
+        lookup.Properties.DisplayMember = "prod_rec_type"
+        lookup.Properties.ValueMember = "id_prod_rec_type"
+        lookup.ItemIndex = 0
+    End Sub
+
     Private Sub TERecNumber_Validating(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles TERecNumber.Validating
         'Dim query_jml As String
         'query_jml = String.Format("SELECT COUNT(id_prod_order_rec) FROM tb_prod_order_rec WHERE prod_order_rec_number='{0}' AND id_prod_order_rec!='{1}'", TERecNumber.Text, id_receive)
@@ -250,7 +263,6 @@ Public Class FormProductionRecDet
         If check_edit_report_status(LEReportStatus.EditValue.ToString, "28", id_receive) Then
             BScan.Enabled = True
             BDelete.Enabled = True
-            BSave.Enabled = True
             TEDODate.Properties.ReadOnly = False
             TEDONumber.Properties.ReadOnly = False
             MENote.Properties.ReadOnly = False
@@ -260,7 +272,6 @@ Public Class FormProductionRecDet
         Else
             BScan.Enabled = False
             BDelete.Enabled = False
-            BSave.Enabled = False
             TEDODate.Properties.ReadOnly = True
             TEDONumber.Properties.ReadOnly = True
             MENote.Properties.ReadOnly = True
@@ -268,6 +279,9 @@ Public Class FormProductionRecDet
             BtnInfoSrs.Enabled = False
             GVListPurchase.OptionsCustomization.AllowGroup = True
         End If
+        BSave.Enabled = False
+        LERecType.Enabled = False
+        PanelNavBarcode.Enabled = False
 
         'attachment
         If check_attach_report_status(LEReportStatus.EditValue.ToString, "28", id_receive) Then
@@ -342,11 +356,12 @@ Public Class FormProductionRecDet
         ValidateChildren()
         Dim query As String = ""
         Dim err_txt As String = ""
-        Dim rec_number, rec_date, do_number, do_date, rec_note, rec_stats As String
+        Dim rec_number, rec_date, id_prod_rec_type, do_number, do_date, rec_note, rec_stats As String
         Dim id_rec_new As String
 
         rec_number = ""
         rec_date = ""
+        id_prod_rec_type = ""
         do_number = ""
         do_date = ""
         rec_note = ""
@@ -368,9 +383,11 @@ Public Class FormProductionRecDet
             do_date = DateTime.Parse(TEDODate.EditValue.ToString).ToString("yyyy-MM-dd")
         End If
         rec_date = TERecDate.Text
+        id_prod_rec_type = LERecType.EditValue.ToString
         do_number = TEDONumber.Text
         rec_note = MENote.Text
         rec_stats = LEReportStatus.EditValue
+
 
 
         For i As Integer = 0 To GVListPurchase.RowCount - 1

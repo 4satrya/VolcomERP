@@ -642,7 +642,11 @@ Public Class FormProductionRecDet
         Dim code_check As String = GVBarcode.GetFocusedRowCellValue("ean_code").ToString
         Dim code_found As Boolean = False
         Dim id_prod_order_det As String = ""
-        Dim cur_total As Integer = Integer.Parse(GVListPurchase.Columns("prod_order_rec_det_qty").SummaryItem.SummaryValue.ToString)
+        Dim cur_total As Integer = 0
+        Try
+            cur_total = GVListPurchase.Columns("prod_order_rec_det_qty").SummaryItem.SummaryValue.ToString
+        Catch ex As Exception
+        End Try
 
         For i As Integer = 0 To (GVListPurchase.RowCount - 1)
             Dim code As String = GVListPurchase.GetRowCellValue(i, "ean_code").ToString

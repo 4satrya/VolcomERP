@@ -624,7 +624,7 @@ Partial Class FormProductionRecDet
         Me.SCCRec.Panel2.Controls.Add(Me.GroupControlListBarcode)
         Me.SCCRec.Panel2.Text = "Panel2"
         Me.SCCRec.Size = New System.Drawing.Size(909, 310)
-        Me.SCCRec.SplitterPosition = 134
+        Me.SCCRec.SplitterPosition = 145
         Me.SCCRec.TabIndex = 44
         Me.SCCRec.Text = "SplitContainerControl1"
         '
@@ -636,7 +636,7 @@ Partial Class FormProductionRecDet
         Me.GConListPurchase.Enabled = False
         Me.GConListPurchase.Location = New System.Drawing.Point(0, 0)
         Me.GConListPurchase.Name = "GConListPurchase"
-        Me.GConListPurchase.Size = New System.Drawing.Size(909, 134)
+        Me.GConListPurchase.Size = New System.Drawing.Size(909, 145)
         Me.GConListPurchase.TabIndex = 39
         Me.GConListPurchase.Text = "List Receive"
         '
@@ -647,7 +647,7 @@ Partial Class FormProductionRecDet
         Me.GCListPurchase.MainView = Me.GVListPurchase
         Me.GCListPurchase.Name = "GCListPurchase"
         Me.GCListPurchase.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckEdit1, Me.RepositoryItemSpinEdit1})
-        Me.GCListPurchase.Size = New System.Drawing.Size(886, 130)
+        Me.GCListPurchase.Size = New System.Drawing.Size(886, 141)
         Me.GCListPurchase.TabIndex = 5
         Me.GCListPurchase.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVListPurchase})
         '
@@ -796,7 +796,7 @@ Partial Class FormProductionRecDet
         Me.GroupControlListBarcode.Enabled = False
         Me.GroupControlListBarcode.Location = New System.Drawing.Point(0, 0)
         Me.GroupControlListBarcode.Name = "GroupControlListBarcode"
-        Me.GroupControlListBarcode.Size = New System.Drawing.Size(909, 170)
+        Me.GroupControlListBarcode.Size = New System.Drawing.Size(909, 159)
         Me.GroupControlListBarcode.TabIndex = 0
         Me.GroupControlListBarcode.Text = "List Barcode"
         '
@@ -807,7 +807,7 @@ Partial Class FormProductionRecDet
         Me.GCBarcode.MainView = Me.GVBarcode
         Me.GCBarcode.Name = "GCBarcode"
         Me.GCBarcode.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckEdit2, Me.RepositoryItemSpinEdit2})
-        Me.GCBarcode.Size = New System.Drawing.Size(886, 133)
+        Me.GCBarcode.Size = New System.Drawing.Size(886, 122)
         Me.GCBarcode.TabIndex = 3
         Me.GCBarcode.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVBarcode})
         '

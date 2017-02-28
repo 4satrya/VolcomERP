@@ -10310,4 +10310,17 @@ Public Class FormMain
         End Try
         Cursor = Cursors.Default
     End Sub
+
+    Private Sub NBSpecialReceiving_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBSpecialReceiving.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormProductionSpecialRec.MdiParent = Me
+            FormProductionSpecialRec.Show()
+            FormProductionSpecialRec.WindowState = FormWindowState.Maximized
+            FormProductionSpecialRec.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
 End Class

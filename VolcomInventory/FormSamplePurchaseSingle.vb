@@ -14,27 +14,27 @@
     End Sub
 
     Sub view_sample()
-        'Try
-        Dim query As String
-        query = "CALL view_sample_single(" & FormSamplePurchaseDet.id_comp_to.ToString & ")"
-        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
-        GCSample.DataSource = data
+        Try
+            Dim query As String
+            query = "CALL view_sample_single(" & FormSamplePurchaseDet.id_comp_to.ToString & ")"
+            Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+            GCSample.DataSource = data
 
-        If Not data.Rows.Count < 1 Then
-            If id_sample_price <> "-1" Then
-                '
-                Dim id_sample As String
-                id_sample = get_id_sample_f_id_price(id_sample_price)
-                GVSample.FocusedRowHandle = find_row(GVSample, "id_sample", id_sample)
-                '
+            If Not data.Rows.Count < 1 Then
+                If id_sample_price <> "-1" Then
+                    '
+                    Dim id_sample As String
+                    id_sample = get_id_sample_f_id_price(id_sample_price)
+                    GVSample.FocusedRowHandle = find_row(GVSample, "id_sample", id_sample)
+                    '
+                End If
+                GVSample.ActiveFilterString = "[id_season_orign] = '" & FormSamplePurchaseDet.LESeason.EditValue.ToString & "'"
+                view_image()
+                view_sample_price(GVSample.GetFocusedRowCellDisplayText("id_sample").ToString)
             End If
-            GVSample.ActiveFilterString = "[id_season_orign] = '" & FormSamplePurchaseDet.LESeason.EditValue.ToString & "'"
-            view_image()
-            view_sample_price(GVSample.GetFocusedRowCellDisplayText("id_sample").ToString)
-        End If
-        'Catch ex As Exception
-        'errorConnection()
-        'End Try
+        Catch ex As Exception
+            errorConnection()
+        End Try
     End Sub
     Sub view_image()
         If System.IO.File.Exists(sample_image_path & GVSample.GetFocusedRowCellDisplayText("id_sample").ToString & ".jpg") Then

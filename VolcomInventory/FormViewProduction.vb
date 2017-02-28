@@ -11,6 +11,7 @@
             'new
             TEPONumber.Text = header_number_prod("1")
             TEDate.Text = view_date(0)
+            TETolerance.EditValue = 0
         Else
             'edit
             Dim query As String = String.Format("SELECT *,DATE_FORMAT(prod_order_date,'%Y-%m-%d') as prod_order_datex FROM tb_prod_order WHERE id_prod_order = '{0}'", id_prod_order)
@@ -20,7 +21,9 @@
 
             LEPOType.EditValue = data.Rows(0)("id_po_type").ToString()
             LECategory.EditValue = data.Rows(0)("id_term_production").ToString()
-
+            '
+            TETolerance.EditValue = data.Rows(0)("tolerance")
+            '
             TEDate.Text = view_date_from(data.Rows(0)("prod_order_datex").ToString(), 0)
             '
             id_prod_demand_design = data.Rows(0)("id_prod_demand_design").ToString()

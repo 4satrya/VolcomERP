@@ -6,11 +6,12 @@
     Public is_payment As String = "-1"
 
     Private Sub FormViewSamplePR_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        DEPIBKDate.EditValue = Now
         view_report_status(LEReportStatus)
         view_currency(LECurrency)
         view_payment_status(LEPaymentStatus)
 
-        Dim query As String = "SELECT z.pr_sample_purc_dp,z.pr_sample_purc_vat,z.id_pr_sample_purc,z.id_comp_contact_to,z.id_report_status,z.pr_sample_purc_number,z.pr_sample_purc_note,DATE_FORMAT(z.pr_sample_purc_date,'%Y-%m-%d') as pr_sample_purc_date,g.season_orign,a.id_sample_purc_rec,a.sample_purc_rec_number,a.delivery_order_number,b.sample_purc_number,DATE_FORMAT(a.sample_purc_rec_date,'%d %M %Y') AS sample_purc_rec_date,d.comp_name AS comp_to,b.id_sample_purc,z.id_payment_status "
+        Dim query As String = "SELECT z.pibk_no,z.pibk_date,z.inv_no,z.pr_sample_purc_dp,z.pr_sample_purc_vat,z.id_pr_sample_purc,z.id_comp_contact_to,z.id_report_status,z.pr_sample_purc_number,z.pr_sample_purc_note,DATE_FORMAT(z.pr_sample_purc_date,'%Y-%m-%d') as pr_sample_purc_date,g.season_orign,a.id_sample_purc_rec,a.sample_purc_rec_number,a.delivery_order_number,b.sample_purc_number,DATE_FORMAT(a.sample_purc_rec_date,'%d %M %Y') AS sample_purc_rec_date,d.comp_name AS comp_to,b.id_sample_purc,z.id_payment_status "
         query += "FROM tb_pr_sample_purc z "
         query += "LEFT JOIN tb_sample_purc_rec a ON z.id_sample_purc_rec = a.id_sample_purc_rec "
         query += "INNER JOIN tb_sample_purc b ON z.id_sample_purc=b.id_sample_purc "
@@ -33,7 +34,11 @@
 
         TEDONumber.Text = data.Rows(0)("delivery_order_number").ToString
         TERecNumber.Text = data.Rows(0)("sample_purc_rec_number").ToString
-
+        '
+        TEPIBKNo.Text = data.Rows(0)("pibk_no").ToString
+        DEPIBKDate.EditValue = data.Rows(0)("pibk_date")
+        TEInvNo.Text = data.Rows(0)("inv_no").ToString
+        '
         id_purc = data.Rows(0)("id_sample_purc").ToString
         view_po()
 

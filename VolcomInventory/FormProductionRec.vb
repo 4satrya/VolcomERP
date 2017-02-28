@@ -108,7 +108,7 @@
         query += "  WHERE tb_prod_order_rec.id_prod_order = a.id_prod_order "
         query += "  AND tb_prod_order_rec.id_report_status != '5' "
         query += ") AS receive_created, "
-        query += "DATE_FORMAT(DATE_ADD(a.prod_order_date,INTERVAL a.prod_order_lead_time DAY),'%d %M %Y') AS prod_order_lead_time "
+        query += "DATE_FORMAT(DATE_ADD(a.prod_order_date,INTERVAL a.prod_order_lead_time DAY),'%d %M %Y') AS prod_order_lead_time, a.special_rec_memo "
         query += "FROM tb_prod_order a "
         query += "INNER JOIN tb_prod_demand_design b ON a.id_prod_demand_design = b.id_prod_demand_design "
         query += "INNER JOIN tb_lookup_report_status c ON a.id_report_status = c.id_report_status "
@@ -116,8 +116,12 @@
         query += "INNER JOIN tb_season_delivery e ON b.id_delivery=e.id_delivery "
         query += "INNER JOIN tb_season f ON f.id_season=e.id_season "
         query += "INNER JOIN tb_lookup_po_type g ON g.id_po_type=a.id_po_type "
-        query += "INNER JOIN tb_lookup_term_production h ON h.id_term_production=a.id_term_production "
-        query += "WHERE a.id_report_status = '3' OR a.id_report_status = '4' ORDER BY a.id_prod_order ASC "
+        query += "INNER JOIN tb_lookup_term_production h ON h.id_term_production=a.id_term_production 
+        LEFT JOIN (         
+            SELECT r.id_prod_order_rec, r.id_prod_order FROM tb_prod_order_rec r WHERE r.id_prod_rec_type=1 AND r.id_report_status!=5
+            GROUP BY r.id_prod_order 
+        ) rec ON rec.id_prod_order = a.id_prod_order "
+        query += "WHERE (a.id_report_status = '3' OR a.id_report_status = '4') AND ISNULL(rec.id_prod_order_rec) ORDER BY a.id_prod_order ASC "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCProd.DataSource = data
         If data.Rows.Count > 0 Then
@@ -169,7 +173,13 @@
                 view.FocusedRowHandle = focusedRowHandle
             End If
         End If
-        view_list_prod(GVProd.GetFocusedRowCellValue("id_prod_order").ToString)
+        Dim idy As String = "-1"
+        Try
+            idy = GVProd.GetFocusedRowCellValue("id_prod_order").ToString
+        Catch ex As Exception
+
+        End Try
+        view_list_prod(idy)
         showMyToolHint()
     End Sub
 

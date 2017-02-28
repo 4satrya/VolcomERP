@@ -81,10 +81,12 @@ Partial Class FormProductionRec
         Me.GridColumnDelRec = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnName = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnPoTypeRec = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnRecType = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemDateEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemDateEdit()
         Me.GridView3 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.XTCTabReceive = New DevExpress.XtraTab.XtraTabControl()
-        Me.GridColumnRecType = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnMemo = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemTextEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.XTPListPO.SuspendLayout()
         CType(Me.SCCRec, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SCCRec.SuspendLayout()
@@ -110,6 +112,7 @@ Partial Class FormProductionRec
         CType(Me.GridView3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XTCTabReceive, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCTabReceive.SuspendLayout()
+        CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'XTPListPO
@@ -150,7 +153,7 @@ Partial Class FormProductionRec
         Me.GCProd.Location = New System.Drawing.Point(2, 20)
         Me.GCProd.MainView = Me.GVProd
         Me.GCProd.Name = "GCProd"
-        Me.GCProd.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RIPictureEdit})
+        Me.GCProd.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RIPictureEdit, Me.RepositoryItemTextEdit2})
         Me.GCProd.Size = New System.Drawing.Size(799, 293)
         Me.GCProd.TabIndex = 3
         Me.GCProd.ToolTipController = Me.ToolTipControllerNew
@@ -158,7 +161,7 @@ Partial Class FormProductionRec
         '
         'GVProd
         '
-        Me.GVProd.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnProdNo, Me.GridColumnReportStatus, Me.GridColumnIdReportStatus, Me.GridColumnProdDate, Me.GridColumnEstRecDate, Me.GridColumnPOType, Me.GridColumnTerm, Me.GridColumnDesign, Me.GridColumnCode, Me.GridColumnIdPO, Me.GridColumnIdSeason, Me.GridColumnSeason, Me.GridColumnIdDelivery, Me.GridColumnDelivery, Me.GridColumnRecCreated, Me.GridColumnNowDate})
+        Me.GVProd.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnProdNo, Me.GridColumnReportStatus, Me.GridColumnIdReportStatus, Me.GridColumnProdDate, Me.GridColumnEstRecDate, Me.GridColumnPOType, Me.GridColumnTerm, Me.GridColumnDesign, Me.GridColumnCode, Me.GridColumnIdPO, Me.GridColumnIdSeason, Me.GridColumnSeason, Me.GridColumnIdDelivery, Me.GridColumnDelivery, Me.GridColumnRecCreated, Me.GridColumnNowDate, Me.GridColumnMemo})
         Me.GVProd.GridControl = Me.GCProd
         Me.GVProd.GroupCount = 2
         Me.GVProd.Name = "GVProd"
@@ -174,7 +177,7 @@ Partial Class FormProductionRec
         Me.GridColumnProdNo.Name = "GridColumnProdNo"
         Me.GridColumnProdNo.Visible = True
         Me.GridColumnProdNo.VisibleIndex = 0
-        Me.GridColumnProdNo.Width = 77
+        Me.GridColumnProdNo.Width = 96
         '
         'GridColumnReportStatus
         '
@@ -182,8 +185,8 @@ Partial Class FormProductionRec
         Me.GridColumnReportStatus.FieldName = "report_status"
         Me.GridColumnReportStatus.Name = "GridColumnReportStatus"
         Me.GridColumnReportStatus.Visible = True
-        Me.GridColumnReportStatus.VisibleIndex = 7
-        Me.GridColumnReportStatus.Width = 84
+        Me.GridColumnReportStatus.VisibleIndex = 8
+        Me.GridColumnReportStatus.Width = 110
         '
         'GridColumnIdReportStatus
         '
@@ -198,7 +201,7 @@ Partial Class FormProductionRec
         Me.GridColumnProdDate.Name = "GridColumnProdDate"
         Me.GridColumnProdDate.Visible = True
         Me.GridColumnProdDate.VisibleIndex = 5
-        Me.GridColumnProdDate.Width = 81
+        Me.GridColumnProdDate.Width = 101
         '
         'GridColumnEstRecDate
         '
@@ -207,6 +210,7 @@ Partial Class FormProductionRec
         Me.GridColumnEstRecDate.Name = "GridColumnEstRecDate"
         Me.GridColumnEstRecDate.Visible = True
         Me.GridColumnEstRecDate.VisibleIndex = 6
+        Me.GridColumnEstRecDate.Width = 93
         '
         'GridColumnPOType
         '
@@ -215,7 +219,7 @@ Partial Class FormProductionRec
         Me.GridColumnPOType.Name = "GridColumnPOType"
         Me.GridColumnPOType.Visible = True
         Me.GridColumnPOType.VisibleIndex = 3
-        Me.GridColumnPOType.Width = 81
+        Me.GridColumnPOType.Width = 101
         '
         'GridColumnTerm
         '
@@ -224,7 +228,7 @@ Partial Class FormProductionRec
         Me.GridColumnTerm.Name = "GridColumnTerm"
         Me.GridColumnTerm.Visible = True
         Me.GridColumnTerm.VisibleIndex = 4
-        Me.GridColumnTerm.Width = 81
+        Me.GridColumnTerm.Width = 101
         '
         'GridColumnDesign
         '
@@ -233,7 +237,7 @@ Partial Class FormProductionRec
         Me.GridColumnDesign.Name = "GridColumnDesign"
         Me.GridColumnDesign.Visible = True
         Me.GridColumnDesign.VisibleIndex = 1
-        Me.GridColumnDesign.Width = 126
+        Me.GridColumnDesign.Width = 157
         '
         'GridColumnCode
         '
@@ -242,7 +246,7 @@ Partial Class FormProductionRec
         Me.GridColumnCode.Name = "GridColumnCode"
         Me.GridColumnCode.Visible = True
         Me.GridColumnCode.VisibleIndex = 2
-        Me.GridColumnCode.Width = 81
+        Me.GridColumnCode.Width = 101
         '
         'GridColumnIdPO
         '
@@ -282,8 +286,8 @@ Partial Class FormProductionRec
         Me.GridColumnRecCreated.FieldName = "receive_created"
         Me.GridColumnRecCreated.Name = "GridColumnRecCreated"
         Me.GridColumnRecCreated.Visible = True
-        Me.GridColumnRecCreated.VisibleIndex = 8
-        Me.GridColumnRecCreated.Width = 87
+        Me.GridColumnRecCreated.VisibleIndex = 9
+        Me.GridColumnRecCreated.Width = 83
         '
         'GridColumnNowDate
         '
@@ -644,6 +648,14 @@ Partial Class FormProductionRec
         Me.GridColumnPoTypeRec.Visible = True
         Me.GridColumnPoTypeRec.VisibleIndex = 4
         '
+        'GridColumnRecType
+        '
+        Me.GridColumnRecType.Caption = "Rec. Type"
+        Me.GridColumnRecType.FieldName = "prod_rec_type"
+        Me.GridColumnRecType.Name = "GridColumnRecType"
+        Me.GridColumnRecType.Visible = True
+        Me.GridColumnRecType.VisibleIndex = 3
+        '
         'RepositoryItemDateEdit1
         '
         Me.RepositoryItemDateEdit1.AutoHeight = False
@@ -668,13 +680,22 @@ Partial Class FormProductionRec
         Me.XTCTabReceive.TabIndex = 8
         Me.XTCTabReceive.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPListReceive, Me.XTPListPO})
         '
-        'GridColumnRecType
+        'GridColumnMemo
         '
-        Me.GridColumnRecType.Caption = "Rec. Type"
-        Me.GridColumnRecType.FieldName = "prod_rec_type"
-        Me.GridColumnRecType.Name = "GridColumnRecType"
-        Me.GridColumnRecType.Visible = True
-        Me.GridColumnRecType.VisibleIndex = 3
+        Me.GridColumnMemo.Caption = "Memo"
+        Me.GridColumnMemo.ColumnEdit = Me.RepositoryItemTextEdit2
+        Me.GridColumnMemo.FieldName = "special_rec_memo"
+        Me.GridColumnMemo.Name = "GridColumnMemo"
+        Me.GridColumnMemo.OptionsColumn.AllowEdit = False
+        Me.GridColumnMemo.Visible = True
+        Me.GridColumnMemo.VisibleIndex = 7
+        Me.GridColumnMemo.Width = 119
+        '
+        'RepositoryItemTextEdit2
+        '
+        Me.RepositoryItemTextEdit2.AutoHeight = False
+        Me.RepositoryItemTextEdit2.Name = "RepositoryItemTextEdit2"
+        Me.RepositoryItemTextEdit2.NullText = "-"
         '
         'FormProductionRec
         '
@@ -714,6 +735,7 @@ Partial Class FormProductionRec
         CType(Me.GridView3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XTCTabReceive, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XTCTabReceive.ResumeLayout(False)
+        CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -782,4 +804,6 @@ Partial Class FormProductionRec
     Friend WithEvents GridColumnName As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnPoTypeRec As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnRecType As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnMemo As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RepositoryItemTextEdit2 As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
 End Class

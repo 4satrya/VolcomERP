@@ -22,6 +22,8 @@ Partial Class FormProductionRecDet
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormProductionRecDet))
         Me.GroupGeneralHeader = New DevExpress.XtraEditors.GroupControl()
+        Me.LabelControl12 = New DevExpress.XtraEditors.LabelControl()
+        Me.TxtMemoRef = New DevExpress.XtraEditors.TextEdit()
         Me.LERecType = New DevExpress.XtraEditors.LookUpEdit()
         Me.LabelControl11 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl10 = New DevExpress.XtraEditors.LabelControl()
@@ -97,6 +99,7 @@ Partial Class FormProductionRecDet
         Me.BScan = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
+        CType(Me.TxtMemoRef.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LERecType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtPOType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PEView.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -141,6 +144,8 @@ Partial Class FormProductionRecDet
         'GroupGeneralHeader
         '
         Me.GroupGeneralHeader.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupGeneralHeader.Controls.Add(Me.LabelControl12)
+        Me.GroupGeneralHeader.Controls.Add(Me.TxtMemoRef)
         Me.GroupGeneralHeader.Controls.Add(Me.LERecType)
         Me.GroupGeneralHeader.Controls.Add(Me.LabelControl11)
         Me.GroupGeneralHeader.Controls.Add(Me.LabelControl10)
@@ -176,10 +181,35 @@ Partial Class FormProductionRecDet
         Me.GroupGeneralHeader.Size = New System.Drawing.Size(909, 146)
         Me.GroupGeneralHeader.TabIndex = 38
         '
+        'LabelControl12
+        '
+        Me.LabelControl12.Location = New System.Drawing.Point(694, 88)
+        Me.LabelControl12.Name = "LabelControl12"
+        Me.LabelControl12.Size = New System.Drawing.Size(56, 13)
+        Me.LabelControl12.TabIndex = 167
+        Me.LabelControl12.Text = "Memo Ref#"
+        Me.LabelControl12.Visible = False
+        '
+        'TxtMemoRef
+        '
+        Me.TxtMemoRef.EditValue = ""
+        Me.TxtMemoRef.Location = New System.Drawing.Point(765, 85)
+        Me.TxtMemoRef.Name = "TxtMemoRef"
+        Me.TxtMemoRef.Properties.AppearanceReadOnly.BackColor = System.Drawing.Color.White
+        Me.TxtMemoRef.Properties.AppearanceReadOnly.Options.UseBackColor = True
+        Me.TxtMemoRef.Properties.EditValueChangedDelay = 1
+        Me.TxtMemoRef.Properties.ReadOnly = True
+        Me.TxtMemoRef.Size = New System.Drawing.Size(130, 20)
+        Me.TxtMemoRef.TabIndex = 166
+        Me.TxtMemoRef.TabStop = False
+        Me.TxtMemoRef.Visible = False
+        '
         'LERecType
         '
         Me.LERecType.Location = New System.Drawing.Point(555, 59)
         Me.LERecType.Name = "LERecType"
+        Me.LERecType.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.White
+        Me.LERecType.Properties.AppearanceDisabled.Options.UseBackColor = True
         Me.LERecType.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.LERecType.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_prod_rec_type", "ID"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("prod_rec_type", "Type")})
         Me.LERecType.Size = New System.Drawing.Size(130, 20)
@@ -206,6 +236,8 @@ Partial Class FormProductionRecDet
         Me.TxtPOType.EditValue = ""
         Me.TxtPOType.Location = New System.Drawing.Point(213, 33)
         Me.TxtPOType.Name = "TxtPOType"
+        Me.TxtPOType.Properties.AppearanceReadOnly.BackColor = System.Drawing.Color.White
+        Me.TxtPOType.Properties.AppearanceReadOnly.Options.UseBackColor = True
         Me.TxtPOType.Properties.EditValueChangedDelay = 1
         Me.TxtPOType.Properties.ReadOnly = True
         Me.TxtPOType.Size = New System.Drawing.Size(249, 20)
@@ -260,6 +292,8 @@ Partial Class FormProductionRecDet
         Me.TEDesign.EditValue = ""
         Me.TEDesign.Location = New System.Drawing.Point(213, 111)
         Me.TEDesign.Name = "TEDesign"
+        Me.TEDesign.Properties.AppearanceReadOnly.BackColor = System.Drawing.Color.White
+        Me.TEDesign.Properties.AppearanceReadOnly.Options.UseBackColor = True
         Me.TEDesign.Properties.EditValueChangedDelay = 1
         Me.TEDesign.Properties.ReadOnly = True
         Me.TEDesign.Size = New System.Drawing.Size(249, 20)
@@ -291,6 +325,8 @@ Partial Class FormProductionRecDet
         Me.TEOrderDate.EditValue = ""
         Me.TEOrderDate.Location = New System.Drawing.Point(555, 7)
         Me.TEOrderDate.Name = "TEOrderDate"
+        Me.TEOrderDate.Properties.AppearanceReadOnly.BackColor = System.Drawing.Color.White
+        Me.TEOrderDate.Properties.AppearanceReadOnly.Options.UseBackColor = True
         Me.TEOrderDate.Properties.EditValueChangedDelay = 1
         Me.TEOrderDate.Properties.ReadOnly = True
         Me.TEOrderDate.Size = New System.Drawing.Size(130, 20)
@@ -310,6 +346,8 @@ Partial Class FormProductionRecDet
         Me.TEEstRecDate.EditValue = ""
         Me.TEEstRecDate.Location = New System.Drawing.Point(765, 7)
         Me.TEEstRecDate.Name = "TEEstRecDate"
+        Me.TEEstRecDate.Properties.AppearanceReadOnly.BackColor = System.Drawing.Color.White
+        Me.TEEstRecDate.Properties.AppearanceReadOnly.Options.UseBackColor = True
         Me.TEEstRecDate.Properties.EditValueChangedDelay = 1
         Me.TEEstRecDate.Properties.ReadOnly = True
         Me.TEEstRecDate.Size = New System.Drawing.Size(130, 20)
@@ -354,6 +392,8 @@ Partial Class FormProductionRecDet
         Me.TERecDate.EditValue = ""
         Me.TERecDate.Location = New System.Drawing.Point(765, 33)
         Me.TERecDate.Name = "TERecDate"
+        Me.TERecDate.Properties.AppearanceReadOnly.BackColor = System.Drawing.Color.White
+        Me.TERecDate.Properties.AppearanceReadOnly.Options.UseBackColor = True
         Me.TERecDate.Properties.EditValueChangedDelay = 1
         Me.TERecDate.Properties.ReadOnly = True
         Me.TERecDate.Size = New System.Drawing.Size(130, 20)
@@ -373,6 +413,8 @@ Partial Class FormProductionRecDet
         Me.TERecNumber.EditValue = ""
         Me.TERecNumber.Location = New System.Drawing.Point(555, 33)
         Me.TERecNumber.Name = "TERecNumber"
+        Me.TERecNumber.Properties.AppearanceReadOnly.BackColor = System.Drawing.Color.White
+        Me.TERecNumber.Properties.AppearanceReadOnly.Options.UseBackColor = True
         Me.TERecNumber.Properties.EditValueChangedDelay = 1
         Me.TERecNumber.Properties.ReadOnly = True
         Me.TERecNumber.Size = New System.Drawing.Size(130, 20)
@@ -401,6 +443,8 @@ Partial Class FormProductionRecDet
         Me.TECompName.EditValue = ""
         Me.TECompName.Location = New System.Drawing.Point(213, 59)
         Me.TECompName.Name = "TECompName"
+        Me.TECompName.Properties.AppearanceReadOnly.BackColor = System.Drawing.Color.White
+        Me.TECompName.Properties.AppearanceReadOnly.Options.UseBackColor = True
         Me.TECompName.Properties.EditValueChangedDelay = 1
         Me.TECompName.Properties.ReadOnly = True
         Me.TECompName.Size = New System.Drawing.Size(220, 20)
@@ -412,6 +456,8 @@ Partial Class FormProductionRecDet
         Me.TECompShipToName.EditValue = ""
         Me.TECompShipToName.Location = New System.Drawing.Point(213, 85)
         Me.TECompShipToName.Name = "TECompShipToName"
+        Me.TECompShipToName.Properties.AppearanceReadOnly.BackColor = System.Drawing.Color.White
+        Me.TECompShipToName.Properties.AppearanceReadOnly.Options.UseBackColor = True
         Me.TECompShipToName.Properties.EditValueChangedDelay = 1
         Me.TECompShipToName.Properties.ReadOnly = True
         Me.TECompShipToName.Size = New System.Drawing.Size(220, 20)
@@ -439,6 +485,8 @@ Partial Class FormProductionRecDet
         Me.TEPONumber.EditValue = ""
         Me.TEPONumber.Location = New System.Drawing.Point(213, 7)
         Me.TEPONumber.Name = "TEPONumber"
+        Me.TEPONumber.Properties.AppearanceReadOnly.BackColor = System.Drawing.Color.White
+        Me.TEPONumber.Properties.AppearanceReadOnly.Options.UseBackColor = True
         Me.TEPONumber.Properties.EditValueChangedDelay = 1
         Me.TEPONumber.Properties.ReadOnly = True
         Me.TEPONumber.Size = New System.Drawing.Size(191, 20)
@@ -473,6 +521,10 @@ Partial Class FormProductionRecDet
         Me.LEReportStatus.Name = "LEReportStatus"
         Me.LEReportStatus.Properties.Appearance.Options.UseTextOptions = True
         Me.LEReportStatus.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near
+        Me.LEReportStatus.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.White
+        Me.LEReportStatus.Properties.AppearanceDisabled.Options.UseBackColor = True
+        Me.LEReportStatus.Properties.AppearanceReadOnly.BackColor = System.Drawing.Color.White
+        Me.LEReportStatus.Properties.AppearanceReadOnly.Options.UseBackColor = True
         Me.LEReportStatus.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.LEReportStatus.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_report_status", "ID Report Status", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("report_status", "Report Status")})
         Me.LEReportStatus.Properties.NullText = ""
@@ -492,6 +544,10 @@ Partial Class FormProductionRecDet
         '
         Me.MENote.Location = New System.Drawing.Point(89, 10)
         Me.MENote.Name = "MENote"
+        Me.MENote.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.White
+        Me.MENote.Properties.AppearanceDisabled.Options.UseBackColor = True
+        Me.MENote.Properties.AppearanceReadOnly.BackColor = System.Drawing.Color.White
+        Me.MENote.Properties.AppearanceReadOnly.Options.UseBackColor = True
         Me.MENote.Properties.MaxLength = 100
         Me.MENote.Size = New System.Drawing.Size(409, 45)
         Me.MENote.TabIndex = 6
@@ -940,6 +996,7 @@ Partial Class FormProductionRecDet
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupGeneralHeader.ResumeLayout(False)
         Me.GroupGeneralHeader.PerformLayout()
+        CType(Me.TxtMemoRef.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LERecType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtPOType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PEView.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1057,4 +1114,6 @@ Partial Class FormProductionRecDet
     Friend WithEvents BtnXlsBOF As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents LERecType As DevExpress.XtraEditors.LookUpEdit
     Friend WithEvents LabelControl11 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LabelControl12 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents TxtMemoRef As DevExpress.XtraEditors.TextEdit
 End Class

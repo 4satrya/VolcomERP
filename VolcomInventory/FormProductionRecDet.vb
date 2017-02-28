@@ -69,7 +69,7 @@ Public Class FormProductionRecDet
             BMark.Enabled = True
 
             Dim order_created As String
-            Dim query = "SELECT j.id_design,IF(a.delivery_order_date<>'0000-00-00', 'date_normal','date_null') as del_date_type, i.id_sample, (i.design_display_name) AS `design_name`, a.id_report_status,a.prod_order_rec_note,a.id_comp_contact_from as id_comp_from,b.id_prod_order,a.id_comp_contact_to as id_comp_to,g.season,a.id_prod_order_rec,a.prod_order_rec_number,DATE_FORMAT(b.prod_order_date,'%Y-%m-%d') as prod_order_datex,b.prod_order_lead_time,a.delivery_order_date,a.delivery_order_number,b.prod_order_number,DATE_FORMAT(a.prod_order_rec_date,'%Y-%m-%d') AS prod_order_rec_date, f.comp_name AS comp_from, f.comp_number AS comp_from_number,d.comp_name AS comp_to, d.comp_number AS comp_to_number, i.id_sample, po_type.po_type, rt.id_prod_rec_type, rt.prod_rec_type "
+            Dim query = "SELECT j.id_design,IF(a.delivery_order_date<>'0000-00-00', 'date_normal','date_null') as del_date_type, i.id_sample, (i.design_display_name) AS `design_name`, a.id_report_status,a.prod_order_rec_note,a.id_comp_contact_from as id_comp_from,b.id_prod_order,a.id_comp_contact_to as id_comp_to,g.season,a.id_prod_order_rec,a.prod_order_rec_number,DATE_FORMAT(b.prod_order_date,'%Y-%m-%d') as prod_order_datex,b.prod_order_lead_time,a.delivery_order_date,a.delivery_order_number,b.prod_order_number,DATE_FORMAT(a.prod_order_rec_date,'%Y-%m-%d') AS prod_order_rec_date, f.comp_name AS comp_from, f.comp_number AS comp_from_number,d.comp_name AS comp_to, d.comp_number AS comp_to_number, i.id_sample, po_type.po_type, rt.id_prod_rec_type, rt.prod_rec_type, b.special_rec_memo "
             query += "FROM tb_prod_order_rec a "
             query += "INNER JOIN tb_prod_order b ON a.id_prod_order=b.id_prod_order "
             query += "INNER JOIN tb_m_comp_contact c ON c.id_comp_contact=a.id_comp_contact_to "
@@ -112,6 +112,8 @@ Public Class FormProductionRecDet
 
             LEReportStatus.EditValue = Nothing
             LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", data.Rows(0)("id_report_status").ToString)
+            LERecType.ItemIndex = LERecType.Properties.GetDataSourceRowIndex("id_prod_rec_type", data.Rows(0)("id_prod_rec_type").ToString)
+            TxtMemoRef.Text = data.Rows(0)("special_rec_memo").ToString
 
             MENote.Text = data.Rows(0)("prod_order_rec_note").ToString
             pre_viewImages("2", PEView, id_design, False)
@@ -140,7 +142,7 @@ Public Class FormProductionRecDet
 
     Sub view_po()
         Dim query As String = "SELECT b.id_design,d.id_sample, d.design_name, d.design_display_name, a.id_report_status, a.prod_order_number, a.id_po_type, DATE_FORMAT(a.prod_order_date,'%Y-%m-%d') as prod_order_datex, "
-        query += "a.prod_order_lead_time, a.prod_order_note, g.po_type, get_total_po(" + id_order + ", 2) AS `total_min`, g.po_type, get_total_po(" + id_order + ", 3) AS `total_max`, get_total_po(" + id_order + ", 4) AS `total_rec`, a.is_special_rec "
+        query += "a.prod_order_lead_time, a.prod_order_note, g.po_type, get_total_po(" + id_order + ", 2) AS `total_min`, g.po_type, get_total_po(" + id_order + ", 3) AS `total_max`, get_total_po(" + id_order + ", 4) AS `total_rec`, a.is_special_rec, a.special_rec_memo "
         query += "FROM tb_prod_order a "
         query += "INNER JOIN tb_prod_demand_design b ON a.id_prod_demand_design = b.id_prod_demand_design "
         query += "INNER JOIN tb_lookup_report_status c ON a.id_report_status = c.id_report_status "
@@ -163,6 +165,7 @@ Public Class FormProductionRecDet
         total_min = Integer.Parse(data.Rows(0)("total_min").ToString)
         total_max = Integer.Parse(data.Rows(0)("total_max").ToString)
         total_rec = Integer.Parse(data.Rows(0)("total_rec").ToString)
+        TxtMemoRef.Text = data.Rows(0)("special_rec_memo").ToString
         pre_viewImages("2", PEView, id_design, False)
         mainVendor()
     End Sub
@@ -405,100 +408,127 @@ Public Class FormProductionRecDet
         Next
         'end of validasi
 
-        If id_receive = "-1" Then
-            'new
-            rec_number = header_number_prod("3")
-            If err_txt = "1" Or Not formIsValidInGroup(EPSampleRec, GroupGeneralHeader) Or id_order = "-1" Then
-                errorInput()
-            Else
-                Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure to save changes?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
-                If confirm = Windows.Forms.DialogResult.Yes Then
-                    Cursor = Cursors.WaitCursor
-                    Try
-                        'insert rec
-                        If do_date = "0000-00-00" Then
-                            query = String.Format("INSERT INTO tb_prod_order_rec(id_prod_order, prod_order_rec_number, delivery_order_number, delivery_order_date, prod_order_rec_date, prod_order_rec_note ,id_report_status, id_comp_contact_to , id_comp_contact_from, id_prod_rec_type) VALUES('{0}','{1}','{2}',NULL,DATE(NOW()),'{3}','{4}','{5}', '{6}', '{7}'); SELECT LAST_INSERT_ID(); ", id_order, rec_number, do_number, rec_note, rec_stats, id_comp_to, id_comp_from, id_prod_rec_type)
-                            id_rec_new = execute_query(query, 0, True, "", "", "", "")
-                        Else
-                            query = String.Format("INSERT INTO tb_prod_order_rec(id_prod_order, prod_order_rec_number, delivery_order_number, delivery_order_date, prod_order_rec_date, prod_order_rec_note ,id_report_status, id_comp_contact_to , id_comp_contact_from, id_prod_rec_type) VALUES('{0}','{1}','{2}','{3}',DATE(NOW()),'{4}','{5}','{6}', '{7}', '{8}'); SELECT LAST_INSERT_ID(); ", id_order, rec_number, do_number, do_date, rec_note, rec_stats, id_comp_to, id_comp_from, id_prod_rec_type)
-                            id_rec_new = execute_query(query, 0, True, "", "", "", "")
-                        End If
+        Dim cond_fill = True
+        If GVBarcode.RowCount <= 0 Then
+            cond_fill = False
+        End If
 
-                        'insert who prepared
-                        insert_who_prepared("28", id_rec_new, id_user)
-
-                        increase_inc_prod("3")
-
-                        '
-                        'rec detail
-                        For i As Integer = 0 To ((GVListPurchase.RowCount - 1) - GetGroupRowCount(GVListPurchase))
-                            Try
-                                If Not GVListPurchase.GetRowCellValue(i, "id_prod_order_det").ToString = "" Then
-                                    query = String.Format("INSERT INTO tb_prod_order_rec_det(id_prod_order_det,id_prod_order_rec,prod_order_rec_det_qty,prod_order_rec_det_note) VALUES('{0}','{1}','{2}','{3}')", GVListPurchase.GetRowCellValue(i, "id_prod_order_det").ToString, id_rec_new, decimalSQL(GVListPurchase.GetRowCellValue(i, "prod_order_rec_det_qty").ToString), GVListPurchase.GetRowCellValue(i, "prod_order_rec_det_note").ToString)
-                                    execute_non_query(query, True, "", "", "", "")
-                                End If
-                            Catch ex As Exception
-                            End Try
-                        Next
-
-                        'end insert who prepared
-                        FormProductionRec.view_prod_order_rec()
-                        FormProductionRec.view_prod_order()
-                        FormProductionRec.GVProdRec.FocusedRowHandle = find_row(FormProductionRec.GVProdRec, "id_prod_order_rec", id_rec_new)
-                        FormProductionRec.XTCTabReceive.SelectedTabPageIndex = 0
-                        id_receive = id_rec_new
-                        TERecNumber.Text = rec_number
-                        actionLoad()
-
-                        'export to bof
-                        exportToBOF(False)
-
-                        infoCustom("Document #" + rec_number + " was created successfully.")
-                    Catch ex As Exception
-                        errorConnection()
-                    End Try
-                    Cursor = Cursors.Default
+        Dim cond_save As Boolean = True
+        Dim err As String = ""
+        If LERecType.EditValue.ToString = "1" Then
+            Dim ttl As Integer = 0
+            Try
+                ttl = GVListPurchase.Columns("prod_order_rec_det_qty").SummaryItem.SummaryValue.ToString
+            Catch ex As Exception
+            End Try
+            If is_special_rec = "2" Then
+                If (total_rec + ttl) < total_min Then
+                    err = "Minimum receive : " + (total_min - total_rec).ToString
+                    cond_save = False
                 End If
             End If
+        End If
+
+        If Not cond_save Then
+            stopCustom(err)
+        ElseIf Not cond_fill
+            stopCustom("Data scan can't blank")
         Else
-            'edit
-            rec_number = TERecNumber.Text
-            If err_txt = "1" Or Not formIsValidInGroup(EPSampleRec, GroupGeneralHeader) Then
-                errorInput()
+            If id_receive = "-1" Then
+                'new
+                rec_number = header_number_prod("3")
+                If err_txt = "1" Or Not formIsValidInGroup(EPSampleRec, GroupGeneralHeader) Or id_order = "-1" Then
+                    errorInput()
+                Else
+                    Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure to save changes?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+                    If confirm = Windows.Forms.DialogResult.Yes Then
+                        Cursor = Cursors.WaitCursor
+                        Try
+                            'insert rec
+                            If do_date = "0000-00-00" Then
+                                query = String.Format("INSERT INTO tb_prod_order_rec(id_prod_order, prod_order_rec_number, delivery_order_number, delivery_order_date, prod_order_rec_date, prod_order_rec_note ,id_report_status, id_comp_contact_to , id_comp_contact_from, id_prod_rec_type) VALUES('{0}','{1}','{2}',NULL,DATE(NOW()),'{3}','{4}','{5}', '{6}', '{7}'); SELECT LAST_INSERT_ID(); ", id_order, rec_number, do_number, rec_note, rec_stats, id_comp_to, id_comp_from, id_prod_rec_type)
+                                id_rec_new = execute_query(query, 0, True, "", "", "", "")
+                            Else
+                                query = String.Format("INSERT INTO tb_prod_order_rec(id_prod_order, prod_order_rec_number, delivery_order_number, delivery_order_date, prod_order_rec_date, prod_order_rec_note ,id_report_status, id_comp_contact_to , id_comp_contact_from, id_prod_rec_type) VALUES('{0}','{1}','{2}','{3}',DATE(NOW()),'{4}','{5}','{6}', '{7}', '{8}'); SELECT LAST_INSERT_ID(); ", id_order, rec_number, do_number, do_date, rec_note, rec_stats, id_comp_to, id_comp_from, id_prod_rec_type)
+                                id_rec_new = execute_query(query, 0, True, "", "", "", "")
+                            End If
+
+                            'insert who prepared
+                            insert_who_prepared("28", id_rec_new, id_user)
+
+                            increase_inc_prod("3")
+
+                            '
+                            'rec detail
+                            For i As Integer = 0 To ((GVListPurchase.RowCount - 1) - GetGroupRowCount(GVListPurchase))
+                                Try
+                                    If Not GVListPurchase.GetRowCellValue(i, "id_prod_order_det").ToString = "" Then
+                                        query = String.Format("INSERT INTO tb_prod_order_rec_det(id_prod_order_det,id_prod_order_rec,prod_order_rec_det_qty,prod_order_rec_det_note) VALUES('{0}','{1}','{2}','{3}')", GVListPurchase.GetRowCellValue(i, "id_prod_order_det").ToString, id_rec_new, decimalSQL(GVListPurchase.GetRowCellValue(i, "prod_order_rec_det_qty").ToString), GVListPurchase.GetRowCellValue(i, "prod_order_rec_det_note").ToString)
+                                        execute_non_query(query, True, "", "", "", "")
+                                    End If
+                                Catch ex As Exception
+                                End Try
+                            Next
+
+                            'end insert who prepared
+                            FormProductionRec.view_prod_order_rec()
+                            FormProductionRec.view_prod_order()
+                            FormProductionRec.GVProdRec.FocusedRowHandle = find_row(FormProductionRec.GVProdRec, "id_prod_order_rec", id_rec_new)
+                            FormProductionRec.XTCTabReceive.SelectedTabPageIndex = 0
+                            id_receive = id_rec_new
+                            TERecNumber.Text = rec_number
+                            actionLoad()
+
+                            'export to bof
+                            exportToBOF(False)
+
+                            infoCustom("Document #" + rec_number + " was created successfully.")
+                        Catch ex As Exception
+                            errorConnection()
+                        End Try
+                        Cursor = Cursors.Default
+                    End If
+                End If
             Else
-                Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure to save changes?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
-                If confirm = Windows.Forms.DialogResult.Yes Then
-                    Cursor = Cursors.WaitCursor
-                    Try
-                        'UPDATE rec
-                        If do_date = "0000-00-00" Then
-                            query = String.Format("UPDATE tb_prod_order_rec SET delivery_order_number='{0}',delivery_order_date=null,prod_order_rec_note='{1}',id_report_status='{2}',id_comp_contact_to='{3}', id_comp_contact_from = '{4}' WHERE id_prod_order_rec='{5}'", do_number, rec_note, rec_stats, id_comp_to, id_comp_from, id_receive)
-                            execute_non_query(query, True, "", "", "", "")
-                        Else
-                            query = String.Format("UPDATE tb_prod_order_rec SET delivery_order_number='{0}',delivery_order_date='{1}',prod_order_rec_note='{2}',id_report_status='{3}',id_comp_contact_to='{4}', id_comp_contact_from = '{5}' WHERE id_prod_order_rec='{6}'", do_number, do_date, rec_note, rec_stats, id_comp_to, id_comp_from, id_receive)
-                            execute_non_query(query, True, "", "", "", "")
-                        End If
+                'edit
+                rec_number = TERecNumber.Text
+                If err_txt = "1" Or Not formIsValidInGroup(EPSampleRec, GroupGeneralHeader) Then
+                    errorInput()
+                Else
+                    Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure to save changes?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+                    If confirm = Windows.Forms.DialogResult.Yes Then
+                        Cursor = Cursors.WaitCursor
+                        Try
+                            'UPDATE rec
+                            If do_date = "0000-00-00" Then
+                                query = String.Format("UPDATE tb_prod_order_rec SET delivery_order_number='{0}',delivery_order_date=null,prod_order_rec_note='{1}',id_report_status='{2}',id_comp_contact_to='{3}', id_comp_contact_from = '{4}' WHERE id_prod_order_rec='{5}'", do_number, rec_note, rec_stats, id_comp_to, id_comp_from, id_receive)
+                                execute_non_query(query, True, "", "", "", "")
+                            Else
+                                query = String.Format("UPDATE tb_prod_order_rec SET delivery_order_number='{0}',delivery_order_date='{1}',prod_order_rec_note='{2}',id_report_status='{3}',id_comp_contact_to='{4}', id_comp_contact_from = '{5}' WHERE id_prod_order_rec='{6}'", do_number, do_date, rec_note, rec_stats, id_comp_to, id_comp_from, id_receive)
+                                execute_non_query(query, True, "", "", "", "")
+                            End If
 
-                        'rec detail
-                        For i As Integer = 0 To ((GVListPurchase.RowCount - 1) - GetGroupRowCount(GVListPurchase))
-                            query = String.Format("UPDATE tb_prod_order_rec_det SET prod_order_rec_det_qty='{0}',prod_order_rec_det_note='{1}' WHERE id_prod_order_rec_det='{2}'", decimalSQL(GVListPurchase.GetRowCellValue(i, "prod_order_rec_det_qty").ToString), GVListPurchase.GetRowCellValue(i, "prod_order_rec_det_note").ToString, GVListPurchase.GetRowCellValue(i, "id_prod_order_rec_det").ToString)
-                            execute_non_query(query, True, "", "", "", "")
-                        Next
+                            'rec detail
+                            For i As Integer = 0 To ((GVListPurchase.RowCount - 1) - GetGroupRowCount(GVListPurchase))
+                                query = String.Format("UPDATE tb_prod_order_rec_det SET prod_order_rec_det_qty='{0}',prod_order_rec_det_note='{1}' WHERE id_prod_order_rec_det='{2}'", decimalSQL(GVListPurchase.GetRowCellValue(i, "prod_order_rec_det_qty").ToString), GVListPurchase.GetRowCellValue(i, "prod_order_rec_det_note").ToString, GVListPurchase.GetRowCellValue(i, "id_prod_order_rec_det").ToString)
+                                execute_non_query(query, True, "", "", "", "")
+                            Next
 
-                        FormProductionRec.view_prod_order_rec()
-                        FormProductionRec.view_prod_order()
-                        FormProductionRec.GVProdRec.FocusedRowHandle = find_row(FormProductionRec.GVProdRec, "id_prod_order_rec", id_receive)
-                        FormProductionRec.XTCTabReceive.SelectedTabPageIndex = 0
-                        actionLoad()
+                            FormProductionRec.view_prod_order_rec()
+                            FormProductionRec.view_prod_order()
+                            FormProductionRec.GVProdRec.FocusedRowHandle = find_row(FormProductionRec.GVProdRec, "id_prod_order_rec", id_receive)
+                            FormProductionRec.XTCTabReceive.SelectedTabPageIndex = 0
+                            actionLoad()
 
-                        'export to bof
-                        exportToBOF(False)
+                            'export to bof
+                            exportToBOF(False)
 
-                        infoCustom("Document #" + rec_number + " was edited successfully.")
-                    Catch ex As Exception
-                        errorConnection()
-                    End Try
-                    Cursor = Cursors.Default
+                            infoCustom("Document #" + rec_number + " was edited successfully.")
+                        Catch ex As Exception
+                            errorConnection()
+                        End Try
+                        Cursor = Cursors.Default
+                    End If
                 End If
             End If
         End If
@@ -674,7 +704,8 @@ Public Class FormProductionRecDet
                     newRows()
                     'allowDelete()
                 Else
-                    stopCustom("Tolerance receive maximum : " + total_max.ToString)
+                    GVBarcode.SetFocusedRowCellValue("ean_code", "")
+                    stopCustom("Maximum receive : " + (total_max - total_rec).ToString)
                 End If
             End If
         End If

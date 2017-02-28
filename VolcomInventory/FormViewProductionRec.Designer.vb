@@ -66,6 +66,8 @@ Partial Class FormViewProductionRec
         Me.RepositoryItemSpinEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
         Me.ColNote = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.TxtRecType = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl11 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.GroupControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl3.SuspendLayout()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -93,6 +95,7 @@ Partial Class FormViewProductionRec
         CType(Me.GVListPurchase, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemSpinEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtRecType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupControl3
@@ -127,6 +130,8 @@ Partial Class FormViewProductionRec
         'GroupGeneralHeader
         '
         Me.GroupGeneralHeader.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupGeneralHeader.Controls.Add(Me.LabelControl11)
+        Me.GroupGeneralHeader.Controls.Add(Me.TxtRecType)
         Me.GroupGeneralHeader.Controls.Add(Me.LabelControl10)
         Me.GroupGeneralHeader.Controls.Add(Me.TxtPOType)
         Me.GroupGeneralHeader.Controls.Add(Me.PEView)
@@ -266,7 +271,7 @@ Partial Class FormViewProductionRec
         'TEDONumber
         '
         Me.TEDONumber.EditValue = ""
-        Me.TEDONumber.Location = New System.Drawing.Point(558, 63)
+        Me.TEDONumber.Location = New System.Drawing.Point(558, 81)
         Me.TEDONumber.Name = "TEDONumber"
         Me.TEDONumber.Properties.EditValueChangedDelay = 1
         Me.TEDONumber.Size = New System.Drawing.Size(130, 20)
@@ -274,7 +279,7 @@ Partial Class FormViewProductionRec
         '
         'LabelControl2
         '
-        Me.LabelControl2.Location = New System.Drawing.Point(486, 66)
+        Me.LabelControl2.Location = New System.Drawing.Point(486, 84)
         Me.LabelControl2.Name = "LabelControl2"
         Me.LabelControl2.Size = New System.Drawing.Size(55, 13)
         Me.LabelControl2.TabIndex = 149
@@ -578,6 +583,24 @@ Partial Class FormViewProductionRec
         Me.RepositoryItemCheckEdit1.AutoHeight = False
         Me.RepositoryItemCheckEdit1.Name = "RepositoryItemCheckEdit1"
         '
+        'TxtRecType
+        '
+        Me.TxtRecType.EditValue = ""
+        Me.TxtRecType.Location = New System.Drawing.Point(558, 57)
+        Me.TxtRecType.Name = "TxtRecType"
+        Me.TxtRecType.Properties.EditValueChangedDelay = 1
+        Me.TxtRecType.Properties.ReadOnly = True
+        Me.TxtRecType.Size = New System.Drawing.Size(130, 20)
+        Me.TxtRecType.TabIndex = 164
+        '
+        'LabelControl11
+        '
+        Me.LabelControl11.Location = New System.Drawing.Point(487, 60)
+        Me.LabelControl11.Name = "LabelControl11"
+        Me.LabelControl11.Size = New System.Drawing.Size(45, 13)
+        Me.LabelControl11.TabIndex = 165
+        Me.LabelControl11.Text = "Rec Type"
+        '
         'FormViewProductionRec
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -623,6 +646,7 @@ Partial Class FormViewProductionRec
         CType(Me.GVListPurchase, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemSpinEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtRecType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -673,4 +697,6 @@ Partial Class FormViewProductionRec
     Friend WithEvents BtnAttachment As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents LabelControl10 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents TxtPOType As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LabelControl11 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents TxtRecType As DevExpress.XtraEditors.TextEdit
 End Class

@@ -19,7 +19,7 @@
         view_report_status(LEReportStatus)
 
         Dim order_created As String
-        Dim query = "SELECT j.id_design,IF(a.delivery_order_date<>'0000-00-00', 'date_normal','date_null') as del_date_type, i.id_sample, (i.design_display_name) AS `design_name`, a.id_report_status,a.prod_order_rec_note,a.id_comp_contact_from as id_comp_from,b.id_prod_order,a.id_comp_contact_to as id_comp_to,g.season,a.id_prod_order_rec,a.prod_order_rec_number,DATE_FORMAT(b.prod_order_date,'%Y-%m-%d') as prod_order_datex,b.prod_order_lead_time,a.delivery_order_date,a.delivery_order_number,b.prod_order_number,DATE_FORMAT(a.prod_order_rec_date,'%Y-%m-%d') AS prod_order_rec_date, f.comp_name AS comp_from, f.comp_number AS comp_from_number,d.comp_name AS comp_to, d.comp_number AS comp_to_number, i.id_sample, po_type.po_type "
+        Dim query = "SELECT j.id_design,IF(a.delivery_order_date<>'0000-00-00', 'date_normal','date_null') as del_date_type, i.id_sample, (i.design_display_name) AS `design_name`, a.id_report_status,a.prod_order_rec_note,a.id_comp_contact_from as id_comp_from,b.id_prod_order,a.id_comp_contact_to as id_comp_to,g.season,a.id_prod_order_rec,a.prod_order_rec_number,DATE_FORMAT(b.prod_order_date,'%Y-%m-%d') as prod_order_datex,b.prod_order_lead_time,a.delivery_order_date,a.delivery_order_number,b.prod_order_number,DATE_FORMAT(a.prod_order_rec_date,'%Y-%m-%d') AS prod_order_rec_date, f.comp_name AS comp_from, f.comp_number AS comp_from_number,d.comp_name AS comp_to, d.comp_number AS comp_to_number, i.id_sample, po_type.po_type, rt.prod_rec_type "
         query += "FROM tb_prod_order_rec a "
         query += "INNER JOIN tb_prod_order b ON a.id_prod_order=b.id_prod_order "
         query += "INNER JOIN tb_m_comp_contact c ON c.id_comp_contact=a.id_comp_contact_to "
@@ -31,6 +31,7 @@
         query += "INNER JOIN tb_prod_demand_design j ON b.id_prod_demand_design = j.id_prod_demand_design "
         query += "INNER JOIN tb_m_design i ON j.id_design = i.id_design "
         query += "INNER JOIN tb_lookup_po_type po_type ON po_type.id_po_type = b.id_po_type "
+        query += "LEFT JOIN tb_lookup_prod_rec_type rt ON rt.id_prod_rec_type = a.id_prod_rec_type "
         query += " WHERE a.id_prod_order_rec='" & id_receive & "' "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
@@ -54,7 +55,7 @@
 
         Dim tgl_delivery() As String = data.Rows(0)("delivery_order_date").ToString.Split(" ")
         'TEDODate.Text = tgl_delivery(0)
-
+        TxtRecType.Text = data.Rows(0)("prod_rec_type").ToString
 
         If data.Rows(0)("del_date_type") = "date_normal" Then
             TEDODate.EditValue = data.Rows(0)("delivery_order_date")

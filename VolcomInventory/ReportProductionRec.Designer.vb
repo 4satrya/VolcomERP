@@ -32,6 +32,9 @@ Partial Public Class ReportProductionRec
         Me.XrLabel12 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel1 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrPanel1 = New DevExpress.XtraReports.UI.XRPanel()
+        Me.XrLabel22 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel20 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LabelRecType = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel18 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel17 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel14 = New DevExpress.XtraReports.UI.XRLabel()
@@ -248,12 +251,43 @@ Partial Public Class ReportProductionRec
         Me.XrPanel1.Borders = CType(((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top) _
             Or DevExpress.XtraPrinting.BorderSide.Right), DevExpress.XtraPrinting.BorderSide)
         Me.XrPanel1.CanGrow = False
-        Me.XrPanel1.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel18, Me.XrLabel17, Me.XrLabel14, Me.XrLabel16, Me.XrLabel15, Me.LDONumber, Me.XrLabel8, Me.XrLabel7, Me.LPOType, Me.LPONumber, Me.XrLabel5, Me.XrLabel21, Me.XrLabel13, Me.LDODate, Me.XrLabel11, Me.XrLabel10, Me.XrLabel9, Me.LFromName, Me.LToName, Me.XrLabel2, Me.XrLabel3})
+        Me.XrPanel1.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel22, Me.XrLabel20, Me.LabelRecType, Me.XrLabel18, Me.XrLabel17, Me.XrLabel14, Me.XrLabel16, Me.XrLabel15, Me.LDONumber, Me.XrLabel8, Me.XrLabel7, Me.LPOType, Me.LPONumber, Me.XrLabel5, Me.XrLabel21, Me.XrLabel13, Me.LDODate, Me.XrLabel11, Me.XrLabel10, Me.XrLabel9, Me.LFromName, Me.LToName, Me.XrLabel2, Me.XrLabel3})
         Me.XrPanel1.LocationFloat = New DevExpress.Utils.PointFloat(0.00009536743!, 49.45833!)
         Me.XrPanel1.Name = "XrPanel1"
         Me.XrPanel1.SizeF = New System.Drawing.SizeF(787.1248!, 115.0817!)
         Me.XrPanel1.StylePriority.UseBorderColor = False
         Me.XrPanel1.StylePriority.UseBorders = False
+        '
+        'XrLabel22
+        '
+        Me.XrLabel22.Borders = DevExpress.XtraPrinting.BorderSide.None
+        Me.XrLabel22.LocationFloat = New DevExpress.Utils.PointFloat(525.6669!, 29.16675!)
+        Me.XrLabel22.Name = "XrLabel22"
+        Me.XrLabel22.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel22.SizeF = New System.Drawing.SizeF(85.41647!, 13.58337!)
+        Me.XrLabel22.StylePriority.UseBorders = False
+        Me.XrLabel22.Text = "Rec. Type"
+        '
+        'XrLabel20
+        '
+        Me.XrLabel20.Borders = DevExpress.XtraPrinting.BorderSide.None
+        Me.XrLabel20.LocationFloat = New DevExpress.Utils.PointFloat(611.0829!, 29.16675!)
+        Me.XrLabel20.Name = "XrLabel20"
+        Me.XrLabel20.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel20.SizeF = New System.Drawing.SizeF(11.45837!, 13.58337!)
+        Me.XrLabel20.StylePriority.UseBorders = False
+        Me.XrLabel20.Text = ":"
+        '
+        'LabelRecType
+        '
+        Me.LabelRecType.Borders = DevExpress.XtraPrinting.BorderSide.None
+        Me.LabelRecType.Font = New System.Drawing.Font("Times New Roman", 9.75!)
+        Me.LabelRecType.LocationFloat = New DevExpress.Utils.PointFloat(622.5417!, 29.16675!)
+        Me.LabelRecType.Name = "LabelRecType"
+        Me.LabelRecType.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LabelRecType.SizeF = New System.Drawing.SizeF(154.5832!, 13.58337!)
+        Me.LabelRecType.StylePriority.UseBorders = False
+        Me.LabelRecType.StylePriority.UseFont = False
         '
         'XrLabel18
         '
@@ -285,12 +319,12 @@ Partial Public Class ReportProductionRec
         Me.XrLabel14.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel14.SizeF = New System.Drawing.SizeF(85.4165!, 27.16672!)
         Me.XrLabel14.StylePriority.UseBorders = False
-        Me.XrLabel14.Text = "Type"
+        Me.XrLabel14.Text = "Category"
         '
         'XrLabel16
         '
         Me.XrLabel16.Borders = DevExpress.XtraPrinting.BorderSide.None
-        Me.XrLabel16.LocationFloat = New DevExpress.Utils.PointFloat(525.6665!, 42.74998!)
+        Me.XrLabel16.LocationFloat = New DevExpress.Utils.PointFloat(525.6666!, 42.75006!)
         Me.XrLabel16.Name = "XrLabel16"
         Me.XrLabel16.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel16.SizeF = New System.Drawing.SizeF(85.41647!, 13.58337!)
@@ -300,7 +334,7 @@ Partial Public Class ReportProductionRec
         'XrLabel15
         '
         Me.XrLabel15.Borders = DevExpress.XtraPrinting.BorderSide.None
-        Me.XrLabel15.LocationFloat = New DevExpress.Utils.PointFloat(611.0832!, 42.74998!)
+        Me.XrLabel15.LocationFloat = New DevExpress.Utils.PointFloat(611.0834!, 42.75006!)
         Me.XrLabel15.Name = "XrLabel15"
         Me.XrLabel15.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel15.SizeF = New System.Drawing.SizeF(11.45837!, 13.58337!)
@@ -311,7 +345,7 @@ Partial Public Class ReportProductionRec
         '
         Me.LDONumber.Borders = DevExpress.XtraPrinting.BorderSide.None
         Me.LDONumber.Font = New System.Drawing.Font("Times New Roman", 9.75!)
-        Me.LDONumber.LocationFloat = New DevExpress.Utils.PointFloat(622.5416!, 42.75002!)
+        Me.LDONumber.LocationFloat = New DevExpress.Utils.PointFloat(622.5417!, 42.75009!)
         Me.LDONumber.Name = "LDONumber"
         Me.LDONumber.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.LDONumber.SizeF = New System.Drawing.SizeF(154.5832!, 13.58337!)
@@ -379,7 +413,7 @@ Partial Public Class ReportProductionRec
         'XrLabel21
         '
         Me.XrLabel21.Borders = DevExpress.XtraPrinting.BorderSide.None
-        Me.XrLabel21.LocationFloat = New DevExpress.Utils.PointFloat(525.6665!, 56.33338!)
+        Me.XrLabel21.LocationFloat = New DevExpress.Utils.PointFloat(525.6666!, 56.33346!)
         Me.XrLabel21.Name = "XrLabel21"
         Me.XrLabel21.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel21.SizeF = New System.Drawing.SizeF(85.41647!, 13.58337!)
@@ -389,7 +423,7 @@ Partial Public Class ReportProductionRec
         'XrLabel13
         '
         Me.XrLabel13.Borders = DevExpress.XtraPrinting.BorderSide.None
-        Me.XrLabel13.LocationFloat = New DevExpress.Utils.PointFloat(611.0832!, 56.33338!)
+        Me.XrLabel13.LocationFloat = New DevExpress.Utils.PointFloat(611.0834!, 56.33346!)
         Me.XrLabel13.Name = "XrLabel13"
         Me.XrLabel13.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel13.SizeF = New System.Drawing.SizeF(11.45837!, 13.58337!)
@@ -400,7 +434,7 @@ Partial Public Class ReportProductionRec
         '
         Me.LDODate.Borders = DevExpress.XtraPrinting.BorderSide.None
         Me.LDODate.Font = New System.Drawing.Font("Times New Roman", 9.75!)
-        Me.LDODate.LocationFloat = New DevExpress.Utils.PointFloat(622.5416!, 56.33342!)
+        Me.LDODate.LocationFloat = New DevExpress.Utils.PointFloat(622.5417!, 56.3335!)
         Me.LDODate.Name = "LDODate"
         Me.LDODate.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.LDODate.SizeF = New System.Drawing.SizeF(154.5832!, 13.58337!)
@@ -646,4 +680,7 @@ Partial Public Class ReportProductionRec
     Friend WithEvents RepositoryItemSpinEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit
     Friend WithEvents RepositoryItemCheckEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
     Friend WithEvents LRecDate As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents XrLabel22 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents XrLabel20 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents LabelRecType As DevExpress.XtraReports.UI.XRLabel
 End Class

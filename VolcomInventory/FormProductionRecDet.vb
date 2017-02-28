@@ -346,6 +346,7 @@ Public Class FormProductionRecDet
         ' Report.id_comp_to = id_comp_to
         Report.LToName.Text = TECompShipToName.Text.ToString
 
+        Report.LabelRecType.Text = LERecType.Text.ToString
         Report.LRecDate.Text = TERecDate.Text.ToString
         Report.LDODate.Text = TEDODate.Text.ToString
 

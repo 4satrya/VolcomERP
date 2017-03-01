@@ -80,6 +80,7 @@ Partial Class FormSalesReturnOrderDet
         Me.BtnAddMultiple = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnAdd = New DevExpress.XtraEditors.SimpleButton()
         Me.EPForm = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.BtnImport2 = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
         CType(Me.PanelControlTopRight, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -677,6 +678,7 @@ Partial Class FormSalesReturnOrderDet
         'PanelControlNav
         '
         Me.PanelControlNav.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelControlNav.Controls.Add(Me.BtnImport2)
         Me.PanelControlNav.Controls.Add(Me.BtnEdit)
         Me.PanelControlNav.Controls.Add(Me.BtnImport)
         Me.PanelControlNav.Controls.Add(Me.BtnDel)
@@ -707,9 +709,9 @@ Partial Class FormSalesReturnOrderDet
         Me.BtnImport.ImageList = Me.LargeImageCollection
         Me.BtnImport.Location = New System.Drawing.Point(0, 0)
         Me.BtnImport.Name = "BtnImport"
-        Me.BtnImport.Size = New System.Drawing.Size(131, 35)
+        Me.BtnImport.Size = New System.Drawing.Size(137, 35)
         Me.BtnImport.TabIndex = 5
-        Me.BtnImport.Text = "Import from Excel"
+        Me.BtnImport.Text = "Import Excel Per Size"
         '
         'BtnDel
         '
@@ -747,6 +749,17 @@ Partial Class FormSalesReturnOrderDet
         'EPForm
         '
         Me.EPForm.ContainerControl = Me
+        '
+        'BtnImport2
+        '
+        Me.BtnImport2.Dock = System.Windows.Forms.DockStyle.Left
+        Me.BtnImport2.ImageIndex = 3
+        Me.BtnImport2.ImageList = Me.LargeImageCollection
+        Me.BtnImport2.Location = New System.Drawing.Point(137, 0)
+        Me.BtnImport2.Name = "BtnImport2"
+        Me.BtnImport2.Size = New System.Drawing.Size(130, 35)
+        Me.BtnImport2.TabIndex = 6
+        Me.BtnImport2.Text = "Import From Excel"
         '
         'FormSalesReturnOrderDet
         '
@@ -860,4 +873,5 @@ Partial Class FormSalesReturnOrderDet
     Friend WithEvents PanelControlBottomRight As DevExpress.XtraEditors.PanelControl
     Friend WithEvents BtnImport As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BtnAddMultiple As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BtnImport2 As DevExpress.XtraEditors.SimpleButton
 End Class

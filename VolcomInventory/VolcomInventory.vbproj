@@ -1060,6 +1060,18 @@
     <Compile Include="FormProductionCOPDet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormProductionSpecialRec.Designer.vb">
+      <DependentUpon>FormProductionSpecialRec.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormProductionSpecialRec.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormProductionSpecialRecSingle.Designer.vb">
+      <DependentUpon>FormProductionSpecialRecSingle.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormProductionSpecialRecSingle.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormProductionSummary.Designer.vb">
       <DependentUpon>FormProductionSummary.vb</DependentUpon>
     </Compile>
@@ -5050,6 +5062,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormProductionCOPDet.resx">
       <DependentUpon>FormProductionCOPDet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormProductionSpecialRec.resx">
+      <DependentUpon>FormProductionSpecialRec.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormProductionSpecialRecSingle.resx">
+      <DependentUpon>FormProductionSpecialRecSingle.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormProductionSummary.resx">
       <DependentUpon>FormProductionSummary.vb</DependentUpon>

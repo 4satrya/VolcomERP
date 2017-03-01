@@ -148,6 +148,11 @@
             FormSamplePurchaseDet.TECompAttn.Text = GVCompanyContactList.GetFocusedRowCellDisplayText("contact_person").ToString
             FormSamplePurchaseDet.MECompAddress.Text = GVCompany.GetFocusedRowCellDisplayText("address_primary").ToString
             Close()
+        ElseIf id_pop_up = "1c" Then
+            FormSamplePurchaseDet.id_comp_contact_courier = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
+            FormSamplePurchaseDet.TECourierCode.Text = GVCompany.GetFocusedRowCellDisplayText("comp_number").ToString
+            FormSamplePurchaseDet.TECourier.Text = GVCompany.GetFocusedRowCellDisplayText("comp_name").ToString
+            Close()
         ElseIf id_pop_up = "2" Then
             FormSamplePurchaseDet.id_comp_ship_to = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
             FormSamplePurchaseDet.TECompShipTo.Text = GVCompany.GetFocusedRowCellDisplayText("comp_number").ToString
@@ -168,6 +173,11 @@
             FormSamplePLSingle.TxtCodeCompTo.Text = GVCompany.GetFocusedRowCellDisplayText("comp_number").ToString
             FormSamplePLSingle.TxtNameCompTo.Text = GVCompany.GetFocusedRowCellDisplayText("comp_name").ToString
             FormSamplePLSingle.MEAdrressCompTo.Text = GVCompany.GetFocusedRowCellDisplayText("address_primary").ToString
+            Close()
+        ElseIf id_pop_up = "6" Then
+            FormSamplePRDet.id_comp_contact_pay_to = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
+            FormSamplePRDet.TECompTo.Text = GVCompany.GetFocusedRowCellDisplayText("comp_name").ToString
+            FormSamplePRDet.MECompAddress.Text = GVCompany.GetFocusedRowCellDisplayText("address_primary").ToString
             Close()
         ElseIf id_pop_up = "7" Then
             FormSampleRetOutSingle.id_comp_contact_from = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
@@ -372,6 +382,7 @@
                     Cursor = Cursors.WaitCursor
                     FormSalesOrderDet.viewDetail("-1")
                     FormSalesOrderDet.id_store = GVCompany.GetFocusedRowCellValue("id_comp").ToString
+                    FormSalesOrderDet.id_store_cat = GVCompany.GetFocusedRowCellValue("id_comp_cat").ToString
                     FormSalesOrderDet.id_store_contact_to = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
                     FormSalesOrderDet.TxtNameCompTo.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
                     FormSalesOrderDet.TxtCodeCompTo.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
@@ -811,6 +822,13 @@
                 stopCustom(ex.ToString)
                 Close()
             End Try
+        ElseIf id_pop_up = "74" Then
+            'RETURN Mat In Prod
+            FormMatRetInProd.id_comp_contact_from = GVCompany.GetFocusedRowCellValue("id_comp").ToString
+            FormMatRetInProd.TxtNameCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
+            FormMatRetInProd.TxtCodeCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
+            FormMatRetInProd.MEAdrressCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "3")
+            Close()
         End If
         Cursor = Cursors.Default
     End Sub

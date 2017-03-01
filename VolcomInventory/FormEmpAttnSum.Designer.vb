@@ -21,7 +21,7 @@ Partial Class FormEmpAttnSum
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormEmpAttnSum))
-        Me.XtraTabControl1 = New DevExpress.XtraTab.XtraTabControl()
+        Me.XTCReportAttendance = New DevExpress.XtraTab.XtraTabControl()
         Me.XTPMonthly = New DevExpress.XtraTab.XtraTabPage()
         Me.GCSum = New DevExpress.XtraGrid.GridControl()
         Me.GVSum = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -40,16 +40,6 @@ Partial Class FormEmpAttnSum
         Me.GridColumn40 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn19 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn41 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
-        Me.LEDeptSum = New DevExpress.XtraEditors.LookUpEdit()
-        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
-        Me.BPrintSum = New DevExpress.XtraEditors.SimpleButton()
-        Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
-        Me.DEUntilSum = New DevExpress.XtraEditors.DateEdit()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.DEStartSum = New DevExpress.XtraEditors.DateEdit()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.BViewSum = New DevExpress.XtraEditors.SimpleButton()
         Me.XTPD2D = New DevExpress.XtraTab.XtraTabPage()
         Me.GCSchedule = New DevExpress.XtraGrid.GridControl()
         Me.ViewMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -87,64 +77,101 @@ Partial Class FormEmpAttnSum
         Me.GridColumn24 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn25 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn26 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
-        Me.LEDept = New DevExpress.XtraEditors.LookUpEdit()
-        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
-        Me.BPrint = New DevExpress.XtraEditors.SimpleButton()
-        Me.DEUntil = New DevExpress.XtraEditors.DateEdit()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.DEStart = New DevExpress.XtraEditors.DateEdit()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.BViewSchedule = New DevExpress.XtraEditors.SimpleButton()
-        CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.XtraTabControl1.SuspendLayout()
+        Me.XTPSchedule = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCListSchedule = New DevExpress.XtraGrid.GridControl()
+        Me.GVListSchedule = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn27 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn28 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn29 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn30 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn31 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn32 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn42 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn43 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn44 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn45 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn46 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn47 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn48 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn49 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn50 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn51 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn52 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn53 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn54 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn55 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn56 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn57 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn58 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn59 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn60 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn61 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn62 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn63 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn64 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn65 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn66 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn67 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.XTPScheduleTable = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCScheduleTable = New DevExpress.XtraGrid.GridControl()
+        Me.GVScheduleTable = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
+        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
+        Me.LEDeptSum = New DevExpress.XtraEditors.LookUpEdit()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
+        Me.BPrintSum = New DevExpress.XtraEditors.SimpleButton()
+        Me.DEUntilSum = New DevExpress.XtraEditors.DateEdit()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.DEStartSum = New DevExpress.XtraEditors.DateEdit()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.BViewSum = New DevExpress.XtraEditors.SimpleButton()
+        CType(Me.XTCReportAttendance, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTCReportAttendance.SuspendLayout()
         Me.XTPMonthly.SuspendLayout()
         CType(Me.GCSum, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVSum, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.PanelControl2.SuspendLayout()
-        CType(Me.LEDeptSum.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DEUntilSum.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DEUntilSum.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DEStartSum.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DEStartSum.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTPD2D.SuspendLayout()
         CType(Me.GCSchedule, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ViewMenu.SuspendLayout()
         CType(Me.GVSchedule, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.PanelControl1.SuspendLayout()
-        CType(Me.LEDept.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DEUntil.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DEStart.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DEStart.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTPSchedule.SuspendLayout()
+        CType(Me.GCListSchedule, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVListSchedule, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTPScheduleTable.SuspendLayout()
+        CType(Me.GCScheduleTable, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVScheduleTable, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl2.SuspendLayout()
+        CType(Me.LEDeptSum.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEUntilSum.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEUntilSum.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEStartSum.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEStartSum.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'XtraTabControl1
+        'XTCReportAttendance
         '
-        Me.XtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.XtraTabControl1.HeaderLocation = DevExpress.XtraTab.TabHeaderLocation.Bottom
-        Me.XtraTabControl1.Location = New System.Drawing.Point(0, 0)
-        Me.XtraTabControl1.Name = "XtraTabControl1"
-        Me.XtraTabControl1.SelectedTabPage = Me.XTPMonthly
-        Me.XtraTabControl1.Size = New System.Drawing.Size(1006, 328)
-        Me.XtraTabControl1.TabIndex = 0
-        Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPMonthly, Me.XTPD2D})
+        Me.XTCReportAttendance.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.XTCReportAttendance.HeaderLocation = DevExpress.XtraTab.TabHeaderLocation.Bottom
+        Me.XTCReportAttendance.Location = New System.Drawing.Point(0, 38)
+        Me.XTCReportAttendance.Name = "XTCReportAttendance"
+        Me.XTCReportAttendance.SelectedTabPage = Me.XTPMonthly
+        Me.XTCReportAttendance.Size = New System.Drawing.Size(1006, 290)
+        Me.XTCReportAttendance.TabIndex = 0
+        Me.XTCReportAttendance.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPMonthly, Me.XTPD2D, Me.XTPSchedule, Me.XTPScheduleTable})
         '
         'XTPMonthly
         '
         Me.XTPMonthly.Controls.Add(Me.GCSum)
-        Me.XTPMonthly.Controls.Add(Me.PanelControl2)
         Me.XTPMonthly.Name = "XTPMonthly"
-        Me.XTPMonthly.Size = New System.Drawing.Size(1000, 300)
+        Me.XTPMonthly.Size = New System.Drawing.Size(1000, 262)
         Me.XTPMonthly.Text = "Summary"
         '
         'GCSum
         '
         Me.GCSum.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCSum.Location = New System.Drawing.Point(0, 38)
+        Me.GCSum.Location = New System.Drawing.Point(0, 0)
         Me.GCSum.MainView = Me.GVSum
         Me.GCSum.Name = "GCSum"
         Me.GCSum.Size = New System.Drawing.Size(1000, 262)
@@ -313,137 +340,18 @@ Partial Class FormEmpAttnSum
         Me.GridColumn41.VisibleIndex = 10
         Me.GridColumn41.Width = 71
         '
-        'PanelControl2
-        '
-        Me.PanelControl2.Controls.Add(Me.LEDeptSum)
-        Me.PanelControl2.Controls.Add(Me.LabelControl1)
-        Me.PanelControl2.Controls.Add(Me.BPrintSum)
-        Me.PanelControl2.Controls.Add(Me.DEUntilSum)
-        Me.PanelControl2.Controls.Add(Me.Label3)
-        Me.PanelControl2.Controls.Add(Me.DEStartSum)
-        Me.PanelControl2.Controls.Add(Me.Label4)
-        Me.PanelControl2.Controls.Add(Me.BViewSum)
-        Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Top
-        Me.PanelControl2.Location = New System.Drawing.Point(0, 0)
-        Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(1000, 38)
-        Me.PanelControl2.TabIndex = 3
-        '
-        'LEDeptSum
-        '
-        Me.LEDeptSum.Location = New System.Drawing.Point(475, 9)
-        Me.LEDeptSum.Name = "LEDeptSum"
-        Me.LEDeptSum.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.LEDeptSum.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_departement", "Id Departement", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("departement", "Departemen")})
-        Me.LEDeptSum.Size = New System.Drawing.Size(151, 20)
-        Me.LEDeptSum.TabIndex = 14
-        '
-        'LabelControl1
-        '
-        Me.LabelControl1.Location = New System.Drawing.Point(406, 12)
-        Me.LabelControl1.Name = "LabelControl1"
-        Me.LabelControl1.Size = New System.Drawing.Size(63, 13)
-        Me.LabelControl1.TabIndex = 13
-        Me.LabelControl1.Text = "Departement"
-        '
-        'BPrintSum
-        '
-        Me.BPrintSum.ImageList = Me.LargeImageCollection
-        Me.BPrintSum.Location = New System.Drawing.Point(724, 6)
-        Me.BPrintSum.Name = "BPrintSum"
-        Me.BPrintSum.Size = New System.Drawing.Size(86, 25)
-        Me.BPrintSum.TabIndex = 12
-        Me.BPrintSum.Text = "print"
-        '
-        'LargeImageCollection
-        '
-        Me.LargeImageCollection.ImageSize = New System.Drawing.Size(24, 24)
-        Me.LargeImageCollection.ImageStream = CType(resources.GetObject("LargeImageCollection.ImageStream"), DevExpress.Utils.ImageCollectionStreamer)
-        Me.LargeImageCollection.Images.SetKeyName(0, "20_24x24.png")
-        Me.LargeImageCollection.Images.SetKeyName(1, "8_24x24.png")
-        Me.LargeImageCollection.Images.SetKeyName(2, "23_24x24.png")
-        Me.LargeImageCollection.Images.SetKeyName(3, "arrow_refresh.png")
-        Me.LargeImageCollection.Images.SetKeyName(4, "check_mark.png")
-        Me.LargeImageCollection.Images.SetKeyName(5, "gnome_application_exit (1).png")
-        Me.LargeImageCollection.Images.SetKeyName(6, "printer_3.png")
-        Me.LargeImageCollection.Images.SetKeyName(7, "save.png")
-        Me.LargeImageCollection.Images.SetKeyName(8, "31_24x24.png")
-        Me.LargeImageCollection.Images.SetKeyName(9, "18_24x24.png")
-        Me.LargeImageCollection.Images.SetKeyName(10, "1415351112474759854-32.png")
-        Me.LargeImageCollection.Images.SetKeyName(11, "icon_merchandise_clothes32.png")
-        Me.LargeImageCollection.Images.SetKeyName(12, "t_shirtgreen.png")
-        Me.LargeImageCollection.Images.SetKeyName(13, "lock red.png")
-        Me.LargeImageCollection.Images.SetKeyName(14, "ordering32.png")
-        Me.LargeImageCollection.Images.SetKeyName(15, "kghostview.png")
-        Me.LargeImageCollection.Images.SetKeyName(16, "MetroUI-Folder-OS-Configure-icon.png")
-        Me.LargeImageCollection.Images.SetKeyName(17, "Setting(32).png")
-        Me.LargeImageCollection.Images.SetKeyName(18, "estimate_icon32.png")
-        Me.LargeImageCollection.Images.SetKeyName(19, "copy_icon.png")
-        '
-        'DEUntilSum
-        '
-        Me.DEUntilSum.EditValue = Nothing
-        Me.DEUntilSum.Location = New System.Drawing.Point(273, 9)
-        Me.DEUntilSum.Name = "DEUntilSum"
-        Me.DEUntilSum.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.DEUntilSum.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.DEUntilSum.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
-        Me.DEUntilSum.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.DEUntilSum.Size = New System.Drawing.Size(127, 20)
-        Me.DEUntilSum.TabIndex = 11
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(229, 12)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(38, 13)
-        Me.Label3.TabIndex = 10
-        Me.Label3.Text = "Until : "
-        '
-        'DEStartSum
-        '
-        Me.DEStartSum.EditValue = Nothing
-        Me.DEStartSum.Location = New System.Drawing.Point(109, 9)
-        Me.DEStartSum.Name = "DEStartSum"
-        Me.DEStartSum.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.DEStartSum.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.DEStartSum.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
-        Me.DEStartSum.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.DEStartSum.Size = New System.Drawing.Size(114, 20)
-        Me.DEStartSum.TabIndex = 9
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(5, 12)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(98, 13)
-        Me.Label4.TabIndex = 8
-        Me.Label4.Text = "Attendance from : "
-        '
-        'BViewSum
-        '
-        Me.BViewSum.ImageList = Me.LargeImageCollection
-        Me.BViewSum.Location = New System.Drawing.Point(632, 6)
-        Me.BViewSum.Name = "BViewSum"
-        Me.BViewSum.Size = New System.Drawing.Size(86, 25)
-        Me.BViewSum.TabIndex = 1
-        Me.BViewSum.Text = "view"
-        '
         'XTPD2D
         '
         Me.XTPD2D.Controls.Add(Me.GCSchedule)
-        Me.XTPD2D.Controls.Add(Me.PanelControl1)
         Me.XTPD2D.Name = "XTPD2D"
-        Me.XTPD2D.Size = New System.Drawing.Size(1000, 300)
+        Me.XTPD2D.Size = New System.Drawing.Size(1000, 262)
         Me.XTPD2D.Text = "Detail"
         '
         'GCSchedule
         '
         Me.GCSchedule.ContextMenuStrip = Me.ViewMenu
         Me.GCSchedule.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCSchedule.Location = New System.Drawing.Point(0, 38)
+        Me.GCSchedule.Location = New System.Drawing.Point(0, 0)
         Me.GCSchedule.MainView = Me.GVSchedule
         Me.GCSchedule.Name = "GCSchedule"
         Me.GCSchedule.Size = New System.Drawing.Size(1000, 262)
@@ -742,150 +650,474 @@ Partial Class FormEmpAttnSum
         Me.GridColumn26.Visible = True
         Me.GridColumn26.VisibleIndex = 19
         '
-        'PanelControl1
+        'XTPSchedule
         '
-        Me.PanelControl1.Controls.Add(Me.LEDept)
-        Me.PanelControl1.Controls.Add(Me.LabelControl3)
-        Me.PanelControl1.Controls.Add(Me.BPrint)
-        Me.PanelControl1.Controls.Add(Me.DEUntil)
-        Me.PanelControl1.Controls.Add(Me.Label2)
-        Me.PanelControl1.Controls.Add(Me.DEStart)
-        Me.PanelControl1.Controls.Add(Me.Label1)
-        Me.PanelControl1.Controls.Add(Me.BViewSchedule)
-        Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.PanelControl1.Location = New System.Drawing.Point(0, 0)
-        Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(1000, 38)
-        Me.PanelControl1.TabIndex = 2
+        Me.XTPSchedule.Controls.Add(Me.GCListSchedule)
+        Me.XTPSchedule.Name = "XTPSchedule"
+        Me.XTPSchedule.Size = New System.Drawing.Size(1000, 262)
+        Me.XTPSchedule.Text = "Schedule"
         '
-        'LEDept
+        'GCListSchedule
         '
-        Me.LEDept.Location = New System.Drawing.Point(475, 9)
-        Me.LEDept.Name = "LEDept"
-        Me.LEDept.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.LEDept.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_departement", "Id Departement", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("departement", "Departemen")})
-        Me.LEDept.Size = New System.Drawing.Size(151, 20)
-        Me.LEDept.TabIndex = 14
+        Me.GCListSchedule.ContextMenuStrip = Me.ViewMenu
+        Me.GCListSchedule.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCListSchedule.Location = New System.Drawing.Point(0, 0)
+        Me.GCListSchedule.MainView = Me.GVListSchedule
+        Me.GCListSchedule.Name = "GCListSchedule"
+        Me.GCListSchedule.Size = New System.Drawing.Size(1000, 262)
+        Me.GCListSchedule.TabIndex = 8
+        Me.GCListSchedule.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVListSchedule})
         '
-        'LabelControl3
+        'GVListSchedule
         '
-        Me.LabelControl3.Location = New System.Drawing.Point(406, 12)
-        Me.LabelControl3.Name = "LabelControl3"
-        Me.LabelControl3.Size = New System.Drawing.Size(63, 13)
-        Me.LabelControl3.TabIndex = 13
-        Me.LabelControl3.Text = "Departement"
+        Me.GVListSchedule.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn27, Me.GridColumn28, Me.GridColumn29, Me.GridColumn30, Me.GridColumn31, Me.GridColumn32, Me.GridColumn42, Me.GridColumn43, Me.GridColumn44, Me.GridColumn45, Me.GridColumn46, Me.GridColumn47, Me.GridColumn48, Me.GridColumn49, Me.GridColumn50, Me.GridColumn51, Me.GridColumn52, Me.GridColumn53, Me.GridColumn54, Me.GridColumn55, Me.GridColumn56, Me.GridColumn57, Me.GridColumn58, Me.GridColumn59, Me.GridColumn60, Me.GridColumn61, Me.GridColumn62, Me.GridColumn63, Me.GridColumn64, Me.GridColumn65, Me.GridColumn66, Me.GridColumn67})
+        Me.GVListSchedule.GridControl = Me.GCListSchedule
+        Me.GVListSchedule.GroupCount = 2
+        Me.GVListSchedule.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "work_hour", Me.GridColumn58, "{0:0.##}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "actual_work_hour", Me.GridColumn59, "{0:0.##}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "late", Me.GridColumn60, "{0:0.##}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "over", Me.GridColumn61, "{0:0.##}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "balance", Me.GridColumn62, "{0:0.##}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "over_break", Me.GridColumn63, "{0:0.##}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "present", Me.GridColumn64, "{0:0.##}")})
+        Me.GVListSchedule.Name = "GVListSchedule"
+        Me.GVListSchedule.OptionsBehavior.Editable = False
+        Me.GVListSchedule.OptionsView.ColumnAutoWidth = False
+        Me.GVListSchedule.OptionsView.ShowFooter = True
+        Me.GVListSchedule.OptionsView.ShowGroupPanel = False
+        Me.GVListSchedule.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumn43, DevExpress.Data.ColumnSortOrder.Ascending), New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumn30, DevExpress.Data.ColumnSortOrder.Ascending), New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumn45, DevExpress.Data.ColumnSortOrder.Ascending)})
         '
-        'BPrint
+        'GridColumn27
         '
-        Me.BPrint.ImageList = Me.LargeImageCollection
-        Me.BPrint.Location = New System.Drawing.Point(724, 6)
-        Me.BPrint.Name = "BPrint"
-        Me.BPrint.Size = New System.Drawing.Size(86, 25)
-        Me.BPrint.TabIndex = 12
-        Me.BPrint.Text = "print"
+        Me.GridColumn27.Caption = "ID Employee"
+        Me.GridColumn27.FieldName = "id_employee"
+        Me.GridColumn27.Name = "GridColumn27"
         '
-        'DEUntil
+        'GridColumn28
         '
-        Me.DEUntil.EditValue = Nothing
-        Me.DEUntil.Location = New System.Drawing.Point(273, 9)
-        Me.DEUntil.Name = "DEUntil"
-        Me.DEUntil.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.DEUntil.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.DEUntil.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
-        Me.DEUntil.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.DEUntil.Size = New System.Drawing.Size(127, 20)
-        Me.DEUntil.TabIndex = 11
+        Me.GridColumn28.Caption = "ID Schedule"
+        Me.GridColumn28.FieldName = "id_schedule"
+        Me.GridColumn28.Name = "GridColumn28"
         '
-        'Label2
+        'GridColumn29
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(229, 12)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(38, 13)
-        Me.Label2.TabIndex = 10
-        Me.Label2.Text = "Until : "
+        Me.GridColumn29.Caption = "Code"
+        Me.GridColumn29.FieldName = "employee_code"
+        Me.GridColumn29.Name = "GridColumn29"
         '
-        'DEStart
+        'GridColumn30
         '
-        Me.DEStart.EditValue = Nothing
-        Me.DEStart.Location = New System.Drawing.Point(109, 9)
-        Me.DEStart.Name = "DEStart"
-        Me.DEStart.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.DEStart.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.DEStart.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
-        Me.DEStart.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.DEStart.Size = New System.Drawing.Size(114, 20)
-        Me.DEStart.TabIndex = 9
+        Me.GridColumn30.Caption = "Employee"
+        Me.GridColumn30.FieldName = "employee_name"
+        Me.GridColumn30.FieldNameSortGroup = "id_employee"
+        Me.GridColumn30.Name = "GridColumn30"
+        Me.GridColumn30.Visible = True
+        Me.GridColumn30.VisibleIndex = 1
         '
-        'Label1
+        'GridColumn31
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(5, 12)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(98, 13)
-        Me.Label1.TabIndex = 8
-        Me.Label1.Text = "Attendance from : "
+        Me.GridColumn31.Caption = "Level"
+        Me.GridColumn31.FieldName = "employee_level"
+        Me.GridColumn31.Name = "GridColumn31"
+        Me.GridColumn31.Visible = True
+        Me.GridColumn31.VisibleIndex = 0
         '
-        'BViewSchedule
+        'GridColumn32
         '
-        Me.BViewSchedule.ImageList = Me.LargeImageCollection
-        Me.BViewSchedule.Location = New System.Drawing.Point(632, 6)
-        Me.BViewSchedule.Name = "BViewSchedule"
-        Me.BViewSchedule.Size = New System.Drawing.Size(86, 25)
-        Me.BViewSchedule.TabIndex = 1
-        Me.BViewSchedule.Text = "view"
+        Me.GridColumn32.Caption = "Position"
+        Me.GridColumn32.FieldName = "employee_position"
+        Me.GridColumn32.Name = "GridColumn32"
+        Me.GridColumn32.Visible = True
+        Me.GridColumn32.VisibleIndex = 1
+        '
+        'GridColumn42
+        '
+        Me.GridColumn42.Caption = "Status"
+        Me.GridColumn42.FieldName = "employee_active"
+        Me.GridColumn42.Name = "GridColumn42"
+        Me.GridColumn42.Visible = True
+        Me.GridColumn42.VisibleIndex = 11
+        '
+        'GridColumn43
+        '
+        Me.GridColumn43.Caption = "Departement"
+        Me.GridColumn43.FieldName = "departement"
+        Me.GridColumn43.FieldNameSortGroup = "id_departement"
+        Me.GridColumn43.Name = "GridColumn43"
+        Me.GridColumn43.Visible = True
+        Me.GridColumn43.VisibleIndex = 3
+        '
+        'GridColumn44
+        '
+        Me.GridColumn44.Caption = "ID Departement"
+        Me.GridColumn44.FieldName = "id_departement"
+        Me.GridColumn44.Name = "GridColumn44"
+        '
+        'GridColumn45
+        '
+        Me.GridColumn45.Caption = "Date"
+        Me.GridColumn45.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.GridColumn45.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn45.FieldName = "date"
+        Me.GridColumn45.Name = "GridColumn45"
+        Me.GridColumn45.Visible = True
+        Me.GridColumn45.VisibleIndex = 2
+        '
+        'GridColumn46
+        '
+        Me.GridColumn46.Caption = "In"
+        Me.GridColumn46.DisplayFormat.FormatString = "hh:mm:ss tt"
+        Me.GridColumn46.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn46.FieldName = "in"
+        Me.GridColumn46.Name = "GridColumn46"
+        Me.GridColumn46.Visible = True
+        Me.GridColumn46.VisibleIndex = 3
+        '
+        'GridColumn47
+        '
+        Me.GridColumn47.Caption = "Tolerance In"
+        Me.GridColumn47.DisplayFormat.FormatString = "hh:mm:ss tt"
+        Me.GridColumn47.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn47.FieldName = "in_tolerance"
+        Me.GridColumn47.Name = "GridColumn47"
+        Me.GridColumn47.Visible = True
+        Me.GridColumn47.VisibleIndex = 4
+        '
+        'GridColumn48
+        '
+        Me.GridColumn48.Caption = "Out"
+        Me.GridColumn48.DisplayFormat.FormatString = "hh:mm:ss tt"
+        Me.GridColumn48.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn48.FieldName = "out"
+        Me.GridColumn48.Name = "GridColumn48"
+        Me.GridColumn48.Visible = True
+        Me.GridColumn48.VisibleIndex = 5
+        '
+        'GridColumn49
+        '
+        Me.GridColumn49.Caption = "Start Break"
+        Me.GridColumn49.DisplayFormat.FormatString = "hh:mm:ss tt"
+        Me.GridColumn49.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn49.FieldName = "break_out"
+        Me.GridColumn49.Name = "GridColumn49"
+        Me.GridColumn49.Visible = True
+        Me.GridColumn49.VisibleIndex = 6
+        '
+        'GridColumn50
+        '
+        Me.GridColumn50.Caption = "End Break"
+        Me.GridColumn50.DisplayFormat.FormatString = "hh:mm:ss tt"
+        Me.GridColumn50.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn50.FieldName = "break_in"
+        Me.GridColumn50.Name = "GridColumn50"
+        Me.GridColumn50.Visible = True
+        Me.GridColumn50.VisibleIndex = 7
+        '
+        'GridColumn51
+        '
+        Me.GridColumn51.Caption = "Note"
+        Me.GridColumn51.FieldName = "note"
+        Me.GridColumn51.Name = "GridColumn51"
+        Me.GridColumn51.Visible = True
+        Me.GridColumn51.VisibleIndex = 8
+        '
+        'GridColumn52
+        '
+        Me.GridColumn52.Caption = "Type"
+        Me.GridColumn52.FieldName = "schedule_type"
+        Me.GridColumn52.Name = "GridColumn52"
+        Me.GridColumn52.Visible = True
+        Me.GridColumn52.VisibleIndex = 9
+        '
+        'GridColumn53
+        '
+        Me.GridColumn53.Caption = "Weekday"
+        Me.GridColumn53.DisplayFormat.FormatString = "dddd"
+        Me.GridColumn53.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn53.FieldName = "date"
+        Me.GridColumn53.Name = "GridColumn53"
+        Me.GridColumn53.Visible = True
+        Me.GridColumn53.VisibleIndex = 10
+        '
+        'GridColumn54
+        '
+        Me.GridColumn54.Caption = "Start Work"
+        Me.GridColumn54.DisplayFormat.FormatString = "hh:mm:ss tt"
+        Me.GridColumn54.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn54.FieldName = "att_in"
+        Me.GridColumn54.Name = "GridColumn54"
+        '
+        'GridColumn55
+        '
+        Me.GridColumn55.Caption = "End Work"
+        Me.GridColumn55.DisplayFormat.FormatString = "hh:mm:ss tt"
+        Me.GridColumn55.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn55.FieldName = "att_out"
+        Me.GridColumn55.Name = "GridColumn55"
+        '
+        'GridColumn56
+        '
+        Me.GridColumn56.Caption = "Start Break"
+        Me.GridColumn56.DisplayFormat.FormatString = "hh:mm:ss tt"
+        Me.GridColumn56.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn56.FieldName = "start_break"
+        Me.GridColumn56.Name = "GridColumn56"
+        '
+        'GridColumn57
+        '
+        Me.GridColumn57.Caption = "End Break"
+        Me.GridColumn57.DisplayFormat.FormatString = "hh:mm:ss tt"
+        Me.GridColumn57.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn57.FieldName = "end_break"
+        Me.GridColumn57.Name = "GridColumn57"
+        '
+        'GridColumn58
+        '
+        Me.GridColumn58.Caption = "Working Minutes"
+        Me.GridColumn58.FieldName = "work_hour"
+        Me.GridColumn58.Name = "GridColumn58"
+        Me.GridColumn58.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "work_hour", "{0:0.##}")})
+        '
+        'GridColumn59
+        '
+        Me.GridColumn59.Caption = "Actual Working Minutes"
+        Me.GridColumn59.FieldName = "actual_work_hour"
+        Me.GridColumn59.Name = "GridColumn59"
+        Me.GridColumn59.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "actual_work_hour", "{0:0.##}")})
+        '
+        'GridColumn60
+        '
+        Me.GridColumn60.Caption = "Late"
+        Me.GridColumn60.FieldName = "late"
+        Me.GridColumn60.Name = "GridColumn60"
+        Me.GridColumn60.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "late", "{0:0.##}")})
+        '
+        'GridColumn61
+        '
+        Me.GridColumn61.Caption = "Over"
+        Me.GridColumn61.FieldName = "over"
+        Me.GridColumn61.Name = "GridColumn61"
+        Me.GridColumn61.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "over", "{0:0.##}")})
+        '
+        'GridColumn62
+        '
+        Me.GridColumn62.Caption = "Balance"
+        Me.GridColumn62.FieldName = "balance"
+        Me.GridColumn62.Name = "GridColumn62"
+        Me.GridColumn62.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "balance", "{0:0.##}")})
+        '
+        'GridColumn63
+        '
+        Me.GridColumn63.Caption = "Over Break"
+        Me.GridColumn63.FieldName = "over_break"
+        Me.GridColumn63.Name = "GridColumn63"
+        Me.GridColumn63.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "over_break", "{0:0.##}")})
+        '
+        'GridColumn64
+        '
+        Me.GridColumn64.Caption = "Present"
+        Me.GridColumn64.FieldName = "present"
+        Me.GridColumn64.Name = "GridColumn64"
+        Me.GridColumn64.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "present", "{0:0.##}")})
+        '
+        'GridColumn65
+        '
+        Me.GridColumn65.Caption = "ID Leave Type"
+        Me.GridColumn65.FieldName = "id_leave_type"
+        Me.GridColumn65.Name = "GridColumn65"
+        '
+        'GridColumn66
+        '
+        Me.GridColumn66.Caption = "Type Leave"
+        Me.GridColumn66.FieldName = "leave_type"
+        Me.GridColumn66.Name = "GridColumn66"
+        '
+        'GridColumn67
+        '
+        Me.GridColumn67.Caption = "Leave Purpose"
+        Me.GridColumn67.FieldName = "info_leave"
+        Me.GridColumn67.Name = "GridColumn67"
+        '
+        'XTPScheduleTable
+        '
+        Me.XTPScheduleTable.Controls.Add(Me.GCScheduleTable)
+        Me.XTPScheduleTable.Name = "XTPScheduleTable"
+        Me.XTPScheduleTable.Size = New System.Drawing.Size(1000, 262)
+        Me.XTPScheduleTable.Text = "Schedule Table"
+        '
+        'GCScheduleTable
+        '
+        Me.GCScheduleTable.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCScheduleTable.Location = New System.Drawing.Point(0, 0)
+        Me.GCScheduleTable.MainView = Me.GVScheduleTable
+        Me.GCScheduleTable.Name = "GCScheduleTable"
+        Me.GCScheduleTable.Size = New System.Drawing.Size(1000, 262)
+        Me.GCScheduleTable.TabIndex = 4
+        Me.GCScheduleTable.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVScheduleTable})
+        '
+        'GVScheduleTable
+        '
+        Me.GVScheduleTable.GridControl = Me.GCScheduleTable
+        Me.GVScheduleTable.Name = "GVScheduleTable"
+        Me.GVScheduleTable.OptionsView.ColumnAutoWidth = False
+        Me.GVScheduleTable.OptionsView.ShowGroupPanel = False
+        '
+        'LargeImageCollection
+        '
+        Me.LargeImageCollection.ImageSize = New System.Drawing.Size(24, 24)
+        Me.LargeImageCollection.ImageStream = CType(resources.GetObject("LargeImageCollection.ImageStream"), DevExpress.Utils.ImageCollectionStreamer)
+        Me.LargeImageCollection.Images.SetKeyName(0, "20_24x24.png")
+        Me.LargeImageCollection.Images.SetKeyName(1, "8_24x24.png")
+        Me.LargeImageCollection.Images.SetKeyName(2, "23_24x24.png")
+        Me.LargeImageCollection.Images.SetKeyName(3, "arrow_refresh.png")
+        Me.LargeImageCollection.Images.SetKeyName(4, "check_mark.png")
+        Me.LargeImageCollection.Images.SetKeyName(5, "gnome_application_exit (1).png")
+        Me.LargeImageCollection.Images.SetKeyName(6, "printer_3.png")
+        Me.LargeImageCollection.Images.SetKeyName(7, "save.png")
+        Me.LargeImageCollection.Images.SetKeyName(8, "31_24x24.png")
+        Me.LargeImageCollection.Images.SetKeyName(9, "18_24x24.png")
+        Me.LargeImageCollection.Images.SetKeyName(10, "1415351112474759854-32.png")
+        Me.LargeImageCollection.Images.SetKeyName(11, "icon_merchandise_clothes32.png")
+        Me.LargeImageCollection.Images.SetKeyName(12, "t_shirtgreen.png")
+        Me.LargeImageCollection.Images.SetKeyName(13, "lock red.png")
+        Me.LargeImageCollection.Images.SetKeyName(14, "ordering32.png")
+        Me.LargeImageCollection.Images.SetKeyName(15, "kghostview.png")
+        Me.LargeImageCollection.Images.SetKeyName(16, "MetroUI-Folder-OS-Configure-icon.png")
+        Me.LargeImageCollection.Images.SetKeyName(17, "Setting(32).png")
+        Me.LargeImageCollection.Images.SetKeyName(18, "estimate_icon32.png")
+        Me.LargeImageCollection.Images.SetKeyName(19, "copy_icon.png")
+        '
+        'PanelControl2
+        '
+        Me.PanelControl2.Controls.Add(Me.LEDeptSum)
+        Me.PanelControl2.Controls.Add(Me.LabelControl1)
+        Me.PanelControl2.Controls.Add(Me.BPrintSum)
+        Me.PanelControl2.Controls.Add(Me.DEUntilSum)
+        Me.PanelControl2.Controls.Add(Me.Label3)
+        Me.PanelControl2.Controls.Add(Me.DEStartSum)
+        Me.PanelControl2.Controls.Add(Me.Label4)
+        Me.PanelControl2.Controls.Add(Me.BViewSum)
+        Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelControl2.Location = New System.Drawing.Point(0, 0)
+        Me.PanelControl2.Name = "PanelControl2"
+        Me.PanelControl2.Size = New System.Drawing.Size(1006, 38)
+        Me.PanelControl2.TabIndex = 3
+        '
+        'LEDeptSum
+        '
+        Me.LEDeptSum.Location = New System.Drawing.Point(475, 9)
+        Me.LEDeptSum.Name = "LEDeptSum"
+        Me.LEDeptSum.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.LEDeptSum.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_departement", "Id Departement", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("departement", "Departemen")})
+        Me.LEDeptSum.Size = New System.Drawing.Size(151, 20)
+        Me.LEDeptSum.TabIndex = 14
+        '
+        'LabelControl1
+        '
+        Me.LabelControl1.Location = New System.Drawing.Point(406, 12)
+        Me.LabelControl1.Name = "LabelControl1"
+        Me.LabelControl1.Size = New System.Drawing.Size(63, 13)
+        Me.LabelControl1.TabIndex = 13
+        Me.LabelControl1.Text = "Departement"
+        '
+        'BPrintSum
+        '
+        Me.BPrintSum.ImageList = Me.LargeImageCollection
+        Me.BPrintSum.Location = New System.Drawing.Point(724, 6)
+        Me.BPrintSum.Name = "BPrintSum"
+        Me.BPrintSum.Size = New System.Drawing.Size(86, 25)
+        Me.BPrintSum.TabIndex = 12
+        Me.BPrintSum.Text = "print"
+        '
+        'DEUntilSum
+        '
+        Me.DEUntilSum.EditValue = Nothing
+        Me.DEUntilSum.Location = New System.Drawing.Point(273, 9)
+        Me.DEUntilSum.Name = "DEUntilSum"
+        Me.DEUntilSum.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEUntilSum.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEUntilSum.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.DEUntilSum.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEUntilSum.Size = New System.Drawing.Size(127, 20)
+        Me.DEUntilSum.TabIndex = 11
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(229, 12)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(38, 13)
+        Me.Label3.TabIndex = 10
+        Me.Label3.Text = "Until : "
+        '
+        'DEStartSum
+        '
+        Me.DEStartSum.EditValue = Nothing
+        Me.DEStartSum.Location = New System.Drawing.Point(109, 9)
+        Me.DEStartSum.Name = "DEStartSum"
+        Me.DEStartSum.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEStartSum.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEStartSum.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.DEStartSum.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEStartSum.Size = New System.Drawing.Size(114, 20)
+        Me.DEStartSum.TabIndex = 9
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(5, 12)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(98, 13)
+        Me.Label4.TabIndex = 8
+        Me.Label4.Text = "Attendance from : "
+        '
+        'BViewSum
+        '
+        Me.BViewSum.ImageList = Me.LargeImageCollection
+        Me.BViewSum.Location = New System.Drawing.Point(632, 6)
+        Me.BViewSum.Name = "BViewSum"
+        Me.BViewSum.Size = New System.Drawing.Size(86, 25)
+        Me.BViewSum.TabIndex = 1
+        Me.BViewSum.Text = "view"
         '
         'FormEmpAttnSum
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1006, 328)
-        Me.Controls.Add(Me.XtraTabControl1)
+        Me.Controls.Add(Me.XTCReportAttendance)
+        Me.Controls.Add(Me.PanelControl2)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FormEmpAttnSum"
         Me.Text = "Summary Attendance Report"
-        CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.XtraTabControl1.ResumeLayout(False)
+        CType(Me.XTCReportAttendance, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTCReportAttendance.ResumeLayout(False)
         Me.XTPMonthly.ResumeLayout(False)
         CType(Me.GCSum, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVSum, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.PanelControl2.ResumeLayout(False)
-        Me.PanelControl2.PerformLayout()
-        CType(Me.LEDeptSum.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DEUntilSum.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DEUntilSum.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DEStartSum.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DEStartSum.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XTPD2D.ResumeLayout(False)
         CType(Me.GCSchedule, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ViewMenu.ResumeLayout(False)
         CType(Me.GVSchedule, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.PanelControl1.ResumeLayout(False)
-        Me.PanelControl1.PerformLayout()
-        CType(Me.LEDept.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DEUntil.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DEStart.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DEStart.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTPSchedule.ResumeLayout(False)
+        CType(Me.GCListSchedule, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVListSchedule, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTPScheduleTable.ResumeLayout(False)
+        CType(Me.GCScheduleTable, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVScheduleTable, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl2.ResumeLayout(False)
+        Me.PanelControl2.PerformLayout()
+        CType(Me.LEDeptSum.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEUntilSum.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEUntilSum.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEStartSum.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEStartSum.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
 
-    Friend WithEvents XtraTabControl1 As DevExpress.XtraTab.XtraTabControl
+    Friend WithEvents XTCReportAttendance As DevExpress.XtraTab.XtraTabControl
     Friend WithEvents XTPD2D As DevExpress.XtraTab.XtraTabPage
     Friend WithEvents XTPMonthly As DevExpress.XtraTab.XtraTabPage
     Public WithEvents LargeImageCollection As DevExpress.Utils.ImageCollection
-    Friend WithEvents PanelControl1 As DevExpress.XtraEditors.PanelControl
-    Friend WithEvents BViewSchedule As DevExpress.XtraEditors.SimpleButton
-    Friend WithEvents DEUntil As DevExpress.XtraEditors.DateEdit
-    Friend WithEvents Label2 As Label
-    Friend WithEvents DEStart As DevExpress.XtraEditors.DateEdit
-    Friend WithEvents Label1 As Label
     Friend WithEvents GCSchedule As DevExpress.XtraGrid.GridControl
     Friend WithEvents GVSchedule As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
@@ -907,11 +1139,8 @@ Partial Class FormEmpAttnSum
     Friend WithEvents GCOver As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GCBalance As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GCOverBreak As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents BPrint As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents GridColumn21 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn20 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents LEDept As DevExpress.XtraEditors.LookUpEdit
-    Friend WithEvents LabelControl3 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents GridColumnPresent As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents PanelControl2 As DevExpress.XtraEditors.PanelControl
     Friend WithEvents LEDeptSum As DevExpress.XtraEditors.LookUpEdit
@@ -951,4 +1180,42 @@ Partial Class FormEmpAttnSum
     Friend WithEvents GridColumnLevel As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnLevels As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnIDSchedule As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents XTPSchedule As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents XTPScheduleTable As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents GCListSchedule As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVListSchedule As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn27 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn28 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn29 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn30 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn31 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn32 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn42 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn43 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn44 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn45 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn46 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn47 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn48 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn49 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn50 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn51 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn52 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn53 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn54 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn55 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn56 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn57 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn58 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn59 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn60 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn61 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn62 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn63 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn64 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn65 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn66 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn67 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GCScheduleTable As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVScheduleTable As DevExpress.XtraGrid.Views.Grid.GridView
 End Class

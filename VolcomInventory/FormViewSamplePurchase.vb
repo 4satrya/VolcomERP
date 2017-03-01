@@ -2,6 +2,8 @@
     Public id_sample_purc As String = "-1"
     Public id_comp_to As String = "-1"
     Public id_comp_ship_to As String = "-1"
+    Public id_comp_contact_courier As String = "-1"
+
     Public date_created As String = ""
     Private Sub FormViewSamplePurchase_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         view_currency(LECurrency)
@@ -10,7 +12,7 @@
         view_payment_type(LEpayment)
         view_report_status(LEReportStatus)
 
-        Dim query As String = String.Format("SELECT id_report_status,sample_purc_vat,id_season_orign,sample_purc_number,id_comp_contact_to,id_comp_contact_ship_to,id_po_type,id_payment,DATE_FORMAT(sample_purc_date,'%Y-%m-%d') as sample_purc_datex,sample_purc_lead_time,sample_purc_top,id_currency,sample_purc_note FROM tb_sample_purc WHERE id_sample_purc = '{0}'", id_sample_purc)
+        Dim query As String = String.Format("SELECT id_comp_contact_courier,courier_comm,id_report_status,sample_purc_vat,id_season_orign,sample_purc_number,id_comp_contact_to,id_comp_contact_ship_to,id_po_type,id_payment,DATE_FORMAT(sample_purc_date,'%Y-%m-%d') as sample_purc_datex,sample_purc_lead_time,sample_purc_top,id_currency,sample_purc_note FROM tb_sample_purc WHERE id_sample_purc = '{0}'", id_sample_purc)
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
         TEPONumber.Text = data.Rows(0)("sample_purc_number").ToString
@@ -38,6 +40,15 @@
         TECompShipTo.Text = get_company_x(get_id_company(id_comp_ship_to), "2")
         MECompShipToAddress.Text = get_company_x(get_id_company(id_comp_ship_to), "3")
 
+        Try
+            id_comp_contact_courier = data.Rows(0)("id_comp_contact_courier").ToString
+            TECourier.Text = get_company_x(get_id_company(id_comp_contact_courier), "1")
+            TECourierCode.Text = get_company_x(get_id_company(id_comp_contact_courier), "2")
+        Catch ex As Exception
+        End Try
+
+        TEComm.EditValue = data.Rows(0)("courier_comm")
+
         MENote.Text = data.Rows(0)("sample_purc_note").ToString
 
         date_created = data.Rows(0)("sample_purc_datex").ToString
@@ -46,7 +57,6 @@
         TERecDate.Text = view_date_from(date_created, Integer.Parse(data.Rows(0)("sample_purc_lead_time").ToString))
         TETOP.Text = data.Rows(0)("sample_purc_top").ToString
         TEDueDate.Text = view_date_from(date_created, (Integer.Parse(data.Rows(0)("sample_purc_lead_time").ToString) + Integer.Parse(data.Rows(0)("sample_purc_top").ToString)))
-
         '
         GConListPurchase.Enabled = True
         TEVat.Properties.ReadOnly = True

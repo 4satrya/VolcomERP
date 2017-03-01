@@ -1,5 +1,6 @@
 ﻿Public Class FormSalesOrderSvcLevel
     Sub viewSalesOrder()
+        CheckSelAll.Checked = False
 
         'Prepare paramater
         Dim date_from_selected As String = "0000-01-01"
@@ -659,6 +660,33 @@
             FormSalesOrderPacking.ShowDialog()
         End If
         GVSalesOrder.ActiveFilterString = ""
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub CheckSelAll_CheckedChanged(sender As Object, e As EventArgs) Handles CheckSelAll.CheckedChanged
+        If GVSalesOrder.RowCount > 0 Then
+            Dim cek As String = CheckSelAll.EditValue.ToString
+            For i As Integer = ((GVSalesOrder.RowCount - 1) - GetGroupRowCount(GVSalesOrder)) To 0 Step -1
+                Dim id_prepare_status As String = GVSalesOrder.GetRowCellValue(i, "id_prepare_status").ToString
+                If cek And id_prepare_status = "1" Then
+                    GVSalesOrder.SetRowCellValue(i, "is_select", "Yes")
+                Else
+                    GVSalesOrder.SetRowCellValue(i, "is_select", "No")
+                End If
+            Next
+        End If
+    End Sub
+
+    Private Sub PrintPrepareOrderToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PrintPrepareOrderToolStripMenuItem.Click
+        Cursor = Cursors.WaitCursor
+        If XTCSvcLevel.SelectedTabPageIndex = 0 Then
+            If GVSalesOrder.FocusedRowHandle >= 0 And GVSalesOrder.RowCount > 0 Then
+                FormViewSalesOrder.id_sales_order = GVSalesOrder.GetFocusedRowCellValue("id_sales_order").ToString
+                FormViewSalesOrder.is_print = "1"
+                FormViewSalesOrder.ShowDialog()
+            End If
+        ElseIf XTCSvcLevel.SelectedTabPageIndex = 1 Then
+        End If
         Cursor = Cursors.Default
     End Sub
 End Class

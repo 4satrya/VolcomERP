@@ -4105,7 +4105,7 @@ Public Class FormMain
 
                         'cancel reserved
                         Dim stc_cancel As ClassSalesReturn = New ClassSalesReturn()
-                        stc_cancel.cancelReservedStock(id_sales_return, "46")
+                        stc_cancel.cancelReservedStock(id_sales_return)
 
                         'delete
                         query = String.Format("DELETE FROM tb_sales_return WHERE id_sales_return ='{0}'", id_sales_return)
@@ -10291,6 +10291,33 @@ Public Class FormMain
             FormProductionSummary.Show()
             FormProductionSummary.WindowState = FormWindowState.Maximized
             FormProductionSummary.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBAttnStore_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBAttnStore.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormEmpAttnSum.MdiParent = Me
+            FormEmpAttnSum.view_store = True
+            FormEmpAttnSum.Show()
+            FormEmpAttnSum.WindowState = FormWindowState.Maximized
+            FormEmpAttnSum.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBSpecialReceiving_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBSpecialReceiving.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormProductionSpecialRec.MdiParent = Me
+            FormProductionSpecialRec.Show()
+            FormProductionSpecialRec.WindowState = FormWindowState.Maximized
+            FormProductionSpecialRec.Focus()
         Catch ex As Exception
             errorProcess()
         End Try

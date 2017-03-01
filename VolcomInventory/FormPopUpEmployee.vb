@@ -10,13 +10,13 @@
         query += " INNER JOIN tb_lookup_employee_level lvl ON lvl.id_employee_level=emp.id_employee_level "
         query += " INNER JOIN tb_lookup_employee_active active On active.id_employee_active=emp.id_employee_active"
         If FormEmpLeave.is_propose = "1" Then
-            Dim id_user_admin_management As String = get_opt_emp_field("id_user_admin_mng").ToString
-            If id_user_admin_management = id_user Then
-                Dim id_min_lvl As String = get_opt_emp_field("leave_asst_mgr_level").ToString
-                query += " AND lvl.id_employee_level>0 AND lvl.id_employee_level <'" & id_min_lvl & "' "
-            Else
-                query += " AND (dep.id_user_admin='" & id_user & "' OR dep.id_user_admin_backup='" & id_user & "')"
-            End If
+            'Dim id_user_admin_management As String = get_opt_emp_field("id_user_admin_mng").ToString
+            'If id_user_admin_management = id_user Then
+            '    Dim id_min_lvl As String = get_opt_emp_field("leave_asst_mgr_level").ToString
+            '    query += " AND lvl.id_employee_level>0 AND lvl.id_employee_level <'" & id_min_lvl & "' "
+            'Else
+            '    query += " AND (dep.id_user_admin='" & id_user & "' OR dep.id_user_admin_backup='" & id_user & "')"
+            'End If
         End If
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCEmployee.DataSource = data

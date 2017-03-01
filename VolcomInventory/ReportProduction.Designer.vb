@@ -286,7 +286,7 @@ Partial Public Class ReportProduction
         Me.LTitle.SizeF = New System.Drawing.SizeF(386.9594!, 25.08334!)
         Me.LTitle.StylePriority.UseFont = False
         Me.LTitle.StylePriority.UseTextAlignment = False
-        Me.LTitle.Text = "PRODUCTION ORDER"
+        Me.LTitle.Text = "F. G. PURCHASE ORDER"
         Me.LTitle.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
         '
         'LPONumber

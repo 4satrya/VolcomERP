@@ -62,8 +62,8 @@
 
         If confirm = Windows.Forms.DialogResult.Yes Then
             Cursor = Cursors.WaitCursor
-            Try
-                Dim query As String = ""
+            'Try
+            Dim query As String = ""
                 'update all to 2
                 reset_is_use_mark(id_report_mark, "2")
                 'set accept or refuse is use to 1
@@ -75,12 +75,22 @@
                 FormReportMark.GVMark.ExpandAllGroups()
                 '...
                 FormWork.view_mark_need()
-                'FormWork.view_mark_history()
+                'cancel dan email nolak
+                Dim report_mark_type As String = FormReportMark.GVMark.GetFocusedRowCellDisplayText("report_mark_type").ToString
+                Dim id_report As String = FormReportMark.GVMark.GetFocusedRowCellDisplayText("id_report").ToString
+                If report_mark_type = "95" Or report_mark_type = "96" Or report_mark_type = "99" Or report_mark_type = "102" Or report_mark_type = "104" Then
+                    'set cancel
+                    FormReportMark.change_status("6")
+                    'mail
+                    Dim mail As ClassSendEmail = New ClassSendEmail()
+                    mail.report_mark_type = report_mark_type
+                    mail.send_email_appr(report_mark_type, id_report, False)
+                End If
                 Close()
-            Catch ex As Exception
-                errorConnection()
-            End Try
-            Cursor = Cursors.Default
+                'Catch ex As Exception
+                '    errorConnection(ex.ToString)
+                'End Try
+                Cursor = Cursors.Default
         End If
     End Sub
 

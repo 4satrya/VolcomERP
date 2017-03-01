@@ -19,24 +19,27 @@ Partial Class FormSalesOrderPacking
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl
-        Me.SimpleButton1 = New DevExpress.XtraEditors.SimpleButton
-        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl
-        Me.SLEPackingStatus = New DevExpress.XtraEditors.SearchLookUpEdit
-        Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.GridColumnIdPrepareStatus = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnPrepareStatus = New DevExpress.XtraGrid.Columns.GridColumn
+        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.SimpleButton1 = New DevExpress.XtraEditors.SimpleButton()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
+        Me.SLEPackingStatus = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumnIdPrepareStatus = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnPrepareStatus = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.MENote = New DevExpress.XtraEditors.MemoEdit()
+        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.SLEPackingStatus.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.MENote.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl1
         '
         Me.PanelControl1.Controls.Add(Me.SimpleButton1)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl1.Location = New System.Drawing.Point(0, 72)
+        Me.PanelControl1.Location = New System.Drawing.Point(0, 137)
         Me.PanelControl1.LookAndFeel.SkinName = "Blue"
         Me.PanelControl1.LookAndFeel.UseDefaultLookAndFeel = False
         Me.PanelControl1.Name = "PanelControl1"
@@ -93,11 +96,28 @@ Partial Class FormSalesOrderPacking
         Me.GridColumnPrepareStatus.Visible = True
         Me.GridColumnPrepareStatus.VisibleIndex = 0
         '
+        'MENote
+        '
+        Me.MENote.Location = New System.Drawing.Point(12, 76)
+        Me.MENote.Name = "MENote"
+        Me.MENote.Size = New System.Drawing.Size(324, 45)
+        Me.MENote.TabIndex = 3
+        '
+        'LabelControl2
+        '
+        Me.LabelControl2.Location = New System.Drawing.Point(12, 57)
+        Me.LabelControl2.Name = "LabelControl2"
+        Me.LabelControl2.Size = New System.Drawing.Size(23, 13)
+        Me.LabelControl2.TabIndex = 4
+        Me.LabelControl2.Text = "Note"
+        '
         'FormSalesOrderPacking
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(348, 110)
+        Me.ClientSize = New System.Drawing.Size(348, 175)
+        Me.Controls.Add(Me.LabelControl2)
+        Me.Controls.Add(Me.MENote)
         Me.Controls.Add(Me.SLEPackingStatus)
         Me.Controls.Add(Me.LabelControl1)
         Me.Controls.Add(Me.PanelControl1)
@@ -111,6 +131,7 @@ Partial Class FormSalesOrderPacking
         Me.PanelControl1.ResumeLayout(False)
         CType(Me.SLEPackingStatus.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.MENote.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -122,4 +143,6 @@ Partial Class FormSalesOrderPacking
     Friend WithEvents SearchLookUpEdit1View As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumnIdPrepareStatus As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnPrepareStatus As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents MENote As DevExpress.XtraEditors.MemoEdit
+    Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
 End Class

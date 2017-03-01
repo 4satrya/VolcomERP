@@ -47,13 +47,8 @@
     Private Sub ReportLeave_BeforePrint(ByVal sender As System.Object, ByVal e As System.Drawing.Printing.PrintEventArgs) Handles MyBase.BeforePrint
         load_detail()
 
-        If report_mark_type = "95" Then
-            load_mark_horz_side("95", id_report, "2", "1", XrTable1)
-        ElseIf report_mark_type = "96" Then
-            load_mark_horz_side("96", id_report, "2", "1", XrTable1)
-        ElseIf report_mark_type = "99" Then
-            load_mark_horz_side("99", id_report, "2", "1", XrTable1)
-        End If
+        load_mark_horz_side(report_mark_type, id_report, "2", "1", XrTable1)
+
         BSideRight.HeightF = BSideRight.HeightF + (25.0F * 4)
         BSideLeft.HeightF = BSideLeft.HeightF + (25.0F * 4)
     End Sub

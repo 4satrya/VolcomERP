@@ -251,7 +251,7 @@ Partial Public Class ReportEmpLeave
         Me.XrLabel44.LocationFloat = New DevExpress.Utils.PointFloat(611.0002!, 0!)
         Me.XrLabel44.Name = "XrLabel44"
         Me.XrLabel44.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel44.SizeF = New System.Drawing.SizeF(12.99994!, 187.8751!)
+        Me.XrLabel44.SizeF = New System.Drawing.SizeF(12.99994!, 188.5002!)
         Me.XrLabel44.StylePriority.UseBorders = False
         Me.XrLabel44.StylePriority.UseBorderWidth = False
         Me.XrLabel44.StylePriority.UseTextAlignment = False
@@ -264,7 +264,7 @@ Partial Public Class ReportEmpLeave
         Me.XrLabel42.LocationFloat = New DevExpress.Utils.PointFloat(0!, 0!)
         Me.XrLabel42.Name = "XrLabel42"
         Me.XrLabel42.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel42.SizeF = New System.Drawing.SizeF(10.08331!, 187.8751!)
+        Me.XrLabel42.SizeF = New System.Drawing.SizeF(10.08331!, 188.5002!)
         Me.XrLabel42.StylePriority.UseBorders = False
         Me.XrLabel42.StylePriority.UseBorderWidth = False
         Me.XrLabel42.StylePriority.UseTextAlignment = False

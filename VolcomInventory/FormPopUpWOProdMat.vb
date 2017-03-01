@@ -7,7 +7,7 @@
     End Sub
 
     Sub view_wo()
-        Dim query = "SELECT a.id_report_status,h.report_status,po.prod_order_number,desg.design_name,a.id_prod_order_wo,a.id_ovh_price "
+        Dim query = "SELECT a.id_report_status,h.report_status,po.prod_order_number,desg.design_name,desg.design_code,a.id_prod_order_wo,a.id_ovh_price "
         query += ",(SELECT IFNULL(MAX(prod_order_wo_prog_percent),0) FROM tb_prod_order_wo_prog WHERE id_prod_order_wo = a.id_prod_order_wo) as progress,"
         query += "g.payment, "
         query += "b.id_comp_contact,d.comp_name AS comp_name_to, "
@@ -64,13 +64,14 @@
         If id_pop_up = "1" Then 'ret in prod
             If GVProdWO.RowCount > 0 Then
                 FormMatRetInProd.id_prod_order_wo = GVProdWO.GetFocusedRowCellValue("id_prod_order_wo").ToString
-                FormMatRetInProd.TEWONumber.Text = GVProdWO.GetFocusedRowCellValue("prod_order_wo_number").ToString
+                'FormMatRetInProd.TEWONumber.Text = GVProdWO.GetFocusedRowCellValue("prod_order_wo_number").ToString
                 FormMatRetInProd.id_comp_contact_from = GVProdWO.GetFocusedRowCellValue("id_comp_contact").ToString
                 FormMatRetInProd.TxtNameCompFrom.Text = get_company_x(get_id_company(GVProdWO.GetFocusedRowCellValue("id_comp_contact").ToString), "1")
                 FormMatRetInProd.TxtCodeCompFrom.Text = get_company_x(get_id_company(GVProdWO.GetFocusedRowCellValue("id_comp_contact").ToString), "2")
                 FormMatRetInProd.MEAdrressCompFrom.Text = get_company_x(get_id_company(GVProdWO.GetFocusedRowCellValue("id_comp_contact").ToString), "3")
                 FormMatRetInProd.TEPONumber.Text = GVProdWO.GetFocusedRowCellValue("prod_order_number").ToString
                 FormMatRetInProd.TEDesign.Text = GVProdWO.GetFocusedRowCellValue("design_name").ToString
+                FormMatRetInProd.TEDesignCode.Text = GVProdWO.GetFocusedRowCellValue("design_code").ToString
 
                 FormMatRetInProd.GroupControlRet.Enabled = True
                 FormMatRetInProd.viewDetailReturnExt("-1")

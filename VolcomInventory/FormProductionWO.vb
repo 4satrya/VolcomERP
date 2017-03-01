@@ -297,6 +297,10 @@
                     query = String.Format("UPDATE tb_prod_order_wo SET prod_order_wo_number='{0}',id_comp_contact_ship_to='{1}',id_payment='{2}',prod_order_wo_lead_time='{3}',prod_order_wo_top='{4}',prod_order_wo_note='{5}',prod_order_wo_vat='{6}',prod_order_wo_del_date='{7}',prod_order_wo_kurs='{9}',id_currency='{10}', is_main_vendor='{11}',id_ovh_price='{12}' WHERE id_prod_order_wo='{8}'", wo_number, id_comp_ship_to, payment_type, lead_time, top, notex, vat, del_date, id_wo, decimalSQL(kurs.ToString), id_currency, is_main_vendor, id_ovh_price)
                     execute_non_query(query, True, "", "", "", "")
                     '
+                    'update mark
+                    query = String.Format("UPDATE tb_report_mark SET info='{0}' WHERE id_report='{1}' AND report_mark_type='23'", FormProductionDet.LEPOType.Text, id_wo)
+                    execute_non_query(query, True, "", "", "", "")
+                    '
                     query = String.Format("DELETE FROM tb_prod_order_wo_det WHERE id_prod_order_wo='{0}'", id_wo)
                     execute_non_query(query, True, "", "", "", "")
                     For i As Integer = 0 To GVListPurchase.RowCount - 1

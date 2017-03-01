@@ -6,6 +6,7 @@
 
     Private Sub FormSamplePRDet_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'checkFormAccess(Name)
+        DEPIBKDate.EditValue = Now
         If id_purc = "-1" Then
             view_currency(LECurrency)
         Else
@@ -32,7 +33,7 @@
             BPrePrint.Visible = False
         Else
             'edit
-            Dim query As String = "SELECT z.pr_sample_purc_dp,z.pr_sample_purc_vat,z.id_pr_sample_purc,z.id_comp_contact_to,z.id_report_status,z.pr_sample_purc_number,z.pr_sample_purc_note,DATE_FORMAT(z.pr_sample_purc_date,'%Y-%m-%d') as pr_sample_purc_date,g.season_orign,a.id_sample_purc_rec,a.sample_purc_rec_number,a.delivery_order_number,b.sample_purc_number,DATE_FORMAT(a.sample_purc_rec_date,'%d %M %Y') AS sample_purc_rec_date,d.comp_name AS comp_to,b.id_sample_purc "
+            Dim query As String = "SELECT z.pibk_no,z.pibk_date,z.inv_no,z.pr_sample_purc_dp,z.pr_sample_purc_vat,z.id_pr_sample_purc,z.id_comp_contact_to,z.id_report_status,z.pr_sample_purc_number,z.pr_sample_purc_note,DATE_FORMAT(z.pr_sample_purc_date,'%Y-%m-%d') as pr_sample_purc_date,g.season_orign,a.id_sample_purc_rec,a.sample_purc_rec_number,a.delivery_order_number,b.sample_purc_number,DATE_FORMAT(a.sample_purc_rec_date,'%d %M %Y') AS sample_purc_rec_date,d.comp_name AS comp_to,b.id_sample_purc "
             query += "FROM tb_pr_sample_purc z "
             query += "LEFT JOIN tb_sample_purc_rec a ON z.id_sample_purc_rec = a.id_sample_purc_rec "
             query += "INNER JOIN tb_sample_purc b ON z.id_sample_purc=b.id_sample_purc "
@@ -62,7 +63,11 @@
 
             GConListPurchase.Enabled = True
             view_list_pr()
-
+            '
+            TEPIBKNo.Text = data.Rows(0)("pibk_no").ToString
+            DEPIBKDate.EditValue = data.Rows(0)("pibk_date")
+            TEInvNo.Text = data.Rows(0)("inv_no").ToString
+            '
             TEVat.Text = data.Rows(0)("pr_sample_purc_vat").ToString
 
             TEDPTot.Text = data.Rows(0)("pr_sample_purc_dp").ToString
@@ -325,13 +330,18 @@
     Private Sub BSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BSave.Click
         Dim query As String = ""
         Dim err_txt As String = ""
-        Dim pr_number, pr_date, pr_note, pr_stats, id_dc As String
+        Dim pr_number, pr_date, pr_note, pr_stats, id_dc, inv_no, pibk_no, pibk_date As String
         Dim id_pr_new As String
         Dim pr_vat, pr_dp, pr_tot As Decimal
         pr_number = ""
         pr_date = ""
         pr_note = ""
         pr_stats = ""
+        '
+        inv_no = ""
+        pibk_no = ""
+        pibk_date = ""
+        '
         pr_vat = 0.0
         pr_dp = 0.0
         pr_tot = 0.0
@@ -345,6 +355,10 @@
             pr_vat = TEVat.EditValue
             pr_dp = TEDPTot.EditValue
             pr_tot = TETot.EditValue
+            '
+            inv_no = TEInvNo.Text
+            pibk_no = TEPIBKNo.Text
+            pibk_date = Date.Parse(DEPIBKDate.EditValue.ToString).ToString("yyyy-MM-dd")
         Catch ex As Exception
             err_txt = "1"
         End Try
@@ -366,7 +380,7 @@
             Else
                 Try
                     'insert pr
-                    query = String.Format("INSERT INTO tb_pr_sample_purc(id_sample_purc,id_sample_purc_rec,pr_sample_purc_number,pr_sample_purc_date,pr_sample_purc_note,id_report_status,pr_sample_purc_vat,pr_sample_purc_dp,pr_sample_purc_total,id_comp_contact_to) VALUES('{0}','{1}','{2}',DATE(NOW()),'{3}','{4}','{5}','{6}','{7}','{8}');SELECT LAST_INSERT_ID();", id_purc, id_rec, pr_number, pr_note, pr_stats, decimalSQL(pr_vat.ToString), decimalSQL(pr_dp.ToString), decimalSQL(pr_tot.ToString), id_comp_contact_pay_to)
+                    query = String.Format("INSERT INTO tb_pr_sample_purc(id_sample_purc,id_sample_purc_rec,pr_sample_purc_number,pr_sample_purc_date,pr_sample_purc_note,id_report_status,pr_sample_purc_vat,pr_sample_purc_dp,pr_sample_purc_total,id_comp_contact_to,pibk_no,pibk_date,inv_no) VALUES('{0}','{1}','{2}',DATE(NOW()),'{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}');SELECT LAST_INSERT_ID();", id_purc, id_rec, pr_number, pr_note, pr_stats, decimalSQL(pr_vat.ToString), decimalSQL(pr_dp.ToString), decimalSQL(pr_tot.ToString), id_comp_contact_pay_to, pibk_no, pibk_date, inv_no)
 
                     id_pr_new = execute_query(query, 0, True, "", "", "", "")
                     'insert who prepared
@@ -417,7 +431,7 @@
             Else
                 Try
                     'update pr
-                    query = String.Format("UPDATE tb_pr_sample_purc SET pr_sample_purc_number='{0}',pr_sample_purc_note='{1}',id_report_status='{2}',pr_sample_purc_vat='{4}',pr_sample_purc_dp='{5}',pr_sample_purc_total='{6}',id_comp_contact_to='{7}' WHERE id_pr_sample_purc='{3}'", pr_number, pr_note, pr_stats, id_pr, decimalSQL(pr_vat.ToString), decimalSQL(pr_dp.ToString), decimalSQL(pr_tot.ToString), id_comp_contact_pay_to)
+                    query = String.Format("UPDATE tb_pr_sample_purc SET pr_sample_purc_number='{0}',pr_sample_purc_note='{1}',id_report_status='{2}',pr_sample_purc_vat='{4}',pr_sample_purc_dp='{5}',pr_sample_purc_total='{6}',id_comp_contact_to='{7}',pibk_no='{8}',pibk_date='{9}',inv_no='{10}' WHERE id_pr_sample_purc='{3}'", pr_number, pr_note, pr_stats, id_pr, decimalSQL(pr_vat.ToString), decimalSQL(pr_dp.ToString), decimalSQL(pr_tot.ToString), id_comp_contact_pay_to, pibk_no, pibk_date, inv_no)
                     execute_non_query(query, True, "", "", "", "")
                     'pr detail
                     For i As Integer = 0 To GVListPurchase.RowCount - 1

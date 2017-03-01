@@ -216,13 +216,13 @@
                                 INNER JOIN tb_lookup_employee_level lvl ON lvl.id_employee_level=emp.id_employee_level  
                                 WHERE employee_code='" & TEEmployeeCode.Text & "'"
         If FormEmpLeave.is_propose = "1" Then
-            Dim id_user_admin_management As String = get_opt_emp_field("id_user_admin_mng").ToString
-            If id_user_admin_management = id_user Then
-                Dim id_min_lvl As String = get_opt_emp_field("leave_asst_mgr_level").ToString
-                query += " AND lvl.id_employee_level>0 AND lvl.id_employee_level <'" & id_min_lvl & "' "
-            Else
-                query += " AND (dep.id_user_admin='" & id_user & "' OR dep.id_user_admin_backup='" & id_user & "')"
-            End If
+            'Dim id_user_admin_management As String = get_opt_emp_field("id_user_admin_mng").ToString
+            'If id_user_admin_management = id_user Then
+            '    Dim id_min_lvl As String = get_opt_emp_field("leave_asst_mgr_level").ToString
+            '    query += " AND lvl.id_employee_level>0 AND lvl.id_employee_level <'" & id_min_lvl & "' "
+            'Else
+            '    query += " AND (dep.id_user_admin='" & id_user & "' OR dep.id_user_admin_backup='" & id_user & "')"
+            'End If
         End If
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
@@ -341,31 +341,58 @@
                     query = "UPDATE tb_emp_leave SET report_mark_type='102' WHERE id_emp_leave='" & id_emp_leave & "'"
                     execute_non_query(query, True, "", "", "", "")
                 Else
+                    ''filter by level
+                    'Dim jum_check As String = ""
+                    'query = "SELECT IF(id_employee_level >= " & get_opt_emp_field("leave_spv_level").ToString & ",3,IF(id_employee_level < " & get_opt_emp_field("leave_spv_level").ToString & " AND id_employee_level >= " & get_opt_emp_field("leave_asst_mgr_level").ToString & ",2,1)) as jum_cek FROM tb_m_employee WHERE id_employee='" & id_employee & "'"
+                    'jum_check = execute_query(query, 0, True, "", "", "", "")
+                    ''1 = mgr up
+                    ''2 = coordinator - asst mgr
+                    ''3 = staff - spv
+                    'If jum_check = "1" Then
+                    '    submit_who_prepared_no_user("99", id_emp_leave, id_employee)
+                    '    query = "UPDATE tb_emp_leave SET report_mark_type='99' WHERE id_emp_leave='" & id_emp_leave & "'"
+                    '    execute_non_query(query, True, "", "", "", "")
+                    'ElseIf jum_check = "2" Then
+                    '    submit_who_prepared_no_user("96", id_emp_leave, id_employee)
+                    '    query = "UPDATE tb_emp_leave SET report_mark_type='96' WHERE id_emp_leave='" & id_emp_leave & "'"
+                    '    execute_non_query(query, True, "", "", "", "")
+                    '    '
+                    '    query = "UPDATE tb_report_mark SET id_user='" & id_user & "',id_employee='" & id_employee_user & "' WHERE report_mark_type='96' AND id_report_status='2' AND id_report='" & id_emp_leave & "'"
+                    '    execute_non_query(query, True, "", "", "", "")
+                    'Else
+                    '    submit_who_prepared_no_user("95", id_emp_leave, id_employee)
+                    '    query = "UPDATE tb_emp_leave SET report_mark_type='95' WHERE id_emp_leave='" & id_emp_leave & "'"
+                    '    execute_non_query(query, True, "", "", "", "")
+                    '    '
+                    '    query = "UPDATE tb_report_mark SET id_user='" & id_user & "',id_employee='" & id_employee_user & "' WHERE report_mark_type='95' AND id_report_status='2' AND id_report='" & id_emp_leave & "'"
+                    '    execute_non_query(query, True, "", "", "", "")
+                    'End If
+
+                    'after 2017/2/22 admin Manager still approved by HRD
                     'filter by level
-                    Dim jum_check As String = ""
-                    query = "SELECT IF(id_employee_level >= " & get_opt_emp_field("leave_spv_level").ToString & ",3,IF(id_employee_level < " & get_opt_emp_field("leave_spv_level").ToString & " AND id_employee_level >= " & get_opt_emp_field("leave_asst_mgr_level").ToString & ",2,1)) as jum_cek FROM tb_m_employee WHERE id_employee='" & id_employee & "'"
-                    jum_check = execute_query(query, 0, True, "", "", "", "")
-                    '1 = mgr up
-                    '2 = coordinator - asst mgr
-                    '3 = staff - spv
-                    If jum_check = "1" Then
+                    Dim jum_check_dept_head As String = ""
+                    query = "SELECT COUNT(*) as jum FROM tb_m_departement dep
+                                INNER JOIN tb_m_user usr ON usr.id_user=dep.id_user_head
+                                WHERE usr.id_employee='" & id_employee & "'"
+                    jum_check_dept_head = execute_query(query, 0, True, "", "", "", "")
+                    '1 = Dept Head
+                    If jum_check_dept_head = "1" Then
                         submit_who_prepared_no_user("99", id_emp_leave, id_employee)
                         query = "UPDATE tb_emp_leave SET report_mark_type='99' WHERE id_emp_leave='" & id_emp_leave & "'"
                         execute_non_query(query, True, "", "", "", "")
-                    ElseIf jum_check = "2" Then
-                        submit_who_prepared_no_user("96", id_emp_leave, id_employee)
-                        query = "UPDATE tb_emp_leave SET report_mark_type='96' WHERE id_emp_leave='" & id_emp_leave & "'"
-                        execute_non_query(query, True, "", "", "", "")
-                        '
-                        query = "UPDATE tb_report_mark SET id_user='" & id_user & "',id_employee='" & id_employee_user & "' WHERE report_mark_type='96' AND id_report_status='2' AND id_report='" & id_emp_leave & "'"
-                        execute_non_query(query, True, "", "", "", "")
                     Else
-                        submit_who_prepared_no_user("95", id_emp_leave, id_employee)
-                        query = "UPDATE tb_emp_leave SET report_mark_type='95' WHERE id_emp_leave='" & id_emp_leave & "'"
-                        execute_non_query(query, True, "", "", "", "")
-                        '
-                        query = "UPDATE tb_report_mark SET id_user='" & id_user & "',id_employee='" & id_employee_user & "' WHERE report_mark_type='95' AND id_report_status='2' AND id_report='" & id_emp_leave & "'"
-                        execute_non_query(query, True, "", "", "", "")
+                        Dim id_user_admin_management As String = get_opt_emp_field("id_user_admin_mng").ToString
+                        If get_id_employee(id_user_admin_management) = id_employee Then
+                            'if admin Head Dept
+                            submit_who_prepared_no_user("104", id_emp_leave, id_employee)
+                            query = "UPDATE tb_emp_leave SET report_mark_type='104' WHERE id_emp_leave='" & id_emp_leave & "'"
+                            execute_non_query(query, True, "", "", "", "")
+                        Else
+                            'if staff biasa
+                            submit_who_prepared_no_user("95", id_emp_leave, id_employee)
+                            query = "UPDATE tb_emp_leave SET report_mark_type='95' WHERE id_emp_leave='" & id_emp_leave & "'"
+                            execute_non_query(query, True, "", "", "", "")
+                        End If
                     End If
                 End If
                 '
@@ -408,7 +435,7 @@
         If e.KeyCode = Keys.Enter Then
             Dim query As String = "SELECT emp.*,dep.departement FROM tb_m_employee emp INNER JOIN tb_m_departement dep ON dep.id_departement=emp.id_departement WHERE employee_code='" & TEEMployeeChange.Text & "'"
             If FormEmpLeave.is_propose = "1" Then
-                query += " AND (dep.id_user_admin='" & id_user & "' OR dep.id_user_admin_backup='" & id_user & "')"
+                'query += " AND (dep.id_user_admin='" & id_user & "' OR dep.id_user_admin_backup='" & id_user & "')"
             End If
             Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 

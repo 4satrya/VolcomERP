@@ -31,11 +31,20 @@ Partial Class FormSalesReturnQC
         Me.GridColumnCompTo = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnLastUpdate = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnLastUser = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnTotal = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ViewMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.SMPrePrint = New System.Windows.Forms.ToolStripMenuItem()
         Me.SMPrint = New System.Windows.Forms.ToolStripMenuItem()
         Me.XTCReturnQC = New DevExpress.XtraTab.XtraTabControl()
         Me.XTPReturnQC = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCFilter = New DevExpress.XtraEditors.GroupControl()
+        Me.BtnView = New DevExpress.XtraEditors.SimpleButton()
+        Me.BHide = New DevExpress.XtraEditors.SimpleButton()
+        Me.BExpand = New DevExpress.XtraEditors.SimpleButton()
+        Me.DEUntil = New DevExpress.XtraEditors.DateEdit()
+        Me.DEFrom = New DevExpress.XtraEditors.DateEdit()
+        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
         Me.XTPReturnList = New DevExpress.XtraTab.XtraTabPage()
         Me.SplitContainerControl1 = New DevExpress.XtraEditors.SplitContainerControl()
         Me.GroupControl1 = New DevExpress.XtraEditors.GroupControl()
@@ -70,12 +79,21 @@ Partial Class FormSalesReturnQC
         Me.GridColumnProductName = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdDesignPrice = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnPriceType = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.BtnPrintDetail = New DevExpress.XtraEditors.SimpleButton()
+        Me.BAccept = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.GCSalesReturnQC, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVSalesReturnQC, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ViewMenu.SuspendLayout()
         CType(Me.XTCReturnQC, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCReturnQC.SuspendLayout()
         Me.XTPReturnQC.SuspendLayout()
+        CType(Me.GCFilter, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GCFilter.SuspendLayout()
+        CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEUntil.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTPReturnList.SuspendLayout()
         CType(Me.SplitContainerControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainerControl1.SuspendLayout()
@@ -89,23 +107,27 @@ Partial Class FormSalesReturnQC
         CType(Me.GCItemList, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVItemList, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemSpinEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl1.SuspendLayout()
         Me.SuspendLayout()
         '
         'GCSalesReturnQC
         '
         Me.GCSalesReturnQC.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCSalesReturnQC.Location = New System.Drawing.Point(0, 0)
+        Me.GCSalesReturnQC.Location = New System.Drawing.Point(0, 39)
         Me.GCSalesReturnQC.MainView = Me.GVSalesReturnQC
         Me.GCSalesReturnQC.Name = "GCSalesReturnQC"
-        Me.GCSalesReturnQC.Size = New System.Drawing.Size(762, 481)
+        Me.GCSalesReturnQC.Size = New System.Drawing.Size(762, 442)
         Me.GCSalesReturnQC.TabIndex = 0
         Me.GCSalesReturnQC.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVSalesReturnQC})
         '
         'GVSalesReturnQC
         '
-        Me.GVSalesReturnQC.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnSalesReturnQCNumber, Me.GridColumnSalesReturnNumber, Me.GridColumnStoreNameFrom, Me.GridColumnCreatedDate, Me.GridColumnQCCategory, Me.GridColumnReportStatus, Me.GridColumnCompTo, Me.GridColumnLastUpdate, Me.GridColumnLastUser})
+        Me.GVSalesReturnQC.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnSalesReturnQCNumber, Me.GridColumnSalesReturnNumber, Me.GridColumnStoreNameFrom, Me.GridColumnCreatedDate, Me.GridColumnQCCategory, Me.GridColumnReportStatus, Me.GridColumnCompTo, Me.GridColumnLastUpdate, Me.GridColumnLastUser, Me.GridColumnTotal})
         Me.GVSalesReturnQC.GridControl = Me.GCSalesReturnQC
+        Me.GVSalesReturnQC.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total", Me.GridColumnTotal, "{0:n0}")})
         Me.GVSalesReturnQC.Name = "GVSalesReturnQC"
+        Me.GVSalesReturnQC.OptionsView.ShowFooter = True
         Me.GVSalesReturnQC.OptionsView.ShowGroupPanel = False
         '
         'GridColumnSalesReturnQCNumber
@@ -115,6 +137,7 @@ Partial Class FormSalesReturnQC
         Me.GridColumnSalesReturnQCNumber.Name = "GridColumnSalesReturnQCNumber"
         Me.GridColumnSalesReturnQCNumber.Visible = True
         Me.GridColumnSalesReturnQCNumber.VisibleIndex = 0
+        Me.GridColumnSalesReturnQCNumber.Width = 106
         '
         'GridColumnSalesReturnNumber
         '
@@ -123,6 +146,7 @@ Partial Class FormSalesReturnQC
         Me.GridColumnSalesReturnNumber.Name = "GridColumnSalesReturnNumber"
         Me.GridColumnSalesReturnNumber.Visible = True
         Me.GridColumnSalesReturnNumber.VisibleIndex = 1
+        Me.GridColumnSalesReturnNumber.Width = 106
         '
         'GridColumnStoreNameFrom
         '
@@ -131,6 +155,7 @@ Partial Class FormSalesReturnQC
         Me.GridColumnStoreNameFrom.Name = "GridColumnStoreNameFrom"
         Me.GridColumnStoreNameFrom.Visible = True
         Me.GridColumnStoreNameFrom.VisibleIndex = 2
+        Me.GridColumnStoreNameFrom.Width = 106
         '
         'GridColumnCreatedDate
         '
@@ -140,7 +165,8 @@ Partial Class FormSalesReturnQC
         Me.GridColumnCreatedDate.FieldName = "sales_return_qc_date"
         Me.GridColumnCreatedDate.Name = "GridColumnCreatedDate"
         Me.GridColumnCreatedDate.Visible = True
-        Me.GridColumnCreatedDate.VisibleIndex = 5
+        Me.GridColumnCreatedDate.VisibleIndex = 6
+        Me.GridColumnCreatedDate.Width = 116
         '
         'GridColumnQCCategory
         '
@@ -149,6 +175,7 @@ Partial Class FormSalesReturnQC
         Me.GridColumnQCCategory.Name = "GridColumnQCCategory"
         Me.GridColumnQCCategory.Visible = True
         Me.GridColumnQCCategory.VisibleIndex = 4
+        Me.GridColumnQCCategory.Width = 106
         '
         'GridColumnReportStatus
         '
@@ -156,7 +183,8 @@ Partial Class FormSalesReturnQC
         Me.GridColumnReportStatus.FieldName = "report_status"
         Me.GridColumnReportStatus.Name = "GridColumnReportStatus"
         Me.GridColumnReportStatus.Visible = True
-        Me.GridColumnReportStatus.VisibleIndex = 8
+        Me.GridColumnReportStatus.VisibleIndex = 9
+        Me.GridColumnReportStatus.Width = 122
         '
         'GridColumnCompTo
         '
@@ -165,6 +193,7 @@ Partial Class FormSalesReturnQC
         Me.GridColumnCompTo.Name = "GridColumnCompTo"
         Me.GridColumnCompTo.Visible = True
         Me.GridColumnCompTo.VisibleIndex = 3
+        Me.GridColumnCompTo.Width = 106
         '
         'GridColumnLastUpdate
         '
@@ -174,7 +203,8 @@ Partial Class FormSalesReturnQC
         Me.GridColumnLastUpdate.FieldName = "last_update"
         Me.GridColumnLastUpdate.Name = "GridColumnLastUpdate"
         Me.GridColumnLastUpdate.Visible = True
-        Me.GridColumnLastUpdate.VisibleIndex = 6
+        Me.GridColumnLastUpdate.VisibleIndex = 7
+        Me.GridColumnLastUpdate.Width = 116
         '
         'GridColumnLastUser
         '
@@ -182,7 +212,20 @@ Partial Class FormSalesReturnQC
         Me.GridColumnLastUser.FieldName = "last_user"
         Me.GridColumnLastUser.Name = "GridColumnLastUser"
         Me.GridColumnLastUser.Visible = True
-        Me.GridColumnLastUser.VisibleIndex = 7
+        Me.GridColumnLastUser.VisibleIndex = 8
+        Me.GridColumnLastUser.Width = 116
+        '
+        'GridColumnTotal
+        '
+        Me.GridColumnTotal.Caption = "Total"
+        Me.GridColumnTotal.DisplayFormat.FormatString = "{0:n0}"
+        Me.GridColumnTotal.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnTotal.FieldName = "total"
+        Me.GridColumnTotal.Name = "GridColumnTotal"
+        Me.GridColumnTotal.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total", "{0:n0}")})
+        Me.GridColumnTotal.Visible = True
+        Me.GridColumnTotal.VisibleIndex = 5
+        Me.GridColumnTotal.Width = 62
         '
         'ViewMenu
         '
@@ -216,9 +259,97 @@ Partial Class FormSalesReturnQC
         'XTPReturnQC
         '
         Me.XTPReturnQC.Controls.Add(Me.GCSalesReturnQC)
+        Me.XTPReturnQC.Controls.Add(Me.GCFilter)
         Me.XTPReturnQC.Name = "XTPReturnQC"
         Me.XTPReturnQC.Size = New System.Drawing.Size(762, 481)
         Me.XTPReturnQC.Text = "Transaction List"
+        '
+        'GCFilter
+        '
+        Me.GCFilter.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GCFilter.Controls.Add(Me.BtnView)
+        Me.GCFilter.Controls.Add(Me.BHide)
+        Me.GCFilter.Controls.Add(Me.BExpand)
+        Me.GCFilter.Controls.Add(Me.DEUntil)
+        Me.GCFilter.Controls.Add(Me.DEFrom)
+        Me.GCFilter.Controls.Add(Me.LabelControl2)
+        Me.GCFilter.Controls.Add(Me.LabelControl3)
+        Me.GCFilter.Dock = System.Windows.Forms.DockStyle.Top
+        Me.GCFilter.Location = New System.Drawing.Point(0, 0)
+        Me.GCFilter.Name = "GCFilter"
+        Me.GCFilter.Size = New System.Drawing.Size(762, 39)
+        Me.GCFilter.TabIndex = 6
+        '
+        'BtnView
+        '
+        Me.BtnView.Location = New System.Drawing.Point(317, 9)
+        Me.BtnView.LookAndFeel.SkinName = "Blue"
+        Me.BtnView.Name = "BtnView"
+        Me.BtnView.Size = New System.Drawing.Size(75, 20)
+        Me.BtnView.TabIndex = 8896
+        Me.BtnView.Text = "View"
+        '
+        'BHide
+        '
+        Me.BHide.ImageIndex = 9
+        Me.BHide.Location = New System.Drawing.Point(938, 14)
+        Me.BHide.Name = "BHide"
+        Me.BHide.Size = New System.Drawing.Size(104, 20)
+        Me.BHide.TabIndex = 8898
+        Me.BHide.Text = "Hide All Detail"
+        Me.BHide.Visible = False
+        '
+        'BExpand
+        '
+        Me.BExpand.ImageIndex = 8
+        Me.BExpand.Location = New System.Drawing.Point(835, 14)
+        Me.BExpand.Name = "BExpand"
+        Me.BExpand.Size = New System.Drawing.Size(99, 20)
+        Me.BExpand.TabIndex = 8897
+        Me.BExpand.Text = "Expand All Detail"
+        Me.BExpand.Visible = False
+        '
+        'DEUntil
+        '
+        Me.DEUntil.EditValue = Nothing
+        Me.DEUntil.Location = New System.Drawing.Point(202, 9)
+        Me.DEUntil.Name = "DEUntil"
+        Me.DEUntil.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEUntil.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.DEUntil.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.DEUntil.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEUntil.Properties.Mask.EditMask = "dd\/MM\/yyyy"
+        Me.DEUntil.Size = New System.Drawing.Size(111, 20)
+        Me.DEUntil.TabIndex = 8895
+        '
+        'DEFrom
+        '
+        Me.DEFrom.EditValue = Nothing
+        Me.DEFrom.Location = New System.Drawing.Point(58, 9)
+        Me.DEFrom.Name = "DEFrom"
+        Me.DEFrom.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEFrom.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.DEFrom.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.DEFrom.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEFrom.Properties.Mask.EditMask = "dd\/MM\/yyyy"
+        Me.DEFrom.Size = New System.Drawing.Size(111, 20)
+        Me.DEFrom.TabIndex = 8894
+        '
+        'LabelControl2
+        '
+        Me.LabelControl2.Location = New System.Drawing.Point(175, 12)
+        Me.LabelControl2.Name = "LabelControl2"
+        Me.LabelControl2.Size = New System.Drawing.Size(21, 13)
+        Me.LabelControl2.TabIndex = 8893
+        Me.LabelControl2.Text = "Until"
+        '
+        'LabelControl3
+        '
+        Me.LabelControl3.Location = New System.Drawing.Point(28, 12)
+        Me.LabelControl3.Name = "LabelControl3"
+        Me.LabelControl3.Size = New System.Drawing.Size(24, 13)
+        Me.LabelControl3.TabIndex = 8892
+        Me.LabelControl3.Text = "From"
         '
         'XTPReturnList
         '
@@ -329,6 +460,7 @@ Partial Class FormSalesReturnQC
         '
         Me.GroupControl2.CaptionLocation = DevExpress.Utils.Locations.Left
         Me.GroupControl2.Controls.Add(Me.GCItemList)
+        Me.GroupControl2.Controls.Add(Me.PanelControl1)
         Me.GroupControl2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupControl2.Location = New System.Drawing.Point(0, 0)
         Me.GroupControl2.Name = "GroupControl2"
@@ -339,12 +471,12 @@ Partial Class FormSalesReturnQC
         'GCItemList
         '
         Me.GCItemList.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCItemList.Location = New System.Drawing.Point(20, 2)
+        Me.GCItemList.Location = New System.Drawing.Point(20, 34)
         Me.GCItemList.LookAndFeel.SkinName = "Office 2010 Silver"
         Me.GCItemList.MainView = Me.GVItemList
         Me.GCItemList.Name = "GCItemList"
         Me.GCItemList.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemSpinEdit1})
-        Me.GCItemList.Size = New System.Drawing.Size(740, 255)
+        Me.GCItemList.Size = New System.Drawing.Size(740, 223)
         Me.GCItemList.TabIndex = 4
         Me.GCItemList.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVItemList})
         '
@@ -543,6 +675,48 @@ Partial Class FormSalesReturnQC
         Me.GridColumnPriceType.Visible = True
         Me.GridColumnPriceType.VisibleIndex = 3
         '
+        'PanelControl1
+        '
+        Me.PanelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelControl1.Controls.Add(Me.BtnPrintDetail)
+        Me.PanelControl1.Controls.Add(Me.BAccept)
+        Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelControl1.Location = New System.Drawing.Point(20, 2)
+        Me.PanelControl1.Name = "PanelControl1"
+        Me.PanelControl1.Size = New System.Drawing.Size(740, 32)
+        Me.PanelControl1.TabIndex = 141
+        '
+        'BtnPrintDetail
+        '
+        Me.BtnPrintDetail.Appearance.BackColor = System.Drawing.Color.Teal
+        Me.BtnPrintDetail.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnPrintDetail.Appearance.Options.UseBackColor = True
+        Me.BtnPrintDetail.Appearance.Options.UseFont = True
+        Me.BtnPrintDetail.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnPrintDetail.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.BtnPrintDetail.Location = New System.Drawing.Point(556, 0)
+        Me.BtnPrintDetail.LookAndFeel.SkinName = "Metropolis"
+        Me.BtnPrintDetail.Name = "BtnPrintDetail"
+        Me.BtnPrintDetail.Size = New System.Drawing.Size(92, 32)
+        Me.BtnPrintDetail.TabIndex = 140
+        Me.BtnPrintDetail.Text = "Print Detail"
+        Me.BtnPrintDetail.Visible = False
+        '
+        'BAccept
+        '
+        Me.BAccept.Appearance.BackColor = System.Drawing.SystemColors.Highlight
+        Me.BAccept.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BAccept.Appearance.Options.UseBackColor = True
+        Me.BAccept.Appearance.Options.UseFont = True
+        Me.BAccept.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BAccept.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.BAccept.Location = New System.Drawing.Point(648, 0)
+        Me.BAccept.LookAndFeel.SkinName = "Metropolis"
+        Me.BAccept.Name = "BAccept"
+        Me.BAccept.Size = New System.Drawing.Size(92, 32)
+        Me.BAccept.TabIndex = 139
+        Me.BAccept.Text = "View Detail"
+        '
         'FormSalesReturnQC
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -562,6 +736,13 @@ Partial Class FormSalesReturnQC
         CType(Me.XTCReturnQC, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XTCReturnQC.ResumeLayout(False)
         Me.XTPReturnQC.ResumeLayout(False)
+        CType(Me.GCFilter, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GCFilter.ResumeLayout(False)
+        Me.GCFilter.PerformLayout()
+        CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEUntil.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XTPReturnList.ResumeLayout(False)
         CType(Me.SplitContainerControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainerControl1.ResumeLayout(False)
@@ -575,6 +756,8 @@ Partial Class FormSalesReturnQC
         CType(Me.GCItemList, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVItemList, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemSpinEdit1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -628,4 +811,16 @@ Partial Class FormSalesReturnQC
     Friend WithEvents GridColumnIdDesignPrice As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnPriceType As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnAllowedQty As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GCFilter As DevExpress.XtraEditors.GroupControl
+    Friend WithEvents BtnView As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BHide As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BExpand As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents DEUntil As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents DEFrom As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LabelControl3 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents PanelControl1 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents BtnPrintDetail As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BAccept As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GridColumnTotal As DevExpress.XtraGrid.Columns.GridColumn
 End Class

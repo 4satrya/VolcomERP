@@ -9,6 +9,7 @@
         query += " FROM tb_m_product_log_print logp"
         query += " INNER JOIN tb_m_user usr ON usr.id_user=logp.id_user"
         query += " INNER JOIN tb_lookup_printer_barcode printer ON printer.id_printer_barcode=logp.id_printer"
+        query += " WHERE logp.id_product='" + id_product + "'"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCLog.DataSource = data
         GVLog.BestFitColumns()

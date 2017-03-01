@@ -6,17 +6,36 @@
     Dim super_user As String = get_setup_field("id_role_super_admin")
 
     Private Sub FormSalesOrder_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        viewSalesOrder()
-        viewSalesOrderGen()
+        'date now
+        Dim data As DataTable = execute_query("SELECT DATE(NOW()) AS `tgl`", -1, True, "", "", "", "")
+        DEFrom.EditValue = data.Rows(0)("tgl")
+        DEUntil.EditValue = data.Rows(0)("tgl")
+
+        'viewSalesOrder()
+        'viewSalesOrderGen()
     End Sub
 
     Sub viewSalesOrderGen()
         Dim query_c As ClassSalesOrder = New ClassSalesOrder()
         Dim query As String = ""
+
+        'date
+        Dim date_from_selected As String = "0000-01-01"
+        Dim date_until_selected As String = "9999-01-01"
+        Try
+            date_from_selected = DateTime.Parse(DEFrom.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+        Try
+            date_until_selected = DateTime.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+        Dim cond As String = "AND (gen.sales_order_gen_date>='" + date_from_selected + "' AND gen.sales_order_gen_date<='" + date_until_selected + "') "
+
         If id_role_login <> super_user Then
-            query = query_c.queryMainGen("AND gen.id_user='" + id_user + "' ", "2")
+            query = query_c.queryMainGen("AND gen.id_user='" + id_user + "' " + cond, "2")
         Else
-            query = query_c.queryMainGen("-1", "2")
+            query = query_c.queryMainGen(cond, "2")
         End If
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCGen.DataSource = data
@@ -30,6 +49,20 @@
         If id_role_login <> super_user Then
             cond += "AND a.id_user_created='" + id_user + "' "
         End If
+
+        'date
+        Dim date_from_selected As String = "0000-01-01"
+        Dim date_until_selected As String = "9999-01-01"
+        Try
+            date_from_selected = DateTime.Parse(DEFrom.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+        Try
+            date_until_selected = DateTime.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+        cond += "AND (a.sales_order_date>='" + date_from_selected + "' AND a.sales_order_date<='" + date_until_selected + "') "
+
         Dim query As String = query_c.queryMain(cond, "2")
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCSalesOrder.DataSource = data
@@ -116,8 +149,9 @@
     End Sub
 
     Private Sub GVSalesOrder_FocusedRowChanged(ByVal sender As System.Object, ByVal e As DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs) Handles GVSalesOrder.FocusedRowChanged
-        noManipulating()
-        viewDet()
+        GCDetailSO.DataSource = Nothing
+        'noManipulating()
+        'viewDet()
     End Sub
 
     Sub viewDet()
@@ -202,5 +236,22 @@
         If GVGen.FocusedRowHandle >= 0 And GVGen.RowCount > 0 Then
             FormMain.but_edit()
         End If
+    End Sub
+
+    Private Sub BtnView_Click_1(sender As Object, e As EventArgs) Handles BtnView.Click
+        Cursor = Cursors.WaitCursor
+        If XTCSOGeneral.SelectedTabPageIndex = 0 Then
+            viewSalesOrder()
+        Else
+            viewSalesOrderGen()
+        End If
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnViewProgress_Click(sender As Object, e As EventArgs) Handles BtnViewProgress.Click
+        Cursor = Cursors.WaitCursor
+        noManipulating()
+        viewDet()
+        Cursor = Cursors.Default
     End Sub
 End Class

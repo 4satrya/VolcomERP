@@ -2,6 +2,7 @@
     Public id_sample_purc As String = "-1"
     Public id_comp_to As String = "-1"
     Public id_comp_ship_to As String = "-1"
+    Public id_comp_contact_courier As String = "-1"
     Public id_sample_plan As String = "-1"
     Public date_created As String = ""
     Public id_report_status_g As String = "1"
@@ -11,6 +12,8 @@
         view_po_type(LEPOType)
         viewSeasonOrign(LESeason)
         view_payment_type(LEpayment)
+
+        TEComm.EditValue = 0
 
         Dim default_kurs As Decimal = 1.0
         TEKurs.EditValue = default_kurs
@@ -29,43 +32,47 @@
             BMark.Visible = False
             '
         Else
-            Dim query As String = String.Format("SELECT id_report_status,sample_purc_kurs,sample_purc_vat,id_season_orign,sample_purc_number,id_comp_contact_to,id_comp_contact_ship_to,id_po_type,id_payment,DATE_FORMAT(sample_purc_date,'%Y-%m-%d') as sample_purc_datex,sample_purc_lead_time,sample_purc_top,id_currency,sample_purc_note FROM tb_sample_purc WHERE id_sample_purc = '{0}'", id_sample_purc)
+            Dim query As String = String.Format("SELECT id_comp_contact_courier,courier_comm,id_report_status,sample_purc_kurs,sample_purc_vat,id_season_orign,sample_purc_number,id_comp_contact_to,id_comp_contact_ship_to,id_po_type,id_payment,DATE_FORMAT(sample_purc_date,'%Y-%m-%d') as sample_purc_datex,sample_purc_lead_time,sample_purc_top,id_currency,sample_purc_note FROM tb_sample_purc WHERE id_sample_purc = '{0}'", id_sample_purc)
             Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
-
+            '
             TEPONumber.Text = data.Rows(0)("sample_purc_number").ToString
-
             TEKurs.EditValue = data.Rows(0)("sample_purc_kurs").ToString
-
+            '
             LECurrency.EditValue = Nothing
             LECurrency.ItemIndex = LECurrency.Properties.GetDataSourceRowIndex("id_currency", data.Rows(0)("id_currency").ToString)
-
             LEpayment.ItemIndex = LEpayment.Properties.GetDataSourceRowIndex("id_payment", data.Rows(0)("id_payment").ToString)
-
+            '
             LESeason.EditValue = data.Rows(0)("id_season_orign").ToString
             LEPOType.EditValue = data.Rows(0)("id_po_type").ToString()
-
             id_report_status_g = data.Rows(0)("id_report_status").ToString
-
+            '
             id_comp_to = data.Rows(0)("id_comp_contact_to").ToString
             TECompName.Text = get_company_x(get_id_company(id_comp_to), "1")
             TECompCode.Text = get_company_x(get_id_company(id_comp_to), "2")
             MECompAddress.Text = get_company_x(get_id_company(id_comp_to), "3")
             TECompAttn.Text = get_company_contact_x(id_comp_to, "1")
-
+            '
             id_comp_ship_to = data.Rows(0)("id_comp_contact_ship_to").ToString
             TECompShipToName.Text = get_company_x(get_id_company(id_comp_ship_to), "1")
             TECompShipTo.Text = get_company_x(get_id_company(id_comp_ship_to), "2")
             MECompShipToAddress.Text = get_company_x(get_id_company(id_comp_ship_to), "3")
+            '
+            Try
+                id_comp_contact_courier = data.Rows(0)("id_comp_contact_courier").ToString
+                TECourier.Text = get_company_x(get_id_company(id_comp_contact_courier), "1")
+                TECourierCode.Text = get_company_x(get_id_company(id_comp_contact_courier), "2")
+            Catch ex As Exception
+            End Try
 
+            TEComm.EditValue = data.Rows(0)("courier_comm")
+            '
             MENote.Text = data.Rows(0)("sample_purc_note").ToString
-
             date_created = data.Rows(0)("sample_purc_datex").ToString
             TEDate.Text = view_date_from(date_created, 0)
             TELeadTime.Text = data.Rows(0)("sample_purc_lead_time").ToString
             TERecDate.Text = view_date_from(date_created, Integer.Parse(data.Rows(0)("sample_purc_lead_time").ToString))
             TETOP.Text = data.Rows(0)("sample_purc_top").ToString
             TEDueDate.Text = view_date_from(date_created, (Integer.Parse(data.Rows(0)("sample_purc_lead_time").ToString) + Integer.Parse(data.Rows(0)("sample_purc_top").ToString)))
-
             '
             GConListPurchase.Enabled = True
             TEVat.Properties.ReadOnly = False
@@ -111,7 +118,7 @@
                     newRow("discount") = "0"
                     newRow("qty") = data_loop.Rows(i)("qty").ToString()
                     newRow("total") = data_loop.Rows(i)("total").ToString()
-
+                    '
                     TryCast(GCListPurchase.DataSource, DataTable).Rows.Add(newRow)
                     GCListPurchase.RefreshDataSource()
                 End If
@@ -209,6 +216,10 @@
         notex = MENote.Text
         vat = TEVat.EditValue
 
+        If TECourierCode.Text = "" Then
+            id_comp_contact_courier = "NULL"
+        End If
+
         ValidateChildren()
 
         If id_sample_purc <> "-1" Then
@@ -216,7 +227,7 @@
             If Not formIsValidInGroup(EPSamplePurc, GroupGeneralHeader) Or id_comp_ship_to = "-1" Or id_comp_to = "-1" Then
                 errorInput()
             Else
-                query = String.Format("UPDATE tb_sample_purc SET id_season_orign='{0}',sample_purc_number='{1}',id_comp_contact_to='{2}',id_comp_contact_ship_to='{3}',id_po_type='{4}',id_payment='{5}',sample_purc_lead_time='{6}',sample_purc_top='{7}',id_currency='{8}',sample_purc_note='{9}',sample_purc_vat='{10}',sample_purc_kurs='{12}' WHERE id_sample_purc='{11}'", id_season_orign, po_number, id_comp_to, id_comp_ship_to, po_typex, payment_type, lead_time, top, id_currency, notex, vat, id_sample_purc, decimalSQL(TEKurs.EditValue.ToString))
+                query = String.Format("UPDATE tb_sample_purc Set id_season_orign='{0}',sample_purc_number='{1}',id_comp_contact_to='{2}',id_comp_contact_ship_to='{3}',id_po_type='{4}',id_payment='{5}',sample_purc_lead_time='{6}',sample_purc_top='{7}',id_currency='{8}',sample_purc_note='{9}',sample_purc_vat='{10}',sample_purc_kurs='{12}',id_comp_contact_courier={13},courier_comm='{14}' WHERE id_sample_purc='{11}'", id_season_orign, po_number, id_comp_to, id_comp_ship_to, po_typex, payment_type, lead_time, top, id_currency, notex, vat, id_sample_purc, decimalSQL(TEKurs.EditValue.ToString), id_comp_contact_courier, decimalSQL(TEComm.EditValue.ToString))
                 execute_non_query(query, True, "", "", "", "")
                 'detail
                 'delete first
@@ -269,7 +280,7 @@
             If Not formIsValidInGroup(EPSamplePurc, GroupGeneralHeader) Or id_comp_ship_to = "-1" Or id_comp_to = "-1" Then
                 errorInput()
             Else
-                query = String.Format("INSERT INTO tb_sample_purc(id_season_orign,sample_purc_number,id_comp_contact_to,id_comp_contact_ship_to,id_po_type,id_payment,sample_purc_date,sample_purc_lead_time,sample_purc_top,id_currency,sample_purc_note,sample_purc_vat,sample_purc_kurs) VALUES('{0}','{1}','{2}','{3}','{4}','{5}',DATE(NOW()),'{6}','{7}','{8}','{9}','{10}','{11}');SELECT LAST_INSERT_ID()", id_season_orign, po_number, id_comp_to, id_comp_ship_to, po_typex, payment_type, lead_time, top, id_currency, notex, vat, decimalSQL(TEKurs.EditValue.ToString))
+                query = String.Format("INSERT INTO tb_sample_purc(id_season_orign,sample_purc_number,id_comp_contact_to,id_comp_contact_ship_to,id_po_type,id_payment,sample_purc_date,sample_purc_lead_time,sample_purc_top,id_currency,sample_purc_note,sample_purc_vat,sample_purc_kurs,id_comp_contact_courier,courier_comm) VALUES('{0}','{1}','{2}','{3}','{4}','{5}',DATE(NOW()),'{6}','{7}','{8}','{9}','{10}','{11}',{12},'{13}');SELECT LAST_INSERT_ID()", id_season_orign, po_number, id_comp_to, id_comp_ship_to, po_typex, payment_type, lead_time, top, id_currency, notex, vat, decimalSQL(TEKurs.EditValue.ToString), id_comp_contact_courier, decimalSQL(TEComm.EditValue.ToString))
                 Dim last_id As String = execute_query(query, 0, True, "", "", "", "")
 
                 If GVListPurchase.RowCount > 0 Then
@@ -480,5 +491,11 @@
         ' Show the report's preview. 
         Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
         Tool.ShowPreview()
+    End Sub
+
+    Private Sub BPickCourier_Click(sender As Object, e As EventArgs) Handles BPickCourier.Click
+        FormPopUpContact.id_pop_up = "1c"
+        FormPopUpContact.id_cat = get_setup_field("id_comp_cat_vendor")
+        FormPopUpContact.ShowDialog()
     End Sub
 End Class

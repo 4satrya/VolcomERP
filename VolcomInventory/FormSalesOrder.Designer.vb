@@ -43,8 +43,6 @@ Partial Class FormSalesOrder
         Me.GridColumnReff = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GroupControlProgressDO = New DevExpress.XtraEditors.GroupControl()
-        Me.XTCSalesOrderProgress = New DevExpress.XtraTab.XtraTabControl()
-        Me.XTPSalesOrderDetail = New DevExpress.XtraTab.XtraTabPage()
         Me.GCDetailSO = New DevExpress.XtraGrid.GridControl()
         Me.ViewMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.SMViewDel = New System.Windows.Forms.ToolStripMenuItem()
@@ -74,6 +72,15 @@ Partial Class FormSalesOrder
         Me.GridColumnSoCat = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.XTPInfo = New DevExpress.XtraTab.XtraTabPage()
         Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
+        Me.GCFilter = New DevExpress.XtraEditors.GroupControl()
+        Me.BtnView = New DevExpress.XtraEditors.SimpleButton()
+        Me.BHide = New DevExpress.XtraEditors.SimpleButton()
+        Me.BExpand = New DevExpress.XtraEditors.SimpleButton()
+        Me.DEUntil = New DevExpress.XtraEditors.DateEdit()
+        Me.DEFrom = New DevExpress.XtraEditors.DateEdit()
+        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
+        Me.BtnViewProgress = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.XTCSalesOrder, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCSalesOrder.SuspendLayout()
         Me.XTPList.SuspendLayout()
@@ -90,9 +97,6 @@ Partial Class FormSalesOrder
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControlProgressDO, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControlProgressDO.SuspendLayout()
-        CType(Me.XTCSalesOrderProgress, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.XTCSalesOrderProgress.SuspendLayout()
-        Me.XTPSalesOrderDetail.SuspendLayout()
         CType(Me.GCDetailSO, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ViewMenu.SuspendLayout()
         CType(Me.GVDetailSO, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -101,6 +105,12 @@ Partial Class FormSalesOrder
         CType(Me.GCGen, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVGen, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GCFilter, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GCFilter.SuspendLayout()
+        CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEUntil.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'XTCSalesOrder
@@ -109,11 +119,11 @@ Partial Class FormSalesOrder
         Me.XTCSalesOrder.BorderStylePage = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
         Me.XTCSalesOrder.Dock = System.Windows.Forms.DockStyle.Fill
         Me.XTCSalesOrder.HeaderLocation = DevExpress.XtraTab.TabHeaderLocation.Bottom
-        Me.XTCSalesOrder.Location = New System.Drawing.Point(0, 0)
+        Me.XTCSalesOrder.Location = New System.Drawing.Point(0, 39)
         Me.XTCSalesOrder.Name = "XTCSalesOrder"
         Me.XTCSalesOrder.SelectedTabPage = Me.XTPList
         Me.XTCSalesOrder.ShowTabHeader = DevExpress.Utils.DefaultBoolean.[False]
-        Me.XTCSalesOrder.Size = New System.Drawing.Size(837, 483)
+        Me.XTCSalesOrder.Size = New System.Drawing.Size(724, 444)
         Me.XTCSalesOrder.TabIndex = 0
         Me.XTCSalesOrder.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPList, Me.XTPInfo})
         '
@@ -121,7 +131,7 @@ Partial Class FormSalesOrder
         '
         Me.XTPList.Controls.Add(Me.XTCSOGeneral)
         Me.XTPList.Name = "XTPList"
-        Me.XTPList.Size = New System.Drawing.Size(831, 477)
+        Me.XTPList.Size = New System.Drawing.Size(718, 438)
         Me.XTPList.Text = "Order List"
         '
         'XTCSOGeneral
@@ -131,7 +141,7 @@ Partial Class FormSalesOrder
         Me.XTCSOGeneral.Location = New System.Drawing.Point(0, 0)
         Me.XTCSOGeneral.Name = "XTCSOGeneral"
         Me.XTCSOGeneral.SelectedTabPage = Me.XTPPrepareList
-        Me.XTCSOGeneral.Size = New System.Drawing.Size(831, 477)
+        Me.XTCSOGeneral.Size = New System.Drawing.Size(718, 438)
         Me.XTCSOGeneral.TabIndex = 3
         Me.XTCSOGeneral.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPPrepareList, Me.XTPPrepareGenerate})
         '
@@ -139,7 +149,7 @@ Partial Class FormSalesOrder
         '
         Me.XTPPrepareList.Controls.Add(Me.SCCSalesOrder)
         Me.XTPPrepareList.Name = "XTPPrepareList"
-        Me.XTPPrepareList.Size = New System.Drawing.Size(825, 449)
+        Me.XTPPrepareList.Size = New System.Drawing.Size(712, 410)
         Me.XTPPrepareList.Text = "Prepare Order List"
         '
         'SCCSalesOrder
@@ -152,7 +162,7 @@ Partial Class FormSalesOrder
         Me.SCCSalesOrder.Panel1.Text = "Panel1"
         Me.SCCSalesOrder.Panel2.Controls.Add(Me.GroupControlProgressDO)
         Me.SCCSalesOrder.Panel2.Text = "Panel2"
-        Me.SCCSalesOrder.Size = New System.Drawing.Size(825, 449)
+        Me.SCCSalesOrder.Size = New System.Drawing.Size(712, 410)
         Me.SCCSalesOrder.SplitterPosition = 241
         Me.SCCSalesOrder.TabIndex = 2
         Me.SCCSalesOrder.Text = "SplitContainerControl1"
@@ -163,7 +173,7 @@ Partial Class FormSalesOrder
         Me.GroupControlSSalesOrderList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupControlSSalesOrderList.Location = New System.Drawing.Point(0, 0)
         Me.GroupControlSSalesOrderList.Name = "GroupControlSSalesOrderList"
-        Me.GroupControlSSalesOrderList.Size = New System.Drawing.Size(825, 241)
+        Me.GroupControlSSalesOrderList.Size = New System.Drawing.Size(712, 241)
         Me.GroupControlSSalesOrderList.TabIndex = 0
         Me.GroupControlSSalesOrderList.Text = "Order List"
         '
@@ -174,7 +184,7 @@ Partial Class FormSalesOrder
         Me.GCSalesOrder.MainView = Me.GVSalesOrder
         Me.GCSalesOrder.Name = "GCSalesOrder"
         Me.GCSalesOrder.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemProgressBar1})
-        Me.GCSalesOrder.Size = New System.Drawing.Size(821, 219)
+        Me.GCSalesOrder.Size = New System.Drawing.Size(708, 219)
         Me.GCSalesOrder.TabIndex = 1
         Me.GCSalesOrder.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVSalesOrder, Me.GridView2})
         '
@@ -296,41 +306,25 @@ Partial Class FormSalesOrder
         '
         'GroupControlProgressDO
         '
-        Me.GroupControlProgressDO.Controls.Add(Me.XTCSalesOrderProgress)
+        Me.GroupControlProgressDO.Controls.Add(Me.GCDetailSO)
+        Me.GroupControlProgressDO.Controls.Add(Me.BtnViewProgress)
         Me.GroupControlProgressDO.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupControlProgressDO.Location = New System.Drawing.Point(0, 0)
         Me.GroupControlProgressDO.Name = "GroupControlProgressDO"
-        Me.GroupControlProgressDO.Size = New System.Drawing.Size(825, 203)
+        Me.GroupControlProgressDO.Size = New System.Drawing.Size(712, 164)
         Me.GroupControlProgressDO.TabIndex = 0
         Me.GroupControlProgressDO.Text = "Progress Order"
-        '
-        'XTCSalesOrderProgress
-        '
-        Me.XTCSalesOrderProgress.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.XTCSalesOrderProgress.Location = New System.Drawing.Point(2, 20)
-        Me.XTCSalesOrderProgress.Name = "XTCSalesOrderProgress"
-        Me.XTCSalesOrderProgress.SelectedTabPage = Me.XTPSalesOrderDetail
-        Me.XTCSalesOrderProgress.Size = New System.Drawing.Size(821, 181)
-        Me.XTCSalesOrderProgress.TabIndex = 0
-        Me.XTCSalesOrderProgress.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPSalesOrderDetail})
-        '
-        'XTPSalesOrderDetail
-        '
-        Me.XTPSalesOrderDetail.Controls.Add(Me.GCDetailSO)
-        Me.XTPSalesOrderDetail.Name = "XTPSalesOrderDetail"
-        Me.XTPSalesOrderDetail.Size = New System.Drawing.Size(815, 153)
-        Me.XTPSalesOrderDetail.Text = "Order Detail"
         '
         'GCDetailSO
         '
         Me.GCDetailSO.ContextMenuStrip = Me.ViewMenu
         Me.GCDetailSO.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCDetailSO.Location = New System.Drawing.Point(0, 0)
+        Me.GCDetailSO.Location = New System.Drawing.Point(2, 43)
         Me.GCDetailSO.LookAndFeel.SkinName = "Office 2010 Silver"
         Me.GCDetailSO.MainView = Me.GVDetailSO
         Me.GCDetailSO.Name = "GCDetailSO"
         Me.GCDetailSO.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemSpinEdit1})
-        Me.GCDetailSO.Size = New System.Drawing.Size(815, 153)
+        Me.GCDetailSO.Size = New System.Drawing.Size(708, 119)
         Me.GCDetailSO.TabIndex = 4
         Me.GCDetailSO.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVDetailSO})
         '
@@ -592,12 +586,109 @@ Partial Class FormSalesOrder
         Me.LargeImageCollection.ImageStream = CType(resources.GetObject("LargeImageCollection.ImageStream"), DevExpress.Utils.ImageCollectionStreamer)
         Me.LargeImageCollection.Images.SetKeyName(0, "kghostview.png")
         '
+        'GCFilter
+        '
+        Me.GCFilter.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GCFilter.Controls.Add(Me.BtnView)
+        Me.GCFilter.Controls.Add(Me.BHide)
+        Me.GCFilter.Controls.Add(Me.BExpand)
+        Me.GCFilter.Controls.Add(Me.DEUntil)
+        Me.GCFilter.Controls.Add(Me.DEFrom)
+        Me.GCFilter.Controls.Add(Me.LabelControl2)
+        Me.GCFilter.Controls.Add(Me.LabelControl3)
+        Me.GCFilter.Dock = System.Windows.Forms.DockStyle.Top
+        Me.GCFilter.Location = New System.Drawing.Point(0, 0)
+        Me.GCFilter.Name = "GCFilter"
+        Me.GCFilter.Size = New System.Drawing.Size(724, 39)
+        Me.GCFilter.TabIndex = 5
+        '
+        'BtnView
+        '
+        Me.BtnView.Location = New System.Drawing.Point(317, 9)
+        Me.BtnView.LookAndFeel.SkinName = "Blue"
+        Me.BtnView.Name = "BtnView"
+        Me.BtnView.Size = New System.Drawing.Size(75, 20)
+        Me.BtnView.TabIndex = 8896
+        Me.BtnView.Text = "View"
+        '
+        'BHide
+        '
+        Me.BHide.ImageIndex = 9
+        Me.BHide.Location = New System.Drawing.Point(938, 14)
+        Me.BHide.Name = "BHide"
+        Me.BHide.Size = New System.Drawing.Size(104, 20)
+        Me.BHide.TabIndex = 8898
+        Me.BHide.Text = "Hide All Detail"
+        Me.BHide.Visible = False
+        '
+        'BExpand
+        '
+        Me.BExpand.ImageIndex = 8
+        Me.BExpand.Location = New System.Drawing.Point(835, 14)
+        Me.BExpand.Name = "BExpand"
+        Me.BExpand.Size = New System.Drawing.Size(99, 20)
+        Me.BExpand.TabIndex = 8897
+        Me.BExpand.Text = "Expand All Detail"
+        Me.BExpand.Visible = False
+        '
+        'DEUntil
+        '
+        Me.DEUntil.EditValue = Nothing
+        Me.DEUntil.Location = New System.Drawing.Point(202, 9)
+        Me.DEUntil.Name = "DEUntil"
+        Me.DEUntil.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEUntil.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.DEUntil.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.DEUntil.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEUntil.Properties.Mask.EditMask = "dd\/MM\/yyyy"
+        Me.DEUntil.Size = New System.Drawing.Size(111, 20)
+        Me.DEUntil.TabIndex = 8895
+        '
+        'DEFrom
+        '
+        Me.DEFrom.EditValue = Nothing
+        Me.DEFrom.Location = New System.Drawing.Point(58, 9)
+        Me.DEFrom.Name = "DEFrom"
+        Me.DEFrom.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEFrom.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.DEFrom.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.DEFrom.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEFrom.Properties.Mask.EditMask = "dd\/MM\/yyyy"
+        Me.DEFrom.Size = New System.Drawing.Size(111, 20)
+        Me.DEFrom.TabIndex = 8894
+        '
+        'LabelControl2
+        '
+        Me.LabelControl2.Location = New System.Drawing.Point(175, 12)
+        Me.LabelControl2.Name = "LabelControl2"
+        Me.LabelControl2.Size = New System.Drawing.Size(21, 13)
+        Me.LabelControl2.TabIndex = 8893
+        Me.LabelControl2.Text = "Until"
+        '
+        'LabelControl3
+        '
+        Me.LabelControl3.Location = New System.Drawing.Point(28, 12)
+        Me.LabelControl3.Name = "LabelControl3"
+        Me.LabelControl3.Size = New System.Drawing.Size(24, 13)
+        Me.LabelControl3.TabIndex = 8892
+        Me.LabelControl3.Text = "From"
+        '
+        'BtnViewProgress
+        '
+        Me.BtnViewProgress.Dock = System.Windows.Forms.DockStyle.Top
+        Me.BtnViewProgress.Location = New System.Drawing.Point(2, 20)
+        Me.BtnViewProgress.Name = "BtnViewProgress"
+        Me.BtnViewProgress.Size = New System.Drawing.Size(708, 23)
+        Me.BtnViewProgress.TabIndex = 5
+        Me.BtnViewProgress.Text = "View Progress"
+        '
         'FormSalesOrder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(837, 483)
+        Me.ClientSize = New System.Drawing.Size(724, 483)
         Me.Controls.Add(Me.XTCSalesOrder)
+        Me.Controls.Add(Me.GCFilter)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -621,9 +712,6 @@ Partial Class FormSalesOrder
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControlProgressDO, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControlProgressDO.ResumeLayout(False)
-        CType(Me.XTCSalesOrderProgress, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.XTCSalesOrderProgress.ResumeLayout(False)
-        Me.XTPSalesOrderDetail.ResumeLayout(False)
         CType(Me.GCDetailSO, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ViewMenu.ResumeLayout(False)
         CType(Me.GVDetailSO, System.ComponentModel.ISupportInitialize).EndInit()
@@ -632,6 +720,13 @@ Partial Class FormSalesOrder
         CType(Me.GCGen, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVGen, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GCFilter, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GCFilter.ResumeLayout(False)
+        Me.GCFilter.PerformLayout()
+        CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEUntil.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -649,8 +744,6 @@ Partial Class FormSalesOrder
     Friend WithEvents SCCSalesOrder As DevExpress.XtraEditors.SplitContainerControl
     Friend WithEvents GroupControlSSalesOrderList As DevExpress.XtraEditors.GroupControl
     Friend WithEvents GroupControlProgressDO As DevExpress.XtraEditors.GroupControl
-    Friend WithEvents XTCSalesOrderProgress As DevExpress.XtraTab.XtraTabControl
-    Friend WithEvents XTPSalesOrderDetail As DevExpress.XtraTab.XtraTabPage
     Friend WithEvents GCDetailSO As DevExpress.XtraGrid.GridControl
     Friend WithEvents GVDetailSO As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumnNo As DevExpress.XtraGrid.Columns.GridColumn
@@ -688,4 +781,13 @@ Partial Class FormSalesOrder
     Friend WithEvents GridColumnDate As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnRepStatus As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnSoCat As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GCFilter As DevExpress.XtraEditors.GroupControl
+    Friend WithEvents BtnView As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BHide As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BExpand As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents DEUntil As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents DEFrom As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LabelControl3 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents BtnViewProgress As DevExpress.XtraEditors.SimpleButton
 End Class

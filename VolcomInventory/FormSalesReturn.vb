@@ -4,7 +4,11 @@
     Dim bdel_active As String = "1"
 
     Private Sub FormSalesReturn_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        viewSalesReturn()
+        'date now
+        Dim data As DataTable = execute_query("SELECT DATE(NOW()) AS `tgl`", -1, True, "", "", "", "")
+        DEFrom.EditValue = data.Rows(0)("tgl")
+        DEUntil.EditValue = data.Rows(0)("tgl")
+
         viewSalesReturnOrder()
     End Sub
 
@@ -20,8 +24,19 @@
     End Sub
 
     Sub viewSalesReturn()
+        Dim date_from_selected As String = "0000-01-01"
+        Dim date_until_selected As String = "9999-01-01"
+        Try
+            date_from_selected = DateTime.Parse(DEFrom.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+        Try
+            date_until_selected = DateTime.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+
         Dim query_c As ClassSalesReturn = New ClassSalesReturn()
-        Dim query As String = query_c.queryMain("-1", "2")
+        Dim query As String = query_c.queryMain("AND (a.sales_return_date>='" + date_from_selected + "' AND a.sales_return_date<='" + date_until_selected + "') ", "2")
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCSalesReturn.DataSource = data
         check_menu()
@@ -116,43 +131,6 @@
         Dim query As String = query_c.queryMain("AND a.id_report_status = '6' AND (a.id_prepare_status='1') ", "1")
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCSalesReturnOrder.DataSource = data
-
-        Dim id_sales_return_order As String = "-1"
-        Try
-            id_sales_return_order = GVSalesReturnOrder.GetFocusedRowCellValue("id_sales_return_order").ToString
-        Catch ex As Exception
-        End Try
-        Dim id_store_contact_to As String = "-1"
-        Try
-            id_store_contact_to = GVSalesReturnOrder.GetFocusedRowCellValue("id_store_contact_to").ToString
-        Catch ex As Exception
-        End Try
-
-        Dim id_wh_drawer As String = "-1"
-        Try
-            id_wh_drawer = GVSalesReturnOrder.GetFocusedRowCellValue("id_wh_drawer_store").ToString
-        Catch ex As Exception
-        End Try
-
-        Dim id_wh_rack As String = "-1"
-        Try
-            id_wh_rack = GVSalesReturnOrder.GetFocusedRowCellValue("id_wh_rack_store").ToString
-        Catch ex As Exception
-        End Try
-
-        Dim id_wh_locator As String = "-1"
-        Try
-            id_wh_locator = GVSalesReturnOrder.GetFocusedRowCellValue("id_wh_locator_store").ToString
-        Catch ex As Exception
-        End Try
-        Try
-            viewListReturnOrder(id_sales_return_order, get_company_contact_x(id_store_contact_to, "3"), id_wh_drawer, id_wh_rack, id_wh_locator)
-        Catch ex As Exception
-
-        End Try
-
-
-
         check_menu()
     End Sub
 
@@ -190,40 +168,42 @@
 
     Sub rowChanged()
         Cursor = Cursors.WaitCursor
-        noManipulating()
-        Dim id_sales_return_order As String = "-1"
-        Try
-            id_sales_return_order = GVSalesReturnOrder.GetFocusedRowCellValue("id_sales_return_order").ToString
-        Catch ex As Exception
-        End Try
-        Dim id_store_contact_to As String = "-1"
-        Try
-            id_store_contact_to = GVSalesReturnOrder.GetFocusedRowCellValue("id_store_contact_to").ToString
-        Catch ex As Exception
-        End Try
+        GCSalesReturnOrderDetail.DataSource = Nothing
+        BtnPrintDetail.Visible = False
+        'noManipulating()
+        'Dim id_sales_return_order As String = "-1"
+        'Try
+        '    id_sales_return_order = GVSalesReturnOrder.GetFocusedRowCellValue("id_sales_return_order").ToString
+        'Catch ex As Exception
+        'End Try
+        'Dim id_store_contact_to As String = "-1"
+        'Try
+        '    id_store_contact_to = GVSalesReturnOrder.GetFocusedRowCellValue("id_store_contact_to").ToString
+        'Catch ex As Exception
+        'End Try
 
-        Dim id_wh_drawer As String = "-1"
-        Try
-            id_wh_drawer = GVSalesReturnOrder.GetFocusedRowCellValue("id_wh_drawer_store").ToString
-        Catch ex As Exception
-        End Try
+        'Dim id_wh_drawer As String = "-1"
+        'Try
+        '    id_wh_drawer = GVSalesReturnOrder.GetFocusedRowCellValue("id_wh_drawer_store").ToString
+        'Catch ex As Exception
+        'End Try
 
-        Dim id_wh_rack As String = "-1"
-        Try
-            id_wh_rack = GVSalesReturnOrder.GetFocusedRowCellValue("id_wh_rack_store").ToString
-        Catch ex As Exception
-        End Try
+        'Dim id_wh_rack As String = "-1"
+        'Try
+        '    id_wh_rack = GVSalesReturnOrder.GetFocusedRowCellValue("id_wh_rack_store").ToString
+        'Catch ex As Exception
+        'End Try
 
-        Dim id_wh_locator As String = "-1"
-        Try
-            id_wh_locator = GVSalesReturnOrder.GetFocusedRowCellValue("id_wh_locator_store").ToString
-        Catch ex As Exception
-        End Try
-        Try
-            viewListReturnOrder(id_sales_return_order, get_company_contact_x(id_store_contact_to, "3"), id_wh_drawer, id_wh_rack, id_wh_locator)
-        Catch ex As Exception
+        'Dim id_wh_locator As String = "-1"
+        'Try
+        '    id_wh_locator = GVSalesReturnOrder.GetFocusedRowCellValue("id_wh_locator_store").ToString
+        'Catch ex As Exception
+        'End Try
+        'Try
+        '    viewListReturnOrder(id_sales_return_order, get_company_contact_x(id_store_contact_to, "3"), id_wh_drawer, id_wh_rack, id_wh_locator)
+        'Catch ex As Exception
 
-        End Try
+        'End Try
         Cursor = Cursors.Default
     End Sub
 
@@ -290,5 +270,58 @@
                 ViewMenu.Show(view.GridControl, e.Point)
             End If
         End If
+    End Sub
+
+    Private Sub BAccept_Click(sender As Object, e As EventArgs) Handles BAccept.Click
+        Dim id_sales_return_order As String = "-1"
+        Try
+            id_sales_return_order = GVSalesReturnOrder.GetFocusedRowCellValue("id_sales_return_order").ToString
+        Catch ex As Exception
+        End Try
+        Dim id_store_contact_to As String = "-1"
+        Try
+            id_store_contact_to = GVSalesReturnOrder.GetFocusedRowCellValue("id_store_contact_to").ToString
+        Catch ex As Exception
+        End Try
+
+        Dim id_wh_drawer As String = "-1"
+        Try
+            id_wh_drawer = GVSalesReturnOrder.GetFocusedRowCellValue("id_wh_drawer_store").ToString
+        Catch ex As Exception
+        End Try
+
+        Dim id_wh_rack As String = "-1"
+        Try
+            id_wh_rack = GVSalesReturnOrder.GetFocusedRowCellValue("id_wh_rack_store").ToString
+        Catch ex As Exception
+        End Try
+
+        Dim id_wh_locator As String = "-1"
+        Try
+            id_wh_locator = GVSalesReturnOrder.GetFocusedRowCellValue("id_wh_locator_store").ToString
+        Catch ex As Exception
+        End Try
+        Try
+            viewListReturnOrder(id_sales_return_order, get_company_contact_x(id_store_contact_to, "3"), id_wh_drawer, id_wh_rack, id_wh_locator)
+        Catch ex As Exception
+
+        End Try
+        BtnPrintDetail.Visible = True
+    End Sub
+
+    Private Sub BtnPrintDetail_Click(sender As Object, e As EventArgs) Handles BtnPrintDetail.Click
+        Dim nbr As String = ""
+        Try
+            nbr = GVSalesReturnOrder.GetFocusedRowCellValue("sales_return_order_number").ToString
+        Catch ex As Exception
+
+        End Try
+        print(GCSalesReturnOrderDetail, nbr)
+    End Sub
+
+    Private Sub BtnView_Click(sender As Object, e As EventArgs) Handles BtnView.Click
+        Cursor = Cursors.WaitCursor
+        viewSalesReturn()
+        Cursor = Cursors.Default
     End Sub
 End Class

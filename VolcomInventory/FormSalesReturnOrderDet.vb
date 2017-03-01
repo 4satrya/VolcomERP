@@ -460,4 +460,15 @@
             BtnAdd.Focus()
         End If
     End Sub
+
+    Private Sub BtnImport2_Click(sender As Object, e As EventArgs) Handles BtnImport2.Click
+        If id_comp <> "-1" Then
+            Cursor = Cursors.WaitCursor
+            FormImportExcel.id_pop_up = "29"
+            FormImportExcel.ShowDialog()
+            Cursor = Cursors.Default
+        Else
+            stopCustom("Please select store/destination first !")
+        End If
+    End Sub
 End Class

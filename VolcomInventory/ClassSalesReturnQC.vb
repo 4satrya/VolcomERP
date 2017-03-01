@@ -17,7 +17,7 @@
         query += "a.sales_return_qc_note, a.sales_return_qc_number, "
         query += "CONCAT(c.comp_number,' - ',c.comp_name) AS store_name_from, (c.comp_number) AS store_number_from, "
         query += "CONCAT(e.comp_number,' - ',e.comp_name) AS comp_name_to, (e.comp_number) AS comp_number_to, "
-        query += "f.sales_return_number, g.report_status, h.pl_category, "
+        query += "f.sales_return_number, g.report_status, h.pl_category, det.`total`, "
         query += "a.last_update, getUserEmp(a.last_update_by, 1) AS last_user, ('No') AS is_select "
         query += "FROM tb_sales_return_qc a  "
         query += "INNER JOIN tb_m_comp_contact b ON a.id_store_contact_from = b.id_comp_contact "
@@ -27,6 +27,11 @@
         query += "INNER JOIN tb_sales_return f ON f.id_sales_return = a.id_sales_return "
         query += "INNER JOIN tb_lookup_report_status g ON g.id_report_status = a.id_report_status "
         query += "INNER JOIN tb_lookup_pl_category h ON h.id_pl_category = a.id_pl_category "
+        query += "LEFT JOIN (
+        SELECT d.id_sales_return_qc, SUM(d.sales_return_qc_det_qty) AS `total` 
+        FROM tb_sales_return_qc_det d
+        GROUP BY d.id_sales_return_qc
+        ) det ON det.id_sales_return_qc = a.id_sales_return_qc "
         query += "WHERE a.id_sales_return_qc>0 "
         query += condition + " "
         query += "ORDER BY a.id_sales_return_qc " + order_type

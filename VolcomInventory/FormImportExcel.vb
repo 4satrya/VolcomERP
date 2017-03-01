@@ -90,8 +90,8 @@ Public Class FormImportExcel
             MyCommand = New OleDbDataAdapter("select code, wh, store, SUM(qty) AS qty from [" & CBWorksheetName.SelectedItem.ToString & "] where not ([code]='') GROUP BY code,wh,store", oledbconn)
         ElseIf id_pop_up = "23" Or id_pop_up = "24" Then
             MyCommand = New OleDbDataAdapter("select VENDOR, KODE, NAMA, SIZETYP, `xxs/1`, `xs/2`, `s/3`, `m/4`, `ml/5`, `l/6`, `xl/7`, `xxl/8`, `all/9`, `~/0` from [" & CBWorksheetName.SelectedItem.ToString & "]", oledbconn)
-        ElseIf id_pop_up = "25" Then
-            MyCommand = New OleDbDataAdapter("select KODE, NAMA, SIZETYP, `xxs/1`, `xs/2`, `s/3`, `m/4`, `ml/5`, `l/6`, `xl/7`, `xxl/8`, `all/9`, `~/0` from [" & CBWorksheetName.SelectedItem.ToString & "]", oledbconn)
+        ElseIf id_pop_up = "25" Or id_pop_up = "29" Then
+            MyCommand = New OleDbDataAdapter("select KODE, NAMA, SIZETYP, `xxs/1`, `xs/2`, `s/3`, `m/4`, `ml/5`, `l/6`, `xl/7`, `xxl/8`, `all/9`, `~/0` from [" & CBWorksheetName.SelectedItem.ToString & "] where not ([KODE]='')", oledbconn)
         ElseIf id_pop_up = "26" Then
             MyCommand = New OleDbDataAdapter("select no_faktur, nama_toko, npwp, alamat, id_keterangan_tambahan, kode_barang, ket_barang, jumlah_barang, harga_satuan, harga_total, diskon, ppn, dpp, jumlah_ppn, jumlah_dpp, referensi from [" & CBWorksheetName.SelectedItem.ToString & "] where not ([no_faktur]='')", oledbconn)
         Else
@@ -1245,7 +1245,7 @@ Public Class FormImportExcel
             Dim qry_det As String = ""
             For d As Integer = 0 To data_temp.Rows.Count - 1
                 For c As Integer = 4 To 13
-                    If data_temp.Rows(d)(c).ToString <> "" And data_temp.Rows(d)(c).ToString <> "-" Then
+                    If data_temp.Rows(d)(c).ToString <> "" And data_temp.Rows(d)(c).ToString <> "-" And data_temp.Rows(d)(c).ToString <> "0" Then
                         If qry_det <> "" Then
                             qry_det += "UNION ALL "
                         End If
@@ -1336,13 +1336,30 @@ Public Class FormImportExcel
 
             Dim command As MySqlCommand = connection.CreateCommand()
             Dim qry As String = "DROP TABLE IF EXISTS tb_so_single_temp; CREATE TEMPORARY TABLE IF NOT EXISTS tb_so_single_temp AS ( SELECT * FROM ("
+            Dim qry_det As String = ""
             For d As Integer = 0 To data_temp.Rows.Count - 1
-                If d > 0 Then
-                    qry += "UNION ALL "
-                End If
-                qry += "SELECT '" + FormSalesOrderDet.id_comp_par + "' AS `id_wh`,'" + id_user + "' AS `id_user`, '" + data_temp.Rows(d)("KODE").ToString + "' AS `code`, '" + data_temp.Rows(d)("SIZETYP").ToString + "' AS `sizetype`,  '" + data_temp.Rows(d)("xxs/1").ToString + "' AS `1`, '" + data_temp.Rows(d)("xs/2").ToString + "' AS `2`, '" + data_temp.Rows(d)("s/3").ToString + "' AS `3`, '" + data_temp.Rows(d)("m/4").ToString + "' AS `4`, '" + data_temp.Rows(d)("ml/5").ToString + "' AS `5`, '" + data_temp.Rows(d)("l/6").ToString + "' AS `6`, '" + data_temp.Rows(d)("xl/7").ToString + "' AS `7`, '" + data_temp.Rows(d)("xxl/8").ToString + "' AS `8`, '" + data_temp.Rows(d)("all/9").ToString + "' AS `9`, '" + data_temp.Rows(d)("~/0").ToString + "' AS `0` "
+                For c As Integer = 3 To 12
+                    If data_temp.Rows(d)(c).ToString <> "" And data_temp.Rows(d)(c).ToString <> "-" And data_temp.Rows(d)(c).ToString <> "0" Then
+                        If qry_det <> "" Then
+                            qry_det += "UNION ALL "
+                        End If
+                        Dim size As String = 0
+                        If c < 12 Then
+                            size = c - 2
+                        End If
+                        qry_det += "SELECT '" + FormSalesOrderDet.id_comp_par + "' AS `id_wh`,'" + id_user + "' AS `id_user`, '" + data_temp.Rows(d)("KODE").ToString + data_temp.Rows(d)("SIZETYP").ToString + size + "1" + "' AS `code`, '" + data_temp.Rows(d)(c).ToString + "' AS `qty` "
+                    End If
+                Next
             Next
-            qry += ") a ); ALTER TABLE tb_so_single_temp CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci; "
+            qry += qry_det + ") a ); ALTER TABLE tb_so_single_temp CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci; "
+
+            'For d As Integer = 0 To data_temp.Rows.Count - 1
+            '    If d > 0 Then
+            '        qry += "UNION ALL "
+            '    End If
+            '    qry += "SELECT '" + FormSalesOrderDet.id_comp_par + "' AS `id_wh`,'" + id_user + "' AS `id_user`, '" + data_temp.Rows(d)("KODE").ToString + "' AS `code`, '" + data_temp.Rows(d)("SIZETYP").ToString + "' AS `sizetype`,  '" + data_temp.Rows(d)("xxs/1").ToString + "' AS `1`, '" + data_temp.Rows(d)("xs/2").ToString + "' AS `2`, '" + data_temp.Rows(d)("s/3").ToString + "' AS `3`, '" + data_temp.Rows(d)("m/4").ToString + "' AS `4`, '" + data_temp.Rows(d)("ml/5").ToString + "' AS `5`, '" + data_temp.Rows(d)("l/6").ToString + "' AS `6`, '" + data_temp.Rows(d)("xl/7").ToString + "' AS `7`, '" + data_temp.Rows(d)("xxl/8").ToString + "' AS `8`, '" + data_temp.Rows(d)("all/9").ToString + "' AS `9`, '" + data_temp.Rows(d)("~/0").ToString + "' AS `0` "
+            'Next
+            'qry += ") a ); ALTER TABLE tb_so_single_temp CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci; "
             command.CommandText = qry
             command.ExecuteNonQuery()
             command.Dispose()
@@ -1455,6 +1472,74 @@ Public Class FormImportExcel
 
             'Customize column
             GVData.Columns("IdProduct").Visible = False
+        ElseIf id_pop_up = "29" Then
+            'return order 9
+            Dim connection_string As String = String.Format("Data Source={0};User Id={1};Password={2};Database={3};Convert Zero Datetime=True", app_host, app_username, app_password, app_database)
+            Dim connection As New MySqlConnection(connection_string)
+            connection.Open()
+
+            Dim command As MySqlCommand = connection.CreateCommand()
+            Dim qry As String = "DROP TABLE IF EXISTS tb_ro_single_temp; CREATE TEMPORARY TABLE IF NOT EXISTS tb_ro_single_temp AS ( SELECT * FROM ("
+            Dim qry_det As String = ""
+            For d As Integer = 0 To data_temp.Rows.Count - 1
+                For c As Integer = 3 To 12
+                    If data_temp.Rows(d)(c).ToString <> "" And data_temp.Rows(d)(c).ToString <> "-" And data_temp.Rows(d)(c).ToString <> "0" Then
+                        If qry_det <> "" Then
+                            qry_det += "UNION ALL "
+                        End If
+                        Dim size As String = 0
+                        If c < 12 Then
+                            size = c - 2
+                        End If
+                        qry_det += "SELECT '" + FormSalesReturnOrderDet.id_comp + "' AS `id_wh`,'" + id_user + "' AS `id_user`, '" + data_temp.Rows(d)("KODE").ToString + data_temp.Rows(d)("SIZETYP").ToString + size + "1" + "' AS `code`, '" + data_temp.Rows(d)(c).ToString + "' AS `qty` "
+                    End If
+                Next
+            Next
+            qry += qry_det + ") a ); ALTER TABLE tb_ro_single_temp CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci; "
+            command.CommandText = qry
+            command.ExecuteNonQuery()
+            command.Dispose()
+            'Console.WriteLine(qry)
+
+            Dim data As New DataTable
+            Dim adapter As New MySqlDataAdapter("CALL view_return_order_single_temp(" + FormSalesReturnOrderDet.id_comp + ", '" + id_user + "')", connection)
+            adapter.SelectCommand.CommandTimeout = 300
+            adapter.Fill(data)
+            adapter.Dispose()
+            data.Dispose()
+            Dim data_par As DataTable = FormSalesReturnOrderDet.GCItemList.DataSource
+            If data_par.Rows.Count = 0 Then
+                GCData.DataSource = data
+            Else
+                Dim t1 = data.AsEnumerable()
+                Dim t2 = data_par.AsEnumerable()
+                Dim except As DataTable = (From _t1 In t1
+                                           Group Join _t2 In t2
+                                           On _t1("id_product") Equals _t2("id_product") Into Group
+                                           From _t3 In Group.DefaultIfEmpty()
+                                           Where _t3 Is Nothing
+                                           Select _t1).CopyToDataTable
+                GCData.DataSource = except
+            End If
+            connection.Close()
+            connection.Dispose()
+
+            'Customize column
+            GVData.Columns("id_design_price_retail").Visible = False
+            GVData.Columns("id_design").Visible = False
+            GVData.Columns("id_product").Visible = False
+            GVData.Columns("Amount").Visible = False
+            GVData.Columns("Price").Visible = False
+            GVData.Columns("SOH").Visible = False
+            GVData.Columns("Code").VisibleIndex = 0
+            GVData.Columns("Style").VisibleIndex = 1
+            GVData.Columns("Size").VisibleIndex = 2
+            GVData.Columns("Qty").VisibleIndex = 3
+            GVData.Columns("Status").VisibleIndex = 4
+            GVData.Columns("Qty").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+            GVData.Columns("Qty").DisplayFormat.FormatString = "{0:n0}"
+            GVData.Columns("SOH").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+            GVData.Columns("SOH").DisplayFormat.FormatString = "{0:n0}"
         End If
         data_temp.Dispose()
         oledbconn.Close()
@@ -2642,6 +2727,43 @@ Public Class FormImportExcel
                     Close()
                 Else
                     stopCustom("No data available.")
+                End If
+            ElseIf id_pop_up = "29" Then
+                Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Please make sure :" + System.Environment.NewLine + "- Only 'OK' status will include in order list." + System.Environment.NewLine + "- If this report is an important, please click 'No' button, and then click 'Print' button to export to multiple formats provided." + System.Environment.NewLine + "Are you sure you want to continue this process?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+                If confirm = Windows.Forms.DialogResult.Yes Then
+                    makeSafeGV(GVData)
+                    GVData.ActiveFilterString = "[Status] = 'OK'"
+                    If GVData.RowCount > 0 Then
+                        For i As Integer = 0 To GVData.RowCount - 1
+                            Dim newRow As DataRow = (TryCast(FormSalesReturnOrderDet.GCItemList.DataSource, DataTable)).NewRow()
+                            newRow("id_sales_return_order_det") = "0"
+                            newRow("name") = GVData.GetRowCellValue(i, "Style").ToString
+                            newRow("code") = GVData.GetRowCellValue(i, "Code").ToString
+                            newRow("size") = GVData.GetRowCellValue(i, "Size").ToString
+                            newRow("sales_return_order_det_qty") = GVData.GetRowCellValue(i, "Qty")
+                            newRow("design_price_type") = ""
+                            newRow("id_design_price") = GVData.GetRowCellValue(i, "id_design_price_retail").ToString
+                            newRow("design_price") = GVData.GetRowCellValue(i, "Price")
+                            newRow("id_return_cat") = "1"
+                            newRow("return_cat") = "Return"
+                            newRow("amount") = GVData.GetRowCellValue(i, "Amount")
+                            newRow("sales_return_order_det_note") = ""
+                            newRow("id_design") = GVData.GetRowCellValue(i, "id_design").ToString
+                            newRow("id_product") = GVData.GetRowCellValue(i, "id_product").ToString
+                            newRow("id_sample") = "0"
+                            TryCast(FormSalesReturnOrderDet.GCItemList.DataSource, DataTable).Rows.Add(newRow)
+                            FormSalesReturnOrderDet.GCItemList.RefreshDataSource()
+                            FormSalesReturnOrderDet.GVItemList.RefreshData()
+                            PBC.PerformStep()
+                            PBC.Update()
+                        Next
+                        FormSalesReturnOrderDet.GVItemList.OptionsBehavior.AutoExpandAllGroups = True
+                        FormSalesReturnOrderDet.check_but()
+                        Close()
+                    Else
+                        stopCustom("There is no data for import process, please make sure your input !")
+                        makeSafeGV(GVData)
+                    End If
                 End If
             End If
         End If

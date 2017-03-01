@@ -64,6 +64,7 @@
                 Cursor = Cursors.Default
             ElseIf id_pop_up = "4" Then
                 Cursor = Cursors.WaitCursor
+                Dim final_comment As String = MENote.Text
                 Dim qry As String = ""
                 Dim qry_stt As String = ""
                 For i As Integer = 0 To ((FormSalesOrderSvcLevel.GVSalesOrder.RowCount - 1) - GetGroupRowCount(FormSalesOrderSvcLevel.GVSalesOrder))
@@ -86,7 +87,7 @@
                     query_close_stock += "HAVING qty>0 "
                     execute_non_query(query_close_stock, True, "", "", "", "")
 
-                    Dim query_upd As String = "UPDATE tb_sales_order SET id_prepare_status='" + SLEPackingStatus.EditValue.ToString + "' WHERE (" + qry_stt + ") "
+                    Dim query_upd As String = "UPDATE tb_sales_order SET id_prepare_status='" + SLEPackingStatus.EditValue.ToString + "', final_comment='" + final_comment + "' WHERE (" + qry_stt + ") "
                     execute_non_query(query_upd, True, "", "", "", "")
                     FormSalesOrderSvcLevel.viewSalesOrder()
                     Close()

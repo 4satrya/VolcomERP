@@ -7,7 +7,16 @@
     Public id_product As String = "-1"
 
     Private Sub FormSalesReturnOrderSingleV2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        viewProduct()
+        viewSeason()
+    End Sub
+
+    Sub viewSeason()
+        Dim query As String = ""
+        query += "SELECT (0) AS `id_season`, (0) AS `range`, ('All Season') AS `season` UNION ALL "
+        query += "(SELECT a.id_season, b.range, a.season FROM tb_season a "
+        query += "INNER JOIN tb_range b ON a.id_range = b.id_range "
+        query += "ORDER BY b.range DESC) "
+        viewSearchLookupQuery(SLESeason, query, "id_season", "season", "id_season")
     End Sub
 
     'VIEW
@@ -20,6 +29,12 @@
             GVProduct.OptionsBehavior.AutoExpandAllGroups = True
         Else
             BtnChoose.Enabled = False
+        End If
+        Dim id_season As String = SLESeason.EditValue.ToString
+        If id_season = "0" Then
+            GVProduct.ActiveFilterString = ""
+        Else
+            GVProduct.ActiveFilterString = "[id_season]='" + id_season + "'"
         End If
     End Sub
 
@@ -92,5 +107,11 @@
             stopCustom("Nothing item selected")
             GVProduct.ActiveFilterString = ""
         End If
+    End Sub
+
+    Private Sub BtnView_Click(sender As Object, e As EventArgs) Handles BtnView.Click
+        Cursor = Cursors.WaitCursor
+        viewProduct()
+        Cursor = Cursors.Default
     End Sub
 End Class

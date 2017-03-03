@@ -345,8 +345,6 @@
 
         End Try
 
-        'MsgBox("main :" + id_productx)
-
         'Constraint Status
         If GVItemList.RowCount > 0 And id_productx <> "0" Then
             BtnEdit.Enabled = True
@@ -596,27 +594,6 @@
             FormImportExcel.ShowDialog()
         End If
         Cursor = Cursors.Default
-    End Sub
-
-    Private Sub DEEnd_EditValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DEEnd.EditValueChanged
-      
-    End Sub
-
-    Private Sub DEEnd_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DEEnd.Leave
-        
-    End Sub
-
-    Private Sub DEEnd_EditValueChanging(ByVal sender As System.Object, ByVal e As DevExpress.XtraEditors.Controls.ChangingEventArgs) Handles DEEnd.EditValueChanging
-        'If end_load Then
-        '    Cursor = Cursors.WaitCursor
-        '    Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Changing end period will reset the list, are you sure to continue??", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
-        '    If confirm = Windows.Forms.DialogResult.Yes Then
-        '        viewDetail()
-        '    Else
-        '        e.Cancel = True
-        '    End If
-        '    Cursor = Cursors.Default
-        'End If
     End Sub
     Private Sub TxtCodeCompFrom_KeyUp(sender As Object, e As KeyEventArgs) Handles TxtCodeCompFrom.KeyDown
         If e.KeyCode = Keys.Enter Then

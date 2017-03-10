@@ -380,7 +380,7 @@ Public Class FormSalesReturnQCDet
     Sub allow_status()
         If check_edit_report_status(id_report_status, "49", id_sales_return_qc) Then
             MENote.Properties.ReadOnly = False
-            BtnSave.Enabled = True
+            BtnSave.Enabled = False
             LEPLCategory.Enabled = True
             BtnInfoSrs.Enabled = True
             TEDrawer.Properties.ReadOnly = False
@@ -757,6 +757,9 @@ Public Class FormSalesReturnQCDet
                     If jum_ins_p > 0 Then
                         execute_non_query(query_counting, True, "", "", "", "")
                     End If
+
+                    'submit who prepared
+                    submit_who_prepared("49", id_sales_return_qc, id_user)
 
                     FormSalesReturnQC.viewSalesReturnQC()
                     FormSalesReturnQC.viewSalesReturn()

@@ -191,7 +191,7 @@ Public Class FormProductionPLToWHRecDet
             BtnBrowseContactFrom.Enabled = True
             BtnBrowseContactTo.Enabled = True
             MENote.Properties.ReadOnly = False
-            BtnSave.Enabled = True
+            BtnSave.Enabled = False
             BScan.Enabled = True
             BDelete.Enabled = True
             SLEStorage.Enabled = True
@@ -213,6 +213,7 @@ Public Class FormProductionPLToWHRecDet
             SLEDrawer.Enabled = False
             GVRetDetail.OptionsBehavior.ReadOnly = True
         End If
+        PanelNavBarcode.Enabled = False
 
         'attachment
         If check_attach_report_status(id_report_status, "37", id_pl_prod_order_rec) Then
@@ -529,6 +530,9 @@ Public Class FormProductionPLToWHRecDet
                             Next
                         Next
                         execute_non_query(query_counting, True, "", "", "", "")
+
+                        'submit who prepared
+                        submit_who_prepared("37", id_pl_prod_order_rec, id_user)
 
                         exportToBOF(False)
                         FormProductionPLToWHRec.viewPL()

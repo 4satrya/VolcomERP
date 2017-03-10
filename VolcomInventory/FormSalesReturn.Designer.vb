@@ -93,6 +93,7 @@ Partial Class FormSalesReturn
         Me.ViewMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.SMPrePrint = New System.Windows.Forms.ToolStripMenuItem()
         Me.SMPrint = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GridColumnRemaining = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XTCSalesReturn, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCSalesReturn.SuspendLayout()
         Me.XTPSalesReturnList.SuspendLayout()
@@ -533,9 +534,10 @@ Partial Class FormSalesReturn
         '
         'GVSalesReturnOrderDetail
         '
-        Me.GVSalesReturnOrderDetail.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumnIdSalesTarget, Me.GridColumnCode, Me.GridColumnName, Me.GridColumnSize, Me.GridColumnUOM, Me.GridColumnQty, Me.GridColumnQtyReturn, Me.GridColumnPrice, Me.GridColumnAmount, Me.GridColumnRemark, Me.GridColumnReturnCategory, Me.GridColumnIdDesign, Me.GridColumnIdProduct, Me.GridColumnIdSample, Me.GridColumnIdSalesOrderDet, Me.GridColumnProductName, Me.GridColumnIdReturnCat, Me.GridColumnIdDesignPrice, Me.GridColumnPriceType, Me.GridColumn2})
+        Me.GVSalesReturnOrderDetail.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumnIdSalesTarget, Me.GridColumnCode, Me.GridColumnName, Me.GridColumnSize, Me.GridColumnUOM, Me.GridColumnQty, Me.GridColumnQtyReturn, Me.GridColumnPrice, Me.GridColumnAmount, Me.GridColumnRemark, Me.GridColumnReturnCategory, Me.GridColumnIdDesign, Me.GridColumnIdProduct, Me.GridColumnIdSample, Me.GridColumnIdSalesOrderDet, Me.GridColumnProductName, Me.GridColumnIdReturnCat, Me.GridColumnIdDesignPrice, Me.GridColumnPriceType, Me.GridColumn2, Me.GridColumnRemaining})
+        Me.GVSalesReturnOrderDetail.CustomizationFormBounds = New System.Drawing.Rectangle(739, 187, 216, 178)
         Me.GVSalesReturnOrderDetail.GridControl = Me.GCSalesReturnOrderDetail
-        Me.GVSalesReturnOrderDetail.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_order_det_qty", Me.GridColumnQty, "{0:n2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_det_qty", Me.GridColumnQtyReturn, "{0:n2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount", Me.GridColumnAmount, "{0:n2}")})
+        Me.GVSalesReturnOrderDetail.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_order_det_qty", Me.GridColumnQty, "{0:n2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_det_qty", Me.GridColumnQtyReturn, "{0:n2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount", Me.GridColumnAmount, "{0:n2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "remaining", Me.GridColumnRemaining, "{0:N0}")})
         Me.GVSalesReturnOrderDetail.Name = "GVSalesReturnOrderDetail"
         Me.GVSalesReturnOrderDetail.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[True]
         Me.GVSalesReturnOrderDetail.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.[True]
@@ -622,6 +624,8 @@ Partial Class FormSalesReturn
         Me.GridColumnQty.Name = "GridColumnQty"
         Me.GridColumnQty.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.[False]
         Me.GridColumnQty.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_order_det_qty", "{0:n0}")})
+        Me.GridColumnQty.Visible = True
+        Me.GridColumnQty.VisibleIndex = 4
         Me.GridColumnQty.Width = 65
         '
         'RepositoryItemSpinEdit1
@@ -644,6 +648,8 @@ Partial Class FormSalesReturn
         Me.GridColumnQtyReturn.FieldName = "sales_return_det_qty_view"
         Me.GridColumnQtyReturn.Name = "GridColumnQtyReturn"
         Me.GridColumnQtyReturn.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_det_qty_view", "{0:n0}")})
+        Me.GridColumnQtyReturn.Visible = True
+        Me.GridColumnQtyReturn.VisibleIndex = 5
         Me.GridColumnQtyReturn.Width = 84
         '
         'GridColumnPrice
@@ -658,7 +664,7 @@ Partial Class FormSalesReturn
         Me.GridColumnPrice.FieldName = "design_price"
         Me.GridColumnPrice.Name = "GridColumnPrice"
         Me.GridColumnPrice.Visible = True
-        Me.GridColumnPrice.VisibleIndex = 5
+        Me.GridColumnPrice.VisibleIndex = 7
         Me.GridColumnPrice.Width = 73
         '
         'GridColumnAmount
@@ -674,7 +680,7 @@ Partial Class FormSalesReturn
         Me.GridColumnAmount.Name = "GridColumnAmount"
         Me.GridColumnAmount.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount", "{0:n2}")})
         Me.GridColumnAmount.Visible = True
-        Me.GridColumnAmount.VisibleIndex = 6
+        Me.GridColumnAmount.VisibleIndex = 8
         Me.GridColumnAmount.Width = 86
         '
         'GridColumnRemark
@@ -758,8 +764,6 @@ Partial Class FormSalesReturn
         Me.GridColumn2.FieldName = "soh"
         Me.GridColumn2.Name = "GridColumn2"
         Me.GridColumn2.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "soh", "{0:N0}")})
-        Me.GridColumn2.Visible = True
-        Me.GridColumn2.VisibleIndex = 4
         '
         'PanelControl1
         '
@@ -820,6 +824,19 @@ Partial Class FormSalesReturn
         Me.SMPrint.Name = "SMPrint"
         Me.SMPrint.Size = New System.Drawing.Size(136, 22)
         Me.SMPrint.Text = "Print"
+        '
+        'GridColumnRemaining
+        '
+        Me.GridColumnRemaining.Caption = "Remaining"
+        Me.GridColumnRemaining.DisplayFormat.FormatString = "{0:N0}"
+        Me.GridColumnRemaining.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnRemaining.FieldName = "remaining"
+        Me.GridColumnRemaining.Name = "GridColumnRemaining"
+        Me.GridColumnRemaining.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "remaining", "{0:N0}")})
+        Me.GridColumnRemaining.UnboundExpression = "[sales_return_order_det_qty] - [sales_return_det_qty_view]"
+        Me.GridColumnRemaining.UnboundType = DevExpress.Data.UnboundColumnType.[Integer]
+        Me.GridColumnRemaining.Visible = True
+        Me.GridColumnRemaining.VisibleIndex = 6
         '
         'FormSalesReturn
         '
@@ -939,4 +956,5 @@ Partial Class FormSalesReturn
     Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LabelControl3 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents GridColumnTotal As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnRemaining As DevExpress.XtraGrid.Columns.GridColumn
 End Class

@@ -76,7 +76,8 @@ Partial Class FormMatRetInProd
         Me.GridColumnRack = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnDescription = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GroupGeneralHeader = New DevExpress.XtraEditors.GroupControl()
-        Me.TextEdit1 = New DevExpress.XtraEditors.TextEdit()
+        Me.BtnBrowseComp = New DevExpress.XtraEditors.SimpleButton()
+        Me.TEDesignCode = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.TEDesign = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
@@ -124,7 +125,7 @@ Partial Class FormMatRetInProd
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
-        CType(Me.TextEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TEDesignCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEDesign.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DERet.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEPONumber.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -669,7 +670,8 @@ Partial Class FormMatRetInProd
         'GroupGeneralHeader
         '
         Me.GroupGeneralHeader.CaptionLocation = DevExpress.Utils.Locations.Left
-        Me.GroupGeneralHeader.Controls.Add(Me.TextEdit1)
+        Me.GroupGeneralHeader.Controls.Add(Me.BtnBrowseComp)
+        Me.GroupGeneralHeader.Controls.Add(Me.TEDesignCode)
         Me.GroupGeneralHeader.Controls.Add(Me.LabelControl2)
         Me.GroupGeneralHeader.Controls.Add(Me.TEDesign)
         Me.GroupGeneralHeader.Controls.Add(Me.LabelControl6)
@@ -691,15 +693,25 @@ Partial Class FormMatRetInProd
         Me.GroupGeneralHeader.Size = New System.Drawing.Size(904, 127)
         Me.GroupGeneralHeader.TabIndex = 176
         '
-        'TextEdit1
+        'BtnBrowseComp
         '
-        Me.TextEdit1.EditValue = ""
-        Me.TextEdit1.Location = New System.Drawing.Point(111, 91)
-        Me.TextEdit1.Name = "TextEdit1"
-        Me.TextEdit1.Properties.EditValueChangedDelay = 1
-        Me.TextEdit1.Properties.ReadOnly = True
-        Me.TextEdit1.Size = New System.Drawing.Size(331, 20)
-        Me.TextEdit1.TabIndex = 169
+        Me.BtnBrowseComp.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnBrowseComp.Appearance.Options.UseFont = True
+        Me.BtnBrowseComp.Location = New System.Drawing.Point(868, 38)
+        Me.BtnBrowseComp.Name = "BtnBrowseComp"
+        Me.BtnBrowseComp.Size = New System.Drawing.Size(23, 20)
+        Me.BtnBrowseComp.TabIndex = 171
+        Me.BtnBrowseComp.Text = "..."
+        '
+        'TEDesignCode
+        '
+        Me.TEDesignCode.EditValue = ""
+        Me.TEDesignCode.Location = New System.Drawing.Point(111, 91)
+        Me.TEDesignCode.Name = "TEDesignCode"
+        Me.TEDesignCode.Properties.EditValueChangedDelay = 1
+        Me.TEDesignCode.Properties.ReadOnly = True
+        Me.TEDesignCode.Size = New System.Drawing.Size(331, 20)
+        Me.TEDesignCode.TabIndex = 169
         '
         'LabelControl2
         '
@@ -818,13 +830,13 @@ Partial Class FormMatRetInProd
         'TxtNameCompFrom
         '
         Me.TxtNameCompFrom.EditValue = ""
-        Me.TxtNameCompFrom.Location = New System.Drawing.Point(716, 39)
+        Me.TxtNameCompFrom.Location = New System.Drawing.Point(696, 38)
         Me.TxtNameCompFrom.Name = "TxtNameCompFrom"
         Me.TxtNameCompFrom.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtNameCompFrom.Properties.Appearance.Options.UseFont = True
         Me.TxtNameCompFrom.Properties.EditValueChangedDelay = 1
         Me.TxtNameCompFrom.Properties.ReadOnly = True
-        Me.TxtNameCompFrom.Size = New System.Drawing.Size(175, 20)
+        Me.TxtNameCompFrom.Size = New System.Drawing.Size(166, 20)
         Me.TxtNameCompFrom.TabIndex = 3
         Me.TxtNameCompFrom.TabStop = False
         '
@@ -837,7 +849,7 @@ Partial Class FormMatRetInProd
         Me.TxtCodeCompFrom.Properties.Appearance.Options.UseFont = True
         Me.TxtCodeCompFrom.Properties.EditValueChangedDelay = 1
         Me.TxtCodeCompFrom.Properties.ReadOnly = True
-        Me.TxtCodeCompFrom.Size = New System.Drawing.Size(102, 20)
+        Me.TxtCodeCompFrom.Size = New System.Drawing.Size(86, 20)
         Me.TxtCodeCompFrom.TabIndex = 2
         Me.TxtCodeCompFrom.TabStop = False
         '
@@ -1000,7 +1012,7 @@ Partial Class FormMatRetInProd
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupGeneralHeader.ResumeLayout(False)
         Me.GroupGeneralHeader.PerformLayout()
-        CType(Me.TextEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TEDesignCode.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEDesign.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DERet.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEPONumber.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1098,6 +1110,7 @@ Partial Class FormMatRetInProd
     Friend WithEvents GridColumnCost As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnTotCost As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents BAttach As DevExpress.XtraEditors.SimpleButton
-    Friend WithEvents TextEdit1 As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents TEDesignCode As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents BtnBrowseComp As DevExpress.XtraEditors.SimpleButton
 End Class

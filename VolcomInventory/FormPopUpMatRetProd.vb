@@ -1,6 +1,7 @@
 ﻿Public Class FormPopUpMatRetProd
-    Public id_prod_order_wo As String = "-1"
     Public id_prod_order As String = "-1"
+    '
+    Public id_comp_contact As String = "-1"
     '
     Public id_pl_mrs_det As String = "-1"
     Public id_pop_up As String = "-1"

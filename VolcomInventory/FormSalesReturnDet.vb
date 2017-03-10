@@ -366,7 +366,7 @@ Public Class FormSalesReturnDet
             PanelControlNav.Enabled = True
             PanelNavBarcode.Enabled = False
             MENote.Properties.ReadOnly = False
-            BtnSave.Enabled = True
+            BtnSave.Enabled = False
             TxtStoreReturnNumber.Properties.ReadOnly = False
             BtnInfoSrs.Enabled = True
             GridColumnQtyLimit.Visible = False
@@ -677,7 +677,8 @@ Public Class FormSalesReturnDet
     Function verifyTrans() As Boolean
         GridColumnStt.Visible = True
         Dim cond_list As Boolean = True
-        Dim query_cek_stok As String = "CALL view_stock_fg('" + id_store + "', '" + id_wh_locator_store + "', '" + id_wh_rack_store + "', '" + id_wh_drawer_store + "', '0', 4, '9999-01-01') "
+        'Dim query_cek_stok As String = "CALL view_stock_fg('" + id_store + "', '" + id_wh_locator_store + "', '" + id_wh_rack_store + "', '" + id_wh_drawer_store + "', '0', 4, '9999-01-01') "
+        Dim query_cek_stok As String = "CALL view_sales_return_order_limit('" + id_sales_return_order + "','0','0') "
         Dim dt_cek As DataTable = execute_query(query_cek_stok, -1, True, "", "", "", "")
 
         For i As Integer = 0 To ((GVItemList.RowCount - 1) - GetGroupRowCount(GVItemList))
@@ -688,7 +689,8 @@ Public Class FormSalesReturnDet
             Dim qty_soh As Integer = 0
             Dim dt_filter_cek As DataRow() = dt_cek.Select("[id_product]='" + id_product_cek + "' ")
             If dt_filter_cek.Length > 0 Then
-                qty_soh = dt_filter_cek(0)("qty_all_product")
+                ' qty_soh = dt_filter_cek(0)("qty_all_product")
+                qty_soh = dt_filter_cek(0)("sales_return_det_qty_limit")
             Else
                 qty_soh = 0
             End If
@@ -812,6 +814,9 @@ Public Class FormSalesReturnDet
                     'reserved stock
                     Dim stc_rev As ClassSalesReturn = New ClassSalesReturn()
                     stc_rev.reservedStock(id_sales_return)
+
+                    'submit who prepared
+                    submit_who_prepared("46", id_sales_return, id_user)
 
                     FormSalesReturn.viewSalesReturn()
                     FormSalesReturn.viewSalesReturnOrder()

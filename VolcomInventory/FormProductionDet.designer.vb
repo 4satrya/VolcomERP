@@ -87,6 +87,9 @@ Partial Class FormProductionDet
         Me.BMark = New DevExpress.XtraEditors.SimpleButton()
         Me.BPrint = New DevExpress.XtraEditors.SimpleButton()
         Me.GroupGeneralHeader = New DevExpress.XtraEditors.GroupControl()
+        Me.LabelControl15 = New DevExpress.XtraEditors.LabelControl()
+        Me.TETolerance = New DevExpress.XtraEditors.SpinEdit()
+        Me.LabelControl14 = New DevExpress.XtraEditors.LabelControl()
         Me.DEDate = New DevExpress.XtraEditors.DateEdit()
         Me.DERecDate = New DevExpress.XtraEditors.DateEdit()
         Me.LabelControl11 = New DevExpress.XtraEditors.LabelControl()
@@ -194,6 +197,7 @@ Partial Class FormProductionDet
         CType(Me.BMDD, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
+        CType(Me.TETolerance.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DERecDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -258,7 +262,7 @@ Partial Class FormProductionDet
         Me.XTPProdOrder.Controls.Add(Me.GroupGeneralHeader)
         Me.XTPProdOrder.Name = "XTPProdOrder"
         Me.XTPProdOrder.Size = New System.Drawing.Size(971, 531)
-        Me.XTPProdOrder.Text = "Production Order"
+        Me.XTPProdOrder.Text = "F. G. Purchase Order"
         '
         'GConListPurchase
         '
@@ -823,7 +827,7 @@ Partial Class FormProductionDet
         '
         'BarLargeButtonItem1
         '
-        Me.BarLargeButtonItem1.Caption = "Print Production Order"
+        Me.BarLargeButtonItem1.Caption = "Print F. G. Purchase Order"
         Me.BarLargeButtonItem1.Id = 1
         Me.BarLargeButtonItem1.Name = "BarLargeButtonItem1"
         '
@@ -925,6 +929,9 @@ Partial Class FormProductionDet
         'GroupGeneralHeader
         '
         Me.GroupGeneralHeader.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupGeneralHeader.Controls.Add(Me.LabelControl15)
+        Me.GroupGeneralHeader.Controls.Add(Me.TETolerance)
+        Me.GroupGeneralHeader.Controls.Add(Me.LabelControl14)
         Me.GroupGeneralHeader.Controls.Add(Me.DEDate)
         Me.GroupGeneralHeader.Controls.Add(Me.DERecDate)
         Me.GroupGeneralHeader.Controls.Add(Me.LabelControl11)
@@ -958,6 +965,36 @@ Partial Class FormProductionDet
         Me.GroupGeneralHeader.Name = "GroupGeneralHeader"
         Me.GroupGeneralHeader.Size = New System.Drawing.Size(971, 135)
         Me.GroupGeneralHeader.TabIndex = 1
+        '
+        'LabelControl15
+        '
+        Me.LabelControl15.Location = New System.Drawing.Point(505, 98)
+        Me.LabelControl15.Name = "LabelControl15"
+        Me.LabelControl15.Size = New System.Drawing.Size(11, 13)
+        Me.LabelControl15.TabIndex = 176
+        Me.LabelControl15.Text = "%"
+        '
+        'TETolerance
+        '
+        Me.TETolerance.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.TETolerance.Location = New System.Drawing.Point(442, 95)
+        Me.TETolerance.Name = "TETolerance"
+        Me.TETolerance.Properties.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TETolerance.Properties.Appearance.Options.UseFont = True
+        Me.TETolerance.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.TETolerance.Properties.IsFloatValue = False
+        Me.TETolerance.Properties.Mask.EditMask = "N00"
+        Me.TETolerance.Properties.MaxValue = New Decimal(New Integer() {2147483647, 0, 0, 0})
+        Me.TETolerance.Size = New System.Drawing.Size(57, 22)
+        Me.TETolerance.TabIndex = 176
+        '
+        'LabelControl14
+        '
+        Me.LabelControl14.Location = New System.Drawing.Point(381, 99)
+        Me.LabelControl14.Name = "LabelControl14"
+        Me.LabelControl14.Size = New System.Drawing.Size(47, 13)
+        Me.LabelControl14.TabIndex = 175
+        Me.LabelControl14.Text = "Tolerance"
         '
         'DEDate
         '
@@ -999,7 +1036,7 @@ Partial Class FormProductionDet
         'TELeadTime
         '
         Me.TELeadTime.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.TELeadTime.Location = New System.Drawing.Point(442, 96)
+        Me.TELeadTime.Location = New System.Drawing.Point(598, 95)
         Me.TELeadTime.Name = "TELeadTime"
         Me.TELeadTime.Properties.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TELeadTime.Properties.Appearance.Options.UseFont = True
@@ -1007,12 +1044,12 @@ Partial Class FormProductionDet
         Me.TELeadTime.Properties.IsFloatValue = False
         Me.TELeadTime.Properties.Mask.EditMask = "N00"
         Me.TELeadTime.Properties.MaxValue = New Decimal(New Integer() {2147483647, 0, 0, 0})
-        Me.TELeadTime.Size = New System.Drawing.Size(243, 22)
+        Me.TELeadTime.Size = New System.Drawing.Size(87, 22)
         Me.TELeadTime.TabIndex = 160
         '
         'LabelControl13
         '
-        Me.LabelControl13.Location = New System.Drawing.Point(381, 102)
+        Me.LabelControl13.Location = New System.Drawing.Point(535, 99)
         Me.LabelControl13.Name = "LabelControl13"
         Me.LabelControl13.Size = New System.Drawing.Size(48, 13)
         Me.LabelControl13.TabIndex = 161
@@ -1706,7 +1743,7 @@ Partial Class FormProductionDet
         Me.Name = "FormProductionDet"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Production Order Detail"
+        Me.Text = "F. G. Purchase Order"
         CType(Me.EPProdOrder, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XTCPageProduction, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1738,6 +1775,7 @@ Partial Class FormProductionDet
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupGeneralHeader.ResumeLayout(False)
         Me.GroupGeneralHeader.PerformLayout()
+        CType(Me.TETolerance.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEDate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DERecDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1916,4 +1954,7 @@ Partial Class FormProductionDet
     Friend WithEvents GridColumnUPC As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents DERecDate As DevExpress.XtraEditors.DateEdit
     Friend WithEvents DEDate As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents LabelControl15 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents TETolerance As DevExpress.XtraEditors.SpinEdit
+    Friend WithEvents LabelControl14 As DevExpress.XtraEditors.LabelControl
 End Class

@@ -751,6 +751,18 @@
             FormChangeStatus.id_pop_up = "6"
             FormChangeStatus.ShowDialog()
         End If
+    End Sub
+
+    Private Sub PrintPrepareOrderToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PrintPrepareOrderToolStripMenuItem.Click
+        Cursor = Cursors.WaitCursor
+        If XTCSvcLevel.SelectedTabPageIndex = 0 Then
+            If GVSalesOrder.FocusedRowHandle >= 0 And GVSalesOrder.RowCount > 0 Then
+                FormViewSalesOrder.id_sales_order = GVSalesOrder.GetFocusedRowCellValue("id_sales_order").ToString
+                FormViewSalesOrder.is_print = "1"
+                FormViewSalesOrder.ShowDialog()
+            End If
+        ElseIf XTCSvcLevel.SelectedTabPageIndex = 1 Then
+        End If
         Cursor = Cursors.Default
     End Sub
 End Class

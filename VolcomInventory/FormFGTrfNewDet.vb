@@ -293,25 +293,22 @@ Public Class FormFGTrfNewDet
             BtnAdd.Enabled = True
             BtnEdit.Enabled = True
             BtnDel.Enabled = True
-            PanelNavBarcode.Enabled = True
             MENote.Properties.ReadOnly = False
             GVItemList.OptionsCustomization.AllowGroup = False
-            BtnSave.Enabled = True
             BPickDrawer.Enabled = True
-            BtnVerify.Enabled = True
         Else
             BtnAdd.Enabled = False
             BtnEdit.Enabled = False
             BtnDel.Enabled = False
-            PanelNavBarcode.Enabled = False
             MENote.Properties.ReadOnly = True
             GVItemList.OptionsCustomization.AllowGroup = True
-            BtnSave.Enabled = False
             GridColumnQtyLimit.Visible = False
             GridColumnQtyWH.Visible = False
             BPickDrawer.Enabled = False
-            BtnVerify.Enabled = False
         End If
+        PanelNavBarcode.Enabled = False
+        BtnVerify.Enabled = False
+        BtnSave.Enabled = False
 
         'ATTACH
         If check_attach_report_status(id_report_status, "57", id_fg_trf) Then
@@ -1103,6 +1100,9 @@ Public Class FormFGTrfNewDet
                     If GVBarcode.RowCount > 0 Then
                         execute_non_query(query_counting, True, "", "", "", "")
                     End If
+
+                    'submit who prepared
+                    submit_who_prepared("57", id_fg_trf, id_user)
 
                     FormFGTrfNew.viewSalesOrder()
                     FormFGTrfNew.viewFGTrf()

@@ -3,7 +3,6 @@
     Public id_mat_prod_ret_in As String = ""
     Public id_prod_order As String = ""
     Public id_prod_order_wo As String = ""
-    Public id_comp_contact_to As String = ""
     Public id_comp_contact_from As String = ""
     Public id_mat_purc_det_list, id_mat_purc_ret_in_det_list As New List(Of String)
     Dim date_start As Date
@@ -38,7 +37,7 @@
             'View data
             Try
                 Dim query As String = "SELECT a.id_report_status,i.report_status,a.id_mat_prod_ret_in,b.id_prod_order_wo,h.id_prod_order, a.mat_prod_ret_in_date, a.mat_prod_ret_in_note,h.prod_order_number,b.prod_order_wo_number,desg.design_name,e.comp_name,e.comp_number,e.address_primary,a.id_comp_contact_from, "
-                query += "a.mat_prod_ret_in_number  "
+                query += "a.mat_prod_ret_in_number "
                 query += ",drw.id_wh_drawer,rck.id_wh_rack,loc.id_wh_locator,comp.id_comp "
                 query += "FROM tb_mat_prod_ret_in a "
                 query += "INNER JOIN tb_prod_order_wo b ON a.id_prod_order_wo = b.id_prod_order_wo "
@@ -244,11 +243,11 @@
                         'Try
                         id_pl_mrs_det = GVRetDetail.GetRowCellValue(j, "id_pl_mrs_det").ToString
                         mat_purc_ret_in_det_qty = GVRetDetail.GetRowCellValue(j, "mat_prod_ret_in_det_qty")
-                        mat_purc_ret_in_det_price = GVRetDetail.GetRowCellValue(j, "pl_mrs_det_price")
-                        mat_purc_ret_in_det_note = GVRetDetail.GetRowCellValue(j, "mat_prod_ret_in_det_note").ToString
-                        query = "INSERT tb_mat_prod_ret_in_det(id_mat_prod_ret_in, id_pl_mrs_det, mat_prod_ret_in_det_qty,mat_prod_ret_in_det_price, mat_prod_ret_in_det_note) "
-                        query += "VALUES('" + id_mat_prod_ret_in + "', '" + id_pl_mrs_det + "', '" + decimalSQL(mat_purc_ret_in_det_qty.ToString) + "','" + decimalSQL(mat_purc_ret_in_det_price.ToString) + "', '" + mat_purc_ret_in_det_note + "') "
-                        execute_non_query(query, True, "", "", "", "")
+                            mat_purc_ret_in_det_price = GVRetDetail.GetRowCellValue(j, "pl_mrs_det_price")
+                            mat_purc_ret_in_det_note = GVRetDetail.GetRowCellValue(j, "mat_prod_ret_in_det_note").ToString
+                            query = "INSERT tb_mat_prod_ret_in_det(id_mat_prod_ret_in, id_pl_mrs_det, mat_prod_ret_in_det_qty,mat_prod_ret_in_det_price, mat_prod_ret_in_det_note) "
+                            query += "VALUES('" + id_mat_prod_ret_in + "', '" + id_pl_mrs_det + "', '" + decimalSQL(mat_purc_ret_in_det_qty.ToString) + "','" + decimalSQL(mat_purc_ret_in_det_price.ToString) + "', '" + mat_purc_ret_in_det_note + "') "
+                            execute_non_query(query, True, "", "", "", "")
                         'Catch ex As Exception
 
                         'End Try
@@ -317,7 +316,9 @@
     End Sub
     Private Sub BtnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnAdd.Click
         FormPopUpMatRetProd.id_pop_up = "1"
-        FormPopUpMatRetProd.id_prod_order_wo = id_prod_order_wo
+        '
+        FormPopUpMatRetProd.id_prod_order = id_prod_order
+        FormPopUpMatRetProd.id_comp_contact = id_comp_contact_from
         FormPopUpMatRetProd.ShowDialog()
     End Sub
     Private Sub BtnDel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnDel.Click
@@ -327,8 +328,11 @@
     End Sub
     Private Sub BtnEdit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnEdit.Click
         FormPopUpMatRetProd.id_pop_up = "1"
+
         FormPopUpMatRetProd.id_pl_mrs_det = GVRetDetail.GetFocusedRowCellValue("id_pl_mrs_det").ToString
-        FormPopUpMatRetProd.id_prod_order_wo = id_prod_order_wo
+        FormPopUpMatRetProd.id_prod_order = id_prod_order
+        FormPopUpMatRetProd.id_comp_contact = id_comp_contact_from
+        '
         FormPopUpMatRetProd.ShowDialog()
     End Sub
     Private Sub BtnPrint_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnPrint.Click
@@ -358,13 +362,20 @@
         Dispose()
     End Sub
     Private Sub BtnBrowsePO_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnBrowsePO.Click
-        FormPopUpWOProdMat.id_pop_up = "1"
-        FormPopUpWOProdMat.ShowDialog()
+        'FormPopUpWOProdMat.id_pop_up = "1"
+        'FormPopUpWOProdMat.ShowDialog()
+        FormPopUpProd.id_pop_up = "8"
+        FormPopUpProd.ShowDialog()
     End Sub
     Private Sub GVRetDetail_CustomColumnDisplayText(ByVal sender As System.Object, ByVal e As DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs) Handles GVRetDetail.CustomColumnDisplayText
         If e.Column.FieldName = "no" Then
             e.DisplayText = (e.ListSourceRowIndex + 1).ToString()
         End If
+    End Sub
+
+    Private Sub BtnBrowseComp_Click(sender As Object, e As EventArgs) Handles BtnBrowseComp.Click
+        FormPopUpContact.id_pop_up = "74"
+        FormPopUpContact.ShowDialog()
     End Sub
 
     Private Sub BAttach_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BAttach.Click

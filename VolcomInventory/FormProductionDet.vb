@@ -15,7 +15,9 @@
         '
         view_term_production(LECategory)
         view_po_type(LEPOType)
-
+        '
+        TETolerance.EditValue = 0
+        '
         date_created = Now
         DEDate.EditValue = date_created
         DERecDate.EditValue = date_created
@@ -55,7 +57,9 @@
 
             LEPOType.EditValue = data.Rows(0)("id_po_type").ToString()
             LECategory.EditValue = data.Rows(0)("id_term_production").ToString()
-
+            '
+            TETolerance.EditValue = data.Rows(0)("tolerance")
+            '
             date_created = data.Rows(0)("prod_order_date")
             TELeadTime.Text = data.Rows(0)("prod_order_lead_time").ToString
             '
@@ -196,7 +200,7 @@
                 errorInput()
             Else
                 Dim po_number As String = header_number_prod(1)
-                query = String.Format("INSERT INTO tb_prod_order(id_prod_demand_design,prod_order_number,id_po_type,id_term_production,prod_order_date,prod_order_note,id_delivery,prod_order_lead_time) VALUES('{0}','{1}','{2}','{3}',NOW(),'{4}','{5}','{6}');SELECT LAST_INSERT_ID() ", id_prod_demand_design, po_number, LEPOType.EditValue.ToString, LECategory.EditValue.ToString, MENote.Text, id_delivery, TELeadTime.Text)
+                query = String.Format("INSERT INTO tb_prod_order(id_prod_demand_design,prod_order_number,id_po_type,id_term_production,prod_order_date,prod_order_note,id_delivery,prod_order_lead_time,tolerance) VALUES('{0}','{1}','{2}','{3}',NOW(),'{4}','{5}','{6}','{7}');SELECT LAST_INSERT_ID() ", id_prod_demand_design, po_number, LEPOType.EditValue.ToString, LECategory.EditValue.ToString, MENote.Text, id_delivery, TELeadTime.Text, TETolerance.EditValue.ToString)
                 Dim last_id As String = execute_query(query, 0, True, "", "", "", "")
 
                 If GVListProduct.RowCount > 0 Then
@@ -223,7 +227,7 @@
             If Not formIsValidInGroup(EPProdOrder, GroupGeneralHeader) Or id_prod_demand_design = "-1" Then
                 errorInput()
             Else
-                query = String.Format("UPDATE tb_prod_order SET id_prod_demand_design='{0}',prod_order_number='{1}',id_po_type='{2}',id_term_production='{3}',prod_order_note='{4}',id_delivery='{6}',prod_order_lead_time='{7}' WHERE id_prod_order='{5}'", id_prod_demand_design, TEPONumber.Text, LEPOType.EditValue, LECategory.EditValue, MENote.Text, id_prod_order, id_delivery, TELeadTime.Text)
+                query = String.Format("UPDATE tb_prod_order SET id_prod_demand_design='{0}',prod_order_number='{1}',id_po_type='{2}',id_term_production='{3}',prod_order_note='{4}',id_delivery='{6}',prod_order_lead_time='{7}',tolerance='{8}' WHERE id_prod_order='{5}'", id_prod_demand_design, TEPONumber.Text, LEPOType.EditValue, LECategory.EditValue, MENote.Text, id_prod_order, id_delivery, TELeadTime.Text, TETolerance.EditValue.ToString)
                 execute_non_query(query, True, "", "", "", "")
 
                 'update mark
@@ -235,7 +239,7 @@
                 FormProduction.GVProd.FocusedRowHandle = find_row(FormProduction.GVProd, "id_prod_order", id_prod_order)
 
                 For i As Integer = 0 To GVListProduct.RowCount - 1
-                    query = String.Format("UPDATE tb_prod_order_det SET prod_order_det_note='{1}' WHERE id_prod_order_det='{0]'", GVListProduct.GetRowCellValue(i, "id_prod_order_det").ToString(), GVListProduct.GetRowCellValue(i, "note").ToString())
+                    query = String.Format("UPDATE tb_prod_order_det SET prod_order_det_note='{1}' WHERE id_prod_order_det='{0}'", GVListProduct.GetRowCellValue(i, "id_prod_order_det").ToString(), GVListProduct.GetRowCellValue(i, "note").ToString())
                     execute_non_query(query, True, "", "", "", "")
                 Next
 
@@ -245,6 +249,7 @@
         'universal save bom
         'save_id_bom()
     End Sub
+
     Sub save_id_bom()
         Dim query As String = ""
         If GVListProduct.RowCount > 0 Then

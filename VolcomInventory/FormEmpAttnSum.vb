@@ -357,6 +357,10 @@
             getReportSum()
         ElseIf XTCReportAttendance.SelectedTabPageIndex = 1 Then
             getReport()
+        ElseIf XTCReportAttendance.SelectedTabPageIndex = 2 Then
+            print(GCListSchedule, LEDeptSum.Text + "(" + Date.Parse(DEStartSum.EditValue.ToString).ToString("dd MMM yyyy") + " - " + Date.Parse(DEUntilSum.EditValue.ToString).ToString("dd MMM yyyy") + ")")
+        ElseIf XTCReportAttendance.SelectedTabPageIndex = 3 Then
+            print(GCScheduleTable, LEDeptSum.Text + "(" + Date.Parse(DEStartSum.EditValue.ToString).ToString("dd MMM yyyy") + " - " + Date.Parse(DEUntilSum.EditValue.ToString).ToString("dd MMM yyyy") + ")")
         End If
     End Sub
 

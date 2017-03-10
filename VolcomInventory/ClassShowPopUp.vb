@@ -414,6 +414,12 @@
             FormEmpLeaveDet.report_mark_type = "104"
             FormEmpLeaveDet.is_view = "1"
             FormEmpLeaveDet.ShowDialog()
+        ElseIf report_mark_type = "105" Then
+            'final clear
+            FormProductionFinalClearDet.id_prod_fc = id_report
+            FormProductionFinalClearDet.action = "upd"
+            FormProductionFinalClearDet.is_view = "1"
+            FormProductionFinalClearDet.ShowDialog()
         Else
             'MsgBox(id_report)
             stopCustom("Document Not Found")
@@ -980,6 +986,12 @@
             field_id = "id_emp_leave"
             field_number = "emp_leave_number"
             field_date = "emp_leave_date"
+        ElseIf report_mark_type = "105" Then
+            'FINAL CLEARANCE
+            table_name = "tb_prod_fc"
+            field_id = "id_prod_fc"
+            field_number = "prod_fc_number"
+            field_date = "prod_fc_date"
         Else
             query = "Select '-' AS report_number, NOW() as report_date"
         End If
@@ -995,15 +1007,31 @@
             'info col
             If report_mark_type = "22" Then
                 'po production
-                query = "SELECT pot.po_type FROM tb_prod_order po
+                query = "SELECT desg.design_code,desg.design_display_name, pot.po_type FROM tb_prod_order po
+                        INNER JOIN tb_prod_demand_design pdd ON pdd.id_prod_demand_design=po.id_prod_demand_design
+                        INNER JOIN tb_m_design desg ON desg.id_design=pdd.id_design 
                         INNER JOIN tb_lookup_po_type pot ON pot.id_po_type=po.id_po_type WHERE po.id_prod_order='" & id_report & "'"
-                info_col = execute_query(query, 0, True, "", "", "", "")
+                Dim datax As DataTable = execute_query(query, -1, True, "", "", "", "")
+                If datax.Rows.Count > 0 Then
+                    info_col = datax.Rows(0)("po_type").ToString
+                    info_report = ""
+                    info_design_code = datax.Rows(0)("design_code").ToString
+                    info_design = datax.Rows(0)("design_display_name").ToString
+                End If
             ElseIf report_mark_type = "23" Then
                 'wo production
-                query = "SELECT pot.po_type FROM tb_prod_order_wo wo
+                query = "SELECT desg.design_code,desg.design_display_name,pot.po_type,po.prod_order_number FROM tb_prod_order_wo wo
                         INNER JOIN tb_prod_order po ON po.id_prod_order=wo.id_prod_order
+                        INNER JOIN tb_prod_demand_design pdd ON pdd.id_prod_demand_design=po.id_prod_demand_design
+                        INNER JOIN tb_m_design desg ON desg.id_design=pdd.id_design 
                         INNER JOIN tb_lookup_po_type pot ON pot.id_po_type=po.id_po_type WHERE wo.id_prod_order_wo='" & id_report & "'"
-                info_col = execute_query(query, 0, True, "", "", "", "")
+                Dim datax As DataTable = execute_query(query, -1, True, "", "", "", "")
+                If datax.Rows.Count > 0 Then
+                    info_col = datax.Rows(0)("po_type").ToString
+                    info_report = datax.Rows(0)("prod_order_number").ToString
+                    info_design_code = datax.Rows(0)("design_code").ToString
+                    info_design = datax.Rows(0)("design_display_name").ToString
+                End If
             ElseIf report_mark_type = "30" Then
                 'PL MRS production
                 query = "SELECT desg.design_code,desg.design_display_name,po.prod_order_number FROM tb_pl_mrs plm

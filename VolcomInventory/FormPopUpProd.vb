@@ -8,6 +8,7 @@
     '5 = Return Mat Prod
     '6 = qc adj in
     '7 = qc adj out
+    '8 = return in prod mat
 
     Private Sub FormPopUpProd_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         view_sample_purc()
@@ -261,6 +262,8 @@
             If GVProd.RowCount > 0 Then
                 FormMatRetInProd.id_prod_order = GVProd.GetFocusedRowCellDisplayText("id_prod_order").ToString
                 FormMatRetInProd.TEPONumber.Text = GVProd.GetFocusedRowCellDisplayText("prod_order_number").ToString
+                FormMatRetInProd.TEDesign.Text = GVProd.GetFocusedRowCellDisplayText("design_name").ToString
+                FormMatRetInProd.TEDesignCode.Text = GVProd.GetFocusedRowCellDisplayText("design_code").ToString
 
                 'FormMatRetInProd.id_comp_contact_from = GVProdWO.GetFocusedRowCellValue("id_comp_contact").ToString
                 'FormMatRetInProd.TxtNameCompFrom.Text = get_company_x(get_id_company(GVProdWO.GetFocusedRowCellValue("id_comp_contact").ToString), "1")

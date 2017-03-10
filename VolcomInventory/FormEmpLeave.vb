@@ -73,13 +73,13 @@
                                 INNER JOIN (SELECT * FROM (SELECT * FROM tb_emp_leave_det empld_wh WHERE (DATE(empld_wh.datetime_start) >= DATE('" & date_from & "') AND DATE(empld_wh.datetime_start) <= DATE('" & date_end & "'))) empx GROUP BY empx.id_emp_leave) empldwh ON empldwh.id_emp_leave=empl.id_emp_leave 
                                 INNER JOIN (SELECT id_emp_leave,MIN(datetime_start) AS min_date,MAX(datetime_until) AS max_date,ROUND(SUM(minutes_total)/60) AS hours_total FROM tb_emp_leave_det GROUP BY id_emp_leave) empld ON empld.id_emp_leave=empldwh.id_emp_leave"
         If is_propose = "1" Then
-            Dim id_user_admin_management As String = get_opt_emp_field("id_user_admin_mng").ToString
-            If id_user_admin_management = id_user Then
-                Dim id_min_lvl As String = get_opt_emp_field("leave_asst_mgr_level").ToString
-                query += " AND lvl.id_employee_level>0 AND lvl.id_employee_level <'" & id_min_lvl & "' "
-            Else
-                query += " AND (dep.id_user_admin='" & id_user & "' OR dep.id_user_admin_backup='" & id_user & "')"
-            End If
+            'Dim id_user_admin_management As String = get_opt_emp_field("id_user_admin_mng").ToString
+            'If id_user_admin_management = id_user Then
+            '    Dim id_min_lvl As String = get_opt_emp_field("leave_asst_mgr_level").ToString
+            '    query += " AND lvl.id_employee_level>0 AND lvl.id_employee_level <'" & id_min_lvl & "' "
+            'Else
+            '    query += " AND (dep.id_user_admin='" & id_user & "' OR dep.id_user_admin_backup='" & id_user & "')"
+            'End If
         End If
         Dim data As DataTable = execute_query(query, "-1", True, "", "", "", "")
         GCLeave.DataSource = data

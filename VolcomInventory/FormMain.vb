@@ -10366,4 +10366,17 @@ Public Class FormMain
         End Try
         Cursor = Cursors.Default
     End Sub
+
+    Private Sub NBDesignProdList_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBDesignProdList.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormProdDesignList.MdiParent = Me
+            FormProdDesignList.Show()
+            FormProdDesignList.WindowState = FormWindowState.Maximized
+            FormProdDesignList.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
 End Class

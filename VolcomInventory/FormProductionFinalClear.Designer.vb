@@ -169,7 +169,7 @@ Partial Class FormProductionFinalClear
         '
         'GridColumn2
         '
-        Me.GridColumn2.Caption = "Order#"
+        Me.GridColumn2.Caption = "FGPO#"
         Me.GridColumn2.FieldName = "prod_order_number"
         Me.GridColumn2.Name = "GridColumn2"
         Me.GridColumn2.Visible = True

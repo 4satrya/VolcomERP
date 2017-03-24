@@ -152,6 +152,9 @@
         yF8BcoWKDA+rDjBq81ZhSS3nXduUhvwBMk5r4gDITwJW/iDspenaAAAAAElFTkSuQmCC
 </value>
   </data>
+  <metadata name="LargeImageCollection.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>31, 17</value>
+  </metadata>
   <data name="BtnXlsBOF.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8

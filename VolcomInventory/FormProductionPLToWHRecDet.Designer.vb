@@ -130,6 +130,9 @@ Partial Class FormProductionPLToWHRecDet
         Me.GridColumnQtyRec = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnRemark = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnNox = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnNumber = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnFrom = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnTo = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GroupControlListBarcode = New DevExpress.XtraEditors.GroupControl()
         Me.GCBarcode = New DevExpress.XtraGrid.GridControl()
         Me.GVBarcode = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -148,6 +151,7 @@ Partial Class FormProductionPLToWHRecDet
         Me.BStop = New DevExpress.XtraEditors.SimpleButton()
         Me.BScan = New DevExpress.XtraEditors.SimpleButton()
         Me.EPRet = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.GridColumnCompNumber = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl3.SuspendLayout()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -757,7 +761,7 @@ Partial Class FormProductionPLToWHRecDet
         '
         'SearchLookUpEdit1View
         '
-        Me.SearchLookUpEdit1View.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn4, Me.GridColumnCompCode, Me.GridColumn5, Me.GridColumnCategoryComp, Me.GridColumnAddress})
+        Me.SearchLookUpEdit1View.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn4, Me.GridColumnCompCode, Me.GridColumn5, Me.GridColumnCategoryComp, Me.GridColumnAddress, Me.GridColumnCompNumber})
         Me.SearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
         Me.SearchLookUpEdit1View.Name = "SearchLookUpEdit1View"
         Me.SearchLookUpEdit1View.OptionsBehavior.Editable = False
@@ -783,6 +787,7 @@ Partial Class FormProductionPLToWHRecDet
         Me.GridColumn5.Name = "GridColumn5"
         Me.GridColumn5.Visible = True
         Me.GridColumn5.VisibleIndex = 0
+        Me.GridColumn5.Width = 265
         '
         'GridColumnCategoryComp
         '
@@ -790,7 +795,8 @@ Partial Class FormProductionPLToWHRecDet
         Me.GridColumnCategoryComp.FieldName = "comp_cat_name"
         Me.GridColumnCategoryComp.Name = "GridColumnCategoryComp"
         Me.GridColumnCategoryComp.Visible = True
-        Me.GridColumnCategoryComp.VisibleIndex = 1
+        Me.GridColumnCategoryComp.VisibleIndex = 2
+        Me.GridColumnCategoryComp.Width = 343
         '
         'GridColumnAddress
         '
@@ -798,7 +804,8 @@ Partial Class FormProductionPLToWHRecDet
         Me.GridColumnAddress.FieldName = "address_primary"
         Me.GridColumnAddress.Name = "GridColumnAddress"
         Me.GridColumnAddress.Visible = True
-        Me.GridColumnAddress.VisibleIndex = 2
+        Me.GridColumnAddress.VisibleIndex = 3
+        Me.GridColumnAddress.Width = 347
         '
         'SLEDrawer
         '
@@ -1181,7 +1188,7 @@ Partial Class FormProductionPLToWHRecDet
         '
         'GVRetDetail
         '
-        Me.GVRetDetail.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdRet, Me.GridColumnIdSamplePurcDet, Me.GridColumnNo, Me.GridColumnEanCode, Me.GridColumnQtyStored, Me.GridColumnUniqueRange, Me.GridColumnCode, Me.GridColumnName, Me.GridColumnSize, Me.GridColumnUOM, Me.GridColumnQty, Me.GridColumnQtyRec, Me.GridColumnRemark, Me.GridColumnNox})
+        Me.GVRetDetail.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdRet, Me.GridColumnIdSamplePurcDet, Me.GridColumnNo, Me.GridColumnEanCode, Me.GridColumnQtyStored, Me.GridColumnUniqueRange, Me.GridColumnCode, Me.GridColumnName, Me.GridColumnSize, Me.GridColumnUOM, Me.GridColumnQty, Me.GridColumnQtyRec, Me.GridColumnRemark, Me.GridColumnNox, Me.GridColumnNumber, Me.GridColumnFrom, Me.GridColumnTo})
         Me.GVRetDetail.GridControl = Me.GCRetDetail
         Me.GVRetDetail.Name = "GVRetDetail"
         Me.GVRetDetail.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[True]
@@ -1350,6 +1357,27 @@ Partial Class FormProductionPLToWHRecDet
         Me.GridColumnNox.Visible = True
         Me.GridColumnNox.VisibleIndex = 0
         Me.GridColumnNox.Width = 68
+        '
+        'GridColumnNumber
+        '
+        Me.GridColumnNumber.Caption = "Number"
+        Me.GridColumnNumber.FieldName = "number"
+        Me.GridColumnNumber.Name = "GridColumnNumber"
+        Me.GridColumnNumber.UnboundType = DevExpress.Data.UnboundColumnType.[String]
+        '
+        'GridColumnFrom
+        '
+        Me.GridColumnFrom.Caption = "From"
+        Me.GridColumnFrom.FieldName = "from"
+        Me.GridColumnFrom.Name = "GridColumnFrom"
+        Me.GridColumnFrom.UnboundType = DevExpress.Data.UnboundColumnType.[String]
+        '
+        'GridColumnTo
+        '
+        Me.GridColumnTo.Caption = "To"
+        Me.GridColumnTo.FieldName = "to"
+        Me.GridColumnTo.Name = "GridColumnTo"
+        Me.GridColumnTo.UnboundType = DevExpress.Data.UnboundColumnType.[String]
         '
         'GroupControlListBarcode
         '
@@ -1534,6 +1562,15 @@ Partial Class FormProductionPLToWHRecDet
         'EPRet
         '
         Me.EPRet.ContainerControl = Me
+        '
+        'GridColumnCompNumber
+        '
+        Me.GridColumnCompNumber.Caption = "Code"
+        Me.GridColumnCompNumber.FieldName = "comp_number"
+        Me.GridColumnCompNumber.Name = "GridColumnCompNumber"
+        Me.GridColumnCompNumber.Visible = True
+        Me.GridColumnCompNumber.VisibleIndex = 1
+        Me.GridColumnCompNumber.Width = 107
         '
         'FormProductionPLToWHRecDet
         '
@@ -1748,4 +1785,8 @@ Partial Class FormProductionPLToWHRecDet
     Friend WithEvents PUDD As DevExpress.XtraBars.PopupMenu
     Friend WithEvents DDBPrint As DevExpress.XtraEditors.DropDownButton
     Friend WithEvents BtnXlsBOF As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GridColumnNumber As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnFrom As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnTo As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnCompNumber As DevExpress.XtraGrid.Columns.GridColumn
 End Class

@@ -1750,6 +1750,20 @@ Module Common
         Return data
     End Function
 
+    Public Function get_company_by_code_no_limit(ByVal code_par As String, ByVal cond_par As String)
+        code_par = addSlashes(code_par)
+        Dim query As String = "SELECT comp.*, cont.id_comp_contact, getCompByContact(cont.id_comp_contact,4) AS `id_wh_drawer`,getCompByContact(cont.id_comp_contact,6) AS `id_wh_rack`, getCompByContact(cont.id_comp_contact,7) AS `id_wh_locator`, cont.contact_person, cont.contact_number, cont.is_default "
+        query += "FROM tb_m_comp comp "
+        query += "INNER JOIN tb_m_comp_contact cont ON cont.id_comp = comp.id_comp AND cont.is_default='1' "
+        query += "WHERE comp.comp_number='" + code_par + "' "
+        If cond_par <> "-1" Then
+            query += cond_par + " "
+        End If
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        Return data
+    End Function
+
+
     Function get_range_x(ByVal id_range As String, ByVal opt As String)
         Dim result As String = ""
         Dim query As String = ""
@@ -2924,7 +2938,7 @@ Module Common
             xrtable.Rows.Add(row_time)
         End If
     End Sub
-    Sub load_mark_horz_side(ByVal report_mark_type As String, ByVal id_report As String, ByVal opt As String, ByVal include_time As String, ByVal xrtable As DevExpress.XtraReports.UI.XRTable)
+    Sub load_mark_horz_side(ByVal report_mark_type As String, ByVal id_report As String, ByVal opt As String, ByVal include_time As String, ByVal xrtable As DevExpress.XtraReports.UI.XRTable, ByVal opt_lang As String)
         'opt
         'X = include received by <-- old --> else than 1 -> name
         '2 = not include
@@ -2936,7 +2950,7 @@ Module Common
         xrtable.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
         'XrTableCell1.Visible = False
 
-        Dim query As String = "SELECT b.report_status_display,a.id_report_status,a.report_mark_note,a.id_report_mark,b.report_status,a.id_user,d.employee_name,e.mark,CONCAT_WS(' ',DATE_FORMAT(a.report_mark_datetime,'%d %M %Y'),TIME(a.report_mark_datetime)) AS date_time,a.report_mark_note,role.role "
+        Dim query As String = "SELECT b.report_status_display_id,b.report_status_display,a.id_report_status,a.report_mark_note,a.id_report_mark,b.report_status,a.id_user,d.employee_name,e.mark,CONCAT_WS(' ',DATE_FORMAT(a.report_mark_datetime,'%d %M %Y'),TIME(a.report_mark_datetime)) AS date_time,a.report_mark_note,role.role "
         query += "FROM tb_report_mark a "
         query += "INNER JOIN tb_lookup_report_status b ON a.id_report_status=b.id_report_status "
         query += "LEFT JOIN tb_m_user c ON a.id_user=c.id_user "
@@ -2974,10 +2988,18 @@ Module Common
                 If data.Rows(j)("report_status").ToString = data.Rows(j - 1)("report_status").ToString Then
                     cell.Text = ""
                 Else
-                    cell.Text = data.Rows(j)("report_status_display").ToString
+                    If opt_lang = "1" Then
+                        cell.Text = data.Rows(j)("report_status_display").ToString
+                    ElseIf opt_lang = "2" Then
+                        cell.Text = data.Rows(j)("report_status_display_id").ToString
+                    End If
                 End If
             Else
-                cell.Text = data.Rows(j)("report_status_display").ToString
+                If opt_lang = "1" Then
+                    cell.Text = data.Rows(j)("report_status_display").ToString
+                ElseIf opt_lang = "2" Then
+                    cell.Text = data.Rows(j)("report_status_display_id").ToString
+                End If
             End If
 
             row_head.Cells.Add(cell)

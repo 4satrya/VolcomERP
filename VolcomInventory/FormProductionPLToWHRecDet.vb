@@ -170,9 +170,9 @@ Public Class FormProductionPLToWHRecDet
 
     'View Storage
     Sub viewComp()
-        Dim query As String = "SELECT ('0') AS `id_comp`, '[Select Account]' AS `comp_name`, '-' AS `comp_cat_name`, '-' AS `address_primary` "
+        Dim query As String = "SELECT ('0') AS `id_comp`, '[Select Account]' AS `comp_name`,'-' AS `comp_number`, '-' AS `comp_cat_name`, '-' AS `address_primary` "
         query += "UNION ALL "
-        query += "(SELECT a.id_comp, CONCAT(a.comp_number, '-', a.comp_name) AS comp_name, b.comp_cat_name, a.address_primary "
+        query += "(SELECT a.id_comp, CONCAT(a.comp_number, '-', a.comp_name) AS comp_name, a.comp_number, b.comp_cat_name, a.address_primary "
         query += "FROM tb_m_comp a "
         query += "INNER JOIN tb_m_comp_cat b ON a.id_comp_cat = b.id_comp_cat "
         query += "INNER JOIN tb_m_wh_locator c ON a.id_comp = c.id_comp "
@@ -534,12 +534,13 @@ Public Class FormProductionPLToWHRecDet
                         'submit who prepared
                         submit_who_prepared("37", id_pl_prod_order_rec, id_user)
 
-                        exportToBOF(False)
+
                         FormProductionPLToWHRec.viewPL()
                         FormProductionPLToWHRec.GVPL.FocusedRowHandle = find_row(FormProductionPLToWHRec.GVPL, "id_pl_prod_order_rec", id_pl_prod_order_rec)
                         FormProductionPLToWHRec.view_sample_purc()
                         action = "upd"
                         actionLoad()
+                        exportToBOF(False)
                         infoCustom("Document #" + pl_prod_order_rec_number + " was created successfully")
                     Catch ex As Exception
                         errorConnection()
@@ -645,12 +646,12 @@ Public Class FormProductionPLToWHRecDet
                         Next
 
                         'View
-                        exportToBOF(False)
                         FormProductionPLToWHRec.viewPL()
                         FormProductionPLToWHRec.GVPL.FocusedRowHandle = find_row(FormProductionPLToWHRec.GVPL, "id_pl_prod_order_rec", id_pl_prod_order_rec)
                         FormProductionPLToWHRec.view_sample_purc()
                         action = "upd"
                         actionLoad()
+                        exportToBOF(False)
                         infoCustom("Document #" + pl_prod_order_rec_number + " was edited successfully")
                     Catch ex As Exception
                         errorConnection()
@@ -1212,6 +1213,10 @@ Public Class FormProductionPLToWHRecDet
             Next
             GridColumnCode.VisibleIndex = 0
             GridColumnQtyRec.VisibleIndex = 1
+            GridColumnNumber.VisibleIndex = 2
+            GridColumnFrom.VisibleIndex = 3
+            GridColumnTo.VisibleIndex = 4
+            GridColumnRemark.VisibleIndex = 5
             GVRetDetail.OptionsPrint.PrintFooter = False
             GVRetDetail.OptionsPrint.PrintHeader = False
 
@@ -1242,6 +1247,11 @@ Public Class FormProductionPLToWHRecDet
             GridColumnSize.VisibleIndex = 3
             GridColumnQtyRec.VisibleIndex = 4
             GridColumnRemark.VisibleIndex = 5
+            GridColumnNumber.Visible = False
+            GridColumnFrom.Visible = False
+            GridColumnTo.Visible = False
+            GVRetDetail.OptionsPrint.PrintFooter = False
+            GVRetDetail.OptionsPrint.PrintHeader = False
             Cursor = Cursors.Default
         End If
     End Sub
@@ -1278,8 +1288,16 @@ Public Class FormProductionPLToWHRecDet
                 colIndex = colIndex + 1
                 If j = 0 Then
                     wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, "code").ToString
-                Else
+                ElseIf j = 1
                     wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, "pl_prod_order_rec_det_qty")
+                ElseIf j = 2
+                    wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellDisplayText(i, "number").ToString
+                ElseIf j = 3
+                    wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellDisplayText(i, "from").ToString
+                ElseIf j = 4
+                    wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellDisplayText(i, "to").ToString
+                Else
+                    wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, "pl_prod_order_rec_det_note").ToString
                 End If
             Next
         Next
@@ -1311,7 +1329,16 @@ Public Class FormProductionPLToWHRecDet
         End Try
     End Sub
 
-
+    Private Sub GVRetDetail_CustomUnboundColumnData(sender As Object, e As DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs) Handles GVRetDetail.CustomUnboundColumnData
+        Dim view As DevExpress.XtraGrid.Views.Grid.GridView = TryCast(sender, DevExpress.XtraGrid.Views.Grid.GridView)
+        If e.Column.FieldName = "from" AndAlso e.IsGetData Then
+            e.Value = TxtVendorCode.Text.ToString
+        ElseIf e.Column.FieldName = "to" AndAlso e.IsGetData Then
+            e.Value = SLEStorage.Text.Split("-")(0).ToString
+        ElseIf e.Column.FieldName = "number" AndAlso e.IsGetData Then
+            e.Value = TxtRetOutNumber.Text.ToString
+        End If
+    End Sub
 
     Private Sub BtnAttachment_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnAttachment.Click
         Cursor = Cursors.WaitCursor

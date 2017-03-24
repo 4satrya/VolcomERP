@@ -762,6 +762,14 @@
                 FormViewSalesOrder.ShowDialog()
             End If
         ElseIf XTCSvcLevel.SelectedTabPageIndex = 1 Then
+            If GVSalesReturnOrder.FocusedRowHandle >= 0 And GVSalesReturnOrder.RowCount > 0 Then
+                Cursor = Cursors.WaitCursor
+                FormViewSalesReturnOrder.id_sales_return_order = GVSalesReturnOrder.GetFocusedRowCellValue("id_sales_return_order").ToString
+                FormViewSalesReturnOrder.is_detail_soh = "1"
+                FormViewSalesReturnOrder.is_print = "1"
+                FormViewSalesReturnOrder.ShowDialog()
+                Cursor = Cursors.Default
+            End If
         End If
         Cursor = Cursors.Default
     End Sub

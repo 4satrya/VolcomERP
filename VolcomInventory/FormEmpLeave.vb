@@ -50,6 +50,7 @@
                                 (SELECT id_emp_leave,MIN(datetime_start) AS min_date,MAX(datetime_until) AS max_date,ROUND(SUM(minutes_total)/60) AS hours_total FROM tb_emp_leave_det GROUP BY id_emp_leave) empld ON empld.id_emp_leave=empl.id_emp_leave
                                 WHERE DATE(empl.emp_leave_date) >= DATE('" & date_from & "') AND DATE(empl.emp_leave_date) <= DATE('" & date_end & "')"
         If is_propose = "1" Then
+            query += " AND empl.id_leave_type!=5"
             'Dim id_user_admin_management As String = get_opt_emp_field("id_user_admin_mng").ToString
             'If id_user_admin_management = id_user Then
             '    Dim id_min_lvl As String = get_opt_emp_field("leave_asst_mgr_level").ToString
@@ -73,6 +74,7 @@
                                 INNER JOIN (SELECT * FROM (SELECT * FROM tb_emp_leave_det empld_wh WHERE (DATE(empld_wh.datetime_start) >= DATE('" & date_from & "') AND DATE(empld_wh.datetime_start) <= DATE('" & date_end & "'))) empx GROUP BY empx.id_emp_leave) empldwh ON empldwh.id_emp_leave=empl.id_emp_leave 
                                 INNER JOIN (SELECT id_emp_leave,MIN(datetime_start) AS min_date,MAX(datetime_until) AS max_date,ROUND(SUM(minutes_total)/60) AS hours_total FROM tb_emp_leave_det GROUP BY id_emp_leave) empld ON empld.id_emp_leave=empldwh.id_emp_leave"
         If is_propose = "1" Then
+            query += " WHERE empl.id_leave_type!=5"
             'Dim id_user_admin_management As String = get_opt_emp_field("id_user_admin_mng").ToString
             'If id_user_admin_management = id_user Then
             '    Dim id_min_lvl As String = get_opt_emp_field("leave_asst_mgr_level").ToString

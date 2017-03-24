@@ -86,7 +86,16 @@
 
             If data.Rows(0)("id_report_status").ToString = "5" Or data.Rows(0)("id_report_status").ToString = "6" Then
                 BMark.Visible = False
+                If data.Rows(0)("id_report_status").ToString = "6" Then
+                    If FormEmpLeave.is_hrd = 1 Then
+                        BCancelPropose.Visible = True
+                    End If
+                End If
+            Else
+                BMark.Visible = True
+                BCancelPropose.Visible = False
             End If
+
         End If
         '
     End Sub
@@ -195,7 +204,7 @@
 
     Sub pick_load()
         If id_employee = "-1" Then
-            stopCustom("Please choose employee first.")
+            stopCustom("Pilih karyawan terlebih dahulu.")
         Else
             FormEmpLeavePick.id_schedule = "-1"
             FormEmpLeavePick.id_employee = id_employee
@@ -243,7 +252,7 @@
                 BAddLeave.Focus()
             End If
         Else
-            stopCustom("No employee found.")
+            stopCustom("Karyawan tidak ditemukan.")
         End If
     End Sub
 
@@ -279,9 +288,9 @@
         Dim query As String = ""
         Dim problem As Boolean = False
         If id_employee = "-1" Or id_employee_change = "-1" Or TETotLeave.EditValue <= 0 Then
-            stopCustom("Please check your input !")
+            stopCustom("Lengkapi isian dengan lengkap !")
         ElseIf TERemainingLeaveAfter.EditValue < 0
-            stopCustom("Remaining Leave not sufficient.")
+            stopCustom("Sisa cuti tidak mencukupi.")
         Else
             If LELeaveType.EditValue.ToString = "2" And LEFormDC.EditValue.ToString = "2" Then
                 'check if sudah form sekali dalam sebulan.
@@ -290,7 +299,7 @@
                                         WHERE DATE_FORMAT(lvd.datetime_start, '%Y-%m') = DATE_FORMAT(NOW(), '%Y-%m') AND lv.id_emp='" & id_employee & "' AND lv.id_form_dc='2' AND lv.id_leave_type='2' AND lv.id_report_status!='5' "
                 Dim cek As String = execute_query(query_cek, 0, True, "", "", "", "")
                 If Not cek.ToString = "0" Then
-                    stopCustom("Only can use form only once per month for sick leave." & vbNewLine & "Please provide DC for sick leave.")
+                    stopCustom("Hanya dapat mengajukan sakit dengan form satu kali dalam satu bulan." & vbNewLine & "Please provide DC for sick leave.")
                     problem = True
                 End If
             End If
@@ -347,6 +356,11 @@
                         query = "UPDATE tb_emp_leave SET report_mark_type='104' WHERE id_emp_leave='" & id_emp_leave & "'"
                         execute_non_query(query, True, "", "", "", "")
                     Else
+                        Dim jum_check_dept_head As String = ""
+                        query = "SELECT COUNT(*) as jum FROM tb_m_departement dep
+                                    INNER JOIN tb_m_user usr ON usr.id_user=dep.id_user_head
+                                    WHERE usr.id_employee='" & id_employee & "'"
+                        jum_check_dept_head = execute_query(query, 0, True, "", "", "", "")
                         'filter by level
                         Dim jum_check As String = ""
                         query = "SELECT IF(id_employee_level >= " & get_opt_emp_field("leave_spv_level").ToString & ",3,IF(id_employee_level < " & get_opt_emp_field("leave_spv_level").ToString & " AND id_employee_level >= " & get_opt_emp_field("leave_asst_mgr_level").ToString & ",2,1)) as jum_cek FROM tb_m_employee WHERE id_employee='" & id_employee & "'"
@@ -354,7 +368,7 @@
                         '1 = mgr up
                         '2 = coordinator - asst mgr
                         '3 = staff - spv
-                        If jum_check = "1" Then
+                        If jum_check = "1" Or Not jum_check_dept_head = "0" Then
                             submit_who_prepared_no_user("99", id_emp_leave, id_employee)
                             query = "UPDATE tb_emp_leave SET report_mark_type='99' WHERE id_emp_leave='" & id_emp_leave & "'"
                             execute_non_query(query, True, "", "", "", "")
@@ -397,7 +411,7 @@
                     'End If
                 End If
                 '
-                infoCustom("Leave proposed")
+                infoCustom("Cuti diajukan. Menunggu persetujuan.")
                 '
                 FormEmpLeave.DEStart.EditValue = Now
                 FormEmpLeave.DEUntil.EditValue = Now
@@ -447,7 +461,7 @@
                 '
                 MELeavePurpose.Focus()
             Else
-                stopCustom("No employee found.")
+                stopCustom("Karyawan tidak ditemukan.")
             End If
         End If
     End Sub
@@ -520,5 +534,29 @@
         If e.KeyCode = Keys.Enter Then
             BSave.Focus()
         End If
+    End Sub
+
+    Private Sub BCancelPropose_Click(sender As Object, e As EventArgs) Handles BCancelPropose.Click
+        Dim confirm As DialogResult
+        confirm = DevExpress.XtraEditors.XtraMessageBox.Show("Do you want to cancel this proposal ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+
+        If confirm = Windows.Forms.DialogResult.Yes Then
+            'update schedule
+            Dim query As String = "UPDATE tb_emp_schedule emp
+            INNER JOIN tb_emp_leave_det ld ON emp.id_schedule=ld.id_schedule
+            SET emp.id_leave_type=NULL,emp.info_leave=NULL
+            WHERE ld.id_emp_leave='" & id_emp_leave & "'"
+            execute_non_query(query, True, "", "", "", "")
+            query = String.Format("UPDATE tb_report_mark SET report_mark_lead_time=NULL,report_mark_start_datetime=NULL WHERE report_mark_type='{0}' AND id_report='{1}' AND id_report_status>'1'", report_mark_type, id_emp_leave, "5")
+            execute_non_query(query, True, "", "", "", "")
+            'set cancel
+            FormReportMark.report_mark_type = report_mark_type
+            FormReportMark.id_report = id_emp_leave
+            FormReportMark.change_status("5")
+            '
+            infoCustom("Cuti dibatalkan")
+            load_form()
+        End If
+
     End Sub
 End Class

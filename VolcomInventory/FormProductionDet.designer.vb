@@ -168,6 +168,9 @@ Partial Class FormProductionDet
         Me.BDeleteMRS = New DevExpress.XtraEditors.SimpleButton()
         Me.BEditMRS = New DevExpress.XtraEditors.SimpleButton()
         Me.BAddMRS = New DevExpress.XtraEditors.SimpleButton()
+        Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
+        Me.MEBOMNote = New DevExpress.XtraEditors.MemoEdit()
+        Me.LabelControl16 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.EPProdOrder, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XTCPageProduction, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -228,6 +231,9 @@ Partial Class FormProductionDet
         CType(Me.RepositoryItemProgressBar1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
+        CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl3.SuspendLayout()
+        CType(Me.MEBOMNote.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'EPProdOrder
@@ -495,6 +501,7 @@ Partial Class FormProductionDet
         'XTPBOM
         '
         Me.XTPBOM.Controls.Add(Me.GCBOM)
+        Me.XTPBOM.Controls.Add(Me.PanelControl3)
         Me.XTPBOM.Name = "XTPBOM"
         Me.XTPBOM.Size = New System.Drawing.Size(943, 253)
         Me.XTPBOM.Text = "Bill Of Material"
@@ -505,7 +512,7 @@ Partial Class FormProductionDet
         Me.GCBOM.Location = New System.Drawing.Point(0, 0)
         Me.GCBOM.MainView = Me.GVBOM
         Me.GCBOM.Name = "GCBOM"
-        Me.GCBOM.Size = New System.Drawing.Size(943, 253)
+        Me.GCBOM.Size = New System.Drawing.Size(943, 195)
         Me.GCBOM.TabIndex = 3
         Me.GCBOM.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVBOM})
         '
@@ -1727,6 +1734,32 @@ Partial Class FormProductionDet
         Me.BAddMRS.TabIndex = 21
         Me.BAddMRS.Text = "Add"
         '
+        'PanelControl3
+        '
+        Me.PanelControl3.Controls.Add(Me.LabelControl16)
+        Me.PanelControl3.Controls.Add(Me.MEBOMNote)
+        Me.PanelControl3.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.PanelControl3.Location = New System.Drawing.Point(0, 195)
+        Me.PanelControl3.Name = "PanelControl3"
+        Me.PanelControl3.Size = New System.Drawing.Size(943, 58)
+        Me.PanelControl3.TabIndex = 4
+        '
+        'MEBOMNote
+        '
+        Me.MEBOMNote.Location = New System.Drawing.Point(81, 10)
+        Me.MEBOMNote.MenuManager = Me.BMDD
+        Me.MEBOMNote.Name = "MEBOMNote"
+        Me.MEBOMNote.Size = New System.Drawing.Size(849, 38)
+        Me.MEBOMNote.TabIndex = 0
+        '
+        'LabelControl16
+        '
+        Me.LabelControl16.Location = New System.Drawing.Point(14, 12)
+        Me.LabelControl16.Name = "LabelControl16"
+        Me.LabelControl16.Size = New System.Drawing.Size(58, 13)
+        Me.LabelControl16.TabIndex = 139
+        Me.LabelControl16.Text = "BOM Note : "
+        '
         'FormProductionDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1806,6 +1839,10 @@ Partial Class FormProductionDet
         CType(Me.RepositoryItemProgressBar1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
+        CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl3.ResumeLayout(False)
+        Me.PanelControl3.PerformLayout()
+        CType(Me.MEBOMNote.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1957,4 +1994,7 @@ Partial Class FormProductionDet
     Friend WithEvents LabelControl15 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents TETolerance As DevExpress.XtraEditors.SpinEdit
     Friend WithEvents LabelControl14 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents PanelControl3 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents LabelControl16 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents MEBOMNote As DevExpress.XtraEditors.MemoEdit
 End Class

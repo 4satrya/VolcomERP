@@ -13,6 +13,8 @@
     Public id_wh_rack As String = "-1"
     Public id_wh_locator As String = "-1"
 
+    Public is_print As String = "-1"
+
     Private Sub FormViewSalesReturnOrder_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         viewReportStatus()
         actionLoad()
@@ -58,13 +60,13 @@
             GridColumnRemark.Visible = False
             GridColumnAmount.Visible = False
             GridColumnPrice.Visible = False
-            GridColumnSOH.Visible = True
-            GridColumnQty.Visible = False
+            GridColumnSOH.Visible = False
+            GridColumnQty.Visible = True
             GridColumnNo.VisibleIndex = 0
             GridColumnCode.VisibleIndex = 1
             GridColumnName.VisibleIndex = 2
             GridColumnSize.VisibleIndex = 3
-            GridColumnSOH.VisibleIndex = 4
+            GridColumnQty.VisibleIndex = 4
             GridColumnQtyReturn.VisibleIndex = 5
         End If
 
@@ -72,8 +74,46 @@
         viewDetail()
         check_but()
         allow_status()
+
+        If is_print = "1" Then
+            printOrder()
+            Close()
+        End If
     End Sub
 
+    Sub printOrder()
+        Cursor = Cursors.WaitCursor
+        ReportSalesReturnOrder.id_sales_return_order = id_sales_return_order
+        ReportSalesReturnOrder.dt = GCItemList.DataSource
+        ReportSalesReturnOrder.is_hidden_app_list = "1"
+        Dim Report As New ReportSalesReturnOrder()
+
+        ' '... 
+        ' ' creating and saving the view's layout to a new memory stream 
+        Dim str As System.IO.Stream
+        str = New System.IO.MemoryStream()
+        GVItemList.SaveLayoutToStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+        str.Seek(0, System.IO.SeekOrigin.Begin)
+        Report.GridView1.RestoreLayoutFromStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+        str.Seek(0, System.IO.SeekOrigin.Begin)
+
+        'Grid Detail
+        ReportStyleGridview(Report.GridView1)
+
+        'Parse val
+        Report.LRecNumber.Text = TxtSalesOrderNumber.Text
+        Report.LRecDate.Text = DEForm.Text
+        Report.LabelTo.Text = TxtCodeCompTo.Text + " - " + TxtNameCompTo.Text
+        Report.LabelAddress.Text = MEAdrressCompTo.Text
+        Report.LabelEstReturn.Text = DERetDueDate.Text
+        Report.LabelNote.Text = MENote.Text
+
+
+        'Show the report's preview. 
+        Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
+        Tool.ShowPreviewDialog()
+        Cursor = Cursors.Default
+    End Sub
 
     Sub viewReportStatus()
         Dim query As String = "SELECT * FROM tb_lookup_report_status a ORDER BY a.id_report_status "
@@ -85,25 +125,26 @@
         If is_detail_soh <> "-1" Then
             Dim query As String = "CALL view_sales_return_order_limit('" + id_sales_return_order + "',0,0)"
             Dim data As DataTable = execute_query(query, "-1", True, "", "", "", "")
-            Dim dt As DataTable = execute_query("CALL view_stock_fg('" + id_comp + "', '" + id_wh_locator + "', '" + id_wh_rack + "', '" + id_wh_drawer + "', '0', '4', '9999-01-01')", -1, True, "", "", "", "")
-            Dim tb1 = data.AsEnumerable()
-            Dim tb2 = dt.AsEnumerable()
-            Dim query_new = From table1 In tb1
-                            Group Join table_tmp In tb2 On table1("code") Equals table_tmp("code")
-                            Into Group
-                            From y1 In Group.DefaultIfEmpty()
-                            Select New With
-                            {
-                            .code = table1.Field(Of String)("code"),
-                            .name = table1.Field(Of String)("name"),
-                            .size = table1.Field(Of String)("size"),
-                            .sales_return_order_det_qty = CType(table1("sales_return_order_det_qty"), Decimal),
-                            .sales_return_det_qty_view = CType(table1("sales_return_det_qty_view"), Decimal),
-                            .soh = If(y1 Is Nothing, 0.0, y1("qty_all_product")),
-                            .design_price = CType(table1("design_price"), Decimal),
-                            .amount = CType(table1("amount"), Decimal)
-                            }
-            GCItemList.DataSource = query_new.ToList
+            GCItemList.DataSource = data
+            'Dim dt As DataTable = execute_query("CALL view_stock_fg('" + id_comp + "', '" + id_wh_locator + "', '" + id_wh_rack + "', '" + id_wh_drawer + "', '0', '4', '9999-01-01')", -1, True, "", "", "", "")
+            'Dim tb1 = data.AsEnumerable()
+            'Dim tb2 = dt.AsEnumerable()
+            'Dim query_new = From table1 In tb1
+            '                Group Join table_tmp In tb2 On table1("code") Equals table_tmp("code")
+            '                Into Group
+            '                From y1 In Group.DefaultIfEmpty()
+            '                Select New With
+            '                {
+            '                .code = table1.Field(Of String)("code"),
+            '                .name = table1.Field(Of String)("name"),
+            '                .size = table1.Field(Of String)("size"),
+            '                .sales_return_order_det_qty = CType(table1("sales_return_order_det_qty"), Decimal),
+            '                .sales_return_det_qty_view = CType(table1("sales_return_det_qty_view"), Decimal),
+            '                .soh = If(y1 Is Nothing, 0.0, y1("qty_all_product")),
+            '                .design_price = CType(table1("design_price"), Decimal),
+            '                .amount = CType(table1("amount"), Decimal)
+            '                }
+            'GCItemList.DataSource = query_new.ToList
         Else
             Dim query As String = "CALL view_sales_return_order('" + id_sales_return_order + "')"
             Dim data As DataTable = execute_query(query, "-1", True, "", "", "", "")

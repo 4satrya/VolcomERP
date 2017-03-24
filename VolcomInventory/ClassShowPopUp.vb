@@ -206,7 +206,7 @@
             'SALES POS
             FormViewSalesPOS.id_sales_pos = id_report
             FormViewSalesPOS.ShowDialog()
-        ElseIf report_mark_type = "49" Then
+        ElseIf report_mark_type = "49" Or report_mark_type="106" Then
             'SALES RETURN QC
             FormViewSalesReturnQC.id_sales_return_qc = id_report
             FormViewSalesReturnQC.ShowDialog()
@@ -714,7 +714,7 @@
             field_id = "id_sales_pos"
             field_number = "sales_pos_number"
             field_date = "sales_pos_date"
-        ElseIf report_mark_type = "49" Then
+        ElseIf report_mark_type = "49" Or report_mark_type = "106" Then
             'SALES RETURN QC
             table_name = "tb_sales_return_qc"
             field_id = "id_sales_return_qc"
@@ -1032,6 +1032,31 @@
                     info_design_code = datax.Rows(0)("design_code").ToString
                     info_design = datax.Rows(0)("design_display_name").ToString
                 End If
+            ElseIf report_mark_type = "28" Then
+                'receiving QC
+                query = "SELECT a.id_report_status,h.report_status, g.id_season,g.season,a.id_prod_order_rec,a.prod_order_rec_number, "
+                query += "(a.delivery_order_date) AS delivery_order_date,a.delivery_order_number,b.prod_order_number, "
+                query += "(a.prod_order_rec_date) AS prod_order_rec_date, CONCAT(f.comp_number,' - ',f.comp_name) AS comp_from, CONCAT(d.comp_number,' - ',d.comp_name) AS comp_to, dsg.design_code,dsg.design_display_name, po_type.po_type "
+                query += "FROM tb_prod_order_rec a  "
+                query += "INNER JOIN tb_prod_order b ON a.id_prod_order=b.id_prod_order "
+                query += "INNER JOIN tb_m_comp_contact c ON c.id_comp_contact = a.id_comp_contact_to "
+                query += "INNER JOIN tb_m_comp d ON d.id_comp = c.id_comp "
+                query += "INNER JOIN tb_m_comp_contact e ON e.id_comp_contact = a.id_comp_contact_from  "
+                query += "INNER JOIN tb_m_comp f ON f.id_comp = e.id_comp "
+                query += "INNER JOIN tb_season_delivery i ON b.id_delivery = i.id_delivery "
+                query += "INNER JOIN tb_season g ON g.id_season = i.id_season "
+                query += "INNER JOIN tb_lookup_report_status h ON h.id_report_status = a.id_report_status "
+                query += "INNER JOIN tb_prod_demand_design pd_dsg ON pd_dsg.id_prod_demand_design = b.id_prod_demand_design "
+                query += "INNER JOIN tb_m_design dsg ON dsg.id_design = pd_dsg.id_design "
+                query += "INNER JOIN tb_lookup_po_type po_type ON po_type.id_po_type = b.id_po_type "
+                query += "WHERE a.id_prod_order_rec=" + id_report + " "
+                Dim datax As DataTable = execute_query(query, -1, True, "", "", "", "")
+                If datax.Rows.Count > 0 Then
+                    info_col = datax.Rows(0)("po_type").ToString
+                    info_report = datax.Rows(0)("prod_order_number").ToString
+                    info_design_code = datax.Rows(0)("design_code").ToString
+                    info_design = datax.Rows(0)("design_display_name").ToString
+                End If
             ElseIf report_mark_type = "30" Then
                 'PL MRS production
                 query = "SELECT desg.design_code,desg.design_display_name,po.prod_order_number FROM tb_pl_mrs plm
@@ -1047,44 +1072,158 @@
                     info_design_code = datax.Rows(0)("design_code").ToString
                     info_design = datax.Rows(0)("design_display_name").ToString
                 End If
+            ElseIf report_mark_type = "31" Then
+                'return out production
+                query = "SELECT a.id_prod_order_ret_out,a.prod_order_ret_out_number, "
+                query += "b.prod_order_number, "
+                query += "dsg.design_code,dsg.design_display_name, po_type.po_type "
+                query += "FROM tb_prod_order_ret_out a  "
+                query += "INNER JOIN tb_prod_order b ON a.id_prod_order=b.id_prod_order "
+                query += "INNER JOIN tb_prod_demand_design pd_dsg ON pd_dsg.id_prod_demand_design = b.id_prod_demand_design "
+                query += "INNER JOIN tb_m_design dsg ON dsg.id_design = pd_dsg.id_design "
+                query += "INNER JOIN tb_lookup_po_type po_type ON po_type.id_po_type = b.id_po_type "
+                query += "WHERE a.id_prod_order_ret_out=" + id_report + " "
+                Dim datax As DataTable = execute_query(query, -1, True, "", "", "", "")
+                If datax.Rows.Count > 0 Then
+                    info_col = datax.Rows(0)("po_type").ToString
+                    info_report = datax.Rows(0)("prod_order_number").ToString
+                    info_design_code = datax.Rows(0)("design_code").ToString
+                    info_design = datax.Rows(0)("design_display_name").ToString
+                End If
+            ElseIf report_mark_type = "32" Then
+                'return in production
+                query = "SELECT a.id_prod_order_ret_in,a.prod_order_ret_in_number, "
+                query += "b.prod_order_number, "
+                query += "dsg.design_code,dsg.design_display_name, po_type.po_type "
+                query += "FROM tb_prod_order_ret_in a  "
+                query += "INNER JOIN tb_prod_order b ON a.id_prod_order=b.id_prod_order "
+                query += "INNER JOIN tb_prod_demand_design pd_dsg ON pd_dsg.id_prod_demand_design = b.id_prod_demand_design "
+                query += "INNER JOIN tb_m_design dsg ON dsg.id_design = pd_dsg.id_design "
+                query += "INNER JOIN tb_lookup_po_type po_type ON po_type.id_po_type = b.id_po_type "
+                query += "WHERE a.id_prod_order_ret_in=" + id_report + " "
+                Dim datax As DataTable = execute_query(query, -1, True, "", "", "", "")
+                If datax.Rows.Count > 0 Then
+                    info_col = datax.Rows(0)("po_type").ToString
+                    info_report = datax.Rows(0)("prod_order_number").ToString
+                    info_design_code = datax.Rows(0)("design_code").ToString
+                    info_design = datax.Rows(0)("design_display_name").ToString
+                End If
+            ElseIf report_mark_type = "33" Then
+                'pl to wh
+                query = "SELECT a.id_pl_prod_order,a.pl_prod_order_number, "
+                query += "b.prod_order_number, "
+                query += "dsg.design_code,dsg.design_display_name, po_type.po_type "
+                query += "FROM tb_pl_prod_order a  "
+                query += "INNER JOIN tb_prod_order b ON a.id_prod_order=b.id_prod_order "
+                query += "INNER JOIN tb_prod_demand_design pd_dsg ON pd_dsg.id_prod_demand_design = b.id_prod_demand_design "
+                query += "INNER JOIN tb_m_design dsg ON dsg.id_design = pd_dsg.id_design "
+                query += "INNER JOIN tb_lookup_po_type po_type ON po_type.id_po_type = b.id_po_type "
+                query += "WHERE a.id_pl_prod_order=" + id_report + " "
+                Dim datax As DataTable = execute_query(query, -1, True, "", "", "", "")
+                If datax.Rows.Count > 0 Then
+                    info_col = datax.Rows(0)("po_type").ToString
+                    info_report = datax.Rows(0)("prod_order_number").ToString
+                    info_design_code = datax.Rows(0)("design_code").ToString
+                    info_design = datax.Rows(0)("design_display_name").ToString
+                End If
             ElseIf report_mark_type = "37" Then
                 'rec wh
-                query = "SELECT CONCAT(c.comp_number,' - ', c.comp_name) AS `info` 
+                query = "SELECT CONCAT(c.comp_number,' - ', c.comp_name) AS `vendor`,
+                d.design_code AS `code`, d.design_display_name AS `name`, 
+                CAST(IFNULL(SUM(recd.pl_prod_order_rec_det_qty),0) AS DECIMAL(10,0)) AS `total_qty` 
                 FROM tb_pl_prod_order_rec rec
+                LEFT JOIN tb_pl_prod_order_rec_det recd ON recd.id_pl_prod_order_rec = rec.id_pl_prod_order_rec
                 INNER JOIN tb_pl_prod_order pl ON pl.id_pl_prod_order = rec.id_pl_prod_order
                 INNER JOIN tb_prod_order po ON po.id_prod_order = pl.id_prod_order
                 LEFT JOIN tb_prod_order_wo wo ON wo.id_prod_order = po.id_prod_order AND wo.is_main_vendor=1
                 LEFT JOIN tb_m_ovh_price op ON op.id_ovh_price = wo.id_ovh_price
                 LEFT JOIN tb_m_comp_contact cc ON cc.id_comp_contact = op.id_comp_contact
                 LEFT JOIN tb_m_comp c ON c.id_comp = cc.id_comp 
-                WHERE rec.id_pl_prod_order_rec=" + id_report + " "
-                info_col = execute_query(query, 0, True, "", "", "", "")
+                INNER JOIN tb_prod_demand_design pdd ON pdd.id_prod_demand_design = po.id_prod_demand_design
+                INNER JOIN tb_m_design d ON d.id_design = pdd.id_design
+                WHERE rec.id_pl_prod_order_rec=" + id_report + "
+                GROUP BY rec.id_pl_prod_order_rec "
+                Dim datax As DataTable = execute_query(query, -1, True, "", "", "", "")
+                If datax.Rows.Count > 0 Then
+                    info_col = datax.Rows(0)("total_qty").ToString
+                    info_report = datax.Rows(0)("vendor").ToString
+                    info_design_code = datax.Rows(0)("code").ToString
+                    info_design = datax.Rows(0)("name").ToString
+                End If
             ElseIf report_mark_type = "43" Then
                 'pre delivery
-                query = "SELECT CONCAT(c.comp_number,' - ', c.comp_name) AS `info` 
+                query = "SELECT CONCAT(c.comp_number,' - ', c.comp_name) AS `store`, 
+                CAST(IFNULL(SUM(delt.pl_sales_order_del_det_qty),0) AS DECIMAL(10,0)) AS `total_qty`
                 FROM tb_pl_sales_order_del del
+                LEFT JOIN tb_pl_sales_order_del_det delt ON delt.id_pl_sales_order_del = del.id_pl_sales_order_del
                 INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = del.id_store_contact_to
                 INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp 
-                WHERE del.id_pl_sales_order_del=" + id_report + " "
-                info_col = execute_query(query, 0, True, "", "", "", "")
+                WHERE del.id_pl_sales_order_del=" + id_report + "
+                GROUP BY del.id_pl_sales_order_del "
+                Dim datax As DataTable = execute_query(query, -1, True, "", "", "", "")
+                If datax.Rows.Count > 0 Then
+                    info_col = datax.Rows(0)("total_qty").ToString
+                    info_report = datax.Rows(0)("store").ToString
+                End If
             ElseIf report_mark_type = "46" Then
                 'return
-                query = "SELECT CONCAT(c.comp_number,' - ', c.comp_name) AS `info` FROM tb_sales_return r
+                query = "SELECT CONCAT(c.comp_number,' - ', c.comp_name) AS `store`,
+                CAST(IFNULL(SUM(rd.sales_return_det_qty),0) AS DECIMAL(10,0)) AS `total_qty`
+                FROM tb_sales_return r
+                LEFT JOIN tb_sales_return_det rd ON rd.id_sales_return = r.id_sales_return
                 INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = r.id_store_contact_from
-                INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp WHERE r.id_sales_return=" + id_report + " "
-                info_col = execute_query(query, 0, True, "", "", "", "")
-            ElseIf report_mark_type = "49" Then
+                INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp 
+                WHERE r.id_sales_return=" + id_report + " 
+                GROUP BY r.id_sales_return "
+                Dim datax As DataTable = execute_query(query, -1, True, "", "", "", "")
+                If datax.Rows.Count > 0 Then
+                    info_col = datax.Rows(0)("total_qty").ToString
+                    info_report = datax.Rows(0)("store").ToString
+                End If
+            ElseIf report_mark_type = "49" Or report_mark_type = "106" Then
                 'return transfer
-                query = "SELECT r.sales_return_number AS `info_report`, CONCAT(c.comp_number,' - ', c.comp_name) AS `info_col` 
+                query = "SELECT r.sales_return_number AS `return`, 
+                CONCAT(c.comp_number,' - ', c.comp_name) AS `store`,
+                CAST(IFNULL(SUM(rtd.sales_return_qc_det_qty),0) AS DECIMAL(10,0)) AS `total_qty`
                 FROM tb_sales_return_qc rt
+                LEFT JOIN tb_sales_return_qc_det rtd ON rtd.id_sales_return_qc = rt.id_sales_return_qc
                 INNER JOIN tb_sales_return r ON r.id_sales_return = rt.id_sales_return
                 INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = rt.id_store_contact_from
                 INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp 
-                WHERE rt.id_sales_return_qc=" + id_report + " "
+                WHERE rt.id_sales_return_qc=" + id_report + "
+                GROUP BY rt.id_sales_return_qc "
                 Dim datax As DataTable = execute_query(query, -1, True, "", "", "", "")
                 If datax.Rows.Count > 0 Then
-                    info_col = datax.Rows(0)("info_col").ToString
-                    info_report = datax.Rows(0)("info_report").ToString
+                    info_col = datax.Rows(0)("total_qty").ToString
+                    info_report = datax.Rows(0)("store").ToString
+                    info_design = datax.Rows(0)("return").ToString
+                End If
+            ElseIf report_mark_type = "57" Then
+                'transfer
+                query = "SELECT 
+                CONCAT(c.comp_number,' - ', c.comp_name) AS `to`,
+                CAST(IFNULL(SUM(td.fg_trf_det_qty),0) AS DECIMAL(10,0)) AS `total_qty`
+                FROM tb_fg_trf t
+                LEFT JOIN tb_fg_trf_det td ON td.id_fg_trf = t.id_fg_trf
+                INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = t.id_comp_contact_to
+                INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp 
+                WHERE t.id_fg_trf=" + id_report + "
+                GROUP BY t.id_fg_trf "
+                Dim datax As DataTable = execute_query(query, -1, True, "", "", "", "")
+                If datax.Rows.Count > 0 Then
+                    info_col = datax.Rows(0)("total_qty").ToString
+                    info_report = datax.Rows(0)("to").ToString
+                End If
+            ElseIf report_mark_type = "105" Then
+                'final clearance
+                Dim fcl As New ClassProductionFinalClear()
+                query = fcl.queryMain("AND f.id_prod_fc=" + id_report + " ", "1")
+                Dim datax As DataTable = execute_query(query, -1, True, "", "", "", "")
+                If datax.Rows.Count > 0 Then
+                    info_col = datax.Rows(0)("pl_category").ToString
+                    info_report = datax.Rows(0)("prod_order_number").ToString
+                    info_design_code = datax.Rows(0)("code").ToString
+                    info_design = datax.Rows(0)("name").ToString
                 End If
             End If
         End If

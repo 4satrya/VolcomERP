@@ -102,10 +102,10 @@ Partial Public Class ReportEmpLeave
         '
         'LFormDC
         '
-        Me.LFormDC.LocationFloat = New DevExpress.Utils.PointFloat(130.2996!, 125.5!)
+        Me.LFormDC.LocationFloat = New DevExpress.Utils.PointFloat(155.2993!, 125.5!)
         Me.LFormDC.Name = "LFormDC"
         Me.LFormDC.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LFormDC.SizeF = New System.Drawing.SizeF(480.7005!, 25.00003!)
+        Me.LFormDC.SizeF = New System.Drawing.SizeF(455.7008!, 25.00003!)
         Me.LFormDC.StylePriority.UseTextAlignment = False
         Me.LFormDC.Text = "-"
         Me.LFormDC.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
@@ -113,7 +113,7 @@ Partial Public Class ReportEmpLeave
         'XrLabel11
         '
         Me.XrLabel11.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel11.LocationFloat = New DevExpress.Utils.PointFloat(117.0187!, 125.5!)
+        Me.XrLabel11.LocationFloat = New DevExpress.Utils.PointFloat(142.0179!, 125.5!)
         Me.XrLabel11.Name = "XrLabel11"
         Me.XrLabel11.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel11.SizeF = New System.Drawing.SizeF(13.28127!, 25.0!)
@@ -125,10 +125,10 @@ Partial Public Class ReportEmpLeave
         'XrLabel12
         '
         Me.XrLabel12.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel12.LocationFloat = New DevExpress.Utils.PointFloat(10.0835!, 125.5001!)
+        Me.XrLabel12.LocationFloat = New DevExpress.Utils.PointFloat(10.08352!, 125.5001!)
         Me.XrLabel12.Name = "XrLabel12"
         Me.XrLabel12.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel12.SizeF = New System.Drawing.SizeF(106.9352!, 24.99999!)
+        Me.XrLabel12.SizeF = New System.Drawing.SizeF(131.9346!, 25.0!)
         Me.XrLabel12.StylePriority.UseFont = False
         Me.XrLabel12.StylePriority.UseTextAlignment = False
         Me.XrLabel12.Text = "Form / DC"
@@ -138,10 +138,10 @@ Partial Public Class ReportEmpLeave
         '
         Me.LReplacedBy.Borders = DevExpress.XtraPrinting.BorderSide.None
         Me.LReplacedBy.Font = New System.Drawing.Font("Times New Roman", 9.0!)
-        Me.LReplacedBy.LocationFloat = New DevExpress.Utils.PointFloat(130.2999!, 150.5001!)
+        Me.LReplacedBy.LocationFloat = New DevExpress.Utils.PointFloat(155.2996!, 150.5001!)
         Me.LReplacedBy.Name = "LReplacedBy"
         Me.LReplacedBy.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LReplacedBy.SizeF = New System.Drawing.SizeF(239.2094!, 25.00002!)
+        Me.LReplacedBy.SizeF = New System.Drawing.SizeF(214.2097!, 25.00002!)
         Me.LReplacedBy.StylePriority.UseBorders = False
         Me.LReplacedBy.StylePriority.UseFont = False
         Me.LReplacedBy.StylePriority.UseTextAlignment = False
@@ -189,7 +189,7 @@ Partial Public Class ReportEmpLeave
         'XrLabel51
         '
         Me.XrLabel51.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel51.LocationFloat = New DevExpress.Utils.PointFloat(117.0186!, 150.5001!)
+        Me.XrLabel51.LocationFloat = New DevExpress.Utils.PointFloat(142.0181!, 150.5001!)
         Me.XrLabel51.Name = "XrLabel51"
         Me.XrLabel51.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel51.SizeF = New System.Drawing.SizeF(13.28127!, 25.0!)
@@ -201,21 +201,21 @@ Partial Public Class ReportEmpLeave
         'XrLabel52
         '
         Me.XrLabel52.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel52.LocationFloat = New DevExpress.Utils.PointFloat(10.0834!, 150.5001!)
+        Me.XrLabel52.LocationFloat = New DevExpress.Utils.PointFloat(10.08339!, 150.5001!)
         Me.XrLabel52.Name = "XrLabel52"
         Me.XrLabel52.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel52.SizeF = New System.Drawing.SizeF(106.9352!, 25.0!)
+        Me.XrLabel52.SizeF = New System.Drawing.SizeF(131.9346!, 25.0!)
         Me.XrLabel52.StylePriority.UseFont = False
         Me.XrLabel52.StylePriority.UseTextAlignment = False
-        Me.XrLabel52.Text = "Replaced By"
+        Me.XrLabel52.Text = "Digantikan Oleh"
         Me.XrLabel52.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         '
         'LLeavePurpose
         '
-        Me.LLeavePurpose.LocationFloat = New DevExpress.Utils.PointFloat(130.2998!, 63.00001!)
+        Me.LLeavePurpose.LocationFloat = New DevExpress.Utils.PointFloat(155.2995!, 63.00001!)
         Me.LLeavePurpose.Name = "LLeavePurpose"
         Me.LLeavePurpose.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LLeavePurpose.SizeF = New System.Drawing.SizeF(480.7004!, 62.50003!)
+        Me.LLeavePurpose.SizeF = New System.Drawing.SizeF(455.7007!, 62.50003!)
         Me.LLeavePurpose.StylePriority.UseTextAlignment = False
         Me.LLeavePurpose.Text = "-"
         Me.LLeavePurpose.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
@@ -223,7 +223,7 @@ Partial Public Class ReportEmpLeave
         'XrLabel45
         '
         Me.XrLabel45.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel45.LocationFloat = New DevExpress.Utils.PointFloat(117.0184!, 62.99992!)
+        Me.XrLabel45.LocationFloat = New DevExpress.Utils.PointFloat(142.0179!, 62.99992!)
         Me.XrLabel45.Name = "XrLabel45"
         Me.XrLabel45.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel45.SizeF = New System.Drawing.SizeF(13.28128!, 62.50013!)
@@ -238,10 +238,10 @@ Partial Public Class ReportEmpLeave
         Me.XrLabel46.LocationFloat = New DevExpress.Utils.PointFloat(10.08326!, 62.99995!)
         Me.XrLabel46.Name = "XrLabel46"
         Me.XrLabel46.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel46.SizeF = New System.Drawing.SizeF(106.9352!, 62.5001!)
+        Me.XrLabel46.SizeF = New System.Drawing.SizeF(131.9346!, 62.5001!)
         Me.XrLabel46.StylePriority.UseFont = False
         Me.XrLabel46.StylePriority.UseTextAlignment = False
-        Me.XrLabel46.Text = "Leave Purpose"
+        Me.XrLabel46.Text = "Keperluan"
         Me.XrLabel46.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         '
         'XrLabel44
@@ -295,31 +295,31 @@ Partial Public Class ReportEmpLeave
         'XrLabel29
         '
         Me.XrLabel29.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel29.LocationFloat = New DevExpress.Utils.PointFloat(10.08337!, 13.0!)
+        Me.XrLabel29.LocationFloat = New DevExpress.Utils.PointFloat(10.08339!, 13.00001!)
         Me.XrLabel29.Name = "XrLabel29"
         Me.XrLabel29.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel29.SizeF = New System.Drawing.SizeF(106.9352!, 25.0!)
+        Me.XrLabel29.SizeF = New System.Drawing.SizeF(131.9346!, 25.0!)
         Me.XrLabel29.StylePriority.UseFont = False
         Me.XrLabel29.StylePriority.UseTextAlignment = False
-        Me.XrLabel29.Text = "Leave Type"
+        Me.XrLabel29.Text = "Tipe Cuti"
         Me.XrLabel29.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         '
         'XrLabel30
         '
         Me.XrLabel30.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel30.LocationFloat = New DevExpress.Utils.PointFloat(10.08337!, 37.99997!)
+        Me.XrLabel30.LocationFloat = New DevExpress.Utils.PointFloat(10.08339!, 37.99998!)
         Me.XrLabel30.Name = "XrLabel30"
         Me.XrLabel30.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel30.SizeF = New System.Drawing.SizeF(106.9352!, 24.99999!)
+        Me.XrLabel30.SizeF = New System.Drawing.SizeF(131.9346!, 25.0!)
         Me.XrLabel30.StylePriority.UseFont = False
         Me.XrLabel30.StylePriority.UseTextAlignment = False
-        Me.XrLabel30.Text = "Leave Periode"
+        Me.XrLabel30.Text = "Periode Cuti"
         Me.XrLabel30.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         '
         'XrLabel31
         '
         Me.XrLabel31.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel31.LocationFloat = New DevExpress.Utils.PointFloat(117.0186!, 13.0!)
+        Me.XrLabel31.LocationFloat = New DevExpress.Utils.PointFloat(142.0181!, 13.0!)
         Me.XrLabel31.Name = "XrLabel31"
         Me.XrLabel31.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel31.SizeF = New System.Drawing.SizeF(13.28127!, 25.0!)
@@ -331,7 +331,7 @@ Partial Public Class ReportEmpLeave
         'XrLabel32
         '
         Me.XrLabel32.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel32.LocationFloat = New DevExpress.Utils.PointFloat(117.0186!, 37.99994!)
+        Me.XrLabel32.LocationFloat = New DevExpress.Utils.PointFloat(142.0181!, 37.99994!)
         Me.XrLabel32.Name = "XrLabel32"
         Me.XrLabel32.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel32.SizeF = New System.Drawing.SizeF(13.28127!, 25.0!)
@@ -342,20 +342,20 @@ Partial Public Class ReportEmpLeave
         '
         'LLeavePeriode
         '
-        Me.LLeavePeriode.LocationFloat = New DevExpress.Utils.PointFloat(130.2997!, 37.99995!)
+        Me.LLeavePeriode.LocationFloat = New DevExpress.Utils.PointFloat(155.2994!, 37.99995!)
         Me.LLeavePeriode.Name = "LLeavePeriode"
         Me.LLeavePeriode.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LLeavePeriode.SizeF = New System.Drawing.SizeF(480.7005!, 25.00003!)
+        Me.LLeavePeriode.SizeF = New System.Drawing.SizeF(455.7008!, 25.00003!)
         Me.LLeavePeriode.StylePriority.UseTextAlignment = False
         Me.LLeavePeriode.Text = "-"
         Me.LLeavePeriode.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         '
         'LLeaveType
         '
-        Me.LLeaveType.LocationFloat = New DevExpress.Utils.PointFloat(130.2997!, 13.00001!)
+        Me.LLeaveType.LocationFloat = New DevExpress.Utils.PointFloat(155.2994!, 13.00001!)
         Me.LLeaveType.Name = "LLeaveType"
         Me.LLeaveType.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LLeaveType.SizeF = New System.Drawing.SizeF(480.7005!, 25.00001!)
+        Me.LLeaveType.SizeF = New System.Drawing.SizeF(455.7008!, 25.00001!)
         Me.LLeaveType.StylePriority.UseTextAlignment = False
         Me.LLeaveType.Text = "-"
         Me.LLeaveType.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
@@ -386,7 +386,7 @@ Partial Public Class ReportEmpLeave
         Me.XrLabel1.SizeF = New System.Drawing.SizeF(447.4785!, 100.0!)
         Me.XrLabel1.StylePriority.UseFont = False
         Me.XrLabel1.StylePriority.UseTextAlignment = False
-        Me.XrLabel1.Text = "LEAVE REQUEST FORM"
+        Me.XrLabel1.Text = "FORM PENGAJUAN CUTI"
         Me.XrLabel1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
         '
         'BottomMargin
@@ -399,22 +399,22 @@ Partial Public Class ReportEmpLeave
         'XrLabel2
         '
         Me.XrLabel2.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel2.LocationFloat = New DevExpress.Utils.PointFloat(10.08331!, 37.99997!)
+        Me.XrLabel2.LocationFloat = New DevExpress.Utils.PointFloat(10.08333!, 37.99998!)
         Me.XrLabel2.Name = "XrLabel2"
         Me.XrLabel2.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel2.SizeF = New System.Drawing.SizeF(106.9351!, 25.0!)
+        Me.XrLabel2.SizeF = New System.Drawing.SizeF(131.935!, 25.0!)
         Me.XrLabel2.StylePriority.UseFont = False
         Me.XrLabel2.StylePriority.UseTextAlignment = False
-        Me.XrLabel2.Text = "Requested by"
+        Me.XrLabel2.Text = "Diajukan Oleh"
         Me.XrLabel2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         '
         'XrLabel3
         '
         Me.XrLabel3.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel3.LocationFloat = New DevExpress.Utils.PointFloat(10.08331!, 88.00004!)
+        Me.XrLabel3.LocationFloat = New DevExpress.Utils.PointFloat(10.08333!, 88.00005!)
         Me.XrLabel3.Name = "XrLabel3"
         Me.XrLabel3.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel3.SizeF = New System.Drawing.SizeF(106.9351!, 25.0!)
+        Me.XrLabel3.SizeF = New System.Drawing.SizeF(131.935!, 25.0!)
         Me.XrLabel3.StylePriority.UseFont = False
         Me.XrLabel3.StylePriority.UseTextAlignment = False
         Me.XrLabel3.Text = "Departement"
@@ -423,31 +423,31 @@ Partial Public Class ReportEmpLeave
         'XrLabel4
         '
         Me.XrLabel4.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel4.LocationFloat = New DevExpress.Utils.PointFloat(10.08331!, 63.00006!)
+        Me.XrLabel4.LocationFloat = New DevExpress.Utils.PointFloat(10.08333!, 63.00004!)
         Me.XrLabel4.Name = "XrLabel4"
         Me.XrLabel4.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel4.SizeF = New System.Drawing.SizeF(106.9351!, 25.0!)
+        Me.XrLabel4.SizeF = New System.Drawing.SizeF(131.935!, 25.0!)
         Me.XrLabel4.StylePriority.UseFont = False
         Me.XrLabel4.StylePriority.UseTextAlignment = False
-        Me.XrLabel4.Text = "Position"
+        Me.XrLabel4.Text = "Posisi"
         Me.XrLabel4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         '
         'XrLabel5
         '
         Me.XrLabel5.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel5.LocationFloat = New DevExpress.Utils.PointFloat(10.08331!, 113.0!)
+        Me.XrLabel5.LocationFloat = New DevExpress.Utils.PointFloat(10.08333!, 113.0!)
         Me.XrLabel5.Name = "XrLabel5"
         Me.XrLabel5.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel5.SizeF = New System.Drawing.SizeF(106.9351!, 24.99999!)
+        Me.XrLabel5.SizeF = New System.Drawing.SizeF(131.935!, 24.99997!)
         Me.XrLabel5.StylePriority.UseFont = False
         Me.XrLabel5.StylePriority.UseTextAlignment = False
-        Me.XrLabel5.Text = "Join Date"
+        Me.XrLabel5.Text = "Tanggal Mulai Kerja"
         Me.XrLabel5.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         '
         'XrLabel6
         '
         Me.XrLabel6.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel6.LocationFloat = New DevExpress.Utils.PointFloat(117.0185!, 38.00002!)
+        Me.XrLabel6.LocationFloat = New DevExpress.Utils.PointFloat(142.0183!, 38.00002!)
         Me.XrLabel6.Name = "XrLabel6"
         Me.XrLabel6.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel6.SizeF = New System.Drawing.SizeF(13.28127!, 25.0!)
@@ -459,7 +459,7 @@ Partial Public Class ReportEmpLeave
         'XrLabel7
         '
         Me.XrLabel7.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel7.LocationFloat = New DevExpress.Utils.PointFloat(117.0185!, 63.0!)
+        Me.XrLabel7.LocationFloat = New DevExpress.Utils.PointFloat(142.0183!, 63.0!)
         Me.XrLabel7.Name = "XrLabel7"
         Me.XrLabel7.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel7.SizeF = New System.Drawing.SizeF(13.28127!, 25.0!)
@@ -471,7 +471,7 @@ Partial Public Class ReportEmpLeave
         'XrLabel8
         '
         Me.XrLabel8.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel8.LocationFloat = New DevExpress.Utils.PointFloat(117.0185!, 88.00004!)
+        Me.XrLabel8.LocationFloat = New DevExpress.Utils.PointFloat(142.0183!, 88.00004!)
         Me.XrLabel8.Name = "XrLabel8"
         Me.XrLabel8.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel8.SizeF = New System.Drawing.SizeF(13.28127!, 25.0!)
@@ -483,7 +483,7 @@ Partial Public Class ReportEmpLeave
         'XrLabel9
         '
         Me.XrLabel9.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel9.LocationFloat = New DevExpress.Utils.PointFloat(117.0185!, 112.9999!)
+        Me.XrLabel9.LocationFloat = New DevExpress.Utils.PointFloat(142.0183!, 112.9999!)
         Me.XrLabel9.Name = "XrLabel9"
         Me.XrLabel9.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel9.SizeF = New System.Drawing.SizeF(13.28127!, 25.0!)
@@ -497,10 +497,10 @@ Partial Public Class ReportEmpLeave
         Me.LJoinDate.BorderDashStyle = DevExpress.XtraPrinting.BorderDashStyle.Solid
         Me.LJoinDate.Borders = DevExpress.XtraPrinting.BorderSide.None
         Me.LJoinDate.Font = New System.Drawing.Font("Times New Roman", 9.0!)
-        Me.LJoinDate.LocationFloat = New DevExpress.Utils.PointFloat(130.2996!, 113.0!)
+        Me.LJoinDate.LocationFloat = New DevExpress.Utils.PointFloat(155.2996!, 113.0!)
         Me.LJoinDate.Name = "LJoinDate"
         Me.LJoinDate.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LJoinDate.SizeF = New System.Drawing.SizeF(480.7006!, 25.00003!)
+        Me.LJoinDate.SizeF = New System.Drawing.SizeF(455.7006!, 25.00003!)
         Me.LJoinDate.StylePriority.UseBorderDashStyle = False
         Me.LJoinDate.StylePriority.UseBorders = False
         Me.LJoinDate.StylePriority.UseFont = False
@@ -513,10 +513,10 @@ Partial Public Class ReportEmpLeave
         Me.LDept.BorderDashStyle = DevExpress.XtraPrinting.BorderDashStyle.Solid
         Me.LDept.Borders = DevExpress.XtraPrinting.BorderSide.None
         Me.LDept.Font = New System.Drawing.Font("Times New Roman", 9.0!)
-        Me.LDept.LocationFloat = New DevExpress.Utils.PointFloat(130.2996!, 88.00004!)
+        Me.LDept.LocationFloat = New DevExpress.Utils.PointFloat(155.2996!, 88.00005!)
         Me.LDept.Name = "LDept"
         Me.LDept.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LDept.SizeF = New System.Drawing.SizeF(480.7006!, 25.00001!)
+        Me.LDept.SizeF = New System.Drawing.SizeF(455.7006!, 25.00001!)
         Me.LDept.StylePriority.UseBorderDashStyle = False
         Me.LDept.StylePriority.UseBorders = False
         Me.LDept.StylePriority.UseFont = False
@@ -529,10 +529,10 @@ Partial Public Class ReportEmpLeave
         Me.LPosition.BorderDashStyle = DevExpress.XtraPrinting.BorderDashStyle.Solid
         Me.LPosition.Borders = DevExpress.XtraPrinting.BorderSide.None
         Me.LPosition.Font = New System.Drawing.Font("Times New Roman", 9.0!)
-        Me.LPosition.LocationFloat = New DevExpress.Utils.PointFloat(130.2996!, 62.99999!)
+        Me.LPosition.LocationFloat = New DevExpress.Utils.PointFloat(155.2996!, 62.99998!)
         Me.LPosition.Name = "LPosition"
         Me.LPosition.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LPosition.SizeF = New System.Drawing.SizeF(480.7006!, 25.00001!)
+        Me.LPosition.SizeF = New System.Drawing.SizeF(455.7006!, 25.00001!)
         Me.LPosition.StylePriority.UseBorderDashStyle = False
         Me.LPosition.StylePriority.UseBorders = False
         Me.LPosition.StylePriority.UseFont = False
@@ -545,10 +545,10 @@ Partial Public Class ReportEmpLeave
         Me.LName.BorderDashStyle = DevExpress.XtraPrinting.BorderDashStyle.Solid
         Me.LName.Borders = DevExpress.XtraPrinting.BorderSide.None
         Me.LName.Font = New System.Drawing.Font("Times New Roman", 9.0!)
-        Me.LName.LocationFloat = New DevExpress.Utils.PointFloat(130.2996!, 38.00002!)
+        Me.LName.LocationFloat = New DevExpress.Utils.PointFloat(155.2996!, 38.00001!)
         Me.LName.Name = "LName"
         Me.LName.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LName.SizeF = New System.Drawing.SizeF(240.1261!, 25.00002!)
+        Me.LName.SizeF = New System.Drawing.SizeF(215.1261!, 25.00002!)
         Me.LName.StylePriority.UseBorderDashStyle = False
         Me.LName.StylePriority.UseBorders = False
         Me.LName.StylePriority.UseFont = False
@@ -658,10 +658,10 @@ Partial Public Class ReportEmpLeave
         Me.LNumber.BorderDashStyle = DevExpress.XtraPrinting.BorderDashStyle.Solid
         Me.LNumber.Borders = DevExpress.XtraPrinting.BorderSide.None
         Me.LNumber.Font = New System.Drawing.Font("Times New Roman", 9.0!)
-        Me.LNumber.LocationFloat = New DevExpress.Utils.PointFloat(130.2996!, 13.00001!)
+        Me.LNumber.LocationFloat = New DevExpress.Utils.PointFloat(155.2996!, 13.00001!)
         Me.LNumber.Name = "LNumber"
         Me.LNumber.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LNumber.SizeF = New System.Drawing.SizeF(480.7006!, 25.00002!)
+        Me.LNumber.SizeF = New System.Drawing.SizeF(455.7006!, 25.00002!)
         Me.LNumber.StylePriority.UseBorderDashStyle = False
         Me.LNumber.StylePriority.UseBorders = False
         Me.LNumber.StylePriority.UseFont = False
@@ -672,7 +672,7 @@ Partial Public Class ReportEmpLeave
         'XrLabel18
         '
         Me.XrLabel18.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel18.LocationFloat = New DevExpress.Utils.PointFloat(117.0185!, 13.00001!)
+        Me.XrLabel18.LocationFloat = New DevExpress.Utils.PointFloat(142.0183!, 13.00001!)
         Me.XrLabel18.Name = "XrLabel18"
         Me.XrLabel18.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel18.SizeF = New System.Drawing.SizeF(13.28127!, 25.0!)
@@ -684,13 +684,13 @@ Partial Public Class ReportEmpLeave
         'XrLabel19
         '
         Me.XrLabel19.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel19.LocationFloat = New DevExpress.Utils.PointFloat(10.08337!, 13.00001!)
+        Me.XrLabel19.LocationFloat = New DevExpress.Utils.PointFloat(10.08339!, 13.00001!)
         Me.XrLabel19.Name = "XrLabel19"
         Me.XrLabel19.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel19.SizeF = New System.Drawing.SizeF(106.9351!, 25.0!)
+        Me.XrLabel19.SizeF = New System.Drawing.SizeF(131.935!, 25.0!)
         Me.XrLabel19.StylePriority.UseFont = False
         Me.XrLabel19.StylePriority.UseTextAlignment = False
-        Me.XrLabel19.Text = "Number"
+        Me.XrLabel19.Text = "Nomor"
         Me.XrLabel19.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         '
         'ReportFooter
@@ -788,10 +788,10 @@ Partial Public Class ReportEmpLeave
         '
         'LRemainingAfter
         '
-        Me.LRemainingAfter.LocationFloat = New DevExpress.Utils.PointFloat(130.2996!, 62.99992!)
+        Me.LRemainingAfter.LocationFloat = New DevExpress.Utils.PointFloat(155.2996!, 62.99992!)
         Me.LRemainingAfter.Name = "LRemainingAfter"
         Me.LRemainingAfter.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LRemainingAfter.SizeF = New System.Drawing.SizeF(480.7007!, 25.00003!)
+        Me.LRemainingAfter.SizeF = New System.Drawing.SizeF(455.7007!, 25.00003!)
         Me.LRemainingAfter.StylePriority.UseTextAlignment = False
         Me.LRemainingAfter.Text = "-"
         Me.LRemainingAfter.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
@@ -799,7 +799,7 @@ Partial Public Class ReportEmpLeave
         'XrLabel27
         '
         Me.XrLabel27.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel27.LocationFloat = New DevExpress.Utils.PointFloat(117.0186!, 63.0!)
+        Me.XrLabel27.LocationFloat = New DevExpress.Utils.PointFloat(142.0181!, 63.0!)
         Me.XrLabel27.Name = "XrLabel27"
         Me.XrLabel27.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel27.SizeF = New System.Drawing.SizeF(13.28127!, 25.0!)
@@ -811,31 +811,31 @@ Partial Public Class ReportEmpLeave
         'XrLabel26
         '
         Me.XrLabel26.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel26.LocationFloat = New DevExpress.Utils.PointFloat(10.08332!, 62.99997!)
+        Me.XrLabel26.LocationFloat = New DevExpress.Utils.PointFloat(10.08333!, 62.99998!)
         Me.XrLabel26.Name = "XrLabel26"
         Me.XrLabel26.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel26.SizeF = New System.Drawing.SizeF(106.9352!, 25.0!)
+        Me.XrLabel26.SizeF = New System.Drawing.SizeF(131.9346!, 25.0!)
         Me.XrLabel26.StylePriority.UseFont = False
         Me.XrLabel26.StylePriority.UseTextAlignment = False
-        Me.XrLabel26.Text = "Remaining After"
+        Me.XrLabel26.Text = "Sisa Cuti Setelahnya"
         Me.XrLabel26.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         '
         'LRemainingLeave
         '
-        Me.LRemainingLeave.LocationFloat = New DevExpress.Utils.PointFloat(130.2996!, 13.00001!)
+        Me.LRemainingLeave.LocationFloat = New DevExpress.Utils.PointFloat(155.2996!, 13.00001!)
         Me.LRemainingLeave.Name = "LRemainingLeave"
         Me.LRemainingLeave.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LRemainingLeave.SizeF = New System.Drawing.SizeF(480.7007!, 25.00001!)
+        Me.LRemainingLeave.SizeF = New System.Drawing.SizeF(455.7007!, 25.00001!)
         Me.LRemainingLeave.StylePriority.UseTextAlignment = False
         Me.LRemainingLeave.Text = "-"
         Me.LRemainingLeave.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         '
         'LLeaveUsage
         '
-        Me.LLeaveUsage.LocationFloat = New DevExpress.Utils.PointFloat(130.2996!, 37.99995!)
+        Me.LLeaveUsage.LocationFloat = New DevExpress.Utils.PointFloat(155.2996!, 37.99998!)
         Me.LLeaveUsage.Name = "LLeaveUsage"
         Me.LLeaveUsage.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LLeaveUsage.SizeF = New System.Drawing.SizeF(480.7007!, 25.00003!)
+        Me.LLeaveUsage.SizeF = New System.Drawing.SizeF(455.7007!, 25.00003!)
         Me.LLeaveUsage.StylePriority.UseTextAlignment = False
         Me.LLeaveUsage.Text = "-"
         Me.LLeaveUsage.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
@@ -843,7 +843,7 @@ Partial Public Class ReportEmpLeave
         'XrLabel22
         '
         Me.XrLabel22.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel22.LocationFloat = New DevExpress.Utils.PointFloat(117.0184!, 37.99994!)
+        Me.XrLabel22.LocationFloat = New DevExpress.Utils.PointFloat(142.0179!, 37.99994!)
         Me.XrLabel22.Name = "XrLabel22"
         Me.XrLabel22.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel22.SizeF = New System.Drawing.SizeF(13.28127!, 25.0!)
@@ -855,7 +855,7 @@ Partial Public Class ReportEmpLeave
         'XrLabel23
         '
         Me.XrLabel23.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel23.LocationFloat = New DevExpress.Utils.PointFloat(117.0184!, 13.0!)
+        Me.XrLabel23.LocationFloat = New DevExpress.Utils.PointFloat(142.0179!, 13.0!)
         Me.XrLabel23.Name = "XrLabel23"
         Me.XrLabel23.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel23.SizeF = New System.Drawing.SizeF(13.28127!, 25.0!)
@@ -867,25 +867,25 @@ Partial Public Class ReportEmpLeave
         'XrLabel24
         '
         Me.XrLabel24.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel24.LocationFloat = New DevExpress.Utils.PointFloat(10.08325!, 37.99997!)
+        Me.XrLabel24.LocationFloat = New DevExpress.Utils.PointFloat(10.08326!, 37.99998!)
         Me.XrLabel24.Name = "XrLabel24"
         Me.XrLabel24.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel24.SizeF = New System.Drawing.SizeF(106.9352!, 24.99999!)
+        Me.XrLabel24.SizeF = New System.Drawing.SizeF(131.9346!, 25.0!)
         Me.XrLabel24.StylePriority.UseFont = False
         Me.XrLabel24.StylePriority.UseTextAlignment = False
-        Me.XrLabel24.Text = "Leave Usage"
+        Me.XrLabel24.Text = "Lama Cuti"
         Me.XrLabel24.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         '
         'XrLabel25
         '
         Me.XrLabel25.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel25.LocationFloat = New DevExpress.Utils.PointFloat(10.08325!, 13.0!)
+        Me.XrLabel25.LocationFloat = New DevExpress.Utils.PointFloat(10.08326!, 13.00001!)
         Me.XrLabel25.Name = "XrLabel25"
         Me.XrLabel25.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel25.SizeF = New System.Drawing.SizeF(106.9352!, 25.0!)
+        Me.XrLabel25.SizeF = New System.Drawing.SizeF(131.9346!, 25.0!)
         Me.XrLabel25.StylePriority.UseFont = False
         Me.XrLabel25.StylePriority.UseTextAlignment = False
-        Me.XrLabel25.Text = "Remaining Leave"
+        Me.XrLabel25.Text = "Sisa Cuti"
         Me.XrLabel25.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         '
         'XrLabel56

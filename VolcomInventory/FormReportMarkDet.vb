@@ -64,33 +64,35 @@
             Cursor = Cursors.WaitCursor
             'Try
             Dim query As String = ""
-                'update all to 2
-                reset_is_use_mark(id_report_mark, "2")
-                'set accept or refuse is use to 1
-                query = String.Format("UPDATE tb_report_mark SET id_mark='3',is_use='1',report_mark_note='{1}',report_mark_datetime=NOW() WHERE id_report_mark='{0}'", FormReportMark.GVMark.GetFocusedRowCellDisplayText("id_report_mark").ToString, MEComment.Text)
-                execute_non_query(query, True, "", "", "", "")
-                FormReportMark.view_mark()
-                FormReportMark.sendNotif("2")
-                FormReportMark.GVMark.FocusedRowHandle = find_row(FormReportMark.GVMark, "id_report_mark", id_report_mark)
-                FormReportMark.GVMark.ExpandAllGroups()
-                '...
-                FormWork.view_mark_need()
-                'cancel dan email nolak
-                Dim report_mark_type As String = FormReportMark.GVMark.GetFocusedRowCellDisplayText("report_mark_type").ToString
-                Dim id_report As String = FormReportMark.GVMark.GetFocusedRowCellDisplayText("id_report").ToString
-                If report_mark_type = "95" Or report_mark_type = "96" Or report_mark_type = "99" Or report_mark_type = "102" Or report_mark_type = "104" Then
-                    'set cancel
-                    FormReportMark.change_status("6")
-                    'mail
-                    Dim mail As ClassSendEmail = New ClassSendEmail()
-                    mail.report_mark_type = report_mark_type
-                    mail.send_email_appr(report_mark_type, id_report, False)
-                End If
-                Close()
-                'Catch ex As Exception
-                '    errorConnection(ex.ToString)
-                'End Try
-                Cursor = Cursors.Default
+            'update all to 2
+            reset_is_use_mark(id_report_mark, "2")
+            'set accept or refuse is use to 1
+            query = String.Format("UPDATE tb_report_mark SET id_mark='3',is_use='1',report_mark_note='{1}',report_mark_datetime=NOW() WHERE id_report_mark='{0}'", FormReportMark.GVMark.GetFocusedRowCellDisplayText("id_report_mark").ToString, MEComment.Text)
+            execute_non_query(query, True, "", "", "", "")
+            FormReportMark.view_mark()
+            FormReportMark.sendNotif("2")
+            FormReportMark.GVMark.FocusedRowHandle = find_row(FormReportMark.GVMark, "id_report_mark", id_report_mark)
+            FormReportMark.GVMark.ExpandAllGroups()
+            '...
+            FormWork.view_mark_need()
+            'cancel dan email nolak
+            Dim report_mark_type As String = FormReportMark.GVMark.GetFocusedRowCellDisplayText("report_mark_type").ToString
+            Dim id_report As String = FormReportMark.GVMark.GetFocusedRowCellDisplayText("id_report").ToString
+            If report_mark_type = "95" Or report_mark_type = "96" Or report_mark_type = "99" Or report_mark_type = "102" Or report_mark_type = "104" Then
+                'set cancel
+                FormReportMark.report_mark_type = report_mark_type
+                FormReportMark.id_report = id_report
+                FormReportMark.change_status("5")
+                'mail
+                Dim mail As ClassSendEmail = New ClassSendEmail()
+                mail.report_mark_type = report_mark_type
+                mail.send_email_appr(report_mark_type, id_report, False)
+            End If
+            Close()
+            'Catch ex As Exception
+            '    errorConnection(ex.ToString)
+            'End Try
+            Cursor = Cursors.Default
         End If
     End Sub
 

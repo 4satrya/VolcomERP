@@ -7,6 +7,8 @@
         DEUntilCode.EditValue = data_dt.Rows(0)("dt")
         DEFromAcc.EditValue = data_dt.Rows(0)("dt")
         DEUntilAcc.EditValue = data_dt.Rows(0)("dt")
+        DEFromReturn.EditValue = data_dt.Rows(0)("dt")
+        DEUntilReturn.EditValue = data_dt.Rows(0)("dt")
     End Sub
 
     Sub viewSvcBySO()
@@ -102,6 +104,8 @@
             DEFromCode.Focus()
         ElseIf XTCSvcLelel.SelectedTabPageIndex = 2 Then
             DEFromAcc.Focus()
+        ElseIf XTCSvcLelel.SelectedTabPageIndex = 3 Then
+            DEFromReturn.Focus()
         End If
     End Sub
 
@@ -147,6 +151,42 @@
             viewSvcByAcc()
             BtnAcc.Focus()
             Cursor = Cursors.Default
+        End If
+    End Sub
+
+    Private Sub BtnViewReturn_Click(sender As Object, e As EventArgs) Handles BtnViewReturn.Click
+        Cursor = Cursors.WaitCursor
+        viewSvcReturn()
+        Cursor = Cursors.Default
+    End Sub
+
+    Sub viewSvcReturn()
+        'Prepare paramater
+        Dim date_from_selected As String = "0000-01-01"
+        Dim date_until_selected As String = "9999-01-01"
+        Try
+            date_from_selected = DateTime.Parse(DEFromReturn.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+        Try
+            date_until_selected = DateTime.Parse(DEUntilReturn.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+
+        Dim query As String = "CALL view_svc_level_return('" + date_from_selected + "','" + date_until_selected + "') "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCReturn.DataSource = data
+    End Sub
+
+    Private Sub DEFromReturn_KeyDown(sender As Object, e As KeyEventArgs) Handles DEFromReturn.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            DEUntilReturn.Focus()
+        End If
+    End Sub
+
+    Private Sub DEUntilReturn_KeyDown(sender As Object, e As KeyEventArgs) Handles DEUntilReturn.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            BtnViewReturn.Focus()
         End If
     End Sub
 End Class

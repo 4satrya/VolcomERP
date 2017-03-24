@@ -32,7 +32,7 @@
 
         If id_pop_up = "1" Then 'edit
             Dim query As String = "SELECT "
-            query += " m_p.id_design, bom.id_bom,bom.bom_date_created, bom.id_product, bom.is_default, bom.bom_name, bom.id_currency, bom.kurs, bom.id_term_production, bom.id_bom_approve, bom.user_mat_submit,user_ovh_submit"
+            query += " m_p.id_design, bom.bom_note, bom.id_bom,bom.bom_date_created, bom.id_product, bom.is_default, bom.bom_name, bom.id_currency, bom.kurs, bom.id_term_production, bom.id_bom_approve, bom.user_mat_submit,user_ovh_submit"
             query += " FROM tb_bom bom"
             query += " INNER JOIN tb_m_product m_p ON m_p.id_product=bom.id_product"
             query += " WHERE m_p.id_design='" & id_design & "' AND bom.is_default='1' "
@@ -40,6 +40,7 @@
             Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
             If data.Rows.Count > 0 Then
                 TEName.Text = data.Rows(0)("bom_name").ToString
+                MEBOMNote.Text = data.Rows(0)("bom_note").ToString
                 Dim date_temp As Date = data.Rows(0)("bom_date_created").ToString
                 DEBOM.EditValue = date_temp
                 LECurrency.EditValue = Nothing
@@ -161,10 +162,11 @@
         If TEName.Text = "" Then
             stopCustom("Please insert bom name.")
         Else
-            Dim bom_name, id_term_production, query, unit_price, kurs, id_currency As String
+            Dim bom_note, bom_name, id_term_production, query, unit_price, kurs, id_currency As String
 
             ValidateChildren()
             bom_name = TEName.Text
+            bom_note = MEBOMNote.Text
             id_term_production = LETerm.EditValue
             unit_price = decimalSQL(TEUnitPrice.EditValue.ToString)
             kurs = decimalSQL(TEKurs.EditValue.ToString)
@@ -182,7 +184,7 @@
                 query = "INSERT INTO tb_bom_approve(id_report_status) VALUES('1'); SELECT LAST_INSERT_ID();"
                 id_bom_approve = execute_query(query, 0, True, "", "", "", "")
                 'insert bom default
-                query = "INSERT INTO tb_bom(id_product,id_term_production,bom_name,id_currency,kurs,bom_unit_price,bom_date_created,is_default,id_bom_approve,id_user_last_update,bom_date_updated)"
+                query = "INSERT INTO tb_bom(id_product,id_term_production,bom_name,id_currency,kurs,bom_unit_price,bom_note,bom_date_created,is_default,id_bom_approve,id_user_last_update,bom_date_updated)"
                 query += " SELECT "
                 query += " id_product"
                 query += " ,'" & id_term_production & "' AS id_term_production"
@@ -190,6 +192,7 @@
                 query += " ,'" & id_currency & "' AS id_currency"
                 query += " ,'" & kurs & "' AS kurs"
                 query += " ,'" & unit_price & "' AS bom_unit_price"
+                query += " ,'" & bom_note & "' AS bom_note"
                 query += " ,NOW() AS bom_date_created"
                 query += " ,'1' AS is_default"
                 query += " ,'" & id_bom_approve & "'"
@@ -247,6 +250,7 @@
                 query += " ,id_currency='" & id_currency & "'"
                 query += " ,kurs='" & kurs & "'"
                 query += " ,bom_unit_price='" & unit_price & "'"
+                query += " ,bom_note='" & bom_note & "'"
                 query += " ,bom_date_updated=NOW()"
                 query += " ,id_user_last_update='" & id_user & "'"
                 query += " WHERE m_p.id_design='" & id_design & "' AND bom.is_default='1'"
@@ -512,8 +516,8 @@
         query += " WHERE m_p.id_design='" & id_design & "'"
         execute_non_query(query, True, "", "", "", "")
         'INSERT BOM
-        query = "INSERT INTO tb_bom(id_product,id_term_production,bom_name,id_currency,kurs,bom_unit_price,bom_date_created,bom_date_updated,id_user_last_update,id_bom_approve,id_report_status,is_default) "
-        query += " SELECT bom.id_product,bom.id_term_production,bom.bom_name,bom.id_currency,bom.kurs,bom.bom_unit_price,DATE(NOW()),NOW(),'" + id_user + "','" + id_bom_approve_new + "','1',1"
+        query = "INSERT INTO tb_bom(id_product,id_term_production,bom_name,id_currency,kurs,bom_unit_price,bom_date_created,bom_date_updated,id_user_last_update,id_bom_approve,id_report_status,is_default,bom_note) "
+        query += " SELECT bom.id_product,bom.id_term_production,bom.bom_name,bom.id_currency,bom.kurs,bom.bom_unit_price,DATE(NOW()),NOW(),'" + id_user + "','" + id_bom_approve_new + "','1',1,bom.bom_note "
         query += " FROM tb_bom bom"
         query += " INNER JOIN tb_m_product prod ON prod.id_product=bom.id_product"
         query += " WHERE bom.id_bom_approve='" + id_bom_approve + "' AND prod.id_design='" + id_design + "'"

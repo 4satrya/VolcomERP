@@ -83,7 +83,7 @@
                     query_close_stock += "NOW(), '', '2' "
                     query_close_stock += "FROM tb_storage_fg stc "
                     query_close_stock += "WHERE stc.report_mark_type=39 AND (" + qry + ") "
-                    query_close_stock += "GROUP BY stc.id_product "
+                    query_close_stock += "GROUP BY stc.id_product,stc.id_report "
                     query_close_stock += "HAVING qty>0 "
                     execute_non_query(query_close_stock, True, "", "", "", "")
 

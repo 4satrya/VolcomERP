@@ -32,4 +32,10 @@
     Private Sub FormProdDemandHist_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
         Dispose()
     End Sub
+
+    Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles BtnPrint.Click
+        Cursor = Cursors.WaitCursor
+        print(GCProdDemand, "HISTORY PD")
+        Cursor = Cursors.Default
+    End Sub
 End Class

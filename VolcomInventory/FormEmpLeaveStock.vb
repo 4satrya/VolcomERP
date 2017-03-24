@@ -28,7 +28,6 @@
 
     Sub viewDept()
         Dim query As String = "SELECT 0 as id_departement, 'All departement' as departement UNION (SELECT id_departement,departement FROM tb_m_departement a ORDER BY a.departement ASC) "
-        viewLookupQuery(LEDept, query, 0, "departement", "id_departement")
         '
         viewLookupQuery(LEDeptSum, query, 0, "departement", "id_departement")
     End Sub
@@ -49,26 +48,20 @@
         End Try
     End Sub
 
-    Private Sub LEDept_EditValueChanged(sender As Object, e As EventArgs) Handles LEDept.EditValueChanged
-        Try
-            viewEmp(LEEmp, LEDept.EditValue.ToString)
-        Catch ex As Exception
-        End Try
-    End Sub
-
     Private Sub BViewSum_Click(sender As Object, e As EventArgs) Handles BViewSum.Click
         Dim dep_search As String = ""
         Dim emp_search As String = ""
 
-        If Not LEDeptSum.EditValue.ToString = "0" Then
-            dep_search = " AND emp.id_departement='" & LEDeptSum.EditValue.ToString & "' "
-        End If
+        If XTCLeaveRemaining.SelectedTabPageIndex = 0 Then
+            If Not LEDeptSum.EditValue.ToString = "0" Then
+                dep_search = " AND emp.id_departement='" & LEDeptSum.EditValue.ToString & "' "
+            End If
 
-        If Not LEEmpSum.EditValue.ToString = "0" Then
-            emp_search = " AND emp.id_employee='" & LEEmpSum.EditValue.ToString & "' "
-        End If
+            If Not LEEmpSum.EditValue.ToString = "0" Then
+                emp_search = " AND emp.id_employee='" & LEEmpSum.EditValue.ToString & "' "
+            End If
 
-        Dim query As String = "SELECT emp.id_employee,emp.employee_position,emp.employee_code,emp.employee_name,emp.id_departement,dep.departement,lvl.employee_level,active.employee_active
+            Dim query As String = "SELECT emp.id_employee,emp.employee_position,emp.employee_code,emp.employee_name,emp.id_departement,dep.departement,lvl.employee_level,active.employee_active
                                 ,SUM(IF(emp_sl.type='1',IF(emp_sl.plus_minus=1,emp_sl.qty,-emp_sl.qty),0)) AS qty_leave
                                 ,SUM(IF(emp_sl.type='2',IF(emp_sl.plus_minus=1,emp_sl.qty,-emp_sl.qty),0)) AS qty_dp
                                 ,SUM(IFNULL(adv.qty_leave,0)) AS adv_leave
@@ -93,28 +86,24 @@
                                     GROUP BY id_emp
                                     HAVING -(SUM(adv.qty)) < 0   
                                 ) adv ON adv.id_employee = emp.id_employee
+                                WHERE 1=1
                                 " & dep_search & "
                                 " & emp_search & "
                                 GROUP BY emp.id_employee"
-        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
-        GCSum.DataSource = data
-        GVSum.BestFitColumns()
-        GVSum.ExpandAllGroups()
-    End Sub
+            Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+            Console.WriteLine(query)
+            GCSum.DataSource = data
+            GVSum.BestFitColumns()
+            GVSum.ExpandAllGroups()
+        ElseIf XTCLeaveRemaining.SelectedTabPageIndex = 1 Then
+            If Not LEDeptSum.EditValue.ToString = "0" Then
+                dep_search = " AND emp.id_departement='" & LEDeptSum.EditValue.ToString & "' "
+            End If
+            If Not LEEmpSum.EditValue.ToString = "0" Then
+                emp_search = " AND emp.id_employee='" & LEEmpSum.EditValue.ToString & "' "
+            End If
 
-    Private Sub BViewSchedule_Click(sender As Object, e As EventArgs) Handles BViewSchedule.Click
-        Dim dep_search As String = ""
-        Dim emp_search As String = ""
-
-        If Not LEDept.EditValue.ToString = "0" Then
-            dep_search = " AND emp.id_departement='" & LEDept.EditValue.ToString & "' "
-        End If
-
-        If Not LEEmp.EditValue.ToString = "0" Then
-            emp_search = " AND emp.id_employee='" & LEEmp.EditValue.ToString & "' "
-        End If
-
-        Dim query As String = "SELECT emp.id_employee,emp.employee_position,emp.employee_code,emp.employee_name,emp.id_departement,dep.departement,lvl.employee_level,active.employee_active
+            Dim query As String = "SELECT emp.id_employee,emp.employee_position,emp.employee_code,emp.employee_name,emp.id_departement,dep.departement,lvl.employee_level,active.employee_active
                                 ,SUM(IF(emp_sl.plus_minus=1,emp_sl.qty,-emp_sl.qty)) AS qty_leave
                                 ,emp_sl.type,IF(emp_sl.type='1','Leave','DP') AS type_ket,emp_sl.date_expired
                                 FROM tb_emp_stock_leave emp_sl
@@ -141,9 +130,10 @@
                                 " & emp_search & "
                                 GROUP BY id_emp
                                 HAVING -(SUM(adv.qty)) < 0"
-        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
-        GCSchedule.DataSource = data
-        GVSchedule.BestFitColumns()
-        GVSchedule.ExpandAllGroups()
+            Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+            GCSchedule.DataSource = data
+            GVSchedule.BestFitColumns()
+            GVSchedule.ExpandAllGroups()
+        End If
     End Sub
 End Class

@@ -20,9 +20,7 @@
             DEUntilLeave.Visible = False
             Luntil.Visible = False
         Else 'leave
-            If FormEmpLeaveDet.LELeaveType.EditValue.ToString = "1" Then
-                BPickAll.Visible = False
-            End If
+            BPickAll.Visible = True
         End If
     End Sub
 
@@ -70,7 +68,7 @@
 
     Private Sub BAdd_Click(sender As Object, e As EventArgs) Handles BAdd.Click
         If DEStartLeave.Text = "" And opt = "-1" Then
-            stopCustom("Please select schedule first.")
+            stopCustom("Pilih tanggal pengajuan cuti terlebih dahulu.")
         Else
             If opt = "1" Then ' change schedule from
                 FormEmpChScheduleDet.id_sch_from = GVSchedule.GetFocusedRowCellDisplayText("id_schedule").ToString
@@ -92,7 +90,7 @@
                 Next
 
                 If check = False Then
-                    stopCustom("This schedule already proposed.")
+                    stopCustom("Tanggal ini sudah diajukan cuti.")
                 Else
                     Dim total_min As Integer = 0
 

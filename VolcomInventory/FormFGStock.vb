@@ -83,6 +83,12 @@
     Public date_from_selected_stock_qc As String = "-1"
     Public date_until_selected_stock_qc As String = "-1"
 
+    '-----------------------------
+    'RESERVED STOCK LIST
+    '-----------------------------
+    Public id_design_rsv As String = "-1"
+    Public id_drw_rsv As String = "-1"
+
     'Datatalbe-Tab Stock Store
     Public dt_qc As DataTable
 
@@ -161,19 +167,36 @@
 
     Private Sub SMViewDel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SMViewDel.Click
         Cursor = Cursors.WaitCursor
-        If BandedGridViewFGStockCard.RowCount > 0 Then
-            Dim id_trans As String = "-1"
-            Dim report_mark_type As String = "-1"
-            Try
-                id_trans = BandedGridViewFGStockCard.GetFocusedRowCellValue("id_report").ToString
-                report_mark_type = BandedGridViewFGStockCard.GetFocusedRowCellValue("report_mark_type").ToString
-            Catch ex As Exception
-            End Try
+        If XTCFGStock.SelectedTabPageIndex = 1 Then
+            If BandedGridViewFGStockCard.RowCount > 0 Then
+                Dim id_trans As String = "-1"
+                Dim report_mark_type As String = "-1"
+                Try
+                    id_trans = BandedGridViewFGStockCard.GetFocusedRowCellValue("id_report").ToString
+                    report_mark_type = BandedGridViewFGStockCard.GetFocusedRowCellValue("report_mark_type").ToString
+                Catch ex As Exception
+                End Try
 
-            Dim showpopup As ClassShowPopUp = New ClassShowPopUp()
-            showpopup.report_mark_type = report_mark_type
-            showpopup.id_report = id_trans
-            showpopup.show()
+                Dim showpopup As ClassShowPopUp = New ClassShowPopUp()
+                showpopup.report_mark_type = report_mark_type
+                showpopup.id_report = id_trans
+                showpopup.show()
+            End If
+        ElseIf XTCFGStock.SelectedTabPageIndex = 4 Then
+            If GVRsv.RowCount > 0 And GVRsv.FocusedRowHandle >= 0 Then
+                Dim id_trans As String = "-1"
+                Dim report_mark_type As String = "-1"
+                Try
+                    id_trans = GVRsv.GetFocusedRowCellValue("id_report").ToString
+                    report_mark_type = GVRsv.GetFocusedRowCellValue("report_mark_type").ToString
+                Catch ex As Exception
+                End Try
+
+                Dim showpopup As ClassShowPopUp = New ClassShowPopUp()
+                showpopup.report_mark_type = report_mark_type
+                showpopup.id_report = id_trans
+                showpopup.show()
+            End If
         End If
         Cursor = Cursors.Default
     End Sub
@@ -1027,5 +1050,115 @@
         FormPopUpDesign.id_pop_up = "1"
         FormPopUpDesign.ShowDialog()
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub SimpleButton2_Click(sender As Object, e As EventArgs) Handles BtnViewRsv.Click
+        If CheckEditAllDsgRsv.EditValue = True Then
+            If id_drw_rsv = "-1" Then
+                stopCustom("Account can't blank")
+            Else
+                viewRsv()
+            End If
+        Else
+            If id_drw_rsv = "-1" Or id_design_rsv = "-1" Then
+                stopCustom("Account & design can't blank")
+            Else
+                viewRsv()
+            End If
+        End If
+    End Sub
+
+    Sub viewRsv()
+        Cursor = Cursors.WaitCursor
+        Dim query As String = "CALL view_stock_fg_rsv(" + id_drw_rsv + ", " + id_design_rsv + ")"
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCRsv.DataSource = data
+        GVRsv.Columns("1").Caption = "1" + System.Environment.NewLine + "XXS"
+        GVRsv.Columns("2").Caption = "2" + System.Environment.NewLine + "XS"
+        GVRsv.Columns("3").Caption = "3" + System.Environment.NewLine + "S"
+        GVRsv.Columns("4").Caption = "4" + System.Environment.NewLine + "M"
+        GVRsv.Columns("5").Caption = "5" + System.Environment.NewLine + "ML"
+        GVRsv.Columns("6").Caption = "6" + System.Environment.NewLine + "L"
+        GVRsv.Columns("7").Caption = "7" + System.Environment.NewLine + "XL"
+        GVRsv.Columns("8").Caption = "8" + System.Environment.NewLine + "XXL"
+        GVRsv.Columns("9").Caption = "9" + System.Environment.NewLine + "ALL"
+        GVRsv.Columns("0").Caption = "0" + System.Environment.NewLine + "SM"
+        GVRsv.RefreshData()
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub TxtCodeDsgRsv_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtCodeDsgRsv.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            Cursor = Cursors.WaitCursor
+            Dim code As String = addSlashes(TxtCodeDsgRsv.Text)
+            Dim query As String = "CALL view_all_design_param('AND design_code=''" + code + "''')"
+            Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+            If data.Rows.Count = 0 Or code = "" Then
+                stopCustom("Design not found !")
+                id_design_rsv = "-1"
+                TxtCodeDsgRsv.Text = ""
+                TxtNameDsgRsv.Text = ""
+                TxtCodeDsgRsv.Focus()
+            Else
+                id_design_rsv = data.Rows(0)("id_design").ToString.ToUpper
+                TxtNameDsgRsv.Text = data.Rows(0)("design_display_name").ToString.ToUpper
+                TxtCodeAccRsv.Focus()
+            End If
+            GCRsv.DataSource = Nothing
+            Cursor = Cursors.Default
+        Else
+            id_design_rsv = "-1"
+            TxtNameDsgRsv.Text = ""
+            GCRsv.DataSource = Nothing
+        End If
+    End Sub
+
+    Private Sub TxtCodeAccRsv_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtCodeAccRsv.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            Cursor = Cursors.WaitCursor
+            Dim code As String = addSlashes(TxtCodeAccRsv.Text)
+            Dim data As DataTable = get_company_by_code_no_limit(code, "AND !ISNULL(comp.id_drawer_def) ")
+            If data.Rows.Count = 0 Or code = "" Then
+                stopCustom("Account not found!")
+                id_drw_rsv = "-1"
+                TxtNameAccRsv.Text = ""
+                TxtCodeAccRsv.Text = ""
+                TxtCodeAccRsv.Focus()
+            Else
+                If data.Rows.Count = 1 Then
+                    id_drw_rsv = data.Rows(0)("id_drawer_def").ToString
+                    TxtNameAccRsv.Text = data.Rows(0)("comp_name").ToString
+                    BtnViewRsv.Focus()
+                Else
+                    FormMasterCompanyDouble.dt = data
+                    FormMasterCompanyDouble.ShowDialog()
+                    If id_drw_rsv <> "-1" Then
+                        BtnViewRsv.Focus()
+                    Else
+                        TxtCodeAccRsv.Focus()
+                    End If
+                End If
+            End If
+            Cursor = Cursors.Default
+        Else
+            id_drw_rsv = "-1"
+            TxtNameAccRsv.Text = ""
+            GCRsv.DataSource = Nothing
+        End If
+    End Sub
+
+    Private Sub CheckEditAllDsgRsv_CheckedChanged(sender As Object, e As EventArgs) Handles CheckEditAllDsgRsv.CheckedChanged
+        GCRsv.DataSource = Nothing
+        TxtCodeDsgRsv.Text = ""
+        TxtNameDsgRsv.Text = ""
+        If CheckEditAllDsgRsv.EditValue = True Then
+            id_design_rsv = "0"
+            TxtCodeDsgRsv.Properties.ReadOnly = True
+            TxtCodeAccRsv.Focus()
+        Else
+            id_design_rsv = "-1"
+            TxtCodeDsgRsv.Properties.ReadOnly = False
+            TxtCodeDsgRsv.Focus()
+        End If
     End Sub
 End Class

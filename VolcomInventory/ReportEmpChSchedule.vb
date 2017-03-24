@@ -52,7 +52,7 @@
     Private Sub ReportLeave_BeforePrint(ByVal sender As System.Object, ByVal e As System.Drawing.Printing.PrintEventArgs) Handles MyBase.BeforePrint
         load_detail()
 
-        load_mark_horz_side("98", id_report, "2", "1", XrTable1)
+        load_mark_horz_side("98", id_report, "2", "1", XrTable1, "1")
 
         BSideRight.HeightF = BSideRight.HeightF + (25.0F * 4)
         BSideLeft.HeightF = BSideLeft.HeightF + (25.0F * 4)

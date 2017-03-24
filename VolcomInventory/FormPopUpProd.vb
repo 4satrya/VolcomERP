@@ -22,7 +22,8 @@
         query += "DATE_FORMAT(a.prod_order_date,'%d %M %Y') AS prod_order_date,a.id_report_status,c.report_status, "
         query += "b.id_design,b.id_delivery, e.delivery, f.season, e.id_season, "
         query += "DATE_FORMAT(a.prod_order_date,'%d %M %Y') AS prod_order_date, "
-        query += "DATE_FORMAT(DATE_ADD(a.prod_order_date,INTERVAL a.prod_order_lead_time DAY),'%d %M %Y') AS prod_order_lead_time "
+        query += "DATE_FORMAT(DATE_ADD(a.prod_order_date,INTERVAL a.prod_order_lead_time DAY),'%d %M %Y') AS prod_order_lead_time, "
+        query += "cm.comp_number AS `vendor_code`, cm.comp_name AS `vendor` "
         query += "FROM tb_prod_order a "
         query += "INNER JOIN tb_prod_demand_design b ON a.id_prod_demand_design = b.id_prod_demand_design "
         query += "INNER JOIN tb_lookup_report_status c ON a.id_report_status = c.id_report_status "
@@ -31,6 +32,10 @@
         query += "INNER JOIN tb_season f ON f.id_season=e.id_season "
         query += "INNER JOIN tb_lookup_po_type g ON g.id_po_type=a.id_po_type "
         query += "INNER JOIN tb_lookup_term_production h ON h.id_term_production=a.id_term_production "
+        query += "LEFT JOIN tb_prod_order_wo wo ON wo.id_prod_order = a.id_prod_order AND wo.is_main_vendor=1
+        LEFT JOIN tb_m_ovh_price ovh ON ovh.id_ovh_price = wo.id_ovh_price
+        LEFT JOIN tb_m_comp_contact cc ON cc.id_comp_contact = ovh.id_comp_contact
+        LEFT JOIN tb_m_comp cm ON cm.id_comp = cc.id_comp "
         query += "WHERE (a.id_report_status = '3' OR a.id_report_status = '4') "
         If id_prod_order <> "-1" Then
             query += "AND a.id_prod_order = '" + id_prod_order + "' "
@@ -275,6 +280,23 @@
                 FormMatRetInProd.GroupControlRet.Enabled = True
                 FormMatRetInProd.viewDetailReturnExt("-1")
                 FormMatRetInProd.check_but()
+                Close()
+            Else
+                warningCustom("No data selected.")
+            End If
+        ElseIf id_pop_up = "9" Then
+            If GVProd.RowCount > 0 Then
+                FormProductionFinalClearDet.id_prod_order = GVProd.GetFocusedRowCellValue("id_prod_order").ToString
+                FormProductionFinalClearDet.id_design = GVProd.GetFocusedRowCellValue("id_design").ToString
+                FormProductionFinalClearDet.TxtOrder.Text = GVProd.GetFocusedRowCellValue("prod_order_number").ToString
+                FormProductionFinalClearDet.TxtSeason.Text = GVProd.GetFocusedRowCellValue("season").ToString
+                FormProductionFinalClearDet.TxtDel.Text = GVProd.GetFocusedRowCellValue("delivery").ToString
+                FormProductionFinalClearDet.TxtVendorCode.Text = GVProd.GetFocusedRowCellValue("vendor_code").ToString
+                FormProductionFinalClearDet.TxtVendorName.Text = GVProd.GetFocusedRowCellValue("vendor").ToString
+                FormProductionFinalClearDet.TxtStyleCode.Text = GVProd.GetFocusedRowCellValue("design_code").ToString
+                FormProductionFinalClearDet.TxtStyle.Text = GVProd.GetFocusedRowCellValue("design_name").ToString
+                FormProductionFinalClearDet.viewDetail()
+                pre_viewImages("2", FormProductionFinalClearDet.PEView, FormProductionFinalClearDet.id_design, False)
                 Close()
             Else
                 warningCustom("No data selected.")

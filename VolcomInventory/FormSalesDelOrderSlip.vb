@@ -356,9 +356,6 @@ Public Class FormSalesDelOrderSlip
                     id_pl_sales_order_del_slip = execute_query(query_main, 0, True, "", "", "", "")
                     increase_inc_sales("31")
 
-                    'insert who prepared
-                    submit_who_prepared("103", id_pl_sales_order_del_slip, id_user)
-
                     'Detail return
                     Dim jum_ins_j As Integer = 0
                     Dim query_detail As String = ""
@@ -380,6 +377,9 @@ Public Class FormSalesDelOrderSlip
                     If GVSalesDelOrder.RowCount > 0 Then
                         execute_non_query(query_detail, True, "", "", "", "")
                     End If
+
+                    'insert who prepared
+                    submit_who_prepared("103", id_pl_sales_order_del_slip, id_user)
 
                     FormSalesDelOrder.viewSalesDelSlip()
                     FormSalesDelOrder.GVDel.FocusedRowHandle = find_row(FormSalesDelOrder.GVDel, "id_pl_sales_order_del_slip", id_pl_sales_order_del_slip)

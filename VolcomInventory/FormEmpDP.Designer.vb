@@ -37,6 +37,7 @@ Partial Class FormEmpDP
         Me.Label2 = New System.Windows.Forms.Label()
         Me.DEStart = New DevExpress.XtraEditors.DateEdit()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.BViewDP = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.GCLeave, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVLeave, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -115,7 +116,7 @@ Partial Class FormEmpDP
         Me.GridColumn1.Caption = "DP From"
         Me.GridColumn1.DisplayFormat.FormatString = "dd MMM yyyy H:mm:ss"
         Me.GridColumn1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.GridColumn1.FieldName = "dp_time_start"
+        Me.GridColumn1.FieldName = "start_dp"
         Me.GridColumn1.Name = "GridColumn1"
         Me.GridColumn1.Visible = True
         Me.GridColumn1.VisibleIndex = 4
@@ -126,7 +127,7 @@ Partial Class FormEmpDP
         Me.GridColumn5.Caption = "Until"
         Me.GridColumn5.DisplayFormat.FormatString = "dd MMM yyyy H:mm:ss"
         Me.GridColumn5.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.GridColumn5.FieldName = "dp_time_end"
+        Me.GridColumn5.FieldName = "end_dp"
         Me.GridColumn5.Name = "GridColumn5"
         Me.GridColumn5.Visible = True
         Me.GridColumn5.VisibleIndex = 5
@@ -158,6 +159,7 @@ Partial Class FormEmpDP
         '
         'PanelControl1
         '
+        Me.PanelControl1.Controls.Add(Me.BViewDP)
         Me.PanelControl1.Controls.Add(Me.BViewSum)
         Me.PanelControl1.Controls.Add(Me.DEUntil)
         Me.PanelControl1.Controls.Add(Me.Label2)
@@ -173,9 +175,9 @@ Partial Class FormEmpDP
         '
         Me.BViewSum.Location = New System.Drawing.Point(388, 6)
         Me.BViewSum.Name = "BViewSum"
-        Me.BViewSum.Size = New System.Drawing.Size(69, 25)
+        Me.BViewSum.Size = New System.Drawing.Size(118, 25)
         Me.BViewSum.TabIndex = 12
-        Me.BViewSum.Text = "view"
+        Me.BViewSum.Text = "view (date created)"
         '
         'DEUntil
         '
@@ -219,6 +221,14 @@ Partial Class FormEmpDP
         Me.Label1.TabIndex = 8
         Me.Label1.Text = "From : "
         '
+        'BViewDP
+        '
+        Me.BViewDP.Location = New System.Drawing.Point(512, 6)
+        Me.BViewDP.Name = "BViewDP"
+        Me.BViewDP.Size = New System.Drawing.Size(99, 25)
+        Me.BViewDP.TabIndex = 13
+        Me.BViewDP.Text = "view (DP date)"
+        '
         'FormEmpDP
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -259,4 +269,5 @@ Partial Class FormEmpDP
     Friend WithEvents DEStart As DevExpress.XtraEditors.DateEdit
     Friend WithEvents Label1 As Label
     Friend WithEvents GridColumn8 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BViewDP As DevExpress.XtraEditors.SimpleButton
 End Class

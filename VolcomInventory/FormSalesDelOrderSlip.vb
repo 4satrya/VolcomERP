@@ -84,7 +84,6 @@ Public Class FormSalesDelOrderSlip
             Next
 
             'main
-            MsgBox(del_list)
             Dim query_cd As ClassSalesDelOrder = New ClassSalesDelOrder()
             Dim queryd As String = query_cd.queryMain("AND (" + del_list + ") ", "1")
             Dim datad As DataTable = execute_query(queryd, -1, True, "", "", "", "")
@@ -167,7 +166,7 @@ Public Class FormSalesDelOrderSlip
         End If
 
         'view form
-        If is_view Then
+        If is_view = "1" Then
             BtnSave.Visible = False
             BtnCancel.Visible = False
             BtnAttachment.Visible = False
@@ -409,58 +408,51 @@ Public Class FormSalesDelOrderSlip
         If bof_column = "1" Then
             Cursor = Cursors.WaitCursor
 
-            'fill remark
-            For r As Integer = 0 To ((GVItemList.RowCount - 1) - GetGroupRowCount(GVItemList))
-                GVItemList.SetRowCellValue(r, "remark", TxtSalesDelOrderNumber.Text)
-            Next
-
             'hide column
             For c As Integer = 0 To GVItemList.Columns.Count - 1
                 GVItemList.Columns(c).Visible = False
             Next
             GridColumnCode.VisibleIndex = 0
             GridColumnQty.VisibleIndex = 1
-            GridColumnRemark.VisibleIndex = 2
+            GridColumnNumber.VisibleIndex = 2
+            GridColumnFrom.VisibleIndex = 3
+            GridColumnTo.VisibleIndex = 4
+            GridColumnRemark.VisibleIndex = 5
             GVItemList.OptionsPrint.PrintFooter = False
-            GVItemList.OptionsPrint.PrintHeader = False
 
 
-            'export excel
-            Dim path_root As String = ""
-            Try
-                ' Open the file using a stream reader.
-                Using sr As New IO.StreamReader(Application.StartupPath & "\bof_path.txt")
-                    ' Read the stream to a string and write the string to the console.
-                    path_root = sr.ReadToEnd()
-                End Using
-            Catch ex As Exception
-            End Try
+            ''export excel
+            'Dim path_root As String = ""
+            'Try
+            '    ' Open the file using a stream reader.
+            '    Using sr As New IO.StreamReader(Application.StartupPath & "\bof_path.txt")
+            '        ' Read the stream to a string and write the string to the console.
+            '        path_root = sr.ReadToEnd()
+            '    End Using
+            'Catch ex As Exception
+            'End Try
 
-            Dim fileName As String = bof_xls_so + ".xls"
-            Dim exp As String = IO.Path.Combine(path_root, fileName)
-            Try
-                ExportToExcel(GVItemList, exp, show_msg)
-            Catch ex As Exception
-                stopCustom("Please close your excel file first then try again later")
-            End Try
+            'Dim fileName As String = bof_xls_so + ".xls"
+            'Dim exp As String = IO.Path.Combine(path_root, fileName)
+            'Try
+            '    ExportToExcel(GVItemList, exp, show_msg)
+            'Catch ex As Exception
+            '    stopCustom("Please close your excel file first then try again later")
+            'End Try
 
-
-            'clear remark
-            For r As Integer = 0 To ((GVItemList.RowCount - 1) - GetGroupRowCount(GVItemList))
-                GVItemList.SetRowCellValue(r, "remark", "")
-            Next
-
-            'show column
-            GridColumnCode.VisibleIndex = 0
-            GridColumnName.VisibleIndex = 1
-            GridColumnSize.VisibleIndex = 2
-            GridColumnQty.VisibleIndex = 3
-            GridColumnPrice.VisibleIndex = 4
-            GridColumnAmount.VisibleIndex = 5
-            GridColumnRemark.VisibleIndex = 6
-            GridColumnRemark.Visible = False
-            GVItemList.OptionsPrint.PrintFooter = True
-            GVItemList.OptionsPrint.PrintHeader = True
+            ''show column
+            'GridColumnCode.VisibleIndex = 0
+            'GridColumnName.VisibleIndex = 1
+            'GridColumnSize.VisibleIndex = 2
+            'GridColumnQty.VisibleIndex = 3
+            'GridColumnPrice.VisibleIndex = 4
+            'GridColumnAmount.VisibleIndex = 5
+            'GridColumnRemark.VisibleIndex = 6
+            'GridColumnRemark.Visible = False
+            'GridColumnNumber.Visible = False
+            'GridColumnFrom.Visible = False
+            'GridColumnTo.Visible = False
+            'GVItemList.OptionsPrint.PrintFooter = True
             Cursor = Cursors.Default
         End If
     End Sub
@@ -495,11 +487,17 @@ Public Class FormSalesDelOrderSlip
             colIndex = 0
             For j As Integer = 0 To dtTemp.VisibleColumns.Count - 1
                 colIndex = colIndex + 1
-                If j = 0 Then
+                If j = 0 Then 'code
                     wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, "code").ToString
-                ElseIf j = 1 Then
+                ElseIf j = 1 Then 'qty
                     wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, "pl_sales_order_del_det_qty")
-                Else
+                ElseIf j = 2 Then 'number
+                    wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, "number").ToString
+                ElseIf j = 3 Then 'from
+                    wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, "from").ToString
+                ElseIf j = 4 Then 'to
+                    wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, "to").ToString
+                Else 'remark
                     wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, "remark")
                 End If
             Next
@@ -556,5 +554,16 @@ Public Class FormSalesDelOrderSlip
         FormDocumentUpload.report_mark_type = "103"
         FormDocumentUpload.ShowDialog()
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub GVItemList_CustomUnboundColumnData(sender As Object, e As DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs) Handles GVItemList.CustomUnboundColumnData
+        Dim view As DevExpress.XtraGrid.Views.Grid.GridView = TryCast(sender, DevExpress.XtraGrid.Views.Grid.GridView)
+        If e.Column.FieldName = "from" AndAlso e.IsGetData Then
+            e.Value = TxtCodeCompFrom.Text.ToString
+        ElseIf e.Column.FieldName = "to" AndAlso e.IsGetData Then
+            e.Value = TxtCodeCompTo.Text.ToString
+        ElseIf e.Column.FieldName = "number" AndAlso e.IsGetData Then
+            e.Value = TxtSalesDelOrderNumber.Text.ToString
+        End If
     End Sub
 End Class

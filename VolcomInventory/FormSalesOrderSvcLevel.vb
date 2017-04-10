@@ -275,6 +275,7 @@
         query += "SELECT id_report_status, report_status FROM tb_lookup_report_status WHERE id_report_status=1 OR id_report_status=3 OR id_report_status=5 OR id_report_status=6 ORDER BY id_report_status ASC "
         viewSearchLookupQuery(SLEStatusRec, query, "id_report_status", "report_status", "id_report_status")
         viewSearchLookupQuery(SLEStatusDO, query, "id_report_status", "report_status", "id_report_status")
+        viewSearchLookupQuery(SLEStatusDS, query, "id_report_status", "report_status", "id_report_status")
         viewSearchLookupQuery(SLEStatusReturn, query, "id_report_status", "report_status", "id_report_status")
         viewSearchLookupQuery(SLEStatusReturnQC, query, "id_report_status", "report_status", "id_report_status")
         viewSearchLookupQuery(SLEStatusTrf, query, "id_report_status", "report_status", "id_report_status")
@@ -720,6 +721,7 @@
         If GVDel.FocusedRowHandle >= 0 And GVDel.RowCount > 0 Then
             Cursor = Cursors.WaitCursor
             FormSalesDelOrderSlip.action = "upd"
+            FormSalesDelOrderSlip.is_view = "1"
             FormSalesDelOrderSlip.id_pl_sales_order_del_slip = GVDel.GetFocusedRowCellValue("id_pl_sales_order_del_slip").ToString
             FormSalesDelOrderSlip.ShowDialog()
             Cursor = Cursors.Default

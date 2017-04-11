@@ -139,10 +139,13 @@ Public Class FormSalesDelOrderSlip
         query += ") del ON del.id_sales_order = so.id_sales_order "
         query += "GROUP BY so.id_sales_order "
         query += ") rmg ON rmg.id_sales_order = a.id_sales_order "
-        query += "Left Join tb_pl_sales_order_del_slip_det sd ON sd.id_pl_sales_order_del = a.id_pl_sales_order_del "
-        query += "Left Join tb_pl_sales_order_del_slip sdm On sdm.id_pl_sales_order_del_slip = sd.id_pl_sales_order_del_slip And sdm.id_report_status!=5 "
-        query += "WHERE a.id_pl_sales_order_del>0 "
-        query += "AND a.id_store_contact_to='" + id_store_contact_to + "' AND a.id_comp_contact_from='" + id_comp_contact_from + "' AND a.id_report_status=1 AND a.last_update_by=" + id_user + " AND ISNULL(sdm.id_pl_sales_order_del_slip) "
+        query += "LEFT JOIN (
+        SELECT sd.id_pl_sales_order_del,sd.id_pl_sales_order_del_slip FROM tb_pl_sales_order_del_slip_det sd
+        INNER JOIN tb_pl_sales_order_del_slip sdm On sdm.id_pl_sales_order_del_slip = sd.id_pl_sales_order_del_slip 
+        WHERE sdm.id_report_status!=5 
+        GROUP BY sd.id_pl_sales_order_del) ds ON ds.id_pl_sales_order_del = a.id_pl_sales_order_del "
+        query += "WHERE a.id_pl_sales_order_del>0 AND ISNULL(ds.id_pl_sales_order_del_slip) "
+        query += "AND a.id_store_contact_to='" + id_store_contact_to + "' AND a.id_comp_contact_from='" + id_comp_contact_from + "' AND a.id_report_status=1 AND a.last_update_by=" + id_user + " "
         query += "ORDER BY a.id_pl_sales_order_del ASC "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCSalesDelOrder.DataSource = data

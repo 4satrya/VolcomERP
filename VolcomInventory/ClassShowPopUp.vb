@@ -206,7 +206,7 @@
             'SALES POS
             FormViewSalesPOS.id_sales_pos = id_report
             FormViewSalesPOS.ShowDialog()
-        ElseIf report_mark_type = "49" Or report_mark_type="106" Then
+        ElseIf report_mark_type = "49" Or report_mark_type = "106" Then
             'SALES RETURN QC
             FormViewSalesReturnQC.id_sales_return_qc = id_report
             FormViewSalesReturnQC.ShowDialog()
@@ -408,6 +408,12 @@
             FormEmpLeaveDet.report_mark_type = "102"
             FormEmpLeaveDet.is_view = "1"
             FormEmpLeaveDet.ShowDialog()
+        ElseIf report_mark_type = "103" Then
+            'delivery slip
+            FormSalesDelOrderSlip.action = "upd"
+            FormSalesDelOrderSlip.id_pl_sales_order_del_slip = id_report
+            FormSalesDelOrderSlip.is_view = "1"
+            FormSalesDelOrderSlip.ShowDialog()
         ElseIf report_mark_type = "104" Then
             'propose leave HRD
             FormEmpLeaveDet.id_emp_leave = id_report
@@ -980,6 +986,12 @@
             field_id = "id_emp_leave"
             field_number = "emp_leave_number"
             field_date = "emp_leave_date"
+        ElseIf report_mark_type = "103" Then
+            'Del Slip
+            table_name = "tb_pl_sales_order_del_slip"
+            field_id = "id_pl_sales_order_del_slip"
+            field_number = "pl_sales_order_del_slip_number"
+            field_date = "pl_sales_order_del_slip_date"
         ElseIf report_mark_type = "104" Then
             'Propose leave
             table_name = "tb_emp_leave"
@@ -1215,7 +1227,7 @@
                     info_report = datax.Rows(0)("to").ToString
                 End If
             ElseIf report_mark_type = "103" Then
-                'delivery
+                'delivery slip
                 query = "SELECT CONCAT(c.comp_number,' - ', c.comp_name) AS `store`, 
                 CAST(IFNULL(SUM(delt.pl_sales_order_del_det_qty),0) AS DECIMAL(10,0)) AS `total_qty`
                 FROM tb_pl_sales_order_del_slip_det dsd

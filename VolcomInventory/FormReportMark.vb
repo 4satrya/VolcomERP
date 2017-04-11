@@ -346,6 +346,9 @@
         ElseIf report_mark_type = "102" Then
             'Leave Propose HRD
             query = String.Format("SELECT id_report_status, emp_leave_number as report_number FROM tb_emp_leave WHERE id_emp_leave = '{0}'", id_report)
+        ElseIf report_mark_type = "103" Then
+            'SALES DELIVERY ORDER SLIP
+            query = String.Format("SELECT id_report_status,pl_sales_order_del_slip_number as report_number FROM tb_pl_sales_order_del_slip WHERE id_pl_sales_order_del_slip = '{0}'", id_report)
         ElseIf report_mark_type = "104" Then
             'Leave Propose For Admin Manager
             query = String.Format("SELECT id_report_status, emp_leave_number as report_number FROM tb_emp_leave WHERE id_emp_leave = '{0}'", id_report)
@@ -3407,6 +3410,15 @@
             execute_non_query(query, True, "", "", "", "")
             'FormEmpLeave.load_sum()
             infoCustom("Status changed.")
+        ElseIf report_mark_type = "103" Then
+            Dim stt As ClassSalesDelOrder = New ClassSalesDelOrder()
+            stt.changeStatusHead(id_report, id_status_reportx)
+            infoCustom("Status changed.")
+
+            FormSalesDelOrderSlip.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+            FormSalesDelOrderSlip.actionLoad()
+            FormSalesDelOrder.viewSalesDelSlip()
+            FormSalesDelOrder.GVDel.FocusedRowHandle = find_row(FormSalesDelOrder.GVDel, "id_pl_sales_order_del_slip", id_report)
         ElseIf report_mark_type = "104" Then
             'LEAVE PROPOSE
             If id_status_reportx = "3" Or id_status_reportx = "6" Then

@@ -153,4 +153,34 @@
         Dim query As String = String.Format("UPDATE tb_pl_sales_order_del SET id_report_status='{0}', last_update=NOW(), last_update_by=" + id_user + " WHERE id_pl_sales_order_del ='{1}'", id_status_reportx_par, id_report_par)
         execute_non_query(query, True, "", "", "", "")
     End Sub
+
+    Public Sub changeStatusHead(ByVal id_report_par As String, ByVal id_status_reportx_par As String)
+        'rollback stock if cancelled and complerted
+        If id_status_reportx_par = "6" Then
+            'Dim query_complete As String = "INSERT INTO tb_storage_fg(id_wh_drawer, id_storage_category, id_product, bom_unit_price, report_mark_type, id_report, storage_product_qty, storage_product_datetime, storage_product_notes, id_stock_status) "
+            'query_complete += "SELECT del.id_wh_drawer AS `drawer`, '1', del_det.id_product, dsg.design_cop, '39' AS `report_mark_type`, del.id_sales_order AS `id_report`, del_det.pl_sales_order_del_det_qty, NOW(), '', '2' "
+            'query_complete += "FROM tb_pl_sales_order_del del "
+            'query_complete += "INNER JOIN tb_pl_sales_order_del_det del_det ON del.id_pl_sales_order_del = del_det.id_pl_sales_order_del "
+            'query_complete += "INNER JOIN tb_m_product prod ON prod.id_product = del_det.id_product  "
+            'query_complete += "INNER JOIN tb_m_design dsg ON dsg.id_design = prod.id_design "
+            'query_complete += "WHERE del.id_pl_sales_order_del=" + id_report_par + " AND del_det.pl_sales_order_del_det_qty>0 "
+            'query_complete += "UNION ALL "
+            'query_complete += "SELECT del.id_wh_drawer AS `drawer`, '2', del_det.id_product, dsg.design_cop, '43' AS `report_mark_type`, del.id_pl_sales_order_del AS `id_report`, del_det.pl_sales_order_del_det_qty, NOW(), '','1' "
+            'query_complete += "FROM tb_pl_sales_order_del del "
+            'query_complete += "INNER JOIN tb_pl_sales_order_del_det del_det ON del.id_pl_sales_order_del = del_det.id_pl_sales_order_del "
+            'query_complete += "INNER JOIN tb_m_product prod ON prod.id_product = del_det.id_product  "
+            'query_complete += "INNER JOIN tb_m_design dsg ON dsg.id_design = prod.id_design "
+            'query_complete += "WHERE del.id_pl_sales_order_del=" + id_report_par + " AND del_det.pl_sales_order_del_det_qty>0 "
+            'query_complete += "UNION ALL "
+            'query_complete += "SELECT getCompByContact(del.id_store_contact_to, 4) AS `drawer`, '1', del_det.id_product, dsg.design_cop, '43' AS `report_mark_type`, del.id_pl_sales_order_del AS `id_report`, del_det.pl_sales_order_del_det_qty, NOW(), '','1' "
+            'query_complete += "FROM tb_pl_sales_order_del del "
+            'query_complete += "INNER JOIN tb_pl_sales_order_del_det del_det ON del.id_pl_sales_order_del = del_det.id_pl_sales_order_del "
+            'query_complete += "INNER JOIN tb_m_product prod ON prod.id_product = del_det.id_product  "
+            'query_complete += "INNER JOIN tb_m_design dsg ON dsg.id_design = prod.id_design "
+            'query_complete += "WHERE del.id_pl_sales_order_del=" + id_report_par + " AND del_det.pl_sales_order_del_det_qty>0 "
+            'execute_non_query(query_complete, True, "", "", "", "")
+        End If
+        Dim query As String = String.Format("UPDATE tb_pl_sales_order_del_slip SET id_report_status='{0}', last_update=NOW(), last_update_by=" + id_user + " WHERE id_pl_sales_order_del_slip ='{1}'", id_status_reportx_par, id_report_par)
+        execute_non_query(query, True, "", "", "", "")
+    End Sub
 End Class

@@ -39,7 +39,7 @@
     Sub load_sum()
         Dim date_from As String = Date.Parse(DEStart.EditValue.ToString).ToString("yyyy-MM-dd")
         Dim date_end As String = Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd")
-        Dim query As String = "SELECT empl.*,empx.employee_name as who_create,empld.min_date,empld.max_date,status.report_status,emp.employee_name,emp.employee_code,empld.hours_total FROM tb_emp_leave empl
+        Dim query As String = "SELECT empl.*,dep.departement,empx.employee_name as who_create,empld.min_date,empld.max_date,status.report_status,emp.employee_name,emp.employee_code,empld.hours_total FROM tb_emp_leave empl
                                 INNER JOIN tb_lookup_report_status STATUS ON status.id_report_status=empl.id_report_status
                                 INNER JOIN tb_m_employee emp ON emp.id_employee=empl.id_emp
                                 INNER JOIN tb_lookup_employee_level lvl ON lvl.id_employee_level=emp.id_employee_level  
@@ -66,7 +66,7 @@
     Private Sub SimpleButton1_Click(sender As Object, e As EventArgs) Handles BViewOnLeave.Click
         Dim date_from As String = Date.Parse(DEStart.EditValue.ToString).ToString("yyyy-MM-dd")
         Dim date_end As String = Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd")
-        Dim query As String = "SELECT empl.*,empld.min_date,empld.max_date,status.report_status,emp.employee_name,emp.employee_code,empld.hours_total  FROM tb_emp_leave empl
+        Dim query As String = "SELECT empl.*,dep.departement,empld.min_date,empld.max_date,status.report_status,emp.employee_name,emp.employee_code,empld.hours_total  FROM tb_emp_leave empl
                                 INNER JOIN tb_lookup_report_status STATUS ON status.id_report_status=empl.id_report_status
                                 INNER JOIN tb_m_employee emp ON emp.id_employee=empl.id_emp
                                 INNER JOIN tb_m_departement dep ON dep.id_departement=emp.id_departement

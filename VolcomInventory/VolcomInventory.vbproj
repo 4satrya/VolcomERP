@@ -689,6 +689,12 @@
     <Compile Include="FormEmpReview.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormEmpStoreSchCompare.Designer.vb">
+      <DependentUpon>FormEmpStoreSchCompare.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormEmpStoreSchCompare.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormFGBorrowQCReq.Designer.vb">
       <DependentUpon>FormFGBorrowQCReq.vb</DependentUpon>
     </Compile>
@@ -4898,6 +4904,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormEmpReview.resx">
       <DependentUpon>FormEmpReview.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmpStoreSchCompare.resx">
+      <DependentUpon>FormEmpStoreSchCompare.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormFGBorrowQCReq.resx">
       <DependentUpon>FormFGBorrowQCReq.vb</DependentUpon>

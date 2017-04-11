@@ -30,6 +30,7 @@ Partial Class FormEmpLeave
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnTotHours = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
         Me.BViewOnLeave = New DevExpress.XtraEditors.SimpleButton()
         Me.BViewSum = New DevExpress.XtraEditors.SimpleButton()
@@ -37,7 +38,7 @@ Partial Class FormEmpLeave
         Me.Label2 = New System.Windows.Forms.Label()
         Me.DEStart = New DevExpress.XtraEditors.DateEdit()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GCLeave, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVLeave, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -60,11 +61,12 @@ Partial Class FormEmpLeave
         '
         'GVLeave
         '
-        Me.GVLeave.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIDLeave, Me.GridColumn2, Me.GridColumn7, Me.GridColumn3, Me.GridColumn4, Me.GridColumn1, Me.GridColumn5, Me.GridColumnTotHours, Me.GridColumn6, Me.GridColumn8})
+        Me.GVLeave.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIDLeave, Me.GridColumn2, Me.GridColumn7, Me.GridColumn9, Me.GridColumn3, Me.GridColumn4, Me.GridColumn1, Me.GridColumn5, Me.GridColumnTotHours, Me.GridColumn6, Me.GridColumn8})
         Me.GVLeave.GridControl = Me.GCLeave
         Me.GVLeave.Name = "GVLeave"
         Me.GVLeave.OptionsBehavior.Editable = False
         Me.GVLeave.OptionsFind.AlwaysVisible = True
+        Me.GVLeave.OptionsView.ShowFooter = True
         Me.GVLeave.OptionsView.ShowGroupPanel = False
         '
         'GridColumnIDLeave
@@ -99,7 +101,7 @@ Partial Class FormEmpLeave
         Me.GridColumn3.FieldName = "employee_name"
         Me.GridColumn3.Name = "GridColumn3"
         Me.GridColumn3.Visible = True
-        Me.GridColumn3.VisibleIndex = 3
+        Me.GridColumn3.VisibleIndex = 4
         Me.GridColumn3.Width = 160
         '
         'GridColumn4
@@ -119,7 +121,7 @@ Partial Class FormEmpLeave
         Me.GridColumn1.FieldName = "min_date"
         Me.GridColumn1.Name = "GridColumn1"
         Me.GridColumn1.Visible = True
-        Me.GridColumn1.VisibleIndex = 4
+        Me.GridColumn1.VisibleIndex = 5
         Me.GridColumn1.Width = 77
         '
         'GridColumn5
@@ -130,7 +132,7 @@ Partial Class FormEmpLeave
         Me.GridColumn5.FieldName = "max_date"
         Me.GridColumn5.Name = "GridColumn5"
         Me.GridColumn5.Visible = True
-        Me.GridColumn5.VisibleIndex = 5
+        Me.GridColumn5.VisibleIndex = 6
         Me.GridColumn5.Width = 66
         '
         'GridColumnTotHours
@@ -138,8 +140,9 @@ Partial Class FormEmpLeave
         Me.GridColumnTotHours.Caption = "Total (hours)"
         Me.GridColumnTotHours.FieldName = "hours_total"
         Me.GridColumnTotHours.Name = "GridColumnTotHours"
+        Me.GridColumnTotHours.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "hours_total", "{0}")})
         Me.GridColumnTotHours.Visible = True
-        Me.GridColumnTotHours.VisibleIndex = 6
+        Me.GridColumnTotHours.VisibleIndex = 7
         Me.GridColumnTotHours.Width = 73
         '
         'GridColumn6
@@ -148,8 +151,14 @@ Partial Class FormEmpLeave
         Me.GridColumn6.FieldName = "report_status"
         Me.GridColumn6.Name = "GridColumn6"
         Me.GridColumn6.Visible = True
-        Me.GridColumn6.VisibleIndex = 7
+        Me.GridColumn6.VisibleIndex = 8
         Me.GridColumn6.Width = 60
+        '
+        'GridColumn8
+        '
+        Me.GridColumn8.Caption = "Created By"
+        Me.GridColumn8.FieldName = "who_create"
+        Me.GridColumn8.Name = "GridColumn8"
         '
         'PanelControl1
         '
@@ -223,13 +232,13 @@ Partial Class FormEmpLeave
         Me.Label1.TabIndex = 8
         Me.Label1.Text = "From : "
         '
-        'GridColumn8
+        'GridColumn9
         '
-        Me.GridColumn8.Caption = "Created By"
-        Me.GridColumn8.FieldName = "who_create"
-        Me.GridColumn8.Name = "GridColumn8"
-        Me.GridColumn8.Visible = True
-        Me.GridColumn8.VisibleIndex = 8
+        Me.GridColumn9.Caption = "Departement"
+        Me.GridColumn9.FieldName = "departement"
+        Me.GridColumn9.Name = "GridColumn9"
+        Me.GridColumn9.Visible = True
+        Me.GridColumn9.VisibleIndex = 3
         '
         'FormEmpLeave
         '
@@ -274,4 +283,5 @@ Partial Class FormEmpLeave
     Friend WithEvents GridColumnTotHours As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn7 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn8 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn9 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

@@ -195,7 +195,7 @@ Public Class FormSalesOrderDet
         ElseIf Not cond_cat_str Then
             stopCustom("Transfer order can't process, please select another category !")
         Else
-            Dim sales_order_note As String = MENote.Text
+            Dim sales_order_note As String = addSlashes(MENote.Text)
             Dim id_so_type As String = LETypeSO.EditValue.ToString
             Dim id_so_status As String = LEStatusSO.EditValue.ToString
             Dim id_report_status As String = LEReportStatus.EditValue
@@ -228,7 +228,7 @@ Public Class FormSalesOrderDet
                             Dim id_design_price As String = GVItemList.GetRowCellValue(i, "id_design_price").ToString
                             Dim design_price As String = decimalSQL(GVItemList.GetRowCellValue(i, "design_price").ToString)
                             Dim sales_order_det_qty As String = decimalSQL(GVItemList.GetRowCellValue(i, "sales_order_det_qty").ToString)
-                            Dim sales_order_det_note As String = GVItemList.GetRowCellValue(i, "sales_order_det_note").ToString
+                            Dim sales_order_det_note As String = addSlashes(GVItemList.GetRowCellValue(i, "sales_order_det_note").ToString)
 
                             If jum_ins_j > 0 Then
                                 query_detail += ", "

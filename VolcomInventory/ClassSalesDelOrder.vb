@@ -45,8 +45,6 @@
         query += ") del ON del.id_sales_order = so.id_sales_order "
         query += "GROUP BY so.id_sales_order "
         query += ") rmg ON rmg.id_sales_order = a.id_sales_order "
-        query += "Left Join tb_pl_sales_order_del_slip_det sd ON sd.id_pl_sales_order_del = a.id_pl_sales_order_del "
-        query += "Left Join tb_pl_sales_order_del_slip sdm On sdm.id_pl_sales_order_del_slip = sd.id_pl_sales_order_del_slip And sdm.id_report_status!=5 "
         query += "WHERE a.id_pl_sales_order_del>0 "
         query += condition + " "
         query += "ORDER BY a.id_pl_sales_order_del " + order_type

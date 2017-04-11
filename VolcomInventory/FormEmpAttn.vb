@@ -69,4 +69,8 @@
         Catch ex As Exception
         End Try
     End Sub
+
+    Private Sub SimpleButton1_Click(sender As Object, e As EventArgs) Handles SimpleButton1.Click
+        print(GCLogAttn, "List Attendance (Raw)")
+    End Sub
 End Class

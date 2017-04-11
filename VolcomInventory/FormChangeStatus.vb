@@ -225,7 +225,37 @@
                 FormSalesOrderSvcLevel.viewTrf()
                 Close()
             ElseIf id_pop_up = "6" Then
-                ' belum isi
+                Dim check_stt As Boolean = False
+                For c As Integer = 0 To ((FormSalesOrderSvcLevel.GVDel.RowCount - 1) - GetGroupRowCount(FormSalesOrderSvcLevel.GVDel))
+                    Dim rs As String = FormSalesOrderSvcLevel.GVDel.GetRowCellValue(c, "id_report_status").ToString
+                    If rs = "5" Or rs = "6" Then
+                        check_stt = True
+                        Exit For
+                    End If
+                Next
+
+                If check_stt Then
+                    stopCustom("Can't update status because data is already locked.")
+                    FormSalesOrderSvcLevel.GVDel.ActiveFilterString = ""
+                    Close()
+                Else
+                    Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure want to set " + SLEStatusRec.Text.ToLower.ToString + " status for these data?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+                    If confirm = Windows.Forms.DialogResult.Yes Then
+                        Cursor = Cursors.WaitCursor
+                        For i As Integer = 0 To ((FormSalesOrderSvcLevel.GVDel.RowCount - 1) - GetGroupRowCount(FormSalesOrderSvcLevel.GVDel))
+                            Dim stt As ClassSalesDelOrder = New ClassSalesDelOrder()
+                            stt.changeStatusHead(FormSalesOrderSvcLevel.GVDel.GetRowCellValue(i, "id_pl_sales_order_del_slip").ToString, SLEStatusRec.EditValue.ToString)
+                            removeAppList(report_mark_type, FormSalesOrderSvcLevel.GVDel.GetRowCellValue(i, "id_pl_sales_order_del_slip").ToString, id_status_reportx)
+                            insertFinalComment(report_mark_type, FormSalesOrderSvcLevel.GVDel.GetRowCellValue(i, "id_pl_sales_order_del_slip").ToString, id_status_reportx, note)
+                            PBC.PerformStep()
+                            PBC.Update()
+                        Next
+                        Cursor = Cursors.Default
+                    End If
+                End If
+                FormSalesOrderSvcLevel.GVSalesDelOrder.ActiveFilterString = ""
+                FormSalesOrderSvcLevel.viewDO()
+                Close()
             End If
         Else
             stopCustom("Unable change to this status, report doesn't meet requirement to this status.")

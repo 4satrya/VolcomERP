@@ -1214,6 +1214,22 @@
                     info_col = datax.Rows(0)("total_qty").ToString
                     info_report = datax.Rows(0)("to").ToString
                 End If
+            ElseIf report_mark_type = "103" Then
+                'delivery
+                query = "SELECT CONCAT(c.comp_number,' - ', c.comp_name) AS `store`, 
+                CAST(IFNULL(SUM(delt.pl_sales_order_del_det_qty),0) AS DECIMAL(10,0)) AS `total_qty`
+                FROM tb_pl_sales_order_del_slip_det dsd
+                INNER JOIN tb_pl_sales_order_del del ON del.id_pl_sales_order_del = dsd.id_pl_sales_order_del
+                LEFT JOIN tb_pl_sales_order_del_det delt ON delt.id_pl_sales_order_del = del.id_pl_sales_order_del
+                INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = del.id_store_contact_to
+                INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp 
+                WHERE dsd.id_pl_sales_order_del_slip=" + id_report + "
+                GROUP BY dsd.id_pl_sales_order_del_slip "
+                Dim datax As DataTable = execute_query(query, -1, True, "", "", "", "")
+                If datax.Rows.Count > 0 Then
+                    info_col = datax.Rows(0)("total_qty").ToString
+                    info_report = datax.Rows(0)("store").ToString
+                End If
             ElseIf report_mark_type = "105" Then
                 'final clearance
                 Dim fcl As New ClassProductionFinalClear()

@@ -421,38 +421,38 @@ Public Class FormSalesDelOrderSlip
             GVItemList.OptionsPrint.PrintFooter = False
 
 
-            ''export excel
-            'Dim path_root As String = ""
-            'Try
-            '    ' Open the file using a stream reader.
-            '    Using sr As New IO.StreamReader(Application.StartupPath & "\bof_path.txt")
-            '        ' Read the stream to a string and write the string to the console.
-            '        path_root = sr.ReadToEnd()
-            '    End Using
-            'Catch ex As Exception
-            'End Try
+            'export excel
+            Dim path_root As String = ""
+            Try
+                ' Open the file using a stream reader.
+                Using sr As New IO.StreamReader(Application.StartupPath & "\bof_path.txt")
+                    ' Read the stream to a string and write the string to the console.
+                    path_root = sr.ReadToEnd()
+                End Using
+            Catch ex As Exception
+            End Try
 
-            'Dim fileName As String = bof_xls_so + ".xls"
-            'Dim exp As String = IO.Path.Combine(path_root, fileName)
-            'Try
-            '    ExportToExcel(GVItemList, exp, show_msg)
-            'Catch ex As Exception
-            '    stopCustom("Please close your excel file first then try again later")
-            'End Try
+            Dim fileName As String = bof_xls_so + ".xls"
+            Dim exp As String = IO.Path.Combine(path_root, fileName)
+            Try
+                ExportToExcel(GVItemList, exp, show_msg)
+            Catch ex As Exception
+                stopCustom("Please close your excel file first then try again later")
+            End Try
 
-            ''show column
-            'GridColumnCode.VisibleIndex = 0
-            'GridColumnName.VisibleIndex = 1
-            'GridColumnSize.VisibleIndex = 2
-            'GridColumnQty.VisibleIndex = 3
-            'GridColumnPrice.VisibleIndex = 4
-            'GridColumnAmount.VisibleIndex = 5
-            'GridColumnRemark.VisibleIndex = 6
-            'GridColumnRemark.Visible = False
-            'GridColumnNumber.Visible = False
-            'GridColumnFrom.Visible = False
-            'GridColumnTo.Visible = False
-            'GVItemList.OptionsPrint.PrintFooter = True
+            'show column
+            GridColumnCode.VisibleIndex = 0
+            GridColumnName.VisibleIndex = 1
+            GridColumnSize.VisibleIndex = 2
+            GridColumnQty.VisibleIndex = 3
+            GridColumnPrice.VisibleIndex = 4
+            GridColumnAmount.VisibleIndex = 5
+            GridColumnRemark.VisibleIndex = 6
+            GridColumnRemark.Visible = False
+            GridColumnNumber.Visible = False
+            GridColumnFrom.Visible = False
+            GridColumnTo.Visible = False
+            GVItemList.OptionsPrint.PrintFooter = True
             Cursor = Cursors.Default
         End If
     End Sub
@@ -544,7 +544,7 @@ Public Class FormSalesDelOrderSlip
 
     Private Sub BtnXlsBOF_Click(sender As Object, e As EventArgs) Handles BtnXlsBOF.Click
         Cursor = Cursors.WaitCursor
-        exportToBOF(False)
+        exportToBOF(True)
         Cursor = Cursors.Default
     End Sub
 

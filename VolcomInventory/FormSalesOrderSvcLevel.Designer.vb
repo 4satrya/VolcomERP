@@ -1813,7 +1813,6 @@ Partial Class FormSalesOrderSvcLevel
         Me.GVDel.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total", Me.GridColumn58, "{0:n0}")})
         Me.GVDel.Name = "GVDel"
         Me.GVDel.OptionsBehavior.AutoExpandAllGroups = True
-        Me.GVDel.OptionsBehavior.ReadOnly = True
         Me.GVDel.OptionsView.ShowFooter = True
         Me.GVDel.OptionsView.ShowGroupPanel = False
         Me.GVDel.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumn53, DevExpress.Data.ColumnSortOrder.Descending)})

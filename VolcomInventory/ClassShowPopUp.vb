@@ -1226,6 +1226,14 @@
                     info_col = datax.Rows(0)("total_qty").ToString
                     info_report = datax.Rows(0)("to").ToString
                 End If
+            ElseIf report_mark_type = "95" Or report_mark_type = "96" Or report_mark_type = "99" Or report_mark_type = "102" Or report_mark_type = "104" Then
+                query = "SELECT emp.employee_name FROM tb_emp_leave el
+                            INNER JOIN tb_m_employee emp ON emp.id_employee=el.id_emp
+                            WHERE el.id_emp_leave='" + id_report + "'"
+                Dim datax As DataTable = execute_query(query, -1, True, "", "", "", "")
+                If datax.Rows.Count > 0 Then
+                    info_col = datax.Rows(0)("employee_name").ToString
+                End If
             ElseIf report_mark_type = "103" Then
                 'delivery slip
                 query = "SELECT CONCAT(c.comp_number,' - ', c.comp_name) AS `store`, 

@@ -127,6 +127,7 @@
                 End If
                 FormSalesOrderSvcLevel.GVSalesDelOrder.ActiveFilterString = ""
                 FormSalesOrderSvcLevel.viewDO()
+                FormSalesOrderSvcLevel.viewSalesOrder()
                 Close()
             ElseIf id_pop_up = "3" Then
                 Dim check_stt As Boolean = False
@@ -223,6 +224,7 @@
                 End If
                 FormSalesOrderSvcLevel.GVFGTrf.ActiveFilterString = ""
                 FormSalesOrderSvcLevel.viewTrf()
+                FormSalesOrderSvcLevel.viewSalesOrder()
                 Close()
             ElseIf id_pop_up = "6" Then
                 Dim check_stt As Boolean = False

@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FormEmpStoreSchCompare
     Inherits DevExpress.XtraEditors.XtraForm
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         If disposing AndAlso components IsNot Nothing Then
             components.Dispose()
@@ -17,12 +17,10 @@ Partial Class FormEmpStoreSchCompare
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
-        Me.XtraTabControl1 = New DevExpress.XtraTab.XtraTabControl()
-        Me.XtraTabPage1 = New DevExpress.XtraTab.XtraTabPage()
-        Me.XtraTabPage2 = New DevExpress.XtraTab.XtraTabPage()
         Me.LEDeptSum = New DevExpress.XtraEditors.LookUpEdit()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.BPrintSum = New DevExpress.XtraEditors.SimpleButton()
@@ -31,15 +29,31 @@ Partial Class FormEmpStoreSchCompare
         Me.DEStartSum = New DevExpress.XtraEditors.DateEdit()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.BViewSum = New DevExpress.XtraEditors.SimpleButton()
+        Me.XtraTabControl1 = New DevExpress.XtraTab.XtraTabControl()
+        Me.XTPPlan = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCScheduleTable = New DevExpress.XtraGrid.GridControl()
+        Me.ViewMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.SMViewHistoryPD = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GVScheduleTable = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.XTPCurrent = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCScheduleAfter = New DevExpress.XtraGrid.GridControl()
+        Me.GVScheduleAfter = New DevExpress.XtraGrid.Views.Grid.GridView()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
-        CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.XtraTabControl1.SuspendLayout()
         CType(Me.LEDeptSum.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEUntilSum.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEUntilSum.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEStartSum.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEStartSum.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XtraTabControl1.SuspendLayout()
+        Me.XTPPlan.SuspendLayout()
+        CType(Me.GCScheduleTable, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ViewMenu.SuspendLayout()
+        CType(Me.GVScheduleTable, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTPCurrent.SuspendLayout()
+        CType(Me.GCScheduleAfter, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVScheduleAfter, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl1
@@ -57,29 +71,6 @@ Partial Class FormEmpStoreSchCompare
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(822, 42)
         Me.PanelControl1.TabIndex = 0
-        '
-        'XtraTabControl1
-        '
-        Me.XtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.XtraTabControl1.HeaderLocation = DevExpress.XtraTab.TabHeaderLocation.Bottom
-        Me.XtraTabControl1.Location = New System.Drawing.Point(0, 42)
-        Me.XtraTabControl1.Name = "XtraTabControl1"
-        Me.XtraTabControl1.SelectedTabPage = Me.XtraTabPage1
-        Me.XtraTabControl1.Size = New System.Drawing.Size(822, 226)
-        Me.XtraTabControl1.TabIndex = 1
-        Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XtraTabPage1, Me.XtraTabPage2})
-        '
-        'XtraTabPage1
-        '
-        Me.XtraTabPage1.Name = "XtraTabPage1"
-        Me.XtraTabPage1.Size = New System.Drawing.Size(816, 198)
-        Me.XtraTabPage1.Text = "XtraTabPage1"
-        '
-        'XtraTabPage2
-        '
-        Me.XtraTabPage2.Name = "XtraTabPage2"
-        Me.XtraTabPage2.Size = New System.Drawing.Size(294, 272)
-        Me.XtraTabPage2.Text = "XtraTabPage2"
         '
         'LEDeptSum
         '
@@ -156,6 +147,81 @@ Partial Class FormEmpStoreSchCompare
         Me.BViewSum.TabIndex = 15
         Me.BViewSum.Text = "view"
         '
+        'XtraTabControl1
+        '
+        Me.XtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.XtraTabControl1.HeaderLocation = DevExpress.XtraTab.TabHeaderLocation.Bottom
+        Me.XtraTabControl1.Location = New System.Drawing.Point(0, 42)
+        Me.XtraTabControl1.Name = "XtraTabControl1"
+        Me.XtraTabControl1.SelectedTabPage = Me.XTPPlan
+        Me.XtraTabControl1.Size = New System.Drawing.Size(822, 226)
+        Me.XtraTabControl1.TabIndex = 1
+        Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPPlan, Me.XTPCurrent})
+        '
+        'XTPPlan
+        '
+        Me.XTPPlan.Controls.Add(Me.GCScheduleTable)
+        Me.XTPPlan.Name = "XTPPlan"
+        Me.XTPPlan.Size = New System.Drawing.Size(816, 198)
+        Me.XTPPlan.Text = "Planning"
+        '
+        'GCScheduleTable
+        '
+        Me.GCScheduleTable.ContextMenuStrip = Me.ViewMenu
+        Me.GCScheduleTable.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCScheduleTable.Location = New System.Drawing.Point(0, 0)
+        Me.GCScheduleTable.MainView = Me.GVScheduleTable
+        Me.GCScheduleTable.Name = "GCScheduleTable"
+        Me.GCScheduleTable.Size = New System.Drawing.Size(816, 198)
+        Me.GCScheduleTable.TabIndex = 5
+        Me.GCScheduleTable.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVScheduleTable})
+        '
+        'ViewMenu
+        '
+        Me.ViewMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SMViewHistoryPD})
+        Me.ViewMenu.Name = "ContextMenuStripYM"
+        Me.ViewMenu.Size = New System.Drawing.Size(141, 26)
+        '
+        'SMViewHistoryPD
+        '
+        Me.SMViewHistoryPD.Name = "SMViewHistoryPD"
+        Me.SMViewHistoryPD.Size = New System.Drawing.Size(140, 22)
+        Me.SMViewHistoryPD.Text = "View History"
+        '
+        'GVScheduleTable
+        '
+        Me.GVScheduleTable.GridControl = Me.GCScheduleTable
+        Me.GVScheduleTable.Name = "GVScheduleTable"
+        Me.GVScheduleTable.OptionsBehavior.Editable = False
+        Me.GVScheduleTable.OptionsView.ColumnAutoWidth = False
+        Me.GVScheduleTable.OptionsView.ShowGroupPanel = False
+        '
+        'XTPCurrent
+        '
+        Me.XTPCurrent.Controls.Add(Me.GCScheduleAfter)
+        Me.XTPCurrent.Name = "XTPCurrent"
+        Me.XTPCurrent.Size = New System.Drawing.Size(816, 198)
+        Me.XTPCurrent.Text = "Current"
+        '
+        'GCScheduleAfter
+        '
+        Me.GCScheduleAfter.ContextMenuStrip = Me.ViewMenu
+        Me.GCScheduleAfter.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCScheduleAfter.Location = New System.Drawing.Point(0, 0)
+        Me.GCScheduleAfter.MainView = Me.GVScheduleAfter
+        Me.GCScheduleAfter.Name = "GCScheduleAfter"
+        Me.GCScheduleAfter.Size = New System.Drawing.Size(816, 198)
+        Me.GCScheduleAfter.TabIndex = 5
+        Me.GCScheduleAfter.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVScheduleAfter})
+        '
+        'GVScheduleAfter
+        '
+        Me.GVScheduleAfter.GridControl = Me.GCScheduleAfter
+        Me.GVScheduleAfter.Name = "GVScheduleAfter"
+        Me.GVScheduleAfter.OptionsBehavior.Editable = False
+        Me.GVScheduleAfter.OptionsView.ColumnAutoWidth = False
+        Me.GVScheduleAfter.OptionsView.ShowGroupPanel = False
+        '
         'FormEmpStoreSchCompare
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -172,21 +238,28 @@ Partial Class FormEmpStoreSchCompare
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         Me.PanelControl1.PerformLayout()
-        CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.XtraTabControl1.ResumeLayout(False)
         CType(Me.LEDeptSum.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEUntilSum.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEUntilSum.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEStartSum.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEStartSum.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XtraTabControl1.ResumeLayout(False)
+        Me.XTPPlan.ResumeLayout(False)
+        CType(Me.GCScheduleTable, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ViewMenu.ResumeLayout(False)
+        CType(Me.GVScheduleTable, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTPCurrent.ResumeLayout(False)
+        CType(Me.GCScheduleAfter, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVScheduleAfter, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
 
     Friend WithEvents PanelControl1 As DevExpress.XtraEditors.PanelControl
     Friend WithEvents XtraTabControl1 As DevExpress.XtraTab.XtraTabControl
-    Friend WithEvents XtraTabPage1 As DevExpress.XtraTab.XtraTabPage
-    Friend WithEvents XtraTabPage2 As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents XTPPlan As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents XTPCurrent As DevExpress.XtraTab.XtraTabPage
     Friend WithEvents LEDeptSum As DevExpress.XtraEditors.LookUpEdit
     Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents BPrintSum As DevExpress.XtraEditors.SimpleButton
@@ -195,4 +268,10 @@ Partial Class FormEmpStoreSchCompare
     Friend WithEvents DEStartSum As DevExpress.XtraEditors.DateEdit
     Friend WithEvents Label4 As Label
     Friend WithEvents BViewSum As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GCScheduleTable As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVScheduleTable As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GCScheduleAfter As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVScheduleAfter As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents ViewMenu As ContextMenuStrip
+    Friend WithEvents SMViewHistoryPD As ToolStripMenuItem
 End Class

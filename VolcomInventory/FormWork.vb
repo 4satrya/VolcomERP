@@ -46,6 +46,14 @@
 
         GCMarkNeed.DataSource = data
         GVMarkNeed.BestFitColumns()
+        Try
+            FormMain.checkNumberNotif()
+        Catch ex As Exception
+        End Try
+        Try
+            FormNotification.viewNotif()
+        Catch ex As Exception
+        End Try
     End Sub
     Sub view_mark_history()
         Dim date_start, date_until As String

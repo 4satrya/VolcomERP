@@ -10383,4 +10383,17 @@ Public Class FormMain
         End Try
         Cursor = Cursors.Default
     End Sub
+
+    Private Sub NBSchCompare_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBSchCompare.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormEmpStoreSchCompare.MdiParent = Me
+            FormEmpStoreSchCompare.Show()
+            FormEmpStoreSchCompare.WindowState = FormWindowState.Maximized
+            FormEmpStoreSchCompare.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
 End Class

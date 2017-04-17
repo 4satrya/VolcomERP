@@ -20,8 +20,6 @@
     Private Sub FormEmpDPDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         TENumber.Text = header_number_emp("2")
         DEDateCreated.EditValue = Now
-        DEStartDP.EditValue = Now
-        DEUntilDP.EditValue = Now
         '
         If id_emp_dp = "-1" Then 'new
             BMark.Visible = False
@@ -49,43 +47,42 @@
             '
             id_employee = data.Rows(0)("id_employee").ToString
             MEDPNote.Text = data.Rows(0)("dp_note").ToString
-            DEStartDP.EditValue = data.Rows(0)("dp_time_start")
-            DEUntilDP.EditValue = data.Rows(0)("dp_time_end")
-            '
-            calc()
             '
             If is_view = "1" Or check_edit_report_status(id_emp_dp, "97", id_emp_dp) Then
                 BPickEmployee.Visible = False
                 TEEmployeeCode.Properties.ReadOnly = True
                 MEDPNote.ReadOnly = True
-                DEStartDP.Properties.ReadOnly = True
-                DEUntilDP.Properties.ReadOnly = True
                 BSave.Visible = False
                 BPrint.Visible = False
             End If
         End If
+        load_det()
     End Sub
+    Sub load_det()
+        Dim query As String = "SELECT * FROM tb_emp_dp_det WHERE id_dp='" & id_emp_dp & "'"
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
-    Sub calc()
-        If Not DEStartDP.EditValue > DEUntilDP.EditValue Then
-            '
-            Dim date_start As Date = DEStartDP.EditValue
-            Dim date_until As Date = DEUntilDP.EditValue
-            Dim time_diff As TimeSpan
-            Dim diff As Integer
-            time_diff = date_until - date_start
-            diff = Math.Floor(time_diff.TotalHours)
-            TETotHour.EditValue = diff
+        GCDP.DataSource = data
+        calc()
+        show_but()
+    End Sub
+    Sub show_but()
+        If GVDP.RowCount > 0 Then
+            BDelDP.Visible = True
         Else
-            '
-            TETotHour.EditValue = 0
+            BDelDP.Visible = False
+        End If
+    End Sub
+    Sub calc()
+        If GVDP.RowCount > 0 Then
+            TETotHour.EditValue = GVDP.Columns("subtotal_hour").SummaryItem.SummaryValue
         End If
     End Sub
 
     Private Sub TEEmployeeCode_KeyDown(sender As Object, e As KeyEventArgs) Handles TEEmployeeCode.KeyDown
         If e.KeyCode = Keys.Enter Then
             load_emp_detail()
-            MEDPNote.Focus()
+            BAddDP.Focus()
         End If
     End Sub
     Sub load_emp_detail()
@@ -106,43 +103,69 @@
         TEEmployeeCode.Focus()
     End Sub
 
-    Private Sub DEStartDP_KeyDown(sender As Object, e As KeyEventArgs) Handles DEStartDP.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            DEUntilDP.Focus()
-        End If
-    End Sub
-
-    Private Sub DEUntilDP_KeyDown(sender As Object, e As KeyEventArgs) Handles DEUntilDP.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            BSave.Focus()
-        End If
-    End Sub
-
-    Private Sub DEStartDP_EditValueChanged(sender As Object, e As EventArgs) Handles DEStartDP.EditValueChanged
+    Private Sub DEStartDP_EditValueChanged(sender As Object, e As EventArgs)
         calc()
     End Sub
 
-    Private Sub DEUntilDP_EditValueChanged(sender As Object, e As EventArgs) Handles DEUntilDP.EditValueChanged
+    Private Sub DEUntilDP_EditValueChanged(sender As Object, e As EventArgs)
         calc()
     End Sub
 
     Private Sub BSave_Click(sender As Object, e As EventArgs) Handles BSave.Click
         If id_emp_dp = "-1" Then 'new
-            Dim query As String = "INSERT INTO tb_emp_dp(dp_number,id_employee,dp_date_created,dp_time_start,dp_time_end,dp_total,dp_note)
-                                    VALUES('" & header_number_emp("2") & "','" & id_employee & "',NOW(),'" & Date.Parse(DEStartDP.EditValue.ToString).ToString("yyyy-MM-dd H:mm:ss") & "','" & Date.Parse(DEUntilDP.EditValue.ToString).ToString("yyyy-MM-dd H:mm:ss") & "','" & TETotHour.EditValue.ToString & "','" & MEDPNote.Text & "');SELECT LAST_INSERT_ID();"
-            id_emp_dp = execute_query(query, 0, True, "", "", "", "")
-            '
-            submit_who_prepared("97", id_emp_dp, id_user)
-            '
-            FormEmpDP.load_dp()
-            increase_inc_emp("2")
-            infoCustom("DP registered, waiting approval.")
-            Close()
-        Else 'edit
-            Dim query As String = "UDPATE tb_emp_dp SET id_employee='" & id_employee & "',dp_time_start='" & Date.Parse(DEStartDP.EditValue.ToString).ToString("yyyy-MM-dd H:mm:ss") & "',dp_time_end='" & Date.Parse(DEUntilDP.EditValue.ToString).ToString("yyyy-MM-dd H:mm:ss") & "',dp_total='" & TETotHour.EditValue.ToString & "',dp_note='" & MEDPNote.Text & "' WHERE id_dp='" & id_emp_dp & "'"
-            execute_non_query(query, True, "", "", "", "")
-            infoCustom("DP updated")
-            Close()
+            If GVDP.RowCount > 0 Then
+                Dim query As String = "INSERT INTO tb_emp_dp(dp_number,id_employee,dp_date_created,dp_total,dp_note)
+                                        VALUES('" & header_number_emp("2") & "','" & id_employee & "',NOW(),'" & TETotHour.EditValue.ToString & "','" & MEDPNote.Text & "');SELECT LAST_INSERT_ID();"
+                id_emp_dp = execute_query(query, 0, True, "", "", "", "")
+                query = "INSERT INTO tb_emp_dp_det(id_dp,dp_time_start,dp_time_end,remark,subtotal_hour) VALUES"
+                For i As Integer = 0 To GVDP.RowCount - 1
+                    Dim subtot_hr As Integer = GVDP.GetRowCellValue(i, "subtotal_hour")
+                    Dim dt_start As Date = GVDP.GetRowCellValue(i, "dp_time_start")
+                    Dim dt_end As Date = GVDP.GetRowCellValue(i, "dp_time_end")
+                    Dim remark As String = GVDP.GetRowCellValue(i, "remark").ToString
+
+                    If Not i = 0 Then
+                        query += ","
+                    End If
+                    query += "('" & id_emp_dp & "','" & Date.Parse(dt_start.ToString).ToString("yyyy-MM-dd H:mm:ss") & "','" & Date.Parse(dt_end.ToString).ToString("yyyy-MM-dd H:mm:ss") & "','" & remark & "','" & decimalSQL(subtot_hr.ToString).ToString & "')"
+                Next
+                execute_non_query(query, True, "", "", "", "")
+                submit_who_prepared("97", id_emp_dp, id_user)
+                infoCustom("DP registered, waiting approval.")
+                FormEmpDP.load_dp()
+                FormEmpDP.GVLeave.FocusedRowHandle = find_row(FormEmpDP.GVLeave, "id_dp", id_emp_dp)
+                Close()
+            Else
+                stopCustom("Please insert DP detail first.")
+            End If
+        Else
+            If GVDP.RowCount > 0 Then
+                Dim query As String = "UDPATE tb_emp_dp SET id_employee='" & id_employee & "',dp_total='" & TETotHour.EditValue.ToString & "',dp_note='" & MEDPNote.Text & "' WHERE id_dp='" & id_emp_dp & "'"
+                execute_non_query(query, True, "", "", "", "")
+                '
+                query = "DELETE FROM tb_emp_dp WHERE id_dp='" & id_emp_dp & "'"
+                execute_non_query(query, True, "", "", "", "")
+                '
+                query = "INSERT INTO tb_emp_dp_det(id_dp,dp_time_start,dp_time_end,remark,subtotal_hour) VALUES"
+                For i As Integer = 0 To GVDP.RowCount - 1
+                    Dim subtot_hr As Integer = GVDP.GetRowCellValue(i, "subtotal_hour")
+                    Dim dt_start As Date = GVDP.GetRowCellValue(i, "dp_time_start")
+                    Dim dt_end As Date = GVDP.GetRowCellValue(i, "dp_time_end")
+                    Dim remark As Date = GVDP.GetRowCellValue(i, "remark")
+
+                    If Not i = 0 Then
+                        query += ","
+                    End If
+                    query += "('" & id_emp_dp & "','" & Date.Parse(dt_start.ToString).ToString("yyyy-MM-dd H:mm:ss") & "','" & Date.Parse(dt_end.ToString).ToString("yyyy-MM-dd H:mm:ss") & "','" & remark & "','" & decimalSQL(subtot_hr.ToString).ToString & "')"
+                Next
+                execute_non_query(query, True, "", "", "", "")
+                infoCustom("DP updated")
+                FormEmpDP.load_dp()
+                FormEmpDP.GVLeave.FocusedRowHandle = find_row(FormEmpDP.GVLeave, "id_dp", id_emp_dp)
+                Close()
+            Else
+                stopCustom("Please insert DP detail first.")
+            End If
         End If
     End Sub
 
@@ -160,5 +183,19 @@
         ' Show the report's preview. 
         Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
         Tool.ShowPreview()
+    End Sub
+
+    Private Sub BAddDP_Click(sender As Object, e As EventArgs) Handles BAddDP.Click
+        FormEmpDPPick.ShowDialog()
+    End Sub
+
+    Private Sub BDelDP_Click(sender As Object, e As EventArgs) Handles BDelDP.Click
+        Dim confirm As DialogResult
+        confirm = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure want to delete this ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+
+        If confirm = DialogResult.Yes Then
+            GVDP.DeleteSelectedRows()
+            calc()
+        End If
     End Sub
 End Class

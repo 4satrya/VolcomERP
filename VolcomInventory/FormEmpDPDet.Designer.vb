@@ -41,15 +41,22 @@ Partial Class FormEmpDPDet
         Me.BCancel = New DevExpress.XtraEditors.SimpleButton()
         Me.BSave = New DevExpress.XtraEditors.SimpleButton()
         Me.GroupControl2 = New DevExpress.XtraEditors.GroupControl()
-        Me.DEUntilDP = New DevExpress.XtraEditors.DateEdit()
-        Me.DEStartDP = New DevExpress.XtraEditors.DateEdit()
         Me.LabelControl8 = New DevExpress.XtraEditors.LabelControl()
         Me.TETotHour = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
         Me.MEDPNote = New DevExpress.XtraEditors.MemoEdit()
         Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
+        Me.GroupControl3 = New DevExpress.XtraEditors.GroupControl()
+        Me.GCDP = New DevExpress.XtraGrid.GridControl()
+        Me.GVDP = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.BDelDP = New DevExpress.XtraEditors.SimpleButton()
+        Me.BAddDP = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl1.SuspendLayout()
         CType(Me.DEDateCreated.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -64,12 +71,14 @@ Partial Class FormEmpDPDet
         Me.PanelControl3.SuspendLayout()
         CType(Me.GroupControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl2.SuspendLayout()
-        CType(Me.DEUntilDP.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DEUntilDP.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DEStartDP.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DEStartDP.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TETotHour.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.MEDPNote.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GroupControl3, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupControl3.SuspendLayout()
+        CType(Me.GCDP, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVDP, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl1.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupControl1
@@ -90,7 +99,7 @@ Partial Class FormEmpDPDet
         Me.GroupControl1.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupControl1.Location = New System.Drawing.Point(0, 0)
         Me.GroupControl1.Name = "GroupControl1"
-        Me.GroupControl1.Size = New System.Drawing.Size(640, 96)
+        Me.GroupControl1.Size = New System.Drawing.Size(622, 96)
         Me.GroupControl1.TabIndex = 1
         Me.GroupControl1.Text = "Employee"
         '
@@ -241,9 +250,9 @@ Partial Class FormEmpDPDet
         Me.PanelControl3.Controls.Add(Me.BCancel)
         Me.PanelControl3.Controls.Add(Me.BSave)
         Me.PanelControl3.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl3.Location = New System.Drawing.Point(0, 241)
+        Me.PanelControl3.Location = New System.Drawing.Point(0, 353)
         Me.PanelControl3.Name = "PanelControl3"
-        Me.PanelControl3.Size = New System.Drawing.Size(640, 37)
+        Me.PanelControl3.Size = New System.Drawing.Size(622, 37)
         Me.PanelControl3.TabIndex = 5
         '
         'BPrint
@@ -251,7 +260,7 @@ Partial Class FormEmpDPDet
         Me.BPrint.Dock = System.Windows.Forms.DockStyle.Right
         Me.BPrint.ImageIndex = 6
         Me.BPrint.ImageList = Me.LargeImageCollection
-        Me.BPrint.Location = New System.Drawing.Point(417, 2)
+        Me.BPrint.Location = New System.Drawing.Point(399, 2)
         Me.BPrint.Name = "BPrint"
         Me.BPrint.Size = New System.Drawing.Size(73, 33)
         Me.BPrint.TabIndex = 3
@@ -273,7 +282,7 @@ Partial Class FormEmpDPDet
         Me.BCancel.Dock = System.Windows.Forms.DockStyle.Right
         Me.BCancel.ImageIndex = 5
         Me.BCancel.ImageList = Me.LargeImageCollection
-        Me.BCancel.Location = New System.Drawing.Point(490, 2)
+        Me.BCancel.Location = New System.Drawing.Point(472, 2)
         Me.BCancel.Name = "BCancel"
         Me.BCancel.Size = New System.Drawing.Size(73, 33)
         Me.BCancel.TabIndex = 1
@@ -284,7 +293,7 @@ Partial Class FormEmpDPDet
         Me.BSave.Dock = System.Windows.Forms.DockStyle.Right
         Me.BSave.ImageIndex = 7
         Me.BSave.ImageList = Me.LargeImageCollection
-        Me.BSave.Location = New System.Drawing.Point(563, 2)
+        Me.BSave.Location = New System.Drawing.Point(545, 2)
         Me.BSave.Name = "BSave"
         Me.BSave.Size = New System.Drawing.Size(75, 33)
         Me.BSave.TabIndex = 0
@@ -293,53 +302,21 @@ Partial Class FormEmpDPDet
         'GroupControl2
         '
         Me.GroupControl2.CaptionLocation = DevExpress.Utils.Locations.Left
-        Me.GroupControl2.Controls.Add(Me.DEUntilDP)
-        Me.GroupControl2.Controls.Add(Me.DEStartDP)
         Me.GroupControl2.Controls.Add(Me.LabelControl8)
         Me.GroupControl2.Controls.Add(Me.TETotHour)
         Me.GroupControl2.Controls.Add(Me.LabelControl4)
-        Me.GroupControl2.Controls.Add(Me.Label3)
-        Me.GroupControl2.Controls.Add(Me.Label4)
         Me.GroupControl2.Controls.Add(Me.MEDPNote)
         Me.GroupControl2.Controls.Add(Me.LabelControl5)
-        Me.GroupControl2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GroupControl2.Location = New System.Drawing.Point(0, 96)
+        Me.GroupControl2.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.GroupControl2.Location = New System.Drawing.Point(0, 261)
         Me.GroupControl2.Name = "GroupControl2"
-        Me.GroupControl2.Size = New System.Drawing.Size(640, 145)
+        Me.GroupControl2.Size = New System.Drawing.Size(622, 92)
         Me.GroupControl2.TabIndex = 6
         Me.GroupControl2.Text = "DP"
         '
-        'DEUntilDP
-        '
-        Me.DEUntilDP.EditValue = Nothing
-        Me.DEUntilDP.Location = New System.Drawing.Point(402, 74)
-        Me.DEUntilDP.Name = "DEUntilDP"
-        Me.DEUntilDP.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.DEUntilDP.Properties.CalendarTimeEditing = DevExpress.Utils.DefaultBoolean.[True]
-        Me.DEUntilDP.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.DEUntilDP.Properties.DisplayFormat.FormatString = "dd MMM yyyy hh:mm:ss tt"
-        Me.DEUntilDP.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.DEUntilDP.Properties.Mask.EditMask = "dd-MM-yyyy/H-mm-ss"
-        Me.DEUntilDP.Size = New System.Drawing.Size(210, 20)
-        Me.DEUntilDP.TabIndex = 3
-        '
-        'DEStartDP
-        '
-        Me.DEStartDP.EditValue = Nothing
-        Me.DEStartDP.Location = New System.Drawing.Point(128, 74)
-        Me.DEStartDP.Name = "DEStartDP"
-        Me.DEStartDP.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.DEStartDP.Properties.CalendarTimeEditing = DevExpress.Utils.DefaultBoolean.[True]
-        Me.DEStartDP.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.DEStartDP.Properties.DisplayFormat.FormatString = "dd MMM yyyy hh:mm:ss tt"
-        Me.DEStartDP.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.DEStartDP.Properties.Mask.EditMask = "dd-MM-yyyy/H-mm-ss"
-        Me.DEStartDP.Size = New System.Drawing.Size(217, 20)
-        Me.DEStartDP.TabIndex = 2
-        '
         'LabelControl8
         '
-        Me.LabelControl8.Location = New System.Drawing.Point(287, 110)
+        Me.LabelControl8.Location = New System.Drawing.Point(287, 65)
         Me.LabelControl8.Name = "LabelControl8"
         Me.LabelControl8.Size = New System.Drawing.Size(36, 13)
         Me.LabelControl8.TabIndex = 108
@@ -348,7 +325,7 @@ Partial Class FormEmpDPDet
         'TETotHour
         '
         Me.TETotHour.EditValue = ""
-        Me.TETotHour.Location = New System.Drawing.Point(128, 107)
+        Me.TETotHour.Location = New System.Drawing.Point(128, 62)
         Me.TETotHour.Name = "TETotHour"
         Me.TETotHour.Properties.EditValueChangedDelay = 1
         Me.TETotHour.Properties.ReadOnly = True
@@ -358,33 +335,15 @@ Partial Class FormEmpDPDet
         '
         'LabelControl4
         '
-        Me.LabelControl4.Location = New System.Drawing.Point(34, 110)
+        Me.LabelControl4.Location = New System.Drawing.Point(34, 65)
         Me.LabelControl4.Name = "LabelControl4"
         Me.LabelControl4.Size = New System.Drawing.Size(24, 13)
         Me.LabelControl4.TabIndex = 107
         Me.LabelControl4.Text = "Total"
         '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(358, 77)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(38, 13)
-        Me.Label3.TabIndex = 104
-        Me.Label3.Text = "Until : "
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(31, 77)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(43, 13)
-        Me.Label4.TabIndex = 102
-        Me.Label4.Text = "Periode"
-        '
         'MEDPNote
         '
-        Me.MEDPNote.Location = New System.Drawing.Point(128, 16)
+        Me.MEDPNote.Location = New System.Drawing.Point(128, 10)
         Me.MEDPNote.Name = "MEDPNote"
         Me.MEDPNote.Properties.MaxLength = 200
         Me.MEDPNote.Size = New System.Drawing.Size(484, 46)
@@ -392,17 +351,126 @@ Partial Class FormEmpDPDet
         '
         'LabelControl5
         '
-        Me.LabelControl5.Location = New System.Drawing.Point(34, 18)
+        Me.LabelControl5.Location = New System.Drawing.Point(34, 12)
         Me.LabelControl5.Name = "LabelControl5"
         Me.LabelControl5.Size = New System.Drawing.Size(39, 13)
         Me.LabelControl5.TabIndex = 99
         Me.LabelControl5.Text = "DP Note"
         '
+        'GroupControl3
+        '
+        Me.GroupControl3.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupControl3.Controls.Add(Me.GCDP)
+        Me.GroupControl3.Controls.Add(Me.PanelControl1)
+        Me.GroupControl3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupControl3.Location = New System.Drawing.Point(0, 96)
+        Me.GroupControl3.Name = "GroupControl3"
+        Me.GroupControl3.Size = New System.Drawing.Size(622, 165)
+        Me.GroupControl3.TabIndex = 7
+        Me.GroupControl3.Text = "Detail"
+        '
+        'GCDP
+        '
+        Me.GCDP.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCDP.Location = New System.Drawing.Point(20, 38)
+        Me.GCDP.MainView = Me.GVDP
+        Me.GCDP.Name = "GCDP"
+        Me.GCDP.Size = New System.Drawing.Size(600, 125)
+        Me.GCDP.TabIndex = 1
+        Me.GCDP.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVDP})
+        '
+        'GVDP
+        '
+        Me.GVDP.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5})
+        Me.GVDP.GridControl = Me.GCDP
+        Me.GVDP.Name = "GVDP"
+        Me.GVDP.OptionsBehavior.Editable = False
+        Me.GVDP.OptionsCustomization.AllowFilter = False
+        Me.GVDP.OptionsCustomization.AllowGroup = False
+        Me.GVDP.OptionsCustomization.AllowSort = False
+        Me.GVDP.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn1
+        '
+        Me.GridColumn1.Caption = "ID"
+        Me.GridColumn1.FieldName = "id_dp_det"
+        Me.GridColumn1.Name = "GridColumn1"
+        '
+        'GridColumn2
+        '
+        Me.GridColumn2.Caption = "Start"
+        Me.GridColumn2.DisplayFormat.FormatString = "dd MMM yyyy H:mm"
+        Me.GridColumn2.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn2.FieldName = "dp_time_start"
+        Me.GridColumn2.Name = "GridColumn2"
+        Me.GridColumn2.Visible = True
+        Me.GridColumn2.VisibleIndex = 0
+        '
+        'GridColumn3
+        '
+        Me.GridColumn3.Caption = "Until"
+        Me.GridColumn3.DisplayFormat.FormatString = "dd MMM yyyy H:mm"
+        Me.GridColumn3.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn3.FieldName = "dp_time_end"
+        Me.GridColumn3.Name = "GridColumn3"
+        Me.GridColumn3.Visible = True
+        Me.GridColumn3.VisibleIndex = 1
+        '
+        'GridColumn4
+        '
+        Me.GridColumn4.Caption = "Sub Total (hour)"
+        Me.GridColumn4.FieldName = "subtotal_hour"
+        Me.GridColumn4.Name = "GridColumn4"
+        Me.GridColumn4.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "subtotal_hour", "{0}")})
+        Me.GridColumn4.Visible = True
+        Me.GridColumn4.VisibleIndex = 2
+        '
+        'GridColumn5
+        '
+        Me.GridColumn5.Caption = "Note"
+        Me.GridColumn5.FieldName = "remark"
+        Me.GridColumn5.Name = "GridColumn5"
+        Me.GridColumn5.Visible = True
+        Me.GridColumn5.VisibleIndex = 3
+        '
+        'PanelControl1
+        '
+        Me.PanelControl1.Controls.Add(Me.BDelDP)
+        Me.PanelControl1.Controls.Add(Me.BAddDP)
+        Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelControl1.Location = New System.Drawing.Point(20, 2)
+        Me.PanelControl1.Name = "PanelControl1"
+        Me.PanelControl1.Size = New System.Drawing.Size(600, 36)
+        Me.PanelControl1.TabIndex = 0
+        '
+        'BDelDP
+        '
+        Me.BDelDP.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BDelDP.ImageIndex = 1
+        Me.BDelDP.ImageList = Me.LargeImageCollection
+        Me.BDelDP.Location = New System.Drawing.Point(420, 2)
+        Me.BDelDP.Name = "BDelDP"
+        Me.BDelDP.Size = New System.Drawing.Size(89, 32)
+        Me.BDelDP.TabIndex = 1
+        Me.BDelDP.Text = "Delete"
+        '
+        'BAddDP
+        '
+        Me.BAddDP.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BAddDP.ImageIndex = 0
+        Me.BAddDP.ImageList = Me.LargeImageCollection
+        Me.BAddDP.Location = New System.Drawing.Point(509, 2)
+        Me.BAddDP.Name = "BAddDP"
+        Me.BAddDP.Size = New System.Drawing.Size(89, 32)
+        Me.BAddDP.TabIndex = 0
+        Me.BAddDP.Text = "Add"
+        '
         'FormEmpDPDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(640, 278)
+        Me.ClientSize = New System.Drawing.Size(622, 390)
+        Me.Controls.Add(Me.GroupControl3)
         Me.Controls.Add(Me.GroupControl2)
         Me.Controls.Add(Me.PanelControl3)
         Me.Controls.Add(Me.GroupControl1)
@@ -428,12 +496,14 @@ Partial Class FormEmpDPDet
         CType(Me.GroupControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControl2.ResumeLayout(False)
         Me.GroupControl2.PerformLayout()
-        CType(Me.DEUntilDP.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DEUntilDP.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DEStartDP.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DEStartDP.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TETotHour.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.MEDPNote.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GroupControl3, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupControl3.ResumeLayout(False)
+        CType(Me.GCDP, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVDP, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -456,8 +526,6 @@ Partial Class FormEmpDPDet
     Friend WithEvents BCancel As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BSave As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents GroupControl2 As DevExpress.XtraEditors.GroupControl
-    Friend WithEvents Label3 As Label
-    Friend WithEvents Label4 As Label
     Friend WithEvents MEDPNote As DevExpress.XtraEditors.MemoEdit
     Friend WithEvents LabelControl5 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents TETotHour As DevExpress.XtraEditors.TextEdit
@@ -465,6 +533,15 @@ Partial Class FormEmpDPDet
     Friend WithEvents DEDateCreated As DevExpress.XtraEditors.DateEdit
     Friend WithEvents LabelControl6 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LabelControl8 As DevExpress.XtraEditors.LabelControl
-    Friend WithEvents DEUntilDP As DevExpress.XtraEditors.DateEdit
-    Friend WithEvents DEStartDP As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents GroupControl3 As DevExpress.XtraEditors.GroupControl
+    Friend WithEvents GCDP As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVDP As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn2 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn3 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents PanelControl1 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents BDelDP As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BAddDP As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

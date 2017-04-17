@@ -122,6 +122,7 @@
                 End If
                 FormSalesOrderSvcLevel.GVSalesDelOrder.ActiveFilterString = ""
                 FormSalesOrderSvcLevel.viewDO()
+                FormSalesOrderSvcLevel.viewSalesOrder()
                 Close()
             ElseIf id_pop_up = "3" Then
                 Dim check_stt As Boolean = False
@@ -176,7 +177,7 @@
                         For i As Integer = 0 To ((FormSalesOrderSvcLevel.GVSalesReturnQC.RowCount - 1) - GetGroupRowCount(FormSalesOrderSvcLevel.GVSalesReturnQC))
                             Dim stt As ClassSalesReturnQC = New ClassSalesReturnQC()
                             stt.changeStatus(FormSalesOrderSvcLevel.GVSalesReturnQC.GetRowCellValue(i, "id_sales_return_qc").ToString, SLEStatusRec.EditValue.ToString)
-                            removeAppList(report_mark_type, FormSalesOrderSvcLevel.GVSalesReturnQC.GetRowCellValue(i, "id_sales_return_qc").ToString, id_status_reportx)
+                            removeAppList(FormSalesOrderSvcLevel.GVSalesReturnQC.GetRowCellValue(i, "rmk").ToString, FormSalesOrderSvcLevel.GVSalesReturnQC.GetRowCellValue(i, "id_sales_return_qc").ToString, id_status_reportx)
                             insertFinalComment(report_mark_type, FormSalesOrderSvcLevel.GVSalesReturnQC.GetRowCellValue(i, "id_sales_return_qc").ToString, id_status_reportx, note)
                             PBC.PerformStep()
                             PBC.Update()
@@ -218,6 +219,7 @@
                 End If
                 FormSalesOrderSvcLevel.GVFGTrf.ActiveFilterString = ""
                 FormSalesOrderSvcLevel.viewTrf()
+                FormSalesOrderSvcLevel.viewSalesOrder()
                 Close()
             End If
         Else

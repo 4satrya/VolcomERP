@@ -3,9 +3,16 @@
     '1 = schedule table
     '2 = attnassigndet
     Private Sub FormEmpScheduleTableSet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim dayOfWeek = CInt(Date.Today.DayOfWeek)
-        Dim startOfWeek = Date.Today.AddDays(-1 * dayOfWeek)
-        Dim endOfWeek = Date.Today.AddDays(7 - dayOfWeek).AddSeconds(-1)
+        Dim date_min As Date
+        Dim query_date As String = "SELECT IF(NOW()>=IF(DAYOFMONTH(LAST_DAY(NOW()))='31',LAST_DAY(NOW()),DATE_ADD(LAST_DAY(NOW()),INTERVAL 1 DAY)),
+                                    DATE_ADD(LAST_DAY(NOW()), INTERVAL 1 DAY),
+                                    DATE_FORMAT(NOW() ,'%Y-%m-01')) AS date_start"
+        date_min = Date.Parse(execute_query(query_date, 0, True, "", "", "", "").ToString)
+        DEStart.Properties.MinValue = date_min
+        DEUntil.Properties.MinValue = date_min
+        '
+        Dim startOfWeek = Date.Parse(execute_query("SELECT SUBDATE(NOW(), WEEKDAY(NOW()));", 0, True, "", "", "", "").ToString)
+        Dim endOfWeek = Date.Parse(execute_query("SELECT DATE_ADD(SUBDATE(NOW(), WEEKDAY(NOW())),INTERVAL 6 DAY);", 0, True, "", "", "", "").ToString)
         '
         DEStart.EditValue = startOfWeek
         DEUntil.EditValue = endOfWeek

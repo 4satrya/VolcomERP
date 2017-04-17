@@ -300,7 +300,8 @@
             Close()
         ElseIf id_pop_up = "25" Then
             FormProductionRecDet.id_comp_from = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
-            FormProductionRecDet.TECompName.Text = GVCompany.GetFocusedRowCellDisplayText("comp_number").ToString + "-" + GVCompany.GetFocusedRowCellDisplayText("comp_name").ToString
+            FormProductionRecDet.TxtCodeCompFrom.Text = GVCompany.GetFocusedRowCellDisplayText("comp_number").ToString
+            FormProductionRecDet.TECompName.Text = GVCompany.GetFocusedRowCellDisplayText("comp_name").ToString
             Close()
         ElseIf id_pop_up = "26" Then
             'pl mrs
@@ -310,7 +311,8 @@
             Close()
         ElseIf id_pop_up = "27" Then
             FormProductionRecDet.id_comp_to = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
-            FormProductionRecDet.TECompShipToName.Text = GVCompany.GetFocusedRowCellDisplayText("comp_number").ToString + "-" + GVCompany.GetFocusedRowCellDisplayText("comp_name").ToString
+            FormProductionRecDet.TxtCodeCompTo.Text = GVCompany.GetFocusedRowCellDisplayText("comp_number").ToString
+            FormProductionRecDet.TECompShipToName.Text = GVCompany.GetFocusedRowCellDisplayText("comp_name").ToString
             Close()
         ElseIf id_pop_up = "28" Then
             'pl mrs
@@ -480,6 +482,7 @@
             FormSalesReturnQCDet.id_comp_user = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
             FormSalesReturnQCDet.id_wh_type = GVCompany.GetFocusedRowCellValue("id_wh_type").ToString
             FormSalesReturnQCDet.setDefDrawer()
+            FormSalesReturnQCDet.setReportMarkType()
             FormSalesReturnQCDet.viewDetail()
             FormSalesReturnQCDet.view_barcode_list()
             FormSalesReturnQCDet.id_reject_type = "-1"

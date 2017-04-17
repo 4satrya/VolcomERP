@@ -555,9 +555,9 @@ Partial Class FormViewSalesReturnOrder
         Me.GridColumnQtyReturn.Caption = "Return Qty"
         Me.GridColumnQtyReturn.DisplayFormat.FormatString = "N0"
         Me.GridColumnQtyReturn.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumnQtyReturn.FieldName = "sales_return_det_qty_view"
+        Me.GridColumnQtyReturn.FieldName = "sales_return_det_qty_view_completed"
         Me.GridColumnQtyReturn.Name = "GridColumnQtyReturn"
-        Me.GridColumnQtyReturn.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_det_qty_view", "{0:N0}")})
+        Me.GridColumnQtyReturn.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_det_qty_view_completed", "{0:N0}")})
         '
         'GridColumnSOH
         '

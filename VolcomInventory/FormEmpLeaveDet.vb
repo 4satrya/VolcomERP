@@ -59,6 +59,8 @@
                                     WHERE empl.id_emp_leave='" & id_emp_leave & "'"
             Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
             '
+            TENumber.Text = data.Rows(0)("emp_leave_number").ToString
+            '
             report_mark_type = data.Rows(0)("report_mark_type").ToString
             LELeaveType.ItemIndex = LELeaveType.Properties.GetDataSourceRowIndex("id_leave_type", data.Rows(0)("id_leave_type").ToString)
             LEFormDC.ItemIndex = LEFormDC.Properties.GetDataSourceRowIndex("id_form_dc", data.Rows(0)("id_form_dc").ToString)

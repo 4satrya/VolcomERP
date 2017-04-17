@@ -22,6 +22,8 @@ Partial Class FormProductionRecDet
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormProductionRecDet))
         Me.GroupGeneralHeader = New DevExpress.XtraEditors.GroupControl()
+        Me.TxtCodeCompTo = New DevExpress.XtraEditors.TextEdit()
+        Me.TxtCodeCompFrom = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl10 = New DevExpress.XtraEditors.LabelControl()
         Me.TxtPOType = New DevExpress.XtraEditors.TextEdit()
         Me.BtnInfoSrs = New DevExpress.XtraEditors.SimpleButton()
@@ -55,8 +57,9 @@ Partial Class FormProductionRecDet
         Me.MENote = New DevExpress.XtraEditors.MemoEdit()
         Me.LabelControl18 = New DevExpress.XtraEditors.LabelControl()
         Me.GroupControl1 = New DevExpress.XtraEditors.GroupControl()
-        Me.BtnAttachment = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnXlsBOF = New DevExpress.XtraEditors.SimpleButton()
         Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
+        Me.BtnAttachment = New DevExpress.XtraEditors.SimpleButton()
         Me.BPrint = New DevExpress.XtraEditors.SimpleButton()
         Me.BCancel = New DevExpress.XtraEditors.SimpleButton()
         Me.BSave = New DevExpress.XtraEditors.SimpleButton()
@@ -77,6 +80,9 @@ Partial Class FormProductionRecDet
         Me.ColQty = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ColQtyRec = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ColNote = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnNumber = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnFrom = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnTo = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.RepositoryItemSpinEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
         Me.GroupControlListBarcode = New DevExpress.XtraEditors.GroupControl()
@@ -92,9 +98,10 @@ Partial Class FormProductionRecDet
         Me.BDelete = New DevExpress.XtraEditors.SimpleButton()
         Me.BStop = New DevExpress.XtraEditors.SimpleButton()
         Me.BScan = New DevExpress.XtraEditors.SimpleButton()
-        Me.BtnXlsBOF = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
+        CType(Me.TxtCodeCompTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtCodeCompFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtPOType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PEView.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEDesign.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -138,6 +145,8 @@ Partial Class FormProductionRecDet
         'GroupGeneralHeader
         '
         Me.GroupGeneralHeader.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupGeneralHeader.Controls.Add(Me.TxtCodeCompTo)
+        Me.GroupGeneralHeader.Controls.Add(Me.TxtCodeCompFrom)
         Me.GroupGeneralHeader.Controls.Add(Me.LabelControl10)
         Me.GroupGeneralHeader.Controls.Add(Me.TxtPOType)
         Me.GroupGeneralHeader.Controls.Add(Me.BtnInfoSrs)
@@ -171,6 +180,28 @@ Partial Class FormProductionRecDet
         Me.GroupGeneralHeader.Size = New System.Drawing.Size(909, 146)
         Me.GroupGeneralHeader.TabIndex = 38
         '
+        'TxtCodeCompTo
+        '
+        Me.TxtCodeCompTo.EditValue = ""
+        Me.TxtCodeCompTo.Location = New System.Drawing.Point(192, 85)
+        Me.TxtCodeCompTo.Name = "TxtCodeCompTo"
+        Me.TxtCodeCompTo.Properties.EditValueChangedDelay = 1
+        Me.TxtCodeCompTo.Properties.ReadOnly = True
+        Me.TxtCodeCompTo.Size = New System.Drawing.Size(41, 20)
+        Me.TxtCodeCompTo.TabIndex = 165
+        Me.TxtCodeCompTo.TabStop = False
+        '
+        'TxtCodeCompFrom
+        '
+        Me.TxtCodeCompFrom.EditValue = ""
+        Me.TxtCodeCompFrom.Location = New System.Drawing.Point(192, 59)
+        Me.TxtCodeCompFrom.Name = "TxtCodeCompFrom"
+        Me.TxtCodeCompFrom.Properties.EditValueChangedDelay = 1
+        Me.TxtCodeCompFrom.Properties.ReadOnly = True
+        Me.TxtCodeCompFrom.Size = New System.Drawing.Size(41, 20)
+        Me.TxtCodeCompFrom.TabIndex = 164
+        Me.TxtCodeCompFrom.TabStop = False
+        '
         'LabelControl10
         '
         Me.LabelControl10.Location = New System.Drawing.Point(125, 36)
@@ -182,11 +213,11 @@ Partial Class FormProductionRecDet
         'TxtPOType
         '
         Me.TxtPOType.EditValue = ""
-        Me.TxtPOType.Location = New System.Drawing.Point(213, 33)
+        Me.TxtPOType.Location = New System.Drawing.Point(192, 33)
         Me.TxtPOType.Name = "TxtPOType"
         Me.TxtPOType.Properties.EditValueChangedDelay = 1
         Me.TxtPOType.Properties.ReadOnly = True
-        Me.TxtPOType.Size = New System.Drawing.Size(249, 20)
+        Me.TxtPOType.Size = New System.Drawing.Size(282, 20)
         Me.TxtPOType.TabIndex = 162
         Me.TxtPOType.TabStop = False
         '
@@ -195,7 +226,7 @@ Partial Class FormProductionRecDet
         Me.BtnInfoSrs.Appearance.Font = New System.Drawing.Font("Monotype Corsiva", 11.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnInfoSrs.Appearance.Options.UseFont = True
         Me.BtnInfoSrs.Enabled = False
-        Me.BtnInfoSrs.Location = New System.Drawing.Point(439, 7)
+        Me.BtnInfoSrs.Location = New System.Drawing.Point(451, 7)
         Me.BtnInfoSrs.Name = "BtnInfoSrs"
         Me.BtnInfoSrs.Size = New System.Drawing.Size(23, 20)
         Me.BtnInfoSrs.TabIndex = 1
@@ -206,7 +237,7 @@ Partial Class FormProductionRecDet
         '
         'BShowContact2
         '
-        Me.BShowContact2.Location = New System.Drawing.Point(439, 85)
+        Me.BShowContact2.Location = New System.Drawing.Point(451, 85)
         Me.BShowContact2.Name = "BShowContact2"
         Me.BShowContact2.Size = New System.Drawing.Size(23, 20)
         Me.BShowContact2.TabIndex = 3
@@ -236,11 +267,11 @@ Partial Class FormProductionRecDet
         'TEDesign
         '
         Me.TEDesign.EditValue = ""
-        Me.TEDesign.Location = New System.Drawing.Point(213, 111)
+        Me.TEDesign.Location = New System.Drawing.Point(192, 111)
         Me.TEDesign.Name = "TEDesign"
         Me.TEDesign.Properties.EditValueChangedDelay = 1
         Me.TEDesign.Properties.ReadOnly = True
-        Me.TEDesign.Size = New System.Drawing.Size(249, 20)
+        Me.TEDesign.Size = New System.Drawing.Size(282, 20)
         Me.TEDesign.TabIndex = 160
         Me.TEDesign.TabStop = False
         '
@@ -258,7 +289,7 @@ Partial Class FormProductionRecDet
         '
         'BShowContact
         '
-        Me.BShowContact.Location = New System.Drawing.Point(439, 59)
+        Me.BShowContact.Location = New System.Drawing.Point(451, 59)
         Me.BShowContact.Name = "BShowContact"
         Me.BShowContact.Size = New System.Drawing.Size(23, 20)
         Me.BShowContact.TabIndex = 2
@@ -367,7 +398,7 @@ Partial Class FormProductionRecDet
         '
         'BShowOrder
         '
-        Me.BShowOrder.Location = New System.Drawing.Point(410, 7)
+        Me.BShowOrder.Location = New System.Drawing.Point(422, 7)
         Me.BShowOrder.Name = "BShowOrder"
         Me.BShowOrder.Size = New System.Drawing.Size(23, 20)
         Me.BShowOrder.TabIndex = 0
@@ -376,22 +407,22 @@ Partial Class FormProductionRecDet
         'TECompName
         '
         Me.TECompName.EditValue = ""
-        Me.TECompName.Location = New System.Drawing.Point(213, 59)
+        Me.TECompName.Location = New System.Drawing.Point(235, 59)
         Me.TECompName.Name = "TECompName"
         Me.TECompName.Properties.EditValueChangedDelay = 1
         Me.TECompName.Properties.ReadOnly = True
-        Me.TECompName.Size = New System.Drawing.Size(220, 20)
+        Me.TECompName.Size = New System.Drawing.Size(215, 20)
         Me.TECompName.TabIndex = 0
         Me.TECompName.TabStop = False
         '
         'TECompShipToName
         '
         Me.TECompShipToName.EditValue = ""
-        Me.TECompShipToName.Location = New System.Drawing.Point(213, 85)
+        Me.TECompShipToName.Location = New System.Drawing.Point(235, 85)
         Me.TECompShipToName.Name = "TECompShipToName"
         Me.TECompShipToName.Properties.EditValueChangedDelay = 1
         Me.TECompShipToName.Properties.ReadOnly = True
-        Me.TECompShipToName.Size = New System.Drawing.Size(220, 20)
+        Me.TECompShipToName.Size = New System.Drawing.Size(215, 20)
         Me.TECompShipToName.TabIndex = 116
         Me.TECompShipToName.TabStop = False
         '
@@ -414,11 +445,11 @@ Partial Class FormProductionRecDet
         'TEPONumber
         '
         Me.TEPONumber.EditValue = ""
-        Me.TEPONumber.Location = New System.Drawing.Point(213, 7)
+        Me.TEPONumber.Location = New System.Drawing.Point(192, 7)
         Me.TEPONumber.Name = "TEPONumber"
         Me.TEPONumber.Properties.EditValueChangedDelay = 1
         Me.TEPONumber.Properties.ReadOnly = True
-        Me.TEPONumber.Size = New System.Drawing.Size(191, 20)
+        Me.TEPONumber.Size = New System.Drawing.Size(224, 20)
         Me.TEPONumber.TabIndex = 3
         Me.TEPONumber.TabStop = False
         '
@@ -496,17 +527,18 @@ Partial Class FormProductionRecDet
         Me.GroupControl1.Size = New System.Drawing.Size(909, 36)
         Me.GroupControl1.TabIndex = 41
         '
-        'BtnAttachment
+        'BtnXlsBOF
         '
-        Me.BtnAttachment.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BtnAttachment.Enabled = False
-        Me.BtnAttachment.ImageIndex = 10
-        Me.BtnAttachment.ImageList = Me.LargeImageCollection
-        Me.BtnAttachment.Location = New System.Drawing.Point(585, 2)
-        Me.BtnAttachment.Name = "BtnAttachment"
-        Me.BtnAttachment.Size = New System.Drawing.Size(97, 32)
-        Me.BtnAttachment.TabIndex = 12
-        Me.BtnAttachment.Text = "Attachment"
+        Me.BtnXlsBOF.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnXlsBOF.Image = CType(resources.GetObject("BtnXlsBOF.Image"), System.Drawing.Image)
+        Me.BtnXlsBOF.ImageIndex = 11
+        Me.BtnXlsBOF.ImageList = Me.LargeImageCollection
+        Me.BtnXlsBOF.Location = New System.Drawing.Point(470, 2)
+        Me.BtnXlsBOF.Name = "BtnXlsBOF"
+        Me.BtnXlsBOF.Size = New System.Drawing.Size(115, 32)
+        Me.BtnXlsBOF.TabIndex = 16
+        Me.BtnXlsBOF.Text = "Generate XLS"
+        Me.BtnXlsBOF.Visible = False
         '
         'LargeImageCollection
         '
@@ -523,6 +555,18 @@ Partial Class FormProductionRecDet
         Me.LargeImageCollection.Images.SetKeyName(8, "31_24x24.png")
         Me.LargeImageCollection.Images.SetKeyName(9, "18_24x24.png")
         Me.LargeImageCollection.Images.SetKeyName(10, "attachment-icon.png")
+        '
+        'BtnAttachment
+        '
+        Me.BtnAttachment.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnAttachment.Enabled = False
+        Me.BtnAttachment.ImageIndex = 10
+        Me.BtnAttachment.ImageList = Me.LargeImageCollection
+        Me.BtnAttachment.Location = New System.Drawing.Point(585, 2)
+        Me.BtnAttachment.Name = "BtnAttachment"
+        Me.BtnAttachment.Size = New System.Drawing.Size(97, 32)
+        Me.BtnAttachment.TabIndex = 12
+        Me.BtnAttachment.Text = "Attachment"
         '
         'BPrint
         '
@@ -617,7 +661,7 @@ Partial Class FormProductionRecDet
         '
         'GVListPurchase
         '
-        Me.GVListPurchase.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ColIdRecDet, Me.ColIdPurcDet, Me.ColNo, Me.ColCode, Me.GridColumnEANCode, Me.ColName, Me.ColSize, Me.ColQty, Me.ColQtyRec, Me.ColNote})
+        Me.GVListPurchase.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ColIdRecDet, Me.ColIdPurcDet, Me.ColNo, Me.ColCode, Me.GridColumnEANCode, Me.ColName, Me.ColSize, Me.ColQty, Me.ColQtyRec, Me.ColNote, Me.GridColumnNumber, Me.GridColumnFrom, Me.GridColumnTo})
         Me.GVListPurchase.GridControl = Me.GCListPurchase
         Me.GVListPurchase.Name = "GVListPurchase"
         Me.GVListPurchase.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[False]
@@ -733,6 +777,27 @@ Partial Class FormProductionRecDet
         Me.ColNote.Visible = True
         Me.ColNote.VisibleIndex = 6
         Me.ColNote.Width = 145
+        '
+        'GridColumnNumber
+        '
+        Me.GridColumnNumber.Caption = "Number"
+        Me.GridColumnNumber.FieldName = "number"
+        Me.GridColumnNumber.Name = "GridColumnNumber"
+        Me.GridColumnNumber.UnboundType = DevExpress.Data.UnboundColumnType.[String]
+        '
+        'GridColumnFrom
+        '
+        Me.GridColumnFrom.Caption = "From"
+        Me.GridColumnFrom.FieldName = "from"
+        Me.GridColumnFrom.Name = "GridColumnFrom"
+        Me.GridColumnFrom.UnboundType = DevExpress.Data.UnboundColumnType.[String]
+        '
+        'GridColumnTo
+        '
+        Me.GridColumnTo.Caption = "To"
+        Me.GridColumnTo.FieldName = "to"
+        Me.GridColumnTo.Name = "GridColumnTo"
+        Me.GridColumnTo.UnboundType = DevExpress.Data.UnboundColumnType.[String]
         '
         'RepositoryItemCheckEdit1
         '
@@ -883,19 +948,6 @@ Partial Class FormProductionRecDet
         Me.BScan.TabIndex = 6
         Me.BScan.Text = "Start Scan"
         '
-        'BtnXlsBOF
-        '
-        Me.BtnXlsBOF.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BtnXlsBOF.Image = CType(resources.GetObject("BtnXlsBOF.Image"), System.Drawing.Image)
-        Me.BtnXlsBOF.ImageIndex = 11
-        Me.BtnXlsBOF.ImageList = Me.LargeImageCollection
-        Me.BtnXlsBOF.Location = New System.Drawing.Point(470, 2)
-        Me.BtnXlsBOF.Name = "BtnXlsBOF"
-        Me.BtnXlsBOF.Size = New System.Drawing.Size(115, 32)
-        Me.BtnXlsBOF.TabIndex = 16
-        Me.BtnXlsBOF.Text = "Generate XLS"
-        Me.BtnXlsBOF.Visible = False
-        '
         'FormProductionRecDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -917,6 +969,8 @@ Partial Class FormProductionRecDet
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupGeneralHeader.ResumeLayout(False)
         Me.GroupGeneralHeader.PerformLayout()
+        CType(Me.TxtCodeCompTo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtCodeCompFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtPOType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PEView.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEDesign.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1031,4 +1085,9 @@ Partial Class FormProductionRecDet
     Friend WithEvents LabelControl10 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents TxtPOType As DevExpress.XtraEditors.TextEdit
     Friend WithEvents BtnXlsBOF As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GridColumnNumber As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnFrom As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnTo As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents TxtCodeCompTo As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents TxtCodeCompFrom As DevExpress.XtraEditors.TextEdit
 End Class

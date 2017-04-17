@@ -37,6 +37,10 @@ Partial Class FormMasterEmployeePosition
         Me.LabelControl7 = New DevExpress.XtraEditors.LabelControl()
         Me.DEDate = New DevExpress.XtraEditors.DateEdit()
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.LESubDeptOrign = New DevExpress.XtraEditors.LookUpEdit()
+        Me.LabelControl8 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl9 = New DevExpress.XtraEditors.LabelControl()
+        Me.LESubDept = New DevExpress.XtraEditors.LookUpEdit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.LEOriginDept.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -48,6 +52,8 @@ Partial Class FormMasterEmployeePosition
         CType(Me.DEDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LESubDeptOrign.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LESubDept.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'BtnSave
@@ -64,7 +70,7 @@ Partial Class FormMasterEmployeePosition
         Me.PanelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
         Me.PanelControl1.Controls.Add(Me.BtnSave)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl1.Location = New System.Drawing.Point(0, 201)
+        Me.PanelControl1.Location = New System.Drawing.Point(0, 251)
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(490, 37)
         Me.PanelControl1.TabIndex = 100
@@ -80,18 +86,18 @@ Partial Class FormMasterEmployeePosition
         'LEOriginDept
         '
         Me.LEOriginDept.Enabled = False
-        Me.LEOriginDept.Location = New System.Drawing.Point(114, 12)
+        Me.LEOriginDept.Location = New System.Drawing.Point(133, 12)
         Me.LEOriginDept.Name = "LEOriginDept"
         Me.LEOriginDept.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.LEOriginDept.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_departement", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("departement", "Departement")})
         Me.LEOriginDept.Properties.NullText = "-"
-        Me.LEOriginDept.Size = New System.Drawing.Size(358, 20)
+        Me.LEOriginDept.Size = New System.Drawing.Size(339, 20)
         Me.LEOriginDept.TabIndex = 3
         Me.LEOriginDept.TabStop = False
         '
         'LabelControl2
         '
-        Me.LabelControl2.Location = New System.Drawing.Point(12, 41)
+        Me.LabelControl2.Location = New System.Drawing.Point(12, 67)
         Me.LabelControl2.Name = "LabelControl2"
         Me.LabelControl2.Size = New System.Drawing.Size(56, 13)
         Me.LabelControl2.TabIndex = 4
@@ -100,27 +106,27 @@ Partial Class FormMasterEmployeePosition
         'LEOriginLevel
         '
         Me.LEOriginLevel.Enabled = False
-        Me.LEOriginLevel.Location = New System.Drawing.Point(114, 38)
+        Me.LEOriginLevel.Location = New System.Drawing.Point(133, 64)
         Me.LEOriginLevel.Name = "LEOriginLevel"
         Me.LEOriginLevel.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.LEOriginLevel.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_employee_level", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("employee_level", "Level")})
         Me.LEOriginLevel.Properties.NullText = "-"
-        Me.LEOriginLevel.Size = New System.Drawing.Size(358, 20)
+        Me.LEOriginLevel.Size = New System.Drawing.Size(339, 20)
         Me.LEOriginLevel.TabIndex = 5
         Me.LEOriginLevel.TabStop = False
         '
         'TxtOriginPosition
         '
         Me.TxtOriginPosition.Enabled = False
-        Me.TxtOriginPosition.Location = New System.Drawing.Point(114, 64)
+        Me.TxtOriginPosition.Location = New System.Drawing.Point(133, 90)
         Me.TxtOriginPosition.Name = "TxtOriginPosition"
-        Me.TxtOriginPosition.Size = New System.Drawing.Size(358, 20)
+        Me.TxtOriginPosition.Size = New System.Drawing.Size(339, 20)
         Me.TxtOriginPosition.TabIndex = 6
         Me.TxtOriginPosition.TabStop = False
         '
         'LabelControl3
         '
-        Me.LabelControl3.Location = New System.Drawing.Point(12, 67)
+        Me.LabelControl3.Location = New System.Drawing.Point(12, 93)
         Me.LabelControl3.Name = "LabelControl3"
         Me.LabelControl3.Size = New System.Drawing.Size(68, 13)
         Me.LabelControl3.TabIndex = 7
@@ -128,34 +134,34 @@ Partial Class FormMasterEmployeePosition
         '
         'TxtPosition
         '
-        Me.TxtPosition.Location = New System.Drawing.Point(114, 142)
+        Me.TxtPosition.Location = New System.Drawing.Point(133, 194)
         Me.TxtPosition.Name = "TxtPosition"
-        Me.TxtPosition.Size = New System.Drawing.Size(358, 20)
+        Me.TxtPosition.Size = New System.Drawing.Size(339, 20)
         Me.TxtPosition.TabIndex = 2
         '
         'LELevel
         '
-        Me.LELevel.Location = New System.Drawing.Point(114, 116)
+        Me.LELevel.Location = New System.Drawing.Point(133, 168)
         Me.LELevel.Name = "LELevel"
         Me.LELevel.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.LELevel.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_employee_level", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("employee_level", "Level")})
         Me.LELevel.Properties.NullText = "-"
-        Me.LELevel.Size = New System.Drawing.Size(358, 20)
+        Me.LELevel.Size = New System.Drawing.Size(339, 20)
         Me.LELevel.TabIndex = 1
         '
         'LEDepartement
         '
-        Me.LEDepartement.Location = New System.Drawing.Point(114, 90)
+        Me.LEDepartement.Location = New System.Drawing.Point(133, 116)
         Me.LEDepartement.Name = "LEDepartement"
         Me.LEDepartement.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.LEDepartement.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_departement", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("departement", "Departement")})
         Me.LEDepartement.Properties.NullText = "-"
-        Me.LEDepartement.Size = New System.Drawing.Size(358, 20)
+        Me.LEDepartement.Size = New System.Drawing.Size(339, 20)
         Me.LEDepartement.TabIndex = 0
         '
         'LabelControl4
         '
-        Me.LabelControl4.Location = New System.Drawing.Point(12, 145)
+        Me.LabelControl4.Location = New System.Drawing.Point(12, 197)
         Me.LabelControl4.Name = "LabelControl4"
         Me.LabelControl4.Size = New System.Drawing.Size(37, 13)
         Me.LabelControl4.TabIndex = 13
@@ -163,7 +169,7 @@ Partial Class FormMasterEmployeePosition
         '
         'LabelControl5
         '
-        Me.LabelControl5.Location = New System.Drawing.Point(12, 119)
+        Me.LabelControl5.Location = New System.Drawing.Point(12, 171)
         Me.LabelControl5.Name = "LabelControl5"
         Me.LabelControl5.Size = New System.Drawing.Size(25, 13)
         Me.LabelControl5.TabIndex = 12
@@ -171,7 +177,7 @@ Partial Class FormMasterEmployeePosition
         '
         'LabelControl6
         '
-        Me.LabelControl6.Location = New System.Drawing.Point(12, 93)
+        Me.LabelControl6.Location = New System.Drawing.Point(12, 119)
         Me.LabelControl6.Name = "LabelControl6"
         Me.LabelControl6.Size = New System.Drawing.Size(63, 13)
         Me.LabelControl6.TabIndex = 11
@@ -179,7 +185,7 @@ Partial Class FormMasterEmployeePosition
         '
         'LabelControl7
         '
-        Me.LabelControl7.Location = New System.Drawing.Point(12, 169)
+        Me.LabelControl7.Location = New System.Drawing.Point(12, 221)
         Me.LabelControl7.Name = "LabelControl7"
         Me.LabelControl7.Size = New System.Drawing.Size(69, 13)
         Me.LabelControl7.TabIndex = 14
@@ -188,7 +194,7 @@ Partial Class FormMasterEmployeePosition
         'DEDate
         '
         Me.DEDate.EditValue = Nothing
-        Me.DEDate.Location = New System.Drawing.Point(114, 166)
+        Me.DEDate.Location = New System.Drawing.Point(133, 218)
         Me.DEDate.Name = "DEDate"
         Me.DEDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[False]
         Me.DEDate.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
@@ -196,19 +202,61 @@ Partial Class FormMasterEmployeePosition
         Me.DEDate.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
         Me.DEDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.DEDate.Properties.Mask.EditMask = "dd\/MM\/yyyy"
-        Me.DEDate.Size = New System.Drawing.Size(358, 20)
+        Me.DEDate.Size = New System.Drawing.Size(339, 20)
         Me.DEDate.TabIndex = 3
         '
         'ErrorProvider1
         '
         Me.ErrorProvider1.ContainerControl = Me
         '
+        'LESubDeptOrign
+        '
+        Me.LESubDeptOrign.Enabled = False
+        Me.LESubDeptOrign.Location = New System.Drawing.Point(133, 38)
+        Me.LESubDeptOrign.Name = "LESubDeptOrign"
+        Me.LESubDeptOrign.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.LESubDeptOrign.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_departement_sub", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("departement_sub", "Departement")})
+        Me.LESubDeptOrign.Properties.NullText = "-"
+        Me.LESubDeptOrign.Size = New System.Drawing.Size(339, 20)
+        Me.LESubDeptOrign.TabIndex = 102
+        Me.LESubDeptOrign.TabStop = False
+        '
+        'LabelControl8
+        '
+        Me.LabelControl8.Location = New System.Drawing.Point(12, 41)
+        Me.LabelControl8.Name = "LabelControl8"
+        Me.LabelControl8.Size = New System.Drawing.Size(115, 13)
+        Me.LabelControl8.TabIndex = 101
+        Me.LabelControl8.Text = "Origin Sub Departement"
+        '
+        'LabelControl9
+        '
+        Me.LabelControl9.Location = New System.Drawing.Point(12, 145)
+        Me.LabelControl9.Name = "LabelControl9"
+        Me.LabelControl9.Size = New System.Drawing.Size(84, 13)
+        Me.LabelControl9.TabIndex = 104
+        Me.LabelControl9.Text = "Sub Departement"
+        '
+        'LESubDept
+        '
+        Me.LESubDept.Location = New System.Drawing.Point(133, 142)
+        Me.LESubDept.Name = "LESubDept"
+        Me.LESubDept.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.LESubDept.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_departement_sub", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("departement_sub", "Departement")})
+        Me.LESubDept.Properties.NullText = "-"
+        Me.LESubDept.Size = New System.Drawing.Size(339, 20)
+        Me.LESubDept.TabIndex = 103
+        '
         'FormMasterEmployeePosition
         '
         Me.AcceptButton = Me.BtnSave
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(490, 238)
+        Me.ClientSize = New System.Drawing.Size(490, 288)
+        Me.Controls.Add(Me.LabelControl9)
+        Me.Controls.Add(Me.LESubDept)
+        Me.Controls.Add(Me.LESubDeptOrign)
+        Me.Controls.Add(Me.LabelControl8)
         Me.Controls.Add(Me.DEDate)
         Me.Controls.Add(Me.LabelControl7)
         Me.Controls.Add(Me.LabelControl4)
@@ -241,6 +289,8 @@ Partial Class FormMasterEmployeePosition
         CType(Me.DEDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEDate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LESubDeptOrign.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LESubDept.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -263,4 +313,8 @@ Partial Class FormMasterEmployeePosition
     Friend WithEvents LabelControl7 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents DEDate As DevExpress.XtraEditors.DateEdit
     Friend WithEvents ErrorProvider1 As ErrorProvider
+    Friend WithEvents LESubDeptOrign As DevExpress.XtraEditors.LookUpEdit
+    Friend WithEvents LabelControl8 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LabelControl9 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LESubDept As DevExpress.XtraEditors.LookUpEdit
 End Class

@@ -459,10 +459,15 @@
         ElseIf type = "6" Then
             If GVSalesOrder.FocusedRowHandle >= 0 Then
                 Dim alloc_cek As String = GVSalesOrder.GetFocusedRowCellValue("id_prepare_status").ToString
+                Dim ots As Integer = GVSalesOrder.GetFocusedRowCellValue("outstanding")
                 If alloc_cek = "2" Then
                     GVSalesOrder.Columns("is_select").OptionsColumn.AllowEdit = False
                 Else
-                    GVSalesOrder.Columns("is_select").OptionsColumn.AllowEdit = True
+                    If ots = 0 Then
+                        GVSalesOrder.Columns("is_select").OptionsColumn.AllowEdit = True
+                    Else
+                        GVSalesOrder.Columns("is_select").OptionsColumn.AllowEdit = False
+                    End If
                 End If
             End If
         End If
@@ -668,7 +673,8 @@
             Dim cek As String = CheckSelAll.EditValue.ToString
             For i As Integer = ((GVSalesOrder.RowCount - 1) - GetGroupRowCount(GVSalesOrder)) To 0 Step -1
                 Dim id_prepare_status As String = GVSalesOrder.GetRowCellValue(i, "id_prepare_status").ToString
-                If cek And id_prepare_status = "1" Then
+                Dim ots As Integer = GVSalesOrder.GetRowCellValue(i, "outstanding")
+                If cek And id_prepare_status = "1" And ots = 0 Then
                     GVSalesOrder.SetRowCellValue(i, "is_select", "Yes")
                 Else
                     GVSalesOrder.SetRowCellValue(i, "is_select", "No")

@@ -87,7 +87,7 @@
                     query_close_stock += "HAVING qty>0 "
                     execute_non_query(query_close_stock, True, "", "", "", "")
 
-                    Dim query_upd As String = "UPDATE tb_sales_order SET id_prepare_status='" + SLEPackingStatus.EditValue.ToString + "', final_comment='" + final_comment + "' WHERE (" + qry_stt + ") "
+                    Dim query_upd As String = "UPDATE tb_sales_order SET id_prepare_status='" + SLEPackingStatus.EditValue.ToString + "', final_comment='" + final_comment + "', final_date=NOW(), final_by='" + id_user + "' WHERE (" + qry_stt + ") "
                     execute_non_query(query_upd, True, "", "", "", "")
                     FormSalesOrderSvcLevel.viewSalesOrder()
                     Close()

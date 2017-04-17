@@ -61,6 +61,7 @@ Partial Class FormSalesOrder
         Me.GridColumnPrice = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnAmount = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnRemark = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.BtnViewProgress = New DevExpress.XtraEditors.SimpleButton()
         Me.XTPPrepareGenerate = New DevExpress.XtraTab.XtraTabPage()
         Me.GCGen = New DevExpress.XtraGrid.GridControl()
         Me.GVGen = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -80,7 +81,7 @@ Partial Class FormSalesOrder
         Me.DEFrom = New DevExpress.XtraEditors.DateEdit()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
-        Me.BtnViewProgress = New DevExpress.XtraEditors.SimpleButton()
+        Me.GridColumnTotalOrder = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XTCSalesOrder, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCSalesOrder.SuspendLayout()
         Me.XTPList.SuspendLayout()
@@ -190,10 +191,12 @@ Partial Class FormSalesOrder
         '
         'GVSalesOrder
         '
-        Me.GVSalesOrder.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnSalesTargetNumb, Me.GridColumnTo, Me.GridColumnSalesTargetDate, Me.GridColumnDSalesTargetNote, Me.GridColumnReportStatus, Me.GridColumnPrepareStatus, Me.GridColumn9, Me.GridColumnIdSalesOrder, Me.GridColumn1Category, Me.GridColumn10, Me.GridColumnReff})
+        Me.GVSalesOrder.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnSalesTargetNumb, Me.GridColumnTo, Me.GridColumnSalesTargetDate, Me.GridColumnDSalesTargetNote, Me.GridColumnReportStatus, Me.GridColumnPrepareStatus, Me.GridColumn9, Me.GridColumnIdSalesOrder, Me.GridColumn1Category, Me.GridColumn10, Me.GridColumnReff, Me.GridColumnTotalOrder})
         Me.GVSalesOrder.GridControl = Me.GCSalesOrder
+        Me.GVSalesOrder.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_order", Me.GridColumnTotalOrder, "{0:n0}")})
         Me.GVSalesOrder.Name = "GVSalesOrder"
         Me.GVSalesOrder.OptionsBehavior.ReadOnly = True
+        Me.GVSalesOrder.OptionsView.ShowFooter = True
         Me.GVSalesOrder.OptionsView.ShowGroupPanel = False
         Me.GVSalesOrder.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumnIdSalesOrder, DevExpress.Data.ColumnSortOrder.Descending)})
         '
@@ -204,7 +207,7 @@ Partial Class FormSalesOrder
         Me.GridColumnSalesTargetNumb.Name = "GridColumnSalesTargetNumb"
         Me.GridColumnSalesTargetNumb.Visible = True
         Me.GridColumnSalesTargetNumb.VisibleIndex = 0
-        Me.GridColumnSalesTargetNumb.Width = 123
+        Me.GridColumnSalesTargetNumb.Width = 138
         '
         'GridColumnTo
         '
@@ -213,7 +216,7 @@ Partial Class FormSalesOrder
         Me.GridColumnTo.Name = "GridColumnTo"
         Me.GridColumnTo.Visible = True
         Me.GridColumnTo.VisibleIndex = 2
-        Me.GridColumnTo.Width = 111
+        Me.GridColumnTo.Width = 124
         '
         'GridColumnSalesTargetDate
         '
@@ -223,8 +226,8 @@ Partial Class FormSalesOrder
         Me.GridColumnSalesTargetDate.FieldName = "sales_order_date"
         Me.GridColumnSalesTargetDate.Name = "GridColumnSalesTargetDate"
         Me.GridColumnSalesTargetDate.Visible = True
-        Me.GridColumnSalesTargetDate.VisibleIndex = 5
-        Me.GridColumnSalesTargetDate.Width = 111
+        Me.GridColumnSalesTargetDate.VisibleIndex = 6
+        Me.GridColumnSalesTargetDate.Width = 132
         '
         'GridColumnDSalesTargetNote
         '
@@ -239,8 +242,8 @@ Partial Class FormSalesOrder
         Me.GridColumnReportStatus.FieldName = "report_status"
         Me.GridColumnReportStatus.Name = "GridColumnReportStatus"
         Me.GridColumnReportStatus.Visible = True
-        Me.GridColumnReportStatus.VisibleIndex = 6
-        Me.GridColumnReportStatus.Width = 141
+        Me.GridColumnReportStatus.VisibleIndex = 7
+        Me.GridColumnReportStatus.Width = 168
         '
         'GridColumnPrepareStatus
         '
@@ -248,7 +251,8 @@ Partial Class FormSalesOrder
         Me.GridColumnPrepareStatus.FieldName = "prepare_status"
         Me.GridColumnPrepareStatus.Name = "GridColumnPrepareStatus"
         Me.GridColumnPrepareStatus.Visible = True
-        Me.GridColumnPrepareStatus.VisibleIndex = 7
+        Me.GridColumnPrepareStatus.VisibleIndex = 8
+        Me.GridColumnPrepareStatus.Width = 89
         '
         'GridColumn9
         '
@@ -257,8 +261,8 @@ Partial Class FormSalesOrder
         Me.GridColumn9.FieldName = "so_completness"
         Me.GridColumn9.Name = "GridColumn9"
         Me.GridColumn9.Visible = True
-        Me.GridColumn9.VisibleIndex = 8
-        Me.GridColumn9.Width = 85
+        Me.GridColumn9.VisibleIndex = 9
+        Me.GridColumn9.Width = 106
         '
         'RepositoryItemProgressBar1
         '
@@ -282,6 +286,7 @@ Partial Class FormSalesOrder
         Me.GridColumn1Category.Name = "GridColumn1Category"
         Me.GridColumn1Category.Visible = True
         Me.GridColumn1Category.VisibleIndex = 4
+        Me.GridColumn1Category.Width = 84
         '
         'GridColumn10
         '
@@ -290,6 +295,7 @@ Partial Class FormSalesOrder
         Me.GridColumn10.Name = "GridColumn10"
         Me.GridColumn10.Visible = True
         Me.GridColumn10.VisibleIndex = 3
+        Me.GridColumn10.Width = 84
         '
         'GridColumnReff
         '
@@ -298,6 +304,7 @@ Partial Class FormSalesOrder
         Me.GridColumnReff.Name = "GridColumnReff"
         Me.GridColumnReff.Visible = True
         Me.GridColumnReff.VisibleIndex = 1
+        Me.GridColumnReff.Width = 84
         '
         'GridView2
         '
@@ -503,11 +510,20 @@ Partial Class FormSalesOrder
         Me.GridColumnRemark.Name = "GridColumnRemark"
         Me.GridColumnRemark.Width = 255
         '
+        'BtnViewProgress
+        '
+        Me.BtnViewProgress.Dock = System.Windows.Forms.DockStyle.Top
+        Me.BtnViewProgress.Location = New System.Drawing.Point(2, 20)
+        Me.BtnViewProgress.Name = "BtnViewProgress"
+        Me.BtnViewProgress.Size = New System.Drawing.Size(708, 23)
+        Me.BtnViewProgress.TabIndex = 5
+        Me.BtnViewProgress.Text = "View Progress"
+        '
         'XTPPrepareGenerate
         '
         Me.XTPPrepareGenerate.Controls.Add(Me.GCGen)
         Me.XTPPrepareGenerate.Name = "XTPPrepareGenerate"
-        Me.XTPPrepareGenerate.Size = New System.Drawing.Size(825, 449)
+        Me.XTPPrepareGenerate.Size = New System.Drawing.Size(712, 410)
         Me.XTPPrepareGenerate.Text = "Generate Prepare Order"
         '
         'GCGen
@@ -516,7 +532,7 @@ Partial Class FormSalesOrder
         Me.GCGen.Location = New System.Drawing.Point(0, 0)
         Me.GCGen.MainView = Me.GVGen
         Me.GCGen.Name = "GCGen"
-        Me.GCGen.Size = New System.Drawing.Size(825, 449)
+        Me.GCGen.Size = New System.Drawing.Size(712, 410)
         Me.GCGen.TabIndex = 0
         Me.GCGen.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVGen})
         '
@@ -577,7 +593,7 @@ Partial Class FormSalesOrder
         'XTPInfo
         '
         Me.XTPInfo.Name = "XTPInfo"
-        Me.XTPInfo.Size = New System.Drawing.Size(831, 477)
+        Me.XTPInfo.Size = New System.Drawing.Size(718, 438)
         Me.XTPInfo.Text = "Info"
         '
         'LargeImageCollection
@@ -673,14 +689,17 @@ Partial Class FormSalesOrder
         Me.LabelControl3.TabIndex = 8892
         Me.LabelControl3.Text = "From"
         '
-        'BtnViewProgress
+        'GridColumnTotalOrder
         '
-        Me.BtnViewProgress.Dock = System.Windows.Forms.DockStyle.Top
-        Me.BtnViewProgress.Location = New System.Drawing.Point(2, 20)
-        Me.BtnViewProgress.Name = "BtnViewProgress"
-        Me.BtnViewProgress.Size = New System.Drawing.Size(708, 23)
-        Me.BtnViewProgress.TabIndex = 5
-        Me.BtnViewProgress.Text = "View Progress"
+        Me.GridColumnTotalOrder.Caption = "Total"
+        Me.GridColumnTotalOrder.DisplayFormat.FormatString = "{0:n0}"
+        Me.GridColumnTotalOrder.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnTotalOrder.FieldName = "total_order"
+        Me.GridColumnTotalOrder.Name = "GridColumnTotalOrder"
+        Me.GridColumnTotalOrder.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_order", "{0:n0}")})
+        Me.GridColumnTotalOrder.Visible = True
+        Me.GridColumnTotalOrder.VisibleIndex = 5
+        Me.GridColumnTotalOrder.Width = 53
         '
         'FormSalesOrder
         '
@@ -790,4 +809,5 @@ Partial Class FormSalesOrder
     Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LabelControl3 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents BtnViewProgress As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GridColumnTotalOrder As DevExpress.XtraGrid.Columns.GridColumn
 End Class

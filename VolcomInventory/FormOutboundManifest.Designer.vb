@@ -89,6 +89,7 @@ Partial Class FormOutboundManifest
         Me.GVManifest.OptionsView.AllowCellMerge = True
         Me.GVManifest.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.[False]
         Me.GVManifest.OptionsView.ShowGroupPanel = False
+        Me.GVManifest.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumn4, DevExpress.Data.ColumnSortOrder.Ascending)})
         '
         'GridColumnNo
         '

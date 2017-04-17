@@ -37,6 +37,7 @@ Partial Class FormWHSvcLevel
         Me.GridColumnDiff = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnCat = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnReff = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnStatus = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GCFilter = New DevExpress.XtraEditors.GroupControl()
         Me.BtnView = New DevExpress.XtraEditors.SimpleButton()
         Me.BHide = New DevExpress.XtraEditors.SimpleButton()
@@ -92,6 +93,29 @@ Partial Class FormWHSvcLevel
         Me.DEFromAcc = New DevExpress.XtraEditors.DateEdit()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
+        Me.XTPByReturn = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCReturn = New DevExpress.XtraGrid.GridControl()
+        Me.GVReturn = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn13 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn14 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn16 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn17 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn18 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn19 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GroupControl1 = New DevExpress.XtraEditors.GroupControl()
+        Me.BtnViewReturn = New DevExpress.XtraEditors.SimpleButton()
+        Me.SimpleButton6 = New DevExpress.XtraEditors.SimpleButton()
+        Me.SimpleButton7 = New DevExpress.XtraEditors.SimpleButton()
+        Me.DEUntilReturn = New DevExpress.XtraEditors.DateEdit()
+        Me.DEFromReturn = New DevExpress.XtraEditors.DateEdit()
+        Me.LabelControl7 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl8 = New DevExpress.XtraEditors.LabelControl()
+        Me.GridColumnNote = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XTCSvcLelel, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCSvcLelel.SuspendLayout()
         Me.XTPBySO.SuspendLayout()
@@ -122,6 +146,15 @@ Partial Class FormWHSvcLevel
         CType(Me.DEUntilAcc.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEFromAcc.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEFromAcc.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTPByReturn.SuspendLayout()
+        CType(Me.GCReturn, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVReturn, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupControl1.SuspendLayout()
+        CType(Me.DEUntilReturn.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEUntilReturn.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEFromReturn.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEFromReturn.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'XTCSvcLelel
@@ -133,7 +166,7 @@ Partial Class FormWHSvcLevel
         Me.XTCSvcLelel.SelectedTabPage = Me.XTPBySO
         Me.XTCSvcLelel.Size = New System.Drawing.Size(777, 364)
         Me.XTCSvcLelel.TabIndex = 0
-        Me.XTCSvcLelel.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPBySO, Me.XTPByCode, Me.XTPByAcc})
+        Me.XTCSvcLelel.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPBySO, Me.XTPByCode, Me.XTPByAcc, Me.XTPByReturn})
         '
         'XTPBySO
         '
@@ -141,7 +174,7 @@ Partial Class FormWHSvcLevel
         Me.XTPBySO.Controls.Add(Me.GCFilter)
         Me.XTPBySO.Name = "XTPBySO"
         Me.XTPBySO.Size = New System.Drawing.Size(771, 336)
-        Me.XTPBySO.Text = "By Prepare Order"
+        Me.XTPBySO.Text = "Prepare Order"
         '
         'GCBySO
         '
@@ -155,7 +188,7 @@ Partial Class FormWHSvcLevel
         '
         'GVBySO
         '
-        Me.GVBySO.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnPrepNumber, Me.GridColumnPrepDate, Me.GridColumnBarcode, Me.GridColumnDesignCode, Me.GridColumnClass, Me.GridColumnDsgName, Me.GridColumnSize, Me.GridColumnFrom, Me.GridColumnTo, Me.GridColumnOrderQty, Me.GridColumnDelQty, Me.GridColumnDiff, Me.GridColumnCat, Me.GridColumnReff})
+        Me.GVBySO.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnPrepNumber, Me.GridColumnPrepDate, Me.GridColumnBarcode, Me.GridColumnDesignCode, Me.GridColumnClass, Me.GridColumnDsgName, Me.GridColumnSize, Me.GridColumnFrom, Me.GridColumnTo, Me.GridColumnOrderQty, Me.GridColumnDelQty, Me.GridColumnDiff, Me.GridColumnCat, Me.GridColumnReff, Me.GridColumnStatus, Me.GridColumnNote})
         Me.GVBySO.GridControl = Me.GCBySO
         Me.GVBySO.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_order_det_qty", Me.GridColumnOrderQty, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "pl_sales_order_del_det_qty", Me.GridColumnDelQty, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "diff_qty", Me.GridColumnDiff, "{0:N0}")})
         Me.GVBySO.Name = "GVBySO"
@@ -305,6 +338,14 @@ Partial Class FormWHSvcLevel
         Me.GridColumnReff.Visible = True
         Me.GridColumnReff.VisibleIndex = 1
         '
+        'GridColumnStatus
+        '
+        Me.GridColumnStatus.Caption = "Status"
+        Me.GridColumnStatus.FieldName = "prepare_status"
+        Me.GridColumnStatus.Name = "GridColumnStatus"
+        Me.GridColumnStatus.Visible = True
+        Me.GridColumnStatus.VisibleIndex = 14
+        '
         'GCFilter
         '
         Me.GCFilter.CaptionLocation = DevExpress.Utils.Locations.Left
@@ -398,7 +439,7 @@ Partial Class FormWHSvcLevel
         Me.XTPByCode.Controls.Add(Me.GroupControlByCode)
         Me.XTPByCode.Name = "XTPByCode"
         Me.XTPByCode.Size = New System.Drawing.Size(771, 336)
-        Me.XTPByCode.Text = "By Code"
+        Me.XTPByCode.Text = "Prepare Order By Code"
         '
         'GCByCode
         '
@@ -674,7 +715,7 @@ Partial Class FormWHSvcLevel
         Me.XTPByAcc.Controls.Add(Me.GroupControlByAccount)
         Me.XTPByAcc.Name = "XTPByAcc"
         Me.XTPByAcc.Size = New System.Drawing.Size(771, 336)
-        Me.XTPByAcc.Text = "By Account"
+        Me.XTPByAcc.Text = "Prepare Order By Account"
         '
         'GCByAcco
         '
@@ -909,6 +950,249 @@ Partial Class FormWHSvcLevel
         Me.LabelControl4.TabIndex = 8892
         Me.LabelControl4.Text = "From"
         '
+        'XTPByReturn
+        '
+        Me.XTPByReturn.Controls.Add(Me.GCReturn)
+        Me.XTPByReturn.Controls.Add(Me.GroupControl1)
+        Me.XTPByReturn.Name = "XTPByReturn"
+        Me.XTPByReturn.Size = New System.Drawing.Size(771, 336)
+        Me.XTPByReturn.Text = "Return"
+        '
+        'GCReturn
+        '
+        Me.GCReturn.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCReturn.Location = New System.Drawing.Point(0, 39)
+        Me.GCReturn.MainView = Me.GVReturn
+        Me.GCReturn.Name = "GCReturn"
+        Me.GCReturn.Size = New System.Drawing.Size(771, 297)
+        Me.GCReturn.TabIndex = 5
+        Me.GCReturn.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVReturn})
+        '
+        'GVReturn
+        '
+        Me.GVReturn.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn8, Me.GridColumn9, Me.GridColumn12, Me.GridColumn13, Me.GridColumn14, Me.GridColumn16, Me.GridColumn17, Me.GridColumn18, Me.GridColumn19})
+        Me.GVReturn.GridControl = Me.GCReturn
+        Me.GVReturn.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_order_det_qty", Me.GridColumn17, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_det_qty", Me.GridColumn18, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "diff_qty", Me.GridColumn19, "{0:N0}")})
+        Me.GVReturn.Name = "GVReturn"
+        Me.GVReturn.OptionsBehavior.AutoExpandAllGroups = True
+        Me.GVReturn.OptionsBehavior.Editable = False
+        Me.GVReturn.OptionsView.ColumnAutoWidth = False
+        Me.GVReturn.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.[True]
+        Me.GVReturn.OptionsView.ShowFooter = True
+        Me.GVReturn.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn1
+        '
+        Me.GridColumn1.Caption = "Return Order#"
+        Me.GridColumn1.FieldName = "sales_return_order_number"
+        Me.GridColumn1.Name = "GridColumn1"
+        Me.GridColumn1.Visible = True
+        Me.GridColumn1.VisibleIndex = 0
+        '
+        'GridColumn2
+        '
+        Me.GridColumn2.Caption = "Date"
+        Me.GridColumn2.DisplayFormat.FormatString = "dd\/MM\/yyyy"
+        Me.GridColumn2.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn2.FieldName = "sales_return_order_date"
+        Me.GridColumn2.Name = "GridColumn2"
+        Me.GridColumn2.Visible = True
+        Me.GridColumn2.VisibleIndex = 1
+        '
+        'GridColumn8
+        '
+        Me.GridColumn8.Caption = "Barcode"
+        Me.GridColumn8.FieldName = "product_full_code"
+        Me.GridColumn8.Name = "GridColumn8"
+        Me.GridColumn8.Visible = True
+        Me.GridColumn8.VisibleIndex = 2
+        '
+        'GridColumn9
+        '
+        Me.GridColumn9.Caption = "Code"
+        Me.GridColumn9.FieldName = "design_code"
+        Me.GridColumn9.Name = "GridColumn9"
+        Me.GridColumn9.Visible = True
+        Me.GridColumn9.VisibleIndex = 3
+        '
+        'GridColumn12
+        '
+        Me.GridColumn12.Caption = "Class"
+        Me.GridColumn12.FieldName = "class_display"
+        Me.GridColumn12.Name = "GridColumn12"
+        Me.GridColumn12.Visible = True
+        Me.GridColumn12.VisibleIndex = 4
+        '
+        'GridColumn13
+        '
+        Me.GridColumn13.Caption = "Description"
+        Me.GridColumn13.FieldName = "design_display_name"
+        Me.GridColumn13.Name = "GridColumn13"
+        Me.GridColumn13.Visible = True
+        Me.GridColumn13.VisibleIndex = 5
+        '
+        'GridColumn14
+        '
+        Me.GridColumn14.Caption = "Size"
+        Me.GridColumn14.FieldName = "size"
+        Me.GridColumn14.Name = "GridColumn14"
+        Me.GridColumn14.Visible = True
+        Me.GridColumn14.VisibleIndex = 6
+        '
+        'GridColumn16
+        '
+        Me.GridColumn16.Caption = "Store"
+        Me.GridColumn16.FieldName = "comp_name_to"
+        Me.GridColumn16.Name = "GridColumn16"
+        Me.GridColumn16.Visible = True
+        Me.GridColumn16.VisibleIndex = 7
+        '
+        'GridColumn17
+        '
+        Me.GridColumn17.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn17.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn17.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn17.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn17.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
+        Me.GridColumn17.Caption = "Order Qty"
+        Me.GridColumn17.DisplayFormat.FormatString = "N0"
+        Me.GridColumn17.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn17.FieldName = "sales_return_order_det_qty"
+        Me.GridColumn17.Name = "GridColumn17"
+        Me.GridColumn17.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_order_det_qty", "{0:n0}")})
+        Me.GridColumn17.Visible = True
+        Me.GridColumn17.VisibleIndex = 8
+        Me.GridColumn17.Width = 49
+        '
+        'GridColumn18
+        '
+        Me.GridColumn18.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn18.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn18.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn18.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn18.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
+        Me.GridColumn18.Caption = "Return Qty"
+        Me.GridColumn18.DisplayFormat.FormatString = "N0"
+        Me.GridColumn18.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn18.FieldName = "sales_return_det_qty"
+        Me.GridColumn18.Name = "GridColumn18"
+        Me.GridColumn18.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_det_qty", "{0:n0}")})
+        Me.GridColumn18.Visible = True
+        Me.GridColumn18.VisibleIndex = 9
+        Me.GridColumn18.Width = 56
+        '
+        'GridColumn19
+        '
+        Me.GridColumn19.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn19.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn19.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn19.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn19.Caption = "Diff"
+        Me.GridColumn19.DisplayFormat.FormatString = "N0"
+        Me.GridColumn19.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn19.FieldName = "diff_qty"
+        Me.GridColumn19.Name = "GridColumn19"
+        Me.GridColumn19.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "diff_qty", "{0:n0}")})
+        Me.GridColumn19.UnboundExpression = "[sales_return_order_det_qty] - [sales_return_det_qty]"
+        Me.GridColumn19.UnboundType = DevExpress.Data.UnboundColumnType.[Integer]
+        Me.GridColumn19.Visible = True
+        Me.GridColumn19.VisibleIndex = 10
+        '
+        'GroupControl1
+        '
+        Me.GroupControl1.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupControl1.Controls.Add(Me.BtnViewReturn)
+        Me.GroupControl1.Controls.Add(Me.SimpleButton6)
+        Me.GroupControl1.Controls.Add(Me.SimpleButton7)
+        Me.GroupControl1.Controls.Add(Me.DEUntilReturn)
+        Me.GroupControl1.Controls.Add(Me.DEFromReturn)
+        Me.GroupControl1.Controls.Add(Me.LabelControl7)
+        Me.GroupControl1.Controls.Add(Me.LabelControl8)
+        Me.GroupControl1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.GroupControl1.Location = New System.Drawing.Point(0, 0)
+        Me.GroupControl1.Name = "GroupControl1"
+        Me.GroupControl1.Size = New System.Drawing.Size(771, 39)
+        Me.GroupControl1.TabIndex = 4
+        '
+        'BtnViewReturn
+        '
+        Me.BtnViewReturn.Location = New System.Drawing.Point(317, 9)
+        Me.BtnViewReturn.LookAndFeel.SkinName = "Blue"
+        Me.BtnViewReturn.Name = "BtnViewReturn"
+        Me.BtnViewReturn.Size = New System.Drawing.Size(75, 20)
+        Me.BtnViewReturn.TabIndex = 8896
+        Me.BtnViewReturn.Text = "View"
+        '
+        'SimpleButton6
+        '
+        Me.SimpleButton6.ImageIndex = 9
+        Me.SimpleButton6.Location = New System.Drawing.Point(938, 14)
+        Me.SimpleButton6.Name = "SimpleButton6"
+        Me.SimpleButton6.Size = New System.Drawing.Size(104, 20)
+        Me.SimpleButton6.TabIndex = 8898
+        Me.SimpleButton6.Text = "Hide All Detail"
+        Me.SimpleButton6.Visible = False
+        '
+        'SimpleButton7
+        '
+        Me.SimpleButton7.ImageIndex = 8
+        Me.SimpleButton7.Location = New System.Drawing.Point(835, 14)
+        Me.SimpleButton7.Name = "SimpleButton7"
+        Me.SimpleButton7.Size = New System.Drawing.Size(99, 20)
+        Me.SimpleButton7.TabIndex = 8897
+        Me.SimpleButton7.Text = "Expand All Detail"
+        Me.SimpleButton7.Visible = False
+        '
+        'DEUntilReturn
+        '
+        Me.DEUntilReturn.EditValue = Nothing
+        Me.DEUntilReturn.Location = New System.Drawing.Point(202, 9)
+        Me.DEUntilReturn.Name = "DEUntilReturn"
+        Me.DEUntilReturn.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEUntilReturn.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.DEUntilReturn.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.DEUntilReturn.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEUntilReturn.Properties.Mask.EditMask = "dd\/MM\/yyyy"
+        Me.DEUntilReturn.Size = New System.Drawing.Size(111, 20)
+        Me.DEUntilReturn.TabIndex = 8895
+        '
+        'DEFromReturn
+        '
+        Me.DEFromReturn.EditValue = Nothing
+        Me.DEFromReturn.Location = New System.Drawing.Point(58, 9)
+        Me.DEFromReturn.Name = "DEFromReturn"
+        Me.DEFromReturn.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEFromReturn.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.DEFromReturn.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.DEFromReturn.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEFromReturn.Properties.Mask.EditMask = "dd\/MM\/yyyy"
+        Me.DEFromReturn.Size = New System.Drawing.Size(111, 20)
+        Me.DEFromReturn.TabIndex = 8894
+        '
+        'LabelControl7
+        '
+        Me.LabelControl7.Location = New System.Drawing.Point(175, 12)
+        Me.LabelControl7.Name = "LabelControl7"
+        Me.LabelControl7.Size = New System.Drawing.Size(21, 13)
+        Me.LabelControl7.TabIndex = 8893
+        Me.LabelControl7.Text = "Until"
+        '
+        'LabelControl8
+        '
+        Me.LabelControl8.Location = New System.Drawing.Point(28, 12)
+        Me.LabelControl8.Name = "LabelControl8"
+        Me.LabelControl8.Size = New System.Drawing.Size(24, 13)
+        Me.LabelControl8.TabIndex = 8892
+        Me.LabelControl8.Text = "From"
+        '
+        'GridColumnNote
+        '
+        Me.GridColumnNote.Caption = "Note"
+        Me.GridColumnNote.FieldName = "final_comment"
+        Me.GridColumnNote.Name = "GridColumnNote"
+        Me.GridColumnNote.Visible = True
+        Me.GridColumnNote.VisibleIndex = 15
+        '
         'FormWHSvcLevel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -952,6 +1236,16 @@ Partial Class FormWHSvcLevel
         CType(Me.DEUntilAcc.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEFromAcc.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEFromAcc.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTPByReturn.ResumeLayout(False)
+        CType(Me.GCReturn, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVReturn, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupControl1.ResumeLayout(False)
+        Me.GroupControl1.PerformLayout()
+        CType(Me.DEUntilReturn.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEUntilReturn.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEFromReturn.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEFromReturn.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1029,4 +1323,28 @@ Partial Class FormWHSvcLevel
     Friend WithEvents gridBandDEL As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents GridColumnCat As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnReff As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents XTPByReturn As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents GCReturn As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVReturn As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn2 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn8 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn9 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn12 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn13 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn14 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn16 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn17 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn18 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn19 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GroupControl1 As DevExpress.XtraEditors.GroupControl
+    Friend WithEvents BtnViewReturn As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents SimpleButton6 As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents SimpleButton7 As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents DEUntilReturn As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents DEFromReturn As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents LabelControl7 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LabelControl8 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents GridColumnStatus As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnNote As DevExpress.XtraGrid.Columns.GridColumn
 End Class

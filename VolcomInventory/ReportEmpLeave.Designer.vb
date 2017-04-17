@@ -441,7 +441,7 @@ Partial Public Class ReportEmpLeave
         Me.XrLabel5.SizeF = New System.Drawing.SizeF(131.935!, 24.99997!)
         Me.XrLabel5.StylePriority.UseFont = False
         Me.XrLabel5.StylePriority.UseTextAlignment = False
-        Me.XrLabel5.Text = "Tanggal Bergabung"
+        Me.XrLabel5.Text = "Tanggal Mulai Kerja"
         Me.XrLabel5.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         '
         'XrLabel6
@@ -873,7 +873,7 @@ Partial Public Class ReportEmpLeave
         Me.XrLabel24.SizeF = New System.Drawing.SizeF(131.9346!, 25.0!)
         Me.XrLabel24.StylePriority.UseFont = False
         Me.XrLabel24.StylePriority.UseTextAlignment = False
-        Me.XrLabel24.Text = "Cuti Terpakai"
+        Me.XrLabel24.Text = "Lama Cuti"
         Me.XrLabel24.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         '
         'XrLabel25

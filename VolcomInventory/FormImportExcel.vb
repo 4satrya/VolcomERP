@@ -1828,7 +1828,7 @@ Public Class FormImportExcel
                                 newRow("design_price") = GVData.GetRowCellValue(i, "design_price")
                                 newRow("id_design") = GVData.GetRowCellValue(i, "id_design").ToString()
                                 newRow("id_product") = GVData.GetRowCellValue(i, "id_product").ToString()
-                                newRow("id_sample") = GVData.GetRowCellValue(i, "id_sample").ToString()
+                                'newRow("id_sample") = GVData.GetRowCellValue(i, "id_sample").ToString()
                                 newRow("id_design_price") = GVData.GetRowCellValue(i, "id_design_price").ToString()
                                 newRow("id_sales_pos_det") = "0"
                                 newRow("color") = GVData.GetRowCellValue(i, "Color").ToString()

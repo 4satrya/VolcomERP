@@ -20,9 +20,7 @@
             DEUntilLeave.Visible = False
             Luntil.Visible = False
         Else 'leave
-            'If FormEmpLeaveDet.LELeaveType.EditValue.ToString = "1" Then
-            BPickAll.Visible = False
-            'End If
+            BPickAll.Visible = True
         End If
     End Sub
 
@@ -247,5 +245,12 @@
         Next
 
         Close()
+    End Sub
+
+    Private Sub DEStart_EditValueChanged(sender As Object, e As EventArgs) Handles DEStart.EditValueChanged
+        Try
+            DEUntil.Properties.MinValue = DEStart.EditValue
+        Catch ex As Exception
+        End Try
     End Sub
 End Class

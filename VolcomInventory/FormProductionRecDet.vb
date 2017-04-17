@@ -50,13 +50,16 @@ Public Class FormProductionRecDet
 
             'own source
             Dim id_qc As String = execute_query("SELECT id_qc_dept FROM tb_opt", 0, True, "", "", "", "")
-            Dim query_get_comp_name As String = "SELECT CONCAT(b.comp_number,'-', b.comp_name) AS `comp_name` FROM tb_m_comp_contact a "
+            Dim query_get_comp_name As String = "SELECT b.comp_number, b.comp_name, CONCAT(b.comp_number,'-', b.comp_name) AS `comp_name_combine` FROM tb_m_comp_contact a "
             query_get_comp_name += "INNER JOIN tb_m_comp b ON a.id_comp = b.id_comp "
             query_get_comp_name += "WHERE a.id_comp_contact = '" + id_qc + "' AND b.id_departement = '" + id_departement_user + "'"
             Try
-                TECompShipToName.Text = execute_query(query_get_comp_name, 0, True, "", "", "", "")
+                Dim data_get_comp_name As DataTable = execute_query(query_get_comp_name, -1, True, "", "", "", "")
+                TxtCodeCompTo.Text = data_get_comp_name.Rows(0)("comp_number").ToString
+                TECompShipToName.Text = data_get_comp_name.Rows(0)("comp_name").ToString
                 id_comp_to = id_qc
             Catch ex As Exception
+                TxtCodeCompTo.Text = ""
                 TECompShipToName.Text = ""
                 id_comp_to = "-1"
             End Try
@@ -88,9 +91,11 @@ Public Class FormProductionRecDet
 
             id_order = data.Rows(0)("id_prod_order").ToString
             id_comp_from = data.Rows(0)("id_comp_from").ToString
-            TECompName.Text = data.Rows(0)("comp_from_number").ToString + "-" + data.Rows(0)("comp_from").ToString
+            TxtCodeCompFrom.Text = data.Rows(0)("comp_from_number").ToString
+            TECompName.Text = data.Rows(0)("comp_from").ToString
             id_comp_to = data.Rows(0)("id_comp_to").ToString
-            TECompShipToName.Text = data.Rows(0)("comp_to_number").ToString + "-" + data.Rows(0)("comp_to").ToString
+            TxtCodeCompTo.Text = data.Rows(0)("comp_to_number").ToString
+            TECompShipToName.Text = data.Rows(0)("comp_to").ToString
             id_design = data.Rows(0)("id_design").ToString
 
             order_created = data.Rows(0)("prod_order_datex").ToString
@@ -165,9 +170,11 @@ Public Class FormProductionRecDet
         Dim data_vend As DataTable = getMainVendor(id_order)
         Try
             id_comp_from = data_vend.Rows(0)("id_comp_contact").ToString
-            TECompName.Text = data_vend.Rows(0)("comp_number").ToString + "-" + data_vend.Rows(0)("comp_name").ToString
+            TxtCodeCompFrom.Text = data_vend.Rows(0)("comp_number").ToString
+            TECompName.Text = data_vend.Rows(0)("comp_name").ToString
         Catch ex As Exception
             id_comp_from = "-1"
+            TxtCodeCompFrom.Text = ""
             TECompName.Text = ""
         End Try
 
@@ -759,6 +766,10 @@ Public Class FormProductionRecDet
             Next
             ColCode.VisibleIndex = 0
             ColQtyRec.VisibleIndex = 1
+            GridColumnNumber.VisibleIndex = 2
+            GridColumnFrom.VisibleIndex = 3
+            GridColumnTo.VisibleIndex = 4
+            ColNote.VisibleIndex = 5
             GVListPurchase.OptionsPrint.PrintFooter = False
             GVListPurchase.OptionsPrint.PrintHeader = False
 
@@ -790,6 +801,11 @@ Public Class FormProductionRecDet
             ColSize.VisibleIndex = 4
             ColQtyRec.VisibleIndex = 5
             ColNote.VisibleIndex = 6
+            GridColumnNumber.Visible = False
+            GridColumnFrom.Visible = False
+            GridColumnTo.Visible = False
+            GVListPurchase.OptionsPrint.PrintFooter = True
+            GVListPurchase.OptionsPrint.PrintHeader = True
             Cursor = Cursors.Default
         End If
     End Sub
@@ -824,10 +840,18 @@ Public Class FormProductionRecDet
             colIndex = 0
             For j As Integer = 0 To dtTemp.VisibleColumns.Count - 1
                 colIndex = colIndex + 1
-                If j = 0 Then
+                If j = 0 Then 'code
                     wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, "code").ToString
-                Else
+                ElseIf j = 1 Then 'qty
                     wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, "prod_order_rec_det_qty")
+                ElseIf j = 2 Then 'number
+                    wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellDisplayText(i, "number").ToString
+                ElseIf j = 3 Then 'from
+                    wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellDisplayText(i, "from").ToString
+                ElseIf j = 4 Then 'to
+                    wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellDisplayText(i, "to").ToString
+                ElseIf j = 5 Then 'remark
+                    wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, "prod_order_rec_det_note").ToString
                 End If
             Next
         Next
@@ -857,5 +881,16 @@ Public Class FormProductionRecDet
         Finally
             o = Nothing
         End Try
+    End Sub
+
+    Private Sub GVListPurchase_CustomUnboundColumnData(sender As Object, e As DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs) Handles GVListPurchase.CustomUnboundColumnData
+        Dim view As DevExpress.XtraGrid.Views.Grid.GridView = TryCast(sender, DevExpress.XtraGrid.Views.Grid.GridView)
+        If e.Column.FieldName = "from" AndAlso e.IsGetData Then
+            e.Value = TxtCodeCompFrom.Text.ToString
+        ElseIf e.Column.FieldName = "to" AndAlso e.IsGetData Then
+            e.Value = TxtCodeCompTo.Text.ToString
+        ElseIf e.Column.FieldName = "number" AndAlso e.IsGetData Then
+            e.Value = TERecNumber.Text.ToString
+        End If
     End Sub
 End Class

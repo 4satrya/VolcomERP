@@ -539,6 +539,12 @@
     <Compile Include="FormEmpDPDet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormEmpDPPick.Designer.vb">
+      <DependentUpon>FormEmpDPPick.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormEmpDPPick.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormEmpEmail.Designer.vb">
       <DependentUpon>FormEmpEmail.vb</DependentUpon>
     </Compile>
@@ -681,6 +687,18 @@
       <DependentUpon>FormEmpReview.vb</DependentUpon>
     </Compile>
     <Compile Include="FormEmpReview.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEmpStoreSchCompare.Designer.vb">
+      <DependentUpon>FormEmpStoreSchCompare.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormEmpStoreSchCompare.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEmpStoreSchCompareHistory.Designer.vb">
+      <DependentUpon>FormEmpStoreSchCompareHistory.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormEmpStoreSchCompareHistory.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormFGBorrowQCReq.Designer.vb">
@@ -4809,6 +4827,9 @@
     <EmbeddedResource Include="FormEmpDPDet.resx">
       <DependentUpon>FormEmpDPDet.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormEmpDPPick.resx">
+      <DependentUpon>FormEmpDPPick.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormEmpEmail.resx">
       <DependentUpon>FormEmpEmail.vb</DependentUpon>
     </EmbeddedResource>
@@ -4877,6 +4898,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormEmpReview.resx">
       <DependentUpon>FormEmpReview.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmpStoreSchCompare.resx">
+      <DependentUpon>FormEmpStoreSchCompare.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmpStoreSchCompareHistory.resx">
+      <DependentUpon>FormEmpStoreSchCompareHistory.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormFGBorrowQCReq.resx">
       <DependentUpon>FormFGBorrowQCReq.vb</DependentUpon>

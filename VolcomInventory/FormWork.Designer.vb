@@ -8063,7 +8063,7 @@ Partial Class FormWork
         '
         'GridColumn894
         '
-        Me.GridColumn894.Caption = "Design Code"
+        Me.GridColumn894.Caption = "Code"
         Me.GridColumn894.FieldName = "info_design_code"
         Me.GridColumn894.Name = "GridColumn894"
         Me.GridColumn894.Visible = True

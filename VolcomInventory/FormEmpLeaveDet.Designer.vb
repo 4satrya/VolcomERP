@@ -162,7 +162,7 @@ Partial Class FormEmpLeaveDet
         '
         'LELeaveType
         '
-        Me.LELeaveType.Location = New System.Drawing.Point(399, 10)
+        Me.LELeaveType.Location = New System.Drawing.Point(416, 10)
         Me.LELeaveType.Name = "LELeaveType"
         Me.LELeaveType.Properties.Appearance.Options.UseTextOptions = True
         Me.LELeaveType.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near
@@ -179,7 +179,7 @@ Partial Class FormEmpLeaveDet
         '
         'LabelControl9
         '
-        Me.LabelControl9.Location = New System.Drawing.Point(351, 12)
+        Me.LabelControl9.Location = New System.Drawing.Point(368, 12)
         Me.LabelControl9.Name = "LabelControl9"
         Me.LabelControl9.Size = New System.Drawing.Size(42, 13)
         Me.LabelControl9.TabIndex = 143
@@ -188,7 +188,7 @@ Partial Class FormEmpLeaveDet
         'TENumber
         '
         Me.TENumber.EditValue = ""
-        Me.TENumber.Location = New System.Drawing.Point(128, 10)
+        Me.TENumber.Location = New System.Drawing.Point(145, 10)
         Me.TENumber.Name = "TENumber"
         Me.TENumber.Properties.EditValueChangedDelay = 1
         Me.TENumber.Properties.ReadOnly = True
@@ -206,7 +206,7 @@ Partial Class FormEmpLeaveDet
         'TEEmployeeCode
         '
         Me.TEEmployeeCode.EditValue = ""
-        Me.TEEmployeeCode.Location = New System.Drawing.Point(128, 36)
+        Me.TEEmployeeCode.Location = New System.Drawing.Point(145, 36)
         Me.TEEmployeeCode.Name = "TEEmployeeCode"
         Me.TEEmployeeCode.Properties.EditValueChangedDelay = 1
         Me.TEEmployeeCode.Properties.ReadOnly = True
@@ -215,7 +215,7 @@ Partial Class FormEmpLeaveDet
         '
         'BPickEmployee
         '
-        Me.BPickEmployee.Location = New System.Drawing.Point(583, 34)
+        Me.BPickEmployee.Location = New System.Drawing.Point(600, 34)
         Me.BPickEmployee.Name = "BPickEmployee"
         Me.BPickEmployee.Size = New System.Drawing.Size(29, 23)
         Me.BPickEmployee.TabIndex = 0
@@ -225,7 +225,7 @@ Partial Class FormEmpLeaveDet
         'DEJoinDate
         '
         Me.DEJoinDate.EditValue = Nothing
-        Me.DEJoinDate.Location = New System.Drawing.Point(128, 88)
+        Me.DEJoinDate.Location = New System.Drawing.Point(145, 88)
         Me.DEJoinDate.Name = "DEJoinDate"
         Me.DEJoinDate.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.DEJoinDate.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
@@ -239,14 +239,14 @@ Partial Class FormEmpLeaveDet
         '
         Me.LabelControl4.Location = New System.Drawing.Point(35, 91)
         Me.LabelControl4.Name = "LabelControl4"
-        Me.LabelControl4.Size = New System.Drawing.Size(44, 13)
+        Me.LabelControl4.Size = New System.Drawing.Size(93, 13)
         Me.LabelControl4.TabIndex = 94
-        Me.LabelControl4.Text = "Join date"
+        Me.LabelControl4.Text = "Tanggal Mulai Kerja"
         '
         'TEDept
         '
         Me.TEDept.EditValue = ""
-        Me.TEDept.Location = New System.Drawing.Point(128, 62)
+        Me.TEDept.Location = New System.Drawing.Point(145, 62)
         Me.TEDept.Name = "TEDept"
         Me.TEDept.Properties.EditValueChangedDelay = 1
         Me.TEDept.Properties.ReadOnly = True
@@ -264,7 +264,7 @@ Partial Class FormEmpLeaveDet
         'TEPosition
         '
         Me.TEPosition.EditValue = ""
-        Me.TEPosition.Location = New System.Drawing.Point(399, 62)
+        Me.TEPosition.Location = New System.Drawing.Point(416, 62)
         Me.TEPosition.Name = "TEPosition"
         Me.TEPosition.Properties.EditValueChangedDelay = 1
         Me.TEPosition.Properties.ReadOnly = True
@@ -273,7 +273,7 @@ Partial Class FormEmpLeaveDet
         '
         'LabelControl1
         '
-        Me.LabelControl1.Location = New System.Drawing.Point(351, 65)
+        Me.LabelControl1.Location = New System.Drawing.Point(368, 65)
         Me.LabelControl1.Name = "LabelControl1"
         Me.LabelControl1.Size = New System.Drawing.Size(26, 13)
         Me.LabelControl1.TabIndex = 90
@@ -282,7 +282,7 @@ Partial Class FormEmpLeaveDet
         'TEEmployeeName
         '
         Me.TEEmployeeName.EditValue = ""
-        Me.TEEmployeeName.Location = New System.Drawing.Point(253, 36)
+        Me.TEEmployeeName.Location = New System.Drawing.Point(270, 36)
         Me.TEEmployeeName.Name = "TEEmployeeName"
         Me.TEEmployeeName.Properties.EditValueChangedDelay = 1
         Me.TEEmployeeName.Properties.ReadOnly = True
@@ -651,11 +651,11 @@ Partial Class FormEmpLeaveDet
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(50, 50)
+        Me.Label1.Location = New System.Drawing.Point(66, 50)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(77, 13)
+        Me.Label1.Size = New System.Drawing.Size(61, 13)
         Me.Label1.TabIndex = 3
-        Me.Label1.Text = "Cuti Terpakai :"
+        Me.Label1.Text = "Lama Cuti :"
         '
         'PanelControl1
         '
@@ -804,7 +804,7 @@ Partial Class FormEmpLeaveDet
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(18, 83)
+        Me.Label4.Location = New System.Drawing.Point(16, 83)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(111, 13)
         Me.Label4.TabIndex = 97

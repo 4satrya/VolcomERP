@@ -176,7 +176,7 @@
             query_complete += "UNION ALL "
             query_complete += "SELECT getCompByContact(del.id_store_contact_to, 4) AS `drawer`, '1', del_det.id_product, dsg.design_cop, '43' AS `report_mark_type`, del.id_pl_sales_order_del AS `id_report`, del_det.pl_sales_order_del_det_qty, NOW(), '','1' "
             query_complete += "FROM tb_pl_sales_order_del_slip_det dsd "
-            query_complete += "INNER JOIN tb_pl_sales_order_del del ON del.id_pl_sales_order_del = dsd.id_pl_sales_order_del"
+            query_complete += "INNER JOIN tb_pl_sales_order_del del ON del.id_pl_sales_order_del = dsd.id_pl_sales_order_del "
             query_complete += "INNER JOIN tb_pl_sales_order_del_det del_det ON del.id_pl_sales_order_del = del_det.id_pl_sales_order_del "
             query_complete += "INNER JOIN tb_m_product prod ON prod.id_product = del_det.id_product  "
             query_complete += "INNER JOIN tb_m_design dsg ON dsg.id_design = prod.id_design "

@@ -255,8 +255,9 @@
                         Cursor = Cursors.Default
                     End If
                 End If
-                FormSalesOrderSvcLevel.GVSalesDelOrder.ActiveFilterString = ""
-                FormSalesOrderSvcLevel.viewDO()
+                FormSalesOrderSvcLevel.GVDel.ActiveFilterString = ""
+                FormSalesOrderSvcLevel.viewDS()
+                FormSalesOrderSvcLevel.viewSalesOrder()
                 Close()
             End If
         Else

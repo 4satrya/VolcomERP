@@ -27,20 +27,28 @@
     'View Data
     'View Packing List
     Sub viewPL()
-        Dim query As String = "SELECT ss.id_season, ss.season, k.pl_category, i.prod_order_number, a.id_pl_prod_order ,a.id_comp_contact_from , a.id_comp_contact_to, a.pl_prod_order_note, a.pl_prod_order_number, "
+        Dim query As String = "SELECT ssd.id_season, ssd.season, k.pl_category, i.prod_order_number, dsg.design_code AS `code`, dsg.design_display_name AS `name`, a.id_pl_prod_order ,a.id_comp_contact_from , a.id_comp_contact_to, a.pl_prod_order_note, a.pl_prod_order_number, "
         query += "CONCAT(d.comp_number,' - ',d.comp_name) AS comp_name_from, CONCAT(f.comp_number,' - ',f.comp_name) AS comp_name_to, h.report_status, a.id_report_status, "
-        query += "pl_prod_order_date, a.id_pd_alloc, pd_alloc.pd_alloc "
+        query += "pl_prod_order_date, a.id_pd_alloc, pd_alloc.pd_alloc, det.total "
         query += "FROM tb_pl_prod_order a "
         query += "INNER JOIN tb_m_comp_contact c ON a.id_comp_contact_from = c.id_comp_contact "
         query += "INNER JOIN tb_m_comp d ON c.id_comp = d.id_comp "
         query += "INNER JOIN tb_m_comp_contact e ON a.id_comp_contact_to = e.id_comp_contact "
         query += "INNER JOIN tb_m_comp f ON e.id_comp = f.id_comp "
         query += "INNER JOIN tb_lookup_report_status h ON h.id_report_status = a.id_report_status "
-        query += "INNER JOIN tb_prod_order i ON a.id_prod_order = i.id_prod_order "
+        query += "INNER JOIN tb_prod_order i ON a.id_prod_order = i.id_prod_order 
+        INNER JOIN tb_prod_demand_design pd_dsg ON pd_dsg.id_prod_demand_design = i.id_prod_demand_design
+        INNER JOIN tb_m_design dsg ON dsg.id_design = pd_dsg.id_design "
         query += "INNER JOIN tb_lookup_pl_category k ON k.id_pl_category = a.id_pl_category "
         query += "LEFT JOIN tb_lookup_pd_alloc pd_alloc ON pd_alloc.id_pd_alloc = a.id_pd_alloc "
         query += "INNER JOIN tb_season_delivery del ON del.id_delivery = i.id_delivery "
-        query += "INNER JOIN tb_season ss ON ss.id_season = del.id_season "
+        query += "INNER JOIN tb_season ss ON ss.id_season = del.id_season 
+        INNER JOIN tb_season ssd ON ssd.id_season = dsg.id_season "
+        query += "LEFT JOIN(
+        SELECT pld.id_pl_prod_order, SUM(pld.pl_prod_order_det_qty) AS `total`
+        FROM tb_pl_prod_order_det pld
+        GROUP BY pld.id_pl_prod_order
+        ) det ON det.id_pl_prod_order = a.id_pl_prod_order "
         query += "ORDER BY a.id_pl_prod_order DESC "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCPL.DataSource = data

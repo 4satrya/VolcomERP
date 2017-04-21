@@ -39,6 +39,9 @@ Partial Class FormProductionPLToWH
         Me.GridColumnStatus = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnPLCategory = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnPDAlloc = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnDesignCode = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnDesignName = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnTotal = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.XTPPLInfo = New DevExpress.XtraTab.XtraTabPage()
         Me.SCCPL = New DevExpress.XtraEditors.SplitContainerControl()
         Me.GroupControlProd = New DevExpress.XtraEditors.GroupControl()
@@ -122,13 +125,15 @@ Partial Class FormProductionPLToWH
         '
         'GVPL
         '
-        Me.GVPL.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumnIdPLSample, Me.GridColumnIdContactFrom, Me.GridColumnIdCompContactTo, Me.GridColumn1, Me.GridColumnPLNumber, Me.GridColumnSRNumber, Me.GridColumnFrom, Me.GridColumnTo, Me.GridColumnPLDate, Me.GridColumnPLNote, Me.GridColumnSeasno, Me.GridColumnStatus, Me.GridColumnPLCategory, Me.GridColumnPDAlloc})
+        Me.GVPL.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumnIdPLSample, Me.GridColumnIdContactFrom, Me.GridColumnIdCompContactTo, Me.GridColumn1, Me.GridColumnPLNumber, Me.GridColumnSRNumber, Me.GridColumnFrom, Me.GridColumnTo, Me.GridColumnPLDate, Me.GridColumnPLNote, Me.GridColumnSeasno, Me.GridColumnStatus, Me.GridColumnPLCategory, Me.GridColumnPDAlloc, Me.GridColumnDesignCode, Me.GridColumnDesignName, Me.GridColumnTotal})
         Me.GVPL.GridControl = Me.GCPL
         Me.GVPL.GroupCount = 1
+        Me.GVPL.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total", Me.GridColumnTotal, "{0:n0}")})
         Me.GVPL.Name = "GVPL"
         Me.GVPL.OptionsBehavior.AutoExpandAllGroups = True
         Me.GVPL.OptionsBehavior.Editable = False
         Me.GVPL.OptionsFind.AlwaysVisible = True
+        Me.GVPL.OptionsView.ShowFooter = True
         Me.GVPL.OptionsView.ShowGroupPanel = False
         Me.GVPL.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumnSeasno, DevExpress.Data.ColumnSortOrder.Descending), New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumnIdPLSample, DevExpress.Data.ColumnSortOrder.Descending)})
         '
@@ -174,7 +179,7 @@ Partial Class FormProductionPLToWH
         Me.GridColumnPLNumber.Name = "GridColumnPLNumber"
         Me.GridColumnPLNumber.Visible = True
         Me.GridColumnPLNumber.VisibleIndex = 0
-        Me.GridColumnPLNumber.Width = 97
+        Me.GridColumnPLNumber.Width = 120
         '
         'GridColumnSRNumber
         '
@@ -183,6 +188,7 @@ Partial Class FormProductionPLToWH
         Me.GridColumnSRNumber.Name = "GridColumnSRNumber"
         Me.GridColumnSRNumber.Visible = True
         Me.GridColumnSRNumber.VisibleIndex = 1
+        Me.GridColumnSRNumber.Width = 93
         '
         'GridColumnFrom
         '
@@ -190,8 +196,8 @@ Partial Class FormProductionPLToWH
         Me.GridColumnFrom.FieldName = "comp_name_from"
         Me.GridColumnFrom.Name = "GridColumnFrom"
         Me.GridColumnFrom.Visible = True
-        Me.GridColumnFrom.VisibleIndex = 2
-        Me.GridColumnFrom.Width = 97
+        Me.GridColumnFrom.VisibleIndex = 4
+        Me.GridColumnFrom.Width = 155
         '
         'GridColumnTo
         '
@@ -199,8 +205,8 @@ Partial Class FormProductionPLToWH
         Me.GridColumnTo.FieldName = "comp_name_to"
         Me.GridColumnTo.Name = "GridColumnTo"
         Me.GridColumnTo.Visible = True
-        Me.GridColumnTo.VisibleIndex = 3
-        Me.GridColumnTo.Width = 97
+        Me.GridColumnTo.VisibleIndex = 5
+        Me.GridColumnTo.Width = 131
         '
         'GridColumnPLDate
         '
@@ -210,8 +216,8 @@ Partial Class FormProductionPLToWH
         Me.GridColumnPLDate.FieldName = "pl_prod_order_date"
         Me.GridColumnPLDate.Name = "GridColumnPLDate"
         Me.GridColumnPLDate.Visible = True
-        Me.GridColumnPLDate.VisibleIndex = 4
-        Me.GridColumnPLDate.Width = 97
+        Me.GridColumnPLDate.VisibleIndex = 7
+        Me.GridColumnPLDate.Width = 73
         '
         'GridColumnPLNote
         '
@@ -235,8 +241,8 @@ Partial Class FormProductionPLToWH
         Me.GridColumnStatus.FieldName = "report_status"
         Me.GridColumnStatus.Name = "GridColumnStatus"
         Me.GridColumnStatus.Visible = True
-        Me.GridColumnStatus.VisibleIndex = 6
-        Me.GridColumnStatus.Width = 107
+        Me.GridColumnStatus.VisibleIndex = 9
+        Me.GridColumnStatus.Width = 50
         '
         'GridColumnPLCategory
         '
@@ -244,13 +250,46 @@ Partial Class FormProductionPLToWH
         Me.GridColumnPLCategory.FieldName = "pl_category"
         Me.GridColumnPLCategory.Name = "GridColumnPLCategory"
         Me.GridColumnPLCategory.Visible = True
-        Me.GridColumnPLCategory.VisibleIndex = 5
+        Me.GridColumnPLCategory.VisibleIndex = 8
+        Me.GridColumnPLCategory.Width = 48
         '
         'GridColumnPDAlloc
         '
         Me.GridColumnPDAlloc.Caption = "Allocation"
         Me.GridColumnPDAlloc.FieldName = "pd_alloc"
         Me.GridColumnPDAlloc.Name = "GridColumnPDAlloc"
+        '
+        'GridColumnDesignCode
+        '
+        Me.GridColumnDesignCode.Caption = "Code"
+        Me.GridColumnDesignCode.FieldName = "code"
+        Me.GridColumnDesignCode.Name = "GridColumnDesignCode"
+        Me.GridColumnDesignCode.OptionsColumn.ReadOnly = True
+        Me.GridColumnDesignCode.Visible = True
+        Me.GridColumnDesignCode.VisibleIndex = 2
+        Me.GridColumnDesignCode.Width = 93
+        '
+        'GridColumnDesignName
+        '
+        Me.GridColumnDesignName.Caption = "Name"
+        Me.GridColumnDesignName.FieldName = "name"
+        Me.GridColumnDesignName.Name = "GridColumnDesignName"
+        Me.GridColumnDesignName.OptionsColumn.ReadOnly = True
+        Me.GridColumnDesignName.Visible = True
+        Me.GridColumnDesignName.VisibleIndex = 3
+        Me.GridColumnDesignName.Width = 243
+        '
+        'GridColumnTotal
+        '
+        Me.GridColumnTotal.Caption = "Total"
+        Me.GridColumnTotal.DisplayFormat.FormatString = "N0"
+        Me.GridColumnTotal.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnTotal.FieldName = "total"
+        Me.GridColumnTotal.Name = "GridColumnTotal"
+        Me.GridColumnTotal.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total", "{0:N0}")})
+        Me.GridColumnTotal.Visible = True
+        Me.GridColumnTotal.VisibleIndex = 6
+        Me.GridColumnTotal.Width = 56
         '
         'XTPPLInfo
         '
@@ -674,4 +713,7 @@ Partial Class FormProductionPLToWH
     Friend WithEvents ColSize As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ToolTipControllerNew As DevExpress.Utils.ToolTipController
     Friend WithEvents GridColumnPDAlloc As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnDesignCode As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnDesignName As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnTotal As DevExpress.XtraGrid.Columns.GridColumn
 End Class

@@ -49,7 +49,7 @@
                 'FormWork.view_mark_history()
                 Close()
             Catch ex As Exception
-                ex.ToString()
+                MsgBox(ex.ToString())
             End Try
             Cursor = Cursors.Default
         End If

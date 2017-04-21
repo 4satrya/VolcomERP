@@ -54,10 +54,10 @@ Partial Class FormSalesOrderSvcLevel
         Me.GridColumnIsClosed = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemCheckEdit6 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.GridColumn45 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemTextEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.GridColumnTotalSO = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnOutstanding = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnFinalDate = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.RepositoryItemTextEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.GridColumnClosedBy = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.ViewMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -291,6 +291,9 @@ Partial Class FormSalesOrderSvcLevel
         Me.DEFromTrf = New DevExpress.XtraEditors.DateEdit()
         Me.LabelControl20 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl21 = New DevExpress.XtraEditors.LabelControl()
+        Me.ViewPreDel = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ViewDetailToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PrintUniqueCodeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.GCFilter, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GCFilter.SuspendLayout()
         CType(Me.PanelSelect, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -400,6 +403,7 @@ Partial Class FormSalesOrderSvcLevel
         CType(Me.DEUntilTrf.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEFromTrf.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEFromTrf.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ViewPreDel.SuspendLayout()
         Me.SuspendLayout()
         '
         'GCFilter
@@ -745,6 +749,12 @@ Partial Class FormSalesOrderSvcLevel
         Me.GridColumn45.VisibleIndex = 10
         Me.GridColumn45.Width = 64
         '
+        'RepositoryItemTextEdit1
+        '
+        Me.RepositoryItemTextEdit1.AutoHeight = False
+        Me.RepositoryItemTextEdit1.Name = "RepositoryItemTextEdit1"
+        Me.RepositoryItemTextEdit1.NullText = "-"
+        '
         'GridColumnTotalSO
         '
         Me.GridColumnTotalSO.Caption = "Total"
@@ -781,12 +791,6 @@ Partial Class FormSalesOrderSvcLevel
         Me.GridColumnFinalDate.Visible = True
         Me.GridColumnFinalDate.VisibleIndex = 11
         Me.GridColumnFinalDate.Width = 72
-        '
-        'RepositoryItemTextEdit1
-        '
-        Me.RepositoryItemTextEdit1.AutoHeight = False
-        Me.RepositoryItemTextEdit1.Name = "RepositoryItemTextEdit1"
-        Me.RepositoryItemTextEdit1.NullText = "-"
         '
         'GridColumnClosedBy
         '
@@ -1528,6 +1532,7 @@ Partial Class FormSalesOrderSvcLevel
         '
         'GCSalesDelOrder
         '
+        Me.GCSalesDelOrder.ContextMenuStrip = Me.ViewPreDel
         Me.GCSalesDelOrder.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GCSalesDelOrder.Location = New System.Drawing.Point(0, 39)
         Me.GCSalesDelOrder.MainView = Me.GVSalesDelOrder
@@ -3034,6 +3039,24 @@ Partial Class FormSalesOrderSvcLevel
         Me.LabelControl21.TabIndex = 8892
         Me.LabelControl21.Text = "From"
         '
+        'ViewPreDel
+        '
+        Me.ViewPreDel.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewDetailToolStripMenuItem, Me.PrintUniqueCodeToolStripMenuItem})
+        Me.ViewPreDel.Name = "ViewPreDel"
+        Me.ViewPreDel.Size = New System.Drawing.Size(172, 48)
+        '
+        'ViewDetailToolStripMenuItem
+        '
+        Me.ViewDetailToolStripMenuItem.Name = "ViewDetailToolStripMenuItem"
+        Me.ViewDetailToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.ViewDetailToolStripMenuItem.Text = "View Detail"
+        '
+        'PrintUniqueCodeToolStripMenuItem
+        '
+        Me.PrintUniqueCodeToolStripMenuItem.Name = "PrintUniqueCodeToolStripMenuItem"
+        Me.PrintUniqueCodeToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.PrintUniqueCodeToolStripMenuItem.Text = "Print Unique Code"
+        '
         'FormSalesOrderSvcLevel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -3161,6 +3184,7 @@ Partial Class FormSalesOrderSvcLevel
         CType(Me.DEUntilTrf.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEFromTrf.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEFromTrf.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ViewPreDel.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -3436,4 +3460,7 @@ Partial Class FormSalesOrderSvcLevel
     Friend WithEvents GridColumnFinalDate As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RepositoryItemTextEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
     Friend WithEvents GridColumnClosedBy As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ViewPreDel As ContextMenuStrip
+    Friend WithEvents ViewDetailToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents PrintUniqueCodeToolStripMenuItem As ToolStripMenuItem
 End Class

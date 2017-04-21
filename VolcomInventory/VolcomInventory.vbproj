@@ -929,6 +929,12 @@
     <Compile Include="FormGuide.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormListPOMat.Designer.vb">
+      <DependentUpon>FormListPOMat.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormListPOMat.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormMasterComnputerDet.Designer.vb">
       <DependentUpon>FormMasterComnputerDet.vb</DependentUpon>
     </Compile>
@@ -3323,6 +3329,12 @@
     <Compile Include="FormTestImage.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormUniqueDel.Designer.vb">
+      <DependentUpon>FormUniqueDel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormUniqueDel.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormUpload.Designer.vb">
       <DependentUpon>FormUpload.vb</DependentUpon>
     </Compile>
@@ -5051,6 +5063,9 @@
     <EmbeddedResource Include="FormGuide.resx">
       <DependentUpon>FormGuide.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormListPOMat.resx">
+      <DependentUpon>FormListPOMat.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormMasterComnputerDet.resx">
       <DependentUpon>FormMasterComnputerDet.vb</DependentUpon>
     </EmbeddedResource>
@@ -6594,6 +6609,9 @@
     <EmbeddedResource Include="FormTest.resx">
       <DependentUpon>FormTest.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormUniqueDel.resx">
+      <DependentUpon>FormUniqueDel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormUpload.resx">
       <DependentUpon>FormUpload.vb</DependentUpon>

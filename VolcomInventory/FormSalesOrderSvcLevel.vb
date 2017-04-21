@@ -568,6 +568,10 @@
     End Sub
 
     Private Sub GVSalesDelOrder_DoubleClick(sender As Object, e As EventArgs) Handles GVSalesDelOrder.DoubleClick
+        viewDetailPreDel()
+    End Sub
+
+    Sub viewDetailPreDel()
         If GVSalesDelOrder.FocusedRowHandle >= 0 And GVSalesDelOrder.RowCount > 0 Then
             Cursor = Cursors.WaitCursor
             FormViewSalesDelOrder.action = "upd"
@@ -778,6 +782,19 @@
                 FormViewSalesReturnOrder.ShowDialog()
                 Cursor = Cursors.Default
             End If
+        End If
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub ViewDetailToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ViewDetailToolStripMenuItem.Click
+        viewDetailPreDel()
+    End Sub
+
+    Private Sub PrintUniqueCodeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PrintUniqueCodeToolStripMenuItem.Click
+        Cursor = Cursors.WaitCursor
+        If GVSalesDelOrder.FocusedRowHandle >= 0 And GVSalesDelOrder.RowCount > 0 Then
+            FormUniqueDel.id_del = GVSalesDelOrder.GetFocusedRowCellValue("id_pl_sales_order_del").ToString
+            FormUniqueDel.ShowDialog()
         End If
         Cursor = Cursors.Default
     End Sub

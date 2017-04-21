@@ -947,17 +947,18 @@ Public Class FormMain
                 FormProductionDet.id_prod_order = "-1"
                 FormProductionDet.ShowDialog()
             Else 'prod demand design
-                Dim query_check As String = "SELECT COUNT(id_prod_order) FROM tb_prod_order pro LEFT JOIN tb_prod_demand_design pd_desg ON pd_desg.id_prod_demand_design=pro.id_prod_demand_design "
-                query_check += " WHERE pro.id_report_status!=5 AND pd_desg.id_design='" & FormProduction.GVDesign.GetFocusedRowCellValue("id_design").ToString & "'"
-                Dim jml_po As String = execute_query(query_check, 0, True, "", "", "", "")
+                'update 21/4/2017 repeat order
+                'Dim query_check As String = "SELECT COUNT(id_prod_order) FROM tb_prod_order pro LEFT JOIN tb_prod_demand_design pd_desg ON pd_desg.id_prod_demand_design=pro.id_prod_demand_design "
+                'query_check += " WHERE pro.id_report_status!=5 AND pd_desg.id_design='" & FormProduction.GVDesign.GetFocusedRowCellValue("id_design").ToString & "'"
+                'Dim jml_po As String = execute_query(query_check, 0, True, "", "", "", "")
 
-                If jml_po = "0" Then
-                    FormProductionDet.id_prod_demand_design = FormProduction.GVDesign.GetFocusedRowCellValue("id_prod_demand_design").ToString
-                    FormProductionDet.is_pd_base = "1"
-                    FormProductionDet.ShowDialog()
-                Else
-                    stopCustom("PO with this design already created, please cancel it first.")
-                End If
+                'If jml_po = "0" Then
+                '    FormProductionDet.id_prod_demand_design = FormProduction.GVDesign.GetFocusedRowCellValue("id_prod_demand_design").ToString
+                '    FormProductionDet.is_pd_base = "1"
+                '    FormProductionDet.ShowDialog()
+                'Else
+                '    stopCustom("PO with this design already created, please cancel it first.")
+                'End If
             End If
         ElseIf formName = "FormMatPL" Then
             If FormMatPL.XTCPL.SelectedTabPageIndex = 0 Then 'Production

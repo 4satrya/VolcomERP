@@ -321,10 +321,19 @@ Public Class FormProductionPLToWHDet
                 id_prod_order_det_list.Add(data.Rows(i)("id_prod_order_det").ToString)
                 id_pl_prod_order_det_list.Add(data.Rows(i)("id_pl_prod_order_det").ToString)
                 Dim id_prod_order_det As String = data.Rows(i)("id_prod_order_det").ToString
-                Dim queryx As String = "SELECT a.id_product, a.range_awal, a.range_akhir, a.digit_code, b.product_full_code, dsg.is_old_design, b.last_print_unique "
-                queryx += "FROM tb_m_product_range a INNER JOIN tb_m_product b ON a.id_product = b.id_product  "
-                queryx += "INNER JOIN tb_m_design dsg ON dsg.id_design = b.id_design "
-                queryx += "WHERE a.id_prod_order_det = '" + id_prod_order_det + "' GROUP BY b.id_product "
+                Dim queryx As String = "SELECT a.id_product, pod.id_prod_order_det, a.range_awal, a.range_akhir, a.digit_code, a.product_full_code, a.is_old_design,a.last_print_unique 
+                                        FROM tb_prod_order_det pod
+                                        INNER JOIN tb_prod_demand_product pdd ON pdd.id_prod_demand_product=pod.id_prod_demand_product
+                                        INNER JOIN tb_m_product p ON pdd.id_product=p.id_product
+                                        INNER JOIN 
+                                        (
+                                        SELECT a.id_product, a.id_prod_order_det, MIN(a.range_awal) AS range_awal, MAX(a.range_akhir) AS range_akhir, a.digit_code, b.product_full_code, dsg.is_old_design,b.last_print_unique 
+                                        FROM tb_m_product_range a 
+                                        INNER JOIN tb_m_product b ON a.id_product = b.id_product 
+                                        INNER JOIN tb_m_design dsg ON dsg.id_design = b.id_design 
+                                        GROUP BY a.id_product 
+                                        )a ON a.id_product=p.id_product
+                                        WHERE pod.id_prod_order_det = '" + id_prod_order_det + "' GROUP BY a.id_product "
                 Dim datax As DataTable = execute_query(queryx, -1, True, "", "", "", "")
                 For k As Integer = 0 To (datax.Rows.Count - 1)
                     'data.Rows(0)("id_product").ToString

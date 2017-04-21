@@ -466,14 +466,16 @@
 
         Dim band_desc As DevExpress.XtraGrid.Views.BandedGrid.GridBand = BGVFGStock.Bands.AddBand("Description")
         Dim band_qty_free As DevExpress.XtraGrid.Views.BandedGrid.GridBand = BGVFGStock.Bands.AddBand("Qty Free")
-        Dim band_qty_res As DevExpress.XtraGrid.Views.BandedGrid.GridBand = BGVFGStock.Bands.AddBand("Qty Reserved")
+        Dim band_qty_bom As DevExpress.XtraGrid.Views.BandedGrid.GridBand = BGVFGStock.Bands.AddBand("Qty BOM")
+        Dim band_qty_res As DevExpress.XtraGrid.Views.BandedGrid.GridBand = BGVFGStock.Bands.AddBand("Qty Reserved Packing List")
         Dim band_qty_total As DevExpress.XtraGrid.Views.BandedGrid.GridBand = BGVFGStock.Bands.AddBand("Total Qty")
+
         band_qty_total.AppearanceHeader.Font = New Font(BGVFGStock.Appearance.Row.Font.FontFamily, BGVFGStock.Appearance.Row.Font.Size, FontStyle.Bold)
 
         Dim query As String = "CALL view_stock_mat_sum('" + id_wh_param_selected + "', '" + id_locator_param_selected + "', '" + id_rack_param_selected + "', '" + id_drawer_param_selected + "', '" + id_design_selected_stock_sum + "') "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         For i As Integer = 0 To data.Columns.Count - 1
-            If data.Columns(i).ColumnName.ToString = "id_mat_det" Or data.Columns(i).ColumnName.ToString = "code" Or data.Columns(i).ColumnName.ToString = "name" Or data.Columns(i).ColumnName.ToString = "mat_cat" Or data.Columns(i).ColumnName.ToString = "year" Or data.Columns(i).ColumnName.ToString = "lot" Or data.Columns(i).ColumnName.ToString = "color" Or data.Columns(i).ColumnName.ToString = "size" Or data.Columns(i).ColumnName.ToString = "uom" Then
+            If data.Columns(i).ColumnName.ToString = "id_mat_det" Or data.Columns(i).ColumnName.ToString = "code" Or data.Columns(i).ColumnName.ToString = "name" Or data.Columns(i).ColumnName.ToString = "mat_cat" Or data.Columns(i).ColumnName.ToString = "year" Or data.Columns(i).ColumnName.ToString = "lot" Or data.Columns(i).ColumnName.ToString = "color" Or data.Columns(i).ColumnName.ToString = "size" Or data.Columns(i).ColumnName.ToString = "uom" Or data.Columns(i).ColumnName.ToString = "price" Then
                 If data.Columns(i).ColumnName.ToString = "code" Then
                     band_desc.Columns.Add(BGVFGStock.Columns.AddVisible(data.Columns(i).ColumnName.ToString, "Code"))
                 ElseIf data.Columns(i).ColumnName.ToString = "id_mat_det" Then
@@ -492,6 +494,8 @@
                     band_desc.Columns.Add(BGVFGStock.Columns.AddVisible(data.Columns(i).ColumnName.ToString, "Size"))
                 ElseIf data.Columns(i).ColumnName.ToString = "uom" Then
                     band_desc.Columns.Add(BGVFGStock.Columns.AddVisible(data.Columns(i).ColumnName.ToString, "UOM"))
+                ElseIf data.Columns(i).ColumnName.ToString = "price" Then
+                    band_desc.Columns.Add(BGVFGStock.Columns.AddVisible(data.Columns(i).ColumnName.ToString, "Cost"))
                 End If
             ElseIf data.Columns(i).ColumnName.ToString.Contains("qty_free") Then
                 Dim st_caption As String = "Free Qty"
@@ -565,10 +569,26 @@
                 item.DisplayFormat = "{0:n2}"
                 item.ShowInGroupColumnFooter = BGVFGStock.Columns(data.Columns(i).ColumnName.ToString)
                 BGVFGStock.GroupSummary.Add(item)
+            ElseIf data.Columns(i).ColumnName.ToString.Contains("qty_left_bom") Or data.Columns(i).ColumnName.ToString.Contains("bom_res") Then
+                Dim st_caption As String = ""
+                If data.Columns(i).ColumnName.ToString.Contains("qty_left_bom") Then
+                    st_caption = "Qty After BOM Reserved"
+                ElseIf data.Columns(i).ColumnName.ToString.Contains("bom_res") Then
+                    st_caption = "BOM Reserved"
+                End If
+
+                band_qty_bom.Columns.Add(BGVFGStock.Columns.AddVisible(data.Columns(i).ColumnName.ToString, st_caption))
+
+                BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+                BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+                BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+                BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).DisplayFormat.FormatString = "{0:n2}"
             End If
         Next
         GCFGStock.DataSource = data
         dt_sum = data
+        'hide bom
+        band_qty_bom.Visible = False
 
         'hide column
         BGVFGStock.Columns("id_mat_det").Visible = False

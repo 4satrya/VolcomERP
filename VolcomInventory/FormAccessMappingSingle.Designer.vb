@@ -20,24 +20,25 @@ Partial Class FormAccessMappingSingle
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormAccessMappingSingle))
-        Me.PCClose = New DevExpress.XtraEditors.PanelControl
-        Me.CheckEditSelAll = New DevExpress.XtraEditors.CheckEdit
-        Me.BtnSave = New DevExpress.XtraEditors.SimpleButton
-        Me.BtnClose = New DevExpress.XtraEditors.SimpleButton
-        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl
-        Me.LabelRole = New DevExpress.XtraEditors.LabelControl
-        Me.PictureMenuAccess = New DevExpress.XtraEditors.PictureEdit
-        Me.GCMenu = New DevExpress.XtraGrid.GridControl
-        Me.GVMenu = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.GridColumnIdFormControl = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnDescriptionMenuName = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnProcess = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnStatus = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
-        Me.GridColumnGroupMenu = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnIsView = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnIdForm = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnIsChanegd = New DevExpress.XtraGrid.Columns.GridColumn
+        Me.PCClose = New DevExpress.XtraEditors.PanelControl()
+        Me.CheckEditSelAll = New DevExpress.XtraEditors.CheckEdit()
+        Me.BtnClose = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnSave = New DevExpress.XtraEditors.SimpleButton()
+        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.LabelRole = New DevExpress.XtraEditors.LabelControl()
+        Me.PictureMenuAccess = New DevExpress.XtraEditors.PictureEdit()
+        Me.GCMenu = New DevExpress.XtraGrid.GridControl()
+        Me.GVMenu = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumnIdFormControl = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnDescriptionMenuName = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnProcess = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnStatus = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.GridColumnGroupMenu = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnIsView = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnIdForm = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnIsChanegd = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.BPrint = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.PCClose, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PCClose.SuspendLayout()
         CType(Me.CheckEditSelAll.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -51,6 +52,7 @@ Partial Class FormAccessMappingSingle
         '
         'PCClose
         '
+        Me.PCClose.Controls.Add(Me.BPrint)
         Me.PCClose.Controls.Add(Me.CheckEditSelAll)
         Me.PCClose.Controls.Add(Me.BtnClose)
         Me.PCClose.Controls.Add(Me.BtnSave)
@@ -70,15 +72,6 @@ Partial Class FormAccessMappingSingle
         Me.CheckEditSelAll.Size = New System.Drawing.Size(75, 19)
         Me.CheckEditSelAll.TabIndex = 2
         '
-        'BtnSave
-        '
-        Me.BtnSave.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BtnSave.Location = New System.Drawing.Point(503, 2)
-        Me.BtnSave.Name = "BtnSave"
-        Me.BtnSave.Size = New System.Drawing.Size(75, 34)
-        Me.BtnSave.TabIndex = 1
-        Me.BtnSave.Text = "Save"
-        '
         'BtnClose
         '
         Me.BtnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel
@@ -88,6 +81,15 @@ Partial Class FormAccessMappingSingle
         Me.BtnClose.Size = New System.Drawing.Size(75, 34)
         Me.BtnClose.TabIndex = 0
         Me.BtnClose.Text = "Close"
+        '
+        'BtnSave
+        '
+        Me.BtnSave.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnSave.Location = New System.Drawing.Point(503, 2)
+        Me.BtnSave.Name = "BtnSave"
+        Me.BtnSave.Size = New System.Drawing.Size(75, 34)
+        Me.BtnSave.TabIndex = 1
+        Me.BtnSave.Text = "Save"
         '
         'PanelControl1
         '
@@ -214,6 +216,16 @@ Partial Class FormAccessMappingSingle
         Me.GridColumnIsChanegd.FieldName = "is_changed"
         Me.GridColumnIsChanegd.Name = "GridColumnIsChanegd"
         '
+        'BPrint
+        '
+        Me.BPrint.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.BPrint.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BPrint.Location = New System.Drawing.Point(353, 2)
+        Me.BPrint.Name = "BPrint"
+        Me.BPrint.Size = New System.Drawing.Size(75, 34)
+        Me.BPrint.TabIndex = 3
+        Me.BPrint.Text = "Print"
+        '
         'FormAccessMappingSingle
         '
         Me.AcceptButton = Me.BtnSave
@@ -229,7 +241,6 @@ Partial Class FormAccessMappingSingle
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FormAccessMappingSingle"
-        Me.ShowInTaskbar = False
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Mapping Access"
@@ -264,4 +275,5 @@ Partial Class FormAccessMappingSingle
     Friend WithEvents GridColumnIdForm As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents CheckEditSelAll As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents GridColumnIsChanegd As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BPrint As DevExpress.XtraEditors.SimpleButton
 End Class

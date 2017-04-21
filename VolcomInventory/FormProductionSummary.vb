@@ -5,6 +5,8 @@
         DEUntil.EditValue = data_dt.Rows(0)("dt")
         DEFromPD.EditValue = data_dt.Rows(0)("dt")
         DEUntilPD.EditValue = data_dt.Rows(0)("dt")
+        DEFromMat.EditValue = data_dt.Rows(0)("dt")
+        DEUntilMat.EditValue = data_dt.Rows(0)("dt")
         DEFrom.Focus()
     End Sub
 
@@ -51,11 +53,32 @@
         End If
     End Sub
 
+    Sub viewPOMat()
+        Cursor = Cursors.WaitCursor
+        Dim date_from_selected As String = "0000-01-01"
+        Dim date_until_selected As String = "9999-01-01"
+        Try
+            date_from_selected = DateTime.Parse(DEFromMat.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+        Try
+            date_until_selected = DateTime.Parse(DEUntilMat.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+
+        Dim query As String = "CALL view_mat_purc_det_all('" + date_from_selected + "', '" + date_until_selected + "', '" + id_user + "')"
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCListPurchase.DataSource = data
+        Cursor = Cursors.Default
+    End Sub
+
     Private Sub XTCSum_SelectedPageChanged(sender As Object, e As DevExpress.XtraTab.TabPageChangedEventArgs) Handles XTCSum.SelectedPageChanged
         If XTCSum.SelectedTabPageIndex = 0 Then
             DEFrom.Focus()
         ElseIf XTCSum.SelectedTabPageIndex = 1 Then
             DEFromPD.Focus()
+        ElseIf XTCSum.SelectedTabPageIndex = 2 Then
+            DEFromMat.Focus()
         End If
     End Sub
 
@@ -159,7 +182,6 @@
         Cursor = Cursors.Default
     End Sub
 
-
     Private Sub GVDesign_RowStyle(sender As Object, e As DevExpress.XtraGrid.Views.Grid.RowStyleEventArgs) Handles GVDesign.RowStyle
         Dim View As DevExpress.XtraGrid.Views.Grid.GridView = sender
         If (e.RowHandle >= 0) Then
@@ -172,5 +194,9 @@
                 e.Appearance.BackColor2 = Color.White
             End If
         End If
+    End Sub
+
+    Private Sub BtnViewMat_Click(sender As Object, e As EventArgs) Handles BtnViewMat.Click
+        viewPOMat()
     End Sub
 End Class

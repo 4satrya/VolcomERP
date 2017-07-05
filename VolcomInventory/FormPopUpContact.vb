@@ -478,6 +478,12 @@
             'End If
         ElseIf id_pop_up = "43" Then
             'Sales Return QC
+            If GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString = get_setup_field("wh_to_claim") Then
+                If FormSalesReturnQCDet.id_comp_to <> get_setup_field("wh_from_claim") Then
+                    stopCustom("This account only receive from RT2")
+                    Exit Sub
+                End If
+            End If
             FormSalesReturnQCDet.id_comp_contact_to = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
             FormSalesReturnQCDet.TxtNameCompTo.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
             FormSalesReturnQCDet.TxtCodeCompTo.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
@@ -492,222 +498,231 @@
             'FormSalesReturnDet.GroupControlDrawerDetail.Enabled = True
             Close()
         ElseIf id_pop_up = "44" Then
-            'STORE STOCK OPNAME
-            Cursor = Cursors.WaitCursor
-            FormFGStockOpnameStoreDet.id_store_contact_from = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
-            FormFGStockOpnameStoreDet.TxtNameStoreFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
-            FormFGStockOpnameStoreDet.TxtCodeStoreFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
-            FormFGStockOpnameStoreDet.id_store_from = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
-            FormFGStockOpnameStoreDet.GroupControlItem.Enabled = True
-            FormFGStockOpnameStoreDet.viewDetail()
-            FormFGStockOpnameStoreDet.view_barcode_list()
-            FormFGStockOpnameStoreDet.codeAvailableIns("0", GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString, "0")
-            Close()
-            Cursor = Cursors.Default
-        ElseIf id_pop_up = "45" Then
-            'Mat Stock Opname Det
-            FormMatStockOpnameDet.id_comp_contact = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
-            FormMatStockOpnameDet.TESourceName.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
-            FormMatStockOpnameDet.TESourceCode.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
-            FormMatStockOpnameDet.MESourceAddress.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "3")
-            Close()
-        ElseIf id_pop_up = "46" Then
-            'FG MISSING
-            Cursor = Cursors.WaitCursor
-            FormFGMissingDet.SPDiscount.EditValue = Decimal.Parse(GVCompany.GetFocusedRowCellValue("comp_commission").ToString)
-            FormFGMissingDet.id_store_from = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
-            FormFGMissingDet.id_wh_drawer = GVCompanyContactList.GetFocusedRowCellDisplayText("id_wh_drawer").ToString
-            FormFGMissingDet.id_wh_rack = GVCompanyContactList.GetFocusedRowCellDisplayText("id_wh_rack").ToString
-            FormFGMissingDet.id_wh_locator = GVCompanyContactList.GetFocusedRowCellDisplayText("id_wh_locator").ToString
-            FormFGMissingDet.id_store_contact_from = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
-            FormFGMissingDet.TxtNameCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
-            FormFGMissingDet.TxtCodeCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
-            FormFGMissingDet.MEAdrressCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "3")
-            FormFGMissingDet.GroupControlList.Enabled = True
-            FormFGMissingDet.viewDetail()
-            FormFGMissingDet.getDiscount()
-            FormFGMissingDet.getNetto()
-            FormFGMissingDet.getVat()
-            FormFGMissingDet.getTaxBase()
-            Close()
-            Cursor = Cursors.Default
-        ElseIf id_pop_up = "47" Then
-            'WH STOCK OPNAME
-            Cursor = Cursors.WaitCursor
-            FormFGStockOpnameWHDet.id_comp_contact_from = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
-            FormFGStockOpnameWHDet.TxtNameCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
-            FormFGStockOpnameWHDet.TxtCodeCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
-            FormFGStockOpnameWHDet.id_comp_from = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
-            FormFGStockOpnameWHDet.GroupControlItem.Enabled = True
-            FormFGStockOpnameWHDet.viewDetail()
-            FormFGStockOpnameWHDet.view_barcode_list()
-            FormFGStockOpnameWHDet.dt.Clear()
-            FormFGStockOpnameWHDet.setDefaultDrawer()
-            Close()
-            Cursor = Cursors.Default
-        ElseIf id_pop_up = "48" Then
-            'FG TRansfer From
-            Cursor = Cursors.WaitCursor
-            FormFGTrfDet.id_comp_contact_from = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
-            FormFGTrfDet.TxtNameCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
-            FormFGTrfDet.TxtCodeCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
-            FormFGTrfDet.id_comp_from = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
-            FormFGTrfDet.GroupControlDrawerDetail.Enabled = True
-            FormFGTrfDet.GroupControlListItem.Enabled = True
-            FormFGTrfDet.GroupControlScannedItem.Enabled = True
-            FormFGTrfDet.viewDetailDrawer()
-            FormFGTrfDet.viewDetail()
-            FormFGTrfDet.view_barcode_list()
-            Close()
-            Cursor = Cursors.Default
-        ElseIf id_pop_up = "49" Then
-            'FG TRansfer To
-            Cursor = Cursors.WaitCursor
-            FormFGTrfDet.id_comp_contact_to = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
-            FormFGTrfDet.TxtNameCompTo.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
-            FormFGTrfDet.TxtCodeCompTo.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
-            FormFGTrfDet.id_comp_to = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
-            Close()
-            Cursor = Cursors.Default
-        ElseIf id_pop_up = "50" Then
-            'PL SAMPLE DELIVERY TO WH From
-            Cursor = Cursors.WaitCursor
-            FormSampleDelDet.id_comp_contact_from = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
-            FormSampleDelDet.TxtNameCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
-            FormSampleDelDet.TxtCodeCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
-            FormSampleDelDet.id_comp_from = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
-            FormSampleDelDet.GroupControlDrawerDetail.Enabled = True
-            FormSampleDelDet.GroupControlListItem.Enabled = True
-            FormSampleDelDet.GroupControlScannedItem.Enabled = True
-            FormSampleDelDet.viewDetailDrawer()
-            FormSampleDelDet.viewDetail()
-            FormSampleDelDet.viewDetailBC()
-            Close()
-            Cursor = Cursors.Default
-        ElseIf id_pop_up = "51" Then
-            'PL SAMPLE DELIVERY TO WH To
-            Cursor = Cursors.WaitCursor
-            FormSampleDelDet.id_comp_contact_to = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
-            FormSampleDelDet.TxtNameCompTo.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
-            FormSampleDelDet.TxtCodeCompTo.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
-            FormSampleDelDet.id_comp_to = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
-            Close()
-            Cursor = Cursors.Default
-        ElseIf id_pop_up = "52" Then
-            'REC PL SAMPLE DELIVERY WH
-            Cursor = Cursors.WaitCursor
-            FormSampleDelRecDet.id_comp_contact_to = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
-            FormSampleDelRecDet.TxtNameCompTo.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
-            FormSampleDelRecDet.TxtCodeCompTo.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
-            FormSampleDelRecDet.id_comp_to = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
-            Close()
-            Cursor = Cursors.Default
-        ElseIf id_pop_up = "53" Then
-            'SALES ORDER SAMPLE
-            FormSampleOrderDet.id_store_contact_to = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
-            FormSampleOrderDet.TxtNameCompTo.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
-            FormSampleOrderDet.TxtCodeCompTo.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
-            FormSampleOrderDet.MEAdrressCompTo.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "3")
-            FormSampleOrderDet.viewDetail()
-            FormSampleOrderDet.GroupControlList.Enabled = True
-            Close()
-        ElseIf id_pop_up = "54" Then
-            'DELIVERY ORDER SAMPLE
-            Cursor = Cursors.WaitCursor
-            FormSampleDelOrderDet.id_comp_contact_from = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
-            FormSampleDelOrderDet.TxtNameCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
-            FormSampleDelOrderDet.TxtCodeCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
-            FormSampleDelOrderDet.id_comp_from = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
-            FormSampleDelOrderDet.GroupControlDrawerDetail.Enabled = True
-            FormSampleDelOrderDet.GroupControlScannedItem.Enabled = True
-            FormSampleDelOrderDet.viewDetailDrawer()
-            FormSampleDelOrderDet.viewDetailBC()
-            FormSampleDelOrderDet.check_but()
-            For i As Integer = 0 To (FormSampleDelOrderDet.GVItemList.RowCount - 1)
-                Dim id_sample As String = FormSampleDelOrderDet.GVItemList.GetRowCellValue(i, "id_sample").ToString
-                FormSampleDelOrderDet.countQtyFromWh(id_sample)
-            Next
-            FormSampleDelOrderDet.GCItemList.RefreshDataSource()
-            FormSampleDelOrderDet.GVItemList.RefreshData()
-            FormSampleDelOrderDet.allowScanPage()
-            Close()
-            Cursor = Cursors.Default
-        ElseIf id_pop_up = "55" Then
-            'SAMPLE STOCK OPNAME
-            Cursor = Cursors.WaitCursor
-            FormSampleStockOpnameDet.id_comp_contact_from = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
-            FormSampleStockOpnameDet.TxtNameCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
-            FormSampleStockOpnameDet.TxtCodeCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
-            FormSampleStockOpnameDet.id_comp_from = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
-            FormSampleStockOpnameDet.GroupControlItem.Enabled = True
-            FormSampleStockOpnameDet.viewDetail()
-            FormSampleStockOpnameDet.view_barcode_list()
-            FormSampleStockOpnameDet.dt.Clear()
-            Close()
-            Cursor = Cursors.Default
-        ElseIf id_pop_up = "56" Then
-            Cursor = Cursors.WaitCursor
-            FormSOHDet.id_comp_contact = GVCompanyContactList.GetFocusedRowCellValue("id_comp_contact").ToString
-            FormSOHDet.TECompGroup.Text = GVCompany.GetFocusedRowCellValue("comp_group").ToString
-            FormSOHDet.TECompName.Text = GVCompany.GetFocusedRowCellValue("comp_name").ToString
-            FormSOHDet.TECompCode.Text = get_company_x(GVCompany.GetFocusedRowCellValue("id_comp").ToString, "2")
-            Close()
-            Cursor = Cursors.Default
-        ElseIf id_pop_up = "57" Then
-            'FG Write Off
-            Cursor = Cursors.WaitCursor
-            FormFGWoffDet.id_comp_contact_from = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
-            FormFGWoffDet.TxtNameCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
-            FormFGWoffDet.TxtCodeCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
-            FormFGWoffDet.id_comp_from = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
-            FormFGWoffDet.GroupControlDrawerDetail.Enabled = True
-            FormFGWoffDet.GroupControlListItem.Enabled = True
-            FormFGWoffDet.GroupControlScannedItem.Enabled = True
-            FormFGWoffDet.viewDetailDrawer()
-            FormFGWoffDet.viewDetail()
-            FormFGWoffDet.view_barcode_list()
-            Close()
-            Cursor = Cursors.Default
-        ElseIf id_pop_up = "59" Then
-            'Prepare Order for new product
-            Cursor = Cursors.WaitCursor
-            FormFGDSSONew.id_comp_contact_par = GVCompanyContactList.GetFocusedRowCellValue("id_comp_contact").ToString
-            FormFGDSSONew.TxtNameCompTo.Text = GVCompany.GetFocusedRowCellValue("comp_name").ToString
-            FormFGDSSONew.TxtCodeCompTo.Text = get_company_x(GVCompany.GetFocusedRowCellValue("id_comp").ToString, "2")
-            Close()
-            Cursor = Cursors.Default
-        ElseIf id_pop_up = "60" Then
-            'Prepare Order for new product
-            Cursor = Cursors.WaitCursor
-            FormFGSalesOrderReffDet.id_comp_contact_par = GVCompanyContactList.GetFocusedRowCellValue("id_comp_contact").ToString
-            FormFGSalesOrderReffDet.TxtNameCompTo.Text = GVCompany.GetFocusedRowCellValue("comp_name").ToString
-            FormFGSalesOrderReffDet.TxtCodeCompTo.Text = get_company_x(GVCompany.GetFocusedRowCellValue("id_comp").ToString, "2")
-            Close()
-            Cursor = Cursors.Default
-        ElseIf id_pop_up = "61" Then
-            FormSalesPromoDet.id_comp = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
-            FormSalesPromoDet.id_store_contact_from = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
-            FormSalesPromoDet.id_wh_drawer = GVCompanyContactList.GetFocusedRowCellDisplayText("id_wh_drawer").ToString
-            FormSalesPromoDet.id_wh_rack = GVCompanyContactList.GetFocusedRowCellDisplayText("id_wh_rack").ToString
-            FormSalesPromoDet.id_wh_locator = GVCompanyContactList.GetFocusedRowCellDisplayText("id_wh_locator").ToString
-            FormSalesPromoDet.TxtNameCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
-            FormSalesPromoDet.TxtCodeCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
-            FormSalesPromoDet.MEAdrressCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "3")
-            FormSalesPromoDet.viewDetail()
-            FormSalesPromoDet.viewStockStore()
-            FormSalesPromoDet.check_but()
-            FormSalesPromoDet.GroupControlList.Enabled = True
-            FormSalesPromoDet.getNetto()
-            FormSalesPromoDet.getVat()
-            FormSalesPromoDet.getTaxBase()
-            Close()
-        ElseIf id_pop_up = "62" Then
-            'Prepare Order - WH
-            If FormSalesOrderDet.id_comp_contact_par <> GVCompanyContactList.GetFocusedRowCellValue("id_comp_contact").ToString And FormSalesOrderDet.GVItemList.RowCount > 0 Then
-                Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("These changes will reset your item list. Are you sure you want to keep these changes?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
-                If confirm = Windows.Forms.DialogResult.Yes Then
+                'STORE STOCK OPNAME
+                Cursor = Cursors.WaitCursor
+                FormFGStockOpnameStoreDet.id_store_contact_from = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
+                FormFGStockOpnameStoreDet.TxtNameStoreFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
+                FormFGStockOpnameStoreDet.TxtCodeStoreFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
+                FormFGStockOpnameStoreDet.id_store_from = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
+                FormFGStockOpnameStoreDet.GroupControlItem.Enabled = True
+                FormFGStockOpnameStoreDet.viewDetail()
+                FormFGStockOpnameStoreDet.view_barcode_list()
+                FormFGStockOpnameStoreDet.codeAvailableIns("0", GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString, "0")
+                Close()
+                Cursor = Cursors.Default
+            ElseIf id_pop_up = "45" Then
+                'Mat Stock Opname Det
+                FormMatStockOpnameDet.id_comp_contact = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
+                FormMatStockOpnameDet.TESourceName.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
+                FormMatStockOpnameDet.TESourceCode.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
+                FormMatStockOpnameDet.MESourceAddress.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "3")
+                Close()
+            ElseIf id_pop_up = "46" Then
+                'FG MISSING
+                Cursor = Cursors.WaitCursor
+                FormFGMissingDet.SPDiscount.EditValue = Decimal.Parse(GVCompany.GetFocusedRowCellValue("comp_commission").ToString)
+                FormFGMissingDet.id_store_from = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
+                FormFGMissingDet.id_wh_drawer = GVCompanyContactList.GetFocusedRowCellDisplayText("id_wh_drawer").ToString
+                FormFGMissingDet.id_wh_rack = GVCompanyContactList.GetFocusedRowCellDisplayText("id_wh_rack").ToString
+                FormFGMissingDet.id_wh_locator = GVCompanyContactList.GetFocusedRowCellDisplayText("id_wh_locator").ToString
+                FormFGMissingDet.id_store_contact_from = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
+                FormFGMissingDet.TxtNameCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
+                FormFGMissingDet.TxtCodeCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
+                FormFGMissingDet.MEAdrressCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "3")
+                FormFGMissingDet.GroupControlList.Enabled = True
+                FormFGMissingDet.viewDetail()
+                FormFGMissingDet.getDiscount()
+                FormFGMissingDet.getNetto()
+                FormFGMissingDet.getVat()
+                FormFGMissingDet.getTaxBase()
+                Close()
+                Cursor = Cursors.Default
+            ElseIf id_pop_up = "47" Then
+                'WH STOCK OPNAME
+                Cursor = Cursors.WaitCursor
+                FormFGStockOpnameWHDet.id_comp_contact_from = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
+                FormFGStockOpnameWHDet.TxtNameCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
+                FormFGStockOpnameWHDet.TxtCodeCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
+                FormFGStockOpnameWHDet.id_comp_from = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
+                FormFGStockOpnameWHDet.GroupControlItem.Enabled = True
+                FormFGStockOpnameWHDet.viewDetail()
+                FormFGStockOpnameWHDet.view_barcode_list()
+                FormFGStockOpnameWHDet.dt.Clear()
+                FormFGStockOpnameWHDet.setDefaultDrawer()
+                Close()
+                Cursor = Cursors.Default
+            ElseIf id_pop_up = "48" Then
+                'FG TRansfer From
+                Cursor = Cursors.WaitCursor
+                FormFGTrfDet.id_comp_contact_from = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
+                FormFGTrfDet.TxtNameCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
+                FormFGTrfDet.TxtCodeCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
+                FormFGTrfDet.id_comp_from = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
+                FormFGTrfDet.GroupControlDrawerDetail.Enabled = True
+                FormFGTrfDet.GroupControlListItem.Enabled = True
+                FormFGTrfDet.GroupControlScannedItem.Enabled = True
+                FormFGTrfDet.viewDetailDrawer()
+                FormFGTrfDet.viewDetail()
+                FormFGTrfDet.view_barcode_list()
+                Close()
+                Cursor = Cursors.Default
+            ElseIf id_pop_up = "49" Then
+                'FG TRansfer To
+                Cursor = Cursors.WaitCursor
+                FormFGTrfDet.id_comp_contact_to = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
+                FormFGTrfDet.TxtNameCompTo.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
+                FormFGTrfDet.TxtCodeCompTo.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
+                FormFGTrfDet.id_comp_to = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
+                Close()
+                Cursor = Cursors.Default
+            ElseIf id_pop_up = "50" Then
+                'PL SAMPLE DELIVERY TO WH From
+                Cursor = Cursors.WaitCursor
+                FormSampleDelDet.id_comp_contact_from = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
+                FormSampleDelDet.TxtNameCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
+                FormSampleDelDet.TxtCodeCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
+                FormSampleDelDet.id_comp_from = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
+                FormSampleDelDet.GroupControlDrawerDetail.Enabled = True
+                FormSampleDelDet.GroupControlListItem.Enabled = True
+                FormSampleDelDet.GroupControlScannedItem.Enabled = True
+                FormSampleDelDet.viewDetailDrawer()
+                FormSampleDelDet.viewDetail()
+                FormSampleDelDet.viewDetailBC()
+                Close()
+                Cursor = Cursors.Default
+            ElseIf id_pop_up = "51" Then
+                'PL SAMPLE DELIVERY TO WH To
+                Cursor = Cursors.WaitCursor
+                FormSampleDelDet.id_comp_contact_to = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
+                FormSampleDelDet.TxtNameCompTo.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
+                FormSampleDelDet.TxtCodeCompTo.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
+                FormSampleDelDet.id_comp_to = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
+                Close()
+                Cursor = Cursors.Default
+            ElseIf id_pop_up = "52" Then
+                'REC PL SAMPLE DELIVERY WH
+                Cursor = Cursors.WaitCursor
+                FormSampleDelRecDet.id_comp_contact_to = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
+                FormSampleDelRecDet.TxtNameCompTo.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
+                FormSampleDelRecDet.TxtCodeCompTo.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
+                FormSampleDelRecDet.id_comp_to = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
+                Close()
+                Cursor = Cursors.Default
+            ElseIf id_pop_up = "53" Then
+                'SALES ORDER SAMPLE
+                FormSampleOrderDet.id_store_contact_to = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
+                FormSampleOrderDet.TxtNameCompTo.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
+                FormSampleOrderDet.TxtCodeCompTo.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
+                FormSampleOrderDet.MEAdrressCompTo.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "3")
+                FormSampleOrderDet.viewDetail()
+                FormSampleOrderDet.GroupControlList.Enabled = True
+                Close()
+            ElseIf id_pop_up = "54" Then
+                'DELIVERY ORDER SAMPLE
+                Cursor = Cursors.WaitCursor
+                FormSampleDelOrderDet.id_comp_contact_from = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
+                FormSampleDelOrderDet.TxtNameCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
+                FormSampleDelOrderDet.TxtCodeCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
+                FormSampleDelOrderDet.id_comp_from = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
+                FormSampleDelOrderDet.GroupControlDrawerDetail.Enabled = True
+                FormSampleDelOrderDet.GroupControlScannedItem.Enabled = True
+                FormSampleDelOrderDet.viewDetailDrawer()
+                FormSampleDelOrderDet.viewDetailBC()
+                FormSampleDelOrderDet.check_but()
+                For i As Integer = 0 To (FormSampleDelOrderDet.GVItemList.RowCount - 1)
+                    Dim id_sample As String = FormSampleDelOrderDet.GVItemList.GetRowCellValue(i, "id_sample").ToString
+                    FormSampleDelOrderDet.countQtyFromWh(id_sample)
+                Next
+                FormSampleDelOrderDet.GCItemList.RefreshDataSource()
+                FormSampleDelOrderDet.GVItemList.RefreshData()
+                FormSampleDelOrderDet.allowScanPage()
+                Close()
+                Cursor = Cursors.Default
+            ElseIf id_pop_up = "55" Then
+                'SAMPLE STOCK OPNAME
+                Cursor = Cursors.WaitCursor
+                FormSampleStockOpnameDet.id_comp_contact_from = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
+                FormSampleStockOpnameDet.TxtNameCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
+                FormSampleStockOpnameDet.TxtCodeCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
+                FormSampleStockOpnameDet.id_comp_from = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
+                FormSampleStockOpnameDet.GroupControlItem.Enabled = True
+                FormSampleStockOpnameDet.viewDetail()
+                FormSampleStockOpnameDet.view_barcode_list()
+                FormSampleStockOpnameDet.dt.Clear()
+                Close()
+                Cursor = Cursors.Default
+            ElseIf id_pop_up = "56" Then
+                Cursor = Cursors.WaitCursor
+                FormSOHDet.id_comp_contact = GVCompanyContactList.GetFocusedRowCellValue("id_comp_contact").ToString
+                FormSOHDet.TECompGroup.Text = GVCompany.GetFocusedRowCellValue("comp_group").ToString
+                FormSOHDet.TECompName.Text = GVCompany.GetFocusedRowCellValue("comp_name").ToString
+                FormSOHDet.TECompCode.Text = get_company_x(GVCompany.GetFocusedRowCellValue("id_comp").ToString, "2")
+                Close()
+                Cursor = Cursors.Default
+            ElseIf id_pop_up = "57" Then
+                'FG Write Off
+                Cursor = Cursors.WaitCursor
+                FormFGWoffDet.id_comp_contact_from = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
+                FormFGWoffDet.TxtNameCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
+                FormFGWoffDet.TxtCodeCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
+                FormFGWoffDet.id_comp_from = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
+                FormFGWoffDet.GroupControlDrawerDetail.Enabled = True
+                FormFGWoffDet.GroupControlListItem.Enabled = True
+                FormFGWoffDet.GroupControlScannedItem.Enabled = True
+                FormFGWoffDet.viewDetailDrawer()
+                FormFGWoffDet.viewDetail()
+                FormFGWoffDet.view_barcode_list()
+                Close()
+                Cursor = Cursors.Default
+            ElseIf id_pop_up = "59" Then
+                'Prepare Order for new product
+                Cursor = Cursors.WaitCursor
+                FormFGDSSONew.id_comp_contact_par = GVCompanyContactList.GetFocusedRowCellValue("id_comp_contact").ToString
+                FormFGDSSONew.TxtNameCompTo.Text = GVCompany.GetFocusedRowCellValue("comp_name").ToString
+                FormFGDSSONew.TxtCodeCompTo.Text = get_company_x(GVCompany.GetFocusedRowCellValue("id_comp").ToString, "2")
+                Close()
+                Cursor = Cursors.Default
+            ElseIf id_pop_up = "60" Then
+                'Prepare Order for new product
+                Cursor = Cursors.WaitCursor
+                FormFGSalesOrderReffDet.id_comp_contact_par = GVCompanyContactList.GetFocusedRowCellValue("id_comp_contact").ToString
+                FormFGSalesOrderReffDet.TxtNameCompTo.Text = GVCompany.GetFocusedRowCellValue("comp_name").ToString
+                FormFGSalesOrderReffDet.TxtCodeCompTo.Text = get_company_x(GVCompany.GetFocusedRowCellValue("id_comp").ToString, "2")
+                Close()
+                Cursor = Cursors.Default
+            ElseIf id_pop_up = "61" Then
+                FormSalesPromoDet.id_comp = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
+                FormSalesPromoDet.id_store_contact_from = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
+                FormSalesPromoDet.id_wh_drawer = GVCompanyContactList.GetFocusedRowCellDisplayText("id_wh_drawer").ToString
+                FormSalesPromoDet.id_wh_rack = GVCompanyContactList.GetFocusedRowCellDisplayText("id_wh_rack").ToString
+                FormSalesPromoDet.id_wh_locator = GVCompanyContactList.GetFocusedRowCellDisplayText("id_wh_locator").ToString
+                FormSalesPromoDet.TxtNameCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
+                FormSalesPromoDet.TxtCodeCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
+                FormSalesPromoDet.MEAdrressCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "3")
+                FormSalesPromoDet.viewDetail()
+                FormSalesPromoDet.viewStockStore()
+                FormSalesPromoDet.check_but()
+                FormSalesPromoDet.GroupControlList.Enabled = True
+                FormSalesPromoDet.getNetto()
+                FormSalesPromoDet.getVat()
+                FormSalesPromoDet.getTaxBase()
+                Close()
+            ElseIf id_pop_up = "62" Then
+                'Prepare Order - WH
+                If FormSalesOrderDet.id_comp_contact_par <> GVCompanyContactList.GetFocusedRowCellValue("id_comp_contact").ToString And FormSalesOrderDet.GVItemList.RowCount > 0 Then
+                    Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("These changes will reset your item list. Are you sure you want to keep these changes?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+                    If confirm = Windows.Forms.DialogResult.Yes Then
+                        Cursor = Cursors.WaitCursor
+                        FormSalesOrderDet.viewDetail("-1")
+                        FormSalesOrderDet.id_comp_par = GVCompany.GetFocusedRowCellValue("id_comp").ToString
+                        FormSalesOrderDet.id_comp_contact_par = GVCompanyContactList.GetFocusedRowCellValue("id_comp_contact").ToString
+                        FormSalesOrderDet.TxtWHNameTo.Text = GVCompany.GetFocusedRowCellValue("comp_name").ToString
+                        FormSalesOrderDet.TxtWHCodeTo.Text = get_company_x(GVCompany.GetFocusedRowCellValue("id_comp").ToString, "2")
+                        Close()
+                        Cursor = Cursors.Default
+                    End If
+                Else
                     Cursor = Cursors.WaitCursor
-                    FormSalesOrderDet.viewDetail("-1")
                     FormSalesOrderDet.id_comp_par = GVCompany.GetFocusedRowCellValue("id_comp").ToString
                     FormSalesOrderDet.id_comp_contact_par = GVCompanyContactList.GetFocusedRowCellValue("id_comp_contact").ToString
                     FormSalesOrderDet.TxtWHNameTo.Text = GVCompany.GetFocusedRowCellValue("comp_name").ToString
@@ -715,135 +730,126 @@
                     Close()
                     Cursor = Cursors.Default
                 End If
-            Else
-                Cursor = Cursors.WaitCursor
-                FormSalesOrderDet.id_comp_par = GVCompany.GetFocusedRowCellValue("id_comp").ToString
-                FormSalesOrderDet.id_comp_contact_par = GVCompanyContactList.GetFocusedRowCellValue("id_comp_contact").ToString
-                FormSalesOrderDet.TxtWHNameTo.Text = GVCompany.GetFocusedRowCellValue("comp_name").ToString
-                FormSalesOrderDet.TxtWHCodeTo.Text = get_company_x(GVCompany.GetFocusedRowCellValue("id_comp").ToString, "2")
+            ElseIf id_pop_up = "63" Then
+                '63
+            ElseIf id_pop_up = "64" Then
+                'from
+                FormSamplePLToWHDet.id_comp_from = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
+                FormSamplePLToWHDet.id_comp_contact_from = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
+                FormSamplePLToWHDet.TxtNameCompFrom.Text = GVCompany.GetFocusedRowCellDisplayText("comp_name").ToString
+                FormSamplePLToWHDet.TxtCodeCompFrom.Text = GVCompany.GetFocusedRowCellDisplayText("comp_number").ToString
+                FormSamplePLToWHDet.setDefaultDrawer()
+                FormSamplePLToWHDet.viewDetail()
+                FormSamplePLToWHDet.codeAvailableIns()
                 Close()
-                Cursor = Cursors.Default
-            End If
-        ElseIf id_pop_up = "63" Then
-            '63
-        ElseIf id_pop_up = "64" Then
-            'from
-            FormSamplePLToWHDet.id_comp_from = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
-            FormSamplePLToWHDet.id_comp_contact_from = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
-            FormSamplePLToWHDet.TxtNameCompFrom.Text = GVCompany.GetFocusedRowCellDisplayText("comp_name").ToString
-            FormSamplePLToWHDet.TxtCodeCompFrom.Text = GVCompany.GetFocusedRowCellDisplayText("comp_number").ToString
-            FormSamplePLToWHDet.setDefaultDrawer()
-            FormSamplePLToWHDet.viewDetail()
-            FormSamplePLToWHDet.codeAvailableIns()
-            Close()
-        ElseIf id_pop_up = "65" Then
-            'to
-            FormSamplePLToWHDet.id_comp_to = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
-            FormSamplePLToWHDet.id_comp_contact_to = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
-            FormSamplePLToWHDet.TxtNameCompTo.Text = GVCompany.GetFocusedRowCellDisplayText("comp_name").ToString
-            FormSamplePLToWHDet.TxtCodeCompTo.Text = GVCompany.GetFocusedRowCellDisplayText("comp_number").ToString
-            Close()
-        ElseIf id_pop_up = "66" Then
-            FormFGWHAllocDet.id_comp_from = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
-            FormFGWHAllocDet.id_wh_drawer_from = GVCompanyContactList.GetFocusedRowCellValue("id_wh_drawer").ToString
-            FormFGWHAllocDet.TxtNameCompFrom.Text = GVCompany.GetFocusedRowCellDisplayText("comp_name").ToString
-            FormFGWHAllocDet.TxtCodeCompFrom.Text = GVCompany.GetFocusedRowCellDisplayText("comp_number").ToString
-            FormFGWHAllocDet.viewDetail()
-            BtnSave.Focus()
-            Close()
-        ElseIf id_pop_up = "67" Then
-            FormSampleReturnPLDet.id_comp_to = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
-            FormSampleReturnPLDet.id_comp_contact_to = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
-            FormSampleReturnPLDet.TxtCodeCompTo.Text = GVCompany.GetFocusedRowCellDisplayText("comp_number").ToString
-            FormSampleReturnPLDet.TxtNameCompTo.Text = GVCompany.GetFocusedRowCellDisplayText("comp_name").ToString
-            FormSampleReturnPLDet.setDefaultDrawer()
-            FormSampleReturnPLDet.viewDetail()
-            FormSampleReturnPLDet.codeAvailableIns()
-            Close()
-        ElseIf id_pop_up = "68" Then
-            'Design COP PD
-            FormMasterDesignCOPPD.TEVendorName.Text = get_company_x(GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString, "1")
-            FormMasterDesignCOPPD.TEVendor.Text = get_company_x(GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString, "2")
-            FormMasterDesignCOPPD.id_comp_contact = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
-            FormMasterDesignCOPPD.id_comp = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
-            Close()
-        ElseIf id_pop_up = "69" Then
-            'REPAIR FROM
-            FormFGRepairDet.id_comp_from = GVCompany.GetFocusedRowCellValue("id_comp").ToString
-            FormFGRepairDet.TxtNameCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
-            FormFGRepairDet.TxtCodeCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
-            FormFGRepairDet.setDefaultDrawerFrom()
-            FormFGRepairDet.viewDetail()
-            FormFGRepairDet.codeAvailableIns()
-            FormFGRepairDet.TxtCodeCompTo.Focus()
-            Close()
-        ElseIf id_pop_up = "70" Then
-            'REPAIR TO
-            FormFGRepairDet.id_comp_to = GVCompany.GetFocusedRowCellValue("id_comp").ToString
-            FormFGRepairDet.TxtNameCompTo.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
-            FormFGRepairDet.TxtCodeCompTo.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
-            FormFGRepairDet.setDefaultDrawerTo()
-            Close()
-        ElseIf id_pop_up = "71" Then
-            'RETURN REPAIR FROM
-            FormFGRepairReturnDet.id_comp_from = GVCompany.GetFocusedRowCellValue("id_comp").ToString
-            FormFGRepairReturnDet.TxtNameCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
-            FormFGRepairReturnDet.TxtCodeCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
-            FormFGRepairReturnDet.setDefaultDrawerFrom()
-            FormFGRepairReturnDet.viewDetail()
-            FormFGRepairReturnDet.codeAvailableIns()
-            FormFGRepairReturnDet.TxtCodeCompTo.Focus()
-            Close()
-        ElseIf id_pop_up = "72" Then
-            'RETURN REPAIR TO
-            FormFGRepairReturnDet.id_comp_to = GVCompany.GetFocusedRowCellValue("id_comp").ToString
-            FormFGRepairReturnDet.TxtNameCompTo.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
-            FormFGRepairReturnDet.TxtCodeCompTo.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
-            FormFGRepairReturnDet.setDefaultDrawerTo()
-            Close()
-        ElseIf id_pop_up = "73" Then
-            'CVLONE COMPAY
-            Dim host As String = FormOutlet.GVOutlet.GetFocusedRowCellValue("host").ToString
-            Dim username As String = FormOutlet.GVOutlet.GetFocusedRowCellValue("username").ToString
-            Dim pass As String = FormOutlet.GVOutlet.GetFocusedRowCellValue("pass").ToString
-            Dim db As String = FormOutlet.GVOutlet.GetFocusedRowCellValue("db").ToString
+            ElseIf id_pop_up = "65" Then
+                'to
+                FormSamplePLToWHDet.id_comp_to = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
+                FormSamplePLToWHDet.id_comp_contact_to = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
+                FormSamplePLToWHDet.TxtNameCompTo.Text = GVCompany.GetFocusedRowCellDisplayText("comp_name").ToString
+                FormSamplePLToWHDet.TxtCodeCompTo.Text = GVCompany.GetFocusedRowCellDisplayText("comp_number").ToString
+                Close()
+            ElseIf id_pop_up = "66" Then
+                FormFGWHAllocDet.id_comp_from = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
+                FormFGWHAllocDet.id_wh_drawer_from = GVCompanyContactList.GetFocusedRowCellValue("id_wh_drawer").ToString
+                FormFGWHAllocDet.TxtNameCompFrom.Text = GVCompany.GetFocusedRowCellDisplayText("comp_name").ToString
+                FormFGWHAllocDet.TxtCodeCompFrom.Text = GVCompany.GetFocusedRowCellDisplayText("comp_number").ToString
+                FormFGWHAllocDet.viewDetail()
+                BtnSave.Focus()
+                Close()
+            ElseIf id_pop_up = "67" Then
+                FormSampleReturnPLDet.id_comp_to = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
+                FormSampleReturnPLDet.id_comp_contact_to = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
+                FormSampleReturnPLDet.TxtCodeCompTo.Text = GVCompany.GetFocusedRowCellDisplayText("comp_number").ToString
+                FormSampleReturnPLDet.TxtNameCompTo.Text = GVCompany.GetFocusedRowCellDisplayText("comp_name").ToString
+                FormSampleReturnPLDet.setDefaultDrawer()
+                FormSampleReturnPLDet.viewDetail()
+                FormSampleReturnPLDet.codeAvailableIns()
+                Close()
+            ElseIf id_pop_up = "68" Then
+                'Design COP PD
+                FormMasterDesignCOPPD.TEVendorName.Text = get_company_x(GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString, "1")
+                FormMasterDesignCOPPD.TEVendor.Text = get_company_x(GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString, "2")
+                FormMasterDesignCOPPD.id_comp_contact = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
+                FormMasterDesignCOPPD.id_comp = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
+                Close()
+            ElseIf id_pop_up = "69" Then
+                'REPAIR FROM
+                FormFGRepairDet.id_comp_from = GVCompany.GetFocusedRowCellValue("id_comp").ToString
+                FormFGRepairDet.TxtNameCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
+                FormFGRepairDet.TxtCodeCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
+                FormFGRepairDet.setDefaultDrawerFrom()
+                FormFGRepairDet.viewDetail()
+                FormFGRepairDet.codeAvailableIns()
+                FormFGRepairDet.TxtCodeCompTo.Focus()
+                Close()
+            ElseIf id_pop_up = "70" Then
+                'REPAIR TO
+                FormFGRepairDet.id_comp_to = GVCompany.GetFocusedRowCellValue("id_comp").ToString
+                FormFGRepairDet.TxtNameCompTo.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
+                FormFGRepairDet.TxtCodeCompTo.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
+                FormFGRepairDet.setDefaultDrawerTo()
+                Close()
+            ElseIf id_pop_up = "71" Then
+                'RETURN REPAIR FROM
+                FormFGRepairReturnDet.id_comp_from = GVCompany.GetFocusedRowCellValue("id_comp").ToString
+                FormFGRepairReturnDet.TxtNameCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
+                FormFGRepairReturnDet.TxtCodeCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
+                FormFGRepairReturnDet.setDefaultDrawerFrom()
+                FormFGRepairReturnDet.viewDetail()
+                FormFGRepairReturnDet.codeAvailableIns()
+                FormFGRepairReturnDet.TxtCodeCompTo.Focus()
+                Close()
+            ElseIf id_pop_up = "72" Then
+                'RETURN REPAIR TO
+                FormFGRepairReturnDet.id_comp_to = GVCompany.GetFocusedRowCellValue("id_comp").ToString
+                FormFGRepairReturnDet.TxtNameCompTo.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
+                FormFGRepairReturnDet.TxtCodeCompTo.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
+                FormFGRepairReturnDet.setDefaultDrawerTo()
+                Close()
+            ElseIf id_pop_up = "73" Then
+                'CVLONE COMPAY
+                Dim host As String = FormOutlet.GVOutlet.GetFocusedRowCellValue("host").ToString
+                Dim username As String = FormOutlet.GVOutlet.GetFocusedRowCellValue("username").ToString
+                Dim pass As String = FormOutlet.GVOutlet.GetFocusedRowCellValue("pass").ToString
+                Dim db As String = FormOutlet.GVOutlet.GetFocusedRowCellValue("db").ToString
 
-            Try
-                'comp
-                Dim id_comp As String = GVCompany.GetFocusedRowCellValue("id_comp").ToString
-                Dim dtcomp As DataTable = execute_query("SELECT * FROM tb_m_comp WHERE id_comp=" + id_comp + "", -1, True, "", "", "", "")
-                Dim qinscomp As String = "INSERT INTO tb_m_comp(id_comp, id_comp_cat, comp_number, id_city, comp_name, comp_display_name, address_primary, address_other, fax, postal_code, email, website, id_tax, npwp, is_active, id_departement, comp_commission, id_store_type, id_area, id_employee_rep, id_comp_group, id_pd_alloc, id_wh_type, id_wh, id_acc_sale_ar, id_acc_sale_fg, id_so_type, id_drawer_def, awb_destination, awb_zone, awb_cargo_code, awb_rank, is_own_store) "
-                qinscomp += "SELECT '" + dtcomp.Rows(0)("id_comp").ToString + "', '" + dtcomp.Rows(0)("id_comp_cat").ToString + "', '" + dtcomp.Rows(0)("comp_number").ToString + "', '" + dtcomp.Rows(0)("id_city").ToString + "', '" + dtcomp.Rows(0)("comp_name").ToString + "', '" + dtcomp.Rows(0)("comp_display_name").ToString + "', '" + dtcomp.Rows(0)("address_primary").ToString + "', '" + dtcomp.Rows(0)("address_other").ToString + "', '" + dtcomp.Rows(0)("fax").ToString + "', '" + dtcomp.Rows(0)("postal_code").ToString + "', '" + dtcomp.Rows(0)("email").ToString + "', '" + dtcomp.Rows(0)("website").ToString + "', '" + dtcomp.Rows(0)("id_tax").ToString + "', '" + dtcomp.Rows(0)("npwp").ToString + "', '" + dtcomp.Rows(0)("is_active").ToString + "', " + checkNullInput(dtcomp.Rows(0)("id_departement").ToString) + ", '" + decimalSQL(dtcomp.Rows(0)("comp_commission").ToString) + "', '" + dtcomp.Rows(0)("id_store_type").ToString + "', '" + dtcomp.Rows(0)("id_area").ToString + "', '" + dtcomp.Rows(0)("id_employee_rep").ToString + "', '" + dtcomp.Rows(0)("id_comp_group").ToString + "', '" + dtcomp.Rows(0)("id_pd_alloc").ToString + "', " + checkNullInput(dtcomp.Rows(0)("id_wh_type").ToString) + ", " + checkNullInput(dtcomp.Rows(0)("id_wh").ToString) + ", " + checkNullInput(dtcomp.Rows(0)("id_acc_sale_ar").ToString) + ", " + checkNullInput(dtcomp.Rows(0)("id_acc_sale_fg").ToString) + ", '" + dtcomp.Rows(0)("id_so_type").ToString + "', '" + dtcomp.Rows(0)("id_drawer_def").ToString + "', " + checkNullInput(dtcomp.Rows(0)("awb_destination").ToString) + ", " + checkNullInput(dtcomp.Rows(0)("awb_zone").ToString) + ", " + checkNullInput(dtcomp.Rows(0)("awb_cargo_code").ToString) + ", " + checkNullInput(dtcomp.Rows(0)("awb_rank").ToString) + ", '" + dtcomp.Rows(0)("is_own_store").ToString + "'; SELECT LAST_INSERT_ID() "
-                execute_non_query(qinscomp, False, host, username, pass, db)
+                Try
+                    'comp
+                    Dim id_comp As String = GVCompany.GetFocusedRowCellValue("id_comp").ToString
+                    Dim dtcomp As DataTable = execute_query("SELECT * FROM tb_m_comp WHERE id_comp=" + id_comp + "", -1, True, "", "", "", "")
+                    Dim qinscomp As String = "INSERT INTO tb_m_comp(id_comp, id_comp_cat, comp_number, id_city, comp_name, comp_display_name, address_primary, address_other, fax, postal_code, email, website, id_tax, npwp, is_active, id_departement, comp_commission, id_store_type, id_area, id_employee_rep, id_comp_group, id_pd_alloc, id_wh_type, id_wh, id_acc_sale_ar, id_acc_sale_fg, id_so_type, id_drawer_def, awb_destination, awb_zone, awb_cargo_code, awb_rank, is_own_store) "
+                    qinscomp += "SELECT '" + dtcomp.Rows(0)("id_comp").ToString + "', '" + dtcomp.Rows(0)("id_comp_cat").ToString + "', '" + dtcomp.Rows(0)("comp_number").ToString + "', '" + dtcomp.Rows(0)("id_city").ToString + "', '" + dtcomp.Rows(0)("comp_name").ToString + "', '" + dtcomp.Rows(0)("comp_display_name").ToString + "', '" + dtcomp.Rows(0)("address_primary").ToString + "', '" + dtcomp.Rows(0)("address_other").ToString + "', '" + dtcomp.Rows(0)("fax").ToString + "', '" + dtcomp.Rows(0)("postal_code").ToString + "', '" + dtcomp.Rows(0)("email").ToString + "', '" + dtcomp.Rows(0)("website").ToString + "', '" + dtcomp.Rows(0)("id_tax").ToString + "', '" + dtcomp.Rows(0)("npwp").ToString + "', '" + dtcomp.Rows(0)("is_active").ToString + "', " + checkNullInput(dtcomp.Rows(0)("id_departement").ToString) + ", '" + decimalSQL(dtcomp.Rows(0)("comp_commission").ToString) + "', '" + dtcomp.Rows(0)("id_store_type").ToString + "', '" + dtcomp.Rows(0)("id_area").ToString + "', '" + dtcomp.Rows(0)("id_employee_rep").ToString + "', '" + dtcomp.Rows(0)("id_comp_group").ToString + "', '" + dtcomp.Rows(0)("id_pd_alloc").ToString + "', " + checkNullInput(dtcomp.Rows(0)("id_wh_type").ToString) + ", " + checkNullInput(dtcomp.Rows(0)("id_wh").ToString) + ", " + checkNullInput(dtcomp.Rows(0)("id_acc_sale_ar").ToString) + ", " + checkNullInput(dtcomp.Rows(0)("id_acc_sale_fg").ToString) + ", '" + dtcomp.Rows(0)("id_so_type").ToString + "', '" + dtcomp.Rows(0)("id_drawer_def").ToString + "', " + checkNullInput(dtcomp.Rows(0)("awb_destination").ToString) + ", " + checkNullInput(dtcomp.Rows(0)("awb_zone").ToString) + ", " + checkNullInput(dtcomp.Rows(0)("awb_cargo_code").ToString) + ", " + checkNullInput(dtcomp.Rows(0)("awb_rank").ToString) + ", '" + dtcomp.Rows(0)("is_own_store").ToString + "'; SELECT LAST_INSERT_ID() "
+                    execute_non_query(qinscomp, False, host, username, pass, db)
 
-                'contact
-                Dim dtconn As DataTable = execute_query("SELECT a.id_comp_contact, a.id_comp,a.contact_person, a.contact_number, a.is_default FROM tb_m_comp_contact a WHERE a.id_comp=" + dtcomp.Rows(0)("id_comp").ToString + " AND a.is_default=1", -1, True, "", "", "", "")
-                Dim qcon As String = "INSERT INTO tb_m_comp_contact(id_comp_contact, id_comp, contact_person, contact_number, is_default) 
+                    'contact
+                    Dim dtconn As DataTable = execute_query("SELECT a.id_comp_contact, a.id_comp,a.contact_person, a.contact_number, a.is_default FROM tb_m_comp_contact a WHERE a.id_comp=" + dtcomp.Rows(0)("id_comp").ToString + " AND a.is_default=1", -1, True, "", "", "", "")
+                    Dim qcon As String = "INSERT INTO tb_m_comp_contact(id_comp_contact, id_comp, contact_person, contact_number, is_default) 
                 SELECT '" + dtconn.Rows(0)("id_comp_contact").ToString + "', '" + dtconn.Rows(0)("id_comp").ToString + "', '" + dtconn.Rows(0)("contact_person").ToString + "', '" + dtconn.Rows(0)("contact_number").ToString + "','1' "
-                execute_non_query(qcon, False, host, username, pass, db)
-                infoCustom("Clone data success")
+                    execute_non_query(qcon, False, host, username, pass, db)
+                    infoCustom("Clone data success")
+                    Close()
+                Catch ex As Exception
+                    stopCustom(ex.ToString)
+                    Close()
+                End Try
+            ElseIf id_pop_up = "74" Then
+                'RETURN Mat In Prod
+                FormMatRetInProd.id_comp_contact_from = GVCompany.GetFocusedRowCellValue("id_comp").ToString
+                FormMatRetInProd.TxtNameCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
+                FormMatRetInProd.TxtCodeCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
+                FormMatRetInProd.MEAdrressCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "3")
                 Close()
-            Catch ex As Exception
-                stopCustom(ex.ToString)
+            ElseIf id_pop_up = "75" Then
+                'from final clearance
+                FormProductionFinalClearDet.id_comp_from = GVCompany.GetFocusedRowCellValue("id_comp").ToString
+                FormProductionFinalClearDet.TxtNameCompFrom.Text = GVCompany.GetFocusedRowCellValue("comp_name").ToString
+                FormProductionFinalClearDet.TxtCodeCompFrom.Text = GVCompany.GetFocusedRowCellValue("comp_number").ToString
+                FormProductionFinalClearDet.TxtCodeCompTo.Focus()
                 Close()
-            End Try
-        ElseIf id_pop_up = "74" Then
-            'RETURN Mat In Prod
-            FormMatRetInProd.id_comp_contact_from = GVCompany.GetFocusedRowCellValue("id_comp").ToString
-            FormMatRetInProd.TxtNameCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
-            FormMatRetInProd.TxtCodeCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
-            FormMatRetInProd.MEAdrressCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "3")
-            Close()
-        ElseIf id_pop_up = "75" Then
-            'from final clearance
-            FormProductionFinalClearDet.id_comp_from = GVCompany.GetFocusedRowCellValue("id_comp").ToString
-            FormProductionFinalClearDet.TxtNameCompFrom.Text = GVCompany.GetFocusedRowCellValue("comp_name").ToString
-            FormProductionFinalClearDet.TxtCodeCompFrom.Text = GVCompany.GetFocusedRowCellValue("comp_number").ToString
-            FormProductionFinalClearDet.TxtCodeCompTo.Focus()
-            Close()
-        ElseIf id_pop_up = "76" Then
-            'to final clearance
-            FormProductionFinalClearDet.id_comp_to = GVCompany.GetFocusedRowCellValue("id_comp").ToString
+            ElseIf id_pop_up = "76" Then
+                'to final clearance
+                FormProductionFinalClearDet.id_comp_to = GVCompany.GetFocusedRowCellValue("id_comp").ToString
             FormProductionFinalClearDet.TxtNameCompTo.Text = GVCompany.GetFocusedRowCellValue("comp_name").ToString
             FormProductionFinalClearDet.TxtCodeCompTo.Text = GVCompany.GetFocusedRowCellValue("comp_number").ToString
             FormProductionFinalClearDet.TxtOrder.Focus()

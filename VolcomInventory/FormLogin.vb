@@ -41,6 +41,7 @@ Public Class FormLogin
                     id_employee_user = data.Rows(0)("id_employee").ToString
                     id_departement_user = data.Rows(0)("id_departement").ToString
                     is_change_pass_user = data.Rows(0)("is_change").ToString
+                    Dim show_notif As String = data.Rows(0)("show_notif").ToString
                     checkMenu() 'check menu based on role
 
                     'log
@@ -57,7 +58,11 @@ Public Class FormLogin
                     FormMain.checkNumberNotif()
                     Dim interval As Integer = Integer.Parse(get_setup_field("load_notif").ToString)
                     FormMain.TimerNotif.Interval = interval
-                    FormMain.TimerNotif.Enabled = True
+                    If show_notif = "1" Then
+                        FormMain.TimerNotif.Enabled = True
+                    Else
+                        FormMain.TimerNotif.Enabled = False
+                    End If
 
                     FormMain.LoginToolStripMenuItem.Visible = False
                     FormMain.LogoutToolStripMenuItem.Visible = True

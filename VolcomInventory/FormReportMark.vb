@@ -352,6 +352,9 @@
         ElseIf report_mark_type = "105" Then
             'final clear
             query = String.Format("SELECT id_report_status, prod_fc_number as report_number FROM tb_prod_fc WHERE id_prod_fc = '{0}'", id_report)
+        ElseIf report_mark_type = "107" Then
+            'production assembly
+            query = String.Format("SELECT id_report_status, prod_ass_number as report_number FROM tb_prod_ass WHERE id_prod_ass = '{0}'", id_report)
         End If
 
         data = execute_query(query, -1, True, "", "", "", "")
@@ -3465,6 +3468,23 @@
                 FormProductionFinalClear.viewFinalClear()
                 FormProductionFinalClear.GVFinalClear.FocusedRowHandle = find_row(FormProductionFinalClear.GVFinalClear, "id_prod_fc", id_report)
             End If
+        ElseIf report_mark_type = "107" Then
+            Cursor = Cursors.WaitCursor
+            'production assem
+            If id_status_reportx = "3" Then
+                id_status_reportx = "6"
+            End If
+
+            Dim ch_stt As New ClassProductionAssembly()
+            ch_stt.changeStatus(id_report, id_status_reportx)
+
+            If form_origin = "FormProductionAssemblySingle" Then
+                FormProductionAssemblySingle.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                FormProductionAssemblySingle.actionLoad()
+                FormProductionAssembly.viewData()
+                FormProductionAssembly.GVData.FocusedRowHandle = find_row(FormProductionAssembly.GVData, "id_prod_ass", id_report)
+            End If
+            Cursor = Cursors.Default
         End If
 
         'adding lead time

@@ -80,10 +80,13 @@ Partial Class FormProductionRec
         Me.GridColumnIdDel = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnDelRec = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnName = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnStyleCode = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnPoTypeRec = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnQty = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemDateEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemDateEdit()
         Me.GridView3 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.XTCTabReceive = New DevExpress.XtraTab.XtraTabControl()
+        Me.GridColumnArriveDate = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.XTPListPO.SuspendLayout()
         CType(Me.SCCRec, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SCCRec.SuspendLayout()
@@ -506,12 +509,14 @@ Partial Class FormProductionRec
         '
         'GVProdRec
         '
-        Me.GVProdRec.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ColIdPRodOrderRecPurc, Me.ColSeason, Me.ColRecNumber, Me.ColShipFrom, Me.ColShipTo, Me.ColRecDate, Me.ColDueDate, Me.ColPSONumber, Me.ColDONumber, Me.ColIDStatus, Me.ColStatus, Me.GridColumnIdDel, Me.GridColumnDelRec, Me.GridColumnName, Me.GridColumnPoTypeRec})
+        Me.GVProdRec.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ColIdPRodOrderRecPurc, Me.ColSeason, Me.ColRecNumber, Me.ColShipFrom, Me.ColShipTo, Me.ColRecDate, Me.ColDueDate, Me.ColPSONumber, Me.ColDONumber, Me.ColIDStatus, Me.ColStatus, Me.GridColumnIdDel, Me.GridColumnDelRec, Me.GridColumnName, Me.GridColumnStyleCode, Me.GridColumnPoTypeRec, Me.GridColumnQty, Me.GridColumnArriveDate})
         Me.GVProdRec.GridControl = Me.GCProdRec
         Me.GVProdRec.GroupCount = 1
+        Me.GVProdRec.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty", Me.GridColumnQty, "{0:n0}")})
         Me.GVProdRec.Name = "GVProdRec"
         Me.GVProdRec.OptionsBehavior.Editable = False
         Me.GVProdRec.OptionsFind.AlwaysVisible = True
+        Me.GVProdRec.OptionsView.ShowFooter = True
         Me.GVProdRec.OptionsView.ShowGroupPanel = False
         Me.GVProdRec.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.ColSeason, DevExpress.Data.ColumnSortOrder.Descending), New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.ColIdPRodOrderRecPurc, DevExpress.Data.ColumnSortOrder.Descending)})
         '
@@ -537,7 +542,7 @@ Partial Class FormProductionRec
         Me.ColRecNumber.Name = "ColRecNumber"
         Me.ColRecNumber.Visible = True
         Me.ColRecNumber.VisibleIndex = 0
-        Me.ColRecNumber.Width = 73
+        Me.ColRecNumber.Width = 67
         '
         'ColShipFrom
         '
@@ -545,8 +550,8 @@ Partial Class FormProductionRec
         Me.ColShipFrom.FieldName = "comp_from"
         Me.ColShipFrom.Name = "ColShipFrom"
         Me.ColShipFrom.Visible = True
-        Me.ColShipFrom.VisibleIndex = 6
-        Me.ColShipFrom.Width = 142
+        Me.ColShipFrom.VisibleIndex = 5
+        Me.ColShipFrom.Width = 122
         '
         'ColShipTo
         '
@@ -554,8 +559,8 @@ Partial Class FormProductionRec
         Me.ColShipTo.FieldName = "comp_to"
         Me.ColShipTo.Name = "ColShipTo"
         Me.ColShipTo.Visible = True
-        Me.ColShipTo.VisibleIndex = 7
-        Me.ColShipTo.Width = 142
+        Me.ColShipTo.VisibleIndex = 6
+        Me.ColShipTo.Width = 122
         '
         'ColRecDate
         '
@@ -565,8 +570,8 @@ Partial Class FormProductionRec
         Me.ColRecDate.FieldName = "prod_order_rec_date"
         Me.ColRecDate.Name = "ColRecDate"
         Me.ColRecDate.Visible = True
-        Me.ColRecDate.VisibleIndex = 8
-        Me.ColRecDate.Width = 131
+        Me.ColRecDate.VisibleIndex = 11
+        Me.ColRecDate.Width = 122
         '
         'ColDueDate
         '
@@ -577,8 +582,8 @@ Partial Class FormProductionRec
         Me.ColDueDate.FieldName = "delivery_order_date"
         Me.ColDueDate.Name = "ColDueDate"
         Me.ColDueDate.Visible = True
-        Me.ColDueDate.VisibleIndex = 5
-        Me.ColDueDate.Width = 144
+        Me.ColDueDate.VisibleIndex = 9
+        Me.ColDueDate.Width = 124
         '
         'RepositoryItemTextEdit1
         '
@@ -593,6 +598,7 @@ Partial Class FormProductionRec
         Me.ColPSONumber.Name = "ColPSONumber"
         Me.ColPSONumber.Visible = True
         Me.ColPSONumber.VisibleIndex = 1
+        Me.ColPSONumber.Width = 69
         '
         'ColDONumber
         '
@@ -600,7 +606,8 @@ Partial Class FormProductionRec
         Me.ColDONumber.FieldName = "delivery_order_number"
         Me.ColDONumber.Name = "ColDONumber"
         Me.ColDONumber.Visible = True
-        Me.ColDONumber.VisibleIndex = 4
+        Me.ColDONumber.VisibleIndex = 8
+        Me.ColDONumber.Width = 63
         '
         'ColIDStatus
         '
@@ -614,7 +621,8 @@ Partial Class FormProductionRec
         Me.ColStatus.FieldName = "report_status"
         Me.ColStatus.Name = "ColStatus"
         Me.ColStatus.Visible = True
-        Me.ColStatus.VisibleIndex = 9
+        Me.ColStatus.VisibleIndex = 12
+        Me.ColStatus.Width = 93
         '
         'GridColumnIdDel
         '
@@ -633,7 +641,17 @@ Partial Class FormProductionRec
         Me.GridColumnName.FieldName = "name"
         Me.GridColumnName.Name = "GridColumnName"
         Me.GridColumnName.Visible = True
-        Me.GridColumnName.VisibleIndex = 2
+        Me.GridColumnName.VisibleIndex = 3
+        Me.GridColumnName.Width = 112
+        '
+        'GridColumnStyleCode
+        '
+        Me.GridColumnStyleCode.Caption = "Code"
+        Me.GridColumnStyleCode.FieldName = "code"
+        Me.GridColumnStyleCode.Name = "GridColumnStyleCode"
+        Me.GridColumnStyleCode.Visible = True
+        Me.GridColumnStyleCode.VisibleIndex = 2
+        Me.GridColumnStyleCode.Width = 69
         '
         'GridColumnPoTypeRec
         '
@@ -641,7 +659,20 @@ Partial Class FormProductionRec
         Me.GridColumnPoTypeRec.FieldName = "po_type"
         Me.GridColumnPoTypeRec.Name = "GridColumnPoTypeRec"
         Me.GridColumnPoTypeRec.Visible = True
-        Me.GridColumnPoTypeRec.VisibleIndex = 3
+        Me.GridColumnPoTypeRec.VisibleIndex = 4
+        Me.GridColumnPoTypeRec.Width = 63
+        '
+        'GridColumnQty
+        '
+        Me.GridColumnQty.Caption = "Qty"
+        Me.GridColumnQty.DisplayFormat.FormatString = "N0"
+        Me.GridColumnQty.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnQty.FieldName = "qty"
+        Me.GridColumnQty.Name = "GridColumnQty"
+        Me.GridColumnQty.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty", "{0:N0}")})
+        Me.GridColumnQty.Visible = True
+        Me.GridColumnQty.VisibleIndex = 7
+        Me.GridColumnQty.Width = 52
         '
         'RepositoryItemDateEdit1
         '
@@ -666,6 +697,16 @@ Partial Class FormProductionRec
         Me.XTCTabReceive.Size = New System.Drawing.Size(809, 494)
         Me.XTCTabReceive.TabIndex = 8
         Me.XTCTabReceive.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPListReceive, Me.XTPListPO})
+        '
+        'GridColumnArriveDate
+        '
+        Me.GridColumnArriveDate.Caption = "Arrive in QC"
+        Me.GridColumnArriveDate.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.GridColumnArriveDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumnArriveDate.FieldName = "arrive_date"
+        Me.GridColumnArriveDate.Name = "GridColumnArriveDate"
+        Me.GridColumnArriveDate.Visible = True
+        Me.GridColumnArriveDate.VisibleIndex = 10
         '
         'FormProductionRec
         '
@@ -772,4 +813,7 @@ Partial Class FormProductionRec
     Friend WithEvents RepositoryItemTextEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
     Friend WithEvents GridColumnName As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnPoTypeRec As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnStyleCode As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnQty As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnArriveDate As DevExpress.XtraGrid.Columns.GridColumn
 End Class

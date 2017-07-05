@@ -61,6 +61,46 @@ Module Common
 
         Return header_number
     End Function
+    '=>=========== opt code header general =====================
+    Function get_opt_general_field(ByVal field As String)
+        'opt as var choose field
+        Dim ret_var, query As String
+        ret_var = ""
+
+        Try
+            query = "SELECT " & field & " FROM tb_opt_accounting LIMIT 1"
+            ret_var = execute_query(query, 0, True, "", "", "", "")
+        Catch ex As Exception
+            ret_var = ""
+        End Try
+
+        Return ret_var
+    End Function
+    Function header_number_general(ByVal opt As String)
+        'opt
+        '1 = awbill
+
+        Dim header_number_x As String
+        header_number_x = ""
+
+        If opt = "1" Then
+            header_number_x = combine_header_number(get_opt_general_field("awbill_code_head"), Integer.Parse(get_opt_general_field("awbill_code_inc")), Integer.Parse(get_opt_general_field("awbill_code_digit")))
+        End If
+
+        Return header_number_x
+    End Function
+    Sub increase_inc_general(ByVal opt As String)
+        'opt
+        '1 = awbill
+
+        Dim query As String
+        query = ""
+
+        If opt = "1" Then
+            query = "UPDATE tb_opt_general SET awbill_code_inc=(tb_opt_general.awbill_code_inc+1)"
+            execute_non_query(query, True, "", "", "", "")
+        End If
+    End Sub
     '=>=========== opt code header sample =====================
     Function header_number(ByVal opt As String)
         'opt
@@ -389,6 +429,8 @@ Module Common
             header_number_x = combine_header_number(get_opt_prod_field("prod_qc_adj_out_code_head"), Integer.Parse(get_opt_prod_field("prod_qc_adj_out_code_inc")), Integer.Parse(get_opt_prod_field("prod_qc_adj_out_code_digit")))
         ElseIf opt = "12" Then
             header_number_x = combine_header_number(get_opt_prod_field("prod_fc_code_head"), Integer.Parse(get_opt_prod_field("prod_fc_code_inc")), Integer.Parse(get_opt_prod_field("prod_fc_code_digit")))
+        ElseIf opt = "13" Then
+            header_number_x = combine_header_number(get_opt_prod_field("prod_ass_code_head"), Integer.Parse(get_opt_prod_field("prod_ass_code_inc")), Integer.Parse(get_opt_prod_field("prod_ass_code_digit")))
         End If
 
         Return header_number_x
@@ -442,6 +484,9 @@ Module Common
             execute_non_query(query, True, "", "", "", "")
         ElseIf opt = "12" Then
             query = "UPDATE tb_opt_prod SET prod_fc_code_inc = (tb_opt_prod.prod_fc_code_inc + 1)"
+            execute_non_query(query, True, "", "", "", "")
+        ElseIf opt = "13" Then
+            query = "UPDATE tb_opt_prod SET prod_ass_code_inc = (tb_opt_prod.prod_ass_code_inc + 1)"
             execute_non_query(query, True, "", "", "", "")
         End If
     End Sub

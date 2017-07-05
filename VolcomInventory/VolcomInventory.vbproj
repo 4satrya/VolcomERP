@@ -902,6 +902,12 @@
     <Compile Include="FormFGStock.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormFGTransList.Designer.vb">
+      <DependentUpon>FormFGTransList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormFGTransList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormFGTrfNew.Designer.vb">
       <DependentUpon>FormFGTrfNew.vb</DependentUpon>
     </Compile>
@@ -1148,10 +1154,22 @@
     <Compile Include="FormProductionAssembly.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormProductionAssemblyComp.Designer.vb">
+      <DependentUpon>FormProductionAssemblyComp.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormProductionAssemblyComp.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormProductionAssemblyNew.Designer.vb">
       <DependentUpon>FormProductionAssemblyNew.vb</DependentUpon>
     </Compile>
     <Compile Include="FormProductionAssemblyNew.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormProductionAssemblyQuickAdd.Designer.vb">
+      <DependentUpon>FormProductionAssemblyQuickAdd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormProductionAssemblyQuickAdd.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormProductionAssemblySingle.Designer.vb">
@@ -3932,6 +3950,12 @@
     <Compile Include="FormWHCargoRateDet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormWHDelEmpty.Designer.vb">
+      <DependentUpon>FormWHDelEmpty.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormWHDelEmpty.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormWHImportDO.Designer.vb">
       <DependentUpon>FormWHImportDO.vb</DependentUpon>
     </Compile>
@@ -3954,6 +3978,12 @@
       <DependentUpon>FormWorkPlace.vb</DependentUpon>
     </Compile>
     <Compile Include="FormWorkPlace.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormWorkQuick.Designer.vb">
+      <DependentUpon>FormWorkQuick.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormWorkQuick.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Library\Common.vb" />
@@ -5115,6 +5145,9 @@
       <DependentUpon>FormFGStock.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormFGTransList.resx">
+      <DependentUpon>FormFGTransList.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormFGTrfNew.resx">
       <DependentUpon>FormFGTrfNew.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -5241,8 +5274,14 @@
     <EmbeddedResource Include="FormProductionAssembly.resx">
       <DependentUpon>FormProductionAssembly.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormProductionAssemblyComp.resx">
+      <DependentUpon>FormProductionAssemblyComp.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormProductionAssemblyNew.resx">
       <DependentUpon>FormProductionAssemblyNew.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormProductionAssemblyQuickAdd.resx">
+      <DependentUpon>FormProductionAssemblyQuickAdd.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormProductionAssemblySingle.resx">
       <DependentUpon>FormProductionAssemblySingle.vb</DependentUpon>
@@ -7077,6 +7116,9 @@
     <EmbeddedResource Include="FormMasterEmployeeDet.resx">
       <DependentUpon>FormMasterEmployeeDet.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormWorkQuick.resx">
+      <DependentUpon>FormWorkQuick.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pivot.resx">
       <DependentUpon>Pivot.vb</DependentUpon>

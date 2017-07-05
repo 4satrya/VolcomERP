@@ -45,6 +45,7 @@ Partial Class FormMasterDesignSingle
         Me.RILEValueCodex = New DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit()
         Me.TECode = New DevExpress.XtraEditors.TextEdit()
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
+        Me.BtnReviseStyle = New DevExpress.XtraEditors.SimpleButton()
         Me.CheckEditApproved = New DevExpress.XtraEditors.CheckEdit()
         Me.SLEDelAct = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView5 = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -562,6 +563,7 @@ Partial Class FormMasterDesignSingle
         '
         Me.PanelControl2.Appearance.BackColor = System.Drawing.Color.Transparent
         Me.PanelControl2.Appearance.Options.UseBackColor = True
+        Me.PanelControl2.Controls.Add(Me.BtnReviseStyle)
         Me.PanelControl2.Controls.Add(Me.CheckEditApproved)
         Me.PanelControl2.Controls.Add(Me.SLEDelAct)
         Me.PanelControl2.Controls.Add(Me.TECodeImport)
@@ -585,6 +587,17 @@ Partial Class FormMasterDesignSingle
         Me.PanelControl2.Name = "PanelControl2"
         Me.PanelControl2.Size = New System.Drawing.Size(907, 31)
         Me.PanelControl2.TabIndex = 92
+        '
+        'BtnReviseStyle
+        '
+        Me.BtnReviseStyle.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnReviseStyle.Location = New System.Drawing.Point(768, 2)
+        Me.BtnReviseStyle.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.BtnReviseStyle.Name = "BtnReviseStyle"
+        Me.BtnReviseStyle.Size = New System.Drawing.Size(71, 27)
+        Me.BtnReviseStyle.TabIndex = 124
+        Me.BtnReviseStyle.Text = "Revise"
+        Me.BtnReviseStyle.Visible = False
         '
         'CheckEditApproved
         '
@@ -2901,4 +2914,5 @@ Partial Class FormMasterDesignSingle
     Friend WithEvents GridColumn50 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn51 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn52 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BtnReviseStyle As DevExpress.XtraEditors.SimpleButton
 End Class

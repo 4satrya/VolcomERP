@@ -25,4 +25,24 @@
         query += "ORDER BY a.id_prod_ass " + order_type
         Return query
     End Function
+
+    Public Sub removeAllComponents(ByVal id_prod_ass As String)
+        Dim query As String = "DELETE tb_prod_ass_comp_det 
+        FROM tb_prod_ass_comp_det 
+        INNER JOIN tb_prod_ass_det ON tb_prod_ass_det.id_prod_ass_det = tb_prod_ass_comp_det.id_prod_ass_det
+        WHERE tb_prod_ass_det.id_prod_ass=" + id_prod_ass + " "
+        execute_non_query(query, True, "", "", "", "")
+    End Sub
+
+    Public Sub changeStatus(ByVal id_report_par As String, ByVal id_status_reportx_par As String)
+        If id_status_reportx_par = "6" Then
+            'cek po
+            Dim query_final_ss As String = "CALL view_prod_ass_final(" + id_report_par + ")"
+            Dim data_cek_po As DataTable = execute_query(query_final_ss, -1, True, "", "", "", "")
+        End If
+
+        'change report status
+        Dim query As String = String.Format("UPDATE tb_prod_ass SET id_report_status='{0}' WHERE id_prod_ass ='{1}' ", id_status_reportx_par, id_report_par)
+        execute_non_query(query, True, "", "", "", "")
+    End Sub
 End Class

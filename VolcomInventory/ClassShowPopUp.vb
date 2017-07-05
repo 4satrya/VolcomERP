@@ -206,7 +206,7 @@
             'SALES POS
             FormViewSalesPOS.id_sales_pos = id_report
             FormViewSalesPOS.ShowDialog()
-        ElseIf report_mark_type = "49" Or report_mark_type="106" Then
+        ElseIf report_mark_type = "49" Or report_mark_type = "106" Then
             'SALES RETURN QC
             FormViewSalesReturnQC.id_sales_return_qc = id_report
             FormViewSalesReturnQC.ShowDialog()
@@ -420,6 +420,12 @@
             FormProductionFinalClearDet.action = "upd"
             FormProductionFinalClearDet.is_view = "1"
             FormProductionFinalClearDet.ShowDialog()
+        ElseIf report_mark_type = "107" Then
+            'assembly
+            FormProductionAssemblySingle.id_prod_ass = id_report
+            FormProductionAssemblySingle.action = "upd"
+            FormProductionAssemblySingle.is_view = "1"
+            FormProductionAssemblySingle.ShowDialog()
         Else
             'MsgBox(id_report)
             stopCustom("Document Not Found")
@@ -992,6 +998,12 @@
             field_id = "id_prod_fc"
             field_number = "prod_fc_number"
             field_date = "prod_fc_date"
+        ElseIf report_mark_type = "107" Then
+            'ASSEMBLY
+            table_name = "tb_prod_ass"
+            field_id = "id_prod_ass"
+            field_number = "prod_ass_number"
+            field_date = "prod_ass_date"
         Else
             query = "Select '-' AS report_number, NOW() as report_date"
         End If
@@ -1230,6 +1242,17 @@
                 If datax.Rows.Count > 0 Then
                     info_col = datax.Rows(0)("pl_category").ToString
                     info_report = datax.Rows(0)("prod_order_number").ToString
+                    info_design_code = datax.Rows(0)("code").ToString
+                    info_design = datax.Rows(0)("name").ToString
+                End If
+            ElseIf report_mark_type = "107" Then
+                'assembly
+                Dim ass As New ClassProductionAssembly()
+                query = ass.queryMain("AND a.id_prod_ass=" + id_report + " ", "1")
+                Dim datax As DataTable = execute_query(query, -1, True, "", "", "", "")
+                If datax.Rows.Count > 0 Then
+                    info_col = ""
+                    info_report = ""
                     info_design_code = datax.Rows(0)("code").ToString
                     info_design = datax.Rows(0)("name").ToString
                 End If

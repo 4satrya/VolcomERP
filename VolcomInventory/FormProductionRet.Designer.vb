@@ -32,6 +32,9 @@ Partial Class FormProductionRet
         Me.ColDueDate = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ColPSONumber = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnStatusOut = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.XTPRetIn = New DevExpress.XtraTab.XtraTabPage()
         Me.GCRetIn = New DevExpress.XtraGrid.GridControl()
         Me.GVRetIn = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -43,6 +46,9 @@ Partial Class FormProductionRet
         Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnStatusIn = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn13 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XTCReturn, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCReturn.SuspendLayout()
         Me.XTPRetOut.SuspendLayout()
@@ -86,12 +92,14 @@ Partial Class FormProductionRet
         '
         'GVRetOut
         '
-        Me.GVRetOut.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ColIdSampleRetOut, Me.ColSeason, Me.ColRetOutNumber, Me.ColShipFrom, Me.ColShipTo, Me.ColRecDate, Me.ColDueDate, Me.ColPSONumber, Me.GridColumnStatusOut})
+        Me.GVRetOut.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ColIdSampleRetOut, Me.ColSeason, Me.ColRetOutNumber, Me.ColShipFrom, Me.ColShipTo, Me.ColRecDate, Me.ColDueDate, Me.ColPSONumber, Me.GridColumnStatusOut, Me.GridColumn7, Me.GridColumn9, Me.GridColumn10})
         Me.GVRetOut.GridControl = Me.GCRetOut
         Me.GVRetOut.GroupCount = 1
+        Me.GVRetOut.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty", Me.GridColumn10, "{0:n0}")})
         Me.GVRetOut.Name = "GVRetOut"
         Me.GVRetOut.OptionsBehavior.AutoExpandAllGroups = True
         Me.GVRetOut.OptionsBehavior.Editable = False
+        Me.GVRetOut.OptionsView.ShowFooter = True
         Me.GVRetOut.OptionsView.ShowGroupPanel = False
         Me.GVRetOut.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.ColSeason, DevExpress.Data.ColumnSortOrder.Descending), New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.ColIdSampleRetOut, DevExpress.Data.ColumnSortOrder.Descending)})
         '
@@ -115,7 +123,7 @@ Partial Class FormProductionRet
         Me.ColRetOutNumber.Name = "ColRetOutNumber"
         Me.ColRetOutNumber.Visible = True
         Me.ColRetOutNumber.VisibleIndex = 0
-        Me.ColRetOutNumber.Width = 73
+        Me.ColRetOutNumber.Width = 78
         '
         'ColShipFrom
         '
@@ -123,8 +131,8 @@ Partial Class FormProductionRet
         Me.ColShipFrom.FieldName = "comp_from"
         Me.ColShipFrom.Name = "ColShipFrom"
         Me.ColShipFrom.Visible = True
-        Me.ColShipFrom.VisibleIndex = 2
-        Me.ColShipFrom.Width = 142
+        Me.ColShipFrom.VisibleIndex = 4
+        Me.ColShipFrom.Width = 139
         '
         'ColShipTo
         '
@@ -132,8 +140,8 @@ Partial Class FormProductionRet
         Me.ColShipTo.FieldName = "comp_to"
         Me.ColShipTo.Name = "ColShipTo"
         Me.ColShipTo.Visible = True
-        Me.ColShipTo.VisibleIndex = 3
-        Me.ColShipTo.Width = 142
+        Me.ColShipTo.VisibleIndex = 5
+        Me.ColShipTo.Width = 139
         '
         'ColRecDate
         '
@@ -143,8 +151,8 @@ Partial Class FormProductionRet
         Me.ColRecDate.FieldName = "prod_order_ret_out_date"
         Me.ColRecDate.Name = "ColRecDate"
         Me.ColRecDate.Visible = True
-        Me.ColRecDate.VisibleIndex = 4
-        Me.ColRecDate.Width = 131
+        Me.ColRecDate.VisibleIndex = 7
+        Me.ColRecDate.Width = 136
         '
         'ColDueDate
         '
@@ -154,8 +162,8 @@ Partial Class FormProductionRet
         Me.ColDueDate.FieldName = "prod_order_ret_out_due_date"
         Me.ColDueDate.Name = "ColDueDate"
         Me.ColDueDate.Visible = True
-        Me.ColDueDate.VisibleIndex = 5
-        Me.ColDueDate.Width = 144
+        Me.ColDueDate.VisibleIndex = 8
+        Me.ColDueDate.Width = 148
         '
         'ColPSONumber
         '
@@ -164,6 +172,7 @@ Partial Class FormProductionRet
         Me.ColPSONumber.Name = "ColPSONumber"
         Me.ColPSONumber.Visible = True
         Me.ColPSONumber.VisibleIndex = 1
+        Me.ColPSONumber.Width = 80
         '
         'GridColumnStatusOut
         '
@@ -171,7 +180,38 @@ Partial Class FormProductionRet
         Me.GridColumnStatusOut.FieldName = "report_status"
         Me.GridColumnStatusOut.Name = "GridColumnStatusOut"
         Me.GridColumnStatusOut.Visible = True
-        Me.GridColumnStatusOut.VisibleIndex = 6
+        Me.GridColumnStatusOut.VisibleIndex = 9
+        Me.GridColumnStatusOut.Width = 89
+        '
+        'GridColumn7
+        '
+        Me.GridColumn7.Caption = "Code"
+        Me.GridColumn7.FieldName = "code"
+        Me.GridColumn7.Name = "GridColumn7"
+        Me.GridColumn7.Visible = True
+        Me.GridColumn7.VisibleIndex = 2
+        Me.GridColumn7.Width = 80
+        '
+        'GridColumn9
+        '
+        Me.GridColumn9.Caption = "Name"
+        Me.GridColumn9.FieldName = "name"
+        Me.GridColumn9.Name = "GridColumn9"
+        Me.GridColumn9.Visible = True
+        Me.GridColumn9.VisibleIndex = 3
+        Me.GridColumn9.Width = 139
+        '
+        'GridColumn10
+        '
+        Me.GridColumn10.Caption = "Qty"
+        Me.GridColumn10.DisplayFormat.FormatString = "N0"
+        Me.GridColumn10.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn10.FieldName = "qty"
+        Me.GridColumn10.Name = "GridColumn10"
+        Me.GridColumn10.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty", "{0:N0}")})
+        Me.GridColumn10.Visible = True
+        Me.GridColumn10.VisibleIndex = 6
+        Me.GridColumn10.Width = 50
         '
         'XTPRetIn
         '
@@ -192,12 +232,14 @@ Partial Class FormProductionRet
         '
         'GVRetIn
         '
-        Me.GVRetIn.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumn8, Me.GridColumnStatusIn})
+        Me.GVRetIn.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumn8, Me.GridColumnStatusIn, Me.GridColumn11, Me.GridColumn12, Me.GridColumn13})
         Me.GVRetIn.GridControl = Me.GCRetIn
         Me.GVRetIn.GroupCount = 1
+        Me.GVRetIn.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty", Me.GridColumn13, "{0:n0}")})
         Me.GVRetIn.Name = "GVRetIn"
         Me.GVRetIn.OptionsBehavior.AutoExpandAllGroups = True
         Me.GVRetIn.OptionsBehavior.Editable = False
+        Me.GVRetIn.OptionsView.ShowFooter = True
         Me.GVRetIn.OptionsView.ShowGroupPanel = False
         Me.GVRetIn.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumn2, DevExpress.Data.ColumnSortOrder.Descending), New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumn1, DevExpress.Data.ColumnSortOrder.Descending)})
         '
@@ -221,7 +263,7 @@ Partial Class FormProductionRet
         Me.GridColumn3.Name = "GridColumn3"
         Me.GridColumn3.Visible = True
         Me.GridColumn3.VisibleIndex = 0
-        Me.GridColumn3.Width = 73
+        Me.GridColumn3.Width = 91
         '
         'GridColumn4
         '
@@ -229,8 +271,8 @@ Partial Class FormProductionRet
         Me.GridColumn4.FieldName = "comp_from"
         Me.GridColumn4.Name = "GridColumn4"
         Me.GridColumn4.Visible = True
-        Me.GridColumn4.VisibleIndex = 2
-        Me.GridColumn4.Width = 142
+        Me.GridColumn4.VisibleIndex = 4
+        Me.GridColumn4.Width = 148
         '
         'GridColumn5
         '
@@ -238,8 +280,8 @@ Partial Class FormProductionRet
         Me.GridColumn5.FieldName = "comp_to"
         Me.GridColumn5.Name = "GridColumn5"
         Me.GridColumn5.Visible = True
-        Me.GridColumn5.VisibleIndex = 3
-        Me.GridColumn5.Width = 142
+        Me.GridColumn5.VisibleIndex = 5
+        Me.GridColumn5.Width = 148
         '
         'GridColumn6
         '
@@ -249,8 +291,8 @@ Partial Class FormProductionRet
         Me.GridColumn6.FieldName = "prod_order_ret_in_date"
         Me.GridColumn6.Name = "GridColumn6"
         Me.GridColumn6.Visible = True
-        Me.GridColumn6.VisibleIndex = 4
-        Me.GridColumn6.Width = 131
+        Me.GridColumn6.VisibleIndex = 7
+        Me.GridColumn6.Width = 164
         '
         'GridColumn8
         '
@@ -259,6 +301,7 @@ Partial Class FormProductionRet
         Me.GridColumn8.Name = "GridColumn8"
         Me.GridColumn8.Visible = True
         Me.GridColumn8.VisibleIndex = 1
+        Me.GridColumn8.Width = 93
         '
         'GridColumnStatusIn
         '
@@ -266,7 +309,38 @@ Partial Class FormProductionRet
         Me.GridColumnStatusIn.FieldName = "report_status"
         Me.GridColumnStatusIn.Name = "GridColumnStatusIn"
         Me.GridColumnStatusIn.Visible = True
-        Me.GridColumnStatusIn.VisibleIndex = 5
+        Me.GridColumnStatusIn.VisibleIndex = 8
+        Me.GridColumnStatusIn.Width = 93
+        '
+        'GridColumn11
+        '
+        Me.GridColumn11.Caption = "Code"
+        Me.GridColumn11.FieldName = "code"
+        Me.GridColumn11.Name = "GridColumn11"
+        Me.GridColumn11.Visible = True
+        Me.GridColumn11.VisibleIndex = 2
+        Me.GridColumn11.Width = 99
+        '
+        'GridColumn12
+        '
+        Me.GridColumn12.Caption = "Name"
+        Me.GridColumn12.FieldName = "name"
+        Me.GridColumn12.Name = "GridColumn12"
+        Me.GridColumn12.Visible = True
+        Me.GridColumn12.VisibleIndex = 3
+        Me.GridColumn12.Width = 186
+        '
+        'GridColumn13
+        '
+        Me.GridColumn13.Caption = "Qty"
+        Me.GridColumn13.DisplayFormat.FormatString = "N0"
+        Me.GridColumn13.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn13.FieldName = "qty"
+        Me.GridColumn13.Name = "GridColumn13"
+        Me.GridColumn13.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty", "{0:N0}")})
+        Me.GridColumn13.Visible = True
+        Me.GridColumn13.VisibleIndex = 6
+        Me.GridColumn13.Width = 56
         '
         'FormProductionRet
         '
@@ -316,4 +390,10 @@ Partial Class FormProductionRet
     Friend WithEvents GridColumn8 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnStatusOut As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnStatusIn As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn7 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn9 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn10 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn11 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn12 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn13 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

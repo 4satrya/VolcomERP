@@ -9,7 +9,7 @@
     End Sub
 
     Sub viewPlanOrder()
-        Dim query As String = "SELECT * FROM tb_lookup_status_order ORDER BY id_lookup_status_order ASC"
+        Dim query As String = "SELECT * FROM tb_lookup_status_order WHERE id_lookup_status_order>1 ORDER BY id_lookup_status_order ASC"
         viewLookupQuery(LEPlanStatus, query, 0, "lookup_status_order", "id_lookup_status_order")
     End Sub
 
@@ -70,7 +70,9 @@
                     If id_lookup_status_order = "2" Then 'drop
                         query_upd += ", id_active=2 "
                     ElseIf id_lookup_status_order = "3" Then 'move
-                        query_upd += ",id_season='" + id_season_to + "', id_season_move=IF(ISNULL(id_season_move),'" + id_season_from + "',id_season_move) "
+                        Dim query_get_del As String = "SELECT id_delivery FROM tb_season_delivery WHERE id_season='" + id_season_to + "' LIMIT 1 "
+                        Dim id_delivery As String = execute_query(query_get_del, 0, True, "", "", "", "")
+                        query_upd += ",id_season='" + id_season_to + "', id_delivery='" + id_delivery + "', id_delivery_act='" + id_delivery + "', id_season_move=IF(ISNULL(id_season_move),'" + id_season_from + "',id_season_move) "
                     Else
                         query_upd += ", id_season='" + id_season_to + "', id_season_move=NULL "
                     End If

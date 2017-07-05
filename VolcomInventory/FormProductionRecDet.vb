@@ -69,7 +69,7 @@ Public Class FormProductionRecDet
             BMark.Enabled = True
 
             Dim order_created As String
-            Dim query = "SELECT j.id_design,IF(a.delivery_order_date<>'0000-00-00', 'date_normal','date_null') as del_date_type, i.id_sample, (i.design_display_name) AS `design_name`, a.id_report_status,a.prod_order_rec_note,a.id_comp_contact_from as id_comp_from,b.id_prod_order,a.id_comp_contact_to as id_comp_to,g.season,a.id_prod_order_rec,a.prod_order_rec_number,DATE_FORMAT(b.prod_order_date,'%Y-%m-%d') as prod_order_datex,b.prod_order_lead_time,a.delivery_order_date,a.delivery_order_number,b.prod_order_number,DATE_FORMAT(a.prod_order_rec_date,'%Y-%m-%d') AS prod_order_rec_date, f.comp_name AS comp_from, f.comp_number AS comp_from_number,d.comp_name AS comp_to, d.comp_number AS comp_to_number, i.id_sample, po_type.po_type "
+            Dim query = "SELECT j.id_design,IF(a.delivery_order_date<>'0000-00-00', 'date_normal','date_null') as del_date_type, i.id_sample, (i.design_display_name) AS `design_name`, a.id_report_status,a.prod_order_rec_note,a.id_comp_contact_from as id_comp_from,b.id_prod_order,a.id_comp_contact_to as id_comp_to,g.season,a.id_prod_order_rec,a.prod_order_rec_number,DATE_FORMAT(b.prod_order_date,'%Y-%m-%d') as prod_order_datex,b.prod_order_lead_time, a.arrive_date,a.delivery_order_date,a.delivery_order_number,b.prod_order_number,DATE_FORMAT(a.prod_order_rec_date,'%Y-%m-%d') AS prod_order_rec_date, f.comp_name AS comp_from, f.comp_number AS comp_from_number,d.comp_name AS comp_to, d.comp_number AS comp_to_number, i.id_sample, po_type.po_type "
             query += "FROM tb_prod_order_rec a "
             query += "INNER JOIN tb_prod_order b ON a.id_prod_order=b.id_prod_order "
             query += "INNER JOIN tb_m_comp_contact c ON c.id_comp_contact=a.id_comp_contact_to "
@@ -110,6 +110,9 @@ Public Class FormProductionRecDet
             If data.Rows(0)("del_date_type") = "date_normal" Then
                 TEDODate.EditValue = data.Rows(0)("delivery_order_date")
             End If
+
+            DEArrive.EditValue = data.Rows(0)("arrive_date")
+
 
             LEReportStatus.EditValue = Nothing
             LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", data.Rows(0)("id_report_status").ToString)
@@ -259,6 +262,7 @@ Public Class FormProductionRecDet
             BDelete.Enabled = True
             BSave.Enabled = True
             TEDODate.Properties.ReadOnly = False
+            DEArrive.Properties.ReadOnly = False
             TEDONumber.Properties.ReadOnly = False
             MENote.Properties.ReadOnly = False
             GVListPurchase.OptionsBehavior.Editable = True
@@ -269,6 +273,7 @@ Public Class FormProductionRecDet
             BDelete.Enabled = False
             BSave.Enabled = False
             TEDODate.Properties.ReadOnly = True
+            DEArrive.Properties.ReadOnly = True
             TEDONumber.Properties.ReadOnly = True
             MENote.Properties.ReadOnly = True
             GVListPurchase.OptionsBehavior.Editable = False
@@ -333,6 +338,7 @@ Public Class FormProductionRecDet
 
         Report.LRecDate.Text = TERecDate.Text.ToString
         Report.LDODate.Text = TEDODate.Text.ToString
+        Report.LabelArriveDate.Text = DEArrive.Text.ToString
 
         Report.LNote.Text = MENote.Text.ToString
         Report.GVListPurchase.OptionsPrint.PrintFooter = False
@@ -349,7 +355,7 @@ Public Class FormProductionRecDet
         ValidateChildren()
         Dim query As String = ""
         Dim err_txt As String = ""
-        Dim rec_number, rec_date, do_number, do_date, rec_note, rec_stats As String
+        Dim rec_number, rec_date, do_number, do_date, arrive_date, rec_note, rec_stats As String
         Dim id_rec_new As String
 
         rec_number = ""
@@ -375,6 +381,16 @@ Public Class FormProductionRecDet
             do_date = DateTime.Parse(TEDODate.EditValue.ToString).ToString("yyyy-MM-dd")
         End If
         rec_date = TERecDate.Text
+        Try
+            arrive_date = DateTime.Parse(DEArrive.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+        If arrive_date = "" Then
+            arrive_date = "0000-00-00"
+        Else
+            arrive_date = DateTime.Parse(DEArrive.EditValue.ToString).ToString("yyyy-MM-dd")
+        End If
+
         do_number = TEDONumber.Text
         rec_note = MENote.Text
         rec_stats = LEReportStatus.EditValue
@@ -402,10 +418,10 @@ Public Class FormProductionRecDet
                     Try
                         'insert rec
                         If do_date = "0000-00-00" Then
-                            query = String.Format("INSERT INTO tb_prod_order_rec(id_prod_order, prod_order_rec_number, delivery_order_number, delivery_order_date, prod_order_rec_date, prod_order_rec_note ,id_report_status, id_comp_contact_to , id_comp_contact_from) VALUES('{0}','{1}','{2}',NULL,DATE(NOW()),'{3}','{4}','{5}', '{6}'); SELECT LAST_INSERT_ID(); ", id_order, rec_number, do_number, rec_note, rec_stats, id_comp_to, id_comp_from)
+                            query = String.Format("INSERT INTO tb_prod_order_rec(id_prod_order, prod_order_rec_number, delivery_order_number, delivery_order_date, arrive_date, prod_order_rec_date, prod_order_rec_note ,id_report_status, id_comp_contact_to , id_comp_contact_from) VALUES('{0}','{1}','{2}',NULL, '{3}',DATE(NOW()),'{4}','{5}','{6}', '{7}'); SELECT LAST_INSERT_ID(); ", id_order, rec_number, do_number, arrive_date, rec_note, rec_stats, id_comp_to, id_comp_from)
                             id_rec_new = execute_query(query, 0, True, "", "", "", "")
                         Else
-                            query = String.Format("INSERT INTO tb_prod_order_rec(id_prod_order, prod_order_rec_number, delivery_order_number, delivery_order_date, prod_order_rec_date, prod_order_rec_note ,id_report_status, id_comp_contact_to , id_comp_contact_from) VALUES('{0}','{1}','{2}','{3}',DATE(NOW()),'{4}','{5}','{6}', '{7}'); SELECT LAST_INSERT_ID(); ", id_order, rec_number, do_number, do_date, rec_note, rec_stats, id_comp_to, id_comp_from)
+                            query = String.Format("INSERT INTO tb_prod_order_rec(id_prod_order, prod_order_rec_number, delivery_order_number, delivery_order_date, arrive_date, prod_order_rec_date, prod_order_rec_note ,id_report_status, id_comp_contact_to , id_comp_contact_from) VALUES('{0}','{1}','{2}','{3}', '{4}',DATE(NOW()),'{5}','{6}','{7}', '{8}'); SELECT LAST_INSERT_ID(); ", id_order, rec_number, do_number, do_date, arrive_date, rec_note, rec_stats, id_comp_to, id_comp_from)
                             id_rec_new = execute_query(query, 0, True, "", "", "", "")
                         End If
 
@@ -457,10 +473,10 @@ Public Class FormProductionRecDet
                     Try
                         'UPDATE rec
                         If do_date = "0000-00-00" Then
-                            query = String.Format("UPDATE tb_prod_order_rec SET delivery_order_number='{0}',delivery_order_date=null,prod_order_rec_note='{1}',id_report_status='{2}',id_comp_contact_to='{3}', id_comp_contact_from = '{4}' WHERE id_prod_order_rec='{5}'", do_number, rec_note, rec_stats, id_comp_to, id_comp_from, id_receive)
+                            query = String.Format("UPDATE tb_prod_order_rec SET delivery_order_number='{0}',delivery_order_date=null, arrive_date='{1}',prod_order_rec_note='{2}',id_report_status='{3}',id_comp_contact_to='{4}', id_comp_contact_from = '{5}' WHERE id_prod_order_rec='{6}'", do_number, arrive_date, rec_note, rec_stats, id_comp_to, id_comp_from, id_receive)
                             execute_non_query(query, True, "", "", "", "")
                         Else
-                            query = String.Format("UPDATE tb_prod_order_rec SET delivery_order_number='{0}',delivery_order_date='{1}',prod_order_rec_note='{2}',id_report_status='{3}',id_comp_contact_to='{4}', id_comp_contact_from = '{5}' WHERE id_prod_order_rec='{6}'", do_number, do_date, rec_note, rec_stats, id_comp_to, id_comp_from, id_receive)
+                            query = String.Format("UPDATE tb_prod_order_rec SET delivery_order_number='{0}',delivery_order_date='{1}', arrive_date='{2}',prod_order_rec_note='{3}',id_report_status='{4}',id_comp_contact_to='{5}', id_comp_contact_from = '{6}' WHERE id_prod_order_rec='{7}'", do_number, do_date, arrive_date, rec_note, rec_stats, id_comp_to, id_comp_from, id_receive)
                             execute_non_query(query, True, "", "", "", "")
                         End If
 
@@ -892,5 +908,9 @@ Public Class FormProductionRecDet
         ElseIf e.Column.FieldName = "number" AndAlso e.IsGetData Then
             e.Value = TERecNumber.Text.ToString
         End If
+    End Sub
+
+    Private Sub DEArrive_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles DEArrive.Validating
+        EP_DE_cant_blank(EPSampleRec, DEArrive)
     End Sub
 End Class

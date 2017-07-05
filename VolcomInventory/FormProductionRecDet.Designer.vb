@@ -22,6 +22,8 @@ Partial Class FormProductionRecDet
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormProductionRecDet))
         Me.GroupGeneralHeader = New DevExpress.XtraEditors.GroupControl()
+        Me.LabelControl11 = New DevExpress.XtraEditors.LabelControl()
+        Me.DEArrive = New DevExpress.XtraEditors.DateEdit()
         Me.TxtCodeCompTo = New DevExpress.XtraEditors.TextEdit()
         Me.TxtCodeCompFrom = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl10 = New DevExpress.XtraEditors.LabelControl()
@@ -100,6 +102,8 @@ Partial Class FormProductionRecDet
         Me.BScan = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
+        CType(Me.DEArrive.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEArrive.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtCodeCompTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtCodeCompFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtPOType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -145,6 +149,8 @@ Partial Class FormProductionRecDet
         'GroupGeneralHeader
         '
         Me.GroupGeneralHeader.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupGeneralHeader.Controls.Add(Me.LabelControl11)
+        Me.GroupGeneralHeader.Controls.Add(Me.DEArrive)
         Me.GroupGeneralHeader.Controls.Add(Me.TxtCodeCompTo)
         Me.GroupGeneralHeader.Controls.Add(Me.TxtCodeCompFrom)
         Me.GroupGeneralHeader.Controls.Add(Me.LabelControl10)
@@ -179,6 +185,28 @@ Partial Class FormProductionRecDet
         Me.GroupGeneralHeader.Name = "GroupGeneralHeader"
         Me.GroupGeneralHeader.Size = New System.Drawing.Size(909, 146)
         Me.GroupGeneralHeader.TabIndex = 38
+        '
+        'LabelControl11
+        '
+        Me.LabelControl11.Location = New System.Drawing.Point(694, 92)
+        Me.LabelControl11.Name = "LabelControl11"
+        Me.LabelControl11.Size = New System.Drawing.Size(58, 13)
+        Me.LabelControl11.TabIndex = 167
+        Me.LabelControl11.Text = "Arrive in QC"
+        '
+        'DEArrive
+        '
+        Me.DEArrive.EditValue = Nothing
+        Me.DEArrive.Location = New System.Drawing.Point(765, 89)
+        Me.DEArrive.Name = "DEArrive"
+        Me.DEArrive.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEArrive.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.DEArrive.Properties.DisplayFormat.FormatString = "dd'/'MM'/'yyyy"
+        Me.DEArrive.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEArrive.Size = New System.Drawing.Size(130, 20)
+        Me.DEArrive.TabIndex = 166
+        Me.DEArrive.ToolTip = "Tanggal tiba di QC"
+        Me.DEArrive.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Information
         '
         'TxtCodeCompTo
         '
@@ -969,6 +997,8 @@ Partial Class FormProductionRecDet
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupGeneralHeader.ResumeLayout(False)
         Me.GroupGeneralHeader.PerformLayout()
+        CType(Me.DEArrive.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEArrive.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtCodeCompTo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtCodeCompFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtPOType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1090,4 +1120,6 @@ Partial Class FormProductionRecDet
     Friend WithEvents GridColumnTo As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents TxtCodeCompTo As DevExpress.XtraEditors.TextEdit
     Friend WithEvents TxtCodeCompFrom As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LabelControl11 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents DEArrive As DevExpress.XtraEditors.DateEdit
 End Class

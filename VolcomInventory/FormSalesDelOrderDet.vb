@@ -575,18 +575,20 @@ Public Class FormSalesDelOrderDet
                     End If
                     For j As Integer = 0 To ((GVItemList.RowCount - 1) - GetGroupRowCount(GVItemList))
                         Try
-                            Dim id_sales_order_det As String = GVItemList.GetRowCellValue(j, "id_sales_order_det").ToString
-                            Dim id_product As String = GVItemList.GetRowCellValue(j, "id_product").ToString
-                            Dim id_design_price As String = GVItemList.GetRowCellValue(j, "id_design_price").ToString
-                            Dim design_price As String = decimalSQL(GVItemList.GetRowCellValue(j, "design_price").ToString)
-                            Dim pl_sales_order_del_det_qty As String = decimalSQL(GVItemList.GetRowCellValue(j, "pl_sales_order_del_det_qty").ToString)
-                            Dim pl_sales_order_del_det_note As String = GVItemList.GetRowCellValue(j, "pl_sales_order_del_det_note").ToString
+                            If GVItemList.GetRowCellValue(j, "pl_sales_order_del_det_qty") > 0 Then
+                                Dim id_sales_order_det As String = GVItemList.GetRowCellValue(j, "id_sales_order_det").ToString
+                                Dim id_product As String = GVItemList.GetRowCellValue(j, "id_product").ToString
+                                Dim id_design_price As String = GVItemList.GetRowCellValue(j, "id_design_price").ToString
+                                Dim design_price As String = decimalSQL(GVItemList.GetRowCellValue(j, "design_price").ToString)
+                                Dim pl_sales_order_del_det_qty As String = decimalSQL(GVItemList.GetRowCellValue(j, "pl_sales_order_del_det_qty").ToString)
+                                Dim pl_sales_order_del_det_note As String = GVItemList.GetRowCellValue(j, "pl_sales_order_del_det_note").ToString
 
-                            If jum_ins_j > 0 Then
-                                query_detail += ", "
+                                If jum_ins_j > 0 Then
+                                    query_detail += ", "
+                                End If
+                                query_detail += "('" + id_pl_sales_order_del + "', '" + id_sales_order_det + "', '" + id_product + "', '" + id_design_price + "', '" + design_price + "', '" + pl_sales_order_del_det_qty + "', '" + pl_sales_order_del_det_note + "') "
+                                jum_ins_j = jum_ins_j + 1
                             End If
-                            query_detail += "('" + id_pl_sales_order_del + "', '" + id_sales_order_det + "', '" + id_product + "', '" + id_design_price + "', '" + design_price + "', '" + pl_sales_order_del_det_qty + "', '" + pl_sales_order_del_det_note + "') "
-                            jum_ins_j = jum_ins_j + 1
                         Catch ex As Exception
                         End Try
                     Next
@@ -630,6 +632,7 @@ Public Class FormSalesDelOrderDet
 
                     'submit who prepared
                     submit_who_prepared("43", id_pl_sales_order_del, id_user)
+
 
                     FormSalesDelOrder.viewSalesDelOrder()
                     FormSalesDelOrder.GVSalesDelOrder.FocusedRowHandle = find_row(FormSalesDelOrder.GVSalesDelOrder, "id_pl_sales_order_del", id_pl_sales_order_del)

@@ -192,7 +192,7 @@ Public Class FormSalesReturnQCDet
         TxtNameCompFrom.Text = data.Rows(0)("store_name_from").ToString
         'MEAdrressCompFrom.Text = get_company_x(id_comp_from, 3)
 
-        Dim id_comp_to As String = data.Rows(0)("id_comp_to").ToString
+        id_comp_to = data.Rows(0)("id_comp_to").ToString
         id_comp_contact_to_return = data.Rows(0)("id_comp_contact_to").ToString
         TxtCodeFrom.Text = data.Rows(0)("comp_code_to").ToString
         TxtNameFrom.Text = data.Rows(0)("comp_name_to").ToString

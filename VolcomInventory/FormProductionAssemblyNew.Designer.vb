@@ -21,16 +21,16 @@ Partial Class FormProductionAssemblyNew
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormProductionAssemblyNew))
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
-        Me.BtnNew = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnCancel = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnNew = New DevExpress.XtraEditors.SimpleButton()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.ButtonEdit1 = New DevExpress.XtraEditors.ButtonEdit()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
-        Me.TextEdit1 = New DevExpress.XtraEditors.TextEdit()
+        Me.TxtDesign = New DevExpress.XtraEditors.TextEdit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.ButtonEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TextEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtDesign.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl1
@@ -43,16 +43,6 @@ Partial Class FormProductionAssemblyNew
         Me.PanelControl1.Size = New System.Drawing.Size(372, 41)
         Me.PanelControl1.TabIndex = 0
         '
-        'BtnNew
-        '
-        Me.BtnNew.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BtnNew.Image = CType(resources.GetObject("BtnNew.Image"), System.Drawing.Image)
-        Me.BtnNew.Location = New System.Drawing.Point(261, 2)
-        Me.BtnNew.Name = "BtnNew"
-        Me.BtnNew.Size = New System.Drawing.Size(109, 37)
-        Me.BtnNew.TabIndex = 0
-        Me.BtnNew.Text = "Create New"
-        '
         'BtnCancel
         '
         Me.BtnCancel.Dock = System.Windows.Forms.DockStyle.Right
@@ -62,6 +52,16 @@ Partial Class FormProductionAssemblyNew
         Me.BtnCancel.Size = New System.Drawing.Size(86, 37)
         Me.BtnCancel.TabIndex = 1
         Me.BtnCancel.Text = "Cancel"
+        '
+        'BtnNew
+        '
+        Me.BtnNew.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnNew.Image = CType(resources.GetObject("BtnNew.Image"), System.Drawing.Image)
+        Me.BtnNew.Location = New System.Drawing.Point(261, 2)
+        Me.BtnNew.Name = "BtnNew"
+        Me.BtnNew.Size = New System.Drawing.Size(109, 37)
+        Me.BtnNew.TabIndex = 0
+        Me.BtnNew.Text = "Create New"
         '
         'LabelControl1
         '
@@ -87,22 +87,22 @@ Partial Class FormProductionAssemblyNew
         Me.LabelControl2.TabIndex = 3
         Me.LabelControl2.Text = "Design"
         '
-        'TextEdit1
+        'TxtDesign
         '
-        Me.TextEdit1.Enabled = False
-        Me.TextEdit1.Location = New System.Drawing.Point(16, 83)
-        Me.TextEdit1.Name = "TextEdit1"
-        Me.TextEdit1.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.White
-        Me.TextEdit1.Properties.AppearanceDisabled.Options.UseBackColor = True
-        Me.TextEdit1.Size = New System.Drawing.Size(344, 20)
-        Me.TextEdit1.TabIndex = 4
+        Me.TxtDesign.Enabled = False
+        Me.TxtDesign.Location = New System.Drawing.Point(16, 83)
+        Me.TxtDesign.Name = "TxtDesign"
+        Me.TxtDesign.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.White
+        Me.TxtDesign.Properties.AppearanceDisabled.Options.UseBackColor = True
+        Me.TxtDesign.Size = New System.Drawing.Size(344, 20)
+        Me.TxtDesign.TabIndex = 4
         '
         'FormProductionAssemblyNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(372, 185)
-        Me.Controls.Add(Me.TextEdit1)
+        Me.Controls.Add(Me.TxtDesign)
         Me.Controls.Add(Me.LabelControl2)
         Me.Controls.Add(Me.ButtonEdit1)
         Me.Controls.Add(Me.LabelControl1)
@@ -116,7 +116,7 @@ Partial Class FormProductionAssemblyNew
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         CType(Me.ButtonEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TextEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtDesign.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -128,5 +128,5 @@ Partial Class FormProductionAssemblyNew
     Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents ButtonEdit1 As DevExpress.XtraEditors.ButtonEdit
     Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
-    Friend WithEvents TextEdit1 As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents TxtDesign As DevExpress.XtraEditors.TextEdit
 End Class

@@ -843,7 +843,7 @@
                 band_ret_in.Columns.Add(BGVFGStockQC.Columns.AddVisible(data.Columns(i).ColumnName.ToString, data.Columns(i).ColumnName.ToString.Substring(0, st_caption)))
                 BGVFGStockQC.Columns(data.Columns(i).ColumnName.ToString).AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
                 BGVFGStockQC.Columns(data.Columns(i).ColumnName.ToString).DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-                BGVFGStockQC.Columns(data.Columns(i).ColumnName.ToString).DisplayFormat.FormatString = "{0:n0 }"
+                BGVFGStockQC.Columns(data.Columns(i).ColumnName.ToString).DisplayFormat.FormatString = "{0:n0}"
 
                 BGVFGStockQC.Columns(data.Columns(i).ColumnName.ToString).SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum
                 BGVFGStockQC.Columns(data.Columns(i).ColumnName.ToString).SummaryItem.DisplayFormat = "{0:n0}"

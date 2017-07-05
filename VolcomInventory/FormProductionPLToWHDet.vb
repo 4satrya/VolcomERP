@@ -203,6 +203,7 @@ Public Class FormProductionPLToWHDet
             LEPLCategory.Enabled = False
             GVRetDetail.OptionsBehavior.ReadOnly = True
         End If
+        PanelNavBarcode.Enabled = False
 
         'attachment
         If check_attach_report_status(id_report_status, "33", id_pl_prod_order) Then
@@ -796,6 +797,7 @@ Public Class FormProductionPLToWHDet
     End Sub
 
     Private Sub BScan_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BScan.Click
+        getLimitQty()
         MENote.Enabled = False
         BtnBrowsePO.Enabled = False
         BtnBrowseContactFrom.Enabled = False
@@ -821,7 +823,29 @@ Public Class FormProductionPLToWHDet
         'allowDelete()
     End Sub
 
+    Sub getLimitQty()
+        Cursor = Cursors.WaitCursor
+        Dim query As String = "CALL view_stock_prod_rec('" + id_prod_order + "', '0', '0', '0', '" + id_pl_prod_order + "','0', '" + LEPDAlloc.EditValue.ToString + "')"
+        Dim dt_cek As DataTable = execute_query(query, -1, True, "", "", "", "")
+        For i As Integer = 0 To ((GVRetDetail.RowCount - 1) - GetGroupRowCount(GVRetDetail))
+            Dim id_prod_order_det_cekya As String = GVRetDetail.GetRowCellValue(i, "id_prod_order_det").ToString
+            Dim qty_cek As Integer = GVRetDetail.GetRowCellValue(i, "pl_prod_order_det_qty")
+
+            Dim data_filter_cek As DataRow() = dt_cek.Select("[id_prod_order_det]='" + id_prod_order_det_cekya + "' ")
+            If data_filter_cek.Length <= 0 Then
+                GVRetDetail.SetRowCellValue(i, "limit_qty", 0)
+            Else
+                Dim limit_qty As Integer = data_filter_cek(0)("qty")
+                GVRetDetail.SetRowCellValue(i, "limit_qty", limit_qty)
+            End If
+        Next
+        Cursor = Cursors.Default
+    End Sub
+
     Private Sub BStop_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BStop.Click
+        LabelDelScan.Visible = False
+        TxtDeleteScan.Visible = False
+        TxtDeleteScan.Text = ""
         MENote.Enabled = True
         If action = "ins" Then
             BtnBrowsePO.Enabled = True
@@ -859,17 +883,24 @@ Public Class FormProductionPLToWHDet
     End Sub
 
     Private Sub BDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BDelete.Click
-        Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure want to delete this data?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
-        If confirm = Windows.Forms.DialogResult.Yes Then
-            Dim id_prod_order_det As String = GVBarcode.GetFocusedRowCellValue("id_prod_order_det").ToString
-            deleteRowsBc()
-            If id_prod_order_det <> "" Or id_prod_order_det <> Nothing Then
-                GVBarcode.ApplyFindFilter("")
-                'GVBarcode.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Default
-                countQty(id_prod_order_det)
-            End If
-            allowDelete()
-        End If
+        BDelete.Enabled = False
+        BScan.Enabled = False
+        BStop.Enabled = True
+        LabelDelScan.Visible = True
+        TxtDeleteScan.Visible = True
+        TxtDeleteScan.Text = ""
+        TxtDeleteScan.Focus()
+        'Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure want to delete this data?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+        'If confirm = Windows.Forms.DialogResult.Yes Then
+        '    Dim id_prod_order_det As String = GVBarcode.GetFocusedRowCellValue("id_prod_order_det").ToString
+        '    deleteRowsBc()
+        '    If id_prod_order_det <> "" Or id_prod_order_det <> Nothing Then
+        '        GVBarcode.ApplyFindFilter("")
+        '        'GVBarcode.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Default
+        '        countQty(id_prod_order_det)
+        '    End If
+        '    allowDelete()
+        'End If
     End Sub
 
     Private Sub GVBarcode_HiddenEditor(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GVBarcode.HiddenEditor
@@ -880,6 +911,8 @@ Public Class FormProductionPLToWHDet
         Dim counting_code As String = ""
         Dim index_atas As Integer = 0
         Dim is_old As String = "0"
+        Dim jum_scan As Integer = 0
+        Dim jum_limit As Integer = 0
 
         'check available code
         Dim dt_filter As DataRow() = dt.Select("[product_full_code]='" + code_check + "' ")
@@ -891,12 +924,19 @@ Public Class FormProductionPLToWHDet
         End If
 
         If is_old = "1" Then
-            GVBarcode.SetFocusedRowCellValue("id_pl_prod_order_det_unique", "0")
-            GVBarcode.SetFocusedRowCellValue("is_fix", "2")
-            GVBarcode.SetFocusedRowCellValue("id_prod_order_det", id_prod_order_det)
-            GVBarcode.SetFocusedRowCellValue("counting_code", counting_code)
-            countQty(id_prod_order_det)
-            newRowsBc()
+            GVRetDetail.FocusedRowHandle = find_row(GVRetDetail, "id_prod_order_det", id_prod_order_det)
+            If GVRetDetail.GetFocusedRowCellValue("pl_prod_order_det_qty") >= GVRetDetail.GetFocusedRowCellValue("limit_qty") Then
+                GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "code", "")
+                GVBarcode.FocusedRowHandle = GVBarcode.RowCount - 1
+                stopCustom("Can't scan. Maximum qty for size " + GVRetDetail.GetFocusedRowCellValue("size").ToString + " :  " + GVRetDetail.GetFocusedRowCellValue("limit_qty").ToString)
+            Else
+                GVBarcode.SetFocusedRowCellValue("id_pl_prod_order_det_unique", "0")
+                GVBarcode.SetFocusedRowCellValue("is_fix", "2")
+                GVBarcode.SetFocusedRowCellValue("id_prod_order_det", id_prod_order_det)
+                GVBarcode.SetFocusedRowCellValue("counting_code", counting_code)
+                countQty(id_prod_order_det)
+                newRowsBc()
+            End If
         ElseIf is_old = "2" Then
             'check duplicate code
             If GVBarcode.RowCount <= 0 Then
@@ -928,12 +968,19 @@ Public Class FormProductionPLToWHDet
                 GVBarcode.SetFocusedRowCellValue("code", "")
                 stopCustom("Data duplicate !")
             Else
-                GVBarcode.SetFocusedRowCellValue("id_pl_prod_order_det_unique", "0")
-                GVBarcode.SetFocusedRowCellValue("is_fix", "2")
-                GVBarcode.SetFocusedRowCellValue("id_prod_order_det", id_prod_order_det)
-                GVBarcode.SetFocusedRowCellValue("counting_code", counting_code)
-                countQty(id_prod_order_det)
-                newRowsBc()
+                GVRetDetail.FocusedRowHandle = find_row(GVRetDetail, "id_prod_order_det", id_prod_order_det)
+                If GVRetDetail.GetFocusedRowCellValue("pl_prod_order_det_qty") >= GVRetDetail.GetFocusedRowCellValue("limit_qty") Then
+                    GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "code", "")
+                    GVBarcode.FocusedRowHandle = GVBarcode.RowCount - 1
+                    stopCustom("Can't scan. Maximum qty for size " + GVRetDetail.GetFocusedRowCellValue("size").ToString + " :  " + GVRetDetail.GetFocusedRowCellValue("limit_qty").ToString)
+                Else
+                    GVBarcode.SetFocusedRowCellValue("id_pl_prod_order_det_unique", "0")
+                    GVBarcode.SetFocusedRowCellValue("is_fix", "2")
+                    GVBarcode.SetFocusedRowCellValue("id_prod_order_det", id_prod_order_det)
+                    GVBarcode.SetFocusedRowCellValue("counting_code", counting_code)
+                    countQty(id_prod_order_det)
+                    newRowsBc()
+                End If
             End If
         Else
             GVBarcode.SetFocusedRowCellValue("code", "")
@@ -1144,6 +1191,67 @@ Public Class FormProductionPLToWHDet
             e.Value = TxtCodeCompTo.Text.ToString
         ElseIf e.Column.FieldName = "number" AndAlso e.IsGetData Then
             e.Value = TxtRetOutNumber.Text.ToString
+        End If
+    End Sub
+
+    Private Sub TxtDeleteScan_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtDeleteScan.KeyDown
+        If e.KeyCode = Keys.Enter And TxtDeleteScan.Text.Length > 0 Then
+            Cursor = Cursors.WaitCursor
+            GVBarcode.ActiveFilterString = "[code]='" + TxtDeleteScan.Text + "'"
+            If GVBarcode.RowCount <= 0 Then
+                stopCustom("Code not found.")
+                GVBarcode.ActiveFilterString = ""
+                TxtDeleteScan.Text = ""
+                TxtDeleteScan.Focus()
+            Else
+                Dim id_pl_prod_order_del_det_counting As String = "-1"
+                Try
+                    id_pl_prod_order_del_det_counting = GVBarcode.GetFocusedRowCellValue("id_pl_prod_order_del_det_counting").ToString
+                Catch ex As Exception
+                End Try
+
+                If action = "ins" Then
+                    Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure want to delete this data?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+                    If confirm = Windows.Forms.DialogResult.Yes Then
+                        Dim id_prod_order_det As String = GVBarcode.GetFocusedRowCellValue("id_prod_order_det").ToString
+                        deleteRowsBc()
+                        If id_prod_order_det <> "" Or id_prod_order_det <> Nothing Then
+                            GVBarcode.ActiveFilterString = ""
+                            countQty(id_prod_order_det)
+                        End If
+                        GCRetDetail.RefreshDataSource()
+                        GVRetDetail.RefreshData()
+                        allowDelete()
+                    Else
+                        GVBarcode.ActiveFilterString = ""
+                    End If
+                    TxtDeleteScan.Text = ""
+                    TxtDeleteScan.Focus()
+                ElseIf action = "upd" Then
+                    If id_pl_prod_order_del_det_counting = "0" Then
+                        Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure want to delete this data?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+                        If confirm = Windows.Forms.DialogResult.Yes Then
+                            Dim id_prod_order_det As String = GVBarcode.GetFocusedRowCellValue("id_prod_order_det").ToString
+                            deleteRowsBc()
+                            If id_prod_order_det <> "" Or id_prod_order_det <> Nothing Then
+                                GVBarcode.ActiveFilterString = ""
+                                countQty(id_prod_order_det)
+                            End If
+                            GCRetDetail.RefreshDataSource()
+                            GVRetDetail.RefreshData()
+                            allowDelete()
+                        Else
+                            GVBarcode.ActiveFilterString = ""
+                        End If
+                    Else
+                        errorCustom("This data already locked and can't delete.")
+                        GVBarcode.ActiveFilterString = ""
+                    End If
+                    TxtDeleteScan.Text = ""
+                    TxtDeleteScan.Focus()
+                End If
+            End If
+            Cursor = Cursors.Default
         End If
     End Sub
 

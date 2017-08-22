@@ -45,9 +45,9 @@
     Private Sub DownloadTemplateToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles DownloadTemplateToolStripMenuItem.Click
         SplashScreenManager1.ShowWaitForm()
         Try
-            FormEmpFPFinger.ip = GVFP.GetFocusedRowCellValue("ip").ToString
-            FormEmpFPFinger.port = GVFP.GetFocusedRowCellValue("port").ToString
-            FormEmpFPFinger.ShowDialog()
+            FormEmpFingerNew.ip = GVFP.GetFocusedRowCellValue("ip").ToString
+            FormEmpFingerNew.port = GVFP.GetFocusedRowCellValue("port").ToString
+            FormEmpFingerNew.ShowDialog()
         Catch ex As Exception
             errorProcess()
         End Try
@@ -55,7 +55,7 @@
     End Sub
 
     Private Sub ShowFingerTemplateToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles ShowFingerTemplateToolStripMenuItem.Click
-        Cursor = Cursors.WaitCursor
+        SplashScreenManager1.ShowWaitForm()
         Try
             FormEmpFPFaceNew.ip = GVFP.GetFocusedRowCellValue("ip").ToString
             FormEmpFPFaceNew.port = GVFP.GetFocusedRowCellValue("port").ToString
@@ -63,7 +63,7 @@
         Catch ex As Exception
             errorProcess()
         End Try
-        Cursor = Cursors.Default
+        SplashScreenManager1.CloseWaitForm()
     End Sub
 
     Private Sub DownloadFingerTemplateToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles DownloadFingerTemplateToolStripMenuItem.Click

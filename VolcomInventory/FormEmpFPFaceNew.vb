@@ -47,6 +47,7 @@
         lvFace.EndUpdate()
         axCZKEM1.EnableDevice(iMachineNumber, True)
         fp.disconnect()
+        MsgBox("end")
     End Sub
 
     Private Sub FormEmpFPFaceNew_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed

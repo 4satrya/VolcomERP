@@ -59,4 +59,8 @@
     Private Sub BtnOutlet_Click(sender As Object, e As EventArgs) Handles BtnOutlet.Click
         FormOutlet.ShowDialog()
     End Sub
+
+    Private Sub BSubDep_Click(sender As Object, e As EventArgs) Handles BSubDep.Click
+        FormSuperUsersubDept.ShowDialog()
+    End Sub
 End Class

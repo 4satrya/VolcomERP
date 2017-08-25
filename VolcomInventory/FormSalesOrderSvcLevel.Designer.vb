@@ -84,8 +84,19 @@ Partial Class FormSalesOrderSvcLevel
         Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnSvcLevel = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemProgressBar2 = New DevExpress.XtraEditors.Repository.RepositoryItemProgressBar()
+        Me.GridColumn57 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemCheckEdit8 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.GridColumn58 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn59 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn60 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemTextEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
+        Me.GridColumn61 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemTextEdit3 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.GridView3 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GCFilterRet = New DevExpress.XtraEditors.GroupControl()
+        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.CheckEdit1 = New DevExpress.XtraEditors.CheckEdit()
+        Me.SimpleButton6 = New DevExpress.XtraEditors.SimpleButton()
         Me.SLEPackingStatusRet = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -191,6 +202,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.RepositoryItemCheckEdit3 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.GridColumnTotalRet = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnTotalNonStock = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnRetType = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GroupControl2 = New DevExpress.XtraEditors.GroupControl()
         Me.BtnUpdateReturn = New DevExpress.XtraEditors.SimpleButton()
         Me.SLEStatusReturn = New DevExpress.XtraEditors.SearchLookUpEdit()
@@ -293,7 +305,6 @@ Partial Class FormSalesOrderSvcLevel
         Me.DEFromNonStock = New DevExpress.XtraEditors.DateEdit()
         Me.LabelControl23 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl24 = New DevExpress.XtraEditors.LabelControl()
-        Me.GridColumnRetType = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GCFilter, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GCFilter.SuspendLayout()
         CType(Me.PanelSelect, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -319,9 +330,15 @@ Partial Class FormSalesOrderSvcLevel
         CType(Me.GCSalesReturnOrder, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVSalesReturnOrder, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemProgressBar2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemCheckEdit8, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemTextEdit3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GCFilterRet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GCFilterRet.SuspendLayout()
+        CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl1.SuspendLayout()
+        CType(Me.CheckEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLEPackingStatusRet.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEUntilRet.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -836,6 +853,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.UpdatePackingStatusToolStripMenuItem.Name = "UpdatePackingStatusToolStripMenuItem"
         Me.UpdatePackingStatusToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
         Me.UpdatePackingStatusToolStripMenuItem.Text = "Update Status"
+        Me.UpdatePackingStatusToolStripMenuItem.Visible = False
         '
         'XTCSvcLevel
         '
@@ -870,18 +888,17 @@ Partial Class FormSalesOrderSvcLevel
         Me.GCSalesReturnOrder.Location = New System.Drawing.Point(0, 39)
         Me.GCSalesReturnOrder.MainView = Me.GVSalesReturnOrder
         Me.GCSalesReturnOrder.Name = "GCSalesReturnOrder"
-        Me.GCSalesReturnOrder.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemProgressBar2})
+        Me.GCSalesReturnOrder.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemProgressBar2, Me.RepositoryItemCheckEdit8, Me.RepositoryItemTextEdit2, Me.RepositoryItemTextEdit3})
         Me.GCSalesReturnOrder.Size = New System.Drawing.Size(783, 349)
         Me.GCSalesReturnOrder.TabIndex = 4
         Me.GCSalesReturnOrder.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVSalesReturnOrder, Me.GridView3})
         '
         'GVSalesReturnOrder
         '
-        Me.GVSalesReturnOrder.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumnEstDate, Me.GridColumn7, Me.GridColumn8, Me.GridColumnTimeRemaining, Me.GridColumnReturnQty, Me.GridColumnOrderQty, Me.GridColumn11, Me.GridColumnCurrDate, Me.GridColumn12, Me.GridColumnSvcLevel})
+        Me.GVSalesReturnOrder.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumnEstDate, Me.GridColumn7, Me.GridColumn8, Me.GridColumnTimeRemaining, Me.GridColumnReturnQty, Me.GridColumnOrderQty, Me.GridColumn11, Me.GridColumnCurrDate, Me.GridColumn12, Me.GridColumnSvcLevel, Me.GridColumn57, Me.GridColumn58, Me.GridColumn59, Me.GridColumn60, Me.GridColumn61})
         Me.GVSalesReturnOrder.CustomizationFormBounds = New System.Drawing.Rectangle(805, 323, 210, 172)
         Me.GVSalesReturnOrder.GridControl = Me.GCSalesReturnOrder
         Me.GVSalesReturnOrder.Name = "GVSalesReturnOrder"
-        Me.GVSalesReturnOrder.OptionsBehavior.ReadOnly = True
         Me.GVSalesReturnOrder.OptionsView.ShowGroupPanel = False
         '
         'GridColumn4
@@ -889,17 +906,20 @@ Partial Class FormSalesOrderSvcLevel
         Me.GridColumn4.Caption = "Number"
         Me.GridColumn4.FieldName = "sales_return_order_number"
         Me.GridColumn4.Name = "GridColumn4"
+        Me.GridColumn4.OptionsColumn.ReadOnly = True
         Me.GridColumn4.Visible = True
         Me.GridColumn4.VisibleIndex = 0
-        Me.GridColumn4.Width = 83
+        Me.GridColumn4.Width = 95
         '
         'GridColumn5
         '
         Me.GridColumn5.Caption = "Store"
         Me.GridColumn5.FieldName = "store_name_to"
         Me.GridColumn5.Name = "GridColumn5"
+        Me.GridColumn5.OptionsColumn.ReadOnly = True
         Me.GridColumn5.Visible = True
         Me.GridColumn5.VisibleIndex = 1
+        Me.GridColumn5.Width = 85
         '
         'GridColumn6
         '
@@ -908,8 +928,10 @@ Partial Class FormSalesOrderSvcLevel
         Me.GridColumn6.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.GridColumn6.FieldName = "sales_return_order_date"
         Me.GridColumn6.Name = "GridColumn6"
+        Me.GridColumn6.OptionsColumn.ReadOnly = True
         Me.GridColumn6.Visible = True
         Me.GridColumn6.VisibleIndex = 2
+        Me.GridColumn6.Width = 85
         '
         'GridColumnEstDate
         '
@@ -918,28 +940,34 @@ Partial Class FormSalesOrderSvcLevel
         Me.GridColumnEstDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.GridColumnEstDate.FieldName = "sales_return_order_est_date"
         Me.GridColumnEstDate.Name = "GridColumnEstDate"
+        Me.GridColumnEstDate.OptionsColumn.ReadOnly = True
         Me.GridColumnEstDate.Visible = True
         Me.GridColumnEstDate.VisibleIndex = 3
+        Me.GridColumnEstDate.Width = 85
         '
         'GridColumn7
         '
         Me.GridColumn7.Caption = "Note"
         Me.GridColumn7.FieldName = "sales_return_order_note"
         Me.GridColumn7.Name = "GridColumn7"
+        Me.GridColumn7.OptionsColumn.ReadOnly = True
         '
         'GridColumn8
         '
         Me.GridColumn8.Caption = "Created Return"
         Me.GridColumn8.FieldName = "created_return"
         Me.GridColumn8.Name = "GridColumn8"
+        Me.GridColumn8.OptionsColumn.ReadOnly = True
         Me.GridColumn8.Visible = True
         Me.GridColumn8.VisibleIndex = 4
+        Me.GridColumn8.Width = 85
         '
         'GridColumnTimeRemaining
         '
         Me.GridColumnTimeRemaining.Caption = "Time Remaining"
         Me.GridColumnTimeRemaining.FieldName = "time_remaining"
         Me.GridColumnTimeRemaining.Name = "GridColumnTimeRemaining"
+        Me.GridColumnTimeRemaining.OptionsColumn.ReadOnly = True
         '
         'GridColumnReturnQty
         '
@@ -948,6 +976,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.GridColumnReturnQty.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnReturnQty.FieldName = "return_qty"
         Me.GridColumnReturnQty.Name = "GridColumnReturnQty"
+        Me.GridColumnReturnQty.OptionsColumn.ReadOnly = True
         '
         'GridColumnOrderQty
         '
@@ -956,26 +985,31 @@ Partial Class FormSalesOrderSvcLevel
         Me.GridColumnOrderQty.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnOrderQty.FieldName = "order_qty"
         Me.GridColumnOrderQty.Name = "GridColumnOrderQty"
+        Me.GridColumnOrderQty.OptionsColumn.ReadOnly = True
         '
         'GridColumn11
         '
         Me.GridColumn11.Caption = "Status"
         Me.GridColumn11.FieldName = "report_status"
         Me.GridColumn11.Name = "GridColumn11"
+        Me.GridColumn11.OptionsColumn.ReadOnly = True
         '
         'GridColumnCurrDate
         '
         Me.GridColumnCurrDate.Caption = "Current Date"
         Me.GridColumnCurrDate.FieldName = "sales_return_order_date_current"
         Me.GridColumnCurrDate.Name = "GridColumnCurrDate"
+        Me.GridColumnCurrDate.OptionsColumn.ReadOnly = True
         '
         'GridColumn12
         '
         Me.GridColumn12.Caption = "Status"
         Me.GridColumn12.FieldName = "prepare_status"
         Me.GridColumn12.Name = "GridColumn12"
+        Me.GridColumn12.OptionsColumn.ReadOnly = True
         Me.GridColumn12.Visible = True
-        Me.GridColumn12.VisibleIndex = 5
+        Me.GridColumn12.VisibleIndex = 6
+        Me.GridColumn12.Width = 85
         '
         'GridColumnSvcLevel
         '
@@ -983,14 +1017,83 @@ Partial Class FormSalesOrderSvcLevel
         Me.GridColumnSvcLevel.ColumnEdit = Me.RepositoryItemProgressBar2
         Me.GridColumnSvcLevel.FieldName = "svc_level"
         Me.GridColumnSvcLevel.Name = "GridColumnSvcLevel"
+        Me.GridColumnSvcLevel.OptionsColumn.ReadOnly = True
         Me.GridColumnSvcLevel.Visible = True
-        Me.GridColumnSvcLevel.VisibleIndex = 6
+        Me.GridColumnSvcLevel.VisibleIndex = 10
+        Me.GridColumnSvcLevel.Width = 105
         '
         'RepositoryItemProgressBar2
         '
         Me.RepositoryItemProgressBar2.Name = "RepositoryItemProgressBar2"
         Me.RepositoryItemProgressBar2.ReadOnly = True
         Me.RepositoryItemProgressBar2.ShowTitle = True
+        '
+        'GridColumn57
+        '
+        Me.GridColumn57.Caption = "Select"
+        Me.GridColumn57.ColumnEdit = Me.RepositoryItemCheckEdit8
+        Me.GridColumn57.FieldName = "is_select"
+        Me.GridColumn57.Name = "GridColumn57"
+        Me.GridColumn57.Visible = True
+        Me.GridColumn57.VisibleIndex = 11
+        Me.GridColumn57.Width = 71
+        '
+        'RepositoryItemCheckEdit8
+        '
+        Me.RepositoryItemCheckEdit8.AutoHeight = False
+        Me.RepositoryItemCheckEdit8.Name = "RepositoryItemCheckEdit8"
+        Me.RepositoryItemCheckEdit8.ValueChecked = "Yes"
+        Me.RepositoryItemCheckEdit8.ValueUnchecked = "No"
+        '
+        'GridColumn58
+        '
+        Me.GridColumn58.Caption = "Outstanding"
+        Me.GridColumn58.DisplayFormat.FormatString = "N0"
+        Me.GridColumn58.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn58.FieldName = "outstanding"
+        Me.GridColumn58.Name = "GridColumn58"
+        Me.GridColumn58.Visible = True
+        Me.GridColumn58.VisibleIndex = 5
+        '
+        'GridColumn59
+        '
+        Me.GridColumn59.Caption = "Note"
+        Me.GridColumn59.FieldName = "final_comment"
+        Me.GridColumn59.Name = "GridColumn59"
+        Me.GridColumn59.Visible = True
+        Me.GridColumn59.VisibleIndex = 7
+        '
+        'GridColumn60
+        '
+        Me.GridColumn60.Caption = "Closed Date"
+        Me.GridColumn60.ColumnEdit = Me.RepositoryItemTextEdit2
+        Me.GridColumn60.DisplayFormat.FormatString = "dd MMMM yyyy'/'hh:mm tt"
+        Me.GridColumn60.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn60.FieldName = "final_date"
+        Me.GridColumn60.Name = "GridColumn60"
+        Me.GridColumn60.Visible = True
+        Me.GridColumn60.VisibleIndex = 8
+        '
+        'RepositoryItemTextEdit2
+        '
+        Me.RepositoryItemTextEdit2.AutoHeight = False
+        Me.RepositoryItemTextEdit2.Name = "RepositoryItemTextEdit2"
+        Me.RepositoryItemTextEdit2.NullText = "-"
+        '
+        'GridColumn61
+        '
+        Me.GridColumn61.Caption = "Closed By"
+        Me.GridColumn61.ColumnEdit = Me.RepositoryItemTextEdit3
+        Me.GridColumn61.FieldName = "final_by_name"
+        Me.GridColumn61.Name = "GridColumn61"
+        Me.GridColumn61.Visible = True
+        Me.GridColumn61.VisibleIndex = 9
+        '
+        'RepositoryItemTextEdit3
+        '
+        Me.RepositoryItemTextEdit3.AutoHeight = False
+        Me.RepositoryItemTextEdit3.Name = "RepositoryItemTextEdit3"
+        Me.RepositoryItemTextEdit3.NullText = "-"
         '
         'GridView3
         '
@@ -1000,6 +1103,8 @@ Partial Class FormSalesOrderSvcLevel
         'GCFilterRet
         '
         Me.GCFilterRet.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GCFilterRet.Controls.Add(Me.PanelControl1)
+        Me.GCFilterRet.Controls.Add(Me.SimpleButton6)
         Me.GCFilterRet.Controls.Add(Me.SLEPackingStatusRet)
         Me.GCFilterRet.Controls.Add(Me.BtnViewRet)
         Me.GCFilterRet.Controls.Add(Me.LabelControl4)
@@ -1014,6 +1119,37 @@ Partial Class FormSalesOrderSvcLevel
         Me.GCFilterRet.Name = "GCFilterRet"
         Me.GCFilterRet.Size = New System.Drawing.Size(783, 39)
         Me.GCFilterRet.TabIndex = 3
+        '
+        'PanelControl1
+        '
+        Me.PanelControl1.Appearance.BackColor = System.Drawing.Color.Transparent
+        Me.PanelControl1.Appearance.Options.UseBackColor = True
+        Me.PanelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelControl1.Controls.Add(Me.CheckEdit1)
+        Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Right
+        Me.PanelControl1.Location = New System.Drawing.Point(695, 2)
+        Me.PanelControl1.Name = "PanelControl1"
+        Me.PanelControl1.Size = New System.Drawing.Size(86, 35)
+        Me.PanelControl1.TabIndex = 8902
+        '
+        'CheckEdit1
+        '
+        Me.CheckEdit1.Location = New System.Drawing.Point(11, 6)
+        Me.CheckEdit1.Name = "CheckEdit1"
+        Me.CheckEdit1.Properties.Appearance.ForeColor = System.Drawing.Color.Black
+        Me.CheckEdit1.Properties.Appearance.Options.UseForeColor = True
+        Me.CheckEdit1.Properties.Caption = "Select All"
+        Me.CheckEdit1.Size = New System.Drawing.Size(72, 19)
+        Me.CheckEdit1.TabIndex = 0
+        '
+        'SimpleButton6
+        '
+        Me.SimpleButton6.Location = New System.Drawing.Point(597, 9)
+        Me.SimpleButton6.LookAndFeel.SkinName = "Blue"
+        Me.SimpleButton6.Name = "SimpleButton6"
+        Me.SimpleButton6.Size = New System.Drawing.Size(85, 20)
+        Me.SimpleButton6.TabIndex = 8901
+        Me.SimpleButton6.Text = "Closing Order"
         '
         'SLEPackingStatusRet
         '
@@ -2046,6 +2182,14 @@ Partial Class FormSalesOrderSvcLevel
         Me.GridColumnTotalNonStock.VisibleIndex = 7
         Me.GridColumnTotalNonStock.Width = 99
         '
+        'GridColumnRetType
+        '
+        Me.GridColumnRetType.Caption = "Type"
+        Me.GridColumnRetType.FieldName = "ret_type"
+        Me.GridColumnRetType.Name = "GridColumnRetType"
+        Me.GridColumnRetType.Visible = True
+        Me.GridColumnRetType.VisibleIndex = 1
+        '
         'GroupControl2
         '
         Me.GroupControl2.CaptionLocation = DevExpress.Utils.Locations.Left
@@ -3038,14 +3182,6 @@ Partial Class FormSalesOrderSvcLevel
         Me.LabelControl24.TabIndex = 8892
         Me.LabelControl24.Text = "From"
         '
-        'GridColumnRetType
-        '
-        Me.GridColumnRetType.Caption = "Type"
-        Me.GridColumnRetType.FieldName = "ret_type"
-        Me.GridColumnRetType.Name = "GridColumnRetType"
-        Me.GridColumnRetType.Visible = True
-        Me.GridColumnRetType.VisibleIndex = 1
-        '
         'FormSalesOrderSvcLevel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -3082,10 +3218,16 @@ Partial Class FormSalesOrderSvcLevel
         CType(Me.GCSalesReturnOrder, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVSalesReturnOrder, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemProgressBar2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemCheckEdit8, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemTextEdit3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GCFilterRet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GCFilterRet.ResumeLayout(False)
         Me.GCFilterRet.PerformLayout()
+        CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl1.ResumeLayout(False)
+        CType(Me.CheckEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SLEPackingStatusRet.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEUntilRet.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -3452,4 +3594,15 @@ Partial Class FormSalesOrderSvcLevel
     Friend WithEvents GridView11 As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumnTotalNonStock As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnRetType As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn57 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RepositoryItemCheckEdit8 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+    Friend WithEvents GridColumn58 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents SimpleButton6 As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GridColumn59 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn60 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RepositoryItemTextEdit2 As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
+    Friend WithEvents GridColumn61 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RepositoryItemTextEdit3 As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
+    Friend WithEvents PanelControl1 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents CheckEdit1 As DevExpress.XtraEditors.CheckEdit
 End Class

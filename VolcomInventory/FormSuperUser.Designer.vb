@@ -33,6 +33,7 @@ Partial Class FormSuperUser
         Me.TxtDB = New DevExpress.XtraEditors.LabelControl()
         Me.BSendMessage = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnOutlet = New DevExpress.XtraEditors.SimpleButton()
+        Me.BSubDep = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.PictureEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -48,7 +49,7 @@ Partial Class FormSuperUser
         'BtnConn
         '
         Me.BtnConn.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.BtnConn.Location = New System.Drawing.Point(0, 151)
+        Me.BtnConn.Location = New System.Drawing.Point(0, 128)
         Me.BtnConn.Name = "BtnConn"
         Me.BtnConn.Size = New System.Drawing.Size(430, 23)
         Me.BtnConn.TabIndex = 1
@@ -57,7 +58,7 @@ Partial Class FormSuperUser
         'BtnDepartement
         '
         Me.BtnDepartement.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.BtnDepartement.Location = New System.Drawing.Point(0, 174)
+        Me.BtnDepartement.Location = New System.Drawing.Point(0, 151)
         Me.BtnDepartement.Name = "BtnDepartement"
         Me.BtnDepartement.Size = New System.Drawing.Size(430, 23)
         Me.BtnDepartement.TabIndex = 2
@@ -150,11 +151,23 @@ Partial Class FormSuperUser
         Me.BtnOutlet.TabIndex = 16
         Me.BtnOutlet.Text = "Outlet Setup"
         '
+        'BSubDep
+        '
+        Me.BSubDep.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.BSubDep.Location = New System.Drawing.Point(0, 174)
+        Me.BSubDep.Name = "BSubDep"
+        Me.BSubDep.Size = New System.Drawing.Size(430, 23)
+        Me.BSubDep.TabIndex = 17
+        Me.BSubDep.Text = "Change Sub Departement"
+        '
         'FormSuperUser
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(430, 289)
+        Me.Controls.Add(Me.BtnConn)
+        Me.Controls.Add(Me.BtnDepartement)
+        Me.Controls.Add(Me.BSubDep)
         Me.Controls.Add(Me.TxtDB)
         Me.Controls.Add(Me.TxtHost)
         Me.Controls.Add(Me.LabelControl6)
@@ -162,8 +175,6 @@ Partial Class FormSuperUser
         Me.Controls.Add(Me.LabelControl4)
         Me.Controls.Add(Me.LabelControl1)
         Me.Controls.Add(Me.PictureEdit1)
-        Me.Controls.Add(Me.BtnConn)
-        Me.Controls.Add(Me.BtnDepartement)
         Me.Controls.Add(Me.SimpleButton1)
         Me.Controls.Add(Me.BSendMessage)
         Me.Controls.Add(Me.BtnOutlet)
@@ -192,4 +203,5 @@ Partial Class FormSuperUser
     Friend WithEvents TxtDB As DevExpress.XtraEditors.LabelControl
     Friend WithEvents BSendMessage As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BtnOutlet As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BSubDep As DevExpress.XtraEditors.SimpleButton
 End Class

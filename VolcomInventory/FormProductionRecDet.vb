@@ -364,6 +364,7 @@ Public Class FormProductionRecDet
         do_date = ""
         rec_note = ""
         rec_stats = ""
+        arrive_date = ""
 
         makeSafeGV(GVListPurchase)
         makeSafeGV(GVBarcode)

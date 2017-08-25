@@ -30,21 +30,30 @@
                 Dim id_user As String = ""
                 Dim is_head_dept As String = ""
                 Dim is_asst_head_dept As String = ""
+                Dim is_sub_head As String = ""
 
                 If CEHeadDept.Checked = True Then
                     id_user = "NULL"
                     is_head_dept = "1"
                     is_asst_head_dept = "2"
-                ElseIf CEAsstHeadDept.Checked = True
+                    is_sub_head = "2"
+                ElseIf CEAsstHeadDept.Checked = True Then
                     id_user = "NULL"
                     is_head_dept = "2"
                     is_asst_head_dept = "1"
+                    is_sub_head = "2"
+                ElseIf CESubHead.Checked = True Then
+                    id_user = "NULL"
+                    is_head_dept = "2"
+                    is_asst_head_dept = "2"
+                    is_sub_head = "1"
                 Else
                     id_user = "'" & GVUser.GetFocusedRowCellDisplayText("id_user").ToString & "'"
                     is_head_dept = "2"
                     is_asst_head_dept = "2"
+                    is_sub_head = "2"
                 End If
-                Dim query As String = String.Format("INSERT tb_mark_asg_user(id_mark_asg,id_user,level,lead_time,is_head_dept,is_asst_head_dept) VALUES('{0}',{1},((SELECT COUNT(a.id_mark_asg_user) FROM tb_mark_asg_user a WHERE a.id_mark_asg='{0}')+1),'{2}','{3}','{4}')", id_mark_asg, id_user, time_fix, is_head_dept, is_asst_head_dept)
+                Dim query As String = String.Format("INSERT tb_mark_asg_user(id_mark_asg,id_user,level,lead_time,is_head_dept,is_asst_head_dept,is_sub_head) VALUES('{0}',{1},((SELECT COUNT(a.id_mark_asg_user) FROM tb_mark_asg_user a WHERE a.id_mark_asg='{0}')+1),'{2}','{3}','{4}',{5})", id_mark_asg, id_user, time_fix, is_head_dept, is_asst_head_dept, is_sub_head)
                 execute_non_query(query, True, "", "", "", "")
                 FormMarkAssignUser.view_user()
                 Close()
@@ -63,8 +72,9 @@
     Private Sub CEHeadDept_CheckedChanged(sender As Object, e As EventArgs) Handles CEHeadDept.CheckedChanged
         If CEHeadDept.Checked = True Then
             CEAsstHeadDept.Checked = False
+            CESubHead.Checked = False
         End If
-        If CEHeadDept.Checked = True Or CEAsstHeadDept.Checked = True Then
+        If CEHeadDept.Checked = True Or CEAsstHeadDept.Checked = True Or CESubHead.Checked = True Then
             GCUser.Enabled = False
         Else
             GCUser.Enabled = True
@@ -74,8 +84,21 @@
     Private Sub CEAsstHeadDept_CheckedChanged(sender As Object, e As EventArgs) Handles CEAsstHeadDept.CheckedChanged
         If CEAsstHeadDept.Checked = True Then
             CEHeadDept.Checked = False
+            CESubHead.Checked = False
         End If
-        If CEHeadDept.Checked = True Or CEAsstHeadDept.Checked = True Then
+        If CEHeadDept.Checked = True Or CEAsstHeadDept.Checked = True Or CESubHead.Checked = True Then
+            GCUser.Enabled = False
+        Else
+            GCUser.Enabled = True
+        End If
+    End Sub
+
+    Private Sub CESubHead_CheckedChanged(sender As Object, e As EventArgs) Handles CESubHead.CheckedChanged, CEHeadDept.CheckedChanged
+        If CESubHead.Checked = True Then
+            CEAsstHeadDept.Checked = False
+            CEHeadDept.Checked = False
+        End If
+        If CEHeadDept.Checked = True Or CEAsstHeadDept.Checked = True Or CESubHead.Checked = True Then
             GCUser.Enabled = False
         Else
             GCUser.Enabled = True

@@ -239,18 +239,18 @@ Partial Class FormMasterDesignSingle
         Me.BtnSetAsPrintedPrice = New DevExpress.XtraEditors.SimpleButton()
         Me.Bdelete = New DevExpress.XtraEditors.SimpleButton()
         Me.BAdd = New DevExpress.XtraEditors.SimpleButton()
-        Me.ViewMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.SMViewDel = New System.Windows.Forms.ToolStripMenuItem()
         Me.XTPComment = New DevExpress.XtraTab.XtraTabPage()
         Me.GCComment = New DevExpress.XtraGrid.GridControl()
         Me.GVComment = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.PanelControlComment = New DevExpress.XtraEditors.PanelControl()
-        Me.BDelComment = New DevExpress.XtraEditors.SimpleButton()
-        Me.BAddComment = New DevExpress.XtraEditors.SimpleButton()
         Me.GridColumnCmntID = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnCmntName = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnCmntDatetime = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnCmntComment = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.PanelControlComment = New DevExpress.XtraEditors.PanelControl()
+        Me.BDelComment = New DevExpress.XtraEditors.SimpleButton()
+        Me.BAddComment = New DevExpress.XtraEditors.SimpleButton()
+        Me.ViewMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.SMViewDel = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.RILEValNon, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EPMasterDesign, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GCCode, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -361,12 +361,12 @@ Partial Class FormMasterDesignSingle
         CType(Me.GridView4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelRetailPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelRetailPrice.SuspendLayout()
-        Me.ViewMenu.SuspendLayout()
         Me.XTPComment.SuspendLayout()
         CType(Me.GCComment, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVComment, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControlComment, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlComment.SuspendLayout()
+        Me.ViewMenu.SuspendLayout()
         Me.SuspendLayout()
         '
         'RILEValNon
@@ -600,13 +600,13 @@ Partial Class FormMasterDesignSingle
         Me.PanelControl2.LookAndFeel.UseDefaultLookAndFeel = False
         Me.PanelControl2.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(892, 31)
+        Me.PanelControl2.Size = New System.Drawing.Size(907, 31)
         Me.PanelControl2.TabIndex = 92
         '
         'BtnReviseStyle
         '
         Me.BtnReviseStyle.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BtnReviseStyle.Location = New System.Drawing.Point(753, 2)
+        Me.BtnReviseStyle.Location = New System.Drawing.Point(768, 2)
         Me.BtnReviseStyle.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.BtnReviseStyle.Name = "BtnReviseStyle"
         Me.BtnReviseStyle.Size = New System.Drawing.Size(71, 27)
@@ -667,7 +667,7 @@ Partial Class FormMasterDesignSingle
         Me.TECodeImport.Location = New System.Drawing.Point(339, 30)
         Me.TECodeImport.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.TECodeImport.Name = "TECodeImport"
-        Me.TECodeImport.Size = New System.Drawing.Size(82, 20)
+        Me.TECodeImport.Size = New System.Drawing.Size(97, 20)
         Me.TECodeImport.TabIndex = 13
         Me.TECodeImport.Visible = False
         '
@@ -730,7 +730,7 @@ Partial Class FormMasterDesignSingle
         'BSave
         '
         Me.BSave.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BSave.Location = New System.Drawing.Point(824, 2)
+        Me.BSave.Location = New System.Drawing.Point(839, 2)
         Me.BSave.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.BSave.Name = "BSave"
         Me.BSave.Size = New System.Drawing.Size(66, 27)
@@ -1552,7 +1552,7 @@ Partial Class FormMasterDesignSingle
         Me.TEDisplayName.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.TEDisplayName.Name = "TEDisplayName"
         Me.TEDisplayName.Properties.MaxLength = 25
-        Me.TEDisplayName.Size = New System.Drawing.Size(317, 20)
+        Me.TEDisplayName.Size = New System.Drawing.Size(332, 20)
         Me.TEDisplayName.TabIndex = 18
         Me.TEDisplayName.TabStop = False
         '
@@ -1606,7 +1606,7 @@ Partial Class FormMasterDesignSingle
         Me.XTPGeneral.ImageIndex = 3
         Me.XTPGeneral.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.XTPGeneral.Name = "XTPGeneral"
-        Me.XTPGeneral.Size = New System.Drawing.Size(892, 600)
+        Me.XTPGeneral.Size = New System.Drawing.Size(907, 600)
         Me.XTPGeneral.Text = "Design"
         '
         'PanC3
@@ -1617,7 +1617,7 @@ Partial Class FormMasterDesignSingle
         Me.PanC3.Location = New System.Drawing.Point(402, 0)
         Me.PanC3.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.PanC3.Name = "PanC3"
-        Me.PanC3.Size = New System.Drawing.Size(490, 569)
+        Me.PanC3.Size = New System.Drawing.Size(505, 569)
         Me.PanC3.TabIndex = 98
         '
         'XTPCode
@@ -1626,7 +1626,7 @@ Partial Class FormMasterDesignSingle
         Me.XTPCode.Location = New System.Drawing.Point(0, 0)
         Me.XTPCode.Name = "XTPCode"
         Me.XTPCode.SelectedTabPage = Me.XTPDesign
-        Me.XTPCode.Size = New System.Drawing.Size(490, 569)
+        Me.XTPCode.Size = New System.Drawing.Size(505, 569)
         Me.XTPCode.TabIndex = 100
         Me.XTPCode.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPDesign, Me.XTPMD, Me.XTPNonMD})
         '
@@ -1637,7 +1637,7 @@ Partial Class FormMasterDesignSingle
         Me.XTPDesign.Controls.Add(Me.PanelDesc)
         Me.XTPDesign.Controls.Add(Me.PanelControl3)
         Me.XTPDesign.Name = "XTPDesign"
-        Me.XTPDesign.Size = New System.Drawing.Size(484, 541)
+        Me.XTPDesign.Size = New System.Drawing.Size(499, 541)
         Me.XTPDesign.Text = "Design Detail"
         '
         'GCCodeDsg
@@ -1649,7 +1649,7 @@ Partial Class FormMasterDesignSingle
         Me.GCCodeDsg.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.GCCodeDsg.Name = "GCCodeDsg"
         Me.GCCodeDsg.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RILEDesgValue, Me.RILEValDesg, Me.RILEParDesg})
-        Me.GCCodeDsg.Size = New System.Drawing.Size(484, 369)
+        Me.GCCodeDsg.Size = New System.Drawing.Size(499, 369)
         Me.GCCodeDsg.TabIndex = 95
         Me.GCCodeDsg.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVCodeDsg})
         '
@@ -1802,7 +1802,7 @@ Partial Class FormMasterDesignSingle
         Me.DNCodeDesign.Location = New System.Drawing.Point(0, 409)
         Me.DNCodeDesign.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.DNCodeDesign.Name = "DNCodeDesign"
-        Me.DNCodeDesign.Size = New System.Drawing.Size(484, 24)
+        Me.DNCodeDesign.Size = New System.Drawing.Size(499, 24)
         Me.DNCodeDesign.TabIndex = 94
         Me.DNCodeDesign.Visible = False
         '
@@ -1816,13 +1816,13 @@ Partial Class FormMasterDesignSingle
         Me.PanelDesc.Location = New System.Drawing.Point(0, 433)
         Me.PanelDesc.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.PanelDesc.Name = "PanelDesc"
-        Me.PanelDesc.Size = New System.Drawing.Size(484, 108)
+        Me.PanelDesc.Size = New System.Drawing.Size(499, 108)
         Me.PanelDesc.TabIndex = 100
         '
         'BGenerateDesc
         '
         Me.BGenerateDesc.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BGenerateDesc.Location = New System.Drawing.Point(334, 34)
+        Me.BGenerateDesc.Location = New System.Drawing.Point(349, 34)
         Me.BGenerateDesc.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.BGenerateDesc.Name = "BGenerateDesc"
         Me.BGenerateDesc.Size = New System.Drawing.Size(124, 20)
@@ -1842,7 +1842,7 @@ Partial Class FormMasterDesignSingle
         Me.PanelControl3.Location = New System.Drawing.Point(0, 0)
         Me.PanelControl3.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.PanelControl3.Name = "PanelControl3"
-        Me.PanelControl3.Size = New System.Drawing.Size(484, 40)
+        Me.PanelControl3.Size = New System.Drawing.Size(499, 40)
         Me.PanelControl3.TabIndex = 92
         '
         'BRefreshCodeDsg
@@ -2228,7 +2228,7 @@ Partial Class FormMasterDesignSingle
         Me.XTPSize.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.XTPSize.Name = "XTPSize"
         Me.XTPSize.PageVisible = False
-        Me.XTPSize.Size = New System.Drawing.Size(892, 600)
+        Me.XTPSize.Size = New System.Drawing.Size(907, 600)
         Me.XTPSize.Text = "Size"
         '
         'GCProduct
@@ -2238,7 +2238,7 @@ Partial Class FormMasterDesignSingle
         Me.GCProduct.MainView = Me.GVProduct
         Me.GCProduct.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.GCProduct.Name = "GCProduct"
-        Me.GCProduct.Size = New System.Drawing.Size(892, 561)
+        Me.GCProduct.Size = New System.Drawing.Size(907, 561)
         Me.GCProduct.TabIndex = 21
         Me.GCProduct.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVProduct, Me.GridView6})
         '
@@ -2309,7 +2309,7 @@ Partial Class FormMasterDesignSingle
         Me.PanelControl1.LookAndFeel.UseDefaultLookAndFeel = False
         Me.PanelControl1.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(892, 39)
+        Me.PanelControl1.Size = New System.Drawing.Size(907, 39)
         Me.PanelControl1.TabIndex = 20
         '
         'BtnDelSize
@@ -2317,7 +2317,7 @@ Partial Class FormMasterDesignSingle
         Me.BtnDelSize.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnDelSize.ImageIndex = 4
         Me.BtnDelSize.ImageList = Me.LargeImageCollection
-        Me.BtnDelSize.Location = New System.Drawing.Point(699, 2)
+        Me.BtnDelSize.Location = New System.Drawing.Point(714, 2)
         Me.BtnDelSize.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.BtnDelSize.Name = "BtnDelSize"
         Me.BtnDelSize.Size = New System.Drawing.Size(82, 35)
@@ -2329,7 +2329,7 @@ Partial Class FormMasterDesignSingle
         Me.BtnTemplateSize.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnTemplateSize.ImageIndex = 12
         Me.BtnTemplateSize.ImageList = Me.LargeImageCollection
-        Me.BtnTemplateSize.Location = New System.Drawing.Point(781, 2)
+        Me.BtnTemplateSize.Location = New System.Drawing.Point(796, 2)
         Me.BtnTemplateSize.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.BtnTemplateSize.Name = "BtnTemplateSize"
         Me.BtnTemplateSize.Size = New System.Drawing.Size(109, 35)
@@ -2563,18 +2563,6 @@ Partial Class FormMasterDesignSingle
         Me.BAdd.TabIndex = 16
         Me.BAdd.Text = "Add"
         '
-        'ViewMenu
-        '
-        Me.ViewMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SMViewDel})
-        Me.ViewMenu.Name = "ContextMenuStripYM"
-        Me.ViewMenu.Size = New System.Drawing.Size(159, 26)
-        '
-        'SMViewDel
-        '
-        Me.SMViewDel.Name = "SMViewDel"
-        Me.SMViewDel.Size = New System.Drawing.Size(158, 22)
-        Me.SMViewDel.Text = "View Document"
-        '
         'XTPComment
         '
         Me.XTPComment.Controls.Add(Me.GCComment)
@@ -2601,6 +2589,41 @@ Partial Class FormMasterDesignSingle
         Me.GVComment.Name = "GVComment"
         Me.GVComment.OptionsView.ShowGroupPanel = False
         Me.GVComment.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumnCmntDatetime, DevExpress.Data.ColumnSortOrder.Descending)})
+        '
+        'GridColumnCmntID
+        '
+        Me.GridColumnCmntID.Caption = "ID"
+        Me.GridColumnCmntID.FieldName = "id_design_comment"
+        Me.GridColumnCmntID.Name = "GridColumnCmntID"
+        '
+        'GridColumnCmntName
+        '
+        Me.GridColumnCmntName.Caption = "By"
+        Me.GridColumnCmntName.FieldName = "employee_name"
+        Me.GridColumnCmntName.Name = "GridColumnCmntName"
+        Me.GridColumnCmntName.Visible = True
+        Me.GridColumnCmntName.VisibleIndex = 1
+        Me.GridColumnCmntName.Width = 105
+        '
+        'GridColumnCmntDatetime
+        '
+        Me.GridColumnCmntDatetime.Caption = "Date Time"
+        Me.GridColumnCmntDatetime.DisplayFormat.FormatString = "dd MMM yyyy H:mm:ss"
+        Me.GridColumnCmntDatetime.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumnCmntDatetime.FieldName = "datetime"
+        Me.GridColumnCmntDatetime.Name = "GridColumnCmntDatetime"
+        Me.GridColumnCmntDatetime.Visible = True
+        Me.GridColumnCmntDatetime.VisibleIndex = 0
+        Me.GridColumnCmntDatetime.Width = 108
+        '
+        'GridColumnCmntComment
+        '
+        Me.GridColumnCmntComment.Caption = "Comment"
+        Me.GridColumnCmntComment.FieldName = "comment"
+        Me.GridColumnCmntComment.Name = "GridColumnCmntComment"
+        Me.GridColumnCmntComment.Visible = True
+        Me.GridColumnCmntComment.VisibleIndex = 2
+        Me.GridColumnCmntComment.Width = 483
         '
         'PanelControlComment
         '
@@ -2639,40 +2662,17 @@ Partial Class FormMasterDesignSingle
         Me.BAddComment.TabIndex = 16
         Me.BAddComment.Text = "Add"
         '
-        'GridColumnCmntID
+        'ViewMenu
         '
-        Me.GridColumnCmntID.Caption = "ID"
-        Me.GridColumnCmntID.FieldName = "id_design_comment"
-        Me.GridColumnCmntID.Name = "GridColumnCmntID"
+        Me.ViewMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SMViewDel})
+        Me.ViewMenu.Name = "ContextMenuStripYM"
+        Me.ViewMenu.Size = New System.Drawing.Size(159, 26)
         '
-        'GridColumnCmntName
+        'SMViewDel
         '
-        Me.GridColumnCmntName.Caption = "By"
-        Me.GridColumnCmntName.FieldName = "employee_name"
-        Me.GridColumnCmntName.Name = "GridColumnCmntName"
-        Me.GridColumnCmntName.Visible = True
-        Me.GridColumnCmntName.VisibleIndex = 1
-        Me.GridColumnCmntName.Width = 105
-        '
-        'GridColumnCmntDatetime
-        '
-        Me.GridColumnCmntDatetime.Caption = "Date Time"
-        Me.GridColumnCmntDatetime.DisplayFormat.FormatString = "dd MMM yyyy H:mm:ss"
-        Me.GridColumnCmntDatetime.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.GridColumnCmntDatetime.FieldName = "datetime"
-        Me.GridColumnCmntDatetime.Name = "GridColumnCmntDatetime"
-        Me.GridColumnCmntDatetime.Visible = True
-        Me.GridColumnCmntDatetime.VisibleIndex = 0
-        Me.GridColumnCmntDatetime.Width = 108
-        '
-        'GridColumnCmntComment
-        '
-        Me.GridColumnCmntComment.Caption = "Comment"
-        Me.GridColumnCmntComment.FieldName = "comment"
-        Me.GridColumnCmntComment.Name = "GridColumnCmntComment"
-        Me.GridColumnCmntComment.Visible = True
-        Me.GridColumnCmntComment.VisibleIndex = 2
-        Me.GridColumnCmntComment.Width = 483
+        Me.SMViewDel.Name = "SMViewDel"
+        Me.SMViewDel.Size = New System.Drawing.Size(158, 22)
+        Me.SMViewDel.Text = "View Document"
         '
         'FormMasterDesignSingle
         '
@@ -2806,12 +2806,12 @@ Partial Class FormMasterDesignSingle
         CType(Me.GridView4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelRetailPrice, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelRetailPrice.ResumeLayout(False)
-        Me.ViewMenu.ResumeLayout(False)
         Me.XTPComment.ResumeLayout(False)
         CType(Me.GCComment, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVComment, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControlComment, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControlComment.ResumeLayout(False)
+        Me.ViewMenu.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub

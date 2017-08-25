@@ -511,6 +511,18 @@
     <Compile Include="FormDeliveryCargoDet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormDepartementSub.Designer.vb">
+      <DependentUpon>FormDepartementSub.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormDepartementSub.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDepartementSubDet.Designer.vb">
+      <DependentUpon>FormDepartementSubDet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormDepartementSubDet.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormEmpAttn.Designer.vb">
       <DependentUpon>FormEmpAttn.vb</DependentUpon>
     </Compile>
@@ -3523,6 +3535,12 @@
     <Compile Include="FormSuperUserDept.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormSuperUserSubDept.Designer.vb">
+      <DependentUpon>FormSuperUserSubDept.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormSuperUserSubDept.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormTemplateCode.Designer.vb">
       <DependentUpon>FormTemplateCode.vb</DependentUpon>
     </Compile>
@@ -5083,6 +5101,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormDeliveryCargoDet.resx">
       <DependentUpon>FormDeliveryCargoDet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDepartementSub.resx">
+      <DependentUpon>FormDepartementSub.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDepartementSubDet.resx">
+      <DependentUpon>FormDepartementSubDet.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormEmpAttn.resx">
       <DependentUpon>FormEmpAttn.vb</DependentUpon>
@@ -6952,6 +6976,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormSuperUserDept.resx">
       <DependentUpon>FormSuperUserDept.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSuperUserSubDept.resx">
+      <DependentUpon>FormSuperUserSubDept.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormTemplateCode.resx">
       <DependentUpon>FormTemplateCode.vb</DependentUpon>

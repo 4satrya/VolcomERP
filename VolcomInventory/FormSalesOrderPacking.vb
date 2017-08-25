@@ -5,11 +5,11 @@
 
     Private Sub FormSalesOrderPacking_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Dim query As String = "SELECT * FROM tb_lookup_prepare_status a WHERE a.id_prepare_status>0 "
-        If id_pop_up = "4" Then
+        If id_pop_up = "4" Or id_pop_up = "5" Then
             query += "AND a.id_prepare_status=2 "
         End If
         viewSearchLookupQuery(SLEPackingStatus, query, "id_prepare_status", "prepare_status", "id_prepare_status")
-        If id_pop_up <> "4" Then
+        If id_pop_up <> "4" And id_pop_up <> "5" Then
             SLEPackingStatus.EditValue = id_cur_status
         End If
     End Sub
@@ -90,6 +90,23 @@
                     Dim query_upd As String = "UPDATE tb_sales_order SET id_prepare_status='" + SLEPackingStatus.EditValue.ToString + "', final_comment='" + final_comment + "', final_date=NOW(), final_by='" + id_user + "' WHERE (" + qry_stt + ") "
                     execute_non_query(query_upd, True, "", "", "", "")
                     FormSalesOrderSvcLevel.viewSalesOrder()
+                    Close()
+                End If
+                Cursor = Cursors.Default
+            ElseIf id_pop_up = "5" Then
+                Cursor = Cursors.WaitCursor
+                Dim final_comment As String = MENote.Text
+                Dim qry_stt As String = ""
+                For i As Integer = 0 To ((FormSalesOrderSvcLevel.GVSalesReturnOrder.RowCount - 1) - GetGroupRowCount(FormSalesOrderSvcLevel.GVSalesReturnOrder))
+                    If i > 0 Then
+                        qry_stt += "OR "
+                    End If
+                    qry_stt += "id_sales_return_order='" + FormSalesOrderSvcLevel.GVSalesReturnOrder.GetRowCellValue(i, "id_sales_return_order").ToString + "' "
+                Next
+                If qry_stt <> "" Then
+                    Dim query_upd As String = "UPDATE tb_sales_return_order SET id_prepare_status='" + SLEPackingStatus.EditValue.ToString + "', final_comment='" + final_comment + "', final_date=NOW(), final_by='" + id_user + "' WHERE (" + qry_stt + ") "
+                    execute_non_query(query_upd, True, "", "", "", "")
+                    FormSalesOrderSvcLevel.viewReturnOrder()
                     Close()
                 End If
                 Cursor = Cursors.Default

@@ -21,7 +21,7 @@
         query += "IFNULL(g.created_return,0) AS created_return, IFNULL(h.order_qty,0) AS order_qty, IFNULL(i.return_qty,0) AS return_qty, "
         query += "(a.sales_return_order_est_date) AS sales_return_order_est_date_org, "
         query += "DATE(NOW()) AS sales_return_order_date_current, a.id_prepare_status,stt_ord.prepare_status, "
-        query += "((IFNULL(i.return_qty,0)/IFNULL(h.order_qty,0))*100) AS `svc_level` "
+        query += "((IFNULL(i.return_qty,0)/IFNULL(h.order_qty,0))*100) AS `svc_level`, 'No' as `is_select`, IFNULL(ots.outstanding,0) AS `outstanding`, a.final_comment, a.final_date, fe.employee_name AS `final_by_name` "
         query += "FROM tb_sales_return_order a "
         query += "INNER JOIN tb_m_comp_contact c ON c.id_comp_contact = a.id_store_contact_to "
         query += "INNER JOIN tb_m_comp d ON c.id_comp = d.id_comp "
@@ -46,6 +46,13 @@
         query += "INNER JOIN tb_lookup_prepare_status stt_ord ON stt_ord.id_prepare_status = a.id_prepare_status "
         query += "INNER JOIN tb_m_wh_drawer drw ON drw.id_wh_drawer = d.id_drawer_def "
         query += "INNER JOIN tb_m_wh_rack rck ON rck.id_wh_rack = drw.id_wh_rack "
+        query += "LEFT JOIN (
+        SELECT ret.id_sales_return_order,COUNT(*) AS `outstanding` FROM tb_sales_return ret
+        WHERE ret.id_report_status!=5 AND ret.id_report_status!=6
+        GROUP BY ret.id_sales_return_order
+        ) ots ON ots.id_sales_return_order = a.id_sales_return_order "
+        query += "LEFT JOIN tb_m_user fu ON fu.id_user = a.final_by "
+        query += "LEFT JOIN tb_m_employee fe ON fe.id_employee = fu.id_employee "
         query += "WHERE a.id_sales_return_order>0 " + condition
         query += "ORDER BY a.id_sales_return_order " + order_type
         Return query

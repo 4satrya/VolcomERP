@@ -38,6 +38,7 @@ Partial Class FormMarkAssignUserSingle
         Me.TEMin = New DevExpress.XtraEditors.SpinEdit()
         Me.CEHeadDept = New DevExpress.XtraEditors.CheckEdit()
         Me.CEAsstHeadDept = New DevExpress.XtraEditors.CheckEdit()
+        Me.CESubHead = New DevExpress.XtraEditors.CheckEdit()
         CType(Me.GCUser, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVUser, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEHour.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -45,6 +46,7 @@ Partial Class FormMarkAssignUserSingle
         CType(Me.TEMin.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CEHeadDept.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CEAsstHeadDept.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CESubHead.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GCUser
@@ -53,7 +55,7 @@ Partial Class FormMarkAssignUserSingle
         Me.GCUser.Location = New System.Drawing.Point(0, 0)
         Me.GCUser.MainView = Me.GVUser
         Me.GCUser.Name = "GCUser"
-        Me.GCUser.Size = New System.Drawing.Size(731, 300)
+        Me.GCUser.Size = New System.Drawing.Size(773, 300)
         Me.GCUser.TabIndex = 7
         Me.GCUser.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVUser})
         '
@@ -119,7 +121,7 @@ Partial Class FormMarkAssignUserSingle
         'BCancel
         '
         Me.BCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.BCancel.Location = New System.Drawing.Point(563, 319)
+        Me.BCancel.Location = New System.Drawing.Point(605, 319)
         Me.BCancel.Name = "BCancel"
         Me.BCancel.Size = New System.Drawing.Size(75, 23)
         Me.BCancel.TabIndex = 160
@@ -127,7 +129,7 @@ Partial Class FormMarkAssignUserSingle
         '
         'BSave
         '
-        Me.BSave.Location = New System.Drawing.Point(644, 319)
+        Me.BSave.Location = New System.Drawing.Point(686, 319)
         Me.BSave.Name = "BSave"
         Me.BSave.Size = New System.Drawing.Size(75, 23)
         Me.BSave.TabIndex = 159
@@ -136,7 +138,7 @@ Partial Class FormMarkAssignUserSingle
         'LabelControl3
         '
         Me.LabelControl3.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl3.Location = New System.Drawing.Point(448, 323)
+        Me.LabelControl3.Location = New System.Drawing.Point(527, 323)
         Me.LabelControl3.Name = "LabelControl3"
         Me.LabelControl3.Size = New System.Drawing.Size(3, 15)
         Me.LabelControl3.TabIndex = 158
@@ -145,7 +147,7 @@ Partial Class FormMarkAssignUserSingle
         'LabelControl2
         '
         Me.LabelControl2.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl2.Location = New System.Drawing.Point(371, 323)
+        Me.LabelControl2.Location = New System.Drawing.Point(450, 323)
         Me.LabelControl2.Name = "LabelControl2"
         Me.LabelControl2.Size = New System.Drawing.Size(3, 15)
         Me.LabelControl2.TabIndex = 157
@@ -154,7 +156,7 @@ Partial Class FormMarkAssignUserSingle
         'TEHour
         '
         Me.TEHour.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.TEHour.Location = New System.Drawing.Point(304, 320)
+        Me.TEHour.Location = New System.Drawing.Point(383, 320)
         Me.TEHour.Name = "TEHour"
         Me.TEHour.Properties.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TEHour.Properties.Appearance.Options.UseFont = True
@@ -168,7 +170,7 @@ Partial Class FormMarkAssignUserSingle
         'TESec
         '
         Me.TESec.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.TESec.Location = New System.Drawing.Point(458, 320)
+        Me.TESec.Location = New System.Drawing.Point(537, 320)
         Me.TESec.Name = "TESec"
         Me.TESec.Properties.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TESec.Properties.Appearance.Options.UseFont = True
@@ -182,7 +184,7 @@ Partial Class FormMarkAssignUserSingle
         'LabelRange
         '
         Me.LabelRange.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelRange.Location = New System.Drawing.Point(241, 323)
+        Me.LabelRange.Location = New System.Drawing.Point(320, 323)
         Me.LabelRange.Name = "LabelRange"
         Me.LabelRange.Size = New System.Drawing.Size(54, 15)
         Me.LabelRange.TabIndex = 154
@@ -191,7 +193,7 @@ Partial Class FormMarkAssignUserSingle
         'TEMin
         '
         Me.TEMin.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.TEMin.Location = New System.Drawing.Point(380, 320)
+        Me.TEMin.Location = New System.Drawing.Point(459, 320)
         Me.TEMin.Name = "TEMin"
         Me.TEMin.Properties.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TEMin.Properties.Appearance.Options.UseFont = True
@@ -212,17 +214,26 @@ Partial Class FormMarkAssignUserSingle
         '
         'CEAsstHeadDept
         '
-        Me.CEAsstHeadDept.Location = New System.Drawing.Point(107, 320)
+        Me.CEAsstHeadDept.Location = New System.Drawing.Point(96, 321)
         Me.CEAsstHeadDept.Name = "CEAsstHeadDept"
         Me.CEAsstHeadDept.Properties.Caption = "Asst Head Dept"
         Me.CEAsstHeadDept.Size = New System.Drawing.Size(103, 19)
         Me.CEAsstHeadDept.TabIndex = 162
         '
+        'CESubHead
+        '
+        Me.CESubHead.Location = New System.Drawing.Point(205, 321)
+        Me.CESubHead.Name = "CESubHead"
+        Me.CESubHead.Properties.Caption = "Head Sub Dept"
+        Me.CESubHead.Size = New System.Drawing.Size(109, 19)
+        Me.CESubHead.TabIndex = 163
+        '
         'FormMarkAssignUserSingle
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(731, 354)
+        Me.ClientSize = New System.Drawing.Size(773, 354)
+        Me.Controls.Add(Me.CESubHead)
         Me.Controls.Add(Me.CEAsstHeadDept)
         Me.Controls.Add(Me.CEHeadDept)
         Me.Controls.Add(Me.BCancel)
@@ -248,6 +259,7 @@ Partial Class FormMarkAssignUserSingle
         CType(Me.TEMin.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CEHeadDept.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CEAsstHeadDept.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CESubHead.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -271,4 +283,5 @@ Partial Class FormMarkAssignUserSingle
     Friend WithEvents TEMin As DevExpress.XtraEditors.SpinEdit
     Friend WithEvents CEHeadDept As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents CEAsstHeadDept As DevExpress.XtraEditors.CheckEdit
+    Friend WithEvents CESubHead As DevExpress.XtraEditors.CheckEdit
 End Class

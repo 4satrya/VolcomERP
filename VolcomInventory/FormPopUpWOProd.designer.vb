@@ -55,6 +55,8 @@ Partial Class FormPopUpWOProd
         Me.ColNote = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ColColor = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ColSize = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
         CType(Me.SplitContainerControl1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -135,11 +137,12 @@ Partial Class FormPopUpWOProd
         '
         'GVProdWO
         '
-        Me.GVProdWO.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ColIdMatPurchase, Me.ColPONumber, Me.ColShipFrom, Me.ColShipTo, Me.ColSamplePurcDate, Me.ColRecDate, Me.ColDueDate, Me.ColPayment, Me.ColStatus, Me.ColIDStatus, Me.ColIdWoType, Me.ColWoType, Me.GridColumnProgress, Me.GridColumnIDCompTo, Me.GridColumnPONumber})
+        Me.GVProdWO.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ColIdMatPurchase, Me.ColPONumber, Me.ColShipFrom, Me.ColShipTo, Me.ColSamplePurcDate, Me.ColRecDate, Me.ColDueDate, Me.ColPayment, Me.ColStatus, Me.ColIDStatus, Me.ColIdWoType, Me.ColWoType, Me.GridColumnProgress, Me.GridColumnIDCompTo, Me.GridColumnPONumber, Me.GridColumn1, Me.GridColumn2})
         Me.GVProdWO.GridControl = Me.GCProdWO
         Me.GVProdWO.Name = "GVProdWO"
         Me.GVProdWO.OptionsBehavior.Editable = False
         Me.GVProdWO.OptionsFind.AlwaysVisible = True
+        Me.GVProdWO.OptionsView.ColumnAutoWidth = False
         Me.GVProdWO.OptionsView.ShowGroupPanel = False
         '
         'ColIdMatPurchase
@@ -155,7 +158,7 @@ Partial Class FormPopUpWOProd
         Me.ColPONumber.Name = "ColPONumber"
         Me.ColPONumber.Visible = True
         Me.ColPONumber.VisibleIndex = 0
-        Me.ColPONumber.Width = 88
+        Me.ColPONumber.Width = 71
         '
         'ColShipFrom
         '
@@ -163,7 +166,8 @@ Partial Class FormPopUpWOProd
         Me.ColShipFrom.FieldName = "comp_name_to"
         Me.ColShipFrom.Name = "ColShipFrom"
         Me.ColShipFrom.Visible = True
-        Me.ColShipFrom.VisibleIndex = 3
+        Me.ColShipFrom.VisibleIndex = 5
+        Me.ColShipFrom.Width = 57
         '
         'ColShipTo
         '
@@ -171,7 +175,8 @@ Partial Class FormPopUpWOProd
         Me.ColShipTo.FieldName = "comp_name_ship_to"
         Me.ColShipTo.Name = "ColShipTo"
         Me.ColShipTo.Visible = True
-        Me.ColShipTo.VisibleIndex = 4
+        Me.ColShipTo.VisibleIndex = 6
+        Me.ColShipTo.Width = 57
         '
         'ColSamplePurcDate
         '
@@ -181,8 +186,8 @@ Partial Class FormPopUpWOProd
         Me.ColSamplePurcDate.FieldName = "prod_order_wo_date"
         Me.ColSamplePurcDate.Name = "ColSamplePurcDate"
         Me.ColSamplePurcDate.Visible = True
-        Me.ColSamplePurcDate.VisibleIndex = 5
-        Me.ColSamplePurcDate.Width = 69
+        Me.ColSamplePurcDate.VisibleIndex = 7
+        Me.ColSamplePurcDate.Width = 52
         '
         'ColRecDate
         '
@@ -192,8 +197,8 @@ Partial Class FormPopUpWOProd
         Me.ColRecDate.FieldName = "prod_order_wo_lead_time"
         Me.ColRecDate.Name = "ColRecDate"
         Me.ColRecDate.Visible = True
-        Me.ColRecDate.VisibleIndex = 6
-        Me.ColRecDate.Width = 69
+        Me.ColRecDate.VisibleIndex = 8
+        Me.ColRecDate.Width = 52
         '
         'ColDueDate
         '
@@ -203,8 +208,8 @@ Partial Class FormPopUpWOProd
         Me.ColDueDate.FieldName = "prod_order_wo_top"
         Me.ColDueDate.Name = "ColDueDate"
         Me.ColDueDate.Visible = True
-        Me.ColDueDate.VisibleIndex = 9
-        Me.ColDueDate.Width = 109
+        Me.ColDueDate.VisibleIndex = 10
+        Me.ColDueDate.Width = 98
         '
         'ColPayment
         '
@@ -219,8 +224,8 @@ Partial Class FormPopUpWOProd
         Me.ColStatus.FieldName = "report_status"
         Me.ColStatus.Name = "ColStatus"
         Me.ColStatus.Visible = True
-        Me.ColStatus.VisibleIndex = 7
-        Me.ColStatus.Width = 43
+        Me.ColStatus.VisibleIndex = 9
+        Me.ColStatus.Width = 32
         '
         'ColIDStatus
         '
@@ -241,8 +246,8 @@ Partial Class FormPopUpWOProd
         Me.ColWoType.FieldName = "overhead"
         Me.ColWoType.Name = "ColWoType"
         Me.ColWoType.Visible = True
-        Me.ColWoType.VisibleIndex = 2
-        Me.ColWoType.Width = 53
+        Me.ColWoType.VisibleIndex = 4
+        Me.ColWoType.Width = 39
         '
         'GridColumnProgress
         '
@@ -254,9 +259,7 @@ Partial Class FormPopUpWOProd
         Me.GridColumnProgress.ColumnEdit = Me.PGBProg
         Me.GridColumnProgress.FieldName = "progress"
         Me.GridColumnProgress.Name = "GridColumnProgress"
-        Me.GridColumnProgress.Visible = True
-        Me.GridColumnProgress.VisibleIndex = 8
-        Me.GridColumnProgress.Width = 64
+        Me.GridColumnProgress.Width = 48
         '
         'PGBProg
         '
@@ -286,7 +289,7 @@ Partial Class FormPopUpWOProd
         Me.GridColumnPONumber.Name = "GridColumnPONumber"
         Me.GridColumnPONumber.Visible = True
         Me.GridColumnPONumber.VisibleIndex = 1
-        Me.GridColumnPONumber.Width = 67
+        Me.GridColumnPONumber.Width = 54
         '
         'GCListPurchase
         '
@@ -442,6 +445,24 @@ Partial Class FormPopUpWOProd
         Me.ColSize.VisibleIndex = 4
         Me.ColSize.Width = 56
         '
+        'GridColumn1
+        '
+        Me.GridColumn1.Caption = "Design Code"
+        Me.GridColumn1.FieldName = "design_code"
+        Me.GridColumn1.Name = "GridColumn1"
+        Me.GridColumn1.Visible = True
+        Me.GridColumn1.VisibleIndex = 2
+        Me.GridColumn1.Width = 79
+        '
+        'GridColumn2
+        '
+        Me.GridColumn2.Caption = "Design"
+        Me.GridColumn2.FieldName = "design_display_name"
+        Me.GridColumn2.Name = "GridColumn2"
+        Me.GridColumn2.Visible = True
+        Me.GridColumn2.VisibleIndex = 3
+        Me.GridColumn2.Width = 57
+        '
         'FormPopUpWOProd
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -506,4 +527,6 @@ Partial Class FormPopUpWOProd
     Friend WithEvents ColColor As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ColSize As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnPONumber As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn2 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

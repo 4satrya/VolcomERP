@@ -402,6 +402,12 @@
                                     INNER JOIN tb_m_user usr ON usr.id_user=dep.id_user_head
                                     WHERE usr.id_employee='" & id_employee & "'"
                             jum_check_dept_head = execute_query(query, 0, True, "", "", "", "")
+                            'check if sub dep head
+                            Dim jum_check_sub_dept_head As String = ""
+                            query = "SELECT COUNT(*) as jum FROM tb_m_departement_sub dep
+                                    INNER JOIN tb_m_user usr ON usr.id_user=dep.id_usr_head_sub_dept
+                                    WHERE usr.id_employee='" & id_employee & "'"
+                            jum_check_sub_dept_head = execute_query(query, 0, True, "", "", "", "")
                             'filter by level
                             Dim jum_check As String = ""
                             query = "SELECT IF(id_employee_level >= " & get_opt_emp_field("leave_spv_level").ToString & ",3,IF(id_employee_level < " & get_opt_emp_field("leave_spv_level").ToString & " AND id_employee_level >= " & get_opt_emp_field("leave_asst_mgr_level").ToString & ",2,1)) as jum_cek FROM tb_m_employee WHERE id_employee='" & id_employee & "'"
@@ -413,7 +419,7 @@
                                 submit_who_prepared_no_user("110", id_emp_leave, id_employee)
                                 query = "UPDATE tb_emp_leave SET report_mark_type='110' WHERE id_emp_leave='" & id_emp_leave & "'"
                                 execute_non_query(query, True, "", "", "", "")
-                            ElseIf jum_check = "2" Then
+                            ElseIf jum_check = "2" Or Not jum_check_sub_dept_head = "0" Then
                                 submit_who_prepared_no_user("109", id_emp_leave, id_employee)
                                 query = "UPDATE tb_emp_leave SET report_mark_type='109' WHERE id_emp_leave='" & id_emp_leave & "'"
                                 execute_non_query(query, True, "", "", "", "")
@@ -423,11 +429,18 @@
                                 execute_non_query(query, True, "", "", "", "")
                             End If
                         Else
+                            'check if dep head
                             Dim jum_check_dept_head As String = ""
                             query = "SELECT COUNT(*) as jum FROM tb_m_departement dep
                                     INNER JOIN tb_m_user usr ON usr.id_user=dep.id_user_head
                                     WHERE usr.id_employee='" & id_employee & "'"
                             jum_check_dept_head = execute_query(query, 0, True, "", "", "", "")
+                            'check if sub dep head
+                            Dim jum_check_sub_dept_head As String = ""
+                            query = "SELECT COUNT(*) as jum FROM tb_m_departement_sub dep
+                                    INNER JOIN tb_m_user usr ON usr.id_user=dep.id_usr_head_sub_dept
+                                    WHERE usr.id_employee='" & id_employee & "'"
+                            jum_check_sub_dept_head = execute_query(query, 0, True, "", "", "", "")
                             'filter by level
                             Dim jum_check As String = ""
                             query = "SELECT IF(id_employee_level >= " & get_opt_emp_field("leave_spv_level").ToString & ",3,IF(id_employee_level < " & get_opt_emp_field("leave_spv_level").ToString & " AND id_employee_level >= " & get_opt_emp_field("leave_asst_mgr_level").ToString & ",2,1)) as jum_cek FROM tb_m_employee WHERE id_employee='" & id_employee & "'"
@@ -439,7 +452,7 @@
                                 submit_who_prepared_no_user("99", id_emp_leave, id_employee)
                                 query = "UPDATE tb_emp_leave SET report_mark_type='99' WHERE id_emp_leave='" & id_emp_leave & "'"
                                 execute_non_query(query, True, "", "", "", "")
-                            ElseIf jum_check = "2" Then
+                            ElseIf jum_check = "2" Or Not jum_check_sub_dept_head = "0" Then
                                 submit_who_prepared_no_user("96", id_emp_leave, id_employee)
                                 query = "UPDATE tb_emp_leave SET report_mark_type='96' WHERE id_emp_leave='" & id_emp_leave & "'"
                                 execute_non_query(query, True, "", "", "", "")

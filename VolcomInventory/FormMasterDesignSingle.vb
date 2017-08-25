@@ -838,6 +838,8 @@
                 BGenerate.Enabled = False
                 BtnGetLastCount.Enabled = False
                 GCCode.Enabled = False
+                GCCodeNonMD.Enabled = False
+                TEDisplayNameNonMD.Enabled = False
                 DEWHDate.Enabled = False
                 BtnAddRetCode.Enabled = False
             End If

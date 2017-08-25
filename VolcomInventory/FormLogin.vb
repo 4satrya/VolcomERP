@@ -40,6 +40,7 @@ Public Class FormLogin
                     username_user = data.Rows(0)("username").ToString
                     id_employee_user = data.Rows(0)("id_employee").ToString
                     id_departement_user = data.Rows(0)("id_departement").ToString
+                    id_departement_sub_user = data.Rows(0)("id_departement_sub").ToString
                     is_change_pass_user = data.Rows(0)("is_change").ToString
                     Dim show_notif As String = data.Rows(0)("show_notif").ToString
                     checkMenu() 'check menu based on role

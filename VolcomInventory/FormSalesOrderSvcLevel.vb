@@ -236,6 +236,7 @@
     Private Sub BtnViewRet_Click(sender As Object, e As EventArgs) Handles BtnViewRet.Click
         Cursor = Cursors.WaitCursor
         viewReturnOrder()
+        noEdit(8)
         Cursor = Cursors.Default
     End Sub
 
@@ -508,6 +509,20 @@
                     GVNonStock.Columns("is_select").OptionsColumn.AllowEdit = False
                 Else
                     GVNonStock.Columns("is_select").OptionsColumn.AllowEdit = True
+                End If
+            End If
+        ElseIf type = "8" Then 'return order
+            If GVSalesReturnOrder.FocusedRowHandle >= 0 Then
+                Dim alloc_cek As String = GVSalesReturnOrder.GetFocusedRowCellValue("id_prepare_status").ToString
+                Dim ots As Integer = GVSalesReturnOrder.GetFocusedRowCellValue("outstanding")
+                If alloc_cek = "2" Then
+                    GVSalesReturnOrder.Columns("is_select").OptionsColumn.AllowEdit = False
+                Else
+                    If ots = 0 Then
+                        GVSalesReturnOrder.Columns("is_select").OptionsColumn.AllowEdit = True
+                    Else
+                        GVSalesReturnOrder.Columns("is_select").OptionsColumn.AllowEdit = False
+                    End If
                 End If
             End If
         End If
@@ -796,5 +811,43 @@
             FormWHDelEmptyDet.ShowDialog()
             Cursor = Cursors.Default
         End If
+    End Sub
+
+    Private Sub GVSalesReturnOrder_ColumnFilterChanged(sender As Object, e As EventArgs) Handles GVSalesReturnOrder.ColumnFilterChanged
+        noEdit(8)
+    End Sub
+
+    Private Sub GVSalesReturnOrder_FocusedRowChanged(sender As Object, e As DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs) Handles GVSalesReturnOrder.FocusedRowChanged
+        noEdit(8)
+    End Sub
+
+    Private Sub CheckEdit1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckEdit1.CheckedChanged
+        If GVSalesReturnOrder.RowCount > 0 Then
+            Dim cek As String = CheckEdit1.EditValue.ToString
+            For i As Integer = ((GVSalesReturnOrder.RowCount - 1) - GetGroupRowCount(GVSalesReturnOrder)) To 0 Step -1
+                Dim id_prepare_status As String = GVSalesReturnOrder.GetRowCellValue(i, "id_prepare_status").ToString
+                Dim ots As Integer = GVSalesReturnOrder.GetRowCellValue(i, "outstanding")
+                If cek And id_prepare_status = "1" And ots = 0 Then
+                    GVSalesReturnOrder.SetRowCellValue(i, "is_select", "Yes")
+                Else
+                    GVSalesReturnOrder.SetRowCellValue(i, "is_select", "No")
+                End If
+            Next
+        End If
+    End Sub
+
+    Private Sub SimpleButton6_Click(sender As Object, e As EventArgs) Handles SimpleButton6.Click
+        Cursor = Cursors.WaitCursor
+        GVSalesReturnOrder.ActiveFilterString = ""
+        GVSalesReturnOrder.ActiveFilterString = "[is_select]='Yes' "
+        If GVSalesReturnOrder.RowCount = 0 Then
+            stopCustom("Please select order first.")
+            GVSalesReturnOrder.ActiveFilterString = ""
+        Else
+            FormSalesOrderPacking.id_pop_up = "5"
+            FormSalesOrderPacking.ShowDialog()
+        End If
+        GVSalesReturnOrder.ActiveFilterString = ""
+        Cursor = Cursors.Default
     End Sub
 End Class

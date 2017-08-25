@@ -181,32 +181,28 @@
             GVItemList.ActiveFilterString = ""
             Dim dt_filter As DataRow() = dt.Select("[code]='" + code_par + "' ")
             If dt_filter.Length > 0 Then
-                If dt_filter(0)("id_price").ToString <> "0" Then
-                    Dim newRow As DataRow = (TryCast(GCItemList.DataSource, DataTable)).NewRow()
-                    newRow("id_sample_pl_det") = "0"
-                    newRow("id_sample") = dt_filter(0)("id_sample").ToString
-                    newRow("id_sample_price") = dt_filter(0)("id_cost").ToString
-                    newRow("sample_price") = dt_filter(0)("cost")
-                    newRow("id_sample_ret_price") = dt_filter(0)("id_price").ToString
-                    newRow("sample_ret_price") = dt_filter(0)("price")
-                    newRow("code") = dt_filter(0)("code").ToString
-                    newRow("code_us") = dt_filter(0)("code_us").ToString
-                    newRow("name") = dt_filter(0)("name").ToString
-                    newRow("size") = dt_filter(0)("size").ToString
-                    newRow("color") = dt_filter(0)("color").ToString
-                    newRow("class") = dt_filter(0)("class").ToString
-                    newRow("id_season") = dt_filter(0)("id_season").ToString
-                    newRow("season") = dt_filter(0)("season").ToString
-                    newRow("id_season_orign") = dt_filter(0)("id_season_orign").ToString
-                    newRow("season_orign") = dt_filter(0)("season_orign").ToString
-                    newRow("sample_pl_det_qty") = 1
-                    'newRow("amount") = 0
-                    TryCast(GCItemList.DataSource, DataTable).Rows.Add(newRow)
-                    GCItemList.RefreshDataSource()
-                    GVItemList.RefreshData()
-                Else
-                    stopCustom("Retail price is not available !")
-                End If
+                Dim newRow As DataRow = (TryCast(GCItemList.DataSource, DataTable)).NewRow()
+                newRow("id_sample_pl_det") = "0"
+                newRow("id_sample") = dt_filter(0)("id_sample").ToString
+                newRow("id_sample_price") = dt_filter(0)("id_cost").ToString
+                newRow("sample_price") = dt_filter(0)("cost")
+                newRow("id_sample_ret_price") = dt_filter(0)("id_price").ToString
+                newRow("sample_ret_price") = dt_filter(0)("price")
+                newRow("code") = dt_filter(0)("code").ToString
+                newRow("code_us") = dt_filter(0)("code_us").ToString
+                newRow("name") = dt_filter(0)("name").ToString
+                newRow("size") = dt_filter(0)("size").ToString
+                newRow("color") = dt_filter(0)("color").ToString
+                newRow("class") = dt_filter(0)("class").ToString
+                newRow("id_season") = dt_filter(0)("id_season").ToString
+                newRow("season") = dt_filter(0)("season").ToString
+                newRow("id_season_orign") = dt_filter(0)("id_season_orign").ToString
+                newRow("season_orign") = dt_filter(0)("season_orign").ToString
+                newRow("sample_pl_det_qty") = 1
+                'newRow("amount") = 0
+                TryCast(GCItemList.DataSource, DataTable).Rows.Add(newRow)
+                GCItemList.RefreshDataSource()
+                GVItemList.RefreshData()
             Else
                 stopCustom("Code not found!")
             End If

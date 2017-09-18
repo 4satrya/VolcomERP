@@ -15,17 +15,23 @@ Public Class FormSalesOrderDet
     Public bof_column As String = get_setup_field("bof_column")
     Public bof_xls_so As String = get_setup_field("bof_xls_so")
     Public dt As DataTable
+    Public id_type As String
 
     Private Sub FormSalesOrderDet_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        id_type = FormSalesOrder.id_type
         id_comp_cat_wh = get_setup_field("id_comp_cat_wh")
         viewReportStatus()
         viewSoType()
         viewSoStatus()
+        viewPeriodUniform()
+        viewUniType()
         actionLoad()
 
         'packing status invisible
         LabelControl4.Visible = False
         TxtPackingStatus.Visible = False
+
+
         WindowState = FormWindowState.Maximized
     End Sub
 
@@ -56,7 +62,7 @@ Public Class FormSalesOrderDet
             'query view based on edit id's
             Dim query As String = "SELECT a.id_so_status, a.id_sales_order, a.id_store_contact_to, (d.id_comp) AS id_store,(d.comp_name) AS store_name_to, (d.comp_number) AS store_number_to, (d.address_primary) AS store_address_to, a.id_warehouse_contact_to, (wh.id_comp) AS id_comp_par,(wh.comp_name) AS warehouse_name_to, (wh.comp_number) AS warehouse_number_to, a.id_report_status, f.report_status, "
             query += "a.sales_order_note, a.sales_order_date, a.sales_order_note, a.sales_order_number, "
-            query += "DATE_FORMAT(a.sales_order_date,'%Y-%m-%d') AS sales_order_datex, a.id_so_type, IFNULL(an.fg_so_reff_number,'-') AS `fg_so_reff_number`, ps.id_prepare_status, ps.prepare_status "
+            query += "DATE_FORMAT(a.sales_order_date,'%Y-%m-%d') AS sales_order_datex, a.id_so_type, IFNULL(an.fg_so_reff_number,'-') AS `fg_so_reff_number`, ps.id_prepare_status, ps.prepare_status, a.id_emp_uni_period, a.id_uni_type "
             query += "FROM tb_sales_order a "
             query += "INNER JOIN tb_m_comp_contact c ON c.id_comp_contact = a.id_store_contact_to "
             query += "INNER JOIN tb_m_comp d ON c.id_comp = d.id_comp "
@@ -90,13 +96,33 @@ Public Class FormSalesOrderDet
             LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", data.Rows(0)("id_report_status").ToString)
             LETypeSO.ItemIndex = LETypeSO.Properties.GetDataSourceRowIndex("id_so_type", data.Rows(0)("id_so_type").ToString)
             LEStatusSO.ItemIndex = LEStatusSO.Properties.GetDataSourceRowIndex("id_so_status", data.Rows(0)("id_so_status").ToString)
+            LEPeriodx.ItemIndex = LEPeriodx.Properties.GetDataSourceRowIndex("id_emp_uni_period", data.Rows(0)("id_emp_uni_period").ToString)
+            LEUniType.ItemIndex = LEUniType.Properties.GetDataSourceRowIndex("id_uni_type", data.Rows(0)("id_uni_type").ToString)
             TxtPackingStatus.Text = data.Rows(0)("prepare_status").ToString
+
+            'set type
+            If Not IsDBNull(data.Rows(0)("id_emp_uni_period")) Then
+                id_type = "1"
+            Else
+                id_type = "-1"
+            End If
+
             'detail2
             viewDetail(id_sales_order)
             noEdit()
             getDataReference()
             check_but()
             allow_status()
+        End If
+
+        'general view
+        If id_type = "1" Then 'prepare uniform
+            GroupUni.Visible = True
+            LEPeriodx.Focus()
+            LEStatusSO.ItemIndex = LEStatusSO.Properties.GetDataSourceRowIndex("id_so_status", "5")
+            LEStatusSO.Enabled = False
+        Else
+            GroupUni.Visible = False
         End If
     End Sub
 
@@ -117,6 +143,21 @@ Public Class FormSalesOrderDet
         Dim query As String = "SELECT * FROM tb_lookup_report_status a ORDER BY a.id_report_status "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         viewLookupQuery(LEReportStatus, query, 0, "report_status", "id_report_status")
+    End Sub
+
+    Sub viewPeriodUniform()
+        Dim query As String = "SELECT * FROM tb_emp_uni_period p ORDER BY p.id_emp_uni_period DESC "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        LEPeriodx.Properties.DataSource = Nothing
+        LEPeriodx.Properties.DataSource = data
+        LEPeriodx.Properties.DisplayMember = "period_name"
+        LEPeriodx.Properties.ValueMember = "id_emp_uni_period"
+        LEPeriodx.ItemIndex = 0
+    End Sub
+
+    Sub viewUniType()
+        Dim query As String = "SELECT * FROM tb_lookup_uni_type t ORDER BY t.id_uni_type ASC "
+        viewLookupQuery(LEUniType, query, 0, "uni_type", "id_uni_type")
     End Sub
 
     Sub viewDetail(ByVal id_sales_order_par As String)
@@ -195,11 +236,17 @@ Public Class FormSalesOrderDet
         ElseIf Not cond_cat_str Then
             stopCustom("Transfer order can't process, please select another category !")
         Else
-            Dim sales_order_note As String = MENote.Text
+            Dim sales_order_note As String = addSlashes(MENote.Text)
             Dim id_so_type As String = LETypeSO.EditValue.ToString
             Dim id_so_status As String = LEStatusSO.EditValue.ToString
             Dim id_report_status As String = LEReportStatus.EditValue
             Dim sales_order_number As String = ""
+            Dim id_emp_uni_period As String = "NULL"
+            Dim id_uni_type As String = "NULL"
+            If id_type = "1" Then 'prepare uniform
+                id_emp_uni_period = LEPeriodx.EditValue.ToString
+                id_uni_type = LEUniType.EditValue.ToString
+            End If
 
             If action = "ins" Then
                 Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure to continue this process?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
@@ -207,8 +254,8 @@ Public Class FormSalesOrderDet
                     Cursor = Cursors.WaitCursor
                     sales_order_number = header_number_sales("2")
                     'Main tbale
-                    Dim query As String = "INSERT INTO tb_sales_order(id_store_contact_to, id_warehouse_contact_to, sales_order_number, sales_order_date, sales_order_note, id_so_type, id_report_status, id_so_status, id_user_created) "
-                    query += "VALUES('" + id_store_contact_to + "', '" + id_comp_contact_par + "', '" + sales_order_number + "', NOW(), '" + sales_order_note + "', '" + id_so_type + "', '" + id_report_status + "', '" + id_so_status + "', '" + id_user + "'); SELECT LAST_INSERT_ID(); "
+                    Dim query As String = "INSERT INTO tb_sales_order(id_store_contact_to, id_warehouse_contact_to, sales_order_number, sales_order_date, sales_order_note, id_so_type, id_report_status, id_so_status, id_user_created, id_emp_uni_period, id_uni_type) "
+                    query += "VALUES('" + id_store_contact_to + "', '" + id_comp_contact_par + "', '" + sales_order_number + "', NOW(), '" + sales_order_note + "', '" + id_so_type + "', '" + id_report_status + "', '" + id_so_status + "', '" + id_user + "'," + id_emp_uni_period + ", " + id_uni_type + "); SELECT LAST_INSERT_ID(); "
                     id_sales_order = execute_query(query, 0, True, "", "", "", "")
 
                     increase_inc_sales("2")
@@ -228,7 +275,7 @@ Public Class FormSalesOrderDet
                             Dim id_design_price As String = GVItemList.GetRowCellValue(i, "id_design_price").ToString
                             Dim design_price As String = decimalSQL(GVItemList.GetRowCellValue(i, "design_price").ToString)
                             Dim sales_order_det_qty As String = decimalSQL(GVItemList.GetRowCellValue(i, "sales_order_det_qty").ToString)
-                            Dim sales_order_det_note As String = GVItemList.GetRowCellValue(i, "sales_order_det_note").ToString
+                            Dim sales_order_det_note As String = addSlashes(GVItemList.GetRowCellValue(i, "sales_order_det_note").ToString)
 
                             If jum_ins_j > 0 Then
                                 query_detail += ", "
@@ -263,7 +310,9 @@ Public Class FormSalesOrderDet
                 If confirm = Windows.Forms.DialogResult.Yes Then
                     Cursor = Cursors.WaitCursor
                     sales_order_number = TxtSalesOrderNumber.Text
-                    Dim query As String = "UPDATE tb_sales_order SET id_store_contact_to='" + id_store_contact_to + "', id_warehouse_contact_to='" + id_comp_contact_par + "', sales_order_number = '" + sales_order_number + "', sales_order_note='" + sales_order_note + "', id_so_type='" + id_so_type + "', id_so_status = '" + id_so_status + "' WHERE id_sales_order='" + id_sales_order + "' "
+                    Dim query As String = "UPDATE tb_sales_order SET id_store_contact_to='" + id_store_contact_to + "', id_warehouse_contact_to='" + id_comp_contact_par + "', sales_order_number = '" + sales_order_number + "', sales_order_note='" + sales_order_note + "', id_so_type='" + id_so_type + "', id_so_status = '" + id_so_status + "', 
+                    id_emp_uni_period=" + id_emp_uni_period + ", id_uni_type=" + id_uni_type + "
+                    WHERE id_sales_order='" + id_sales_order + "' "
                     execute_non_query(query, True, "", "", "", "")
 
                     'edit detail table
@@ -362,6 +411,8 @@ Public Class FormSalesOrderDet
             LEStatusSO.Enabled = True
             TxtCodeCompTo.Enabled = False
             TxtWHCodeTo.Enabled = False
+            LEPeriodx.Enabled = True
+            LEUniType.Enabled = True
         Else
             BtnBrowseContactTo.Enabled = False
             BtnBrowseWH.Enabled = False
@@ -373,6 +424,8 @@ Public Class FormSalesOrderDet
             LEStatusSO.Enabled = False
             TxtCodeCompTo.Enabled = False
             TxtWHCodeTo.Enabled = False
+            LEPeriodx.Enabled = False
+            LEUniType.Enabled = False
         End If
 
         'attachment
@@ -593,7 +646,12 @@ Public Class FormSalesOrderDet
                 id_comp_contact_par = data.Rows(0)("id_comp_contact").ToString
                 TxtWHNameTo.Text = data.Rows(0)("comp_name").ToString
                 getDataReference()
-                LEStatusSO.Focus()
+                If LEStatusSO.Enabled = False Then
+                    addMyRow()
+                    GCItemList.Focus()
+                Else
+                    LEStatusSO.Focus()
+                End If
                 Cursor = Cursors.Default
             End If
         End If
@@ -709,7 +767,7 @@ Public Class FormSalesOrderDet
             If id_sales_order_det = "0" Then
                 If GVItemList.FocusedColumn.ToString = "Code" Then
                     GVItemList.CloseEditor()
-                    Dim code_pas As String = GVItemList.GetRowCellValue(rh, "code").ToString
+                    Dim code_pas As String = addSlashes(GVItemList.GetRowCellValue(rh, "code").ToString)
                     Dim data_filter As DataRow() = dt.Select("[product_full_code]='" + code_pas + "' ")
                     If data_filter.Length = 0 Then
                         stopCustom("Product not found !")
@@ -737,9 +795,15 @@ Public Class FormSalesOrderDet
                             GVItemList.FocusedColumn = GridColumnQty
                             CType(GCItemList.DataSource, DataTable).AcceptChanges()
                         Else
-                            stopCustom("You already entry this product.")
-                            setDefautMyRow(rh)
-                            CType(GCItemList.DataSource, DataTable).AcceptChanges()
+                            GVItemList.SetFocusedRowCellValue("code", "")
+                            GVItemList.ActiveFilterString = "[code]='" + code_pas + "'"
+                            FormSalesOrderDetEdit.ShowDialog()
+                            GVItemList.ActiveFilterString = ""
+                            GVItemList.FocusedRowHandle = GVItemList.RowCount - 1
+                            GVItemList.FocusedColumn = GridColumnCode
+                            'stopCustom("You already entry this product.")
+                            'setDefautMyRow(rh)
+                            'CType(GCItemList.DataSource, DataTable).AcceptChanges()
                         End If
                     End If
                 ElseIf GVItemList.FocusedColumn.ToString = "Qty" Then
@@ -755,7 +819,9 @@ Public Class FormSalesOrderDet
                     End If
                 ElseIf GVItemList.FocusedColumn.ToString = "Remark" Then 'for remark
                     GVItemList.CloseEditor()
-                    addMyRow()
+                    If GVItemList.GetRowCellValue(GVItemList.RowCount - 1, "code").ToString <> "" Then
+                        addMyRow()
+                    End If
                     GVItemList.FocusedRowHandle = GVItemList.RowCount - 1
                     GVItemList.FocusedColumn = GridColumnCode
                 End If
@@ -867,18 +933,16 @@ Public Class FormSalesOrderDet
         If bof_column = "1" Then
             Cursor = Cursors.WaitCursor
 
-            'fill remark
-            For r As Integer = 0 To ((GVItemList.RowCount - 1) - GetGroupRowCount(GVItemList))
-                GVItemList.SetRowCellValue(r, "sales_order_det_note", TxtSalesOrderNumber.Text)
-            Next
-
             'hide column
             For c As Integer = 0 To GVItemList.Columns.Count - 1
                 GVItemList.Columns(c).Visible = False
             Next
             GridColumnCode.VisibleIndex = 0
             GridColumnQty.VisibleIndex = 1
-            GridColumnRemark.VisibleIndex = 2
+            GridColumnNumber.VisibleIndex = 2
+            GridColumnFrom.VisibleIndex = 3
+            GridColumnTo.VisibleIndex = 4
+            GridColumnRemark.VisibleIndex = 5
             GVItemList.OptionsPrint.PrintFooter = False
             GVItemList.OptionsPrint.PrintHeader = False
 
@@ -902,11 +966,6 @@ Public Class FormSalesOrderDet
                 stopCustom("Please close your excel file first then try again later")
             End Try
 
-            'clear remark
-            For r As Integer = 0 To ((GVItemList.RowCount - 1) - GetGroupRowCount(GVItemList))
-                GVItemList.SetRowCellValue(r, "sales_order_det_note", "")
-            Next
-
             'show column
             GridColumnNo.VisibleIndex = 0
             GridColumnCode.VisibleIndex = 1
@@ -916,6 +975,11 @@ Public Class FormSalesOrderDet
             GridColumnPrice.VisibleIndex = 5
             GridColumnAmount.VisibleIndex = 6
             GridColumnRemark.VisibleIndex = 7
+            GridColumnNumber.Visible = False
+            GridColumnFrom.Visible = False
+            GridColumnTo.Visible = False
+            GVItemList.OptionsPrint.PrintFooter = True
+            GVItemList.OptionsPrint.PrintHeader = True
             Cursor = Cursors.Default
         End If
     End Sub
@@ -950,12 +1014,18 @@ Public Class FormSalesOrderDet
             colIndex = 0
             For j As Integer = 0 To dtTemp.VisibleColumns.Count - 1
                 colIndex = colIndex + 1
-                If j = 0 Then
+                If j = 0 Then 'code
                     wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, "code").ToString
-                ElseIf j = 1
+                ElseIf j = 1 'qty
                     wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, "sales_order_det_qty")
-                Else
-                    wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, "sales_order_det_note")
+                ElseIf j = 2 'number
+                    wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellDisplayText(i, "number").ToString
+                ElseIf j = 3 'from
+                    wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellDisplayText(i, "from").ToString
+                ElseIf j = 4 'to
+                    wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellDisplayText(i, "to").ToString
+                Else 'remark det
+                    wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, "sales_order_det_note").ToString
                 End If
             Next
         Next
@@ -986,4 +1056,31 @@ Public Class FormSalesOrderDet
         End Try
     End Sub
 
+    Private Sub GVItemList_CustomUnboundColumnData(sender As Object, e As DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs) Handles GVItemList.CustomUnboundColumnData
+        Dim view As DevExpress.XtraGrid.Views.Grid.GridView = TryCast(sender, DevExpress.XtraGrid.Views.Grid.GridView)
+        If e.Column.FieldName = "from" AndAlso e.IsGetData Then
+            e.Value = TxtWHCodeTo.Text.ToString
+        ElseIf e.Column.FieldName = "to" AndAlso e.IsGetData Then
+            e.Value = TxtCodeCompTo.Text.ToString
+        ElseIf e.Column.FieldName = "number" AndAlso e.IsGetData Then
+            e.Value = TxtSalesOrderNumber.Text.ToString
+        End If
+    End Sub
+
+    Private Sub LEStatusSO_EditValueChanged(sender As Object, e As EventArgs) Handles LEStatusSO.EditValueChanged
+
+    End Sub
+
+
+    Private Sub LEPeriodx_KeyDown(sender As Object, e As KeyEventArgs) Handles LEPeriodx.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            LEUniType.Focus()
+        End If
+    End Sub
+
+    Private Sub LEUniType_KeyDown(sender As Object, e As KeyEventArgs) Handles LEUniType.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            LETypeSO.Focus()
+        End If
+    End Sub
 End Class

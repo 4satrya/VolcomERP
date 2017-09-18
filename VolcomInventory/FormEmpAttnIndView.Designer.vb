@@ -43,6 +43,8 @@ Partial Class FormEmpAttnIndView
         Me.GridColumn17 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn18 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn19 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn25 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn26 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
         Me.BViewSchedule = New DevExpress.XtraEditors.SimpleButton()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -70,8 +72,7 @@ Partial Class FormEmpAttnIndView
         Me.GridColumn21 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn23 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn20 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn25 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn26 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnIDScheduleType = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GCSchedule, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVSchedule, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -134,7 +135,7 @@ Partial Class FormEmpAttnIndView
         '
         'GVSchedule
         '
-        Me.GVSchedule.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn4, Me.GridColumn3, Me.GridColumn5, Me.GridColumn6, Me.GridColumn7, Me.GridColumn8, Me.GridColumn9, Me.GridColumn10, Me.GridColumn11, Me.GridColumn12, Me.GridColumn13, Me.GridColumn14, Me.GridColumn15, Me.GridColumn16, Me.GridColumn17, Me.GridColumn18, Me.GridColumn19, Me.GridColumn25, Me.GridColumn26})
+        Me.GVSchedule.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn4, Me.GridColumn3, Me.GridColumn5, Me.GridColumn6, Me.GridColumn7, Me.GridColumnIDScheduleType, Me.GridColumn8, Me.GridColumn9, Me.GridColumn10, Me.GridColumn11, Me.GridColumn12, Me.GridColumn13, Me.GridColumn14, Me.GridColumn15, Me.GridColumn16, Me.GridColumn17, Me.GridColumn18, Me.GridColumn19, Me.GridColumn25, Me.GridColumn26})
         Me.GVSchedule.GridControl = Me.GCSchedule
         Me.GVSchedule.Name = "GVSchedule"
         Me.GVSchedule.OptionsView.ShowFooter = True
@@ -324,6 +325,24 @@ Partial Class FormEmpAttnIndView
         Me.GridColumn19.Visible = True
         Me.GridColumn19.VisibleIndex = 7
         Me.GridColumn19.Width = 66
+        '
+        'GridColumn25
+        '
+        Me.GridColumn25.Caption = "Type Leave"
+        Me.GridColumn25.FieldName = "leave_type"
+        Me.GridColumn25.Name = "GridColumn25"
+        Me.GridColumn25.Visible = True
+        Me.GridColumn25.VisibleIndex = 14
+        Me.GridColumn25.Width = 69
+        '
+        'GridColumn26
+        '
+        Me.GridColumn26.Caption = "Leave Purpose"
+        Me.GridColumn26.FieldName = "info_leave"
+        Me.GridColumn26.Name = "GridColumn26"
+        Me.GridColumn26.Visible = True
+        Me.GridColumn26.VisibleIndex = 15
+        Me.GridColumn26.Width = 69
         '
         'PanelControl3
         '
@@ -585,23 +604,11 @@ Partial Class FormEmpAttnIndView
         Me.GridColumn20.VisibleIndex = 2
         Me.GridColumn20.Width = 112
         '
-        'GridColumn25
+        'GridColumnIDScheduleType
         '
-        Me.GridColumn25.Caption = "Type Leave"
-        Me.GridColumn25.FieldName = "leave_type"
-        Me.GridColumn25.Name = "GridColumn25"
-        Me.GridColumn25.Visible = True
-        Me.GridColumn25.VisibleIndex = 14
-        Me.GridColumn25.Width = 69
-        '
-        'GridColumn26
-        '
-        Me.GridColumn26.Caption = "Leave Purpose"
-        Me.GridColumn26.FieldName = "info_leave"
-        Me.GridColumn26.Name = "GridColumn26"
-        Me.GridColumn26.Visible = True
-        Me.GridColumn26.VisibleIndex = 15
-        Me.GridColumn26.Width = 69
+        Me.GridColumnIDScheduleType.Caption = "ID Schedule Type"
+        Me.GridColumnIDScheduleType.FieldName = "id_schedule_type"
+        Me.GridColumnIDScheduleType.Name = "GridColumnIDScheduleType"
         '
         'FormEmpAttnIndView
         '
@@ -698,4 +705,5 @@ Partial Class FormEmpAttnIndView
     Friend WithEvents GridColumn20 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn25 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn26 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnIDScheduleType As DevExpress.XtraGrid.Columns.GridColumn
 End Class

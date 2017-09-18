@@ -154,4 +154,13 @@
         FormReportMark.is_view = "1"
         FormReportMark.ShowDialog()
     End Sub
+
+    Private Sub BAttach_Click(sender As Object, e As EventArgs) Handles BAttach.Click
+        Cursor = Cursors.WaitCursor
+        FormDocumentUpload.id_report = id_sample_purc
+        FormDocumentUpload.report_mark_type = "1"
+        FormDocumentUpload.is_view = "1"
+        FormDocumentUpload.ShowDialog()
+        Cursor = Cursors.Default
+    End Sub
 End Class

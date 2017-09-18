@@ -58,6 +58,11 @@
                 METotSay.Text = ConvertCurrencyToEnglish(GVBOM.Columns("total").SummaryItem.SummaryValue.ToString, get_setup_field("id_currency_default"))
                 TEUnitCost.EditValue = GVBOM.Columns("total").SummaryItem.SummaryValue
             End If
+            'search note
+            If GVBOM.RowCount > 0 Then
+                MEBOMNote.Text = GVBOM.GetRowCellValue(0, "bom_note").ToString
+            End If
+            '
         Catch ex As Exception
             errorConnection()
         End Try

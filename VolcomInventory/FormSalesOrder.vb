@@ -4,6 +4,7 @@
     Dim bdel_active As String = "1"
     Dim id_season_par As String = "-1"
     Dim super_user As String = get_setup_field("id_role_super_admin")
+    Public id_type As String = "-1"
 
     Private Sub FormSalesOrder_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'date now
@@ -13,6 +14,12 @@
 
         'viewSalesOrder()
         'viewSalesOrderGen()
+        'VIEW OPTION
+        If id_type = "1" Then 'prepare uniform
+            XTPPrepareGenerate.PageVisible = False
+            GridColumnPeriodUni.VisibleIndex = 2
+            GridColumnPrepareType.VisibleIndex = 3
+        End If
     End Sub
 
     Sub viewSalesOrderGen()
@@ -63,6 +70,9 @@
         End Try
         cond += "AND (a.sales_order_date>='" + date_from_selected + "' AND a.sales_order_date<='" + date_until_selected + "') "
 
+        If id_type = "1" Then 'prepare uniform
+            cond += "AND !ISNULL(a.id_emp_uni_period) "
+        End If
         Dim query As String = query_c.queryMain(cond, "2")
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCSalesOrder.DataSource = data

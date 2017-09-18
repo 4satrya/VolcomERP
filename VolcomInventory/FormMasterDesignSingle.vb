@@ -15,7 +15,7 @@
     Public bool_qty_line As Boolean = False
     Public id_pop_up As String = "-1"
     Public ss_dept As String = "-1"
-    Dim is_approved As String = "-1"
+    Dim is_approved As String = "2"
 
     'View UOM
     Private Sub viewUOM(ByVal lookup As DevExpress.XtraEditors.LookUpEdit)
@@ -207,8 +207,14 @@
             GCCode.DataSource = data_insert_parameter
             DNCode.DataSource = data_insert_parameter
             Try
-                add_combo_grid_val(GVCode, 0)
-                view_value_code(GVCode, 1)
+                Dim query As String = String.Format("SELECT id_code,code_name as Code,description as Description FROM tb_m_code")
+                Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+                RILEParCode.DataSource = data
+                'add_combo_grid_val(GVCode, 0)
+                Dim queryx As String = String.Format("SELECT id_code,id_code_detail,CODE as Code,code_detail_name as Name,display_name as 'Printed Name',CONCAT(CODE,' - ',code_detail_name) AS value FROM tb_m_code_detail")
+                Dim datax As DataTable = execute_query(queryx, -1, True, "", "", "", "")
+                RILEValCode.DataSource = datax
+                'view_value_code(GVCode, 1)
             Catch ex As Exception
             End Try
         ElseIf id_type = "2" Then
@@ -220,8 +226,14 @@
             GCCodeDsg.DataSource = data_insert_parameter_dsg
             DNCodeDesign.DataSource = data_insert_parameter_dsg
             Try
-                add_combo_grid_val(GVCodeDsg, 0)
-                view_value_code(GVCodeDsg, 1)
+                Dim query As String = String.Format("SELECT id_code,code_name as Code,description as Description FROM tb_m_code")
+                Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+                RILEParDesg.DataSource = data
+                'add_combo_grid_val(GVCodeDsg, 0)
+                Dim queryx As String = String.Format("SELECT id_code,id_code_detail,CODE as Code,code_detail_name as Name,display_name as 'Printed Name',CONCAT(CODE,' - ',code_detail_name) AS value FROM tb_m_code_detail")
+                Dim datax As DataTable = execute_query(queryx, -1, True, "", "", "", "")
+                RILEValDesg.DataSource = datax
+                'view_value_code(GVCodeDsg, 1)
             Catch ex As Exception
             End Try
         Else
@@ -233,8 +245,14 @@
             GCCodeNonMD.DataSource = data_insert_parameter_non_md
             DNCodeNonMD.DataSource = data_insert_parameter_non_md
             Try
-                add_combo_grid_val(GVCodeNonMD, 0)
-                view_value_code(GVCodeNonMD, 1)
+                Dim query As String = String.Format("SELECT id_code,code_name as Code,description as Description FROM tb_m_code")
+                Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+                RILEParNon.DataSource = data
+                'add_combo_grid_val(GVCodeNonMD, 0)
+                Dim queryx As String = String.Format("SELECT id_code,id_code_detail,CODE as Code,code_detail_name as Name,display_name as 'Printed Name',CONCAT(CODE,' - ',code_detail_name) AS value FROM tb_m_code_detail")
+                Dim datax As DataTable = execute_query(queryx, -1, True, "", "", "", "")
+                RILEValNon.DataSource = datax
+                'view_value_code(GVCodeNonMD, 1)
             Catch ex As Exception
             End Try
         End If
@@ -336,7 +354,8 @@
         load_isi_param("1")
         load_isi_param("2")
         load_isi_param("3")
-
+        '
+        load_comment()
 
         'permission condition
         If id_pop_up = "-1" Or id_pop_up = "2" Or id_pop_up = "5" Then
@@ -528,13 +547,14 @@
                 errorConnection()
             End Try
         Else
-            'ins jika dilakuyukan di LINE LIST
+            'ins jika dilakukan di LINE LIST
             SLEDesign.EditValue = Nothing
             If formName = "FormFGLineList" Or formName = "FormFGDesignList" Then
                 LESeason.EditValue = id_season_par
                 LESampleOrign.EditValue = Nothing
             End If
             inputPermission() 'access limit
+            XTPComment.PageVisible = False
         End If
     End Sub
 
@@ -568,7 +588,6 @@
             XTPLineList.PageVisible = True
             XTPSize.PageVisible = True
             SLEDel.Enabled = True
-            LERetCode.Enabled = True
             DEEOS.Enabled = True
             BeditCode.Enabled = True
             BRefreshCode.Enabled = True
@@ -589,6 +608,20 @@
                 XTPLineList.PageVisible = True
                 BtnGetLastCount.Visible = False
             End If
+
+            'cek return code permission
+            Dim query_cek_print As String = "SELECT IFNULL(SUM(last_print_unique),0) AS `total_print` FROM tb_m_product WHERE id_design='" + id_design + "' "
+            Dim dt_cek_print As DataTable = execute_query(query_cek_print, -1, True, "", "", "", "")
+            Dim total_print As Integer = dt_cek_print.Rows(0)("total_print")
+            If total_print > 0 Then
+                LERetCode.Enabled = False
+            Else
+                LERetCode.Enabled = True
+            End If
+
+            'comment
+            PanelControlComment.Visible = False
+
         ElseIf id_pop_up = "2" Then 'sample dept
             XTPLineList.PageVisible = False
             XTPPrice.PageVisible = False
@@ -619,6 +652,10 @@
             BtnAddSeaason.Enabled = False
             DNCode.Enabled = False
             PictureEdit1.Properties.ReadOnly = True
+
+            'comment
+            PanelControlComment.Visible = False
+
         ElseIf id_pop_up = "3" Then 'non merch
             TxtFabrication.Enabled = True
             LESampleOrign.Enabled = True
@@ -626,6 +663,10 @@
             DERetDate.Enabled = False
             DEEOS.Enabled = False
             LEPlanStatus.Enabled = False
+
+            'comment
+            PanelControlComment.Visible = False
+
         ElseIf id_pop_up = "4" Then 'preview design
             XTPLineList.PageVisible = False
             XTPPrice.PageVisible = False
@@ -660,23 +701,42 @@
             XTPSize.Visible = False
             XTPLineList.Visible = False
             XTPPrice.Visible = False
+
+            'comment
+            PanelControlComment.Visible = False
+
         ElseIf id_pop_up = "5" Then 'design dept
-            TEName.Enabled = True
-            BeditCodeDsg.Enabled = True
-            BRefreshCodeDsg.Enabled = True
-            BGenerateDesc.Enabled = True
-            LESampleOrign.Enabled = True
-            TxtFabrication.Enabled = True
-            SLEDesign.Enabled = True
-            GCCodeDsg.Enabled = True
-            MEDetail.Enabled = True
-            SLEDesign.Enabled = True
-            TxtCodeImport.Enabled = True
-            LESeason.Enabled = True
-            SLESeasonOrigin.Enabled = True
-            BtnAddSeasonOrign.Enabled = True
-
-
+            If is_approved = "2" Then
+                BtnReviseStyle.Visible = False
+                TEName.Enabled = True
+                BeditCodeDsg.Enabled = True
+                BRefreshCodeDsg.Enabled = True
+                BGenerateDesc.Enabled = True
+                LESampleOrign.Enabled = True
+                TxtFabrication.Enabled = True
+                SLEDesign.Enabled = True
+                GCCodeDsg.Enabled = True
+                MEDetail.Enabled = True
+                TxtCodeImport.Enabled = True
+                LESeason.Enabled = True
+                SLESeasonOrigin.Enabled = True
+                BtnAddSeasonOrign.Enabled = True
+            Else
+                BtnReviseStyle.Visible = True
+                TEName.Enabled = False
+                BeditCodeDsg.Enabled = False
+                BRefreshCodeDsg.Enabled = False
+                BGenerateDesc.Enabled = False
+                LESampleOrign.Enabled = False
+                TxtFabrication.Enabled = False
+                SLEDesign.Enabled = False
+                GCCodeDsg.Enabled = False
+                MEDetail.Enabled = False
+                TxtCodeImport.Enabled = False
+                LESeason.Enabled = False
+                SLESeasonOrigin.Enabled = False
+                BtnAddSeasonOrign.Enabled = False
+            End If
             PictureEdit1.Properties.ReadOnly = False
             XTPLineList.PageVisible = False
             XTPPrice.PageVisible = False
@@ -699,6 +759,10 @@
             DEWHDate.Enabled = False
             DEInStoreDet.Enabled = False
             BtnAddRetCode.Enabled = False
+
+            'comment
+            PanelControlComment.Visible = True
+
         Else 'unidentified -> from formmasterproduct
             XTPLineList.PageVisible = False
             XTPSize.PageVisible = False
@@ -769,14 +833,13 @@
                     XTPLineList.PageVisible = True
                 End If
                 XTPSize.PageVisible = False
-                SLEDel.Enabled = False
-                LERetCode.Enabled = False
-                DEEOS.Enabled = False
                 BeditCode.Enabled = False
                 BRefreshCode.Enabled = False
                 BGenerate.Enabled = False
                 BtnGetLastCount.Enabled = False
                 GCCode.Enabled = False
+                GCCodeNonMD.Enabled = False
+                TEDisplayNameNonMD.Enabled = False
                 DEWHDate.Enabled = False
                 BtnAddRetCode.Enabled = False
             End If
@@ -1149,7 +1212,7 @@
                             query += "id_design_ref='" + id_design_ref + "', "
                         End If
                         query += "id_active='" + id_active + "', "
-                        query += "id_lookup_status_order='" + id_lookup_status_order + "', design_detail='" + design_detail + "' "
+                        query += "design_detail='" + design_detail + "' "
                         query += "WHERE id_design='{5}' "
                         query = String.Format(query, namex, display_name, code, id_uom, id_season, id_design, id_design_type, design_ret_code)
                         execute_non_query(query, True, "", "", "", "")
@@ -2068,6 +2131,74 @@
     Private Sub TEDisplayNameNonMD_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles TEDisplayNameNonMD.Validating
         If id_pop_up = "3" Then 'only for codefication
             EP_TE_cant_blank(EPMasterDesign, TEDisplayNameNonMD)
+        End If
+    End Sub
+
+    Private Sub BtnReviseStyle_Click(sender As Object, e As EventArgs) Handles BtnReviseStyle.Click
+        Dim is_permanent_master_dsg As String = get_setup_field("is_permanent_master_dsg")
+        Dim query_cek_po As String = ""
+        query_cek_po += "SELECT COUNT(*) FROM tb_prod_order pr_ord "
+        query_cek_po += "INNER JOIN tb_prod_demand_design pd_dsg ON pr_ord.id_prod_demand_design = pd_dsg.id_prod_demand_design "
+        query_cek_po += "WHERE pd_dsg.id_design = '" + id_design + "' AND pr_ord.id_report_status !='5' "
+        Dim jum_cek_po As String = execute_query(query_cek_po, 0, True, "", "", "", "")
+        If jum_cek_po > 0 Then
+            If is_permanent_master_dsg = "1" Then
+                stopCustom("Can not be revised because the order is being processed")
+            Else
+                resetApprove()
+            End If
+        Else
+            resetApprove()
+        End If
+    End Sub
+
+    Sub resetApprove()
+        Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("This action will be reset approval this design and you can revise this design. Are you sure you want to continue this process?", "Revise", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+        If confirm = Windows.Forms.DialogResult.Yes Then
+            Cursor = Cursors.WaitCursor
+            Dim query As String = "UPDATE tb_m_design SET is_approved=2, approved_by=NULL, approved_time=NULL WHERE id_design=" + id_design + " "
+            execute_non_query(query, True, "", "", "", "")
+            actionLoad()
+            Cursor = Cursors.Default
+        End If
+    End Sub
+
+    Private Sub BDelComment_Click(sender As Object, e As EventArgs) Handles BDelComment.Click
+        Dim confirm As DialogResult
+        Dim query As String = ""
+        confirm = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure want to delete this data?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+
+        Dim id_design_comment As String = GVComment.GetFocusedRowCellDisplayText("id_design_comment").ToString
+        If confirm = Windows.Forms.DialogResult.Yes Then
+            query = "DELETE FROM tb_m_design_comment WHERE id_design_comment='" & id_design_comment & "'"
+            execute_non_query(query, True, "", "", "", "")
+            load_comment()
+        End If
+    End Sub
+
+    Private Sub BAddComment_Click(sender As Object, e As EventArgs) Handles BAddComment.Click
+        Cursor = Cursors.WaitCursor
+
+        'Try
+        FormMasterDesignComment.ShowDialog()
+        'Catch ex As Exception
+        '    stopCustom(ex.ToString)
+        'End Try
+
+        Cursor = Cursors.Default
+    End Sub
+
+    Sub load_comment()
+        Dim query As String = "SELECT * FROM tb_m_design_comment dc
+                                INNER JOIN tb_m_user usr ON dc.`id_user`=usr.`id_user`
+                                INNER JOIN tb_m_employee emp ON emp.`id_employee`=usr.`id_employee`
+                                WHERE dc.id_design='" & id_design & "' ORDER BY dc.datetime DESC"
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "'")
+        GCComment.DataSource = data
+        If data.Rows.Count > 0 Then
+            BDelComment.Visible = True
+        Else
+            BDelComment.Visible = False
         End If
     End Sub
 End Class

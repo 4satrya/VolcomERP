@@ -92,7 +92,8 @@
     End Sub
 
     Private Sub BSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BSave.Click
-
+        Dim query As String = ""
+        query = "INSERT INTO tb_sales_pos()"
     End Sub
 
     Private Sub LEBilling_EditValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LEBilling.EditValueChanged

@@ -39,17 +39,19 @@
     Sub load_sum()
         Dim date_from As String = Date.Parse(DEStart.EditValue.ToString).ToString("yyyy-MM-dd")
         Dim date_end As String = Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd")
-        Dim query As String = "SELECT empl.*,empx.employee_name as who_create,empld.min_date,empld.max_date,status.report_status,emp.employee_name,emp.employee_code,empld.hours_total FROM tb_emp_leave empl
+        Dim query As String = "SELECT empl.*,dep_sub.departement_sub,dep.departement,empx.employee_name as who_create,empld.min_date,empld.max_date,status.report_status,emp.employee_name,emp.employee_code,empld.hours_total FROM tb_emp_leave empl
                                 INNER JOIN tb_lookup_report_status STATUS ON status.id_report_status=empl.id_report_status
                                 INNER JOIN tb_m_employee emp ON emp.id_employee=empl.id_emp
                                 INNER JOIN tb_lookup_employee_level lvl ON lvl.id_employee_level=emp.id_employee_level  
                                 INNER JOIN tb_m_departement dep ON dep.id_departement=emp.id_departement
+                                LEFT JOIN tb_m_departement_sub dep_sub ON dep_sub.id_departement_sub=emp.id_departement_sub
                                 LEFT JOIN tb_m_user usrx ON usrx.id_user=empl.id_user_who_create
                                 LEFT JOIN tb_m_employee empx ON empx.id_employee=usrx.id_employee
                                 INNER JOIN 
                                 (SELECT id_emp_leave,MIN(datetime_start) AS min_date,MAX(datetime_until) AS max_date,ROUND(SUM(minutes_total)/60) AS hours_total FROM tb_emp_leave_det GROUP BY id_emp_leave) empld ON empld.id_emp_leave=empl.id_emp_leave
                                 WHERE DATE(empl.emp_leave_date) >= DATE('" & date_from & "') AND DATE(empl.emp_leave_date) <= DATE('" & date_end & "')"
         If is_propose = "1" Then
+            query += " AND empl.id_leave_type!=5 AND empl.id_leave_type!=6"
             'Dim id_user_admin_management As String = get_opt_emp_field("id_user_admin_mng").ToString
             'If id_user_admin_management = id_user Then
             '    Dim id_min_lvl As String = get_opt_emp_field("leave_asst_mgr_level").ToString
@@ -61,27 +63,38 @@
         End If
         Dim data As DataTable = execute_query(query, "-1", True, "", "", "", "")
         GCLeave.DataSource = data
+        GVLeave.BestFitColumns()
     End Sub
     Private Sub SimpleButton1_Click(sender As Object, e As EventArgs) Handles BViewOnLeave.Click
         Dim date_from As String = Date.Parse(DEStart.EditValue.ToString).ToString("yyyy-MM-dd")
         Dim date_end As String = Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd")
-        Dim query As String = "SELECT empl.*,empld.min_date,empld.max_date,status.report_status,emp.employee_name,emp.employee_code,empld.hours_total  FROM tb_emp_leave empl
+        Dim query As String = "SELECT empl.*,dep_sub.departement_sub,dep.departement,empld.min_date,empld.max_date,status.report_status,emp.employee_name,emp.employee_code,empld.hours_total  FROM tb_emp_leave empl
                                 INNER JOIN tb_lookup_report_status STATUS ON status.id_report_status=empl.id_report_status
                                 INNER JOIN tb_m_employee emp ON emp.id_employee=empl.id_emp
                                 INNER JOIN tb_m_departement dep ON dep.id_departement=emp.id_departement
+                                LEFT JOIN tb_m_departement_sub dep_sub ON dep_sub.id_departement_sub=emp.id_departement_sub
                                 INNER JOIN tb_lookup_employee_level lvl ON lvl.id_employee_level=emp.id_employee_level  
                                 INNER JOIN (SELECT * FROM (SELECT * FROM tb_emp_leave_det empld_wh WHERE (DATE(empld_wh.datetime_start) >= DATE('" & date_from & "') AND DATE(empld_wh.datetime_start) <= DATE('" & date_end & "'))) empx GROUP BY empx.id_emp_leave) empldwh ON empldwh.id_emp_leave=empl.id_emp_leave 
                                 INNER JOIN (SELECT id_emp_leave,MIN(datetime_start) AS min_date,MAX(datetime_until) AS max_date,ROUND(SUM(minutes_total)/60) AS hours_total FROM tb_emp_leave_det GROUP BY id_emp_leave) empld ON empld.id_emp_leave=empldwh.id_emp_leave"
         If is_propose = "1" Then
-            Dim id_user_admin_management As String = get_opt_emp_field("id_user_admin_mng").ToString
-            If id_user_admin_management = id_user Then
-                Dim id_min_lvl As String = get_opt_emp_field("leave_asst_mgr_level").ToString
-                query += " AND lvl.id_employee_level>0 AND lvl.id_employee_level <'" & id_min_lvl & "' "
-            Else
-                query += " AND (dep.id_user_admin='" & id_user & "' OR dep.id_user_admin_backup='" & id_user & "')"
-            End If
+            query += " WHERE empl.id_leave_type!=5"
+            'Dim id_user_admin_management As String = get_opt_emp_field("id_user_admin_mng").ToString
+            'If id_user_admin_management = id_user Then
+            '    Dim id_min_lvl As String = get_opt_emp_field("leave_asst_mgr_level").ToString
+            '    query += " AND lvl.id_employee_level>0 AND lvl.id_employee_level <'" & id_min_lvl & "' "
+            'Else
+            '    query += " AND (dep.id_user_admin='" & id_user & "' OR dep.id_user_admin_backup='" & id_user & "')"
+            'End If
         End If
         Dim data As DataTable = execute_query(query, "-1", True, "", "", "", "")
         GCLeave.DataSource = data
+        GVLeave.BestFitColumns()
+    End Sub
+
+    Private Sub GVLeave_DoubleClick(sender As Object, e As EventArgs) Handles GVLeave.DoubleClick
+        If GVLeave.RowCount > 0 Then
+            FormEmpLeaveDet.id_emp_leave = GVLeave.GetFocusedRowCellValue("id_emp_leave").ToString
+            FormEmpLeaveDet.ShowDialog()
+        End If
     End Sub
 End Class

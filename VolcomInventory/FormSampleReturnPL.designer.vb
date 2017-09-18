@@ -27,6 +27,7 @@ Partial Class FormSampleReturnPL
         Me.GridColumnNote = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnReportStatus = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnTo = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnTotal = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GCSamplePL, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVSamplePL, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -43,10 +44,13 @@ Partial Class FormSampleReturnPL
         '
         'GVSamplePL
         '
-        Me.GVSamplePL.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnId, Me.GridColumnSamplePLNumber, Me.GridColumnPLDate, Me.GridColumnNote, Me.GridColumnReportStatus, Me.GridColumnTo})
+        Me.GVSamplePL.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnId, Me.GridColumnSamplePLNumber, Me.GridColumnPLDate, Me.GridColumnNote, Me.GridColumnReportStatus, Me.GridColumnTo, Me.GridColumnTotal})
         Me.GVSamplePL.GridControl = Me.GCSamplePL
+        Me.GVSamplePL.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total", Me.GridColumnTotal, "{0:N0}")})
         Me.GVSamplePL.Name = "GVSamplePL"
+        Me.GVSamplePL.OptionsBehavior.AutoExpandAllGroups = True
         Me.GVSamplePL.OptionsBehavior.Editable = False
+        Me.GVSamplePL.OptionsView.ShowFooter = True
         Me.GVSamplePL.OptionsView.ShowGroupPanel = False
         Me.GVSamplePL.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumnId, DevExpress.Data.ColumnSortOrder.Descending)})
         '
@@ -63,6 +67,7 @@ Partial Class FormSampleReturnPL
         Me.GridColumnSamplePLNumber.Name = "GridColumnSamplePLNumber"
         Me.GridColumnSamplePLNumber.Visible = True
         Me.GridColumnSamplePLNumber.VisibleIndex = 0
+        Me.GridColumnSamplePLNumber.Width = 116
         '
         'GridColumnPLDate
         '
@@ -72,7 +77,8 @@ Partial Class FormSampleReturnPL
         Me.GridColumnPLDate.FieldName = "sample_pl_ret_date"
         Me.GridColumnPLDate.Name = "GridColumnPLDate"
         Me.GridColumnPLDate.Visible = True
-        Me.GridColumnPLDate.VisibleIndex = 2
+        Me.GridColumnPLDate.VisibleIndex = 3
+        Me.GridColumnPLDate.Width = 128
         '
         'GridColumnNote
         '
@@ -80,7 +86,8 @@ Partial Class FormSampleReturnPL
         Me.GridColumnNote.FieldName = "sample_pl_ret_note"
         Me.GridColumnNote.Name = "GridColumnNote"
         Me.GridColumnNote.Visible = True
-        Me.GridColumnNote.VisibleIndex = 3
+        Me.GridColumnNote.VisibleIndex = 4
+        Me.GridColumnNote.Width = 128
         '
         'GridColumnReportStatus
         '
@@ -89,7 +96,8 @@ Partial Class FormSampleReturnPL
         Me.GridColumnReportStatus.FieldNameSortGroup = "id_report_status"
         Me.GridColumnReportStatus.Name = "GridColumnReportStatus"
         Me.GridColumnReportStatus.Visible = True
-        Me.GridColumnReportStatus.VisibleIndex = 4
+        Me.GridColumnReportStatus.VisibleIndex = 5
+        Me.GridColumnReportStatus.Width = 130
         '
         'GridColumnTo
         '
@@ -98,6 +106,19 @@ Partial Class FormSampleReturnPL
         Me.GridColumnTo.Name = "GridColumnTo"
         Me.GridColumnTo.Visible = True
         Me.GridColumnTo.VisibleIndex = 1
+        Me.GridColumnTo.Width = 116
+        '
+        'GridColumnTotal
+        '
+        Me.GridColumnTotal.Caption = "Total Qty"
+        Me.GridColumnTotal.DisplayFormat.FormatString = "N0"
+        Me.GridColumnTotal.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnTotal.FieldName = "total"
+        Me.GridColumnTotal.Name = "GridColumnTotal"
+        Me.GridColumnTotal.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total", "{0:N0}")})
+        Me.GridColumnTotal.Visible = True
+        Me.GridColumnTotal.VisibleIndex = 2
+        Me.GridColumnTotal.Width = 78
         '
         'FormSampleReturnPL
         '
@@ -111,7 +132,7 @@ Partial Class FormSampleReturnPL
         Me.Name = "FormSampleReturnPL"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Return"
+        Me.Text = "Inbound Sample"
         CType(Me.GCSamplePL, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVSamplePL, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -126,4 +147,5 @@ Partial Class FormSampleReturnPL
     Friend WithEvents GridColumnNote As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnReportStatus As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnTo As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnTotal As DevExpress.XtraGrid.Columns.GridColumn
 End Class

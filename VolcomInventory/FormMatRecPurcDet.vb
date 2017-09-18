@@ -176,6 +176,7 @@
         Dim query = "CALL view_purc_mat_det_limit('" & id_order & "')"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCListPurchase.DataSource = data
+        view_list_pcs()
     End Sub
 
     Sub view_list_pcs()

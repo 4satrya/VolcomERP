@@ -73,14 +73,19 @@ Partial Class FormSalesReturnOrderDet
         Me.GridColumnIdReturnCat = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdDesignPrice = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnPriceType = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnQtyAvail = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnFound = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControlNav = New DevExpress.XtraEditors.PanelControl()
+        Me.BtnImport2 = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnEdit = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnImport = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnDel = New DevExpress.XtraEditors.SimpleButton()
-        Me.BtnAddMultiple = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnAdd = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnAddMultiple = New DevExpress.XtraEditors.SimpleButton()
         Me.EPForm = New System.Windows.Forms.ErrorProvider(Me.components)
-        Me.BtnImport2 = New DevExpress.XtraEditors.SimpleButton()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.AddAnotherProductToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReviseQtyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
         CType(Me.PanelControlTopRight, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -111,6 +116,7 @@ Partial Class FormSalesReturnOrderDet
         CType(Me.PanelControlNav, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlNav.SuspendLayout()
         CType(Me.EPForm, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupGeneralHeader
@@ -470,7 +476,7 @@ Partial Class FormSalesReturnOrderDet
         '
         'GVItemList
         '
-        Me.GVItemList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumnCode, Me.GridColumnName, Me.GridColumnSize, Me.GridColumnQty, Me.GridColumnPrice, Me.GridColumnAmount, Me.GridColumnRemark, Me.GridColumnIdSalesTarget, Me.GridColumnUOM, Me.GridColumnReturnCategory, Me.GridColumnIdDesign, Me.GridColumnIdProduct, Me.GridColumnIdSample, Me.GridColumnIdSalesOrderDet, Me.GridColumnProductName, Me.GridColumnIdReturnCat, Me.GridColumnIdDesignPrice, Me.GridColumnPriceType})
+        Me.GVItemList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumnCode, Me.GridColumnName, Me.GridColumnSize, Me.GridColumnQty, Me.GridColumnPrice, Me.GridColumnAmount, Me.GridColumnRemark, Me.GridColumnIdSalesTarget, Me.GridColumnUOM, Me.GridColumnReturnCategory, Me.GridColumnIdDesign, Me.GridColumnIdProduct, Me.GridColumnIdSample, Me.GridColumnIdSalesOrderDet, Me.GridColumnProductName, Me.GridColumnIdReturnCat, Me.GridColumnIdDesignPrice, Me.GridColumnPriceType, Me.GridColumnQtyAvail, Me.GridColumnFound})
         Me.GVItemList.GridControl = Me.GCItemList
         Me.GVItemList.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_order_det_qty", Me.GridColumnQty, "{0:f2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount", Me.GridColumnAmount, "{0:n2}")})
         Me.GVItemList.Name = "GVItemList"
@@ -495,7 +501,6 @@ Partial Class FormSalesReturnOrderDet
         Me.GridColumnCode.Caption = "Code"
         Me.GridColumnCode.FieldName = "code"
         Me.GridColumnCode.Name = "GridColumnCode"
-        Me.GridColumnCode.OptionsColumn.AllowEdit = False
         Me.GridColumnCode.Visible = True
         Me.GridColumnCode.VisibleIndex = 1
         Me.GridColumnCode.Width = 55
@@ -506,7 +511,6 @@ Partial Class FormSalesReturnOrderDet
         Me.GridColumnName.FieldName = "name"
         Me.GridColumnName.FieldNameSortGroup = "id_design"
         Me.GridColumnName.Name = "GridColumnName"
-        Me.GridColumnName.OptionsColumn.AllowEdit = False
         Me.GridColumnName.Visible = True
         Me.GridColumnName.VisibleIndex = 2
         Me.GridColumnName.Width = 103
@@ -537,7 +541,6 @@ Partial Class FormSalesReturnOrderDet
         Me.GridColumnQty.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnQty.FieldName = "sales_return_order_det_qty"
         Me.GridColumnQty.Name = "GridColumnQty"
-        Me.GridColumnQty.OptionsColumn.AllowEdit = False
         Me.GridColumnQty.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.[False]
         Me.GridColumnQty.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_order_det_qty", "{0:n0}")})
         Me.GridColumnQty.Visible = True
@@ -675,6 +678,20 @@ Partial Class FormSalesReturnOrderDet
         Me.GridColumnPriceType.Name = "GridColumnPriceType"
         Me.GridColumnPriceType.OptionsColumn.AllowEdit = False
         '
+        'GridColumnQtyAvail
+        '
+        Me.GridColumnQtyAvail.Caption = "Limit Qty"
+        Me.GridColumnQtyAvail.DisplayFormat.FormatString = "{0:n0}"
+        Me.GridColumnQtyAvail.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnQtyAvail.FieldName = "qty_avail"
+        Me.GridColumnQtyAvail.Name = "GridColumnQtyAvail"
+        '
+        'GridColumnFound
+        '
+        Me.GridColumnFound.Caption = "Found"
+        Me.GridColumnFound.FieldName = "is_found"
+        Me.GridColumnFound.Name = "GridColumnFound"
+        '
         'PanelControlNav
         '
         Me.PanelControlNav.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
@@ -682,20 +699,31 @@ Partial Class FormSalesReturnOrderDet
         Me.PanelControlNav.Controls.Add(Me.BtnEdit)
         Me.PanelControlNav.Controls.Add(Me.BtnImport)
         Me.PanelControlNav.Controls.Add(Me.BtnDel)
-        Me.PanelControlNav.Controls.Add(Me.BtnAddMultiple)
         Me.PanelControlNav.Controls.Add(Me.BtnAdd)
+        Me.PanelControlNav.Controls.Add(Me.BtnAddMultiple)
         Me.PanelControlNav.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControlNav.Location = New System.Drawing.Point(21, 2)
         Me.PanelControlNav.Name = "PanelControlNav"
         Me.PanelControlNav.Size = New System.Drawing.Size(762, 35)
         Me.PanelControlNav.TabIndex = 0
         '
+        'BtnImport2
+        '
+        Me.BtnImport2.Dock = System.Windows.Forms.DockStyle.Left
+        Me.BtnImport2.ImageIndex = 3
+        Me.BtnImport2.ImageList = Me.LargeImageCollection
+        Me.BtnImport2.Location = New System.Drawing.Point(137, 0)
+        Me.BtnImport2.Name = "BtnImport2"
+        Me.BtnImport2.Size = New System.Drawing.Size(130, 35)
+        Me.BtnImport2.TabIndex = 6
+        Me.BtnImport2.Text = "Import From Excel"
+        '
         'BtnEdit
         '
         Me.BtnEdit.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnEdit.ImageIndex = 2
         Me.BtnEdit.ImageList = Me.LargeImageCollection
-        Me.BtnEdit.Location = New System.Drawing.Point(401, 0)
+        Me.BtnEdit.Location = New System.Drawing.Point(447, 0)
         Me.BtnEdit.Name = "BtnEdit"
         Me.BtnEdit.Size = New System.Drawing.Size(34, 35)
         Me.BtnEdit.TabIndex = 4
@@ -718,48 +746,55 @@ Partial Class FormSalesReturnOrderDet
         Me.BtnDel.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnDel.ImageIndex = 1
         Me.BtnDel.ImageList = Me.LargeImageCollection
-        Me.BtnDel.Location = New System.Drawing.Point(435, 0)
+        Me.BtnDel.Location = New System.Drawing.Point(481, 0)
         Me.BtnDel.Name = "BtnDel"
-        Me.BtnDel.Size = New System.Drawing.Size(91, 35)
+        Me.BtnDel.Size = New System.Drawing.Size(80, 35)
         Me.BtnDel.TabIndex = 4
         Me.BtnDel.Text = "Delete"
-        '
-        'BtnAddMultiple
-        '
-        Me.BtnAddMultiple.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BtnAddMultiple.ImageIndex = 11
-        Me.BtnAddMultiple.ImageList = Me.LargeImageCollection
-        Me.BtnAddMultiple.Location = New System.Drawing.Point(526, 0)
-        Me.BtnAddMultiple.Name = "BtnAddMultiple"
-        Me.BtnAddMultiple.Size = New System.Drawing.Size(123, 35)
-        Me.BtnAddMultiple.TabIndex = 3
-        Me.BtnAddMultiple.Text = "Add Multiple Item"
         '
         'BtnAdd
         '
         Me.BtnAdd.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnAdd.ImageIndex = 0
         Me.BtnAdd.ImageList = Me.LargeImageCollection
-        Me.BtnAdd.Location = New System.Drawing.Point(649, 0)
+        Me.BtnAdd.Location = New System.Drawing.Point(561, 0)
         Me.BtnAdd.Name = "BtnAdd"
-        Me.BtnAdd.Size = New System.Drawing.Size(113, 35)
+        Me.BtnAdd.Size = New System.Drawing.Size(78, 35)
         Me.BtnAdd.TabIndex = 2
-        Me.BtnAdd.Text = "Add Single Item"
+        Me.BtnAdd.Text = "Add"
+        '
+        'BtnAddMultiple
+        '
+        Me.BtnAddMultiple.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnAddMultiple.ImageIndex = 11
+        Me.BtnAddMultiple.ImageList = Me.LargeImageCollection
+        Me.BtnAddMultiple.Location = New System.Drawing.Point(639, 0)
+        Me.BtnAddMultiple.Name = "BtnAddMultiple"
+        Me.BtnAddMultiple.Size = New System.Drawing.Size(123, 35)
+        Me.BtnAddMultiple.TabIndex = 3
+        Me.BtnAddMultiple.Text = "Add Multiple Item"
         '
         'EPForm
         '
         Me.EPForm.ContainerControl = Me
         '
-        'BtnImport2
+        'ContextMenuStrip1
         '
-        Me.BtnImport2.Dock = System.Windows.Forms.DockStyle.Left
-        Me.BtnImport2.ImageIndex = 3
-        Me.BtnImport2.ImageList = Me.LargeImageCollection
-        Me.BtnImport2.Location = New System.Drawing.Point(137, 0)
-        Me.BtnImport2.Name = "BtnImport2"
-        Me.BtnImport2.Size = New System.Drawing.Size(130, 35)
-        Me.BtnImport2.TabIndex = 6
-        Me.BtnImport2.Text = "Import From Excel"
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddAnotherProductToolStripMenuItem, Me.ReviseQtyToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(186, 70)
+        '
+        'AddAnotherProductToolStripMenuItem
+        '
+        Me.AddAnotherProductToolStripMenuItem.Name = "AddAnotherProductToolStripMenuItem"
+        Me.AddAnotherProductToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.AddAnotherProductToolStripMenuItem.Text = "Add another product"
+        '
+        'ReviseQtyToolStripMenuItem
+        '
+        Me.ReviseQtyToolStripMenuItem.Name = "ReviseQtyToolStripMenuItem"
+        Me.ReviseQtyToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.ReviseQtyToolStripMenuItem.Text = "Revise Qty"
         '
         'FormSalesReturnOrderDet
         '
@@ -770,6 +805,7 @@ Partial Class FormSalesReturnOrderDet
         Me.Controls.Add(Me.GroupControl3)
         Me.Controls.Add(Me.PanelControl3)
         Me.Controls.Add(Me.GroupGeneralHeader)
+        Me.KeyPreview = True
         Me.LookAndFeel.SkinName = "Office 2010 Blue"
         Me.LookAndFeel.UseDefaultLookAndFeel = False
         Me.MinimizeBox = False
@@ -777,6 +813,7 @@ Partial Class FormSalesReturnOrderDet
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Sales Return Order"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupGeneralHeader.ResumeLayout(False)
         CType(Me.PanelControlTopRight, System.ComponentModel.ISupportInitialize).EndInit()
@@ -811,6 +848,7 @@ Partial Class FormSalesReturnOrderDet
         CType(Me.PanelControlNav, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControlNav.ResumeLayout(False)
         CType(Me.EPForm, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -874,4 +912,9 @@ Partial Class FormSalesReturnOrderDet
     Friend WithEvents BtnImport As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BtnAddMultiple As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BtnImport2 As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GridColumnQtyAvail As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnFound As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
+    Friend WithEvents AddAnotherProductToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ReviseQtyToolStripMenuItem As ToolStripMenuItem
 End Class

@@ -11,6 +11,15 @@
         Else
             pre_load_mark_horz("43", id_pl_sales_order_del, "2", "2", XrTable1)
         End If
+
+        If LabelUni6.Text = "" Then
+            LabelUni1.Visible = False
+            LabelUni2.Visible = False
+            LabelUni3.Visible = False
+            LabelUni4.Visible = False
+            LabelUni5.Visible = False
+            LabelUni6.Visible = False
+        End If
     End Sub
 
     Private Sub GVItemList_CustomColumnDisplayText(sender As Object, e As DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs) Handles GVItemList.CustomColumnDisplayText

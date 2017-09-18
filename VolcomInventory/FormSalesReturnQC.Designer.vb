@@ -440,16 +440,12 @@ Partial Class FormSalesReturnQC
         Me.GridColumnDSalesTargetNote.Caption = "Note"
         Me.GridColumnDSalesTargetNote.FieldName = "sales_return_note"
         Me.GridColumnDSalesTargetNote.Name = "GridColumnDSalesTargetNote"
-        Me.GridColumnDSalesTargetNote.Visible = True
-        Me.GridColumnDSalesTargetNote.VisibleIndex = 4
         '
         'GridColumn2
         '
         Me.GridColumn2.Caption = "Status"
         Me.GridColumn2.FieldName = "report_status"
         Me.GridColumn2.Name = "GridColumn2"
-        Me.GridColumn2.Visible = True
-        Me.GridColumn2.VisibleIndex = 5
         '
         'GridView2
         '

@@ -44,6 +44,8 @@ Partial Class FormSampleStock
         Me.GridColumnOrign = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnCategory = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnClass = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnFOBCur = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnFOBPrice = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnClassDetail = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControlImg = New DevExpress.XtraEditors.PanelControl()
         Me.PESampleStock = New DevExpress.XtraEditors.PictureEdit()
@@ -111,8 +113,7 @@ Partial Class FormSampleStock
         Me.SLERackSampleDist = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView8 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.LabelControl14 = New DevExpress.XtraEditors.LabelControl()
-        Me.GridColumnFOBPrice = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnFOBCur = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnSatatus = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XTCWHMain, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCWHMain.SuspendLayout()
         Me.XTPStock.SuspendLayout()
@@ -258,7 +259,7 @@ Partial Class FormSampleStock
         '
         'GVSample
         '
-        Me.GVSample.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn15, Me.GridColumn18, Me.GridColumn16, Me.GridColumn19, Me.GridColumn25, Me.GridColumn26, Me.GridColumnCost, Me.GridColumnAmount, Me.GridColumnQty, Me.GridColumnQtyResrved, Me.GridColumnQtyNormal, Me.GridColumnUSCode, Me.GridColumnSeason, Me.GridColumnOrign, Me.GridColumnCategory, Me.GridColumnClass, Me.GridColumnFOBCur, Me.GridColumnFOBPrice, Me.GridColumnClassDetail})
+        Me.GVSample.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn15, Me.GridColumn18, Me.GridColumn16, Me.GridColumn19, Me.GridColumn25, Me.GridColumn26, Me.GridColumnCost, Me.GridColumnAmount, Me.GridColumnQty, Me.GridColumnQtyResrved, Me.GridColumnQtyNormal, Me.GridColumnUSCode, Me.GridColumnSeason, Me.GridColumnOrign, Me.GridColumnCategory, Me.GridColumnClass, Me.GridColumnFOBCur, Me.GridColumnFOBPrice, Me.GridColumnClassDetail, Me.GridColumnSatatus})
         Me.GVSample.GridControl = Me.GCSample
         Me.GVSample.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_all_sample", Me.GridColumnQty, "{0:n2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sample_amount", Me.GridColumnAmount, "{0:n2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_normal", Me.GridColumnQtyNormal, "{0:n2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_reserved", Me.GridColumnQtyResrved, "{0:n2}")})
         Me.GVSample.Name = "GVSample"
@@ -327,7 +328,7 @@ Partial Class FormSampleStock
         Me.GridColumnCost.FieldName = "sample_price"
         Me.GridColumnCost.Name = "GridColumnCost"
         Me.GridColumnCost.Visible = True
-        Me.GridColumnCost.VisibleIndex = 9
+        Me.GridColumnCost.VisibleIndex = 10
         '
         'GridColumnAmount
         '
@@ -336,7 +337,7 @@ Partial Class FormSampleStock
         Me.GridColumnAmount.Name = "GridColumnAmount"
         Me.GridColumnAmount.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sample_amount", "{0:n2}")})
         Me.GridColumnAmount.Visible = True
-        Me.GridColumnAmount.VisibleIndex = 13
+        Me.GridColumnAmount.VisibleIndex = 14
         '
         'GridColumnQty
         '
@@ -348,7 +349,7 @@ Partial Class FormSampleStock
         Me.GridColumnQty.OptionsColumn.ShowInCustomizationForm = False
         Me.GridColumnQty.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_all_sample", "{0:n2}")})
         Me.GridColumnQty.Visible = True
-        Me.GridColumnQty.VisibleIndex = 10
+        Me.GridColumnQty.VisibleIndex = 11
         '
         'GridColumnQtyResrved
         '
@@ -359,7 +360,7 @@ Partial Class FormSampleStock
         Me.GridColumnQtyResrved.Name = "GridColumnQtyResrved"
         Me.GridColumnQtyResrved.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_reserved", "{0:n2}")})
         Me.GridColumnQtyResrved.Visible = True
-        Me.GridColumnQtyResrved.VisibleIndex = 11
+        Me.GridColumnQtyResrved.VisibleIndex = 12
         '
         'GridColumnQtyNormal
         '
@@ -370,7 +371,7 @@ Partial Class FormSampleStock
         Me.GridColumnQtyNormal.Name = "GridColumnQtyNormal"
         Me.GridColumnQtyNormal.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_normal", "{0:n2}")})
         Me.GridColumnQtyNormal.Visible = True
-        Me.GridColumnQtyNormal.VisibleIndex = 12
+        Me.GridColumnQtyNormal.VisibleIndex = 13
         '
         'GridColumnUSCode
         '
@@ -411,6 +412,26 @@ Partial Class FormSampleStock
         Me.GridColumnClass.Name = "GridColumnClass"
         Me.GridColumnClass.Visible = True
         Me.GridColumnClass.VisibleIndex = 5
+        '
+        'GridColumnFOBCur
+        '
+        Me.GridColumnFOBCur.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumnFOBCur.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumnFOBCur.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumnFOBCur.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumnFOBCur.Caption = "FOB Currency"
+        Me.GridColumnFOBCur.FieldName = "currency_fob"
+        Me.GridColumnFOBCur.Name = "GridColumnFOBCur"
+        '
+        'GridColumnFOBPrice
+        '
+        Me.GridColumnFOBPrice.Caption = "FOB Price"
+        Me.GridColumnFOBPrice.DisplayFormat.FormatString = "N2"
+        Me.GridColumnFOBPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnFOBPrice.FieldName = "sample_price_fob"
+        Me.GridColumnFOBPrice.Name = "GridColumnFOBPrice"
+        Me.GridColumnFOBPrice.Visible = True
+        Me.GridColumnFOBPrice.VisibleIndex = 9
         '
         'GridColumnClassDetail
         '
@@ -1052,25 +1073,13 @@ Partial Class FormSampleStock
         Me.LabelControl14.TabIndex = 4
         Me.LabelControl14.Text = "Rack"
         '
-        'GridColumnFOBPrice
+        'GridColumnSatatus
         '
-        Me.GridColumnFOBPrice.Caption = "FOB Price"
-        Me.GridColumnFOBPrice.DisplayFormat.FormatString = "N2"
-        Me.GridColumnFOBPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumnFOBPrice.FieldName = "sample_price_fob"
-        Me.GridColumnFOBPrice.Name = "GridColumnFOBPrice"
-        Me.GridColumnFOBPrice.Visible = True
-        Me.GridColumnFOBPrice.VisibleIndex = 8
-        '
-        'GridColumnFOBCur
-        '
-        Me.GridColumnFOBCur.AppearanceCell.Options.UseTextOptions = True
-        Me.GridColumnFOBCur.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.GridColumnFOBCur.AppearanceHeader.Options.UseTextOptions = True
-        Me.GridColumnFOBCur.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.GridColumnFOBCur.Caption = "FOB Currency"
-        Me.GridColumnFOBCur.FieldName = "currency_fob"
-        Me.GridColumnFOBCur.Name = "GridColumnFOBCur"
+        Me.GridColumnSatatus.Caption = "Status"
+        Me.GridColumnSatatus.FieldName = "status_nr"
+        Me.GridColumnSatatus.Name = "GridColumnSatatus"
+        Me.GridColumnSatatus.Visible = True
+        Me.GridColumnSatatus.VisibleIndex = 8
         '
         'FormSampleStock
         '
@@ -1242,4 +1251,5 @@ Partial Class FormSampleStock
     Friend WithEvents GridColumnClassDetail As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnFOBCur As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnFOBPrice As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnSatatus As DevExpress.XtraGrid.Columns.GridColumn
 End Class

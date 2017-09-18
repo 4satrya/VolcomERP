@@ -102,7 +102,7 @@
         Try
             If id_pop_up = "1" Then
                 Dim query As String = "CALL view_stock_sample('" + id_wh_view + "','" + id_wh_locator_view + "','" + id_wh_rack_view + "','" + id_wh_drawer_view + "', '9999-12-01','3')"
-                Console.WriteLine(query)
+
                 Dim data As DataTable
                 If action = "upd" Then
                     Dim dtd_temp As DataTable = execute_query(query, -1, True, "", "", "", "")

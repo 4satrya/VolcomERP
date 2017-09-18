@@ -22,7 +22,10 @@ Partial Class barcodeaa
         Me.Button1 = New System.Windows.Forms.Button()
         Me.MemoEdit1 = New DevExpress.XtraEditors.MemoEdit()
         Me.Button2 = New System.Windows.Forms.Button()
+        Me.TextEdit1 = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.MemoEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TextEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Button1
@@ -50,21 +53,42 @@ Partial Class barcodeaa
         Me.Button2.Text = "Test Print Zebra"
         Me.Button2.UseVisualStyleBackColor = True
         '
+        'TextEdit1
+        '
+        Me.TextEdit1.Location = New System.Drawing.Point(12, 331)
+        Me.TextEdit1.Name = "TextEdit1"
+        Me.TextEdit1.Size = New System.Drawing.Size(234, 20)
+        Me.TextEdit1.TabIndex = 3
+        '
+        'LabelControl1
+        '
+        Me.LabelControl1.Location = New System.Drawing.Point(12, 312)
+        Me.LabelControl1.Name = "LabelControl1"
+        Me.LabelControl1.Size = New System.Drawing.Size(39, 13)
+        Me.LabelControl1.TabIndex = 4
+        Me.LabelControl1.Text = "No Ketik"
+        '
         'barcodeaa
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(587, 363)
+        Me.Controls.Add(Me.LabelControl1)
+        Me.Controls.Add(Me.TextEdit1)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.MemoEdit1)
         Me.Controls.Add(Me.Button1)
         Me.Name = "barcodeaa"
         Me.Text = "barcodeaa"
         CType(Me.MemoEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TextEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents MemoEdit1 As DevExpress.XtraEditors.MemoEdit
     Friend WithEvents Button2 As Button
+    Friend WithEvents TextEdit1 As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
 End Class

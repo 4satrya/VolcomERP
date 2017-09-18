@@ -101,6 +101,8 @@
             TEPicDesign.Text = data.Rows(0)("pic_path_design").ToString
             TEPicLogo.Text = data.Rows(0)("pic_path_logo").ToString
             data.Dispose()
+            '
+
         Catch ex As Exception
         End Try
     End Sub

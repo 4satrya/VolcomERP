@@ -24,6 +24,8 @@ Partial Class FormBOMDesignSingle
         Me.EPBOM = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
         Me.GroupGeneral = New DevExpress.XtraEditors.GroupControl()
+        Me.LabelControl10 = New DevExpress.XtraEditors.LabelControl()
+        Me.MEBOMNote = New DevExpress.XtraEditors.MemoEdit()
         Me.DEBOM = New DevExpress.XtraEditors.DateEdit()
         Me.LabelControl9 = New DevExpress.XtraEditors.LabelControl()
         Me.TEKurs = New DevExpress.XtraEditors.TextEdit()
@@ -92,6 +94,7 @@ Partial Class FormBOMDesignSingle
         Me.LabelPrintedName = New DevExpress.XtraEditors.LabelControl()
         Me.LSampleTitle = New DevExpress.XtraEditors.LabelControl()
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
+        Me.BDupDesign = New DevExpress.XtraEditors.SimpleButton()
         Me.BDuplicate = New DevExpress.XtraEditors.SimpleButton()
         Me.BMark = New DevExpress.XtraEditors.SimpleButton()
         Me.Bprint = New DevExpress.XtraEditors.SimpleButton()
@@ -103,6 +106,7 @@ Partial Class FormBOMDesignSingle
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupGeneral, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneral.SuspendLayout()
+        CType(Me.MEBOMNote.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEBOM.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEBOM.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEKurs.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -153,6 +157,8 @@ Partial Class FormBOMDesignSingle
         'GroupGeneral
         '
         Me.GroupGeneral.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupGeneral.Controls.Add(Me.LabelControl10)
+        Me.GroupGeneral.Controls.Add(Me.MEBOMNote)
         Me.GroupGeneral.Controls.Add(Me.DEBOM)
         Me.GroupGeneral.Controls.Add(Me.LabelControl9)
         Me.GroupGeneral.Controls.Add(Me.TEKurs)
@@ -169,6 +175,21 @@ Partial Class FormBOMDesignSingle
         Me.GroupGeneral.Size = New System.Drawing.Size(244, 419)
         Me.GroupGeneral.TabIndex = 28
         Me.GroupGeneral.Text = "General"
+        '
+        'LabelControl10
+        '
+        Me.LabelControl10.Location = New System.Drawing.Point(35, 233)
+        Me.LabelControl10.Name = "LabelControl10"
+        Me.LabelControl10.Size = New System.Drawing.Size(23, 13)
+        Me.LabelControl10.TabIndex = 154
+        Me.LabelControl10.Text = "Note"
+        '
+        'MEBOMNote
+        '
+        Me.MEBOMNote.Location = New System.Drawing.Point(35, 249)
+        Me.MEBOMNote.Name = "MEBOMNote"
+        Me.MEBOMNote.Size = New System.Drawing.Size(179, 120)
+        Me.MEBOMNote.TabIndex = 153
         '
         'DEBOM
         '
@@ -913,6 +934,7 @@ Partial Class FormBOMDesignSingle
         'PanelControl2
         '
         Me.PanelControl2.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelControl2.Controls.Add(Me.BDupDesign)
         Me.PanelControl2.Controls.Add(Me.BDuplicate)
         Me.PanelControl2.Controls.Add(Me.BMark)
         Me.PanelControl2.Controls.Add(Me.Bprint)
@@ -926,14 +948,23 @@ Partial Class FormBOMDesignSingle
         Me.PanelControl2.Size = New System.Drawing.Size(1000, 33)
         Me.PanelControl2.TabIndex = 25
         '
+        'BDupDesign
+        '
+        Me.BDupDesign.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BDupDesign.Location = New System.Drawing.Point(428, 0)
+        Me.BDupDesign.Name = "BDupDesign"
+        Me.BDupDesign.Size = New System.Drawing.Size(148, 33)
+        Me.BDupDesign.TabIndex = 20
+        Me.BDupDesign.Text = "Duplicate To Other Design"
+        '
         'BDuplicate
         '
         Me.BDuplicate.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BDuplicate.Location = New System.Drawing.Point(635, 0)
+        Me.BDuplicate.Location = New System.Drawing.Point(576, 0)
         Me.BDuplicate.Name = "BDuplicate"
-        Me.BDuplicate.Size = New System.Drawing.Size(75, 33)
+        Me.BDuplicate.Size = New System.Drawing.Size(134, 33)
         Me.BDuplicate.TabIndex = 19
-        Me.BDuplicate.Text = "Duplicate"
+        Me.BDuplicate.Text = "Duplicate To This Design"
         '
         'BMark
         '
@@ -1010,6 +1041,7 @@ Partial Class FormBOMDesignSingle
         CType(Me.GroupGeneral, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupGeneral.ResumeLayout(False)
         Me.GroupGeneral.PerformLayout()
+        CType(Me.MEBOMNote.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEBOM.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEBOM.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEKurs.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1125,4 +1157,7 @@ Partial Class FormBOMDesignSingle
     Friend WithEvents GridColumnKursMat As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn13 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnKursOVH As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LabelControl10 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents MEBOMNote As DevExpress.XtraEditors.MemoEdit
+    Friend WithEvents BDupDesign As DevExpress.XtraEditors.SimpleButton
 End Class

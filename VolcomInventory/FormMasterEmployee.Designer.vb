@@ -97,7 +97,7 @@ Partial Class FormMasterEmployee
         Me.GCEmployee.MainView = Me.GVEmployee
         Me.GCEmployee.Name = "GCEmployee"
         Me.GCEmployee.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemPictureEdit1})
-        Me.GCEmployee.Size = New System.Drawing.Size(734, 408)
+        Me.GCEmployee.Size = New System.Drawing.Size(764, 408)
         Me.GCEmployee.TabIndex = 0
         Me.GCEmployee.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVEmployee})
         '
@@ -523,7 +523,7 @@ Partial Class FormMasterEmployee
         'BandedGridColumnLocaleM
         '
         Me.BandedGridColumnLocaleM.Caption = "Local Email"
-        Me.BandedGridColumnLocaleM.FieldName = "email_local"
+        Me.BandedGridColumnLocaleM.FieldName = "email_lokal"
         Me.BandedGridColumnLocaleM.Name = "BandedGridColumnLocaleM"
         Me.BandedGridColumnLocaleM.Visible = True
         '
@@ -550,7 +550,7 @@ Partial Class FormMasterEmployee
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl1.Location = New System.Drawing.Point(0, 0)
         Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(734, 35)
+        Me.PanelControl1.Size = New System.Drawing.Size(764, 35)
         Me.PanelControl1.TabIndex = 1
         '
         'SimpleButton1
@@ -568,7 +568,7 @@ Partial Class FormMasterEmployee
         Me.PanelControlFreeze.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
         Me.PanelControlFreeze.Controls.Add(Me.CheckEditFreeze)
         Me.PanelControlFreeze.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PanelControlFreeze.Location = New System.Drawing.Point(541, 0)
+        Me.PanelControlFreeze.Location = New System.Drawing.Point(571, 0)
         Me.PanelControlFreeze.Name = "PanelControlFreeze"
         Me.PanelControlFreeze.Size = New System.Drawing.Size(97, 35)
         Me.PanelControlFreeze.TabIndex = 109
@@ -587,7 +587,7 @@ Partial Class FormMasterEmployee
         Me.PanelOpt.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
         Me.PanelOpt.Controls.Add(Me.CheckImg)
         Me.PanelOpt.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PanelOpt.Location = New System.Drawing.Point(638, 0)
+        Me.PanelOpt.Location = New System.Drawing.Point(668, 0)
         Me.PanelOpt.Name = "PanelOpt"
         Me.PanelOpt.Size = New System.Drawing.Size(96, 35)
         Me.PanelOpt.TabIndex = 108
@@ -619,7 +619,7 @@ Partial Class FormMasterEmployee
         Me.BAccept.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.UltraFlat
         Me.BAccept.LookAndFeel.UseDefaultLookAndFeel = False
         Me.BAccept.Name = "BAccept"
-        Me.BAccept.Size = New System.Drawing.Size(734, 28)
+        Me.BAccept.Size = New System.Drawing.Size(764, 28)
         Me.BAccept.TabIndex = 138
         Me.BAccept.Text = "Syncronize Fingerprint Machine"
         '
@@ -638,7 +638,7 @@ Partial Class FormMasterEmployee
         Me.BClone.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.UltraFlat
         Me.BClone.LookAndFeel.UseDefaultLookAndFeel = False
         Me.BClone.Name = "BClone"
-        Me.BClone.Size = New System.Drawing.Size(734, 28)
+        Me.BClone.Size = New System.Drawing.Size(764, 28)
         Me.BClone.TabIndex = 139
         Me.BClone.Text = "Clone"
         Me.BClone.Visible = False
@@ -647,7 +647,7 @@ Partial Class FormMasterEmployee
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(734, 499)
+        Me.ClientSize = New System.Drawing.Size(764, 499)
         Me.Controls.Add(Me.GCEmployee)
         Me.Controls.Add(Me.BAccept)
         Me.Controls.Add(Me.PanelControl1)

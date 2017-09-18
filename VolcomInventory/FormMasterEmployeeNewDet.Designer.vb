@@ -149,6 +149,8 @@ Partial Class FormMasterEmployeeNewDet
         Me.BtnNext = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnSaveChanges = New DevExpress.XtraEditors.SimpleButton()
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControlTop, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlTop.SuspendLayout()
         CType(Me.DELastDay.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1086,7 +1088,7 @@ Partial Class FormMasterEmployeeNewDet
         '
         'GVPosition
         '
-        Me.GVPosition.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumn7, Me.GridColumn8, Me.GridColumn9, Me.GridColumn10, Me.GridColumnDatePostion})
+        Me.GVPosition.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn4, Me.GridColumn5, Me.GridColumn2, Me.GridColumn6, Me.GridColumn7, Me.GridColumn8, Me.GridColumn3, Me.GridColumn9, Me.GridColumn10, Me.GridColumnDatePostion})
         Me.GVPosition.GridControl = Me.GCPosition
         Me.GVPosition.Name = "GVPosition"
         Me.GVPosition.OptionsBehavior.Editable = False
@@ -1106,7 +1108,7 @@ Partial Class FormMasterEmployeeNewDet
         Me.GridColumn5.FieldNameSortGroup = "id_departement_origin"
         Me.GridColumn5.Name = "GridColumn5"
         Me.GridColumn5.Visible = True
-        Me.GridColumn5.VisibleIndex = 4
+        Me.GridColumn5.VisibleIndex = 5
         '
         'GridColumn6
         '
@@ -1115,7 +1117,7 @@ Partial Class FormMasterEmployeeNewDet
         Me.GridColumn6.FieldNameSortGroup = "id_employee_level_origin"
         Me.GridColumn6.Name = "GridColumn6"
         Me.GridColumn6.Visible = True
-        Me.GridColumn6.VisibleIndex = 5
+        Me.GridColumn6.VisibleIndex = 7
         '
         'GridColumn7
         '
@@ -1123,7 +1125,7 @@ Partial Class FormMasterEmployeeNewDet
         Me.GridColumn7.FieldName = "employee_position_origin"
         Me.GridColumn7.Name = "GridColumn7"
         Me.GridColumn7.Visible = True
-        Me.GridColumn7.VisibleIndex = 6
+        Me.GridColumn7.VisibleIndex = 8
         '
         'GridColumn8
         '
@@ -1141,7 +1143,7 @@ Partial Class FormMasterEmployeeNewDet
         Me.GridColumn9.FieldNameSortGroup = "id_employee_level"
         Me.GridColumn9.Name = "GridColumn9"
         Me.GridColumn9.Visible = True
-        Me.GridColumn9.VisibleIndex = 2
+        Me.GridColumn9.VisibleIndex = 3
         '
         'GridColumn10
         '
@@ -1149,7 +1151,7 @@ Partial Class FormMasterEmployeeNewDet
         Me.GridColumn10.FieldName = "employee_position"
         Me.GridColumn10.Name = "GridColumn10"
         Me.GridColumn10.Visible = True
-        Me.GridColumn10.VisibleIndex = 3
+        Me.GridColumn10.VisibleIndex = 4
         '
         'GridColumnDatePostion
         '
@@ -1505,6 +1507,20 @@ Partial Class FormMasterEmployeeNewDet
         '
         Me.ErrorProvider1.ContainerControl = Me
         '
+        'GridColumn2
+        '
+        Me.GridColumn2.Caption = "Orign Sub Dept"
+        Me.GridColumn2.Name = "GridColumn2"
+        Me.GridColumn2.Visible = True
+        Me.GridColumn2.VisibleIndex = 2
+        '
+        'GridColumn3
+        '
+        Me.GridColumn3.Caption = "Sub Dept"
+        Me.GridColumn3.Name = "GridColumn3"
+        Me.GridColumn3.Visible = True
+        Me.GridColumn3.VisibleIndex = 6
+        '
         'FormMasterEmployeeNewDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1730,4 +1746,6 @@ Partial Class FormMasterEmployeeNewDet
     Friend WithEvents Label36 As Label
     Friend WithEvents DERegBPJSKes As DevExpress.XtraEditors.DateEdit
     Friend WithEvents DERegBPJSTK As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents GridColumn2 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn3 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

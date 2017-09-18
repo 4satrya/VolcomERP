@@ -110,7 +110,7 @@
         query += "WHERE b.id_report_status = '6' AND (a.sales_return_det_qty - COALESCE(ret.jum_ret, 0)) >'0' "
         query += "GROUP BY a.id_sales_return "
         query += ") g ON g.id_sales_return = a.id_sales_return "
-        query += "WHERE a.id_report_status = '6' "
+        query += "WHERE a.id_report_status = '6' AND a.id_ret_type=1 "
         query += "ORDER BY a.id_sales_return ASC "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCSalesReturn.DataSource = data

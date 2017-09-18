@@ -102,6 +102,8 @@ Partial Class FormBOMSingle
         Me.BCancel = New DevExpress.XtraEditors.SimpleButton()
         Me.BSave = New DevExpress.XtraEditors.SimpleButton()
         Me.LTitleProduct = New DevExpress.XtraEditors.LabelControl()
+        Me.MEBOMNote = New DevExpress.XtraEditors.MemoEdit()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.EPBOM, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupGeneral, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -134,6 +136,7 @@ Partial Class FormBOMSingle
         Me.PCLotTitle.SuspendLayout()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
+        CType(Me.MEBOMNote.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'EPBOM
@@ -153,6 +156,8 @@ Partial Class FormBOMSingle
         'GroupGeneral
         '
         Me.GroupGeneral.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupGeneral.Controls.Add(Me.LabelControl1)
+        Me.GroupGeneral.Controls.Add(Me.MEBOMNote)
         Me.GroupGeneral.Controls.Add(Me.TEKurs)
         Me.GroupGeneral.Controls.Add(Me.LabelControl6)
         Me.GroupGeneral.Controls.Add(Me.LEReportStatus)
@@ -1033,6 +1038,21 @@ Partial Class FormBOMSingle
         Me.LTitleProduct.TabIndex = 12
         Me.LTitleProduct.Text = "Product : "
         '
+        'MEBOMNote
+        '
+        Me.MEBOMNote.Location = New System.Drawing.Point(35, 252)
+        Me.MEBOMNote.Name = "MEBOMNote"
+        Me.MEBOMNote.Size = New System.Drawing.Size(179, 103)
+        Me.MEBOMNote.TabIndex = 150
+        '
+        'LabelControl1
+        '
+        Me.LabelControl1.Location = New System.Drawing.Point(35, 233)
+        Me.LabelControl1.Name = "LabelControl1"
+        Me.LabelControl1.Size = New System.Drawing.Size(23, 13)
+        Me.LabelControl1.TabIndex = 151
+        Me.LabelControl1.Text = "Note"
+        '
         'FormBOMSingle
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1085,6 +1105,7 @@ Partial Class FormBOMSingle
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl2.ResumeLayout(False)
         Me.PanelControl2.PerformLayout()
+        CType(Me.MEBOMNote.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1169,4 +1190,6 @@ Partial Class FormBOMSingle
     Friend WithEvents GridColumnKursMat As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnKursOVH As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnCurrency As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents MEBOMNote As DevExpress.XtraEditors.MemoEdit
 End Class

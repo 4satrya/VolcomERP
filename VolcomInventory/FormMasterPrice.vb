@@ -66,7 +66,7 @@
         Dim query_c As ClassDesign = New ClassDesign()
         Dim cond As String = "-1"
         If id_role_login <> super_user Then
-            cond = "AND rm.id_user='" + id_user + "' "
+            cond = "AND prc.id_user_created='" + id_user + "' "
         End If
         Dim query As String = query_c.queryPriceExcelMain(cond, "2")
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")

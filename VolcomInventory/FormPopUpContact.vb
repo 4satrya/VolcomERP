@@ -93,7 +93,7 @@
     End Sub
 
     Sub view_company()
-        Dim query As String = "SELECT tb_m_comp.comp_commission,tb_m_comp.id_comp as id_comp,tb_m_comp.comp_number as comp_number,tb_m_comp.comp_name as comp_name,tb_m_comp.address_primary as address_primary,tb_m_comp.is_active as is_active,tb_m_comp_cat.comp_cat_name as company_category,tb_m_comp_group.comp_group, tb_m_comp.id_wh_type "
+        Dim query As String = "SELECT tb_m_comp.comp_commission,tb_m_comp.id_comp as id_comp,tb_m_comp.comp_number as comp_number,tb_m_comp.comp_name as comp_name,tb_m_comp.address_primary as address_primary,tb_m_comp.is_active as is_active, tb_m_comp.id_comp_cat, tb_m_comp_cat.comp_cat_name as company_category,tb_m_comp_group.comp_group, tb_m_comp.id_wh_type "
         query += " FROM tb_m_comp INNER JOIN tb_m_comp_cat ON tb_m_comp.id_comp_cat=tb_m_comp_cat.id_comp_cat "
         query += " INNER JOIN tb_m_comp_group ON tb_m_comp_group.id_comp_group=tb_m_comp.id_comp_group "
         If id_cat <> "-1" Then
@@ -102,6 +102,14 @@
         If id_pop_up = "38" Then
             query += "AND (tb_m_comp.id_comp_cat = '2' OR tb_m_comp.id_comp_cat = '5' OR tb_m_comp.id_comp_cat = '6') "
         End If
+
+        If id_pop_up = "41" Then
+            Dim id_ret_type = FormSalesReturnDet.id_ret_type
+            If id_ret_type = "3" Then 'return direct/khusus
+                query += "AND tb_m_comp.id_comp<>" + get_setup_field("wh_temp") + " "
+            End If
+        End If
+
         If id_pop_up = "47" Then
             query += "AND (tb_m_comp.id_comp_cat = '5' OR tb_m_comp.id_comp_cat = '6') "
         End If
@@ -140,6 +148,7 @@
             FormWHAWBillDet.TECompCode.Text = GVCompany.GetFocusedRowCellDisplayText("comp_number").ToString
             FormWHAWBillDet.TECompName.Text = GVCompany.GetFocusedRowCellDisplayText("comp_name").ToString
             FormWHAWBillDet.rate_table()
+            FormWHAWBillDet.clear_do()
             Close()
         ElseIf id_pop_up = "1" Then
             FormSamplePurchaseDet.id_comp_to = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
@@ -300,7 +309,8 @@
             Close()
         ElseIf id_pop_up = "25" Then
             FormProductionRecDet.id_comp_from = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
-            FormProductionRecDet.TECompName.Text = GVCompany.GetFocusedRowCellDisplayText("comp_number").ToString + "-" + GVCompany.GetFocusedRowCellDisplayText("comp_name").ToString
+            FormProductionRecDet.TxtCodeCompFrom.Text = GVCompany.GetFocusedRowCellDisplayText("comp_number").ToString
+            FormProductionRecDet.TECompName.Text = GVCompany.GetFocusedRowCellDisplayText("comp_name").ToString
             Close()
         ElseIf id_pop_up = "26" Then
             'pl mrs
@@ -310,7 +320,8 @@
             Close()
         ElseIf id_pop_up = "27" Then
             FormProductionRecDet.id_comp_to = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
-            FormProductionRecDet.TECompShipToName.Text = GVCompany.GetFocusedRowCellDisplayText("comp_number").ToString + "-" + GVCompany.GetFocusedRowCellDisplayText("comp_name").ToString
+            FormProductionRecDet.TxtCodeCompTo.Text = GVCompany.GetFocusedRowCellDisplayText("comp_number").ToString
+            FormProductionRecDet.TECompShipToName.Text = GVCompany.GetFocusedRowCellDisplayText("comp_name").ToString
             Close()
         ElseIf id_pop_up = "28" Then
             'pl mrs
@@ -393,6 +404,7 @@
             Else
                 Cursor = Cursors.WaitCursor
                 FormSalesOrderDet.id_store = GVCompany.GetFocusedRowCellValue("id_comp").ToString
+                FormSalesOrderDet.id_store_cat = GVCompany.GetFocusedRowCellValue("id_comp_cat").ToString
                 FormSalesOrderDet.id_store_contact_to = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
                 FormSalesOrderDet.TxtNameCompTo.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
                 FormSalesOrderDet.TxtCodeCompTo.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
@@ -474,12 +486,19 @@
             'End If
         ElseIf id_pop_up = "43" Then
             'Sales Return QC
+            If GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString = get_setup_field("wh_to_claim") Then
+                If FormSalesReturnQCDet.id_comp_to <> get_setup_field("wh_from_claim") Then
+                    stopCustom("This account only receive from RT2")
+                    Exit Sub
+                End If
+            End If
             FormSalesReturnQCDet.id_comp_contact_to = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
             FormSalesReturnQCDet.TxtNameCompTo.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
             FormSalesReturnQCDet.TxtCodeCompTo.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
             FormSalesReturnQCDet.id_comp_user = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
             FormSalesReturnQCDet.id_wh_type = GVCompany.GetFocusedRowCellValue("id_wh_type").ToString
             FormSalesReturnQCDet.setDefDrawer()
+            FormSalesReturnQCDet.setReportMarkType()
             FormSalesReturnQCDet.viewDetail()
             FormSalesReturnQCDet.view_barcode_list()
             FormSalesReturnQCDet.id_reject_type = "-1"
@@ -829,6 +848,35 @@
             FormMatRetInProd.TxtCodeCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
             FormMatRetInProd.MEAdrressCompFrom.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "3")
             Close()
+        ElseIf id_pop_up = "75" Then
+            'from final clearance
+            FormProductionFinalClearDet.id_comp_from = GVCompany.GetFocusedRowCellValue("id_comp").ToString
+            FormProductionFinalClearDet.TxtNameCompFrom.Text = GVCompany.GetFocusedRowCellValue("comp_name").ToString
+            FormProductionFinalClearDet.TxtCodeCompFrom.Text = GVCompany.GetFocusedRowCellValue("comp_number").ToString
+            FormProductionFinalClearDet.TxtCodeCompTo.Focus()
+            Close()
+        ElseIf id_pop_up = "76" Then
+            'to final clearance
+            FormProductionFinalClearDet.id_comp_to = GVCompany.GetFocusedRowCellValue("id_comp").ToString
+            FormProductionFinalClearDet.TxtNameCompTo.Text = GVCompany.GetFocusedRowCellValue("comp_name").ToString
+            FormProductionFinalClearDet.TxtCodeCompTo.Text = GVCompany.GetFocusedRowCellValue("comp_number").ToString
+            FormProductionFinalClearDet.TxtOrder.Focus()
+            Close()
+        ElseIf id_pop_up = "77" Then
+            'del empty
+            Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure you want to choose this store : " + GVCompany.GetFocusedRowCellValue("comp_number").ToString + " - " + GVCompany.GetFocusedRowCellValue("comp_name").ToString + "?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+            If confirm = Windows.Forms.DialogResult.Yes Then
+                Dim id_comp_contact As String = GVCompanyContactList.GetFocusedRowCellValue("id_comp_contact").ToString
+                Dim query As String = "INSERT INTO tb_wh_del_empty(wh_del_empty_number, id_store_contact_from, wh_del_empty_date,id_report_status, last_update, last_update_by) "
+                query += "VALUES('" + header_number_sales("31") + "', '" + id_comp_contact + "', NOW(),1, NOW(), " + id_user + ");SELECT LAST_INSERT_ID(); "
+                Dim id As String = execute_query(query, 0, True, "", "", "", "")
+                increase_inc_sales("31")
+                FormWHDelEmpty.viewDel()
+                FormWHDelEmpty.GVDel.FocusedRowHandle = find_row(FormWHDelEmpty.GVDel, "id_wh_del_empty", id)
+                Close()
+                FormWHDelEmptyDet.id_wh_del_empty = id
+                FormWHDelEmptyDet.ShowDialog()
+            End If
         End If
         Cursor = Cursors.Default
     End Sub

@@ -4,10 +4,13 @@
         view_do()
     End Sub
     Sub view_do()
-        Dim query As String = "SELECT awbdo.*,awb.awbill_no,awb.awbill_inv_no,'no' AS is_check FROM tb_wh_awb_do awbdo "
-        query += " LEFT JOIN tb_wh_awbill_det det On awbdo.do_no=det.do_no "
-        query += " LEFT JOIN tb_wh_awbill awb ON awb.id_awbill=det.id_awbill "
-        query += " WHERE store_number='" + store_number + "' And ISNULL(awb.id_awbill)"
+        Dim query As String = ""
+
+        query = "SELECT awbdo.*,awb.awbill_no,awb.awbill_inv_no,'no' AS is_check FROM tb_wh_awb_do awbdo 
+        LEFT JOIN tb_wh_awbill_det det ON awbdo.do_no=det.do_no 
+        LEFT JOIN tb_wh_awbill awb ON awb.id_awbill=det.id_awbill 
+        WHERE store_number='" & store_number.ToString & "' AND ISNULL(awb.id_awbill)"
+
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
         Dim data_par As DataTable = FormWHAWBillDet.GCDO.DataSource

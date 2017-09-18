@@ -33,6 +33,7 @@ Public Class FormProductionPLToWHRecDet
 
     Public id_comp_to As String = "-1"
     Public id_design As String = "-1"
+    Public id_design_cat As String = "-1"
 
     Private Sub FormProductionPLToWHRecDet_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         checkFormAccessSingle(Name)
@@ -170,9 +171,9 @@ Public Class FormProductionPLToWHRecDet
 
     'View Storage
     Sub viewComp()
-        Dim query As String = "SELECT ('0') AS `id_comp`, '[Select Account]' AS `comp_name`, '-' AS `comp_cat_name`, '-' AS `address_primary` "
+        Dim query As String = "SELECT ('0') AS `id_comp`, '[Select Account]' AS `comp_name`,'-' AS `comp_number`, '-' AS `comp_cat_name`, '-' AS `address_primary` "
         query += "UNION ALL "
-        query += "(SELECT a.id_comp, CONCAT(a.comp_number, '-', a.comp_name) AS comp_name, b.comp_cat_name, a.address_primary "
+        query += "(SELECT a.id_comp, CONCAT(a.comp_number, '-', a.comp_name) AS comp_name, a.comp_number, b.comp_cat_name, a.address_primary "
         query += "FROM tb_m_comp a "
         query += "INNER JOIN tb_m_comp_cat b ON a.id_comp_cat = b.id_comp_cat "
         query += "INNER JOIN tb_m_wh_locator c ON a.id_comp = c.id_comp "
@@ -191,7 +192,7 @@ Public Class FormProductionPLToWHRecDet
             BtnBrowseContactFrom.Enabled = True
             BtnBrowseContactTo.Enabled = True
             MENote.Properties.ReadOnly = False
-            BtnSave.Enabled = True
+            BtnSave.Enabled = False
             BScan.Enabled = True
             BDelete.Enabled = True
             SLEStorage.Enabled = True
@@ -213,6 +214,7 @@ Public Class FormProductionPLToWHRecDet
             SLEDrawer.Enabled = False
             GVRetDetail.OptionsBehavior.ReadOnly = True
         End If
+        PanelNavBarcode.Enabled = False
 
         'attachment
         If check_attach_report_status(id_report_status, "37", id_pl_prod_order_rec) Then
@@ -286,7 +288,7 @@ Public Class FormProductionPLToWHRecDet
         query += "DATE_FORMAT(a.pl_prod_order_date,'%d %M %Y') AS pl_prod_order_date,a.id_report_status,c.report_status, "
         query += "b.id_design,b.id_delivery, e.delivery, f.season, e.id_season, "
         query += "a.id_comp_contact_from, a.id_comp_contact_to, (i.id_comp) AS id_comp_to, (i.comp_name) AS comp_name_to, (i.comp_number) AS comp_number_to, (k.comp_name) AS comp_name_from, (k.comp_number) AS comp_number_from, d.design_cop, "
-        query += "alloc.id_pd_alloc, alloc.pd_alloc "
+        query += "alloc.id_pd_alloc, alloc.pd_alloc, prc.design_price, prc.id_design_cat "
         query += "FROM tb_pl_prod_order a "
         query += "INNER JOIN tb_m_comp_contact h ON h.id_comp_contact = a.id_comp_contact_to "
         query += "INNER JOIN tb_m_comp i ON h.id_comp = i.id_comp "
@@ -300,7 +302,20 @@ Public Class FormProductionPLToWHRecDet
         query += "INNER JOIN tb_season f ON f.id_season=e.id_season "
         query += "INNER JOIN tb_lookup_pl_category g ON g.id_pl_category = a.id_pl_category "
         query += "LEFT JOIN tb_pl_prod_order_rec z ON a.id_pl_prod_order = z.id_pl_prod_order AND z.id_report_status!='5' "
-        query += "LEFT JOIN tb_lookup_pd_alloc alloc ON alloc.id_pd_alloc = a.id_pd_alloc "
+        query += "LEFT JOIN tb_lookup_pd_alloc alloc ON alloc.id_pd_alloc = a.id_pd_alloc 
+        LEFT JOIN(
+		    SELECT * FROM (
+		    SELECT price.id_design, price.design_price, price_type.id_design_cat
+		    FROM tb_m_design_price price 
+		    INNER JOIN tb_lookup_design_price_type price_type 
+		    ON price.id_design_price_type = price_type.id_design_price_type 
+		    INNER JOIN tb_lookup_currency curr ON curr.id_currency = price.id_currency 
+		    INNER JOIN tb_m_user `user` ON user.id_user = price.id_user 
+		    INNER JOIN tb_m_employee emp ON emp.id_employee = user.id_employee 
+		    WHERE price.is_active_wh='1' AND price.design_price_start_date <= DATE(NOW())
+		    ORDER BY price.design_price_start_date DESC, price.id_design_price DESC ) a
+		    GROUP BY a.id_design
+	    ) prc ON prc.id_design = d.id_design "
         query += "WHERE a.id_pl_prod_order = '" + id_pl_prod_order + "' "
         query += "ORDER BY a.id_pl_prod_order ASC "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
@@ -315,6 +330,7 @@ Public Class FormProductionPLToWHRecDet
         id_comp_to = data.Rows(0)("id_comp_to").ToString
         id_sample = data.Rows(0)("id_sample").ToString
         id_design = data.Rows(0)("id_design").ToString
+        id_design_cat = data.Rows(0)("id_design_cat").ToString
         TEDesign.Text = data.Rows(0)("design_display_name").ToString
         TxtAllocation.Text = data.Rows(0)("pd_alloc").ToString
         TxtSeason.Text = data.Rows(0)("season").ToString
@@ -530,12 +546,16 @@ Public Class FormProductionPLToWHRecDet
                         Next
                         execute_non_query(query_counting, True, "", "", "", "")
 
-                        exportToBOF(False)
+                        'submit who prepared
+                        submit_who_prepared("37", id_pl_prod_order_rec, id_user)
+
+
                         FormProductionPLToWHRec.viewPL()
                         FormProductionPLToWHRec.GVPL.FocusedRowHandle = find_row(FormProductionPLToWHRec.GVPL, "id_pl_prod_order_rec", id_pl_prod_order_rec)
                         FormProductionPLToWHRec.view_sample_purc()
                         action = "upd"
                         actionLoad()
+                        exportToBOF(False)
                         infoCustom("Document #" + pl_prod_order_rec_number + " was created successfully")
                     Catch ex As Exception
                         errorConnection()
@@ -641,12 +661,12 @@ Public Class FormProductionPLToWHRecDet
                         Next
 
                         'View
-                        exportToBOF(False)
                         FormProductionPLToWHRec.viewPL()
                         FormProductionPLToWHRec.GVPL.FocusedRowHandle = find_row(FormProductionPLToWHRec.GVPL, "id_pl_prod_order_rec", id_pl_prod_order_rec)
                         FormProductionPLToWHRec.view_sample_purc()
                         action = "upd"
                         actionLoad()
+                        exportToBOF(False)
                         infoCustom("Document #" + pl_prod_order_rec_number + " was edited successfully")
                     Catch ex As Exception
                         errorConnection()
@@ -782,6 +802,29 @@ Public Class FormProductionPLToWHRecDet
     End Sub
 
     Private Sub BScan_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BScan.Click
+        Dim id_wh As String = "-1"
+        Try
+            id_wh = SLEStorage.EditValue.ToString
+        Catch ex As Exception
+        End Try
+
+        If id_wh = 0 Then
+            stopCustom("Please select storage first !")
+            Exit Sub
+        End If
+
+        Dim id_wh_type As String = execute_query("SELECT id_wh_type FROM tb_m_comp WHERE id_comp=" + id_wh + "", 0, True, "", "", "", "")
+        If id_wh_type = "1" Or id_wh_type = "2" Then
+            If id_wh_type <> id_design_cat Then
+                If id_wh_type = "1" Then
+                    stopCustom(SLEStorage.Text.ToString + " is only for normal product. ")
+                Else
+                    stopCustom(SLEStorage.Text.ToString + " is only for sale product. ")
+                End If
+                Exit Sub
+            End If
+        End If
+
         MENote.Enabled = False
         BtnBrowsePO.Enabled = False
         BtnBrowseContactFrom.Enabled = False
@@ -843,6 +886,10 @@ Public Class FormProductionPLToWHRecDet
         End If
         GCRetDetail.RefreshDataSource()
         GVRetDetail.RefreshData()
+
+        If GVBarcode.RowCount > 0 Then
+            SLEStorage.Enabled = False
+        End If
     End Sub
 
     Private Sub BDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BDelete.Click
@@ -886,7 +933,7 @@ Public Class FormProductionPLToWHRecDet
             GVBarcode.SetFocusedRowCellValue("counting_code", counting_code)
             countQty(id_pl_prod_order_det)
             newRowsBc()
-        ElseIf is_old = "2" Then 'new system product
+        ElseIf is_old = "2" Or is_old = "3" Then 'new system product
             'check duplicate code
             If GVBarcode.RowCount <= 0 Then
                 code_duplicate = False
@@ -1208,6 +1255,10 @@ Public Class FormProductionPLToWHRecDet
             Next
             GridColumnCode.VisibleIndex = 0
             GridColumnQtyRec.VisibleIndex = 1
+            GridColumnNumber.VisibleIndex = 2
+            GridColumnFrom.VisibleIndex = 3
+            GridColumnTo.VisibleIndex = 4
+            GridColumnRemark.VisibleIndex = 5
             GVRetDetail.OptionsPrint.PrintFooter = False
             GVRetDetail.OptionsPrint.PrintHeader = False
 
@@ -1238,6 +1289,11 @@ Public Class FormProductionPLToWHRecDet
             GridColumnSize.VisibleIndex = 3
             GridColumnQtyRec.VisibleIndex = 4
             GridColumnRemark.VisibleIndex = 5
+            GridColumnNumber.Visible = False
+            GridColumnFrom.Visible = False
+            GridColumnTo.Visible = False
+            GVRetDetail.OptionsPrint.PrintFooter = False
+            GVRetDetail.OptionsPrint.PrintHeader = False
             Cursor = Cursors.Default
         End If
     End Sub
@@ -1274,8 +1330,16 @@ Public Class FormProductionPLToWHRecDet
                 colIndex = colIndex + 1
                 If j = 0 Then
                     wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, "code").ToString
-                Else
+                ElseIf j = 1
                     wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, "pl_prod_order_rec_det_qty")
+                ElseIf j = 2
+                    wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellDisplayText(i, "number").ToString
+                ElseIf j = 3
+                    wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellDisplayText(i, "from").ToString
+                ElseIf j = 4
+                    wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellDisplayText(i, "to").ToString
+                Else
+                    wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, "pl_prod_order_rec_det_note").ToString
                 End If
             Next
         Next
@@ -1307,7 +1371,16 @@ Public Class FormProductionPLToWHRecDet
         End Try
     End Sub
 
-
+    Private Sub GVRetDetail_CustomUnboundColumnData(sender As Object, e As DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs) Handles GVRetDetail.CustomUnboundColumnData
+        Dim view As DevExpress.XtraGrid.Views.Grid.GridView = TryCast(sender, DevExpress.XtraGrid.Views.Grid.GridView)
+        If e.Column.FieldName = "from" AndAlso e.IsGetData Then
+            e.Value = TxtVendorCode.Text.ToString
+        ElseIf e.Column.FieldName = "to" AndAlso e.IsGetData Then
+            e.Value = SLEStorage.Text.Split("-")(0).ToString
+        ElseIf e.Column.FieldName = "number" AndAlso e.IsGetData Then
+            e.Value = TxtRetOutNumber.Text.ToString
+        End If
+    End Sub
 
     Private Sub BtnAttachment_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnAttachment.Click
         Cursor = Cursors.WaitCursor

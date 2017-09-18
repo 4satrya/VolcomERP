@@ -99,6 +99,9 @@ Partial Class FormSalesReturnQCDet
         Me.GridColumnIdSample = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdPlSalesOrderDel = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnStt = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnNumber = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnFrom = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnTo = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemSpinEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
         Me.XTCReturn = New DevExpress.XtraTab.XtraTabControl()
         Me.XTPScan = New DevExpress.XtraTab.XtraTabPage()
@@ -116,6 +119,8 @@ Partial Class FormSalesReturnQCDet
         Me.GridColumnIdDesignPriceBc = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnDesignPriceBc = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdRejectType = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnNameB = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnSizeB = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnRejectType = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemCheckEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.RepositoryItemSpinEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
@@ -158,8 +163,6 @@ Partial Class FormSalesReturnQCDet
         Me.GridColumnIdx = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdx2 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.EPForm = New System.Windows.Forms.ErrorProvider(Me.components)
-        Me.GridColumnNameB = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnSizeB = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
         CType(Me.PanelControlTopRight, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -848,7 +851,7 @@ Partial Class FormSalesReturnQCDet
         '
         'GVItemList
         '
-        Me.GVItemList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumnCode, Me.GridColumnName, Me.GridColumnSize, Me.GridColumnPriceType, Me.GridColumnQty, Me.GridColumnQtyLimit, Me.GridColumnPrice, Me.GridColumnAmount, Me.GridColumnRemark, Me.GridColumnUOM, Me.GridColumnQtyWH, Me.GridColumnEanCode, Me.GridColumnIdSalesOrderDet, Me.GridColumn2, Me.GridColumnIdDesignPrice, Me.GridColumnIdDesign, Me.GridColumnIdSample, Me.GridColumnIdPlSalesOrderDel, Me.GridColumnStt})
+        Me.GVItemList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumnCode, Me.GridColumnName, Me.GridColumnSize, Me.GridColumnPriceType, Me.GridColumnQty, Me.GridColumnQtyLimit, Me.GridColumnPrice, Me.GridColumnAmount, Me.GridColumnRemark, Me.GridColumnUOM, Me.GridColumnQtyWH, Me.GridColumnEanCode, Me.GridColumnIdSalesOrderDet, Me.GridColumn2, Me.GridColumnIdDesignPrice, Me.GridColumnIdDesign, Me.GridColumnIdSample, Me.GridColumnIdPlSalesOrderDel, Me.GridColumnStt, Me.GridColumnNumber, Me.GridColumnFrom, Me.GridColumnTo})
         Me.GVItemList.GridControl = Me.GCItemList
         Me.GVItemList.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_qc_det_qty", Me.GridColumnQty, "{0:n0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_qc_det_amount", Me.GridColumnAmount, "{0:n2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_qc_det_qty_limit", Me.GridColumnQtyLimit, "{0:n0}")})
         Me.GVItemList.Name = "GVItemList"
@@ -865,7 +868,7 @@ Partial Class FormSalesReturnQCDet
         Me.GridColumnNo.OptionsColumn.AllowEdit = False
         Me.GridColumnNo.Visible = True
         Me.GridColumnNo.VisibleIndex = 0
-        Me.GridColumnNo.Width = 42
+        Me.GridColumnNo.Width = 41
         '
         'GridColumnCode
         '
@@ -875,7 +878,7 @@ Partial Class FormSalesReturnQCDet
         Me.GridColumnCode.OptionsColumn.ReadOnly = True
         Me.GridColumnCode.Visible = True
         Me.GridColumnCode.VisibleIndex = 1
-        Me.GridColumnCode.Width = 71
+        Me.GridColumnCode.Width = 70
         '
         'GridColumnName
         '
@@ -886,7 +889,7 @@ Partial Class FormSalesReturnQCDet
         Me.GridColumnName.OptionsColumn.ReadOnly = True
         Me.GridColumnName.Visible = True
         Me.GridColumnName.VisibleIndex = 2
-        Me.GridColumnName.Width = 142
+        Me.GridColumnName.Width = 140
         '
         'GridColumnSize
         '
@@ -900,7 +903,7 @@ Partial Class FormSalesReturnQCDet
         Me.GridColumnSize.OptionsColumn.ReadOnly = True
         Me.GridColumnSize.Visible = True
         Me.GridColumnSize.VisibleIndex = 3
-        Me.GridColumnSize.Width = 54
+        Me.GridColumnSize.Width = 53
         '
         'GridColumnPriceType
         '
@@ -908,7 +911,9 @@ Partial Class FormSalesReturnQCDet
         Me.GridColumnPriceType.FieldName = "design_price_type"
         Me.GridColumnPriceType.Name = "GridColumnPriceType"
         Me.GridColumnPriceType.OptionsColumn.ReadOnly = True
-        Me.GridColumnPriceType.Width = 80
+        Me.GridColumnPriceType.Visible = True
+        Me.GridColumnPriceType.VisibleIndex = 7
+        Me.GridColumnPriceType.Width = 82
         '
         'GridColumnQty
         '
@@ -925,17 +930,20 @@ Partial Class FormSalesReturnQCDet
         Me.GridColumnQty.OptionsColumn.ReadOnly = True
         Me.GridColumnQty.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_qc_det_qty", "{0:n0}")})
         Me.GridColumnQty.Visible = True
-        Me.GridColumnQty.VisibleIndex = 4
-        Me.GridColumnQty.Width = 89
+        Me.GridColumnQty.VisibleIndex = 5
+        Me.GridColumnQty.Width = 57
         '
         'GridColumnQtyLimit
         '
-        Me.GridColumnQtyLimit.Caption = "Qty Limit"
+        Me.GridColumnQtyLimit.Caption = "Limit Qty"
         Me.GridColumnQtyLimit.DisplayFormat.FormatString = "N0"
         Me.GridColumnQtyLimit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnQtyLimit.FieldName = "sales_return_qc_det_qty_limit"
         Me.GridColumnQtyLimit.Name = "GridColumnQtyLimit"
         Me.GridColumnQtyLimit.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_qc_det_qty_limit", "{0:N0}")})
+        Me.GridColumnQtyLimit.Visible = True
+        Me.GridColumnQtyLimit.VisibleIndex = 4
+        Me.GridColumnQtyLimit.Width = 74
         '
         'GridColumnPrice
         '
@@ -950,8 +958,8 @@ Partial Class FormSalesReturnQCDet
         Me.GridColumnPrice.Name = "GridColumnPrice"
         Me.GridColumnPrice.OptionsColumn.ReadOnly = True
         Me.GridColumnPrice.Visible = True
-        Me.GridColumnPrice.VisibleIndex = 5
-        Me.GridColumnPrice.Width = 108
+        Me.GridColumnPrice.VisibleIndex = 8
+        Me.GridColumnPrice.Width = 110
         '
         'GridColumnAmount
         '
@@ -967,8 +975,8 @@ Partial Class FormSalesReturnQCDet
         Me.GridColumnAmount.OptionsColumn.ReadOnly = True
         Me.GridColumnAmount.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_qc_det_amount", "{0:n2}")})
         Me.GridColumnAmount.Visible = True
-        Me.GridColumnAmount.VisibleIndex = 6
-        Me.GridColumnAmount.Width = 124
+        Me.GridColumnAmount.VisibleIndex = 9
+        Me.GridColumnAmount.Width = 128
         '
         'GridColumnRemark
         '
@@ -976,8 +984,8 @@ Partial Class FormSalesReturnQCDet
         Me.GridColumnRemark.FieldName = "sales_return_qc_det_note"
         Me.GridColumnRemark.Name = "GridColumnRemark"
         Me.GridColumnRemark.Visible = True
-        Me.GridColumnRemark.VisibleIndex = 7
-        Me.GridColumnRemark.Width = 231
+        Me.GridColumnRemark.VisibleIndex = 10
+        Me.GridColumnRemark.Width = 255
         '
         'GridColumnUOM
         '
@@ -1062,10 +1070,35 @@ Partial Class FormSalesReturnQCDet
         '
         'GridColumnStt
         '
-        Me.GridColumnStt.Caption = "Status"
+        Me.GridColumnStt.Caption = "Diff"
         Me.GridColumnStt.FieldName = "status"
         Me.GridColumnStt.Name = "GridColumnStt"
         Me.GridColumnStt.OptionsColumn.AllowEdit = False
+        Me.GridColumnStt.UnboundType = DevExpress.Data.UnboundColumnType.[String]
+        Me.GridColumnStt.Visible = True
+        Me.GridColumnStt.VisibleIndex = 6
+        Me.GridColumnStt.Width = 68
+        '
+        'GridColumnNumber
+        '
+        Me.GridColumnNumber.Caption = "Number"
+        Me.GridColumnNumber.FieldName = "number"
+        Me.GridColumnNumber.Name = "GridColumnNumber"
+        Me.GridColumnNumber.UnboundType = DevExpress.Data.UnboundColumnType.[String]
+        '
+        'GridColumnFrom
+        '
+        Me.GridColumnFrom.Caption = "From"
+        Me.GridColumnFrom.FieldName = "from"
+        Me.GridColumnFrom.Name = "GridColumnFrom"
+        Me.GridColumnFrom.UnboundType = DevExpress.Data.UnboundColumnType.[String]
+        '
+        'GridColumnTo
+        '
+        Me.GridColumnTo.Caption = "To"
+        Me.GridColumnTo.FieldName = "to"
+        Me.GridColumnTo.Name = "GridColumnTo"
+        Me.GridColumnTo.UnboundType = DevExpress.Data.UnboundColumnType.[String]
         '
         'RepositoryItemSpinEdit1
         '
@@ -1216,6 +1249,26 @@ Partial Class FormSalesReturnQCDet
         Me.GridColumnIdRejectType.FieldName = "id_reject_type"
         Me.GridColumnIdRejectType.Name = "GridColumnIdRejectType"
         Me.GridColumnIdRejectType.OptionsColumn.AllowEdit = False
+        '
+        'GridColumnNameB
+        '
+        Me.GridColumnNameB.Caption = "Description"
+        Me.GridColumnNameB.FieldName = "name"
+        Me.GridColumnNameB.Name = "GridColumnNameB"
+        Me.GridColumnNameB.OptionsColumn.AllowEdit = False
+        Me.GridColumnNameB.Visible = True
+        Me.GridColumnNameB.VisibleIndex = 2
+        Me.GridColumnNameB.Width = 499
+        '
+        'GridColumnSizeB
+        '
+        Me.GridColumnSizeB.Caption = "Size"
+        Me.GridColumnSizeB.FieldName = "size"
+        Me.GridColumnSizeB.Name = "GridColumnSizeB"
+        Me.GridColumnSizeB.OptionsColumn.AllowEdit = False
+        Me.GridColumnSizeB.Visible = True
+        Me.GridColumnSizeB.VisibleIndex = 3
+        Me.GridColumnSizeB.Width = 60
         '
         'GridColumnRejectType
         '
@@ -1575,26 +1628,6 @@ Partial Class FormSalesReturnQCDet
         '
         Me.EPForm.ContainerControl = Me
         '
-        'GridColumnNameB
-        '
-        Me.GridColumnNameB.Caption = "Description"
-        Me.GridColumnNameB.FieldName = "name"
-        Me.GridColumnNameB.Name = "GridColumnNameB"
-        Me.GridColumnNameB.OptionsColumn.AllowEdit = False
-        Me.GridColumnNameB.Visible = True
-        Me.GridColumnNameB.VisibleIndex = 2
-        Me.GridColumnNameB.Width = 499
-        '
-        'GridColumnSizeB
-        '
-        Me.GridColumnSizeB.Caption = "Size"
-        Me.GridColumnSizeB.FieldName = "size"
-        Me.GridColumnSizeB.Name = "GridColumnSizeB"
-        Me.GridColumnSizeB.OptionsColumn.AllowEdit = False
-        Me.GridColumnSizeB.Visible = True
-        Me.GridColumnSizeB.VisibleIndex = 3
-        Me.GridColumnSizeB.Width = 60
-        '
         'FormSalesReturnQCDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1827,4 +1860,7 @@ Partial Class FormSalesReturnQCDet
     Friend WithEvents GridColumnStt As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnNameB As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnSizeB As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnNumber As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnFrom As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnTo As DevExpress.XtraGrid.Columns.GridColumn
 End Class

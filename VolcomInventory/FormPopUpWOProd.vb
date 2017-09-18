@@ -9,7 +9,7 @@
     End Sub
 
     Sub view_wo()
-        Dim query = "SELECT po.prod_order_number,a.id_report_status,h.report_status,a.id_prod_order_wo,a.id_ovh_price,a.id_prod_order "
+        Dim query = "SELECT dsg.design_code,dsg.design_display_name,po.prod_order_number,a.id_report_status,h.report_status,a.id_prod_order_wo,a.id_ovh_price,a.id_prod_order "
         query += ",(SELECT IFNULL(MAX(prod_order_wo_prog_percent),0) FROM tb_prod_order_wo_prog WHERE id_prod_order_wo = a.id_prod_order_wo) as progress,"
         query += "g.payment,a.prod_order_wo_kurs,a.id_currency, "
         query += "b.id_comp_contact,d.comp_name AS comp_name_to, "
@@ -21,6 +21,8 @@
         query += "DATE_ADD(a.prod_order_wo_date,INTERVAL (a.prod_order_wo_top+a.prod_order_wo_lead_time) DAY) AS prod_order_wo_top "
         query += "FROM tb_prod_order_wo a INNER JOIN tb_m_ovh_price b ON a.id_ovh_price=b.id_ovh_price "
         query += "INNER JOIN tb_prod_order po ON po.id_prod_order=a.id_prod_order "
+        query += "INNER JOIN tb_prod_demand_design pdd ON pdd.id_prod_demand_design=po.id_prod_demand_design "
+        query += "INNER JOIN tb_m_design dsg ON dsg.id_design=pdd.id_design "
         query += "INNER JOIN tb_m_comp_contact c ON b.id_comp_contact = c.id_comp_contact "
         query += "INNER JOIN tb_m_comp d ON c.id_comp = d.id_comp "
         query += "INNER JOIN tb_m_comp_contact e ON a.id_comp_contact_ship_to = e.id_comp_contact "
@@ -48,6 +50,7 @@
         Else
             BSave.Enabled = False
         End If
+        GVProdWO.BestFitColumns()
     End Sub
     Sub view_wo(ByVal id_prod_wo As String)
         Dim query = "CALL view_prod_order_wo_det('" & id_prod_wo & "','1')"

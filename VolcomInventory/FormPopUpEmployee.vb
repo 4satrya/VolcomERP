@@ -32,6 +32,10 @@
     End Sub
 
     Private Sub BPick_Click(sender As Object, e As EventArgs) Handles BPick.Click
+        pick()
+    End Sub
+
+    Sub pick()
         If id_popup = "1" Then
             FormEmpLeaveDet.id_employee = GVEmployee.GetFocusedRowCellValue("id_employee").ToString
             FormEmpLeaveDet.TEEmployeeCode.Text = GVEmployee.GetFocusedRowCellValue("employee_code").ToString
@@ -62,6 +66,12 @@
             FormEmpChScheduleDet.TEPosition.Text = GVEmployee.GetFocusedRowCellValue("employee_position").ToString
             FormEmpChScheduleDet.MEChNote.Focus()
             Close()
+        End If
+    End Sub
+
+    Private Sub GVEmployee_DoubleClick(sender As Object, e As EventArgs) Handles GVEmployee.DoubleClick
+        If GVEmployee.RowCount > 0 Then
+            pick()
         End If
     End Sub
 End Class

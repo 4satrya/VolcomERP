@@ -28,6 +28,7 @@ Partial Class FormSalesReturnOrder
         Me.GridColumnDSalesTargetNote = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnReportStatus = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumnPrepareStatus = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GCSalesReturnOrder, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVSalesReturnOrder, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -45,7 +46,7 @@ Partial Class FormSalesReturnOrder
         '
         'GVSalesReturnOrder
         '
-        Me.GVSalesReturnOrder.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnSalesTargetNumb, Me.GridColumnTo, Me.GridColumnSalesTargetDate, Me.GridColumnEstDate, Me.GridColumnDSalesTargetNote, Me.GridColumnReportStatus})
+        Me.GVSalesReturnOrder.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnSalesTargetNumb, Me.GridColumnTo, Me.GridColumnSalesTargetDate, Me.GridColumnEstDate, Me.GridColumnDSalesTargetNote, Me.GridColumnReportStatus, Me.GridColumnPrepareStatus})
         Me.GVSalesReturnOrder.GridControl = Me.GCSalesReturnOrder
         Me.GVSalesReturnOrder.Name = "GVSalesReturnOrder"
         Me.GVSalesReturnOrder.OptionsBehavior.ReadOnly = True
@@ -105,6 +106,14 @@ Partial Class FormSalesReturnOrder
         Me.GridView2.GridControl = Me.GCSalesReturnOrder
         Me.GridView2.Name = "GridView2"
         '
+        'GridColumnPrepareStatus
+        '
+        Me.GridColumnPrepareStatus.Caption = "WH Status"
+        Me.GridColumnPrepareStatus.FieldName = "prepare_status"
+        Me.GridColumnPrepareStatus.Name = "GridColumnPrepareStatus"
+        Me.GridColumnPrepareStatus.Visible = True
+        Me.GridColumnPrepareStatus.VisibleIndex = 6
+        '
         'FormSalesReturnOrder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -133,4 +142,5 @@ Partial Class FormSalesReturnOrder
     Friend WithEvents GridColumnReportStatus As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridView2 As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumnEstDate As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnPrepareStatus As DevExpress.XtraGrid.Columns.GridColumn
 End Class

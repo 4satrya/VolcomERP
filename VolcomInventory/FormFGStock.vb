@@ -83,6 +83,12 @@
     Public date_from_selected_stock_qc As String = "-1"
     Public date_until_selected_stock_qc As String = "-1"
 
+    '-----------------------------
+    'RESERVED STOCK LIST
+    '-----------------------------
+    Public id_design_rsv As String = "-1"
+    Public id_drw_rsv As String = "-1"
+
     'Datatalbe-Tab Stock Store
     Public dt_qc As DataTable
 
@@ -92,7 +98,6 @@
         If id_pop_up = "-1" Then
             viewWHStockCard()
             viewWHStockSum()
-            viewProductStockSum()
             viewStoreStockStore()
             viewProductStockStore()
             XTPFGStockQC.PageVisible = False
@@ -108,6 +113,7 @@
         DEUntil.EditValue = data_dt.Rows(0)("dt")
         DEUntilStockFG.EditValue = data_dt.Rows(0)("dt")
         DEUntilStockQC.EditValue = data_dt.Rows(0)("dt")
+        ActiveControl = TxtDesignCode
     End Sub
 
     '=============== TAB STOCK CARD FG=================================
@@ -161,19 +167,36 @@
 
     Private Sub SMViewDel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SMViewDel.Click
         Cursor = Cursors.WaitCursor
-        If BandedGridViewFGStockCard.RowCount > 0 Then
-            Dim id_trans As String = "-1"
-            Dim report_mark_type As String = "-1"
-            Try
-                id_trans = BandedGridViewFGStockCard.GetFocusedRowCellValue("id_report").ToString
-                report_mark_type = BandedGridViewFGStockCard.GetFocusedRowCellValue("report_mark_type").ToString
-            Catch ex As Exception
-            End Try
+        If XTCFGStock.SelectedTabPageIndex = 1 Then
+            If BandedGridViewFGStockCard.RowCount > 0 Then
+                Dim id_trans As String = "-1"
+                Dim report_mark_type As String = "-1"
+                Try
+                    id_trans = BandedGridViewFGStockCard.GetFocusedRowCellValue("id_report").ToString
+                    report_mark_type = BandedGridViewFGStockCard.GetFocusedRowCellValue("report_mark_type").ToString
+                Catch ex As Exception
+                End Try
 
-            Dim showpopup As ClassShowPopUp = New ClassShowPopUp()
-            showpopup.report_mark_type = report_mark_type
-            showpopup.id_report = id_trans
-            showpopup.show()
+                Dim showpopup As ClassShowPopUp = New ClassShowPopUp()
+                showpopup.report_mark_type = report_mark_type
+                showpopup.id_report = id_trans
+                showpopup.show()
+            End If
+        ElseIf XTCFGStock.SelectedTabPageIndex = 4 Then
+            If GVRsv.RowCount > 0 And GVRsv.FocusedRowHandle >= 0 Then
+                Dim id_trans As String = "-1"
+                Dim report_mark_type As String = "-1"
+                Try
+                    id_trans = GVRsv.GetFocusedRowCellValue("id_report").ToString
+                    report_mark_type = GVRsv.GetFocusedRowCellValue("report_mark_type").ToString
+                Catch ex As Exception
+                End Try
+
+                Dim showpopup As ClassShowPopUp = New ClassShowPopUp()
+                showpopup.report_mark_type = report_mark_type
+                showpopup.id_report = id_trans
+                showpopup.show()
+            End If
         End If
         Cursor = Cursors.Default
     End Sub
@@ -281,7 +304,6 @@
         End Try
 
         Try
-            id_design_selected_stock_sum = SLEDesignStockSum.EditValue.ToString
             id_wh_param_selected = SLEWHStockSum.EditValue.ToString
             id_locator_param_selected = SLELocatorStockSum.EditValue.ToString
             id_rack_param_selected = SLERackStockSum.EditValue.ToString
@@ -293,7 +315,7 @@
         If id_design_selected_stock_sum = "0" Then
             label_design_selected_stock_sum = "All Design"
         Else
-            label_design_selected_stock_sum = SLEDesignStockSum.Properties.View.GetFocusedRowCellValue("label_design").ToString
+            label_design_selected_stock_sum = TxtDesignCode.Text
         End If
 
         If id_wh_param_selected = "0" Then
@@ -509,27 +531,6 @@
         GroupControlInfo.Enabled = True
         GroupControlTraccking.Enabled = True
         Cursor = Cursors.Default
-    End Sub
-
-    Sub viewProductStockSum()
-        Dim query As String = ""
-        query += "CALL view_design_wh(TRUE) "
-        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
-        For i As Integer = 0 To data.Rows.Count - 1
-            If i = 0 Then
-                label_design_stock_sum_def = data.Rows(i)("label_design").ToString
-                Exit For
-            End If
-        Next
-        SLEDesignStockSum.Properties.DataSource = Nothing
-        SLEDesignStockSum.Properties.DataSource = data
-        SLEDesignStockSum.Properties.DisplayMember = "label_design"
-        SLEDesignStockSum.Properties.ValueMember = "id_design"
-        If data.Rows.Count.ToString >= 1 Then
-            SLEDesignStockSum.EditValue = data.Rows(0)("id_design").ToString
-        Else
-            SLEDesignStockSum.EditValue = Nothing
-        End If
     End Sub
 
     '===========================TAB STOCK STORE======================================
@@ -820,7 +821,7 @@
                 band_ret_in.Columns.Add(BGVFGStockQC.Columns.AddVisible(data.Columns(i).ColumnName.ToString, data.Columns(i).ColumnName.ToString.Substring(0, st_caption)))
                 BGVFGStockQC.Columns(data.Columns(i).ColumnName.ToString).AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
                 BGVFGStockQC.Columns(data.Columns(i).ColumnName.ToString).DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-                BGVFGStockQC.Columns(data.Columns(i).ColumnName.ToString).DisplayFormat.FormatString = "{0:n0 }"
+                BGVFGStockQC.Columns(data.Columns(i).ColumnName.ToString).DisplayFormat.FormatString = "{0:n0}"
 
                 BGVFGStockQC.Columns(data.Columns(i).ColumnName.ToString).SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum
                 BGVFGStockQC.Columns(data.Columns(i).ColumnName.ToString).SummaryItem.DisplayFormat = "{0:n0}"
@@ -990,8 +991,11 @@
 
     Private Sub XTCFGStock_SelectedPageChanged(sender As Object, e As DevExpress.XtraTab.TabPageChangedEventArgs) Handles XTCFGStock.SelectedPageChanged
         If XTCFGStock.SelectedTabPageIndex = 0 Then
+            TxtDesignCode.Focus()
         ElseIf XTCFGStock.SelectedTabPageIndex = 1 Then
             TxtCodeDsgSC.Focus()
+        ElseIf XTCFGStock.SelectedTabPageIndex = 4 Then
+            TxtCodeDsgRsv.Focus()
         End If
     End Sub
 
@@ -1014,7 +1018,6 @@
     Private Sub DEUntil_KeyDown(sender As Object, e As KeyEventArgs) Handles DEUntil.KeyDown
         If e.KeyCode = Keys.Enter Then
             BtnTracking.Focus()
-            viewStockCard()
         End If
     End Sub
 
@@ -1027,5 +1030,171 @@
         FormPopUpDesign.id_pop_up = "1"
         FormPopUpDesign.ShowDialog()
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub SimpleButton2_Click(sender As Object, e As EventArgs) Handles BtnViewRsv.Click
+        If CheckEditAllDsgRsv.EditValue = True Then
+            If id_drw_rsv = "-1" Then
+                stopCustom("Account can't blank")
+            Else
+                viewRsv()
+            End If
+        Else
+            If id_drw_rsv = "-1" Or id_design_rsv = "-1" Then
+                stopCustom("Account & design can't blank")
+            Else
+                viewRsv()
+            End If
+        End If
+    End Sub
+
+    Sub viewRsv()
+        Cursor = Cursors.WaitCursor
+        Dim query As String = "CALL view_stock_fg_rsv(" + id_drw_rsv + ", " + id_design_rsv + ")"
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCRsv.DataSource = data
+        GVRsv.Columns("1").Caption = "1" + System.Environment.NewLine + "XXS"
+        GVRsv.Columns("2").Caption = "2" + System.Environment.NewLine + "XS"
+        GVRsv.Columns("3").Caption = "3" + System.Environment.NewLine + "S"
+        GVRsv.Columns("4").Caption = "4" + System.Environment.NewLine + "M"
+        GVRsv.Columns("5").Caption = "5" + System.Environment.NewLine + "ML"
+        GVRsv.Columns("6").Caption = "6" + System.Environment.NewLine + "L"
+        GVRsv.Columns("7").Caption = "7" + System.Environment.NewLine + "XL"
+        GVRsv.Columns("8").Caption = "8" + System.Environment.NewLine + "XXL"
+        GVRsv.Columns("9").Caption = "9" + System.Environment.NewLine + "ALL"
+        GVRsv.Columns("0").Caption = "0" + System.Environment.NewLine + "SM"
+        GVRsv.RefreshData()
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub TxtCodeDsgRsv_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtCodeDsgRsv.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            Cursor = Cursors.WaitCursor
+            Dim code As String = addSlashes(TxtCodeDsgRsv.Text)
+            Dim query As String = "CALL view_all_design_param('AND design_code=''" + code + "''')"
+            Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+            If data.Rows.Count = 0 Or code = "" Then
+                stopCustom("Design not found !")
+                id_design_rsv = "-1"
+                TxtCodeDsgRsv.Text = ""
+                TxtNameDsgRsv.Text = ""
+                TxtCodeDsgRsv.Focus()
+            Else
+                id_design_rsv = data.Rows(0)("id_design").ToString.ToUpper
+                TxtNameDsgRsv.Text = data.Rows(0)("design_display_name").ToString.ToUpper
+                TxtCodeAccRsv.Focus()
+            End If
+            GCRsv.DataSource = Nothing
+            Cursor = Cursors.Default
+        Else
+            id_design_rsv = "-1"
+            TxtNameDsgRsv.Text = ""
+            GCRsv.DataSource = Nothing
+        End If
+    End Sub
+
+    Private Sub TxtCodeAccRsv_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtCodeAccRsv.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            Cursor = Cursors.WaitCursor
+            Dim code As String = addSlashes(TxtCodeAccRsv.Text)
+            Dim data As DataTable = get_company_by_code_no_limit(code, "AND !ISNULL(comp.id_drawer_def) ")
+            If data.Rows.Count = 0 Or code = "" Then
+                stopCustom("Account not found!")
+                id_drw_rsv = "-1"
+                TxtNameAccRsv.Text = ""
+                TxtCodeAccRsv.Text = ""
+                TxtCodeAccRsv.Focus()
+            Else
+                If data.Rows.Count = 1 Then
+                    id_drw_rsv = data.Rows(0)("id_drawer_def").ToString
+                    TxtNameAccRsv.Text = data.Rows(0)("comp_name").ToString
+                    BtnViewRsv.Focus()
+                Else
+                    FormMasterCompanyDouble.dt = data
+                    FormMasterCompanyDouble.ShowDialog()
+                    If id_drw_rsv <> "-1" Then
+                        BtnViewRsv.Focus()
+                    Else
+                        TxtCodeAccRsv.Focus()
+                    End If
+                End If
+            End If
+            Cursor = Cursors.Default
+        Else
+            id_drw_rsv = "-1"
+            TxtNameAccRsv.Text = ""
+            GCRsv.DataSource = Nothing
+        End If
+    End Sub
+
+    Private Sub CheckEditAllDsgRsv_CheckedChanged(sender As Object, e As EventArgs) Handles CheckEditAllDsgRsv.CheckedChanged
+        GCRsv.DataSource = Nothing
+        TxtCodeDsgRsv.Text = ""
+        TxtNameDsgRsv.Text = ""
+        If CheckEditAllDsgRsv.EditValue = True Then
+            id_design_rsv = "0"
+            TxtCodeDsgRsv.Properties.ReadOnly = True
+            TxtCodeAccRsv.Focus()
+        Else
+            id_design_rsv = "-1"
+            TxtCodeDsgRsv.Properties.ReadOnly = False
+            TxtCodeDsgRsv.Focus()
+        End If
+    End Sub
+    Sub resetViewStockSum()
+        id_design_selected_stock_sum = "-1"
+        TxtDesign.Text = ""
+        GCFGStock.DataSource = Nothing
+    End Sub
+
+    Private Sub TxtDesignCode_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtDesignCode.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            Cursor = Cursors.WaitCursor
+            Dim query As String = "CALL view_all_design_param('AND design_code=''" + addSlashes(TxtDesignCode.Text) + "''')"
+            Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+            If data.Rows.Count = 0 Or TxtDesignCode.Text = "" Then
+                stopCustom("Design not found !")
+                resetViewStockSum()
+                TxtDesignCode.Focus()
+            Else
+                id_design_selected_stock_sum = data.Rows(0)("id_design").ToString.ToUpper
+                TxtDesign.Text = data.Rows(0)("design_display_name").ToString.ToUpper
+                SLEWHStockSum.Focus()
+                SLEWHStockSum.ShowPopup()
+            End If
+            GCFGStock.DataSource = Nothing
+            Cursor = Cursors.Default
+        Else
+            resetViewStockSum()
+            GCFGStock.DataSource = Nothing
+        End If
+    End Sub
+
+    Private Sub SLEWHStockSum_KeyDown(sender As Object, e As KeyEventArgs) Handles SLEWHStockSum.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            DEUntilStockFG.Focus()
+        End If
+    End Sub
+
+    Private Sub DEUntilStockFG_KeyDown(sender As Object, e As KeyEventArgs) Handles DEUntilStockFG.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            BtnViewStockSum.Focus()
+        End If
+    End Sub
+
+    Private Sub CheckEdit1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckEdit1.CheckedChanged
+        GCFGStock.DataSource = Nothing
+        TxtDesignCode.Text = ""
+        TxtDesign.Text = ""
+        If CheckEdit1.EditValue = True Then
+            id_design_selected_stock_sum = "0"
+            TxtDesignCode.Properties.ReadOnly = True
+            SLEWHStockSum.Focus()
+            SLEWHStockSum.ShowPopup()
+        Else
+            id_design_selected_stock_sum = "-1"
+            TxtDesignCode.Properties.ReadOnly = False
+            TxtDesignCode.Focus()
+        End If
     End Sub
 End Class

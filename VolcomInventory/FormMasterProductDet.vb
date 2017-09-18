@@ -315,8 +315,8 @@
 
     Private Sub BSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BSave.Click
         Dim id_product_tersimpan, query, namex, display_name, full_code, code, inv_method, min_stock, max_stock, min_order, max_order, product_ean_code As String
-        namex = TEName.Text
-        display_name = TEDisplayName.Text
+        namex = addSlashes(TEName.Text)
+        display_name = addSlashes(TEDisplayName.Text)
         code = TECode.Text
         full_code = TEFullCode.Text
         inv_method = LEInvMethod.EditValue

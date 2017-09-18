@@ -170,7 +170,7 @@
         query += "FROM tb_pl_sales_order_del_det_counting a "
         query += "INNER JOIN tb_pl_sales_order_del_det b ON a.id_pl_sales_order_del_det = b.id_pl_sales_order_del_det "
         query += "INNER JOIN tb_m_product c ON c.id_product = b.id_product "
-        query += "WHERE b.id_pl_sales_order_del = '" + id_pl_sales_order_del + "' AND a.id_counting_type='1' AND b.id_product='" + id_productx + "' "
+        query += "WHERE b.id_pl_sales_order_del = '" + id_pl_sales_order_del + "' AND b.id_product='" + id_productx + "' "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         For i As Integer = 0 To (data.Rows.Count - 1)
             id_pl_sales_order_del_det_counting_list.Add(data.Rows(i)("id_pl_sales_order_del_det_counting").ToString)

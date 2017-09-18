@@ -19,85 +19,85 @@ Partial Class FormMasterProductDet
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMasterProductDet))
         Me.EPMasterProduct = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
-        Me.XTCDetSample = New DevExpress.XtraTab.XtraTabControl
-        Me.XTPGeneral = New DevExpress.XtraTab.XtraTabPage
-        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl
-        Me.CheckEdit1 = New DevExpress.XtraEditors.CheckEdit
-        Me.BGenerate = New DevExpress.XtraEditors.SimpleButton
-        Me.BSave = New DevExpress.XtraEditors.SimpleButton
-        Me.PanC1 = New DevExpress.XtraEditors.PanelControl
-        Me.TEEanCode = New DevExpress.XtraEditors.TextEdit
-        Me.BRefreshCode = New DevExpress.XtraEditors.SimpleButton
-        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl
-        Me.BeditCode = New DevExpress.XtraEditors.SimpleButton
-        Me.TEFullCode = New DevExpress.XtraEditors.TextEdit
-        Me.LETemplate = New DevExpress.XtraEditors.SearchLookUpEdit
-        Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.DNCode = New DevExpress.XtraEditors.DataNavigator
-        Me.LabelControl9 = New DevExpress.XtraEditors.LabelControl
-        Me.LabelControl7 = New DevExpress.XtraEditors.LabelControl
-        Me.GCCode = New DevExpress.XtraGrid.GridControl
-        Me.GVCode = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.ColCodeParam = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColCodeValue = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.RepositoryItemSearchLookUpEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit
-        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.LabelControl10 = New DevExpress.XtraEditors.LabelControl
-        Me.TEDesignCode = New DevExpress.XtraEditors.TextEdit
-        Me.TECode = New DevExpress.XtraEditors.TextEdit
-        Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl
-        Me.TEDisplayName = New DevExpress.XtraEditors.TextEdit
-        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl
-        Me.PanC2 = New DevExpress.XtraEditors.PanelControl
-        Me.TEMaxOrder = New DevExpress.XtraEditors.TextEdit
-        Me.LabelControl11 = New DevExpress.XtraEditors.LabelControl
-        Me.TEMinOrder = New DevExpress.XtraEditors.TextEdit
-        Me.LabelControl8 = New DevExpress.XtraEditors.LabelControl
-        Me.TEMaxStock = New DevExpress.XtraEditors.TextEdit
-        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl
-        Me.TEMinStock = New DevExpress.XtraEditors.TextEdit
-        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl
-        Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl
-        Me.TEName = New DevExpress.XtraEditors.TextEdit
-        Me.LabelControlUpdateName = New DevExpress.XtraEditors.LabelControl
-        Me.LEInvMethod = New DevExpress.XtraEditors.LookUpEdit
-        Me.XTPPrice = New DevExpress.XtraTab.XtraTabPage
-        Me.BAdd = New DevExpress.XtraEditors.SimpleButton
-        Me.Bedit = New DevExpress.XtraEditors.SimpleButton
-        Me.Bdelete = New DevExpress.XtraEditors.SimpleButton
-        Me.XtraTabControl1 = New DevExpress.XtraTab.XtraTabControl
-        Me.XtraTabPage1 = New DevExpress.XtraTab.XtraTabPage
-        Me.GCProductPrice = New DevExpress.XtraGrid.GridControl
-        Me.GVProductPrice = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.ColSamplePirce = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColPriceName = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColCurrency = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColPrice = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColDate = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColIsPrint = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
-        Me.GridView4 = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.XTPMovement = New DevExpress.XtraTab.XtraTabPage
-        Me.XtraTabControl2 = New DevExpress.XtraTab.XtraTabControl
-        Me.XtraTabPage2 = New DevExpress.XtraTab.XtraTabPage
-        Me.GCProductMovement = New DevExpress.XtraGrid.GridControl
-        Me.GVProductMovement = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridView5 = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.PCLotTitle = New DevExpress.XtraEditors.PanelControl
-        Me.LabelPrintedName = New DevExpress.XtraEditors.LabelControl
-        Me.LSampleTitle = New DevExpress.XtraEditors.LabelControl
+        Me.XTCDetSample = New DevExpress.XtraTab.XtraTabControl()
+        Me.XTPGeneral = New DevExpress.XtraTab.XtraTabPage()
+        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
+        Me.CheckEdit1 = New DevExpress.XtraEditors.CheckEdit()
+        Me.BGenerate = New DevExpress.XtraEditors.SimpleButton()
+        Me.BSave = New DevExpress.XtraEditors.SimpleButton()
+        Me.PanC1 = New DevExpress.XtraEditors.PanelControl()
+        Me.TEEanCode = New DevExpress.XtraEditors.TextEdit()
+        Me.BRefreshCode = New DevExpress.XtraEditors.SimpleButton()
+        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
+        Me.BeditCode = New DevExpress.XtraEditors.SimpleButton()
+        Me.TEFullCode = New DevExpress.XtraEditors.TextEdit()
+        Me.LETemplate = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.DNCode = New DevExpress.XtraEditors.DataNavigator()
+        Me.LabelControl9 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl7 = New DevExpress.XtraEditors.LabelControl()
+        Me.GCCode = New DevExpress.XtraGrid.GridControl()
+        Me.GVCode = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.ColCodeParam = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColCodeValue = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemSearchLookUpEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit()
+        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.LabelControl10 = New DevExpress.XtraEditors.LabelControl()
+        Me.TEDesignCode = New DevExpress.XtraEditors.TextEdit()
+        Me.TECode = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
+        Me.TEDisplayName = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
+        Me.PanC2 = New DevExpress.XtraEditors.PanelControl()
+        Me.TEMaxOrder = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl11 = New DevExpress.XtraEditors.LabelControl()
+        Me.TEMinOrder = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl8 = New DevExpress.XtraEditors.LabelControl()
+        Me.TEMaxStock = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
+        Me.TEMinStock = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
+        Me.TEName = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControlUpdateName = New DevExpress.XtraEditors.LabelControl()
+        Me.LEInvMethod = New DevExpress.XtraEditors.LookUpEdit()
+        Me.XTPPrice = New DevExpress.XtraTab.XtraTabPage()
+        Me.BAdd = New DevExpress.XtraEditors.SimpleButton()
+        Me.Bedit = New DevExpress.XtraEditors.SimpleButton()
+        Me.Bdelete = New DevExpress.XtraEditors.SimpleButton()
+        Me.XtraTabControl1 = New DevExpress.XtraTab.XtraTabControl()
+        Me.XtraTabPage1 = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCProductPrice = New DevExpress.XtraGrid.GridControl()
+        Me.GVProductPrice = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.ColSamplePirce = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColPriceName = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColCurrency = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColPrice = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColDate = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColIsPrint = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.GridView4 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.XTPMovement = New DevExpress.XtraTab.XtraTabPage()
+        Me.XtraTabControl2 = New DevExpress.XtraTab.XtraTabControl()
+        Me.XtraTabPage2 = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCProductMovement = New DevExpress.XtraGrid.GridControl()
+        Me.GVProductMovement = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridView5 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.PCLotTitle = New DevExpress.XtraEditors.PanelControl()
+        Me.LabelPrintedName = New DevExpress.XtraEditors.LabelControl()
+        Me.LSampleTitle = New DevExpress.XtraEditors.LabelControl()
         CType(Me.EPMasterProduct, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XTCDetSample, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -183,7 +183,7 @@ Partial Class FormMasterProductDet
         Me.XTPGeneral.Controls.Add(Me.PanC2)
         Me.XTPGeneral.ImageIndex = 3
         Me.XTPGeneral.Name = "XTPGeneral"
-        Me.XTPGeneral.Size = New System.Drawing.Size(689, 440)
+        Me.XTPGeneral.Size = New System.Drawing.Size(687, 440)
         Me.XTPGeneral.Text = "General"
         '
         'PanelControl2
@@ -195,7 +195,7 @@ Partial Class FormMasterProductDet
         Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.PanelControl2.Location = New System.Drawing.Point(242, 409)
         Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(447, 31)
+        Me.PanelControl2.Size = New System.Drawing.Size(445, 31)
         Me.PanelControl2.TabIndex = 17
         '
         'CheckEdit1
@@ -245,7 +245,7 @@ Partial Class FormMasterProductDet
         Me.PanC1.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanC1.Location = New System.Drawing.Point(242, 0)
         Me.PanC1.Name = "PanC1"
-        Me.PanC1.Size = New System.Drawing.Size(447, 409)
+        Me.PanC1.Size = New System.Drawing.Size(445, 409)
         Me.PanC1.TabIndex = 16
         '
         'TEEanCode
@@ -590,7 +590,7 @@ Partial Class FormMasterProductDet
         Me.XTPPrice.ImageIndex = 1
         Me.XTPPrice.Name = "XTPPrice"
         Me.XTPPrice.PageVisible = False
-        Me.XTPPrice.Size = New System.Drawing.Size(689, 440)
+        Me.XTPPrice.Size = New System.Drawing.Size(687, 440)
         Me.XTPPrice.Text = "Price"
         '
         'BAdd
@@ -636,7 +636,7 @@ Partial Class FormMasterProductDet
         '
         Me.XtraTabPage1.Controls.Add(Me.GCProductPrice)
         Me.XtraTabPage1.Name = "XtraTabPage1"
-        Me.XtraTabPage1.Size = New System.Drawing.Size(657, 290)
+        Me.XtraTabPage1.Size = New System.Drawing.Size(657, 288)
         Me.XtraTabPage1.Text = "Price"
         '
         'GCProductPrice
@@ -646,7 +646,7 @@ Partial Class FormMasterProductDet
         Me.GCProductPrice.MainView = Me.GVProductPrice
         Me.GCProductPrice.Name = "GCProductPrice"
         Me.GCProductPrice.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckEdit1})
-        Me.GCProductPrice.Size = New System.Drawing.Size(657, 290)
+        Me.GCProductPrice.Size = New System.Drawing.Size(657, 288)
         Me.GCProductPrice.TabIndex = 2
         Me.GCProductPrice.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVProductPrice, Me.GridView4})
         '
@@ -741,7 +741,7 @@ Partial Class FormMasterProductDet
         Me.XTPMovement.ImageIndex = 2
         Me.XTPMovement.Name = "XTPMovement"
         Me.XTPMovement.PageVisible = False
-        Me.XTPMovement.Size = New System.Drawing.Size(689, 440)
+        Me.XTPMovement.Size = New System.Drawing.Size(687, 440)
         Me.XTPMovement.Text = "Movement"
         '
         'XtraTabControl2
@@ -757,7 +757,7 @@ Partial Class FormMasterProductDet
         '
         Me.XtraTabPage2.Controls.Add(Me.GCProductMovement)
         Me.XtraTabPage2.Name = "XtraTabPage2"
-        Me.XtraTabPage2.Size = New System.Drawing.Size(657, 313)
+        Me.XtraTabPage2.Size = New System.Drawing.Size(657, 311)
         Me.XtraTabPage2.Text = "Movement"
         '
         'GCProductMovement
@@ -766,7 +766,7 @@ Partial Class FormMasterProductDet
         Me.GCProductMovement.Location = New System.Drawing.Point(0, 0)
         Me.GCProductMovement.MainView = Me.GVProductMovement
         Me.GCProductMovement.Name = "GCProductMovement"
-        Me.GCProductMovement.Size = New System.Drawing.Size(657, 313)
+        Me.GCProductMovement.Size = New System.Drawing.Size(657, 311)
         Me.GCProductMovement.TabIndex = 2
         Me.GCProductMovement.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVProductMovement, Me.GridView5})
         '
@@ -873,7 +873,6 @@ Partial Class FormMasterProductDet
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FormMasterProductDet"
-        Me.ShowInTaskbar = False
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Product"

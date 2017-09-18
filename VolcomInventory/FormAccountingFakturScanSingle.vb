@@ -314,8 +314,8 @@ Public Class FormAccountingFakturScanSingle
         Dim acc_fak_scan_faktur_date As String = TxtFakturDate.Text.ToString
         If action = "ins" Then
             'main 
-            Dim query As String = "INSERT INTO tb_a_acc_fak_scan(acc_fak_scan_date, acc_fak_scan_trans_date, acc_fak_scan_faktur_date, id_faktur_type, acc_fak_scan_period, acc_fak_scan_year) "
-            query += "VALUES(NOW(), NOW(), '" + acc_fak_scan_faktur_date + "', '" + id_faktur_type + "','" + acc_fak_scan_period + "', '" + acc_fak_scan_year + "'); SELECT LAST_INSERT_ID(); "
+            Dim query As String = "INSERT INTO tb_a_acc_fak_scan(acc_fak_scan_date, acc_fak_scan_trans_date, acc_fak_scan_faktur_date, id_faktur_type, acc_fak_scan_period, acc_fak_scan_year,id_departement) "
+            query += "VALUES(NOW(), NOW(), '" + acc_fak_scan_faktur_date + "', '" + id_faktur_type + "','" + acc_fak_scan_period + "', '" + acc_fak_scan_year + "','" + id_departement_user + "'); SELECT LAST_INSERT_ID(); "
             id_acc_fak_scan = execute_query(query, 0, True, "", "", "", "")
 
             infoCustom("Faktur was created successfully. ")

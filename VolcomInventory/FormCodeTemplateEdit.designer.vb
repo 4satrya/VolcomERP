@@ -19,35 +19,35 @@ Partial Class FormCodeTemplateEdit
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormCodeTemplateEdit))
-        Me.BDelete = New DevExpress.XtraEditors.SimpleButton
+        Me.BDelete = New DevExpress.XtraEditors.SimpleButton()
         Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
-        Me.BEdit = New DevExpress.XtraEditors.SimpleButton
-        Me.BAdd = New DevExpress.XtraEditors.SimpleButton
-        Me.XTCCode = New DevExpress.XtraTab.XtraTabControl
-        Me.XTPCode = New DevExpress.XtraTab.XtraTabPage
-        Me.GCCode = New DevExpress.XtraGrid.GridControl
-        Me.GVCode = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.ColumnIdCode = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GCCodeName = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GCCodeDesc = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColIsIncludeName = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.RepositoryItemCheckEdit3 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
-        Me.ColIsIncludeCode = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.RepositoryItemCheckEdit4 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
-        Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
-        Me.XTPCodeDet = New DevExpress.XtraTab.XtraTabPage
-        Me.GCCodeDetail = New DevExpress.XtraGrid.GridControl
-        Me.GVCodeDetail = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.ColumnIdCodeDet = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColumnCode = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColumnCodeName = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColumnDisplayName = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.RepositoryItemCheckEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
-        Me.PCDeliveryTitle = New DevExpress.XtraEditors.PanelControl
-        Me.LabelCodeContent = New DevExpress.XtraEditors.LabelControl
-        Me.LabelCodeTitle = New DevExpress.XtraEditors.LabelControl
+        Me.BEdit = New DevExpress.XtraEditors.SimpleButton()
+        Me.BAdd = New DevExpress.XtraEditors.SimpleButton()
+        Me.XTCCode = New DevExpress.XtraTab.XtraTabControl()
+        Me.XTPCode = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCCode = New DevExpress.XtraGrid.GridControl()
+        Me.GVCode = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.ColumnIdCode = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GCCodeName = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GCCodeDesc = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColIsIncludeName = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemCheckEdit3 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.ColIsIncludeCode = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemCheckEdit4 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.XTPCodeDet = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCCodeDetail = New DevExpress.XtraGrid.GridControl()
+        Me.GVCodeDetail = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.ColumnIdCodeDet = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColumnCode = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColumnCodeName = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColumnDisplayName = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemCheckEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.PCDeliveryTitle = New DevExpress.XtraEditors.PanelControl()
+        Me.LabelCodeContent = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelCodeTitle = New DevExpress.XtraEditors.LabelControl()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XTCCode, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCCode.SuspendLayout()
@@ -67,12 +67,13 @@ Partial Class FormCodeTemplateEdit
         '
         'BDelete
         '
+        Me.BDelete.Dock = System.Windows.Forms.DockStyle.Right
         Me.BDelete.ImageIndex = 1
         Me.BDelete.ImageList = Me.LargeImageCollection
-        Me.BDelete.Location = New System.Drawing.Point(436, 6)
+        Me.BDelete.Location = New System.Drawing.Point(449, 2)
         Me.BDelete.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.BDelete.Name = "BDelete"
-        Me.BDelete.Size = New System.Drawing.Size(81, 29)
+        Me.BDelete.Size = New System.Drawing.Size(81, 42)
         Me.BDelete.TabIndex = 2
         Me.BDelete.Text = "Delete"
         '
@@ -86,23 +87,25 @@ Partial Class FormCodeTemplateEdit
         '
         'BEdit
         '
+        Me.BEdit.Dock = System.Windows.Forms.DockStyle.Right
         Me.BEdit.ImageIndex = 2
         Me.BEdit.ImageList = Me.LargeImageCollection
-        Me.BEdit.Location = New System.Drawing.Point(523, 6)
+        Me.BEdit.Location = New System.Drawing.Point(530, 2)
         Me.BEdit.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.BEdit.Name = "BEdit"
-        Me.BEdit.Size = New System.Drawing.Size(81, 29)
+        Me.BEdit.Size = New System.Drawing.Size(81, 42)
         Me.BEdit.TabIndex = 1
         Me.BEdit.Text = "Edit"
         '
         'BAdd
         '
+        Me.BAdd.Dock = System.Windows.Forms.DockStyle.Right
         Me.BAdd.ImageIndex = 0
         Me.BAdd.ImageList = Me.LargeImageCollection
-        Me.BAdd.Location = New System.Drawing.Point(609, 6)
+        Me.BAdd.Location = New System.Drawing.Point(611, 2)
         Me.BAdd.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.BAdd.Name = "BAdd"
-        Me.BAdd.Size = New System.Drawing.Size(81, 29)
+        Me.BAdd.Size = New System.Drawing.Size(81, 42)
         Me.BAdd.TabIndex = 0
         Me.BAdd.Text = "Add"
         '
@@ -111,7 +114,6 @@ Partial Class FormCodeTemplateEdit
         Me.XTCCode.AppearancePage.Header.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.XTCCode.AppearancePage.Header.Options.UseFont = True
         Me.XTCCode.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.XTCCode.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.XTCCode.HeaderLocation = DevExpress.XtraTab.TabHeaderLocation.Left
         Me.XTCCode.HeaderOrientation = DevExpress.XtraTab.TabOrientation.Vertical
         Me.XTCCode.Location = New System.Drawing.Point(0, 0)
@@ -124,9 +126,8 @@ Partial Class FormCodeTemplateEdit
         'XTPCode
         '
         Me.XTPCode.Controls.Add(Me.GCCode)
-        Me.XTPCode.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.XTPCode.Name = "XTPCode"
-        Me.XTPCode.Size = New System.Drawing.Size(697, 324)
+        Me.XTPCode.Size = New System.Drawing.Size(694, 324)
         Me.XTPCode.Text = "Code"
         '
         'GCCode
@@ -136,7 +137,7 @@ Partial Class FormCodeTemplateEdit
         Me.GCCode.MainView = Me.GVCode
         Me.GCCode.Name = "GCCode"
         Me.GCCode.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckEdit1, Me.RepositoryItemCheckEdit3, Me.RepositoryItemCheckEdit4})
-        Me.GCCode.Size = New System.Drawing.Size(697, 324)
+        Me.GCCode.Size = New System.Drawing.Size(694, 324)
         Me.GCCode.TabIndex = 0
         Me.GCCode.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVCode})
         '
@@ -217,9 +218,8 @@ Partial Class FormCodeTemplateEdit
         '
         Me.XTPCodeDet.Controls.Add(Me.GCCodeDetail)
         Me.XTPCodeDet.Controls.Add(Me.PCDeliveryTitle)
-        Me.XTPCodeDet.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.XTPCodeDet.Name = "XTPCodeDet"
-        Me.XTPCodeDet.Size = New System.Drawing.Size(697, 324)
+        Me.XTPCodeDet.Size = New System.Drawing.Size(694, 324)
         Me.XTPCodeDet.Text = "Detail"
         '
         'GCCodeDetail
@@ -229,7 +229,7 @@ Partial Class FormCodeTemplateEdit
         Me.GCCodeDetail.MainView = Me.GVCodeDetail
         Me.GCCodeDetail.Name = "GCCodeDetail"
         Me.GCCodeDetail.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckEdit2})
-        Me.GCCodeDetail.Size = New System.Drawing.Size(697, 278)
+        Me.GCCodeDetail.Size = New System.Drawing.Size(694, 278)
         Me.GCCodeDetail.TabIndex = 6
         Me.GCCodeDetail.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVCodeDetail})
         '
@@ -298,7 +298,7 @@ Partial Class FormCodeTemplateEdit
         Me.PCDeliveryTitle.LookAndFeel.SkinName = "iMaginary"
         Me.PCDeliveryTitle.LookAndFeel.UseDefaultLookAndFeel = False
         Me.PCDeliveryTitle.Name = "PCDeliveryTitle"
-        Me.PCDeliveryTitle.Size = New System.Drawing.Size(697, 46)
+        Me.PCDeliveryTitle.Size = New System.Drawing.Size(694, 46)
         Me.PCDeliveryTitle.TabIndex = 5
         '
         'LabelCodeContent

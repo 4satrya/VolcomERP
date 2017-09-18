@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FormMasterDesignCOP
     Inherits DevExpress.XtraEditors.XtraForm
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         If disposing AndAlso components IsNot Nothing Then
             components.Dispose()
@@ -17,7 +17,7 @@ Partial Class FormMasterDesignCOP
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.GCDesign = New DevExpress.XtraGrid.GridControl()
@@ -30,6 +30,7 @@ Partial Class FormMasterDesignCOP
         Me.RPImg = New DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit()
         Me.GridColumnOrign = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.ColSampleCode = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumn1 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.GridColumnClass = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.ColName = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.ColUOM = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
@@ -105,7 +106,7 @@ Partial Class FormMasterDesignCOP
         'BGVDesign
         '
         Me.BGVDesign.Bands.AddRange(New DevExpress.XtraGrid.Views.BandedGrid.GridBand() {Me.GridBandDetail, Me.gridBand2, Me.gridBand3, Me.gridBand4, Me.gridBand5})
-        Me.BGVDesign.Columns.AddRange(New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn() {Me.Picture, Me.ColID, Me.ColDisplayName, Me.ColName, Me.ColUOM, Me.ColSampleSeason, Me.ColSampleCode, Me.Orign, Me.ColIdSeason, Me.GridColumnColor, Me.GridColumnOrign, Me.GridColumnClass, Me.GridColumnBreakSize, Me.GridColumnFabrication, Me.GridColumnIdCurrECOPPD, Me.GridColumnCurrECOPPD, Me.GridColumnKursECOPPD, Me.GridColumnECOPPD, Me.GridColumnECOPPDIdVendor, Me.GridColumnCompECOPPD, Me.GridColumnCompCECOPPD, Me.IdCurrECOPBOM, Me.CurrECOPBOM, Me.KursECOPBOM, Me.ECOPBOM, Me.ECOPBOMIdVendor, Me.CompECOPBOM, Me.CompCECOPBOM, Me.KursECOPPP, Me.ECOPPP, Me.COPFinal})
+        Me.BGVDesign.Columns.AddRange(New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn() {Me.Picture, Me.ColID, Me.ColDisplayName, Me.ColName, Me.BandedGridColumn1, Me.ColUOM, Me.ColSampleSeason, Me.ColSampleCode, Me.Orign, Me.ColIdSeason, Me.GridColumnColor, Me.GridColumnOrign, Me.GridColumnClass, Me.GridColumnBreakSize, Me.GridColumnFabrication, Me.GridColumnIdCurrECOPPD, Me.GridColumnCurrECOPPD, Me.GridColumnKursECOPPD, Me.GridColumnECOPPD, Me.GridColumnECOPPDIdVendor, Me.GridColumnCompECOPPD, Me.GridColumnCompCECOPPD, Me.IdCurrECOPBOM, Me.CurrECOPBOM, Me.KursECOPBOM, Me.ECOPBOM, Me.ECOPBOMIdVendor, Me.CompECOPBOM, Me.CompCECOPBOM, Me.KursECOPPP, Me.ECOPPP, Me.COPFinal})
         Me.BGVDesign.GridControl = Me.GCDesign
         Me.BGVDesign.GroupCount = 1
         Me.BGVDesign.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "design_cop", Me.COPFinal, "{0:N2}")})
@@ -128,6 +129,7 @@ Partial Class FormMasterDesignCOP
         Me.GridBandDetail.Columns.Add(Me.Picture)
         Me.GridBandDetail.Columns.Add(Me.GridColumnOrign)
         Me.GridBandDetail.Columns.Add(Me.ColSampleCode)
+        Me.GridBandDetail.Columns.Add(Me.BandedGridColumn1)
         Me.GridBandDetail.Columns.Add(Me.GridColumnClass)
         Me.GridBandDetail.Columns.Add(Me.ColName)
         Me.GridBandDetail.Columns.Add(Me.ColUOM)
@@ -138,7 +140,7 @@ Partial Class FormMasterDesignCOP
         Me.GridBandDetail.Columns.Add(Me.GridColumnBreakSize)
         Me.GridBandDetail.Name = "GridBandDetail"
         Me.GridBandDetail.VisibleIndex = 0
-        Me.GridBandDetail.Width = 541
+        Me.GridBandDetail.Width = 632
         '
         'ColID
         '
@@ -191,6 +193,14 @@ Partial Class FormMasterDesignCOP
         Me.ColSampleCode.Name = "ColSampleCode"
         Me.ColSampleCode.Visible = True
         Me.ColSampleCode.Width = 92
+        '
+        'BandedGridColumn1
+        '
+        Me.BandedGridColumn1.Caption = "Code Import"
+        Me.BandedGridColumn1.FieldName = "code_import"
+        Me.BandedGridColumn1.Name = "BandedGridColumn1"
+        Me.BandedGridColumn1.Visible = True
+        Me.BandedGridColumn1.Width = 91
         '
         'GridColumnClass
         '
@@ -550,7 +560,7 @@ Partial Class FormMasterDesignCOP
         '
         Me.ViewMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SMEditEcopPD, Me.SMEditEcopFinal})
         Me.ViewMenu.Name = "ContextMenuStripYM"
-        Me.ViewMenu.Size = New System.Drawing.Size(235, 48)
+        Me.ViewMenu.Size = New System.Drawing.Size(235, 70)
         '
         'SMEditEcopPD
         '
@@ -646,6 +656,7 @@ Partial Class FormMasterDesignCOP
     Friend WithEvents CEShowImg As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents Picture As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents RPImg As DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit
+    Friend WithEvents BandedGridColumn1 As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents GridBandDetail As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents gridBand2 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents gridBand3 As DevExpress.XtraGrid.Views.BandedGrid.GridBand

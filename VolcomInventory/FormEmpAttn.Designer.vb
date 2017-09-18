@@ -34,6 +34,7 @@ Partial Class FormEmpAttn
         Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.SimpleButton1 = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -46,6 +47,7 @@ Partial Class FormEmpAttn
         '
         'PanelControl1
         '
+        Me.PanelControl1.Controls.Add(Me.SimpleButton1)
         Me.PanelControl1.Controls.Add(Me.BGetData)
         Me.PanelControl1.Controls.Add(Me.BView)
         Me.PanelControl1.Controls.Add(Me.DEUntil)
@@ -184,6 +186,14 @@ Partial Class FormEmpAttn
         Me.GridColumn5.Visible = True
         Me.GridColumn5.VisibleIndex = 5
         '
+        'SimpleButton1
+        '
+        Me.SimpleButton1.Location = New System.Drawing.Point(471, 10)
+        Me.SimpleButton1.Name = "SimpleButton1"
+        Me.SimpleButton1.Size = New System.Drawing.Size(75, 23)
+        Me.SimpleButton1.TabIndex = 112
+        Me.SimpleButton1.Text = "Print"
+        '
         'FormEmpAttn
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -221,4 +231,5 @@ Partial Class FormEmpAttn
     Friend WithEvents GridColumn3 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents SimpleButton1 As DevExpress.XtraEditors.SimpleButton
 End Class

@@ -31,9 +31,9 @@ Partial Class FormPopUpEmployee
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnJoinDate = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnJoinDate = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl3.SuspendLayout()
@@ -75,7 +75,7 @@ Partial Class FormPopUpEmployee
         Me.BPick.Name = "BPick"
         Me.BPick.Size = New System.Drawing.Size(75, 33)
         Me.BPick.TabIndex = 0
-        Me.BPick.Text = "Save"
+        Me.BPick.Text = "Pilih"
         '
         'GCEmployee
         '
@@ -104,7 +104,7 @@ Partial Class FormPopUpEmployee
         '
         'GridColumn2
         '
-        Me.GridColumn2.Caption = "Employee Code (NIP)"
+        Me.GridColumn2.Caption = "NIK"
         Me.GridColumn2.FieldName = "employee_code"
         Me.GridColumn2.Name = "GridColumn2"
         Me.GridColumn2.OptionsColumn.AllowEdit = False
@@ -113,7 +113,7 @@ Partial Class FormPopUpEmployee
         '
         'GridColumn3
         '
-        Me.GridColumn3.Caption = "Employee Name"
+        Me.GridColumn3.Caption = "Nama"
         Me.GridColumn3.FieldName = "employee_name"
         Me.GridColumn3.Name = "GridColumn3"
         Me.GridColumn3.OptionsColumn.AllowEdit = False
@@ -129,9 +129,19 @@ Partial Class FormPopUpEmployee
         Me.GridColumn4.Visible = True
         Me.GridColumn4.VisibleIndex = 2
         '
+        'GridColumnJoinDate
+        '
+        Me.GridColumnJoinDate.Caption = "Tanggal Mulai Kerja"
+        Me.GridColumnJoinDate.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.GridColumnJoinDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumnJoinDate.FieldName = "employee_join_date"
+        Me.GridColumnJoinDate.Name = "GridColumnJoinDate"
+        Me.GridColumnJoinDate.Visible = True
+        Me.GridColumnJoinDate.VisibleIndex = 4
+        '
         'GridColumn5
         '
-        Me.GridColumn5.Caption = "Position"
+        Me.GridColumn5.Caption = "Posisi"
         Me.GridColumn5.FieldName = "employee_position"
         Me.GridColumn5.Name = "GridColumn5"
         Me.GridColumn5.OptionsColumn.AllowEdit = False
@@ -147,16 +157,6 @@ Partial Class FormPopUpEmployee
         Me.GridColumn6.Visible = True
         Me.GridColumn6.VisibleIndex = 5
         '
-        'GridColumnJoinDate
-        '
-        Me.GridColumnJoinDate.Caption = "Join Date"
-        Me.GridColumnJoinDate.DisplayFormat.FormatString = "dd MMM yyyy"
-        Me.GridColumnJoinDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.GridColumnJoinDate.FieldName = "employee_join_date"
-        Me.GridColumnJoinDate.Name = "GridColumnJoinDate"
-        Me.GridColumnJoinDate.Visible = True
-        Me.GridColumnJoinDate.VisibleIndex = 4
-        '
         'FormPopUpEmployee
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -169,7 +169,7 @@ Partial Class FormPopUpEmployee
         Me.MinimizeBox = False
         Me.Name = "FormPopUpEmployee"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Pick Employee"
+        Me.Text = "Pilih Karyawan"
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl3.ResumeLayout(False)

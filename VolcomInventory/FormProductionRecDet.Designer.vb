@@ -26,6 +26,9 @@ Partial Class FormProductionRecDet
         Me.TxtMemoRef = New DevExpress.XtraEditors.TextEdit()
         Me.LERecType = New DevExpress.XtraEditors.LookUpEdit()
         Me.LabelControl11 = New DevExpress.XtraEditors.LabelControl()
+        Me.DEArrive = New DevExpress.XtraEditors.DateEdit()
+        Me.TxtCodeCompTo = New DevExpress.XtraEditors.TextEdit()
+        Me.TxtCodeCompFrom = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl10 = New DevExpress.XtraEditors.LabelControl()
         Me.TxtPOType = New DevExpress.XtraEditors.TextEdit()
         Me.BtnInfoSrs = New DevExpress.XtraEditors.SimpleButton()
@@ -82,6 +85,9 @@ Partial Class FormProductionRecDet
         Me.ColQty = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ColQtyRec = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ColNote = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnNumber = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnFrom = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnTo = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.RepositoryItemSpinEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
         Me.GroupControlListBarcode = New DevExpress.XtraEditors.GroupControl()
@@ -97,10 +103,15 @@ Partial Class FormProductionRecDet
         Me.BDelete = New DevExpress.XtraEditors.SimpleButton()
         Me.BStop = New DevExpress.XtraEditors.SimpleButton()
         Me.BScan = New DevExpress.XtraEditors.SimpleButton()
+        Me.LabelControl13 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
         CType(Me.TxtMemoRef.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LERecType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEArrive.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEArrive.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtCodeCompTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtCodeCompFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtPOType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PEView.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEDesign.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -144,10 +155,14 @@ Partial Class FormProductionRecDet
         'GroupGeneralHeader
         '
         Me.GroupGeneralHeader.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupGeneralHeader.Controls.Add(Me.LabelControl13)
         Me.GroupGeneralHeader.Controls.Add(Me.LabelControl12)
         Me.GroupGeneralHeader.Controls.Add(Me.TxtMemoRef)
         Me.GroupGeneralHeader.Controls.Add(Me.LERecType)
         Me.GroupGeneralHeader.Controls.Add(Me.LabelControl11)
+        Me.GroupGeneralHeader.Controls.Add(Me.DEArrive)
+        Me.GroupGeneralHeader.Controls.Add(Me.TxtCodeCompTo)
+        Me.GroupGeneralHeader.Controls.Add(Me.TxtCodeCompFrom)
         Me.GroupGeneralHeader.Controls.Add(Me.LabelControl10)
         Me.GroupGeneralHeader.Controls.Add(Me.TxtPOType)
         Me.GroupGeneralHeader.Controls.Add(Me.BtnInfoSrs)
@@ -217,11 +232,47 @@ Partial Class FormProductionRecDet
         '
         'LabelControl11
         '
-        Me.LabelControl11.Location = New System.Drawing.Point(483, 62)
+        Me.LabelControl11.Location = New System.Drawing.Point(694, 92)
         Me.LabelControl11.Name = "LabelControl11"
-        Me.LabelControl11.Size = New System.Drawing.Size(49, 13)
-        Me.LabelControl11.TabIndex = 164
-        Me.LabelControl11.Text = "Rec. Type"
+        Me.LabelControl11.Size = New System.Drawing.Size(58, 13)
+        Me.LabelControl11.TabIndex = 167
+        Me.LabelControl11.Text = "Arrive in QC"
+        '
+        'DEArrive
+        '
+        Me.DEArrive.EditValue = Nothing
+        Me.DEArrive.Location = New System.Drawing.Point(765, 89)
+        Me.DEArrive.Name = "DEArrive"
+        Me.DEArrive.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEArrive.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.DEArrive.Properties.DisplayFormat.FormatString = "dd'/'MM'/'yyyy"
+        Me.DEArrive.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEArrive.Size = New System.Drawing.Size(130, 20)
+        Me.DEArrive.TabIndex = 166
+        Me.DEArrive.ToolTip = "Tanggal tiba di QC"
+        Me.DEArrive.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Information
+        '
+        'TxtCodeCompTo
+        '
+        Me.TxtCodeCompTo.EditValue = ""
+        Me.TxtCodeCompTo.Location = New System.Drawing.Point(192, 85)
+        Me.TxtCodeCompTo.Name = "TxtCodeCompTo"
+        Me.TxtCodeCompTo.Properties.EditValueChangedDelay = 1
+        Me.TxtCodeCompTo.Properties.ReadOnly = True
+        Me.TxtCodeCompTo.Size = New System.Drawing.Size(41, 20)
+        Me.TxtCodeCompTo.TabIndex = 165
+        Me.TxtCodeCompTo.TabStop = False
+        '
+        'TxtCodeCompFrom
+        '
+        Me.TxtCodeCompFrom.EditValue = ""
+        Me.TxtCodeCompFrom.Location = New System.Drawing.Point(192, 59)
+        Me.TxtCodeCompFrom.Name = "TxtCodeCompFrom"
+        Me.TxtCodeCompFrom.Properties.EditValueChangedDelay = 1
+        Me.TxtCodeCompFrom.Properties.ReadOnly = True
+        Me.TxtCodeCompFrom.Size = New System.Drawing.Size(41, 20)
+        Me.TxtCodeCompFrom.TabIndex = 164
+        Me.TxtCodeCompFrom.TabStop = False
         '
         'LabelControl10
         '
@@ -234,13 +285,13 @@ Partial Class FormProductionRecDet
         'TxtPOType
         '
         Me.TxtPOType.EditValue = ""
-        Me.TxtPOType.Location = New System.Drawing.Point(213, 33)
+        Me.TxtPOType.Location = New System.Drawing.Point(192, 33)
         Me.TxtPOType.Name = "TxtPOType"
         Me.TxtPOType.Properties.AppearanceReadOnly.BackColor = System.Drawing.Color.White
         Me.TxtPOType.Properties.AppearanceReadOnly.Options.UseBackColor = True
         Me.TxtPOType.Properties.EditValueChangedDelay = 1
         Me.TxtPOType.Properties.ReadOnly = True
-        Me.TxtPOType.Size = New System.Drawing.Size(249, 20)
+        Me.TxtPOType.Size = New System.Drawing.Size(282, 20)
         Me.TxtPOType.TabIndex = 162
         Me.TxtPOType.TabStop = False
         '
@@ -249,7 +300,7 @@ Partial Class FormProductionRecDet
         Me.BtnInfoSrs.Appearance.Font = New System.Drawing.Font("Monotype Corsiva", 11.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnInfoSrs.Appearance.Options.UseFont = True
         Me.BtnInfoSrs.Enabled = False
-        Me.BtnInfoSrs.Location = New System.Drawing.Point(439, 7)
+        Me.BtnInfoSrs.Location = New System.Drawing.Point(451, 7)
         Me.BtnInfoSrs.Name = "BtnInfoSrs"
         Me.BtnInfoSrs.Size = New System.Drawing.Size(23, 20)
         Me.BtnInfoSrs.TabIndex = 1
@@ -260,7 +311,7 @@ Partial Class FormProductionRecDet
         '
         'BShowContact2
         '
-        Me.BShowContact2.Location = New System.Drawing.Point(439, 85)
+        Me.BShowContact2.Location = New System.Drawing.Point(451, 85)
         Me.BShowContact2.Name = "BShowContact2"
         Me.BShowContact2.Size = New System.Drawing.Size(23, 20)
         Me.BShowContact2.TabIndex = 3
@@ -290,13 +341,13 @@ Partial Class FormProductionRecDet
         'TEDesign
         '
         Me.TEDesign.EditValue = ""
-        Me.TEDesign.Location = New System.Drawing.Point(213, 111)
+        Me.TEDesign.Location = New System.Drawing.Point(192, 111)
         Me.TEDesign.Name = "TEDesign"
         Me.TEDesign.Properties.AppearanceReadOnly.BackColor = System.Drawing.Color.White
         Me.TEDesign.Properties.AppearanceReadOnly.Options.UseBackColor = True
         Me.TEDesign.Properties.EditValueChangedDelay = 1
         Me.TEDesign.Properties.ReadOnly = True
-        Me.TEDesign.Size = New System.Drawing.Size(249, 20)
+        Me.TEDesign.Size = New System.Drawing.Size(282, 20)
         Me.TEDesign.TabIndex = 160
         Me.TEDesign.TabStop = False
         '
@@ -314,7 +365,7 @@ Partial Class FormProductionRecDet
         '
         'BShowContact
         '
-        Me.BShowContact.Location = New System.Drawing.Point(439, 59)
+        Me.BShowContact.Location = New System.Drawing.Point(451, 59)
         Me.BShowContact.Name = "BShowContact"
         Me.BShowContact.Size = New System.Drawing.Size(23, 20)
         Me.BShowContact.TabIndex = 2
@@ -441,26 +492,26 @@ Partial Class FormProductionRecDet
         'TECompName
         '
         Me.TECompName.EditValue = ""
-        Me.TECompName.Location = New System.Drawing.Point(213, 59)
+        Me.TECompName.Location = New System.Drawing.Point(235, 59)
         Me.TECompName.Name = "TECompName"
         Me.TECompName.Properties.AppearanceReadOnly.BackColor = System.Drawing.Color.White
         Me.TECompName.Properties.AppearanceReadOnly.Options.UseBackColor = True
         Me.TECompName.Properties.EditValueChangedDelay = 1
         Me.TECompName.Properties.ReadOnly = True
-        Me.TECompName.Size = New System.Drawing.Size(220, 20)
+        Me.TECompName.Size = New System.Drawing.Size(215, 20)
         Me.TECompName.TabIndex = 0
         Me.TECompName.TabStop = False
         '
         'TECompShipToName
         '
         Me.TECompShipToName.EditValue = ""
-        Me.TECompShipToName.Location = New System.Drawing.Point(213, 85)
+        Me.TECompShipToName.Location = New System.Drawing.Point(235, 85)
         Me.TECompShipToName.Name = "TECompShipToName"
         Me.TECompShipToName.Properties.AppearanceReadOnly.BackColor = System.Drawing.Color.White
         Me.TECompShipToName.Properties.AppearanceReadOnly.Options.UseBackColor = True
         Me.TECompShipToName.Properties.EditValueChangedDelay = 1
         Me.TECompShipToName.Properties.ReadOnly = True
-        Me.TECompShipToName.Size = New System.Drawing.Size(220, 20)
+        Me.TECompShipToName.Size = New System.Drawing.Size(215, 20)
         Me.TECompShipToName.TabIndex = 116
         Me.TECompShipToName.TabStop = False
         '
@@ -483,13 +534,13 @@ Partial Class FormProductionRecDet
         'TEPONumber
         '
         Me.TEPONumber.EditValue = ""
-        Me.TEPONumber.Location = New System.Drawing.Point(213, 7)
+        Me.TEPONumber.Location = New System.Drawing.Point(192, 7)
         Me.TEPONumber.Name = "TEPONumber"
         Me.TEPONumber.Properties.AppearanceReadOnly.BackColor = System.Drawing.Color.White
         Me.TEPONumber.Properties.AppearanceReadOnly.Options.UseBackColor = True
         Me.TEPONumber.Properties.EditValueChangedDelay = 1
         Me.TEPONumber.Properties.ReadOnly = True
-        Me.TEPONumber.Size = New System.Drawing.Size(191, 20)
+        Me.TEPONumber.Size = New System.Drawing.Size(224, 20)
         Me.TEPONumber.TabIndex = 3
         Me.TEPONumber.TabStop = False
         '
@@ -709,7 +760,7 @@ Partial Class FormProductionRecDet
         '
         'GVListPurchase
         '
-        Me.GVListPurchase.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ColIdRecDet, Me.ColIdPurcDet, Me.ColNo, Me.ColCode, Me.GridColumnEANCode, Me.ColName, Me.ColSize, Me.ColQty, Me.ColQtyRec, Me.ColNote})
+        Me.GVListPurchase.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ColIdRecDet, Me.ColIdPurcDet, Me.ColNo, Me.ColCode, Me.GridColumnEANCode, Me.ColName, Me.ColSize, Me.ColQty, Me.ColQtyRec, Me.ColNote, Me.GridColumnNumber, Me.GridColumnFrom, Me.GridColumnTo})
         Me.GVListPurchase.GridControl = Me.GCListPurchase
         Me.GVListPurchase.Name = "GVListPurchase"
         Me.GVListPurchase.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[False]
@@ -825,6 +876,27 @@ Partial Class FormProductionRecDet
         Me.ColNote.Visible = True
         Me.ColNote.VisibleIndex = 6
         Me.ColNote.Width = 145
+        '
+        'GridColumnNumber
+        '
+        Me.GridColumnNumber.Caption = "Number"
+        Me.GridColumnNumber.FieldName = "number"
+        Me.GridColumnNumber.Name = "GridColumnNumber"
+        Me.GridColumnNumber.UnboundType = DevExpress.Data.UnboundColumnType.[String]
+        '
+        'GridColumnFrom
+        '
+        Me.GridColumnFrom.Caption = "From"
+        Me.GridColumnFrom.FieldName = "from"
+        Me.GridColumnFrom.Name = "GridColumnFrom"
+        Me.GridColumnFrom.UnboundType = DevExpress.Data.UnboundColumnType.[String]
+        '
+        'GridColumnTo
+        '
+        Me.GridColumnTo.Caption = "To"
+        Me.GridColumnTo.FieldName = "to"
+        Me.GridColumnTo.Name = "GridColumnTo"
+        Me.GridColumnTo.UnboundType = DevExpress.Data.UnboundColumnType.[String]
         '
         'RepositoryItemCheckEdit1
         '
@@ -975,6 +1047,14 @@ Partial Class FormProductionRecDet
         Me.BScan.TabIndex = 6
         Me.BScan.Text = "Start Scan"
         '
+        'LabelControl13
+        '
+        Me.LabelControl13.Location = New System.Drawing.Point(484, 62)
+        Me.LabelControl13.Name = "LabelControl13"
+        Me.LabelControl13.Size = New System.Drawing.Size(24, 13)
+        Me.LabelControl13.TabIndex = 168
+        Me.LabelControl13.Text = "Type"
+        '
         'FormProductionRecDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -998,6 +1078,10 @@ Partial Class FormProductionRecDet
         Me.GroupGeneralHeader.PerformLayout()
         CType(Me.TxtMemoRef.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LERecType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEArrive.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEArrive.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtCodeCompTo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtCodeCompFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtPOType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PEView.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEDesign.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1113,7 +1197,14 @@ Partial Class FormProductionRecDet
     Friend WithEvents TxtPOType As DevExpress.XtraEditors.TextEdit
     Friend WithEvents BtnXlsBOF As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents LERecType As DevExpress.XtraEditors.LookUpEdit
-    Friend WithEvents LabelControl11 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LabelControl12 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents TxtMemoRef As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents GridColumnNumber As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnFrom As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnTo As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents TxtCodeCompTo As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents TxtCodeCompFrom As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LabelControl11 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents DEArrive As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents LabelControl13 As DevExpress.XtraEditors.LabelControl
 End Class

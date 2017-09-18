@@ -16,7 +16,7 @@
         query += "SELECT a.id_comp_contact_to, a.id_report_status, a.id_sales_return_qc, a.id_sales_return, DATE_FORMAT(a.sales_return_qc_date, '%d %M %Y') AS sales_return_qc_date, "
         query += "a.sales_return_qc_note, a.sales_return_qc_number, "
         query += "CONCAT(c.comp_number,' - ',c.comp_name) AS store_name_from, (c.comp_number) AS store_number_from, "
-        query += "CONCAT(e.comp_number,' - ',e.comp_name) AS comp_name_to, (e.comp_number) AS comp_number_to, "
+        query += "CONCAT(e.comp_number,' - ',e.comp_name) AS comp_name_to, (e.comp_number) AS comp_number_to, get_custom_rmk(e.id_wh_type,49) AS `rmk`, "
         query += "f.sales_return_number, g.report_status, h.pl_category, det.`total`, "
         query += "a.last_update, getUserEmp(a.last_update_by, 1) AS last_user, ('No') AS is_select "
         query += "FROM tb_sales_return_qc a  "
@@ -36,6 +36,12 @@
         query += condition + " "
         query += "ORDER BY a.id_sales_return_qc " + order_type
         Return query
+    End Function
+
+    Public Function transactionList(ByVal condition As String, ByVal order_type As String) As DataTable
+        Dim query As String = "CALL view_sales_return_qc_main(""" + condition + """, " + order_type + ")"
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        Return data
     End Function
 
     Public Sub changeStatus(ByVal id_report_par As String, ByVal id_status_reportx_par As String)

@@ -41,6 +41,7 @@
                 Dim id_term_production As String = data.Rows(0)("id_term_production").ToString
 
                 TEKurs.EditValue = data.Rows(0)("kurs")
+                MEBOMNote.Text = data.Rows(0)("bom_note").ToString
 
                 data.Dispose()
 
@@ -122,6 +123,7 @@
                 id_bom = data.Rows(0)("id_bom").ToString
 
                 TEKurs.EditValue = data.Rows(0)("kurs")
+                MEBOMNote.Text = data.Rows(0)("bom_note").ToString
 
                 data.Dispose()
                 TEName.Text = bom_name
@@ -230,10 +232,11 @@
     End Sub
 
     Private Sub BSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BSave.Click
-        Dim bom_name, id_term_production, query, unit_price, id_bom_new, id_bom_approve_new, kurs As String
+        Dim bom_note, bom_name, id_term_production, query, unit_price, id_bom_new, id_bom_approve_new, kurs As String
 
         ValidateChildren()
         bom_name = TEName.Text
+        bom_note = MEBOMNote.Text
         id_term_production = LETerm.EditValue
         unit_price = decimalSQL(TEUnitPrice.EditValue.ToString)
         kurs = decimalSQL(TEKurs.EditValue.ToString)
@@ -243,7 +246,7 @@
                 If Not formIsValid(EPBOM) Then
                     errorInput()
                 Else
-                    query = String.Format("UPDATE tb_bom SET bom_name='{0}',id_term_production='{1}',bom_date_created=DATE(NOW()),bom_unit_price='{2}',id_currency='{3}',kurs='{5}',id_user_last_update='{6}',bom_date_updated=NOW() WHERE id_bom='{4}'", bom_name, id_term_production, unit_price, LECurrency.EditValue.ToString, id_bom, kurs, id_user)
+                    query = String.Format("UPDATE tb_bom SET bom_name='{0}',id_term_production='{1}',bom_date_created=DATE(NOW()),bom_unit_price='{2}',id_currency='{3}',kurs='{5}',id_user_last_update='{6}',bom_note='{7}',bom_date_updated=NOW() WHERE id_bom='{4}'", bom_name, id_term_production, unit_price, LECurrency.EditValue.ToString, id_bom, kurs, id_user, bom_note)
                     execute_non_query(query, True, "", "", "", "")
                     FormBOM.view_bom(id_product)
                     FormBOM.GVBOM.FocusedRowHandle = find_row(FormBOM.GVBOM, "id_bom", id_bom)
@@ -259,7 +262,7 @@
                 If Not formIsValid(EPBOM) Then
                     errorInput()
                 Else
-                    query = String.Format("INSERT INTO tb_bom(bom_name,id_product,id_term_production,bom_date_created,bom_unit_price,id_currency,kurs,id_user_last_update,bom_date_updated) VALUES('{0}','{1}','{2}',DATE(NOW()),'{3}','{4}','{5}','{6}',NOW());SELECT LAST_INSERT_ID() ", bom_name, id_product, id_term_production, unit_price, LECurrency.EditValue.ToString, kurs, id_user)
+                    query = String.Format("INSERT INTO tb_bom(bom_name,id_product,id_term_production,bom_date_created,bom_unit_price,id_currency,kurs,id_user_last_update,bom_date_updated,bom_note) VALUES('{0}','{1}','{2}',DATE(NOW()),'{3}','{4}','{5}','{6}',NOW(),'{7}');SELECT LAST_INSERT_ID() ", bom_name, id_product, id_term_production, unit_price, LECurrency.EditValue.ToString, kurs, id_user, bom_note)
                     id_bom_new = execute_query(query, 0, True, "", "", "", "")
                     insert_who_prepared("8", id_bom_new, id_user)
                     FormBOM.view_bom(id_product)
@@ -279,7 +282,7 @@
                 If Not formIsValid(EPBOM) Then
                     errorInput()
                 Else
-                    query = String.Format("UPDATE tb_bom SET bom_name='{0}',id_term_production='{1}',bom_date_updated=NOW(),bom_unit_price='{2}',id_currency='{3}',kurs='{5}',id_user_last_update='{6}' WHERE id_bom_approve='{4}'", bom_name, id_term_production, unit_price, LECurrency.EditValue.ToString, id_bom_approve, kurs, id_user)
+                    query = String.Format("UPDATE tb_bom SET bom_name='{0}',id_term_production='{1}',bom_date_updated=NOW(),bom_unit_price='{2}',id_currency='{3}',kurs='{5}',id_user_last_update='{6}',bom_note='{7}' WHERE id_bom_approve='{4}'", bom_name, id_term_production, unit_price, LECurrency.EditValue.ToString, id_bom_approve, kurs, id_user, bom_note)
                     execute_non_query(query, True, "", "", "", "")
                     '
                     infoCustom("BOM updated.")
@@ -295,7 +298,7 @@
                     Dim query_loop As String = "SELECT id_product FROM tb_m_product WHERE id_design='" & FormBOM.GVPerDesign.GetFocusedRowCellValue("id_design").ToString & "'"
                     Dim data_loop As DataTable = execute_query(query_loop, -1, True, "", "", "", "")
                     For i As Integer = 0 To data_loop.Rows.Count - 1
-                        query = String.Format("INSERT INTO tb_bom(bom_name,id_product,id_term_production,bom_date_created,bom_unit_price,id_currency,kurs,id_bom_approve,bom_date_updated,id_user_last_update) VALUES('{0}','{1}','{2}',DATE(NOW()),'{3}','{4}','{5}','{6}',NOW(),'{7}'); ", bom_name, data_loop.Rows(i)("id_product").ToString, id_term_production, unit_price, LECurrency.EditValue.ToString, kurs, id_bom_approve_new, id_user)
+                        query = String.Format("INSERT INTO tb_bom(bom_name,id_product,id_term_production,bom_date_created,bom_unit_price,id_currency,kurs,id_bom_approve,bom_date_updated,id_user_last_update,bom_note) VALUES('{0}','{1}','{2}',DATE(NOW()),'{3}','{4}','{5}','{6}',NOW(),'{7}','{8}'); ", bom_name, data_loop.Rows(i)("id_product").ToString, id_term_production, unit_price, LECurrency.EditValue.ToString, kurs, id_bom_approve_new, id_user, bom_note)
                         execute_non_query(query, True, "", "", "", "")
                     Next
                     '
@@ -616,8 +619,8 @@
         query = "INSERT INTO tb_bom_approve(id_report_status) VALUES(1); SELECT LAST_INSERT_ID();"
         id_bom_approve_new = execute_query(query, 0, True, "", "", "", "")
         'INSERT BOM
-        query = "INSERT INTO tb_bom(id_product,id_term_production,bom_name,id_currency,kurs,bom_unit_price,bom_date_created,bom_date_updated,id_user_last_update,id_bom_approve,id_report_status,is_default) "
-        query += " SELECT bom.id_product,bom.id_term_production,bom.bom_name,bom.id_currency,bom.kurs,bom.bom_unit_price,DATE(NOW()),NOW(),'" + id_user + "','" + id_bom_approve_new + "','1',2"
+        query = "INSERT INTO tb_bom(id_product,id_term_production,bom_name,id_currency,kurs,bom_unit_price,bom_date_created,bom_date_updated,id_user_last_update,id_bom_approve,id_report_status,is_default,bom_note) "
+        query += " SELECT bom.id_product,bom.id_term_production,bom.bom_name,bom.id_currency,bom.kurs,bom.bom_unit_price,DATE(NOW()),NOW(),'" + id_user + "','" + id_bom_approve_new + "','1',2,bom.bom_note "
         query += " FROM tb_bom bom"
         query += " INNER JOIN tb_m_product prod ON prod.id_product=bom.id_product"
         query += " WHERE bom.id_bom_approve='" + id_bom_approve + "' AND prod.id_design='" + id_design + "'"

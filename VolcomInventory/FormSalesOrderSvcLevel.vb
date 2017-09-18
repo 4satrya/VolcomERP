@@ -197,6 +197,34 @@
         GCFGTrf.DataSource = data
     End Sub
 
+    Sub viewNonStock()
+        'Prepare paramater
+        Dim date_from_selected As String = "0000-01-01"
+        Dim date_until_selected As String = "9999-01-01"
+        Try
+            date_from_selected = DateTime.Parse(DEFromNonStock.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+
+        Try
+            date_until_selected = DateTime.Parse(DEUntilNonStock.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+
+        Dim cond_status As String = ""
+        If SLEStatusNonStock.EditValue.ToString = "0" Then
+            cond_status = "AND (del.id_report_status=1 OR del.id_report_status=3 OR del.id_report_status=5 OR del.id_report_status=6) "
+        Else
+            cond_status = "AND del.id_report_status=" + SLEStatusNonStock.EditValue.ToString + " "
+        End If
+
+        'prepare query
+        Dim query_c As ClassDelEmpty = New ClassDelEmpty()
+        Dim query As String = query_c.queryMain("AND (del.wh_del_empty_date>='" + date_from_selected + "' AND wh_del_empty_date<='" + date_until_selected + "') " + cond_status, "1")
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCNonStock.DataSource = data
+    End Sub
+
     Private Sub BtnView_Click(sender As Object, e As EventArgs) Handles BtnView.Click
         Cursor = Cursors.WaitCursor
         GVSalesOrder.ActiveFilterString = ""
@@ -208,6 +236,7 @@
     Private Sub BtnViewRet_Click(sender As Object, e As EventArgs) Handles BtnViewRet.Click
         Cursor = Cursors.WaitCursor
         viewReturnOrder()
+        noEdit(8)
         Cursor = Cursors.Default
     End Sub
 
@@ -231,6 +260,8 @@
         DEUntilReturnQC.EditValue = data_dt.Rows(0)("dt")
         DEFromTrf.EditValue = data_dt.Rows(0)("dt")
         DEUntilTrf.EditValue = data_dt.Rows(0)("dt")
+        DEFromNonStock.EditValue = data_dt.Rows(0)("dt")
+        DEUntilNonStock.EditValue = data_dt.Rows(0)("dt")
     End Sub
 
     Sub viewPackingStatus()
@@ -248,6 +279,7 @@
         viewSearchLookupQuery(SLEStatusReturn, query, "id_report_status", "report_status", "id_report_status")
         viewSearchLookupQuery(SLEStatusReturnQC, query, "id_report_status", "report_status", "id_report_status")
         viewSearchLookupQuery(SLEStatusTrf, query, "id_report_status", "report_status", "id_report_status")
+        viewSearchLookupQuery(SLEStatusNonStock, query, "id_report_status", "report_status", "id_report_status")
     End Sub
 
     Private Sub SMView_Click(sender As Object, e As EventArgs) Handles SMView.Click
@@ -459,10 +491,38 @@
         ElseIf type = "6" Then
             If GVSalesOrder.FocusedRowHandle >= 0 Then
                 Dim alloc_cek As String = GVSalesOrder.GetFocusedRowCellValue("id_prepare_status").ToString
+                Dim ots As Integer = GVSalesOrder.GetFocusedRowCellValue("outstanding")
                 If alloc_cek = "2" Then
                     GVSalesOrder.Columns("is_select").OptionsColumn.AllowEdit = False
                 Else
-                    GVSalesOrder.Columns("is_select").OptionsColumn.AllowEdit = True
+                    If ots = 0 Then
+                        GVSalesOrder.Columns("is_select").OptionsColumn.AllowEdit = True
+                    Else
+                        GVSalesOrder.Columns("is_select").OptionsColumn.AllowEdit = False
+                    End If
+                End If
+            End If
+        ElseIf type = "7" Then ' non stock inv
+            If GVNonStock.FocusedRowHandle >= 0 Then
+                Dim alloc_cek As String = GVNonStock.GetFocusedRowCellValue("id_report_status").ToString
+                If alloc_cek = "5" Or alloc_cek = "6" Then
+                    GVNonStock.Columns("is_select").OptionsColumn.AllowEdit = False
+                Else
+                    GVNonStock.Columns("is_select").OptionsColumn.AllowEdit = True
+                End If
+            End If
+        ElseIf type = "8" Then 'return order
+            If GVSalesReturnOrder.FocusedRowHandle >= 0 Then
+                Dim alloc_cek As String = GVSalesReturnOrder.GetFocusedRowCellValue("id_prepare_status").ToString
+                Dim ots As Integer = GVSalesReturnOrder.GetFocusedRowCellValue("outstanding")
+                If alloc_cek = "2" Then
+                    GVSalesReturnOrder.Columns("is_select").OptionsColumn.AllowEdit = False
+                Else
+                    If ots = 0 Then
+                        GVSalesReturnOrder.Columns("is_select").OptionsColumn.AllowEdit = True
+                    Else
+                        GVSalesReturnOrder.Columns("is_select").OptionsColumn.AllowEdit = False
+                    End If
                 End If
             End If
         End If
@@ -523,6 +583,10 @@
     End Sub
 
     Private Sub GVSalesDelOrder_DoubleClick(sender As Object, e As EventArgs) Handles GVSalesDelOrder.DoubleClick
+        viewDetailPreDel()
+    End Sub
+
+    Sub viewDetailPreDel()
         If GVSalesDelOrder.FocusedRowHandle >= 0 And GVSalesDelOrder.RowCount > 0 Then
             Cursor = Cursors.WaitCursor
             FormViewSalesDelOrder.action = "upd"
@@ -668,7 +732,8 @@
             Dim cek As String = CheckSelAll.EditValue.ToString
             For i As Integer = ((GVSalesOrder.RowCount - 1) - GetGroupRowCount(GVSalesOrder)) To 0 Step -1
                 Dim id_prepare_status As String = GVSalesOrder.GetRowCellValue(i, "id_prepare_status").ToString
-                If cek And id_prepare_status = "1" Then
+                Dim ots As Integer = GVSalesOrder.GetRowCellValue(i, "outstanding")
+                If cek And id_prepare_status = "1" And ots = 0 Then
                     GVSalesOrder.SetRowCellValue(i, "is_select", "Yes")
                 Else
                     GVSalesOrder.SetRowCellValue(i, "is_select", "No")
@@ -686,7 +751,103 @@
                 FormViewSalesOrder.ShowDialog()
             End If
         ElseIf XTCSvcLevel.SelectedTabPageIndex = 1 Then
+            If GVSalesReturnOrder.FocusedRowHandle >= 0 And GVSalesReturnOrder.RowCount > 0 Then
+                Cursor = Cursors.WaitCursor
+                FormViewSalesReturnOrder.id_sales_return_order = GVSalesReturnOrder.GetFocusedRowCellValue("id_sales_return_order").ToString
+                FormViewSalesReturnOrder.is_detail_soh = "1"
+                FormViewSalesReturnOrder.is_print = "1"
+                FormViewSalesReturnOrder.ShowDialog()
+                Cursor = Cursors.Default
+            End If
         End If
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub ViewDetailToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ViewDetailToolStripMenuItem.Click
+        viewDetailPreDel()
+    End Sub
+
+    Private Sub PrintUniqueCodeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PrintUniqueCodeToolStripMenuItem.Click
+        Cursor = Cursors.WaitCursor
+        If GVSalesDelOrder.FocusedRowHandle >= 0 And GVSalesDelOrder.RowCount > 0 Then
+            FormUniqueDel.id_del = GVSalesDelOrder.GetFocusedRowCellValue("id_pl_sales_order_del").ToString
+            FormUniqueDel.ShowDialog()
+        End If
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnViewNonStock_Click(sender As Object, e As EventArgs) Handles BtnViewNonStock.Click
+        Cursor = Cursors.WaitCursor
+        GVNonStock.ActiveFilterString = ""
+        viewNonStock()
+        noEdit(7)
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub GVNonStock_FocusedRowChanged(sender As Object, e As DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs) Handles GVNonStock.FocusedRowChanged
+        noEdit(7)
+    End Sub
+
+    Private Sub BtnUpdateStatusNonStock_Click(sender As Object, e As EventArgs) Handles BtnUpdateStatusNonStock.Click
+        Cursor = Cursors.WaitCursor
+        GVNonStock.ActiveFilterString = ""
+        GVNonStock.ActiveFilterString = "[is_select]='Yes' "
+        If GVNonStock.RowCount = 0 Then
+            stopCustom("Please select document first.")
+            GVNonStock.ActiveFilterString = ""
+        Else
+            FormChangeStatus.id_pop_up = "6"
+            FormChangeStatus.ShowDialog()
+        End If
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub GVNonStock_DoubleClick(sender As Object, e As EventArgs) Handles GVNonStock.DoubleClick
+        If GVNonStock.FocusedRowHandle >= 0 And GVNonStock.RowCount > 0 Then
+            Cursor = Cursors.WaitCursor
+            FormWHDelEmptyDet.action = "upd"
+            FormWHDelEmptyDet.id_wh_del_empty = GVNonStock.GetFocusedRowCellValue("id_wh_del_empty").ToString
+            FormWHDelEmptyDet.is_view = "1"
+            FormWHDelEmptyDet.ShowDialog()
+            Cursor = Cursors.Default
+        End If
+    End Sub
+
+    Private Sub GVSalesReturnOrder_ColumnFilterChanged(sender As Object, e As EventArgs) Handles GVSalesReturnOrder.ColumnFilterChanged
+        noEdit(8)
+    End Sub
+
+    Private Sub GVSalesReturnOrder_FocusedRowChanged(sender As Object, e As DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs) Handles GVSalesReturnOrder.FocusedRowChanged
+        noEdit(8)
+    End Sub
+
+    Private Sub CheckEdit1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckEdit1.CheckedChanged
+        If GVSalesReturnOrder.RowCount > 0 Then
+            Dim cek As String = CheckEdit1.EditValue.ToString
+            For i As Integer = ((GVSalesReturnOrder.RowCount - 1) - GetGroupRowCount(GVSalesReturnOrder)) To 0 Step -1
+                Dim id_prepare_status As String = GVSalesReturnOrder.GetRowCellValue(i, "id_prepare_status").ToString
+                Dim ots As Integer = GVSalesReturnOrder.GetRowCellValue(i, "outstanding")
+                If cek And id_prepare_status = "1" And ots = 0 Then
+                    GVSalesReturnOrder.SetRowCellValue(i, "is_select", "Yes")
+                Else
+                    GVSalesReturnOrder.SetRowCellValue(i, "is_select", "No")
+                End If
+            Next
+        End If
+    End Sub
+
+    Private Sub SimpleButton6_Click(sender As Object, e As EventArgs) Handles SimpleButton6.Click
+        Cursor = Cursors.WaitCursor
+        GVSalesReturnOrder.ActiveFilterString = ""
+        GVSalesReturnOrder.ActiveFilterString = "[is_select]='Yes' "
+        If GVSalesReturnOrder.RowCount = 0 Then
+            stopCustom("Please select order first.")
+            GVSalesReturnOrder.ActiveFilterString = ""
+        Else
+            FormSalesOrderPacking.id_pop_up = "5"
+            FormSalesOrderPacking.ShowDialog()
+        End If
+        GVSalesReturnOrder.ActiveFilterString = ""
         Cursor = Cursors.Default
     End Sub
 End Class

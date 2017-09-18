@@ -28,6 +28,7 @@ Partial Public Class ReportSamplePurchase
         Me.ColCode = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ColName = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ColSize = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColColor = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ColPrice = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ColQty = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ColDiscount = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -150,7 +151,7 @@ Partial Public Class ReportSamplePurchase
         Me.GVListPurchase.AppearancePrint.Row.Options.UseBorderColor = True
         Me.GVListPurchase.AppearancePrint.Row.Options.UseFont = True
         Me.GVListPurchase.AppearancePrint.Row.Options.UseForeColor = True
-        Me.GVListPurchase.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ColIdPrice, Me.ColNo, Me.ColCode, Me.ColName, Me.ColSize, Me.ColPrice, Me.ColQty, Me.ColDiscount, Me.GridColumn1, Me.ColSubtotal, Me.ColNote})
+        Me.GVListPurchase.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ColIdPrice, Me.ColNo, Me.ColCode, Me.ColName, Me.ColSize, Me.ColColor, Me.ColPrice, Me.ColQty, Me.ColDiscount, Me.GridColumn1, Me.ColSubtotal, Me.ColNote})
         Me.GVListPurchase.GridControl = Me.GCListPurchase
         Me.GVListPurchase.HorzScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always
         Me.GVListPurchase.Name = "GVListPurchase"
@@ -207,6 +208,18 @@ Partial Public Class ReportSamplePurchase
         Me.ColSize.VisibleIndex = 3
         Me.ColSize.Width = 87
         '
+        'ColColor
+        '
+        Me.ColColor.AppearanceCell.Options.UseTextOptions = True
+        Me.ColColor.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.ColColor.AppearanceHeader.Options.UseTextOptions = True
+        Me.ColColor.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.ColColor.Caption = "Color"
+        Me.ColColor.FieldName = "color"
+        Me.ColColor.Name = "ColColor"
+        Me.ColColor.Visible = True
+        Me.ColColor.VisibleIndex = 5
+        '
         'ColPrice
         '
         Me.ColPrice.AppearanceCell.Options.UseTextOptions = True
@@ -219,7 +232,7 @@ Partial Public Class ReportSamplePurchase
         Me.ColPrice.FieldName = "price"
         Me.ColPrice.Name = "ColPrice"
         Me.ColPrice.Visible = True
-        Me.ColPrice.VisibleIndex = 6
+        Me.ColPrice.VisibleIndex = 7
         Me.ColPrice.Width = 126
         '
         'ColQty
@@ -250,7 +263,7 @@ Partial Public Class ReportSamplePurchase
         Me.ColDiscount.FieldName = "discount"
         Me.ColDiscount.Name = "ColDiscount"
         Me.ColDiscount.Visible = True
-        Me.ColDiscount.VisibleIndex = 5
+        Me.ColDiscount.VisibleIndex = 6
         Me.ColDiscount.Width = 118
         '
         'GridColumn1
@@ -275,7 +288,7 @@ Partial Public Class ReportSamplePurchase
         Me.ColSubtotal.Name = "ColSubtotal"
         Me.ColSubtotal.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total", "{0:N2}")})
         Me.ColSubtotal.Visible = True
-        Me.ColSubtotal.VisibleIndex = 7
+        Me.ColSubtotal.VisibleIndex = 8
         Me.ColSubtotal.Width = 164
         '
         'ColNote
@@ -296,7 +309,7 @@ Partial Public Class ReportSamplePurchase
         'TopMargin
         '
         Me.TopMargin.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrPanel1, Me.LPODate, Me.XrLabel1, Me.LPONumber, Me.XrLabel12, Me.LTitle})
-        Me.TopMargin.HeightF = 102.2916!
+        Me.TopMargin.HeightF = 115.2083!
         Me.TopMargin.Name = "TopMargin"
         Me.TopMargin.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
         Me.TopMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
@@ -309,7 +322,7 @@ Partial Public Class ReportSamplePurchase
         Me.XrPanel1.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.LSeason, Me.XrLabel20, Me.XrLabel17, Me.XrLabel19, Me.LShipToAddress, Me.XrLabel21, Me.XrLabel13, Me.LShipToName, Me.XrLabel15, Me.XrLabel11, Me.XrLabel10, Me.XrLabel9, Me.LToName, Me.LToAttn, Me.LToAddress, Me.XrLabel4, Me.XrLabel2, Me.XrLabel3})
         Me.XrPanel1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 25.08329!)
         Me.XrPanel1.Name = "XrPanel1"
-        Me.XrPanel1.SizeF = New System.Drawing.SizeF(649.9999!, 77.20831!)
+        Me.XrPanel1.SizeF = New System.Drawing.SizeF(649.9999!, 90.12497!)
         Me.XrPanel1.StylePriority.UseBorders = False
         '
         'LSeason
@@ -960,7 +973,7 @@ Partial Public Class ReportSamplePurchase
         '
         Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.Detail, Me.TopMargin, Me.BottomMargin, Me.PageFooter})
         Me.Font = New System.Drawing.Font("Times New Roman", 9.75!)
-        Me.Margins = New System.Drawing.Printing.Margins(100, 100, 102, 19)
+        Me.Margins = New System.Drawing.Printing.Margins(100, 100, 115, 19)
         Me.PageHeight = 550
         Me.PaperKind = System.Drawing.Printing.PaperKind.Custom
         Me.StyleSheet.AddRange(New DevExpress.XtraReports.UI.XRControlStyle() {Me.XrControlStyle1, Me.XrControlStyle2, Me.XrControlStyle3, Me.XrControlStyle4, Me.XrControlStyle5, Me.XrControlStyle6, Me.XrControlStyle7})
@@ -1047,4 +1060,5 @@ Partial Public Class ReportSamplePurchase
     Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents LKurs As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents LHKurs As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents ColColor As DevExpress.XtraGrid.Columns.GridColumn
 End Class

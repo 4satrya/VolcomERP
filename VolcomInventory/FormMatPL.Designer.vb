@@ -35,6 +35,7 @@ Partial Class FormMatPL
         Me.GridColumnTo = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnPLDate = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnPLStatus = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnDesignCode = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnPLDesign = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnPLWONumber = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnPLIdPO = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -54,6 +55,7 @@ Partial Class FormMatPL
         Me.GridColumnWONumber = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnMRSNumber = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnMRSDesignCode = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnMRSDesign = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn42 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RCIPLCreated = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
@@ -125,6 +127,7 @@ Partial Class FormMatPL
         Me.GridColumn20 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdReport = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemProgressBar2 = New DevExpress.XtraEditors.Repository.RepositoryItemProgressBar()
+        Me.GridColumn44 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XTCPL, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCPL.SuspendLayout()
         Me.XTPProduction.SuspendLayout()
@@ -212,7 +215,7 @@ Partial Class FormMatPL
         '
         'GVProdPL
         '
-        Me.GVProdPL.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdPLSample, Me.GridColumnIdContactFrom, Me.GridColumnIdCompContactTo, Me.GridColumnPLIdWO, Me.GridColumnPLNumber, Me.GridColumnPLPoNumber, Me.GridColumnFrom, Me.GridColumnTo, Me.GridColumnPLDate, Me.GridColumnPLStatus, Me.GridColumnPLDesign, Me.GridColumnPLWONumber, Me.GridColumnPLIdPO, Me.GridColumnIdReportStatus, Me.ColMrsNumber})
+        Me.GVProdPL.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdPLSample, Me.GridColumnIdContactFrom, Me.GridColumnIdCompContactTo, Me.GridColumnPLIdWO, Me.GridColumnPLNumber, Me.GridColumnPLPoNumber, Me.GridColumnFrom, Me.GridColumnTo, Me.GridColumnPLDate, Me.GridColumnPLStatus, Me.GridColumnDesignCode, Me.GridColumnPLDesign, Me.GridColumnPLWONumber, Me.GridColumnPLIdPO, Me.GridColumnIdReportStatus, Me.ColMrsNumber, Me.GridColumn44})
         Me.GVProdPL.GridControl = Me.GCProdPL
         Me.GVProdPL.Name = "GVProdPL"
         Me.GVProdPL.OptionsBehavior.Editable = False
@@ -269,7 +272,7 @@ Partial Class FormMatPL
         Me.GridColumnFrom.FieldName = "comp_name_from"
         Me.GridColumnFrom.Name = "GridColumnFrom"
         Me.GridColumnFrom.Visible = True
-        Me.GridColumnFrom.VisibleIndex = 5
+        Me.GridColumnFrom.VisibleIndex = 6
         '
         'GridColumnTo
         '
@@ -277,7 +280,7 @@ Partial Class FormMatPL
         Me.GridColumnTo.FieldName = "comp_name_to"
         Me.GridColumnTo.Name = "GridColumnTo"
         Me.GridColumnTo.Visible = True
-        Me.GridColumnTo.VisibleIndex = 6
+        Me.GridColumnTo.VisibleIndex = 7
         '
         'GridColumnPLDate
         '
@@ -287,7 +290,7 @@ Partial Class FormMatPL
         Me.GridColumnPLDate.FieldName = "pl_mrs_date"
         Me.GridColumnPLDate.Name = "GridColumnPLDate"
         Me.GridColumnPLDate.Visible = True
-        Me.GridColumnPLDate.VisibleIndex = 7
+        Me.GridColumnPLDate.VisibleIndex = 8
         '
         'GridColumnPLStatus
         '
@@ -295,7 +298,15 @@ Partial Class FormMatPL
         Me.GridColumnPLStatus.FieldName = "report_status"
         Me.GridColumnPLStatus.Name = "GridColumnPLStatus"
         Me.GridColumnPLStatus.Visible = True
-        Me.GridColumnPLStatus.VisibleIndex = 8
+        Me.GridColumnPLStatus.VisibleIndex = 9
+        '
+        'GridColumnDesignCode
+        '
+        Me.GridColumnDesignCode.Caption = "Design Code"
+        Me.GridColumnDesignCode.FieldName = "design_code"
+        Me.GridColumnDesignCode.Name = "GridColumnDesignCode"
+        Me.GridColumnDesignCode.Visible = True
+        Me.GridColumnDesignCode.VisibleIndex = 4
         '
         'GridColumnPLDesign
         '
@@ -303,7 +314,7 @@ Partial Class FormMatPL
         Me.GridColumnPLDesign.FieldName = "design_display_name"
         Me.GridColumnPLDesign.Name = "GridColumnPLDesign"
         Me.GridColumnPLDesign.Visible = True
-        Me.GridColumnPLDesign.VisibleIndex = 4
+        Me.GridColumnPLDesign.VisibleIndex = 5
         '
         'GridColumnPLWONumber
         '
@@ -354,7 +365,7 @@ Partial Class FormMatPL
         '
         'GVMRS
         '
-        Me.GVMRS.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdMRS, Me.GridColumnIdWO, Me.GridColumnIdCompReqFrom, Me.GridColumnCompReqFrom, Me.GridColumnIdCompReqTo, Me.GridColumnCompReqTo, Me.GridColumnDate, Me.GridColumn1, Me.GridColumnWONumber, Me.GridColumnMRSNumber, Me.GridColumn2, Me.GridColumnMRSDesign, Me.GridColumn42, Me.GridColumn43})
+        Me.GVMRS.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdMRS, Me.GridColumnIdWO, Me.GridColumnIdCompReqFrom, Me.GridColumnCompReqFrom, Me.GridColumnIdCompReqTo, Me.GridColumnCompReqTo, Me.GridColumnDate, Me.GridColumn1, Me.GridColumnWONumber, Me.GridColumnMRSNumber, Me.GridColumn2, Me.GridColumnMRSDesignCode, Me.GridColumnMRSDesign, Me.GridColumn42, Me.GridColumn43})
         Me.GVMRS.GridControl = Me.GCMRS
         Me.GVMRS.Name = "GVMRS"
         Me.GVMRS.OptionsBehavior.Editable = False
@@ -385,8 +396,8 @@ Partial Class FormMatPL
         Me.GridColumnCompReqFrom.FieldName = "comp_name_req_from"
         Me.GridColumnCompReqFrom.Name = "GridColumnCompReqFrom"
         Me.GridColumnCompReqFrom.Visible = True
-        Me.GridColumnCompReqFrom.VisibleIndex = 3
-        Me.GridColumnCompReqFrom.Width = 118
+        Me.GridColumnCompReqFrom.VisibleIndex = 4
+        Me.GridColumnCompReqFrom.Width = 93
         '
         'GridColumnIdCompReqTo
         '
@@ -400,8 +411,8 @@ Partial Class FormMatPL
         Me.GridColumnCompReqTo.FieldName = "comp_name_req_to"
         Me.GridColumnCompReqTo.Name = "GridColumnCompReqTo"
         Me.GridColumnCompReqTo.Visible = True
-        Me.GridColumnCompReqTo.VisibleIndex = 4
-        Me.GridColumnCompReqTo.Width = 118
+        Me.GridColumnCompReqTo.VisibleIndex = 5
+        Me.GridColumnCompReqTo.Width = 93
         '
         'GridColumnDate
         '
@@ -411,8 +422,8 @@ Partial Class FormMatPL
         Me.GridColumnDate.FieldName = "prod_order_mrs_date"
         Me.GridColumnDate.Name = "GridColumnDate"
         Me.GridColumnDate.Visible = True
-        Me.GridColumnDate.VisibleIndex = 5
-        Me.GridColumnDate.Width = 70
+        Me.GridColumnDate.VisibleIndex = 6
+        Me.GridColumnDate.Width = 54
         '
         'GridColumn1
         '
@@ -420,8 +431,8 @@ Partial Class FormMatPL
         Me.GridColumn1.FieldName = "report_status"
         Me.GridColumn1.Name = "GridColumn1"
         Me.GridColumn1.Visible = True
-        Me.GridColumn1.VisibleIndex = 6
-        Me.GridColumn1.Width = 63
+        Me.GridColumn1.VisibleIndex = 7
+        Me.GridColumn1.Width = 48
         '
         'GridColumnWONumber
         '
@@ -437,7 +448,7 @@ Partial Class FormMatPL
         Me.GridColumnMRSNumber.Name = "GridColumnMRSNumber"
         Me.GridColumnMRSNumber.Visible = True
         Me.GridColumnMRSNumber.VisibleIndex = 0
-        Me.GridColumnMRSNumber.Width = 99
+        Me.GridColumnMRSNumber.Width = 81
         '
         'GridColumn2
         '
@@ -446,7 +457,16 @@ Partial Class FormMatPL
         Me.GridColumn2.Name = "GridColumn2"
         Me.GridColumn2.Visible = True
         Me.GridColumn2.VisibleIndex = 1
-        Me.GridColumn2.Width = 90
+        Me.GridColumn2.Width = 74
+        '
+        'GridColumnMRSDesignCode
+        '
+        Me.GridColumnMRSDesignCode.Caption = "Design Code"
+        Me.GridColumnMRSDesignCode.FieldName = "design_code"
+        Me.GridColumnMRSDesignCode.Name = "GridColumnMRSDesignCode"
+        Me.GridColumnMRSDesignCode.Visible = True
+        Me.GridColumnMRSDesignCode.VisibleIndex = 2
+        Me.GridColumnMRSDesignCode.Width = 76
         '
         'GridColumnMRSDesign
         '
@@ -454,8 +474,8 @@ Partial Class FormMatPL
         Me.GridColumnMRSDesign.FieldName = "design_display_name"
         Me.GridColumnMRSDesign.Name = "GridColumnMRSDesign"
         Me.GridColumnMRSDesign.Visible = True
-        Me.GridColumnMRSDesign.VisibleIndex = 2
-        Me.GridColumnMRSDesign.Width = 100
+        Me.GridColumnMRSDesign.VisibleIndex = 3
+        Me.GridColumnMRSDesign.Width = 79
         '
         'GridColumn42
         '
@@ -468,7 +488,8 @@ Partial Class FormMatPL
         Me.GridColumn42.FieldName = "pl_created"
         Me.GridColumn42.Name = "GridColumn42"
         Me.GridColumn42.Visible = True
-        Me.GridColumn42.VisibleIndex = 7
+        Me.GridColumn42.VisibleIndex = 8
+        Me.GridColumn42.Width = 67
         '
         'RCIPLCreated
         '
@@ -1034,6 +1055,14 @@ Partial Class FormMatPL
         Me.RepositoryItemProgressBar2.StartColor = System.Drawing.Color.Green
         Me.RepositoryItemProgressBar2.Step = 1
         '
+        'GridColumn44
+        '
+        Me.GridColumn44.Caption = "Submitted"
+        Me.GridColumn44.FieldName = "is_submit"
+        Me.GridColumn44.Name = "GridColumn44"
+        Me.GridColumn44.Visible = True
+        Me.GridColumn44.VisibleIndex = 10
+        '
         'FormMatPL
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1193,4 +1222,7 @@ Partial Class FormMatPL
     Friend WithEvents GridColumn51 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnSeason As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents LabelControl4 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents GridColumnDesignCode As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnMRSDesignCode As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn44 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

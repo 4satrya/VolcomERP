@@ -76,6 +76,11 @@
                 FormFGStock.GCFGStockCard.DataSource = Nothing
                 Close()
                 FormFGStock.TxtCodeDsgSC.Focus()
+            ElseIf id_pop_up = "2" Then
+                FormProductionAssemblyNew.id_design = GVDesign.GetFocusedRowCellValue("id_design").ToString
+                FormProductionAssemblyNew.ButtonEdit1.Text = GVDesign.GetFocusedRowCellValue("design_code").ToString
+                FormProductionAssemblyNew.TxtDesign.Text = GVDesign.GetFocusedRowCellValue("design_display_name").ToString
+                Close()
             End If
         End If
         Cursor = Cursors.Default
@@ -90,6 +95,8 @@
     End Sub
 
     Private Sub FormPopUpDesign_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-        SLESeason.ShowPopup()
+        If id_pop_up = "1" Then
+            SLESeason.ShowPopup()
+        End If
     End Sub
 End Class

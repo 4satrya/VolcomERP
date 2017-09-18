@@ -22,10 +22,17 @@
         viewSeasonWO()
         viewSeasonMRS()
         '
+        viewStatusPD()
         viewVendor()
-
-        viewProdDemand()
         checkFormAccess(Name)
+    End Sub
+    Sub viewStatusPD()
+        Dim query As String = "SELECT '0' as id_statuspd, 'All' as status_pd 
+                                UNION
+                              SELECT '1' as id_statuspd, 'Already Created' as status_pd 
+                                UNION
+                              SELECT '2' as id_statuspd, 'Not yet created' as status_pd"
+        viewSearchLookupQuery(SLEStatusPD, query, "id_statuspd", "status_pd", "id_statuspd")
     End Sub
     'view season
     Sub viewVendor()
@@ -167,9 +174,11 @@
         Dim query = "SELECT "
         query += "IFNULL(SUM(rec.prod_order_rec_det_qty),0) AS qty_rec, "
         query += "IFNULL(SUM(pod.prod_order_qty),0) As qty_order, "
+        query += "IFNULL(SUM(qty_plwh.qty),0) As qty_plwh, "
         query += "comp.comp_name,a.id_prod_order,d.id_sample, a.prod_order_number, d.design_display_name, d.design_code, h.term_production, g.po_type,d.design_cop, "
         query += "a.prod_order_date,a.id_report_status,c.report_status, "
         query += "b.id_design,b.id_delivery, e.delivery, f.season, e.id_season "
+        query += ",IF(ISNULL(mark.id_mark),'no','yes') AS is_submit,maxd.employee_name as last_mark "
         query += "FROM tb_prod_order a "
         query += "INNER JOIN tb_prod_order_det pod ON pod.id_prod_order=a.id_prod_order "
         query += "INNER JOIN tb_prod_demand_design b On a.id_prod_demand_design = b.id_prod_demand_design "
@@ -183,14 +192,38 @@
         query += "LEFT JOIN tb_m_ovh_price ovh_p On ovh_p.id_ovh_price=wo.id_ovh_price "
         query += "LEFT JOIN tb_m_comp_contact cc ON cc.id_comp_contact=ovh_p.id_comp_contact "
         query += "LEFT JOIN tb_m_comp comp On comp.id_comp=cc.id_comp "
+        query += "LEFT JOIN 
+                    (
+	                    SELECT * FROM tb_report_mark GROUP BY report_mark_type,id_report
+                    ) mark ON mark.id_report=a.id_prod_order AND mark.report_mark_type='22' "
         query += "LEFT JOIN  "
         query += "( "
         query += "SELECT recd.id_prod_order_det,SUM(recd.prod_order_rec_det_qty) AS prod_order_rec_det_qty "
         query += "FROM "
         query += "tb_prod_order_rec rec "
-        query += "LEFT JOIN tb_prod_order_rec_det recd On recd.id_prod_order_rec=rec.id_prod_order_rec "
+        query += "LEFT JOIN tb_prod_order_rec_det recd On recd.id_prod_order_rec=rec.id_prod_order_rec AND rec.id_report_status != 5 "
         query += "GROUP BY recd.id_prod_order_det "
         query += ") rec On rec.id_prod_order_det=pod.id_prod_order_det "
+        query += "LEFT JOIN
+                    (
+                    SELECT pld.`id_prod_order_det`,SUM(pld.`pl_prod_order_det_qty`) as qty FROM tb_pl_prod_order_det pld
+                    INNER JOIN tb_pl_prod_order pl ON pl.`id_pl_prod_order`=pld.`id_pl_prod_order`
+                    WHERE pl.`id_report_status`='6'
+                    GROUP BY pld.`id_prod_order_det`
+                    ) qty_plwh ON qty_plwh.id_prod_order_det=pod.id_prod_order_det "
+        query += "LEFT JOIN
+                 (SELECT mark.id_report_mark,mark.id_report,emp.employee_name,maxd.report_mark_datetime,mark.report_number
+                    FROM tb_report_mark mark
+                    INNER JOIN tb_m_employee emp ON emp.`id_employee`=mark.id_employee
+                    INNER JOIN 
+                    (
+	                    SELECT mark.id_report,mark.report_mark_type,MAX(report_mark_datetime) AS report_mark_datetime
+	                    FROM tb_report_mark mark
+	                    WHERE mark.id_mark='2' AND NOT ISNULL(report_mark_start_datetime) AND report_mark_type='22'
+	                    GROUP BY report_mark_type,id_report
+                    ) maxd ON maxd.id_report=mark.id_report AND maxd.report_mark_type=mark.report_mark_type AND maxd.report_mark_datetime=mark.report_mark_datetime
+                    WHERE mark.id_mark='2' AND NOT ISNULL(mark.report_mark_start_datetime) AND mark.report_mark_type='22'
+                  ) maxd ON maxd.id_report = a.id_prod_order "
         query += "WHERE 1=1 " & query_where
         query += "GROUP BY a.id_prod_order"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
@@ -226,7 +259,9 @@
     '=== prod demand ====
     'View Production Demand
     Sub viewProdDemand()
-        Dim query As String = "CALL view_design_demand_all(0)"
+        Dim status_pd As String = SLEStatusPD.EditValue.ToString
+
+        Dim query As String = "CALL view_design_demand_po(" & status_pd & ")"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCDesign.DataSource = data
         If data.Rows.Count > 0 Then
@@ -236,7 +271,11 @@
         check_but()
     End Sub
     Sub view_prod_demand_product()
-        Dim query As String = "CALL view_prod_demand_product('" + GVDesign.GetFocusedRowCellValue("id_prod_demand_design").ToString + "',1)"
+        Dim id_pdd As String = ""
+        If GVDesign.RowCount > 0 Then
+            id_pdd = GVDesign.GetFocusedRowCellValue("id_prod_demand_design").ToString()
+        End If
+        Dim query As String = "CALL view_prod_demand_product('" + id_pdd + "',1)"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCListProduct.DataSource = data
     End Sub
@@ -346,6 +385,7 @@
         query += "a.prod_order_wo_date, "
         query += "DATE_ADD(a.prod_order_wo_date,INTERVAL a.prod_order_wo_lead_time DAY) AS prod_order_wo_lead_time, "
         query += "DATE_ADD(a.prod_order_wo_date,INTERVAL (a.prod_order_wo_top+a.prod_order_wo_lead_time) DAY) AS prod_order_wo_top "
+        query += ",IF(ISNULL(mark.id_mark),'no','yes') AS is_submit,maxd.employee_name as last_mark "
         query += "FROM tb_prod_order_wo a INNER JOIN tb_m_ovh_price b ON a.id_ovh_price=b.id_ovh_price "
         '
         query += "INNER JOIN tb_prod_order po ON po.id_prod_order=a.id_prod_order "
@@ -361,7 +401,24 @@
         query += "INNER JOIN tb_lookup_payment g ON a.id_payment = g.id_payment "
         query += "INNER JOIN tb_lookup_report_status h ON h.id_report_status = a.id_report_status "
         query += "INNER JOIN tb_m_ovh j ON b.id_ovh = j.id_ovh "
+        query += "LEFT JOIN 
+                    (
+	                    SELECT * FROM tb_report_mark GROUP BY report_mark_type,id_report
+                    ) mark ON mark.id_report=a.id_prod_order_wo AND mark.report_mark_type='23' "
         '
+        query += "LEFT JOIN
+                 (SELECT mark.id_report_mark,mark.id_report,emp.employee_name,maxd.report_mark_datetime,mark.report_number
+                    FROM tb_report_mark mark
+                    INNER JOIN tb_m_employee emp ON emp.`id_employee`=mark.id_employee
+                    INNER JOIN 
+                    (
+	                    SELECT mark.id_report,mark.report_mark_type,MAX(report_mark_datetime) AS report_mark_datetime
+	                    FROM tb_report_mark mark
+	                    WHERE mark.id_mark='2' AND NOT ISNULL(report_mark_start_datetime) AND report_mark_type='23'
+	                    GROUP BY report_mark_type,id_report
+                    ) maxd ON maxd.id_report=mark.id_report AND maxd.report_mark_type=mark.report_mark_type AND maxd.report_mark_datetime=mark.report_mark_datetime
+                    WHERE mark.id_mark='2' AND NOT ISNULL(mark.report_mark_start_datetime) AND mark.report_mark_type='23'
+                  ) maxd ON maxd.id_report = a.id_prod_order_wo "
         query += "WHERE 1=1 " & query_where
 
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
@@ -394,6 +451,7 @@
         query += "d.comp_name AS comp_name_req_from,c.id_comp_contact AS id_comp_name_req_from, "
         query += "f.comp_name AS comp_name_req_to,e.id_comp_contact AS id_comp_name_req_to, "
         query += "a.prod_order_mrs_date "
+        query += ",IF(ISNULL(mark.id_mark),'no','yes') AS is_submit,maxd.employee_name as last_mark "
         query += "FROM tb_prod_order_mrs a "
         query += "LEFT JOIN tb_prod_order_wo b ON a.id_prod_order_wo = b.id_prod_order_wo "
         '
@@ -408,7 +466,24 @@
         query += "INNER JOIN tb_m_comp_contact e ON a.id_comp_contact_req_to = e.id_comp_contact "
         query += "INNER JOIN tb_m_comp f ON e.id_comp = f.id_comp "
         query += "INNER JOIN tb_lookup_report_status h ON h.id_report_status = a.id_report_status "
+        query += "LEFT JOIN 
+                    (
+	                    SELECT * FROM tb_report_mark GROUP BY report_mark_type,id_report
+                    ) mark ON mark.id_report=a.id_prod_order_mrs AND mark.report_mark_type='29' "
         '
+        query += "LEFT JOIN
+                 (SELECT mark.id_report_mark,mark.id_report,emp.employee_name,maxd.report_mark_datetime,mark.report_number
+                    FROM tb_report_mark mark
+                    INNER JOIN tb_m_employee emp ON emp.`id_employee`=mark.id_employee
+                    INNER JOIN 
+                    (
+	                    SELECT mark.id_report,mark.report_mark_type,MAX(report_mark_datetime) AS report_mark_datetime
+	                    FROM tb_report_mark mark
+	                    WHERE mark.id_mark='2' AND NOT ISNULL(report_mark_start_datetime) AND report_mark_type='29'
+	                    GROUP BY report_mark_type,id_report
+                    ) maxd ON maxd.id_report=mark.id_report AND maxd.report_mark_type=mark.report_mark_type AND maxd.report_mark_datetime=mark.report_mark_datetime
+                    WHERE mark.id_mark='2' AND NOT ISNULL(mark.report_mark_start_datetime) AND mark.report_mark_type='29'
+                  ) maxd ON maxd.id_report = a.id_prod_order_mrs "
         query += "WHERE 1=1 " & query_where
 
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
@@ -445,5 +520,9 @@
         FormProductionMRS.TEDesign.Text = GVMRS.GetFocusedRowCellValue("design_display_name").ToString
         FormProductionMRS.TEDesignCode.Text = GVMRS.GetFocusedRowCellValue("design_code").ToString
         FormProductionMRS.ShowDialog()
+    End Sub
+
+    Private Sub BtnView_Click(sender As Object, e As EventArgs) Handles BtnView.Click
+        viewProdDemand()
     End Sub
 End Class

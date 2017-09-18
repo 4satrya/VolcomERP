@@ -3,7 +3,6 @@
     Dim id_form_control As String
     Dim id_role As String = FormAccess.GVRole.GetFocusedRowCellDisplayText("id_role").ToString
     Dim id_form As String
-
     'Form Load
     Private Sub FormAccessMappingSingle_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         viewMenu()
@@ -106,7 +105,6 @@
         FormMain.BEProgress.EditValue = 0
         Cursor = Cursors.Default
     End Sub
-
     Private Sub CheckEditSelAll_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckEditSelAll.CheckedChanged
         Dim cek As String = CheckEditSelAll.EditValue.ToString
         For i As Integer = 0 To (GVMenu.RowCount - 1)
@@ -122,14 +120,23 @@
             End Try
         Next
     End Sub
-
     Private Sub RepositoryItemCheckEdit1_EditValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RepositoryItemCheckEdit1.EditValueChanged
         Try
             GVMenu.SetFocusedRowCellValue("is_changed", "Yes")
         Catch ex As Exception
-
         End Try
     End Sub
 
-  
+    Private Sub BBPrintChecked_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BBPrintChecked.ItemClick
+        Cursor = Cursors.WaitCursor
+        GVMenu.ActiveFilterString = "[is_select]='Yes'"
+        print_no_footer(GCMenu, "Selected Menu Access")
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BBPrintAll_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BBPrintAll.ItemClick
+        Cursor = Cursors.WaitCursor
+        print_no_footer(GCMenu, "Menu Access")
+        Cursor = Cursors.Default
+    End Sub
 End Class

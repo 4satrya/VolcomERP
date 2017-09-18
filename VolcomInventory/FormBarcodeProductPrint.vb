@@ -255,8 +255,12 @@ Public Class FormBarcodeProductPrint
 
             pd.PrinterSettings = New PrinterSettings()
             If (pd.ShowDialog() = DialogResult.OK) Then
-                RawPrinterHelper.SendStringToPrinter(pd.PrinterSettings.PrinterName, print_command)
-                upd_last_digit("3")
+                Try
+                    upd_last_digit("3")
+                    RawPrinterHelper.SendStringToPrinter(pd.PrinterSettings.PrinterName, print_command)
+                Catch ex As Exception
+                    stopCustom(ex.ToString)
+                End Try
             End If
         End If
     End Sub
@@ -362,8 +366,12 @@ Public Class FormBarcodeProductPrint
 
             pd.PrinterSettings = New PrinterSettings()
             If (pd.ShowDialog() = DialogResult.OK) Then
-                RawPrinterHelper.SendStringToPrinter(pd.PrinterSettings.PrinterName, print_command)
-                upd_last_digit("2")
+                Try
+                    upd_last_digit("2")
+                    RawPrinterHelper.SendStringToPrinter(pd.PrinterSettings.PrinterName, print_command)
+                Catch ex As Exception
+                    stopCustom(ex.ToString)
+                End Try
             End If
         End If
     End Sub
@@ -434,8 +442,12 @@ Public Class FormBarcodeProductPrint
 
             pd.PrinterSettings = New PrinterSettings()
             If (pd.ShowDialog() = DialogResult.OK) Then
-                RawPrinterHelper.SendStringToPrinter(pd.PrinterSettings.PrinterName, print_command)
-                upd_last_digit("1")
+                Try
+                    upd_last_digit("1")
+                    RawPrinterHelper.SendStringToPrinter(pd.PrinterSettings.PrinterName, print_command)
+                Catch ex As Exception
+                    stopCustom(ex.ToString)
+                End Try
             End If
         End If
     End Sub

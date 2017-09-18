@@ -23,6 +23,8 @@ Public Class FormFGTrfNewDet
     Public id_pre As String = "-1"
     Public bof_column As String = get_setup_field("bof_column")
     Public bof_xls_so As String = get_setup_field("bof_xls_trf")
+    Dim id_wh_type As String = "-1"
+    Dim is_save_unreg_unique As String = "-1"
 
     Private Sub FormFGTrfNewDet_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'get default store category for pick company
@@ -55,9 +57,6 @@ Public Class FormFGTrfNewDet
         Catch ex As Exception
         End Try
 
-        'hide diff status
-        GridColumnStatus.Visible = False
-
         If action = "ins" Then
             XTPOutboundScanNew.PageEnabled = True
             BtnPrint.Enabled = False
@@ -72,6 +71,9 @@ Public Class FormFGTrfNewDet
             If id_sales_order <> "-1" Then
                 viewSalesOrder()
             End If
+
+            'check is_save_unreg_unique (unique tdk teregister)
+            is_save_unreg_unique = get_setup_field("is_save_unreg_unique")
         ElseIf action = "upd" Then
             GroupControlListItem.Enabled = True
             GroupControlScannedItem.Enabled = True
@@ -126,7 +128,7 @@ Public Class FormFGTrfNewDet
     End Sub
 
     Sub viewSalesOrder()
-        Dim query As String = "SELECT a.id_so_type, a.id_so_status, a.id_sales_order, a.id_store_contact_to, (d.comp_name) AS store_name_to,a.id_report_status, f.report_status, "
+        Dim query As String = "SELECT a.id_so_type, a.id_so_status, a.id_sales_order, a.id_store_contact_to, d.id_wh_type, (d.comp_name) AS store_name_to,a.id_report_status, f.report_status, "
         query += "a.sales_order_note,a.sales_order_date, a.sales_order_note, a.sales_order_number, "
         query += "DATE_FORMAT(a.sales_order_date,'%d %M %Y') AS sales_order_date, (SELECT COUNT(id_pl_sales_order_del) FROM tb_pl_sales_order_del WHERE tb_pl_sales_order_del.id_sales_order = a.id_sales_order) AS pl_created, "
         query += "a.id_warehouse_contact_to, (wh.comp_number) AS `wh_number`, (wh.comp_name) AS `wh_name` "
@@ -149,6 +151,7 @@ Public Class FormFGTrfNewDet
         id_comp_contact_to = data.Rows(0)("id_store_contact_to").ToString
         TxtCodeCompTo.Text = get_company_x(id_comp_to, 2)
         TxtNameCompTo.Text = get_company_x(id_comp_to, 1)
+        id_wh_type = data.Rows(0)("id_wh_type").ToString
 
         'wh
         Dim query_comp_from As String = "SELECT id_comp FROM tb_m_comp_contact WHERE id_comp_contact = '" + data.Rows(0)("id_warehouse_contact_to").ToString + "'"
@@ -166,7 +169,7 @@ Public Class FormFGTrfNewDet
         viewDetail()
         viewDetailDrawer()
         view_barcode_list()
-        setDefaultDrawer()
+        'setDefaultDrawer()
         GroupControlListItem.Enabled = True
         GroupControlScannedItem.Enabled = True
         check_but()
@@ -293,25 +296,23 @@ Public Class FormFGTrfNewDet
             BtnAdd.Enabled = True
             BtnEdit.Enabled = True
             BtnDel.Enabled = True
-            PanelNavBarcode.Enabled = True
             MENote.Properties.ReadOnly = False
             GVItemList.OptionsCustomization.AllowGroup = False
-            BtnSave.Enabled = True
             BPickDrawer.Enabled = True
-            BtnVerify.Enabled = True
         Else
             BtnAdd.Enabled = False
             BtnEdit.Enabled = False
             BtnDel.Enabled = False
-            PanelNavBarcode.Enabled = False
             MENote.Properties.ReadOnly = True
             GVItemList.OptionsCustomization.AllowGroup = True
-            BtnSave.Enabled = False
-            GridColumnQtyLimit.Visible = False
             GridColumnQtyWH.Visible = False
             BPickDrawer.Enabled = False
-            BtnVerify.Enabled = False
         End If
+        PanelNavBarcode.Enabled = False
+        BtnVerify.Enabled = False
+        BtnSave.Enabled = False
+        GridColumnQtyLimit.Visible = False
+        GridColumnStatus.Visible = False
 
         'ATTACH
         If check_attach_report_status(id_report_status, "57", id_fg_trf) Then
@@ -381,29 +382,12 @@ Public Class FormFGTrfNewDet
             'action
             Dim query As String = "CALL view_sales_order_limit_for_trf('" + id_sales_order + "', '0', '0')"
             Dim data As DataTable = execute_query(query, "-1", True, "", "", "", "")
-            Dim id_product_param As String = ""
-            For i As Integer = 0 To (data.Rows.Count - 1)
-                id_product_param += data.Rows(i)("id_product").ToString
-                If i < (data.Rows.Count - 1) Then
-                    id_product_param += ";"
-                End If
-            Next
             GCItemList.DataSource = data
-            codeAvailableIns(id_product_param)
         ElseIf action = "upd" Then
             id_fg_trf_det_list.Clear()
-            Dim id_param As String = ""
             Dim query As String = "CALL view_fg_trf('" + id_fg_trf + "')"
             Dim data As DataTable = execute_query(query, "-1", True, "", "", "", "")
-            For i As Integer = 0 To (data.Rows.Count - 1)
-                id_fg_trf_det_list.Add(data.Rows(i)("id_fg_trf_det").ToString)
-                id_param = id_param + data.Rows(i)("id_product").ToString
-                If i < (data.Rows.Count - 1) Then
-                    id_param = id_param + ";"
-                End If
-            Next
             GCItemList.DataSource = data
-            Me.codeAvailableIns(id_param)
         End If
     End Sub
 
@@ -435,6 +419,18 @@ Public Class FormFGTrfNewDet
                 dt = data_not
             Else
                 dt.Merge(data_not, True, MissingSchemaAction.Ignore)
+            End If
+        End If
+
+        If is_save_unreg_unique = "1" Then
+            'merge with unique unregistered
+            Dim data_unreg = query_c.dataUnregisteredCode(id_product_param)
+            If data_unreg.Rows.Count > 0 Then
+                If dt.Rows.Count = 0 Then
+                    dt = data_unreg
+                Else
+                    dt.Merge(data_unreg, True, MissingSchemaAction.Ignore)
+                End If
             End If
         End If
     End Sub
@@ -565,7 +561,22 @@ Public Class FormFGTrfNewDet
         End If
     End Sub
 
+    Sub loadCodeDetail()
+        Cursor = Cursors.WaitCursor
+        Dim id_product_param As String = ""
+        For i As Integer = 0 To ((GVItemList.RowCount - 1) - GetGroupRowCount(GVItemList))
+            id_product_param += GVItemList.GetRowCellValue(i, "id_product").ToString
+            If i < ((GVItemList.RowCount - 1) - GetGroupRowCount(GVItemList)) Then
+                id_product_param += ";"
+            End If
+        Next
+        codeAvailableIns(id_product_param)
+        Cursor = Cursors.Default
+    End Sub
+
     Sub startScan()
+        loadCodeDetail()
+        verifyTrans()
         disableControl()
         newRowsBc()
         'allowDelete()
@@ -694,6 +705,7 @@ Public Class FormFGTrfNewDet
         Dim id_pl_prod_order_rec_det_unique As String = ""
         Dim id_product As String = ""
         Dim product_name As String = ""
+        Dim id_design_cat As String = ""
         Dim size As String = ""
         Dim bom_unit_price As Decimal = 0.0
         Dim id_design_price As String = ""
@@ -709,7 +721,9 @@ Public Class FormFGTrfNewDet
             id_pl_prod_order_rec_det_unique = dt_filter(0)("id_pl_prod_order_rec_det_unique").ToString
             id_product = dt_filter(0)("id_product").ToString
             product_name = dt_filter(0)("name").ToString
+            id_design_cat = dt_filter(0)("id_design_cat").ToString
             size = dt_filter(0)("size").ToString
+            'MsgBox(dt_filter(0)("bom_unit_price").ToString)
             bom_unit_price = Decimal.Parse(dt_filter(0)("bom_unit_price").ToString)
             is_old = dt_filter(0)("is_old_design").ToString
             code_found = True
@@ -719,8 +733,7 @@ Public Class FormFGTrfNewDet
         GVItemList.ActiveFilterString = "[id_product]='" + id_product + "' "
         GVItemList.FocusedRowHandle = 0
         Try
-            ' jum_limit = GVItemList.GetFocusedRowCellValue("qty_from_wh")
-            jum_limit = 999999999
+            jum_limit = GVItemList.GetFocusedRowCellValue("sales_order_det_qty_limit")
         Catch ex As Exception
         End Try
         Try
@@ -729,80 +742,100 @@ Public Class FormFGTrfNewDet
         End Try
         makeSafeGV(GVItemList)
 
-
-        If is_old = "1" Then 'old product
-            If Not code_found Then
-                GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "code", "")
-                GVBarcode.FocusedRowHandle = GVBarcode.RowCount - 1
-                stopCustom("Data not found or duplicate!")
-            Else
-                If jum_limit <= 0 Then
-                    GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "code", "")
-                    GVBarcode.FocusedRowHandle = GVBarcode.RowCount - 1
-                    stopCustom("This item cannot scan, because exceed the limit order.")
-                ElseIf jum_scan >= jum_limit Then
-                    GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "code", "")
-                    GVBarcode.FocusedRowHandle = GVBarcode.RowCount - 1
-                    stopCustom("Scanned qty exceed allowed qty")
-                Else
-                    GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "id_pl_prod_order_rec_det_unique", id_pl_prod_order_rec_det_unique)
-                    GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "id_fg_trf_det_counting", "0")
-                    GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "is_fix", "2")
-                    GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "counting_code", counting_code)
-                    GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "id_product", id_product)
-                    GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "name", product_name)
-                    GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "size", size)
-                    GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "bom_unit_price", bom_unit_price)
-                    countQty(id_product)
-                    newRowsBc()
-                    GCItemList.RefreshDataSource()
-                    GVItemList.RefreshData()
-                End If
-            End If
-        ElseIf is_old = "2" Then ' new product
-            'check duplicate code
-            GVBarcode.ActiveFilterString = "[code]='" + code_check + "' AND [is_fix]='2' "
-            If GVBarcode.RowCount > 0 Then
-                code_duplicate = True
-            End If
-            GVBarcode.ActiveFilterString = ""
-
-            If Not code_found Then
-                GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "code", "")
-                GVBarcode.FocusedRowHandle = GVBarcode.RowCount - 1
-                stopCustom("Data not found or duplicate!")
-            ElseIf code_duplicate Then
-                GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "code", "")
-                GVBarcode.FocusedRowHandle = GVBarcode.RowCount - 1
-                stopCustom("Data duplicate !")
-            Else
-                If jum_limit <= 0 Then
-                    GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "code", "")
-                    GVBarcode.FocusedRowHandle = GVBarcode.RowCount - 1
-                    stopCustom("This item cannot scan, because exceed the limit order.")
-                ElseIf jum_scan >= jum_limit Then
-                    GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "code", "")
-                    GVBarcode.FocusedRowHandle = GVBarcode.RowCount - 1
-                    stopCustom("Scanned qty exceed allowed qty")
-                Else
-                    GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "id_pl_prod_order_rec_det_unique", id_pl_prod_order_rec_det_unique)
-                    GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "id_fg_trf_det_counting", "0")
-                    GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "is_fix", "2")
-                    GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "counting_code", counting_code)
-                    GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "id_product", id_product)
-                    GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "name", product_name)
-                    GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "size", size)
-                    GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "bom_unit_price", bom_unit_price)
-                    countQty(id_product)
-                    newRowsBc()
-                    GCItemList.RefreshDataSource()
-                    GVItemList.RefreshData()
-                End If
-            End If
-        Else
+        If Not code_found Then
             GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "code", "")
             GVBarcode.FocusedRowHandle = GVBarcode.RowCount - 1
-            stopCustom("Data not found !")
+            stopCustom("Data not found or duplicate!")
+        Else
+            'jika akun normal/sale
+            If id_wh_type = "1" Or id_wh_type = "2" Then
+                If id_wh_type <> id_design_cat Then
+                    GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "code", "")
+                    GVBarcode.FocusedRowHandle = GVBarcode.RowCount - 1
+                    If id_wh_type = "1" Then
+                        stopCustom(TxtCodeCompTo.Text + " is only for normal product. ")
+                    Else
+                        stopCustom(TxtCodeCompTo.Text + " is only for sale product. ")
+                    End If
+                    Cursor = Cursors.Default
+                    Exit Sub
+                End If
+            End If
+
+            If is_old = "1" Then 'old product
+                If Not code_found Then
+                    GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "code", "")
+                    GVBarcode.FocusedRowHandle = GVBarcode.RowCount - 1
+                    stopCustom("Data not found or duplicate!")
+                Else
+                    If jum_limit <= 0 Then
+                        GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "code", "")
+                        GVBarcode.FocusedRowHandle = GVBarcode.RowCount - 1
+                        stopCustom("This item cannot scan, because limit qty is zero.")
+                    ElseIf jum_scan >= jum_limit Then
+                        GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "code", "")
+                        GVBarcode.FocusedRowHandle = GVBarcode.RowCount - 1
+                        stopCustom("Maximum qty : " + jum_limit.ToString)
+                    Else
+                        GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "id_pl_prod_order_rec_det_unique", id_pl_prod_order_rec_det_unique)
+                        GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "id_fg_trf_det_counting", "0")
+                        GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "is_fix", "2")
+                        GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "counting_code", counting_code)
+                        GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "id_product", id_product)
+                        GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "name", product_name)
+                        GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "size", size)
+                        GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "bom_unit_price", bom_unit_price)
+                        countQty(id_product)
+                        newRowsBc()
+                        GCItemList.RefreshDataSource()
+                        GVItemList.RefreshData()
+                    End If
+                End If
+            ElseIf is_old = "2" Or is_old = "3" Then ' new product
+                'check duplicate code
+                GVBarcode.ActiveFilterString = "[code]='" + code_check + "' AND [is_fix]='2' "
+                If GVBarcode.RowCount > 0 Then
+                    code_duplicate = True
+                End If
+                GVBarcode.ActiveFilterString = ""
+
+                If Not code_found Then
+                    GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "code", "")
+                    GVBarcode.FocusedRowHandle = GVBarcode.RowCount - 1
+                    stopCustom("Data not found or duplicate!")
+                ElseIf code_duplicate Then
+                    GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "code", "")
+                    GVBarcode.FocusedRowHandle = GVBarcode.RowCount - 1
+                    stopCustom("Data duplicate !")
+                Else
+                    If jum_limit <= 0 Then
+                        GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "code", "")
+                        GVBarcode.FocusedRowHandle = GVBarcode.RowCount - 1
+                        stopCustom("This item cannot scan, because limit qty is zero.")
+                    ElseIf jum_scan >= jum_limit Then
+                        GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "code", "")
+                        GVBarcode.FocusedRowHandle = GVBarcode.RowCount - 1
+                        stopCustom("Maximum qty : " + jum_limit.ToString)
+                    Else
+                        GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "id_pl_prod_order_rec_det_unique", id_pl_prod_order_rec_det_unique)
+                        GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "id_fg_trf_det_counting", "0")
+                        GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "is_fix", "2")
+                        GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "counting_code", counting_code)
+                        GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "id_product", id_product)
+                        GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "name", product_name)
+                        GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "size", size)
+                        GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "bom_unit_price", bom_unit_price)
+                        countQty(id_product)
+                        newRowsBc()
+                        GCItemList.RefreshDataSource()
+                        GVItemList.RefreshData()
+                    End If
+                End If
+            Else
+                GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "code", "")
+                GVBarcode.FocusedRowHandle = GVBarcode.RowCount - 1
+                stopCustom("Data not found !")
+            End If
         End If
         Cursor = Cursors.Default
     End Sub
@@ -990,17 +1023,9 @@ Public Class FormFGTrfNewDet
                 cond_check_data = False
             Else
                 If qty_cek > data_filter_cek(0)("sales_order_det_qty_limit") Then
-                    Dim diff As Integer = 0
-                    diff = qty_cek - data_filter_cek(0)("sales_order_det_qty_limit")
-                    GVItemList.SetRowCellValue(i, "status", "+" + diff.ToString)
                     cond_check_data = False
-                ElseIf qty_cek < data_filter_cek(0)("sales_order_det_qty_limit") Then
-                    Dim diff As Integer = 0
-                    diff = qty_cek - data_filter_cek(0)("sales_order_det_qty_limit")
-                    GVItemList.SetRowCellValue(i, "status", diff.ToString)
-                Else
-                    GVItemList.SetRowCellValue(i, "status", "0")
                 End If
+                GVItemList.SetRowCellValue(i, "sales_order_det_qty_limit", data_filter_cek(0)("sales_order_det_qty_limit"))
             End If
         Next
         GCItemList.RefreshDataSource()
@@ -1103,6 +1128,9 @@ Public Class FormFGTrfNewDet
                     If GVBarcode.RowCount > 0 Then
                         execute_non_query(query_counting, True, "", "", "", "")
                     End If
+
+                    'submit who prepared
+                    submit_who_prepared("57", id_fg_trf, id_user)
 
                     FormFGTrfNew.viewSalesOrder()
                     FormFGTrfNew.viewFGTrf()
@@ -1218,7 +1246,6 @@ Public Class FormFGTrfNewDet
 
     Sub getReport()
         Cursor = Cursors.WaitCursor
-        GridColumnStatus.Visible = False
         ReportFGTrf.id_fg_trf = id_fg_trf
         ReportFGTrf.id_type = id_type
         ReportFGTrf.dt = GCItemList.DataSource
@@ -1425,18 +1452,16 @@ Public Class FormFGTrfNewDet
         If bof_column = "1" Then
             Cursor = Cursors.WaitCursor
 
-            'fill remark
-            For r As Integer = 0 To ((GVItemList.RowCount - 1) - GetGroupRowCount(GVItemList))
-                GVItemList.SetRowCellValue(r, "fg_trf_det_note", TxtNumber.Text)
-            Next
-
             'hide column
             For c As Integer = 0 To GVItemList.Columns.Count - 1
                 GVItemList.Columns(c).Visible = False
             Next
             GridColumnCode.VisibleIndex = 0
             GridColumnQty.VisibleIndex = 1
-            GridColumnRemark.VisibleIndex = 2
+            GridColumnNumber.VisibleIndex = 2
+            GridColumnFrom.VisibleIndex = 3
+            GridColumnTo.VisibleIndex = 4
+            GridColumnRemark.VisibleIndex = 5
             GVItemList.OptionsPrint.PrintFooter = False
             GVItemList.OptionsPrint.PrintHeader = False
 
@@ -1460,21 +1485,22 @@ Public Class FormFGTrfNewDet
                 stopCustom("Please close your excel file first then try again later")
             End Try
 
-            'fill remark
-            For r As Integer = 0 To ((GVItemList.RowCount - 1) - GetGroupRowCount(GVItemList))
-                GVItemList.SetRowCellValue(r, "fg_trf_det_note", "")
-            Next
-
             'show column
             GridColumnNo.VisibleIndex = 0
             GridColumnCode.VisibleIndex = 1
             GridColumnName.VisibleIndex = 2
             GridColumnSize.VisibleIndex = 3
-            GridColumnColor.VisibleIndex = 4
-            GridColumnQty.VisibleIndex = 5
-            GridColumnRemark.VisibleIndex = 6
-            GridColumnStatus.VisibleIndex = 7
+            GridColumnQty.VisibleIndex = 4
+            GridColumnPriceType.VisibleIndex = 5
+            GridColumnPrice.VisibleIndex = 6
+            GridColumnAmount.VisibleIndex = 7
+            GridColumnRemark.VisibleIndex = 8
             GridColumnStatus.Visible = False
+            GridColumnNumber.Visible = False
+            GridColumnFrom.Visible = False
+            GridColumnTo.Visible = False
+            GVItemList.OptionsPrint.PrintFooter = True
+            GVItemList.OptionsPrint.PrintHeader = True
             Cursor = Cursors.Default
         End If
     End Sub
@@ -1509,12 +1535,18 @@ Public Class FormFGTrfNewDet
             colIndex = 0
             For j As Integer = 0 To dtTemp.VisibleColumns.Count - 1
                 colIndex = colIndex + 1
-                If j = 0 Then
+                If j = 0 Then 'code
                     wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, "code").ToString
-                ElseIf j = 1 Then
+                ElseIf j = 1 Then 'qty
                     wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, "fg_trf_det_qty")
+                ElseIf j = 2 Then 'number
+                    wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellDisplayText(i, "number").ToString
+                ElseIf j = 3 Then 'from
+                    wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellDisplayText(i, "from").ToString
+                ElseIf j = 4 Then 'to
+                    wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellDisplayText(i, "to").ToString
                 Else
-                    wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, "fg_trf_det_note")
+                    wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, "fg_trf_det_note").ToString
                 End If
             Next
         Next
@@ -1556,4 +1588,30 @@ Public Class FormFGTrfNewDet
         verifyTrans()
         Cursor = Cursors.Default
     End Sub
+
+    Private Sub GVItemList_CustomUnboundColumnData(sender As Object, e As DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs) Handles GVItemList.CustomUnboundColumnData
+        Dim view As DevExpress.XtraGrid.Views.Grid.GridView = TryCast(sender, DevExpress.XtraGrid.Views.Grid.GridView)
+        If e.Column.FieldName = "from" AndAlso e.IsGetData Then
+            e.Value = TxtCodeCompFrom.Text.ToString
+        ElseIf e.Column.FieldName = "to" AndAlso e.IsGetData Then
+            e.Value = TxtCodeCompTo.Text.ToString
+        ElseIf e.Column.FieldName = "number" AndAlso e.IsGetData Then
+            e.Value = TxtNumber.Text.ToString
+        ElseIf e.Column.FieldName = "status" AndAlso e.IsGetData Then
+            e.Value = getDiff(view, e.ListSourceRowIndex)
+        End If
+    End Sub
+
+    Private Function getDiff(view As DevExpress.XtraGrid.Views.Grid.GridView, listSourceRowIndex As Integer) As String
+        Dim qty As Integer = Convert.ToInt32(view.GetListSourceRowCellValue(listSourceRowIndex, "fg_trf_det_qty"))
+        Dim limit As Integer = Convert.ToInt32(view.GetListSourceRowCellValue(listSourceRowIndex, "sales_order_det_qty_limit"))
+        Dim diff As Integer = qty - limit
+        Dim stt As String = ""
+        If diff > 0 Then
+            stt = "+" + diff.ToString
+        Else
+            stt = diff.ToString
+        End If
+        Return stt
+    End Function
 End Class

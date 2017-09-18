@@ -56,10 +56,13 @@
         Dim id_str As String = ""
         Dim jum_str As Integer = 0
         Dim name As String = ""
+        Dim design_code As String = ""
         If FormMasterDesignSingle.id_pop_up = "3" Then 'non MD
             name = addSlashes(FormMasterDesignSingle.TEDisplayNameNonMD.Text)
+            design_code = addSlashes(FormMasterDesignSingle.TECodeNonMD.Text)
         Else 'MD
             name = addSlashes(FormMasterDesignSingle.TEDisplayName.Text)
+            design_code = addSlashes(FormMasterDesignSingle.TECode.Text)
         End If
         If jum_tot > 0 Then
             If cond_same Then
@@ -79,7 +82,7 @@
                                 query_ins += "SET @my_id=NULL; "
                             End If
                             query_ins += "INSERT INTO tb_m_product(id_design, product_display_name, product_name, product_code, product_full_code, product_ean_code, inv_min_stock, inv_max_stock, id_method, order_min, order_max) VALUES "
-                            query_ins += "('" + FormMasterDesignSingle.id_design + "', '" + name + "', '" + name + "', '" + GVCodeDetail.GetRowCellValue(l, "code").ToString + "', '" + FormMasterDesignSingle.TECode.Text + GVCodeDetail.GetRowCellValue(l, "code").ToString + "', '-', 0.00, 0.00, '1', 0.00, 0.00); "
+                            query_ins += "('" + FormMasterDesignSingle.id_design + "', '" + name + "', '" + name + "', '" + GVCodeDetail.GetRowCellValue(l, "code").ToString + "', '" + design_code + GVCodeDetail.GetRowCellValue(l, "code").ToString + "', '-', 0.00, 0.00, '1', 0.00, 0.00); "
                             query_ins += "SET @my_id=LAST_INSERT_ID(); "
                             query_ins += "CALL generate_vendor_code('" + FormMasterDesignSingle.id_range_par + "', @my_id); "
                             query_ins += "CALL ins_line_list_alloc('" + FormMasterDesignSingle.id_design + "', @my_id); "

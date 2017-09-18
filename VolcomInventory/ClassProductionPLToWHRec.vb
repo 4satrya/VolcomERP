@@ -12,7 +12,7 @@
             condition = ""
         End If
 
-        Dim query As String = "SELECT CONCAT(vend_c.comp_number, ' - ', vend_c.comp_name) AS vendor, i.prod_order_number,dsg.id_design, (dsg.design_display_name) AS `design_name`, k.pl_category, i.prod_order_number, a0.id_pl_prod_order_rec , a0.id_comp_contact_from , a0.id_comp_contact_to, a0.pl_prod_order_rec_note, a0.pl_prod_order_rec_number, a.pl_prod_order_number, "
+        Dim query As String = "SELECT CONCAT(vend_c.comp_number, ' - ', vend_c.comp_name) AS vendor, i.prod_order_number,dsg.id_design, (dsg.design_display_name) AS `design_name`, dsg.design_code AS `code`, k.pl_category, i.prod_order_number, a0.id_pl_prod_order_rec , a0.id_comp_contact_from , a0.id_comp_contact_to, a0.pl_prod_order_rec_note, a0.pl_prod_order_rec_number, a.pl_prod_order_number, "
         query += "CONCAT(d.comp_number,' - ',d.comp_name) AS comp_name_from, CONCAT(f.comp_number,' - ',f.comp_name) AS comp_name_to, h.report_status, a0.id_report_status, "
         query += "a0.pl_prod_order_rec_date, ss.id_season, ss.season, IFNULL(det.total_qty,0) AS `total_qty`, "
         query += "a0.last_update, getUserEmp(a0.last_update_by, '1') AS last_user, ('No') AS is_select "
@@ -44,6 +44,12 @@
         query += "GROUP BY a0.id_pl_prod_order_rec "
         query += "ORDER BY a0.id_pl_prod_order_rec " + order_type
         Return query
+    End Function
+
+    Public Function transactionList(ByVal condition As String, ByVal order_type As String) As DataTable
+        Dim query As String = "CALL view_pl_prod_rec_main(""" + condition + """, " + order_type + ")"
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        Return data
     End Function
 
     Public Sub changeStatus(ByVal id_report_par As String, ByVal id_status_reportx_par As String)

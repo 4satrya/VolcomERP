@@ -19,26 +19,26 @@ Partial Class FormSetupPicLocation
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormSetupPicLocation))
-        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl
-        Me.BSave = New DevExpress.XtraEditors.SimpleButton
-        Me.XtraTabControl1 = New DevExpress.XtraTab.XtraTabControl
-        Me.XTPPicLocation = New DevExpress.XtraTab.XtraTabPage
-        Me.PC2 = New DevExpress.XtraEditors.PanelControl
-        Me.BBrowseLogo = New DevExpress.XtraEditors.SimpleButton
-        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl
-        Me.TEPicLogo = New DevExpress.XtraEditors.TextEdit
-        Me.PictureEditIcon = New DevExpress.XtraEditors.PictureEdit
-        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl
-        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl
-        Me.BBrowseMat = New DevExpress.XtraEditors.SimpleButton
-        Me.TEPicMat = New DevExpress.XtraEditors.TextEdit
-        Me.BBrowseSample = New DevExpress.XtraEditors.SimpleButton
-        Me.TEPicSample = New DevExpress.XtraEditors.TextEdit
-        Me.LabelSeason = New DevExpress.XtraEditors.LabelControl
-        Me.BBrowseDesign = New DevExpress.XtraEditors.SimpleButton
-        Me.TEPicDesign = New DevExpress.XtraEditors.TextEdit
+        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.BSave = New DevExpress.XtraEditors.SimpleButton()
+        Me.XtraTabControl1 = New DevExpress.XtraTab.XtraTabControl()
+        Me.XTPPicLocation = New DevExpress.XtraTab.XtraTabPage()
+        Me.PC2 = New DevExpress.XtraEditors.PanelControl()
+        Me.BBrowseLogo = New DevExpress.XtraEditors.SimpleButton()
+        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
+        Me.TEPicLogo = New DevExpress.XtraEditors.TextEdit()
+        Me.PictureEditIcon = New DevExpress.XtraEditors.PictureEdit()
+        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
+        Me.BBrowseMat = New DevExpress.XtraEditors.SimpleButton()
+        Me.TEPicMat = New DevExpress.XtraEditors.TextEdit()
+        Me.BBrowseSample = New DevExpress.XtraEditors.SimpleButton()
+        Me.TEPicSample = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelSeason = New DevExpress.XtraEditors.LabelControl()
+        Me.BBrowseDesign = New DevExpress.XtraEditors.SimpleButton()
+        Me.TEPicDesign = New DevExpress.XtraEditors.TextEdit()
         Me.EPPicLocation = New System.Windows.Forms.ErrorProvider(Me.components)
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
@@ -59,7 +59,7 @@ Partial Class FormSetupPicLocation
         '
         Me.PanelControl1.Controls.Add(Me.BSave)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl1.Location = New System.Drawing.Point(0, 158)
+        Me.PanelControl1.Location = New System.Drawing.Point(0, 156)
         Me.PanelControl1.LookAndFeel.SkinName = "Blue"
         Me.PanelControl1.LookAndFeel.UseDefaultLookAndFeel = False
         Me.PanelControl1.Name = "PanelControl1"
@@ -73,6 +73,7 @@ Partial Class FormSetupPicLocation
         Me.BSave.Size = New System.Drawing.Size(75, 23)
         Me.BSave.TabIndex = 61
         Me.BSave.Text = "Save"
+        Me.BSave.Visible = False
         '
         'XtraTabControl1
         '
@@ -89,7 +90,7 @@ Partial Class FormSetupPicLocation
         Me.XTPPicLocation.Controls.Add(Me.PC2)
         Me.XTPPicLocation.Controls.Add(Me.PanelControl1)
         Me.XTPPicLocation.Name = "XTPPicLocation"
-        Me.XTPPicLocation.Size = New System.Drawing.Size(640, 204)
+        Me.XTPPicLocation.Size = New System.Drawing.Size(640, 202)
         Me.XTPPicLocation.Text = "Picture Location"
         '
         'PC2
@@ -111,7 +112,7 @@ Partial Class FormSetupPicLocation
         Me.PC2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PC2.Location = New System.Drawing.Point(0, 0)
         Me.PC2.Name = "PC2"
-        Me.PC2.Size = New System.Drawing.Size(640, 158)
+        Me.PC2.Size = New System.Drawing.Size(640, 156)
         Me.PC2.TabIndex = 63
         '
         'BBrowseLogo
@@ -138,7 +139,7 @@ Partial Class FormSetupPicLocation
         Me.TEPicLogo.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 10.0!)
         Me.TEPicLogo.Properties.Appearance.Options.UseFont = True
         Me.TEPicLogo.Properties.ReadOnly = True
-        Me.TEPicLogo.Size = New System.Drawing.Size(243, 23)
+        Me.TEPicLogo.Size = New System.Drawing.Size(243, 22)
         Me.TEPicLogo.TabIndex = 63
         '
         'PictureEditIcon
@@ -186,7 +187,7 @@ Partial Class FormSetupPicLocation
         Me.TEPicMat.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 10.0!)
         Me.TEPicMat.Properties.Appearance.Options.UseFont = True
         Me.TEPicMat.Properties.ReadOnly = True
-        Me.TEPicMat.Size = New System.Drawing.Size(243, 23)
+        Me.TEPicMat.Size = New System.Drawing.Size(243, 22)
         Me.TEPicMat.TabIndex = 50
         '
         'BBrowseSample
@@ -204,7 +205,7 @@ Partial Class FormSetupPicLocation
         Me.TEPicSample.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 10.0!)
         Me.TEPicSample.Properties.Appearance.Options.UseFont = True
         Me.TEPicSample.Properties.ReadOnly = True
-        Me.TEPicSample.Size = New System.Drawing.Size(243, 23)
+        Me.TEPicSample.Size = New System.Drawing.Size(243, 22)
         Me.TEPicSample.TabIndex = 53
         '
         'LabelSeason
@@ -231,7 +232,7 @@ Partial Class FormSetupPicLocation
         Me.TEPicDesign.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 10.0!)
         Me.TEPicDesign.Properties.Appearance.Options.UseFont = True
         Me.TEPicDesign.Properties.ReadOnly = True
-        Me.TEPicDesign.Size = New System.Drawing.Size(243, 23)
+        Me.TEPicDesign.Size = New System.Drawing.Size(243, 22)
         Me.TEPicDesign.TabIndex = 56
         '
         'EPPicLocation
@@ -249,7 +250,6 @@ Partial Class FormSetupPicLocation
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FormSetupPicLocation"
-        Me.ShowInTaskbar = False
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Setup"

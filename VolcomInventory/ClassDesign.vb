@@ -7,18 +7,21 @@
         Dim query As String = ""
         query += "Select CAST(prod.id_product AS CHAR(15)) AS `id_product`, ('0') AS `id_pl_prod_order_rec_det_unique`, "
         query += "(prod.product_full_code) As `product_code`, ('') As `product_counting_code`, "
-        query += "(prod.product_full_code) AS `product_full_code`, ('1') AS `is_old_design`, ('2') AS `is_rec`, "
-        query += "(dsg.design_cop) AS `bom_unit_price`, CAST(prc.id_design_price AS CHAR(15)) AS `id_design_price`, prc.design_price, ('0') AS `id_sales_return_det_counting` "
+        query += "(prod.product_full_code) AS `product_full_code`, (dsg.design_display_name) AS `name`,  cod.display_name AS `size`, ('1') AS `is_old_design`, ('2') AS `is_rec`, "
+        query += "(dsg.design_cop) AS `bom_unit_price`, CAST(prc.id_design_price AS CHAR(15)) AS `id_design_price`, prc.design_price, prc.id_design_price_type, prc.design_price_type, prc.id_design_cat, prc.design_cat, ('0') AS `id_sales_return_det_counting` "
         query += "From tb_m_product prod "
+        query += "JOIN tb_opt o
+        INNER JOIN tb_m_product_code cc ON cc.id_product = prod.id_product 
+        INNER JOIN tb_m_code_detail cod ON cod.id_code_detail = cc.id_code_detail AND cod.id_code = o.id_code_product_size "
         query += "INNER Join tb_m_design dsg ON dsg.id_design = prod.id_design "
         query += "Left Join( "
         query += "Select * FROM ( "
-        query += "Select price.id_design, price.design_price, price.design_price_date, price.id_design_price, price_type.design_price_type "
+        query += "Select price.id_design, price.design_price, price.design_price_date, price.id_design_price, price.id_design_price_type, price_type.design_price_type, cat.id_design_cat, cat.design_cat "
         query += "From tb_m_design_price price "
-        query += "INNER Join tb_lookup_design_price_type price_type "
-        query += "On price.id_design_price_type = price_type.id_design_price_type "
+        query += "INNER Join tb_lookup_design_price_type price_type On price.id_design_price_type = price_type.id_design_price_type "
+        query += "INNER JOIN tb_lookup_design_cat cat ON cat.id_design_cat = price_type.id_design_cat "
         query += "WHERE price.is_active_wh ='1' AND price.design_price_start_date <= NOW() "
-        query += "ORDER BY price.design_price_start_date DESC ) a "
+        query += "ORDER BY price.design_price_start_date DESC, price.id_design_price DESC ) a "
         query += "GROUP BY a.id_design "
         query += ") prc ON prc.id_design = dsg.id_design "
         query += "WHERE dsg.is_old_design = '1' AND ("
@@ -32,8 +35,74 @@
         Return query
     End Function
 
+    Public Function dataUnregisteredCode(ByVal product_param As String)
+        Dim product_arr As String() = Split(product_param, ";")
+        Dim query As String = ""
+        query += "Select CAST(prod.id_product AS CHAR(15)) AS `id_product`, ('0') AS `id_pl_prod_order_rec_det_unique`, "
+        query += "(prod.product_full_code) As `product_code`, prod.product_name AS `name`, cod.display_name AS `size`, ('') As `product_counting_code`, "
+        query += "(prod.product_full_code) AS `product_full_code`, ('1') AS `is_old_design`, ('2') AS `is_rec`, "
+        query += "(dsg.design_cop) AS `bom_unit_price`, CAST(prc.id_design_price AS CHAR(15)) AS `id_design_price`, prc.design_price, prc.id_design_price_type, prc.design_price_type, prc.id_design_cat, prc.design_cat, ('0') AS `id_sales_return_det_counting`, prod.last_print_unique "
+        query += "From tb_m_product prod "
+        query += "INNER Join tb_m_design dsg ON dsg.id_design = prod.id_design "
+        query += "Left Join( "
+        query += "Select * FROM ( "
+        query += "Select price.id_design, price.design_price, price.design_price_date, price.id_design_price, price.id_design_price_type, price_type.design_price_type, cat.id_design_cat, cat.design_cat "
+        query += "From tb_m_design_price price "
+        query += "INNER Join tb_lookup_design_price_type price_type On price.id_design_price_type = price_type.id_design_price_type "
+        query += "INNER JOIN tb_lookup_design_cat cat ON cat.id_design_cat = price_type.id_design_cat "
+        query += "WHERE price.is_active_wh ='1' AND price.design_price_start_date <= NOW() "
+        query += "ORDER BY price.design_price_start_date DESC ) a "
+        query += "GROUP BY a.id_design "
+        query += ") prc ON prc.id_design = dsg.id_design "
+        query += "JOIN tb_opt o "
+        query += "INNER JOIN tb_m_product_code cc ON cc.id_product = prod.id_product "
+        query += "INNER JOIN tb_m_code_detail cod ON cod.id_code_detail = cc.id_code_detail AND cod.id_code = o.id_code_product_size "
+        query += "WHERE dsg.is_old_design = '3' AND ("
+        For i As Integer = 0 To (product_arr.Count - 1)
+            If i > 0 Then
+                query += "OR "
+            End If
+            query += "prod.id_product='" + product_arr(i).ToString + "' "
+        Next
+        query += ") "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        Dim dt As New DataTable
+        Try
+            'initiation datatable jika blm ada
+            dt.Columns.Add("id_product")
+            dt.Columns.Add("id_design_cat")
+            dt.Columns.Add("id_pl_prod_order_rec_det_unique")
+            dt.Columns.Add("product_code")
+            dt.Columns.Add("name")
+            dt.Columns.Add("size")
+            dt.Columns.Add("product_counting_code")
+            dt.Columns.Add("product_full_code")
+            dt.Columns.Add("bom_unit_price")
+            dt.Columns.Add("is_old_design")
+        Catch ex As Exception
+        End Try
+        For i As Integer = 0 To data.Rows.Count - 1
+            Dim range_akhir As Integer = Integer.Parse(data.Rows(i)("last_print_unique").ToString)
+            For j As Integer = 1 To range_akhir
+                Dim R As DataRow = dt.NewRow
+                R("id_product") = data.Rows(i)("id_product").ToString
+                R("id_design_cat") = data.Rows(i)("id_design_cat").ToString
+                R("id_pl_prod_order_rec_det_unique") = data.Rows(i)("id_pl_prod_order_rec_det_unique").ToString
+                R("product_code") = data.Rows(i)("product_code").ToString
+                R("name") = data.Rows(i)("name").ToString
+                R("size") = data.Rows(i)("size").ToString
+                R("product_counting_code") = combine_header_number("", j, 4)
+                R("product_full_code") = combine_header_number(data.Rows(i)("product_code").ToString, j, 4)
+                R("bom_unit_price") = data.Rows(i)("bom_unit_price")
+                R("is_old_design") = 3
+                dt.Rows.Add(R)
+            Next
+        Next
+        Return dt
+    End Function
+
     Public Sub updatedTime(ByVal id_design_par As String)
-        Dim query As String = "UPDATE tb_m_design SET last_updated=NOW(), updated_by='" + id_user + "' WHERE id_design='" + id_design_par + "' "
+        Dim query As String = "UPDATE tb_m_design Set last_updated=NOW(), updated_by='" + id_user + "' WHERE id_design='" + id_design_par + "' "
         execute_non_query(query, True, "", "", "", "")
     End Sub
 

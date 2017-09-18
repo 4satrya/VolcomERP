@@ -87,10 +87,47 @@
         End If
         'detail2
         viewDetail()
+        view_problem_summary()
         view_barcode_list()
         check_but()
         allow_status()
     End Sub
+
+    Sub view_problem_summary()
+        Dim query As String = "SELECT p.id_product,p.product_full_code AS `code` , d.design_display_name AS `name`, cd.code_detail_name AS `size`,
+        COUNT(rp.id_product) AS `qty`
+        FROM tb_sales_return_problem rp
+        INNER JOIN tb_m_product p ON p.id_product = RP.id_product
+        INNER JOIN tb_m_product_code pc ON pc.id_product = p.id_product
+        INNER JOIN tb_m_code_detail cd ON cd.id_code_detail = pc.id_code_detail
+        INNER JOIN tb_m_design d ON d.id_design = p.id_design
+        WHERE rp.id_sales_return='" + id_sales_return + "'
+        GROUP BY rp.id_product "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCProbSum.DataSource = data
+        view_barcode_list_prob()
+    End Sub
+
+    Sub view_barcode_list_prob()
+        Cursor = Cursors.WaitCursor
+        Dim id_product As String = "-1"
+        Try
+            id_product = GVProbSum.GetFocusedRowCellValue("id_product").ToString
+        Catch ex As Exception
+        End Try
+        Dim query As String = "SELECT '0' AS `no`,rp.id_sales_return_problem, rp.id_product, rp.scanned_code AS `code`,
+        d.design_display_name AS `name`, cd.code_detail_name AS `size` 
+        FROM tb_sales_return_problem rp
+        INNER JOIN tb_m_product p ON p.id_product = rp.id_product
+        INNER JOIN tb_m_product_code pc ON pc.id_product = p.id_product
+        INNER JOIN tb_m_code_detail cd ON cd.id_code_detail = pc.id_code_detail
+        INNER JOIN tb_m_design d ON d.id_design = p.id_design
+        WHERE rp.id_sales_return=" + id_sales_return + " AND rp.id_product='" + id_product + "' "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCBarcodeProb.DataSource = data
+        Cursor = Cursors.Default
+    End Sub
+
     Sub viewSalesReturnOrder()
         Dim query As String = "SELECT a.id_sales_return_order, a.id_store_contact_to, (d.comp_name) AS store_name_to,a.id_report_status, f.report_status, "
         query += "a.sales_return_order_note, a.sales_return_order_note, a.sales_return_order_number, "
@@ -560,5 +597,41 @@
 
     Private Sub GVItemList_ColumnFilterChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GVItemList.ColumnFilterChanged
         view_barcode_list()
+    End Sub
+
+    Private Sub XTCReturnSummary_SelectedPageChanged(sender As Object, e As DevExpress.XtraTab.TabPageChangedEventArgs) Handles XTCReturnSummary.SelectedPageChanged
+        If XTCReturnSummary.SelectedTabPageIndex = 0 Then
+            XTCReturn.SelectedTabPageIndex = 0
+        Else
+            XTCReturn.SelectedTabPageIndex = 1
+        End If
+    End Sub
+
+    Private Sub XTCReturn_SelectedPageChanged(sender As Object, e As DevExpress.XtraTab.TabPageChangedEventArgs) Handles XTCReturn.SelectedPageChanged
+        If XTCReturn.SelectedTabPageIndex = 0 Then
+            XTCReturnSummary.SelectedTabPageIndex = 0
+        Else
+            XTCReturnSummary.SelectedTabPageIndex = 1
+        End If
+    End Sub
+
+    Private Sub GVProbSum_CustomColumnDisplayText(sender As Object, e As DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs) Handles GVProbSum.CustomColumnDisplayText
+        If e.Column.FieldName = "no" Then
+            e.DisplayText = (e.ListSourceRowIndex + 1).ToString()
+        End If
+    End Sub
+
+    Private Sub GVBarcodeProb_CustomColumnDisplayText(sender As Object, e As DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs) Handles GVBarcodeProb.CustomColumnDisplayText
+        If e.Column.FieldName = "no" Then
+            e.DisplayText = (e.ListSourceRowIndex + 1).ToString()
+        End If
+    End Sub
+
+    Private Sub GVProbSum_FocusedRowChanged(sender As Object, e As DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs) Handles GVProbSum.FocusedRowChanged
+        view_barcode_list_prob()
+    End Sub
+
+    Private Sub GVProbSum_ColumnFilterChanged(sender As Object, e As EventArgs) Handles GVProbSum.ColumnFilterChanged
+        view_barcode_list_prob()
     End Sub
 End Class

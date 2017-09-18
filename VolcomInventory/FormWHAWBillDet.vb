@@ -486,6 +486,9 @@
                 id_comp = data.Rows(0)("id_comp").ToString
                 TECompName.Text = data.Rows(0)("comp_name").ToString
                 TECompCode.Text = data.Rows(0)("comp_number").ToString
+                '
+                clear_do()
+                '
                 'TEWeight.Focus() ---三
                 rate_table()
                 e.SuppressKeyPress = True
@@ -493,7 +496,11 @@
             End If
         End If
     End Sub
-
+    Sub clear_do()
+        For i As Integer = GVDO.RowCount To 0 Step -1
+            GVDO.DeleteRow(i)
+        Next
+    End Sub
     Private Sub BRemoveDO_Click(sender As Object, e As EventArgs) Handles BRemoveDO.Click
         If GVDO.RowCount > 0 Then
             GVDO.DeleteRow(GVDO.FocusedRowHandle)

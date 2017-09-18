@@ -20,9 +20,7 @@
             DEUntilLeave.Visible = False
             Luntil.Visible = False
         Else 'leave
-            If FormEmpLeaveDet.LELeaveType.EditValue.ToString = "1" Then
-                BPickAll.Visible = False
-            End If
+            BPickAll.Visible = True
         End If
     End Sub
 
@@ -50,6 +48,7 @@
     End Sub
 
     Private Sub GVSchedule_FocusedRowChanged(sender As Object, e As DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs) Handles GVSchedule.FocusedRowChanged
+        CEFullDay.Checked = True
         load_total()
     End Sub
 
@@ -70,7 +69,7 @@
 
     Private Sub BAdd_Click(sender As Object, e As EventArgs) Handles BAdd.Click
         If DEStartLeave.Text = "" And opt = "-1" Then
-            stopCustom("Please select schedule first.")
+            stopCustom("Pilih tanggal pengajuan cuti terlebih dahulu.")
         Else
             If opt = "1" Then ' change schedule from
                 FormEmpChScheduleDet.id_sch_from = GVSchedule.GetFocusedRowCellDisplayText("id_schedule").ToString
@@ -92,7 +91,7 @@
                 Next
 
                 If check = False Then
-                    stopCustom("This schedule already proposed.")
+                    stopCustom("Tanggal ini sudah diajukan cuti.")
                 Else
                     Dim total_min As Integer = 0
 
@@ -112,24 +111,40 @@
                         total_min = GVSchedule.GetFocusedRowCellValue("minutes_work")
                     End If
 
-                    Dim newRow As DataRow = (TryCast(FormEmpLeaveDet.GCLeaveDet.DataSource, DataTable)).NewRow()
-                    newRow("id_schedule") = GVSchedule.GetFocusedRowCellDisplayText("id_schedule").ToString
-                    newRow("datetime_start") = date_from
-                    newRow("datetime_until") = date_until
-                    newRow("is_full_day") = is_full_day
-                    newRow("hours_total") = total_min / 60
-                    newRow("minutes_total") = total_min
 
-                    TryCast(FormEmpLeaveDet.GCLeaveDet.DataSource, DataTable).Rows.Add(newRow)
-                    FormEmpLeaveDet.GCLeaveDet.RefreshDataSource()
-                    FormEmpLeaveDet.load_but_calc()
-                    FormEmpLeaveDet.GVLeaveDet.FocusedRowHandle = 0
-                    '
-                    Close()
+                    If total_min < get_opt_emp_field("min_leave_minutes") And is_no_min_hour(FormEmpLeaveDet.LELeaveType.EditValue.ToString) = "2" Then
+                        stopCustom("Hanya dapat mengajukan dengan lama minimal 4 jam")
+                    Else
+                        Dim newRow As DataRow = (TryCast(FormEmpLeaveDet.GCLeaveDet.DataSource, DataTable)).NewRow()
+                        newRow("id_schedule") = GVSchedule.GetFocusedRowCellDisplayText("id_schedule").ToString
+                        newRow("datetime_start") = date_from
+                        newRow("datetime_until") = date_until
+                        newRow("is_full_day") = is_full_day
+                        newRow("hours_total") = total_min / 60
+                        newRow("minutes_total") = total_min
+
+                        TryCast(FormEmpLeaveDet.GCLeaveDet.DataSource, DataTable).Rows.Add(newRow)
+                        FormEmpLeaveDet.GCLeaveDet.RefreshDataSource()
+                        FormEmpLeaveDet.load_but_calc()
+                        FormEmpLeaveDet.GVLeaveDet.FocusedRowHandle = 0
+                        '
+                        Close()
+                    End If
                 End If
             End If
         End If
     End Sub
+
+    Function is_no_min_hour(ByVal id_leave_type As String)
+        Dim no_min_hour As String = ""
+
+        Dim query As String = "SELECT * FROM tb_lookup_leave_type WHERE id_leave_type='" & id_leave_type & "'"
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+
+        no_min_hour = data.Rows(0)("is_no_min_hour").ToString
+
+        Return no_min_hour
+    End Function
 
     Private Sub CEFullDay_CheckedChanged(sender As Object, e As EventArgs) Handles CEFullDay.CheckedChanged
         load_date()
@@ -149,7 +164,6 @@
                     '
                     DEStartLeave.Properties.ReadOnly = True
                     DEUntilLeave.Properties.ReadOnly = True
-                    '
                 End If
             Else
                 DEStartLeave.Properties.ReadOnly = False
@@ -248,4 +262,12 @@
 
         Close()
     End Sub
+
+    Private Sub DEStart_EditValueChanged(sender As Object, e As EventArgs) Handles DEStart.EditValueChanged
+        Try
+            DEUntil.Properties.MinValue = DEStart.EditValue
+        Catch ex As Exception
+        End Try
+    End Sub
+
 End Class

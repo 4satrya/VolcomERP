@@ -30,6 +30,7 @@
             BPrePrint.Visible = False
             BPrint.Visible = False
             BMark.Visible = False
+            BtnAttachment.Visible = False
             '
         Else
             Dim query As String = String.Format("SELECT id_comp_contact_courier,courier_comm,id_report_status,sample_purc_kurs,sample_purc_vat,id_season_orign,sample_purc_number,id_comp_contact_to,id_comp_contact_ship_to,id_po_type,id_payment,DATE_FORMAT(sample_purc_date,'%Y-%m-%d') as sample_purc_datex,sample_purc_lead_time,sample_purc_top,id_currency,sample_purc_note FROM tb_sample_purc WHERE id_sample_purc = '{0}'", id_sample_purc)
@@ -79,6 +80,8 @@
             view_list_purchase()
             TEVat.Text = data.Rows(0)("sample_purc_vat").ToString
             calculate()
+            '
+            BtnAttachment.Visible = True
         End If
         allow_status()
         ' begin here sample plan
@@ -497,5 +500,13 @@
         FormPopUpContact.id_pop_up = "1c"
         FormPopUpContact.id_cat = get_setup_field("id_comp_cat_vendor")
         FormPopUpContact.ShowDialog()
+    End Sub
+
+    Private Sub BtnAttachment_Click(sender As Object, e As EventArgs) Handles BtnAttachment.Click
+        Cursor = Cursors.WaitCursor
+        FormDocumentUpload.id_report = id_sample_purc
+        FormDocumentUpload.report_mark_type = "1"
+        FormDocumentUpload.ShowDialog()
+        Cursor = Cursors.Default
     End Sub
 End Class

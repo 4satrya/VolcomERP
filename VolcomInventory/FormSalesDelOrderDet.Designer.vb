@@ -64,6 +64,7 @@ Partial Class FormSalesDelOrderDet
         Me.barDockControlLeft = New DevExpress.XtraBars.BarDockControl()
         Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl()
         Me.BarButtonItem1 = New DevExpress.XtraBars.BarButtonItem()
+        Me.BtnVerify = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnCancel = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnSave = New DevExpress.XtraEditors.SimpleButton()
         Me.GroupControl3 = New DevExpress.XtraEditors.GroupControl()
@@ -96,6 +97,10 @@ Partial Class FormSalesDelOrderDet
         Me.GridColumnIdSample = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdPlSalesOrderDel = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnStatus = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnNumber = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnFrom = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnTo = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnPriceType = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemSpinEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
         Me.XTCDONew = New DevExpress.XtraTab.XtraTabControl()
         Me.XTPOutboundScanNew = New DevExpress.XtraTab.XtraTabPage()
@@ -109,6 +114,8 @@ Partial Class FormSalesDelOrderDet
         Me.GridColumnIsFix = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdUniqueReceiving = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdProductScan = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnBarcodeName = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnBarcodeSize = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemCheckEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.RepositoryItemSpinEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
         Me.PanelNavBarcode = New DevExpress.XtraEditors.PanelControl()
@@ -124,9 +131,13 @@ Partial Class FormSalesDelOrderDet
         Me.XtraTabPage1 = New DevExpress.XtraTab.XtraTabPage()
         Me.GCTest = New DevExpress.XtraGrid.GridControl()
         Me.GVTest = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.BtnVerify = New DevExpress.XtraEditors.SimpleButton()
-        Me.GridColumnBarcodeName = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnBarcodeSize = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GroupUni = New DevExpress.XtraEditors.GroupControl()
+        Me.LabelPeriod = New DevExpress.XtraEditors.LabelControl()
+        Me.TxtPeriod = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
+        Me.TxtNIK = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl11 = New DevExpress.XtraEditors.LabelControl()
+        Me.TxtEmployee = New DevExpress.XtraEditors.TextEdit()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
         CType(Me.PanelControlTopLeft, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -186,6 +197,11 @@ Partial Class FormSalesDelOrderDet
         Me.XtraTabPage1.SuspendLayout()
         CType(Me.GCTest, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVTest, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GroupUni, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupUni.SuspendLayout()
+        CType(Me.TxtPeriod.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtNIK.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtEmployee.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupGeneralHeader
@@ -195,9 +211,9 @@ Partial Class FormSalesDelOrderDet
         Me.GroupGeneralHeader.Controls.Add(Me.PanelControlTopMiddle)
         Me.GroupGeneralHeader.Controls.Add(Me.PanelControlTopRight)
         Me.GroupGeneralHeader.Dock = System.Windows.Forms.DockStyle.Top
-        Me.GroupGeneralHeader.Location = New System.Drawing.Point(0, 0)
+        Me.GroupGeneralHeader.Location = New System.Drawing.Point(0, 36)
         Me.GroupGeneralHeader.Name = "GroupGeneralHeader"
-        Me.GroupGeneralHeader.Size = New System.Drawing.Size(954, 176)
+        Me.GroupGeneralHeader.Size = New System.Drawing.Size(948, 180)
         Me.GroupGeneralHeader.TabIndex = 184
         '
         'PanelControlTopLeft
@@ -221,7 +237,7 @@ Partial Class FormSalesDelOrderDet
         Me.PanelControlTopLeft.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelControlTopLeft.Location = New System.Drawing.Point(21, 2)
         Me.PanelControlTopLeft.Name = "PanelControlTopLeft"
-        Me.PanelControlTopLeft.Size = New System.Drawing.Size(446, 172)
+        Me.PanelControlTopLeft.Size = New System.Drawing.Size(440, 176)
         Me.PanelControlTopLeft.TabIndex = 10002
         '
         'LabelControl2
@@ -244,7 +260,7 @@ Partial Class FormSalesDelOrderDet
         Me.TxtDrawer.Properties.Appearance.Options.UseFont = True
         Me.TxtDrawer.Properties.EditValueChangedDelay = 1
         Me.TxtDrawer.Properties.ReadOnly = True
-        Me.TxtDrawer.Size = New System.Drawing.Size(250, 20)
+        Me.TxtDrawer.Size = New System.Drawing.Size(244, 20)
         Me.TxtDrawer.TabIndex = 8902
         Me.TxtDrawer.TabStop = False
         '
@@ -270,7 +286,7 @@ Partial Class FormSalesDelOrderDet
         Me.MEAdrressCompTo.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.MEAdrressCompTo.Properties.Appearance.Options.UseFont = True
         Me.MEAdrressCompTo.Properties.ReadOnly = True
-        Me.MEAdrressCompTo.Size = New System.Drawing.Size(322, 43)
+        Me.MEAdrressCompTo.Size = New System.Drawing.Size(316, 43)
         Me.MEAdrressCompTo.TabIndex = 4444
         '
         'BtnInfoSrs
@@ -279,7 +295,7 @@ Partial Class FormSalesDelOrderDet
         Me.BtnInfoSrs.Appearance.Font = New System.Drawing.Font("Monotype Corsiva", 11.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnInfoSrs.Appearance.Options.UseFont = True
         Me.BtnInfoSrs.Enabled = False
-        Me.BtnInfoSrs.Location = New System.Drawing.Point(384, 8)
+        Me.BtnInfoSrs.Location = New System.Drawing.Point(378, 8)
         Me.BtnInfoSrs.Name = "BtnInfoSrs"
         Me.BtnInfoSrs.Size = New System.Drawing.Size(23, 20)
         Me.BtnInfoSrs.TabIndex = 2
@@ -321,7 +337,7 @@ Partial Class FormSalesDelOrderDet
         Me.TxtNameCompTo.Properties.Appearance.Options.UseFont = True
         Me.TxtNameCompTo.Properties.EditValueChangedDelay = 1
         Me.TxtNameCompTo.Properties.ReadOnly = True
-        Me.TxtNameCompTo.Size = New System.Drawing.Size(250, 20)
+        Me.TxtNameCompTo.Size = New System.Drawing.Size(244, 20)
         Me.TxtNameCompTo.TabIndex = 8888
         Me.TxtNameCompTo.TabStop = False
         '
@@ -348,7 +364,7 @@ Partial Class FormSalesDelOrderDet
         Me.BtnBrowseSO.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnBrowseSO.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnBrowseSO.Appearance.Options.UseFont = True
-        Me.BtnBrowseSO.Location = New System.Drawing.Point(354, 8)
+        Me.BtnBrowseSO.Location = New System.Drawing.Point(348, 8)
         Me.BtnBrowseSO.Name = "BtnBrowseSO"
         Me.BtnBrowseSO.Size = New System.Drawing.Size(23, 20)
         Me.BtnBrowseSO.TabIndex = 1
@@ -374,7 +390,7 @@ Partial Class FormSalesDelOrderDet
         Me.TxtSalesOrder.Properties.Appearance.Options.UseFont = True
         Me.TxtSalesOrder.Properties.EditValueChangedDelay = 1
         Me.TxtSalesOrder.Properties.ReadOnly = True
-        Me.TxtSalesOrder.Size = New System.Drawing.Size(263, 20)
+        Me.TxtSalesOrder.Size = New System.Drawing.Size(257, 20)
         Me.TxtSalesOrder.TabIndex = 8898
         Me.TxtSalesOrder.TabStop = False
         '
@@ -402,7 +418,7 @@ Partial Class FormSalesDelOrderDet
         Me.TxtNameCompFrom.Properties.Appearance.Options.UseFont = True
         Me.TxtNameCompFrom.Properties.EditValueChangedDelay = 1
         Me.TxtNameCompFrom.Properties.ReadOnly = True
-        Me.TxtNameCompFrom.Size = New System.Drawing.Size(250, 20)
+        Me.TxtNameCompFrom.Size = New System.Drawing.Size(244, 20)
         Me.TxtNameCompFrom.TabIndex = 8897
         Me.TxtNameCompFrom.TabStop = False
         '
@@ -414,9 +430,9 @@ Partial Class FormSalesDelOrderDet
         Me.PanelControlTopMiddle.Controls.Add(Me.LETypeSO)
         Me.PanelControlTopMiddle.Controls.Add(Me.LabelControl6)
         Me.PanelControlTopMiddle.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PanelControlTopMiddle.Location = New System.Drawing.Point(467, 2)
+        Me.PanelControlTopMiddle.Location = New System.Drawing.Point(461, 2)
         Me.PanelControlTopMiddle.Name = "PanelControlTopMiddle"
-        Me.PanelControlTopMiddle.Size = New System.Drawing.Size(274, 172)
+        Me.PanelControlTopMiddle.Size = New System.Drawing.Size(274, 176)
         Me.PanelControlTopMiddle.TabIndex = 10003
         '
         'LEStatusSO
@@ -473,9 +489,9 @@ Partial Class FormSalesDelOrderDet
         Me.PanelControlTopRight.Controls.Add(Me.LabelControl7)
         Me.PanelControlTopRight.Controls.Add(Me.DEForm)
         Me.PanelControlTopRight.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PanelControlTopRight.Location = New System.Drawing.Point(741, 2)
+        Me.PanelControlTopRight.Location = New System.Drawing.Point(735, 2)
         Me.PanelControlTopRight.Name = "PanelControlTopRight"
-        Me.PanelControlTopRight.Size = New System.Drawing.Size(211, 172)
+        Me.PanelControlTopRight.Size = New System.Drawing.Size(211, 176)
         Me.PanelControlTopRight.TabIndex = 10004
         '
         'TxtSalesDelOrderNumber
@@ -669,6 +685,18 @@ Partial Class FormSalesDelOrderDet
         Me.BarButtonItem1.Id = 0
         Me.BarButtonItem1.Name = "BarButtonItem1"
         '
+        'BtnVerify
+        '
+        Me.BtnVerify.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnVerify.Image = CType(resources.GetObject("BtnVerify.Image"), System.Drawing.Image)
+        Me.BtnVerify.ImageIndex = 5
+        Me.BtnVerify.ImageList = Me.LargeImageCollection
+        Me.BtnVerify.Location = New System.Drawing.Point(720, 2)
+        Me.BtnVerify.Name = "BtnVerify"
+        Me.BtnVerify.Size = New System.Drawing.Size(82, 36)
+        Me.BtnVerify.TabIndex = 20
+        Me.BtnVerify.Text = "Verify"
+        '
         'BtnCancel
         '
         Me.BtnCancel.Dock = System.Windows.Forms.DockStyle.Right
@@ -768,14 +796,14 @@ Partial Class FormSalesDelOrderDet
         '
         Me.SCCSalesOrderDel.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SCCSalesOrderDel.Horizontal = False
-        Me.SCCSalesOrderDel.Location = New System.Drawing.Point(0, 0)
+        Me.SCCSalesOrderDel.Location = New System.Drawing.Point(0, 216)
         Me.SCCSalesOrderDel.Name = "SCCSalesOrderDel"
         Me.SCCSalesOrderDel.Panel1.Controls.Add(Me.GroupControlListItem)
         Me.SCCSalesOrderDel.Panel1.Text = "Panel1"
         Me.SCCSalesOrderDel.Panel2.Controls.Add(Me.XTCDONew)
         Me.SCCSalesOrderDel.Panel2.Text = "Panel2"
-        Me.SCCSalesOrderDel.Size = New System.Drawing.Size(948, 365)
-        Me.SCCSalesOrderDel.SplitterPosition = 188
+        Me.SCCSalesOrderDel.Size = New System.Drawing.Size(948, 325)
+        Me.SCCSalesOrderDel.SplitterPosition = 176
         Me.SCCSalesOrderDel.TabIndex = 187
         Me.SCCSalesOrderDel.Text = "SplitContainerControl1"
         '
@@ -787,7 +815,7 @@ Partial Class FormSalesDelOrderDet
         Me.GroupControlListItem.Enabled = False
         Me.GroupControlListItem.Location = New System.Drawing.Point(0, 0)
         Me.GroupControlListItem.Name = "GroupControlListItem"
-        Me.GroupControlListItem.Size = New System.Drawing.Size(948, 188)
+        Me.GroupControlListItem.Size = New System.Drawing.Size(948, 176)
         Me.GroupControlListItem.TabIndex = 0
         Me.GroupControlListItem.Text = "Delivery Order Item"
         '
@@ -799,13 +827,13 @@ Partial Class FormSalesDelOrderDet
         Me.GCItemList.MainView = Me.GVItemList
         Me.GCItemList.Name = "GCItemList"
         Me.GCItemList.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemSpinEdit1})
-        Me.GCItemList.Size = New System.Drawing.Size(925, 184)
+        Me.GCItemList.Size = New System.Drawing.Size(925, 172)
         Me.GCItemList.TabIndex = 3
         Me.GCItemList.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVItemList})
         '
         'GVItemList
         '
-        Me.GVItemList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumnCode, Me.GridColumnName, Me.GridColumnSize, Me.GridColumnQty, Me.GridColumnQtyLimit, Me.GridColumnPrice, Me.GridColumnAmount, Me.GridColumnRemark, Me.GridColumnUOM, Me.GridColumnQtyWH, Me.GridColumnEanCode, Me.GridColumnIdSalesOrderDet, Me.GridColumnIdProduct, Me.GridColumnIdDesignPrice, Me.GridColumnIdDesign, Me.GridColumnIdSample, Me.GridColumnIdPlSalesOrderDel, Me.GridColumnStatus})
+        Me.GVItemList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumnCode, Me.GridColumnName, Me.GridColumnSize, Me.GridColumnQty, Me.GridColumnQtyLimit, Me.GridColumnPrice, Me.GridColumnAmount, Me.GridColumnRemark, Me.GridColumnUOM, Me.GridColumnQtyWH, Me.GridColumnEanCode, Me.GridColumnIdSalesOrderDet, Me.GridColumnIdProduct, Me.GridColumnIdDesignPrice, Me.GridColumnIdDesign, Me.GridColumnIdSample, Me.GridColumnIdPlSalesOrderDel, Me.GridColumnStatus, Me.GridColumnNumber, Me.GridColumnFrom, Me.GridColumnTo, Me.GridColumnPriceType})
         Me.GVItemList.CustomizationFormBounds = New System.Drawing.Rectangle(958, 136, 216, 180)
         Me.GVItemList.GridControl = Me.GCItemList
         Me.GVItemList.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_from_wh", Me.GridColumnQtyWH, "{0:n0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "pl_sales_order_del_det_qty", Me.GridColumnQty, "{0:n0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "pl_sales_order_del_det_amount", Me.GridColumnAmount, "{0:n0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_order_det_qty_limit", Me.GridColumnQtyLimit, "{0:n0}")})
@@ -836,7 +864,7 @@ Partial Class FormSalesDelOrderDet
         Me.GridColumnCode.OptionsColumn.ReadOnly = True
         Me.GridColumnCode.Visible = True
         Me.GridColumnCode.VisibleIndex = 0
-        Me.GridColumnCode.Width = 93
+        Me.GridColumnCode.Width = 87
         '
         'GridColumnName
         '
@@ -847,7 +875,7 @@ Partial Class FormSalesDelOrderDet
         Me.GridColumnName.OptionsColumn.ReadOnly = True
         Me.GridColumnName.Visible = True
         Me.GridColumnName.VisibleIndex = 1
-        Me.GridColumnName.Width = 171
+        Me.GridColumnName.Width = 161
         '
         'GridColumnSize
         '
@@ -861,7 +889,7 @@ Partial Class FormSalesDelOrderDet
         Me.GridColumnSize.OptionsColumn.ReadOnly = True
         Me.GridColumnSize.Visible = True
         Me.GridColumnSize.VisibleIndex = 2
-        Me.GridColumnSize.Width = 53
+        Me.GridColumnSize.Width = 50
         '
         'GridColumnQty
         '
@@ -880,17 +908,17 @@ Partial Class FormSalesDelOrderDet
         Me.GridColumnQty.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "pl_sales_order_del_det_qty", "{0:n0}")})
         Me.GridColumnQty.Visible = True
         Me.GridColumnQty.VisibleIndex = 4
-        Me.GridColumnQty.Width = 71
+        Me.GridColumnQty.Width = 67
         '
         'GridColumnQtyLimit
         '
-        Me.GridColumnQtyLimit.AppearanceCell.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GridColumnQtyLimit.AppearanceCell.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
         Me.GridColumnQtyLimit.AppearanceCell.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.GridColumnQtyLimit.AppearanceCell.Options.UseFont = True
         Me.GridColumnQtyLimit.AppearanceCell.Options.UseForeColor = True
         Me.GridColumnQtyLimit.AppearanceCell.Options.UseTextOptions = True
         Me.GridColumnQtyLimit.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumnQtyLimit.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GridColumnQtyLimit.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
         Me.GridColumnQtyLimit.AppearanceHeader.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.GridColumnQtyLimit.AppearanceHeader.Options.UseFont = True
         Me.GridColumnQtyLimit.AppearanceHeader.Options.UseForeColor = True
@@ -904,7 +932,7 @@ Partial Class FormSalesDelOrderDet
         Me.GridColumnQtyLimit.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_order_det_qty_limit", "{0:n0}")})
         Me.GridColumnQtyLimit.Visible = True
         Me.GridColumnQtyLimit.VisibleIndex = 3
-        Me.GridColumnQtyLimit.Width = 61
+        Me.GridColumnQtyLimit.Width = 57
         '
         'GridColumnPrice
         '
@@ -917,8 +945,8 @@ Partial Class FormSalesDelOrderDet
         Me.GridColumnPrice.OptionsColumn.AllowShowHide = False
         Me.GridColumnPrice.OptionsColumn.ReadOnly = True
         Me.GridColumnPrice.Visible = True
-        Me.GridColumnPrice.VisibleIndex = 5
-        Me.GridColumnPrice.Width = 135
+        Me.GridColumnPrice.VisibleIndex = 7
+        Me.GridColumnPrice.Width = 131
         '
         'GridColumnAmount
         '
@@ -932,8 +960,8 @@ Partial Class FormSalesDelOrderDet
         Me.GridColumnAmount.OptionsColumn.ReadOnly = True
         Me.GridColumnAmount.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "pl_sales_order_del_det_amount", "{0:n2}")})
         Me.GridColumnAmount.Visible = True
-        Me.GridColumnAmount.VisibleIndex = 6
-        Me.GridColumnAmount.Width = 155
+        Me.GridColumnAmount.VisibleIndex = 8
+        Me.GridColumnAmount.Width = 150
         '
         'GridColumnRemark
         '
@@ -941,8 +969,8 @@ Partial Class FormSalesDelOrderDet
         Me.GridColumnRemark.FieldName = "pl_sales_order_del_det_note"
         Me.GridColumnRemark.Name = "GridColumnRemark"
         Me.GridColumnRemark.Visible = True
-        Me.GridColumnRemark.VisibleIndex = 7
-        Me.GridColumnRemark.Width = 289
+        Me.GridColumnRemark.VisibleIndex = 9
+        Me.GridColumnRemark.Width = 288
         '
         'GridColumnUOM
         '
@@ -974,6 +1002,7 @@ Partial Class FormSalesDelOrderDet
         Me.GridColumnQtyWH.Name = "GridColumnQtyWH"
         Me.GridColumnQtyWH.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.[False]
         Me.GridColumnQtyWH.OptionsColumn.ReadOnly = True
+        Me.GridColumnQtyWH.OptionsColumn.ShowInCustomizationForm = False
         Me.GridColumnQtyWH.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_from_wh", "{0:n0}")})
         Me.GridColumnQtyWH.Width = 97
         '
@@ -1037,9 +1066,39 @@ Partial Class FormSalesDelOrderDet
         Me.GridColumnStatus.FieldName = "status"
         Me.GridColumnStatus.Name = "GridColumnStatus"
         Me.GridColumnStatus.OptionsColumn.AllowEdit = False
+        Me.GridColumnStatus.UnboundType = DevExpress.Data.UnboundColumnType.[Object]
         Me.GridColumnStatus.Visible = True
-        Me.GridColumnStatus.VisibleIndex = 8
-        Me.GridColumnStatus.Width = 97
+        Me.GridColumnStatus.VisibleIndex = 5
+        Me.GridColumnStatus.Width = 73
+        '
+        'GridColumnNumber
+        '
+        Me.GridColumnNumber.Caption = "Number"
+        Me.GridColumnNumber.FieldName = "number"
+        Me.GridColumnNumber.Name = "GridColumnNumber"
+        Me.GridColumnNumber.UnboundType = DevExpress.Data.UnboundColumnType.[String]
+        '
+        'GridColumnFrom
+        '
+        Me.GridColumnFrom.Caption = "From"
+        Me.GridColumnFrom.FieldName = "from"
+        Me.GridColumnFrom.Name = "GridColumnFrom"
+        Me.GridColumnFrom.UnboundType = DevExpress.Data.UnboundColumnType.[String]
+        '
+        'GridColumnTo
+        '
+        Me.GridColumnTo.Caption = "To"
+        Me.GridColumnTo.FieldName = "to"
+        Me.GridColumnTo.Name = "GridColumnTo"
+        Me.GridColumnTo.UnboundType = DevExpress.Data.UnboundColumnType.[String]
+        '
+        'GridColumnPriceType
+        '
+        Me.GridColumnPriceType.Caption = "Price Type"
+        Me.GridColumnPriceType.FieldName = "design_price_type"
+        Me.GridColumnPriceType.Name = "GridColumnPriceType"
+        Me.GridColumnPriceType.Visible = True
+        Me.GridColumnPriceType.VisibleIndex = 6
         '
         'RepositoryItemSpinEdit1
         '
@@ -1055,7 +1114,7 @@ Partial Class FormSalesDelOrderDet
         Me.XTCDONew.Location = New System.Drawing.Point(0, 0)
         Me.XTCDONew.Name = "XTCDONew"
         Me.XTCDONew.SelectedTabPage = Me.XTPOutboundScanNew
-        Me.XTCDONew.Size = New System.Drawing.Size(948, 171)
+        Me.XTCDONew.Size = New System.Drawing.Size(948, 143)
         Me.XTCDONew.TabIndex = 0
         Me.XTCDONew.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPOutboundScanNew})
         '
@@ -1063,7 +1122,7 @@ Partial Class FormSalesDelOrderDet
         '
         Me.XTPOutboundScanNew.Controls.Add(Me.GroupControlScannedItem)
         Me.XTPOutboundScanNew.Name = "XTPOutboundScanNew"
-        Me.XTPOutboundScanNew.Size = New System.Drawing.Size(942, 143)
+        Me.XTPOutboundScanNew.Size = New System.Drawing.Size(942, 115)
         Me.XTPOutboundScanNew.Text = "Outbound Scan"
         '
         'GroupControlScannedItem
@@ -1074,7 +1133,7 @@ Partial Class FormSalesDelOrderDet
         Me.GroupControlScannedItem.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupControlScannedItem.Location = New System.Drawing.Point(0, 0)
         Me.GroupControlScannedItem.Name = "GroupControlScannedItem"
-        Me.GroupControlScannedItem.Size = New System.Drawing.Size(942, 143)
+        Me.GroupControlScannedItem.Size = New System.Drawing.Size(942, 115)
         Me.GroupControlScannedItem.TabIndex = 1
         Me.GroupControlScannedItem.Text = "Scanned Code"
         '
@@ -1085,7 +1144,7 @@ Partial Class FormSalesDelOrderDet
         Me.GCBarcode.MainView = Me.GVBarcode
         Me.GCBarcode.Name = "GCBarcode"
         Me.GCBarcode.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckEdit2, Me.RepositoryItemSpinEdit2})
-        Me.GCBarcode.Size = New System.Drawing.Size(919, 106)
+        Me.GCBarcode.Size = New System.Drawing.Size(919, 78)
         Me.GCBarcode.TabIndex = 5
         Me.GCBarcode.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVBarcode})
         '
@@ -1164,6 +1223,26 @@ Partial Class FormSalesDelOrderDet
         Me.GridColumnIdProductScan.Caption = "Id Product"
         Me.GridColumnIdProductScan.FieldName = "id_product"
         Me.GridColumnIdProductScan.Name = "GridColumnIdProductScan"
+        '
+        'GridColumnBarcodeName
+        '
+        Me.GridColumnBarcodeName.Caption = "Description"
+        Me.GridColumnBarcodeName.FieldName = "name"
+        Me.GridColumnBarcodeName.Name = "GridColumnBarcodeName"
+        Me.GridColumnBarcodeName.OptionsColumn.AllowEdit = False
+        Me.GridColumnBarcodeName.Visible = True
+        Me.GridColumnBarcodeName.VisibleIndex = 2
+        Me.GridColumnBarcodeName.Width = 674
+        '
+        'GridColumnBarcodeSize
+        '
+        Me.GridColumnBarcodeSize.Caption = "Size"
+        Me.GridColumnBarcodeSize.FieldName = "size"
+        Me.GridColumnBarcodeSize.Name = "GridColumnBarcodeSize"
+        Me.GridColumnBarcodeSize.OptionsColumn.AllowEdit = False
+        Me.GridColumnBarcodeSize.Visible = True
+        Me.GridColumnBarcodeSize.VisibleIndex = 3
+        Me.GridColumnBarcodeSize.Width = 80
         '
         'RepositoryItemCheckEdit2
         '
@@ -1257,19 +1336,21 @@ Partial Class FormSalesDelOrderDet
         Me.XTCDO.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
         Me.XTCDO.BorderStylePage = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
         Me.XTCDO.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.XTCDO.Location = New System.Drawing.Point(0, 176)
+        Me.XTCDO.Location = New System.Drawing.Point(0, 0)
         Me.XTCDO.Name = "XTCDO"
         Me.XTCDO.SelectedTabPage = Me.XTPOutBoundItem
         Me.XTCDO.ShowTabHeader = DevExpress.Utils.DefaultBoolean.[False]
-        Me.XTCDO.Size = New System.Drawing.Size(954, 371)
+        Me.XTCDO.Size = New System.Drawing.Size(954, 547)
         Me.XTCDO.TabIndex = 187
         Me.XTCDO.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPOutBoundItem, Me.XTPOutboundScan, Me.XtraTabPage1})
         '
         'XTPOutBoundItem
         '
         Me.XTPOutBoundItem.Controls.Add(Me.SCCSalesOrderDel)
+        Me.XTPOutBoundItem.Controls.Add(Me.GroupGeneralHeader)
+        Me.XTPOutBoundItem.Controls.Add(Me.GroupUni)
         Me.XTPOutBoundItem.Name = "XTPOutBoundItem"
-        Me.XTPOutBoundItem.Size = New System.Drawing.Size(948, 365)
+        Me.XTPOutBoundItem.Size = New System.Drawing.Size(948, 541)
         Me.XTPOutBoundItem.Text = "Outbond Item"
         '
         'XTPOutboundScan
@@ -1301,37 +1382,87 @@ Partial Class FormSalesDelOrderDet
         Me.GVTest.GridControl = Me.GCTest
         Me.GVTest.Name = "GVTest"
         '
-        'BtnVerify
+        'GroupUni
         '
-        Me.BtnVerify.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BtnVerify.Image = CType(resources.GetObject("BtnVerify.Image"), System.Drawing.Image)
-        Me.BtnVerify.ImageIndex = 5
-        Me.BtnVerify.ImageList = Me.LargeImageCollection
-        Me.BtnVerify.Location = New System.Drawing.Point(720, 2)
-        Me.BtnVerify.Name = "BtnVerify"
-        Me.BtnVerify.Size = New System.Drawing.Size(82, 36)
-        Me.BtnVerify.TabIndex = 20
-        Me.BtnVerify.Text = "Verify"
+        Me.GroupUni.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupUni.Controls.Add(Me.TxtEmployee)
+        Me.GroupUni.Controls.Add(Me.LabelControl11)
+        Me.GroupUni.Controls.Add(Me.TxtNIK)
+        Me.GroupUni.Controls.Add(Me.LabelControl4)
+        Me.GroupUni.Controls.Add(Me.TxtPeriod)
+        Me.GroupUni.Controls.Add(Me.LabelPeriod)
+        Me.GroupUni.Dock = System.Windows.Forms.DockStyle.Top
+        Me.GroupUni.Location = New System.Drawing.Point(0, 0)
+        Me.GroupUni.Name = "GroupUni"
+        Me.GroupUni.Size = New System.Drawing.Size(948, 36)
+        Me.GroupUni.TabIndex = 188
+        Me.GroupUni.Visible = False
         '
-        'GridColumnBarcodeName
+        'LabelPeriod
         '
-        Me.GridColumnBarcodeName.Caption = "Description"
-        Me.GridColumnBarcodeName.FieldName = "name"
-        Me.GridColumnBarcodeName.Name = "GridColumnBarcodeName"
-        Me.GridColumnBarcodeName.OptionsColumn.AllowEdit = False
-        Me.GridColumnBarcodeName.Visible = True
-        Me.GridColumnBarcodeName.VisibleIndex = 2
-        Me.GridColumnBarcodeName.Width = 674
+        Me.LabelPeriod.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelPeriod.Location = New System.Drawing.Point(31, 11)
+        Me.LabelPeriod.Name = "LabelPeriod"
+        Me.LabelPeriod.Size = New System.Drawing.Size(30, 13)
+        Me.LabelPeriod.TabIndex = 8895
+        Me.LabelPeriod.Text = "Period"
         '
-        'GridColumnBarcodeSize
+        'TxtPeriod
         '
-        Me.GridColumnBarcodeSize.Caption = "Size"
-        Me.GridColumnBarcodeSize.FieldName = "size"
-        Me.GridColumnBarcodeSize.Name = "GridColumnBarcodeSize"
-        Me.GridColumnBarcodeSize.OptionsColumn.AllowEdit = False
-        Me.GridColumnBarcodeSize.Visible = True
-        Me.GridColumnBarcodeSize.VisibleIndex = 3
-        Me.GridColumnBarcodeSize.Width = 80
+        Me.TxtPeriod.EditValue = ""
+        Me.TxtPeriod.Location = New System.Drawing.Point(71, 8)
+        Me.TxtPeriod.Name = "TxtPeriod"
+        Me.TxtPeriod.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtPeriod.Properties.Appearance.Options.UseFont = True
+        Me.TxtPeriod.Properties.EditValueChangedDelay = 1
+        Me.TxtPeriod.Properties.ReadOnly = True
+        Me.TxtPeriod.Size = New System.Drawing.Size(151, 20)
+        Me.TxtPeriod.TabIndex = 8904
+        Me.TxtPeriod.TabStop = False
+        '
+        'LabelControl4
+        '
+        Me.LabelControl4.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl4.Location = New System.Drawing.Point(228, 11)
+        Me.LabelControl4.Name = "LabelControl4"
+        Me.LabelControl4.Size = New System.Drawing.Size(17, 13)
+        Me.LabelControl4.TabIndex = 8905
+        Me.LabelControl4.Text = "NIK"
+        '
+        'TxtNIK
+        '
+        Me.TxtNIK.EditValue = ""
+        Me.TxtNIK.Location = New System.Drawing.Point(251, 8)
+        Me.TxtNIK.Name = "TxtNIK"
+        Me.TxtNIK.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtNIK.Properties.Appearance.Options.UseFont = True
+        Me.TxtNIK.Properties.EditValueChangedDelay = 1
+        Me.TxtNIK.Properties.ReadOnly = True
+        Me.TxtNIK.Size = New System.Drawing.Size(214, 20)
+        Me.TxtNIK.TabIndex = 8906
+        Me.TxtNIK.TabStop = False
+        '
+        'LabelControl11
+        '
+        Me.LabelControl11.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl11.Location = New System.Drawing.Point(475, 11)
+        Me.LabelControl11.Name = "LabelControl11"
+        Me.LabelControl11.Size = New System.Drawing.Size(46, 13)
+        Me.LabelControl11.TabIndex = 8907
+        Me.LabelControl11.Text = "Employee"
+        '
+        'TxtEmployee
+        '
+        Me.TxtEmployee.EditValue = ""
+        Me.TxtEmployee.Location = New System.Drawing.Point(527, 8)
+        Me.TxtEmployee.Name = "TxtEmployee"
+        Me.TxtEmployee.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtEmployee.Properties.Appearance.Options.UseFont = True
+        Me.TxtEmployee.Properties.EditValueChangedDelay = 1
+        Me.TxtEmployee.Properties.ReadOnly = True
+        Me.TxtEmployee.Size = New System.Drawing.Size(361, 20)
+        Me.TxtEmployee.TabIndex = 8908
+        Me.TxtEmployee.TabStop = False
         '
         'FormSalesDelOrderDet
         '
@@ -1341,7 +1472,6 @@ Partial Class FormSalesDelOrderDet
         Me.Controls.Add(Me.XTCDO)
         Me.Controls.Add(Me.GroupControl3)
         Me.Controls.Add(Me.PanelControl3)
-        Me.Controls.Add(Me.GroupGeneralHeader)
         Me.Controls.Add(Me.barDockControlLeft)
         Me.Controls.Add(Me.barDockControlRight)
         Me.Controls.Add(Me.barDockControlBottom)
@@ -1418,6 +1548,12 @@ Partial Class FormSalesDelOrderDet
         Me.XtraTabPage1.ResumeLayout(False)
         CType(Me.GCTest, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVTest, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GroupUni, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupUni.ResumeLayout(False)
+        Me.GroupUni.PerformLayout()
+        CType(Me.TxtPeriod.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtNIK.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtEmployee.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1528,4 +1664,15 @@ Partial Class FormSalesDelOrderDet
     Friend WithEvents BtnVerify As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents GridColumnBarcodeName As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnBarcodeSize As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnNumber As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnFrom As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnTo As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnPriceType As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GroupUni As DevExpress.XtraEditors.GroupControl
+    Friend WithEvents TxtEmployee As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LabelControl11 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents TxtNIK As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LabelControl4 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents TxtPeriod As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LabelPeriod As DevExpress.XtraEditors.LabelControl
 End Class

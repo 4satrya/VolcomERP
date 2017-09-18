@@ -61,6 +61,12 @@
                 GVScheduleBefore.Columns.AddVisible(curD.ToString("yyyy-MM-dd"), curD.ToString("dd MMM yyyy"))
                 GVScheduleBefore.Columns(curD.ToString("yyyy-MM-dd")).OptionsColumn.AllowEdit = False
 
+                If curD.DayOfWeek = DayOfWeek.Saturday Or curD.DayOfWeek = DayOfWeek.Sunday Then
+                    GVScheduleBefore.Columns(curD.ToString("yyyy-MM-dd")).AppearanceCell.BackColor = Color.Pink
+                ElseIf check_public_holiday(curD) = "1" Then
+                    GVScheduleBefore.Columns(curD.ToString("yyyy-MM-dd")).AppearanceCell.BackColor = Color.Red
+                End If
+
                 string_date += ",'" & curD.ToString("yyyy-MM-dd") & "'"
                 curD = curD.AddDays(1)
             End While
@@ -91,6 +97,8 @@
                 GCScheduleBefore.RefreshDataSource()
             Next
             GVScheduleBefore.BestFitColumns()
+            GVScheduleBefore.OptionsSelection.EnableAppearanceFocusedRow = False
+            GVScheduleBefore.OptionsSelection.EnableAppearanceFocusedCell = False
             'repeat for after
             curD = startP
             string_date = ""
@@ -113,6 +121,13 @@
                 GVScheduleAfter.Columns(curD.ToString("yyyy-MM-dd")).OptionsColumn.AllowEdit = False
 
                 string_date += ",'" & curD.ToString("yyyy-MM-dd") & "'"
+
+                If curD.DayOfWeek = DayOfWeek.Saturday Or curD.DayOfWeek = DayOfWeek.Sunday Then
+                    GVScheduleAfter.Columns(curD.ToString("yyyy-MM-dd")).AppearanceCell.BackColor = Color.Pink
+                ElseIf check_public_holiday(curD) = "1" Then
+                    GVScheduleAfter.Columns(curD.ToString("yyyy-MM-dd")).AppearanceCell.BackColor = Color.Red
+                End If
+
                 curD = curD.AddDays(1)
             End While
             '
@@ -141,9 +156,25 @@
                 TryCast(GCScheduleAfter.DataSource, DataTable).Rows.Add(newRow)
                 GCScheduleAfter.RefreshDataSource()
             Next
+
             GVScheduleAfter.BestFitColumns()
+            GVScheduleAfter.OptionsSelection.EnableAppearanceFocusedRow = False
+            GVScheduleAfter.OptionsSelection.EnableAppearanceFocusedCell = False
         End If
     End Sub
+
+    Function check_public_holiday(date_par As Date)
+        Dim is_public_holiday = "2"
+
+        Dim query As String = "SELECT * FROM tb_emp_holiday WHERE id_religion=0 AND emp_holiday_date='" & date_par.ToString("yyyy-MM-dd") & "'"
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+
+        If data.Rows.Count > 0 Then
+            is_public_holiday = "1"
+        End If
+
+        Return is_public_holiday
+    End Function
 
     Private Sub FormEmpAttnAssignDet_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
         Dispose()

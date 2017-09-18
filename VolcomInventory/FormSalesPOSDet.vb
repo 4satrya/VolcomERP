@@ -1,4 +1,7 @@
-﻿Public Class FormSalesPOSDet 
+﻿Imports System.Data.OleDb
+Imports System.IO
+
+Public Class FormSalesPOSDet
     Public action As String
     Public id_sales_pos As String = "-1"
     Public id_store_contact_from As String = "-1"
@@ -592,18 +595,74 @@
             stopCustom("Please fill start & end period !")
         Else
             viewStockStore()
-            FormImportExcel.id_pop_up = "6"
-            FormImportExcel.ShowDialog()
+            load_excel_data()
+            'join
+
+            'FormImportExcel.id_pop_up = "6"
+            'FormImportExcel.ShowDialog()
         End If
         Cursor = Cursors.Default
     End Sub
 
-    Private Sub DEEnd_EditValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DEEnd.EditValueChanged
-      
-    End Sub
+    Sub load_excel_data()
+        Dim oledbconn As New OleDbConnection
+        Dim strConn As String
+        Dim data_temp As New DataTable
+        Dim bof_xls_path As String = get_setup_field("bof_xls_bill_path")
+        Dim bof_xls_temp_path As String = get_setup_field("bof_xls_bill_temp_path")
+        Dim bof_xls_ws As String = get_setup_field("bof_xls_bill_path_worksheet")
 
-    Private Sub DEEnd_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DEEnd.Leave
-        
+        File.Copy(bof_xls_path, bof_xls_temp_path, True)
+
+        strConn = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source='" & bof_xls_temp_path & "';Extended Properties=""Excel 12.0 XML; IMEX=1;HDR=NO;TypeGuessRows=0;ImportMixedTypes=Text;"""
+        oledbconn.ConnectionString = strConn
+        Dim MyCommand As OleDbDataAdapter
+        MyCommand = New OleDbDataAdapter("select [F2] as code,SUM([F3]) as qty from [" & bof_xls_ws & "] WHERE NOT [F2] IS NULL AND NOT [F3]  IS NULL GROUP BY [F2]", oledbconn)
+
+        'Try
+        MyCommand.Fill(data_temp)
+        MyCommand.Dispose()
+
+        Dim dt As DataTable = dt_stock_store
+        Dim tb1 = data_temp.AsEnumerable()
+        Dim tb2 = dt.AsEnumerable()
+
+        Dim query = From table1 In tb1
+                    Group Join table_tmp In tb2 On table1("code") Equals table_tmp("code")
+                    Into Group
+                    From y1 In Group.DefaultIfEmpty()
+                    Select New With
+                    {
+                        .Code = table1.Field(Of String)("code"),
+                        .Description = If(y1 Is Nothing, "", y1("name")),
+                        .Size = If(y1 Is Nothing, "", y1("size")),
+                        .Amount = If(y1 Is Nothing, "", table1("qty") * y1("design_price_retail")),
+                        .Qty = CType(table1("qty"), Decimal),
+                        .Qty_Volcom = If(y1 Is Nothing, 0.0, y1("qty_all_product")),
+                        .Price = If(y1 Is Nothing, 0.0, y1("design_price_retail")),
+                        .id_design_price_retail = If(y1 Is Nothing, 0, y1("id_design_price_retail")),
+                        .design_price_type = If(y1 Is Nothing, "", y1("design_price_type")),
+                        .design_price = If(y1 Is Nothing, 0.0, y1("design_price")),
+                        .sales_pos_det_note = If(y1 Is Nothing, "", ""),
+                        .id_design = If(y1 Is Nothing, 0, y1("id_design")),
+                        .id_product = If(y1 Is Nothing, 0, y1("id_product")),
+                        .id_sample = If(y1 Is Nothing, 0, y1("id_sample")),
+                        .id_design_price = If(y1 Is Nothing, 0, y1("id_design_price")),
+                        .Type = If(y1 Is Nothing, "", y1("design_price_type")),
+                        .id_sales_pos_det = If(y1 Is Nothing, "", "0"),
+                        .Color = If(y1 Is Nothing, "", y1("color")),
+                        .Diff = If((CType(table1("qty"), Decimal) - If(y1 Is Nothing, 0.0, y1("qty_all_product"))) <= 0, 0.0, (CType(table1("qty"), Decimal) - If(y1 Is Nothing, 0.0, y1("qty_all_product"))))
+                    }
+
+        GCItemList.DataSource = Nothing
+        GCItemList.DataSource = query.ToList()
+        GCItemList.RefreshDataSource()
+        GVItemList.PopulateColumns()
+
+        'Catch ex As Exception
+        'stopCustom("Input must be in accordance with the format specified !")
+        'Exit Sub
+        'End Try
     End Sub
 
     Private Sub DEEnd_EditValueChanging(ByVal sender As System.Object, ByVal e As DevExpress.XtraEditors.Controls.ChangingEventArgs) Handles DEEnd.EditValueChanging

@@ -165,10 +165,17 @@
     End Sub
 
     Private Sub BEdit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BEdit.Click
-        FormMasterCodeDetSingle.id_code_det = GVCodeDetail.GetFocusedRowCellDisplayText("id_code_detail").ToString
-        FormMasterCodeDetSingle.id_code = GVCode.GetFocusedRowCellDisplayText("id_code").ToString
-        FormMasterCodeDetSingle.id_pop_up = id_pop_up
-        FormMasterCodeDetSingle.ShowDialog()
+        Dim query As String = "SELECT * FROM tb_m_design_code WHERE id_code_detail='" & GVCodeDetail.GetFocusedRowCellDisplayText("id_code_detail").ToString & "'"
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+
+        If data.Rows.Count > 0 Then
+            stopCustom("Code already used.")
+        Else
+            FormMasterCodeDetSingle.id_code_det = GVCodeDetail.GetFocusedRowCellDisplayText("id_code_detail").ToString
+            FormMasterCodeDetSingle.id_code = GVCode.GetFocusedRowCellDisplayText("id_code").ToString
+            FormMasterCodeDetSingle.id_pop_up = id_pop_up
+            FormMasterCodeDetSingle.ShowDialog()
+        End If
     End Sub
 
     Private Sub FormCodeTemplateEdit_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed

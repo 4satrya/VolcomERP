@@ -33,13 +33,13 @@
         LReplacedBy.Text = data.Rows(0)("name_ch").ToString
         LReplacedByNIK.Text = data.Rows(0)("code_ch").ToString
         '
-        LRemainingLeave.Text = data.Rows(0)("leave_remaining").ToString & " hour(s)"
+        LRemainingLeave.Text = data.Rows(0)("leave_remaining").ToString & " jam"
         If data.Rows(0)("id_leave_type").ToString = "1" Then
-            LLeaveUsage.Text = data.Rows(0)("leave_total").ToString & " hour(s)"
-            LRemainingAfter.Text = (data.Rows(0)("leave_remaining") - data.Rows(0)("leave_total")).ToString & " hour(s)"
+            LLeaveUsage.Text = data.Rows(0)("leave_total").ToString & " jam"
+            LRemainingAfter.Text = (data.Rows(0)("leave_remaining") - data.Rows(0)("leave_total")).ToString & " jam"
         Else
-            LLeaveUsage.Text = data.Rows(0)("leave_total").ToString & "(0) hour(s)"
-            LRemainingAfter.Text = data.Rows(0)("leave_remaining").ToString & " hour(s)"
+            LLeaveUsage.Text = data.Rows(0)("leave_total").ToString & " (0) jam"
+            LRemainingAfter.Text = data.Rows(0)("leave_remaining").ToString & " jam"
         End If
         '
         report_mark_type = data.Rows(0)("report_mark_type").ToString
@@ -47,7 +47,7 @@
     Private Sub ReportLeave_BeforePrint(ByVal sender As System.Object, ByVal e As System.Drawing.Printing.PrintEventArgs) Handles MyBase.BeforePrint
         load_detail()
 
-        load_mark_horz_side(report_mark_type, id_report, "2", "1", XrTable1)
+        load_mark_horz_side(report_mark_type, id_report, "2", "1", XrTable1, "2")
 
         BSideRight.HeightF = BSideRight.HeightF + (25.0F * 4)
         BSideLeft.HeightF = BSideLeft.HeightF + (25.0F * 4)

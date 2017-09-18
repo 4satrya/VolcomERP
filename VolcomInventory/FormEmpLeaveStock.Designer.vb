@@ -48,7 +48,6 @@ Partial Class FormEmpLeaveStock
         Me.XTCLeaveRemaining = New DevExpress.XtraTab.XtraTabControl()
         Me.XTPSum = New DevExpress.XtraTab.XtraTabPage()
         Me.XTPDetail = New DevExpress.XtraTab.XtraTabPage()
-        Me.GCSchedule = New DevExpress.XtraGrid.GridControl()
         Me.GVSchedule = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn21 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIDSchedule = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -63,16 +62,7 @@ Partial Class FormEmpLeaveStock
         Me.GridColumnType = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnQty = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
-        Me.LEEmp = New DevExpress.XtraEditors.SearchLookUpEdit()
-        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
-        Me.LEDept = New DevExpress.XtraEditors.LookUpEdit()
-        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
-        Me.BViewSchedule = New DevExpress.XtraEditors.SimpleButton()
+        Me.GCSchedule = New DevExpress.XtraGrid.GridControl()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.LEDeptSum.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -84,13 +74,8 @@ Partial Class FormEmpLeaveStock
         Me.XTCLeaveRemaining.SuspendLayout()
         Me.XTPSum.SuspendLayout()
         Me.XTPDetail.SuspendLayout()
-        CType(Me.GCSchedule, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVSchedule, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.PanelControl2.SuspendLayout()
-        CType(Me.LEEmp.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LEDept.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GCSchedule, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl1
@@ -103,7 +88,7 @@ Partial Class FormEmpLeaveStock
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl1.Location = New System.Drawing.Point(0, 0)
         Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(627, 38)
+        Me.PanelControl1.Size = New System.Drawing.Size(633, 38)
         Me.PanelControl1.TabIndex = 3
         '
         'LEDeptSum
@@ -184,7 +169,7 @@ Partial Class FormEmpLeaveStock
         'GCSum
         '
         Me.GCSum.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCSum.Location = New System.Drawing.Point(0, 38)
+        Me.GCSum.Location = New System.Drawing.Point(0, 0)
         Me.GCSum.MainView = Me.GVSum
         Me.GCSum.Name = "GCSum"
         Me.GCSum.Size = New System.Drawing.Size(627, 230)
@@ -359,38 +344,26 @@ Partial Class FormEmpLeaveStock
         '
         Me.XTCLeaveRemaining.Dock = System.Windows.Forms.DockStyle.Fill
         Me.XTCLeaveRemaining.HeaderLocation = DevExpress.XtraTab.TabHeaderLocation.Bottom
-        Me.XTCLeaveRemaining.Location = New System.Drawing.Point(0, 0)
+        Me.XTCLeaveRemaining.Location = New System.Drawing.Point(0, 38)
         Me.XTCLeaveRemaining.Name = "XTCLeaveRemaining"
         Me.XTCLeaveRemaining.SelectedTabPage = Me.XTPSum
-        Me.XTCLeaveRemaining.Size = New System.Drawing.Size(633, 296)
+        Me.XTCLeaveRemaining.Size = New System.Drawing.Size(633, 258)
         Me.XTCLeaveRemaining.TabIndex = 10
         Me.XTCLeaveRemaining.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPSum, Me.XTPDetail})
         '
         'XTPSum
         '
         Me.XTPSum.Controls.Add(Me.GCSum)
-        Me.XTPSum.Controls.Add(Me.PanelControl1)
         Me.XTPSum.Name = "XTPSum"
-        Me.XTPSum.Size = New System.Drawing.Size(627, 268)
+        Me.XTPSum.Size = New System.Drawing.Size(627, 230)
         Me.XTPSum.Text = "Summary"
         '
         'XTPDetail
         '
         Me.XTPDetail.Controls.Add(Me.GCSchedule)
-        Me.XTPDetail.Controls.Add(Me.PanelControl2)
         Me.XTPDetail.Name = "XTPDetail"
-        Me.XTPDetail.Size = New System.Drawing.Size(627, 268)
+        Me.XTPDetail.Size = New System.Drawing.Size(627, 230)
         Me.XTPDetail.Text = "Detail"
-        '
-        'GCSchedule
-        '
-        Me.GCSchedule.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCSchedule.Location = New System.Drawing.Point(0, 38)
-        Me.GCSchedule.MainView = Me.GVSchedule
-        Me.GCSchedule.Name = "GCSchedule"
-        Me.GCSchedule.Size = New System.Drawing.Size(627, 230)
-        Me.GCSchedule.TabIndex = 9
-        Me.GCSchedule.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVSchedule})
         '
         'GVSchedule
         '
@@ -512,93 +485,15 @@ Partial Class FormEmpLeaveStock
         Me.GridColumn10.FieldName = "qty_leave"
         Me.GridColumn10.Name = "GridColumn10"
         '
-        'PanelControl2
+        'GCSchedule
         '
-        Me.PanelControl2.Controls.Add(Me.LEEmp)
-        Me.PanelControl2.Controls.Add(Me.LabelControl2)
-        Me.PanelControl2.Controls.Add(Me.LEDept)
-        Me.PanelControl2.Controls.Add(Me.LabelControl3)
-        Me.PanelControl2.Controls.Add(Me.BViewSchedule)
-        Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Top
-        Me.PanelControl2.Location = New System.Drawing.Point(0, 0)
-        Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(627, 38)
-        Me.PanelControl2.TabIndex = 8
-        '
-        'LEEmp
-        '
-        Me.LEEmp.Location = New System.Drawing.Point(299, 9)
-        Me.LEEmp.Name = "LEEmp"
-        Me.LEEmp.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.LEEmp.Properties.View = Me.GridView1
-        Me.LEEmp.Size = New System.Drawing.Size(195, 20)
-        Me.LEEmp.TabIndex = 8900
-        '
-        'GridView1
-        '
-        Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn4, Me.GridColumn5, Me.GridColumn6})
-        Me.GridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
-        Me.GridView1.Name = "GridView1"
-        Me.GridView1.OptionsSelection.EnableAppearanceFocusedCell = False
-        Me.GridView1.OptionsView.ShowGroupPanel = False
-        '
-        'GridColumn4
-        '
-        Me.GridColumn4.Caption = "ID Employee"
-        Me.GridColumn4.FieldName = "id_employee"
-        Me.GridColumn4.Name = "GridColumn4"
-        '
-        'GridColumn5
-        '
-        Me.GridColumn5.Caption = "Code"
-        Me.GridColumn5.FieldName = "employee_code"
-        Me.GridColumn5.Name = "GridColumn5"
-        Me.GridColumn5.Visible = True
-        Me.GridColumn5.VisibleIndex = 0
-        Me.GridColumn5.Width = 186
-        '
-        'GridColumn6
-        '
-        Me.GridColumn6.Caption = "Name"
-        Me.GridColumn6.FieldName = "employee_name"
-        Me.GridColumn6.Name = "GridColumn6"
-        Me.GridColumn6.Visible = True
-        Me.GridColumn6.VisibleIndex = 1
-        Me.GridColumn6.Width = 360
-        '
-        'LabelControl2
-        '
-        Me.LabelControl2.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl2.Location = New System.Drawing.Point(247, 12)
-        Me.LabelControl2.Name = "LabelControl2"
-        Me.LabelControl2.Size = New System.Drawing.Size(46, 13)
-        Me.LabelControl2.TabIndex = 8899
-        Me.LabelControl2.Text = "Employee"
-        '
-        'LEDept
-        '
-        Me.LEDept.Location = New System.Drawing.Point(90, 9)
-        Me.LEDept.Name = "LEDept"
-        Me.LEDept.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.LEDept.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_departement", "Id Departement", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("departement", "Departemen")})
-        Me.LEDept.Size = New System.Drawing.Size(151, 20)
-        Me.LEDept.TabIndex = 14
-        '
-        'LabelControl3
-        '
-        Me.LabelControl3.Location = New System.Drawing.Point(21, 12)
-        Me.LabelControl3.Name = "LabelControl3"
-        Me.LabelControl3.Size = New System.Drawing.Size(63, 13)
-        Me.LabelControl3.TabIndex = 13
-        Me.LabelControl3.Text = "Departement"
-        '
-        'BViewSchedule
-        '
-        Me.BViewSchedule.Location = New System.Drawing.Point(500, 6)
-        Me.BViewSchedule.Name = "BViewSchedule"
-        Me.BViewSchedule.Size = New System.Drawing.Size(86, 25)
-        Me.BViewSchedule.TabIndex = 1
-        Me.BViewSchedule.Text = "view"
+        Me.GCSchedule.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCSchedule.Location = New System.Drawing.Point(0, 0)
+        Me.GCSchedule.MainView = Me.GVSchedule
+        Me.GCSchedule.Name = "GCSchedule"
+        Me.GCSchedule.Size = New System.Drawing.Size(627, 230)
+        Me.GCSchedule.TabIndex = 9
+        Me.GCSchedule.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVSchedule})
         '
         'FormEmpLeaveStock
         '
@@ -606,6 +501,7 @@ Partial Class FormEmpLeaveStock
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(633, 296)
         Me.Controls.Add(Me.XTCLeaveRemaining)
+        Me.Controls.Add(Me.PanelControl1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -624,14 +520,8 @@ Partial Class FormEmpLeaveStock
         Me.XTCLeaveRemaining.ResumeLayout(False)
         Me.XTPSum.ResumeLayout(False)
         Me.XTPDetail.ResumeLayout(False)
-        CType(Me.GCSchedule, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVSchedule, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.PanelControl2.ResumeLayout(False)
-        Me.PanelControl2.PerformLayout()
-        CType(Me.LEEmp.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LEDept.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GCSchedule, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -659,6 +549,12 @@ Partial Class FormEmpLeaveStock
     Friend WithEvents XTCLeaveRemaining As DevExpress.XtraTab.XtraTabControl
     Friend WithEvents XTPSum As DevExpress.XtraTab.XtraTabPage
     Friend WithEvents XTPDetail As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents GridColumn3 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnHLeaveRemaining As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnHDPRemaining As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnAdvanceLeave As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnHAdvLeaveRemaining As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnHTotLeave As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GCSchedule As DevExpress.XtraGrid.GridControl
     Friend WithEvents GVSchedule As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumn21 As DevExpress.XtraGrid.Columns.GridColumn
@@ -670,24 +566,8 @@ Partial Class FormEmpLeaveStock
     Friend WithEvents GridColumn23 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn38 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn39 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents PanelControl2 As DevExpress.XtraEditors.PanelControl
-    Friend WithEvents LEDept As DevExpress.XtraEditors.LookUpEdit
-    Friend WithEvents LabelControl3 As DevExpress.XtraEditors.LabelControl
-    Friend WithEvents BViewSchedule As DevExpress.XtraEditors.SimpleButton
-    Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
-    Friend WithEvents GridColumn3 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents LEEmp As DevExpress.XtraEditors.SearchLookUpEdit
-    Friend WithEvents GridView1 As DevExpress.XtraGrid.Views.Grid.GridView
-    Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumnHLeaveRemaining As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumnHDPRemaining As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnDateExpired As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnType As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnQty As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn10 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumnAdvanceLeave As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumnHAdvLeaveRemaining As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumnHTotLeave As DevExpress.XtraGrid.Columns.GridColumn
 End Class

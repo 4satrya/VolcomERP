@@ -68,6 +68,7 @@ Partial Class FormViewProductionRec
         Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.TxtRecType = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl11 = New DevExpress.XtraEditors.LabelControl()
+        Me.DEArrive = New DevExpress.XtraEditors.DateEdit()
         CType(Me.GroupControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl3.SuspendLayout()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -96,6 +97,8 @@ Partial Class FormViewProductionRec
         CType(Me.RepositoryItemSpinEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtRecType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEArrive.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEArrive.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupControl3
@@ -132,6 +135,7 @@ Partial Class FormViewProductionRec
         Me.GroupGeneralHeader.CaptionLocation = DevExpress.Utils.Locations.Left
         Me.GroupGeneralHeader.Controls.Add(Me.LabelControl11)
         Me.GroupGeneralHeader.Controls.Add(Me.TxtRecType)
+        Me.GroupGeneralHeader.Controls.Add(Me.DEArrive)
         Me.GroupGeneralHeader.Controls.Add(Me.LabelControl10)
         Me.GroupGeneralHeader.Controls.Add(Me.TxtPOType)
         Me.GroupGeneralHeader.Controls.Add(Me.PEView)
@@ -593,13 +597,29 @@ Partial Class FormViewProductionRec
         Me.TxtRecType.Size = New System.Drawing.Size(130, 20)
         Me.TxtRecType.TabIndex = 164
         '
+
         'LabelControl11
         '
-        Me.LabelControl11.Location = New System.Drawing.Point(487, 60)
+        Me.LabelControl11.Location = New System.Drawing.Point(694, 92)
         Me.LabelControl11.Name = "LabelControl11"
-        Me.LabelControl11.Size = New System.Drawing.Size(45, 13)
-        Me.LabelControl11.TabIndex = 165
-        Me.LabelControl11.Text = "Rec Type"
+        Me.LabelControl11.Size = New System.Drawing.Size(58, 13)
+        Me.LabelControl11.TabIndex = 169
+        Me.LabelControl11.Text = "Arrive in QC"
+        '
+        'DEArrive
+        '
+        Me.DEArrive.EditValue = Nothing
+        Me.DEArrive.Location = New System.Drawing.Point(765, 89)
+        Me.DEArrive.Name = "DEArrive"
+        Me.DEArrive.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEArrive.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.DEArrive.Properties.DisplayFormat.FormatString = "dd'/'MM'/'yyyy"
+        Me.DEArrive.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEArrive.Size = New System.Drawing.Size(130, 20)
+        Me.DEArrive.TabIndex = 168
+        Me.DEArrive.ToolTip = "Tanggal tiba di QC"
+        Me.DEArrive.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Information
+
         '
         'FormViewProductionRec
         '
@@ -647,6 +667,8 @@ Partial Class FormViewProductionRec
         CType(Me.RepositoryItemSpinEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtRecType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEArrive.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEArrive.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -699,4 +721,5 @@ Partial Class FormViewProductionRec
     Friend WithEvents TxtPOType As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelControl11 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents TxtRecType As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents DEArrive As DevExpress.XtraEditors.DateEdit
 End Class

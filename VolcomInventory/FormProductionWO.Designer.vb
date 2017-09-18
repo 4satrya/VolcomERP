@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FormProductionWO
     Inherits DevExpress.XtraEditors.XtraForm
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         If disposing AndAlso components IsNot Nothing Then
             components.Dispose()
@@ -17,7 +17,7 @@ Partial Class FormProductionWO
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormProductionWO))
@@ -180,9 +180,9 @@ Partial Class FormProductionWO
         Me.GroupControl3.Controls.Add(Me.BCancel)
         Me.GroupControl3.Controls.Add(Me.BSave)
         Me.GroupControl3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GroupControl3.Location = New System.Drawing.Point(0, 543)
+        Me.GroupControl3.Location = New System.Drawing.Point(0, 547)
         Me.GroupControl3.Name = "GroupControl3"
-        Me.GroupControl3.Size = New System.Drawing.Size(909, 39)
+        Me.GroupControl3.Size = New System.Drawing.Size(909, 35)
         Me.GroupControl3.TabIndex = 56
         '
         'BReviseWO
@@ -192,7 +192,7 @@ Partial Class FormProductionWO
         Me.BReviseWO.ImageList = Me.ImgBut
         Me.BReviseWO.Location = New System.Drawing.Point(112, 2)
         Me.BReviseWO.Name = "BReviseWO"
-        Me.BReviseWO.Size = New System.Drawing.Size(92, 35)
+        Me.BReviseWO.Size = New System.Drawing.Size(92, 31)
         Me.BReviseWO.TabIndex = 17
         Me.BReviseWO.Text = "Revise"
         '
@@ -220,7 +220,7 @@ Partial Class FormProductionWO
         Me.BtnAttachment.ImageList = Me.ImgBut
         Me.BtnAttachment.Location = New System.Drawing.Point(519, 2)
         Me.BtnAttachment.Name = "BtnAttachment"
-        Me.BtnAttachment.Size = New System.Drawing.Size(115, 35)
+        Me.BtnAttachment.Size = New System.Drawing.Size(115, 31)
         Me.BtnAttachment.TabIndex = 16
         Me.BtnAttachment.Text = "Attachment"
         '
@@ -231,7 +231,7 @@ Partial Class FormProductionWO
         Me.BMark.ImageList = Me.ImgBut
         Me.BMark.Location = New System.Drawing.Point(20, 2)
         Me.BMark.Name = "BMark"
-        Me.BMark.Size = New System.Drawing.Size(92, 35)
+        Me.BMark.Size = New System.Drawing.Size(92, 31)
         Me.BMark.TabIndex = 4
         Me.BMark.Text = "Mark"
         '
@@ -242,7 +242,7 @@ Partial Class FormProductionWO
         Me.BPrint.ImageList = Me.ImgBut
         Me.BPrint.Location = New System.Drawing.Point(634, 2)
         Me.BPrint.Name = "BPrint"
-        Me.BPrint.Size = New System.Drawing.Size(90, 35)
+        Me.BPrint.Size = New System.Drawing.Size(90, 31)
         Me.BPrint.TabIndex = 3
         Me.BPrint.Text = "Print"
         '
@@ -253,7 +253,7 @@ Partial Class FormProductionWO
         Me.BCancel.ImageList = Me.ImgBut
         Me.BCancel.Location = New System.Drawing.Point(724, 2)
         Me.BCancel.Name = "BCancel"
-        Me.BCancel.Size = New System.Drawing.Size(95, 35)
+        Me.BCancel.Size = New System.Drawing.Size(95, 31)
         Me.BCancel.TabIndex = 2
         Me.BCancel.Text = "Cancel"
         '
@@ -265,7 +265,7 @@ Partial Class FormProductionWO
         Me.BSave.ImageList = Me.ImgBut
         Me.BSave.Location = New System.Drawing.Point(819, 2)
         Me.BSave.Name = "BSave"
-        Me.BSave.Size = New System.Drawing.Size(88, 35)
+        Me.BSave.Size = New System.Drawing.Size(88, 31)
         Me.BSave.TabIndex = 1
         Me.BSave.Text = "Save"
         '
@@ -297,7 +297,7 @@ Partial Class FormProductionWO
         Me.GroupGeneralFooter.Controls.Add(Me.TECompShipTo)
         Me.GroupGeneralFooter.Controls.Add(Me.LabelControl23)
         Me.GroupGeneralFooter.Dock = System.Windows.Forms.DockStyle.Top
-        Me.GroupGeneralFooter.Location = New System.Drawing.Point(0, 405)
+        Me.GroupGeneralFooter.Location = New System.Drawing.Point(0, 409)
         Me.GroupGeneralFooter.Name = "GroupGeneralFooter"
         Me.GroupGeneralFooter.Size = New System.Drawing.Size(909, 138)
         Me.GroupGeneralFooter.TabIndex = 55
@@ -560,9 +560,9 @@ Partial Class FormProductionWO
         Me.GConListPurchase.CaptionLocation = DevExpress.Utils.Locations.Left
         Me.GConListPurchase.Controls.Add(Me.PanelControl1)
         Me.GConListPurchase.Dock = System.Windows.Forms.DockStyle.Top
-        Me.GConListPurchase.Location = New System.Drawing.Point(0, 181)
+        Me.GConListPurchase.Location = New System.Drawing.Point(0, 191)
         Me.GConListPurchase.Name = "GConListPurchase"
-        Me.GConListPurchase.Size = New System.Drawing.Size(909, 224)
+        Me.GConListPurchase.Size = New System.Drawing.Size(909, 218)
         Me.GConListPurchase.TabIndex = 54
         Me.GConListPurchase.Text = "List Purchase"
         '
@@ -575,7 +575,7 @@ Partial Class FormProductionWO
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelControl1.Location = New System.Drawing.Point(20, 2)
         Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(887, 220)
+        Me.PanelControl1.Size = New System.Drawing.Size(887, 214)
         Me.PanelControl1.TabIndex = 19
         '
         'GCListPurchase
@@ -585,7 +585,7 @@ Partial Class FormProductionWO
         Me.GCListPurchase.MainView = Me.GVListPurchase
         Me.GCListPurchase.Margin = New System.Windows.Forms.Padding(0)
         Me.GCListPurchase.Name = "GCListPurchase"
-        Me.GCListPurchase.Size = New System.Drawing.Size(887, 220)
+        Me.GCListPurchase.Size = New System.Drawing.Size(887, 214)
         Me.GCListPurchase.TabIndex = 0
         Me.GCListPurchase.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVListPurchase})
         '
@@ -781,7 +781,7 @@ Partial Class FormProductionWO
         Me.GroupGeneralHeader.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupGeneralHeader.Location = New System.Drawing.Point(0, 0)
         Me.GroupGeneralHeader.Name = "GroupGeneralHeader"
-        Me.GroupGeneralHeader.Size = New System.Drawing.Size(909, 181)
+        Me.GroupGeneralHeader.Size = New System.Drawing.Size(909, 191)
         Me.GroupGeneralHeader.TabIndex = 53
         '
         'DEDueDate
@@ -830,7 +830,7 @@ Partial Class FormProductionWO
         '
         'CheckEditMainVendor
         '
-        Me.CheckEditMainVendor.Location = New System.Drawing.Point(223, 158)
+        Me.CheckEditMainVendor.Location = New System.Drawing.Point(223, 160)
         Me.CheckEditMainVendor.Name = "CheckEditMainVendor"
         Me.CheckEditMainVendor.Properties.Caption = "Set as main vendor"
         Me.CheckEditMainVendor.Size = New System.Drawing.Size(115, 19)
@@ -938,7 +938,7 @@ Partial Class FormProductionWO
         '
         'LabelControl24
         '
-        Me.LabelControl24.Location = New System.Drawing.Point(357, 134)
+        Me.LabelControl24.Location = New System.Drawing.Point(357, 136)
         Me.LabelControl24.Name = "LabelControl24"
         Me.LabelControl24.Size = New System.Drawing.Size(32, 13)
         Me.LabelControl24.TabIndex = 145
@@ -1060,7 +1060,7 @@ Partial Class FormProductionWO
         '
         'LabelControl8
         '
-        Me.LabelControl8.Location = New System.Drawing.Point(357, 105)
+        Me.LabelControl8.Location = New System.Drawing.Point(357, 104)
         Me.LabelControl8.Name = "LabelControl8"
         Me.LabelControl8.Size = New System.Drawing.Size(20, 13)
         Me.LabelControl8.TabIndex = 129

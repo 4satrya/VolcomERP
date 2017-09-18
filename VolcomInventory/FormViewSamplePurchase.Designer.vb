@@ -20,6 +20,7 @@ Partial Class FormViewSamplePurchase
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GroupControl3 = New DevExpress.XtraEditors.GroupControl()
+        Me.BAttach = New DevExpress.XtraEditors.SimpleButton()
         Me.BMark = New DevExpress.XtraEditors.SimpleButton()
         Me.GroupGeneralFooter = New DevExpress.XtraEditors.GroupControl()
         Me.LabelControl26 = New DevExpress.XtraEditors.LabelControl()
@@ -144,17 +145,27 @@ Partial Class FormViewSamplePurchase
         'GroupControl3
         '
         Me.GroupControl3.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupControl3.Controls.Add(Me.BAttach)
         Me.GroupControl3.Controls.Add(Me.BMark)
         Me.GroupControl3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupControl3.Location = New System.Drawing.Point(0, 503)
         Me.GroupControl3.Name = "GroupControl3"
-        Me.GroupControl3.Size = New System.Drawing.Size(894, 38)
+        Me.GroupControl3.Size = New System.Drawing.Size(894, 68)
         Me.GroupControl3.TabIndex = 32
+        '
+        'BAttach
+        '
+        Me.BAttach.Dock = System.Windows.Forms.DockStyle.Top
+        Me.BAttach.Location = New System.Drawing.Point(20, 2)
+        Me.BAttach.Name = "BAttach"
+        Me.BAttach.Size = New System.Drawing.Size(872, 30)
+        Me.BAttach.TabIndex = 5
+        Me.BAttach.Text = "Attachment"
         '
         'BMark
         '
-        Me.BMark.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.BMark.Location = New System.Drawing.Point(20, 2)
+        Me.BMark.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.BMark.Location = New System.Drawing.Point(20, 32)
         Me.BMark.Name = "BMark"
         Me.BMark.Size = New System.Drawing.Size(872, 34)
         Me.BMark.TabIndex = 4
@@ -1058,7 +1069,7 @@ Partial Class FormViewSamplePurchase
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(894, 541)
+        Me.ClientSize = New System.Drawing.Size(894, 571)
         Me.Controls.Add(Me.GroupControl3)
         Me.Controls.Add(Me.GroupGeneralFooter)
         Me.Controls.Add(Me.GConListPurchase)
@@ -1195,4 +1206,5 @@ Partial Class FormViewSamplePurchase
     Friend WithEvents LabelControl26 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LabelControl25 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents TEComm As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents BAttach As DevExpress.XtraEditors.SimpleButton
 End Class

@@ -54,8 +54,9 @@ Partial Class FormProductionPLToWHDet
         Me.BtnBrowsePO = New DevExpress.XtraEditors.SimpleButton()
         Me.PEView = New DevExpress.XtraEditors.PictureEdit()
         Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
-        Me.BtnAttachment = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnXlsBOF = New DevExpress.XtraEditors.SimpleButton()
         Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
+        Me.BtnAttachment = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnPrint = New DevExpress.XtraEditors.SimpleButton()
         Me.BMark = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnCancel = New DevExpress.XtraEditors.SimpleButton()
@@ -87,6 +88,10 @@ Partial Class FormProductionPLToWHDet
         Me.GridColumnRemark = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnNox = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnUniqueRange = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnNumber = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnFrom = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnTo = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnLimitQty = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
         Me.BtnDel = New DevExpress.XtraEditors.SimpleButton()
         Me.SimpleButton1 = New DevExpress.XtraEditors.SimpleButton()
@@ -104,11 +109,12 @@ Partial Class FormProductionPLToWHDet
         Me.RepositoryItemCheckEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.RepositoryItemSpinEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
         Me.PanelNavBarcode = New DevExpress.XtraEditors.PanelControl()
+        Me.TxtDeleteScan = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelDelScan = New DevExpress.XtraEditors.LabelControl()
         Me.BDelete = New DevExpress.XtraEditors.SimpleButton()
         Me.BStop = New DevExpress.XtraEditors.SimpleButton()
         Me.BScan = New DevExpress.XtraEditors.SimpleButton()
         Me.EPRet = New System.Windows.Forms.ErrorProvider(Me.components)
-        Me.BtnXlsBOF = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
         CType(Me.PanelControlTopMain, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -155,6 +161,7 @@ Partial Class FormProductionPLToWHDet
         CType(Me.RepositoryItemSpinEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelNavBarcode, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelNavBarcode.SuspendLayout()
+        CType(Me.TxtDeleteScan.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EPRet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -570,16 +577,18 @@ Partial Class FormProductionPLToWHDet
         Me.PanelControl3.Size = New System.Drawing.Size(926, 36)
         Me.PanelControl3.TabIndex = 183
         '
-        'BtnAttachment
+        'BtnXlsBOF
         '
-        Me.BtnAttachment.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BtnAttachment.ImageIndex = 10
-        Me.BtnAttachment.ImageList = Me.LargeImageCollection
-        Me.BtnAttachment.Location = New System.Drawing.Point(598, 2)
-        Me.BtnAttachment.Name = "BtnAttachment"
-        Me.BtnAttachment.Size = New System.Drawing.Size(101, 32)
-        Me.BtnAttachment.TabIndex = 13
-        Me.BtnAttachment.Text = "Attachment"
+        Me.BtnXlsBOF.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnXlsBOF.Image = CType(resources.GetObject("BtnXlsBOF.Image"), System.Drawing.Image)
+        Me.BtnXlsBOF.ImageIndex = 11
+        Me.BtnXlsBOF.ImageList = Me.LargeImageCollection
+        Me.BtnXlsBOF.Location = New System.Drawing.Point(483, 2)
+        Me.BtnXlsBOF.Name = "BtnXlsBOF"
+        Me.BtnXlsBOF.Size = New System.Drawing.Size(115, 32)
+        Me.BtnXlsBOF.TabIndex = 19
+        Me.BtnXlsBOF.Text = "Generate XLS"
+        Me.BtnXlsBOF.Visible = False
         '
         'LargeImageCollection
         '
@@ -596,6 +605,17 @@ Partial Class FormProductionPLToWHDet
         Me.LargeImageCollection.Images.SetKeyName(8, "31_24x24.png")
         Me.LargeImageCollection.Images.SetKeyName(9, "18_24x24.png")
         Me.LargeImageCollection.Images.SetKeyName(10, "attachment-icon.png")
+        '
+        'BtnAttachment
+        '
+        Me.BtnAttachment.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnAttachment.ImageIndex = 10
+        Me.BtnAttachment.ImageList = Me.LargeImageCollection
+        Me.BtnAttachment.Location = New System.Drawing.Point(598, 2)
+        Me.BtnAttachment.Name = "BtnAttachment"
+        Me.BtnAttachment.Size = New System.Drawing.Size(101, 32)
+        Me.BtnAttachment.TabIndex = 13
+        Me.BtnAttachment.Text = "Attachment"
         '
         'BtnPrint
         '
@@ -772,7 +792,7 @@ Partial Class FormProductionPLToWHDet
         '
         'GVRetDetail
         '
-        Me.GVRetDetail.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdRet, Me.GridColumnIdSamplePurcDet, Me.GridColumnNo, Me.GridColumnCode, Me.GridColumnEanCode, Me.GridColumnName, Me.GridColumnSize, Me.GridColumnUOM, Me.GridColumnQty, Me.GridColumnQtyAllow, Me.GridColumnRemark, Me.GridColumnNox, Me.GridColumnUniqueRange})
+        Me.GVRetDetail.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdRet, Me.GridColumnIdSamplePurcDet, Me.GridColumnNo, Me.GridColumnCode, Me.GridColumnEanCode, Me.GridColumnName, Me.GridColumnSize, Me.GridColumnUOM, Me.GridColumnQty, Me.GridColumnQtyAllow, Me.GridColumnRemark, Me.GridColumnNox, Me.GridColumnUniqueRange, Me.GridColumnNumber, Me.GridColumnFrom, Me.GridColumnTo, Me.GridColumnLimitQty})
         Me.GVRetDetail.GridControl = Me.GCRetDetail
         Me.GVRetDetail.Name = "GVRetDetail"
         Me.GVRetDetail.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[True]
@@ -929,6 +949,36 @@ Partial Class FormProductionPLToWHDet
         Me.GridColumnUniqueRange.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.[False]
         Me.GridColumnUniqueRange.OptionsColumn.ReadOnly = True
         Me.GridColumnUniqueRange.Width = 94
+        '
+        'GridColumnNumber
+        '
+        Me.GridColumnNumber.Caption = "Number"
+        Me.GridColumnNumber.FieldName = "number"
+        Me.GridColumnNumber.Name = "GridColumnNumber"
+        Me.GridColumnNumber.UnboundType = DevExpress.Data.UnboundColumnType.[String]
+        '
+        'GridColumnFrom
+        '
+        Me.GridColumnFrom.Caption = "From"
+        Me.GridColumnFrom.FieldName = "from"
+        Me.GridColumnFrom.Name = "GridColumnFrom"
+        Me.GridColumnFrom.UnboundType = DevExpress.Data.UnboundColumnType.[String]
+        '
+        'GridColumnTo
+        '
+        Me.GridColumnTo.Caption = "To"
+        Me.GridColumnTo.FieldName = "to"
+        Me.GridColumnTo.Name = "GridColumnTo"
+        Me.GridColumnTo.UnboundType = DevExpress.Data.UnboundColumnType.[String]
+        '
+        'GridColumnLimitQty
+        '
+        Me.GridColumnLimitQty.Caption = "Limit Qty"
+        Me.GridColumnLimitQty.DisplayFormat.FormatString = "N0"
+        Me.GridColumnLimitQty.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnLimitQty.FieldName = "limit_qty"
+        Me.GridColumnLimitQty.Name = "GridColumnLimitQty"
+        Me.GridColumnLimitQty.OptionsColumn.AllowEdit = False
         '
         'PanelControl1
         '
@@ -1099,6 +1149,8 @@ Partial Class FormProductionPLToWHDet
         'PanelNavBarcode
         '
         Me.PanelNavBarcode.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelNavBarcode.Controls.Add(Me.TxtDeleteScan)
+        Me.PanelNavBarcode.Controls.Add(Me.LabelDelScan)
         Me.PanelNavBarcode.Controls.Add(Me.BDelete)
         Me.PanelNavBarcode.Controls.Add(Me.BStop)
         Me.PanelNavBarcode.Controls.Add(Me.BScan)
@@ -1109,6 +1161,23 @@ Partial Class FormProductionPLToWHDet
         Me.PanelNavBarcode.Name = "PanelNavBarcode"
         Me.PanelNavBarcode.Size = New System.Drawing.Size(903, 33)
         Me.PanelNavBarcode.TabIndex = 0
+        '
+        'TxtDeleteScan
+        '
+        Me.TxtDeleteScan.Location = New System.Drawing.Point(69, 7)
+        Me.TxtDeleteScan.Name = "TxtDeleteScan"
+        Me.TxtDeleteScan.Size = New System.Drawing.Size(248, 20)
+        Me.TxtDeleteScan.TabIndex = 21
+        Me.TxtDeleteScan.Visible = False
+        '
+        'LabelDelScan
+        '
+        Me.LabelDelScan.Location = New System.Drawing.Point(7, 9)
+        Me.LabelDelScan.Name = "LabelDelScan"
+        Me.LabelDelScan.Size = New System.Drawing.Size(56, 13)
+        Me.LabelDelScan.TabIndex = 20
+        Me.LabelDelScan.Text = "Delete scan"
+        Me.LabelDelScan.Visible = False
         '
         'BDelete
         '
@@ -1147,19 +1216,6 @@ Partial Class FormProductionPLToWHDet
         'EPRet
         '
         Me.EPRet.ContainerControl = Me
-        '
-        'BtnXlsBOF
-        '
-        Me.BtnXlsBOF.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BtnXlsBOF.Image = CType(resources.GetObject("BtnXlsBOF.Image"), System.Drawing.Image)
-        Me.BtnXlsBOF.ImageIndex = 11
-        Me.BtnXlsBOF.ImageList = Me.LargeImageCollection
-        Me.BtnXlsBOF.Location = New System.Drawing.Point(483, 2)
-        Me.BtnXlsBOF.Name = "BtnXlsBOF"
-        Me.BtnXlsBOF.Size = New System.Drawing.Size(115, 32)
-        Me.BtnXlsBOF.TabIndex = 19
-        Me.BtnXlsBOF.Text = "Generate XLS"
-        Me.BtnXlsBOF.Visible = False
         '
         'FormProductionPLToWHDet
         '
@@ -1226,6 +1282,8 @@ Partial Class FormProductionPLToWHDet
         CType(Me.RepositoryItemSpinEdit2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelNavBarcode, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelNavBarcode.ResumeLayout(False)
+        Me.PanelNavBarcode.PerformLayout()
+        CType(Me.TxtDeleteScan.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EPRet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -1318,4 +1376,10 @@ Partial Class FormProductionPLToWHDet
     Friend WithEvents TxtVendorCode As DevExpress.XtraEditors.TextEdit
     Friend WithEvents TxtVendor As DevExpress.XtraEditors.TextEdit
     Friend WithEvents BtnXlsBOF As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GridColumnNumber As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnFrom As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnTo As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnLimitQty As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents TxtDeleteScan As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LabelDelScan As DevExpress.XtraEditors.LabelControl
 End Class

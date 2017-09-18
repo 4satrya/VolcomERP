@@ -36,7 +36,7 @@
         com_print.AppendLine("^LL0400")
         com_print.AppendLine("^LS0")
         com_print.AppendLine("^BY2,2,160^FT19,234^B2N,,N,N")
-        com_print.AppendLine("^FD0" & code & "8^FS")
+        com_print.AppendLine("^FD" & code & "^FS")
         com_print.AppendLine("^FT19,258^A0N,23,24^FH\^FD" & code & "^FS")
         com_print.AppendLine("^FT19,71^A0N,14,14^FH\^FD" & desc & "^FS")
         com_print.AppendLine("^FT19,53^A0N,14,14^FH\^FD" & season & "  " & country_orign & "  " & class_ & "  " & color & "  " & size & "^FS")

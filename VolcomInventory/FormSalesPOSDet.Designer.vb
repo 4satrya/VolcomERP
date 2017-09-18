@@ -106,6 +106,7 @@ Partial Class FormSalesPOSDet
         Me.BtnEdit = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnAdd = New DevExpress.XtraEditors.SimpleButton()
         Me.EPForm = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.GridColumnMin = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
         CType(Me.PanelControlTopLeft, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -184,7 +185,7 @@ Partial Class FormSalesPOSDet
         Me.PanelControlTopLeft.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelControlTopLeft.Location = New System.Drawing.Point(20, 2)
         Me.PanelControlTopLeft.Name = "PanelControlTopLeft"
-        Me.PanelControlTopLeft.Size = New System.Drawing.Size(444, 109)
+        Me.PanelControlTopLeft.Size = New System.Drawing.Size(426, 109)
         Me.PanelControlTopLeft.TabIndex = 8933
         '
         'LabelControl11
@@ -207,7 +208,7 @@ Partial Class FormSalesPOSDet
         Me.TENPWP.Properties.Appearance.Options.UseFont = True
         Me.TENPWP.Properties.EditValueChangedDelay = 1
         Me.TENPWP.Properties.ReadOnly = True
-        Me.TENPWP.Size = New System.Drawing.Size(371, 20)
+        Me.TENPWP.Size = New System.Drawing.Size(353, 20)
         Me.TENPWP.TabIndex = 8890
         Me.TENPWP.TabStop = False
         '
@@ -220,7 +221,7 @@ Partial Class FormSalesPOSDet
         Me.MEAdrressCompFrom.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.MEAdrressCompFrom.Properties.Appearance.Options.UseFont = True
         Me.MEAdrressCompFrom.Properties.ReadOnly = True
-        Me.MEAdrressCompFrom.Size = New System.Drawing.Size(371, 46)
+        Me.MEAdrressCompFrom.Size = New System.Drawing.Size(353, 46)
         Me.MEAdrressCompFrom.TabIndex = 4444
         Me.MEAdrressCompFrom.TabStop = False
         '
@@ -255,7 +256,7 @@ Partial Class FormSalesPOSDet
         Me.TxtNameCompFrom.Properties.Appearance.Options.UseFont = True
         Me.TxtNameCompFrom.Properties.EditValueChangedDelay = 1
         Me.TxtNameCompFrom.Properties.ReadOnly = True
-        Me.TxtNameCompFrom.Size = New System.Drawing.Size(254, 20)
+        Me.TxtNameCompFrom.Size = New System.Drawing.Size(236, 20)
         Me.TxtNameCompFrom.TabIndex = 8888
         Me.TxtNameCompFrom.TabStop = False
         '
@@ -264,7 +265,7 @@ Partial Class FormSalesPOSDet
         Me.BtnBrowseContactFrom.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnBrowseContactFrom.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnBrowseContactFrom.Appearance.Options.UseFont = True
-        Me.BtnBrowseContactFrom.Location = New System.Drawing.Point(398, 3)
+        Me.BtnBrowseContactFrom.Location = New System.Drawing.Point(380, 4)
         Me.BtnBrowseContactFrom.Name = "BtnBrowseContactFrom"
         Me.BtnBrowseContactFrom.Size = New System.Drawing.Size(23, 20)
         Me.BtnBrowseContactFrom.TabIndex = 1
@@ -295,9 +296,9 @@ Partial Class FormSalesPOSDet
         Me.PanelControlTopMiddle.Controls.Add(Me.LabelControl8)
         Me.PanelControlTopMiddle.Controls.Add(Me.LabelControl4)
         Me.PanelControlTopMiddle.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PanelControlTopMiddle.Location = New System.Drawing.Point(464, 2)
+        Me.PanelControlTopMiddle.Location = New System.Drawing.Point(446, 2)
         Me.PanelControlTopMiddle.Name = "PanelControlTopMiddle"
-        Me.PanelControlTopMiddle.Size = New System.Drawing.Size(289, 109)
+        Me.PanelControlTopMiddle.Size = New System.Drawing.Size(330, 109)
         Me.PanelControlTopMiddle.TabIndex = 8934
         '
         'BDO
@@ -305,7 +306,7 @@ Partial Class FormSalesPOSDet
         Me.BDO.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BDO.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BDO.Appearance.Options.UseFont = True
-        Me.BDO.Location = New System.Drawing.Point(254, 82)
+        Me.BDO.Location = New System.Drawing.Point(295, 82)
         Me.BDO.Name = "BDO"
         Me.BDO.Size = New System.Drawing.Size(23, 20)
         Me.BDO.TabIndex = 8937
@@ -323,7 +324,7 @@ Partial Class FormSalesPOSDet
         Me.TEDO.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TEDO.Properties.Appearance.Options.UseFont = True
         Me.TEDO.Properties.EditValueChangedDelay = 1
-        Me.TEDO.Size = New System.Drawing.Size(166, 20)
+        Me.TEDO.Size = New System.Drawing.Size(207, 20)
         Me.TEDO.TabIndex = 6
         Me.TEDO.Visible = False
         '
@@ -346,7 +347,7 @@ Partial Class FormSalesPOSDet
         Me.DEDueDate.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.DEDueDate.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
         Me.DEDueDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.DEDueDate.Size = New System.Drawing.Size(193, 20)
+        Me.DEDueDate.Size = New System.Drawing.Size(234, 20)
         Me.DEDueDate.TabIndex = 5
         '
         'LabelControl6
@@ -361,13 +362,13 @@ Partial Class FormSalesPOSDet
         'DEEnd
         '
         Me.DEEnd.EditValue = Nothing
-        Me.DEEnd.Location = New System.Drawing.Point(183, 28)
+        Me.DEEnd.Location = New System.Drawing.Point(217, 28)
         Me.DEEnd.Name = "DEEnd"
         Me.DEEnd.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.DEEnd.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.DEEnd.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
         Me.DEEnd.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.DEEnd.Size = New System.Drawing.Size(94, 20)
+        Me.DEEnd.Size = New System.Drawing.Size(101, 20)
         Me.DEEnd.TabIndex = 4
         '
         'LETypeSO
@@ -380,7 +381,7 @@ Partial Class FormSalesPOSDet
         Me.LETypeSO.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_so_type", "ID SO Type", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("so_type", "Type")})
         Me.LETypeSO.Properties.NullText = ""
         Me.LETypeSO.Properties.ShowFooter = False
-        Me.LETypeSO.Size = New System.Drawing.Size(193, 20)
+        Me.LETypeSO.Size = New System.Drawing.Size(234, 20)
         Me.LETypeSO.TabIndex = 2
         '
         'DEStart
@@ -393,7 +394,7 @@ Partial Class FormSalesPOSDet
         Me.DEStart.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
         Me.DEStart.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.DEStart.Properties.Mask.EditMask = "dd-MM-yyyy"
-        Me.DEStart.Size = New System.Drawing.Size(83, 20)
+        Me.DEStart.Size = New System.Drawing.Size(117, 20)
         Me.DEStart.TabIndex = 3
         '
         'LabelControl2
@@ -417,7 +418,7 @@ Partial Class FormSalesPOSDet
         'LabelControl4
         '
         Me.LabelControl4.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl4.Location = New System.Drawing.Point(173, 31)
+        Me.LabelControl4.Location = New System.Drawing.Point(207, 31)
         Me.LabelControl4.Name = "LabelControl4"
         Me.LabelControl4.Size = New System.Drawing.Size(4, 13)
         Me.LabelControl4.TabIndex = 8926
@@ -431,26 +432,26 @@ Partial Class FormSalesPOSDet
         Me.PanelControlTopRight.Controls.Add(Me.LabelControl7)
         Me.PanelControlTopRight.Controls.Add(Me.DEForm)
         Me.PanelControlTopRight.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PanelControlTopRight.Location = New System.Drawing.Point(753, 2)
+        Me.PanelControlTopRight.Location = New System.Drawing.Point(776, 2)
         Me.PanelControlTopRight.Name = "PanelControlTopRight"
-        Me.PanelControlTopRight.Size = New System.Drawing.Size(199, 109)
+        Me.PanelControlTopRight.Size = New System.Drawing.Size(176, 109)
         Me.PanelControlTopRight.TabIndex = 8935
         '
         'TxtVirtualPosNumber
         '
         Me.TxtVirtualPosNumber.EditValue = ""
-        Me.TxtVirtualPosNumber.Location = New System.Drawing.Point(67, 35)
+        Me.TxtVirtualPosNumber.Location = New System.Drawing.Point(49, 32)
         Me.TxtVirtualPosNumber.Name = "TxtVirtualPosNumber"
         Me.TxtVirtualPosNumber.Properties.EditValueChangedDelay = 1
         Me.TxtVirtualPosNumber.Properties.ReadOnly = True
-        Me.TxtVirtualPosNumber.Size = New System.Drawing.Size(116, 20)
+        Me.TxtVirtualPosNumber.Size = New System.Drawing.Size(117, 20)
         Me.TxtVirtualPosNumber.TabIndex = 8
         Me.TxtVirtualPosNumber.TabStop = False
         '
         'LabelControl5
         '
         Me.LabelControl5.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl5.Location = New System.Drawing.Point(13, 38)
+        Me.LabelControl5.Location = New System.Drawing.Point(6, 35)
         Me.LabelControl5.Name = "LabelControl5"
         Me.LabelControl5.Size = New System.Drawing.Size(37, 13)
         Me.LabelControl5.TabIndex = 155
@@ -459,7 +460,7 @@ Partial Class FormSalesPOSDet
         'LabelControl7
         '
         Me.LabelControl7.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl7.Location = New System.Drawing.Point(13, 12)
+        Me.LabelControl7.Location = New System.Drawing.Point(6, 9)
         Me.LabelControl7.Name = "LabelControl7"
         Me.LabelControl7.Size = New System.Drawing.Size(23, 13)
         Me.LabelControl7.TabIndex = 159
@@ -468,11 +469,11 @@ Partial Class FormSalesPOSDet
         'DEForm
         '
         Me.DEForm.EditValue = ""
-        Me.DEForm.Location = New System.Drawing.Point(67, 9)
+        Me.DEForm.Location = New System.Drawing.Point(49, 6)
         Me.DEForm.Name = "DEForm"
         Me.DEForm.Properties.EditValueChangedDelay = 1
         Me.DEForm.Properties.ReadOnly = True
-        Me.DEForm.Size = New System.Drawing.Size(116, 20)
+        Me.DEForm.Size = New System.Drawing.Size(117, 20)
         Me.DEForm.TabIndex = 162
         Me.DEForm.TabStop = False
         '
@@ -873,7 +874,7 @@ Partial Class FormSalesPOSDet
         '
         'GVItemList
         '
-        Me.GVItemList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumnCode, Me.GridColumnName, Me.GridColumnSize, Me.GridColumnQty, Me.GridColumnAmount, Me.GridColumnDesignPriceRetail, Me.GridColumnColor, Me.GridColumnDesignPriceType, Me.GridColumnUOM, Me.GridColumnPrice, Me.GridColumnRemark, Me.GridColumnIdDesign, Me.GridColumnIdProduct, Me.GridColumnIdSample, Me.GridColumnIdDesignPrice, Me.GridColumnIdSalesPOSDet, Me.GridColumnIdDesignPriceRetail})
+        Me.GVItemList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumnCode, Me.GridColumnName, Me.GridColumnSize, Me.GridColumnQty, Me.GridColumnAmount, Me.GridColumnDesignPriceRetail, Me.GridColumnColor, Me.GridColumnDesignPriceType, Me.GridColumnUOM, Me.GridColumnPrice, Me.GridColumnRemark, Me.GridColumnIdDesign, Me.GridColumnIdProduct, Me.GridColumnIdSample, Me.GridColumnIdDesignPrice, Me.GridColumnIdSalesPOSDet, Me.GridColumnIdDesignPriceRetail, Me.GridColumnMin})
         Me.GVItemList.GridControl = Me.GCItemList
         Me.GVItemList.Name = "GVItemList"
         Me.GVItemList.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[True]
@@ -1154,6 +1155,11 @@ Partial Class FormSalesPOSDet
         '
         Me.EPForm.ContainerControl = Me
         '
+        'GridColumnMin
+        '
+        Me.GridColumnMin.Caption = "Store Stock"
+        Me.GridColumnMin.Name = "GridColumnMin"
+        '
         'FormSalesPOSDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1312,4 +1318,5 @@ Partial Class FormSalesPOSDet
     Friend WithEvents BDO As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents TEDO As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LDO As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents GridColumnMin As DevExpress.XtraGrid.Columns.GridColumn
 End Class

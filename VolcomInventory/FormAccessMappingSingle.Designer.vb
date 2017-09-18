@@ -19,27 +19,42 @@ Partial Class FormAccessMappingSingle
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormAccessMappingSingle))
-        Me.PCClose = New DevExpress.XtraEditors.PanelControl
-        Me.CheckEditSelAll = New DevExpress.XtraEditors.CheckEdit
-        Me.BtnSave = New DevExpress.XtraEditors.SimpleButton
-        Me.BtnClose = New DevExpress.XtraEditors.SimpleButton
-        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl
-        Me.LabelRole = New DevExpress.XtraEditors.LabelControl
-        Me.PictureMenuAccess = New DevExpress.XtraEditors.PictureEdit
-        Me.GCMenu = New DevExpress.XtraGrid.GridControl
-        Me.GVMenu = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.GridColumnIdFormControl = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnDescriptionMenuName = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnProcess = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnStatus = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
-        Me.GridColumnGroupMenu = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnIsView = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnIdForm = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnIsChanegd = New DevExpress.XtraGrid.Columns.GridColumn
+        Me.PCClose = New DevExpress.XtraEditors.PanelControl()
+        Me.DDBPrint = New DevExpress.XtraEditors.DropDownButton()
+        Me.PUDD = New DevExpress.XtraBars.PopupMenu(Me.components)
+        Me.BBPrintChecked = New DevExpress.XtraBars.BarButtonItem()
+        Me.BBPrintAll = New DevExpress.XtraBars.BarButtonItem()
+        Me.BMDD = New DevExpress.XtraBars.BarManager(Me.components)
+        Me.barDockControlTop = New DevExpress.XtraBars.BarDockControl()
+        Me.barDockControlBottom = New DevExpress.XtraBars.BarDockControl()
+        Me.barDockControlLeft = New DevExpress.XtraBars.BarDockControl()
+        Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl()
+        Me.BarButtonItem1 = New DevExpress.XtraBars.BarButtonItem()
+        Me.BarLargeButtonItem1 = New DevExpress.XtraBars.BarLargeButtonItem()
+        Me.BarButtonItem2 = New DevExpress.XtraBars.BarButtonItem()
+        Me.CheckEditSelAll = New DevExpress.XtraEditors.CheckEdit()
+        Me.BtnClose = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnSave = New DevExpress.XtraEditors.SimpleButton()
+        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.LabelRole = New DevExpress.XtraEditors.LabelControl()
+        Me.PictureMenuAccess = New DevExpress.XtraEditors.PictureEdit()
+        Me.GCMenu = New DevExpress.XtraGrid.GridControl()
+        Me.GVMenu = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumnIdFormControl = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnDescriptionMenuName = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnProcess = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnStatus = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.GridColumnGroupMenu = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnIsView = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnIdForm = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnIsChanegd = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PCClose, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PCClose.SuspendLayout()
+        CType(Me.PUDD, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.BMDD, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CheckEditSelAll.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
@@ -51,6 +66,7 @@ Partial Class FormAccessMappingSingle
         '
         'PCClose
         '
+        Me.PCClose.Controls.Add(Me.DDBPrint)
         Me.PCClose.Controls.Add(Me.CheckEditSelAll)
         Me.PCClose.Controls.Add(Me.BtnClose)
         Me.PCClose.Controls.Add(Me.BtnSave)
@@ -62,6 +78,91 @@ Partial Class FormAccessMappingSingle
         Me.PCClose.Size = New System.Drawing.Size(580, 38)
         Me.PCClose.TabIndex = 28
         '
+        'DDBPrint
+        '
+        Me.DDBPrint.Dock = System.Windows.Forms.DockStyle.Right
+        Me.DDBPrint.DropDownArrowStyle = DevExpress.XtraEditors.DropDownArrowStyle.Show
+        Me.DDBPrint.DropDownControl = Me.PUDD
+        Me.DDBPrint.ImageIndex = 6
+        Me.DDBPrint.Location = New System.Drawing.Point(349, 2)
+        Me.DDBPrint.Name = "DDBPrint"
+        Me.DDBPrint.Size = New System.Drawing.Size(79, 34)
+        Me.DDBPrint.TabIndex = 6
+        Me.DDBPrint.Text = "Print"
+        '
+        'PUDD
+        '
+        Me.PUDD.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.BBPrintChecked), New DevExpress.XtraBars.LinkPersistInfo(Me.BBPrintAll)})
+        Me.PUDD.Manager = Me.BMDD
+        Me.PUDD.Name = "PUDD"
+        '
+        'BBPrintChecked
+        '
+        Me.BBPrintChecked.Caption = "Print Checked"
+        Me.BBPrintChecked.Id = 3
+        Me.BBPrintChecked.Name = "BBPrintChecked"
+        '
+        'BBPrintAll
+        '
+        Me.BBPrintAll.Caption = "Print All"
+        Me.BBPrintAll.Id = 4
+        Me.BBPrintAll.Name = "BBPrintAll"
+        '
+        'BMDD
+        '
+        Me.BMDD.DockControls.Add(Me.barDockControlTop)
+        Me.BMDD.DockControls.Add(Me.barDockControlBottom)
+        Me.BMDD.DockControls.Add(Me.barDockControlLeft)
+        Me.BMDD.DockControls.Add(Me.barDockControlRight)
+        Me.BMDD.Form = Me
+        Me.BMDD.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.BarButtonItem1, Me.BarLargeButtonItem1, Me.BarButtonItem2, Me.BBPrintChecked, Me.BBPrintAll})
+        Me.BMDD.MaxItemId = 5
+        '
+        'barDockControlTop
+        '
+        Me.barDockControlTop.CausesValidation = False
+        Me.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top
+        Me.barDockControlTop.Location = New System.Drawing.Point(0, 0)
+        Me.barDockControlTop.Size = New System.Drawing.Size(580, 0)
+        '
+        'barDockControlBottom
+        '
+        Me.barDockControlBottom.CausesValidation = False
+        Me.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.barDockControlBottom.Location = New System.Drawing.Point(0, 418)
+        Me.barDockControlBottom.Size = New System.Drawing.Size(580, 0)
+        '
+        'barDockControlLeft
+        '
+        Me.barDockControlLeft.CausesValidation = False
+        Me.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left
+        Me.barDockControlLeft.Location = New System.Drawing.Point(0, 0)
+        Me.barDockControlLeft.Size = New System.Drawing.Size(0, 418)
+        '
+        'barDockControlRight
+        '
+        Me.barDockControlRight.CausesValidation = False
+        Me.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right
+        Me.barDockControlRight.Location = New System.Drawing.Point(580, 0)
+        Me.barDockControlRight.Size = New System.Drawing.Size(0, 418)
+        '
+        'BarButtonItem1
+        '
+        Me.BarButtonItem1.Id = 0
+        Me.BarButtonItem1.Name = "BarButtonItem1"
+        '
+        'BarLargeButtonItem1
+        '
+        Me.BarLargeButtonItem1.Caption = "Print F. G. Purchase Order"
+        Me.BarLargeButtonItem1.Id = 1
+        Me.BarLargeButtonItem1.Name = "BarLargeButtonItem1"
+        '
+        'BarButtonItem2
+        '
+        Me.BarButtonItem2.Caption = "Print BOM"
+        Me.BarButtonItem2.Id = 2
+        Me.BarButtonItem2.Name = "BarButtonItem2"
+        '
         'CheckEditSelAll
         '
         Me.CheckEditSelAll.Location = New System.Drawing.Point(9, 10)
@@ -69,15 +170,6 @@ Partial Class FormAccessMappingSingle
         Me.CheckEditSelAll.Properties.Caption = "Select All"
         Me.CheckEditSelAll.Size = New System.Drawing.Size(75, 19)
         Me.CheckEditSelAll.TabIndex = 2
-        '
-        'BtnSave
-        '
-        Me.BtnSave.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BtnSave.Location = New System.Drawing.Point(503, 2)
-        Me.BtnSave.Name = "BtnSave"
-        Me.BtnSave.Size = New System.Drawing.Size(75, 34)
-        Me.BtnSave.TabIndex = 1
-        Me.BtnSave.Text = "Save"
         '
         'BtnClose
         '
@@ -88,6 +180,15 @@ Partial Class FormAccessMappingSingle
         Me.BtnClose.Size = New System.Drawing.Size(75, 34)
         Me.BtnClose.TabIndex = 0
         Me.BtnClose.Text = "Close"
+        '
+        'BtnSave
+        '
+        Me.BtnSave.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnSave.Location = New System.Drawing.Point(503, 2)
+        Me.BtnSave.Name = "BtnSave"
+        Me.BtnSave.Size = New System.Drawing.Size(75, 34)
+        Me.BtnSave.TabIndex = 1
+        Me.BtnSave.Text = "Save"
         '
         'PanelControl1
         '
@@ -224,17 +325,22 @@ Partial Class FormAccessMappingSingle
         Me.Controls.Add(Me.GCMenu)
         Me.Controls.Add(Me.PanelControl1)
         Me.Controls.Add(Me.PCClose)
+        Me.Controls.Add(Me.barDockControlLeft)
+        Me.Controls.Add(Me.barDockControlRight)
+        Me.Controls.Add(Me.barDockControlBottom)
+        Me.Controls.Add(Me.barDockControlTop)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.LookAndFeel.SkinName = "Blue"
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FormAccessMappingSingle"
         Me.ShowInTaskbar = False
-        Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Mapping Access"
         CType(Me.PCClose, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PCClose.ResumeLayout(False)
+        CType(Me.PUDD, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BMDD, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CheckEditSelAll.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
@@ -244,6 +350,7 @@ Partial Class FormAccessMappingSingle
         CType(Me.GVMenu, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents PCClose As DevExpress.XtraEditors.PanelControl
@@ -264,4 +371,16 @@ Partial Class FormAccessMappingSingle
     Friend WithEvents GridColumnIdForm As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents CheckEditSelAll As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents GridColumnIsChanegd As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents DDBPrint As DevExpress.XtraEditors.DropDownButton
+    Friend WithEvents PUDD As DevExpress.XtraBars.PopupMenu
+    Friend WithEvents BMDD As DevExpress.XtraBars.BarManager
+    Friend WithEvents barDockControlTop As DevExpress.XtraBars.BarDockControl
+    Friend WithEvents barDockControlBottom As DevExpress.XtraBars.BarDockControl
+    Friend WithEvents barDockControlLeft As DevExpress.XtraBars.BarDockControl
+    Friend WithEvents barDockControlRight As DevExpress.XtraBars.BarDockControl
+    Friend WithEvents BarButtonItem1 As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents BarLargeButtonItem1 As DevExpress.XtraBars.BarLargeButtonItem
+    Friend WithEvents BarButtonItem2 As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents BBPrintChecked As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents BBPrintAll As DevExpress.XtraBars.BarButtonItem
 End Class

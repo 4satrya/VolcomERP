@@ -25,6 +25,7 @@ Partial Class FormSamplePurchaseDet
         Me.GroupControl3 = New DevExpress.XtraEditors.GroupControl()
         Me.BPrePrint = New DevExpress.XtraEditors.SimpleButton()
         Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
+        Me.BtnAttachment = New DevExpress.XtraEditors.SimpleButton()
         Me.BMark = New DevExpress.XtraEditors.SimpleButton()
         Me.BPrint = New DevExpress.XtraEditors.SimpleButton()
         Me.BCancel = New DevExpress.XtraEditors.SimpleButton()
@@ -115,6 +116,8 @@ Partial Class FormSamplePurchaseDet
         Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
         Me.TEPONumber = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
+        Me.ImgBut = New DevExpress.Utils.ImageCollection(Me.components)
+        CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EPSamplePurc, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl3.SuspendLayout()
@@ -161,6 +164,7 @@ Partial Class FormSamplePurchaseDet
         CType(Me.TECompName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TECompCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEPONumber.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ImgBut, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'EPSamplePurc
@@ -170,6 +174,7 @@ Partial Class FormSamplePurchaseDet
         'GroupControl3
         '
         Me.GroupControl3.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupControl3.Controls.Add(Me.BtnAttachment)
         Me.GroupControl3.Controls.Add(Me.BPrePrint)
         Me.GroupControl3.Controls.Add(Me.BMark)
         Me.GroupControl3.Controls.Add(Me.BPrint)
@@ -180,6 +185,18 @@ Partial Class FormSamplePurchaseDet
         Me.GroupControl3.Name = "GroupControl3"
         Me.GroupControl3.Size = New System.Drawing.Size(909, 40)
         Me.GroupControl3.TabIndex = 36
+        '
+        'BtnAttachment
+        '
+        Me.BtnAttachment.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnAttachment.ImageIndex = 10
+        Me.BtnAttachment.ImageList = Me.ImgBut
+        Me.BtnAttachment.Location = New System.Drawing.Point(484, 2)
+        Me.BtnAttachment.Name = "BtnAttachment"
+        Me.BtnAttachment.Size = New System.Drawing.Size(97, 34)
+        Me.BtnAttachment.TabIndex = 14
+        Me.BtnAttachment.Text = "Attachment"
+        Me.BtnAttachment.Visible = False
         '
         'BPrePrint
         '
@@ -230,7 +247,7 @@ Partial Class FormSamplePurchaseDet
         Me.BPrint.Dock = System.Windows.Forms.DockStyle.Right
         Me.BPrint.Enabled = False
         Me.BPrint.ImageIndex = 6
-        Me.BPrint.ImageList = Me.LargeImageCollection
+        Me.BPrint.ImageList = Me.ImgBut
         Me.BPrint.Location = New System.Drawing.Point(682, 2)
         Me.BPrint.Name = "BPrint"
         Me.BPrint.Size = New System.Drawing.Size(75, 36)
@@ -241,7 +258,7 @@ Partial Class FormSamplePurchaseDet
         '
         Me.BCancel.Dock = System.Windows.Forms.DockStyle.Right
         Me.BCancel.ImageIndex = 5
-        Me.BCancel.ImageList = Me.LargeImageCollection
+        Me.BCancel.ImageList = Me.ImgBut
         Me.BCancel.Location = New System.Drawing.Point(757, 2)
         Me.BCancel.Name = "BCancel"
         Me.BCancel.Size = New System.Drawing.Size(75, 36)
@@ -253,7 +270,7 @@ Partial Class FormSamplePurchaseDet
         Me.BSave.Dock = System.Windows.Forms.DockStyle.Right
         Me.BSave.Enabled = False
         Me.BSave.ImageIndex = 7
-        Me.BSave.ImageList = Me.LargeImageCollection
+        Me.BSave.ImageList = Me.ImgBut
         Me.BSave.Location = New System.Drawing.Point(832, 2)
         Me.BSave.Name = "BSave"
         Me.BSave.Size = New System.Drawing.Size(75, 36)
@@ -853,6 +870,18 @@ Partial Class FormSamplePurchaseDet
         Me.BAdd.TabIndex = 18
         Me.BAdd.Text = "Add"
         '
+        'Bdel
+        '
+        Me.Bdel.Dock = System.Windows.Forms.DockStyle.Right
+        Me.Bdel.Enabled = False
+        Me.Bdel.ImageIndex = 1
+        Me.Bdel.ImageList = Me.LargeImageCollection
+        Me.Bdel.Location = New System.Drawing.Point(614, 0)
+        Me.Bdel.Name = "Bdel"
+        Me.Bdel.Size = New System.Drawing.Size(91, 38)
+        Me.Bdel.TabIndex = 17
+        Me.Bdel.Text = "Delete"
+        '
         'GroupGeneralHeader
         '
         Me.GroupGeneralHeader.CaptionLocation = DevExpress.Utils.Locations.Left
@@ -1184,6 +1213,23 @@ Partial Class FormSamplePurchaseDet
         Me.LabelControl3.TabIndex = 86
         Me.LabelControl3.Text = "PO Number"
         '
+        'ImgBut
+        '
+        Me.ImgBut.ImageSize = New System.Drawing.Size(24, 24)
+        Me.ImgBut.ImageStream = CType(resources.GetObject("ImgBut.ImageStream"), DevExpress.Utils.ImageCollectionStreamer)
+        Me.ImgBut.Images.SetKeyName(0, "20_24x24.png")
+        Me.ImgBut.Images.SetKeyName(1, "8_24x24.png")
+        Me.ImgBut.Images.SetKeyName(2, "23_24x24.png")
+        Me.ImgBut.Images.SetKeyName(3, "arrow_refresh.png")
+        Me.ImgBut.Images.SetKeyName(4, "check_mark.png")
+        Me.ImgBut.Images.SetKeyName(5, "gnome_application_exit (1).png")
+        Me.ImgBut.Images.SetKeyName(6, "printer_3.png")
+        Me.ImgBut.Images.SetKeyName(7, "save.png")
+        Me.ImgBut.Images.SetKeyName(8, "31_24x24.png")
+        Me.ImgBut.Images.SetKeyName(9, "18_24x24.png")
+        Me.ImgBut.Images.SetKeyName(10, "attachment-icon.png")
+        Me.ImgBut.Images.SetKeyName(11, "document_32.png")
+        '
         'FormSamplePurchaseDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1248,6 +1294,7 @@ Partial Class FormSamplePurchaseDet
         CType(Me.TECompName.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TECompCode.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEPONumber.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ImgBut, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1345,4 +1392,6 @@ Partial Class FormSamplePurchaseDet
     Friend WithEvents LabelControl26 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents TEComm As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelControl25 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents BtnAttachment As DevExpress.XtraEditors.SimpleButton
+    Public WithEvents ImgBut As DevExpress.Utils.ImageCollection
 End Class

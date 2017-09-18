@@ -53,6 +53,12 @@ Partial Class FormAccess
         Me.ColumnIdRole = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GolumnRoleMaster = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.XTPLog = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCLog = New DevExpress.XtraGrid.GridControl()
+        Me.GVLog = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GCFilter = New DevExpress.XtraEditors.GroupControl()
         Me.BtnView = New DevExpress.XtraEditors.SimpleButton()
         Me.BHide = New DevExpress.XtraEditors.SimpleButton()
@@ -61,12 +67,8 @@ Partial Class FormAccess
         Me.DEFrom = New DevExpress.XtraEditors.DateEdit()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
-        Me.GCLog = New DevExpress.XtraGrid.GridControl()
-        Me.GVLog = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PCBack, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PCBack.SuspendLayout()
         CType(Me.XTCMenuManage, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -88,14 +90,14 @@ Partial Class FormAccess
         CType(Me.GCRole, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVRole, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTPLog.SuspendLayout()
+        CType(Me.GCLog, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVLog, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GCFilter, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GCFilter.SuspendLayout()
         CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEUntil.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GCLog, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GVLog, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PCBack
@@ -388,6 +390,58 @@ Partial Class FormAccess
         Me.XTPLog.Size = New System.Drawing.Size(656, 383)
         Me.XTPLog.Text = "Log"
         '
+        'GCLog
+        '
+        Me.GCLog.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCLog.Location = New System.Drawing.Point(0, 39)
+        Me.GCLog.MainView = Me.GVLog
+        Me.GCLog.Name = "GCLog"
+        Me.GCLog.Size = New System.Drawing.Size(656, 344)
+        Me.GCLog.TabIndex = 5
+        Me.GCLog.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVLog})
+        '
+        'GVLog
+        '
+        Me.GVLog.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumn9, Me.GridColumn8, Me.GridColumn7})
+        Me.GVLog.GridControl = Me.GCLog
+        Me.GVLog.Name = "GVLog"
+        Me.GVLog.OptionsBehavior.Editable = False
+        Me.GVLog.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn4
+        '
+        Me.GridColumn4.Caption = "Name"
+        Me.GridColumn4.FieldName = "employee_name"
+        Me.GridColumn4.Name = "GridColumn4"
+        Me.GridColumn4.Visible = True
+        Me.GridColumn4.VisibleIndex = 0
+        '
+        'GridColumn5
+        '
+        Me.GridColumn5.Caption = "Position"
+        Me.GridColumn5.FieldName = "employee_position"
+        Me.GridColumn5.Name = "GridColumn5"
+        Me.GridColumn5.Visible = True
+        Me.GridColumn5.VisibleIndex = 1
+        '
+        'GridColumn6
+        '
+        Me.GridColumn6.Caption = "Type"
+        Me.GridColumn6.FieldName = "type_display"
+        Me.GridColumn6.Name = "GridColumn6"
+        Me.GridColumn6.Visible = True
+        Me.GridColumn6.VisibleIndex = 2
+        '
+        'GridColumn7
+        '
+        Me.GridColumn7.Caption = "Time"
+        Me.GridColumn7.DisplayFormat.FormatString = "dd\/MM\/yyyy hh:mm tt"
+        Me.GridColumn7.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn7.FieldName = "time"
+        Me.GridColumn7.Name = "GridColumn7"
+        Me.GridColumn7.Visible = True
+        Me.GridColumn7.VisibleIndex = 5
+        '
         'GCFilter
         '
         Me.GCFilter.CaptionLocation = DevExpress.Utils.Locations.Left
@@ -475,57 +529,21 @@ Partial Class FormAccess
         Me.LabelControl3.TabIndex = 8892
         Me.LabelControl3.Text = "From"
         '
-        'GCLog
+        'GridColumn8
         '
-        Me.GCLog.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCLog.Location = New System.Drawing.Point(0, 39)
-        Me.GCLog.MainView = Me.GVLog
-        Me.GCLog.Name = "GCLog"
-        Me.GCLog.Size = New System.Drawing.Size(656, 344)
-        Me.GCLog.TabIndex = 5
-        Me.GCLog.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVLog})
+        Me.GridColumn8.Caption = "Version Number"
+        Me.GridColumn8.FieldName = "version_number"
+        Me.GridColumn8.Name = "GridColumn8"
+        Me.GridColumn8.Visible = True
+        Me.GridColumn8.VisibleIndex = 4
         '
-        'GVLog
+        'GridColumn9
         '
-        Me.GVLog.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumn7})
-        Me.GVLog.GridControl = Me.GCLog
-        Me.GVLog.Name = "GVLog"
-        Me.GVLog.OptionsBehavior.Editable = False
-        Me.GVLog.OptionsView.ShowGroupPanel = False
-        '
-        'GridColumn4
-        '
-        Me.GridColumn4.Caption = "Name"
-        Me.GridColumn4.FieldName = "employee_name"
-        Me.GridColumn4.Name = "GridColumn4"
-        Me.GridColumn4.Visible = True
-        Me.GridColumn4.VisibleIndex = 0
-        '
-        'GridColumn5
-        '
-        Me.GridColumn5.Caption = "Position"
-        Me.GridColumn5.FieldName = "employee_position"
-        Me.GridColumn5.Name = "GridColumn5"
-        Me.GridColumn5.Visible = True
-        Me.GridColumn5.VisibleIndex = 1
-        '
-        'GridColumn6
-        '
-        Me.GridColumn6.Caption = "Type"
-        Me.GridColumn6.FieldName = "type_display"
-        Me.GridColumn6.Name = "GridColumn6"
-        Me.GridColumn6.Visible = True
-        Me.GridColumn6.VisibleIndex = 2
-        '
-        'GridColumn7
-        '
-        Me.GridColumn7.Caption = "Time"
-        Me.GridColumn7.DisplayFormat.FormatString = "dd\/MM\/yyyy hh:mm tt"
-        Me.GridColumn7.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.GridColumn7.FieldName = "time"
-        Me.GridColumn7.Name = "GridColumn7"
-        Me.GridColumn7.Visible = True
-        Me.GridColumn7.VisibleIndex = 3
+        Me.GridColumn9.Caption = "IP Address"
+        Me.GridColumn9.FieldName = "ip_address"
+        Me.GridColumn9.Name = "GridColumn9"
+        Me.GridColumn9.Visible = True
+        Me.GridColumn9.VisibleIndex = 3
         '
         'FormAccess
         '
@@ -561,6 +579,8 @@ Partial Class FormAccess
         CType(Me.GCRole, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVRole, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XTPLog.ResumeLayout(False)
+        CType(Me.GCLog, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVLog, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GCFilter, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GCFilter.ResumeLayout(False)
         Me.GCFilter.PerformLayout()
@@ -568,8 +588,6 @@ Partial Class FormAccess
         CType(Me.DEUntil.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GCLog, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GVLog, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -620,4 +638,6 @@ Partial Class FormAccess
     Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn7 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn9 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn8 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

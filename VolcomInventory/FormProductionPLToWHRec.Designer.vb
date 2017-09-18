@@ -42,6 +42,8 @@ Partial Class FormProductionPLToWHRec
         Me.GridColumnTotal = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnVendor = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnLastUpdate = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.XTPPLInfo = New DevExpress.XtraTab.XtraTabPage()
         Me.SCCPL = New DevExpress.XtraEditors.SplitContainerControl()
         Me.GroupControlPL = New DevExpress.XtraEditors.GroupControl()
@@ -77,8 +79,7 @@ Partial Class FormProductionPLToWHRec
         Me.ViewMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.SMPrePrint = New System.Windows.Forms.ToolStripMenuItem()
         Me.SMPrint = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GridColumnLastUpdate = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnCodeRec = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XTCPL, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCPL.SuspendLayout()
         Me.XTPPList.SuspendLayout()
@@ -129,7 +130,7 @@ Partial Class FormProductionPLToWHRec
         '
         'GVPL
         '
-        Me.GVPL.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumnIdPLSample, Me.GridColumnIdContactFrom, Me.GridColumnIdCompContactTo, Me.GridColumn1, Me.GridColumnPLNumber, Me.GridColumnSRNumber, Me.GridColumnFrom, Me.GridColumnTo, Me.GridColumnPLDate, Me.GridColumnPLNote, Me.GridColumnSeasno, Me.GridColumnStatus, Me.GridColumnPLCategory, Me.GridColumnDesignMain, Me.GridColumnTotal, Me.GridColumnVendor, Me.GridColumn4, Me.GridColumnLastUpdate, Me.GridColumn6})
+        Me.GVPL.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumnIdPLSample, Me.GridColumnIdContactFrom, Me.GridColumnIdCompContactTo, Me.GridColumn1, Me.GridColumnPLNumber, Me.GridColumnSRNumber, Me.GridColumnFrom, Me.GridColumnTo, Me.GridColumnPLDate, Me.GridColumnPLNote, Me.GridColumnSeasno, Me.GridColumnStatus, Me.GridColumnPLCategory, Me.GridColumnDesignMain, Me.GridColumnTotal, Me.GridColumnVendor, Me.GridColumn4, Me.GridColumnLastUpdate, Me.GridColumn6, Me.GridColumnCodeRec})
         Me.GVPL.GridControl = Me.GCPL
         Me.GVPL.GroupCount = 1
         Me.GVPL.Name = "GVPL"
@@ -198,7 +199,7 @@ Partial Class FormProductionPLToWHRec
         Me.GridColumnFrom.FieldName = "comp_name_from"
         Me.GridColumnFrom.Name = "GridColumnFrom"
         Me.GridColumnFrom.Visible = True
-        Me.GridColumnFrom.VisibleIndex = 5
+        Me.GridColumnFrom.VisibleIndex = 6
         Me.GridColumnFrom.Width = 97
         '
         'GridColumnTo
@@ -207,7 +208,7 @@ Partial Class FormProductionPLToWHRec
         Me.GridColumnTo.FieldName = "comp_name_to"
         Me.GridColumnTo.Name = "GridColumnTo"
         Me.GridColumnTo.Visible = True
-        Me.GridColumnTo.VisibleIndex = 6
+        Me.GridColumnTo.VisibleIndex = 7
         Me.GridColumnTo.Width = 97
         '
         'GridColumnPLDate
@@ -218,7 +219,7 @@ Partial Class FormProductionPLToWHRec
         Me.GridColumnPLDate.FieldName = "pl_prod_order_rec_date"
         Me.GridColumnPLDate.Name = "GridColumnPLDate"
         Me.GridColumnPLDate.Visible = True
-        Me.GridColumnPLDate.VisibleIndex = 9
+        Me.GridColumnPLDate.VisibleIndex = 10
         Me.GridColumnPLDate.Width = 97
         '
         'GridColumnPLNote
@@ -241,7 +242,7 @@ Partial Class FormProductionPLToWHRec
         Me.GridColumnStatus.FieldName = "report_status"
         Me.GridColumnStatus.Name = "GridColumnStatus"
         Me.GridColumnStatus.Visible = True
-        Me.GridColumnStatus.VisibleIndex = 12
+        Me.GridColumnStatus.VisibleIndex = 13
         Me.GridColumnStatus.Width = 107
         '
         'GridColumnPLCategory
@@ -250,7 +251,7 @@ Partial Class FormProductionPLToWHRec
         Me.GridColumnPLCategory.FieldName = "pl_category"
         Me.GridColumnPLCategory.Name = "GridColumnPLCategory"
         Me.GridColumnPLCategory.Visible = True
-        Me.GridColumnPLCategory.VisibleIndex = 7
+        Me.GridColumnPLCategory.VisibleIndex = 8
         '
         'GridColumnDesignMain
         '
@@ -259,7 +260,7 @@ Partial Class FormProductionPLToWHRec
         Me.GridColumnDesignMain.FieldNameSortGroup = "id_design"
         Me.GridColumnDesignMain.Name = "GridColumnDesignMain"
         Me.GridColumnDesignMain.Visible = True
-        Me.GridColumnDesignMain.VisibleIndex = 3
+        Me.GridColumnDesignMain.VisibleIndex = 4
         '
         'GridColumnTotal
         '
@@ -270,7 +271,7 @@ Partial Class FormProductionPLToWHRec
         Me.GridColumnTotal.Name = "GridColumnTotal"
         Me.GridColumnTotal.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_qty", "{0:n0}")})
         Me.GridColumnTotal.Visible = True
-        Me.GridColumnTotal.VisibleIndex = 8
+        Me.GridColumnTotal.VisibleIndex = 9
         '
         'GridColumnVendor
         '
@@ -278,7 +279,7 @@ Partial Class FormProductionPLToWHRec
         Me.GridColumnVendor.FieldName = "vendor"
         Me.GridColumnVendor.Name = "GridColumnVendor"
         Me.GridColumnVendor.Visible = True
-        Me.GridColumnVendor.VisibleIndex = 4
+        Me.GridColumnVendor.VisibleIndex = 5
         '
         'GridColumn4
         '
@@ -287,6 +288,24 @@ Partial Class FormProductionPLToWHRec
         Me.GridColumn4.Name = "GridColumn4"
         Me.GridColumn4.Visible = True
         Me.GridColumn4.VisibleIndex = 2
+        '
+        'GridColumnLastUpdate
+        '
+        Me.GridColumnLastUpdate.Caption = "Last Update"
+        Me.GridColumnLastUpdate.DisplayFormat.FormatString = "dd MMMM yyyy'/'hh:mm tt"
+        Me.GridColumnLastUpdate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumnLastUpdate.FieldName = "last_update"
+        Me.GridColumnLastUpdate.Name = "GridColumnLastUpdate"
+        Me.GridColumnLastUpdate.Visible = True
+        Me.GridColumnLastUpdate.VisibleIndex = 11
+        '
+        'GridColumn6
+        '
+        Me.GridColumn6.Caption = "Updated By"
+        Me.GridColumn6.FieldName = "last_user"
+        Me.GridColumn6.Name = "GridColumn6"
+        Me.GridColumn6.Visible = True
+        Me.GridColumn6.VisibleIndex = 12
         '
         'XTPPLInfo
         '
@@ -620,23 +639,13 @@ Partial Class FormProductionPLToWHRec
         Me.SMPrint.Size = New System.Drawing.Size(136, 22)
         Me.SMPrint.Text = "Print"
         '
-        'GridColumnLastUpdate
+        'GridColumnCodeRec
         '
-        Me.GridColumnLastUpdate.Caption = "Last Update"
-        Me.GridColumnLastUpdate.DisplayFormat.FormatString = "dd MMMM yyyy'/'hh:mm tt"
-        Me.GridColumnLastUpdate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.GridColumnLastUpdate.FieldName = "last_update"
-        Me.GridColumnLastUpdate.Name = "GridColumnLastUpdate"
-        Me.GridColumnLastUpdate.Visible = True
-        Me.GridColumnLastUpdate.VisibleIndex = 10
-        '
-        'GridColumn6
-        '
-        Me.GridColumn6.Caption = "Updated By"
-        Me.GridColumn6.FieldName = "last_user"
-        Me.GridColumn6.Name = "GridColumn6"
-        Me.GridColumn6.Visible = True
-        Me.GridColumn6.VisibleIndex = 11
+        Me.GridColumnCodeRec.Caption = "Code"
+        Me.GridColumnCodeRec.FieldName = "code"
+        Me.GridColumnCodeRec.Name = "GridColumnCodeRec"
+        Me.GridColumnCodeRec.Visible = True
+        Me.GridColumnCodeRec.VisibleIndex = 3
         '
         'FormProductionPLToWHRec
         '
@@ -731,4 +740,5 @@ Partial Class FormProductionPLToWHRec
     Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnLastUpdate As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnCodeRec As DevExpress.XtraGrid.Columns.GridColumn
 End Class

@@ -172,8 +172,8 @@
                 Dim id_currency As String = get_setup_field("id_currency_default")
                 If action = "ins" Then
                     'query main table
-                    Dim query_main As String = "INSERT tb_fg_price(id_design_price_type, fg_price_number, fg_price_date, fg_price_note, id_report_status) "
-                    query_main += "VALUES('" + id_design_price_type + "','" + header_number_sales("25") + "', NOW(), '" + fg_price_note + "', '1'); SELECT LAST_INSERT_ID(); "
+                    Dim query_main As String = "INSERT tb_fg_price(id_design_price_type, fg_price_number, fg_price_date, fg_price_note, id_report_status,id_user_created) "
+                    query_main += "VALUES('" + id_design_price_type + "','" + header_number_sales("25") + "', NOW(), '" + fg_price_note + "', '1','" + id_user + "'); SELECT LAST_INSERT_ID(); "
                     id_fg_price = execute_query(query_main, 0, True, "", "", "", "")
                     increase_inc_sales("25")
 

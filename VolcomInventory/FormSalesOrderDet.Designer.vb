@@ -45,10 +45,11 @@ Partial Class FormSalesOrderDet
         Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl7 = New DevExpress.XtraEditors.LabelControl()
         Me.DEForm = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelPeriod = New DevExpress.XtraEditors.LabelControl()
         Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
-        Me.BtnAttachment = New DevExpress.XtraEditors.SimpleButton()
-        Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
         Me.BtnXlsBOF = New DevExpress.XtraEditors.SimpleButton()
+        Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
+        Me.BtnAttachment = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnPrint = New DevExpress.XtraEditors.SimpleButton()
         Me.SimpleButton1 = New DevExpress.XtraEditors.SimpleButton()
         Me.BMark = New DevExpress.XtraEditors.SimpleButton()
@@ -86,6 +87,9 @@ Partial Class FormSalesOrderDet
         Me.GridColumnQtyAvail = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIsFound = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnErr = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnNumber = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnFrom = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnTo = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControlNav = New DevExpress.XtraEditors.PanelControl()
         Me.BtnImportExcelNew = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnImportExcel = New DevExpress.XtraEditors.SimpleButton()
@@ -95,6 +99,9 @@ Partial Class FormSalesOrderDet
         Me.BtnAddV3 = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnAddV2 = New DevExpress.XtraEditors.SimpleButton()
         Me.EPForm = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.GroupUni = New DevExpress.XtraEditors.GroupControl()
+        Me.LEUniType = New DevExpress.XtraEditors.LookUpEdit()
+        Me.LEPeriodx = New DevExpress.XtraEditors.LookUpEdit()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
         CType(Me.PanelControlTopLeft, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -131,6 +138,10 @@ Partial Class FormSalesOrderDet
         CType(Me.PanelControlNav, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlNav.SuspendLayout()
         CType(Me.EPForm, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GroupUni, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupUni.SuspendLayout()
+        CType(Me.LEUniType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LEPeriodx.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupGeneralHeader
@@ -140,7 +151,7 @@ Partial Class FormSalesOrderDet
         Me.GroupGeneralHeader.Controls.Add(Me.PanelControlTopMain)
         Me.GroupGeneralHeader.Controls.Add(Me.PanelControlTopRight)
         Me.GroupGeneralHeader.Dock = System.Windows.Forms.DockStyle.Top
-        Me.GroupGeneralHeader.Location = New System.Drawing.Point(0, 0)
+        Me.GroupGeneralHeader.Location = New System.Drawing.Point(0, 36)
         Me.GroupGeneralHeader.Name = "GroupGeneralHeader"
         Me.GroupGeneralHeader.Size = New System.Drawing.Size(842, 136)
         Me.GroupGeneralHeader.TabIndex = 183
@@ -420,6 +431,15 @@ Partial Class FormSalesOrderDet
         Me.DEForm.TabIndex = 162
         Me.DEForm.TabStop = False
         '
+        'LabelPeriod
+        '
+        Me.LabelPeriod.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelPeriod.Location = New System.Drawing.Point(31, 11)
+        Me.LabelPeriod.Name = "LabelPeriod"
+        Me.LabelPeriod.Size = New System.Drawing.Size(70, 13)
+        Me.LabelPeriod.TabIndex = 8895
+        Me.LabelPeriod.Text = "Uniform Period"
+        '
         'PanelControl3
         '
         Me.PanelControl3.Controls.Add(Me.BtnXlsBOF)
@@ -437,16 +457,18 @@ Partial Class FormSalesOrderDet
         Me.PanelControl3.Size = New System.Drawing.Size(842, 38)
         Me.PanelControl3.TabIndex = 186
         '
-        'BtnAttachment
+        'BtnXlsBOF
         '
-        Me.BtnAttachment.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BtnAttachment.ImageIndex = 10
-        Me.BtnAttachment.ImageList = Me.LargeImageCollection
-        Me.BtnAttachment.Location = New System.Drawing.Point(516, 2)
-        Me.BtnAttachment.Name = "BtnAttachment"
-        Me.BtnAttachment.Size = New System.Drawing.Size(99, 34)
-        Me.BtnAttachment.TabIndex = 13
-        Me.BtnAttachment.Text = "Attachment"
+        Me.BtnXlsBOF.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnXlsBOF.Image = CType(resources.GetObject("BtnXlsBOF.Image"), System.Drawing.Image)
+        Me.BtnXlsBOF.ImageIndex = 11
+        Me.BtnXlsBOF.ImageList = Me.LargeImageCollection
+        Me.BtnXlsBOF.Location = New System.Drawing.Point(400, 2)
+        Me.BtnXlsBOF.Name = "BtnXlsBOF"
+        Me.BtnXlsBOF.Size = New System.Drawing.Size(116, 34)
+        Me.BtnXlsBOF.TabIndex = 15
+        Me.BtnXlsBOF.Text = "Generate XLS"
+        Me.BtnXlsBOF.Visible = False
         '
         'LargeImageCollection
         '
@@ -465,18 +487,16 @@ Partial Class FormSalesOrderDet
         Me.LargeImageCollection.Images.SetKeyName(10, "attachment-icon.png")
         Me.LargeImageCollection.Images.SetKeyName(11, "ordering32.png")
         '
-        'BtnXlsBOF
+        'BtnAttachment
         '
-        Me.BtnXlsBOF.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BtnXlsBOF.Image = CType(resources.GetObject("BtnXlsBOF.Image"), System.Drawing.Image)
-        Me.BtnXlsBOF.ImageIndex = 11
-        Me.BtnXlsBOF.ImageList = Me.LargeImageCollection
-        Me.BtnXlsBOF.Location = New System.Drawing.Point(400, 2)
-        Me.BtnXlsBOF.Name = "BtnXlsBOF"
-        Me.BtnXlsBOF.Size = New System.Drawing.Size(116, 34)
-        Me.BtnXlsBOF.TabIndex = 15
-        Me.BtnXlsBOF.Text = "Generate XLS"
-        Me.BtnXlsBOF.Visible = False
+        Me.BtnAttachment.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnAttachment.ImageIndex = 10
+        Me.BtnAttachment.ImageList = Me.LargeImageCollection
+        Me.BtnAttachment.Location = New System.Drawing.Point(516, 2)
+        Me.BtnAttachment.Name = "BtnAttachment"
+        Me.BtnAttachment.Size = New System.Drawing.Size(99, 34)
+        Me.BtnAttachment.TabIndex = 13
+        Me.BtnAttachment.Text = "Attachment"
         '
         'BtnPrint
         '
@@ -619,9 +639,9 @@ Partial Class FormSalesOrderDet
         Me.GroupControlList.Controls.Add(Me.GCItemList)
         Me.GroupControlList.Controls.Add(Me.PanelControlNav)
         Me.GroupControlList.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GroupControlList.Location = New System.Drawing.Point(0, 136)
+        Me.GroupControlList.Location = New System.Drawing.Point(0, 172)
         Me.GroupControlList.Name = "GroupControlList"
-        Me.GroupControlList.Size = New System.Drawing.Size(842, 299)
+        Me.GroupControlList.Size = New System.Drawing.Size(842, 263)
         Me.GroupControlList.TabIndex = 184
         Me.GroupControlList.Text = "Item List"
         '
@@ -633,13 +653,13 @@ Partial Class FormSalesOrderDet
         Me.GCItemList.MainView = Me.GVItemList
         Me.GCItemList.Name = "GCItemList"
         Me.GCItemList.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemSpinEdit1})
-        Me.GCItemList.Size = New System.Drawing.Size(820, 260)
+        Me.GCItemList.Size = New System.Drawing.Size(820, 224)
         Me.GCItemList.TabIndex = 4
         Me.GCItemList.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVItemList})
         '
         'GVItemList
         '
-        Me.GVItemList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumnCode, Me.GridColumnName, Me.GridColumnSize, Me.GridColumnPriceType, Me.GridColumnQty, Me.GridColumnPrice, Me.GridColumnAmount, Me.GridColumnRemark, Me.GridColumnUOM, Me.GridColumnIdSalesTarget, Me.GridColumnEanCode, Me.GridColumnIdDesign, Me.GridColumnIdProduct, Me.GridColumnIdSample, Me.GridColumnIdSalesOrderDet, Me.GridColumnIdDesignPrice, Me.GridColumnQtyAvail, Me.GridColumnIsFound, Me.GridColumnErr})
+        Me.GVItemList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumnCode, Me.GridColumnName, Me.GridColumnSize, Me.GridColumnPriceType, Me.GridColumnQty, Me.GridColumnPrice, Me.GridColumnAmount, Me.GridColumnRemark, Me.GridColumnUOM, Me.GridColumnIdSalesTarget, Me.GridColumnEanCode, Me.GridColumnIdDesign, Me.GridColumnIdProduct, Me.GridColumnIdSample, Me.GridColumnIdSalesOrderDet, Me.GridColumnIdDesignPrice, Me.GridColumnQtyAvail, Me.GridColumnIsFound, Me.GridColumnErr, Me.GridColumnNumber, Me.GridColumnFrom, Me.GridColumnTo})
         Me.GVItemList.GridControl = Me.GCItemList
         Me.GVItemList.Name = "GVItemList"
         Me.GVItemList.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[True]
@@ -864,6 +884,27 @@ Partial Class FormSalesOrderDet
         Me.GridColumnErr.Name = "GridColumnErr"
         Me.GridColumnErr.OptionsColumn.AllowEdit = False
         '
+        'GridColumnNumber
+        '
+        Me.GridColumnNumber.Caption = "Number"
+        Me.GridColumnNumber.FieldName = "number"
+        Me.GridColumnNumber.Name = "GridColumnNumber"
+        Me.GridColumnNumber.UnboundType = DevExpress.Data.UnboundColumnType.[String]
+        '
+        'GridColumnFrom
+        '
+        Me.GridColumnFrom.Caption = "From"
+        Me.GridColumnFrom.FieldName = "from"
+        Me.GridColumnFrom.Name = "GridColumnFrom"
+        Me.GridColumnFrom.UnboundType = DevExpress.Data.UnboundColumnType.[String]
+        '
+        'GridColumnTo
+        '
+        Me.GridColumnTo.Caption = "To"
+        Me.GridColumnTo.FieldName = "to"
+        Me.GridColumnTo.Name = "GridColumnTo"
+        Me.GridColumnTo.UnboundType = DevExpress.Data.UnboundColumnType.[String]
+        '
         'PanelControlNav
         '
         Me.PanelControlNav.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
@@ -971,6 +1012,36 @@ Partial Class FormSalesOrderDet
         '
         Me.EPForm.ContainerControl = Me
         '
+        'GroupUni
+        '
+        Me.GroupUni.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupUni.Controls.Add(Me.LEUniType)
+        Me.GroupUni.Controls.Add(Me.LEPeriodx)
+        Me.GroupUni.Controls.Add(Me.LabelPeriod)
+        Me.GroupUni.Dock = System.Windows.Forms.DockStyle.Top
+        Me.GroupUni.Location = New System.Drawing.Point(0, 0)
+        Me.GroupUni.Name = "GroupUni"
+        Me.GroupUni.Size = New System.Drawing.Size(842, 36)
+        Me.GroupUni.TabIndex = 182
+        '
+        'LEUniType
+        '
+        Me.LEUniType.Location = New System.Drawing.Point(296, 8)
+        Me.LEUniType.Name = "LEUniType"
+        Me.LEUniType.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.LEUniType.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_uni_type", "id", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("uni_type", "Type")})
+        Me.LEUniType.Size = New System.Drawing.Size(144, 20)
+        Me.LEUniType.TabIndex = 8903
+        '
+        'LEPeriodx
+        '
+        Me.LEPeriodx.Location = New System.Drawing.Point(121, 8)
+        Me.LEPeriodx.Name = "LEPeriodx"
+        Me.LEPeriodx.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.LEPeriodx.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_emp_uni_period", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("period_name", "Period"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("selection_date_start", "Start", 20, DevExpress.Utils.FormatType.DateTime, "dd\/MM\/yyyy", True, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("selection_date_end", "End", 20, DevExpress.Utils.FormatType.DateTime, "dd\/MM\/yyyy", True, DevExpress.Utils.HorzAlignment.[Default])})
+        Me.LEPeriodx.Size = New System.Drawing.Size(172, 20)
+        Me.LEPeriodx.TabIndex = 8901
+        '
         'FormSalesOrderDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -980,6 +1051,7 @@ Partial Class FormSalesOrderDet
         Me.Controls.Add(Me.GroupControl3)
         Me.Controls.Add(Me.PanelControl3)
         Me.Controls.Add(Me.GroupGeneralHeader)
+        Me.Controls.Add(Me.GroupUni)
         Me.MinimizeBox = False
         Me.Name = "FormSalesOrderDet"
         Me.ShowInTaskbar = False
@@ -1026,6 +1098,11 @@ Partial Class FormSalesOrderDet
         CType(Me.PanelControlNav, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControlNav.ResumeLayout(False)
         CType(Me.EPForm, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GroupUni, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupUni.ResumeLayout(False)
+        Me.GroupUni.PerformLayout()
+        CType(Me.LEUniType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LEPeriodx.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1103,4 +1180,11 @@ Partial Class FormSalesOrderDet
     Friend WithEvents GridColumnErr As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents BtnImportExcelNew As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BtnXlsBOF As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GridColumnFrom As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnTo As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnNumber As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LabelPeriod As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents GroupUni As DevExpress.XtraEditors.GroupControl
+    Friend WithEvents LEPeriodx As DevExpress.XtraEditors.LookUpEdit
+    Friend WithEvents LEUniType As DevExpress.XtraEditors.LookUpEdit
 End Class

@@ -46,6 +46,14 @@
 
         GCMarkNeed.DataSource = data
         GVMarkNeed.BestFitColumns()
+        Try
+            FormMain.checkNumberNotif()
+        Catch ex As Exception
+        End Try
+        Try
+            FormNotification.viewNotif()
+        Catch ex As Exception
+        End Try
     End Sub
     Sub view_mark_history()
         Dim date_start, date_until As String
@@ -4666,6 +4674,18 @@
             DEUntil.Properties.MinValue = DEStart.EditValue
         Catch ex As Exception
         End Try
+    End Sub
+
+    Private Sub FormWork_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+        If e.KeyCode = Keys.F2 Then
+            Cursor = Cursors.WaitCursor
+            Dim query_cek As String = "SELECT COUNT(*) AS `jum` FROM tb_work_quick_user w WHERE w.id_user='" + id_user + "' "
+            Dim data_cek As DataTable = execute_query(query_cek, -1, True, "", "", "", "")
+            If data_cek.Rows(0)("jum") > 0 Then
+                FormWorkQuick.ShowDialog()
+            End If
+            Cursor = Cursors.Default
+        End If
     End Sub
 
     'Private Sub GVMarkNeed_CustomColumnDisplayText(sender As Object, e As DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs) Handles GVMarkNeed.CustomColumnDisplayText

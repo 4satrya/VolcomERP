@@ -2,13 +2,13 @@
     Dim bnew_active As String = "1"
     Dim bedit_active As String = "1"
     Dim bdel_active As String = "1"
-
+    Public id_dept As String = "-1"
     Private Sub FormAccountingFakturScan_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewTrans()
     End Sub
 
     Sub viewTrans()
-        Dim query As String = "SELECT *, IF(a.id_faktur_type=2, a.acc_fak_scan_faktur_date, '-') AS `faktur_date_view` FROM tb_a_acc_fak_scan a INNER JOIN tb_lookup_faktur_type b ON a.id_faktur_type=b.id_faktur_type ORDER BY a.id_acc_fak_scan DESC "
+        Dim query As String = "SELECT *, IF(a.id_faktur_type=2, a.acc_fak_scan_faktur_date, '-') AS `faktur_date_view` FROM tb_a_acc_fak_scan a INNER JOIN tb_lookup_faktur_type b ON a.id_faktur_type=b.id_faktur_type WHERE id_departement='" & id_departement_user & "' ORDER BY a.id_acc_fak_scan DESC "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCFak.DataSource = data
         check_menu()

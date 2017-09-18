@@ -105,6 +105,10 @@ Partial Class FormViewProductionWO
         Me.TEWONumber = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
         Me.EPMatWO = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.TEBOMDiff = New DevExpress.XtraEditors.TextEdit()
+        Me.LBOMDiff = New DevExpress.XtraEditors.LabelControl()
+        Me.TEBOMUnitPrice = New DevExpress.XtraEditors.TextEdit()
+        Me.LBOMUnitPrice = New DevExpress.XtraEditors.LabelControl()
         CType(Me.GroupControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl3.SuspendLayout()
         CType(Me.GroupGeneralFooter, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -155,6 +159,8 @@ Partial Class FormViewProductionWO
         CType(Me.TECompCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEWONumber.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EPMatWO, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TEBOMDiff.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TEBOMUnitPrice.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupControl3
@@ -163,9 +169,9 @@ Partial Class FormViewProductionWO
         Me.GroupControl3.Controls.Add(Me.BAttach)
         Me.GroupControl3.Controls.Add(Me.BMark)
         Me.GroupControl3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GroupControl3.Location = New System.Drawing.Point(0, 561)
+        Me.GroupControl3.Location = New System.Drawing.Point(0, 554)
         Me.GroupControl3.Name = "GroupControl3"
-        Me.GroupControl3.Size = New System.Drawing.Size(909, 63)
+        Me.GroupControl3.Size = New System.Drawing.Size(909, 70)
         Me.GroupControl3.TabIndex = 60
         '
         'BAttach
@@ -173,14 +179,14 @@ Partial Class FormViewProductionWO
         Me.BAttach.Dock = System.Windows.Forms.DockStyle.Fill
         Me.BAttach.Location = New System.Drawing.Point(20, 2)
         Me.BAttach.Name = "BAttach"
-        Me.BAttach.Size = New System.Drawing.Size(887, 30)
+        Me.BAttach.Size = New System.Drawing.Size(887, 37)
         Me.BAttach.TabIndex = 5
         Me.BAttach.Text = "Attachment"
         '
         'BMark
         '
         Me.BMark.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.BMark.Location = New System.Drawing.Point(20, 32)
+        Me.BMark.Location = New System.Drawing.Point(20, 39)
         Me.BMark.Name = "BMark"
         Me.BMark.Size = New System.Drawing.Size(887, 29)
         Me.BMark.TabIndex = 4
@@ -213,7 +219,7 @@ Partial Class FormViewProductionWO
         Me.GroupGeneralFooter.Controls.Add(Me.TECompShipTo)
         Me.GroupGeneralFooter.Controls.Add(Me.LabelControl23)
         Me.GroupGeneralFooter.Dock = System.Windows.Forms.DockStyle.Top
-        Me.GroupGeneralFooter.Location = New System.Drawing.Point(0, 406)
+        Me.GroupGeneralFooter.Location = New System.Drawing.Point(0, 399)
         Me.GroupGeneralFooter.Name = "GroupGeneralFooter"
         Me.GroupGeneralFooter.Size = New System.Drawing.Size(909, 155)
         Me.GroupGeneralFooter.TabIndex = 59
@@ -474,9 +480,9 @@ Partial Class FormViewProductionWO
         Me.GConListPurchase.CaptionLocation = DevExpress.Utils.Locations.Left
         Me.GConListPurchase.Controls.Add(Me.PanelControl1)
         Me.GConListPurchase.Dock = System.Windows.Forms.DockStyle.Top
-        Me.GConListPurchase.Location = New System.Drawing.Point(0, 182)
+        Me.GConListPurchase.Location = New System.Drawing.Point(0, 195)
         Me.GConListPurchase.Name = "GConListPurchase"
-        Me.GConListPurchase.Size = New System.Drawing.Size(909, 224)
+        Me.GConListPurchase.Size = New System.Drawing.Size(909, 204)
         Me.GConListPurchase.TabIndex = 58
         Me.GConListPurchase.Text = "List Purchase"
         '
@@ -489,7 +495,7 @@ Partial Class FormViewProductionWO
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelControl1.Location = New System.Drawing.Point(20, 2)
         Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(887, 220)
+        Me.PanelControl1.Size = New System.Drawing.Size(887, 200)
         Me.PanelControl1.TabIndex = 19
         '
         'GCListPurchase
@@ -499,7 +505,7 @@ Partial Class FormViewProductionWO
         Me.GCListPurchase.MainView = Me.GVListPurchase
         Me.GCListPurchase.Margin = New System.Windows.Forms.Padding(0)
         Me.GCListPurchase.Name = "GCListPurchase"
-        Me.GCListPurchase.Size = New System.Drawing.Size(887, 220)
+        Me.GCListPurchase.Size = New System.Drawing.Size(887, 200)
         Me.GCListPurchase.TabIndex = 0
         Me.GCListPurchase.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVListPurchase})
         '
@@ -657,6 +663,10 @@ Partial Class FormViewProductionWO
         'GroupGeneralHeader
         '
         Me.GroupGeneralHeader.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupGeneralHeader.Controls.Add(Me.TEBOMDiff)
+        Me.GroupGeneralHeader.Controls.Add(Me.LBOMDiff)
+        Me.GroupGeneralHeader.Controls.Add(Me.TEBOMUnitPrice)
+        Me.GroupGeneralHeader.Controls.Add(Me.LBOMUnitPrice)
         Me.GroupGeneralHeader.Controls.Add(Me.CheckEditMainVendor)
         Me.GroupGeneralHeader.Controls.Add(Me.DEDueDate)
         Me.GroupGeneralHeader.Controls.Add(Me.DEDateNow)
@@ -694,7 +704,7 @@ Partial Class FormViewProductionWO
         Me.GroupGeneralHeader.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupGeneralHeader.Location = New System.Drawing.Point(0, 0)
         Me.GroupGeneralHeader.Name = "GroupGeneralHeader"
-        Me.GroupGeneralHeader.Size = New System.Drawing.Size(909, 182)
+        Me.GroupGeneralHeader.Size = New System.Drawing.Size(909, 195)
         Me.GroupGeneralHeader.TabIndex = 57
         '
         'CheckEditMainVendor
@@ -795,7 +805,7 @@ Partial Class FormViewProductionWO
         'TEDesignCode
         '
         Me.TEDesignCode.EditValue = ""
-        Me.TEDesignCode.Location = New System.Drawing.Point(706, 136)
+        Me.TEDesignCode.Location = New System.Drawing.Point(706, 131)
         Me.TEDesignCode.Name = "TEDesignCode"
         Me.TEDesignCode.Properties.EditValueChangedDelay = 1
         Me.TEDesignCode.Properties.ReadOnly = True
@@ -1106,6 +1116,54 @@ Partial Class FormViewProductionWO
         '
         Me.EPMatWO.ContainerControl = Me
         '
+        'TEBOMDiff
+        '
+        Me.TEBOMDiff.EditValue = ""
+        Me.TEBOMDiff.Location = New System.Drawing.Point(706, 159)
+        Me.TEBOMDiff.Name = "TEBOMDiff"
+        Me.TEBOMDiff.Properties.Appearance.Options.UseTextOptions = True
+        Me.TEBOMDiff.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.TEBOMDiff.Properties.EditValueChangedDelay = 1
+        Me.TEBOMDiff.Properties.Mask.EditMask = "N2"
+        Me.TEBOMDiff.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
+        Me.TEBOMDiff.Properties.Mask.SaveLiteral = False
+        Me.TEBOMDiff.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.TEBOMDiff.Properties.ReadOnly = True
+        Me.TEBOMDiff.Size = New System.Drawing.Size(191, 20)
+        Me.TEBOMDiff.TabIndex = 181
+        '
+        'LBOMDiff
+        '
+        Me.LBOMDiff.Location = New System.Drawing.Point(634, 162)
+        Me.LBOMDiff.Name = "LBOMDiff"
+        Me.LBOMDiff.Size = New System.Drawing.Size(43, 13)
+        Me.LBOMDiff.TabIndex = 180
+        Me.LBOMDiff.Text = "BOM Diff"
+        '
+        'TEBOMUnitPrice
+        '
+        Me.TEBOMUnitPrice.EditValue = ""
+        Me.TEBOMUnitPrice.Location = New System.Drawing.Point(454, 159)
+        Me.TEBOMUnitPrice.Name = "TEBOMUnitPrice"
+        Me.TEBOMUnitPrice.Properties.Appearance.Options.UseTextOptions = True
+        Me.TEBOMUnitPrice.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.TEBOMUnitPrice.Properties.EditValueChangedDelay = 1
+        Me.TEBOMUnitPrice.Properties.Mask.EditMask = "N2"
+        Me.TEBOMUnitPrice.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
+        Me.TEBOMUnitPrice.Properties.Mask.SaveLiteral = False
+        Me.TEBOMUnitPrice.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.TEBOMUnitPrice.Properties.ReadOnly = True
+        Me.TEBOMUnitPrice.Size = New System.Drawing.Size(163, 20)
+        Me.TEBOMUnitPrice.TabIndex = 179
+        '
+        'LBOMUnitPrice
+        '
+        Me.LBOMUnitPrice.Location = New System.Drawing.Point(357, 162)
+        Me.LBOMUnitPrice.Name = "LBOMUnitPrice"
+        Me.LBOMUnitPrice.Size = New System.Drawing.Size(70, 13)
+        Me.LBOMUnitPrice.TabIndex = 178
+        Me.LBOMUnitPrice.Text = "BOM Unit Price"
+        '
         'FormViewProductionWO
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1174,6 +1232,8 @@ Partial Class FormViewProductionWO
         CType(Me.TECompCode.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEWONumber.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EPMatWO, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TEBOMDiff.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TEBOMUnitPrice.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1262,4 +1322,8 @@ Partial Class FormViewProductionWO
     Friend WithEvents DEEstRecDate As DevExpress.XtraEditors.DateEdit
     Friend WithEvents CheckEditMainVendor As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents BAttach As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents TEBOMDiff As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LBOMDiff As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents TEBOMUnitPrice As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LBOMUnitPrice As DevExpress.XtraEditors.LabelControl
 End Class

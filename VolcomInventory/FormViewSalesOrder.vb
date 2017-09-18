@@ -10,6 +10,7 @@
     Public id_comp_par As String = "-1"
     Dim id_comp_cat_wh As String = "-1"
     Public is_print As String = "-1"
+    Dim id_so_status As String = "-1"
 
     Private Sub FormViewSalesOrder_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Cursor = Cursors.WaitCursor
@@ -31,7 +32,7 @@
         'query view based on edit id's
         Dim query As String = "SELECT a.id_so_status, a.id_sales_order, a.id_store_contact_to, (d.id_comp) AS id_store,(d.comp_name) AS store_name_to, (d.comp_number) AS store_number_to, (d.address_primary) AS store_address_to, a.id_warehouse_contact_to, (wh.id_comp) AS id_comp_par,(wh.comp_name) AS warehouse_name_to, (wh.comp_number) AS warehouse_number_to, a.id_report_status, f.report_status, "
         query += "a.sales_order_note, a.sales_order_date, a.sales_order_note, a.sales_order_number, "
-        query += "DATE_FORMAT(a.sales_order_date,'%Y-%m-%d') AS sales_order_datex, a.id_so_type, IFNULL(an.fg_so_reff_number,'-') AS `fg_so_reff_number`, ps.id_prepare_status, ps.prepare_status "
+        query += "DATE_FORMAT(a.sales_order_date,'%Y-%m-%d') AS sales_order_datex, a.id_so_type, IFNULL(an.fg_so_reff_number,'-') AS `fg_so_reff_number`, ps.id_prepare_status, ps.prepare_status, eu.period_name, ut.uni_type, ube.employee_code, ube.employee_name "
         query += "FROM tb_sales_order a "
         query += "INNER JOIN tb_m_comp_contact c ON c.id_comp_contact = a.id_store_contact_to "
         query += "INNER JOIN tb_m_comp d ON c.id_comp = d.id_comp "
@@ -41,7 +42,11 @@
         query += "INNER JOIN tb_lookup_so_type g ON g.id_so_type = a.id_so_type "
         query += "INNER JOIN tb_lookup_so_status h ON h.id_so_status = a.id_so_status "
         query += "LEFT JOIN tb_fg_so_reff an ON an.id_fg_so_reff = a.id_fg_so_reff "
-        query += "INNER JOIN tb_lookup_prepare_status ps ON ps.id_prepare_status = a.id_prepare_status "
+        query += "INNER JOIN tb_lookup_prepare_status ps ON ps.id_prepare_status = a.id_prepare_status 
+        LEFT JOIN tb_emp_uni_period eu ON eu.id_emp_uni_period=a.id_emp_uni_period 
+        LEFT JOIN tb_lookup_uni_type ut ON ut.id_uni_type = a.id_uni_type 
+        LEFT JOIN tb_emp_uni_budget ub ON ub.id_emp_uni_budget = a.id_emp_uni_budget
+        LEFT JOIN tb_m_employee ube ON ube.id_employee = ub.id_employee "
         query += "WHERE a.id_sales_order = '" + id_sales_order + "' "
         Dim data As DataTable = execute_query(query, "-1", True, "", "", "", "")
 
@@ -66,6 +71,18 @@
         LETypeSO.ItemIndex = LETypeSO.Properties.GetDataSourceRowIndex("id_so_type", data.Rows(0)("id_so_type").ToString)
         LEStatusSO.ItemIndex = LEStatusSO.Properties.GetDataSourceRowIndex("id_so_status", data.Rows(0)("id_so_status").ToString)
         TxtPackingStatus.Text = data.Rows(0)("prepare_status").ToString
+
+        'uni
+        id_so_status = data.Rows(0)("id_so_status").ToString
+        If id_so_status = "7" Then
+            LabelUni1.Visible = True
+            LabelUni2.Visible = True
+            TxtUni1.Visible = True
+            TxtUni2.Visible = True
+            TxtUni1.Text = data.Rows(0)("employee_code").ToString
+            TxtUni2.Text = data.Rows(0)("employee_name").ToString
+        End If
+
         'detail2
         viewDetail()
         check_but()
@@ -100,7 +117,16 @@
         Report.LRecNumber.Text = TxtSalesOrderNumber.Text
         Report.LabelNote.Text = MENote.Text
         Report.LabelType.Text = LETypeSO.Text
-
+        If id_so_status = "7" Then
+            Report.LabelNIK.Visible = True
+            Report.LabelNIKDot.Visible = True
+            Report.LabelTitleNIK.Visible = True
+            Report.LabelName.Visible = True
+            Report.LabelNameDot.Visible = True
+            Report.LabelTitleName.Visible = True
+            Report.LabelNIK.Text = TxtUni1.Text
+            Report.LabelName.Text = TxtUni2.Text
+        End If
 
         'Show the report's preview. 
         Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)

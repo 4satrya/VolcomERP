@@ -15,14 +15,16 @@
         Dim query As String = "SELECT ret.id_sample_pl_ret, ret.sample_pl_ret_number, ret.sample_pl_ret_date, DATE_FORMAT(ret.sample_pl_ret_date,'%Y-%m-%d') AS sample_pl_datex, ret.sample_pl_ret_note,"
         query += " ret.id_wh_drawer, drw.wh_drawer_code, drw.wh_drawer, rck.id_wh_rack, loc.id_wh_locator,"
         query += " ret.id_comp_contact_to, getCompByContact(ret.id_comp_contact_to, 1) As id_comp_to, getCompByContact(ret.id_comp_contact_to, 5) As comp_to, getCompByContact(ret.id_comp_contact_to, 2) As comp_to_code, getCompByContact(ret.id_comp_contact_to, 3) As comp_to_name,"
-        query += " ret.id_report_status, stt.report_status"
-        query += " FROM tb_sample_pl_ret ret"
+        query += " ret.id_report_status, stt.report_status, IFNULL(SUM(sample_pl_ret_det_qty),0) AS `total` "
+        query += " FROM tb_sample_pl_ret ret 
+        LEFT JOIN tb_sample_pl_ret_det retd ON retd.id_sample_pl_ret = ret.id_sample_pl_ret "
         query += " INNER JOIN tb_lookup_report_status stt On ret.id_report_status = stt.id_report_status"
         query += " INNER JOIN tb_m_wh_drawer drw On drw.id_wh_drawer = ret.id_wh_drawer"
         query += " INNER JOIN tb_m_wh_rack rck On rck.id_wh_rack = drw.id_wh_rack"
         query += " INNER JOIN tb_m_wh_locator loc On loc.id_wh_locator = rck.id_wh_locator"
         query += " WHERE ret.id_sample_pl_ret>0 "
         query += condition + " "
+        query += " GROUP BY ret.id_sample_pl_ret "
         query += "ORDER BY ret.id_sample_pl_ret " + order_type
         Return query
     End Function

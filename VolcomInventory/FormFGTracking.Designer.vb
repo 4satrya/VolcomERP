@@ -19,54 +19,57 @@ Partial Class FormFGTracking
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
-        Me.GroupControlFilter = New DevExpress.XtraEditors.GroupControl
-        Me.DEUntil = New DevExpress.XtraEditors.DateEdit
-        Me.DEFrom = New DevExpress.XtraEditors.DateEdit
-        Me.BtnTracking = New DevExpress.XtraEditors.SimpleButton
-        Me.BtnEditCode = New DevExpress.XtraEditors.ButtonEdit
-        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl
-        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl
-        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl
-        Me.GroupControlInfo = New DevExpress.XtraEditors.GroupControl
-        Me.LabelColor = New DevExpress.XtraEditors.LabelControl
-        Me.LabelControl21 = New DevExpress.XtraEditors.LabelControl
-        Me.LabelControl19 = New DevExpress.XtraEditors.LabelControl
-        Me.LabelSource = New DevExpress.XtraEditors.LabelControl
-        Me.LabelControl17 = New DevExpress.XtraEditors.LabelControl
-        Me.LabelControl16 = New DevExpress.XtraEditors.LabelControl
-        Me.LabelBranding = New DevExpress.XtraEditors.LabelControl
-        Me.LabelControl15 = New DevExpress.XtraEditors.LabelControl
-        Me.LabelControl13 = New DevExpress.XtraEditors.LabelControl
-        Me.LabelDivision = New DevExpress.XtraEditors.LabelControl
-        Me.LabelControl11 = New DevExpress.XtraEditors.LabelControl
-        Me.LabelControl10 = New DevExpress.XtraEditors.LabelControl
-        Me.LabelSize = New DevExpress.XtraEditors.LabelControl
-        Me.LabelControl8 = New DevExpress.XtraEditors.LabelControl
-        Me.LabelControl7 = New DevExpress.XtraEditors.LabelControl
-        Me.LabelCode = New DevExpress.XtraEditors.LabelControl
-        Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl
-        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl
-        Me.LabelTitle = New DevExpress.XtraEditors.LabelControl
-        Me.PanelControlImg = New DevExpress.XtraEditors.PanelControl
-        Me.PictureEdit1 = New DevExpress.XtraEditors.PictureEdit
-        Me.BtnViewImg = New DevExpress.XtraEditors.SimpleButton
-        Me.GroupControlTraccking = New DevExpress.XtraEditors.GroupControl
-        Me.GCTracking = New DevExpress.XtraGrid.GridControl
+        Me.components = New System.ComponentModel.Container()
+        Me.GroupControlFilter = New DevExpress.XtraEditors.GroupControl()
+        Me.DEUntil = New DevExpress.XtraEditors.DateEdit()
+        Me.DEFrom = New DevExpress.XtraEditors.DateEdit()
+        Me.BtnTracking = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnEditCode = New DevExpress.XtraEditors.ButtonEdit()
+        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
+        Me.GroupControlInfo = New DevExpress.XtraEditors.GroupControl()
+        Me.LabelColor = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl21 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl19 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelSource = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl17 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl16 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelBranding = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl15 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl13 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelDivision = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl11 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl10 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelSize = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl8 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl7 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelCode = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelTitle = New DevExpress.XtraEditors.LabelControl()
+        Me.PanelControlImg = New DevExpress.XtraEditors.PanelControl()
+        Me.PictureEdit1 = New DevExpress.XtraEditors.PictureEdit()
+        Me.BtnViewImg = New DevExpress.XtraEditors.SimpleButton()
+        Me.GroupControlTraccking = New DevExpress.XtraEditors.GroupControl()
+        Me.GCTracking = New DevExpress.XtraGrid.GridControl()
         Me.ViewMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.SMViewDel = New System.Windows.Forms.ToolStripMenuItem
-        Me.GVTracking = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.GridColumnTransNumber = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnFrom = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnTo = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnTransDate = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnType = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnReportStatus = New DevExpress.XtraGrid.Columns.GridColumn
+        Me.SMViewDel = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GVTracking = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumnTransNumber = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnFrom = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnTo = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnTransDate = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnType = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnReportStatus = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnCode = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnDesign = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnSize = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GroupControlFilter, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControlFilter.SuspendLayout()
-        CType(Me.DEUntil.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEUntil.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DEFrom.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BtnEditCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControlInfo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -103,9 +106,9 @@ Partial Class FormFGTracking
         Me.DEUntil.Location = New System.Drawing.Point(489, 30)
         Me.DEUntil.Name = "DEUntil"
         Me.DEUntil.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEUntil.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.DEUntil.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
         Me.DEUntil.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.DEUntil.Properties.VistaTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton})
         Me.DEUntil.Size = New System.Drawing.Size(155, 20)
         Me.DEUntil.TabIndex = 8891
         '
@@ -115,9 +118,9 @@ Partial Class FormFGTracking
         Me.DEFrom.Location = New System.Drawing.Point(288, 30)
         Me.DEFrom.Name = "DEFrom"
         Me.DEFrom.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEFrom.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.DEFrom.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
         Me.DEFrom.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.DEFrom.Properties.VistaTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton})
         Me.DEFrom.Size = New System.Drawing.Size(155, 20)
         Me.DEFrom.TabIndex = 8890
         '
@@ -133,7 +136,7 @@ Partial Class FormFGTracking
         '
         Me.BtnEditCode.Location = New System.Drawing.Point(79, 31)
         Me.BtnEditCode.Name = "BtnEditCode"
-        Me.BtnEditCode.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton})
+        Me.BtnEditCode.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.BtnEditCode.Size = New System.Drawing.Size(160, 20)
         Me.BtnEditCode.TabIndex = 3
         '
@@ -369,7 +372,7 @@ Partial Class FormFGTracking
         Me.PanelControlImg.Controls.Add(Me.PictureEdit1)
         Me.PanelControlImg.Controls.Add(Me.BtnViewImg)
         Me.PanelControlImg.Dock = System.Windows.Forms.DockStyle.Left
-        Me.PanelControlImg.Location = New System.Drawing.Point(22, 2)
+        Me.PanelControlImg.Location = New System.Drawing.Point(21, 2)
         Me.PanelControlImg.Name = "PanelControlImg"
         Me.PanelControlImg.Size = New System.Drawing.Size(177, 218)
         Me.PanelControlImg.TabIndex = 0
@@ -409,10 +412,10 @@ Partial Class FormFGTracking
         '
         Me.GCTracking.ContextMenuStrip = Me.ViewMenu
         Me.GCTracking.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCTracking.Location = New System.Drawing.Point(22, 2)
+        Me.GCTracking.Location = New System.Drawing.Point(21, 2)
         Me.GCTracking.MainView = Me.GVTracking
         Me.GCTracking.Name = "GCTracking"
-        Me.GCTracking.Size = New System.Drawing.Size(817, 245)
+        Me.GCTracking.Size = New System.Drawing.Size(818, 245)
         Me.GCTracking.TabIndex = 0
         Me.GCTracking.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVTracking})
         '
@@ -430,7 +433,7 @@ Partial Class FormFGTracking
         '
         'GVTracking
         '
-        Me.GVTracking.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnTransNumber, Me.GridColumnFrom, Me.GridColumnTo, Me.GridColumnTransDate, Me.GridColumnType, Me.GridColumnReportStatus})
+        Me.GVTracking.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnTransNumber, Me.GridColumnFrom, Me.GridColumnTo, Me.GridColumnTransDate, Me.GridColumnType, Me.GridColumnReportStatus, Me.GridColumnCode, Me.GridColumnDesign, Me.GridColumnSize})
         Me.GVTracking.GridControl = Me.GCTracking
         Me.GVTracking.Name = "GVTracking"
         Me.GVTracking.OptionsBehavior.Editable = False
@@ -444,6 +447,7 @@ Partial Class FormFGTracking
         Me.GridColumnTransNumber.Name = "GridColumnTransNumber"
         Me.GridColumnTransNumber.Visible = True
         Me.GridColumnTransNumber.VisibleIndex = 0
+        Me.GridColumnTransNumber.Width = 119
         '
         'GridColumnFrom
         '
@@ -451,7 +455,8 @@ Partial Class FormFGTracking
         Me.GridColumnFrom.FieldName = "comp_name_from"
         Me.GridColumnFrom.Name = "GridColumnFrom"
         Me.GridColumnFrom.Visible = True
-        Me.GridColumnFrom.VisibleIndex = 1
+        Me.GridColumnFrom.VisibleIndex = 4
+        Me.GridColumnFrom.Width = 131
         '
         'GridColumnTo
         '
@@ -459,7 +464,8 @@ Partial Class FormFGTracking
         Me.GridColumnTo.FieldName = "comp_name_to"
         Me.GridColumnTo.Name = "GridColumnTo"
         Me.GridColumnTo.Visible = True
-        Me.GridColumnTo.VisibleIndex = 2
+        Me.GridColumnTo.VisibleIndex = 5
+        Me.GridColumnTo.Width = 131
         '
         'GridColumnTransDate
         '
@@ -467,7 +473,8 @@ Partial Class FormFGTracking
         Me.GridColumnTransDate.FieldName = "trans_date"
         Me.GridColumnTransDate.Name = "GridColumnTransDate"
         Me.GridColumnTransDate.Visible = True
-        Me.GridColumnTransDate.VisibleIndex = 3
+        Me.GridColumnTransDate.VisibleIndex = 6
+        Me.GridColumnTransDate.Width = 131
         '
         'GridColumnType
         '
@@ -475,7 +482,8 @@ Partial Class FormFGTracking
         Me.GridColumnType.FieldName = "report_mark_type_name"
         Me.GridColumnType.Name = "GridColumnType"
         Me.GridColumnType.Visible = True
-        Me.GridColumnType.VisibleIndex = 4
+        Me.GridColumnType.VisibleIndex = 7
+        Me.GridColumnType.Width = 131
         '
         'GridColumnReportStatus
         '
@@ -483,7 +491,35 @@ Partial Class FormFGTracking
         Me.GridColumnReportStatus.FieldName = "report_status"
         Me.GridColumnReportStatus.Name = "GridColumnReportStatus"
         Me.GridColumnReportStatus.Visible = True
-        Me.GridColumnReportStatus.VisibleIndex = 5
+        Me.GridColumnReportStatus.VisibleIndex = 8
+        Me.GridColumnReportStatus.Width = 141
+        '
+        'GridColumnCode
+        '
+        Me.GridColumnCode.Caption = "Unique Code"
+        Me.GridColumnCode.FieldName = "product_unique_code"
+        Me.GridColumnCode.Name = "GridColumnCode"
+        Me.GridColumnCode.Visible = True
+        Me.GridColumnCode.VisibleIndex = 1
+        Me.GridColumnCode.Width = 119
+        '
+        'GridColumnDesign
+        '
+        Me.GridColumnDesign.Caption = "Design"
+        Me.GridColumnDesign.FieldName = "display_name"
+        Me.GridColumnDesign.Name = "GridColumnDesign"
+        Me.GridColumnDesign.Visible = True
+        Me.GridColumnDesign.VisibleIndex = 2
+        Me.GridColumnDesign.Width = 119
+        '
+        'GridColumnSize
+        '
+        Me.GridColumnSize.Caption = "Size"
+        Me.GridColumnSize.FieldName = "size"
+        Me.GridColumnSize.Name = "GridColumnSize"
+        Me.GridColumnSize.Visible = True
+        Me.GridColumnSize.VisibleIndex = 3
+        Me.GridColumnSize.Width = 56
         '
         'FormFGTracking
         '
@@ -505,9 +541,9 @@ Partial Class FormFGTracking
         CType(Me.GroupControlFilter, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControlFilter.ResumeLayout(False)
         Me.GroupControlFilter.PerformLayout()
-        CType(Me.DEUntil.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEUntil.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DEFrom.Properties.VistaTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BtnEditCode.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControlInfo, System.ComponentModel.ISupportInitialize).EndInit()
@@ -566,4 +602,7 @@ Partial Class FormFGTracking
     Friend WithEvents PictureEdit1 As DevExpress.XtraEditors.PictureEdit
     Friend WithEvents ViewMenu As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents SMViewDel As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents GridColumnCode As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnDesign As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnSize As DevExpress.XtraGrid.Columns.GridColumn
 End Class

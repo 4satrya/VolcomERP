@@ -22,6 +22,8 @@ Partial Class FormEmpShiftDet
         Me.TEShiftName = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.LabelControl8 = New DevExpress.XtraEditors.LabelControl()
+        Me.TEShiftCode = New DevExpress.XtraEditors.TextEdit()
         Me.TEWorkStart = New DevExpress.XtraEditors.TimeEdit()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
@@ -49,11 +51,13 @@ Partial Class FormEmpShiftDet
         Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
         Me.BCancel = New DevExpress.XtraEditors.SimpleButton()
         Me.BSave = New DevExpress.XtraEditors.SimpleButton()
-        Me.LabelControl8 = New DevExpress.XtraEditors.LabelControl()
-        Me.TEShiftCode = New DevExpress.XtraEditors.TextEdit()
+        Me.TEEndTolerance = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl9 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl10 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.TEShiftName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
+        CType(Me.TEShiftCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEWorkStart.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEWorkEnd.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEBreakEnd.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -75,7 +79,7 @@ Partial Class FormEmpShiftDet
         CType(Me.CESunday.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl3.SuspendLayout()
-        CType(Me.TEShiftCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TEEndTolerance.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TEShiftName
@@ -107,6 +111,24 @@ Partial Class FormEmpShiftDet
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(492, 73)
         Me.PanelControl1.TabIndex = 2
+        '
+        'LabelControl8
+        '
+        Me.LabelControl8.Appearance.Font = New System.Drawing.Font("Tahoma", 10.0!)
+        Me.LabelControl8.Location = New System.Drawing.Point(12, 45)
+        Me.LabelControl8.Name = "LabelControl8"
+        Me.LabelControl8.Size = New System.Drawing.Size(59, 16)
+        Me.LabelControl8.TabIndex = 3
+        Me.LabelControl8.Text = "Shift Code"
+        '
+        'TEShiftCode
+        '
+        Me.TEShiftCode.Location = New System.Drawing.Point(97, 42)
+        Me.TEShiftCode.Name = "TEShiftCode"
+        Me.TEShiftCode.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 10.0!)
+        Me.TEShiftCode.Properties.Appearance.Options.UseFont = True
+        Me.TEShiftCode.Size = New System.Drawing.Size(268, 22)
+        Me.TEShiftCode.TabIndex = 1
         '
         'TEWorkStart
         '
@@ -146,7 +168,7 @@ Partial Class FormEmpShiftDet
         '
         'LabelControl4
         '
-        Me.LabelControl4.Location = New System.Drawing.Point(12, 128)
+        Me.LabelControl4.Location = New System.Drawing.Point(12, 152)
         Me.LabelControl4.Name = "LabelControl4"
         Me.LabelControl4.Size = New System.Drawing.Size(73, 13)
         Me.LabelControl4.TabIndex = 10
@@ -155,7 +177,7 @@ Partial Class FormEmpShiftDet
         'TEBreakEnd
         '
         Me.TEBreakEnd.EditValue = New Date(2016, 8, 30, 0, 0, 0, 0)
-        Me.TEBreakEnd.Location = New System.Drawing.Point(97, 125)
+        Me.TEBreakEnd.Location = New System.Drawing.Point(97, 149)
         Me.TEBreakEnd.Name = "TEBreakEnd"
         Me.TEBreakEnd.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.TEBreakEnd.Properties.Mask.EditMask = "HH:mm:ss"
@@ -164,7 +186,7 @@ Partial Class FormEmpShiftDet
         '
         'LabelControl5
         '
-        Me.LabelControl5.Location = New System.Drawing.Point(12, 102)
+        Me.LabelControl5.Location = New System.Drawing.Point(12, 126)
         Me.LabelControl5.Name = "LabelControl5"
         Me.LabelControl5.Size = New System.Drawing.Size(79, 13)
         Me.LabelControl5.TabIndex = 8
@@ -173,7 +195,7 @@ Partial Class FormEmpShiftDet
         'TEBreakStart
         '
         Me.TEBreakStart.EditValue = New Date(2016, 8, 30, 0, 0, 0, 0)
-        Me.TEBreakStart.Location = New System.Drawing.Point(97, 99)
+        Me.TEBreakStart.Location = New System.Drawing.Point(97, 123)
         Me.TEBreakStart.Name = "TEBreakStart"
         Me.TEBreakStart.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.TEBreakStart.Properties.Mask.EditMask = "HH:mm:ss"
@@ -182,7 +204,7 @@ Partial Class FormEmpShiftDet
         '
         'LabelControl6
         '
-        Me.LabelControl6.Location = New System.Drawing.Point(12, 167)
+        Me.LabelControl6.Location = New System.Drawing.Point(12, 180)
         Me.LabelControl6.Name = "LabelControl6"
         Me.LabelControl6.Size = New System.Drawing.Size(79, 13)
         Me.LabelControl6.TabIndex = 11
@@ -190,7 +212,7 @@ Partial Class FormEmpShiftDet
         '
         'TEMinutes
         '
-        Me.TEMinutes.Location = New System.Drawing.Point(97, 162)
+        Me.TEMinutes.Location = New System.Drawing.Point(97, 175)
         Me.TEMinutes.Name = "TEMinutes"
         Me.TEMinutes.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 10.0!)
         Me.TEMinutes.Properties.Appearance.Options.UseFont = True
@@ -199,6 +221,9 @@ Partial Class FormEmpShiftDet
         '
         'PanelControl2
         '
+        Me.PanelControl2.Controls.Add(Me.LabelControl10)
+        Me.PanelControl2.Controls.Add(Me.TEEndTolerance)
+        Me.PanelControl2.Controls.Add(Me.LabelControl9)
         Me.PanelControl2.Controls.Add(Me.CEHoliday)
         Me.PanelControl2.Controls.Add(Me.CEEndNext)
         Me.PanelControl2.Controls.Add(Me.CETolNext)
@@ -362,23 +387,30 @@ Partial Class FormEmpShiftDet
         Me.BSave.TabIndex = 19
         Me.BSave.Text = "Save"
         '
-        'LabelControl8
+        'TEEndTolerance
         '
-        Me.LabelControl8.Appearance.Font = New System.Drawing.Font("Tahoma", 10.0!)
-        Me.LabelControl8.Location = New System.Drawing.Point(12, 45)
-        Me.LabelControl8.Name = "LabelControl8"
-        Me.LabelControl8.Size = New System.Drawing.Size(59, 16)
-        Me.LabelControl8.TabIndex = 3
-        Me.LabelControl8.Text = "Shift Code"
+        Me.TEEndTolerance.Location = New System.Drawing.Point(97, 95)
+        Me.TEEndTolerance.Name = "TEEndTolerance"
+        Me.TEEndTolerance.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 10.0!)
+        Me.TEEndTolerance.Properties.Appearance.Options.UseFont = True
+        Me.TEEndTolerance.Size = New System.Drawing.Size(165, 22)
+        Me.TEEndTolerance.TabIndex = 22
         '
-        'TEShiftCode
+        'LabelControl9
         '
-        Me.TEShiftCode.Location = New System.Drawing.Point(97, 42)
-        Me.TEShiftCode.Name = "TEShiftCode"
-        Me.TEShiftCode.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 10.0!)
-        Me.TEShiftCode.Properties.Appearance.Options.UseFont = True
-        Me.TEShiftCode.Size = New System.Drawing.Size(268, 22)
-        Me.TEShiftCode.TabIndex = 1
+        Me.LabelControl9.Location = New System.Drawing.Point(12, 100)
+        Me.LabelControl9.Name = "LabelControl9"
+        Me.LabelControl9.Size = New System.Drawing.Size(68, 13)
+        Me.LabelControl9.TabIndex = 23
+        Me.LabelControl9.Text = "End Tolerance"
+        '
+        'LabelControl10
+        '
+        Me.LabelControl10.Location = New System.Drawing.Point(268, 100)
+        Me.LabelControl10.Name = "LabelControl10"
+        Me.LabelControl10.Size = New System.Drawing.Size(37, 13)
+        Me.LabelControl10.TabIndex = 24
+        Me.LabelControl10.Text = "Minutes"
         '
         'FormEmpShiftDet
         '
@@ -397,6 +429,7 @@ Partial Class FormEmpShiftDet
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         Me.PanelControl1.PerformLayout()
+        CType(Me.TEShiftCode.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEWorkStart.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEWorkEnd.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEBreakEnd.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -419,7 +452,7 @@ Partial Class FormEmpShiftDet
         CType(Me.CESunday.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl3.ResumeLayout(False)
-        CType(Me.TEShiftCode.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TEEndTolerance.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -456,4 +489,7 @@ Partial Class FormEmpShiftDet
     Friend WithEvents CEHoliday As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents LabelControl8 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents TEShiftCode As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents TEEndTolerance As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LabelControl9 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LabelControl10 As DevExpress.XtraEditors.LabelControl
 End Class

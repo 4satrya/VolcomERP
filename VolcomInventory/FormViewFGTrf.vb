@@ -127,10 +127,12 @@
         End If
 
         'mark button
-        If is_only_for_alloc = "1" Then
-            BMark.Enabled = False
-        Else
+        Dim query_cek As String = "SELECT * FROM tb_report_mark WHERE report_mark_type=57 AND id_report=" + id_fg_trf + " "
+        Dim data_cek As DataTable = execute_query(query_cek, -1, True, "", "", "", "")
+        If data_cek.Rows.Count > 0 Then
             BMark.Enabled = True
+        Else
+            BMark.Enabled = False
         End If
         TxtNumber.Focus()
     End Sub

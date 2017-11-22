@@ -164,7 +164,7 @@ Public Class FormBarcodeProductPrint
                         print_command += "<ESC>A"
                         print_command += "<ESC>#E5"
                         print_command += "<ESC>H580<ESC>V00" & (add_sato_vpx + 10).ToString & "<ESC>L0200<ESC>S" & TEProdCode.Text & vbNewLine
-                        print_command += "<ESC>H580<ESC>V00" & (add_sato_vpx + 30).ToString & "<ESC>D202160" & TEProdCode.Text & vbNewLine
+                        print_command += "<ESC>H610<ESC>V00" & (add_sato_vpx + 30).ToString & "<ESC>D202160" & TEProdCode.Text & vbNewLine 'UBAH HXXX POSISI BARCODENYA
                         print_command += "<ESC>H580<ESC>V0" & (add_sato_vpx + 200).ToString & "<ESC>L0200<ESC>S" & TEDesignName.Text & vbNewLine
                         print_command += "<ESC>H650<ESC>V0" & (add_sato_vpx + 220).ToString & "<ESC>L0200<ESC>XUsize" & vbNewLine
                         print_command += "<ESC>H740<ESC>V0" & (add_sato_vpx + 220).ToString & "<ESC>L0200<ESC>XUcolor" & vbNewLine
@@ -181,7 +181,7 @@ Public Class FormBarcodeProductPrint
                         print_command += "<ESC>A"
                         print_command += "<ESC>#E5"
                         print_command += "<ESC>H580<ESC>V00" & (add_sato_vpx + 10).ToString & "<ESC>L0200<ESC>S" & TEProdCode.Text & vbNewLine
-                        print_command += "<ESC>H580<ESC>V00" & (add_sato_vpx + 30).ToString & "<ESC>D202100" & TEProdCode.Text & vbNewLine
+                        print_command += "<ESC>H610<ESC>V00" & (add_sato_vpx + 30).ToString & "<ESC>D202100" & TEProdCode.Text & vbNewLine
                         print_command += "<ESC>H580<ESC>V0" & (add_sato_vpx + 140).ToString & "<ESC>L0200<ESC>S" & TEDesignName.Text & vbNewLine
                         print_command += "<ESC>H650<ESC>V0" & (add_sato_vpx + 160).ToString & "<ESC>L0200<ESC>XUsize" & vbNewLine
                         print_command += "<ESC>H740<ESC>V0" & (add_sato_vpx + 160).ToString & "<ESC>L0200<ESC>XUcolor" & vbNewLine
@@ -315,7 +315,7 @@ Public Class FormBarcodeProductPrint
                     print_command += "<ESC>A"
                     print_command += "<ESC>#E5"
                     print_command += "<ESC>H580<ESC>V00" & (add_sato_vpx + 10).ToString & "<ESC>L0200<ESC>S" & TEProdCode.Text & vbNewLine
-                    print_command += "<ESC>H580<ESC>V00" & (add_sato_vpx + 30).ToString & "<ESC>D202100" & TEProdCode.Text & vbNewLine
+                    print_command += "<ESC>H610<ESC>V00" & (add_sato_vpx + 30).ToString & "<ESC>D202100" & TEProdCode.Text & vbNewLine
                     print_command += "<ESC>H580<ESC>V0" & (add_sato_vpx + 140).ToString & "<ESC>L0200<ESC>S" & TEDesignName.Text & vbNewLine
                     print_command += "<ESC>H650<ESC>V0" & (add_sato_vpx + 160).ToString & "<ESC>L0200<ESC>XUsize" & vbNewLine
                     print_command += "<ESC>H740<ESC>V0" & (add_sato_vpx + 160).ToString & "<ESC>L0200<ESC>XUcolor" & vbNewLine
@@ -401,7 +401,7 @@ Public Class FormBarcodeProductPrint
                 print_command += "<ESC>A"
                 print_command += "<ESC>#E5"
                 print_command += "<ESC>H580<ESC>V00" & (add_sato_vpx + 10).ToString & "<ESC>L0200<ESC>S" & TEProdCode.Text & vbNewLine
-                print_command += "<ESC>H580<ESC>V00" & (add_sato_vpx + 30).ToString & "<ESC>D202160" & TEProdCode.Text & vbNewLine
+                print_command += "<ESC>H610<ESC>V00" & (add_sato_vpx + 30).ToString & "<ESC>D202160" & TEProdCode.Text & vbNewLine
                 print_command += "<ESC>H580<ESC>V0" & (add_sato_vpx + 200).ToString & "<ESC>L0200<ESC>S" & TEDesignName.Text & vbNewLine
                 print_command += "<ESC>H650<ESC>V0" & (add_sato_vpx + 220).ToString & "<ESC>L0200<ESC>XUsize" & vbNewLine
                 print_command += "<ESC>H740<ESC>V0" & (add_sato_vpx + 220).ToString & "<ESC>L0200<ESC>XUcolor" & vbNewLine

@@ -818,7 +818,6 @@
                 FormSamplePLSingle.id_report_status = id_status_reportx
                 FormSamplePLSingle.actionLoad()
                 FormViewSamplePL.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormWork.viewPL()
             Catch ex As Exception
             End Try
         ElseIf report_mark_type = "4" Then
@@ -830,7 +829,6 @@
                 FormSamplePRDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
                 FormSamplePRDet.allow_status()
                 FormViewSamplePR.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormWork.view_sample_pr()
             Catch ex As Exception
             End Try
         ElseIf report_mark_type = "5" Then
@@ -924,8 +922,7 @@
                     FormProdDemand.GVProdDemand.FocusedRowHandle = find_row(FormProdDemand.GVProdDemand, "id_prod_demand", id_report)
                     FormProdDemand.view_product()
                 ElseIf form_origin = "FormWork" Then
-                    FormWork.viewProdDemand()
-                    FormWork.GVProdDemand.FocusedRowHandle = find_row(FormWork.GVProdDemand, "id_prod_demand", id_report)
+
                 ElseIf form_origin = "FormProdDemandSingle" Then
                     FormProdDemandSingle.id_prod_demand = id_report
                     FormProdDemandSingle.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
@@ -996,7 +993,6 @@
                 FormSamplePLDel.GVPL.FocusedRowHandle = find_row(FormSamplePLDel.GVPL, "id_pl_sample_del", id_report)
             Else
                 FormViewSamplePLDel.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormWork.viewPLDel()
             End If
             'Catch ex As Exception
             'End Try
@@ -1088,7 +1084,6 @@
                 FormSampleReturn.viewPl()
             Else
                 FormViewSampleReturn.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormWork.viewSampleReturn()
             End If
             'Catch ex As Exception
             'End Try
@@ -1345,7 +1340,6 @@
                 FormViewSampleAdjIn.action = "upd"
                 FormViewSampleAdjIn.id_report_status = id_status_reportx
                 FormViewSampleAdjIn.actionLoad()
-                FormWork.viewAdjInSample()
             End If
             'Catch ex As Exception
             'End Try
@@ -1435,7 +1429,6 @@
                 FormViewSampleAdjOut.action = "upd"
                 FormViewSampleAdjOut.id_report_status = id_status_reportx
                 FormViewSampleAdjOut.actionLoad()
-                FormWork.viewAdjOutSample()
             End If
             'Catch ex As Exception
             'End Try
@@ -1492,7 +1485,6 @@
                     FormMatPR.view_mat_rec()
                 Else
                     FormViewMatPR.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                    FormWork.view_mat_pr()
                 End If
             Catch ex As Exception
             End Try
@@ -1510,7 +1502,6 @@
                     FormMatPRWO.view_mat_rec()
                 Else
                     FormViewMatPRWO.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                    FormWork.view_mat_pr_wo()
                 End If
             Catch ex As Exception
             End Try
@@ -1534,7 +1525,6 @@
                     FormViewMatAdjIn.action = "upd"
                     FormViewMatAdjIn.id_report_status = id_status_reportx
                     FormViewMatAdjIn.actionLoad()
-                    FormWork.viewMatAdjIn()
                 End If
             Catch ex As Exception
             End Try
@@ -1596,7 +1586,6 @@
                 FormViewMatAdjOut.action = "upd"
                 FormViewMatAdjOut.id_report_status = id_status_reportx
                 FormViewMatAdjOut.actionLoad()
-                FormWork.viewMatAdjOut()
             End If
             Cursor = Cursors.Default
         ElseIf report_mark_type = "28" Then
@@ -1629,7 +1618,6 @@
                     FormProductionRec.GVProdRec.FocusedRowHandle = find_row(FormProductionRec.GVProdRec, "id_prod_order_rec", id_report)
                 Else
                     FormViewProductionRec.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                    FormWork.view_production_rec()
                 End If
             Catch ex As Exception
                 errorConnection()
@@ -1740,7 +1728,6 @@
                     FormProductionRet.viewRetOut()
                 Else
                     FormViewProductionRetOut.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                    FormWork.view_production_ret_out()
                 End If
             Catch ex As Exception
             End Try

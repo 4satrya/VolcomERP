@@ -12,7 +12,6 @@
             DEStart.Properties.MinValue = date_min
             DEUntil.Properties.MinValue = date_min
         End If
-
         '
         Dim startOfWeek = Date.Parse(execute_query("SELECT SUBDATE(NOW(), WEEKDAY(NOW()));", 0, True, "", "", "", "").ToString)
         Dim endOfWeek = Date.Parse(execute_query("SELECT DATE_ADD(SUBDATE(NOW(), WEEKDAY(NOW())),INTERVAL 6 DAY);", 0, True, "", "", "", "").ToString)

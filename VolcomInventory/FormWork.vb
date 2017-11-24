@@ -14,6 +14,9 @@
         checkFormAccess(Name)
         DEStart.EditValue = Now
         DEUntil.EditValue = Now
+        '
+        DEStart.EditValue = Now.AddMonths(-3)
+        '
     End Sub
     '=============== begin mark tab =======================
     Private Sub BViewApproval_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BViewApproval.Click
@@ -55,6 +58,44 @@
         Catch ex As Exception
         End Try
     End Sub
+
+    Sub view_mark_approved(ByVal date_start As String, ByVal date_until As String)
+
+        Dim query = "SELECT a.id_mark , a.info, a.info_design ,a.info_design_code ,a.info_report , a.report_mark_type , a.id_report , a.id_report_status , c.report_status , b.report_mark_type_name, a.report_mark_datetime "
+        query += ",a.report_mark_start_datetime AS date_time_start,mark.mark "
+        query += ",ADDTIME(report_mark_start_datetime,report_mark_lead_time) AS lead_time "
+        query += ",ADDTIME(report_mark_start_datetime,report_mark_lead_time) AS raw_lead_time "
+        query += ",YEAR(a.report_mark_datetime) as y_datetime,MONTHNAME(STR_TO_DATE(MONTH(a.report_mark_datetime), '%m')) as m_datetime "
+        query += ",TIME_TO_SEC(TIMEDIFF(NOW(),((ADDTIME(report_mark_start_datetime,report_mark_lead_time))))) AS time_miss, report_date, report_number "
+        query += "FROM tb_report_mark a "
+        query += "INNER JOIN tb_lookup_report_mark_type b ON b.report_mark_type = a.report_mark_type "
+        query += "INNER JOIN tb_lookup_mark mark ON mark.id_mark=a.id_mark "
+        query += "INNER JOIN tb_lookup_report_status c ON c.id_report_status = a.id_report_status "
+        query += "WHERE DATE(a.report_mark_datetime) >='" & date_start & "' AND DATE(a.report_mark_datetime) <='" & date_until & "' AND a.id_mark != 1 AND a.id_user ='" & id_user & "' AND NOT ISNULL(a.report_mark_datetime) ORDER BY a.report_mark_datetime DESC "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+
+        GCMarkApproved.DataSource = data
+        GVMarkApproved.BestFitColumns()
+    End Sub
+
+    Sub view_mark_declined(ByVal date_start As String, ByVal date_until As String)
+        Dim query = "SELECT a.id_mark , a.info, a.info_design ,a.info_design_code ,a.info_report , a.report_mark_type , a.id_report , a.id_report_status , c.report_status , b.report_mark_type_name, a.report_mark_datetime "
+        query += ",a.report_mark_start_datetime AS date_time_start,mark.mark "
+        query += ",ADDTIME(report_mark_start_datetime,report_mark_lead_time) AS lead_time "
+        query += ",ADDTIME(report_mark_start_datetime,report_mark_lead_time) AS raw_lead_time "
+        query += ",YEAR(a.report_mark_datetime) as y_datetime,MONTHNAME(STR_TO_DATE(MONTH(a.report_mark_datetime), '%m')) as m_datetime "
+        query += ",TIME_TO_SEC(TIMEDIFF(NOW(),((ADDTIME(report_mark_start_datetime,report_mark_lead_time))))) AS time_miss, report_date, report_number "
+        query += "FROM tb_report_mark a "
+        query += "INNER JOIN tb_lookup_report_mark_type b ON b.report_mark_type = a.report_mark_type "
+        query += "INNER JOIN tb_lookup_mark mark ON mark.id_mark=a.id_mark "
+        query += "INNER JOIN tb_lookup_report_status c ON c.id_report_status = a.id_report_status "
+        query += "WHERE DATE(a.report_mark_datetime) >='" & date_start & "' AND DATE(a.report_mark_datetime) <='" & date_until & "' AND a.id_mark != 1 AND a.id_user ='" & id_user & "' AND NOT ISNULL(a.report_mark_datetime) ORDER BY a.report_mark_datetime DESC "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+
+        GCMarkDeclined.DataSource = data
+        GVMarkDeclined.BestFitColumns()
+    End Sub
+
     Sub view_mark_history()
         Dim date_start, date_until As String
 
@@ -74,8 +115,8 @@
         query += "WHERE DATE(a.report_mark_datetime) >='" & date_start & "' AND DATE(a.report_mark_datetime) <='" & date_until & "' AND a.id_mark != 1 AND a.id_user ='" & id_user & "' AND NOT ISNULL(a.report_mark_datetime) ORDER BY a.report_mark_datetime DESC "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
-        GCMarkHistory.DataSource = data
-        GVMarkHistory.BestFitColumns()
+        GCMarkApproved.DataSource = data
+        GVMarkApproved.BestFitColumns()
     End Sub
     Private Sub GVMarkNeed_RowCellStyle(ByVal sender As System.Object, ByVal e As DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs) Handles GVMarkNeed.RowCellStyle
         Dim lead_time As String = sender.GetRowCellDisplayText(e.RowHandle, sender.Columns("time_miss"))
@@ -94,7 +135,7 @@
         view_popup_gv_mark()
     End Sub
 
-    Private Sub GVMarkHistory_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GVMarkHistory.DoubleClick
+    Private Sub GVMarkHistory_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GVMarkApproved.DoubleClick
         view_popup_gv_mark()
     End Sub
     Sub view_popup_gv_mark()
@@ -112,12 +153,12 @@
                 showpopup.show()
             End If
         Else 'history
-            If GVMarkHistory.RowCount > 0 Then
+            If GVMarkApproved.RowCount > 0 Then
                 Dim report_mark_type As String = "-1"
                 Dim id_report As String = "-1"
 
-                report_mark_type = GVMarkHistory.GetFocusedRowCellValue("report_mark_type").ToString
-                id_report = GVMarkHistory.GetFocusedRowCellValue("id_report").ToString
+                report_mark_type = GVMarkApproved.GetFocusedRowCellValue("report_mark_type").ToString
+                id_report = GVMarkApproved.GetFocusedRowCellValue("id_report").ToString
 
                 Dim showpopup As ClassShowPopUp = New ClassShowPopUp()
                 showpopup.report_mark_type = report_mark_type
@@ -141,7 +182,7 @@
         End If
     End Sub
 
-    Private Sub GVMarkHistory_FocusedRowChanged(ByVal sender As System.Object, ByVal e As DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs) Handles GVMarkHistory.FocusedRowChanged
+    Private Sub GVMarkHistory_FocusedRowChanged(ByVal sender As System.Object, ByVal e As DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs) Handles GVMarkApproved.FocusedRowChanged
         no_focus_gv(sender, e)
     End Sub
     Sub no_focus_gv(ByVal sender As System.Object, ByVal e As DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs)

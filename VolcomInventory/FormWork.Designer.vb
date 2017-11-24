@@ -49,8 +49,8 @@ Partial Class FormWork
         Me.BViewApproval = New DevExpress.XtraEditors.SimpleButton()
         Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
         Me.XTPApproved = New DevExpress.XtraTab.XtraTabPage()
-        Me.GCMarkHistory = New DevExpress.XtraGrid.GridControl()
-        Me.GVMarkHistory = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GCMarkApproved = New DevExpress.XtraGrid.GridControl()
+        Me.GVMarkApproved = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn27 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn28 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn29 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -74,11 +74,8 @@ Partial Class FormWork
         Me.Label16 = New System.Windows.Forms.Label()
         Me.BViewHistory = New DevExpress.XtraEditors.SimpleButton()
         Me.XTPNotApproved = New DevExpress.XtraTab.XtraTabPage()
-        Me.SimpleButton1 = New DevExpress.XtraEditors.SimpleButton()
-        Me.SimpleButton2 = New DevExpress.XtraEditors.SimpleButton()
-        Me.GridBand1 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
-        Me.GridControl1 = New DevExpress.XtraGrid.GridControl()
-        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GCMarkDeclined = New DevExpress.XtraGrid.GridControl()
+        Me.GVMarkDeclined = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -101,6 +98,9 @@ Partial Class FormWork
         Me.DateEdit2 = New DevExpress.XtraEditors.DateEdit()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.SimpleButton3 = New DevExpress.XtraEditors.SimpleButton()
+        Me.SimpleButton1 = New DevExpress.XtraEditors.SimpleButton()
+        Me.SimpleButton2 = New DevExpress.XtraEditors.SimpleButton()
+        Me.GridBand1 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         CType(Me.RepositoryItemSpinEdit6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemSpinEdit4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XTCGeneral, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -115,8 +115,8 @@ Partial Class FormWork
         Me.PanelControl10.SuspendLayout()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTPApproved.SuspendLayout()
-        CType(Me.GCMarkHistory, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GVMarkHistory, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GCMarkApproved, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVMarkApproved, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl11, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl11.SuspendLayout()
         CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -124,8 +124,8 @@ Partial Class FormWork
         CType(Me.DEStart.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEStart.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTPNotApproved.SuspendLayout()
-        CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GCMarkDeclined, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVMarkDeclined, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.DateEdit1.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -380,32 +380,32 @@ Partial Class FormWork
         '
         'XTPApproved
         '
-        Me.XTPApproved.Controls.Add(Me.GCMarkHistory)
+        Me.XTPApproved.Controls.Add(Me.GCMarkApproved)
         Me.XTPApproved.Controls.Add(Me.PanelControl11)
         Me.XTPApproved.Name = "XTPApproved"
         Me.XTPApproved.Size = New System.Drawing.Size(939, 440)
         Me.XTPApproved.Text = "Approved"
         '
-        'GCMarkHistory
+        'GCMarkApproved
         '
-        Me.GCMarkHistory.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCMarkHistory.Location = New System.Drawing.Point(0, 36)
-        Me.GCMarkHistory.MainView = Me.GVMarkHistory
-        Me.GCMarkHistory.Name = "GCMarkHistory"
-        Me.GCMarkHistory.Size = New System.Drawing.Size(939, 404)
-        Me.GCMarkHistory.TabIndex = 3
-        Me.GCMarkHistory.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVMarkHistory})
+        Me.GCMarkApproved.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCMarkApproved.Location = New System.Drawing.Point(0, 36)
+        Me.GCMarkApproved.MainView = Me.GVMarkApproved
+        Me.GCMarkApproved.Name = "GCMarkApproved"
+        Me.GCMarkApproved.Size = New System.Drawing.Size(939, 404)
+        Me.GCMarkApproved.TabIndex = 3
+        Me.GCMarkApproved.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVMarkApproved})
         '
-        'GVMarkHistory
+        'GVMarkApproved
         '
-        Me.GVMarkHistory.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn27, Me.GridColumn28, Me.GridColumn29, Me.GridColumn30, Me.GridColumn31, Me.GridColumn32, Me.GridColumn35, Me.GridColumnMarkDatetime, Me.GridCol33, Me.GridColumn900, Me.GColMHYear, Me.GridColumn34, Me.GridColumn328, Me.GridColumn896, Me.GridColumn897, Me.GridColumn898})
-        Me.GVMarkHistory.GridControl = Me.GCMarkHistory
-        Me.GVMarkHistory.GroupCount = 2
-        Me.GVMarkHistory.Name = "GVMarkHistory"
-        Me.GVMarkHistory.OptionsBehavior.Editable = False
-        Me.GVMarkHistory.OptionsFind.AlwaysVisible = True
-        Me.GVMarkHistory.OptionsView.ShowGroupPanel = False
-        Me.GVMarkHistory.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GColMHYear, DevExpress.Data.ColumnSortOrder.Ascending), New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumn34, DevExpress.Data.ColumnSortOrder.Ascending)})
+        Me.GVMarkApproved.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn27, Me.GridColumn28, Me.GridColumn29, Me.GridColumn30, Me.GridColumn31, Me.GridColumn32, Me.GridColumn35, Me.GridColumnMarkDatetime, Me.GridCol33, Me.GridColumn900, Me.GColMHYear, Me.GridColumn34, Me.GridColumn328, Me.GridColumn896, Me.GridColumn897, Me.GridColumn898})
+        Me.GVMarkApproved.GridControl = Me.GCMarkApproved
+        Me.GVMarkApproved.GroupCount = 2
+        Me.GVMarkApproved.Name = "GVMarkApproved"
+        Me.GVMarkApproved.OptionsBehavior.Editable = False
+        Me.GVMarkApproved.OptionsFind.AlwaysVisible = True
+        Me.GVMarkApproved.OptionsView.ShowGroupPanel = False
+        Me.GVMarkApproved.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GColMHYear, DevExpress.Data.ColumnSortOrder.Ascending), New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumn34, DevExpress.Data.ColumnSortOrder.Ascending)})
         '
         'GridColumn27
         '
@@ -605,57 +605,32 @@ Partial Class FormWork
         '
         'XTPNotApproved
         '
-        Me.XTPNotApproved.Controls.Add(Me.GridControl1)
+        Me.XTPNotApproved.Controls.Add(Me.GCMarkDeclined)
         Me.XTPNotApproved.Controls.Add(Me.PanelControl1)
         Me.XTPNotApproved.Name = "XTPNotApproved"
         Me.XTPNotApproved.Size = New System.Drawing.Size(939, 440)
         Me.XTPNotApproved.Text = "Not Approved"
         '
-        'SimpleButton1
+        'GCMarkDeclined
         '
-        Me.SimpleButton1.Dock = System.Windows.Forms.DockStyle.Left
-        Me.SimpleButton1.Location = New System.Drawing.Point(2, 2)
-        Me.SimpleButton1.Name = "SimpleButton1"
-        Me.SimpleButton1.Size = New System.Drawing.Size(88, 32)
-        Me.SimpleButton1.TabIndex = 5
-        Me.SimpleButton1.Text = "Packing List"
-        Me.SimpleButton1.Visible = False
+        Me.GCMarkDeclined.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCMarkDeclined.Location = New System.Drawing.Point(0, 36)
+        Me.GCMarkDeclined.MainView = Me.GVMarkDeclined
+        Me.GCMarkDeclined.Name = "GCMarkDeclined"
+        Me.GCMarkDeclined.Size = New System.Drawing.Size(939, 404)
+        Me.GCMarkDeclined.TabIndex = 5
+        Me.GCMarkDeclined.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVMarkDeclined})
         '
-        'SimpleButton2
+        'GVMarkDeclined
         '
-        Me.SimpleButton2.Dock = System.Windows.Forms.DockStyle.Right
-        Me.SimpleButton2.Location = New System.Drawing.Point(862, 2)
-        Me.SimpleButton2.Name = "SimpleButton2"
-        Me.SimpleButton2.Size = New System.Drawing.Size(75, 32)
-        Me.SimpleButton2.TabIndex = 0
-        Me.SimpleButton2.Text = "View"
-        '
-        'GridBand1
-        '
-        Me.GridBand1.Caption = "GridBand1"
-        Me.GridBand1.Name = "GridBand1"
-        Me.GridBand1.VisibleIndex = -1
-        '
-        'GridControl1
-        '
-        Me.GridControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GridControl1.Location = New System.Drawing.Point(0, 36)
-        Me.GridControl1.MainView = Me.GridView1
-        Me.GridControl1.Name = "GridControl1"
-        Me.GridControl1.Size = New System.Drawing.Size(939, 404)
-        Me.GridControl1.TabIndex = 5
-        Me.GridControl1.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView1})
-        '
-        'GridView1
-        '
-        Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumn7, Me.GridColumn8, Me.GridColumn9, Me.GridColumn10, Me.GridColumn11, Me.GridColumn12, Me.GridColumn13, Me.GridColumn14, Me.GridColumn15, Me.GridColumn16})
-        Me.GridView1.GridControl = Me.GridControl1
-        Me.GridView1.GroupCount = 2
-        Me.GridView1.Name = "GridView1"
-        Me.GridView1.OptionsBehavior.Editable = False
-        Me.GridView1.OptionsFind.AlwaysVisible = True
-        Me.GridView1.OptionsView.ShowGroupPanel = False
-        Me.GridView1.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumn11, DevExpress.Data.ColumnSortOrder.Ascending), New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumn12, DevExpress.Data.ColumnSortOrder.Ascending)})
+        Me.GVMarkDeclined.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumn7, Me.GridColumn8, Me.GridColumn9, Me.GridColumn10, Me.GridColumn11, Me.GridColumn12, Me.GridColumn13, Me.GridColumn14, Me.GridColumn15, Me.GridColumn16})
+        Me.GVMarkDeclined.GridControl = Me.GCMarkDeclined
+        Me.GVMarkDeclined.GroupCount = 2
+        Me.GVMarkDeclined.Name = "GVMarkDeclined"
+        Me.GVMarkDeclined.OptionsBehavior.Editable = False
+        Me.GVMarkDeclined.OptionsFind.AlwaysVisible = True
+        Me.GVMarkDeclined.OptionsView.ShowGroupPanel = False
+        Me.GVMarkDeclined.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumn11, DevExpress.Data.ColumnSortOrder.Ascending), New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumn12, DevExpress.Data.ColumnSortOrder.Ascending)})
         '
         'GridColumn1
         '
@@ -853,6 +828,31 @@ Partial Class FormWork
         Me.SimpleButton3.TabIndex = 0
         Me.SimpleButton3.Text = "View"
         '
+        'SimpleButton1
+        '
+        Me.SimpleButton1.Dock = System.Windows.Forms.DockStyle.Left
+        Me.SimpleButton1.Location = New System.Drawing.Point(2, 2)
+        Me.SimpleButton1.Name = "SimpleButton1"
+        Me.SimpleButton1.Size = New System.Drawing.Size(88, 32)
+        Me.SimpleButton1.TabIndex = 5
+        Me.SimpleButton1.Text = "Packing List"
+        Me.SimpleButton1.Visible = False
+        '
+        'SimpleButton2
+        '
+        Me.SimpleButton2.Dock = System.Windows.Forms.DockStyle.Right
+        Me.SimpleButton2.Location = New System.Drawing.Point(862, 2)
+        Me.SimpleButton2.Name = "SimpleButton2"
+        Me.SimpleButton2.Size = New System.Drawing.Size(75, 32)
+        Me.SimpleButton2.TabIndex = 0
+        Me.SimpleButton2.Text = "View"
+        '
+        'GridBand1
+        '
+        Me.GridBand1.Caption = "GridBand1"
+        Me.GridBand1.Name = "GridBand1"
+        Me.GridBand1.VisibleIndex = -1
+        '
         'FormWork
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -881,8 +881,8 @@ Partial Class FormWork
         Me.PanelControl10.ResumeLayout(False)
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XTPApproved.ResumeLayout(False)
-        CType(Me.GCMarkHistory, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GVMarkHistory, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GCMarkApproved, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVMarkApproved, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl11, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl11.ResumeLayout(False)
         Me.PanelControl11.PerformLayout()
@@ -891,8 +891,8 @@ Partial Class FormWork
         CType(Me.DEStart.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEStart.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XTPNotApproved.ResumeLayout(False)
-        CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GCMarkDeclined, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVMarkDeclined, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         Me.PanelControl1.PerformLayout()
@@ -921,8 +921,8 @@ Partial Class FormWork
     Friend WithEvents ColMarkNeedReportDate As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ColLeadTime As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ColRawLeadTime As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GCMarkHistory As DevExpress.XtraGrid.GridControl
-    Friend WithEvents GVMarkHistory As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GCMarkApproved As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVMarkApproved As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumn27 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn28 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn29 As DevExpress.XtraGrid.Columns.GridColumn
@@ -959,8 +959,8 @@ Partial Class FormWork
     Friend WithEvents GridColumn900 As DevExpress.XtraGrid.Columns.GridColumn
     Public WithEvents LargeImageCollection As DevExpress.Utils.ImageCollection
     Friend WithEvents XTPNotApproved As DevExpress.XtraTab.XtraTabPage
-    Friend WithEvents GridControl1 As DevExpress.XtraGrid.GridControl
-    Friend WithEvents GridView1 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GCMarkDeclined As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVMarkDeclined As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn2 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn3 As DevExpress.XtraGrid.Columns.GridColumn

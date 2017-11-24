@@ -85,7 +85,7 @@
     '----------------------TAB MENU------------------------------
     'View Menu
     Sub viewMenu()
-        Dim query As String = "SELECT * FROM tb_menu a INNER JOIN tb_lookup_group_menu b ON a.id_group_menu = b.id_group_menu ORDER BY a.description_menu_name ASC"
+        Dim query As String = "SELECT * FROM tb_menu a INNER JOIN tb_lookup_group_menu b ON a.id_group_menu = b.id_group_menu INNER JOIN tb_menu_caption capt ON capt.`menu_name`=a.`menu_name` ORDER BY a.description_menu_name ASC"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCMenu.DataSource = data
         GVMenu.Columns("group_menu").GroupIndex = 0

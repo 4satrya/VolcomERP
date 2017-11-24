@@ -19,33 +19,33 @@ Partial Class FormAccessMenuSingle
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormAccessMenuSingle))
-        Me.BtnCancel = New DevExpress.XtraEditors.SimpleButton
-        Me.BtnSave = New DevExpress.XtraEditors.SimpleButton
+        Me.BtnCancel = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnSave = New DevExpress.XtraEditors.SimpleButton()
         Me.EPRole = New System.Windows.Forms.ErrorProvider(Me.components)
-        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl
-        Me.TxtMenuName = New DevExpress.XtraEditors.TextEdit
-        Me.MEDescription = New DevExpress.XtraEditors.MemoEdit
-        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl
-        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl
-        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl
-        Me.LEGroup = New DevExpress.XtraEditors.LookUpEdit
-        Me.GroupControlGeneral = New DevExpress.XtraEditors.GroupControl
-        Me.GroupControlInvolved = New DevExpress.XtraEditors.GroupControl
-        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl
-        Me.GCInvolved = New DevExpress.XtraGrid.GridControl
-        Me.GVInvolved = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.GridColumnIdFormInvolved = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnFormNameInvolved = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnFormMenu = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
-        Me.GridColumnIdMenuInvolved = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl
-        Me.BtnDelete = New DevExpress.XtraEditors.SimpleButton
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
+        Me.TxtMenuName = New DevExpress.XtraEditors.TextEdit()
+        Me.MEDescription = New DevExpress.XtraEditors.MemoEdit()
+        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
+        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
+        Me.LEGroup = New DevExpress.XtraEditors.LookUpEdit()
+        Me.GroupControlGeneral = New DevExpress.XtraEditors.GroupControl()
+        Me.GroupControlInvolved = New DevExpress.XtraEditors.GroupControl()
+        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
+        Me.GCInvolved = New DevExpress.XtraGrid.GridControl()
+        Me.GVInvolved = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumnIdFormInvolved = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnFormNameInvolved = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnFormMenu = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.GridColumnIdMenuInvolved = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
+        Me.BtnDelete = New DevExpress.XtraEditors.SimpleButton()
         Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
-        Me.BtnEdit = New DevExpress.XtraEditors.SimpleButton
-        Me.BtnAdd = New DevExpress.XtraEditors.SimpleButton
+        Me.BtnEdit = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnAdd = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.EPRole, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtMenuName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.MEDescription.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -198,7 +198,7 @@ Partial Class FormAccessMenuSingle
         Me.PanelControl2.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
         Me.PanelControl2.Controls.Add(Me.GCInvolved)
         Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Left
-        Me.PanelControl2.Location = New System.Drawing.Point(22, 52)
+        Me.PanelControl2.Location = New System.Drawing.Point(21, 52)
         Me.PanelControl2.Name = "PanelControl2"
         Me.PanelControl2.Size = New System.Drawing.Size(371, 240)
         Me.PanelControl2.TabIndex = 1
@@ -268,9 +268,9 @@ Partial Class FormAccessMenuSingle
         Me.PanelControl3.Controls.Add(Me.BtnEdit)
         Me.PanelControl3.Controls.Add(Me.BtnAdd)
         Me.PanelControl3.Dock = System.Windows.Forms.DockStyle.Top
-        Me.PanelControl3.Location = New System.Drawing.Point(22, 2)
+        Me.PanelControl3.Location = New System.Drawing.Point(21, 2)
         Me.PanelControl3.Name = "PanelControl3"
-        Me.PanelControl3.Size = New System.Drawing.Size(723, 50)
+        Me.PanelControl3.Size = New System.Drawing.Size(724, 50)
         Me.PanelControl3.TabIndex = 0
         '
         'BtnDelete
@@ -325,7 +325,6 @@ Partial Class FormAccessMenuSingle
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FormAccessMenuSingle"
-        Me.ShowInTaskbar = False
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Master Menu "

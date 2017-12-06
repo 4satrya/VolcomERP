@@ -10982,4 +10982,18 @@ Public Class FormMain
         End Try
         Cursor = Cursors.Default
     End Sub
+
+    Private Sub NBBackupStock_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBBackupStock.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormFGBackupStock.MdiParent = Me
+            FormFGBackupStock.Show()
+            FormFGBackupStock.WindowState = FormWindowState.Maximized
+            FormFGBackupStock.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
 End Class

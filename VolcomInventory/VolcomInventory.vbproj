@@ -225,6 +225,7 @@
     <Compile Include="ClassSendingMail.vb" />
     <Compile Include="ClassShowPopUp.vb" />
     <Compile Include="ClassStock.vb" />
+    <Compile Include="ClassStockTake.vb" />
     <Compile Include="ClassUser.vb" />
     <Compile Include="FindPanel.vb">
       <SubType>Component</SubType>
@@ -797,6 +798,18 @@
       <DependentUpon>FormFGAging.vb</DependentUpon>
     </Compile>
     <Compile Include="FormFGAging.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormFGBackupStock.Designer.vb">
+      <DependentUpon>FormFGBackupStock.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormFGBackupStock.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormFGBackupStockDet.Designer.vb">
+      <DependentUpon>FormFGBackupStockDet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormFGBackupStockDet.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormFGBorrowQCReq.Designer.vb">
@@ -5345,6 +5358,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormFGAging.resx">
       <DependentUpon>FormFGAging.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormFGBackupStock.resx">
+      <DependentUpon>FormFGBackupStock.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormFGBackupStockDet.resx">
+      <DependentUpon>FormFGBackupStockDet.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormFGBorrowQCReq.resx">
       <DependentUpon>FormFGBorrowQCReq.vb</DependentUpon>

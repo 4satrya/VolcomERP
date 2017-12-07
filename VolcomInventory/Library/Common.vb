@@ -610,6 +610,7 @@ Module Common
             header_number_x = combine_header_number(get_opt_sales_field("sales_order_code_head"), Integer.Parse(get_opt_sales_field("sales_order_code_inc")), Integer.Parse(get_opt_sales_field("sales_order_code_digit")))
         ElseIf opt = "3" Then
             header_number_x = combine_header_number(get_opt_sales_field("sales_del_order_code_head"), Integer.Parse(get_opt_sales_field("sales_del_order_code_inc")), Integer.Parse(get_opt_sales_field("sales_del_order_code_digit")))
+            increase_inc_sales("3")
         ElseIf opt = "4" Then
             header_number_x = combine_header_number(get_opt_sales_field("sales_return_order_code_head"), Integer.Parse(get_opt_sales_field("sales_return_order_code_inc")), Integer.Parse(get_opt_sales_field("sales_return_order_code_digit")))
         ElseIf opt = "5" Then

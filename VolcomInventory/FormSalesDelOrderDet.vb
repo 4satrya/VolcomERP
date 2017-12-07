@@ -570,11 +570,11 @@ Public Class FormSalesDelOrderDet
                 Dim pl_sales_order_del_note As String = MENote.Text.ToString
                 If action = "ins" Then
                     'query main table
-                    Dim pl_sales_order_del_number As String = header_number_sales("3")
+                    Dim pl_sales_order_del_number As String = ""
                     Dim query_main As String = "INSERT tb_pl_sales_order_del(id_sales_order, pl_sales_order_del_number, id_comp_contact_from, id_store_contact_to, pl_sales_order_del_date, pl_sales_order_del_note, id_report_status, last_update, last_update_by, id_wh_drawer) "
-                    query_main += "VALUES('" + id_sales_order + "', '" + pl_sales_order_del_number + "', '" + id_comp_contact_from + "', '" + id_store_contact_to + "', NOW(), '" + pl_sales_order_del_note + "', '1', NOW(), " + id_user + ", '" + id_wh_drawer + "'); SELECT LAST_INSERT_ID(); "
+                    query_main += "VALUES('" + id_sales_order + "', '" + header_number_sales("3") + "', '" + id_comp_contact_from + "', '" + id_store_contact_to + "', NOW(), '" + pl_sales_order_del_note + "', '1', NOW(), " + id_user + ", '" + id_wh_drawer + "'); SELECT LAST_INSERT_ID(); "
                     id_pl_sales_order_del = execute_query(query_main, 0, True, "", "", "", "")
-                    increase_inc_sales("3")
+
 
                     'insert who prepared
                     insert_who_prepared("43", id_pl_sales_order_del, id_user)
@@ -651,7 +651,7 @@ Public Class FormSalesDelOrderDet
                     action = "upd"
                     actionLoad()
                     exportToBOF(False)
-                    infoCustom("Delivery Order : " + pl_sales_order_del_number + " was created successfully.")
+                    infoCustom("Delivery Order : " + TxtSalesDelOrderNumber.Text + " was created successfully.")
                 ElseIf action = "upd" Then
                     'update main table
                     Dim pl_sales_order_del_number As String = TxtSalesDelOrderNumber.Text

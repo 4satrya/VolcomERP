@@ -1517,6 +1517,9 @@ Public Class FormMain
         ElseIf formName = "FormProdDebitNote" Then
             FormProdDebitNoteDet.id_dn = "-1"
             FormProdDebitNoteDet.ShowDialog()
+        ElseIf formName = "FormFGBackupStock" Then
+            FormFGBackupStockDet.action = "ins"
+            FormFGBackupStockDet.ShowDialog()
         Else
             RPSubMenu.Visible = False
         End If
@@ -1777,14 +1780,14 @@ Public Class FormMain
                 Else ' per PD
                     'Try
                     If FormBOM.GVDesign.FocusedRowHandle < 0 Then
-                            stopCustom("Please select proper design first!")
-                        Else
-                            FormBOMDesignSingle.id_pop_up = "1"
-                            FormBOMDesignSingle.id_design = FormBOM.GVDesign.GetFocusedRowCellValue("id_design").ToString
-                            FormBOMDesignSingle.TEQtyPD.EditValue = FormBOM.GVDesign.GetFocusedRowCellValue("qty")
-                            FormBOMDesignSingle.id_prod_demand_design = FormBOM.GVDesign.GetFocusedRowCellValue("id_prod_demand_design").ToString
-                            FormBOMDesignSingle.ShowDialog()
-                        End If
+                        stopCustom("Please select proper design first!")
+                    Else
+                        FormBOMDesignSingle.id_pop_up = "1"
+                        FormBOMDesignSingle.id_design = FormBOM.GVDesign.GetFocusedRowCellValue("id_design").ToString
+                        FormBOMDesignSingle.TEQtyPD.EditValue = FormBOM.GVDesign.GetFocusedRowCellValue("qty")
+                        FormBOMDesignSingle.id_prod_demand_design = FormBOM.GVDesign.GetFocusedRowCellValue("id_prod_demand_design").ToString
+                        FormBOMDesignSingle.ShowDialog()
+                    End If
                     'Catch ex As Exception
                     'stopCustom("Please select proper design first!")
                     'End Try
@@ -2421,6 +2424,10 @@ Public Class FormMain
             ElseIf formName = "FormDepartementSub" Then
                 FormDepartementSubDet.id_subdept = FormDepartementSub.GVDepartment.GetFocusedRowCellValue("id_departement_sub").ToString
                 FormDepartementSubDet.ShowDialog()
+            ElseIf formName = "FormFGBackupStock" Then
+                FormFGBackupStockDet.action = "upd"
+                FormFGBackupStockDet.id_st_period = FormFGBackupStock.GVPeriod.GetFocusedRowCellValue("id_st_period").ToString
+                FormFGBackupStockDet.ShowDialog()
             Else
                 RPSubMenu.Visible = False
             End If
@@ -5497,6 +5504,7 @@ Public Class FormMain
                     errorDelete()
                 End Try
             End If
+        ElseIf formName = "FormFGBackupStock" Then
         Else
             RPSubMenu.Visible = False
         End If
@@ -6738,6 +6746,8 @@ Public Class FormMain
             print_raw(FormFGAging.GCDesign, "")
         ElseIf formName = "FormFGTransSummary" Then
             print_raw(FormFGTransSummary.GCData, "")
+        ElseIf formName = "FormFGBackupStock" Then
+            print_raw(FormFGBackupStock.GCPeriod, "")
         Else
             RPSubMenu.Visible = False
         End If
@@ -7316,6 +7326,9 @@ Public Class FormMain
         ElseIf formName = "FormFGTransSummary" Then
             FormFGTransSummary.Close()
             FormFGTransSummary.Dispose()
+        ElseIf formName = "FormFGBackupStock" Then
+            FormFGBackupStock.Close()
+            FormFGBackupStock.Dispose()
         Else
             RPSubMenu.Visible = False
         End If

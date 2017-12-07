@@ -1319,6 +1319,7 @@ Partial Class FormBOM
         '
         Me.XTPPerDesign.Controls.Add(Me.SplitContainerControl4)
         Me.XTPPerDesign.Name = "XTPPerDesign"
+        Me.XTPPerDesign.PageVisible = False
         Me.XTPPerDesign.Size = New System.Drawing.Size(905, 492)
         Me.XTPPerDesign.Text = "Design"
         '

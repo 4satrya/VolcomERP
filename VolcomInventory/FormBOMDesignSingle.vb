@@ -447,22 +447,42 @@
     End Sub
 
     Private Sub BEditOVH_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BEditOVH.Click
-        '
-        FormBOMSingleOvh.id_pop_up = "1"
-        FormBOMSingleOvh.TEQty.EditValue = GVBomDetOvh.GetFocusedRowCellValue("qty")
-        FormBOMSingleOvh.id_bom_det = GVBomDetOvh.GetFocusedRowCellValue("id_bom_det").ToString
-        FormBOMSingleOvh.id_ovh = GVBomDetOvh.GetFocusedRowCellValue("id_component").ToString
-        FormBOMSingleOvh.ShowDialog()
+        'check the payment first
+        Dim query As String = "SELECT * FROM tb_pr_prod_order pr
+                                INNER JOIN tb_prod_order_wo wo ON wo.id_prod_order_wo=pr.id_prod_order_wo
+                                INNER JOIN tb_prod_order po ON po.id_prod_order=wo.id_prod_order
+                                WHERE pr.id_report_status!='5' AND po.id_report_status!='5' AND po.id_prod_demand_design='" & id_prod_demand_design & "' AND wo.id_ovh_price='" & GVBomDetOvh.GetFocusedRowCellValue("id_component_price").ToString & "'"
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+
+        If data.Rows.Count > 0 Then
+            stopCustom("Payment already created for this item. Please cancel it first.")
+        Else
+            FormBOMSingleOvh.id_pop_up = "1"
+            FormBOMSingleOvh.TEQty.EditValue = GVBomDetOvh.GetFocusedRowCellValue("qty")
+            FormBOMSingleOvh.id_bom_det = GVBomDetOvh.GetFocusedRowCellValue("id_bom_det").ToString
+            FormBOMSingleOvh.id_ovh = GVBomDetOvh.GetFocusedRowCellValue("id_component").ToString
+            FormBOMSingleOvh.ShowDialog()
+        End If
     End Sub
 
     Private Sub BDelOVH_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BDelOVH.Click
-        Dim confirm As DialogResult
-        confirm = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure want to delete this component?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+        Dim query As String = "SELECT * FROM tb_pr_prod_order pr
+                                INNER JOIN tb_prod_order_wo wo ON wo.id_prod_order_wo=pr.id_prod_order_wo
+                                INNER JOIN tb_prod_order po ON po.id_prod_order=wo.id_prod_order
+                                WHERE pr.id_report_status!='5' AND po.id_report_status!='5' AND po.id_prod_demand_design='" & id_prod_demand_design & "' AND wo.id_ovh_price='" & GVBomDetOvh.GetFocusedRowCellValue("id_component_price").ToString & "'"
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
-        If confirm = Windows.Forms.DialogResult.Yes Then
-            Cursor = Cursors.WaitCursor
-            GVBomDetOvh.DeleteSelectedRows()
-            Cursor = Cursors.Default
+        If data.Rows.Count > 0 Then
+            stopCustom("Payment already created for this item. Please cancel it first.")
+        Else
+            Dim confirm As DialogResult
+            confirm = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure want to delete this component?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+
+            If confirm = Windows.Forms.DialogResult.Yes Then
+                Cursor = Cursors.WaitCursor
+                GVBomDetOvh.DeleteSelectedRows()
+                Cursor = Cursors.Default
+            End If
         End If
     End Sub
 

@@ -82,8 +82,6 @@ Partial Class FormFGBackupStock
         Me.GridColumn4.Caption = "Last Updated"
         Me.GridColumn4.FieldName = "st_period_updated_date"
         Me.GridColumn4.Name = "GridColumn4"
-        Me.GridColumn4.Visible = True
-        Me.GridColumn4.VisibleIndex = 3
         Me.GridColumn4.Width = 366
         '
         'GridColumn6
@@ -100,8 +98,6 @@ Partial Class FormFGBackupStock
         Me.GridColumn5.Caption = "Updated By"
         Me.GridColumn5.FieldName = "st_period_updated_by"
         Me.GridColumn5.Name = "GridColumn5"
-        Me.GridColumn5.Visible = True
-        Me.GridColumn5.VisibleIndex = 4
         Me.GridColumn5.Width = 371
         '
         'FormFGBackupStock

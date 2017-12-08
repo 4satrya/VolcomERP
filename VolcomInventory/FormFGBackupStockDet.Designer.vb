@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FormFGBackupStockDet
     Inherits DevExpress.XtraEditors.XtraForm
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         If disposing AndAlso components IsNot Nothing Then
             components.Dispose()
@@ -17,7 +17,7 @@ Partial Class FormFGBackupStockDet
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormFGBackupStockDet))
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
@@ -43,18 +43,6 @@ Partial Class FormFGBackupStockDet
         Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.XTCDetail = New DevExpress.XtraTab.XtraTabControl()
         Me.XTPSummary = New DevExpress.XtraTab.XtraTabPage()
-        Me.XTPDetailStock = New DevExpress.XtraTab.XtraTabPage()
-        Me.GCDetail = New DevExpress.XtraGrid.GridControl()
-        Me.GVDetail = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.RepositoryItemCheckEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
-        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.CESelectAll.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -73,10 +61,6 @@ Partial Class FormFGBackupStockDet
         CType(Me.XTCDetail, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCDetail.SuspendLayout()
         Me.XTPSummary.SuspendLayout()
-        Me.XTPDetailStock.SuspendLayout()
-        CType(Me.GCDetail, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GVDetail, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RepositoryItemCheckEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl1
@@ -307,7 +291,7 @@ Partial Class FormFGBackupStockDet
         Me.XTCDetail.SelectedTabPage = Me.XTPSummary
         Me.XTCDetail.Size = New System.Drawing.Size(778, 330)
         Me.XTCDetail.TabIndex = 3
-        Me.XTCDetail.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPSummary, Me.XTPDetailStock})
+        Me.XTCDetail.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPSummary})
         '
         'XTPSummary
         '
@@ -315,108 +299,6 @@ Partial Class FormFGBackupStockDet
         Me.XTPSummary.Name = "XTPSummary"
         Me.XTPSummary.Size = New System.Drawing.Size(772, 302)
         Me.XTPSummary.Text = "Summary"
-        '
-        'XTPDetailStock
-        '
-        Me.XTPDetailStock.Controls.Add(Me.GCDetail)
-        Me.XTPDetailStock.Name = "XTPDetailStock"
-        Me.XTPDetailStock.PageVisible = False
-        Me.XTPDetailStock.Size = New System.Drawing.Size(772, 302)
-        Me.XTPDetailStock.Text = "Detail Stock"
-        '
-        'GCDetail
-        '
-        Me.GCDetail.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCDetail.Location = New System.Drawing.Point(0, 0)
-        Me.GCDetail.MainView = Me.GVDetail
-        Me.GCDetail.Name = "GCDetail"
-        Me.GCDetail.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckEdit2})
-        Me.GCDetail.Size = New System.Drawing.Size(772, 302)
-        Me.GCDetail.TabIndex = 2
-        Me.GCDetail.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVDetail})
-        '
-        'GVDetail
-        '
-        Me.GVDetail.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn4, Me.GridColumn6, Me.GridColumn8, Me.GridColumn7, Me.GridColumn9, Me.GridColumn10, Me.GridColumn11})
-        Me.GVDetail.GridControl = Me.GCDetail
-        Me.GVDetail.GroupCount = 1
-        Me.GVDetail.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_soh", Me.GridColumn8, "{0:N0}")})
-        Me.GVDetail.Name = "GVDetail"
-        Me.GVDetail.OptionsBehavior.AutoExpandAllGroups = True
-        Me.GVDetail.OptionsFind.AlwaysVisible = True
-        Me.GVDetail.OptionsView.ShowFooter = True
-        Me.GVDetail.OptionsView.ShowGroupedColumns = True
-        Me.GVDetail.OptionsView.ShowGroupPanel = False
-        Me.GVDetail.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumn11, DevExpress.Data.ColumnSortOrder.Ascending)})
-        '
-        'GridColumn4
-        '
-        Me.GridColumn4.Caption = "Id Comp"
-        Me.GridColumn4.FieldName = "id_comp"
-        Me.GridColumn4.Name = "GridColumn4"
-        Me.GridColumn4.OptionsColumn.AllowEdit = False
-        '
-        'GridColumn6
-        '
-        Me.GridColumn6.Caption = "Id Product"
-        Me.GridColumn6.FieldName = "id_product"
-        Me.GridColumn6.Name = "GridColumn6"
-        '
-        'GridColumn8
-        '
-        Me.GridColumn8.Caption = "SOH"
-        Me.GridColumn8.DisplayFormat.FormatString = "N0"
-        Me.GridColumn8.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn8.FieldName = "qty_soh"
-        Me.GridColumn8.Name = "GridColumn8"
-        Me.GridColumn8.OptionsColumn.AllowEdit = False
-        Me.GridColumn8.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_soh", "{0:N0}")})
-        Me.GridColumn8.Visible = True
-        Me.GridColumn8.VisibleIndex = 4
-        Me.GridColumn8.Width = 191
-        '
-        'GridColumn7
-        '
-        Me.GridColumn7.Caption = "Code"
-        Me.GridColumn7.FieldName = "code"
-        Me.GridColumn7.Name = "GridColumn7"
-        Me.GridColumn7.Visible = True
-        Me.GridColumn7.VisibleIndex = 0
-        Me.GridColumn7.Width = 193
-        '
-        'GridColumn9
-        '
-        Me.GridColumn9.Caption = "Description"
-        Me.GridColumn9.FieldName = "name"
-        Me.GridColumn9.Name = "GridColumn9"
-        Me.GridColumn9.Visible = True
-        Me.GridColumn9.VisibleIndex = 2
-        Me.GridColumn9.Width = 777
-        '
-        'GridColumn10
-        '
-        Me.GridColumn10.Caption = "Size"
-        Me.GridColumn10.FieldName = "size"
-        Me.GridColumn10.Name = "GridColumn10"
-        Me.GridColumn10.Visible = True
-        Me.GridColumn10.VisibleIndex = 3
-        Me.GridColumn10.Width = 71
-        '
-        'GridColumn11
-        '
-        Me.GridColumn11.Caption = "Account"
-        Me.GridColumn11.FieldName = "comp"
-        Me.GridColumn11.Name = "GridColumn11"
-        Me.GridColumn11.Visible = True
-        Me.GridColumn11.VisibleIndex = 1
-        Me.GridColumn11.Width = 384
-        '
-        'RepositoryItemCheckEdit2
-        '
-        Me.RepositoryItemCheckEdit2.AutoHeight = False
-        Me.RepositoryItemCheckEdit2.Name = "RepositoryItemCheckEdit2"
-        Me.RepositoryItemCheckEdit2.ValueChecked = "Yes"
-        Me.RepositoryItemCheckEdit2.ValueUnchecked = "No"
         '
         'FormFGBackupStockDet
         '
@@ -450,10 +332,6 @@ Partial Class FormFGBackupStockDet
         CType(Me.XTCDetail, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XTCDetail.ResumeLayout(False)
         Me.XTPSummary.ResumeLayout(False)
-        Me.XTPDetailStock.ResumeLayout(False)
-        CType(Me.GCDetail, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GVDetail, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RepositoryItemCheckEdit2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -481,16 +359,4 @@ Partial Class FormFGBackupStockDet
     Friend WithEvents BtnPrint As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents XTCDetail As DevExpress.XtraTab.XtraTabControl
     Friend WithEvents XTPSummary As DevExpress.XtraTab.XtraTabPage
-    Friend WithEvents XTPDetailStock As DevExpress.XtraTab.XtraTabPage
-    Friend WithEvents GCDetail As DevExpress.XtraGrid.GridControl
-    Friend WithEvents GVDetail As DevExpress.XtraGrid.Views.Grid.GridView
-    Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn8 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn7 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn9 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn10 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn11 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents RepositoryItemCheckEdit2 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
-    Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
 End Class

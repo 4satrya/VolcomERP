@@ -799,6 +799,12 @@
     <Compile Include="FormEmpStoreSchCompareHistory.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormEmpUniList.Designer.vb">
+      <DependentUpon>FormEmpUniList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormEmpUniList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormEmpUniOrderDet.Designer.vb">
       <DependentUpon>FormEmpUniOrderDet.vb</DependentUpon>
     </Compile>
@@ -5429,6 +5435,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormEmpStoreSchCompareHistory.resx">
       <DependentUpon>FormEmpStoreSchCompareHistory.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmpUniList.resx">
+      <DependentUpon>FormEmpUniList.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormEmpUniOrderDet.resx">
       <DependentUpon>FormEmpUniOrderDet.vb</DependentUpon>

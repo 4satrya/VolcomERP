@@ -61,4 +61,29 @@
         query += "ORDER BY so.id_sales_order " + order_type
         Return query
     End Function
+
+
+    Public Function queryMainList(ByVal condition As String, ByVal order_type As String) As String
+        If order_type = "1" Then
+            order_type = "ASC "
+        ElseIf order_type = "2" Then
+            order_type = "DESC "
+        End If
+
+        If condition <> "-1" Then
+            condition = condition
+        Else
+            condition = ""
+        End If
+
+        Dim query As String = "SELECT d.id_emp_uni_design, d.id_emp_uni_period, d.id_wh_drawer, d.note, d.created_date, d.id_report_status 
+        FROM tb_emp_uni_design d
+        INNER JOIN tb_emp_uni_period pr ON pr.id_emp_uni_period = d.id_emp_uni_period
+        INNER JOIN tb_lookup_report_status rs ON rs.id_report_status = d.id_report_status
+        WHERE d.id_emp_uni_design>0 "
+        query += condition + " "
+        query += "GROUP BY d.id_emp_uni_design  "
+        query += "ORDER BY d.id_emp_uni_design " + order_type
+        Return query
+    End Function
 End Class

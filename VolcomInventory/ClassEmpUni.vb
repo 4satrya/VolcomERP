@@ -76,7 +76,7 @@
             condition = ""
         End If
 
-        Dim query As String = "SELECT d.id_emp_uni_design, d.id_emp_uni_period, d.id_wh_drawer, d.note, d.created_date, d.id_report_status 
+        Dim query As String = "SELECT d.id_emp_uni_design, d.id_emp_uni_period, pr.period_name, d.id_wh_drawer, d.note, d.created_date, d.id_report_status, rs.report_status
         FROM tb_emp_uni_design d
         INNER JOIN tb_emp_uni_period pr ON pr.id_emp_uni_period = d.id_emp_uni_period
         INNER JOIN tb_lookup_report_status rs ON rs.id_report_status = d.id_report_status

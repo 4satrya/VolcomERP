@@ -2431,7 +2431,8 @@ Public Class FormMain
                 FormEmpPayrollPeriode.id_payroll = FormEmpPayroll.GVPayrollPeriode.GetFocusedRowCellValue("id_payroll").ToString
                 FormEmpPayrollPeriode.ShowDialog()
             ElseIf formName = "FormEmpUniList" Then
-
+                FormEmpUniListDet.id_emp_uni_design = FormEmpUniList.GVData.GetFocusedRowCellValue("id_emp_uni_design").ToString
+                FormEmpUniListDet.ShowDialog()
             Else
                 RPSubMenu.Visible = False
             End If

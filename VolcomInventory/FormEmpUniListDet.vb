@@ -5,7 +5,14 @@
     Private Sub FormEmpUniListDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewWH()
         viewPeriodUniform()
+        viewReportStatus()
         actionLoad()
+    End Sub
+
+    Sub viewReportStatus()
+        Dim query As String = "SELECT * FROM tb_lookup_report_status a ORDER BY a.id_report_status "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        viewLookupQuery(LEReportStatus, query, 0, "report_status", "id_report_status")
     End Sub
 
     Sub actionLoad()
@@ -22,11 +29,11 @@
         Dim qm As String = "SELECT * FROM tb_report_mark rm WHERE rm.report_mark_type=123 AND id_report =" + id_emp_uni_design + " "
         Dim dm As DataTable = execute_query(qm, -1, True, "", "", "", "")
         If dm.Rows.Count > 0 Then
-            BMark.Visible = True
             BtnSave.Enabled = False
+            PanelControlNav.Visible = False
         Else
-            BMark.Visible = False
             BtnSave.Enabled = True
+            PanelControlNav.Visible = True
         End If
 
         BtnAttachment.Enabled = True
@@ -84,8 +91,12 @@
                 Dim query As String = "UPDATE tb_emp_uni_design SET note='" + note + "' WHERE id_emp_uni_design=" + id_emp_uni_design + " "
                 execute_non_query(query, True, "", "", "", "")
 
-                'sumbit
-                submit_who_prepared("123", id_emp_uni_design, id_user)
+                'submit
+                Dim qm As String = "SELECT * FROM tb_report_mark rm WHERE rm.report_mark_type=123 AND id_report =" + id_emp_uni_design + " "
+                Dim dm As DataTable = execute_query(qm, -1, True, "", "", "", "")
+                If dm.Rows.Count <= 0 Then
+                    submit_who_prepared("123", id_emp_uni_design, id_user)
+                End If
 
                 'view data
                 FormEmpUniList.viewData()
@@ -97,5 +108,22 @@
         Else
             stopCustom("Data can't blank !")
         End If
+    End Sub
+
+    Private Sub BMark_Click(sender As Object, e As EventArgs) Handles BMark.Click
+        Cursor = Cursors.WaitCursor
+        FormReportMark.report_mark_type = "123"
+        FormReportMark.id_report = id_emp_uni_design
+        FormReportMark.ShowDialog()
+        actionLoad()
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnAttachment_Click(sender As Object, e As EventArgs) Handles BtnAttachment.Click
+        Cursor = Cursors.WaitCursor
+        FormDocumentUpload.id_report = id_emp_uni_design
+        FormDocumentUpload.report_mark_type = "123"
+        FormDocumentUpload.ShowDialog()
+        Cursor = Cursors.Default
     End Sub
 End Class

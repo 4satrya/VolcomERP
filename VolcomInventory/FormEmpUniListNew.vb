@@ -52,12 +52,13 @@
             Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure to continue this process?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
             If confirm = Windows.Forms.DialogResult.Yes Then
                 Dim query As String = "INSERT INTO tb_emp_uni_design(id_emp_uni_period, id_wh_drawer, created_date, id_report_status) 
-                VALUES('" + id_period + "', '" + id_wh_drawer + "',NOW(),'1') "
+                VALUES('" + id_period + "', '" + id_wh_drawer + "',NOW(),'1'); SELECT LAST_INSERT_ID(); "
                 Dim id_new As String = execute_query(query, 0, True, "", "", "", "")
                 FormEmpUniList.viewData()
                 FormEmpUniList.GVData.FocusedRowHandle = find_row(FormEmpUniList.GVData, "id_emp_uni_design", id_new)
                 Close()
-
+                FormEmpUniListDet.id_emp_uni_design = id_new
+                FormEmpUniListDet.ShowDialog()
             End If
         End If
     End Sub

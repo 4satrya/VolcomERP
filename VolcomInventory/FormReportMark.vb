@@ -367,6 +367,9 @@
         ElseIf report_mark_type = "117" Then
             'missing staff
             query = String.Format("SELECT id_report_status,sales_pos_number as report_number FROM tb_sales_pos WHERE id_sales_pos = '{0}'", id_report)
+        ElseIf report_mark_type = "123" Then
+            'list uniform
+            query = String.Format("SELECT ed.id_report_status,ep.period_name as report_number FROM tb_emp_uni_design ed INNER JOIN tb_emp_uni_period ep ON ep.id_emp_uni_period = ed.id_emp_uni_period WHERE ed.id_emp_uni_design = '{0}'", id_report)
         End If
 
         data = execute_query(query, -1, True, "", "", "", "")
@@ -3666,6 +3669,16 @@
             Else
                 'code here
             End If
+        ElseIf report_mark_type = "123" Then
+            'list uniform
+            query = String.Format("UPDATE tb_emp_uni_design SET id_report_status='{0}' WHERE id_emp_uni_design ='{1}'", id_status_reportx, id_report)
+            execute_non_query(query, True, "", "", "", "")
+            infoCustom("Status changed.")
+
+            FormEmpUniListDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+            FormEmpUniListDet.actionLoad()
+            FormEmpUniList.viewData()
+            FormEmpUniList.GVData.FocusedRowHandle = find_row(FormEmpUniList.GVData, "id_emp_uni_design", id_report)
         End If
 
         'adding lead time

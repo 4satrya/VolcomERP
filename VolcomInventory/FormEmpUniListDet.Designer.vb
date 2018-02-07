@@ -29,7 +29,14 @@ Partial Class FormEmpUniListDet
         Me.BtnCancel = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnSave = New DevExpress.XtraEditors.SimpleButton()
         Me.GroupUni = New DevExpress.XtraEditors.GroupControl()
+        Me.SLEWH = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn19 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.LEPeriodx = New DevExpress.XtraEditors.LookUpEdit()
+        Me.LabelPeriod = New DevExpress.XtraEditors.LabelControl()
         Me.GroupControl3 = New DevExpress.XtraEditors.GroupControl()
         Me.PanelControlBottomRight = New DevExpress.XtraEditors.PanelControl()
         Me.LEReportStatus = New DevExpress.XtraEditors.LookUpEdit()
@@ -65,18 +72,13 @@ Partial Class FormEmpUniListDet
         Me.GridColumnTo = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControlNav = New DevExpress.XtraEditors.PanelControl()
         Me.BtnImportExcelNew = New DevExpress.XtraEditors.SimpleButton()
-        Me.LabelPeriod = New DevExpress.XtraEditors.LabelControl()
-        Me.SLEWH = New DevExpress.XtraEditors.SearchLookUpEdit()
-        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn19 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl3.SuspendLayout()
         CType(Me.GroupUni, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupUni.SuspendLayout()
+        CType(Me.SLEWH.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LEPeriodx.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl3.SuspendLayout()
@@ -91,8 +93,6 @@ Partial Class FormEmpUniListDet
         CType(Me.RepositoryItemSpinEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControlNav, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlNav.SuspendLayout()
-        CType(Me.SLEWH.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LargeImageCollection
@@ -195,14 +195,72 @@ Partial Class FormEmpUniListDet
         Me.GroupUni.Size = New System.Drawing.Size(862, 46)
         Me.GroupUni.TabIndex = 188
         '
+        'SLEWH
+        '
+        Me.SLEWH.Enabled = False
+        Me.SLEWH.Location = New System.Drawing.Point(332, 13)
+        Me.SLEWH.Name = "SLEWH"
+        Me.SLEWH.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEWH.Properties.View = Me.GridView1
+        Me.SLEWH.Size = New System.Drawing.Size(228, 20)
+        Me.SLEWH.TabIndex = 8905
+        '
+        'GridView1
+        '
+        Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn5, Me.GridColumn6, Me.GridColumn19})
+        Me.GridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView1.Name = "GridView1"
+        Me.GridView1.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView1.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn5
+        '
+        Me.GridColumn5.Caption = "Id Comp"
+        Me.GridColumn5.FieldName = "id_comp"
+        Me.GridColumn5.Name = "GridColumn5"
+        '
+        'GridColumn6
+        '
+        Me.GridColumn6.Caption = "Account"
+        Me.GridColumn6.FieldName = "comp_number"
+        Me.GridColumn6.Name = "GridColumn6"
+        Me.GridColumn6.Visible = True
+        Me.GridColumn6.VisibleIndex = 0
+        '
+        'GridColumn19
+        '
+        Me.GridColumn19.Caption = "Description"
+        Me.GridColumn19.FieldName = "comp_name_label"
+        Me.GridColumn19.Name = "GridColumn19"
+        Me.GridColumn19.Visible = True
+        Me.GridColumn19.VisibleIndex = 1
+        '
+        'LabelControl2
+        '
+        Me.LabelControl2.Location = New System.Drawing.Point(293, 16)
+        Me.LabelControl2.Name = "LabelControl2"
+        Me.LabelControl2.Size = New System.Drawing.Size(33, 13)
+        Me.LabelControl2.TabIndex = 8906
+        Me.LabelControl2.Text = "Source"
+        '
         'LEPeriodx
         '
+        Me.LEPeriodx.Enabled = False
         Me.LEPeriodx.Location = New System.Drawing.Point(112, 13)
         Me.LEPeriodx.Name = "LEPeriodx"
         Me.LEPeriodx.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.LEPeriodx.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_emp_uni_period", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("period_name", "Period"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("selection_date_start", "Start", 20, DevExpress.Utils.FormatType.DateTime, "dd\/MM\/yyyy", True, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("selection_date_end", "End", 20, DevExpress.Utils.FormatType.DateTime, "dd\/MM\/yyyy", True, DevExpress.Utils.HorzAlignment.[Default])})
         Me.LEPeriodx.Size = New System.Drawing.Size(172, 20)
         Me.LEPeriodx.TabIndex = 8901
+        '
+        'LabelPeriod
+        '
+        Me.LabelPeriod.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelPeriod.Location = New System.Drawing.Point(31, 16)
+        Me.LabelPeriod.Name = "LabelPeriod"
+        Me.LabelPeriod.Size = New System.Drawing.Size(70, 13)
+        Me.LabelPeriod.TabIndex = 8895
+        Me.LabelPeriod.Text = "Uniform Period"
         '
         'GroupControl3
         '
@@ -559,62 +617,6 @@ Partial Class FormEmpUniListDet
         Me.BtnImportExcelNew.TabStop = False
         Me.BtnImportExcelNew.Text = "Import Excel"
         '
-        'LabelPeriod
-        '
-        Me.LabelPeriod.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelPeriod.Location = New System.Drawing.Point(31, 16)
-        Me.LabelPeriod.Name = "LabelPeriod"
-        Me.LabelPeriod.Size = New System.Drawing.Size(70, 13)
-        Me.LabelPeriod.TabIndex = 8895
-        Me.LabelPeriod.Text = "Uniform Period"
-        '
-        'SLEWH
-        '
-        Me.SLEWH.Location = New System.Drawing.Point(332, 13)
-        Me.SLEWH.Name = "SLEWH"
-        Me.SLEWH.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.SLEWH.Properties.View = Me.GridView1
-        Me.SLEWH.Size = New System.Drawing.Size(228, 20)
-        Me.SLEWH.TabIndex = 8905
-        '
-        'GridView1
-        '
-        Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn5, Me.GridColumn6, Me.GridColumn19})
-        Me.GridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
-        Me.GridView1.Name = "GridView1"
-        Me.GridView1.OptionsSelection.EnableAppearanceFocusedCell = False
-        Me.GridView1.OptionsView.ShowGroupPanel = False
-        '
-        'GridColumn5
-        '
-        Me.GridColumn5.Caption = "Id Comp"
-        Me.GridColumn5.FieldName = "id_comp"
-        Me.GridColumn5.Name = "GridColumn5"
-        '
-        'GridColumn6
-        '
-        Me.GridColumn6.Caption = "Account"
-        Me.GridColumn6.FieldName = "comp_number"
-        Me.GridColumn6.Name = "GridColumn6"
-        Me.GridColumn6.Visible = True
-        Me.GridColumn6.VisibleIndex = 0
-        '
-        'GridColumn19
-        '
-        Me.GridColumn19.Caption = "Description"
-        Me.GridColumn19.FieldName = "comp_name_label"
-        Me.GridColumn19.Name = "GridColumn19"
-        Me.GridColumn19.Visible = True
-        Me.GridColumn19.VisibleIndex = 1
-        '
-        'LabelControl2
-        '
-        Me.LabelControl2.Location = New System.Drawing.Point(293, 16)
-        Me.LabelControl2.Name = "LabelControl2"
-        Me.LabelControl2.Size = New System.Drawing.Size(33, 13)
-        Me.LabelControl2.TabIndex = 8906
-        Me.LabelControl2.Text = "Source"
-        '
         'FormEmpUniListDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -628,12 +630,15 @@ Partial Class FormEmpUniListDet
         Me.Name = "FormEmpUniListDet"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Uniform List Detail"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl3.ResumeLayout(False)
         CType(Me.GroupUni, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupUni.ResumeLayout(False)
         Me.GroupUni.PerformLayout()
+        CType(Me.SLEWH.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LEPeriodx.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControl3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControl3.ResumeLayout(False)
@@ -650,8 +655,6 @@ Partial Class FormEmpUniListDet
         CType(Me.RepositoryItemSpinEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControlNav, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControlNav.ResumeLayout(False)
-        CType(Me.SLEWH.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

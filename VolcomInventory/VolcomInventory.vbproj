@@ -805,6 +805,18 @@
     <Compile Include="FormEmpUniList.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormEmpUniListDet.Designer.vb">
+      <DependentUpon>FormEmpUniListDet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormEmpUniListDet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEmpUniListNew.Designer.vb">
+      <DependentUpon>FormEmpUniListNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormEmpUniListNew.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormEmpUniOrderDet.Designer.vb">
       <DependentUpon>FormEmpUniOrderDet.vb</DependentUpon>
     </Compile>
@@ -5438,6 +5450,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormEmpUniList.resx">
       <DependentUpon>FormEmpUniList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmpUniListDet.resx">
+      <DependentUpon>FormEmpUniListDet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmpUniListNew.resx">
+      <DependentUpon>FormEmpUniListNew.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormEmpUniOrderDet.resx">
       <DependentUpon>FormEmpUniOrderDet.vb</DependentUpon>

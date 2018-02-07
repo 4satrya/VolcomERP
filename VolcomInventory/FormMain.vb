@@ -1520,6 +1520,8 @@ Public Class FormMain
         ElseIf formName = "FormEmpPayroll" Then
             FormEmpPayrollPeriode.id_payroll = "-1"
             FormEmpPayrollPeriode.ShowDialog()
+        ElseIf formName = "FormEmpUniList" Then
+            FormEmpUniListNew.ShowDialog()
         Else
             RPSubMenu.Visible = False
         End If
@@ -2428,6 +2430,8 @@ Public Class FormMain
             ElseIf formName = "FormEmpPayroll" Then
                 FormEmpPayrollPeriode.id_payroll = FormEmpPayroll.GVPayrollPeriode.GetFocusedRowCellValue("id_payroll").ToString
                 FormEmpPayrollPeriode.ShowDialog()
+            ElseIf formName = "FormEmpUniList" Then
+
             Else
                 RPSubMenu.Visible = False
             End If
@@ -7351,6 +7355,9 @@ Public Class FormMain
         ElseIf formName = "FormFGCompareStockCard" Then
             FormFGCompareStockCard.Close()
             FormFGCompareStockCard.Dispose()
+        ElseIf formName = "FormEmpUniList" Then
+            FormEmpUniList.Close()
+            FormEmpUniList.Dispose()
         Else
             RPSubMenu.Visible = False
         End If
@@ -8018,6 +8025,8 @@ Public Class FormMain
             FormDepartementSub.view_departement()
         ElseIf formName = "FormEmpPayroll" Then
             FormEmpPayroll.load_payroll()
+        ElseIf formName = "FormEmpUniList" Then
+            FormEmpUniList.viewData()
         End If
     End Sub
     'Switch

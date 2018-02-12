@@ -89,8 +89,8 @@
         increase_inc_acc("1")
 
         'det journal
-        Dim qd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_comp, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number, id_status_open) 
-        SELECT '" + id + "', d.id_acc, d.id_comp, d.debit, d.credit, d.acc_trans_det_note, d.report_mark_type, d.id_report, d.report_number, '1'
+        Dim qd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_comp, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number, id_status_open) 
+        SELECT '" + id + "', d.id_acc, d.id_comp, d.qty, d.debit, d.credit, d.acc_trans_det_note, d.report_mark_type, d.id_report, d.report_number, '1'
         FROM tb_a_acc_trans_draft d
         WHERE d.report_mark_type='" + report_mark_type_param + "' AND d.id_report='" + id_report_param + "' "
         execute_non_query(qd, True, "", "", "", "")

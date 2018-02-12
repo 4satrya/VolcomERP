@@ -157,6 +157,7 @@ Partial Class FormEmpPayrollOvertime
         Me.GVOverTime.GridControl = Me.GCOverTime
         Me.GVOverTime.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_hour", Me.GridColumnTotHour, "{0:N1}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_point", Me.GridColumnTotPoint, "{0:N1}")})
         Me.GVOverTime.Name = "GVOverTime"
+        Me.GVOverTime.OptionsView.GroupFooterShowMode = DevExpress.XtraGrid.Views.Grid.GroupFooterShowMode.VisibleAlways
         Me.GVOverTime.OptionsView.ShowFooter = True
         Me.GVOverTime.OptionsView.ShowGroupPanel = False
         '

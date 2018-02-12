@@ -1,6 +1,6 @@
 ﻿Public Class FormSalesReturnOrderOLSingle
     Private Sub FormSalesReturnOrderOLSingle_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim query As String = "CALL view_stock_ol_store('" + addSlashes(FormSalesReturnOrderOLDet.TxtOLStoreNumber.Text) + "'," + FormSalesReturnOrderOLDet.id_store + ") "
+        Dim query As String = "CALL view_stock_ol_store2('" + FormSalesReturnOrderOLDet.id_sales_order + "'," + FormSalesReturnOrderOLDet.id_store + ") "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCList.DataSource = data
         GVList.FocusedColumn = GridColumnOrder

@@ -8028,6 +8028,11 @@ Public Class FormMain
             FormEmpPayroll.load_payroll()
         ElseIf formName = "FormEmpUniList" Then
             FormEmpUniList.viewData()
+            If FormEmpPayroll.XTCPayroll.SelectedTabPageIndex = 0 Then
+                FormEmpPayroll.load_payroll()
+            Else
+                FormEmpPayroll.load_payroll_detail()
+            End If
         End If
     End Sub
     'Switch

@@ -301,7 +301,7 @@
         'check stock
         Cursor = Cursors.WaitCursor
         Dim cond_data As Boolean = True
-        Dim dt As DataTable = execute_query("CALL view_stock_ol_store('" + addSlashes(TxtOLStoreNumber.Text) + "'," + id_store + ")", -1, True, "", "", "", "")
+        Dim dt As DataTable = execute_query("CALL view_stock_ol_store2('" + id_sales_order + "'," + id_store + ")", -1, True, "", "", "", "")
         For c As Integer = 0 To ((GVItemList.RowCount - 1) - GetGroupRowCount(GVItemList))
             Dim id_product_cek As String = GVItemList.GetRowCellValue(c, "id_product").ToString
             Dim qty_cek As Integer = GVItemList.GetRowCellValue(c, "sales_return_order_det_qty")
@@ -415,6 +415,7 @@
             If data.Rows.Count = 0 Then
                 stopCustom("Account not found !")
                 resetStore(True)
+                resetOrder(True)
                 TxtStoreCode.Focus()
             Else
                 id_store = data.Rows(0)("id_comp").ToString
@@ -422,12 +423,14 @@
                 TxtStoreCode.Text = data.Rows(0)("comp_number").ToString
                 TxtStoreName.Text = data.Rows(0)("comp_name").ToString
                 id_wh_drawer = data.Rows(0)("id_drawer_def").ToString
+                resetOrder(True)
                 viewDetail()
                 check_but()
                 TxtWHCode.Focus()
             End If
         Else
             resetStore(False)
+            resetOrder(True)
         End If
     End Sub
 
@@ -536,7 +539,7 @@
                 If GVItemList.FocusedColumn.ToString = "Code" Then
                     GVItemList.CloseEditor()
                     Dim code_pas As String = addSlashes(GVItemList.GetRowCellValue(rh, "code").ToString)
-                    Dim dt As DataTable = execute_query("CALL view_stock_ol_store('" + addSlashes(TxtOLStoreNumber.Text) + "'," + id_store + ")", -1, True, "", "", "", "")
+                    Dim dt As DataTable = execute_query("CALL view_stock_ol_store2('" + id_sales_order + "'," + id_store + ")", -1, True, "", "", "", "")
                     Dim data_filter As DataRow() = dt.Select("[code]='" + code_pas + "' ")
                     If data_filter.Length = 0 Then
                         stopCustom("Product not found !")

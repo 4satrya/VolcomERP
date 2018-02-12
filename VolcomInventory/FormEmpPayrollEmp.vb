@@ -5,7 +5,7 @@
         load_emp()
     End Sub
     Sub load_emp()
-        Dim query As String = "SELECT 'no' AS is_check,emp.id_employee,dep.is_store,emp.employee_code,emp.employee_name,dep.departement,emp.employee_join_date,emp.employee_position,active.employee_active,salx.*
+        Dim query As String = "SELECT 'no' AS is_check,emp.id_employee,dep.total_workdays,dep.is_store,emp.employee_code,emp.employee_name,dep.departement,emp.employee_join_date,emp.employee_position,active.employee_active,salx.*
                                 FROM tb_m_employee emp
                                 INNER JOIN tb_m_departement dep ON dep.id_departement=emp.id_departement
                                 INNER JOIN tb_lookup_employee_level lvl ON lvl.id_employee_level=emp.id_employee_level 
@@ -59,14 +59,15 @@
             stopCustom("Please select order first.")
             GVEmployee.ActiveFilterString = ""
         Else
-            query = "INSERT INTO tb_emp_payroll_det(id_payroll,id_employee,id_salary) VALUES"
+            query = "INSERT INTO tb_emp_payroll_det(id_payroll,id_employee,id_salary,workdays) VALUES"
             For i As Integer = 0 To ((GVEmployee.RowCount - 1) - GetGroupRowCount(GVEmployee))
                 Dim id_employee As String = GVEmployee.GetRowCellValue(i, "id_employee").ToString
                 Dim id_salary As String = GVEmployee.GetRowCellValue(i, "id_employee_salary").ToString
+                Dim workdays As String = decimalSQL(GVEmployee.GetRowCellValue(i, "total_workdays").ToString)
                 If Not i = 0 Then
                     query += ","
                 End If
-                query += "('" & id_payroll & "','" & id_employee & "','" & id_salary & "')"
+                query += "('" & id_payroll & "','" & id_employee & "','" & id_salary & "','" & workdays & "')"
             Next
             execute_non_query(query, True, "", "", "", "")
         End If
@@ -78,8 +79,8 @@
     End Sub
 
     Private Sub BPickAll_Click(sender As Object, e As EventArgs) Handles BPickAll.Click
-        Dim query As String = "INSERT INTO tb_emp_payroll_det(id_payroll,id_employee,id_salary)
-                                SELECT '" & id_payroll & "' as id_payroll,emp.id_employee,salx.id_employee_salary
+        Dim query As String = "INSERT INTO tb_emp_payroll_det(id_payroll,id_employee,id_salary,workdays)
+                                SELECT '" & id_payroll & "' as id_payroll,emp.id_employee,salx.id_employee_salary,dep.total_workdays
                                 FROM tb_m_employee emp
                                 INNER JOIN tb_m_departement dep ON dep.id_departement=emp.id_departement
                                 INNER JOIN tb_lookup_employee_level lvl ON lvl.id_employee_level=emp.id_employee_level 

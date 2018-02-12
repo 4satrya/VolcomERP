@@ -52,6 +52,7 @@ Partial Class FormAccountingDraftJournal
         Me.GridColumnIdDraft = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdBillType = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PBC = New DevExpress.XtraEditors.ProgressBarControl()
+        Me.GridColumnQty = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControlNav, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlNav.SuspendLayout()
         CType(Me.LEJournalType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -145,7 +146,7 @@ Partial Class FormAccountingDraftJournal
         '
         'GVData
         '
-        Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumnAcc, Me.GridColumnAccDesc, Me.GridColumnReportNumber, Me.GridColumnCompName, Me.GridColumnDebit, Me.GridColumnCredit, Me.GridColumnNote, Me.GridColumnIdDraft, Me.GridColumnIdBillType})
+        Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumnAcc, Me.GridColumnAccDesc, Me.GridColumnReportNumber, Me.GridColumnCompName, Me.GridColumnDebit, Me.GridColumnCredit, Me.GridColumnNote, Me.GridColumnIdDraft, Me.GridColumnIdBillType, Me.GridColumnQty})
         Me.GVData.GridControl = Me.GCData
         Me.GVData.Name = "GVData"
         Me.GVData.OptionsView.ShowFooter = True
@@ -308,7 +309,7 @@ Partial Class FormAccountingDraftJournal
         Me.GridColumnDebit.Name = "GridColumnDebit"
         Me.GridColumnDebit.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "debit", "{0:N2}")})
         Me.GridColumnDebit.Visible = True
-        Me.GridColumnDebit.VisibleIndex = 6
+        Me.GridColumnDebit.VisibleIndex = 7
         Me.GridColumnDebit.Width = 218
         '
         'REValue
@@ -328,7 +329,7 @@ Partial Class FormAccountingDraftJournal
         Me.GridColumnCredit.Name = "GridColumnCredit"
         Me.GridColumnCredit.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "credit", "{0:N2}")})
         Me.GridColumnCredit.Visible = True
-        Me.GridColumnCredit.VisibleIndex = 7
+        Me.GridColumnCredit.VisibleIndex = 8
         Me.GridColumnCredit.Width = 266
         '
         'GridColumnNote
@@ -361,6 +362,17 @@ Partial Class FormAccountingDraftJournal
         Me.PBC.Name = "PBC"
         Me.PBC.Size = New System.Drawing.Size(983, 5)
         Me.PBC.TabIndex = 92
+        '
+        'GridColumnQty
+        '
+        Me.GridColumnQty.Caption = "Qty"
+        Me.GridColumnQty.DisplayFormat.FormatString = "N0"
+        Me.GridColumnQty.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnQty.FieldName = "qty"
+        Me.GridColumnQty.Name = "GridColumnQty"
+        Me.GridColumnQty.OptionsColumn.AllowEdit = False
+        Me.GridColumnQty.Visible = True
+        Me.GridColumnQty.VisibleIndex = 6
         '
         'FormAccountingDraftJournal
         '
@@ -423,4 +435,5 @@ Partial Class FormAccountingDraftJournal
     Friend WithEvents LEJournalType As DevExpress.XtraEditors.LookUpEdit
     Friend WithEvents Label1 As Label
     Friend WithEvents GridColumnIdBillType As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnQty As DevExpress.XtraGrid.Columns.GridColumn
 End Class

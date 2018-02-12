@@ -503,9 +503,16 @@
                             '2 = coordinator - asst mgr
                             '3 = staff - spv
                             If jum_check = "1" Or Not jum_check_dept_head = "0" Then
-                                submit_who_prepared_no_user("99", id_emp_leave, id_employee)
-                                query = "UPDATE tb_emp_leave SET report_mark_type='99' WHERE id_emp_leave='" & id_emp_leave & "'"
-                                execute_non_query(query, True, "", "", "", "")
+                                If id_employee = get_opt_emp_field("id_emp_admin_mng").ToString Then
+                                    submit_who_prepared_no_user("99", id_emp_leave, id_employee)
+                                    query = "UPDATE tb_emp_leave SET report_mark_type='99' WHERE id_emp_leave='" & id_emp_leave & "'"
+                                    execute_non_query(query, True, "", "", "", "")
+                                Else
+                                    submit_who_prepared_no_user("124", id_emp_leave, id_employee)
+                                    query = "UPDATE tb_emp_leave SET report_mark_type='124' WHERE id_emp_leave='" & id_emp_leave & "'"
+                                    execute_non_query(query, True, "", "", "", "")
+                                End If
+
                             ElseIf jum_check = "2" Or Not jum_check_sub_dept_head = "0" Then
                                 submit_who_prepared_no_user("96", id_emp_leave, id_employee)
                                 query = "UPDATE tb_emp_leave SET report_mark_type='96' WHERE id_emp_leave='" & id_emp_leave & "'"

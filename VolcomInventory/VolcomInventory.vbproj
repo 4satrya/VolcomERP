@@ -691,10 +691,34 @@
     <Compile Include="FormEmpPayroll.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormEmpPayrollAdjustment.Designer.vb">
+      <DependentUpon>FormEmpPayrollAdjustment.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormEmpPayrollAdjustment.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEmpPayrollAdjustmentDet.Designer.vb">
+      <DependentUpon>FormEmpPayrollAdjustmentDet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormEmpPayrollAdjustmentDet.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormEmpPayrollDeduction.Designer.vb">
       <DependentUpon>FormEmpPayrollDeduction.vb</DependentUpon>
     </Compile>
     <Compile Include="FormEmpPayrollDeduction.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEmpPayrollDeductionDet.Designer.vb">
+      <DependentUpon>FormEmpPayrollDeductionDet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormEmpPayrollDeductionDet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEmpPayrollDeductionGen.Designer.vb">
+      <DependentUpon>FormEmpPayrollDeductionGen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormEmpPayrollDeductionGen.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormEmpPayrollEmp.Designer.vb">
@@ -5394,8 +5418,20 @@
     <EmbeddedResource Include="FormEmpPayroll.resx">
       <DependentUpon>FormEmpPayroll.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormEmpPayrollAdjustment.resx">
+      <DependentUpon>FormEmpPayrollAdjustment.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmpPayrollAdjustmentDet.resx">
+      <DependentUpon>FormEmpPayrollAdjustmentDet.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormEmpPayrollDeduction.resx">
       <DependentUpon>FormEmpPayrollDeduction.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmpPayrollDeductionDet.resx">
+      <DependentUpon>FormEmpPayrollDeductionDet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmpPayrollDeductionGen.resx">
+      <DependentUpon>FormEmpPayrollDeductionGen.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormEmpPayrollEmp.resx">
       <DependentUpon>FormEmpPayrollEmp.vb</DependentUpon>

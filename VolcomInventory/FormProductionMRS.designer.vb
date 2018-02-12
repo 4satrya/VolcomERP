@@ -353,7 +353,6 @@ Partial Class FormProductionMRS
         Me.SEQty.Increment = New Decimal(New Integer() {1, 0, 0, 131072})
         Me.SEQty.Mask.EditMask = "N2"
         Me.SEQty.MaxValue = New Decimal(New Integer() {10000000, 0, 0, 0})
-        Me.SEQty.MinValue = New Decimal(New Integer() {1, 0, 0, 0})
         Me.SEQty.Name = "SEQty"
         '
         'ColNote

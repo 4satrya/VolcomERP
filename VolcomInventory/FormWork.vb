@@ -88,8 +88,6 @@
         End If
     End Sub
 
-
-
     Private Sub GVMarkNeed_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GVMarkNeed.DoubleClick
         view_popup_gv_mark()
     End Sub

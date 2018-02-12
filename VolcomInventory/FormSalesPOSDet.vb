@@ -440,6 +440,17 @@ Public Class FormSalesPOSDet
                         execute_non_query(query_detail, True, "", "", "", "")
                     End If
 
+                    'update total qty
+                    Dim queryt As String = "UPDATE tb_sales_pos main
+                    INNER JOIN (
+                        SELECT pd.id_sales_pos,ABS(SUM(pd.sales_pos_det_qty)) AS `total`
+                        FROM tb_sales_pos_det pd
+                        WHERE pd.id_sales_pos=" + id_sales_pos + "
+                        GROUP BY pd.id_sales_pos
+                    ) src ON src.id_sales_pos = main.id_sales_pos
+                    SET main.sales_pos_total_qty = src.total "
+                    execute_non_query(queryt, True, "", "", "", "")
+
                     If id_menu = "1" Or id_menu = "4" Then
                         'reserved stock
                         Dim rsv_stock As ClassSalesInv = New ClassSalesInv()
@@ -826,12 +837,17 @@ Public Class FormSalesPOSDet
         strConn = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source='" & bof_xls_temp_path & "';Extended Properties=""Excel 12.0 XML; IMEX=1;HDR=NO;TypeGuessRows=0;ImportMixedTypes=Text;"""
         oledbconn.ConnectionString = strConn
         Dim MyCommand As OleDbDataAdapter
-        MyCommand = New OleDbDataAdapter("select [F2] as code,SUM([F3]) as qty,SUM([F4]) AS price from [" & bof_xls_ws & "] WHERE NOT [F2] IS NULL AND NOT [F3]  IS NULL GROUP BY [F2]", oledbconn)
+        Try
+            MyCommand = New OleDbDataAdapter("select [F2] as code,SUM([F3]) as qty,SUM([F4]) AS price from [" & bof_xls_ws & "] WHERE NOT [F2] IS NULL AND NOT [F3]  IS NULL GROUP BY [F2]", oledbconn)
+            MyCommand.Fill(data_temp)
+            MyCommand.Dispose()
+        Catch ex As Exception
+            MyCommand = New OleDbDataAdapter("select [F2] as code,SUM([F3]) as qty,'' AS price from [" & bof_xls_ws & "] WHERE NOT [F2] IS NULL AND NOT [F3]  IS NULL GROUP BY [F2]", oledbconn)
+            MyCommand.Fill(data_temp)
+            MyCommand.Dispose()
+        End Try
 
         'Try
-        MyCommand.Fill(data_temp)
-        MyCommand.Dispose()
-
         'get price master
         Dim price_per_date As String = DateTime.Parse(DEEnd.EditValue.ToString).ToString("yyyy-MM-dd")
         Dim query_price As String = "call view_product_price('AND d.id_active = 1', '" + price_per_date + "') "

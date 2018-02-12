@@ -17,7 +17,7 @@
             condition = ""
         End If
         Dim query As String = "SELECT d.id_acc_trans_draft, d.id_comp, d.id_bill_type, c.comp_name, CONCAT(c.comp_number,' - ', c.comp_name) AS `comp`, d.id_acc, acc.acc_name, acc.acc_description, d.id_comp, d.debit, d.credit, d.id_currency, d.kurs, d.debit_valas, d.credit_valas, 
-        d.acc_trans_det_note, d.report_mark_type, d.id_report, d.report_number, d.id_acc_src, d.id_status_open
+        d.acc_trans_det_note, d.report_mark_type, d.id_report, d.report_number, d.qty, d.id_acc_src, d.id_status_open
         FROM tb_a_acc_trans_draft d
         INNER JOIN tb_a_acc acc ON acc.id_acc = d.id_acc
         LEFT JOIN tb_m_comp c ON c.id_comp = d.id_comp

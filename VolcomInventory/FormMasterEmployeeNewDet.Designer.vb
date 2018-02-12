@@ -157,6 +157,7 @@ Partial Class FormMasterEmployeeNewDet
         Me.BtnNext = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnSaveChanges = New DevExpress.XtraEditors.SimpleButton()
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.CEKoperasi = New DevExpress.XtraEditors.CheckEdit()
         CType(Me.PanelControlTop, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlTop.SuspendLayout()
         CType(Me.DELastDay.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -237,6 +238,7 @@ Partial Class FormMasterEmployeeNewDet
         CType(Me.PanelControlBottom, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlBottom.SuspendLayout()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CEKoperasi.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControlTop
@@ -557,6 +559,7 @@ Partial Class FormMasterEmployeeNewDet
         '
         'XTPGeneral
         '
+        Me.XTPGeneral.Controls.Add(Me.CEKoperasi)
         Me.XTPGeneral.Controls.Add(Me.CEJP)
         Me.XTPGeneral.Controls.Add(Me.CEJHT)
         Me.XTPGeneral.Controls.Add(Me.CEBPJS)
@@ -649,15 +652,15 @@ Partial Class FormMasterEmployeeNewDet
         '
         'TENoRek
         '
-        Me.TENoRek.Location = New System.Drawing.Point(562, 220)
+        Me.TENoRek.Location = New System.Drawing.Point(456, 220)
         Me.TENoRek.Name = "TENoRek"
-        Me.TENoRek.Size = New System.Drawing.Size(219, 20)
+        Me.TENoRek.Size = New System.Drawing.Size(210, 20)
         Me.TENoRek.TabIndex = 8901
         '
         'Label37
         '
         Me.Label37.AutoSize = True
-        Me.Label37.Location = New System.Drawing.Point(489, 223)
+        Me.Label37.Location = New System.Drawing.Point(383, 223)
         Me.Label37.Name = "Label37"
         Me.Label37.Size = New System.Drawing.Size(67, 13)
         Me.Label37.TabIndex = 8900
@@ -917,7 +920,7 @@ Partial Class FormMasterEmployeeNewDet
         '
         Me.TxtNpwp.Location = New System.Drawing.Point(107, 220)
         Me.TxtNpwp.Name = "TxtNpwp"
-        Me.TxtNpwp.Size = New System.Drawing.Size(376, 20)
+        Me.TxtNpwp.Size = New System.Drawing.Size(270, 20)
         Me.TxtNpwp.TabIndex = 16
         '
         'TxtBPJSTK
@@ -1590,6 +1593,16 @@ Partial Class FormMasterEmployeeNewDet
         '
         Me.ErrorProvider1.ContainerControl = Me
         '
+        'CEKoperasi
+        '
+        Me.CEKoperasi.Location = New System.Drawing.Point(672, 220)
+        Me.CEKoperasi.Name = "CEKoperasi"
+        Me.CEKoperasi.Properties.Caption = "Koperasi Member"
+        Me.CEKoperasi.Properties.ValueChecked = "yes"
+        Me.CEKoperasi.Properties.ValueUnchecked = "no"
+        Me.CEKoperasi.Size = New System.Drawing.Size(109, 19)
+        Me.CEKoperasi.TabIndex = 8905
+        '
         'FormMasterEmployeeNewDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1687,6 +1700,7 @@ Partial Class FormMasterEmployeeNewDet
         CType(Me.PanelControlBottom, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControlBottom.ResumeLayout(False)
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CEKoperasi.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1827,4 +1841,5 @@ Partial Class FormMasterEmployeeNewDet
     Friend WithEvents CEJP As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents CEJHT As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents CEBPJS As DevExpress.XtraEditors.CheckEdit
+    Friend WithEvents CEKoperasi As DevExpress.XtraEditors.CheckEdit
 End Class

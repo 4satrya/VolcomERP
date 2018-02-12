@@ -64,7 +64,7 @@
             'propose leave need management approval
             FormEmpLeaveDet.Close()
         ElseIf report_mark_type = "99" Then
-            'propose leave
+            'propose leave manager
             FormEmpLeaveDet.Close()
         ElseIf report_mark_type = "102" Then
             'propose leave HRD
@@ -75,6 +75,18 @@
         ElseIf report_mark_type = "105" Then
             'final clearance
             FormProductionFinalClearDet.Close()
+        ElseIf report_mark_type = "108" Then
+            'propose leave manager
+            FormEmpLeaveDet.Close()
+        ElseIf report_mark_type = "109" Then
+            'propose leave manager
+            FormEmpLeaveDet.Close()
+        ElseIf report_mark_type = "110" Then
+            'propose leave manager
+            FormEmpLeaveDet.Close()
+        ElseIf report_mark_type = "124" Then
+            'propose leave manager
+            FormEmpLeaveDet.Close()
         End If
     End Sub
     Sub show()
@@ -498,6 +510,24 @@
             FormProductionAssemblySingle.action = "upd"
             FormProductionAssemblySingle.is_view = "1"
             FormProductionAssemblySingle.ShowDialog()
+        ElseIf report_mark_type = "108" Then
+            'Propose Leave (Staff-Supervisor KK Unit)
+            FormEmpLeaveDet.id_emp_leave = id_report
+            FormEmpLeaveDet.report_mark_type = "108"
+            FormEmpLeaveDet.is_view = "1"
+            FormEmpLeaveDet.ShowDialog()
+        ElseIf report_mark_type = "109" Then
+            'Propose Leave (Coord-Asst Mgr KK Unit)
+            FormEmpLeaveDet.id_emp_leave = id_report
+            FormEmpLeaveDet.report_mark_type = "109"
+            FormEmpLeaveDet.is_view = "1"
+            FormEmpLeaveDet.ShowDialog()
+        ElseIf report_mark_type = "110" Then
+            'Propose Leave (Manager KK Unit)
+            FormEmpLeaveDet.id_emp_leave = id_report
+            FormEmpLeaveDet.report_mark_type = "110"
+            FormEmpLeaveDet.is_view = "1"
+            FormEmpLeaveDet.ShowDialog()
         ElseIf report_mark_type = "111" Then
             'non stock out
             FormSalesReturnDet.id_sales_return = id_report
@@ -537,6 +567,12 @@
             FormSalesReturnDet.action = "upd"
             FormSalesReturnDet.is_view = "1"
             FormSalesReturnDet.ShowDialog()
+        ElseIf report_mark_type = "124" Then
+            'Propose Leave (Manager KK Unit)
+            FormEmpLeaveDet.id_emp_leave = id_report
+            FormEmpLeaveDet.report_mark_type = "124"
+            FormEmpLeaveDet.is_view = "1"
+            FormEmpLeaveDet.ShowDialog()
         Else
             'MsgBox(id_report)
             stopCustom("Document Not Found")
@@ -1121,6 +1157,24 @@
             field_id = "id_prod_ass"
             field_number = "prod_ass_number"
             field_date = "prod_ass_date"
+        ElseIf report_mark_type = "108" Then
+            'Propose leave
+            table_name = "tb_emp_leave"
+            field_id = "id_emp_leave"
+            field_number = "emp_leave_number"
+            field_date = "emp_leave_date"
+        ElseIf report_mark_type = "109" Then
+            'Propose leave
+            table_name = "tb_emp_leave"
+            field_id = "id_emp_leave"
+            field_number = "emp_leave_number"
+            field_date = "emp_leave_date"
+        ElseIf report_mark_type = "110" Then
+            'Propose leave
+            table_name = "tb_emp_leave"
+            field_id = "id_emp_leave"
+            field_number = "emp_leave_number"
+            field_date = "emp_leave_date"
         ElseIf report_mark_type = "111" Then
             'non stock out
             table_name = "tb_sales_return"
@@ -1157,6 +1211,12 @@
             field_id = "id_sales_return"
             field_number = "sales_return_number"
             field_date = "sales_return_date"
+        ElseIf report_mark_type = "124" Then
+            'Propose leave
+            table_name = "tb_emp_leave"
+            field_id = "id_emp_leave"
+            field_number = "emp_leave_number"
+            field_date = "emp_leave_date"
         Else
             query = "Select '-' AS report_number, NOW() as report_date"
         End If

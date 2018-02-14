@@ -1,6 +1,7 @@
 ﻿Public Class FormEmpUniListDet
     Public id_emp_uni_design As String = "-1"
-    Dim id_report_status As String = "-1"
+    Dim id_report_status As String = " -1"
+    Dim id_wh_drawer As String = "-1"
 
     Private Sub FormEmpUniListDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewWH()
@@ -10,17 +11,18 @@
     End Sub
 
     Sub viewReportStatus()
-        Dim query As String = "SELECT * FROM tb_lookup_report_status a ORDER BY a.id_report_status "
+        Dim query As String = "Select * FROM tb_lookup_report_status a ORDER BY a.id_report_status "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         viewLookupQuery(LEReportStatus, query, 0, "report_status", "id_report_status")
     End Sub
 
     Sub actionLoad()
         Dim list As New ClassEmpUni()
-        Dim query As String = list.queryMainList("AND d.id_emp_uni_design='" + id_emp_uni_design + "' ", "1")
+        Dim query As String = list.queryMainList("And d.id_emp_uni_design='" + id_emp_uni_design + "' ", "1")
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         LEPeriodx.ItemIndex = LEPeriodx.Properties.GetDataSourceRowIndex("id_emp_uni_period", data.Rows(0)("id_emp_uni_period").ToString)
         SLEWH.EditValue = data.Rows(0)("id_wh_drawer").ToString
+        id_wh_drawer = data.Rows(0)("id_wh_drawer").ToString
         MENote.Text = data.Rows(0)("note").ToString
         LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", data.Rows(0)("id_report_status").ToString)
         id_report_status = data.Rows(0)("id_report_status").ToString
@@ -42,6 +44,28 @@
         Else
             BtnPrint.Enabled = False
         End If
+
+        'viewDetail
+        viewDetail()
+    End Sub
+
+    Sub viewDetail()
+        Cursor = Cursors.WaitCursor
+        Dim query As String = "CALL view_emp_uni_design_new(" + id_emp_uni_design + ") "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCData.DataSource = data
+        GVData.Columns("1").Caption = "1" + System.Environment.NewLine + "XXS"
+        GVData.Columns("2").Caption = "2" + System.Environment.NewLine + "XS"
+        GVData.Columns("3").Caption = "3" + System.Environment.NewLine + "S"
+        GVData.Columns("4").Caption = "4" + System.Environment.NewLine + "M"
+        GVData.Columns("5").Caption = "5" + System.Environment.NewLine + "ML"
+        GVData.Columns("6").Caption = "6" + System.Environment.NewLine + "L"
+        GVData.Columns("7").Caption = "7" + System.Environment.NewLine + "XL"
+        GVData.Columns("8").Caption = "8" + System.Environment.NewLine + "XXL"
+        GVData.Columns("9").Caption = "9" + System.Environment.NewLine + "ALL"
+        GVData.Columns("0").Caption = "0" + System.Environment.NewLine + "SM"
+        GVData.RefreshData()
+        Cursor = Cursors.Default
     End Sub
 
     Private Sub FormEmpUniListDet_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
@@ -83,7 +107,7 @@
     End Sub
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles BtnSave.Click
-        If GVItemList.RowCount > 0 Then
+        If GVData.RowCount > 0 Then
             Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure to continue this process?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
             If confirm = Windows.Forms.DialogResult.Yes Then
                 Cursor = Cursors.WaitCursor
@@ -125,5 +149,22 @@
         FormDocumentUpload.report_mark_type = "123"
         FormDocumentUpload.ShowDialog()
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnImportExcelNew_Click(sender As Object, e As EventArgs) Handles BtnImportExcelNew.Click
+        Cursor = Cursors.WaitCursor
+        FormImportExcel.id_pop_up = "33"
+        FormImportExcel.ShowDialog()
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub GVData_CustomColumnDisplayText(sender As Object, e As DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs) Handles GVData.CustomColumnDisplayText
+        Dim view As DevExpress.XtraGrid.Views.Base.ColumnView = TryCast(sender, DevExpress.XtraGrid.Views.Base.ColumnView)
+        If (e.Column.FieldName = "1" Or e.Column.FieldName = "2" Or e.Column.FieldName = "3" Or e.Column.FieldName = "4" Or e.Column.FieldName = "5" Or e.Column.FieldName = "6" Or e.Column.FieldName = "7" Or e.Column.FieldName = "8" Or e.Column.FieldName = "9" Or e.Column.FieldName = "0" Or e.Column.FieldName = "total_qty") AndAlso e.ListSourceRowIndex <> DevExpress.XtraGrid.GridControl.InvalidRowHandle Then
+            Dim qty As Decimal = Convert.ToDecimal(e.Value)
+            If qty = 0 Then
+                e.DisplayText = "-"
+            End If
+        End If
     End Sub
 End Class

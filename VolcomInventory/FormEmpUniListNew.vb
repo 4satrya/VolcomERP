@@ -41,6 +41,20 @@
     Private Sub FormEmpUniListNew_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewPeriodUniform()
         viewWH()
+
+        'Dim id As String = "-1"
+        'Try
+        '    id = LEPeriodx.EditValue.ToString
+        'Catch ex As Exception
+        'End Try
+        'Dim qc As String = "SELECT * FROM tb_emp_uni_design d WHERE d.id_emp_uni_period='" + id + "' AND d.id_report_status!=5 "
+        'Dim data As DataTable = execute_query(qc, -1, True, "", "", "", "")
+        'If data.Rows.Count > 0 Then
+        '    SLEWH.EditValue = data.Rows(0)("id_wh_drawer").ToString
+        '    SLEWH.Enabled = False
+        'Else
+        '    SLEWH.Enabled = True
+        'End If
     End Sub
 
     Private Sub BtnCreate_Click(sender As Object, e As EventArgs) Handles BtnCreate.Click
@@ -60,6 +74,22 @@
                 FormEmpUniListDet.id_emp_uni_design = id_new
                 FormEmpUniListDet.ShowDialog()
             End If
+        End If
+    End Sub
+
+    Private Sub LEPeriodx_EditValueChanged(sender As Object, e As EventArgs) Handles LEPeriodx.EditValueChanged
+        Dim id As String = "-1"
+        Try
+            id = LEPeriodx.EditValue.ToString
+        Catch ex As Exception
+        End Try
+        Dim qc As String = "SELECT * FROM tb_emp_uni_design d WHERE d.id_emp_uni_period='" + id + "' AND d.id_report_status!=5 "
+        Dim data As DataTable = execute_query(qc, -1, True, "", "", "", "")
+        If data.Rows.Count > 0 Then
+            SLEWH.EditValue = data.Rows(0)("id_wh_drawer").ToString
+            SLEWH.Enabled = False
+        Else
+            SLEWH.Enabled = True
         End If
     End Sub
 End Class

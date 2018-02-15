@@ -3721,9 +3721,13 @@
             End If
         ElseIf report_mark_type = "123" Then
             'list uniform
+            If id_status_reportx = "3" Then
+                id_status_reportx = "6"
+            End If
+
             query = String.Format("UPDATE tb_emp_uni_design SET id_report_status='{0}' WHERE id_emp_uni_design ='{1}'", id_status_reportx, id_report)
             execute_non_query(query, True, "", "", "", "")
-            infoCustom("Status changed.")
+            'infoCustom("Status changed.")
 
             FormEmpUniListDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
             FormEmpUniListDet.actionLoad()

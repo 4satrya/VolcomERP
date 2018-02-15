@@ -2,6 +2,7 @@
     Public id_emp_uni_design As String = "-1"
     Dim id_report_status As String = " -1"
     Dim id_wh_drawer As String = "-1"
+    Public is_view As String = "-1"
 
     Private Sub FormEmpUniListDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewWH()
@@ -136,6 +137,9 @@
 
     Private Sub BMark_Click(sender As Object, e As EventArgs) Handles BMark.Click
         Cursor = Cursors.WaitCursor
+        If is_view = "1" Then
+            FormReportMark.is_view = is_view
+        End If
         FormReportMark.report_mark_type = "123"
         FormReportMark.id_report = id_emp_uni_design
         FormReportMark.ShowDialog()
@@ -145,6 +149,9 @@
 
     Private Sub BtnAttachment_Click(sender As Object, e As EventArgs) Handles BtnAttachment.Click
         Cursor = Cursors.WaitCursor
+        If is_view = "1" Then
+            FormDocumentUpload.is_view = is_view
+        End If
         FormDocumentUpload.id_report = id_emp_uni_design
         FormDocumentUpload.report_mark_type = "123"
         FormDocumentUpload.ShowDialog()
@@ -166,5 +173,11 @@
                 e.DisplayText = "-"
             End If
         End If
+    End Sub
+
+    Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles BtnPrint.Click
+        Cursor = Cursors.WaitCursor
+        print_raw(GCData, "")
+        Cursor = Cursors.Default
     End Sub
 End Class

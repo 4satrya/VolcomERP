@@ -84,6 +84,9 @@
         ElseIf report_mark_type = "110" Then
             'propose leave manager
             FormEmpLeaveDet.Close()
+        ElseIf report_mark_type = "123" Then
+            'uniform list
+            FormEmpUniListDet.Close()
         ElseIf report_mark_type = "124" Then
             'propose leave manager
             FormEmpLeaveDet.Close()
@@ -567,6 +570,11 @@
             FormSalesReturnDet.action = "upd"
             FormSalesReturnDet.is_view = "1"
             FormSalesReturnDet.ShowDialog()
+        ElseIf report_mark_type = "123" Then
+            'uniform List
+            FormEmpUniListDet.is_view = "1"
+            FormEmpUniListDet.id_emp_uni_design = id_report
+            FormEmpUniListDet.ShowDialog()
         ElseIf report_mark_type = "124" Then
             'Propose Leave (Manager KK Unit)
             FormEmpLeaveDet.id_emp_leave = id_report

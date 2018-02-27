@@ -59,6 +59,14 @@ Partial Class FormMasterPrice
         Me.GridColumnSeason = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
         Me.XTPImport = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCFilter = New DevExpress.XtraEditors.GroupControl()
+        Me.BtnViewImport = New DevExpress.XtraEditors.SimpleButton()
+        Me.BHide = New DevExpress.XtraEditors.SimpleButton()
+        Me.BExpand = New DevExpress.XtraEditors.SimpleButton()
+        Me.DEUntilImport = New DevExpress.XtraEditors.DateEdit()
+        Me.DEFromImport = New DevExpress.XtraEditors.DateEdit()
+        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.GCPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XTCPrice, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -75,15 +83,21 @@ Partial Class FormMasterPrice
         CType(Me.SLESeason.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTPImport.SuspendLayout()
+        CType(Me.GCFilter, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GCFilter.SuspendLayout()
+        CType(Me.DEUntilImport.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEUntilImport.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEFromImport.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEFromImport.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GCPrice
         '
         Me.GCPrice.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCPrice.Location = New System.Drawing.Point(0, 0)
+        Me.GCPrice.Location = New System.Drawing.Point(0, 39)
         Me.GCPrice.MainView = Me.GVPrice
         Me.GCPrice.Name = "GCPrice"
-        Me.GCPrice.Size = New System.Drawing.Size(699, 317)
+        Me.GCPrice.Size = New System.Drawing.Size(699, 278)
         Me.GCPrice.TabIndex = 0
         Me.GCPrice.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVPrice})
         '
@@ -420,9 +434,97 @@ Partial Class FormMasterPrice
         'XTPImport
         '
         Me.XTPImport.Controls.Add(Me.GCPrice)
+        Me.XTPImport.Controls.Add(Me.GCFilter)
         Me.XTPImport.Name = "XTPImport"
         Me.XTPImport.Size = New System.Drawing.Size(699, 317)
         Me.XTPImport.Text = "Import from Excel"
+        '
+        'GCFilter
+        '
+        Me.GCFilter.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GCFilter.Controls.Add(Me.BtnViewImport)
+        Me.GCFilter.Controls.Add(Me.BHide)
+        Me.GCFilter.Controls.Add(Me.BExpand)
+        Me.GCFilter.Controls.Add(Me.DEUntilImport)
+        Me.GCFilter.Controls.Add(Me.DEFromImport)
+        Me.GCFilter.Controls.Add(Me.LabelControl3)
+        Me.GCFilter.Controls.Add(Me.LabelControl5)
+        Me.GCFilter.Dock = System.Windows.Forms.DockStyle.Top
+        Me.GCFilter.Location = New System.Drawing.Point(0, 0)
+        Me.GCFilter.Name = "GCFilter"
+        Me.GCFilter.Size = New System.Drawing.Size(699, 39)
+        Me.GCFilter.TabIndex = 4
+        '
+        'BtnViewImport
+        '
+        Me.BtnViewImport.Location = New System.Drawing.Point(317, 9)
+        Me.BtnViewImport.LookAndFeel.SkinName = "Blue"
+        Me.BtnViewImport.Name = "BtnViewImport"
+        Me.BtnViewImport.Size = New System.Drawing.Size(75, 20)
+        Me.BtnViewImport.TabIndex = 8896
+        Me.BtnViewImport.Text = "View"
+        '
+        'BHide
+        '
+        Me.BHide.ImageIndex = 9
+        Me.BHide.Location = New System.Drawing.Point(938, 14)
+        Me.BHide.Name = "BHide"
+        Me.BHide.Size = New System.Drawing.Size(104, 20)
+        Me.BHide.TabIndex = 8898
+        Me.BHide.Text = "Hide All Detail"
+        Me.BHide.Visible = False
+        '
+        'BExpand
+        '
+        Me.BExpand.ImageIndex = 8
+        Me.BExpand.Location = New System.Drawing.Point(835, 14)
+        Me.BExpand.Name = "BExpand"
+        Me.BExpand.Size = New System.Drawing.Size(99, 20)
+        Me.BExpand.TabIndex = 8897
+        Me.BExpand.Text = "Expand All Detail"
+        Me.BExpand.Visible = False
+        '
+        'DEUntilImport
+        '
+        Me.DEUntilImport.EditValue = Nothing
+        Me.DEUntilImport.Location = New System.Drawing.Point(202, 9)
+        Me.DEUntilImport.Name = "DEUntilImport"
+        Me.DEUntilImport.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEUntilImport.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.DEUntilImport.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.DEUntilImport.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEUntilImport.Properties.Mask.EditMask = "dd\/MM\/yyyy"
+        Me.DEUntilImport.Size = New System.Drawing.Size(111, 20)
+        Me.DEUntilImport.TabIndex = 8895
+        '
+        'DEFromImport
+        '
+        Me.DEFromImport.EditValue = Nothing
+        Me.DEFromImport.Location = New System.Drawing.Point(58, 9)
+        Me.DEFromImport.Name = "DEFromImport"
+        Me.DEFromImport.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEFromImport.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.DEFromImport.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.DEFromImport.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEFromImport.Properties.Mask.EditMask = "dd\/MM\/yyyy"
+        Me.DEFromImport.Size = New System.Drawing.Size(111, 20)
+        Me.DEFromImport.TabIndex = 8894
+        '
+        'LabelControl3
+        '
+        Me.LabelControl3.Location = New System.Drawing.Point(175, 12)
+        Me.LabelControl3.Name = "LabelControl3"
+        Me.LabelControl3.Size = New System.Drawing.Size(21, 13)
+        Me.LabelControl3.TabIndex = 8893
+        Me.LabelControl3.Text = "Until"
+        '
+        'LabelControl5
+        '
+        Me.LabelControl5.Location = New System.Drawing.Point(28, 12)
+        Me.LabelControl5.Name = "LabelControl5"
+        Me.LabelControl5.Size = New System.Drawing.Size(24, 13)
+        Me.LabelControl5.TabIndex = 8892
+        Me.LabelControl5.Text = "From"
         '
         'FormMasterPrice
         '
@@ -451,6 +553,13 @@ Partial Class FormMasterPrice
         CType(Me.SLESeason.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XTPImport.ResumeLayout(False)
+        CType(Me.GCFilter, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GCFilter.ResumeLayout(False)
+        Me.GCFilter.PerformLayout()
+        CType(Me.DEUntilImport.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEUntilImport.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEFromImport.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEFromImport.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -495,4 +604,12 @@ Partial Class FormMasterPrice
     Friend WithEvents GridColumnNo As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnDel As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnPriceType As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GCFilter As DevExpress.XtraEditors.GroupControl
+    Friend WithEvents BtnViewImport As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BHide As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BExpand As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents DEUntilImport As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents DEFromImport As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents LabelControl3 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LabelControl5 As DevExpress.XtraEditors.LabelControl
 End Class

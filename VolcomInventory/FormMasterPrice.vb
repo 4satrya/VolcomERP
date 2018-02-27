@@ -5,12 +5,13 @@
     Dim super_user As String = get_setup_field("id_role_super_admin")
 
     Private Sub FormMasterPrice_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        viewPrice()
         viewSeason()
 
         'set default
         Dim dt_now As DataTable = execute_query("SELECT DATE(NOW()) as tgl", -1, True, "", "", "", "")
         DEFrom.EditValue = dt_now.Rows(0)("tgl")
+        DEFromImport.EditValue = dt_now.Rows(0)("tgl")
+        DEUntilImport.EditValue = dt_now.Rows(0)("tgl")
     End Sub
 
     Sub viewSeason()
@@ -63,15 +64,30 @@
     End Sub
 
     Sub viewPrice()
+        Cursor = Cursors.WaitCursor
+        'Prepare paramater
+        Dim date_from_selected As String = "0000-01-01"
+        Dim date_until_selected As String = "9999-01-01"
+        Try
+            date_from_selected = DateTime.Parse(DEFromImport.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+        Try
+            date_until_selected = DateTime.Parse(DEUntilImport.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+
         Dim query_c As ClassDesign = New ClassDesign()
-        Dim cond As String = "-1"
+        Dim cond As String = "AND (prc.fg_price_date>='" + date_from_selected + "' AND prc.fg_price_date<='" + date_until_selected + "') "
         If id_role_login <> super_user Then
-            cond = "AND prc.id_user_created='" + id_user + "' "
+            cond += "AND prc.id_user_created='" + id_user + "' "
         End If
+
         Dim query As String = query_c.queryPriceExcelMain(cond, "2")
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCPrice.DataSource = data
         check_menu()
+        Cursor = Cursors.Default
     End Sub
 
     Private Sub FormMasterPrice_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
@@ -116,6 +132,7 @@
                 bdel_active = "1"
                 noManipulating()
             End If
+            DEFromImport.Focus()
         End If
     End Sub
 
@@ -181,5 +198,21 @@
 
     Private Sub SLESeason_EditValueChanged(sender As Object, e As EventArgs) Handles SLESeason.EditValueChanged
         viewDel()
+    End Sub
+
+    Private Sub SimpleButton1_Click(sender As Object, e As EventArgs) Handles BtnViewImport.Click
+        viewPrice()
+    End Sub
+
+    Private Sub DEFromImport_KeyDown(sender As Object, e As KeyEventArgs) Handles DEFromImport.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            DEUntilImport.Focus()
+        End If
+    End Sub
+
+    Private Sub DEUntilImport_KeyDown(sender As Object, e As KeyEventArgs) Handles DEUntilImport.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            BtnViewImport.Focus()
+        End If
     End Sub
 End Class

@@ -11149,4 +11149,17 @@ Public Class FormMain
         End Try
         Cursor = Cursors.Default
     End Sub
+
+    Private Sub NBProdOver_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBProdOver.LinkClicked
+        Cursor = Cursors.WaitCursor
+        'Try
+        '    FormEmpLeaveCut.MdiParent = Me
+        '    FormEmpLeaveCut.Show()
+        '    FormEmpLeaveCut.WindowState = FormWindowState.Maximized
+        '    FormEmpLeaveCut.Focus()
+        'Catch ex As Exception
+        '    errorProcess()
+        'End Try
+        Cursor = Cursors.Default
+    End Sub
 End Class

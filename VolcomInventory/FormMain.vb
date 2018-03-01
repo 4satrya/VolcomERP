@@ -1523,6 +1523,9 @@ Public Class FormMain
         ElseIf formName = "FormEmpLeaveCut" Then
             FormEmpLeaveCutDet.id_leave_cut = "-1"
             FormEmpLeaveCutDet.ShowDialog()
+        ElseIf formName = "FormProdOverMemo" Then
+            FormProdOverMemoDet.action = "ins"
+            FormProdOverMemoDet.ShowDialog()
         Else
             RPSubMenu.Visible = False
         End If
@@ -2434,6 +2437,10 @@ Public Class FormMain
             ElseIf formName = "FormEmpLeaveCut" Then
                 FormEmpLeaveCutDet.id_leave_cut = FormEmpLeaveCut.GVPayrollPeriode.GetFocusedRowCellValue("id_leave_cut").ToString
                 FormEmpLeaveCutDet.ShowDialog()
+            ElseIf formName = "FormProdOverMemo" Then
+                FormProdOverMemoDet.id_prod_over_memo = FormProdOverMemo.GVMemo.GetFocusedRowCellValue("id_prod_over_memo").ToString
+                FormProdOverMemoDet.action = "ins"
+                FormProdOverMemoDet.ShowDialog()
             Else
                 RPSubMenu.Visible = False
             End If
@@ -6790,6 +6797,8 @@ Public Class FormMain
             End If
         ElseIf formName = "FormEmpLeaveCut" Then
             print_raw(FormEmpLeaveCut.GCPayrollPeriode, "")
+        ElseIf formName = "FormProdOverMemo" Then
+            print_raw(FormProdOverMemo.GCMemo, "")
         Else
             RPSubMenu.Visible = False
         End If
@@ -7383,6 +7392,9 @@ Public Class FormMain
         ElseIf formName = "FormEmpLeaveCut" Then
             FormEmpLeaveCut.Close()
             FormEmpLeaveCut.Dispose()
+        ElseIf formName = "FormProdOverMemo" Then
+            FormProdOverMemo.Close()
+            FormProdOverMemo.Dispose()
         Else
             RPSubMenu.Visible = False
         End If
@@ -8056,6 +8068,8 @@ Public Class FormMain
             End If
         ElseIf formName = "FormEmpLeaveCut" Then
             FormEmpLeaveCut.load_leave_cut()
+        ElseIf formName = "FormProdOverMemo" Then
+            FormProdOverMemo.viewData()
         End If
     End Sub
     'Switch
@@ -11152,14 +11166,14 @@ Public Class FormMain
 
     Private Sub NBProdOver_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBProdOver.LinkClicked
         Cursor = Cursors.WaitCursor
-        'Try
-        '    FormEmpLeaveCut.MdiParent = Me
-        '    FormEmpLeaveCut.Show()
-        '    FormEmpLeaveCut.WindowState = FormWindowState.Maximized
-        '    FormEmpLeaveCut.Focus()
-        'Catch ex As Exception
-        '    errorProcess()
-        'End Try
+        Try
+            FormProdOverMemo.MdiParent = Me
+            FormProdOverMemo.Show()
+            FormProdOverMemo.WindowState = FormWindowState.Maximized
+            FormProdOverMemo.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
         Cursor = Cursors.Default
     End Sub
 End Class

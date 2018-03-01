@@ -1418,6 +1418,18 @@
     <Compile Include="FormProdOverMemo.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormProdOverMemoDet.Designer.vb">
+      <DependentUpon>FormProdOverMemoDet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormProdOverMemoDet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormProdOverMemoSingle.Designer.vb">
+      <DependentUpon>FormProdOverMemoSingle.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormProdOverMemoSingle.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormProductionAssembly.Designer.vb">
       <DependentUpon>FormProductionAssembly.vb</DependentUpon>
     </Compile>
@@ -5814,6 +5826,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormProdOverMemo.resx">
       <DependentUpon>FormProdOverMemo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormProdOverMemoDet.resx">
+      <DependentUpon>FormProdOverMemoDet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormProdOverMemoSingle.resx">
+      <DependentUpon>FormProdOverMemoSingle.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormProductionAssembly.resx">
       <DependentUpon>FormProductionAssembly.vb</DependentUpon>

@@ -61,4 +61,10 @@
     Private Sub FormProdOverMemo_Deactivate(sender As Object, e As EventArgs) Handles MyBase.Deactivate
         FormMain.hide_rb()
     End Sub
+
+    Private Sub GVMemo_DoubleClick(sender As Object, e As EventArgs) Handles GVMemo.DoubleClick
+        If GVMemo.RowCount > 0 And GVMemo.FocusedRowHandle >= 0 Then
+            FormMain.but_edit()
+        End If
+    End Sub
 End Class

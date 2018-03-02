@@ -43,30 +43,30 @@
     End Sub
 
     Sub addUser()
-        Cursor = Cursors.WaitCursor
-        GVEmployee.ActiveFilterString = "[is_select]='Yes'"
-        If GVEmployee.RowCount > 0 Then
-            Dim fp As New ClassFingerPrint()
-            Dim data_fp As DataTable = fp.get_fp_register()
-            fp.ip = data_fp.Rows(0)("ip").ToString
-            fp.port = data_fp.Rows(0)("port").ToString
-            fp.connect()
-            fp.disable_fp()
-            For i As Integer = 0 To ((GVEmployee.RowCount - 1) - GetGroupRowCount(GVEmployee))
-                Dim is_select As String = GVEmployee.GetRowCellValue(i, "is_select").ToString
-                Dim code As String = GVEmployee.GetRowCellValue(i, "employee_code").ToString
-                Dim name As String = GVEmployee.GetRowCellValue(i, "employee_name").ToString
-                fp.setUserInfo(code, name, "", 0, True)
-            Next
-            fp.refresh_fp()
-            fp.enable_fp()
-            fp.disconnect()
-            infoCustom("OK")
-        Else
-            stopCustom("No item selected.")
-        End If
-        GVEmployee.ActiveFilterString = ""
-        Cursor = Cursors.Default
+        'Cursor = Cursors.WaitCursor
+        'GVEmployee.ActiveFilterString = "[is_select]='Yes'"
+        'If GVEmployee.RowCount > 0 Then
+        '    Dim fp As New ClassFingerPrint()
+        '    Dim data_fp As DataTable = fp.get_fp_register()
+        '    fp.ip = data_fp.Rows(0)("ip").ToString
+        '    fp.port = data_fp.Rows(0)("port").ToString
+        '    fp.connect()
+        '    fp.disable_fp()
+        '    For i As Integer = 0 To ((GVEmployee.RowCount - 1) - GetGroupRowCount(GVEmployee))
+        '        Dim is_select As String = GVEmployee.GetRowCellValue(i, "is_select").ToString
+        '        Dim code As String = GVEmployee.GetRowCellValue(i, "employee_code").ToString
+        '        Dim name As String = GVEmployee.GetRowCellValue(i, "employee_name").ToString
+        '        fp.setUserInfo(code, name, "", 0, True)
+        '    Next
+        '    fp.refresh_fp()
+        '    fp.enable_fp()
+        '    fp.disconnect()
+        '    infoCustom("OK")
+        'Else
+        '    stopCustom("No item selected.")
+        'End If
+        'GVEmployee.ActiveFilterString = ""
+        'Cursor = Cursors.Default
     End Sub
 
     Private Sub RepositoryItemCheckEdit1_EditValueChanged(sender As Object, e As EventArgs) Handles RepositoryItemCheckEdit1.EditValueChanged

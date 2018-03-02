@@ -188,27 +188,27 @@ Public Class FormMain
     Sub check_pic_location()
         'picture location
         Dim err_pic As String = "-1"
-        Try
-            Dim pic_path_mat As String = get_setup_field("pic_path_mat")
-            Dim pic_path_sample As String = get_setup_field("pic_path_sample")
-            Dim pic_path_design As String = get_setup_field("pic_path_design")
-            Dim pic_path_logo As String = get_setup_field("pic_path_logo")
+        'Try
+        '    Dim pic_path_mat As String = get_setup_field("pic_path_mat")
+        '    Dim pic_path_sample As String = get_setup_field("pic_path_sample")
+        '    Dim pic_path_design As String = get_setup_field("pic_path_design")
+        '    Dim pic_path_logo As String = get_setup_field("pic_path_logo")
 
-            If pic_path_mat = "" Or pic_path_sample = "" Or pic_path_design = "" Or pic_path_logo = "" Then
-                err_pic = "1"
-            Else
-                If Not System.IO.Directory.Exists(pic_path_sample) Or Not System.IO.Directory.Exists(pic_path_mat) Or Not System.IO.Directory.Exists(pic_path_design) Or Not System.IO.Directory.Exists(pic_path_logo) Then
-                    err_pic = "1"
-                Else
-                    If Not System.IO.File.Exists(pic_path_mat & "\default.jpg") Or Not System.IO.File.Exists(pic_path_sample & "\default.jpg") Or Not System.IO.File.Exists(pic_path_design & "\default.jpg") Or Not System.IO.File.Exists(pic_path_logo & "\default.jpg") Then
-                        err_pic = "2"
-                    End If
-                End If
-            End If
-        Catch ex As Exception
-            'err_pic = "1"
-            MsgBox(ex.ToString)
-        End Try
+        '    If pic_path_mat = "" Or pic_path_sample = "" Or pic_path_design = "" Or pic_path_logo = "" Then
+        '        err_pic = "1"
+        '    Else
+        '        If Not System.IO.Directory.Exists(pic_path_sample) Or Not System.IO.Directory.Exists(pic_path_mat) Or Not System.IO.Directory.Exists(pic_path_design) Or Not System.IO.Directory.Exists(pic_path_logo) Then
+        '            err_pic = "1"
+        '        Else
+        '            If Not System.IO.File.Exists(pic_path_mat & "\default.jpg") Or Not System.IO.File.Exists(pic_path_sample & "\default.jpg") Or Not System.IO.File.Exists(pic_path_design & "\default.jpg") Or Not System.IO.File.Exists(pic_path_logo & "\default.jpg") Then
+        '                err_pic = "2"
+        '            End If
+        '        End If
+        '    End If
+        'Catch ex As Exception
+        '    'err_pic = "1"
+        '    MsgBox(ex.ToString)
+        'End Try
         '
         If err_pic <> "-1" Then
             LoginToolStripMenuItem.Visible = False
@@ -4680,16 +4680,16 @@ Public Class FormMain
 
                     'delete fp
                     Try
-                        Dim fp As New ClassFingerPrint()
-                        Dim data_fp As DataTable = fp.get_fp_register()
-                        fp.ip = data_fp.Rows(0)("ip").ToString
-                        fp.port = data_fp.Rows(0)("port").ToString
-                        fp.connect()
-                        fp.disable_fp()
-                        fp.deleteUserInfo(employee_code)
-                        fp.refresh_fp()
-                        fp.enable_fp()
-                        fp.disconnect()
+                        'Dim fp As New ClassFingerPrint()
+                        'Dim data_fp As DataTable = fp.get_fp_register()
+                        'fp.ip = data_fp.Rows(0)("ip").ToString
+                        'fp.port = data_fp.Rows(0)("port").ToString
+                        'fp.connect()
+                        'fp.disable_fp()
+                        'fp.deleteUserInfo(employee_code)
+                        'fp.refresh_fp()
+                        'fp.enable_fp()
+                        'fp.disconnect()
                     Catch ex As Exception
                         stopCustom(ex.ToString)
                     End Try
@@ -8024,7 +8024,7 @@ Public Class FormMain
                 FormWHCargoRate.load_cargo_rate_in()
             End If
         ElseIf formName = "FormEmpFP" Then
-            FormEmpFP.viewFP()
+            'FormEmpFP.viewFP()
         ElseIf formName = "FormEmpShift" Then
             'Shift employee
             FormEmpShift.load_schedule()

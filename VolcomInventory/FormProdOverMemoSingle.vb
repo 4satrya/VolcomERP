@@ -15,9 +15,9 @@
 
         End Try
         If memo_number = "" Then
-            GVProd.Columns("check").OptionsColumn.AllowEdit = False
-        Else
             GVProd.Columns("check").OptionsColumn.AllowEdit = True
+        Else
+            GVProd.Columns("check").OptionsColumn.AllowEdit = False
         End If
     End Sub
 
@@ -90,7 +90,7 @@
                         ,wo.id_prod_order_wo,
                         IF(a.is_closing_rec=1,'Closed','Opened') AS `rec_status`,
                         a.is_special_rec, a.special_rec_memo, a.special_rec_datetime,
-                        mm.memo_number, mm.created_date, mm.expired_date 
+                        mm.memo_number, mm.created_date, mm.expired_date, '' AS `remark`, 'no' AS `check`
                         FROM tb_prod_order a 
                         INNER JOIN tb_prod_order_det pod ON pod.id_prod_order=a.id_prod_order 
                         INNER JOIN tb_prod_demand_design b ON a.id_prod_demand_design = b.id_prod_demand_design 
@@ -188,8 +188,8 @@
                 newRow("id_prod_over_memo") = "0"
                 newRow("id_prod_order") = GVProd.GetRowCellValue(i, "id_prod_order").ToString
                 newRow("prod_order_number") = GVProd.GetRowCellValue(i, "prod_order_number").ToString
-                newRow("code") = GVProd.GetRowCellValue(i, "code").ToString
-                newRow("name") = GVProd.GetRowCellValue(i, "name").ToString
+                newRow("code") = GVProd.GetRowCellValue(i, "design_code").ToString
+                newRow("name") = GVProd.GetRowCellValue(i, "design_display_name").ToString
                 newRow("remark") = GVProd.GetRowCellValue(i, "remark").ToString
                 TryCast(FormProdOverMemoDet.GCData.DataSource, DataTable).Rows.Add(newRow)
                 FormProdOverMemoDet.GCData.RefreshDataSource()
@@ -200,5 +200,9 @@
 
         GVProd.ActiveFilterString = ""
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub FormProdOverMemoSingle_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        Dispose()
     End Sub
 End Class

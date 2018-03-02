@@ -23,26 +23,26 @@ Partial Class FormProdOverMemoSingle
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
         Me.SLEVendor = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView14 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.SLESeason = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.BSearch = New DevExpress.XtraEditors.SimpleButton()
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.SLEDesignStockStore = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GVSLEDesgSearch = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.LabelControl9 = New DevExpress.XtraEditors.LabelControl()
-        Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnCodeSearch = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl9 = New DevExpress.XtraEditors.LabelControl()
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
+        Me.BtnChoose = New DevExpress.XtraEditors.SimpleButton()
         Me.PCSelAll = New DevExpress.XtraEditors.PanelControl()
         Me.CheckEditSelAll = New DevExpress.XtraEditors.CheckEdit()
-        Me.PBCLineList = New DevExpress.XtraEditors.ProgressBarControl()
         Me.GCProd = New DevExpress.XtraGrid.GridControl()
         Me.GVProd = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumnIDWO = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -84,7 +84,6 @@ Partial Class FormProdOverMemoSingle
         Me.GridColumnBAP = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnMemoDate = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnMemoExpired = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.BtnChoose = New DevExpress.XtraEditors.SimpleButton()
         Me.GridColumnRemakr = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
@@ -99,7 +98,6 @@ Partial Class FormProdOverMemoSingle
         CType(Me.PCSelAll, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PCSelAll.SuspendLayout()
         CType(Me.CheckEditSelAll.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PBCLineList.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GCProd, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVProd, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RICESelect, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -140,6 +138,30 @@ Partial Class FormProdOverMemoSingle
         Me.GridView14.OptionsSelection.EnableAppearanceFocusedCell = False
         Me.GridView14.OptionsView.ShowGroupPanel = False
         '
+        'GridColumn10
+        '
+        Me.GridColumn10.Caption = "Id Comp"
+        Me.GridColumn10.FieldName = "id_comp"
+        Me.GridColumn10.Name = "GridColumn10"
+        '
+        'GridColumn11
+        '
+        Me.GridColumn11.Caption = "Comp Number"
+        Me.GridColumn11.FieldName = "comp_number"
+        Me.GridColumn11.Name = "GridColumn11"
+        Me.GridColumn11.Visible = True
+        Me.GridColumn11.VisibleIndex = 0
+        Me.GridColumn11.Width = 188
+        '
+        'GridColumn12
+        '
+        Me.GridColumn12.Caption = "Comp Name"
+        Me.GridColumn12.FieldName = "comp_name"
+        Me.GridColumn12.Name = "GridColumn12"
+        Me.GridColumn12.Visible = True
+        Me.GridColumn12.VisibleIndex = 1
+        Me.GridColumn12.Width = 504
+        '
         'SLESeason
         '
         Me.SLESeason.Location = New System.Drawing.Point(304, 9)
@@ -158,6 +180,20 @@ Partial Class FormProdOverMemoSingle
         Me.SearchLookUpEdit1View.Name = "SearchLookUpEdit1View"
         Me.SearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = False
         Me.SearchLookUpEdit1View.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn6
+        '
+        Me.GridColumn6.Caption = "Id Season"
+        Me.GridColumn6.FieldName = "id_season"
+        Me.GridColumn6.Name = "GridColumn6"
+        '
+        'GridColumn8
+        '
+        Me.GridColumn8.Caption = "Season"
+        Me.GridColumn8.FieldName = "season"
+        Me.GridColumn8.Name = "GridColumn8"
+        Me.GridColumn8.Visible = True
+        Me.GridColumn8.VisibleIndex = 0
         '
         'BSearch
         '
@@ -202,53 +238,6 @@ Partial Class FormProdOverMemoSingle
         Me.GVSLEDesgSearch.OptionsSelection.EnableAppearanceFocusedCell = False
         Me.GVSLEDesgSearch.OptionsView.ShowGroupPanel = False
         '
-        'LabelControl9
-        '
-        Me.LabelControl9.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl9.Location = New System.Drawing.Point(12, 12)
-        Me.LabelControl9.Name = "LabelControl9"
-        Me.LabelControl9.Size = New System.Drawing.Size(32, 13)
-        Me.LabelControl9.TabIndex = 8906
-        Me.LabelControl9.Text = "Design"
-        '
-        'GridColumn10
-        '
-        Me.GridColumn10.Caption = "Id Comp"
-        Me.GridColumn10.FieldName = "id_comp"
-        Me.GridColumn10.Name = "GridColumn10"
-        '
-        'GridColumn11
-        '
-        Me.GridColumn11.Caption = "Comp Number"
-        Me.GridColumn11.FieldName = "comp_number"
-        Me.GridColumn11.Name = "GridColumn11"
-        Me.GridColumn11.Visible = True
-        Me.GridColumn11.VisibleIndex = 0
-        Me.GridColumn11.Width = 188
-        '
-        'GridColumn12
-        '
-        Me.GridColumn12.Caption = "Comp Name"
-        Me.GridColumn12.FieldName = "comp_name"
-        Me.GridColumn12.Name = "GridColumn12"
-        Me.GridColumn12.Visible = True
-        Me.GridColumn12.VisibleIndex = 1
-        Me.GridColumn12.Width = 504
-        '
-        'GridColumn6
-        '
-        Me.GridColumn6.Caption = "Id Season"
-        Me.GridColumn6.FieldName = "id_season"
-        Me.GridColumn6.Name = "GridColumn6"
-        '
-        'GridColumn8
-        '
-        Me.GridColumn8.Caption = "Season"
-        Me.GridColumn8.FieldName = "season"
-        Me.GridColumn8.Name = "GridColumn8"
-        Me.GridColumn8.Visible = True
-        Me.GridColumn8.VisibleIndex = 0
-        '
         'GridColumnCodeSearch
         '
         Me.GridColumnCodeSearch.Caption = "Code"
@@ -280,23 +269,41 @@ Partial Class FormProdOverMemoSingle
         Me.GridColumn9.VisibleIndex = 2
         Me.GridColumn9.Width = 146
         '
+        'LabelControl9
+        '
+        Me.LabelControl9.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl9.Location = New System.Drawing.Point(12, 12)
+        Me.LabelControl9.Name = "LabelControl9"
+        Me.LabelControl9.Size = New System.Drawing.Size(32, 13)
+        Me.LabelControl9.TabIndex = 8906
+        Me.LabelControl9.Text = "Design"
+        '
         'PanelControl2
         '
         Me.PanelControl2.Controls.Add(Me.BtnChoose)
         Me.PanelControl2.Controls.Add(Me.PCSelAll)
-        Me.PanelControl2.Controls.Add(Me.PBCLineList)
         Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.PanelControl2.Location = New System.Drawing.Point(0, 493)
         Me.PanelControl2.Name = "PanelControl2"
         Me.PanelControl2.Size = New System.Drawing.Size(938, 39)
         Me.PanelControl2.TabIndex = 2
         '
+        'BtnChoose
+        '
+        Me.BtnChoose.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnChoose.Image = CType(resources.GetObject("BtnChoose.Image"), System.Drawing.Image)
+        Me.BtnChoose.Location = New System.Drawing.Point(847, 2)
+        Me.BtnChoose.Name = "BtnChoose"
+        Me.BtnChoose.Size = New System.Drawing.Size(89, 35)
+        Me.BtnChoose.TabIndex = 107
+        Me.BtnChoose.Text = "Choose"
+        '
         'PCSelAll
         '
         Me.PCSelAll.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
         Me.PCSelAll.Controls.Add(Me.CheckEditSelAll)
         Me.PCSelAll.Dock = System.Windows.Forms.DockStyle.Left
-        Me.PCSelAll.Location = New System.Drawing.Point(123, 2)
+        Me.PCSelAll.Location = New System.Drawing.Point(2, 2)
         Me.PCSelAll.Name = "PCSelAll"
         Me.PCSelAll.Size = New System.Drawing.Size(108, 35)
         Me.PCSelAll.TabIndex = 105
@@ -308,15 +315,6 @@ Partial Class FormProdOverMemoSingle
         Me.CheckEditSelAll.Properties.Caption = "Select All Item"
         Me.CheckEditSelAll.Size = New System.Drawing.Size(99, 19)
         Me.CheckEditSelAll.TabIndex = 102
-        '
-        'PBCLineList
-        '
-        Me.PBCLineList.Dock = System.Windows.Forms.DockStyle.Left
-        Me.PBCLineList.Location = New System.Drawing.Point(2, 2)
-        Me.PBCLineList.Name = "PBCLineList"
-        Me.PBCLineList.Properties.ShowTitle = True
-        Me.PBCLineList.Size = New System.Drawing.Size(121, 35)
-        Me.PBCLineList.TabIndex = 104
         '
         'GCProd
         '
@@ -751,17 +749,6 @@ Partial Class FormProdOverMemoSingle
         Me.GridColumnMemoExpired.VisibleIndex = 8
         Me.GridColumnMemoExpired.Width = 141
         '
-        'BtnChoose
-        '
-        Me.BtnChoose.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BtnChoose.Image = CType(resources.GetObject("BtnChoose.Image"), System.Drawing.Image)
-        Me.BtnChoose.Location = New System.Drawing.Point(847, 2)
-        Me.BtnChoose.Name = "BtnChoose"
-        Me.BtnChoose.Size = New System.Drawing.Size(89, 35)
-        Me.BtnChoose.TabIndex = 107
-        Me.BtnChoose.Text = "Choose"
-        Me.BtnChoose.Visible = False
-        '
         'GridColumnRemakr
         '
         Me.GridColumnRemakr.Caption = "Remark"
@@ -799,7 +786,6 @@ Partial Class FormProdOverMemoSingle
         CType(Me.PCSelAll, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PCSelAll.ResumeLayout(False)
         CType(Me.CheckEditSelAll.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PBCLineList.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GCProd, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVProd, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RICESelect, System.ComponentModel.ISupportInitialize).EndInit()
@@ -830,7 +816,6 @@ Partial Class FormProdOverMemoSingle
     Friend WithEvents PanelControl2 As DevExpress.XtraEditors.PanelControl
     Friend WithEvents PCSelAll As DevExpress.XtraEditors.PanelControl
     Friend WithEvents CheckEditSelAll As DevExpress.XtraEditors.CheckEdit
-    Friend WithEvents PBCLineList As DevExpress.XtraEditors.ProgressBarControl
     Friend WithEvents GCProd As DevExpress.XtraGrid.GridControl
     Friend WithEvents GVProd As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumnIDWO As DevExpress.XtraGrid.Columns.GridColumn

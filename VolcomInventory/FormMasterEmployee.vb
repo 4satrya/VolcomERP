@@ -117,7 +117,7 @@
         Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure want to sync all machine?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
         If confirm = Windows.Forms.DialogResult.Yes Then
             Dim fp As New ClassFingerPrint()
-            fp.sync_all()
+            'fp.sync_all()
         End If
     End Sub
 

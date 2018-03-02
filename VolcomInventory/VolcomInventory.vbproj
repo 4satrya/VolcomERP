@@ -5168,6 +5168,7 @@
     <Compile Include="XtraFormViewFGWHAlloc.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="zkemkeeper\CZKEM.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AppLauncher.resx">

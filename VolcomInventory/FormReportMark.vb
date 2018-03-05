@@ -214,7 +214,7 @@
         ElseIf report_mark_type = "48" Then
             'SALES VIRTUAL POS
             query = String.Format("SELECT id_report_status,sales_pos_number as report_number FROM tb_sales_pos WHERE id_sales_pos = '{0}'", id_report)
-        ElseIf report_mark_type = "49" Then
+        ElseIf report_mark_type = "49" Or report_mark_type = "106" Then
             'SALES RETURN QC
             query = String.Format("SELECT id_report_status,sales_return_qc_number as report_number FROM tb_sales_return_qc WHERE id_sales_return_qc = '{0}'", id_report)
         ElseIf report_mark_type = "50" Then
@@ -2201,7 +2201,7 @@
             Else
                 'code here
             End If
-        ElseIf report_mark_type = "49" Then
+        ElseIf report_mark_type = "49" Or report_mark_type = "106" Then
             'SALES RETURN QC
             Dim st As ClassSalesReturnQC = New ClassSalesReturnQC()
             st.changeStatus(id_report, id_status_reportx)
@@ -4593,7 +4593,7 @@
             pushNotif("Return Order", "Document #" + report_number + " is " + type, "FormSalesReturnOrder", dt.Rows(0)("id_user"), id_user, id_report, report_number, "1")
         ElseIf report_mark_type = "46" Then
             pushNotif("Return", "Document #" + report_number + " is " + type, "FormSalesReturn", dt.Rows(0)("id_user"), id_user, id_report, report_number, "1")
-        ElseIf report_mark_type = "49" Then
+        ElseIf report_mark_type = "49" Or report_mark_type = "106" Then
             pushNotif("Return QC", "Document #" + report_number + " is " + type, "FormSalesReturnQC", dt.Rows(0)("id_user"), id_user, id_report, report_number, "1")
         ElseIf report_mark_type = "82" Then
             pushNotif("Product Price From Excel", "Document #" + report_number + " is " + type, "FormMasterPrice", dt.Rows(0)("id_user"), id_user, id_report, report_number, "1")

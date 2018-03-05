@@ -379,6 +379,9 @@
         ElseIf report_mark_type = "124" Then
             'Propose Leave Admin Manager
             query = String.Format("SELECT id_report_status, emp_leave_number as report_number FROM tb_emp_leave WHERE id_emp_leave = '{0}'", id_report)
+        ElseIf report_mark_type = "126" Then
+            'over production memo
+            query = String.Format("SELECT id_report_status, memo_number as report_number FROM tb_prod_over_memo WHERE id_prod_over_memo = '{0}'", id_report)
         End If
 
         data = execute_query(query, -1, True, "", "", "", "")
@@ -3754,6 +3757,15 @@
             query = String.Format("UPDATE tb_emp_leave SET id_report_status='{0}' WHERE id_emp_leave ='{1}'", id_status_reportx, id_report)
             execute_non_query(query, True, "", "", "", "")
             'FormEmpLeave.load_sum()
+        ElseIf report_mark_type = "126" Then
+            'Production Over Memo
+            If id_status_reportx = "3" Then
+                id_status_reportx = "6"
+            End If
+
+            Dim query_upd As String = "UPDATE tb_prod_over_memo SET id_report_status='" + id_status_reportx + "' WHERE id_prod_over_memo='" + id_report + "' "
+            execute_non_query(query_upd, True, "", "", "", "")
+            FormProdOverMemoDet.actionLoad()
         End If
 
         'adding lead time

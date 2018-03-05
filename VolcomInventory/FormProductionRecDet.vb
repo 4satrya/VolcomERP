@@ -707,11 +707,16 @@ Public Class FormProductionRecDet
                     newRows()
                 Else
                     If id_prod_over_memo <> "NULL" Then
-                        is_over_tol = "1"
-                        GVBarcode.SetFocusedRowCellValue("is_fix", "2")
-                        GVBarcode.SetFocusedRowCellValue("id_prod_order_det", id_prod_order_det)
-                        countQty(id_prod_order_det)
-                        newRows()
+                        If getTimeDB() < expired_date Then
+                            is_over_tol = "1"
+                            GVBarcode.SetFocusedRowCellValue("is_fix", "2")
+                            GVBarcode.SetFocusedRowCellValue("id_prod_order_det", id_prod_order_det)
+                            countQty(id_prod_order_det)
+                            newRows()
+                        Else
+                            GVBarcode.SetFocusedRowCellValue("ean_code", "")
+                            stopCustom("Memo is expired !")
+                        End If
                     Else
                         GVBarcode.SetFocusedRowCellValue("ean_code", "")
                         stopCustom("Maximum receive : " + (total_max - total_rec).ToString)

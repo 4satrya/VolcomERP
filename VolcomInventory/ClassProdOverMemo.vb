@@ -13,7 +13,7 @@
         End If
 
         Dim query As String = "SELECT m.id_prod_over_memo, m.memo_number, m.created_date, m.lead_time, ADDTIME(m.created_date,CONCAT(m.lead_time,':00:00')) AS `expired_date`, 
-        m.id_report_status, rs.report_status
+        m.id_report_status, rs.report_status, m.memo_note
         FROM tb_prod_over_memo m
         INNER JOIN tb_lookup_report_status rs ON rs.id_report_status = m.id_report_status
         WHERE m.id_prod_over_memo>0 "

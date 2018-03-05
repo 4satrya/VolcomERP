@@ -66,6 +66,9 @@
         ElseIf report_mark_type = "25" Then
             'material PR WO
             FormViewMatPRWO.Close()
+        ElseIf report_mark_type = "28" Or report_mark_type = "127" Then
+            'receiving QC
+            FormViewProductionRec.Close()
         ElseIf report_mark_type = "29" Then
             'production MRS
             FormViewProductionMRS.Close()
@@ -245,7 +248,7 @@
             FormViewMatAdjOut.action = "upd"
             FormViewMatAdjOut.id_adj_out_mat = id_report
             FormViewMatAdjOut.ShowDialog()
-        ElseIf report_mark_type = "28" Then
+        ElseIf report_mark_type = "28" Or report_mark_type = "127" Then
             'receive FG QC
             FormViewProductionRec.id_receive = id_report
             FormViewProductionRec.ShowDialog()
@@ -792,7 +795,7 @@
             field_id = "id_adj_out_mat"
             field_number = "adj_out_mat_number"
             field_date = "adj_out_mat_date"
-        ElseIf report_mark_type = "28" Then
+        ElseIf report_mark_type = "28" Or report_mark_type = "127" Then
             'receive QC FG
             table_name = "tb_prod_order_rec"
             field_id = "id_prod_order_rec"
@@ -1302,7 +1305,7 @@
                     info_design_code = datax.Rows(0)("design_code").ToString
                     info_design = datax.Rows(0)("design_display_name").ToString
                 End If
-            ElseIf report_mark_type = "28" Then
+            ElseIf report_mark_type = "28" Or report_mark_type = "127" Then
                 'receiving QC
                 query = "SELECT a.id_report_status,h.report_status, g.id_season,g.season,a.id_prod_order_rec,a.prod_order_rec_number, "
                 query += "(a.delivery_order_date) AS delivery_order_date,a.delivery_order_number,b.prod_order_number, "

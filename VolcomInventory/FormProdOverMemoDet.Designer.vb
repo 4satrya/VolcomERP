@@ -105,6 +105,8 @@ Partial Class FormProdOverMemoDet
         Me.DEExpired.Name = "DEExpired"
         Me.DEExpired.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.DEExpired.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEExpired.Properties.DisplayFormat.FormatString = "dd MMMM yyyy hh:mm tt"
+        Me.DEExpired.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.DEExpired.Size = New System.Drawing.Size(211, 20)
         Me.DEExpired.TabIndex = 5
         '
@@ -116,6 +118,8 @@ Partial Class FormProdOverMemoDet
         Me.DECreated.Name = "DECreated"
         Me.DECreated.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.DECreated.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DECreated.Properties.DisplayFormat.FormatString = "dd MMMM yyyy hh:mm tt"
+        Me.DECreated.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.DECreated.Size = New System.Drawing.Size(211, 20)
         Me.DECreated.TabIndex = 4
         '

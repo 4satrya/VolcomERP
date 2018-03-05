@@ -7,7 +7,8 @@
     Dim sample_purc_rec_det_qty_inp As Decimal
     Dim myList(,) As String
     Dim is_start As Boolean = False
-
+    Dim is_over_tol As String = "2"
+    Dim id_prod_over_memo As String = "NULL"
 
     Private Sub FormProductionRecDet_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         If Not id_order = "-1" Then
@@ -19,7 +20,7 @@
         view_report_status(LEReportStatus)
 
         Dim order_created As String
-        Dim query = "SELECT j.id_design,IF(a.delivery_order_date<>'0000-00-00', 'date_normal','date_null') as del_date_type, i.id_sample, (i.design_display_name) AS `design_name`, a.id_report_status,a.prod_order_rec_note,a.id_comp_contact_from as id_comp_from,b.id_prod_order,a.id_comp_contact_to as id_comp_to,g.season,a.id_prod_order_rec,a.prod_order_rec_number,DATE_FORMAT(b.prod_order_date,'%Y-%m-%d') as prod_order_datex,b.prod_order_lead_time,a.delivery_order_date,a.delivery_order_number, a.arrive_date,b.prod_order_number,DATE_FORMAT(a.prod_order_rec_date,'%Y-%m-%d') AS prod_order_rec_date, f.comp_name AS comp_from, f.comp_number AS comp_from_number,d.comp_name AS comp_to, d.comp_number AS comp_to_number, i.id_sample, po_type.po_type "
+        Dim query = "SELECT j.id_design,IF(a.delivery_order_date<>'0000-00-00', 'date_normal','date_null') as del_date_type, i.id_sample, (i.design_display_name) AS `design_name`, a.id_report_status,a.prod_order_rec_note,a.id_comp_contact_from as id_comp_from,b.id_prod_order,a.id_comp_contact_to as id_comp_to,g.season,a.id_prod_order_rec,a.prod_order_rec_number,DATE_FORMAT(b.prod_order_date,'%Y-%m-%d') as prod_order_datex,b.prod_order_lead_time,a.delivery_order_date,a.delivery_order_number, a.arrive_date,b.prod_order_number,DATE_FORMAT(a.prod_order_rec_date,'%Y-%m-%d') AS prod_order_rec_date, f.comp_name AS comp_from, f.comp_number AS comp_from_number,d.comp_name AS comp_to, d.comp_number AS comp_to_number, i.id_sample, po_type.po_type, a.is_over_tol, a.id_prod_over_memo "
         query += "FROM tb_prod_order_rec a "
         query += "INNER JOIN tb_prod_order b ON a.id_prod_order=b.id_prod_order "
         query += "INNER JOIN tb_m_comp_contact c ON c.id_comp_contact=a.id_comp_contact_to "
@@ -41,10 +42,16 @@
 
         id_design = data.Rows(0)("id_design").ToString
         id_order = data.Rows(0)("id_prod_order").ToString
+        is_over_tol = data.Rows(0)("is_over_tol").ToString
+        id_prod_over_memo = data.Rows(0)("id_prod_over_memo").ToString
         id_comp_from = data.Rows(0)("id_comp_from").ToString
         TECompName.Text = data.Rows(0)("comp_from").ToString
         id_comp_to = data.Rows(0)("id_comp_to").ToString
         TECompShipToName.Text = data.Rows(0)("comp_to").ToString
+
+        If is_over_tol = "1" Then
+            BtnMemoOverTol.Visible = True
+        End If
 
         order_created = data.Rows(0)("prod_order_datex").ToString
         TEOrderDate.Text = view_date_from(order_created, 0)
@@ -75,6 +82,23 @@
         TERecNumber.Enabled = False
         view_list_rec()
         allow_status()
+
+        'get info
+        Dim qo As String = "SELECT pod.id_prod_order,SUM(pod.prod_order_qty) AS `order`, IFNULL(r.total_rec,0) AS `rec`
+        FROM tb_prod_order_det pod
+        LEFT JOIN (
+	        SELECT r.id_prod_order, SUM(rd.prod_order_rec_det_qty) AS `total_rec`
+	        FROM tb_prod_order_rec_det rd
+	        INNER JOIN tb_prod_order_rec r ON r.id_prod_order_rec = rd.id_prod_order_rec
+	        WHERE r.id_prod_order_rec!=" + id_receive + " AND r.id_report_status=6
+	        GROUP BY r.id_prod_order
+        ) r ON r.id_prod_order = pod.id_prod_order
+        WHERE pod.id_prod_order=" + id_order + "
+        GROUP BY pod.id_prod_order "
+        Dim dto As DataTable = execute_query(qo, -1, True, "", "", "", "")
+        TxtOrder.EditValue = dto.Rows(0)("order")
+        TxtRec.EditValue = dto.Rows(0)("rec") + GVListPurchase.Columns("prod_order_rec_det_qty").SummaryItem.SummaryValue
+        TxtDiff.EditValue = (TxtRec.EditValue - TxtOrder.EditValue) / TxtOrder.EditValue * 100
     End Sub
 
     Sub view_po()
@@ -133,6 +157,11 @@
         Cursor = Cursors.WaitCursor
         FormReportMark.id_report = id_receive
         FormReportMark.report_mark_type = "28"
+        If is_over_tol = "1" Then
+            FormReportMark.report_mark_type = "127"
+        Else
+            FormReportMark.report_mark_type = "28"
+        End If
         FormReportMark.is_view = "1"
         FormReportMark.form_origin = Name
         FormReportMark.ShowDialog()
@@ -194,8 +223,22 @@
     Private Sub BtnAttachment_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnAttachment.Click
         Cursor = Cursors.WaitCursor
         FormDocumentUpload.id_report = id_receive
-        FormDocumentUpload.report_mark_type = "28"
+        If is_over_tol = "1" Then
+            FormDocumentUpload.report_mark_type = "127"
+        Else
+            FormDocumentUpload.report_mark_type = "28"
+        End If
+
         FormDocumentUpload.is_view = "1"
+        FormDocumentUpload.ShowDialog()
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnMemoOverTol_Click(sender As Object, e As EventArgs) Handles BtnMemoOverTol.Click
+        Cursor = Cursors.WaitCursor
+        FormDocumentUpload.is_view = "1"
+        FormDocumentUpload.id_report = id_prod_over_memo
+        FormDocumentUpload.report_mark_type = 126
         FormDocumentUpload.ShowDialog()
         Cursor = Cursors.Default
     End Sub

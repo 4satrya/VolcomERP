@@ -14,6 +14,9 @@ Public Class FormProductionRecDet
     Dim total_max As Integer = 0
     Dim total_rec As Integer = 0
     Dim is_special_rec As String = "-1"
+    Dim expired_date As DateTime = Nothing
+    Dim is_over_tol As String = "2"
+    Dim id_prod_over_memo As String = "NULL"
 
 
 
@@ -74,7 +77,7 @@ Public Class FormProductionRecDet
             BMark.Enabled = True
 
             Dim order_created As String
-            Dim query = "SELECT j.id_design,IF(a.delivery_order_date<>'0000-00-00', 'date_normal','date_null') as del_date_type, i.id_sample, (i.design_display_name) AS `design_name`, a.id_report_status,a.prod_order_rec_note,a.id_comp_contact_from as id_comp_from,b.id_prod_order,a.id_comp_contact_to as id_comp_to,g.season,a.id_prod_order_rec,a.prod_order_rec_number,DATE_FORMAT(b.prod_order_date,'%Y-%m-%d') as prod_order_datex,b.prod_order_lead_time, a.arrive_date,a.delivery_order_date,a.delivery_order_number,b.prod_order_number,DATE_FORMAT(a.prod_order_rec_date,'%Y-%m-%d') AS prod_order_rec_date, f.comp_name AS comp_from, f.comp_number AS comp_from_number,d.comp_name AS comp_to, d.comp_number AS comp_to_number, i.id_sample, po_type.po_type "
+            Dim query = "SELECT j.id_design,IF(a.delivery_order_date<>'0000-00-00', 'date_normal','date_null') as del_date_type, i.id_sample, (i.design_display_name) AS `design_name`, a.id_report_status,a.prod_order_rec_note,a.id_comp_contact_from as id_comp_from,b.id_prod_order,a.id_comp_contact_to as id_comp_to,g.season,a.id_prod_order_rec,a.prod_order_rec_number,DATE_FORMAT(b.prod_order_date,'%Y-%m-%d') as prod_order_datex,b.prod_order_lead_time, a.arrive_date,a.delivery_order_date,a.delivery_order_number,b.prod_order_number,DATE_FORMAT(a.prod_order_rec_date,'%Y-%m-%d') AS prod_order_rec_date, f.comp_name AS comp_from, f.comp_number AS comp_from_number,d.comp_name AS comp_to, d.comp_number AS comp_to_number, i.id_sample, po_type.po_type, a.is_over_tol, a.id_prod_over_memo "
             query += "FROM tb_prod_order_rec a "
             query += "INNER JOIN tb_prod_order b ON a.id_prod_order=b.id_prod_order "
             query += "INNER JOIN tb_m_comp_contact c ON c.id_comp_contact=a.id_comp_contact_to "
@@ -95,6 +98,8 @@ Public Class FormProductionRecDet
             TxtPOType.Text = data.Rows(0)("po_type").ToString
 
             id_order = data.Rows(0)("id_prod_order").ToString
+            is_over_tol = data.Rows(0)("is_over_tol").ToString
+            id_prod_over_memo = data.Rows(0)("id_prod_over_memo").ToString
             id_comp_from = data.Rows(0)("id_comp_from").ToString
             TxtCodeCompFrom.Text = data.Rows(0)("comp_from_number").ToString
             TECompName.Text = data.Rows(0)("comp_from").ToString
@@ -174,6 +179,18 @@ Public Class FormProductionRecDet
         total_rec = Integer.Parse(data.Rows(0)("total_rec").ToString)
         pre_viewImages("2", PEView, id_design, False)
         mainVendor()
+
+        'see memo
+        Dim qm As String = "SELECT od.id_prod_over_memo,ADDTIME(o.created_date,CONCAT(o.lead_time,':00:00')) AS `expired_date`
+        FROM tb_prod_over_memo_det od
+        INNER JOIN tb_prod_over_memo o ON o.id_prod_over_memo = od.id_prod_over_memo 
+        WHERE od.id_prod_order=" + id_order + " AND o.id_report_status=6 AND NOW()<ADDTIME(o.created_date,CONCAT(o.lead_time,':00:00'))
+        ORDER BY od.id_prod_over_memo_det ASC "
+        Dim dm As DataTable = execute_query(qm, -1, True, "", "", "", "")
+        If dm.Rows.Count > 0 Then
+            expired_date = dm.Rows(0)("expired_date")
+            id_prod_over_memo = dm.Rows(0)("id_prod_over_memo").ToString
+        End If
     End Sub
 
     Sub mainVendor()
@@ -258,7 +275,11 @@ Public Class FormProductionRecDet
     Private Sub BMark_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BMark.Click
         Cursor = Cursors.WaitCursor
         FormReportMark.id_report = id_receive
-        FormReportMark.report_mark_type = "28"
+        If is_over_tol = "1" Then
+            FormReportMark.report_mark_type = "127"
+        Else
+            FormReportMark.report_mark_type = "28"
+        End If
         FormReportMark.form_origin = Name
         FormReportMark.ShowDialog()
         Cursor = Cursors.Default
@@ -427,10 +448,10 @@ Public Class FormProductionRecDet
                     Try
                         'insert rec
                         If do_date = "0000-00-00" Then
-                            query = String.Format("INSERT INTO tb_prod_order_rec(id_prod_order, prod_order_rec_number, delivery_order_number, delivery_order_date, arrive_date, prod_order_rec_date, prod_order_rec_note ,id_report_status, id_comp_contact_to , id_comp_contact_from) VALUES('{0}','{1}','{2}',NULL, '{3}',DATE(NOW()),'{4}','{5}','{6}', '{7}'); SELECT LAST_INSERT_ID(); ", id_order, rec_number, do_number, arrive_date, rec_note, rec_stats, id_comp_to, id_comp_from)
+                            query = String.Format("INSERT INTO tb_prod_order_rec(id_prod_order, prod_order_rec_number, delivery_order_number, delivery_order_date, arrive_date, prod_order_rec_date, prod_order_rec_note ,id_report_status, id_comp_contact_to , id_comp_contact_from, is_over_tol, id_prod_over_memo) VALUES('{0}','{1}','{2}',NULL, '{3}',DATE(NOW()),'{4}','{5}','{6}', '{7}','{8}',{9}); SELECT LAST_INSERT_ID(); ", id_order, rec_number, do_number, arrive_date, rec_note, rec_stats, id_comp_to, id_comp_from, is_over_tol, id_prod_over_memo)
                             id_rec_new = execute_query(query, 0, True, "", "", "", "")
                         Else
-                            query = String.Format("INSERT INTO tb_prod_order_rec(id_prod_order, prod_order_rec_number, delivery_order_number, delivery_order_date, arrive_date, prod_order_rec_date, prod_order_rec_note ,id_report_status, id_comp_contact_to , id_comp_contact_from) VALUES('{0}','{1}','{2}','{3}', '{4}',DATE(NOW()),'{5}','{6}','{7}', '{8}'); SELECT LAST_INSERT_ID(); ", id_order, rec_number, do_number, do_date, arrive_date, rec_note, rec_stats, id_comp_to, id_comp_from)
+                            query = String.Format("INSERT INTO tb_prod_order_rec(id_prod_order, prod_order_rec_number, delivery_order_number, delivery_order_date, arrive_date, prod_order_rec_date, prod_order_rec_note ,id_report_status, id_comp_contact_to , id_comp_contact_from, is_over_tol, id_prod_over_memo) VALUES('{0}','{1}','{2}','{3}', '{4}',DATE(NOW()),'{5}','{6}','{7}', '{8}', '{9}', {10}); SELECT LAST_INSERT_ID(); ", id_order, rec_number, do_number, do_date, arrive_date, rec_note, rec_stats, id_comp_to, id_comp_from, is_over_tol, id_prod_over_memo)
                             id_rec_new = execute_query(query, 0, True, "", "", "", "")
                         End If
 
@@ -685,8 +706,16 @@ Public Class FormProductionRecDet
                     countQty(id_prod_order_det)
                     newRows()
                 Else
-                    GVBarcode.SetFocusedRowCellValue("ean_code", "")
-                    stopCustom("Maximum receive : " + (total_max - total_rec).ToString)
+                    If id_prod_over_memo <> "NULL" Then
+                        is_over_tol = "1"
+                        GVBarcode.SetFocusedRowCellValue("is_fix", "2")
+                        GVBarcode.SetFocusedRowCellValue("id_prod_order_det", id_prod_order_det)
+                        countQty(id_prod_order_det)
+                        newRows()
+                    Else
+                        GVBarcode.SetFocusedRowCellValue("ean_code", "")
+                        stopCustom("Maximum receive : " + (total_max - total_rec).ToString)
+                    End If
                 End If
             End If
         End If
@@ -770,7 +799,11 @@ Public Class FormProductionRecDet
     Private Sub BtnAttachment_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnAttachment.Click
         Cursor = Cursors.WaitCursor
         FormDocumentUpload.id_report = id_receive
-        FormDocumentUpload.report_mark_type = "28"
+        If is_over_tol = "1" Then
+            FormDocumentUpload.report_mark_type = "127"
+        Else
+            FormDocumentUpload.report_mark_type = "28"
+        End If
         FormDocumentUpload.ShowDialog()
         Cursor = Cursors.Default
     End Sub

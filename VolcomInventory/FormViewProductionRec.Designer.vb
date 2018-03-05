@@ -23,6 +23,8 @@ Partial Class FormViewProductionRec
         Me.BtnAttachment = New DevExpress.XtraEditors.SimpleButton()
         Me.BMark = New DevExpress.XtraEditors.SimpleButton()
         Me.GroupGeneralHeader = New DevExpress.XtraEditors.GroupControl()
+        Me.LabelControl11 = New DevExpress.XtraEditors.LabelControl()
+        Me.DEArrive = New DevExpress.XtraEditors.DateEdit()
         Me.LabelControl10 = New DevExpress.XtraEditors.LabelControl()
         Me.TxtPOType = New DevExpress.XtraEditors.TextEdit()
         Me.PEView = New DevExpress.XtraEditors.PictureEdit()
@@ -66,12 +68,20 @@ Partial Class FormViewProductionRec
         Me.RepositoryItemSpinEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
         Me.ColNote = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
-        Me.LabelControl11 = New DevExpress.XtraEditors.LabelControl()
-        Me.DEArrive = New DevExpress.XtraEditors.DateEdit()
+        Me.BtnMemoOverTol = New DevExpress.XtraEditors.SimpleButton()
+        Me.LabelControl12 = New DevExpress.XtraEditors.LabelControl()
+        Me.TxtOrder = New DevExpress.XtraEditors.TextEdit()
+        Me.TxtRec = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl13 = New DevExpress.XtraEditors.LabelControl()
+        Me.TxtDiff = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl14 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl15 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.GroupControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl3.SuspendLayout()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
+        CType(Me.DEArrive.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEArrive.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtPOType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PEView.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEDesign.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -95,27 +105,29 @@ Partial Class FormViewProductionRec
         CType(Me.GVListPurchase, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemSpinEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DEArrive.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DEArrive.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtOrder.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtRec.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtDiff.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupControl3
         '
         Me.GroupControl3.CaptionLocation = DevExpress.Utils.Locations.Left
         Me.GroupControl3.Controls.Add(Me.BtnAttachment)
+        Me.GroupControl3.Controls.Add(Me.BtnMemoOverTol)
         Me.GroupControl3.Controls.Add(Me.BMark)
         Me.GroupControl3.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.GroupControl3.Location = New System.Drawing.Point(0, 411)
+        Me.GroupControl3.Location = New System.Drawing.Point(0, 481)
         Me.GroupControl3.Name = "GroupControl3"
-        Me.GroupControl3.Size = New System.Drawing.Size(909, 65)
+        Me.GroupControl3.Size = New System.Drawing.Size(909, 91)
         Me.GroupControl3.TabIndex = 61
         '
         'BtnAttachment
         '
-        Me.BtnAttachment.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.BtnAttachment.Location = New System.Drawing.Point(20, 34)
+        Me.BtnAttachment.Dock = System.Windows.Forms.DockStyle.Top
+        Me.BtnAttachment.Location = New System.Drawing.Point(20, 61)
         Me.BtnAttachment.Name = "BtnAttachment"
-        Me.BtnAttachment.Size = New System.Drawing.Size(887, 29)
+        Me.BtnAttachment.Size = New System.Drawing.Size(887, 30)
         Me.BtnAttachment.TabIndex = 5
         Me.BtnAttachment.Text = "Attachment"
         '
@@ -161,6 +173,28 @@ Partial Class FormViewProductionRec
         Me.GroupGeneralHeader.Name = "GroupGeneralHeader"
         Me.GroupGeneralHeader.Size = New System.Drawing.Size(909, 142)
         Me.GroupGeneralHeader.TabIndex = 62
+        '
+        'LabelControl11
+        '
+        Me.LabelControl11.Location = New System.Drawing.Point(694, 92)
+        Me.LabelControl11.Name = "LabelControl11"
+        Me.LabelControl11.Size = New System.Drawing.Size(58, 13)
+        Me.LabelControl11.TabIndex = 169
+        Me.LabelControl11.Text = "Arrive in QC"
+        '
+        'DEArrive
+        '
+        Me.DEArrive.EditValue = Nothing
+        Me.DEArrive.Location = New System.Drawing.Point(765, 89)
+        Me.DEArrive.Name = "DEArrive"
+        Me.DEArrive.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEArrive.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.DEArrive.Properties.DisplayFormat.FormatString = "dd'/'MM'/'yyyy"
+        Me.DEArrive.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEArrive.Size = New System.Drawing.Size(130, 20)
+        Me.DEArrive.TabIndex = 168
+        Me.DEArrive.ToolTip = "Tanggal tiba di QC"
+        Me.DEArrive.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Information
         '
         'LabelControl10
         '
@@ -381,20 +415,27 @@ Partial Class FormViewProductionRec
         'GroupControl1
         '
         Me.GroupControl1.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupControl1.Controls.Add(Me.LabelControl15)
+        Me.GroupControl1.Controls.Add(Me.LabelControl14)
+        Me.GroupControl1.Controls.Add(Me.TxtDiff)
+        Me.GroupControl1.Controls.Add(Me.LabelControl13)
+        Me.GroupControl1.Controls.Add(Me.TxtRec)
+        Me.GroupControl1.Controls.Add(Me.TxtOrder)
+        Me.GroupControl1.Controls.Add(Me.LabelControl12)
         Me.GroupControl1.Controls.Add(Me.LEReportStatus)
         Me.GroupControl1.Controls.Add(Me.LabelControl21)
         Me.GroupControl1.Controls.Add(Me.MENote)
         Me.GroupControl1.Controls.Add(Me.LabelControl18)
         Me.GroupControl1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.GroupControl1.Location = New System.Drawing.Point(0, 336)
+        Me.GroupControl1.Location = New System.Drawing.Point(0, 385)
         Me.GroupControl1.Name = "GroupControl1"
-        Me.GroupControl1.Size = New System.Drawing.Size(909, 75)
+        Me.GroupControl1.Size = New System.Drawing.Size(909, 96)
         Me.GroupControl1.TabIndex = 63
         '
         'LEReportStatus
         '
         Me.LEReportStatus.Enabled = False
-        Me.LEReportStatus.Location = New System.Drawing.Point(609, 10)
+        Me.LEReportStatus.Location = New System.Drawing.Point(89, 61)
         Me.LEReportStatus.Name = "LEReportStatus"
         Me.LEReportStatus.Properties.Appearance.Options.UseTextOptions = True
         Me.LEReportStatus.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near
@@ -407,7 +448,7 @@ Partial Class FormViewProductionRec
         '
         'LabelControl21
         '
-        Me.LabelControl21.Location = New System.Drawing.Point(560, 13)
+        Me.LabelControl21.Location = New System.Drawing.Point(28, 64)
         Me.LabelControl21.Name = "LabelControl21"
         Me.LabelControl21.Size = New System.Drawing.Size(31, 13)
         Me.LabelControl21.TabIndex = 144
@@ -437,7 +478,7 @@ Partial Class FormViewProductionRec
         Me.GConListPurchase.Enabled = False
         Me.GConListPurchase.Location = New System.Drawing.Point(0, 142)
         Me.GConListPurchase.Name = "GConListPurchase"
-        Me.GConListPurchase.Size = New System.Drawing.Size(909, 194)
+        Me.GConListPurchase.Size = New System.Drawing.Size(909, 243)
         Me.GConListPurchase.TabIndex = 64
         Me.GConListPurchase.Text = "List Receive"
         '
@@ -448,7 +489,7 @@ Partial Class FormViewProductionRec
         Me.GCListPurchase.MainView = Me.GVListPurchase
         Me.GCListPurchase.Name = "GCListPurchase"
         Me.GCListPurchase.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckEdit1, Me.RepositoryItemSpinEdit1})
-        Me.GCListPurchase.Size = New System.Drawing.Size(887, 190)
+        Me.GCListPurchase.Size = New System.Drawing.Size(887, 239)
         Me.GCListPurchase.TabIndex = 1
         Me.GCListPurchase.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVListPurchase})
         '
@@ -584,33 +625,89 @@ Partial Class FormViewProductionRec
         Me.RepositoryItemCheckEdit1.AutoHeight = False
         Me.RepositoryItemCheckEdit1.Name = "RepositoryItemCheckEdit1"
         '
-        'LabelControl11
+        'BtnMemoOverTol
         '
-        Me.LabelControl11.Location = New System.Drawing.Point(694, 92)
-        Me.LabelControl11.Name = "LabelControl11"
-        Me.LabelControl11.Size = New System.Drawing.Size(58, 13)
-        Me.LabelControl11.TabIndex = 169
-        Me.LabelControl11.Text = "Arrive in QC"
+        Me.BtnMemoOverTol.Dock = System.Windows.Forms.DockStyle.Top
+        Me.BtnMemoOverTol.Location = New System.Drawing.Point(20, 34)
+        Me.BtnMemoOverTol.Name = "BtnMemoOverTol"
+        Me.BtnMemoOverTol.Size = New System.Drawing.Size(887, 27)
+        Me.BtnMemoOverTol.TabIndex = 6
+        Me.BtnMemoOverTol.Text = "Memo Over Tolerance"
+        Me.BtnMemoOverTol.Visible = False
         '
-        'DEArrive
+        'LabelControl12
         '
-        Me.DEArrive.EditValue = Nothing
-        Me.DEArrive.Location = New System.Drawing.Point(765, 89)
-        Me.DEArrive.Name = "DEArrive"
-        Me.DEArrive.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.DEArrive.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
-        Me.DEArrive.Properties.DisplayFormat.FormatString = "dd'/'MM'/'yyyy"
-        Me.DEArrive.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.DEArrive.Size = New System.Drawing.Size(130, 20)
-        Me.DEArrive.TabIndex = 168
-        Me.DEArrive.ToolTip = "Tanggal tiba di QC"
-        Me.DEArrive.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Information
+        Me.LabelControl12.Location = New System.Drawing.Point(708, 13)
+        Me.LabelControl12.Name = "LabelControl12"
+        Me.LabelControl12.Size = New System.Drawing.Size(28, 13)
+        Me.LabelControl12.TabIndex = 170
+        Me.LabelControl12.Text = "Order"
+        '
+        'TxtOrder
+        '
+        Me.TxtOrder.EditValue = ""
+        Me.TxtOrder.Location = New System.Drawing.Point(773, 10)
+        Me.TxtOrder.Name = "TxtOrder"
+        Me.TxtOrder.Properties.DisplayFormat.FormatString = "n0"
+        Me.TxtOrder.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.TxtOrder.Properties.EditValueChangedDelay = 1
+        Me.TxtOrder.Properties.ReadOnly = True
+        Me.TxtOrder.Size = New System.Drawing.Size(122, 20)
+        Me.TxtOrder.TabIndex = 170
+        '
+        'TxtRec
+        '
+        Me.TxtRec.EditValue = ""
+        Me.TxtRec.Location = New System.Drawing.Point(773, 35)
+        Me.TxtRec.Name = "TxtRec"
+        Me.TxtRec.Properties.DisplayFormat.FormatString = "n0"
+        Me.TxtRec.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.TxtRec.Properties.EditValueChangedDelay = 1
+        Me.TxtRec.Properties.ReadOnly = True
+        Me.TxtRec.Size = New System.Drawing.Size(122, 20)
+        Me.TxtRec.TabIndex = 171
+        '
+        'LabelControl13
+        '
+        Me.LabelControl13.Location = New System.Drawing.Point(708, 38)
+        Me.LabelControl13.Name = "LabelControl13"
+        Me.LabelControl13.Size = New System.Drawing.Size(44, 13)
+        Me.LabelControl13.TabIndex = 172
+        Me.LabelControl13.Text = "Received"
+        '
+        'TxtDiff
+        '
+        Me.TxtDiff.EditValue = ""
+        Me.TxtDiff.Location = New System.Drawing.Point(773, 61)
+        Me.TxtDiff.Name = "TxtDiff"
+        Me.TxtDiff.Properties.DisplayFormat.FormatString = "n2"
+        Me.TxtDiff.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.TxtDiff.Properties.EditValueChangedDelay = 1
+        Me.TxtDiff.Properties.ReadOnly = True
+        Me.TxtDiff.Size = New System.Drawing.Size(105, 20)
+        Me.TxtDiff.TabIndex = 173
+        '
+        'LabelControl14
+        '
+        Me.LabelControl14.Location = New System.Drawing.Point(708, 64)
+        Me.LabelControl14.Name = "LabelControl14"
+        Me.LabelControl14.Size = New System.Drawing.Size(43, 13)
+        Me.LabelControl14.TabIndex = 174
+        Me.LabelControl14.Text = "Different"
+        '
+        'LabelControl15
+        '
+        Me.LabelControl15.Location = New System.Drawing.Point(884, 64)
+        Me.LabelControl15.Name = "LabelControl15"
+        Me.LabelControl15.Size = New System.Drawing.Size(11, 13)
+        Me.LabelControl15.TabIndex = 175
+        Me.LabelControl15.Text = "%"
         '
         'FormViewProductionRec
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(909, 476)
+        Me.ClientSize = New System.Drawing.Size(909, 572)
         Me.Controls.Add(Me.GConListPurchase)
         Me.Controls.Add(Me.GroupControl1)
         Me.Controls.Add(Me.GroupGeneralHeader)
@@ -627,6 +724,8 @@ Partial Class FormViewProductionRec
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupGeneralHeader.ResumeLayout(False)
         Me.GroupGeneralHeader.PerformLayout()
+        CType(Me.DEArrive.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEArrive.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtPOType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PEView.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEDesign.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -651,8 +750,9 @@ Partial Class FormViewProductionRec
         CType(Me.GVListPurchase, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemSpinEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DEArrive.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DEArrive.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtOrder.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtRec.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtDiff.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -705,4 +805,12 @@ Partial Class FormViewProductionRec
     Friend WithEvents TxtPOType As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelControl11 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents DEArrive As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents BtnMemoOverTol As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents LabelControl15 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LabelControl14 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents TxtDiff As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LabelControl13 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents TxtRec As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents TxtOrder As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LabelControl12 As DevExpress.XtraEditors.LabelControl
 End Class

@@ -2439,7 +2439,7 @@ Public Class FormMain
                 FormEmpLeaveCutDet.ShowDialog()
             ElseIf formName = "FormProdOverMemo" Then
                 FormProdOverMemoDet.id_prod_over_memo = FormProdOverMemo.GVMemo.GetFocusedRowCellValue("id_prod_over_memo").ToString
-                FormProdOverMemoDet.action = "ins"
+                FormProdOverMemoDet.action = "upd"
                 FormProdOverMemoDet.ShowDialog()
             Else
                 RPSubMenu.Visible = False

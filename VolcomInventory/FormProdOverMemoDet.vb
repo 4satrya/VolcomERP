@@ -87,6 +87,10 @@
     End Sub
 
     Private Sub BtnAttachment_Click(sender As Object, e As EventArgs) Handles BtnAttachment.Click
+        showAttach()
+    End Sub
+
+    Sub showAttach()
         Cursor = Cursors.WaitCursor
         FormDocumentUpload.report_mark_type = "126"
         FormDocumentUpload.id_report = id_prod_over_memo
@@ -128,5 +132,51 @@
         FormProdOverMemoSingle.data_par = GCData.DataSource
         FormProdOverMemoSingle.ShowDialog()
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
+        Close()
+    End Sub
+
+    Private Sub FormProdOverMemoDet_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        Dispose()
+    End Sub
+
+    Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles BtnSave.Click
+        If TxtMemoNumber.Text = "" Or GVData.RowCount <= 0 Then
+            stopCustom("Data can't blank !")
+        Else
+            Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure you want to continue this process? ", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+            If confirm = Windows.Forms.DialogResult.Yes Then
+                Cursor = Cursors.WaitCursor
+                Dim memo_number As String = Trim(addSlashes(TxtMemoNumber.Text))
+                Dim lead_time As Integer = get_setup_field("prod_over_lead_time") 'in hour
+                Dim memo_note As String = addSlashes(MENote.Text)
+
+                'main
+                Dim qi As String = "INSERT INTO tb_prod_over_memo(memo_number, created_date, lead_time, memo_note, id_report_status) 
+                VALUES('" + memo_number + "', NOW(), '" + decimalSQL(lead_time.ToString) + "', '" + memo_note + "', 1); SELECT LAST_INSERT_ID(); "
+                id_prod_over_memo = execute_query(qi, 0, True, "", "", "", "")
+
+                'detail
+                Dim qd As String = "INSERT INTO tb_prod_over_memo_det(id_prod_over_memo, id_prod_order, remark) VALUES "
+                For i As Integer = 0 To ((GVData.RowCount - 1) - GetGroupRowCount(GVData))
+                    If i > 0 Then
+                        qd += ", "
+                    End If
+                    qd += "('" + id_prod_over_memo + "', '" + GVData.GetRowCellValue(i, "id_prod_order").ToString + "', '" + GVData.GetRowCellValue(i, "remark").ToString + "') "
+                Next
+                execute_non_query(qd, True, "", "", "", "")
+
+                'refresh
+                action = "upd"
+                actionLoad()
+                FormProdOverMemo.viewData()
+                FormProdOverMemo.GVMemo.FocusedRowHandle = find_row(FormProdOverMemo.GVMemo, "id_prod_over_memo", id_prod_over_memo)
+                infoCustom("Memo : " + TxtMemoNumber.Text + " created successfully, please upload attachment file !")
+                showAttach()
+                Cursor = Cursors.Default
+            End If
+        End If
     End Sub
 End Class

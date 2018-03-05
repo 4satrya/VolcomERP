@@ -21,57 +21,57 @@ Partial Class FormProdOverMemoDet
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormProdOverMemoDet))
         Me.GroupControlTop = New DevExpress.XtraEditors.GroupControl()
-        Me.GroupControlMiddle = New DevExpress.XtraEditors.GroupControl()
-        Me.PanelControlBottom = New DevExpress.XtraEditors.PanelControl()
-        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
-        Me.TxtMemoNumber = New DevExpress.XtraEditors.TextEdit()
-        Me.MENote = New DevExpress.XtraEditors.MemoEdit()
-        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
-        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
-        Me.DECreated = New DevExpress.XtraEditors.DateEdit()
-        Me.DEExpired = New DevExpress.XtraEditors.DateEdit()
         Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
-        Me.GroupControlBottom = New DevExpress.XtraEditors.GroupControl()
-        Me.PanelBottomRight = New DevExpress.XtraEditors.PanelControl()
-        Me.LEReportStatus = New DevExpress.XtraEditors.LookUpEdit()
-        Me.LabelControl21 = New DevExpress.XtraEditors.LabelControl()
+        Me.DEExpired = New DevExpress.XtraEditors.DateEdit()
+        Me.DECreated = New DevExpress.XtraEditors.DateEdit()
+        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
+        Me.TxtMemoNumber = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
+        Me.GroupControlMiddle = New DevExpress.XtraEditors.GroupControl()
         Me.GCData = New DevExpress.XtraGrid.GridControl()
         Me.GVData = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.PanelControlNav = New DevExpress.XtraEditors.PanelControl()
-        Me.BtnAdd = New DevExpress.XtraEditors.SimpleButton()
-        Me.BtnDelete = New DevExpress.XtraEditors.SimpleButton()
-        Me.BtnSave = New DevExpress.XtraEditors.SimpleButton()
-        Me.BtnClose = New DevExpress.XtraEditors.SimpleButton()
-        Me.BtnPrint = New DevExpress.XtraEditors.SimpleButton()
-        Me.BtnAttachment = New DevExpress.XtraEditors.SimpleButton()
-        Me.BtnMark = New DevExpress.XtraEditors.SimpleButton()
         Me.GridColumnId = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdPO = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnPONumber = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnCode = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnDescription = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnRemark = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.PanelControlNav = New DevExpress.XtraEditors.PanelControl()
+        Me.BtnDelete = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnAdd = New DevExpress.XtraEditors.SimpleButton()
+        Me.PanelControlBottom = New DevExpress.XtraEditors.PanelControl()
+        Me.BtnMark = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnAttachment = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnPrint = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnClose = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnSave = New DevExpress.XtraEditors.SimpleButton()
+        Me.MENote = New DevExpress.XtraEditors.MemoEdit()
+        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
+        Me.GroupControlBottom = New DevExpress.XtraEditors.GroupControl()
+        Me.PanelBottomRight = New DevExpress.XtraEditors.PanelControl()
+        Me.LEReportStatus = New DevExpress.XtraEditors.LookUpEdit()
+        Me.LabelControl21 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.GroupControlTop, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControlTop.SuspendLayout()
-        CType(Me.GroupControlMiddle, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupControlMiddle.SuspendLayout()
-        CType(Me.PanelControlBottom, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.PanelControlBottom.SuspendLayout()
-        CType(Me.TxtMemoNumber.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.MENote.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DECreated.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DECreated.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEExpired.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEExpired.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DECreated.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DECreated.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtMemoNumber.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GroupControlMiddle, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupControlMiddle.SuspendLayout()
+        CType(Me.GCData, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVData, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControlNav, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControlNav.SuspendLayout()
+        CType(Me.PanelControlBottom, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControlBottom.SuspendLayout()
+        CType(Me.MENote.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControlBottom, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControlBottom.SuspendLayout()
         CType(Me.PanelBottomRight, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelBottomRight.SuspendLayout()
         CType(Me.LEReportStatus.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GCData, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GVData, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PanelControlNav, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.PanelControlNav.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupControlTop
@@ -89,78 +89,13 @@ Partial Class FormProdOverMemoDet
         Me.GroupControlTop.Size = New System.Drawing.Size(979, 83)
         Me.GroupControlTop.TabIndex = 0
         '
-        'GroupControlMiddle
+        'LabelControl4
         '
-        Me.GroupControlMiddle.CaptionLocation = DevExpress.Utils.Locations.Left
-        Me.GroupControlMiddle.Controls.Add(Me.GCData)
-        Me.GroupControlMiddle.Controls.Add(Me.PanelControlNav)
-        Me.GroupControlMiddle.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GroupControlMiddle.Location = New System.Drawing.Point(0, 83)
-        Me.GroupControlMiddle.Name = "GroupControlMiddle"
-        Me.GroupControlMiddle.Size = New System.Drawing.Size(979, 375)
-        Me.GroupControlMiddle.TabIndex = 1
-        '
-        'PanelControlBottom
-        '
-        Me.PanelControlBottom.Controls.Add(Me.BtnMark)
-        Me.PanelControlBottom.Controls.Add(Me.BtnAttachment)
-        Me.PanelControlBottom.Controls.Add(Me.BtnPrint)
-        Me.PanelControlBottom.Controls.Add(Me.BtnClose)
-        Me.PanelControlBottom.Controls.Add(Me.BtnSave)
-        Me.PanelControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControlBottom.Location = New System.Drawing.Point(0, 529)
-        Me.PanelControlBottom.Name = "PanelControlBottom"
-        Me.PanelControlBottom.Size = New System.Drawing.Size(979, 45)
-        Me.PanelControlBottom.TabIndex = 2
-        '
-        'LabelControl1
-        '
-        Me.LabelControl1.Location = New System.Drawing.Point(33, 20)
-        Me.LabelControl1.Name = "LabelControl1"
-        Me.LabelControl1.Size = New System.Drawing.Size(68, 13)
-        Me.LabelControl1.TabIndex = 0
-        Me.LabelControl1.Text = "Memo Number"
-        '
-        'TxtMemoNumber
-        '
-        Me.TxtMemoNumber.Location = New System.Drawing.Point(114, 17)
-        Me.TxtMemoNumber.Name = "TxtMemoNumber"
-        Me.TxtMemoNumber.Size = New System.Drawing.Size(297, 20)
-        Me.TxtMemoNumber.TabIndex = 0
-        '
-        'MENote
-        '
-        Me.MENote.Location = New System.Drawing.Point(71, 9)
-        Me.MENote.Name = "MENote"
-        Me.MENote.Size = New System.Drawing.Size(285, 49)
-        Me.MENote.TabIndex = 1
-        '
-        'LabelControl2
-        '
-        Me.LabelControl2.Location = New System.Drawing.Point(33, 11)
-        Me.LabelControl2.Name = "LabelControl2"
-        Me.LabelControl2.Size = New System.Drawing.Size(23, 13)
-        Me.LabelControl2.TabIndex = 2
-        Me.LabelControl2.Text = "Note"
-        '
-        'LabelControl3
-        '
-        Me.LabelControl3.Location = New System.Drawing.Point(675, 20)
-        Me.LabelControl3.Name = "LabelControl3"
-        Me.LabelControl3.Size = New System.Drawing.Size(65, 13)
-        Me.LabelControl3.TabIndex = 3
-        Me.LabelControl3.Text = "Created Date"
-        '
-        'DECreated
-        '
-        Me.DECreated.EditValue = Nothing
-        Me.DECreated.Enabled = False
-        Me.DECreated.Location = New System.Drawing.Point(756, 17)
-        Me.DECreated.Name = "DECreated"
-        Me.DECreated.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.DECreated.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.DECreated.Size = New System.Drawing.Size(211, 20)
-        Me.DECreated.TabIndex = 4
+        Me.LabelControl4.Location = New System.Drawing.Point(675, 46)
+        Me.LabelControl4.Name = "LabelControl4"
+        Me.LabelControl4.Size = New System.Drawing.Size(62, 13)
+        Me.LabelControl4.TabIndex = 6
+        Me.LabelControl4.Text = "Expired Date"
         '
         'DEExpired
         '
@@ -173,61 +108,50 @@ Partial Class FormProdOverMemoDet
         Me.DEExpired.Size = New System.Drawing.Size(211, 20)
         Me.DEExpired.TabIndex = 5
         '
-        'LabelControl4
+        'DECreated
         '
-        Me.LabelControl4.Location = New System.Drawing.Point(675, 46)
-        Me.LabelControl4.Name = "LabelControl4"
-        Me.LabelControl4.Size = New System.Drawing.Size(62, 13)
-        Me.LabelControl4.TabIndex = 6
-        Me.LabelControl4.Text = "Expired Date"
+        Me.DECreated.EditValue = Nothing
+        Me.DECreated.Enabled = False
+        Me.DECreated.Location = New System.Drawing.Point(756, 17)
+        Me.DECreated.Name = "DECreated"
+        Me.DECreated.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DECreated.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DECreated.Size = New System.Drawing.Size(211, 20)
+        Me.DECreated.TabIndex = 4
         '
-        'GroupControlBottom
+        'LabelControl3
         '
-        Me.GroupControlBottom.CaptionLocation = DevExpress.Utils.Locations.Left
-        Me.GroupControlBottom.Controls.Add(Me.PanelBottomRight)
-        Me.GroupControlBottom.Controls.Add(Me.MENote)
-        Me.GroupControlBottom.Controls.Add(Me.LabelControl2)
-        Me.GroupControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.GroupControlBottom.Location = New System.Drawing.Point(0, 458)
-        Me.GroupControlBottom.Name = "GroupControlBottom"
-        Me.GroupControlBottom.Size = New System.Drawing.Size(979, 71)
-        Me.GroupControlBottom.TabIndex = 1
-        Me.GroupControlBottom.Text = "."
+        Me.LabelControl3.Location = New System.Drawing.Point(675, 20)
+        Me.LabelControl3.Name = "LabelControl3"
+        Me.LabelControl3.Size = New System.Drawing.Size(65, 13)
+        Me.LabelControl3.TabIndex = 3
+        Me.LabelControl3.Text = "Created Date"
         '
-        'PanelBottomRight
+        'TxtMemoNumber
         '
-        Me.PanelBottomRight.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
-        Me.PanelBottomRight.Controls.Add(Me.LEReportStatus)
-        Me.PanelBottomRight.Controls.Add(Me.LabelControl21)
-        Me.PanelBottomRight.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PanelBottomRight.Location = New System.Drawing.Point(670, 2)
-        Me.PanelBottomRight.Name = "PanelBottomRight"
-        Me.PanelBottomRight.Size = New System.Drawing.Size(307, 67)
-        Me.PanelBottomRight.TabIndex = 140
+        Me.TxtMemoNumber.Location = New System.Drawing.Point(114, 17)
+        Me.TxtMemoNumber.Name = "TxtMemoNumber"
+        Me.TxtMemoNumber.Size = New System.Drawing.Size(297, 20)
+        Me.TxtMemoNumber.TabIndex = 0
         '
-        'LEReportStatus
+        'LabelControl1
         '
-        Me.LEReportStatus.Enabled = False
-        Me.LEReportStatus.Location = New System.Drawing.Point(90, 6)
-        Me.LEReportStatus.Name = "LEReportStatus"
-        Me.LEReportStatus.Properties.Appearance.Options.UseTextOptions = True
-        Me.LEReportStatus.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near
-        Me.LEReportStatus.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.White
-        Me.LEReportStatus.Properties.AppearanceDisabled.Options.UseBackColor = True
-        Me.LEReportStatus.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.LEReportStatus.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_report_status", "ID Report Status", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("report_status", "Report Status")})
-        Me.LEReportStatus.Properties.NullText = ""
-        Me.LEReportStatus.Properties.ShowFooter = False
-        Me.LEReportStatus.Size = New System.Drawing.Size(211, 20)
-        Me.LEReportStatus.TabIndex = 7
+        Me.LabelControl1.Location = New System.Drawing.Point(33, 20)
+        Me.LabelControl1.Name = "LabelControl1"
+        Me.LabelControl1.Size = New System.Drawing.Size(68, 13)
+        Me.LabelControl1.TabIndex = 0
+        Me.LabelControl1.Text = "Memo Number"
         '
-        'LabelControl21
+        'GroupControlMiddle
         '
-        Me.LabelControl21.Location = New System.Drawing.Point(40, 9)
-        Me.LabelControl21.Name = "LabelControl21"
-        Me.LabelControl21.Size = New System.Drawing.Size(31, 13)
-        Me.LabelControl21.TabIndex = 144
-        Me.LabelControl21.Text = "Status"
+        Me.GroupControlMiddle.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupControlMiddle.Controls.Add(Me.GCData)
+        Me.GroupControlMiddle.Controls.Add(Me.PanelControlNav)
+        Me.GroupControlMiddle.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupControlMiddle.Location = New System.Drawing.Point(0, 83)
+        Me.GroupControlMiddle.Name = "GroupControlMiddle"
+        Me.GroupControlMiddle.Size = New System.Drawing.Size(979, 375)
+        Me.GroupControlMiddle.TabIndex = 1
         '
         'GCData
         '
@@ -245,86 +169,6 @@ Partial Class FormProdOverMemoDet
         Me.GVData.GridControl = Me.GCData
         Me.GVData.Name = "GVData"
         Me.GVData.OptionsView.ShowGroupPanel = False
-        '
-        'PanelControlNav
-        '
-        Me.PanelControlNav.Controls.Add(Me.BtnDelete)
-        Me.PanelControlNav.Controls.Add(Me.BtnAdd)
-        Me.PanelControlNav.Dock = System.Windows.Forms.DockStyle.Top
-        Me.PanelControlNav.Location = New System.Drawing.Point(20, 2)
-        Me.PanelControlNav.Name = "PanelControlNav"
-        Me.PanelControlNav.Size = New System.Drawing.Size(957, 42)
-        Me.PanelControlNav.TabIndex = 1
-        '
-        'BtnAdd
-        '
-        Me.BtnAdd.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BtnAdd.Image = CType(resources.GetObject("BtnAdd.Image"), System.Drawing.Image)
-        Me.BtnAdd.Location = New System.Drawing.Point(868, 2)
-        Me.BtnAdd.Name = "BtnAdd"
-        Me.BtnAdd.Size = New System.Drawing.Size(87, 38)
-        Me.BtnAdd.TabIndex = 0
-        Me.BtnAdd.Text = "Add"
-        '
-        'BtnDelete
-        '
-        Me.BtnDelete.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BtnDelete.Image = CType(resources.GetObject("BtnDelete.Image"), System.Drawing.Image)
-        Me.BtnDelete.Location = New System.Drawing.Point(778, 2)
-        Me.BtnDelete.Name = "BtnDelete"
-        Me.BtnDelete.Size = New System.Drawing.Size(90, 38)
-        Me.BtnDelete.TabIndex = 1
-        Me.BtnDelete.Text = "Delete"
-        '
-        'BtnSave
-        '
-        Me.BtnSave.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BtnSave.Image = CType(resources.GetObject("BtnSave.Image"), System.Drawing.Image)
-        Me.BtnSave.Location = New System.Drawing.Point(890, 2)
-        Me.BtnSave.Name = "BtnSave"
-        Me.BtnSave.Size = New System.Drawing.Size(87, 41)
-        Me.BtnSave.TabIndex = 1
-        Me.BtnSave.Text = "Save"
-        '
-        'BtnClose
-        '
-        Me.BtnClose.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BtnClose.Image = CType(resources.GetObject("BtnClose.Image"), System.Drawing.Image)
-        Me.BtnClose.Location = New System.Drawing.Point(803, 2)
-        Me.BtnClose.Name = "BtnClose"
-        Me.BtnClose.Size = New System.Drawing.Size(87, 41)
-        Me.BtnClose.TabIndex = 2
-        Me.BtnClose.Text = "Close"
-        '
-        'BtnPrint
-        '
-        Me.BtnPrint.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BtnPrint.Image = CType(resources.GetObject("BtnPrint.Image"), System.Drawing.Image)
-        Me.BtnPrint.Location = New System.Drawing.Point(716, 2)
-        Me.BtnPrint.Name = "BtnPrint"
-        Me.BtnPrint.Size = New System.Drawing.Size(87, 41)
-        Me.BtnPrint.TabIndex = 3
-        Me.BtnPrint.Text = "Print"
-        '
-        'BtnAttachment
-        '
-        Me.BtnAttachment.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BtnAttachment.Image = CType(resources.GetObject("BtnAttachment.Image"), System.Drawing.Image)
-        Me.BtnAttachment.Location = New System.Drawing.Point(610, 2)
-        Me.BtnAttachment.Name = "BtnAttachment"
-        Me.BtnAttachment.Size = New System.Drawing.Size(106, 41)
-        Me.BtnAttachment.TabIndex = 4
-        Me.BtnAttachment.Text = "Attachment"
-        '
-        'BtnMark
-        '
-        Me.BtnMark.Dock = System.Windows.Forms.DockStyle.Left
-        Me.BtnMark.Image = CType(resources.GetObject("BtnMark.Image"), System.Drawing.Image)
-        Me.BtnMark.Location = New System.Drawing.Point(2, 2)
-        Me.BtnMark.Name = "BtnMark"
-        Me.BtnMark.Size = New System.Drawing.Size(88, 41)
-        Me.BtnMark.TabIndex = 5
-        Me.BtnMark.Text = "Mark"
         '
         'GridColumnId
         '
@@ -379,6 +223,162 @@ Partial Class FormProdOverMemoDet
         Me.GridColumnRemark.VisibleIndex = 3
         Me.GridColumnRemark.Width = 260
         '
+        'PanelControlNav
+        '
+        Me.PanelControlNav.Controls.Add(Me.BtnDelete)
+        Me.PanelControlNav.Controls.Add(Me.BtnAdd)
+        Me.PanelControlNav.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelControlNav.Location = New System.Drawing.Point(20, 2)
+        Me.PanelControlNav.Name = "PanelControlNav"
+        Me.PanelControlNav.Size = New System.Drawing.Size(957, 42)
+        Me.PanelControlNav.TabIndex = 1
+        '
+        'BtnDelete
+        '
+        Me.BtnDelete.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnDelete.Image = CType(resources.GetObject("BtnDelete.Image"), System.Drawing.Image)
+        Me.BtnDelete.Location = New System.Drawing.Point(778, 2)
+        Me.BtnDelete.Name = "BtnDelete"
+        Me.BtnDelete.Size = New System.Drawing.Size(90, 38)
+        Me.BtnDelete.TabIndex = 1
+        Me.BtnDelete.Text = "Delete"
+        '
+        'BtnAdd
+        '
+        Me.BtnAdd.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnAdd.Image = CType(resources.GetObject("BtnAdd.Image"), System.Drawing.Image)
+        Me.BtnAdd.Location = New System.Drawing.Point(868, 2)
+        Me.BtnAdd.Name = "BtnAdd"
+        Me.BtnAdd.Size = New System.Drawing.Size(87, 38)
+        Me.BtnAdd.TabIndex = 0
+        Me.BtnAdd.Text = "Add"
+        '
+        'PanelControlBottom
+        '
+        Me.PanelControlBottom.Controls.Add(Me.BtnMark)
+        Me.PanelControlBottom.Controls.Add(Me.BtnAttachment)
+        Me.PanelControlBottom.Controls.Add(Me.BtnPrint)
+        Me.PanelControlBottom.Controls.Add(Me.BtnClose)
+        Me.PanelControlBottom.Controls.Add(Me.BtnSave)
+        Me.PanelControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.PanelControlBottom.Location = New System.Drawing.Point(0, 529)
+        Me.PanelControlBottom.Name = "PanelControlBottom"
+        Me.PanelControlBottom.Size = New System.Drawing.Size(979, 45)
+        Me.PanelControlBottom.TabIndex = 2
+        '
+        'BtnMark
+        '
+        Me.BtnMark.Dock = System.Windows.Forms.DockStyle.Left
+        Me.BtnMark.Image = CType(resources.GetObject("BtnMark.Image"), System.Drawing.Image)
+        Me.BtnMark.Location = New System.Drawing.Point(2, 2)
+        Me.BtnMark.Name = "BtnMark"
+        Me.BtnMark.Size = New System.Drawing.Size(88, 41)
+        Me.BtnMark.TabIndex = 5
+        Me.BtnMark.Text = "Mark"
+        '
+        'BtnAttachment
+        '
+        Me.BtnAttachment.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnAttachment.Image = CType(resources.GetObject("BtnAttachment.Image"), System.Drawing.Image)
+        Me.BtnAttachment.Location = New System.Drawing.Point(610, 2)
+        Me.BtnAttachment.Name = "BtnAttachment"
+        Me.BtnAttachment.Size = New System.Drawing.Size(106, 41)
+        Me.BtnAttachment.TabIndex = 4
+        Me.BtnAttachment.Text = "Attachment"
+        '
+        'BtnPrint
+        '
+        Me.BtnPrint.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnPrint.Image = CType(resources.GetObject("BtnPrint.Image"), System.Drawing.Image)
+        Me.BtnPrint.Location = New System.Drawing.Point(716, 2)
+        Me.BtnPrint.Name = "BtnPrint"
+        Me.BtnPrint.Size = New System.Drawing.Size(87, 41)
+        Me.BtnPrint.TabIndex = 3
+        Me.BtnPrint.Text = "Print"
+        '
+        'BtnClose
+        '
+        Me.BtnClose.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnClose.Image = CType(resources.GetObject("BtnClose.Image"), System.Drawing.Image)
+        Me.BtnClose.Location = New System.Drawing.Point(803, 2)
+        Me.BtnClose.Name = "BtnClose"
+        Me.BtnClose.Size = New System.Drawing.Size(87, 41)
+        Me.BtnClose.TabIndex = 2
+        Me.BtnClose.Text = "Close"
+        '
+        'BtnSave
+        '
+        Me.BtnSave.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnSave.Image = CType(resources.GetObject("BtnSave.Image"), System.Drawing.Image)
+        Me.BtnSave.Location = New System.Drawing.Point(890, 2)
+        Me.BtnSave.Name = "BtnSave"
+        Me.BtnSave.Size = New System.Drawing.Size(87, 41)
+        Me.BtnSave.TabIndex = 1
+        Me.BtnSave.Text = "Save"
+        '
+        'MENote
+        '
+        Me.MENote.Location = New System.Drawing.Point(71, 9)
+        Me.MENote.Name = "MENote"
+        Me.MENote.Size = New System.Drawing.Size(285, 49)
+        Me.MENote.TabIndex = 1
+        '
+        'LabelControl2
+        '
+        Me.LabelControl2.Location = New System.Drawing.Point(33, 11)
+        Me.LabelControl2.Name = "LabelControl2"
+        Me.LabelControl2.Size = New System.Drawing.Size(23, 13)
+        Me.LabelControl2.TabIndex = 2
+        Me.LabelControl2.Text = "Note"
+        '
+        'GroupControlBottom
+        '
+        Me.GroupControlBottom.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupControlBottom.Controls.Add(Me.PanelBottomRight)
+        Me.GroupControlBottom.Controls.Add(Me.MENote)
+        Me.GroupControlBottom.Controls.Add(Me.LabelControl2)
+        Me.GroupControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.GroupControlBottom.Location = New System.Drawing.Point(0, 458)
+        Me.GroupControlBottom.Name = "GroupControlBottom"
+        Me.GroupControlBottom.Size = New System.Drawing.Size(979, 71)
+        Me.GroupControlBottom.TabIndex = 1
+        Me.GroupControlBottom.Text = "."
+        '
+        'PanelBottomRight
+        '
+        Me.PanelBottomRight.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelBottomRight.Controls.Add(Me.LEReportStatus)
+        Me.PanelBottomRight.Controls.Add(Me.LabelControl21)
+        Me.PanelBottomRight.Dock = System.Windows.Forms.DockStyle.Right
+        Me.PanelBottomRight.Location = New System.Drawing.Point(670, 2)
+        Me.PanelBottomRight.Name = "PanelBottomRight"
+        Me.PanelBottomRight.Size = New System.Drawing.Size(307, 67)
+        Me.PanelBottomRight.TabIndex = 140
+        '
+        'LEReportStatus
+        '
+        Me.LEReportStatus.Enabled = False
+        Me.LEReportStatus.Location = New System.Drawing.Point(90, 6)
+        Me.LEReportStatus.Name = "LEReportStatus"
+        Me.LEReportStatus.Properties.Appearance.Options.UseTextOptions = True
+        Me.LEReportStatus.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near
+        Me.LEReportStatus.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.White
+        Me.LEReportStatus.Properties.AppearanceDisabled.Options.UseBackColor = True
+        Me.LEReportStatus.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.LEReportStatus.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_report_status", "ID Report Status", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("report_status", "Report Status")})
+        Me.LEReportStatus.Properties.NullText = ""
+        Me.LEReportStatus.Properties.ShowFooter = False
+        Me.LEReportStatus.Size = New System.Drawing.Size(211, 20)
+        Me.LEReportStatus.TabIndex = 7
+        '
+        'LabelControl21
+        '
+        Me.LabelControl21.Location = New System.Drawing.Point(40, 9)
+        Me.LabelControl21.Name = "LabelControl21"
+        Me.LabelControl21.Size = New System.Drawing.Size(31, 13)
+        Me.LabelControl21.TabIndex = 144
+        Me.LabelControl21.Text = "Status"
+        '
         'FormProdOverMemoDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -395,16 +395,20 @@ Partial Class FormProdOverMemoDet
         CType(Me.GroupControlTop, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControlTop.ResumeLayout(False)
         Me.GroupControlTop.PerformLayout()
-        CType(Me.GroupControlMiddle, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupControlMiddle.ResumeLayout(False)
-        CType(Me.PanelControlBottom, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.PanelControlBottom.ResumeLayout(False)
-        CType(Me.TxtMemoNumber.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.MENote.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DECreated.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DECreated.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEExpired.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEExpired.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DECreated.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DECreated.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtMemoNumber.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GroupControlMiddle, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupControlMiddle.ResumeLayout(False)
+        CType(Me.GCData, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVData, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControlNav, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControlNav.ResumeLayout(False)
+        CType(Me.PanelControlBottom, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControlBottom.ResumeLayout(False)
+        CType(Me.MENote.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControlBottom, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControlBottom.ResumeLayout(False)
         Me.GroupControlBottom.PerformLayout()
@@ -412,10 +416,6 @@ Partial Class FormProdOverMemoDet
         Me.PanelBottomRight.ResumeLayout(False)
         Me.PanelBottomRight.PerformLayout()
         CType(Me.LEReportStatus.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GCData, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GVData, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PanelControlNav, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.PanelControlNav.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub

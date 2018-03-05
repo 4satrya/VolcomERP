@@ -123,6 +123,9 @@
         ElseIf report_mark_type = "124" Then
             'propose leave manager
             FormEmpLeaveDet.Close()
+        ElseIf report_mark_type = "126" Then
+            'memo over prod
+            FormProdOverMemoDet.Close()
         End If
     End Sub
     Sub show()
@@ -609,6 +612,12 @@
             FormEmpLeaveDet.report_mark_type = "124"
             FormEmpLeaveDet.is_view = "1"
             FormEmpLeaveDet.ShowDialog()
+        ElseIf report_mark_type = "126" Then
+            'memo over prod
+            FormProdOverMemoDet.id_prod_over_memo = id_report
+            FormProdOverMemoDet.action = "upd"
+            FormProdOverMemoDet.is_view = "1"
+            FormProdOverMemoDet.ShowDialog()
         Else
             'MsgBox(id_report)
             stopCustom("Document Not Found")

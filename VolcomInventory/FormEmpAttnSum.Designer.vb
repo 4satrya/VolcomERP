@@ -350,7 +350,7 @@ Partial Class FormEmpAttnSum
         '
         Me.XTPD2D.Controls.Add(Me.GCSchedule)
         Me.XTPD2D.Name = "XTPD2D"
-        Me.XTPD2D.Size = New System.Drawing.Size(1000, 262)
+        Me.XTPD2D.Size = New System.Drawing.Size(838, 262)
         Me.XTPD2D.Text = "Detail"
         '
         'GCSchedule
@@ -360,7 +360,7 @@ Partial Class FormEmpAttnSum
         Me.GCSchedule.Location = New System.Drawing.Point(0, 0)
         Me.GCSchedule.MainView = Me.GVSchedule
         Me.GCSchedule.Name = "GCSchedule"
-        Me.GCSchedule.Size = New System.Drawing.Size(1000, 262)
+        Me.GCSchedule.Size = New System.Drawing.Size(838, 262)
         Me.GCSchedule.TabIndex = 7
         Me.GCSchedule.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVSchedule})
         '
@@ -384,6 +384,11 @@ Partial Class FormEmpAttnSum
         Me.GVSchedule.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "work_hour", Me.GCWorkMin, "{0:0.##}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "actual_work_hour", Me.GCWorkMinActual, "{0:0.##}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "late", Me.GCLate, "{0:0.##}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "over", Me.GCOver, "{0:0.##}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "balance", Me.GCBalance, "{0:0.##}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "over_break", Me.GCOverBreak, "{0:0.##}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "present", Me.GridColumnPresent, "{0:0.##}")})
         Me.GVSchedule.Name = "GVSchedule"
         Me.GVSchedule.OptionsBehavior.Editable = False
+        Me.GVSchedule.OptionsClipboard.ClipboardMode = DevExpress.Export.ClipboardMode.Formatted
+        Me.GVSchedule.OptionsClipboard.CopyCollapsedData = DevExpress.Utils.DefaultBoolean.[True]
+        Me.GVSchedule.OptionsClipboard.CopyColumnHeaders = DevExpress.Utils.DefaultBoolean.[True]
+        Me.GVSchedule.OptionsSelection.MultiSelect = True
+        Me.GVSchedule.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect
         Me.GVSchedule.OptionsView.ColumnAutoWidth = False
         Me.GVSchedule.OptionsView.ShowFooter = True
         Me.GVSchedule.OptionsView.ShowGroupPanel = False
@@ -671,7 +676,7 @@ Partial Class FormEmpAttnSum
         '
         Me.XTPSchedule.Controls.Add(Me.GCListSchedule)
         Me.XTPSchedule.Name = "XTPSchedule"
-        Me.XTPSchedule.Size = New System.Drawing.Size(1000, 262)
+        Me.XTPSchedule.Size = New System.Drawing.Size(838, 262)
         Me.XTPSchedule.Text = "Schedule"
         '
         'GCListSchedule
@@ -681,7 +686,7 @@ Partial Class FormEmpAttnSum
         Me.GCListSchedule.Location = New System.Drawing.Point(0, 0)
         Me.GCListSchedule.MainView = Me.GVListSchedule
         Me.GCListSchedule.Name = "GCListSchedule"
-        Me.GCListSchedule.Size = New System.Drawing.Size(1000, 262)
+        Me.GCListSchedule.Size = New System.Drawing.Size(838, 262)
         Me.GCListSchedule.TabIndex = 8
         Me.GCListSchedule.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVListSchedule})
         '
@@ -963,7 +968,7 @@ Partial Class FormEmpAttnSum
         '
         Me.XTPScheduleTable.Controls.Add(Me.GCScheduleTable)
         Me.XTPScheduleTable.Name = "XTPScheduleTable"
-        Me.XTPScheduleTable.Size = New System.Drawing.Size(1000, 262)
+        Me.XTPScheduleTable.Size = New System.Drawing.Size(838, 262)
         Me.XTPScheduleTable.Text = "Schedule Table"
         '
         'GCScheduleTable
@@ -972,7 +977,7 @@ Partial Class FormEmpAttnSum
         Me.GCScheduleTable.Location = New System.Drawing.Point(0, 0)
         Me.GCScheduleTable.MainView = Me.GVScheduleTable
         Me.GCScheduleTable.Name = "GCScheduleTable"
-        Me.GCScheduleTable.Size = New System.Drawing.Size(1000, 262)
+        Me.GCScheduleTable.Size = New System.Drawing.Size(838, 262)
         Me.GCScheduleTable.TabIndex = 4
         Me.GCScheduleTable.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVScheduleTable})
         '

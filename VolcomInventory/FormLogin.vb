@@ -30,6 +30,7 @@ Public Class FormLogin
             Dim data As DataTable
             Try
                 Cursor = Cursors.WaitCursor
+
                 query = String.Format("SELECT * FROM tb_m_user a INNER JOIN tb_m_employee b ON a.id_employee = b.id_employee WHERE a.username = '{0}' AND a.password=MD5('{1}') AND b.id_employee_active=1", username, password)
                 data = execute_query(query, -1, True, "", "", "", "")
                 If data.Rows.Count > 0 Then

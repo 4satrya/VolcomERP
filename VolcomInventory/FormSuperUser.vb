@@ -79,6 +79,7 @@
         '    submit_who_prepared("120", data.Rows(i)("id_sales_return").ToString, data.Rows(i)("last_update_by").ToString)
         'Next
         'Cursor = Cursors.Default
+        FormTest.ShowDialog()
     End Sub
 
     Private Sub BtnDepartement_Click(sender As Object, e As EventArgs) Handles BtnDepartement.Click

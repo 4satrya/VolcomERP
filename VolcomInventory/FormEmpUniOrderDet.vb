@@ -6,6 +6,11 @@ Public Class FormEmpUniOrderDet
     Public id_emp_uni_period As String = "-1"
     Dim prepared_by As String = ""
     Dim id_wh_drawer As String = ""
+    Public is_public_form As Boolean = False
+    Dim id_departement As String = "-1"
+    Public is_view As String = "-1"
+    Dim id_sex As String = "-1"
+    Dim is_filter_uni_sex As String = "-1"
 
     Private Sub FormEmpUniOrderDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewReportStatus()
@@ -19,6 +24,8 @@ Public Class FormEmpUniOrderDet
         id_emp_uni_budget = data.Rows(0)("id_emp_uni_budget").ToString
         id_emp_uni_period = data.Rows(0)("id_emp_uni_period").ToString
         id_wh_drawer = data.Rows(0)("id_drawer_def").ToString
+        id_departement = data.Rows(0)("id_departement").ToString
+        id_sex = data.Rows(0)("id_sex").ToString
         TxtNIK.Text = data.Rows(0)("employee_code").ToString
         TxtName.Text = data.Rows(0)("employee_name").ToString
         TxtDept.Text = data.Rows(0)("departement").ToString
@@ -36,12 +43,19 @@ Public Class FormEmpUniOrderDet
         TxtDiff.EditValue = TxtBudget.EditValue - TxtTotal.EditValue
         TxtDesign.Focus()
 
-        If data.Rows(0)("id_report_status").ToString = 5 Or data.Rows(0)("id_report_status").ToString = 6 Then
+        'filter uniform by sex option
+        is_filter_uni_sex = get_setup_field("is_filter_uni_sex")
+
+        If data.Rows(0)("id_report_status").ToString = "5" Or data.Rows(0)("id_report_status").ToString = "6" Or data.Rows(0)("is_selected").ToString = "1" Then
             BtnAccept.Visible = False
             BtnCancelOrder.Visible = False
             PanelControl4.Visible = False
         End If
         viewDetail()
+
+        If is_view = "1" Then
+            BtnMark.Visible = True
+        End If
     End Sub
 
     Sub getTotal()
@@ -84,16 +98,18 @@ Public Class FormEmpUniOrderDet
         If confirm = Windows.Forms.DialogResult.Yes Then
             Cursor = Cursors.WaitCursor
             'submit
-            submit_who_prepared("39", id_sales_order, id_user)
+            submit_who_prepared("130", id_sales_order, id_user)
 
             'update completed
-            Dim query As String = "UPDATE tb_sales_order Set id_report_status=6, sales_order_note='" + addSlashes(MENote.Text.ToString) + "' WHERE id_sales_order=" + id_sales_order + " "
+            Dim query As String = "UPDATE tb_sales_order set is_selected=1, sales_order_note='" + addSlashes(MENote.Text.ToString) + "' WHERE id_sales_order=" + id_sales_order + " "
             execute_non_query(query, True, "", "", "", "")
-            FormEmpUniPeriodDet.viewOrder()
+            If Not is_public_form Then
+                FormEmpUniPeriodDet.viewOrder()
+            End If
             actionLoad()
 
             'print direct
-            printOrder(False)
+            'printOrder(False)
             Cursor = Cursors.Default
         End If
     End Sub
@@ -110,7 +126,9 @@ Public Class FormEmpUniOrderDet
 
             Dim query As String = "UPDATE tb_sales_order Set id_report_status=5,sales_order_note='" + addSlashes(MENote.Text.ToString) + "' WHERE id_sales_order=" + id_sales_order + " "
             execute_non_query(query, True, "", "", "", "")
-            FormEmpUniPeriodDet.viewOrder()
+            If Not is_public_form Then
+                FormEmpUniPeriodDet.viewOrder()
+            End If
             actionLoad()
         End If
     End Sub
@@ -132,7 +150,7 @@ Public Class FormEmpUniOrderDet
         FormEmpUniOrderDelete.ShowDialog()
         If GVItemList.ActiveFilterString <> "" Then
             If GVItemList.RowCount <= 0 Then
-                stopCustom("Not found")
+                stopCustom("Data tidak ditemukan")
             Else
                 deleteData()
             End If
@@ -191,15 +209,19 @@ Public Class FormEmpUniOrderDet
     End Sub
 
     Public Sub selectUniform(ByVal key As String)
-        Dim dt As DataTable = checkStock("AND dm.id_emp_uni_period=" + id_emp_uni_period + " AND dd.no='" + key.ToString + "'")
+        Dim cond_sex As String = ""
+        If is_filter_uni_sex = "1" And id_sex = "1" Then
+            cond_sex = "AND dd.division='M' "
+        End If
+        Dim dt As DataTable = checkStock("AND dm.id_emp_uni_period=" + id_emp_uni_period + " AND dd.no='" + key.ToString + "' " + cond_sex)
         If dt.Rows.Count <= 0 Then
-            stopCustom("Product not found")
+            stopCustom("Product tidak ditemukan")
             TxtDesign.Text = ""
             TxtDesign.Focus()
         Else
             'jika sudah ada di list
             If checkExist(dt.Rows(0)("id_design").ToString) Then
-                stopCustom("Product already order")
+                stopCustom("Product sudah dipilih")
                 TxtDesign.Text = ""
                 TxtDesign.Focus()
             Else
@@ -213,6 +235,15 @@ Public Class FormEmpUniOrderDet
     Private Sub TxtDesign_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtDesign.KeyDown
         If e.KeyCode = Keys.Enter Then
             Cursor = Cursors.WaitCursor
+            If is_public_form Then
+                Dim valid As String = execute_query("SELECT is_selection_time(" + id_emp_uni_period + ", " + id_departement + ")", 0, True, "", "", "", "")
+                If valid = "2" Then
+                    stopCustom("Maaf, saat ini belum waktunya memilih uniform")
+                    TxtDesign.Text = ""
+                    TxtDesign.Focus()
+                    Exit Sub
+                End If
+            End If
             Dim key As String = addSlashes(TxtDesign.Text)
             selectUniform(key)
             Cursor = Cursors.Default
@@ -224,7 +255,7 @@ Public Class FormEmpUniOrderDet
             IFNULL(s.qty_avl,0) AS qty_avl,
             IFNULL(s.qty_rsv,0) AS qty_rsv,
             IFNULL(s.qty_tot,0) AS qty_tot,
-            prc.id_design_price, prc.design_price
+            prc.id_design_price, prc.design_price, IFNULL(dd.point,0) AS `point`
             FROM tb_emp_uni_design_det dd
             INNER JOIN tb_emp_uni_design dm ON dm.id_emp_uni_design = dd.id_emp_uni_design
             INNER JOIN tb_m_design dsg ON dsg.id_design = dd.id_design
@@ -307,9 +338,9 @@ Public Class FormEmpUniOrderDet
         Report.LabelName.Text = TxtName.Text.ToUpper
         Report.LabelDept.Text = TxtDept.Text.ToUpper
         Report.LabelLevel.Text = TxtLevel.Text.ToUpper
-        Report.LabelBudget.Text = TxtBudget.Text.ToUpper
-        Report.LabelTotal.Text = TxtTotal.Text.ToUpper
-        Report.LabelDiff.Text = TxtDiff.Text
+        Report.LabelBudget.Text = TxtBudget.Text.ToUpper + "%"
+        Report.LabelTotal.Text = TxtTotal.Text.ToUpper + "%"
+        Report.LabelDiff.Text = TxtDiff.Text + "%"
         Report.LabelHRD.Text = prepared_by.ToUpper
         Report.LabelTTDName.Text = TxtName.Text.ToUpper
         Report.LabelDate.Text = DECreated.Text.ToString
@@ -346,6 +377,7 @@ Public Class FormEmpUniOrderDet
     Sub viewStock()
         Cursor = Cursors.WaitCursor
         FormEmpUniSuggest.id_emp_uni_period = id_emp_uni_period
+        FormEmpUniSuggest.id_sex = id_sex
         FormEmpUniSuggest.ShowDialog()
         Cursor = Cursors.Default
     End Sub
@@ -360,6 +392,15 @@ Public Class FormEmpUniOrderDet
 
     Private Sub StockToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StockToolStripMenuItem.Click
         viewStock()
+    End Sub
+
+    Private Sub BtnMark_Click(sender As Object, e As EventArgs) Handles BtnMark.Click
+        Cursor = Cursors.WaitCursor
+        FormReportMark.report_mark_type = "130"
+        FormReportMark.is_view = "1"
+        FormReportMark.id_report = id_sales_order
+        FormReportMark.ShowDialog()
+        Cursor = Cursors.Default
     End Sub
 
     'Private Sub TxtCode_KeyDown(sender As Object, e As KeyEventArgs)

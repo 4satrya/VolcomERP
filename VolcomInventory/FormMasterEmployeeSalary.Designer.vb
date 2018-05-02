@@ -33,6 +33,8 @@ Partial Class FormMasterEmployeeSalary
         Me.TxtAllowHouse = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
         Me.TxtAllowCar = New DevExpress.XtraEditors.TextEdit()
+        Me.TETotal = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl7 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.TxtBasicSalary.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -41,13 +43,14 @@ Partial Class FormMasterEmployeeSalary
         CType(Me.TxtAllowTrans.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtAllowHouse.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtAllowCar.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TETotal.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl1
         '
         Me.PanelControl1.Controls.Add(Me.BtnSave)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl1.Location = New System.Drawing.Point(0, 303)
+        Me.PanelControl1.Location = New System.Drawing.Point(0, 344)
         Me.PanelControl1.LookAndFeel.SkinName = "Blue"
         Me.PanelControl1.LookAndFeel.UseDefaultLookAndFeel = False
         Me.PanelControl1.Name = "PanelControl1"
@@ -187,9 +190,9 @@ Partial Class FormMasterEmployeeSalary
         '
         Me.LabelControl6.Location = New System.Drawing.Point(12, 237)
         Me.LabelControl6.Name = "LabelControl6"
-        Me.LabelControl6.Size = New System.Drawing.Size(68, 13)
+        Me.LabelControl6.Size = New System.Drawing.Size(107, 13)
         Me.LabelControl6.TabIndex = 11
-        Me.LabelControl6.Text = "Car Allowance"
+        Me.LabelControl6.Text = "Attendance Allowance"
         '
         'TxtAllowCar
         '
@@ -207,11 +210,38 @@ Partial Class FormMasterEmployeeSalary
         Me.TxtAllowCar.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Information
         Me.TxtAllowCar.ToolTipTitle = "Information"
         '
+        'TETotal
+        '
+        Me.TETotal.Location = New System.Drawing.Point(12, 301)
+        Me.TETotal.Name = "TETotal"
+        Me.TETotal.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TETotal.Properties.Appearance.Options.UseFont = True
+        Me.TETotal.Properties.Mask.EditMask = "n2"
+        Me.TETotal.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
+        Me.TETotal.Properties.Mask.SaveLiteral = False
+        Me.TETotal.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.TETotal.Properties.MaxLength = 50
+        Me.TETotal.Properties.ReadOnly = True
+        Me.TETotal.Size = New System.Drawing.Size(427, 20)
+        Me.TETotal.TabIndex = 101
+        Me.TETotal.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Information
+        Me.TETotal.ToolTipTitle = "Information"
+        '
+        'LabelControl7
+        '
+        Me.LabelControl7.Location = New System.Drawing.Point(12, 282)
+        Me.LabelControl7.Name = "LabelControl7"
+        Me.LabelControl7.Size = New System.Drawing.Size(57, 13)
+        Me.LabelControl7.TabIndex = 102
+        Me.LabelControl7.Text = "Total Salary"
+        '
         'FormMasterEmployeeSalary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(463, 341)
+        Me.ClientSize = New System.Drawing.Size(463, 382)
+        Me.Controls.Add(Me.TETotal)
+        Me.Controls.Add(Me.LabelControl7)
         Me.Controls.Add(Me.TxtAllowCar)
         Me.Controls.Add(Me.LabelControl6)
         Me.Controls.Add(Me.TxtAllowHouse)
@@ -239,6 +269,7 @@ Partial Class FormMasterEmployeeSalary
         CType(Me.TxtAllowTrans.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtAllowHouse.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtAllowCar.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TETotal.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -258,4 +289,6 @@ Partial Class FormMasterEmployeeSalary
     Friend WithEvents TxtAllowHouse As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelControl6 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents TxtAllowCar As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents TETotal As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LabelControl7 As DevExpress.XtraEditors.LabelControl
 End Class

@@ -23,17 +23,22 @@
         '
         DECreatedBy.EditValue = Now
         '
-        Dim query As String = "SELECT ass.id_asset,ass.vendor_code,ass.asset_code,ass.asset_code_old,ass.id_asset_cat,ass.asset_desc
+        Dim query As String = "SELECT ass.id_asset,pod.vendor_sku AS vendor_code,ass.asset_code,ass.asset_code_old,pod.id_asset_cat,ass.asset_desc
                                 ,IF(ISNULL(cur_user.id_asset),emp.employee_name,cur_user.employee_name) AS employee_name
                                 ,IF(ISNULL(cur_user.id_asset),emp.id_employee,cur_user.id_employee) AS id_employee
                                 ,IF(ISNULL(cur_user.id_asset),dep.departement,cur_user.departement) AS departement
                                 ,IF(ISNULL(cur_user.id_asset),dep.id_departement,cur_user.id_departement) AS id_departement
-                                FROM tb_a_asset ass 
+                                ,ass.asset_location
+                                FROM tb_a_asset ass
+                                INNER JOIN tb_a_asset_rec_det recd ON recd.id_asset_rec_det=ass.id_asset_rec_det
+                                INNER JOIN tb_a_asset_rec rec ON rec.id_asset_rec=recd.id_asset_rec
+                                INNER JOIN tb_a_asset_po_det pod ON pod.id_asset_po_det=recd.`id_asset_po_det`
+                                INNER JOIN tb_a_asset_po po ON po.id_asset_po=pod.id_asset_po 
                                 LEFT JOIN
                                 (
                                     SELECT a.id_asset,emp.`employee_name`,emp.`id_employee`,dep.`departement`,dep.`id_departement` FROM
                                     (
-	                                SELECT * FROM tb_a_asset_log WHERE id_asset='" & id_asset & "' ORDER BY `date` DESC 
+	                                    SELECT * FROM tb_a_asset_log WHERE id_asset='" & id_asset & "' ORDER BY `date` DESC 
                                     )a 
                                     LEFT JOIN tb_m_employee emp ON emp.`id_employee`=a.id_employee
                                     INNER JOIN tb_m_departement dep ON dep.`id_departement`=a.id_departement
@@ -41,12 +46,13 @@
                                 )cur_user ON cur_user.id_asset=ass.id_asset
                                 LEFT JOIN tb_m_employee emp ON emp.`id_employee`=ass.id_employee
                                 INNER JOIN tb_m_user usr ON usr.id_user=ass.id_user_created
-                                INNER JOIN tb_m_departement dep ON dep.`id_departement`=ass.id_departement
+                                INNER JOIN tb_m_departement dep ON dep.`id_departement`=pod.id_departement
                                 WHERE ass.id_asset='" & id_asset & "'"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
         TECode.Text = data.Rows(0)("asset_code").ToString
         TEOldCode.Text = data.Rows(0)("asset_code_old").ToString
+        TEOldLocation.Text = data.Rows(0)("asset_location").ToString
         TEDesc.Text = data.Rows(0)("asset_desc").ToString
 
         LEAssetCat.ItemIndex = LEAssetCat.Properties.GetDataSourceRowIndex("id_asset_cat", data.Rows(0)("id_asset_cat").ToString)
@@ -60,9 +66,10 @@
                 LECurUser.ItemIndex = LECurUser.Properties.GetDataSourceRowIndex("id_employee", data.Rows(0)("id_employee").ToString)
             End If
             BSave.Visible = True
+            BPrint.Visible = False
         Else 'edit
             '
-            Dim query_view As String = "SELECT a.*,LPAD(a.id_asset_log,5,'0'),emp.employee_name,dep.departement AS move_no 
+            Dim query_view As String = "SELECT a.*,LPAD(a.id_asset_log,5,'0') AS move_no,emp.employee_name,dep.departement
                                         FROM tb_a_asset_log a 
                                         INNER JOIN tb_m_user usr ON usr.id_user=a.id_user_created
                                         INNER JOIN tb_m_employee emp ON emp.id_employee=usr.id_employee
@@ -83,12 +90,16 @@
             '
             MENote.Text = data_view.Rows(0)("note").ToString
             DEMovingDate.EditValue = data_view.Rows(0)("date")
+            DECreatedBy.EditValue = data_view.Rows(0)("date_created")
             '
             TEMoveNo.Text = "IAMA" & data_view.Rows(0)("move_no").ToString
             departement = data_view(0)("departement").ToString
             TECreatedBy.Text = data_view(0)("employee_name").ToString
+            TEOldLocation.Text = data_view(0)("location_old").ToString
+            TENewLocation.Text = data_view(0)("location").ToString
             '
             BSave.Visible = False
+            BPrint.Visible = True
         End If
     End Sub
     Sub load_cat()
@@ -135,8 +146,8 @@
             id_emp_new = "'" & LENewUser.EditValue.ToString & "'"
         End If
 
-        Dim query As String = "INSERT INTO tb_a_asset_log(id_asset,id_departement_old,id_employee_old,id_departement,id_employee,note,date,id_user_created,date_created)
-                                VALUES('" & id_asset & "','" & LECurDep.EditValue.ToString & "'," & id_emp_old & ",'" & LENewDep.EditValue.ToString & "'," & id_emp_new & ",'" & addSlashes(MENote.Text) & "','" & Date.Parse(DEMovingDate.EditValue.ToString).ToString("yyyy-MM-dd") & "','" & id_user & "',NOW()); SELECT LAST_INSERT_ID(); "
+        Dim query As String = "INSERT INTO tb_a_asset_log(id_asset,id_departement_old,id_employee_old,id_departement,id_employee,location_old,location,note,date,id_user_created,date_created)
+                                VALUES('" & id_asset & "','" & LECurDep.EditValue.ToString & "'," & id_emp_old & ",'" & LENewDep.EditValue.ToString & "'," & id_emp_new & ",'" & addSlashes(TEOldLocation.Text) & "','" & addSlashes(TENewLocation.Text) & "','" & addSlashes(MENote.Text) & "','" & Date.Parse(DEMovingDate.EditValue.ToString).ToString("yyyy-MM-dd") & "','" & id_user & "',NOW()); SELECT LAST_INSERT_ID(); "
         id_asset_log = execute_query(query, 0, True, "", "", "", "")
 
         FormMasterAsset.load_moving_log()

@@ -1071,7 +1071,7 @@ Public Class FormSalesPOSDet
             ElseIf typ = "9" Then
                 so_cat = "And so.id_so_status = 7 "
             Else
-                so_cat = "AND so.id_so_status=0 "
+                so_cat = "AND so.id_so_status!=3 "
             End If
 
             Dim query As String = "SELECT pldel.id_pl_sales_order_del, so.sales_order_ol_shop_number, pldel.id_store_contact_to, comp.id_comp, comp.comp_name, comp.comp_number, comp.address_primary, comp.npwp, comp.id_drawer_def, comp.comp_commission, rck.id_wh_rack, loc.id_wh_locator, sp.id_sales_pos
@@ -1110,6 +1110,7 @@ Public Class FormSalesPOSDet
                 MEAdrressCompFrom.Text = data.Rows(0)("address_primary").ToString
                 TENPWP.Text = data.Rows(0)("npwp").ToString
                 SPDiscount.EditValue = data.Rows(0)("comp_commission")
+                PanelControlNav.Visible = False
 
                 ' fill GV
                 view_do()
@@ -1232,7 +1233,7 @@ Public Class FormSalesPOSDet
             defaultReset()
 
             If LEInvType.EditValue.ToString = "0" Then
-                TEDO.Enabled = False
+                TEDO.Enabled = True
                 TxtCodeCompFrom.Enabled = True
                 BtnBrowseContactFrom.Enabled = True
                 PanelControlNav.Visible = True

@@ -232,12 +232,15 @@ Public Class FormMain
         If formName = "FormMasterCompany" Then
             BBContact.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
         End If
+
         If formName = "FormAccess" Or formName = "FormMarkAssign" Then
             BBMapping.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
         End If
+
         If formName = "FormAccess" Or formName = "FormMasterSample" Or formName = "FormFGDesignList" Then
             BBDuplicate.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
         End If
+
         If formName = "FormMasterWH" Then
             If FormMasterWH.XTCWHMain.SelectedTabPageIndex = 0 Then
                 BBNew.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
@@ -1277,6 +1280,7 @@ Public Class FormMain
         ElseIf formName = "FormMasterEmployee" Then
             'Master Employee
             FormMasterEmployeeNewDet.action = "ins"
+            FormMasterEmployeeNewDet.is_salary = FormMasterEmployee.is_salary
             FormMasterEmployeeNewDet.ShowDialog()
             'FormMasterEmployeeDet.action = "ins"
             'FormMasterEmployeeDet.ShowDialog()
@@ -1532,15 +1536,22 @@ Public Class FormMain
             FormMasterAssetCategoryDetail.id_asset_cat = "-1"
             FormMasterAssetCategoryDetail.ShowDialog()
         ElseIf formName = "FormMasterAsset" Then
-            If FormMasterAsset.XtraTabControl1.SelectedTabPageIndex = 0 Then
-                FormMasterAssetDetail.id_asset = "-1"
-                FormMasterAssetDetail.ShowDialog()
-            ElseIf FormMasterAsset.XtraTabControl1.SelectedTabPageIndex = 1 Then
+            If FormMasterAsset.XTCListAsset.SelectedTabPageIndex = 0 Then
+                'FormMasterAssetDetail.id_asset = "-1"
+                'FormMasterAssetDetail.ShowDialog()
+                infoCustom("Please use purchase procedure")
+            ElseIf FormMasterAsset.XTCListAsset.SelectedTabPageIndex = 1 Then
                 If FormMasterAsset.GVAsset.RowCount > 0 Then
                     FormMasterAssetLog.id_asset = FormMasterAsset.GVAsset.GetFocusedRowCellValue("id_asset").ToString
                     FormMasterAssetLog.ShowDialog()
                 End If
             End If
+        ElseIf formName = "FormAssetPO" Then
+            FormAssetPODet.id_po = "-1"
+            FormAssetPODet.ShowDialog()
+        ElseIf formName = "FormAssetRec" Then
+            FormAssetRecDet.id_rec = "-1"
+            FormAssetRecDet.ShowDialog()
         Else
             RPSubMenu.Visible = False
         End If
@@ -2189,6 +2200,7 @@ Public Class FormMain
             ElseIf formName = "FormMasterEmployee" Then
                 'Master Employee
                 FormMasterEmployeeNewDet.id_employee = FormMasterEmployee.GVEmployee.GetFocusedRowCellValue("id_employee").ToString
+                FormMasterEmployeeNewDet.is_salary = FormMasterEmployee.is_salary
                 FormMasterEmployeeNewDet.action = "upd"
                 FormMasterEmployeeNewDet.ShowDialog()
             ElseIf formName = "FormSampleDel" Then
@@ -2465,6 +2477,12 @@ Public Class FormMain
             ElseIf formName = "FormMasterAsset" Then
                 FormMasterAssetDetail.id_asset = FormMasterAsset.GVAsset.GetFocusedRowCellValue("id_asset").ToString
                 FormMasterAssetDetail.ShowDialog()
+            ElseIf formName = "FormAssetPO" Then
+                FormAssetPODet.id_po = FormAssetPO.GVPOList.GetFocusedRowCellValue("id_asset_po").ToString
+                FormAssetPODet.ShowDialog()
+            ElseIf formName = "FormAssetRec" Then
+                FormAssetRecDet.id_rec = FormAssetRec.GVRecList.GetFocusedRowCellValue("id_asset_rec").ToString
+                FormAssetRecDet.ShowDialog()
             Else
                 RPSubMenu.Visible = False
             End If
@@ -5584,6 +5602,22 @@ Public Class FormMain
                 execute_non_query(query_del, True, "", "", "", "")
                 FormMasterAsset.load_asset()
             End If
+        ElseIf formName = "FormAssetPO" Then
+            Dim id As String = FormAssetPO.GVPOList.GetFocusedRowCellValue("id_asset_po").ToString
+            confirm = XtraMessageBox.Show("Are you sure want to delete?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+            If confirm = DialogResult.Yes Then
+                Dim query_del As String = "DELETE FROM tb_a_asset_po WHERE id_asset_po='" + id + "'"
+                execute_non_query(query_del, True, "", "", "", "")
+                FormAssetPO.load_po()
+            End If
+        ElseIf formName = "FormAssetRec" Then
+            Dim id As String = FormAssetRec.GVRecList.GetFocusedRowCellValue("id_asset_rec").ToString
+            confirm = XtraMessageBox.Show("Are you sure want to delete?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+            If confirm = DialogResult.Yes Then
+                Dim query_del As String = "DELETE FROM tb_a_asset_rec WHERE id_asset_rec='" + id + "'"
+                execute_non_query(query_del, True, "", "", "", "")
+                FormAssetRec.load_rec()
+            End If
         Else
             RPSubMenu.Visible = False
         End If
@@ -6842,11 +6876,15 @@ Public Class FormMain
         ElseIf formName = "FormMasterAssetCategory" Then
             print_raw(FormMasterAssetCategory.GCAssetCat, "")
         ElseIf formName = "FormMasterAsset" Then
-            If FormMasterAsset.XtraTabControl1.SelectedTabPageIndex = 0 Then
+            If FormMasterAsset.XTCListAsset.SelectedTabPageIndex = 0 Then
                 print_raw(FormMasterAsset.GCAsset, "")
-            ElseIf FormMasterAsset.xtratabcontrol1.SelectedTabPageIndex = 1 Then
+            ElseIf FormMasterAsset.XTCListAsset.SelectedTabPageIndex = 1 Then
                 print_raw(FormMasterAsset.GCAssetMovingLog, "")
             End If
+        ElseIf formName = "FormAssetPO" Then
+            print_raw(FormAssetPO.GCPOList, "")
+        ElseIf formName = "FormAssetRec" Then
+            print_raw(FormAssetRec.GCRecList, "")
         Else
             RPSubMenu.Visible = False
         End If
@@ -7452,6 +7490,12 @@ Public Class FormMain
         ElseIf formName = "FormMasterAsset" Then
             FormMasterAsset.Close()
             FormMasterAsset.Dispose()
+        ElseIf formName = "FormAssetPO" Then
+            FormAssetPO.Close()
+            FormAssetPO.Dispose()
+        ElseIf formName = "FormAssetRec" Then
+            FormAssetRec.Close()
+            FormAssetRec.Dispose()
         Else
             RPSubMenu.Visible = False
         End If
@@ -8129,6 +8173,16 @@ Public Class FormMain
             FormProdOverMemo.viewData()
         ElseIf formName = "FormEmpUniList" Then
             FormEmpUniList.viewData()
+        ElseIf formName = "FormMasterAsset" Then
+            If FormMasterAsset.XTCListAsset.SelectedTabPageIndex = 0 Then
+                FormMasterAsset.load_asset()
+            ElseIf FormMasterAsset.XTCListAsset.SelectedTabPageIndex = 1 Then
+                FormMasterAsset.load_moving_log()
+            End If
+        ElseIf formName = "FormAssetPO" Then
+            FormAssetPO.load_po()
+        ElseIf formName = "FormAssetRec" Then
+            FormAssetRec.load_rec()
         End If
     End Sub
     'Switch
@@ -11250,6 +11304,105 @@ Public Class FormMain
             FormMasterAsset.Show()
             FormMasterAsset.WindowState = FormWindowState.Maximized
             FormMasterAsset.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBAssetPO_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBAssetPO.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormAssetPO.MdiParent = Me
+            FormAssetPO.Show()
+            FormAssetPO.WindowState = FormWindowState.Maximized
+            FormAssetPO.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBAssetRec_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBAssetRec.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormAssetRec.MdiParent = Me
+            FormAssetRec.Show()
+            FormAssetRec.WindowState = FormWindowState.Maximized
+            FormAssetRec.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBGUniformPublic_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBGUniformPublic.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Dim query As String = "SELECT p.id_emp_uni_period, b.id_emp_uni_budget, IFNULL(so.id_sales_order,0) AS `id_order`
+        FROM tb_emp_uni_period p 
+        LEFT JOIN tb_emp_uni_budget b ON b.id_emp_uni_period = p.id_emp_uni_period AND b.id_employee=" + id_employee_user + "
+        LEFT JOIN tb_m_employee e ON e.id_employee = b.id_employee
+        LEFT JOIN tb_sales_order so ON so.id_emp_uni_budget = b.id_emp_uni_budget AND so.id_emp_uni_period = p.id_emp_uni_period
+        WHERE p.id_status=1  "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        Dim id_periode As String = "-1"
+        Try
+            id_periode = data.Rows(0)("id_emp_uni_period").ToString
+        Catch ex As Exception
+        End Try
+        If id_periode = "" Then
+            id_periode = "-1"
+        End If
+        Dim valid As String = execute_query("SELECT is_selection_time(" + id_periode + ", " + id_departement_user + ")", 0, True, "", "", "", "")
+        If data.Rows.Count > 0 And valid = "1" Then
+            Dim uni As New ClassEmpUni()
+            uni.is_public_form = True
+            uni.openOrderDetail(id_periode, data.Rows(0)("id_emp_uni_budget").ToString, data.Rows(0)("id_order").ToString, id_departement_user)
+        Else
+            stopCustom("Periode uniform belum dimulai")
+        End If
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBGUniformAdmin_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBGUniformAdmin.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Dim query As String = "SELECT p.id_emp_uni_period FROM tb_emp_uni_period p WHERE p.id_status=1  "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        Dim id_periode As String = "-1"
+        Try
+            id_periode = data.Rows(0)("id_emp_uni_period").ToString
+        Catch ex As Exception
+        End Try
+        If id_periode = "" Then
+            id_periode = "-1"
+        End If
+
+        If data.Rows.Count > 0 Then
+            Try
+                FormEmpUniPeriodDet.MdiParent = Me
+                FormEmpUniPeriodDet.action = "upd"
+                FormEmpUniPeriodDet.id_emp_uni_period = id_periode
+                FormEmpUniPeriodDet.is_public_form = True
+                FormEmpUniPeriodDet.Show()
+                FormEmpUniPeriodDet.WindowState = FormWindowState.Maximized
+                FormEmpUniPeriodDet.Focus()
+            Catch ex As Exception
+                errorProcess()
+            End Try
+        Else
+            stopCustom("Periode uniform belum dimulai")
+        End If
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBEmpNorm_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBEmpNorm.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormMasterEmployee.is_salary = "1"
+            FormMasterEmployee.MdiParent = Me
+            FormMasterEmployee.Show()
+            FormMasterEmployee.WindowState = FormWindowState.Maximized
+            FormMasterEmployee.Focus()
         Catch ex As Exception
             errorProcess()
         End Try

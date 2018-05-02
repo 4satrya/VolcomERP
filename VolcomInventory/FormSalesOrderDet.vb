@@ -17,6 +17,7 @@ Public Class FormSalesOrderDet
     Public dt As DataTable
     Public id_type As String
     Public id_commerce_type As String = "-1"
+    Public id_store_type As String = "-1"
 
     Private Sub FormSalesOrderDet_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         id_type = FormSalesOrder.id_type
@@ -653,6 +654,7 @@ Public Class FormSalesOrderDet
                     id_commerce_type = data.Rows(0)("id_commerce_type").ToString
                     checkCommerceType()
                     id_store_cat = data.Rows(0)("id_comp_cat").ToString
+                    id_store_type = data.Rows(0)("id_store_type").ToString
                     id_store_contact_to = data.Rows(0)("id_comp_contact").ToString
                     TxtNameCompTo.Text = data.Rows(0)("comp_name").ToString
                     MEAdrressCompTo.Text = data.Rows(0)("address_primary").ToString
@@ -673,6 +675,7 @@ Public Class FormSalesOrderDet
         id_store = "-1"
         id_commerce_type = "-1"
         id_store_cat = "-1"
+        id_store_type = "-1"
         id_store_contact_to = "-1"
         TxtNameCompTo.Text = ""
         MEAdrressCompTo.Text = ""
@@ -859,9 +862,25 @@ Public Class FormSalesOrderDet
                             GVItemList.SetRowCellValue(rh, "name", data_filter(0)("design_display_name").ToString)
                             GVItemList.SetRowCellValue(rh, "size", data_filter(0)("Size").ToString)
                             GVItemList.SetRowCellValue(rh, "sales_order_det_qty", 0)
-                            GVItemList.SetRowCellValue(rh, "id_design_price", data_filter(0)("id_design_price").ToString)
-                            GVItemList.SetRowCellValue(rh, "design_price", data_filter(0)("design_price"))
-                            GVItemList.SetRowCellValue(rh, "design_price_type", data_filter(0)("design_price_type").ToString)
+
+                            'untuk claim toko normal
+                            If LEStatusSO.EditValue.ToString = "8" And id_store_type = "1" Then 'jika cat claim dan toko normal => harga normal
+                                Dim dtp As DataTable = getNormalPrice(data_filter(0)("id_design").ToString)
+                                If dtp.Rows.Count > 0 Then
+                                    GVItemList.SetRowCellValue(rh, "id_design_price", dtp(0)("id_design_price").ToString)
+                                    GVItemList.SetRowCellValue(rh, "design_price", dtp(0)("design_price"))
+                                    GVItemList.SetRowCellValue(rh, "design_price_type", dtp(0)("design_price_type").ToString)
+                                Else
+                                    GVItemList.SetRowCellValue(rh, "id_design_price", data_filter(0)("id_design_price").ToString)
+                                    GVItemList.SetRowCellValue(rh, "design_price", data_filter(0)("design_price"))
+                                    GVItemList.SetRowCellValue(rh, "design_price_type", data_filter(0)("design_price_type").ToString)
+                                End If
+                            Else 'selaiinnya haga update
+                                GVItemList.SetRowCellValue(rh, "id_design_price", data_filter(0)("id_design_price").ToString)
+                                GVItemList.SetRowCellValue(rh, "design_price", data_filter(0)("design_price"))
+                                GVItemList.SetRowCellValue(rh, "design_price_type", data_filter(0)("design_price_type").ToString)
+                            End If
+
                             GVItemList.SetRowCellValue(rh, "amount", 0)
                             GVItemList.SetRowCellValue(rh, "qty_avail", data_filter(0)("total_allow"))
                             GVItemList.SetRowCellValue(rh, "sales_order_det_note", "")
@@ -1094,13 +1113,13 @@ Public Class FormSalesOrderDet
                 colIndex = colIndex + 1
                 If j = 0 Then 'code
                     wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, "code").ToString
-                ElseIf j = 1 'qty
+                ElseIf j = 1 Then 'qty
                     wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, "sales_order_det_qty")
-                ElseIf j = 2 'number
+                ElseIf j = 2 Then 'number
                     wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellDisplayText(i, "number").ToString
-                ElseIf j = 3 'from
+                ElseIf j = 3 Then 'from
                     wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellDisplayText(i, "from").ToString
-                ElseIf j = 4 'to
+                ElseIf j = 4 Then 'to
                     wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellDisplayText(i, "to").ToString
                 Else 'remark det
                     wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, "sales_order_det_note").ToString
@@ -1146,7 +1165,16 @@ Public Class FormSalesOrderDet
     End Sub
 
     Private Sub LEStatusSO_EditValueChanged(sender As Object, e As EventArgs) Handles LEStatusSO.EditValueChanged
-
+        If Not LEStatusSO.EditValue = LEStatusSO.OldEditValue Then
+            If GVItemList.RowCount > 0 Then
+                Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("This action will be reset your item list order, are you sure want to continue this action?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+                If confirm = Windows.Forms.DialogResult.Yes Then
+                    viewDetail("-1")
+                Else
+                    LEStatusSO.EditValue = LEStatusSO.OldEditValue
+                End If
+            End If
+        End If
     End Sub
 
 
@@ -1173,4 +1201,5 @@ Public Class FormSalesOrderDet
             End If
         End If
     End Sub
+
 End Class

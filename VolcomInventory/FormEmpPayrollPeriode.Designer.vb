@@ -31,6 +31,10 @@ Partial Class FormEmpPayrollPeriode
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
         Me.MEPayrollNote = New DevExpress.XtraEditors.MemoEdit()
+        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
+        Me.DEEndOt = New DevExpress.XtraEditors.DateEdit()
+        Me.DEStartOt = New DevExpress.XtraEditors.DateEdit()
+        Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -39,6 +43,10 @@ Partial Class FormEmpPayrollPeriode
         CType(Me.DEStart.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEStart.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.MEPayrollNote.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEEndOt.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEEndOt.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEStartOt.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEStartOt.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl1
@@ -46,7 +54,7 @@ Partial Class FormEmpPayrollPeriode
         Me.PanelControl1.Controls.Add(Me.BtnCancel)
         Me.PanelControl1.Controls.Add(Me.BtnSave)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl1.Location = New System.Drawing.Point(0, 156)
+        Me.PanelControl1.Location = New System.Drawing.Point(0, 204)
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(462, 38)
         Me.PanelControl1.TabIndex = 1
@@ -99,7 +107,7 @@ Partial Class FormEmpPayrollPeriode
         'DEEnd
         '
         Me.DEEnd.EditValue = Nothing
-        Me.DEEnd.Location = New System.Drawing.Point(93, 38)
+        Me.DEEnd.Location = New System.Drawing.Point(122, 38)
         Me.DEEnd.Name = "DEEnd"
         Me.DEEnd.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.DEEnd.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
@@ -112,7 +120,7 @@ Partial Class FormEmpPayrollPeriode
         'DEStart
         '
         Me.DEStart.EditValue = Nothing
-        Me.DEStart.Location = New System.Drawing.Point(93, 11)
+        Me.DEStart.Location = New System.Drawing.Point(122, 11)
         Me.DEStart.Name = "DEStart"
         Me.DEStart.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.DEStart.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
@@ -143,7 +151,7 @@ Partial Class FormEmpPayrollPeriode
         'LabelControl3
         '
         Me.LabelControl3.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl3.Location = New System.Drawing.Point(12, 67)
+        Me.LabelControl3.Location = New System.Drawing.Point(12, 119)
         Me.LabelControl3.Name = "LabelControl3"
         Me.LabelControl3.Size = New System.Drawing.Size(23, 13)
         Me.LabelControl3.TabIndex = 8932
@@ -151,16 +159,64 @@ Partial Class FormEmpPayrollPeriode
         '
         'MEPayrollNote
         '
-        Me.MEPayrollNote.Location = New System.Drawing.Point(93, 65)
+        Me.MEPayrollNote.Location = New System.Drawing.Point(122, 117)
         Me.MEPayrollNote.Name = "MEPayrollNote"
-        Me.MEPayrollNote.Size = New System.Drawing.Size(353, 68)
+        Me.MEPayrollNote.Size = New System.Drawing.Size(313, 68)
         Me.MEPayrollNote.TabIndex = 8933
+        '
+        'LabelControl4
+        '
+        Me.LabelControl4.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl4.Location = New System.Drawing.Point(12, 94)
+        Me.LabelControl4.Name = "LabelControl4"
+        Me.LabelControl4.Size = New System.Drawing.Size(98, 13)
+        Me.LabelControl4.TabIndex = 8937
+        Me.LabelControl4.Text = "Overtime Period End"
+        '
+        'DEEndOt
+        '
+        Me.DEEndOt.EditValue = Nothing
+        Me.DEEndOt.Location = New System.Drawing.Point(122, 91)
+        Me.DEEndOt.Name = "DEEndOt"
+        Me.DEEndOt.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEEndOt.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.DEEndOt.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.DEEndOt.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEEndOt.Properties.Mask.EditMask = "dd\/MM\/yyyy"
+        Me.DEEndOt.Size = New System.Drawing.Size(222, 20)
+        Me.DEEndOt.TabIndex = 8935
+        '
+        'DEStartOt
+        '
+        Me.DEStartOt.EditValue = Nothing
+        Me.DEStartOt.Location = New System.Drawing.Point(122, 64)
+        Me.DEStartOt.Name = "DEStartOt"
+        Me.DEStartOt.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEStartOt.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.DEStartOt.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.DEStartOt.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEStartOt.Properties.Mask.EditMask = "dd\/MM\/yyyy"
+        Me.DEStartOt.Size = New System.Drawing.Size(222, 20)
+        Me.DEStartOt.TabIndex = 8934
+        '
+        'LabelControl5
+        '
+        Me.LabelControl5.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl5.Location = New System.Drawing.Point(12, 67)
+        Me.LabelControl5.Name = "LabelControl5"
+        Me.LabelControl5.Size = New System.Drawing.Size(104, 13)
+        Me.LabelControl5.TabIndex = 8936
+        Me.LabelControl5.Text = "Overtime Period Start"
         '
         'FormEmpPayrollPeriode
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(462, 194)
+        Me.ClientSize = New System.Drawing.Size(462, 242)
+        Me.Controls.Add(Me.LabelControl4)
+        Me.Controls.Add(Me.DEEndOt)
+        Me.Controls.Add(Me.DEStartOt)
+        Me.Controls.Add(Me.LabelControl5)
         Me.Controls.Add(Me.MEPayrollNote)
         Me.Controls.Add(Me.LabelControl3)
         Me.Controls.Add(Me.LabelControl1)
@@ -182,6 +238,10 @@ Partial Class FormEmpPayrollPeriode
         CType(Me.DEStart.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEStart.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.MEPayrollNote.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEEndOt.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEEndOt.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEStartOt.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEStartOt.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -197,4 +257,8 @@ Partial Class FormEmpPayrollPeriode
     Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LabelControl3 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents MEPayrollNote As DevExpress.XtraEditors.MemoEdit
+    Friend WithEvents LabelControl4 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents DEEndOt As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents DEStartOt As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents LabelControl5 As DevExpress.XtraEditors.LabelControl
 End Class

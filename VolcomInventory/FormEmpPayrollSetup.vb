@@ -28,6 +28,7 @@
                 TEPembilang.EditValue = data.Rows(0)("ot_reg_pembilang")
                 TEPenyebut.EditValue = data.Rows(0)("ot_reg_penyebut")
                 TEKoperasiIuran.EditValue = data.Rows(0)("koperasi_iuran")
+                DEEffDate.EditValue = data.Rows(0)("eff_trans_date")
                 MemoEdit1.Text = data.Rows(0)("note").ToString
             End If
         End If
@@ -35,7 +36,7 @@
 
     Private Sub BPick_Click(sender As Object, e As EventArgs) Handles BPick.Click
         If Not id_payroll = "-1" Then
-            Dim query As String = "UPDATE tb_emp_payroll SET ump='" & TEUMP.EditValue.ToString & "',bpjs_max='" & TEBPJSMax.EditValue.ToString & "',jp_max='" & TEJPMax.EditValue.ToString & "',ot_reg_pembilang='" & TEPembilang.EditValue.ToString & "',ot_reg_penyebut='" & TEPenyebut.EditValue.ToString & "',koperasi_iuran,note='" & addSlashes(MemoEdit1.Text) & "' WHERE id_payroll='" & id_payroll & "'"
+            Dim query As String = "UPDATE tb_emp_payroll SET ump='" & TEUMP.EditValue.ToString & "',bpjs_max='" & TEBPJSMax.EditValue.ToString & "',jp_max='" & TEJPMax.EditValue.ToString & "',ot_reg_pembilang='" & TEPembilang.EditValue.ToString & "',ot_reg_penyebut='" & TEPenyebut.EditValue.ToString & "',koperasi_iuran='" & TEKoperasiIuran.EditValue.ToString & "',note='" & addSlashes(MemoEdit1.Text) & "',eff_trans_date='" & Date.Parse(DEEffDate.EditValue.ToString).ToString("yyyy-MM-dd") & "' WHERE id_payroll='" & id_payroll & "'"
             execute_query(query, -1, True, "", "", "", "")
             FormEmpPayroll.load_payroll_detail()
             Close()

@@ -20,6 +20,7 @@ Public Class FormSalesDelOrderDet
     Public bof_column As String = get_setup_field("bof_column")
     Public bof_xls_so As String = get_setup_field("bof_xls_do")
     Dim is_save_unreg_unique As String = "-1"
+    Dim id_so_status As String = ""
 
 
     'var check qty
@@ -161,7 +162,7 @@ Public Class FormSalesDelOrderDet
         TxtOLShopNumber.Text = data.Rows(0)("sales_order_ol_shop_number").ToString
 
         'uniform
-        Dim id_so_status As String = data.Rows(0)("id_so_status").ToString
+        id_so_status = data.Rows(0)("id_so_status").ToString
         If id_so_status = "7" Then
             GroupUni.Visible = True
             TxtPeriod.Text = data.Rows(0)("period_name").ToString
@@ -171,6 +172,15 @@ Public Class FormSalesDelOrderDet
 
         'general
         viewDetail()
+        'jika dia claim : account normal - harga normal; account sale - harga sale
+        If id_so_status = "8" Then
+            For i As Integer = 0 To ((GVItemList.RowCount - 1) - GetGroupRowCount(GVItemList))
+                Dim dtp As DataTable = getNormalPrice(GVItemList.GetRowCellValue(i, "id_design").ToString)
+                GVItemList.SetRowCellValue(i, "id_design_price", dtp.Rows(0)("id_design_price").ToString)
+                GVItemList.SetRowCellValue(i, "design_price", dtp.Rows(0)("design_price"))
+                GVItemList.SetRowCellValue(i, "design_price_type", dtp.Rows(0)("design_price_type"))
+            Next
+        End If
         view_barcode_list()
         'setDefaultDrawer()
         GroupControlListItem.Enabled = True
@@ -334,7 +344,7 @@ Public Class FormSalesDelOrderDet
             If dt.Rows.Count = 0 Then
                 dt = data_not
             Else
-                dt.Merge(data_not)
+                dt.Merge(data_not, True, MissingSchemaAction.Ignore)
             End If
         End If
 
@@ -990,7 +1000,7 @@ Public Class FormSalesDelOrderDet
             stopCustom("Data not found!")
         Else
             'jika akun normal/sale
-            If id_store_type = "1" Or id_store_type = "2" Then
+            If (id_store_type = "1" Or id_store_type = "2") And id_so_status <> 8 Then
                 If id_store_type <> id_design_cat Then
                     GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "code", "")
                     GVBarcode.FocusedRowHandle = GVBarcode.RowCount - 1

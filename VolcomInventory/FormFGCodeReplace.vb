@@ -116,4 +116,32 @@
             FormMain.but_edit()
         End If
     End Sub
+
+    Private Sub BViewUnique_Click(sender As Object, e As EventArgs) Handles BViewUnique.Click
+        Dim where_string As String = ""
+
+        If GVFGCodeReplaceStore.RowCount > 0 Then
+            Cursor = Cursors.WaitCursor
+            'search id det
+            makeSafeGV(GVFGCodeReplaceStore)
+            GVFGCodeReplaceStore.ActiveFilterString = "[is_check]='yes'"
+            If GVFGCodeReplaceStore.RowCount > 0 Then
+                For i As Integer = 0 To GVFGCodeReplaceStore.RowCount - 1
+                    If i = 0 Then
+                        where_string = GVFGCodeReplaceStore.GetRowCellValue(i, "id_fg_code_replace_store").ToString
+                    Else
+                        where_string += "," & GVFGCodeReplaceStore.GetRowCellValue(i, "id_fg_code_replace_store").ToString
+                    End If
+                Next
+                makeSafeGV(GVFGCodeReplaceStore)
+                '
+                FormFGCodeReplaceView.id = where_string
+                FormFGCodeReplaceView.load_view()
+                FormFGCodeReplaceView.ShowDialog()
+                Cursor = Cursors.Default
+            Else
+                stopCustom("Please choose employee first.")
+            End If
+        End If
+    End Sub
 End Class

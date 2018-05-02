@@ -257,12 +257,12 @@
         Dim query As String = "SELECT * FROM tb_emp_assign_sch rm 
                                 LEFT JOIN
                                 (
-	                                SELECT rm.`id_report_mark`,rm.`id_report`,sch.`id_departement`,rm.`id_mark`,rm.`report_number` FROM tb_report_mark rm
-	                                INNER JOIN tb_emp_assign_sch sch ON sch.`id_assign_sch`=rm.`id_report`
-	                                WHERE rm.report_mark_type='100' AND rm.id_mark_asg='116' AND (rm.id_mark='2' OR rm.`id_mark`='3') AND sch.`id_departement`='" & id_departement & "' AND rm.id_report<='" & id_emp_assign_sch & "'
-	                                GROUP BY rm.`id_report`
+                                 SELECT rm.`id_report_mark`,rm.`id_report`,sch.`id_departement`,rm.`id_mark`,rm.`report_number` FROM tb_report_mark rm
+                                 INNER JOIN tb_emp_assign_sch sch ON sch.`id_assign_sch`=rm.`id_report`
+                                 WHERE rm.report_mark_type='100' AND rm.id_mark_asg='116' AND (rm.id_mark='2' OR rm.`id_mark`='3') AND sch.`id_departement`='" & id_departement & "' AND rm.id_report<'" & id_emp_assign_sch & "'
+                                 GROUP BY rm.`id_report`
                                 )st ON st.id_report=rm.`id_assign_sch`
-                                WHERE rm.`id_assign_sch`<='" & id_emp_assign_sch & "' AND rm.`id_departement`='" & id_departement & "' AND NOT (rm.id_report_status='5' OR rm.id_report_status='6')  AND ISNULL(st.id_report)"
+                                WHERE rm.`id_assign_sch`<'" & id_emp_assign_sch & "' AND rm.`id_departement`='" & id_departement & "' AND NOT (rm.id_report_status='5' OR rm.id_report_status='6')  AND ISNULL(st.id_report)"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         If data.Rows.Count > 0 Then
             infoCustom("Please process proposed schdule before this.")
@@ -272,5 +272,9 @@
             FormReportMark.is_view = is_view
             FormReportMark.ShowDialog()
         End If
+    End Sub
+
+    Private Sub PanelControl1_Paint(sender As Object, e As PaintEventArgs) Handles PanelControl1.Paint
+
     End Sub
 End Class

@@ -1809,7 +1809,7 @@ Module Common
     Public Function get_company_by_code(ByVal code_par As String, ByVal cond_par As String)
         code_par = addSlashes(code_par)
         Dim query As String = "SELECT comp.id_drawer_def,comp.comp_commission,comp.id_comp as id_comp,comp.comp_number as comp_number,comp.comp_name as comp_name,comp.address_primary as address_primary,comp.is_active as is_active, comp.id_comp_cat, comp.id_wh_type, IFNULL(comp.id_commerce_type,1) AS `id_commerce_type`, 
-        cont.id_comp_contact, getCompByContact(cont.id_comp_contact,4) AS `id_wh_drawer`,getCompByContact(cont.id_comp_contact,6) AS `id_wh_rack`, getCompByContact(cont.id_comp_contact,7) AS `id_wh_locator`, cont.contact_person, cont.contact_number, cont.is_default "
+        cont.id_comp_contact, getCompByContact(cont.id_comp_contact,4) AS `id_wh_drawer`,getCompByContact(cont.id_comp_contact,6) AS `id_wh_rack`, getCompByContact(cont.id_comp_contact,7) AS `id_wh_locator`, cont.contact_person, cont.contact_number, cont.is_default,comp.id_store_type "
         query += "FROM tb_m_comp comp "
         query += "INNER JOIN tb_m_comp_contact cont ON cont.id_comp = comp.id_comp AND cont.is_default='1' "
         query += "WHERE comp.comp_number='" + code_par + "' "
@@ -2321,7 +2321,19 @@ Module Common
             Console.WriteLine(ex.ToString)
         End Try
     End Sub
-
+    'view repository lookupedit
+    Public Sub viewLookupRepositoryQuery(ByVal LE As Repository.RepositoryItemLookUpEdit, ByVal query As String, ByVal index_selected As Integer, ByVal display As String, ByVal value As String)
+        Try
+            Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+            LE.DataSource = Nothing
+            LE.DataSource = data
+            LE.DisplayMember = display
+            LE.ValueMember = value
+        Catch ex As Exception
+            'errorConnection()
+            Console.WriteLine(ex.ToString)
+        End Try
+    End Sub
     'View Lookup with Query
     Public Sub viewSearchLookupQuery(ByVal SLE As DevExpress.XtraEditors.SearchLookUpEdit, ByVal query As String, ByVal index_selected As String, ByVal display As String, ByVal value As String)
         'Try
@@ -5202,5 +5214,15 @@ WHERE b.report_mark_type='" & report_mark_type & "' ORDER BY b.id_report_status,
         age = start.Year - dob.Year
         If (dob > start.AddYears(-age)) Then age -= 1
         Return age
+    End Function
+
+
+    Public Function getNormalPrice(ByVal id_design_par As String)
+        Dim query As String = "SELECT * FROM tb_m_design_price p
+        INNER JOIN tb_lookup_design_price_type pt ON pt.id_design_price_type = p.id_design_price_type
+        INNER JOIN tb_lookup_design_cat cat ON cat.id_design_cat = pt.id_design_cat
+        WHERE p.id_design=" + id_design_par + " AND p.id_design_price_type=1 "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        Return data
     End Function
 End Module

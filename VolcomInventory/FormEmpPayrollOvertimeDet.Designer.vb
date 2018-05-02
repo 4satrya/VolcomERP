@@ -23,10 +23,10 @@ Partial Class FormEmpPayrollOvertimeDet
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormEmpPayrollOvertimeDet))
         Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
         Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
-        Me.TEPoint = New DevExpress.XtraEditors.TextEdit()
         Me.BCancel = New DevExpress.XtraEditors.SimpleButton()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.BSave = New DevExpress.XtraEditors.SimpleButton()
+        Me.TEPoint = New DevExpress.XtraEditors.TextEdit()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.TEEmployeeCode = New DevExpress.XtraEditors.TextEdit()
         Me.BPickEmployee = New DevExpress.XtraEditors.SimpleButton()
         Me.TEEmployeeName = New DevExpress.XtraEditors.TextEdit()
@@ -105,6 +105,28 @@ Partial Class FormEmpPayrollOvertimeDet
         Me.PanelControl3.Size = New System.Drawing.Size(721, 39)
         Me.PanelControl3.TabIndex = 6
         '
+        'BCancel
+        '
+        Me.BCancel.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BCancel.ImageIndex = 5
+        Me.BCancel.ImageList = Me.LargeImageCollection
+        Me.BCancel.Location = New System.Drawing.Point(571, 2)
+        Me.BCancel.Name = "BCancel"
+        Me.BCancel.Size = New System.Drawing.Size(73, 35)
+        Me.BCancel.TabIndex = 10
+        Me.BCancel.Text = "Cancel"
+        '
+        'BSave
+        '
+        Me.BSave.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BSave.ImageIndex = 7
+        Me.BSave.ImageList = Me.LargeImageCollection
+        Me.BSave.Location = New System.Drawing.Point(644, 2)
+        Me.BSave.Name = "BSave"
+        Me.BSave.Size = New System.Drawing.Size(75, 35)
+        Me.BSave.TabIndex = 9
+        Me.BSave.Text = "Save"
+        '
         'TEPoint
         '
         Me.TEPoint.EditValue = ""
@@ -121,17 +143,6 @@ Partial Class FormEmpPayrollOvertimeDet
         Me.TEPoint.Size = New System.Drawing.Size(118, 20)
         Me.TEPoint.TabIndex = 153
         '
-        'BCancel
-        '
-        Me.BCancel.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BCancel.ImageIndex = 5
-        Me.BCancel.ImageList = Me.LargeImageCollection
-        Me.BCancel.Location = New System.Drawing.Point(571, 2)
-        Me.BCancel.Name = "BCancel"
-        Me.BCancel.Size = New System.Drawing.Size(73, 35)
-        Me.BCancel.TabIndex = 10
-        Me.BCancel.Text = "Cancel"
-        '
         'Label2
         '
         Me.Label2.AutoSize = True
@@ -140,17 +151,6 @@ Partial Class FormEmpPayrollOvertimeDet
         Me.Label2.Size = New System.Drawing.Size(31, 13)
         Me.Label2.TabIndex = 152
         Me.Label2.Text = "Point"
-        '
-        'BSave
-        '
-        Me.BSave.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BSave.ImageIndex = 7
-        Me.BSave.ImageList = Me.LargeImageCollection
-        Me.BSave.Location = New System.Drawing.Point(644, 2)
-        Me.BSave.Name = "BSave"
-        Me.BSave.Size = New System.Drawing.Size(75, 35)
-        Me.BSave.TabIndex = 9
-        Me.BSave.Text = "Save"
         '
         'TEEmployeeCode
         '

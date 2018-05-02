@@ -58,13 +58,6 @@
         BtnSave.Enabled = False
         PanelControlNav.Enabled = False
 
-        'ATTACH
-        If check_attach_report_status(id_report_status, "126", id_prod_over_memo) Then
-            BtnAttachment.Enabled = True
-        Else
-            BtnAttachment.Enabled = False
-        End If
-
         If check_print_report_status(id_report_status) Then
             BtnPrint.Enabled = True
         Else
@@ -73,6 +66,11 @@
 
         If is_view = "1" Then
             BtnSave.Visible = False
+        End If
+        'if completed
+        If id_report_status = "6" Then
+            LExpired.Visible = True
+            DEExpired.Visible = True
         End If
     End Sub
 
@@ -94,7 +92,7 @@
         Cursor = Cursors.WaitCursor
         FormDocumentUpload.report_mark_type = "126"
         FormDocumentUpload.id_report = id_prod_over_memo
-        If is_view = "1" Then
+        If is_view = "1" Or id_report_status = "6" Then
             FormDocumentUpload.is_view = "1"
         End If
         FormDocumentUpload.ShowDialog()

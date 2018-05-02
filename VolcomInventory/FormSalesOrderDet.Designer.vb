@@ -36,6 +36,8 @@ Partial Class FormSalesOrderDet
         Me.BtnBrowseContactTo = New DevExpress.XtraEditors.SimpleButton()
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
         Me.PanelControlTopMain = New DevExpress.XtraEditors.PanelControl()
+        Me.TxtOLShopNumber = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl10 = New DevExpress.XtraEditors.LabelControl()
         Me.LEStatusSO = New DevExpress.XtraEditors.LookUpEdit()
         Me.LabelControl8 = New DevExpress.XtraEditors.LabelControl()
         Me.PanelControlTopRight = New DevExpress.XtraEditors.PanelControl()
@@ -102,8 +104,6 @@ Partial Class FormSalesOrderDet
         Me.GroupUni = New DevExpress.XtraEditors.GroupControl()
         Me.LEUniType = New DevExpress.XtraEditors.LookUpEdit()
         Me.LEPeriodx = New DevExpress.XtraEditors.LookUpEdit()
-        Me.LabelControl10 = New DevExpress.XtraEditors.LabelControl()
-        Me.TxtOLShopNumber = New DevExpress.XtraEditors.TextEdit()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
         CType(Me.PanelControlTopLeft, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -116,6 +116,7 @@ Partial Class FormSalesOrderDet
         CType(Me.TxtCodeCompTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControlTopMain, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlTopMain.SuspendLayout()
+        CType(Me.TxtOLShopNumber.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LEStatusSO.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControlTopRight, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlTopRight.SuspendLayout()
@@ -144,7 +145,6 @@ Partial Class FormSalesOrderDet
         Me.GroupUni.SuspendLayout()
         CType(Me.LEUniType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LEPeriodx.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TxtOLShopNumber.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupGeneralHeader
@@ -335,6 +335,23 @@ Partial Class FormSalesOrderDet
         Me.PanelControlTopMain.Name = "PanelControlTopMain"
         Me.PanelControlTopMain.Size = New System.Drawing.Size(254, 132)
         Me.PanelControlTopMain.TabIndex = 8897
+        '
+        'TxtOLShopNumber
+        '
+        Me.TxtOLShopNumber.Enabled = False
+        Me.TxtOLShopNumber.Location = New System.Drawing.Point(72, 35)
+        Me.TxtOLShopNumber.Name = "TxtOLShopNumber"
+        Me.TxtOLShopNumber.Size = New System.Drawing.Size(166, 20)
+        Me.TxtOLShopNumber.TabIndex = 8896
+        '
+        'LabelControl10
+        '
+        Me.LabelControl10.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl10.Location = New System.Drawing.Point(6, 38)
+        Me.LabelControl10.Name = "LabelControl10"
+        Me.LabelControl10.Size = New System.Drawing.Size(62, 13)
+        Me.LabelControl10.TabIndex = 8895
+        Me.LabelControl10.Text = "OL Store No."
         '
         'LEStatusSO
         '
@@ -1047,23 +1064,6 @@ Partial Class FormSalesOrderDet
         Me.LEPeriodx.Size = New System.Drawing.Size(172, 20)
         Me.LEPeriodx.TabIndex = 8901
         '
-        'LabelControl10
-        '
-        Me.LabelControl10.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl10.Location = New System.Drawing.Point(6, 38)
-        Me.LabelControl10.Name = "LabelControl10"
-        Me.LabelControl10.Size = New System.Drawing.Size(62, 13)
-        Me.LabelControl10.TabIndex = 8895
-        Me.LabelControl10.Text = "OL Store No."
-        '
-        'TxtOLShopNumber
-        '
-        Me.TxtOLShopNumber.Enabled = False
-        Me.TxtOLShopNumber.Location = New System.Drawing.Point(72, 35)
-        Me.TxtOLShopNumber.Name = "TxtOLShopNumber"
-        Me.TxtOLShopNumber.Size = New System.Drawing.Size(166, 20)
-        Me.TxtOLShopNumber.TabIndex = 8896
-        '
         'FormSalesOrderDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1093,6 +1093,7 @@ Partial Class FormSalesOrderDet
         CType(Me.PanelControlTopMain, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControlTopMain.ResumeLayout(False)
         Me.PanelControlTopMain.PerformLayout()
+        CType(Me.TxtOLShopNumber.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LEStatusSO.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControlTopRight, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControlTopRight.ResumeLayout(False)
@@ -1125,7 +1126,6 @@ Partial Class FormSalesOrderDet
         Me.GroupUni.PerformLayout()
         CType(Me.LEUniType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LEPeriodx.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TxtOLShopNumber.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

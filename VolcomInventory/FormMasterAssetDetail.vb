@@ -1,6 +1,10 @@
 ﻿Public Class FormMasterAssetDetail
     Public id_asset As String = "-1"
     Private Sub FormMasterAssetDetail_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        load_form()
+    End Sub
+
+    Sub load_form()
         load_cat()
         load_dept()
         load_user()
@@ -25,20 +29,29 @@
             LEAssetCat.Enabled = True
             LEDept.Enabled = True
             DERecDate.Properties.ReadOnly = False
+            BSetNonActive.Visible = False
         Else 'edit
-            Dim query As String = "SELECT a.*,emp_cre.employee_name AS emp_created,emp_last.employee_name AS emp_last_upd
+            Dim query As String = "SELECT a.asset_location,a.asset_code,a.asset_code_old,a.asset_desc,pod.id_asset_cat,pod.id_departement,a.id_employee
+                                    ,po.asset_po_no,pod.qty as po_qty,po.asset_po_date,pod.value AS po_value
+                                    ,recd.qty_rec,recd.value_rec ,rec.asset_rec_date,a.age,a.date_created,a.date_last_upd
+                                    ,pod.vendor_sku,emp_cre.employee_name AS emp_created,emp_last.employee_name AS emp_last_upd
                                     FROM tb_a_asset a
+                                    INNER JOIN tb_a_asset_rec_det recd ON recd.id_asset_rec_det=a.id_asset_rec_det
+                                    INNER JOIN tb_a_asset_rec rec ON rec.id_asset_rec=recd.id_asset_rec
+                                    INNER JOIN tb_a_asset_po_det pod ON pod.id_asset_po_det=recd.`id_asset_po_det`
+                                    INNER JOIN tb_a_asset_po po ON po.id_asset_po=pod.id_asset_po
                                     LEFT JOIN tb_m_user usr_cre ON usr_cre.id_user=a.id_user_created
                                     LEFT JOIN tb_m_employee emp_cre ON emp_cre.id_employee=usr_cre.id_employee
-                                    LEFT JOIN tb_m_user usr_last ON usr_cre.id_user=a.id_user_last_upd
+                                    LEFT JOIN tb_m_user usr_last ON usr_last.id_user=a.id_user_last_upd
                                     LEFT JOIN tb_m_employee emp_last ON emp_last.id_employee=usr_last.id_employee
                                     WHERE a.id_asset='" & id_asset & "'"
             Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
             '
             TECode.Text = data.Rows(0)("asset_code").ToString
             TEOldCode.Text = data.Rows(0)("asset_code_old").ToString
-            TEVendorCode.Text = data.Rows(0)("vendor_code").ToString
+            TEVendorCode.Text = data.Rows(0)("vendor_sku").ToString
             TEDesc.Text = data.Rows(0)("asset_desc").ToString
+            TELocation.Text = data.Rows(0)("asset_location").ToString
             LEAssetCat.ItemIndex = LEAssetCat.Properties.GetDataSourceRowIndex("id_asset_cat", data.Rows(0)("id_asset_cat").ToString)
             LEAssetCat.Enabled = False
             '
@@ -49,15 +62,15 @@
                 LEUser.ItemIndex = LEUser.Properties.GetDataSourceRowIndex("id_employee", data.Rows(0)("id_employee").ToString)
             End If
             '
-            TEPONumber.Text = data.Rows(0)("po_no").ToString
+            TEPONumber.Text = data.Rows(0)("asset_po_no").ToString
             TEPOQty.EditValue = data.Rows(0)("po_qty")
-            DEPODate.EditValue = data.Rows(0)("po_date")
+            DEPODate.EditValue = data.Rows(0)("asset_po_date")
             TEPOValue.EditValue = data.Rows(0)("po_value")
             '
-            TERecQty.EditValue = data.Rows(0)("rec_qty")
-            DERecDate.EditValue = data.Rows(0)("rec_date")
+            TERecQty.EditValue = data.Rows(0)("qty_rec")
+            DERecDate.EditValue = data.Rows(0)("asset_rec_date")
             DERecDate.Properties.ReadOnly = True
-            TERecValue.EditValue = data.Rows(0)("rec_value")
+            TERecValue.EditValue = data.Rows(0)("value_rec")
             '
             TEAge.EditValue = data.Rows(0)("age")
             '
@@ -183,12 +196,8 @@
     End Sub
 
     Private Sub BSave_Click(sender As Object, e As EventArgs) Handles BSave.Click
-        generate_code()
-        Dim code As String = addSlashes(TECode.Text)
         Dim code_old As String = addSlashes(TEOldCode.Text)
-        Dim vendor_code As String = addSlashes(TEVendorCode.Text)
         Dim desc As String = addSlashes(TEDesc.Text)
-        Dim asset_cat As String = LEAssetCat.EditValue.ToString
         '
         Dim id_emp As String = "NULL"
         If LEUser.Text = "" Then
@@ -197,28 +206,19 @@
             id_emp = "'" & LEUser.EditValue.ToString & "'"
         End If
         '
-        Dim id_dep As String = LEDept.EditValue.ToString
-        Dim po_no As String = addSlashes(TEPONumber.Text)
-        Dim po_date As String = Date.Parse(DEPODate.EditValue.ToString).ToString("yyyy-MM-dd")
-        Dim po_qty As String = TEPOQty.EditValue.ToString
-        Dim po_value As String = decimalSQL(TEPOValue.EditValue.ToString)
-        '
-        Dim rec_date As String = Date.Parse(DERecDate.EditValue.ToString).ToString("yyyy-MM-dd")
-        Dim rec_qty As String = TEPOQty.EditValue.ToString
-        Dim rec_value As String = decimalSQL(TERecValue.EditValue.ToString)
-        '
         Dim age As String = TEAge.EditValue.ToString
+        Dim asset_location As String = TELocation.Text
         '
         If id_asset = "-1" Then 'new
-            Dim query As String = "INSERT INTO tb_a_asset(id_asset_cat,asset_code_old,asset_code,vendor_code,asset_desc,id_departement,id_employee,po_no,po_qty,po_value,po_date,rec_date,rec_qty,rec_value,age,id_user_created,id_user_last_upd,date_created,date_last_upd)
-                                    VALUES('" & asset_cat & "','" & code_old & "','" & code & "','" & vendor_code & "','" & desc & "','" & id_dep & "'," & id_emp & ",'" & po_no & "','" & po_qty & "','" & po_value & "','" & po_date & "','" & rec_date & "','" & rec_qty & "','" & rec_value & "','" & age & "','" & id_user & "','" & id_user & "',NOW(),NOW()); SELECT LAST_INSERT_ID(); "
-            id_asset = execute_query(query, 0, True, "", "", "", "")
+            'Dim query As String = "INSERT INTO tb_a_asset(id_asset_cat,asset_code_old,asset_code,vendor_code,asset_desc,id_departement,id_employee,po_no,po_qty,po_value,po_date,rec_date,rec_qty,rec_value,age,id_user_created,id_user_last_upd,date_created,date_last_upd)
+            '                        VALUES('" & asset_cat & "','" & code_old & "','" & code & "','" & vendor_code & "','" & desc & "','" & id_dep & "'," & id_emp & ",'" & po_no & "','" & po_qty & "','" & po_value & "','" & po_date & "','" & rec_date & "','" & rec_qty & "','" & rec_value & "','" & age & "','" & id_user & "','" & id_user & "',NOW(),NOW()); SELECT LAST_INSERT_ID(); "
+            'id_asset = execute_query(query, 0, True, "", "", "", "")
 
-            FormMasterAsset.load_asset()
-            FormMasterAsset.GVAsset.FocusedRowHandle = find_row(FormMasterAsset.GVAsset, "id_asset", id_asset)
-            Close()
+            'FormMasterAsset.load_asset()
+            'FormMasterAsset.GVAsset.FocusedRowHandle = find_row(FormMasterAsset.GVAsset, "id_asset", id_asset)
+            'Close()
         Else
-            Dim query As String = "UPDATE tb_a_asset SET asset_code_old='" & code_old & "',vendor_code='" & vendor_code & "',id_employee=" & id_emp & ",asset_desc='" & desc & "',po_no='" & po_no & "',po_qty='" & po_qty & "',po_value='" & po_value & "',po_date='" & po_date & "',rec_date='" & rec_date & "',rec_qty='" & rec_qty & "',rec_value='" & rec_value & "',age='" & age & "',id_user_last_upd='" & id_user & "',date_last_upd=NOW()
+            Dim query As String = "UPDATE tb_a_asset SET asset_code_old='" & code_old & "',id_employee=" & id_emp & ",asset_desc='" & desc & "',asset_location='" & asset_location & "',age='" & age & "',id_user_last_upd='" & id_user & "',date_last_upd=NOW()
                                     WHERE id_asset='" & id_asset & "'"
 
             execute_non_query(query, True, "", "", "", "")
@@ -230,5 +230,11 @@
 
     Private Sub BNothingUser_Click(sender As Object, e As EventArgs) Handles BNothingUser.Click
         LEUser.ItemIndex = 0
+    End Sub
+
+    Private Sub BSetNonActive_Click(sender As Object, e As EventArgs) Handles BSetNonActive.Click
+        Dim query As String = "UPDATE tb_a_asset SET is_active='2',id_user_last_upd='" & id_user & "',date_last_upd=NOW() WHERE id_asset='" & id_asset & "'"
+        execute_non_query(query, True, "", "", "", "")
+        load_form()
     End Sub
 End Class

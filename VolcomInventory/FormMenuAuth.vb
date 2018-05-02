@@ -30,13 +30,39 @@
 
     Sub allowed()
         If type = "1" Then
+            'return non stock
             FormSalesReturnDetNew.allow = True
+        ElseIf type = "2" Then
+            'show cost - report stock
+            If FormFGStock.XTCSOH.SelectedTabPageIndex = 0 Then
+                If FormFGStock.BGVFGStock.RowCount > 0 Then
+                    FormFGStock.show_cost = True
+                    FormFGStock.BGVFGStock.Columns("Unit Cost").VisibleIndex = 8
+                    FormFGStock.BGVFGStock.Columns("Unit Cost").OptionsColumn.ShowInCustomizationForm = True
+                    FormFGStock.BGVFGStock.Columns("Amount Cost Total").VisibleIndex = 70
+                    FormFGStock.BGVFGStock.Columns("Amount Cost Total").OptionsColumn.ShowInCustomizationForm = True
+                Else
+                    FormFGStock.show_cost = True
+                End If
+            ElseIf FormFGStock.XTCSOH.SelectedTabPageIndex = 1 Then
+                If FormFGStock.BGVStockBarcode.RowCount > 0 Then
+                    FormFGStock.show_cost = True
+                    FormFGStock.BGVStockBarcode.Columns("design_cop").VisibleIndex = 6
+                    FormFGStock.BGVStockBarcode.Columns("design_cop").OptionsColumn.ShowInCustomizationForm = True
+                Else
+                    FormFGStock.show_cost = True
+                End If
+            End If
         End If
     End Sub
 
     Sub rejected()
         If type = "1" Then
+            'return non stock
             FormSalesReturnDetNew.allow = False
+        ElseIf type = "2" Then
+            'show cost - report stock
+            'no action
         End If
     End Sub
 

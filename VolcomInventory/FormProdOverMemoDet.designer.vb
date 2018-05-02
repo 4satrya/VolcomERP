@@ -21,7 +21,7 @@ Partial Class FormProdOverMemoDet
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormProdOverMemoDet))
         Me.GroupControlTop = New DevExpress.XtraEditors.GroupControl()
-        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
+        Me.LExpired = New DevExpress.XtraEditors.LabelControl()
         Me.DEExpired = New DevExpress.XtraEditors.DateEdit()
         Me.DECreated = New DevExpress.XtraEditors.DateEdit()
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
@@ -36,6 +36,7 @@ Partial Class FormProdOverMemoDet
         Me.GridColumnCode = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnDescription = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnRemark = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnQty = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControlNav = New DevExpress.XtraEditors.PanelControl()
         Me.BtnDelete = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnAdd = New DevExpress.XtraEditors.SimpleButton()
@@ -51,7 +52,6 @@ Partial Class FormProdOverMemoDet
         Me.PanelBottomRight = New DevExpress.XtraEditors.PanelControl()
         Me.LEReportStatus = New DevExpress.XtraEditors.LookUpEdit()
         Me.LabelControl21 = New DevExpress.XtraEditors.LabelControl()
-        Me.GridColumnQty = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GroupControlTop, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControlTop.SuspendLayout()
         CType(Me.DEExpired.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -78,7 +78,7 @@ Partial Class FormProdOverMemoDet
         'GroupControlTop
         '
         Me.GroupControlTop.CaptionLocation = DevExpress.Utils.Locations.Left
-        Me.GroupControlTop.Controls.Add(Me.LabelControl4)
+        Me.GroupControlTop.Controls.Add(Me.LExpired)
         Me.GroupControlTop.Controls.Add(Me.DEExpired)
         Me.GroupControlTop.Controls.Add(Me.DECreated)
         Me.GroupControlTop.Controls.Add(Me.LabelControl3)
@@ -90,13 +90,14 @@ Partial Class FormProdOverMemoDet
         Me.GroupControlTop.Size = New System.Drawing.Size(979, 83)
         Me.GroupControlTop.TabIndex = 0
         '
-        'LabelControl4
+        'LExpired
         '
-        Me.LabelControl4.Location = New System.Drawing.Point(675, 46)
-        Me.LabelControl4.Name = "LabelControl4"
-        Me.LabelControl4.Size = New System.Drawing.Size(62, 13)
-        Me.LabelControl4.TabIndex = 6
-        Me.LabelControl4.Text = "Expired Date"
+        Me.LExpired.Location = New System.Drawing.Point(675, 46)
+        Me.LExpired.Name = "LExpired"
+        Me.LExpired.Size = New System.Drawing.Size(62, 13)
+        Me.LExpired.TabIndex = 6
+        Me.LExpired.Text = "Expired Date"
+        Me.LExpired.Visible = False
         '
         'DEExpired
         '
@@ -110,6 +111,7 @@ Partial Class FormProdOverMemoDet
         Me.DEExpired.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.DEExpired.Size = New System.Drawing.Size(211, 20)
         Me.DEExpired.TabIndex = 5
+        Me.DEExpired.Visible = False
         '
         'DECreated
         '
@@ -128,9 +130,9 @@ Partial Class FormProdOverMemoDet
         '
         Me.LabelControl3.Location = New System.Drawing.Point(675, 20)
         Me.LabelControl3.Name = "LabelControl3"
-        Me.LabelControl3.Size = New System.Drawing.Size(65, 13)
+        Me.LabelControl3.Size = New System.Drawing.Size(23, 13)
         Me.LabelControl3.TabIndex = 3
-        Me.LabelControl3.Text = "Created Date"
+        Me.LabelControl3.Text = "Date"
         '
         'TxtMemoNumber
         '
@@ -173,6 +175,7 @@ Partial Class FormProdOverMemoDet
         Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnId, Me.GridColumnIdPO, Me.GridColumnPONumber, Me.GridColumnCode, Me.GridColumnDescription, Me.GridColumnRemark, Me.GridColumnQty})
         Me.GVData.GridControl = Me.GCData
         Me.GVData.Name = "GVData"
+        Me.GVData.OptionsView.ShowFooter = True
         Me.GVData.OptionsView.ShowGroupPanel = False
         '
         'GridColumnId
@@ -227,6 +230,15 @@ Partial Class FormProdOverMemoDet
         Me.GridColumnRemark.Visible = True
         Me.GridColumnRemark.VisibleIndex = 4
         Me.GridColumnRemark.Width = 260
+        '
+        'GridColumnQty
+        '
+        Me.GridColumnQty.Caption = "Qty"
+        Me.GridColumnQty.FieldName = "qty"
+        Me.GridColumnQty.Name = "GridColumnQty"
+        Me.GridColumnQty.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty", "{0:N0}")})
+        Me.GridColumnQty.Visible = True
+        Me.GridColumnQty.VisibleIndex = 3
         '
         'PanelControlNav
         '
@@ -384,14 +396,6 @@ Partial Class FormProdOverMemoDet
         Me.LabelControl21.TabIndex = 144
         Me.LabelControl21.Text = "Status"
         '
-        'GridColumnQty
-        '
-        Me.GridColumnQty.Caption = "Qty"
-        Me.GridColumnQty.FieldName = "qty"
-        Me.GridColumnQty.Name = "GridColumnQty"
-        Me.GridColumnQty.Visible = True
-        Me.GridColumnQty.VisibleIndex = 3
-        '
         'FormProdOverMemoDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -440,7 +444,7 @@ Partial Class FormProdOverMemoDet
     Friend WithEvents MENote As DevExpress.XtraEditors.MemoEdit
     Friend WithEvents TxtMemoNumber As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
-    Friend WithEvents LabelControl4 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LExpired As DevExpress.XtraEditors.LabelControl
     Friend WithEvents DEExpired As DevExpress.XtraEditors.DateEdit
     Friend WithEvents DECreated As DevExpress.XtraEditors.DateEdit
     Friend WithEvents LabelControl3 As DevExpress.XtraEditors.LabelControl

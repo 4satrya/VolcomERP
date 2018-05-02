@@ -8,7 +8,7 @@
     End Sub
 
     Sub viewSalesReturnOrder()
-        Dim query As String = "SELECT a.id_sales_return_order, a.id_store_contact_to, (d.comp_name) AS store_name_to,a.id_report_status, f.report_status, "
+        Dim query As String = "SELECT a.id_sales_return_order, a.id_store_contact_to, CONCAT(d.comp_number,' - ',d.comp_name) AS store_name_to,a.id_report_status, f.report_status, "
         query += "a.sales_return_order_note, a.sales_return_order_note, a.sales_return_order_number, "
         query += "DATE_FORMAT(a.sales_return_order_date,'%d %M %Y') AS sales_return_order_date, "
         query += "DATE_FORMAT(a.sales_return_order_est_date,'%d %M %Y') AS sales_return_order_est_date, a.id_prepare_status, ps.prepare_status "

@@ -8,6 +8,16 @@
         TxtAllowTrans.EditValue = 0
         TxtAllowHouse.EditValue = 0
         TxtAllowCar.EditValue = 0
+        TETotal.EditValue = 0
+    End Sub
+
+    Sub calculate()
+        Try
+            Dim total As Integer = TxtAllowCar.EditValue + TxtAllowHouse.EditValue + TxtAllowJob.EditValue + TxtAllowMeal.EditValue + TxtAllowTrans.EditValue + TxtBasicSalary.EditValue
+            TETotal.EditValue = total
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles BtnSave.Click
@@ -39,5 +49,29 @@
 
     Private Sub FormMasterEmployeeSalary_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
         Dispose()
+    End Sub
+
+    Private Sub TxtBasicSalary_EditValueChanged(sender As Object, e As EventArgs) Handles TxtBasicSalary.EditValueChanged
+        calculate()
+    End Sub
+
+    Private Sub TxtAllowJob_EditValueChanged(sender As Object, e As EventArgs) Handles TxtAllowJob.EditValueChanged
+        calculate()
+    End Sub
+
+    Private Sub TxtAllowMeal_EditValueChanged(sender As Object, e As EventArgs) Handles TxtAllowMeal.EditValueChanged
+        calculate()
+    End Sub
+
+    Private Sub TxtAllowTrans_EditValueChanged(sender As Object, e As EventArgs) Handles TxtAllowTrans.EditValueChanged
+        calculate()
+    End Sub
+
+    Private Sub TxtAllowHouse_EditValueChanged(sender As Object, e As EventArgs) Handles TxtAllowHouse.EditValueChanged
+        calculate()
+    End Sub
+
+    Private Sub TxtAllowCar_EditValueChanged(sender As Object, e As EventArgs) Handles TxtAllowCar.EditValueChanged
+        calculate()
     End Sub
 End Class

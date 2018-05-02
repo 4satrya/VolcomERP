@@ -86,7 +86,7 @@
 
         'prepare query
         Dim query_c As ClassSalesReturn = New ClassSalesReturn()
-        Dim data As DataTable = query_c.transactionList("AND (a.id_ret_type=1 OR a.id_ret_type=3) AND (a.sales_return_date>='" + date_from_selected + "' AND a.sales_return_date<='" + date_until_selected + "') ", "1")
+        Dim data As DataTable = query_c.transactionList("AND (a.id_ret_type!=2) AND (a.sales_return_date>='" + date_from_selected + "' AND a.sales_return_date<='" + date_until_selected + "') ", "1")
         GCSalesReturn.DataSource = data
         Cursor = Cursors.Default
     End Sub
@@ -112,7 +112,7 @@
 
         'prepare query
         Dim query_c As ClassSalesReturn = New ClassSalesReturn()
-        Dim data As DataTable = query_c.transactionList("AND a.id_ret_type=2 AND (a.sales_return_date>='" + date_from_selected + "' AND a.sales_return_date<='" + date_until_selected + "') ", "1")
+        Dim data As DataTable = query_c.transactionListNSI("AND a.id_ret_type=2 AND (a.sales_return_date>='" + date_from_selected + "' AND a.sales_return_date<='" + date_until_selected + "') ", "1")
         GCNonStock.DataSource = data
         Cursor = Cursors.Default
     End Sub

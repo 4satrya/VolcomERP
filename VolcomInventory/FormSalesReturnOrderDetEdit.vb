@@ -55,26 +55,30 @@
             Else
                 Dim qty As Integer = TxtAdd.EditValue
                 Dim dt As DataTable = execute_query("CALL view_stock_fg('" + FormSalesReturnOrderDet.id_comp + "', '" + FormSalesReturnOrderDet.id_wh_locator + "', '" + FormSalesReturnOrderDet.id_wh_rack + "', '" + FormSalesReturnOrderDet.id_wh_drawer + "', '" + id_product + "', '4', '9999-01-01') ", -1, True, "", "", "", "")
-                Dim qty_limit As Integer = dt.Rows(0)("qty_all_product")
-                If qty > qty_limit Then
-                    stopCustom("Can't exceed " + qty_limit.ToString)
+                If dt.Rows.Count > 0 Then
+                    Dim qty_limit As Integer = dt.Rows(0)("qty_all_product")
+                    If qty > qty_limit Then
+                        stopCustom("Can't exceed " + qty_limit.ToString)
+                    Else
+                        Dim query_ins = "INSERT INTO tb_sales_return_order_det(id_sales_return_order, id_product, id_return_cat, id_design_price, design_price, sales_return_order_det_qty, sales_return_order_det_note) VALUES 
+                        ('" + FormSalesReturnOrderDet.id_sales_return_order + "','" + id_product + "','1', '" + dt.Rows(0)("id_design_price_retail").ToString + "','" + decimalSQL(dt.Rows(0)("design_price_retail").ToString) + "','" + decimalSQL(qty.ToString) + "','') "
+                        execute_non_query(query_ins, True, "", "", "", "")
+                        FormSalesReturnOrderDet.viewDetail()
+
+                        'log
+                        Dim ret As New ClassSalesReturn()
+                        ret.orderLog(FormSalesReturnOrderDet.id_sales_return_order, "1", addSlashes(TxtCode.Text) + " " + addSlashes(TxtDesign.Text) + " : " + TxtAdd.Text.ToString)
+
+                        'reset
+                        TxtCode.Text = ""
+                        TxtDesign.Text = ""
+                        TxtSize.Text = ""
+                        TxtAdd.EditValue = 0
+                        id_product = "-1"
+                        TxtCode.Focus()
+                    End If
                 Else
-                    Dim query_ins = "INSERT INTO tb_sales_return_order_det(id_sales_return_order, id_product, id_return_cat, id_design_price, design_price, sales_return_order_det_qty, sales_return_order_det_note) VALUES 
-                    ('" + FormSalesReturnOrderDet.id_sales_return_order + "','" + id_product + "','1', '" + dt.Rows(0)("id_design_price_retail").ToString + "','" + decimalSQL(dt.Rows(0)("design_price_retail").ToString) + "','" + decimalSQL(qty.ToString) + "','') "
-                    execute_non_query(query_ins, True, "", "", "", "")
-                    FormSalesReturnOrderDet.viewDetail()
-
-                    'log
-                    Dim ret As New ClassSalesReturn()
-                    ret.orderLog(FormSalesReturnOrderDet.id_sales_return_order, "1", addSlashes(TxtCode.Text) + " " + addSlashes(TxtDesign.Text) + " : " + TxtAdd.Text.ToString)
-
-                    'reset
-                    TxtCode.Text = ""
-                    TxtDesign.Text = ""
-                    TxtSize.Text = ""
-                    TxtAdd.EditValue = 0
-                    id_product = "-1"
-                    TxtCode.Focus()
+                    stopCustom("There is no available stock")
                 End If
             End If
         End If

@@ -486,7 +486,7 @@ Partial Class FormEmpInitialize
         '
         'BandedGridColumnAllowCar
         '
-        Me.BandedGridColumnAllowCar.Caption = "Car Allowance"
+        Me.BandedGridColumnAllowCar.Caption = "Attendance Allowance"
         Me.BandedGridColumnAllowCar.DisplayFormat.FormatString = "{0:n2}"
         Me.BandedGridColumnAllowCar.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.BandedGridColumnAllowCar.FieldName = "allow_car"

@@ -59,7 +59,7 @@
             stopCustom("Please select order first.")
             GVEmployee.ActiveFilterString = ""
         Else
-            query = "INSERT INTO tb_emp_payroll_det(id_payroll,id_employee,id_salary,workdays) VALUES"
+            query = "INSERT INTO tb_emp_payroll_det(id_payroll,id_employee,id_salary,workdays,actual_workdays) VALUES"
             For i As Integer = 0 To ((GVEmployee.RowCount - 1) - GetGroupRowCount(GVEmployee))
                 Dim id_employee As String = GVEmployee.GetRowCellValue(i, "id_employee").ToString
                 Dim id_salary As String = GVEmployee.GetRowCellValue(i, "id_employee_salary").ToString
@@ -67,7 +67,7 @@
                 If Not i = 0 Then
                     query += ","
                 End If
-                query += "('" & id_payroll & "','" & id_employee & "','" & id_salary & "','" & workdays & "')"
+                query += "('" & id_payroll & "','" & id_employee & "','" & id_salary & "','" & workdays & "','" & workdays & "')"
             Next
             execute_non_query(query, True, "", "", "", "")
         End If

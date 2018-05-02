@@ -40,6 +40,7 @@
     Public id_rack_param_selected As String = "-1"
     Public id_drawer_param_selected As String = "-1"
     Public id_design_selected_stock_sum As String = "-1"
+    Public id_product_selected_stock_sum As String = "-1"
     Public label_design_selected_stock_sum As String = "-1"
     Public label_wh_selected_stock_sum As String = "-1"
     Public label_locator_selected_stock_sum As String = "-1"
@@ -93,13 +94,14 @@
     Public dt_qc As DataTable
 
     Public id_pop_up As String = "-1"
+    Dim first_load_sum As Boolean = True
+    Dim first_load_card As Boolean = True
+    Public show_cost As Boolean = False
 
     Private Sub FormFGStock_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         If id_pop_up = "-1" Then
-            viewWHStockCard()
+            'viewWHStockCard()
             viewWHStockSum()
-            viewStoreStockStore()
-            viewProductStockStore()
             XTPFGStockQC.PageVisible = False
         Else
             viewProductStockQC()
@@ -356,108 +358,123 @@
             label_drawer_selected_stock_sum = SLEDrawerStockSum.Properties.View.GetFocusedRowCellValue("drawer_label").ToString
         End If
 
+        If XTCSOH.SelectedTabPageIndex = 0 Then
+            'Prepare Baded
+            BGVFGStock.Columns.Clear()
+            BGVFGStock.Bands.Clear()
+            BGVFGStock.Appearance.BandPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
 
-        'Prepare Baded
-        BGVFGStock.Columns.Clear()
-        BGVFGStock.Bands.Clear()
-        BGVFGStock.Appearance.BandPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+            ' Make the group footers always visible.
+            BGVFGStock.OptionsView.GroupFooterShowMode = DevExpress.XtraGrid.Views.Grid.GroupFooterShowMode.VisibleAlways
 
-        ' Make the group footers always visible.
-        BGVFGStock.OptionsView.GroupFooterShowMode = DevExpress.XtraGrid.Views.Grid.GroupFooterShowMode.VisibleAlways
+            Dim band_desc As DevExpress.XtraGrid.Views.BandedGrid.GridBand = BGVFGStock.Bands.AddBand("DESCRIPTION")
+            Dim band_aging As DevExpress.XtraGrid.Views.BandedGrid.GridBand = BGVFGStock.Bands.AddBand("AGING (MONTH)")
+            Dim band_qty_free As DevExpress.XtraGrid.Views.BandedGrid.GridBand = BGVFGStock.Bands.AddBand("AVAILABLE QTY")
+            Dim band_qty_res As DevExpress.XtraGrid.Views.BandedGrid.GridBand = BGVFGStock.Bands.AddBand("RESERVED QTY")
+            Dim band_qty_total As DevExpress.XtraGrid.Views.BandedGrid.GridBand = BGVFGStock.Bands.AddBand("TOTAL QTY")
+            'band_qty_total.AppearanceHeader.Font = New Font(BGVFGStock.Appearance.Row.Font.FontFamily, BGVFGStock.Appearance.Row.Font.Size, FontStyle.Bold)
 
-        Dim band_desc As DevExpress.XtraGrid.Views.BandedGrid.GridBand = BGVFGStock.Bands.AddBand("DESCRIPTION")
-        Dim band_aging As DevExpress.XtraGrid.Views.BandedGrid.GridBand = BGVFGStock.Bands.AddBand("AGING (MONTH)")
-        Dim band_qty_free As DevExpress.XtraGrid.Views.BandedGrid.GridBand = BGVFGStock.Bands.AddBand("AVAILABLE QTY")
-        Dim band_qty_res As DevExpress.XtraGrid.Views.BandedGrid.GridBand = BGVFGStock.Bands.AddBand("RESERVED QTY")
-        Dim band_qty_total As DevExpress.XtraGrid.Views.BandedGrid.GridBand = BGVFGStock.Bands.AddBand("TOTAL QTY")
-        'band_qty_total.AppearanceHeader.Font = New Font(BGVFGStock.Appearance.Row.Font.FontFamily, BGVFGStock.Appearance.Row.Font.Size, FontStyle.Bold)
-
-        Dim query As String = "CALL view_stock_fg_sum('" + id_wh_param_selected + "', '" + id_locator_param_selected + "', '" + id_rack_param_selected + "', '" + id_drawer_param_selected + "', '" + id_design_selected_stock_sum + "', '" + date_until_selected_stock_sum + "') "
-        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
-        For i As Integer = 0 To data.Columns.Count - 1
-            If data.Columns(i).ColumnName.ToString = "id_sample" Or data.Columns(i).ColumnName.ToString = "Code" Or data.Columns(i).ColumnName.ToString = "id_design" Or data.Columns(i).ColumnName.ToString = "Design" Or data.Columns(i).ColumnName.ToString = "design_display_name" Or data.Columns(i).ColumnName.ToString = "uom" Or data.Columns(i).ColumnName.ToString = "id_design_stock" Or data.Columns(i).ColumnName.ToString = "Unit Cost" Or data.Columns(i).ColumnName.ToString = "Product Division" Or data.Columns(i).ColumnName.ToString = "Product Source" Or data.Columns(i).ColumnName.ToString = "Product Branding" Or data.Columns(i).ColumnName.ToString = "Range" Or data.Columns(i).ColumnName.ToString = "Product Counting" Or data.Columns(i).ColumnName.ToString = "Color" Or data.Columns(i).ColumnName.ToString = "Status" Or data.Columns(i).ColumnName.ToString = "Price" Or data.Columns(i).ColumnName.ToString = "Sizetype" Or data.Columns(i).ColumnName.ToString = "Account" Then
-                band_desc.Columns.Add(BGVFGStock.Columns.AddVisible(data.Columns(i).ColumnName.ToString, data.Columns(i).ColumnName.ToString))
-                If data.Columns(i).ColumnName.ToString = "Price" Or data.Columns(i).ColumnName.ToString = "Unit Cost" Then
+            Dim query As String = "CALL view_stock_fg_sum('" + id_wh_param_selected + "', '" + id_locator_param_selected + "', '" + id_rack_param_selected + "', '" + id_drawer_param_selected + "', '" + id_design_selected_stock_sum + "', '" + date_until_selected_stock_sum + "') "
+            Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+            For i As Integer = 0 To data.Columns.Count - 1
+                If data.Columns(i).ColumnName.ToString = "id_sample" Or data.Columns(i).ColumnName.ToString = "Code" Or data.Columns(i).ColumnName.ToString = "id_design" Or data.Columns(i).ColumnName.ToString = "Design" Or data.Columns(i).ColumnName.ToString = "design_display_name" Or data.Columns(i).ColumnName.ToString = "uom" Or data.Columns(i).ColumnName.ToString = "id_design_stock" Or data.Columns(i).ColumnName.ToString = "Unit Cost" Or data.Columns(i).ColumnName.ToString = "Product Division" Or data.Columns(i).ColumnName.ToString = "Product Source" Or data.Columns(i).ColumnName.ToString = "Product Branding" Or data.Columns(i).ColumnName.ToString = "Range" Or data.Columns(i).ColumnName.ToString = "Product Counting" Or data.Columns(i).ColumnName.ToString = "Color" Or data.Columns(i).ColumnName.ToString = "Status" Or data.Columns(i).ColumnName.ToString = "Price" Or data.Columns(i).ColumnName.ToString = "Sizetype" Or data.Columns(i).ColumnName.ToString = "Account" Then
+                    band_desc.Columns.Add(BGVFGStock.Columns.AddVisible(data.Columns(i).ColumnName.ToString, data.Columns(i).ColumnName.ToString))
+                    If data.Columns(i).ColumnName.ToString = "Price" Or data.Columns(i).ColumnName.ToString = "Unit Cost" Then
+                        BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+                        BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+                        BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).DisplayFormat.FormatString = "{0:n2}"
+                    End If
+                ElseIf data.Columns(i).ColumnName.ToString.Contains(" Free") Then
+                    Dim st_caption As String = data.Columns(i).ColumnName.ToString.Length - 5
+                    band_qty_free.Columns.Add(BGVFGStock.Columns.AddVisible(data.Columns(i).ColumnName.ToString, data.Columns(i).ColumnName.ToString.Substring(0, st_caption)))
                     BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
                     BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-                    BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).DisplayFormat.FormatString = "{0:n2}"
+                    BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).DisplayFormat.FormatString = "{0:n0}"
+
+                    BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum
+                    BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).SummaryItem.DisplayFormat = "{0:n0}"
+
+                    Dim item As DevExpress.XtraGrid.GridGroupSummaryItem = New DevExpress.XtraGrid.GridGroupSummaryItem()
+                    item.FieldName = data.Columns(i).ColumnName.ToString
+                    item.SummaryType = DevExpress.Data.SummaryItemType.Sum
+                    item.DisplayFormat = "{0:n0}"
+                    item.ShowInGroupColumnFooter = BGVFGStock.Columns(data.Columns(i).ColumnName.ToString)
+                    BGVFGStock.GroupSummary.Add(item)
+                ElseIf data.Columns(i).ColumnName.ToString.Contains(" Reserved") Then
+                    Dim st_caption As String = data.Columns(i).ColumnName.ToString.Length - 9
+                    band_qty_res.Columns.Add(BGVFGStock.Columns.AddVisible(data.Columns(i).ColumnName.ToString, data.Columns(i).ColumnName.ToString.Substring(0, st_caption)))
+                    BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+                    BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+                    BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).DisplayFormat.FormatString = "{0:n0}"
+
+                    BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum
+                    BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).SummaryItem.DisplayFormat = "{0:n0}"
+
+                    Dim item As DevExpress.XtraGrid.GridGroupSummaryItem = New DevExpress.XtraGrid.GridGroupSummaryItem()
+                    item.FieldName = data.Columns(i).ColumnName.ToString
+                    item.SummaryType = DevExpress.Data.SummaryItemType.Sum
+                    item.DisplayFormat = "{0:n0}"
+                    item.ShowInGroupColumnFooter = BGVFGStock.Columns(data.Columns(i).ColumnName.ToString)
+                    BGVFGStock.GroupSummary.Add(item)
+                ElseIf data.Columns(i).ColumnName.ToString.Contains(" Aging") Then
+                    Dim st_caption As String = data.Columns(i).ColumnName.ToString.Length - 6
+                    band_aging.Columns.Add(BGVFGStock.Columns.AddVisible(data.Columns(i).ColumnName.ToString, data.Columns(i).ColumnName.ToString.Substring(0, st_caption)))
+                    BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+                    BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+                    BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).DisplayFormat.FormatString = "{0:n0}"
+                ElseIf data.Columns(i).ColumnName.ToString.Contains(" Total") Then
+                    Dim st_caption As String = data.Columns(i).ColumnName.ToString.Length - 6
+                    band_qty_total.Columns.Add(BGVFGStock.Columns.AddVisible(data.Columns(i).ColumnName.ToString, data.Columns(i).ColumnName.ToString.Substring(0, st_caption)))
+                    BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+                    'BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).AppearanceHeader.Font = New Font(BGVFGStock.Appearance.Row.Font.FontFamily, BGVFGStock.Appearance.Row.Font.Size, FontStyle.Bold)
+                    'BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).AppearanceCell.Font = New Font(BGVFGStock.Appearance.Row.Font.FontFamily, BGVFGStock.Appearance.Row.Font.Size, FontStyle.Bold)
+                    BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+                    BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).DisplayFormat.FormatString = "{0:n0}"
+
+                    BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum
+                    BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).SummaryItem.DisplayFormat = "{0:n0}"
+
+                    Dim item As DevExpress.XtraGrid.GridGroupSummaryItem = New DevExpress.XtraGrid.GridGroupSummaryItem()
+                    item.FieldName = data.Columns(i).ColumnName.ToString
+                    item.SummaryType = DevExpress.Data.SummaryItemType.Sum
+                    item.DisplayFormat = "{0:n0}"
+                    item.ShowInGroupColumnFooter = BGVFGStock.Columns(data.Columns(i).ColumnName.ToString)
+                    BGVFGStock.GroupSummary.Add(item)
                 End If
-            ElseIf data.Columns(i).ColumnName.ToString.Contains(" Free") Then
-                Dim st_caption As String = data.Columns(i).ColumnName.ToString.Length - 5
-                band_qty_free.Columns.Add(BGVFGStock.Columns.AddVisible(data.Columns(i).ColumnName.ToString, data.Columns(i).ColumnName.ToString.Substring(0, st_caption)))
-                BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-                BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-                BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).DisplayFormat.FormatString = "{0:n0}"
+                progres_bar_update(i, data.Columns.Count - 1)
+            Next
+            GCFGStock.DataSource = data
+            dt_sum = data
 
-                BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum
-                BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).SummaryItem.DisplayFormat = "{0:n0}"
-
-                Dim item As DevExpress.XtraGrid.GridGroupSummaryItem = New DevExpress.XtraGrid.GridGroupSummaryItem()
-                item.FieldName = data.Columns(i).ColumnName.ToString
-                item.SummaryType = DevExpress.Data.SummaryItemType.Sum
-                item.DisplayFormat = "{0:n0}"
-                item.ShowInGroupColumnFooter = BGVFGStock.Columns(data.Columns(i).ColumnName.ToString)
-                BGVFGStock.GroupSummary.Add(item)
-            ElseIf data.Columns(i).ColumnName.ToString.Contains(" Reserved") Then
-                Dim st_caption As String = data.Columns(i).ColumnName.ToString.Length - 9
-                band_qty_res.Columns.Add(BGVFGStock.Columns.AddVisible(data.Columns(i).ColumnName.ToString, data.Columns(i).ColumnName.ToString.Substring(0, st_caption)))
-                BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-                BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-                BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).DisplayFormat.FormatString = "{0:n0}"
-
-                BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum
-                BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).SummaryItem.DisplayFormat = "{0:n0}"
-
-                Dim item As DevExpress.XtraGrid.GridGroupSummaryItem = New DevExpress.XtraGrid.GridGroupSummaryItem()
-                item.FieldName = data.Columns(i).ColumnName.ToString
-                item.SummaryType = DevExpress.Data.SummaryItemType.Sum
-                item.DisplayFormat = "{0:n0}"
-                item.ShowInGroupColumnFooter = BGVFGStock.Columns(data.Columns(i).ColumnName.ToString)
-                BGVFGStock.GroupSummary.Add(item)
-            ElseIf data.Columns(i).ColumnName.ToString.Contains(" Aging") Then
-                Dim st_caption As String = data.Columns(i).ColumnName.ToString.Length - 6
-                band_aging.Columns.Add(BGVFGStock.Columns.AddVisible(data.Columns(i).ColumnName.ToString, data.Columns(i).ColumnName.ToString.Substring(0, st_caption)))
-                BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-                BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-                BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).DisplayFormat.FormatString = "{0:n0}"
-            ElseIf data.Columns(i).ColumnName.ToString.Contains(" Total") Then
-                Dim st_caption As String = data.Columns(i).ColumnName.ToString.Length - 6
-                band_qty_total.Columns.Add(BGVFGStock.Columns.AddVisible(data.Columns(i).ColumnName.ToString, data.Columns(i).ColumnName.ToString.Substring(0, st_caption)))
-                BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-                'BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).AppearanceHeader.Font = New Font(BGVFGStock.Appearance.Row.Font.FontFamily, BGVFGStock.Appearance.Row.Font.Size, FontStyle.Bold)
-                'BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).AppearanceCell.Font = New Font(BGVFGStock.Appearance.Row.Font.FontFamily, BGVFGStock.Appearance.Row.Font.Size, FontStyle.Bold)
-                BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-                BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).DisplayFormat.FormatString = "{0:n0}"
-
-                BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum
-                BGVFGStock.Columns(data.Columns(i).ColumnName.ToString).SummaryItem.DisplayFormat = "{0:n0}"
-
-                Dim item As DevExpress.XtraGrid.GridGroupSummaryItem = New DevExpress.XtraGrid.GridGroupSummaryItem()
-                item.FieldName = data.Columns(i).ColumnName.ToString
-                item.SummaryType = DevExpress.Data.SummaryItemType.Sum
-                item.DisplayFormat = "{0:n0}"
-                item.ShowInGroupColumnFooter = BGVFGStock.Columns(data.Columns(i).ColumnName.ToString)
-                BGVFGStock.GroupSummary.Add(item)
+            'hide column
+            BGVFGStock.Columns("id_sample").Visible = False
+            BGVFGStock.Columns("id_design").Visible = False
+            BGVFGStock.Columns("design_display_name").Visible = False
+            BGVFGStock.Columns("uom").Visible = False
+            BGVFGStock.Columns("id_design_stock").Visible = False
+            BGVFGStock.Columns("Product Counting").Visible = False
+            BGVFGStock.Columns("Range").Visible = False
+            If Not show_cost Then
+                BGVFGStock.Columns("Unit Cost").Visible = False
+                BGVFGStock.Columns("Unit Cost").OptionsColumn.ShowInCustomizationForm = False
+                BGVFGStock.Columns("Amount Cost Total").Visible = False
+                BGVFGStock.Columns("Amount Cost Total").OptionsColumn.ShowInCustomizationForm = False
             End If
-            progres_bar_update(i, data.Columns.Count - 1)
-        Next
-        GCFGStock.DataSource = data
-        dt_sum = data
+            For j As Integer = 0 To special_code_list.Count - 1
+                BGVFGStock.Columns(special_code_list(j)).Visible = False
+            Next
 
-        'hide column
-        BGVFGStock.Columns("id_sample").Visible = False
-        BGVFGStock.Columns("id_design").Visible = False
-        BGVFGStock.Columns("design_display_name").Visible = False
-        BGVFGStock.Columns("uom").Visible = False
-        BGVFGStock.Columns("id_design_stock").Visible = False
-        BGVFGStock.Columns("Product Counting").Visible = False
-        BGVFGStock.Columns("Range").Visible = False
-        For j As Integer = 0 To special_code_list.Count - 1
-            BGVFGStock.Columns(special_code_list(j)).Visible = False
-        Next
-
-        'Enable Group
-        GroupControlStockSum.Enabled = True
+            'Enable Group
+            GroupControlStockSum.Enabled = True
+        Else
+            Dim query As String = "CALL view_stock_fg('" + id_wh_param_selected + "', '" + id_locator_param_selected + "', '" + id_rack_param_selected + "', '" + id_drawer_param_selected + "', '" + id_product_selected_stock_sum + "', 4, '" + date_until_selected_stock_sum + "') "
+            Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+            GCStockBarcode.DataSource = data
+            If Not show_cost Then
+                BGVStockBarcode.Columns("design_cop").Visible = False
+                BGVStockBarcode.Columns("design_cop").OptionsColumn.ShowInCustomizationForm = False
+            End If
+        End If
         Cursor = Cursors.Default
     End Sub
 
@@ -554,23 +571,23 @@
 
     '===========================TAB STOCK STORE======================================
     Sub viewStoreStockStore()
-        Dim query As String = getQueryStore()
-        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
-        For i As Integer = 0 To data.Rows.Count - 1
-            If i = 0 Then
-                store_def_stock_store = data.Rows(i)("comp_name_label").ToString
-                Exit For
-            End If
-        Next
-        SLEStockStore.Properties.DataSource = Nothing
-        SLEStockStore.Properties.DataSource = data
-        SLEStockStore.Properties.DisplayMember = "comp_name_label"
-        SLEStockStore.Properties.ValueMember = "id_comp"
-        If data.Rows.Count.ToString >= 1 Then
-            SLEStockStore.EditValue = data.Rows(0)("id_comp").ToString
-        Else
-            SLEStockStore.EditValue = Nothing
-        End If
+        'Dim query As String = getQueryStore()
+        'Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        'For i As Integer = 0 To data.Rows.Count - 1
+        '    If i = 0 Then
+        '        store_def_stock_store = data.Rows(i)("comp_name_label").ToString
+        '        Exit For
+        '    End If
+        'Next
+        'SLEStockStore.Properties.DataSource = Nothing
+        'SLEStockStore.Properties.DataSource = data
+        'SLEStockStore.Properties.DisplayMember = "comp_name_label"
+        'SLEStockStore.Properties.ValueMember = "id_comp"
+        'If data.Rows.Count.ToString >= 1 Then
+        '    SLEStockStore.EditValue = data.Rows(0)("id_comp").ToString
+        'Else
+        '    SLEStockStore.EditValue = Nothing
+        'End If
     End Sub
 
     Sub viewProductStockStore()
@@ -1012,6 +1029,12 @@
         If XTCFGStock.SelectedTabPageIndex = 0 Then
             TxtDesignCode.Focus()
         ElseIf XTCFGStock.SelectedTabPageIndex = 1 Then
+            If first_load_card Then
+                Cursor = Cursors.WaitCursor
+                viewWHStockCard()
+                first_load_card = False
+                Cursor = Cursors.Default
+            End If
             TxtCodeDsgSC.Focus()
         ElseIf XTCFGStock.SelectedTabPageIndex = 4 Then
             TxtCodeDsgRsv.Focus()
@@ -1162,30 +1185,50 @@
     End Sub
     Sub resetViewStockSum()
         id_design_selected_stock_sum = "-1"
+        id_product_selected_stock_sum = "-1"
         TxtDesign.Text = ""
         GCFGStock.DataSource = Nothing
+        GCStockBarcode.DataSource=Nothing
     End Sub
 
     Private Sub TxtDesignCode_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtDesignCode.KeyDown
         If e.KeyCode = Keys.Enter Then
             Cursor = Cursors.WaitCursor
-            Dim query As String = "CALL view_all_design_param('AND design_code=''" + addSlashes(TxtDesignCode.Text) + "''')"
+            Dim query As String = ""
+            If XTCSOH.SelectedTabPageIndex = 0 Then
+                query = "CALL view_all_design_param('AND design_code=''" + addSlashes(TxtDesignCode.Text) + "''')"
+            Else
+                query = "SELECT * FROM tb_m_product p WHERE p.product_full_code='" + addSlashes(TxtDesignCode.Text) + "' "
+            End If
             Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
             If data.Rows.Count = 0 Or TxtDesignCode.Text = "" Then
-                stopCustom("Design not found !")
+                stopCustom("Product not found !")
                 resetViewStockSum()
                 TxtDesignCode.Focus()
             Else
-                id_design_selected_stock_sum = data.Rows(0)("id_design").ToString.ToUpper
-                TxtDesign.Text = data.Rows(0)("design_display_name").ToString.ToUpper
+                If XTCSOH.SelectedTabPageIndex = 0 Then
+                    id_design_selected_stock_sum = data.Rows(0)("id_design").ToString.ToUpper
+                    TxtDesign.Text = data.Rows(0)("design_display_name").ToString.ToUpper
+                Else
+                    id_product_selected_stock_sum = data.Rows(0)("id_product").ToString.ToUpper
+                    TxtDesign.Text = data.Rows(0)("product_display_name").ToString.ToUpper
+                End If
                 SLEWHStockSum.Focus()
                 SLEWHStockSum.ShowPopup()
             End If
-            GCFGStock.DataSource = Nothing
+            If XTCSOH.SelectedTabPageIndex = 0 Then
+                GCFGStock.DataSource = Nothing
+            Else
+                GCStockBarcode.DataSource = Nothing
+            End If
             Cursor = Cursors.Default
         Else
             resetViewStockSum()
-            GCFGStock.DataSource = Nothing
+            If XTCSOH.SelectedTabPageIndex = 0 Then
+                GCFGStock.DataSource = Nothing
+            Else
+                GCStockBarcode.DataSource = Nothing
+            End If
         End If
     End Sub
 
@@ -1207,13 +1250,33 @@
         TxtDesign.Text = ""
         If CheckEdit1.EditValue = True Then
             id_design_selected_stock_sum = "0"
+            id_product_selected_stock_sum = "0"
             TxtDesignCode.Properties.ReadOnly = True
             SLEWHStockSum.Focus()
             SLEWHStockSum.ShowPopup()
         Else
             id_design_selected_stock_sum = "-1"
+            id_product_selected_stock_sum = "-1"
             TxtDesignCode.Properties.ReadOnly = False
             TxtDesignCode.Focus()
+        End If
+    End Sub
+
+    Private Sub XTCSOH_SelectedPageChanged(sender As Object, e As DevExpress.XtraTab.TabPageChangedEventArgs) Handles XTCSOH.SelectedPageChanged
+        TxtDesignCode.Text = ""
+        TxtDesign.Text = ""
+        TxtDesignCode.Focus()
+        If XTCSOH.SelectedTabPageIndex = 0 Then
+            LabelSOH.Text = "Code"
+        Else
+            LabelSOH.Text = "Barcode"
+        End If
+    End Sub
+
+    Private Sub FormFGStock_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+        If e.KeyCode = Keys.F7 Then
+            FormMenuAuth.type = "2"
+            FormMenuAuth.ShowDialog()
         End If
     End Sub
 End Class

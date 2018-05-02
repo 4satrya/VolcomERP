@@ -44,6 +44,10 @@ Partial Class FormMatPL
         Me.GridColumnIdReportStatus = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ColMrsNumber = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn44 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
+        Me.BSearch = New DevExpress.XtraEditors.SimpleButton()
+        Me.LEStatusPL = New DevExpress.XtraEditors.LookUpEdit()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.XTPListProdMRS = New DevExpress.XtraTab.XtraTabPage()
         Me.GCMRS = New DevExpress.XtraGrid.GridControl()
         Me.GVMRS = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -66,7 +70,7 @@ Partial Class FormMatPL
         Me.RepositoryItemProgressBar1 = New DevExpress.XtraEditors.Repository.RepositoryItemProgressBar()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
         Me.BtnView = New DevExpress.XtraEditors.SimpleButton()
-        Me.SLESeason = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.SLEPLCreated = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn51 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnSeason = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -117,6 +121,10 @@ Partial Class FormMatPL
         Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn16 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn17 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn47 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
+        Me.BSearchPLStatusOther = New DevExpress.XtraEditors.SimpleButton()
+        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.XtraTabPage2 = New DevExpress.XtraTab.XtraTabPage()
         Me.GCMRSOther = New DevExpress.XtraGrid.GridControl()
         Me.GVMRSOther = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -129,11 +137,21 @@ Partial Class FormMatPL
         Me.GridColumnStatus = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn20 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdReport = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn50 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RICEPLCreatedOther = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.GridColumn52 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemProgressBar2 = New DevExpress.XtraEditors.Repository.RepositoryItemProgressBar()
-        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
-        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
-        Me.LEStatusPL = New DevExpress.XtraEditors.LookUpEdit()
-        Me.BSearch = New DevExpress.XtraEditors.SimpleButton()
+        Me.PanelControl4 = New DevExpress.XtraEditors.PanelControl()
+        Me.BSearchPLCreatedOther = New DevExpress.XtraEditors.SimpleButton()
+        Me.SLEPLCreatedOther = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn48 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn49 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
+        Me.SLEStatusPLOther = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn53 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn54 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XTCPL, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCPL.SuspendLayout()
         Me.XTPProduction.SuspendLayout()
@@ -142,6 +160,9 @@ Partial Class FormMatPL
         Me.XTPListProdPL.SuspendLayout()
         CType(Me.GCProdPL, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVProdPL, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl2.SuspendLayout()
+        CType(Me.LEStatusPL.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTPListProdMRS.SuspendLayout()
         CType(Me.GCMRS, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVMRS, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -149,7 +170,7 @@ Partial Class FormMatPL
         CType(Me.RepositoryItemProgressBar1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
-        CType(Me.SLESeason.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SLEPLCreated.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTPWOMat.SuspendLayout()
         CType(Me.XTCPLWO, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -166,13 +187,19 @@ Partial Class FormMatPL
         Me.XtraTabPage1.SuspendLayout()
         CType(Me.GCPLOther, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVPLOther, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl3.SuspendLayout()
         Me.XtraTabPage2.SuspendLayout()
         CType(Me.GCMRSOther, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVMRSOther, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RICEPLCreatedOther, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemProgressBar2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.PanelControl2.SuspendLayout()
-        CType(Me.LEStatusPL.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl4.SuspendLayout()
+        CType(Me.SLEPLCreatedOther.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SLEStatusPLOther.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'XTCPL
@@ -386,6 +413,46 @@ Partial Class FormMatPL
         Me.GridColumn44.Visible = True
         Me.GridColumn44.VisibleIndex = 10
         '
+        'PanelControl2
+        '
+        Me.PanelControl2.Controls.Add(Me.BSearch)
+        Me.PanelControl2.Controls.Add(Me.LEStatusPL)
+        Me.PanelControl2.Controls.Add(Me.LabelControl1)
+        Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelControl2.Location = New System.Drawing.Point(0, 0)
+        Me.PanelControl2.Name = "PanelControl2"
+        Me.PanelControl2.Size = New System.Drawing.Size(721, 35)
+        Me.PanelControl2.TabIndex = 2
+        '
+        'BSearch
+        '
+        Me.BSearch.Location = New System.Drawing.Point(229, 5)
+        Me.BSearch.Name = "BSearch"
+        Me.BSearch.Size = New System.Drawing.Size(59, 23)
+        Me.BSearch.TabIndex = 8904
+        Me.BSearch.Text = "Search"
+        '
+        'LEStatusPL
+        '
+        Me.LEStatusPL.Location = New System.Drawing.Point(47, 7)
+        Me.LEStatusPL.Name = "LEStatusPL"
+        Me.LEStatusPL.Properties.Appearance.Options.UseTextOptions = True
+        Me.LEStatusPL.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near
+        Me.LEStatusPL.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.LEStatusPL.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_status", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("status", "Status")})
+        Me.LEStatusPL.Properties.NullText = ""
+        Me.LEStatusPL.Properties.ShowFooter = False
+        Me.LEStatusPL.Size = New System.Drawing.Size(176, 20)
+        Me.LEStatusPL.TabIndex = 15
+        '
+        'LabelControl1
+        '
+        Me.LabelControl1.Location = New System.Drawing.Point(10, 10)
+        Me.LabelControl1.Name = "LabelControl1"
+        Me.LabelControl1.Size = New System.Drawing.Size(31, 13)
+        Me.LabelControl1.TabIndex = 0
+        Me.LabelControl1.Text = "Status"
+        '
         'XTPListProdMRS
         '
         Me.XTPListProdMRS.Controls.Add(Me.GCMRS)
@@ -561,7 +628,7 @@ Partial Class FormMatPL
         'PanelControl1
         '
         Me.PanelControl1.Controls.Add(Me.BtnView)
-        Me.PanelControl1.Controls.Add(Me.SLESeason)
+        Me.PanelControl1.Controls.Add(Me.SLEPLCreated)
         Me.PanelControl1.Controls.Add(Me.LabelControl4)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl1.Location = New System.Drawing.Point(0, 0)
@@ -578,17 +645,17 @@ Partial Class FormMatPL
         Me.BtnView.TabIndex = 101
         Me.BtnView.Text = "View"
         '
-        'SLESeason
+        'SLEPLCreated
         '
-        Me.SLESeason.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.SLESeason.Location = New System.Drawing.Point(69, 12)
-        Me.SLESeason.Name = "SLESeason"
-        Me.SLESeason.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SLESeason.Properties.Appearance.Options.UseFont = True
-        Me.SLESeason.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.SLESeason.Properties.View = Me.SearchLookUpEdit1View
-        Me.SLESeason.Size = New System.Drawing.Size(201, 20)
-        Me.SLESeason.TabIndex = 100
+        Me.SLEPLCreated.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.SLEPLCreated.Location = New System.Drawing.Point(69, 12)
+        Me.SLEPLCreated.Name = "SLEPLCreated"
+        Me.SLEPLCreated.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SLEPLCreated.Properties.Appearance.Options.UseFont = True
+        Me.SLEPLCreated.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEPLCreated.Properties.View = Me.SearchLookUpEdit1View
+        Me.SLEPLCreated.Size = New System.Drawing.Size(201, 20)
+        Me.SLEPLCreated.TabIndex = 100
         '
         'SearchLookUpEdit1View
         '
@@ -880,6 +947,7 @@ Partial Class FormMatPL
         'XtraTabPage1
         '
         Me.XtraTabPage1.Controls.Add(Me.GCPLOther)
+        Me.XtraTabPage1.Controls.Add(Me.PanelControl3)
         Me.XtraTabPage1.Name = "XtraTabPage1"
         Me.XtraTabPage1.Size = New System.Drawing.Size(721, 338)
         Me.XtraTabPage1.Text = "All Packing List"
@@ -887,16 +955,16 @@ Partial Class FormMatPL
         'GCPLOther
         '
         Me.GCPLOther.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCPLOther.Location = New System.Drawing.Point(0, 0)
+        Me.GCPLOther.Location = New System.Drawing.Point(0, 35)
         Me.GCPLOther.MainView = Me.GVPLOther
         Me.GCPLOther.Name = "GCPLOther"
-        Me.GCPLOther.Size = New System.Drawing.Size(721, 338)
+        Me.GCPLOther.Size = New System.Drawing.Size(721, 303)
         Me.GCPLOther.TabIndex = 2
         Me.GCPLOther.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVPLOther})
         '
         'GVPLOther
         '
-        Me.GVPLOther.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumn7, Me.GridColumn9, Me.GridColumn10, Me.GridColumn11, Me.GridColumn12, Me.GridColumn16, Me.GridColumn17})
+        Me.GVPLOther.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumn7, Me.GridColumn9, Me.GridColumn10, Me.GridColumn11, Me.GridColumn12, Me.GridColumn16, Me.GridColumn17, Me.GridColumn47})
         Me.GVPLOther.GridControl = Me.GCPLOther
         Me.GVPLOther.Name = "GVPLOther"
         Me.GVPLOther.OptionsBehavior.Editable = False
@@ -987,9 +1055,45 @@ Partial Class FormMatPL
         Me.GridColumn17.Visible = True
         Me.GridColumn17.VisibleIndex = 1
         '
+        'GridColumn47
+        '
+        Me.GridColumn47.Caption = "Submitted"
+        Me.GridColumn47.FieldName = "is_submit"
+        Me.GridColumn47.Name = "GridColumn47"
+        Me.GridColumn47.Visible = True
+        Me.GridColumn47.VisibleIndex = 6
+        '
+        'PanelControl3
+        '
+        Me.PanelControl3.Controls.Add(Me.SLEStatusPLOther)
+        Me.PanelControl3.Controls.Add(Me.BSearchPLStatusOther)
+        Me.PanelControl3.Controls.Add(Me.LabelControl2)
+        Me.PanelControl3.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelControl3.Location = New System.Drawing.Point(0, 0)
+        Me.PanelControl3.Name = "PanelControl3"
+        Me.PanelControl3.Size = New System.Drawing.Size(721, 35)
+        Me.PanelControl3.TabIndex = 3
+        '
+        'BSearchPLStatusOther
+        '
+        Me.BSearchPLStatusOther.Location = New System.Drawing.Point(229, 5)
+        Me.BSearchPLStatusOther.Name = "BSearchPLStatusOther"
+        Me.BSearchPLStatusOther.Size = New System.Drawing.Size(59, 23)
+        Me.BSearchPLStatusOther.TabIndex = 8904
+        Me.BSearchPLStatusOther.Text = "Search"
+        '
+        'LabelControl2
+        '
+        Me.LabelControl2.Location = New System.Drawing.Point(10, 10)
+        Me.LabelControl2.Name = "LabelControl2"
+        Me.LabelControl2.Size = New System.Drawing.Size(31, 13)
+        Me.LabelControl2.TabIndex = 0
+        Me.LabelControl2.Text = "Status"
+        '
         'XtraTabPage2
         '
         Me.XtraTabPage2.Controls.Add(Me.GCMRSOther)
+        Me.XtraTabPage2.Controls.Add(Me.PanelControl4)
         Me.XtraTabPage2.Name = "XtraTabPage2"
         Me.XtraTabPage2.Size = New System.Drawing.Size(721, 338)
         Me.XtraTabPage2.Text = "List Material Requisition"
@@ -997,17 +1101,17 @@ Partial Class FormMatPL
         'GCMRSOther
         '
         Me.GCMRSOther.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCMRSOther.Location = New System.Drawing.Point(0, 0)
+        Me.GCMRSOther.Location = New System.Drawing.Point(0, 44)
         Me.GCMRSOther.MainView = Me.GVMRSOther
         Me.GCMRSOther.Name = "GCMRSOther"
-        Me.GCMRSOther.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemProgressBar2})
-        Me.GCMRSOther.Size = New System.Drawing.Size(721, 338)
+        Me.GCMRSOther.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemProgressBar2, Me.RICEPLCreatedOther})
+        Me.GCMRSOther.Size = New System.Drawing.Size(721, 294)
         Me.GCMRSOther.TabIndex = 10
         Me.GCMRSOther.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVMRSOther})
         '
         'GVMRSOther
         '
-        Me.GVMRSOther.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn8, Me.GridColumn13, Me.GridColumn14, Me.GridColumn15, Me.GridColumn18, Me.GridColumn19, Me.GridColumnStatus, Me.GridColumn20, Me.GridColumnIdReport})
+        Me.GVMRSOther.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn8, Me.GridColumn13, Me.GridColumn14, Me.GridColumn15, Me.GridColumn18, Me.GridColumn19, Me.GridColumnStatus, Me.GridColumn20, Me.GridColumnIdReport, Me.GridColumn50, Me.GridColumn52})
         Me.GVMRSOther.GridControl = Me.GCMRSOther
         Me.GVMRSOther.Name = "GVMRSOther"
         Me.GVMRSOther.OptionsBehavior.Editable = False
@@ -1085,6 +1189,34 @@ Partial Class FormMatPL
         Me.GridColumnIdReport.FieldName = "id_report_status"
         Me.GridColumnIdReport.Name = "GridColumnIdReport"
         '
+        'GridColumn50
+        '
+        Me.GridColumn50.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn50.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn50.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn50.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn50.Caption = "PL Created"
+        Me.GridColumn50.ColumnEdit = Me.RICEPLCreatedOther
+        Me.GridColumn50.FieldName = "pl_created"
+        Me.GridColumn50.Name = "GridColumn50"
+        Me.GridColumn50.Visible = True
+        Me.GridColumn50.VisibleIndex = 5
+        '
+        'RICEPLCreatedOther
+        '
+        Me.RICEPLCreatedOther.AutoHeight = False
+        Me.RICEPLCreatedOther.Name = "RICEPLCreatedOther"
+        Me.RICEPLCreatedOther.ValueChecked = "yes"
+        Me.RICEPLCreatedOther.ValueUnchecked = "no"
+        '
+        'GridColumn52
+        '
+        Me.GridColumn52.Caption = "Qty PL"
+        Me.GridColumn52.DisplayFormat.FormatString = "N0"
+        Me.GridColumn52.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn52.FieldName = "jum_pl"
+        Me.GridColumn52.Name = "GridColumn52"
+        '
         'RepositoryItemProgressBar2
         '
         Me.RepositoryItemProgressBar2.Appearance.BackColor = System.Drawing.Color.Lime
@@ -1097,45 +1229,101 @@ Partial Class FormMatPL
         Me.RepositoryItemProgressBar2.StartColor = System.Drawing.Color.Green
         Me.RepositoryItemProgressBar2.Step = 1
         '
-        'PanelControl2
+        'PanelControl4
         '
-        Me.PanelControl2.Controls.Add(Me.BSearch)
-        Me.PanelControl2.Controls.Add(Me.LEStatusPL)
-        Me.PanelControl2.Controls.Add(Me.LabelControl1)
-        Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Top
-        Me.PanelControl2.Location = New System.Drawing.Point(0, 0)
-        Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(721, 35)
-        Me.PanelControl2.TabIndex = 2
+        Me.PanelControl4.Controls.Add(Me.BSearchPLCreatedOther)
+        Me.PanelControl4.Controls.Add(Me.SLEPLCreatedOther)
+        Me.PanelControl4.Controls.Add(Me.LabelControl3)
+        Me.PanelControl4.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelControl4.Location = New System.Drawing.Point(0, 0)
+        Me.PanelControl4.Name = "PanelControl4"
+        Me.PanelControl4.Size = New System.Drawing.Size(721, 44)
+        Me.PanelControl4.TabIndex = 11
         '
-        'LabelControl1
+        'BSearchPLCreatedOther
         '
-        Me.LabelControl1.Location = New System.Drawing.Point(10, 10)
-        Me.LabelControl1.Name = "LabelControl1"
-        Me.LabelControl1.Size = New System.Drawing.Size(31, 13)
-        Me.LabelControl1.TabIndex = 0
-        Me.LabelControl1.Text = "Status"
+        Me.BSearchPLCreatedOther.ImageIndex = 15
+        Me.BSearchPLCreatedOther.Location = New System.Drawing.Point(276, 10)
+        Me.BSearchPLCreatedOther.Name = "BSearchPLCreatedOther"
+        Me.BSearchPLCreatedOther.Size = New System.Drawing.Size(83, 24)
+        Me.BSearchPLCreatedOther.TabIndex = 101
+        Me.BSearchPLCreatedOther.Text = "View"
         '
-        'LEStatusPL
+        'SLEPLCreatedOther
         '
-        Me.LEStatusPL.Location = New System.Drawing.Point(47, 7)
-        Me.LEStatusPL.Name = "LEStatusPL"
-        Me.LEStatusPL.Properties.Appearance.Options.UseTextOptions = True
-        Me.LEStatusPL.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near
-        Me.LEStatusPL.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.LEStatusPL.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_status", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("status", "Status")})
-        Me.LEStatusPL.Properties.NullText = ""
-        Me.LEStatusPL.Properties.ShowFooter = False
-        Me.LEStatusPL.Size = New System.Drawing.Size(176, 20)
-        Me.LEStatusPL.TabIndex = 15
+        Me.SLEPLCreatedOther.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.SLEPLCreatedOther.Location = New System.Drawing.Point(69, 12)
+        Me.SLEPLCreatedOther.Name = "SLEPLCreatedOther"
+        Me.SLEPLCreatedOther.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SLEPLCreatedOther.Properties.Appearance.Options.UseFont = True
+        Me.SLEPLCreatedOther.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEPLCreatedOther.Properties.View = Me.GridView1
+        Me.SLEPLCreatedOther.Size = New System.Drawing.Size(201, 20)
+        Me.SLEPLCreatedOther.TabIndex = 100
         '
-        'BSearch
+        'GridView1
         '
-        Me.BSearch.Location = New System.Drawing.Point(229, 5)
-        Me.BSearch.Name = "BSearch"
-        Me.BSearch.Size = New System.Drawing.Size(59, 23)
-        Me.BSearch.TabIndex = 8904
-        Me.BSearch.Text = "Search"
+        Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn48, Me.GridColumn49})
+        Me.GridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView1.Name = "GridView1"
+        Me.GridView1.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView1.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn48
+        '
+        Me.GridColumn48.Caption = "Id Status"
+        Me.GridColumn48.FieldName = "id_statusmrs"
+        Me.GridColumn48.Name = "GridColumn48"
+        '
+        'GridColumn49
+        '
+        Me.GridColumn49.Caption = "Status Packing List"
+        Me.GridColumn49.FieldName = "status_mrs"
+        Me.GridColumn49.Name = "GridColumn49"
+        Me.GridColumn49.Visible = True
+        Me.GridColumn49.VisibleIndex = 0
+        '
+        'LabelControl3
+        '
+        Me.LabelControl3.Location = New System.Drawing.Point(10, 15)
+        Me.LabelControl3.Name = "LabelControl3"
+        Me.LabelControl3.Size = New System.Drawing.Size(53, 13)
+        Me.LabelControl3.TabIndex = 99
+        Me.LabelControl3.Text = "PL Created"
+        '
+        'SLEStatusPLOther
+        '
+        Me.SLEStatusPLOther.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.SLEStatusPLOther.Location = New System.Drawing.Point(47, 7)
+        Me.SLEStatusPLOther.Name = "SLEStatusPLOther"
+        Me.SLEStatusPLOther.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SLEStatusPLOther.Properties.Appearance.Options.UseFont = True
+        Me.SLEStatusPLOther.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEStatusPLOther.Properties.View = Me.GridView2
+        Me.SLEStatusPLOther.Size = New System.Drawing.Size(176, 20)
+        Me.SLEStatusPLOther.TabIndex = 8905
+        '
+        'GridView2
+        '
+        Me.GridView2.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn53, Me.GridColumn54})
+        Me.GridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView2.Name = "GridView2"
+        Me.GridView2.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView2.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn53
+        '
+        Me.GridColumn53.Caption = "Id Status"
+        Me.GridColumn53.FieldName = "id_status"
+        Me.GridColumn53.Name = "GridColumn53"
+        '
+        'GridColumn54
+        '
+        Me.GridColumn54.Caption = "Status"
+        Me.GridColumn54.FieldName = "status"
+        Me.GridColumn54.Name = "GridColumn54"
+        Me.GridColumn54.Visible = True
+        Me.GridColumn54.VisibleIndex = 0
         '
         'FormMatPL
         '
@@ -1158,6 +1346,10 @@ Partial Class FormMatPL
         Me.XTPListProdPL.ResumeLayout(False)
         CType(Me.GCProdPL, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVProdPL, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl2.ResumeLayout(False)
+        Me.PanelControl2.PerformLayout()
+        CType(Me.LEStatusPL.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XTPListProdMRS.ResumeLayout(False)
         CType(Me.GCMRS, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVMRS, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1166,7 +1358,7 @@ Partial Class FormMatPL
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         Me.PanelControl1.PerformLayout()
-        CType(Me.SLESeason.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SLEPLCreated.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XTPWOMat.ResumeLayout(False)
         CType(Me.XTCPLWO, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1183,14 +1375,21 @@ Partial Class FormMatPL
         Me.XtraTabPage1.ResumeLayout(False)
         CType(Me.GCPLOther, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVPLOther, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl3.ResumeLayout(False)
+        Me.PanelControl3.PerformLayout()
         Me.XtraTabPage2.ResumeLayout(False)
         CType(Me.GCMRSOther, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVMRSOther, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RICEPLCreatedOther, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemProgressBar2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.PanelControl2.ResumeLayout(False)
-        Me.PanelControl2.PerformLayout()
-        CType(Me.LEStatusPL.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl4.ResumeLayout(False)
+        Me.PanelControl4.PerformLayout()
+        CType(Me.SLEPLCreatedOther.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SLEStatusPLOther.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1295,7 +1494,7 @@ Partial Class FormMatPL
     Friend WithEvents GridColumn43 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents PanelControl1 As DevExpress.XtraEditors.PanelControl
     Friend WithEvents BtnView As DevExpress.XtraEditors.SimpleButton
-    Friend WithEvents SLESeason As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents SLEPLCreated As DevExpress.XtraEditors.SearchLookUpEdit
     Friend WithEvents SearchLookUpEdit1View As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumn51 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnSeason As DevExpress.XtraGrid.Columns.GridColumn
@@ -1309,4 +1508,22 @@ Partial Class FormMatPL
     Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LEStatusPL As DevExpress.XtraEditors.LookUpEdit
     Friend WithEvents BSearch As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents PanelControl3 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents BSearchPLStatusOther As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents GridColumn47 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents PanelControl4 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents BSearchPLCreatedOther As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents SLEPLCreatedOther As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView1 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn48 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn49 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LabelControl3 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents GridColumn50 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RICEPLCreatedOther As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+    Friend WithEvents GridColumn52 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents SLEStatusPLOther As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView2 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn53 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn54 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

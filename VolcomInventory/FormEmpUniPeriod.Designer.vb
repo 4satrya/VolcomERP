@@ -26,6 +26,7 @@ Partial Class FormEmpUniPeriod
         Me.GridColumnSelectionEnd = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnCreatedDate = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnDistribution = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnActive = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GCUni, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVUni, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -42,7 +43,7 @@ Partial Class FormEmpUniPeriod
         '
         'GVUni
         '
-        Me.GVUni.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnPeriodName, Me.GridColumnSelectionStart, Me.GridColumnSelectionEnd, Me.GridColumnCreatedDate, Me.GridColumnDistribution})
+        Me.GVUni.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnPeriodName, Me.GridColumnSelectionStart, Me.GridColumnSelectionEnd, Me.GridColumnCreatedDate, Me.GridColumnDistribution, Me.GridColumnActive})
         Me.GVUni.GridControl = Me.GCUni
         Me.GVUni.Name = "GVUni"
         Me.GVUni.OptionsBehavior.Editable = False
@@ -96,6 +97,14 @@ Partial Class FormEmpUniPeriod
         Me.GridColumnDistribution.Visible = True
         Me.GridColumnDistribution.VisibleIndex = 4
         '
+        'GridColumnActive
+        '
+        Me.GridColumnActive.Caption = "Status"
+        Me.GridColumnActive.FieldName = "status"
+        Me.GridColumnActive.Name = "GridColumnActive"
+        Me.GridColumnActive.Visible = True
+        Me.GridColumnActive.VisibleIndex = 5
+        '
         'FormEmpUniPeriod
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -118,4 +127,5 @@ Partial Class FormEmpUniPeriod
     Friend WithEvents GridColumnSelectionEnd As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnCreatedDate As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnDistribution As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnActive As DevExpress.XtraGrid.Columns.GridColumn
 End Class

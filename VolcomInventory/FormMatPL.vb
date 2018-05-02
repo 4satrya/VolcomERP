@@ -7,11 +7,9 @@
         Cursor = Cursors.WaitCursor
         Try
             view_status_pl()
-            viewPL()
             viewStatusMRS()
+            view_status_pl_other()
 
-            viewPLOther()
-            view_mrs_other()
             viewPLWO()
             view_mrs_mat_wo()
             '
@@ -31,13 +29,24 @@
                                 SELECT 4 AS id_status,'ALL' AS `status`"
         viewLookupQuery(LEStatusPL, query, 0, "status", "id_status")
     End Sub
+    Sub view_status_pl_other()
+        Dim query As String = "SELECT 1 AS id_status,'On Process' AS `status`
+                                UNION
+                                SELECT 2 AS id_status,'Completed' AS `status`
+                                UNION
+                                SELECT 3 AS id_status,'Cancelled' AS `status`
+                                UNION
+                                SELECT 4 AS id_status,'ALL' AS `status`"
+        viewSearchLookupQuery(SLEStatusPLOther, query, "id_status", "status", "id_status")
+    End Sub
     Sub viewStatusMRS()
         Dim query As String = "SELECT '0' as id_statusmrs, 'All' as status_mrs 
                                 UNION
                               SELECT '1' as id_statusmrs, 'Already Created' as status_mrs 
                                 UNION
                               SELECT '2' as id_statusmrs, 'Not yet created' as status_mrs"
-        viewSearchLookupQuery(SLESeason, query, "id_statusmrs", "status_mrs", "id_statusmrs")
+        viewSearchLookupQuery(SLEPLCreated, query, "id_statusmrs", "status_mrs", "id_statusmrs")
+        viewSearchLookupQuery(SLEPLCreatedOther, query, "id_statusmrs", "status_mrs", "id_statusmrs")
     End Sub
     Private Sub FormMatPL_Activated(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Activated
         FormMain.show_rb(Name)
@@ -64,21 +73,27 @@
         Dim query As String = "CALL view_pl('" & query_where & "')"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCProdPL.DataSource = data
+        '
+        check_but()
     End Sub
     Sub viewPLOther()
-        Dim query As String = "SELECT a.id_pl_mrs ,a.id_comp_contact_from , a.id_comp_contact_to, a.pl_mrs_note, a.pl_mrs_number, "
-        query += "(d.comp_name) AS comp_name_from, (f.comp_name) AS comp_name_to, h.report_status, a.id_report_status,i.prod_order_mrs_number, "
-        query += "a.pl_mrs_date, a.id_report_status FROM tb_pl_mrs a "
-        query += "INNER JOIN tb_m_comp_contact c ON a.id_comp_contact_from = c.id_comp_contact "
-        query += "INNER JOIN tb_m_comp d ON c.id_comp = d.id_comp "
-        query += "INNER JOIN tb_m_comp_contact e ON a.id_comp_contact_to = e.id_comp_contact "
-        query += "INNER JOIN tb_m_comp f ON e.id_comp = f.id_comp "
-        query += "INNER JOIN tb_lookup_report_status h ON h.id_report_status = a.id_report_status "
-        query += "INNER JOIN tb_prod_order_mrs i ON a.id_prod_order_mrs = i.id_prod_order_mrs "
-        query += "WHERE ISNULL(i.id_prod_order) AND i.mrs_type='1' "
-        query += "ORDER BY a.id_pl_mrs DESC "
+        Dim query_where As String = ""
+        If SLEStatusPLOther.EditValue.ToString = "1" Then
+            query_where = " AND a.id_report_status != 6 AND a.id_report_status != 5 "
+        ElseIf SLEStatusPLOther.EditValue.ToString = "2" Then
+            query_where = " AND a.id_report_status = 6 "
+        ElseIf SLEStatusPLOther.EditValue.ToString = "3" Then
+            query_where = " AND a.id_report_status = 5 "
+        ElseIf SLEStatusPLOther.EditValue.ToString = "4" Then
+            query_where = " "
+        End If
+
+        Dim query As String = "CALL view_pl_other('" & query_where & "')"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+
         GCPLOther.DataSource = data
+        '
+        check_but()
     End Sub
     Sub viewPLWO()
         Dim query As String = "SELECT a.id_pl_mrs ,wo.mat_wo_number,a.id_comp_contact_from , a.id_comp_contact_to, a.pl_mrs_note, a.pl_mrs_number, "
@@ -97,7 +112,7 @@
         GCPLWO.DataSource = data
     End Sub
     Sub viewMRS()
-        Dim status_mrs As String = SLESeason.EditValue.ToString
+        Dim status_mrs As String = SLEPLCreated.EditValue.ToString
         Dim query_status As String = ""
         If status_mrs = "0" Then
             '
@@ -129,22 +144,41 @@
                     WHERE (a.id_report_status = '3' OR a.id_report_status='4')  " & query_status & " AND NOT ISNULL(a.id_prod_order)"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCMRS.DataSource = data
+        '
+        check_but()
     End Sub
     Sub view_mrs_other()
-        Dim query = "SELECT a.id_prod_order_mrs,a.prod_order_mrs_number,a.id_report_status,h.report_status,a.id_prod_order_wo,b.prod_order_wo_number, "
-        query += "d.comp_name AS comp_name_req_from,c.id_comp_contact AS id_comp_name_req_from, "
-        query += "f.comp_name AS comp_name_req_to,e.id_comp_contact AS id_comp_name_req_to, "
-        query += "a.prod_order_mrs_date "
-        query += "FROM tb_prod_order_mrs a "
-        query += "LEFT JOIN tb_prod_order_wo b ON a.id_prod_order_wo = b.id_prod_order_wo "
-        query += "INNER JOIN tb_m_comp_contact c ON a.id_comp_contact_req_from = c.id_comp_contact "
-        query += "INNER JOIN tb_m_comp d ON c.id_comp = d.id_comp "
-        query += "INNER JOIN tb_m_comp_contact e ON a.id_comp_contact_req_to = e.id_comp_contact "
-        query += "INNER JOIN tb_m_comp f ON e.id_comp = f.id_comp "
-        query += "INNER JOIN tb_lookup_report_status h ON h.id_report_status = a.id_report_status "
-        query += "WHERE (a.id_report_status = '3' OR a.id_report_status='4') AND ISNULL(a.id_prod_order) AND a.mrs_type='1'"
+        Dim status_mrs As String = SLEPLCreatedOther.EditValue.ToString
+        Dim query_status As String = ""
+        If status_mrs = "0" Then
+            '
+        ElseIf status_mrs = "1" Then
+            query_status = "AND IFNULL(jum_pl.jum_pl,0)>0 "
+        ElseIf status_mrs = "2" Then
+            query_status = "AND IFNULL(jum_pl.jum_pl,0)<=0 "
+        End If
+
+        Dim query = "SELECT a.id_prod_order_mrs,a.prod_order_mrs_number,a.id_report_status,h.report_status,a.id_prod_order_wo,b.prod_order_wo_number, 
+                    d.comp_name AS comp_name_req_from,c.id_comp_contact AS id_comp_name_req_from, 
+                    f.comp_name AS comp_name_req_to,e.id_comp_contact AS id_comp_name_req_to, 
+                    a.prod_order_mrs_date 
+                    ,IF(IFNULL(jum_pl.jum_pl,0)>0,'yes','no') AS pl_created,IFNULL(jum_pl.jum_pl,0) AS jum_pl
+                    FROM tb_prod_order_mrs a 
+                    LEFT JOIN tb_prod_order_wo b ON a.id_prod_order_wo = b.id_prod_order_wo 
+                    INNER JOIN tb_m_comp_contact c ON a.id_comp_contact_req_from = c.id_comp_contact 
+                    INNER JOIN tb_m_comp d ON c.id_comp = d.id_comp 
+                    INNER JOIN tb_m_comp_contact e ON a.id_comp_contact_req_to = e.id_comp_contact 
+                    INNER JOIN tb_m_comp f ON e.id_comp = f.id_comp 
+                    INNER JOIN tb_lookup_report_status h ON h.id_report_status = a.id_report_status 
+                    LEFT JOIN 
+                    (
+	                    SELECT COUNT(id_pl_mrs) AS jum_pl,id_prod_order_mrs FROM tb_pl_mrs WHERE id_report_status!=5 GROUP BY id_prod_order_mrs
+                    ) AS jum_pl ON jum_pl.id_prod_order_mrs=a.id_prod_order_mrs
+                    WHERE (a.id_report_status = '3' OR a.id_report_status='4') AND ISNULL(a.id_prod_order) AND a.mrs_type='1' " & query_status
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCMRSOther.DataSource = data
+        '
+        check_but()
     End Sub
     Sub view_mrs_mat_wo()
         Dim query = "SELECT a.id_prod_order_mrs,a.prod_order_mrs_number,a.id_report_status,h.report_status,a.id_prod_order_wo,b.mat_wo_number, "
@@ -256,5 +290,13 @@
 
     Private Sub BSearch_Click(sender As Object, e As EventArgs) Handles BSearch.Click
         viewPL()
+    End Sub
+
+    Private Sub BSearchPLStatusOther_Click(sender As Object, e As EventArgs) Handles BSearchPLStatusOther.Click
+        viewPLOther()
+    End Sub
+
+    Private Sub BSearchPLCreatedOther_Click(sender As Object, e As EventArgs) Handles BSearchPLCreatedOther.Click
+        view_mrs_other()
     End Sub
 End Class

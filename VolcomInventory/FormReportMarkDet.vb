@@ -121,6 +121,14 @@
                 Dim mail As ClassSendEmail = New ClassSendEmail()
                 mail.report_mark_type = report_mark_type
                 mail.send_email_appr(report_mark_type, id_report, False)
+            ElseIf report_mark_type = "130" Then
+                'uniform
+                Dim qupd As String = "UPDATE tb_sales_order set is_selected=2 WHERE id_sales_order=" + id_report + " "
+                execute_non_query(qupd, True, "", "", "", "")
+
+                'delete all mark
+                Dim qm As String = "DELETE FROM tb_report_mark WHERE id_report=" + id_report + " AND report_mark_type=" + report_mark_type + " "
+                execute_non_query(qm, True, "", "", "", "")
             End If
             close_form(FormReportMark.report_mark_type)
             FormReportMark.Close()

@@ -39,6 +39,8 @@ Partial Class FormEmpPayrollSetup
         Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
         Me.MemoEdit1 = New DevExpress.XtraEditors.MemoEdit()
+        Me.DEEffDate = New DevExpress.XtraEditors.DateEdit()
+        Me.LabelControl8 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl3.SuspendLayout()
@@ -49,6 +51,8 @@ Partial Class FormEmpPayrollSetup
         CType(Me.TEJPMax.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEKoperasiIuran.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.MemoEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEEffDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEEffDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LargeImageCollection
@@ -81,9 +85,9 @@ Partial Class FormEmpPayrollSetup
         Me.PanelControl3.Controls.Add(Me.BCancel)
         Me.PanelControl3.Controls.Add(Me.BPick)
         Me.PanelControl3.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl3.Location = New System.Drawing.Point(0, 211)
+        Me.PanelControl3.Location = New System.Drawing.Point(0, 243)
         Me.PanelControl3.Name = "PanelControl3"
-        Me.PanelControl3.Size = New System.Drawing.Size(414, 37)
+        Me.PanelControl3.Size = New System.Drawing.Size(432, 37)
         Me.PanelControl3.TabIndex = 7
         '
         'BCancel
@@ -91,7 +95,7 @@ Partial Class FormEmpPayrollSetup
         Me.BCancel.Dock = System.Windows.Forms.DockStyle.Right
         Me.BCancel.ImageIndex = 5
         Me.BCancel.ImageList = Me.LargeImageCollection
-        Me.BCancel.Location = New System.Drawing.Point(264, 2)
+        Me.BCancel.Location = New System.Drawing.Point(282, 2)
         Me.BCancel.Name = "BCancel"
         Me.BCancel.Size = New System.Drawing.Size(73, 33)
         Me.BCancel.TabIndex = 9
@@ -102,7 +106,7 @@ Partial Class FormEmpPayrollSetup
         Me.BPick.Dock = System.Windows.Forms.DockStyle.Right
         Me.BPick.ImageIndex = 7
         Me.BPick.ImageList = Me.LargeImageCollection
-        Me.BPick.Location = New System.Drawing.Point(337, 2)
+        Me.BPick.Location = New System.Drawing.Point(355, 2)
         Me.BPick.Name = "BPick"
         Me.BPick.Size = New System.Drawing.Size(75, 33)
         Me.BPick.TabIndex = 8
@@ -111,7 +115,7 @@ Partial Class FormEmpPayrollSetup
         'TEUMP
         '
         Me.TEUMP.EditValue = "1.00"
-        Me.TEUMP.Location = New System.Drawing.Point(121, 9)
+        Me.TEUMP.Location = New System.Drawing.Point(139, 9)
         Me.TEUMP.Name = "TEUMP"
         Me.TEUMP.Properties.Appearance.Options.UseTextOptions = True
         Me.TEUMP.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
@@ -142,7 +146,7 @@ Partial Class FormEmpPayrollSetup
         'TEBPJSMax
         '
         Me.TEBPJSMax.EditValue = "1.00"
-        Me.TEBPJSMax.Location = New System.Drawing.Point(121, 35)
+        Me.TEBPJSMax.Location = New System.Drawing.Point(139, 35)
         Me.TEBPJSMax.Name = "TEBPJSMax"
         Me.TEBPJSMax.Properties.Appearance.Options.UseTextOptions = True
         Me.TEBPJSMax.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
@@ -165,7 +169,7 @@ Partial Class FormEmpPayrollSetup
         'TEPembilang
         '
         Me.TEPembilang.EditValue = "1.00"
-        Me.TEPembilang.Location = New System.Drawing.Point(121, 89)
+        Me.TEPembilang.Location = New System.Drawing.Point(139, 89)
         Me.TEPembilang.Name = "TEPembilang"
         Me.TEPembilang.Properties.Appearance.Options.UseTextOptions = True
         Me.TEPembilang.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
@@ -179,7 +183,7 @@ Partial Class FormEmpPayrollSetup
         '
         'LabelControl3
         '
-        Me.LabelControl3.Location = New System.Drawing.Point(270, 92)
+        Me.LabelControl3.Location = New System.Drawing.Point(288, 92)
         Me.LabelControl3.Name = "LabelControl3"
         Me.LabelControl3.Size = New System.Drawing.Size(4, 13)
         Me.LabelControl3.TabIndex = 140
@@ -188,7 +192,7 @@ Partial Class FormEmpPayrollSetup
         'TEPenyebut
         '
         Me.TEPenyebut.EditValue = "1.00"
-        Me.TEPenyebut.Location = New System.Drawing.Point(280, 89)
+        Me.TEPenyebut.Location = New System.Drawing.Point(298, 89)
         Me.TEPenyebut.Name = "TEPenyebut"
         Me.TEPenyebut.Properties.EditValueChangedDelay = 1
         Me.TEPenyebut.Properties.Mask.EditMask = "N0"
@@ -209,7 +213,7 @@ Partial Class FormEmpPayrollSetup
         'TEJPMax
         '
         Me.TEJPMax.EditValue = "1.00"
-        Me.TEJPMax.Location = New System.Drawing.Point(121, 63)
+        Me.TEJPMax.Location = New System.Drawing.Point(139, 63)
         Me.TEJPMax.Name = "TEJPMax"
         Me.TEJPMax.Properties.Appearance.Options.UseTextOptions = True
         Me.TEJPMax.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
@@ -224,7 +228,7 @@ Partial Class FormEmpPayrollSetup
         'TEKoperasiIuran
         '
         Me.TEKoperasiIuran.EditValue = "1.00"
-        Me.TEKoperasiIuran.Location = New System.Drawing.Point(121, 115)
+        Me.TEKoperasiIuran.Location = New System.Drawing.Point(139, 115)
         Me.TEKoperasiIuran.Name = "TEKoperasiIuran"
         Me.TEKoperasiIuran.Properties.Appearance.Options.UseTextOptions = True
         Me.TEKoperasiIuran.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
@@ -246,7 +250,7 @@ Partial Class FormEmpPayrollSetup
         '
         'LabelControl6
         '
-        Me.LabelControl6.Location = New System.Drawing.Point(12, 148)
+        Me.LabelControl6.Location = New System.Drawing.Point(12, 169)
         Me.LabelControl6.Name = "LabelControl6"
         Me.LabelControl6.Size = New System.Drawing.Size(23, 13)
         Me.LabelControl6.TabIndex = 146
@@ -254,16 +258,41 @@ Partial Class FormEmpPayrollSetup
         '
         'MemoEdit1
         '
-        Me.MemoEdit1.Location = New System.Drawing.Point(121, 141)
+        Me.MemoEdit1.Location = New System.Drawing.Point(139, 167)
         Me.MemoEdit1.Name = "MemoEdit1"
         Me.MemoEdit1.Size = New System.Drawing.Size(281, 59)
         Me.MemoEdit1.TabIndex = 7
+        '
+        'DEEffDate
+        '
+        Me.DEEffDate.Anchor = System.Windows.Forms.AnchorStyles.Right
+        Me.DEEffDate.EditValue = Nothing
+        Me.DEEffDate.Location = New System.Drawing.Point(139, 141)
+        Me.DEEffDate.Name = "DEEffDate"
+        Me.DEEffDate.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEEffDate.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.DEEffDate.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.DEEffDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEEffDate.Properties.Mask.EditMask = "dd\/MM\/yyyy"
+        Me.DEEffDate.Size = New System.Drawing.Size(281, 20)
+        Me.DEEffDate.TabIndex = 8933
+        '
+        'LabelControl8
+        '
+        Me.LabelControl8.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl8.Location = New System.Drawing.Point(12, 144)
+        Me.LabelControl8.Name = "LabelControl8"
+        Me.LabelControl8.Size = New System.Drawing.Size(113, 13)
+        Me.LabelControl8.TabIndex = 8934
+        Me.LabelControl8.Text = "Effective Transfer Date"
         '
         'FormEmpPayrollSetup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(414, 248)
+        Me.ClientSize = New System.Drawing.Size(432, 280)
+        Me.Controls.Add(Me.DEEffDate)
+        Me.Controls.Add(Me.LabelControl8)
         Me.Controls.Add(Me.MemoEdit1)
         Me.Controls.Add(Me.LabelControl6)
         Me.Controls.Add(Me.LabelControl5)
@@ -295,6 +324,8 @@ Partial Class FormEmpPayrollSetup
         CType(Me.TEJPMax.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEKoperasiIuran.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.MemoEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEEffDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEEffDate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -318,4 +349,6 @@ Partial Class FormEmpPayrollSetup
     Friend WithEvents LabelControl5 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LabelControl6 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents MemoEdit1 As DevExpress.XtraEditors.MemoEdit
+    Friend WithEvents DEEffDate As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents LabelControl8 As DevExpress.XtraEditors.LabelControl
 End Class

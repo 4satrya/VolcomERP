@@ -118,10 +118,28 @@
                     newRow("code") = GVProdList.GetRowCellValue(i, "product_full_code").ToString
                     newRow("size") = GVProdList.GetRowCellValue(i, "Size").ToString
                     newRow("sales_order_det_qty") = GVProdList.GetRowCellValue(i, "total_order")
-                    newRow("id_design_price") = GVProdList.GetRowCellValue(i, "id_design_price").ToString
-                    newRow("design_price") = GVProdList.GetRowCellValue(i, "design_price")
-                    newRow("design_price_type") = GVProdList.GetRowCellValue(i, "design_price_type").ToString
-                    newRow("amount") = GVProdList.GetRowCellValue(i, "design_price") * GVProdList.GetRowCellValue(i, "total_order")
+
+                    If FormSalesOrderDet.LEStatusSO.EditValue.ToString = "8" And FormSalesOrderDet.id_store_type = "1" Then 'jika cat claim dan toko normal => harga normal
+                        Dim dtp As DataTable = getNormalPrice(GVProdList.GetRowCellValue(i, "id_design").ToString)
+                        If dtp.Rows.Count > 0 Then
+                            newRow("id_design_price") = dtp(0)("id_design_price").ToString
+                            newRow("design_price") = dtp(0)("design_price")
+                            newRow("design_price_type") = dtp(0)("design_price_type").ToString
+                            newRow("amount") = dtp(0)("design_price") * GVProdList.GetRowCellValue(i, "total_order")
+                        Else
+                            newRow("id_design_price") = GVProdList.GetRowCellValue(i, "id_design_price").ToString
+                            newRow("design_price") = GVProdList.GetRowCellValue(i, "design_price")
+                            newRow("design_price_type") = GVProdList.GetRowCellValue(i, "design_price_type").ToString
+                            newRow("amount") = GVProdList.GetRowCellValue(i, "design_price") * GVProdList.GetRowCellValue(i, "total_order")
+                        End If
+                    Else
+                        newRow("id_design_price") = GVProdList.GetRowCellValue(i, "id_design_price").ToString
+                        newRow("design_price") = GVProdList.GetRowCellValue(i, "design_price")
+                        newRow("design_price_type") = GVProdList.GetRowCellValue(i, "design_price_type").ToString
+                        newRow("amount") = GVProdList.GetRowCellValue(i, "design_price") * GVProdList.GetRowCellValue(i, "total_order")
+                    End If
+
+
                     newRow("sales_order_det_note") = GVProdList.GetRowCellValue(i, "note").ToString
                     newRow("id_design") = GVProdList.GetRowCellValue(i, "id_design").ToString
                     newRow("id_product") = GVProdList.GetRowCellValue(i, "id_product").ToString

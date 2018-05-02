@@ -54,6 +54,12 @@
             FormViewMatRecPurc.Close()
         ElseIf report_mark_type = "17" Then
             FormViewMatRecWO.Close()
+        ElseIf report_mark_type = "18" Then
+            'return out material
+            FormViewMatRetOut.Close()
+        ElseIf report_mark_type = "19" Then
+            'return in material
+            FormViewMatRetIn.Close()
         ElseIf report_mark_type = "22" Then
             'Production Order
             FormViewProduction.Close()
@@ -87,6 +93,9 @@
         ElseIf report_mark_type = "44" Then
             'non production MRS
             FormViewMatMRS.Close()
+        ElseIf report_mark_type = "47" Then
+            'return in mat
+            FormViewMatRetInProd.Close()
         ElseIf report_mark_type = "48" Or report_mark_type = "66" Or report_mark_type = "118" Or report_mark_type = "54" Or report_mark_type = "67" Or report_mark_type = "116" Or report_mark_type = "117" Then
             'invoice/missing/credit note
             FormViewSalesPOS.Close()
@@ -132,6 +141,15 @@
         ElseIf report_mark_type = "126" Then
             'memo over prod
             FormProdOverMemoDet.Close()
+        ElseIf report_mark_type = "128" Then
+            'Asset PO
+            FormAssetPODet.Close()
+        ElseIf report_mark_type = "129" Then
+            'Asset Rec
+            FormAssetRecDet.Close()
+        ElseIf report_mark_type = "130" Then
+            'UNIFORM ORDER
+            FormEmpUniOrderDet.Close()
         End If
     End Sub
     Sub show()
@@ -629,6 +647,21 @@
             FormProdOverMemoDet.action = "upd"
             FormProdOverMemoDet.is_view = "1"
             FormProdOverMemoDet.ShowDialog()
+        ElseIf report_mark_type = "128" Then
+            'Asset PO
+            FormAssetPODet.id_po = id_report
+            FormAssetPODet.is_view = "1"
+            FormAssetPODet.ShowDialog()
+        ElseIf report_mark_type = "129" Then
+            'Asset Rec
+            FormAssetRecDet.id_rec = id_report
+            FormAssetRecDet.is_view = "1"
+            FormAssetRecDet.ShowDialog()
+        ElseIf report_mark_type = "130" Then
+            'uniform
+            FormEmpUniOrderDet.id_sales_order = id_report
+            FormEmpUniOrderDet.is_view = "1"
+            FormEmpUniOrderDet.ShowDialog()
         Else
             'MsgBox(id_report)
             stopCustom("Document Not Found")
@@ -863,7 +896,7 @@
             field_id = "id_pl_prod_order_rec"
             field_number = "pl_prod_order_rec_number"
             field_date = "pl_prod_order_rec_date"
-        ElseIf report_mark_type = "39" Then
+        ElseIf report_mark_type = "39" Or report_mark_type = "130" Then
             'SALES ORDER
             table_name = "tb_sales_order"
             field_id = "id_sales_order"
@@ -1273,6 +1306,18 @@
             field_id = "id_emp_leave"
             field_number = "emp_leave_number"
             field_date = "emp_leave_date"
+        ElseIf report_mark_type = "128" Then
+            'Asset PO
+            table_name = "tb_a_asset_po"
+            field_id = "id_asset_po"
+            field_number = "asset_po_no"
+            field_date = "asset_po_date"
+        ElseIf report_mark_type = "129" Then
+            'Asset Rec
+            table_name = "tb_a_asset_rec"
+            field_id = "id_asset_rec"
+            field_number = "asset_rec_no"
+            field_date = "asset_rec_date"
         Else
             query = "Select '-' AS report_number, NOW() as report_date"
         End If
@@ -1606,6 +1651,21 @@
                 If datax.Rows.Count > 0 Then
                     info_col = datax.Rows(0)("total_qty").ToString
                     info_report = datax.Rows(0)("store").ToString
+                End If
+            ElseIf report_mark_type = "130" Then
+                'uniform ordder
+                query = "SELECT sod.id_sales_order, e.id_employee, e.employee_code,e.employee_name, SUM(sod.sales_order_det_qty) AS `total_qty` 
+                FROM tb_sales_order_det sod
+                INNER JOIN tb_sales_order so ON so.id_sales_order = sod.id_sales_order
+                LEFT JOIN tb_emp_uni_budget b ON b.id_emp_uni_budget = so.id_emp_uni_budget
+                LEFT JOIN tb_m_employee e ON e.id_employee = b.id_employee
+                WHERE sod.id_sales_order=" + id_report + "
+                GROUP BY sod.id_sales_order "
+                Dim datax As DataTable = execute_query(query, -1, True, "", "", "", "")
+                If datax.Rows.Count > 0 Then
+                    info_col = datax.Rows(0)("total_qty").ToString
+                    info_design_code = datax.Rows(0)("employee_code").ToString
+                    info_design = datax.Rows(0)("employee_name").ToString
                 End If
             End If
         End If

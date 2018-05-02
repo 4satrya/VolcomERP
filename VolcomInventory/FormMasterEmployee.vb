@@ -1,5 +1,6 @@
 ﻿Public Class FormMasterEmployee
     Public contract_rvw_date As String = "-1"
+    Public is_salary As String = "-1"
 
     Private Sub FormMasterEmployee_Activated(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Activated
         FormMain.show_rb(Name)
@@ -14,6 +15,28 @@
         Dim query As String = "CALL view_employee('" + cond_param + "', '2')"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCEmployee.DataSource = data
+        '
+        If Not is_salary = "1" Then
+            GVEmployee.Columns("basic_salary").Visible = False
+            GVEmployee.Columns("basic_salary").OptionsColumn.ShowInCustomizationForm = False
+            '
+            GVEmployee.Columns("allow_job").Visible = False
+            GVEmployee.Columns("allow_job").OptionsColumn.ShowInCustomizationForm = False
+            '
+            GVEmployee.Columns("allow_meal").Visible = False
+            GVEmployee.Columns("allow_meal").OptionsColumn.ShowInCustomizationForm = False
+            '
+            GVEmployee.Columns("allow_trans").Visible = False
+            GVEmployee.Columns("allow_trans").OptionsColumn.ShowInCustomizationForm = False
+            '
+            GVEmployee.Columns("allow_car").Visible = False
+            GVEmployee.Columns("allow_car").OptionsColumn.ShowInCustomizationForm = False
+            '
+            GVEmployee.Columns("allow_house").Visible = False
+            GVEmployee.Columns("allow_house").OptionsColumn.ShowInCustomizationForm = False
+
+            gridBandSalary.Visible = False
+        End If
     End Sub
 
     Sub viewEmployeeAge(ByVal cond_param As String, ByVal date_param As String)
@@ -151,5 +174,10 @@
 
     Private Sub FormMasterEmployee_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
         Dispose()
+    End Sub
+
+    Private Sub BImportSalary_Click(sender As Object, e As EventArgs) Handles BImportSalary.Click
+        FormImportExcel.id_pop_up = "34"
+        FormImportExcel.ShowDialog()
     End Sub
 End Class

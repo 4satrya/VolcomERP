@@ -326,20 +326,20 @@ Partial Class FormFGLineList
         '
         'BBPrepEstPrice
         '
-        Me.BBPrepEstPrice.Caption = "Prepare Est Price"
+        Me.BBPrepEstPrice.Caption = "Prepare Data"
         Me.BBPrepEstPrice.Id = 7
         Me.BBPrepEstPrice.Name = "BBPrepEstPrice"
         '
         'BtnImportEstPrice
         '
-        Me.BtnImportEstPrice.Caption = "Import Est Price"
+        Me.BtnImportEstPrice.Caption = "Import Data"
         Me.BtnImportEstPrice.Id = 8
         Me.BtnImportEstPrice.Name = "BtnImportEstPrice"
         '
         'BBSubEstPrice
         '
         Me.BBSubEstPrice.Border = DevExpress.XtraEditors.Controls.BorderStyles.[Default]
-        Me.BBSubEstPrice.Caption = "Estimate Price"
+        Me.BBSubEstPrice.Caption = "Quick Add"
         Me.BBSubEstPrice.Id = 9
         Me.BBSubEstPrice.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.BBPrepEstPrice), New DevExpress.XtraBars.LinkPersistInfo(Me.BtnImportEstPrice)})
         Me.BBSubEstPrice.Name = "BBSubEstPrice"

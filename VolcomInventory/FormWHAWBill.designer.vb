@@ -80,6 +80,7 @@ Partial Class FormWHAWBill
         Me.BandedGridColumn39 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumn28 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.BAWBRec = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnManifest = New DevExpress.XtraEditors.SimpleButton()
         Me.CEDO = New DevExpress.XtraEditors.CheckEdit()
         Me.BView = New DevExpress.XtraEditors.SimpleButton()
@@ -830,6 +831,7 @@ Partial Class FormWHAWBill
         '
         'PanelControl1
         '
+        Me.PanelControl1.Controls.Add(Me.BAWBRec)
         Me.PanelControl1.Controls.Add(Me.BtnManifest)
         Me.PanelControl1.Controls.Add(Me.CEDO)
         Me.PanelControl1.Controls.Add(Me.BView)
@@ -847,6 +849,15 @@ Partial Class FormWHAWBill
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(1273, 39)
         Me.PanelControl1.TabIndex = 1
+        '
+        'BAWBRec
+        '
+        Me.BAWBRec.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BAWBRec.Location = New System.Drawing.Point(1131, 2)
+        Me.BAWBRec.Name = "BAWBRec"
+        Me.BAWBRec.Size = New System.Drawing.Size(140, 35)
+        Me.BAWBRec.TabIndex = 108
+        Me.BAWBRec.Text = "Import AWB Receive Data"
         '
         'BtnManifest
         '
@@ -1813,4 +1824,5 @@ Partial Class FormWHAWBill
     Friend WithEvents GridBand14 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents gridBand6 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents BandedGridColumn28 As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BAWBRec As DevExpress.XtraEditors.SimpleButton
 End Class

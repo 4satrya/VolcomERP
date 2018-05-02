@@ -82,7 +82,7 @@ Partial Class FormEmpUniOrderSingle
         '
         'GridColumnAvail
         '
-        Me.GridColumnAvail.Caption = "Available"
+        Me.GridColumnAvail.Caption = "Stok"
         Me.GridColumnAvail.DisplayFormat.FormatString = "N0"
         Me.GridColumnAvail.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnAvail.FieldName = "qty_avl"
@@ -127,8 +127,6 @@ Partial Class FormEmpUniOrderSingle
         Me.GridColumnPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnPrice.FieldName = "design_price"
         Me.GridColumnPrice.Name = "GridColumnPrice"
-        Me.GridColumnPrice.Visible = True
-        Me.GridColumnPrice.VisibleIndex = 5
         Me.GridColumnPrice.Width = 114
         '
         'PanelControl1

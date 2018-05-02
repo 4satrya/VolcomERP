@@ -4,6 +4,7 @@
     Dim data_dt As DataTable = Nothing
     Dim id_marriage_stattus_db As String = "-1"
 
+    Public is_salary As String = "-1"
     Sub viewSex()
         Dim query As String = "SELECT * FROM tb_lookup_sex a ORDER BY a.id_sex "
         viewLookupQuery(LESex, query, 0, "sex", "id_sex")
@@ -90,6 +91,13 @@
         viewEmployeePosition()
         viewSalary()
         actionLoad()
+        '
+        If is_salary = "1" Then
+            XTPSalary.PageVisible = True
+        Else
+            XTPSalary.PageVisible = False
+        End If
+        '
     End Sub
 
     Sub viewSalary()
@@ -148,6 +156,7 @@
             DERegBPJSKes.EditValue = datarow("employee_bpjs_kesehatan_date")
             TxtNpwp.Text = datarow("employee_npwp").ToString
             TENoRek.Text = datarow("employee_no_rek").ToString
+            TENoRek.Text = datarow("employee_rek_name").ToString
             TxtPhone.Text = datarow("phone").ToString
             TxtMobilePhone.Text = datarow("phone_mobile").ToString
             TxtPhoneExt.Text = datarow("phone_ext").ToString
@@ -179,6 +188,12 @@
                 CEJHT.Checked = True
             Else
                 CEJHT.Checked = False
+            End If
+            '
+            If data.Rows(0)("is_koperasi").ToString = "yes" Then
+                CEKoperasi.Checked = True
+            Else
+                CEKoperasi.Checked = False
             End If
             '
             'load img
@@ -349,6 +364,7 @@
             End Try
             Dim employee_npwp As String = addSlashes(TxtNpwp.Text)
             Dim employee_no_rek As String = addSlashes(TENoRek.Text)
+            Dim employee_rek_name As String = addSlashes(TERekeningName.Text)
             Dim phone As String = TxtPhone.Text
             Dim phone_mobile As String = TxtMobilePhone.Text
             Dim phone_ext As String = TxtPhoneExt.Text
@@ -388,8 +404,8 @@
             '
             If action = "ins" Then
                 'main
-                Dim query As String = "INSERT INTO tb_m_employee(employee_code, employee_name, employee_nick_name, employee_initial_name, employee_join_date, employee_last_date, id_employee_active, id_sex, id_blood_type, employee_pob, employee_dob, id_religion, id_country, employee_ethnic, id_education, employee_ktp, employee_ktp_period, employee_passport, employee_passport_period, employee_bpjs_tk, employee_bpjs_tk_date, employee_bpjs_kesehatan, employee_bpjs_kesehatan_date, employee_npwp, employee_no_rek, address_primary, address_additional, phone, phone_mobile, phone_ext, email_lokal, email_external, email_other,is_bpjs_volcom,is_jp,is_jht,is_koperasi) "
-                query += "VALUES('" + employee_code + "', '" + employee_name + "', '" + employee_nick_name + "', '" + employee_initial_name + "', '" + employee_join_date + "', " + employee_last_date + ", '" + id_employee_active + "', '" + id_sex + "', '" + id_blood_type + "', '" + employee_pob + "', '" + employee_dob + "', '" + id_religion + "', '" + id_country + "', '" + employee_ethnic + "', '" + id_education + "', '" + employee_ktp + "', " + employee_ktp_period + ", '" + employee_passport + "', " + employee_passport_period + ", '" + employee_bpjs_tk + "', " + employee_bpjs_tk_date + ", '" + employee_bpjs_kesehatan + "', " + employee_bpjs_kesehatan_date + ", '" + employee_npwp + "', '" + employee_no_rek + "', '" + address_primary + "', '" + address_additional + "', '" + phone + "', '" + phone_mobile + "', '" + phone_ext + "', '" + email_lokal + "', '" + email_external + "', '" + email_other + "','" & is_bpjs_volcom & "','" & is_jp & "','" & is_jht & "','" & is_koperasi & "'); SELECT LAST_INSERT_ID(); "
+                Dim query As String = "INSERT INTO tb_m_employee(employee_code, employee_name, employee_nick_name, employee_initial_name, employee_join_date, employee_last_date, id_employee_active, id_sex, id_blood_type, employee_pob, employee_dob, id_religion, id_country, employee_ethnic, id_education, employee_ktp, employee_ktp_period, employee_passport, employee_passport_period, employee_bpjs_tk, employee_bpjs_tk_date, employee_bpjs_kesehatan, employee_bpjs_kesehatan_date, employee_npwp, employee_no_rek,employee_rek_name, address_primary, address_additional, phone, phone_mobile, phone_ext, email_lokal, email_external, email_other,is_bpjs_volcom,is_jp,is_jht,is_koperasi) "
+                query += "VALUES('" + employee_code + "', '" + employee_name + "', '" + employee_nick_name + "', '" + employee_initial_name + "', '" + employee_join_date + "', " + employee_last_date + ", '" + id_employee_active + "', '" + id_sex + "', '" + id_blood_type + "', '" + employee_pob + "', '" + employee_dob + "', '" + id_religion + "', '" + id_country + "', '" + employee_ethnic + "', '" + id_education + "', '" + employee_ktp + "', " + employee_ktp_period + ", '" + employee_passport + "', " + employee_passport_period + ", '" + employee_bpjs_tk + "', " + employee_bpjs_tk_date + ", '" + employee_bpjs_kesehatan + "', " + employee_bpjs_kesehatan_date + ", '" + employee_npwp + "', '" + employee_no_rek + "','" + employee_rek_name + "', '" + address_primary + "', '" + address_additional + "', '" + phone + "', '" + phone_mobile + "', '" + phone_ext + "', '" + email_lokal + "', '" + email_external + "', '" + email_other + "','" & is_bpjs_volcom & "','" & is_jp & "','" & is_jht & "','" & is_koperasi & "'); SELECT LAST_INSERT_ID(); "
                 id_employee = execute_query(query, 0, True, "", "", "", "")
 
                 'pic
@@ -433,6 +449,7 @@
                 query += "employee_bpjs_kesehatan_date=" + employee_bpjs_kesehatan_date + ", "
                 query += "employee_npwp='" + employee_npwp + "', "
                 query += "employee_no_rek='" + employee_no_rek + "', "
+                query += "employee_rek_name='" + employee_rek_name + "', "
                 query += "phone='" + phone + "', "
                 query += "phone_mobile='" + phone_mobile + "', "
                 query += "phone_ext='" + phone_ext + "', "
@@ -454,7 +471,11 @@
                 execute_non_query(query, True, "", "", "", "")
 
                 'pic
-                save_image_ori(PEEmployee, emp_image_path, id_employee & ".jpg")
+                Try
+                    save_image_ori(PEEmployee, emp_image_path, id_employee & ".jpg")
+                Catch ex As Exception
+                    infoCustom(ex.ToString)
+                End Try
 
                 'fp
                 setFP(employee_code, employee_name, id_employee_active)

@@ -28,31 +28,42 @@
 
             'cek stok
             Dim check_avail_stc As Boolean = True
-            Dim condition As String = "AND dm.id_emp_uni_period=" + FormEmpUniPeriodDet.id_emp_uni_period + " AND prod.id_product=" + id_product + " "
+            Dim condition As String = "AND dm.id_emp_uni_period=" + FormEmpUniOrderDet.id_emp_uni_period + " AND prod.id_product=" + id_product + " "
             Dim data_stc As DataTable = FormEmpUniOrderDet.checkStock(condition)
             If (data_stc.Rows.Count <= 0) Or data_stc.Rows(0)("qty_avl") <= 0 Then
                 check_avail_stc = False
             End If
 
             'cek budget
-            Dim total As Decimal = FormEmpUniOrderDet.TxtTotal.EditValue + GVDesign.GetFocusedRowCellValue("design_cop")
+            Dim total As Decimal = FormEmpUniOrderDet.TxtTotal.EditValue + GVDesign.GetFocusedRowCellValue("point")
 
             If check_existing Then
-                stopCustom("Product already order")
+                stopCustom("Product sudah dipilih")
                 Close()
             ElseIf Not check_avail_stc Then
-                stopCustom("There is no available quantity")
+                stopCustom("Stok sudah habis")
             ElseIf total > FormEmpUniOrderDet.Txtbudget.EditValue Then
-                stopCustom("Exceed maximum order : " + FormEmpUniOrderDet.TxtBudget.Text.ToString)
+                stopCustom("Budget tidak mencukupi")
                 Close()
             Else
+                Cursor = Cursors.WaitCursor
                 Dim query As String = "INSERT INTO tb_sales_order_det(id_sales_order, id_product, id_design_price, design_price, sales_order_det_qty, sales_order_det_note) VALUES 
-                ('" + FormEmpUniOrderDet.id_sales_order + "','" + id_product + "','" + id_design_price + "','" + design_price + "','1','') "
-                execute_non_query(query, True, "", "", "", "")
+                ('" + FormEmpUniOrderDet.id_sales_order + "','" + id_product + "','" + id_design_price + "','" + design_price + "','1',''); SELECT LAST_INSERT_ID(); "
+                Dim id_new As String = execute_query(query, 0, True, "", "", "", "")
+
+                'cek lg
+                data_stc = Nothing
+                data_stc = FormEmpUniOrderDet.checkStock(condition)
+                If (data_stc.Rows.Count <= 0) Or data_stc.Rows(0)("qty_avl") < 0 Then
+                    Dim qdel As String = "DELETE FROM tb_sales_order_det WHERE id_sales_order_det=" + id_new + " "
+                    execute_non_query(qdel, True, "", "", "", "")
+                    stopCustom("Stok sudah habis")
+                End If
 
                 'refresh
                 FormEmpUniOrderDet.actionLoad()
                 Close()
+                Cursor = Cursors.Default
             End If
 
             Cursor = Cursors.Default

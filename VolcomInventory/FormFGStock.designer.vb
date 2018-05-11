@@ -50,6 +50,7 @@ Partial Class FormFGStock
         Me.GridColumnTotal = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.GridColumnAmoTotal = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.GroupControl4 = New DevExpress.XtraEditors.GroupControl()
+        Me.LabelControl8 = New DevExpress.XtraEditors.LabelControl()
         Me.CheckEdit1 = New DevExpress.XtraEditors.CheckEdit()
         Me.TxtDesign = New DevExpress.XtraEditors.TextEdit()
         Me.TxtDesignCode = New DevExpress.XtraEditors.TextEdit()
@@ -187,7 +188,7 @@ Partial Class FormFGStock
         Me.TxtCodeDsgRsv = New DevExpress.XtraEditors.TextEdit()
         Me.TxtNameDsgRsv = New DevExpress.XtraEditors.TextEdit()
         Me.GridColumn51 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.LabelControl8 = New DevExpress.XtraEditors.LabelControl()
+        Me.SimpleButton1 = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.XTCFGStock, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCFGStock.SuspendLayout()
         Me.XTPFGStockWHSum.SuspendLayout()
@@ -569,6 +570,7 @@ Partial Class FormFGStock
         '
         Me.GroupControl4.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.UltraFlat
         Me.GroupControl4.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupControl4.Controls.Add(Me.SimpleButton1)
         Me.GroupControl4.Controls.Add(Me.LabelControl8)
         Me.GroupControl4.Controls.Add(Me.CheckEdit1)
         Me.GroupControl4.Controls.Add(Me.TxtDesign)
@@ -591,6 +593,14 @@ Partial Class FormFGStock
         Me.GroupControl4.Size = New System.Drawing.Size(1164, 56)
         Me.GroupControl4.TabIndex = 18
         Me.GroupControl4.Text = "Filter"
+        '
+        'LabelControl8
+        '
+        Me.LabelControl8.Location = New System.Drawing.Point(867, 23)
+        Me.LabelControl8.Name = "LabelControl8"
+        Me.LabelControl8.Size = New System.Drawing.Size(126, 13)
+        Me.LabelControl8.TabIndex = 8904
+        Me.LabelControl8.Text = "Press F7 to show unit cost"
         '
         'CheckEdit1
         '
@@ -1971,13 +1981,15 @@ Partial Class FormFGStock
         Me.GridColumn51.Visible = True
         Me.GridColumn51.VisibleIndex = 0
         '
-        'LabelControl8
+        'SimpleButton1
         '
-        Me.LabelControl8.Location = New System.Drawing.Point(867, 23)
-        Me.LabelControl8.Name = "LabelControl8"
-        Me.LabelControl8.Size = New System.Drawing.Size(126, 13)
-        Me.LabelControl8.TabIndex = 8904
-        Me.LabelControl8.Text = "Press F7 to show unit cost"
+        Me.SimpleButton1.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SimpleButton1.Appearance.Options.UseFont = True
+        Me.SimpleButton1.Location = New System.Drawing.Point(999, 19)
+        Me.SimpleButton1.Name = "SimpleButton1"
+        Me.SimpleButton1.Size = New System.Drawing.Size(103, 23)
+        Me.SimpleButton1.TabIndex = 8905
+        Me.SimpleButton1.Text = "View Dummy"
         '
         'FormFGStock
         '
@@ -2255,4 +2267,5 @@ Partial Class FormFGStock
     Friend WithEvents gridBand3 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents gridBand4 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents LabelControl8 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents SimpleButton1 As DevExpress.XtraEditors.SimpleButton
 End Class

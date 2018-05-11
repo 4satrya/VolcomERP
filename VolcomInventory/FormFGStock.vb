@@ -1279,4 +1279,65 @@
             FormMenuAuth.ShowDialog()
         End If
     End Sub
+
+    Private Sub SimpleButton1_Click(sender As Object, e As EventArgs) Handles SimpleButton1.Click
+        Cursor = Cursors.WaitCursor
+
+        'Clear List code
+        special_code_list.Clear()
+
+        'Prepare paramater
+        date_until_selected_stock_sum = "9999-01-01"
+        Try
+            date_until_selected_stock_sum = DateTime.Parse(DEUntilStockFG.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+
+        Try
+            id_wh_param_selected = SLEWHStockSum.EditValue.ToString
+            id_locator_param_selected = SLELocatorStockSum.EditValue.ToString
+            id_rack_param_selected = SLERackStockSum.EditValue.ToString
+            id_drawer_param_selected = SLEDrawerStockSum.EditValue.ToString
+        Catch ex As Exception
+        End Try
+
+        'set selected
+        If id_design_selected_stock_sum = "0" Then
+            label_design_selected_stock_sum = "All Design"
+        Else
+            label_design_selected_stock_sum = TxtDesignCode.Text
+        End If
+
+        If id_wh_param_selected = "0" Then
+            label_wh_selected_stock_sum = "All WH"
+        Else
+            label_wh_selected_stock_sum = SLEWHStockSum.Properties.View.GetFocusedRowCellValue("comp_name_label").ToString
+        End If
+
+        If id_locator_param_selected = "0" Then
+            label_locator_selected_stock_sum = "All Locator"
+        Else
+            label_locator_selected_stock_sum = SLELocatorStockSum.Properties.View.GetFocusedRowCellValue("locator_label").ToString
+        End If
+
+        If id_rack_param_selected = "0" Then
+            label_rack_selected_stock_sum = "All Rack"
+        Else
+            label_rack_selected_stock_sum = SLERackStockSum.Properties.View.GetFocusedRowCellValue("rack_label").ToString
+        End If
+
+        If id_drawer_param_selected = "0" Then
+            label_drawer_selected_stock_sum = "All Drawer"
+        Else
+            label_drawer_selected_stock_sum = SLEDrawerStockSum.Properties.View.GetFocusedRowCellValue("drawer_label").ToString
+        End If
+        Dim query As String = "CALL view_stock_fg_dummy('" + id_wh_param_selected + "', '" + id_locator_param_selected + "', '" + id_rack_param_selected + "', '" + id_drawer_param_selected + "', '" + id_product_selected_stock_sum + "', 4, '" + date_until_selected_stock_sum + "') "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCStockBarcode.DataSource = data
+        If Not show_cost Then
+            BGVStockBarcode.Columns("design_cop").Visible = False
+            BGVStockBarcode.Columns("design_cop").OptionsColumn.ShowInCustomizationForm = False
+        End If
+        Cursor = Cursors.Default
+    End Sub
 End Class

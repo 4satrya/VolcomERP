@@ -53,7 +53,7 @@
         If LECat.EditValue.ToString <> "0" Then
             cond_cat = "AND c.id_item_cat = '" + LECat.EditValue.ToString + "' "
         End If
-        Dim query As String = "SELECT coa.acc_name AS `exp_acc`, coa.acc_description AS `exp_description`, cat.item_cat, et.expense_type,
+        Dim query As String = "SELECT c.id_item_coa,coa.acc_name AS `exp_acc`, coa.acc_description AS `exp_description`, cat.item_cat, et.expense_type,
         IFNULL(SUM(case when MONTH(em.month) = '1' THEN em.value_expense END),0) AS `1_budget`,
         IFNULL(SUM(case when MONTH(em.month) = '2' THEN em.value_expense END),0) AS `2_budget`,
         IFNULL(SUM(case when MONTH(em.month) = '3' THEN em.value_expense END),0) AS `3_budget`,
@@ -137,11 +137,72 @@
         FormMain.hide_rb()
     End Sub
 
+    Dim dtb_hist As DataTable = Nothing
     Private Sub CEBudgetHistory_CheckedChanged(sender As Object, e As EventArgs) Handles CEBudgetHistory.CheckedChanged
+        dtb_hist = Nothing
         If CEBudgetHistory.EditValue = True Then
             GroupControlBudgetRevision.Visible = True
+            Dim query As String = "SELECT c.id_item_coa, m.month, CONCAT(MONTH(m.month),'_','budget') AS `col_name`, COUNT(m.month) AS `jum` 
+            FROM tb_b_expense_month_log ml
+            INNER JOIN tb_b_expense_month m ON m.id_b_expense_month = ml.id_b_expense_month
+            INNER JOIN tb_b_expense e ON e.id_b_expense = m.id_b_expense
+            INNER JOIN tb_item_coa c ON c.id_item_coa = e.id_item_coa
+            WHERE e.year='" + LEYear.EditValue.ToString + "' AND c.id_departement='" + LEDeptSum.EditValue.ToString + "'
+            GROUP BY c.id_item_coa,m.month
+            HAVING jum>1 "
+            dtb_hist = execute_query(query, -1, True, "", "", "", "")
         Else
             GroupControlBudgetRevision.Visible = False
         End If
+        AddHandler GVData.RowCellStyle, AddressOf custom_cell
+        GCData.Focus()
+    End Sub
+
+    Public Sub custom_cell(ByVal sender As System.Object, ByVal e As DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs)
+        Dim View As DevExpress.XtraGrid.Views.Grid.GridView = sender
+
+        Dim currview As DevExpress.XtraGrid.Views.Grid.GridView = TryCast(sender, DevExpress.XtraGrid.Views.Grid.GridView)
+        MsgBox(e.RowHandle.ToString)
+        'Dim jum As Integer = 0
+        'Try
+        '    jum = dtb_hist.Rows.Count
+        'Catch ex As Exception
+        '    jum = 0
+        'End Try
+        'If jum > 0 Then
+        '    For i As Integer = 0 To dtb_hist.Rows.Count - 1
+        '        If e.Column.FieldName.ToString = dtb_hist.Rows(i)("col_name").ToString Then
+        '            If currview.GetRowCellValue(e.RowHandle, "id_item_coa").ToString = dtb_hist.Rows(i)("id_item_coa").ToString Then
+        '                e.Appearance.BackColor = Color.YellowGreen
+        '            Else
+        '                e.Appearance.BackColor = Color.Empty
+        '            End If
+        '        Else
+        '            e.Appearance.BackColor = Color.Empty
+        '        End If
+        '    Next
+        'Else
+        '    e.Appearance.BackColor = Color.Empty
+        'End If
+
+
+
+        'For i As Integer = 1 To 12
+        '    If e.Column.FieldName.ToString = i.ToString + "_budget" Or e.Column.FieldName.ToString = i.ToString + "_actual" Then
+        '        If currview.GetRowCellValue(e.RowHandle, i.ToString + "_budget") <> currview.GetRowCellValue(e.RowHandle, i.ToString + "_actual") Then
+        '            If CEShowHiglights.EditValue = True Then
+        '                If e.Column.FieldName.ToString = i.ToString + "_actual" Then
+        '                    e.Appearance.BackColor = Color.LightSeaGreen
+        '                Else
+        '                    e.Appearance.BackColor = Color.Crimson
+        '                End If
+        '            Else
+        '                e.Appearance.BackColor = Color.Empty
+        '            End If
+        '        Else
+        '            e.Appearance.BackColor = Color.Empty
+        '        End If
+        '    End If
+        'Next
     End Sub
 End Class

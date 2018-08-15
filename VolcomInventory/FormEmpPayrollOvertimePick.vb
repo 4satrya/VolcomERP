@@ -211,7 +211,7 @@
         Return tot_point
     End Function
 
-    Function calc_hour(ByVal ot_start As Date, ByVal ot_end As Date, ByVal break As Integer)
+    Function calc_hour(ByVal ot_start As Date, ByVal ot_end As Date, ByVal break As Decimal)
         Dim diff As Decimal = 0.0
 
         If Not ot_start > ot_end Then
@@ -248,7 +248,7 @@
             Try
                 Dim ot_start As Date = GVSchedule.GetFocusedRowCellValue("ot_in")
                 Dim ot_end As Date = GVSchedule.GetFocusedRowCellValue("ot_out")
-                Dim ot_break As Integer = GVSchedule.GetFocusedRowCellValue("ot_break")
+                Dim ot_break As Decimal = GVSchedule.GetFocusedRowCellValue("ot_break")
 
                 Dim tot_hour As Decimal = calc_hour(ot_start, ot_end, ot_break)
                 Dim id_sch_type As String = GVSchedule.GetFocusedRowCellValue("id_schedule_type").ToString

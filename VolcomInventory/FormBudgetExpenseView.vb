@@ -54,18 +54,18 @@
             cond_cat = "AND c.id_item_cat = '" + LECat.EditValue.ToString + "' "
         End If
         Dim query As String = "SELECT coa.acc_name AS `exp_acc`, coa.acc_description AS `exp_description`, cat.item_cat, et.expense_type,
-        SUM(case when MONTH(em.month) = '1' THEN em.value_expense END) AS `1_budget`,
-        SUM(case when MONTH(em.month) = '2' THEN em.value_expense END) AS `2_budget`,
-        SUM(case when MONTH(em.month) = '3' THEN em.value_expense END) AS `3_budget`,
-        SUM(case when MONTH(em.month) = '4' THEN em.value_expense END) AS `4_budget`,
-        SUM(case when MONTH(em.month) = '5' THEN em.value_expense END) AS `5_budget`,
-        SUM(case when MONTH(em.month) = '6' THEN em.value_expense END) AS `6_budget`,
-        SUM(case when MONTH(em.month) = '7' THEN em.value_expense END) AS `7_budget`,
-        SUM(case when MONTH(em.month) = '8' THEN em.value_expense END) AS `8_budget`,
-        SUM(case when MONTH(em.month) = '9' THEN em.value_expense END) AS `9_budget`,
-        SUM(case when MONTH(em.month) = '10' THEN em.value_expense END) AS `10_budget`,
-        SUM(case when MONTH(em.month) = '11' THEN em.value_expense END) AS `11_budget`,
-        SUM(case when MONTH(em.month) = '12' THEN em.value_expense END) AS `12_budget`,
+        IFNULL(SUM(case when MONTH(em.month) = '1' THEN em.value_expense END),0) AS `1_budget`,
+        IFNULL(SUM(case when MONTH(em.month) = '2' THEN em.value_expense END),0) AS `2_budget`,
+        IFNULL(SUM(case when MONTH(em.month) = '3' THEN em.value_expense END),0) AS `3_budget`,
+        IFNULL(SUM(case when MONTH(em.month) = '4' THEN em.value_expense END),0) AS `4_budget`,
+        IFNULL(SUM(case when MONTH(em.month) = '5' THEN em.value_expense END),0) AS `5_budget`,
+        IFNULL(SUM(case when MONTH(em.month) = '6' THEN em.value_expense END),0) AS `6_budget`,
+        IFNULL(SUM(case when MONTH(em.month) = '7' THEN em.value_expense END),0) AS `7_budget`,
+        IFNULL(SUM(case when MONTH(em.month) = '8' THEN em.value_expense END),0) AS `8_budget`,
+        IFNULL(SUM(case when MONTH(em.month) = '9' THEN em.value_expense END),0) AS `9_budget`,
+        IFNULL(SUM(case when MONTH(em.month) = '10' THEN em.value_expense END),0) AS `10_budget`,
+        IFNULL(SUM(case when MONTH(em.month) = '11' THEN em.value_expense END),0) AS `11_budget`,
+        IFNULL(SUM(case when MONTH(em.month) = '12' THEN em.value_expense END),0) AS `12_budget`,
         0 AS `1_actual`,
         0 AS `2_actual`,
         0 AS `3_actual`,
@@ -79,11 +79,11 @@
         0 AS `11_actual`,
         0 AS `12_actual`
         FROM tb_b_expense_month em
-        INNER JOIN tb_b_expense e ON e.id_b_expense = em.id_b_expense
-        INNER JOIN tb_item_coa c ON c.id_item_coa = e.id_item_coa
-        INNER JOIN tb_item_cat cat ON cat.id_item_cat = c.id_item_cat
-        INNER JOIN tb_lookup_expense_type et ON et.id_expense_type = cat.id_expense_type
-        INNER JOIN tb_a_acc coa ON coa.id_acc = c.id_coa_out
+        LEFT JOIN tb_b_expense e ON e.id_b_expense = em.id_b_expense
+        LEFT JOIN tb_item_coa c ON c.id_item_coa = e.id_item_coa
+        LEFT JOIN tb_item_cat cat ON cat.id_item_cat = c.id_item_cat
+        LEFT JOIN tb_lookup_expense_type et ON et.id_expense_type = cat.id_expense_type
+        LEFT JOIN tb_a_acc coa ON coa.id_acc = c.id_coa_out
         WHERE c.id_departement='" + LEDeptSum.EditValue.ToString + "' AND e.year='" + LEYear.Text.ToString + "' 
         " + cond_cat + "
         GROUP BY e.id_item_coa "
@@ -135,5 +135,13 @@
 
     Private Sub FormBudgetExpenseView_Deactivate(sender As Object, e As EventArgs) Handles MyBase.Deactivate
         FormMain.hide_rb()
+    End Sub
+
+    Private Sub CEBudgetHistory_CheckedChanged(sender As Object, e As EventArgs) Handles CEBudgetHistory.CheckedChanged
+        If CEBudgetHistory.EditValue = True Then
+            GroupControlBudgetRevision.Visible = True
+        Else
+            GroupControlBudgetRevision.Visible = False
+        End If
     End Sub
 End Class

@@ -61,7 +61,9 @@
     Sub load_req()
         Dim where_dep As String = ""
         '
-        where_dep = " WHERE dep.id_departement='" & SLEDepartement.EditValue.ToString() & "'"
+        If Not SLEDepartement.EditValue.ToString() = 0 Then
+            where_dep = " WHERE dep.id_departement='" & SLEDepartement.EditValue.ToString() & "'"
+        End If
         '
         Dim query As String = "SELECT pr.`id_purc_req`,dep.`departement`,pr.`purc_req_number`,pr.`note`,empc.`employee_name` AS created_by,pr.`date_created`,empu.`employee_name` AS last_upd_by,pr.`date_last_upd` FROM `tb_purc_req` pr
                                 INNER JOIN tb_m_departement dep ON dep.id_departement=pr.id_departement

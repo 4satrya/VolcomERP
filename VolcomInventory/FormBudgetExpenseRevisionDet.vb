@@ -69,18 +69,18 @@
         IFNULL(v.`10_budget`,0) AS `10_budget`,
         IFNULL(v.`11_budget`,0) AS `11_budget`,
         IFNULL(v.`12_budget`,0) AS `12_budget`,
-        IFNULL(r.`1_rev`,v.`1_budget`) AS `1_actual`,
-        IFNULL(r.`2_rev`,v.`2_budget`) AS `2_actual`,
-        IFNULL(r.`3_rev`,v.`3_budget`) AS `3_actual`,
-        IFNULL(r.`4_rev`,v.`4_budget`) AS `4_actual`,
-        IFNULL(r.`5_rev`,v.`5_budget`) AS `5_actual`,
-        IFNULL(r.`6_rev`,v.`6_budget`) AS `6_actual`,
-        IFNULL(r.`7_rev`,v.`7_budget`) AS `7_actual`,
-        IFNULL(r.`8_rev`,v.`8_budget`) AS `8_actual`,
-        IFNULL(r.`9_rev`,v.`9_budget`) AS `9_actual`,
-        IFNULL(r.`10_rev`,v.`10_budget`) AS `10_actual`,
-        IFNULL(r.`11_rev`,v.`11_budget`) AS `11_actual`,
-        IFNULL(r.`12_rev`,v.`12_budget`) AS `12_actual`
+        IFNULL(r.`1_rev`,IFNULL(v.`1_budget`,0)) AS `1_actual`,
+        IFNULL(r.`2_rev`,IFNULL(v.`2_budget`,0)) AS `2_actual`,
+        IFNULL(r.`3_rev`,IFNULL(v.`3_budget`,0)) AS `3_actual`,
+        IFNULL(r.`4_rev`,IFNULL(v.`4_budget`,0)) AS `4_actual`,
+        IFNULL(r.`5_rev`,IFNULL(v.`5_budget`,0)) AS `5_actual`,
+        IFNULL(r.`6_rev`,IFNULL(v.`6_budget`,0)) AS `6_actual`,
+        IFNULL(r.`7_rev`,IFNULL(v.`7_budget`,0)) AS `7_actual`,
+        IFNULL(r.`8_rev`,IFNULL(v.`8_budget`,0)) AS `8_actual`,
+        IFNULL(r.`9_rev`,IFNULL(v.`9_budget`,0)) AS `9_actual`,
+        IFNULL(r.`10_rev`,IFNULL(v.`10_budget`,0)) AS `10_actual`,
+        IFNULL(r.`11_rev`,IFNULL(v.`11_budget`,0)) AS `11_actual`,
+        IFNULL(r.`12_rev`,IFNULL(v.`12_budget`,0)) AS `12_actual`
         FROM tb_item_coa c
         INNER JOIN tb_item_cat cat ON cat.id_item_cat = c.id_item_cat
         INNER JOIN tb_lookup_expense_type et ON et.id_expense_type = cat.id_expense_type
@@ -151,10 +151,12 @@
             BtnConfirm.Visible = True
             BtnMark.Visible = False
             MENote.Enabled = True
+            GVData.OptionsBehavior.Editable = True
         Else
             BtnConfirm.Visible = False
             BtnMark.Visible = True
             MENote.Enabled = False
+            GVData.OptionsBehavior.Editable = False
         End If
 
         If id_report_status = "6" Then
@@ -165,6 +167,7 @@
             BtnConfirm.Visible = False
             MENote.Enabled = False
             BtnPrint.Visible = False
+            GVData.OptionsBehavior.Editable = False
         End If
     End Sub
 
@@ -338,7 +341,12 @@
             'cari id month
             Dim qm As String = "SELECT IFNULL(m.id_b_expense_month,0) AS id_b_expense_month FROM tb_b_expense_month m
             WHERE m.id_b_expense='" + id_b_expense + "' AND m.month='" + month + "' "
-            Dim id_b_expense_month As String = execute_query(qm, 0, True, "", "", "", "")
+            Dim id_b_expense_month As String = "0"
+            Try
+                id_b_expense_month = execute_query(qm, 0, True, "", "", "", "")
+            Catch ex As Exception
+                id_b_expense_month = "0"
+            End Try
             If id_b_expense_month = "0" Then
                 id_b_expense_month = "NULL"
             End If

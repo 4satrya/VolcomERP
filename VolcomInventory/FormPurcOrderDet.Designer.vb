@@ -23,15 +23,23 @@ Partial Class FormPurcOrderDet
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormPurcOrderDet))
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
         Me.PanelControl4 = New DevExpress.XtraEditors.PanelControl()
-        Me.TextEdit1 = New DevExpress.XtraEditors.TextEdit()
+        Me.TEVendorEmail = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl14 = New DevExpress.XtraEditors.LabelControl()
+        Me.TEVendorFax = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl13 = New DevExpress.XtraEditors.LabelControl()
+        Me.TEVendorPhone = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl11 = New DevExpress.XtraEditors.LabelControl()
+        Me.TEVendorAttn = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
-        Me.TxtNameCompTo = New DevExpress.XtraEditors.TextEdit()
+        Me.TEVendorName = New DevExpress.XtraEditors.TextEdit()
         Me.MEAdrressCompTo = New DevExpress.XtraEditors.MemoEdit()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
-        Me.TxtCodeCompTo = New DevExpress.XtraEditors.TextEdit()
-        Me.BtnBrowseContactTo = New DevExpress.XtraEditors.SimpleButton()
+        Me.TEVendorCode = New DevExpress.XtraEditors.TextEdit()
+        Me.BPickVendor = New DevExpress.XtraEditors.SimpleButton()
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
         Me.PanelControlTopRight = New DevExpress.XtraEditors.PanelControl()
+        Me.DEEstReceiveDate = New DevExpress.XtraEditors.DateEdit()
+        Me.LabelControl12 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl10 = New DevExpress.XtraEditors.LabelControl()
         Me.LookUpEdit1 = New DevExpress.XtraEditors.LookUpEdit()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
@@ -107,12 +115,17 @@ Partial Class FormPurcOrderDet
         Me.PanelControl2.SuspendLayout()
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl4.SuspendLayout()
-        CType(Me.TextEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TxtNameCompTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TEVendorEmail.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TEVendorFax.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TEVendorPhone.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TEVendorAttn.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TEVendorName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.MEAdrressCompTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TxtCodeCompTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TEVendorCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControlTopRight, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlTopRight.SuspendLayout()
+        CType(Me.DEEstReceiveDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEEstReceiveDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LookUpEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEDateCreated.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEDateCreated.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -156,41 +169,122 @@ Partial Class FormPurcOrderDet
         Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl2.Location = New System.Drawing.Point(0, 0)
         Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(953, 122)
+        Me.PanelControl2.Size = New System.Drawing.Size(953, 147)
         Me.PanelControl2.TabIndex = 2
         '
         'PanelControl4
         '
         Me.PanelControl4.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
-        Me.PanelControl4.Controls.Add(Me.TextEdit1)
+        Me.PanelControl4.Controls.Add(Me.TEVendorEmail)
+        Me.PanelControl4.Controls.Add(Me.LabelControl14)
+        Me.PanelControl4.Controls.Add(Me.TEVendorFax)
+        Me.PanelControl4.Controls.Add(Me.LabelControl13)
+        Me.PanelControl4.Controls.Add(Me.TEVendorPhone)
+        Me.PanelControl4.Controls.Add(Me.LabelControl11)
+        Me.PanelControl4.Controls.Add(Me.TEVendorAttn)
         Me.PanelControl4.Controls.Add(Me.LabelControl4)
-        Me.PanelControl4.Controls.Add(Me.TxtNameCompTo)
+        Me.PanelControl4.Controls.Add(Me.TEVendorName)
         Me.PanelControl4.Controls.Add(Me.MEAdrressCompTo)
         Me.PanelControl4.Controls.Add(Me.LabelControl1)
-        Me.PanelControl4.Controls.Add(Me.TxtCodeCompTo)
-        Me.PanelControl4.Controls.Add(Me.BtnBrowseContactTo)
+        Me.PanelControl4.Controls.Add(Me.TEVendorCode)
+        Me.PanelControl4.Controls.Add(Me.BPickVendor)
         Me.PanelControl4.Controls.Add(Me.LabelControl3)
         Me.PanelControl4.Dock = System.Windows.Forms.DockStyle.Left
         Me.PanelControl4.Location = New System.Drawing.Point(2, 2)
         Me.PanelControl4.Name = "PanelControl4"
-        Me.PanelControl4.Size = New System.Drawing.Size(423, 118)
+        Me.PanelControl4.Size = New System.Drawing.Size(423, 143)
         Me.PanelControl4.TabIndex = 8937
         '
-        'TextEdit1
+        'TEVendorEmail
         '
-        Me.TextEdit1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.TEVendorEmail.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextEdit1.EditValue = ""
-        Me.TextEdit1.Enabled = False
-        Me.TextEdit1.Location = New System.Drawing.Point(100, 88)
-        Me.TextEdit1.Name = "TextEdit1"
-        Me.TextEdit1.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextEdit1.Properties.Appearance.Options.UseFont = True
-        Me.TextEdit1.Properties.EditValueChangedDelay = 1
-        Me.TextEdit1.Properties.ReadOnly = True
-        Me.TextEdit1.Size = New System.Drawing.Size(312, 20)
-        Me.TextEdit1.TabIndex = 8896
-        Me.TextEdit1.TabStop = False
+        Me.TEVendorEmail.EditValue = ""
+        Me.TEVendorEmail.Enabled = False
+        Me.TEVendorEmail.Location = New System.Drawing.Point(272, 88)
+        Me.TEVendorEmail.Name = "TEVendorEmail"
+        Me.TEVendorEmail.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TEVendorEmail.Properties.Appearance.Options.UseFont = True
+        Me.TEVendorEmail.Properties.EditValueChangedDelay = 1
+        Me.TEVendorEmail.Properties.ReadOnly = True
+        Me.TEVendorEmail.Size = New System.Drawing.Size(140, 20)
+        Me.TEVendorEmail.TabIndex = 8902
+        Me.TEVendorEmail.TabStop = False
+        '
+        'LabelControl14
+        '
+        Me.LabelControl14.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl14.Location = New System.Drawing.Point(237, 91)
+        Me.LabelControl14.Name = "LabelControl14"
+        Me.LabelControl14.Size = New System.Drawing.Size(24, 13)
+        Me.LabelControl14.TabIndex = 8901
+        Me.LabelControl14.Text = "Email"
+        '
+        'TEVendorFax
+        '
+        Me.TEVendorFax.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TEVendorFax.EditValue = ""
+        Me.TEVendorFax.Enabled = False
+        Me.TEVendorFax.Location = New System.Drawing.Point(272, 114)
+        Me.TEVendorFax.Name = "TEVendorFax"
+        Me.TEVendorFax.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TEVendorFax.Properties.Appearance.Options.UseFont = True
+        Me.TEVendorFax.Properties.EditValueChangedDelay = 1
+        Me.TEVendorFax.Properties.ReadOnly = True
+        Me.TEVendorFax.Size = New System.Drawing.Size(140, 20)
+        Me.TEVendorFax.TabIndex = 8900
+        Me.TEVendorFax.TabStop = False
+        '
+        'LabelControl13
+        '
+        Me.LabelControl13.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl13.Location = New System.Drawing.Point(237, 117)
+        Me.LabelControl13.Name = "LabelControl13"
+        Me.LabelControl13.Size = New System.Drawing.Size(18, 13)
+        Me.LabelControl13.TabIndex = 8899
+        Me.LabelControl13.Text = "Fax"
+        '
+        'TEVendorPhone
+        '
+        Me.TEVendorPhone.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TEVendorPhone.EditValue = ""
+        Me.TEVendorPhone.Enabled = False
+        Me.TEVendorPhone.Location = New System.Drawing.Point(100, 114)
+        Me.TEVendorPhone.Name = "TEVendorPhone"
+        Me.TEVendorPhone.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TEVendorPhone.Properties.Appearance.Options.UseFont = True
+        Me.TEVendorPhone.Properties.EditValueChangedDelay = 1
+        Me.TEVendorPhone.Properties.ReadOnly = True
+        Me.TEVendorPhone.Size = New System.Drawing.Size(131, 20)
+        Me.TEVendorPhone.TabIndex = 8898
+        Me.TEVendorPhone.TabStop = False
+        '
+        'LabelControl11
+        '
+        Me.LabelControl11.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl11.Location = New System.Drawing.Point(10, 117)
+        Me.LabelControl11.Name = "LabelControl11"
+        Me.LabelControl11.Size = New System.Drawing.Size(30, 13)
+        Me.LabelControl11.TabIndex = 8897
+        Me.LabelControl11.Text = "Phone"
+        '
+        'TEVendorAttn
+        '
+        Me.TEVendorAttn.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TEVendorAttn.EditValue = ""
+        Me.TEVendorAttn.Enabled = False
+        Me.TEVendorAttn.Location = New System.Drawing.Point(100, 88)
+        Me.TEVendorAttn.Name = "TEVendorAttn"
+        Me.TEVendorAttn.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TEVendorAttn.Properties.Appearance.Options.UseFont = True
+        Me.TEVendorAttn.Properties.EditValueChangedDelay = 1
+        Me.TEVendorAttn.Properties.ReadOnly = True
+        Me.TEVendorAttn.Size = New System.Drawing.Size(131, 20)
+        Me.TEVendorAttn.TabIndex = 8896
+        Me.TEVendorAttn.TabStop = False
         '
         'LabelControl4
         '
@@ -201,21 +295,21 @@ Partial Class FormPurcOrderDet
         Me.LabelControl4.TabIndex = 8895
         Me.LabelControl4.Text = "Attention"
         '
-        'TxtNameCompTo
+        'TEVendorName
         '
-        Me.TxtNameCompTo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.TEVendorName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtNameCompTo.EditValue = ""
-        Me.TxtNameCompTo.Enabled = False
-        Me.TxtNameCompTo.Location = New System.Drawing.Point(172, 10)
-        Me.TxtNameCompTo.Name = "TxtNameCompTo"
-        Me.TxtNameCompTo.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtNameCompTo.Properties.Appearance.Options.UseFont = True
-        Me.TxtNameCompTo.Properties.EditValueChangedDelay = 1
-        Me.TxtNameCompTo.Properties.ReadOnly = True
-        Me.TxtNameCompTo.Size = New System.Drawing.Size(208, 20)
-        Me.TxtNameCompTo.TabIndex = 8894
-        Me.TxtNameCompTo.TabStop = False
+        Me.TEVendorName.EditValue = ""
+        Me.TEVendorName.Enabled = False
+        Me.TEVendorName.Location = New System.Drawing.Point(172, 10)
+        Me.TEVendorName.Name = "TEVendorName"
+        Me.TEVendorName.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TEVendorName.Properties.Appearance.Options.UseFont = True
+        Me.TEVendorName.Properties.EditValueChangedDelay = 1
+        Me.TEVendorName.Properties.ReadOnly = True
+        Me.TEVendorName.Size = New System.Drawing.Size(208, 20)
+        Me.TEVendorName.TabIndex = 8894
+        Me.TEVendorName.TabStop = False
         '
         'MEAdrressCompTo
         '
@@ -240,28 +334,28 @@ Partial Class FormPurcOrderDet
         Me.LabelControl1.TabIndex = 8891
         Me.LabelControl1.Text = "Vendor"
         '
-        'TxtCodeCompTo
+        'TEVendorCode
         '
-        Me.TxtCodeCompTo.EditValue = ""
-        Me.TxtCodeCompTo.Location = New System.Drawing.Point(100, 10)
-        Me.TxtCodeCompTo.Name = "TxtCodeCompTo"
-        Me.TxtCodeCompTo.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtCodeCompTo.Properties.Appearance.Options.UseFont = True
-        Me.TxtCodeCompTo.Properties.EditValueChangedDelay = 1
-        Me.TxtCodeCompTo.Size = New System.Drawing.Size(66, 20)
-        Me.TxtCodeCompTo.TabIndex = 8889
+        Me.TEVendorCode.EditValue = ""
+        Me.TEVendorCode.Location = New System.Drawing.Point(100, 10)
+        Me.TEVendorCode.Name = "TEVendorCode"
+        Me.TEVendorCode.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TEVendorCode.Properties.Appearance.Options.UseFont = True
+        Me.TEVendorCode.Properties.EditValueChangedDelay = 1
+        Me.TEVendorCode.Size = New System.Drawing.Size(66, 20)
+        Me.TEVendorCode.TabIndex = 8889
         '
-        'BtnBrowseContactTo
+        'BPickVendor
         '
-        Me.BtnBrowseContactTo.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnBrowseContactTo.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnBrowseContactTo.Appearance.Options.UseFont = True
-        Me.BtnBrowseContactTo.Location = New System.Drawing.Point(386, 10)
-        Me.BtnBrowseContactTo.Name = "BtnBrowseContactTo"
-        Me.BtnBrowseContactTo.Size = New System.Drawing.Size(26, 20)
-        Me.BtnBrowseContactTo.TabIndex = 8890
-        Me.BtnBrowseContactTo.TabStop = False
-        Me.BtnBrowseContactTo.Text = "..."
+        Me.BPickVendor.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BPickVendor.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BPickVendor.Appearance.Options.UseFont = True
+        Me.BPickVendor.Location = New System.Drawing.Point(386, 10)
+        Me.BPickVendor.Name = "BPickVendor"
+        Me.BPickVendor.Size = New System.Drawing.Size(26, 20)
+        Me.BPickVendor.TabIndex = 8890
+        Me.BPickVendor.TabStop = False
+        Me.BPickVendor.Text = "..."
         '
         'LabelControl3
         '
@@ -275,6 +369,8 @@ Partial Class FormPurcOrderDet
         'PanelControlTopRight
         '
         Me.PanelControlTopRight.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelControlTopRight.Controls.Add(Me.DEEstReceiveDate)
+        Me.PanelControlTopRight.Controls.Add(Me.LabelControl12)
         Me.PanelControlTopRight.Controls.Add(Me.LabelControl10)
         Me.PanelControlTopRight.Controls.Add(Me.LookUpEdit1)
         Me.PanelControlTopRight.Controls.Add(Me.LabelControl2)
@@ -286,12 +382,32 @@ Partial Class FormPurcOrderDet
         Me.PanelControlTopRight.Dock = System.Windows.Forms.DockStyle.Right
         Me.PanelControlTopRight.Location = New System.Drawing.Point(643, 2)
         Me.PanelControlTopRight.Name = "PanelControlTopRight"
-        Me.PanelControlTopRight.Size = New System.Drawing.Size(308, 118)
+        Me.PanelControlTopRight.Size = New System.Drawing.Size(308, 143)
         Me.PanelControlTopRight.TabIndex = 8936
+        '
+        'DEEstReceiveDate
+        '
+        Me.DEEstReceiveDate.EditValue = Nothing
+        Me.DEEstReceiveDate.Location = New System.Drawing.Point(102, 114)
+        Me.DEEstReceiveDate.Name = "DEEstReceiveDate"
+        Me.DEEstReceiveDate.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEEstReceiveDate.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEEstReceiveDate.Properties.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.DEEstReceiveDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEEstReceiveDate.Size = New System.Drawing.Size(192, 20)
+        Me.DEEstReceiveDate.TabIndex = 166
+        '
+        'LabelControl12
+        '
+        Me.LabelControl12.Location = New System.Drawing.Point(10, 117)
+        Me.LabelControl12.Name = "LabelControl12"
+        Me.LabelControl12.Size = New System.Drawing.Size(86, 13)
+        Me.LabelControl12.TabIndex = 165
+        Me.LabelControl12.Text = "Est. Receive Date"
         '
         'LabelControl10
         '
-        Me.LabelControl10.Location = New System.Drawing.Point(14, 91)
+        Me.LabelControl10.Location = New System.Drawing.Point(10, 91)
         Me.LabelControl10.Name = "LabelControl10"
         Me.LabelControl10.Size = New System.Drawing.Size(69, 13)
         Me.LabelControl10.TabIndex = 164
@@ -302,7 +418,7 @@ Partial Class FormPurcOrderDet
         Me.LookUpEdit1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LookUpEdit1.Enabled = False
-        Me.LookUpEdit1.Location = New System.Drawing.Point(87, 88)
+        Me.LookUpEdit1.Location = New System.Drawing.Point(102, 88)
         Me.LookUpEdit1.Name = "LookUpEdit1"
         Me.LookUpEdit1.Properties.Appearance.Options.UseTextOptions = True
         Me.LookUpEdit1.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near
@@ -310,13 +426,13 @@ Partial Class FormPurcOrderDet
         Me.LookUpEdit1.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_report_status", "ID Report Status", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("report_status", "Report Status")})
         Me.LookUpEdit1.Properties.NullText = ""
         Me.LookUpEdit1.Properties.ShowFooter = False
-        Me.LookUpEdit1.Size = New System.Drawing.Size(207, 20)
+        Me.LookUpEdit1.Size = New System.Drawing.Size(192, 20)
         Me.LookUpEdit1.TabIndex = 163
         '
         'LabelControl2
         '
         Me.LabelControl2.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl2.Location = New System.Drawing.Point(14, 65)
+        Me.LabelControl2.Location = New System.Drawing.Point(10, 65)
         Me.LabelControl2.Name = "LabelControl2"
         Me.LabelControl2.Size = New System.Drawing.Size(54, 13)
         Me.LabelControl2.TabIndex = 159
@@ -325,42 +441,42 @@ Partial Class FormPurcOrderDet
         'DEDateCreated
         '
         Me.DEDateCreated.EditValue = Nothing
-        Me.DEDateCreated.Location = New System.Drawing.Point(87, 10)
+        Me.DEDateCreated.Location = New System.Drawing.Point(102, 10)
         Me.DEDateCreated.Name = "DEDateCreated"
         Me.DEDateCreated.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.DEDateCreated.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.DEDateCreated.Properties.DisplayFormat.FormatString = "dd MMMM yyyy"
         Me.DEDateCreated.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.DEDateCreated.Properties.ReadOnly = True
-        Me.DEDateCreated.Size = New System.Drawing.Size(207, 20)
+        Me.DEDateCreated.Size = New System.Drawing.Size(192, 20)
         Me.DEDateCreated.TabIndex = 160
         '
         'TEReqBy
         '
         Me.TEReqBy.EditValue = ""
-        Me.TEReqBy.Location = New System.Drawing.Point(87, 62)
+        Me.TEReqBy.Location = New System.Drawing.Point(102, 62)
         Me.TEReqBy.Name = "TEReqBy"
         Me.TEReqBy.Properties.EditValueChangedDelay = 1
         Me.TEReqBy.Properties.ReadOnly = True
-        Me.TEReqBy.Size = New System.Drawing.Size(207, 20)
+        Me.TEReqBy.Size = New System.Drawing.Size(192, 20)
         Me.TEReqBy.TabIndex = 162
         Me.TEReqBy.TabStop = False
         '
         'TEPONumber
         '
         Me.TEPONumber.EditValue = ""
-        Me.TEPONumber.Location = New System.Drawing.Point(87, 36)
+        Me.TEPONumber.Location = New System.Drawing.Point(102, 36)
         Me.TEPONumber.Name = "TEPONumber"
         Me.TEPONumber.Properties.EditValueChangedDelay = 1
         Me.TEPONumber.Properties.ReadOnly = True
-        Me.TEPONumber.Size = New System.Drawing.Size(207, 20)
+        Me.TEPONumber.Size = New System.Drawing.Size(192, 20)
         Me.TEPONumber.TabIndex = 8
         Me.TEPONumber.TabStop = False
         '
         'LabelControl5
         '
         Me.LabelControl5.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl5.Location = New System.Drawing.Point(14, 39)
+        Me.LabelControl5.Location = New System.Drawing.Point(10, 39)
         Me.LabelControl5.Name = "LabelControl5"
         Me.LabelControl5.Size = New System.Drawing.Size(37, 13)
         Me.LabelControl5.TabIndex = 155
@@ -369,7 +485,7 @@ Partial Class FormPurcOrderDet
         'LabelControl7
         '
         Me.LabelControl7.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl7.Location = New System.Drawing.Point(14, 13)
+        Me.LabelControl7.Location = New System.Drawing.Point(10, 13)
         Me.LabelControl7.Name = "LabelControl7"
         Me.LabelControl7.Size = New System.Drawing.Size(65, 13)
         Me.LabelControl7.TabIndex = 159
@@ -623,10 +739,10 @@ Partial Class FormPurcOrderDet
         '
         Me.XTCPurcOrder.Dock = System.Windows.Forms.DockStyle.Fill
         Me.XTCPurcOrder.HeaderLocation = DevExpress.XtraTab.TabHeaderLocation.Bottom
-        Me.XTCPurcOrder.Location = New System.Drawing.Point(0, 122)
+        Me.XTCPurcOrder.Location = New System.Drawing.Point(0, 147)
         Me.XTCPurcOrder.Name = "XTCPurcOrder"
         Me.XTCPurcOrder.SelectedTabPage = Me.XtraTabPage1
-        Me.XTCPurcOrder.Size = New System.Drawing.Size(953, 297)
+        Me.XTCPurcOrder.Size = New System.Drawing.Size(953, 272)
         Me.XTCPurcOrder.TabIndex = 8
         Me.XTCPurcOrder.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XtraTabPage1, Me.XtraTabPage2})
         '
@@ -634,7 +750,7 @@ Partial Class FormPurcOrderDet
         '
         Me.XtraTabPage1.Controls.Add(Me.GCSummary)
         Me.XtraTabPage1.Name = "XtraTabPage1"
-        Me.XtraTabPage1.Size = New System.Drawing.Size(947, 269)
+        Me.XtraTabPage1.Size = New System.Drawing.Size(947, 244)
         Me.XtraTabPage1.Text = "Summary"
         '
         'GCSummary
@@ -645,7 +761,7 @@ Partial Class FormPurcOrderDet
         Me.GCSummary.MainView = Me.GVSummary
         Me.GCSummary.Name = "GCSummary"
         Me.GCSummary.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemSpinEdit2, Me.RepositoryItemSearchLookUpEdit1})
-        Me.GCSummary.Size = New System.Drawing.Size(947, 269)
+        Me.GCSummary.Size = New System.Drawing.Size(947, 244)
         Me.GCSummary.TabIndex = 5
         Me.GCSummary.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVSummary})
         '
@@ -793,7 +909,7 @@ Partial Class FormPurcOrderDet
         '
         Me.XtraTabPage2.Controls.Add(Me.GCItemList)
         Me.XtraTabPage2.Name = "XtraTabPage2"
-        Me.XtraTabPage2.Size = New System.Drawing.Size(947, 269)
+        Me.XtraTabPage2.Size = New System.Drawing.Size(947, 244)
         Me.XtraTabPage2.Text = "Request List"
         '
         'GCItemList
@@ -804,7 +920,7 @@ Partial Class FormPurcOrderDet
         Me.GCItemList.MainView = Me.GVItemList
         Me.GCItemList.Name = "GCItemList"
         Me.GCItemList.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemSpinEdit1, Me.RISLEItem})
-        Me.GCItemList.Size = New System.Drawing.Size(947, 269)
+        Me.GCItemList.Size = New System.Drawing.Size(947, 244)
         Me.GCItemList.TabIndex = 4
         Me.GCItemList.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVItemList})
         '
@@ -1046,13 +1162,18 @@ Partial Class FormPurcOrderDet
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl4.ResumeLayout(False)
         Me.PanelControl4.PerformLayout()
-        CType(Me.TextEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TxtNameCompTo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TEVendorEmail.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TEVendorFax.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TEVendorPhone.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TEVendorAttn.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TEVendorName.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.MEAdrressCompTo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TxtCodeCompTo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TEVendorCode.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControlTopRight, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControlTopRight.ResumeLayout(False)
         Me.PanelControlTopRight.PerformLayout()
+        CType(Me.DEEstReceiveDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEEstReceiveDate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LookUpEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEDateCreated.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEDateCreated.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1102,13 +1223,13 @@ Partial Class FormPurcOrderDet
     Friend WithEvents TEPONumber As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelControl5 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LabelControl7 As DevExpress.XtraEditors.LabelControl
-    Friend WithEvents TextEdit1 As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents TEVendorAttn As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelControl4 As DevExpress.XtraEditors.LabelControl
-    Friend WithEvents TxtNameCompTo As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents TEVendorName As DevExpress.XtraEditors.TextEdit
     Friend WithEvents MEAdrressCompTo As DevExpress.XtraEditors.MemoEdit
     Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
-    Friend WithEvents TxtCodeCompTo As DevExpress.XtraEditors.TextEdit
-    Friend WithEvents BtnBrowseContactTo As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents TEVendorCode As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents BPickVendor As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents LabelControl3 As DevExpress.XtraEditors.LabelControl
     Public WithEvents LargeImageCollection As DevExpress.Utils.ImageCollection
     Friend WithEvents PanelControl1 As DevExpress.XtraEditors.PanelControl
@@ -1175,4 +1296,12 @@ Partial Class FormPurcOrderDet
     Friend WithEvents LabelControl8 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LabelControl10 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LookUpEdit1 As DevExpress.XtraEditors.LookUpEdit
+    Friend WithEvents TEVendorPhone As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LabelControl11 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents DEEstReceiveDate As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents LabelControl12 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents TEVendorFax As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LabelControl13 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents TEVendorEmail As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LabelControl14 As DevExpress.XtraEditors.LabelControl
 End Class

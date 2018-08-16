@@ -1801,6 +1801,14 @@ Module Common
             'so category
             query = "SELECT id_so_type FROM tb_m_comp WHERE id_comp='" & id_comp & "'"
             result = execute_query(query, 0, True, "", "", "", "")
+        ElseIf opt = "9" Then
+            'fax
+            query = "SELECT fax FROM tb_m_comp WHERE id_comp='" & id_comp & "'"
+            result = execute_query(query, 0, True, "", "", "", "")
+        ElseIf opt = "10" Then
+            'email
+            query = "SELECT email FROM tb_m_comp WHERE id_comp='" & id_comp & "'"
+            result = execute_query(query, 0, True, "", "", "", "")
         End If
         Return result
     End Function

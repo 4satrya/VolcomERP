@@ -40,11 +40,14 @@ Partial Class FormPurcOrder
         Me.XTPRequest = New DevExpress.XtraTab.XtraTabPage()
         Me.GCPurcReq = New DevExpress.XtraGrid.GridControl()
         Me.GVPurcReq = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn32 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RICEPurchase = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn20 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn21 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn22 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn33 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn18 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -75,9 +78,6 @@ Partial Class FormPurcOrder
         Me.GridColumn26 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn27 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
-        Me.GridColumn32 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn33 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.RICEPurchase = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XtraTabControl1.SuspendLayout()
         Me.XTPPO.SuspendLayout()
@@ -90,6 +90,7 @@ Partial Class FormPurcOrder
         Me.XTPRequest.SuspendLayout()
         CType(Me.GCPurcReq, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVPurcReq, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RICEPurchase, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RICECheck, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
@@ -99,7 +100,6 @@ Partial Class FormPurcOrder
         CType(Me.GridView3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLEDepartement.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RICEPurchase, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'XtraTabControl1
@@ -271,6 +271,26 @@ Partial Class FormPurcOrder
         Me.GVPurcReq.OptionsFind.AlwaysVisible = True
         Me.GVPurcReq.OptionsView.ShowGroupPanel = False
         '
+        'GridColumn32
+        '
+        Me.GridColumn32.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn32.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn32.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn32.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn32.Caption = "*"
+        Me.GridColumn32.ColumnEdit = Me.RICEPurchase
+        Me.GridColumn32.FieldName = "is_check"
+        Me.GridColumn32.Name = "GridColumn32"
+        Me.GridColumn32.Visible = True
+        Me.GridColumn32.VisibleIndex = 0
+        '
+        'RICEPurchase
+        '
+        Me.RICEPurchase.AutoHeight = False
+        Me.RICEPurchase.Name = "RICEPurchase"
+        Me.RICEPurchase.ValueChecked = "yes"
+        Me.RICEPurchase.ValueUnchecked = "no"
+        '
         'GridColumn8
         '
         Me.GridColumn8.Caption = "id_purc_req"
@@ -293,6 +313,7 @@ Partial Class FormPurcOrder
         'GridColumn21
         '
         Me.GridColumn21.Caption = "Item"
+        Me.GridColumn21.FieldName = "item_desc"
         Me.GridColumn21.Name = "GridColumn21"
         Me.GridColumn21.Visible = True
         Me.GridColumn21.VisibleIndex = 4
@@ -301,16 +322,26 @@ Partial Class FormPurcOrder
         'GridColumn22
         '
         Me.GridColumn22.Caption = "Qty Requested"
+        Me.GridColumn22.FieldName = "qty_req"
         Me.GridColumn22.Name = "GridColumn22"
         Me.GridColumn22.Visible = True
         Me.GridColumn22.VisibleIndex = 7
         Me.GridColumn22.Width = 78
+        '
+        'GridColumn33
+        '
+        Me.GridColumn33.Caption = "Qty PO"
+        Me.GridColumn33.FieldName = "qty_po"
+        Me.GridColumn33.Name = "GridColumn33"
+        Me.GridColumn33.Visible = True
+        Me.GridColumn33.VisibleIndex = 6
         '
         'GridColumn18
         '
         Me.GridColumn18.Caption = "Value (PR)"
         Me.GridColumn18.DisplayFormat.FormatString = "N2"
         Me.GridColumn18.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn18.FieldName = "value"
         Me.GridColumn18.Name = "GridColumn18"
         Me.GridColumn18.Visible = True
         Me.GridColumn18.VisibleIndex = 5
@@ -550,32 +581,6 @@ Partial Class FormPurcOrder
         Me.LabelControl1.TabIndex = 8911
         Me.LabelControl1.Text = "Departement"
         '
-        'GridColumn32
-        '
-        Me.GridColumn32.AppearanceCell.Options.UseTextOptions = True
-        Me.GridColumn32.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.GridColumn32.AppearanceHeader.Options.UseTextOptions = True
-        Me.GridColumn32.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.GridColumn32.Caption = "*"
-        Me.GridColumn32.ColumnEdit = Me.RICEPurchase
-        Me.GridColumn32.Name = "GridColumn32"
-        Me.GridColumn32.Visible = True
-        Me.GridColumn32.VisibleIndex = 0
-        '
-        'GridColumn33
-        '
-        Me.GridColumn33.Caption = "Qty PO"
-        Me.GridColumn33.Name = "GridColumn33"
-        Me.GridColumn33.Visible = True
-        Me.GridColumn33.VisibleIndex = 6
-        '
-        'RICEPurchase
-        '
-        Me.RICEPurchase.AutoHeight = False
-        Me.RICEPurchase.Name = "RICEPurchase"
-        Me.RICEPurchase.ValueChecked = "yes"
-        Me.RICEPurchase.ValueUnchecked = "no"
-        '
         'FormPurcOrder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -601,6 +606,7 @@ Partial Class FormPurcOrder
         Me.XTPRequest.ResumeLayout(False)
         CType(Me.GCPurcReq, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVPurcReq, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RICEPurchase, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RICECheck, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl2.ResumeLayout(False)
@@ -611,7 +617,6 @@ Partial Class FormPurcOrder
         CType(Me.GridView3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SLEDepartement.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RICEPurchase, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

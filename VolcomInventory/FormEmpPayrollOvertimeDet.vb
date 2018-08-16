@@ -297,4 +297,8 @@
             LEDPType.Visible = True
         End If
     End Sub
+
+    Private Sub LEDayoff_EditValueChanged(sender As Object, e As EventArgs) Handles LEDayoff.EditValueChanged
+        calc_point()
+    End Sub
 End Class

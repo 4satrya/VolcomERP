@@ -1000,6 +1000,18 @@
             FormSalesReportTrackingParam.TxtNameCompFrom.Text = get_company_x(GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString, "1")
             FormSalesReportTrackingParam.TxtCodeCompFrom.Text = get_company_x(GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString, "2")
             Close()
+        ElseIf id_pop_up = "86" Then
+            'Purchase Order Purchasing
+            FormPurcOrderDet.id_vendor_contact = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
+            FormPurcOrderDet.TEVendorCode.Text = GVCompany.GetFocusedRowCellValue("comp_number").ToString
+            FormPurcOrderDet.TEVendorName.Text = GVCompany.GetFocusedRowCellValue("comp_name").ToString
+            FormProdDebitNoteDet.MEAdrressCompDebitTo.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "3")
+            '
+            FormPurcOrderDet.TEVendorAttn.Text = GVCompanyContactList.GetFocusedRowCellValue("contact_name").ToString
+            FormPurcOrderDet.TEVendorEmail.Text = get_company_x(GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString, "9")
+            FormPurcOrderDet.TEVendorPhone.Text = get_company_contact_x(GVCompanyContactList.GetFocusedRowCellValue("id_comp_contact").ToString, "2")
+            FormPurcOrderDet.TEVendorFax.Text = get_company_x(GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString, "10")
+            Close()
         End If
         Cursor = Cursors.Default
     End Sub

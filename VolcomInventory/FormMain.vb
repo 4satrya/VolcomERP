@@ -1587,6 +1587,9 @@ Public Class FormMain
             FormPurcReqDet.ShowDialog()
         ElseIf formName = "FormBudgetExpenseRevision" Then
             FormBudgetExpenseRevisionNew.ShowDialog()
+        ElseIf formName = "FormPurcOrder" Then
+            FormPurcOrderDet.id_po = "-1"
+            FormPurcOrderDet.ShowDialog()
         Else
             RPSubMenu.Visible = False
         End If
@@ -2546,6 +2549,9 @@ Public Class FormMain
             ElseIf formName = "FormBudgetExpenseRevision" Then
                 FormBudgetExpenseRevisionDet.id = FormBudgetExpenseRevision.GVData.GetFocusedRowCellValue("id_b_expense_revision").ToString
                 FormBudgetExpenseRevisionDet.ShowDialog()
+            ElseIf formName = "FormPurcOrder" Then
+                FormPurcOrderDet.id_po = FormPurcOrder.GVPO.GetFocusedRowCellValue("id_purc_order").ToString
+                FormPurcOrderDet.ShowDialog()
             Else
                 RPSubMenu.Visible = False
             End If
@@ -5681,6 +5687,30 @@ Public Class FormMain
                 execute_non_query(query_del, True, "", "", "", "")
                 FormAssetRec.load_rec()
             End If
+        ElseIf formName = "FormPurcReq" Then
+            If check_edit_report_status(FormPurcReq.GVPurcReq.GetFocusedRowCellValue("id_report_status").ToString, "137", FormPurcReq.GVPurcReq.GetFocusedRowCellValue("id_purc_req")) Then
+                Dim id As String = FormPurcReq.GVPurcReq.GetFocusedRowCellValue("id_purc_req").ToString
+                confirm = XtraMessageBox.Show("Are you sure want to delete?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+                If confirm = DialogResult.Yes Then
+                    Dim query_del As String = "DELETE FROM tb_purc_req WHERE id_purc_req='" + id + "'"
+                    execute_non_query(query_del, True, "", "", "", "")
+                    FormPurcReq.load_req()
+                End If
+            Else
+                stopCustom("This report already approved.")
+            End If
+        ElseIf formName = "FormPurcOrder" Then
+            If check_edit_report_status(FormPurcOrder.GVPO.GetFocusedRowCellValue("id_report_status").ToString, "139", FormPurcOrder.GVPO.GetFocusedRowCellValue("id_purc_order")) Then
+                Dim id As String = FormPurcReq.GVPurcReq.GetFocusedRowCellValue("id_purc_req").ToString
+                confirm = XtraMessageBox.Show("Are you sure want to delete?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+                If confirm = DialogResult.Yes Then
+                    Dim query_del As String = "DELETE FROM tb_purc_req WHERE id_purc_req='" + id + "'"
+                    execute_non_query(query_del, True, "", "", "", "")
+                    FormPurcReq.load_req()
+                End If
+            Else
+                stopCustom("This report already approved.")
+            End If
         Else
             RPSubMenu.Visible = False
         End If
@@ -6976,6 +7006,10 @@ Public Class FormMain
             print_raw_no_export(FormBudgetExpenseView.GCData)
         ElseIf formName = "FormBudgetExpenseRevision" Then
             print_raw_no_export(FormBudgetExpenseRevision.GCData)
+        ElseIf formName = "FormPurcReq" Then
+            print_raw_no_export(FormPurcReq.GCPurcReq)
+        ElseIf formName = "FormPurcOrder" Then
+            print_raw_no_export(FormPurcOrder.GCPO)
         Else
             RPSubMenu.Visible = False
         End If
@@ -7614,6 +7648,12 @@ Public Class FormMain
         ElseIf formName = "FormBudgetExpenseRevision" Then
             FormBudgetExpenseRevision.Close()
             FormBudgetExpenseRevision.Dispose()
+        ElseIf formName = "FormPurcReq" Then
+            FormPurcReq.Close()
+            FormPurcReq.Dispose()
+        ElseIf formName = "FormPurcOrder" Then
+            FormPurcOrder.Close()
+            FormPurcOrder.Dispose()
         Else
             RPSubMenu.Visible = False
         End If
@@ -11725,6 +11765,19 @@ Public Class FormMain
             FormPurcReq.Show()
             FormPurcReq.WindowState = FormWindowState.Maximized
             FormPurcReq.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBPurcOrder_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBPurcOrder.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormPurcOrder.MdiParent = Me
+            FormPurcOrder.Show()
+            FormPurcOrder.WindowState = FormWindowState.Maximized
+            FormPurcOrder.Focus()
         Catch ex As Exception
             errorProcess()
         End Try

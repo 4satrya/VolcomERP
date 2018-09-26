@@ -168,7 +168,7 @@ Partial Class FormMatStock
         Me.GridView5 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.LabelControl26 = New DevExpress.XtraEditors.LabelControl()
         Me.BtnViewStockVendor = New DevExpress.XtraEditors.SimpleButton()
-        Me.XTPStockCardBOM = New DevExpress.XtraTab.XtraTabPage()
+        Me.XTPTrackingBOM = New DevExpress.XtraTab.XtraTabPage()
         Me.GCBOMTracking = New DevExpress.XtraEditors.GroupControl()
         Me.GCStockBOM = New DevExpress.XtraGrid.GridControl()
         Me.BGVStockBOM = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridView()
@@ -280,7 +280,7 @@ Partial Class FormMatStock
         CType(Me.GridView3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLEVendor.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView5, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.XTPStockCardBOM.SuspendLayout()
+        Me.XTPTrackingBOM.SuspendLayout()
         CType(Me.GCBOMTracking, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GCBOMTracking.SuspendLayout()
         CType(Me.GCStockBOM, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -315,7 +315,7 @@ Partial Class FormMatStock
         Me.XTCFGStock.SelectedTabPage = Me.XTPFGStockWHSum
         Me.XTCFGStock.Size = New System.Drawing.Size(1160, 488)
         Me.XTCFGStock.TabIndex = 1
-        Me.XTCFGStock.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPFGStockWHSum, Me.XTPFGStockCardWH, Me.XTPStockMatWO, Me.XTPStockCardBOM, Me.XTPStockCardReserved})
+        Me.XTCFGStock.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPFGStockWHSum, Me.XTPFGStockCardWH, Me.XTPStockMatWO, Me.XTPTrackingBOM, Me.XTPStockCardReserved})
         '
         'XTPFGStockWHSum
         '
@@ -1689,13 +1689,13 @@ Partial Class FormMatStock
         Me.BtnViewStockVendor.TabIndex = 6
         Me.BtnViewStockVendor.Text = "View"
         '
-        'XTPStockCardBOM
+        'XTPTrackingBOM
         '
-        Me.XTPStockCardBOM.Controls.Add(Me.GCBOMTracking)
-        Me.XTPStockCardBOM.Controls.Add(Me.GroupControl5)
-        Me.XTPStockCardBOM.Name = "XTPStockCardBOM"
-        Me.XTPStockCardBOM.Size = New System.Drawing.Size(1154, 460)
-        Me.XTPStockCardBOM.Text = "Stock Card BOM"
+        Me.XTPTrackingBOM.Controls.Add(Me.GCBOMTracking)
+        Me.XTPTrackingBOM.Controls.Add(Me.GroupControl5)
+        Me.XTPTrackingBOM.Name = "XTPTrackingBOM"
+        Me.XTPTrackingBOM.Size = New System.Drawing.Size(1154, 460)
+        Me.XTPTrackingBOM.Text = "Tracking BOM"
         '
         'GCBOMTracking
         '
@@ -2261,7 +2261,7 @@ Partial Class FormMatStock
         CType(Me.GridView3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SLEVendor.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView5, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.XTPStockCardBOM.ResumeLayout(False)
+        Me.XTPTrackingBOM.ResumeLayout(False)
         CType(Me.GCBOMTracking, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GCBOMTracking.ResumeLayout(False)
         CType(Me.GCStockBOM, System.ComponentModel.ISupportInitialize).EndInit()
@@ -2456,7 +2456,7 @@ Partial Class FormMatStock
     Friend WithEvents gridBand2 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents gridBand3 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents BandedGridColumnUOM As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
-    Friend WithEvents XTPStockCardBOM As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents XTPTrackingBOM As DevExpress.XtraTab.XtraTabPage
     Friend WithEvents GCBOMTracking As DevExpress.XtraEditors.GroupControl
     Friend WithEvents GCStockBOM As DevExpress.XtraGrid.GridControl
     Friend WithEvents BGVStockBOM As DevExpress.XtraGrid.Views.BandedGrid.BandedGridView

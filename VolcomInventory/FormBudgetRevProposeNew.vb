@@ -41,7 +41,7 @@
         End If
 
         If Not cond Then
-            stopCustom("Revenue budget : " + TxtYear.Text + " already created")
+            warningCustom("Anggaran tahun : " + TxtYear.Text + " sudah dibuat")
         Else
             Cursor = Cursors.WaitCursor
             Dim year As String = TxtYear.Text

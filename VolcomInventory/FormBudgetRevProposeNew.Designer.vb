@@ -72,22 +72,22 @@ Partial Class FormBudgetRevProposeNew
         Me.LabelControl2.Appearance.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelControl2.Location = New System.Drawing.Point(17, 49)
         Me.LabelControl2.Name = "LabelControl2"
-        Me.LabelControl2.Size = New System.Drawing.Size(92, 16)
+        Me.LabelControl2.Size = New System.Drawing.Size(100, 16)
         Me.LabelControl2.TabIndex = 6
-        Me.LabelControl2.Text = "Yearly Budget"
+        Me.LabelControl2.Text = "Total Anggaran"
         '
         'LabelControl1
         '
         Me.LabelControl1.Appearance.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelControl1.Location = New System.Drawing.Point(17, 21)
         Me.LabelControl1.Name = "LabelControl1"
-        Me.LabelControl1.Size = New System.Drawing.Size(26, 16)
+        Me.LabelControl1.Size = New System.Drawing.Size(36, 16)
         Me.LabelControl1.TabIndex = 4
-        Me.LabelControl1.Text = "Year"
+        Me.LabelControl1.Text = "Tahun"
         '
         'TxtTotal
         '
-        Me.TxtTotal.Location = New System.Drawing.Point(117, 46)
+        Me.TxtTotal.Location = New System.Drawing.Point(136, 46)
         Me.TxtTotal.Name = "TxtTotal"
         Me.TxtTotal.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtTotal.Properties.Appearance.Options.UseFont = True
@@ -95,19 +95,19 @@ Partial Class FormBudgetRevProposeNew
         Me.TxtTotal.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.TxtTotal.Properties.Mask.EditMask = "n2"
         Me.TxtTotal.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
-        Me.TxtTotal.Size = New System.Drawing.Size(261, 22)
+        Me.TxtTotal.Size = New System.Drawing.Size(242, 22)
         Me.TxtTotal.TabIndex = 1
         '
         'TxtYear
         '
-        Me.TxtYear.Location = New System.Drawing.Point(117, 18)
+        Me.TxtYear.Location = New System.Drawing.Point(136, 18)
         Me.TxtYear.Name = "TxtYear"
         Me.TxtYear.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtYear.Properties.Appearance.Options.UseFont = True
         Me.TxtYear.Properties.Mask.EditMask = "f0"
         Me.TxtYear.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
         Me.TxtYear.Properties.MaxLength = 4
-        Me.TxtYear.Size = New System.Drawing.Size(85, 22)
+        Me.TxtYear.Size = New System.Drawing.Size(99, 22)
         Me.TxtYear.TabIndex = 0
         '
         'LabelControl5
@@ -115,15 +115,15 @@ Partial Class FormBudgetRevProposeNew
         Me.LabelControl5.Appearance.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelControl5.Location = New System.Drawing.Point(17, 75)
         Me.LabelControl5.Name = "LabelControl5"
-        Me.LabelControl5.Size = New System.Drawing.Size(45, 16)
+        Me.LabelControl5.Size = New System.Drawing.Size(26, 16)
         Me.LabelControl5.TabIndex = 9
-        Me.LabelControl5.Text = "Remark"
+        Me.LabelControl5.Text = "Note"
         '
         'MENote
         '
-        Me.MENote.Location = New System.Drawing.Point(117, 74)
+        Me.MENote.Location = New System.Drawing.Point(136, 74)
         Me.MENote.Name = "MENote"
-        Me.MENote.Size = New System.Drawing.Size(261, 35)
+        Me.MENote.Size = New System.Drawing.Size(242, 35)
         Me.MENote.TabIndex = 2
         '
         'FormBudgetRevProposeNew

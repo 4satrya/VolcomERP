@@ -1,5 +1,8 @@
 ﻿Public Class FormReportMarkDet
     Public id_report_mark As String = "-1"
+    Dim report_mark_type As String = "-1"
+    Dim id_report As String = "-1"
+    Dim id_report_status As String = "-1"
 
     Private Sub FormReportMarkDet_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Dim query As String = String.Format("SELECT a.id_user,a.report_mark_note,c.employee_name FROM tb_report_mark a INNER JOIN tb_m_user b ON a.id_user=b.id_user INNER JOIN tb_m_employee c ON b.id_employee=c.id_employee WHERE a.id_report_mark = '{0}'", id_report_mark)
@@ -35,17 +38,38 @@
 
     Private Sub BAccept_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BAccept.Click
         Cursor = Cursors.WaitCursor
+        accept("form")
+        Cursor = Cursors.Default
+    End Sub
+
+    Public Sub accept(ByVal opt As String)
         Try
             Dim query As String = ""
             'update all to 2
             reset_is_use_mark(id_report_mark, "2")
             'set accept or refuse is use to 1
-            query = String.Format("UPDATE tb_report_mark SET id_mark='2',is_use='1',report_mark_note='{1}',report_mark_datetime=NOW() WHERE id_report_mark='{0}'", FormReportMark.GVMark.GetFocusedRowCellDisplayText("id_report_mark").ToString, addSlashes(MEComment.Text))
+            Dim comment As String = ""
+            If opt = "form" Then
+                id_report_mark = FormReportMark.GVMark.GetFocusedRowCellDisplayText("id_report_mark").ToString
+                comment = addSlashes(MEComment.Text)
+                report_mark_type = FormReportMark.report_mark_type
+                id_report = FormReportMark.id_report
+                id_report_status = FormReportMark.GVMark.GetFocusedRowCellValue("id_report_status").ToString
+            ElseIf opt = "outside" Then
+                Dim query_view As String = "SELECT id_report,id_report_status,report_mark_type FROM tb_report_mark WHERE id_report_mark='" & id_report_mark & "'"
+                Dim data_view As DataTable = execute_query(query_view, -1, True, "", "", "", "")
+                If data_view.Rows.Count > 0 Then
+                    report_mark_type = data_view.Rows(0)("report_mark_type").ToString
+                    id_report = data_view.Rows(0)("id_report").ToString
+                    id_report_status = data_view.Rows(0)("id_report_status").ToString
+                End If
+            End If
+
+            query = String.Format("UPDATE tb_report_mark SET id_mark='2',is_use='1',report_mark_note='{1}',report_mark_datetime=NOW() WHERE id_report_mark='{0}'", id_report_mark, comment)
             execute_non_query(query, True, "", "", "", "")
             updateMarkSingle(2)
             ' here auto approve
-            Dim id_status_reportx As String = FormReportMark.GVMark.GetFocusedRowCellValue("id_report_status").ToString
-            Dim query_jml As String = String.Format("SELECT count(id_report_mark) FROM tb_report_mark WHERE report_mark_type='{0}' AND id_report='{1}' AND id_report_status = '{2}' AND is_use='1'", FormReportMark.report_mark_type, FormReportMark.id_report, id_status_reportx)
+            Dim query_jml As String = String.Format("SELECT count(id_report_mark) FROM tb_report_mark WHERE report_mark_type='{0}' AND id_report='{1}' AND id_report_status = '{2}' AND is_use='1'", report_mark_type, id_report, id_report_status)
             Dim jml As Integer = execute_query(query_jml, 0, True, "", "", "", "")
             Dim assigned As Boolean = False
             If jml < 1 Then
@@ -53,18 +77,23 @@
                 assigned = False
             Else
                 assigned = True
-                query_jml = String.Format("SELECT count(id_report_mark) FROM tb_report_mark WHERE report_mark_type='{0}' AND id_report='{1}' AND id_report_status <= '{2}' AND id_mark != '2' AND is_use='1'", FormReportMark.report_mark_type, FormReportMark.id_report, id_status_reportx)
+                query_jml = String.Format("SELECT count(id_report_mark) FROM tb_report_mark WHERE report_mark_type='{0}' AND id_report='{1}' AND id_report_status <= '{2}' AND id_mark != '2' AND is_use='1'", report_mark_type, FormReportMark.id_report, id_report_status)
                 jml = execute_query(query_jml, 0, True, "", "", "", "")
             End If
             '
             If (jml < 1 And assigned = True) Then
-                FormReportMark.change_status(id_status_reportx)
+                FormReportMark.id_report = id_report
+                FormReportMark.report_mark_type = report_mark_type
+                FormReportMark.change_status(id_report_status)
             End If
             '
-            FormReportMark.view_mark()
-            FormReportMark.sendNotif("1")
-            FormReportMark.GVMark.FocusedRowHandle = find_row(FormReportMark.GVMark, "id_report_mark", id_report_mark)
-            FormReportMark.GVMark.ExpandAllGroups()
+            If opt = "form" Then
+                FormReportMark.view_mark()
+                FormReportMark.sendNotif("1")
+                FormReportMark.GVMark.FocusedRowHandle = find_row(FormReportMark.GVMark, "id_report_mark", id_report_mark)
+                FormReportMark.GVMark.ExpandAllGroups()
+            End If
+
             'slow but..
             If is_auto_load_workplace = "1" Then
                 FormWork.view_mark_need()
@@ -72,18 +101,18 @@
 
             'FormWork.view_mark_history()
             '
-            close_form(FormReportMark.report_mark_type)
+            close_form(report_mark_type)
             FormReportMark.Close()
             Close()
         Catch ex As Exception
             MsgBox(ex.ToString())
         End Try
-        Cursor = Cursors.Default
     End Sub
-    Sub close_form(ByVal report_mark_type)
+
+    Sub close_form(ByVal report_mark_typex)
         Try
             Dim popup As ClassShowPopUp = New ClassShowPopUp()
-            popup.report_mark_type = report_mark_type
+            popup.report_mark_type = report_mark_typex
             popup.close()
         Catch ex As Exception
         End Try

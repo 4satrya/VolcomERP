@@ -94,6 +94,7 @@
         load_mat_price()
 
     End Sub
+
     Sub view_mat()
         Try
             Dim query As String
@@ -108,6 +109,7 @@
             errorConnection()
         End Try
     End Sub
+
     Sub view_mat_price(ByVal id_mat_detx As String)
         Dim query As String = "CALL view_mat_det_price_cost(" & id_mat_detx & ")"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")

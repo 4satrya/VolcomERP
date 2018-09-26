@@ -19,6 +19,7 @@ Partial Class FormBudgetExpensePropose
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormBudgetExpensePropose))
         Me.GCData = New DevExpress.XtraGrid.GridControl()
         Me.GVData = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -29,17 +30,21 @@ Partial Class FormBudgetExpensePropose
         Me.GridColumnStatus = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnTotal = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.PanelControlNav = New DevExpress.XtraEditors.PanelControl()
+        Me.BtnDownloadFormatXLS = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.GCData, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVData, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControlNav, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControlNav.SuspendLayout()
         Me.SuspendLayout()
         '
         'GCData
         '
         Me.GCData.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCData.Location = New System.Drawing.Point(0, 0)
+        Me.GCData.Location = New System.Drawing.Point(0, 46)
         Me.GCData.MainView = Me.GVData
         Me.GCData.Name = "GCData"
-        Me.GCData.Size = New System.Drawing.Size(786, 542)
+        Me.GCData.Size = New System.Drawing.Size(786, 496)
         Me.GCData.TabIndex = 1
         Me.GCData.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVData})
         '
@@ -120,17 +125,39 @@ Partial Class FormBudgetExpensePropose
         Me.GridColumn2.Visible = True
         Me.GridColumn2.VisibleIndex = 1
         '
+        'PanelControlNav
+        '
+        Me.PanelControlNav.Controls.Add(Me.BtnDownloadFormatXLS)
+        Me.PanelControlNav.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelControlNav.Location = New System.Drawing.Point(0, 0)
+        Me.PanelControlNav.Name = "PanelControlNav"
+        Me.PanelControlNav.Size = New System.Drawing.Size(786, 46)
+        Me.PanelControlNav.TabIndex = 2
+        '
+        'BtnDownloadFormatXLS
+        '
+        Me.BtnDownloadFormatXLS.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnDownloadFormatXLS.Image = CType(resources.GetObject("BtnDownloadFormatXLS.Image"), System.Drawing.Image)
+        Me.BtnDownloadFormatXLS.Location = New System.Drawing.Point(625, 2)
+        Me.BtnDownloadFormatXLS.Name = "BtnDownloadFormatXLS"
+        Me.BtnDownloadFormatXLS.Size = New System.Drawing.Size(159, 42)
+        Me.BtnDownloadFormatXLS.TabIndex = 0
+        Me.BtnDownloadFormatXLS.Text = "Download Format XLS"
+        '
         'FormBudgetExpensePropose
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(786, 542)
         Me.Controls.Add(Me.GCData)
+        Me.Controls.Add(Me.PanelControlNav)
         Me.Name = "FormBudgetExpensePropose"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Propose Expense Budget"
         CType(Me.GCData, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVData, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControlNav, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControlNav.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -145,4 +172,6 @@ Partial Class FormBudgetExpensePropose
     Friend WithEvents GridColumnStatus As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnTotal As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn2 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents PanelControlNav As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents BtnDownloadFormatXLS As DevExpress.XtraEditors.SimpleButton
 End Class

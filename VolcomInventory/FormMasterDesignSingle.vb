@@ -846,7 +846,6 @@
                 If id_pop_up = "-1" Then
                     XTPLineList.PageVisible = True
                 End If
-                XTPSize.PageVisible = False
                 BeditCode.Enabled = False
                 BRefreshCode.Enabled = False
                 BGenerate.Enabled = False

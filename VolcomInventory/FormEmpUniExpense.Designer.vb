@@ -227,7 +227,7 @@ Partial Class FormEmpUniExpense
         Me.Controls.Add(Me.GCFilter)
         Me.Name = "FormEmpUniExpense"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Uniform Expense"
+        Me.Text = "Expense"
         CType(Me.GCFilter, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GCFilter.ResumeLayout(False)
         Me.GCFilter.PerformLayout()

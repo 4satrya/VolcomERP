@@ -1,18 +1,27 @@
 ﻿Public Class FormViewProdDemand
     Public id_prod_demand As String
     Public report_mark_type As String
-    Dim id_pd_kind As String = "-1"
+    Public id_pd_kind As String = "-1"
 
     Dim id_role_super_admin As String = "-1"
     Public data_column As New DataTable
 
     Private Sub FormViewProdDemand_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ' MsgBox(report_mark_type)
-        Dim query As String = "SELECT * FROM tb_prod_demand a INNER JOIN tb_season b ON a.id_season = b.id_season WHERE a.id_prod_demand = '" + id_prod_demand + "'"
+        Dim query As String = "SELECT * FROM tb_prod_demand a 
+        INNER JOIN tb_season b ON a.id_season = b.id_season 
+        INNER JOIN tb_lookup_report_status stt ON stt.id_report_status = a.id_report_status
+        WHERE a.id_prod_demand = '" + id_prod_demand + "'"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         LabelTitle.Text = data.Rows(0)("prod_demand_number").ToString
         LabelSubTitle.Text = "Season : " + data.Rows(0)("season").ToString
+        LabelStatus.Text = "Status : " + data.Rows(0)("report_status").ToString
         id_pd_kind = data.Rows(0)("id_pd_kind").ToString
+        If data.Rows(0)("id_report_status").ToString = "6" Then
+            PanelControlCompleted.Visible = True
+            XTPRevision.PageVisible = True
+        End If
+
 
         'initial role super admin
         id_role_super_admin = get_setup_field("id_role_super_admin")
@@ -43,7 +52,7 @@
     Sub view_product()
         'build report
         Dim prod_demand_report As ClassProdDemand = New ClassProdDemand()
-        prod_demand_report.printReportLess(id_prod_demand, BGVProduct, GCProduct)
+        prod_demand_report.printReportLess(id_prod_demand + " AND is_void=2", BGVProduct, GCProduct)
 
         'bestfit
         BGVProduct.BestFitColumns()
@@ -161,5 +170,64 @@
 
     Private Sub FormViewProdDemand_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
         Dispose()
+    End Sub
+
+    Private Sub CheckEditShowNonActive_CheckedChanged(sender As Object, e As EventArgs) Handles CheckEditShowNonActive.CheckedChanged
+        Cursor = Cursors.WaitCursor
+        If CheckEditShowNonActive.EditValue = True Then
+            Dim prod_demand_report As ClassProdDemand = New ClassProdDemand()
+            prod_demand_report.printReportLess(id_prod_demand, BGVProduct, GCProduct)
+        Else
+            Dim prod_demand_report As ClassProdDemand = New ClassProdDemand()
+            prod_demand_report.printReportLess(id_prod_demand + " AND is_void=2 ", BGVProduct, GCProduct)
+        End If
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub XTCPD_SelectedPageChanged(sender As Object, e As DevExpress.XtraTab.TabPageChangedEventArgs) Handles XTCPD.SelectedPageChanged
+        If XTCPD.SelectedTabPageIndex = 1 Then
+            viewRevision()
+        End If
+    End Sub
+
+    Sub viewRevision()
+        Cursor = Cursors.WaitCursor
+        Dim r As New ClassProdDemand
+        Dim query As String = r.queryMainRev("AND r.id_prod_demand=" + id_prod_demand + "", "1")
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCData.DataSource = data
+        GVData.BestFitColumns()
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub GVData_DoubleClick(sender As Object, e As EventArgs) Handles GVData.DoubleClick
+        If GVData.RowCount > 0 And GVData.FocusedRowHandle >= 0 Then
+            Cursor = Cursors.WaitCursor
+            Dim rmt As String = ""
+            If id_pd_kind = "1" Then 'MD
+                rmt = "143"
+            ElseIf id_pd_kind = "2" Then 'MKT
+                rmt = "144"
+            Else 'HRD
+                rmt = "145"
+            End If
+            Dim m As New ClassShowPopUp()
+            m.id_report = GVData.GetFocusedRowCellValue("id_prod_demand_rev").ToString
+            m.report_mark_type = rmt
+            m.show()
+            Cursor = Cursors.Default
+        End If
+    End Sub
+
+    Private Sub ViewBreakdownSizeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ViewBreakdownSizeToolStripMenuItem.Click
+        Cursor = Cursors.WaitCursor
+        If BGVProduct.RowCount > 0 And BGVProduct.FocusedRowHandle >= 0 Then
+            Dim id_prod_demand_design As String = BGVProduct.GetFocusedRowCellValue("id_prod_demand_design").ToString
+            FormProdDemandBreakSize.LabelTitle.Text = BGVProduct.GetFocusedRowCellValue("DESCRIPTION_desc_report_column").ToString
+            FormProdDemandBreakSize.LabelSubTitle.Text = BGVProduct.GetFocusedRowCellValue("CODE_desc_report_column").ToString
+            FormProdDemandBreakSize.id_pdd = id_prod_demand_design
+            FormProdDemandBreakSize.ShowDialog()
+        End If
+        Cursor = Cursors.Default
     End Sub
 End Class

@@ -7,13 +7,19 @@
     Public report_mark_type As String = "0"
 
     Public directory_upload As String = get_setup_field("upload_dir")
+    Public is_only_pdf As Boolean = False
 
     Private Sub BUploadFile_ButtonClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraEditors.Controls.ButtonPressedEventArgs) Handles BUploadFile.ButtonClick
         Dim fd As OpenFileDialog = New OpenFileDialog()
 
         fd.Title = "Upload file"
         fd.InitialDirectory = "C:\"
-        fd.Filter = "All files (*.*)|*.*|All files (*.*)|*.*"
+        If is_only_pdf Then
+            fd.Filter = "Pdf Files|*.pdf"
+        Else
+            fd.Filter = "All files (*.*)|*.*|All files (*.*)|*.*"
+        End If
+
         fd.FilterIndex = 2
         fd.RestoreDirectory = True
 
@@ -39,7 +45,7 @@
     Private Sub BUpload_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BUpload.Click
         Try
             'save db
-            Dim query As String = "INSERT INTO tb_doc(doc_desc,report_mark_type,id_report,datetime,ext) VALUES('" & addSlashes(TEFileName.Text) & "','" & report_mark_type & "','" & id_report & "',NOW(),'" & file_ext & "');SELECT LAST_INSERT_ID() "
+            Dim query As String = "INSERT INTO tb_doc(doc_desc,report_mark_type,id_report,datetime,ext,id_user_upload) VALUES('" & addSlashes(TEFileName.Text) & "','" & report_mark_type & "','" & id_report & "',NOW(),'" & file_ext & "','" & id_user & "');SELECT LAST_INSERT_ID() "
             Dim last_id As String = execute_query(query, 0, True, "", "", "", "")
             'upload
             Dim path As String = directory_upload & report_mark_type & "\"

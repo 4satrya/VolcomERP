@@ -130,4 +130,8 @@
     Private Sub BMockMark_Click(sender As Object, e As EventArgs) Handles BMockMark.Click
         FormSUMockMark.ShowDialog()
     End Sub
+
+    Private Sub BtnSetupDBIA_Click(sender As Object, e As EventArgs) Handles BtnSetupDBIA.Click
+        FormSetupDBStockTake.ShowDialog()
+    End Sub
 End Class

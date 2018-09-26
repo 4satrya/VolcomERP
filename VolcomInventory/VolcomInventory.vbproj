@@ -547,6 +547,12 @@
     <Compile Include="FormBudgetExpenseProposeDet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormBudgetExpenseProposeFormatXLS.Designer.vb">
+      <DependentUpon>FormBudgetExpenseProposeFormatXLS.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormBudgetExpenseProposeFormatXLS.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormBudgetExpenseRevision.Designer.vb">
       <DependentUpon>FormBudgetExpenseRevision.vb</DependentUpon>
     </Compile>
@@ -569,6 +575,18 @@
       <DependentUpon>FormBudgetExpenseView.vb</DependentUpon>
     </Compile>
     <Compile Include="FormBudgetExpenseView.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormBudgetRevenueRevisionDet.Designer.vb">
+      <DependentUpon>FormBudgetRevenueRevisionDet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormBudgetRevenueRevisionDet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormBudgetRevenueRevisionNew.Designer.vb">
+      <DependentUpon>FormBudgetRevenueRevisionNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormBudgetRevenueRevisionNew.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormBudgetRevPropose.Designer.vb">
@@ -1273,6 +1291,12 @@
     <Compile Include="FormFGLineListMoveSeason.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormFGLineListPDExist.Designer.vb">
+      <DependentUpon>FormFGLineListPDExist.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormFGLineListPDExist.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormFGLineListPrepPrice.Designer.vb">
       <DependentUpon>FormFGLineListPrepPrice.vb</DependentUpon>
     </Compile>
@@ -1705,6 +1729,42 @@
     <Compile Include="FormProdDebitNoteDet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormProdDemandBreakSize.Designer.vb">
+      <DependentUpon>FormProdDemandBreakSize.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormProdDemandBreakSize.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormProdDemandRev.Designer.vb">
+      <DependentUpon>FormProdDemandRev.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormProdDemandRev.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormProdDemandRevBreakSize.Designer.vb">
+      <DependentUpon>FormProdDemandRevBreakSize.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormProdDemandRevBreakSize.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormProdDemandRevDet.Designer.vb">
+      <DependentUpon>FormProdDemandRevDet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormProdDemandRevDet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormProdDemandRevNew.Designer.vb">
+      <DependentUpon>FormProdDemandRevNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormProdDemandRevNew.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormProdDemandRevSingle.Designer.vb">
+      <DependentUpon>FormProdDemandRevSingle.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormProdDemandRevSingle.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormProdDuty.Designer.vb">
       <DependentUpon>FormProdDuty.vb</DependentUpon>
     </Compile>
@@ -1859,6 +1919,24 @@
       <DependentUpon>FormRejectTypeDet.vb</DependentUpon>
     </Compile>
     <Compile Include="FormRejectTypeDet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReportMarkCancel.Designer.vb">
+      <DependentUpon>FormReportMarkCancel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormReportMarkCancel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReportMarkCancelList.Designer.vb">
+      <DependentUpon>FormReportMarkCancelList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormReportMarkCancelList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReportMarkCancelPick.Designer.vb">
+      <DependentUpon>FormReportMarkCancelPick.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormReportMarkCancelPick.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormRevenue.Designer.vb">
@@ -4843,6 +4921,12 @@
     <Compile Include="ReportBudgetExpenseRevision.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ReportCancelForm.Designer.vb">
+      <DependentUpon>ReportCancelForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportCancelForm.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ReportDebitNote.Designer.vb">
       <DependentUpon>ReportDebitNote.vb</DependentUpon>
     </Compile>
@@ -5261,6 +5345,12 @@
       <DependentUpon>ReportProdDemand.vb</DependentUpon>
     </Compile>
     <Compile Include="ReportProdDemand.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportProdDemandRev.Designer.vb">
+      <DependentUpon>ReportProdDemandRev.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportProdDemandRev.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ReportProdOverMemo.Designer.vb">
@@ -5794,6 +5884,9 @@
     <EmbeddedResource Include="FormBudgetExpenseProposeDet.resx">
       <DependentUpon>FormBudgetExpenseProposeDet.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormBudgetExpenseProposeFormatXLS.resx">
+      <DependentUpon>FormBudgetExpenseProposeFormatXLS.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormBudgetExpenseRevision.resx">
       <DependentUpon>FormBudgetExpenseRevision.vb</DependentUpon>
     </EmbeddedResource>
@@ -5805,6 +5898,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormBudgetExpenseView.resx">
       <DependentUpon>FormBudgetExpenseView.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormBudgetRevenueRevisionDet.resx">
+      <DependentUpon>FormBudgetRevenueRevisionDet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormBudgetRevenueRevisionNew.resx">
+      <DependentUpon>FormBudgetRevenueRevisionNew.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormBudgetRevPropose.resx">
       <DependentUpon>FormBudgetRevPropose.vb</DependentUpon>
@@ -6172,6 +6271,9 @@
     <EmbeddedResource Include="FormFGLineListMoveSeason.resx">
       <DependentUpon>FormFGLineListMoveSeason.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormFGLineListPDExist.resx">
+      <DependentUpon>FormFGLineListPDExist.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormFGLineListPrepPrice.resx">
       <DependentUpon>FormFGLineListPrepPrice.vb</DependentUpon>
     </EmbeddedResource>
@@ -6393,6 +6495,24 @@
     <EmbeddedResource Include="FormProdDebitNoteDet.resx">
       <DependentUpon>FormProdDebitNoteDet.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormProdDemandBreakSize.resx">
+      <DependentUpon>FormProdDemandBreakSize.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormProdDemandRev.resx">
+      <DependentUpon>FormProdDemandRev.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormProdDemandRevBreakSize.resx">
+      <DependentUpon>FormProdDemandRevBreakSize.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormProdDemandRevDet.resx">
+      <DependentUpon>FormProdDemandRevDet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormProdDemandRevNew.resx">
+      <DependentUpon>FormProdDemandRevNew.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormProdDemandRevSingle.resx">
+      <DependentUpon>FormProdDemandRevSingle.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormProdDuty.resx">
       <DependentUpon>FormProdDuty.vb</DependentUpon>
     </EmbeddedResource>
@@ -6470,6 +6590,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormRejectTypeDet.resx">
       <DependentUpon>FormRejectTypeDet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormReportMarkCancel.resx">
+      <DependentUpon>FormReportMarkCancel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormReportMarkCancelList.resx">
+      <DependentUpon>FormReportMarkCancelList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormReportMarkCancelPick.resx">
+      <DependentUpon>FormReportMarkCancelPick.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormRevenue.resx">
       <DependentUpon>FormRevenue.vb</DependentUpon>
@@ -8383,6 +8512,9 @@
     <EmbeddedResource Include="ReportBudgetExpenseRevision.resx">
       <DependentUpon>ReportBudgetExpenseRevision.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportCancelForm.resx">
+      <DependentUpon>ReportCancelForm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportDebitNote.resx">
       <DependentUpon>ReportDebitNote.vb</DependentUpon>
     </EmbeddedResource>
@@ -8635,6 +8767,9 @@
     <EmbeddedResource Include="ReportProdDemand.resx">
       <DependentUpon>ReportProdDemand.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportProdDemandRev.resx">
+      <DependentUpon>ReportProdDemandRev.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportProdOverMemo.resx">
       <DependentUpon>ReportProdOverMemo.vb</DependentUpon>

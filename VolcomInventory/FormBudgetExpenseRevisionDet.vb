@@ -9,6 +9,7 @@
     Private Sub FormBudgetExpenseRevisionDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewReportStatus()
         actionLoad()
+        RepositoryItemTextEdit2.Enabled = False
     End Sub
 
     Sub viewReportStatus()
@@ -186,7 +187,7 @@
         End If
     End Sub
 
-    Private Sub BtnConfirm_Click(sender As Object, e As EventArgs) Handles BtnConfirm.Click
+    Sub confirm()
         Cursor = Cursors.WaitCursor
         Dim cond_rev As Boolean = False
         makeSafeGV(GVData)
@@ -195,15 +196,26 @@
             cond_rev = True
         End If
 
+        'cek upload
+        Dim cond_attach As Boolean = False
+        Dim qf As String = "SELECT * FROM tb_doc d WHERE d.report_mark_type=138 AND d.id_report=" + id + " "
+        Dim df As DataTable = execute_query(qf, -1, True, "", "", "", "")
+        If df.Rows.Count > 0 Then
+            cond_attach = True
+        End If
+
 
         If MENote.Text = "" Then
             GVData.ActiveFilterString = ""
-            stopCustom("Please input reason")
+            warningCustom("Mohon isi alasan revisi anggaran")
         ElseIf Not cond_rev Then
             GVData.ActiveFilterString = ""
-            stopCustom("No revisions were made. If you want to cancel this revision, please click 'Cancel Propose'")
+            warningCustom("Tidak ada revisi yang dilakukan. Jika ingin membatalkan revisi, silahkan klik tombol 'Cancel Propose'")
+        ElseIf Not cond_attach Then
+            warningCustom("Silahkan upload terlebih dahulu dokumen anggaran (format : PDF) yang sudah disetujui Manajemen")
+            attach()
         Else
-            Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure you want to confirm this budget ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+            Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Anda yakin ingin melakukan revisi anggaran?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
             If confirm = Windows.Forms.DialogResult.Yes Then
                 Cursor = Cursors.WaitCursor
                 'insert budget tahunan yg direvisi
@@ -235,7 +247,7 @@
                 BtnConfirm.Visible = False
                 GVData.ActiveFilterString = ""
                 actionLoad()
-                infoCustom("Revision budget submitted. Waiting for approval.")
+                infoCustom("Revisi anggaran sudah diajukan. Menunggu persetujuan.")
                 Cursor = Cursors.Default
             Else
                 GVData.ActiveFilterString = ""
@@ -244,8 +256,12 @@
         Cursor = Cursors.Default
     End Sub
 
+    Private Sub BtnConfirm_Click(sender As Object, e As EventArgs) Handles BtnConfirm.Click
+        confirm()
+    End Sub
+
     Private Sub BtnCancell_Click(sender As Object, e As EventArgs) Handles BtnCancell.Click
-        Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure you want to cancelled this propose ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+        Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Anda yakin ingin membatalkan revisi ini ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
         If confirm = Windows.Forms.DialogResult.Yes Then
             Cursor = Cursors.WaitCursor
             Dim query As String = "UPDATE tb_b_expense_revision SET id_report_status=5 WHERE id_b_expense_revision='" + id + "'"
@@ -263,29 +279,33 @@
     End Sub
 
     Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles BtnPrint.Click
+        CEShowDetail.EditValue = True
         If id_report_status = "6" Then
             Cursor = Cursors.WaitCursor
             ReportBudgetExpenseRevision.id = id
-            ReportBudgetExpenseRevision.dt = GCData.DataSource
+            ReportBudgetExpenseRevision.dt = GCRev.DataSource
             Dim Report As New ReportBudgetExpenseRevision()
 
             ' '... 
             ' ' creating and saving the view's layout to a new memory stream 
             Dim str As System.IO.Stream
             str = New System.IO.MemoryStream()
-            GVData.SaveLayoutToStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+            GVRev.SaveLayoutToStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
             str.Seek(0, System.IO.SeekOrigin.Begin)
-            Report.GVData.RestoreLayoutFromStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+            Report.GVRev.RestoreLayoutFromStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
             str.Seek(0, System.IO.SeekOrigin.Begin)
 
             'Grid Detail
-            ReportStyleGridview(Report.GVData)
+            ReportStyleGridview(Report.GVRev)
 
             'Parse val
             Report.LabelNumber.Text = TxtNumber.Text.ToUpper
             Report.LabelYear.Text = TxtYear.Text.ToUpper
             Report.LabelDept.Text = TxtDepartement.Text.ToUpper
             Report.LabelDate.Text = DECreated.Text.ToString
+            Report.LNote.Text = MENote.Text
+            Report.LabelTotalBefore.Text = TxtTotalBefore.Text
+            Report.LabelTotalAfter.Text = TxtTotalAfter.Text
 
             'Show the report's preview. 
             Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
@@ -294,14 +314,20 @@
             Tool.ShowRibbonPreviewDialog()
             Cursor = Cursors.Default
         Else
-            print_raw_no_export(GCData)
+            print_raw_no_export(GCRev)
         End If
+        CEShowDetail.EditValue = False
     End Sub
 
     Private Sub BtnAttachment_Click(sender As Object, e As EventArgs) Handles BtnAttachment.Click
+        attach()
+    End Sub
+
+    Sub attach()
         Cursor = Cursors.WaitCursor
         FormDocumentUpload.report_mark_type = "138"
         FormDocumentUpload.id_report = id
+        FormDocumentUpload.is_only_pdf = True
         If is_view = "1" Or id_report_status = "6" Or id_report_status = "5" Or is_confirm = "1" Then
             FormDocumentUpload.is_view = "1"
         End If
@@ -428,14 +454,18 @@
                     If CEShowHiglights.EditValue = True Then
                         If e.Column.FieldName.ToString = i.ToString + "_actual" Then
                             e.Appearance.BackColor = Color.LightSeaGreen
-                        Else
-                            e.Appearance.BackColor = Color.Crimson
+                            'Else
+                            'e.Appearance.BackColor = Color.Crimson
                         End If
                     Else
-                        e.Appearance.BackColor = Color.Empty
+                        If e.Column.FieldName.ToString <> i.ToString + "_budget" Then
+                            e.Appearance.BackColor = Color.Empty
+                        End If
                     End If
                 Else
-                    e.Appearance.BackColor = Color.Empty
+                    If e.Column.FieldName.ToString <> i.ToString + "_budget" Then
+                        e.Appearance.BackColor = Color.Empty
+                    End If
                 End If
             End If
         Next

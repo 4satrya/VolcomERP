@@ -1557,9 +1557,13 @@ Public Class FormMain
             FormEmpUniExpenseDet.action = "ins"
             FormEmpUniExpenseDet.ShowDialog()
         ElseIf formName = "FormBudgetRevPropose" Then
-            FormBudgetRevProposeNew.action = "ins"
-            FormBudgetRevProposeNew.ShowDialog()
-            FormBudgetRevPropose.openNewTrans()
+            If FormBudgetRevPropose.XTCRev.SelectedTabPageIndex = 1 Then
+                FormBudgetRevProposeNew.action = "ins"
+                FormBudgetRevProposeNew.ShowDialog()
+                FormBudgetRevPropose.openNewTrans()
+            ElseIf FormBudgetRevPropose.XTCRev.SelectedTabPageIndex = 2 Then
+                FormBudgetRevenueRevisionNew.ShowDialog()
+            End If
         ElseIf formName = "FormItemCatPropose" Then
             Dim query As String = "INSERT INTO tb_item_cat_propose(number, created_date, note, id_report_status) 
             VALUES('" + header_number_sales("37") + "',NOW(), '',1);SELECT LAST_INSERT_ID(); "
@@ -1590,6 +1594,11 @@ Public Class FormMain
         ElseIf formName = "FormPurcOrder" Then
             FormPurcOrderDet.id_po = "-1"
             FormPurcOrderDet.ShowDialog()
+        ElseIf formName = "FormProdDemandRev" Then
+            FormProdDemandRevNew.ShowDialog()
+        ElseIf formName = "FormReportMarkCancelList" Then
+            FormReportMarkCancel.id_report_mark_cancel = "-1"
+            FormReportMarkCancel.ShowDialog()
         Else
             RPSubMenu.Visible = False
         End If
@@ -2528,8 +2537,15 @@ Public Class FormMain
                 FormEmpUniExpenseDet.action = "upd"
                 FormEmpUniExpenseDet.ShowDialog()
             ElseIf formName = "FormBudgetRevPropose" Then
-                FormBudgetRevProposeDet.id = FormBudgetRevPropose.GVRev.GetFocusedRowCellValue("id_b_revenue_propose").ToString
-                FormBudgetRevProposeDet.ShowDialog()
+                If FormBudgetRevPropose.XTCRev.SelectedTabPageIndex = 1 Then
+                    FormBudgetRevProposeDet.id = FormBudgetRevPropose.GVRev.GetFocusedRowCellValue("id_b_revenue_propose").ToString
+                    FormBudgetRevProposeDet.ShowDialog()
+                ElseIf FormBudgetRevPropose.XTCRev.SelectedTabPageIndex = 2 Then
+                    FormBudgetRevenueRevisionDet.id = FormBudgetRevPropose.GVRevision.GetFocusedRowCellValue("id_b_revenue_revision").ToString
+                    FormBudgetRevenueRevisionDet.ShowDialog()
+                Else
+
+                End If
             ElseIf formName = "FormItemCatPropose" Then
                 FormItemCatProposeDet.id = FormItemCatPropose.GVData.GetFocusedRowCellValue("id_item_cat_propose").ToString
                 FormItemCatProposeDet.ShowDialog()
@@ -2552,6 +2568,12 @@ Public Class FormMain
             ElseIf formName = "FormPurcOrder" Then
                 FormPurcOrderDet.id_po = FormPurcOrder.GVPO.GetFocusedRowCellValue("id_purc_order").ToString
                 FormPurcOrderDet.ShowDialog()
+            ElseIf formName = "FormProdDemandRev" Then
+                FormProdDemandRevDet.id = FormProdDemandRev.GVData.GetFocusedRowCellValue("id_prod_demand_rev").ToString
+                FormProdDemandRevDet.ShowDialog()
+            ElseIf formName = "FormReportMarkCancelList" Then
+                FormReportMarkCancel.id_report_mark_cancel = FormReportMarkCancelList.GVListCancel.GetFocusedRowCellValue("id_report_mark_cancel").ToString
+                FormReportMarkCancel.ShowDialog()
             Else
                 RPSubMenu.Visible = False
             End If
@@ -4041,7 +4063,7 @@ Public Class FormMain
                     stopCustom("This Material Requisition already processed.")
                 End If
             Else 'other
-                If check_edit_report_status(FormMatMRS.GVMRS.GetFocusedRowCellDisplayText("id_report_status"), "29", FormMatMRS.GVMRS.GetFocusedRowCellDisplayText("id_prod_order_mrs")) Then
+                If check_edit_report_status(FormMatMRS.GVMRS.GetFocusedRowCellDisplayText("id_report_status"), "44", FormMatMRS.GVMRS.GetFocusedRowCellDisplayText("id_prod_order_mrs")) Then
                     confirm = XtraMessageBox.Show("Are you sure want to delete this Material Requesition?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
                     If confirm = Windows.Forms.DialogResult.Yes Then
                         Try
@@ -4050,7 +4072,7 @@ Public Class FormMain
                             execute_non_query(query, True, "", "", "", "")
 
                             'del mark
-                            delete_all_mark_related("29", id_mrs)
+                            delete_all_mark_related("44", id_mrs)
 
                             FormMatMRS.view_mrs()
                         Catch ex As Exception
@@ -6009,10 +6031,16 @@ Public Class FormMain
                 ElseIf FormMatPL.XTCTabProduction.SelectedTabPageIndex = 1 Then 'list MRS
                     print(FormMatPL.GCMRS, "List Material Request For Production")
                 End If
-            ElseIf FormMatPL.XTCPL.SelectedTabPageIndex = 1 Then 'Out
+            ElseIf FormMatPL.XTCPL.SelectedTabPageIndex = 1 Then 'WO
+                If FormMatPL.XTCPLWO.SelectedTabPageIndex = 0 Then
+                    print(FormMatPL.GCPLWO, "Packing List Material Work Order")
+                ElseIf FormMatPL.XTCPLWO.SelectedTabPageIndex = 1 Then
+                    print(FormMatPL.GCMRSWO, "List Material Request Work Order")
+                End If
+            ElseIf FormMatPL.XTCPL.SelectedTabPageIndex = 2 Then 'Other
                 If FormMatPL.XTCPLOther.SelectedTabPageIndex = 0 Then
                     print(FormMatPL.GCPLOther, "Packing List Material Other")
-                ElseIf FormMatPL.XTCPLOther.SelectedTabPageIndex = 0 Then
+                ElseIf FormMatPL.XTCPLOther.SelectedTabPageIndex = 1 Then
                     print(FormMatPL.GCMRSOther, "List Material Request Other")
                 End If
             End If
@@ -7014,6 +7042,12 @@ Public Class FormMain
             ElseIf FormItemCatMapping.XTCMapping.SelectedTabPageIndex = 1 Then
                 print_raw(FormItemCatMapping.GCPropose, "")
             End If
+        ElseIf formName = "FormBudgetRevPropose" Then
+            If FormBudgetRevPropose.XTCRev.SelectedTabPageIndex = 1 Then
+                print_raw_no_export(FormBudgetRevPropose.GCRev)
+            ElseIf FormBudgetRevPropose.XTCRev.SelectedTabPageIndex = 2 Then
+                print_raw_no_export(FormBudgetRevPropose.GCRevision)
+            End If
         ElseIf formName = "FormBudgetExpensePropose" Then
             print_raw(FormBudgetExpensePropose.GCData, "")
         ElseIf formName = "FormBudgetExpenseView" Then
@@ -7024,6 +7058,10 @@ Public Class FormMain
             print_raw_no_export(FormPurcReq.GCPurcReq)
         ElseIf formName = "FormPurcOrder" Then
             print_raw_no_export(FormPurcOrder.GCPO)
+        ElseIf formName = "FormProdDemandRev" Then
+            print_raw_no_export(FormProdDemandRev.GCData)
+        ElseIf formName = "FormReportMarkCancelList" Then
+            print_raw_no_export(FormReportMarkCancelList.GCListCancel)
         Else
             RPSubMenu.Visible = False
         End If
@@ -7668,6 +7706,12 @@ Public Class FormMain
         ElseIf formName = "FormPurcOrder" Then
             FormPurcOrder.Close()
             FormPurcOrder.Dispose()
+        ElseIf formName = "FormProdDemandRev" Then
+            FormProdDemandRev.Close()
+            FormProdDemandRev.Dispose()
+        ElseIf formName = "FormReportMarkCancelList" Then
+            FormReportMarkCancelList.Close()
+            FormReportMarkCancelList.Dispose()
         Else
             RPSubMenu.Visible = False
         End If
@@ -8358,7 +8402,11 @@ Public Class FormMain
         ElseIf formName = "FormEmpUniExpense" Then
             FormEmpUniExpense.viewData()
         ElseIf formName = "FormBudgetRevPropose" Then
-            FormBudgetRevPropose.viewData()
+            If FormBudgetRevPropose.XTCRev.SelectedTabPageIndex = 1 Then
+                FormBudgetRevPropose.viewData()
+            ElseIf FormBudgetRevPropose.XTCRev.SelectedTabPageIndex = 2 Then
+                FormBudgetRevPropose.viewRevision()
+            End If
         ElseIf formName = "FormItemCatPropose" Then
             If FormItemCatPropose.XTCCat.SelectedTabPageIndex = 0 Then
                 FormItemCatPropose.viewCat()
@@ -8375,6 +8423,8 @@ Public Class FormMain
             FormBudgetExpensePropose.viewData()
         ElseIf formName = "FormBudgetExpenseRevision" Then
             FormBudgetExpenseRevision.viewData()
+        ElseIf formName = "FormProdDemandRev" Then
+            FormProdDemandRev.viewData()
         End If
     End Sub
     'Switch
@@ -8443,210 +8493,7 @@ Public Class FormMain
         Cursor = Cursors.WaitCursor
         If formName = "FormWork" Then
             If FormWork.XTCGeneral.SelectedTabPageIndex = 0 Then
-            ElseIf FormWork.XTCGeneral.SelectedTabPageIndex = 1 Then
-                'sample
-                If FormWork.XTCSample.SelectedTabPageIndex = 0 Then
-                    'purchase
-                    FormViewSamplePurchase.id_sample_purc = FormWork.GVSamplePurchase.GetFocusedRowCellDisplayText("id_sample_purc").ToString
-                    FormViewSamplePurchase.ShowDialog()
-                ElseIf FormWork.XTCSample.SelectedTabPageIndex = 1 Then
-                    'receive
-                    FormViewSampleReceive.id_receive = FormWork.GVSampleReceive.GetFocusedRowCellDisplayText("id_sample_purc_rec").ToString
-                    FormViewSampleReceive.ShowDialog()
-                ElseIf FormWork.XTCSample.SelectedTabPageIndex = 2 Then
-                    'packing list
-                    FormViewSamplePL.id_pl_sample_purc = FormWork.GVSamplePL.GetFocusedRowCellDisplayText("id_pl_sample_purc").ToString
-                    FormViewSamplePL.ShowDialog()
-                ElseIf FormWork.XTCSample.SelectedTabPageIndex = 3 Then
-                    'paymen requisition
-                    FormViewSamplePR.id_pr = FormWork.GVSamplePR.GetFocusedRowCellDisplayText("id_pr_sample_purc").ToString
-                    FormViewSamplePR.ShowDialog()
-                ElseIf FormWork.XTCSample.SelectedTabPageIndex = 4 Then
-                    'sample requisition
-                    FormViewSampleReq.id_sample_requisition = FormWork.GVSampleReq.GetFocusedRowCellValue("id_sample_requisition").ToString
-                    FormViewSampleReq.ShowDialog()
-                ElseIf FormWork.XTCSample.SelectedTabPageIndex = 5 Then
-                    'PL Sample Del
-                    FormViewSamplePLDel.action = "upd"
-                    FormViewSamplePLDel.id_pl_sample_del = FormWork.GVSamplePLDel.GetFocusedRowCellDisplayText("id_pl_sample_del").ToString
-                    FormViewSamplePLDel.id_comp_contact_to = FormWork.GVSamplePLDel.GetFocusedRowCellDisplayText("id_comp_contact_to").ToString
-                    FormViewSamplePLDel.id_comp_contact_from = FormWork.GVSamplePLDel.GetFocusedRowCellDisplayText("id_comp_contact_from").ToString
-                    FormViewSamplePLDel.ShowDialog()
-                ElseIf FormWork.XTCSample.SelectedTabPageIndex = 6 Then
-                    'Sample Return From Delivery
-                    FormViewSampleReturn.action = "upd"
-                    FormViewSampleReturn.id_sample_return = FormWork.GVRetSample.GetFocusedRowCellDisplayText("id_sample_return").ToString
-                    FormViewSampleReturn.ShowDialog()
-                ElseIf FormWork.XTCSample.SelectedTabPageIndex = 7 Then
-                    'Adj In Sample
-                    FormViewSampleAdjIn.action = "upd"
-                    FormViewSampleAdjIn.id_adj_in_sample = FormWork.GVAdjSampleIn.GetFocusedRowCellDisplayText("id_adj_in_sample").ToString
-                    FormViewSampleAdjIn.ShowDialog()
-                ElseIf FormWork.XTCSample.SelectedTabPageIndex = 8 Then
-                    'Adj Out Sample
-                    FormViewSampleAdjOut.action = "upd"
-                    FormViewSampleAdjOut.id_adj_out_sample = FormWork.GVAdjOutSample.GetFocusedRowCellDisplayText("id_adj_out_sample").ToString
-                    FormViewSampleAdjOut.ShowDialog()
-                ElseIf FormWork.XTCSample.SelectedTabPageIndex = 9 Then
-                    'PL SAMPLE DELIVERY
-                    FormViewSampleDel.id_sample_del = FormWork.GVSampleDel.GetFocusedRowCellValue("id_sample_del").ToString
-                    FormViewSampleDel.ShowDialog()
-                ElseIf FormWork.XTCSample.SelectedTabPageIndex = 10 Then
-                    'REC PL SAMPLE DELIVERY
-                    FormViewSampleDelRec.id_sample_del_rec = FormWork.GVSampleDelRec.GetFocusedRowCellValue("id_sample_del_rec").ToString
-                    FormViewSampleDelRec.ShowDialog()
-                ElseIf FormWork.XTCSample.SelectedTabPageIndex = 11 Then
-                    'SALES ORDER SAMPLE
-                    FormViewSampleOrder.id_sample_order = FormWork.GVSampleOrder.GetFocusedRowCellValue("id_sample_order").ToString
-                    FormViewSampleOrder.ShowDialog()
-                ElseIf FormWork.XTCSample.SelectedTabPageIndex = 12 Then
-                    'DELIVERY ORDER SAMPLE
-                    FormViewSampleDelOrder.id_pl_sample_order_del = FormWork.GVSampleDelOrder.GetFocusedRowCellValue("id_pl_sample_order_del").ToString
-                    FormViewSampleDelOrder.ShowDialog()
-                End If
-            ElseIf FormWork.XTCGeneral.SelectedTabPageIndex = 2 Then
-                If FormWork.XTCMaterial.SelectedTabPageIndex = 0 Then
-                    'PO
-                ElseIf FormWork.XTCMaterial.SelectedTabPageIndex = 1 Then
-                    'rEC
-                ElseIf FormWork.XTCMaterial.SelectedTabPageIndex = 2 Then
-                    'PR PO
-                    FormViewMatPR.id_pr = FormWork.GVMatPRPO.GetFocusedRowCellValue("id_pr_mat_purc").ToString
-                    FormViewMatPR.ShowDialog()
-                ElseIf FormWork.XTCMaterial.SelectedTabPageIndex = 3 Then
-                    'PR WO
-                    FormViewMatPRWO.id_pr = FormWork.GVMatPRWO.GetFocusedRowCellValue("id_pr_mat_wo").ToString
-                    FormViewMatPRWO.ShowDialog()
-                ElseIf FormWork.XTCMaterial.SelectedTabPageIndex = 4 Then
-                    'Adj In Material
-                    FormViewMatAdjIn.action = "upd"
-                    FormViewMatAdjIn.id_adj_in_mat = FormWork.GVMatAdjIn.GetFocusedRowCellDisplayText("id_adj_in_mat").ToString
-                    FormViewMatAdjIn.ShowDialog()
-                ElseIf FormWork.XTCMaterial.SelectedTabPageIndex = 5 Then
-                    'Adj Out Materal
-                    FormViewMatAdjOut.action = "upd"
-                    FormViewMatAdjOut.id_adj_out_mat = FormWork.GVMatAdjOut.GetFocusedRowCellDisplayText("id_adj_out_mat").ToString
-                    FormViewMatAdjOut.ShowDialog()
-                End If
-            ElseIf FormWork.XTCGeneral.SelectedTabPageIndex = 3 Then
-                If FormWork.XTCProduction.SelectedTabPageIndex = 0 Then
-                    'prod demand
-                    FormViewProdDemand.report_mark_type = FormWork.GVProdDemand.GetFocusedRowCellValue("report_mark_type").ToString
-                    FormViewProdDemand.id_prod_demand = FormWork.GVProdDemand.GetFocusedRowCellDisplayText("id_prod_demand").ToString
-                    FormViewProdDemand.ShowDialog()
-                ElseIf FormWork.XTCProduction.SelectedTabPageIndex = 3 Then
-                    'prod FG QC
-                    FormViewProductionRec.id_receive = FormWork.GVProdRec.GetFocusedRowCellDisplayText("id_prod_order_rec").ToString
-                    FormViewProductionRec.ShowDialog()
-                ElseIf FormWork.XTCProduction.SelectedTabPageIndex = 4 Then
-                    'return out FG QC
-                    FormViewProductionRetOut.id_prod_order_ret_out = FormWork.GVProdRetOut.GetFocusedRowCellDisplayText("id_prod_order_ret_out").ToString
-                    FormViewProductionRetOut.ShowDialog()
-                ElseIf FormWork.XTCProduction.SelectedTabPageIndex = 5 Then
-                    'return in FG QC
-                    FormViewProductionRetIn.id_prod_order_ret_in = FormWork.GVProdRetIn.GetFocusedRowCellDisplayText("id_prod_order_ret_in").ToString
-                    FormViewProductionRetIn.ShowDialog()
-                ElseIf FormWork.XTCProduction.SelectedTabPageIndex = 6 Then
-                    'PL FG TO WH
-                    Dim id As String = "-1"
-                    Try
-                        id = FormWork.GVProdPLToWH.GetFocusedRowCellValue("id_pl_prod_order").ToString
-                    Catch ex As Exception
-                    End Try
-                    If id <> "-1" And id <> "" Then
-                        FormViewProductionPLToWH.id_pl_prod_order = id
-                        FormViewProductionPLToWH.ShowDialog()
-                    End If
-                ElseIf FormWork.XTCProduction.SelectedTabPageIndex = 7 Then
-                    'PL FG TO WH
-                    FormViewProductionPLToWHRec.id_pl_prod_order_rec = FormWork.GVProdPLToWHRec.GetFocusedRowCellDisplayText("id_pl_prod_order_rec").ToString
-                    FormViewProductionPLToWHRec.ShowDialog()
-                End If
-            ElseIf FormWork.XTCGeneral.SelectedTabPageIndex = 4 Then
-                If FormWork.XTCSales.SelectedTabPageIndex = 0 Then
-                    'SALES TARGET
-                ElseIf FormWork.XTCSales.SelectedTabPageIndex = 1 Then
-                    'PROPOSE PRICE
-                    FormViewFGProposePrice.id_fg_propose_price = FormWork.GVFGPropose.GetFocusedRowCellValue("id_fg_propose_price").ToString
-                    FormViewFGProposePrice.ShowDialog()
-                ElseIf FormWork.XTCSales.SelectedTabPageIndex = 2 Then
-                    'SALES ORDER
-                    FormViewSalesOrder.id_sales_order = FormWork.GVSalesOrder.GetFocusedRowCellValue("id_sales_order").ToString
-                    FormViewSalesOrder.ShowDialog()
-                ElseIf FormWork.XTCSales.SelectedTabPageIndex = 3 Then
-                    'SALES DEL ORDER
-                    FormViewSalesDelOrder.id_pl_sales_order_del = FormWork.GVSalesDelOrder.GetFocusedRowCellValue("id_pl_sales_order_del").ToString
-                    FormViewSalesDelOrder.ShowDialog()
-                ElseIf FormWork.XTCSales.SelectedTabPageIndex = 4 Then
-                    'SALES Return ORDER
-                    FormViewSalesReturnOrder.id_sales_return_order = FormWork.GVSalesReturnOrder.GetFocusedRowCellValue("id_sales_return_order").ToString
-                    FormViewSalesReturnOrder.ShowDialog()
-                ElseIf FormWork.XTCSales.SelectedTabPageIndex = 5 Then
-                    'SALES Return
-                    FormViewSalesReturn.id_sales_return = FormWork.GVSalesReturn.GetFocusedRowCellValue("id_sales_return").ToString
-                    FormViewSalesReturn.ShowDialog()
-                ElseIf FormWork.XTCSales.SelectedTabPageIndex = 6 Then
-                    'SALES POS
-                    FormViewSalesPOS.id_sales_pos = FormWork.GVSalesPOS.GetFocusedRowCellValue("id_sales_pos").ToString
-                    FormViewSalesPOS.ShowDialog()
-                ElseIf FormWork.XTCSales.SelectedTabPageIndex = 7 Then
-                    'SALES CREDIT NOTE
-                    FormViewSalesCreditNote.id_sales_pos = FormWork.GVSalesCreditNote.GetFocusedRowCellValue("id_sales_pos").ToString
-                    FormViewSalesCreditNote.ShowDialog()
-                ElseIf FormWork.XTCSales.SelectedTabPageIndex = 8 Then
-                    'SALES Return QC
-                    FormViewSalesReturnQC.id_sales_return_qc = FormWork.GVSalesReturnQC.GetFocusedRowCellValue("id_sales_return_qc").ToString
-                    FormViewSalesReturnQC.ShowDialog()
-                ElseIf FormWork.XTCSales.SelectedTabPageIndex = 9 Then
-                    'SALES Invoice
-                    FormViewSalesInvoice.id_sales_invoice = FormWork.GVSalesInvoice.GetFocusedRowCellValue("id_sales_invoice").ToString
-                    FormViewSalesInvoice.ShowDialog()
-                ElseIf FormWork.XTCSales.SelectedTabPageIndex = 10 Then
-                    'FG SO STORE
-                    FormViewFGStockOpname.id_fg_so_store = FormWork.GVSOStore.GetFocusedRowCellValue("id_fg_so_store").ToString
-                    FormViewFGStockOpname.ShowDialog()
-                ElseIf FormWork.XTCSales.SelectedTabPageIndex = 11 Then
-                    'FG MISSING
-                    FormViewFGMissing.id_fg_missing = FormWork.GVFGMissing.GetFocusedRowCellValue("id_sales_pos").ToString
-                    FormViewFGMissing.ShowDialog()
-                ElseIf FormWork.XTCSales.SelectedTabPageIndex = 12 Then
-                    'FG MISSING CREDIT NOTE STORE
-                    FormViewFGMissingCreditNoteStore.id_sales_pos = FormWork.GVFGMissingCNStore.GetFocusedRowCellValue("id_sales_pos").ToString
-                    FormViewFGMissingCreditNoteStore.ShowDialog()
-                ElseIf FormWork.XTCSales.SelectedTabPageIndex = 13 Then
-                    'FG SO WH
-                    FormViewFGStockOpnameWH.id_fg_so_wh = FormWork.GVFGSOWH.GetFocusedRowCellValue("id_fg_so_wh").ToString
-                    FormViewFGStockOpnameWH.ShowDialog()
-                ElseIf FormWork.XTCSales.SelectedTabPageIndex = 14 Then
-                    'FG ADJ IN
-                    FormViewFGAdjIn.id_adj_in_fg = FormWork.GVFGAdjIn.GetFocusedRowCellValue("id_adj_in_fg").ToString
-                    FormViewFGAdjIn.ShowDialog()
-                ElseIf FormWork.XTCSales.SelectedTabPageIndex = 15 Then
-                    'FG ADJ OUT
-                    FormViewFGAdjOut.id_adj_out_fg = FormWork.GVFGAdjOut.GetFocusedRowCellValue("id_adj_out_fg").ToString
-                    FormViewFGAdjOut.ShowDialog()
-                ElseIf FormWork.XTCSales.SelectedTabPageIndex = 16 Then
-                    'FG TRF
-                    FormViewFGTrf.id_fg_trf = FormWork.GVFGTrf.GetFocusedRowCellValue("id_fg_trf").ToString
-                    FormViewFGTrf.ShowDialog()
-                ElseIf FormWork.XTCSales.SelectedTabPageIndex = 17 Then
-                    'FG TRF REC
-                    FormViewFGTrf.id_type = "1"
-                    FormViewFGTrf.id_fg_trf = FormWork.GVFGTrfRec.GetFocusedRowCellValue("id_fg_trf").ToString
-                    FormViewFGTrf.ShowDialog()
-                ElseIf FormWork.XTCSales.SelectedTabPageIndex = 18 Then
-                    'CODE REPLACEMENT STORE
-                    FormViewFGCodeReplaceStore.id_fg_code_replace_store = FormWork.GVFGCodeReplaceStore.GetFocusedRowCellValue("id_fg_code_replace_store").ToString
-                    FormViewFGCodeReplaceStore.ShowDialog()
-                ElseIf FormWork.XTCSales.SelectedTabPageIndex = 19 Then
-                    'CODE REPLACEMENT Wh
-                    FormViewFGCodeReplaceWH.id_fg_code_replace_wh = FormWork.GVFGCodeReplaceWH.GetFocusedRowCellValue("id_fg_code_replace_wh").ToString
-                    FormViewFGCodeReplaceWH.ShowDialog()
-                ElseIf FormWork.XTCSales.SelectedTabPageIndex = 20 Then
-                    'WRITE OFF FG
-                    FormViewFGWoff.id_fg_woff = FormWork.GVFGWoff.GetFocusedRowCellValue("id_fg_woff").ToString
-                    FormViewFGWoff.ShowDialog()
-                End If
+
             End If
         ElseIf formName = "FormFGStockOpnameStore" Then
             FormViewFGStockOpname.id_fg_so_store = FormFGStockOpnameStore.GVSOStore.GetFocusedRowCellValue("id_fg_so_store").ToString
@@ -11828,6 +11675,60 @@ Public Class FormMain
             FormFGRepairReturn.Show()
             FormFGRepairReturn.WindowState = FormWindowState.Maximized
             FormFGRepairReturn.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+    Private Sub NBAttnIndDep_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBAttnIndDep.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormEmpAttnInd.MdiParent = Me
+            FormEmpAttnInd.is_dep = True
+            FormEmpAttnInd.Show()
+            FormEmpAttnInd.WindowState = FormWindowState.Maximized
+            FormEmpAttnInd.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBPDRef_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBPDRef.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormProdDemandRev.MdiParent = Me
+            FormProdDemandRev.Show()
+            FormProdDemandRev.WindowState = FormWindowState.Maximized
+            FormProdDemandRev.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBCancelForm_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBCancelForm.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormReportMarkCancelList.MdiParent = Me
+            FormReportMarkCancelList.is_admin = "-1"
+            FormReportMarkCancelList.Show()
+            FormReportMarkCancelList.WindowState = FormWindowState.Maximized
+            FormReportMarkCancelList.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBCancelFormAdmin_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBCancelFormAdmin.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormReportMarkCancelList.MdiParent = Me
+            FormReportMarkCancelList.is_admin = "1"
+            FormReportMarkCancelList.Show()
+            FormReportMarkCancelList.WindowState = FormWindowState.Maximized
+            FormReportMarkCancelList.Focus()
         Catch ex As Exception
             errorProcess()
         End Try

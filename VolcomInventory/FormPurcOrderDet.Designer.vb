@@ -56,6 +56,8 @@ Partial Class FormPurcOrderDet
         Me.BtnSave = New DevExpress.XtraEditors.SimpleButton()
         Me.PanelControl5 = New DevExpress.XtraEditors.PanelControl()
         Me.PanelControl6 = New DevExpress.XtraEditors.PanelControl()
+        Me.LabelControl15 = New DevExpress.XtraEditors.LabelControl()
+        Me.CEPercent = New DevExpress.XtraEditors.CheckEdit()
         Me.TEDiscTotal = New DevExpress.XtraEditors.TextEdit()
         Me.TEGrandTotal = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl9 = New DevExpress.XtraEditors.LabelControl()
@@ -76,9 +78,11 @@ Partial Class FormPurcOrderDet
         Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn21 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn22 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn33 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RICECheck = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
@@ -90,8 +94,10 @@ Partial Class FormPurcOrderDet
         Me.GridColumnPOItemDesc = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnQtyPO = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnPOUOM = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnValQty = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnPOSubTot = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnPOVal = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RITEVal = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.GridColumnDiscPercent = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnDisc = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemSpinEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
@@ -102,6 +108,8 @@ Partial Class FormPurcOrderDet
         Me.GridColumn18 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn19 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn20 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -129,6 +137,7 @@ Partial Class FormPurcOrderDet
         Me.PanelControl5.SuspendLayout()
         CType(Me.PanelControl6, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl6.SuspendLayout()
+        CType(Me.CEPercent.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEDiscTotal.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEGrandTotal.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEDiscPercent.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -147,6 +156,7 @@ Partial Class FormPurcOrderDet
         Me.XTPSummary.SuspendLayout()
         CType(Me.GCSummary, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVSummary, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RITEVal, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemSpinEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemSearchLookUpEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -407,7 +417,6 @@ Partial Class FormPurcOrderDet
         '
         Me.LEPaymentTerm.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LEPaymentTerm.Enabled = False
         Me.LEPaymentTerm.Location = New System.Drawing.Point(102, 88)
         Me.LEPaymentTerm.Name = "LEPaymentTerm"
         Me.LEPaymentTerm.Properties.Appearance.Options.UseTextOptions = True
@@ -575,6 +584,8 @@ Partial Class FormPurcOrderDet
         'PanelControl6
         '
         Me.PanelControl6.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelControl6.Controls.Add(Me.LabelControl15)
+        Me.PanelControl6.Controls.Add(Me.CEPercent)
         Me.PanelControl6.Controls.Add(Me.TEDiscTotal)
         Me.PanelControl6.Controls.Add(Me.TEGrandTotal)
         Me.PanelControl6.Controls.Add(Me.LabelControl9)
@@ -583,21 +594,44 @@ Partial Class FormPurcOrderDet
         Me.PanelControl6.Controls.Add(Me.TETotal)
         Me.PanelControl6.Controls.Add(Me.LabelControl6)
         Me.PanelControl6.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PanelControl6.Location = New System.Drawing.Point(584, 2)
+        Me.PanelControl6.Location = New System.Drawing.Point(550, 2)
         Me.PanelControl6.Name = "PanelControl6"
-        Me.PanelControl6.Size = New System.Drawing.Size(367, 99)
+        Me.PanelControl6.Size = New System.Drawing.Size(401, 99)
         Me.PanelControl6.TabIndex = 172
+        '
+        'LabelControl15
+        '
+        Me.LabelControl15.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl15.Location = New System.Drawing.Point(171, 37)
+        Me.LabelControl15.Name = "LabelControl15"
+        Me.LabelControl15.Size = New System.Drawing.Size(11, 13)
+        Me.LabelControl15.TabIndex = 8900
+        Me.LabelControl15.Text = "%"
+        '
+        'CEPercent
+        '
+        Me.CEPercent.Location = New System.Drawing.Point(87, 35)
+        Me.CEPercent.Name = "CEPercent"
+        Me.CEPercent.Properties.Caption = ""
+        Me.CEPercent.Size = New System.Drawing.Size(17, 19)
+        Me.CEPercent.TabIndex = 173
         '
         'TEDiscTotal
         '
         Me.TEDiscTotal.EditValue = ""
-        Me.TEDiscTotal.Location = New System.Drawing.Point(151, 34)
+        Me.TEDiscTotal.Location = New System.Drawing.Point(185, 34)
         Me.TEDiscTotal.Name = "TEDiscTotal"
+        Me.TEDiscTotal.Properties.Appearance.Options.UseTextOptions = True
+        Me.TEDiscTotal.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.TEDiscTotal.Properties.AppearanceDisabled.Options.UseTextOptions = True
+        Me.TEDiscTotal.Properties.AppearanceDisabled.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.TEDiscTotal.Properties.AppearanceReadOnly.Options.UseTextOptions = True
         Me.TEDiscTotal.Properties.AppearanceReadOnly.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.TEDiscTotal.Properties.DisplayFormat.FormatString = "N2"
         Me.TEDiscTotal.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.TEDiscTotal.Properties.EditValueChangedDelay = 1
+        Me.TEDiscTotal.Properties.Mask.EditMask = "N2"
+        Me.TEDiscTotal.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
         Me.TEDiscTotal.Size = New System.Drawing.Size(202, 20)
         Me.TEDiscTotal.TabIndex = 150
         Me.TEDiscTotal.TabStop = False
@@ -605,7 +639,7 @@ Partial Class FormPurcOrderDet
         'TEGrandTotal
         '
         Me.TEGrandTotal.EditValue = ""
-        Me.TEGrandTotal.Location = New System.Drawing.Point(76, 60)
+        Me.TEGrandTotal.Location = New System.Drawing.Point(87, 60)
         Me.TEGrandTotal.Name = "TEGrandTotal"
         Me.TEGrandTotal.Properties.AppearanceReadOnly.Options.UseTextOptions = True
         Me.TEGrandTotal.Properties.AppearanceReadOnly.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
@@ -613,7 +647,7 @@ Partial Class FormPurcOrderDet
         Me.TEGrandTotal.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.TEGrandTotal.Properties.EditValueChangedDelay = 1
         Me.TEGrandTotal.Properties.ReadOnly = True
-        Me.TEGrandTotal.Size = New System.Drawing.Size(277, 20)
+        Me.TEGrandTotal.Size = New System.Drawing.Size(300, 20)
         Me.TEGrandTotal.TabIndex = 149
         Me.TEGrandTotal.TabStop = False
         '
@@ -628,14 +662,21 @@ Partial Class FormPurcOrderDet
         'TEDiscPercent
         '
         Me.TEDiscPercent.EditValue = ""
-        Me.TEDiscPercent.Location = New System.Drawing.Point(76, 34)
+        Me.TEDiscPercent.Enabled = False
+        Me.TEDiscPercent.Location = New System.Drawing.Point(106, 34)
         Me.TEDiscPercent.Name = "TEDiscPercent"
+        Me.TEDiscPercent.Properties.Appearance.Options.UseTextOptions = True
+        Me.TEDiscPercent.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.TEDiscPercent.Properties.AppearanceDisabled.Options.UseTextOptions = True
+        Me.TEDiscPercent.Properties.AppearanceDisabled.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.TEDiscPercent.Properties.AppearanceReadOnly.Options.UseTextOptions = True
         Me.TEDiscPercent.Properties.AppearanceReadOnly.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.TEDiscPercent.Properties.DisplayFormat.FormatString = "N2"
         Me.TEDiscPercent.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.TEDiscPercent.Properties.EditValueChangedDelay = 1
-        Me.TEDiscPercent.Size = New System.Drawing.Size(69, 20)
+        Me.TEDiscPercent.Properties.Mask.EditMask = "N2"
+        Me.TEDiscPercent.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
+        Me.TEDiscPercent.Size = New System.Drawing.Size(62, 20)
         Me.TEDiscPercent.TabIndex = 147
         Me.TEDiscPercent.TabStop = False
         '
@@ -650,7 +691,7 @@ Partial Class FormPurcOrderDet
         'TETotal
         '
         Me.TETotal.EditValue = ""
-        Me.TETotal.Location = New System.Drawing.Point(76, 8)
+        Me.TETotal.Location = New System.Drawing.Point(87, 8)
         Me.TETotal.Name = "TETotal"
         Me.TETotal.Properties.AppearanceReadOnly.Options.UseTextOptions = True
         Me.TETotal.Properties.AppearanceReadOnly.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
@@ -658,7 +699,7 @@ Partial Class FormPurcOrderDet
         Me.TETotal.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.TETotal.Properties.EditValueChangedDelay = 1
         Me.TETotal.Properties.ReadOnly = True
-        Me.TETotal.Size = New System.Drawing.Size(277, 20)
+        Me.TETotal.Size = New System.Drawing.Size(300, 20)
         Me.TETotal.TabIndex = 145
         Me.TETotal.TabStop = False
         '
@@ -756,7 +797,7 @@ Partial Class FormPurcOrderDet
         '
         'GVPurcReq
         '
-        Me.GVPurcReq.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn8, Me.GridColumn9, Me.GridColumn1, Me.GridColumn21, Me.GridColumn22, Me.GridColumn33, Me.GridColumn2, Me.GridColumn10, Me.GridColumn11})
+        Me.GVPurcReq.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn8, Me.GridColumn9, Me.GridColumn1, Me.GridColumn21, Me.GridColumn3, Me.GridColumn22, Me.GridColumn33, Me.GridColumn2, Me.GridColumn10, Me.GridColumn11, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6})
         Me.GVPurcReq.GridControl = Me.GCPurcReq
         Me.GVPurcReq.Name = "GVPurcReq"
         Me.GVPurcReq.OptionsBehavior.ReadOnly = True
@@ -766,6 +807,7 @@ Partial Class FormPurcOrderDet
         'GridColumn8
         '
         Me.GridColumn8.Caption = "id_purc_req"
+        Me.GridColumn8.FieldName = "id_purc_req"
         Me.GridColumn8.Name = "GridColumn8"
         '
         'GridColumn9
@@ -780,6 +822,7 @@ Partial Class FormPurcOrderDet
         'GridColumn1
         '
         Me.GridColumn1.Caption = "ID Item"
+        Me.GridColumn1.FieldName = "id_item"
         Me.GridColumn1.Name = "GridColumn1"
         '
         'GridColumn21
@@ -791,9 +834,19 @@ Partial Class FormPurcOrderDet
         Me.GridColumn21.VisibleIndex = 3
         Me.GridColumn21.Width = 78
         '
+        'GridColumn3
+        '
+        Me.GridColumn3.Caption = "UOM"
+        Me.GridColumn3.FieldName = "uom"
+        Me.GridColumn3.Name = "GridColumn3"
+        Me.GridColumn3.Visible = True
+        Me.GridColumn3.VisibleIndex = 4
+        '
         'GridColumn22
         '
         Me.GridColumn22.Caption = "Qty (PR)"
+        Me.GridColumn22.DisplayFormat.FormatString = "N2"
+        Me.GridColumn22.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn22.FieldName = "qty_pr"
         Me.GridColumn22.Name = "GridColumn22"
         Me.GridColumn22.Visible = True
@@ -818,8 +871,16 @@ Partial Class FormPurcOrderDet
         Me.GridColumn2.FieldName = "val_pr"
         Me.GridColumn2.Name = "GridColumn2"
         Me.GridColumn2.Visible = True
-        Me.GridColumn2.VisibleIndex = 4
+        Me.GridColumn2.VisibleIndex = 7
         Me.GridColumn2.Width = 78
+        '
+        'GridColumn4
+        '
+        Me.GridColumn4.Caption = "Value (PO)"
+        Me.GridColumn4.DisplayFormat.FormatString = "N2"
+        Me.GridColumn4.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn4.FieldName = "val_po"
+        Me.GridColumn4.Name = "GridColumn4"
         '
         'GridColumn10
         '
@@ -870,14 +931,14 @@ Partial Class FormPurcOrderDet
         Me.GCSummary.LookAndFeel.SkinName = "Office 2010 Silver"
         Me.GCSummary.MainView = Me.GVSummary
         Me.GCSummary.Name = "GCSummary"
-        Me.GCSummary.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemSpinEdit2, Me.RepositoryItemSearchLookUpEdit1})
+        Me.GCSummary.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemSpinEdit2, Me.RepositoryItemSearchLookUpEdit1, Me.RITEVal})
         Me.GCSummary.Size = New System.Drawing.Size(947, 244)
         Me.GCSummary.TabIndex = 5
         Me.GCSummary.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVSummary})
         '
         'GVSummary
         '
-        Me.GVSummary.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnPOIdItem, Me.GridColumnPOItemDesc, Me.GridColumnQtyPO, Me.GridColumnPOUOM, Me.GridColumnPOSubTot, Me.GridColumnPOVal, Me.GridColumnDiscPercent, Me.GridColumnDisc})
+        Me.GVSummary.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnPOIdItem, Me.GridColumnPOItemDesc, Me.GridColumnQtyPO, Me.GridColumnPOUOM, Me.GridColumnValQty, Me.GridColumnPOSubTot, Me.GridColumnPOVal, Me.GridColumnDiscPercent, Me.GridColumnDisc})
         Me.GVSummary.GridControl = Me.GCSummary
         Me.GVSummary.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sub_tot", Nothing, "{0:N2}")})
         Me.GVSummary.Name = "GVSummary"
@@ -893,12 +954,16 @@ Partial Class FormPurcOrderDet
         'GridColumnPOIdItem
         '
         Me.GridColumnPOIdItem.Caption = "ID Item"
+        Me.GridColumnPOIdItem.FieldName = "id_item"
         Me.GridColumnPOIdItem.Name = "GridColumnPOIdItem"
+        Me.GridColumnPOIdItem.OptionsColumn.AllowEdit = False
         '
         'GridColumnPOItemDesc
         '
         Me.GridColumnPOItemDesc.Caption = "Item"
+        Me.GridColumnPOItemDesc.FieldName = "item_desc"
         Me.GridColumnPOItemDesc.Name = "GridColumnPOItemDesc"
+        Me.GridColumnPOItemDesc.OptionsColumn.AllowEdit = False
         Me.GridColumnPOItemDesc.Visible = True
         Me.GridColumnPOItemDesc.VisibleIndex = 0
         Me.GridColumnPOItemDesc.Width = 157
@@ -906,7 +971,11 @@ Partial Class FormPurcOrderDet
         'GridColumnQtyPO
         '
         Me.GridColumnQtyPO.Caption = "Qty"
+        Me.GridColumnQtyPO.DisplayFormat.FormatString = "N2"
+        Me.GridColumnQtyPO.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnQtyPO.FieldName = "qty_po"
         Me.GridColumnQtyPO.Name = "GridColumnQtyPO"
+        Me.GridColumnQtyPO.OptionsColumn.AllowEdit = False
         Me.GridColumnQtyPO.Visible = True
         Me.GridColumnQtyPO.VisibleIndex = 1
         Me.GridColumnQtyPO.Width = 72
@@ -914,15 +983,36 @@ Partial Class FormPurcOrderDet
         'GridColumnPOUOM
         '
         Me.GridColumnPOUOM.Caption = "UOM"
+        Me.GridColumnPOUOM.FieldName = "uom"
         Me.GridColumnPOUOM.Name = "GridColumnPOUOM"
+        Me.GridColumnPOUOM.OptionsColumn.AllowEdit = False
         Me.GridColumnPOUOM.Visible = True
         Me.GridColumnPOUOM.VisibleIndex = 2
         Me.GridColumnPOUOM.Width = 48
         '
+        'GridColumnValQty
+        '
+        Me.GridColumnValQty.Caption = "Value x Qty"
+        Me.GridColumnValQty.DisplayFormat.FormatString = "N2"
+        Me.GridColumnValQty.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnValQty.FieldName = "sub_tot_before"
+        Me.GridColumnValQty.Name = "GridColumnValQty"
+        Me.GridColumnValQty.OptionsColumn.AllowEdit = False
+        Me.GridColumnValQty.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sub_tot_before", "{0:N2}")})
+        Me.GridColumnValQty.UnboundExpression = "[qty_po] * [val_po]"
+        Me.GridColumnValQty.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
+        '
         'GridColumnPOSubTot
         '
         Me.GridColumnPOSubTot.Caption = "Sub Total"
+        Me.GridColumnPOSubTot.DisplayFormat.FormatString = "N2"
+        Me.GridColumnPOSubTot.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnPOSubTot.FieldName = "sub_total"
         Me.GridColumnPOSubTot.Name = "GridColumnPOSubTot"
+        Me.GridColumnPOSubTot.OptionsColumn.AllowEdit = False
+        Me.GridColumnPOSubTot.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sub_total", "{0:N2}")})
+        Me.GridColumnPOSubTot.UnboundExpression = "([val_po] - [discount]) * [qty_po]"
+        Me.GridColumnPOSubTot.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
         Me.GridColumnPOSubTot.Visible = True
         Me.GridColumnPOSubTot.VisibleIndex = 6
         Me.GridColumnPOSubTot.Width = 239
@@ -930,14 +1020,31 @@ Partial Class FormPurcOrderDet
         'GridColumnPOVal
         '
         Me.GridColumnPOVal.Caption = "Value"
+        Me.GridColumnPOVal.ColumnEdit = Me.RITEVal
+        Me.GridColumnPOVal.DisplayFormat.FormatString = "N2"
+        Me.GridColumnPOVal.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnPOVal.FieldName = "val_po"
         Me.GridColumnPOVal.Name = "GridColumnPOVal"
         Me.GridColumnPOVal.Visible = True
         Me.GridColumnPOVal.VisibleIndex = 3
         Me.GridColumnPOVal.Width = 174
         '
+        'RITEVal
+        '
+        Me.RITEVal.AutoHeight = False
+        Me.RITEVal.DisplayFormat.FormatString = "N2"
+        Me.RITEVal.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.RITEVal.Mask.EditMask = "N2"
+        Me.RITEVal.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
+        Me.RITEVal.Name = "RITEVal"
+        '
         'GridColumnDiscPercent
         '
         Me.GridColumnDiscPercent.Caption = "Discount (%)"
+        Me.GridColumnDiscPercent.ColumnEdit = Me.RITEVal
+        Me.GridColumnDiscPercent.DisplayFormat.FormatString = "N2"
+        Me.GridColumnDiscPercent.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnDiscPercent.FieldName = "discount_percent"
         Me.GridColumnDiscPercent.Name = "GridColumnDiscPercent"
         Me.GridColumnDiscPercent.Visible = True
         Me.GridColumnDiscPercent.VisibleIndex = 4
@@ -946,7 +1053,12 @@ Partial Class FormPurcOrderDet
         'GridColumnDisc
         '
         Me.GridColumnDisc.Caption = "Discount"
+        Me.GridColumnDisc.ColumnEdit = Me.RITEVal
+        Me.GridColumnDisc.DisplayFormat.FormatString = "N2"
+        Me.GridColumnDisc.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnDisc.FieldName = "discount"
         Me.GridColumnDisc.Name = "GridColumnDisc"
+        Me.GridColumnDisc.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "discount", "{0:N2}")})
         Me.GridColumnDisc.Visible = True
         Me.GridColumnDisc.VisibleIndex = 5
         Me.GridColumnDisc.Width = 161
@@ -1015,6 +1127,22 @@ Partial Class FormPurcOrderDet
         Me.GridColumn20.Visible = True
         Me.GridColumn20.VisibleIndex = 2
         '
+        'GridColumn5
+        '
+        Me.GridColumn5.Caption = "Discount %"
+        Me.GridColumn5.DisplayFormat.FormatString = "N2"
+        Me.GridColumn5.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn5.FieldName = "discount_percent"
+        Me.GridColumn5.Name = "GridColumn5"
+        '
+        'GridColumn6
+        '
+        Me.GridColumn6.Caption = "Discount"
+        Me.GridColumn6.DisplayFormat.FormatString = "N2"
+        Me.GridColumn6.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn6.FieldName = "discount"
+        Me.GridColumn6.Name = "GridColumn6"
+        '
         'FormPurcOrderDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1060,6 +1188,7 @@ Partial Class FormPurcOrderDet
         CType(Me.PanelControl6, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl6.ResumeLayout(False)
         Me.PanelControl6.PerformLayout()
+        CType(Me.CEPercent.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEDiscTotal.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEGrandTotal.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEDiscPercent.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1079,6 +1208,7 @@ Partial Class FormPurcOrderDet
         Me.XTPSummary.ResumeLayout(False)
         CType(Me.GCSummary, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVSummary, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RITEVal, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemSpinEdit2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemSearchLookUpEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView3, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1167,4 +1297,12 @@ Partial Class FormPurcOrderDet
     Friend WithEvents GridColumn10 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn11 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RICECheck As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+    Friend WithEvents GridColumn3 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnValQty As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RITEVal As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
+    Friend WithEvents LabelControl15 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents CEPercent As DevExpress.XtraEditors.CheckEdit
+    Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

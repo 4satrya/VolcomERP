@@ -360,14 +360,22 @@
         ElseIf TEAdvLeaveTot.EditValue > Integer.Parse(get_opt_emp_field("notif_max_adv_hour")) Then
             stopCustom("Advance Leave sudah melebihi batas yang ditentukan.")
         Else
-            If LELeaveType.EditValue.ToString = "2" And LEFormDC.EditValue.ToString = "2" Then
+            If LELeaveType.EditValue.ToString = "2" And LEFormDC.EditValue.ToString = "2" And GVLeaveDet.RowCount > 1 Then
+                'lebih dari 1 hari sakit pakai form
+                stopCustom("Hanya dapat mengajukan sakit dengan form satu hari dalam satu bulan." & vbNewLine & "Ajukan surat keterangan sakit dari dokter (DC) untuk pengajuan sakit.")
+                problem = True
+            ElseIf LELeaveType.EditValue.ToString = "2" And LEFormDC.EditValue.ToString = "2" Then
                 'check if sudah form sekali dalam sebulan.
+                Dim date_sick As String = Date.Parse(GVLeaveDet.GetRowCellValue(0, "datetime_start")).ToString("yyyy-MM-dd")
+                '
                 Dim query_cek As String = "SELECT COUNT(lvd.id_emp_leave) FROM tb_emp_leave_det lvd
                                         INNER JOIN tb_emp_leave lv ON lv.id_emp_leave=lvd.id_emp_leave
-                                        WHERE DATE_FORMAT(lvd.datetime_start, '%Y-%m') = DATE_FORMAT(NOW(), '%Y-%m') AND lv.id_emp='" & id_employee & "' AND lv.id_form_dc='2' AND lv.id_leave_type='2' AND lv.id_report_status!='5' "
+                                        WHERE DATE_FORMAT(lvd.datetime_start, '%Y-%m') = DATE_FORMAT('" & date_sick & "', '%Y-%m') AND lv.id_emp='" & id_employee & "' AND lv.id_form_dc='2' AND lv.id_leave_type='2' AND lv.id_report_status!='5' "
                 Dim cek As String = execute_query(query_cek, 0, True, "", "", "", "")
+                Console.WriteLine(query_cek)
+                Console.WriteLine(cek)
                 If Not cek.ToString = "0" Then
-                    stopCustom("Hanya dapat mengajukan sakit dengan form satu kali dalam satu bulan." & vbNewLine & "Please provide DC for sick leave.")
+                    stopCustom("Hanya dapat mengajukan sakit dengan form satu hari dalam satu bulan." & vbNewLine & "Ajukan surat keterangan sakit dari dokter (DC) untuk pengajuan sakit.")
                     problem = True
                 End If
             End If

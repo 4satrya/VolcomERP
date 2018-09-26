@@ -77,6 +77,8 @@ Partial Class FormSalesPOSDet
         Me.METotSay = New DevExpress.XtraEditors.MemoEdit()
         Me.LabelControl19 = New DevExpress.XtraEditors.LabelControl()
         Me.PanelControlBottomRight = New DevExpress.XtraEditors.PanelControl()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
+        Me.TxtPotPenjualan = New DevExpress.XtraEditors.TextEdit()
         Me.TxtTaxBase = New DevExpress.XtraEditors.TextEdit()
         Me.TxtVatTot = New DevExpress.XtraEditors.TextEdit()
         Me.TxtNetto = New DevExpress.XtraEditors.TextEdit()
@@ -129,8 +131,6 @@ Partial Class FormSalesPOSDet
         Me.BtnAdd = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnListProduct = New DevExpress.XtraEditors.SimpleButton()
         Me.EPForm = New System.Windows.Forms.ErrorProvider(Me.components)
-        Me.TxtPotPenjualan = New DevExpress.XtraEditors.TextEdit()
-        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
         CType(Me.PanelControlTopLeft, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -175,6 +175,7 @@ Partial Class FormSalesPOSDet
         CType(Me.METotSay.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControlBottomRight, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlBottomRight.SuspendLayout()
+        CType(Me.TxtPotPenjualan.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtTaxBase.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtVatTot.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtNetto.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -190,7 +191,6 @@ Partial Class FormSalesPOSDet
         CType(Me.PanelControlNav, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlNav.SuspendLayout()
         CType(Me.EPForm, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TxtPotPenjualan.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupGeneralHeader
@@ -890,6 +890,25 @@ Partial Class FormSalesPOSDet
         Me.PanelControlBottomRight.Size = New System.Drawing.Size(258, 141)
         Me.PanelControlBottomRight.TabIndex = 172
         '
+        'LabelControl1
+        '
+        Me.LabelControl1.Location = New System.Drawing.Point(6, 36)
+        Me.LabelControl1.Name = "LabelControl1"
+        Me.LabelControl1.Size = New System.Drawing.Size(70, 13)
+        Me.LabelControl1.TabIndex = 170
+        Me.LabelControl1.Text = "Pot. Penjualan"
+        '
+        'TxtPotPenjualan
+        '
+        Me.TxtPotPenjualan.Location = New System.Drawing.Point(80, 33)
+        Me.TxtPotPenjualan.Name = "TxtPotPenjualan"
+        Me.TxtPotPenjualan.Properties.DisplayFormat.FormatString = "N2"
+        Me.TxtPotPenjualan.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.TxtPotPenjualan.Properties.Mask.EditMask = "n2"
+        Me.TxtPotPenjualan.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
+        Me.TxtPotPenjualan.Size = New System.Drawing.Size(160, 20)
+        Me.TxtPotPenjualan.TabIndex = 169
+        '
         'TxtTaxBase
         '
         Me.TxtTaxBase.Location = New System.Drawing.Point(80, 110)
@@ -1360,9 +1379,9 @@ Partial Class FormSalesPOSDet
         '
         'SimpleButton2
         '
-        Me.SimpleButton2.Location = New System.Drawing.Point(501, 7)
+        Me.SimpleButton2.Location = New System.Drawing.Point(536, 6)
         Me.SimpleButton2.Name = "SimpleButton2"
-        Me.SimpleButton2.Size = New System.Drawing.Size(75, 23)
+        Me.SimpleButton2.Size = New System.Drawing.Size(81, 23)
         Me.SimpleButton2.TabIndex = 25
         Me.SimpleButton2.Text = "SimpleButton2"
         Me.SimpleButton2.Visible = False
@@ -1446,25 +1465,6 @@ Partial Class FormSalesPOSDet
         '
         Me.EPForm.ContainerControl = Me
         '
-        'TxtPotPenjualan
-        '
-        Me.TxtPotPenjualan.Location = New System.Drawing.Point(80, 33)
-        Me.TxtPotPenjualan.Name = "TxtPotPenjualan"
-        Me.TxtPotPenjualan.Properties.DisplayFormat.FormatString = "N2"
-        Me.TxtPotPenjualan.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.TxtPotPenjualan.Properties.Mask.EditMask = "n2"
-        Me.TxtPotPenjualan.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
-        Me.TxtPotPenjualan.Size = New System.Drawing.Size(160, 20)
-        Me.TxtPotPenjualan.TabIndex = 169
-        '
-        'LabelControl1
-        '
-        Me.LabelControl1.Location = New System.Drawing.Point(6, 36)
-        Me.LabelControl1.Name = "LabelControl1"
-        Me.LabelControl1.Size = New System.Drawing.Size(70, 13)
-        Me.LabelControl1.TabIndex = 170
-        Me.LabelControl1.Text = "Pot. Penjualan"
-        '
         'FormSalesPOSDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1531,6 +1531,7 @@ Partial Class FormSalesPOSDet
         CType(Me.PanelControlBottomRight, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControlBottomRight.ResumeLayout(False)
         Me.PanelControlBottomRight.PerformLayout()
+        CType(Me.TxtPotPenjualan.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtTaxBase.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtVatTot.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtNetto.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1546,7 +1547,6 @@ Partial Class FormSalesPOSDet
         CType(Me.PanelControlNav, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControlNav.ResumeLayout(False)
         CType(Me.EPForm, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TxtPotPenjualan.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

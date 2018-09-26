@@ -244,25 +244,31 @@
     End Function
 
     Private Sub GVSchedule_CellValueChanged(sender As Object, e As DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs) Handles GVSchedule.CellValueChanged
-        If e.Column.FieldName = "ot_in" Or e.Column.FieldName = "ot_out" Or e.Column.FieldName = "ot_break" Or e.Column.FieldName = "id_ot_type" Or e.Column.FieldName = "id_dp_type" Then
+        If e.Column.FieldName = "is_check" Or e.Column.FieldName = "is_dp" Or e.Column.FieldName = "ot_in" Or e.Column.FieldName = "ot_out" Or e.Column.FieldName = "ot_break" Or e.Column.FieldName = "id_ot_type" Or e.Column.FieldName = "id_dp_type" Then
             Try
-                Dim ot_start As Date = GVSchedule.GetFocusedRowCellValue("ot_in")
-                Dim ot_end As Date = GVSchedule.GetFocusedRowCellValue("ot_out")
-                Dim ot_break As Decimal = GVSchedule.GetFocusedRowCellValue("ot_break")
-
-                Dim tot_hour As Decimal = calc_hour(ot_start, ot_end, ot_break)
-                Dim id_sch_type As String = GVSchedule.GetFocusedRowCellValue("id_schedule_type").ToString
-                Dim is_store As String = GVSchedule.GetFocusedRowCellValue("is_store").ToString
-                GVSchedule.SetFocusedRowCellValue("ot_hour", tot_hour)
-                GVSchedule.SetFocusedRowCellValue("point", calc_point(id_sch_type, tot_hour, is_store))
-                '
-                Dim tot_dp As Integer = calc_dp(tot_hour, calc_point(id_sch_type, tot_hour, is_store), GVSchedule.GetFocusedRowCellValue("id_dp_type").ToString)
-                GVSchedule.SetFocusedRowCellValue("dp_tot", tot_dp)
-                '
-                GVSchedule.RefreshData()
+                Dim rowhandle = e.RowHandle
+                calculate_overtime(rowhandle)
             Catch ex As Exception
+                Console.WriteLine(ex.ToString)
             End Try
         End If
+    End Sub
+
+    Sub calculate_overtime(ByVal rowhandle As Integer)
+        Dim ot_start As Date = GVSchedule.GetRowCellValue(rowhandle, "ot_in")
+        Dim ot_end As Date = GVSchedule.GetRowCellValue(rowhandle, "ot_out")
+        Dim ot_break As Decimal = GVSchedule.GetRowCellValue(rowhandle, "ot_break")
+
+        Dim tot_hour As Decimal = calc_hour(ot_start, ot_end, ot_break)
+        Dim id_sch_type As String = GVSchedule.GetRowCellValue(rowhandle, "id_schedule_type").ToString
+        Dim is_store As String = GVSchedule.GetRowCellValue(rowhandle, "is_store").ToString
+        GVSchedule.SetRowCellValue(rowhandle, "ot_hour", tot_hour)
+        GVSchedule.SetRowCellValue(rowhandle, "point", calc_point(id_sch_type, tot_hour, is_store))
+        '
+        Dim tot_dp As Integer = calc_dp(tot_hour, calc_point(id_sch_type, tot_hour, is_store), GVSchedule.GetRowCellValue(rowhandle, "id_dp_type").ToString)
+        GVSchedule.SetRowCellValue(rowhandle, "dp_tot", tot_dp)
+        '
+        GVSchedule.RefreshData()
     End Sub
 
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles BtnCancel.Click

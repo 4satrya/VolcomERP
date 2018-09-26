@@ -24,6 +24,7 @@
         Dim query As String = ""
         If form_type = "2" Or form_type = "3" Then
             query = query_c.queryMainStore("AND rep.id_report_status=6 ", "2")
+            GridColumnStatus.Visible = False
         Else
             query = query_c.queryMainStore("-1", "2")
         End If

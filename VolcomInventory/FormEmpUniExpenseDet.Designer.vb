@@ -538,7 +538,7 @@ Partial Class FormEmpUniExpenseDet
         Me.MinimizeBox = False
         Me.Name = "FormEmpUniExpenseDet"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Uniform Expense"
+        Me.Text = "Expense"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.GroupControlTop, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControlTop.ResumeLayout(False)

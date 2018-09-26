@@ -69,8 +69,8 @@
                                 INNER JOIN tb_m_departement dep ON dep.id_departement=pr.id_departement
                                 INNER JOIN tb_m_user usrc ON usrc.`id_user`=pr.`id_user_created`
                                 INNER JOIN tb_m_employee empc ON empc.`id_employee`=usrc.`id_employee`
-                                INNER JOIN tb_m_user usru ON usru.`id_user`=pr.`id_user_last_upd`
-                                INNER JOIN tb_m_employee empu ON empu.`id_employee`=usru.`id_employee` " & where_dep & "
+                                LEFT JOIN tb_m_user usru ON usru.`id_user`=pr.`id_user_last_upd`
+                                LEFT JOIN tb_m_employee empu ON empu.`id_employee`=usru.`id_employee` " & where_dep & "
                                 ORDER BY pr.`id_purc_req` DESC"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCPurcReq.DataSource = data

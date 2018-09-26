@@ -444,30 +444,54 @@ Public Class FormMasterRawMaterialDetSingle
     End Sub
     'Add Price
     Private Sub BtnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnAdd.Click
-        FormMasterRawMaterialPrcSingle.action = "ins"
-        FormMasterRawMaterialPrcSingle.ShowDialog()
+        Dim query_, res As String
+        'check first
+        query_ = String.Format("SELECT count(id_storage_mat) FROM tb_storage_mat WHERE id_mat_det='{0}' ", id_mat_det)
+        res = execute_query(query_, 0, True, "", "", "", "")
+        If Not res = "0" Then
+            stopCustom("Material already used with default cost.")
+        Else
+            FormMasterRawMaterialPrcSingle.action = "ins"
+            FormMasterRawMaterialPrcSingle.ShowDialog()
+        End If
     End Sub
     'Delete Price
     Private Sub BtnDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnDelete.Click
-        Dim confirm As DialogResult = XtraMessageBox.Show("Are you sure want to delete this price?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
-        If confirm = Windows.Forms.DialogResult.Yes Then
-            Cursor = Cursors.WaitCursor
-            Try
-                Dim id_mat_det_price As String = GVPrice.GetFocusedRowCellDisplayText("id_mat_det_price").ToString
-                Dim query As String = String.Format("DELETE FROM tb_m_mat_det_price WHERE id_mat_det_price = '{0}'", id_mat_det_price)
-                execute_non_query(query, True, "", "", "", "")
-                viewPrice()
-            Catch ex As Exception
-                errorDelete()
-            End Try
-            Cursor = Cursors.Default
+        Dim query_, res As String
+        'check first
+        query_ = String.Format("SELECT count(id_storage_mat) FROM tb_storage_mat WHERE id_mat_det='{0}' ", id_mat_det)
+        res = execute_query(query_, 0, True, "", "", "", "")
+        If Not res = "0" Then
+            stopCustom("Material already used with default cost.")
+        Else
+            Dim confirm As DialogResult = XtraMessageBox.Show("Are you sure want to delete this price?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+            If confirm = Windows.Forms.DialogResult.Yes Then
+                Cursor = Cursors.WaitCursor
+                Try
+                    Dim id_mat_det_price As String = GVPrice.GetFocusedRowCellDisplayText("id_mat_det_price").ToString
+                    Dim query As String = String.Format("DELETE FROM tb_m_mat_det_price WHERE id_mat_det_price = '{0}'", id_mat_det_price)
+                    execute_non_query(query, True, "", "", "", "")
+                    viewPrice()
+                Catch ex As Exception
+                    errorDelete()
+                End Try
+                Cursor = Cursors.Default
+            End If
         End If
     End Sub
     'Edit Price
     Private Sub BtnEdit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnEdit.Click
-        FormMasterRawMaterialPrcSingle.action = "upd"
-        FormMasterRawMaterialPrcSingle.id_mat_det_price = GVPrice.GetFocusedRowCellDisplayText("id_mat_det_price").ToString
-        FormMasterRawMaterialPrcSingle.ShowDialog()
+        Dim query_, res As String
+        'check first
+        query_ = String.Format("SELECT count(id_storage_mat) FROM tb_storage_mat WHERE id_mat_det='{0}' ", id_mat_det)
+        res = execute_query(query_, 0, True, "", "", "", "")
+        If Not res = "0" Then
+            stopCustom("Material already used with default cost.")
+        Else
+            FormMasterRawMaterialPrcSingle.action = "upd"
+            FormMasterRawMaterialPrcSingle.id_mat_det_price = GVPrice.GetFocusedRowCellDisplayText("id_mat_det_price").ToString
+            FormMasterRawMaterialPrcSingle.ShowDialog()
+        End If
     End Sub
     '----------MOVEMENT-----------------
     Sub viewMovement()

@@ -26,7 +26,7 @@
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles BtnSave.Click
         Cursor = Cursors.WaitCursor
         If SLEYear.EditValue = Nothing Or MEReason.Text = "" Then
-            stopCustom("All fields are required.")
+            warningCustom("Lengkapi seluruh data.")
         Else
             'check outstanding
             Dim cond_exist = False
@@ -37,7 +37,7 @@
             End If
 
             If cond_exist Then
-                stopCustom("Can't revision of the budget, because there is a revision that is being processed.")
+                warningCustom("Revisi anggaran tidak dapat dilakukan, karena revisi anggaran tahun " + SLEYear.Text.ToString + " sedang diproses.")
             Else
                 Dim year As String = SLEYear.Text.ToString
                 Dim value_expense_total_old = decimalSQL(TxtTotal.EditValue.ToString)

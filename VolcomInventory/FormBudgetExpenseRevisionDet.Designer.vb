@@ -49,6 +49,7 @@ Partial Class FormBudgetExpenseRevisionDet
         Me.BandedGridColumnExpType = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.gridBand1 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         Me.BandedGridColumnJanBudget = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.RepositoryItemTextEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.BandedGridColumnJanActual = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.RepositoryItemTextEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.BandedGridColumnJanDiff = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
@@ -137,6 +138,7 @@ Partial Class FormBudgetExpenseRevisionDet
         Me.PanelControlBottom.SuspendLayout()
         CType(Me.GCData, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVData, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SplitContainerControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainerControl1.SuspendLayout()
@@ -189,18 +191,18 @@ Partial Class FormBudgetExpenseRevisionDet
         Me.LabelControl7.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelControl7.Location = New System.Drawing.Point(36, 69)
         Me.LabelControl7.Name = "LabelControl7"
-        Me.LabelControl7.Size = New System.Drawing.Size(36, 13)
+        Me.LabelControl7.Size = New System.Drawing.Size(32, 13)
         Me.LabelControl7.TabIndex = 150
-        Me.LabelControl7.Text = "Reason"
+        Me.LabelControl7.Text = "Alasan"
         '
         'LabelControl6
         '
         Me.LabelControl6.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelControl6.Location = New System.Drawing.Point(36, 43)
         Me.LabelControl6.Name = "LabelControl6"
-        Me.LabelControl6.Size = New System.Drawing.Size(63, 13)
+        Me.LabelControl6.Size = New System.Drawing.Size(59, 13)
         Me.LabelControl6.TabIndex = 149
-        Me.LabelControl6.Text = "Departement"
+        Me.LabelControl6.Text = "Departemen"
         '
         'TxtDepartement
         '
@@ -227,9 +229,9 @@ Partial Class FormBudgetExpenseRevisionDet
         Me.LabelControl2.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelControl2.Location = New System.Drawing.Point(36, 17)
         Me.LabelControl2.Name = "LabelControl2"
-        Me.LabelControl2.Size = New System.Drawing.Size(22, 13)
+        Me.LabelControl2.Size = New System.Drawing.Size(30, 13)
         Me.LabelControl2.TabIndex = 147
-        Me.LabelControl2.Text = "Year"
+        Me.LabelControl2.Text = "Tahun"
         '
         'PanelControl1
         '
@@ -260,9 +262,9 @@ Partial Class FormBudgetExpenseRevisionDet
         Me.LabelControl4.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelControl4.Location = New System.Drawing.Point(11, 41)
         Me.LabelControl4.Name = "LabelControl4"
-        Me.LabelControl4.Size = New System.Drawing.Size(23, 13)
+        Me.LabelControl4.Size = New System.Drawing.Size(71, 13)
         Me.LabelControl4.TabIndex = 7
-        Me.LabelControl4.Text = "Date"
+        Me.LabelControl4.Text = "Tanggal dibuat"
         '
         'LEReportStatus
         '
@@ -310,9 +312,9 @@ Partial Class FormBudgetExpenseRevisionDet
         Me.LabelControl3.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelControl3.Location = New System.Drawing.Point(11, 15)
         Me.LabelControl3.Name = "LabelControl3"
-        Me.LabelControl3.Size = New System.Drawing.Size(37, 13)
+        Me.LabelControl3.Size = New System.Drawing.Size(31, 13)
         Me.LabelControl3.TabIndex = 5
-        Me.LabelControl3.Text = "Number"
+        Me.LabelControl3.Text = "Nomor"
         '
         'PanelControlBottom
         '
@@ -331,7 +333,7 @@ Partial Class FormBudgetExpenseRevisionDet
         '
         Me.BtnAttachment.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnAttachment.Image = CType(resources.GetObject("BtnAttachment.Image"), System.Drawing.Image)
-        Me.BtnAttachment.Location = New System.Drawing.Point(722, 2)
+        Me.BtnAttachment.Location = New System.Drawing.Point(701, 2)
         Me.BtnAttachment.Name = "BtnAttachment"
         Me.BtnAttachment.Size = New System.Drawing.Size(106, 40)
         Me.BtnAttachment.TabIndex = 4
@@ -342,11 +344,11 @@ Partial Class FormBudgetExpenseRevisionDet
         '
         Me.BtnPrint.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnPrint.Image = CType(resources.GetObject("BtnPrint.Image"), System.Drawing.Image)
-        Me.BtnPrint.Location = New System.Drawing.Point(828, 2)
+        Me.BtnPrint.Location = New System.Drawing.Point(807, 2)
         Me.BtnPrint.Name = "BtnPrint"
-        Me.BtnPrint.Size = New System.Drawing.Size(87, 40)
+        Me.BtnPrint.Size = New System.Drawing.Size(108, 40)
         Me.BtnPrint.TabIndex = 3
-        Me.BtnPrint.Text = "Print"
+        Me.BtnPrint.Text = "Print Report"
         '
         'BtnMark
         '
@@ -387,7 +389,7 @@ Partial Class FormBudgetExpenseRevisionDet
         Me.GCData.Location = New System.Drawing.Point(2, 60)
         Me.GCData.MainView = Me.GVData
         Me.GCData.Name = "GCData"
-        Me.GCData.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemTextEdit1})
+        Me.GCData.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemTextEdit1, Me.RepositoryItemTextEdit2})
         Me.GCData.Size = New System.Drawing.Size(1135, 370)
         Me.GCData.TabIndex = 14
         Me.GCData.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVData})
@@ -459,7 +461,10 @@ Partial Class FormBudgetExpenseRevisionDet
         '
         'BandedGridColumnJanBudget
         '
+        Me.BandedGridColumnJanBudget.AppearanceCell.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.BandedGridColumnJanBudget.AppearanceCell.Options.UseBackColor = True
         Me.BandedGridColumnJanBudget.Caption = "Before"
+        Me.BandedGridColumnJanBudget.ColumnEdit = Me.RepositoryItemTextEdit2
         Me.BandedGridColumnJanBudget.DisplayFormat.FormatString = "N2"
         Me.BandedGridColumnJanBudget.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.BandedGridColumnJanBudget.FieldName = "1_budget"
@@ -468,8 +473,16 @@ Partial Class FormBudgetExpenseRevisionDet
         Me.BandedGridColumnJanBudget.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "1_budget", "{0:N2}")})
         Me.BandedGridColumnJanBudget.Visible = True
         '
+        'RepositoryItemTextEdit2
+        '
+        Me.RepositoryItemTextEdit2.Name = "RepositoryItemTextEdit2"
+        '
         'BandedGridColumnJanActual
         '
+        Me.BandedGridColumnJanActual.AppearanceCell.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BandedGridColumnJanActual.AppearanceCell.Options.UseFont = True
+        Me.BandedGridColumnJanActual.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BandedGridColumnJanActual.AppearanceHeader.Options.UseFont = True
         Me.BandedGridColumnJanActual.Caption = "After"
         Me.BandedGridColumnJanActual.ColumnEdit = Me.RepositoryItemTextEdit1
         Me.BandedGridColumnJanActual.DisplayFormat.FormatString = "N2"
@@ -513,6 +526,8 @@ Partial Class FormBudgetExpenseRevisionDet
         '
         'BandedGridColumnFebBudget
         '
+        Me.BandedGridColumnFebBudget.AppearanceCell.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.BandedGridColumnFebBudget.AppearanceCell.Options.UseBackColor = True
         Me.BandedGridColumnFebBudget.Caption = "Before"
         Me.BandedGridColumnFebBudget.DisplayFormat.FormatString = "n2"
         Me.BandedGridColumnFebBudget.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
@@ -524,6 +539,10 @@ Partial Class FormBudgetExpenseRevisionDet
         '
         'BandedGridColumnFebActual
         '
+        Me.BandedGridColumnFebActual.AppearanceCell.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BandedGridColumnFebActual.AppearanceCell.Options.UseFont = True
+        Me.BandedGridColumnFebActual.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BandedGridColumnFebActual.AppearanceHeader.Options.UseFont = True
         Me.BandedGridColumnFebActual.Caption = "After"
         Me.BandedGridColumnFebActual.ColumnEdit = Me.RepositoryItemTextEdit1
         Me.BandedGridColumnFebActual.DisplayFormat.FormatString = "N2"
@@ -558,6 +577,8 @@ Partial Class FormBudgetExpenseRevisionDet
         '
         'BandedGridColumnMarBudget
         '
+        Me.BandedGridColumnMarBudget.AppearanceCell.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.BandedGridColumnMarBudget.AppearanceCell.Options.UseBackColor = True
         Me.BandedGridColumnMarBudget.Caption = "Before"
         Me.BandedGridColumnMarBudget.DisplayFormat.FormatString = "N2"
         Me.BandedGridColumnMarBudget.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
@@ -569,6 +590,10 @@ Partial Class FormBudgetExpenseRevisionDet
         '
         'BandedGridColumnMarActual
         '
+        Me.BandedGridColumnMarActual.AppearanceCell.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BandedGridColumnMarActual.AppearanceCell.Options.UseFont = True
+        Me.BandedGridColumnMarActual.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BandedGridColumnMarActual.AppearanceHeader.Options.UseFont = True
         Me.BandedGridColumnMarActual.Caption = "After"
         Me.BandedGridColumnMarActual.ColumnEdit = Me.RepositoryItemTextEdit1
         Me.BandedGridColumnMarActual.DisplayFormat.FormatString = "N2"
@@ -603,6 +628,8 @@ Partial Class FormBudgetExpenseRevisionDet
         '
         'BandedGridColumnAprBudget
         '
+        Me.BandedGridColumnAprBudget.AppearanceCell.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.BandedGridColumnAprBudget.AppearanceCell.Options.UseBackColor = True
         Me.BandedGridColumnAprBudget.Caption = "Before"
         Me.BandedGridColumnAprBudget.DisplayFormat.FormatString = "N2"
         Me.BandedGridColumnAprBudget.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
@@ -614,6 +641,10 @@ Partial Class FormBudgetExpenseRevisionDet
         '
         'BandedGridColumnAprActual
         '
+        Me.BandedGridColumnAprActual.AppearanceCell.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BandedGridColumnAprActual.AppearanceCell.Options.UseFont = True
+        Me.BandedGridColumnAprActual.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BandedGridColumnAprActual.AppearanceHeader.Options.UseFont = True
         Me.BandedGridColumnAprActual.Caption = "After"
         Me.BandedGridColumnAprActual.ColumnEdit = Me.RepositoryItemTextEdit1
         Me.BandedGridColumnAprActual.DisplayFormat.FormatString = "N2"
@@ -647,6 +678,8 @@ Partial Class FormBudgetExpenseRevisionDet
         '
         'BandedGridColumnMayBudget
         '
+        Me.BandedGridColumnMayBudget.AppearanceCell.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.BandedGridColumnMayBudget.AppearanceCell.Options.UseBackColor = True
         Me.BandedGridColumnMayBudget.Caption = "Before"
         Me.BandedGridColumnMayBudget.DisplayFormat.FormatString = "N2"
         Me.BandedGridColumnMayBudget.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
@@ -658,6 +691,10 @@ Partial Class FormBudgetExpenseRevisionDet
         '
         'BandedGridColumnMayActual
         '
+        Me.BandedGridColumnMayActual.AppearanceCell.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BandedGridColumnMayActual.AppearanceCell.Options.UseFont = True
+        Me.BandedGridColumnMayActual.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BandedGridColumnMayActual.AppearanceHeader.Options.UseFont = True
         Me.BandedGridColumnMayActual.Caption = "After"
         Me.BandedGridColumnMayActual.ColumnEdit = Me.RepositoryItemTextEdit1
         Me.BandedGridColumnMayActual.DisplayFormat.FormatString = "N2"
@@ -691,6 +728,8 @@ Partial Class FormBudgetExpenseRevisionDet
         '
         'BandedGridColumnJuneBudget
         '
+        Me.BandedGridColumnJuneBudget.AppearanceCell.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.BandedGridColumnJuneBudget.AppearanceCell.Options.UseBackColor = True
         Me.BandedGridColumnJuneBudget.Caption = "Before"
         Me.BandedGridColumnJuneBudget.DisplayFormat.FormatString = "N2"
         Me.BandedGridColumnJuneBudget.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
@@ -702,6 +741,10 @@ Partial Class FormBudgetExpenseRevisionDet
         '
         'BandedGridColumnJuneActual
         '
+        Me.BandedGridColumnJuneActual.AppearanceCell.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BandedGridColumnJuneActual.AppearanceCell.Options.UseFont = True
+        Me.BandedGridColumnJuneActual.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BandedGridColumnJuneActual.AppearanceHeader.Options.UseFont = True
         Me.BandedGridColumnJuneActual.Caption = "After"
         Me.BandedGridColumnJuneActual.ColumnEdit = Me.RepositoryItemTextEdit1
         Me.BandedGridColumnJuneActual.DisplayFormat.FormatString = "N2"
@@ -735,6 +778,8 @@ Partial Class FormBudgetExpenseRevisionDet
         '
         'BandedGridColumnJulyBudget
         '
+        Me.BandedGridColumnJulyBudget.AppearanceCell.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.BandedGridColumnJulyBudget.AppearanceCell.Options.UseBackColor = True
         Me.BandedGridColumnJulyBudget.Caption = "Before"
         Me.BandedGridColumnJulyBudget.DisplayFormat.FormatString = "N2"
         Me.BandedGridColumnJulyBudget.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
@@ -746,6 +791,10 @@ Partial Class FormBudgetExpenseRevisionDet
         '
         'BandedGridColumnJulyActual
         '
+        Me.BandedGridColumnJulyActual.AppearanceCell.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BandedGridColumnJulyActual.AppearanceCell.Options.UseFont = True
+        Me.BandedGridColumnJulyActual.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BandedGridColumnJulyActual.AppearanceHeader.Options.UseFont = True
         Me.BandedGridColumnJulyActual.Caption = "After"
         Me.BandedGridColumnJulyActual.ColumnEdit = Me.RepositoryItemTextEdit1
         Me.BandedGridColumnJulyActual.DisplayFormat.FormatString = "N2"
@@ -779,6 +828,8 @@ Partial Class FormBudgetExpenseRevisionDet
         '
         'BandedGridColumnAugBUdget
         '
+        Me.BandedGridColumnAugBUdget.AppearanceCell.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.BandedGridColumnAugBUdget.AppearanceCell.Options.UseBackColor = True
         Me.BandedGridColumnAugBUdget.Caption = "Before"
         Me.BandedGridColumnAugBUdget.DisplayFormat.FormatString = "N2"
         Me.BandedGridColumnAugBUdget.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
@@ -790,6 +841,10 @@ Partial Class FormBudgetExpenseRevisionDet
         '
         'BandedGridColumnAugActual
         '
+        Me.BandedGridColumnAugActual.AppearanceCell.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BandedGridColumnAugActual.AppearanceCell.Options.UseFont = True
+        Me.BandedGridColumnAugActual.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BandedGridColumnAugActual.AppearanceHeader.Options.UseFont = True
         Me.BandedGridColumnAugActual.Caption = "After"
         Me.BandedGridColumnAugActual.ColumnEdit = Me.RepositoryItemTextEdit1
         Me.BandedGridColumnAugActual.DisplayFormat.FormatString = "N2"
@@ -823,6 +878,8 @@ Partial Class FormBudgetExpenseRevisionDet
         '
         'BandedGridColumnSepBudget
         '
+        Me.BandedGridColumnSepBudget.AppearanceCell.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.BandedGridColumnSepBudget.AppearanceCell.Options.UseBackColor = True
         Me.BandedGridColumnSepBudget.Caption = "Before"
         Me.BandedGridColumnSepBudget.DisplayFormat.FormatString = "N2"
         Me.BandedGridColumnSepBudget.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
@@ -834,6 +891,10 @@ Partial Class FormBudgetExpenseRevisionDet
         '
         'BandedGridColumnSePActual
         '
+        Me.BandedGridColumnSePActual.AppearanceCell.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BandedGridColumnSePActual.AppearanceCell.Options.UseFont = True
+        Me.BandedGridColumnSePActual.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BandedGridColumnSePActual.AppearanceHeader.Options.UseFont = True
         Me.BandedGridColumnSePActual.Caption = "After"
         Me.BandedGridColumnSePActual.ColumnEdit = Me.RepositoryItemTextEdit1
         Me.BandedGridColumnSePActual.DisplayFormat.FormatString = "N2"
@@ -867,6 +928,8 @@ Partial Class FormBudgetExpenseRevisionDet
         '
         'BandedGridColumnOctBudget
         '
+        Me.BandedGridColumnOctBudget.AppearanceCell.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.BandedGridColumnOctBudget.AppearanceCell.Options.UseBackColor = True
         Me.BandedGridColumnOctBudget.Caption = "Before"
         Me.BandedGridColumnOctBudget.DisplayFormat.FormatString = "N2"
         Me.BandedGridColumnOctBudget.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
@@ -878,6 +941,10 @@ Partial Class FormBudgetExpenseRevisionDet
         '
         'BandedGridColumnOctActual
         '
+        Me.BandedGridColumnOctActual.AppearanceCell.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BandedGridColumnOctActual.AppearanceCell.Options.UseFont = True
+        Me.BandedGridColumnOctActual.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BandedGridColumnOctActual.AppearanceHeader.Options.UseFont = True
         Me.BandedGridColumnOctActual.Caption = "After"
         Me.BandedGridColumnOctActual.ColumnEdit = Me.RepositoryItemTextEdit1
         Me.BandedGridColumnOctActual.DisplayFormat.FormatString = "N2"
@@ -911,6 +978,8 @@ Partial Class FormBudgetExpenseRevisionDet
         '
         'BandedGridColumnNovBudget
         '
+        Me.BandedGridColumnNovBudget.AppearanceCell.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.BandedGridColumnNovBudget.AppearanceCell.Options.UseBackColor = True
         Me.BandedGridColumnNovBudget.Caption = "Before"
         Me.BandedGridColumnNovBudget.DisplayFormat.FormatString = "N2"
         Me.BandedGridColumnNovBudget.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
@@ -922,6 +991,10 @@ Partial Class FormBudgetExpenseRevisionDet
         '
         'BandedGridColumnNovActual
         '
+        Me.BandedGridColumnNovActual.AppearanceCell.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BandedGridColumnNovActual.AppearanceCell.Options.UseFont = True
+        Me.BandedGridColumnNovActual.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BandedGridColumnNovActual.AppearanceHeader.Options.UseFont = True
         Me.BandedGridColumnNovActual.Caption = "After"
         Me.BandedGridColumnNovActual.ColumnEdit = Me.RepositoryItemTextEdit1
         Me.BandedGridColumnNovActual.DisplayFormat.FormatString = "N2"
@@ -955,6 +1028,8 @@ Partial Class FormBudgetExpenseRevisionDet
         '
         'BandedGridColumnDecBudget
         '
+        Me.BandedGridColumnDecBudget.AppearanceCell.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.BandedGridColumnDecBudget.AppearanceCell.Options.UseBackColor = True
         Me.BandedGridColumnDecBudget.Caption = "Before"
         Me.BandedGridColumnDecBudget.DisplayFormat.FormatString = "N2"
         Me.BandedGridColumnDecBudget.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
@@ -966,6 +1041,10 @@ Partial Class FormBudgetExpenseRevisionDet
         '
         'BandedGridColumnDecActual
         '
+        Me.BandedGridColumnDecActual.AppearanceCell.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BandedGridColumnDecActual.AppearanceCell.Options.UseFont = True
+        Me.BandedGridColumnDecActual.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BandedGridColumnDecActual.AppearanceHeader.Options.UseFont = True
         Me.BandedGridColumnDecActual.Caption = "After"
         Me.BandedGridColumnDecActual.ColumnEdit = Me.RepositoryItemTextEdit1
         Me.BandedGridColumnDecActual.DisplayFormat.FormatString = "N2"
@@ -1013,6 +1092,7 @@ Partial Class FormBudgetExpenseRevisionDet
         '
         'BandedGridColumnTotalActual
         '
+        Me.BandedGridColumnTotalActual.AppearanceCell.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BandedGridColumnTotalActual.Caption = "After"
         Me.BandedGridColumnTotalActual.DisplayFormat.FormatString = "N2"
         Me.BandedGridColumnTotalActual.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
@@ -1077,7 +1157,7 @@ Partial Class FormBudgetExpenseRevisionDet
         Me.GroupControlBudget.Name = "GroupControlBudget"
         Me.GroupControlBudget.Size = New System.Drawing.Size(1139, 470)
         Me.GroupControlBudget.TabIndex = 0
-        Me.GroupControlBudget.Text = "Budget Detail"
+        Me.GroupControlBudget.Text = "Detail Anggaran"
         '
         'PanelControl5
         '
@@ -1097,19 +1177,19 @@ Partial Class FormBudgetExpenseRevisionDet
         Me.LabelControl9.Appearance.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.LabelControl9.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.LabelControl9.Dock = System.Windows.Forms.DockStyle.Right
-        Me.LabelControl9.Location = New System.Drawing.Point(476, 2)
+        Me.LabelControl9.Location = New System.Drawing.Point(201, 2)
         Me.LabelControl9.Name = "LabelControl9"
         Me.LabelControl9.Padding = New System.Windows.Forms.Padding(0, 7, 5, 0)
-        Me.LabelControl9.Size = New System.Drawing.Size(69, 26)
+        Me.LabelControl9.Size = New System.Drawing.Size(203, 26)
         Me.LabelControl9.TabIndex = 106
-        Me.LabelControl9.Text = "BEFORE"
+        Me.LabelControl9.Text = "TOTAL SEBELUM REVISI"
         '
         'PanelControl7
         '
         Me.PanelControl7.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
         Me.PanelControl7.Controls.Add(Me.TxtTotalBefore)
         Me.PanelControl7.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PanelControl7.Location = New System.Drawing.Point(545, 2)
+        Me.PanelControl7.Location = New System.Drawing.Point(404, 2)
         Me.PanelControl7.Name = "PanelControl7"
         Me.PanelControl7.Padding = New System.Windows.Forms.Padding(4, 5, 12, 0)
         Me.PanelControl7.Size = New System.Drawing.Size(264, 36)
@@ -1122,15 +1202,11 @@ Partial Class FormBudgetExpenseRevisionDet
         Me.TxtTotalBefore.Enabled = False
         Me.TxtTotalBefore.Location = New System.Drawing.Point(4, 5)
         Me.TxtTotalBefore.Name = "TxtTotalBefore"
-        Me.TxtTotalBefore.Properties.Appearance.BackColor = System.Drawing.Color.White
         Me.TxtTotalBefore.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtTotalBefore.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.TxtTotalBefore.Properties.Appearance.Options.UseBackColor = True
         Me.TxtTotalBefore.Properties.Appearance.Options.UseFont = True
         Me.TxtTotalBefore.Properties.Appearance.Options.UseForeColor = True
-        Me.TxtTotalBefore.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.White
         Me.TxtTotalBefore.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.TxtTotalBefore.Properties.AppearanceDisabled.Options.UseBackColor = True
         Me.TxtTotalBefore.Properties.AppearanceDisabled.Options.UseForeColor = True
         Me.TxtTotalBefore.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.UltraFlat
         Me.TxtTotalBefore.Properties.DisplayFormat.FormatString = "n2"
@@ -1144,12 +1220,12 @@ Partial Class FormBudgetExpenseRevisionDet
         Me.LabelControl8.Appearance.ForeColor = System.Drawing.Color.Teal
         Me.LabelControl8.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.LabelControl8.Dock = System.Windows.Forms.DockStyle.Right
-        Me.LabelControl8.Location = New System.Drawing.Point(809, 2)
+        Me.LabelControl8.Location = New System.Drawing.Point(668, 2)
         Me.LabelControl8.Name = "LabelControl8"
         Me.LabelControl8.Padding = New System.Windows.Forms.Padding(0, 7, 5, 0)
-        Me.LabelControl8.Size = New System.Drawing.Size(60, 26)
+        Me.LabelControl8.Size = New System.Drawing.Size(201, 26)
         Me.LabelControl8.TabIndex = 102
-        Me.LabelControl8.Text = "AFTER"
+        Me.LabelControl8.Text = "TOTAL SETELAH REVISI"
         '
         'PanelControl6
         '
@@ -1169,13 +1245,9 @@ Partial Class FormBudgetExpenseRevisionDet
         Me.TxtTotalAfter.Enabled = False
         Me.TxtTotalAfter.Location = New System.Drawing.Point(4, 5)
         Me.TxtTotalAfter.Name = "TxtTotalAfter"
-        Me.TxtTotalAfter.Properties.Appearance.BackColor = System.Drawing.Color.White
         Me.TxtTotalAfter.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtTotalAfter.Properties.Appearance.Options.UseBackColor = True
         Me.TxtTotalAfter.Properties.Appearance.Options.UseFont = True
-        Me.TxtTotalAfter.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.White
         Me.TxtTotalAfter.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Teal
-        Me.TxtTotalAfter.Properties.AppearanceDisabled.Options.UseBackColor = True
         Me.TxtTotalAfter.Properties.AppearanceDisabled.Options.UseForeColor = True
         Me.TxtTotalAfter.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.UltraFlat
         Me.TxtTotalAfter.Properties.DisplayFormat.FormatString = "n2"
@@ -1197,15 +1269,15 @@ Partial Class FormBudgetExpenseRevisionDet
         '
         Me.CEShowHiglights.Location = New System.Drawing.Point(136, 10)
         Me.CEShowHiglights.Name = "CEShowHiglights"
-        Me.CEShowHiglights.Properties.Caption = "Show highlight"
-        Me.CEShowHiglights.Size = New System.Drawing.Size(107, 19)
+        Me.CEShowHiglights.Properties.Caption = "Tampilkan highlight"
+        Me.CEShowHiglights.Size = New System.Drawing.Size(117, 19)
         Me.CEShowHiglights.TabIndex = 119
         '
         'CEShowDetail
         '
         Me.CEShowDetail.Location = New System.Drawing.Point(11, 10)
         Me.CEShowDetail.Name = "CEShowDetail"
-        Me.CEShowDetail.Properties.Caption = "Show Detail Revision"
+        Me.CEShowDetail.Properties.Caption = "Tampilkan detil revisi"
         Me.CEShowDetail.Size = New System.Drawing.Size(129, 19)
         Me.CEShowDetail.TabIndex = 118
         '
@@ -1235,9 +1307,11 @@ Partial Class FormBudgetExpenseRevisionDet
         Me.GVRev.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6})
         Me.GVRev.GridControl = Me.GCRev
         Me.GVRev.GroupCount = 1
+        Me.GVRev.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "value_expense_old", Me.GridColumn4, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "value_expense_new", Me.GridColumn5, "{0:N2}")})
         Me.GVRev.Name = "GVRev"
         Me.GVRev.OptionsBehavior.AutoExpandAllGroups = True
         Me.GVRev.OptionsBehavior.Editable = False
+        Me.GVRev.OptionsView.ShowFooter = True
         Me.GVRev.OptionsView.ShowGroupedColumns = True
         Me.GVRev.OptionsView.ShowGroupPanel = False
         Me.GVRev.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumn2, DevExpress.Data.ColumnSortOrder.Ascending)})
@@ -1273,6 +1347,7 @@ Partial Class FormBudgetExpenseRevisionDet
         Me.GridColumn4.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn4.FieldName = "value_expense_old"
         Me.GridColumn4.Name = "GridColumn4"
+        Me.GridColumn4.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "value_expense_old", "{0:N2}")})
         Me.GridColumn4.Visible = True
         Me.GridColumn4.VisibleIndex = 4
         '
@@ -1283,6 +1358,7 @@ Partial Class FormBudgetExpenseRevisionDet
         Me.GridColumn5.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn5.FieldName = "value_expense_new"
         Me.GridColumn5.Name = "GridColumn5"
+        Me.GridColumn5.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "value_expense_new", "{0:N2}")})
         Me.GridColumn5.Visible = True
         Me.GridColumn5.VisibleIndex = 5
         '
@@ -1324,6 +1400,7 @@ Partial Class FormBudgetExpenseRevisionDet
         Me.PanelControlBottom.ResumeLayout(False)
         CType(Me.GCData, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVData, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SplitContainerControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainerControl1.ResumeLayout(False)
@@ -1452,4 +1529,5 @@ Partial Class FormBudgetExpenseRevisionDet
     Friend WithEvents LabelControl8 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents PanelControl6 As DevExpress.XtraEditors.PanelControl
     Friend WithEvents TxtTotalAfter As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents RepositoryItemTextEdit2 As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
 End Class

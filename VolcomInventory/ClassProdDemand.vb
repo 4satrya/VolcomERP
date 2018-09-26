@@ -503,4 +503,28 @@
             errorConnection()
         End Try
     End Sub
+
+    Public Function queryMainRev(ByVal condition As String, ByVal order_type As String) As String
+        If order_type = "1" Then
+            order_type = "ASC "
+        ElseIf order_type = "2" Then
+            order_type = "DESC "
+        End If
+
+        If condition <> "-1" Then
+            condition = condition
+        Else
+            condition = ""
+        End If
+
+        Dim query As String = "SELECT r.id_prod_demand_rev, r.id_prod_demand, pd.prod_demand_number, pd.id_pd_kind, r.rev_count, r.id_report_status, stt.report_status, r.created_date, r.note, r.is_confirm
+        FROM tb_prod_demand_rev r
+        INNER JOIN tb_prod_demand pd ON pd.id_prod_demand = r.id_prod_demand
+        INNER JOIN tb_lookup_report_status stt ON stt.id_report_status = r.id_report_status
+        WHERE r.id_prod_demand_rev>0 "
+        query += condition + " "
+        query += "GROUP BY r.id_prod_demand_rev "
+        query += "ORDER BY r.id_prod_demand_rev " + order_type
+        Return query
+    End Function
 End Class

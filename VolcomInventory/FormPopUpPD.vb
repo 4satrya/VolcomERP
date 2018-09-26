@@ -12,7 +12,7 @@
         query += " LEFT JOIN tb_prod_demand_product pd_prd ON pd_prd.id_prod_demand_design = pd_dsg.id_prod_demand_design "
         query += " INNER JOIN tb_season b ON pd.id_season = b.id_season "
         query += " INNER JOIN tb_lookup_report_status c ON c.id_report_status = pd.id_report_status "
-        query += " WHERE pd.id_report_status = '6' AND pd.is_pd='1'"
+        query += " WHERE pd.id_report_status = '6' AND pd.is_pd='1' AND pd_dsg.is_void='2' "
         query += " GROUP BY pd_dsg.id_prod_demand"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCProdDemand.DataSource = data

@@ -86,10 +86,11 @@
         End If
         '
         Dim query As String = "SELECT req.date_created AS pr_created,dep.`departement`,rd.`id_purc_req_det`,req.`id_purc_req`,req.`purc_req_number`,cat.`item_cat`,itm.`item_desc`,rd.`value` AS val_pr,rd.`qty` AS qty_pr,'no' AS is_check 
-                                ,IFNULL(po.qty,0) AS qty_po_created,IFNULL(rec.qty,0) AS qty_rec,0.00 AS qty_po
+                                ,IFNULL(po.qty,0) AS qty_po_created,IFNULL(rec.qty,0) AS qty_rec,0.00 AS qty_po,uom.uom,rd.id_item
                                 FROM tb_purc_req_det rd 
                                 INNER JOIN tb_purc_req req ON req.id_purc_req=rd.id_purc_req
                                 INNER JOIN tb_item itm ON itm.`id_item`=rd.`id_item`
+                                INNER JOIN tb_m_uom uom ON uom.id_uom=itm.id_uom
                                 INNER JOIN tb_item_cat cat ON cat.`id_item_cat`=itm.`id_item_cat`
                                 INNER JOIN tb_m_departement dep ON dep.`id_departement`=req.`id_departement`
                                 LEFT JOIN 

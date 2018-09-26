@@ -84,4 +84,10 @@
             Cursor = Cursors.Default
         End If
     End Sub
+
+    Private Sub BtnDownloadFormatXLS_Click(sender As Object, e As EventArgs) Handles BtnDownloadFormatXLS.Click
+        Cursor = Cursors.WaitCursor
+        FormBudgetExpenseProposeFormatXLS.ShowDialog()
+        Cursor = Cursors.Default
+    End Sub
 End Class

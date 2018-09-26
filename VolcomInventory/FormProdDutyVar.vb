@@ -83,6 +83,7 @@
 
     Private Sub BSave_Click(sender As Object, e As EventArgs) Handles BSave.Click
         Dim pib_date As String = ""
+        Dim ls_date As String = ""
 
         Dim is_pr As String = ""
         Dim is_paid As String = ""
@@ -94,9 +95,9 @@
         End If
 
         If DELSDate.Text = "" Then
-            pib_date = ",ls_date=NULL"
+            ls_date = ",ls_date=NULL"
         Else
-            pib_date = ",ls_date='" & Date.Parse(DELSDate.EditValue.ToString).ToString("yyyy-MM-dd") & "'"
+            ls_date = ",ls_date='" & Date.Parse(DELSDate.EditValue.ToString).ToString("yyyy-MM-dd") & "'"
         End If
 
         If CEPaid.Checked = True Then
@@ -110,8 +111,43 @@
         Else
             is_pr = "2"
         End If
+        '
 
-        Dim query_upd As String = "UPDATE tb_prod_order SET tot_freight_cost='" & decimalSQL(TEFreightRp.EditValue.ToString) & "',pib_no='" & TEPIBNo.Text & "'" & pib_date & ",duty_percent='" & decimalSQL(TEDuty.EditValue.ToString) & "',duty_royalty='" & decimalSQL(TERoyalty.EditValue.ToString) & "',duty_sales_vat='" & decimalSQL(TESalesVAT.EditValue.ToString) & "',duty_sales_thru='" & decimalSQL(TESalesThrough.EditValue.ToString) & "',duty_store_disc='" & decimalSQL(TEStoreDisc.EditValue.ToString) & "',duty_pph='" & decimalSQL(TEPPH.EditValue.ToString) & "',aju_no='" & TEAju.EditValue.ToString & "',po_lama_no='" & TEPOLama.EditValue.ToString & "',duty_is_pr_proposed='" & is_pr & "',duty_is_pay='" & is_paid & "',act_sales_amount_after_disc='" & decimalSQL(TESalesAmount.EditValue.ToString) & "',royalty_pib='" & decimalSQL(TERoyaltyPIB.EditValue.ToString) & "' WHERE id_prod_order='" & id_prod_order & "'"
+        '
+        Dim query_upd As String = "UPDATE tb_prod_order SET 
+                                        tot_freight_cost='" & decimalSQL(TEFreightRp.EditValue.ToString) & "'
+                                        ,country_source='" & addSlashes(TEFrom.Text.ToString) & "'
+                                        ,dest_port='" & addSlashes(TEDestPort.Text.ToString) & "'
+                                        ,hs_code='" & addSlashes(TEHSCode.Text.ToString) & "'
+                                        ,ppjk='" & addSlashes(TEPPJK.Text.ToString) & "'
+                                        ,ppjk_inv_no='" & addSlashes(TEInvNo.Text.ToString) & "'
+                                        ,pib_uom='" & addSlashes(TEUOM.Text.ToString) & "'
+                                        ,pib_volume='" & decimalSQL(TEVolume.EditValue.ToString) & "'
+                                        ,pib_id_currency='" & LECurrency.EditValue.ToString & "'
+                                        ,pib_kurs='" & decimalSQL(TEKurs.EditValue.ToString) & "'
+                                        ,pib_no='" & addSlashes(TEPIBNo.Text) & "'" & pib_date & "
+                                        ,cif='" & decimalSQL(TECIF.EditValue.ToString) & "'
+                                        ,coo_no='" & addSlashes(TECOONumber.Text.ToString) & "'
+                                        ,ls_no='" & addSlashes(TELSNumber.Text.ToString) & "'
+                                        ,tot_freight_cost='" & decimalSQL(TEFreightRp.EditValue.ToString) & "'
+                                        ,act_sales_qty='" & decimalSQL(TESalesActual.EditValue.ToString) & "'
+                                        ,penalty_percent='" & decimalSQL(TEPenalty.EditValue.ToString) & "'
+                                        " & ls_date & "
+                                        ,duty_percent='" & decimalSQL(TEDuty.EditValue.ToString) & "'
+                                        ,duty_royalty='" & decimalSQL(TERoyalty.EditValue.ToString) & "'
+                                        ,duty_sales_vat='" & decimalSQL(TESalesVAT.EditValue.ToString) & "'
+                                        ,duty_sales_thru='" & decimalSQL(TESalesThrough.EditValue.ToString) & "'
+                                        ,duty_store_disc='" & decimalSQL(TEStoreDisc.EditValue.ToString) & "'
+                                        ,duty_pph='" & decimalSQL(TEPPH.EditValue.ToString) & "'
+                                        ,aju_no='" & addSlashes(TEAju.EditValue.ToString) & "'
+                                        ,po_lama_no='" & TEPOLama.EditValue.ToString & "'
+                                        ,duty_is_pr_proposed='" & is_pr & "'
+                                        ,duty_is_pay='" & is_paid & "'
+                                        ,act_sales_amount_after_disc='" & decimalSQL(TESalesAmount.EditValue.ToString) & "'
+                                        ,royalty_pib='" & decimalSQL(TERoyaltyPIB.EditValue.ToString) & "' 
+                                        WHERE id_prod_order='" & id_prod_order & "'"
+
+
         execute_non_query(query_upd, True, "", "", "", "")
         '
         infoCustom("Variable set !")

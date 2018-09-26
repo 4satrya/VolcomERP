@@ -484,7 +484,6 @@ Public Class FormSalesPOSDet
                         viewDraft()
                     End If
 
-
                     Cursor = Cursors.Default
                 End If
             ElseIf action = "upd" Then

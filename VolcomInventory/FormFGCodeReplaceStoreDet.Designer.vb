@@ -875,7 +875,7 @@ Partial Class FormFGCodeReplaceStoreDet
         Me.BtnVerifiy.Name = "BtnVerifiy"
         Me.BtnVerifiy.Size = New System.Drawing.Size(1010, 32)
         Me.BtnVerifiy.TabIndex = 0
-        Me.BtnVerifiy.Text = "Verifiy"
+        Me.BtnVerifiy.Text = "Verify"
         Me.BtnVerifiy.Visible = False
         '
         'FormFGCodeReplaceStoreDet

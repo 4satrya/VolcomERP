@@ -27,9 +27,9 @@ Partial Class FormBudgetExpenseRevisionNew
         Me.SLEYear = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumnYear = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnTotal = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
         Me.MEReason = New DevExpress.XtraEditors.MemoEdit()
-        Me.GridColumnTotal = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.TxtTotal = New DevExpress.XtraEditors.TextEdit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -44,9 +44,9 @@ Partial Class FormBudgetExpenseRevisionNew
         '
         Me.LabelControl1.Location = New System.Drawing.Point(25, 23)
         Me.LabelControl1.Name = "LabelControl1"
-        Me.LabelControl1.Size = New System.Drawing.Size(22, 13)
+        Me.LabelControl1.Size = New System.Drawing.Size(30, 13)
         Me.LabelControl1.TabIndex = 0
-        Me.LabelControl1.Text = "Year"
+        Me.LabelControl1.Text = "Tahun"
         '
         'PanelControl1
         '
@@ -107,21 +107,6 @@ Partial Class FormBudgetExpenseRevisionNew
         Me.GridColumnYear.Visible = True
         Me.GridColumnYear.VisibleIndex = 0
         '
-        'LabelControl4
-        '
-        Me.LabelControl4.Location = New System.Drawing.Point(25, 113)
-        Me.LabelControl4.Name = "LabelControl4"
-        Me.LabelControl4.Size = New System.Drawing.Size(36, 13)
-        Me.LabelControl4.TabIndex = 101
-        Me.LabelControl4.Text = "Reason"
-        '
-        'MEReason
-        '
-        Me.MEReason.Location = New System.Drawing.Point(25, 132)
-        Me.MEReason.Name = "MEReason"
-        Me.MEReason.Size = New System.Drawing.Size(267, 41)
-        Me.MEReason.TabIndex = 102
-        '
         'GridColumnTotal
         '
         Me.GridColumnTotal.Caption = "Total"
@@ -132,6 +117,21 @@ Partial Class FormBudgetExpenseRevisionNew
         Me.GridColumnTotal.OptionsColumn.AllowEdit = False
         Me.GridColumnTotal.Visible = True
         Me.GridColumnTotal.VisibleIndex = 1
+        '
+        'LabelControl4
+        '
+        Me.LabelControl4.Location = New System.Drawing.Point(25, 113)
+        Me.LabelControl4.Name = "LabelControl4"
+        Me.LabelControl4.Size = New System.Drawing.Size(32, 13)
+        Me.LabelControl4.TabIndex = 101
+        Me.LabelControl4.Text = "Alasan"
+        '
+        'MEReason
+        '
+        Me.MEReason.Location = New System.Drawing.Point(25, 132)
+        Me.MEReason.Name = "MEReason"
+        Me.MEReason.Size = New System.Drawing.Size(267, 41)
+        Me.MEReason.TabIndex = 102
         '
         'LabelControl2
         '

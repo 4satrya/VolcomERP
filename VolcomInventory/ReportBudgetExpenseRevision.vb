@@ -3,7 +3,7 @@
     Public Shared dt As DataTable
 
     Private Sub ReportBudgetExpenseRevision_BeforePrint(sender As Object, e As Printing.PrintEventArgs) Handles MyBase.BeforePrint
-        GCData.DataSource = dt
+        GCRev.DataSource = dt
         load_mark_horz("138", id, "2", "1", XrTable1)
     End Sub
 End Class

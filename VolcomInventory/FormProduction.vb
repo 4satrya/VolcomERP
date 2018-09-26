@@ -26,6 +26,7 @@
         viewVendor()
         checkFormAccess(Name)
     End Sub
+
     Sub viewStatusPD()
         Dim query As String = "SELECT '0' as id_statuspd, 'All' as status_pd 
                                 UNION
@@ -34,6 +35,7 @@
                               SELECT '2' as id_statuspd, 'Not yet created' as status_pd"
         viewSearchLookupQuery(SLEStatusPD, query, "id_statuspd", "status_pd", "id_statuspd")
     End Sub
+
     'view season
     Sub viewVendor()
         Dim query As String = ""
@@ -51,6 +53,7 @@
             SLEVendor.EditValue = Nothing
         End If
     End Sub
+
     Sub viewSeason()
         Dim query As String = "SELECT '-1' AS id_season, 'All Season' as season UNION "
         query += "(SELECT id_season,season FROM tb_season a "
@@ -58,6 +61,7 @@
         query += "ORDER BY b.range ASC)"
         viewSearchLookupQuery(SLESeason, query, "id_season", "season", "id_season")
     End Sub
+
     Sub viewSeasonWO()
         Dim query As String = "SELECT '-1' AS id_season, 'All Season' as season UNION "
         query += "(SELECT id_season,season FROM tb_season a "
@@ -65,6 +69,7 @@
         query += "ORDER BY b.range ASC)"
         viewSearchLookupQuery(SLESeasonWO, query, "id_season", "season", "id_season")
     End Sub
+
     Sub viewSeasonMRS()
         Dim query As String = "SELECT '-1' AS id_season, 'All Season' as season UNION "
         query += "(SELECT id_season,season FROM tb_season a "
@@ -72,6 +77,7 @@
         query += "ORDER BY b.range ASC)"
         viewSearchLookupQuery(SLESeasonMRS, query, "id_season", "season", "id_season")
     End Sub
+
     Sub viewDesign()
         Dim query As String = ""
         query += "CALL view_design_order(TRUE)"
@@ -355,6 +361,10 @@
                 view.FocusedRowHandle = focusedRowHandle
             End If
         End If
+        Try
+            view_prod_demand_product()
+        Catch ex As Exception
+        End Try
     End Sub
 
     Private Sub BSearch_Click(sender As Object, e As EventArgs) Handles BSearch.Click

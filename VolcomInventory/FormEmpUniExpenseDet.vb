@@ -189,7 +189,7 @@
         If e.KeyCode = Keys.Enter Then
             'hanya bisa do single karena liat di categori SO : uniform
             Dim so_cat As String = ""
-            so_cat = "AND (so.id_so_status=7 OR so.id_so_status=9) "
+            'so_cat = "AND (so.id_so_status=7 OR so.id_so_status=9) "
 
             Dim query As String = "SELECT pldel.id_pl_sales_order_del, so.sales_order_ol_shop_number, pldel.id_store_contact_to, comp.id_comp, comp.comp_name, comp.comp_number, comp.address_primary, comp.npwp, comp.id_drawer_def, comp.comp_commission, rck.id_wh_rack, loc.id_wh_locator, sp.id_emp_uni_ex, so.id_so_status, so.id_emp_uni_budget
             FROM tb_pl_sales_order_del pldel 

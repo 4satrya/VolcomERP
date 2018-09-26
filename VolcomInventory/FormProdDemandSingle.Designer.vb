@@ -69,10 +69,25 @@ Partial Class FormProdDemandSingle
         Me.GCDesign = New DevExpress.XtraGrid.GridControl()
         Me.GVDesign = New DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView()
         Me.BandedGridColumn2 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.PanelControlCompleted = New DevExpress.XtraEditors.PanelControl()
+        Me.CheckEditShowNonActive = New DevExpress.XtraEditors.CheckEdit()
         Me.PanelControlNav = New DevExpress.XtraEditors.PanelControl()
         Me.BtnAddFromLineList = New DevExpress.XtraEditors.SimpleButton()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridBand1 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
+        Me.XTCPD = New DevExpress.XtraTab.XtraTabControl()
+        Me.XTPDetail = New DevExpress.XtraTab.XtraTabPage()
+        Me.XTPRevision = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCData = New DevExpress.XtraGrid.GridControl()
+        Me.GVData = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumnIdProdDemandRev = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnIdPD = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnRevCount = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnPDNumber = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnSTT = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnDate = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ViewBreakdownSizeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.EPProdDemand, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LESampleDivision.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ButtonEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -100,9 +115,19 @@ Partial Class FormProdDemandSingle
         Me.GroupControlList.SuspendLayout()
         CType(Me.GCDesign, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVDesign, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControlCompleted, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControlCompleted.SuspendLayout()
+        CType(Me.CheckEditShowNonActive.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControlNav, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlNav.SuspendLayout()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.XTCPD, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTCPD.SuspendLayout()
+        Me.XTPDetail.SuspendLayout()
+        Me.XTPRevision.SuspendLayout()
+        CType(Me.GCData, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVData, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'EPProdDemand
@@ -358,7 +383,7 @@ Partial Class FormProdDemandSingle
         Me.BBom.Dock = System.Windows.Forms.DockStyle.Right
         Me.BBom.ImageIndex = 17
         Me.BBom.ImageList = Me.LargeImageCollection
-        Me.BBom.Location = New System.Drawing.Point(462, 0)
+        Me.BBom.Location = New System.Drawing.Point(456, 0)
         Me.BBom.Name = "BBom"
         Me.BBom.Size = New System.Drawing.Size(91, 35)
         Me.BBom.TabIndex = 9
@@ -370,7 +395,7 @@ Partial Class FormProdDemandSingle
         Me.BtnAdd.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnAdd.ImageIndex = 0
         Me.BtnAdd.ImageList = Me.LargeImageCollection
-        Me.BtnAdd.Location = New System.Drawing.Point(851, 0)
+        Me.BtnAdd.Location = New System.Drawing.Point(845, 0)
         Me.BtnAdd.Name = "BtnAdd"
         Me.BtnAdd.Size = New System.Drawing.Size(91, 35)
         Me.BtnAdd.TabIndex = 5
@@ -382,7 +407,7 @@ Partial Class FormProdDemandSingle
         Me.BtnEdit.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnEdit.ImageIndex = 2
         Me.BtnEdit.ImageList = Me.LargeImageCollection
-        Me.BtnEdit.Location = New System.Drawing.Point(767, 0)
+        Me.BtnEdit.Location = New System.Drawing.Point(761, 0)
         Me.BtnEdit.Name = "BtnEdit"
         Me.BtnEdit.Size = New System.Drawing.Size(84, 35)
         Me.BtnEdit.TabIndex = 6
@@ -394,7 +419,7 @@ Partial Class FormProdDemandSingle
         Me.BtnDelete.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnDelete.ImageIndex = 1
         Me.BtnDelete.ImageList = Me.LargeImageCollection
-        Me.BtnDelete.Location = New System.Drawing.Point(553, 0)
+        Me.BtnDelete.Location = New System.Drawing.Point(547, 0)
         Me.BtnDelete.Name = "BtnDelete"
         Me.BtnDelete.Size = New System.Drawing.Size(91, 35)
         Me.BtnDelete.TabIndex = 8
@@ -580,22 +605,23 @@ Partial Class FormProdDemandSingle
         '
         Me.GroupControlList.CaptionLocation = DevExpress.Utils.Locations.Left
         Me.GroupControlList.Controls.Add(Me.GCDesign)
+        Me.GroupControlList.Controls.Add(Me.PanelControlCompleted)
         Me.GroupControlList.Controls.Add(Me.PanelControlNav)
         Me.GroupControlList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupControlList.Enabled = False
-        Me.GroupControlList.Location = New System.Drawing.Point(0, 152)
+        Me.GroupControlList.Location = New System.Drawing.Point(0, 0)
         Me.GroupControlList.Name = "GroupControlList"
-        Me.GroupControlList.Size = New System.Drawing.Size(964, 313)
+        Me.GroupControlList.Size = New System.Drawing.Size(958, 285)
         Me.GroupControlList.TabIndex = 188
-        Me.GroupControlList.Text = "Item List"
         '
         'GCDesign
         '
+        Me.GCDesign.ContextMenuStrip = Me.ContextMenuStrip1
         Me.GCDesign.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCDesign.Location = New System.Drawing.Point(20, 37)
+        Me.GCDesign.Location = New System.Drawing.Point(20, 69)
         Me.GCDesign.MainView = Me.GVDesign
         Me.GCDesign.Name = "GCDesign"
-        Me.GCDesign.Size = New System.Drawing.Size(942, 274)
+        Me.GCDesign.Size = New System.Drawing.Size(936, 214)
         Me.GCDesign.TabIndex = 40
         Me.GCDesign.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVDesign})
         '
@@ -616,6 +642,25 @@ Partial Class FormProdDemandSingle
         Me.BandedGridColumn2.Name = "BandedGridColumn2"
         Me.BandedGridColumn2.Visible = True
         '
+        'PanelControlCompleted
+        '
+        Me.PanelControlCompleted.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelControlCompleted.Controls.Add(Me.CheckEditShowNonActive)
+        Me.PanelControlCompleted.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelControlCompleted.Location = New System.Drawing.Point(20, 37)
+        Me.PanelControlCompleted.Name = "PanelControlCompleted"
+        Me.PanelControlCompleted.Size = New System.Drawing.Size(936, 32)
+        Me.PanelControlCompleted.TabIndex = 41
+        Me.PanelControlCompleted.Visible = False
+        '
+        'CheckEditShowNonActive
+        '
+        Me.CheckEditShowNonActive.Location = New System.Drawing.Point(8, 6)
+        Me.CheckEditShowNonActive.Name = "CheckEditShowNonActive"
+        Me.CheckEditShowNonActive.Properties.Caption = "show non active status"
+        Me.CheckEditShowNonActive.Size = New System.Drawing.Size(150, 19)
+        Me.CheckEditShowNonActive.TabIndex = 164
+        '
         'PanelControlNav
         '
         Me.PanelControlNav.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
@@ -627,7 +672,7 @@ Partial Class FormProdDemandSingle
         Me.PanelControlNav.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControlNav.Location = New System.Drawing.Point(20, 2)
         Me.PanelControlNav.Name = "PanelControlNav"
-        Me.PanelControlNav.Size = New System.Drawing.Size(942, 35)
+        Me.PanelControlNav.Size = New System.Drawing.Size(936, 35)
         Me.PanelControlNav.TabIndex = 17
         '
         'BtnAddFromLineList
@@ -635,11 +680,12 @@ Partial Class FormProdDemandSingle
         Me.BtnAddFromLineList.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnAddFromLineList.ImageIndex = 0
         Me.BtnAddFromLineList.ImageList = Me.LargeImageCollection
-        Me.BtnAddFromLineList.Location = New System.Drawing.Point(644, 0)
+        Me.BtnAddFromLineList.Location = New System.Drawing.Point(638, 0)
         Me.BtnAddFromLineList.Name = "BtnAddFromLineList"
         Me.BtnAddFromLineList.Size = New System.Drawing.Size(123, 35)
         Me.BtnAddFromLineList.TabIndex = 7
         Me.BtnAddFromLineList.Text = "Add from Line List"
+        Me.BtnAddFromLineList.Visible = False
         '
         'GridView1
         '
@@ -651,12 +697,118 @@ Partial Class FormProdDemandSingle
         Me.GridBand1.Name = "GridBand1"
         Me.GridBand1.VisibleIndex = -1
         '
+        'XTCPD
+        '
+        Me.XTCPD.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.XTCPD.Location = New System.Drawing.Point(0, 152)
+        Me.XTCPD.Name = "XTCPD"
+        Me.XTCPD.SelectedTabPage = Me.XTPDetail
+        Me.XTCPD.Size = New System.Drawing.Size(964, 313)
+        Me.XTCPD.TabIndex = 189
+        Me.XTCPD.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPDetail, Me.XTPRevision})
+        '
+        'XTPDetail
+        '
+        Me.XTPDetail.Controls.Add(Me.GroupControlList)
+        Me.XTPDetail.Name = "XTPDetail"
+        Me.XTPDetail.Size = New System.Drawing.Size(958, 285)
+        Me.XTPDetail.Text = "Detail"
+        '
+        'XTPRevision
+        '
+        Me.XTPRevision.Controls.Add(Me.GCData)
+        Me.XTPRevision.Name = "XTPRevision"
+        Me.XTPRevision.PageVisible = False
+        Me.XTPRevision.Size = New System.Drawing.Size(958, 285)
+        Me.XTPRevision.Text = "Revision"
+        '
+        'GCData
+        '
+        Me.GCData.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCData.Location = New System.Drawing.Point(0, 0)
+        Me.GCData.MainView = Me.GVData
+        Me.GCData.Name = "GCData"
+        Me.GCData.Size = New System.Drawing.Size(958, 285)
+        Me.GCData.TabIndex = 1
+        Me.GCData.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVData})
+        '
+        'GVData
+        '
+        Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdProdDemandRev, Me.GridColumnIdPD, Me.GridColumnRevCount, Me.GridColumnPDNumber, Me.GridColumnSTT, Me.GridColumnDate})
+        Me.GVData.GridControl = Me.GCData
+        Me.GVData.Name = "GVData"
+        Me.GVData.OptionsBehavior.AutoExpandAllGroups = True
+        Me.GVData.OptionsBehavior.Editable = False
+        Me.GVData.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumnIdProdDemandRev
+        '
+        Me.GridColumnIdProdDemandRev.Caption = "Id"
+        Me.GridColumnIdProdDemandRev.FieldName = "id_prod_demand_rev"
+        Me.GridColumnIdProdDemandRev.Name = "GridColumnIdProdDemandRev"
+        '
+        'GridColumnIdPD
+        '
+        Me.GridColumnIdPD.Caption = "ID PD"
+        Me.GridColumnIdPD.FieldName = "id_prod_demand"
+        Me.GridColumnIdPD.Name = "GridColumnIdPD"
+        '
+        'GridColumnRevCount
+        '
+        Me.GridColumnRevCount.Caption = "Revision No."
+        Me.GridColumnRevCount.FieldName = "rev_count"
+        Me.GridColumnRevCount.Name = "GridColumnRevCount"
+        Me.GridColumnRevCount.Visible = True
+        Me.GridColumnRevCount.VisibleIndex = 1
+        Me.GridColumnRevCount.Width = 157
+        '
+        'GridColumnPDNumber
+        '
+        Me.GridColumnPDNumber.Caption = "PD Number"
+        Me.GridColumnPDNumber.FieldName = "prod_demand_number"
+        Me.GridColumnPDNumber.Name = "GridColumnPDNumber"
+        Me.GridColumnPDNumber.Visible = True
+        Me.GridColumnPDNumber.VisibleIndex = 0
+        Me.GridColumnPDNumber.Width = 514
+        '
+        'GridColumnSTT
+        '
+        Me.GridColumnSTT.Caption = "Status"
+        Me.GridColumnSTT.FieldName = "report_status"
+        Me.GridColumnSTT.Name = "GridColumnSTT"
+        Me.GridColumnSTT.Visible = True
+        Me.GridColumnSTT.VisibleIndex = 3
+        Me.GridColumnSTT.Width = 600
+        '
+        'GridColumnDate
+        '
+        Me.GridColumnDate.Caption = "Created Date"
+        Me.GridColumnDate.DisplayFormat.FormatString = "dd MMMM yyyy \/ HH:mm"
+        Me.GridColumnDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumnDate.FieldName = "created_date"
+        Me.GridColumnDate.Name = "GridColumnDate"
+        Me.GridColumnDate.Visible = True
+        Me.GridColumnDate.VisibleIndex = 2
+        Me.GridColumnDate.Width = 345
+        '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewBreakdownSizeToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(183, 48)
+        '
+        'ViewBreakdownSizeToolStripMenuItem
+        '
+        Me.ViewBreakdownSizeToolStripMenuItem.Name = "ViewBreakdownSizeToolStripMenuItem"
+        Me.ViewBreakdownSizeToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
+        Me.ViewBreakdownSizeToolStripMenuItem.Text = "view breakdown size"
+        '
         'FormProdDemandSingle
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(964, 605)
-        Me.Controls.Add(Me.GroupControlList)
+        Me.Controls.Add(Me.XTCPD)
         Me.Controls.Add(Me.GroupControl3)
         Me.Controls.Add(Me.GroupGeneralHeader)
         Me.Controls.Add(Me.PCGeneralSave)
@@ -697,9 +849,19 @@ Partial Class FormProdDemandSingle
         Me.GroupControlList.ResumeLayout(False)
         CType(Me.GCDesign, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVDesign, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControlCompleted, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControlCompleted.ResumeLayout(False)
+        CType(Me.CheckEditShowNonActive.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControlNav, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControlNav.ResumeLayout(False)
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.XTCPD, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTCPD.ResumeLayout(False)
+        Me.XTPDetail.ResumeLayout(False)
+        Me.XTPRevision.ResumeLayout(False)
+        CType(Me.GCData, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVData, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -755,4 +917,19 @@ Partial Class FormProdDemandSingle
     Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents GridColumnIdKind As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnKind As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents PanelControlCompleted As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents CheckEditShowNonActive As DevExpress.XtraEditors.CheckEdit
+    Friend WithEvents XTCPD As DevExpress.XtraTab.XtraTabControl
+    Friend WithEvents XTPDetail As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents XTPRevision As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents GCData As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVData As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumnIdProdDemandRev As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnIdPD As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnRevCount As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnPDNumber As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnSTT As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnDate As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
+    Friend WithEvents ViewBreakdownSizeToolStripMenuItem As ToolStripMenuItem
 End Class

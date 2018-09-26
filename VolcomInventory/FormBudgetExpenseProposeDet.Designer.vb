@@ -22,13 +22,15 @@ Partial Class FormBudgetExpenseProposeDet
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormBudgetExpenseProposeDet))
         Me.PanelControlBottom = New DevExpress.XtraEditors.PanelControl()
+        Me.BtnImportFromXLS = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnFormatXLS = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnAttachment = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnCancell = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnMark = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnPrint = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnPrev = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnNext = New DevExpress.XtraEditors.SimpleButton()
-        Me.BtnCancell = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnConfirm = New DevExpress.XtraEditors.SimpleButton()
-        Me.BtnMark = New DevExpress.XtraEditors.SimpleButton()
         Me.XTCBudget = New DevExpress.XtraTab.XtraTabControl()
         Me.XtraTabPage1 = New DevExpress.XtraTab.XtraTabPage()
         Me.MENote = New DevExpress.XtraEditors.MemoEdit()
@@ -86,7 +88,7 @@ Partial Class FormBudgetExpenseProposeDet
         Me.GridColumn1Dec = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnTotalInput = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnAcc = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnDescAcc = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnCat = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnYearlyCat = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumndiff = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -156,48 +158,94 @@ Partial Class FormBudgetExpenseProposeDet
         '
         'PanelControlBottom
         '
+        Me.PanelControlBottom.Controls.Add(Me.BtnImportFromXLS)
+        Me.PanelControlBottom.Controls.Add(Me.BtnFormatXLS)
         Me.PanelControlBottom.Controls.Add(Me.BtnAttachment)
+        Me.PanelControlBottom.Controls.Add(Me.BtnCancell)
+        Me.PanelControlBottom.Controls.Add(Me.BtnMark)
         Me.PanelControlBottom.Controls.Add(Me.BtnPrint)
         Me.PanelControlBottom.Controls.Add(Me.BtnPrev)
         Me.PanelControlBottom.Controls.Add(Me.BtnNext)
-        Me.PanelControlBottom.Controls.Add(Me.BtnCancell)
         Me.PanelControlBottom.Controls.Add(Me.BtnConfirm)
-        Me.PanelControlBottom.Controls.Add(Me.BtnMark)
         Me.PanelControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControlBottom.Location = New System.Drawing.Point(0, 562)
+        Me.PanelControlBottom.Location = New System.Drawing.Point(0, 568)
         Me.PanelControlBottom.Name = "PanelControlBottom"
-        Me.PanelControlBottom.Size = New System.Drawing.Size(944, 44)
+        Me.PanelControlBottom.Size = New System.Drawing.Size(944, 38)
         Me.PanelControlBottom.TabIndex = 5
+        '
+        'BtnImportFromXLS
+        '
+        Me.BtnImportFromXLS.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnImportFromXLS.Image = CType(resources.GetObject("BtnImportFromXLS.Image"), System.Drawing.Image)
+        Me.BtnImportFromXLS.Location = New System.Drawing.Point(270, 2)
+        Me.BtnImportFromXLS.Name = "BtnImportFromXLS"
+        Me.BtnImportFromXLS.Size = New System.Drawing.Size(111, 34)
+        Me.BtnImportFromXLS.TabIndex = 11
+        Me.BtnImportFromXLS.Text = "Import Excel"
+        Me.BtnImportFromXLS.Visible = False
+        '
+        'BtnFormatXLS
+        '
+        Me.BtnFormatXLS.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnFormatXLS.Image = CType(resources.GetObject("BtnFormatXLS.Image"), System.Drawing.Image)
+        Me.BtnFormatXLS.Location = New System.Drawing.Point(381, 2)
+        Me.BtnFormatXLS.Name = "BtnFormatXLS"
+        Me.BtnFormatXLS.Size = New System.Drawing.Size(100, 34)
+        Me.BtnFormatXLS.TabIndex = 10
+        Me.BtnFormatXLS.Text = "Format XLS"
+        Me.BtnFormatXLS.Visible = False
         '
         'BtnAttachment
         '
         Me.BtnAttachment.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnAttachment.Image = CType(resources.GetObject("BtnAttachment.Image"), System.Drawing.Image)
-        Me.BtnAttachment.Location = New System.Drawing.Point(473, 2)
+        Me.BtnAttachment.Location = New System.Drawing.Point(481, 2)
         Me.BtnAttachment.Name = "BtnAttachment"
-        Me.BtnAttachment.Size = New System.Drawing.Size(106, 40)
+        Me.BtnAttachment.Size = New System.Drawing.Size(100, 34)
         Me.BtnAttachment.TabIndex = 4
         Me.BtnAttachment.Text = "Attachment"
         Me.BtnAttachment.Visible = False
+        '
+        'BtnCancell
+        '
+        Me.BtnCancell.Dock = System.Windows.Forms.DockStyle.Left
+        Me.BtnCancell.Image = CType(resources.GetObject("BtnCancell.Image"), System.Drawing.Image)
+        Me.BtnCancell.Location = New System.Drawing.Point(91, 2)
+        Me.BtnCancell.Name = "BtnCancell"
+        Me.BtnCancell.Size = New System.Drawing.Size(126, 34)
+        Me.BtnCancell.TabIndex = 7
+        Me.BtnCancell.Text = "Cancell Propose"
+        Me.BtnCancell.Visible = False
+        '
+        'BtnMark
+        '
+        Me.BtnMark.Dock = System.Windows.Forms.DockStyle.Left
+        Me.BtnMark.Image = CType(resources.GetObject("BtnMark.Image"), System.Drawing.Image)
+        Me.BtnMark.Location = New System.Drawing.Point(2, 2)
+        Me.BtnMark.Name = "BtnMark"
+        Me.BtnMark.Size = New System.Drawing.Size(89, 34)
+        Me.BtnMark.TabIndex = 5
+        Me.BtnMark.Text = "Mark"
+        Me.BtnMark.Visible = False
         '
         'BtnPrint
         '
         Me.BtnPrint.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnPrint.Image = CType(resources.GetObject("BtnPrint.Image"), System.Drawing.Image)
-        Me.BtnPrint.Location = New System.Drawing.Point(579, 2)
+        Me.BtnPrint.Location = New System.Drawing.Point(581, 2)
         Me.BtnPrint.Name = "BtnPrint"
-        Me.BtnPrint.Size = New System.Drawing.Size(87, 40)
+        Me.BtnPrint.Size = New System.Drawing.Size(106, 34)
         Me.BtnPrint.TabIndex = 3
-        Me.BtnPrint.Text = "Print"
+        Me.BtnPrint.Text = "Print Report"
         Me.BtnPrint.Visible = False
         '
         'BtnPrev
         '
         Me.BtnPrev.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnPrev.Image = CType(resources.GetObject("BtnPrev.Image"), System.Drawing.Image)
-        Me.BtnPrev.Location = New System.Drawing.Point(666, 2)
+        Me.BtnPrev.Location = New System.Drawing.Point(687, 2)
         Me.BtnPrev.Name = "BtnPrev"
-        Me.BtnPrev.Size = New System.Drawing.Size(90, 40)
+        Me.BtnPrev.Size = New System.Drawing.Size(94, 34)
         Me.BtnPrev.TabIndex = 9
         Me.BtnPrev.Text = "Previous"
         Me.BtnPrev.Visible = False
@@ -206,44 +254,22 @@ Partial Class FormBudgetExpenseProposeDet
         '
         Me.BtnNext.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnNext.Image = CType(resources.GetObject("BtnNext.Image"), System.Drawing.Image)
-        Me.BtnNext.Location = New System.Drawing.Point(756, 2)
+        Me.BtnNext.Location = New System.Drawing.Point(781, 2)
         Me.BtnNext.Name = "BtnNext"
-        Me.BtnNext.Size = New System.Drawing.Size(90, 40)
+        Me.BtnNext.Size = New System.Drawing.Size(71, 34)
         Me.BtnNext.TabIndex = 8
         Me.BtnNext.Text = "Next"
-        '
-        'BtnCancell
-        '
-        Me.BtnCancell.Dock = System.Windows.Forms.DockStyle.Left
-        Me.BtnCancell.Image = CType(resources.GetObject("BtnCancell.Image"), System.Drawing.Image)
-        Me.BtnCancell.Location = New System.Drawing.Point(91, 2)
-        Me.BtnCancell.Name = "BtnCancell"
-        Me.BtnCancell.Size = New System.Drawing.Size(126, 40)
-        Me.BtnCancell.TabIndex = 7
-        Me.BtnCancell.Text = "Cancell Propose"
-        Me.BtnCancell.Visible = False
         '
         'BtnConfirm
         '
         Me.BtnConfirm.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnConfirm.Image = CType(resources.GetObject("BtnConfirm.Image"), System.Drawing.Image)
-        Me.BtnConfirm.Location = New System.Drawing.Point(846, 2)
+        Me.BtnConfirm.Location = New System.Drawing.Point(852, 2)
         Me.BtnConfirm.Name = "BtnConfirm"
-        Me.BtnConfirm.Size = New System.Drawing.Size(96, 40)
+        Me.BtnConfirm.Size = New System.Drawing.Size(90, 34)
         Me.BtnConfirm.TabIndex = 6
         Me.BtnConfirm.Text = "Confirm"
         Me.BtnConfirm.Visible = False
-        '
-        'BtnMark
-        '
-        Me.BtnMark.Dock = System.Windows.Forms.DockStyle.Left
-        Me.BtnMark.Image = CType(resources.GetObject("BtnMark.Image"), System.Drawing.Image)
-        Me.BtnMark.Location = New System.Drawing.Point(2, 2)
-        Me.BtnMark.Name = "BtnMark"
-        Me.BtnMark.Size = New System.Drawing.Size(89, 40)
-        Me.BtnMark.TabIndex = 5
-        Me.BtnMark.Text = "Mark"
-        Me.BtnMark.Visible = False
         '
         'XTCBudget
         '
@@ -252,7 +278,7 @@ Partial Class FormBudgetExpenseProposeDet
         Me.XTCBudget.Name = "XTCBudget"
         Me.XTCBudget.SelectedTabPage = Me.XtraTabPage1
         Me.XTCBudget.ShowTabHeader = DevExpress.Utils.DefaultBoolean.[True]
-        Me.XTCBudget.Size = New System.Drawing.Size(944, 513)
+        Me.XTCBudget.Size = New System.Drawing.Size(944, 519)
         Me.XTCBudget.TabIndex = 6
         Me.XTCBudget.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XtraTabPage1, Me.XtraTabPage2, Me.XtraTabPage3})
         '
@@ -269,8 +295,8 @@ Partial Class FormBudgetExpenseProposeDet
         Me.XtraTabPage1.Controls.Add(Me.LEDeptSum)
         Me.XtraTabPage1.Controls.Add(Me.LabelControl1)
         Me.XtraTabPage1.Name = "XtraTabPage1"
-        Me.XtraTabPage1.Size = New System.Drawing.Size(938, 485)
-        Me.XtraTabPage1.Text = "Annual Budget"
+        Me.XtraTabPage1.Size = New System.Drawing.Size(938, 491)
+        Me.XtraTabPage1.Text = "Anggaran Tahunan"
         '
         'MENote
         '
@@ -296,7 +322,7 @@ Partial Class FormBudgetExpenseProposeDet
         Me.PanelControl3.Dock = System.Windows.Forms.DockStyle.Left
         Me.PanelControl3.Location = New System.Drawing.Point(0, 0)
         Me.PanelControl3.Name = "PanelControl3"
-        Me.PanelControl3.Size = New System.Drawing.Size(205, 485)
+        Me.PanelControl3.Size = New System.Drawing.Size(205, 491)
         Me.PanelControl3.TabIndex = 24
         '
         'LabelControl6
@@ -304,9 +330,9 @@ Partial Class FormBudgetExpenseProposeDet
         Me.LabelControl6.Appearance.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelControl6.Location = New System.Drawing.Point(240, 236)
         Me.LabelControl6.Name = "LabelControl6"
-        Me.LabelControl6.Size = New System.Drawing.Size(90, 19)
+        Me.LabelControl6.Size = New System.Drawing.Size(177, 19)
         Me.LabelControl6.TabIndex = 23
-        Me.LabelControl6.Text = "Budget Total"
+        Me.LabelControl6.Text = "Total Anggaran Tahunan"
         '
         'TxtTotal
         '
@@ -320,6 +346,8 @@ Partial Class FormBudgetExpenseProposeDet
         Me.TxtTotal.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
         Me.TxtTotal.Size = New System.Drawing.Size(421, 26)
         Me.TxtTotal.TabIndex = 22
+        Me.TxtTotal.ToolTip = "Masukkan nominal total anggaran tahunan. Contoh : 50.000.000"
+        Me.TxtTotal.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Information
         '
         'TxtYear
         '
@@ -338,18 +366,18 @@ Partial Class FormBudgetExpenseProposeDet
         Me.LabelControl5.Appearance.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelControl5.Location = New System.Drawing.Point(240, 162)
         Me.LabelControl5.Name = "LabelControl5"
-        Me.LabelControl5.Size = New System.Drawing.Size(32, 19)
+        Me.LabelControl5.Size = New System.Drawing.Size(45, 19)
         Me.LabelControl5.TabIndex = 20
-        Me.LabelControl5.Text = "Year"
+        Me.LabelControl5.Text = "Tahun"
         '
         'LabelControl2
         '
         Me.LabelControl2.Appearance.Font = New System.Drawing.Font("Tahoma", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelControl2.Location = New System.Drawing.Point(240, 15)
         Me.LabelControl2.Name = "LabelControl2"
-        Me.LabelControl2.Size = New System.Drawing.Size(208, 39)
+        Me.LabelControl2.Size = New System.Drawing.Size(272, 39)
         Me.LabelControl2.TabIndex = 19
-        Me.LabelControl2.Text = "Annual Budget"
+        Me.LabelControl2.Text = "Anggaran Tahunan"
         '
         'LEDeptSum
         '
@@ -368,9 +396,9 @@ Partial Class FormBudgetExpenseProposeDet
         Me.LabelControl1.Appearance.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelControl1.Location = New System.Drawing.Point(241, 92)
         Me.LabelControl1.Name = "LabelControl1"
-        Me.LabelControl1.Size = New System.Drawing.Size(91, 19)
+        Me.LabelControl1.Size = New System.Drawing.Size(86, 19)
         Me.LabelControl1.TabIndex = 0
-        Me.LabelControl1.Text = "Departement"
+        Me.LabelControl1.Text = "Departemen"
         '
         'XtraTabPage2
         '
@@ -378,8 +406,8 @@ Partial Class FormBudgetExpenseProposeDet
         Me.XtraTabPage2.Controls.Add(Me.PanelControl5)
         Me.XtraTabPage2.Controls.Add(Me.PanelControl4)
         Me.XtraTabPage2.Name = "XtraTabPage2"
-        Me.XtraTabPage2.Size = New System.Drawing.Size(938, 485)
-        Me.XtraTabPage2.Text = "Annual Budget (Per Category)"
+        Me.XtraTabPage2.Size = New System.Drawing.Size(938, 491)
+        Me.XtraTabPage2.Text = "Detail Anggaran Tahunan (Per Kategori)"
         '
         'GCYearlyCat
         '
@@ -388,7 +416,7 @@ Partial Class FormBudgetExpenseProposeDet
         Me.GCYearlyCat.MainView = Me.GVYearlyCat
         Me.GCYearlyCat.Name = "GCYearlyCat"
         Me.GCYearlyCat.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemTextEdit2})
-        Me.GCYearlyCat.Size = New System.Drawing.Size(938, 401)
+        Me.GCYearlyCat.Size = New System.Drawing.Size(938, 407)
         Me.GCYearlyCat.TabIndex = 1
         Me.GCYearlyCat.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVYearlyCat})
         '
@@ -481,7 +509,7 @@ Partial Class FormBudgetExpenseProposeDet
         Me.PanelControl5.Controls.Add(Me.LabelControl8)
         Me.PanelControl5.Controls.Add(Me.PanelControl6)
         Me.PanelControl5.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl5.Location = New System.Drawing.Point(0, 441)
+        Me.PanelControl5.Location = New System.Drawing.Point(0, 447)
         Me.PanelControl5.Name = "PanelControl5"
         Me.PanelControl5.Size = New System.Drawing.Size(938, 44)
         Me.PanelControl5.TabIndex = 9
@@ -597,7 +625,7 @@ Partial Class FormBudgetExpenseProposeDet
         Me.BtnPrintDraftYearlyCat.Appearance.Options.UseFont = True
         Me.BtnPrintDraftYearlyCat.Dock = System.Windows.Forms.DockStyle.Left
         Me.BtnPrintDraftYearlyCat.Image = CType(resources.GetObject("BtnPrintDraftYearlyCat.Image"), System.Drawing.Image)
-        Me.BtnPrintDraftYearlyCat.Location = New System.Drawing.Point(298, 2)
+        Me.BtnPrintDraftYearlyCat.Location = New System.Drawing.Point(278, 2)
         Me.BtnPrintDraftYearlyCat.Name = "BtnPrintDraftYearlyCat"
         Me.BtnPrintDraftYearlyCat.Size = New System.Drawing.Size(85, 36)
         Me.BtnPrintDraftYearlyCat.TabIndex = 113
@@ -612,9 +640,9 @@ Partial Class FormBudgetExpenseProposeDet
         Me.BtnDividedYearlyCat.Image = CType(resources.GetObject("BtnDividedYearlyCat.Image"), System.Drawing.Image)
         Me.BtnDividedYearlyCat.Location = New System.Drawing.Point(189, 2)
         Me.BtnDividedYearlyCat.Name = "BtnDividedYearlyCat"
-        Me.BtnDividedYearlyCat.Size = New System.Drawing.Size(109, 36)
+        Me.BtnDividedYearlyCat.Size = New System.Drawing.Size(89, 36)
         Me.BtnDividedYearlyCat.TabIndex = 112
-        Me.BtnDividedYearlyCat.Text = "Divided Equally"
+        Me.BtnDividedYearlyCat.Text = "Bagi Rata"
         Me.BtnDividedYearlyCat.Visible = False
         '
         'BtnImportXLSYearlyCat
@@ -635,12 +663,12 @@ Partial Class FormBudgetExpenseProposeDet
         Me.LabelControl7.Appearance.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelControl7.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.LabelControl7.Dock = System.Windows.Forms.DockStyle.Right
-        Me.LabelControl7.Location = New System.Drawing.Point(465, 2)
+        Me.LabelControl7.Location = New System.Drawing.Point(423, 2)
         Me.LabelControl7.Name = "LabelControl7"
         Me.LabelControl7.Padding = New System.Windows.Forms.Padding(0, 7, 5, 0)
-        Me.LabelControl7.Size = New System.Drawing.Size(207, 26)
+        Me.LabelControl7.Size = New System.Drawing.Size(249, 26)
         Me.LabelControl7.TabIndex = 102
-        Me.LabelControl7.Text = "ANNUAL BUDGET TOTAL"
+        Me.LabelControl7.Text = "TOTAL ANGGARAN TAHUNAN"
         '
         'PanelTotal
         '
@@ -692,8 +720,8 @@ Partial Class FormBudgetExpenseProposeDet
         Me.XtraTabPage3.Controls.Add(Me.GCMonthly)
         Me.XtraTabPage3.Controls.Add(Me.PanelControl11)
         Me.XtraTabPage3.Name = "XtraTabPage3"
-        Me.XtraTabPage3.Size = New System.Drawing.Size(938, 485)
-        Me.XtraTabPage3.Text = "Monthly Budget"
+        Me.XtraTabPage3.Size = New System.Drawing.Size(938, 491)
+        Me.XtraTabPage3.Text = "Detail Anggaran Bulanan"
         '
         'GCMonthly
         '
@@ -702,13 +730,13 @@ Partial Class FormBudgetExpenseProposeDet
         Me.GCMonthly.MainView = Me.GVMonthly
         Me.GCMonthly.Name = "GCMonthly"
         Me.GCMonthly.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckEdit1, Me.RepositoryItemTextEdit1})
-        Me.GCMonthly.Size = New System.Drawing.Size(938, 447)
+        Me.GCMonthly.Size = New System.Drawing.Size(938, 453)
         Me.GCMonthly.TabIndex = 12
         Me.GCMonthly.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVMonthly})
         '
         'GVMonthly
         '
-        Me.GVMonthly.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnno, Me.GridColumnJan, Me.GridColumnFeb, Me.GridColumnMarch, Me.GridColumnApril, Me.GridColumnMay, Me.GridColumnJune, Me.GridColumnJuly, Me.GridColumnAugust, Me.GridColumnSept, Me.GridColumnOct, Me.GridColumnNov, Me.GridColumn1Dec, Me.GridColumnTotalInput, Me.GridColumnAcc, Me.GridColumn6, Me.GridColumnCat, Me.GridColumnYearlyCat, Me.GridColumndiff, Me.GridColumnYear})
+        Me.GVMonthly.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnno, Me.GridColumnJan, Me.GridColumnFeb, Me.GridColumnMarch, Me.GridColumnApril, Me.GridColumnMay, Me.GridColumnJune, Me.GridColumnJuly, Me.GridColumnAugust, Me.GridColumnSept, Me.GridColumnOct, Me.GridColumnNov, Me.GridColumn1Dec, Me.GridColumnTotalInput, Me.GridColumnAcc, Me.GridColumnDescAcc, Me.GridColumnCat, Me.GridColumnYearlyCat, Me.GridColumndiff, Me.GridColumnYear})
         Me.GVMonthly.GridControl = Me.GCMonthly
         Me.GVMonthly.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "1", Me.GridColumnJan, "{0:n2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "2", Me.GridColumnFeb, "{0:n2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "3", Me.GridColumnMarch, "{0:n2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "4", Me.GridColumnApril, "{0:n2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "5", Me.GridColumnMay, "{0:n2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "6", Me.GridColumnJune, "{0:n2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "7", Me.GridColumnJuly, "{0:n2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "8", Me.GridColumnAugust, "{0:n2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "9", Me.GridColumnSept, "{0:n2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "10", Me.GridColumnOct, "{0:n2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "11", Me.GridColumnNov, "{0:n2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "12", Me.GridColumn1Dec, "{0:n2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_input", Me.GridColumnTotalInput, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "diff", Me.GridColumndiff, "{0:N2}")})
         Me.GVMonthly.Name = "GVMonthly"
@@ -879,10 +907,6 @@ Partial Class FormBudgetExpenseProposeDet
         '
         'GridColumnTotalInput
         '
-        Me.GridColumnTotalInput.AppearanceCell.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
-        Me.GridColumnTotalInput.AppearanceCell.Options.UseFont = True
-        Me.GridColumnTotalInput.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
-        Me.GridColumnTotalInput.AppearanceHeader.Options.UseFont = True
         Me.GridColumnTotalInput.Caption = "Total"
         Me.GridColumnTotalInput.DisplayFormat.FormatString = "N2"
         Me.GridColumnTotalInput.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
@@ -905,15 +929,15 @@ Partial Class FormBudgetExpenseProposeDet
         Me.GridColumnAcc.Visible = True
         Me.GridColumnAcc.VisibleIndex = 0
         '
-        'GridColumn6
+        'GridColumnDescAcc
         '
-        Me.GridColumn6.Caption = "Description"
-        Me.GridColumn6.FieldName = "exp_description"
-        Me.GridColumn6.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left
-        Me.GridColumn6.Name = "GridColumn6"
-        Me.GridColumn6.OptionsColumn.AllowEdit = False
-        Me.GridColumn6.Visible = True
-        Me.GridColumn6.VisibleIndex = 1
+        Me.GridColumnDescAcc.Caption = "Description"
+        Me.GridColumnDescAcc.FieldName = "exp_description"
+        Me.GridColumnDescAcc.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left
+        Me.GridColumnDescAcc.Name = "GridColumnDescAcc"
+        Me.GridColumnDescAcc.OptionsColumn.AllowEdit = False
+        Me.GridColumnDescAcc.Visible = True
+        Me.GridColumnDescAcc.VisibleIndex = 1
         '
         'GridColumnCat
         '
@@ -1059,15 +1083,15 @@ Partial Class FormBudgetExpenseProposeDet
         Me.PanelControl2.Controls.Add(Me.TxtNumber)
         Me.PanelControl2.Controls.Add(Me.LabelControl3)
         Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PanelControl2.Location = New System.Drawing.Point(414, 2)
+        Me.PanelControl2.Location = New System.Drawing.Point(356, 2)
         Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(528, 45)
+        Me.PanelControl2.Size = New System.Drawing.Size(586, 45)
         Me.PanelControl2.TabIndex = 5
         '
         'LabelControl21
         '
         Me.LabelControl21.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl21.Location = New System.Drawing.Point(364, 15)
+        Me.LabelControl21.Location = New System.Drawing.Point(417, 15)
         Me.LabelControl21.Name = "LabelControl21"
         Me.LabelControl21.Size = New System.Drawing.Size(31, 13)
         Me.LabelControl21.TabIndex = 144
@@ -1078,15 +1102,15 @@ Partial Class FormBudgetExpenseProposeDet
         Me.LabelControl4.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelControl4.Location = New System.Drawing.Point(178, 15)
         Me.LabelControl4.Name = "LabelControl4"
-        Me.LabelControl4.Size = New System.Drawing.Size(23, 13)
+        Me.LabelControl4.Size = New System.Drawing.Size(72, 13)
         Me.LabelControl4.TabIndex = 7
-        Me.LabelControl4.Text = "Date"
+        Me.LabelControl4.Text = "Tanggal Dibuat"
         '
         'DECreated
         '
         Me.DECreated.EditValue = Nothing
         Me.DECreated.Enabled = False
-        Me.DECreated.Location = New System.Drawing.Point(207, 12)
+        Me.DECreated.Location = New System.Drawing.Point(257, 12)
         Me.DECreated.Name = "DECreated"
         Me.DECreated.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DECreated.Properties.Appearance.Options.UseFont = True
@@ -1098,7 +1122,7 @@ Partial Class FormBudgetExpenseProposeDet
         'LEReportStatus
         '
         Me.LEReportStatus.Enabled = False
-        Me.LEReportStatus.Location = New System.Drawing.Point(401, 12)
+        Me.LEReportStatus.Location = New System.Drawing.Point(451, 12)
         Me.LEReportStatus.Name = "LEReportStatus"
         Me.LEReportStatus.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LEReportStatus.Properties.Appearance.Options.UseFont = True
@@ -1128,9 +1152,9 @@ Partial Class FormBudgetExpenseProposeDet
         Me.LabelControl3.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelControl3.Location = New System.Drawing.Point(11, 15)
         Me.LabelControl3.Name = "LabelControl3"
-        Me.LabelControl3.Size = New System.Drawing.Size(37, 13)
+        Me.LabelControl3.Size = New System.Drawing.Size(31, 13)
         Me.LabelControl3.TabIndex = 5
-        Me.LabelControl3.Text = "Number"
+        Me.LabelControl3.Text = "Nomor"
         '
         'CMSYearlyCat
         '
@@ -1170,6 +1194,7 @@ Partial Class FormBudgetExpenseProposeDet
         Me.Name = "FormBudgetExpenseProposeDet"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Propose Expense Budget"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.PanelControlBottom, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControlBottom.ResumeLayout(False)
         CType(Me.XTCBudget, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1302,11 +1327,13 @@ Partial Class FormBudgetExpenseProposeDet
     Friend WithEvents BtnImportXLSMonthly As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BtnExportXLSMonthly As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents GridColumnAcc As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnDescAcc As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnCat As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnYearlyCat As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumndiff As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnYear As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents DividedEquallyToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents BtnDividedMonthlyCat As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BtnImportFromXLS As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BtnFormatXLS As DevExpress.XtraEditors.SimpleButton
 End Class

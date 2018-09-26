@@ -147,7 +147,6 @@
                 Else
                     PanelControlScan.Visible = False
                     BtnVerifiy.Visible = False
-                    GridColumnStatus.Visible = False
                 End If
             End If
         End If
@@ -403,6 +402,7 @@
                 execute_non_query(query_upd, True, "", "", "", "")
 
                 actionLoad()
+                FormFGCodeReplace.viewCodeReplaceStore()
                 FormFGCodeReplace.GVFGCodeReplaceStore.FocusedRowHandle = find_row(FormFGCodeReplace.GVFGCodeReplaceStore, "id_fg_code_replace_store", id_fg_code_replace_store)
                 infoCustom("Verification compeleted")
                 Cursor = Cursors.Default
@@ -429,8 +429,8 @@
                 If GVBarcode.GetFocusedRowCellValue("status") = "verified" Then
                     infoCustom("Code duplicate !")
                 Else
-                    Dim queryIns As String = "INSERT INTO tb_fg_code_replace_store_temp VALUES ('" + addSlashes(code) + "', '" + GVBarcode.GetFocusedRowCellValue("id_fg_code_replace_store_det") + "', '" + id_fg_code_replace_store + "') "
-                    execute_query(queryIns, -1, True, "", "", "", "")
+                    'Dim queryIns As String = "INSERT INTO tb_fg_code_replace_store_temp VALUES ('" + addSlashes(code) + "', '" + GVBarcode.GetFocusedRowCellValue("id_fg_code_replace_store_det") + "', '" + id_fg_code_replace_store + "') "
+                    'execute_query(queryIns, -1, True, "", "", "", "")
                     GVBarcode.SetFocusedRowCellValue("status", "verified")
                 End If
             Else

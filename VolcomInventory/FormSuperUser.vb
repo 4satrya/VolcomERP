@@ -11,37 +11,38 @@
     End Sub
 
     Private Sub BtnOther_Click(sender As Object, e As EventArgs) Handles BtnOther.Click
-        'asset
-        Dim qa As String = "SELECT rd.id_item, rd.id_purc_rec_det, rd.qty, coa.id_coa_out, rq.id_departement, i.item_desc, NOW(), (pod.`value` - pod.discount) AS `cost`, 2
-                FROM tb_purc_rec_det rd
-                INNER JOIN tb_purc_order_det pod ON pod.id_purc_order_det = rd.id_purc_order_det
-                INNER JOIN tb_purc_req_det rqd ON rqd.id_purc_req_det = pod.id_purc_order_det
-                INNER JOIN tb_purc_req rq ON rq.id_purc_req = rqd.id_purc_req
-                INNER JOIN tb_item i ON i.id_item = rd.id_item
-                INNER JOIN tb_item_cat cat ON cat.id_item_cat = i.id_item_cat
-                INNER JOIN tb_lookup_expense_type et ON et.id_expense_type = cat.id_expense_type
-                INNER JOIN tb_item_coa coa ON coa.id_item_cat = cat.id_item_cat AND coa.id_departement=rq.id_departement
-                WHERE rd.id_purc_rec=" + TextEdit1.Text + " AND et.id_expense_type=2 "
-        Dim da As DataTable = execute_query(qa, -1, True, "", "", "", "")
-        If da.Rows.Count > 0 Then
-            Dim ix As Integer = 0
-            Dim qa_ins As String = "INSERT INTO tb_purc_rec_asset (`id_item`,`id_purc_rec_det`,`id_departement`, `id_acc_fa`,`asset_name`,`acq_date`,`acq_cost`) VALUES "
-            For a As Integer = 0 To da.Rows.Count - 1
-                For j As Integer = 1 To da.Rows(a)("qty")
-                    If ix > 0 Then
-                        qa_ins += ", "
-                    End If
+        FormTestImage.ShowDialog()
+        ''asset
+        'Dim qa As String = "SELECT rd.id_item, rd.id_purc_rec_det, rd.qty, coa.id_coa_out, rq.id_departement, i.item_desc, NOW(), (pod.`value` - pod.discount) AS `cost`, 2
+        '        FROM tb_purc_rec_det rd
+        '        INNER JOIN tb_purc_order_det pod ON pod.id_purc_order_det = rd.id_purc_order_det
+        '        INNER JOIN tb_purc_req_det rqd ON rqd.id_purc_req_det = pod.id_purc_order_det
+        '        INNER JOIN tb_purc_req rq ON rq.id_purc_req = rqd.id_purc_req
+        '        INNER JOIN tb_item i ON i.id_item = rd.id_item
+        '        INNER JOIN tb_item_cat cat ON cat.id_item_cat = i.id_item_cat
+        '        INNER JOIN tb_lookup_expense_type et ON et.id_expense_type = cat.id_expense_type
+        '        INNER JOIN tb_item_coa coa ON coa.id_item_cat = cat.id_item_cat AND coa.id_departement=rq.id_departement
+        '        WHERE rd.id_purc_rec=" + TextEdit1.Text + " AND et.id_expense_type=2 "
+        'Dim da As DataTable = execute_query(qa, -1, True, "", "", "", "")
+        'If da.Rows.Count > 0 Then
+        '    Dim ix As Integer = 0
+        '    Dim qa_ins As String = "INSERT INTO tb_purc_rec_asset (`id_item`,`id_purc_rec_det`,`id_departement`, `id_acc_fa`,`asset_name`,`acq_date`,`acq_cost`) VALUES "
+        '    For a As Integer = 0 To da.Rows.Count - 1
+        '        For j As Integer = 1 To da.Rows(a)("qty")
+        '            If ix > 0 Then
+        '                qa_ins += ", "
+        '            End If
 
-                    qa_ins += "('" + da.Rows(a)("id_item").ToString + "', '" + da.Rows(a)("id_purc_rec_det").ToString + "', '" + da.Rows(a)("id_departement").ToString + "', '" + da.Rows(a)("id_coa_out").ToString + "', '" + da.Rows(a)("item_desc").ToString + "', NOW(), '" + decimalSQL(da.Rows(a)("cost").ToString) + "') "
-                    ix += 1
-                Next
-            Next
+        '            qa_ins += "('" + da.Rows(a)("id_item").ToString + "', '" + da.Rows(a)("id_purc_rec_det").ToString + "', '" + da.Rows(a)("id_departement").ToString + "', '" + da.Rows(a)("id_coa_out").ToString + "', '" + da.Rows(a)("item_desc").ToString + "', NOW(), '" + decimalSQL(da.Rows(a)("cost").ToString) + "') "
+        '            ix += 1
+        '        Next
+        '    Next
 
-            'ins 
-            If ix > 0 Then
-                execute_non_query(qa_ins, True, "", "", "", "")
-            End If
-        End If
+        '    'ins 
+        '    If ix > 0 Then
+        '        execute_non_query(qa_ins, True, "", "", "", "")
+        '    End If
+        'End If
 
         'Dim f As New ClassFingerPrint
         'f.ip = "192.168.1.74"

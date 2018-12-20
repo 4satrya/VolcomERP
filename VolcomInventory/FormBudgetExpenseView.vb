@@ -130,7 +130,11 @@
             SUM(case when MONTH(j.date_created) = '12' THEN jd.debit END) AS `12`
             FROM tb_a_acc_trans_det jd
             INNER JOIN tb_a_acc_trans j ON j.id_acc_trans = jd.id_acc_trans
-            WHERE jd.report_mark_type=156 AND jd.debit<>0
+            JOIN tb_opt_purchasing o
+            WHERE (jd.report_mark_type=148 OR jd.report_mark_type=156 OR jd.report_mark_type=157 OR jd.report_mark_type=161 or jd.report_mark_type=166) 
+            AND jd.debit <>0
+            AND jd.id_acc<>o.acc_coa_receive
+            AND jd.id_acc<>o.acc_coa_vat_in
             GROUP BY jd.id_acc
         ) r ON r.id_acc = coa.id_acc
         WHERE c.id_departement='" + LEDeptSum.EditValue.ToString + "' AND e.year='" + LEYear.Text.ToString + "' 

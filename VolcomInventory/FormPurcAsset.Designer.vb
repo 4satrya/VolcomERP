@@ -20,6 +20,9 @@ Partial Class FormPurcAsset
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim SerializableAppearanceObject1 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
+        Dim SerializableAppearanceObject2 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormPurcAsset))
         Me.XTCAsset = New DevExpress.XtraTab.XtraTabControl()
         Me.XTPPending = New DevExpress.XtraTab.XtraTabPage()
         Me.GCPending = New DevExpress.XtraGrid.GridControl()
@@ -37,16 +40,40 @@ Partial Class FormPurcAsset
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnacqCost = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnBookValue = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnaccumDep = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnAssetNumber = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.XTPSold = New DevExpress.XtraTab.XtraTabPage()
         Me.GridControl2 = New DevExpress.XtraGrid.GridControl()
         Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.XTPDepresiasi = New DevExpress.XtraTab.XtraTabPage()
-        Me.GridControl3 = New DevExpress.XtraGrid.GridControl()
-        Me.GridView3 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GCDep = New DevExpress.XtraGrid.GridControl()
+        Me.GVDep = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumnDepAssetNumber = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnDepAssetName = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumndepDept = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnDepStartPeriod = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnDepEndPeriod = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnDepPeriod = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnDepUseLife = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnDepAcqCost = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnAmount = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnDepCountFullDay = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnDepEverYMonth = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnDepFirstMonth = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnDepLastMonth = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnDepTotalEveryMonth = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnDepApply = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.BtnApply = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
+        Me.GridColumnDepDetail = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.BtnDetail = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
+        Me.BtnApplyAll = New DevExpress.XtraEditors.SimpleButton()
+        Me.PanelNavDep = New DevExpress.XtraEditors.PanelControl()
+        Me.BtnHistory = New DevExpress.XtraEditors.SimpleButton()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.RecordToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GridColumnBookValue = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XTCAsset, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCAsset.SuspendLayout()
         Me.XTPPending.SuspendLayout()
@@ -60,8 +87,12 @@ Partial Class FormPurcAsset
         CType(Me.GridControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTPDepresiasi.SuspendLayout()
-        CType(Me.GridControl3, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GridView3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GCDep, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVDep, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.BtnApply, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.BtnDetail, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelNavDep, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelNavDep.SuspendLayout()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -117,15 +148,15 @@ Partial Class FormPurcAsset
         Me.GridColumnAcqDate.FieldName = "acq_date"
         Me.GridColumnAcqDate.Name = "GridColumnAcqDate"
         Me.GridColumnAcqDate.Visible = True
-        Me.GridColumnAcqDate.VisibleIndex = 1
+        Me.GridColumnAcqDate.VisibleIndex = 2
         '
         'GridColumnItem
         '
-        Me.GridColumnItem.Caption = "Item"
+        Me.GridColumnItem.Caption = "Asset Name"
         Me.GridColumnItem.FieldName = "asset_name"
         Me.GridColumnItem.Name = "GridColumnItem"
         Me.GridColumnItem.Visible = True
-        Me.GridColumnItem.VisibleIndex = 2
+        Me.GridColumnItem.VisibleIndex = 0
         '
         'GridColumndept
         '
@@ -133,7 +164,7 @@ Partial Class FormPurcAsset
         Me.GridColumndept.FieldName = "departement"
         Me.GridColumndept.Name = "GridColumndept"
         Me.GridColumndept.Visible = True
-        Me.GridColumndept.VisibleIndex = 0
+        Me.GridColumndept.VisibleIndex = 1
         '
         'GridColumnRecNumber
         '
@@ -178,12 +209,14 @@ Partial Class FormPurcAsset
         '
         'GVActive
         '
-        Me.GVActive.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumnBookValue})
+        Me.GVActive.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumnacqCost, Me.GridColumnBookValue, Me.GridColumnaccumDep, Me.GridColumnAssetNumber})
         Me.GVActive.GridControl = Me.GCActive
+        Me.GVActive.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "acq_cost", Me.GridColumnacqCost, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "book_value", Me.GridColumnBookValue, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "accum_value", Me.GridColumnaccumDep, "{0:N2}")})
         Me.GVActive.Name = "GVActive"
         Me.GVActive.OptionsBehavior.AutoExpandAllGroups = True
         Me.GVActive.OptionsBehavior.Editable = False
         Me.GVActive.OptionsFind.AlwaysVisible = True
+        Me.GVActive.OptionsView.ShowFooter = True
         Me.GVActive.OptionsView.ShowGroupPanel = False
         '
         'GridColumn1
@@ -194,15 +227,15 @@ Partial Class FormPurcAsset
         Me.GridColumn1.FieldName = "acq_date"
         Me.GridColumn1.Name = "GridColumn1"
         Me.GridColumn1.Visible = True
-        Me.GridColumn1.VisibleIndex = 1
+        Me.GridColumn1.VisibleIndex = 3
         '
         'GridColumn2
         '
-        Me.GridColumn2.Caption = "Item"
+        Me.GridColumn2.Caption = "Asset Name"
         Me.GridColumn2.FieldName = "asset_name"
         Me.GridColumn2.Name = "GridColumn2"
         Me.GridColumn2.Visible = True
-        Me.GridColumn2.VisibleIndex = 2
+        Me.GridColumn2.VisibleIndex = 1
         '
         'GridColumn3
         '
@@ -210,7 +243,7 @@ Partial Class FormPurcAsset
         Me.GridColumn3.FieldName = "departement"
         Me.GridColumn3.Name = "GridColumn3"
         Me.GridColumn3.Visible = True
-        Me.GridColumn3.VisibleIndex = 0
+        Me.GridColumn3.VisibleIndex = 2
         '
         'GridColumn4
         '
@@ -218,17 +251,50 @@ Partial Class FormPurcAsset
         Me.GridColumn4.FieldName = "purc_rec_number"
         Me.GridColumn4.Name = "GridColumn4"
         Me.GridColumn4.Visible = True
-        Me.GridColumn4.VisibleIndex = 3
+        Me.GridColumn4.VisibleIndex = 4
         '
-        'GridColumn5
+        'GridColumnacqCost
         '
-        Me.GridColumn5.Caption = "Acquisition Cost"
-        Me.GridColumn5.DisplayFormat.FormatString = "N2"
-        Me.GridColumn5.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn5.FieldName = "acq_cost"
-        Me.GridColumn5.Name = "GridColumn5"
-        Me.GridColumn5.Visible = True
-        Me.GridColumn5.VisibleIndex = 4
+        Me.GridColumnacqCost.Caption = "Acquisition Cost"
+        Me.GridColumnacqCost.DisplayFormat.FormatString = "N2"
+        Me.GridColumnacqCost.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnacqCost.FieldName = "acq_cost"
+        Me.GridColumnacqCost.Name = "GridColumnacqCost"
+        Me.GridColumnacqCost.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "acq_cost", "{0:N2}")})
+        Me.GridColumnacqCost.Visible = True
+        Me.GridColumnacqCost.VisibleIndex = 5
+        '
+        'GridColumnBookValue
+        '
+        Me.GridColumnBookValue.Caption = "Book Value"
+        Me.GridColumnBookValue.DisplayFormat.FormatString = "N2"
+        Me.GridColumnBookValue.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnBookValue.FieldName = "book_value"
+        Me.GridColumnBookValue.Name = "GridColumnBookValue"
+        Me.GridColumnBookValue.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "book_value", "{0:N2}")})
+        Me.GridColumnBookValue.UnboundExpression = "[acq_cost]-[accum_value]"
+        Me.GridColumnBookValue.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
+        Me.GridColumnBookValue.Visible = True
+        Me.GridColumnBookValue.VisibleIndex = 7
+        '
+        'GridColumnaccumDep
+        '
+        Me.GridColumnaccumDep.Caption = "Accumulated Depreciation"
+        Me.GridColumnaccumDep.DisplayFormat.FormatString = "N2"
+        Me.GridColumnaccumDep.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnaccumDep.FieldName = "accum_value"
+        Me.GridColumnaccumDep.Name = "GridColumnaccumDep"
+        Me.GridColumnaccumDep.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "accum_value", "{0:N2}")})
+        Me.GridColumnaccumDep.Visible = True
+        Me.GridColumnaccumDep.VisibleIndex = 6
+        '
+        'GridColumnAssetNumber
+        '
+        Me.GridColumnAssetNumber.Caption = "Asset Number"
+        Me.GridColumnAssetNumber.FieldName = "asset_number"
+        Me.GridColumnAssetNumber.Name = "GridColumnAssetNumber"
+        Me.GridColumnAssetNumber.Visible = True
+        Me.GridColumnAssetNumber.VisibleIndex = 0
         '
         'XTPSold
         '
@@ -259,29 +325,271 @@ Partial Class FormPurcAsset
         '
         'XTPDepresiasi
         '
-        Me.XTPDepresiasi.Controls.Add(Me.GridControl3)
+        Me.XTPDepresiasi.Controls.Add(Me.GCDep)
+        Me.XTPDepresiasi.Controls.Add(Me.BtnApplyAll)
+        Me.XTPDepresiasi.Controls.Add(Me.PanelNavDep)
         Me.XTPDepresiasi.Name = "XTPDepresiasi"
         Me.XTPDepresiasi.Size = New System.Drawing.Size(775, 443)
         Me.XTPDepresiasi.Text = "Depreciation"
         '
-        'GridControl3
+        'GCDep
         '
-        Me.GridControl3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GridControl3.Location = New System.Drawing.Point(0, 0)
-        Me.GridControl3.MainView = Me.GridView3
-        Me.GridControl3.Name = "GridControl3"
-        Me.GridControl3.Size = New System.Drawing.Size(775, 443)
-        Me.GridControl3.TabIndex = 1
-        Me.GridControl3.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView3})
+        Me.GCDep.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCDep.Location = New System.Drawing.Point(0, 48)
+        Me.GCDep.LookAndFeel.SkinName = "Office 2010 Blue"
+        Me.GCDep.LookAndFeel.UseDefaultLookAndFeel = False
+        Me.GCDep.MainView = Me.GVDep
+        Me.GCDep.Name = "GCDep"
+        Me.GCDep.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.BtnApply, Me.BtnDetail})
+        Me.GCDep.Size = New System.Drawing.Size(775, 367)
+        Me.GCDep.TabIndex = 1
+        Me.GCDep.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVDep})
         '
-        'GridView3
+        'GVDep
         '
-        Me.GridView3.GridControl = Me.GridControl3
-        Me.GridView3.Name = "GridView3"
-        Me.GridView3.OptionsBehavior.AutoExpandAllGroups = True
-        Me.GridView3.OptionsBehavior.Editable = False
-        Me.GridView3.OptionsFind.AlwaysVisible = True
-        Me.GridView3.OptionsView.ShowGroupPanel = False
+        Me.GVDep.Appearance.HeaderPanel.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.GVDep.Appearance.HeaderPanel.Options.UseFont = True
+        Me.GVDep.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnDepAssetNumber, Me.GridColumnDepAssetName, Me.GridColumndepDept, Me.GridColumnDepStartPeriod, Me.GridColumnDepEndPeriod, Me.GridColumnDepPeriod, Me.GridColumnDepUseLife, Me.GridColumnDepAcqCost, Me.GridColumnAmount, Me.GridColumnDepCountFullDay, Me.GridColumnDepEverYMonth, Me.GridColumnDepFirstMonth, Me.GridColumnDepLastMonth, Me.GridColumnDepTotalEveryMonth, Me.GridColumnDepApply, Me.GridColumnDepDetail})
+        Me.GVDep.GridControl = Me.GCDep
+        Me.GVDep.Name = "GVDep"
+        Me.GVDep.OptionsBehavior.AutoExpandAllGroups = True
+        Me.GVDep.OptionsFind.AlwaysVisible = True
+        Me.GVDep.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumnDepAssetNumber
+        '
+        Me.GridColumnDepAssetNumber.Caption = "Asset Number"
+        Me.GridColumnDepAssetNumber.FieldName = "asset_number"
+        Me.GridColumnDepAssetNumber.Name = "GridColumnDepAssetNumber"
+        Me.GridColumnDepAssetNumber.OptionsColumn.AllowEdit = False
+        Me.GridColumnDepAssetNumber.Visible = True
+        Me.GridColumnDepAssetNumber.VisibleIndex = 0
+        '
+        'GridColumnDepAssetName
+        '
+        Me.GridColumnDepAssetName.Caption = "Asset Name"
+        Me.GridColumnDepAssetName.FieldName = "asset_name"
+        Me.GridColumnDepAssetName.Name = "GridColumnDepAssetName"
+        Me.GridColumnDepAssetName.OptionsColumn.AllowEdit = False
+        Me.GridColumnDepAssetName.Visible = True
+        Me.GridColumnDepAssetName.VisibleIndex = 1
+        '
+        'GridColumndepDept
+        '
+        Me.GridColumndepDept.Caption = "Departement"
+        Me.GridColumndepDept.FieldName = "departement"
+        Me.GridColumndepDept.Name = "GridColumndepDept"
+        Me.GridColumndepDept.Visible = True
+        Me.GridColumndepDept.VisibleIndex = 2
+        '
+        'GridColumnDepStartPeriod
+        '
+        Me.GridColumnDepStartPeriod.Caption = "Start Period"
+        Me.GridColumnDepStartPeriod.FieldName = "start_period"
+        Me.GridColumnDepStartPeriod.Name = "GridColumnDepStartPeriod"
+        '
+        'GridColumnDepEndPeriod
+        '
+        Me.GridColumnDepEndPeriod.Caption = "End Period"
+        Me.GridColumnDepEndPeriod.FieldName = "end_period"
+        Me.GridColumnDepEndPeriod.Name = "GridColumnDepEndPeriod"
+        '
+        'GridColumnDepPeriod
+        '
+        Me.GridColumnDepPeriod.Caption = "Period"
+        Me.GridColumnDepPeriod.FieldName = "period"
+        Me.GridColumnDepPeriod.Name = "GridColumnDepPeriod"
+        Me.GridColumnDepPeriod.OptionsColumn.AllowEdit = False
+        Me.GridColumnDepPeriod.UnboundExpression = "Iif(IsNullOrEmpty([start_period]), [end_period], Concat([start_period], ' - ', [e" &
+    "nd_period]))"
+        Me.GridColumnDepPeriod.UnboundType = DevExpress.Data.UnboundColumnType.[String]
+        Me.GridColumnDepPeriod.Visible = True
+        Me.GridColumnDepPeriod.VisibleIndex = 3
+        '
+        'GridColumnDepUseLife
+        '
+        Me.GridColumnDepUseLife.Caption = "Useful Life"
+        Me.GridColumnDepUseLife.DisplayFormat.FormatString = "N0"
+        Me.GridColumnDepUseLife.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnDepUseLife.FieldName = "useful_life"
+        Me.GridColumnDepUseLife.Name = "GridColumnDepUseLife"
+        Me.GridColumnDepUseLife.OptionsColumn.AllowEdit = False
+        Me.GridColumnDepUseLife.Visible = True
+        Me.GridColumnDepUseLife.VisibleIndex = 4
+        '
+        'GridColumnDepAcqCost
+        '
+        Me.GridColumnDepAcqCost.Caption = "Acqusition Cost"
+        Me.GridColumnDepAcqCost.DisplayFormat.FormatString = "N2"
+        Me.GridColumnDepAcqCost.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnDepAcqCost.FieldName = "acq_cost"
+        Me.GridColumnDepAcqCost.Name = "GridColumnDepAcqCost"
+        Me.GridColumnDepAcqCost.Visible = True
+        Me.GridColumnDepAcqCost.VisibleIndex = 5
+        '
+        'GridColumnAmount
+        '
+        Me.GridColumnAmount.Caption = "Depreciation Amount"
+        Me.GridColumnAmount.DisplayFormat.FormatString = "N2"
+        Me.GridColumnAmount.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnAmount.FieldName = "amount"
+        Me.GridColumnAmount.Name = "GridColumnAmount"
+        Me.GridColumnAmount.OptionsColumn.AllowEdit = False
+        Me.GridColumnAmount.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount", "{0:N2}")})
+        Me.GridColumnAmount.UnboundExpression = "[dep_first_month] + [dep_total_full_day] + [dep_last_month]"
+        Me.GridColumnAmount.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
+        Me.GridColumnAmount.Visible = True
+        Me.GridColumnAmount.VisibleIndex = 6
+        '
+        'GridColumnDepCountFullDay
+        '
+        Me.GridColumnDepCountFullDay.Caption = "Full Day"
+        Me.GridColumnDepCountFullDay.FieldName = "full_day"
+        Me.GridColumnDepCountFullDay.Name = "GridColumnDepCountFullDay"
+        Me.GridColumnDepCountFullDay.OptionsColumn.AllowEdit = False
+        '
+        'GridColumnDepEverYMonth
+        '
+        Me.GridColumnDepEverYMonth.Caption = "Depreciation Every Month"
+        Me.GridColumnDepEverYMonth.DisplayFormat.FormatString = "N2"
+        Me.GridColumnDepEverYMonth.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnDepEverYMonth.FieldName = "dep_full_day"
+        Me.GridColumnDepEverYMonth.Name = "GridColumnDepEverYMonth"
+        Me.GridColumnDepEverYMonth.OptionsColumn.AllowEdit = False
+        '
+        'GridColumnDepFirstMonth
+        '
+        Me.GridColumnDepFirstMonth.Caption = "Depreciation First Month"
+        Me.GridColumnDepFirstMonth.DisplayFormat.FormatString = "N2"
+        Me.GridColumnDepFirstMonth.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnDepFirstMonth.FieldName = "dep_first_month"
+        Me.GridColumnDepFirstMonth.Name = "GridColumnDepFirstMonth"
+        Me.GridColumnDepFirstMonth.OptionsColumn.AllowEdit = False
+        '
+        'GridColumnDepLastMonth
+        '
+        Me.GridColumnDepLastMonth.Caption = "Depreciation Last Month"
+        Me.GridColumnDepLastMonth.DisplayFormat.FormatString = "N2"
+        Me.GridColumnDepLastMonth.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnDepLastMonth.FieldName = "dep_last_month"
+        Me.GridColumnDepLastMonth.Name = "GridColumnDepLastMonth"
+        Me.GridColumnDepLastMonth.OptionsColumn.AllowEdit = False
+        '
+        'GridColumnDepTotalEveryMonth
+        '
+        Me.GridColumnDepTotalEveryMonth.Caption = "Depreciation Total Every Month"
+        Me.GridColumnDepTotalEveryMonth.DisplayFormat.FormatString = "N2"
+        Me.GridColumnDepTotalEveryMonth.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnDepTotalEveryMonth.FieldName = "dep_total_full_day"
+        Me.GridColumnDepTotalEveryMonth.Name = "GridColumnDepTotalEveryMonth"
+        Me.GridColumnDepTotalEveryMonth.OptionsColumn.AllowEdit = False
+        Me.GridColumnDepTotalEveryMonth.UnboundExpression = "[full_day] * [dep_full_day]"
+        Me.GridColumnDepTotalEveryMonth.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
+        '
+        'GridColumnDepApply
+        '
+        Me.GridColumnDepApply.Caption = "  "
+        Me.GridColumnDepApply.ColumnEdit = Me.BtnApply
+        Me.GridColumnDepApply.FieldName = "btn_apply"
+        Me.GridColumnDepApply.Name = "GridColumnDepApply"
+        Me.GridColumnDepApply.Visible = True
+        Me.GridColumnDepApply.VisibleIndex = 8
+        '
+        'BtnApply
+        '
+        Me.BtnApply.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.[True]
+        Me.BtnApply.AutoHeight = False
+        SerializableAppearanceObject1.BackColor = System.Drawing.Color.LightSeaGreen
+        SerializableAppearanceObject1.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        SerializableAppearanceObject1.ForeColor = System.Drawing.Color.White
+        SerializableAppearanceObject1.Options.UseBackColor = True
+        SerializableAppearanceObject1.Options.UseFont = True
+        SerializableAppearanceObject1.Options.UseForeColor = True
+        Me.BtnApply.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "Apply", -1, True, True, False, DevExpress.XtraEditors.ImageLocation.MiddleCenter, Nothing, New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject1, "", Nothing, Nothing, True)})
+        Me.BtnApply.ButtonsStyle = DevExpress.XtraEditors.Controls.BorderStyles.UltraFlat
+        Me.BtnApply.LookAndFeel.UseDefaultLookAndFeel = False
+        Me.BtnApply.Name = "BtnApply"
+        Me.BtnApply.NullText = "asas"
+        Me.BtnApply.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor
+        '
+        'GridColumnDepDetail
+        '
+        Me.GridColumnDepDetail.Caption = "  "
+        Me.GridColumnDepDetail.ColumnEdit = Me.BtnDetail
+        Me.GridColumnDepDetail.FieldName = "btn_detail"
+        Me.GridColumnDepDetail.Name = "GridColumnDepDetail"
+        Me.GridColumnDepDetail.Visible = True
+        Me.GridColumnDepDetail.VisibleIndex = 7
+        '
+        'BtnDetail
+        '
+        Me.BtnDetail.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.[True]
+        Me.BtnDetail.AutoHeight = False
+        SerializableAppearanceObject2.BackColor = System.Drawing.Color.DeepSkyBlue
+        SerializableAppearanceObject2.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        SerializableAppearanceObject2.ForeColor = System.Drawing.Color.White
+        SerializableAppearanceObject2.Options.UseBackColor = True
+        SerializableAppearanceObject2.Options.UseFont = True
+        SerializableAppearanceObject2.Options.UseForeColor = True
+        Me.BtnDetail.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "Detail", -1, True, True, False, DevExpress.XtraEditors.ImageLocation.MiddleCenter, Nothing, New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject2, "", Nothing, Nothing, True)})
+        Me.BtnDetail.ButtonsStyle = DevExpress.XtraEditors.Controls.BorderStyles.UltraFlat
+        Me.BtnDetail.LookAndFeel.UseDefaultLookAndFeel = False
+        Me.BtnDetail.Name = "BtnDetail"
+        Me.BtnDetail.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor
+        '
+        'BtnApplyAll
+        '
+        Me.BtnApplyAll.Appearance.BackColor = System.Drawing.Color.LightSeaGreen
+        Me.BtnApplyAll.Appearance.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnApplyAll.Appearance.ForeColor = System.Drawing.Color.White
+        Me.BtnApplyAll.Appearance.Options.UseBackColor = True
+        Me.BtnApplyAll.Appearance.Options.UseFont = True
+        Me.BtnApplyAll.Appearance.Options.UseForeColor = True
+        Me.BtnApplyAll.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.BtnApplyAll.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.BtnApplyAll.Location = New System.Drawing.Point(0, 415)
+        Me.BtnApplyAll.LookAndFeel.SkinName = "Metropolis"
+        Me.BtnApplyAll.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.UltraFlat
+        Me.BtnApplyAll.LookAndFeel.UseDefaultLookAndFeel = False
+        Me.BtnApplyAll.Name = "BtnApplyAll"
+        Me.BtnApplyAll.Size = New System.Drawing.Size(775, 28)
+        Me.BtnApplyAll.TabIndex = 140
+        Me.BtnApplyAll.Text = "Apply All"
+        Me.BtnApplyAll.Visible = False
+        '
+        'PanelNavDep
+        '
+        Me.PanelNavDep.Controls.Add(Me.BtnHistory)
+        Me.PanelNavDep.Controls.Add(Me.LabelControl1)
+        Me.PanelNavDep.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelNavDep.Location = New System.Drawing.Point(0, 0)
+        Me.PanelNavDep.LookAndFeel.SkinName = "Office 2010 Blue"
+        Me.PanelNavDep.LookAndFeel.UseDefaultLookAndFeel = False
+        Me.PanelNavDep.Name = "PanelNavDep"
+        Me.PanelNavDep.Size = New System.Drawing.Size(775, 48)
+        Me.PanelNavDep.TabIndex = 2
+        '
+        'BtnHistory
+        '
+        Me.BtnHistory.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnHistory.Image = CType(resources.GetObject("BtnHistory.Image"), System.Drawing.Image)
+        Me.BtnHistory.Location = New System.Drawing.Point(675, 2)
+        Me.BtnHistory.LookAndFeel.SkinName = "Office 2007 Pink"
+        Me.BtnHistory.LookAndFeel.UseDefaultLookAndFeel = False
+        Me.BtnHistory.Name = "BtnHistory"
+        Me.BtnHistory.Size = New System.Drawing.Size(98, 44)
+        Me.BtnHistory.TabIndex = 1
+        Me.BtnHistory.Text = "History"
+        '
+        'LabelControl1
+        '
+        Me.LabelControl1.Appearance.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl1.Appearance.ForeColor = System.Drawing.Color.DarkSlateBlue
+        Me.LabelControl1.Location = New System.Drawing.Point(14, 13)
+        Me.LabelControl1.Name = "LabelControl1"
+        Me.LabelControl1.Size = New System.Drawing.Size(182, 19)
+        Me.LabelControl1.TabIndex = 0
+        Me.LabelControl1.Text = "Depreciation Schedule"
         '
         'ContextMenuStrip1
         '
@@ -294,16 +602,6 @@ Partial Class FormPurcAsset
         Me.RecordToolStripMenuItem.Name = "RecordToolStripMenuItem"
         Me.RecordToolStripMenuItem.Size = New System.Drawing.Size(111, 22)
         Me.RecordToolStripMenuItem.Text = "Record"
-        '
-        'GridColumnBookValue
-        '
-        Me.GridColumnBookValue.Caption = "Book Value"
-        Me.GridColumnBookValue.DisplayFormat.FormatString = "N2"
-        Me.GridColumnBookValue.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumnBookValue.FieldName = "book_value"
-        Me.GridColumnBookValue.Name = "GridColumnBookValue"
-        Me.GridColumnBookValue.Visible = True
-        Me.GridColumnBookValue.VisibleIndex = 5
         '
         'FormPurcAsset
         '
@@ -328,8 +626,13 @@ Partial Class FormPurcAsset
         CType(Me.GridControl2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XTPDepresiasi.ResumeLayout(False)
-        CType(Me.GridControl3, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GridView3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GCDep, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVDep, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BtnApply, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BtnDetail, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelNavDep, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelNavDep.ResumeLayout(False)
+        Me.PanelNavDep.PerformLayout()
         Me.ContextMenuStrip1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
@@ -346,8 +649,8 @@ Partial Class FormPurcAsset
     Friend WithEvents GVActive As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridControl2 As DevExpress.XtraGrid.GridControl
     Friend WithEvents GridView2 As DevExpress.XtraGrid.Views.Grid.GridView
-    Friend WithEvents GridControl3 As DevExpress.XtraGrid.GridControl
-    Friend WithEvents GridView3 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GCDep As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVDep As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumnAcqDate As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnItem As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumndept As DevExpress.XtraGrid.Columns.GridColumn
@@ -360,6 +663,30 @@ Partial Class FormPurcAsset
     Friend WithEvents GridColumn2 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn3 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnacqCost As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnBookValue As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnaccumDep As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnAssetNumber As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents PanelNavDep As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents BtnHistory As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents GridColumnDepAssetNumber As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnDepAssetName As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnDepApply As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BtnApply As DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit
+    Friend WithEvents GridColumnDepDetail As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnDepPeriod As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnDepUseLife As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnAmount As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnDepCountFullDay As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnDepEverYMonth As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnDepFirstMonth As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnDepLastMonth As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnDepTotalEveryMonth As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BtnDetail As DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit
+    Friend WithEvents BtnApplyAll As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GridColumndepDept As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnDepStartPeriod As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnDepEndPeriod As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnDepAcqCost As DevExpress.XtraGrid.Columns.GridColumn
 End Class

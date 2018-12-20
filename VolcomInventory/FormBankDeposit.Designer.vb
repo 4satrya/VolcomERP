@@ -40,6 +40,8 @@ Partial Class FormBankDeposit
         Me.GridColumnVendor = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn32 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn24 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn25 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn26 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.BCreatePO = New DevExpress.XtraEditors.SimpleButton()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
         Me.SLEStatusInvoice = New DevExpress.XtraEditors.SearchLookUpEdit()
@@ -61,10 +63,10 @@ Partial Class FormBankDeposit
         Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn15 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn20 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn22 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn18 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn21 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
         Me.SLEStoreDeposit = New DevExpress.XtraEditors.SearchLookUpEdit()
@@ -73,8 +75,6 @@ Partial Class FormBankDeposit
         Me.GridColumn29 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.BViewPayment = New DevExpress.XtraEditors.SimpleButton()
-        Me.GridColumn25 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn26 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XTCPO, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCPO.SuspendLayout()
         Me.XTPInvoice.SuspendLayout()
@@ -321,6 +321,21 @@ Partial Class FormBankDeposit
         Me.GridColumn24.Visible = True
         Me.GridColumn24.VisibleIndex = 15
         '
+        'GridColumn25
+        '
+        Me.GridColumn25.Caption = "Invoice Type"
+        Me.GridColumn25.FieldName = "report_mark_type_name"
+        Me.GridColumn25.Name = "GridColumn25"
+        Me.GridColumn25.Visible = True
+        Me.GridColumn25.VisibleIndex = 2
+        Me.GridColumn25.Width = 115
+        '
+        'GridColumn26
+        '
+        Me.GridColumn26.Caption = "Id Invoice Type"
+        Me.GridColumn26.FieldName = "report_mark_type"
+        Me.GridColumn26.Name = "GridColumn26"
+        '
         'BCreatePO
         '
         Me.BCreatePO.Appearance.BackColor = System.Drawing.Color.CornflowerBlue
@@ -460,7 +475,7 @@ Partial Class FormBankDeposit
         '
         'GVList
         '
-        Me.GVList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn8, Me.GridColumn9, Me.GridColumn11, Me.GridColumn15, Me.GridColumn20, Me.GridColumn22, Me.GridColumn18, Me.GridColumn21, Me.GridColumn10})
+        Me.GVList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn8, Me.GridColumn9, Me.GridColumn11, Me.GridColumn15, Me.GridColumn20, Me.GridColumn5, Me.GridColumn22, Me.GridColumn18, Me.GridColumn21})
         Me.GVList.GridControl = Me.GCList
         Me.GVList.Name = "GVList"
         Me.GVList.OptionsBehavior.AutoExpandAllGroups = True
@@ -470,7 +485,7 @@ Partial Class FormBankDeposit
         'GridColumn8
         '
         Me.GridColumn8.Caption = "ID"
-        Me.GridColumn8.FieldName = "id_payment"
+        Me.GridColumn8.FieldName = "id_rec_payment"
         Me.GridColumn8.Name = "GridColumn8"
         Me.GridColumn8.OptionsColumn.AllowEdit = False
         '
@@ -493,7 +508,7 @@ Partial Class FormBankDeposit
         Me.GridColumn11.Name = "GridColumn11"
         Me.GridColumn11.OptionsColumn.AllowEdit = False
         Me.GridColumn11.Visible = True
-        Me.GridColumn11.VisibleIndex = 3
+        Me.GridColumn11.VisibleIndex = 2
         Me.GridColumn11.Width = 107
         '
         'GridColumn15
@@ -503,7 +518,7 @@ Partial Class FormBankDeposit
         Me.GridColumn15.Name = "GridColumn15"
         Me.GridColumn15.OptionsColumn.AllowEdit = False
         Me.GridColumn15.Visible = True
-        Me.GridColumn15.VisibleIndex = 4
+        Me.GridColumn15.VisibleIndex = 3
         Me.GridColumn15.Width = 109
         '
         'GridColumn20
@@ -512,14 +527,30 @@ Partial Class FormBankDeposit
         Me.GridColumn20.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GridColumn20.AppearanceHeader.Options.UseTextOptions = True
         Me.GridColumn20.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumn20.Caption = "Value"
+        Me.GridColumn20.Caption = "Amount Receiving"
         Me.GridColumn20.DisplayFormat.FormatString = "N2"
         Me.GridColumn20.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn20.FieldName = "value"
         Me.GridColumn20.Name = "GridColumn20"
         Me.GridColumn20.OptionsColumn.AllowEdit = False
         Me.GridColumn20.Visible = True
-        Me.GridColumn20.VisibleIndex = 5
+        Me.GridColumn20.VisibleIndex = 4
+        Me.GridColumn20.Width = 120
+        '
+        'GridColumn5
+        '
+        Me.GridColumn5.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn5.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn5.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn5.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn5.Caption = "Amount To Pay"
+        Me.GridColumn5.DisplayFormat.FormatString = "N2"
+        Me.GridColumn5.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn5.FieldName = "val_need_pay"
+        Me.GridColumn5.Name = "GridColumn5"
+        Me.GridColumn5.Visible = True
+        Me.GridColumn5.VisibleIndex = 5
+        Me.GridColumn5.Width = 136
         '
         'GridColumn22
         '
@@ -529,6 +560,7 @@ Partial Class FormBankDeposit
         Me.GridColumn22.OptionsColumn.AllowEdit = False
         Me.GridColumn22.Visible = True
         Me.GridColumn22.VisibleIndex = 7
+        Me.GridColumn22.Width = 109
         '
         'GridColumn18
         '
@@ -541,22 +573,13 @@ Partial Class FormBankDeposit
         '
         'GridColumn21
         '
-        Me.GridColumn21.Caption = "Vendor"
+        Me.GridColumn21.Caption = "Store"
         Me.GridColumn21.FieldName = "comp_name"
         Me.GridColumn21.Name = "GridColumn21"
         Me.GridColumn21.OptionsColumn.AllowEdit = False
         Me.GridColumn21.Visible = True
         Me.GridColumn21.VisibleIndex = 0
         Me.GridColumn21.Width = 103
-        '
-        'GridColumn10
-        '
-        Me.GridColumn10.Caption = "Report Type"
-        Me.GridColumn10.FieldName = "report_mark_type_name"
-        Me.GridColumn10.Name = "GridColumn10"
-        Me.GridColumn10.OptionsColumn.AllowEdit = False
-        Me.GridColumn10.Visible = True
-        Me.GridColumn10.VisibleIndex = 2
         '
         'RepositoryItemCheckEdit1
         '
@@ -622,21 +645,6 @@ Partial Class FormBankDeposit
         Me.BViewPayment.Size = New System.Drawing.Size(60, 23)
         Me.BViewPayment.TabIndex = 8916
         Me.BViewPayment.Text = "view"
-        '
-        'GridColumn25
-        '
-        Me.GridColumn25.Caption = "Invoice Type"
-        Me.GridColumn25.FieldName = "report_mark_type_name"
-        Me.GridColumn25.Name = "GridColumn25"
-        Me.GridColumn25.Visible = True
-        Me.GridColumn25.VisibleIndex = 2
-        Me.GridColumn25.Width = 115
-        '
-        'GridColumn26
-        '
-        Me.GridColumn26.Caption = "Id Invoice Type"
-        Me.GridColumn26.FieldName = "report_mark_type"
-        Me.GridColumn26.Name = "GridColumn26"
         '
         'FormBankDeposit
         '
@@ -716,7 +724,6 @@ Partial Class FormBankDeposit
     Friend WithEvents GridColumn22 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn18 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn21 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn10 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RepositoryItemCheckEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
     Friend WithEvents PanelControl2 As DevExpress.XtraEditors.PanelControl
     Friend WithEvents SLEStoreDeposit As DevExpress.XtraEditors.SearchLookUpEdit
@@ -732,4 +739,5 @@ Partial Class FormBankDeposit
     Friend WithEvents GridColumn24 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn25 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn26 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

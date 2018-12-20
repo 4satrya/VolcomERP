@@ -162,6 +162,10 @@
                 FormReportMark.report_mark_type = report_mark_type
                 FormReportMark.id_report = id_report
                 FormReportMark.change_status("5")
+            ElseIf report_mark_type = "160" Then
+                'cancell asset
+                Dim a As New ClassPurcAsset()
+                a.cancellPropose(id_report, FormPurcAssetDet.id_purc_rec)
             End If
             FormReportMark.sendNotif("2")
             close_form(FormReportMark.report_mark_type)

@@ -1566,6 +1566,12 @@
     <Compile Include="FormItemReqAdd.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormItemReqAddStore.Designer.vb">
+      <DependentUpon>FormItemReqAddStore.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormItemReqAddStore.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormItemReqDet.Designer.vb">
       <DependentUpon>FormItemReqDet.vb</DependentUpon>
     </Compile>
@@ -2032,6 +2038,24 @@
       <DependentUpon>FormPurcAsset.vb</DependentUpon>
     </Compile>
     <Compile Include="FormPurcAsset.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPurcAssetDepDetail.Designer.vb">
+      <DependentUpon>FormPurcAssetDepDetail.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormPurcAssetDepDetail.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPurcAssetDepHistory.Designer.vb">
+      <DependentUpon>FormPurcAssetDepHistory.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormPurcAssetDepHistory.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPurcAssetDepHistoryDet.Designer.vb">
+      <DependentUpon>FormPurcAssetDepHistoryDet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormPurcAssetDepHistoryDet.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormPurcAssetDet.Designer.vb">
@@ -6703,6 +6727,9 @@
     <EmbeddedResource Include="FormItemReqAdd.resx">
       <DependentUpon>FormItemReqAdd.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormItemReqAddStore.resx">
+      <DependentUpon>FormItemReqAddStore.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormItemReqDet.resx">
       <DependentUpon>FormItemReqDet.vb</DependentUpon>
     </EmbeddedResource>
@@ -6937,6 +6964,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormPurcAsset.resx">
       <DependentUpon>FormPurcAsset.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPurcAssetDepDetail.resx">
+      <DependentUpon>FormPurcAssetDepDetail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPurcAssetDepHistory.resx">
+      <DependentUpon>FormPurcAssetDepHistory.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPurcAssetDepHistoryDet.resx">
+      <DependentUpon>FormPurcAssetDepHistoryDet.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormPurcAssetDet.resx">
       <DependentUpon>FormPurcAssetDet.vb</DependentUpon>

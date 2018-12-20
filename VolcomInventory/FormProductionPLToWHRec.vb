@@ -6,7 +6,11 @@
 
     'Form Load
     Private Sub FormProductionPLToWHRec_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        viewPL()
+        Dim dt_now As DateTime = getTimeDB()
+        DEFrom.EditValue = dt_now
+        DEUntil.EditValue = dt_now
+
+        'list PL
         view_sample_purc()
     End Sub
 
@@ -23,11 +27,29 @@
     'View Data
     'View Packing List
     Sub viewPL()
+        Cursor = Cursors.WaitCursor
+
+        'Prepare paramater
+        Dim date_from_selected As String = "0000-01-01"
+        Dim date_until_selected As String = "9999-01-01"
+        Try
+            date_from_selected = DateTime.Parse(DEFrom.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+
+        Try
+            date_until_selected = DateTime.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+
+
         Dim query_c As ClassProductionPLToWHRec = New ClassProductionPLToWHRec()
-        Dim query As String = query_c.queryMain("-1", "2")
+        Dim query As String = query_c.queryMain("AND (a0.pl_prod_order_rec_date>='" + date_from_selected + "' AND a0.pl_prod_order_rec_date<='" + date_until_selected + "') ", "2")
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCPL.DataSource = data
+        GVPL.BestFitColumns()
         check_menu()
+        Cursor = Cursors.Default
     End Sub
 
     Private Sub GVPL_CustomColumnDisplayText(ByVal sender As System.Object, ByVal e As DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs) Handles GVPL.CustomColumnDisplayText
@@ -232,5 +254,9 @@
         FormProductionPLToWHRecDet.id_pre = "2"
         FormMain.but_edit()
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnView_Click(sender As Object, e As EventArgs) Handles BtnView.Click
+        viewPL()
     End Sub
 End Class

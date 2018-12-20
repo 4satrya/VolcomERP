@@ -2,6 +2,8 @@
     Dim bnew_active As String = "1"
     Dim bedit_active As String = "1"
     Dim bdel_active As String = "1"
+    Public is_for_store As String = "2"
+
 
     Private Sub FormItemReq_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewData()
@@ -10,7 +12,7 @@
     Sub viewData()
         Cursor = Cursors.WaitCursor
         Dim ir As New ClassItemRequest()
-        Dim cond As String = "AND r.id_departement=" + id_departement_user + " "
+        Dim cond As String = "AND r.id_departement=" + id_departement_user + " AND r.is_for_store='" + is_for_store + "' "
         Dim query As String = ir.queryMain(cond, "2")
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCData.DataSource = data
@@ -92,6 +94,7 @@
         If GVData.RowCount > 0 And GVData.FocusedRowHandle >= 0 Then
             Cursor = Cursors.WaitCursor
             FormItemDelReqDet.is_view = "1"
+            FormItemDelReqDet.is_for_store = is_for_store
             FormItemDelReqDet.id = GVData.GetFocusedRowCellValue("id_item_req").ToString
             FormItemDelReqDet.ShowDialog()
             Cursor = Cursors.Default

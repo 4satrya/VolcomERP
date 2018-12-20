@@ -19,36 +19,36 @@ Partial Class FormPopUpMat
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.GroupGeneral = New DevExpress.XtraEditors.GroupControl
-        Me.PictureEdit1 = New DevExpress.XtraEditors.PictureEdit
-        Me.BView = New DevExpress.XtraEditors.SimpleButton
-        Me.GCMat = New DevExpress.XtraGrid.GridControl
-        Me.GVMat = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColSize = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnQty = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnColor = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridView3 = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.GroupControl3 = New DevExpress.XtraEditors.GroupControl
-        Me.GCMatPrice = New DevExpress.XtraGrid.GridControl
-        Me.GVMatPrice = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.GridColumn16 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn17 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn18 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn19 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn20 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColPriceStockQty = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridView5 = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.PanelControlButton = New DevExpress.XtraEditors.PanelControl
-        Me.BShowBOM = New DevExpress.XtraEditors.SimpleButton
-        Me.CEBOM = New DevExpress.XtraEditors.CheckEdit
-        Me.BCancel = New DevExpress.XtraEditors.SimpleButton
-        Me.BSave = New DevExpress.XtraEditors.SimpleButton
+        Me.GroupGeneral = New DevExpress.XtraEditors.GroupControl()
+        Me.PictureEdit1 = New DevExpress.XtraEditors.PictureEdit()
+        Me.BView = New DevExpress.XtraEditors.SimpleButton()
+        Me.GCMat = New DevExpress.XtraGrid.GridControl()
+        Me.GVMat = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColSize = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnQty = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnColor = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridView3 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GroupControl3 = New DevExpress.XtraEditors.GroupControl()
+        Me.GCMatPrice = New DevExpress.XtraGrid.GridControl()
+        Me.GVMatPrice = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn16 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn17 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn18 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn19 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn20 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColPriceStockQty = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridView5 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.PanelControlButton = New DevExpress.XtraEditors.PanelControl()
+        Me.BShowBOM = New DevExpress.XtraEditors.SimpleButton()
+        Me.CEBOM = New DevExpress.XtraEditors.CheckEdit()
+        Me.BCancel = New DevExpress.XtraEditors.SimpleButton()
+        Me.BSave = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.GroupGeneral, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneral.SuspendLayout()
         CType(Me.PictureEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -82,11 +82,11 @@ Partial Class FormPopUpMat
         'PictureEdit1
         '
         Me.PictureEdit1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PictureEdit1.Location = New System.Drawing.Point(2, 22)
+        Me.PictureEdit1.Location = New System.Drawing.Point(2, 20)
         Me.PictureEdit1.Name = "PictureEdit1"
         Me.PictureEdit1.Properties.PictureStoreMode = DevExpress.XtraEditors.Controls.PictureStoreMode.Image
         Me.PictureEdit1.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch
-        Me.PictureEdit1.Size = New System.Drawing.Size(233, 224)
+        Me.PictureEdit1.Size = New System.Drawing.Size(233, 226)
         Me.PictureEdit1.TabIndex = 97
         '
         'BView
@@ -101,10 +101,10 @@ Partial Class FormPopUpMat
         'GCMat
         '
         Me.GCMat.Dock = System.Windows.Forms.DockStyle.Right
-        Me.GCMat.Location = New System.Drawing.Point(235, 22)
+        Me.GCMat.Location = New System.Drawing.Point(235, 20)
         Me.GCMat.MainView = Me.GVMat
         Me.GCMat.Name = "GCMat"
-        Me.GCMat.Size = New System.Drawing.Size(630, 247)
+        Me.GCMat.Size = New System.Drawing.Size(630, 249)
         Me.GCMat.TabIndex = 11
         Me.GCMat.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVMat, Me.GridView3})
         '
@@ -230,10 +230,10 @@ Partial Class FormPopUpMat
         'GCMatPrice
         '
         Me.GCMatPrice.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCMatPrice.Location = New System.Drawing.Point(2, 22)
+        Me.GCMatPrice.Location = New System.Drawing.Point(2, 20)
         Me.GCMatPrice.MainView = Me.GVMatPrice
         Me.GCMatPrice.Name = "GCMatPrice"
-        Me.GCMatPrice.Size = New System.Drawing.Size(859, 110)
+        Me.GCMatPrice.Size = New System.Drawing.Size(859, 112)
         Me.GCMatPrice.TabIndex = 3
         Me.GCMatPrice.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVMatPrice, Me.GridView5})
         '
@@ -368,7 +368,6 @@ Partial Class FormPopUpMat
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FormPopUpMat"
-        Me.ShowInTaskbar = False
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Pick Material"

@@ -52,6 +52,7 @@ Partial Class FormSalesReportTracking
         Me.BandedGridColumnValSOH = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumnValSaas = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumnValSaasDel = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.SimpleButton1 = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -61,6 +62,7 @@ Partial Class FormSalesReportTracking
         '
         'PanelControl1
         '
+        Me.PanelControl1.Controls.Add(Me.SimpleButton1)
         Me.PanelControl1.Controls.Add(Me.BSearch)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl1.Location = New System.Drawing.Point(0, 0)
@@ -445,6 +447,17 @@ Partial Class FormSalesReportTracking
         Me.BandedGridColumnValSaasDel.Visible = True
         Me.BandedGridColumnValSaasDel.Width = 84
         '
+        'SimpleButton1
+        '
+        Me.SimpleButton1.Dock = System.Windows.Forms.DockStyle.Right
+        Me.SimpleButton1.ImageIndex = 6
+        Me.SimpleButton1.ImageList = Me.LargeImageCollection
+        Me.SimpleButton1.Location = New System.Drawing.Point(833, 2)
+        Me.SimpleButton1.Name = "SimpleButton1"
+        Me.SimpleButton1.Size = New System.Drawing.Size(100, 38)
+        Me.SimpleButton1.TabIndex = 17
+        Me.SimpleButton1.Text = "Print"
+        '
         'FormSalesReportTracking
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -498,4 +511,5 @@ Partial Class FormSalesReportTracking
     Friend WithEvents BandedGridColumnValSOH As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents BandedGridColumnValSaas As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents BandedGridColumnValSaasDel As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents SimpleButton1 As DevExpress.XtraEditors.SimpleButton
 End Class

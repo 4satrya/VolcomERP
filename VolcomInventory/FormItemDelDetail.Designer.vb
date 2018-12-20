@@ -54,6 +54,21 @@ Partial Class FormItemDelDetail
         Me.GridColumnRemark = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnStt = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.XTCDel = New DevExpress.XtraTab.XtraTabControl()
+        Me.XTPSummary = New DevExpress.XtraTab.XtraTabPage()
+        Me.XTPDetail = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCDetail = New DevExpress.XtraGrid.GridControl()
+        Me.GVDetail = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnItem = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnIdItem = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnQtyDetail = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnStoreCode = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnStoreName = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnCombine = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.TxtRequestNo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -74,6 +89,12 @@ Partial Class FormItemDelDetail
         CType(Me.LEReportStatus.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GCData, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVData, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.XTCDel, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTCDel.SuspendLayout()
+        Me.XTPSummary.SuspendLayout()
+        Me.XTPDetail.SuspendLayout()
+        CType(Me.GCDetail, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVDetail, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl1
@@ -351,10 +372,10 @@ Partial Class FormItemDelDetail
         'GCData
         '
         Me.GCData.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCData.Location = New System.Drawing.Point(0, 108)
+        Me.GCData.Location = New System.Drawing.Point(0, 0)
         Me.GCData.MainView = Me.GVData
         Me.GCData.Name = "GCData"
-        Me.GCData.Size = New System.Drawing.Size(819, 325)
+        Me.GCData.Size = New System.Drawing.Size(813, 297)
         Me.GCData.TabIndex = 16
         Me.GCData.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVData})
         '
@@ -379,7 +400,7 @@ Partial Class FormItemDelDetail
         '
         'GridColumnITemName
         '
-        Me.GridColumnITemName.Caption = "Description"
+        Me.GridColumnITemName.Caption = "Item"
         Me.GridColumnITemName.FieldName = "item_desc"
         Me.GridColumnITemName.Name = "GridColumnITemName"
         Me.GridColumnITemName.OptionsColumn.AllowEdit = False
@@ -430,12 +451,146 @@ Partial Class FormItemDelDetail
         Me.GridColumn1.Visible = True
         Me.GridColumn1.VisibleIndex = 2
         '
+        'XTCDel
+        '
+        Me.XTCDel.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.XTCDel.Location = New System.Drawing.Point(0, 108)
+        Me.XTCDel.Name = "XTCDel"
+        Me.XTCDel.SelectedTabPage = Me.XTPSummary
+        Me.XTCDel.Size = New System.Drawing.Size(819, 325)
+        Me.XTCDel.TabIndex = 17
+        Me.XTCDel.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPSummary, Me.XTPDetail})
+        '
+        'XTPSummary
+        '
+        Me.XTPSummary.Controls.Add(Me.GCData)
+        Me.XTPSummary.Name = "XTPSummary"
+        Me.XTPSummary.Size = New System.Drawing.Size(813, 297)
+        Me.XTPSummary.Text = "Summary"
+        '
+        'XTPDetail
+        '
+        Me.XTPDetail.Controls.Add(Me.GCDetail)
+        Me.XTPDetail.Name = "XTPDetail"
+        Me.XTPDetail.Size = New System.Drawing.Size(813, 297)
+        Me.XTPDetail.Text = "Detail"
+        '
+        'GCDetail
+        '
+        Me.GCDetail.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCDetail.Location = New System.Drawing.Point(0, 0)
+        Me.GCDetail.MainView = Me.GVDetail
+        Me.GCDetail.Name = "GCDetail"
+        Me.GCDetail.Size = New System.Drawing.Size(813, 297)
+        Me.GCDetail.TabIndex = 17
+        Me.GCDetail.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVDetail})
+        '
+        'GVDetail
+        '
+        Me.GVDetail.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn2, Me.GridColumnItem, Me.GridColumnIdItem, Me.GridColumnQtyDetail, Me.GridColumn6, Me.GridColumn7, Me.GridColumn8, Me.GridColumnStoreCode, Me.GridColumnStoreName, Me.GridColumnCombine})
+        Me.GVDetail.GridControl = Me.GCDetail
+        Me.GVDetail.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty", Me.GridColumnQtyDetail, "{0:N2}")})
+        Me.GVDetail.Name = "GVDetail"
+        Me.GVDetail.OptionsBehavior.AutoExpandAllGroups = True
+        Me.GVDetail.OptionsView.ShowFooter = True
+        Me.GVDetail.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn2
+        '
+        Me.GridColumn2.Caption = "No"
+        Me.GridColumn2.FieldName = "no"
+        Me.GridColumn2.Name = "GridColumn2"
+        Me.GridColumn2.OptionsColumn.AllowEdit = False
+        Me.GridColumn2.Visible = True
+        Me.GridColumn2.VisibleIndex = 0
+        Me.GridColumn2.Width = 37
+        '
+        'GridColumnItem
+        '
+        Me.GridColumnItem.Caption = "Item"
+        Me.GridColumnItem.FieldName = "item_desc"
+        Me.GridColumnItem.Name = "GridColumnItem"
+        Me.GridColumnItem.OptionsColumn.AllowEdit = False
+        Me.GridColumnItem.Visible = True
+        Me.GridColumnItem.VisibleIndex = 3
+        Me.GridColumnItem.Width = 152
+        '
+        'GridColumnIdItem
+        '
+        Me.GridColumnIdItem.Caption = "Id Item"
+        Me.GridColumnIdItem.FieldName = "id_item"
+        Me.GridColumnIdItem.Name = "GridColumnIdItem"
+        Me.GridColumnIdItem.OptionsColumn.AllowEdit = False
+        '
+        'GridColumnQtyDetail
+        '
+        Me.GridColumnQtyDetail.Caption = "Qty"
+        Me.GridColumnQtyDetail.DisplayFormat.FormatString = "N2"
+        Me.GridColumnQtyDetail.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnQtyDetail.FieldName = "qty"
+        Me.GridColumnQtyDetail.Name = "GridColumnQtyDetail"
+        Me.GridColumnQtyDetail.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty", "{0:N2}")})
+        Me.GridColumnQtyDetail.Visible = True
+        Me.GridColumnQtyDetail.VisibleIndex = 5
+        Me.GridColumnQtyDetail.Width = 194
+        '
+        'GridColumn6
+        '
+        Me.GridColumn6.Caption = "Remark"
+        Me.GridColumn6.FieldName = "remark"
+        Me.GridColumn6.Name = "GridColumn6"
+        Me.GridColumn6.Visible = True
+        Me.GridColumn6.VisibleIndex = 6
+        Me.GridColumn6.Width = 213
+        '
+        'GridColumn7
+        '
+        Me.GridColumn7.Caption = "Status"
+        Me.GridColumn7.FieldName = "stt"
+        Me.GridColumn7.Name = "GridColumn7"
+        Me.GridColumn7.OptionsColumn.AllowEdit = False
+        '
+        'GridColumn8
+        '
+        Me.GridColumn8.Caption = "UOM"
+        Me.GridColumn8.FieldName = "uom"
+        Me.GridColumn8.Name = "GridColumn8"
+        Me.GridColumn8.Visible = True
+        Me.GridColumn8.VisibleIndex = 4
+        Me.GridColumn8.Width = 39
+        '
+        'GridColumnStoreCode
+        '
+        Me.GridColumnStoreCode.Caption = "Store Code"
+        Me.GridColumnStoreCode.FieldName = "comp_number"
+        Me.GridColumnStoreCode.Name = "GridColumnStoreCode"
+        Me.GridColumnStoreCode.Visible = True
+        Me.GridColumnStoreCode.VisibleIndex = 1
+        Me.GridColumnStoreCode.Width = 97
+        '
+        'GridColumnStoreName
+        '
+        Me.GridColumnStoreName.Caption = "Store"
+        Me.GridColumnStoreName.FieldName = "comp_name"
+        Me.GridColumnStoreName.Name = "GridColumnStoreName"
+        Me.GridColumnStoreName.Visible = True
+        Me.GridColumnStoreName.VisibleIndex = 2
+        Me.GridColumnStoreName.Width = 81
+        '
+        'GridColumnCombine
+        '
+        Me.GridColumnCombine.Caption = "Group"
+        Me.GridColumnCombine.FieldName = "grp"
+        Me.GridColumnCombine.Name = "GridColumnCombine"
+        Me.GridColumnCombine.UnboundExpression = "Concat([id_item], '#*mt*#', [item_desc])"
+        Me.GridColumnCombine.UnboundType = DevExpress.Data.UnboundColumnType.[String]
+        '
         'FormItemDelDetail
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(819, 546)
-        Me.Controls.Add(Me.GCData)
+        Me.Controls.Add(Me.XTCDel)
         Me.Controls.Add(Me.PanelControl3)
         Me.Controls.Add(Me.PanelControlBottom)
         Me.Controls.Add(Me.PanelControl1)
@@ -468,6 +623,12 @@ Partial Class FormItemDelDetail
         CType(Me.LEReportStatus.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GCData, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVData, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.XTCDel, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTCDel.ResumeLayout(False)
+        Me.XTPSummary.ResumeLayout(False)
+        Me.XTPDetail.ResumeLayout(False)
+        CType(Me.GCDetail, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVDetail, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -506,4 +667,19 @@ Partial Class FormItemDelDetail
     Friend WithEvents GridColumnStt As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents BtnViewJournal As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents XTCDel As DevExpress.XtraTab.XtraTabControl
+    Friend WithEvents XTPSummary As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents XTPDetail As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents GCDetail As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVDetail As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn2 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnItem As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnIdItem As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnQtyDetail As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn7 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn8 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnStoreCode As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnStoreName As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnCombine As DevExpress.XtraGrid.Columns.GridColumn
 End Class

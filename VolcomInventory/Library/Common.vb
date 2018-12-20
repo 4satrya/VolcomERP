@@ -44,6 +44,23 @@ Module Common
 
         Return ret_var
     End Function
+
+    Function get_purc_setup_field(ByVal field As String)
+        'opt as var choose field
+        Dim ret_var, query As String
+        ret_var = ""
+
+        Try
+            query = "SELECT " & field & " FROM tb_opt_purchasing LIMIT 1"
+            ret_var = execute_query(query, 0, True, "", "", "", "")
+        Catch ex As Exception
+            ret_var = ""
+        End Try
+
+        Return ret_var
+    End Function
+
+
     Function combine_header_number(ByVal header As String, ByVal increment As Integer, ByVal digit As Integer)
         Dim header_number, zero_number As String
         header_number = ""

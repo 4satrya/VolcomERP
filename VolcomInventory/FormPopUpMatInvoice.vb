@@ -76,4 +76,8 @@
             Close()
         End If
     End Sub
+
+    Private Sub GVProdInvoice_ColumnFilterChanged(sender As Object, e As EventArgs) Handles GVProdInvoice.ColumnFilterChanged
+        viewInvDet()
+    End Sub
 End Class

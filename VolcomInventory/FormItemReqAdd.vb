@@ -31,6 +31,12 @@
         Cursor = Cursors.WaitCursor
         makeSafeGV(GVSOH)
 
+        'group by dept
+        GridColumnDept.GroupIndex = 0
+
+        'id purchasing store
+        Dim id_purc_store As String = get_purc_setup_field("id_purc_store")
+
         'Prepare paramater
         Dim date_until_selected As String = "9999-01-01"
         Dim id_item_cat As String = LECat.EditValue.ToString
@@ -39,7 +45,7 @@
         Else
             id_item_cat = "AND im.id_item_cat='" + id_item_cat + "' "
         End If
-        Dim cond As String = "AND i.id_departement=" + id_departement_user + " " + id_item_cat
+        Dim cond As String = "AND (i.id_departement=" + id_departement_user + " OR i.id_departement=" + id_purc_store + ") " + id_item_cat
 
         Dim stc As New ClassPurcItemStock()
         Dim query As String = stc.queryGetStock(cond, date_until_selected)
@@ -111,6 +117,7 @@
         Else
             warningCustom("No item selected")
             makeSafeGV(GVSOH)
+            GridColumnDept.GroupIndex = 0
         End If
         Cursor = Cursors.Default
     End Sub

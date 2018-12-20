@@ -105,4 +105,8 @@
     Private Sub BCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BCancel.Click
         Close()
     End Sub
+
+    Private Sub GVProdPL_ColumnFilterChanged(sender As Object, e As EventArgs) Handles GVProdPL.ColumnFilterChanged
+        viewFillEmptyData()
+    End Sub
 End Class

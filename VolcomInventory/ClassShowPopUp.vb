@@ -122,7 +122,7 @@
         ElseIf report_mark_type = "65" Then
             'code replacement
             FormViewFGCodeReplaceStore.Close()
-        ElseIf report_mark_type = "95" Then
+        ElseIf report_mark_type = "95" Or report_mark_type = "164" Or report_mark_type = "165" Then
             'propose leave
             FormEmpLeaveDet.Close()
         ElseIf report_mark_type = "96" Then
@@ -215,12 +215,18 @@
         ElseIf report_mark_type = "153" Then
             'Propose Company
             FormMasterCompany.Close()
-        ElseIf report_mark_type = "154" Then
+        ElseIf report_mark_type = "154" Or report_mark_type = "163" Then
             'item req
             FormItemReqDet.Close()
         ElseIf report_mark_type = "159" Then
             'payment
             FormBankWithdrawalDet.Close()
+        ElseIf report_mark_type = "160" Then
+            'asset
+            FormPurcAssetDet.Close()
+        ElseIf report_mark_type = "162" Then
+            'Rec Payment
+            FormBankDepositDet.Close()
         End If
     End Sub
     Sub show()
@@ -819,13 +825,13 @@
             FormMasterCompanySingle.id_company = id_report
             FormMasterCompanySingle.is_view = "1"
             FormProductionClaimReturnDet.ShowDialog()
-        ElseIf report_mark_type = "154" Then
+        ElseIf report_mark_type = "154" Or report_mark_type = "163" Then
             'item req
             FormItemReqDet.action = "upd"
             FormItemReqDet.id = id_report
             FormItemReqDet.is_view = "1"
             FormItemReqDet.ShowDialog()
-        ElseIf report_mark_type = "156" Then
+        ElseIf report_mark_type = "156" Or report_mark_type = "166" Then
             'item del
             FormItemDelDetail.action = "upd"
             FormItemDelDetail.id = id_report
@@ -836,6 +842,29 @@
             FormBankWithdrawalDet.id_payment = id_report
             FormBankWithdrawalDet.is_view = "1"
             FormBankWithdrawalDet.ShowDialog()
+        ElseIf report_mark_type = "160" Then
+            'asset
+            FormPurcAssetDet.action = "upd"
+            FormPurcAssetDet.id = id_report
+            FormPurcAssetDet.is_view = "1"
+            FormPurcAssetDet.ShowDialog()
+        ElseIf report_mark_type = "162" Then
+            'payment
+            FormBankDepositDet.id_deposit = id_report
+            FormBankDepositDet.is_view = "1"
+            FormBankDepositDet.ShowDialog()
+        ElseIf report_mark_type = "164" Then
+            'propose leave
+            FormEmpLeaveDet.id_emp_leave = id_report
+            FormEmpLeaveDet.report_mark_type = "164"
+            FormEmpLeaveDet.is_view = "1"
+            FormEmpLeaveDet.ShowDialog()
+        ElseIf report_mark_type = "165" Then
+            'propose leave
+            FormEmpLeaveDet.id_emp_leave = id_report
+            FormEmpLeaveDet.report_mark_type = "165"
+            FormEmpLeaveDet.is_view = "1"
+            FormEmpLeaveDet.ShowDialog()
         Else
             'MsgBox(id_report)
             stopCustom("Document Not Found")
@@ -1352,7 +1381,7 @@
             field_id = "id_fg_repair_return_rec"
             field_number = "fg_repair_return_rec_number"
             field_date = "fg_repair_return_rec_date"
-        ElseIf report_mark_type = "95" Then
+        ElseIf report_mark_type = "95" Or report_mark_type = "164" Or report_mark_type = "165" Then
             'Propose leave
             table_name = "tb_emp_leave"
             field_id = "id_emp_leave"
@@ -1598,13 +1627,13 @@
             field_id = "id_comp"
             field_number = "comp_name"
             field_date = "last_updated"
-        ElseIf report_mark_type = "154" Then
+        ElseIf report_mark_type = "154" Or report_mark_type = "163" Then
             'item req
             table_name = "tb_item_req"
             field_id = "id_item_req"
             field_number = "number"
             field_date = "created_date"
-        ElseIf report_mark_type = "156" Then
+        ElseIf report_mark_type = "156" Or report_mark_type = "166" Then
             'item del
             table_name = "tb_item_del"
             field_id = "id_item_del"
@@ -1614,6 +1643,12 @@
             'item del
             table_name = "tb_payment"
             field_id = "id_payment"
+            field_number = "number"
+            field_date = "date_created"
+        ElseIf report_mark_type = "162" Then
+            'item del
+            table_name = "tb_rec_payment"
+            field_id = "id_rec_payment"
             field_number = "number"
             field_date = "date_created"
         Else
@@ -1889,7 +1924,7 @@
                         info_col = datax.Rows(0)("total_qty").ToString
                         info_report = datax.Rows(0)("to").ToString
                     End If
-                ElseIf report_mark_type = "95" Or report_mark_type = "96" Or report_mark_type = "99" Or report_mark_type = "102" Or report_mark_type = "104" Then
+                ElseIf report_mark_type = "95" Or report_mark_type = "96" Or report_mark_type = "99" Or report_mark_type = "102" Or report_mark_type = "104" Or report_mark_type = "164" Or report_mark_type = "165" Then
                     query = "SELECT emp.employee_name FROM tb_emp_leave el
                             INNER JOIN tb_m_employee emp ON emp.id_employee=el.id_emp
                             WHERE el.id_emp_leave='" + id_report + "'"

@@ -1,9 +1,19 @@
 ﻿Public Class FormItemDelReqDet
     Public id As String = "-1"
     Public is_view As String = "-1"
+    Public is_for_store As String = "2"
 
     Private Sub FormItemDelReqDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewDetail()
+
+        'menu
+        If is_for_store = "1" Then
+            XTPDetail.PageVisible = True
+            viewDetailStore()
+        Else
+            XTPDetail.PageVisible = False
+        End If
+
         If is_view = "1" Then
             PanelControlNav.Visible = False
             GridColumnAction.Visible = False
@@ -16,6 +26,15 @@
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCData.DataSource = data
         GVData.BestFitColumns()
+        noEdit()
+    End Sub
+
+    Sub viewDetailStore()
+        Dim req As New ClassItemRequest()
+        Dim query As String = req.queryDetailInfoForStore("AND rd.id_item_req=" + id + " ", "1")
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCDetail.DataSource = data
+        GVDetail.BestFitColumns()
         noEdit()
     End Sub
 
@@ -86,5 +105,11 @@
             makeSafeGV(GVData)
         End If
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub GVDetail_CustomColumnDisplayText(sender As Object, e As DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs) Handles GVDetail.CustomColumnDisplayText
+        If e.Column.FieldName = "no" Then
+            e.DisplayText = (e.ListSourceRowIndex + 1).ToString()
+        End If
     End Sub
 End Class

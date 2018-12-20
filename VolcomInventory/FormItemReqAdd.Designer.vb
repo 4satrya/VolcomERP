@@ -102,11 +102,14 @@ Partial Class FormItemReqAdd
         '
         Me.GVSOH.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdItem, Me.GridColumnItemDesc, Me.GridColumnIdItemCat, Me.GridColumnItemCat, Me.GridColumnQty, Me.GridColumnAmount, Me.GridColumnIdDept, Me.GridColumnDept, Me.GridColumnQtyReq, Me.GridColumnRemark})
         Me.GVSOH.GridControl = Me.GCSOH
+        Me.GVSOH.GroupCount = 1
         Me.GVSOH.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty", Me.GridColumnQty, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount", Me.GridColumnAmount, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_req", Me.GridColumnQtyReq, "{0:N2}")})
         Me.GVSOH.Name = "GVSOH"
         Me.GVSOH.OptionsBehavior.AutoExpandAllGroups = True
         Me.GVSOH.OptionsView.ShowFooter = True
+        Me.GVSOH.OptionsView.ShowGroupedColumns = True
         Me.GVSOH.OptionsView.ShowGroupPanel = False
+        Me.GVSOH.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumnDept, DevExpress.Data.ColumnSortOrder.Ascending)})
         '
         'GridColumnIdItem
         '
@@ -117,12 +120,12 @@ Partial Class FormItemReqAdd
         '
         'GridColumnItemDesc
         '
-        Me.GridColumnItemDesc.Caption = "Description"
+        Me.GridColumnItemDesc.Caption = "Item"
         Me.GridColumnItemDesc.FieldName = "item_desc"
         Me.GridColumnItemDesc.Name = "GridColumnItemDesc"
         Me.GridColumnItemDesc.OptionsColumn.AllowEdit = False
         Me.GridColumnItemDesc.Visible = True
-        Me.GridColumnItemDesc.VisibleIndex = 0
+        Me.GridColumnItemDesc.VisibleIndex = 1
         '
         'GridColumnIdItemCat
         '
@@ -138,7 +141,7 @@ Partial Class FormItemReqAdd
         Me.GridColumnItemCat.Name = "GridColumnItemCat"
         Me.GridColumnItemCat.OptionsColumn.AllowEdit = False
         Me.GridColumnItemCat.Visible = True
-        Me.GridColumnItemCat.VisibleIndex = 1
+        Me.GridColumnItemCat.VisibleIndex = 2
         '
         'GridColumnQty
         '
@@ -150,7 +153,7 @@ Partial Class FormItemReqAdd
         Me.GridColumnQty.OptionsColumn.AllowEdit = False
         Me.GridColumnQty.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty", "{0:N2}")})
         Me.GridColumnQty.Visible = True
-        Me.GridColumnQty.VisibleIndex = 2
+        Me.GridColumnQty.VisibleIndex = 3
         '
         'GridColumnAmount
         '
@@ -177,6 +180,8 @@ Partial Class FormItemReqAdd
         Me.GridColumnDept.FieldName = "departement"
         Me.GridColumnDept.Name = "GridColumnDept"
         Me.GridColumnDept.OptionsColumn.AllowEdit = False
+        Me.GridColumnDept.Visible = True
+        Me.GridColumnDept.VisibleIndex = 0
         '
         'GridColumnQtyReq
         '
@@ -188,7 +193,7 @@ Partial Class FormItemReqAdd
         Me.GridColumnQtyReq.Name = "GridColumnQtyReq"
         Me.GridColumnQtyReq.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_req", "{0:N2}")})
         Me.GridColumnQtyReq.Visible = True
-        Me.GridColumnQtyReq.VisibleIndex = 3
+        Me.GridColumnQtyReq.VisibleIndex = 4
         '
         'RepositoryItemTextEdit1
         '
@@ -203,7 +208,7 @@ Partial Class FormItemReqAdd
         Me.GridColumnRemark.FieldName = "remark"
         Me.GridColumnRemark.Name = "GridColumnRemark"
         Me.GridColumnRemark.Visible = True
-        Me.GridColumnRemark.VisibleIndex = 4
+        Me.GridColumnRemark.VisibleIndex = 5
         '
         'PanelControl1
         '

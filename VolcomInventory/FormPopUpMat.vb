@@ -91,13 +91,6 @@
         Dispose()
     End Sub
 
-    Private Sub GVMat_RowClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraGrid.Views.Grid.RowClickEventArgs) Handles GVMat.RowClick
-        If GVMat.RowCount > 0 Then
-            view_image()
-            view_mat_price(GVMat.GetFocusedRowCellValue("id_mat_det").ToString)
-        End If
-    End Sub
-
     Private Sub BView_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BView.Click
         Try
             If System.IO.File.Exists(material_image_path & GVMat.GetFocusedRowCellDisplayText("id_sample").ToString & ".jpg") Then
@@ -265,5 +258,19 @@
     Private Sub BShowBOM_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BShowBOM.Click
         FormInfoBOMMat.id_pd_design = get_prod_order_x(id_po, "1")
         FormInfoBOMMat.ShowDialog()
+    End Sub
+
+    Private Sub GVMat_FocusedRowChanged(sender As Object, e As DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs) Handles GVMat.FocusedRowChanged
+        If GVMat.RowCount > 0 Then
+            view_image()
+            view_mat_price(GVMat.GetFocusedRowCellValue("id_mat_det").ToString)
+        End If
+    End Sub
+
+    Private Sub GVMat_ColumnFilterChanged(sender As Object, e As EventArgs) Handles GVMat.ColumnFilterChanged
+        If GVMat.RowCount > 0 Then
+            view_image()
+            view_mat_price(GVMat.GetFocusedRowCellValue("id_mat_det").ToString)
+        End If
     End Sub
 End Class

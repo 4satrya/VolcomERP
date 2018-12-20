@@ -30,10 +30,19 @@
                     warningCustom("Stock not found")
                     TxtAdd.Focus()
                 Else
-                    If data_filter_cek(0)("qty_all_product") = 0 Then
-                        warningCustom("No stock available")
-                    ElseIf TxtAdd.EditValue > data_filter_cek(0)("qty_all_product") Then
-                        warningCustom("Quantity can't exceed " + data_filter_cek(0)("qty_all_product").ToString)
+                    If FormSalesPOSDet.is_block_no_stock = "1" Then
+                        If data_filter_cek(0)("qty_all_product") = 0 Then
+                            warningCustom("No stock available")
+                        ElseIf TxtAdd.EditValue > data_filter_cek(0)("qty_all_product") Then
+                            warningCustom("Quantity can't exceed " + data_filter_cek(0)("qty_all_product").ToString)
+                        Else
+                            FormSalesPOSDet.GVItemList.SetFocusedRowCellValue("sales_pos_det_qty", TxtAdd.EditValue)
+                            FormSalesPOSDet.GVItemList.SetFocusedRowCellValue("note", "OK")
+                            FormSalesPOSDet.GCItemList.RefreshDataSource()
+                            FormSalesPOSDet.GVItemList.RefreshData()
+                            FormSalesPOSDet.calculate()
+                            Close()
+                        End If
                     Else
                         FormSalesPOSDet.GVItemList.SetFocusedRowCellValue("sales_pos_det_qty", TxtAdd.EditValue)
                         FormSalesPOSDet.GVItemList.SetFocusedRowCellValue("note", "OK")

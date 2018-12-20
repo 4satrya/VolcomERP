@@ -129,7 +129,7 @@ Partial Class FormBankWithdrawalDet
         Me.PanelControl4.Dock = System.Windows.Forms.DockStyle.Left
         Me.PanelControl4.Location = New System.Drawing.Point(2, 2)
         Me.PanelControl4.Name = "PanelControl4"
-        Me.PanelControl4.Size = New System.Drawing.Size(502, 55)
+        Me.PanelControl4.Size = New System.Drawing.Size(470, 55)
         Me.PanelControl4.TabIndex = 166
         '
         'SLEPayFrom
@@ -140,7 +140,7 @@ Partial Class FormBankWithdrawalDet
         Me.SLEPayFrom.Properties.Appearance.Options.UseFont = True
         Me.SLEPayFrom.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.SLEPayFrom.Properties.View = Me.SearchLookUpEdit2View
-        Me.SLEPayFrom.Size = New System.Drawing.Size(400, 28)
+        Me.SLEPayFrom.Size = New System.Drawing.Size(366, 28)
         Me.SLEPayFrom.TabIndex = 167
         '
         'SearchLookUpEdit2View

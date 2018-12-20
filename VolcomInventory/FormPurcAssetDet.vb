@@ -1,11 +1,12 @@
 ﻿Public Class FormPurcAssetDet
     Public id As String = "-1"
     Public action As String = "-1"
-    Dim id_purc_rec As String = "-1"
+    Public id_purc_rec As String = "-1"
     Dim id_purc_order As String = "-1"
     Public is_confirm As String = "-1"
     Public is_view As String = "-1"
     Dim id_report_status As String = "-1"
+    Public find_accum As Boolean = False
 
     Private Sub FormPurcAssetDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewCOA()
@@ -27,12 +28,12 @@
 
 
             Dim a As New ClassPurcAsset()
-            Dim query As String = a.queryMain("AND a.id_purc_rec_asset=" + id + "", "1")
+            Dim query As String = a.queryMain("AND a.id_purc_rec_asset=" + id + "", "1", find_accum)
             Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
             is_confirm = data.Rows(0)("is_confirm").ToString
             'generate number
             If is_confirm = "2" Then
-                execute_non_query("CALL gen_number(1, 160)", True, "", "", "", "")
+                execute_non_query("CALL gen_number(" + id + ", 160)", True, "", "", "", "")
                 TxtAssetNumber.Text = execute_query("SELECT asset_number FROM tb_purc_rec_asset WHERE id_purc_rec_asset=" + id + "", 0, True, "", "", "", "")
             Else
                 TxtAssetNumber.Text = data.Rows(0)("asset_number").ToString
@@ -41,11 +42,10 @@
             TxtDept.Text = data.Rows(0)("departement").ToString
             SLEAccountFixedAsset.EditValue = data.Rows(0)("id_acc_fa").ToString
             DECreated.EditValue = data.Rows(0)("acq_date")
-            DEAsADate.Properties.MinValue = DECreated.EditValue
             TxtCost.EditValue = data.Rows(0)("acq_cost")
             id_purc_rec = data.Rows(0)("id_purc_rec").ToString
             LinkRec.Text = data.Rows(0)("purc_rec_number").ToString
-            id_purc_order = data.Rows(0)("id_purc_rec").ToString
+            id_purc_order = data.Rows(0)("id_purc_order").ToString
             LinkOrder.Text = data.Rows(0)("purc_order_number").ToString
             id_report_status = data.Rows(0)("id_report_status").ToString
 
@@ -58,17 +58,17 @@
                 SLEAccumDep.EditValue = data.Rows(0)("id_acc_dep_accum").ToString
             End If
             TxtAccumDep.EditValue = data.Rows(0)("accum_dep")
-            If IsDBNull(data.Rows(0)("as_date")) Then
-                DEAsADate.EditValue = data.Rows(0)("acq_date")
-            Else
-                DEAsADate.EditValue = data.Rows(0)("as_date")
-            End If
             If data.Rows(0)("is_non_depresiasi") = "1" Then
                 CheckEditIsNonDep.EditValue = True
                 PanelDepDetail.Enabled = False
             Else
                 CheckEditIsNonDep.EditValue = False
                 PanelDepDetail.Enabled = True
+            End If
+
+            'jika asset aktif
+            If find_accum Then
+                TxtAccumDep.EditValue = data.Rows(0)("accum_value")
             End If
             allow_status()
         End If
@@ -88,7 +88,6 @@
             SLEDep.Enabled = True
             SLEAccumDep.Enabled = True
             TxtAccumDep.Enabled = True
-            DEAsADate.Enabled = True
         Else
             BtnConfirm.Visible = False
             BtnCancell.Visible = True
@@ -100,12 +99,13 @@
             SLEDep.Enabled = False
             SLEAccumDep.Enabled = False
             TxtAccumDep.Enabled = False
-            DEAsADate.Enabled = False
         End If
 
         If id_report_status = "6" Then
             BtnCancell.Visible = False
             PanelApp.Visible = True
+            BtnDepHist.Visible = True
+            BtnDepHist.BringToFront()
         ElseIf id_report_status = "5" Then
             BtnCancell.Visible = False
             PanelApp.Visible = False
@@ -162,11 +162,10 @@
                 Dim id_acc_dep As String = SLEDep.EditValue.ToString
                 Dim id_acc_dep_accum As String = SLEAccumDep.EditValue.ToString
                 Dim accum_dep As String = decimalSQL(TxtAccumDep.EditValue.ToString)
-                Dim as_date As String = DateTime.Parse(DEAsADate.EditValue.ToString).ToString("yyyy-MM-dd")
                 Dim query As String = "UPDATE tb_purc_rec_asset SET asset_name='" + asset_name + "',
                 asset_note='" + asset_note + "', is_non_depresiasi='" + is_non_depresiasi + "',useful_life='" + useful_life + "',
                 id_acc_dep='" + id_acc_dep + "', id_acc_dep_accum='" + id_acc_dep_accum + "', accum_dep='" + accum_dep + "',
-                as_date='" + as_date + "', is_confirm=1 WHERE id_purc_rec_asset='" + id + "' "
+                is_confirm=1 WHERE id_purc_rec_asset='" + id + "' "
                 execute_non_query(query, True, "", "", "", "")
                 submit_who_prepared("160", id, id_user)
                 FormPurcAsset.viewPending()
@@ -182,9 +181,27 @@
         Cursor = Cursors.WaitCursor
         FormReportMark.report_mark_type = "160"
         FormReportMark.id_report = id
-        FormReportMark.is_view = is_view
+        FormReportMark.is_view = "1"
         FormReportMark.form_origin = Name
         FormReportMark.ShowDialog()
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnCancell_Click(sender As Object, e As EventArgs) Handles BtnCancell.Click
+        Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure you want to cancell this process ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+        If confirm = Windows.Forms.DialogResult.Yes Then
+            Cursor = Cursors.WaitCursor
+            Dim a As New ClassPurcAsset()
+            a.cancellPropose(id, id_purc_rec)
+            Cursor = Cursors.Default
+        End If
+
+    End Sub
+
+    Private Sub BtnDepHist_Click(sender As Object, e As EventArgs) Handles BtnDepHist.Click
+        Cursor = Cursors.WaitCursor
+        FormPurcAssetDepHistory.cond = "AND dep.id_purc_rec_asset='" + id + "' "
+        FormPurcAssetDepHistory.ShowDialog()
         Cursor = Cursors.Default
     End Sub
 End Class

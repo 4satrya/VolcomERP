@@ -63,7 +63,7 @@
             query += "SELECT 0 as id_departement, 'All departement' as departement UNION  "
             query += "(SELECT id_departement,departement FROM tb_m_departement a ORDER BY a.departement ASC) "
         Else
-            query += "(SELECT id_departement,departement FROM tb_m_departement a WHERE (a.id_user_admin=" + id_user + " OR a.id_departement=" + id_departement_user + ") ORDER BY a.departement ASC) "
+            query += "(SELECT id_departement,departement FROM tb_m_departement a WHERE (a.id_user_admin=" + id_user + " OR a.id_user_admin_backup=" + id_user + " OR a.id_departement=" + id_departement_user + ") ORDER BY a.departement ASC) "
         End If
         viewLookupQuery(LEDeptSum, query, 0, "departement", "id_departement")
         Cursor = Cursors.Default

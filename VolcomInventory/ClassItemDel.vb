@@ -15,7 +15,7 @@
         Dim query As String = "SELECT del.id_item_del, del.id_item_req, req.`number` AS `req_number`,  
         req.created_by AS `requested_by`, er.employee_name AS `requested_by_name`, 
         req.id_departement, dept.departement, del.`number`, del.created_date, 
-        del.created_by, ed.employee_name AS `created_by_name`, del.note, del.id_report_status, stt.report_status
+        del.created_by, ed.employee_name AS `created_by_name`, del.note, del.id_report_status, stt.report_status, req.is_for_store
         FROM tb_item_del del
         INNER JOIN tb_item_req req ON req.id_item_req = del.id_item_req
         INNER JOIN tb_m_departement dept ON dept.id_departement = req.id_departement

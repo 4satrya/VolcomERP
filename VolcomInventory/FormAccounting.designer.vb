@@ -59,6 +59,7 @@ Partial Class FormAccounting
         Me.RepositoryItemTextEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnSalesAccount = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemCheckEdit3 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
         Me.BtnViewCompany = New DevExpress.XtraEditors.SimpleButton()
@@ -66,7 +67,7 @@ Partial Class FormAccounting
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.BalanceMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.SMViewTransaction = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnSalesReturnAccount = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XTCGeneral, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCGeneral.SuspendLayout()
         Me.XTPAccount.SuspendLayout()
@@ -345,7 +346,7 @@ Partial Class FormAccounting
         '
         'GVCompany
         '
-        Me.GVCompany.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn4, Me.CompanyCode, Me.GridColumn5, Me.GridColumn6, Me.GridColumn7, Me.Category, Me.GridColumn8, Me.GridColumn10, Me.GridColumn9, Me.GridColumn11})
+        Me.GVCompany.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn4, Me.CompanyCode, Me.GridColumn5, Me.GridColumn6, Me.GridColumn7, Me.Category, Me.GridColumn8, Me.GridColumn10, Me.GridColumn9, Me.GridColumnSalesAccount, Me.GridColumnSalesReturnAccount})
         Me.GVCompany.GridControl = Me.GCCompany
         Me.GVCompany.Name = "GVCompany"
         Me.GVCompany.OptionsBehavior.Editable = False
@@ -391,7 +392,7 @@ Partial Class FormAccounting
         Me.GridColumn7.FieldName = "is_active"
         Me.GridColumn7.Name = "GridColumn7"
         Me.GridColumn7.Visible = True
-        Me.GridColumn7.VisibleIndex = 7
+        Me.GridColumn7.VisibleIndex = 8
         Me.GridColumn7.Width = 52
         '
         'RepositoryItemCheckEdit2
@@ -417,7 +418,7 @@ Partial Class FormAccounting
         Me.GridColumn8.FieldName = "acc_ap"
         Me.GridColumn8.Name = "GridColumn8"
         Me.GridColumn8.Visible = True
-        Me.GridColumn8.VisibleIndex = 5
+        Me.GridColumn8.VisibleIndex = 6
         '
         'RepositoryItemTextEdit1
         '
@@ -432,7 +433,7 @@ Partial Class FormAccounting
         Me.GridColumn10.FieldName = "acc_dp"
         Me.GridColumn10.Name = "GridColumn10"
         Me.GridColumn10.Visible = True
-        Me.GridColumn10.VisibleIndex = 6
+        Me.GridColumn10.VisibleIndex = 7
         '
         'GridColumn9
         '
@@ -441,7 +442,16 @@ Partial Class FormAccounting
         Me.GridColumn9.FieldName = "acc_ar"
         Me.GridColumn9.Name = "GridColumn9"
         Me.GridColumn9.Visible = True
-        Me.GridColumn9.VisibleIndex = 3
+        Me.GridColumn9.VisibleIndex = 5
+        '
+        'GridColumnSalesAccount
+        '
+        Me.GridColumnSalesAccount.Caption = "Sales Account"
+        Me.GridColumnSalesAccount.ColumnEdit = Me.RepositoryItemTextEdit1
+        Me.GridColumnSalesAccount.FieldName = "acc_sales"
+        Me.GridColumnSalesAccount.Name = "GridColumnSalesAccount"
+        Me.GridColumnSalesAccount.Visible = True
+        Me.GridColumnSalesAccount.VisibleIndex = 3
         '
         'RepositoryItemCheckEdit3
         '
@@ -501,14 +511,14 @@ Partial Class FormAccounting
         Me.SMViewTransaction.Size = New System.Drawing.Size(135, 22)
         Me.SMViewTransaction.Text = "Transaction"
         '
-        'GridColumn11
+        'GridColumnSalesReturnAccount
         '
-        Me.GridColumn11.Caption = "Account Sales"
-        Me.GridColumn11.ColumnEdit = Me.RepositoryItemTextEdit1
-        Me.GridColumn11.FieldName = "acc_sales"
-        Me.GridColumn11.Name = "GridColumn11"
-        Me.GridColumn11.Visible = True
-        Me.GridColumn11.VisibleIndex = 4
+        Me.GridColumnSalesReturnAccount.Caption = "Sales Return Account"
+        Me.GridColumnSalesReturnAccount.ColumnEdit = Me.RepositoryItemTextEdit1
+        Me.GridColumnSalesReturnAccount.FieldName = "acc_sales_return"
+        Me.GridColumnSalesReturnAccount.Name = "GridColumnSalesReturnAccount"
+        Me.GridColumnSalesReturnAccount.Visible = True
+        Me.GridColumnSalesReturnAccount.VisibleIndex = 4
         '
         'FormAccounting
         '
@@ -592,5 +602,6 @@ Partial Class FormAccounting
     Friend WithEvents GridColumn9 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RepositoryItemTextEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
     Friend WithEvents GridColumn10 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn11 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnSalesAccount As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnSalesReturnAccount As DevExpress.XtraGrid.Columns.GridColumn
 End Class

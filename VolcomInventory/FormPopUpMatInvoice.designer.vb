@@ -19,42 +19,42 @@ Partial Class FormPopUpMatInvoice
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl
-        Me.BCancel = New DevExpress.XtraEditors.SimpleButton
-        Me.BSave = New DevExpress.XtraEditors.SimpleButton
-        Me.SplitContainerControl1 = New DevExpress.XtraEditors.SplitContainerControl
-        Me.GroupGeneral = New DevExpress.XtraEditors.GroupControl
-        Me.GCProdInvoice = New DevExpress.XtraGrid.GridControl
-        Me.GVProdInvoice = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.GridColumnIdInv = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnInvNo = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnCompTo = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnDatex = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnDueDate = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnIdCompTo = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnIdWO = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnWONo = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnDesign = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnIdReportStatus = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnReportStatus = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnPONO = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GCListPurchase = New DevExpress.XtraGrid.GridControl
-        Me.GVListPurchase = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.ColIdPRDetSample = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColIdPurcDet = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColNo = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColCode = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColName = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColPrice = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColQtyRec = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.COlUOM = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColNote = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnTotal = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnIdMatDet = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnPLNumber = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnIdPlMRS = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.GridColumnIdCurrency = New DevExpress.XtraGrid.Columns.GridColumn
+        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
+        Me.BCancel = New DevExpress.XtraEditors.SimpleButton()
+        Me.BSave = New DevExpress.XtraEditors.SimpleButton()
+        Me.SplitContainerControl1 = New DevExpress.XtraEditors.SplitContainerControl()
+        Me.GroupGeneral = New DevExpress.XtraEditors.GroupControl()
+        Me.GCProdInvoice = New DevExpress.XtraGrid.GridControl()
+        Me.GVProdInvoice = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumnIdInv = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnInvNo = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnCompTo = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnDatex = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnDueDate = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnIdCompTo = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnIdWO = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnWONo = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnDesign = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnIdReportStatus = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnReportStatus = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnPONO = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnIdCurrency = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GCListPurchase = New DevExpress.XtraGrid.GridControl()
+        Me.GVListPurchase = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.ColIdPRDetSample = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColIdPurcDet = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColNo = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColCode = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColName = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColPrice = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColQtyRec = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.COlUOM = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColNote = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnTotal = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnIdMatDet = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnPLNumber = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnIdPlMRS = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
         CType(Me.SplitContainerControl1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -125,10 +125,10 @@ Partial Class FormPopUpMatInvoice
         'GCProdInvoice
         '
         Me.GCProdInvoice.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCProdInvoice.Location = New System.Drawing.Point(2, 22)
+        Me.GCProdInvoice.Location = New System.Drawing.Point(2, 20)
         Me.GCProdInvoice.MainView = Me.GVProdInvoice
         Me.GCProdInvoice.Name = "GCProdInvoice"
-        Me.GCProdInvoice.Size = New System.Drawing.Size(810, 201)
+        Me.GCProdInvoice.Size = New System.Drawing.Size(810, 203)
         Me.GCProdInvoice.TabIndex = 2
         Me.GCProdInvoice.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVProdInvoice})
         '
@@ -228,6 +228,12 @@ Partial Class FormPopUpMatInvoice
         Me.GridColumnPONO.Name = "GridColumnPONO"
         Me.GridColumnPONO.Visible = True
         Me.GridColumnPONO.VisibleIndex = 2
+        '
+        'GridColumnIdCurrency
+        '
+        Me.GridColumnIdCurrency.Caption = "Id Currency"
+        Me.GridColumnIdCurrency.FieldName = "id_currency"
+        Me.GridColumnIdCurrency.Name = "GridColumnIdCurrency"
         '
         'GCListPurchase
         '
@@ -389,12 +395,6 @@ Partial Class FormPopUpMatInvoice
         '
         Me.GridView1.GridControl = Me.GCListPurchase
         Me.GridView1.Name = "GridView1"
-        '
-        'GridColumnIdCurrency
-        '
-        Me.GridColumnIdCurrency.Caption = "Id Currency"
-        Me.GridColumnIdCurrency.FieldName = "id_currency"
-        Me.GridColumnIdCurrency.Name = "GridColumnIdCurrency"
         '
         'FormPopUpMatInvoice
         '

@@ -160,6 +160,7 @@ Partial Class FormMasterEmployeeNewDet
         Me.BtnNext = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnSaveChanges = New DevExpress.XtraEditors.SimpleButton()
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.CEPIC = New DevExpress.XtraEditors.CheckEdit()
         CType(Me.PanelControlTop, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlTop.SuspendLayout()
         CType(Me.DELastDay.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -242,11 +243,13 @@ Partial Class FormMasterEmployeeNewDet
         CType(Me.PanelControlBottom, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlBottom.SuspendLayout()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CEPIC.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControlTop
         '
         Me.PanelControlTop.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelControlTop.Controls.Add(Me.CEPIC)
         Me.PanelControlTop.Controls.Add(Me.DELastDay)
         Me.PanelControlTop.Controls.Add(Me.LabelLastDay)
         Me.PanelControlTop.Controls.Add(Me.TxtFocus)
@@ -320,7 +323,7 @@ Partial Class FormMasterEmployeeNewDet
         Me.LEActive.Name = "LEActive"
         Me.LEActive.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.LEActive.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_employee_active", "Id", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("employee_active", "Active Status")})
-        Me.LEActive.Size = New System.Drawing.Size(576, 20)
+        Me.LEActive.Size = New System.Drawing.Size(460, 20)
         Me.LEActive.TabIndex = 5
         '
         'DEJoinDate
@@ -395,7 +398,7 @@ Partial Class FormMasterEmployeeNewDet
         Me.TxtFullName.Name = "TxtFullName"
         Me.TxtFullName.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtFullName.Properties.Appearance.Options.UseFont = True
-        Me.TxtFullName.Size = New System.Drawing.Size(576, 20)
+        Me.TxtFullName.Size = New System.Drawing.Size(575, 20)
         Me.TxtFullName.TabIndex = 1
         '
         'Label2
@@ -1624,6 +1627,16 @@ Partial Class FormMasterEmployeeNewDet
         '
         Me.ErrorProvider1.ContainerControl = Me
         '
+        'CEPIC
+        '
+        Me.CEPIC.Location = New System.Drawing.Point(696, 113)
+        Me.CEPIC.Name = "CEPIC"
+        Me.CEPIC.Properties.Caption = "Person In Charge"
+        Me.CEPIC.Properties.ValueChecked = "yes"
+        Me.CEPIC.Properties.ValueUnchecked = "no"
+        Me.CEPIC.Size = New System.Drawing.Size(109, 19)
+        Me.CEPIC.TabIndex = 8906
+        '
         'FormMasterEmployeeNewDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1723,6 +1736,7 @@ Partial Class FormMasterEmployeeNewDet
         CType(Me.PanelControlBottom, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControlBottom.ResumeLayout(False)
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CEPIC.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1866,4 +1880,5 @@ Partial Class FormMasterEmployeeNewDet
     Friend WithEvents CEKoperasi As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents TERekeningName As DevExpress.XtraEditors.TextEdit
     Friend WithEvents Label38 As Label
+    Friend WithEvents CEPIC As DevExpress.XtraEditors.CheckEdit
 End Class

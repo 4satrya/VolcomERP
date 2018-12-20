@@ -21,6 +21,10 @@ Partial Class FormItemReqDet
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormItemReqDet))
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.TxtRequestedBy = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
+        Me.TxtDept = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
         Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
         Me.DECreated = New DevExpress.XtraEditors.DateEdit()
@@ -49,12 +53,28 @@ Partial Class FormItemReqDet
         Me.GridColumnQty = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnRemark = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnStt = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
-        Me.TxtDept = New DevExpress.XtraEditors.TextEdit()
-        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
-        Me.TxtRequestedBy = New DevExpress.XtraEditors.TextEdit()
+        Me.XTCRequest = New DevExpress.XtraTab.XtraTabControl()
+        Me.XTPSummary = New DevExpress.XtraTab.XtraTabPage()
+        Me.XTPDetail = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCDetail = New DevExpress.XtraGrid.GridControl()
+        Me.GVDetail = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnQtyDetail = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnCombine = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.PanelControlNavDetail = New DevExpress.XtraEditors.PanelControl()
+        Me.BtnDelDetail = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnAddDetail = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
+        CType(Me.TxtRequestedBy.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtDept.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
         CType(Me.DECreated.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -72,8 +92,14 @@ Partial Class FormItemReqDet
         Me.PanelControlNav.SuspendLayout()
         CType(Me.GCData, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVData, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TxtDept.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TxtRequestedBy.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.XTCRequest, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTCRequest.SuspendLayout()
+        Me.XTPSummary.SuspendLayout()
+        Me.XTPDetail.SuspendLayout()
+        CType(Me.GCDetail, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVDetail, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControlNavDetail, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControlNavDetail.SuspendLayout()
         Me.SuspendLayout()
         '
         'PanelControl1
@@ -88,6 +114,44 @@ Partial Class FormItemReqDet
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(819, 76)
         Me.PanelControl1.TabIndex = 9
+        '
+        'TxtRequestedBy
+        '
+        Me.TxtRequestedBy.Enabled = False
+        Me.TxtRequestedBy.Location = New System.Drawing.Point(97, 40)
+        Me.TxtRequestedBy.Name = "TxtRequestedBy"
+        Me.TxtRequestedBy.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtRequestedBy.Properties.Appearance.Options.UseFont = True
+        Me.TxtRequestedBy.Size = New System.Drawing.Size(229, 20)
+        Me.TxtRequestedBy.TabIndex = 10
+        '
+        'LabelControl2
+        '
+        Me.LabelControl2.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl2.Location = New System.Drawing.Point(17, 43)
+        Me.LabelControl2.Name = "LabelControl2"
+        Me.LabelControl2.Size = New System.Drawing.Size(67, 13)
+        Me.LabelControl2.TabIndex = 9
+        Me.LabelControl2.Text = "Requested by"
+        '
+        'TxtDept
+        '
+        Me.TxtDept.Enabled = False
+        Me.TxtDept.Location = New System.Drawing.Point(97, 14)
+        Me.TxtDept.Name = "TxtDept"
+        Me.TxtDept.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtDept.Properties.Appearance.Options.UseFont = True
+        Me.TxtDept.Size = New System.Drawing.Size(229, 20)
+        Me.TxtDept.TabIndex = 8
+        '
+        'LabelControl1
+        '
+        Me.LabelControl1.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl1.Location = New System.Drawing.Point(17, 17)
+        Me.LabelControl1.Name = "LabelControl1"
+        Me.LabelControl1.Size = New System.Drawing.Size(57, 13)
+        Me.LabelControl1.TabIndex = 8
+        Me.LabelControl1.Text = "Department"
         '
         'PanelControl2
         '
@@ -283,18 +347,18 @@ Partial Class FormItemReqDet
         Me.PanelControlNav.Controls.Add(Me.BtnDelete)
         Me.PanelControlNav.Controls.Add(Me.BtnAdd)
         Me.PanelControlNav.Dock = System.Windows.Forms.DockStyle.Top
-        Me.PanelControlNav.Location = New System.Drawing.Point(0, 76)
+        Me.PanelControlNav.Location = New System.Drawing.Point(0, 0)
         Me.PanelControlNav.Name = "PanelControlNav"
-        Me.PanelControlNav.Size = New System.Drawing.Size(819, 34)
+        Me.PanelControlNav.Size = New System.Drawing.Size(813, 40)
         Me.PanelControlNav.TabIndex = 14
         '
         'BtnDelete
         '
         Me.BtnDelete.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnDelete.Image = CType(resources.GetObject("BtnDelete.Image"), System.Drawing.Image)
-        Me.BtnDelete.Location = New System.Drawing.Point(665, 0)
+        Me.BtnDelete.Location = New System.Drawing.Point(659, 0)
         Me.BtnDelete.Name = "BtnDelete"
-        Me.BtnDelete.Size = New System.Drawing.Size(79, 34)
+        Me.BtnDelete.Size = New System.Drawing.Size(79, 40)
         Me.BtnDelete.TabIndex = 16
         Me.BtnDelete.Text = "Delete"
         '
@@ -302,19 +366,19 @@ Partial Class FormItemReqDet
         '
         Me.BtnAdd.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnAdd.Image = CType(resources.GetObject("BtnAdd.Image"), System.Drawing.Image)
-        Me.BtnAdd.Location = New System.Drawing.Point(744, 0)
+        Me.BtnAdd.Location = New System.Drawing.Point(738, 0)
         Me.BtnAdd.Name = "BtnAdd"
-        Me.BtnAdd.Size = New System.Drawing.Size(75, 34)
+        Me.BtnAdd.Size = New System.Drawing.Size(75, 40)
         Me.BtnAdd.TabIndex = 15
         Me.BtnAdd.Text = "Add"
         '
         'GCData
         '
         Me.GCData.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCData.Location = New System.Drawing.Point(0, 110)
+        Me.GCData.Location = New System.Drawing.Point(0, 40)
         Me.GCData.MainView = Me.GVData
         Me.GCData.Name = "GCData"
-        Me.GCData.Size = New System.Drawing.Size(819, 323)
+        Me.GCData.Size = New System.Drawing.Size(813, 289)
         Me.GCData.TabIndex = 15
         Me.GCData.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVData})
         '
@@ -339,7 +403,7 @@ Partial Class FormItemReqDet
         '
         'GridColumnITemName
         '
-        Me.GridColumnITemName.Caption = "Description"
+        Me.GridColumnITemName.Caption = "Item"
         Me.GridColumnITemName.FieldName = "item_desc"
         Me.GridColumnITemName.Name = "GridColumnITemName"
         Me.GridColumnITemName.OptionsColumn.AllowEdit = False
@@ -382,51 +446,176 @@ Partial Class FormItemReqDet
         Me.GridColumnStt.FieldName = "stt"
         Me.GridColumnStt.Name = "GridColumnStt"
         '
-        'LabelControl1
+        'XTCRequest
         '
-        Me.LabelControl1.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl1.Location = New System.Drawing.Point(17, 17)
-        Me.LabelControl1.Name = "LabelControl1"
-        Me.LabelControl1.Size = New System.Drawing.Size(57, 13)
-        Me.LabelControl1.TabIndex = 8
-        Me.LabelControl1.Text = "Department"
+        Me.XTCRequest.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.XTCRequest.Location = New System.Drawing.Point(0, 76)
+        Me.XTCRequest.Name = "XTCRequest"
+        Me.XTCRequest.SelectedTabPage = Me.XTPSummary
+        Me.XTCRequest.Size = New System.Drawing.Size(819, 357)
+        Me.XTCRequest.TabIndex = 16
+        Me.XTCRequest.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPSummary, Me.XTPDetail})
         '
-        'TxtDept
+        'XTPSummary
         '
-        Me.TxtDept.Enabled = False
-        Me.TxtDept.Location = New System.Drawing.Point(97, 14)
-        Me.TxtDept.Name = "TxtDept"
-        Me.TxtDept.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtDept.Properties.Appearance.Options.UseFont = True
-        Me.TxtDept.Size = New System.Drawing.Size(229, 20)
-        Me.TxtDept.TabIndex = 8
+        Me.XTPSummary.Controls.Add(Me.GCData)
+        Me.XTPSummary.Controls.Add(Me.PanelControlNav)
+        Me.XTPSummary.Name = "XTPSummary"
+        Me.XTPSummary.Size = New System.Drawing.Size(813, 329)
+        Me.XTPSummary.Text = "Summary"
         '
-        'LabelControl2
+        'XTPDetail
         '
-        Me.LabelControl2.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl2.Location = New System.Drawing.Point(17, 43)
-        Me.LabelControl2.Name = "LabelControl2"
-        Me.LabelControl2.Size = New System.Drawing.Size(67, 13)
-        Me.LabelControl2.TabIndex = 9
-        Me.LabelControl2.Text = "Requested by"
+        Me.XTPDetail.Controls.Add(Me.GCDetail)
+        Me.XTPDetail.Controls.Add(Me.PanelControlNavDetail)
+        Me.XTPDetail.Name = "XTPDetail"
+        Me.XTPDetail.Size = New System.Drawing.Size(813, 329)
+        Me.XTPDetail.Text = "Detail"
         '
-        'TxtRequestedBy
+        'GCDetail
         '
-        Me.TxtRequestedBy.Enabled = False
-        Me.TxtRequestedBy.Location = New System.Drawing.Point(97, 40)
-        Me.TxtRequestedBy.Name = "TxtRequestedBy"
-        Me.TxtRequestedBy.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtRequestedBy.Properties.Appearance.Options.UseFont = True
-        Me.TxtRequestedBy.Size = New System.Drawing.Size(229, 20)
-        Me.TxtRequestedBy.TabIndex = 10
+        Me.GCDetail.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCDetail.Location = New System.Drawing.Point(0, 40)
+        Me.GCDetail.MainView = Me.GVDetail
+        Me.GCDetail.Name = "GCDetail"
+        Me.GCDetail.Size = New System.Drawing.Size(813, 289)
+        Me.GCDetail.TabIndex = 16
+        Me.GCDetail.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVDetail})
+        '
+        'GVDetail
+        '
+        Me.GVDetail.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumnQtyDetail, Me.GridColumn5, Me.GridColumn6, Me.GridColumn7, Me.GridColumn8, Me.GridColumn9, Me.GridColumnCombine})
+        Me.GVDetail.GridControl = Me.GCDetail
+        Me.GVDetail.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty", Me.GridColumnQtyDetail, "{0:N2}")})
+        Me.GVDetail.Name = "GVDetail"
+        Me.GVDetail.OptionsBehavior.AutoExpandAllGroups = True
+        Me.GVDetail.OptionsView.ShowFooter = True
+        Me.GVDetail.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn1
+        '
+        Me.GridColumn1.Caption = "No"
+        Me.GridColumn1.FieldName = "no"
+        Me.GridColumn1.Name = "GridColumn1"
+        Me.GridColumn1.OptionsColumn.AllowEdit = False
+        Me.GridColumn1.Visible = True
+        Me.GridColumn1.VisibleIndex = 0
+        Me.GridColumn1.Width = 38
+        '
+        'GridColumn2
+        '
+        Me.GridColumn2.Caption = "Item"
+        Me.GridColumn2.FieldName = "item_desc"
+        Me.GridColumn2.Name = "GridColumn2"
+        Me.GridColumn2.OptionsColumn.AllowEdit = False
+        Me.GridColumn2.Visible = True
+        Me.GridColumn2.VisibleIndex = 3
+        Me.GridColumn2.Width = 176
+        '
+        'GridColumn3
+        '
+        Me.GridColumn3.Caption = "Id Item"
+        Me.GridColumn3.FieldName = "id_item"
+        Me.GridColumn3.Name = "GridColumn3"
+        Me.GridColumn3.OptionsColumn.AllowEdit = False
+        '
+        'GridColumnQtyDetail
+        '
+        Me.GridColumnQtyDetail.Caption = "Qty"
+        Me.GridColumnQtyDetail.DisplayFormat.FormatString = "N2"
+        Me.GridColumnQtyDetail.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnQtyDetail.FieldName = "qty"
+        Me.GridColumnQtyDetail.Name = "GridColumnQtyDetail"
+        Me.GridColumnQtyDetail.OptionsColumn.AllowEdit = False
+        Me.GridColumnQtyDetail.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty", "{0:N2}")})
+        Me.GridColumnQtyDetail.Visible = True
+        Me.GridColumnQtyDetail.VisibleIndex = 4
+        Me.GridColumnQtyDetail.Width = 176
+        '
+        'GridColumn5
+        '
+        Me.GridColumn5.Caption = "Remark"
+        Me.GridColumn5.FieldName = "remark"
+        Me.GridColumn5.Name = "GridColumn5"
+        Me.GridColumn5.Visible = True
+        Me.GridColumn5.VisibleIndex = 5
+        Me.GridColumn5.Width = 186
+        '
+        'GridColumn6
+        '
+        Me.GridColumn6.Caption = "Status"
+        Me.GridColumn6.FieldName = "stt"
+        Me.GridColumn6.Name = "GridColumn6"
+        '
+        'GridColumn7
+        '
+        Me.GridColumn7.Caption = "Store Code"
+        Me.GridColumn7.FieldName = "comp_number"
+        Me.GridColumn7.Name = "GridColumn7"
+        Me.GridColumn7.Visible = True
+        Me.GridColumn7.VisibleIndex = 1
+        Me.GridColumn7.Width = 84
+        '
+        'GridColumn8
+        '
+        Me.GridColumn8.Caption = "Store"
+        Me.GridColumn8.FieldName = "comp_name"
+        Me.GridColumn8.Name = "GridColumn8"
+        Me.GridColumn8.Visible = True
+        Me.GridColumn8.VisibleIndex = 2
+        Me.GridColumn8.Width = 153
+        '
+        'GridColumn9
+        '
+        Me.GridColumn9.Caption = "Id Comp"
+        Me.GridColumn9.FieldName = "id_comp"
+        Me.GridColumn9.Name = "GridColumn9"
+        '
+        'GridColumnCombine
+        '
+        Me.GridColumnCombine.Caption = "Group"
+        Me.GridColumnCombine.FieldName = "grp"
+        Me.GridColumnCombine.Name = "GridColumnCombine"
+        Me.GridColumnCombine.UnboundExpression = "Concat([id_item], '#*mt*#', [item_desc])"
+        Me.GridColumnCombine.UnboundType = DevExpress.Data.UnboundColumnType.[String]
+        '
+        'PanelControlNavDetail
+        '
+        Me.PanelControlNavDetail.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelControlNavDetail.Controls.Add(Me.BtnDelDetail)
+        Me.PanelControlNavDetail.Controls.Add(Me.BtnAddDetail)
+        Me.PanelControlNavDetail.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelControlNavDetail.Location = New System.Drawing.Point(0, 0)
+        Me.PanelControlNavDetail.Name = "PanelControlNavDetail"
+        Me.PanelControlNavDetail.Size = New System.Drawing.Size(813, 40)
+        Me.PanelControlNavDetail.TabIndex = 15
+        '
+        'BtnDelDetail
+        '
+        Me.BtnDelDetail.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnDelDetail.Image = CType(resources.GetObject("BtnDelDetail.Image"), System.Drawing.Image)
+        Me.BtnDelDetail.Location = New System.Drawing.Point(659, 0)
+        Me.BtnDelDetail.Name = "BtnDelDetail"
+        Me.BtnDelDetail.Size = New System.Drawing.Size(79, 40)
+        Me.BtnDelDetail.TabIndex = 16
+        Me.BtnDelDetail.Text = "Delete"
+        '
+        'BtnAddDetail
+        '
+        Me.BtnAddDetail.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnAddDetail.Image = CType(resources.GetObject("BtnAddDetail.Image"), System.Drawing.Image)
+        Me.BtnAddDetail.Location = New System.Drawing.Point(738, 0)
+        Me.BtnAddDetail.Name = "BtnAddDetail"
+        Me.BtnAddDetail.Size = New System.Drawing.Size(75, 40)
+        Me.BtnAddDetail.TabIndex = 15
+        Me.BtnAddDetail.Text = "Add"
         '
         'FormItemReqDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(819, 546)
-        Me.Controls.Add(Me.GCData)
-        Me.Controls.Add(Me.PanelControlNav)
+        Me.Controls.Add(Me.XTCRequest)
         Me.Controls.Add(Me.PanelControl3)
         Me.Controls.Add(Me.PanelControlBottom)
         Me.Controls.Add(Me.PanelControl1)
@@ -438,6 +627,8 @@ Partial Class FormItemReqDet
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         Me.PanelControl1.PerformLayout()
+        CType(Me.TxtRequestedBy.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtDept.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl2.ResumeLayout(False)
         Me.PanelControl2.PerformLayout()
@@ -458,8 +649,14 @@ Partial Class FormItemReqDet
         Me.PanelControlNav.ResumeLayout(False)
         CType(Me.GCData, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVData, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TxtDept.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TxtRequestedBy.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.XTCRequest, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTCRequest.ResumeLayout(False)
+        Me.XTPSummary.ResumeLayout(False)
+        Me.XTPDetail.ResumeLayout(False)
+        CType(Me.GCDetail, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVDetail, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControlNavDetail, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControlNavDetail.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -497,4 +694,22 @@ Partial Class FormItemReqDet
     Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents TxtDept As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents XTCRequest As DevExpress.XtraTab.XtraTabControl
+    Friend WithEvents XTPSummary As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents XTPDetail As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents GCDetail As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVDetail As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn2 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn3 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnQtyDetail As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn7 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn8 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents PanelControlNavDetail As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents BtnDelDetail As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BtnAddDetail As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GridColumn9 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnCombine As DevExpress.XtraGrid.Columns.GridColumn
 End Class

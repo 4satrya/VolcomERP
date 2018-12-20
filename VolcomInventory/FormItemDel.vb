@@ -18,7 +18,8 @@
     Sub viewRequest()
         Cursor = Cursors.WaitCursor
         Dim id_prepare_status As String = SLEPackingStatus.EditValue.ToString
-        Dim query As String = "SELECT r.id_item_req, r.id_departement, dept.departement, r.`number`, r.created_date, r.created_by, e.employee_name AS `created_by_name`, r.note 
+        Dim query As String = "SELECT r.id_item_req, r.id_departement, dept.departement, r.`number`, r.created_date, r.created_by, e.employee_name AS `created_by_name`, r.note, 
+        r.is_for_store, IF(r.is_for_store=1,'163', '154') AS `rmt`
         FROM tb_item_req r
         INNER JOIN tb_m_user u ON u.id_user = r.created_by
         INNER JOIN tb_m_employee e ON e.id_employee = u.id_employee
@@ -175,5 +176,16 @@
 
     Private Sub SLEPackingStatus_EditValueChanged(sender As Object, e As EventArgs) Handles SLEPackingStatus.EditValueChanged
         viewRequest()
+    End Sub
+
+    Private Sub BtnDetail_Click(sender As Object, e As EventArgs) Handles BtnDetail.Click
+        Cursor = Cursors.WaitCursor
+        Dim rmt As String = GVRequest.GetFocusedRowCellValue("rmt").ToString
+        Dim id_report As String = GVRequest.GetFocusedRowCellValue("id_item_req").ToString
+        Dim p As New ClassShowPopUp
+        p.id_report = id_report
+        p.report_mark_type = rmt
+        p.show()
+        Cursor = Cursors.Default
     End Sub
 End Class

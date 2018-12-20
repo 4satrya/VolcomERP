@@ -20,6 +20,7 @@ Partial Class FormItemDel
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim SerializableAppearanceObject1 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
         Me.XTCDel = New DevExpress.XtraTab.XtraTabControl()
         Me.XTPRequest = New DevExpress.XtraTab.XtraTabPage()
         Me.GCRequest = New DevExpress.XtraGrid.GridControl()
@@ -40,12 +41,14 @@ Partial Class FormItemDel
         Me.XTPDel = New DevExpress.XtraTab.XtraTabPage()
         Me.GCDelivery = New DevExpress.XtraGrid.GridControl()
         Me.GVDelivery = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.ToolTipController1 = New DevExpress.Utils.ToolTipController(Me.components)
         Me.GridColumnNumber = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnDept = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnCreatedDate = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnCreatedByName = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnStt = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ToolTipController1 = New DevExpress.Utils.ToolTipController(Me.components)
+        Me.GridColumnAction = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.BtnDetail = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
         CType(Me.XTCDel, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCDel.SuspendLayout()
         Me.XTPRequest.SuspendLayout()
@@ -59,6 +62,7 @@ Partial Class FormItemDel
         Me.XTPDel.SuspendLayout()
         CType(Me.GCDelivery, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVDelivery, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.BtnDetail, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'XTCDel
@@ -87,6 +91,7 @@ Partial Class FormItemDel
         Me.GCRequest.Location = New System.Drawing.Point(0, 46)
         Me.GCRequest.MainView = Me.GVRequest
         Me.GCRequest.Name = "GCRequest"
+        Me.GCRequest.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.BtnDetail})
         Me.GCRequest.Size = New System.Drawing.Size(705, 364)
         Me.GCRequest.TabIndex = 0
         Me.GCRequest.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVRequest})
@@ -102,14 +107,14 @@ Partial Class FormItemDel
         Me.ViewDetailToolStripMenuItem.Name = "ViewDetailToolStripMenuItem"
         Me.ViewDetailToolStripMenuItem.Size = New System.Drawing.Size(130, 22)
         Me.ViewDetailToolStripMenuItem.Text = "view detail"
+        Me.ViewDetailToolStripMenuItem.Visible = False
         '
         'GVRequest
         '
-        Me.GVRequest.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdReq, Me.GridColumnRecNumber, Me.GridColumnDeptReq, Me.GridColumnCreateddateReq, Me.GridColumnCreatedByReq})
+        Me.GVRequest.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdReq, Me.GridColumnRecNumber, Me.GridColumnDeptReq, Me.GridColumnCreateddateReq, Me.GridColumnCreatedByReq, Me.GridColumnAction})
         Me.GVRequest.GridControl = Me.GCRequest
         Me.GVRequest.Name = "GVRequest"
         Me.GVRequest.OptionsBehavior.AutoExpandAllGroups = True
-        Me.GVRequest.OptionsBehavior.Editable = False
         Me.GVRequest.OptionsCustomization.AllowSort = False
         Me.GVRequest.OptionsFind.AlwaysVisible = True
         Me.GVRequest.OptionsView.ShowGroupPanel = False
@@ -119,12 +124,14 @@ Partial Class FormItemDel
         Me.GridColumnIdReq.Caption = "Id"
         Me.GridColumnIdReq.FieldName = "id_item_req"
         Me.GridColumnIdReq.Name = "GridColumnIdReq"
+        Me.GridColumnIdReq.OptionsColumn.AllowEdit = False
         '
         'GridColumnRecNumber
         '
         Me.GridColumnRecNumber.Caption = "Number"
         Me.GridColumnRecNumber.FieldName = "number"
         Me.GridColumnRecNumber.Name = "GridColumnRecNumber"
+        Me.GridColumnRecNumber.OptionsColumn.AllowEdit = False
         Me.GridColumnRecNumber.Visible = True
         Me.GridColumnRecNumber.VisibleIndex = 0
         '
@@ -133,6 +140,7 @@ Partial Class FormItemDel
         Me.GridColumnDeptReq.Caption = "Department"
         Me.GridColumnDeptReq.FieldName = "departement"
         Me.GridColumnDeptReq.Name = "GridColumnDeptReq"
+        Me.GridColumnDeptReq.OptionsColumn.AllowEdit = False
         Me.GridColumnDeptReq.Visible = True
         Me.GridColumnDeptReq.VisibleIndex = 2
         '
@@ -143,6 +151,7 @@ Partial Class FormItemDel
         Me.GridColumnCreateddateReq.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnCreateddateReq.FieldName = "created_date"
         Me.GridColumnCreateddateReq.Name = "GridColumnCreateddateReq"
+        Me.GridColumnCreateddateReq.OptionsColumn.AllowEdit = False
         Me.GridColumnCreateddateReq.Visible = True
         Me.GridColumnCreateddateReq.VisibleIndex = 1
         '
@@ -151,6 +160,7 @@ Partial Class FormItemDel
         Me.GridColumnCreatedByReq.Caption = "Request by"
         Me.GridColumnCreatedByReq.FieldName = "created_by_name"
         Me.GridColumnCreatedByReq.Name = "GridColumnCreatedByReq"
+        Me.GridColumnCreatedByReq.OptionsColumn.AllowEdit = False
         Me.GridColumnCreatedByReq.Visible = True
         Me.GridColumnCreatedByReq.VisibleIndex = 3
         '
@@ -273,6 +283,30 @@ Partial Class FormItemDel
         Me.GridColumnStt.Visible = True
         Me.GridColumnStt.VisibleIndex = 4
         '
+        'GridColumnAction
+        '
+        Me.GridColumnAction.Caption = "  "
+        Me.GridColumnAction.ColumnEdit = Me.BtnDetail
+        Me.GridColumnAction.FieldName = "btn_detail"
+        Me.GridColumnAction.Name = "GridColumnAction"
+        Me.GridColumnAction.Visible = True
+        Me.GridColumnAction.VisibleIndex = 4
+        '
+        'BtnDetail
+        '
+        Me.BtnDetail.AutoHeight = False
+        SerializableAppearanceObject1.BackColor = System.Drawing.SystemColors.Highlight
+        SerializableAppearanceObject1.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        SerializableAppearanceObject1.ForeColor = System.Drawing.Color.White
+        SerializableAppearanceObject1.Options.UseBackColor = True
+        SerializableAppearanceObject1.Options.UseFont = True
+        SerializableAppearanceObject1.Options.UseForeColor = True
+        Me.BtnDetail.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "Detail", -1, True, True, False, DevExpress.XtraEditors.ImageLocation.MiddleCenter, Nothing, New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject1, "", Nothing, Nothing, True)})
+        Me.BtnDetail.ButtonsStyle = DevExpress.XtraEditors.Controls.BorderStyles.UltraFlat
+        Me.BtnDetail.LookAndFeel.UseDefaultLookAndFeel = False
+        Me.BtnDetail.Name = "BtnDetail"
+        Me.BtnDetail.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor
+        '
         'FormItemDel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -297,6 +331,7 @@ Partial Class FormItemDel
         Me.XTPDel.ResumeLayout(False)
         CType(Me.GCDelivery, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVDelivery, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BtnDetail, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -327,4 +362,6 @@ Partial Class FormItemDel
     Friend WithEvents GridColumnCreatedDate As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnCreatedByName As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnStt As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnAction As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BtnDetail As DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit
 End Class

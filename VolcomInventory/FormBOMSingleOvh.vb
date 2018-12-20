@@ -499,4 +499,10 @@
     Private Sub TEPrice_EditValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TEPrice.EditValueChanged
         calculate()
     End Sub
+
+    Private Sub GVOVH_ColumnFilterChanged(sender As Object, e As EventArgs) Handles GVOVH.ColumnFilterChanged
+        If GVOVH.RowCount > 0 Then
+            view_ovh_price(GVOVH.GetFocusedRowCellValue("id_ovh"))
+        End If
+    End Sub
 End Class

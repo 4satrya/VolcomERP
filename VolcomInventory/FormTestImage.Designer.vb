@@ -26,17 +26,11 @@ Partial Class FormTestImage
         Me.LabelName = New DevExpress.XtraEditors.LabelControl()
         Me.LabelCode = New DevExpress.XtraEditors.LabelControl()
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
-        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
-        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
-        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
-        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
-        Me.SLDrawer = New DevExpress.XtraEditors.SearchLookUpEdit()
-        Me.SearchLookUpEdit4View = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.SLRack = New DevExpress.XtraEditors.SearchLookUpEdit()
-        Me.SearchLookUpEdit3View = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.SLLocator = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.LCSeason = New DevExpress.XtraEditors.LabelControl()
+        Me.LCType = New DevExpress.XtraEditors.LabelControl()
+        Me.SLSeason = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.SearchLookUpEdit2View = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.SLWH = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.SLType = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GCList = New DevExpress.XtraGrid.GridControl()
         Me.GVList = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -50,13 +44,9 @@ Partial Class FormTestImage
         CType(Me.TextCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
-        CType(Me.SLDrawer.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.SearchLookUpEdit4View, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.SLRack.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.SearchLookUpEdit3View, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.SLLocator.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SLSeason.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SearchLookUpEdit2View, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.SLWH.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SLType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GCList, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVList, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -112,97 +102,45 @@ Partial Class FormTestImage
         '
         'PanelControl2
         '
-        Me.PanelControl2.Controls.Add(Me.LabelControl4)
-        Me.PanelControl2.Controls.Add(Me.LabelControl3)
-        Me.PanelControl2.Controls.Add(Me.LabelControl2)
-        Me.PanelControl2.Controls.Add(Me.LabelControl1)
-        Me.PanelControl2.Controls.Add(Me.SLDrawer)
-        Me.PanelControl2.Controls.Add(Me.SLRack)
-        Me.PanelControl2.Controls.Add(Me.SLLocator)
-        Me.PanelControl2.Controls.Add(Me.SLWH)
+        Me.PanelControl2.Controls.Add(Me.LCSeason)
+        Me.PanelControl2.Controls.Add(Me.LCType)
+        Me.PanelControl2.Controls.Add(Me.SLSeason)
+        Me.PanelControl2.Controls.Add(Me.SLType)
         Me.PanelControl2.Controls.Add(Me.LabelName)
         Me.PanelControl2.Controls.Add(Me.TextName)
         Me.PanelControl2.Controls.Add(Me.LabelCode)
         Me.PanelControl2.Controls.Add(Me.GCList)
         Me.PanelControl2.Controls.Add(Me.TextCode)
-        Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PanelControl2.Location = New System.Drawing.Point(202, 0)
+        Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PanelControl2.Location = New System.Drawing.Point(196, 0)
         Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(668, 349)
+        Me.PanelControl2.Size = New System.Drawing.Size(675, 349)
         Me.PanelControl2.TabIndex = 1
         '
-        'LabelControl4
+        'LCSeason
         '
-        Me.LabelControl4.Location = New System.Drawing.Point(362, 81)
-        Me.LabelControl4.Name = "LabelControl4"
-        Me.LabelControl4.Size = New System.Drawing.Size(35, 13)
-        Me.LabelControl4.TabIndex = 12
-        Me.LabelControl4.Text = "Drawer"
+        Me.LCSeason.Location = New System.Drawing.Point(130, 81)
+        Me.LCSeason.Name = "LCSeason"
+        Me.LCSeason.Size = New System.Drawing.Size(35, 13)
+        Me.LCSeason.TabIndex = 10
+        Me.LCSeason.Text = "Season"
         '
-        'LabelControl3
+        'LCType
         '
-        Me.LabelControl3.Location = New System.Drawing.Point(245, 81)
-        Me.LabelControl3.Name = "LabelControl3"
-        Me.LabelControl3.Size = New System.Drawing.Size(23, 13)
-        Me.LabelControl3.TabIndex = 11
-        Me.LabelControl3.Text = "Rack"
+        Me.LCType.Location = New System.Drawing.Point(15, 81)
+        Me.LCType.Name = "LCType"
+        Me.LCType.Size = New System.Drawing.Size(24, 13)
+        Me.LCType.TabIndex = 9
+        Me.LCType.Text = "Type"
         '
-        'LabelControl2
+        'SLSeason
         '
-        Me.LabelControl2.Location = New System.Drawing.Point(130, 81)
-        Me.LabelControl2.Name = "LabelControl2"
-        Me.LabelControl2.Size = New System.Drawing.Size(36, 13)
-        Me.LabelControl2.TabIndex = 10
-        Me.LabelControl2.Text = "Locator"
-        '
-        'LabelControl1
-        '
-        Me.LabelControl1.Location = New System.Drawing.Point(15, 81)
-        Me.LabelControl1.Name = "LabelControl1"
-        Me.LabelControl1.Size = New System.Drawing.Size(17, 13)
-        Me.LabelControl1.TabIndex = 9
-        Me.LabelControl1.Text = "WH"
-        '
-        'SLDrawer
-        '
-        Me.SLDrawer.Location = New System.Drawing.Point(362, 100)
-        Me.SLDrawer.Name = "SLDrawer"
-        Me.SLDrawer.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.SLDrawer.Properties.View = Me.SearchLookUpEdit4View
-        Me.SLDrawer.Size = New System.Drawing.Size(100, 20)
-        Me.SLDrawer.TabIndex = 8
-        '
-        'SearchLookUpEdit4View
-        '
-        Me.SearchLookUpEdit4View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
-        Me.SearchLookUpEdit4View.Name = "SearchLookUpEdit4View"
-        Me.SearchLookUpEdit4View.OptionsSelection.EnableAppearanceFocusedCell = False
-        Me.SearchLookUpEdit4View.OptionsView.ShowGroupPanel = False
-        '
-        'SLRack
-        '
-        Me.SLRack.Location = New System.Drawing.Point(245, 100)
-        Me.SLRack.Name = "SLRack"
-        Me.SLRack.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.SLRack.Properties.View = Me.SearchLookUpEdit3View
-        Me.SLRack.Size = New System.Drawing.Size(100, 20)
-        Me.SLRack.TabIndex = 7
-        '
-        'SearchLookUpEdit3View
-        '
-        Me.SearchLookUpEdit3View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
-        Me.SearchLookUpEdit3View.Name = "SearchLookUpEdit3View"
-        Me.SearchLookUpEdit3View.OptionsSelection.EnableAppearanceFocusedCell = False
-        Me.SearchLookUpEdit3View.OptionsView.ShowGroupPanel = False
-        '
-        'SLLocator
-        '
-        Me.SLLocator.Location = New System.Drawing.Point(130, 100)
-        Me.SLLocator.Name = "SLLocator"
-        Me.SLLocator.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.SLLocator.Properties.View = Me.SearchLookUpEdit2View
-        Me.SLLocator.Size = New System.Drawing.Size(100, 20)
-        Me.SLLocator.TabIndex = 6
+        Me.SLSeason.Location = New System.Drawing.Point(130, 100)
+        Me.SLSeason.Name = "SLSeason"
+        Me.SLSeason.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLSeason.Properties.View = Me.SearchLookUpEdit2View
+        Me.SLSeason.Size = New System.Drawing.Size(100, 20)
+        Me.SLSeason.TabIndex = 6
         '
         'SearchLookUpEdit2View
         '
@@ -211,14 +149,14 @@ Partial Class FormTestImage
         Me.SearchLookUpEdit2View.OptionsSelection.EnableAppearanceFocusedCell = False
         Me.SearchLookUpEdit2View.OptionsView.ShowGroupPanel = False
         '
-        'SLWH
+        'SLType
         '
-        Me.SLWH.Location = New System.Drawing.Point(15, 100)
-        Me.SLWH.Name = "SLWH"
-        Me.SLWH.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.SLWH.Properties.View = Me.SearchLookUpEdit1View
-        Me.SLWH.Size = New System.Drawing.Size(100, 20)
-        Me.SLWH.TabIndex = 5
+        Me.SLType.Location = New System.Drawing.Point(15, 100)
+        Me.SLType.Name = "SLType"
+        Me.SLType.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLType.Properties.View = Me.SearchLookUpEdit1View
+        Me.SLType.Size = New System.Drawing.Size(100, 20)
+        Me.SLType.TabIndex = 5
         '
         'SearchLookUpEdit1View
         '
@@ -232,7 +170,7 @@ Partial Class FormTestImage
         Me.GCList.Location = New System.Drawing.Point(0, 138)
         Me.GCList.MainView = Me.GVList
         Me.GCList.Name = "GCList"
-        Me.GCList.Size = New System.Drawing.Size(668, 211)
+        Me.GCList.Size = New System.Drawing.Size(675, 211)
         Me.GCList.TabIndex = 0
         Me.GCList.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVList})
         '
@@ -270,11 +208,11 @@ Partial Class FormTestImage
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(870, 349)
+        Me.ClientSize = New System.Drawing.Size(871, 349)
         Me.Controls.Add(Me.PanelControl2)
         Me.Controls.Add(Me.PanelControl1)
         Me.Name = "FormTestImage"
-        Me.Text = "FormTestImage"
+        Me.Text = "Coba Dua"
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         CType(Me.PictureEdit.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -283,13 +221,9 @@ Partial Class FormTestImage
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl2.ResumeLayout(False)
         Me.PanelControl2.PerformLayout()
-        CType(Me.SLDrawer.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.SearchLookUpEdit4View, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.SLRack.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.SearchLookUpEdit3View, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.SLLocator.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SLSeason.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SearchLookUpEdit2View, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.SLWH.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SLType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GCList, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVList, System.ComponentModel.ISupportInitialize).EndInit()
@@ -309,16 +243,10 @@ Partial Class FormTestImage
     Friend WithEvents TextCode As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelName As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LabelCode As DevExpress.XtraEditors.LabelControl
-    Friend WithEvents SLWH As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents SLType As DevExpress.XtraEditors.SearchLookUpEdit
     Friend WithEvents SearchLookUpEdit1View As DevExpress.XtraGrid.Views.Grid.GridView
-    Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
-    Friend WithEvents SLDrawer As DevExpress.XtraEditors.SearchLookUpEdit
-    Friend WithEvents SearchLookUpEdit4View As DevExpress.XtraGrid.Views.Grid.GridView
-    Friend WithEvents SLRack As DevExpress.XtraEditors.SearchLookUpEdit
-    Friend WithEvents SearchLookUpEdit3View As DevExpress.XtraGrid.Views.Grid.GridView
-    Friend WithEvents SLLocator As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents LCType As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents SLSeason As DevExpress.XtraEditors.SearchLookUpEdit
     Friend WithEvents SearchLookUpEdit2View As DevExpress.XtraGrid.Views.Grid.GridView
-    Friend WithEvents LabelControl4 As DevExpress.XtraEditors.LabelControl
-    Friend WithEvents LabelControl3 As DevExpress.XtraEditors.LabelControl
-    Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LCSeason As DevExpress.XtraEditors.LabelControl
 End Class

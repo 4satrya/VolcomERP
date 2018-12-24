@@ -1,51 +1,58 @@
 ﻿Public Class FormTestImage
+    Dim bnew_active As String = "1"
+    Dim bedit_active As String = "1"
+    Dim bdel_active As String = "1"
+
+    Private Sub FormTestImage_Deactivate(sender As Object, e As EventArgs) Handles MyBase.Deactivate
+        FormMain.hide_rb()
+    End Sub
+
+    Private Sub FormTestImage_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
+        FormMain.show_rb(Name)
+        check_menu()
+    End Sub
+
+    Sub check_menu()
+        bnew_active = "0"
+        bedit_active = "0"
+        bdel_active = "0"
+        checkFormAccess(Name)
+        button_main(bnew_active, bedit_active, bdel_active)
+    End Sub
+
     Private Sub FormTestImage_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         loadList()
-        loadWH()
-        loadLocator()
-        loadRack()
-        loadDrawer()
+        viewType()
     End Sub
 
     Sub loadList()
-        Dim query As String = "SELECT * FROM `tb_m_design` LIMIT 50"
+        Dim cond As String = "-1"
+
+        If SLSeason.EditValue Then
+            cond = "And f1.id_season=" + SLSeason.EditValue.ToString() + " "
+        End If
+
+        Dim query As String = "CALL view_all_design_param('" + cond + "')"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
         GCList.DataSource = data
     End Sub
 
-    Sub loadWH()
-        Dim query As String = ""
-
-        query = "SELECT `id_comp_cat_wh` FROM `tb_opt`"
-        Dim id_comp_cat_wh As String = execute_query(query, 0, True, "", "", "", "")
-
-        query = "SELECT `id_comp_cat_store` FROM `tb_opt`"
-        Dim id_comp_cat_store As String = execute_query(query, 0, True, "", "", "", "")
-
-        query = "SELECT ('0') AS id_comp, ('-') AS comp_number, ('All WH') AS comp_name UNION ALL SELECT a.id_comp, a.comp_number, a.comp_name FROM tb_m_comp a WHERE (a.id_comp_cat = '" + id_comp_cat_wh + "' OR  a.id_comp_cat = '" + id_comp_cat_store + "') ORDER BY comp_number ASC"
-        viewSearchLookupQuery(SLWH, query, "id_comp", "comp_name", "id_comp")
+    Sub viewType()
+        Dim query As String = "SELECT * FROM tb_lookup_line_list_type a ORDER BY a.id_line_list_type ASC"
+        viewSearchLookupQuery(SLType, query, "id_line_list_type", "line_list_type", "id_line_list_type")
     End Sub
 
-    Sub loadLocator()
-        Dim id_comp As String = SLWH.EditValue.ToString()
-        Dim query As String = "SELECT ('0') AS id_comp, ('0') AS id_wh_locator, ('-') AS wh_locator_code, ('All Loactor') AS wh_locator, ('-') AS wh_locator_description UNION ALL SELECT a.id_comp, a.id_wh_locator, a.wh_locator_code, a.wh_locator, a.wh_locator_description FROM tb_m_wh_locator a WHERE a.id_comp = '" + id_comp + "'"
+    Sub viewSeason()
+        Dim type As String = ""
 
-        viewSearchLookupQuery(SLLocator, query, "id_wh_locator", "wh_locator", "id_wh_locator")
-    End Sub
+        If SLType.EditValue Then
+            type = SLType.EditValue.ToString()
+        End If
 
-    Sub loadRack()
-        Dim id_locator As String = SLLocator.EditValue.ToString()
-        Dim query As String = "SELECT ('0') AS id_locator, ('0') AS id_wh_rack, ('-') AS wh_rack_code, ('All Rack') AS wh_rack, ('-') AS wh_rack_description UNION ALL SELECT a.id_wh_locator, a.id_wh_rack, a.wh_rack_code, a.wh_rack, a.wh_rack_description FROM tb_m_wh_rack a WHERE a.id_wh_locator = '" + id_locator + "'"
+        Dim query As String = "Select a.id_season, a.season, b.id_range, b.`range` From tb_season a INNER Join tb_range b ON a.id_range = b.id_range WHERE b.is_md='" + type + "' ORDER BY `range` DESC"
 
-        viewSearchLookupQuery(SLRack, query, "id_wh_rack", "wh_rack", "id_wh_rack")
-    End Sub
-
-    Sub loadDrawer()
-        Dim id_rack As String = SLRack.EditValue.ToString()
-        Dim query As String = "SELECT ('0') AS id_rack, ('0') AS id_wh_drawer, ('-') AS wh_drawer_code, ('All Drawer') AS wh_drawer, ('-') AS wh_drawer_description UNION ALL SELECT a.id_wh_rack, a.id_wh_drawer, a.wh_drawer_code, a.wh_drawer, a.wh_drawer_description FROM tb_m_wh_drawer a WHERE a.id_wh_rack = '" + id_rack + "'"
-
-        viewSearchLookupQuery(SLDrawer, query, "id_wh_drawer", "wh_drawer", "id_wh_drawer")
+        viewSearchLookupQuery(SLSeason, query, "id_season", "season", "id_season")
     End Sub
 
     Private Sub GVList_RowClick(sender As Object, e As DevExpress.XtraGrid.Views.Grid.RowClickEventArgs) Handles GVList.RowClick
@@ -61,9 +68,11 @@
         TextName.EditValue = design_name
     End Sub
 
-    Private Sub SLWH_EditValueChanged(sender As Object, e As EventArgs) Handles SLWH.EditValueChanged
-        loadLocator()
-        loadRack()
-        loadDrawer()
+    Private Sub SLType_EditValueChanged(sender As Object, e As EventArgs) Handles SLType.EditValueChanged
+        viewSeason()
+    End Sub
+
+    Private Sub SLSeason_EditValueChanged(sender As Object, e As EventArgs) Handles SLSeason.EditValueChanged
+        loadList()
     End Sub
 End Class

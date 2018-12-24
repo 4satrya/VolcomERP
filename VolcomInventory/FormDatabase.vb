@@ -15,8 +15,8 @@ Public Class FormDatabase
     Private Sub SimpleButtonConnect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SimpleButtonConnect.Click
         Cursor = Cursors.WaitCursor
 
-        Try
-            If connect_state = False Then
+        'Try
+        If connect_state = False Then
                 Dim host As String = TextEditHost.Text
                 Dim username As String = TextEditUsername.Text
                 Dim password As String = TextEditPassword.Text
@@ -40,9 +40,9 @@ Public Class FormDatabase
 
                 connect_state = False
             End If
-        Catch ex As Exception
-            XtraMessageBox.Show("Connection failed!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
+        'Catch ex As Exception
+        'XtraMessageBox.Show("Connection failed!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        'End Try
 
         Cursor = Cursors.Default
     End Sub

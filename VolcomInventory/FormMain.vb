@@ -7494,6 +7494,9 @@ Public Class FormMain
         ElseIf formName = "FormSamplePrintBarcode" Then
             FormSamplePrintBarcode.Close()
             FormSamplePrintBarcode.Dispose()
+        ElseIf formName = "FormSamplePR" Then
+            FormSamplePR.Close()
+            FormSamplePR.Dispose()
         ElseIf formName = "FormSampleOrder" Then
             'SALES ORDER SAMPLE
             FormSampleOrder.Close()
@@ -7856,6 +7859,12 @@ Public Class FormMain
         ElseIf formName = "FormBankDeposit" Then
             FormBankDeposit.Close()
             FormBankDeposit.Dispose()
+        ElseIf formName = "FormCoba" Then
+            FormCoba.Close()
+            FormCoba.Dispose()
+        ElseIf formName = "FormTestImage" Then
+            FormTestImage.Close()
+            FormTestImage.Dispose()
         Else
             RPSubMenu.Visible = False
         End If
@@ -8603,6 +8612,8 @@ Public Class FormMain
             ElseIf FormBankDeposit.XTCPO.SelectedTabPageIndex = 1 Then
                 FormBankDeposit.load_invoice()
             End If
+        ElseIf formName = "FormCoba" Then
+            FormCoba.load_list()
         End If
     End Sub
     'Switch
@@ -12063,6 +12074,32 @@ Public Class FormMain
             FormBankDeposit.Show()
             FormBankDeposit.WindowState = FormWindowState.Maximized
             FormBankDeposit.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBCoba_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBCoba.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormCoba.MdiParent = Me
+            FormCoba.Show()
+            FormCoba.WindowState = FormWindowState.Maximized
+            FormCoba.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBCobaDua_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBCobaDua.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormTestImage.MdiParent = Me
+            FormTestImage.Show()
+            FormTestImage.WindowState = FormWindowState.Maximized
+            FormTestImage.Focus()
         Catch ex As Exception
             errorProcess()
         End Try

@@ -282,6 +282,18 @@
     <Compile Include="ClassShowPopUp.vb" />
     <Compile Include="ClassStock.vb" />
     <Compile Include="ClassUser.vb" />
+    <Compile Include="CobaFormBanded.Designer.vb">
+      <DependentUpon>CobaFormBanded.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CobaFormBanded.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CobaReport.Designer.vb">
+      <DependentUpon>CobaReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CobaReport.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="FindPanel.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -4521,6 +4533,12 @@
     <Compile Include="FormTest.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormTestBarcodeScan.Designer.vb">
+      <DependentUpon>FormTestBarcodeScan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormTestBarcodeScan.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormTestImage.Designer.vb">
       <DependentUpon>FormTestImage.vb</DependentUpon>
     </Compile>
@@ -6024,6 +6042,12 @@
     <EmbeddedResource Include="barcodeaa.resx">
       <DependentUpon>barcodeaa.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CobaFormBanded.resx">
+      <DependentUpon>CobaFormBanded.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CobaReport.resx">
+      <DependentUpon>CobaReport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormAccess.resx">
       <DependentUpon>FormAccess.vb</DependentUpon>
@@ -8547,6 +8571,9 @@
       <DependentUpon>FormTest.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormTestBarcodeScan.resx">
+      <DependentUpon>FormTestBarcodeScan.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormTestImage.resx">
       <DependentUpon>FormTestImage.vb</DependentUpon>
     </EmbeddedResource>
@@ -9502,17 +9529,6 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <COMReference Include="zkemkeeper">
-      <Guid>{FE9DED34-E159-408E-8490-B720A5E632C7}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

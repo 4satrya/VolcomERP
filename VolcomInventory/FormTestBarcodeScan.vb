@@ -123,16 +123,14 @@ Public Class FormTestBarcodeScan
             INSERT INTO `tb_sales_return_rec` (`number`, `created_date`, `do_number`, `note`, `id_report_status`) VALUES ('" + TENumber.EditValue.ToString + "', '" + createdDate.ToString("yyyy-MM-dd HH:mm:ss") + "', '" + TEDONumber.EditValue.ToString + "', '" + MENote.Text.ToString + "', '6'); SELECT LAST_INSERT_ID();
         "
 
-        Console.WriteLine(query)
-
-        Dim id_sales_return_rec As String = "1"
+        Dim id_sales_return_rec As String = execute_query(query, 0, True, "", "", "", "")
 
         For i = 0 To GVList.RowCount - 1
             query = "
                 INSERT INTO `tb_sales_return_rec_det` (`id_sales_return_rec`, `id_product`, `qty`) VALUES ('" + id_sales_return_rec + "', '" + GVList.GetRowCellValue(i, "id_product").ToString + "', '" + GVList.GetRowCellValue(i, "quantity").ToString + "');
             "
 
-            Console.WriteLine(query)
+            execute_non_query(query, True, "", "", "", "")
         Next
 
         Cursor = Cursors.Default

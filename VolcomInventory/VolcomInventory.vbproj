@@ -3777,6 +3777,18 @@
     <Compile Include="FormSalesReturnOrderSingleV2.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormSalesReturnRec.Designer.vb">
+      <DependentUpon>FormSalesReturnRec.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormSalesReturnRec.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSalesReturnRecDet.Designer.vb">
+      <DependentUpon>FormSalesReturnRecDet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormSalesReturnRecDet.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormSalesReturnSearch.Designer.vb">
       <DependentUpon>FormSalesReturnSearch.vb</DependentUpon>
     </Compile>
@@ -8080,6 +8092,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormSalesReturnOrderSingleV2.resx">
       <DependentUpon>FormSalesReturnOrderSingleV2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSalesReturnRec.resx">
+      <DependentUpon>FormSalesReturnRec.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSalesReturnRecDet.resx">
+      <DependentUpon>FormSalesReturnRecDet.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormSalesReturnSearch.resx">
       <DependentUpon>FormSalesReturnSearch.vb</DependentUpon>

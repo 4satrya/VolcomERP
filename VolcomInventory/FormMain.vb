@@ -1637,6 +1637,9 @@ Public Class FormMain
                 FormItemDelDetail.TxtDept.Text = FormItemDel.GVRequest.GetFocusedRowCellValue("departement").ToString
                 FormItemDelDetail.ShowDialog()
             End If
+        ElseIf formName = "FormSalesReturnRec" Then
+            FormSalesReturnRecDet.id = "-1"
+            FormSalesReturnRecDet.ShowDialog()
         Else
             RPSubMenu.Visible = False
         End If
@@ -2633,6 +2636,9 @@ Public Class FormMain
                 FormItemDelDetail.action = "upd"
                 FormItemDelDetail.id = FormItemDel.GVDelivery.GetFocusedRowCellValue("id_item_del").ToString
                 FormItemDelDetail.ShowDialog()
+            ElseIf formName = "FormSalesReturnRec" Then
+                FormSalesReturnRecDet.id = FormSalesReturnRec.GVList.GetFocusedRowCellValue("id_sales_return_rec").ToString
+                FormSalesReturnRecDet.ShowDialog()
             Else
                 RPSubMenu.Visible = False
             End If
@@ -7865,6 +7871,9 @@ Public Class FormMain
         ElseIf formName = "FormTestImage" Then
             FormTestImage.Close()
             FormTestImage.Dispose()
+        ElseIf formName = "FormSalesReturnRec" Then
+            FormSalesReturnRec.Close()
+            FormSalesReturnRec.Dispose()
         Else
             RPSubMenu.Visible = False
         End If
@@ -8614,6 +8623,8 @@ Public Class FormMain
             End If
         ElseIf formName = "FormCoba" Then
             FormCoba.load_list()
+        ElseIf formName = "FormSalesReturnRec" Then
+            FormSalesReturnRec.load_list()
         End If
     End Sub
     'Switch
@@ -12100,6 +12111,19 @@ Public Class FormMain
             FormTestImage.Show()
             FormTestImage.WindowState = FormWindowState.Maximized
             FormTestImage.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBSalesReturnRec_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBSalesReturnRec.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormSalesReturnRec.MdiParent = Me
+            FormSalesReturnRec.Show()
+            FormSalesReturnRec.WindowState = FormWindowState.Maximized
+            FormSalesReturnRec.Focus()
         Catch ex As Exception
             errorProcess()
         End Try

@@ -40,12 +40,12 @@ Partial Class FormTestBarcodeScan
         Me.GCCodeDetailName = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GCQuantity = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
-        Me.GroupControl1 = New DevExpress.XtraEditors.GroupControl()
-        Me.SBAttachment = New DevExpress.XtraEditors.SimpleButton()
-        Me.SBMark = New DevExpress.XtraEditors.SimpleButton()
-        Me.SBPrint = New DevExpress.XtraEditors.SimpleButton()
-        Me.SBCancel = New DevExpress.XtraEditors.SimpleButton()
         Me.SBSave = New DevExpress.XtraEditors.SimpleButton()
+        Me.SBCancel = New DevExpress.XtraEditors.SimpleButton()
+        Me.SBPrint = New DevExpress.XtraEditors.SimpleButton()
+        Me.SBMark = New DevExpress.XtraEditors.SimpleButton()
+        Me.SBAttachment = New DevExpress.XtraEditors.SimpleButton()
+        Me.GroupControl1 = New DevExpress.XtraEditors.GroupControl()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.MENote.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -244,6 +244,59 @@ Partial Class FormTestBarcodeScan
         Me.PanelControl3.Size = New System.Drawing.Size(970, 50)
         Me.PanelControl3.TabIndex = 2
         '
+        'SBSave
+        '
+        Me.SBSave.Dock = System.Windows.Forms.DockStyle.Right
+        Me.SBSave.Enabled = False
+        Me.SBSave.Image = CType(resources.GetObject("SBSave.Image"), System.Drawing.Image)
+        Me.SBSave.Location = New System.Drawing.Point(873, 2)
+        Me.SBSave.Name = "SBSave"
+        Me.SBSave.Size = New System.Drawing.Size(91, 42)
+        Me.SBSave.TabIndex = 1
+        Me.SBSave.Text = "Save"
+        '
+        'SBCancel
+        '
+        Me.SBCancel.Dock = System.Windows.Forms.DockStyle.Right
+        Me.SBCancel.Image = CType(resources.GetObject("SBCancel.Image"), System.Drawing.Image)
+        Me.SBCancel.Location = New System.Drawing.Point(783, 2)
+        Me.SBCancel.Name = "SBCancel"
+        Me.SBCancel.Size = New System.Drawing.Size(90, 42)
+        Me.SBCancel.TabIndex = 2
+        Me.SBCancel.Text = "Cancel"
+        '
+        'SBPrint
+        '
+        Me.SBPrint.Dock = System.Windows.Forms.DockStyle.Right
+        Me.SBPrint.Image = CType(resources.GetObject("SBPrint.Image"), System.Drawing.Image)
+        Me.SBPrint.Location = New System.Drawing.Point(693, 2)
+        Me.SBPrint.Name = "SBPrint"
+        Me.SBPrint.Size = New System.Drawing.Size(90, 42)
+        Me.SBPrint.TabIndex = 3
+        Me.SBPrint.Text = "Print"
+        '
+        'SBMark
+        '
+        Me.SBMark.Dock = System.Windows.Forms.DockStyle.Left
+        Me.SBMark.Enabled = False
+        Me.SBMark.Image = CType(resources.GetObject("SBMark.Image"), System.Drawing.Image)
+        Me.SBMark.Location = New System.Drawing.Point(20, 2)
+        Me.SBMark.Name = "SBMark"
+        Me.SBMark.Size = New System.Drawing.Size(81, 42)
+        Me.SBMark.TabIndex = 4
+        Me.SBMark.Text = "Mark"
+        '
+        'SBAttachment
+        '
+        Me.SBAttachment.Dock = System.Windows.Forms.DockStyle.Right
+        Me.SBAttachment.Enabled = False
+        Me.SBAttachment.Image = CType(resources.GetObject("SBAttachment.Image"), System.Drawing.Image)
+        Me.SBAttachment.Location = New System.Drawing.Point(592, 2)
+        Me.SBAttachment.Name = "SBAttachment"
+        Me.SBAttachment.Size = New System.Drawing.Size(101, 42)
+        Me.SBAttachment.TabIndex = 5
+        Me.SBAttachment.Text = "Attachment"
+        '
         'GroupControl1
         '
         Me.GroupControl1.CaptionLocation = DevExpress.Utils.Locations.Left
@@ -257,59 +310,6 @@ Partial Class FormTestBarcodeScan
         Me.GroupControl1.Name = "GroupControl1"
         Me.GroupControl1.Size = New System.Drawing.Size(966, 46)
         Me.GroupControl1.TabIndex = 37
-        '
-        'SBAttachment
-        '
-        Me.SBAttachment.Dock = System.Windows.Forms.DockStyle.Right
-        Me.SBAttachment.Enabled = False
-        Me.SBAttachment.Image = CType(resources.GetObject("SBAttachment.Image"), System.Drawing.Image)
-        Me.SBAttachment.Location = New System.Drawing.Point(592, 2)
-        Me.SBAttachment.Name = "SBAttachment"
-        Me.SBAttachment.Size = New System.Drawing.Size(101, 42)
-        Me.SBAttachment.TabIndex = 5
-        Me.SBAttachment.Text = "Attachment"
-        '
-        'SBMark
-        '
-        Me.SBMark.Dock = System.Windows.Forms.DockStyle.Left
-        Me.SBMark.Enabled = False
-        Me.SBMark.Image = CType(resources.GetObject("SBMark.Image"), System.Drawing.Image)
-        Me.SBMark.Location = New System.Drawing.Point(20, 2)
-        Me.SBMark.Name = "SBMark"
-        Me.SBMark.Size = New System.Drawing.Size(81, 42)
-        Me.SBMark.TabIndex = 4
-        Me.SBMark.Text = "Mark"
-        '
-        'SBPrint
-        '
-        Me.SBPrint.Dock = System.Windows.Forms.DockStyle.Right
-        Me.SBPrint.Image = CType(resources.GetObject("SBPrint.Image"), System.Drawing.Image)
-        Me.SBPrint.Location = New System.Drawing.Point(693, 2)
-        Me.SBPrint.Name = "SBPrint"
-        Me.SBPrint.Size = New System.Drawing.Size(90, 42)
-        Me.SBPrint.TabIndex = 3
-        Me.SBPrint.Text = "Print"
-        '
-        'SBCancel
-        '
-        Me.SBCancel.Dock = System.Windows.Forms.DockStyle.Right
-        Me.SBCancel.Image = CType(resources.GetObject("SBCancel.Image"), System.Drawing.Image)
-        Me.SBCancel.Location = New System.Drawing.Point(783, 2)
-        Me.SBCancel.Name = "SBCancel"
-        Me.SBCancel.Size = New System.Drawing.Size(90, 42)
-        Me.SBCancel.TabIndex = 2
-        Me.SBCancel.Text = "Cancel"
-        '
-        'SBSave
-        '
-        Me.SBSave.Dock = System.Windows.Forms.DockStyle.Right
-        Me.SBSave.Enabled = False
-        Me.SBSave.Image = CType(resources.GetObject("SBSave.Image"), System.Drawing.Image)
-        Me.SBSave.Location = New System.Drawing.Point(873, 2)
-        Me.SBSave.Name = "SBSave"
-        Me.SBSave.Size = New System.Drawing.Size(91, 42)
-        Me.SBSave.TabIndex = 1
-        Me.SBSave.Text = "Save"
         '
         'FormTestBarcodeScan
         '
@@ -353,12 +353,6 @@ Partial Class FormTestBarcodeScan
     Friend WithEvents GCCodeDetailName As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GCQuantity As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents PanelControl3 As DevExpress.XtraEditors.PanelControl
-    Friend WithEvents GroupControl1 As DevExpress.XtraEditors.GroupControl
-    Friend WithEvents SBAttachment As DevExpress.XtraEditors.SimpleButton
-    Friend WithEvents SBMark As DevExpress.XtraEditors.SimpleButton
-    Friend WithEvents SBPrint As DevExpress.XtraEditors.SimpleButton
-    Friend WithEvents SBCancel As DevExpress.XtraEditors.SimpleButton
-    Friend WithEvents SBSave As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents Label3 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
@@ -368,4 +362,10 @@ Partial Class FormTestBarcodeScan
     Friend WithEvents TENumber As DevExpress.XtraEditors.TextEdit
     Friend WithEvents TECreatedDate As DevExpress.XtraEditors.TextEdit
     Friend WithEvents MENote As DevExpress.XtraEditors.MemoEdit
+    Friend WithEvents GroupControl1 As DevExpress.XtraEditors.GroupControl
+    Friend WithEvents SBAttachment As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents SBMark As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents SBPrint As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents SBCancel As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents SBSave As DevExpress.XtraEditors.SimpleButton
 End Class

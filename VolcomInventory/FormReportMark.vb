@@ -460,6 +460,9 @@
         ElseIf report_mark_type = "159" Then
             'Payment
             query = String.Format("SELECT id_report_status,number as report_number FROM tb_payment WHERE id_payment = '{0}'", id_report)
+        ElseIf report_mark_type = "168" Then
+            'return rec
+            query = String.Format("SELECT id_report_status,number as report_number FROM tb_sales_return_rec WHERE id_sales_return_rec = '{0}'", id_report)
         End If
 
         data = execute_query(query, -1, True, "", "", "", "")
@@ -4890,7 +4893,7 @@ SET  dsg.`prod_order_cop_pd_curr`=copd.`id_currency`,dsg.`prod_order_cop_kurs_pd
             FormBankWithdrawal.load_payment()
             FormBankWithdrawalDet.form_load()
             FormBankWithdrawal.GVList.FocusedRowHandle = find_row(FormBankWithdrawal.GVList, "id_payment", id_report)
-         ElseIf report_mark_type = "160" Then
+        ElseIf report_mark_type = "160" Then
             'Asset management
             'auto completed
             If id_status_reportx = "3" Then
@@ -4903,6 +4906,20 @@ SET  dsg.`prod_order_cop_pd_curr`=copd.`id_currency`,dsg.`prod_order_cop_kurs_pd
 
             'refresh view
             FormPurcAsset.viewPending()
+        ElseIf report_mark_type = "168" Then
+            'return rec
+            'auto completed
+            If id_status_reportx = "3" Then
+                id_status_reportx = "6"
+            End If
+
+            'update
+            query = String.Format("UPDATE tb_sales_return_rec SET id_report_status='{0}' WHERE id_sales_return_rec ='{1}'", id_status_reportx, id_report)
+            execute_non_query(query, True, "", "", "", "")
+
+            'refresh view
+            FormSalesReturnRec.load_list()
+            FormSalesReturnRec.GVList.FocusedRowHandle = find_row(FormSalesReturnRec.GVList, "id_sales_return_rec", id_report)
         End If
 
         'adding lead time

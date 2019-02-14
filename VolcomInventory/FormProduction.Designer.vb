@@ -1159,7 +1159,7 @@ Partial Class FormProduction
         Me.GridColumn5.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
         Me.GridColumn5.AppearanceHeader.Options.UseTextOptions = True
         Me.GridColumn5.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.GridColumn5.Caption = "Jumlah PDO"
+        Me.GridColumn5.Caption = "Jumlah FGPO"
         Me.GridColumn5.FieldName = "jml_pdo"
         Me.GridColumn5.Name = "GridColumn5"
         Me.GridColumn5.Visible = True

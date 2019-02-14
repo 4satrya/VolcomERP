@@ -12387,14 +12387,17 @@ Public Class FormMain
     Private Sub NBSampleBudget_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBSampleBudget.LinkClicked
         Cursor = Cursors.WaitCursor
         Try
-            FormBudgetExpenseRevision.MdiParent = Me
-            FormBudgetExpenseRevision.is_admin = "1"
-            FormBudgetExpenseRevision.Show()
-            FormBudgetExpenseRevision.WindowState = FormWindowState.Maximized
-            FormBudgetExpenseRevision.Focus()
+            FormSampleBudget.MdiParent = Me
+            FormSampleBudget.Show()
+            FormSampleBudget.WindowState = FormWindowState.Maximized
+            FormSampleBudget.Focus()
         Catch ex As Exception
             errorProcess()
         End Try
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBOLStoreWork_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBOLStoreWork.LinkClicked
+
     End Sub
 End Class

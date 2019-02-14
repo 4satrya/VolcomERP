@@ -617,7 +617,6 @@
         Dim Report As New ReportMatPurchase()
 
         ' '... 
-        GridColumnColor.Visible = False
         GridColumnDiscount.Visible = False
         GVListPurchase.BestFitColumns()
         ' ' creating and saving the view's layout to a new memory stream 

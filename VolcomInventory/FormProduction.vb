@@ -600,7 +600,7 @@ Public Class FormProduction
 
     Private Sub GVDesign_RowStyle(sender As Object, e As DevExpress.XtraGrid.Views.Grid.RowStyleEventArgs) Handles GVDesign.RowStyle
         Try
-            If GVDesign.GetRowCellValue(e.RowHandle, "id_lookup_status_order").ToString = "2" Then
+            If GVDesign.GetRowCellValue(e.RowHandle, "id_lookup_status_order").ToString = "2" Or GVProd.GetRowCellValue(e.RowHandle, "jml_pdo") > 0 Then
                 e.Appearance.BackColor = Color.Salmon
                 e.Appearance.ForeColor = Color.Red
                 e.Appearance.FontStyleDelta = FontStyle.Bold

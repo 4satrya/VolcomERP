@@ -24,7 +24,7 @@ Partial Public Class ReportAttnSum
         Me.GCSchedule = New DevExpress.XtraGrid.GridControl()
         Me.GVSchedule = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.TopMargin = New DevExpress.XtraReports.UI.TopMarginBand()
-        Me.XrLabel2 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LType = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel5 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel8 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel10 = New DevExpress.XtraReports.UI.XRLabel()
@@ -70,23 +70,23 @@ Partial Public Class ReportAttnSum
         '
         'TopMargin
         '
-        Me.TopMargin.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel2, Me.XrLabel5, Me.XrLabel8, Me.XrLabel10, Me.LDept, Me.LDateRange, Me.LTitle})
+        Me.TopMargin.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.LType, Me.XrLabel5, Me.XrLabel8, Me.XrLabel10, Me.LDept, Me.LDateRange, Me.LTitle})
         Me.TopMargin.HeightF = 121.0415!
         Me.TopMargin.Name = "TopMargin"
         Me.TopMargin.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
         Me.TopMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
         '
-        'XrLabel2
+        'LType
         '
-        Me.XrLabel2.Borders = DevExpress.XtraPrinting.BorderSide.None
-        Me.XrLabel2.LocationFloat = New DevExpress.Utils.PointFloat(0!, 60.37501!)
-        Me.XrLabel2.Name = "XrLabel2"
-        Me.XrLabel2.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel2.SizeF = New System.Drawing.SizeF(82.2916!, 19.83335!)
-        Me.XrLabel2.StylePriority.UseBorders = False
-        Me.XrLabel2.StylePriority.UseTextAlignment = False
-        Me.XrLabel2.Text = "Departement"
-        Me.XrLabel2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        Me.LType.Borders = DevExpress.XtraPrinting.BorderSide.None
+        Me.LType.LocationFloat = New DevExpress.Utils.PointFloat(0!, 60.37501!)
+        Me.LType.Name = "LType"
+        Me.LType.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LType.SizeF = New System.Drawing.SizeF(82.2916!, 19.83335!)
+        Me.LType.StylePriority.UseBorders = False
+        Me.LType.StylePriority.UseTextAlignment = False
+        Me.LType.Text = "Departement"
+        Me.LType.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         '
         'XrLabel5
         '
@@ -199,7 +199,7 @@ Partial Public Class ReportAttnSum
     Friend WithEvents TopMargin As DevExpress.XtraReports.UI.TopMarginBand
     Friend WithEvents BottomMargin As DevExpress.XtraReports.UI.BottomMarginBand
     Friend WithEvents LTitle As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel2 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents LType As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel5 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel8 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel10 As DevExpress.XtraReports.UI.XRLabel

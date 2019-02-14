@@ -34,10 +34,14 @@ GROUP BY spb.`id_sample_purc_budget`"
     Sub load_remaining_budget()
         If id_sample_purc = "-1" Then
             Try
-                If LECurrency.EditValue.ToString = "1" Then 'rp
-                    TERemainingBudget.EditValue = SLEBudget.Properties.View.GetFocusedRowCellValue("remaining_rp")
-                ElseIf LECurrency.EditValue.ToString = "2" Then 'usd
-                    TERemainingBudget.EditValue = SLEBudget.Properties.View.GetFocusedRowCellValue("remaining_usd")
+                If SLEBudget.EditValue = 0 Then
+                    TERemainingBudget.EditValue = 0.00
+                Else
+                    If LECurrency.EditValue.ToString = "1" Then 'rp
+                        TERemainingBudget.EditValue = SLEBudget.Properties.View.GetFocusedRowCellValue("remaining_rp")
+                    ElseIf LECurrency.EditValue.ToString = "2" Then 'usd
+                        TERemainingBudget.EditValue = SLEBudget.Properties.View.GetFocusedRowCellValue("remaining_usd")
+                    End If
                 End If
             Catch ex As Exception
                 TERemainingBudget.EditValue = 0.00
@@ -78,7 +82,7 @@ GROUP BY spb.`id_sample_purc_budget`"
             BtnAttachment.Visible = False
             '
         Else
-            Dim query As String = String.Format("SELECT id_comp_contact_courier,id_sample_purc_budget,budget_before,budget_after,courier_comm,id_report_status,sample_purc_kurs,sample_purc_vat,id_season_orign,sample_purc_number,id_comp_contact_to,id_comp_contact_ship_to,id_po_type,id_payment,DATE_FORMAT(sample_purc_date,'%Y-%m-%d') as sample_purc_datex,sample_purc_lead_time,sample_purc_top,id_currency,sample_purc_note FROM tb_sample_purc WHERE id_sample_purc = '{0}'", id_sample_purc)
+            Dim query As String = String.Format("SELECT id_comp_contact_courier,id_sample_purc_budget,IF(id_sample_purc_budget=0,0.00,budget_before) AS budget_before,IF(id_sample_purc_budget=0,0.00,budget_after) AS budget_after,courier_comm,id_report_status,sample_purc_kurs,sample_purc_vat,id_season_orign,sample_purc_number,id_comp_contact_to,id_comp_contact_ship_to,id_po_type,id_payment,DATE_FORMAT(sample_purc_date,'%Y-%m-%d') as sample_purc_datex,sample_purc_lead_time,sample_purc_top,id_currency,sample_purc_note FROM tb_sample_purc WHERE id_sample_purc = '{0}'", id_sample_purc)
             Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
             '
             TEPONumber.Text = data.Rows(0)("sample_purc_number").ToString
@@ -132,6 +136,7 @@ GROUP BY spb.`id_sample_purc_budget`"
             calculate()
             '
             BtnAttachment.Visible = True
+            PanelControl2.Visible = False
             BSave.Visible = False
         End If
         allow_status()
@@ -444,7 +449,7 @@ GROUP BY spb.`id_sample_purc_budget`"
     End Sub
 
     Private Sub BAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BAdd.Click
-        If SLEBudget.EditValue = Nothing Then
+        If SLEBudget.EditValue Is Nothing Then
             warningCustom("Please select budget first")
         ElseIf id_comp_to = "-1" Then
             warningCustom("Please select vendor first")
@@ -650,7 +655,7 @@ GROUP BY spb.`id_sample_purc_budget`"
     End Sub
 
     Private Sub SLEBudget_EditValueChanged(sender As Object, e As EventArgs) Handles SLEBudget.EditValueChanged
-        If GVListPurchase.RowCount > 0 Then
+        If GVListPurchase.RowCount > 0 And id_sample_purc = "-1" Then
             Dim confirm As DialogResult
             confirm = DevExpress.XtraEditors.XtraMessageBox.Show("All list will be reset, continue ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
 

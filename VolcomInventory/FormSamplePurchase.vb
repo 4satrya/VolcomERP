@@ -82,7 +82,7 @@ INNER JOIN tb_m_comp_contact e ON a.id_comp_contact_ship_to = e.id_comp_contact
 INNER JOIN tb_m_comp f ON e.id_comp = f.id_comp 
 INNER JOIN tb_lookup_payment g ON a.id_payment = g.id_payment 
 INNER JOIN tb_lookup_report_status h ON h.id_report_status = a.id_report_status
-WHERE 1=1 " & query_where
+WHERE 1=1 " & query_where & " ORDER BY a.id_sample_purc DESC"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCSamplePurchase.DataSource = data
         GVSamplePurchase.BestFitColumns()

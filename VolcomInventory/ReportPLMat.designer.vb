@@ -759,7 +759,7 @@ Partial Public Class ReportPLMat
         '
         Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.Detail, Me.TopMargin, Me.BottomMargin, Me.PageFooter})
         Me.Margins = New System.Drawing.Printing.Margins(100, 100, 144, 19)
-        Me.PageHeight = 500
+        Me.PageHeight = 550
         Me.PaperKind = System.Drawing.Printing.PaperKind.Custom
         Me.Version = "15.1"
         CType(Me.GCDetail, System.ComponentModel.ISupportInitialize).EndInit()

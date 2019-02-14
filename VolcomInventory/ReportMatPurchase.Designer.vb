@@ -1134,7 +1134,7 @@ Partial Public Class ReportMatPurchase
         Me.XrLabel31.BorderColor = System.Drawing.Color.DimGray
         Me.XrLabel31.Borders = CType((DevExpress.XtraPrinting.BorderSide.Top Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
         Me.XrLabel31.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel31.LocationFloat = New DevExpress.Utils.PointFloat(257.2917!, 80.00031!)
+        Me.XrLabel31.LocationFloat = New DevExpress.Utils.PointFloat(328.8334!, 80.00031!)
         Me.XrLabel31.Name = "XrLabel31"
         Me.XrLabel31.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel31.SizeF = New System.Drawing.SizeF(66.66693!, 20.00005!)
@@ -1170,7 +1170,7 @@ Partial Public Class ReportMatPurchase
         Me.LRange.LocationFloat = New DevExpress.Utils.PointFloat(57.20813!, 80.00031!)
         Me.LRange.Name = "LRange"
         Me.LRange.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LRange.SizeF = New System.Drawing.SizeF(26.1254!, 19.99997!)
+        Me.LRange.SizeF = New System.Drawing.SizeF(80.29205!, 19.99997!)
         Me.LRange.StylePriority.UseBorderColor = False
         Me.LRange.StylePriority.UseBorders = False
         Me.LRange.StylePriority.UseFont = False
@@ -1182,10 +1182,10 @@ Partial Public Class ReportMatPurchase
         Me.LSeason.BorderColor = System.Drawing.Color.DimGray
         Me.LSeason.Borders = CType((DevExpress.XtraPrinting.BorderSide.Top Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
         Me.LSeason.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LSeason.LocationFloat = New DevExpress.Utils.PointFloat(140.5419!, 80.00024!)
+        Me.LSeason.LocationFloat = New DevExpress.Utils.PointFloat(194.7086!, 80.00011!)
         Me.LSeason.Name = "LSeason"
         Me.LSeason.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LSeason.SizeF = New System.Drawing.SizeF(116.7498!, 20.00005!)
+        Me.LSeason.SizeF = New System.Drawing.SizeF(134.1248!, 20.00005!)
         Me.LSeason.StylePriority.UseBorderColor = False
         Me.LSeason.StylePriority.UseBorders = False
         Me.LSeason.StylePriority.UseFont = False
@@ -1213,7 +1213,7 @@ Partial Public Class ReportMatPurchase
         Me.XrLabel16.BorderColor = System.Drawing.Color.DimGray
         Me.XrLabel16.Borders = CType((DevExpress.XtraPrinting.BorderSide.Top Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
         Me.XrLabel16.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel16.LocationFloat = New DevExpress.Utils.PointFloat(83.33353!, 80.00031!)
+        Me.XrLabel16.LocationFloat = New DevExpress.Utils.PointFloat(137.5002!, 80.00011!)
         Me.XrLabel16.Name = "XrLabel16"
         Me.XrLabel16.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel16.SizeF = New System.Drawing.SizeF(57.20837!, 20.00002!)
@@ -1230,10 +1230,10 @@ Partial Public Class ReportMatPurchase
         Me.LDelivery.Borders = CType(((DevExpress.XtraPrinting.BorderSide.Top Or DevExpress.XtraPrinting.BorderSide.Right) _
             Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
         Me.LDelivery.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LDelivery.LocationFloat = New DevExpress.Utils.PointFloat(323.9586!, 80.00024!)
+        Me.LDelivery.LocationFloat = New DevExpress.Utils.PointFloat(395.5003!, 80.00024!)
         Me.LDelivery.Name = "LDelivery"
         Me.LDelivery.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LDelivery.SizeF = New System.Drawing.SizeF(168.1252!, 19.99998!)
+        Me.LDelivery.SizeF = New System.Drawing.SizeF(96.5835!, 19.99998!)
         Me.LDelivery.StylePriority.UseBorderColor = False
         Me.LDelivery.StylePriority.UseBorders = False
         Me.LDelivery.StylePriority.UseFont = False

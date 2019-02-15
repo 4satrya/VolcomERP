@@ -19,7 +19,9 @@ Partial Class FormMatPurchase
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.XtraTabControl1 = New DevExpress.XtraTab.XtraTabControl()
+        Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMatPurchase))
+        Me.XTCPurcMat = New DevExpress.XtraTab.XtraTabControl()
         Me.XTPPurchaseMat = New DevExpress.XtraTab.XtraTabPage()
         Me.GCMatPurchase = New DevExpress.XtraGrid.GridControl()
         Me.GVMatPurchase = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -39,6 +41,7 @@ Partial Class FormMatPurchase
         Me.ColIDStatus = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ColIdDelivery = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ColIdSeason = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PCFilterDate = New DevExpress.XtraEditors.PanelControl()
         Me.PCSelAll = New DevExpress.XtraEditors.PanelControl()
@@ -90,8 +93,27 @@ Partial Class FormMatPurchase
         Me.GridColumnCategory = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
         Me.BCreate = New DevExpress.XtraEditors.SimpleButton()
-        CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.XtraTabControl1.SuspendLayout()
+        Me.XTPOrderConfirmation = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCKO = New DevExpress.XtraGrid.GridControl()
+        Me.GVKO = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn49 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn50 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn59 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn60 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn61 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemProgressBar2 = New DevExpress.XtraEditors.Repository.RepositoryItemProgressBar()
+        Me.PanelControl5 = New DevExpress.XtraEditors.PanelControl()
+        Me.BEditKO = New DevExpress.XtraEditors.SimpleButton()
+        Me.SLEVendorKO = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn46 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn47 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn48 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.BViewKO = New DevExpress.XtraEditors.SimpleButton()
+        Me.LabelControl10 = New DevExpress.XtraEditors.LabelControl()
+        Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
+        CType(Me.XTCPurcMat, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTCPurcMat.SuspendLayout()
         Me.XTPPurchaseMat.SuspendLayout()
         CType(Me.GCMatPurchase, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVMatPurchase, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -122,18 +144,27 @@ Partial Class FormMatPurchase
         CType(Me.GVProduct, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
+        Me.XTPOrderConfirmation.SuspendLayout()
+        CType(Me.GCKO, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVKO, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemProgressBar2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl5, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl5.SuspendLayout()
+        CType(Me.SLEVendorKO.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'XtraTabControl1
+        'XTCPurcMat
         '
-        Me.XtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.XtraTabControl1.HeaderLocation = DevExpress.XtraTab.TabHeaderLocation.Bottom
-        Me.XtraTabControl1.Location = New System.Drawing.Point(0, 0)
-        Me.XtraTabControl1.Name = "XtraTabControl1"
-        Me.XtraTabControl1.SelectedTabPage = Me.XTPPurchaseMat
-        Me.XtraTabControl1.Size = New System.Drawing.Size(796, 375)
-        Me.XtraTabControl1.TabIndex = 7
-        Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPPurchaseMat, Me.XTPProdDemand})
+        Me.XTCPurcMat.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.XTCPurcMat.HeaderLocation = DevExpress.XtraTab.TabHeaderLocation.Bottom
+        Me.XTCPurcMat.Location = New System.Drawing.Point(0, 0)
+        Me.XTCPurcMat.Name = "XTCPurcMat"
+        Me.XTCPurcMat.SelectedTabPage = Me.XTPPurchaseMat
+        Me.XTCPurcMat.Size = New System.Drawing.Size(796, 375)
+        Me.XTCPurcMat.TabIndex = 7
+        Me.XTCPurcMat.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPPurchaseMat, Me.XTPProdDemand, Me.XTPOrderConfirmation})
         '
         'XTPPurchaseMat
         '
@@ -157,7 +188,7 @@ Partial Class FormMatPurchase
         '
         'GVMatPurchase
         '
-        Me.GVMatPurchase.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ColIdMatPurchase, Me.GridColumn2, Me.ColSeason, Me.ColDelivery, Me.ColPONumber, Me.ColShipFrom, Me.ColShipTo, Me.ColSamplePurcDate, Me.ColRecDate, Me.ColDueDate, Me.ColPayment, Me.ColStatus, Me.ColIDStatus, Me.ColIdDelivery, Me.ColIdSeason, Me.GridColumn1})
+        Me.GVMatPurchase.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ColIdMatPurchase, Me.GridColumn2, Me.ColSeason, Me.ColDelivery, Me.ColPONumber, Me.ColShipFrom, Me.ColShipTo, Me.ColSamplePurcDate, Me.ColRecDate, Me.ColDueDate, Me.ColPayment, Me.ColStatus, Me.ColIDStatus, Me.ColIdDelivery, Me.ColIdSeason, Me.GridColumn5, Me.GridColumn1})
         Me.GVMatPurchase.GridControl = Me.GCMatPurchase
         Me.GVMatPurchase.GroupCount = 2
         Me.GVMatPurchase.Name = "GVMatPurchase"
@@ -319,6 +350,14 @@ Partial Class FormMatPurchase
         Me.ColIdSeason.FieldName = "id_season"
         Me.ColIdSeason.Name = "ColIdSeason"
         Me.ColIdSeason.OptionsColumn.AllowEdit = False
+        '
+        'GridColumn5
+        '
+        Me.GridColumn5.Caption = "Vat"
+        Me.GridColumn5.DisplayFormat.FormatString = "N2"
+        Me.GridColumn5.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn5.FieldName = "vat"
+        Me.GridColumn5.Name = "GridColumn5"
         '
         'GridColumn1
         '
@@ -792,12 +831,187 @@ Partial Class FormMatPurchase
         Me.BCreate.TabIndex = 2
         Me.BCreate.Text = "Generate PO"
         '
+        'XTPOrderConfirmation
+        '
+        Me.XTPOrderConfirmation.Controls.Add(Me.GCKO)
+        Me.XTPOrderConfirmation.Controls.Add(Me.PanelControl5)
+        Me.XTPOrderConfirmation.Name = "XTPOrderConfirmation"
+        Me.XTPOrderConfirmation.Size = New System.Drawing.Size(790, 347)
+        Me.XTPOrderConfirmation.Text = "Order Confirmation"
+        '
+        'GCKO
+        '
+        Me.GCKO.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCKO.Location = New System.Drawing.Point(0, 38)
+        Me.GCKO.MainView = Me.GVKO
+        Me.GCKO.Name = "GCKO"
+        Me.GCKO.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemProgressBar2})
+        Me.GCKO.Size = New System.Drawing.Size(790, 309)
+        Me.GCKO.TabIndex = 11
+        Me.GCKO.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVKO})
+        '
+        'GVKO
+        '
+        Me.GVKO.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn49, Me.GridColumn50, Me.GridColumn59, Me.GridColumn60, Me.GridColumn61})
+        Me.GVKO.GridControl = Me.GCKO
+        Me.GVKO.Name = "GVKO"
+        Me.GVKO.OptionsBehavior.Editable = False
+        Me.GVKO.OptionsFind.AlwaysVisible = True
+        Me.GVKO.OptionsView.ColumnAutoWidth = False
+        Me.GVKO.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn49
+        '
+        Me.GridColumn49.Caption = "ID KO"
+        Me.GridColumn49.FieldName = "id_prod_order_ko"
+        Me.GridColumn49.Name = "GridColumn49"
+        '
+        'GridColumn50
+        '
+        Me.GridColumn50.Caption = "Number"
+        Me.GridColumn50.FieldName = "number"
+        Me.GridColumn50.Name = "GridColumn50"
+        Me.GridColumn50.Visible = True
+        Me.GridColumn50.VisibleIndex = 0
+        '
+        'GridColumn59
+        '
+        Me.GridColumn59.Caption = "Revision"
+        Me.GridColumn59.FieldName = "revision"
+        Me.GridColumn59.Name = "GridColumn59"
+        Me.GridColumn59.Visible = True
+        Me.GridColumn59.VisibleIndex = 1
+        '
+        'GridColumn60
+        '
+        Me.GridColumn60.Caption = "Vendor"
+        Me.GridColumn60.FieldName = "comp_name"
+        Me.GridColumn60.Name = "GridColumn60"
+        Me.GridColumn60.Visible = True
+        Me.GridColumn60.VisibleIndex = 2
+        '
+        'GridColumn61
+        '
+        Me.GridColumn61.Caption = "Created Date"
+        Me.GridColumn61.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.GridColumn61.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn61.FieldName = "date_created"
+        Me.GridColumn61.Name = "GridColumn61"
+        Me.GridColumn61.Visible = True
+        Me.GridColumn61.VisibleIndex = 3
+        '
+        'RepositoryItemProgressBar2
+        '
+        Me.RepositoryItemProgressBar2.Appearance.BackColor = System.Drawing.Color.Lime
+        Me.RepositoryItemProgressBar2.EndColor = System.Drawing.Color.Green
+        Me.RepositoryItemProgressBar2.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat
+        Me.RepositoryItemProgressBar2.LookAndFeel.UseDefaultLookAndFeel = False
+        Me.RepositoryItemProgressBar2.Name = "RepositoryItemProgressBar2"
+        Me.RepositoryItemProgressBar2.ProgressViewStyle = DevExpress.XtraEditors.Controls.ProgressViewStyle.Solid
+        Me.RepositoryItemProgressBar2.ShowTitle = True
+        Me.RepositoryItemProgressBar2.StartColor = System.Drawing.Color.Green
+        Me.RepositoryItemProgressBar2.Step = 1
+        '
+        'PanelControl5
+        '
+        Me.PanelControl5.Controls.Add(Me.BEditKO)
+        Me.PanelControl5.Controls.Add(Me.SLEVendorKO)
+        Me.PanelControl5.Controls.Add(Me.BViewKO)
+        Me.PanelControl5.Controls.Add(Me.LabelControl10)
+        Me.PanelControl5.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelControl5.Location = New System.Drawing.Point(0, 0)
+        Me.PanelControl5.Name = "PanelControl5"
+        Me.PanelControl5.Size = New System.Drawing.Size(790, 38)
+        Me.PanelControl5.TabIndex = 5
+        '
+        'BEditKO
+        '
+        Me.BEditKO.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BEditKO.ImageIndex = 2
+        Me.BEditKO.ImageList = Me.LargeImageCollection
+        Me.BEditKO.Location = New System.Drawing.Point(698, 2)
+        Me.BEditKO.Name = "BEditKO"
+        Me.BEditKO.Size = New System.Drawing.Size(90, 34)
+        Me.BEditKO.TabIndex = 8906
+        Me.BEditKO.Text = "Edit"
+        Me.BEditKO.Visible = False
+        '
+        'SLEVendorKO
+        '
+        Me.SLEVendorKO.Location = New System.Drawing.Point(51, 8)
+        Me.SLEVendorKO.Name = "SLEVendorKO"
+        Me.SLEVendorKO.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SLEVendorKO.Properties.Appearance.Options.UseFont = True
+        Me.SLEVendorKO.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEVendorKO.Properties.View = Me.GridView1
+        Me.SLEVendorKO.Size = New System.Drawing.Size(148, 20)
+        Me.SLEVendorKO.TabIndex = 8905
+        '
+        'GridView1
+        '
+        Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn46, Me.GridColumn47, Me.GridColumn48})
+        Me.GridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView1.Name = "GridView1"
+        Me.GridView1.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView1.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn46
+        '
+        Me.GridColumn46.Caption = "Id Comp"
+        Me.GridColumn46.FieldName = "id_comp"
+        Me.GridColumn46.Name = "GridColumn46"
+        '
+        'GridColumn47
+        '
+        Me.GridColumn47.Caption = "Comp Number"
+        Me.GridColumn47.FieldName = "comp_number"
+        Me.GridColumn47.Name = "GridColumn47"
+        Me.GridColumn47.Visible = True
+        Me.GridColumn47.VisibleIndex = 0
+        Me.GridColumn47.Width = 188
+        '
+        'GridColumn48
+        '
+        Me.GridColumn48.Caption = "Comp Name"
+        Me.GridColumn48.FieldName = "comp_name"
+        Me.GridColumn48.Name = "GridColumn48"
+        Me.GridColumn48.Visible = True
+        Me.GridColumn48.VisibleIndex = 1
+        Me.GridColumn48.Width = 504
+        '
+        'BViewKO
+        '
+        Me.BViewKO.Location = New System.Drawing.Point(205, 6)
+        Me.BViewKO.Name = "BViewKO"
+        Me.BViewKO.Size = New System.Drawing.Size(59, 23)
+        Me.BViewKO.TabIndex = 8903
+        Me.BViewKO.Text = "Search"
+        '
+        'LabelControl10
+        '
+        Me.LabelControl10.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl10.Location = New System.Drawing.Point(11, 11)
+        Me.LabelControl10.Name = "LabelControl10"
+        Me.LabelControl10.Size = New System.Drawing.Size(34, 13)
+        Me.LabelControl10.TabIndex = 8901
+        Me.LabelControl10.Text = "Vendor"
+        '
+        'LargeImageCollection
+        '
+        Me.LargeImageCollection.ImageSize = New System.Drawing.Size(24, 24)
+        Me.LargeImageCollection.ImageStream = CType(resources.GetObject("LargeImageCollection.ImageStream"), DevExpress.Utils.ImageCollectionStreamer)
+        Me.LargeImageCollection.Images.SetKeyName(0, "20_24x24.png")
+        Me.LargeImageCollection.Images.SetKeyName(1, "8_24x24.png")
+        Me.LargeImageCollection.Images.SetKeyName(2, "23_24x24.png")
+        Me.LargeImageCollection.Images.SetKeyName(3, "safari (4).png")
+        Me.LargeImageCollection.Images.SetKeyName(4, "31-Document_32x32.png")
+        '
         'FormMatPurchase
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(796, 375)
-        Me.Controls.Add(Me.XtraTabControl1)
+        Me.Controls.Add(Me.XTCPurcMat)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -805,8 +1019,8 @@ Partial Class FormMatPurchase
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Purchase Raw Material"
-        CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.XtraTabControl1.ResumeLayout(False)
+        CType(Me.XTCPurcMat, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTCPurcMat.ResumeLayout(False)
         Me.XTPPurchaseMat.ResumeLayout(False)
         CType(Me.GCMatPurchase, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVMatPurchase, System.ComponentModel.ISupportInitialize).EndInit()
@@ -839,10 +1053,20 @@ Partial Class FormMatPurchase
         CType(Me.GVProduct, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
+        Me.XTPOrderConfirmation.ResumeLayout(False)
+        CType(Me.GCKO, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVKO, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemProgressBar2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl5, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl5.ResumeLayout(False)
+        Me.PanelControl5.PerformLayout()
+        CType(Me.SLEVendorKO.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents XtraTabControl1 As DevExpress.XtraTab.XtraTabControl
+    Friend WithEvents XTCPurcMat As DevExpress.XtraTab.XtraTabControl
     Friend WithEvents XTPPurchaseMat As DevExpress.XtraTab.XtraTabPage
     Friend WithEvents GCMatPurchase As DevExpress.XtraGrid.GridControl
     Friend WithEvents GVMatPurchase As DevExpress.XtraGrid.Views.Grid.GridView
@@ -913,4 +1137,24 @@ Partial Class FormMatPurchase
     Friend WithEvents DEStart As DevExpress.XtraEditors.DateEdit
     Friend WithEvents GridColumn2 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RICECheck As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+    Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents XTPOrderConfirmation As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents PanelControl5 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents BEditKO As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents SLEVendorKO As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView1 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn46 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn47 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn48 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BViewKO As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents LabelControl10 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents GCKO As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVKO As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn49 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn50 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn59 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn60 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn61 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RepositoryItemProgressBar2 As DevExpress.XtraEditors.Repository.RepositoryItemProgressBar
+    Public WithEvents LargeImageCollection As DevExpress.Utils.ImageCollection
 End Class

@@ -47,19 +47,19 @@ Partial Class FormCashAdvance
         Me.XTPList = New DevExpress.XtraTab.XtraTabPage()
         Me.GCListOpen = New DevExpress.XtraGrid.GridControl()
         Me.GVListOpen = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn15 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn18 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn19 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn21 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GCId = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GCNumber = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GCCreatedDate = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GCCreatedBy = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GCNote = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GCEmployee = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GCDepartement = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GCCashInAdvance = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GCProposalStatus = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GCReportBackDate = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GCReportBackDueDate = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GCReportBackStatus = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GCIdReportStatus = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.BAccountability = New DevExpress.XtraEditors.SimpleButton()
         Me.BMDD = New DevExpress.XtraBars.BarManager(Me.components)
@@ -316,140 +316,148 @@ Partial Class FormCashAdvance
         '
         'GVListOpen
         '
-        Me.GVListOpen.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn9, Me.GridColumn10, Me.GridColumn11, Me.GridColumn6, Me.GridColumn15, Me.GridColumn18, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn19, Me.GridColumn12, Me.GridColumn7, Me.GridColumn21})
+        Me.GVListOpen.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GCId, Me.GCNumber, Me.GCCreatedDate, Me.GCCreatedBy, Me.GCNote, Me.GCEmployee, Me.GCDepartement, Me.GCCashInAdvance, Me.GCProposalStatus, Me.GCReportBackDate, Me.GCReportBackDueDate, Me.GCReportBackStatus, Me.GCIdReportStatus})
         Me.GVListOpen.GridControl = Me.GCListOpen
         Me.GVListOpen.Name = "GVListOpen"
         Me.GVListOpen.OptionsBehavior.AutoExpandAllGroups = True
         Me.GVListOpen.OptionsBehavior.Editable = False
-        Me.GVListOpen.OptionsBehavior.ReadOnly = True
-        Me.GVListOpen.OptionsSelection.EnableAppearanceFocusedRow = False
-        Me.GVListOpen.OptionsView.ColumnAutoWidth = False
         Me.GVListOpen.OptionsView.ShowGroupPanel = False
         '
-        'GridColumn9
+        'GCId
         '
-        Me.GridColumn9.Caption = "ID"
-        Me.GridColumn9.FieldName = "id_cash_advance"
-        Me.GridColumn9.Name = "GridColumn9"
-        Me.GridColumn9.OptionsColumn.AllowEdit = False
+        Me.GCId.Caption = "ID"
+        Me.GCId.FieldName = "id_cash_advance"
+        Me.GCId.Name = "GCId"
         '
-        'GridColumn10
+        'GCNumber
         '
-        Me.GridColumn10.Caption = "Number"
-        Me.GridColumn10.FieldName = "number"
-        Me.GridColumn10.Name = "GridColumn10"
-        Me.GridColumn10.OptionsColumn.AllowEdit = False
-        Me.GridColumn10.Visible = True
-        Me.GridColumn10.VisibleIndex = 0
-        Me.GridColumn10.Width = 165
+        Me.GCNumber.Caption = "Number"
+        Me.GCNumber.FieldName = "number"
+        Me.GCNumber.MinWidth = 70
+        Me.GCNumber.Name = "GCNumber"
+        Me.GCNumber.Visible = True
+        Me.GCNumber.VisibleIndex = 0
+        Me.GCNumber.Width = 70
         '
-        'GridColumn11
+        'GCCreatedDate
         '
-        Me.GridColumn11.Caption = "Created Date"
-        Me.GridColumn11.DisplayFormat.FormatString = "dd MMMM yyyy"
-        Me.GridColumn11.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.GridColumn11.FieldName = "date_created"
-        Me.GridColumn11.Name = "GridColumn11"
-        Me.GridColumn11.OptionsColumn.AllowEdit = False
-        Me.GridColumn11.Visible = True
-        Me.GridColumn11.VisibleIndex = 1
-        Me.GridColumn11.Width = 92
+        Me.GCCreatedDate.Caption = "Created Date"
+        Me.GCCreatedDate.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.GCCreatedDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GCCreatedDate.FieldName = "date_created"
+        Me.GCCreatedDate.MinWidth = 110
+        Me.GCCreatedDate.Name = "GCCreatedDate"
+        Me.GCCreatedDate.Visible = True
+        Me.GCCreatedDate.VisibleIndex = 1
+        Me.GCCreatedDate.Width = 110
         '
-        'GridColumn6
+        'GCCreatedBy
         '
-        Me.GridColumn6.Caption = "Created By"
-        Me.GridColumn6.FieldName = "emp_created"
-        Me.GridColumn6.Name = "GridColumn6"
-        Me.GridColumn6.Visible = True
-        Me.GridColumn6.VisibleIndex = 3
+        Me.GCCreatedBy.Caption = "Created By"
+        Me.GCCreatedBy.FieldName = "emp_created"
+        Me.GCCreatedBy.MinWidth = 150
+        Me.GCCreatedBy.Name = "GCCreatedBy"
+        Me.GCCreatedBy.Visible = True
+        Me.GCCreatedBy.VisibleIndex = 3
+        Me.GCCreatedBy.Width = 150
         '
-        'GridColumn15
+        'GCNote
         '
-        Me.GridColumn15.Caption = "Note"
-        Me.GridColumn15.FieldName = "note"
-        Me.GridColumn15.Name = "GridColumn15"
-        Me.GridColumn15.OptionsColumn.AllowEdit = False
-        Me.GridColumn15.Visible = True
-        Me.GridColumn15.VisibleIndex = 6
+        Me.GCNote.Caption = "Note"
+        Me.GCNote.FieldName = "note"
+        Me.GCNote.MinWidth = 40
+        Me.GCNote.Name = "GCNote"
+        Me.GCNote.Visible = True
+        Me.GCNote.VisibleIndex = 6
+        Me.GCNote.Width = 40
         '
-        'GridColumn18
+        'GCEmployee
         '
-        Me.GridColumn18.Caption = "Employee"
-        Me.GridColumn18.DisplayFormat.FormatString = "N2"
-        Me.GridColumn18.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn18.FieldName = "employee_name"
-        Me.GridColumn18.Name = "GridColumn18"
-        Me.GridColumn18.Visible = True
-        Me.GridColumn18.VisibleIndex = 4
+        Me.GCEmployee.Caption = "Employee"
+        Me.GCEmployee.DisplayFormat.FormatString = "N2"
+        Me.GCEmployee.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GCEmployee.FieldName = "employee_name"
+        Me.GCEmployee.MinWidth = 150
+        Me.GCEmployee.Name = "GCEmployee"
+        Me.GCEmployee.Visible = True
+        Me.GCEmployee.VisibleIndex = 4
+        Me.GCEmployee.Width = 150
         '
-        'GridColumn3
+        'GCDepartement
         '
-        Me.GridColumn3.Caption = "Departement"
-        Me.GridColumn3.FieldName = "departement"
-        Me.GridColumn3.Name = "GridColumn3"
-        Me.GridColumn3.Visible = True
-        Me.GridColumn3.VisibleIndex = 2
+        Me.GCDepartement.Caption = "Departement"
+        Me.GCDepartement.FieldName = "departement"
+        Me.GCDepartement.MinWidth = 150
+        Me.GCDepartement.Name = "GCDepartement"
+        Me.GCDepartement.Visible = True
+        Me.GCDepartement.VisibleIndex = 2
+        Me.GCDepartement.Width = 150
         '
-        'GridColumn4
+        'GCCashInAdvance
         '
-        Me.GridColumn4.AppearanceCell.Options.UseTextOptions = True
-        Me.GridColumn4.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumn4.AppearanceHeader.Options.UseTextOptions = True
-        Me.GridColumn4.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumn4.Caption = "Cash in Advance"
-        Me.GridColumn4.DisplayFormat.FormatString = "N2"
-        Me.GridColumn4.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn4.FieldName = "val_ca"
-        Me.GridColumn4.Name = "GridColumn4"
-        Me.GridColumn4.Visible = True
-        Me.GridColumn4.VisibleIndex = 5
-        Me.GridColumn4.Width = 90
+        Me.GCCashInAdvance.AppearanceCell.Options.UseTextOptions = True
+        Me.GCCashInAdvance.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GCCashInAdvance.AppearanceHeader.Options.UseTextOptions = True
+        Me.GCCashInAdvance.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GCCashInAdvance.Caption = "Cash in Advance"
+        Me.GCCashInAdvance.DisplayFormat.FormatString = "N2"
+        Me.GCCashInAdvance.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GCCashInAdvance.FieldName = "val_ca"
+        Me.GCCashInAdvance.MinWidth = 120
+        Me.GCCashInAdvance.Name = "GCCashInAdvance"
+        Me.GCCashInAdvance.Visible = True
+        Me.GCCashInAdvance.VisibleIndex = 5
+        Me.GCCashInAdvance.Width = 120
         '
-        'GridColumn5
+        'GCProposalStatus
         '
-        Me.GridColumn5.Caption = "Proposal Status"
-        Me.GridColumn5.FieldName = "report_status"
-        Me.GridColumn5.Name = "GridColumn5"
-        Me.GridColumn5.Visible = True
-        Me.GridColumn5.VisibleIndex = 7
-        Me.GridColumn5.Width = 104
+        Me.GCProposalStatus.Caption = "Proposal Status"
+        Me.GCProposalStatus.FieldName = "report_status"
+        Me.GCProposalStatus.MinWidth = 90
+        Me.GCProposalStatus.Name = "GCProposalStatus"
+        Me.GCProposalStatus.Visible = True
+        Me.GCProposalStatus.VisibleIndex = 7
+        Me.GCProposalStatus.Width = 90
         '
-        'GridColumn19
+        'GCReportBackDate
         '
-        Me.GridColumn19.Caption = "Report Back Date"
-        Me.GridColumn19.DisplayFormat.FormatString = "dd MMM yyyy"
-        Me.GridColumn19.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.GridColumn19.FieldName = "report_back_date"
-        Me.GridColumn19.Name = "GridColumn19"
-        Me.GridColumn19.Visible = True
-        Me.GridColumn19.VisibleIndex = 8
-        Me.GridColumn19.Width = 95
+        Me.GCReportBackDate.Caption = "Report Back Date"
+        Me.GCReportBackDate.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.GCReportBackDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GCReportBackDate.FieldName = "report_back_date"
+        Me.GCReportBackDate.MinWidth = 110
+        Me.GCReportBackDate.Name = "GCReportBackDate"
+        Me.GCReportBackDate.Visible = True
+        Me.GCReportBackDate.VisibleIndex = 8
+        Me.GCReportBackDate.Width = 110
         '
-        'GridColumn12
+        'GCReportBackDueDate
         '
-        Me.GridColumn12.Caption = "Report Back Due Date"
-        Me.GridColumn12.DisplayFormat.FormatString = "dd MMM yyyy"
-        Me.GridColumn12.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.GridColumn12.FieldName = "report_back_due_date"
-        Me.GridColumn12.Name = "GridColumn12"
-        Me.GridColumn12.Visible = True
-        Me.GridColumn12.VisibleIndex = 9
-        Me.GridColumn12.Width = 133
+        Me.GCReportBackDueDate.Caption = "Report Back Due Date"
+        Me.GCReportBackDueDate.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.GCReportBackDueDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GCReportBackDueDate.FieldName = "report_back_due_date"
+        Me.GCReportBackDueDate.MinWidth = 110
+        Me.GCReportBackDueDate.Name = "GCReportBackDueDate"
+        Me.GCReportBackDueDate.Visible = True
+        Me.GCReportBackDueDate.VisibleIndex = 9
+        Me.GCReportBackDueDate.Width = 110
         '
-        'GridColumn7
+        'GCReportBackStatus
         '
-        Me.GridColumn7.Caption = "Report Back Status"
-        Me.GridColumn7.FieldName = "rb_status"
-        Me.GridColumn7.Name = "GridColumn7"
-        Me.GridColumn7.Visible = True
-        Me.GridColumn7.VisibleIndex = 10
-        Me.GridColumn7.Width = 103
+        Me.GCReportBackStatus.Caption = "Report Back Status"
+        Me.GCReportBackStatus.FieldName = "rb_status"
+        Me.GCReportBackStatus.MinWidth = 90
+        Me.GCReportBackStatus.Name = "GCReportBackStatus"
+        Me.GCReportBackStatus.Visible = True
+        Me.GCReportBackStatus.VisibleIndex = 10
+        Me.GCReportBackStatus.Width = 90
         '
-        'GridColumn21
+        'GCIdReportStatus
         '
-        Me.GridColumn21.Caption = "Id Report Status"
-        Me.GridColumn21.FieldName = "id_report_status"
-        Me.GridColumn21.Name = "GridColumn21"
+        Me.GCIdReportStatus.Caption = "Id Report Status"
+        Me.GCIdReportStatus.FieldName = "id_report_status"
+        Me.GCIdReportStatus.Name = "GCIdReportStatus"
         '
         'RepositoryItemCheckEdit1
         '
@@ -542,12 +550,12 @@ Partial Class FormCashAdvance
         '
         Me.ViewMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SMMainVendor})
         Me.ViewMenu.Name = "ContextMenuStripYM"
-        Me.ViewMenu.Size = New System.Drawing.Size(176, 26)
+        Me.ViewMenu.Size = New System.Drawing.Size(175, 26)
         '
         'SMMainVendor
         '
         Me.SMMainVendor.Name = "SMMainVendor"
-        Me.SMMainVendor.Size = New System.Drawing.Size(175, 22)
+        Me.SMMainVendor.Size = New System.Drawing.Size(174, 22)
         Me.SMMainVendor.Text = "Set as Main Vendor"
         '
         'FormCashAdvance
@@ -610,23 +618,23 @@ Partial Class FormCashAdvance
     Friend WithEvents GCListOpen As DevExpress.XtraGrid.GridControl
     Friend WithEvents GVListOpen As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents RepositoryItemCheckEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
-    Friend WithEvents GridColumn9 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn10 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn11 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn15 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn18 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GCId As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GCNumber As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GCCreatedDate As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GCNote As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GCEmployee As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents BAccountability As DevExpress.XtraEditors.SimpleButton
-    Friend WithEvents GridColumn3 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GCDepartement As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GCCashInAdvance As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GCProposalStatus As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents SLEType As DevExpress.XtraEditors.SearchLookUpEdit
     Friend WithEvents GridView2 As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumn13 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn14 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn19 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn12 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn7 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GCCreatedBy As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GCReportBackDate As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GCReportBackDueDate As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GCReportBackStatus As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents PUDD As DevExpress.XtraBars.PopupMenu
     Friend WithEvents BarLargeButtonItem1 As DevExpress.XtraBars.BarLargeButtonItem
     Friend WithEvents BarButtonItem2 As DevExpress.XtraBars.BarButtonItem
@@ -644,5 +652,5 @@ Partial Class FormCashAdvance
     Friend WithEvents GridColumn8 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn20 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents LabelControl3 As DevExpress.XtraEditors.LabelControl
-    Friend WithEvents GridColumn21 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GCIdReportStatus As DevExpress.XtraGrid.Columns.GridColumn
 End Class

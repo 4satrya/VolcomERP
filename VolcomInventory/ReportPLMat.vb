@@ -46,7 +46,7 @@
 
     Private Sub TopMargin_BeforePrint(ByVal sender As System.Object, ByVal e As System.Drawing.Printing.PrintEventArgs) Handles TopMargin.BeforePrint
         'Fetch from db main
-        Dim query As String = "SELECT i.id_prod_order,i.prod_order_mrs_number,m.design_name,k.prod_order_number,j.prod_order_wo_number,a.id_prod_order_mrs, a.id_pl_mrs ,a.id_comp_contact_from , a.id_comp_contact_to,a.pl_mrs_date, a.pl_mrs_note, a.pl_mrs_number, (d.comp_name) AS comp_name_from, (d.comp_number) AS comp_code_from, (d.id_comp) AS id_comp_from, (f.comp_name) AS comp_name_to, (f.comp_number) AS comp_code_to, (f.id_comp) AS id_comp_to,(f.address_primary) AS comp_address_to, a.id_report_status, "
+        Dim query As String = "SELECT i.id_prod_order,i.prod_order_mrs_number,m.design_name,m.design_display_name,k.prod_order_number,j.prod_order_wo_number,a.id_prod_order_mrs, a.id_pl_mrs ,a.id_comp_contact_from , a.id_comp_contact_to,a.pl_mrs_date, a.pl_mrs_note, a.pl_mrs_number, (d.comp_name) AS comp_name_from, (d.comp_number) AS comp_code_from, (d.id_comp) AS id_comp_from, (f.comp_name) AS comp_name_to, (f.comp_number) AS comp_code_to, (f.id_comp) AS id_comp_to,(f.address_primary) AS comp_address_to, a.id_report_status, "
         query += "DATE_FORMAT(a.pl_mrs_date,'%Y-%m-%d') as pl_mrs_datex, k.prod_order_number "
         query += "FROM tb_pl_mrs a "
         query += "INNER JOIN tb_m_comp_contact c ON a.id_comp_contact_from = c.id_comp_contact "
@@ -84,7 +84,7 @@
             '
             LType.Text = "Other Request"
         Else
-            LDesign.Text = data.Rows(0)("design_name").ToString
+            LDesign.Text = data.Rows(0)("design_display_name").ToString
             LabelPDONo.Text = data.Rows(0)("prod_order_wo_number").ToString
             LWONo.Text = data.Rows(0)("prod_order_number").ToString
         End If

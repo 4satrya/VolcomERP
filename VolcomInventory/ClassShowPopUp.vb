@@ -239,6 +239,9 @@
         ElseIf report_mark_type = "169" Then
             'value-added asset
             FormPurcAssetValueAdded.Close()
+        ElseIf report_mark_type = "174" Then
+            'Cash Advance Reconcile
+            FormCashAdvanceReconcile.Close()
         End If
     End Sub
     Sub show()
@@ -898,6 +901,11 @@
             FormPurcAssetValueAdded.id = id_report
             FormPurcAssetValueAdded.is_view = "1"
             FormPurcAssetValueAdded.ShowDialog()
+        ElseIf report_mark_type = "174" Then
+            'Cash Advance Reconcile
+            FormCashAdvanceReconcile.id_ca = id_report
+            FormCashAdvanceReconcile.is_view = "1"
+            FormCashAdvanceReconcile.ShowDialog()
         Else
             'MsgBox(id_report)
             stopCustom("Document Not Found")
@@ -1708,6 +1716,12 @@
             field_id = "id_sales_return_rec"
             field_number = "number"
             field_date = "created_date"
+        ElseIf report_mark_type = "174" Then
+            'Cash Advance Reconcile
+            table_name = "tb_cash_advance"
+            field_id = "id_cash_advance"
+            field_number = "number"
+            field_date = "date_created"
         Else
             query = "Select '-' AS report_number, NOW() as report_date"
         End If

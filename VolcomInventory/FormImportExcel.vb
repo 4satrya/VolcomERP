@@ -113,7 +113,7 @@ Public Class FormImportExcel
             MyCommand.Fill(data_temp)
             MyCommand.Dispose()
         Catch ex As Exception
-            stopCustom("Input must be in accordance with the format specified !")
+            stopCustom("Input must be in accordance with the format specified !" + System.Environment.NewLine + ex.ToString)
             Exit Sub
         End Try
 
@@ -2468,8 +2468,76 @@ Public Class FormImportExcel
             'Catch ex As Exception
             '    stopCustom(ex.ToString)
             'End Try
+        ElseIf id_pop_up = "41" Then
+            'check format generate OL store order
+            Dim connection_string As String = String.Format("Data Source={0};User Id={1};Password={2};Database={3};Convert Zero Datetime=True", app_host, app_username, app_password, app_database)
+            Dim connection As New MySqlConnection(connection_string)
+            connection.Open()
+
+            Dim command As MySqlCommand = connection.CreateCommand()
+            Dim qry As String = "DROP TABLE IF EXISTS tb_so_ol_store; CREATE TEMPORARY TABLE IF NOT EXISTS tb_so_ol_store AS ( SELECT * FROM ("
+            Dim qry_det As String = ""
+            For d As Integer = 0 To data_temp.Rows.Count - 1
+                If qry_det <> "" Then
+                    qry_det += "UNION ALL "
+                End If
+                qry_det += "SELECT '" + data_temp.Rows(d)("Order Number").ToString + "' AS `order_number`,'" + data_temp.Rows(d)("Order Item Id").ToString + "' AS `item_id`,  '" + data_temp.Rows(d)("Zalora Id").ToString + "' AS `ol_store_id`, LEFT('" + data_temp.Rows(d)("Seller SKU").ToString + "',9) AS `design_code`, IF('" + data_temp.Rows(d)("Variation").ToString + "'<'10',LPAD('" + data_temp.Rows(d)("Variation").ToString + "',2,'0'),IF('" + data_temp.Rows(d)("Variation").ToString + "'='One Size', 'ALL', REPLACE('" + data_temp.Rows(d)("Variation").ToString + "',' in',''))) AS `size`,
+                '" + DateTime.Parse(data_temp.Rows(d)("Created at").ToString).ToString("yyyy-MM-dd hh:mm") + "' AS `created_date_ol_store`, '" + addSlashes(data_temp.Rows(d)("Customer Name").ToString) + "' AS `customer_name`, '" + addSlashes(data_temp.Rows(d)("Shipping Name").ToString) + "' AS `shipping_name`, '" + addSlashes(data_temp.Rows(d)("Shipping Address").ToString) + "' AS `shipping_address`,
+                '" + addSlashes(data_temp.Rows(d)("Shipping Phone Number").ToString) + "' AS `shipping_phone`, '" + addSlashes(data_temp.Rows(d)("Shipping City").ToString) + "' AS `shipping_city`, '" + data_temp.Rows(d)("Shipping Postcode").ToString + "' AS `shipping_post_code`, '" + addSlashes(data_temp.Rows(d)("Shipping Region").ToString) + "' AS `shipping_region`,  '" + addSlashes(data_temp.Rows(d)("Payment Method").ToString) + "' AS `payment_method`,  '" + data_temp.Rows(d)("Tracking Code").ToString + "' AS `tracking_code`, '" + id_user + "' AS `id_user` "
+            Next
+            qry += qry_det + ") a ); ALTER TABLE tb_so_ol_store CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci; "
+            command.CommandText = qry
+            command.ExecuteNonQuery()
+            command.Dispose()
+            'Console.WriteLine(qry)
+
+            Dim data As New DataTable
+            Dim adapter As New MySqlDataAdapter("CALL view_ol_store_order_temp(" + FormOLStoreDet.SLECompGroup.EditValue.ToString + ", " + id_user + ")", connection)
+            adapter.SelectCommand.CommandTimeout = 300
+            adapter.Fill(data)
+            adapter.Dispose()
+
+            'data
+            GCData.DataSource = data
+            GVData.OptionsView.ColumnAutoWidth = False
+
+            'dispose
+            data.Dispose()
+            connection.Close()
+            connection.Dispose()
+
+            'option
+            GVData.OptionsView.ShowFooter = True
+            GVData.OptionsCustomization.AllowSort = False
+            GVData.OptionsCustomization.AllowFilter = False
+
+            'hide
+            GVData.Columns("id_comp_contact_from").Visible = False
+            GVData.Columns("id_wh_drawer").Visible = False
+            GVData.Columns("id_store_contact_to").Visible = False
+            GVData.Columns("id_store_drawer").Visible = False
+            GVData.Columns("id_so_type").Visible = False
+            GVData.Columns("id_so_status").Visible = False
+            GVData.Columns("id_design").Visible = False
+            GVData.Columns("id_product").Visible = False
+            GVData.Columns("id_design_price").Visible = False
+
+            'best fit
+            GVData.BestFitColumns()
+
+            'display format
+            GVData.Columns("sales_order_ol_shop_date").DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+            GVData.Columns("sales_order_ol_shop_date").SummaryItem.DisplayFormat = "dd MMMM yyyy HH:mm"
+            GVData.Columns("sales_order_det_qty").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+            GVData.Columns("sales_order_det_qty").SummaryItem.DisplayFormat = "{0:n0}"
+            GVData.Columns("design_price").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+            GVData.Columns("design_price").SummaryItem.DisplayFormat = "{0:n2}"
+
+            'summary
+            GVData.Columns("sales_order_det_qty").SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum
+            GVData.Columns("sales_order_det_qty").SummaryItem.DisplayFormat = "{0:n0}"
         End If
-            data_temp.Dispose()
+        data_temp.Dispose()
         oledbconn.Close()
         oledbconn.Dispose()
     End Sub
@@ -2514,7 +2582,7 @@ Public Class FormImportExcel
                 e.Appearance.BackColor = Color.Salmon
                 e.Appearance.BackColor2 = Color.WhiteSmoke
             End If
-        ElseIf id_pop_up = "11" Or id_pop_up = "13" Or id_pop_up = "14" Or id_pop_up = "15" Or id_pop_up = "17" Or id_pop_up = "19" Or id_pop_up = "20" Or id_pop_up = "21" Or id_pop_up = "25" Or id_pop_up = "31" Or id_pop_up = "33" Or id_pop_up = "37" Or id_pop_up = "40" Then
+        ElseIf id_pop_up = "11" Or id_pop_up = "13" Or id_pop_up = "14" Or id_pop_up = "15" Or id_pop_up = "17" Or id_pop_up = "19" Or id_pop_up = "20" Or id_pop_up = "21" Or id_pop_up = "25" Or id_pop_up = "31" Or id_pop_up = "33" Or id_pop_up = "37" Or id_pop_up = "40" Or id_pop_up = "41" Then
             Dim stt As String = sender.GetRowCellValue(e.RowHandle, sender.Columns("Status")).ToString
             If stt <> "OK" Then
                 e.Appearance.BackColor = Color.Salmon
@@ -4251,6 +4319,9 @@ Public Class FormImportExcel
                     stopCustom("Tidak ada data yang diimport. Hanya yang berstatus 'OK' yang bisa diimport. Mohon periksa kembali ")
                     makeSafeGV(GVData)
                 End If
+            ElseIf id_pop_up = "41" Then
+                'generate order
+
             End If
         End If
         Cursor = Cursors.Default

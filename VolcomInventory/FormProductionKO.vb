@@ -1,6 +1,8 @@
 ﻿Public Class FormProductionKO
     Public id_ko As String = "-1"
     Public is_locked As String = "2"
+    Public is_purc_mat As String = "2"
+
     Private Sub FormProductionKO_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
         Dispose()
     End Sub
@@ -20,7 +22,7 @@
 
     Sub load_head()
         'view yang revisi terakhir
-        Dim query As String = "SELECT ko.is_locked,c.phone,c.fax,ko.number,ko.vat,ko.id_ko_template,too.term_production,cc.`contact_person`,c.`comp_number`,c.`comp_name`,c.`address_primary`,ko.`date_created`,LPAD(ko.`revision`,2,'0') AS revision
+        Dim query As String = "SELECT ko.is_locked,ko.is_purc_mat,c.phone,c.fax,ko.number,ko.vat,ko.id_ko_template,too.term_production,cc.`contact_person`,c.`comp_number`,c.`comp_name`,c.`address_primary`,ko.`date_created`,LPAD(ko.`revision`,2,'0') AS revision
 FROM tb_prod_order_ko ko
 INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact=ko.id_comp_contact
 INNER JOIN tb_m_comp c ON c.id_comp=cc.id_comp
@@ -29,7 +31,8 @@ WHERE id_prod_order_ko='" & id_ko & "'"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
         If data.Rows.Count > 0 Then
-
+            is_purc_mat = data.Rows(0)("is_purc_mat").ToString
+            '
             TEKONumber.Text = data.Rows(0)("number").ToString
             TECompCode.Text = data.Rows(0)("comp_number").ToString
             TECompName.Text = data.Rows(0)("comp_name").ToString
@@ -90,7 +93,24 @@ WHERE id_prod_order_ko='" & id_ko & "'"
     End Sub
 
     Sub load_det()
-        Dim query As String = "SELECT kod.id_prod_order_ko_det,'' AS `no`,po.`prod_order_number`,LEFT(dsg.design_display_name,LENGTH(dsg.design_display_name)-3) AS class_dsg,RIGHT(dsg.design_display_name,3) AS color
+        Dim query As String = ""
+
+        If is_purc_mat = "1" Then
+            query = "SELECT kod.id_prod_order_ko_det,'' AS `no`,po.`mat_purc_number` AS prod_order_number,md.mat_det_display_name AS class_dsg,cd.`display_name` AS color
+,SUM(pod.mat_purc_det_qty) AS qty_order,pod.mat_purc_det_price AS bom_unit,pod.mat_purc_det_price AS po_amount_rp
+,kod.lead_time_prod AS lead_time,kod.lead_time_payment,po.mat_purc_date AS prod_order_wo_del_date,DATE_ADD(po.mat_purc_date,INTERVAL kod.lead_time_prod DAY) AS esti_del_date
+FROM `tb_prod_order_ko_det` kod
+INNER JOIN tb_mat_purc po ON po.id_mat_purc=kod.id_purc_order
+INNER JOIN  tb_mat_purc_det pod ON po.id_mat_purc=pod.id_mat_purc
+INNER JOIN tb_m_mat_det_price mdp ON mdp.`id_mat_det_price`=pod.`id_mat_det_price`
+INNER JOIN tb_m_mat_det md ON md.`id_mat_det`=mdp.`id_mat_det`
+INNER JOIN `tb_m_mat_det_code` mdc ON mdc.id_mat_det = md.id_mat_det
+INNER JOIN `tb_m_code_detail` cd ON cd.id_code_detail=mdc.id_code_detail AND cd.id_code='1'
+WHERE kod.id_prod_order_ko='" & id_ko & "'
+GROUP BY po.id_mat_purc
+ORDER BY po.`id_mat_purc` ASC"
+        Else
+            query = "SELECT kod.id_prod_order_ko_det,'' AS `no`,po.`prod_order_number`,LEFT(dsg.design_display_name,LENGTH(dsg.design_display_name)-3) AS class_dsg,RIGHT(dsg.design_display_name,3) AS color
 ,wo_price.qty_po AS qty_order,wo_price.prod_order_wo_det_price AS bom_unit,wo_price.price_amount AS po_amount_rp
 ,kod.lead_time_prod AS lead_time,kod.lead_time_payment,wo_price.prod_order_wo_del_date,DATE_ADD(wo_price.prod_order_wo_del_date,INTERVAL kod.lead_time_prod DAY) AS esti_del_date
 FROM `tb_prod_order_ko_det` kod
@@ -113,6 +133,8 @@ LEFT JOIN (
 ) wo_price ON wo_price.id_prod_order= po.id_prod_order
 WHERE kod.id_prod_order_ko='" & id_ko & "'
 ORDER BY po.`id_prod_order` ASC"
+        End If
+
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "'")
         GCProd.DataSource = data
         GVProd.BestFitColumns()
@@ -183,12 +205,12 @@ WHERE id_prod_order_ko='" & SLERevision.EditValue.ToString & "'"
     End Sub
 
     Private Sub BRevise_Click(sender As Object, e As EventArgs) Handles BRevise.Click
-        Dim query As String = "INSERT INTO tb_prod_order_ko(`id_prod_order_ko_reff`,`number`,`revision`,`id_ko_template`,`id_comp_contact`,`vat`,`id_term_production`,`date_created`,`created_by`,`id_emp_purc_mngr`,`id_emp_fc`,`id_emp_director`)
-SELECT `id_prod_order_ko_reff`,`number`,(SELECT COUNT(id_prod_order_ko) FROM tb_prod_order_ko WHERE id_prod_order_ko_reff=(SELECT id_prod_order_ko_reff FROM tb_prod_order_ko WHERE id_prod_order_ko='" & id_ko & "')),`id_ko_template`,`id_comp_contact`,`vat`,`id_term_production`,`date_created`,`created_by`,`id_emp_purc_mngr`,`id_emp_fc`,`id_emp_director` FROM tb_prod_order_ko WHERE id_prod_order_ko='" & id_ko & "'; SELECT LAST_INSERT_ID(); "
+        Dim query As String = "INSERT INTO tb_prod_order_ko(`id_prod_order_ko_reff`,`number`,`revision`,`id_ko_template`,`id_comp_contact`,`vat`,`id_term_production`,`date_created`,`created_by`,`id_emp_purc_mngr`,`id_emp_fc`,`id_emp_director`,`is_purc_mat`)
+SELECT `id_prod_order_ko_reff`,`number`,(SELECT COUNT(id_prod_order_ko) FROM tb_prod_order_ko WHERE id_prod_order_ko_reff=(SELECT id_prod_order_ko_reff FROM tb_prod_order_ko WHERE id_prod_order_ko='" & id_ko & "')),`id_ko_template`,`id_comp_contact`,`vat`,`id_term_production`,`date_created`,`created_by`,`id_emp_purc_mngr`,`id_emp_fc`,`id_emp_director`,`is_purc_mat` FROM tb_prod_order_ko WHERE id_prod_order_ko='" & id_ko & "'; SELECT LAST_INSERT_ID(); "
         Dim new_id_ko As String = execute_query(query, 0, True, "", "", "", "")
         'det
-        query = "INSERT INTO tb_prod_order_ko_det(`id_prod_order_ko`,`revision`,`id_prod_order`,`lead_time_prod`,`lead_time_payment`)
-SELECT '" & new_id_ko & "' AS id_ko,`revision`,`id_prod_order`,`lead_time_prod`,`lead_time_payment` FROM tb_prod_order_ko_det WHERE id_prod_order_ko='" & id_ko & "'"
+        query = "INSERT INTO tb_prod_order_ko_det(`id_prod_order_ko`,`revision`,`id_prod_order`,`id_purc_order`,`lead_time_prod`,`lead_time_payment`)
+SELECT '" & new_id_ko & "' AS id_ko,`revision`,`id_prod_order`,`id_purc_order`,`lead_time_prod`,`lead_time_payment` FROM tb_prod_order_ko_det WHERE id_prod_order_ko='" & id_ko & "'"
         execute_non_query(query, True, "", "", "", "")
         '
         infoCustom("KO revised")

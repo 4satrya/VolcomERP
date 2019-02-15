@@ -2182,6 +2182,7 @@ Partial Class FormProduction
         Me.BEditKO.Size = New System.Drawing.Size(90, 34)
         Me.BEditKO.TabIndex = 8906
         Me.BEditKO.Text = "Edit"
+        Me.BEditKO.Visible = False
         '
         'SLEVendorKO
         '

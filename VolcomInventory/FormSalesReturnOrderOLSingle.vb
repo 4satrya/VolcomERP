@@ -4,6 +4,7 @@
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCList.DataSource = data
         GVList.FocusedColumn = GridColumnOrder
+        GVList.BestFitColumns()
     End Sub
 
     Private Sub FormSalesReturnOrderOLSingle_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
@@ -18,11 +19,12 @@
             Dim cond_exists As Boolean = False
             Dim err_exist As String = ""
             For i As Integer = 0 To ((GVList.RowCount - 1) - GetGroupRowCount(GVList))
+                Dim id_sod_cek As String = GVList.GetRowCellValue(i, "id_sales_order_det").ToString
                 Dim id_product_cek As String = GVList.GetRowCellValue(i, "id_product").ToString
                 Dim code_cek As String = GVList.GetRowCellValue(i, "code").ToString
                 Dim name_cek As String = GVList.GetRowCellValue(i, "name").ToString
                 Dim size_cek As String = GVList.GetRowCellValue(i, "size").ToString
-                FormSalesReturnOrderOLDet.GVItemList.ActiveFilterString = "[id_product]='" + id_product_cek + "'"
+                FormSalesReturnOrderOLDet.GVItemList.ActiveFilterString = "[id_sales_order_det]='" + id_sod_cek + "'"
                 If FormSalesReturnOrderOLDet.GVItemList.RowCount > 0 Then
                     cond_exists = True
                     err_exist = code_cek + "/" + name_cek + "/ Size " + size_cek + " already exist. "
@@ -38,6 +40,8 @@
                 For ls As Integer = 0 To ((GVList.RowCount - 1) - GetGroupRowCount(GVList))
                     Dim newRow As DataRow = (TryCast(FormSalesReturnOrderOLDet.GCItemList.DataSource, DataTable)).NewRow()
                     newRow("code") = GVList.GetRowCellValue(ls, "code").ToString
+                    newRow("item_id") = GVList.GetRowCellValue(ls, "item_id").ToString
+                    newRow("ol_store_id") = GVList.GetRowCellValue(ls, "ol_store_id").ToString
                     newRow("name") = GVList.GetRowCellValue(ls, "name").ToString
                     newRow("size") = GVList.GetRowCellValue(ls, "size").ToString
                     newRow("sales_return_order_det_qty") = GVList.GetRowCellValue(ls, "order")
@@ -46,13 +50,14 @@
                     newRow("design_price") = GVList.GetRowCellValue(ls, "design_price")
                     newRow("id_design") = GVList.GetRowCellValue(ls, "id_design").ToString
                     newRow("id_product") = GVList.GetRowCellValue(ls, "id_product").ToString
-                    newRow("id_sales_order_det") = FormSalesReturnOrderOLDet.getIdSODet(GVList.GetRowCellValue(ls, "id_product").ToString)
+                    newRow("id_sales_order_det") = GVList.GetRowCellValue(ls, "id_sales_order_det").ToString
                     newRow("id_design_price") = GVList.GetRowCellValue(ls, "id_design_price").ToString
                     newRow("id_sales_return_order") = "0"
 
                     TryCast(FormSalesReturnOrderOLDet.GCItemList.DataSource, DataTable).Rows.Add(newRow)
                     FormSalesReturnOrderOLDet.GCItemList.RefreshDataSource()
                     FormSalesReturnOrderOLDet.GVItemList.RefreshData()
+                    FormSalesReturnOrderOLDet.id_sales_order_det_list.Add(GVList.GetRowCellValue(ls, "id_sales_order_det").ToString)
                 Next
                 Close()
             End If

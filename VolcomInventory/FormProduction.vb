@@ -656,7 +656,7 @@ Public Class FormProduction
         Dim query_where As String = ""
         '
         If Not SLEVendorKO.EditValue.ToString = "0" Then
-            query_where += " AND c.id_comp='" & SLEVendor.EditValue.ToString & "'"
+            query_where += " AND c.id_comp='" & SLEVendorKO.EditValue.ToString & "'"
         End If
         '
         Dim query As String = "SELECT ko.*,c.`comp_name` FROM tb_prod_order_ko ko
@@ -664,7 +664,7 @@ INNER JOIN tb_m_comp_contact cc ON cc.`id_comp_contact`=ko.`id_comp_contact`
 INNER JOIN tb_m_comp c ON c.`id_comp`=cc.`id_comp`
 WHERE ko.id_prod_order_ko 
 IN (SELECT MAX(id_prod_order_ko) AS id FROM `tb_prod_order_ko`
-GROUP BY id_prod_order_ko_reff) " & query_where
+GROUP BY id_prod_order_ko_reff) AND is_purc_mat=2 " & query_where & " ORDER BY ko.id_prod_order_ko DESC"
 
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCKO.DataSource = data

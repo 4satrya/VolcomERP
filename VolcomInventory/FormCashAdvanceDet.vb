@@ -60,16 +60,30 @@
             BPrint.Visible = True
             '
             If LEReportStatus.EditValue.ToString = "6" Then
-
+                BtnViewJournal.Visible = True
             End If
+
+            '
+            SLEType.Properties.ReadOnly = True
+            DEAdvanceEnd.Properties.ReadOnly = True
+            SLEPayFrom.Properties.ReadOnly = True
+            SLEEmployee.Properties.ReadOnly = True
+            SLEDepartement.Properties.ReadOnly = True
+            SLEPayTo.Properties.ReadOnly = True
+            TETotal.Enabled = False
+            MENote.Properties.ReadOnly = True
         End If
 
         is_load = True
+
+        If id_ca = "-1" Then
+            calculate_report_day()
+        End If
     End Sub
 
 
     Sub load_type()
-        Dim query As String = "SELECT id_cash_advance_type,cash_advance_type FROM tb_lookup_cash_advance_type"
+        Dim query As String = "SELECT id_cash_advance_type,cash_advance_type,day_limit FROM tb_lookup_cash_advance_type"
         viewSearchLookupQuery(SLEType, query, "id_cash_advance_type", "cash_advance_type", "id_cash_advance_type")
     End Sub
 
@@ -106,17 +120,19 @@
         If is_load = True Then
             Try
                 Dim date_start As String = Date.Parse(DEAdvanceEnd.EditValue.ToString).ToString("yyyy-MM-dd")
+                Dim dayLimit As String = execute_query("SELECT day_limit FROM tb_lookup_cash_advance_type WHERE id_cash_advance_type = " + SLEType.EditValue.ToString, 0, True, "", "", "", "")
                 Dim query As String = ""
 
-                If SLEType.EditValue.ToString = "1" Then 'dinas H+3
-                    query = "CALL work_days(3,'" & date_start & "','" & SLEEmployee.EditValue.ToString & "')"
-                ElseIf SLEType.EditValue.ToString = "2" Then 'operation H+1
-                    query = "CALL work_days(1,'" & date_start & "','" & SLEEmployee.EditValue.ToString & "')"
-                End If
+                query = "SELECT ('" + date_start + "' + INTERVAL " + dayLimit + " DAY) AS date"
+                'If SLEType.EditValue.ToString = "1" Then 'dinas H+3
+                '    query = "CALL work_days(3,'" & date_start & "','" & SLEEmployee.EditValue.ToString & "')"
+                'ElseIf SLEType.EditValue.ToString = "2" Then 'operation H+1
+                '    query = "CALL work_days(1,'" & date_start & "','" & SLEEmployee.EditValue.ToString & "')"
+                'End If
 
                 Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
                 If data.Rows.Count > 0 Then
-                    DEDueDate.EditValue = data.Rows(0)("date")
+                    DEDueDate.EditValue = Date.Parse(data.Rows(0)("date").ToString).ToString("dd MMMM yyyy")
                     is_no_schedule = False
                 Else
                     warningCustom("Please register schedule for this employee first, contact HRD for further detail.")
@@ -172,6 +188,8 @@ VALUES('" & SLEType.EditValue.ToString & "',NOW(),'" & id_user & "','" & SLEEmpl
 
             FormCashAdvance.GVListOpen.FocusedRowHandle = find_row(FormCashAdvance.GVListOpen, "id_cash_advance", id_ca)
             FormCashAdvance.XTCPO.SelectedTabPageIndex = 0
+
+            Close()
         End If
     End Sub
 
@@ -197,7 +215,7 @@ VALUES('" & SLEType.EditValue.ToString & "',NOW(),'" & id_user & "','" & SLEEmpl
         Report.LNote.Text = MENote.Text
 
         If LEReportStatus.EditValue.ToString = "6" Then
-            Report.id_pre = "2"
+            Report.id_pre = "-1"
         Else
             Report.id_pre = "1"
         End If
@@ -205,6 +223,30 @@ VALUES('" & SLEType.EditValue.ToString & "',NOW(),'" & id_user & "','" & SLEEmpl
         'Show the report's preview. 
         Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
         Tool.ShowPreview()
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnViewJournal_Click(sender As Object, e As EventArgs) Handles BtnViewJournal.Click
+        Cursor = Cursors.WaitCursor
+        Dim id_acc_trans As String = ""
+        Try
+            id_acc_trans = execute_query("SELECT ad.id_acc_trans FROM tb_a_acc_trans_det ad
+            WHERE ad.report_mark_type=167 AND ad.id_report=" + id_ca + "
+            GROUP BY ad.id_acc_trans ", 0, True, "", "", "", "")
+        Catch ex As Exception
+            id_acc_trans = ""
+        End Try
+
+        If id_acc_trans <> "" Then
+            Dim s As New ClassShowPopUp()
+            FormViewJournal.is_enable_view_doc = False
+            FormViewJournal.BMark.Visible = False
+            s.id_report = id_acc_trans
+            s.report_mark_type = "36"
+            s.show()
+        Else
+            warningCustom("Auto journal not found.")
+        End If
         Cursor = Cursors.Default
     End Sub
 End Class

@@ -125,7 +125,7 @@
             End If
             If is_in_mat = "1" Then
                 '
-                FormMatPurchase.XtraTabControl1.SelectedTabPageIndex = 0
+                FormMatPurchase.XTCPurcMat.SelectedTabPageIndex = 0
                 FormMatPurchase.view_mat_purc()
                 FormMatPurchase.GVMatPurchase.ActiveFilterString = string_filter
             End If

@@ -62,6 +62,7 @@ Partial Class FormBOMSingleOvh
         Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
         Me.BCancel = New DevExpress.XtraEditors.SimpleButton()
         Me.BSave = New DevExpress.XtraEditors.SimpleButton()
+        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.SplitContainerControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainerControl1.SuspendLayout()
         CType(Me.GroupGeneral, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -205,7 +206,7 @@ Partial Class FormBOMSingleOvh
         '
         'GVOVHPrice
         '
-        Me.GVOVHPrice.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ColMatPirce, Me.ColPriceName, Me.ColCompany, Me.ColPrice, Me.ColDate, Me.ColCurrenct, Me.GridColumnIDCurrency})
+        Me.GVOVHPrice.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ColMatPirce, Me.GridColumn2, Me.ColPriceName, Me.ColCompany, Me.ColPrice, Me.ColDate, Me.ColCurrenct, Me.GridColumnIDCurrency})
         Me.GVOVHPrice.GridControl = Me.GCOVHPrice
         Me.GVOVHPrice.Name = "GVOVHPrice"
         Me.GVOVHPrice.OptionsBehavior.Editable = False
@@ -224,7 +225,7 @@ Partial Class FormBOMSingleOvh
         Me.ColPriceName.Name = "ColPriceName"
         Me.ColPriceName.Visible = True
         Me.ColPriceName.VisibleIndex = 0
-        Me.ColPriceName.Width = 174
+        Me.ColPriceName.Width = 239
         '
         'ColCompany
         '
@@ -232,8 +233,8 @@ Partial Class FormBOMSingleOvh
         Me.ColCompany.FieldName = "comp_name"
         Me.ColCompany.Name = "ColCompany"
         Me.ColCompany.Visible = True
-        Me.ColCompany.VisibleIndex = 1
-        Me.ColCompany.Width = 174
+        Me.ColCompany.VisibleIndex = 2
+        Me.ColCompany.Width = 348
         '
         'ColPrice
         '
@@ -247,8 +248,8 @@ Partial Class FormBOMSingleOvh
         Me.ColPrice.FieldName = "ovh_price"
         Me.ColPrice.Name = "ColPrice"
         Me.ColPrice.Visible = True
-        Me.ColPrice.VisibleIndex = 3
-        Me.ColPrice.Width = 174
+        Me.ColPrice.VisibleIndex = 4
+        Me.ColPrice.Width = 348
         '
         'ColDate
         '
@@ -256,8 +257,8 @@ Partial Class FormBOMSingleOvh
         Me.ColDate.FieldName = "ovh_price_date"
         Me.ColDate.Name = "ColDate"
         Me.ColDate.Visible = True
-        Me.ColDate.VisibleIndex = 4
-        Me.ColDate.Width = 174
+        Me.ColDate.VisibleIndex = 5
+        Me.ColDate.Width = 359
         '
         'ColCurrenct
         '
@@ -269,8 +270,8 @@ Partial Class FormBOMSingleOvh
         Me.ColCurrenct.FieldName = "currency"
         Me.ColCurrenct.Name = "ColCurrenct"
         Me.ColCurrenct.Visible = True
-        Me.ColCurrenct.VisibleIndex = 2
-        Me.ColCurrenct.Width = 60
+        Me.ColCurrenct.VisibleIndex = 3
+        Me.ColCurrenct.Width = 119
         '
         'GridColumnIDCurrency
         '
@@ -536,6 +537,15 @@ Partial Class FormBOMSingleOvh
         Me.BSave.TabIndex = 1
         Me.BSave.Text = " Save"
         '
+        'GridColumn2
+        '
+        Me.GridColumn2.Caption = "Contact Person"
+        Me.GridColumn2.FieldName = "cp"
+        Me.GridColumn2.Name = "GridColumn2"
+        Me.GridColumn2.Visible = True
+        Me.GridColumn2.VisibleIndex = 1
+        Me.GridColumn2.Width = 219
+        '
         'FormBOMSingleOvh
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -624,4 +634,5 @@ Partial Class FormBOMSingleOvh
     Friend WithEvents CEOVHMain As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents GridColumnIDCurrency As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents BGetKurs As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GridColumn2 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

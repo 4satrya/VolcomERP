@@ -2,7 +2,7 @@
     Shared Function Scan() As Image
         Dim cdd As WIA.CommonDialog = New WIA.CommonDialog
 
-        Dim device As WIA.Device
+        Dim device As WIA.Device = Nothing
 
         Try
             device = cdd.ShowSelectDevice(WIA.WiaDeviceType.UnspecifiedDeviceType, True, False)

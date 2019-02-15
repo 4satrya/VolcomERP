@@ -1676,6 +1676,8 @@ Public Class FormMain
             FormSalesReturnRecDet.ShowDialog()
         ElseIf formName = "FormDeptHeadSurvey" Then
             FormDeptHeadSurveyDet.ShowDialog()
+        ElseIf formName = "FormOLStore" Then
+            FormOLStoreDet.ShowDialog()
         Else
             RPSubMenu.Visible = False
         End If
@@ -7122,162 +7124,165 @@ Public Class FormMain
                 print_raw(FormOLStoreSummary.GCDetail, "")
             End If
         ElseIf formName = "FormFGAging" Then
-                print_raw(FormFGAging.GCDesign, "")
-            ElseIf formName = "FormFGTransSummary" Then
-                print_raw(FormFGTransSummary.GCData, "")
-            ElseIf formName = "FormFGFirstDel" Then
-                print_raw(FormFGFirstDel.GCData, "")
-            ElseIf formName = "FormFGCompareStockCard" Then
-                print_raw(FormFGCompareStockCard.GCData, "")
-            ElseIf formName = "FormEmpPayroll" Then
-                If FormEmpPayroll.XTCPayroll.SelectedTabPageIndex = 0 Then
-                    print_raw(FormEmpPayroll.GCPayrollPeriode, "")
-                Else
-                    print_raw(FormEmpPayroll.GCPayroll, "")
-                End If
-            ElseIf formName = "FormEmpLeaveCut" Then
-                print_raw(FormEmpLeaveCut.GCPayrollPeriode, "")
-            ElseIf formName = "FormProdOverMemo" Then
-                print_raw(FormProdOverMemo.GCMemo, "")
-            ElseIf formName = "FormMasterAssetCategory" Then
-                print_raw(FormMasterAssetCategory.GCAssetCat, "")
-            ElseIf formName = "FormMasterAsset" Then
-                If FormMasterAsset.XTCListAsset.SelectedTabPageIndex = 0 Then
-                    print_raw(FormMasterAsset.GCAsset, "")
-                ElseIf FormMasterAsset.XTCListAsset.SelectedTabPageIndex = 1 Then
-                    print_raw(FormMasterAsset.GCAssetMovingLog, "")
-                End If
-            ElseIf formName = "FormAssetPO" Then
-                print_raw(FormAssetPO.GCPOList, "")
-            ElseIf formName = "FormAssetRec" Then
-                print_raw(FormAssetRec.GCRecList, "")
-            ElseIf formName = "FormEmpUniReport" Then
-                print_raw(FormEmpUniReport.GCDetail, "")
-            ElseIf formName = "FormEmpUniExpense" Then
-                print_raw(FormEmpUniExpense.GCData, "")
-            ElseIf formName = "FormItemCatPropose" Then
-                If FormItemCatPropose.XTCCat.SelectedTabPageIndex = 0 Then
-                    print_raw(FormItemCatPropose.GCItemCat, "")
-                ElseIf FormItemCatPropose.XTCCat.SelectedTabPageIndex = 1 Then
-                    print_raw(FormItemCatPropose.GCData, "")
-                End If
-            ElseIf formName = "FormItemCatMapping" Then
-                If FormItemCatMapping.XTCMapping.SelectedTabPageIndex = 0 Then
-                    print_raw(FormItemCatMapping.GCMapping, "")
-                ElseIf FormItemCatMapping.XTCMapping.SelectedTabPageIndex = 1 Then
-                    print_raw(FormItemCatMapping.GCPropose, "")
-                End If
-            ElseIf formName = "FormBudgetRevPropose" Then
-                If FormBudgetRevPropose.XTCRev.SelectedTabPageIndex = 1 Then
-                    print_raw_no_export(FormBudgetRevPropose.GCRev)
-                ElseIf FormBudgetRevPropose.XTCRev.SelectedTabPageIndex = 2 Then
-                    print_raw_no_export(FormBudgetRevPropose.GCRevision)
-                End If
-            ElseIf formName = "FormBudgetExpensePropose" Then
-                print_raw(FormBudgetExpensePropose.GCData, "")
-            ElseIf formName = "FormBudgetExpenseView" Then
-                print_raw_no_export(FormBudgetExpenseView.GCData)
-            ElseIf formName = "FormBudgetExpenseRevision" Then
-                print_raw_no_export(FormBudgetExpenseRevision.GCData)
-            ElseIf formName = "FormPurcReq" Then
-                print_raw_no_export(FormPurcReq.GCPurcReq)
-            ElseIf formName = "FormPurcOrder" Then
-                print_raw_no_export(FormPurcOrder.GCPO)
-            ElseIf formName = "FormProdDemandRev" Then
-                print_raw_no_export(FormProdDemandRev.GCData)
-            ElseIf formName = "FormReportMarkCancelList" Then
-                print_raw_no_export(FormReportMarkCancelList.GCListCancel)
-            ElseIf formName = "FormPurcReceive" Then
-                If FormPurcReceive.XTCRec.SelectedTabPageIndex = 0 Then
-                    print_raw_no_export(FormPurcReceive.GCPO)
-                ElseIf FormPurcReceive.XTCRec.SelectedTabPageIndex = 1 Then
-                    print_raw_no_export(FormPurcReceive.GCReceive)
-                End If
-            ElseIf formName = "FormPurcReturn" Then
-                If FormPurcReturn.XTCReturn.SelectedTabPageIndex = 0 Then
-                    print_raw_no_export(FormPurcReturn.GCPO)
-                ElseIf FormPurcReturn.XTCReturn.SelectedTabPageIndex = 1 Then
-                    print_raw_no_export(FormPurcReturn.GCReturn)
-                End If
-            ElseIf formName = "FormPurcItemStock" Then
-                If FormPurcItemStock.XTCStock.SelectedTabPageIndex = 0 Then
-                    print_raw(FormPurcItemStock.GCSOH, "")
-                ElseIf FormPurcItemStock.XTCStock.SelectedTabPageIndex = 1 Then
-                    print_raw(FormPurcItemStock.GCSC, "")
-                End If
-            ElseIf formName = "FormEmpUniSumReport" Then
-                If FormEmpUniSumReport.XTCUniReport.SelectedTabPageIndex = 0 Then
-                    print_raw(FormEmpUniSumReport.GCPeriod, "")
-                ElseIf FormEmpUniSumReport.XTCUniReport.SelectedTabPageIndex = 1 Then
-                    print_raw(FormEmpUniSumReport.GCByDate, "")
-                ElseIf FormEmpUniSumReport.XTCUniReport.SelectedTabPageIndex = 2 Then
-                    print_raw(FormEmpUniSumReport.GCDetail, "")
-                End If
-            ElseIf formName = "FormProductionClaimReturn" Then
-                print_raw_no_export(FormProductionClaimReturn.GCData)
-            ElseIf formName = "FormItemReq" Then
-                print_raw_no_export(FormItemReq.GCData)
-            ElseIf formName = "FormItemDel" Then
-                If FormItemDel.XTCDel.SelectedTabPageIndex = 0 Then
-                    print_raw_no_export(FormItemDel.GCRequest)
-                ElseIf FormItemDel.XTCDel.SelectedTabPageIndex = 1 Then
-                    print_raw_no_export(FormItemDel.GCDelivery)
-                End If
-            ElseIf formName = "FormPurcPayment" Then
-                print_raw_no_export(FormPurcPayment.GCPOList)
-            ElseIf formName = "FormBankWithdrawal" Then
-                If FormBankWithdrawal.XTCPO.SelectedTabPageIndex = 0 Then
-                    print_raw_no_export(FormBankWithdrawal.GCList)
-                ElseIf FormBankWithdrawal.XTCPO.SelectedTabPageIndex = 1 Then
-                    print_raw_no_export(FormBankWithdrawal.GCPOList)
-                End If
-            ElseIf formName = "FormBankDeposit" Then
-                If FormBankDeposit.XTCPO.SelectedTabPageIndex = 0 Then
-                    print_raw_no_export(FormBankDeposit.GCList)
-                ElseIf FormBankDeposit.XTCPO.SelectedTabPageIndex = 1 Then
-                    print_raw_no_export(FormBankDeposit.GCInvoiceList)
-                End If
-            ElseIf formName = "FormPurcAsset" Then
-                If FormPurcAsset.XTCAsset.SelectedTabPageIndex = 0 Then
-                    print_raw_no_export(FormPurcAsset.GCPending)
-                ElseIf FormPurcAsset.XTCAsset.SelectedTabPageIndex = 1 Then
-                    print_raw_no_export(FormPurcAsset.GCActive)
-                End If
-            ElseIf formName = "FormItemExpense" Then
-                print_raw_no_export(FormItemExpense.GCData)
-            ElseIf formName = "FormSalesReturnRec" Then
-                'Receive Return
-                Dim dateFrom As String = Date.Parse(FormSalesReturnRec.DEFrom.EditValue.ToString).ToString("dd MMMM yyyy")
-                Dim dateUntil As String = Date.Parse(FormSalesReturnRec.DEUntil.EditValue.ToString).ToString("dd MMMM yyyy")
-
-                Dim period As String = "Period : " + dateFrom + " until " + dateUntil
-
-                print(FormSalesReturnRec.GCList, "List Receive Return" + System.Environment.NewLine + period)
-            ElseIf formName = "FormOpt" Then
-                If FormOpt.XTCOpt.SelectedTabPageIndex = 0 Then
-                    print_raw(FormOpt.GCCode, "List Opt")
-                ElseIf FormOpt.XTCOpt.SelectedTabPageIndex = 1 Then
-                    print_raw(FormOpt.GCOther, "List Opt")
-                End If
-            ElseIf formName = "FormEmpPerAppraisal" Then
-                'Performance Appraisal
-                If FormEmpPerAppraisal.XTCEmp.SelectedTabPage.Name = "XTPPenilaian" Then
-                    print(FormEmpPerAppraisal.GCList, "List Penilaian Kinerja Karyawan")
-                ElseIf FormEmpPerAppraisal.XTCEmp.SelectedTabPage.Name = "XTPHistory" Then
-                    print(FormEmpPerAppraisal.GCHistory, "List History Penilaian Kinerja Karyawan")
-                End If
-            ElseIf formName = "FormDeptHeadSurvey" Then
-
-                If FormDeptHeadSurvey.XTCSurvey.SelectedTabPage.Name = "XTPForm" Then
-
-                ElseIf FormDeptHeadSurvey.XTCSurvey.SelectedTabPage.Name = "XTPPeriod" Then
-                    print(FormDeptHeadSurvey.GCListPeriod, "List Periode Survey Dept Head")
-                End If
-            ElseIf formName = "FormSetKurs" Then
-                'Kurs Transaksi
-                print(FormSetKurs.GCKursTrans, "List Kurs")
+            print_raw(FormFGAging.GCDesign, "")
+        ElseIf formName = "FormFGTransSummary" Then
+            print_raw(FormFGTransSummary.GCData, "")
+        ElseIf formName = "FormFGFirstDel" Then
+            print_raw(FormFGFirstDel.GCData, "")
+        ElseIf formName = "FormFGCompareStockCard" Then
+            print_raw(FormFGCompareStockCard.GCData, "")
+        ElseIf formName = "FormEmpPayroll" Then
+            If FormEmpPayroll.XTCPayroll.SelectedTabPageIndex = 0 Then
+                print_raw(FormEmpPayroll.GCPayrollPeriode, "")
             Else
-                RPSubMenu.Visible = False
+                print_raw(FormEmpPayroll.GCPayroll, "")
+            End If
+        ElseIf formName = "FormEmpLeaveCut" Then
+            print_raw(FormEmpLeaveCut.GCPayrollPeriode, "")
+        ElseIf formName = "FormProdOverMemo" Then
+            print_raw(FormProdOverMemo.GCMemo, "")
+        ElseIf formName = "FormMasterAssetCategory" Then
+            print_raw(FormMasterAssetCategory.GCAssetCat, "")
+        ElseIf formName = "FormMasterAsset" Then
+            If FormMasterAsset.XTCListAsset.SelectedTabPageIndex = 0 Then
+                print_raw(FormMasterAsset.GCAsset, "")
+            ElseIf FormMasterAsset.XTCListAsset.SelectedTabPageIndex = 1 Then
+                print_raw(FormMasterAsset.GCAssetMovingLog, "")
+            End If
+        ElseIf formName = "FormAssetPO" Then
+            print_raw(FormAssetPO.GCPOList, "")
+        ElseIf formName = "FormAssetRec" Then
+            print_raw(FormAssetRec.GCRecList, "")
+        ElseIf formName = "FormEmpUniReport" Then
+            print_raw(FormEmpUniReport.GCDetail, "")
+        ElseIf formName = "FormEmpUniExpense" Then
+            print_raw(FormEmpUniExpense.GCData, "")
+        ElseIf formName = "FormItemCatPropose" Then
+            If FormItemCatPropose.XTCCat.SelectedTabPageIndex = 0 Then
+                print_raw(FormItemCatPropose.GCItemCat, "")
+            ElseIf FormItemCatPropose.XTCCat.SelectedTabPageIndex = 1 Then
+                print_raw(FormItemCatPropose.GCData, "")
+            End If
+        ElseIf formName = "FormItemCatMapping" Then
+            If FormItemCatMapping.XTCMapping.SelectedTabPageIndex = 0 Then
+                print_raw(FormItemCatMapping.GCMapping, "")
+            ElseIf FormItemCatMapping.XTCMapping.SelectedTabPageIndex = 1 Then
+                print_raw(FormItemCatMapping.GCPropose, "")
+            End If
+        ElseIf formName = "FormBudgetRevPropose" Then
+            If FormBudgetRevPropose.XTCRev.SelectedTabPageIndex = 1 Then
+                print_raw_no_export(FormBudgetRevPropose.GCRev)
+            ElseIf FormBudgetRevPropose.XTCRev.SelectedTabPageIndex = 2 Then
+                print_raw_no_export(FormBudgetRevPropose.GCRevision)
+            End If
+        ElseIf formName = "FormBudgetExpensePropose" Then
+            print_raw(FormBudgetExpensePropose.GCData, "")
+        ElseIf formName = "FormBudgetExpenseView" Then
+            print_raw_no_export(FormBudgetExpenseView.GCData)
+        ElseIf formName = "FormBudgetExpenseRevision" Then
+            print_raw_no_export(FormBudgetExpenseRevision.GCData)
+        ElseIf formName = "FormPurcReq" Then
+            print_raw_no_export(FormPurcReq.GCPurcReq)
+        ElseIf formName = "FormPurcOrder" Then
+            print_raw_no_export(FormPurcOrder.GCPO)
+        ElseIf formName = "FormProdDemandRev" Then
+            print_raw_no_export(FormProdDemandRev.GCData)
+        ElseIf formName = "FormReportMarkCancelList" Then
+            print_raw_no_export(FormReportMarkCancelList.GCListCancel)
+        ElseIf formName = "FormPurcReceive" Then
+            If FormPurcReceive.XTCRec.SelectedTabPageIndex = 0 Then
+                print_raw_no_export(FormPurcReceive.GCPO)
+            ElseIf FormPurcReceive.XTCRec.SelectedTabPageIndex = 1 Then
+                print_raw_no_export(FormPurcReceive.GCReceive)
+            End If
+        ElseIf formName = "FormPurcReturn" Then
+            If FormPurcReturn.XTCReturn.SelectedTabPageIndex = 0 Then
+                print_raw_no_export(FormPurcReturn.GCPO)
+            ElseIf FormPurcReturn.XTCReturn.SelectedTabPageIndex = 1 Then
+                print_raw_no_export(FormPurcReturn.GCReturn)
+            End If
+        ElseIf formName = "FormPurcItemStock" Then
+            If FormPurcItemStock.XTCStock.SelectedTabPageIndex = 0 Then
+                print_raw(FormPurcItemStock.GCSOH, "")
+            ElseIf FormPurcItemStock.XTCStock.SelectedTabPageIndex = 1 Then
+                print_raw(FormPurcItemStock.GCSC, "")
+            End If
+        ElseIf formName = "FormEmpUniSumReport" Then
+            If FormEmpUniSumReport.XTCUniReport.SelectedTabPageIndex = 0 Then
+                print_raw(FormEmpUniSumReport.GCPeriod, "")
+            ElseIf FormEmpUniSumReport.XTCUniReport.SelectedTabPageIndex = 1 Then
+                print_raw(FormEmpUniSumReport.GCByDate, "")
+            ElseIf FormEmpUniSumReport.XTCUniReport.SelectedTabPageIndex = 2 Then
+                print_raw(FormEmpUniSumReport.GCDetail, "")
+            End If
+        ElseIf formName = "FormProductionClaimReturn" Then
+            print_raw_no_export(FormProductionClaimReturn.GCData)
+        ElseIf formName = "FormItemReq" Then
+            print_raw_no_export(FormItemReq.GCData)
+        ElseIf formName = "FormItemDel" Then
+            If FormItemDel.XTCDel.SelectedTabPageIndex = 0 Then
+                print_raw_no_export(FormItemDel.GCRequest)
+            ElseIf FormItemDel.XTCDel.SelectedTabPageIndex = 1 Then
+                print_raw_no_export(FormItemDel.GCDelivery)
+            End If
+        ElseIf formName = "FormPurcPayment" Then
+            print_raw_no_export(FormPurcPayment.GCPOList)
+        ElseIf formName = "FormBankWithdrawal" Then
+            If FormBankWithdrawal.XTCPO.SelectedTabPageIndex = 0 Then
+                print_raw_no_export(FormBankWithdrawal.GCList)
+            ElseIf FormBankWithdrawal.XTCPO.SelectedTabPageIndex = 1 Then
+                print_raw_no_export(FormBankWithdrawal.GCPOList)
+            End If
+        ElseIf formName = "FormBankDeposit" Then
+            If FormBankDeposit.XTCPO.SelectedTabPageIndex = 0 Then
+                print_raw_no_export(FormBankDeposit.GCList)
+            ElseIf FormBankDeposit.XTCPO.SelectedTabPageIndex = 1 Then
+                print_raw_no_export(FormBankDeposit.GCInvoiceList)
+            End If
+        ElseIf formName = "FormPurcAsset" Then
+            If FormPurcAsset.XTCAsset.SelectedTabPageIndex = 0 Then
+                print_raw_no_export(FormPurcAsset.GCPending)
+            ElseIf FormPurcAsset.XTCAsset.SelectedTabPageIndex = 1 Then
+                print_raw_no_export(FormPurcAsset.GCActive)
+            End If
+        ElseIf formName = "FormItemExpense" Then
+            print_raw_no_export(FormItemExpense.GCData)
+        ElseIf formName = "FormSalesReturnRec" Then
+            'Receive Return
+            Dim dateFrom As String = Date.Parse(FormSalesReturnRec.DEFrom.EditValue.ToString).ToString("dd MMMM yyyy")
+            Dim dateUntil As String = Date.Parse(FormSalesReturnRec.DEUntil.EditValue.ToString).ToString("dd MMMM yyyy")
+
+            Dim period As String = "Period : " + dateFrom + " until " + dateUntil
+
+            print(FormSalesReturnRec.GCList, "List Receive Return" + System.Environment.NewLine + period)
+        ElseIf formName = "FormOpt" Then
+            If FormOpt.XTCOpt.SelectedTabPageIndex = 0 Then
+                print_raw(FormOpt.GCCode, "List Opt")
+            ElseIf FormOpt.XTCOpt.SelectedTabPageIndex = 1 Then
+                print_raw(FormOpt.GCOther, "List Opt")
+            End If
+        ElseIf formName = "FormEmpPerAppraisal" Then
+            'Performance Appraisal
+            If FormEmpPerAppraisal.XTCEmp.SelectedTabPage.Name = "XTPPenilaian" Then
+                print(FormEmpPerAppraisal.GCList, "List Penilaian Kinerja Karyawan")
+            ElseIf FormEmpPerAppraisal.XTCEmp.SelectedTabPage.Name = "XTPHistory" Then
+                print(FormEmpPerAppraisal.GCHistory, "List History Penilaian Kinerja Karyawan")
+            End If
+        ElseIf formName = "FormDeptHeadSurvey" Then
+
+            If FormDeptHeadSurvey.XTCSurvey.SelectedTabPage.Name = "XTPForm" Then
+
+            ElseIf FormDeptHeadSurvey.XTCSurvey.SelectedTabPage.Name = "XTPPeriod" Then
+                print(FormDeptHeadSurvey.GCListPeriod, "List Periode Survey Dept Head")
+            End If
+        ElseIf formName = "FormSetKurs" Then
+            'Kurs Transaksi
+            print(FormSetKurs.GCKursTrans, "List Kurs")
+        ElseIf formName = "FormCashAdvance" Then
+            'FormCashAdvance
+            FormCashAdvance.print_list()
+        Else
+            RPSubMenu.Visible = False
         End If
         Cursor = Cursors.Default
     End Sub
@@ -7962,6 +7967,9 @@ Public Class FormMain
         ElseIf formName = "FormItemExpense" Then
             FormItemExpense.Close()
             FormItemExpense.Dispose()
+        ElseIf formName = "FormCashAdvance" Then
+            FormCashAdvance.Close()
+            FormCashAdvance.Dispose()
         ElseIf formName = "FormSalesReturnRec" Then
             FormSalesReturnRec.Close()
             FormSalesReturnRec.Dispose()
@@ -8155,9 +8163,9 @@ Public Class FormMain
             FormSampleReq.viewSampleReq()
         ElseIf formName = "FormMatPurchase" Then
             'Material Purchase
-            If FormMatPurchase.XtraTabControl1.SelectedTabPageIndex = 0 Then 'purchase order
+            If FormMatPurchase.XTCPurcMat.SelectedTabPageIndex = 0 Then 'purchase order
                 FormMatPurchase.view_mat_purc()
-            ElseIf FormMatPurchase.XtraTabControl1.SelectedTabPageIndex = 1 Then 'prod demand
+            ElseIf FormMatPurchase.XTCPurcMat.SelectedTabPageIndex = 1 Then 'prod demand
                 FormMatPurchase.viewProdDemand()
             End If
         ElseIf formName = "FormMatWO" Then
@@ -8747,6 +8755,8 @@ Public Class FormMain
             End If
         ElseIf formName = "FormSetKurs" Then
             FormSetKurs.load_kurs()
+        ElseIf formName = "FormCashAdvance" Then
+            FormCashAdvance.load_cash_advance()
         End If
     End Sub
     'Switch
@@ -12398,6 +12408,15 @@ Public Class FormMain
     End Sub
 
     Private Sub NBOLStoreWork_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBOLStoreWork.LinkClicked
-
+        Cursor = Cursors.WaitCursor
+        Try
+            FormOLStore.MdiParent = Me
+            FormOLStore.Show()
+            FormOLStore.WindowState = FormWindowState.Maximized
+            FormOLStore.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
     End Sub
 End Class

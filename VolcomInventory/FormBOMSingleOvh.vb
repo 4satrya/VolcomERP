@@ -121,7 +121,7 @@
         End Try
     End Sub
     Sub view_ovh_price(ByVal id_ovhx As String)
-        Dim query As String = "SELECT tb_lookup_currency.currency,tb_m_ovh_price.id_ovh_price,tb_m_ovh_price.ovh_price_name,tb_m_ovh_price.ovh_price,tb_m_ovh_price.ovh_price_date,tb_m_comp.comp_name,tb_m_ovh_price.id_currency 
+        Dim query As String = "SELECT tb_m_comp_contact.contact_person AS cp,tb_lookup_currency.currency,tb_m_ovh_price.id_ovh_price,tb_m_ovh_price.ovh_price_name,tb_m_ovh_price.ovh_price,tb_m_ovh_price.ovh_price_date,tb_m_comp.comp_name,tb_m_ovh_price.id_currency 
 FROM 
 tb_m_ovh_price
 INNER JOIN tb_m_comp_contact ON tb_m_ovh_price.id_comp_contact=tb_m_comp_contact.id_comp_contact 

@@ -1860,6 +1860,18 @@
     <Compile Include="FormNtwainCoba.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormOLStore.Designer.vb">
+      <DependentUpon>FormOLStore.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormOLStore.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormOLStoreDet.Designer.vb">
+      <DependentUpon>FormOLStoreDet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormOLStoreDet.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormOLStoreSummary.Designer.vb">
       <DependentUpon>FormOLStoreSummary.vb</DependentUpon>
     </Compile>
@@ -5415,6 +5427,12 @@
     <Compile Include="ReportCashAdvance.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ReportCashAdvanceReconcile.Designer.vb">
+      <DependentUpon>ReportCashAdvanceReconcile.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportCashAdvanceReconcile.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ReportDebitNote.Designer.vb">
       <DependentUpon>ReportDebitNote.vb</DependentUpon>
     </Compile>
@@ -7151,6 +7169,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormNtwainCoba.resx">
       <DependentUpon>FormNtwainCoba.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormOLStore.resx">
+      <DependentUpon>FormOLStore.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormOLStoreDet.resx">
+      <DependentUpon>FormOLStoreDet.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormOLStoreSummary.resx">
       <DependentUpon>FormOLStoreSummary.vb</DependentUpon>
@@ -9349,6 +9373,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportCashAdvance.resx">
       <DependentUpon>ReportCashAdvance.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportCashAdvanceReconcile.resx">
+      <DependentUpon>ReportCashAdvanceReconcile.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportDebitNote.resx">
       <DependentUpon>ReportDebitNote.vb</DependentUpon>

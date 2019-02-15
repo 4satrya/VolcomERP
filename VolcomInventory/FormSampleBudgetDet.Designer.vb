@@ -37,6 +37,7 @@ Partial Class FormSampleBudgetDet
         Me.GridColumnId = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnDesc = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnYear = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnDivision = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnValUsd = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnValRp = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -61,7 +62,6 @@ Partial Class FormSampleBudgetDet
         Me.BtnCancel = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnSave = New DevExpress.XtraEditors.SimpleButton()
         Me.BMark = New DevExpress.XtraEditors.SimpleButton()
-        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
@@ -256,6 +256,12 @@ Partial Class FormSampleBudgetDet
         Me.GridColumnYear.VisibleIndex = 1
         Me.GridColumnYear.Width = 298
         '
+        'GridColumn8
+        '
+        Me.GridColumn8.Caption = "ID Division"
+        Me.GridColumn8.FieldName = "id_dvision_before"
+        Me.GridColumn8.Name = "GridColumn8"
+        '
         'GridColumnDivision
         '
         Me.GridColumnDivision.Caption = "Division"
@@ -273,7 +279,7 @@ Partial Class FormSampleBudgetDet
         Me.GridColumnValUsd.FieldName = "value_usd_before"
         Me.GridColumnValUsd.Name = "GridColumnValUsd"
         Me.GridColumnValUsd.Visible = True
-        Me.GridColumnValUsd.VisibleIndex = 4
+        Me.GridColumnValUsd.VisibleIndex = 3
         Me.GridColumnValUsd.Width = 298
         '
         'GridColumnValRp
@@ -284,7 +290,7 @@ Partial Class FormSampleBudgetDet
         Me.GridColumnValRp.FieldName = "value_rp_before"
         Me.GridColumnValRp.Name = "GridColumnValRp"
         Me.GridColumnValRp.Visible = True
-        Me.GridColumnValRp.VisibleIndex = 5
+        Me.GridColumnValRp.VisibleIndex = 4
         Me.GridColumnValRp.Width = 306
         '
         'RICEBudget
@@ -501,14 +507,6 @@ Partial Class FormSampleBudgetDet
         Me.BMark.TabIndex = 16
         Me.BMark.TabStop = False
         Me.BMark.Text = "Mark"
-        '
-        'GridColumn8
-        '
-        Me.GridColumn8.Caption = "ID Division"
-        Me.GridColumn8.FieldName = "id_dvision_before"
-        Me.GridColumn8.Name = "GridColumn8"
-        Me.GridColumn8.Visible = True
-        Me.GridColumn8.VisibleIndex = 3
         '
         'FormSampleBudgetDet
         '

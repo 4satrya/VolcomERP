@@ -11,6 +11,7 @@
     Dim store_address As String = ""
     Public is_print As String = "-1"
     Public is_detail_soh As String = "-1"
+    Public id_sales_order_det_list As New List(Of String)
 
 
     Private Sub FormSalesReturnOrderOLDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -298,29 +299,43 @@
         'del not found
         delNotFoundMyRow()
 
-        'check stock
+        'group
+        GridColumnIdProduct.GroupIndex = 0
+        GVItemList.CollapseAllGroups()
+
+        'new check stok
         Cursor = Cursors.WaitCursor
+        Dim err_data As String = ""
         Dim cond_data As Boolean = True
-        Dim dt As DataTable = execute_query("CALL view_stock_ol_store2('" + id_sales_order + "'," + id_store + ")", -1, True, "", "", "", "")
-        For c As Integer = 0 To ((GVItemList.RowCount - 1) - GetGroupRowCount(GVItemList))
-            Dim id_product_cek As String = GVItemList.GetRowCellValue(c, "id_product").ToString
-            Dim qty_cek As Integer = GVItemList.GetRowCellValue(c, "sales_return_order_det_qty")
+        Dim query_stc As String = "SELECT sod.id_product, sod.item_id, sod.ol_store_id, IFNULL(stc.qty,0) AS `qty`
+        FROM tb_sales_order_det sod
+        LEFT JOIN (
+	        SELECT f.id_product, SUM(IF(f.id_storage_category=2, CONCAT('-', f.storage_product_qty), f.storage_product_qty)) AS `qty` 
+	        FROM tb_storage_fg f 
+	        WHERE f.id_wh_drawer=" + id_wh_drawer + "
+	        GROUP BY f.id_product
+        ) stc ON stc.id_product = sod.id_product
+        WHERE sod.id_sales_order=" + id_sales_order + "
+        GROUP BY sod.id_product "
+        Dim dt As DataTable = execute_query(query_stc, -1, True, "", "", "", "")
+        For c As Integer = 1 To GetGroupRowCount(GVItemList)
+            Dim rh As Integer = c * -1
+            Dim qty_cek As Decimal = Convert.ToDecimal(GVItemList.GetGroupSummaryValue(rh, TryCast(GVItemList.GroupSummary(0), DevExpress.XtraGrid.GridGroupSummaryItem)))
+            Dim id_product_cek As String = GVItemList.GetGroupRowValue(rh).ToString
             Dim data_filter_cek As DataRow() = dt.Select("[id_product]='" + id_product_cek + "' ")
-            If data_filter_cek.Length <= 0 Then
-                GVItemList.SetRowCellValue(c, "error_status", "Product not found;")
-                cond_data = False
-            Else
-                If qty_cek > data_filter_cek(0)("qty") Then
-                    GVItemList.SetRowCellValue(c, "error_status", "Qty can't exceed " + data_filter_cek(0)("qty").ToString + ";")
-                    cond_data = False
-                Else
-                    GVItemList.SetRowCellValue(c, "error_status", "")
-                End If
+            If qty_cek > data_filter_cek(0)("qty") Then
+                stopCustom("Item Id : " + data_filter_cek(0)("item_id").ToString + " can't exceed " + data_filter_cek(0)("qty").ToString)
+                Cursor = Cursors.Default
+                makeSafeGV(GVItemList)
+                GridColumnIdProduct.Visible = False
+                Exit Sub
             End If
         Next
         GCItemList.RefreshDataSource()
         GVItemList.RefreshData()
         Cursor = Cursors.Default
+        makeSafeGV(GVItemList)
+        GridColumnIdProduct.Visible = False
 
         If id_store_contact_to = "-1" Or id_wh_contact_to = "-1" Then
             stopCustom("Store/WH can't blank ")
@@ -400,10 +415,12 @@
             Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure want to delete this item?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
             If confirm = Windows.Forms.DialogResult.Yes Then
                 Cursor = Cursors.WaitCursor
+                Dim id_so_det As String = GVItemList.GetFocusedRowCellValue("id_sales_order_det").ToString
                 GVItemList.DeleteRow(GVItemList.FocusedRowHandle)
                 CType(GCItemList.DataSource, DataTable).AcceptChanges()
                 GCItemList.RefreshDataSource()
                 GVItemList.RefreshData()
+                id_sales_order_det_list.Remove(id_so_det)
                 check_but()
                 Cursor = Cursors.Default
             End If

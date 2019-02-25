@@ -52,7 +52,9 @@
     End Sub
 
     Private Sub FormFGTracking_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
+        Dim dt As DateTime = getTimeDB()
+        DEFrom.EditValue = dt
+        DEUntil.EditValue = dt
     End Sub
 
     Private Sub BtnViewImg_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnViewImg.Click

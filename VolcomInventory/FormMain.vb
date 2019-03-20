@@ -113,8 +113,8 @@ Public Class FormMain
             checkTotalNotif(data_notif.Rows.Count)
             For i As Integer = 0 To data_notif.Rows.Count - 1
                 If data_notif.Rows(i)("id_type").ToString = "2" Then
-                    showNotify(data_notif(i)("notif_title").ToString, data_notif(i)("notif_content").ToString, "2#" + data_notif(i)("notif_frm_to").ToString + "#" + data_notif(i)("id_notif_det").ToString + "#" + data_notif(i)("id_report").ToString + "#" + data_notif(i)("report_number").ToString + "#" + data_notif(i)("notif_tag").ToString)
-                Else
+                showNotify(data_notif(i)("notif_title").ToString, data_notif(i)("notif_content").ToString, "2#" + data_notif(i)("notif_frm_to").ToString + "#" + data_notif(i)("id_notif_det").ToString + "#" + data_notif(i)("id_report").ToString + "#" + data_notif(i)("report_number").ToString + "#" + data_notif(i)("notif_tag").ToString)
+            Else
                     showNotify(data_notif(i)("notif_title").ToString, data_notif(i)("notif_content").ToString, data_notif.Rows(i)("id_type").ToString)
                 End If
             Next
@@ -166,7 +166,8 @@ Public Class FormMain
             Dim id_report As String = col_foc_str(3)
             Dim report_number As String = col_foc_str(4)
             Dim notif_tag As String = col_foc_str(5)
-            frmNotif(frm, id_report, report_number, notif_tag)
+            Dim rmt As String = col_foc_str(6)
+            frmNotif(frm, id_report, rmt, report_number, notif_tag)
         ElseIf e.Info.Tag.ToString = "3" Then
             Try
                 FormFGDesignList.MdiParent = Me
@@ -282,7 +283,7 @@ Public Class FormMain
             BBDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
         End If
 
-        If formName = "FormWork" Or formName = "FormProductionWOList" Or formName = "FormFGDistScheme" Or formName = "FormFGLineList" Or formName = "FormFGTracking" Or formName = "FormFGStock" Or formName = "FormMatStock" Or formName = "FormSalesWeekly" Or formName = "FormFGWoffList" Or formName = "FormFGDistSchemaSetup" Or formName = "FormFGProdList" Or formName = "FormSamplePLExport" Or formName = "FormFGWHAllocLog" Or formName = "FormEmpReview" Or formName = "FormProductionSummary" Or formName = "FormWHDelEmptyStock" Or formName = "FormFGTransList" Or formName = "FormProdClosing" Or formName = "FormOLStoreSummary" Or formName = "FormFGAging" Or formName = "FormFGTransSummary" Or formName = "FormFGFirstDel" Or formName = "FormFGCompareStockCard" Or formName = "FormEmpUniReport" Or formName = "FormBudgetExpenseView" Then
+        If formName = "FormWork" Or formName = "FormProductionWOList" Or formName = "FormFGDistScheme" Or formName = "FormFGLineList" Or formName = "FormFGTracking" Or formName = "FormFGStock" Or formName = "FormMatStock" Or formName = "FormSalesWeekly" Or formName = "FormFGWoffList" Or formName = "FormFGDistSchemaSetup" Or formName = "FormFGProdList" Or formName = "FormSamplePLExport" Or formName = "FormFGWHAllocLog" Or formName = "FormEmpReview" Or formName = "FormProductionSummary" Or formName = "FormWHDelEmptyStock" Or formName = "FormFGTransList" Or formName = "FormProdClosing" Or formName = "FormOLStoreSummary" Or formName = "FormFGAging" Or formName = "FormFGTransSummary" Or formName = "FormFGFirstDel" Or formName = "FormFGCompareStockCard" Or formName = "FormEmpUniReport" Or formName = "FormBudgetExpenseView" Or formName = "FormPurcItemStock" Or formName = "FormEmpUniSumReport" Then
             RGAreaManage.Visible = False
         End If
 
@@ -309,6 +310,18 @@ Public Class FormMain
         End If
         If formName = "FormSOHPrice" Then
             BBNew.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+            BBDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+        End If
+
+        If formName = "FormOpt" Then
+            BBNew.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+            BBEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+            BBDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+        End If
+
+        If formName = "FormEmpPerAppraisal" Then
+            BBNew.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+            BBEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
             BBDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
         End If
 
@@ -400,7 +413,7 @@ Public Class FormMain
             BBDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
         End If
 
-        If formName = "FormWork" Or formName = "FormProductionWOList" Or formName = "FormFGDistScheme" Or formName = "FormFGLineList" Or formName = "FormFGTracking" Or formName = "FormFGStock" Or formName = "FormMatStock" Or formName = "FormSalesWeekly" Or formName = "FormFGWoffList" Or formName = "FormFGDistSchemaSetup" Or formName = "FormFGProdList" Or formName = "FormSamplePLExport" Or formName = "FormFGWHAllocLog" Or formName = "FormEmpReview" Or formName = "FormProductionSummary" Or formName = "FormWHDelEmptyStock" Or formName = "FormFGTransList" Or formName = "FormProdClosing" Or formName = "FormOLStoreSummary" Or formName = "FormFGAging" Or formName = "FormFGTransSummary" Or formName = "FormFGFirstDel" Or formName = "FormFGCompareStockCard" Or formName = "FormEmpUniReport" Or formName = "FormBudgetExpenseView" Then
+        If formName = "FormWork" Or formName = "FormProductionWOList" Or formName = "FormFGDistScheme" Or formName = "FormFGLineList" Or formName = "FormFGTracking" Or formName = "FormFGStock" Or formName = "FormMatStock" Or formName = "FormSalesWeekly" Or formName = "FormFGWoffList" Or formName = "FormFGDistSchemaSetup" Or formName = "FormFGProdList" Or formName = "FormSamplePLExport" Or formName = "FormFGWHAllocLog" Or formName = "FormEmpReview" Or formName = "FormProductionSummary" Or formName = "FormWHDelEmptyStock" Or formName = "FormFGTransList" Or formName = "FormProdClosing" Or formName = "FormOLStoreSummary" Or formName = "FormFGAging" Or formName = "FormFGTransSummary" Or formName = "FormFGFirstDel" Or formName = "FormFGCompareStockCard" Or formName = "FormEmpUniReport" Or formName = "FormBudgetExpenseView" Or formName = "FormPurcItemStock" Or formName = "FormEmpUniSumReport" Then
             RGAreaManage.Visible = True
         End If
 
@@ -428,6 +441,20 @@ Public Class FormMain
 
         If formName = "FormSOHPrice" Then
             BBNew.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
+            BBDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
+        End If
+
+        If formName = "FormOpt" Then
+            BBNew.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
+            BBEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
+            BBDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
+            BBRefresh.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
+            BBPrint.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
+        End If
+
+        If formName = "FormEmpPerAppraisal" Then
+            BBNew.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
+            BBEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
             BBDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
         End If
 
@@ -958,13 +985,13 @@ Public Class FormMain
             If FormMatPL.XTCPL.SelectedTabPageIndex = 0 Then 'Production
                 If FormMatPL.XTCTabProduction.SelectedTabPageIndex = 0 Then 'list PL
                     FormMatPLSingle.action = "ins"
-                    FormMatPLSingle.id_comp_from = get_company_from(id_user)
+                    FormMatPLSingle.id_comp_from = get_opt_mat_field("id_wh_mat") 'material WH
                     FormMatPLSingle.id_comp_contact_to = "-1"
                     FormMatPLSingle.id_comp_contact_from = "-1"
                     FormMatPLSingle.ShowDialog()
                 Else 'from MRS
                     FormMatPLSingle.action = "ins"
-                    FormMatPLSingle.id_comp_from = get_company_from(id_user)
+                    FormMatPLSingle.id_comp_from = get_opt_mat_field("id_wh_mat") 'material WH
                     FormMatPLSingle.id_comp_contact_to = FormMatPL.GVMRS.GetFocusedRowCellValue("id_comp_name_req_from").ToString
                     FormMatPLSingle.BtnPopSRS.Enabled = False
                     FormMatPLSingle.id_mrs = FormMatPL.GVMRS.GetFocusedRowCellDisplayText("id_prod_order_mrs").ToString
@@ -975,7 +1002,7 @@ Public Class FormMain
             ElseIf FormMatPL.XTCPL.SelectedTabPageIndex = 1 Then 'WO
                 If FormMatPL.XTCPLWO.SelectedTabPageIndex = 0 Then 'list WO
                     FormMatPLSingle.action = "ins"
-                    FormMatPLSingle.id_comp_from = get_company_from(id_user)
+                    FormMatPLSingle.id_comp_from = get_opt_mat_field("id_wh_mat") 'material WH
                     FormMatPLSingle.id_comp_contact_to = "-1"
                     FormMatPLSingle.id_comp_contact_from = "-1"
                     FormMatPLSingle.is_other = "1"
@@ -1071,8 +1098,10 @@ Public Class FormMain
                 FormProductionRecDet.id_order = "-1"
                 FormProductionRecDet.ShowDialog()
             Else 'based on PO
-                FormProductionRecDet.id_order = FormProductionRec.GVProd.GetFocusedRowCellValue("id_prod_order").ToString
-                FormProductionRecDet.ShowDialog()
+                If FormProductionRec.GVProd.RowCount > 0 And FormProductionRec.GVProd.FocusedRowHandle >= 0 Then
+                    FormProductionRecDet.id_order = FormProductionRec.GVProd.GetFocusedRowCellValue("id_prod_order").ToString
+                    FormProductionRecDet.ShowDialog()
+                End If
             End If
         ElseIf formName = "FormProductionRet" Then
             'FG Return
@@ -1091,14 +1120,17 @@ Public Class FormMain
                 FormProductionPLToWHDet.id_pl_prod_order = "0"
                 FormProductionPLToWHDet.ShowDialog()
             Else
-                Dim cost As Decimal = FormProductionPLToWH.GVProd.GetFocusedRowCellValue("design_cop")
-                If cost > 0 Then
-                    FormProductionPLToWHDet.action = "ins"
-                    FormProductionPLToWHDet.id_pl_prod_order = "0"
-                    FormProductionPLToWHDet.id_prod_order = FormProductionPLToWH.GVProd.GetFocusedRowCellValue("id_prod_order").ToString
-                    FormProductionPLToWHDet.ShowDialog()
-                Else
-                    stopCustom("Packing list can't continue process, because there is no cost for this style.")
+                If FormProductionPLToWH.GVProd.RowCount > 0 And FormProductionPLToWH.GVProd.FocusedRowHandle >= 0 Then
+                    Dim id_cop_status As String = FormProductionPLToWH.GVProd.GetFocusedRowCellValue("id_cop_status").ToString
+                    Dim cost As Decimal = FormProductionPLToWH.GVProd.GetFocusedRowCellValue("design_cop")
+                    If id_cop_status = "2" Then
+                        FormProductionPLToWHDet.action = "ins"
+                        FormProductionPLToWHDet.id_pl_prod_order = "0"
+                        FormProductionPLToWHDet.id_prod_order = FormProductionPLToWH.GVProd.GetFocusedRowCellValue("id_prod_order").ToString
+                        FormProductionPLToWHDet.ShowDialog()
+                    Else
+                        stopCustom("Packing list can't continue process, because there is no final cost for this style.")
+                    End If
                 End If
             End If
         ElseIf formName = "FormMatInvoice" Then
@@ -1599,6 +1631,58 @@ Public Class FormMain
         ElseIf formName = "FormReportMarkCancelList" Then
             FormReportMarkCancel.id_report_mark_cancel = "-1"
             FormReportMarkCancel.ShowDialog()
+        ElseIf formName = "FormPurcReceive" Then
+            If FormPurcReceive.GVPO.RowCount > 0 And FormPurcReceive.GVPO.FocusedRowHandle >= 0 Then
+                Dim id_purc_order As String = FormPurcReceive.GVPO.GetFocusedRowCellValue("id_purc_order").ToString
+                FormPurcReceiveDet.id_purc_order = id_purc_order
+                FormPurcReceiveDet.id_comp = FormPurcReceive.GVPO.GetFocusedRowCellValue("id_comp").ToString
+                FormPurcReceiveDet.action = "ins"
+                FormPurcReceiveDet.TxtOrderNumber.Text = FormPurcReceive.GVPO.GetFocusedRowCellValue("purc_order_number").ToString
+                FormPurcReceiveDet.TxtVendor.Text = FormPurcReceive.GVPO.GetFocusedRowCellValue("comp_number").ToString + " - " + FormPurcReceive.GVPO.GetFocusedRowCellValue("comp_name").ToString
+                FormPurcReceiveDet.ShowDialog()
+            End If
+        ElseIf formName = "FormPurcReturn" Then
+            If FormPurcReturn.GVPO.RowCount > 0 And FormPurcReturn.GVPO.FocusedRowHandle >= 0 Then
+                Dim id_purc_order As String = FormPurcReturn.GVPO.GetFocusedRowCellValue("id_purc_order").ToString
+                FormPurchaseReturnDet.id_purc_order = id_purc_order
+                FormPurchaseReturnDet.action = "ins"
+                FormPurchaseReturnDet.TxtOrderNumber.Text = FormPurcReturn.GVPO.GetFocusedRowCellValue("purc_order_number").ToString
+                FormPurchaseReturnDet.TxtVendor.Text = FormPurcReturn.GVPO.GetFocusedRowCellValue("comp_number").ToString + " - " + FormPurcReturn.GVPO.GetFocusedRowCellValue("comp_name").ToString
+                FormPurchaseReturnDet.ShowDialog()
+            End If
+        ElseIf formName = "FormProductionClaimReturn" Then
+            FormProductionClaimReturnDet.action = "ins"
+            FormProductionClaimReturnDet.ShowDialog()
+        ElseIf formName = "FormItemReq" Then
+            FormItemReqDet.action = "ins"
+            FormItemReqDet.is_for_store = FormItemReq.is_for_store
+            FormItemReqDet.ShowDialog()
+        ElseIf formName = "FormItemDel" Then
+            If FormItemDel.GVRequest.RowCount > 0 And FormItemDel.GVRequest.FocusedRowHandle >= 0 Then
+                Dim id_item_req As String = FormItemDel.GVRequest.GetFocusedRowCellValue("id_item_req").ToString
+                Dim is_for_store As String = FormItemDel.GVRequest.GetFocusedRowCellValue("is_for_store").ToString
+                FormItemDelDetail.is_for_store = is_for_store
+                FormItemDelDetail.id_req = id_item_req
+                FormItemDelDetail.action = "ins"
+                FormItemDelDetail.TxtRequestNo.Text = FormItemDel.GVRequest.GetFocusedRowCellValue("number").ToString
+                FormItemDelDetail.TxtRequestedBy.Text = FormItemDel.GVRequest.GetFocusedRowCellValue("created_by_name").ToString
+                FormItemDelDetail.TxtDept.Text = FormItemDel.GVRequest.GetFocusedRowCellValue("departement").ToString
+                FormItemDelDetail.ShowDialog()
+            End If
+        ElseIf formName = "FormItemExpense" Then
+            FormItemExpenseDet.action = "ins"
+            FormItemExpenseDet.ShowDialog()
+        ElseIf formName = "FormCashAdvance" Then
+            FormCashAdvanceDet.id_ca = "-1"
+            FormCashAdvanceDet.ShowDialog()
+        ElseIf formName = "FormSalesReturnRec" Then
+            FormSalesReturnRecDet.ShowDialog()
+        ElseIf formName = "FormDeptHeadSurvey" Then
+            FormDeptHeadSurveyDet.ShowDialog()
+        ElseIf formName = "FormOLStore" Then
+            FormOLStoreDet.ShowDialog()
+        ElseIf formName = "FormSampleExpense" Then
+            FormSampleExpenseDet.ShowDialog()
         Else
             RPSubMenu.Visible = False
         End If
@@ -1796,10 +1880,13 @@ Public Class FormMain
                 FormProdDemandSingle.id_report_status = FormProdDemand.GVProdDemand.GetFocusedRowCellValue("id_report_status").ToString
                 FormProdDemandSingle.id_pd_kind = FormProdDemand.GVProdDemand.GetFocusedRowCellValue("id_pd_kind").ToString
                 FormProdDemandSingle.id_pd_type = FormProdDemand.GVProdDemand.GetFocusedRowCellValue("id_pd_type").ToString
+                FormProdDemandSingle.id_pd_budget = FormProdDemand.GVProdDemand.GetFocusedRowCellValue("id_pd_budget").ToString
                 FormProdDemandSingle.id_division = FormProdDemand.GVProdDemand.GetFocusedRowCellValue("id_division").ToString
                 FormProdDemandSingle.DEForm.EditValue = FormProdDemand.GVProdDemand.GetFocusedRowCellValue("prod_demand_date")
                 FormProdDemandSingle.action = "upd"
                 FormProdDemandSingle.id_pd = FormProdDemand.GVProdDemand.GetFocusedRowCellValue("is_pd").ToString
+                FormProdDemandSingle.is_confirm = FormProdDemand.GVProdDemand.GetFocusedRowCellValue("is_confirm").ToString
+                FormProdDemandSingle.rate_current = FormProdDemand.GVProdDemand.GetFocusedRowCellValue("rate_current")
                 FormProdDemandSingle.ShowDialog()
             ElseIf formName = "FormMasterCode" Then
                 '
@@ -2574,12 +2661,49 @@ Public Class FormMain
             ElseIf formName = "FormReportMarkCancelList" Then
                 FormReportMarkCancel.id_report_mark_cancel = FormReportMarkCancelList.GVListCancel.GetFocusedRowCellValue("id_report_mark_cancel").ToString
                 FormReportMarkCancel.ShowDialog()
+            ElseIf formName = "FormPurcReceive" Then
+                FormPurcReceiveDet.action = "upd"
+                FormPurcReceiveDet.id = FormPurcReceive.GVReceive.GetFocusedRowCellValue("id_purc_rec").ToString
+                FormPurcReceiveDet.ShowDialog()
+            ElseIf formName = "FormPurcReturn" Then
+                FormPurchaseReturnDet.action = "upd"
+                FormPurchaseReturnDet.id = FormPurcReturn.GVReturn.GetFocusedRowCellValue("id_purc_return").ToString
+                FormPurchaseReturnDet.ShowDialog()
+            ElseIf formName = "FormProductionClaimReturn" Then
+                FormProductionClaimReturnDet.action = "upd"
+                FormProductionClaimReturnDet.id = FormProductionClaimReturn.GVData.GetFocusedRowCellValue("id_prod_claim_return").ToString
+                FormProductionClaimReturnDet.ShowDialog()
+            ElseIf formName = "FormItemReq" Then
+                FormItemReqDet.action = "upd"
+                FormItemReqDet.id = FormItemReq.GVData.GetFocusedRowCellValue("id_item_req").ToString
+                FormItemReqDet.ShowDialog()
+            ElseIf formName = "FormItemDel" Then
+                FormItemDelDetail.action = "upd"
+                FormItemDelDetail.id = FormItemDel.GVDelivery.GetFocusedRowCellValue("id_item_del").ToString
+                FormItemDelDetail.ShowDialog()
+            ElseIf formName = "FormItemExpense" Then
+                FormItemExpenseDet.action = "upd"
+                FormItemExpenseDet.id = FormItemExpense.GVData.GetFocusedRowCellValue("id_item_expense").ToString
+                FormItemExpenseDet.ShowDialog()
+            ElseIf formName = "FormCashAdvance" Then
+                FormCashAdvanceDet.id_ca = FormCashAdvance.GVListOpen.GetFocusedRowCellValue("id_cash_advance").ToString
+                FormCashAdvanceDet.ShowDialog()
+            ElseIf formName = "FormSalesReturnRec" Then
+                FormSalesReturnRecDet.id = FormSalesReturnRec.GVList.GetFocusedRowCellValue("id_sales_return_rec").ToString
+                FormSalesReturnRecDet.ShowDialog()
+            ElseIf formName = "FormDeptHeadSurvey" Then
+                FormDeptHeadSurveyDet.id_period = FormDeptHeadSurvey.GVListPeriod.GetFocusedRowCellValue("id_question_depthead_period").ToString
+                FormDeptHeadSurveyDet.ShowDialog()
+            ElseIf formName = "FormSampleExpense" Then
+                FormSampleExpenseDet.id_purc = FormSampleExpense.GVPurchaseList.GetFocusedRowCellValue("id_sample_purc_mat").ToString
+                FormSampleExpenseDet.ShowDialog()
             Else
                 RPSubMenu.Visible = False
             End If
             Cursor = Cursors.Default
         End If
     End Sub
+
     'Delete Data
     Private Sub BBDelete_ItemClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles BBDelete.ItemClick
         Dim confirm As DialogResult
@@ -5747,6 +5871,19 @@ Public Class FormMain
             Else
                 stopCustom("This report already approved.")
             End If
+        ElseIf formName = "FormEmpUniSumReport" Then
+        ElseIf formName = "FormSampleExpense" Then
+            If check_edit_report_status(FormSampleExpense.GVPurchaseList.GetFocusedRowCellValue("id_report_status").ToString, "179", FormSampleExpense.GVPurchaseList.GetFocusedRowCellValue("id_sample_purc_mat")) Then
+                Dim id As String = FormSampleExpense.GVPurchaseList.GetFocusedRowCellValue("id_sample_purc_mat").ToString
+                confirm = XtraMessageBox.Show("Are you sure want to delete?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+                If confirm = DialogResult.Yes Then
+                    Dim query_del As String = "DELETE FROM tb_sample_purc_mat WHERE id_sample_purc_mat='" + id + "'"
+                    execute_non_query(query_del, True, "", "", "", "")
+                    FormSampleExpense.load_purc("2")
+                End If
+            Else
+                stopCustom("This report already approved.")
+            End If
         Else
             RPSubMenu.Visible = False
         End If
@@ -6083,7 +6220,13 @@ Public Class FormMain
                 End If
             End If
         ElseIf formName = "FormAccounting" Then
-            print(FormAccounting.GCAcc, "Chart Of Account")
+            If FormAccounting.XTCGeneral.SelectedTabPageIndex = 0 Then
+                print_raw(FormAccounting.GCAcc, "Chart Of Account")
+            ElseIf FormAccounting.XTCGeneral.SelectedTabPageIndex = 1 Then
+                'print_raw(FormAccounting.TreeList1, "Chart Of Account")
+            ElseIf FormAccounting.XTCGeneral.SelectedTabPageIndex = 2 Then
+                print_raw(FormAccounting.GCCompany, "")
+            End If
         ElseIf formName = "FormAccountingJournal" Then
             If FormAccountingJournal.XTCJurnal.SelectedTabPageIndex = 0 Then
                 print(FormAccountingJournal.GCAccTrans, "Journal Transaction")
@@ -6995,7 +7138,11 @@ Public Class FormMain
         ElseIf formName = "FormProdClosing" Then
             print_raw(FormProdClosing.GCProd, "")
         ElseIf formName = "FormOLStoreSummary" Then
-            print_raw(FormOLStoreSummary.GCData, "")
+            If FormOLStoreSummary.XTCOLStore.SelectedTabPageIndex = 0 Then
+                print_raw(FormOLStoreSummary.GCData, "")
+            ElseIf FormOLStoreSummary.XTCOLStore.SelectedTabPageIndex = 1 Then
+                print_raw(FormOLStoreSummary.GCDetail, "")
+            End If
         ElseIf formName = "FormFGAging" Then
             print_raw(FormFGAging.GCDesign, "")
         ElseIf formName = "FormFGTransSummary" Then
@@ -7062,6 +7209,121 @@ Public Class FormMain
             print_raw_no_export(FormProdDemandRev.GCData)
         ElseIf formName = "FormReportMarkCancelList" Then
             print_raw_no_export(FormReportMarkCancelList.GCListCancel)
+        ElseIf formName = "FormPurcReceive" Then
+            If FormPurcReceive.XTCRec.SelectedTabPageIndex = 0 Then
+                print_raw_no_export(FormPurcReceive.GCPO)
+            ElseIf FormPurcReceive.XTCRec.SelectedTabPageIndex = 1 Then
+                print_raw_no_export(FormPurcReceive.GCReceive)
+            End If
+        ElseIf formName = "FormPurcReturn" Then
+            If FormPurcReturn.XTCReturn.SelectedTabPageIndex = 0 Then
+                print_raw_no_export(FormPurcReturn.GCPO)
+            ElseIf FormPurcReturn.XTCReturn.SelectedTabPageIndex = 1 Then
+                print_raw_no_export(FormPurcReturn.GCReturn)
+            End If
+        ElseIf formName = "FormPurcItemStock" Then
+            If FormPurcItemStock.XTCStock.SelectedTabPageIndex = 0 Then
+                print_raw(FormPurcItemStock.GCSOH, "")
+            ElseIf FormPurcItemStock.XTCStock.SelectedTabPageIndex = 1 Then
+                print_raw(FormPurcItemStock.GCSC, "")
+            End If
+        ElseIf formName = "FormEmpUniSumReport" Then
+            If FormEmpUniSumReport.XTCUniReport.SelectedTabPageIndex = 0 Then
+                print_raw(FormEmpUniSumReport.GCPeriod, "")
+            ElseIf FormEmpUniSumReport.XTCUniReport.SelectedTabPageIndex = 1 Then
+                print_raw(FormEmpUniSumReport.GCByDate, "")
+            ElseIf FormEmpUniSumReport.XTCUniReport.SelectedTabPageIndex = 2 Then
+                print_raw(FormEmpUniSumReport.GCDetail, "")
+            End If
+        ElseIf formName = "FormProductionClaimReturn" Then
+            print_raw_no_export(FormProductionClaimReturn.GCData)
+        ElseIf formName = "FormItemReq" Then
+            print_raw_no_export(FormItemReq.GCData)
+        ElseIf formName = "FormItemDel" Then
+            If FormItemDel.XTCDel.SelectedTabPageIndex = 0 Then
+                print_raw_no_export(FormItemDel.GCRequest)
+            ElseIf FormItemDel.XTCDel.SelectedTabPageIndex = 1 Then
+                print_raw_no_export(FormItemDel.GCDelivery)
+            End If
+        ElseIf formName = "FormPurcPayment" Then
+            print_raw_no_export(FormPurcPayment.GCPOList)
+        ElseIf formName = "FormBankWithdrawal" Then
+            If FormBankWithdrawal.XTCPO.SelectedTabPageIndex = 0 Then
+                print_raw_no_export(FormBankWithdrawal.GCList)
+            ElseIf FormBankWithdrawal.XTCPO.SelectedTabPageIndex = 1 Then
+                print_raw_no_export(FormBankWithdrawal.GCPOList)
+            End If
+        ElseIf formName = "FormBankDeposit" Then
+            If FormBankDeposit.XTCPO.SelectedTabPageIndex = 0 Then
+                print_raw_no_export(FormBankDeposit.GCList)
+            ElseIf FormBankDeposit.XTCPO.SelectedTabPageIndex = 1 Then
+                print_raw_no_export(FormBankDeposit.GCInvoiceList)
+            End If
+        ElseIf formName = "FormPurcAsset" Then
+            If FormPurcAsset.XTCAsset.SelectedTabPageIndex = 0 Then
+                print_raw_no_export(FormPurcAsset.GCPending)
+            ElseIf FormPurcAsset.XTCAsset.SelectedTabPageIndex = 1 Then
+                print_raw_no_export(FormPurcAsset.GCActive)
+            End If
+        ElseIf formName = "FormItemExpense" Then
+            print_raw_no_export(FormItemExpense.GCData)
+        ElseIf formName = "FormSalesReturnRec" Then
+            'Receive Return
+            Dim dateFrom As String = Date.Parse(FormSalesReturnRec.DEFrom.EditValue.ToString).ToString("dd MMMM yyyy")
+            Dim dateUntil As String = Date.Parse(FormSalesReturnRec.DEUntil.EditValue.ToString).ToString("dd MMMM yyyy")
+
+            Dim period As String = "Period : " + dateFrom + " until " + dateUntil
+
+            print(FormSalesReturnRec.GCList, "List Receive Return" + System.Environment.NewLine + period)
+        ElseIf formName = "FormOpt" Then
+            If FormOpt.XTCOpt.SelectedTabPageIndex = 0 Then
+                print_raw(FormOpt.GCCode, "List Opt")
+            ElseIf FormOpt.XTCOpt.SelectedTabPageIndex = 1 Then
+                print_raw(FormOpt.GCOther, "List Opt")
+            End If
+        ElseIf formName = "FormEmpPerAppraisal" Then
+            'Performance Appraisal
+            If FormEmpPerAppraisal.XTCEmp.SelectedTabPage.Name = "XTPPenilaian" Then
+                print(FormEmpPerAppraisal.GCList, "List Penilaian Kinerja Karyawan")
+            ElseIf FormEmpPerAppraisal.XTCEmp.SelectedTabPage.Name = "XTPHistory" Then
+                print(FormEmpPerAppraisal.GCHistory, "List History Penilaian Kinerja Karyawan")
+            End If
+        ElseIf formName = "FormDeptHeadSurvey" Then
+
+            If FormDeptHeadSurvey.XTCSurvey.SelectedTabPage.Name = "XTPForm" Then
+
+            ElseIf FormDeptHeadSurvey.XTCSurvey.SelectedTabPage.Name = "XTPPeriod" Then
+                print(FormDeptHeadSurvey.GCListPeriod, "List Periode Survey Dept Head")
+            End If
+        ElseIf formName = "FormSetKurs" Then
+            'Kurs Transaksi
+            print(FormSetKurs.GCKursTrans, "List Kurs")
+        ElseIf formName = "FormCashAdvance" Then
+            'FormCashAdvance
+            FormCashAdvance.print_list()
+        ElseIf formName = "FormVerifyMaster" Then
+            'verify master
+            If FormVerifyMaster.XTCVerify.SelectedTabPageIndex = 0 Then
+                print_raw(FormVerifyMaster.GCData, "")
+            ElseIf FormVerifyMaster.XTCVerify.SelectedTabPageIndex = 1 Then
+                print_raw(FormVerifyMaster.GCHistory, "")
+            End If
+        ElseIf formName = "FormSampleExpense" Then
+            'Sample Purchase Material
+            print(FormSampleExpense.GCPurchaseList, "List Purchase Sample Material")
+        ElseIf formName = "FormOLStore" Then
+            If FormOLStore.XtraTabControl1.SelectedTabPageIndex = 0 Then
+                print_raw(FormOLStore.GCSummary, "")
+            ElseIf FormOLStore.XtraTabControl1.SelectedTabPageIndex = 1 Then
+                print_raw(FormOLStore.GCDetail, "")
+            ElseIf FormOLStore.XtraTabControl1.SelectedTabPageIndex = 2 Then
+                print_raw(FormOLStore.GCCancellOrder, "")
+            End If
+        ElseIf formName = "FormEmloyeePps" Then
+            'Sample Purchase Material
+            print(FormEmloyeePps.GCEmployeePps, "List Proposal")
+        ElseIf formName = "FormSamplePurcClose" Then
+            print(FormSamplePurcClose.GCListClose, "List Closing")
         Else
             RPSubMenu.Visible = False
         End If
@@ -7712,6 +7974,78 @@ Public Class FormMain
         ElseIf formName = "FormReportMarkCancelList" Then
             FormReportMarkCancelList.Close()
             FormReportMarkCancelList.Dispose()
+        ElseIf formName = "FormPurcReceive" Then
+            FormPurcReceive.Close()
+            FormPurcReceive.Dispose()
+        ElseIf formName = "FormPurcItemStock" Then
+            FormPurcItemStock.Close()
+            FormPurcItemStock.Dispose()
+        ElseIf formName = "FormEmpUniSumReport" Then
+            FormEmpUniSumReport.Close()
+            FormEmpUniSumReport.Dispose()
+        ElseIf formName = "FormProductionClaimReturn" Then
+            FormProductionClaimReturn.Close()
+            FormProductionClaimReturn.Dispose()
+        ElseIf formName = "FormPurcReturn" Then
+            FormPurcReturn.Close()
+            FormPurcReturn.Dispose()
+        ElseIf formName = "FormItemReq" Then
+            FormItemReq.Close()
+            FormItemReq.Dispose()
+        ElseIf formName = "FormItemDel" Then
+            FormItemDel.Close()
+            FormItemDel.Dispose()
+        ElseIf formName = "FormPurcPayment" Then
+            FormPurcPayment.Close()
+            FormPurcPayment.Dispose()
+        ElseIf formName = "FormBankWithdrawal" Then
+            FormBankWithdrawal.Close()
+            FormBankWithdrawal.Dispose()
+        ElseIf formName = "FormBankDeposit" Then
+            FormBankDeposit.Close()
+            FormBankDeposit.Dispose()
+        ElseIf formName = "FormPurcAsset" Then
+            FormPurcAsset.Close()
+            FormPurcAsset.Dispose()
+        ElseIf formName = "FormItemExpense" Then
+            FormItemExpense.Close()
+            FormItemExpense.Dispose()
+        ElseIf formName = "FormCashAdvance" Then
+            FormCashAdvance.Close()
+            FormCashAdvance.Dispose()
+        ElseIf formName = "FormSalesReturnRec" Then
+            FormSalesReturnRec.Close()
+            FormSalesReturnRec.Dispose()
+        ElseIf formName = "FormOpt" Then
+            FormOpt.Close()
+            FormOpt.Dispose()
+        ElseIf formName = "FormEmpPerAppraisal" Then
+            FormEmpPerAppraisal.Close()
+            FormEmpPerAppraisal.Dispose()
+        ElseIf formName = "FormDeptHeadSurvey" Then
+            FormDeptHeadSurvey.Close()
+            FormDeptHeadSurvey.Dispose()
+        ElseIf formName = "FormSetKurs" Then
+            'Kurs Transaksi
+            FormSetKurs.Close()
+            FormSetKurs.Dispose()
+        ElseIf formName = "FormVerifyMaster" Then
+            'verify master
+            FormVerifyMaster.Close()
+            FormVerifyMaster.Dispose()
+        ElseIf formName = "FormSampleExpense" Then
+            'Sample Purchase Material
+            FormSampleExpense.Close()
+            FormSampleExpense.Dispose()
+        ElseIf formName = "FormOLStore" Then
+            FormOLStore.Close()
+            FormOLStore.Dispose()
+        ElseIf formName = "FormEmloyeePps" Then
+            FormEmloyeePps.Close()
+            FormEmloyeePps.Dispose()
+        ElseIf formName = "FormSamplePurcClose" Then
+            FormSamplePurcClose.Close()
+            FormSamplePurcClose.Dispose()
         Else
             RPSubMenu.Visible = False
         End If
@@ -7889,9 +8223,9 @@ Public Class FormMain
             FormSampleReq.viewSampleReq()
         ElseIf formName = "FormMatPurchase" Then
             'Material Purchase
-            If FormMatPurchase.XtraTabControl1.SelectedTabPageIndex = 0 Then 'purchase order
+            If FormMatPurchase.XTCPurcMat.SelectedTabPageIndex = 0 Then 'purchase order
                 FormMatPurchase.view_mat_purc()
-            ElseIf FormMatPurchase.XtraTabControl1.SelectedTabPageIndex = 1 Then 'prod demand
+            ElseIf FormMatPurchase.XTCPurcMat.SelectedTabPageIndex = 1 Then 'prod demand
                 FormMatPurchase.viewProdDemand()
             End If
         ElseIf formName = "FormMatWO" Then
@@ -8425,6 +8759,78 @@ Public Class FormMain
             FormBudgetExpenseRevision.viewData()
         ElseIf formName = "FormProdDemandRev" Then
             FormProdDemandRev.viewData()
+        ElseIf formName = "FormPurcReceive" Then
+            If FormPurcReceive.XTCRec.SelectedTabPageIndex = 0 Then
+                FormPurcReceive.viewOrder()
+            ElseIf FormPurcReceive.XTCRec.SelectedTabPageIndex = 1 Then
+                FormPurcReceive.viewReceive()
+            End If
+        ElseIf formName = "FormPurcReturn" Then
+            If FormPurcReturn.XTCReturn.SelectedTabPageIndex = 0 Then
+                FormPurcReturn.viewOrder()
+            ElseIf FormPurcReturn.XTCReturn.SelectedTabPageIndex = 1 Then
+                FormPurcReturn.viewReturn()
+            End If
+        ElseIf formName = "FormProductionClaimReturn" Then
+            FormProductionClaimReturn.viewData()
+        ElseIf formName = "FormItemReq" Then
+            FormItemReq.viewData()
+        ElseIf formName = "FormItemDel" Then
+            If FormItemDel.XTCDel.SelectedTabPageIndex = 0 Then
+                FormItemDel.viewRequest()
+            ElseIf FormItemDel.XTCDel.SelectedTabPageIndex = 1 Then
+                FormItemDel.viewDelivery()
+            End If
+        ElseIf formName = "FormBankWithdrawal" Then
+            If FormBankWithdrawal.XTCPO.SelectedTabPageIndex = 0 Then
+                FormBankWithdrawal.load_payment()
+            ElseIf FormBankWithdrawal.XTCPO.SelectedTabPageIndex = 1 Then
+                FormBankWithdrawal.load_po()
+            End If
+        ElseIf formName = "FormBankDeposit" Then
+            If FormBankDeposit.XTCPO.SelectedTabPageIndex = 0 Then
+                FormBankDeposit.load_deposit()
+            ElseIf FormBankDeposit.XTCPO.SelectedTabPageIndex = 1 Then
+                FormBankDeposit.load_invoice()
+            End If
+        ElseIf formName = "FormPurcAsset" Then
+            If FormPurcAsset.XTCAsset.SelectedTabPageIndex = 0 Then
+                FormPurcAsset.viewPending()
+            ElseIf FormPurcAsset.XTCAsset.SelectedTabPageIndex = 1 Then
+                FormPurcAsset.viewActive()
+            End If
+        ElseIf formName = "FormItemExpense" Then
+            FormItemExpense.viewData()
+        ElseIf formName = "FormSalesReturnRec" Then
+            FormSalesReturnRec.load_list()
+        ElseIf formName = "FormOpt" Then
+            FormOpt.load_data()
+        ElseIf formName = "FormEmpPerAppraisal" Then
+            FormEmpPerAppraisal.load_employee()
+        ElseIf formName = "FormDeptHeadSurvey" Then
+            If FormDeptHeadSurvey.XTCSurvey.SelectedTabPage.Name = "XTPForm" Then
+                FormDeptHeadSurvey.load_question()
+            ElseIf FormDeptHeadSurvey.XTCSurvey.SelectedTabPage.Name = "XTPPeriod" Then
+                FormDeptHeadSurvey.load_period()
+            End If
+        ElseIf formName = "FormSetKurs" Then
+            FormSetKurs.load_kurs()
+        ElseIf formName = "FormCashAdvance" Then
+            FormCashAdvance.load_cash_advance()
+        ElseIf formName = "FormSampleExpense" Then
+            FormSampleExpense.load_purc("2")
+        ElseIf formName = "FormOLStore" Then
+            If FormOLStore.XtraTabControl1.SelectedTabPageIndex = 0 Then
+                FormOLStore.viewSummary()
+            ElseIf FormOLStore.XtraTabControl1.SelectedTabPageIndex = 1 Then
+                FormOLStore.viewDetail()
+            ElseIf FormOLStore.XtraTabControl1.SelectedTabPageIndex = 2 Then
+                FormOLStore.viewDetailCancell()
+            End If
+        ElseIf formName = "FormEmloyeePps" Then
+            FormEmloyeePps.load_pps()
+        ElseIf formName = "FormSamplePurcClose" Then
+            FormSamplePurcClose.load_close("1")
         End If
     End Sub
     'Switch
@@ -11736,6 +12142,407 @@ Public Class FormMain
     End Sub
 
     Private Sub NBPurcReceiveNonAsset_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBPurcReceiveNonAsset.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormPurcReceive.MdiParent = Me
+            FormPurcReceive.Show()
+            FormPurcReceive.WindowState = FormWindowState.Maximized
+            FormPurcReceive.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
 
+    Private Sub NBItemStock_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBItemStock.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormPurcItemStock.MdiParent = Me
+            FormPurcItemStock.Show()
+            FormPurcItemStock.WindowState = FormWindowState.Maximized
+            FormPurcItemStock.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBPurcReturn_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBPurcReturn.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormPurcReturn.MdiParent = Me
+            FormPurcReturn.Show()
+            FormPurcReturn.WindowState = FormWindowState.Maximized
+            FormPurcReturn.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBEmpUniSummary_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBEmpUniSummary.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormEmpUniSumReport.MdiParent = Me
+            FormEmpUniSumReport.Show()
+            FormEmpUniSumReport.WindowState = FormWindowState.Maximized
+            FormEmpUniSumReport.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBClaimReturn_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBClaimReturn.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormProductionClaimReturn.MdiParent = Me
+            FormProductionClaimReturn.Show()
+            FormProductionClaimReturn.WindowState = FormWindowState.Maximized
+            FormProductionClaimReturn.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBItemRequest_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBItemRequest.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormItemReq.MdiParent = Me
+            FormItemReq.Show()
+            FormItemReq.WindowState = FormWindowState.Maximized
+            FormItemReq.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBItemDel_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBItemDel.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormItemDel.MdiParent = Me
+            FormItemDel.Show()
+            FormItemDel.WindowState = FormWindowState.Maximized
+            FormItemDel.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBPurcPayment_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBPurcPayment.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormPurcPayment.MdiParent = Me
+            FormPurcPayment.Show()
+            FormPurcPayment.WindowState = FormWindowState.Maximized
+            FormPurcPayment.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBItemExpense_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBItemExpense.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormItemExpense.MdiParent = Me
+            FormItemExpense.Show()
+            FormItemExpense.WindowState = FormWindowState.Maximized
+            FormItemExpense.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBBankWithdrawal_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBBankWithdrawal.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormBankWithdrawal.MdiParent = Me
+            FormBankWithdrawal.Show()
+            FormBankWithdrawal.WindowState = FormWindowState.Maximized
+            FormBankWithdrawal.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBAssetManagement_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBAssetManagement.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormPurcAsset.MdiParent = Me
+            FormPurcAsset.Show()
+            FormPurcAsset.WindowState = FormWindowState.Maximized
+            FormPurcAsset.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBBankDeposit_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBBankDeposit.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormBankDeposit.MdiParent = Me
+            FormBankDeposit.Show()
+            FormBankDeposit.WindowState = FormWindowState.Maximized
+            FormBankDeposit.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBItemRequestForStore_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBItemRequestForStore.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormItemReq.Close()
+            FormItemReq.Dispose()
+        Catch ex As Exception
+        End Try
+
+        Try
+            FormItemReq.MdiParent = Me
+            FormItemReq.is_for_store = "1"
+            FormItemReq.Show()
+            FormItemReq.WindowState = FormWindowState.Maximized
+            FormItemReq.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBSalesReturnRec_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBSalesReturnRec.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormSalesReturnRec.MdiParent = Me
+            FormSalesReturnRec.Show()
+            FormSalesReturnRec.WindowState = FormWindowState.Maximized
+            FormSalesReturnRec.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBCashAdvance_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBCashAdvance.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormCashAdvance.MdiParent = Me
+            FormCashAdvance.Show()
+            FormCashAdvance.WindowState = FormWindowState.Maximized
+            FormCashAdvance.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBOpt_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBOpt.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormOpt.MdiParent = Me
+            FormOpt.Show()
+            FormOpt.WindowState = FormWindowState.Maximized
+            FormOpt.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBEmpPerAppraisal_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBEmpPerAppraisal.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormEmpPerAppraisal.MdiParent = Me
+            FormEmpPerAppraisal.is_hrd = "1"
+            FormEmpPerAppraisal.Show()
+            FormEmpPerAppraisal.WindowState = FormWindowState.Maximized
+            FormEmpPerAppraisal.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBEmpPerAppraisalDep_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBEmpPerAppraisalDep.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormEmpPerAppraisal.MdiParent = Me
+            FormEmpPerAppraisal.is_dephead = "1"
+            FormEmpPerAppraisal.Show()
+            FormEmpPerAppraisal.WindowState = FormWindowState.Maximized
+            FormEmpPerAppraisal.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBDeptHeadSurvey_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBDeptHeadSurvey.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            Dim id_period As Integer = Convert.ToInt32(execute_query("SELECT IFNULL((SELECT id_question_depthead_period FROM tb_question_depthead_period WHERE `status` = 1 AND CURDATE() >= from_period AND CURDATE() <= until_period LIMIT 1), 0) AS id_question_depthead_period", 0, True, "", "", "", ""))
+
+            If id_period = 0 Then
+                stopCustom("Tidak sedang dalam periode survey.")
+            Else
+                FormDeptHeadSurvey.MdiParent = Me
+                FormDeptHeadSurvey.Show()
+                FormDeptHeadSurvey.WindowState = FormWindowState.Maximized
+                FormDeptHeadSurvey.Focus()
+            End If
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBDeptHeadSurveyHRD_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBDeptHeadSurveyHRD.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormDeptHeadSurvey.MdiParent = Me
+            FormDeptHeadSurvey.is_hrd = "1"
+            FormDeptHeadSurvey.Show()
+            FormDeptHeadSurvey.WindowState = FormWindowState.Maximized
+            FormDeptHeadSurvey.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBKursTrans_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBKursTrans.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormSetKurs.MdiParent = Me
+            FormSetKurs.Show()
+            FormSetKurs.WindowState = FormWindowState.Maximized
+            FormSetKurs.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBProposeExpenseBudgetAdmin_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBProposeExpenseBudgetAdmin.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormBudgetExpensePropose.Close()
+            FormBudgetExpensePropose.Dispose()
+        Catch ex As Exception
+        End Try
+        Try
+            FormBudgetExpensePropose.MdiParent = Me
+            FormBudgetExpensePropose.is_admin = "1"
+            FormBudgetExpensePropose.Show()
+            FormBudgetExpensePropose.WindowState = FormWindowState.Maximized
+            FormBudgetExpensePropose.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBRevExpenseBudgetAdmin_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBRevExpenseBudgetAdmin.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormBudgetExpenseRevision.Close()
+            FormBudgetExpenseRevision.Dispose()
+        Catch ex As Exception
+        End Try
+        Try
+            FormBudgetExpenseRevision.MdiParent = Me
+            FormBudgetExpenseRevision.is_admin = "1"
+            FormBudgetExpenseRevision.Show()
+            FormBudgetExpenseRevision.WindowState = FormWindowState.Maximized
+            FormBudgetExpenseRevision.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBSampleBudget_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBSampleBudget.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormSampleBudget.MdiParent = Me
+            FormSampleBudget.Show()
+            FormSampleBudget.WindowState = FormWindowState.Maximized
+            FormSampleBudget.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBOLStoreWork_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBOLStoreWork.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormOLStore.MdiParent = Me
+            FormOLStore.Show()
+            FormOLStore.WindowState = FormWindowState.Maximized
+            FormOLStore.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBVerifyMaster_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBVerifyMaster.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormVerifyMaster.MdiParent = Me
+            FormVerifyMaster.Show()
+            FormVerifyMaster.WindowState = FormWindowState.Maximized
+            FormVerifyMaster.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBSamplePOMat_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBSamplePOMat.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormSampleExpense.MdiParent = Me
+            FormSampleExpense.Show()
+            FormSampleExpense.WindowState = FormWindowState.Maximized
+            FormSampleExpense.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBProposeEmp_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBProposeEmp.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormEmloyeePps.MdiParent = Me
+            FormEmloyeePps.Show()
+            FormEmloyeePps.WindowState = FormWindowState.Maximized
+            FormEmloyeePps.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBSamplePurcClose_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBSamplePurcClose.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormSamplePurcClose.MdiParent = Me
+            FormSamplePurcClose.Show()
+            FormSamplePurcClose.WindowState = FormWindowState.Maximized
+            FormSamplePurcClose.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
     End Sub
 End Class

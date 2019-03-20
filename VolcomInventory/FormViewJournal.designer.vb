@@ -33,6 +33,7 @@ Partial Class FormViewJournal
         Me.RepositoryItemTextEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.GridColumnIdReport = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnReportMT = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnDesc = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControl4 = New DevExpress.XtraEditors.PanelControl()
         Me.MENote = New DevExpress.XtraEditors.MemoEdit()
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
@@ -73,17 +74,20 @@ Partial Class FormViewJournal
         Me.GCJournalDet.MainView = Me.GVJournalDet
         Me.GCJournalDet.Name = "GCJournalDet"
         Me.GCJournalDet.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemTextEdit1, Me.RepositoryItemTextEdit2})
-        Me.GCJournalDet.Size = New System.Drawing.Size(744, 326)
+        Me.GCJournalDet.Size = New System.Drawing.Size(834, 326)
         Me.GCJournalDet.TabIndex = 11
         Me.GCJournalDet.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVJournalDet})
         '
         'GVJournalDet
         '
-        Me.GVJournalDet.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn6, Me.GridColumn7, Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumnIdReport, Me.GridColumnReportMT})
+        Me.GVJournalDet.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn6, Me.GridColumn7, Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumnIdReport, Me.GridColumnReportMT, Me.GridColumnDesc})
         Me.GVJournalDet.GridControl = Me.GCJournalDet
         Me.GVJournalDet.Name = "GVJournalDet"
+        Me.GVJournalDet.OptionsBehavior.AutoExpandAllGroups = True
+        Me.GVJournalDet.OptionsBehavior.Editable = False
         Me.GVJournalDet.OptionsView.ShowFooter = True
         Me.GVJournalDet.OptionsView.ShowGroupPanel = False
+        Me.GVJournalDet.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumn4, DevExpress.Data.ColumnSortOrder.Descending)})
         '
         'GridColumn6
         '
@@ -130,7 +134,7 @@ Partial Class FormViewJournal
         Me.GridColumn3.FieldName = "note"
         Me.GridColumn3.Name = "GridColumn3"
         Me.GridColumn3.Visible = True
-        Me.GridColumn3.VisibleIndex = 2
+        Me.GridColumn3.VisibleIndex = 3
         Me.GridColumn3.Width = 300
         '
         'GridColumn4
@@ -147,7 +151,7 @@ Partial Class FormViewJournal
         Me.GridColumn4.Name = "GridColumn4"
         Me.GridColumn4.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "debit", "{0:N2}")})
         Me.GridColumn4.Visible = True
-        Me.GridColumn4.VisibleIndex = 3
+        Me.GridColumn4.VisibleIndex = 4
         Me.GridColumn4.Width = 138
         '
         'RepositoryItemTextEdit1
@@ -176,7 +180,7 @@ Partial Class FormViewJournal
         Me.GridColumn5.Name = "GridColumn5"
         Me.GridColumn5.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "credit", "{0:N2}")})
         Me.GridColumn5.Visible = True
-        Me.GridColumn5.VisibleIndex = 4
+        Me.GridColumn5.VisibleIndex = 5
         Me.GridColumn5.Width = 134
         '
         'RepositoryItemTextEdit2
@@ -203,6 +207,14 @@ Partial Class FormViewJournal
         Me.GridColumnReportMT.FieldName = "report_mark_type"
         Me.GridColumnReportMT.Name = "GridColumnReportMT"
         '
+        'GridColumnDesc
+        '
+        Me.GridColumnDesc.Caption = "Description"
+        Me.GridColumnDesc.FieldName = "acc_description"
+        Me.GridColumnDesc.Name = "GridColumnDesc"
+        Me.GridColumnDesc.Visible = True
+        Me.GridColumnDesc.VisibleIndex = 2
+        '
         'PanelControl4
         '
         Me.PanelControl4.Controls.Add(Me.MENote)
@@ -210,7 +222,7 @@ Partial Class FormViewJournal
         Me.PanelControl4.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.PanelControl4.Location = New System.Drawing.Point(0, 401)
         Me.PanelControl4.Name = "PanelControl4"
-        Me.PanelControl4.Size = New System.Drawing.Size(744, 58)
+        Me.PanelControl4.Size = New System.Drawing.Size(834, 58)
         Me.PanelControl4.TabIndex = 13
         '
         'MENote
@@ -234,7 +246,7 @@ Partial Class FormViewJournal
         Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.PanelControl2.Location = New System.Drawing.Point(0, 459)
         Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(744, 33)
+        Me.PanelControl2.Size = New System.Drawing.Size(834, 33)
         Me.PanelControl2.TabIndex = 10
         '
         'BMark
@@ -242,7 +254,7 @@ Partial Class FormViewJournal
         Me.BMark.Dock = System.Windows.Forms.DockStyle.Fill
         Me.BMark.Location = New System.Drawing.Point(2, 2)
         Me.BMark.Name = "BMark"
-        Me.BMark.Size = New System.Drawing.Size(740, 29)
+        Me.BMark.Size = New System.Drawing.Size(830, 29)
         Me.BMark.TabIndex = 21
         Me.BMark.Text = "Mark"
         '
@@ -258,7 +270,7 @@ Partial Class FormViewJournal
         Me.PCGeneralheader.Dock = System.Windows.Forms.DockStyle.Top
         Me.PCGeneralheader.Location = New System.Drawing.Point(0, 0)
         Me.PCGeneralheader.Name = "PCGeneralheader"
-        Me.PCGeneralheader.Size = New System.Drawing.Size(744, 75)
+        Me.PCGeneralheader.Size = New System.Drawing.Size(834, 75)
         Me.PCGeneralheader.TabIndex = 9
         '
         'LEBilling
@@ -282,14 +294,14 @@ Partial Class FormViewJournal
         'TEUserEntry
         '
         Me.TEUserEntry.Enabled = False
-        Me.TEUserEntry.Location = New System.Drawing.Point(525, 38)
+        Me.TEUserEntry.Location = New System.Drawing.Point(619, 38)
         Me.TEUserEntry.Name = "TEUserEntry"
         Me.TEUserEntry.Size = New System.Drawing.Size(203, 20)
         Me.TEUserEntry.TabIndex = 5
         '
         'LabelControl2
         '
-        Me.LabelControl2.Location = New System.Drawing.Point(456, 41)
+        Me.LabelControl2.Location = New System.Drawing.Point(550, 41)
         Me.LabelControl2.Name = "LabelControl2"
         Me.LabelControl2.Size = New System.Drawing.Size(51, 13)
         Me.LabelControl2.TabIndex = 4
@@ -314,14 +326,14 @@ Partial Class FormViewJournal
         'TEDate
         '
         Me.TEDate.Enabled = False
-        Me.TEDate.Location = New System.Drawing.Point(525, 12)
+        Me.TEDate.Location = New System.Drawing.Point(619, 12)
         Me.TEDate.Name = "TEDate"
         Me.TEDate.Size = New System.Drawing.Size(203, 20)
         Me.TEDate.TabIndex = 1
         '
         'LTransNo
         '
-        Me.LTransNo.Location = New System.Drawing.Point(456, 15)
+        Me.LTransNo.Location = New System.Drawing.Point(550, 15)
         Me.LTransNo.Name = "LTransNo"
         Me.LTransNo.Size = New System.Drawing.Size(23, 13)
         Me.LTransNo.TabIndex = 0
@@ -343,7 +355,7 @@ Partial Class FormViewJournal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(744, 492)
+        Me.ClientSize = New System.Drawing.Size(834, 492)
         Me.Controls.Add(Me.GCJournalDet)
         Me.Controls.Add(Me.PanelControl4)
         Me.Controls.Add(Me.PanelControl2)
@@ -404,4 +416,5 @@ Partial Class FormViewJournal
     Friend WithEvents GridColumnIdReport As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnReportMT As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents LEBilling As DevExpress.XtraEditors.LookUpEdit
+    Friend WithEvents GridColumnDesc As DevExpress.XtraGrid.Columns.GridColumn
 End Class

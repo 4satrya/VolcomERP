@@ -25,11 +25,11 @@ Partial Class FormPurcItem
         Me.RICECheck = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn17 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -76,9 +76,10 @@ Partial Class FormPurcItem
         '
         'GVItem
         '
-        Me.GVItem.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnPick, Me.GridColumn1, Me.GridColumn3, Me.GridColumn17, Me.GridColumn10, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumn7, Me.GridColumn8, Me.GridColumn9})
+        Me.GVItem.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnPick, Me.GridColumn1, Me.GridColumn3, Me.GridColumn2, Me.GridColumn17, Me.GridColumn10, Me.GridColumn4, Me.GridColumn5, Me.GridColumn7, Me.GridColumn8, Me.GridColumn9})
         Me.GVItem.GridControl = Me.GCItem
         Me.GVItem.Name = "GVItem"
+        Me.GVItem.OptionsBehavior.Editable = False
         Me.GVItem.OptionsFind.AlwaysVisible = True
         Me.GVItem.OptionsView.ShowGroupPanel = False
         '
@@ -114,13 +115,19 @@ Partial Class FormPurcItem
         Me.GridColumn3.FieldName = "id_item_cat"
         Me.GridColumn3.Name = "GridColumn3"
         '
+        'GridColumn2
+        '
+        Me.GridColumn2.Caption = "Item Type"
+        Me.GridColumn2.FieldName = "item_type"
+        Me.GridColumn2.Name = "GridColumn2"
+        '
         'GridColumn17
         '
         Me.GridColumn17.Caption = "Type"
         Me.GridColumn17.FieldName = "expense_type"
         Me.GridColumn17.Name = "GridColumn17"
         Me.GridColumn17.Visible = True
-        Me.GridColumn17.VisibleIndex = 3
+        Me.GridColumn17.VisibleIndex = 5
         '
         'GridColumn10
         '
@@ -128,7 +135,7 @@ Partial Class FormPurcItem
         Me.GridColumn10.FieldName = "item_desc"
         Me.GridColumn10.Name = "GridColumn10"
         Me.GridColumn10.Visible = True
-        Me.GridColumn10.VisibleIndex = 4
+        Me.GridColumn10.VisibleIndex = 2
         '
         'GridColumn4
         '
@@ -136,7 +143,7 @@ Partial Class FormPurcItem
         Me.GridColumn4.FieldName = "item_cat"
         Me.GridColumn4.Name = "GridColumn4"
         Me.GridColumn4.Visible = True
-        Me.GridColumn4.VisibleIndex = 2
+        Me.GridColumn4.VisibleIndex = 4
         '
         'GridColumn5
         '
@@ -144,18 +151,11 @@ Partial Class FormPurcItem
         Me.GridColumn5.FieldName = "value"
         Me.GridColumn5.Name = "GridColumn5"
         '
-        'GridColumn6
-        '
-        Me.GridColumn6.Caption = "Track Stock"
-        Me.GridColumn6.ColumnEdit = Me.RICECheck
-        Me.GridColumn6.FieldName = "is_stock"
-        Me.GridColumn6.Name = "GridColumn6"
-        Me.GridColumn6.Visible = True
-        Me.GridColumn6.VisibleIndex = 5
-        '
         'GridColumn7
         '
         Me.GridColumn7.Caption = "Date Created"
+        Me.GridColumn7.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.GridColumn7.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.GridColumn7.FieldName = "date_created"
         Me.GridColumn7.Name = "GridColumn7"
         Me.GridColumn7.Visible = True
@@ -167,7 +167,7 @@ Partial Class FormPurcItem
         Me.GridColumn8.FieldName = "uom"
         Me.GridColumn8.Name = "GridColumn8"
         Me.GridColumn8.Visible = True
-        Me.GridColumn8.VisibleIndex = 7
+        Me.GridColumn8.VisibleIndex = 3
         '
         'GridColumn9
         '
@@ -175,7 +175,7 @@ Partial Class FormPurcItem
         Me.GridColumn9.FieldName = "emp_created"
         Me.GridColumn9.Name = "GridColumn9"
         Me.GridColumn9.Visible = True
-        Me.GridColumn9.VisibleIndex = 8
+        Me.GridColumn9.VisibleIndex = 7
         '
         'PanelControl1
         '
@@ -355,7 +355,6 @@ Partial Class FormPurcItem
     Friend WithEvents GridColumn10 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn7 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn8 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn9 As DevExpress.XtraGrid.Columns.GridColumn
@@ -377,4 +376,5 @@ Partial Class FormPurcItem
     Friend WithEvents GridColumn16 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents LabelControl3 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents GridColumn17 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn2 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

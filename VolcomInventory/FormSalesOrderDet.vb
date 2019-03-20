@@ -179,7 +179,12 @@ Public Class FormSalesOrderDet
     End Sub
 
     Sub viewDetail(ByVal id_sales_order_par As String)
-        Dim query As String = "CALL view_sales_order('" + id_sales_order_par + "')"
+        Dim query As String = ""
+        If id_commerce_type = "2" Then
+            query = "CALL view_sales_order_ol_store('" + id_sales_order_par + "')"
+        Else
+            query = "CALL view_sales_order('" + id_sales_order_par + "')"
+        End If
         Dim data As DataTable = execute_query(query, "-1", True, "", "", "", "")
         If action = "ins" Then
             'action

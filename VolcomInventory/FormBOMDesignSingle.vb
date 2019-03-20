@@ -428,6 +428,10 @@
 
     Private Sub FormBOMSingle_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
         '
+        If Not id_bom_approve = "-1" Then
+            Dim query_upd As String = "UPDATE tb_bom SET `bom_last_updated`=NOW() WHERE tb_bom.`id_bom_approve`='" & id_bom_approve & "' "
+            execute_non_query(query_upd, True, "", "", "", "")
+        End If
         Dispose()
     End Sub
 

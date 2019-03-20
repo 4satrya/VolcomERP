@@ -517,9 +517,10 @@
             condition = ""
         End If
 
-        Dim query As String = "SELECT r.id_prod_demand_rev, r.id_prod_demand, pd.prod_demand_number, pd.id_pd_kind, r.rev_count, r.id_report_status, stt.report_status, r.created_date, r.note, r.is_confirm
+        Dim query As String = "SELECT r.id_prod_demand_rev, r.id_prod_demand, pd.prod_demand_number, pd.id_pd_kind, r.rev_count, r.id_report_status, stt.report_status, r.created_date, r.note, r.is_confirm, pd.id_season, s.season
         FROM tb_prod_demand_rev r
         INNER JOIN tb_prod_demand pd ON pd.id_prod_demand = r.id_prod_demand
+        INNER JOIN tb_season s ON s.id_season = pd.id_season
         INNER JOIN tb_lookup_report_status stt ON stt.id_report_status = r.id_report_status
         WHERE r.id_prod_demand_rev>0 "
         query += condition + " "
@@ -527,4 +528,84 @@
         query += "ORDER BY r.id_prod_demand_rev " + order_type
         Return query
     End Function
+
+    Sub generateBreakSize(ByVal id_prod_demand As String, ByVal GVDesign As DevExpress.XtraGrid.Views.Grid.GridView)
+        Dim query As String = "SELECT pdd.id_prod_demand_design,
+                IFNULL(SUM(CASE WHEN cd.index_size=1 THEN pdp.prod_demand_product_qty END),0) AS `qty1`,
+                IFNULL(SUM(CASE WHEN cd.index_size=2 THEN pdp.prod_demand_product_qty END),0) AS `qty2`,
+                IFNULL(SUM(CASE WHEN cd.index_size=3 THEN pdp.prod_demand_product_qty END),0) AS `qty3`,
+                IFNULL(SUM(CASE WHEN cd.index_size=4 THEN pdp.prod_demand_product_qty END),0) AS `qty4`,
+                IFNULL(SUM(CASE WHEN cd.index_size=5 THEN pdp.prod_demand_product_qty END),0) AS `qty5`,
+                IFNULL(SUM(CASE WHEN cd.index_size=6 THEN pdp.prod_demand_product_qty END),0) AS `qty6`,
+                IFNULL(SUM(CASE WHEN cd.index_size=7 THEN pdp.prod_demand_product_qty END),0) AS `qty7`,
+                IFNULL(SUM(CASE WHEN cd.index_size=8 THEN pdp.prod_demand_product_qty END),0) AS `qty8`,
+                IFNULL(SUM(CASE WHEN cd.index_size=9 THEN pdp.prod_demand_product_qty END),0) AS `qty9`,
+                IFNULL(SUM(CASE WHEN cd.index_size=10 THEN pdp.prod_demand_product_qty END),0) AS `qty10`
+                FROM tb_prod_demand_design pdd 
+                INNER JOIN tb_prod_demand_product pdp ON pdp.id_prod_demand_design =  pdd.id_prod_demand_design
+                INNER JOIN tb_m_product p ON p.id_product = pdp.id_product
+                INNER JOIN tb_m_product_code pc ON pc.id_product = p.id_product
+                INNER JOIN tb_m_code_detail cd ON cd.id_code_detail = pc.id_code_detail
+                WHERE pdd.id_prod_demand=" + id_prod_demand + " AND pdp.prod_demand_product_qty>0
+                GROUP BY pdd.id_prod_demand_design "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+
+        makeSafeGV(GVDesign)
+        For i As Integer = 0 To ((GVDesign.RowCount - 1) - GetGroupRowCount(GVDesign))
+            Dim id_pdd As String = GVDesign.GetRowCellValue(i, "id_prod_demand_design").ToString
+            Dim data_filter_cek As DataRow() = data.Select("[id_prod_demand_design]='" + id_pdd + "' ")
+            For j As Integer = 1 To 10
+                GVDesign.SetRowCellValue(i, "qty" + j.ToString, data_filter_cek(0)("qty" + j.ToString))
+            Next
+            GVDesign.RefreshData()
+        Next
+
+        'set caption
+        Dim query_caption As String = " SELECT cd.index_size,CONCAT('qty',cd.index_size) AS `col`,GROUP_CONCAT(DISTINCT cd.code_detail_name ORDER BY cd.code_detail_name ASC SEPARATOR '\n') AS `caption` FROM tb_m_code_detail cd
+                WHERE cd.id_code='33'
+                AND cd.`index_size` IN (
+                    SELECT cd.`index_size` FROM tb_prod_demand_design pdd 
+                    INNER JOIN tb_prod_demand_product pdp ON pdp.id_prod_demand_design =  pdd.id_prod_demand_design
+                    INNER JOIN tb_m_product p ON p.id_product = pdp.id_product
+                    INNER JOIN tb_m_product_code pc ON pc.id_product = p.id_product
+                    INNER JOIN tb_m_code_detail cd ON cd.id_code_detail = pc.id_code_detail
+                    WHERE pdd.id_prod_demand=" + id_prod_demand + " AND pdp.prod_demand_product_qty>0
+                    GROUP BY cd.`index_size`
+                )
+                AND cd.`size_type` IN (
+                    SELECT cd.`size_type` FROM tb_prod_demand_design pdd 
+                    INNER JOIN tb_prod_demand_product pdp ON pdp.id_prod_demand_design =  pdd.id_prod_demand_design
+                    INNER JOIN tb_m_product p ON p.id_product = pdp.id_product
+                    INNER JOIN tb_m_product_code pc ON pc.id_product = p.id_product
+                    INNER JOIN tb_m_code_detail cd ON cd.id_code_detail = pc.id_code_detail
+                    WHERE pdd.id_prod_demand=" + id_prod_demand + " AND pdp.prod_demand_product_qty>0
+                    GROUP BY cd.`size_type`
+                )
+                GROUP BY cd.index_size "
+        Dim data_caption As DataTable = execute_query(query_caption, -1, True, "", "", "", "")
+        For c As Integer = 0 To data_caption.Rows.Count - 1
+            GVDesign.Columns(data_caption.Rows(c)("col").ToString).Caption = data_caption.Rows(c)("caption").ToString
+        Next
+    End Sub
+
+    Sub showBreakSize(ByVal GVDesign As DevExpress.XtraGrid.Views.Grid.GridView)
+        Dim i As Integer = GVDesign.Columns("TOTAL QTY_add_report_column").VisibleIndex
+        Dim index_last_visible = i
+        For j As Integer = 1 To 10
+            If GVDesign.Columns("qty" + j.ToString).SummaryItem.SummaryValue > 0 Then
+                index_last_visible += 1
+                If j < 10 Then
+                    GVDesign.Columns("qty" + j.ToString).VisibleIndex = index_last_visible
+                Else
+                    GVDesign.Columns("qty" + j.ToString).VisibleIndex = i + 1
+                End If
+            End If
+        Next
+    End Sub
+
+    Sub hideBreakSize(ByVal GVDesign As DevExpress.XtraGrid.Views.Grid.GridView)
+        For j As Integer = 1 To 10
+            GVDesign.Columns("qty" + j.ToString).Visible = False
+        Next
+    End Sub
 End Class

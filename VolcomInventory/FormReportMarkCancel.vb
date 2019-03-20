@@ -10,7 +10,7 @@
     Private Sub FormReportMarkCancel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         act_load()
     End Sub
-
+    '
     Sub load_report_mark_type()
         Dim query As String = "SELECT report_mark_type,report_mark_type_name FROM `tb_lookup_report_mark_type` WHERE is_able_cancel='1'"
         viewLookupQuery(LEReportMarkType, query, 0, "report_mark_type_name", "report_mark_type")
@@ -30,6 +30,7 @@
                 DEDateProposed.EditValue = data.Rows(0)("created_datetime")
                 MEReason.Text = data.Rows(0)("reason").ToString
                 LEReportMarkType.ItemIndex = LEReportMarkType.Properties.GetDataSourceRowIndex("report_mark_type", data.Rows(0)("report_mark_type").ToString)
+                LEReportMarkType.Enabled = False
                 '
                 PCAddDel.Visible = False
                 BAddColumn.Visible = False
@@ -38,29 +39,9 @@
                 '
                 load_det()
                 '
-                Dim query_approve As String = "SELECT a.id_report_mark,a.id_mark, a.info , a.info_design ,a.info_design_code ,a.info_report , a.report_mark_type , a.id_report , a.id_report_status , c.report_status , b.report_mark_type_name 
-                                                ,a.report_mark_start_datetime AS date_time_start 
-                                                ,ADDTIME(report_mark_start_datetime,report_mark_lead_time) AS lead_time 
-                                                ,ADDTIME(report_mark_start_datetime,report_mark_lead_time) AS raw_lead_time 
-                                                ,TIME_TO_SEC(TIMEDIFF(NOW(),((ADDTIME(report_mark_start_datetime,report_mark_lead_time))))) AS time_miss, report_date, report_number 
-                                                FROM tb_report_mark a 
-                                                INNER JOIN tb_lookup_report_mark_type b ON b.report_mark_type = a.report_mark_type 
-                                                INNER JOIN tb_lookup_report_status c ON c.id_report_status = a.id_report_status 
-                                                LEFT JOIN 
-                                                                    (
-	                                                                    SELECT report_mark_type,id_report,id_mark_asg,COUNT(id_report_mark) AS jml FROM tb_report_mark WHERE id_mark!=1 GROUP BY report_mark_type,id_report,id_mark_asg
-                                                                    ) mark ON  a.report_mark_type=mark.report_mark_type AND a.id_report=mark.id_report AND a.id_mark_asg=mark.id_mark_asg 
-                                                WHERE a.id_mark = 1 AND a.id_user ='" & id_user & "' AND NOW()>a.report_mark_start_datetime 
-                                                AND IFNULL(mark.jml,0) < 1 AND a.id_report='" & id_report_mark_cancel & "' AND a.report_mark_type='142'"
-                Dim data_approve As DataTable = execute_query(query_approve, -1, True, "", "", "", "")
-                If data_approve.Rows.Count > 0 Then
-                    PCSubmit.Visible = True
-                    BSubmit.Text = "Approve"
-                    id_report_mark = data_approve.Rows(0)("id_report_mark").ToString
-                Else
-                    PCSubmit.Visible = True
-                End If
+                BSubmit.Text = "Mark"
             End If
+
         Else
             'not view
             If id_report_mark_cancel = "-1" Then 'new
@@ -96,15 +77,17 @@
                     BViewApproval.Visible = True
                     PCSubmit.Visible = False
                     PCPrint.Visible = True
+                    BPrint.Text = "Print"
                     '
                     is_view = "1"
                     BAddColumn.Visible = False
                     BUpdateValue.Visible = False
                 Else
-                    BViewApproval.Visible = False
+                    BViewApproval.Visible = True
                     PCSubmit.Visible = True
-                    PCPrint.Visible = False
+                    PCPrint.Visible = True
                     BSubmit.Text = "Submit"
+                    BPrint.Text = "Print Preview"
                     '
                     BAddColumn.Visible = True
                     BUpdateValue.Visible = True
@@ -113,8 +96,15 @@
         End If
         '
         If is_complete = "1" Then
-            PCSubmit.Visible = True
-            BSubmit.Text = "Complete"
+            Dim query_comp As String = "SELECT * FROM tb_doc WHERE id_user_upload='" & id_user & "' AND report_mark_type='142' AND id_report='" & id_report_mark_cancel & "'"
+            Dim data_comp As DataTable = execute_query(query_comp, -1, True, "", "", "", "")
+            If data_comp.Rows.Count > 0 Then
+                PCSubmit.Visible = True
+                BSubmit.Text = "Complete"
+            Else
+                PCSubmit.Visible = False
+            End If
+            BViewApproval.Visible = True
         End If
         '
         but_show()
@@ -198,14 +188,18 @@
             Else
                 warningCustom("Please attach supporting document first")
             End If
-        ElseIf BSubmit.Text = "Approve" Then
-            Dim confirm As DialogResult
-            confirm = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure want to approve ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+        ElseIf BSubmit.Text = "Mark" Then
+            'Dim confirm As DialogResult
+            'confirm = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure want to approve ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
 
-            If confirm = Windows.Forms.DialogResult.Yes Then
-                FormReportMarkDet.id_report_mark = id_report_mark
-                FormReportMarkDet.accept("outside")
-            End If
+            'If confirm = Windows.Forms.DialogResult.Yes Then
+            '    FormReportMarkDet.id_report_mark = id_report_mark
+            '    FormReportMarkDet.accept("outside")
+            'End If
+            FormReportMark.id_report = id_report_mark_cancel
+            FormReportMark.report_mark_type = "142"
+            FormReportMark.is_view = "1"
+            FormReportMark.ShowDialog()
         ElseIf BSubmit.Text = "Complete" Then
             Dim confirm As DialogResult
             confirm = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure want to complete ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
@@ -303,6 +297,12 @@
 
         ' Show the report's preview. 
         Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
+        If Not BPrint.Text = "Print" Then
+            MsgBox("a")
+            Tool.PrintingSystem.SetCommandVisibility(DevExpress.XtraPrinting.PrintingSystemCommand.Print, DevExpress.XtraPrinting.CommandVisibility.None)
+            Tool.PrintingSystem.SetCommandVisibility(DevExpress.XtraPrinting.PrintingSystemCommand.PrintDirect, DevExpress.XtraPrinting.CommandVisibility.None)
+            Tool.PrintingSystem.SetCommandVisibility(DevExpress.XtraPrinting.PrintingSystemCommand.PrintSelection, DevExpress.XtraPrinting.CommandVisibility.None)
+        End If
         Tool.ShowPreview()
     End Sub
 

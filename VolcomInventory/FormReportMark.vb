@@ -32,7 +32,12 @@
 
             If confirm = Windows.Forms.DialogResult.Yes Then
                 submit_who_prepared(report_mark_type, id_report, id_user)
-
+                '
+                If report_mark_type = "153" Then
+                    FormMasterCompanySingle.update_status("4")
+                    FormMasterCompanySingle.action_load()
+                End If
+                '
                 infoCustom("Form submitted.")
                 act_load()
             Else
@@ -326,7 +331,7 @@
         ElseIf report_mark_type = "94" Then
             'REPAIR RETURN REC
             query = String.Format("SELECT id_report_status, fg_repair_return_rec_number as report_number FROM tb_fg_repair_return_rec WHERE id_fg_repair_return_rec = '{0}'", id_report)
-        ElseIf report_mark_type = "95" Then
+        ElseIf report_mark_type = "95" Or report_mark_type = "164" Or report_mark_type = "165" Then
             'Leave Propose
             query = String.Format("SELECT id_report_status, emp_leave_number as report_number FROM tb_emp_leave WHERE id_emp_leave = '{0}'", id_report)
         ElseIf report_mark_type = "96" Then
@@ -431,6 +436,63 @@
         ElseIf report_mark_type = "147" Then
             ' REVENUE BUDGET REVISION
             query = String.Format("SELECT id_report_status,number as report_number FROM tb_b_revenue_revision WHERE id_b_revenue_revision = '{0}'", id_report)
+        ElseIf report_mark_type = "148" Then
+            'Purchase receive non aseet
+            query = String.Format("SELECT id_report_status,purc_rec_number as report_number FROM tb_purc_rec WHERE id_purc_rec = '{0}'", id_report)
+        ElseIf report_mark_type = "150" Or report_mark_type = "155" Then
+            ' Propose COP
+            query = String.Format("SELECT id_report_status,number as report_number FROM tb_design_cop_propose WHERE id_design_cop_propose = '{0}'", id_report)
+        ElseIf report_mark_type = "151" Then
+            'claim return
+            query = String.Format("SELECT id_report_status,number as report_number FROM tb_prod_claim_return WHERE id_prod_claim_return = '{0}'", id_report)
+        ElseIf report_mark_type = "152" Then
+            ''Purchase Return
+            query = String.Format("SELECT id_report_status,number as report_number FROM tb_purc_return WHERE id_purc_return = '{0}'", id_report)
+        ElseIf report_mark_type = "153" Then
+            'Propose company
+            query = String.Format("SELECT id_report_status,comp_name as report_number FROM tb_m_comp WHERE id_comp = '{0}'", id_report)
+        ElseIf report_mark_type = "154" Or report_mark_type = "163" Then
+            'Item request
+            query = String.Format("SELECT id_report_status,number as report_number FROM tb_item_req WHERE id_item_req = '{0}'", id_report)
+        ElseIf report_mark_type = "156" Or report_mark_type = "166" Then
+            'Item del
+            query = String.Format("SELECT id_report_status,number as report_number FROM tb_item_del WHERE id_item_del = '{0}'", id_report)
+        ElseIf report_mark_type = "157" Then
+            'expense
+            query = String.Format("SELECT id_report_status,number as report_number FROM tb_item_expense WHERE id_item_expense = '{0}'", id_report)
+        ElseIf report_mark_type = "158" Then
+            'NO STOCJ
+            query = String.Format("SELECT id_report_status,number as report_number FROM tb_sales_pos_no_stock WHERE id_sales_pos_no_stock = '{0}'", id_report)
+        ElseIf report_mark_type = "159" Then
+            'Payment
+            query = String.Format("SELECT id_report_status,number as report_number FROM tb_payment WHERE id_payment = '{0}'", id_report)
+        ElseIf report_mark_type = "160" Or report_mark_type = "169" Then
+            'Aset Management
+            query = String.Format("SELECT id_report_status,asset_number as report_number FROM tb_purc_rec_asset WHERE id_purc_rec_asset = '{0}'", id_report)
+        ElseIf report_mark_type = "162" Then
+            'Receive Payment (Bank Deposit/BBM)
+            query = String.Format("SELECT id_report_status,number as report_number FROM tb_rec_payment WHERE id_rec_payment = '{0}'", id_report)
+        ElseIf report_mark_type = "167" Then
+            'cash advance
+            query = String.Format("SELECT id_report_status,number as report_number FROM tb_cash_advance WHERE id_cash_advance = '{0}'", id_report)
+        ElseIf report_mark_type = "168" Then
+            'Receive Return
+            query = String.Format("SELECT id_report_status,number as report_number FROM tb_sales_return_rec WHERE id_sales_return_rec = '{0}'", id_report)
+        ElseIf report_mark_type = "170" Then
+            'approve us
+            query = String.Format("SELECT id_report_status,number as report_number FROM tb_m_design_approve_us WHERE id_design_approve_us = '{0}'", id_report)
+        ElseIf report_mark_type = "174" Then
+            'cash advance reconcile
+            query = String.Format("SELECT rb_id_report_status as id_report_status,number as report_number FROM tb_cash_advance WHERE id_cash_advance = '{0}'", id_report)
+        ElseIf report_mark_type = "175" Then
+            'Sample Budget Propose
+            query = String.Format("SELECT id_report_status as id_report_status,number as report_number FROM tb_sample_budget_pps WHERE id_sample_budget_pps = '{0}'", id_report)
+        ElseIf report_mark_type = "176" Or report_mark_type = "177" Or report_mark_type = "178" Then
+            'propose design changes
+            query = String.Format("SELECT id_report_status, number as report_number FROM tb_m_design_rev WHERE id_design_rev = '{0}'", id_report)
+        ElseIf report_mark_type = "180" Then
+            'propose employee changes
+            query = String.Format("SELECT id_report_status, number as report_number FROM tb_employee_pps WHERE id_employee_pps = '{0}'", id_report)
         End If
 
         data = execute_query(query, -1, True, "", "", "", "")
@@ -507,7 +569,7 @@
         'End If
     End Sub
     Sub view_mark()
-        Dim query As String = "SELECT IF(a.is_requisite='2','no','yes') AS is_requisite,a.id_report,a.report_mark_type,emp.employee_name,a.id_mark,a.id_mark_asg,a.id_report_status,a.report_mark_note,a.id_report_mark,b.report_status,a.id_user,IF(a.id_report_status=1,'Submitted',IF(e.`id_mark`=2,b.report_status,e.`mark`)) AS mark,CONCAT_WS(' ',DATE_FORMAT(a.report_mark_datetime,'%d %M %Y'),TIME(a.report_mark_datetime)) AS date_time,a.report_mark_note,a.is_use 
+        Dim query As String = "SELECT IF(a.is_requisite='2','no','yes') AS is_requisite, a.is_need_print, a.is_need_upload,a.id_report,a.report_mark_type,emp.employee_name,a.id_mark,a.id_mark_asg,a.id_report_status,a.report_mark_note,a.id_report_mark,b.report_status,a.id_user,IF(a.id_report_status=1,'Submitted',IF(e.`id_mark`=2,b.report_status,e.`mark`)) AS mark,CONCAT_WS(' ',DATE_FORMAT(a.report_mark_datetime,'%d %M %Y'),TIME(a.report_mark_datetime)) AS date_time,a.report_mark_note,a.is_use 
                             ,CONCAT_WS(' ',DATE_FORMAT(a.report_mark_start_datetime,'%d %M %Y'),TIME(a.report_mark_start_datetime)) AS date_time_start 
                             ,CONCAT_WS(' ',DATE_FORMAT((ADDTIME(report_mark_start_datetime,report_mark_lead_time)),'%d %M %Y'),TIME((ADDTIME(report_mark_start_datetime,report_mark_lead_time)))) AS lead_time 
                             ,CONCAT_WS(' ',DATE(ADDTIME(report_mark_start_datetime,report_mark_lead_time)),TIME((ADDTIME(report_mark_start_datetime,report_mark_lead_time)))) AS raw_lead_time 
@@ -1018,7 +1080,7 @@
         ElseIf report_mark_type = "9" Or report_mark_type = "80" Or report_mark_type = "81" Then
             'PROD DEMAND
             'auto completed
-            If id_status_reportx = "3" Then
+            If id_status_reportx = "2" Then
                 id_status_reportx = "6"
             End If
 
@@ -1045,6 +1107,11 @@
                     query_post_price += "SELECT id_design, '1', 'Normal Price', '" + id_currency + "', 0, NOW(), NOW(), '1', '1', '" + id_user + "' FROM tb_prod_demand_design WHERE id_prod_demand = '" + id_report + "' "
                     execute_non_query(query_post_price, True, "", "", "", "")
                 End If
+
+                'notif email
+                Dim mail As ClassSendEmail = New ClassSendEmail()
+                mail.report_mark_type = report_mark_type
+                mail.send_email_notif(report_mark_type, id_report)
             End If
 
             'update status
@@ -1231,7 +1298,7 @@
             If id_status_reportx = 6 Then 'Completed
                 Dim is_ok As String = "1"
                 For i As Integer = 0 To FormMatRecPurcDet.GVListPurchase.RowCount - 1
-                    If FormMatRecPurcDet.GVListPurchase.GetRowCellValue(i, "cost") = 0 Then
+                    If FormMatRecPurcDet.GVListPurchase.GetRowCellValue(i, "mat_purc_rec_det_qty") > 0 And FormMatRecPurcDet.GVListPurchase.GetRowCellValue(i, "cost") = 0 Then
                         is_ok = "2"
                         Exit For
                     End If
@@ -1250,7 +1317,7 @@
                     query_completed += "LEFT JOIN ( "
                     query_completed += "SELECT id_mat_det_price as id_mat_det_price_cost,mat_det_price as mat_det_price_cost,id_mat_det FROM tb_m_mat_det_price WHERE is_default_cost=1 "
                     query_completed += ") cost ON cost.id_mat_det=c.id_mat_det "
-                    query_completed += "WHERE a.id_mat_purc_rec = '" + id_report + "' "
+                    query_completed += "WHERE a.id_mat_purc_rec = '" + id_report + "' AND a.mat_purc_rec_det_qty>0 "
                     Dim data As DataTable = execute_query(query_completed, -1, True, "", "", "", "")
                     Dim jum_ins_i As Integer = 0
                     Dim query_upd_storage As String = ""
@@ -1287,7 +1354,7 @@
                     INNER JOIN tb_mat_purc_rec r ON r.id_mat_purc_rec = rd.id_mat_purc_rec
                     INNER JOIN tb_mat_purc_det pod ON pod.id_mat_purc_det = rd.id_mat_purc_det
                     INNER JOIN tb_m_mat_det_price prc ON prc.id_mat_det_price = pod.id_mat_det_price
-                    WHERE rd.id_mat_purc_rec=" + id_report + ")
+                    WHERE rd.id_mat_purc_rec=" + id_report + " AND rd.mat_purc_rec_det_qty>0)
                     UNION ALL 
                     (SELECT '" + idj + "',191,SUM(prc.mat_det_price * rd.mat_purc_rec_det_qty)*(po.mat_purc_vat/100) AS `debit_val`, 0 AS `credit_val`, 'Auto Posting', '16', '" + id_report + "', r.mat_purc_rec_number, 2
                     FROM tb_mat_purc_rec_det rd
@@ -1295,7 +1362,7 @@
                     INNER JOIN tb_mat_purc_det pod ON pod.id_mat_purc_det = rd.id_mat_purc_det
                     INNER JOIN tb_m_mat_det_price prc ON prc.id_mat_det_price = pod.id_mat_det_price
                     INNER JOIN tb_mat_purc po ON po.id_mat_purc = pod.id_mat_purc
-                    WHERE rd.id_mat_purc_rec=" + id_report + ")
+                    WHERE rd.id_mat_purc_rec=" + id_report + " AND rd.mat_purc_rec_det_qty>0)
                     UNION ALL
                     (SELECT '" + idj + "',a.id_acc,0 AS `debit_val`,SUM(prc.mat_det_price * rd.mat_purc_rec_det_qty)*((po.mat_purc_vat+100)/100) AS `credit_val`, 'Auto Posting', '16', '" + id_report + "', r.mat_purc_rec_number, 2
                     FROM tb_mat_purc_rec_det rd
@@ -1306,7 +1373,7 @@
                     INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = po.id_comp_contact_to
                     INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp
                     JOIN tb_a_acc a ON a.acc_name LIKE CONCAT('2112','%',c.comp_number) AND a.id_is_det=2
-                    WHERE rd.id_mat_purc_rec=" + id_report + ") "
+                    WHERE rd.id_mat_purc_rec=" + id_report + " AND rd.mat_purc_rec_det_qty>0) "
                     execute_non_query(qdj, True, "", "", "", "")
 
                     'infoCustom("Status changed.")
@@ -2178,245 +2245,609 @@
             'SALES Del Order
             Dim stt As ClassSalesDelOrder = New ClassSalesDelOrder()
             stt.changeStatus(id_report, id_status_reportx)
+            If FormViewSalesDelOrder.id_commerce_type = "2" Then
+                stt.sendEmailConfirmation(id_report)
+            End If
             'infoCustom("Status changed.")
 
             If form_origin = "FormSalesDelOrderDet" Then
-                FormSalesDelOrderDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormSalesDelOrderDet.check_but()
-                FormSalesDelOrderDet.actionLoad()
-                FormSalesDelOrder.viewSalesDelOrder()
-                FormSalesDelOrder.GVSalesDelOrder.FocusedRowHandle = find_row(FormSalesDelOrder.GVSalesDelOrder, "id_pl_sales_order_del", id_report)
-            Else
-                'no code
-            End If
-        ElseIf report_mark_type = "44" Then
-            'MRS WO
-            query = String.Format("UPDATE tb_prod_order_mrs SET id_report_status='{0}' WHERE id_prod_order_mrs ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-            'infoCustom("Status changed.")
-            Try
-                FormMatMRSDet.id_report_status_g = id_status_reportx
-                FormMatMRSDet.allow_status()
-                If FormMatMRS.XTCMRS.SelectedTabPageIndex = 0 Then 'wo mat
-                    FormMatMRS.view_mrs_wo()
-                    FormMatMRS.GVMRSWO.FocusedRowHandle = find_row(FormMatMRS.GVMRSWO, "id_prod_order_mrs", id_report)
-                ElseIf FormMatMRS.XTCMRS.SelectedTabPageIndex = 1 Then 'other
-                    FormMatMRS.view_mrs()
-                    FormMatMRS.GVMRS.FocusedRowHandle = find_row(FormMatMRS.GVMRS, "id_prod_order_mrs", id_report)
+                    FormSalesDelOrderDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                    FormSalesDelOrderDet.check_but()
+                    FormSalesDelOrderDet.actionLoad()
+                    FormSalesDelOrder.viewSalesDelOrder()
+                    FormSalesDelOrder.GVSalesDelOrder.FocusedRowHandle = find_row(FormSalesDelOrder.GVSalesDelOrder, "id_pl_sales_order_del", id_report)
+                Else
+                    'no code
                 End If
-            Catch ex As Exception
-            End Try
-        ElseIf report_mark_type = "45" Then
-            'SALES Return Order
-            Try
-                query = String.Format("UPDATE tb_sales_return_order SET id_report_status='{0}' WHERE id_sales_return_order ='{1}'", id_status_reportx, id_report)
+            ElseIf report_mark_type = "44" Then
+                'MRS WO
+                query = String.Format("UPDATE tb_prod_order_mrs SET id_report_status='{0}' WHERE id_prod_order_mrs ='{1}'", id_status_reportx, id_report)
                 execute_non_query(query, True, "", "", "", "")
                 'infoCustom("Status changed.")
-            Catch ex As Exception
-                errorConnection()
-                Close()
-            End Try
+                Try
+                    FormMatMRSDet.id_report_status_g = id_status_reportx
+                    FormMatMRSDet.allow_status()
+                    If FormMatMRS.XTCMRS.SelectedTabPageIndex = 0 Then 'wo mat
+                        FormMatMRS.view_mrs_wo()
+                        FormMatMRS.GVMRSWO.FocusedRowHandle = find_row(FormMatMRS.GVMRSWO, "id_prod_order_mrs", id_report)
+                    ElseIf FormMatMRS.XTCMRS.SelectedTabPageIndex = 1 Then 'other
+                        FormMatMRS.view_mrs()
+                        FormMatMRS.GVMRS.FocusedRowHandle = find_row(FormMatMRS.GVMRS, "id_prod_order_mrs", id_report)
+                    End If
+                Catch ex As Exception
+                End Try
+            ElseIf report_mark_type = "45" Then
+                'SALES Return Order
+                Try
+                    query = String.Format("UPDATE tb_sales_return_order SET id_report_status='{0}' WHERE id_sales_return_order ='{1}'", id_status_reportx, id_report)
+                    execute_non_query(query, True, "", "", "", "")
+                    'infoCustom("Status changed.")
+                Catch ex As Exception
+                    errorConnection()
+                    Close()
+                End Try
 
-            If form_origin = "FormSalesReturnOrderDet" Then
-                FormSalesReturnOrderDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormSalesReturnOrderDet.check_but()
-                FormSalesReturnOrderDet.actionLoad()
-                FormSalesReturnOrder.viewSalesReturnOrder()
-                FormSalesReturnOrder.GVSalesReturnOrder.FocusedRowHandle = find_row(FormSalesReturnOrder.GVSalesReturnOrder, "id_sales_return_order", id_report)
-            Else
-                'code here
-            End If
-        ElseIf report_mark_type = "46" Or report_mark_type = "111" Or report_mark_type = "113" Or report_mark_type = "120" Then
-            'SALES RETURN
-            If id_status_reportx = "3" And report_mark_type = "111" Then
-                id_status_reportx = "6"
-            End If
-
-            If report_mark_type = "120" Then
-                Dim stt As ClassSalesReturn = New ClassSalesReturn()
-                stt.changeStatusOLStore(id_report, id_status_reportx)
-            Else
-                Dim stt As ClassSalesReturn = New ClassSalesReturn()
-                stt.changeStatus(id_report, id_status_reportx)
-            End If
-
-
-            'infoCustom("Status changed.")
-
-            If form_origin = "FormSalesReturnDet" Then
-                FormSalesReturnDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormSalesReturnDet.check_but()
-                FormSalesReturnDet.actionLoad()
-                FormSalesReturn.viewSalesReturn()
-                FormSalesReturn.viewSalesReturnOrder()
-                FormSalesReturn.GVSalesReturn.FocusedRowHandle = find_row(FormSalesReturn.GVSalesReturn, "id_sales_return", id_report)
-            Else
-                'code here
-            End If
-        ElseIf report_mark_type = "47" Then
-            'Return Production
-            query = String.Format("UPDATE tb_mat_prod_ret_in SET id_report_status='{0}' WHERE id_mat_prod_ret_in ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-            If id_status_reportx = 6 Then 'Completed
-                Dim query_del As String = "DELETE FROM tb_mat_prod_ret_in_det WHERE id_mat_prod_ret_in_det='" + id_report + "' AND mat_prod_ret_in_det_qty <= 0"
-                execute_non_query(query_del, True, "", "", "", "")
-                '
-                Dim query_completed As String = "SELECT c.id_mat_det,b.id_mat_det_price,a.mat_prod_ret_in_det_price,a.mat_prod_ret_in_det_qty,d.id_wh_drawer,d.mat_prod_ret_in_number,IFNULL(cost.id_mat_det_price_cost,0) as id_mat_det_price_cost,IFNULL(cost.mat_det_price_cost,0.0) as mat_det_price_cost FROM tb_mat_prod_ret_in_det a "
-                query_completed += "INNER JOIN tb_pl_mrs_det b ON a.id_pl_mrs_det = b.id_pl_mrs_det "
-                query_completed += "INNER JOIN tb_m_mat_det_price c ON c.id_mat_det_price = b.id_mat_det_price "
-                query_completed += "INNER JOIN tb_mat_prod_ret_in d ON d.id_mat_prod_ret_in = a.id_mat_prod_ret_in "
-                query_completed += "LEFT JOIN( "
-                query_completed += "SELECT id_mat_det_price as id_mat_det_price_cost,mat_det_price as mat_det_price_cost,id_mat_det FROM tb_m_mat_det_price WHERE is_default_cost=1 "
-                query_completed += ") cost ON cost.id_mat_det=c.id_mat_det "
-                query_completed += "WHERE a.id_mat_prod_ret_in = '" + id_report + "' "
-                Dim data As DataTable = execute_query(query_completed, -1, True, "", "", "", "")
-                For i As Integer = 0 To (data.Rows.Count - 1)
-                    Dim id_wh_drawer As String = data.Rows(i)("id_wh_drawer").ToString
-                    Dim id_mat_det As String = data.Rows(i)("id_mat_det").ToString
-                    Dim id_mat_det_price As String = data.Rows(i)("id_mat_det_price_cost").ToString
-                    Dim mat_det_price As Decimal = data.Rows(i)("mat_det_price_cost")
-                    Dim mat_wo_rec_det_qty As String = data.Rows(i)("mat_prod_ret_in_det_qty").ToString
-                    Dim mat_wo_rec_number As String = data.Rows(i)("mat_prod_ret_in_number").ToString
-                    Dim query_upd_storage As String = "INSERT tb_storage_mat(id_wh_drawer, id_storage_category, id_mat_det, storage_mat_qty, storage_mat_datetime, storage_mat_notes,id_report,report_mark_type,id_stock_status,id_mat_det_price,price) "
-                    'update storage
-                    query_upd_storage += "VALUES('" + id_wh_drawer + "', '1', '" + id_mat_det + "', '" + mat_wo_rec_det_qty + "', NOW(), 'Completed, Material Return In Production Receive No. : " + mat_wo_rec_number + "','" + id_report + "','" + report_mark_type + "','1','" + id_mat_det_price + "','" + decimalSQL(mat_det_price.ToString) + "')"
-                    execute_non_query(query_upd_storage, True, "", "", "", "")
-                    'update stored
-                Next
-            End If
-            'infoCustom("Status changed.")
-            Try
-                FormMatRetInProd.id_report_status = id_status_reportx
-                FormMatRetInProd.allow_status()
-                FormMatRet.viewRetInProd()
-                FormMatRet.GVRetInProd.FocusedRowHandle = find_row(FormMatRet.GVRetInProd, "id_mat_prod_ret_in", id_report)
-            Catch ex As Exception
-            End Try
-        ElseIf report_mark_type = "48" Then
-            'SALES POS
-            If id_status_reportx = "3" Then
-                id_status_reportx = "6"
-            End If
-
-            If id_status_reportx = "5" Then
-                'cancelled
-                Dim cancel_rsv_stock As ClassSalesInv = New ClassSalesInv()
-                cancel_rsv_stock.cancelReservedStock(id_report, "48")
-            ElseIf id_status_reportx = "6" Then
-                'completed
-                Dim complete_rsv_stock As ClassSalesInv = New ClassSalesInv()
-                complete_rsv_stock.completedStock(id_report, "48")
-            End If
-
-            'update status
-            query = String.Format("UPDATE tb_sales_pos SET id_report_status='{0}' WHERE id_sales_pos ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-            'infoCustom("Status changed.")
-
-            If form_origin = "FormSalesPOSDet" Then
-                FormSalesPOSDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormSalesPOSDet.check_but()
-                FormSalesPOSDet.actionLoad()
-                FormSalesPOS.viewSalesPOS()
-                FormSalesPOS.GVSalesPOS.FocusedRowHandle = find_row(FormSalesPOS.GVSalesPOS, "id_sales_pos", id_report)
-            Else
-                'code here
-            End If
-        ElseIf report_mark_type = "49" Or report_mark_type = "106" Then
-            'SALES RETURN QC
-            Dim st As ClassSalesReturnQC = New ClassSalesReturnQC()
-            st.changeStatus(id_report, id_status_reportx)
-            'infoCustom("Status changed.")
-
-            If form_origin = "FormSalesReturnQCDet" Then
-                FormSalesReturnQCDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormSalesReturnQCDet.check_but()
-                FormSalesReturnQCDet.actionLoad()
-                FormSalesReturnQC.viewSalesReturnQC()
-                FormSalesReturnQC.GVSalesReturnQC.FocusedRowHandle = find_row(FormSalesReturnQC.GVSalesReturnQC, "id_sales_return_qc", id_report)
-            Else
-                'code here
-            End If
-        ElseIf report_mark_type = "50" Then
-            'PR Production
-            query = String.Format("UPDATE tb_pr_prod_order SET id_report_status='{0}' WHERE id_pr_prod_order ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-            Try
-                FormProdPRWODet.id_report_status = id_status_reportx
-                FormProdPRWODet.allow_status()
-                FormProdPRWO.view_pr()
-                FormProdPRWO.GVMatPR.FocusedRowHandle = find_row(FormProdPRWO.GVMatPR, "id_pr_prod_order", id_report)
-            Catch ex As Exception
-            End Try
-        ElseIf report_mark_type = "51" Then
-            'SALES INVOICE
-            Try
-                query = String.Format("UPDATE tb_sales_invoice SET id_report_status='{0}' WHERE id_sales_invoice ='{1}'", id_status_reportx, id_report)
-                execute_non_query(query, True, "", "", "", "")
-                'infoCustom("Status changed.")
-
-                If form_origin = "FormSalesInvoiceDet" Then
-                    FormSalesInvoiceDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                    FormSalesInvoiceDet.check_but()
-                    FormSalesInvoiceDet.actionLoad()
-                    FormSalesInvoice.viewSalesInvoice()
-                    FormSalesInvoice.GVSalesInvoice.FocusedRowHandle = find_row(FormSalesInvoice.GVSalesInvoice, "id_sales_invoice", id_report)
+                If form_origin = "FormSalesReturnOrderDet" Then
+                    FormSalesReturnOrderDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                    FormSalesReturnOrderDet.check_but()
+                    FormSalesReturnOrderDet.actionLoad()
+                    FormSalesReturnOrder.viewSalesReturnOrder()
+                    FormSalesReturnOrder.GVSalesReturnOrder.FocusedRowHandle = find_row(FormSalesReturnOrder.GVSalesReturnOrder, "id_sales_return_order", id_report)
                 Else
                     'code here
                 End If
-            Catch ex As Exception
-                errorConnection()
-                Close()
-            End Try
-        ElseIf report_mark_type = "52" Then
-            'Mat Stock Opname
-            query = String.Format("UPDATE tb_mat_so SET id_report_status='{0}' WHERE id_mat_so ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-            'infoCustom("Status changed.")
-            Try
-                FormMatStockOpnameDet.id_report_status = id_status_reportx
-                FormMatStockOpnameDet.allow_status()
-                FormMatStockOpnameResultDet.id_report_status = id_status_reportx
-                FormMatStockOpnameResultDet.allow_status()
-                FormMatStockOpname.view_so()
-                FormMatStockOpname.GVMatPR.FocusedRowHandle = find_row(FormMatStockOpname.GVMatPR, "id_mat_so", id_report)
-            Catch ex As Exception
-            End Try
-        ElseIf report_mark_type = "53" Then
-            'FG SO STORE
-            Try
-                query = String.Format("UPDATE tb_fg_so_store SET id_report_status='{0}' WHERE id_fg_so_store ='{1}'", id_status_reportx, id_report)
-                execute_non_query(query, True, "", "", "", "")
+            ElseIf report_mark_type = "46" Or report_mark_type = "111" Or report_mark_type = "113" Or report_mark_type = "120" Then
+                'SALES RETURN
+                If id_status_reportx = "3" And report_mark_type = "111" Then
+                    id_status_reportx = "6"
+                End If
+
+                If report_mark_type = "120" Then
+                    Dim stt As ClassSalesReturn = New ClassSalesReturn()
+                    stt.changeStatusOLStore(id_report, id_status_reportx)
+                Else
+                    Dim stt As ClassSalesReturn = New ClassSalesReturn()
+                    stt.changeStatus(id_report, id_status_reportx)
+                End If
+
+
                 'infoCustom("Status changed.")
 
-                If form_origin = "FormFGStockOpnameStoreDet" Then
-                    'FormSalesInvoiceDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                    ' FormFGStockOpnameStoreDet.check_but()
-                    FormFGStockOpnameStoreDet.actionLoad()
-                    FormFGStockOpnameStore.viewSoStore()
-                    FormFGStockOpnameStore.GVSOStore.FocusedRowHandle = find_row(FormFGStockOpnameStore.GVSOStore, "id_fg_so_store", id_report)
+                If form_origin = "FormSalesReturnDet" Then
+                    FormSalesReturnDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                    FormSalesReturnDet.check_but()
+                    FormSalesReturnDet.actionLoad()
+                    FormSalesReturn.viewSalesReturn()
+                    FormSalesReturn.viewSalesReturnOrder()
+                    FormSalesReturn.GVSalesReturn.FocusedRowHandle = find_row(FormSalesReturn.GVSalesReturn, "id_sales_return", id_report)
                 Else
                     'code here
                 End If
-            Catch ex As Exception
-                errorConnection()
-                Close()
-            End Try
-        ElseIf report_mark_type = "54" Then
-            'FG MISSING
-            If id_status_reportx = "3" Then
-                id_status_reportx = "6"
-            End If
+            ElseIf report_mark_type = "47" Then
+                'Return Production
+                query = String.Format("UPDATE tb_mat_prod_ret_in SET id_report_status='{0}' WHERE id_mat_prod_ret_in ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+                If id_status_reportx = 6 Then 'Completed
+                    Dim query_del As String = "DELETE FROM tb_mat_prod_ret_in_det WHERE id_mat_prod_ret_in_det='" + id_report + "' AND mat_prod_ret_in_det_qty <= 0"
+                    execute_non_query(query_del, True, "", "", "", "")
+                    '
+                    Dim query_completed As String = "SELECT c.id_mat_det,b.id_mat_det_price,a.mat_prod_ret_in_det_price,a.mat_prod_ret_in_det_qty,d.id_wh_drawer,d.mat_prod_ret_in_number,IFNULL(cost.id_mat_det_price_cost,0) as id_mat_det_price_cost,IFNULL(cost.mat_det_price_cost,0.0) as mat_det_price_cost FROM tb_mat_prod_ret_in_det a "
+                    query_completed += "INNER JOIN tb_pl_mrs_det b ON a.id_pl_mrs_det = b.id_pl_mrs_det "
+                    query_completed += "INNER JOIN tb_m_mat_det_price c ON c.id_mat_det_price = b.id_mat_det_price "
+                    query_completed += "INNER JOIN tb_mat_prod_ret_in d ON d.id_mat_prod_ret_in = a.id_mat_prod_ret_in "
+                    query_completed += "LEFT JOIN( "
+                    query_completed += "SELECT id_mat_det_price as id_mat_det_price_cost,mat_det_price as mat_det_price_cost,id_mat_det FROM tb_m_mat_det_price WHERE is_default_cost=1 "
+                    query_completed += ") cost ON cost.id_mat_det=c.id_mat_det "
+                    query_completed += "WHERE a.id_mat_prod_ret_in = '" + id_report + "' "
+                    Dim data As DataTable = execute_query(query_completed, -1, True, "", "", "", "")
+                    For i As Integer = 0 To (data.Rows.Count - 1)
+                        Dim id_wh_drawer As String = data.Rows(i)("id_wh_drawer").ToString
+                        Dim id_mat_det As String = data.Rows(i)("id_mat_det").ToString
+                        Dim id_mat_det_price As String = data.Rows(i)("id_mat_det_price_cost").ToString
+                        Dim mat_det_price As Decimal = data.Rows(i)("mat_det_price_cost")
+                        Dim mat_wo_rec_det_qty As String = data.Rows(i)("mat_prod_ret_in_det_qty").ToString
+                        Dim mat_wo_rec_number As String = data.Rows(i)("mat_prod_ret_in_number").ToString
+                        Dim query_upd_storage As String = "INSERT tb_storage_mat(id_wh_drawer, id_storage_category, id_mat_det, storage_mat_qty, storage_mat_datetime, storage_mat_notes,id_report,report_mark_type,id_stock_status,id_mat_det_price,price) "
+                        'update storage
+                        query_upd_storage += "VALUES('" + id_wh_drawer + "', '1', '" + id_mat_det + "', '" + mat_wo_rec_det_qty + "', NOW(), 'Completed, Material Return In Production Receive No. : " + mat_wo_rec_number + "','" + id_report + "','" + report_mark_type + "','1','" + id_mat_det_price + "','" + decimalSQL(mat_det_price.ToString) + "')"
+                        execute_non_query(query_upd_storage, True, "", "", "", "")
+                        'update stored
+                    Next
+                End If
+                'infoCustom("Status changed.")
+                Try
+                    FormMatRetInProd.id_report_status = id_status_reportx
+                    FormMatRetInProd.allow_status()
+                    FormMatRet.viewRetInProd()
+                    FormMatRet.GVRetInProd.FocusedRowHandle = find_row(FormMatRet.GVRetInProd, "id_mat_prod_ret_in", id_report)
+                Catch ex As Exception
+                End Try
+            ElseIf report_mark_type = "48" Then
+                'SALES POS
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
 
-            Try
                 If id_status_reportx = "5" Then
-                    'cancelled
                     Dim cancel_rsv_stock As ClassSalesInv = New ClassSalesInv()
-                    cancel_rsv_stock.cancelReservedStock(id_report, "54")
+
+                    If FormSalesPOSDet.is_use_unique_code = "1" Then
+                        'cancelled unique
+                        cancel_rsv_stock.cancellUnique(id_report, report_mark_type)
+                    End If
+
+
+                    'cancelled
+                    cancel_rsv_stock.cancelReservedStock(id_report, "48")
                 ElseIf id_status_reportx = "6" Then
                     'completed
                     Dim complete_rsv_stock As ClassSalesInv = New ClassSalesInv()
-                    complete_rsv_stock.completedStock(id_report, "54")
+                    complete_rsv_stock.completedStock(id_report, "48")
+                End If
+
+                'update status
+                query = String.Format("UPDATE tb_sales_pos SET id_report_status='{0}' WHERE id_sales_pos ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+                'infoCustom("Status changed.")
+
+                If form_origin = "FormSalesPOSDet" Then
+                    FormSalesPOSDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                    FormSalesPOSDet.check_but()
+                    FormSalesPOSDet.actionLoad()
+                    FormSalesPOS.viewSalesPOS()
+                    FormSalesPOS.GVSalesPOS.FocusedRowHandle = find_row(FormSalesPOS.GVSalesPOS, "id_sales_pos", id_report)
+                Else
+                    'code here
+                End If
+            ElseIf report_mark_type = "49" Or report_mark_type = "106" Then
+                'SALES RETURN QC
+                Dim st As ClassSalesReturnQC = New ClassSalesReturnQC()
+                st.changeStatus(id_report, id_status_reportx)
+                'infoCustom("Status changed.")
+
+                If form_origin = "FormSalesReturnQCDet" Then
+                    FormSalesReturnQCDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                    FormSalesReturnQCDet.check_but()
+                    FormSalesReturnQCDet.actionLoad()
+                    FormSalesReturnQC.viewSalesReturnQC()
+                    FormSalesReturnQC.GVSalesReturnQC.FocusedRowHandle = find_row(FormSalesReturnQC.GVSalesReturnQC, "id_sales_return_qc", id_report)
+                Else
+                    'code here
+                End If
+            ElseIf report_mark_type = "50" Then
+                'PR Production
+                query = String.Format("UPDATE tb_pr_prod_order SET id_report_status='{0}' WHERE id_pr_prod_order ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+                Try
+                    FormProdPRWODet.id_report_status = id_status_reportx
+                    FormProdPRWODet.allow_status()
+                    FormProdPRWO.view_pr()
+                    FormProdPRWO.GVMatPR.FocusedRowHandle = find_row(FormProdPRWO.GVMatPR, "id_pr_prod_order", id_report)
+                Catch ex As Exception
+                End Try
+            ElseIf report_mark_type = "51" Then
+                'SALES INVOICE
+                Try
+                    query = String.Format("UPDATE tb_sales_invoice SET id_report_status='{0}' WHERE id_sales_invoice ='{1}'", id_status_reportx, id_report)
+                    execute_non_query(query, True, "", "", "", "")
+                    'infoCustom("Status changed.")
+
+                    If form_origin = "FormSalesInvoiceDet" Then
+                        FormSalesInvoiceDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                        FormSalesInvoiceDet.check_but()
+                        FormSalesInvoiceDet.actionLoad()
+                        FormSalesInvoice.viewSalesInvoice()
+                        FormSalesInvoice.GVSalesInvoice.FocusedRowHandle = find_row(FormSalesInvoice.GVSalesInvoice, "id_sales_invoice", id_report)
+                    Else
+                        'code here
+                    End If
+                Catch ex As Exception
+                    errorConnection()
+                    Close()
+                End Try
+            ElseIf report_mark_type = "52" Then
+                'Mat Stock Opname
+                query = String.Format("UPDATE tb_mat_so SET id_report_status='{0}' WHERE id_mat_so ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+                'infoCustom("Status changed.")
+                Try
+                    FormMatStockOpnameDet.id_report_status = id_status_reportx
+                    FormMatStockOpnameDet.allow_status()
+                    FormMatStockOpnameResultDet.id_report_status = id_status_reportx
+                    FormMatStockOpnameResultDet.allow_status()
+                    FormMatStockOpname.view_so()
+                    FormMatStockOpname.GVMatPR.FocusedRowHandle = find_row(FormMatStockOpname.GVMatPR, "id_mat_so", id_report)
+                Catch ex As Exception
+                End Try
+            ElseIf report_mark_type = "53" Then
+                'FG SO STORE
+                Try
+                    query = String.Format("UPDATE tb_fg_so_store SET id_report_status='{0}' WHERE id_fg_so_store ='{1}'", id_status_reportx, id_report)
+                    execute_non_query(query, True, "", "", "", "")
+                    'infoCustom("Status changed.")
+
+                    If form_origin = "FormFGStockOpnameStoreDet" Then
+                        'FormSalesInvoiceDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                        ' FormFGStockOpnameStoreDet.check_but()
+                        FormFGStockOpnameStoreDet.actionLoad()
+                        FormFGStockOpnameStore.viewSoStore()
+                        FormFGStockOpnameStore.GVSOStore.FocusedRowHandle = find_row(FormFGStockOpnameStore.GVSOStore, "id_fg_so_store", id_report)
+                    Else
+                        'code here
+                    End If
+                Catch ex As Exception
+                    errorConnection()
+                    Close()
+                End Try
+            ElseIf report_mark_type = "54" Then
+                'FG MISSING
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
+
+                Try
+                    If id_status_reportx = "5" Then
+                        Dim cancel_rsv_stock As ClassSalesInv = New ClassSalesInv()
+
+                        If FormSalesPOSDet.is_use_unique_code = "1" Then
+                            'cancelled unique
+                            cancel_rsv_stock.cancellUnique(id_report, report_mark_type)
+                        End If
+
+
+                        'cancelled stock
+                        cancel_rsv_stock.cancelReservedStock(id_report, "54")
+                    ElseIf id_status_reportx = "6" Then
+                        'completed
+                        Dim complete_rsv_stock As ClassSalesInv = New ClassSalesInv()
+                        complete_rsv_stock.completedStock(id_report, "54")
+                    End If
+
+                    query = String.Format("UPDATE tb_sales_pos SET id_report_status='{0}' WHERE id_sales_pos ='{1}'", id_status_reportx, id_report)
+                    execute_non_query(query, True, "", "", "", "")
+                    'infoCustom("Status changed.")
+
+                    If form_origin = "FormSalesPOSDet" Then
+                        FormSalesPOSDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                        FormSalesPOSDet.check_but()
+                        FormSalesPOSDet.actionLoad()
+                        FormSalesPOS.viewSalesPOS()
+                        FormSalesPOS.GVSalesPOS.FocusedRowHandle = find_row(FormSalesPOS.GVSalesPOS, "id_sales_pos", id_report)
+                    Else
+                        'code here
+                    End If
+                Catch ex As Exception
+                    errorConnection()
+                    Close()
+                End Try
+            ElseIf report_mark_type = "55" Then
+                'FG MISSING INVOICE
+                Try
+                    query = String.Format("UPDATE tb_fg_missing_invoice SET id_report_status='{0}' WHERE id_fg_missing_invoice ='{1}'", id_status_reportx, id_report)
+                    execute_non_query(query, True, "", "", "", "")
+                    'infoCustom("Status changed.")
+
+                    If form_origin = "FormFGMissingInvoiceDet" Then
+                        FormFGMissingInvoiceDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                        FormFGMissingInvoiceDet.check_but()
+                        FormFGMissingInvoiceDet.actionLoad()
+                        FormFGMissingInvoice.viewFGMissingInvoice()
+                        FormFGMissingInvoice.GVFGMissingInvoice.FocusedRowHandle = find_row(FormFGMissingInvoice.GVFGMissingInvoice, "id_fg_missing_invoice", id_report)
+                    Else
+                        'code here
+                    End If
+                Catch ex As Exception
+                    errorConnection()
+                    Close()
+                End Try
+            ElseIf report_mark_type = "56" Then
+                'FG SO WH
+                Try
+                    query = String.Format("UPDATE tb_fg_so_wh SET id_report_status='{0}' WHERE id_fg_so_wh ='{1}'", id_status_reportx, id_report)
+                    execute_non_query(query, True, "", "", "", "")
+                    'infoCustom("Status changed.")
+
+                    If form_origin = "FormFGStockOpnameWHDet" Then
+                        'FormSalesInvoiceDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                        ' FormFGStockOpnameStoreDet.check_but()
+                        FormFGStockOpnameWHDet.actionLoad()
+                        FormFGStockOpnameWH.viewSOWH()
+                        FormFGStockOpnameWH.GVSOWH.FocusedRowHandle = find_row(FormFGStockOpnameWH.GVSOWH, "id_fg_so_wh", id_report)
+                    Else
+                        'code here
+                    End If
+                Catch ex As Exception
+                    errorConnection()
+                    Close()
+                End Try
+            ElseIf report_mark_type = "57" Then
+                'TRANSFER
+                Dim stt As ClassFGTrf = New ClassFGTrf()
+                stt.changeStatus(id_report, id_status_reportx)
+                'infoCustom("Status changed.")
+
+                If form_origin = "FormFGTrfDet" Then
+                    FormFGTrfDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                    FormFGTrfDet.check_but()
+                    FormFGTrfDet.actionLoad()
+                    FormFGTrf.viewFGTrf()
+                    FormFGTrf.GVFGTrf.FocusedRowHandle = find_row(FormFGTrf.GVFGTrf, "id_fg_trf", id_report)
+                ElseIf form_origin = "FormFGTrfNewDet" Then
+                    FormFGTrfNewDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                    FormFGTrfNewDet.check_but()
+                    FormFGTrfNewDet.actionLoad()
+                    FormFGTrfNew.viewFGTrf()
+                    FormFGTrfNew.GVFGTrf.FocusedRowHandle = find_row(FormFGTrfNew.GVFGTrf, "id_fg_trf", id_report)
+                Else
+                    'no code
+                End If
+            ElseIf report_mark_type = "58" Then
+                'REC TRF
+                Try
+                    If id_status_reportx = "6" Then
+                        ' jika complete
+                        Dim query_save_st As String = ""
+                        query_save_st += "INSERT INTO tb_storage_fg(id_wh_drawer,id_storage_category,id_product,bom_unit_price,report_mark_type,id_report,storage_product_qty,storage_product_datetime,storage_product_notes,id_stock_status) "
+                        query_save_st += "SELECT trf.id_wh_drawer, '1', trf_det.id_product, dsg.design_cop, '58', '" + id_report + "', trf_det.fg_trf_det_qty_rec, "
+                        query_save_st += "NOW(), CONCAT('Receive Transfer Completed, No : ', trf.fg_trf_number), '1' "
+                        query_save_st += "FROM tb_fg_trf_det trf_det "
+                        query_save_st += "INNER JOIN tb_fg_trf trf ON trf.id_fg_trf = trf_det.id_fg_trf "
+                        query_save_st += "INNER JOIN tb_m_product prd ON prd.id_product = trf_det.id_product "
+                        query_save_st += "INNER JOIN tb_m_design dsg ON dsg.id_design = prd.id_design "
+                        query_save_st += "WHERE trf.id_fg_trf = '" + id_report + "' "
+                        execute_non_query(query_save_st, True, "", "", "", "")
+                    End If
+
+                    query = String.Format("UPDATE tb_fg_trf SET id_report_status_rec='{0}' WHERE id_fg_trf ='{1}'", id_status_reportx, id_report)
+                    execute_non_query(query, True, "", "", "", "")
+                    'infoCustom("Status changed.")
+
+                    If form_origin = "FormFGTrfDet" Then
+                        FormFGTrfDet.LEReportStatus2.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                        FormFGTrfDet.check_but()
+                        FormFGTrfDet.actionLoad()
+                        FormFGTrfReceive.viewFGTrf()
+                        FormFGTrfReceive.GVFGTrf.FocusedRowHandle = find_row(FormFGTrfReceive.GVFGTrf, "id_fg_trf", id_report)
+                    Else
+                        'code here
+                    End If
+                Catch ex As Exception
+                    errorConnection()
+                    Close()
+                End Try
+            ElseIf report_mark_type = "60" Then
+                'PL SAMPLE DEL
+                query = String.Format("UPDATE tb_sample_del SET id_report_status='{0}' WHERE id_sample_del ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+
+                'rollback stock if cancelled and complerted
+                If id_status_reportx = "5" Then
+                    Dim query_drawer As String = "SELECT c.sample_del_number, b.id_sample, a.id_wh_drawer, a.sample_del_det_drawer_qty,a.id_sample_price, a.sample_price FROM tb_sample_del_det_drawer a "
+                    query_drawer += "INNER JOIN tb_sample_del_det b ON a.id_sample_del_det = b.id_sample_del_det "
+                    query_drawer += "INNER JOIN tb_sample_del c ON c.id_sample_del = b.id_sample_del "
+                    query_drawer += "WHERE b.id_sample_del = '" + id_report + "' "
+                    Dim data_drawer As DataTable = execute_query(query_drawer, -1, True, "", "", "", "")
+
+                    'prepare rollback stock
+                    Dim query_drawer_stock As String = ""
+                    Dim jum_ins_c As Integer = 0
+                    If data_drawer.Rows.Count > 0 Then
+                        query_drawer_stock = "INSERT tb_storage_sample(id_wh_drawer, id_storage_category, id_sample, qty_sample, datetime_storage_sample, storage_sample_notes, id_sample_price, sample_price, report_mark_type, id_report, id_stock_status) VALUES "
+                    End If
+                    For c As Integer = 0 To (data_drawer.Rows.Count - 1)
+                        If c > 0 Then
+                            query_drawer_stock += ", "
+                        End If
+                        query_drawer_stock += "('" + data_drawer(c)("id_wh_drawer").ToString + "', '1', '" + data_drawer(c)("id_sample").ToString + "', '" + decimalSQL(data_drawer(c)("sample_del_det_drawer_qty").ToString) + "', NOW(), 'PL sample Delivery No: " + data_drawer(c)("sample_del_number").ToString + ", has been canceled', '" + data_drawer(c)("id_sample_price").ToString + "','" + decimalSQL(data_drawer(c)("sample_price").ToString) + "', '60', '" + id_report + "', '2') "
+                    Next
+
+                    'excequte rollback
+                    If data_drawer.Rows.Count > 0 Then
+                        execute_non_query(query_drawer_stock, True, "", "", "", "")
+                    End If
+                ElseIf id_status_reportx = "6" Then
+                    Dim query_drawer As String = "SELECT c.sample_del_number, b.id_sample, a.id_wh_drawer, a.sample_del_det_drawer_qty, a.id_sample_price, a.sample_price FROM tb_sample_del_det_drawer a "
+                    query_drawer += "INNER JOIN tb_sample_del_det b ON a.id_sample_del_det = b.id_sample_del_det "
+                    query_drawer += "INNER JOIN tb_sample_del c ON c.id_sample_del = b.id_sample_del "
+                    query_drawer += "WHERE b.id_sample_del = '" + id_report + "' "
+                    Dim data_drawer As DataTable = execute_query(query_drawer, -1, True, "", "", "", "")
+
+                    'prepare rollback stock
+                    Dim query_drawer_stock_reserved As String = ""
+                    Dim query_drawer_stock_preparedx As String = ""
+                    Dim jum_ins_c As Integer = 0
+                    If data_drawer.Rows.Count > 0 Then
+                        query_drawer_stock_reserved = "INSERT tb_storage_sample(id_wh_drawer, id_storage_category, id_sample, qty_sample, datetime_storage_sample, storage_sample_notes, id_sample_price, sample_price, report_mark_type, id_report, id_stock_status) VALUES "
+                        query_drawer_stock_preparedx = "INSERT tb_storage_sample(id_wh_drawer, id_storage_category, id_sample, qty_sample, datetime_storage_sample, storage_sample_notes, id_sample_price, sample_price, report_mark_type, id_report, id_stock_status) VALUES "
+                    End If
+                    For c As Integer = 0 To (data_drawer.Rows.Count - 1)
+                        If c > 0 Then
+                            query_drawer_stock_reserved += ", "
+                            query_drawer_stock_preparedx += ", "
+                        End If
+                        query_drawer_stock_reserved += "('" + data_drawer(c)("id_wh_drawer").ToString + "', '1', '" + data_drawer(c)("id_sample").ToString + "', '" + decimalSQL(data_drawer(c)("sample_del_det_drawer_qty").ToString) + "', NOW(), 'PL Sample Delivery Completed and delete reserved stock, no : " + data_drawer(c)("sample_del_number").ToString + "',  '" + data_drawer(c)("id_sample_price").ToString + "', '" + decimalSQL(data_drawer(c)("sample_price").ToString) + "', '60', '" + id_report + "', '2') "
+                        query_drawer_stock_preparedx += "('" + data_drawer(c)("id_wh_drawer").ToString + "', '2', '" + data_drawer(c)("id_sample").ToString + "', '" + decimalSQL(data_drawer(c)("sample_del_det_drawer_qty").ToString) + "', NOW(), 'PL Sample Delivery, no : " + data_drawer(c)("sample_del_number").ToString + "', '" + data_drawer(c)("id_sample_price").ToString + "','" + decimalSQL(data_drawer(c)("sample_price").ToString) + "', '60', '" + id_report + "', '1') "
+                    Next
+
+                    'excequte
+                    If data_drawer.Rows.Count > 0 Then
+                        execute_non_query(query_drawer_stock_reserved, True, "", "", "", "")
+                        execute_non_query(query_drawer_stock_preparedx, True, "", "", "", "")
+                    End If
+                End If
+
+                'infoCustom("Status changed.")
+
+                If form_origin = "FormSampleDelDet" Then
+                    FormSampleDelDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                    FormSampleDelDet.check_but()
+                    FormSampleDelDet.actionLoad()
+                    FormSampleDel.viewSampleDel()
+                    FormSampleDel.GVSampleDel.FocusedRowHandle = find_row(FormSampleDel.GVSampleDel, "id_sample_del", id_report)
+                Else
+                    'no code
+                End If
+            ElseIf report_mark_type = "61" Then
+                'RECEIVING SAMPLE DEL
+                Try
+                    query = String.Format("UPDATE tb_sample_del_rec SET id_report_status='{0}' WHERE id_sample_del_rec ='{1}'", id_status_reportx, id_report)
+                    execute_non_query(query, True, "", "", "", "")
+                    'infoCustom("Status changed.")
+
+                    If form_origin = "FormSampleDelRecDet" Then
+                        FormSampleDelRecDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                        FormSampleDelRecDet.actionLoad()
+                        FormSampleDelRec.viewSampleDel()
+                        FormSampleDelRec.viewSampleDelRec()
+                        FormSampleDelRec.GVSampleDelRec.FocusedRowHandle = find_row(FormSampleDelRec.GVSampleDelRec, "id_sample_del_rec", id_report)
+                    Else
+                        'code here
+                    End If
+                Catch ex As Exception
+                    errorConnection()
+                    Close()
+                End Try
+            ElseIf report_mark_type = "62" Then
+                'SO SAMPLE ORDER
+                Try
+                    query = String.Format("UPDATE tb_sample_order SET id_report_status='{0}' WHERE id_sample_order ='{1}'", id_status_reportx, id_report)
+                    execute_non_query(query, True, "", "", "", "")
+                    'infoCustom("Status changed.")
+
+                    If form_origin = "FormSampleOrderDet" Then
+                        FormSampleOrderDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                        FormSampleOrderDet.actionLoad()
+                        FormSampleOrder.viewSampleOrder()
+                        FormSampleOrder.GVSampleOrder.FocusedRowHandle = find_row(FormSampleOrder.GVSampleOrder, "id_sample_order", id_report)
+                    Else
+                        'code here
+                    End If
+                Catch ex As Exception
+                    errorConnection()
+                    Close()
+                End Try
+            ElseIf report_mark_type = "63" Then
+                ' DELIVERY ORDER SAMPLE FOR SALES
+                query = String.Format("UPDATE tb_pl_sample_order_del SET id_report_status='{0}' WHERE id_pl_sample_order_del ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+
+                'rollback stock if cancelled and complerted
+                If id_status_reportx = "5" Then
+                    Dim query_c As ClassSampleDelOrder = New ClassSampleDelOrder
+                    Dim query_drawer As String = query_c.queryDetailDrawer("AND a1.id_pl_sample_order_del = ''" + id_report + "''", "1")
+                    Dim data_drawer As DataTable = execute_query(query_drawer, -1, True, "", "", "", "")
+
+                    'prepare rollback stock
+                    Dim query_drawer_stock As String = ""
+                    Dim jum_ins_c As Integer = 0
+                    If data_drawer.Rows.Count > 0 Then
+                        query_drawer_stock = "INSERT tb_storage_sample(id_wh_drawer, id_storage_category, id_sample, qty_sample, datetime_storage_sample, storage_sample_notes, id_sample_price, sample_price, report_mark_type, id_report, id_stock_status) VALUES "
+                    End If
+                    For c As Integer = 0 To (data_drawer.Rows.Count - 1)
+                        If c > 0 Then
+                            query_drawer_stock += ", "
+                        End If
+                        query_drawer_stock += "('" + data_drawer(c)("id_wh_drawer").ToString + "', '1', '" + data_drawer(c)("id_sample").ToString + "', '" + decimalSQL(data_drawer(c)("qty_all_sample").ToString) + "', NOW(), 'Delivery Order Sample No: " + data_drawer(c)("pl_sample_order_del_number").ToString + ", has been canceled', '" + data_drawer(c)("id_sample_price").ToString + "','" + decimalSQL(data_drawer(c)("sample_price").ToString) + "', '63', '" + id_report + "', '2') "
+                    Next
+
+                    'excequte rollback
+                    If data_drawer.Rows.Count > 0 Then
+                        execute_non_query(query_drawer_stock, True, "", "", "", "")
+                    End If
+                ElseIf id_status_reportx = "6" Then
+                    Dim query_c As ClassSampleDelOrder = New ClassSampleDelOrder
+                    Dim query_drawer As String = query_c.queryDetailDrawer("AND a1.id_pl_sample_order_del = ''" + id_report + "''", "1")
+                    Dim data_drawer As DataTable = execute_query(query_drawer, -1, True, "", "", "", "")
+
+                    'prepare rollback stock
+                    Dim query_drawer_stock_reserved As String = ""
+                    Dim query_drawer_stock_preparedx As String = ""
+                    Dim jum_ins_c As Integer = 0
+                    If data_drawer.Rows.Count > 0 Then
+                        query_drawer_stock_reserved = "INSERT tb_storage_sample(id_wh_drawer, id_storage_category, id_sample, qty_sample, datetime_storage_sample, storage_sample_notes, id_sample_price, sample_price, report_mark_type, id_report, id_stock_status) VALUES "
+                        query_drawer_stock_preparedx = "INSERT tb_storage_sample(id_wh_drawer, id_storage_category, id_sample, qty_sample, datetime_storage_sample, storage_sample_notes, id_sample_price, sample_price, report_mark_type, id_report, id_stock_status) VALUES "
+                    End If
+                    For c As Integer = 0 To (data_drawer.Rows.Count - 1)
+                        If c > 0 Then
+                            query_drawer_stock_reserved += ", "
+                            query_drawer_stock_preparedx += ", "
+                        End If
+                        query_drawer_stock_reserved += "('" + data_drawer(c)("id_wh_drawer").ToString + "', '1', '" + data_drawer(c)("id_sample").ToString + "', '" + decimalSQL(data_drawer(c)("qty_all_sample").ToString) + "', NOW(), 'Delivery Order Sample Completed and delete reserved stock, no : " + data_drawer(c)("pl_sample_order_del_number").ToString + "',  '" + data_drawer(c)("id_sample_price").ToString + "', '" + decimalSQL(data_drawer(c)("sample_price").ToString) + "', '63', '" + id_report + "', '2') "
+                        query_drawer_stock_preparedx += "('" + data_drawer(c)("id_wh_drawer").ToString + "', '2', '" + data_drawer(c)("id_sample").ToString + "', '" + decimalSQL(data_drawer(c)("qty_all_sample").ToString) + "', NOW(), 'Delivery Order Sample, no : " + data_drawer(c)("pl_sample_order_del_number").ToString + "', '" + data_drawer(c)("id_sample_price").ToString + "','" + decimalSQL(data_drawer(c)("sample_price").ToString) + "', '63', '" + id_report + "', '1') "
+                    Next
+
+                    'excequte
+                    If data_drawer.Rows.Count > 0 Then
+                        execute_non_query(query_drawer_stock_reserved, True, "", "", "", "")
+                        execute_non_query(query_drawer_stock_preparedx, True, "", "", "", "")
+                    End If
+                End If
+
+                'infoCustom("Status changed.")
+
+                If form_origin = "FormSampleDelOrderDet" Then
+                    FormSampleDelOrderDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                    FormSampleDelOrderDet.check_but()
+                    FormSampleDelOrderDet.actionLoad()
+                    FormSampleDelOrder.viewSampleDelOrder()
+                    FormSampleDelOrder.viewSampleOrder()
+                    FormSampleDelOrder.GVSampleDelOrder.FocusedRowHandle = find_row(FormSampleDelOrder.GVSampleDelOrder, "id_pl_sample_order_del", id_report)
+                Else
+                    'no code
+                End If
+            ElseIf report_mark_type = "64" Then
+                'SAMPLE SO
+                Try
+                    query = String.Format("UPDATE tb_sample_so SET id_report_status='{0}' WHERE id_sample_so ='{1}'", id_status_reportx, id_report)
+                    execute_non_query(query, True, "", "", "", "")
+                    'infoCustom("Status changed.")
+
+                    If form_origin = "FormSampleStockOpname" Then
+                        FormSampleStockOpnameDet.actionLoad()
+                        FormSampleStockOpname.viewSOWH()
+                        FormSampleStockOpname.GVSOWH.FocusedRowHandle = find_row(FormSampleStockOpname.GVSOWH, "id_sample_so", id_report)
+                    Else
+                        'code here
+                    End If
+                Catch ex As Exception
+                    errorConnection()
+                    Close()
+                End Try
+            ElseIf report_mark_type = "65" Then
+                'CODE REPLACEMENT
+                If id_status_reportx = "3" Then
+                    id_status_reportx = 6
+                End If
+                'action complete
+                'If id_status_reportx = "6" Then
+                '    Dim query_replace As String = "CALL generate_replace_barcode('" + id_report + "')"
+                '    execute_non_query(query_replace, True, "", "", "", "")
+                'End If
+
+                query = String.Format("UPDATE tb_fg_code_replace_store SET id_report_status='{0}' WHERE id_fg_code_replace_store ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+                'infoCustom("Status changed.")
+
+                If form_origin = "FormFGCodeReplaceStoreDet" Then
+                    FormFGCodeReplaceStoreDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                    FormFGCodeReplaceStoreDet.check_but()
+                    FormFGCodeReplaceStoreDet.actionLoad()
+                    FormFGCodeReplace.viewCodeReplaceStore()
+                    FormFGCodeReplace.GVFGCodeReplaceStore.FocusedRowHandle = find_row(FormFGCodeReplace.GVFGCodeReplaceStore, "id_fg_code_replace_store", id_report)
+                Else
+                    'no code
+                End If
+            ElseIf report_mark_type = "66" Or report_mark_type = "118" Then
+                'SALES CREDIT NOTE
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
+
+                If id_status_reportx = "6" Then
+                    'completed
+                    Dim stc_in As ClassSalesInv = New ClassSalesInv()
+                    stc_in.insertUnique(id_report, report_mark_type)
+                    stc_in.completeInStock(id_report, report_mark_type)
                 End If
 
                 query = String.Format("UPDATE tb_sales_pos SET id_report_status='{0}' WHERE id_sales_pos ='{1}'", id_status_reportx, id_report)
@@ -2432,1073 +2863,727 @@
                 Else
                     'code here
                 End If
-            Catch ex As Exception
-                errorConnection()
-                Close()
-            End Try
-        ElseIf report_mark_type = "55" Then
-            'FG MISSING INVOICE
-            Try
-                query = String.Format("UPDATE tb_fg_missing_invoice SET id_report_status='{0}' WHERE id_fg_missing_invoice ='{1}'", id_status_reportx, id_report)
-                execute_non_query(query, True, "", "", "", "")
-                'infoCustom("Status changed.")
-
-                If form_origin = "FormFGMissingInvoiceDet" Then
-                    FormFGMissingInvoiceDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                    FormFGMissingInvoiceDet.check_but()
-                    FormFGMissingInvoiceDet.actionLoad()
-                    FormFGMissingInvoice.viewFGMissingInvoice()
-                    FormFGMissingInvoice.GVFGMissingInvoice.FocusedRowHandle = find_row(FormFGMissingInvoice.GVFGMissingInvoice, "id_fg_missing_invoice", id_report)
-                Else
-                    'code here
+            ElseIf report_mark_type = "67" Then
+                'MISSING CREDIT NOTE
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
                 End If
-            Catch ex As Exception
-                errorConnection()
-                Close()
-            End Try
-        ElseIf report_mark_type = "56" Then
-            'FG SO WH
-            Try
-                query = String.Format("UPDATE tb_fg_so_wh SET id_report_status='{0}' WHERE id_fg_so_wh ='{1}'", id_status_reportx, id_report)
-                execute_non_query(query, True, "", "", "", "")
-                'infoCustom("Status changed.")
 
-                If form_origin = "FormFGStockOpnameWHDet" Then
-                    'FormSalesInvoiceDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                    ' FormFGStockOpnameStoreDet.check_but()
-                    FormFGStockOpnameWHDet.actionLoad()
-                    FormFGStockOpnameWH.viewSOWH()
-                    FormFGStockOpnameWH.GVSOWH.FocusedRowHandle = find_row(FormFGStockOpnameWH.GVSOWH, "id_fg_so_wh", id_report)
-                Else
-                    'code here
-                End If
-            Catch ex As Exception
-                errorConnection()
-                Close()
-            End Try
-        ElseIf report_mark_type = "57" Then
-            'TRANSFER
-            Dim stt As ClassFGTrf = New ClassFGTrf()
-            stt.changeStatus(id_report, id_status_reportx)
-            'infoCustom("Status changed.")
-
-            If form_origin = "FormFGTrfDet" Then
-                FormFGTrfDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormFGTrfDet.check_but()
-                FormFGTrfDet.actionLoad()
-                FormFGTrf.viewFGTrf()
-                FormFGTrf.GVFGTrf.FocusedRowHandle = find_row(FormFGTrf.GVFGTrf, "id_fg_trf", id_report)
-            ElseIf form_origin = "FormFGTrfNewDet" Then
-                FormFGTrfNewDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormFGTrfNewDet.check_but()
-                FormFGTrfNewDet.actionLoad()
-                FormFGTrfNew.viewFGTrf()
-                FormFGTrfNew.GVFGTrf.FocusedRowHandle = find_row(FormFGTrfNew.GVFGTrf, "id_fg_trf", id_report)
-            Else
-                'no code
-            End If
-        ElseIf report_mark_type = "58" Then
-            'REC TRF
-            Try
                 If id_status_reportx = "6" Then
-                    ' jika complete
-                    Dim query_save_st As String = ""
-                    query_save_st += "INSERT INTO tb_storage_fg(id_wh_drawer,id_storage_category,id_product,bom_unit_price,report_mark_type,id_report,storage_product_qty,storage_product_datetime,storage_product_notes,id_stock_status) "
-                    query_save_st += "SELECT trf.id_wh_drawer, '1', trf_det.id_product, dsg.design_cop, '58', '" + id_report + "', trf_det.fg_trf_det_qty_rec, "
-                    query_save_st += "NOW(), CONCAT('Receive Transfer Completed, No : ', trf.fg_trf_number), '1' "
-                    query_save_st += "FROM tb_fg_trf_det trf_det "
-                    query_save_st += "INNER JOIN tb_fg_trf trf ON trf.id_fg_trf = trf_det.id_fg_trf "
-                    query_save_st += "INNER JOIN tb_m_product prd ON prd.id_product = trf_det.id_product "
-                    query_save_st += "INNER JOIN tb_m_design dsg ON dsg.id_design = prd.id_design "
-                    query_save_st += "WHERE trf.id_fg_trf = '" + id_report + "' "
-                    execute_non_query(query_save_st, True, "", "", "", "")
+                    'completed
+                    Dim stc_in As ClassSalesInv = New ClassSalesInv()
+                    stc_in.completeInStock(id_report, "67")
                 End If
 
-                query = String.Format("UPDATE tb_fg_trf SET id_report_status_rec='{0}' WHERE id_fg_trf ='{1}'", id_status_reportx, id_report)
+                query = String.Format("UPDATE tb_sales_pos SET id_report_status='{0}' WHERE id_sales_pos ='{1}'", id_status_reportx, id_report)
                 execute_non_query(query, True, "", "", "", "")
                 'infoCustom("Status changed.")
 
-                If form_origin = "FormFGTrfDet" Then
-                    FormFGTrfDet.LEReportStatus2.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                    FormFGTrfDet.check_but()
-                    FormFGTrfDet.actionLoad()
-                    FormFGTrfReceive.viewFGTrf()
-                    FormFGTrfReceive.GVFGTrf.FocusedRowHandle = find_row(FormFGTrfReceive.GVFGTrf, "id_fg_trf", id_report)
+                If form_origin = "FormSalesPOSDet" Then
+                    FormSalesPOSDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                    FormSalesPOSDet.check_but()
+                    FormSalesPOSDet.actionLoad()
+                    FormSalesPOS.viewSalesPOS()
+                    FormSalesPOS.GVSalesPOS.FocusedRowHandle = find_row(FormSalesPOS.GVSalesPOS, "id_sales_pos", id_report)
                 Else
                     'code here
                 End If
-            Catch ex As Exception
-                errorConnection()
-                Close()
-            End Try
-        ElseIf report_mark_type = "60" Then
-            'PL SAMPLE DEL
-            query = String.Format("UPDATE tb_sample_del SET id_report_status='{0}' WHERE id_sample_del ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-
-            'rollback stock if cancelled and complerted
-            If id_status_reportx = "5" Then
-                Dim query_drawer As String = "SELECT c.sample_del_number, b.id_sample, a.id_wh_drawer, a.sample_del_det_drawer_qty,a.id_sample_price, a.sample_price FROM tb_sample_del_det_drawer a "
-                query_drawer += "INNER JOIN tb_sample_del_det b ON a.id_sample_del_det = b.id_sample_del_det "
-                query_drawer += "INNER JOIN tb_sample_del c ON c.id_sample_del = b.id_sample_del "
-                query_drawer += "WHERE b.id_sample_del = '" + id_report + "' "
-                Dim data_drawer As DataTable = execute_query(query_drawer, -1, True, "", "", "", "")
-
-                'prepare rollback stock
-                Dim query_drawer_stock As String = ""
-                Dim jum_ins_c As Integer = 0
-                If data_drawer.Rows.Count > 0 Then
-                    query_drawer_stock = "INSERT tb_storage_sample(id_wh_drawer, id_storage_category, id_sample, qty_sample, datetime_storage_sample, storage_sample_notes, id_sample_price, sample_price, report_mark_type, id_report, id_stock_status) VALUES "
+            ElseIf report_mark_type = "68" Then
+                'CODE REPLACEMENT WH
+                'action complete
+                If id_status_reportx = "6" Then
+                    Dim query_replace As String = "CALL generate_replace_barcode_wh('" + id_report + "')"
+                    execute_non_query(query_replace, True, "", "", "", "")
                 End If
-                For c As Integer = 0 To (data_drawer.Rows.Count - 1)
-                    If c > 0 Then
-                        query_drawer_stock += ", "
-                    End If
-                    query_drawer_stock += "('" + data_drawer(c)("id_wh_drawer").ToString + "', '1', '" + data_drawer(c)("id_sample").ToString + "', '" + decimalSQL(data_drawer(c)("sample_del_det_drawer_qty").ToString) + "', NOW(), 'PL sample Delivery No: " + data_drawer(c)("sample_del_number").ToString + ", has been canceled', '" + data_drawer(c)("id_sample_price").ToString + "','" + decimalSQL(data_drawer(c)("sample_price").ToString) + "', '60', '" + id_report + "', '2') "
-                Next
 
-                'excequte rollback
-                If data_drawer.Rows.Count > 0 Then
-                    execute_non_query(query_drawer_stock, True, "", "", "", "")
-                End If
-            ElseIf id_status_reportx = "6" Then
-                Dim query_drawer As String = "SELECT c.sample_del_number, b.id_sample, a.id_wh_drawer, a.sample_del_det_drawer_qty, a.id_sample_price, a.sample_price FROM tb_sample_del_det_drawer a "
-                query_drawer += "INNER JOIN tb_sample_del_det b ON a.id_sample_del_det = b.id_sample_del_det "
-                query_drawer += "INNER JOIN tb_sample_del c ON c.id_sample_del = b.id_sample_del "
-                query_drawer += "WHERE b.id_sample_del = '" + id_report + "' "
-                Dim data_drawer As DataTable = execute_query(query_drawer, -1, True, "", "", "", "")
-
-                'prepare rollback stock
-                Dim query_drawer_stock_reserved As String = ""
-                Dim query_drawer_stock_preparedx As String = ""
-                Dim jum_ins_c As Integer = 0
-                If data_drawer.Rows.Count > 0 Then
-                    query_drawer_stock_reserved = "INSERT tb_storage_sample(id_wh_drawer, id_storage_category, id_sample, qty_sample, datetime_storage_sample, storage_sample_notes, id_sample_price, sample_price, report_mark_type, id_report, id_stock_status) VALUES "
-                    query_drawer_stock_preparedx = "INSERT tb_storage_sample(id_wh_drawer, id_storage_category, id_sample, qty_sample, datetime_storage_sample, storage_sample_notes, id_sample_price, sample_price, report_mark_type, id_report, id_stock_status) VALUES "
-                End If
-                For c As Integer = 0 To (data_drawer.Rows.Count - 1)
-                    If c > 0 Then
-                        query_drawer_stock_reserved += ", "
-                        query_drawer_stock_preparedx += ", "
-                    End If
-                    query_drawer_stock_reserved += "('" + data_drawer(c)("id_wh_drawer").ToString + "', '1', '" + data_drawer(c)("id_sample").ToString + "', '" + decimalSQL(data_drawer(c)("sample_del_det_drawer_qty").ToString) + "', NOW(), 'PL Sample Delivery Completed and delete reserved stock, no : " + data_drawer(c)("sample_del_number").ToString + "',  '" + data_drawer(c)("id_sample_price").ToString + "', '" + decimalSQL(data_drawer(c)("sample_price").ToString) + "', '60', '" + id_report + "', '2') "
-                    query_drawer_stock_preparedx += "('" + data_drawer(c)("id_wh_drawer").ToString + "', '2', '" + data_drawer(c)("id_sample").ToString + "', '" + decimalSQL(data_drawer(c)("sample_del_det_drawer_qty").ToString) + "', NOW(), 'PL Sample Delivery, no : " + data_drawer(c)("sample_del_number").ToString + "', '" + data_drawer(c)("id_sample_price").ToString + "','" + decimalSQL(data_drawer(c)("sample_price").ToString) + "', '60', '" + id_report + "', '1') "
-                Next
-
-                'excequte
-                If data_drawer.Rows.Count > 0 Then
-                    execute_non_query(query_drawer_stock_reserved, True, "", "", "", "")
-                    execute_non_query(query_drawer_stock_preparedx, True, "", "", "", "")
-                End If
-            End If
-
-            'infoCustom("Status changed.")
-
-            If form_origin = "FormSampleDelDet" Then
-                FormSampleDelDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormSampleDelDet.check_but()
-                FormSampleDelDet.actionLoad()
-                FormSampleDel.viewSampleDel()
-                FormSampleDel.GVSampleDel.FocusedRowHandle = find_row(FormSampleDel.GVSampleDel, "id_sample_del", id_report)
-            Else
-                'no code
-            End If
-        ElseIf report_mark_type = "61" Then
-            'RECEIVING SAMPLE DEL
-            Try
-                query = String.Format("UPDATE tb_sample_del_rec SET id_report_status='{0}' WHERE id_sample_del_rec ='{1}'", id_status_reportx, id_report)
+                query = String.Format("UPDATE tb_fg_code_replace_wh SET id_report_status='{0}' WHERE id_fg_code_replace_wh ='{1}'", id_status_reportx, id_report)
                 execute_non_query(query, True, "", "", "", "")
                 'infoCustom("Status changed.")
 
-                If form_origin = "FormSampleDelRecDet" Then
-                    FormSampleDelRecDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                    FormSampleDelRecDet.actionLoad()
-                    FormSampleDelRec.viewSampleDel()
-                    FormSampleDelRec.viewSampleDelRec()
-                    FormSampleDelRec.GVSampleDelRec.FocusedRowHandle = find_row(FormSampleDelRec.GVSampleDelRec, "id_sample_del_rec", id_report)
+                If form_origin = "FormFGCodeReplaceWHDet" Then
+                    FormFGCodeReplaceWHDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                    FormFGCodeReplaceWHDet.check_but()
+                    FormFGCodeReplaceWHDet.actionLoad()
+                    FormFGCodeReplace.viewCodeReplaceWH()
+                    FormFGCodeReplace.GVFGCodeReplaceWH.FocusedRowHandle = find_row(FormFGCodeReplace.GVFGCodeReplaceWH, "id_fg_code_replace_wh", id_report)
                 Else
-                    'code here
+                    'no code
                 End If
-            Catch ex As Exception
-                errorConnection()
-                Close()
-            End Try
-        ElseIf report_mark_type = "62" Then
-            'SO SAMPLE ORDER
-            Try
-                query = String.Format("UPDATE tb_sample_order SET id_report_status='{0}' WHERE id_sample_order ='{1}'", id_status_reportx, id_report)
+            ElseIf report_mark_type = "69" Then
+                'FG WRITE OFF
+                If id_status_reportx = "5" Then
+                    Dim query_c As ClassFGWoff = New ClassFGWoff()
+                    Dim query_roll As String = query_c.queryRollbackStock(id_report)
+                    execute_non_query(query_roll, True, "", "", "", "")
+                ElseIf id_status_reportx = "6" Then
+                    Dim query_c As ClassFGWoff = New ClassFGWoff()
+                    Dim query_out As String = query_c.queryCompletedStock(id_report)
+                    execute_non_query(query_out, True, "", "", "", "")
+                End If
+
+                'cheange status
+                query = String.Format("UPDATE tb_fg_woff SET id_report_status='{0}' WHERE id_fg_woff ='{1}'", id_status_reportx, id_report)
                 execute_non_query(query, True, "", "", "", "")
                 'infoCustom("Status changed.")
 
-                If form_origin = "FormSampleOrderDet" Then
-                    FormSampleOrderDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                    FormSampleOrderDet.actionLoad()
-                    FormSampleOrder.viewSampleOrder()
-                    FormSampleOrder.GVSampleOrder.FocusedRowHandle = find_row(FormSampleOrder.GVSampleOrder, "id_sample_order", id_report)
-                Else
-                    'code here
+                If form_origin = "FormFGWoffDet" Then
+                    FormFGWoffDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                    FormFGWoffDet.check_but()
+                    FormFGWoffDet.actionLoad()
+                    FormFGWoff.viewFGWoff()
+                    FormFGWoff.GVFGWoff.FocusedRowHandle = find_row(FormFGWoff.GVFGWoff, "id_fg_woff", id_report)
                 End If
-            Catch ex As Exception
-                errorConnection()
-                Close()
-            End Try
-        ElseIf report_mark_type = "63" Then
-            ' DELIVERY ORDER SAMPLE FOR SALES
-            query = String.Format("UPDATE tb_pl_sample_order_del SET id_report_status='{0}' WHERE id_pl_sample_order_del ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-
-            'rollback stock if cancelled and complerted
-            If id_status_reportx = "5" Then
-                Dim query_c As ClassSampleDelOrder = New ClassSampleDelOrder
-                Dim query_drawer As String = query_c.queryDetailDrawer("AND a1.id_pl_sample_order_del = ''" + id_report + "''", "1")
-                Dim data_drawer As DataTable = execute_query(query_drawer, -1, True, "", "", "", "")
-
-                'prepare rollback stock
-                Dim query_drawer_stock As String = ""
-                Dim jum_ins_c As Integer = 0
-                If data_drawer.Rows.Count > 0 Then
-                    query_drawer_stock = "INSERT tb_storage_sample(id_wh_drawer, id_storage_category, id_sample, qty_sample, datetime_storage_sample, storage_sample_notes, id_sample_price, sample_price, report_mark_type, id_report, id_stock_status) VALUES "
-                End If
-                For c As Integer = 0 To (data_drawer.Rows.Count - 1)
-                    If c > 0 Then
-                        query_drawer_stock += ", "
-                    End If
-                    query_drawer_stock += "('" + data_drawer(c)("id_wh_drawer").ToString + "', '1', '" + data_drawer(c)("id_sample").ToString + "', '" + decimalSQL(data_drawer(c)("qty_all_sample").ToString) + "', NOW(), 'Delivery Order Sample No: " + data_drawer(c)("pl_sample_order_del_number").ToString + ", has been canceled', '" + data_drawer(c)("id_sample_price").ToString + "','" + decimalSQL(data_drawer(c)("sample_price").ToString) + "', '63', '" + id_report + "', '2') "
-                Next
-
-                'excequte rollback
-                If data_drawer.Rows.Count > 0 Then
-                    execute_non_query(query_drawer_stock, True, "", "", "", "")
-                End If
-            ElseIf id_status_reportx = "6" Then
-                Dim query_c As ClassSampleDelOrder = New ClassSampleDelOrder
-                Dim query_drawer As String = query_c.queryDetailDrawer("AND a1.id_pl_sample_order_del = ''" + id_report + "''", "1")
-                Dim data_drawer As DataTable = execute_query(query_drawer, -1, True, "", "", "", "")
-
-                'prepare rollback stock
-                Dim query_drawer_stock_reserved As String = ""
-                Dim query_drawer_stock_preparedx As String = ""
-                Dim jum_ins_c As Integer = 0
-                If data_drawer.Rows.Count > 0 Then
-                    query_drawer_stock_reserved = "INSERT tb_storage_sample(id_wh_drawer, id_storage_category, id_sample, qty_sample, datetime_storage_sample, storage_sample_notes, id_sample_price, sample_price, report_mark_type, id_report, id_stock_status) VALUES "
-                    query_drawer_stock_preparedx = "INSERT tb_storage_sample(id_wh_drawer, id_storage_category, id_sample, qty_sample, datetime_storage_sample, storage_sample_notes, id_sample_price, sample_price, report_mark_type, id_report, id_stock_status) VALUES "
-                End If
-                For c As Integer = 0 To (data_drawer.Rows.Count - 1)
-                    If c > 0 Then
-                        query_drawer_stock_reserved += ", "
-                        query_drawer_stock_preparedx += ", "
-                    End If
-                    query_drawer_stock_reserved += "('" + data_drawer(c)("id_wh_drawer").ToString + "', '1', '" + data_drawer(c)("id_sample").ToString + "', '" + decimalSQL(data_drawer(c)("qty_all_sample").ToString) + "', NOW(), 'Delivery Order Sample Completed and delete reserved stock, no : " + data_drawer(c)("pl_sample_order_del_number").ToString + "',  '" + data_drawer(c)("id_sample_price").ToString + "', '" + decimalSQL(data_drawer(c)("sample_price").ToString) + "', '63', '" + id_report + "', '2') "
-                    query_drawer_stock_preparedx += "('" + data_drawer(c)("id_wh_drawer").ToString + "', '2', '" + data_drawer(c)("id_sample").ToString + "', '" + decimalSQL(data_drawer(c)("qty_all_sample").ToString) + "', NOW(), 'Delivery Order Sample, no : " + data_drawer(c)("pl_sample_order_del_number").ToString + "', '" + data_drawer(c)("id_sample_price").ToString + "','" + decimalSQL(data_drawer(c)("sample_price").ToString) + "', '63', '" + id_report + "', '1') "
-                Next
-
-                'excequte
-                If data_drawer.Rows.Count > 0 Then
-                    execute_non_query(query_drawer_stock_reserved, True, "", "", "", "")
-                    execute_non_query(query_drawer_stock_preparedx, True, "", "", "", "")
-                End If
-            End If
-
-            'infoCustom("Status changed.")
-
-            If form_origin = "FormSampleDelOrderDet" Then
-                FormSampleDelOrderDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormSampleDelOrderDet.check_but()
-                FormSampleDelOrderDet.actionLoad()
-                FormSampleDelOrder.viewSampleDelOrder()
-                FormSampleDelOrder.viewSampleOrder()
-                FormSampleDelOrder.GVSampleDelOrder.FocusedRowHandle = find_row(FormSampleDelOrder.GVSampleDelOrder, "id_pl_sample_order_del", id_report)
-            Else
-                'no code
-            End If
-        ElseIf report_mark_type = "64" Then
-            'SAMPLE SO
-            Try
-                query = String.Format("UPDATE tb_sample_so SET id_report_status='{0}' WHERE id_sample_so ='{1}'", id_status_reportx, id_report)
+            ElseIf report_mark_type = "70" Then
+                'FG PROPOSE PRICE
+                query = String.Format("UPDATE tb_fg_propose_price SET id_report_status='{0}' WHERE id_fg_propose_price ='{1}'", id_status_reportx, id_report)
                 execute_non_query(query, True, "", "", "", "")
                 'infoCustom("Status changed.")
 
-                If form_origin = "FormSampleStockOpname" Then
-                    FormSampleStockOpnameDet.actionLoad()
-                    FormSampleStockOpname.viewSOWH()
-                    FormSampleStockOpname.GVSOWH.FocusedRowHandle = find_row(FormSampleStockOpname.GVSOWH, "id_sample_so", id_report)
-                Else
-                    'code here
+                'post ke master price if completed
+                If id_status_reportx = "6" Then
+                    Dim q_post As String = "CALL generate_pp_normal_final('" + id_report + "', '" + id_user + "')"
+                    execute_non_query(q_post, True, "", "", "", "")
                 End If
-            Catch ex As Exception
-                errorConnection()
-                Close()
-            End Try
-        ElseIf report_mark_type = "65" Then
-            'CODE REPLACEMENT
-            If id_status_reportx = "3" Then
-                id_status_reportx = 6
-            End If
-            'action complete
-            'If id_status_reportx = "6" Then
-            '    Dim query_replace As String = "CALL generate_replace_barcode('" + id_report + "')"
-            '    execute_non_query(query_replace, True, "", "", "", "")
-            'End If
 
-            query = String.Format("UPDATE tb_fg_code_replace_store SET id_report_status='{0}' WHERE id_fg_code_replace_store ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-            'infoCustom("Status changed.")
+                If form_origin = "FormFGProposePriceDet" Then
+                    FormFGProposePriceDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                    FormFGProposePriceDet.check_but_imp()
+                    FormFGProposePriceDet.check_but_loc()
+                    FormFGProposePriceDet.actionLoad()
+                    FormFGProposePrice.viewPropose()
+                    FormFGProposePrice.GVFGPropose.FocusedRowHandle = find_row(FormFGProposePrice.GVFGPropose, "id_fg_propose_price", id_report)
+                End If
+            ElseIf report_mark_type = "72" Then
+                'QC Adj In
+                query = String.Format("UPDATE tb_prod_order_qc_adj_in SET id_report_status='{0}' WHERE id_prod_order_qc_adj_in ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+                'infoCustom("Status changed.")
 
-            If form_origin = "FormFGCodeReplaceStoreDet" Then
-                FormFGCodeReplaceStoreDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormFGCodeReplaceStoreDet.check_but()
-                FormFGCodeReplaceStoreDet.actionLoad()
-                FormFGCodeReplace.viewCodeReplaceStore()
-                FormFGCodeReplace.GVFGCodeReplaceStore.FocusedRowHandle = find_row(FormFGCodeReplace.GVFGCodeReplaceStore, "id_fg_code_replace_store", id_report)
-            Else
-                'no code
-            End If
-        ElseIf report_mark_type = "66" Or report_mark_type = "118" Then
-            'SALES CREDIT NOTE
-            If id_status_reportx = "3" Then
-                id_status_reportx = "6"
-            End If
+                If form_origin = "FormProdQCAdjIn" Then
+                    FormProdQCAdjIn.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                    FormProdQCAdjIn.actionLoad()
+                    FormProdQCAdj.viewAdjIn()
+                    FormProdQCAdj.GVAdjIn.FocusedRowHandle = find_row(FormProdQCAdj.GVAdjIn, "id_prod_order_qc_adj_in", id_report)
+                Else
+                    FormViewProdQCAdjIn.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                End If
+            ElseIf report_mark_type = "73" Then
+                'QC Adj Out
+                query = String.Format("UPDATE tb_prod_order_qc_adj_out SET id_report_status='{0}' WHERE id_prod_order_qc_adj_out ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+                'infoCustom("Status changed.")
 
-            If id_status_reportx = "6" Then
-                'completed
-                Dim stc_in As ClassSalesInv = New ClassSalesInv()
-                stc_in.completeInStock(id_report, report_mark_type)
-            End If
+                If form_origin = "FormProdQCAdjOut" Then
+                    FormProdQCAdjOut.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                    FormProdQCAdjOut.actionLoad()
+                    FormProdQCAdj.viewAdjOut()
+                    FormProdQCAdj.GVAdjOut.FocusedRowHandle = find_row(FormProdQCAdj.GVAdjOut, "id_prod_order_qc_adj_out", id_report)
+                Else
+                    FormViewProdQcAdjOut.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                End If
+            ElseIf report_mark_type = "75" Then
+                'ANALISIS SO
+                If id_status_reportx = "6" Then
+                    Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("This process will create prepare order new product documents automatically. Are you sure to continue this process ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+                    If confirm = Windows.Forms.DialogResult.Yes Then
+                        PBC.Visible = True
 
-            query = String.Format("UPDATE tb_sales_pos SET id_report_status='{0}' WHERE id_sales_pos ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-            'infoCustom("Status changed.")
+                        'delete mark
+                        Dim query_del_mark As String = ""
+                        query_del_mark += "DELETE "
+                        query_del_mark += "FROM tb_report_mark "
+                        query_del_mark += "WHERE id_report IN ( "
+                        query_del_mark += "SELECT * FROM ( "
+                        query_del_mark += "select id_sales_order from tb_sales_order a where a.id_fg_so_reff='" + id_report + "' "
+                        query_del_mark += ") a "
+                        query_del_mark += ") AND report_mark_type='39' "
+                        execute_non_query(query_del_mark, True, "", "", "", "")
 
-            If form_origin = "FormSalesPOSDet" Then
-                FormSalesPOSDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormSalesPOSDet.check_but()
-                FormSalesPOSDet.actionLoad()
-                FormSalesPOS.viewSalesPOS()
-                FormSalesPOS.GVSalesPOS.FocusedRowHandle = find_row(FormSalesPOS.GVSalesPOS, "id_sales_pos", id_report)
-            Else
-                'code here
-            End If
-        ElseIf report_mark_type = "67" Then
-            'MISSING CREDIT NOTE
-            If id_status_reportx = "3" Then
-                id_status_reportx = "6"
-            End If
+                        'delete prepare order terkait 
+                        Dim query_del As String = "DELETE FROM tb_sales_order WHERE id_fg_so_reff='" + id_report + "' "
+                        execute_non_query(query_del, True, "", "", "", "")
 
-            If id_status_reportx = "6" Then
-                'completed
-                Dim stc_in As ClassSalesInv = New ClassSalesInv()
-                stc_in.completeInStock(id_report, "67")
-            End If
+                        'get product
+                        Dim ix As Integer = 0
+                        Dim id_product_sel As String = ""
+                        For j As Integer = 0 To ((FormFGSalesOrderReffDet.GVDesign.RowCount - 1) - GetGroupRowCount(FormFGSalesOrderReffDet.GVDesign)) 'looping product
+                            Dim id_product As String = FormFGSalesOrderReffDet.GVDesign.GetRowCellValue(j, "id_product").ToString
+                            If ix > 0 Then
+                                id_product_sel += "OR "
+                            End If
+                            id_product_sel += "ds.id_product = '" + id_product + "' "
+                            ix += 1
+                        Next
 
-            query = String.Format("UPDATE tb_sales_pos SET id_report_status='{0}' WHERE id_sales_pos ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-            'infoCustom("Status changed.")
+                        'looping based on store
+                        Dim str_err As String = ""
+                        Dim sales_order_reff As String = ""
+                        Dim data_fg_store As DataTable = FormFGSalesOrderReffDet.GCDesign.DataSource
 
-            If form_origin = "FormSalesPOSDet" Then
-                FormSalesPOSDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormSalesPOSDet.check_but()
-                FormSalesPOSDet.actionLoad()
-                FormSalesPOS.viewSalesPOS()
-                FormSalesPOS.GVSalesPOS.FocusedRowHandle = find_row(FormSalesPOS.GVSalesPOS, "id_sales_pos", id_report)
-            Else
-                'code here
-            End If
-        ElseIf report_mark_type = "68" Then
-            'CODE REPLACEMENT WH
-            'action complete
-            If id_status_reportx = "6" Then
-                Dim query_replace As String = "CALL generate_replace_barcode_wh('" + id_report + "')"
-                execute_non_query(query_replace, True, "", "", "", "")
-            End If
-
-            query = String.Format("UPDATE tb_fg_code_replace_wh SET id_report_status='{0}' WHERE id_fg_code_replace_wh ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-            'infoCustom("Status changed.")
-
-            If form_origin = "FormFGCodeReplaceWHDet" Then
-                FormFGCodeReplaceWHDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormFGCodeReplaceWHDet.check_but()
-                FormFGCodeReplaceWHDet.actionLoad()
-                FormFGCodeReplace.viewCodeReplaceWH()
-                FormFGCodeReplace.GVFGCodeReplaceWH.FocusedRowHandle = find_row(FormFGCodeReplace.GVFGCodeReplaceWH, "id_fg_code_replace_wh", id_report)
-            Else
-                'no code
-            End If
-        ElseIf report_mark_type = "69" Then
-            'FG WRITE OFF
-            If id_status_reportx = "5" Then
-                Dim query_c As ClassFGWoff = New ClassFGWoff()
-                Dim query_roll As String = query_c.queryRollbackStock(id_report)
-                execute_non_query(query_roll, True, "", "", "", "")
-            ElseIf id_status_reportx = "6" Then
-                Dim query_c As ClassFGWoff = New ClassFGWoff()
-                Dim query_out As String = query_c.queryCompletedStock(id_report)
-                execute_non_query(query_out, True, "", "", "", "")
-            End If
-
-            'cheange status
-            query = String.Format("UPDATE tb_fg_woff SET id_report_status='{0}' WHERE id_fg_woff ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-            'infoCustom("Status changed.")
-
-            If form_origin = "FormFGWoffDet" Then
-                FormFGWoffDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormFGWoffDet.check_but()
-                FormFGWoffDet.actionLoad()
-                FormFGWoff.viewFGWoff()
-                FormFGWoff.GVFGWoff.FocusedRowHandle = find_row(FormFGWoff.GVFGWoff, "id_fg_woff", id_report)
-            End If
-        ElseIf report_mark_type = "70" Then
-            'FG PROPOSE PRICE
-            query = String.Format("UPDATE tb_fg_propose_price SET id_report_status='{0}' WHERE id_fg_propose_price ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-            'infoCustom("Status changed.")
-
-            'post ke master price if completed
-            If id_status_reportx = "6" Then
-                Dim q_post As String = "CALL generate_pp_normal_final('" + id_report + "', '" + id_user + "')"
-                execute_non_query(q_post, True, "", "", "", "")
-            End If
-
-            If form_origin = "FormFGProposePriceDet" Then
-                FormFGProposePriceDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormFGProposePriceDet.check_but_imp()
-                FormFGProposePriceDet.check_but_loc()
-                FormFGProposePriceDet.actionLoad()
-                FormFGProposePrice.viewPropose()
-                FormFGProposePrice.GVFGPropose.FocusedRowHandle = find_row(FormFGProposePrice.GVFGPropose, "id_fg_propose_price", id_report)
-            End If
-        ElseIf report_mark_type = "72" Then
-            'QC Adj In
-            query = String.Format("UPDATE tb_prod_order_qc_adj_in SET id_report_status='{0}' WHERE id_prod_order_qc_adj_in ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-            'infoCustom("Status changed.")
-
-            If form_origin = "FormProdQCAdjIn" Then
-                FormProdQCAdjIn.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormProdQCAdjIn.actionLoad()
-                FormProdQCAdj.viewAdjIn()
-                FormProdQCAdj.GVAdjIn.FocusedRowHandle = find_row(FormProdQCAdj.GVAdjIn, "id_prod_order_qc_adj_in", id_report)
-            Else
-                FormViewProdQCAdjIn.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-            End If
-        ElseIf report_mark_type = "73" Then
-            'QC Adj Out
-            query = String.Format("UPDATE tb_prod_order_qc_adj_out SET id_report_status='{0}' WHERE id_prod_order_qc_adj_out ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-            'infoCustom("Status changed.")
-
-            If form_origin = "FormProdQCAdjOut" Then
-                FormProdQCAdjOut.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormProdQCAdjOut.actionLoad()
-                FormProdQCAdj.viewAdjOut()
-                FormProdQCAdj.GVAdjOut.FocusedRowHandle = find_row(FormProdQCAdj.GVAdjOut, "id_prod_order_qc_adj_out", id_report)
-            Else
-                FormViewProdQcAdjOut.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-            End If
-        ElseIf report_mark_type = "75" Then
-            'ANALISIS SO
-            If id_status_reportx = "6" Then
-                Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("This process will create prepare order new product documents automatically. Are you sure to continue this process ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
-                If confirm = Windows.Forms.DialogResult.Yes Then
-                    PBC.Visible = True
-
-                    'delete mark
-                    Dim query_del_mark As String = ""
-                    query_del_mark += "DELETE "
-                    query_del_mark += "FROM tb_report_mark "
-                    query_del_mark += "WHERE id_report IN ( "
-                    query_del_mark += "SELECT * FROM ( "
-                    query_del_mark += "select id_sales_order from tb_sales_order a where a.id_fg_so_reff='" + id_report + "' "
-                    query_del_mark += ") a "
-                    query_del_mark += ") AND report_mark_type='39' "
-                    execute_non_query(query_del_mark, True, "", "", "", "")
-
-                    'delete prepare order terkait 
-                    Dim query_del As String = "DELETE FROM tb_sales_order WHERE id_fg_so_reff='" + id_report + "' "
-                    execute_non_query(query_del, True, "", "", "", "")
-
-                    'get product
-                    Dim ix As Integer = 0
-                    Dim id_product_sel As String = ""
-                    For j As Integer = 0 To ((FormFGSalesOrderReffDet.GVDesign.RowCount - 1) - GetGroupRowCount(FormFGSalesOrderReffDet.GVDesign)) 'looping product
-                        Dim id_product As String = FormFGSalesOrderReffDet.GVDesign.GetRowCellValue(j, "id_product").ToString
-                        If ix > 0 Then
-                            id_product_sel += "OR "
+                        If data_fg_store.Rows.Count > 0 Then
+                            PBC.Properties.Minimum = 0
+                            PBC.Properties.Maximum = data_fg_store.Rows.Count - 1
+                            PBC.Properties.Step = 1
+                            PBC.Properties.PercentView = True
                         End If
-                        id_product_sel += "ds.id_product = '" + id_product + "' "
-                        ix += 1
-                    Next
 
-                    'looping based on store
-                    Dim str_err As String = ""
-                    Dim sales_order_reff As String = ""
-                    Dim data_fg_store As DataTable = FormFGSalesOrderReffDet.GCDesign.DataSource
-
-                    If data_fg_store.Rows.Count > 0 Then
-                        PBC.Properties.Minimum = 0
-                        PBC.Properties.Maximum = data_fg_store.Rows.Count - 1
-                        PBC.Properties.Step = 1
-                        PBC.Properties.PercentView = True
-                    End If
-
-                    Dim cond_success As Boolean = False
-                    Dim nx As Integer = 0
-                    Dim min_so As Integer = 0 'utk melihat minimal SO
-                    For i As Integer = 0 To data_fg_store.Columns.Count - 1 'looping account
-                        Dim col As String = data_fg_store.Columns(i).ToString
-                        If col.Contains("#id#") Then
-                            nx += 1
-                            Dim col_foc_arr As String() = Split(col, "#id#")
-                            Try
-                                Dim id_sales_order As String = "0"
-                                Dim id_delivery As String = FormFGSalesOrderReffDet.SLEDel.EditValue.ToString
-                                Dim id_store_to As String = col_foc_arr(1)
-                                Dim id_store_contact_to As String = get_company_x(id_store_to, "6")
-                                Dim id_warehouse_contact_to As String = FormFGSalesOrderReffDet.id_comp_contact_par
-                                Dim id_so_type As String = col_foc_arr(3)
-                                Dim id_so_cat As String = col_foc_arr(4)
-                                Dim id_so_status As String = "1"
-                                If id_so_cat = "1" Then
-                                    id_so_status = "1"
-                                Else
-                                    id_so_status = "5"
-                                End If
-
-
-                                'cek harus dibuat so atau tidak
-                                Dim query_cek_so As String = ""
-                                query_cek_so += "SELECT SUM(ds.fg_so_reff_det_qty) AS `tot_ds` FROM tb_fg_so_reff_det ds "
-                                query_cek_so += "INNER JOIN tb_fg_ds_store ds_store ON ds.id_fg_ds_store = ds_store.id_fg_ds_store "
-                                query_cek_so += "INNER JOIN tb_m_comp comp ON comp.id_comp = ds_store.id_comp "
-                                query_cek_so += "WHERE ds.id_fg_so_reff='" + id_report + "' AND ds_store.id_season='" + FormFGSalesOrderReffDet.SLESeason.EditValue.ToString + "' "
-                                query_cek_so += "AND ( "
-                                query_cek_so += id_product_sel + " "
-                                query_cek_so += ") "
-                                query_cek_so += "AND comp.id_comp = '" + id_store_to + "' "
-                                Dim tot_ds As String = execute_query(query_cek_so, 0, True, "", "", "", "")
-
-                                'create so
-                                If tot_ds > "0" Then
-                                    'minimal SO
-                                    min_so += 1
-                                    If min_so = 1 Then
-                                        sales_order_reff = header_number_sales("21")
-                                        increase_inc_sales("21")
+                        Dim cond_success As Boolean = False
+                        Dim nx As Integer = 0
+                        Dim min_so As Integer = 0 'utk melihat minimal SO
+                        For i As Integer = 0 To data_fg_store.Columns.Count - 1 'looping account
+                            Dim col As String = data_fg_store.Columns(i).ToString
+                            If col.Contains("#id#") Then
+                                nx += 1
+                                Dim col_foc_arr As String() = Split(col, "#id#")
+                                Try
+                                    Dim id_sales_order As String = "0"
+                                    Dim id_delivery As String = FormFGSalesOrderReffDet.SLEDel.EditValue.ToString
+                                    Dim id_store_to As String = col_foc_arr(1)
+                                    Dim id_store_contact_to As String = get_company_x(id_store_to, "6")
+                                    Dim id_warehouse_contact_to As String = FormFGSalesOrderReffDet.id_comp_contact_par
+                                    Dim id_so_type As String = col_foc_arr(3)
+                                    Dim id_so_cat As String = col_foc_arr(4)
+                                    Dim id_so_status As String = "1"
+                                    If id_so_cat = "1" Then
+                                        id_so_status = "1"
+                                    Else
+                                        id_so_status = "5"
                                     End If
 
-                                    'insert SO by store
-                                    Dim sales_order_number As String = header_number_sales("2")
-                                    Dim query_so As String = "INSERT INTO tb_sales_order(id_store_contact_to, id_warehouse_contact_to, sales_order_number, sales_order_date, sales_order_note, id_so_type, id_so_status, id_report_status, id_fg_so_reff, id_user_created) "
-                                    query_so += "VALUES ('" + id_store_contact_to + "', '" + id_warehouse_contact_to + "', '" + sales_order_number + "', now(), '', '" + id_so_type + "', '" + id_so_status + "', '6', '" + id_report + "', '" + id_user + "'); SELECT LAST_INSERT_ID(); "
-                                    Dim id_sales_order_new As String = execute_query(query_so, 0, True, "", "", "", "")
 
-                                    'increment sales ord number
-                                    increase_inc_sales("2")
+                                    'cek harus dibuat so atau tidak
+                                    Dim query_cek_so As String = ""
+                                    query_cek_so += "SELECT SUM(ds.fg_so_reff_det_qty) AS `tot_ds` FROM tb_fg_so_reff_det ds "
+                                    query_cek_so += "INNER JOIN tb_fg_ds_store ds_store ON ds.id_fg_ds_store = ds_store.id_fg_ds_store "
+                                    query_cek_so += "INNER JOIN tb_m_comp comp ON comp.id_comp = ds_store.id_comp "
+                                    query_cek_so += "WHERE ds.id_fg_so_reff='" + id_report + "' AND ds_store.id_season='" + FormFGSalesOrderReffDet.SLESeason.EditValue.ToString + "' "
+                                    query_cek_so += "AND ( "
+                                    query_cek_so += id_product_sel + " "
+                                    query_cek_so += ") "
+                                    query_cek_so += "AND comp.id_comp = '" + id_store_to + "' "
+                                    Dim tot_ds As String = execute_query(query_cek_so, 0, True, "", "", "", "")
 
-                                    'insert who prepared
-                                    insert_who_approved("39", id_sales_order_new, id_user)
+                                    'create so
+                                    If tot_ds > "0" Then
+                                        'minimal SO
+                                        min_so += 1
+                                        If min_so = 1 Then
+                                            sales_order_reff = header_number_sales("21")
+                                            increase_inc_sales("21")
+                                        End If
 
-                                    'insert detail
-                                    Dim query_det As String = ""
-                                    query_det += "INSERT INTO tb_sales_order_det(id_sales_order, id_product, id_design_price, design_price, sales_order_det_qty) "
-                                    query_det += "SELECT ('" + id_sales_order_new + "'),ds.id_product, prc.id_design_price, prc.design_price, ds.fg_so_reff_det_qty "
-                                    query_det += "FROM tb_fg_so_reff_det ds "
-                                    query_det += "INNER JOIN tb_fg_ds_store ds_store ON ds.id_fg_ds_store = ds_store.id_fg_ds_store "
-                                    query_det += "INNER JOIN tb_m_comp comp ON comp.id_comp = ds_store.id_comp "
-                                    query_det += "INNER JOIN tb_lookup_pd_alloc pd_alloc ON pd_alloc.id_pd_alloc = comp.id_pd_alloc "
-                                    query_det += "INNER JOIN tb_m_product prod ON prod.id_product = ds.id_product "
-                                    query_det += "LEFT JOIN ( "
-                                    query_det += "SELECT * FROM ( "
-                                    query_det += "SELECT price.id_design, price.design_price, price.design_price_date, price.id_design_price "
-                                    query_det += "FROM tb_m_design_price price "
-                                    query_det += "INNER JOIN tb_lookup_design_price_type price_type "
-                                    query_det += "ON price.id_design_price_type = price_type.id_design_price_type "
-                                    query_det += "INNER JOIN tb_lookup_currency curr ON curr.id_currency = price.id_currency "
-                                    query_det += "INNER JOIN tb_m_user `user` ON user.id_user = price.id_user "
-                                    query_det += "INNER JOIN tb_m_employee emp ON emp.id_employee = user.id_employee "
-                                    query_det += "WHERE price.is_active_wh='1' AND price.design_price_start_date <= NOW() "
-                                    query_det += "ORDER BY price.design_price_start_date DESC ) a "
-                                    query_det += "GROUP BY a.id_design "
-                                    query_det += ") prc ON prc.id_design = prod.id_design "
-                                    query_det += "WHERE ds.id_fg_so_reff = '" + id_report + "' AND ds_store.id_season = '" + FormFGSalesOrderReffDet.SLESeason.EditValue.ToString + "' "
-                                    query_det += "AND ( "
-                                    query_det += id_product_sel + " "
-                                    query_det += ") "
-                                    query_det += "AND ds.fg_so_reff_det_qty >0 "
-                                    query_det += "AND comp.id_comp = '" + id_store_to + "' "
-                                    query_det += "ORDER BY ds.id_product ASC "
-                                    execute_non_query(query_det, True, "", "", "", "")
-                                End If
-                            Catch ex As Exception
-                                str_err += "- " + col_foc_arr(0).ToString + System.Environment.NewLine
-                            End Try
+                                        'insert SO by store
+                                        Dim sales_order_number As String = header_number_sales("2")
+                                        Dim query_so As String = "INSERT INTO tb_sales_order(id_store_contact_to, id_warehouse_contact_to, sales_order_number, sales_order_date, sales_order_note, id_so_type, id_so_status, id_report_status, id_fg_so_reff, id_user_created) "
+                                        query_so += "VALUES ('" + id_store_contact_to + "', '" + id_warehouse_contact_to + "', '" + sales_order_number + "', now(), '', '" + id_so_type + "', '" + id_so_status + "', '6', '" + id_report + "', '" + id_user + "'); SELECT LAST_INSERT_ID(); "
+                                        Dim id_sales_order_new As String = execute_query(query_so, 0, True, "", "", "", "")
 
-                            'colom statis = 15
-                            PBC.PerformStep()
-                            PBC.Update()
-                        End If
-                    Next
+                                        'increment sales ord number
+                                        increase_inc_sales("2")
 
-                    If str_err = "" Then
-                        query = String.Format("UPDATE tb_fg_so_reff SET id_report_status='{0}' WHERE id_fg_so_reff ='{1}'", id_status_reportx, id_report)
-                        execute_non_query(query, True, "", "", "", "")
-                        infoCustom("Status changed and prepare order was created succesfully.")
-                        If form_origin = "FormFGSalesOrderReffDet" Then
-                            FormFGSalesOrderReffDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                            FormFGSalesOrderReffDet.actionLoad()
-                            FormFGSalesOrderReff.viewSOReff()
-                            FormFGSalesOrderReff.GVSOReff.FocusedRowHandle = find_row(FormFGSalesOrderReff.GVSOReff, "id_fg_so_reff", id_report)
+                                        'insert who prepared
+                                        insert_who_approved("39", id_sales_order_new, id_user)
+
+                                        'insert detail
+                                        Dim query_det As String = ""
+                                        query_det += "INSERT INTO tb_sales_order_det(id_sales_order, id_product, id_design_price, design_price, sales_order_det_qty) "
+                                        query_det += "SELECT ('" + id_sales_order_new + "'),ds.id_product, prc.id_design_price, prc.design_price, ds.fg_so_reff_det_qty "
+                                        query_det += "FROM tb_fg_so_reff_det ds "
+                                        query_det += "INNER JOIN tb_fg_ds_store ds_store ON ds.id_fg_ds_store = ds_store.id_fg_ds_store "
+                                        query_det += "INNER JOIN tb_m_comp comp ON comp.id_comp = ds_store.id_comp "
+                                        query_det += "INNER JOIN tb_lookup_pd_alloc pd_alloc ON pd_alloc.id_pd_alloc = comp.id_pd_alloc "
+                                        query_det += "INNER JOIN tb_m_product prod ON prod.id_product = ds.id_product "
+                                        query_det += "LEFT JOIN ( "
+                                        query_det += "SELECT * FROM ( "
+                                        query_det += "SELECT price.id_design, price.design_price, price.design_price_date, price.id_design_price "
+                                        query_det += "FROM tb_m_design_price price "
+                                        query_det += "INNER JOIN tb_lookup_design_price_type price_type "
+                                        query_det += "ON price.id_design_price_type = price_type.id_design_price_type "
+                                        query_det += "INNER JOIN tb_lookup_currency curr ON curr.id_currency = price.id_currency "
+                                        query_det += "INNER JOIN tb_m_user `user` ON user.id_user = price.id_user "
+                                        query_det += "INNER JOIN tb_m_employee emp ON emp.id_employee = user.id_employee "
+                                        query_det += "WHERE price.is_active_wh='1' AND price.design_price_start_date <= NOW() "
+                                        query_det += "ORDER BY price.design_price_start_date DESC ) a "
+                                        query_det += "GROUP BY a.id_design "
+                                        query_det += ") prc ON prc.id_design = prod.id_design "
+                                        query_det += "WHERE ds.id_fg_so_reff = '" + id_report + "' AND ds_store.id_season = '" + FormFGSalesOrderReffDet.SLESeason.EditValue.ToString + "' "
+                                        query_det += "AND ( "
+                                        query_det += id_product_sel + " "
+                                        query_det += ") "
+                                        query_det += "AND ds.fg_so_reff_det_qty >0 "
+                                        query_det += "AND comp.id_comp = '" + id_store_to + "' "
+                                        query_det += "ORDER BY ds.id_product ASC "
+                                        execute_non_query(query_det, True, "", "", "", "")
+                                    End If
+                                Catch ex As Exception
+                                    str_err += "- " + col_foc_arr(0).ToString + System.Environment.NewLine
+                                End Try
+
+                                'colom statis = 15
+                                PBC.PerformStep()
+                                PBC.Update()
+                            End If
+                        Next
+
+                        If str_err = "" Then
+                            query = String.Format("UPDATE tb_fg_so_reff SET id_report_status='{0}' WHERE id_fg_so_reff ='{1}'", id_status_reportx, id_report)
+                            execute_non_query(query, True, "", "", "", "")
+                            infoCustom("Status changed and prepare order was created succesfully.")
+                            If form_origin = "FormFGSalesOrderReffDet" Then
+                                FormFGSalesOrderReffDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                                FormFGSalesOrderReffDet.actionLoad()
+                                FormFGSalesOrderReff.viewSOReff()
+                                FormFGSalesOrderReff.GVSOReff.FocusedRowHandle = find_row(FormFGSalesOrderReff.GVSOReff, "id_fg_so_reff", id_report)
+                                PBC.Visible = False
+                                PBC.EditValue = 0
+                            Else
+                                ' FormViewProdQCAdjIn.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                            End If
+                        Else
+                            stopCustom("There are some problem with this process. These account are not successfully to create prepare order : " + System.Environment.NewLine + str_err + System.Environment.NewLine + "Please try again later !")
                             PBC.Visible = False
                             PBC.EditValue = 0
-                        Else
-                            ' FormViewProdQCAdjIn.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
                         End If
+                    End If
+                Else
+                    query = String.Format("UPDATE tb_fg_so_reff SET id_report_status='{0}' WHERE id_fg_so_reff ='{1}'", id_status_reportx, id_report)
+                    execute_non_query(query, True, "", "", "", "")
+                    'infoCustom("Status changed.")
+
+                    If form_origin = "FormFGSalesOrderReffDet" Then
+                        FormFGSalesOrderReffDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                        FormFGSalesOrderReffDet.actionLoad()
+                        FormFGSalesOrderReff.viewSOReff()
+                        FormFGSalesOrderReff.GVSOReff.FocusedRowHandle = find_row(FormFGSalesOrderReff.GVSOReff, "id_fg_so_reff", id_report)
                     Else
-                        stopCustom("There are some problem with this process. These account are not successfully to create prepare order : " + System.Environment.NewLine + str_err + System.Environment.NewLine + "Please try again later !")
-                        PBC.Visible = False
-                        PBC.EditValue = 0
+                        ' FormViewProdQCAdjIn.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
                     End If
                 End If
-            Else
-                query = String.Format("UPDATE tb_fg_so_reff SET id_report_status='{0}' WHERE id_fg_so_reff ='{1}'", id_status_reportx, id_report)
+            ElseIf report_mark_type = "76" Then
+                'SALES INVOICE PROMO
+                If id_status_reportx = "5" Then
+                    'cancelled
+                    Dim cancel_rsv_stock As ClassSalesInv = New ClassSalesInv()
+                    cancel_rsv_stock.cancelReservedStock(id_report, "76")
+                ElseIf id_status_reportx = "6" Then
+                    'completed
+                    Dim complete_rsv_stock As ClassSalesInv = New ClassSalesInv()
+                    complete_rsv_stock.completedStock(id_report, "76")
+                End If
+
+                query = String.Format("UPDATE tb_sales_pos SET id_report_status='{0}' WHERE id_sales_pos ='{1}'", id_status_reportx, id_report)
                 execute_non_query(query, True, "", "", "", "")
                 'infoCustom("Status changed.")
 
-                If form_origin = "FormFGSalesOrderReffDet" Then
-                    FormFGSalesOrderReffDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                    FormFGSalesOrderReffDet.actionLoad()
-                    FormFGSalesOrderReff.viewSOReff()
-                    FormFGSalesOrderReff.GVSOReff.FocusedRowHandle = find_row(FormFGSalesOrderReff.GVSOReff, "id_fg_so_reff", id_report)
+                If form_origin = "FormSalesPromoDet" Then
+                    FormSalesPromoDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                    FormSalesPromoDet.check_but()
+                    FormSalesPromoDet.actionLoad()
+                    FormSalesPromo.viewSalesPOS()
+                    FormSalesPromo.GVSalesPOS.FocusedRowHandle = find_row(FormSalesPromo.GVSalesPOS, "id_sales_pos", id_report)
                 Else
-                    ' FormViewProdQCAdjIn.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                    'code here
                 End If
-            End If
-        ElseIf report_mark_type = "76" Then
-            'SALES INVOICE PROMO
-            If id_status_reportx = "5" Then
-                'cancelled
-                Dim cancel_rsv_stock As ClassSalesInv = New ClassSalesInv()
-                cancel_rsv_stock.cancelReservedStock(id_report, "76")
-            ElseIf id_status_reportx = "6" Then
-                'completed
-                Dim complete_rsv_stock As ClassSalesInv = New ClassSalesInv()
-                complete_rsv_stock.completedStock(id_report, "76")
-            End If
-
-            query = String.Format("UPDATE tb_sales_pos SET id_report_status='{0}' WHERE id_sales_pos ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-            'infoCustom("Status changed.")
-
-            If form_origin = "FormSalesPromoDet" Then
-                FormSalesPromoDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormSalesPromoDet.check_but()
-                FormSalesPromoDet.actionLoad()
-                FormSalesPromo.viewSalesPOS()
-                FormSalesPromo.GVSalesPOS.FocusedRowHandle = find_row(FormSalesPromo.GVSalesPOS, "id_sales_pos", id_report)
-            Else
-                'code here
-            End If
-        ElseIf report_mark_type = "79" Then
-            'BOM Per Design
-            Try
-                Dim id_design As String = "-1"
-                If form_origin = "FormBomSingle" Then
-                    id_design = FormBOMSingle.id_design
-                ElseIf form_origin = "FormBOMDesignSingle" Then
-                    id_design = FormBOMDesignSingle.id_design
-                End If
-                query = String.Format("UPDATE tb_bom_approve SET id_report_status='{0}' WHERE id_bom_approve ='{1}'", id_status_reportx, id_report)
-                execute_non_query(query, True, "", "", "", "")
-                query = String.Format("UPDATE tb_bom bom INNER JOIN tb_m_product prod ON prod.id_product=bom.id_product SET bom.id_report_status='{0}' WHERE bom.id_bom_approve='{1}' AND prod.id_design='{2}'", id_status_reportx, id_report, FormBOMSingle.id_design)
-                execute_non_query(query, True, "", "", "", "")
-                'infoCustom("Status changed.")
-                If form_origin = "FormBomSingle" Then
-                    FormBOMSingle.act_load()
-                ElseIf form_origin = "FormBOMDesignSingle" Then
-                    FormBOMDesignSingle.act_load()
-                End If
-            Catch ex As Exception
-                errorConnection()
-                Close()
-            End Try
-        ElseIf report_mark_type = "82" Then
-            'FG PRICE
-            'post ke master price if completed
-            If id_status_reportx = "6" Then
-                'insert price
-                Dim query_ins As String = "INSERT INTO tb_m_design_price(id_design, id_design_price_type, design_price_name, id_currency, design_price, design_price_date, design_price_start_date, is_print, id_user) "
-                query_ins += "SELECT det.id_design, prc.id_design_price_type, det.design_price_name, det.id_currency, det.design_price, "
-                query_ins += "NOW(), NOW(), det.is_print, '" + id_user + "' "
-                query_ins += "FROM tb_fg_price_det det "
-                query_ins += "INNER JOIN tb_fg_price prc ON prc.id_fg_price = det.id_fg_price "
-                query_ins += "WHERE det.id_fg_price='" + id_report + "' "
-                execute_non_query(query_ins, True, "", "", "", "")
-
-                'send email
+            ElseIf report_mark_type = "79" Then
+                'BOM Per Design
                 Try
-                    Dim qc As String = "SELECT * FROM tb_fg_price_det prcd WHERE prcd.id_fg_price=" + id_report + " AND prcd.is_print=1 "
-                    Dim dc As DataTable = execute_query(qc, -1, True, "", "", "", "")
-                    If dc.Rows.Count > 0 Then
-                        Dim mail As New ClassSendEmail()
-                        mail.report_mark_type = "82"
-                        mail.id_report = id_report
-                        mail.date_string = FormMasterPriceSingle.DEForm.Text
-                        mail.comment = FormMasterPriceSingle.MENote.Text.ToString
-                        mail.send_email()
+                    Dim id_design As String = "-1"
+                    If form_origin = "FormBomSingle" Then
+                        id_design = FormBOMSingle.id_design
+                    ElseIf form_origin = "FormBOMDesignSingle" Then
+                        id_design = FormBOMDesignSingle.id_design
+                    End If
+                    query = String.Format("UPDATE tb_bom_approve SET id_report_status='{0}' WHERE id_bom_approve ='{1}'", id_status_reportx, id_report)
+                    execute_non_query(query, True, "", "", "", "")
+                    query = String.Format("UPDATE tb_bom bom INNER JOIN tb_m_product prod ON prod.id_product=bom.id_product SET bom.id_report_status='{0}' WHERE bom.id_bom_approve='{1}' AND prod.id_design='{2}'", id_status_reportx, id_report, FormBOMSingle.id_design)
+                    execute_non_query(query, True, "", "", "", "")
+                    'infoCustom("Status changed.")
+                    If form_origin = "FormBomSingle" Then
+                        FormBOMSingle.act_load()
+                    ElseIf form_origin = "FormBOMDesignSingle" Then
+                        FormBOMDesignSingle.act_load()
                     End If
                 Catch ex As Exception
-                    stopCustom(ex.ToString)
+                    errorConnection()
+                    Close()
                 End Try
-            End If
+            ElseIf report_mark_type = "82" Then
+                'FG PRICE
+                'post ke master price if completed
+                If id_status_reportx = "6" Then
+                    'insert price
+                    Dim query_ins As String = "INSERT INTO tb_m_design_price(id_design, id_design_price_type, design_price_name, id_currency, design_price, design_price_date, design_price_start_date, is_print, id_user) "
+                    query_ins += "SELECT det.id_design, prc.id_design_price_type, det.design_price_name, det.id_currency, det.design_price, "
+                    query_ins += "NOW(), IF(prc.fg_effective_date = 0000-00-00, NOW(), prc.fg_effective_date) AS fg_effective_date, det.is_print, '" + id_user + "' "
+                    query_ins += "FROM tb_fg_price_det det "
+                    query_ins += "INNER JOIN tb_fg_price prc ON prc.id_fg_price = det.id_fg_price "
+                    query_ins += "WHERE det.id_fg_price='" + id_report + "' "
+                    execute_non_query(query_ins, True, "", "", "", "")
 
-            query = String.Format("UPDATE tb_fg_price SET id_report_status='{0}' WHERE id_fg_price ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-            'infoCustom("Status changed.")
+                    'send email
+                    Try
+                        Dim qc As String = "SELECT * FROM tb_fg_price_det prcd WHERE prcd.id_fg_price=" + id_report + " AND prcd.is_print=1 "
+                        Dim dc As DataTable = execute_query(qc, -1, True, "", "", "", "")
+                        If dc.Rows.Count > 0 Then
+                            Dim mail As New ClassSendEmail()
+                            mail.report_mark_type = "82"
+                            mail.id_report = id_report
+                            mail.date_string = FormMasterPriceSingle.DEForm.Text
+                            mail.comment = FormMasterPriceSingle.MENote.Text.ToString
+                            mail.send_email()
+                        End If
+                    Catch ex As Exception
+                        stopCustom(ex.ToString)
+                    End Try
+                End If
 
-            If form_origin = "FormMasterPriceSingle" Then
-                FormMasterPriceSingle.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormMasterPriceSingle.check_but()
-                FormMasterPriceSingle.actionLoad()
-                FormMasterPrice.viewPrice()
-                FormMasterPrice.GVPrice.FocusedRowHandle = find_row(FormMasterPrice.GVPrice, "id_fg_price", id_report)
-            End If
-        ElseIf report_mark_type = "85" Then
-            'SAMPLE PL
-            If id_status_reportx = "5" Then
-                'cancelled
-                Dim cancel_rsv_stock As ClassSamplePLtoWH = New ClassSamplePLtoWH()
-                cancel_rsv_stock.cancelReservedStock(id_report, report_mark_type)
-            ElseIf id_status_reportx = "6" Then
-                'completed
-                Dim complete_rsv_stock As ClassSamplePLtoWH = New ClassSamplePLtoWH()
-                complete_rsv_stock.completeReservedStock(id_report, report_mark_type)
-            End If
+                query = String.Format("UPDATE tb_fg_price SET id_report_status='{0}' WHERE id_fg_price ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+                'infoCustom("Status changed.")
 
-            query = String.Format("UPDATE tb_sample_pl SET id_report_status='{0}' WHERE id_sample_pl ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-            'infoCustom("Status changed.")
+                If form_origin = "FormMasterPriceSingle" Then
+                    FormMasterPriceSingle.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                    FormMasterPriceSingle.check_but()
+                    FormMasterPriceSingle.actionLoad()
+                    FormMasterPrice.viewPrice()
+                    FormMasterPrice.GVPrice.FocusedRowHandle = find_row(FormMasterPrice.GVPrice, "id_fg_price", id_report)
+                End If
+            ElseIf report_mark_type = "85" Then
+                'SAMPLE PL
+                If id_status_reportx = "5" Then
+                    'cancelled
+                    Dim cancel_rsv_stock As ClassSamplePLtoWH = New ClassSamplePLtoWH()
+                    cancel_rsv_stock.cancelReservedStock(id_report, report_mark_type)
+                ElseIf id_status_reportx = "6" Then
+                    'completed
+                    Dim complete_rsv_stock As ClassSamplePLtoWH = New ClassSamplePLtoWH()
+                    complete_rsv_stock.completeReservedStock(id_report, report_mark_type)
+                End If
 
-            If form_origin = "FormSamplePLToWHDet" Then
-                FormSamplePLToWHDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormSamplePLToWHDet.check_but()
-                FormSamplePLToWHDet.actionLoad()
-                FormSamplePLToWH.viewSamplePL()
-                FormSamplePLToWH.GVSamplePL.FocusedRowHandle = find_row(FormSamplePLToWH.GVSamplePL, "id_sample_pl", id_report)
-            Else
-                'code here
-            End If
-        ElseIf report_mark_type = "86" Then
-            'SAMPLE PRICE
-            'post ke master price if completed
-            If id_status_reportx = "6" Then
-                Dim query_ins As String = "INSERT INTO tb_m_sample_ret_price(id_sample, id_design_price_type, sample_ret_price_name, id_currency, sample_ret_price, sample_ret_price_date, sample_ret_price_start_date, is_print, id_user) "
-                query_ins += "SELECT det.id_sample, prc.id_design_price_type, det.sample_price_name, det.id_currency, det.sample_price, "
-                query_ins += "NOW(), NOW(), det.is_print, '" + id_user + "' "
-                query_ins += "FROM tb_sample_price_det det "
-                query_ins += "INNER JOIN tb_sample_price prc ON prc.id_sample_price = det.id_sample_price "
-                query_ins += "WHERE det.id_sample_price='" + id_report + "' "
-                execute_non_query(query_ins, True, "", "", "", "")
-            End If
+                query = String.Format("UPDATE tb_sample_pl SET id_report_status='{0}' WHERE id_sample_pl ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+                'infoCustom("Status changed.")
 
-            query = String.Format("UPDATE tb_sample_price SET id_report_status='{0}' WHERE id_sample_price ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-            'infoCustom("Status changed.")
+                If form_origin = "FormSamplePLToWHDet" Then
+                    FormSamplePLToWHDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                    FormSamplePLToWHDet.check_but()
+                    FormSamplePLToWHDet.actionLoad()
+                    FormSamplePLToWH.viewSamplePL()
+                    FormSamplePLToWH.GVSamplePL.FocusedRowHandle = find_row(FormSamplePLToWH.GVSamplePL, "id_sample_pl", id_report)
+                Else
+                    'code here
+                End If
+            ElseIf report_mark_type = "86" Then
+                'SAMPLE PRICE
+                'post ke master price if completed
+                If id_status_reportx = "6" Then
+                    Dim query_ins As String = "INSERT INTO tb_m_sample_ret_price(id_sample, id_design_price_type, sample_ret_price_name, id_currency, sample_ret_price, sample_ret_price_date, sample_ret_price_start_date, is_print, id_user) "
+                    query_ins += "SELECT det.id_sample, prc.id_design_price_type, det.sample_price_name, det.id_currency, det.sample_price, "
+                    query_ins += "NOW(), NOW(), det.is_print, '" + id_user + "' "
+                    query_ins += "FROM tb_sample_price_det det "
+                    query_ins += "INNER JOIN tb_sample_price prc ON prc.id_sample_price = det.id_sample_price "
+                    query_ins += "WHERE det.id_sample_price='" + id_report + "' "
+                    execute_non_query(query_ins, True, "", "", "", "")
+                End If
 
-            If form_origin = "FormMasterPriceSampleSingle" Then
-                FormMasterPriceSampleSingle.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormMasterPriceSampleSingle.check_but()
-                FormMasterPriceSampleSingle.actionLoad()
-                FormMasterPriceSample.viewPrice()
-                FormMasterPriceSample.GVPrice.FocusedRowHandle = find_row(FormMasterPriceSample.GVPrice, "id_sample_price", id_report)
-            End If
-        ElseIf report_mark_type = "87" Then
-            'inventory allocation
-            If id_status_reportx = "5" Then
-                'cancelled
-                Dim cancel_rsv_stock As ClassFGWHAlloc = New ClassFGWHAlloc()
-                cancel_rsv_stock.cancelReservedStock(id_report)
-            ElseIf id_status_reportx = "6" Then
-                'completed
-                Dim cmpl_stock As ClassFGWHAlloc = New ClassFGWHAlloc()
-                cmpl_stock.completeReservedStock(id_report)
-            End If
+                query = String.Format("UPDATE tb_sample_price SET id_report_status='{0}' WHERE id_sample_price ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+                'infoCustom("Status changed.")
 
-            query = String.Format("UPDATE tb_fg_wh_alloc SET id_report_status='{0}' WHERE id_fg_wh_alloc ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-            'infoCustom("Status changed.")
+                If form_origin = "FormMasterPriceSampleSingle" Then
+                    FormMasterPriceSampleSingle.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                    FormMasterPriceSampleSingle.check_but()
+                    FormMasterPriceSampleSingle.actionLoad()
+                    FormMasterPriceSample.viewPrice()
+                    FormMasterPriceSample.GVPrice.FocusedRowHandle = find_row(FormMasterPriceSample.GVPrice, "id_sample_price", id_report)
+                End If
+            ElseIf report_mark_type = "87" Then
+                'inventory allocation
+                If id_status_reportx = "5" Then
+                    'cancelled
+                    Dim cancel_rsv_stock As ClassFGWHAlloc = New ClassFGWHAlloc()
+                    cancel_rsv_stock.cancelReservedStock(id_report)
+                ElseIf id_status_reportx = "6" Then
+                    'completed
+                    Dim cmpl_stock As ClassFGWHAlloc = New ClassFGWHAlloc()
+                    cmpl_stock.completeReservedStock(id_report)
+                End If
 
-            If form_origin = "FormFGWHAllocDet" Then
-                FormFGWHAllocDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormFGWHAllocDet.check_but()
-                FormFGWHAllocDet.actionLoad()
-                FormFGWHAlloc.viewFGWHAlloc()
-                FormFGWHAlloc.GVFGWHAlloc.FocusedRowHandle = find_row(FormFGWHAlloc.GVFGWHAlloc, "id_fg_wh_alloc", id_report)
-            End If
-        ElseIf report_mark_type = "88" Then
-            'generate prepare order
-            If id_status_reportx = "5" Then
-                Dim cancel As New ClassSalesOrder()
-                cancel.cancelReservedStockGen(id_report)
-            ElseIf id_status_reportx = "6" Then
-                'created transfer
-                Dim qv As String = "SELECT so.id_warehouse_contact_to, so.id_store_contact_to, so.id_sales_order, c.id_drawer_def 
+                query = String.Format("UPDATE tb_fg_wh_alloc SET id_report_status='{0}' WHERE id_fg_wh_alloc ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+                'infoCustom("Status changed.")
+
+                If form_origin = "FormFGWHAllocDet" Then
+                    FormFGWHAllocDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                    FormFGWHAllocDet.check_but()
+                    FormFGWHAllocDet.actionLoad()
+                    FormFGWHAlloc.viewFGWHAlloc()
+                    FormFGWHAlloc.GVFGWHAlloc.FocusedRowHandle = find_row(FormFGWHAlloc.GVFGWHAlloc, "id_fg_wh_alloc", id_report)
+                End If
+            ElseIf report_mark_type = "88" Then
+                'generate prepare order
+                If id_status_reportx = "5" Then
+                    Dim cancel As New ClassSalesOrder()
+                    cancel.cancelReservedStockGen(id_report)
+                ElseIf id_status_reportx = "6" Then
+                    'created transfer
+                    Dim qv As String = "SELECT so.id_warehouse_contact_to, so.id_store_contact_to, so.id_sales_order, c.id_drawer_def 
                 FROM tb_sales_order so 
                 INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = so.id_store_contact_to
                 INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp
                 WHERE so.id_sales_order_gen=" + id_report + " AND so.id_so_status=5 AND c.is_only_for_alloc=1 "
-                Dim dtv As DataTable = execute_query(qv, -1, True, "", "", "", "")
-                If dtv.Rows.Count > 0 Then
-                    For m As Integer = 0 To dtv.Rows.Count - 1
-                        'main
-                        Dim qm As String = "INSERT INTO tb_fg_trf(id_comp_contact_from, id_comp_contact_to, id_sales_order, fg_trf_number, fg_trf_date, fg_trf_date_rec, fg_trf_note, id_report_status, id_report_status_rec, id_wh_drawer, last_update, last_update_by) 
+                    Dim dtv As DataTable = execute_query(qv, -1, True, "", "", "", "")
+                    If dtv.Rows.Count > 0 Then
+                        For m As Integer = 0 To dtv.Rows.Count - 1
+                            'main
+                            Dim qm As String = "INSERT INTO tb_fg_trf(id_comp_contact_from, id_comp_contact_to, id_sales_order, fg_trf_number, fg_trf_date, fg_trf_date_rec, fg_trf_note, id_report_status, id_report_status_rec, id_wh_drawer, last_update, last_update_by) 
                         VALUES('" + dtv.Rows(m)("id_warehouse_contact_to").ToString + "', '" + dtv.Rows(m)("id_store_contact_to").ToString + "', '" + dtv.Rows(m)("id_sales_order").ToString + "', '" + header_number_sales("15") + "', NOW(), NOW(), '', '3', '3', '" + dtv.Rows(m)("id_drawer_def").ToString + "', NOW(), " + id_user + "); SELECT LAST_INSERT_ID(); "
-                        Dim id_so As String = execute_query(qm, 0, True, "", "", "", "")
-                        increase_inc_sales("15")
+                            Dim id_so As String = execute_query(qm, 0, True, "", "", "", "")
+                            increase_inc_sales("15")
 
-                        'detail
-                        Dim qd As String = "INSERT INTO tb_fg_trf_det(id_fg_trf, id_product, id_sales_order_det, fg_trf_det_qty, fg_trf_det_qty_rec, fg_trf_det_qty_stored, fg_trf_det_note)
+                            'detail
+                            Dim qd As String = "INSERT INTO tb_fg_trf_det(id_fg_trf, id_product, id_sales_order_det, fg_trf_det_qty, fg_trf_det_qty_rec, fg_trf_det_qty_stored, fg_trf_det_note)
                         SELECT '" + id_so + "', sd.id_product, sd.id_sales_order_det, sd.sales_order_det_qty, sd.sales_order_det_qty, sd.sales_order_det_qty,'' 
                         FROM tb_sales_order_det sd 
                         WHERE sd.id_sales_order=" + dtv.Rows(m)("id_sales_order").ToString + " "
-                        execute_non_query(qd, -1, True, "", "", "")
-                    Next
+                            execute_non_query(qd, -1, True, "", "", "")
+                        Next
+                    End If
                 End If
-            End If
 
 
-            Dim query_update_so As String = "UPDATE tb_sales_order SET id_report_status='" + id_status_reportx + "' WHERE id_sales_order_gen='" + id_report + "' "
-            execute_non_query(query_update_so, True, "", "", "", "")
+                Dim query_update_so As String = "UPDATE tb_sales_order SET id_report_status='" + id_status_reportx + "' WHERE id_sales_order_gen='" + id_report + "' "
+                execute_non_query(query_update_so, True, "", "", "", "")
 
-            query = String.Format("UPDATE tb_sales_order_gen SET id_report_status='{0}' WHERE id_sales_order_gen ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-            'infoCustom("Status changed.")
+                query = String.Format("UPDATE tb_sales_order_gen SET id_report_status='{0}' WHERE id_sales_order_gen ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+                'infoCustom("Status changed.")
 
-            If form_origin = "FormSalesOrderGen" Then
-                FormSalesOrderGen.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormSalesOrderGen.check_but()
-                FormSalesOrderGen.actionLoad()
-                FormSalesOrder.viewSalesOrderGen()
-                FormSalesOrder.GVGen.FocusedRowHandle = find_row(FormSalesOrder.GVGen, "id_sales_order_gen", id_report)
-            End If
-        ElseIf report_mark_type = "89" Then
-            'SAMPLE PL
-            If id_status_reportx = "6" Then
-                'completed
-                Dim complete_rsv_stock As ClassSampleReturnPL = New ClassSampleReturnPL()
-                complete_rsv_stock.completeStock(id_report, report_mark_type)
-            End If
+                If form_origin = "FormSalesOrderGen" Then
+                    FormSalesOrderGen.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                    FormSalesOrderGen.check_but()
+                    FormSalesOrderGen.actionLoad()
+                    FormSalesOrder.viewSalesOrderGen()
+                    FormSalesOrder.GVGen.FocusedRowHandle = find_row(FormSalesOrder.GVGen, "id_sales_order_gen", id_report)
+                End If
+            ElseIf report_mark_type = "89" Then
+                'SAMPLE PL
+                If id_status_reportx = "6" Then
+                    'completed
+                    Dim complete_rsv_stock As ClassSampleReturnPL = New ClassSampleReturnPL()
+                    complete_rsv_stock.completeStock(id_report, report_mark_type)
+                End If
 
-            query = String.Format("UPDATE tb_sample_pl_ret SET id_report_status='{0}' WHERE id_sample_pl_ret ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-            'infoCustom("Status changed.")
+                query = String.Format("UPDATE tb_sample_pl_ret SET id_report_status='{0}' WHERE id_sample_pl_ret ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+                'infoCustom("Status changed.")
 
-            If form_origin = "FormSampleReturnPLDet" Then
-                FormSampleReturnPLDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormSampleReturnPLDet.check_but()
-                FormSampleReturnPLDet.actionLoad()
-                FormSampleReturnPL.viewSamplePL()
-                FormSampleReturnPL.GVSamplePL.FocusedRowHandle = find_row(FormSampleReturnPL.GVSamplePL, "id_sample_pl_ret", id_report)
-            Else
-                'code here
-            End If
-        ElseIf report_mark_type = "91" Or report_mark_type = "140" Then
-            'FG REPAIR
-            If id_status_reportx = "3" Then
-                id_status_reportx = "6"
-            End If
+                If form_origin = "FormSampleReturnPLDet" Then
+                    FormSampleReturnPLDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                    FormSampleReturnPLDet.check_but()
+                    FormSampleReturnPLDet.actionLoad()
+                    FormSampleReturnPL.viewSamplePL()
+                    FormSampleReturnPL.GVSamplePL.FocusedRowHandle = find_row(FormSampleReturnPL.GVSamplePL, "id_sample_pl_ret", id_report)
+                Else
+                    'code here
+                End If
+            ElseIf report_mark_type = "91" Or report_mark_type = "140" Then
+                'FG REPAIR
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
 
-            If id_status_reportx = "5" Then
-                Dim cancel As New ClassFGRepair()
-                cancel.cancelReservedStock(id_report)
-            ElseIf id_status_reportx = "6" Then
-                Dim compl As New ClassFGRepair()
-                compl.completedStock(id_report)
-            End If
-
-            query = String.Format("UPDATE tb_fg_repair SET id_report_status='{0}' WHERE id_fg_repair ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-            'infoCustom("Status changed.")
-
-            If form_origin = "FormFGRepairDet" Then
-                FormFGRepairDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormFGRepairDet.actionLoad()
-                FormFGRepair.viewData()
-                FormFGRepair.GVRepair.FocusedRowHandle = find_row(FormFGRepair.GVRepair, "id_fg_repair", id_report)
-            End If
-        ElseIf report_mark_type = "92" Then
-            'FG REPAIR REC
-            If id_status_reportx = "3" Then
-                id_status_reportx = "6"
-            End If
-
-            If id_status_reportx = "6" Then
-                Dim compl As New ClassFGRepairRec()
-                compl.completedStock(id_report)
-            End If
-
-            query = String.Format("UPDATE tb_fg_repair_rec SET id_report_status='{0}' WHERE id_fg_repair_rec ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-            'infoCustom("Status changed.")
-
-            If form_origin = "FormFGRepairRecDet" Then
-                FormFGRepairRecDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormFGRepairRecDet.actionLoad()
-                FormFGRepairRec.viewData()
-                FormFGRepairRec.viewRepairList()
-                FormFGRepairRec.GVRepairRec.FocusedRowHandle = find_row(FormFGRepairRec.GVRepairRec, "id_fg_repair_rec", id_report)
-            End If
-        ElseIf report_mark_type = "93" Or report_mark_type = "141" Then
-            'FG REPAIR RETURN
-            If id_status_reportx = "3" Then
-                id_status_reportx = "6"
-            End If
-
-            If id_status_reportx = "5" Then
-                If report_mark_type = "93" Then
-                    Dim cancel As New ClassFGRepairReturn()
+                If id_status_reportx = "5" Then
+                    Dim cancel As New ClassFGRepair()
                     cancel.cancelReservedStock(id_report)
+                ElseIf id_status_reportx = "6" Then
+                    Dim compl As New ClassFGRepair()
+                    compl.completedStock(id_report)
                 End If
-            ElseIf id_status_reportx = "6" Then
-                Dim compl As New ClassFGRepairReturn()
-                compl.completedStock(id_report, report_mark_type)
-            End If
 
-            query = String.Format("UPDATE tb_fg_repair_return SET id_report_status='{0}' WHERE id_fg_repair_return ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-            'infoCustom("Status changed.")
+                query = String.Format("UPDATE tb_fg_repair SET id_report_status='{0}' WHERE id_fg_repair ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+                'infoCustom("Status changed.")
 
-            If form_origin = "FormFGRepairReturnDet" Then
-                FormFGRepairReturnDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormFGRepairReturnDet.actionLoad()
-                FormFGRepairReturn.viewData()
-                FormFGRepairReturn.GVRepairReturn.FocusedRowHandle = find_row(FormFGRepairReturn.GVRepairReturn, "id_fg_repair_return", id_report)
-            End If
-        ElseIf report_mark_type = "94" Then
-            'FG REPAIR RETURN REC
-            If id_status_reportx = "3" Then
-                id_status_reportx = "6"
-            End If
+                If form_origin = "FormFGRepairDet" Then
+                    FormFGRepairDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                    FormFGRepairDet.actionLoad()
+                    FormFGRepair.viewData()
+                    FormFGRepair.GVRepair.FocusedRowHandle = find_row(FormFGRepair.GVRepair, "id_fg_repair", id_report)
+                End If
+            ElseIf report_mark_type = "92" Then
+                'FG REPAIR REC
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
 
-            If id_status_reportx = "6" Then
-                Dim compl As New ClassFGRepairReturnRec()
-                compl.completedStock(id_report)
-            End If
+                If id_status_reportx = "6" Then
+                    Dim compl As New ClassFGRepairRec()
+                    compl.completedStock(id_report)
+                End If
 
-            query = String.Format("UPDATE tb_fg_repair_return_rec SET id_report_status='{0}' WHERE id_fg_repair_return_rec ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-            'infoCustom("Status changed.")
+                query = String.Format("UPDATE tb_fg_repair_rec SET id_report_status='{0}' WHERE id_fg_repair_rec ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+                'infoCustom("Status changed.")
 
-            If form_origin = "FormFGRepairReturnRecDet" Then
-                FormFGRepairReturnRecDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormFGRepairReturnRecDet.actionLoad()
-                FormFGRepairReturnRec.viewData()
-                FormFGRepairReturnRec.viewRepairList()
-                FormFGRepairReturnRec.GVRepairRec.FocusedRowHandle = find_row(FormFGRepairReturnRec.GVRepairRec, "id_fg_repair_return_rec", id_report)
-            End If
-        ElseIf report_mark_type = "95" Or report_mark_type = "96" Or report_mark_type = "99" Or report_mark_type = "102" Or report_mark_type = "104" Or report_mark_type = "108" Or report_mark_type = "109" Or report_mark_type = "110" Or report_mark_type = "124" Then
-            'LEAVE PROPOSE
-            If id_status_reportx = "3" Or id_status_reportx = "6" Then
-                'update schedule to cuti
-                Dim query_upd As String = ""
-                query_upd = "UPDATE tb_emp_schedule emps
+                If form_origin = "FormFGRepairRecDet" Then
+                    FormFGRepairRecDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                    FormFGRepairRecDet.actionLoad()
+                    FormFGRepairRec.viewData()
+                    FormFGRepairRec.viewRepairList()
+                    FormFGRepairRec.GVRepairRec.FocusedRowHandle = find_row(FormFGRepairRec.GVRepairRec, "id_fg_repair_rec", id_report)
+                End If
+            ElseIf report_mark_type = "93" Or report_mark_type = "141" Then
+                'FG REPAIR RETURN
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
+
+                If id_status_reportx = "5" Then
+                    If report_mark_type = "93" Then
+                        Dim cancel As New ClassFGRepairReturn()
+                        cancel.cancelReservedStock(id_report)
+                    End If
+                ElseIf id_status_reportx = "6" Then
+                    Dim compl As New ClassFGRepairReturn()
+                    compl.completedStock(id_report, report_mark_type)
+                End If
+
+                query = String.Format("UPDATE tb_fg_repair_return SET id_report_status='{0}' WHERE id_fg_repair_return ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+                'infoCustom("Status changed.")
+
+                If form_origin = "FormFGRepairReturnDet" Then
+                    FormFGRepairReturnDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                    FormFGRepairReturnDet.actionLoad()
+                    FormFGRepairReturn.viewData()
+                    FormFGRepairReturn.GVRepairReturn.FocusedRowHandle = find_row(FormFGRepairReturn.GVRepairReturn, "id_fg_repair_return", id_report)
+                End If
+            ElseIf report_mark_type = "94" Then
+                'FG REPAIR RETURN REC
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
+
+                If id_status_reportx = "6" Then
+                    Dim compl As New ClassFGRepairReturnRec()
+                    compl.completedStock(id_report)
+                End If
+
+                query = String.Format("UPDATE tb_fg_repair_return_rec SET id_report_status='{0}' WHERE id_fg_repair_return_rec ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+                'infoCustom("Status changed.")
+
+                If form_origin = "FormFGRepairReturnRecDet" Then
+                    FormFGRepairReturnRecDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                    FormFGRepairReturnRecDet.actionLoad()
+                    FormFGRepairReturnRec.viewData()
+                    FormFGRepairReturnRec.viewRepairList()
+                    FormFGRepairReturnRec.GVRepairRec.FocusedRowHandle = find_row(FormFGRepairReturnRec.GVRepairRec, "id_fg_repair_return_rec", id_report)
+                End If
+            ElseIf report_mark_type = "95" Or report_mark_type = "96" Or report_mark_type = "99" Or report_mark_type = "102" Or report_mark_type = "104" Or report_mark_type = "108" Or report_mark_type = "109" Or report_mark_type = "110" Or report_mark_type = "124" Or report_mark_type = "164" Or report_mark_type = "165" Then
+                'LEAVE PROPOSE
+                If id_status_reportx = "3" Or id_status_reportx = "6" Then
+                    'update schedule to cuti
+                    Dim query_upd As String = ""
+                    query_upd = "UPDATE tb_emp_schedule emps
                                 INNER JOIN
                                 (SELECT empld.id_schedule,empl.leave_purpose,empl.id_leave_type FROM tb_emp_leave_det empld
                                 INNER JOIN tb_emp_leave empl ON empld.id_emp_leave=empl.id_emp_leave
                                 WHERE empld.id_emp_leave='" & id_report & "')
                                 a ON a.id_schedule=emps.id_schedule
                                 SET emps.id_leave_type=a.id_leave_type,emps.info_leave=a.leave_purpose"
-                execute_non_query(query_upd, True, "", "", "", "")
-                'add if advance
-                'select 
-                Dim query_det As String = "SELECT lve.id_emp,ld.id_emp_leave,SUM(ld.minutes_total) AS qty,NOW() as datex
+                    execute_non_query(query_upd, True, "", "", "", "")
+                    'add if advance
+                    'select 
+                    Dim query_det As String = "SELECT lve.id_emp,ld.id_emp_leave,SUM(ld.minutes_total) AS qty,NOW() as datex
                                 FROM tb_emp_leave_det ld
                                 INNER JOIN tb_emp_leave lve ON lve.id_emp_leave=ld.id_emp_leave
                                 WHERE ld.id_emp_leave='" & id_report & "' AND lve.id_leave_type='4'
                                 GROUP BY ld.id_emp_leave"
-                Dim data_det As DataTable = execute_query(query_det, -1, True, "", "", "", "")
-                If data_det.Rows.Count > 0 Then
-                    Dim qty_adv As Integer = data_det.Rows(0)("qty")
-                    '
-                    Dim query_sisa As String = "SELECT id_emp,SUM(IF(plus_minus=1,qty,-qty)) AS qty_sisa,`type`,IF(`type`=1,'Leave','DP') as type_ket,date_expired FROM tb_emp_stock_leave
+                    Dim data_det As DataTable = execute_query(query_det, -1, True, "", "", "", "")
+                    If data_det.Rows.Count > 0 Then
+                        Dim qty_adv As Integer = data_det.Rows(0)("qty")
+                        '
+                        Dim query_sisa As String = "SELECT id_emp,SUM(IF(plus_minus=1,qty,-qty)) AS qty_sisa,`type`,IF(`type`=1,'Leave','DP') as type_ket,date_expired FROM tb_emp_stock_leave
                                 WHERE id_emp='" & data_det.Rows(0)("id_emp").ToString & "'
                                 GROUP BY id_emp,date_expired,`type`
                                 HAVING SUM(IF(plus_minus=1,qty,-qty)) > 0
                                 ORDER BY date_expired ASC,`type` DESC"
-                    Dim data_sisa As DataTable = execute_query(query_sisa, -1, True, "", "", "", "")
-                    If data_sisa.Rows.Count > 0 Then
-                        For i_sisa As Integer = 0 To data_sisa.Rows.Count - 1
-                            If qty_adv = 0 Then
-                                Exit For
-                            End If
-                            Dim qty_sisa As Integer = data_sisa.Rows(i_sisa)("qty_sisa")
-                            If qty_adv >= qty_sisa Then
-                                'adv kurangi, qty sisa lawankan dgn sisa
-                                qty_adv = qty_adv - qty_sisa
-                                Dim query_pot As String = "INSERT INTO tb_emp_stock_leave(id_emp_leave,id_emp,qty,plus_minus,date_leave,date_expired,is_process_exp,note,`type`) VALUES
+                        Dim data_sisa As DataTable = execute_query(query_sisa, -1, True, "", "", "", "")
+                        If data_sisa.Rows.Count > 0 Then
+                            For i_sisa As Integer = 0 To data_sisa.Rows.Count - 1
+                                If qty_adv = 0 Then
+                                    Exit For
+                                End If
+                                Dim qty_sisa As Integer = data_sisa.Rows(i_sisa)("qty_sisa")
+                                If qty_adv >= qty_sisa Then
+                                    'adv kurangi, qty sisa lawankan dgn sisa
+                                    qty_adv = qty_adv - qty_sisa
+                                    Dim query_pot As String = "INSERT INTO tb_emp_stock_leave(id_emp_leave,id_emp,qty,plus_minus,date_leave,date_expired,is_process_exp,note,`type`) VALUES
                                                             ('" & id_report & "','" & data_det.Rows(0)("id_emp").ToString & "','" & qty_sisa.ToString & "','2',NOW(),'" & Date.Parse(data_sisa.Rows(i_sisa)("date_expired").ToString).ToString("yyyy-MM-dd") & "','2','Auto Paid Advance Leave(" & report_number & ")','" & data_sisa.Rows(i_sisa)("type").ToString & "')"
-                                execute_non_query(query_pot, True, "", "", "", "")
-                            Else
-                                'qty sisa kurangi , lawankan dgn adv
-                                Dim query_pot As String = "INSERT INTO tb_emp_stock_leave(id_emp_leave,id_emp,qty,plus_minus,date_leave,date_expired,is_process_exp,note,`type`) VALUES
+                                    execute_non_query(query_pot, True, "", "", "", "")
+                                Else
+                                    'qty sisa kurangi , lawankan dgn adv
+                                    Dim query_pot As String = "INSERT INTO tb_emp_stock_leave(id_emp_leave,id_emp,qty,plus_minus,date_leave,date_expired,is_process_exp,note,`type`) VALUES
                                                             ('" & id_report & "','" & data_det.Rows(0)("id_emp").ToString & "','" & qty_adv.ToString & "','2',NOW(),'" & Date.Parse(data_sisa.Rows(i_sisa)("date_expired").ToString).ToString("yyyy-MM-dd") & "','2','Auto Paid Advance Leave(" & report_number & ")','" & data_sisa.Rows(i_sisa)("type").ToString & "')"
-                                execute_non_query(query_pot, True, "", "", "", "")
-                                qty_adv = 0
-                            End If
-                        Next
-                    End If
-                    If qty_adv > 0 Then
-                        Dim query_pot As String = "INSERT INTO tb_emp_stock_leave_adv(id_emp,id_emp_leave,qty,adv_datetime)
+                                    execute_non_query(query_pot, True, "", "", "", "")
+                                    qty_adv = 0
+                                End If
+                            Next
+                        End If
+                        If qty_adv > 0 Then
+                            Dim query_pot As String = "INSERT INTO tb_emp_stock_leave_adv(id_emp,id_emp_leave,qty,adv_datetime)
                                 SELECT lve.id_emp,lve.id_emp_leave,'" & qty_adv.ToString & "' AS qty,NOW()
                                 FROM tb_emp_leave lve WHERE lve.id_emp_leave='" & id_report & "' AND lve.id_leave_type='4'"
-                        execute_non_query(query_pot, True, "", "", "", "")
+                            execute_non_query(query_pot, True, "", "", "", "")
+                        End If
+
                     End If
 
+                    'complete 
+                    id_status_reportx = "6"
+                    'mail
+                    Dim mail As ClassSendEmail = New ClassSendEmail()
+                    mail.report_mark_type = report_mark_type
+                    mail.send_email_appr(report_mark_type, id_report, True)
+                ElseIf id_status_reportx = "5" Then 'cancel
+                    Dim query_cancel As String = ""
+                    query_cancel = "DELETE FROM tb_emp_stock_leave_adv WHERE id_emp_leave='" & id_report & "'"
+                    execute_non_query(query_cancel, True, "", "", "", "")
+                    query_cancel = "DELETE FROM tb_emp_stock_leave WHERE id_emp_leave='" & id_report & "'"
+                    execute_non_query(query_cancel, True, "", "", "", "")
                 End If
-
-                'complete 
-                id_status_reportx = "6"
-                'mail
-                Dim mail As ClassSendEmail = New ClassSendEmail()
-                mail.report_mark_type = report_mark_type
-                mail.send_email_appr(report_mark_type, id_report, True)
-            ElseIf id_status_reportx = "5" Then 'cancel
-                Dim query_cancel As String = ""
-                query_cancel = "DELETE FROM tb_emp_stock_leave_adv WHERE id_emp_leave='" & id_report & "'"
-                execute_non_query(query_cancel, True, "", "", "", "")
-                query_cancel = "DELETE FROM tb_emp_stock_leave WHERE id_emp_leave='" & id_report & "'"
-                execute_non_query(query_cancel, True, "", "", "", "")
-            End If
-            query = String.Format("UPDATE tb_emp_leave SET id_report_status='{0}' WHERE id_emp_leave ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-            'FormEmpLeave.load_sum()
-        ElseIf report_mark_type = "97" Then
-            'DP
-            If id_status_reportx = "3" Then
-                'complete 
-                Dim query_det As String = "SELECT det.id_dp,dp.id_employee,det.subtotal_hour,pr.periode_end,det.remark 
+                query = String.Format("UPDATE tb_emp_leave SET id_report_status='{0}' WHERE id_emp_leave ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+                'FormEmpLeave.load_sum()
+            ElseIf report_mark_type = "97" Then
+                'DP
+                If id_status_reportx = "3" Then
+                    'complete 
+                    Dim query_det As String = "SELECT det.id_dp,dp.id_employee,det.subtotal_hour,pr.periode_end,det.remark 
                                             FROM tb_emp_dp_det det
                                             INNER JOIN tb_emp_dp dp ON dp.id_dp=det.id_dp
                                             INNER JOIN tb_emp_payroll pr ON pr.`id_payroll`=dp.id_payroll
                                             WHERE det.id_dp='" & id_report & "'"
-                Dim data_det As DataTable = execute_query(query_det, -1, True, "", "", "", "")
-                If data_det.Rows.Count > 0 Then
-                    For i As Integer = 0 To data_det.Rows.Count - 1
-                        query = "INSERT INTO tb_emp_stock_leave(id_emp_dp,id_emp,qty,plus_minus,date_leave,date_expired,is_process_exp,note,`type`) VALUES
+                    Dim data_det As DataTable = execute_query(query_det, -1, True, "", "", "", "")
+                    If data_det.Rows.Count > 0 Then
+                        For i As Integer = 0 To data_det.Rows.Count - 1
+                            query = "INSERT INTO tb_emp_stock_leave(id_emp_dp,id_emp,qty,plus_minus,date_leave,date_expired,is_process_exp,note,`type`) VALUES
                         ('" & id_report & "','" & data_det.Rows(i)("id_employee").ToString & "','" & (data_det.Rows(i)("subtotal_hour") * 60).ToString & "','1',NOW(),'" & Date.Parse(data_det.Rows(i)("periode_end").ToString).AddMonths(6).ToString("yyyy-MM-dd") & "','2','" & data_det.Rows(i)("remark").ToString & "','2')"
-                        execute_non_query(query, True, "", "", "", "")
-                    Next
+                            execute_non_query(query, True, "", "", "", "")
+                        Next
+                    End If
+                    '
+                    id_status_reportx = "6"
                 End If
-                '
-                id_status_reportx = "6"
-            End If
-            query = String.Format("UPDATE tb_emp_dp SET id_report_status='{0}' WHERE id_dp ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-        ElseIf report_mark_type = "98" Then
-            'Employee change schedule
-            If id_status_reportx = "6" Then
-                'complete 
-                query = "UPDATE tb_emp_schedule sch
+                query = String.Format("UPDATE tb_emp_dp SET id_report_status='{0}' WHERE id_dp ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+            ElseIf report_mark_type = "98" Then
+                'Employee change schedule
+                If id_status_reportx = "6" Then
+                    'complete 
+                    query = "UPDATE tb_emp_schedule sch
                             INNER JOIN(
                             SELECT schdf.id_schedule
                             ,IF(ISNULL(schdt.in),NULL,CONCAT(schdf.date,' ',TIME(schdt.in))) AS `in` 
@@ -3525,8 +3610,8 @@
                             ,sch.id_schedule_type=switch.id_schedule_type
                             ,sch.note=switch.note
                             ,sch.shift_code=switch.shift_code"
-                execute_non_query(query, True, "", "", "", "")
-                query = "UPDATE tb_emp_schedule sch
+                    execute_non_query(query, True, "", "", "", "")
+                    query = "UPDATE tb_emp_schedule sch
                             INNER JOIN(
                             SELECT schdf.id_schedule
                             ,IF(ISNULL(schdt.in),NULL,CONCAT(schdf.date,' ',TIME(schdt.in))) AS `in` 
@@ -3553,193 +3638,199 @@
                             ,sch.id_schedule_type=switch.id_schedule_type
                             ,sch.note=switch.note
                             ,sch.shift_code=switch.shift_code"
+                    execute_non_query(query, True, "", "", "", "")
+                    id_status_reportx = "6"
+                End If
+                query = String.Format("UPDATE tb_emp_ch_schedule SET id_report_status='{0}' WHERE id_emp_ch_schedule ='{1}'", id_status_reportx, id_report)
                 execute_non_query(query, True, "", "", "", "")
-                id_status_reportx = "6"
-            End If
-            query = String.Format("UPDATE tb_emp_ch_schedule SET id_report_status='{0}' WHERE id_emp_ch_schedule ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-        ElseIf report_mark_type = "100" Then
-            'Schedule PROPOSE with approval
-            If id_status_reportx = "3" Then
-                'update schedule 
-                Dim query_after As String = "SELECT sch.id_employee,IFNULL(s.id_shift,0) as id_shift,sch.date FROM tb_emp_assign_sch_det sch
+            ElseIf report_mark_type = "100" Then
+                'Schedule PROPOSE with approval
+                If id_status_reportx = "3" Then
+                    'update schedule 
+                    Dim query_after As String = "SELECT sch.id_employee,IFNULL(s.id_shift,0) as id_shift,sch.date FROM tb_emp_assign_sch_det sch
                                                 LEFT JOIN tb_emp_shift s ON sch.shift_code=s.shift_code
                                                 WHERE id_emp_assign_sch='" & id_report & "' AND `type`='2'"
-                Dim data_after As DataTable = execute_query(query_after, -1, True, "", "", "", "")
-                For j As Integer = 0 To data_after.Rows.Count - 1
-                    Dim id_shift, id_empployee_varx, date_var As String
-                    id_shift = data_after(j)("id_shift").ToString
-                    id_empployee_varx = data_after(j)("id_employee").ToString
-                    date_var = Date.Parse(data_after(j)("date").ToString).ToString("yyy-MM-dd")
+                    Dim data_after As DataTable = execute_query(query_after, -1, True, "", "", "", "")
+                    For j As Integer = 0 To data_after.Rows.Count - 1
+                        Dim id_shift, id_empployee_varx, date_var As String
+                        id_shift = data_after(j)("id_shift").ToString
+                        id_empployee_varx = data_after(j)("id_employee").ToString
+                        date_var = Date.Parse(data_after(j)("date").ToString).ToString("yyy-MM-dd")
 
-                    If Not id_shift = "" Then
-                        If id_shift = "0" Then
-                            Dim query_shift As String = "CALL add_shift(" & id_empployee_varx & ",1,'" & date_var & "','" & date_var & "',2)"
-                            execute_non_query(query_shift, True, "", "", "", "")
-                        Else
-                            Dim query_shift As String = "CALL add_shift(" & id_empployee_varx & "," & id_shift & ",'" & date_var & "','" & date_var & "',1)"
-                            execute_non_query(query_shift, True, "", "", "", "")
+                        If Not id_shift = "" Then
+                            If id_shift = "0" Then
+                                Dim query_shift As String = "CALL add_shift(" & id_empployee_varx & ",1,'" & date_var & "','" & date_var & "',2)"
+                                execute_non_query(query_shift, True, "", "", "", "")
+                            Else
+                                Dim query_shift As String = "CALL add_shift(" & id_empployee_varx & "," & id_shift & ",'" & date_var & "','" & date_var & "',1)"
+                                execute_non_query(query_shift, True, "", "", "", "")
+                            End If
                         End If
+                    Next
+
+                    'complete 
+                    id_status_reportx = "6"
+                End If
+                query = String.Format("UPDATE tb_emp_assign_sch SET id_report_status='{0}' WHERE id_assign_sch ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+                'infoCustom("Status changed.")
+            ElseIf report_mark_type = "101" Then
+                'Air Ways Bill
+                If id_status_reportx = "3" Then
+                    'complete 
+                    id_status_reportx = "6"
+                End If
+                query = String.Format("UPDATE tb_wh_awbill SET id_report_status='{0}' WHERE id_awbill ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+                'infoCustom("Status changed.")
+            ElseIf report_mark_type = "103" Then
+                'combine del
+                Dim stt As ClassSalesDelOrder = New ClassSalesDelOrder()
+                stt.changeStatusHead(id_report, id_status_reportx)
+                'infoCustom("Status changed.")
+
+                FormSalesDelOrderSlip.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                FormSalesDelOrderSlip.actionLoad()
+            ElseIf report_mark_type = "105" Then
+                'Final Clear
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
+
+                query = String.Format("UPDATE tb_prod_fc SET id_report_status='{0}' WHERE id_prod_fc ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+                'infoCustom("Status changed.")
+
+                If form_origin = "FormProductionFinalClearDet" Then
+                    FormProductionFinalClearDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                    FormProductionFinalClearDet.actionLoad()
+                    FormProductionFinalClear.viewFinalClear()
+                    FormProductionFinalClear.GVFinalClear.FocusedRowHandle = find_row(FormProductionFinalClear.GVFinalClear, "id_prod_fc", id_report)
+                End If
+            ElseIf report_mark_type = "107" Then
+                Cursor = Cursors.WaitCursor
+                'production assem
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
+
+                Dim ch_stt As New ClassProductionAssembly()
+                ch_stt.changeStatus(id_report, id_status_reportx)
+
+                If form_origin = "FormProductionAssemblySingle" Then
+                    FormProductionAssemblySingle.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                    FormProductionAssemblySingle.actionLoad()
+                    FormProductionAssembly.viewData()
+                    FormProductionAssembly.GVData.FocusedRowHandle = find_row(FormProductionAssembly.GVData, "id_prod_ass", id_report)
+                End If
+                Cursor = Cursors.Default
+            ElseIf report_mark_type = "111" Then
+                Cursor = Cursors.WaitCursor
+                'out non stock
+
+                Dim ch_stt As New ClassDelEmpty()
+                ch_stt.changeStatus(id_report, id_status_reportx)
+
+                If form_origin = "FormProductionAssemblySingle" Then
+                    FormWHDelEmptyDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                    FormWHDelEmptyDet.actionLoad()
+                    FormWHDelEmpty.viewDel()
+                    FormWHDelEmpty.GVDel.FocusedRowHandle = find_row(FormWHDelEmpty.GVDel, "id_wh_del_empty", id_report)
+                End If
+                Cursor = Cursors.Default
+            ElseIf report_mark_type = "116" Then
+                'Invoice missing promo
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
+
+                query = String.Format("UPDATE tb_sales_pos SET id_report_status='{0}' WHERE id_sales_pos ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+                'infoCustom("Status changed.")
+
+                If form_origin = "FormSalesPOSDet" Then
+                    FormSalesPOSDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                    FormSalesPOSDet.check_but()
+                    FormSalesPOSDet.actionLoad()
+                    FormSalesPOS.viewSalesPOS()
+                    FormSalesPOS.GVSalesPOS.FocusedRowHandle = find_row(FormSalesPOS.GVSalesPOS, "id_sales_pos", id_report)
+                Else
+                    'code here
+                End If
+            ElseIf report_mark_type = "117" Then
+                'imvoice missing staff
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
+
+                If id_status_reportx = "5" Then
+                    Dim cancel_rsv_stock As ClassSalesInv = New ClassSalesInv()
+
+                    If FormSalesPOSDet.is_use_unique_code = "1" Then
+                        'cancelled unique
+                        cancel_rsv_stock.cancellUnique(id_report, report_mark_type)
                     End If
-                Next
 
-                'complete 
-                id_status_reportx = "6"
-            End If
-            query = String.Format("UPDATE tb_emp_assign_sch SET id_report_status='{0}' WHERE id_assign_sch ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-            'infoCustom("Status changed.")
-        ElseIf report_mark_type = "101" Then
-            'Air Ways Bill
-            If id_status_reportx = "3" Then
-                'complete 
-                id_status_reportx = "6"
-            End If
-            query = String.Format("UPDATE tb_wh_awbill SET id_report_status='{0}' WHERE id_awbill ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-            'infoCustom("Status changed.")
-        ElseIf report_mark_type = "103" Then
-            'combine del
-            Dim stt As ClassSalesDelOrder = New ClassSalesDelOrder()
-            stt.changeStatusHead(id_report, id_status_reportx)
-            'infoCustom("Status changed.")
+                    'cancelled stock
+                    cancel_rsv_stock.cancelReservedStock(id_report, "117")
+                ElseIf id_status_reportx = "6" Then
+                    'completed
+                    Dim complete_rsv_stock As ClassSalesInv = New ClassSalesInv()
+                    complete_rsv_stock.completedStockMissingStaff(id_report, "117")
+                End If
 
-            FormSalesDelOrderSlip.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-            FormSalesDelOrderSlip.actionLoad()
-        ElseIf report_mark_type = "105" Then
-            'Final Clear
-            If id_status_reportx = "3" Then
-                id_status_reportx = "6"
-            End If
+                'update status
+                query = String.Format("UPDATE tb_sales_pos SET id_report_status='{0}' WHERE id_sales_pos ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+                'infoCustom("Status changed.")
 
-            query = String.Format("UPDATE tb_prod_fc SET id_report_status='{0}' WHERE id_prod_fc ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-            'infoCustom("Status changed.")
+                If form_origin = "FormSalesPOSDet" Then
+                    FormSalesPOSDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                    FormSalesPOSDet.check_but()
+                    FormSalesPOSDet.actionLoad()
+                    FormSalesPOS.viewSalesPOS()
+                    FormSalesPOS.GVSalesPOS.FocusedRowHandle = find_row(FormSalesPOS.GVSalesPOS, "id_sales_pos", id_report)
+                Else
+                    'code here
+                End If
+            ElseIf report_mark_type = "119" Then
+                'return Order ol
+                If id_status_reportx = "5" Then
+                    Dim ro As New ClassSalesReturnOrder()
+                    ro.cancelReservedStock(id_report)
+                End If
 
-            If form_origin = "FormProductionFinalClearDet" Then
-                FormProductionFinalClearDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormProductionFinalClearDet.actionLoad()
-                FormProductionFinalClear.viewFinalClear()
-                FormProductionFinalClear.GVFinalClear.FocusedRowHandle = find_row(FormProductionFinalClear.GVFinalClear, "id_prod_fc", id_report)
-            End If
-        ElseIf report_mark_type = "107" Then
-            Cursor = Cursors.WaitCursor
-            'production assem
-            If id_status_reportx = "3" Then
-                id_status_reportx = "6"
-            End If
+                query = String.Format("UPDATE tb_sales_return_order SET id_report_status='{0}' WHERE id_sales_return_order ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+                'infoCustom("Status changed.")
 
-            Dim ch_stt As New ClassProductionAssembly()
-            ch_stt.changeStatus(id_report, id_status_reportx)
+                If form_origin = "FormSalesReturnOrderOLDet" Then
+                    FormSalesReturnOrderOLDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                    FormSalesReturnOrderOLDet.check_but()
+                    FormSalesReturnOrderOLDet.actionLoad()
+                    FormSalesReturnOrderOL.viewSalesReturnOrder()
+                    FormSalesReturnOrderOL.GVSalesReturnOrder.FocusedRowHandle = find_row(FormSalesReturnOrderOL.GVSalesReturnOrder, "id_sales_return_order", id_report)
+                Else
+                    'code here
+                End If
+            ElseIf report_mark_type = "123" Then
+                'list uniform
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
 
-            If form_origin = "FormProductionAssemblySingle" Then
-                FormProductionAssemblySingle.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormProductionAssemblySingle.actionLoad()
-                FormProductionAssembly.viewData()
-                FormProductionAssembly.GVData.FocusedRowHandle = find_row(FormProductionAssembly.GVData, "id_prod_ass", id_report)
-            End If
-            Cursor = Cursors.Default
-        ElseIf report_mark_type = "111" Then
-            Cursor = Cursors.WaitCursor
-            'out non stock
+                query = String.Format("UPDATE tb_emp_uni_design SET id_report_status='{0}' WHERE id_emp_uni_design ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
 
-            Dim ch_stt As New ClassDelEmpty()
-            ch_stt.changeStatus(id_report, id_status_reportx)
-
-            If form_origin = "FormProductionAssemblySingle" Then
-                FormWHDelEmptyDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormWHDelEmptyDet.actionLoad()
-                FormWHDelEmpty.viewDel()
-                FormWHDelEmpty.GVDel.FocusedRowHandle = find_row(FormWHDelEmpty.GVDel, "id_wh_del_empty", id_report)
-            End If
-            Cursor = Cursors.Default
-        ElseIf report_mark_type = "116" Then
-            'Invoice missing promo
-            If id_status_reportx = "3" Then
-                id_status_reportx = "6"
-            End If
-
-            query = String.Format("UPDATE tb_sales_pos SET id_report_status='{0}' WHERE id_sales_pos ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-            'infoCustom("Status changed.")
-
-            If form_origin = "FormSalesPOSDet" Then
-                FormSalesPOSDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormSalesPOSDet.check_but()
-                FormSalesPOSDet.actionLoad()
-                FormSalesPOS.viewSalesPOS()
-                FormSalesPOS.GVSalesPOS.FocusedRowHandle = find_row(FormSalesPOS.GVSalesPOS, "id_sales_pos", id_report)
-            Else
-                'code here
-            End If
-        ElseIf report_mark_type = "117" Then
-            'imvoice missing staff
-            If id_status_reportx = "3" Then
-                id_status_reportx = "6"
-            End If
-
-            If id_status_reportx = "5" Then
-                'cancelled
-                Dim cancel_rsv_stock As ClassSalesInv = New ClassSalesInv()
-                cancel_rsv_stock.cancelReservedStock(id_report, "117")
-            ElseIf id_status_reportx = "6" Then
-                'completed
-                Dim complete_rsv_stock As ClassSalesInv = New ClassSalesInv()
-                complete_rsv_stock.completedStockMissingStaff(id_report, "117")
-            End If
-
-            'update status
-            query = String.Format("UPDATE tb_sales_pos SET id_report_status='{0}' WHERE id_sales_pos ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-            'infoCustom("Status changed.")
-
-            If form_origin = "FormSalesPOSDet" Then
-                FormSalesPOSDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormSalesPOSDet.check_but()
-                FormSalesPOSDet.actionLoad()
-                FormSalesPOS.viewSalesPOS()
-                FormSalesPOS.GVSalesPOS.FocusedRowHandle = find_row(FormSalesPOS.GVSalesPOS, "id_sales_pos", id_report)
-            Else
-                'code here
-            End If
-        ElseIf report_mark_type = "119" Then
-            'return Order ol
-            If id_status_reportx = "5" Then
-                Dim ro As New ClassSalesReturnOrder()
-                ro.cancelReservedStock(id_report)
-            End If
-
-            query = String.Format("UPDATE tb_sales_return_order SET id_report_status='{0}' WHERE id_sales_return_order ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-            'infoCustom("Status changed.")
-
-            If form_origin = "FormSalesReturnOrderOLDet" Then
-                FormSalesReturnOrderOLDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormSalesReturnOrderOLDet.check_but()
-                FormSalesReturnOrderOLDet.actionLoad()
-                FormSalesReturnOrderOL.viewSalesReturnOrder()
-                FormSalesReturnOrderOL.GVSalesReturnOrder.FocusedRowHandle = find_row(FormSalesReturnOrderOL.GVSalesReturnOrder, "id_sales_return_order", id_report)
-            Else
-                'code here
-            End If
-        ElseIf report_mark_type = "123" Then
-            'list uniform
-            If id_status_reportx = "3" Then
-                id_status_reportx = "6"
-            End If
-
-            query = String.Format("UPDATE tb_emp_uni_design SET id_report_status='{0}' WHERE id_emp_uni_design ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-
-            'kalo completed generate nomer urut
-            If id_status_reportx = "6" Then
-                Dim qm As String = "SELECT IFNULL(MAX(dd.`no`),0) AS `maks` FROM tb_emp_uni_design_det dd 
+                'kalo completed generate nomer urut
+                If id_status_reportx = "6" Then
+                    Dim qm As String = "SELECT IFNULL(MAX(dd.`no`),0) AS `maks` FROM tb_emp_uni_design_det dd 
                 INNER JOIN tb_emp_uni_design d ON d.id_emp_uni_design = dd.id_emp_uni_design
                 WHERE d.id_emp_uni_period=" + FormEmpUniListDet.LEPeriodx.EditValue.ToString + " AND d.id_report_status=6 "
-                Dim dm As DataTable = execute_query(qm, -1, True, "", "", "", "")
-                Dim maks As Integer = dm.Rows(0)("maks")
+                    Dim dm As DataTable = execute_query(qm, -1, True, "", "", "", "")
+                    Dim maks As Integer = dm.Rows(0)("maks")
 
-                Dim qn As String = "UPDATE tb_emp_uni_design_det main
+                    Dim qn As String = "UPDATE tb_emp_uni_design_det main
                 INNER JOIN (
                     SELECT d.*,  @a:=@a+1 `counting`
                     FROM (
@@ -3755,164 +3846,164 @@
                     ) d, (SELECT @a:= " + maks.ToString + ") AS a
                 ) src ON src.id_emp_uni_design_det = main.id_emp_uni_design_det
                 SET main.no = src.counting, main.division = src.dv "
-                execute_non_query(qn, True, "", "", "", "")
+                    execute_non_query(qn, True, "", "", "", "")
 
-                'update point
-                execute_non_query("CALL set_emp_uni_point(" + FormEmpUniListDet.id_emp_uni_period + ")", True, "", "", "", "")
-            End If
+                    'update point
+                    execute_non_query("CALL set_emp_uni_point(" + FormEmpUniListDet.id_emp_uni_period + ")", True, "", "", "", "")
+                End If
 
 
-            'infoCustom("Status changed.")
+                'infoCustom("Status changed.")
 
-            FormEmpUniListDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-            FormEmpUniListDet.actionLoad()
-            FormEmpUniList.viewData()
-            FormEmpUniList.GVData.FocusedRowHandle = find_row(FormEmpUniList.GVData, "id_emp_uni_design", id_report)
-        ElseIf report_mark_type = "125" Then
-            'leave cut
-            If id_status_reportx = "5" Then
+                FormEmpUniListDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                FormEmpUniListDet.actionLoad()
+                FormEmpUniList.viewData()
+                FormEmpUniList.GVData.FocusedRowHandle = find_row(FormEmpUniList.GVData, "id_emp_uni_design", id_report)
+            ElseIf report_mark_type = "125" Then
+                'leave cut
+                If id_status_reportx = "5" Then
+                    '
+                ElseIf id_status_reportx = "6" Then
+
+                End If
+
+                query = String.Format("UPDATE tb_emp_leave_cut SET id_report_status='{0}' WHERE id_leave_cut ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+                'infoCustom("Status changed.")
+            ElseIf report_mark_type = "126" Then
+                'Production Over Memo
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
+
+                If id_status_reportx = "6" Then
+                    Cursor = Cursors.WaitCursor
+                    Dim query_upd_datetime As String = "UPDATE tb_prod_over_memo SET created_date=NOW() WHERE id_prod_over_memo='" + id_report + "' "
+                    execute_non_query(query_upd_datetime, True, "", "", "", "")
+                    Dim mail As New ClassSendEmail()
+                    mail.report_mark_type = "126"
+                    mail.id_report = id_report
+                    mail.send_email()
+                    Cursor = Cursors.Default
+                End If
+
+                Dim query_upd As String = "UPDATE tb_prod_over_memo SET id_report_status='" + id_status_reportx + "' WHERE id_prod_over_memo='" + id_report + "' "
+                execute_non_query(query_upd, True, "", "", "", "")
+                FormProdOverMemoDet.actionLoad()
+                FormProdOverMemo.viewData()
+                FormProdOverMemo.GVMemo.FocusedRowHandle = find_row(FormProdOverMemo.GVMemo, "id_prod_over_memo", id_report)
+            ElseIf report_mark_type = "128" Then
+                'Asset PO
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
+
+                query = String.Format("UPDATE tb_a_asset_po SET id_report_status='{0}' WHERE id_asset_po ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+                'infoCustom("Status changed.")
+
+                If form_origin = "FormAssetPODet" Then
+                    FormAssetPODet.load_det()
+                    FormAssetPO.load_po()
+                    FormAssetPO.GVPOList.FocusedRowHandle = find_row(FormAssetPO.GVPOList, "id_asset_po", id_report)
+                Else
+                    'code here
+                End If
+            ElseIf report_mark_type = "129" Then
+                'Asset PO
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
+
                 '
-            ElseIf id_status_reportx = "6" Then
-
-            End If
-
-            query = String.Format("UPDATE tb_emp_leave_cut SET id_report_status='{0}' WHERE id_leave_cut ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-            'infoCustom("Status changed.")
-        ElseIf report_mark_type = "126" Then
-            'Production Over Memo
-            If id_status_reportx = "3" Then
-                id_status_reportx = "6"
-            End If
-
-            If id_status_reportx = "6" Then
-                Cursor = Cursors.WaitCursor
-                Dim query_upd_datetime As String = "UPDATE tb_prod_over_memo SET created_date=NOW() WHERE id_prod_over_memo='" + id_report + "' "
-                execute_non_query(query_upd_datetime, True, "", "", "", "")
-                Dim mail As New ClassSendEmail()
-                mail.report_mark_type = "126"
-                mail.id_report = id_report
-                mail.send_email()
-                Cursor = Cursors.Default
-            End If
-
-            Dim query_upd As String = "UPDATE tb_prod_over_memo SET id_report_status='" + id_status_reportx + "' WHERE id_prod_over_memo='" + id_report + "' "
-            execute_non_query(query_upd, True, "", "", "", "")
-            FormProdOverMemoDet.actionLoad()
-            FormProdOverMemo.viewData()
-            FormProdOverMemo.GVMemo.FocusedRowHandle = find_row(FormProdOverMemo.GVMemo, "id_prod_over_memo", id_report)
-        ElseIf report_mark_type = "128" Then
-            'Asset PO
-            If id_status_reportx = "3" Then
-                id_status_reportx = "6"
-            End If
-
-            query = String.Format("UPDATE tb_a_asset_po SET id_report_status='{0}' WHERE id_asset_po ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-            'infoCustom("Status changed.")
-
-            If form_origin = "FormAssetPODet" Then
-                FormAssetPODet.load_det()
-                FormAssetPO.load_po()
-                FormAssetPO.GVPOList.FocusedRowHandle = find_row(FormAssetPO.GVPOList, "id_asset_po", id_report)
-            Else
-                'code here
-            End If
-        ElseIf report_mark_type = "129" Then
-            'Asset PO
-            If id_status_reportx = "3" Then
-                id_status_reportx = "6"
-            End If
-
-            '
-            query = String.Format("UPDATE tb_a_asset_rec SET id_report_status='{0}' WHERE id_asset_rec ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-            'infoCustom("Status changed.")
-            '
-            If id_status_reportx = "6" Then
-                'insert to master asset
-                query = String.Format("SELECT recd.qty_rec,pod.`id_asset_cat`,recd.`id_asset_rec_det`,pod.`desc`,pod.`id_departement`,0 AS id_employee,1 AS id_user_created,1 AS id_user_last_upd,DATE(NOW()) AS date_created,DATE(NOW()) AS date_last_upd FROM tb_a_asset_rec_det recd
+                query = String.Format("UPDATE tb_a_asset_rec SET id_report_status='{0}' WHERE id_asset_rec ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+                'infoCustom("Status changed.")
+                '
+                If id_status_reportx = "6" Then
+                    'insert to master asset
+                    query = String.Format("SELECT recd.qty_rec,pod.`id_asset_cat`,recd.`id_asset_rec_det`,pod.`desc`,pod.`id_departement`,0 AS id_employee,1 AS id_user_created,1 AS id_user_last_upd,DATE(NOW()) AS date_created,DATE(NOW()) AS date_last_upd FROM tb_a_asset_rec_det recd
                                         INNER JOIN tb_a_asset_po_det pod ON pod.`id_asset_po_det`=recd.`id_asset_po_det`
                                         WHERE id_asset_rec='{0}'", id_report)
-                Dim data_sel As DataTable = execute_query(query, -1, True, "", "", "", "")
-                For sel As Integer = 0 To data_sel.Rows.Count - 1
-                    Dim qty_rec As Integer = data_sel.Rows(sel)("qty_rec")
-                    For ins As Integer = 0 To qty_rec - 1
-                        Dim query_ins As String = String.Format("INSERT INTO tb_a_asset(id_asset_cat,id_asset_rec_det,`asset_desc`,id_departement,id_employee,id_user_created,id_user_last_upd,date_created,date_last_upd)
+                    Dim data_sel As DataTable = execute_query(query, -1, True, "", "", "", "")
+                    For sel As Integer = 0 To data_sel.Rows.Count - 1
+                        Dim qty_rec As Integer = data_sel.Rows(sel)("qty_rec")
+                        For ins As Integer = 0 To qty_rec - 1
+                            Dim query_ins As String = String.Format("INSERT INTO tb_a_asset(id_asset_cat,id_asset_rec_det,`asset_desc`,id_departement,id_employee,id_user_created,id_user_last_upd,date_created,date_last_upd)
                                         SELECT pod.`id_asset_cat`,recd.`id_asset_rec_det`,pod.`desc`,pod.`id_departement`,0 AS id_employee,'" & id_user & "' AS id_user_created,'" & id_user & "' AS id_user_last_upd,DATE(NOW()) AS date_created,DATE(NOW()) AS date_last_upd FROM tb_a_asset_rec_det recd
                                         INNER JOIN tb_a_asset_po_det pod ON pod.`id_asset_po_det`=recd.`id_asset_po_det`
                                         WHERE recd.id_asset_rec_det='{0}'", data_sel.Rows(sel)("id_asset_rec_det"))
-                        execute_non_query(query_ins, True, "", "", "", "")
+                            execute_non_query(query_ins, True, "", "", "", "")
+                        Next
                     Next
-                Next
-            End If
+                End If
 
-            If form_origin = "FormAssetRecDet" Then
-                FormAssetRecDet.load_det()
-                FormAssetRec.load_rec()
-                FormAssetRec.GVRecList.FocusedRowHandle = find_row(FormAssetRec.GVRecList, "id_asset_rec", id_report)
-            Else
-                'code here
-            End If
-        ElseIf report_mark_type = "132" Then
-            'Uniform expense
-            If id_status_reportx = "3" Then
-                id_status_reportx = "6"
-            End If
+                If form_origin = "FormAssetRecDet" Then
+                    FormAssetRecDet.load_det()
+                    FormAssetRec.load_rec()
+                    FormAssetRec.GVRecList.FocusedRowHandle = find_row(FormAssetRec.GVRecList, "id_asset_rec", id_report)
+                Else
+                    'code here
+                End If
+            ElseIf report_mark_type = "132" Then
+                'Uniform expense
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
 
-            If id_status_reportx = "5" Then
-                'cancelled
-                Dim cancel_rsv_stock As ClassEmpUniExpense = New ClassEmpUniExpense()
-                cancel_rsv_stock.cancelReservedStock(id_report, "132")
-            ElseIf id_status_reportx = "6" Then
-                'completed
-                Dim complete_rsv_stock As ClassEmpUniExpense = New ClassEmpUniExpense()
-                complete_rsv_stock.completedStock(id_report, "132")
-            End If
+                If id_status_reportx = "5" Then
+                    'cancelled
+                    Dim cancel_rsv_stock As ClassEmpUniExpense = New ClassEmpUniExpense()
+                    cancel_rsv_stock.cancelReservedStock(id_report, "132")
+                ElseIf id_status_reportx = "6" Then
+                    'completed
+                    Dim complete_rsv_stock As ClassEmpUniExpense = New ClassEmpUniExpense()
+                    complete_rsv_stock.completedStock(id_report, "132")
+                End If
 
-            'update status
-            query = String.Format("UPDATE tb_emp_uni_ex SET id_report_status='{0}' WHERE id_emp_uni_ex ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-            'infoCustom("Status changed.")
+                'update status
+                query = String.Format("UPDATE tb_emp_uni_ex SET id_report_status='{0}' WHERE id_emp_uni_ex ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+                'infoCustom("Status changed.")
 
-            If form_origin = "FormEmpUniExpenseDet" Then
-                FormEmpUniExpenseDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-                FormEmpUniExpenseDet.actionLoad()
-                FormEmpUniExpense.viewData()
-                FormEmpUniExpense.GVData.FocusedRowHandle = find_row(FormEmpUniExpense.GVData, "id_emp_uni_ex", id_report)
-            Else
-                'code here
-            End If
-        ElseIf report_mark_type = "133" Then
-            'REVENUE BUDGET
-            'auto completed
-            If id_status_reportx = "3" Then
-                id_status_reportx = "6"
-            End If
+                If form_origin = "FormEmpUniExpenseDet" Then
+                    FormEmpUniExpenseDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                    FormEmpUniExpenseDet.actionLoad()
+                    FormEmpUniExpense.viewData()
+                    FormEmpUniExpense.GVData.FocusedRowHandle = find_row(FormEmpUniExpense.GVData, "id_emp_uni_ex", id_report)
+                Else
+                    'code here
+                End If
+            ElseIf report_mark_type = "133" Then
+                'REVENUE BUDGET
+                'auto completed
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
 
-            If id_status_reportx = "6" Then
-                Dim qc As String = "SELECT r.`year`, rd.`month`, rd.id_store, rd.b_revenue_propose 
+                If id_status_reportx = "6" Then
+                    Dim qc As String = "SELECT r.`year`, rd.`month`, rd.id_store, rd.b_revenue_propose 
                 FROM tb_b_revenue_propose_det rd
                 INNER JOIN tb_b_revenue_propose r ON r.id_b_revenue_propose = rd.id_b_revenue_propose
                 WHERE r.id_b_revenue_propose=" + id_report + " "
-                Dim dc As DataTable = execute_query(qc, -1, True, "", "", "", "")
-                For i As Integer = 0 To dc.Rows.Count - 1
-                    Dim year As String = dc.Rows(i)("year").ToString
-                    Dim month As String = dc.Rows(i)("month").ToString
-                    Dim id_store As String = dc.Rows(i)("id_store").ToString
-                    Dim b_revenue_propose As String = decimalSQL(dc.Rows(i)("b_revenue_propose").ToString)
+                    Dim dc As DataTable = execute_query(qc, -1, True, "", "", "", "")
+                    For i As Integer = 0 To dc.Rows.Count - 1
+                        Dim year As String = dc.Rows(i)("year").ToString
+                        Dim month As String = dc.Rows(i)("month").ToString
+                        Dim id_store As String = dc.Rows(i)("id_store").ToString
+                        Dim b_revenue_propose As String = decimalSQL(dc.Rows(i)("b_revenue_propose").ToString)
 
-                    'insert tb revenue
-                    Dim qi As String = "INSERT INTO tb_b_revenue (
+                        'insert tb revenue
+                        Dim qi As String = "INSERT INTO tb_b_revenue (
 	                    `year`,
 	                    `month`,
 	                    `id_store`,
 	                    `b_revenue`
                     ) VALUES ('" + year + "', '" + month + "', '" + id_store + "', '" + b_revenue_propose + "'); SELECT LAST_INSERT_ID(); "
-                    Dim id_b_revenue As String = execute_query(qi, 0, True, "", "", "", "")
+                        Dim id_b_revenue As String = execute_query(qi, 0, True, "", "", "", "")
 
-                    'insert log
-                    Dim ql As String = "INSERT INTO tb_b_revenue_log(
+                        'insert log
+                        Dim ql As String = "INSERT INTO tb_b_revenue_log(
 	                    `id_b_revenue`,
 	                    `value_old`,
 	                    `value_new`,
@@ -3921,127 +4012,169 @@
 	                    `id_report`,
 	                    `report_mark_type`
                     ) VALUES('" + id_b_revenue + "', 0, '" + b_revenue_propose + "', NOW(), '" + id_user + "', '" + id_report + "', '133'); "
-                    execute_non_query(ql, True, "", "", "", "")
-                Next
-            End If
+                        execute_non_query(ql, True, "", "", "", "")
+                    Next
+                End If
 
-            'update status
-            query = String.Format("UPDATE tb_b_revenue_propose SET id_report_status='{0}' WHERE id_b_revenue_propose ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
+                'update status
+                query = String.Format("UPDATE tb_b_revenue_propose SET id_report_status='{0}' WHERE id_b_revenue_propose ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
 
-            'refresh view
-            FormBudgetRevProposeDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-            FormBudgetRevProposeDet.actionLoad()
-            FormBudgetRevPropose.viewData()
-            FormBudgetRevPropose.GVRev.FocusedRowHandle = find_row(FormBudgetRevPropose.GVRev, "id_b_revenue_propose", id_report)
-        ElseIf report_mark_type = "134" Then
-            'POPOSE NEW ITEM CAT
-            'auto completed
-            If id_status_reportx = "3" Then
-                id_status_reportx = "6"
-            End If
+                'refresh view
+                FormBudgetRevProposeDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                FormBudgetRevProposeDet.actionLoad()
+                FormBudgetRevPropose.viewData()
+                FormBudgetRevPropose.GVRev.FocusedRowHandle = find_row(FormBudgetRevPropose.GVRev, "id_b_revenue_propose", id_report)
+            ElseIf report_mark_type = "134" Then
+                'POPOSE NEW ITEM CAT
+                'auto completed
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
 
-            'update status
-            query = String.Format("UPDATE tb_item_cat_propose SET id_report_status='{0}' WHERE id_item_cat_propose ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
+                'jika cancel
 
-            'refresh view
-            FormItemCatProposeDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-            FormItemCatProposeDet.actionLoad()
-            FormItemCatPropose.viewPropose()
-            FormItemCatPropose.GVData.FocusedRowHandle = find_row(FormItemCatPropose.GVData, "id_item_cat_propose", id_report)
-        ElseIf report_mark_type = "135" Then
-            'POPOSE NEW ITEM COA
-            'auto completed
-            If id_status_reportx = "3" Then
-                id_status_reportx = "6"
-            End If
+                'update status
+                query = String.Format("UPDATE tb_item_cat_propose SET id_report_status='{0}' WHERE id_item_cat_propose ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
 
-            'update status
-            query = String.Format("UPDATE tb_item_coa_propose SET id_report_status='{0}' WHERE id_item_coa_propose ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
+                'refresh view
+                FormItemCatProposeDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                FormItemCatProposeDet.actionLoad()
+                FormItemCatPropose.viewPropose()
+                FormItemCatPropose.GVData.FocusedRowHandle = find_row(FormItemCatPropose.GVData, "id_item_cat_propose", id_report)
+            ElseIf report_mark_type = "135" Then
+                'POPOSE NEW ITEM COA
+                'auto completed
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
 
-            'refresh view
-            FormItemCatMappingDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-            FormItemCatMappingDet.actionLoad()
-            FormItemCatMapping.viewPropose()
-            FormItemCatMapping.GVPropose.FocusedRowHandle = find_row(FormItemCatMapping.GVPropose, "id_item_coa_propose", id_report)
-        ElseIf report_mark_type = "136" Then
-            'Expense BUDGET
-            'auto completed
-            If id_status_reportx = "3" Then
-                id_status_reportx = "6"
-            End If
+                If id_status_reportx = "6" Then
+                    'main inv store
+                    If FormItemCatMappingDet.TxtProposeCodeInvStore.Text <> "" Then
+                        Dim qmr As String = "UPDATE tb_opt_purchasing main
+                    JOIN tb_item_coa_propose src ON src.id_item_coa_propose=" + id_report + "
+                    SET main.acc_coa_receive = src.acc_coa_receive "
+                        execute_non_query(qmr, True, "", "", "", "")
+                    End If
 
-            If id_status_reportx = "6" Then
-                'budget year & month
-                Dim idb_new As String = "0"
-                Dim idy As String = "0"
-                Dim qall As String = "SELECT y.id_b_expense_propose_year, y.id_b_expense_propose, y.year, y.id_item_coa, y.value_expense AS `value_year`,
+                    'main hutang
+                    If FormItemCatMappingDet.TxtProposeCodeHutang.Text <> "" Then
+                        Dim qmh As String = "UPDATE tb_opt_purchasing main
+                    JOIN tb_item_coa_propose src ON src.id_item_coa_propose=" + id_report + "
+                    SET main.acc_coa_hutang = src.acc_coa_hutang "
+                        execute_non_query(qmh, True, "", "", "", "")
+                    End If
+
+                    'main trf
+                    If FormItemCatMappingDet.TxtProposeCodeInvWH.Text <> "" Then
+                        Dim qmt As String = "UPDATE tb_opt_purchasing main
+                    JOIN tb_item_coa_propose src ON src.id_item_coa_propose=" + id_report + "
+                    SET main.acc_coa_trf = src.acc_coa_trf "
+                        execute_non_query(qmt, True, "", "", "", "")
+                    End If
+
+                    'detail
+                    Dim qd As String = "INSERT INTO tb_item_coa(id_item_coa_propose_det,id_item_cat, id_departement, id_coa_in, id_coa_out, is_request, is_expense)
+		        SELECT d.id_item_coa_propose_det, d.id_item_cat, d.id_departement, d.id_coa_in, d.id_coa_out, d.is_request, d.is_expense
+		        FROM tb_item_coa_propose_det d
+		        WHERE d.id_item_coa_propose = " + id_report + "; "
+                    execute_non_query(qd, True, "", "", "", "")
+                End If
+
+                'update status
+                query = String.Format("UPDATE tb_item_coa_propose SET id_report_status='{0}' WHERE id_item_coa_propose ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+
+                'refresh view
+                FormItemCatMappingDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                FormItemCatMappingDet.actionLoad()
+                FormItemCatMapping.viewPropose()
+                FormItemCatMapping.GVPropose.FocusedRowHandle = find_row(FormItemCatMapping.GVPropose, "id_item_coa_propose", id_report)
+            ElseIf report_mark_type = "136" Then
+                'Expense BUDGET
+                'auto completed
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
+
+                If id_status_reportx = "6" Then
+                    'budget year & month
+                    Dim idb_new As String = "0"
+                    Dim idy As String = "0"
+                    Dim qall As String = "SELECT y.id_b_expense_propose_year, y.id_b_expense_propose, y.year, y.id_item_coa, y.value_expense AS `value_year`,
                 m.id_b_expense_propose_month, m.month, m.value_expense 
                 FROM tb_b_expense_propose_year y 
                 INNER JOIN tb_b_expense_propose_month m ON m.id_b_expense_propose_year = y.id_b_expense_propose_year
                 WHERE y.id_b_expense_propose=" + id_report + "
                 ORDER BY y.id_b_expense_propose_year ASC "
-                Dim dall As DataTable = execute_query(qall, -1, True, "", "", "", "")
-                For i As Integer = 0 To dall.Rows.Count - 1
-                    If idy <> dall.Rows(i)("id_b_expense_propose_year").ToString Then
-                        'isi id year baru jika ud beda dengan row saat ini
-                        idy = dall.Rows(i)("id_b_expense_propose_year").ToString
+                    Dim dall As DataTable = execute_query(qall, -1, True, "", "", "", "")
+                    For i As Integer = 0 To dall.Rows.Count - 1
+                        If idy <> dall.Rows(i)("id_b_expense_propose_year").ToString Then
+                            'isi id year baru jika ud beda dengan row saat ini
+                            idy = dall.Rows(i)("id_b_expense_propose_year").ToString
 
-                        'insert budget tahunan
-                        Dim qyi As String = "INSERT INTO tb_b_expense(year, id_item_coa, value_expense)
+                            'insert budget tahunan
+                            Dim qyi As String = "INSERT INTO tb_b_expense(year, id_item_coa, value_expense)
                         VALUES('" + dall.Rows(i)("year").ToString + "', '" + dall.Rows(i)("id_item_coa").ToString + "','" + decimalSQL(dall.Rows(i)("value_year").ToString) + "'); SELECT LAST_INSERT_ID(); "
-                        idb_new = execute_query(qyi, 0, True, "", "", "", "")
+                            idb_new = execute_query(qyi, 0, True, "", "", "", "")
 
-                        'insert log budget tahunan
-                        Dim qyl As String = "INSERT INTO tb_b_expense_log(id_b_expense, value_old, value_new, log_date, id_user, id_report, report_mark_type)
+                            'insert log budget tahunan
+                            Dim qyl As String = "INSERT INTO tb_b_expense_log(id_b_expense, value_old, value_new, log_date, id_user, id_report, report_mark_type)
                         VALUES('" + idb_new + "', 0, '" + decimalSQL(dall.Rows(i)("value_year").ToString) + "', NOW(),'" + id_user + "', '" + id_report + "', 136); "
-                        execute_non_query(qyl, True, "", "", "", "")
-                    End If
+                            execute_non_query(qyl, True, "", "", "", "")
+                        End If
 
-                    'insert detil bulanan
-                    Dim qm As String = "INSERT INTO tb_b_expense_month(id_b_expense, month, value_expense) VALUES
+                        'insert detil bulanan
+                        Dim qm As String = "INSERT INTO tb_b_expense_month(id_b_expense, month, value_expense) VALUES
                     ('" + idb_new + "', '" + DateTime.Parse(dall.Rows(i)("month").ToString).ToString("yyyy-MM-dd") + "', '" + decimalSQL(dall.Rows(i)("value_expense").ToString) + "'); SELECT LAST_INSERT_ID(); "
-                    Dim idb_month_new As String = execute_query(qm, 0, True, "", "", "", "")
+                        Dim idb_month_new As String = execute_query(qm, 0, True, "", "", "", "")
 
-                    'insert log detil bulanan
-                    Dim qmlog As String = "INSERT INTO tb_b_expense_month_log(id_b_expense_month, value_old, value_new, log_date, id_user, id_report, report_mark_type)
+                        'insert log detil bulanan
+                        Dim qmlog As String = "INSERT INTO tb_b_expense_month_log(id_b_expense_month, value_old, value_new, log_date, id_user, id_report, report_mark_type)
                     VALUES('" + idb_month_new + "', 0 ,'" + decimalSQL(dall.Rows(i)("value_expense").ToString) + "', NOW(), '" + id_user + "', '" + id_report + "', 136); "
-                    execute_non_query(qmlog, True, "", "", "", "")
-                Next
-            End If
+                        execute_non_query(qmlog, True, "", "", "", "")
+                    Next
+                End If
 
 
-            'update status
-            query = String.Format("UPDATE tb_b_expense_propose SET id_report_status='{0}' WHERE id_b_expense_propose ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
+                'update status
+                query = String.Format("UPDATE tb_b_expense_propose SET id_report_status='{0}' WHERE id_b_expense_propose ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
 
-            'refresh view
-            FormBudgetExpenseProposeDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-            FormBudgetExpenseProposeDet.actionLoad()
-            FormBudgetExpensePropose.viewData()
-            FormBudgetExpensePropose.GVData.FocusedRowHandle = find_row(FormBudgetExpensePropose.GVData, "id_b_expense_propose", id_report)
-        ElseIf report_mark_type = "137" Then
-            'Purchase request
-            'auto completed
-            If id_status_reportx = "3" Then
-                id_status_reportx = "6"
-            End If
+                'refresh view
+                FormBudgetExpenseProposeDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                FormBudgetExpenseProposeDet.actionLoad()
+                FormBudgetExpensePropose.viewData()
+                FormBudgetExpensePropose.GVData.FocusedRowHandle = find_row(FormBudgetExpensePropose.GVData, "id_b_expense_propose", id_report)
+            ElseIf report_mark_type = "137" Then
+                'Purchase request
+                'auto completed
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                ElseIf id_status_reportx = "5" Then
+                    'Cancel Storage
+                    Dim query_trans As String = "INSERT INTO `tb_b_expense_trans`(id_b_expense,date_trans,-`value`,is_actual,id_report,report_mark_type) 
+                                                 SELECT id_b_expense,NOW(),`value`,'2' AS is_actual,id_purc_req AS id_report,'137' AS report_mark_type
+                                                 FROM tb_purc_req_det prd
+                                                 WHERE prd.`id_purc_req`='" & id_report & "'"
+                    execute_non_query(query_trans, True, "", "", "", "")
+                End If
 
-            'update status
-            query = String.Format("UPDATE tb_purc_req SET id_report_status='{0}' WHERE id_purc_req ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-        ElseIf report_mark_type = "138" Then
-            'Expense BUDGET revision
-            'auto completed
-            If id_status_reportx = "3" Then
-                id_status_reportx = "6"
-            End If
+                'update status
+                query = String.Format("UPDATE tb_purc_req SET id_report_status='{0}' WHERE id_purc_req ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+            ElseIf report_mark_type = "138" Then
+                'Expense BUDGET revision
+                'auto completed
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
 
-            If id_status_reportx = "6" Then
-                'budget yearly & monthly yg sudqah ada
-                Dim qupd_yearly As String = "UPDATE tb_b_expense main
+                If id_status_reportx = "6" Then
+                    'budget yearly & monthly yg sudqah ada
+                    Dim qupd_yearly As String = "UPDATE tb_b_expense main
                 INNER JOIN (
 	                SELECT ry.id_b_expense,ry.value_new
 	                FROM tb_b_expense_revision_year ry
@@ -4066,53 +4199,53 @@
                 SELECT rd.id_b_expense_month, rd.value_expense_old, rd.value_expense_new, NOW(), '" + id_user + "', '" + id_report + "', 138
 	            FROM tb_b_expense_revision_det rd
 	            WHERE rd.id_b_expense_revision=" + id_report + " AND !ISNULL(rd.id_b_expense_month); "
-                execute_non_query(qupd_yearly, True, "", "", "", "")
+                    execute_non_query(qupd_yearly, True, "", "", "", "")
 
-                'belum ada yearly
-                Dim idb_new As String = "0"
-                Dim idy As String = "0"
-                Dim qall As String = "SELECT ry.id_b_expense_revision_year,r.year, ry.id_item_coa, ry.value_new, rd.value_expense_old, rd.value_expense_new
+                    'belum ada yearly
+                    Dim idb_new As String = "0"
+                    Dim idy As String = "0"
+                    Dim qall As String = "SELECT ry.id_b_expense_revision_year,r.year, ry.id_item_coa, ry.value_new, rd.month,rd.value_expense_old, rd.value_expense_new
                 FROM tb_b_expense_revision_year ry 
-                INNER JOIN tb_b_expense_revision_det rd ON rd.id_item_coa = ry.id_item_coa
+                INNER JOIN tb_b_expense_revision_det rd ON rd.id_item_coa = ry.id_item_coa AND rd.id_b_expense_revision=" + id_report + "
                 INNER JOIN tb_b_expense_revision r ON r.id_b_expense_revision = ry.id_b_expense_revision
                 WHERE ry.id_b_expense_revision=" + id_report + " AND ISNULL(ry.id_b_expense) "
-                Dim dall As DataTable = execute_query(qall, -1, True, "", "", "", "")
-                For i As Integer = 0 To dall.Rows.Count - 1
-                    If idy <> dall.Rows(i)("id_b_expense_revision_year").ToString Then
-                        'isi id year baru jika ud beda dengan row saat ini
-                        idy = dall.Rows(i)("id_b_expense_revision_year").ToString
+                    Dim dall As DataTable = execute_query(qall, -1, True, "", "", "", "")
+                    For i As Integer = 0 To dall.Rows.Count - 1
+                        If idy <> dall.Rows(i)("id_b_expense_revision_year").ToString Then
+                            'isi id year baru jika ud beda dengan row saat ini
+                            idy = dall.Rows(i)("id_b_expense_revision_year").ToString
 
-                        'insert budget tahunan
-                        Dim qyi As String = "INSERT INTO tb_b_expense(year, id_item_coa, value_expense)
+                            'insert budget tahunan
+                            Dim qyi As String = "INSERT INTO tb_b_expense(year, id_item_coa, value_expense)
                         VALUES('" + dall.Rows(i)("year").ToString + "', '" + dall.Rows(i)("id_item_coa").ToString + "','" + decimalSQL(dall.Rows(i)("value_new").ToString) + "'); SELECT LAST_INSERT_ID(); "
-                        idb_new = execute_query(qyi, 0, True, "", "", "", "")
+                            idb_new = execute_query(qyi, 0, True, "", "", "", "")
 
-                        'insert log budget tahunan
-                        Dim qyl As String = "INSERT INTO tb_b_expense_log(id_b_expense, value_old, value_new, log_date, id_user, id_report, report_mark_type)
+                            'insert log budget tahunan
+                            Dim qyl As String = "INSERT INTO tb_b_expense_log(id_b_expense, value_old, value_new, log_date, id_user, id_report, report_mark_type)
                         VALUES('" + idb_new + "', 0, '" + decimalSQL(dall.Rows(i)("value_new").ToString) + "', NOW(),'" + id_user + "', '" + id_report + "', 138); "
-                        execute_non_query(qyl, True, "", "", "", "")
-                    End If
+                            execute_non_query(qyl, True, "", "", "", "")
+                        End If
 
-                    'insert detil bulanan
-                    Dim qm As String = "INSERT INTO tb_b_expense_month(id_b_expense, month, value_expense) VALUES
+                        'insert detil bulanan
+                        Dim qm As String = "INSERT INTO tb_b_expense_month(id_b_expense, month, value_expense) VALUES
                     ('" + idb_new + "', '" + DateTime.Parse(dall.Rows(i)("month").ToString).ToString("yyyy-MM-dd") + "', '" + decimalSQL(dall.Rows(i)("value_expense_new").ToString) + "'); SELECT LAST_INSERT_ID(); "
-                    Dim idb_month_new As String = execute_query(qm, 0, True, "", "", "", "")
+                        Dim idb_month_new As String = execute_query(qm, 0, True, "", "", "", "")
 
-                    'insert log detil bulanan
-                    Dim qmlog As String = "INSERT INTO tb_b_expense_month_log(id_b_expense_month, value_old, value_new, log_date, id_user, id_report, report_mark_type)
+                        'insert log detil bulanan
+                        Dim qmlog As String = "INSERT INTO tb_b_expense_month_log(id_b_expense_month, value_old, value_new, log_date, id_user, id_report, report_mark_type)
                     VALUES('" + idb_month_new + "', 0 ,'" + decimalSQL(dall.Rows(i)("value_expense_new").ToString) + "', NOW(), '" + id_user + "', '" + id_report + "', 138); "
-                    execute_non_query(qmlog, True, "", "", "", "")
-                Next
+                        execute_non_query(qmlog, True, "", "", "", "")
+                    Next
 
-                'belum ada monthly
-                'insert detil bulanan
-                Dim qm_new As String = "INSERT INTO tb_b_expense_month(id_b_expense, month, value_expense) 
+                    'belum ada monthly
+                    'insert detil bulanan
+                    Dim qm_new As String = "INSERT INTO tb_b_expense_month(id_b_expense, month, value_expense) 
                 SELECT rd.id_b_expense, rd.month, rd.value_expense_new
                 FROM tb_b_expense_revision_det rd
                 WHERE rd.id_b_expense_revision=" + id_report + " AND ISNULL(rd.id_b_expense_month) AND !ISNULL(rd.id_b_expense) "
-                execute_non_query(qm_new, True, "", "", "", "")
-                'insert del bulanan log
-                Dim qm_new_log As String = "INSERT INTO tb_b_expense_month_log(id_b_expense_month, value_old, value_new, log_date, id_user, id_report, report_mark_type)
+                    execute_non_query(qm_new, True, "", "", "", "")
+                    'insert del bulanan log
+                    Dim qm_new_log As String = "INSERT INTO tb_b_expense_month_log(id_b_expense_month, value_old, value_new, log_date, id_user, id_report, report_mark_type)
                 SELECT em.id_b_expense_month, rd.value_expense_old, rd.value_expense_new, NOW(),'" + id_user + "','" + id_report + "',138
                 FROM tb_b_expense_revision_det rd
                 INNER JOIN tb_b_expense_month em ON em.month = rd.month AND rd.id_b_expense = em.id_b_expense
@@ -4120,39 +4253,39 @@
                 WHERE rd.id_b_expense_revision='" + id_report + "'
                 AND ISNULL(rd.id_b_expense_month) 
                 AND !ISNULL(rd.id_b_expense) "
-                execute_non_query(qm_new_log, True, "", "", "", "")
-            End If
+                    execute_non_query(qm_new_log, True, "", "", "", "")
+                End If
 
-            'update status
-            query = String.Format("UPDATE tb_b_expense_revision SET id_report_status='{0}' WHERE id_b_expense_revision ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
+                'update status
+                query = String.Format("UPDATE tb_b_expense_revision SET id_report_status='{0}' WHERE id_b_expense_revision ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
 
-            'refresh view
-            FormBudgetExpenseRevisionDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-            FormBudgetExpenseRevisionDet.actionLoad()
-            FormBudgetExpenseRevision.viewData()
-            FormBudgetExpenseRevision.GVData.FocusedRowHandle = find_row(FormBudgetExpenseRevision.GVData, "id_b_expense_revision", id_report)
-        ElseIf report_mark_type = "139" Then
-            'Purchase Order
-            'auto completed
-            If id_status_reportx = "3" Then
-                id_status_reportx = "6"
-            End If
+                'refresh view
+                FormBudgetExpenseRevisionDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                FormBudgetExpenseRevisionDet.actionLoad()
+                FormBudgetExpenseRevision.viewData()
+                FormBudgetExpenseRevision.GVData.FocusedRowHandle = find_row(FormBudgetExpenseRevision.GVData, "id_b_expense_revision", id_report)
+            ElseIf report_mark_type = "139" Then
+                'Purchase Order
+                'auto completed
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
 
-            'update status
-            query = String.Format("UPDATE tb_purc_order SET id_report_status='{0}' WHERE id_purc_order ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-        ElseIf report_mark_type = "143" Or report_mark_type = "144" Or report_mark_type = "145" Then
-            Cursor = Cursors.WaitCursor
-            'pd revision
-            'auto completed
-            If id_status_reportx = "3" Then
-                id_status_reportx = "6"
-            End If
+                'update status
+                query = String.Format("UPDATE tb_purc_order SET id_report_status='{0}' WHERE id_purc_order ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+            ElseIf report_mark_type = "143" Or report_mark_type = "144" Or report_mark_type = "145" Then
+                Cursor = Cursors.WaitCursor
+                'pd revision
+                'auto completed
+                If id_status_reportx = "2" Then
+                    id_status_reportx = "6"
+                End If
 
-            If id_status_reportx = "6" Then
-                'non aktifkan pd dan po
-                Dim query_void As String = "UPDATE tb_prod_demand_design main
+                If id_status_reportx = "6" Then
+                    'non aktifkan pd dan po
+                    Dim query_void As String = "UPDATE tb_prod_demand_design main
                 INNER JOIN (
 	                SELECT rd.id_prod_demand_design, rd.id_prod_demand_design_rev
 	                FROM tb_prod_demand_design_rev rd
@@ -4167,17 +4300,26 @@
 	                INNER JOIN tb_prod_order po ON po.id_prod_demand_design = rd.id_prod_demand_design AND po.id_report_status!=5
 	                WHERE rd.id_prod_demand_rev=" + id_report + "
                 ) src ON src.id_prod_order = main.id_prod_order
-                SET main.id_report_status=5,main.is_void=1, main.void_reason = src.note; "
-                execute_non_query(query_void, True, "", "", "", "")
+                SET main.id_report_status=5,main.is_void=1, main.void_reason = src.note;
+                UPDATE tb_report_mark main 
+                INNER JOIN (
+	                SELECT po.id_prod_order, po.prod_order_number, r.note
+	                FROM tb_prod_demand_design_rev rd
+	                INNER JOIN tb_prod_demand_rev r ON r.id_prod_demand_rev = rd.id_prod_demand_rev
+	                INNER JOIN tb_prod_order po ON po.id_prod_demand_design = rd.id_prod_demand_design
+	                WHERE rd.id_prod_demand_rev=" + id_report + "
+                ) src ON src.id_prod_order = main.id_report AND main.report_mark_type=22
+                SET report_mark_lead_time=NULL,report_mark_start_datetime=NULL; "
+                    execute_non_query(query_void, True, "", "", "", "")
 
 
-                Dim qpr As String = "SELECT * FROM tb_prod_demand_design_rev pdd 
+                    Dim qpr As String = "SELECT * FROM tb_prod_demand_design_rev pdd 
                 INNER JOIN tb_prod_demand_rev pd ON pd.id_prod_demand_rev = pdd.id_prod_demand_rev
-                WHERE pdd.id_prod_demand_rev=" + id_report + " "
-                Dim dpr As DataTable = execute_query(qpr, -1, True, "", "", "", "")
-                For i As Integer = 0 To dpr.Rows.Count - 1
-                    'insert new pdd
-                    Dim qins As String = "INSERT INTO tb_prod_demand_design (
+                WHERE pdd.id_prod_demand_rev=" + id_report + " AND pdd.id_pd_status_rev=1 "
+                    Dim dpr As DataTable = execute_query(qpr, -1, True, "", "", "", "")
+                    For i As Integer = 0 To dpr.Rows.Count - 1
+                        'insert new pdd
+                        Dim qins As String = "INSERT INTO tb_prod_demand_design (
 	                `id_prod_demand`,
 	                `id_delivery` ,
 	                `id_design` ,
@@ -4216,10 +4358,10 @@
                     '" + dpr.Rows(i)("id_prod_demand_design_rev").ToString + "',
                     '" + dpr.Rows(i)("id_prod_demand_design").ToString + "'
                     ); SELECT LAST_INSERT_ID();"
-                    Dim id_prod_demand_design As String = execute_query(qins, 0, True, "", "", "", "")
+                        Dim id_prod_demand_design As String = execute_query(qins, 0, True, "", "", "", "")
 
-                    'insert new pdp
-                    Dim qins_pdp As String = "INSERT INTO tb_prod_demand_product (
+                        'insert new pdp
+                        Dim qins_pdp As String = "INSERT INTO tb_prod_demand_product (
 	                `id_prod_demand_design`,
 	                `id_product`,
 	                `id_bom`,
@@ -4228,10 +4370,10 @@
                     SELECT '" + id_prod_demand_design + "', pdp.id_product, pdp.id_bom, pdp.prod_demand_product_qty 
                     FROM tb_prod_demand_product_rev pdp
                     WHERE pdp.id_prod_demand_design_rev=" + dpr.Rows(i)("id_prod_demand_design_rev").ToString + "; SELECT LAST_INSERT_ID();"
-                    Dim id_prod_demand_product As String = execute_query(qins_pdp, 0, True, "", "", "", "")
+                        Dim id_prod_demand_product As String = execute_query(qins_pdp, 0, True, "", "", "", "")
 
-                    'insert new pdp alloc
-                    Dim qins_alloc As String = "INSERT INTO tb_prod_demand_alloc (
+                        'insert new pdp alloc
+                        Dim qins_alloc As String = "INSERT INTO tb_prod_demand_alloc (
                     `id_prod_demand_product`,
                     `id_pd_alloc`,
                     `prod_demand_alloc_qty`
@@ -4240,102 +4382,1140 @@
                     FROM tb_prod_demand_alloc_rev a
                     INNER JOIN tb_prod_demand_product_rev pdp ON pdp.id_prod_demand_product_rev = a.id_prod_demand_product_rev
                     WHERE pdp.id_prod_demand_design_rev=" + dpr.Rows(i)("id_prod_demand_design_rev").ToString + "; "
-                    execute_non_query(qins_alloc, True, "", "", "", "")
-                Next
-            End If
+                        execute_non_query(qins_alloc, True, "", "", "", "")
+                    Next
+                End If
 
-            'update status
-            query = String.Format("UPDATE tb_prod_demand_rev SET id_report_status='{0}' WHERE id_prod_demand_rev ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
+                'update status
+                query = String.Format("UPDATE tb_prod_demand_rev SET id_report_status='{0}' WHERE id_prod_demand_rev ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
 
-            'refresh view
-            FormProdDemandRevDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
-            FormProdDemandRevDet.actionLoad()
-            FormProdDemandRev.viewData()
-            FormProdDemandRev.GVData.FocusedRowHandle = find_row(FormProdDemandRev.GVData, "id_prod_demand_rev", id_report)
-            Cursor = Cursors.Default
-        ElseIf report_mark_type = "142" Then
-            'Cancel Report
-            'auto on process
-            If id_status_reportx = "6" Then
-                'complete
-                Dim query_cancel As String = "SELECT rmcr.id_report,rmc.report_mark_type 
+                'refresh view
+                FormProdDemandRevDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)
+                FormProdDemandRevDet.actionLoad()
+                FormProdDemandRev.viewData()
+                FormProdDemandRev.GVData.FocusedRowHandle = find_row(FormProdDemandRev.GVData, "id_prod_demand_rev", id_report)
+                Cursor = Cursors.Default
+            ElseIf report_mark_type = "142" Then
+                'Cancel Report
+                'auto on process
+                If id_status_reportx = "6" Then
+                    'complete
+                    Dim query_cancel As String = "SELECT rmcr.id_report,rmc.report_mark_type 
                                                 FROM tb_report_mark_cancel_report rmcr
                                                 INNER JOIN tb_report_mark_cancel rmc ON rmc.id_report_mark_cancel=rmcr.id_report_mark_cancel
                                                 WHERE rmc.id_report_mark_cancel='" & id_report & "'"
-                Dim data_cancel As DataTable = execute_query(query_cancel, -1, True, "", "", "", "")
-                For j As Integer = 0 To data_cancel.Rows.Count - 1
-                    Dim xf As New FormReportMark
-                    xf.id_report = data_cancel.Rows(j)("id_report").ToString
-                    xf.report_mark_type = data_cancel.Rows(j)("report_mark_type").ToString
-                    xf.change_status("5")
-                Next
-                query = String.Format("UPDATE tb_report_mark_cancel SET user_complete='{0}',complete_datetime=NOW() WHERE id_report_mark_cancel ='{1}'", id_user, id_report)
-                execute_non_query(query, True, "", "", "", "")
-            Else
-                Dim query_check As String = "SELECT * FROM tb_report_mark WHERE report_mark_type='142' AND id_report='" & id_report & "' AND id_report_status>" & id_status_reportx
-                Dim data_check As DataTable = execute_query(query_check, -1, True, "", "", "", "")
-                If data_check.Rows.Count = 0 Then
-                    'auto on process
-                    id_status_reportx = 5
+                    Dim data_cancel As DataTable = execute_query(query_cancel, -1, True, "", "", "", "")
+                    For j As Integer = 0 To data_cancel.Rows.Count - 1
+                        Dim xf As New FormReportMark
+                        xf.id_report = data_cancel.Rows(j)("id_report").ToString
+                        xf.report_mark_type = data_cancel.Rows(j)("report_mark_type").ToString
+                        xf.change_status("5")
+                    Next
+                    query = String.Format("UPDATE tb_report_mark_cancel SET user_complete='{0}',complete_datetime=NOW() WHERE id_report_mark_cancel ='{1}'", id_user, id_report)
+                    execute_non_query(query, True, "", "", "", "")
+                Else
+                    Dim query_check As String = "SELECT * FROM tb_report_mark WHERE report_mark_type='142' AND id_report='" & id_report & "' AND id_report_status>" & id_status_reportx
+                    Dim data_check As DataTable = execute_query(query_check, -1, True, "", "", "", "")
+                    If data_check.Rows.Count = 0 Then
+                        'auto on process
+                        id_status_reportx = 4
+                    End If
                 End If
-            End If
-            'update status
-            query = String.Format("UPDATE tb_report_mark_cancel SET id_report_status='{0}' WHERE id_report_mark_cancel ='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
-        ElseIf report_mark_type = "147" Then
-            'auto completed
-            If id_status_reportx = "3" Then
-                id_status_reportx = "6"
-            End If
+                'update status
+                query = String.Format("UPDATE tb_report_mark_cancel SET id_report_status='{0}' WHERE id_report_mark_cancel ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+            ElseIf report_mark_type = "147" Then
+                'auto completed
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
 
-            'completed
-            If id_status_reportx = "6" Then
-                Dim qr As String = "SELECT IFNULL(rv.id_b_revenue,0) AS  `id_b_revenue`,r.`year`,
+                'completed
+                If id_status_reportx = "6" Then
+                    Dim qr As String = "SELECT IFNULL(rv.id_b_revenue,0) AS  `id_b_revenue`,r.`year`,
                 rd.id_b_revenue_revision_det, rd.id_b_revenue_revision, rd.id_store, rd.`month`, rd.value_expense_old, rd.value_expense_new
                 FROM tb_b_revenue_revision_det rd
                 INNER JOIN tb_b_revenue_revision r ON r.id_b_revenue_revision = rd.id_b_revenue_revision
                 LEFT JOIN tb_b_revenue rv ON rv.`year`=r.`year` AND rv.`month` = rd.`month` AND rv.id_store = rd.id_store AND rv.is_active=1
                 WHERE r.id_b_revenue_revision=" + id_report + " "
-                Dim dr As DataTable = execute_query(qr, -1, True, "", "", "", "")
-                For i As Integer = 0 To dr.Rows.Count - 1
-                    Dim id_b_revenue As String = dr.Rows(i)("id_b_revenue").ToString
-                    Dim year As String = dr.Rows(i)("year").ToString
-                    Dim month As String = dr.Rows(i)("month").ToString
-                    Dim id_store As String = dr.Rows(i)("id_store").ToString
-                    Dim b_revenue As String = decimalSQL(dr.Rows(i)("value_expense_new").ToString)
-                    Dim value_old As String = decimalSQL(dr.Rows(i)("value_expense_old").ToString)
-                    Dim value_new As String = decimalSQL(dr.Rows(i)("value_expense_new").ToString)
-                    If id_b_revenue = "0" Then
-                        'insert budget
-                        Dim qi As String = "INSERT INTO tb_b_revenue(year, month, id_store, b_revenue) VALUES 
+                    Dim dr As DataTable = execute_query(qr, -1, True, "", "", "", "")
+                    For i As Integer = 0 To dr.Rows.Count - 1
+                        Dim id_b_revenue As String = dr.Rows(i)("id_b_revenue").ToString
+                        Dim year As String = dr.Rows(i)("year").ToString
+                        Dim month As String = dr.Rows(i)("month").ToString
+                        Dim id_store As String = dr.Rows(i)("id_store").ToString
+                        Dim b_revenue As String = decimalSQL(dr.Rows(i)("value_expense_new").ToString)
+                        Dim value_old As String = decimalSQL(dr.Rows(i)("value_expense_old").ToString)
+                        Dim value_new As String = decimalSQL(dr.Rows(i)("value_expense_new").ToString)
+                        If id_b_revenue = "0" Then
+                            'insert budget
+                            Dim qi As String = "INSERT INTO tb_b_revenue(year, month, id_store, b_revenue) VALUES 
                        ('" + year + "', '" + month + "', '" + id_store + "', '" + b_revenue + "'); SELECT LAST_INSERT_ID(); "
-                        id_b_revenue = execute_query(qi, 0, True, "", "", "", "")
+                            id_b_revenue = execute_query(qi, 0, True, "", "", "", "")
 
-                        'insert log
-                        Dim ql As String = "INSERT INTO tb_b_revenue_log(id_b_revenue, value_old, value_new, log_date, id_user, id_report, report_mark_type) VALUES 
+                            'insert log
+                            Dim ql As String = "INSERT INTO tb_b_revenue_log(id_b_revenue, value_old, value_new, log_date, id_user, id_report, report_mark_type) VALUES 
                         ('" + id_b_revenue + "', '" + value_old + "', '" + value_new + "', NOW(), '" + id_user + "', '" + id_report + "', '147'); "
-                        execute_non_query(ql, True, "", "", "", "")
-                    Else
-                        'edit budget 
-                        Dim qu As String = "UPDATE tb_b_revenue SET b_revenue='" + b_revenue + "' WHERE id_b_revenue='" + id_b_revenue + "' "
-                        execute_non_query(qu, True, "", "", "", "")
+                            execute_non_query(ql, True, "", "", "", "")
+                        Else
+                            'edit budget 
+                            Dim qu As String = "UPDATE tb_b_revenue SET b_revenue='" + b_revenue + "' WHERE id_b_revenue='" + id_b_revenue + "' "
+                            execute_non_query(qu, True, "", "", "", "")
 
-                        'edit log budget
-                        Dim ql As String = "INSERT INTO tb_b_revenue_log(id_b_revenue, value_old, value_new, log_date, id_user, id_report, report_mark_type) VALUES 
+                            'edit log budget
+                            Dim ql As String = "INSERT INTO tb_b_revenue_log(id_b_revenue, value_old, value_new, log_date, id_user, id_report, report_mark_type) VALUES 
                         ('" + id_b_revenue + "', '" + value_old + "', '" + value_new + "', NOW(), '" + id_user + "', '" + id_report + "', '147'); "
-                        execute_non_query(ql, True, "", "", "", "")
+                            execute_non_query(ql, True, "", "", "", "")
+                        End If
+                    Next
+                End If
+
+                'update status
+                query = String.Format("UPDATE tb_b_revenue_revision SET id_report_status='{0}' WHERE id_b_revenue_revision ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+
+                'refresh view
+                FormBudgetRevPropose.viewRevision()
+                FormBudgetRevPropose.GVRevision.FocusedRowHandle = find_row(FormBudgetRevPropose.GVRevision, "id_b_revenue_revision", id_report)
+            ElseIf report_mark_type = "148" Then
+                'PURCHASE RECEIVE NON ASSET
+                'auto completed
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
+
+                'completed
+                If id_status_reportx = "6" Then
+                    'stock only OPEX
+                    Dim qs As String = "INSERT INTO tb_storage_item (
+                    `id_departement`,
+	                `id_storage_category`,
+	                `id_item`,
+	                `value`,
+	                `report_mark_type`,
+	                `id_report`,
+	                `storage_item_qty`,
+	                `storage_item_datetime`,
+	                `storage_item_notes`,
+	                `id_stock_status`
+                ) 
+                SELECT rq.id_departement, 1, rd.id_item, pod.`value`, 148, " + id_report + ", rd.qty, NOW(),'', 1
+                FROM tb_purc_rec_det rd
+                INNER JOIN tb_purc_order_det pod ON pod.id_purc_order_det = rd.id_purc_order_det
+                INNER JOIN tb_purc_req_det rqd ON rqd.id_purc_req_det = pod.id_purc_req_det
+                INNER JOIN tb_purc_req rq ON rq.id_purc_req = rqd.id_purc_req
+                INNER JOIN tb_item i ON i.id_item = rd.id_item
+                INNER JOIN tb_item_cat cat ON cat.id_item_cat = i.id_item_cat
+                WHERE rd.id_purc_rec=" + id_report + " AND cat.id_expense_type=1; "
+                    execute_non_query(qs, True, "", "", "", "")
+
+                    'asset
+                    Dim qa As String = "SELECT rd.id_item, rd.id_purc_rec_det, rd.qty, coa.id_coa_out, rq.id_departement, i.item_desc, NOW(), (pod.`value` - pod.discount) AS `cost`, 2
+                FROM tb_purc_rec_det rd
+                INNER JOIN tb_purc_order_det pod ON pod.id_purc_order_det = rd.id_purc_order_det
+                INNER JOIN tb_purc_req_det rqd ON rqd.id_purc_req_det = pod.id_purc_order_det
+                INNER JOIN tb_purc_req rq ON rq.id_purc_req = rqd.id_purc_req
+                INNER JOIN tb_item i ON i.id_item = rd.id_item
+                INNER JOIN tb_item_cat cat ON cat.id_item_cat = i.id_item_cat
+                INNER JOIN tb_lookup_expense_type et ON et.id_expense_type = cat.id_expense_type
+                INNER JOIN tb_item_coa coa ON coa.id_item_cat = cat.id_item_cat AND coa.id_departement=rq.id_departement
+                WHERE rd.id_purc_rec=" + id_report + " AND et.id_expense_type=2 "
+                    Dim da As DataTable = execute_query(qa, -1, True, "", "", "", "")
+                    If da.Rows.Count > 0 Then
+                        Dim ix As Integer = 0
+                        Dim qa_ins As String = "INSERT INTO tb_purc_rec_asset (`id_item`,`id_purc_rec_det`,`id_departement`, `id_acc_fa`,`asset_name`,`acq_date`,`acq_cost`) VALUES "
+                        For a As Integer = 0 To da.Rows.Count - 1
+                            For j As Integer = 1 To da.Rows(a)("qty")
+                                If ix > 0 Then
+                                    qa_ins += ", "
+                                End If
+
+                                qa_ins += "('" + da.Rows(a)("id_item").ToString + "', '" + da.Rows(a)("id_purc_rec_det").ToString + "', '" + da.Rows(a)("id_departement").ToString + "', '" + da.Rows(a)("id_coa_out").ToString + "', '" + da.Rows(a)("item_desc").ToString + "', NOW(), '" + decimalSQL(da.Rows(a)("cost").ToString) + "') "
+                                ix += 1
+                            Next
+                        Next
+
+                        'ins 
+                        If ix > 0 Then
+                            execute_non_query(qa_ins, True, "", "", "", "")
+                        End If
                     End If
-                Next
+
+
+                    ' select user prepared 
+                    Dim qu As String = "SELECT rm.id_user, rm.report_number FROM tb_report_mark rm WHERE rm.report_mark_type=" + report_mark_type + " AND rm.id_report='" + id_report + "' AND rm.id_report_status=1 "
+                    Dim du As DataTable = execute_query(qu, -1, True, "", "", "", "")
+                    Dim id_user_prepared As String = du.Rows(0)("id_user").ToString
+                    Dim report_number As String = du.Rows(0)("report_number").ToString
+
+                    'main journal
+                    Dim qjm As String = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created, acc_trans_note, id_report_status) 
+                VALUES ('" + header_number_acc("1") + "','" + report_number + "','0','" + id_user_prepared + "', NOW(), 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
+                    Dim id_acc_trans As String = execute_query(qjm, 0, True, "", "", "", "")
+                    increase_inc_acc("1")
+
+                    'det journal
+                    Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_comp, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number)
+                /*total value item inventory*/
+                SELECT " + id_acc_trans + ",o.acc_coa_receive AS `id_acc`, cont.id_comp,  SUM(rd.qty) AS `qty`,
+                SUM(rd.qty * (pod.`value`-pod.discount))-((SUM(rd.qty * (pod.`value`-pod.discount))/(poall.`value`))*poall.disc_value) AS `debit`, 
+                0 AS `credit`,'' AS `note`,148,rd.id_purc_rec, r.purc_rec_number
+                FROM tb_purc_rec_det rd
+                INNER JOIN tb_purc_rec r ON r.id_purc_rec = rd.id_purc_rec
+                INNER JOIN tb_purc_order po ON po.id_purc_order = r.id_purc_order
+                INNER JOIN tb_m_comp_contact cont ON cont.id_comp_contact = po.id_comp_contact
+                INNER JOIN tb_purc_order_det pod ON pod.id_purc_order_det = rd.id_purc_order_det
+                INNER JOIN (
+ 	                SELECT pod.id_purc_order,SUM(pod.qty) AS `qty`, SUM(pod.qty*(pod.`value`-pod.discount)) AS `value`, po.disc_value
+	                FROM tb_purc_order_det pod
+	                INNER JOIN tb_purc_order po ON po.id_purc_order = pod.id_purc_order
+	                WHERE pod.id_purc_order=" + FormPurcReceiveDet.id_purc_order + "
+	                GROUP BY pod.id_purc_order
+                 ) poall ON poall.id_purc_order = r.id_purc_order
+                INNER JOIN tb_item i ON i.id_item = rd.id_item
+                INNER JOIN tb_item_cat cat ON cat.id_item_cat = i.id_item_cat
+                JOIN tb_opt_purchasing o
+                WHERE rd.id_purc_rec=" + id_report + " AND cat.id_expense_type=1
+                GROUP BY rd.id_purc_rec
+                UNION ALL
+                /*total value item asset*/
+                SELECT " + id_acc_trans + ",coa.id_coa_out AS `id_acc`, cont.id_comp,  SUM(rd.qty) AS `qty`,
+                SUM(rd.qty * (pod.`value`-pod.discount))-((SUM(rd.qty * (pod.`value`-pod.discount))/(poall.`value`))*poall.disc_value) AS `debit`, 
+                0 AS `credit`,'' AS `note`,148,rd.id_purc_rec, r.purc_rec_number
+                FROM tb_purc_rec_det rd
+                INNER JOIN tb_purc_rec r ON r.id_purc_rec = rd.id_purc_rec
+                INNER JOIN tb_purc_order po ON po.id_purc_order = r.id_purc_order
+                INNER JOIN tb_m_comp_contact cont ON cont.id_comp_contact = po.id_comp_contact
+                INNER JOIN tb_purc_order_det pod ON pod.id_purc_order_det = rd.id_purc_order_det
+                INNER JOIN (
+ 	                SELECT pod.id_purc_order,SUM(pod.qty) AS `qty`, SUM(pod.qty*(pod.`value`-pod.discount)) AS `value`, po.disc_value
+	                FROM tb_purc_order_det pod
+	                INNER JOIN tb_purc_order po ON po.id_purc_order = pod.id_purc_order
+	                WHERE pod.id_purc_order=" + FormPurcReceiveDet.id_purc_order + "
+	                GROUP BY pod.id_purc_order
+                ) poall ON poall.id_purc_order = r.id_purc_order
+                INNER JOIN tb_purc_req_det rqd ON rqd.id_purc_req_det = pod.id_purc_req_det
+                INNER JOIN tb_purc_req rq ON rq.id_purc_req  = rqd.id_purc_req
+                INNER JOIN tb_item i ON i.id_item = rd.id_item
+                INNER JOIN tb_item_cat cat ON cat.id_item_cat = i.id_item_cat 
+                INNER JOIN tb_item_coa coa ON coa.id_item_cat = cat.id_item_cat AND coa.id_departement = rq.id_departement
+                WHERE rd.id_purc_rec=" + id_report + " AND cat.id_expense_type=2
+                GROUP BY rd.id_purc_rec, rq.id_departement
+                UNION ALL
+                /*total vat in*/
+                SELECT " + id_acc_trans + ",o.acc_coa_vat_in AS `id_acc`, cont.id_comp,  SUM(rd.qty) AS `qty`,
+                (po.vat_percent/100)*(SUM(rd.qty * (pod.`value`-pod.discount))-((SUM(rd.qty * (pod.`value`-pod.discount))/(poall.`value`))*poall.disc_value)) AS `debit`, 
+                0 AS `credit`,'' AS `note`,148,rd.id_purc_rec, r.purc_rec_number
+                FROM tb_purc_rec_det rd
+                INNER JOIN tb_purc_rec r ON r.id_purc_rec = rd.id_purc_rec
+                INNER JOIN tb_purc_order po ON po.id_purc_order = r.id_purc_order
+                INNER JOIN tb_m_comp_contact cont ON cont.id_comp_contact = po.id_comp_contact
+                INNER JOIN tb_purc_order_det pod ON pod.id_purc_order_det = rd.id_purc_order_det
+                INNER JOIN (
+ 	                SELECT pod.id_purc_order,SUM(pod.qty) AS `qty`, SUM(pod.qty*(pod.`value`-pod.discount)) AS `value`, po.disc_value
+	                FROM tb_purc_order_det pod
+	                INNER JOIN tb_purc_order po ON po.id_purc_order = pod.id_purc_order
+	                WHERE pod.id_purc_order=" + FormPurcReceiveDet.id_purc_order + "
+	                GROUP BY pod.id_purc_order
+                ) poall ON poall.id_purc_order = r.id_purc_order
+                JOIN tb_opt_purchasing o
+                WHERE rd.id_purc_rec=" + id_report + " AND po.vat_percent>0
+                GROUP BY rd.id_purc_rec
+                UNION ALL
+                /*total value item inventory + total value item asset + vat in*/
+                SELECT " + id_acc_trans + ", comp.id_acc_ap AS `id_acc`, cont.id_comp, SUM(rd.qty) AS `qty`, 0 AS `debit`, 
+                SUM(rd.qty * (pod.`value`-pod.discount))-((SUM(rd.qty * (pod.`value`-pod.discount))/(poall.`value`))*poall.disc_value) + ((po.vat_percent/100)*(SUM(rd.qty * (pod.`value`-pod.discount))-((SUM(rd.qty * (pod.`value`-pod.discount))/(poall.`value`))*poall.disc_value))) AS `credit`,
+                '' AS `note`, 148, rd.id_purc_rec, r.purc_rec_number
+                FROM tb_purc_rec_det rd
+                INNER JOIN tb_purc_rec r ON r.id_purc_rec = rd.id_purc_rec
+                INNER JOIN tb_purc_order po ON po.id_purc_order = r.id_purc_order
+                INNER JOIN tb_m_comp_contact cont ON cont.id_comp_contact = po.id_comp_contact
+                INNER JOIN tb_m_comp comp ON comp.id_comp = cont.id_comp
+                INNER JOIN tb_purc_order_det pod ON pod.id_purc_order_det = rd.id_purc_order_det
+                INNER JOIN (
+ 	                SELECT pod.id_purc_order,SUM(pod.qty) AS `qty`, SUM(pod.qty*(pod.`value`-pod.discount)) AS `value`, po.disc_value
+	                FROM tb_purc_order_det pod
+	                INNER JOIN tb_purc_order po ON po.id_purc_order = pod.id_purc_order
+	                WHERE pod.id_purc_order=" + FormPurcReceiveDet.id_purc_order + "
+	                GROUP BY pod.id_purc_order
+                ) poall ON poall.id_purc_order = r.id_purc_order
+                WHERE rd.id_purc_rec=" + id_report + "
+                GROUP BY rd.id_purc_rec; "
+                    execute_non_query(qjd, True, "", "", "", "")
+                End If
+
+                'update
+                Dim query_complete As String = ""
+                If id_status_reportx = "6" Then
+                    query_complete = "CALL update_stt_purc_order(" + FormPurcReceiveDet.id_purc_order + ");"
+                End If
+                query = String.Format("UPDATE tb_purc_rec SET id_report_status='{0}' WHERE id_purc_rec ='{1}';" + query_complete, id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+
+                'refresh view
+                FormPurcReceiveDet.actionLoad()
+                FormPurcReceive.viewReceive()
+                FormPurcReceive.GVReceive.FocusedRowHandle = find_row(FormPurcReceive.GVReceive, "id_purc_rec", id_report)
+            ElseIf report_mark_type = "150" Or report_mark_type = "155" Then
+                'Cancel Report
+                'auto complete
+                If id_status_reportx = "3" Or id_status_reportx = "6" Then
+                    id_status_reportx = "6"
+                    'complete
+                    query = "UPDATE tb_m_design dsg
+INNER JOIN `tb_design_cop_propose_det` copd ON copd.id_design=dsg.id_design AND copd.`id_design_cop_propose`='" & id_report & "'
+SET  dsg.`prod_order_cop_pd_curr`=copd.`id_currency`,dsg.`prod_order_cop_kurs_pd`=copd.`kurs`,dsg.`prod_order_cop_pd`=copd.`design_cop`,dsg.`prod_order_cop_pd_vendor`=copd.`id_comp_contact`,dsg.`prod_order_cop_pd_addcost`=copd.`add_cost`"
+                    execute_non_query(query, True, "", "", "", "")
+                End If
+                'update status
+                query = String.Format("UPDATE tb_design_cop_propose SET id_report_status='{0}' WHERE id_design_cop_propose ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+            ElseIf report_mark_type = "151" Then
+                'claim return
+                'auto completed
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
+
+                'update status
+                query = String.Format("UPDATE tb_prod_claim_return SET id_report_status='{0}' WHERE id_prod_claim_return ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+
+                'refresh view
+                Try
+                    FormProductionClaimReturn.viewData()
+                    FormProductionClaimReturn.GVData.FocusedRowHandle = find_row(FormProductionClaimReturn.GVData, "id_prod_claim_return", id_report)
+                Catch ex As Exception
+                End Try
+            ElseIf report_mark_type = "152" Then
+                'purchase return
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
+                If id_status_reportx = "5" Then
+                    'cancell out stock (in stock)
+                    Dim rs As New ClassPurcReturn()
+                    rs.updateStock(id_report, 1)
+                ElseIf id_status_reportx = "6" Then
+                    'complit
+                    ' select user prepared 
+                    Dim qu As String = "SELECT rm.id_user, rm.report_number FROM tb_report_mark rm WHERE rm.report_mark_type=" + report_mark_type + " AND rm.id_report='" + id_report + "' AND rm.id_report_status=1 "
+                    Dim du As DataTable = execute_query(qu, -1, True, "", "", "", "")
+                    Dim id_user_prepared As String = du.Rows(0)("id_user").ToString
+                    Dim report_number As String = du.Rows(0)("report_number").ToString
+
+                    'main journal
+                    Dim qjm As String = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created, acc_trans_note, id_report_status) 
+                VALUES ('" + header_number_acc("1") + "','" + report_number + "','0','" + id_user_prepared + "', NOW(), 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
+                    Dim id_acc_trans As String = execute_query(qjm, 0, True, "", "", "", "")
+                    increase_inc_acc("1")
+
+                    'det journal
+                    Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_comp, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number)
+                SELECT " + id_acc_trans + ",o.acc_coa_receive AS `id_acc`, cont.id_comp,  SUM(rd.qty) AS `qty`,0 AS `debit`, SUM(rd.qty * pod.`value`) AS `credit`,'' AS `note`,152,rd.id_purc_return, r.`number`
+                FROM tb_purc_return_det rd
+                INNER JOIN tb_purc_return r ON r.id_purc_return = rd.id_purc_return
+                INNER JOIN tb_purc_order po ON po.id_purc_order = r.id_purc_order
+                INNER JOIN tb_m_comp_contact cont ON cont.id_comp_contact = po.id_comp_contact
+                INNER JOIN tb_purc_order_det pod ON pod.id_purc_order_det = rd.id_purc_order_det
+                INNER JOIN tb_item i ON i.id_item = rd.id_item
+                JOIN tb_opt_purchasing o
+                WHERE rd.id_purc_return=" + id_report + "
+                GROUP BY rd.id_purc_return
+                UNION ALL
+                SELECT " + id_acc_trans + ", o.acc_coa_hutang AS `id_acc`, cont.id_comp, SUM(rd.qty) AS `qty`, SUM(rd.qty*pod.`value`) AS `debit`, 0 AS `credit`,'' AS `note`, 152, rd.id_purc_return, r.`number`
+                FROM tb_purc_return_det rd
+                INNER JOIN tb_purc_return r ON r.id_purc_return = rd.id_purc_return
+                INNER JOIN tb_purc_order po ON po.id_purc_order = r.id_purc_order
+                INNER JOIN tb_m_comp_contact cont ON cont.id_comp_contact = po.id_comp_contact
+                INNER JOIN tb_purc_order_det pod ON pod.id_purc_order_det = rd.id_purc_order_det
+                JOIN tb_opt_purchasing o
+                WHERE rd.id_purc_return=" + id_report + "
+                GROUP BY rd.id_purc_return "
+                    execute_non_query(qjd, True, "", "", "", "")
+                End If
+
+                'update
+                query = String.Format("UPDATE tb_purc_return SET id_report_status='{0}' WHERE id_purc_return ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+
+                'refresh view
+                FormPurcReturn.viewReturn()
+                FormPurcReturn.GVReturn.FocusedRowHandle = find_row(FormPurcReturn.GVReturn, "id_purc_return", id_report)
+            ElseIf report_mark_type = "153" Then
+                'claim return
+                'auto completed
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
+                'update status
+                query = String.Format("UPDATE tb_m_comp SET id_report_status='{0}' WHERE id_comp ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+                '
+                If id_status_reportx = "6" Then
+                    query = String.Format("UPDATE tb_m_comp SET is_active='1' WHERE id_comp ='{0}'", id_report)
+                    execute_non_query(query, True, "", "", "", "")
+                End If
+                'refresh view
+                Try
+                    FormMasterCompanySingle.action_load()
+                    FormMasterCompany.view_company()
+                    FormMasterCompany.GVCompany.FocusedRowHandle = find_row(FormMasterCompany.GVCompany, "id_comp", id_report)
+                Catch ex As Exception
+                End Try
+            ElseIf report_mark_type = "154" Or report_mark_type = "163" Then
+                'item request
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
+
+                If id_status_reportx = "5" Then
+                    'cancell out stock (in stock)
+                    Dim rs As New ClassItemRequest()
+                    rs.updateStock(id_report, 1, report_mark_type)
+                End If
+
+                'update
+                query = String.Format("UPDATE tb_item_req SET id_report_status='{0}' WHERE id_item_req ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+
+                'refresh view
+                FormItemReq.viewData()
+                FormItemReq.GVData.FocusedRowHandle = find_row(FormItemReq.GVData, "id_item_req", id_report)
+            ElseIf report_mark_type = "156" Or report_mark_type = "166" Then
+                'Item del
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
+
+                'update
+                query = String.Format("UPDATE tb_item_del SET id_report_status='{0}' WHERE id_item_del ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+
+                If id_status_reportx = "6" Then
+                    'completed storage
+                    Dim query_completed_stock As String = "INSERT INTO tb_storage_item (id_departement, id_storage_category,id_item, `value`, report_mark_type, id_report, storage_item_qty, storage_item_datetime, id_stock_status)
+                SELECT r.id_departement, 1, dd.id_item, getAvgCost(dd.id_item), 154, r.id_item_req, dd.qty, NOW(), 1
+                FROM tb_item_del d
+                INNER JOIN tb_item_del_det dd ON dd.id_item_del = d.id_item_del
+                INNER JOIN tb_item_req r ON r.id_item_req = d.id_item_req
+                WHERE d.id_item_del=" + id_report + "
+                UNION ALL
+                SELECT r.id_departement, 2, dd.id_item, getAvgCost(dd.id_item), " + report_mark_type + ", d.id_item_del, dd.qty, NOW(), 1
+                FROM tb_item_del d
+                INNER JOIN tb_item_del_det dd ON dd.id_item_del = d.id_item_del
+                INNER JOIN tb_item_req r ON r.id_item_req = d.id_item_req
+                WHERE d.id_item_del=" + id_report + "; 
+                CALL update_item_reqdel_stt(" + id_report + "); "
+                    execute_non_query(query_completed_stock, True, "", "", "", "")
+
+                    ' select user prepared 
+                    Dim qu As String = "SELECT rm.id_user, rm.report_number FROM tb_report_mark rm WHERE rm.report_mark_type=" + report_mark_type + " AND rm.id_report='" + id_report + "' AND rm.id_report_status=1 "
+                    Dim du As DataTable = execute_query(qu, -1, True, "", "", "", "")
+                    Dim id_user_prepared As String = du.Rows(0)("id_user").ToString
+                    Dim report_number As String = du.Rows(0)("report_number").ToString
+
+                    'main journal
+                    Dim qjm As String = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created, acc_trans_note, id_report_status) 
+                VALUES ('" + header_number_acc("1") + "','" + report_number + "','0','" + id_user_prepared + "', NOW(), 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
+                    Dim id_acc_trans As String = execute_query(qjm, 0, True, "", "", "", "")
+                    increase_inc_acc("1")
+
+                    'det journal
+                    If FormItemDelDetail.is_for_store = "1" Then
+                        Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number, id_comp)
+                    SELECT " + id_acc_trans + " AS `id_trans`,m.id_coa_out AS `id_acc`, SUM(dd.qty) AS `qty`, SUM(dd.qty*getAvgCost(dd.id_item)) AS `debit`, 0 AS `credit`, 
+                    CONCAT('Expense : ',cat.item_cat,' (',c.comp_number,')') AS `note`, " + report_mark_type + " AS `rmt`, d.id_item_del, d.`number`, c.id_comp
+                    FROM tb_item_del_det_alloc dd
+                    INNER JOIN tb_item_del d ON d.id_item_del = dd.id_item_del
+                    INNER JOIN tb_item_req r ON r.id_item_req = d.id_item_req
+                    INNER JOIN tb_item i ON i.id_item = dd.id_item
+                    INNER JOIN tb_item_cat cat ON cat.id_item_cat = i.id_item_cat
+                    INNER JOIN tb_item_coa m ON m.id_item_cat = i.id_item_cat AND m.id_departement = r.id_departement
+                    INNER JOIN tb_m_comp c ON c.id_comp = dd.id_comp
+                    WHERE dd.id_item_del=" + id_report + "
+                    GROUP BY i.id_item_cat, dd.id_comp
+                    UNION ALL
+                    SELECT " + id_acc_trans + " AS `id_trans`,o.acc_coa_receive AS `id_acc`, SUM(dd.qty) AS `qty`, 0 AS `debit`, SUM(dd.qty*getAvgCost(dd.id_item)) AS `credit`, '' AS `note`, " + report_mark_type + " AS `rmt`, d.id_item_del, d.`number`, NULL AS `id_comp`
+                    FROM tb_item_del_det dd
+                    INNER JOIN tb_item_del d ON d.id_item_del = dd.id_item_del
+                    JOIN tb_opt_purchasing o 
+                    WHERE dd.id_item_del=" + id_report + "
+                    GROUP BY dd.id_item_del "
+                        execute_non_query(qjd, True, "", "", "", "")
+                    ElseIf FormItemDelDetail.is_for_store = "2" Then
+                        Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number)
+                    SELECT " + id_acc_trans + " AS `id_trans`,m.id_coa_out AS `id_acc`, SUM(dd.qty) AS `qty`, SUM(dd.qty*getAvgCost(dd.id_item)) AS `debit`, 0 AS `credit`, CONCAT('Expense : ',cat.item_cat) AS `note`, " + report_mark_type + " AS `rmt`, d.id_item_del, d.number
+                    FROM tb_item_del_det dd
+                    INNER JOIN tb_item_del d ON d.id_item_del = dd.id_item_del
+                    INNER JOIN tb_item_req r ON r.id_item_req = d.id_item_req
+                    INNER JOIN tb_item i ON i.id_item = dd.id_item
+                    INNER JOIN tb_item_cat cat ON cat.id_item_cat = i.id_item_cat
+                    INNER JOIN tb_item_coa m ON m.id_item_cat = i.id_item_cat AND m.id_departement = r.id_departement
+                    WHERE dd.id_item_del=" + id_report + "
+                    GROUP BY i.id_item_cat
+                    UNION ALL
+                    SELECT " + id_acc_trans + " AS `id_trans`,o.acc_coa_receive AS `id_acc`, SUM(dd.qty) AS `qty`, 0 AS `debit`, SUM(dd.qty*getAvgCost(dd.id_item)) AS `credit`, '' AS `note`, " + report_mark_type + " AS `rmt`, d.id_item_del, d.number
+                    FROM tb_item_del_det dd
+                    INNER JOIN tb_item_del d ON d.id_item_del = dd.id_item_del
+                    JOIN tb_opt_purchasing o 
+                    WHERE dd.id_item_del=" + id_report + "
+                    GROUP BY dd.id_item_del "
+                        execute_non_query(qjd, True, "", "", "", "")
+                    End If
+                End If
+
+                'refresh view
+                FormItemDelDetail.actionLoad()
+                FormItemDel.viewDelivery()
+                FormItemDel.GVDelivery.FocusedRowHandle = find_row(FormItemDel.GVDelivery, "id_item_del", id_report)
+            ElseIf report_mark_type = "157" Then
+                'expense
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
+
+                'update
+                query = String.Format("UPDATE tb_item_expense SET id_report_status='{0}' WHERE id_item_expense ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+
+
+                If id_status_reportx = "6" Then
+                    ' select user prepared 
+                    Dim qu As String = "SELECT rm.id_user, rm.report_number FROM tb_report_mark rm WHERE rm.report_mark_type=" + report_mark_type + " AND rm.id_report='" + id_report + "' AND rm.id_report_status=1 "
+                    Dim du As DataTable = execute_query(qu, -1, True, "", "", "", "")
+                    Dim id_user_prepared As String = du.Rows(0)("id_user").ToString
+                    Dim report_number As String = du.Rows(0)("report_number").ToString
+
+                    'main journal
+                    Dim qjm As String = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created, acc_trans_note, id_report_status) 
+                VALUES ('" + header_number_acc("1") + "','" + report_number + "','0','" + id_user_prepared + "', NOW(), 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
+                    Dim id_acc_trans As String = execute_query(qjm, 0, True, "", "", "", "")
+                    increase_inc_acc("1")
+
+                    If FormItemExpenseDet.CEPayLater.EditValue = True Then
+                        'utang
+                        Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number) 
+                    SELECT " + id_acc_trans + ", ed.id_acc, ed.amount AS `debit`, 0 AS `credit`, ed.description, 157, e.id_item_expense, e.`number`
+                    FROM tb_item_expense e
+                    INNER JOIN  tb_item_expense_det ed ON ed.id_item_expense = e.id_item_expense
+                    WHERE e.id_item_expense=" + id_report + "
+                    UNION ALL
+                    SELECT " + id_acc_trans + ", o.acc_coa_vat_in, e.vat_total AS `debit`, 0 AS `credit`, '' AS description, 157, e.id_item_expense, e.`number`
+                    FROM tb_item_expense e
+                    JOIN tb_opt_purchasing o
+                    WHERE e.id_item_expense=" + id_report + " AND e.vat_total>0
+                    UNION ALL 
+                    SELECT " + id_acc_trans + ", c.id_acc_ap, 0 AS `debit`, e.`total` AS `credit`, '' AS description, 157, e.id_item_expense, e.`number`
+                    FROM tb_item_expense e
+                    INNER JOIN tb_m_comp c ON c.id_comp = e.id_comp
+                    WHERE e.id_item_expense=" + id_report + " "
+                        execute_non_query(qjd, True, "", "", "", "")
+                    Else
+                        'lansung biaya
+                        Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number) 
+                    SELECT " + id_acc_trans + ", ed.id_acc, ed.amount AS `debit`, 0 AS `credit`, ed.description, 157, e.id_item_expense, e.`number`
+                    FROM tb_item_expense e
+                    INNER JOIN  tb_item_expense_det ed ON ed.id_item_expense = e.id_item_expense
+                    WHERE e.id_item_expense=" + id_report + "
+                    UNION ALL
+                    SELECT " + id_acc_trans + ", o.acc_coa_vat_in, e.vat_total AS `debit`, 0 AS `credit`, '' AS description, 157, e.id_item_expense, e.`number`
+                    FROM tb_item_expense e
+                    JOIN tb_opt_purchasing o
+                    WHERE e.id_item_expense=" + id_report + " AND e.vat_total>0
+                    UNION ALL 
+                    SELECT " + id_acc_trans + ", e.id_acc_from, 0 AS `debit`, e.`total` AS `credit`, '' AS description, 157, e.id_item_expense, e.`number`
+                    FROM tb_item_expense e
+                    WHERE e.id_item_expense=" + id_report + " "
+                        execute_non_query(qjd, True, "", "", "", "")
+                    End If
+                End If
+
+                'refresh view
+                FormItemExpenseDet.actionLoad()
+                FormItemExpense.viewData()
+                FormItemExpense.GVData.FocusedRowHandle = find_row(FormItemExpense.GVData, "id_item_expense", id_report)
+            ElseIf report_mark_type = "159" Then
+                'Payment
+                'auto completed
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
+                'completed
+                If id_status_reportx = "6" Then
+                    'select header
+                    Dim qu_payment As String = "SELECT id_pay_type,report_mark_type FROM tb_payment py WHERE py.id_payment='" & id_report & "'"
+                    Dim data_payment As DataTable = execute_query(qu_payment, -1, True, "", "", "", "")
+                    If data_payment.Rows.Count > 0 Then
+                        If data_payment.Rows(0)("id_pay_type").ToString = "1" Then 'DP
+                            'auto jurnal
+                            'Select user prepared 
+                            Dim qu As String = "SELECT rm.id_user, rm.report_number FROM tb_report_mark rm WHERE rm.report_mark_type=" + report_mark_type + " AND rm.id_report='" + id_report + "' AND rm.id_report_status=1 "
+                            Dim du As DataTable = execute_query(qu, -1, True, "", "", "", "")
+                            Dim id_user_prepared As String = du.Rows(0)("id_user").ToString
+                            Dim report_number As String = du.Rows(0)("report_number").ToString
+
+                            'main journal
+                            Dim qjm As String = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created, acc_trans_note, id_report_status) 
+                        VALUES ('" + header_number_acc("1") + "','" + report_number + "','22','" + id_user_prepared + "', NOW(), 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
+                            Dim id_acc_trans As String = execute_query(qjm, 0, True, "", "", "", "")
+                            increase_inc_acc("1")
+
+                            'det journal
+                            Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_comp, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number)
+                        SELECT '" & id_acc_trans & "' AS id_acc_trans,py.id_acc_payfrom AS `id_acc`, cc.id_comp,  0 AS `qty`,0 AS `debit`, py.value AS `credit`,'' AS `note`,159,py.id_payment, py.number
+                        FROM tb_payment py
+                        INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = py.id_comp_contact
+                        WHERE py.id_payment=" + id_report + "
+                        UNION ALL
+                        SELECT '" & id_acc_trans & "' AS id_acc_trans,comp.id_acc_dp AS `id_acc`, cc.id_comp,  0 AS `qty`,py.value AS `debit`, 0 AS `credit`,'' AS `note`,159,py.id_payment, py.number
+                        FROM tb_payment py
+                        INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = py.id_comp_contact
+                        INNER JOIN tb_m_comp comp ON comp.id_comp=cc.id_comp
+                        WHERE py.id_payment=" & id_report & ""
+                            execute_non_query(qjd, True, "", "", "", "")
+                        Else 'payment
+                            'auto journal
+                            Dim qu As String = "SELECT rm.id_user, rm.report_number FROM tb_report_mark rm WHERE rm.report_mark_type=" + report_mark_type + " AND rm.id_report='" + id_report + "' AND rm.id_report_status=1 "
+                            Dim du As DataTable = execute_query(qu, -1, True, "", "", "", "")
+                            Dim id_user_prepared As String = du.Rows(0)("id_user").ToString
+                            Dim report_number As String = du.Rows(0)("report_number").ToString
+
+                            'main journal
+                            Dim qjm As String = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created, acc_trans_note, id_report_status) 
+                        VALUES ('" + header_number_acc("1") + "','" + report_number + "','22','" + id_user_prepared + "', NOW(), 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
+                            Dim id_acc_trans As String = execute_query(qjm, 0, True, "", "", "", "")
+                            increase_inc_acc("1")
+
+                            'det journal
+                            Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_comp, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number)
+                                            SELECT * FROM
+                                            (
+                                            /* uang keluar kalau ada */
+                                            SELECT '" & id_acc_trans & "' AS id_acc_trans,py.id_acc_payfrom AS `id_acc`, cc.id_comp,  0 AS `qty`,0 AS `debit`, SUM(pyd.value) AS `credit`,'' AS `note`,159,py.id_payment, py.number
+                                            FROM tb_payment_det pyd
+                                            INNER JOIN tb_payment py ON py.id_payment=pyd.id_payment
+                                            INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = py.id_comp_contact
+                                            INNER JOIN tb_m_comp comp ON comp.id_comp=cc.id_comp
+                                            WHERE py.id_payment=" & id_report & "
+                                            GROUP BY py.id_payment
+                                            /* balikin DP */
+                                            UNION ALL
+                                            SELECT '" & id_acc_trans & "' AS id_acc_trans,comp.id_acc_dp AS `id_acc`, cc.id_comp,  0 AS `qty`,0 AS `debit`, SUM(pyd.total_dp) AS `credit`,'' AS `note`,159,py.id_payment, py.number
+                                            FROM tb_payment_det pyd
+                                            INNER JOIN tb_payment py ON py.id_payment=pyd.id_payment
+                                            INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = py.id_comp_contact
+                                            INNER JOIN tb_m_comp comp ON comp.id_comp=cc.id_comp
+                                            WHERE py.id_payment=" & id_report & "
+                                            GROUP BY py.id_payment
+                                            /* hutang dagang total */
+                                            UNION ALL
+                                            SELECT '" & id_acc_trans & "' AS id_acc_trans,comp.id_acc_ap AS `id_acc`, cc.id_comp,  0 AS `qty`,SUM(pyd.total_dp + pyd.value) AS `debit`, 0 AS `credit`,'' AS `note`,159,py.id_payment, py.number
+                                            FROM tb_payment_det pyd
+                                            INNER JOIN tb_payment py ON py.id_payment=pyd.id_payment
+                                            INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = py.id_comp_contact
+                                            INNER JOIN tb_m_comp comp ON comp.id_comp=cc.id_comp
+                                            WHERE py.id_payment=" & id_report & "
+                                            GROUP BY py.id_payment
+                                            )trx WHERE trx.debit != 0 OR trx.credit != 0"
+                            execute_non_query(qjd, True, "", "", "", "")
+                            If data_payment.Rows(0)("report_mark_type").ToString = "139" Then
+                                'close pay in tb_purc_order
+                                Dim qc As String = "UPDATE tb_purc_order po
+                                            INNER JOIN tb_payment_det pyd ON pyd.`id_report`=po.`id_purc_order` AND pyd.`id_payment`=" & id_report & "
+                                            SET po.is_close_pay='1'"
+                                execute_non_query(qc, True, "", "", "", "")
+                                FormBankWithdrawal.load_po()
+                            ElseIf data_payment.Rows(0)("report_mark_type").ToString = "157" Then
+                                'close expense
+                                Dim qc As String = "UPDATE tb_item_expense e
+                                            INNER JOIN tb_payment_det pyd ON pyd.`id_report`=e.`id_item_expense` AND pyd.`id_payment`=" & id_report & "
+                                            SET e.is_open='2'"
+                                execute_non_query(qc, True, "", "", "", "")
+                                FormBankWithdrawal.load_expense()
+                            End If
+                        End If
+                    End If
+                End If
+
+                'update
+                query = String.Format("UPDATE tb_payment SET id_report_status='{0}' WHERE id_payment ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+
+                'refresh view
+
+                FormBankWithdrawal.load_payment()
+                FormBankWithdrawalDet.form_load()
+                FormBankWithdrawal.GVList.FocusedRowHandle = find_row(FormBankWithdrawal.GVList, "id_payment", id_report)
+            ElseIf report_mark_type = "160" Then
+                'Asset management
+                'auto completed
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
+
+                'update
+                query = String.Format("UPDATE tb_purc_rec_asset SET is_active=1,id_report_status='{0}' WHERE id_purc_rec_asset ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+
+                'refresh view
+                FormPurcAsset.viewPending()
+            ElseIf report_mark_type = "162" Then
+                'Receive Payment
+                'auto completed
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
+                'completed
+                If id_status_reportx = "6" Then
+                    'auto jurnal
+                    'Select user prepared 
+                    Dim qu As String = "SELECT rm.id_user, rm.report_number FROM tb_report_mark rm WHERE rm.report_mark_type=" + report_mark_type + " AND rm.id_report='" + id_report + "' AND rm.id_report_status=1 "
+                    Dim du As DataTable = execute_query(qu, -1, True, "", "", "", "")
+                    Dim id_user_prepared As String = du.Rows(0)("id_user").ToString
+                    Dim report_number As String = du.Rows(0)("report_number").ToString
+
+                    'main journal
+                    Dim qjm As String = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created, acc_trans_note, id_report_status) 
+                        VALUES ('" + header_number_acc("1") + "','" + report_number + "','21','" + id_user_prepared + "', NOW(), 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
+                    Dim id_acc_trans As String = execute_query(qjm, 0, True, "", "", "", "")
+                    increase_inc_acc("1")
+
+                    'det journal
+                    Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_comp, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number)
+                                    -- kas masuk
+                                    SELECT '" & id_acc_trans & "' AS id_acc_trans,py.id_acc_pay_rec AS `id_acc`, cc.id_comp,  0 AS `qty`,py.value AS `debit`, 0 AS `credit`,'' AS `note`,162,py.id_rec_payment, py.number
+                                    FROM tb_rec_payment py
+                                    INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = py.id_comp_contact
+                                    WHERE py.id_rec_payment=" & id_report & " AND py.`value` > 0
+                                    UNION ALL
+                                    -- kurangi piutang (AR)
+                                    SELECT '" & id_acc_trans & "' AS id_acc_trans,comp.id_acc_ar AS `id_acc`, cc.id_comp,  0 AS `qty`,0 AS `debit`, py.value AS `credit`,'' AS `note`,162,py.id_rec_payment, py.number
+                                    FROM tb_rec_payment py
+                                    INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = py.id_comp_contact
+                                    INNER JOIN tb_m_comp comp ON comp.id_comp=cc.id_comp
+                                    WHERE py.id_rec_payment=" & id_report & " AND py.`value` > 0
+                                    UNION ALL
+                                    -- lebih bayar keluar berapa dari mana credit
+                                    SELECT '" & id_acc_trans & "' AS id_acc_trans,py.id_acc_pay_to AS `id_acc`, cc.id_comp,  0 AS `qty`,0 AS `debit`, py.`val_need_pay` AS `credit`,'' AS `note`,162,py.id_rec_payment, py.number
+                                    FROM tb_rec_payment py
+                                    INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = py.id_comp_contact
+                                    WHERE py.id_rec_payment=" & id_report & " AND py.`val_need_pay` > 0
+                                    UNION ALL
+                                    -- tambah piutang (AR) debit
+                                    SELECT '" & id_acc_trans & "' AS id_acc_trans,comp.id_acc_ar AS `id_acc`, cc.id_comp,  0 AS `qty`,py.`val_need_pay` AS `debit`, 0 AS `credit`,'' AS `note`,162,py.id_rec_payment, py.number
+                                    FROM tb_rec_payment py
+                                    INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = py.id_comp_contact
+                                    INNER JOIN tb_m_comp comp ON comp.id_comp=cc.id_comp
+                                    WHERE py.id_rec_payment=" & id_report & " AND py.`val_need_pay` > 0"
+                    execute_non_query(qjd, True, "", "", "", "")
+                    'close if complete rec
+                    qjd = "UPDATE tb_sales_pos pos
+INNER JOIN tb_rec_payment_det pyd ON pyd.`id_report`=pos.`id_sales_pos` AND pyd.`report_mark_type`=pos.`report_mark_type`
+SET pos.`is_close_rec_payment`=1
+WHERE pyd.`id_rec_payment`='" & id_report & "'
+AND pyd.`value`=balance_due AND pyd.`value` != 0"
+                    execute_non_query(qjd, True, "", "", "", "")
+                End If
+
+                'update
+                query = String.Format("UPDATE tb_rec_payment SET id_report_status='{0}' WHERE id_rec_payment ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+
+                'refresh view
+                FormBankDeposit.load_deposit()
+                FormBankDeposit.GVList.FocusedRowHandle = find_row(FormBankWithdrawal.GVList, "id_payment", id_report)
+            ElseIf report_mark_type = "167" Then
+                'Cash Advance
+                'auto completed
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
+
+                If id_status_reportx = "6" Then
+                    'Select user prepared 
+                    Dim qu As String = "SELECT rm.id_user, rm.report_number FROM tb_report_mark rm WHERE rm.report_mark_type=" + report_mark_type + " AND rm.id_report='" + id_report + "' AND rm.id_report_status=1 "
+                    Dim du As DataTable = execute_query(qu, -1, True, "", "", "", "")
+                    Dim id_user_prepared As String = du.Rows(0)("id_user").ToString
+                    Dim report_number As String = du.Rows(0)("report_number").ToString
+
+                    'main journal
+                    Dim qjm As String = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created, acc_trans_note, id_report_status) 
+                        VALUES ('" + header_number_acc("1") + "','" + report_number + "','22','" + id_user_prepared + "', NOW(), 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
+                    Dim id_acc_trans As String = execute_query(qjm, 0, True, "", "", "", "")
+                    increase_inc_acc("1")
+
+                    'det journal
+                    Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_comp, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number)
+                                    -- kas keluar
+                                    SELECT '" & id_acc_trans & "' AS id_acc_trans,ca.id_acc_from AS `id_acc`, NULL,  0 AS `qty`,0 AS `debit`, ca.val_ca AS `credit`,'' AS `note`,167,ca.id_cash_advance, ca.number
+                                    FROM tb_cash_advance ca
+                                    WHERE ca.id_cash_advance=" & id_report & " AND ca.`val_ca` > 0
+                                    UNION ALL
+                                    -- cash advance
+                                    SELECT '" & id_acc_trans & "' AS id_acc_trans,ca.id_acc_to AS `id_acc`, NULL,  0 AS `qty`,ca.val_ca AS `debit`, 0 AS `credit`,'' AS `note`,167,ca.id_cash_advance, ca.number
+                                    FROM tb_cash_advance ca
+                                    WHERE ca.id_cash_advance=" & id_report & " AND ca.`val_ca` > 0"
+                    execute_non_query(qjd, True, "", "", "", "")
+                End If
+
+                'update
+                query = String.Format("UPDATE tb_cash_advance SET id_report_status='{0}' WHERE id_cash_advance ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+
+                'refresh view
+                FormCashAdvance.load_cash_advance()
+            ElseIf report_mark_type = "168" Then
+                'Receive Return
+                'auto completed
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
+
+                'update
+                query = String.Format("UPDATE tb_sales_return_rec SET id_report_status='{0}' WHERE id_sales_return_rec ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+
+                'refresh view
+                FormSalesReturnRec.load_list()
+            ElseIf report_mark_type = "169" Then
+                'Asset value-added
+                'auto completed
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
+
+                'update
+                query = String.Format("UPDATE tb_purc_rec_asset SET is_active=1,id_report_status='{0}' WHERE id_purc_rec_asset ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+
+                'refresh view
+                FormPurcAsset.viewActive()
+                FormPurcAssetValueAddedList.viewData()
+            ElseIf report_mark_type = "174" Then
+                'Cash Advance Reconcile
+                'auto completed
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
+
+                If id_status_reportx = "6" Then
+                    'Select user prepared 
+                    Dim qu As String = "SELECT rm.id_user, rm.report_number FROM tb_report_mark rm WHERE rm.report_mark_type=" + report_mark_type + " AND rm.id_report='" + id_report + "' AND rm.id_report_status=1 "
+                    Dim du As DataTable = execute_query(qu, -1, True, "", "", "", "")
+                    Dim id_user_prepared As String = du.Rows(0)("id_user").ToString
+                    Dim report_number As String = du.Rows(0)("report_number").ToString
+
+                    'main journal
+                    Dim qjm As String = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created, acc_trans_note, id_report_status) 
+                        VALUES ('" + header_number_acc("1") + "','" + report_number + "','22','" + id_user_prepared + "', NOW(), 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
+                    Dim id_acc_trans As String = execute_query(qjm, 0, True, "", "", "", "")
+                    increase_inc_acc("1")
+
+                    'det journal
+                    Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_comp, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number)
+                                    -- cash advance
+                                    SELECT '" & id_acc_trans & "' AS id_acc_trans,ca.id_acc_to AS `id_acc`, NULL,  0 AS `qty`,0 AS `debit`,ca.val_ca AS `credit`,'Cash Advance' AS `note`,174,ca.id_cash_advance,ca.number
+                                    FROM tb_cash_advance ca
+                                    WHERE ca.id_cash_advance=" & id_report & " AND ca.`val_ca` > 0
+                                    -- detail
+                                    UNION
+                                    SELECT '" & id_acc_trans & "' AS id_acc_trans,car.id_acc AS `id_acc`, NULL,  0 AS `qty`, car.value AS `debit`,0  AS `credit`,car.description AS `note`,174,ca.id_cash_advance,ca.number
+                                    FROM tb_cash_advance ca
+                                    INNER JOIN tb_cash_advance_report car ON ca.id_cash_advance = car.id_cash_advance
+                                    WHERE ca.id_cash_advance=" & id_report & " AND car.`value` > 0
+                                    -- 
+                                    UNION
+                                    SELECT '" & id_acc_trans & "' AS id_acc_trans,card.id_acc AS `id_acc`, NULL,  0 AS `qty`, IF(card.id_bill_type = 21, card.value, 0) AS `debit`, IF(card.id_bill_type = 21, 0, card.value)  AS `credit`,card.description AS `note`,174,ca.id_cash_advance,ca.number
+                                FROM tb_cash_advance ca
+                                INNER JOIN tb_cash_advance_report_det card ON ca.id_cash_advance = card.id_cash_advance
+                                WHERE ca.id_cash_advance=" & id_report & " AND card.`value` > 0"
+                    execute_non_query(qjd, True, "", "", "", "")
+                End If
+
+                'update
+                query = String.Format("UPDATE tb_cash_advance SET rb_id_report_status='{0}' WHERE id_cash_advance ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+
+                'refresh view
+                FormCashAdvanceReconcile.load_det()
+            ElseIf report_mark_type = "175" Then
+                'item request
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
+
+                If id_status_reportx = "6" Then 'complete update/insert budget
+                    'cek type first
+                    Dim query_pps As String = "SELECT id_type FROM tb_sample_budget_pps WHERE id_sample_budget_pps ='" & id_report & "'"
+                    Dim data_pps As DataTable = execute_query(query_pps, -1, True, "", "", "", "")
+                    If data_pps.Rows.Count > 0 Then
+                        If data_pps.Rows(0)("id_type").ToString = "1" Then 'propose new
+                            Dim query_det As String = "SELECT ppsd.`id_sample_budget_pps_det`,ppsd.`description_after`,ppsd.`year_after`,ppsd.`value_rp_after`,ppsd.`value_usd_after`,ppsd.`kurs_after`
+FROM `tb_sample_budget_pps` pps
+INNER JOIN tb_sample_budget_pps_det ppsd ON ppsd.id_sample_budget_pps=pps.id_sample_budget_pps
+WHERE pps.id_sample_budget_pps='" & id_report & "'"
+                            Dim data_det As DataTable = execute_query(query_det, -1, True, "", "", "", "")
+                            For i As Integer = 0 To data_det.Rows.Count - 1
+                                'insert budget
+                                Dim ins_det As String = "INSERT INTO `tb_sample_purc_budget`(description,`year`,value_rp,value_usd,kurs)
+VALUES('" & data_det.Rows(i)("description_after").ToString & "','" & data_det.Rows(i)("year_after").ToString & "','" & decimalSQL(data_det.Rows(i)("value_rp_after").ToString) & "','" & decimalSQL(data_det.Rows(i)("value_usd_after").ToString) & "','" & decimalSQL(data_det.Rows(i)("kurs_after").ToString) & "');
+SELECT LAST_INSERT_ID(); "
+                                Dim id_det As String = execute_query(ins_det, 0, True, "", "", "", "")
+                                'insert division
+                                Dim ins_div As String = "INSERT INTO `tb_sample_purc_budget_div`(id_sample_purc_budget,id_code_division) 
+SELECT '" & id_det & "' AS id_det,id_code_division FROM tb_sample_budget_pps_div WHERE id_sample_budget_pps_det='" & data_det.Rows(i)("id_sample_budget_pps_det").ToString & "' AND is_after='1'"
+                                execute_non_query(ins_div, True, "", "", "", "")
+                            Next
+                        Else 'revision
+                            Dim query_det As String = "SELECT ppsd.`id_sample_budget_pps_det`,ppsd.`id_sample_purc_budget`,ppsd.`description_after`,ppsd.`year_after`,ppsd.`value_rp_after`,ppsd.`value_usd_after`,ppsd.`kurs_after` 
+FROM `tb_sample_budget_pps` pps
+INNER JOIN tb_sample_budget_pps_det ppsd ON ppsd.id_sample_budget_pps=pps.id_sample_budget_pps
+WHERE pps.id_sample_budget_pps='" & id_report & "'"
+                            Dim data_det As DataTable = execute_query(query_det, -1, True, "", "", "", "")
+                            For i As Integer = 0 To data_det.Rows.Count - 1
+                                'update budget
+                                Dim upd_det As String = "UPDATE tb_sample_purc_budget SET description='" & data_det.Rows(i)("description_after").ToString & "',`year`='" & data_det.Rows(i)("year_after").ToString & "',value_rp='" & decimalSQL(data_det.Rows(i)("value_rp_after").ToString) & "',value_usd='" & decimalSQL(data_det.Rows(i)("value_usd_after").ToString) & "',kurs='" & decimalSQL(data_det.Rows(i)("kurs_after").ToString) & "' WHERE id_sample_purc_budget='" & data_det.Rows(i)("id_sample_purc_budget").ToString & "'"
+                                execute_non_query(upd_det, True, "", "", "", "")
+                                'delete + insert division
+                                Dim upd_div As String = "DELETE FROM tb_sample_purc_budget_div WHERE id_sample_purc_budget='" & data_det.Rows(i)("id_sample_purc_budget").ToString & "';
+INSERT INTO `tb_sample_purc_budget_div`(id_sample_purc_budget,id_code_division) 
+SELECT '" & data_det.Rows(i)("id_sample_purc_budget").ToString & "' AS id_det,id_code_division FROM tb_sample_budget_pps_div WHERE id_sample_budget_pps_det='" & data_det.Rows(i)("id_sample_budget_pps_det").ToString & "' AND is_after='1';"
+                                execute_non_query(upd_div, True, "", "", "", "")
+                            Next
+                        End If
+                    End If
+                End If
+
+                'update
+                query = String.Format("UPDATE tb_sample_budget_pps SET id_report_status='{0}' WHERE id_sample_budget_pps ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+
+                'refresh view
+                'FormSampleBudget.load_propose()
+                'FormSampleBudget.load_budget()
+            ElseIf report_mark_type = "176" Or report_mark_type = "177" Or report_mark_type = "178" Then
+                'Propose Design Changes
+                'auto completed
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
+
+                'update tb_m_design & tb_m_design_code
+                If id_status_reportx = "6" Then
+                    Dim query_changes As String = ""
+
+                    '--tb_m_design
+                    Dim data_dr As DataTable = execute_query("SELECT * FROM tb_m_design_rev WHERE id_design_rev = '" + id_report + "'", -1, True, "", "", "", "")
+                    Dim data_hs As DataTable = execute_query("SELECT * FROM tb_m_design_his WHERE id_design_rev = '" + id_report + "'", -1, True, "", "", "", "")
+
+                    'check changes
+                    If Not data_dr.Rows(0)("design_name").ToString = data_hs.Rows(0)("design_name").ToString Then
+                        query_changes += "design_name = '" + data_dr.Rows(0)("design_name").ToString + "'"
+                    End If
+
+                    If Not data_dr.Rows(0)("design_code").ToString = data_hs.Rows(0)("design_code").ToString Then
+                        If Not query_changes = "" Then
+                            query_changes += ", "
+                        End If
+
+                        query_changes += "design_code = '" + data_dr.Rows(0)("design_code").ToString + "'"
+                    End If
+
+                    If Not data_dr.Rows(0)("design_code_import").ToString = data_hs.Rows(0)("design_code_import").ToString Then
+                        If Not query_changes = "" Then
+                            query_changes += ", "
+                        End If
+
+                        query_changes += "design_code_import = '" + data_dr.Rows(0)("design_code_import").ToString + "'"
+                    End If
+
+                    If Not data_dr.Rows(0)("id_delivery").ToString = data_hs.Rows(0)("id_delivery").ToString Then
+                        If Not query_changes = "" Then
+                            query_changes += ", "
+                        End If
+
+                        query_changes += "id_delivery = '" + data_dr.Rows(0)("id_delivery").ToString + "'"
+                    End If
+
+                    If Not data_dr.Rows(0)("id_delivery_act").ToString = data_hs.Rows(0)("id_delivery_act").ToString Then
+                        If Not query_changes = "" Then
+                            query_changes += ", "
+                        End If
+
+                        query_changes += "id_delivery_act = '" + data_dr.Rows(0)("id_delivery_act").ToString + "'"
+                    End If
+
+                    If Not data_dr.Rows(0)("design_display_name").ToString = data_hs.Rows(0)("design_display_name").ToString Then
+                        If Not query_changes = "" Then
+                            query_changes += ", "
+                        End If
+
+                        query_changes += "design_display_name = '" + addSlashes(data_dr.Rows(0)("design_display_name").ToString) + "'"
+                    End If
+
+                    If Not data_dr.Rows(0)("id_season").ToString = data_hs.Rows(0)("id_season").ToString Then
+                        If Not query_changes = "" Then
+                            query_changes += ", "
+                        End If
+
+                        query_changes += "id_season = '" + data_dr.Rows(0)("id_season").ToString + "'"
+                    End If
+
+                    If Not data_dr.Rows(0)("id_season_orign").ToString = data_hs.Rows(0)("id_season_orign").ToString Then
+                        If Not query_changes = "" Then
+                            query_changes += ", "
+                        End If
+
+                        query_changes += "id_season_orign = '" + data_dr.Rows(0)("id_season_orign").ToString + "'"
+                    End If
+
+                    If Not data_dr.Rows(0)("id_sample").ToString = data_hs.Rows(0)("id_sample").ToString Then
+                        If Not query_changes = "" Then
+                            query_changes += ", "
+                        End If
+
+                        Dim id_sample As String = If(data_dr.Rows(0)("id_sample").ToString = "", "NULL", data_dr.Rows(0)("id_sample").ToString)
+
+                        query_changes += "id_sample = " + id_sample
+                    End If
+
+                    If Not data_dr.Rows(0)("design_eos").ToString = data_hs.Rows(0)("design_eos").ToString Then
+                        If Not query_changes = "" Then
+                            query_changes += ", "
+                        End If
+
+                        Dim design_eos As String = If(data_dr.Rows(0)("design_eos").ToString = "", "NULL", "'" + data_dr.Rows(0)("design_eos").ToString + "'")
+
+                        query_changes += "design_eos = " + design_eos
+                    End If
+
+                    If Not data_dr.Rows(0)("id_ret_code").ToString = data_hs.Rows(0)("id_ret_code").ToString Then
+                        If Not query_changes = "" Then
+                            query_changes += ", "
+                        End If
+
+                        query_changes += "id_ret_code = '" + data_dr.Rows(0)("id_ret_code").ToString + "'"
+                    End If
+
+                    If Not data_dr.Rows(0)("design_fabrication").ToString = data_hs.Rows(0)("design_fabrication").ToString Then
+                        If Not query_changes = "" Then
+                            query_changes += ", "
+                        End If
+
+                        query_changes += "design_fabrication = '" + addSlashes(data_dr.Rows(0)("design_fabrication").ToString) + "'"
+                    End If
+
+                    If Not data_dr.Rows(0)("id_design_ref").ToString = data_hs.Rows(0)("id_design_ref").ToString Then
+                        If Not query_changes = "" Then
+                            query_changes += ", "
+                        End If
+
+                        Dim id_design_ref As String = If(data_dr.Rows(0)("id_design_ref").ToString = "", "NULL", data_dr.Rows(0)("id_design_ref").ToString)
+
+                        query_changes += "id_design_ref = " + id_design_ref
+                    End If
+
+                    If Not data_dr.Rows(0)("design_detail").ToString = data_hs.Rows(0)("design_detail").ToString Then
+                        If Not query_changes = "" Then
+                            query_changes += ", "
+                        End If
+
+                        query_changes += "design_detail = '" + addSlashes(data_dr.Rows(0)("design_detail").ToString) + "'"
+                    End If
+
+                    If Not query_changes = "" Then
+                        query = "UPDATE tb_m_design SET " + query_changes + " WHERE id_design = '" + data_dr.Rows(0)("id_design").ToString + "'"
+                        execute_non_query(query, True, "", "", "", "")
+                    End If
+
+                    '--tb_m_design_code
+                    Dim data_cr As DataTable = execute_query("SELECT cd.id_code, dc.id_code_detail FROM tb_m_design_code_rev AS dc, tb_m_code_detail AS cd, tb_template_code_det AS tcd WHERE dc.id_code_detail = cd.id_code_detail AND cd.id_code = tcd.id_code AND dc.id_design_rev = '" + id_report + "' ORDER BY cd.id_code ASC", -1, True, "", "", "", "")
+                    Dim data_ch As DataTable = execute_query("SELECT cd.id_code, dc.id_code_detail FROM tb_m_design_code_his AS dc, tb_m_code_detail AS cd, tb_template_code_det AS tcd WHERE dc.id_code_detail = cd.id_code_detail AND cd.id_code = tcd.id_code AND dc.id_design_rev = '" + id_report + "' ORDER BY cd.id_code ASC", -1, True, "", "", "", "")
+
+                    Dim new_code As String = ""
+
+                    For i = 0 To data_cr.Rows.Count - 1
+                        new_code = data_cr.Rows(i)("id_code").ToString
+
+                        For j = 0 To data_ch.Rows.Count - 1
+                            'update
+                            If data_cr.Rows(i)("id_code").ToString = data_ch.Rows(j)("id_code").ToString Then
+                                If Not data_cr.Rows(i)("id_code_detail").ToString = data_ch.Rows(j)("id_code_detail").ToString Then
+                                    query = "UPDATE tb_m_design_code SET id_code_detail = '" + data_cr.Rows(i)("id_code_detail").ToString + "' WHERE id_design = '" + data_dr.Rows(0)("id_design").ToString + "' AND id_code_detail = '" + data_ch.Rows(i)("id_code_detail").ToString + "'"
+
+                                    execute_non_query(query, True, "", "", "", "")
+                                End If
+
+                                new_code = ""
+                            End If
+                        Next
+
+                        'if new code
+                        If Not new_code = "" Then
+                            query = "INSERT INTO tb_m_design_code (id_design, id_code_detail) VALUES ('" + data_dr.Rows(0)("id_design").ToString + "', '" + data_cr.Rows(i)("id_code_detail").ToString + "')"
+
+                            execute_non_query(query, True, "", "", "", "")
+                        End If
+                    Next
+
+                    'delete code
+                    Dim old_code As String = ""
+
+                    For j = 0 To data_ch.Rows.Count - 1
+                        old_code = data_ch.Rows(j)("id_code").ToString
+
+                        For i = 0 To data_cr.Rows.Count - 1
+                            If data_ch.Rows(j)("id_code").ToString = data_cr.Rows(i)("id_code").ToString Then
+                                old_code = ""
+                            End If
+                        Next
+
+                        'if old code
+                        If Not old_code = "" Then
+                            query = "DELETE FROM tb_m_design_code WHERE id_design = '" + data_dr.Rows(0)("id_design").ToString + "' AND id_code_detail = '" + data_ch.Rows(j)("id_code_detail").ToString + "'"
+
+                            execute_non_query(query, True, "", "", "", "")
+                        End If
+                    Next
+
+                    'update tb_m_product
+                    execute_non_query("
+                    UPDATE tb_m_product AS p SET p.product_display_name = (SELECT d.design_display_name FROM tb_m_design AS d WHERE d.id_design = '" + data_dr.Rows(0)("id_design").ToString + "'), p.product_name = (SELECT d.design_display_name FROM tb_m_design AS d WHERE d.id_design = '" + data_dr.Rows(0)("id_design").ToString + "'), p.product_full_code = (SELECT CONCAT((SELECT d.design_code FROM tb_m_design AS d WHERE d.id_design = '" + data_dr.Rows(0)("id_design").ToString + "'), p.product_code)) WHERE p.id_design = '" + data_dr.Rows(0)("id_design").ToString + "'
+                ", True, "", "", "", "")
+                End If
+
+                'update
+                query = String.Format("UPDATE tb_m_design_rev SET id_report_status='{0}' WHERE id_design_rev ='{1}'", id_status_reportx, id_report)
+                execute_non_query(query, True, "", "", "", "")
+
+                'refresh view
+                FormMasterDesignSingle.actionLoad()
+            ElseIf report_mark_type = "180" Then
+                'auto completed
+                If id_status_reportx = "3" Then
+                id_status_reportx = "6"
             End If
 
-            'update status
-            query = String.Format("UPDATE tb_b_revenue_revision SET id_report_status='{0}' WHERE id_b_revenue_revision ='{1}'", id_status_reportx, id_report)
+            ' update tb_m_employee
+            If id_status_reportx = "6" Then
+                Dim query_pps As String = "SELECT id_type, id_employee FROM tb_employee_pps WHERE id_employee_pps = '" + id_report + "'"
+                Dim data_pps As DataTable = execute_query(query_pps, -1, True, "", "", "", "")
+
+                FormEmployeePpsDet.id_pps = id_report
+                FormEmployeePpsDet.is_new = If(data_pps.Rows(0)("id_type").ToString = "1", "-1", "1")
+                FormEmployeePpsDet.id_employee = If(data_pps.Rows(0)("id_employee").ToString = "", "-1", data_pps.Rows(0)("id_employee").ToString)
+
+                FormEmployeePpsDet.updateChanges()
+            End If
+
+            'update
+            query = String.Format("UPDATE tb_employee_pps SET id_report_status='{0}' WHERE id_employee_pps ='{1}'", id_status_reportx, id_report)
             execute_non_query(query, True, "", "", "", "")
 
             'refresh view
-            FormBudgetRevPropose.viewRevision()
-            FormBudgetRevPropose.GVRevision.FocusedRowHandle = find_row(FormBudgetRevPropose.GVRevision, "id_b_revenue_revision", id_report)
+            FormEmployeePpsDet.initLoad()
         End If
 
         'adding lead time
@@ -5150,42 +6330,58 @@
     Public Sub sendNotif(ByVal type_par As String)
         Dim type As String = ""
         If type_par = "1" Then
-            type = "accepted"
+            type = "approved"
         Else
-            type = "refused"
+            type = "not approved"
         End If
 
         Dim dt As DataTable = get_who_prepared(report_mark_type, id_report)
         If report_mark_type = "9" Or report_mark_type = "80" Or report_mark_type = "81" Then
-            pushNotif("Production Demand", "Document #" + report_number + " is " + type, "FormProdDemand", dt.Rows(0)("id_user"), id_user, id_report, report_number, "1")
+            pushNotif("Production Demand", "Document #" + report_number + " is " + type, "FormProdDemand", dt.Rows(0)("id_user"), id_user, id_report, report_number, "1", report_mark_type)
         ElseIf report_mark_type = "11" Then
-            pushNotif("Sample Requisition", "Document #" + report_number + " is " + type + " by " + get_user_identify(dt.Rows(0)("id_user"), "1") + ".", "FormSampleReq", dt.Rows(0)("id_user"), id_user, id_report, report_number, "1")
+            pushNotif("Sample Requisition", "Document #" + report_number + " is " + type + " by " + get_user_identify(dt.Rows(0)("id_user"), "1") + ".", "FormSampleReq", dt.Rows(0)("id_user"), id_user, id_report, report_number, "1", report_mark_type)
         ElseIf report_mark_type = "28" Or report_mark_type = "127" Then
-            pushNotif("Receiving QC", "Document #" + report_number + " is " + type + " by " + get_user_identify(id_user, "1") + ".", "FormProductionRec", dt.Rows(0)("id_user"), id_user, id_report, report_number, "1")
+            pushNotif("Receiving QC", "Document #" + report_number + " is " + type + " by " + get_user_identify(id_user, "1") + ".", "FormProductionRec", dt.Rows(0)("id_user"), id_user, id_report, report_number, "1", report_mark_type)
         ElseIf report_mark_type = "31" Then
-            pushNotif("Return Out", "Document #" + report_number + " is " + type, "FormProductionRet", dt.Rows(0)("id_user"), id_user, id_report, report_number, "1")
+            pushNotif("Return Out", "Document #" + report_number + " is " + type, "FormProductionRet", dt.Rows(0)("id_user"), id_user, id_report, report_number, "1", report_mark_type)
         ElseIf report_mark_type = "32" Then
-            pushNotif("Return In", "Document #" + report_number + " is " + type, "FormProductionRet", dt.Rows(0)("id_user"), id_user, id_report, report_number, "2")
+            pushNotif("Return In", "Document #" + report_number + " is " + type, "FormProductionRet", dt.Rows(0)("id_user"), id_user, id_report, report_number, "2", report_mark_type)
         ElseIf report_mark_type = "33" Then
-            pushNotif("Packing List", "Document #" + report_number + " is " + type, "FormProductionPLToWH", dt.Rows(0)("id_user"), id_user, id_report, report_number, "1")
+            pushNotif("Packing List", "Document #" + report_number + " is " + type, "FormProductionPLToWH", dt.Rows(0)("id_user"), id_user, id_report, report_number, "1", report_mark_type)
         ElseIf report_mark_type = "37" Then
-            pushNotif("Received FG in Warehouse", "Document #" + report_number + " is " + type, "FormProductionPLToWHRec", dt.Rows(0)("id_user"), id_user, id_report, report_number, "1")
+            pushNotif("Received FG in Warehouse", "Document #" + report_number + " is " + type, "FormProductionPLToWHRec", dt.Rows(0)("id_user"), id_user, id_report, report_number, "1", report_mark_type)
         ElseIf report_mark_type = "45" Then
-            pushNotif("Return Order", "Document #" + report_number + " is " + type, "FormSalesReturnOrder", dt.Rows(0)("id_user"), id_user, id_report, report_number, "1")
+            pushNotif("Return Order", "Document #" + report_number + " is " + type, "FormSalesReturnOrder", dt.Rows(0)("id_user"), id_user, id_report, report_number, "1", report_mark_type)
         ElseIf report_mark_type = "46" Then
-            pushNotif("Return", "Document #" + report_number + " is " + type, "FormSalesReturn", dt.Rows(0)("id_user"), id_user, id_report, report_number, "1")
+            pushNotif("Return", "Document #" + report_number + " is " + type, "FormSalesReturn", dt.Rows(0)("id_user"), id_user, id_report, report_number, "1", report_mark_type)
         ElseIf report_mark_type = "49" Or report_mark_type = "106" Then
-            pushNotif("Return QC", "Document #" + report_number + " is " + type, "FormSalesReturnQC", dt.Rows(0)("id_user"), id_user, id_report, report_number, "1")
+            pushNotif("Return QC", "Document #" + report_number + " is " + type, "FormSalesReturnQC", dt.Rows(0)("id_user"), id_user, id_report, report_number, "1", report_mark_type)
         ElseIf report_mark_type = "82" Then
-            pushNotif("Product Price From Excel", "Document #" + report_number + " is " + type, "FormMasterPrice", dt.Rows(0)("id_user"), id_user, id_report, report_number, "1")
+            pushNotif("Product Price From Excel", "Document #" + report_number + " is " + type, "FormMasterPrice", dt.Rows(0)("id_user"), id_user, id_report, report_number, "1", report_mark_type)
         ElseIf report_mark_type = "85" Then
-            pushNotif("Packing List Sampple", "Document #" + report_number + " " + type, "FormSamplePLToWH", dt.Rows(0)("id_user"), id_user, id_report, report_number, "1")
+            pushNotif("Packing List Sampple", "Document #" + report_number + " " + type, "FormSamplePLToWH", dt.Rows(0)("id_user"), id_user, id_report, report_number, "1", report_mark_type)
         ElseIf report_mark_type = "86" Then
-            pushNotif("Sample Price From Excel", "Document #" + report_number + " is " + type, "FormMasterPriceSample", dt.Rows(0)("id_user"), id_user, id_report, report_number, "1")
+            pushNotif("Sample Price From Excel", "Document #" + report_number + " is " + type, "FormMasterPriceSample", dt.Rows(0)("id_user"), id_user, id_report, report_number, "1", report_mark_type)
         ElseIf report_mark_type = "87" Then
-            pushNotif("Inventory Allocation", "Document #" + report_number + " " + type, "FormFGWHAlloc", dt.Rows(0)("id_user"), id_user, id_report, report_number, "1")
+            pushNotif("Inventory Allocation", "Document #" + report_number + " " + type, "FormFGWHAlloc", dt.Rows(0)("id_user"), id_user, id_report, report_number, "1", report_mark_type)
         ElseIf report_mark_type = "88" Then
-            pushNotif("Generate Prepare Order", "Document #" + report_number + " " + type + " by " + get_user_identify(id_user, "1") + ".", "FormSalesOrder", dt.Rows(0)("id_user"), id_user, id_report, report_number, "2")
+            pushNotif("Generate Prepare Order", "Document #" + report_number + " " + type + " by " + get_user_identify(id_user, "1") + ".", "FormSalesOrder", dt.Rows(0)("id_user"), id_user, id_report, report_number, "2", report_mark_type)
+        ElseIf report_mark_type = "134" Then
+            Dim note As String = ""
+            If type_par = "2" Then
+                note = "Document #" + report_number + " is not approved and canceled, please submit a new one according to the note"
+            Else
+                note = "Document #" + report_number + " is approved."
+            End If
+            pushNotif("Setup Budget Category", note, "FormItemCatPropose", dt.Rows(0)("id_user"), id_user, id_report, report_number, "1", report_mark_type)
+        ElseIf report_mark_type = "135" Then
+            Dim note As String = ""
+            If type_par = "2" Then
+                note = "Document #" + report_number + " is not approved and canceled, please submit a new one according to the note"
+            Else
+                note = "Document #" + report_number + " is approved."
+            End If
+            pushNotif("Mapping Budget Category", note, "FormItemCatMapping", dt.Rows(0)("id_user"), id_user, id_report, report_number, "1", report_mark_type)
         End If
     End Sub
 

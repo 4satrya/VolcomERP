@@ -43,6 +43,7 @@ Partial Class FormMasterPrice
         Me.GridColumnNo = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnDel = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnPriceType = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnColorDesc = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControlNav = New DevExpress.XtraEditors.PanelControl()
         Me.SLEDel = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -59,6 +60,15 @@ Partial Class FormMasterPrice
         Me.GridColumnSeason = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
         Me.XTPImport = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCFilter = New DevExpress.XtraEditors.GroupControl()
+        Me.BtnViewList = New DevExpress.XtraEditors.SimpleButton()
+        Me.BHide = New DevExpress.XtraEditors.SimpleButton()
+        Me.BExpand = New DevExpress.XtraEditors.SimpleButton()
+        Me.DEUntilList = New DevExpress.XtraEditors.DateEdit()
+        Me.DEFromList = New DevExpress.XtraEditors.DateEdit()
+        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
+        Me.GridColumnEffective = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GCPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XTCPrice, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -75,21 +85,27 @@ Partial Class FormMasterPrice
         CType(Me.SLESeason.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTPImport.SuspendLayout()
+        CType(Me.GCFilter, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GCFilter.SuspendLayout()
+        CType(Me.DEUntilList.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEUntilList.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEFromList.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEFromList.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GCPrice
         '
         Me.GCPrice.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCPrice.Location = New System.Drawing.Point(0, 0)
+        Me.GCPrice.Location = New System.Drawing.Point(0, 39)
         Me.GCPrice.MainView = Me.GVPrice
         Me.GCPrice.Name = "GCPrice"
-        Me.GCPrice.Size = New System.Drawing.Size(699, 317)
+        Me.GCPrice.Size = New System.Drawing.Size(699, 278)
         Me.GCPrice.TabIndex = 0
         Me.GCPrice.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVPrice})
         '
         'GVPrice
         '
-        Me.GVPrice.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnId, Me.GridColumnPriceNumber, Me.GridColumnPriceCreated, Me.GridColumnPriceNote, Me.GridColumnStatus})
+        Me.GVPrice.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnId, Me.GridColumnPriceNumber, Me.GridColumnPriceCreated, Me.GridColumnEffective, Me.GridColumnPriceNote, Me.GridColumnStatus})
         Me.GVPrice.GridControl = Me.GCPrice
         Me.GVPrice.Name = "GVPrice"
         Me.GVPrice.OptionsView.ShowGroupPanel = False
@@ -125,7 +141,7 @@ Partial Class FormMasterPrice
         Me.GridColumnPriceNote.FieldName = "fg_price_note"
         Me.GridColumnPriceNote.Name = "GridColumnPriceNote"
         Me.GridColumnPriceNote.Visible = True
-        Me.GridColumnPriceNote.VisibleIndex = 2
+        Me.GridColumnPriceNote.VisibleIndex = 3
         '
         'GridColumnStatus
         '
@@ -134,7 +150,7 @@ Partial Class FormMasterPrice
         Me.GridColumnStatus.FieldNameSortGroup = "id_report_status"
         Me.GridColumnStatus.Name = "GridColumnStatus"
         Me.GridColumnStatus.Visible = True
-        Me.GridColumnStatus.VisibleIndex = 3
+        Me.GridColumnStatus.VisibleIndex = 4
         '
         'XTCPrice
         '
@@ -168,7 +184,7 @@ Partial Class FormMasterPrice
         '
         'GVBrowsePrice
         '
-        Me.GVBrowsePrice.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnFullCode, Me.GridColumnCode, Me.GridColumnSize, Me.GridColumnClass, Me.GridColumnDesc, Me.GridColumnColor, Me.GridColumnPrice, Me.GridColumnGender, Me.GridColumnRemark, Me.GridColumnSeasonx, Me.GridColumnNo, Me.GridColumnDel, Me.GridColumnPriceType})
+        Me.GVBrowsePrice.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnFullCode, Me.GridColumnCode, Me.GridColumnSize, Me.GridColumnClass, Me.GridColumnDesc, Me.GridColumnColor, Me.GridColumnPrice, Me.GridColumnGender, Me.GridColumnRemark, Me.GridColumnSeasonx, Me.GridColumnNo, Me.GridColumnDel, Me.GridColumnPriceType, Me.GridColumnColorDesc})
         Me.GVBrowsePrice.GridControl = Me.GCBrowsePrice
         Me.GVBrowsePrice.Name = "GVBrowsePrice"
         Me.GVBrowsePrice.OptionsBehavior.AutoExpandAllGroups = True
@@ -231,7 +247,7 @@ Partial Class FormMasterPrice
         Me.GridColumnPrice.FieldName = "design_price"
         Me.GridColumnPrice.Name = "GridColumnPrice"
         Me.GridColumnPrice.Visible = True
-        Me.GridColumnPrice.VisibleIndex = 7
+        Me.GridColumnPrice.VisibleIndex = 8
         '
         'GridColumnGender
         '
@@ -239,7 +255,7 @@ Partial Class FormMasterPrice
         Me.GridColumnGender.FieldName = "division"
         Me.GridColumnGender.Name = "GridColumnGender"
         Me.GridColumnGender.Visible = True
-        Me.GridColumnGender.VisibleIndex = 9
+        Me.GridColumnGender.VisibleIndex = 10
         '
         'GridColumnRemark
         '
@@ -247,7 +263,7 @@ Partial Class FormMasterPrice
         Me.GridColumnRemark.FieldName = "remark"
         Me.GridColumnRemark.Name = "GridColumnRemark"
         Me.GridColumnRemark.Visible = True
-        Me.GridColumnRemark.VisibleIndex = 10
+        Me.GridColumnRemark.VisibleIndex = 11
         '
         'GridColumnSeasonx
         '
@@ -255,7 +271,7 @@ Partial Class FormMasterPrice
         Me.GridColumnSeasonx.FieldName = "season"
         Me.GridColumnSeasonx.Name = "GridColumnSeasonx"
         Me.GridColumnSeasonx.Visible = True
-        Me.GridColumnSeasonx.VisibleIndex = 11
+        Me.GridColumnSeasonx.VisibleIndex = 12
         '
         'GridColumnNo
         '
@@ -272,7 +288,7 @@ Partial Class FormMasterPrice
         Me.GridColumnDel.FieldName = "delivery"
         Me.GridColumnDel.Name = "GridColumnDel"
         Me.GridColumnDel.Visible = True
-        Me.GridColumnDel.VisibleIndex = 12
+        Me.GridColumnDel.VisibleIndex = 13
         '
         'GridColumnPriceType
         '
@@ -280,7 +296,15 @@ Partial Class FormMasterPrice
         Me.GridColumnPriceType.FieldName = "design_price_type"
         Me.GridColumnPriceType.Name = "GridColumnPriceType"
         Me.GridColumnPriceType.Visible = True
-        Me.GridColumnPriceType.VisibleIndex = 8
+        Me.GridColumnPriceType.VisibleIndex = 9
+        '
+        'GridColumnColorDesc
+        '
+        Me.GridColumnColorDesc.Caption = "Color Description"
+        Me.GridColumnColorDesc.FieldName = "color_desc"
+        Me.GridColumnColorDesc.Name = "GridColumnColorDesc"
+        Me.GridColumnColorDesc.Visible = True
+        Me.GridColumnColorDesc.VisibleIndex = 7
         '
         'PanelControlNav
         '
@@ -420,9 +444,109 @@ Partial Class FormMasterPrice
         'XTPImport
         '
         Me.XTPImport.Controls.Add(Me.GCPrice)
+        Me.XTPImport.Controls.Add(Me.GCFilter)
         Me.XTPImport.Name = "XTPImport"
         Me.XTPImport.Size = New System.Drawing.Size(699, 317)
         Me.XTPImport.Text = "Import from Excel"
+        '
+        'GCFilter
+        '
+        Me.GCFilter.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GCFilter.Controls.Add(Me.BtnViewList)
+        Me.GCFilter.Controls.Add(Me.BHide)
+        Me.GCFilter.Controls.Add(Me.BExpand)
+        Me.GCFilter.Controls.Add(Me.DEUntilList)
+        Me.GCFilter.Controls.Add(Me.DEFromList)
+        Me.GCFilter.Controls.Add(Me.LabelControl3)
+        Me.GCFilter.Controls.Add(Me.LabelControl5)
+        Me.GCFilter.Dock = System.Windows.Forms.DockStyle.Top
+        Me.GCFilter.Location = New System.Drawing.Point(0, 0)
+        Me.GCFilter.Name = "GCFilter"
+        Me.GCFilter.Size = New System.Drawing.Size(699, 39)
+        Me.GCFilter.TabIndex = 6
+        '
+        'BtnViewList
+        '
+        Me.BtnViewList.Location = New System.Drawing.Point(317, 9)
+        Me.BtnViewList.LookAndFeel.SkinName = "Blue"
+        Me.BtnViewList.Name = "BtnViewList"
+        Me.BtnViewList.Size = New System.Drawing.Size(75, 20)
+        Me.BtnViewList.TabIndex = 8896
+        Me.BtnViewList.Text = "View"
+        '
+        'BHide
+        '
+        Me.BHide.ImageIndex = 9
+        Me.BHide.Location = New System.Drawing.Point(938, 14)
+        Me.BHide.Name = "BHide"
+        Me.BHide.Size = New System.Drawing.Size(104, 20)
+        Me.BHide.TabIndex = 8898
+        Me.BHide.Text = "Hide All Detail"
+        Me.BHide.Visible = False
+        '
+        'BExpand
+        '
+        Me.BExpand.ImageIndex = 8
+        Me.BExpand.Location = New System.Drawing.Point(835, 14)
+        Me.BExpand.Name = "BExpand"
+        Me.BExpand.Size = New System.Drawing.Size(99, 20)
+        Me.BExpand.TabIndex = 8897
+        Me.BExpand.Text = "Expand All Detail"
+        Me.BExpand.Visible = False
+        '
+        'DEUntilList
+        '
+        Me.DEUntilList.EditValue = Nothing
+        Me.DEUntilList.Location = New System.Drawing.Point(202, 9)
+        Me.DEUntilList.Name = "DEUntilList"
+        Me.DEUntilList.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[False]
+        Me.DEUntilList.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEUntilList.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.DEUntilList.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.DEUntilList.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEUntilList.Properties.Mask.EditMask = "dd\/MM\/yyyy"
+        Me.DEUntilList.Size = New System.Drawing.Size(111, 20)
+        Me.DEUntilList.TabIndex = 8895
+        '
+        'DEFromList
+        '
+        Me.DEFromList.EditValue = Nothing
+        Me.DEFromList.Location = New System.Drawing.Point(58, 9)
+        Me.DEFromList.Name = "DEFromList"
+        Me.DEFromList.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[False]
+        Me.DEFromList.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEFromList.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.DEFromList.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.DEFromList.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEFromList.Properties.Mask.EditMask = "dd\/MM\/yyyy"
+        Me.DEFromList.Size = New System.Drawing.Size(111, 20)
+        Me.DEFromList.TabIndex = 8894
+        '
+        'LabelControl3
+        '
+        Me.LabelControl3.Location = New System.Drawing.Point(175, 12)
+        Me.LabelControl3.Name = "LabelControl3"
+        Me.LabelControl3.Size = New System.Drawing.Size(21, 13)
+        Me.LabelControl3.TabIndex = 8893
+        Me.LabelControl3.Text = "Until"
+        '
+        'LabelControl5
+        '
+        Me.LabelControl5.Location = New System.Drawing.Point(28, 12)
+        Me.LabelControl5.Name = "LabelControl5"
+        Me.LabelControl5.Size = New System.Drawing.Size(24, 13)
+        Me.LabelControl5.TabIndex = 8892
+        Me.LabelControl5.Text = "From"
+        '
+        'GridColumnEffective
+        '
+        Me.GridColumnEffective.Caption = "Effective Date"
+        Me.GridColumnEffective.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.GridColumnEffective.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumnEffective.FieldName = "fg_effective_date"
+        Me.GridColumnEffective.Name = "GridColumnEffective"
+        Me.GridColumnEffective.Visible = True
+        Me.GridColumnEffective.VisibleIndex = 2
         '
         'FormMasterPrice
         '
@@ -451,6 +575,13 @@ Partial Class FormMasterPrice
         CType(Me.SLESeason.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XTPImport.ResumeLayout(False)
+        CType(Me.GCFilter, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GCFilter.ResumeLayout(False)
+        Me.GCFilter.PerformLayout()
+        CType(Me.DEUntilList.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEUntilList.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEFromList.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEFromList.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -495,4 +626,14 @@ Partial Class FormMasterPrice
     Friend WithEvents GridColumnNo As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnDel As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnPriceType As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnColorDesc As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GCFilter As DevExpress.XtraEditors.GroupControl
+    Friend WithEvents BtnViewList As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BHide As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BExpand As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents DEUntilList As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents DEFromList As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents LabelControl3 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LabelControl5 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents GridColumnEffective As DevExpress.XtraGrid.Columns.GridColumn
 End Class

@@ -225,6 +225,7 @@
                     If id_b_expense = "0" Then
                         id_b_expense = "NULL"
                     End If
+
                     Dim value_old As String = decimalSQL(GVData.GetRowCellValue(i, "total_budget").ToString)
                     Dim value_new As String = decimalSQL(GVData.GetRowCellValue(i, "total_actual").ToString)
                     Dim id_item_coa As String = GVData.GetRowCellValue(i, "id_item_coa").ToString
@@ -232,7 +233,7 @@
                     If i > 0 Then
                         qiy += ", "
                     End If
-                    qiy += "('" + id + "', '" + id_b_expense + "','" + id_item_coa + "', '" + value_old + "', '" + value_new + "') "
+                    qiy += "('" + id + "', " + id_b_expense + ",'" + id_item_coa + "', '" + value_old + "', '" + value_new + "') "
                 Next
                 If GVData.RowCount > 0 Then
                     execute_non_query(qiy, True, "", "", "", "")

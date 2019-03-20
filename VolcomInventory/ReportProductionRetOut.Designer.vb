@@ -61,6 +61,9 @@ Partial Public Class ReportProductionRetOut
         Me.LabelNote = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel9 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel14 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LOVH3 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LOVH2 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LOVH1 = New DevExpress.XtraReports.UI.XRLabel()
         CType(Me.GCRetDetail, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVRetDetail, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemSpinEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -254,7 +257,7 @@ Partial Public Class ReportProductionRetOut
         Me.XrPanel1.Borders = CType(((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top) _
             Or DevExpress.XtraPrinting.BorderSide.Right), DevExpress.XtraPrinting.BorderSide)
         Me.XrPanel1.CanGrow = False
-        Me.XrPanel1.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel23, Me.LabelSeason, Me.XrLabel21, Me.LabelDesign, Me.XrLabel19, Me.XrLabel17, Me.LabelPO, Me.XrLabel20, Me.XrLabel18, Me.LabelDueDate, Me.XrLabel13, Me.XrLabel12, Me.LabelTo, Me.XrLabel10, Me.XrLabel3, Me.XrLabel4, Me.XrLabel2, Me.LabelFrom})
+        Me.XrPanel1.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.LOVH3, Me.LOVH2, Me.LOVH1, Me.XrLabel23, Me.LabelSeason, Me.XrLabel21, Me.LabelDesign, Me.XrLabel19, Me.XrLabel17, Me.LabelPO, Me.XrLabel20, Me.XrLabel18, Me.LabelDueDate, Me.XrLabel13, Me.XrLabel12, Me.LabelTo, Me.XrLabel10, Me.XrLabel3, Me.XrLabel4, Me.XrLabel2, Me.LabelFrom})
         Me.XrPanel1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 33.91662!)
         Me.XrPanel1.Name = "XrPanel1"
         Me.XrPanel1.SizeF = New System.Drawing.SizeF(786.0!, 131.0834!)
@@ -560,6 +563,40 @@ Partial Public Class ReportProductionRetOut
         Me.XrLabel14.StylePriority.UseBorders = False
         Me.XrLabel14.Text = ":"
         '
+        'LOVH3
+        '
+        Me.LOVH3.Borders = DevExpress.XtraPrinting.BorderSide.None
+        Me.LOVH3.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LOVH3.LocationFloat = New DevExpress.Utils.PointFloat(664.597!, 42.75014!)
+        Me.LOVH3.Name = "LOVH3"
+        Me.LOVH3.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LOVH3.SizeF = New System.Drawing.SizeF(111.403!, 13.58332!)
+        Me.LOVH3.StylePriority.UseBorders = False
+        Me.LOVH3.StylePriority.UseFont = False
+        Me.LOVH3.Text = "-"
+        '
+        'LOVH2
+        '
+        Me.LOVH2.Borders = DevExpress.XtraPrinting.BorderSide.None
+        Me.LOVH2.LocationFloat = New DevExpress.Utils.PointFloat(653.1387!, 42.75007!)
+        Me.LOVH2.Name = "LOVH2"
+        Me.LOVH2.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LOVH2.SizeF = New System.Drawing.SizeF(11.45833!, 13.58335!)
+        Me.LOVH2.StylePriority.UseBorders = False
+        Me.LOVH2.Text = ":"
+        '
+        'LOVH1
+        '
+        Me.LOVH1.Borders = DevExpress.XtraPrinting.BorderSide.None
+        Me.LOVH1.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LOVH1.LocationFloat = New DevExpress.Utils.PointFloat(567.247!, 42.7501!)
+        Me.LOVH1.Name = "LOVH1"
+        Me.LOVH1.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LOVH1.SizeF = New System.Drawing.SizeF(85.89175!, 13.58334!)
+        Me.LOVH1.StylePriority.UseBorders = False
+        Me.LOVH1.StylePriority.UseFont = False
+        Me.LOVH1.Text = "Overhead"
+        '
         'ReportProductionRetOut
         '
         Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.Detail, Me.TopMargin, Me.BottomMargin, Me.PageFooter})
@@ -616,4 +653,7 @@ Partial Public Class ReportProductionRetOut
     Friend WithEvents XrLabel23 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents LabelSeason As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel21 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents LOVH3 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents LOVH2 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents LOVH1 As DevExpress.XtraReports.UI.XRLabel
 End Class

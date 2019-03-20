@@ -321,7 +321,7 @@ Partial Class FormEmpUniReport
         Me.MinimizeBox = False
         Me.Name = "FormEmpUniReport"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Uniform Report"
+        Me.Text = "Uniform Department Report"
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         Me.PanelControl1.PerformLayout()

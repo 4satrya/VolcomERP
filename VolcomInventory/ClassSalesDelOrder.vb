@@ -12,10 +12,10 @@
             condition = ""
         End If
 
-        Dim query As String = "SELECT a.id_pl_sales_order_del, a.id_sales_order, a.id_store_contact_to, (d.id_comp) AS `id_store`,(d.comp_name) AS store_name_to, (d.comp_number) AS store_number_to, CONCAT(d.comp_number, ' - ', d.comp_name) AS `store`, (d.address_primary) AS store_address_to, d.id_so_type, a.id_report_status, f.report_status, "
+        Dim query As String = "SELECT a.id_pl_sales_order_del, a.id_sales_order, a.id_store_contact_to, d.id_commerce_type,(d.id_comp) AS `id_store`,(d.comp_name) AS store_name_to, (d.comp_number) AS store_number_to, CONCAT(d.comp_number, ' - ', d.comp_name) AS `store`, (d.address_primary) AS store_address_to, d.id_so_type, a.id_report_status, f.report_status, "
         query += "a.pl_sales_order_del_note, a.pl_sales_order_del_date, DATE_FORMAT(a.pl_sales_order_del_date,'%Y-%m-%d') AS pl_sales_order_del_datex, a.pl_sales_order_del_number, b.sales_order_number, b.sales_order_ol_shop_number, "
         query += "DATE_FORMAT(a.pl_sales_order_del_date,'%d %M %Y') AS pl_sales_order_del_date, a.id_comp_contact_from,(wh.id_comp) AS `id_wh`, (wh.comp_number) AS `wh_number`,(wh.comp_name) AS `wh_name`, CONCAT(wh.comp_number, ' - ', wh.comp_name) AS `wh`, a.id_wh_drawer, drw.wh_drawer_code, drw.wh_drawer, cat.id_so_status, cat.so_status, "
-        query += "a.last_update, getUserEmp(a.last_update_by, 1) AS `last_user`, ('No') AS `is_select`, IFNULL(det.`total`,0) AS `total`, rmg.`total_remaining`, eu.period_name, ut.uni_type, ube.employee_code, ube.employee_name, a.is_combine, IFNULL(a.id_combine,0) AS `id_combine`, IFNULL(comb.combine_number,'-') AS `combine_number`, b.sales_order_ol_shop_number, IFNULL(pb.prepared_by,'-') AS `prepared_by` "
+        query += "a.last_update, getUserEmp(a.last_update_by, 1) AS `last_user`, ('No') AS `is_select`, IFNULL(det.`total`,0) AS `total`, rmg.`total_remaining`, eu.period_name, ut.uni_type, ube.employee_code, ube.employee_name, a.is_combine, IFNULL(a.id_combine,0) AS `id_combine`, IFNULL(comb.combine_number,'-') AS `combine_number`, b.sales_order_ol_shop_number, IFNULL(pb.prepared_by,'-') AS `prepared_by`, a.is_use_unique_code "
         query += "FROM tb_pl_sales_order_del a "
         query += "INNER JOIN tb_sales_order b ON a.id_sales_order = b.id_sales_order "
         query += "INNER JOIN tb_m_comp_contact c ON c.id_comp_contact = a.id_store_contact_to "
@@ -201,5 +201,108 @@
         'update delivery slip
         Dim query As String = String.Format("UPDATE tb_pl_sales_order_del_combine SET id_report_status='{0}', last_update=NOW(), last_update_by=" + id_user + " WHERE id_combine ='{1}'", id_status_reportx_par, id_report_par)
         execute_non_query(query, True, "", "", "", "")
+    End Sub
+
+    Public Sub insertUniqueCode(ByVal id_report_par As String, ByVal id_comp_par As String, ByVal is_use_unique_code_par As String)
+        If is_use_unique_code_par = "1" Then
+            Dim query As String = "INSERT INTO tb_m_unique_code(`id_comp` , `id_product` ,`id_pl_sales_order_del_det_counting`, `id_type`, `unique_code` , 
+            `id_design_price` , `design_price` , `qty` , `is_unique_report` , `input_date` )
+            SELECT " + id_comp_par + ",dd.id_product, ddu.id_pl_sales_order_del_det_counting,1, CONCAT(p.product_full_code,ddu.pl_sales_order_del_det_counting) AS `code`, dd.id_design_price, dd.design_price, 1, IF(ISNULL(u.is_unique_report),1, u.is_unique_report) AS `is_unique_report`, NOW()
+            FROM tb_pl_sales_order_del_det dd 
+            INNER JOIN tb_pl_sales_order_del d ON d.id_pl_sales_order_del = dd.id_pl_sales_order_del
+            INNER JOIN tb_pl_sales_order_del_det_counting ddu ON ddu.id_pl_sales_order_del_det = dd.id_pl_sales_order_del_det
+            INNER JOIN tb_m_product p ON p.id_product = dd.id_product
+            INNER JOIN tb_m_design dsg ON dsg.id_design = p.id_design
+            LEFT JOIN (
+	            SELECT u.id_product, u.is_unique_report 
+	            FROM tb_m_unique_code u
+	            WHERE u.id_comp=" + id_comp_par + "
+	            GROUP BY u.id_product
+            ) u ON u.id_product = dd.id_product
+            WHERE dd.id_pl_sales_order_del=" + id_report_par + " AND dsg.is_old_design=2 "
+            execute_non_query(query, True, "", "", "", "")
+        End If
+    End Sub
+
+    Public Sub insertUniqueCodeHead(ByVal id_report_par As String, ByVal id_comp_par As String, ByVal is_use_unique_code_par As String)
+        Dim query As String = "INSERT INTO tb_m_unique_code(`id_comp` , `id_product` ,`id_pl_sales_order_del_det_counting`, `id_type`, `unique_code` , 
+        `id_design_price` , `design_price` , `qty` , `is_unique_report` , `input_date` )
+        SELECT " + id_comp_par + ",dd.id_product, ddu.id_pl_sales_order_del_det_counting,1, CONCAT(p.product_full_code,ddu.pl_sales_order_del_det_counting) AS `code`, dd.id_design_price, dd.design_price, 1, IF(ISNULL(u.is_unique_report),1, u.is_unique_report) AS `is_unique_report`, NOW()
+        FROM tb_pl_sales_order_del_det dd 
+        INNER JOIN tb_pl_sales_order_del d ON d.id_pl_sales_order_del = dd.id_pl_sales_order_del
+        INNER JOIN tb_pl_sales_order_del_det_counting ddu ON ddu.id_pl_sales_order_del_det = dd.id_pl_sales_order_del_det
+        INNER JOIN tb_m_product p ON p.id_product = dd.id_product
+        INNER JOIN tb_m_design dsg ON dsg.id_design = p.id_design
+        LEFT JOIN (
+	        SELECT u.id_product, u.is_unique_report 
+	        FROM tb_m_unique_code u
+	        WHERE u.id_comp=" + id_comp_par + "
+	        GROUP BY u.id_product
+        ) u ON u.id_product = dd.id_product
+        WHERE d.id_combine=" + id_report_par + " AND d.is_use_unique_code=1 AND dsg.is_old_design=2 "
+        execute_non_query(query, True, "", "", "", "")
+    End Sub
+
+    Public Function getMasterDelivery(ByVal del As String) As DataTable
+        Dim query As String = "SELECT m.*, cd.code_detail_name AS `size`
+        FROM (
+	        SELECT dd.id_product, p.product_full_code AS `code`, dsg.design_display_name AS `name`, dd.design_price
+	        FROM tb_pl_sales_order_del d
+	        INNER JOIN tb_pl_sales_order_del_det dd ON dd.id_pl_sales_order_del = d.id_pl_sales_order_del
+	        INNER JOIN tb_m_product p ON p.id_product = dd.id_product
+	        INNER JOIN tb_m_design dsg ON dsg.id_design = p.id_design
+	        WHERE dsg.is_old_design=1 AND (" + del + ")
+	        GROUP BY dd.id_product
+	        UNION ALL
+	        SELECT dd.id_product, p.product_full_code AS `code`, dsg.design_display_name AS `name`, dd.design_price
+	        FROM tb_pl_sales_order_del d
+	        INNER JOIN tb_pl_sales_order_del_det dd ON dd.id_pl_sales_order_del = d.id_pl_sales_order_del
+	        INNER JOIN tb_pl_sales_order_del_det_counting dc ON dc.id_pl_sales_order_del_det = dd.id_pl_sales_order_del_det
+	        INNER JOIN tb_m_unique_code mc ON mc.id_pl_sales_order_del_det_counting = dc.id_pl_sales_order_del_det_counting AND mc.id_type=1
+	        INNER JOIN tb_m_product p ON p.id_product = dd.id_product
+	        INNER JOIN tb_m_design dsg ON dsg.id_design = p.id_design
+	        WHERE dsg.is_old_design=2 AND (" + del + ")
+	        AND mc.is_unique_report=2
+	        GROUP BY dd.id_product
+	        UNION ALL 
+	        SELECT dd.id_product, mc.unique_code AS `code`, dsg.design_display_name AS `name`, dd.design_price
+	        FROM tb_pl_sales_order_del d
+	        INNER JOIN tb_pl_sales_order_del_det dd ON dd.id_pl_sales_order_del = d.id_pl_sales_order_del
+	        INNER JOIN tb_pl_sales_order_del_det_counting dc ON dc.id_pl_sales_order_del_det = dd.id_pl_sales_order_del_det
+	        INNER JOIN tb_m_unique_code mc ON mc.id_pl_sales_order_del_det_counting = dc.id_pl_sales_order_del_det_counting AND mc.id_type=1
+	        INNER JOIN tb_m_product p ON p.id_product = dd.id_product
+	        INNER JOIN tb_m_design dsg ON dsg.id_design = p.id_design
+	        WHERE dsg.is_old_design=2 AND (" + del + ")
+	        AND mc.is_unique_report=1
+	        GROUP BY dd.id_product, mc.id_unique_code
+        ) m
+        INNER JOIN tb_m_product_code pc ON pc.id_product = m.id_product
+        INNER JOIN tb_m_code_detail cd ON cd.id_code_detail = pc.id_code_detail
+        ORDER BY `code` ASC, `name` ASC "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        Return data
+    End Function
+
+    Public Sub sendEmailConfirmation(ByVal id_report As String)
+        'only online store
+        Dim query As String = "SELECT del.id_pl_sales_order_del, del.pl_sales_order_del_number AS `del_number`, 
+        DATE_FORMAT(del.pl_sales_order_del_date, '%d %M %Y') AS `scan_date`, DATE_FORMAT(fcom.report_mark_datetime,'%d %M %Y %H:%i') AS `appr_date`,
+        so.sales_order_number AS `order_number`, so.sales_order_ol_shop_number AS `ol_store_order_number`, DATE_FORMAT(so.sales_order_date,'%d %M %Y') AS `order_date`, so.customer_name,
+        CONCAT(s.comp_number, ' - ', s.comp_name) AS `store`, sg.comp_group AS `store_group_code`, sg.description AS `store_group`
+        FROM tb_pl_sales_order_del del 
+        INNER JOIN tb_m_comp_contact sc ON sc.id_comp_contact = del.id_store_contact_to
+        INNER JOIN tb_m_comp s ON s.id_comp = sc.id_comp
+        INNER JOIN tb_m_comp_group sg ON sg.id_comp_group = s.id_comp_group
+        INNER JOIN tb_report_mark fcom ON fcom.id_report = del.id_pl_sales_order_del AND fcom.report_mark_type=43 AND fcom.is_use=1 AND fcom.id_mark=2 AND fcom.id_report_status=3
+        INNER JOIN tb_sales_order so ON so.id_sales_order = del.id_sales_order
+        WHERE del.id_pl_sales_order_del='" + id_report + "' AND s.id_commerce_type=2 "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        If data.Rows.Count > 0 Then
+            Dim em As New ClassSendEmail
+            em.report_mark_type = "43_ready"
+            em.id_report = id_report
+            em.dt = data
+            em.send_email()
+        End If
     End Sub
 End Class

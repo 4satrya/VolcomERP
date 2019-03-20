@@ -484,4 +484,11 @@
     Private Sub BCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BCancel.Click
         Close()
     End Sub
+
+    Private Sub GVMat_ColumnFilterChanged(sender As Object, e As EventArgs) Handles GVMat.ColumnFilterChanged
+        If Not GVMat.RowCount < 1 Then
+            view_mat_price(GVMat.GetFocusedRowCellDisplayText("id_mat_det").ToString)
+            load_mat_price()
+        End If
+    End Sub
 End Class

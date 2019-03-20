@@ -11,6 +11,8 @@ Public Class ReportSamplePurchase
         Dim query = "CALL view_purc_sample_det('" & id_sample_purc & "')"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCListPurchase.DataSource = data
+        GVListPurchase.BestFitColumns()
+
         If data.Rows.Count > 0 Then
             calculate()
         End If

@@ -457,6 +457,7 @@ Public Class FormProductionPLToWHDet
                     Cursor = Cursors.WaitCursor
                     Try
                         'Main tbale
+                        BtnSave.Enabled = False
                         pl_prod_order_number = header_number_prod("7")
                         query = "INSERT INTO tb_pl_prod_order(id_prod_order, pl_prod_order_number, id_comp_contact_to, id_comp_contact_from, pl_prod_order_date, pl_prod_order_note, id_report_status, id_pl_category, id_pd_alloc) "
                         query += "VALUES('" + id_prod_order + "', '" + pl_prod_order_number + "', '" + id_comp_contact_to + "', '" + id_comp_contact_from + "', NOW(), '" + pl_prod_order_note + "', '" + id_report_status + "', '" + id_pl_category + "', NULL); SELECT LAST_INSERT_ID(); "
@@ -538,7 +539,7 @@ Public Class FormProductionPLToWHDet
 
                         infoCustom("PL was created successfully!")
                     Catch ex As Exception
-                        errorConnection()
+                        stopCustom(ex.ToString)
                     End Try
                     Cursor = Cursors.Default
                 End If

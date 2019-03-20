@@ -1,4 +1,4 @@
-﻿Public Class FormSalesPOS 
+﻿Public Class FormSalesPOS
     Dim bnew_active As String = "1"
     Dim bedit_active As String = "1"
     Dim bdel_active As String = "1"
@@ -252,6 +252,25 @@
     Private Sub GVSalesPOSDet_CustomColumnDisplayText(ByVal sender As System.Object, ByVal e As DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs) Handles GVSalesPOSDet.CustomColumnDisplayText
         If e.Column.FieldName = "no" Then
             e.DisplayText = (e.ListSourceRowIndex + 1).ToString()
+        End If
+    End Sub
+
+    Private Sub BtnNoStock_Click(sender As Object, e As EventArgs) Handles BtnNoStock.Click
+        Cursor = Cursors.WaitCursor
+        If id_departement_user = "14" Then 'IA
+            FormSalesPOSNoStock.id_menu = "2"
+        Else
+            FormSalesPOSNoStock.id_menu = "1"
+        End If
+        FormSalesPOSNoStock.ShowDialog()
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub GVSalesPOS_DoubleClick(sender As Object, e As EventArgs) Handles GVSalesPOS.DoubleClick
+        If GVSalesPOS.RowCount > 0 And GVSalesPOS.FocusedRowHandle >= 0 Then
+            Cursor = Cursors.WaitCursor
+            FormMain.but_edit()
+            Cursor = Cursors.Default
         End If
     End Sub
 End Class

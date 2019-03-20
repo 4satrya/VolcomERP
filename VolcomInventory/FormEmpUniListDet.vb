@@ -4,6 +4,7 @@
     Dim id_report_status As String = " -1"
     Dim id_wh_drawer As String = "-1"
     Public is_view As String = "-1"
+    Public is_dept_head As String = "-1"
 
     Private Sub FormEmpUniListDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewWH()
@@ -29,7 +30,12 @@
         LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", data.Rows(0)("id_report_status").ToString)
         id_report_status = data.Rows(0)("id_report_status").ToString
         id_emp_uni_period = data.Rows(0)("id_emp_uni_period").ToString
-
+        is_dept_head = data.Rows(0)("is_dept_head").ToString
+        If is_dept_head = "1" Then
+            CEforDeptHead.EditValue = True
+        Else
+            CEforDeptHead.EditValue = False
+        End If
 
         'check mark
         Dim qm As String = "SELECT * FROM tb_report_mark rm WHERE rm.report_mark_type=123 AND id_report =" + id_emp_uni_design + " "
@@ -150,7 +156,13 @@
             If confirm = Windows.Forms.DialogResult.Yes Then
                 Cursor = Cursors.WaitCursor
                 Dim note As String = addSlashes(MENote.Text)
-                Dim query As String = "UPDATE tb_emp_uni_design SET note='" + note + "' WHERE id_emp_uni_design=" + id_emp_uni_design + " "
+                If is_dept_head = "True" Then
+                    is_dept_head = "1"
+                Else
+                    is_dept_head = "2"
+                End If
+
+                Dim query As String = "UPDATE tb_emp_uni_design SET note='" + note + "', is_dept_head='" + is_dept_head + "' WHERE id_emp_uni_design=" + id_emp_uni_design + " "
                 execute_non_query(query, True, "", "", "", "")
 
                 'submit

@@ -30,7 +30,12 @@ Public Class ReportProductionMRS
     End Sub
 
     Private Sub TopMargin_BeforePrint(ByVal sender As System.Object, ByVal e As System.Drawing.Printing.PrintEventArgs) Handles TopMargin.BeforePrint
-        Dim query As String = String.Format("SELECT prod_order_mrs_number,id_prod_order,id_prod_order_wo,prod_order_mrs_note,id_report_status,id_comp_contact_req_from,id_comp_contact_req_to,DATE_FORMAT(prod_order_mrs_date,'%Y-%m-%d') as prod_order_mrs_datex FROM tb_prod_order_mrs WHERE id_prod_order_mrs = '{0}'", id_mrs)
+        Dim query As String = String.Format("SELECT po.prod_order_number,dsg.`design_display_name`,mrs.prod_order_mrs_number,mrs.id_prod_order,mrs.id_prod_order_wo,mrs.prod_order_mrs_note,mrs.id_report_status,mrs.id_comp_contact_req_from,mrs.id_comp_contact_req_to,DATE_FORMAT(mrs.prod_order_mrs_date,'%Y-%m-%d') AS prod_order_mrs_datex 
+FROM tb_prod_order_mrs mrs
+INNER JOIN tb_prod_order po ON mrs.id_prod_order=po.id_prod_order
+INNER JOIN tb_prod_demand_design pdd ON po.id_prod_demand_design=pdd.id_prod_demand_design
+INNER JOIN tb_m_design dsg ON dsg.`id_design`=pdd.`id_design`
+WHERE id_prod_order_mrs = '{0}'", id_mrs)
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
         If data.Rows(0)("id_prod_order_wo").ToString = "" Then
@@ -52,8 +57,8 @@ Public Class ReportProductionMRS
             '
             LLMRSType.Text = "Other"
         Else
-            LPONo.Text = get_prod_order_x(data.Rows(0)("id_prod_order").ToString, "2")
-            LDesignName.Text = get_design_x(get_prod_demand_design_x(get_prod_order_x(data.Rows(0)("id_prod_order").ToString, "1"), "3"), "1")
+            LPONo.Text = data.Rows(0)("prod_order_number").ToString
+            LDesignName.Text = data.Rows(0)("design_display_name").ToString
         End If
 
         id_comp_req_from = data.Rows(0)("id_comp_contact_req_from").ToString
@@ -65,7 +70,7 @@ Public Class ReportProductionMRS
         LMRSNumber.Text = data.Rows(0)("prod_order_mrs_number").ToString
         LMRSDate.Text = view_date_from(data.Rows(0)("prod_order_mrs_datex").ToString, 0)
         LNote.Text = data.Rows(0)("prod_order_mrs_note").ToString
-        LPONo.Text = data.Rows(0)("prod_order_mrs_number").ToString
+        LPONo.Text = data.Rows(0)("prod_order_number").ToString
     End Sub
 
     Private Sub ReportMatWO_BeforePrint(ByVal sender As System.Object, ByVal e As System.Drawing.Printing.PrintEventArgs) Handles MyBase.BeforePrint

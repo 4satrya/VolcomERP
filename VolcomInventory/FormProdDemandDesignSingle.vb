@@ -68,6 +68,7 @@ Public Class FormProdDemandDesignSingle
     Sub actionLoad()
         'updated 16 december 2014
         TxtRate.EditValue = 0.0
+        TxtRateManagement.EditValue = 0.0
         TxtMSRP.EditValue = 0.0
         TxtMSRPRp.EditValue = 0.0
 
@@ -95,6 +96,7 @@ Public Class FormProdDemandDesignSingle
             TxtAdditionalPrice.Properties.ReadOnly = True
             TxtPriceNonAdditional.Properties.ReadOnly = True
             TxtMSRPRp.Properties.ReadOnly = True
+            TxtRateManagement.Properties.ReadOnly = True
 
             'prevent close without save
             BtnCancel.Visible = False
@@ -127,6 +129,7 @@ Public Class FormProdDemandDesignSingle
 
             'updated 16 december 2014
             TxtRate.EditValue = data.Rows(0)("rate_current")
+            TxtRateManagement.EditValue = data.Rows(0)("rate_management")
             TxtCurr.Text = data.Rows(0)("currency").ToString
             id_currency = data.Rows(0)("id_currency").ToString
             TxtMSRP.EditValue = data.Rows(0)("msrp")
@@ -468,6 +471,9 @@ Public Class FormProdDemandDesignSingle
             Dim msrp_rp As String = decimalSQL(TxtMSRPRp.EditValue.ToString)
             Dim date_available_start As String = DateTime.Parse(DEStart.EditValue.ToString).ToString("yyyy-MM-dd")
 
+            '02 januari 2019
+            Dim rate_management As String = decimalSQL(TxtRateManagement.EditValue.ToString)
+
             If action = "ins" Then
                 Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure to save this data ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
                 If confirm = Windows.Forms.DialogResult.Yes Then
@@ -511,7 +517,7 @@ Public Class FormProdDemandDesignSingle
                         If cond_date Then
                             'Dim date_available_start As String = DateTime.Parse(DEStart.EditValue.ToString).ToString("yyyy-MM-dd")
 
-                            query = "UPDATE tb_prod_demand_design SET id_design = '" + id_design + "', id_delivery = '" + id_delivery + "', prod_demand_design_propose_price='" + prod_demand_design_propose_price + "', royalty_design = '" + royalty_design + "', royalty_special='" + royalty_special + "', prod_demand_design_estimate_price = '" + prod_demand_design_estimate_price + "', inflation = '" + inflation + "', prod_demand_design_total_cost='" + prod_demand_design_total_cost + "', date_available_start='" + date_available_start + "', rate_current = '" + rate_current + "', msrp='" + msrp + "', msrp_rp='" + msrp_rp + "', "
+                            query = "UPDATE tb_prod_demand_design SET id_design = '" + id_design + "', id_delivery = '" + id_delivery + "', prod_demand_design_propose_price='" + prod_demand_design_propose_price + "', royalty_design = '" + royalty_design + "', royalty_special='" + royalty_special + "', prod_demand_design_estimate_price = '" + prod_demand_design_estimate_price + "', inflation = '" + inflation + "', prod_demand_design_total_cost='" + prod_demand_design_total_cost + "', date_available_start='" + date_available_start + "', rate_current = '" + rate_current + "', rate_management='" + rate_management + "', msrp='" + msrp + "', msrp_rp='" + msrp_rp + "', "
                             If id_currency = "-1" Or id_currency = "" Then
                                 query += "id_currency = NULL "
                             Else
@@ -957,7 +963,7 @@ Public Class FormProdDemandDesignSingle
         'UPDATED 16 DECEMBER 2014
         Dim rate As Decimal = 0.0
         Try
-            rate = TxtRate.EditValue
+            rate = TxtRateManagement.EditValue
         Catch ex As Exception
         End Try
 
@@ -1162,6 +1168,18 @@ Public Class FormProdDemandDesignSingle
 
     Private Sub GVLogCost_FocusedRowChanged(sender As Object, e As DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs) Handles GVLogCost.FocusedRowChanged
 
+    End Sub
+
+    Private Sub BtnRateCurrent_Click(sender As Object, e As EventArgs) Handles BtnRateCurrent.Click
+        Cursor = Cursors.WaitCursor
+        Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure want to update rate?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+        If confirm = Windows.Forms.DialogResult.Yes Then
+            Dim query As String = "SELECT IFNULL(o.rate_management,1) AS `rate_management` FROM tb_opt o "
+            Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+            TxtRateManagement.EditValue = data.Rows(0)("rate_management")
+            getMSRPRP()
+        End If
+        Cursor = Cursors.Default
     End Sub
 
     Private Sub GVLogCost_DoubleClick(sender As Object, e As EventArgs) Handles GVLogCost.DoubleClick

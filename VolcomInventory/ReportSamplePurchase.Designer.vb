@@ -174,7 +174,7 @@ Partial Public Class ReportSamplePurchase
         Me.ColNo.Name = "ColNo"
         Me.ColNo.Visible = True
         Me.ColNo.VisibleIndex = 0
-        Me.ColNo.Width = 44
+        Me.ColNo.Width = 73
         '
         'ColCode
         '
@@ -183,7 +183,7 @@ Partial Public Class ReportSamplePurchase
         Me.ColCode.Name = "ColCode"
         Me.ColCode.Visible = True
         Me.ColCode.VisibleIndex = 1
-        Me.ColCode.Width = 119
+        Me.ColCode.Width = 155
         '
         'ColName
         '
@@ -192,7 +192,7 @@ Partial Public Class ReportSamplePurchase
         Me.ColName.Name = "ColName"
         Me.ColName.Visible = True
         Me.ColName.VisibleIndex = 2
-        Me.ColName.Width = 254
+        Me.ColName.Width = 315
         '
         'ColSize
         '
@@ -206,7 +206,7 @@ Partial Public Class ReportSamplePurchase
         Me.ColSize.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "size", "Sub Total :")})
         Me.ColSize.Visible = True
         Me.ColSize.VisibleIndex = 3
-        Me.ColSize.Width = 87
+        Me.ColSize.Width = 163
         '
         'ColColor
         '
@@ -219,6 +219,7 @@ Partial Public Class ReportSamplePurchase
         Me.ColColor.Name = "ColColor"
         Me.ColColor.Visible = True
         Me.ColColor.VisibleIndex = 5
+        Me.ColColor.Width = 261
         '
         'ColPrice
         '
@@ -232,8 +233,8 @@ Partial Public Class ReportSamplePurchase
         Me.ColPrice.FieldName = "price"
         Me.ColPrice.Name = "ColPrice"
         Me.ColPrice.Visible = True
-        Me.ColPrice.VisibleIndex = 7
-        Me.ColPrice.Width = 126
+        Me.ColPrice.VisibleIndex = 6
+        Me.ColPrice.Width = 314
         '
         'ColQty
         '
@@ -249,7 +250,7 @@ Partial Public Class ReportSamplePurchase
         Me.ColQty.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty", "{0:N2}")})
         Me.ColQty.Visible = True
         Me.ColQty.VisibleIndex = 4
-        Me.ColQty.Width = 105
+        Me.ColQty.Width = 106
         '
         'ColDiscount
         '
@@ -262,8 +263,6 @@ Partial Public Class ReportSamplePurchase
         Me.ColDiscount.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.ColDiscount.FieldName = "discount"
         Me.ColDiscount.Name = "ColDiscount"
-        Me.ColDiscount.Visible = True
-        Me.ColDiscount.VisibleIndex = 6
         Me.ColDiscount.Width = 118
         '
         'GridColumn1
@@ -288,8 +287,8 @@ Partial Public Class ReportSamplePurchase
         Me.ColSubtotal.Name = "ColSubtotal"
         Me.ColSubtotal.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total", "{0:N2}")})
         Me.ColSubtotal.Visible = True
-        Me.ColSubtotal.VisibleIndex = 8
-        Me.ColSubtotal.Width = 164
+        Me.ColSubtotal.VisibleIndex = 7
+        Me.ColSubtotal.Width = 245
         '
         'ColNote
         '
@@ -309,7 +308,7 @@ Partial Public Class ReportSamplePurchase
         'TopMargin
         '
         Me.TopMargin.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrPanel1, Me.LPODate, Me.XrLabel1, Me.LPONumber, Me.XrLabel12, Me.LTitle})
-        Me.TopMargin.HeightF = 115.2083!
+        Me.TopMargin.HeightF = 138.125!
         Me.TopMargin.Name = "TopMargin"
         Me.TopMargin.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
         Me.TopMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
@@ -320,7 +319,7 @@ Partial Public Class ReportSamplePurchase
             Or DevExpress.XtraPrinting.BorderSide.Right), DevExpress.XtraPrinting.BorderSide)
         Me.XrPanel1.CanGrow = False
         Me.XrPanel1.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.LSeason, Me.XrLabel20, Me.XrLabel17, Me.XrLabel19, Me.LShipToAddress, Me.XrLabel21, Me.XrLabel13, Me.LShipToName, Me.XrLabel15, Me.XrLabel11, Me.XrLabel10, Me.XrLabel9, Me.LToName, Me.LToAttn, Me.LToAddress, Me.XrLabel4, Me.XrLabel2, Me.XrLabel3})
-        Me.XrPanel1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 25.08329!)
+        Me.XrPanel1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 48.0!)
         Me.XrPanel1.Name = "XrPanel1"
         Me.XrPanel1.SizeF = New System.Drawing.SizeF(649.9999!, 90.12497!)
         Me.XrPanel1.StylePriority.UseBorders = False
@@ -506,7 +505,7 @@ Partial Public Class ReportSamplePurchase
         'LPODate
         '
         Me.LPODate.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.LPODate.LocationFloat = New DevExpress.Utils.PointFloat(448.9585!, 0!)
+        Me.LPODate.LocationFloat = New DevExpress.Utils.PointFloat(448.9585!, 22.91666!)
         Me.LPODate.Name = "LPODate"
         Me.LPODate.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.LPODate.SizeF = New System.Drawing.SizeF(201.0415!, 25.08334!)
@@ -518,7 +517,7 @@ Partial Public Class ReportSamplePurchase
         'XrLabel1
         '
         Me.XrLabel1.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.XrLabel1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 0!)
+        Me.XrLabel1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 22.91666!)
         Me.XrLabel1.Name = "XrLabel1"
         Me.XrLabel1.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel1.SizeF = New System.Drawing.SizeF(53.04168!, 25.08334!)
@@ -531,7 +530,7 @@ Partial Public Class ReportSamplePurchase
         '
         Me.LPONumber.Borders = DevExpress.XtraPrinting.BorderSide.None
         Me.LPONumber.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.LPONumber.LocationFloat = New DevExpress.Utils.PointFloat(64.50005!, 0!)
+        Me.LPONumber.LocationFloat = New DevExpress.Utils.PointFloat(64.50005!, 22.91666!)
         Me.LPONumber.Name = "LPONumber"
         Me.LPONumber.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.LPONumber.SizeF = New System.Drawing.SizeF(135.4998!, 25.08334!)
@@ -544,7 +543,7 @@ Partial Public Class ReportSamplePurchase
         '
         Me.XrLabel12.Borders = DevExpress.XtraPrinting.BorderSide.None
         Me.XrLabel12.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.XrLabel12.LocationFloat = New DevExpress.Utils.PointFloat(53.04165!, 0!)
+        Me.XrLabel12.LocationFloat = New DevExpress.Utils.PointFloat(53.04165!, 22.91666!)
         Me.XrLabel12.Name = "XrLabel12"
         Me.XrLabel12.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel12.SizeF = New System.Drawing.SizeF(11.45835!, 25.08334!)
@@ -557,7 +556,7 @@ Partial Public Class ReportSamplePurchase
         'LTitle
         '
         Me.LTitle.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Bold)
-        Me.LTitle.LocationFloat = New DevExpress.Utils.PointFloat(199.9998!, 0!)
+        Me.LTitle.LocationFloat = New DevExpress.Utils.PointFloat(199.9998!, 22.91666!)
         Me.LTitle.Name = "LTitle"
         Me.LTitle.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.LTitle.SizeF = New System.Drawing.SizeF(248.9586!, 25.08334!)
@@ -973,7 +972,7 @@ Partial Public Class ReportSamplePurchase
         '
         Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.Detail, Me.TopMargin, Me.BottomMargin, Me.PageFooter})
         Me.Font = New System.Drawing.Font("Times New Roman", 9.75!)
-        Me.Margins = New System.Drawing.Printing.Margins(100, 100, 115, 19)
+        Me.Margins = New System.Drawing.Printing.Margins(100, 100, 138, 19)
         Me.PageHeight = 550
         Me.PaperKind = System.Drawing.Printing.PaperKind.Custom
         Me.StyleSheet.AddRange(New DevExpress.XtraReports.UI.XRControlStyle() {Me.XrControlStyle1, Me.XrControlStyle2, Me.XrControlStyle3, Me.XrControlStyle4, Me.XrControlStyle5, Me.XrControlStyle6, Me.XrControlStyle7})

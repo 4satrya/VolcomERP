@@ -195,10 +195,12 @@ Public Class FormMasterProductForBOF
             colIndex = 0
             For j As Integer = 5 To dtTemp.VisibleColumns.Count - 1
                 colIndex = colIndex + 1
-                If j = 15 Or j = 16 Or j = 17 Then
+                If j = 16 Or j = 17 Or j = 18 Then
                     wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, dtTemp.Columns(j).FieldName)
-                Else
+                ElseIf j <> 11 Then
                     wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, dtTemp.Columns(j).FieldName).ToString
+                Else
+                    colIndex = colIndex - 1
                 End If
             Next
             'update

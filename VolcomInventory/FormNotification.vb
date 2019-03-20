@@ -153,8 +153,14 @@
             Dim id_report As String = GVNotif.GetFocusedRowCellValue("id_report").ToString
             Dim report_number As String = GVNotif.GetFocusedRowCellValue("report_number").ToString
             Dim id_type As String = GVNotif.GetFocusedRowCellValue("id_type").ToString
+            Dim rmt As String = ""
+            Try
+                rmt = GVNotif.GetFocusedRowCellValue("report_mark_type").ToString
+            Catch ex As Exception
+                rmt = ""
+            End Try
             If id_notif_detx <> "0" Then
-                frmNotif(GVNotif.GetFocusedRowCellValue("notif_frm_to").ToString, id_report, report_number, notif_tag)
+                frmNotif(GVNotif.GetFocusedRowCellValue("notif_frm_to").ToString, id_report, rmt, report_number, notif_tag)
                 viewNotif()
                 GVNotif.FocusedRowHandle = find_row(GVNotif, "id_notif_det", id_notif_detx)
             Else

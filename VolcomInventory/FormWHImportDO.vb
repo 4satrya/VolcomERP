@@ -7,6 +7,7 @@
         Dim query As String = "SELECT * FROM tb_wh_awb_do"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCImportDO.DataSource = data
+        GVImportDO.BestFitColumns()
     End Sub
 
     Private Sub FormWHImportDO_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated

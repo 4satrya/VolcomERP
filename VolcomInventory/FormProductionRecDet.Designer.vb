@@ -34,7 +34,6 @@ Partial Class FormProductionRecDet
         Me.LabelControl9 = New DevExpress.XtraEditors.LabelControl()
         Me.TEDesign = New DevExpress.XtraEditors.TextEdit()
         Me.TEDODate = New DevExpress.XtraEditors.DateEdit()
-        Me.BShowContact = New DevExpress.XtraEditors.SimpleButton()
         Me.TEOrderDate = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl8 = New DevExpress.XtraEditors.LabelControl()
         Me.TEEstRecDate = New DevExpress.XtraEditors.TextEdit()
@@ -161,7 +160,6 @@ Partial Class FormProductionRecDet
         Me.GroupGeneralHeader.Controls.Add(Me.LabelControl9)
         Me.GroupGeneralHeader.Controls.Add(Me.TEDesign)
         Me.GroupGeneralHeader.Controls.Add(Me.TEDODate)
-        Me.GroupGeneralHeader.Controls.Add(Me.BShowContact)
         Me.GroupGeneralHeader.Controls.Add(Me.TEOrderDate)
         Me.GroupGeneralHeader.Controls.Add(Me.LabelControl8)
         Me.GroupGeneralHeader.Controls.Add(Me.TEEstRecDate)
@@ -315,14 +313,6 @@ Partial Class FormProductionRecDet
         Me.TEDODate.Size = New System.Drawing.Size(130, 20)
         Me.TEDODate.TabIndex = 5
         '
-        'BShowContact
-        '
-        Me.BShowContact.Location = New System.Drawing.Point(451, 59)
-        Me.BShowContact.Name = "BShowContact"
-        Me.BShowContact.Size = New System.Drawing.Size(23, 20)
-        Me.BShowContact.TabIndex = 2
-        Me.BShowContact.Text = "..."
-        '
         'TEOrderDate
         '
         Me.TEOrderDate.EditValue = ""
@@ -439,7 +429,7 @@ Partial Class FormProductionRecDet
         Me.TECompName.Name = "TECompName"
         Me.TECompName.Properties.EditValueChangedDelay = 1
         Me.TECompName.Properties.ReadOnly = True
-        Me.TECompName.Size = New System.Drawing.Size(215, 20)
+        Me.TECompName.Size = New System.Drawing.Size(239, 20)
         Me.TECompName.TabIndex = 0
         Me.TECompName.TabStop = False
         '
@@ -1074,7 +1064,6 @@ Partial Class FormProductionRecDet
     Friend WithEvents BMark As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents GridView1 As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents EPSampleRec As System.Windows.Forms.ErrorProvider
-    Friend WithEvents BShowContact As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents TEDODate As DevExpress.XtraEditors.DateEdit
     Friend WithEvents PEView As DevExpress.XtraEditors.PictureEdit
     Friend WithEvents LabelControl9 As DevExpress.XtraEditors.LabelControl

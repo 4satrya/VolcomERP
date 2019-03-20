@@ -506,6 +506,7 @@ Partial Class FormViewMatRecPurc
         Me.GVRoll.OptionsCustomization.AllowColumnMoving = False
         Me.GVRoll.OptionsCustomization.AllowGroup = False
         Me.GVRoll.OptionsCustomization.AllowQuickHideColumns = False
+        Me.GVRoll.OptionsView.ShowFooter = True
         Me.GVRoll.OptionsView.ShowGroupPanel = False
         '
         'GridColumn25
@@ -558,6 +559,7 @@ Partial Class FormViewMatRecPurc
         Me.GridColumn29.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn29.FieldName = "qty"
         Me.GridColumn29.Name = "GridColumn29"
+        Me.GridColumn29.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty", "{0:N2}")})
         Me.GridColumn29.Visible = True
         Me.GridColumn29.VisibleIndex = 4
         Me.GridColumn29.Width = 250
@@ -1072,7 +1074,6 @@ Partial Class FormViewMatRecPurc
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FormViewMatRecPurc"
-        Me.ShowInTaskbar = False
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "View Receiving Raw Material Purchasing"

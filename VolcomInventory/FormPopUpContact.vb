@@ -5,6 +5,8 @@
     Public id_departement As String = "-1"
     Public id_so_type As String = "-1"
     Public comp_number As String = "-1"
+    Public is_admin As String = "-1" 'can add or edit contact
+    Public is_must_active As String = "-1"
     'id use of pop up
     'awb = awbill
     '1 = comp_to sample purchase det
@@ -44,12 +46,16 @@
         'auto filter
         If id_pop_up = "25" Or id_pop_up = "30" Or id_pop_up = "33" Then ' rec QC
             Dim id_order As String = "-1"
+            Dim type As String = "1"
+
             If id_pop_up = "25" Then
                 id_order = FormProductionRecDet.id_order
             ElseIf id_pop_up = "30" Then
                 id_order = FormProductionRetOutSingle.id_prod_order
+                type = FormProductionRetOutSingle.LERetType.EditValue.ToString
             Else
                 id_order = FormProductionRetInSingle.id_prod_order
+                type = FormProductionRetInSingle.LERetType.EditValue.ToString
             End If
             Dim query_filter As String = ""
             query_filter += "SELECT comp.comp_number from tb_prod_order_wo wo "
@@ -70,7 +76,16 @@
                     filter_i += 1
                 Next
             End If
-            GVCompany.ActiveFilterString = filter_str
+            '
+
+            If id_pop_up = "30" And type = "2" Then
+                GVCompany.ActiveFilterString = ""
+            ElseIf id_pop_up = "33" And type = "2" Then
+                GVCompany.ActiveFilterString = ""
+            Else
+                GVCompany.ActiveFilterString = filter_str
+            End If
+
         End If
     End Sub
 
@@ -84,7 +99,7 @@
             id_company = "-1"
         End If
 
-        Dim data As DataTable = execute_query(String.Format("SELECT id_comp_contact, getCompByContact(id_comp_contact, 4) AS `id_wh_drawer`, getCompByContact(id_comp_contact, 6) AS `id_wh_rack`, getCompByContact(id_comp_contact, 7) AS `id_wh_locator`, contact_person,contact_number,is_default FROM tb_m_comp_contact WHERE id_comp='{0}' ORDER BY is_default AND contact_person", id_company), -1, True, "", "", "", "")
+        Dim data As DataTable = execute_query(String.Format("SELECT id_comp_contact, getCompByContact(id_comp_contact, 4) AS `id_wh_drawer`, getCompByContact(id_comp_contact, 6) AS `id_wh_rack`, getCompByContact(id_comp_contact, 7) AS `id_wh_locator`, contact_person,contact_number, email,is_default FROM tb_m_comp_contact WHERE id_comp='{0}' ORDER BY is_default AND contact_person", id_company), -1, True, "", "", "", "")
         GCCompanyContactList.DataSource = data
         If Not data.Rows.Count > 0 Or id_company = "-1" Then
             BtnSave.Enabled = False
@@ -95,7 +110,7 @@
 
     Sub view_company()
         Dim query As String = "SELECT tb_m_comp.comp_commission,tb_m_comp.id_comp as id_comp,tb_m_comp.comp_number as comp_number,tb_m_comp.comp_name as comp_name,tb_m_comp.address_primary as address_primary,tb_m_comp.is_active as is_active, tb_m_comp.id_comp_cat, tb_m_comp_cat.comp_cat_name as company_category,tb_m_comp_group.comp_group, tb_m_comp.id_wh_type, tb_m_comp.id_store_type, tb_m_comp.id_wh_type, IFNULL(tb_m_comp.id_commerce_type,1) AS `id_commerce_type`,tb_m_comp.id_drawer_def,
-        IF(tb_m_comp.id_comp_cat=5, tb_m_comp.id_wh_type,IF(tb_m_comp.id_comp_cat=6,tb_m_comp.id_store_type,0)) AS `id_account_type` "
+        IF(tb_m_comp.id_comp_cat=5, tb_m_comp.id_wh_type,IF(tb_m_comp.id_comp_cat=6,tb_m_comp.id_store_type,0)) AS `id_account_type`, tb_m_comp.is_use_unique_code "
         query += " FROM tb_m_comp INNER JOIN tb_m_comp_cat ON tb_m_comp.id_comp_cat=tb_m_comp_cat.id_comp_cat "
         query += " INNER JOIN tb_m_comp_group ON tb_m_comp_group.id_comp_group=tb_m_comp.id_comp_group "
         If id_cat <> "-1" Then
@@ -115,6 +130,8 @@
             Dim id_ret_type = FormSalesReturnDet.id_ret_type
             If id_ret_type = "3" Then 'return direct/khusus
                 query += "AND tb_m_comp.id_comp<>" + get_setup_field("wh_temp") + " "
+            ElseIf id_ret_type = "1" Then 'return reguler
+                query += "AND tb_m_comp.id_comp=" + get_setup_field("wh_temp") + " "
             End If
         End If
 
@@ -124,6 +141,18 @@
 
         If id_pop_up = "81" Then
             query += "AND tb_m_comp.id_commerce_type = 2 "
+        End If
+
+        If id_pop_up = "89" Then
+            query += "AND tb_m_comp.id_comp_cat=6 "
+        End If
+
+        If id_pop_up = "91" Then
+            query += "AND tb_m_comp.is_active=1 "
+        End If
+
+        If id_pop_up = "92" Then
+            query += "AND tb_m_comp.is_active=1 AND tb_m_comp.is_use_unique_code=1 "
         End If
 
         If id_departement <> "-1" Then
@@ -141,7 +170,11 @@
         If comp_number <> "-1" Then
             query += "AND tb_m_comp.comp_number='" + addSlashes(comp_number) + "' "
         End If
-
+        '
+        If is_must_active = "1" Then
+            query += " AND tb_m_comp.is_active=1 "
+        End If
+        '
         query += "ORDER BY comp_name "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCCompany.DataSource = data
@@ -518,12 +551,14 @@
             FormSalesPOSDet.SPDiscount.EditValue = Decimal.Parse(GVCompany.GetFocusedRowCellValue("comp_commission").ToString)
             FormSalesPOSDet.id_comp = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
             FormSalesPOSDet.id_store_contact_from = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
+            FormSalesPOSDet.is_use_unique_code = GVCompany.GetFocusedRowCellValue("is_use_unique_code").ToString
             FormSalesPOSDet.TxtNameCompFrom.Text = get_company_x(GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString, "1")
             FormSalesPOSDet.TxtCodeCompFrom.Text = get_company_x(GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString, "2")
             FormSalesPOSDet.MEAdrressCompFrom.Text = get_company_x(GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString, "3")
             FormSalesPOSDet.TENPWP.Text = get_company_x(GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString, "5")
             FormSalesPOSDet.LETypeSO.ItemIndex = FormSalesPOSDet.LETypeSO.Properties.GetDataSourceRowIndex("id_so_type", get_company_x(GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString, "8"))
             FormSalesPOSDet.viewDetail()
+            FormSalesPOSDet.viewDetailCode()
             FormSalesPOSDet.viewStockStore()
             FormSalesPOSDet.check_but()
             FormSalesPOSDet.GroupControlList.Enabled = True
@@ -1014,10 +1049,84 @@
             Close()
         ElseIf id_pop_up = "87" Then
             'receive return repair di WH
+            FormFGRepairReturnRecDet.id_wh_type = GVCompany.GetFocusedRowCellValue("id_wh_type").ToString
             FormFGRepairReturnRecDet.id_wh_drawer_dest = GVCompany.GetFocusedRowCellValue("id_drawer_def").ToString
             FormFGRepairReturnRecDet.TxtCodeWH.Text = GVCompany.GetFocusedRowCellValue("comp_number").ToString
             FormFGRepairReturnRecDet.TxtNameWH.Text = GVCompany.GetFocusedRowCellValue("comp_name").ToString
             Close()
+        ElseIf id_pop_up = "88" Then
+            'design propose
+            FormMasterDesignCOPProposeDet.TEVendorName.Text = get_company_x(GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString, "1")
+            FormMasterDesignCOPProposeDet.TEVendor.Text = get_company_x(GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString, "2")
+            FormMasterDesignCOPProposeDet.id_comp_contact = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
+            FormMasterDesignCOPProposeDet.id_comp = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
+            Close()
+        ElseIf id_pop_up = "89" Then
+            'invoice no stock
+            FormSalesPOSNoStockDet.id_comp = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
+            FormSalesPOSNoStockDet.TxtCompNumber.Text = GVCompany.GetFocusedRowCellValue("comp_number").ToString
+            FormSalesPOSNoStockDet.TxtCompName.Text = GVCompany.GetFocusedRowCellValue("comp_name").ToString
+            Close()
+        ElseIf id_pop_up = "90" Then
+            'expense
+
+            'cek coa vendor
+            Dim err_coa As String = ""
+            Dim cond_coa_vendor As Boolean = True
+            Dim qcoa_vendor As String = "SELECT c.id_comp, ap.id_acc 
+            FROM tb_m_comp c
+            LEFT JOIN tb_a_acc ap ON ap.id_acc = c.id_acc_ap
+            WHERE c.id_comp=" + GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString + "
+            AND !ISNULL(ap.id_acc) "
+            Dim dcoa_vendor As DataTable = execute_query(qcoa_vendor, -1, True, "", "", "", "")
+            If dcoa_vendor.Rows.Count <= 0 Then
+                err_coa += "- COA : Account Payable Vendor " + System.Environment.NewLine
+                cond_coa_vendor = False
+            End If
+
+            If Not cond_coa_vendor Then
+                warningCustom("Please contact Accounting Department to setup these COA : " + System.Environment.NewLine + err_coa)
+                Close()
+                Exit Sub
+            End If
+
+            FormItemExpenseDet.id_comp = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
+            FormItemExpenseDet.TxtCompNumber.Text = GVCompany.GetFocusedRowCellDisplayText("comp_number").ToString
+            FormItemExpenseDet.TxtCompName.Text = GVCompany.GetFocusedRowCellDisplayText("comp_name").ToString
+            Close()
+        ElseIf id_pop_up = "91" Then
+            'opt activate store report 16 digit
+            FormOpt.id_store = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
+            FormOpt.TxtCompNumber.Text = GVCompany.GetFocusedRowCellDisplayText("comp_number").ToString
+            FormOpt.TxtCompName.Text = GVCompany.GetFocusedRowCellDisplayText("comp_name").ToString
+            If GVCompany.GetFocusedRowCellValue("is_use_unique_code").ToString = "1" Then
+                FormOpt.TxtUseUniqueCode.Text = "Yes"
+                FormOpt.BtnSet.Enabled = False
+            Else
+                FormOpt.TxtUseUniqueCode.Text = "No"
+                FormOpt.BtnSet.Enabled = True
+            End If
+            FormOpt.GCCodeList.DataSource = Nothing
+            Close()
+        ElseIf id_pop_up = "92" Then
+            'verify master
+            If GVCompanyContactList.GetFocusedRowCellValue("contact_person").ToString = "" Or GVCompanyContactList.GetFocusedRowCellValue("email").ToString = "" Then
+                stopCustom("Please complete all data contact person first")
+                FormVerifyMaster.BtnView.Enabled = False
+            Else
+                FormVerifyMaster.id_store = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
+                FormVerifyMaster.id_store_contact = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
+                FormVerifyMaster.TxtCompName.Text = GVCompany.GetFocusedRowCellDisplayText("comp_number").ToString + " - " + GVCompany.GetFocusedRowCellDisplayText("comp_name").ToString
+                FormVerifyMaster.TxtEmail.Text = GVCompanyContactList.GetFocusedRowCellValue("email").ToString
+                FormVerifyMaster.TXTCP.Text = GVCompanyContactList.GetFocusedRowCellValue("contact_person").ToString
+                FormVerifyMaster.BtnView.Enabled = True
+                FormVerifyMaster.BtnReset.Visible = False
+                FormVerifyMaster.GCSalesDelOrder.DataSource = Nothing
+                FormVerifyMaster.BtnLoadData.Visible = False
+                FormVerifyMaster.GCData.DataSource = Nothing
+                FormVerifyMaster.BtnConfirm.Visible = False
+                Close()
+            End If
         End If
         Cursor = Cursors.Default
     End Sub

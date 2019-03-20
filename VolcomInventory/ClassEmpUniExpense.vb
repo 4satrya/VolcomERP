@@ -12,7 +12,7 @@
             condition = ""
         End If
 
-        Dim query As String = "SELECT e.id_emp_uni_ex, e.id_comp_contact, c.comp_number, c.comp_name, CONCAT(c.comp_number,' - ', c.comp_name) AS `comp`, 
+        Dim query As String = "SELECT e.id_emp_uni_ex, e.id_item_cat, cat.item_cat, e.id_departement, dept.departement, e.id_comp_contact, c.comp_number, c.comp_name, CONCAT(c.comp_number,' - ', c.comp_name) AS `comp`, 
         e.id_pl_sales_order_del, del.pl_sales_order_del_number, 
         e.emp_uni_ex_number, e.emp_uni_ex_date, e.emp_uni_ex_note, e.id_report_status , rs.report_status,
         so.id_so_status, so.id_emp_uni_budget, e.period_from, e.period_until
@@ -20,6 +20,8 @@
         INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = e.id_comp_contact
         INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp
         INNER JOIN tb_lookup_report_status rs ON rs.id_report_status = e.id_report_status
+        INNER JOIN tb_item_cat cat ON cat.id_item_cat = e.id_item_cat
+        INNER JOIN tb_m_departement dept ON dept.id_departement = e.id_departement
         LEFT JOIN tb_pl_sales_order_del del ON del.id_pl_sales_order_del = e.id_pl_sales_order_del
         LEFT JOIN tb_sales_order so ON so.id_sales_order = del.id_sales_order
         WHERE e.id_emp_uni_ex>0 "

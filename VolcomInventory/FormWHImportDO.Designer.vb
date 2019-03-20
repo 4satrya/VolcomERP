@@ -30,6 +30,7 @@ Partial Class FormWHImportDO
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnReff = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.GCImportDO, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -66,7 +67,7 @@ Partial Class FormWHImportDO
         '
         'GVImportDO
         '
-        Me.GVImportDO.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn6, Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumnReff})
+        Me.GVImportDO.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn6, Me.GridColumn1, Me.GridColumn7, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumnReff})
         Me.GVImportDO.GridControl = Me.GCImportDO
         Me.GVImportDO.Name = "GVImportDO"
         Me.GVImportDO.OptionsBehavior.Editable = False
@@ -97,7 +98,7 @@ Partial Class FormWHImportDO
         Me.GridColumn2.FieldName = "scan_date"
         Me.GridColumn2.Name = "GridColumn2"
         Me.GridColumn2.Visible = True
-        Me.GridColumn2.VisibleIndex = 2
+        Me.GridColumn2.VisibleIndex = 3
         Me.GridColumn2.Width = 130
         '
         'GridColumn3
@@ -106,7 +107,7 @@ Partial Class FormWHImportDO
         Me.GridColumn3.FieldName = "store_number"
         Me.GridColumn3.Name = "GridColumn3"
         Me.GridColumn3.Visible = True
-        Me.GridColumn3.VisibleIndex = 3
+        Me.GridColumn3.VisibleIndex = 4
         Me.GridColumn3.Width = 130
         '
         'GridColumn4
@@ -115,7 +116,7 @@ Partial Class FormWHImportDO
         Me.GridColumn4.FieldName = "store_name"
         Me.GridColumn4.Name = "GridColumn4"
         Me.GridColumn4.Visible = True
-        Me.GridColumn4.VisibleIndex = 4
+        Me.GridColumn4.VisibleIndex = 5
         Me.GridColumn4.Width = 130
         '
         'GridColumn5
@@ -126,7 +127,7 @@ Partial Class FormWHImportDO
         Me.GridColumn5.FieldName = "qty"
         Me.GridColumn5.Name = "GridColumn5"
         Me.GridColumn5.Visible = True
-        Me.GridColumn5.VisibleIndex = 6
+        Me.GridColumn5.VisibleIndex = 7
         Me.GridColumn5.Width = 142
         '
         'GridColumnReff
@@ -135,7 +136,15 @@ Partial Class FormWHImportDO
         Me.GridColumnReff.FieldName = "reff"
         Me.GridColumnReff.Name = "GridColumnReff"
         Me.GridColumnReff.Visible = True
-        Me.GridColumnReff.VisibleIndex = 5
+        Me.GridColumnReff.VisibleIndex = 6
+        '
+        'GridColumn7
+        '
+        Me.GridColumn7.Caption = "ERP#"
+        Me.GridColumn7.FieldName = "erp_no"
+        Me.GridColumn7.Name = "GridColumn7"
+        Me.GridColumn7.Visible = True
+        Me.GridColumn7.VisibleIndex = 2
         '
         'FormWHImportDO
         '
@@ -167,4 +176,5 @@ Partial Class FormWHImportDO
     Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnReff As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn7 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

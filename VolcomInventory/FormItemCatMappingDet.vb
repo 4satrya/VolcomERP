@@ -3,6 +3,7 @@
     Public is_view As String = "-1"
     Dim id_report_status As String = "-1"
     Dim is_confirm As String = "-1"
+    Public show_mark As Boolean = False
 
     Private Sub FormItemCatMappingDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewReportStatus()
@@ -40,7 +41,7 @@
         Dim query As String = "SELECT 0 AS `id_item_cat`, 'All Category' AS `item_cat`
         UNION ALL
         SELECT c.id_item_cat, c.item_cat FROM tb_item_cat c ORDER BY id_item_cat ASC"
-        viewLookupQuery(LECategory, query, 0, "item_cat", "id_item_cat")
+        viewSearchLookupQuery(SLECat, query, "id_item_cat", "item_cat", "id_item_cat")
         Cursor = Cursors.Default
     End Sub
 
@@ -52,9 +53,7 @@
         viewSearchLookupQuery(SLEInv, query, "id_acc", "acc_description", "id_acc")
     End Sub
 
-    Sub actionLoad()
-        CheckEditCat.EditValue = False
-        SLEInv.Enabled = False
+    Sub loadMain()
         Dim query_c As New ClassItemCat()
         Dim query As String = query_c.queryMappingPropose("AND cp.id_item_coa_propose=" + id + "", "2")
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
@@ -66,10 +65,41 @@
         MENote.Text = data.Rows(0)("note").ToString
         LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", data.Rows(0)("id_report_status").ToString)
 
+        'load general account-propose
+        TxtProposeCodeInvStore.Text = data.Rows(0)("code_inv_store").ToString
+        TxtProposeDescInvStore.Text = data.Rows(0)("name_inv_store").ToString
+        TxtProposeCodeHutang.Text = data.Rows(0)("code_hutang").ToString
+        TxtProposeDescHutang.Text = data.Rows(0)("name_hutang").ToString
+        TxtProposeCodeInvWH.Text = data.Rows(0)("code_inv_wh").ToString
+        TxtProposeDescInvWH.Text = data.Rows(0)("name_inv_wh").ToString
 
+        'load general account-current
+        Dim qcg As String = "SELECT h.acc_name AS `code_hutang`, h.acc_description AS `name_hutang`,
+        r.acc_name AS `code_inv_store`, r.acc_description AS `name_inv_store`,
+        t.acc_name AS `code_inv_wh`, t.acc_description AS `name_inv_wh`
+        FROM tb_opt_purchasing o
+        LEFT JOIN tb_a_acc h ON h.id_acc = o.acc_coa_hutang
+        LEFT JOIN tb_a_acc r ON r.id_acc = o.acc_coa_receive
+        LEFT JOIN tb_a_acc t ON t.id_acc = o.acc_coa_trf "
+        Dim dcg As DataTable = execute_query(qcg, -1, True, "", "", "", "")
+        TxtCurrentCodeInvStore.Text = dcg.Rows(0)("code_inv_store").ToString
+        TxtCurrentDescInvStore.Text = dcg.Rows(0)("name_inv_store").ToString
+        TxtCurrentCodeHutang.Text = dcg.Rows(0)("code_hutang").ToString
+        TxtCurrentDescHutang.Text = dcg.Rows(0)("name_hutang").ToString
+        TxtCurrentCodeInvWH.Text = dcg.Rows(0)("code_inv_wh").ToString
+        TxtCurrentDescInvWH.Text = dcg.Rows(0)("name_inv_wh").ToString
+    End Sub
 
+    Sub actionLoad()
+        CheckEditCat.EditValue = False
+        SLEInv.Enabled = False
+
+        loadMain()
         viewDetail()
         allow_status()
+        If show_mark Then
+            openMark()
+        End If
     End Sub
 
     Sub viewDetail()
@@ -83,8 +113,8 @@
 
         'cat
         Dim cat As String = ""
-        If LECategory.EditValue.ToString <> "0" Then
-            cat = "AND m.id_item_cat='" + LECategory.EditValue.ToString + "' "
+        If SLECat.EditValue.ToString <> "0" Then
+            cat = "AND m.id_item_cat='" + SLECat.EditValue.ToString + "' "
         Else
             cat = ""
         End If
@@ -113,15 +143,29 @@
             BtnMark.Visible = False
             BtnAddMulti.Visible = True
             BtnDeleteMulti.Visible = True
+            BtnEdit.Visible = True
             MENote.Enabled = True
             GCMaping.ContextMenuStrip = ContextMenuStrip1
+            BtnSetInvStore.Enabled = True
+            BtnClearInvStore.Enabled = True
+            BtnSetInvHutang.Enabled = True
+            BtnClearHutang.Enabled = True
+            BtnSetInvWH.Enabled = True
+            BtnClearInvWH.Enabled = True
         Else
             BtnConfirm.Visible = False
             BtnMark.Visible = True
             BtnAddMulti.Visible = False
             BtnDeleteMulti.Visible = False
+            BtnEdit.Visible = False
             MENote.Enabled = False
             GCMaping.ContextMenuStrip = Nothing
+            BtnSetInvStore.Enabled = False
+            BtnClearInvStore.Enabled = False
+            BtnSetInvHutang.Enabled = False
+            BtnClearHutang.Enabled = False
+            BtnSetInvWH.Enabled = False
+            BtnClearInvWH.Enabled = False
         End If
 
         If check_print_report_status(id_report_status) Then
@@ -137,16 +181,27 @@
             BtnConfirm.Visible = False
             BtnAddMulti.Visible = False
             BtnDeleteMulti.Visible = False
+            BtnEdit.Visible = False
             MENote.Enabled = False
             GCMaping.ContextMenuStrip = Nothing
+            BtnSetInvStore.Enabled = False
+            BtnClearInvStore.Enabled = False
+            BtnSetInvHutang.Enabled = False
+            BtnClearHutang.Enabled = False
+            BtnSetInvWH.Enabled = False
+            BtnClearInvWH.Enabled = False
         End If
     End Sub
 
     Private Sub BtnMark_Click(sender As Object, e As EventArgs) Handles BtnMark.Click
+        openMark()
+    End Sub
+
+    Sub openMark()
         Cursor = Cursors.WaitCursor
         FormReportMark.report_mark_type = "135"
         FormReportMark.id_report = id
-        FormReportMark.is_view = "1"
+        FormReportMark.is_view = is_view
         FormReportMark.form_origin = Name
         FormReportMark.ShowDialog()
         Cursor = Cursors.Default
@@ -293,7 +348,73 @@
         viewDetail()
     End Sub
 
-    Private Sub LECategory_EditValueChanged(sender As Object, e As EventArgs) Handles LECategory.EditValueChanged
+    Private Sub LECategory_EditValueChanged(sender As Object, e As EventArgs)
+        viewDetail()
+    End Sub
+
+    Private Sub BtnSetInvWH_Click(sender As Object, e As EventArgs) Handles BtnSetInvWH.Click
+        Cursor = Cursors.WaitCursor
+        FormPopUpCOA.id_pop_up = "10"
+        FormPopUpCOA.ShowDialog()
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnClearInvStore_Click(sender As Object, e As EventArgs) Handles BtnClearInvStore.Click
+        Cursor = Cursors.WaitCursor
+        Dim query As String = "UPDATE tb_item_coa_propose SET acc_coa_receive=NULL WHERE id_item_coa_propose=" + id + " "
+        execute_non_query(query, True, "", "", "", "")
+        loadMain()
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnSetInvHutang_Click(sender As Object, e As EventArgs) Handles BtnSetInvHutang.Click
+        Cursor = Cursors.WaitCursor
+        FormPopUpCOA.id_pop_up = "9"
+        FormPopUpCOA.ShowDialog()
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnClearHutang_Click(sender As Object, e As EventArgs) Handles BtnClearHutang.Click
+        Cursor = Cursors.WaitCursor
+        Dim query As String = "UPDATE tb_item_coa_propose SET acc_coa_hutang=NULL WHERE id_item_coa_propose=" + id + " "
+        execute_non_query(query, True, "", "", "", "")
+        loadMain()
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnClearInvWH_Click(sender As Object, e As EventArgs) Handles BtnClearInvWH.Click
+        Cursor = Cursors.WaitCursor
+        Dim query As String = "UPDATE tb_item_coa_propose SET acc_coa_trf=NULL WHERE id_item_coa_propose=" + id + " "
+        execute_non_query(query, True, "", "", "", "")
+        loadMain()
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnSetInvStore_Click(sender As Object, e As EventArgs) Handles BtnSetInvStore.Click
+        Cursor = Cursors.WaitCursor
+        FormPopUpCOA.id_pop_up = "8"
+        FormPopUpCOA.ShowDialog()
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnEdit_Click(sender As Object, e As EventArgs) Handles BtnEdit.Click
+        edit()
+    End Sub
+
+    Sub edit()
+        If GVMapping.RowCount > 0 And GVMapping.FocusedRowHandle >= 0 Then
+            Cursor = Cursors.WaitCursor
+            FormItemCatMappingEdit.id_detail = GVMapping.GetFocusedRowCellValue("id_item_coa_propose_det").ToString
+            FormItemCatMappingEdit.ShowDialog()
+            Cursor = Cursors.Default
+        End If
+    End Sub
+
+    Private Sub EditToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditToolStripMenuItem.Click
+        edit()
+    End Sub
+
+    Private Sub SLECat_EditValueChanged(sender As Object, e As EventArgs) Handles SLECat.EditValueChanged
         viewDetail()
     End Sub
 End Class

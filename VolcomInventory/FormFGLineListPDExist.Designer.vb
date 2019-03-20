@@ -20,12 +20,13 @@ Partial Class FormFGLineListPDExist
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.GCData = New DevExpress.XtraGrid.GridControl()
         Me.GVData = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.BtnPrint = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.GCData, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -41,25 +42,6 @@ Partial Class FormFGLineListPDExist
         Me.PanelControl1.Size = New System.Drawing.Size(756, 44)
         Me.PanelControl1.TabIndex = 0
         '
-        'GCData
-        '
-        Me.GCData.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCData.Location = New System.Drawing.Point(0, 44)
-        Me.GCData.MainView = Me.GVData
-        Me.GCData.Name = "GCData"
-        Me.GCData.Size = New System.Drawing.Size(756, 323)
-        Me.GCData.TabIndex = 1
-        Me.GCData.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVData})
-        '
-        'GVData
-        '
-        Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn3})
-        Me.GVData.GridControl = Me.GCData
-        Me.GVData.Name = "GVData"
-        Me.GVData.OptionsBehavior.AutoExpandAllGroups = True
-        Me.GVData.OptionsBehavior.Editable = False
-        Me.GVData.OptionsView.ShowGroupPanel = False
-        '
         'LabelControl1
         '
         Me.LabelControl1.Appearance.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -71,6 +53,25 @@ Partial Class FormFGLineListPDExist
         Me.LabelControl1.Size = New System.Drawing.Size(168, 29)
         Me.LabelControl1.TabIndex = 0
         Me.LabelControl1.Text = "PD ALREADY EXIST"
+        '
+        'GCData
+        '
+        Me.GCData.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCData.Location = New System.Drawing.Point(0, 44)
+        Me.GCData.MainView = Me.GVData
+        Me.GCData.Name = "GCData"
+        Me.GCData.Size = New System.Drawing.Size(756, 289)
+        Me.GCData.TabIndex = 1
+        Me.GCData.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVData})
+        '
+        'GVData
+        '
+        Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn3})
+        Me.GVData.GridControl = Me.GCData
+        Me.GVData.Name = "GVData"
+        Me.GVData.OptionsBehavior.AutoExpandAllGroups = True
+        Me.GVData.OptionsBehavior.Editable = False
+        Me.GVData.OptionsView.ShowGroupPanel = False
         '
         'GridColumn1
         '
@@ -96,12 +97,25 @@ Partial Class FormFGLineListPDExist
         Me.GridColumn3.Visible = True
         Me.GridColumn3.VisibleIndex = 2
         '
+        'BtnPrint
+        '
+        Me.BtnPrint.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnPrint.Appearance.Options.UseFont = True
+        Me.BtnPrint.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.BtnPrint.Location = New System.Drawing.Point(0, 333)
+        Me.BtnPrint.LookAndFeel.SkinName = "Office 2010 Blue"
+        Me.BtnPrint.Name = "BtnPrint"
+        Me.BtnPrint.Size = New System.Drawing.Size(756, 34)
+        Me.BtnPrint.TabIndex = 2
+        Me.BtnPrint.Text = "Print"
+        '
         'FormFGLineListPDExist
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(756, 367)
         Me.Controls.Add(Me.GCData)
+        Me.Controls.Add(Me.BtnPrint)
         Me.Controls.Add(Me.PanelControl1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.LookAndFeel.SkinName = "Office 2007 Pink"
@@ -127,4 +141,5 @@ Partial Class FormFGLineListPDExist
     Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn2 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn3 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BtnPrint As DevExpress.XtraEditors.SimpleButton
 End Class

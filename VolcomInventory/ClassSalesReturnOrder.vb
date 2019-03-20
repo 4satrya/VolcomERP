@@ -36,6 +36,7 @@
         Return query
     End Function
 
+    'only for OL Store
     Public Sub reservedStock(ByVal id_report_param As String)
         Dim query As String = "INSERT INTO tb_storage_fg(id_wh_drawer, id_storage_category, id_product, bom_unit_price, report_mark_type, id_report, storage_product_qty, storage_product_datetime, storage_product_notes, id_stock_status) "
         query += "SELECT getCompByContact(ro.id_store_contact_to, 4), '2', ro_det.id_product, IFNULL(dsg.design_cop,0), '119', '" + id_report_param + "', ro_det.sales_return_order_det_qty, NOW(), '', '2' 

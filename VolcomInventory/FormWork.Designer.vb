@@ -78,15 +78,22 @@ Partial Class FormWork
         Me.XtraTabPage3 = New DevExpress.XtraTab.XtraTabPage()
         Me.GCCancelApproval = New DevExpress.XtraGrid.GridControl()
         Me.GVCancelApproval = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn903 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn901 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn902 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn903 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn904 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControl19 = New DevExpress.XtraEditors.PanelControl()
         Me.BRefreshCancelApproval = New DevExpress.XtraEditors.SimpleButton()
         Me.XtraTabPage4 = New DevExpress.XtraTab.XtraTabPage()
         Me.GCCancelApprovalHistory = New DevExpress.XtraGrid.GridControl()
         Me.GVCancelApprovalHistory = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumnID = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnReportNumber = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnReportDate = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnProposedBy = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnType = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnCompleteName = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnCompleteDatetime = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControl20 = New DevExpress.XtraEditors.PanelControl()
         Me.DEEndCancel = New DevExpress.XtraEditors.DateEdit()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -96,13 +103,6 @@ Partial Class FormWork
         Me.SimpleButton1 = New DevExpress.XtraEditors.SimpleButton()
         Me.SimpleButton2 = New DevExpress.XtraEditors.SimpleButton()
         Me.GridBand1 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
-        Me.GridColumnID = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnReportNumber = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnReportDate = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnProposedBy = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnType = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnCompleteName = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnCompleteDatetime = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.RepositoryItemSpinEdit6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemSpinEdit4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XTCGeneral, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -657,6 +657,12 @@ Partial Class FormWork
         Me.GVCancelApproval.OptionsFind.AlwaysVisible = True
         Me.GVCancelApproval.OptionsView.ShowGroupPanel = False
         '
+        'GridColumn903
+        '
+        Me.GridColumn903.Caption = "Id Report"
+        Me.GridColumn903.FieldName = "id_report_mark_cancel"
+        Me.GridColumn903.Name = "GridColumn903"
+        '
         'GridColumn901
         '
         Me.GridColumn901.Caption = "Id Report Type"
@@ -672,12 +678,6 @@ Partial Class FormWork
         Me.GridColumn902.Visible = True
         Me.GridColumn902.VisibleIndex = 0
         Me.GridColumn902.Width = 179
-        '
-        'GridColumn903
-        '
-        Me.GridColumn903.Caption = "Id Report"
-        Me.GridColumn903.FieldName = "id_report_mark_cancel"
-        Me.GridColumn903.Name = "GridColumn903"
         '
         'GridColumn904
         '
@@ -731,7 +731,67 @@ Partial Class FormWork
         Me.GVCancelApprovalHistory.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnID, Me.GridColumnReportNumber, Me.GridColumnReportDate, Me.GridColumnProposedBy, Me.GridColumnType, Me.GridColumnCompleteName, Me.GridColumnCompleteDatetime})
         Me.GVCancelApprovalHistory.GridControl = Me.GCCancelApprovalHistory
         Me.GVCancelApprovalHistory.Name = "GVCancelApprovalHistory"
+        Me.GVCancelApprovalHistory.OptionsBehavior.Editable = False
+        Me.GVCancelApprovalHistory.OptionsBehavior.ReadOnly = True
         Me.GVCancelApprovalHistory.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumnID
+        '
+        Me.GridColumnID.Caption = "ID Report Cancel"
+        Me.GridColumnID.FieldName = "id_report_mark_cancel"
+        Me.GridColumnID.Name = "GridColumnID"
+        '
+        'GridColumnReportNumber
+        '
+        Me.GridColumnReportNumber.Caption = "Number"
+        Me.GridColumnReportNumber.FieldName = "id_report_mark_cancel"
+        Me.GridColumnReportNumber.Name = "GridColumnReportNumber"
+        Me.GridColumnReportNumber.Visible = True
+        Me.GridColumnReportNumber.VisibleIndex = 0
+        '
+        'GridColumnReportDate
+        '
+        Me.GridColumnReportDate.Caption = "Date Proposed"
+        Me.GridColumnReportDate.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.GridColumnReportDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumnReportDate.FieldName = "created_datetime"
+        Me.GridColumnReportDate.Name = "GridColumnReportDate"
+        Me.GridColumnReportDate.Visible = True
+        Me.GridColumnReportDate.VisibleIndex = 2
+        '
+        'GridColumnProposedBy
+        '
+        Me.GridColumnProposedBy.Caption = "Proposed By"
+        Me.GridColumnProposedBy.FieldName = "employee_name"
+        Me.GridColumnProposedBy.Name = "GridColumnProposedBy"
+        Me.GridColumnProposedBy.Visible = True
+        Me.GridColumnProposedBy.VisibleIndex = 3
+        '
+        'GridColumnType
+        '
+        Me.GridColumnType.Caption = "Type"
+        Me.GridColumnType.FieldName = "report_mark_type_name"
+        Me.GridColumnType.Name = "GridColumnType"
+        Me.GridColumnType.Visible = True
+        Me.GridColumnType.VisibleIndex = 1
+        '
+        'GridColumnCompleteName
+        '
+        Me.GridColumnCompleteName.Caption = "Complete By"
+        Me.GridColumnCompleteName.FieldName = "name_complete"
+        Me.GridColumnCompleteName.Name = "GridColumnCompleteName"
+        Me.GridColumnCompleteName.Visible = True
+        Me.GridColumnCompleteName.VisibleIndex = 4
+        '
+        'GridColumnCompleteDatetime
+        '
+        Me.GridColumnCompleteDatetime.Caption = "Complete Datetime"
+        Me.GridColumnCompleteDatetime.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.GridColumnCompleteDatetime.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumnCompleteDatetime.FieldName = "complete_datetime"
+        Me.GridColumnCompleteDatetime.Name = "GridColumnCompleteDatetime"
+        Me.GridColumnCompleteDatetime.Visible = True
+        Me.GridColumnCompleteDatetime.VisibleIndex = 5
         '
         'PanelControl20
         '
@@ -821,64 +881,6 @@ Partial Class FormWork
         Me.GridBand1.Caption = "GridBand1"
         Me.GridBand1.Name = "GridBand1"
         Me.GridBand1.VisibleIndex = -1
-        '
-        'GridColumnID
-        '
-        Me.GridColumnID.Caption = "ID Report Cancel"
-        Me.GridColumnID.FieldName = "id_report_mark_cancel"
-        Me.GridColumnID.Name = "GridColumnID"
-        '
-        'GridColumnReportNumber
-        '
-        Me.GridColumnReportNumber.Caption = "Number"
-        Me.GridColumnReportNumber.FieldName = "id_report_mark_cancel"
-        Me.GridColumnReportNumber.Name = "GridColumnReportNumber"
-        Me.GridColumnReportNumber.Visible = True
-        Me.GridColumnReportNumber.VisibleIndex = 0
-        '
-        'GridColumnReportDate
-        '
-        Me.GridColumnReportDate.Caption = "Date Proposed"
-        Me.GridColumnReportDate.DisplayFormat.FormatString = "dd MMM yyyy"
-        Me.GridColumnReportDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.GridColumnReportDate.FieldName = "created_datetime"
-        Me.GridColumnReportDate.Name = "GridColumnReportDate"
-        Me.GridColumnReportDate.Visible = True
-        Me.GridColumnReportDate.VisibleIndex = 2
-        '
-        'GridColumnProposedBy
-        '
-        Me.GridColumnProposedBy.Caption = "Proposed By"
-        Me.GridColumnProposedBy.FieldName = "employee_name"
-        Me.GridColumnProposedBy.Name = "GridColumnProposedBy"
-        Me.GridColumnProposedBy.Visible = True
-        Me.GridColumnProposedBy.VisibleIndex = 3
-        '
-        'GridColumnType
-        '
-        Me.GridColumnType.Caption = "Type"
-        Me.GridColumnType.FieldName = "report_mark_type_name"
-        Me.GridColumnType.Name = "GridColumnType"
-        Me.GridColumnType.Visible = True
-        Me.GridColumnType.VisibleIndex = 1
-        '
-        'GridColumnCompleteName
-        '
-        Me.GridColumnCompleteName.Caption = "Complete By"
-        Me.GridColumnCompleteName.FieldName = "name_complete"
-        Me.GridColumnCompleteName.Name = "GridColumnCompleteName"
-        Me.GridColumnCompleteName.Visible = True
-        Me.GridColumnCompleteName.VisibleIndex = 4
-        '
-        'GridColumnCompleteDatetime
-        '
-        Me.GridColumnCompleteDatetime.Caption = "Complete Datetime"
-        Me.GridColumnCompleteDatetime.DisplayFormat.FormatString = "dd MMM yyyy"
-        Me.GridColumnCompleteDatetime.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.GridColumnCompleteDatetime.FieldName = "complete_datetime"
-        Me.GridColumnCompleteDatetime.Name = "GridColumnCompleteDatetime"
-        Me.GridColumnCompleteDatetime.Visible = True
-        Me.GridColumnCompleteDatetime.VisibleIndex = 5
         '
         'FormWork
         '

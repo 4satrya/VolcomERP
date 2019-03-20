@@ -633,6 +633,7 @@
             If id_sample <> "" Or id_sample <> Nothing Then
                 GVBarcode.ApplyFindFilter("")
                 countQty(id_sample)
+                warningCustom("tes")
             End If
 
             allowDelete()

@@ -12,6 +12,12 @@
         If id_pop_up <> "4" And id_pop_up <> "5" Then
             SLEPackingStatus.EditValue = id_cur_status
         End If
+
+        'cancell order by MD
+        If id_pop_up = "6" Then
+            SLEPackingStatus.EditValue = "2"
+            SLEPackingStatus.Enabled = False
+        End If
     End Sub
 
     Private Sub FormSalesOrderPacking_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
@@ -19,7 +25,7 @@
     End Sub
 
     Private Sub SimpleButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SimpleButton1.Click
-        Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure want to update Packing Status?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+        Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure want to update Order Status?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
         If confirm = Windows.Forms.DialogResult.Yes Then
             If id_pop_up = "-1" Then
                 Cursor = Cursors.WaitCursor
@@ -64,7 +70,7 @@
                 Cursor = Cursors.Default
             ElseIf id_pop_up = "4" Then
                 Cursor = Cursors.WaitCursor
-                Dim final_comment As String = MENote.Text
+                Dim final_comment As String = addSlashes(MENote.Text)
                 Dim qry As String = ""
                 Dim qry_stt As String = ""
                 For i As Integer = 0 To ((FormSalesOrderSvcLevel.GVSalesOrder.RowCount - 1) - GetGroupRowCount(FormSalesOrderSvcLevel.GVSalesOrder))
@@ -95,7 +101,7 @@
                 Cursor = Cursors.Default
             ElseIf id_pop_up = "5" Then
                 Cursor = Cursors.WaitCursor
-                Dim final_comment As String = MENote.Text
+                Dim final_comment As String = addSlashes(MENote.Text)
                 Dim qry As String = ""
                 Dim qry_stt As String = ""
                 Dim jum_so As Integer = 0
@@ -130,6 +136,27 @@
                     execute_non_query(query_upd, True, "", "", "", "")
                     FormSalesOrderSvcLevel.viewReturnOrder()
                     Close()
+                End If
+                Cursor = Cursors.Default
+            ElseIf id_pop_up = "6" Then
+                'cancell by MD
+                Cursor = Cursors.WaitCursor
+                If Not FormSalesOrder.isWHProcess() Then
+                    Dim final_comment As String = addSlashes(MENote.Text)
+                    Dim id_so As String = FormSalesOrder.GVSalesOrder.GetFocusedRowCellValue("id_sales_order").ToString
+                    Dim id_user_special As String = FormSalesOrder.id_user_special
+                    Dim so As New ClassSalesOrder()
+                    so.cancelReservedStock(id_so)
+
+                    'update stt
+                    Dim query_upd As String = "UPDATE tb_sales_order SET id_prepare_status='" + SLEPackingStatus.EditValue.ToString + "', final_comment='" + final_comment + "', final_date=NOW(), final_by='" + id_user_special + "' WHERE id_sales_order='" + id_so + "' "
+                    execute_non_query(query_upd, True, "", "", "", "")
+                    FormSalesOrder.viewSalesOrder()
+                    FormSalesOrder.GVSalesOrder.FocusedRowHandle = find_row(FormSalesOrder.GVSalesOrder, "id_sales_order", id_so)
+                    FormSalesOrder.id_user_special = "-1"
+                    Close()
+                Else
+                    warningCustom("Already process by Warehouse Department")
                 End If
                 Cursor = Cursors.Default
             End If

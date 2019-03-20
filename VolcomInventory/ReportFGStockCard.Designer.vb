@@ -25,6 +25,7 @@ Partial Public Class ReportFGStockCard
         Me.BandedGridView1 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridView()
         Me.GridBand1 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         Me.TopMargin = New DevExpress.XtraReports.UI.TopMarginBand()
+        Me.LabelPeriod = New DevExpress.XtraReports.UI.XRLabel()
         Me.LabelProduct = New DevExpress.XtraReports.UI.XRLabel()
         Me.LabelWH = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel7 = New DevExpress.XtraReports.UI.XRLabel()
@@ -36,7 +37,6 @@ Partial Public Class ReportFGStockCard
         Me.XrLabel1 = New DevExpress.XtraReports.UI.XRLabel()
         Me.BottomMargin = New DevExpress.XtraReports.UI.BottomMarginBand()
         Me.XrPageInfo1 = New DevExpress.XtraReports.UI.XRPageInfo()
-        Me.LabelPeriod = New DevExpress.XtraReports.UI.XRLabel()
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BandedGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -84,6 +84,18 @@ Partial Public Class ReportFGStockCard
         Me.TopMargin.Name = "TopMargin"
         Me.TopMargin.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
         Me.TopMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+        '
+        'LabelPeriod
+        '
+        Me.LabelPeriod.Font = New System.Drawing.Font("Times New Roman", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelPeriod.LocationFloat = New DevExpress.Utils.PointFloat(112.5!, 83.16666!)
+        Me.LabelPeriod.Name = "LabelPeriod"
+        Me.LabelPeriod.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LabelPeriod.SizeF = New System.Drawing.SizeF(452.0833!, 25.08333!)
+        Me.LabelPeriod.StylePriority.UseFont = False
+        Me.LabelPeriod.StylePriority.UseTextAlignment = False
+        Me.LabelPeriod.Text = "-"
+        Me.LabelPeriod.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         '
         'LabelProduct
         '
@@ -214,18 +226,6 @@ Partial Public Class ReportFGStockCard
         Me.XrPageInfo1.StylePriority.UseFont = False
         Me.XrPageInfo1.StylePriority.UseTextAlignment = False
         Me.XrPageInfo1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
-        '
-        'LabelPeriod
-        '
-        Me.LabelPeriod.Font = New System.Drawing.Font("Times New Roman", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelPeriod.LocationFloat = New DevExpress.Utils.PointFloat(112.5!, 83.16666!)
-        Me.LabelPeriod.Name = "LabelPeriod"
-        Me.LabelPeriod.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LabelPeriod.SizeF = New System.Drawing.SizeF(452.0833!, 25.08333!)
-        Me.LabelPeriod.StylePriority.UseFont = False
-        Me.LabelPeriod.StylePriority.UseTextAlignment = False
-        Me.LabelPeriod.Text = "-"
-        Me.LabelPeriod.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         '
         'ReportFGStockCard
         '

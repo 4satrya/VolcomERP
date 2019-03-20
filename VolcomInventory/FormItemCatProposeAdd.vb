@@ -1,6 +1,13 @@
 ﻿Public Class FormItemCatProposeAdd
     Private Sub FormItemCatProposeAdd_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        actionLoad()
+    End Sub
+
+    Sub actionLoad()
         viewType()
+        TxtCat.Text = ""
+        TxtCatEn.Text = ""
+        LookUpEdit1.Focus()
     End Sub
 
     Sub viewType()
@@ -24,8 +31,8 @@
         If TxtCat.Text = "" Then
             stopCustom("Category can't blank")
         Else
-            Dim item_cat As String = addSlashes(TxtCat.Text)
-            Dim item_cat_en As String = addSlashes(TxtCatEn.Text)
+            Dim item_cat As String = addSlashes(TxtCat.Text).Trim()
+            Dim item_cat_en As String = addSlashes(TxtCatEn.Text).Trim()
             Dim id_expense_type As String = LookUpEdit1.EditValue.ToString
 
             'cek kondisi master
@@ -54,7 +61,7 @@
             VALUES('" + FormItemCatProposeDet.id + "', " + id_expense_type + ", '" + item_cat + "', '" + item_cat_en + "'); "
                 execute_non_query(query, True, "", "", "", "")
                 FormItemCatProposeDet.viewDetail()
-                Close()
+                actionLoad()
             End If
         End If
 
@@ -69,7 +76,7 @@
     Private Sub TxtCat_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtCat.KeyDown
         If e.KeyCode = Keys.Enter Then
             If TxtCat.Text <> "" Then
-                TxtCatEn.Focus()
+                save()
             Else
                 stopCustom("Can't blank.")
                 TxtCat.Focus()

@@ -218,7 +218,7 @@
         Else
             If id_pop_up = "1" Then
                 Dim qty_input_grid As Decimal = Decimal.Parse(SPQtyPL.Text.ToString)
-                If qty_input_grid.ToString <> "0" Then '-------NEW----------
+                If Not qty_input_grid = 0 Then '-------NEW----------
                     If action = "ins" Then
                         'check duplicate
                         Dim already As Boolean = False
@@ -264,7 +264,7 @@
                             FormFGAdjOutDet.check_but()
                             FormFGAdjOutDet.total_amount = Double.Parse(FormFGAdjOutDet.GVDetail.Columns("adj_out_fg_det_amount").SummaryItem.SummaryValue.ToString)
                             FormFGAdjOutDet.METotSay.Text = ConvertCurrencyToEnglish(FormFGAdjOutDet.total_amount, FormFGAdjOutDet.LECurrency.EditValue.ToString)
-                            Close()
+                            'Close()
                         Else
                             stopCustom("This product already on list.")
                         End If
@@ -312,7 +312,7 @@
                             FormFGAdjOutDet.check_but()
                             FormFGAdjOutDet.total_amount = Double.Parse(FormFGAdjOutDet.GVDetail.Columns("adj_out_fg_det_amount").SummaryItem.SummaryValue.ToString)
                             FormFGAdjOutDet.METotSay.Text = ConvertCurrencyToEnglish(FormFGAdjOutDet.total_amount, FormFGAdjOutDet.LECurrency.EditValue.ToString)
-                            Close()
+                            'Close()
                         Else
                             stopCustom("This product already on list.")
                         End If

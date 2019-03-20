@@ -138,7 +138,7 @@
                     FormSalesReturnDet.GVItemList.RefreshData()
                     FormSalesReturnDet.GVItemList.OptionsBehavior.AutoExpandAllGroups = True
                     FormSalesReturnDet.GVItemList.FocusedRowHandle = find_row(FormSalesReturnDet.GVItemList, "id_product", GVItemList.GetFocusedRowCellValue("id_product").ToString)
-                    FormSalesReturnDet.codeAvailableIns(GVItemList.GetFocusedRowCellValue("id_product").ToString, FormSalesReturnDet.id_store, GVItemList.GetFocusedRowCellValue("id_design_price").ToString)
+                    FormSalesReturnDet.codeAvailableIns(GVItemList.GetFocusedRowCellValue("id_product").ToString, GVItemList.GetFocusedRowCellValue("id_product").ToString, FormSalesReturnDet.id_store, GVItemList.GetFocusedRowCellValue("id_design_price").ToString)
                     FormSalesReturnDet.check_but()
                     Close()
                 End If
@@ -183,7 +183,7 @@
                     FormSalesReturnDet.GVItemList.RefreshData()
                     FormSalesReturnDet.GVItemList.OptionsBehavior.AutoExpandAllGroups = True
                     FormSalesReturnDet.codeAvailableDel(GVItemList.GetFocusedRowCellValue("id_product").ToString)
-                    FormSalesReturnDet.codeAvailableIns(GVItemList.GetFocusedRowCellValue("id_product").ToString, FormSalesReturnDet.id_store, GVItemList.GetFocusedRowCellValue("id_design_price").ToString)
+                    FormSalesReturnDet.codeAvailableIns(GVItemList.GetFocusedRowCellValue("id_product").ToString, GVItemList.GetFocusedRowCellValue("id_product").ToString, FormSalesReturnDet.id_store, GVItemList.GetFocusedRowCellValue("id_design_price").ToString)
                     FormSalesReturnDet.check_but()
                     Close()
                 End If

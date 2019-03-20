@@ -133,4 +133,7 @@
         HaevruPUyJvt/7CyMOZ+ZXVvAAAAAElFTkSuQmCC
 </value>
   </data>
+  <data name="BandedGridColumn13.UnboundExpression" xml:space="preserve">
+    <value>(([1_actual] + [2_actual] + [3_actual] + [4_actual] + [5_actual] + [6_actual] + [7_actual] + [8_actual] + [9_actual] + [10_actual] + [11_actual] + [12_actual]) / ([1_budget] + [2_budget] + [3_budget] + [4_budget] + [5_budget] + [6_budget] + [7_budget] + [8_budget] + [9_budget] + [10_budget] + [11_budget] + [12_budget])) * 100 </value>
+  </data>
 </root>

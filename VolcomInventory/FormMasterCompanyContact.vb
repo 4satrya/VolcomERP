@@ -11,7 +11,7 @@ Public Class FormMasterCompanyContact
     End Sub
 
     Sub view_contact()
-        Dim data As DataTable = execute_query(String.Format("SELECT id_comp_contact,contact_person,contact_number,is_default FROM tb_m_comp_contact WHERE id_comp='{0}' ORDER BY is_default AND contact_person", id_company), -1, True, "", "", "", "")
+        Dim data As DataTable = execute_query(String.Format("SELECT id_comp_contact,contact_person,contact_number,email,position,is_default FROM tb_m_comp_contact WHERE id_comp='{0}' ORDER BY is_default AND contact_person", id_company), -1, True, "", "", "", "")
         GCCompanyContactList.DataSource = data
     End Sub
 
@@ -60,8 +60,10 @@ Public Class FormMasterCompanyContact
         End If
 
         GroupControl1.Enabled = False
-        TEContactNumber.Text = GVCompanyContactList.GetFocusedRowCellDisplayText("contact_number")
-        TECP.Text = GVCompanyContactList.GetFocusedRowCellDisplayText("contact_person")
+        TEContactNumber.Text = GVCompanyContactList.GetFocusedRowCellValue("contact_number").ToString
+        TECP.Text = GVCompanyContactList.GetFocusedRowCellValue("contact_person").ToString
+        TEEmail.Text = GVCompanyContactList.GetFocusedRowCellValue("email").ToString
+        TEPosition.Text = GVCompanyContactList.GetFocusedRowCellValue("position").ToString
 
     End Sub
 
@@ -113,8 +115,10 @@ Public Class FormMasterCompanyContact
 
     Private Sub BSave_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BSave.Click
         ValidateChildren()
-        Dim contact_name As String = TECP.Text
-        Dim contact_number As String = TEContactNumber.Text
+        Dim contact_name As String = addSlashes(TECP.Text)
+        Dim contact_number As String = addSlashes(TEContactNumber.Text)
+        Dim email As String = addSlashes(TEEmail.Text)
+        Dim position As String = addSlashes(TEPosition.Text)
         Dim isdefault As String = LEDefault.EditValue.ToString
         Dim query As String
 
@@ -129,7 +133,7 @@ Public Class FormMasterCompanyContact
                 Else
                     isdefault = "0"
                 End If
-                query = String.Format("INSERT INTO tb_m_comp_contact(id_comp,contact_person,contact_number,is_default) VALUES('{0}','{1}','{2}','{3}')", id_company, contact_name, contact_number, isdefault)
+                query = String.Format("INSERT INTO tb_m_comp_contact(id_comp,contact_person,contact_number,email,position,is_default,last_upd,last_upd_by) VALUES('{0}','{1}','{2}','{3}','{4}','{5}',NOW(),'{6}')", id_company, contact_name, contact_number, email, position, isdefault, id_user)
                 execute_non_query(query, True, "", "", "", "")
                 view_contact()
                 clean_field()
@@ -154,7 +158,7 @@ Public Class FormMasterCompanyContact
                 Else
                     isdefault = "0"
                 End If
-                query = String.Format("UPDATE tb_m_comp_contact SET contact_person='{0}',contact_number='{1}',is_default='{2}' WHERE id_comp_contact='{3}'", contact_name, contact_number, isdefault, GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString)
+                query = String.Format("UPDATE tb_m_comp_contact SET contact_person='{0}',contact_number='{1}',is_default='{2}',email='{3}',position='{4}',last_upd=NOW(),last_upd_by='{5}' WHERE id_comp_contact='{5}'", contact_name, contact_number, isdefault, email, position, GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString, id_user)
                 execute_non_query(query, True, "", "", "", "")
                 view_contact()
                 clean_field()

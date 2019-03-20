@@ -86,9 +86,15 @@
             condition = ""
         End If
 
-        Dim query As String = "SELECT cp.id_item_coa_propose, cp.number, cp.created_date, cp.note, cp.id_report_status, stt.report_status, cp.is_confirm 
+        Dim query As String = "SELECT cp.id_item_coa_propose, cp.number, cp.created_date, cp.note, cp.id_report_status, stt.report_status, cp.is_confirm,
+        cp.acc_coa_hutang, h.acc_name AS `code_hutang`, h.acc_description AS `name_hutang`,
+        cp.acc_coa_receive, r.acc_name AS `code_inv_store`, r.acc_description AS `name_inv_store`,
+        cp.acc_coa_trf, t.acc_name AS `code_inv_wh`, t.acc_description AS `name_inv_wh`
         FROM tb_item_coa_propose cp
         INNER JOIN tb_lookup_report_status stt ON stt.id_report_status = cp.id_report_status
+        LEFT JOIN tb_a_acc h ON h.id_acc = cp.acc_coa_hutang
+        LEFT JOIN tb_a_acc r ON r.id_acc = cp.acc_coa_receive
+        LEFT JOIN tb_a_acc t ON t.id_acc = cp.acc_coa_trf 
         WHERE cp.id_item_coa_propose>0 "
         query += condition + " "
         query += "ORDER BY cp.id_item_coa_propose " + order_type

@@ -22,8 +22,8 @@
         Else
             Dim query As String = "INSERT INTO feedback(id_user, feedback_time, feedback) VALUES ('" + id_user + "', NOW(), '" + MEFeedback.Text + "')"
             execute_query(query, -1, True, "", "", "", "")
-            pushNotif("Feedback", "You have new feedback system", "FormFeedback", "7", id_user, "0", "", "")
-            pushNotif("Feedback", "You have new feedback system", "FormFeedback", "8", id_user, "0", "", "")
+            pushNotif("Feedback", "You have new feedback system", "FormFeedback", "7", id_user, "0", "", "", "NULL")
+            pushNotif("Feedback", "You have new feedback system", "FormFeedback", "8", id_user, "0", "", "", "NULL")
             FormFeedback.viewFeedback()
             Close()
         End If

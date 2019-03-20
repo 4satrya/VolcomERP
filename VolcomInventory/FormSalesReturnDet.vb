@@ -41,6 +41,10 @@ Public Class FormSalesReturnDet
     Public is_view As String = "-1"
     Dim id_store_type As String = "-1"
 
+    Public is_use_unique_code As String = "2"
+    Dim id_commerce_type As String = "-1"
+    Dim action_scan_btn As String = ""
+
     Private Sub FormSalesReturnDet_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         viewReportStatus()
         actionLoad()
@@ -96,9 +100,9 @@ Public Class FormSalesReturnDet
 
 
             'query view based on edit id's
-            Dim query As String = "SELECT a.id_wh_drawer,dw.wh_drawer_code,b.id_sales_return_order, a.id_store_contact_from, (d.id_drawer_def) AS `id_wh_drawer_store`,IFNULL(rck.id_wh_rack,-1) AS `id_wh_rack_store`, IFNULL(rck.id_wh_locator,-1) AS `id_wh_locator_store`, a.id_comp_contact_to, (d.comp_name) AS store_name_from, (d1.comp_name) AS comp_name_to, (d.comp_number) AS store_number_from, (d1.comp_number) AS comp_number_to, (d.address_primary) AS store_address_from, a.id_report_status, f.report_status, "
+            Dim query As String = "SELECT a.id_wh_drawer,dw.wh_drawer_code,b.id_sales_return_order, a.id_store_contact_from, d.id_commerce_type,(d.id_drawer_def) AS `id_wh_drawer_store`,IFNULL(rck.id_wh_rack,-1) AS `id_wh_rack_store`, IFNULL(rck.id_wh_locator,-1) AS `id_wh_locator_store`, a.id_comp_contact_to, (d.comp_name) AS store_name_from, (d1.comp_name) AS comp_name_to, (d.comp_number) AS store_number_from, (d1.comp_number) AS comp_number_to, (d.address_primary) AS store_address_from, a.id_report_status, f.report_status, "
             query += "a.sales_return_note,a.sales_return_date, a.sales_return_number, sales_return_store_number,b.sales_return_order_number, "
-            query += "DATE_FORMAT(a.sales_return_date,'%Y-%m-%d') AS sales_return_datex, (c.id_comp) AS id_store, (c1.id_comp) AS id_comp_to, dw.wh_drawer, rc.wh_rack, loc.wh_locator, a.id_ret_type, rt.ret_type, so.sales_order_ol_shop_number "
+            query += "DATE_FORMAT(a.sales_return_date,'%Y-%m-%d') AS sales_return_datex, (c.id_comp) AS id_store, (c1.id_comp) AS id_comp_to, dw.wh_drawer, rc.wh_rack, loc.wh_locator, a.id_ret_type, rt.ret_type, so.sales_order_ol_shop_number, a.is_use_unique_code "
             query += "FROM tb_sales_return a "
             query += "INNER JOIN tb_sales_return_order b ON a.id_sales_return_order = b.id_sales_return_order "
             query += "INNER JOIN tb_m_comp_contact c ON c.id_comp_contact = a.id_store_contact_from "
@@ -141,6 +145,7 @@ Public Class FormSalesReturnDet
             id_wh_drawer_store = data.Rows(0)("id_wh_drawer_store").ToString
             id_wh_locator_store = data.Rows(0)("id_wh_locator_store").ToString
             id_wh_rack_store = data.Rows(0)("id_wh_rack_store").ToString
+            id_commerce_type = data.Rows(0)("id_commerce_type").ToString
 
             drawer_sel = data.Rows(0)("wh_drawer").ToString
             rack_sel = data.Rows(0)("wh_rack").ToString
@@ -151,6 +156,7 @@ Public Class FormSalesReturnDet
             id_ret_type = data.Rows(0)("id_ret_type").ToString
             TxtReturnType.Text = data.Rows(0)("ret_type").ToString
             TxtOLStoreOrder.Text = data.Rows(0)("sales_order_ol_shop_number").ToString
+            is_use_unique_code = data.Rows(0)("is_use_unique_code").ToString
 
             'detail2
             viewDetail()
@@ -180,7 +186,7 @@ Public Class FormSalesReturnDet
         End If
     End Sub
     Sub viewSalesReturnOrder()
-        Dim query As String = "SELECT a.id_sales_return_order, a.id_store_contact_to, a.id_wh_contact_to, d.id_store_type,(d.comp_name) AS store_name_to, (d.id_drawer_def) AS `id_wh_drawer_store`, IFNULL(rck.id_wh_rack,-1) AS `id_wh_rack_store`, IFNULL(rck.id_wh_locator,-1) AS `id_wh_locator_store`,a.id_report_status, f.report_status, "
+        Dim query As String = "SELECT a.id_sales_return_order, a.id_store_contact_to, a.id_wh_contact_to, d.is_use_unique_code, d.id_commerce_type, d.id_store_type,(d.comp_name) AS store_name_to, (d.id_drawer_def) AS `id_wh_drawer_store`, IFNULL(rck.id_wh_rack,-1) AS `id_wh_rack_store`, IFNULL(rck.id_wh_locator,-1) AS `id_wh_locator_store`,a.id_report_status, f.report_status, "
         query += "a.sales_return_order_note, a.sales_return_order_note, a.sales_return_order_number, "
         query += "DATE_FORMAT(a.sales_return_order_date,'%d %M %Y') AS sales_return_order_date, "
         query += "DATE_FORMAT(a.sales_return_order_est_date,'%d %M %Y') AS sales_return_order_est_date "
@@ -212,6 +218,8 @@ Public Class FormSalesReturnDet
         id_store = id_comp_from
         id_store_contact_from = data.Rows(0)("id_store_contact_to").ToString
         id_store_type = data.Rows(0)("id_store_type").ToString
+        id_commerce_type = data.Rows(0)("id_commerce_type").ToString
+        is_use_unique_code = data.Rows(0)("is_use_unique_code").ToString
         TxtCodeCompFrom.Text = get_company_x(id_comp_from, 2)
         TxtNameCompFrom.Text = get_company_x(id_comp_from, 1)
         id_wh_drawer_store = data.Rows(0)("id_wh_drawer_store").ToString
@@ -294,7 +302,7 @@ Public Class FormSalesReturnDet
 
     Sub view_barcode_list()
         If action = "ins" Then
-            Dim query As String = "SELECT ('0') AS no, ('') AS code, ('') AS name, ('') AS size, ('0') AS id_sales_return_det, ('0') AS id_pl_prod_order_rec_det_unique, ('0') AS id_product,('1') AS is_fix, ('') AS counting_code, ('0') AS id_sales_return_det_counting, CAST('0' AS DECIMAL(13,2)) AS bom_unit_price, CAST('0' AS DECIMAL(13,2)) AS design_price, ('0') AS id_design_price "
+            Dim query As String = "SELECT ('0') AS no, ('') AS code, ('') AS name, ('') AS size, ('0') AS id_sales_return_det, ('0') AS id_pl_prod_order_rec_det_unique, ('0') AS id_product,('1') AS is_fix, ('') AS counting_code, ('0') AS id_sales_return_det_counting, CAST('0' AS DECIMAL(13,2)) AS bom_unit_price, CAST('0' AS DECIMAL(13,2)) AS design_price, ('0') AS id_design_price, '0' AS ` is_unique_report` "
             Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
             GCBarcode.DataSource = data
             deleteRowsBc()
@@ -305,7 +313,7 @@ Public Class FormSalesReturnDet
             query += "c.product_display_name AS `name`, cod.display_name AS `size`, (a.sales_return_det_counting) AS counting_code, "
             query += "a.id_sales_return_det_counting, ('2') AS is_fix, "
             query += "IFNULL(a.id_pl_prod_order_rec_det_unique,'0') AS `id_pl_prod_order_rec_det_unique`, b.id_product, "
-            query += "d.bom_unit_price, b.id_design_price, b.design_price "
+            query += "d.bom_unit_price, b.id_design_price, b.design_price, a. is_unique_report "
             query += "FROM tb_sales_return_det_counting a "
             query += "INNER JOIN tb_sales_return_det b ON a.id_sales_return_det = b.id_sales_return_det "
             query += "JOIN tb_opt o "
@@ -337,9 +345,38 @@ Public Class FormSalesReturnDet
 
 
 
-    Sub codeAvailableIns(ByVal id_product_param As String, ByVal id_store_param As String, ByVal id_design_price_param As String)
+    Sub codeAvailableIns(ByVal id_product_param As String, ByVal id_product_param_or As String, ByVal id_store_param As String, ByVal id_design_price_param As String)
+        'unique
         Dim query As String = ""
-        query = "CALL view_stock_fg_unique_ret('" + id_product_param + "','" + id_store_param + "', '" + id_design_price_param + "','0')"
+        If is_use_unique_code = "1" Then
+            query = "SELECT c.id_pl_prod_order_rec_det_unique, prc.design_price, prc.id_design_price, prc.design_price_type, 
+            u.id_product, prod.product_full_code AS `product_code`, prod.product_display_name AS `name`,cd.code_detail_name AS `size`, RIGHT(u.unique_code,4) AS `product_counting_code`,
+            u.unique_code AS `product_full_code`, dsg.design_cop AS `bom_unit_price`, SUM(u.qty) AS `qty`, 6 AS `id_report_status`, 2 AS `is_old_design`, '' AS `stt`, u.is_unique_report
+            FROM tb_m_unique_code u
+            INNER JOIN tb_m_product prod ON prod.id_product = u.id_product
+            INNER JOIN tb_m_product_code prodc ON prodc.id_product = prod.id_product
+            INNER JOIN tb_m_code_detail cd ON cd.id_code_detail = prodc.id_code_detail
+            INNER JOIN tb_m_design dsg ON dsg.id_design = prod.id_design
+            LEFT JOIN( 
+              Select * FROM ( 
+              Select price.id_design, price.design_price, price.design_price_date, price.id_design_price, 
+              price.id_design_price_type, price_type.design_price_type,
+              cat.id_design_cat, cat.design_cat
+              From tb_m_design_price price 
+              INNER Join tb_lookup_design_price_type price_type On price.id_design_price_type = price_type.id_design_price_type 
+              INNER JOIN tb_lookup_design_cat cat ON cat.id_design_cat = price_type.id_design_cat
+              WHERE price.is_active_wh =1 AND price.design_price_start_date <= NOW() 
+              ORDER BY price.design_price_start_date DESC, price.id_design_price DESC ) a 
+              GROUP BY a.id_design 
+            ) prc ON prc.id_design = prod.id_design 
+            INNER JOIN tb_pl_prod_order_rec_det_counting c ON c.id_product = u.id_product AND c.pl_prod_order_rec_det_counting = RIGHT(u.unique_code,4)
+            WHERE u.id_comp=" + id_store + " AND (" + id_product_param_or + ")
+            GROUP BY u.unique_code 
+            HAVING qty>0 "
+        Else
+            query = "CALL view_stock_fg_unique_ret('" + id_product_param + "','" + id_store_param + "', '" + id_design_price_param + "','0')"
+        End If
+
         Dim datax As DataTable = execute_query(query, -1, True, "", "", "", "")
         dt = datax
         'For k As Integer = 0 To (datax.Rows.Count - 1)
@@ -552,32 +589,57 @@ Public Class FormSalesReturnDet
     End Sub
 
     Sub countQty(ByVal id_product_param As String)
-        Dim tot As Decimal = 0.0
-        For i As Integer = 0 To GVBarcode.RowCount - 1
-            Dim id_product As String = GVBarcode.GetRowCellValue(i, "id_product").ToString
-            If id_product = id_product_param Then
-                tot = tot + 1.0
+        If id_commerce_type = "2" Then
+            'onine store
+            'focus
+            makeSafeGV(GVItemList)
+            If action_scan_btn = "start" Then
+                GVItemList.ActiveFilterString = "[id_product]='" + id_product_param + "' AND [diff]>0 "
+            ElseIf action_scan_btn = "delete" Then
+                GVItemList.ActiveFilterString = "[id_product]='" + id_product_param + "' AND [sales_return_det_qty]>0 "
             End If
-        Next
+            GVItemList.FocusedRowHandle = 0
+            makeSafeGV(GVItemList)
 
-        Dim indeks As Integer = -1
-        For j As Integer = 0 To GVItemList.RowCount - 1
-            Try
-                Dim id_productx As String = GVItemList.GetRowCellValue(j, "id_product").ToString
-                If id_productx = id_product_param Then
-                    indeks = j
-                    Exit For
+            Dim tot As Integer = 0
+            If action_scan_btn = "start" Then
+                tot = GVItemList.GetFocusedRowCellValue("sales_return_det_qty") + 1
+            ElseIf action_scan_btn = "delete" Then
+                tot = GVItemList.GetFocusedRowCellValue("sales_return_det_qty") - 1
+            End If
+
+
+            Dim price As Decimal = Decimal.Parse(GVItemList.GetFocusedRowCellValue("design_price").ToString)
+            GVItemList.SetFocusedRowCellValue("sales_return_det_amount", tot * price)
+            GVItemList.SetFocusedRowCellValue("sales_return_det_qty", tot)
+        Else
+            Dim tot As Decimal = 0.0
+            For i As Integer = 0 To GVBarcode.RowCount - 1
+                Dim id_product As String = GVBarcode.GetRowCellValue(i, "id_product").ToString
+                If id_product = id_product_param Then
+                    tot = tot + 1.0
                 End If
-            Catch ex As Exception
-            End Try
-        Next
+            Next
+
+            Dim indeks As Integer = -1
+            For j As Integer = 0 To GVItemList.RowCount - 1
+                Try
+                    Dim id_productx As String = GVItemList.GetRowCellValue(j, "id_product").ToString
+                    If id_productx = id_product_param Then
+                        indeks = j
+                        Exit For
+                    End If
+                Catch ex As Exception
+                End Try
+            Next
 
 
 
-        GVItemList.FocusedRowHandle = indeks
-        Dim price As Decimal = Decimal.Parse(GVItemList.GetFocusedRowCellValue("design_price").ToString)
-        GVItemList.SetFocusedRowCellValue("sales_return_det_amount", tot * price)
-        GVItemList.SetFocusedRowCellValue("sales_return_det_qty", tot)
+            GVItemList.FocusedRowHandle = indeks
+            Dim price As Decimal = Decimal.Parse(GVItemList.GetFocusedRowCellValue("design_price").ToString)
+            GVItemList.SetFocusedRowCellValue("sales_return_det_amount", tot * price)
+            GVItemList.SetFocusedRowCellValue("sales_return_det_qty", tot)
+        End If
     End Sub
 
     Private Sub BtnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnAdd.Click
@@ -773,25 +835,48 @@ Public Class FormSalesReturnDet
         Dim query_cek_stok As String = "CALL view_sales_return_order_limit('" + id_sales_return_order + "','0','0') "
         Dim dt_cek As DataTable = execute_query(query_cek_stok, -1, True, "", "", "", "")
 
-        For i As Integer = 0 To ((GVItemList.RowCount - 1) - GetGroupRowCount(GVItemList))
-            Dim id_product_cek As String = GVItemList.GetRowCellValue(i, "id_product").ToString
-            Dim name_cek As String = GVItemList.GetRowCellValue(i, "name").ToString
-            Dim size_cek As String = GVItemList.GetRowCellValue(i, "size").ToString
-            Dim qty_cek As Integer = GVItemList.GetRowCellValue(i, "sales_return_det_qty")
-            Dim qty_soh As Integer = 0
-            Dim dt_filter_cek As DataRow() = dt_cek.Select("[id_product]='" + id_product_cek + "' ")
-            If dt_filter_cek.Length > 0 Then
-                ' qty_soh = dt_filter_cek(0)("qty_all_product")
-                qty_soh = dt_filter_cek(0)("sales_return_det_qty_limit")
-            Else
-                qty_soh = 0
-            End If
+        If id_commerce_type = "2" Then
+            'online store
+            For i As Integer = 0 To ((GVItemList.RowCount - 1) - GetGroupRowCount(GVItemList))
+                Dim id_sales_return_order_det_cek As String = GVItemList.GetRowCellValue(i, "id_sales_return_order_det").ToString
+                Dim name_cek As String = GVItemList.GetRowCellValue(i, "name").ToString
+                Dim size_cek As String = GVItemList.GetRowCellValue(i, "size").ToString
+                Dim qty_cek As Integer = GVItemList.GetRowCellValue(i, "sales_return_det_qty")
+                Dim qty_soh As Integer = 0
+                Dim dt_filter_cek As DataRow() = dt_cek.Select("[id_sales_return_order_det]='" + id_sales_return_order_det_cek + "' ")
+                If dt_filter_cek.Length > 0 Then
+                    ' qty_soh = dt_filter_cek(0)("qty_all_product")
+                    qty_soh = dt_filter_cek(0)("sales_return_det_qty_limit")
+                Else
+                    qty_soh = 0
+                End If
 
-            If qty_cek > qty_soh Then
-                cond_list = False
-            End If
-            GVItemList.SetRowCellValue(i, "sales_return_det_qty_limit", qty_soh)
-        Next
+                If qty_cek > qty_soh Then
+                    cond_list = False
+                End If
+                GVItemList.SetRowCellValue(i, "sales_return_det_qty_limit", qty_soh)
+            Next
+        Else
+            For i As Integer = 0 To ((GVItemList.RowCount - 1) - GetGroupRowCount(GVItemList))
+                Dim id_product_cek As String = GVItemList.GetRowCellValue(i, "id_product").ToString
+                Dim name_cek As String = GVItemList.GetRowCellValue(i, "name").ToString
+                Dim size_cek As String = GVItemList.GetRowCellValue(i, "size").ToString
+                Dim qty_cek As Integer = GVItemList.GetRowCellValue(i, "sales_return_det_qty")
+                Dim qty_soh As Integer = 0
+                Dim dt_filter_cek As DataRow() = dt_cek.Select("[id_product]='" + id_product_cek + "' ")
+                If dt_filter_cek.Length > 0 Then
+                    ' qty_soh = dt_filter_cek(0)("qty_all_product")
+                    qty_soh = dt_filter_cek(0)("sales_return_det_qty_limit")
+                Else
+                    qty_soh = 0
+                End If
+
+                If qty_cek > qty_soh Then
+                    cond_list = False
+                End If
+                GVItemList.SetRowCellValue(i, "sales_return_det_qty_limit", qty_soh)
+            Next
+        End If
         Return cond_list
     End Function
 
@@ -833,8 +918,8 @@ Public Class FormSalesReturnDet
                     Else
                         sales_return_number = header_number_sales("32")
                     End If
-                    Dim query_main As String = "INSERT tb_sales_return(id_store_contact_from, id_comp_contact_to, id_sales_return_order, sales_return_number, sales_return_store_number, sales_return_date, sales_return_note,id_wh_drawer ,id_report_status, last_update, last_update_by, id_ret_type) "
-                    query_main += "VALUES('" + id_store_contact_from + "', '" + id_comp_contact_to + "', '" + id_sales_return_order + "', '" + sales_return_number + "', '" + sales_return_store_number + "', NOW(), '" + sales_return_note + "','" + id_drawer + "', '1', NOW(), " + id_user + ",'" + id_ret_type + "');SELECT LAST_INSERT_ID(); "
+                    Dim query_main As String = "INSERT tb_sales_return(id_store_contact_from, id_comp_contact_to, id_sales_return_order, sales_return_number, sales_return_store_number, sales_return_date, sales_return_note,id_wh_drawer ,id_report_status, last_update, last_update_by, id_ret_type, is_use_unique_code) "
+                    query_main += "VALUES('" + id_store_contact_from + "', '" + id_comp_contact_to + "', '" + id_sales_return_order + "', '" + sales_return_number + "', '" + sales_return_store_number + "', NOW(), '" + sales_return_note + "','" + id_drawer + "', '1', NOW(), " + id_user + ",'" + id_ret_type + "', '" + is_use_unique_code + "');SELECT LAST_INSERT_ID(); "
                     id_sales_return = execute_query(query_main, 0, True, "", "", "", "")
 
                     If id_ret_type = "1" Then
@@ -895,7 +980,7 @@ Public Class FormSalesReturnDet
                     Dim jum_ins_p As Integer = 0
                     Dim query_counting As String = ""
                     If GVBarcode.RowCount > 0 Then
-                        query_counting = "INSERT INTO tb_sales_return_det_counting(id_sales_return_det, id_pl_prod_order_rec_det_unique, sales_return_det_counting) VALUES "
+                        query_counting = "INSERT INTO tb_sales_return_det_counting(id_sales_return_det, id_pl_prod_order_rec_det_unique, sales_return_det_counting, is_unique_report) VALUES "
                     End If
                     For p As Integer = 0 To (GVBarcode.RowCount - 1)
                         Dim id_product_counting As String = GVBarcode.GetRowCellValue(p, "id_product").ToString
@@ -904,12 +989,13 @@ Public Class FormSalesReturnDet
                             id_pl_prod_order_rec_det_unique = "NULL "
                         End If
                         Dim sales_return_det_counting As String = GVBarcode.GetRowCellValue(p, "counting_code").ToString
+                        Dim is_unique_report As String = GVBarcode.GetRowCellValue(p, "is_unique_report").ToString
                         For p1 As Integer = 0 To (data_get_detail_id.Rows.Count - 1)
                             If id_product_counting = data_get_detail_id.Rows(p1)("id_product").ToString Then
                                 If jum_ins_p > 0 Then
                                     query_counting += ", "
                                 End If
-                                query_counting += "('" + data_get_detail_id.Rows(p1)("id_sales_return_det").ToString + "', " + id_pl_prod_order_rec_det_unique + ", '" + sales_return_det_counting + "') "
+                                query_counting += "('" + data_get_detail_id.Rows(p1)("id_sales_return_det").ToString + "', " + id_pl_prod_order_rec_det_unique + ", '" + sales_return_det_counting + "', '" + is_unique_report + "') "
                                 jum_ins_p = jum_ins_p + 1
                                 Exit For
                             End If
@@ -917,6 +1003,12 @@ Public Class FormSalesReturnDet
                     Next
                     If jum_ins_p > 0 Then
                         execute_non_query(query_counting, True, "", "", "", "")
+                    End If
+
+                    'unik record
+                    If is_use_unique_code = "1" Then
+                        Dim un As New ClassSalesReturn()
+                        un.insertUnique(id_sales_return)
                     End If
 
                     'code problem scan
@@ -1105,13 +1197,19 @@ Public Class FormSalesReturnDet
     Sub loadCodeDetail()
         Cursor = Cursors.WaitCursor
         Dim id_product_param As String = ""
+        Dim id_product_param_or As String = ""
         For i As Integer = 0 To ((GVItemList.RowCount - 1) - GetGroupRowCount(GVItemList))
             id_product_param += GVItemList.GetRowCellValue(i, "id_product").ToString
             If i < ((GVItemList.RowCount - 1) - GetGroupRowCount(GVItemList)) Then
                 id_product_param += ";"
             End If
+
+            If i > 0 Then
+                id_product_param_or += "OR "
+            End If
+            id_product_param_or += "u.id_product='" + GVItemList.GetRowCellValue(i, "id_product").ToString + "' "
         Next
-        codeAvailableIns(id_product_param, id_store, "0")
+        codeAvailableIns(id_product_param, id_product_param_or, id_store, "0")
         Cursor = Cursors.Default
     End Sub
 
@@ -1129,6 +1227,7 @@ Public Class FormSalesReturnDet
     End Sub
 
     Private Sub BScan_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BScan.Click
+        action_scan_btn = "start"
         If GVItemList.RowCount > 0 Then
             loadCodeDetail()
             verifyTrans()
@@ -1140,6 +1239,7 @@ Public Class FormSalesReturnDet
     End Sub
 
     Private Sub BStop_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BStop.Click
+        action_scan_btn = "stop"
         For i As Integer = 0 To (GVBarcode.RowCount - 1)
             Dim check_code As String = ""
             Try
@@ -1179,6 +1279,7 @@ Public Class FormSalesReturnDet
     End Sub
 
     Private Sub BDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BDelete.Click
+        action_scan_btn = "delete"
         disableControl()
         LabelDelScan.Visible = True
         TxtDeleteScan.Visible = True
@@ -1268,6 +1369,7 @@ Public Class FormSalesReturnDet
         Dim is_old As String = "0"
         Dim jum_scan As Integer = 0
         Dim jum_limit As Integer = 0
+        Dim is_unique_report As String = "2"
 
         'check in ro 
         Dim code_list_found As Boolean = False
@@ -1295,11 +1397,18 @@ Public Class FormSalesReturnDet
                 size = dt_filter(0)("size").ToString
                 bom_unit_price = Decimal.Parse(dt_filter(0)("bom_unit_price").ToString)
                 is_old = dt_filter(0)("is_old_design").ToString
+                is_unique_report = dt_filter(0)("is_unique_report").ToString
                 code_found = True
             End If
 
             'get jum del & limit
-            GVItemList.ActiveFilterString = "[id_product]='" + id_product + "' "
+            If id_commerce_type = "2" Then 'online store
+                GVItemList.ActiveFilterString = "[id_product]='" + id_product + "' AND [diff]>0 "
+            Else
+                GVItemList.ActiveFilterString = "[id_product]='" + id_product + "' "
+            End If
+
+
             GVItemList.FocusedRowHandle = 0
             Try
                 jum_limit = GVItemList.GetFocusedRowCellValue("sales_return_det_qty_limit")
@@ -1330,6 +1439,7 @@ Public Class FormSalesReturnDet
                     GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "name", product_name)
                     GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "size", size)
                     GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "bom_unit_price", bom_unit_price)
+                    GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "is_unique_report", is_unique_report)
                     countQty(id_product)
                     checkUnitCost(id_product, bom_unit_price)
                     newRowsBc()
@@ -1370,6 +1480,7 @@ Public Class FormSalesReturnDet
                         GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "name", product_name)
                         GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "size", size)
                         GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "bom_unit_price", bom_unit_price)
+                        GVBarcode.SetRowCellValue(GVBarcode.RowCount - 1, "is_unique_report", is_unique_report)
                         countQty(id_product)
                         checkUnitCost(id_product, bom_unit_price)
                         newRowsBc()

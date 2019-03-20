@@ -146,6 +146,7 @@ Partial Public Class ReportSalesReturnQC
         Me.LabelPLCategory.SizeF = New System.Drawing.SizeF(184.8334!, 17.75!)
         Me.LabelPLCategory.StylePriority.UseBorders = False
         Me.LabelPLCategory.StylePriority.UseFont = False
+        Me.LabelPLCategory.Visible = False
         '
         'XrLabel13
         '
@@ -156,6 +157,7 @@ Partial Public Class ReportSalesReturnQC
         Me.XrLabel13.SizeF = New System.Drawing.SizeF(11.45831!, 17.75001!)
         Me.XrLabel13.StylePriority.UseBorders = False
         Me.XrLabel13.Text = ":"
+        Me.XrLabel13.Visible = False
         '
         'XrLabel8
         '
@@ -166,6 +168,7 @@ Partial Public Class ReportSalesReturnQC
         Me.XrLabel8.SizeF = New System.Drawing.SizeF(105.2082!, 17.75!)
         Me.XrLabel8.StylePriority.UseBorders = False
         Me.XrLabel8.Text = "QC Category"
+        Me.XrLabel8.Visible = False
         '
         'LabelReturn
         '
@@ -196,7 +199,7 @@ Partial Public Class ReportSalesReturnQC
         Me.XrLabel6.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel6.SizeF = New System.Drawing.SizeF(105.2082!, 13.58335!)
         Me.XrLabel6.StylePriority.UseBorders = False
-        Me.XrLabel6.Text = "Return"
+        Me.XrLabel6.Text = "Return No."
         '
         'LabelTo
         '
@@ -313,7 +316,7 @@ Partial Public Class ReportSalesReturnQC
         Me.LTitle.SizeF = New System.Drawing.SizeF(233.0467!, 25.08334!)
         Me.LTitle.StylePriority.UseFont = False
         Me.LTitle.StylePriority.UseTextAlignment = False
-        Me.LTitle.Text = "RETURN QUALITY CONTROL"
+        Me.LTitle.Text = "QUALITY INSPECTION SLIP"
         Me.LTitle.TextAlignment = DevExpress.XtraPrinting.TextAlignment.BottomCenter
         '
         'LRecNumber

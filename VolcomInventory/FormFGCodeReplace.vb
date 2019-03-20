@@ -22,14 +22,19 @@
     Sub viewCodeReplaceStore()
         Dim query_c As ClassFGCodeReplace = New ClassFGCodeReplace()
         Dim query As String = ""
-        If form_type = "2" Or form_type = "3" Then
+        If form_type = "2" Then
             query = query_c.queryMainStore("AND rep.id_report_status=6 ", "2")
             GridColumnStatus.Visible = False
+        ElseIf form_type = "3" Then
+            query = query_c.queryMainStore("AND rep.id_report_status=6 AND rep.is_printed=1 ", "2")
+            GridColumnStatus.Visible = False
+            CENotPrintedYet.Visible = False
         Else
             query = query_c.queryMainStore("-1", "2")
         End If
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCFGCodeReplaceStore.DataSource = data
+        GVFGCodeReplaceStore.BestFitColumns()
         check_menu()
     End Sub
 
@@ -135,13 +140,16 @@
                     End If
                 Next
                 makeSafeGV(GVFGCodeReplaceStore)
+                CENotPrintedYet.EditValue = False
                 '
                 FormFGCodeReplaceView.id = where_string
                 FormFGCodeReplaceView.load_view()
                 FormFGCodeReplaceView.ShowDialog()
                 Cursor = Cursors.Default
             Else
-                stopCustom("Please choose employee first.")
+                stopCustom("Please choose document first.")
+                makeSafeGV(GVFGCodeReplaceStore)
+                CENotPrintedYet.EditValue = False
             End If
         End If
     End Sub
@@ -156,6 +164,15 @@
                     GVFGCodeReplaceStore.SetRowCellValue(i, "is_check", "no")
                 End If
             Next
+        End If
+    End Sub
+
+    Private Sub CENotPrintedYet_CheckedChanged(sender As Object, e As EventArgs) Handles CENotPrintedYet.CheckedChanged
+        makeSafeGV(GVFGCodeReplaceStore)
+        If CENotPrintedYet.EditValue = True Then
+            GVFGCodeReplaceStore.ActiveFilterString = "[print_status]='-' "
+        Else
+            GVFGCodeReplaceStore.ActiveFilterString = ""
         End If
     End Sub
 End Class

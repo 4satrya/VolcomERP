@@ -31,14 +31,18 @@ Partial Class FormMarkAssignUser
         Me.ColIdMarkAsgUser = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnLeadTime = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.SELevel = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
-        Me.BAdd = New DevExpress.XtraEditors.SimpleButton()
+        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
         Me.Bdel = New DevExpress.XtraEditors.SimpleButton()
+        Me.BAdd = New DevExpress.XtraEditors.SimpleButton()
         Me.LStatus = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.LReport = New DevExpress.XtraEditors.LabelControl()
-        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
         Me.LRequisite = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
+        Me.LNeedPrint = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
+        Me.LNeedUpload = New DevExpress.XtraEditors.LabelControl()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl1.SuspendLayout()
@@ -63,9 +67,9 @@ Partial Class FormMarkAssignUser
         Me.GroupControl1.Controls.Add(Me.GCUser)
         Me.GroupControl1.Controls.Add(Me.PanelControl1)
         Me.GroupControl1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.GroupControl1.Location = New System.Drawing.Point(0, 93)
+        Me.GroupControl1.Location = New System.Drawing.Point(0, 143)
         Me.GroupControl1.Name = "GroupControl1"
-        Me.GroupControl1.Size = New System.Drawing.Size(651, 266)
+        Me.GroupControl1.Size = New System.Drawing.Size(651, 246)
         Me.GroupControl1.TabIndex = 5
         Me.GroupControl1.Text = "User"
         '
@@ -76,7 +80,7 @@ Partial Class FormMarkAssignUser
         Me.GCUser.MainView = Me.GVUser
         Me.GCUser.Name = "GCUser"
         Me.GCUser.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.SELevel})
-        Me.GCUser.Size = New System.Drawing.Size(629, 227)
+        Me.GCUser.Size = New System.Drawing.Size(629, 207)
         Me.GCUser.TabIndex = 24
         Me.GCUser.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVUser})
         '
@@ -141,16 +145,15 @@ Partial Class FormMarkAssignUser
         Me.SELevel.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.SELevel.Name = "SELevel"
         '
-        'BAdd
+        'PanelControl1
         '
-        Me.BAdd.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BAdd.ImageIndex = 0
-        Me.BAdd.ImageList = Me.LargeImageCollection
-        Me.BAdd.Location = New System.Drawing.Point(536, 2)
-        Me.BAdd.Name = "BAdd"
-        Me.BAdd.Size = New System.Drawing.Size(91, 31)
-        Me.BAdd.TabIndex = 23
-        Me.BAdd.Text = "Add"
+        Me.PanelControl1.Controls.Add(Me.Bdel)
+        Me.PanelControl1.Controls.Add(Me.BAdd)
+        Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelControl1.Location = New System.Drawing.Point(20, 2)
+        Me.PanelControl1.Name = "PanelControl1"
+        Me.PanelControl1.Size = New System.Drawing.Size(629, 35)
+        Me.PanelControl1.TabIndex = 25
         '
         'Bdel
         '
@@ -162,6 +165,17 @@ Partial Class FormMarkAssignUser
         Me.Bdel.Size = New System.Drawing.Size(91, 31)
         Me.Bdel.TabIndex = 22
         Me.Bdel.Text = "Delete"
+        '
+        'BAdd
+        '
+        Me.BAdd.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BAdd.ImageIndex = 0
+        Me.BAdd.ImageList = Me.LargeImageCollection
+        Me.BAdd.Location = New System.Drawing.Point(536, 2)
+        Me.BAdd.Name = "BAdd"
+        Me.BAdd.Size = New System.Drawing.Size(91, 31)
+        Me.BAdd.TabIndex = 23
+        Me.BAdd.Text = "Add"
         '
         'LStatus
         '
@@ -190,16 +204,6 @@ Partial Class FormMarkAssignUser
         Me.LReport.TabIndex = 24
         Me.LReport.Text = "Report"
         '
-        'PanelControl1
-        '
-        Me.PanelControl1.Controls.Add(Me.Bdel)
-        Me.PanelControl1.Controls.Add(Me.BAdd)
-        Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.PanelControl1.Location = New System.Drawing.Point(20, 2)
-        Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(629, 35)
-        Me.PanelControl1.TabIndex = 25
-        '
         'LRequisite
         '
         Me.LRequisite.Appearance.Font = New System.Drawing.Font("Tahoma", 10.0!)
@@ -218,11 +222,51 @@ Partial Class FormMarkAssignUser
         Me.LabelControl3.TabIndex = 27
         Me.LabelControl3.Text = "Requisite : "
         '
+        'LabelControl1
+        '
+        Me.LabelControl1.Appearance.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.LabelControl1.Location = New System.Drawing.Point(12, 85)
+        Me.LabelControl1.Name = "LabelControl1"
+        Me.LabelControl1.Size = New System.Drawing.Size(80, 16)
+        Me.LabelControl1.TabIndex = 29
+        Me.LabelControl1.Text = "Need Print : "
+        '
+        'LNeedPrint
+        '
+        Me.LNeedPrint.Appearance.Font = New System.Drawing.Font("Tahoma", 10.0!)
+        Me.LNeedPrint.Location = New System.Drawing.Point(91, 85)
+        Me.LNeedPrint.Name = "LNeedPrint"
+        Me.LNeedPrint.Size = New System.Drawing.Size(5, 16)
+        Me.LNeedPrint.TabIndex = 30
+        Me.LNeedPrint.Text = "-"
+        '
+        'LabelControl4
+        '
+        Me.LabelControl4.Appearance.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.LabelControl4.Location = New System.Drawing.Point(12, 107)
+        Me.LabelControl4.Name = "LabelControl4"
+        Me.LabelControl4.Size = New System.Drawing.Size(88, 16)
+        Me.LabelControl4.TabIndex = 31
+        Me.LabelControl4.Text = "Need Upload :"
+        '
+        'LNeedUpload
+        '
+        Me.LNeedUpload.Appearance.Font = New System.Drawing.Font("Tahoma", 10.0!)
+        Me.LNeedUpload.Location = New System.Drawing.Point(111, 107)
+        Me.LNeedUpload.Name = "LNeedUpload"
+        Me.LNeedUpload.Size = New System.Drawing.Size(5, 16)
+        Me.LNeedUpload.TabIndex = 32
+        Me.LNeedUpload.Text = "-"
+        '
         'FormMarkAssignUser
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(651, 359)
+        Me.ClientSize = New System.Drawing.Size(651, 389)
+        Me.Controls.Add(Me.LNeedUpload)
+        Me.Controls.Add(Me.LabelControl4)
+        Me.Controls.Add(Me.LNeedPrint)
+        Me.Controls.Add(Me.LabelControl1)
         Me.Controls.Add(Me.LRequisite)
         Me.Controls.Add(Me.LabelControl3)
         Me.Controls.Add(Me.LStatus)
@@ -266,4 +310,8 @@ Partial Class FormMarkAssignUser
     Friend WithEvents PanelControl1 As DevExpress.XtraEditors.PanelControl
     Friend WithEvents LRequisite As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LabelControl3 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LNeedPrint As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LabelControl4 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LNeedUpload As DevExpress.XtraEditors.LabelControl
 End Class

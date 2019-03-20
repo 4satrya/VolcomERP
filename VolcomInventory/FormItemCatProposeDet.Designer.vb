@@ -363,7 +363,7 @@ Partial Class FormItemCatProposeDet
         Me.MinimizeBox = False
         Me.Name = "FormItemCatProposeDet"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Propose Item Category"
+        Me.Text = "Setup Budget Category"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.GroupControlHead, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControlHead.ResumeLayout(False)

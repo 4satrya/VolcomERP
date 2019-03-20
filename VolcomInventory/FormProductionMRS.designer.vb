@@ -132,9 +132,9 @@ Partial Class FormProductionMRS
         Me.GroupControl3.Controls.Add(Me.BCancel)
         Me.GroupControl3.Controls.Add(Me.BSave)
         Me.GroupControl3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GroupControl3.Location = New System.Drawing.Point(0, 420)
+        Me.GroupControl3.Location = New System.Drawing.Point(0, 414)
         Me.GroupControl3.Name = "GroupControl3"
-        Me.GroupControl3.Size = New System.Drawing.Size(909, 32)
+        Me.GroupControl3.Size = New System.Drawing.Size(909, 38)
         Me.GroupControl3.TabIndex = 60
         '
         'BtnAttachment
@@ -144,7 +144,7 @@ Partial Class FormProductionMRS
         Me.BtnAttachment.ImageList = Me.ImgBut
         Me.BtnAttachment.Location = New System.Drawing.Point(520, 2)
         Me.BtnAttachment.Name = "BtnAttachment"
-        Me.BtnAttachment.Size = New System.Drawing.Size(115, 28)
+        Me.BtnAttachment.Size = New System.Drawing.Size(115, 34)
         Me.BtnAttachment.TabIndex = 16
         Me.BtnAttachment.Text = "Attachment"
         '
@@ -172,7 +172,7 @@ Partial Class FormProductionMRS
         Me.BMark.ImageList = Me.ImgBut
         Me.BMark.Location = New System.Drawing.Point(20, 2)
         Me.BMark.Name = "BMark"
-        Me.BMark.Size = New System.Drawing.Size(85, 28)
+        Me.BMark.Size = New System.Drawing.Size(85, 34)
         Me.BMark.TabIndex = 4
         Me.BMark.Text = "Mark"
         '
@@ -183,7 +183,7 @@ Partial Class FormProductionMRS
         Me.BPrint.ImageList = Me.ImgBut
         Me.BPrint.Location = New System.Drawing.Point(635, 2)
         Me.BPrint.Name = "BPrint"
-        Me.BPrint.Size = New System.Drawing.Size(91, 28)
+        Me.BPrint.Size = New System.Drawing.Size(91, 34)
         Me.BPrint.TabIndex = 3
         Me.BPrint.Text = "Print"
         '
@@ -194,7 +194,7 @@ Partial Class FormProductionMRS
         Me.BCancel.ImageList = Me.ImgBut
         Me.BCancel.Location = New System.Drawing.Point(726, 2)
         Me.BCancel.Name = "BCancel"
-        Me.BCancel.Size = New System.Drawing.Size(95, 28)
+        Me.BCancel.Size = New System.Drawing.Size(95, 34)
         Me.BCancel.TabIndex = 2
         Me.BCancel.Text = "Cancel"
         '
@@ -206,7 +206,7 @@ Partial Class FormProductionMRS
         Me.BSave.ImageList = Me.ImgBut
         Me.BSave.Location = New System.Drawing.Point(821, 2)
         Me.BSave.Name = "BSave"
-        Me.BSave.Size = New System.Drawing.Size(86, 28)
+        Me.BSave.Size = New System.Drawing.Size(86, 34)
         Me.BSave.TabIndex = 1
         Me.BSave.Text = "Save"
         '
@@ -216,7 +216,7 @@ Partial Class FormProductionMRS
         Me.GroupGeneralFooter.Controls.Add(Me.LabelControl18)
         Me.GroupGeneralFooter.Controls.Add(Me.MENote)
         Me.GroupGeneralFooter.Dock = System.Windows.Forms.DockStyle.Top
-        Me.GroupGeneralFooter.Location = New System.Drawing.Point(0, 356)
+        Me.GroupGeneralFooter.Location = New System.Drawing.Point(0, 350)
         Me.GroupGeneralFooter.Name = "GroupGeneralFooter"
         Me.GroupGeneralFooter.Size = New System.Drawing.Size(909, 64)
         Me.GroupGeneralFooter.TabIndex = 59
@@ -244,7 +244,7 @@ Partial Class FormProductionMRS
         Me.GConListPurchase.Dock = System.Windows.Forms.DockStyle.Top
         Me.GConListPurchase.Location = New System.Drawing.Point(0, 100)
         Me.GConListPurchase.Name = "GConListPurchase"
-        Me.GConListPurchase.Size = New System.Drawing.Size(909, 256)
+        Me.GConListPurchase.Size = New System.Drawing.Size(909, 250)
         Me.GConListPurchase.TabIndex = 58
         Me.GConListPurchase.Text = "List Purchase"
         '
@@ -258,7 +258,7 @@ Partial Class FormProductionMRS
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelControl1.Location = New System.Drawing.Point(20, 2)
         Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(887, 252)
+        Me.PanelControl1.Size = New System.Drawing.Size(887, 246)
         Me.PanelControl1.TabIndex = 19
         '
         'GCMat
@@ -269,7 +269,7 @@ Partial Class FormProductionMRS
         Me.GCMat.Margin = New System.Windows.Forms.Padding(0)
         Me.GCMat.Name = "GCMat"
         Me.GCMat.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.SEQty})
-        Me.GCMat.Size = New System.Drawing.Size(887, 214)
+        Me.GCMat.Size = New System.Drawing.Size(887, 208)
         Me.GCMat.TabIndex = 2
         Me.GCMat.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVMat})
         '
@@ -279,6 +279,7 @@ Partial Class FormProductionMRS
         Me.GVMat.GridControl = Me.GCMat
         Me.GVMat.HorzScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Never
         Me.GVMat.Name = "GVMat"
+        Me.GVMat.OptionsSelection.EnableAppearanceFocusedRow = False
         Me.GVMat.OptionsView.ShowFooter = True
         Me.GVMat.OptionsView.ShowGroupPanel = False
         '

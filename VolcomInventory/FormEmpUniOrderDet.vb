@@ -11,6 +11,7 @@ Public Class FormEmpUniOrderDet
     Public is_view As String = "-1"
     Dim id_sex As String = "-1"
     Dim is_filter_uni_sex As String = "-1"
+    Dim is_dept_head As String = "-1"
 
     Private Sub FormEmpUniOrderDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewReportStatus()
@@ -26,6 +27,7 @@ Public Class FormEmpUniOrderDet
         id_wh_drawer = data.Rows(0)("id_drawer_def").ToString
         id_departement = data.Rows(0)("id_departement").ToString
         id_sex = data.Rows(0)("id_sex").ToString
+        is_dept_head = data.Rows(0)("is_dept_head").ToString
         TxtNIK.Text = data.Rows(0)("employee_code").ToString
         TxtName.Text = data.Rows(0)("employee_name").ToString
         TxtDept.Text = data.Rows(0)("departement").ToString
@@ -213,7 +215,13 @@ Public Class FormEmpUniOrderDet
         If is_filter_uni_sex = "1" And id_sex = "1" Then
             cond_sex = "AND dd.division='M' "
         End If
-        Dim dt As DataTable = checkStock("AND dm.id_emp_uni_period=" + id_emp_uni_period + " AND dd.no='" + key.ToString + "' " + cond_sex)
+
+        Dim cond_dept_head As String = ""
+        If is_dept_head = "2" Then
+            cond_dept_head = "AND dd.is_dept_head=2 "
+        End If
+
+        Dim dt As DataTable = checkStock("AND dm.id_emp_uni_period=" + id_emp_uni_period + " AND dd.no='" + key.ToString + "' " + cond_sex + cond_dept_head)
         If dt.Rows.Count <= 0 Then
             stopCustom("Product tidak ditemukan")
             TxtDesign.Text = ""
@@ -378,6 +386,7 @@ Public Class FormEmpUniOrderDet
         Cursor = Cursors.WaitCursor
         FormEmpUniSuggest.id_emp_uni_period = id_emp_uni_period
         FormEmpUniSuggest.id_sex = id_sex
+        FormEmpUniSuggest.is_dept_head = is_dept_head
         FormEmpUniSuggest.ShowDialog()
         Cursor = Cursors.Default
     End Sub

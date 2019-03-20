@@ -36,7 +36,6 @@
         End If
         checkFormAccess(Name)
         button_main(bnew_active, bedit_active, bdel_active)
-        GVProdDemand.ExpandAllGroups()
     End Sub
     'Check print status
     Sub checkPrintStatus()

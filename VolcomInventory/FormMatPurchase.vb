@@ -4,11 +4,29 @@
     Dim bdel_active As String = "1"
 
     Private Sub FormMatPurchase_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        DEStart.EditValue = Now
+        DEEnd.EditValue = Now
+        '
+        viewSeason()
         view_mat_purc()
+        '
+        viewVendorKO()
         'GVMatPurchase.ActiveFilterString = "[id_mat_purc] > 1 AND [id_mat_purc] < 6"
         viewProdDemand()
     End Sub
 
+    Sub viewVendorKO()
+        Dim query As String = ""
+        query += "SELECT ('0') AS id_comp, ('-') AS comp_number, ('All Vendor') AS comp_name, ('ALL Vendor') AS comp_name_label UNION ALL "
+        query += "SELECT comp.id_comp,comp.comp_number, comp.comp_name, CONCAT_WS(' - ', comp.comp_number,comp.comp_name) AS comp_name_label FROM tb_m_comp comp "
+        query += "WHERE comp.id_comp_cat='1'"
+        viewSearchLookupQuery(SLEVendorKO, query, "id_comp", "comp_name_label", "id_comp")
+    End Sub
+
+    Private Sub viewSeason()
+        Dim query As String = "SELECT '0' as id_season,'All season' AS season UNION (SELECT id_season,season FROM tb_season ORDER BY id_season DESC)"
+        viewSearchLookupQuery(LESeason, query, "id_season", "season", "id_season")
+    End Sub
     Private Sub FormMatPurchase_Activated(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Activated
         FormMain.show_rb(Name)
         checkFormAccess(Name)
@@ -18,24 +36,48 @@
         FormMain.hide_rb()
     End Sub
     Sub view_mat_purc()
-        Dim query = "SELECT IFNULL(rev.mat_purc_number,'-') as mat_purc_rev_number,a.id_report_status,h.report_status,a.id_mat_purc, "
-        query += "b.id_season,a.id_delivery,i.delivery, "
-        query += "b.season, g.payment,"
-        query += "d.comp_name AS comp_name_to, "
-        query += "f.comp_name AS comp_name_ship_to, "
-        query += "a.mat_purc_number,"
-        query += "a.mat_purc_date, "
-        query += "DATE_ADD(a.mat_purc_date,INTERVAL a.mat_purc_lead_time DAY) AS mat_purc_lead_time, "
-        query += "DATE_ADD(a.mat_purc_date,INTERVAL (a.mat_purc_top+a.mat_purc_lead_time) DAY) AS mat_purc_top "
-        query += "FROM tb_mat_purc a INNER JOIN tb_season_delivery i ON a.id_delivery = i.id_delivery "
-        query += "INNER JOIN tb_season b ON i.id_season = b.id_season "
-        query += "INNER JOIN tb_m_comp_contact c ON a.id_comp_contact_to = c.id_comp_contact "
-        query += "INNER JOIN tb_m_comp d ON c.id_comp = d.id_comp "
-        query += "INNER JOIN tb_m_comp_contact e ON a.id_comp_contact_ship_to = e.id_comp_contact "
-        query += "INNER JOIN tb_m_comp f ON e.id_comp = f.id_comp "
-        query += "INNER JOIN tb_lookup_payment g ON a.id_payment = g.id_payment "
-        query += "LEFT JOIN tb_mat_purc rev ON rev.id_mat_purc = a.id_mat_purc_rev "
-        query += "INNER JOIN tb_lookup_report_status h ON h.id_report_status = a.id_report_status "
+        Dim query_where As String = ""
+        If Not LESeason.EditValue.ToString = "0" Then
+            query_where += " AND del.id_season='" & LESeason.EditValue.ToString & "'"
+        End If
+
+        Dim query = "SELECT '' AS `no`,a.mat_purc_vat as vat,'no' AS is_check,IFNULL(rev.mat_purc_number,'-') AS mat_purc_rev_number,a.id_report_status,h.report_status,a.id_mat_purc, 
+DATE_ADD(a.`mat_purc_date`,INTERVAL a.`mat_purc_lead_time` DAY) AS est_del_date,a.id_comp_contact_to AS id_comp_contact,d.id_comp AS id_comp,
+DATE_ADD(a.`mat_purc_date`,INTERVAL (a.`mat_purc_lead_time`+a.`mat_purc_top`) DAY) AS payment_due_date,
+a.`mat_purc_lead_time` AS lead_time,a.`mat_purc_top` AS top,
+b.id_season,a.id_delivery,i.delivery, rang.`range`,
+b.season, g.payment,
+d.comp_name AS comp_name_to,  d.`comp_number` AS comp_number_to,
+f.comp_name AS comp_name_ship_to, 
+a.mat_purc_number,
+a.mat_purc_date, del.`id_season`, 
+DATE_ADD(a.mat_purc_date,INTERVAL a.mat_purc_lead_time DAY) AS mat_purc_lead_time, 
+DATE_ADD(a.mat_purc_date,INTERVAL (a.mat_purc_top+a.mat_purc_lead_time) DAY) AS mat_purc_top 
+,cur.`currency` AS po_curr,a.`mat_purc_kurs` AS po_kurs
+,SUM(mpd.`mat_purc_det_price` * mpd.`mat_purc_det_qty`)* ((100 + a.mat_purc_vat)/100) AS po_amount
+,SUM(mpd.`mat_purc_det_qty`) AS qty_order
+,SUM(IF(a.`id_currency`=1,1,a.`mat_purc_kurs`) * mpd.`mat_purc_det_price` * mpd.`mat_purc_det_qty`) * ((100 + a.mat_purc_vat)/100) AS po_amount_rp
+,uom.`uom`
+FROM tb_mat_purc a INNER JOIN tb_season_delivery i ON a.id_delivery = i.id_delivery 
+INNER JOIN tb_season b ON i.id_season = b.id_season 
+INNER JOIN tb_m_comp_contact c ON a.id_comp_contact_to = c.id_comp_contact 
+INNER JOIN tb_m_comp d ON c.id_comp = d.id_comp 
+INNER JOIN tb_m_comp_contact e ON a.id_comp_contact_ship_to = e.id_comp_contact 
+INNER JOIN tb_m_comp f ON e.id_comp = f.id_comp 
+INNER JOIN tb_lookup_payment g ON a.id_payment = g.id_payment 
+LEFT JOIN tb_mat_purc rev ON rev.id_mat_purc = a.id_mat_purc_rev 
+INNER JOIN tb_lookup_report_status h ON h.id_report_status = a.id_report_status
+INNER JOIN `tb_season_delivery` del ON a.`id_delivery`=del.`id_delivery`
+INNER JOIN tb_season ssn ON ssn.`id_season`=del.`id_season`
+INNER JOIN `tb_range` rang ON rang.id_range=ssn.id_range
+INNER JOIN tb_mat_purc_det mpd ON mpd.`id_mat_purc`=a.`id_mat_purc`
+INNER JOIN tb_lookup_currency cur ON cur.id_currency=a.id_currency
+INNER JOIN tb_m_mat_det_price prc ON prc.`id_mat_det_price`=mpd.`id_mat_det_price`
+INNER JOIN tb_m_mat_det md ON md.`id_mat_det`=prc.`id_mat_det`
+INNER JOIN tb_m_mat mat ON mat.`id_mat`=md.`id_mat`
+INNER JOIN tb_m_uom uom ON uom.`id_uom`=mat.`id_uom`
+WHERE 1=1 " & query_where & "
+GROUP BY mpd.`id_mat_purc`"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCMatPurchase.DataSource = data
         check_menu()
@@ -210,5 +252,68 @@
             FormMatPurchaseDet.id_purc = GVMatPurchase.GetFocusedRowCellDisplayText("id_mat_purc")
             FormMatPurchaseDet.ShowDialog()
         End If
+    End Sub
+
+    Private Sub BSearch_Click(sender As Object, e As EventArgs) Handles BSearch.Click
+        view_mat_purc()
+    End Sub
+
+    Private Sub BClearFilter_Click(sender As Object, e As EventArgs) Handles BClearFilter.Click
+        GVMatPurchase.ActiveFilterString = ""
+    End Sub
+
+    Private Sub BFilter_Click(sender As Object, e As EventArgs) Handles BFilter.Click
+        GVMatPurchase.ActiveFilterString = "[mat_purc_date] >= #" & Date.Parse(DEStart.EditValue.ToString).ToString("d") & "# AND [mat_purc_date] <= #" & Date.Parse(DEEnd.EditValue.ToString).ToString("d") & "#"
+    End Sub
+
+    Private Sub BPrint_Click(sender As Object, e As EventArgs) Handles BPrint.Click
+        FormMatPurcSum.dt = GCMatPurchase.DataSource
+        FormMatPurcSum.GVProd.ActiveFilterString = "[is_check]='yes'"
+        FormMatPurcSum.ShowDialog()
+    End Sub
+
+    Private Sub BShowPrintPanel_Click(sender As Object, e As EventArgs) Handles BShowPrintPanel.Click
+        PCFilterDate.Visible = True
+    End Sub
+
+    Private Sub CheckEditSelAll_CheckedChanged(sender As Object, e As EventArgs) Handles CheckEditSelAll.CheckedChanged
+        If GVMatPurchase.RowCount > 0 Then
+            For i As Integer = 0 To ((GVMatPurchase.RowCount - 1) - GetGroupRowCount(GVMatPurchase))
+                If CheckEditSelAll.Checked = False Then
+                    GVMatPurchase.SetRowCellValue(i, "is_check", "no")
+                Else
+                    GVMatPurchase.SetRowCellValue(i, "is_check", "yes")
+                End If
+            Next
+        End If
+    End Sub
+
+    Private Sub BViewKO_Click(sender As Object, e As EventArgs) Handles BViewKO.Click
+        Dim query_where As String = ""
+        '
+        If Not SLEVendorKO.EditValue.ToString = "0" Then
+            query_where += " AND c.id_comp='" & SLEVendorKO.EditValue.ToString & "'"
+        End If
+        '
+        Dim query As String = "SELECT ko.*,c.`comp_name` FROM tb_prod_order_ko ko
+INNER JOIN tb_m_comp_contact cc ON cc.`id_comp_contact`=ko.`id_comp_contact`
+INNER JOIN tb_m_comp c ON c.`id_comp`=cc.`id_comp`
+WHERE ko.id_prod_order_ko 
+IN (SELECT MAX(id_prod_order_ko) AS id FROM `tb_prod_order_ko`
+GROUP BY id_prod_order_ko_reff) AND is_purc_mat=1 " & query_where & " ORDER BY ko.id_prod_order_ko DESC"
+
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCKO.DataSource = data
+        If GVKO.RowCount > 0 Then
+            BEditKO.Visible = True
+        Else
+            BEditKO.Visible = False
+        End If
+        GVKO.BestFitColumns()
+    End Sub
+
+    Private Sub BEditKO_Click(sender As Object, e As EventArgs) Handles BEditKO.Click
+        FormProductionKO.id_ko = GVKO.GetFocusedRowCellValue("id_prod_order_ko").ToString
+        FormProductionKO.ShowDialog()
     End Sub
 End Class

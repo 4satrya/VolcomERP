@@ -1,4 +1,6 @@
-﻿Public Class ClassSalesOrder
+﻿Imports Microsoft.Office.Interop
+
+Public Class ClassSalesOrder
     Public Function queryMain(ByVal condition As String, ByVal order_type As String) As String
         If order_type = "1" Then
             order_type = "ASC "
@@ -12,12 +14,12 @@
             condition = ""
         End If
 
-        Dim query As String = "SELECT a.id_sales_order, a.id_store_contact_to, d.id_comp AS `id_store`, d.id_store_type, d.comp_number AS `store_number`, d.comp_name AS `store`, d.address_primary as `store_address`, CONCAT(d.comp_number,' - ',d.comp_name) AS store_name_to,a.id_report_status, f.report_status, a.id_warehouse_contact_to, CONCAT(wh.comp_number,' - ',wh.comp_name) AS warehouse_name_to, (wh.comp_number) AS warehouse_number_to,  (wh.comp_name) AS `warehouse`, wh.id_drawer_def AS `id_wh_drawer`, drw.wh_drawer_code, drw.wh_drawer, "
+        Dim query As String = "SELECT a.id_sales_order, a.id_store_contact_to, d.id_commerce_type,d.id_comp AS `id_store`, d.is_use_unique_code, d.id_store_type, d.comp_number AS `store_number`, d.comp_name AS `store`, d.address_primary as `store_address`, CONCAT(d.comp_number,' - ',d.comp_name) AS store_name_to,a.id_report_status, f.report_status, a.id_warehouse_contact_to, CONCAT(wh.comp_number,' - ',wh.comp_name) AS warehouse_name_to, (wh.comp_number) AS warehouse_number_to,  (wh.comp_name) AS `warehouse`, wh.id_drawer_def AS `id_wh_drawer`, drw.wh_drawer_code, drw.wh_drawer, "
         query += "a.sales_order_note, a.sales_order_date, a.sales_order_note, a.sales_order_number, a.sales_order_ol_shop_number, "
         query += "(a.sales_order_date) AS sales_order_date, "
         query += "ps.id_prepare_status, ps.prepare_status, ('No') AS `is_select`, cat.id_so_status, cat.so_status, del_cat.id_so_cat, del_cat.so_cat, IFNULL(so_item.tot_so,0.00) AS `total_order`,IF(a.id_so_status!='5', IFNULL(ots.outstanding,0), IFNULL(otstrf.outstanding,0)) AS `outstanding`, "
         query += "IF(a.id_so_status!='5',CAST((IFNULL(dord_item.tot_do, 0.00)/IFNULL(so_item.tot_so,0.00)*100) AS DECIMAL(5,2)), CAST((IFNULL(trf_item.tot_trf, 0.00)/IFNULL(so_item.tot_so,0.00)*100) AS DECIMAL(5,2))) AS so_completness,  "
-        query += "IFNULL(an.fg_so_reff_number,'-') AS `fg_so_reff_number`,a.id_so_type,prep.id_user, "
+        query += "IFNULL(an.fg_so_reff_number,'-') AS `fg_so_reff_number`,a.id_so_type,prep.id_user, prep.prepared_date, "
         query += "IFNULL(crt.created, 0) AS created_process, "
         query += "gen.id_sales_order_gen, IFNULL(gen.sales_order_gen_reff, '-') AS `sales_order_gen_reff`, a.final_comment, a.final_date, fe.employee_name AS `final_by_name`, eu.period_name, ut.uni_type, ube.employee_code, ube.employee_name, lp.printed_date, IFNULL(lp.printed_by,'-') AS `printed_by` "
         query += "FROM tb_sales_order a "
@@ -48,7 +50,7 @@
         query += "GROUP BY trf.id_sales_order "
         query += ") trf_item ON trf_item.id_sales_order = a.id_sales_order "
         query += "Left Join( "
-        query += "Select a.id_report, a.id_user "
+        query += "Select a.id_report, a.id_user, a.report_mark_datetime AS `prepared_date` "
         query += "From tb_report_mark a "
         query += "Where a.report_mark_type ='39' and a.id_report_status='1' "
         query += "group by a.id_report "
@@ -315,4 +317,88 @@
         query += "WHERE so.id_sales_order_gen='" + id_report_param + "' "
         execute_non_query(query, True, "", "", "", "")
     End Sub
+
+    Public Function generateXLSForBOF(ByVal id_so As String) As String
+        Dim path_root As String = ""
+        Dim bof_xls_so As String = get_setup_field("bof_xls_so_gen")
+
+        Try
+            ' Open the file using a stream reader.
+            Using sr As New IO.StreamReader(Application.StartupPath & "\bof_path.txt")
+                ' Read the stream to a string and write the string to the console.
+                path_root = sr.ReadToEnd()
+            End Using
+        Catch ex As Exception
+        End Try
+
+        Dim fileName As String = bof_xls_so + ".xls"
+        Dim exp As String = IO.Path.Combine(path_root, fileName)
+        Try
+            Dim strFileName As String = exp
+            If System.IO.File.Exists(strFileName) Then
+                System.IO.File.Delete(strFileName)
+            End If
+            Dim _excel As New Excel.Application
+            Dim wBook As Excel.Workbook
+            Dim wSheet As Excel.Worksheet
+
+            wBook = _excel.Workbooks.Add()
+            wSheet = wBook.ActiveSheet()
+
+
+            Dim rowIndex As Integer = -1
+            Dim query As String = "SELECT prod.product_full_code AS `code`, CAST(sod.sales_order_det_qty  AS DECIMAL(10,0)) AS `qty`,
+            so.sales_order_number AS `number`, wh.comp_number AS `from`, s.comp_number AS `to`, sod.sales_order_det_note AS `note`,
+            so.sales_order_ol_shop_number AS `order_number`, DATE_FORMAT(so.sales_order_ol_shop_date,'%d/%m/%Y') AS `created_date`, sod.item_id, sod.ol_store_id
+            FROM tb_sales_order so
+            INNER JOIN tb_sales_order_det sod ON sod.id_sales_order = so.id_sales_order
+            INNER JOIN tb_m_product prod ON prod.id_product = sod.id_product
+            INNER JOIN tb_m_comp_contact whc ON whc.id_comp_contact = so.id_warehouse_contact_to
+            INNER JOIN tb_m_comp wh ON wh.id_comp = whc.id_comp
+            INNER JOIN tb_m_comp_contact sc ON sc.id_comp_contact = so.id_store_contact_to
+            INNER JOIN tb_m_comp s ON s.id_comp = sc.id_comp
+            WHERE so.id_sales_order>0 AND (" + id_so + ") "
+            Dim dtTemp As DataTable = execute_query(query, -1, True, "", "", "", "")
+            For i As Integer = 0 To dtTemp.Rows.Count - 1
+                rowIndex = rowIndex + 1
+                wSheet.Cells(rowIndex + 1, 1) = dtTemp.Rows(i)("code").ToString
+                wSheet.Cells(rowIndex + 1, 2) = dtTemp.Rows(i)("qty")
+                wSheet.Cells(rowIndex + 1, 3) = dtTemp.Rows(i)("number").ToString
+                wSheet.Cells(rowIndex + 1, 4) = dtTemp.Rows(i)("from").ToString
+                wSheet.Cells(rowIndex + 1, 5) = dtTemp.Rows(i)("to").ToString
+                wSheet.Cells(rowIndex + 1, 6) = dtTemp.Rows(i)("note").ToString
+                wSheet.Cells(rowIndex + 1, 7) = dtTemp.Rows(i)("order_number").ToString
+                wSheet.Cells(rowIndex + 1, 8) = dtTemp.Rows(i)("created_date").ToString
+                wSheet.Cells(rowIndex + 1, 9) = dtTemp.Rows(i)("item_id").ToString
+                wSheet.Cells(rowIndex + 1, 10) = dtTemp.Rows(i)("ol_store_id").ToString
+            Next
+
+            wSheet.Columns.AutoFit()
+            wBook.SaveAs(strFileName, Excel.XlFileFormat.xlExcel5)
+
+            'release the objects
+            ReleaseObject(wSheet)
+            wBook.Close(False)
+            ReleaseObject(wBook)
+            _excel.Quit()
+            ReleaseObject(_excel)
+            ' some time Office application does not quit after automation: so i am calling GC.Collect method.
+            GC.Collect()
+
+            Return "True"
+        Catch ex As Exception
+            Return ex.ToString
+        End Try
+    End Function
+
+    Private Sub ReleaseObject(ByVal o As Object)
+        Try
+            While (System.Runtime.InteropServices.Marshal.ReleaseComObject(o) > 0)
+            End While
+        Catch
+        Finally
+            o = Nothing
+        End Try
+    End Sub
+
 End Class

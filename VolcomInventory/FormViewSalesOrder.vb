@@ -13,6 +13,7 @@ Public Class FormViewSalesOrder
     Dim id_comp_cat_wh As String = "-1"
     Public is_print As String = "-1"
     Dim id_so_status As String = "-1"
+    Dim id_commerce_type As String = "-1"
 
     Private Sub FormViewSalesOrder_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Cursor = Cursors.WaitCursor
@@ -33,9 +34,9 @@ Public Class FormViewSalesOrder
         BMark.Enabled = True
 
         'query view based on edit id's
-        Dim query As String = "SELECT a.id_so_status, a.id_sales_order, a.id_store_contact_to, (d.id_comp) AS id_store,(d.comp_name) AS store_name_to, (d.comp_number) AS store_number_to, (d.address_primary) AS store_address_to, a.id_warehouse_contact_to, (wh.id_comp) AS id_comp_par,(wh.comp_name) AS warehouse_name_to, (wh.comp_number) AS warehouse_number_to, a.id_report_status, f.report_status, "
+        Dim query As String = "SELECT a.id_so_status, a.id_sales_order, a.id_store_contact_to, d.id_commerce_type, (d.id_comp) AS id_store,(d.comp_name) AS store_name_to, (d.comp_number) AS store_number_to, (d.address_primary) AS store_address_to, a.id_warehouse_contact_to, (wh.id_comp) AS id_comp_par,(wh.comp_name) AS warehouse_name_to, (wh.comp_number) AS warehouse_number_to, a.id_report_status, f.report_status, "
         query += "a.sales_order_note, a.sales_order_date, a.sales_order_note, a.sales_order_number, "
-        query += "DATE_FORMAT(a.sales_order_date,'%Y-%m-%d') AS sales_order_datex, a.id_so_type, IFNULL(an.fg_so_reff_number,'-') AS `fg_so_reff_number`, ps.id_prepare_status, ps.prepare_status, eu.period_name, ut.uni_type, ube.employee_code, ube.employee_name, a.sales_order_ol_shop_number "
+        query += "DATE_FORMAT(a.sales_order_date,'%Y-%m-%d') AS sales_order_datex, a.id_so_type, IFNULL(an.fg_so_reff_number,'-') AS `fg_so_reff_number`, ps.id_prepare_status, ps.prepare_status, eu.period_name, ut.uni_type, ube.employee_code, ube.employee_name, a.sales_order_ol_shop_number, a.customer_name "
         query += "FROM tb_sales_order a "
         query += "INNER JOIN tb_m_comp_contact c ON c.id_comp_contact = a.id_store_contact_to "
         query += "INNER JOIN tb_m_comp d ON c.id_comp = d.id_comp "
@@ -57,6 +58,7 @@ Public Class FormViewSalesOrder
         TxtReff.Text = data.Rows(0)("fg_so_reff_number").ToString
 
         id_store = data.Rows(0)("id_store").ToString
+        id_commerce_type = data.Rows(0)("id_commerce_type").ToString
         id_store_contact_to = data.Rows(0)("id_store_contact_to").ToString
         TxtNameCompTo.Text = data.Rows(0)("store_name_to").ToString
         TxtCodeCompTo.Text = data.Rows(0)("store_number_to").ToString
@@ -87,10 +89,23 @@ Public Class FormViewSalesOrder
             TxtUni2.Text = data.Rows(0)("employee_name").ToString
         End If
 
+        'ol store order
+        If id_commerce_type = "2" Then
+            LabelUni2.Visible = True
+            TxtUni2.Visible = True
+            TxtUni2.Text = data.Rows(0)("customer_name").ToString
+        End If
+
         'detail2
         viewDetail()
         check_but()
         allow_status()
+
+        'detail column
+        If id_commerce_type = "2" Then
+            GridColumnItemId.VisibleIndex = 1
+            GridColumnOLStoreId.VisibleIndex = 2
+        End If
     End Sub
 
     Private Report As ReportSalesOrder
@@ -133,6 +148,18 @@ Public Class FormViewSalesOrder
             Report.LabelName.Text = TxtUni2.Text
         End If
 
+        If id_commerce_type = "2" Then
+            Report.LabelTitleName.Visible = True
+            Report.LabelNameDot.Visible = True
+            Report.LabelName.Visible = True
+            Report.LabelName.Text = TxtUni2.Text
+
+            Report.LabelOLStoreOrder.Visible = True
+            Report.LabelTitleOLStoreOrder.Visible = True
+            Report.LabelDotOLStoreOrder.Visible = True
+            Report.LabelOLStoreOrder.Text = TxtOLShopNumber.Text
+        End If
+
         AddHandler Report.PrintingSystem.EndPrint, AddressOf PrintingSystem_EndPrint
         Report.ShowPreviewDialog()
         Cursor = Cursors.Default
@@ -170,7 +197,13 @@ Public Class FormViewSalesOrder
     End Sub
 
     Sub viewDetail()
-        Dim query As String = "CALL view_sales_order('" + id_sales_order + "')"
+        Dim query As String = ""
+        If id_commerce_type = "2" Then
+            query = "CALL view_sales_order_ol_store('" + id_sales_order + "')"
+
+        Else
+            query = "CALL view_sales_order('" + id_sales_order + "')"
+        End If
         Dim data As DataTable = execute_query(query, "-1", True, "", "", "", "")
         GCItemList.DataSource = data
     End Sub

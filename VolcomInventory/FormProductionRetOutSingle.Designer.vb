@@ -23,6 +23,8 @@ Partial Class FormProductionRetOutSingle
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormProductionRetOutSingle))
         Me.GroupGeneralHeader = New DevExpress.XtraEditors.GroupControl()
         Me.PanelControlTopMiddle = New DevExpress.XtraEditors.PanelControl()
+        Me.LERetType = New DevExpress.XtraEditors.LookUpEdit()
+        Me.LabelControl10 = New DevExpress.XtraEditors.LabelControl()
         Me.MEAdrressCompTo = New DevExpress.XtraEditors.MemoEdit()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.TxtCodeCompFrom = New DevExpress.XtraEditors.TextEdit()
@@ -39,6 +41,7 @@ Partial Class FormProductionRetOutSingle
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
         Me.PEView = New DevExpress.XtraEditors.PictureEdit()
         Me.PanelControlTopRight = New DevExpress.XtraEditors.PanelControl()
+        Me.LabelControl11 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl9 = New DevExpress.XtraEditors.LabelControl()
         Me.TxtRetOutNumber = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
@@ -49,6 +52,12 @@ Partial Class FormProductionRetOutSingle
         Me.DERet = New DevExpress.XtraEditors.TextEdit()
         Me.TxtSeason = New DevExpress.XtraEditors.TextEdit()
         Me.TxtDesign = New DevExpress.XtraEditors.TextEdit()
+        Me.SLEOvh = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
         Me.BtnXlsBOF = New DevExpress.XtraEditors.SimpleButton()
         Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
@@ -78,7 +87,11 @@ Partial Class FormProductionRetOutSingle
         Me.GridColumnQty = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemSpinEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
         Me.GridColumnRemark = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnPriceOVH = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnNox = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnNumber = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnFrom = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnTo = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
         Me.BtnDel = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnEdit = New DevExpress.XtraEditors.SimpleButton()
@@ -96,13 +109,12 @@ Partial Class FormProductionRetOutSingle
         Me.BDelete = New DevExpress.XtraEditors.SimpleButton()
         Me.BStop = New DevExpress.XtraEditors.SimpleButton()
         Me.BScan = New DevExpress.XtraEditors.SimpleButton()
-        Me.GridColumnNumber = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnFrom = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnTo = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnAmount = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
         CType(Me.PanelControlTopMiddle, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlTopMiddle.SuspendLayout()
+        CType(Me.LERetType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.MEAdrressCompTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtCodeCompFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtNameCompFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -118,6 +130,8 @@ Partial Class FormProductionRetOutSingle
         CType(Me.DERet.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtSeason.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtDesign.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SLEOvh.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl3.SuspendLayout()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -156,12 +170,14 @@ Partial Class FormProductionRetOutSingle
         Me.GroupGeneralHeader.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupGeneralHeader.Location = New System.Drawing.Point(0, 0)
         Me.GroupGeneralHeader.Name = "GroupGeneralHeader"
-        Me.GroupGeneralHeader.Size = New System.Drawing.Size(884, 149)
+        Me.GroupGeneralHeader.Size = New System.Drawing.Size(884, 166)
         Me.GroupGeneralHeader.TabIndex = 176
         '
         'PanelControlTopMiddle
         '
         Me.PanelControlTopMiddle.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelControlTopMiddle.Controls.Add(Me.LERetType)
+        Me.PanelControlTopMiddle.Controls.Add(Me.LabelControl10)
         Me.PanelControlTopMiddle.Controls.Add(Me.MEAdrressCompTo)
         Me.PanelControlTopMiddle.Controls.Add(Me.LabelControl1)
         Me.PanelControlTopMiddle.Controls.Add(Me.TxtCodeCompFrom)
@@ -179,26 +195,48 @@ Partial Class FormProductionRetOutSingle
         Me.PanelControlTopMiddle.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelControlTopMiddle.Location = New System.Drawing.Point(141, 2)
         Me.PanelControlTopMiddle.Name = "PanelControlTopMiddle"
-        Me.PanelControlTopMiddle.Size = New System.Drawing.Size(410, 145)
+        Me.PanelControlTopMiddle.Size = New System.Drawing.Size(410, 162)
         Me.PanelControlTopMiddle.TabIndex = 10003
+        '
+        'LERetType
+        '
+        Me.LERetType.Location = New System.Drawing.Point(74, 7)
+        Me.LERetType.Name = "LERetType"
+        Me.LERetType.Properties.Appearance.Options.UseTextOptions = True
+        Me.LERetType.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near
+        Me.LERetType.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.LERetType.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_return_qc_type", "ID Type", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("return_qc_type", "Type")})
+        Me.LERetType.Properties.NullText = ""
+        Me.LERetType.Properties.ShowFooter = False
+        Me.LERetType.Size = New System.Drawing.Size(301, 20)
+        Me.LERetType.TabIndex = 10000
+        '
+        'LabelControl10
+        '
+        Me.LabelControl10.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl10.Location = New System.Drawing.Point(8, 11)
+        Me.LabelControl10.Name = "LabelControl10"
+        Me.LabelControl10.Size = New System.Drawing.Size(60, 13)
+        Me.LabelControl10.TabIndex = 10001
+        Me.LabelControl10.Text = "Return Type"
         '
         'MEAdrressCompTo
         '
         Me.MEAdrressCompTo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.MEAdrressCompTo.Location = New System.Drawing.Point(68, 83)
+        Me.MEAdrressCompTo.Location = New System.Drawing.Point(74, 109)
         Me.MEAdrressCompTo.Name = "MEAdrressCompTo"
         Me.MEAdrressCompTo.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.MEAdrressCompTo.Properties.Appearance.Options.UseFont = True
         Me.MEAdrressCompTo.Properties.ReadOnly = True
-        Me.MEAdrressCompTo.Size = New System.Drawing.Size(307, 46)
+        Me.MEAdrressCompTo.Size = New System.Drawing.Size(301, 46)
         Me.MEAdrressCompTo.TabIndex = 4444
         Me.MEAdrressCompTo.TabStop = False
         '
         'LabelControl1
         '
         Me.LabelControl1.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl1.Location = New System.Drawing.Point(9, 35)
+        Me.LabelControl1.Location = New System.Drawing.Point(9, 61)
         Me.LabelControl1.Name = "LabelControl1"
         Me.LabelControl1.Size = New System.Drawing.Size(24, 13)
         Me.LabelControl1.TabIndex = 145
@@ -207,13 +245,13 @@ Partial Class FormProductionRetOutSingle
         'TxtCodeCompFrom
         '
         Me.TxtCodeCompFrom.EditValue = ""
-        Me.TxtCodeCompFrom.Location = New System.Drawing.Point(68, 32)
+        Me.TxtCodeCompFrom.Location = New System.Drawing.Point(74, 58)
         Me.TxtCodeCompFrom.Name = "TxtCodeCompFrom"
         Me.TxtCodeCompFrom.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtCodeCompFrom.Properties.Appearance.Options.UseFont = True
         Me.TxtCodeCompFrom.Properties.EditValueChangedDelay = 1
         Me.TxtCodeCompFrom.Properties.ReadOnly = True
-        Me.TxtCodeCompFrom.Size = New System.Drawing.Size(73, 20)
+        Me.TxtCodeCompFrom.Size = New System.Drawing.Size(67, 20)
         Me.TxtCodeCompFrom.TabIndex = 7777
         Me.TxtCodeCompFrom.TabStop = False
         '
@@ -223,7 +261,7 @@ Partial Class FormProductionRetOutSingle
         Me.BtnInfoSrs.Appearance.Font = New System.Drawing.Font("Monotype Corsiva", 11.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnInfoSrs.Appearance.Options.UseFont = True
         Me.BtnInfoSrs.Enabled = False
-        Me.BtnInfoSrs.Location = New System.Drawing.Point(352, 6)
+        Me.BtnInfoSrs.Location = New System.Drawing.Point(352, 33)
         Me.BtnInfoSrs.Name = "BtnInfoSrs"
         Me.BtnInfoSrs.Size = New System.Drawing.Size(23, 20)
         Me.BtnInfoSrs.TabIndex = 1
@@ -237,7 +275,7 @@ Partial Class FormProductionRetOutSingle
         Me.TxtNameCompFrom.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtNameCompFrom.EditValue = ""
-        Me.TxtNameCompFrom.Location = New System.Drawing.Point(147, 32)
+        Me.TxtNameCompFrom.Location = New System.Drawing.Point(147, 58)
         Me.TxtNameCompFrom.Name = "TxtNameCompFrom"
         Me.TxtNameCompFrom.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtNameCompFrom.Properties.Appearance.Options.UseFont = True
@@ -252,7 +290,7 @@ Partial Class FormProductionRetOutSingle
         Me.BtnBrowseContactTo.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnBrowseContactTo.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnBrowseContactTo.Appearance.Options.UseFont = True
-        Me.BtnBrowseContactTo.Location = New System.Drawing.Point(352, 58)
+        Me.BtnBrowseContactTo.Location = New System.Drawing.Point(352, 84)
         Me.BtnBrowseContactTo.Name = "BtnBrowseContactTo"
         Me.BtnBrowseContactTo.Size = New System.Drawing.Size(23, 20)
         Me.BtnBrowseContactTo.TabIndex = 3
@@ -261,7 +299,7 @@ Partial Class FormProductionRetOutSingle
         'LabelControl2
         '
         Me.LabelControl2.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl2.Location = New System.Drawing.Point(9, 61)
+        Me.LabelControl2.Location = New System.Drawing.Point(9, 87)
         Me.LabelControl2.Name = "LabelControl2"
         Me.LabelControl2.Size = New System.Drawing.Size(12, 13)
         Me.LabelControl2.TabIndex = 149
@@ -272,24 +310,24 @@ Partial Class FormProductionRetOutSingle
         Me.TxtOrderNumber.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtOrderNumber.EditValue = ""
-        Me.TxtOrderNumber.Location = New System.Drawing.Point(68, 6)
+        Me.TxtOrderNumber.Location = New System.Drawing.Point(74, 33)
         Me.TxtOrderNumber.Name = "TxtOrderNumber"
         Me.TxtOrderNumber.Properties.EditValueChangedDelay = 1
         Me.TxtOrderNumber.Properties.ReadOnly = True
-        Me.TxtOrderNumber.Size = New System.Drawing.Size(249, 20)
+        Me.TxtOrderNumber.Size = New System.Drawing.Size(243, 20)
         Me.TxtOrderNumber.TabIndex = 9999
         Me.TxtOrderNumber.TabStop = False
         '
         'TxtCodeCompTo
         '
         Me.TxtCodeCompTo.EditValue = ""
-        Me.TxtCodeCompTo.Location = New System.Drawing.Point(68, 58)
+        Me.TxtCodeCompTo.Location = New System.Drawing.Point(74, 84)
         Me.TxtCodeCompTo.Name = "TxtCodeCompTo"
         Me.TxtCodeCompTo.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtCodeCompTo.Properties.Appearance.Options.UseFont = True
         Me.TxtCodeCompTo.Properties.EditValueChangedDelay = 1
         Me.TxtCodeCompTo.Properties.ReadOnly = True
-        Me.TxtCodeCompTo.Size = New System.Drawing.Size(73, 20)
+        Me.TxtCodeCompTo.Size = New System.Drawing.Size(67, 20)
         Me.TxtCodeCompTo.TabIndex = 6666
         Me.TxtCodeCompTo.TabStop = False
         '
@@ -298,7 +336,7 @@ Partial Class FormProductionRetOutSingle
         Me.BtnBrowsePO.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnBrowsePO.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnBrowsePO.Appearance.Options.UseFont = True
-        Me.BtnBrowsePO.Location = New System.Drawing.Point(323, 6)
+        Me.BtnBrowsePO.Location = New System.Drawing.Point(323, 33)
         Me.BtnBrowsePO.Name = "BtnBrowsePO"
         Me.BtnBrowsePO.Size = New System.Drawing.Size(23, 20)
         Me.BtnBrowsePO.TabIndex = 0
@@ -309,7 +347,7 @@ Partial Class FormProductionRetOutSingle
         Me.TxtNameCompTo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtNameCompTo.EditValue = ""
-        Me.TxtNameCompTo.Location = New System.Drawing.Point(147, 58)
+        Me.TxtNameCompTo.Location = New System.Drawing.Point(147, 84)
         Me.TxtNameCompTo.Name = "TxtNameCompTo"
         Me.TxtNameCompTo.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtNameCompTo.Properties.Appearance.Options.UseFont = True
@@ -322,7 +360,7 @@ Partial Class FormProductionRetOutSingle
         'LabelControl4
         '
         Me.LabelControl4.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl4.Location = New System.Drawing.Point(9, 9)
+        Me.LabelControl4.Location = New System.Drawing.Point(9, 36)
         Me.LabelControl4.Name = "LabelControl4"
         Me.LabelControl4.Size = New System.Drawing.Size(42, 13)
         Me.LabelControl4.TabIndex = 88
@@ -333,7 +371,7 @@ Partial Class FormProductionRetOutSingle
         Me.BtnBrowseContactFrom.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnBrowseContactFrom.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnBrowseContactFrom.Appearance.Options.UseFont = True
-        Me.BtnBrowseContactFrom.Location = New System.Drawing.Point(352, 32)
+        Me.BtnBrowseContactFrom.Location = New System.Drawing.Point(352, 58)
         Me.BtnBrowseContactFrom.Name = "BtnBrowseContactFrom"
         Me.BtnBrowseContactFrom.Size = New System.Drawing.Size(23, 20)
         Me.BtnBrowseContactFrom.TabIndex = 2
@@ -342,7 +380,7 @@ Partial Class FormProductionRetOutSingle
         'LabelControl3
         '
         Me.LabelControl3.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl3.Location = New System.Drawing.Point(9, 85)
+        Me.LabelControl3.Location = New System.Drawing.Point(9, 111)
         Me.LabelControl3.Name = "LabelControl3"
         Me.LabelControl3.Size = New System.Drawing.Size(39, 13)
         Me.LabelControl3.TabIndex = 153
@@ -358,12 +396,13 @@ Partial Class FormProductionRetOutSingle
         Me.PEView.Properties.LookAndFeel.SkinName = "Office 2010 Silver"
         Me.PEView.Properties.ShowMenu = False
         Me.PEView.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch
-        Me.PEView.Size = New System.Drawing.Size(121, 145)
+        Me.PEView.Size = New System.Drawing.Size(121, 162)
         Me.PEView.TabIndex = 10002
         '
         'PanelControlTopRight
         '
         Me.PanelControlTopRight.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelControlTopRight.Controls.Add(Me.LabelControl11)
         Me.PanelControlTopRight.Controls.Add(Me.LabelControl9)
         Me.PanelControlTopRight.Controls.Add(Me.TxtRetOutNumber)
         Me.PanelControlTopRight.Controls.Add(Me.LabelControl5)
@@ -374,16 +413,26 @@ Partial Class FormProductionRetOutSingle
         Me.PanelControlTopRight.Controls.Add(Me.DERet)
         Me.PanelControlTopRight.Controls.Add(Me.TxtSeason)
         Me.PanelControlTopRight.Controls.Add(Me.TxtDesign)
+        Me.PanelControlTopRight.Controls.Add(Me.SLEOvh)
         Me.PanelControlTopRight.Dock = System.Windows.Forms.DockStyle.Right
         Me.PanelControlTopRight.Location = New System.Drawing.Point(551, 2)
         Me.PanelControlTopRight.Name = "PanelControlTopRight"
-        Me.PanelControlTopRight.Size = New System.Drawing.Size(331, 145)
+        Me.PanelControlTopRight.Size = New System.Drawing.Size(331, 162)
         Me.PanelControlTopRight.TabIndex = 10001
+        '
+        'LabelControl11
+        '
+        Me.LabelControl11.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl11.Location = New System.Drawing.Point(10, 11)
+        Me.LabelControl11.Name = "LabelControl11"
+        Me.LabelControl11.Size = New System.Drawing.Size(48, 13)
+        Me.LabelControl11.TabIndex = 10005
+        Me.LabelControl11.Text = "Overhead"
         '
         'LabelControl9
         '
         Me.LabelControl9.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl9.Location = New System.Drawing.Point(9, 36)
+        Me.LabelControl9.Location = New System.Drawing.Point(9, 62)
         Me.LabelControl9.Name = "LabelControl9"
         Me.LabelControl9.Size = New System.Drawing.Size(35, 13)
         Me.LabelControl9.TabIndex = 10003
@@ -392,7 +441,7 @@ Partial Class FormProductionRetOutSingle
         'TxtRetOutNumber
         '
         Me.TxtRetOutNumber.EditValue = ""
-        Me.TxtRetOutNumber.Location = New System.Drawing.Point(94, 109)
+        Me.TxtRetOutNumber.Location = New System.Drawing.Point(94, 135)
         Me.TxtRetOutNumber.Name = "TxtRetOutNumber"
         Me.TxtRetOutNumber.Properties.EditValueChangedDelay = 1
         Me.TxtRetOutNumber.Properties.ReadOnly = True
@@ -403,7 +452,7 @@ Partial Class FormProductionRetOutSingle
         'LabelControl5
         '
         Me.LabelControl5.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl5.Location = New System.Drawing.Point(8, 112)
+        Me.LabelControl5.Location = New System.Drawing.Point(8, 138)
         Me.LabelControl5.Name = "LabelControl5"
         Me.LabelControl5.Size = New System.Drawing.Size(82, 13)
         Me.LabelControl5.TabIndex = 155
@@ -412,7 +461,7 @@ Partial Class FormProductionRetOutSingle
         'DERetDueDate
         '
         Me.DERetDueDate.EditValue = Nothing
-        Me.DERetDueDate.Location = New System.Drawing.Point(94, 58)
+        Me.DERetDueDate.Location = New System.Drawing.Point(94, 84)
         Me.DERetDueDate.Name = "DERetDueDate"
         Me.DERetDueDate.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.DERetDueDate.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
@@ -424,7 +473,7 @@ Partial Class FormProductionRetOutSingle
         'LabelControl8
         '
         Me.LabelControl8.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl8.Location = New System.Drawing.Point(9, 10)
+        Me.LabelControl8.Location = New System.Drawing.Point(9, 36)
         Me.LabelControl8.Name = "LabelControl8"
         Me.LabelControl8.Size = New System.Drawing.Size(32, 13)
         Me.LabelControl8.TabIndex = 10002
@@ -433,7 +482,7 @@ Partial Class FormProductionRetOutSingle
         'LabelControl7
         '
         Me.LabelControl7.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl7.Location = New System.Drawing.Point(9, 86)
+        Me.LabelControl7.Location = New System.Drawing.Point(9, 112)
         Me.LabelControl7.Name = "LabelControl7"
         Me.LabelControl7.Size = New System.Drawing.Size(23, 13)
         Me.LabelControl7.TabIndex = 159
@@ -442,7 +491,7 @@ Partial Class FormProductionRetOutSingle
         'LabelControl6
         '
         Me.LabelControl6.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl6.Location = New System.Drawing.Point(10, 61)
+        Me.LabelControl6.Location = New System.Drawing.Point(10, 87)
         Me.LabelControl6.Name = "LabelControl6"
         Me.LabelControl6.Size = New System.Drawing.Size(68, 13)
         Me.LabelControl6.TabIndex = 161
@@ -451,7 +500,7 @@ Partial Class FormProductionRetOutSingle
         'DERet
         '
         Me.DERet.EditValue = ""
-        Me.DERet.Location = New System.Drawing.Point(94, 83)
+        Me.DERet.Location = New System.Drawing.Point(94, 109)
         Me.DERet.Name = "DERet"
         Me.DERet.Properties.EditValueChangedDelay = 1
         Me.DERet.Properties.ReadOnly = True
@@ -464,7 +513,7 @@ Partial Class FormProductionRetOutSingle
         Me.TxtSeason.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtSeason.EditValue = ""
-        Me.TxtSeason.Location = New System.Drawing.Point(94, 33)
+        Me.TxtSeason.Location = New System.Drawing.Point(94, 59)
         Me.TxtSeason.Name = "TxtSeason"
         Me.TxtSeason.Properties.EditValueChangedDelay = 1
         Me.TxtSeason.Properties.ReadOnly = True
@@ -477,13 +526,66 @@ Partial Class FormProductionRetOutSingle
         Me.TxtDesign.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtDesign.EditValue = ""
-        Me.TxtDesign.Location = New System.Drawing.Point(94, 7)
+        Me.TxtDesign.Location = New System.Drawing.Point(94, 33)
         Me.TxtDesign.Name = "TxtDesign"
         Me.TxtDesign.Properties.EditValueChangedDelay = 1
         Me.TxtDesign.Properties.ReadOnly = True
         Me.TxtDesign.Size = New System.Drawing.Size(227, 20)
         Me.TxtDesign.TabIndex = 10000
         Me.TxtDesign.TabStop = False
+        '
+        'SLEOvh
+        '
+        Me.SLEOvh.Location = New System.Drawing.Point(94, 8)
+        Me.SLEOvh.Name = "SLEOvh"
+        Me.SLEOvh.Properties.Appearance.Options.UseTextOptions = True
+        Me.SLEOvh.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near
+        Me.SLEOvh.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEOvh.Properties.NullText = ""
+        Me.SLEOvh.Properties.ShowFooter = False
+        Me.SLEOvh.Properties.View = Me.SearchLookUpEdit1View
+        Me.SLEOvh.Size = New System.Drawing.Size(227, 20)
+        Me.SLEOvh.TabIndex = 10006
+        '
+        'SearchLookUpEdit1View
+        '
+        Me.SearchLookUpEdit1View.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5})
+        Me.SearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.SearchLookUpEdit1View.Name = "SearchLookUpEdit1View"
+        Me.SearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.SearchLookUpEdit1View.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn2
+        '
+        Me.GridColumn2.Caption = "Id Ovh Price"
+        Me.GridColumn2.FieldName = "id_ovh_price"
+        Me.GridColumn2.Name = "GridColumn2"
+        '
+        'GridColumn3
+        '
+        Me.GridColumn3.Caption = "Vendor"
+        Me.GridColumn3.FieldName = "comp_name"
+        Me.GridColumn3.Name = "GridColumn3"
+        Me.GridColumn3.Visible = True
+        Me.GridColumn3.VisibleIndex = 0
+        '
+        'GridColumn4
+        '
+        Me.GridColumn4.Caption = "Price"
+        Me.GridColumn4.DisplayFormat.FormatString = "N2"
+        Me.GridColumn4.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn4.FieldName = "ovh_price"
+        Me.GridColumn4.Name = "GridColumn4"
+        Me.GridColumn4.Visible = True
+        Me.GridColumn4.VisibleIndex = 1
+        '
+        'GridColumn5
+        '
+        Me.GridColumn5.Caption = "Overhead"
+        Me.GridColumn5.FieldName = "overhead"
+        Me.GridColumn5.Name = "GridColumn5"
+        Me.GridColumn5.Visible = True
+        Me.GridColumn5.VisibleIndex = 2
         '
         'PanelControl3
         '
@@ -654,13 +756,13 @@ Partial Class FormProductionRetOutSingle
         '
         Me.SCCReturn.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SCCReturn.Horizontal = False
-        Me.SCCReturn.Location = New System.Drawing.Point(0, 149)
+        Me.SCCReturn.Location = New System.Drawing.Point(0, 166)
         Me.SCCReturn.Name = "SCCReturn"
         Me.SCCReturn.Panel1.Controls.Add(Me.GroupControlRet)
         Me.SCCReturn.Panel1.Text = "Panel1"
         Me.SCCReturn.Panel2.Controls.Add(Me.GroupControlListBarcode)
         Me.SCCReturn.Panel2.Text = "Panel2"
-        Me.SCCReturn.Size = New System.Drawing.Size(884, 351)
+        Me.SCCReturn.Size = New System.Drawing.Size(884, 334)
         Me.SCCReturn.SplitterPosition = 171
         Me.SCCReturn.TabIndex = 179
         Me.SCCReturn.Text = "SplitContainerControl1"
@@ -694,7 +796,7 @@ Partial Class FormProductionRetOutSingle
         '
         'GVRetDetail
         '
-        Me.GVRetDetail.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdRet, Me.GridColumnIdSamplePurcDet, Me.GridColumnCode, Me.GridColumnEanCode, Me.GridColumnName, Me.GridColumnSize, Me.GridColumnUOM, Me.GridColumnQty, Me.GridColumnRemark, Me.GridColumnNox, Me.GridColumnNumber, Me.GridColumnFrom, Me.GridColumnTo})
+        Me.GVRetDetail.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdRet, Me.GridColumnIdSamplePurcDet, Me.GridColumnCode, Me.GridColumnEanCode, Me.GridColumnName, Me.GridColumnSize, Me.GridColumnUOM, Me.GridColumnQty, Me.GridColumnRemark, Me.GridColumnPriceOVH, Me.GridColumnAmount, Me.GridColumnNox, Me.GridColumnNumber, Me.GridColumnFrom, Me.GridColumnTo})
         Me.GVRetDetail.GridControl = Me.GCRetDetail
         Me.GVRetDetail.Name = "GVRetDetail"
         Me.GVRetDetail.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[True]
@@ -808,8 +910,23 @@ Partial Class FormProductionRetOutSingle
         Me.GridColumnRemark.FieldName = "prod_order_ret_out_det_note"
         Me.GridColumnRemark.Name = "GridColumnRemark"
         Me.GridColumnRemark.Visible = True
-        Me.GridColumnRemark.VisibleIndex = 6
+        Me.GridColumnRemark.VisibleIndex = 8
         Me.GridColumnRemark.Width = 278
+        '
+        'GridColumnPriceOVH
+        '
+        Me.GridColumnPriceOVH.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumnPriceOVH.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumnPriceOVH.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumnPriceOVH.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumnPriceOVH.Caption = "Price"
+        Me.GridColumnPriceOVH.DisplayFormat.FormatString = "N2"
+        Me.GridColumnPriceOVH.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnPriceOVH.FieldName = "ovh_price"
+        Me.GridColumnPriceOVH.Name = "GridColumnPriceOVH"
+        Me.GridColumnPriceOVH.OptionsColumn.AllowEdit = False
+        Me.GridColumnPriceOVH.Visible = True
+        Me.GridColumnPriceOVH.VisibleIndex = 6
         '
         'GridColumnNox
         '
@@ -820,6 +937,27 @@ Partial Class FormProductionRetOutSingle
         Me.GridColumnNox.Visible = True
         Me.GridColumnNox.VisibleIndex = 0
         Me.GridColumnNox.Width = 77
+        '
+        'GridColumnNumber
+        '
+        Me.GridColumnNumber.Caption = "number"
+        Me.GridColumnNumber.FieldName = "number"
+        Me.GridColumnNumber.Name = "GridColumnNumber"
+        Me.GridColumnNumber.UnboundType = DevExpress.Data.UnboundColumnType.[String]
+        '
+        'GridColumnFrom
+        '
+        Me.GridColumnFrom.Caption = "from"
+        Me.GridColumnFrom.FieldName = "from"
+        Me.GridColumnFrom.Name = "GridColumnFrom"
+        Me.GridColumnFrom.UnboundType = DevExpress.Data.UnboundColumnType.[String]
+        '
+        'GridColumnTo
+        '
+        Me.GridColumnTo.Caption = "to"
+        Me.GridColumnTo.FieldName = "to"
+        Me.GridColumnTo.Name = "GridColumnTo"
+        Me.GridColumnTo.UnboundType = DevExpress.Data.UnboundColumnType.[String]
         '
         'PanelControl1
         '
@@ -881,7 +1019,7 @@ Partial Class FormProductionRetOutSingle
         Me.GroupControlListBarcode.Enabled = False
         Me.GroupControlListBarcode.Location = New System.Drawing.Point(0, 0)
         Me.GroupControlListBarcode.Name = "GroupControlListBarcode"
-        Me.GroupControlListBarcode.Size = New System.Drawing.Size(884, 175)
+        Me.GroupControlListBarcode.Size = New System.Drawing.Size(884, 158)
         Me.GroupControlListBarcode.TabIndex = 1
         Me.GroupControlListBarcode.Text = "List Barcode"
         '
@@ -892,7 +1030,7 @@ Partial Class FormProductionRetOutSingle
         Me.GCBarcode.MainView = Me.GVBarcode
         Me.GCBarcode.Name = "GCBarcode"
         Me.GCBarcode.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckEdit2, Me.RepositoryItemSpinEdit2})
-        Me.GCBarcode.Size = New System.Drawing.Size(862, 138)
+        Me.GCBarcode.Size = New System.Drawing.Size(862, 121)
         Me.GCBarcode.TabIndex = 4
         Me.GCBarcode.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVBarcode})
         '
@@ -1010,26 +1148,18 @@ Partial Class FormProductionRetOutSingle
         Me.BScan.TabIndex = 5
         Me.BScan.Text = "Start Scan"
         '
-        'GridColumnNumber
+        'GridColumnAmount
         '
-        Me.GridColumnNumber.Caption = "number"
-        Me.GridColumnNumber.FieldName = "number"
-        Me.GridColumnNumber.Name = "GridColumnNumber"
-        Me.GridColumnNumber.UnboundType = DevExpress.Data.UnboundColumnType.[String]
-        '
-        'GridColumnFrom
-        '
-        Me.GridColumnFrom.Caption = "from"
-        Me.GridColumnFrom.FieldName = "from"
-        Me.GridColumnFrom.Name = "GridColumnFrom"
-        Me.GridColumnFrom.UnboundType = DevExpress.Data.UnboundColumnType.[String]
-        '
-        'GridColumnTo
-        '
-        Me.GridColumnTo.Caption = "to"
-        Me.GridColumnTo.FieldName = "to"
-        Me.GridColumnTo.Name = "GridColumnTo"
-        Me.GridColumnTo.UnboundType = DevExpress.Data.UnboundColumnType.[String]
+        Me.GridColumnAmount.Caption = "Amount"
+        Me.GridColumnAmount.DisplayFormat.FormatString = "N2"
+        Me.GridColumnAmount.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnAmount.FieldName = "amount"
+        Me.GridColumnAmount.Name = "GridColumnAmount"
+        Me.GridColumnAmount.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount", "{0:N2}")})
+        Me.GridColumnAmount.UnboundExpression = "[prod_order_ret_out_det_qty] * [ovh_price]"
+        Me.GridColumnAmount.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
+        Me.GridColumnAmount.Visible = True
+        Me.GridColumnAmount.VisibleIndex = 7
         '
         'FormProductionRetOutSingle
         '
@@ -1051,6 +1181,7 @@ Partial Class FormProductionRetOutSingle
         CType(Me.PanelControlTopMiddle, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControlTopMiddle.ResumeLayout(False)
         Me.PanelControlTopMiddle.PerformLayout()
+        CType(Me.LERetType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.MEAdrressCompTo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtCodeCompFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtNameCompFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1067,6 +1198,8 @@ Partial Class FormProductionRetOutSingle
         CType(Me.DERet.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtSeason.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtDesign.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SLEOvh.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl3.ResumeLayout(False)
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1177,4 +1310,15 @@ Partial Class FormProductionRetOutSingle
     Friend WithEvents GridColumnNumber As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnFrom As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnTo As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LERetType As DevExpress.XtraEditors.LookUpEdit
+    Friend WithEvents LabelControl10 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LabelControl11 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents GridColumnPriceOVH As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents SLEOvh As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents SearchLookUpEdit1View As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn2 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn3 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnAmount As DevExpress.XtraGrid.Columns.GridColumn
 End Class

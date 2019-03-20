@@ -1,4 +1,6 @@
-﻿Public Class FormProduction
+﻿Imports System.Globalization
+
+Public Class FormProduction
     Dim bnew_active As String = "1"
     Dim bedit_active As String = "1"
     Dim bdel_active As String = "1"
@@ -13,6 +15,8 @@
     Private Sub FormProd_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         RCIMainVendor.ValueChecked = Convert.ToSByte(1)
         RCIMainVendor.ValueUnchecked = Convert.ToSByte(2)
+        DEStart.EditValue = Now()
+        DEEnd.EditValue = Now()
         '
         viewDesign()
         viewDesignWO()
@@ -24,6 +28,9 @@
         '
         viewStatusPD()
         viewVendor()
+        '
+        viewVendorKO()
+        '
         checkFormAccess(Name)
     End Sub
 
@@ -177,24 +184,32 @@
             query_where += " AND cc.id_comp='" & SLEVendor.EditValue.ToString & "'"
         End If
 
-        Dim query = "SELECT "
+        Dim query = "SELECT 'no' as is_check,'' AS no,"
         query += "IFNULL(SUM(rec.prod_order_rec_det_qty),0) AS qty_rec, "
         query += "IFNULL(SUM(pod.prod_order_qty),0) As qty_order, "
         query += "IFNULL(SUM(qty_plwh.qty),0) As qty_plwh, "
-        query += "comp.comp_name,a.id_prod_order,d.id_sample, a.prod_order_number, d.design_display_name, d.design_code, h.term_production, g.po_type,d.design_cop, "
-        query += "a.prod_order_date,a.id_report_status,c.report_status, "
-        query += "b.id_design,b.id_delivery, e.delivery, f.season, e.id_season "
-        query += ",IF(ISNULL(mark.id_mark),'no','yes') AS is_submit,maxd.employee_name as last_mark "
+        query += "IFNULL(SUM(qty_retin.qty),0) As qty_ret_in, "
+        query += "IFNULL(SUM(qty_retout.qty),0) As qty_ret_out, "
+        query += "IFNULL(SUM(qty_claim.qty),0) As qty_ret_claim, "
+        query += "a.id_term_production ,comp.id_comp,cc.id_comp_contact,comp.comp_name,comp.comp_number,a.id_prod_order,d.id_sample, a.prod_order_number, d.design_display_name, d.design_code,d.design_code_import, h.term_production, g.po_type,d.design_cop, "
+        query += "a.prod_order_date,a.id_report_status,c.report_status,season_del_dsg.est_wh_date,season_del_dsg.delivery_date,qty_plwh.pl_prod_order_date,rec.prod_order_rec_date, "
+        query += "b.id_design,b.id_delivery, e.delivery, f.season, e.id_season,`range`.range "
+        query += ",IF(ISNULL(mark.id_mark),'no','yes') AS is_submit,maxd.employee_name as last_mark,RIGHT(d.design_display_name,3) AS color,LEFT(d.design_display_name,length(d.design_display_name)-3) AS class_dsg "
+        query += ",py.payment,DATE_ADD(wo.prod_order_wo_del_date,INTERVAL prod_order_wo_lead_time DAY) AS est_del_date,wo.prod_order_wo_lead_time AS lead_time,DATE_ADD(wo.prod_order_wo_del_date, INTERVAL (wo.prod_order_wo_lead_time+wo.prod_order_wo_top) DAY) AS payment_due_date,prod_order_wo_top AS lead_time_pay "
+        query += ",wo_price.prod_order_wo_vat as vat,wo_price.wo_price AS po_amount_rp,wo_price.wo_price_no_kurs AS po_amount,wo_price.currency as po_curr,wo_price.prod_order_wo_kurs AS po_kurs,IFNULL(SUM(pod.prod_order_qty),0)*(d.prod_order_cop_bom * d.prod_order_cop_bom_curr) AS bom_amount,(d.prod_order_cop_bom * d.prod_order_cop_bom_curr) AS bom_unit "
         query += "FROM tb_prod_order a "
         query += "INNER JOIN tb_prod_order_det pod ON pod.id_prod_order=a.id_prod_order "
         query += "INNER JOIN tb_prod_demand_design b On a.id_prod_demand_design = b.id_prod_demand_design "
         query += "INNER JOIN tb_lookup_report_status c ON a.id_report_status = c.id_report_status "
         query += "INNER JOIN tb_m_design d On b.id_design = d.id_design "
         query += "INNER JOIN tb_season_delivery e On b.id_delivery=e.id_delivery "
+        query += "INNER JOIN tb_season_delivery season_del_dsg On d.id_delivery=season_del_dsg.id_delivery "
         query += "INNER JOIN tb_season f On f.id_season=e.id_season "
+        query += "INNER JOIN tb_range `range` On `range`.id_range=`f`.id_range "
         query += "INNER JOIN tb_lookup_po_type g On g.id_po_type=a.id_po_type "
         query += "INNER JOIN tb_lookup_term_production h On h.id_term_production=a.id_term_production "
         query += "LEFT JOIN tb_prod_order_wo wo On wo.id_prod_order=a.id_prod_order And wo.is_main_vendor='1' "
+        query += "LEFT JOIN tb_lookup_payment py ON py.id_payment=wo.id_payment "
         query += "LEFT JOIN tb_m_ovh_price ovh_p On ovh_p.id_ovh_price=wo.id_ovh_price "
         query += "LEFT JOIN tb_m_comp_contact cc ON cc.id_comp_contact=ovh_p.id_comp_contact "
         query += "LEFT JOIN tb_m_comp comp On comp.id_comp=cc.id_comp "
@@ -202,9 +217,20 @@
                     (
 	                    SELECT * FROM tb_report_mark GROUP BY report_mark_type,id_report
                     ) mark ON mark.id_report=a.id_prod_order AND mark.report_mark_type='22' "
+        query += "LEFT JOIN (
+	                SELECT wo.id_prod_order, wo.id_ovh_price, wo.prod_order_wo_kurs, cur.currency,wo.prod_order_wo_vat,
+	                (SUM(wod.prod_order_wo_det_price * pod.prod_order_qty) * wo.prod_order_wo_kurs * (100 + wo.prod_order_wo_vat)/100) AS `wo_price`
+                    ,(SUM(wod.prod_order_wo_det_price * pod.prod_order_qty) * (100 + wo.prod_order_wo_vat)/100) AS `wo_price_no_kurs`
+	                FROM tb_prod_order_wo wo
+	                INNER JOIN tb_prod_order_wo_det wod ON wod.id_prod_order_wo = wo.id_prod_order_wo
+	                INNER JOIN tb_prod_order_det pod ON pod.id_prod_order_det = wod.id_prod_order_det
+                    INNER JOIN tb_lookup_currency cur ON cur.id_currency=wo.id_currency
+	                WHERE wo.is_main_vendor=1 
+	                GROUP BY wo.id_prod_order_wo
+                ) wo_price ON wo_price.id_prod_order= a.id_prod_order "
         query += "LEFT JOIN  "
         query += "( "
-        query += "SELECT recd.id_prod_order_det,SUM(recd.prod_order_rec_det_qty) AS prod_order_rec_det_qty "
+        query += "SELECT rec.prod_order_rec_date,recd.id_prod_order_det,SUM(recd.prod_order_rec_det_qty) AS prod_order_rec_det_qty "
         query += "FROM "
         query += "tb_prod_order_rec rec "
         query += "LEFT JOIN tb_prod_order_rec_det recd On recd.id_prod_order_rec=rec.id_prod_order_rec AND rec.id_report_status != 5 "
@@ -212,11 +238,33 @@
         query += ") rec On rec.id_prod_order_det=pod.id_prod_order_det "
         query += "LEFT JOIN
                     (
-                    SELECT pld.`id_prod_order_det`,SUM(pld.`pl_prod_order_det_qty`) as qty FROM tb_pl_prod_order_det pld
+                    SELECT pld.`id_prod_order_det`,SUM(pld.`pl_prod_order_det_qty`) as qty,pl.pl_prod_order_date FROM tb_pl_prod_order_det pld
                     INNER JOIN tb_pl_prod_order pl ON pl.`id_pl_prod_order`=pld.`id_pl_prod_order`
                     WHERE pl.`id_report_status`='6'
                     GROUP BY pld.`id_prod_order_det`
                     ) qty_plwh ON qty_plwh.id_prod_order_det=pod.id_prod_order_det "
+        query += "LEFT JOIN
+                    (
+	                    SELECT retd.`id_prod_order_det`,SUM(retd.`prod_order_ret_in_det_qty`) AS qty FROM `tb_prod_order_ret_in_det` retd
+	                    INNER JOIN `tb_prod_order_ret_in` ret ON ret.`id_prod_order_ret_in`=retd.`id_prod_order_ret_in`
+	                    WHERE ret.`id_report_status`='6'
+	                    GROUP BY retd.`id_prod_order_det`
+                    ) qty_retin ON qty_retin.id_prod_order_det=pod.id_prod_order_det 
+
+                    LEFT JOIN
+                    (
+	                    SELECT retd.`id_prod_order_det`,SUM(retd.`prod_order_ret_out_det_qty`) AS qty FROM `tb_prod_order_ret_out_det` retd
+	                    INNER JOIN `tb_prod_order_ret_out` ret ON ret.`id_prod_order_ret_out`=retd.`id_prod_order_ret_out`
+	                    WHERE ret.`id_report_status`='6'
+	                    GROUP BY retd.`id_prod_order_det`
+                    ) qty_retout ON qty_retout.id_prod_order_det=pod.id_prod_order_det 
+                    LEFT JOIN
+                    (
+	                    SELECT retd.`id_prod_order_det`,SUM(retd.`qty`) AS qty FROM `tb_prod_claim_return_det` retd
+	                    INNER JOIN `tb_prod_claim_return` ret ON ret.`id_prod_claim_return`=retd.`id_prod_claim_return`
+	                    WHERE ret.`id_report_status`='6'
+	                    GROUP BY retd.`id_prod_order_det`
+                    ) qty_claim ON qty_claim.id_prod_order_det=pod.id_prod_order_det "
         query += "LEFT JOIN
                  (SELECT mark.id_report_mark,mark.id_report,emp.employee_name,maxd.report_mark_datetime,mark.report_number
                     FROM tb_report_mark mark
@@ -248,7 +296,7 @@
 
         '    data.Rows(i)("images") = img
         'Next
-        '
+
         GCProd.DataSource = data
         If data.Rows.Count > 0 Then
             GVProd.FocusedRowHandle = 0
@@ -368,7 +416,9 @@
     End Sub
 
     Private Sub BSearch_Click(sender As Object, e As EventArgs) Handles BSearch.Click
+        Cursor = Cursors.WaitCursor
         view_production_order()
+        Cursor = Cursors.Default
     End Sub
 
     Private Sub BViewWO_Click(sender As Object, e As EventArgs) Handles BViewWO.Click
@@ -519,6 +569,7 @@
         FormProductionWO.id_po = GVProdWO.GetFocusedRowCellValue("id_prod_order").ToString
         FormProductionWO.ShowDialog()
     End Sub
+
     Sub edit_mrs()
         FormProductionMRS.id_prod_order = GVMRS.GetFocusedRowCellValue("id_prod_order").ToString
         FormProductionMRS.id_mrs = GVMRS.GetFocusedRowCellValue("id_prod_order_mrs").ToString
@@ -549,12 +600,95 @@
 
     Private Sub GVDesign_RowStyle(sender As Object, e As DevExpress.XtraGrid.Views.Grid.RowStyleEventArgs) Handles GVDesign.RowStyle
         Try
-            If GVDesign.GetRowCellValue(e.RowHandle, "id_lookup_status_order").ToString = "2" Then
+            If GVDesign.GetRowCellValue(e.RowHandle, "id_lookup_status_order").ToString = "2" Or GVProd.GetRowCellValue(e.RowHandle, "jml_pdo") > 0 Then
                 e.Appearance.BackColor = Color.Salmon
                 e.Appearance.ForeColor = Color.Red
                 e.Appearance.FontStyleDelta = FontStyle.Bold
             End If
         Catch ex As Exception
         End Try
+    End Sub
+
+    Private Sub BShowPrintPanel_Click(sender As Object, e As EventArgs) Handles BShowPrintPanel.Click
+        PCFilterDate.Visible = True
+    End Sub
+
+    Private Sub BPrint_Click(sender As Object, e As EventArgs) Handles BPrint.Click
+        FormProductionPrint.dt = GCProd.DataSource
+        FormProductionPrint.GVProd.ActiveFilterString = "[is_check]='yes'"
+        FormProductionPrint.ShowDialog()
+    End Sub
+
+    Private Sub BFilter_Click(sender As Object, e As EventArgs) Handles BFilter.Click
+        GVProd.ActiveFilterString = "[prod_order_date] >= #" & Date.Parse(DEStart.EditValue.ToString).ToString("d") & "# AND [prod_order_date] <= #" & Date.Parse(DEEnd.EditValue.ToString).ToString("d") & "#"
+    End Sub
+
+    Private Sub BClearFilter_Click(sender As Object, e As EventArgs) Handles BClearFilter.Click
+        GVProd.ActiveFilterString = ""
+    End Sub
+
+    Private Sub BPrintPD_Click(sender As Object, e As EventArgs) Handles BPrintPD.Click
+        Cursor = Cursors.WaitCursor
+        Try
+            FormViewProdDemand.id_prod_demand = GVDesign.GetFocusedRowCellValue("id_prod_demand")
+            FormViewProdDemand.is_for_production = True
+            FormViewProdDemand.ShowDialog()
+        Catch ex As Exception
+            stopCustom("Please select PD first")
+        End Try
+
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub CheckEditSelAll_CheckedChanged(sender As Object, e As EventArgs) Handles CheckEditSelAll.CheckedChanged
+        If GVProd.RowCount > 0 Then
+            For i As Integer = 0 To ((GVProd.RowCount - 1) - GetGroupRowCount(GVProd))
+                If CheckEditSelAll.Checked = False Then
+                    GVProd.SetRowCellValue(i, "is_check", "no")
+                Else
+                    GVProd.SetRowCellValue(i, "is_check", "yes")
+                End If
+            Next
+        End If
+    End Sub
+
+    Private Sub BViewKO_Click(sender As Object, e As EventArgs) Handles BViewKO.Click
+        Dim query_where As String = ""
+        '
+        If Not SLEVendorKO.EditValue.ToString = "0" Then
+            query_where += " AND c.id_comp='" & SLEVendorKO.EditValue.ToString & "'"
+        End If
+        '
+        Dim query As String = "SELECT ko.*,c.`comp_name` FROM tb_prod_order_ko ko
+INNER JOIN tb_m_comp_contact cc ON cc.`id_comp_contact`=ko.`id_comp_contact`
+INNER JOIN tb_m_comp c ON c.`id_comp`=cc.`id_comp`
+WHERE ko.id_prod_order_ko 
+IN (SELECT MAX(id_prod_order_ko) AS id FROM `tb_prod_order_ko`
+GROUP BY id_prod_order_ko_reff) AND is_purc_mat=2 " & query_where & " ORDER BY ko.id_prod_order_ko DESC"
+
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCKO.DataSource = data
+        If GVKO.RowCount > 0 Then
+            BEditKO.Visible = True
+        Else
+            BEditKO.Visible = False
+        End If
+        GVKO.BestFitColumns()
+    End Sub
+    Sub viewVendorKO()
+        Dim query As String = ""
+        query += "SELECT ('0') AS id_comp, ('-') AS comp_number, ('All Vendor') AS comp_name, ('ALL Vendor') AS comp_name_label UNION ALL "
+        query += "SELECT comp.id_comp,comp.comp_number, comp.comp_name, CONCAT_WS(' - ', comp.comp_number,comp.comp_name) AS comp_name_label FROM tb_m_comp comp "
+        query += "WHERE comp.id_comp_cat='1'"
+        viewSearchLookupQuery(SLEVendorKO, query, "id_comp", "comp_name_label", "id_comp")
+    End Sub
+
+    Sub view_ko()
+        FormProductionKO.id_ko = GVKO.GetFocusedRowCellValue("id_prod_order_ko").ToString
+        FormProductionKO.ShowDialog()
+    End Sub
+
+    Private Sub BEditKO_Click(sender As Object, e As EventArgs) Handles BEditKO.Click
+        view_ko()
     End Sub
 End Class

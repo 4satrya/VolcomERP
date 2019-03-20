@@ -44,11 +44,20 @@
                     INNER JOIN tb_lookup_report_mark_type b ON b.report_mark_type = a.report_mark_type 
                     INNER JOIN tb_lookup_report_status c ON c.id_report_status = a.id_report_status 
                     LEFT JOIN 
-                                        (
-	                                        SELECT report_mark_type,id_report,id_mark_asg,COUNT(id_report_mark) AS jml FROM tb_report_mark WHERE id_mark!=1 GROUP BY report_mark_type,id_report,id_mark_asg
-                                        ) mark ON  a.report_mark_type=mark.report_mark_type AND a.id_report=mark.id_report AND a.id_mark_asg=mark.id_mark_asg 
+                    (
+	                    SELECT report_mark_type,id_report,id_mark_asg,COUNT(id_report_mark) AS jml FROM tb_report_mark WHERE id_mark!=1 GROUP BY report_mark_type,id_report,id_mark_asg
+                    ) mark ON  a.report_mark_type=mark.report_mark_type AND a.id_report=mark.id_report AND a.id_mark_asg=mark.id_mark_asg 
+                    LEFT JOIN 
+                    (
+	                    SELECT rm.id_report,rm.id_report_status,rm.`id_mark_asg`,rm.report_mark_type,SUM(IF(rm.`is_use`=1,1,0)) AS jml_req,SUM(IF(rm.`id_mark`=2,1,0)) AS jml_approve FROM tb_report_mark rm 
+	                    WHERE rm.is_requisite=1
+	                    GROUP BY rm.id_report_status,rm.id_report,rm.report_mark_type
+                    ) req ON a.id_report_status=req.id_report_status AND a.id_report=req.id_report AND a.report_mark_type=req.report_mark_type 
                     WHERE a.id_mark = 1 AND a.id_user ='" & id_user & "' AND NOW()>a.report_mark_start_datetime 
-                    AND IFNULL(mark.jml,0) < 1 "
+                    AND IFNULL(mark.jml,0) < 1 
+                    -- ini yang ngurangi requisite dulu
+                    AND IF(a.is_requisite=2,(IFNULL(req.jml_approve,0) = IFNULL(req.jml_req,0)),TRUE)
+                    AND a.is_on_hold=2"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
         GCMarkNeed.DataSource = data
@@ -254,6 +263,14 @@
 
     Private Sub BViewHistoryCancel_Click(sender As Object, e As EventArgs) Handles BViewHistoryCancel.Click
         history_cancel()
+    End Sub
+
+    Private Sub GVCancelApprovalHistory_DoubleClick(sender As Object, e As EventArgs) Handles GVCancelApprovalHistory.DoubleClick
+        If GVCancelApprovalHistory.RowCount > 0 Then
+            FormReportMarkCancel.is_view = "1"
+            FormReportMarkCancel.id_report_mark_cancel = GVCancelApprovalHistory.GetFocusedRowCellValue("id_report_mark_cancel")
+            FormReportMarkCancel.ShowDialog()
+        End If
     End Sub
     '======================== end of cancel approval ======================================
 End Class

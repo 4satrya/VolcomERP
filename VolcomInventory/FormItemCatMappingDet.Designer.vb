@@ -79,14 +79,52 @@ Partial Class FormItemCatMappingDet
         Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.BandedGridColumn2 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.PanelControlNav = New DevExpress.XtraEditors.PanelControl()
-        Me.LECategory = New DevExpress.XtraEditors.LookUpEdit()
         Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
         Me.LEDept = New DevExpress.XtraEditors.LookUpEdit()
         Me.LabelControl9 = New DevExpress.XtraEditors.LabelControl()
         Me.BtnDeleteMulti = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnEdit = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnAddMulti = New DevExpress.XtraEditors.SimpleButton()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DeleteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GroupControl3 = New DevExpress.XtraEditors.GroupControl()
+        Me.GroupControl2 = New DevExpress.XtraEditors.GroupControl()
+        Me.XTCGeneral = New DevExpress.XtraTab.XtraTabControl()
+        Me.XTPPurchaseReceive = New DevExpress.XtraTab.XtraTabPage()
+        Me.BtnClearHutang = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnSetInvHutang = New DevExpress.XtraEditors.SimpleButton()
+        Me.LabelControl14 = New DevExpress.XtraEditors.LabelControl()
+        Me.TxtProposeDescHutang = New DevExpress.XtraEditors.TextEdit()
+        Me.TxtProposeCodeHutang = New DevExpress.XtraEditors.TextEdit()
+        Me.TxtCurrentDescHutang = New DevExpress.XtraEditors.TextEdit()
+        Me.TxtCurrentCodeHutang = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl15 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl13 = New DevExpress.XtraEditors.LabelControl()
+        Me.BtnClearInvStore = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnSetInvStore = New DevExpress.XtraEditors.SimpleButton()
+        Me.LabelControl12 = New DevExpress.XtraEditors.LabelControl()
+        Me.TxtProposeDescInvStore = New DevExpress.XtraEditors.TextEdit()
+        Me.TxtProposeCodeInvStore = New DevExpress.XtraEditors.TextEdit()
+        Me.TxtCurrentDescInvStore = New DevExpress.XtraEditors.TextEdit()
+        Me.TxtCurrentCodeInvStore = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl11 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl10 = New DevExpress.XtraEditors.LabelControl()
+        Me.XTPPurchaseTrf = New DevExpress.XtraTab.XtraTabPage()
+        Me.BtnClearInvWH = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnSetInvWH = New DevExpress.XtraEditors.SimpleButton()
+        Me.LabelControl16 = New DevExpress.XtraEditors.LabelControl()
+        Me.TxtProposeDescInvWH = New DevExpress.XtraEditors.TextEdit()
+        Me.TxtProposeCodeInvWH = New DevExpress.XtraEditors.TextEdit()
+        Me.TxtCurrentDescInvWH = New DevExpress.XtraEditors.TextEdit()
+        Me.TxtCurrentCodeInvWH = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl17 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl18 = New DevExpress.XtraEditors.LabelControl()
+        Me.SplitContainerControl1 = New DevExpress.XtraEditors.SplitContainerControl()
+        Me.SLECat = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumnIdItemCat = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnItemCat = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GroupControlHead, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControlHead.SuspendLayout()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -119,9 +157,32 @@ Partial Class FormItemCatMappingDet
         CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControlNav, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlNav.SuspendLayout()
-        CType(Me.LECategory.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LEDept.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip1.SuspendLayout()
+        CType(Me.GroupControl3, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupControl3.SuspendLayout()
+        CType(Me.GroupControl2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupControl2.SuspendLayout()
+        CType(Me.XTCGeneral, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTCGeneral.SuspendLayout()
+        Me.XTPPurchaseReceive.SuspendLayout()
+        CType(Me.TxtProposeDescHutang.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtProposeCodeHutang.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtCurrentDescHutang.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtCurrentCodeHutang.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtProposeDescInvStore.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtProposeCodeInvStore.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtCurrentDescInvStore.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtCurrentCodeInvStore.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTPPurchaseTrf.SuspendLayout()
+        CType(Me.TxtProposeDescInvWH.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtProposeCodeInvWH.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtCurrentDescInvWH.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtCurrentCodeInvWH.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SplitContainerControl1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SplitContainerControl1.SuspendLayout()
+        CType(Me.SLECat.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupControlHead
@@ -341,9 +402,9 @@ Partial Class FormItemCatMappingDet
         Me.PanelAdd.Controls.Add(Me.SLEExp)
         Me.PanelAdd.Controls.Add(Me.LabelControl8)
         Me.PanelAdd.Dock = System.Windows.Forms.DockStyle.Left
-        Me.PanelAdd.Location = New System.Drawing.Point(0, 49)
+        Me.PanelAdd.Location = New System.Drawing.Point(20, 40)
         Me.PanelAdd.Name = "PanelAdd"
-        Me.PanelAdd.Size = New System.Drawing.Size(10, 415)
+        Me.PanelAdd.Size = New System.Drawing.Size(10, 373)
         Me.PanelAdd.TabIndex = 14
         Me.PanelAdd.Visible = False
         '
@@ -547,11 +608,11 @@ Partial Class FormItemCatMappingDet
         'GCMaping
         '
         Me.GCMaping.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCMaping.Location = New System.Drawing.Point(10, 87)
+        Me.GCMaping.Location = New System.Drawing.Point(30, 40)
         Me.GCMaping.MainView = Me.GVMapping
         Me.GCMaping.Name = "GCMaping"
         Me.GCMaping.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckEdit1})
-        Me.GCMaping.Size = New System.Drawing.Size(887, 377)
+        Me.GCMaping.Size = New System.Drawing.Size(865, 373)
         Me.GCMaping.TabIndex = 15
         Me.GCMaping.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVMapping})
         '
@@ -626,7 +687,8 @@ Partial Class FormItemCatMappingDet
         Me.gridBand3.Columns.Add(Me.BandedGridColumnInvAcc)
         Me.gridBand3.Columns.Add(Me.BandedGridColumnInvDesc)
         Me.gridBand3.Name = "gridBand3"
-        Me.gridBand3.VisibleIndex = 2
+        Me.gridBand3.Visible = False
+        Me.gridBand3.VisibleIndex = -1
         Me.gridBand3.Width = 150
         '
         'BandedGridColumnInvAcc
@@ -649,8 +711,8 @@ Partial Class FormItemCatMappingDet
         Me.gridBand4.Columns.Add(Me.BandedGridColumn1)
         Me.gridBand4.Columns.Add(Me.BandedGridColumn2)
         Me.gridBand4.Name = "gridBand4"
-        Me.gridBand4.VisibleIndex = 3
-        Me.gridBand4.Width = 200
+        Me.gridBand4.VisibleIndex = 2
+        Me.gridBand4.Width = 100
         '
         'BandedGridColumn1
         '
@@ -674,32 +736,23 @@ Partial Class FormItemCatMappingDet
         Me.BandedGridColumn2.ColumnEdit = Me.RepositoryItemCheckEdit1
         Me.BandedGridColumn2.FieldName = "is_expense_v"
         Me.BandedGridColumn2.Name = "BandedGridColumn2"
-        Me.BandedGridColumn2.Visible = True
         Me.BandedGridColumn2.Width = 100
         '
         'PanelControlNav
         '
         Me.PanelControlNav.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
-        Me.PanelControlNav.Controls.Add(Me.LECategory)
+        Me.PanelControlNav.Controls.Add(Me.SLECat)
         Me.PanelControlNav.Controls.Add(Me.LabelControl6)
         Me.PanelControlNav.Controls.Add(Me.LEDept)
         Me.PanelControlNav.Controls.Add(Me.LabelControl9)
         Me.PanelControlNav.Controls.Add(Me.BtnDeleteMulti)
+        Me.PanelControlNav.Controls.Add(Me.BtnEdit)
         Me.PanelControlNav.Controls.Add(Me.BtnAddMulti)
         Me.PanelControlNav.Dock = System.Windows.Forms.DockStyle.Top
-        Me.PanelControlNav.Location = New System.Drawing.Point(10, 49)
+        Me.PanelControlNav.Location = New System.Drawing.Point(20, 2)
         Me.PanelControlNav.Name = "PanelControlNav"
-        Me.PanelControlNav.Size = New System.Drawing.Size(887, 38)
+        Me.PanelControlNav.Size = New System.Drawing.Size(875, 38)
         Me.PanelControlNav.TabIndex = 16
-        '
-        'LECategory
-        '
-        Me.LECategory.Location = New System.Drawing.Point(315, 10)
-        Me.LECategory.Name = "LECategory"
-        Me.LECategory.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.LECategory.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_item_cat", "Id", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("item_cat", "Category")})
-        Me.LECategory.Size = New System.Drawing.Size(175, 20)
-        Me.LECategory.TabIndex = 24
         '
         'LabelControl6
         '
@@ -730,17 +783,27 @@ Partial Class FormItemCatMappingDet
         '
         Me.BtnDeleteMulti.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnDeleteMulti.Image = CType(resources.GetObject("BtnDeleteMulti.Image"), System.Drawing.Image)
-        Me.BtnDeleteMulti.Location = New System.Drawing.Point(714, 0)
+        Me.BtnDeleteMulti.Location = New System.Drawing.Point(621, 0)
         Me.BtnDeleteMulti.Name = "BtnDeleteMulti"
         Me.BtnDeleteMulti.Size = New System.Drawing.Size(81, 38)
         Me.BtnDeleteMulti.TabIndex = 1
         Me.BtnDeleteMulti.Text = "Delete"
         '
+        'BtnEdit
+        '
+        Me.BtnEdit.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnEdit.Image = CType(resources.GetObject("BtnEdit.Image"), System.Drawing.Image)
+        Me.BtnEdit.Location = New System.Drawing.Point(702, 0)
+        Me.BtnEdit.Name = "BtnEdit"
+        Me.BtnEdit.Size = New System.Drawing.Size(81, 38)
+        Me.BtnEdit.TabIndex = 25
+        Me.BtnEdit.Text = "Edit"
+        '
         'BtnAddMulti
         '
         Me.BtnAddMulti.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnAddMulti.Image = CType(resources.GetObject("BtnAddMulti.Image"), System.Drawing.Image)
-        Me.BtnAddMulti.Location = New System.Drawing.Point(795, 0)
+        Me.BtnAddMulti.Location = New System.Drawing.Point(783, 0)
         Me.BtnAddMulti.Name = "BtnAddMulti"
         Me.BtnAddMulti.Size = New System.Drawing.Size(92, 38)
         Me.BtnAddMulti.TabIndex = 0
@@ -748,9 +811,15 @@ Partial Class FormItemCatMappingDet
         '
         'ContextMenuStrip1
         '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DeleteToolStripMenuItem})
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EditToolStripMenuItem, Me.DeleteToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(108, 26)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(108, 48)
+        '
+        'EditToolStripMenuItem
+        '
+        Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
+        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(107, 22)
+        Me.EditToolStripMenuItem.Text = "Edit"
         '
         'DeleteToolStripMenuItem
         '
@@ -758,14 +827,353 @@ Partial Class FormItemCatMappingDet
         Me.DeleteToolStripMenuItem.Size = New System.Drawing.Size(107, 22)
         Me.DeleteToolStripMenuItem.Text = "Delete"
         '
+        'GroupControl3
+        '
+        Me.GroupControl3.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupControl3.Controls.Add(Me.GCMaping)
+        Me.GroupControl3.Controls.Add(Me.PanelAdd)
+        Me.GroupControl3.Controls.Add(Me.PanelControlNav)
+        Me.GroupControl3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupControl3.Location = New System.Drawing.Point(0, 0)
+        Me.GroupControl3.Name = "GroupControl3"
+        Me.GroupControl3.Size = New System.Drawing.Size(897, 415)
+        Me.GroupControl3.TabIndex = 18
+        Me.GroupControl3.Text = "Expense Account"
+        '
+        'GroupControl2
+        '
+        Me.GroupControl2.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupControl2.Controls.Add(Me.XTCGeneral)
+        Me.GroupControl2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupControl2.Location = New System.Drawing.Point(0, 0)
+        Me.GroupControl2.Name = "GroupControl2"
+        Me.GroupControl2.Size = New System.Drawing.Size(0, 0)
+        Me.GroupControl2.TabIndex = 17
+        Me.GroupControl2.Text = "General Account"
+        '
+        'XTCGeneral
+        '
+        Me.XTCGeneral.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.XTCGeneral.HeaderLocation = DevExpress.XtraTab.TabHeaderLocation.Bottom
+        Me.XTCGeneral.Location = New System.Drawing.Point(19, 0)
+        Me.XTCGeneral.Name = "XTCGeneral"
+        Me.XTCGeneral.SelectedTabPage = Me.XTPPurchaseReceive
+        Me.XTCGeneral.Size = New System.Drawing.Size(0, 0)
+        Me.XTCGeneral.TabIndex = 0
+        Me.XTCGeneral.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPPurchaseReceive, Me.XTPPurchaseTrf})
+        '
+        'XTPPurchaseReceive
+        '
+        Me.XTPPurchaseReceive.Controls.Add(Me.BtnClearHutang)
+        Me.XTPPurchaseReceive.Controls.Add(Me.BtnSetInvHutang)
+        Me.XTPPurchaseReceive.Controls.Add(Me.LabelControl14)
+        Me.XTPPurchaseReceive.Controls.Add(Me.TxtProposeDescHutang)
+        Me.XTPPurchaseReceive.Controls.Add(Me.TxtProposeCodeHutang)
+        Me.XTPPurchaseReceive.Controls.Add(Me.TxtCurrentDescHutang)
+        Me.XTPPurchaseReceive.Controls.Add(Me.TxtCurrentCodeHutang)
+        Me.XTPPurchaseReceive.Controls.Add(Me.LabelControl15)
+        Me.XTPPurchaseReceive.Controls.Add(Me.LabelControl13)
+        Me.XTPPurchaseReceive.Controls.Add(Me.BtnClearInvStore)
+        Me.XTPPurchaseReceive.Controls.Add(Me.BtnSetInvStore)
+        Me.XTPPurchaseReceive.Controls.Add(Me.LabelControl12)
+        Me.XTPPurchaseReceive.Controls.Add(Me.TxtProposeDescInvStore)
+        Me.XTPPurchaseReceive.Controls.Add(Me.TxtProposeCodeInvStore)
+        Me.XTPPurchaseReceive.Controls.Add(Me.TxtCurrentDescInvStore)
+        Me.XTPPurchaseReceive.Controls.Add(Me.TxtCurrentCodeInvStore)
+        Me.XTPPurchaseReceive.Controls.Add(Me.LabelControl11)
+        Me.XTPPurchaseReceive.Controls.Add(Me.LabelControl10)
+        Me.XTPPurchaseReceive.Name = "XTPPurchaseReceive"
+        Me.XTPPurchaseReceive.Size = New System.Drawing.Size(0, 0)
+        Me.XTPPurchaseReceive.Text = "Receive / Return"
+        '
+        'BtnClearHutang
+        '
+        Me.BtnClearHutang.Location = New System.Drawing.Point(759, 104)
+        Me.BtnClearHutang.Name = "BtnClearHutang"
+        Me.BtnClearHutang.Size = New System.Drawing.Size(46, 23)
+        Me.BtnClearHutang.TabIndex = 17
+        Me.BtnClearHutang.Text = "clear"
+        '
+        'BtnSetInvHutang
+        '
+        Me.BtnSetInvHutang.Location = New System.Drawing.Point(707, 104)
+        Me.BtnSetInvHutang.Name = "BtnSetInvHutang"
+        Me.BtnSetInvHutang.Size = New System.Drawing.Size(46, 23)
+        Me.BtnSetInvHutang.TabIndex = 16
+        Me.BtnSetInvHutang.Text = "set"
+        '
+        'LabelControl14
+        '
+        Me.LabelControl14.Location = New System.Drawing.Point(443, 109)
+        Me.LabelControl14.Name = "LabelControl14"
+        Me.LabelControl14.Size = New System.Drawing.Size(39, 13)
+        Me.LabelControl14.TabIndex = 15
+        Me.LabelControl14.Text = "Propose"
+        '
+        'TxtProposeDescHutang
+        '
+        Me.TxtProposeDescHutang.Enabled = False
+        Me.TxtProposeDescHutang.Location = New System.Drawing.Point(494, 132)
+        Me.TxtProposeDescHutang.Name = "TxtProposeDescHutang"
+        Me.TxtProposeDescHutang.Size = New System.Drawing.Size(311, 20)
+        Me.TxtProposeDescHutang.TabIndex = 14
+        '
+        'TxtProposeCodeHutang
+        '
+        Me.TxtProposeCodeHutang.Enabled = False
+        Me.TxtProposeCodeHutang.Location = New System.Drawing.Point(494, 106)
+        Me.TxtProposeCodeHutang.Name = "TxtProposeCodeHutang"
+        Me.TxtProposeCodeHutang.Size = New System.Drawing.Size(202, 20)
+        Me.TxtProposeCodeHutang.TabIndex = 13
+        '
+        'TxtCurrentDescHutang
+        '
+        Me.TxtCurrentDescHutang.Enabled = False
+        Me.TxtCurrentDescHutang.Location = New System.Drawing.Point(494, 80)
+        Me.TxtCurrentDescHutang.Name = "TxtCurrentDescHutang"
+        Me.TxtCurrentDescHutang.Size = New System.Drawing.Size(311, 20)
+        Me.TxtCurrentDescHutang.TabIndex = 12
+        '
+        'TxtCurrentCodeHutang
+        '
+        Me.TxtCurrentCodeHutang.Enabled = False
+        Me.TxtCurrentCodeHutang.Location = New System.Drawing.Point(494, 54)
+        Me.TxtCurrentCodeHutang.Name = "TxtCurrentCodeHutang"
+        Me.TxtCurrentCodeHutang.Size = New System.Drawing.Size(202, 20)
+        Me.TxtCurrentCodeHutang.TabIndex = 11
+        '
+        'LabelControl15
+        '
+        Me.LabelControl15.Location = New System.Drawing.Point(443, 57)
+        Me.LabelControl15.Name = "LabelControl15"
+        Me.LabelControl15.Size = New System.Drawing.Size(40, 13)
+        Me.LabelControl15.TabIndex = 10
+        Me.LabelControl15.Text = "Current "
+        '
+        'LabelControl13
+        '
+        Me.LabelControl13.Appearance.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl13.Location = New System.Drawing.Point(440, 14)
+        Me.LabelControl13.Name = "LabelControl13"
+        Me.LabelControl13.Size = New System.Drawing.Size(106, 19)
+        Me.LabelControl13.TabIndex = 9
+        Me.LabelControl13.Text = "Akun Hutang"
+        '
+        'BtnClearInvStore
+        '
+        Me.BtnClearInvStore.Location = New System.Drawing.Point(332, 104)
+        Me.BtnClearInvStore.Name = "BtnClearInvStore"
+        Me.BtnClearInvStore.Size = New System.Drawing.Size(46, 23)
+        Me.BtnClearInvStore.TabIndex = 8
+        Me.BtnClearInvStore.Text = "clear"
+        '
+        'BtnSetInvStore
+        '
+        Me.BtnSetInvStore.Location = New System.Drawing.Point(280, 104)
+        Me.BtnSetInvStore.Name = "BtnSetInvStore"
+        Me.BtnSetInvStore.Size = New System.Drawing.Size(46, 23)
+        Me.BtnSetInvStore.TabIndex = 7
+        Me.BtnSetInvStore.Text = "set"
+        '
+        'LabelControl12
+        '
+        Me.LabelControl12.Location = New System.Drawing.Point(16, 109)
+        Me.LabelControl12.Name = "LabelControl12"
+        Me.LabelControl12.Size = New System.Drawing.Size(39, 13)
+        Me.LabelControl12.TabIndex = 6
+        Me.LabelControl12.Text = "Propose"
+        '
+        'TxtProposeDescInvStore
+        '
+        Me.TxtProposeDescInvStore.Enabled = False
+        Me.TxtProposeDescInvStore.Location = New System.Drawing.Point(67, 132)
+        Me.TxtProposeDescInvStore.Name = "TxtProposeDescInvStore"
+        Me.TxtProposeDescInvStore.Size = New System.Drawing.Size(311, 20)
+        Me.TxtProposeDescInvStore.TabIndex = 5
+        '
+        'TxtProposeCodeInvStore
+        '
+        Me.TxtProposeCodeInvStore.Enabled = False
+        Me.TxtProposeCodeInvStore.Location = New System.Drawing.Point(67, 106)
+        Me.TxtProposeCodeInvStore.Name = "TxtProposeCodeInvStore"
+        Me.TxtProposeCodeInvStore.Size = New System.Drawing.Size(202, 20)
+        Me.TxtProposeCodeInvStore.TabIndex = 4
+        '
+        'TxtCurrentDescInvStore
+        '
+        Me.TxtCurrentDescInvStore.Enabled = False
+        Me.TxtCurrentDescInvStore.Location = New System.Drawing.Point(67, 80)
+        Me.TxtCurrentDescInvStore.Name = "TxtCurrentDescInvStore"
+        Me.TxtCurrentDescInvStore.Size = New System.Drawing.Size(311, 20)
+        Me.TxtCurrentDescInvStore.TabIndex = 3
+        '
+        'TxtCurrentCodeInvStore
+        '
+        Me.TxtCurrentCodeInvStore.Enabled = False
+        Me.TxtCurrentCodeInvStore.Location = New System.Drawing.Point(67, 54)
+        Me.TxtCurrentCodeInvStore.Name = "TxtCurrentCodeInvStore"
+        Me.TxtCurrentCodeInvStore.Size = New System.Drawing.Size(202, 20)
+        Me.TxtCurrentCodeInvStore.TabIndex = 2
+        '
+        'LabelControl11
+        '
+        Me.LabelControl11.Location = New System.Drawing.Point(16, 57)
+        Me.LabelControl11.Name = "LabelControl11"
+        Me.LabelControl11.Size = New System.Drawing.Size(40, 13)
+        Me.LabelControl11.TabIndex = 1
+        Me.LabelControl11.Text = "Current "
+        '
+        'LabelControl10
+        '
+        Me.LabelControl10.Appearance.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl10.Location = New System.Drawing.Point(16, 14)
+        Me.LabelControl10.Name = "LabelControl10"
+        Me.LabelControl10.Size = New System.Drawing.Size(187, 19)
+        Me.LabelControl10.TabIndex = 0
+        Me.LabelControl10.Text = "Akun Persediaan Store"
+        '
+        'XTPPurchaseTrf
+        '
+        Me.XTPPurchaseTrf.Controls.Add(Me.BtnClearInvWH)
+        Me.XTPPurchaseTrf.Controls.Add(Me.BtnSetInvWH)
+        Me.XTPPurchaseTrf.Controls.Add(Me.LabelControl16)
+        Me.XTPPurchaseTrf.Controls.Add(Me.TxtProposeDescInvWH)
+        Me.XTPPurchaseTrf.Controls.Add(Me.TxtProposeCodeInvWH)
+        Me.XTPPurchaseTrf.Controls.Add(Me.TxtCurrentDescInvWH)
+        Me.XTPPurchaseTrf.Controls.Add(Me.TxtCurrentCodeInvWH)
+        Me.XTPPurchaseTrf.Controls.Add(Me.LabelControl17)
+        Me.XTPPurchaseTrf.Controls.Add(Me.LabelControl18)
+        Me.XTPPurchaseTrf.Name = "XTPPurchaseTrf"
+        Me.XTPPurchaseTrf.Size = New System.Drawing.Size(0, 0)
+        Me.XTPPurchaseTrf.Text = "Transfer"
+        '
+        'BtnClearInvWH
+        '
+        Me.BtnClearInvWH.Location = New System.Drawing.Point(332, 104)
+        Me.BtnClearInvWH.Name = "BtnClearInvWH"
+        Me.BtnClearInvWH.Size = New System.Drawing.Size(46, 23)
+        Me.BtnClearInvWH.TabIndex = 17
+        Me.BtnClearInvWH.Text = "clear"
+        '
+        'BtnSetInvWH
+        '
+        Me.BtnSetInvWH.Location = New System.Drawing.Point(280, 104)
+        Me.BtnSetInvWH.Name = "BtnSetInvWH"
+        Me.BtnSetInvWH.Size = New System.Drawing.Size(46, 23)
+        Me.BtnSetInvWH.TabIndex = 16
+        Me.BtnSetInvWH.Text = "set"
+        '
+        'LabelControl16
+        '
+        Me.LabelControl16.Location = New System.Drawing.Point(16, 109)
+        Me.LabelControl16.Name = "LabelControl16"
+        Me.LabelControl16.Size = New System.Drawing.Size(39, 13)
+        Me.LabelControl16.TabIndex = 15
+        Me.LabelControl16.Text = "Propose"
+        '
+        'TxtProposeDescInvWH
+        '
+        Me.TxtProposeDescInvWH.Enabled = False
+        Me.TxtProposeDescInvWH.Location = New System.Drawing.Point(67, 132)
+        Me.TxtProposeDescInvWH.Name = "TxtProposeDescInvWH"
+        Me.TxtProposeDescInvWH.Size = New System.Drawing.Size(311, 20)
+        Me.TxtProposeDescInvWH.TabIndex = 14
+        '
+        'TxtProposeCodeInvWH
+        '
+        Me.TxtProposeCodeInvWH.Enabled = False
+        Me.TxtProposeCodeInvWH.Location = New System.Drawing.Point(67, 106)
+        Me.TxtProposeCodeInvWH.Name = "TxtProposeCodeInvWH"
+        Me.TxtProposeCodeInvWH.Size = New System.Drawing.Size(202, 20)
+        Me.TxtProposeCodeInvWH.TabIndex = 13
+        '
+        'TxtCurrentDescInvWH
+        '
+        Me.TxtCurrentDescInvWH.Enabled = False
+        Me.TxtCurrentDescInvWH.Location = New System.Drawing.Point(67, 80)
+        Me.TxtCurrentDescInvWH.Name = "TxtCurrentDescInvWH"
+        Me.TxtCurrentDescInvWH.Size = New System.Drawing.Size(311, 20)
+        Me.TxtCurrentDescInvWH.TabIndex = 12
+        '
+        'TxtCurrentCodeInvWH
+        '
+        Me.TxtCurrentCodeInvWH.Enabled = False
+        Me.TxtCurrentCodeInvWH.Location = New System.Drawing.Point(67, 54)
+        Me.TxtCurrentCodeInvWH.Name = "TxtCurrentCodeInvWH"
+        Me.TxtCurrentCodeInvWH.Size = New System.Drawing.Size(202, 20)
+        Me.TxtCurrentCodeInvWH.TabIndex = 11
+        '
+        'LabelControl17
+        '
+        Me.LabelControl17.Location = New System.Drawing.Point(16, 57)
+        Me.LabelControl17.Name = "LabelControl17"
+        Me.LabelControl17.Size = New System.Drawing.Size(40, 13)
+        Me.LabelControl17.TabIndex = 10
+        Me.LabelControl17.Text = "Current "
+        '
+        'LabelControl18
+        '
+        Me.LabelControl18.Appearance.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl18.Location = New System.Drawing.Point(16, 14)
+        Me.LabelControl18.Name = "LabelControl18"
+        Me.LabelControl18.Size = New System.Drawing.Size(244, 19)
+        Me.LabelControl18.TabIndex = 9
+        Me.LabelControl18.Text = "Akun Persediaan Supplies WH"
+        '
+        'SplitContainerControl1
+        '
+        Me.SplitContainerControl1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SplitContainerControl1.Horizontal = False
+        Me.SplitContainerControl1.Location = New System.Drawing.Point(0, 49)
+        Me.SplitContainerControl1.Name = "SplitContainerControl1"
+        Me.SplitContainerControl1.Panel1.Controls.Add(Me.GroupControl2)
+        Me.SplitContainerControl1.Panel1.Text = "Panel1"
+        Me.SplitContainerControl1.Panel2.Controls.Add(Me.GroupControl3)
+        Me.SplitContainerControl1.Panel2.Text = "Panel2"
+        Me.SplitContainerControl1.PanelVisibility = DevExpress.XtraEditors.SplitPanelVisibility.Panel2
+        Me.SplitContainerControl1.Size = New System.Drawing.Size(897, 415)
+        Me.SplitContainerControl1.SplitterPosition = 225
+        Me.SplitContainerControl1.TabIndex = 19
+        Me.SplitContainerControl1.Text = "SplitContainerControl1"
+        '
+        'SLECat
+        '
+        Me.SLECat.Location = New System.Drawing.Point(315, 10)
+        Me.SLECat.Name = "SLECat"
+        Me.SLECat.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLECat.Properties.ShowClearButton = False
+        Me.SLECat.Properties.View = Me.GridView1
+        Me.SLECat.Size = New System.Drawing.Size(228, 20)
+        Me.SLECat.TabIndex = 22
+        '
+        'GridView1
+        '
+        Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdItemCat, Me.GridColumnItemCat})
+        Me.GridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView1.Name = "GridView1"
+        Me.GridView1.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView1.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumnIdItemCat
+        '
+        Me.GridColumnIdItemCat.Caption = "Id"
+        Me.GridColumnIdItemCat.FieldName = "id_item_cat"
+        Me.GridColumnIdItemCat.Name = "GridColumnIdItemCat"
+        '
+        'GridColumnItemCat
+        '
+        Me.GridColumnItemCat.Caption = "Category"
+        Me.GridColumnItemCat.FieldName = "item_cat"
+        Me.GridColumnItemCat.Name = "GridColumnItemCat"
+        Me.GridColumnItemCat.Visible = True
+        Me.GridColumnItemCat.VisibleIndex = 0
+        '
         'FormItemCatMappingDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(897, 560)
-        Me.Controls.Add(Me.GCMaping)
-        Me.Controls.Add(Me.PanelControlNav)
-        Me.Controls.Add(Me.PanelAdd)
+        Me.Controls.Add(Me.SplitContainerControl1)
         Me.Controls.Add(Me.GroupControl1)
         Me.Controls.Add(Me.PanelControlBottom)
         Me.Controls.Add(Me.GroupControlHead)
@@ -811,9 +1219,34 @@ Partial Class FormItemCatMappingDet
         CType(Me.PanelControlNav, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControlNav.ResumeLayout(False)
         Me.PanelControlNav.PerformLayout()
-        CType(Me.LECategory.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LEDept.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ContextMenuStrip1.ResumeLayout(False)
+        CType(Me.GroupControl3, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupControl3.ResumeLayout(False)
+        CType(Me.GroupControl2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupControl2.ResumeLayout(False)
+        CType(Me.XTCGeneral, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTCGeneral.ResumeLayout(False)
+        Me.XTPPurchaseReceive.ResumeLayout(False)
+        Me.XTPPurchaseReceive.PerformLayout()
+        CType(Me.TxtProposeDescHutang.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtProposeCodeHutang.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtCurrentDescHutang.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtCurrentCodeHutang.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtProposeDescInvStore.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtProposeCodeInvStore.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtCurrentDescInvStore.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtCurrentCodeInvStore.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTPPurchaseTrf.ResumeLayout(False)
+        Me.XTPPurchaseTrf.PerformLayout()
+        CType(Me.TxtProposeDescInvWH.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtProposeCodeInvWH.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtCurrentDescInvWH.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtCurrentCodeInvWH.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SplitContainerControl1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.SplitContainerControl1.ResumeLayout(False)
+        CType(Me.SLECat.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -868,10 +1301,6 @@ Partial Class FormItemCatMappingDet
     Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn2 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn3 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents gridBand2 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
-    Friend WithEvents GridBand1 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
-    Friend WithEvents gridBand3 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
-    Friend WithEvents gridBand4 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents BandedGridColumn1 As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents RepositoryItemCheckEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
     Friend WithEvents BandedGridColumn2 As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
@@ -880,8 +1309,50 @@ Partial Class FormItemCatMappingDet
     Friend WithEvents BtnAddMulti As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
     Friend WithEvents DeleteToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents LECategory As DevExpress.XtraEditors.LookUpEdit
     Friend WithEvents LabelControl6 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LEDept As DevExpress.XtraEditors.LookUpEdit
     Friend WithEvents LabelControl9 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents gridBand2 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
+    Friend WithEvents GridBand1 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
+    Friend WithEvents gridBand3 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
+    Friend WithEvents gridBand4 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
+    Friend WithEvents GroupControl3 As DevExpress.XtraEditors.GroupControl
+    Friend WithEvents GroupControl2 As DevExpress.XtraEditors.GroupControl
+    Friend WithEvents SplitContainerControl1 As DevExpress.XtraEditors.SplitContainerControl
+    Friend WithEvents XTCGeneral As DevExpress.XtraTab.XtraTabControl
+    Friend WithEvents XTPPurchaseReceive As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents XTPPurchaseTrf As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents BtnClearInvStore As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BtnSetInvStore As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents LabelControl12 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents TxtProposeDescInvStore As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents TxtProposeCodeInvStore As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents TxtCurrentDescInvStore As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents TxtCurrentCodeInvStore As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LabelControl11 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LabelControl10 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents BtnClearHutang As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BtnSetInvHutang As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents LabelControl14 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents TxtProposeDescHutang As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents TxtProposeCodeHutang As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents TxtCurrentDescHutang As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents TxtCurrentCodeHutang As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LabelControl15 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LabelControl13 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents BtnClearInvWH As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BtnSetInvWH As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents LabelControl16 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents TxtProposeDescInvWH As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents TxtProposeCodeInvWH As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents TxtCurrentDescInvWH As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents TxtCurrentCodeInvWH As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LabelControl17 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LabelControl18 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents BtnEdit As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents EditToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SLECat As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView1 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumnIdItemCat As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnItemCat As DevExpress.XtraGrid.Columns.GridColumn
 End Class

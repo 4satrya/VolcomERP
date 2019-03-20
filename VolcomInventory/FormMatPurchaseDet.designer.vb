@@ -69,11 +69,11 @@ Partial Class FormMatPurchaseDet
         Me.ColName = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ColPrice = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ColQty = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.ColDiscount = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnDiscount = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ColSubtotal = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.ColNote = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnNote = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnSize = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnColor = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
         Me.Bdel = New DevExpress.XtraEditors.SimpleButton()
         Me.BEdit = New DevExpress.XtraEditors.SimpleButton()
@@ -223,6 +223,7 @@ Partial Class FormMatPurchaseDet
         '
         Me.BPrint.Dock = System.Windows.Forms.DockStyle.Right
         Me.BPrint.Enabled = False
+        Me.BPrint.ImageList = Me.LargeImageCollection
         Me.BPrint.Location = New System.Drawing.Point(682, 2)
         Me.BPrint.Name = "BPrint"
         Me.BPrint.Size = New System.Drawing.Size(75, 37)
@@ -300,6 +301,7 @@ Partial Class FormMatPurchaseDet
         Me.TEKurs.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
         Me.TEKurs.Properties.Mask.SaveLiteral = False
         Me.TEKurs.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.TEKurs.Properties.ReadOnly = True
         Me.TEKurs.Size = New System.Drawing.Size(144, 20)
         Me.TEKurs.TabIndex = 145
         '
@@ -470,7 +472,7 @@ Partial Class FormMatPurchaseDet
         Me.TEDiscount.Properties.Appearance.Options.UseTextOptions = True
         Me.TEDiscount.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.TEDiscount.Properties.EditValueChangedDelay = 1
-        Me.TEDiscount.Properties.Mask.EditMask = "N2"
+        Me.TEDiscount.Properties.Mask.EditMask = "N4"
         Me.TEDiscount.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
         Me.TEDiscount.Properties.Mask.SaveLiteral = False
         Me.TEDiscount.Properties.Mask.UseMaskAsDisplayFormat = True
@@ -594,7 +596,7 @@ Partial Class FormMatPurchaseDet
         '
         'GVListPurchase
         '
-        Me.GVListPurchase.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ColIdPurcDet, Me.ColIdMatDetPrice, Me.ColNo, Me.ColCode, Me.ColName, Me.ColPrice, Me.ColQty, Me.ColDiscount, Me.ColSubtotal, Me.ColNote, Me.GridColumnSize, Me.GridColumn5})
+        Me.GVListPurchase.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ColIdPurcDet, Me.ColIdMatDetPrice, Me.ColNo, Me.ColCode, Me.ColName, Me.ColPrice, Me.ColQty, Me.GridColumnDiscount, Me.ColSubtotal, Me.GridColumnNote, Me.GridColumnSize, Me.GridColumnColor})
         Me.GVListPurchase.GridControl = Me.GCListPurchase
         Me.GVListPurchase.HorzScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always
         Me.GVListPurchase.Name = "GVListPurchase"
@@ -664,27 +666,29 @@ Partial Class FormMatPurchaseDet
         Me.ColQty.AppearanceHeader.Options.UseTextOptions = True
         Me.ColQty.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.ColQty.Caption = "Qty"
+        Me.ColQty.DisplayFormat.FormatString = "N2"
+        Me.ColQty.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.ColQty.FieldName = "qty"
         Me.ColQty.Name = "ColQty"
         Me.ColQty.Visible = True
         Me.ColQty.VisibleIndex = 7
         Me.ColQty.Width = 68
         '
-        'ColDiscount
+        'GridColumnDiscount
         '
-        Me.ColDiscount.AppearanceCell.Options.UseTextOptions = True
-        Me.ColDiscount.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.ColDiscount.AppearanceHeader.Options.UseTextOptions = True
-        Me.ColDiscount.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.ColDiscount.Caption = "Discount"
-        Me.ColDiscount.DisplayFormat.FormatString = "N4"
-        Me.ColDiscount.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.ColDiscount.FieldName = "discount"
-        Me.ColDiscount.Name = "ColDiscount"
-        Me.ColDiscount.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "discount", "{0:N2}")})
-        Me.ColDiscount.Visible = True
-        Me.ColDiscount.VisibleIndex = 6
-        Me.ColDiscount.Width = 96
+        Me.GridColumnDiscount.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumnDiscount.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumnDiscount.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumnDiscount.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumnDiscount.Caption = "Discount"
+        Me.GridColumnDiscount.DisplayFormat.FormatString = "N4"
+        Me.GridColumnDiscount.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnDiscount.FieldName = "discount"
+        Me.GridColumnDiscount.Name = "GridColumnDiscount"
+        Me.GridColumnDiscount.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "discount", "{0:N2}")})
+        Me.GridColumnDiscount.Visible = True
+        Me.GridColumnDiscount.VisibleIndex = 6
+        Me.GridColumnDiscount.Width = 96
         '
         'ColSubtotal
         '
@@ -702,13 +706,13 @@ Partial Class FormMatPurchaseDet
         Me.ColSubtotal.VisibleIndex = 8
         Me.ColSubtotal.Width = 165
         '
-        'ColNote
+        'GridColumnNote
         '
-        Me.ColNote.Caption = "Note"
-        Me.ColNote.FieldName = "note"
-        Me.ColNote.Name = "ColNote"
-        Me.ColNote.Visible = True
-        Me.ColNote.VisibleIndex = 9
+        Me.GridColumnNote.Caption = "Note"
+        Me.GridColumnNote.FieldName = "note"
+        Me.GridColumnNote.Name = "GridColumnNote"
+        Me.GridColumnNote.Visible = True
+        Me.GridColumnNote.VisibleIndex = 9
         '
         'GridColumnSize
         '
@@ -722,17 +726,17 @@ Partial Class FormMatPurchaseDet
         Me.GridColumnSize.Visible = True
         Me.GridColumnSize.VisibleIndex = 4
         '
-        'GridColumn5
+        'GridColumnColor
         '
-        Me.GridColumn5.AppearanceCell.Options.UseTextOptions = True
-        Me.GridColumn5.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.GridColumn5.AppearanceHeader.Options.UseTextOptions = True
-        Me.GridColumn5.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.GridColumn5.Caption = "Color"
-        Me.GridColumn5.FieldName = "color"
-        Me.GridColumn5.Name = "GridColumn5"
-        Me.GridColumn5.Visible = True
-        Me.GridColumn5.VisibleIndex = 3
+        Me.GridColumnColor.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumnColor.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumnColor.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumnColor.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumnColor.Caption = "Color"
+        Me.GridColumnColor.FieldName = "color"
+        Me.GridColumnColor.Name = "GridColumnColor"
+        Me.GridColumnColor.Visible = True
+        Me.GridColumnColor.VisibleIndex = 3
         '
         'PanelControl2
         '
@@ -862,7 +866,7 @@ Partial Class FormMatPurchaseDet
         '
         'LEpayment
         '
-        Me.LEpayment.Location = New System.Drawing.Point(448, 40)
+        Me.LEpayment.Location = New System.Drawing.Point(453, 40)
         Me.LEpayment.Name = "LEpayment"
         Me.LEpayment.Properties.Appearance.Options.UseTextOptions = True
         Me.LEpayment.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near
@@ -962,7 +966,7 @@ Partial Class FormMatPurchaseDet
         '
         'LabelControl9
         '
-        Me.LabelControl9.Location = New System.Drawing.Point(373, 43)
+        Me.LabelControl9.Location = New System.Drawing.Point(378, 43)
         Me.LabelControl9.Name = "LabelControl9"
         Me.LabelControl9.Size = New System.Drawing.Size(69, 13)
         Me.LabelControl9.TabIndex = 133
@@ -1008,7 +1012,7 @@ Partial Class FormMatPurchaseDet
         'TETOP
         '
         Me.TETOP.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.TETOP.Location = New System.Drawing.Point(448, 104)
+        Me.TETOP.Location = New System.Drawing.Point(453, 104)
         Me.TETOP.Name = "TETOP"
         Me.TETOP.Properties.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TETOP.Properties.Appearance.Options.UseFont = True
@@ -1021,7 +1025,7 @@ Partial Class FormMatPurchaseDet
         '
         'LabelControl8
         '
-        Me.LabelControl8.Location = New System.Drawing.Point(373, 108)
+        Me.LabelControl8.Location = New System.Drawing.Point(378, 108)
         Me.LabelControl8.Name = "LabelControl8"
         Me.LabelControl8.Size = New System.Drawing.Size(20, 13)
         Me.LabelControl8.TabIndex = 129
@@ -1030,7 +1034,7 @@ Partial Class FormMatPurchaseDet
         'TELeadTime
         '
         Me.TELeadTime.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.TELeadTime.Location = New System.Drawing.Point(448, 71)
+        Me.TELeadTime.Location = New System.Drawing.Point(453, 71)
         Me.TELeadTime.Name = "TELeadTime"
         Me.TELeadTime.Properties.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TELeadTime.Properties.Appearance.Options.UseFont = True
@@ -1043,7 +1047,7 @@ Partial Class FormMatPurchaseDet
         '
         'LabelControl7
         '
-        Me.LabelControl7.Location = New System.Drawing.Point(373, 75)
+        Me.LabelControl7.Location = New System.Drawing.Point(378, 75)
         Me.LabelControl7.Name = "LabelControl7"
         Me.LabelControl7.Size = New System.Drawing.Size(48, 13)
         Me.LabelControl7.TabIndex = 126
@@ -1154,7 +1158,7 @@ Partial Class FormMatPurchaseDet
         'TEPONumber
         '
         Me.TEPONumber.EditValue = ""
-        Me.TEPONumber.Location = New System.Drawing.Point(448, 9)
+        Me.TEPONumber.Location = New System.Drawing.Point(453, 9)
         Me.TEPONumber.Name = "TEPONumber"
         Me.TEPONumber.Properties.EditValueChangedDelay = 1
         Me.TEPONumber.Size = New System.Drawing.Size(148, 20)
@@ -1162,7 +1166,7 @@ Partial Class FormMatPurchaseDet
         '
         'LabelControl3
         '
-        Me.LabelControl3.Location = New System.Drawing.Point(373, 12)
+        Me.LabelControl3.Location = New System.Drawing.Point(378, 12)
         Me.LabelControl3.Name = "LabelControl3"
         Me.LabelControl3.Size = New System.Drawing.Size(54, 13)
         Me.LabelControl3.TabIndex = 86
@@ -1278,9 +1282,9 @@ Partial Class FormMatPurchaseDet
     Friend WithEvents ColName As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ColPrice As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ColQty As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents ColDiscount As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnDiscount As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ColSubtotal As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents ColNote As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnNote As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents PanelControl2 As DevExpress.XtraEditors.PanelControl
     Friend WithEvents BEdit As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BAdd As DevExpress.XtraEditors.SimpleButton
@@ -1327,6 +1331,6 @@ Partial Class FormMatPurchaseDet
     Friend WithEvents BPickPORev As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BtnAttachment As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents GridColumnSize As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnColor As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents BPrePrint As DevExpress.XtraEditors.SimpleButton
 End Class

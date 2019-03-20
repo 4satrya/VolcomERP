@@ -193,6 +193,7 @@ Partial Class FormBOM
         Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn13 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnQty = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn58 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.SplitContainerControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainerControl1.SuspendLayout()
         CType(Me.SplitContainerControl2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1148,7 +1149,7 @@ Partial Class FormBOM
         Me.GVBOMDesign.AppearancePrint.HeaderPanel.Options.UseFont = True
         Me.GVBOMDesign.AppearancePrint.HeaderPanel.Options.UseForeColor = True
         Me.GVBOMDesign.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Office2003
-        Me.GVBOMDesign.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn14, Me.GridColumn18, Me.GridColumn22, Me.GridColumn23, Me.GridColumn24, Me.ColTotal, Me.Cat, Me.ColIDCat, Me.GridColumn25, Me.GridColumnUOM, Me.GridColumn26, Me.GridColumnIsCop})
+        Me.GVBOMDesign.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn58, Me.GridColumn14, Me.GridColumn18, Me.GridColumn22, Me.GridColumn23, Me.GridColumn24, Me.ColTotal, Me.Cat, Me.ColIDCat, Me.GridColumn25, Me.GridColumnUOM, Me.GridColumn26, Me.GridColumnIsCop})
         Me.GVBOMDesign.GridControl = Me.GCBOMDesign
         Me.GVBOMDesign.GroupCount = 1
         Me.GVBOMDesign.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total", Me.ColTotal, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "price", Me.GridColumn24, "Sub Total{0}")})
@@ -1171,7 +1172,7 @@ Partial Class FormBOM
         Me.GridColumn14.Name = "GridColumn14"
         Me.GridColumn14.Visible = True
         Me.GridColumn14.VisibleIndex = 0
-        Me.GridColumn14.Width = 128
+        Me.GridColumn14.Width = 214
         '
         'GridColumn18
         '
@@ -1184,7 +1185,7 @@ Partial Class FormBOM
         Me.GridColumn18.Name = "GridColumn18"
         Me.GridColumn18.Visible = True
         Me.GridColumn18.VisibleIndex = 1
-        Me.GridColumn18.Width = 199
+        Me.GridColumn18.Width = 332
         '
         'GridColumn22
         '
@@ -1196,8 +1197,8 @@ Partial Class FormBOM
         Me.GridColumn22.FieldName = "size"
         Me.GridColumn22.Name = "GridColumn22"
         Me.GridColumn22.Visible = True
-        Me.GridColumn22.VisibleIndex = 3
-        Me.GridColumn22.Width = 52
+        Me.GridColumn22.VisibleIndex = 4
+        Me.GridColumn22.Width = 82
         '
         'GridColumn23
         '
@@ -1211,8 +1212,8 @@ Partial Class FormBOM
         Me.GridColumn23.FieldName = "qty"
         Me.GridColumn23.Name = "GridColumn23"
         Me.GridColumn23.Visible = True
-        Me.GridColumn23.VisibleIndex = 4
-        Me.GridColumn23.Width = 69
+        Me.GridColumn23.VisibleIndex = 5
+        Me.GridColumn23.Width = 110
         '
         'GridColumn24
         '
@@ -1227,8 +1228,8 @@ Partial Class FormBOM
         Me.GridColumn24.Name = "GridColumn24"
         Me.GridColumn24.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "price", "Total")})
         Me.GridColumn24.Visible = True
-        Me.GridColumn24.VisibleIndex = 6
-        Me.GridColumn24.Width = 146
+        Me.GridColumn24.VisibleIndex = 7
+        Me.GridColumn24.Width = 233
         '
         'ColTotal
         '
@@ -1243,8 +1244,8 @@ Partial Class FormBOM
         Me.ColTotal.Name = "ColTotal"
         Me.ColTotal.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total", "{0:N2}")})
         Me.ColTotal.Visible = True
-        Me.ColTotal.VisibleIndex = 7
-        Me.ColTotal.Width = 171
+        Me.ColTotal.VisibleIndex = 8
+        Me.ColTotal.Width = 280
         '
         'Cat
         '
@@ -1285,8 +1286,8 @@ Partial Class FormBOM
         Me.GridColumnUOM.FieldName = "uom"
         Me.GridColumnUOM.Name = "GridColumnUOM"
         Me.GridColumnUOM.Visible = True
-        Me.GridColumnUOM.VisibleIndex = 5
-        Me.GridColumnUOM.Width = 63
+        Me.GridColumnUOM.VisibleIndex = 6
+        Me.GridColumnUOM.Width = 100
         '
         'GridColumn26
         '
@@ -1298,8 +1299,8 @@ Partial Class FormBOM
         Me.GridColumn26.FieldName = "color"
         Me.GridColumn26.Name = "GridColumn26"
         Me.GridColumn26.Visible = True
-        Me.GridColumn26.VisibleIndex = 2
-        Me.GridColumn26.Width = 71
+        Me.GridColumn26.VisibleIndex = 3
+        Me.GridColumn26.Width = 113
         '
         'GridColumnIsCop
         '
@@ -2066,6 +2067,15 @@ Partial Class FormBOM
         Me.GridColumnQty.Name = "GridColumnQty"
         Me.GridColumnQty.Width = 113
         '
+        'GridColumn58
+        '
+        Me.GridColumn58.Caption = "Vendor"
+        Me.GridColumn58.FieldName = "vendor"
+        Me.GridColumn58.Name = "GridColumn58"
+        Me.GridColumn58.Visible = True
+        Me.GridColumn58.VisibleIndex = 2
+        Me.GridColumn58.Width = 165
+        '
         'FormBOM
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2320,4 +2330,5 @@ Partial Class FormBOM
     Friend WithEvents GridColumn56 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn57 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnStatusLineList As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn58 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

@@ -7,6 +7,7 @@ Public Class FormFGLineList
     Public data_band_alloc_plan_par As DataTable = Nothing
     Dim id_role_super_admin As String = "-1"
     Public data_column As New DataTable
+    Dim is_need_us_approval As String = "-1"
 
     'id_pop_up :
     '-1 = line list MD
@@ -45,6 +46,8 @@ Public Class FormFGLineList
         id_role_super_admin = get_setup_field("id_role_super_admin")
 
         'single window
+        BtnActualCost.Visible = False
+        BtnProposePrice.Visible = False
         If id_pop_up = "1" Then
             SLESeason.EditValue = FormProductionPLToWHDet.id_season
             SLESeason.Enabled = False
@@ -105,6 +108,12 @@ Public Class FormFGLineList
         BtnView.Enabled = False
         viewLineList()
         noEdit()
+
+        'fitur blok PD jika blm ad US approval
+        Dim id_ss As String = SLESeason.EditValue.ToString
+        is_need_us_approval = execute_query("SELECT is_need_us_approval FROM tb_season WHERE id_season='" + id_ss + "' ", 0, True, "", "", "", "")
+
+
         BtnView.Text = "View Line List"
         BtnView.Enabled = True
         PanelOpt.Visible = False
@@ -162,6 +171,7 @@ Public Class FormFGLineList
         GCLineList.Visible = False
         GCLineList.DataSource = Nothing
         CheckEditSelAll.Checked = False
+        is_need_us_approval = "-1"
     End Sub
 
     Private Sub SLESeason_EditValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SLESeason.EditValueChanged
@@ -182,6 +192,8 @@ Public Class FormFGLineList
 
 
         'show/hide btn
+        BtnActualCost.Visible = False
+        BtnProposePrice.Visible = False
         If id_pop_up <> "2" Then
             If SLETypeLineList.EditValue.ToString = "1" Then
                 'BtnProposePrice.Visible = False
@@ -353,6 +365,39 @@ Public Class FormFGLineList
                 SMEditDesign.Visible = False
                 SMViewDupe.Visible = False
             End If
+
+            'check changes
+            If BGVLineList.GetFocusedRowCellValue("TOTAL PD CREATED").ToString = "0" Then
+                ProposeChangesToolStripMenuItem.Visible = False
+            Else
+                ProposeChangesToolStripMenuItem.Visible = True
+            End If
+
+            Dim report_mark_type = "-1"
+
+            If id_pop_up = "-1" Then
+                report_mark_type = "177"
+            ElseIf id_pop_up = "3" Then
+                report_mark_type = "178"
+            ElseIf id_pop_up = "5" Then
+                report_mark_type = "176"
+            End If
+
+            Dim query_propose_changes As String = "SELECT(
+	            SELECT CONCAT(e.employee_name, ' | ', DATE_FORMAT(dr.created_at, '%d %M %Y %h:%i %p'))
+	            FROM tb_m_design_rev AS dr 
+	            LEFT JOIN tb_m_employee AS e ON dr.created_by = e.id_employee 
+	            LEFT JOIN tb_lookup_report_status AS rs ON dr.id_report_status = rs.id_report_status 
+	            WHERE dr.id_report_status = '1' AND dr.id_design = '" + BGVLineList.GetFocusedRowCellValue("id_design").ToString + "' AND dr.report_mark_type = '" + report_mark_type + "'
+            ) AS propose_changes"
+            Dim propose_changes As String = execute_query(query_propose_changes, 0, True, "", "", "", "")
+
+            If propose_changes = "" Then
+                ProposeChangesToolStripMenuItem.Text = "Propose Changes"
+            Else
+                ProposeChangesToolStripMenuItem.Text = "View Request Changes (" + propose_changes + ")"
+            End If
+
             Dim view As DevExpress.XtraGrid.Views.Grid.GridView = CType(sender, DevExpress.XtraGrid.Views.Grid.GridView)
             Dim hitInfo As DevExpress.XtraGrid.Views.Grid.ViewInfo.GridHitInfo = view.CalcHitInfo(e.Point)
             If hitInfo.InRow And hitInfo.RowHandle >= 0 Then
@@ -1007,7 +1052,47 @@ Public Class FormFGLineList
                     If dd.Rows.Count > 0 Then
                         FormFGLineListPDExist.dt = dd
                         FormFGLineListPDExist.ShowDialog()
+                        Cursor = Cursors.Default
                         Exit Sub
+                    End If
+
+                    'cek vendor cost
+                    Dim qcost As String = "SELECT d.design_code AS `code`,  d.design_display_name AS `name` 
+                    FROM tb_prod_demand_design pdd
+                    INNER JOIN tb_m_design d ON d.id_design = pdd.id_design
+                    WHERE ISNULL(d.prod_order_cop_pd_vendor) 
+                    AND (" + dsg_cek + ")
+                    GROUP BY d.id_design 
+                    ORDER BY d.design_display_name ASC "
+                    Dim dcost As DataTable = execute_query(qcost, -1, True, "", "", "", "")
+                    If dcost.Rows.Count > 0 Then
+                        Dim err As String = "Cost data is not complete, please make sure or contact Purchasing Dept." + System.Environment.NewLine
+                        For g As Integer = 0 To dcost.Rows.Count - 1
+                            err += dcost.Rows(g)("code").ToString + " - " + dcost.Rows(g)("name").ToString + System.Environment.NewLine
+                        Next
+                        warningCustom(err)
+                        Cursor = Cursors.Default
+                        Exit Sub
+                    End If
+
+                    'cek US approval
+                    If is_need_us_approval = "1" Then
+                        Dim qapp As String = "SELECT d.design_code AS `code`,  d.design_display_name AS `name` 
+                        FROM tb_prod_demand_design pdd
+                        INNER JOIN tb_m_design d ON d.id_design = pdd.id_design
+                        WHERE d.is_design_app_us=2 AND (" + dsg_cek + ")
+                        GROUP BY d.id_design 
+                        ORDER BY d.design_display_name ASC "
+                        Dim dapp As DataTable = execute_query(qapp, -1, True, "", "", "", "")
+                        If dapp.Rows.Count > 0 Then
+                            warningCustom("US approval not found. Click OK to see detail design and make sure with Design Departement.")
+                            FormFGLineListPDExist.dt = dapp
+                            FormFGLineListPDExist.GridColumn1.Visible = False
+                            FormFGLineListPDExist.PanelControl1.Visible = False
+                            FormFGLineListPDExist.ShowDialog()
+                            Cursor = Cursors.Default
+                            Exit Sub
+                        End If
                     End If
 
                     Try
@@ -1126,5 +1211,97 @@ Public Class FormFGLineList
         Cursor = Cursors.WaitCursor
         FormFGLineListAddPrice.ShowDialog()
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnGetRateCurrent_Click(sender As Object, e As EventArgs) Handles BtnGetRateCurrent.Click
+        Cursor = Cursors.WaitCursor
+        If BGVLineList.RowCount > 0 Then
+            Dim jum_tot As Integer = getTotalSelected()
+            Dim id_str As String = ""
+            Dim jum_str As Integer = 0
+            Dim ll_type As String = ""
+            If SLETypeLineList.EditValue.ToString = "1" Then
+                ll_type = "id_prod_demand_design_line"
+            ElseIf SLETypeLineList.EditValue.ToString = "2" Then
+                ll_type = "id_prod_demand_design_line_upd"
+            Else
+                ll_type = "id_prod_demand_design_line_final"
+            End If
+
+            If jum_tot > 0 Then
+                Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure you want to Update Rate Current?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+                If confirm = Windows.Forms.DialogResult.Yes Then
+                    For l As Integer = 0 To ((BGVLineList.RowCount - 1) - GetGroupRowCount(BGVLineList))
+                        If BGVLineList.GetRowCellValue(l, "Select_sct") = "Yes" Then
+                            If jum_str > 0 Then
+                                id_str += "OR "
+                            End If
+                            id_str += "pd_dsg.id_prod_demand_design = " + myCoalesce(BGVLineList.GetRowCellValue(l, ll_type).ToString, "0") + " "
+                            jum_str += 1
+                        End If
+                    Next
+                    Dim query As String = "CALL generate_pd_upd_rate_current('" + id_str + "')"
+                    execute_non_query(query, True, "", "", "", "")
+                    viewLineList()
+                    infoCustom("Rate Current Updated.")
+                    CheckEditSelAll.EditValue = False
+                End If
+            Else
+                stopCustom("Nothing item selected!")
+            End If
+        End If
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub ProposeChangesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProposeChangesToolStripMenuItem.Click
+        Cursor = Cursors.WaitCursor
+        Dim query_c As ClassDesign = New ClassDesign()
+        Dim line_act As String = "-1"
+        Try
+            line_act = query_c.getLineActFocus(SLETypeLineList.EditValue.ToString, BGVLineList)
+        Catch ex As Exception
+        End Try
+        If BGVLineList.RowCount > 0 And line_act = "1" Then
+            Dim id_dsg As String = "-1"
+            Try
+                id_dsg = BGVLineList.GetFocusedRowCellValue("id_design").ToString
+            Catch ex As Exception
+            End Try
+
+            If id_dsg <> "-1" And id_dsg <> "" Then
+                FormMasterDesignSingle.id_pop_up = id_pop_up
+                FormMasterDesignSingle.form_name = Name
+                FormMasterDesignSingle.id_design = id_dsg
+                FormMasterDesignSingle.WindowState = FormWindowState.Maximized
+
+                Dim report_mark_type = "-1"
+
+                If id_pop_up = "-1" Then
+                    report_mark_type = "177"
+                ElseIf id_pop_up = "3" Then
+                    report_mark_type = "178"
+                ElseIf id_pop_up = "5" Then
+                    report_mark_type = "176"
+                End If
+
+                Dim id_design_rev As String = execute_query("SELECT IFNULL((SELECT id_design_rev FROM tb_m_design_rev WHERE id_design = '" + id_dsg + "' AND id_report_status = 1 AND report_mark_type = '" + report_mark_type + "'), -1)", 0, True, "", "", "", "")
+
+                FormMasterDesignSingle.is_propose_changes = True
+                FormMasterDesignSingle.id_propose_changes = id_design_rev
+
+                FormMasterDesignSingle.ShowDialog()
+            Else
+                stopCustom("Design not found.")
+            End If
+        End If
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub ViewHistoryProposeChangesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ViewHistoryProposeChangesToolStripMenuItem.Click
+        FormHistoryProposeChanges.id_design = BGVLineList.GetFocusedRowCellValue("id_design").ToString
+        FormHistoryProposeChanges.id_pop_up = id_pop_up
+        FormHistoryProposeChanges.form_name = Name
+
+        FormHistoryProposeChanges.ShowDialog()
     End Sub
 End Class

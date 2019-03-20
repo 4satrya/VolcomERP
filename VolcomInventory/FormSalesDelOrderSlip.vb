@@ -257,6 +257,9 @@ Public Class FormSalesDelOrderSlip
                 predel += "k.id_pl_sales_order_del=" + GVSalesDelOrder.GetRowCellValue(i, "id_pl_sales_order_del").ToString + " "
             Next
             viewDetail(predel)
+            CheckSelAll.Enabled = False
+            GVSalesDelOrder.OptionsBehavior.Editable = False
+            BtnLoad.Enabled = False
             XTCDel.SelectedTabPageIndex = 1
         End If
         GVSalesDelOrder.ActiveFilterString = ""
@@ -341,6 +344,7 @@ Public Class FormSalesDelOrderSlip
             Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure you want to continue this process?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
             If confirm = Windows.Forms.DialogResult.Yes Then
                 Cursor = Cursors.WaitCursor
+                BtnSave.Enabled = False
                 Dim combine_note As String = MENote.Text.ToString
                 If action = "ins" Then
                     'query main table
@@ -351,6 +355,7 @@ Public Class FormSalesDelOrderSlip
 
 
                     'Detail return
+                    GVSalesDelOrder.ActiveFilterString = "[is_select]='Yes' "
                     Dim jum_ins_j As Integer = 0
                     Dim query_detail As String = ""
                     If GVSalesDelOrder.RowCount > 0 Then
@@ -385,6 +390,8 @@ Public Class FormSalesDelOrderSlip
 
                     FormSalesDelOrder.viewSalesDelOrder()
                     action = "upd"
+                    makeSafeGV(GVSalesDelOrder)
+                    makeSafeGV(GVItemList)
                     actionLoad()
                     exportToBOF(False)
                     infoCustom("Delivery Slip : " + TxtSalesDelOrderNumber.Text + " was created successfully.")

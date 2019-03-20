@@ -10,6 +10,7 @@ Public Class ReportProductionWO
     Public Shared is_pre As String = "-1"
     '
     Public Shared is_main As String = "-1"
+    Public Shared is_po_print As String = "-1"
 
     Dim id_ovh_price As String = "-1"
 
@@ -25,8 +26,8 @@ Public Class ReportProductionWO
         Dim total, sub_tot, gross_tot, vat, discount As Decimal
 
         Try
-            sub_tot = Decimal.Parse(GVListPurchase.Columns("total_cost").SummaryText.ToString)
-            vat = (Decimal.Parse(LVat.Text) / 100) * Decimal.Parse(GVListPurchase.Columns("total_cost").SummaryText.ToString)
+            sub_tot = Decimal.Parse(GVListPurchase.Columns("id_prod_order_det").SummaryText.ToString)
+            vat = (Decimal.Parse(LVat.Text) / 100) * Decimal.Parse(GVListPurchase.Columns("id_prod_order_det").SummaryText.ToString)
         Catch ex As Exception
         End Try
 
@@ -55,32 +56,61 @@ Public Class ReportProductionWO
     End Sub
 
     Sub view_top()
-        Dim query = "SELECT a.id_report_status,h.report_status,a.id_prod_order,a.id_prod_order_wo,a.id_ovh_price,a.id_payment, "
-        query += "g.payment,a.id_currency,a.prod_order_wo_kurs,a.prod_order_wo_note, "
-        query += "d.comp_name AS comp_name_to, "
-        query += "f.comp_name AS comp_name_ship_to,a.id_comp_contact_ship_to, "
-        query += "a.prod_order_wo_number,a.id_ovh_price,j.overhead, "
-        query += "DATE_FORMAT(a.prod_order_wo_date,'%Y-%m-%d') as prod_order_wo_datex,a.prod_order_wo_lead_time,a.prod_order_wo_top,a.prod_order_wo_vat "
-        query += "FROM tb_prod_order_wo a INNER JOIN tb_m_ovh_price b ON a.id_ovh_price=b.id_ovh_price "
-        query += "INNER JOIN tb_m_comp_contact c ON b.id_comp_contact = c.id_comp_contact "
-        query += "INNER JOIN tb_m_comp d ON c.id_comp = d.id_comp "
-        query += "INNER JOIN tb_m_comp_contact e ON a.id_comp_contact_ship_to = e.id_comp_contact "
-        query += "INNER JOIN tb_m_comp f ON e.id_comp = f.id_comp "
-        query += "INNER JOIN tb_lookup_payment g ON a.id_payment = g.id_payment "
-        query += "INNER JOIN tb_lookup_report_status h ON h.id_report_status = a.id_report_status "
-        query += "INNER JOIN tb_m_ovh j ON b.id_ovh = j.id_ovh "
-        query += "WHERE a.id_prod_order_wo='" & id_prod_wo & "'"
+        Dim query = "SELECT dsg.design_code_import,po.`id_po_type`,pd.prod_demand_number,a.id_report_status,h.report_status,a.id_prod_order,a.id_prod_order_wo,a.id_ovh_price,a.id_payment, 
+g.payment,a.id_currency,a.prod_order_wo_kurs,a.prod_order_wo_note, b.id_comp_contact, (SELECT id_own_company_contact FROM tb_opt) AS id_comp_contact_ship_to,
+a.prod_order_wo_number,a.id_ovh_price,j.overhead,
+DATE_FORMAT(a.prod_order_wo_date,'%Y-%m-%d') AS prod_order_wo_datex,a.prod_order_wo_lead_time,a.prod_order_wo_top,a.prod_order_wo_vat 
+,dsg.design_code_import
+,po_type.`po_type`,po.prod_order_number,po.prod_order_note 
+FROM tb_prod_order_wo a INNER JOIN tb_m_ovh_price b ON a.id_ovh_price=b.id_ovh_price 
+INNER JOIN tb_m_comp_contact c ON b.id_comp_contact = c.id_comp_contact 
+INNER JOIN tb_m_comp d ON c.id_comp = d.id_comp 
+INNER JOIN tb_m_comp_contact e ON a.id_comp_contact_ship_to = e.id_comp_contact 
+INNER JOIN tb_m_comp f ON e.id_comp = f.id_comp 
+INNER JOIN tb_lookup_payment g ON a.id_payment = g.id_payment 
+INNER JOIN tb_lookup_report_status h ON h.id_report_status = a.id_report_status 
+INNER JOIN tb_m_ovh j ON b.id_ovh = j.id_ovh 
+INNER JOIN tb_prod_order po ON po.`id_prod_order`=a.`id_prod_order`
+INNER JOIN tb_prod_demand_design pdd ON pdd.`id_prod_demand_design`=po.`id_prod_demand_design`
+INNER JOIN tb_m_design dsg ON dsg.id_design=pdd.id_design
+INNER JOIN tb_prod_demand pd ON pd.`id_prod_demand`=pdd.`id_prod_demand`
+INNER JOIN `tb_lookup_po_type` po_type ON po_type.`id_po_type`=po.`id_po_type`
+WHERE a.id_prod_order_wo='" & id_prod_wo & "'"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
         load_po(id_po)
 
         If is_main = "1" Then
             LTitle.Text = "F.G. PURCHASE ORDER"
+            LWONumber.Text = data.Rows(0)("prod_order_number").ToString
+            LNote.Text = data.Rows(0)("prod_order_note").ToString
+            If data.Rows(0)("id_po_type") = "2" Then 'international
+                LUSCodeTitle.Visible = True
+                LUSCodeDot.Visible = True
+                LUSCode.Visible = True
+                LUSCode.Text = data.Rows(0)("design_code_import").ToString
+            Else
+                LUSCodeTitle.Visible = False
+                LUSCodeDot.Visible = False
+                LUSCode.Visible = False
+            End If
         Else
             LTitle.Text = "WORK ORDER"
+            LWONumber.Text = data.Rows(0)("prod_order_wo_number").ToString
+            LNote.Text = data.Rows(0)("prod_order_wo_note").ToString
+            '
+            If data.Rows(0)("id_po_type") = "2" Then 'international
+                LUSCodeTitle.Visible = True
+                LUSCodeDot.Visible = True
+                LUSCode.Visible = True
+                LUSCode.Text = data.Rows(0)("design_code_import").ToString
+            Else
+                LUSCodeTitle.Visible = False
+                LUSCodeDot.Visible = False
+                LUSCode.Visible = False
+            End If
         End If
 
-        LWONumber.Text = data.Rows(0)("prod_order_wo_number").ToString
         DisplayName = "Production Work Order " & data.Rows(0)("prod_order_wo_number").ToString
 
         Dim kurs As Decimal = data.Rows(0)("prod_order_wo_kurs")
@@ -101,6 +131,7 @@ Public Class ReportProductionWO
         LVat.Text = data.Rows(0)("prod_order_wo_vat").ToString
         LPayment.Text = get_payment(data.Rows(0)("id_payment").ToString)
         id_ovh_price = data.Rows(0)("id_ovh_price").ToString
+        LPDNo.Text = data.Rows(0)("prod_demand_number").ToString
 
         Dim id_comp_ship_to As String = "-1"
 
@@ -108,12 +139,11 @@ Public Class ReportProductionWO
         LShipToName.Text = get_company_x(get_id_company(id_comp_ship_to), "1")
         LShipToAddress.Text = get_company_x(get_id_company(id_comp_ship_to), "3")
 
-        LNote.Text = data.Rows(0)("prod_order_wo_note").ToString
-        '
-        query = "SELECT a.id_currency, a.ovh_price, b.overhead as name, b.overhead_code as code,a.id_comp_contact from tb_m_ovh_price a INNER JOIN tb_m_ovh b WHERE a.id_ovh_price='" & id_ovh_price & "'"
-        data = execute_query(query, -1, True, "", "", "", "")
 
-        LWOType.Text = data.Rows(0)("name").ToString
+        LWOType.Text = data.Rows(0)("overhead").ToString
+
+        LPOType.Text = data.Rows(0)("po_type").ToString
+
         LToName.Text = get_company_x(get_id_company(data.Rows(0)("id_comp_contact").ToString), "1")
         LToAddress.Text = get_company_x(get_id_company(data.Rows(0)("id_comp_contact").ToString), "3")
         LToAttn.Text = get_company_contact_x(data.Rows(0)("id_comp_contact").ToString, "1")
@@ -137,6 +167,13 @@ Public Class ReportProductionWO
     End Sub
 
     Private Sub ReportMatWO_BeforePrint(ByVal sender As System.Object, ByVal e As System.Drawing.Printing.PrintEventArgs) Handles MyBase.BeforePrint
+        If is_po_print = "1" Then
+            Dim query As String = "SELECT id_prod_order_wo FROM tb_prod_order_wo WHERE id_prod_order='" & id_po & "' AND is_main_vendor=1 AND id_report_status!=5"
+            Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+            id_prod_wo = data.Rows(0)("id_prod_order_wo")
+            is_main = "1"
+        End If
+
         view_wo()
         view_top()
 

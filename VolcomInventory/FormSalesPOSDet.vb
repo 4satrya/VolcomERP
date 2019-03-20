@@ -1,5 +1,6 @@
 ﻿Imports System.Data.OleDb
 Imports System.IO
+Imports Microsoft.Office.Interop
 
 Public Class FormSalesPOSDet
     Public action As String
@@ -32,6 +33,11 @@ Public Class FormSalesPOSDet
     Public id_sales_pos_ref As String = "-1"
     Public ol_store_order_cn As String = ""
     Dim vat_def As Decimal = 0
+    Public bof_column As String = get_setup_field("bof_column")
+    Public bof_xls_so As String = get_setup_field("bof_xls_inv")
+    Public is_block_no_stock As String = get_setup_field("is_block_no_stock")
+    Public is_use_unique_code As String = "2"
+
 
     Private Sub FormSalesPOSDet_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         actionLoad()
@@ -126,7 +132,7 @@ Public Class FormSalesPOSDet
 
             'query view based on edit id's
             Dim query As String = ""
-            query += "SELECT pld.pl_sales_order_del_number,a.id_pl_sales_order_del,a.id_so_type, a.id_report_status, a.id_sales_pos, a.sales_pos_date, a.sales_pos_note, "
+            query += "SELECT a.is_use_unique_code,pld.pl_sales_order_del_number,a.id_pl_sales_order_del,a.id_so_type, a.id_report_status, a.id_sales_pos, a.sales_pos_date, a.sales_pos_note, "
             query += "a.sales_pos_number, (c.comp_name) AS store_name_from,c.npwp, "
             query += "a.id_store_contact_from, (c.comp_number) AS store_number_from, (c.address_primary) AS store_address_from,
             IFNULL(a.id_comp_contact_bill,'-1') AS `id_comp_contact_bill`,(cb.comp_number) AS `comp_number_bill`, (cb.comp_name) AS `comp_name_bill`,
@@ -188,6 +194,9 @@ Public Class FormSalesPOSDet
             TxtPotPenjualan.EditValue = data.Rows(0)("sales_pos_potongan")
             SPVat.EditValue = data.Rows(0)("sales_pos_vat")
 
+            'update feb 2019-deteksi laporarn jual unuik
+            is_use_unique_code = data.Rows(0)("is_use_unique_code").ToString
+
             'updated 04 ocktobertr 2017
             id_memo_type = data.Rows(0)("id_memo_type").ToString
             If id_memo_type = "1" Then 'sales invoice
@@ -220,6 +229,7 @@ Public Class FormSalesPOSDet
 
             ''detail2
             viewDetail()
+            viewDetailCode()
             'viewStockStore()
             check_but()
             calculate()
@@ -255,6 +265,19 @@ Public Class FormSalesPOSDet
             Next
         End If
         GCItemList.DataSource = data
+    End Sub
+
+    Sub viewDetailCode()
+        Dim query As String = "SELECT c.id_sales_pos_det_counting, c.id_sales_pos, c.id_product, c.id_pl_prod_order_rec_det_unique, c.counting_code, 
+        c.full_code, prod.product_full_code AS `code`, prod.product_display_name AS `name`, cd.code_detail_name AS `size`, c.id_design_price, c.design_price
+        FROM tb_sales_pos_det_counting c
+        INNER JOIN tb_m_product prod ON prod.id_product = c.id_product
+        INNER JOIN tb_m_product_code pc ON pc.id_product = prod.id_product
+        INNER JOIN tb_m_code_detail cd ON cd.id_code_detail = pc.id_code_detail
+        WHERE c.id_sales_pos=" + id_sales_pos + " "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCCode.DataSource = data
+        GVCode.BestFitColumns()
     End Sub
 
     Sub viewStockStore()
@@ -308,6 +331,31 @@ Public Class FormSalesPOSDet
             cond_bill_to = False
         End If
 
+        'cek no stok
+        makeSafeGV(GVItemList)
+        Dim cond_no_stock As Boolean = False
+        GVItemList.ActiveFilterString = "[note]<>'OK'"
+        If GVItemList.RowCount > 0 And is_block_no_stock = "1" Then
+            cond_no_stock = True
+        End If
+        GVItemList.ActiveFilterString = ""
+        makeSafeGV(GVItemList)
+
+        'isi harga utk kode unik 
+        If is_use_unique_code = "1" Then
+            makeSafeGV(GVCode)
+            For u As Integer = 0 To GVCode.RowCount - 1
+                Dim id_product_cek As String = GVCode.GetRowCellValue(u, "id_product").ToString
+                makeSafeGV(GVItemList)
+                GVItemList.ActiveFilterString = "[id_product]='" + id_product_cek + "' "
+                GVCode.SetRowCellValue(u, "id_design_price", GVItemList.GetFocusedRowCellValue("id_design_price_retail").ToString)
+                GVCode.SetRowCellValue(u, "design_price", GVItemList.GetFocusedRowCellValue("design_price_retail"))
+            Next
+            makeSafeGV(GVCode)
+            makeSafeGV(GVItemList)
+        End If
+
+
         ValidateChildren()
         If Not formIsValidInPanel(EPForm, PanelControlTopLeft) Or Not formIsValidInPanel(EPForm, PanelControlTopMiddle) Then
             errorInput()
@@ -320,6 +368,8 @@ Public Class FormSalesPOSDet
             'stopCustom(err_str.ToString)
         ElseIf Not cond_bill_to Then
             stopCustom("Bill to can't blank")
+        ElseIf cond_no_stock Then
+            stopCustom("Some items have problems. Please see note and check these items.")
         Else
             Dim sales_pos_note As String = addSlashes(MENote.Text)
             Dim id_report_status As String = LEReportStatus.EditValue
@@ -380,8 +430,8 @@ Public Class FormSalesPOSDet
                     Cursor = Cursors.WaitCursor
 
                     'Main tbale
-                    Dim query As String = "INSERT INTO tb_sales_pos(id_store_contact_from,id_comp_contact_bill , sales_pos_number, sales_pos_date, sales_pos_note, id_report_status, id_so_type, sales_pos_total, sales_pos_due_date, sales_pos_start_period, sales_pos_end_period, sales_pos_discount, sales_pos_potongan, sales_pos_vat, id_pl_sales_order_del,id_memo_type,id_inv_type, id_sales_pos_ref) "
-                    query += "VALUES('" + id_store_contact_from + "'," + id_comp_contact_bill + ", '" + sales_pos_number + "', NOW(), '" + sales_pos_note + "', '" + id_report_status + "', '" + id_so_type + "', '" + decimalSQL(total_amount.ToString) + "', '" + sales_pos_due_date + "', '" + sales_pos_start_period + "', '" + sales_pos_end_period + "', '" + sales_pos_discount + "', '" + sales_pos_potongan + "', '" + sales_pos_vat + "'," + do_q + "," + id_memo_type + "," + id_inv_type + "," + id_sales_pos_ref + "); SELECT LAST_INSERT_ID(); "
+                    Dim query As String = "INSERT INTO tb_sales_pos(id_store_contact_from,id_comp_contact_bill , sales_pos_number, sales_pos_date, sales_pos_note, id_report_status, id_so_type, sales_pos_total, sales_pos_due_date, sales_pos_start_period, sales_pos_end_period, sales_pos_discount, sales_pos_potongan, sales_pos_vat, id_pl_sales_order_del,id_memo_type,id_inv_type, id_sales_pos_ref, report_mark_type, is_use_unique_code) "
+                    query += "VALUES('" + id_store_contact_from + "'," + id_comp_contact_bill + ", '" + sales_pos_number + "', NOW(), '" + sales_pos_note + "', '" + id_report_status + "', '" + id_so_type + "', '" + decimalSQL(total_amount.ToString) + "', '" + sales_pos_due_date + "', '" + sales_pos_start_period + "', '" + sales_pos_end_period + "', '" + sales_pos_discount + "', '" + sales_pos_potongan + "', '" + sales_pos_vat + "'," + do_q + "," + id_memo_type + "," + id_inv_type + "," + id_sales_pos_ref + ", '" + report_mark_type + "', '" + is_use_unique_code + "'); SELECT LAST_INSERT_ID(); "
                     id_sales_pos = execute_query(query, 0, True, "", "", "", "")
 
 
@@ -454,6 +504,51 @@ Public Class FormSalesPOSDet
                     SET main.sales_pos_total_qty = src.total "
                     execute_non_query(queryt, True, "", "", "", "")
 
+                    'unique code
+                    If is_use_unique_code = "1" Then
+                        Dim id_type_unik As String = ""
+                        Dim qty_unik As String = ""
+                        Dim col_unik As String = ""
+
+                        If report_mark_type = "48" Or report_mark_type = "54" Or report_mark_type = "116" Or report_mark_type = "117" Then
+                            id_type_unik = "2"
+                            qty_unik = "-1"
+                            col_unik = "id_sales_pos_det_counting"
+                        ElseIf report_mark_type = "66" Or report_mark_type = "67" Or report_mark_type = "118" Then
+                            id_type_unik = "3"
+                            qty_unik = "1"
+                            col_unik = "id_sales_pos_det_counting_cn"
+                        End If
+
+
+                        'detail pos
+                        makeSafeGV(GVCode)
+                        Dim query_code As String = "INSERT INTO tb_sales_pos_det_counting(id_sales_pos, id_product, id_pl_prod_order_rec_det_unique, counting_code, full_code, id_design_price, design_price) VALUES "
+                        For s As Integer = 0 To GVCode.RowCount - 1
+                            Dim id_product As String = GVCode.GetRowCellValue(s, "id_product").ToString
+                            Dim id_pl_prod_order_rec_det_unique As String = GVCode.GetRowCellValue(s, "id_pl_prod_order_rec_det_unique").ToString
+                            Dim counting_code As String = GVCode.GetRowCellValue(s, "counting_code").ToString
+                            Dim full_code As String = GVCode.GetRowCellValue(s, "full_code").ToString
+                            Dim id_design_price As String = GVCode.GetRowCellValue(s, "id_design_price").ToString
+                            Dim design_price As String = decimalSQL(GVCode.GetRowCellValue(s, "design_price").ToString)
+
+                            If s > 0 Then
+                                query_code += ", "
+                            End If
+
+                            query_code += "('" + id_sales_pos + "', '" + id_product + "', '" + id_pl_prod_order_rec_det_unique + "', '" + counting_code + "', '" + full_code + "', '" + id_design_price + "', '" + design_price + "') "
+                        Next
+                        If GVCode.RowCount > 0 Then
+                            execute_non_query(query_code, True, "", "", "", "")
+                        End If
+
+                        'insert di tb unique hanya invoice
+                        If report_mark_type = "48" Or report_mark_type = "54" Or report_mark_type = "116" Or report_mark_type = "117" Then
+                            Dim un As New ClassSalesInv()
+                            un.insertUnique(id_sales_pos, report_mark_type)
+                        End If
+                    End If
+
                     If id_menu = "1" Or id_menu = "4" Then
                         'reserved stock
                         Dim rsv_stock As ClassSalesInv = New ClassSalesInv()
@@ -466,10 +561,14 @@ Public Class FormSalesPOSDet
                         acc.generateJournalSalesDraft(id_sales_pos, report_mark_type)
                     End If
 
+                    'auto submit
+                    submit_who_prepared(report_mark_type, id_sales_pos, id_user)
+
                     FormSalesPOS.viewSalesPOS()
                     FormSalesPOS.GVSalesPOS.FocusedRowHandle = find_row(FormSalesPOS.GVSalesPOS, "id_sales_pos", id_sales_pos)
                     action = "upd"
                     actionLoad()
+                    exportToBOF(False)
 
                     If id_menu = "1" Then
                         infoCustom("Invoice " + TxtVirtualPosNumber.Text + " created succesfully")
@@ -601,6 +700,10 @@ Public Class FormSalesPOSDet
         TxtNameBillTo.Enabled = False
         BtnBrowseBillTo.Enabled = False
 
+        'upddate februari 2019
+        BtnNoStock.Visible = False
+        GridColumnIsSelect.Visible = False
+
         If check_attach_report_status(id_report_status, report_mark_type, id_sales_pos) Then
             BtnAttachment.Enabled = True
         Else
@@ -611,6 +714,12 @@ Public Class FormSalesPOSDet
             BtnPrint.Enabled = True
         Else
             BtnPrint.Enabled = False
+        End If
+
+        If id_report_status <> "5" And bof_column = "1" Then
+            BtnXlsBOF.Visible = True
+        Else
+            BtnXlsBOF.Visible = False
         End If
         TxtVirtualPosNumber.Focus()
     End Sub
@@ -724,14 +833,20 @@ Public Class FormSalesPOSDet
     End Sub
 
     Private Sub BtnDel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnDel.Click
-        Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure want to delete this item?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
-        If confirm = Windows.Forms.DialogResult.Yes Then
-            Cursor = Cursors.WaitCursor
-            GVItemList.DeleteRow(GVItemList.FocusedRowHandle)
-            GCItemList.RefreshDataSource()
-            GVItemList.RefreshData()
-            calculate()
-            Cursor = Cursors.Default
+        del()
+    End Sub
+
+    Sub del()
+        If GVItemList.RowCount > 0 And GVItemList.FocusedRowHandle >= 0 Then
+            Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure want to delete this item?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+            If confirm = Windows.Forms.DialogResult.Yes Then
+                Cursor = Cursors.WaitCursor
+                GVItemList.DeleteRow(GVItemList.FocusedRowHandle)
+                GCItemList.RefreshDataSource()
+                GVItemList.RefreshData()
+                calculate()
+                Cursor = Cursors.Default
+            End If
         End If
     End Sub
 
@@ -820,7 +935,12 @@ Public Class FormSalesPOSDet
             stopCustom("Please fill start & end period !")
         Else
             viewStockStore()
-            load_excel_data()
+            If is_use_unique_code = "2" Then
+                load_excel_data()
+            Else
+                load_excel_data_unique()
+            End If
+
             calculate()
             'join
 
@@ -844,15 +964,20 @@ Public Class FormSalesPOSDet
         oledbconn.ConnectionString = strConn
         Dim MyCommand As OleDbDataAdapter
         Try
-            MyCommand = New OleDbDataAdapter("select [F2] as code,SUM([F3]) as qty,[F4] AS price from [" & bof_xls_ws & "] WHERE NOT [F2] IS NULL AND NOT [F3]  IS NULL GROUP BY [F2],[F4]", oledbconn)
+            MyCommand = New OleDbDataAdapter("select [F2] as code,SUM([F3]) as qty,[F4] AS price from [" & bof_xls_ws & "] WHERE [F3]>0 AND NOT [F2] IS NULL AND NOT [F3]  IS NULL GROUP BY [F2],[F4]", oledbconn)
             MyCommand.Fill(data_temp)
             MyCommand.Dispose()
         Catch ex As Exception
-            MyCommand = New OleDbDataAdapter("select [F2] as code,SUM([F3]) as qty,'' AS price from [" & bof_xls_ws & "] WHERE NOT [F2] IS NULL AND NOT [F3]  IS NULL GROUP BY [F2]", oledbconn)
+            MyCommand = New OleDbDataAdapter("select [F2] as code,SUM([F3]) as qty,'' AS price from [" & bof_xls_ws & "] WHERE [F3]>0 AND NOT [F2] IS NULL AND NOT [F3]  IS NULL GROUP BY [F2]", oledbconn)
             MyCommand.Fill(data_temp)
             MyCommand.Dispose()
         End Try
 
+        checkSOH(data_temp)
+    End Sub
+
+    Sub checkSOH(ByVal data_temp As DataTable)
+        Cursor = Cursors.WaitCursor
         'Try
         'get price master
         Dim price_per_date As String = DateTime.Parse(DEEnd.EditValue.ToString).ToString("yyyy-MM-dd")
@@ -884,6 +1009,7 @@ Public Class FormSalesPOSDet
                             .design_price_retail = If(table1("price").ToString = "", If(rp Is Nothing, 0, rp("design_price")), table1("price")),
                             .id_design = If(rp Is Nothing, "0", rp("id_design").ToString),
                             .id_product = If(rp Is Nothing, "0", rp("id_product").ToString),
+                            .is_select = "No",
                             .note = If(rp Is Nothing, "Product not found", If(table1("qty") > If(rs Is Nothing, 0, rs("qty_all_product")), "+" + (table1("qty") - If(rs Is Nothing, 0, rs("qty_all_product"))).ToString, "OK")),
                             .id_sales_pos_det = "0"
                         }
@@ -891,6 +1017,7 @@ Public Class FormSalesPOSDet
             GCItemList.DataSource = Nothing
             GCItemList.DataSource = query.ToList()
             GCItemList.RefreshDataSource()
+            GVItemList.RefreshData()
         ElseIf id_menu = "2" Or id_menu = "3" Then
             Dim query = From table1 In tb1
                         Join rp In tb3
@@ -908,6 +1035,7 @@ Public Class FormSalesPOSDet
                             .design_price_retail = If(table1("price").ToString = "", If(rp Is Nothing, 0, rp("design_price")), table1("price")),
                             .id_design = If(rp Is Nothing, "0", rp("id_design").ToString),
                             .id_product = If(rp Is Nothing, "0", rp("id_product").ToString),
+                            .is_select = "No",
                             .note = If(rp Is Nothing, "Product not found", "OK"),
                             .id_sales_pos_det = "0"
                         }
@@ -922,9 +1050,39 @@ Public Class FormSalesPOSDet
         'stopCustom("Input must be in accordance with the format specified !")
         'Exit Sub
         'End Try
+        Cursor = Cursors.Default
     End Sub
 
+    Public data_temp_unique As New DataTable
+    Sub load_excel_data_unique()
+        Dim oledbconn As New OleDbConnection
+        Dim strConn As String
+        data_temp_unique.Clear()
+        Dim bof_xls_path As String = get_setup_field("bof_xls_bill_path")
+        Dim bof_xls_temp_path As String = get_setup_field("bof_xls_bill_temp_path")
+        Dim bof_xls_ws As String = get_setup_field("bof_xls_bill_path_worksheet")
+
+        File.Copy(bof_xls_path, bof_xls_temp_path, True)
+        strConn = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source='" & bof_xls_temp_path & "';Extended Properties=""Excel 12.0 XML; IMEX=1;HDR=NO;TypeGuessRows=0;ImportMixedTypes=Text;"""
+        oledbconn.ConnectionString = strConn
+        Dim MyCommand As OleDbDataAdapter
+        Try
+            MyCommand = New OleDbDataAdapter("select [F2] as code,SUM([F3]) as qty,[F4] AS price from [" & bof_xls_ws & "] WHERE [F3]>0 AND NOT [F2] IS NULL AND NOT [F3]  IS NULL GROUP BY [F2],[F4]", oledbconn)
+            MyCommand.Fill(data_temp_unique)
+            MyCommand.Dispose()
+        Catch ex As Exception
+            MyCommand = New OleDbDataAdapter("select [F2] as code,SUM([F3]) as qty,'' AS price from [" & bof_xls_ws & "] WHERE [F3]>0 AND NOT [F2] IS NULL AND NOT [F3]  IS NULL GROUP BY [F2]", oledbconn)
+            MyCommand.Fill(data_temp_unique)
+            MyCommand.Dispose()
+        End Try
+
+        'show form cek koleksi code
+        FormSalesPOSDetCheckCollectionCode.ShowDialog()
+    End Sub
+
+    Public is_continue_load As Boolean = True
     Sub load_excel_ol_store()
+        is_continue_load = True
         Dim oledbconn As New OleDbConnection
         Dim strConn As String
         Dim data_temp As New DataTable
@@ -942,6 +1100,59 @@ Public Class FormSalesPOSDet
 
         MyCommand.Fill(data_temp)
         MyCommand.Dispose()
+
+        Cursor = Cursors.WaitCursor
+        'check order - temp table
+        Dim connection_string As String = String.Format("Data Source={0};User Id={1};Password={2};Database={3};Convert Zero Datetime=True", app_host, app_username, app_password, app_database)
+        Dim connection As New MySql.Data.MySqlClient.MySqlConnection(connection_string)
+        connection.Open()
+        Dim command As MySql.Data.MySqlClient.MySqlCommand = connection.CreateCommand()
+        Dim qry As String = "DROP TABLE IF EXISTS tb_ol_order_temp; CREATE TEMPORARY TABLE IF NOT EXISTS tb_ol_order_temp AS ( SELECT * FROM ("
+        Dim qry_det As String = ""
+        For d As Integer = 0 To data_temp.Rows.Count - 1
+            If qry_det <> "" Then
+                qry_det += "UNION ALL "
+            End If
+            qry_det += "SELECT '" + data_temp.Rows(d)("ol_store_order").ToString + "' AS `order` "
+        Next
+        qry += qry_det + ") a ) ; ALTER TABLE tb_ol_order_temp CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci; "
+        'Console.WriteLine(qry)
+        command.CommandText = qry
+        command.ExecuteNonQuery()
+        command.Dispose()
+        'check order
+        Dim data As New DataTable
+        Dim query_check_order As String = "SELECT o.`order`, so.id_sales_order,so.sales_order_number, so.sales_order_ol_shop_number, del.id_pl_sales_order_del,(del.pl_sales_order_del_number) AS `del_number`, sal.sales_pos_number,
+        IFNULL(deld.pl_sales_order_del_det_qty,0) AS `qty`, p.product_full_code AS `code`, p.product_display_name AS `name`, cd.code_detail_name AS `size`,
+        CONCAT(IF(ISNULL(so.id_sales_order),'ERP order not found; ',''), IF(ISNULL(del.id_pl_sales_order_del),'Delivery not found;',''), IF(!ISNULL(sal.id_sales_pos),'Invoice already created;','')) AS `status`
+        FROM tb_ol_order_temp o
+        LEFT JOIN tb_sales_order so ON so.sales_order_ol_shop_number = o.`order` AND so.id_store_contact_to=" + id_store_contact_from + " AND so.id_report_status=6
+        LEFT JOIN tb_pl_sales_order_del del ON del.id_sales_order = so.id_sales_order AND del.id_report_status=6
+        LEFT JOIN tb_pl_sales_order_del_det deld ON deld.id_pl_sales_order_del = del.id_pl_sales_order_del
+        LEFT JOIN tb_sales_pos_det sald ON sald.id_pl_sales_order_del_det = deld.id_pl_sales_order_del_det
+        LEFT JOIN tb_sales_pos sal ON sal.id_sales_pos = sald.id_sales_pos AND sal.id_report_status!=5
+        LEFT JOIN tb_m_product p ON p.id_product = deld.id_product
+        LEFT JOIN tb_m_product_code pc ON pc.id_product = p.id_product
+        LEFT JOIN tb_m_code_detail cd ON cd.id_code_detail = pc.id_code_detail
+        WHERE ISNULL(so.id_sales_order) OR ISNULL(del.id_pl_sales_order_del) OR !ISNULL(sal.id_sales_pos) "
+        Dim adapter As New MySql.Data.MySqlClient.MySqlDataAdapter(query_check_order, connection)
+        adapter.SelectCommand.CommandTimeout = 300
+        adapter.Fill(data)
+        adapter.Dispose()
+        connection.Close()
+        connection.Dispose()
+        'result check order
+        If data.Rows.Count > 0 Then
+            FormSalesPOSCheckXLS.dt = data
+            FormSalesPOSCheckXLS.ShowDialog()
+        End If
+        data.Dispose()
+        Cursor = Cursors.Default
+        'continue or not
+        If Not is_continue_load Then
+            Exit Sub
+        End If
+
 
         'get del
         Dim query_del As String = "SELECT dd.id_pl_sales_order_del_det, d.pl_sales_order_del_number AS `del`, so.sales_order_ol_shop_number AS `ol_store_order`,p.id_product, p.id_design, p.product_full_code AS `code`, dsg.design_display_name AS `name`, cd.code_detail_name AS `size`,
@@ -988,6 +1199,139 @@ Public Class FormSalesPOSDet
         End Try
     End Sub
 
+
+    Public is_continue_load_det As Boolean = True
+    Sub load_excel_ol_store_det()
+        is_continue_load_det = True
+        Dim oledbconn As New OleDbConnection
+        Dim strConn As String
+        Dim data_temp As New DataTable
+        Dim bof_xls_path As String = get_setup_field("bof_xls_bill_order_path")
+        Dim bof_xls_temp_path As String = get_setup_field("bof_xls_bill_order_temp_path")
+        Dim bof_xls_ws As String = get_setup_field("bof_xls_bill_order_path_worksheet")
+
+        File.Copy(bof_xls_path, bof_xls_temp_path, True)
+
+        strConn = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source='" & bof_xls_temp_path & "';Extended Properties=""Excel 12.0 XML; IMEX=1;HDR=NO;TypeGuessRows=0;ImportMixedTypes=Text;"""
+        oledbconn.ConnectionString = strConn
+        Dim MyCommand As OleDbDataAdapter
+        MyCommand = New OleDbDataAdapter("select [F1] as ol_store_order ,[F2] AS item_id, [F3] AS ol_store_id from [" & bof_xls_ws & "] WHERE NOT [F1] IS NULL GROUP BY [F1],[F2],[F3]", oledbconn)
+
+        MyCommand.Fill(data_temp)
+        MyCommand.Dispose()
+
+        Cursor = Cursors.WaitCursor
+        'check order - temp table
+        Dim connection_string As String = String.Format("Data Source={0};User Id={1};Password={2};Database={3};Convert Zero Datetime=True", app_host, app_username, app_password, app_database)
+        Dim connection As New MySql.Data.MySqlClient.MySqlConnection(connection_string)
+        connection.Open()
+        Dim command As MySql.Data.MySqlClient.MySqlCommand = connection.CreateCommand()
+        Dim qry As String = "DROP TABLE IF EXISTS tb_ol_order_temp; CREATE TEMPORARY TABLE IF NOT EXISTS tb_ol_order_temp AS ( SELECT * FROM ("
+        Dim qry_det As String = ""
+        For d As Integer = 0 To data_temp.Rows.Count - 1
+            If qry_det <> "" Then
+                qry_det += "UNION ALL "
+            End If
+            qry_det += "SELECT '" + data_temp.Rows(d)("ol_store_order").ToString + "' AS `order` ,'" + data_temp.Rows(d)("item_id").ToString + "' AS `item_id`,  '" + data_temp.Rows(d)("ol_store_id").ToString + "' AS `ol_store_id` "
+        Next
+        qry += qry_det + ") a ) ; ALTER TABLE tb_ol_order_temp CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci; "
+        'Console.WriteLine(qry)
+        command.CommandText = qry
+        command.ExecuteNonQuery()
+        command.Dispose()
+        'check order
+        Dim data As New DataTable
+        Dim query_check_order As String = "SELECT o.`order`, o.item_id, o.ol_store_id, so.id_sales_order,so.sales_order_number, so.sales_order_ol_shop_number, del.id_pl_sales_order_del,(del.pl_sales_order_del_number) AS `del_number`, sal.sales_pos_number, ro.sales_return_order_number,
+        IFNULL(deld.pl_sales_order_del_det_qty,0) AS `qty`, p.product_full_code AS `code`, p.product_display_name AS `name`, cd.code_detail_name AS `size`, c.id_comp,c.comp_number, c.comp_name, CONCAT(c.comp_number, ' - ', c.comp_name) AS `comp`,
+        CONCAT(IF(ISNULL(so.id_sales_order),'ERP order not found; ',''), IF(ISNULL(del.id_pl_sales_order_del),'Delivery not found;',''), IF(!ISNULL(sal.id_sales_pos),'Invoice already created;',''),IF(!ISNULL(ro.id_sales_return_order),'Return order already created;',''),IF(c.id_comp!='" + id_comp + "','Account not valid;','')) AS `status`
+        FROM tb_ol_order_temp o
+        LEFT JOIN tb_sales_order so ON so.sales_order_ol_shop_number = o.`order` AND so.id_report_status=6
+        LEFT JOIN tb_sales_order_det sod ON sod.id_sales_order = so.id_sales_order AND sod.item_id = o.item_id AND sod.ol_store_id = o.ol_store_id
+        LEFT JOIN tb_pl_sales_order_del_det deld ON deld.id_sales_order_det = sod.id_sales_order_det
+        LEFT JOIN tb_pl_sales_order_del del ON del.id_pl_sales_order_del = deld.id_pl_sales_order_del AND del.id_report_status=6
+        LEFT JOIN tb_sales_pos_det sald ON sald.id_pl_sales_order_del_det = deld.id_pl_sales_order_del_det
+        LEFT JOIN tb_sales_pos sal ON sal.id_sales_pos = sald.id_sales_pos AND sal.id_report_status!=5
+        LEFT JOIN tb_sales_return_order_det rod ON rod.id_sales_order_det = sod.id_sales_order_det
+        LEFT JOIN tb_sales_return_order ro ON ro.id_sales_return_order = rod.id_sales_return_order AND ro.id_report_status!=5
+        LEFT JOIN tb_m_product p ON p.id_product = sod.id_product
+        LEFT JOIN tb_m_product_code pc ON pc.id_product = p.id_product
+        LEFT JOIN tb_m_code_detail cd ON cd.id_code_detail = pc.id_code_detail
+        LEFT JOIN tb_m_comp_contact cc ON cc.id_comp_contact = so.id_store_contact_to
+        LEFT JOIN tb_m_comp c ON c.id_comp = cc.id_comp
+        WHERE ISNULL(so.id_sales_order) OR ISNULL(del.id_pl_sales_order_del) OR !ISNULL(sal.id_sales_pos) OR !ISNULL(ro.id_sales_return_order) OR c.id_comp!='" + id_comp + "' "
+        Dim adapter As New MySql.Data.MySqlClient.MySqlDataAdapter(query_check_order, connection)
+        adapter.SelectCommand.CommandTimeout = 300
+        adapter.Fill(data)
+        adapter.Dispose()
+        connection.Close()
+        connection.Dispose()
+        'result check order
+        If data.Rows.Count > 0 Then
+            FormSalesPOSCheckXLS.id_pop_up = "1"
+            FormSalesPOSCheckXLS.dt = data
+            FormSalesPOSCheckXLS.ShowDialog()
+        End If
+        data.Dispose()
+        Cursor = Cursors.Default
+        'continue or not
+        If Not is_continue_load_det Then
+            Exit Sub
+        End If
+
+        'get del
+        Dim query_del As String = "SELECT dd.id_pl_sales_order_del_det, d.pl_sales_order_del_number AS `del`, 
+        so.sales_order_ol_shop_number AS `ol_store_order`, sod.item_id, sod.ol_store_id,
+        p.id_product, p.id_design, p.product_full_code AS `code`, dsg.design_display_name AS `name`, cd.code_detail_name AS `size`,
+        dd.pl_sales_order_del_det_qty AS `sales_pos_det_qty`, dd.id_design_price, dd.design_price, dd.id_design_price AS `id_design_price_retail`, dd.design_price AS `design_price_retail`, prct.design_price_type, '' AS `note`,'0' AS `id_sales_pos_det`
+        FROM tb_pl_sales_order_del_det dd
+        INNER JOIN tb_pl_sales_order_del d ON d.id_pl_sales_order_del = dd.id_pl_sales_order_del
+        INNER JOIN tb_sales_order_det sod ON sod.id_sales_order_det = dd.id_sales_order_det
+        INNER JOIN tb_sales_order so ON so.id_sales_order = sod.id_sales_order
+        LEFT JOIN (
+	        SELECT ind.id_sales_pos_det, ind.id_pl_sales_order_del_det
+	        FROM tb_sales_pos_det ind 
+	        INNER JOIN tb_sales_pos inv ON inv.id_sales_pos = ind.id_sales_pos
+	        WHERE inv.id_report_status!=5
+            GROUP BY ind.id_pl_sales_order_del_det
+        ) ind ON ind.id_pl_sales_order_del_det = dd.id_pl_sales_order_del_det
+        LEFT JOIN (
+            SELECT rod.id_sales_order_det
+            FROM tb_sales_return_order_det rod 
+            INNER JOIN tb_sales_return_order ro ON ro.id_sales_return_order = rod.id_sales_return_order
+            WHERE ro.id_report_status!=5
+            GROUP BY rod.id_sales_order_det
+        ) rod ON rod.id_sales_order_det = sod.id_sales_order_det
+        INNER JOIN tb_m_product p ON p.id_product = dd.id_product
+        INNER JOIN tb_m_product_code pc ON pc.id_product = p.id_product 
+        INNER JOIN tb_m_code_detail cd ON cd.id_code_detail = pc.id_code_detail AND cd.id_code=33
+        INNER JOIN tb_m_design dsg ON dsg.id_design = p.id_design
+        INNER JOIN tb_m_design_price prc ON prc.id_design_price = dd.id_design_price
+        INNER JOIN tb_lookup_design_price_type prct ON prct.id_design_price_type = prc.id_design_price_type
+        WHERE d.id_store_contact_to='" + id_store_contact_from + "' AND d.id_report_status=6 AND !ISNULL(so.sales_order_ol_shop_number) AND so.sales_order_ol_shop_number!='' AND ISNULL(ind.id_sales_pos_det) AND ISNULL(rod.id_sales_order_det) "
+        If LEInvType.EditValue.ToString = "4" Then
+            query_del += "HAVING design_price_retail=0 "
+        Else
+            query_del += "HAVING design_price_retail>0 "
+        End If
+        Dim dtd As DataTable = execute_query(query_del, -1, True, "", "", "", "")
+
+        Dim tb1 = data_temp.AsEnumerable()
+        Dim tb2 = dtd.AsEnumerable()
+
+        Try
+            Dim dtr As DataTable = (From table1 In tb1
+                                    Join rd In tb2
+                                    On Trim(table1("ol_store_order").ToString) Equals Trim(rd("ol_store_order").ToString) And Trim(table1("item_id").ToString) Equals Trim(rd("item_id").ToString) And Trim(table1("ol_store_id").ToString) Equals Trim(rd("ol_store_id").ToString)
+                                    Select rd).CopyToDataTable
+
+            GCItemList.DataSource = Nothing
+            GCItemList.DataSource = dtr
+            GCItemList.RefreshDataSource()
+        Catch ex As Exception
+            stopCustom("Order not found or invoice is already created".ToUpper + System.Environment.NewLine + "Error Detail : " + ex.ToString)
+        End Try
+    End Sub
+
     Private Sub DEEnd_EditValueChanging(ByVal sender As System.Object, ByVal e As DevExpress.XtraEditors.Controls.ChangingEventArgs) Handles DEEnd.EditValueChanging
         'If end_load Then
         '    Cursor = Cursors.WaitCursor
@@ -1002,7 +1346,7 @@ Public Class FormSalesPOSDet
     End Sub
     Private Sub TxtCodeCompFrom_KeyUp(sender As Object, e As KeyEventArgs) Handles TxtCodeCompFrom.KeyDown
         If e.KeyCode = Keys.Enter Then
-            Dim query As String = "Select dr.id_wh_drawer, rack.id_wh_rack, Loc.id_wh_locator, cc.id_comp_contact, cc.id_comp, c.npwp, c.comp_number, c.comp_name, c.comp_commission, c.address_primary, c.id_so_type "
+            Dim query As String = "Select dr.id_wh_drawer, rack.id_wh_rack, Loc.id_wh_locator, cc.id_comp_contact, cc.id_comp, c.npwp, c.comp_number, c.comp_name, c.comp_commission, c.address_primary, c.id_so_type, c.is_use_unique_code "
             query += " From tb_m_comp_contact cc "
             query += " INNER JOIN tb_m_comp c On c.id_comp=cc.id_comp"
             query += " INNER JOIN tb_m_wh_drawer dr ON dr.id_wh_drawer=c.id_drawer_def"
@@ -1033,10 +1377,12 @@ Public Class FormSalesPOSDet
                 id_wh_drawer = data.Rows(0)("id_wh_drawer").ToString
                 id_wh_locator = data.Rows(0)("id_wh_locator").ToString
                 id_wh_rack = data.Rows(0)("id_wh_rack").ToString
+                is_use_unique_code = data.Rows(0)("is_use_unique_code").ToString
                 '
                 LETypeSO.ItemIndex = LETypeSO.Properties.GetDataSourceRowIndex("id_so_type", data.Rows(0)("id_so_type").ToString)
                 '
                 viewDetail()
+                viewDetailCode()
                 check_but()
                 GroupControlList.Enabled = True
                 calculate()
@@ -1171,6 +1517,7 @@ Public Class FormSalesPOSDet
         next_control_enter(e)
         If id_do = "-1" Then
             viewDetail()
+            viewDetailCode()
         End If
 
         If e.KeyCode = Keys.Enter Then
@@ -1258,6 +1605,7 @@ Public Class FormSalesPOSDet
         id_wh_locator = "-1"
         id_wh_rack = "-1"
         id_wh_drawer = "-1"
+        is_use_unique_code = "2"
         TxtNameCompFrom.Text = ""
         MEAdrressCompFrom.Text = ""
         TENPWP.Text = ""
@@ -1271,6 +1619,7 @@ Public Class FormSalesPOSDet
 
     Private Sub CheckEdit1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckEditInvType.CheckedChanged
         viewDetail()
+        viewDetailCode()
     End Sub
 
     Private Sub BtnBrowseBillTo_Click(sender As Object, e As EventArgs) Handles BtnBrowseBillTo.Click
@@ -1368,6 +1717,7 @@ Public Class FormSalesPOSDet
                 SPVat.EditValue = data.Rows(0)("sales_pos_vat")
                 calculate()
                 viewDetail()
+                viewDetailCode()
                 BtnListProduct.Focus()
             ElseIf data.Rows.Count > 1 Then
                 Dim cond As String = ""
@@ -1393,6 +1743,7 @@ Public Class FormSalesPOSDet
                 SPVat.EditValue = vat_def
                 calculate()
                 viewDetail()
+                viewDetailCode()
             End If
         Else
             id_sales_pos_ref = "-1"
@@ -1401,6 +1752,7 @@ Public Class FormSalesPOSDet
             SPVat.EditValue = vat_def
             calculate()
             viewDetail()
+            viewDetailCode()
         End If
     End Sub
 
@@ -1438,9 +1790,11 @@ Public Class FormSalesPOSDet
         If action = "ins" Then
             PriceToolStripMenuItem.Visible = True
             DeleteToolStripMenuItem.Visible = True
+            QtyToolStripMenuItem.Visible = True
         Else
             PriceToolStripMenuItem.Visible = False
             DeleteToolStripMenuItem.Visible = False
+            QtyToolStripMenuItem.Visible = False
         End If
     End Sub
 
@@ -1454,11 +1808,199 @@ Public Class FormSalesPOSDet
         End If
     End Sub
 
-    Private Sub SimpleButton2_Click(sender As Object, e As EventArgs) Handles SimpleButton2.Click
-        print_raw(GCItemList, "")
+    Private Sub SimpleButton2_Click(sender As Object, e As EventArgs) Handles BtnNoStock.Click
+        Cursor = Cursors.WaitCursor
+        makeSafeGV(GVItemList)
+        GVItemList.ActiveFilterString = "[is_select]='Yes'"
+        If GVItemList.RowCount <= 0 Then
+            warningCustom("Nothing item selected")
+        Else
+            FormSalesPOSNoStockDet.action = "ins"
+            FormSalesPOSNoStockDet.is_from_inv = "1"
+            FormSalesPOSNoStockDet.ShowDialog()
+        End If
+        GVItemList.ActiveFilterString = ""
+        Cursor = Cursors.Default
     End Sub
 
     Private Sub TxtPotPenjualan_EditValueChanged(sender As Object, e As EventArgs) Handles TxtPotPenjualan.EditValueChanged
         calculate()
+    End Sub
+
+    Sub exportToBOF(ByVal show_msg As Boolean)
+        Cursor = Cursors.WaitCursor
+        If bof_column = "1" Then
+            Cursor = Cursors.WaitCursor
+
+            'copy stream column
+            ' '... 
+            ' ' creating and saving the view's layout to a new memory stream 
+            Dim str As System.IO.Stream
+            str = New System.IO.MemoryStream()
+            GVItemList.SaveLayoutToStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+            str.Seek(0, System.IO.SeekOrigin.Begin)
+
+            'hide column
+            For c As Integer = 0 To GVItemList.Columns.Count - 1
+                GVItemList.Columns(c).Visible = False
+            Next
+            GridColumnCode.VisibleIndex = 0
+            GridColumnQty.VisibleIndex = 1
+            GridColumnDesignPriceRetail.VisibleIndex = 2
+            GridColumnNumber.VisibleIndex = 3
+            GridColumnAcc.VisibleIndex = 4
+            GridColumnStart.VisibleIndex = 5
+            GridColumnEnd.VisibleIndex = 6
+            GridColumnDueDate.VisibleIndex = 7
+            GridColumnType.VisibleIndex = 8
+            DEStart.Properties.DisplayFormat.FormatString = "dd-MM-yyyy"
+            DEEnd.Properties.DisplayFormat.FormatString = "dd-MM-yyyy"
+            DEDueDate.Properties.DisplayFormat.FormatString = "dd-MM-yyyy"
+            GVItemList.OptionsPrint.PrintFooter = False
+            GVItemList.OptionsPrint.PrintHeader = False
+
+
+            'export excel
+            Dim path_root As String = ""
+            Try
+                ' Open the file using a stream reader.
+                Using sr As New IO.StreamReader(Application.StartupPath & "\bof_path.txt")
+                    ' Read the stream to a string and write the string to the console.
+                    path_root = sr.ReadToEnd()
+                End Using
+            Catch ex As Exception
+            End Try
+
+            Dim fileName As String = bof_xls_so + ".xls"
+            Dim exp As String = IO.Path.Combine(path_root, fileName)
+            Try
+                ExportToExcel(GVItemList, exp, show_msg)
+            Catch ex As Exception
+                stopCustom("Please close your excel file first then try again later")
+            End Try
+
+
+            'show column
+            GVItemList.RestoreLayoutFromStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+            str.Seek(0, System.IO.SeekOrigin.Begin)
+            DEStart.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
+            DEEnd.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
+            DEDueDate.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
+            GVItemList.OptionsPrint.PrintFooter = True
+            GVItemList.OptionsPrint.PrintHeader = True
+            Cursor = Cursors.Default
+        End If
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub ExportToExcel(ByVal dtTemp As DevExpress.XtraGrid.Views.Grid.GridView, ByVal filepath As String, show_msg As Boolean)
+        Dim strFileName As String = filepath
+        If System.IO.File.Exists(strFileName) Then
+            System.IO.File.Delete(strFileName)
+        End If
+        Dim _excel As New Excel.Application
+        Dim wBook As Excel.Workbook
+        Dim wSheet As Excel.Worksheet
+
+        wBook = _excel.Workbooks.Add()
+        wSheet = wBook.ActiveSheet()
+
+
+        Dim colIndex As Integer = 0
+        Dim rowIndex As Integer = -1
+
+        ' export the Columns 
+        'If CheckBox1.Checked Then
+        '    For Each dc In dt.Columns
+        '        colIndex = colIndex + 1
+        '        wSheet.Cells(1, colIndex) = dc.ColumnName
+        '    Next
+        'End If
+
+        'export the rows 
+        For i As Integer = 0 To dtTemp.RowCount - 1
+            rowIndex = rowIndex + 1
+            colIndex = 0
+            For j As Integer = 0 To dtTemp.VisibleColumns.Count - 1
+                colIndex = colIndex + 1
+                If j = 0 Then 'code
+                    wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, "code").ToString
+                ElseIf j = 1 Then 'qty
+                    wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, "sales_pos_det_qty")
+                ElseIf j = 2 Then 'harga
+                    wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, "design_price_retail")
+                ElseIf j = 3 Then 'number
+                    wSheet.Cells(rowIndex + 1, colIndex) = TxtVirtualPosNumber.Text
+                ElseIf j = 4 Then 'account toko
+                    wSheet.Cells(rowIndex + 1, colIndex) = TxtCodeCompFrom.Text
+                ElseIf j = 5 Then 'period from
+                    wSheet.Cells(rowIndex + 1, colIndex) = DEStart.EditValue
+                ElseIf j = 6 Then 'period end
+                    wSheet.Cells(rowIndex + 1, colIndex) = DEEnd.EditValue
+                ElseIf j = 7 Then 'due date
+                    wSheet.Cells(rowIndex + 1, colIndex) = DEDueDate.EditValue
+                ElseIf j = 8 Then 'type
+                    If CheckEditInvType.EditValue = False Then
+                        wSheet.Cells(rowIndex + 1, colIndex) = "1"
+                    Else
+                        wSheet.Cells(rowIndex + 1, colIndex) = "2"
+                    End If
+                End If
+            Next
+        Next
+
+        wSheet.Columns.AutoFit()
+        wBook.SaveAs(strFileName, Excel.XlFileFormat.xlExcel5)
+
+        'release the objects
+        ReleaseObject(wSheet)
+        wBook.Close(False)
+        ReleaseObject(wBook)
+        _excel.Quit()
+        ReleaseObject(_excel)
+        ' some time Office application does not quit after automation: so i am calling GC.Collect method.
+        GC.Collect()
+
+        If show_msg Then
+            infoCustom("File exported successfully")
+        End If
+    End Sub
+
+    Private Sub ReleaseObject(ByVal o As Object)
+        Try
+            While (System.Runtime.InteropServices.Marshal.ReleaseComObject(o) > 0)
+            End While
+        Catch
+        Finally
+            o = Nothing
+        End Try
+    End Sub
+
+    Private Sub BtnXlsBOF_Click(sender As Object, e As EventArgs) Handles BtnXlsBOF.Click
+        exportToBOF(True)
+    End Sub
+
+    Private Sub QtyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles QtyToolStripMenuItem.Click
+        Cursor = Cursors.WaitCursor
+        FormSalesPOSQty.action = "upd"
+        FormSalesPOSQty.ShowDialog()
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub Btn_Click(sender As Object, e As EventArgs) Handles BtnImportOLStoreNew.Click
+        Cursor = Cursors.WaitCursor
+        If id_store_contact_from = "-1" Then
+            stopCustom("Store can't blank")
+        Else
+            load_excel_ol_store_det()
+            calculate()
+        End If
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub GVCode_CustomColumnDisplayText(sender As Object, e As DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs) Handles GVCode.CustomColumnDisplayText
+        If e.Column.FieldName = "no" Then
+            e.DisplayText = (e.ListSourceRowIndex + 1).ToString()
+        End If
     End Sub
 End Class

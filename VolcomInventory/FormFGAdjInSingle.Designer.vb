@@ -69,7 +69,6 @@ Partial Class FormFGAdjInSingle
         Me.GridColumn16 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn19 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn25 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn26 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnWHCompName = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnWHLocatorSample = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnWHRackSample = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -84,6 +83,7 @@ Partial Class FormFGAdjInSingle
         Me.PanelControlImg = New DevExpress.XtraEditors.PanelControl()
         Me.PictureEdit1 = New DevExpress.XtraEditors.PictureEdit()
         Me.BtnViewImg = New DevExpress.XtraEditors.SimpleButton()
+        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GroupControlInput, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControlInput.SuspendLayout()
         CType(Me.TxtRealCost.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -557,15 +557,13 @@ Partial Class FormFGAdjInSingle
         '
         'GVFG
         '
-        Me.GVFG.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn15, Me.GridColumn18, Me.GridColumn16, Me.GridColumn19, Me.GridColumn25, Me.GridColumn26, Me.GridColumnWHCompName, Me.GridColumnWHLocatorSample, Me.GridColumnWHRackSample, Me.GridColumnWHDrawerSample, Me.GridColumnIdWHDrawerSample, Me.GridColumnIdDesign})
+        Me.GVFG.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn15, Me.GridColumn18, Me.GridColumn16, Me.GridColumn19, Me.GridColumn25, Me.GridColumn1, Me.GridColumnWHCompName, Me.GridColumnWHLocatorSample, Me.GridColumnWHRackSample, Me.GridColumnWHDrawerSample, Me.GridColumnIdWHDrawerSample, Me.GridColumnIdDesign})
         Me.GVFG.GridControl = Me.GCFG
-        Me.GVFG.GroupCount = 1
         Me.GVFG.Name = "GVFG"
         Me.GVFG.OptionsBehavior.AutoExpandAllGroups = True
         Me.GVFG.OptionsBehavior.Editable = False
         Me.GVFG.OptionsFind.AlwaysVisible = True
         Me.GVFG.OptionsView.ShowGroupPanel = False
-        Me.GVFG.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumn16, DevExpress.Data.ColumnSortOrder.Ascending)})
         '
         'GridColumn15
         '
@@ -584,7 +582,7 @@ Partial Class FormFGAdjInSingle
         Me.GridColumn18.OptionsColumn.ShowInCustomizationForm = False
         Me.GridColumn18.UnboundType = DevExpress.Data.UnboundColumnType.DateTime
         Me.GridColumn18.Visible = True
-        Me.GridColumn18.VisibleIndex = 0
+        Me.GridColumn18.VisibleIndex = 1
         '
         'GridColumn16
         '
@@ -595,7 +593,7 @@ Partial Class FormFGAdjInSingle
         Me.GridColumn16.OptionsColumn.AllowEdit = False
         Me.GridColumn16.OptionsColumn.ShowInCustomizationForm = False
         Me.GridColumn16.Visible = True
-        Me.GridColumn16.VisibleIndex = 4
+        Me.GridColumn16.VisibleIndex = 0
         '
         'GridColumn19
         '
@@ -605,7 +603,7 @@ Partial Class FormFGAdjInSingle
         Me.GridColumn19.OptionsColumn.AllowEdit = False
         Me.GridColumn19.OptionsColumn.ShowInCustomizationForm = False
         Me.GridColumn19.Visible = True
-        Me.GridColumn19.VisibleIndex = 1
+        Me.GridColumn19.VisibleIndex = 2
         '
         'GridColumn25
         '
@@ -614,16 +612,7 @@ Partial Class FormFGAdjInSingle
         Me.GridColumn25.Name = "GridColumn25"
         Me.GridColumn25.OptionsColumn.AllowEdit = False
         Me.GridColumn25.Visible = True
-        Me.GridColumn25.VisibleIndex = 2
-        '
-        'GridColumn26
-        '
-        Me.GridColumn26.Caption = "UOM"
-        Me.GridColumn26.FieldName = "uom"
-        Me.GridColumn26.Name = "GridColumn26"
-        Me.GridColumn26.OptionsColumn.AllowEdit = False
-        Me.GridColumn26.Visible = True
-        Me.GridColumn26.VisibleIndex = 3
+        Me.GridColumn25.VisibleIndex = 3
         '
         'GridColumnWHCompName
         '
@@ -738,6 +727,14 @@ Partial Class FormFGAdjInSingle
         Me.BtnViewImg.TabIndex = 0
         Me.BtnViewImg.Text = "View Image"
         '
+        'GridColumn1
+        '
+        Me.GridColumn1.Caption = "UOM"
+        Me.GridColumn1.FieldName = "uom"
+        Me.GridColumn1.Name = "GridColumn1"
+        Me.GridColumn1.Visible = True
+        Me.GridColumn1.VisibleIndex = 4
+        '
         'FormFGAdjInSingle
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -837,7 +834,6 @@ Partial Class FormFGAdjInSingle
     Friend WithEvents GridColumn16 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn19 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn25 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn26 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnWHCompName As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnWHLocatorSample As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnWHRackSample As DevExpress.XtraGrid.Columns.GridColumn
@@ -852,4 +848,5 @@ Partial Class FormFGAdjInSingle
     Friend WithEvents LabelControl11 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents TxtDesignCode As DevExpress.XtraEditors.TextEdit
     Friend WithEvents BtnViewStockSum As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

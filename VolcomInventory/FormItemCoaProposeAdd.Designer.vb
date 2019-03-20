@@ -24,7 +24,6 @@ Partial Class FormItemCoaProposeAdd
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.BtnClose = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnAdd = New DevExpress.XtraEditors.SimpleButton()
-        Me.LECat = New DevExpress.XtraEditors.LookUpEdit()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.GroupControl1 = New DevExpress.XtraEditors.GroupControl()
         Me.CheckEdit1 = New DevExpress.XtraEditors.CheckEdit()
@@ -45,9 +44,12 @@ Partial Class FormItemCoaProposeAdd
         Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.BandedGridColumn4 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.GridColumn1 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.SLECat = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumnIdItemCat = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnItemCat = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
-        CType(Me.LECat.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl1.SuspendLayout()
         CType(Me.CheckEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -56,6 +58,8 @@ Partial Class FormItemCoaProposeAdd
         CType(Me.RepositoryItemSearchLookUpEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemSearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SLECat.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl2
@@ -97,15 +101,6 @@ Partial Class FormItemCoaProposeAdd
         Me.BtnAdd.TabIndex = 0
         Me.BtnAdd.Text = "Add"
         '
-        'LECat
-        '
-        Me.LECat.Location = New System.Drawing.Point(63, 29)
-        Me.LECat.Name = "LECat"
-        Me.LECat.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.LECat.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_item_cat", "Id", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("item_cat", "Category")})
-        Me.LECat.Size = New System.Drawing.Size(258, 20)
-        Me.LECat.TabIndex = 19
-        '
         'LabelControl1
         '
         Me.LabelControl1.Location = New System.Drawing.Point(12, 32)
@@ -116,9 +111,9 @@ Partial Class FormItemCoaProposeAdd
         '
         'GroupControl1
         '
+        Me.GroupControl1.Controls.Add(Me.SLECat)
         Me.GroupControl1.Controls.Add(Me.CheckEdit1)
         Me.GroupControl1.Controls.Add(Me.LabelControl1)
-        Me.GroupControl1.Controls.Add(Me.LECat)
         Me.GroupControl1.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupControl1.Location = New System.Drawing.Point(0, 0)
         Me.GroupControl1.Name = "GroupControl1"
@@ -169,14 +164,14 @@ Partial Class FormItemCoaProposeAdd
         '
         'gridBand2
         '
-        Me.gridBand2.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.gridBand2.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
         Me.gridBand2.AppearanceHeader.Options.UseFont = True
         Me.gridBand2.Caption = "COA"
         Me.gridBand2.Columns.Add(Me.BandedGridColumn1)
         Me.gridBand2.Columns.Add(Me.BandedGridColumn2)
         Me.gridBand2.Name = "gridBand2"
         Me.gridBand2.VisibleIndex = 1
-        Me.gridBand2.Width = 150
+        Me.gridBand2.Width = 75
         '
         'BandedGridColumn1
         '
@@ -184,6 +179,7 @@ Partial Class FormItemCoaProposeAdd
         Me.BandedGridColumn1.ColumnEdit = Me.RepositoryItemSearchLookUpEdit1
         Me.BandedGridColumn1.FieldName = "exp_acc"
         Me.BandedGridColumn1.Name = "BandedGridColumn1"
+        Me.BandedGridColumn1.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.[False]
         Me.BandedGridColumn1.Visible = True
         '
         'RepositoryItemSearchLookUpEdit1
@@ -231,18 +227,18 @@ Partial Class FormItemCoaProposeAdd
         Me.BandedGridColumn2.ColumnEdit = Me.RepositoryItemSearchLookUpEdit1
         Me.BandedGridColumn2.FieldName = "inv_acc"
         Me.BandedGridColumn2.Name = "BandedGridColumn2"
-        Me.BandedGridColumn2.Visible = True
+        Me.BandedGridColumn2.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.[False]
         '
         'gridBand3
         '
-        Me.gridBand3.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.gridBand3.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
         Me.gridBand3.AppearanceHeader.Options.UseFont = True
         Me.gridBand3.Caption = "Mapping Access"
         Me.gridBand3.Columns.Add(Me.BandedGridColumn3)
         Me.gridBand3.Columns.Add(Me.BandedGridColumn4)
         Me.gridBand3.Name = "gridBand3"
         Me.gridBand3.VisibleIndex = 2
-        Me.gridBand3.Width = 150
+        Me.gridBand3.Width = 75
         '
         'BandedGridColumn3
         '
@@ -250,6 +246,7 @@ Partial Class FormItemCoaProposeAdd
         Me.BandedGridColumn3.ColumnEdit = Me.RepositoryItemCheckEdit1
         Me.BandedGridColumn3.FieldName = "is_request"
         Me.BandedGridColumn3.Name = "BandedGridColumn3"
+        Me.BandedGridColumn3.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.[False]
         Me.BandedGridColumn3.Visible = True
         '
         'RepositoryItemCheckEdit1
@@ -265,7 +262,8 @@ Partial Class FormItemCoaProposeAdd
         Me.BandedGridColumn4.ColumnEdit = Me.RepositoryItemCheckEdit1
         Me.BandedGridColumn4.FieldName = "is_expense"
         Me.BandedGridColumn4.Name = "BandedGridColumn4"
-        Me.BandedGridColumn4.Visible = True
+        Me.BandedGridColumn4.OptionsColumn.AllowEdit = False
+        Me.BandedGridColumn4.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.[False]
         '
         'GridColumn1
         '
@@ -273,6 +271,38 @@ Partial Class FormItemCoaProposeAdd
         Me.GridColumn1.FieldName = "id_departement"
         Me.GridColumn1.Name = "GridColumn1"
         Me.GridColumn1.OptionsColumn.AllowEdit = False
+        '
+        'SLECat
+        '
+        Me.SLECat.Location = New System.Drawing.Point(63, 29)
+        Me.SLECat.Name = "SLECat"
+        Me.SLECat.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLECat.Properties.ShowClearButton = False
+        Me.SLECat.Properties.View = Me.SearchLookUpEdit1View
+        Me.SLECat.Size = New System.Drawing.Size(258, 20)
+        Me.SLECat.TabIndex = 21
+        '
+        'SearchLookUpEdit1View
+        '
+        Me.SearchLookUpEdit1View.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdItemCat, Me.GridColumnItemCat})
+        Me.SearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.SearchLookUpEdit1View.Name = "SearchLookUpEdit1View"
+        Me.SearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.SearchLookUpEdit1View.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumnIdItemCat
+        '
+        Me.GridColumnIdItemCat.Caption = "Id"
+        Me.GridColumnIdItemCat.FieldName = "id_item_cat"
+        Me.GridColumnIdItemCat.Name = "GridColumnIdItemCat"
+        '
+        'GridColumnItemCat
+        '
+        Me.GridColumnItemCat.Caption = "Category"
+        Me.GridColumnItemCat.FieldName = "item_cat"
+        Me.GridColumnItemCat.Name = "GridColumnItemCat"
+        Me.GridColumnItemCat.Visible = True
+        Me.GridColumnItemCat.VisibleIndex = 0
         '
         'FormItemCoaProposeAdd
         '
@@ -289,7 +319,6 @@ Partial Class FormItemCoaProposeAdd
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl2.ResumeLayout(False)
         Me.PanelControl2.PerformLayout()
-        CType(Me.LECat.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControl1.ResumeLayout(False)
         Me.GroupControl1.PerformLayout()
@@ -299,6 +328,8 @@ Partial Class FormItemCoaProposeAdd
         CType(Me.RepositoryItemSearchLookUpEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemSearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SLECat.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -306,7 +337,6 @@ Partial Class FormItemCoaProposeAdd
     Friend WithEvents PanelControl2 As DevExpress.XtraEditors.PanelControl
     Friend WithEvents BtnClose As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BtnAdd As DevExpress.XtraEditors.SimpleButton
-    Friend WithEvents LECat As DevExpress.XtraEditors.LookUpEdit
     Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents GroupControl1 As DevExpress.XtraEditors.GroupControl
     Friend WithEvents GCData As DevExpress.XtraGrid.GridControl
@@ -328,4 +358,8 @@ Partial Class FormItemCoaProposeAdd
     Friend WithEvents BandedGridColumn4 As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents CheckEdit1 As DevExpress.XtraEditors.CheckEdit
+    Friend WithEvents SLECat As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents SearchLookUpEdit1View As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumnIdItemCat As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnItemCat As DevExpress.XtraGrid.Columns.GridColumn
 End Class

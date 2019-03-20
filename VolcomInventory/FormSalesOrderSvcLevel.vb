@@ -27,6 +27,7 @@
         Dim query As String = query_c.queryMain("AND a.id_report_status='6' AND (a.sales_order_date>='" + date_from_selected + "' AND a.sales_order_date<='" + date_until_selected + "') " + cond_status, "1")
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCSalesOrder.DataSource = data
+        GVSalesOrder.BestFitColumns()
     End Sub
 
     Sub viewReturnOrder()
@@ -876,6 +877,9 @@
             id_combine = GVSalesDelOrder.GetFocusedRowCellValue("id_combine").ToString
         Catch ex As Exception
         End Try
+        If id_combine = "0" Then
+            id_combine = ""
+        End If
         If id_combine <> "" Then
             Cursor = Cursors.WaitCursor
             FormSalesDelOrderSlip.is_view = "1"
@@ -897,4 +901,45 @@
             Cursor = Cursors.Default
         End If
     End Sub
+
+    Private Sub CancellCombinedDeliveryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CancellCombinedDeliveryToolStripMenuItem.Click
+        Cursor = Cursors.WaitCursor
+        If GVSalesDelOrder.RowCount > 0 And GVSalesDelOrder.FocusedRowHandle >= 0 Then
+            Dim id_combine As String = ""
+            Try
+                id_combine = GVSalesDelOrder.GetFocusedRowCellValue("id_combine").ToString
+            Catch ex As Exception
+            End Try
+            If id_combine = "0" Then
+                id_combine = ""
+            End If
+            If id_combine <> "" Then
+                If statusCombineDel(id_combine) Then
+                    Cursor = Cursors.WaitCursor
+                    FormSalesDelOrderCancellCombine.id_combine = GVSalesDelOrder.GetFocusedRowCellValue("id_combine").ToString
+                    FormSalesDelOrderCancellCombine.LabelCombineNumber.Text = GVSalesDelOrder.GetFocusedRowCellValue("combine_number").ToString
+                    FormSalesDelOrderCancellCombine.LabelStore.Text = GVSalesDelOrder.GetFocusedRowCellValue("store").ToString
+                    FormSalesDelOrderCancellCombine.id_comp_contact_from = GVSalesDelOrder.GetFocusedRowCellValue("id_comp_contact_from").ToString
+                    FormSalesDelOrderCancellCombine.id_store_contact_to = GVSalesDelOrder.GetFocusedRowCellValue("id_store_contact_to").ToString
+                    FormSalesDelOrderCancellCombine.ShowDialog()
+                    Cursor = Cursors.Default
+                Else
+                    warningCustom("Combined delivery already process")
+                End If
+            Else
+                warningCustom("Combined delivery not found")
+            End If
+        End If
+        Cursor = Cursors.Default
+    End Sub
+
+    Public Function statusCombineDel(ByVal id As String) As Boolean
+        Dim query As String = "SELECT id_report_status FROM tb_pl_sales_order_del_combine WHERE id_combine='" + id + "' "
+        Dim id_stt As String = execute_query(query, 0, True, "", "", "", "")
+        If id_stt <> "1" Then
+            Return False
+        Else
+            Return True
+        End If
+    End Function
 End Class

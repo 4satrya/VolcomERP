@@ -50,7 +50,9 @@ Partial Class FormViewSalesOrder
         Me.LETypeSO = New DevExpress.XtraEditors.LookUpEdit()
         Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
         Me.PanelControlTopRight = New DevExpress.XtraEditors.PanelControl()
+        Me.TxtOLShopNumber = New DevExpress.XtraEditors.TextEdit()
         Me.TxtReff = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl10 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.TxtSalesOrderNumber = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
@@ -77,8 +79,8 @@ Partial Class FormViewSalesOrder
         Me.GridColumnIdSample = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdSalesOrderDet = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdDesignPrice = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.LabelControl10 = New DevExpress.XtraEditors.LabelControl()
-        Me.TxtOLShopNumber = New DevExpress.XtraEditors.TextEdit()
+        Me.GridColumnItemId = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnOLStoreId = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GroupControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl3.SuspendLayout()
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -105,6 +107,7 @@ Partial Class FormViewSalesOrder
         CType(Me.LETypeSO.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControlTopRight, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlTopRight.SuspendLayout()
+        CType(Me.TxtOLShopNumber.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtReff.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtSalesOrderNumber.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEForm.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -113,7 +116,6 @@ Partial Class FormViewSalesOrder
         CType(Me.GCItemList, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVItemList, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemSpinEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TxtOLShopNumber.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupControl3
@@ -470,6 +472,16 @@ Partial Class FormViewSalesOrder
         Me.PanelControlTopRight.Size = New System.Drawing.Size(181, 121)
         Me.PanelControlTopRight.TabIndex = 8898
         '
+        'TxtOLShopNumber
+        '
+        Me.TxtOLShopNumber.EditValue = ""
+        Me.TxtOLShopNumber.Location = New System.Drawing.Point(81, 87)
+        Me.TxtOLShopNumber.Name = "TxtOLShopNumber"
+        Me.TxtOLShopNumber.Properties.EditValueChangedDelay = 1
+        Me.TxtOLShopNumber.Properties.ReadOnly = True
+        Me.TxtOLShopNumber.Size = New System.Drawing.Size(86, 20)
+        Me.TxtOLShopNumber.TabIndex = 8898
+        '
         'TxtReff
         '
         Me.TxtReff.EditValue = ""
@@ -479,6 +491,15 @@ Partial Class FormViewSalesOrder
         Me.TxtReff.Properties.ReadOnly = True
         Me.TxtReff.Size = New System.Drawing.Size(86, 20)
         Me.TxtReff.TabIndex = 166
+        '
+        'LabelControl10
+        '
+        Me.LabelControl10.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl10.Location = New System.Drawing.Point(13, 90)
+        Me.LabelControl10.Name = "LabelControl10"
+        Me.LabelControl10.Size = New System.Drawing.Size(62, 13)
+        Me.LabelControl10.TabIndex = 8897
+        Me.LabelControl10.Text = "OL Store No."
         '
         'LabelControl2
         '
@@ -552,7 +573,7 @@ Partial Class FormViewSalesOrder
         '
         'GVItemList
         '
-        Me.GVItemList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumnCode, Me.GridColumnName, Me.GridColumnSize, Me.GridColumnPriceType, Me.GridColumnQty, Me.GridColumnPrice, Me.GridColumnAmount, Me.GridColumnRemark, Me.GridColumnUOM, Me.GridColumnIdSalesTarget, Me.GridColumnEanCode, Me.GridColumnIdDesign, Me.GridColumnIdProduct, Me.GridColumnIdSample, Me.GridColumnIdSalesOrderDet, Me.GridColumnIdDesignPrice})
+        Me.GVItemList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumnCode, Me.GridColumnName, Me.GridColumnSize, Me.GridColumnPriceType, Me.GridColumnQty, Me.GridColumnPrice, Me.GridColumnAmount, Me.GridColumnRemark, Me.GridColumnUOM, Me.GridColumnIdSalesTarget, Me.GridColumnEanCode, Me.GridColumnIdDesign, Me.GridColumnIdProduct, Me.GridColumnIdSample, Me.GridColumnIdSalesOrderDet, Me.GridColumnIdDesignPrice, Me.GridColumnItemId, Me.GridColumnOLStoreId})
         Me.GVItemList.GridControl = Me.GCItemList
         Me.GVItemList.Name = "GVItemList"
         Me.GVItemList.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[True]
@@ -756,24 +777,17 @@ Partial Class FormViewSalesOrder
         Me.GridColumnIdDesignPrice.OptionsColumn.ShowInCustomizationForm = False
         Me.GridColumnIdDesignPrice.Width = 80
         '
-        'LabelControl10
+        'GridColumnItemId
         '
-        Me.LabelControl10.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl10.Location = New System.Drawing.Point(13, 90)
-        Me.LabelControl10.Name = "LabelControl10"
-        Me.LabelControl10.Size = New System.Drawing.Size(62, 13)
-        Me.LabelControl10.TabIndex = 8897
-        Me.LabelControl10.Text = "OL Store No."
+        Me.GridColumnItemId.Caption = "Item Id"
+        Me.GridColumnItemId.FieldName = "item_id"
+        Me.GridColumnItemId.Name = "GridColumnItemId"
         '
-        'TxtOLShopNumber
+        'GridColumnOLStoreId
         '
-        Me.TxtOLShopNumber.EditValue = ""
-        Me.TxtOLShopNumber.Location = New System.Drawing.Point(81, 87)
-        Me.TxtOLShopNumber.Name = "TxtOLShopNumber"
-        Me.TxtOLShopNumber.Properties.EditValueChangedDelay = 1
-        Me.TxtOLShopNumber.Properties.ReadOnly = True
-        Me.TxtOLShopNumber.Size = New System.Drawing.Size(86, 20)
-        Me.TxtOLShopNumber.TabIndex = 8898
+        Me.GridColumnOLStoreId.Caption = "OL Store Id"
+        Me.GridColumnOLStoreId.FieldName = "ol_store_id"
+        Me.GridColumnOLStoreId.Name = "GridColumnOLStoreId"
         '
         'FormViewSalesOrder
         '
@@ -822,6 +836,7 @@ Partial Class FormViewSalesOrder
         CType(Me.PanelControlTopRight, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControlTopRight.ResumeLayout(False)
         Me.PanelControlTopRight.PerformLayout()
+        CType(Me.TxtOLShopNumber.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtReff.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtSalesOrderNumber.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEForm.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -830,7 +845,6 @@ Partial Class FormViewSalesOrder
         CType(Me.GCItemList, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVItemList, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemSpinEdit1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TxtOLShopNumber.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -894,4 +908,6 @@ Partial Class FormViewSalesOrder
     Friend WithEvents TxtUni1 As DevExpress.XtraEditors.TextEdit
     Friend WithEvents TxtOLShopNumber As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelControl10 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents GridColumnItemId As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnOLStoreId As DevExpress.XtraGrid.Columns.GridColumn
 End Class

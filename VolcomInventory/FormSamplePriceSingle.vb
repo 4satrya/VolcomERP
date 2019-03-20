@@ -92,7 +92,7 @@
         End If
     End Sub
     Private Sub view_currency(ByVal lookup As DevExpress.XtraEditors.LookUpEdit)
-        Dim query As String = "SELECT id_currency,currency FROM tb_lookup_currency"
+        Dim query As String = "SELECT id_currency,currency FROM tb_lookup_currency WHERE is_active_sample='1'"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
         lookup.Properties.DataSource = data

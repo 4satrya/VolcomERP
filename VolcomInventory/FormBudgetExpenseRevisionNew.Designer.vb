@@ -32,17 +32,21 @@ Partial Class FormBudgetExpenseRevisionNew
         Me.MEReason = New DevExpress.XtraEditors.MemoEdit()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.TxtTotal = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
+        Me.TxtDept = New DevExpress.XtraEditors.TextEdit()
+        Me.BtnBrowse = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.SLEYear.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.MEReason.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtTotal.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtDept.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LabelControl1
         '
-        Me.LabelControl1.Location = New System.Drawing.Point(25, 23)
+        Me.LabelControl1.Location = New System.Drawing.Point(25, 63)
         Me.LabelControl1.Name = "LabelControl1"
         Me.LabelControl1.Size = New System.Drawing.Size(30, 13)
         Me.LabelControl1.TabIndex = 0
@@ -53,16 +57,16 @@ Partial Class FormBudgetExpenseRevisionNew
         Me.PanelControl1.Controls.Add(Me.BtnCancel)
         Me.PanelControl1.Controls.Add(Me.BtnSave)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl1.Location = New System.Drawing.Point(0, 207)
+        Me.PanelControl1.Location = New System.Drawing.Point(0, 245)
         Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(317, 42)
+        Me.PanelControl1.Size = New System.Drawing.Size(374, 42)
         Me.PanelControl1.TabIndex = 100
         '
         'BtnCancel
         '
         Me.BtnCancel.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnCancel.Image = CType(resources.GetObject("BtnCancel.Image"), System.Drawing.Image)
-        Me.BtnCancel.Location = New System.Drawing.Point(106, 2)
+        Me.BtnCancel.Location = New System.Drawing.Point(163, 2)
         Me.BtnCancel.Name = "BtnCancel"
         Me.BtnCancel.Size = New System.Drawing.Size(88, 38)
         Me.BtnCancel.TabIndex = 4
@@ -72,7 +76,7 @@ Partial Class FormBudgetExpenseRevisionNew
         '
         Me.BtnSave.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnSave.Image = CType(resources.GetObject("BtnSave.Image"), System.Drawing.Image)
-        Me.BtnSave.Location = New System.Drawing.Point(194, 2)
+        Me.BtnSave.Location = New System.Drawing.Point(251, 2)
         Me.BtnSave.Name = "BtnSave"
         Me.BtnSave.Size = New System.Drawing.Size(121, 38)
         Me.BtnSave.TabIndex = 3
@@ -80,12 +84,12 @@ Partial Class FormBudgetExpenseRevisionNew
         '
         'SLEYear
         '
-        Me.SLEYear.Location = New System.Drawing.Point(25, 42)
+        Me.SLEYear.Location = New System.Drawing.Point(25, 82)
         Me.SLEYear.Name = "SLEYear"
         Me.SLEYear.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.SLEYear.Properties.NullText = "- Select Annual Budget -"
         Me.SLEYear.Properties.View = Me.SearchLookUpEdit1View
-        Me.SLEYear.Size = New System.Drawing.Size(267, 20)
+        Me.SLEYear.Size = New System.Drawing.Size(321, 20)
         Me.SLEYear.TabIndex = 0
         '
         'SearchLookUpEdit1View
@@ -120,7 +124,7 @@ Partial Class FormBudgetExpenseRevisionNew
         '
         'LabelControl4
         '
-        Me.LabelControl4.Location = New System.Drawing.Point(25, 113)
+        Me.LabelControl4.Location = New System.Drawing.Point(25, 153)
         Me.LabelControl4.Name = "LabelControl4"
         Me.LabelControl4.Size = New System.Drawing.Size(32, 13)
         Me.LabelControl4.TabIndex = 101
@@ -128,14 +132,14 @@ Partial Class FormBudgetExpenseRevisionNew
         '
         'MEReason
         '
-        Me.MEReason.Location = New System.Drawing.Point(25, 132)
+        Me.MEReason.Location = New System.Drawing.Point(25, 172)
         Me.MEReason.Name = "MEReason"
-        Me.MEReason.Size = New System.Drawing.Size(267, 41)
+        Me.MEReason.Size = New System.Drawing.Size(321, 41)
         Me.MEReason.TabIndex = 102
         '
         'LabelControl2
         '
-        Me.LabelControl2.Location = New System.Drawing.Point(25, 68)
+        Me.LabelControl2.Location = New System.Drawing.Point(25, 108)
         Me.LabelControl2.Name = "LabelControl2"
         Me.LabelControl2.Size = New System.Drawing.Size(24, 13)
         Me.LabelControl2.TabIndex = 103
@@ -144,18 +148,45 @@ Partial Class FormBudgetExpenseRevisionNew
         'TxtTotal
         '
         Me.TxtTotal.Enabled = False
-        Me.TxtTotal.Location = New System.Drawing.Point(25, 87)
+        Me.TxtTotal.Location = New System.Drawing.Point(25, 127)
         Me.TxtTotal.Name = "TxtTotal"
         Me.TxtTotal.Properties.DisplayFormat.FormatString = "N2"
         Me.TxtTotal.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.TxtTotal.Size = New System.Drawing.Size(267, 20)
+        Me.TxtTotal.Size = New System.Drawing.Size(321, 20)
         Me.TxtTotal.TabIndex = 104
+        '
+        'LabelControl3
+        '
+        Me.LabelControl3.Location = New System.Drawing.Point(25, 18)
+        Me.LabelControl3.Name = "LabelControl3"
+        Me.LabelControl3.Size = New System.Drawing.Size(63, 13)
+        Me.LabelControl3.TabIndex = 105
+        Me.LabelControl3.Text = "Departement"
+        '
+        'TxtDept
+        '
+        Me.TxtDept.Enabled = False
+        Me.TxtDept.Location = New System.Drawing.Point(25, 37)
+        Me.TxtDept.Name = "TxtDept"
+        Me.TxtDept.Size = New System.Drawing.Size(289, 20)
+        Me.TxtDept.TabIndex = 106
+        '
+        'BtnBrowse
+        '
+        Me.BtnBrowse.Location = New System.Drawing.Point(320, 37)
+        Me.BtnBrowse.Name = "BtnBrowse"
+        Me.BtnBrowse.Size = New System.Drawing.Size(26, 20)
+        Me.BtnBrowse.TabIndex = 107
+        Me.BtnBrowse.Text = "..."
         '
         'FormBudgetExpenseRevisionNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(317, 249)
+        Me.ClientSize = New System.Drawing.Size(374, 287)
+        Me.Controls.Add(Me.BtnBrowse)
+        Me.Controls.Add(Me.TxtDept)
+        Me.Controls.Add(Me.LabelControl3)
         Me.Controls.Add(Me.TxtTotal)
         Me.Controls.Add(Me.LabelControl2)
         Me.Controls.Add(Me.MEReason)
@@ -175,6 +206,7 @@ Partial Class FormBudgetExpenseRevisionNew
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.MEReason.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtTotal.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtDept.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -192,4 +224,7 @@ Partial Class FormBudgetExpenseRevisionNew
     Friend WithEvents GridColumnTotal As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents TxtTotal As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LabelControl3 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents TxtDept As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents BtnBrowse As DevExpress.XtraEditors.SimpleButton
 End Class

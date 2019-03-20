@@ -75,6 +75,9 @@ Partial Class FormProductionRetInSingle
         Me.RepositoryItemSpinEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
         Me.GridColumnRemark = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnNox = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnNumber = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnFrom = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnTo = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
         Me.BtnDel = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnEdit = New DevExpress.XtraEditors.SimpleButton()
@@ -92,9 +95,8 @@ Partial Class FormProductionRetInSingle
         Me.BDelete = New DevExpress.XtraEditors.SimpleButton()
         Me.BStop = New DevExpress.XtraEditors.SimpleButton()
         Me.BScan = New DevExpress.XtraEditors.SimpleButton()
-        Me.GridColumnNumber = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnFrom = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnTo = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LERetType = New DevExpress.XtraEditors.LookUpEdit()
+        Me.LabelControl10 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.EPRet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl3.SuspendLayout()
@@ -133,6 +135,7 @@ Partial Class FormProductionRetInSingle
         CType(Me.RepositoryItemSpinEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelNavBarcode, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelNavBarcode.SuspendLayout()
+        CType(Me.LERetType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'EPRet
@@ -293,6 +296,8 @@ Partial Class FormProductionRetInSingle
         'GroupGeneralHeader
         '
         Me.GroupGeneralHeader.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupGeneralHeader.Controls.Add(Me.LERetType)
+        Me.GroupGeneralHeader.Controls.Add(Me.LabelControl10)
         Me.GroupGeneralHeader.Controls.Add(Me.LabelControl8)
         Me.GroupGeneralHeader.Controls.Add(Me.TxtSeason)
         Me.GroupGeneralHeader.Controls.Add(Me.LabelControl6)
@@ -345,7 +350,7 @@ Partial Class FormProductionRetInSingle
         'LabelControl6
         '
         Me.LabelControl6.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl6.Location = New System.Drawing.Point(154, 90)
+        Me.LabelControl6.Location = New System.Drawing.Point(571, 90)
         Me.LabelControl6.Name = "LabelControl6"
         Me.LabelControl6.Size = New System.Drawing.Size(32, 13)
         Me.LabelControl6.TabIndex = 10003
@@ -354,13 +359,13 @@ Partial Class FormProductionRetInSingle
         'TEDesign
         '
         Me.TEDesign.EditValue = ""
-        Me.TEDesign.Location = New System.Drawing.Point(226, 87)
+        Me.TEDesign.Location = New System.Drawing.Point(659, 87)
         Me.TEDesign.Name = "TEDesign"
         Me.TEDesign.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TEDesign.Properties.Appearance.Options.UseFont = True
         Me.TEDesign.Properties.EditValueChangedDelay = 1
         Me.TEDesign.Properties.ReadOnly = True
-        Me.TEDesign.Size = New System.Drawing.Size(303, 20)
+        Me.TEDesign.Size = New System.Drawing.Size(202, 20)
         Me.TEDesign.TabIndex = 10002
         Me.TEDesign.TabStop = False
         '
@@ -381,7 +386,7 @@ Partial Class FormProductionRetInSingle
         Me.BtnInfoSrs.Appearance.Font = New System.Drawing.Font("Monotype Corsiva", 11.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnInfoSrs.Appearance.Options.UseFont = True
         Me.BtnInfoSrs.Enabled = False
-        Me.BtnInfoSrs.Location = New System.Drawing.Point(506, 9)
+        Me.BtnInfoSrs.Location = New System.Drawing.Point(506, 35)
         Me.BtnInfoSrs.Name = "BtnInfoSrs"
         Me.BtnInfoSrs.Size = New System.Drawing.Size(23, 20)
         Me.BtnInfoSrs.TabIndex = 1
@@ -394,7 +399,7 @@ Partial Class FormProductionRetInSingle
         '
         Me.BtnBrowseContactTo.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnBrowseContactTo.Appearance.Options.UseFont = True
-        Me.BtnBrowseContactTo.Location = New System.Drawing.Point(506, 61)
+        Me.BtnBrowseContactTo.Location = New System.Drawing.Point(506, 87)
         Me.BtnBrowseContactTo.Name = "BtnBrowseContactTo"
         Me.BtnBrowseContactTo.Size = New System.Drawing.Size(23, 20)
         Me.BtnBrowseContactTo.TabIndex = 3
@@ -414,7 +419,7 @@ Partial Class FormProductionRetInSingle
         'TxtOrderNumber
         '
         Me.TxtOrderNumber.EditValue = ""
-        Me.TxtOrderNumber.Location = New System.Drawing.Point(226, 9)
+        Me.TxtOrderNumber.Location = New System.Drawing.Point(226, 35)
         Me.TxtOrderNumber.Name = "TxtOrderNumber"
         Me.TxtOrderNumber.Properties.EditValueChangedDelay = 1
         Me.TxtOrderNumber.Properties.ReadOnly = True
@@ -426,7 +431,7 @@ Partial Class FormProductionRetInSingle
         '
         Me.BtnBrowsePO.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnBrowsePO.Appearance.Options.UseFont = True
-        Me.BtnBrowsePO.Location = New System.Drawing.Point(477, 9)
+        Me.BtnBrowsePO.Location = New System.Drawing.Point(477, 35)
         Me.BtnBrowsePO.Name = "BtnBrowsePO"
         Me.BtnBrowsePO.Size = New System.Drawing.Size(23, 20)
         Me.BtnBrowsePO.TabIndex = 0
@@ -435,7 +440,7 @@ Partial Class FormProductionRetInSingle
         'LabelControl4
         '
         Me.LabelControl4.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl4.Location = New System.Drawing.Point(154, 12)
+        Me.LabelControl4.Location = New System.Drawing.Point(154, 38)
         Me.LabelControl4.Name = "LabelControl4"
         Me.LabelControl4.Size = New System.Drawing.Size(42, 13)
         Me.LabelControl4.TabIndex = 88
@@ -493,7 +498,7 @@ Partial Class FormProductionRetInSingle
         '
         Me.BtnBrowseContactFrom.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnBrowseContactFrom.Appearance.Options.UseFont = True
-        Me.BtnBrowseContactFrom.Location = New System.Drawing.Point(506, 35)
+        Me.BtnBrowseContactFrom.Location = New System.Drawing.Point(506, 61)
         Me.BtnBrowseContactFrom.Name = "BtnBrowseContactFrom"
         Me.BtnBrowseContactFrom.Size = New System.Drawing.Size(23, 20)
         Me.BtnBrowseContactFrom.TabIndex = 2
@@ -502,7 +507,7 @@ Partial Class FormProductionRetInSingle
         'TxtNameCompTo
         '
         Me.TxtNameCompTo.EditValue = ""
-        Me.TxtNameCompTo.Location = New System.Drawing.Point(307, 61)
+        Me.TxtNameCompTo.Location = New System.Drawing.Point(307, 87)
         Me.TxtNameCompTo.Name = "TxtNameCompTo"
         Me.TxtNameCompTo.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtNameCompTo.Properties.Appearance.Options.UseFont = True
@@ -515,7 +520,7 @@ Partial Class FormProductionRetInSingle
         'TxtCodeCompTo
         '
         Me.TxtCodeCompTo.EditValue = ""
-        Me.TxtCodeCompTo.Location = New System.Drawing.Point(226, 61)
+        Me.TxtCodeCompTo.Location = New System.Drawing.Point(226, 87)
         Me.TxtCodeCompTo.Name = "TxtCodeCompTo"
         Me.TxtCodeCompTo.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtCodeCompTo.Properties.Appearance.Options.UseFont = True
@@ -528,7 +533,7 @@ Partial Class FormProductionRetInSingle
         'LabelControl2
         '
         Me.LabelControl2.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl2.Location = New System.Drawing.Point(154, 64)
+        Me.LabelControl2.Location = New System.Drawing.Point(154, 90)
         Me.LabelControl2.Name = "LabelControl2"
         Me.LabelControl2.Size = New System.Drawing.Size(59, 13)
         Me.LabelControl2.TabIndex = 149
@@ -537,7 +542,7 @@ Partial Class FormProductionRetInSingle
         'TxtNameCompFrom
         '
         Me.TxtNameCompFrom.EditValue = ""
-        Me.TxtNameCompFrom.Location = New System.Drawing.Point(307, 35)
+        Me.TxtNameCompFrom.Location = New System.Drawing.Point(307, 61)
         Me.TxtNameCompFrom.Name = "TxtNameCompFrom"
         Me.TxtNameCompFrom.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtNameCompFrom.Properties.Appearance.Options.UseFont = True
@@ -550,7 +555,7 @@ Partial Class FormProductionRetInSingle
         'TxtCodeCompFrom
         '
         Me.TxtCodeCompFrom.EditValue = ""
-        Me.TxtCodeCompFrom.Location = New System.Drawing.Point(226, 35)
+        Me.TxtCodeCompFrom.Location = New System.Drawing.Point(226, 61)
         Me.TxtCodeCompFrom.Name = "TxtCodeCompFrom"
         Me.TxtCodeCompFrom.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtCodeCompFrom.Properties.Appearance.Options.UseFont = True
@@ -563,7 +568,7 @@ Partial Class FormProductionRetInSingle
         'LabelControl1
         '
         Me.LabelControl1.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl1.Location = New System.Drawing.Point(154, 38)
+        Me.LabelControl1.Location = New System.Drawing.Point(154, 64)
         Me.LabelControl1.Name = "LabelControl1"
         Me.LabelControl1.Size = New System.Drawing.Size(24, 13)
         Me.LabelControl1.TabIndex = 145
@@ -740,6 +745,27 @@ Partial Class FormProductionRetInSingle
         Me.GridColumnNox.Name = "GridColumnNox"
         Me.GridColumnNox.Visible = True
         Me.GridColumnNox.VisibleIndex = 0
+        '
+        'GridColumnNumber
+        '
+        Me.GridColumnNumber.Caption = "Number"
+        Me.GridColumnNumber.FieldName = "number"
+        Me.GridColumnNumber.Name = "GridColumnNumber"
+        Me.GridColumnNumber.UnboundType = DevExpress.Data.UnboundColumnType.[String]
+        '
+        'GridColumnFrom
+        '
+        Me.GridColumnFrom.Caption = "From"
+        Me.GridColumnFrom.FieldName = "from"
+        Me.GridColumnFrom.Name = "GridColumnFrom"
+        Me.GridColumnFrom.UnboundType = DevExpress.Data.UnboundColumnType.[String]
+        '
+        'GridColumnTo
+        '
+        Me.GridColumnTo.Caption = "To"
+        Me.GridColumnTo.FieldName = "to"
+        Me.GridColumnTo.Name = "GridColumnTo"
+        Me.GridColumnTo.UnboundType = DevExpress.Data.UnboundColumnType.[String]
         '
         'PanelControl1
         '
@@ -928,26 +954,27 @@ Partial Class FormProductionRetInSingle
         Me.BScan.TabIndex = 4
         Me.BScan.Text = "Start Scan"
         '
-        'GridColumnNumber
+        'LERetType
         '
-        Me.GridColumnNumber.Caption = "Number"
-        Me.GridColumnNumber.FieldName = "number"
-        Me.GridColumnNumber.Name = "GridColumnNumber"
-        Me.GridColumnNumber.UnboundType = DevExpress.Data.UnboundColumnType.[String]
+        Me.LERetType.Location = New System.Drawing.Point(226, 9)
+        Me.LERetType.Name = "LERetType"
+        Me.LERetType.Properties.Appearance.Options.UseTextOptions = True
+        Me.LERetType.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near
+        Me.LERetType.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.LERetType.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_return_qc_type", "ID Type", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("return_qc_type", "Type")})
+        Me.LERetType.Properties.NullText = ""
+        Me.LERetType.Properties.ShowFooter = False
+        Me.LERetType.Size = New System.Drawing.Size(303, 20)
+        Me.LERetType.TabIndex = 10007
         '
-        'GridColumnFrom
+        'LabelControl10
         '
-        Me.GridColumnFrom.Caption = "From"
-        Me.GridColumnFrom.FieldName = "from"
-        Me.GridColumnFrom.Name = "GridColumnFrom"
-        Me.GridColumnFrom.UnboundType = DevExpress.Data.UnboundColumnType.[String]
-        '
-        'GridColumnTo
-        '
-        Me.GridColumnTo.Caption = "To"
-        Me.GridColumnTo.FieldName = "to"
-        Me.GridColumnTo.Name = "GridColumnTo"
-        Me.GridColumnTo.UnboundType = DevExpress.Data.UnboundColumnType.[String]
+        Me.LabelControl10.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl10.Location = New System.Drawing.Point(153, 12)
+        Me.LabelControl10.Name = "LabelControl10"
+        Me.LabelControl10.Size = New System.Drawing.Size(60, 13)
+        Me.LabelControl10.TabIndex = 10008
+        Me.LabelControl10.Text = "Return Type"
         '
         'FormProductionRetInSingle
         '
@@ -1005,6 +1032,7 @@ Partial Class FormProductionRetInSingle
         CType(Me.RepositoryItemSpinEdit2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelNavBarcode, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelNavBarcode.ResumeLayout(False)
+        CType(Me.LERetType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1082,4 +1110,6 @@ Partial Class FormProductionRetInSingle
     Friend WithEvents GridColumnNumber As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnFrom As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnTo As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LERetType As DevExpress.XtraEditors.LookUpEdit
+    Friend WithEvents LabelControl10 As DevExpress.XtraEditors.LabelControl
 End Class

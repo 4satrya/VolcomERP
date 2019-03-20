@@ -120,7 +120,7 @@ Partial Class FormItemCatPropose
         Me.XTPItemCat.Controls.Add(Me.GCItemCat)
         Me.XTPItemCat.Name = "XTPItemCat"
         Me.XTPItemCat.Size = New System.Drawing.Size(945, 500)
-        Me.XTPItemCat.Text = "Item Category"
+        Me.XTPItemCat.Text = "Budget Category"
         '
         'GCItemCat
         '
@@ -168,15 +168,13 @@ Partial Class FormItemCatPropose
         Me.GridColumn9.Caption = "Category (En)"
         Me.GridColumn9.FieldName = "item_cat_en"
         Me.GridColumn9.Name = "GridColumn9"
-        Me.GridColumn9.Visible = True
-        Me.GridColumn9.VisibleIndex = 2
         '
         'XTPItemCatPropose
         '
         Me.XTPItemCatPropose.Controls.Add(Me.GCData)
         Me.XTPItemCatPropose.Name = "XTPItemCatPropose"
         Me.XTPItemCatPropose.Size = New System.Drawing.Size(945, 500)
-        Me.XTPItemCatPropose.Text = "Propose Item Category"
+        Me.XTPItemCatPropose.Text = "Setup Budget Category"
         '
         'FormItemCatPropose
         '

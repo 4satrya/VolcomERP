@@ -10,6 +10,11 @@ Public Class FormPopUpCOA
     Private helpery As MyTreeListSearchHelper
 
     Private Sub FormPopUpCOA_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        If id_pop_up = "8" Or id_pop_up = "9" Or id_pop_up = "10" Or id_pop_up = "11" Or id_pop_up = "12" Then
+            XTPOpenTrans.PageVisible = False
+            XTPAccount.PageVisible = False
+        End If
+
         helperx = New MyTreeListSearchHelper(TreeList1)
         helpery = New MyTreeListSearchHelper(TreeList1)
 
@@ -318,6 +323,36 @@ Public Class FormPopUpCOA
                 infoCustom("Please select the type transaction to map first.")
             End If
             Close()
+        ElseIf id_pop_up = "8" Then 'inv store
+            Dim id As String = FormItemCatMappingDet.id
+            Dim query As String = "UPDATE tb_item_coa_propose SET acc_coa_receive='" + GVAcc.GetFocusedRowCellValue("id_acc").ToString + "' WHERE id_item_coa_propose='" + id + "' "
+            execute_non_query(query, True, "", "", "", "")
+            FormItemCatMappingDet.loadMain()
+            Close()
+        ElseIf id_pop_up = "9" Then 'hutang
+            Dim id As String = FormItemCatMappingDet.id
+            Dim query As String = "UPDATE tb_item_coa_propose SET acc_coa_hutang='" + GVAcc.GetFocusedRowCellValue("id_acc").ToString + "' WHERE id_item_coa_propose='" + id + "' "
+            execute_non_query(query, True, "", "", "", "")
+            FormItemCatMappingDet.loadMain()
+            Close()
+        ElseIf id_pop_up = "10" Then 'inv WH
+            Dim id As String = FormItemCatMappingDet.id
+            Dim query As String = "UPDATE tb_item_coa_propose SET acc_coa_trf='" + GVAcc.GetFocusedRowCellValue("id_acc").ToString + "' WHERE id_item_coa_propose='" + id + "' "
+            execute_non_query(query, True, "", "", "", "")
+            FormItemCatMappingDet.loadMain()
+            Close()
+        ElseIf id_pop_up = "11" Then 'general setup
+            'receive account
+            FormAccounting.acc_coa_receive = GVAcc.GetFocusedRowCellValue("id_acc").ToString
+            FormAccounting.TxtRecAccount.Text = GVAcc.GetFocusedRowCellValue("acc_name").ToString
+            FormAccounting.TxtRecDesc.Text = GVAcc.GetFocusedRowCellValue("acc_description").ToString
+            Close()
+        ElseIf id_pop_up = "12" Then 'general setup
+            'vat account
+            FormAccounting.acc_coa_vat_in = GVAcc.GetFocusedRowCellValue("id_acc").ToString
+            FormAccounting.TxtVATAccount.Text = GVAcc.GetFocusedRowCellValue("acc_name").ToString
+            FormAccounting.TxtVATDesc.Text = GVAcc.GetFocusedRowCellValue("acc_description").ToString
+            Close()
         End If
     End Sub
     Sub load_open_trans()
@@ -397,7 +432,13 @@ Public Class FormPopUpCOA
         Dim query As String = ""
         query += "SELECT a.id_acc,acc_name,a.acc_description,a.id_acc_cat,b.acc_cat,a.id_status,c.status,a.id_is_det,d.is_det,comp.id_comp,comp.comp_name,comp.comp_number FROM tb_a_acc a "
         query += "INNER JOIN tb_lookup_acc_cat b ON a.id_acc_cat=b.id_acc_cat INNER JOIN tb_lookup_status c ON a.id_status=c.id_status INNER JOIN tb_lookup_is_det d ON a.id_is_det=d.id_is_det "
-        query += "LEFT JOIN tb_m_comp comp ON comp.id_comp=a.id_comp "
+        query += "LEFT JOIN tb_m_comp comp ON comp.id_comp=a.id_comp 
+        WHERE a.id_status=1 "
+
+        If id_pop_up = "8" Or id_pop_up = "9" Or id_pop_up = "10" Then
+            query += "AND a.id_is_det=2 "
+        End If
+
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCAcc.DataSource = data
     End Sub

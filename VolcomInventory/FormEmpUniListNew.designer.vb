@@ -31,11 +31,13 @@ Partial Class FormEmpUniListNew
         Me.BtnCreate = New DevExpress.XtraEditors.SimpleButton()
         Me.SimpleButton1 = New DevExpress.XtraEditors.SimpleButton()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.CEforDeptHead = New DevExpress.XtraEditors.CheckEdit()
         CType(Me.LEPeriodx.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLEWH.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
+        CType(Me.CEforDeptHead.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LabelControl1
@@ -106,7 +108,7 @@ Partial Class FormEmpUniListNew
         '
         Me.BtnCreate.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnCreate.Image = CType(resources.GetObject("BtnCreate.Image"), System.Drawing.Image)
-        Me.BtnCreate.Location = New System.Drawing.Point(234, 2)
+        Me.BtnCreate.Location = New System.Drawing.Point(218, 2)
         Me.BtnCreate.Name = "BtnCreate"
         Me.BtnCreate.Size = New System.Drawing.Size(88, 34)
         Me.BtnCreate.TabIndex = 2
@@ -116,7 +118,7 @@ Partial Class FormEmpUniListNew
         '
         Me.SimpleButton1.Dock = System.Windows.Forms.DockStyle.Right
         Me.SimpleButton1.Image = CType(resources.GetObject("SimpleButton1.Image"), System.Drawing.Image)
-        Me.SimpleButton1.Location = New System.Drawing.Point(146, 2)
+        Me.SimpleButton1.Location = New System.Drawing.Point(130, 2)
         Me.SimpleButton1.Name = "SimpleButton1"
         Me.SimpleButton1.Size = New System.Drawing.Size(88, 34)
         Me.SimpleButton1.TabIndex = 3
@@ -127,16 +129,25 @@ Partial Class FormEmpUniListNew
         Me.PanelControl1.Controls.Add(Me.SimpleButton1)
         Me.PanelControl1.Controls.Add(Me.BtnCreate)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl1.Location = New System.Drawing.Point(0, 93)
+        Me.PanelControl1.Location = New System.Drawing.Point(0, 100)
         Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(324, 38)
+        Me.PanelControl1.Size = New System.Drawing.Size(308, 38)
         Me.PanelControl1.TabIndex = 8906
+        '
+        'CEforDeptHead
+        '
+        Me.CEforDeptHead.Location = New System.Drawing.Point(176, 70)
+        Me.CEforDeptHead.Name = "CEforDeptHead"
+        Me.CEforDeptHead.Properties.Caption = "List for Dept. Head"
+        Me.CEforDeptHead.Size = New System.Drawing.Size(116, 19)
+        Me.CEforDeptHead.TabIndex = 8907
         '
         'FormEmpUniListNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(324, 131)
+        Me.ClientSize = New System.Drawing.Size(308, 138)
+        Me.Controls.Add(Me.CEforDeptHead)
         Me.Controls.Add(Me.PanelControl1)
         Me.Controls.Add(Me.SLEWH)
         Me.Controls.Add(Me.LEPeriodx)
@@ -153,6 +164,7 @@ Partial Class FormEmpUniListNew
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
+        CType(Me.CEforDeptHead.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -169,4 +181,5 @@ Partial Class FormEmpUniListNew
     Friend WithEvents BtnCreate As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents SimpleButton1 As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents PanelControl1 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents CEforDeptHead As DevExpress.XtraEditors.CheckEdit
 End Class

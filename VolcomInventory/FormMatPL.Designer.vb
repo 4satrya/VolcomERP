@@ -40,6 +40,7 @@ Partial Class FormMatPL
         Me.GridColumnPLWONumber = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn45 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn46 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn55 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnPLIdPO = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdReportStatus = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ColMrsNumber = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -152,7 +153,6 @@ Partial Class FormMatPL
         Me.GridColumn48 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn49 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
-        Me.GridColumn55 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XTCPL, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCPL.SuspendLayout()
         Me.XTPProduction.SuspendLayout()
@@ -314,7 +314,7 @@ Partial Class FormMatPL
         '
         'GridColumnTo
         '
-        Me.GridColumnTo.Caption = "To"
+        Me.GridColumnTo.Caption = "Send To"
         Me.GridColumnTo.FieldName = "comp_name_to"
         Me.GridColumnTo.Name = "GridColumnTo"
         Me.GridColumnTo.Visible = True
@@ -381,6 +381,14 @@ Partial Class FormMatPL
         Me.GridColumn46.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn46.FieldName = "qty_order"
         Me.GridColumn46.Name = "GridColumn46"
+        '
+        'GridColumn55
+        '
+        Me.GridColumn55.Caption = "Qty PL (Top Most)"
+        Me.GridColumn55.DisplayFormat.FormatString = "N2"
+        Me.GridColumn55.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn55.FieldName = "qty_top_most"
+        Me.GridColumn55.Name = "GridColumn55"
         '
         'GridColumnPLIdPO
         '
@@ -1325,14 +1333,6 @@ Partial Class FormMatPL
         Me.LabelControl3.Size = New System.Drawing.Size(53, 13)
         Me.LabelControl3.TabIndex = 99
         Me.LabelControl3.Text = "PL Created"
-        '
-        'GridColumn55
-        '
-        Me.GridColumn55.Caption = "Qty PL (Top Most)"
-        Me.GridColumn55.DisplayFormat.FormatString = "N2"
-        Me.GridColumn55.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn55.FieldName = "qty_top_most"
-        Me.GridColumn55.Name = "GridColumn55"
         '
         'FormMatPL
         '

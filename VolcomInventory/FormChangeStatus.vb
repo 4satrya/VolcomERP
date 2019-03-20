@@ -125,14 +125,17 @@
                             If id_combine = "0" Then
                                 'jika delivery single
                                 stt.changeStatus(FormSalesOrderSvcLevel.GVSalesDelOrder.GetRowCellValue(i, "id_pl_sales_order_del").ToString, SLEStatusRec.EditValue.ToString)
+                                stt.insertUniqueCode(FormSalesOrderSvcLevel.GVSalesDelOrder.GetRowCellValue(i, "id_pl_sales_order_del").ToString, FormSalesOrderSvcLevel.GVSalesDelOrder.GetRowCellValue(i, "id_store").ToString, FormSalesOrderSvcLevel.GVSalesDelOrder.GetRowCellValue(i, "is_use_unique_code").ToString)
                                 removeAppList(report_mark_type, FormSalesOrderSvcLevel.GVSalesDelOrder.GetRowCellValue(i, "id_pl_sales_order_del").ToString, id_status_reportx)
                                 insertFinalComment(report_mark_type, FormSalesOrderSvcLevel.GVSalesDelOrder.GetRowCellValue(i, "id_pl_sales_order_del").ToString, id_status_reportx, note)
+                                sendEmailConfirmation(FormSalesOrderSvcLevel.GVSalesDelOrder.GetRowCellValue(i, "id_commerce_type").ToString, FormSalesOrderSvcLevel.GVSalesDelOrder.GetRowCellValue(i, "id_pl_sales_order_del").ToString)
                             Else
                                 'jika delivery combine
                                 Dim id_del As String = FormSalesOrderSvcLevel.GVSalesDelOrder.GetRowCellValue(i, "id_pl_sales_order_del").ToString
                                 Dim del_stt As String = execute_query("SELECT id_report_status FROM tb_pl_sales_order_del WHERE id_pl_sales_order_del=" + id_del + " ", 0, True, "", "", "", "")
                                 If del_stt <> SLEStatusRec.EditValue.ToString Then
                                     stt.changeStatusHead(id_combine, SLEStatusRec.EditValue.ToString)
+                                    stt.insertUniqueCodeHead(id_combine, FormSalesOrderSvcLevel.GVSalesDelOrder.GetRowCellValue(i, "id_store").ToString, FormSalesOrderSvcLevel.GVSalesDelOrder.GetRowCellValue(i, "is_use_unique_code").ToString)
                                     removeAppListCombine("103", id_combine, id_status_reportx)
                                     insertFinalCommentCombine("103", id_combine, id_status_reportx, note)
                                 End If
@@ -329,6 +332,33 @@
                                          SET report_mark_lead_time=NULL,report_mark_start_datetime=NULL 
                                          WHERE rm.report_mark_type='43' AND rm.id_report_status>'1' "
             execute_non_query(query_single, True, "", "", "", "")
+        End If
+    End Sub
+
+    Sub sendEmailConfirmation(ByVal id_commerce_type As String, ByVal id_report As String)
+        If id_pop_up = "2" Then
+            If id_commerce_type = "2" Then
+                'only online store
+                Dim query As String = "SELECT del.id_pl_sales_order_del, del.pl_sales_order_del_number AS `del_number`, 
+                DATE_FORMAT(del.pl_sales_order_del_date, '%d %M %Y') AS `scan_date`, DATE_FORMAT(fcom.final_comment_date,'%d %M %Y %H:%i') AS `del_date`,
+                so.sales_order_number AS `order_number`, so.sales_order_ol_shop_number AS `ol_store_order_number`, DATE_FORMAT(so.sales_order_date,'%d %M %Y') AS `order_date`, so.customer_name,
+                CONCAT(s.comp_number, ' - ', s.comp_name) AS `store`, sg.comp_group AS `store_group_code`, sg.description AS `store_group`
+                FROM tb_pl_sales_order_del del 
+                INNER JOIN tb_m_comp_contact sc ON sc.id_comp_contact = del.id_store_contact_to
+                INNER JOIN tb_m_comp s ON s.id_comp = sc.id_comp
+                INNER JOIN tb_m_comp_group sg ON sg.id_comp_group = s.id_comp_group
+                INNER JOIN tb_report_mark_final_comment fcom ON fcom.id_report = del.id_pl_sales_order_del AND fcom.report_mark_type=43
+                INNER JOIN tb_sales_order so ON so.id_sales_order = del.id_sales_order
+                WHERE del.id_pl_sales_order_del='" + id_report + "' "
+                Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+                If data.Rows.Count > 0 Then
+                    Dim em As New ClassSendEmail
+                    em.report_mark_type = "43_confirm"
+                    em.id_report = id_report
+                    em.dt = data
+                    em.send_email()
+                End If
+            End If
         End If
     End Sub
 End Class

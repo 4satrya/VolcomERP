@@ -52,4 +52,13 @@
         End If
         GVReportList.ActiveFilterString = ""
     End Sub
+
+    Private Sub SMViewDet_Click(sender As Object, e As EventArgs) Handles SMViewDet.Click
+        If GVReportList.RowCount > 0 Then
+            Dim sp As New ClassShowPopUp()
+            sp.id_report = GVReportList.GetFocusedRowCellValue("id_report").ToString
+            sp.report_mark_type = FormReportMarkCancel.LEReportMarkType.EditValue.ToString
+            sp.show()
+        End If
+    End Sub
 End Class

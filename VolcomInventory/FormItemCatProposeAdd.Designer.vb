@@ -69,7 +69,7 @@ Partial Class FormItemCatProposeAdd
         '
         'TxtCatEn
         '
-        Me.TxtCatEn.Location = New System.Drawing.Point(133, 70)
+        Me.TxtCatEn.Location = New System.Drawing.Point(133, 168)
         Me.TxtCatEn.Name = "TxtCatEn"
         Me.TxtCatEn.Size = New System.Drawing.Size(231, 20)
         Me.TxtCatEn.TabIndex = 4
@@ -77,7 +77,7 @@ Partial Class FormItemCatProposeAdd
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(21, 73)
+        Me.Label3.Location = New System.Drawing.Point(21, 171)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(96, 13)
         Me.Label3.TabIndex = 5
@@ -86,7 +86,7 @@ Partial Class FormItemCatProposeAdd
         'BTnOK
         '
         Me.BTnOK.Image = CType(resources.GetObject("BTnOK.Image"), System.Drawing.Image)
-        Me.BTnOK.Location = New System.Drawing.Point(289, 96)
+        Me.BTnOK.Location = New System.Drawing.Point(289, 77)
         Me.BTnOK.Name = "BTnOK"
         Me.BTnOK.Size = New System.Drawing.Size(75, 36)
         Me.BTnOK.TabIndex = 6
@@ -95,7 +95,7 @@ Partial Class FormItemCatProposeAdd
         'BtnCancel
         '
         Me.BtnCancel.Image = CType(resources.GetObject("BtnCancel.Image"), System.Drawing.Image)
-        Me.BtnCancel.Location = New System.Drawing.Point(195, 96)
+        Me.BtnCancel.Location = New System.Drawing.Point(195, 77)
         Me.BtnCancel.Name = "BtnCancel"
         Me.BtnCancel.Size = New System.Drawing.Size(88, 36)
         Me.BtnCancel.TabIndex = 7
@@ -105,7 +105,7 @@ Partial Class FormItemCatProposeAdd
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(383, 147)
+        Me.ClientSize = New System.Drawing.Size(383, 136)
         Me.Controls.Add(Me.BtnCancel)
         Me.Controls.Add(Me.BTnOK)
         Me.Controls.Add(Me.Label3)

@@ -48,7 +48,8 @@
             TxtDesignCode.Focus()
         Else
             id_product_selected = datax.Rows(0)("id_product").ToString.ToUpper
-            Dim query As String = "CALL view_stock_fg(0, 0, 0, 0, '" & id_product_selected & "',1, '9999-01-01')"
+            'Dim query As String = "CALL view_stock_fg(0, 0, 0, 0, '" & id_product_selected & "',1, '9999-01-01')"
+            Dim query As String = "CALL view_product_param('" & id_product_selected & "')"
             Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
             Dim i As Integer = data.Rows.Count - 1
             GCFG.DataSource = data
@@ -77,7 +78,7 @@
 
         'view data comp/warehouse
         query = ""
-        query += "SELECT a.id_comp, a.comp_number, CONCAT(a.comp_number,' - ', a.comp_name) AS `comp_name` FROM tb_m_comp a "
+        query += "SELECT a.id_comp, a.comp_number, CONCAT(a.comp_number,' - ', a.comp_name) AS `comp_name` FROM tb_m_comp a WHERE a.id_comp_cat='5' or a.id_comp_cat='6'"
         'query += "WHERE a.id_comp_cat = '" + id_comp_cat_wh + "' "
         'If id_wh <> "-1" Then
         '    query += "AND a.id_comp = '" + id_wh + "' "
@@ -151,7 +152,7 @@
                             FormFGAdjInDet.GVDetail.CloseEditor()
                             FormFGAdjInDet.GCDetail.RefreshDataSource()
                             FormFGAdjInDet.GVDetail.RefreshData()
-                            Close()
+                            'Close()
                         End If
                     Else
                         If id_pop_up = 1 Then 'Ins Standard Adj In
@@ -178,7 +179,7 @@
                             FormFGAdjInDet.GVDetail.CloseEditor()
                             FormFGAdjInDet.GCDetail.RefreshDataSource()
                             FormFGAdjInDet.GVDetail.RefreshData()
-                            Close()
+                            'Close()
                         End If
                     End If
                 Else
@@ -363,7 +364,7 @@
     Private Sub GVFG_FocusedRowChanged(ByVal sender As System.Object, ByVal e As DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs) Handles GVFG.FocusedRowChanged
         Dim cost As Decimal = 0.0
         Try
-            cost = Decimal.Parse(GVFG.GetFocusedRowCellValue("bom_unit_price").ToString)
+            cost = Decimal.Parse(GVFG.GetFocusedRowCellValue("design_cop").ToString)
         Catch ex As Exception
         End Try
         TxtRealCost.EditValue = cost

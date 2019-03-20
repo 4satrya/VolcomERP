@@ -53,7 +53,9 @@
                 System.IO.Directory.CreateDirectory(path)
             End If
             My.Computer.Network.UploadFile(file_address, path & last_id & "_" & report_mark_type & "_" & id_report & file_ext, "", "", True, 100, True)
-            FormDocumentUpload.view_file()
+            '
+            FormDocumentUpload.refresh_load(report_mark_type)
+            '
             Close()
         Catch ex As Exception
             stopCustom(ex.ToString)

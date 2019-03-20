@@ -17,13 +17,20 @@
 
     Private Sub FormViewMatPLSingle_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         checkFormAccessSingle(Name) 'check access
+        viewPLType() 'get PL Type
         actionLoad()
+    End Sub
+    'View PL Type
+    Sub viewPLType()
+        Dim query As String = "SELECT id_pl_mat_type,pl_mat_type FROM tb_pl_mat_type a ORDER BY a.id_pl_mat_Type "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        viewLookupQuery(LEPLType, query, 0, "pl_mat_type", "id_pl_mat_type")
     End Sub
 
     Sub actionLoad()
         BtnInfoSrs.Enabled = True
         'Fetch from db main
-        Dim query As String = "SELECT i.prod_order_mrs_number,a.id_prod_order_mrs, a.id_pl_mrs ,a.id_comp_contact_from , a.id_comp_contact_to,a.pl_mrs_date, a.pl_mrs_note, a.pl_mrs_number, (d.comp_name) AS comp_name_from, (d.comp_number) AS comp_code_from, (d.id_comp) AS id_comp_from, (f.comp_name) AS comp_name_to, (f.comp_number) AS comp_code_to, (f.id_comp) AS id_comp_to,(f.address_primary) AS comp_address_t, a.id_report_status, "
+        Dim query As String = "SELECT a.id_pl_mat_type,i.prod_order_mrs_number,a.id_prod_order_mrs, a.id_pl_mrs ,a.id_comp_contact_from , a.id_comp_contact_to,a.pl_mrs_date, a.pl_mrs_note, a.pl_mrs_number, (d.comp_name) AS comp_name_from, (d.comp_number) AS comp_code_from, (d.id_comp) AS id_comp_from, (f.comp_name) AS comp_name_to, (f.comp_number) AS comp_code_to, (f.id_comp) AS id_comp_to,(f.address_primary) AS comp_address_t, a.id_report_status, "
         query += "DATE_FORMAT(a.pl_mrs_date,'%Y-%m-%d') as pl_mrs_datex "
         query += "FROM tb_pl_mrs a "
         query += "INNER JOIN tb_m_comp_contact c ON a.id_comp_contact_from = c.id_comp_contact "
@@ -44,6 +51,7 @@
         TxtNameCompTo.Text = data.Rows(0)("comp_name_to").ToString
         id_comp_to = data.Rows(0)("id_comp_to").ToString
         'MEAdrressCompTo.Text = data.Rows(0)("comp_address_to").ToString
+        LEPLType.ItemIndex = LEPLType.Properties.GetDataSourceRowIndex("id_pl_mat_type", data.Rows(0)("id_pl_mat_type").ToString)
         TxtPLNumber.Text = data.Rows(0)("pl_mrs_number").ToString
         DEPL.Text = view_date_from(data.Rows(0)("pl_mrs_datex").ToString(), 0)
         MENote.Text = data.Rows(0)("pl_mrs_note").ToString

@@ -21,6 +21,8 @@ Public Class FormFGRepairReturnRecDet
     Public id_type As String = "-1"
     Public bof_column As String = get_setup_field("bof_column")
     Public bof_xls_repair As String = get_setup_field("bof_xls_repair_return_rec")
+    Public id_wh_type As String = "-1"
+
 
     Private Sub FormFGRepairRecDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewReportStatus()
@@ -595,6 +597,21 @@ Public Class FormFGRepairReturnRecDet
                     Exit Sub
                 Else
                     GVScan.ActiveFilterString = ""
+                End If
+            End If
+
+            'jika akun normal/sale
+            Dim id_design_cat As String = dt_filter(0)("id_design_cat").ToString
+            Dim prc As Decimal = dt_filter(0)("design_price")
+            If id_wh_type = "1" Or id_wh_type = "2" Then
+                If (id_wh_type <> id_design_cat) And prc > 0 Then
+                    If id_wh_type = "1" Then
+                        stopCustom(TxtCodeWH.Text + " is only for normal product. ")
+                    Else
+                        stopCustom(TxtCodeWH.Text + " is only for sale product. ")
+                    End If
+                    Cursor = Cursors.Default
+                    Exit Sub
                 End If
             End If
 

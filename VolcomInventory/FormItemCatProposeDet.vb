@@ -3,6 +3,7 @@
     Public is_view As String = "-1"
     Dim id_report_status As String = "-1"
     Dim is_confirm As String = "-1"
+    Public show_mark As Boolean = False
 
     Private Sub FormItemCatProposeDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewReportStatus()
@@ -35,13 +36,16 @@
 
         viewDetail()
         allow_status()
+        If show_mark Then
+            openMark()
+        End If
     End Sub
 
     Sub viewDetail()
         Dim query As String = "SELECT d.id_item_cat_propose_det, d.id_item_cat_propose, d.id_expense_type, ex.expense_type, d.item_cat, d.item_cat_en 
         FROM tb_item_cat_propose_det d 
         INNER JOIN tb_lookup_expense_type ex ON ex.id_expense_type = d.id_expense_type
-        WHERE d.id_item_cat_propose=" + id + " "
+        WHERE d.id_item_cat_propose=" + id + " ORDER BY d.id_item_cat_propose_det ASC "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCData.DataSource = data
     End Sub
@@ -80,10 +84,14 @@
     End Sub
 
     Private Sub BtnMark_Click(sender As Object, e As EventArgs) Handles BtnMark.Click
+        openMark()
+    End Sub
+
+    Sub openMark()
         Cursor = Cursors.WaitCursor
         FormReportMark.report_mark_type = "134"
         FormReportMark.id_report = id
-        FormReportMark.is_view = "1"
+        FormReportMark.is_view = is_view
         FormReportMark.form_origin = Name
         FormReportMark.ShowDialog()
         Cursor = Cursors.Default

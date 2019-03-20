@@ -51,7 +51,7 @@
             Dim query = "SELECT a.id_report_status,h.report_status,a.id_prod_order_wo,a.id_ovh_price,a.id_payment, "
             query += "a.id_prod_order,g.payment,b.id_currency,a.prod_order_wo_note,a.prod_order_wo_kurs, "
             query += "d.comp_name AS comp_name_to, "
-            query += "f.comp_name AS comp_name_ship_to,a.id_comp_contact_ship_to, "
+            query += "f.comp_name AS comp_name_ship_to,(SELECT id_own_company_contact FROM tb_opt) AS id_comp_contact_ship_to, "
             query += "a.prod_order_wo_number,a.id_ovh_price,j.overhead, "
             query += "a.prod_order_wo_del_date, "
             query += "DATE_FORMAT(a.prod_order_wo_date,'%Y-%m-%d') as prod_order_wo_datex,a.prod_order_wo_date,a.prod_order_wo_lead_time,a.prod_order_wo_top,a.prod_order_wo_vat, a.is_main_vendor "
@@ -469,6 +469,7 @@
     Private Sub BPrint_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BPrint.Click
         ReportProductionWO.id_prod_wo = id_wo
         ReportProductionWO.id_po = id_po
+        ReportProductionWO.is_po_print = "-1"
 
         If check_print_report_status(id_report_status_g) Then
             ReportProductionWO.is_pre = "-1"

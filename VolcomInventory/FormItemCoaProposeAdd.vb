@@ -7,10 +7,16 @@
 
     Sub viewData()
         Dim query As String = "SELECT d.id_departement, d.departement, NULL AS `exp_acc`, NULL AS `inv_acc`,
-        '1' AS `is_request`, '2' AS `is_expense`, cp.id_item_coa_propose_det
+        '2' AS `is_request`, '1' AS `is_expense`, cp.id_item_coa_propose_det
         FROM tb_m_departement d 
-        LEFT JOIN tb_item_coa_propose_det cp ON cp.id_departement = d.id_departement AND cp.id_item_coa_propose=" + FormItemCatMappingDet.id + " AND cp.id_item_cat=" + LECat.EditValue.ToString + "
-        WHERE d.is_office_dept=1 AND ISNULL(cp.id_item_coa_propose_det) "
+        LEFT JOIN (
+	        SELECT cp.id_item_coa_propose_det, cp.id_departement 
+	        FROM tb_item_coa_propose_det cp
+	        INNER JOIN tb_item_coa_propose cpm ON cpm.id_item_coa_propose = cp.id_item_coa_propose 
+	        WHERE cp.id_item_cat=" + SLECat.EditValue.ToString + " AND cpm.id_report_status!=5
+        ) cp ON cp.id_departement = d.id_departement
+        WHERE d.is_office_dept=1 AND d.is_kk_unit=2 
+        AND ISNULL(cp.id_item_coa_propose_det) "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCData.DataSource = data
     End Sub
@@ -19,7 +25,7 @@
     Sub viewCat()
         Cursor = Cursors.WaitCursor
         Dim query As String = "SELECT c.id_item_cat, c.item_cat FROM tb_item_cat c ORDER BY id_item_cat ASC"
-        viewLookupQuery(LECat, query, 0, "item_cat", "id_item_cat")
+        viewSearchLookupQuery(SLECat, query, "id_item_cat", "item_cat", "id_item_cat")
         Cursor = Cursors.Default
     End Sub
 
@@ -49,7 +55,7 @@
         Close()
     End Sub
 
-    Private Sub LECat_EditValueChanged(sender As Object, e As EventArgs) Handles LECat.EditValueChanged
+    Private Sub LECat_EditValueChanged(sender As Object, e As EventArgs) 
         viewData()
     End Sub
 
@@ -65,7 +71,7 @@
             For i As Integer = 0 To ((GVData.RowCount - 1) - GetGroupRowCount(GVData))
                 'check exist
                 'cek kondisi master
-                Dim id_cat As String = LECat.EditValue.ToString
+                Dim id_cat As String = SLECat.EditValue.ToString
                 Dim id_dept As String = GVData.GetRowCellValue(i, "id_departement").ToString
                 Dim dept As String = GVData.GetRowCellValue(i, "departement").ToString
                 Dim cm As Boolean = False
@@ -101,7 +107,7 @@
                 GVData.ActiveFilterString = ""
             Else
                 Dim id_item_coa_propose As String = FormItemCatMappingDet.id
-                Dim id_item_cat As String = LECat.EditValue.ToString
+                Dim id_item_cat As String = SLECat.EditValue.ToString
 
                 Dim qi As String = "INSERT INTO tb_item_coa_propose_det(id_item_coa_propose, id_item_cat, id_departement, id_coa_in, id_coa_out, is_request, is_expense) VALUES "
                 For j As Integer = 0 To ((GVData.RowCount - 1) - GetGroupRowCount(GVData))
@@ -143,7 +149,11 @@
     Private Sub RepositoryItemSearchLookUpEdit1_Popup(sender As Object, e As EventArgs) Handles RepositoryItemSearchLookUpEdit1.Popup
         Dim editor As DevExpress.XtraEditors.SearchLookUpEdit = TryCast(GVData.ActiveEditor, DevExpress.XtraEditors.SearchLookUpEdit)
         If CheckEdit1.EditValue = True Then
-            editor.Properties.View.ActiveFilterString = "[acc_description] like '%" + LECat.Text.ToString + "%'"
+            editor.Properties.View.ActiveFilterString = "[acc_description] like '%" + SLECat.Text.ToString + "%'"
         End If
+    End Sub
+
+    Private Sub SLECat_EditValueChanged(sender As Object, e As EventArgs) Handles SLECat.EditValueChanged
+        viewData()
     End Sub
 End Class

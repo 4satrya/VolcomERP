@@ -527,6 +527,7 @@ Public Class FormMasterRawMaterialDetSingle
 
     Private Sub BSetDefault_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BSetDefault.Click
         Dim id_mat_det_price As String = GVPrice.GetFocusedRowCellDisplayText("id_mat_det_price").ToString
+        Dim price As String = GVPrice.GetFocusedRowCellDisplayText("mat_det_price").ToString
         Dim query, res As String
         'check first
         query = String.Format("SELECT count(id_storage_mat) FROM tb_storage_mat WHERE id_mat_det='{0}' ", id_mat_det)
@@ -536,15 +537,19 @@ Public Class FormMasterRawMaterialDetSingle
             stopCustom("Please choose price using default currency.")
         ElseIf Not res = "0" Then
             stopCustom("Material already stored by default cost.")
+            'ElseIf Not price.Substring(price.Length - 2) = "00" Then
+            '    stopCustom("Last 2 digit decimal must be zero, example : 1234.2200")
         Else
             Dim confirm As DialogResult
 
-            confirm = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure want to change material cost to this price?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+            confirm = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure want to change material cost to this price? All material listed on MRS will changes, continue ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
             If confirm = Windows.Forms.DialogResult.Yes Then
                 Cursor = Cursors.WaitCursor
                 Try
-                    query = String.Format("UPDATE tb_m_mat_det_price SET is_default_cost='2' WHERE id_mat_det='{1}'; UPDATE tb_m_mat_det_price SET is_default_cost='1' WHERE id_mat_det_price = '{0}'", id_mat_det_price, id_mat_det)
+                    'get old id_mat_det_price
+                    query = String.Format("UPDATE tb_m_mat_det_price SET is_default_cost='2' WHERE id_mat_det='{1}'; UPDATE tb_m_mat_det_price SET is_default_cost='1' WHERE id_mat_det_price = '{0}'; UPDATE tb_prod_order_mrs_det SET id_mat_det_price='{0}' WHERE id_mat_det='{1}'; ", id_mat_det_price, id_mat_det)
                     execute_non_query(query, True, "", "", "", "")
+                    '
                     viewPrice()
                     infoCustom("Default cost changed.")
                 Catch ex As Exception

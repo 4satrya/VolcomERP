@@ -126,39 +126,51 @@
     End Sub
 
     Private Sub GVProd_FocusedRowChanged(ByVal sender As System.Object, ByVal e As DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs) Handles GVProd.FocusedRowChanged
-        Dim focusedRowHandle As Integer = -1
-        If e.FocusedRowHandle = DevExpress.XtraGrid.GridControl.NewItemRowHandle OrElse e.FocusedRowHandle = DevExpress.XtraGrid.GridControl.AutoFilterRowHandle Then
-            Return
+        'Dim focusedRowHandle As Integer = -1
+        'If e.FocusedRowHandle = DevExpress.XtraGrid.GridControl.NewItemRowHandle OrElse e.FocusedRowHandle = DevExpress.XtraGrid.GridControl.AutoFilterRowHandle Then
+        '    Return
+        'End If
+        'Dim view As DevExpress.XtraGrid.Views.Grid.GridView = CType(sender, DevExpress.XtraGrid.Views.Grid.GridView)
+        'If e.FocusedRowHandle < 0 Then
+        '    If e.PrevFocusedRowHandle = DevExpress.XtraGrid.GridControl.InvalidRowHandle Then
+        '        focusedRowHandle = 0
+        '    ElseIf Control.MouseButtons = MouseButtons.Left OrElse Control.MouseButtons = MouseButtons.Right Then
+        '        focusedRowHandle = e.PrevFocusedRowHandle
+        '    Else
+        '        Dim prevRow As Integer = view.GetVisibleIndex(e.PrevFocusedRowHandle)
+        '        Dim currRow As Integer = view.GetVisibleIndex(e.FocusedRowHandle)
+        '        If prevRow > currRow Then
+        '            focusedRowHandle = e.PrevFocusedRowHandle - 1
+        '        Else
+        '            focusedRowHandle = e.PrevFocusedRowHandle + 1
+        '        End If
+        '        If focusedRowHandle < 0 Then
+        '            focusedRowHandle = 0
+        '        End If
+        '        If focusedRowHandle >= view.DataRowCount Then
+        '            focusedRowHandle = view.DataRowCount - 1
+        '        End If
+        '    End If
+        '    If focusedRowHandle < 0 Then
+        '        view.FocusedRowHandle = 0
+        '    Else
+        '        view.FocusedRowHandle = focusedRowHandle
+        '    End If
+        'End If
+        'Dim id_pod As String = "0"
+        'Try
+        '    id_pod = GVProd.GetFocusedRowCellValue("id_prod_order").ToString
+        'Catch ex As Exception
+        'End Try
+        'If id_pod = "" Then
+        '    id_pod = "0"
+        'End If
+        If GVProd.RowCount > 0 And GVProd.FocusedRowHandle >= 0 Then
+            view_list_prod(GVProd.GetFocusedRowCellValue("id_prod_order").ToString)
+            showMyToolHint()
+        Else
+            GCListProd.DataSource = Nothing
         End If
-        Dim view As DevExpress.XtraGrid.Views.Grid.GridView = CType(sender, DevExpress.XtraGrid.Views.Grid.GridView)
-        If e.FocusedRowHandle < 0 Then
-            If e.PrevFocusedRowHandle = DevExpress.XtraGrid.GridControl.InvalidRowHandle Then
-                focusedRowHandle = 0
-            ElseIf Control.MouseButtons = MouseButtons.Left OrElse Control.MouseButtons = MouseButtons.Right Then
-                focusedRowHandle = e.PrevFocusedRowHandle
-            Else
-                Dim prevRow As Integer = view.GetVisibleIndex(e.PrevFocusedRowHandle)
-                Dim currRow As Integer = view.GetVisibleIndex(e.FocusedRowHandle)
-                If prevRow > currRow Then
-                    focusedRowHandle = e.PrevFocusedRowHandle - 1
-                Else
-                    focusedRowHandle = e.PrevFocusedRowHandle + 1
-                End If
-                If focusedRowHandle < 0 Then
-                    focusedRowHandle = 0
-                End If
-                If focusedRowHandle >= view.DataRowCount Then
-                    focusedRowHandle = view.DataRowCount - 1
-                End If
-            End If
-            If focusedRowHandle < 0 Then
-                view.FocusedRowHandle = 0
-            Else
-                view.FocusedRowHandle = focusedRowHandle
-            End If
-        End If
-        view_list_prod(GVProd.GetFocusedRowCellValue("id_prod_order").ToString)
-        showMyToolHint()
     End Sub
 
     Private Sub GVProd_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GVProd.DoubleClick

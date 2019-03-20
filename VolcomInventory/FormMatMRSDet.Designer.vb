@@ -146,7 +146,6 @@ Partial Class FormMatMRSDet
         'BPrint
         '
         Me.BPrint.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BPrint.Enabled = False
         Me.BPrint.Location = New System.Drawing.Point(672, 2)
         Me.BPrint.Name = "BPrint"
         Me.BPrint.Size = New System.Drawing.Size(79, 36)
@@ -417,9 +416,9 @@ Partial Class FormMatMRSDet
         '
         'PanelControl2
         '
+        Me.PanelControl2.Controls.Add(Me.BDelMat)
         Me.PanelControl2.Controls.Add(Me.BEditMat)
         Me.PanelControl2.Controls.Add(Me.BAddMat)
-        Me.PanelControl2.Controls.Add(Me.BDelMat)
         Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl2.Location = New System.Drawing.Point(0, 0)
         Me.PanelControl2.Name = "PanelControl2"
@@ -428,31 +427,34 @@ Partial Class FormMatMRSDet
         '
         'BEditMat
         '
+        Me.BEditMat.Dock = System.Windows.Forms.DockStyle.Right
         Me.BEditMat.ImageIndex = 2
         Me.BEditMat.ImageList = Me.LargeImageCollection
-        Me.BEditMat.Location = New System.Drawing.Point(692, 4)
+        Me.BEditMat.Location = New System.Drawing.Point(703, 2)
         Me.BEditMat.Name = "BEditMat"
-        Me.BEditMat.Size = New System.Drawing.Size(91, 29)
+        Me.BEditMat.Size = New System.Drawing.Size(91, 34)
         Me.BEditMat.TabIndex = 22
         Me.BEditMat.Text = "Edit"
         '
         'BAddMat
         '
+        Me.BAddMat.Dock = System.Windows.Forms.DockStyle.Right
         Me.BAddMat.ImageIndex = 0
         Me.BAddMat.ImageList = Me.LargeImageCollection
-        Me.BAddMat.Location = New System.Drawing.Point(789, 4)
+        Me.BAddMat.Location = New System.Drawing.Point(794, 2)
         Me.BAddMat.Name = "BAddMat"
-        Me.BAddMat.Size = New System.Drawing.Size(91, 29)
+        Me.BAddMat.Size = New System.Drawing.Size(91, 34)
         Me.BAddMat.TabIndex = 21
         Me.BAddMat.Text = "Add"
         '
         'BDelMat
         '
+        Me.BDelMat.Dock = System.Windows.Forms.DockStyle.Right
         Me.BDelMat.ImageIndex = 1
         Me.BDelMat.ImageList = Me.LargeImageCollection
-        Me.BDelMat.Location = New System.Drawing.Point(595, 4)
+        Me.BDelMat.Location = New System.Drawing.Point(612, 2)
         Me.BDelMat.Name = "BDelMat"
-        Me.BDelMat.Size = New System.Drawing.Size(91, 29)
+        Me.BDelMat.Size = New System.Drawing.Size(91, 34)
         Me.BDelMat.TabIndex = 20
         Me.BDelMat.Text = "Delete"
         '

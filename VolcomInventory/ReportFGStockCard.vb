@@ -14,4 +14,13 @@
     Private Sub ReportFGStockCard_BeforePrint(ByVal sender As System.Object, ByVal e As System.Drawing.Printing.PrintEventArgs) Handles MyBase.BeforePrint
         GridControl1.DataSource = dt
     End Sub
+
+    Private Sub BandedGridView1_CustomColumnDisplayText(sender As Object, e As DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs) Handles BandedGridView1.CustomColumnDisplayText
+        If (e.Column.FieldName.Contains("enter") Or e.Column.FieldName = "TTL" Or e.Column.FieldName.Contains("Bal")) Then
+            Dim qty As Decimal = Convert.ToDecimal(e.Value)
+            If qty = 0 Then
+                e.DisplayText = "-"
+            End If
+        End If
+    End Sub
 End Class

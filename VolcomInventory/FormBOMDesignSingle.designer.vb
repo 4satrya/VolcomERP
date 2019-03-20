@@ -68,6 +68,7 @@ Partial Class FormBOMDesignSingle
         Me.GridColumn15 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn14 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn22 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnCat = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn16 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn17 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -611,7 +612,7 @@ Partial Class FormBOMDesignSingle
         '
         'GVBomDetOvh
         '
-        Me.GVBomDetOvh.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn15, Me.GridColumn11, Me.GridColumn14, Me.GridColumnCat, Me.GridColumn16, Me.GridColumn17, Me.GridColumn19, Me.GridColumn13, Me.GridColumnVendPrice, Me.GridColumnKursOVH, Me.GridColumn20, Me.GridColumn21, Me.GridColumn10, Me.GridColumnOVHCenter})
+        Me.GVBomDetOvh.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn15, Me.GridColumn11, Me.GridColumn14, Me.GridColumn22, Me.GridColumnCat, Me.GridColumn16, Me.GridColumn17, Me.GridColumn19, Me.GridColumn13, Me.GridColumnVendPrice, Me.GridColumnKursOVH, Me.GridColumn20, Me.GridColumn21, Me.GridColumn10, Me.GridColumnOVHCenter})
         Me.GVBomDetOvh.CustomizationFormBounds = New System.Drawing.Rectangle(885, 289, 216, 178)
         Me.GVBomDetOvh.GridControl = Me.GCBomDetOvh
         Me.GVBomDetOvh.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total", Me.GridColumn21, "{0:N2}")})
@@ -640,6 +641,15 @@ Partial Class FormBOMDesignSingle
         Me.GridColumn14.FieldName = "id_bom_det"
         Me.GridColumn14.Name = "GridColumn14"
         '
+        'GridColumn22
+        '
+        Me.GridColumn22.Caption = "Vendor"
+        Me.GridColumn22.FieldName = "vendor"
+        Me.GridColumn22.Name = "GridColumn22"
+        Me.GridColumn22.Visible = True
+        Me.GridColumn22.VisibleIndex = 4
+        Me.GridColumn22.Width = 92
+        '
         'GridColumnCat
         '
         Me.GridColumnCat.AppearanceCell.Options.UseTextOptions = True
@@ -651,7 +661,7 @@ Partial Class FormBOMDesignSingle
         Me.GridColumnCat.Name = "GridColumnCat"
         Me.GridColumnCat.Visible = True
         Me.GridColumnCat.VisibleIndex = 2
-        Me.GridColumnCat.Width = 96
+        Me.GridColumnCat.Width = 76
         '
         'GridColumn16
         '
@@ -660,7 +670,7 @@ Partial Class FormBOMDesignSingle
         Me.GridColumn16.Name = "GridColumn16"
         Me.GridColumn16.Visible = True
         Me.GridColumn16.VisibleIndex = 1
-        Me.GridColumn16.Width = 80
+        Me.GridColumn16.Width = 63
         '
         'GridColumn17
         '
@@ -669,7 +679,7 @@ Partial Class FormBOMDesignSingle
         Me.GridColumn17.Name = "GridColumn17"
         Me.GridColumn17.Visible = True
         Me.GridColumn17.VisibleIndex = 3
-        Me.GridColumn17.Width = 203
+        Me.GridColumn17.Width = 118
         '
         'GridColumn19
         '
@@ -683,8 +693,8 @@ Partial Class FormBOMDesignSingle
         Me.GridColumn19.FieldName = "qty"
         Me.GridColumn19.Name = "GridColumn19"
         Me.GridColumn19.Visible = True
-        Me.GridColumn19.VisibleIndex = 4
-        Me.GridColumn19.Width = 46
+        Me.GridColumn19.VisibleIndex = 5
+        Me.GridColumn19.Width = 35
         '
         'GridColumn13
         '
@@ -696,7 +706,8 @@ Partial Class FormBOMDesignSingle
         Me.GridColumn13.FieldName = "currency"
         Me.GridColumn13.Name = "GridColumn13"
         Me.GridColumn13.Visible = True
-        Me.GridColumn13.VisibleIndex = 6
+        Me.GridColumn13.VisibleIndex = 7
+        Me.GridColumn13.Width = 59
         '
         'GridColumnVendPrice
         '
@@ -710,7 +721,8 @@ Partial Class FormBOMDesignSingle
         Me.GridColumnVendPrice.FieldName = "price"
         Me.GridColumnVendPrice.Name = "GridColumnVendPrice"
         Me.GridColumnVendPrice.Visible = True
-        Me.GridColumnVendPrice.VisibleIndex = 7
+        Me.GridColumnVendPrice.VisibleIndex = 8
+        Me.GridColumnVendPrice.Width = 59
         '
         'GridColumnKursOVH
         '
@@ -724,7 +736,8 @@ Partial Class FormBOMDesignSingle
         Me.GridColumnKursOVH.FieldName = "kurs"
         Me.GridColumnKursOVH.Name = "GridColumnKursOVH"
         Me.GridColumnKursOVH.Visible = True
-        Me.GridColumnKursOVH.VisibleIndex = 8
+        Me.GridColumnKursOVH.VisibleIndex = 9
+        Me.GridColumnKursOVH.Width = 59
         '
         'GridColumn20
         '
@@ -738,8 +751,8 @@ Partial Class FormBOMDesignSingle
         Me.GridColumn20.FieldName = "unit_price"
         Me.GridColumn20.Name = "GridColumn20"
         Me.GridColumn20.Visible = True
-        Me.GridColumn20.VisibleIndex = 9
-        Me.GridColumn20.Width = 105
+        Me.GridColumn20.VisibleIndex = 10
+        Me.GridColumn20.Width = 83
         '
         'GridColumn21
         '
@@ -754,8 +767,8 @@ Partial Class FormBOMDesignSingle
         Me.GridColumn21.Name = "GridColumn21"
         Me.GridColumn21.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total", "{0:N2}")})
         Me.GridColumn21.Visible = True
-        Me.GridColumn21.VisibleIndex = 10
-        Me.GridColumn21.Width = 123
+        Me.GridColumn21.VisibleIndex = 11
+        Me.GridColumn21.Width = 116
         '
         'GridColumn10
         '
@@ -767,8 +780,8 @@ Partial Class FormBOMDesignSingle
         Me.GridColumn10.FieldName = "uom"
         Me.GridColumn10.Name = "GridColumn10"
         Me.GridColumn10.Visible = True
-        Me.GridColumn10.VisibleIndex = 5
-        Me.GridColumn10.Width = 43
+        Me.GridColumn10.VisibleIndex = 6
+        Me.GridColumn10.Width = 32
         '
         'GridColumnOVHCenter
         '
@@ -782,7 +795,7 @@ Partial Class FormBOMDesignSingle
         Me.GridColumnOVHCenter.Name = "GridColumnOVHCenter"
         Me.GridColumnOVHCenter.Visible = True
         Me.GridColumnOVHCenter.VisibleIndex = 0
-        Me.GridColumnOVHCenter.Width = 62
+        Me.GridColumnOVHCenter.Width = 49
         '
         'RCOVHMain
         '
@@ -1014,7 +1027,7 @@ Partial Class FormBOMDesignSingle
         Me.BDuplicate.Name = "BDuplicate"
         Me.BDuplicate.Size = New System.Drawing.Size(134, 33)
         Me.BDuplicate.TabIndex = 19
-        Me.BDuplicate.Text = "Duplicate To This Design"
+        Me.BDuplicate.Text = "Record BOM History"
         '
         'BMark
         '
@@ -1217,4 +1230,5 @@ Partial Class FormBOMDesignSingle
     Friend WithEvents PanelControl4 As DevExpress.XtraEditors.PanelControl
     Friend WithEvents GridColumn18 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents LPOApproved As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents GridColumn22 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

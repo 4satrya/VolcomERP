@@ -36,13 +36,15 @@ Partial Class FormSuperUser
         Me.BSubDep = New DevExpress.XtraEditors.SimpleButton()
         Me.BMockMark = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnSetupDBIA = New DevExpress.XtraEditors.SimpleButton()
+        Me.TextEdit1 = New DevExpress.XtraEditors.TextEdit()
         CType(Me.PictureEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TextEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'SimpleButton1
         '
         Me.SimpleButton1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.SimpleButton1.Location = New System.Drawing.Point(0, 184)
+        Me.SimpleButton1.Location = New System.Drawing.Point(0, 226)
         Me.SimpleButton1.Name = "SimpleButton1"
         Me.SimpleButton1.Size = New System.Drawing.Size(430, 23)
         Me.SimpleButton1.TabIndex = 0
@@ -51,7 +53,7 @@ Partial Class FormSuperUser
         'BtnConn
         '
         Me.BtnConn.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.BtnConn.Location = New System.Drawing.Point(0, 115)
+        Me.BtnConn.Location = New System.Drawing.Point(0, 157)
         Me.BtnConn.Name = "BtnConn"
         Me.BtnConn.Size = New System.Drawing.Size(430, 23)
         Me.BtnConn.TabIndex = 1
@@ -60,7 +62,7 @@ Partial Class FormSuperUser
         'BtnDepartement
         '
         Me.BtnDepartement.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.BtnDepartement.Location = New System.Drawing.Point(0, 138)
+        Me.BtnDepartement.Location = New System.Drawing.Point(0, 180)
         Me.BtnDepartement.Name = "BtnDepartement"
         Me.BtnDepartement.Size = New System.Drawing.Size(430, 23)
         Me.BtnDepartement.TabIndex = 2
@@ -69,7 +71,7 @@ Partial Class FormSuperUser
         'BtnOther
         '
         Me.BtnOther.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.BtnOther.Location = New System.Drawing.Point(0, 276)
+        Me.BtnOther.Location = New System.Drawing.Point(0, 318)
         Me.BtnOther.Name = "BtnOther"
         Me.BtnOther.Size = New System.Drawing.Size(430, 23)
         Me.BtnOther.TabIndex = 3
@@ -138,7 +140,7 @@ Partial Class FormSuperUser
         'BSendMessage
         '
         Me.BSendMessage.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.BSendMessage.Location = New System.Drawing.Point(0, 207)
+        Me.BSendMessage.Location = New System.Drawing.Point(0, 249)
         Me.BSendMessage.Name = "BSendMessage"
         Me.BSendMessage.Size = New System.Drawing.Size(430, 23)
         Me.BSendMessage.TabIndex = 15
@@ -147,7 +149,7 @@ Partial Class FormSuperUser
         'BtnOutlet
         '
         Me.BtnOutlet.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.BtnOutlet.Location = New System.Drawing.Point(0, 230)
+        Me.BtnOutlet.Location = New System.Drawing.Point(0, 272)
         Me.BtnOutlet.Name = "BtnOutlet"
         Me.BtnOutlet.Size = New System.Drawing.Size(430, 23)
         Me.BtnOutlet.TabIndex = 16
@@ -156,7 +158,7 @@ Partial Class FormSuperUser
         'BSubDep
         '
         Me.BSubDep.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.BSubDep.Location = New System.Drawing.Point(0, 161)
+        Me.BSubDep.Location = New System.Drawing.Point(0, 203)
         Me.BSubDep.Name = "BSubDep"
         Me.BSubDep.Size = New System.Drawing.Size(430, 23)
         Me.BSubDep.TabIndex = 17
@@ -165,7 +167,7 @@ Partial Class FormSuperUser
         'BMockMark
         '
         Me.BMockMark.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.BMockMark.Location = New System.Drawing.Point(0, 92)
+        Me.BMockMark.Location = New System.Drawing.Point(0, 134)
         Me.BMockMark.Name = "BMockMark"
         Me.BMockMark.Size = New System.Drawing.Size(430, 23)
         Me.BMockMark.TabIndex = 18
@@ -174,17 +176,25 @@ Partial Class FormSuperUser
         'BtnSetupDBIA
         '
         Me.BtnSetupDBIA.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.BtnSetupDBIA.Location = New System.Drawing.Point(0, 253)
+        Me.BtnSetupDBIA.Location = New System.Drawing.Point(0, 295)
         Me.BtnSetupDBIA.Name = "BtnSetupDBIA"
         Me.BtnSetupDBIA.Size = New System.Drawing.Size(430, 23)
         Me.BtnSetupDBIA.TabIndex = 19
         Me.BtnSetupDBIA.Text = "Stock Take DB"
         '
+        'TextEdit1
+        '
+        Me.TextEdit1.Location = New System.Drawing.Point(167, 81)
+        Me.TextEdit1.Name = "TextEdit1"
+        Me.TextEdit1.Size = New System.Drawing.Size(139, 20)
+        Me.TextEdit1.TabIndex = 20
+        '
         'FormSuperUser
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(430, 299)
+        Me.ClientSize = New System.Drawing.Size(430, 341)
+        Me.Controls.Add(Me.TextEdit1)
         Me.Controls.Add(Me.BMockMark)
         Me.Controls.Add(Me.BtnConn)
         Me.Controls.Add(Me.BtnDepartement)
@@ -207,6 +217,7 @@ Partial Class FormSuperUser
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Super User"
         CType(Me.PictureEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TextEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -228,4 +239,5 @@ Partial Class FormSuperUser
     Friend WithEvents BSubDep As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BMockMark As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BtnSetupDBIA As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents TextEdit1 As DevExpress.XtraEditors.TextEdit
 End Class

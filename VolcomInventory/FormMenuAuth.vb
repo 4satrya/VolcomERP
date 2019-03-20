@@ -14,7 +14,36 @@
         WHERE u.username='" + username + "' AND password=MD5('" + password + "') "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         If data.Rows.Count > 0 Then
-            allowed()
+            If type = "1" Then
+                'return non stock
+                FormSalesReturnDetNew.allow = True
+            ElseIf type = "2" Then
+                'show cost - report stock
+                If FormFGStock.XTCSOH.SelectedTabPageIndex = 0 Then
+                    If FormFGStock.BGVFGStock.RowCount > 0 Then
+                        FormFGStock.show_cost = True
+                        FormFGStock.BGVFGStock.Columns("Unit Cost").VisibleIndex = 8
+                        FormFGStock.BGVFGStock.Columns("Unit Cost").OptionsColumn.ShowInCustomizationForm = True
+                        FormFGStock.BGVFGStock.Columns("Amount Cost Total").VisibleIndex = 70
+                        FormFGStock.BGVFGStock.Columns("Amount Cost Total").OptionsColumn.ShowInCustomizationForm = True
+                    Else
+                        FormFGStock.show_cost = True
+                    End If
+                ElseIf FormFGStock.XTCSOH.SelectedTabPageIndex = 1 Then
+                    If FormFGStock.BGVStockBarcode.RowCount > 0 Then
+                        FormFGStock.show_cost = True
+                        FormFGStock.BGVStockBarcode.Columns("design_cop").VisibleIndex = 6
+                        FormFGStock.BGVStockBarcode.Columns("design_cop").OptionsColumn.ShowInCustomizationForm = True
+                    Else
+                        FormFGStock.show_cost = True
+                    End If
+                End If
+            ElseIf type = "3" Then
+                'cancell order by MD
+                FormSalesOrder.id_user_special = data.Rows(0)("id_user").ToString
+                FormSalesOrderPacking.id_pop_up = "6"
+                FormSalesOrderPacking.ShowDialog()
+            End If
             Close()
         Else
             stopCustom("You do not have access for this menu")
@@ -28,33 +57,6 @@
         Close()
     End Sub
 
-    Sub allowed()
-        If type = "1" Then
-            'return non stock
-            FormSalesReturnDetNew.allow = True
-        ElseIf type = "2" Then
-            'show cost - report stock
-            If FormFGStock.XTCSOH.SelectedTabPageIndex = 0 Then
-                If FormFGStock.BGVFGStock.RowCount > 0 Then
-                    FormFGStock.show_cost = True
-                    FormFGStock.BGVFGStock.Columns("Unit Cost").VisibleIndex = 8
-                    FormFGStock.BGVFGStock.Columns("Unit Cost").OptionsColumn.ShowInCustomizationForm = True
-                    FormFGStock.BGVFGStock.Columns("Amount Cost Total").VisibleIndex = 70
-                    FormFGStock.BGVFGStock.Columns("Amount Cost Total").OptionsColumn.ShowInCustomizationForm = True
-                Else
-                    FormFGStock.show_cost = True
-                End If
-            ElseIf FormFGStock.XTCSOH.SelectedTabPageIndex = 1 Then
-                If FormFGStock.BGVStockBarcode.RowCount > 0 Then
-                    FormFGStock.show_cost = True
-                    FormFGStock.BGVStockBarcode.Columns("design_cop").VisibleIndex = 6
-                    FormFGStock.BGVStockBarcode.Columns("design_cop").OptionsColumn.ShowInCustomizationForm = True
-                Else
-                    FormFGStock.show_cost = True
-                End If
-            End If
-        End If
-    End Sub
 
     Sub rejected()
         If type = "1" Then

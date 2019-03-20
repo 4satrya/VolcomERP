@@ -59,9 +59,9 @@ Partial Class FormSalesOrderPacking
         '
         Me.LabelControl1.Location = New System.Drawing.Point(12, 12)
         Me.LabelControl1.Name = "LabelControl1"
-        Me.LabelControl1.Size = New System.Drawing.Size(70, 13)
+        Me.LabelControl1.Size = New System.Drawing.Size(62, 13)
         Me.LabelControl1.TabIndex = 1
-        Me.LabelControl1.Text = "Packing Status"
+        Me.LabelControl1.Text = "Order Status"
         '
         'SLEPackingStatus
         '

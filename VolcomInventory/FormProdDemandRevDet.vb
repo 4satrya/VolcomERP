@@ -5,6 +5,9 @@
     Dim id_report_status As String = "-1"
     Dim is_confirm As String = "-1"
     Dim rmt As String = ""
+    Dim season As String = ""
+    Dim is_load_break_size_rev As Boolean = False
+    Dim is_load_break_size As Boolean = False
 
     Private Sub FormProdDemandRevDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewReportStatus()
@@ -29,6 +32,7 @@
         is_confirm = data.Rows(0)("is_confirm").ToString
         LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", data.Rows(0)("id_report_status").ToString)
         id_report_status = data.Rows(0)("id_report_status").ToString
+        season = data.Rows(0)("season").ToString
         If data.Rows(0)("id_pd_kind").ToString = "1" Then
             rmt = "143"
         ElseIf data.Rows(0)("id_pd_kind").ToString = "2" Then
@@ -36,7 +40,6 @@
         ElseIf data.Rows(0)("id_pd_kind").ToString = "3" Then
             rmt = "145"
         End If
-
         viewDetail()
         allow_status()
     End Sub
@@ -52,10 +55,11 @@
 
     Sub viewPDAll()
         Cursor = Cursors.WaitCursor
+        is_load_break_size = False
+        CEShowBreakDown.EditValue = False
         Dim query As String = "CALL view_prod_demand_rev_all(" + id + ", " + id_prod_demand + ")"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCData.DataSource = data
-        GVData.BestFitColumns()
         Cursor = Cursors.Default
     End Sub
 
@@ -63,16 +67,18 @@
     Sub allow_status()
         BtnAttachment.Visible = True
         BtnCancell.Visible = True
-        If is_confirm = "2" Then
+        If is_confirm = "2" And is_view = "-1" Then
             BtnConfirm.Visible = True
             BtnMark.Visible = False
             MENote.Enabled = False
             PanelControlNav.Visible = True
+            BtnPrint.Visible = False
         Else
             BtnConfirm.Visible = False
             BtnMark.Visible = True
             MENote.Enabled = False
             PanelControlNav.Visible = False
+            BtnPrint.Visible = True
         End If
 
         If id_report_status = "6" Then
@@ -170,11 +176,11 @@
         Cursor = Cursors.WaitCursor
         'cek file
         Dim cond_exist_file As Boolean = True
-        Dim query_file As String = "SELECT * FROM tb_doc d WHERE d.report_mark_type=" + rmt + " AND d.id_report=" + id + ""
-        Dim data_file As DataTable = execute_query(query_file, -1, True, "", "", "", "")
-        If data_file.Rows.Count <= 0 Then
-            cond_exist_file = False
-        End If
+        'Dim query_file As String = "SELECT * FROM tb_doc d WHERE d.report_mark_type=" + rmt + " AND d.id_report=" + id + ""
+        'Dim data_file As DataTable = execute_query(query_file, -1, True, "", "", "", "")
+        'If data_file.Rows.Count <= 0 Then
+        '    cond_exist_file = False
+        'End If
 
         If Not cond_exist_file Then
             stopCustom("Please attach document first")
@@ -188,7 +194,7 @@
                 Dim query As String = "UPDATE tb_prod_demand_rev SET is_confirm=1 WHERE id_prod_demand_rev='" + id + "'"
                 execute_non_query(query, True, "", "", "", "")
 
-                'submit approval
+                'submit approval 
                 submit_who_prepared(rmt, id, id_user)
                 BtnConfirm.Visible = False
                 actionLoad()
@@ -200,48 +206,82 @@
     End Sub
 
     Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles BtnPrint.Click
-        If id_report_status = "6" Then
-            Cursor = Cursors.WaitCursor
-            ReportProdDemandRev.id = id
-            ReportProdDemandRev.rmt = rmt
+        Cursor = Cursors.WaitCursor
+        If Not check_allow_print(id_report_status, rmt, id) Then
+            warningCustom("Can't print, please complete all approval on system first")
+        Else
+            Dim gv As DevExpress.XtraGrid.Views.Grid.GridView = Nothing
             If XTCRevision.SelectedTabPageIndex = 0 Then
+                gv = GVRevision
                 ReportProdDemandRev.dt = GCRevision.DataSource
                 ReportProdDemandRev.type = "1"
             ElseIf XTCRevision.SelectedTabPageIndex = 1 Then
+                gv = GVData
                 ReportProdDemandRev.dt = GCData.DataSource
                 ReportProdDemandRev.type = "2"
             End If
+            ReportProdDemandRev.id = id
+            If id_report_status <> "6" Then
+                ReportProdDemandRev.is_pre = "1"
+            Else
+                ReportProdDemandRev.is_pre = "-1"
+            End If
+            ReportProdDemandRev.id_report_status = LEReportStatus.EditValue.ToString
+
+            ReportProdDemandRev.rmt = rmt
             Dim Report As New ReportProdDemandRev()
 
-            ' '... 
-            ' ' creating and saving the view's layout to a new memory stream 
+            '' '... 
+            '' ' creating and saving the view's layout to a new memory stream 
             Dim str As System.IO.Stream
             str = New System.IO.MemoryStream()
-            GVData.SaveLayoutToStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+            gv.SaveLayoutToStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
             str.Seek(0, System.IO.SeekOrigin.Begin)
             Report.GVData.RestoreLayoutFromStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
             str.Seek(0, System.IO.SeekOrigin.Begin)
 
-            'Grid Detail
-            ReportStyleGridview(Report.GVData)
+            'style
+            Report.GVData.OptionsPrint.UsePrintStyles = True
+            Report.GVData.AppearancePrint.FilterPanel.BackColor = Color.Transparent
+            Report.GVData.AppearancePrint.FilterPanel.ForeColor = Color.Black
+            Report.GVData.AppearancePrint.FilterPanel.Font = New Font("Tahoma", 5, FontStyle.Regular)
 
-            'Parse val
+            Report.GVData.AppearancePrint.GroupFooter.BackColor = Color.Transparent
+            Report.GVData.AppearancePrint.GroupFooter.ForeColor = Color.Black
+            Report.GVData.AppearancePrint.GroupFooter.Font = New Font("Tahoma", 5, FontStyle.Bold)
+
+            Report.GVData.AppearancePrint.GroupRow.BackColor = Color.Transparent
+            Report.GVData.AppearancePrint.GroupRow.ForeColor = Color.Black
+            Report.GVData.AppearancePrint.GroupRow.Font = New Font("Tahoma", 5, FontStyle.Bold)
+
+
+            Report.GVData.AppearancePrint.HeaderPanel.BackColor = Color.Transparent
+            Report.GVData.AppearancePrint.HeaderPanel.ForeColor = Color.Black
+            Report.GVData.AppearancePrint.HeaderPanel.Font = New Font("Tahoma", 5, FontStyle.Bold)
+
+            Report.GVData.AppearancePrint.FooterPanel.BackColor = Color.Transparent
+            Report.GVData.AppearancePrint.FooterPanel.ForeColor = Color.Black
+            Report.GVData.AppearancePrint.FooterPanel.Font = New Font("Tahoma", 5.3, FontStyle.Bold)
+
+            Report.GVData.AppearancePrint.Row.Font = New Font("Tahoma", 5.3, FontStyle.Regular)
+
+            Report.GVData.OptionsPrint.ExpandAllDetails = True
+            Report.GVData.OptionsPrint.UsePrintStyles = True
+            Report.GVData.OptionsPrint.PrintDetails = True
+            Report.GVData.OptionsPrint.PrintFooter = True
+
             Report.LabelNumber.Text = TxtProdDemandNumber.Text
             Report.LabelRev.Text = TxtRevision.Text
+            Report.LabelDate.Text = DECreated.Text.ToUpper
+            Report.LabelSeason.Text = season.ToUpper
+            Report.LabelStatus.Text = LEReportStatus.Text.ToUpper
+            Report.LNote.Text = MENote.Text
 
-            'Show the report's preview. 
+            ' Show the report's preview. 
             Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
-            Tool.PrintingSystem.SetCommandVisibility(DevExpress.XtraPrinting.PrintingSystemCommand.ExportFile, DevExpress.XtraPrinting.CommandVisibility.None)
-            Tool.PrintingSystem.SetCommandVisibility(DevExpress.XtraPrinting.PrintingSystemCommand.SendFile, DevExpress.XtraPrinting.CommandVisibility.None)
-            Tool.ShowRibbonPreviewDialog()
-            Cursor = Cursors.Default
-        Else
-            If XTCRevision.SelectedTabPageIndex = 0 Then
-                print_raw_no_export(GCRevision)
-            ElseIf XTCRevision.SelectedTabPageIndex = 1 Then
-                print_raw_no_export(GCData)
-            End If
+            Tool.ShowPreviewDialog()
         End If
+        Cursor = Cursors.Default
     End Sub
 
     Private Sub BtnAttachment_Click(sender As Object, e As EventArgs) Handles BtnAttachment.Click
@@ -259,7 +299,7 @@
         Cursor = Cursors.WaitCursor
         FormReportMark.report_mark_type = rmt
         FormReportMark.id_report = id
-        FormReportMark.is_view = "1"
+        FormReportMark.is_view = is_view
         FormReportMark.form_origin = Name
         FormReportMark.ShowDialog()
         Cursor = Cursors.Default
@@ -277,63 +317,6 @@
         End If
     End Sub
 
-    Dim tot_cost2 As Decimal
-    Dim tot_prc2 As Decimal
-    Dim tot_cost_grp2 As Decimal
-    Dim tot_prc_grp2 As Decimal
-    Private Sub GVData_CustomSummaryCalculate(sender As Object, e As DevExpress.Data.CustomSummaryEventArgs) Handles GVData.CustomSummaryCalculate
-
-        Dim summaryID As String = Convert.ToString(CType(e.Item, DevExpress.XtraGrid.GridSummaryItem).Tag)
-        Dim View As DevExpress.XtraGrid.Views.Grid.GridView = CType(sender, DevExpress.XtraGrid.Views.Grid.GridView)
-
-        ' Initialization 
-        If e.SummaryProcess = DevExpress.Data.CustomSummaryProcess.Start Then
-            tot_cost2 = 0.0
-            tot_prc2 = 0.0
-            tot_cost_grp2 = 0.0
-            tot_prc_grp2 = 0.0
-        End If
-
-        ' Calculation 
-        If e.SummaryProcess = DevExpress.Data.CustomSummaryProcess.Calculate Then
-            Dim cost As Decimal = CDec(myCoalesce(View.GetRowCellValue(e.RowHandle, "TOTAL COST NON ADDITIONAL").ToString, "0.00"))
-            Dim prc As Decimal = CDec(myCoalesce(View.GetRowCellValue(e.RowHandle, "TOTAL AMOUNT NON ADDITIONAL"), "0.00"))
-            Select Case summaryID
-                Case "c"
-                    tot_cost2 += cost
-                    tot_prc2 += prc
-                Case "d"
-                    tot_cost_grp2 += cost
-                    tot_prc_grp2 += prc
-            End Select
-        End If
-
-        ' Finalization 
-        If e.SummaryProcess = DevExpress.Data.CustomSummaryProcess.Finalize Then
-            Select Case summaryID
-                Case "c" 'total summary
-                    Dim sum_res As Decimal = 0.0
-                    Try
-                        sum_res = tot_prc2 / tot_cost2
-                    Catch ex As Exception
-                    End Try
-                    e.TotalValue = sum_res
-                Case "d" 'group summary
-                    Dim sum_res As Decimal = 0.0
-                    Try
-                        sum_res = tot_prc_grp2 / tot_cost_grp2
-                    Catch ex As Exception
-                    End Try
-                    e.TotalValue = sum_res
-            End Select
-        End If
-    End Sub
-
-    Private Sub GVData_CustomColumnDisplayText(sender As Object, e As DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs) Handles GVData.CustomColumnDisplayText
-        If e.Column.FieldName = "NO" Then
-            e.DisplayText = (e.ListSourceRowIndex + 1).ToString()
-        End If
-    End Sub
 
     Private Sub CEShowHighlight_CheckedChanged(sender As Object, e As EventArgs) Handles CEShowHighlight.CheckedChanged
         AddHandler GVData.RowStyle, AddressOf custom_cell
@@ -413,5 +396,223 @@
             End If
         End If
         Cursor = Cursors.Default
+    End Sub
+
+
+
+    Private Sub CEShowBreakdownRev_CheckedChanged(sender As Object, e As EventArgs) Handles CEShowBreakdownRev.CheckedChanged
+        Cursor = Cursors.WaitCursor
+        If CEShowBreakdownRev.EditValue = True Then
+            'jika belum load
+            If Not is_load_break_size_rev Then
+                Dim query As String = "SELECT pdd.id_prod_demand_design_rev,
+                IFNULL(SUM(CASE WHEN cd.index_size=1 THEN pdp.prod_demand_product_qty END),0) AS `qty1`,
+                IFNULL(SUM(CASE WHEN cd.index_size=2 THEN pdp.prod_demand_product_qty END),0) AS `qty2`,
+                IFNULL(SUM(CASE WHEN cd.index_size=3 THEN pdp.prod_demand_product_qty END),0) AS `qty3`,
+                IFNULL(SUM(CASE WHEN cd.index_size=4 THEN pdp.prod_demand_product_qty END),0) AS `qty4`,
+                IFNULL(SUM(CASE WHEN cd.index_size=5 THEN pdp.prod_demand_product_qty END),0) AS `qty5`,
+                IFNULL(SUM(CASE WHEN cd.index_size=6 THEN pdp.prod_demand_product_qty END),0) AS `qty6`,
+                IFNULL(SUM(CASE WHEN cd.index_size=7 THEN pdp.prod_demand_product_qty END),0) AS `qty7`,
+                IFNULL(SUM(CASE WHEN cd.index_size=8 THEN pdp.prod_demand_product_qty END),0) AS `qty8`,
+                IFNULL(SUM(CASE WHEN cd.index_size=9 THEN pdp.prod_demand_product_qty END),0) AS `qty9`,
+                IFNULL(SUM(CASE WHEN cd.index_size=10 THEN pdp.prod_demand_product_qty END),0) AS `qty10`
+                FROM tb_prod_demand_design_rev pdd 
+                INNER JOIN tb_prod_demand_product_rev pdp ON pdp.id_prod_demand_design_rev =  pdd.id_prod_demand_design_rev
+                INNER JOIN tb_m_product p ON p.id_product = pdp.id_product
+                INNER JOIN tb_m_product_code pc ON pc.id_product = p.id_product
+                INNER JOIN tb_m_code_detail cd ON cd.id_code_detail = pc.id_code_detail
+                WHERE pdd.id_prod_demand_rev=" + id + " AND pdp.prod_demand_product_qty>0
+                GROUP BY pdd.id_prod_demand_design_rev "
+                Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+
+                makeSafeGV(GVRevision)
+                For i As Integer = 0 To ((GVRevision.RowCount - 1) - GetGroupRowCount(GVRevision))
+                    Dim id_pdd As String = GVRevision.GetRowCellValue(i, "id_prod_demand_design_rev").ToString
+                    Dim data_filter_cek As DataRow() = data.Select("[id_prod_demand_design_rev]='" + id_pdd + "' ")
+                    For j As Integer = 1 To 10
+                        GVRevision.SetRowCellValue(i, "qty" + j.ToString, data_filter_cek(0)("qty" + j.ToString))
+                    Next
+                    GVRevision.RefreshData()
+                Next
+
+                'set caption
+                Dim query_caption As String = " SELECT cd.index_size,CONCAT('qty',cd.index_size) AS `col`,GROUP_CONCAT(DISTINCT cd.code_detail_name ORDER BY cd.code_detail_name ASC SEPARATOR '\n') AS `caption` FROM tb_m_code_detail cd
+                WHERE cd.id_code='33'
+                AND cd.`index_size` IN (
+                    SELECT cd.`index_size` FROM tb_prod_demand_design_rev pdd 
+                    INNER JOIN tb_prod_demand_product_rev pdp ON pdp.id_prod_demand_design_rev =  pdd.id_prod_demand_design_rev
+                    INNER JOIN tb_m_product p ON p.id_product = pdp.id_product
+                    INNER JOIN tb_m_product_code pc ON pc.id_product = p.id_product
+                    INNER JOIN tb_m_code_detail cd ON cd.id_code_detail = pc.id_code_detail
+                    WHERE pdd.id_prod_demand_rev=" + id + " AND pdp.prod_demand_product_qty>0
+                    GROUP BY cd.`index_size`
+                )
+                AND cd.`size_type` IN (
+                    SELECT cd.`size_type` FROM tb_prod_demand_design_rev pdd 
+                    INNER JOIN tb_prod_demand_product_rev pdp ON pdp.id_prod_demand_design_rev =  pdd.id_prod_demand_design_rev
+                    INNER JOIN tb_m_product p ON p.id_product = pdp.id_product
+                    INNER JOIN tb_m_product_code pc ON pc.id_product = p.id_product
+                    INNER JOIN tb_m_code_detail cd ON cd.id_code_detail = pc.id_code_detail
+                    WHERE pdd.id_prod_demand_rev=" + id + " AND pdp.prod_demand_product_qty>0
+                    GROUP BY cd.`size_type`
+                )
+                GROUP BY cd.index_size "
+                Dim data_caption As DataTable = execute_query(query_caption, -1, True, "", "", "", "")
+                For c As Integer = 0 To data_caption.Rows.Count - 1
+                    GVRevision.Columns(data_caption.Rows(c)("col").ToString).Caption = data_caption.Rows(c)("caption").ToString
+                Next
+            End If
+
+            'show column
+            Dim ix As Integer = GVRevision.Columns("TOTAL QTY").VisibleIndex
+            Dim index_last_visible = ix
+            For j As Integer = 1 To 10
+                If GVRevision.Columns("qty" + j.ToString).SummaryItem.SummaryValue > 0 Then
+                    index_last_visible += 1
+                    If j < 10 Then
+                        GVRevision.Columns("qty" + j.ToString).VisibleIndex = index_last_visible
+                    Else
+                        GVRevision.Columns("qty" + j.ToString).VisibleIndex = ix + 1
+                    End If
+                End If
+            Next
+            GVRevision.BestFitColumns()
+            is_load_break_size_rev = True
+        Else
+            'hide
+            For j As Integer = 1 To 10
+                GVRevision.Columns("qty" + j.ToString).Visible = False
+            Next
+        End If
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub CEShowBreakDown_CheckedChanged(sender As Object, e As EventArgs) Handles CEShowBreakDown.CheckedChanged
+        Cursor = Cursors.WaitCursor
+        If CEShowBreakDown.EditValue = True Then
+            'jika belum load
+            If Not is_load_break_size Then
+                'set caption
+                Dim query_caption As String = " SELECT cd.index_size,CONCAT('qty',cd.index_size) AS `col`,GROUP_CONCAT(DISTINCT cd.code_detail_name ORDER BY cd.code_detail_name ASC SEPARATOR '\n') AS `caption` FROM tb_m_code_detail cd
+                WHERE cd.id_code='33'
+                AND cd.`index_size` IN (
+                    SELECT * FROM (
+                        SELECT cd.`index_size` FROM tb_prod_demand_design_rev pdd 
+                        INNER JOIN tb_prod_demand_product_rev pdp ON pdp.id_prod_demand_design_rev =  pdd.id_prod_demand_design_rev
+                        INNER JOIN tb_m_product p ON p.id_product = pdp.id_product
+                        INNER JOIN tb_m_product_code pc ON pc.id_product = p.id_product
+                        INNER JOIN tb_m_code_detail cd ON cd.id_code_detail = pc.id_code_detail
+                        WHERE pdd.id_prod_demand_rev=" + id + " AND pdp.prod_demand_product_qty>0
+                        UNION ALL
+                        SELECT cd.`index_size` FROM tb_prod_demand_design pdd 
+                        INNER JOIN tb_prod_demand_product pdp ON pdp.id_prod_demand_design =  pdd.id_prod_demand_design
+                        INNER JOIN tb_m_product p ON p.id_product = pdp.id_product
+                        INNER JOIN tb_m_product_code pc ON pc.id_product = p.id_product
+                        INNER JOIN tb_m_code_detail cd ON cd.id_code_detail = pc.id_code_detail
+                        WHERE pdd.id_prod_demand=" + id_prod_demand + " AND pdp.prod_demand_product_qty>0
+                    ) a GROUP BY a.`index_size`
+                )
+                AND cd.`size_type` IN (
+                    SELECT * FROM (
+                        SELECT cd.`size_type` FROM tb_prod_demand_design_rev pdd 
+                        INNER JOIN tb_prod_demand_product_rev pdp ON pdp.id_prod_demand_design_rev =  pdd.id_prod_demand_design_rev
+                        INNER JOIN tb_m_product p ON p.id_product = pdp.id_product
+                        INNER JOIN tb_m_product_code pc ON pc.id_product = p.id_product
+                        INNER JOIN tb_m_code_detail cd ON cd.id_code_detail = pc.id_code_detail
+                        WHERE pdd.id_prod_demand_rev=" + id + " AND pdp.prod_demand_product_qty>0
+                        UNION ALL
+                        SELECT cd.`size_type` FROM tb_prod_demand_design pdd 
+                        INNER JOIN tb_prod_demand_product pdp ON pdp.id_prod_demand_design =  pdd.id_prod_demand_design
+                        INNER JOIN tb_m_product p ON p.id_product = pdp.id_product
+                        INNER JOIN tb_m_product_code pc ON pc.id_product = p.id_product
+                        INNER JOIN tb_m_code_detail cd ON cd.id_code_detail = pc.id_code_detail
+                        WHERE pdd.id_prod_demand=" + id_prod_demand + " AND pdp.prod_demand_product_qty>0
+                    ) a GROUP BY a.`size_type`
+                ) 
+                GROUP BY cd.index_size "
+                Dim data_caption As DataTable = execute_query(query_caption, -1, True, "", "", "", "")
+                For c As Integer = 0 To data_caption.Rows.Count - 1
+                    GVData.Columns(data_caption.Rows(c)("col").ToString).Caption = data_caption.Rows(c)("caption").ToString
+                Next
+            End If
+
+            'show column
+            Dim ix As Integer = GVData.Columns("TOTAL QTY").VisibleIndex
+            Dim index_last_visible = ix
+            For j As Integer = 1 To 10
+                If GVData.Columns("qty" + j.ToString).SummaryItem.SummaryValue > 0 Then
+                    index_last_visible += 1
+                    If j < 10 Then
+                        GVData.Columns("qty" + j.ToString).VisibleIndex = index_last_visible
+                    Else
+                        GVData.Columns("qty" + j.ToString).VisibleIndex = ix + 1
+                    End If
+                End If
+            Next
+            is_load_break_size = True
+        Else
+            'hide
+            For j As Integer = 1 To 10
+                GVData.Columns("qty" + j.ToString).Visible = False
+            Next
+        End If
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub GVData_CustomColumnDisplayText_1(sender As Object, e As DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs) Handles GVData.CustomColumnDisplayText
+        If e.Column.FieldName = "NO" Then
+            e.DisplayText = (e.ListSourceRowIndex + 1).ToString()
+        End If
+    End Sub
+
+    Dim tot_cost2 As Decimal
+    Dim tot_prc2 As Decimal
+    Dim tot_cost_grp2 As Decimal
+    Dim tot_prc_grp2 As Decimal
+    Private Sub GVData_CustomSummaryCalculate_1(sender As Object, e As DevExpress.Data.CustomSummaryEventArgs) Handles GVData.CustomSummaryCalculate
+        Dim summaryID As String = Convert.ToString(CType(e.Item, DevExpress.XtraGrid.GridSummaryItem).Tag)
+        Dim View As DevExpress.XtraGrid.Views.Grid.GridView = CType(sender, DevExpress.XtraGrid.Views.Grid.GridView)
+
+        ' Initialization 
+        If e.SummaryProcess = DevExpress.Data.CustomSummaryProcess.Start Then
+            tot_cost2 = 0.0
+            tot_prc2 = 0.0
+            tot_cost_grp2 = 0.0
+            tot_prc_grp2 = 0.0
+        End If
+
+        ' Calculation 
+        If e.SummaryProcess = DevExpress.Data.CustomSummaryProcess.Calculate Then
+            Dim cost As Decimal = CDec(myCoalesce(View.GetRowCellValue(e.RowHandle, "TOTAL COST NON ADDITIONAL").ToString, "0.00"))
+            Dim prc As Decimal = CDec(myCoalesce(View.GetRowCellValue(e.RowHandle, "TOTAL AMOUNT NON ADDITIONAL"), "0.00"))
+            Select Case summaryID
+                Case "c"
+                    tot_cost2 += cost
+                    tot_prc2 += prc
+                Case "d"
+                    tot_cost_grp2 += cost
+                    tot_prc_grp2 += prc
+            End Select
+        End If
+
+        ' Finalization 
+        If e.SummaryProcess = DevExpress.Data.CustomSummaryProcess.Finalize Then
+            Select Case summaryID
+                Case "c" 'total summary
+                    Dim sum_res As Decimal = 0.0
+                    Try
+                        sum_res = tot_prc2 / tot_cost2
+                    Catch ex As Exception
+                    End Try
+                    e.TotalValue = sum_res
+                Case "d" 'group summary
+                    Dim sum_res As Decimal = 0.0
+                    Try
+                        sum_res = tot_prc_grp2 / tot_cost_grp2
+                    Catch ex As Exception
+                    End Try
+                    e.TotalValue = sum_res
+            End Select
+        End If
     End Sub
 End Class

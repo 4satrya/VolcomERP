@@ -133,7 +133,6 @@ Public Class FormProductionRecDet
             TEDesign.Text = data.Rows(0)("design_name")
 
             BShowOrder.Enabled = False
-            BShowContact.Enabled = False
             BShowContact2.Enabled = False
             GConListPurchase.Enabled = True
             GroupControlListBarcode.Enabled = True
@@ -483,6 +482,7 @@ Public Class FormProductionRecDet
                 Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure to save changes?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
                 If confirm = Windows.Forms.DialogResult.Yes Then
                     Cursor = Cursors.WaitCursor
+                    BSave.Enabled = False
                     Try
                         'insert rec
                         If do_date = "0000-00-00" Then
@@ -531,7 +531,7 @@ Public Class FormProductionRecDet
 
                         infoCustom("Document #" + rec_number + " was created successfully.")
                     Catch ex As Exception
-                        errorConnection()
+                        stopCustom(ex.ToString)
                     End Try
                     Cursor = Cursors.Default
                 End If
@@ -614,7 +614,7 @@ Public Class FormProductionRecDet
 
     End Sub
 
-    Private Sub BShowContact_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BShowContact.Click
+    Private Sub BShowContact_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         FormPopUpContact.id_pop_up = "25"
         FormPopUpContact.ShowDialog()
     End Sub
@@ -661,7 +661,6 @@ Public Class FormProductionRecDet
         TEDONumber.Enabled = False
         TEDODate.Enabled = False
         BShowOrder.Enabled = False
-        BShowContact.Enabled = False
         BShowContact2.Enabled = False
         BSave.Enabled = False
         BScan.Enabled = False
@@ -692,7 +691,6 @@ Public Class FormProductionRecDet
         MENote.Enabled = True
         TEDONumber.Enabled = True
         TEDODate.Enabled = True
-        BShowContact.Enabled = True
         BShowContact2.Enabled = True
         BSave.Enabled = True
         BScan.Enabled = True

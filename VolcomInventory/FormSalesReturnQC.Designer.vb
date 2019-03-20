@@ -32,6 +32,7 @@ Partial Class FormSalesReturnQC
         Me.GridColumnLastUpdate = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnLastUser = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnTotal = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnPreparedBy = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ViewMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.SMPrePrint = New System.Windows.Forms.ToolStripMenuItem()
         Me.SMPrint = New System.Windows.Forms.ToolStripMenuItem()
@@ -82,7 +83,7 @@ Partial Class FormSalesReturnQC
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
         Me.BtnPrintDetail = New DevExpress.XtraEditors.SimpleButton()
         Me.BAccept = New DevExpress.XtraEditors.SimpleButton()
-        Me.GridColumnPreparedBy = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.PrintDetailScanToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.GCSalesReturnQC, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVSalesReturnQC, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ViewMenu.SuspendLayout()
@@ -166,7 +167,7 @@ Partial Class FormSalesReturnQC
         Me.GridColumnCreatedDate.FieldName = "sales_return_qc_date"
         Me.GridColumnCreatedDate.Name = "GridColumnCreatedDate"
         Me.GridColumnCreatedDate.Visible = True
-        Me.GridColumnCreatedDate.VisibleIndex = 6
+        Me.GridColumnCreatedDate.VisibleIndex = 5
         Me.GridColumnCreatedDate.Width = 116
         '
         'GridColumnQCCategory
@@ -174,8 +175,6 @@ Partial Class FormSalesReturnQC
         Me.GridColumnQCCategory.Caption = "QC Category"
         Me.GridColumnQCCategory.FieldName = "pl_category"
         Me.GridColumnQCCategory.Name = "GridColumnQCCategory"
-        Me.GridColumnQCCategory.Visible = True
-        Me.GridColumnQCCategory.VisibleIndex = 4
         Me.GridColumnQCCategory.Width = 106
         '
         'GridColumnReportStatus
@@ -184,7 +183,7 @@ Partial Class FormSalesReturnQC
         Me.GridColumnReportStatus.FieldName = "report_status"
         Me.GridColumnReportStatus.Name = "GridColumnReportStatus"
         Me.GridColumnReportStatus.Visible = True
-        Me.GridColumnReportStatus.VisibleIndex = 10
+        Me.GridColumnReportStatus.VisibleIndex = 9
         Me.GridColumnReportStatus.Width = 122
         '
         'GridColumnCompTo
@@ -204,7 +203,7 @@ Partial Class FormSalesReturnQC
         Me.GridColumnLastUpdate.FieldName = "last_update"
         Me.GridColumnLastUpdate.Name = "GridColumnLastUpdate"
         Me.GridColumnLastUpdate.Visible = True
-        Me.GridColumnLastUpdate.VisibleIndex = 9
+        Me.GridColumnLastUpdate.VisibleIndex = 8
         Me.GridColumnLastUpdate.Width = 116
         '
         'GridColumnLastUser
@@ -213,7 +212,7 @@ Partial Class FormSalesReturnQC
         Me.GridColumnLastUser.FieldName = "last_user"
         Me.GridColumnLastUser.Name = "GridColumnLastUser"
         Me.GridColumnLastUser.Visible = True
-        Me.GridColumnLastUser.VisibleIndex = 8
+        Me.GridColumnLastUser.VisibleIndex = 7
         Me.GridColumnLastUser.Width = 116
         '
         'GridColumnTotal
@@ -225,25 +224,33 @@ Partial Class FormSalesReturnQC
         Me.GridColumnTotal.Name = "GridColumnTotal"
         Me.GridColumnTotal.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total", "{0:n0}")})
         Me.GridColumnTotal.Visible = True
-        Me.GridColumnTotal.VisibleIndex = 5
+        Me.GridColumnTotal.VisibleIndex = 4
         Me.GridColumnTotal.Width = 62
+        '
+        'GridColumnPreparedBy
+        '
+        Me.GridColumnPreparedBy.Caption = "Prepared By"
+        Me.GridColumnPreparedBy.FieldName = "prepared_by"
+        Me.GridColumnPreparedBy.Name = "GridColumnPreparedBy"
+        Me.GridColumnPreparedBy.Visible = True
+        Me.GridColumnPreparedBy.VisibleIndex = 6
         '
         'ViewMenu
         '
-        Me.ViewMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SMPrePrint, Me.SMPrint})
+        Me.ViewMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SMPrePrint, Me.SMPrint, Me.PrintDetailScanToolStripMenuItem})
         Me.ViewMenu.Name = "ContextMenuStripYM"
-        Me.ViewMenu.Size = New System.Drawing.Size(137, 48)
+        Me.ViewMenu.Size = New System.Drawing.Size(161, 92)
         '
         'SMPrePrint
         '
         Me.SMPrePrint.Name = "SMPrePrint"
-        Me.SMPrePrint.Size = New System.Drawing.Size(136, 22)
+        Me.SMPrePrint.Size = New System.Drawing.Size(160, 22)
         Me.SMPrePrint.Text = "Pre Printing"
         '
         'SMPrint
         '
         Me.SMPrint.Name = "SMPrint"
-        Me.SMPrint.Size = New System.Drawing.Size(136, 22)
+        Me.SMPrint.Size = New System.Drawing.Size(160, 22)
         Me.SMPrint.Text = "Print"
         '
         'XTCReturnQC
@@ -714,13 +721,11 @@ Partial Class FormSalesReturnQC
         Me.BAccept.TabIndex = 139
         Me.BAccept.Text = "View Detail"
         '
-        'GridColumnPreparedBy
+        'PrintDetailScanToolStripMenuItem
         '
-        Me.GridColumnPreparedBy.Caption = "Prepared By"
-        Me.GridColumnPreparedBy.FieldName = "prepared_by"
-        Me.GridColumnPreparedBy.Name = "GridColumnPreparedBy"
-        Me.GridColumnPreparedBy.Visible = True
-        Me.GridColumnPreparedBy.VisibleIndex = 7
+        Me.PrintDetailScanToolStripMenuItem.Name = "PrintDetailScanToolStripMenuItem"
+        Me.PrintDetailScanToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
+        Me.PrintDetailScanToolStripMenuItem.Text = "Print Detail Scan"
         '
         'FormSalesReturnQC
         '
@@ -829,4 +834,5 @@ Partial Class FormSalesReturnQC
     Friend WithEvents BAccept As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents GridColumnTotal As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnPreparedBy As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents PrintDetailScanToolStripMenuItem As ToolStripMenuItem
 End Class

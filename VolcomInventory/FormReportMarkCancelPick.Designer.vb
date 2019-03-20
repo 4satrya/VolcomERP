@@ -29,6 +29,8 @@ Partial Class FormReportMarkCancelPick
         Me.BPick = New DevExpress.XtraEditors.SimpleButton()
         Me.GCReportList = New DevExpress.XtraGrid.GridControl()
         Me.GVReportList = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.ViewMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.SMViewDet = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
@@ -37,6 +39,7 @@ Partial Class FormReportMarkCancelPick
         CType(Me.CheckEditSelAll.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GCReportList, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVReportList, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ViewMenu.SuspendLayout()
         Me.SuspendLayout()
         '
         'LargeImageCollection
@@ -114,6 +117,7 @@ Partial Class FormReportMarkCancelPick
         '
         'GCReportList
         '
+        Me.GCReportList.ContextMenuStrip = Me.ViewMenu
         Me.GCReportList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GCReportList.Location = New System.Drawing.Point(0, 0)
         Me.GCReportList.MainView = Me.GVReportList
@@ -127,6 +131,18 @@ Partial Class FormReportMarkCancelPick
         Me.GVReportList.GridControl = Me.GCReportList
         Me.GVReportList.Name = "GVReportList"
         Me.GVReportList.OptionsView.ShowGroupPanel = False
+        '
+        'ViewMenu
+        '
+        Me.ViewMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SMViewDet})
+        Me.ViewMenu.Name = "ContextMenuStripYM"
+        Me.ViewMenu.Size = New System.Drawing.Size(153, 48)
+        '
+        'SMViewDet
+        '
+        Me.SMViewDet.Name = "SMViewDet"
+        Me.SMViewDet.Size = New System.Drawing.Size(152, 22)
+        Me.SMViewDet.Text = "View Detail"
         '
         'FormReportMarkCancelPick
         '
@@ -148,6 +164,7 @@ Partial Class FormReportMarkCancelPick
         CType(Me.CheckEditSelAll.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GCReportList, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVReportList, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ViewMenu.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -160,4 +177,6 @@ Partial Class FormReportMarkCancelPick
     Friend WithEvents GVReportList As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents PCSelAll As DevExpress.XtraEditors.PanelControl
     Friend WithEvents CheckEditSelAll As DevExpress.XtraEditors.CheckEdit
+    Friend WithEvents ViewMenu As ContextMenuStrip
+    Friend WithEvents SMViewDet As ToolStripMenuItem
 End Class

@@ -27,7 +27,7 @@
     End Sub
 
     Sub viewLevel()
-        Dim query As String = "SELECT * FROM tb_lookup_employee_level lvl ORDER BY lvl.id_employee_level ASC  "
+        Dim query As String = "SELECT * FROM tb_lookup_employee_level lvl WHERE lvl.id_employee_level > 0 ORDER BY lvl.id_employee_level DESC  "
         viewLookupQuery(LELevel, query, 0, "employee_level", "id_employee_level")
         viewLookupQuery(LEOriginLevel, query, 0, "employee_level", "id_employee_level")
     End Sub

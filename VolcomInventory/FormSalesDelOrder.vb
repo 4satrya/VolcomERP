@@ -329,6 +329,9 @@
             id_combine = GVSalesDelOrder.GetFocusedRowCellValue("id_combine").ToString
         Catch ex As Exception
         End Try
+        If id_combine = "0" Then
+            id_combine = ""
+        End If
         If id_combine <> "" Then
             Cursor = Cursors.WaitCursor
             FormSalesDelOrderSlip.action = "upd"
@@ -352,5 +355,16 @@
         viewSalesOrder()
         is_all_order = True
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub FileAttachmentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FileAttachmentToolStripMenuItem.Click
+        If GVSalesOrder.RowCount > 0 And GVSalesOrder.FocusedRowHandle >= 0 Then
+            Cursor = Cursors.WaitCursor
+            FormDocumentUpload.report_mark_type = "39"
+            FormDocumentUpload.id_report = GVSalesOrder.GetFocusedRowCellValue("id_sales_order").ToString
+            FormDocumentUpload.is_view = "1"
+            FormDocumentUpload.ShowDialog()
+            Cursor = Cursors.Default
+        End If
     End Sub
 End Class

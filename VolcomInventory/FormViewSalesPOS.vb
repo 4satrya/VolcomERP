@@ -171,6 +171,7 @@
 
         ''detail2
         viewDetail()
+        viewDetailCode()
         check_but()
         calculate()
         allow_status()
@@ -216,7 +217,20 @@
         GCItemList.DataSource = data
     End Sub
 
-  
+    Sub viewDetailCode()
+        Dim query As String = "SELECT c.id_sales_pos_det_counting, c.id_sales_pos, c.id_product, c.id_pl_prod_order_rec_det_unique, c.counting_code, 
+        c.full_code, prod.product_full_code AS `code`, prod.product_display_name AS `name`, cd.code_detail_name AS `size`, c.id_design_price, c.design_price
+        FROM tb_sales_pos_det_counting c
+        INNER JOIN tb_m_product prod ON prod.id_product = c.id_product
+        INNER JOIN tb_m_product_code pc ON pc.id_product = prod.id_product
+        INNER JOIN tb_m_code_detail cd ON cd.id_code_detail = pc.id_code_detail
+        WHERE c.id_sales_pos=" + id_sales_pos + " "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCCode.DataSource = data
+        GVCode.BestFitColumns()
+    End Sub
+
+
     'sub check_but
     Sub check_but()
        
@@ -355,5 +369,11 @@
         FormAccountingDraftJournal.report_mark_type = report_mark_type
         FormAccountingDraftJournal.ShowDialog()
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub GVCode_CustomColumnDisplayText(sender As Object, e As DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs) Handles GVCode.CustomColumnDisplayText
+        If e.Column.FieldName = "no" Then
+            e.DisplayText = (e.ListSourceRowIndex + 1).ToString()
+        End If
     End Sub
 End Class

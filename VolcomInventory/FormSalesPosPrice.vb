@@ -1,5 +1,6 @@
 ﻿Public Class FormSalesPosPrice
     Public id_design As String = "-1"
+    Public id_pop_up As String = "-1"
 
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles BtnCancel.Click
         Close()
@@ -25,7 +26,12 @@
 
     Sub choose()
         If GVPrice.RowCount > 0 And GVPrice.FocusedRowHandle >= 0 Then
-            FormSalesPOSDet.GVItemList.SetFocusedRowCellValue("design_price_retail", GVPrice.GetFocusedRowCellValue("design_price"))
+            If id_pop_up = "-1" Then
+                FormSalesPOSDet.GVItemList.SetFocusedRowCellValue("design_price_retail", GVPrice.GetFocusedRowCellValue("design_price"))
+            ElseIf id_pop_up = "1" Then
+                FormSalesPOSNoStockAdd.id_design_price = GVPrice.GetFocusedRowCellValue("id_design_price").ToString
+                FormSalesPOSNoStockAdd.TxtPrice.EditValue = GVPrice.GetFocusedRowCellValue("design_price")
+            End If
             Close()
         End If
     End Sub

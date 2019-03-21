@@ -20,8 +20,8 @@
 
     Private Sub BtnOther_Click(sender As Object, e As EventArgs) Handles BtnOther.Click
         'FormNtwainCoba.ShowDialog()
-        FormTest.ShowDialog()
-
+        'FormTest.ShowDialog()
+        ClassInsertAttendance.insertAttendance()
         'Dim webClient As New Net.WebClient
         'Dim result As String = webClient.DownloadString("http://www.fiskal.kemenkeu.go.id/dw-kurs-db.asp")
         'Dim str_kurs_dec As String = Between(result, "Dolar Amerika Serikat (USD)</td><td class='text-right'>", " <img src='data/aimages/up.gif'>").Replace(",", "").Replace(" ", "")

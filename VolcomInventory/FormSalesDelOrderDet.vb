@@ -99,6 +99,7 @@ Public Class FormSalesDelOrderDet
             DEForm.Text = view_date_from(data.Rows(0)("pl_sales_order_del_datex").ToString, 0)
             TxtSalesDelOrderNumber.Text = data.Rows(0)("pl_sales_order_del_number").ToString
             TxtOLShopNumber.Text = data.Rows(0)("sales_order_ol_shop_number").ToString
+            TxtCustomer.Text = data.Rows(0)("customer_name").ToString
             MENote.Text = data.Rows(0)("pl_sales_order_del_note").ToString
             LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", data.Rows(0)("id_report_status").ToString)
             LETypeSO.ItemIndex = LETypeSO.Properties.GetDataSourceRowIndex("id_so_type", data.Rows(0)("id_so_type").ToString)
@@ -1417,6 +1418,8 @@ Public Class FormSalesDelOrderDet
             GridColumnFrom.VisibleIndex = 3
             GridColumnTo.VisibleIndex = 4
             GridColumnRemark.VisibleIndex = 5
+            GridColumnOrderNumber.VisibleIndex = 6
+            GridColumnCustomer.VisibleIndex = 7
             GVItemList.OptionsPrint.PrintFooter = False
             GVItemList.OptionsPrint.PrintHeader = False
 
@@ -1454,6 +1457,8 @@ Public Class FormSalesDelOrderDet
             GridColumnNumber.Visible = False
             GridColumnFrom.Visible = False
             GridColumnTo.Visible = False
+            GridColumnOrderNumber.Visible = False
+            GridColumnCustomer.Visible = False
             GVItemList.OptionsPrint.PrintFooter = True
             GVItemList.OptionsPrint.PrintHeader = True
             Cursor = Cursors.Default
@@ -1500,8 +1505,12 @@ Public Class FormSalesDelOrderDet
                     wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellDisplayText(i, "from").ToString
                 ElseIf j = 4 Then 'to
                     wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellDisplayText(i, "to").ToString
-                Else 'remark detil
+                ElseIf j = 5 Then 'remark detil
                     wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, "pl_sales_order_del_det_note").ToString
+                ElseIf j = 6 Then 'order number
+                    wSheet.Cells(rowIndex + 1, colIndex) = TxtOLShopNumber.Text
+                ElseIf j = 7 Then 'customer Name
+                    wSheet.Cells(rowIndex + 1, colIndex) = TxtCustomer.Text
                 End If
             Next
         Next

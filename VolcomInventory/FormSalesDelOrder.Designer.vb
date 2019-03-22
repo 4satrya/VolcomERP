@@ -92,6 +92,7 @@ Partial Class FormSalesDelOrder
         Me.BtnViewNewPrepare = New DevExpress.XtraEditors.SimpleButton()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.TimerMonitor = New System.Windows.Forms.Timer(Me.components)
+        Me.ServiceController1 = New System.ServiceProcess.ServiceController()
         CType(Me.XTCSalesDelOrder, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCSalesDelOrder.SuspendLayout()
         Me.XTPListDel.SuspendLayout()
@@ -923,4 +924,5 @@ Partial Class FormSalesDelOrder
     Friend WithEvents GridColumnPrintedDate As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnPreparedBy As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents FileAttachmentToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ServiceController1 As ServiceProcess.ServiceController
 End Class

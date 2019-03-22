@@ -176,7 +176,7 @@ Partial Public Class ReportProdBOM
         Me.GridColumn14.Name = "GridColumn14"
         Me.GridColumn14.Visible = True
         Me.GridColumn14.VisibleIndex = 0
-        Me.GridColumn14.Width = 152
+        Me.GridColumn14.Width = 194
         '
         'GridColumn18
         '
@@ -189,7 +189,7 @@ Partial Public Class ReportProdBOM
         Me.GridColumn18.Name = "GridColumn18"
         Me.GridColumn18.Visible = True
         Me.GridColumn18.VisibleIndex = 1
-        Me.GridColumn18.Width = 295
+        Me.GridColumn18.Width = 376
         '
         'GridColumn22
         '
@@ -202,7 +202,7 @@ Partial Public Class ReportProdBOM
         Me.GridColumn22.Name = "GridColumn22"
         Me.GridColumn22.Visible = True
         Me.GridColumn22.VisibleIndex = 3
-        Me.GridColumn22.Width = 57
+        Me.GridColumn22.Width = 72
         '
         'GridColumn23
         '
@@ -217,7 +217,7 @@ Partial Public Class ReportProdBOM
         Me.GridColumn23.Name = "GridColumn23"
         Me.GridColumn23.Visible = True
         Me.GridColumn23.VisibleIndex = 7
-        Me.GridColumn23.Width = 77
+        Me.GridColumn23.Width = 151
         '
         'GridColumn36
         '
@@ -226,6 +226,7 @@ Partial Public Class ReportProdBOM
         Me.GridColumn36.Name = "GridColumn36"
         Me.GridColumn36.Visible = True
         Me.GridColumn36.VisibleIndex = 4
+        Me.GridColumn36.Width = 95
         '
         'GridColumn35
         '
@@ -240,6 +241,7 @@ Partial Public Class ReportProdBOM
         Me.GridColumn35.Name = "GridColumn35"
         Me.GridColumn35.Visible = True
         Me.GridColumn35.VisibleIndex = 5
+        Me.GridColumn35.Width = 95
         '
         'GridColumn34
         '
@@ -254,6 +256,7 @@ Partial Public Class ReportProdBOM
         Me.GridColumn34.Name = "GridColumn34"
         Me.GridColumn34.Visible = True
         Me.GridColumn34.VisibleIndex = 6
+        Me.GridColumn34.Width = 95
         '
         'GridColumn24
         '
@@ -269,7 +272,7 @@ Partial Public Class ReportProdBOM
         Me.GridColumn24.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "price", "Total")})
         Me.GridColumn24.Visible = True
         Me.GridColumn24.VisibleIndex = 9
-        Me.GridColumn24.Width = 160
+        Me.GridColumn24.Width = 210
         '
         'ColTotal
         '
@@ -285,7 +288,7 @@ Partial Public Class ReportProdBOM
         Me.ColTotal.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total", "{0:N4}")})
         Me.ColTotal.Visible = True
         Me.ColTotal.VisibleIndex = 10
-        Me.ColTotal.Width = 178
+        Me.ColTotal.Width = 181
         '
         'Cat
         '
@@ -325,7 +328,7 @@ Partial Public Class ReportProdBOM
         Me.GridColumnUOM.Name = "GridColumnUOM"
         Me.GridColumnUOM.Visible = True
         Me.GridColumnUOM.VisibleIndex = 8
-        Me.GridColumnUOM.Width = 69
+        Me.GridColumnUOM.Width = 80
         '
         'GridColumn26
         '
@@ -338,7 +341,7 @@ Partial Public Class ReportProdBOM
         Me.GridColumn26.Name = "GridColumn26"
         Me.GridColumn26.Visible = True
         Me.GridColumn26.VisibleIndex = 2
-        Me.GridColumn26.Width = 78
+        Me.GridColumn26.Width = 99
         '
         'GridColumnIsCost
         '

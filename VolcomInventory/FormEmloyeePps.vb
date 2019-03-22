@@ -32,7 +32,7 @@
         Dim where_emp As String = If(Not SLUEEmployee.EditValue.ToString = "0", "AND pps.id_employee = '" + SLUEEmployee.EditValue.ToString + "'", "")
 
         Dim query As String = "
-            SELECT pps.id_employee_pps, pps.id_type, pps.id_employee, t.pps_type, pps.number, (SELECT employee_name FROM tb_m_employee WHERE id_employee = pps.created_by) AS created_by, DATE_FORMAT(pps.created_date, '%d %M %Y %H:%i:%s') AS created_date, pps.employee_code, pps.employee_name, pps.note, r.report_status
+            SELECT pps.id_employee_pps, pps.id_type, pps.id_employee, t.pps_type, pps.number, (SELECT employee_name FROM tb_m_employee WHERE id_employee = pps.created_by) AS created_by, DATE_FORMAT(pps.created_date, '%d %M %Y %H:%i:%s') AS created_date, pps.employee_code, pps.employee_name, pps.is_hrd, pps.note, r.report_status
             FROM tb_employee_pps AS pps
             LEFT JOIN tb_lookup_pps_type AS t ON pps.id_type = t.id_pps_type
             LEFT JOIN tb_lookup_report_status AS r ON pps.id_report_status = r.id_report_status
@@ -94,11 +94,14 @@
 
     Private Sub BNew_Click(sender As Object, e As EventArgs) Handles BNew.Click
         FormEmployeePpsDet.is_new = "1"
+        FormEmployeePpsDet.is_hrd = is_hrd
 
         FormEmployeePpsDet.ShowDialog()
     End Sub
 
     Private Sub BEdit_Click(sender As Object, e As EventArgs) Handles BEdit.Click
+        FormEmployeePpsList.is_hrd = is_hrd
+
         FormEmployeePpsList.ShowDialog()
     End Sub
 
@@ -106,6 +109,7 @@
         FormEmployeePpsDet.id_pps = GVEmployeePps.GetFocusedRowCellValue("id_employee_pps").ToString
         FormEmployeePpsDet.is_new = If(GVEmployeePps.GetFocusedRowCellValue("id_type").ToString = "1", "-1", "1")
         FormEmployeePpsDet.id_employee = If(GVEmployeePps.GetFocusedRowCellValue("id_employee").ToString = "", "-1", GVEmployeePps.GetFocusedRowCellValue("id_employee").ToString)
+        FormEmployeePpsDet.is_hrd = If(is_hrd = "-1", "-1", GVEmployeePps.GetFocusedRowCellValue("is_hrd").ToString)
 
         FormEmployeePpsDet.ShowDialog()
     End Sub

@@ -202,7 +202,6 @@
             addcost = total_addcost / qty
         End If
         'TEUnitPrice.EditValue = unit_price
-        TEAddCostActual.EditValue = addcost
         TEUnitCostActual.EditValue = unit_price
     End Sub
     Private Sub BUpdateCOP_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BUpdateCOP.Click
@@ -326,25 +325,25 @@
             MERemark.Visible = False
         End If
         '
-        If GVCostMan.RowCount > 0 And LEStatus.EditValue.ToString = "1" Then 'pre final
-            Dim kurs As Decimal = TEKursMan.EditValue
-            Dim actual_price As Decimal = 0
-            Dim price As Decimal = 0
-            Dim qty As Decimal = 0
-            Dim total As Decimal = 0
-            For i As Integer = 0 To (GVCostMan.RowCount - 1 - GetGroupRowCount(GVCostMan))
-                If GVCostMan.GetRowCellValue(i, "id_category").ToString = "2" And Not GVCostMan.GetRowCellValue(i, "id_currency").ToString = "1" Then
-                    actual_price = GVCostMan.GetRowCellValue(i, "actual_price")
-                    price = kurs * actual_price
-                    GVCostMan.SetRowCellValue(i, "price", price)
-                    '
-                    qty = GVCostMan.GetRowCellValue(i, "qty")
-                    total = qty * price
-                    GVCostMan.SetRowCellValue(i, "total_price", total)
-                End If
-            Next
-        Else 'final
-        End If
+        'If GVCostMan.RowCount > 0 And LEStatus.EditValue.ToString = "1" Then 'pre final
+        '    Dim kurs As Decimal = TEKursMan.EditValue
+        '    Dim actual_price As Decimal = 0
+        '    Dim price As Decimal = 0
+        '    Dim qty As Decimal = 0
+        '    Dim total As Decimal = 0
+        '    For i As Integer = 0 To (GVCostMan.RowCount - 1 - GetGroupRowCount(GVCostMan))
+        '        If GVCostMan.GetRowCellValue(i, "id_category").ToString = "2" And Not GVCostMan.GetRowCellValue(i, "id_currency").ToString = "1" Then
+        '            actual_price = GVCostMan.GetRowCellValue(i, "actual_price")
+        '            price = kurs * actual_price
+        '            GVCostMan.SetRowCellValue(i, "price", price)
+        '            '
+        '            qty = GVCostMan.GetRowCellValue(i, "qty")
+        '            total = qty * price
+        '            GVCostMan.SetRowCellValue(i, "total_price", total)
+        '        End If
+        '    Next
+        'Else 'final
+        'End If
     End Sub
 
     Private Sub TEKursMan_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TEKursMan.KeyUp

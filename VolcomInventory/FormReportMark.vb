@@ -439,7 +439,7 @@
         ElseIf report_mark_type = "148" Then
             'Purchase receive non aseet
             query = String.Format("SELECT id_report_status,purc_rec_number as report_number FROM tb_purc_rec WHERE id_purc_rec = '{0}'", id_report)
-        ElseIf report_mark_type = "150" Or report_mark_type = "155" Then
+        ElseIf report_mark_type = "150" Or report_mark_type = "155" Or report_mark_type = "172" Or report_mark_type = "173" Then
             ' Propose COP
             query = String.Format("SELECT id_report_status,number as report_number FROM tb_design_cop_propose WHERE id_design_cop_propose = '{0}'", id_report)
         ElseIf report_mark_type = "151" Then
@@ -4653,20 +4653,20 @@
                 query = String.Format("UPDATE tb_purc_rec SET id_report_status='{0}' WHERE id_purc_rec ='{1}';" + query_complete, id_status_reportx, id_report)
                 execute_non_query(query, True, "", "", "", "")
 
-                'refresh view
-                FormPurcReceiveDet.actionLoad()
-                FormPurcReceive.viewReceive()
-                FormPurcReceive.GVReceive.FocusedRowHandle = find_row(FormPurcReceive.GVReceive, "id_purc_rec", id_report)
-            ElseIf report_mark_type = "150" Or report_mark_type = "155" Then
-                'Cancel Report
-                'auto complete
-                If id_status_reportx = "3" Or id_status_reportx = "6" Then
-                    id_status_reportx = "6"
-                    'complete
-                    query = "UPDATE tb_m_design dsg
+            'refresh view
+            FormPurcReceiveDet.actionLoad()
+            FormPurcReceive.viewReceive()
+            FormPurcReceive.GVReceive.FocusedRowHandle = find_row(FormPurcReceive.GVReceive, "id_purc_rec", id_report)
+        ElseIf report_mark_type = "150" Or report_mark_type = "155" Or report_mark_type = "172" Or report_mark_type = "173" Then
+            'Cancel Report
+            'auto complete
+            If id_status_reportx = "3" Or id_status_reportx = "6" Then
+                id_status_reportx = "6"
+                'complete
+                query = "UPDATE tb_m_design dsg
 INNER JOIN `tb_design_cop_propose_det` copd ON copd.id_design=dsg.id_design AND copd.`id_design_cop_propose`='" & id_report & "'
 SET  dsg.`prod_order_cop_pd_curr`=copd.`id_currency`,dsg.`prod_order_cop_kurs_pd`=copd.`kurs`,dsg.`prod_order_cop_pd`=copd.`design_cop`,dsg.`prod_order_cop_pd_vendor`=copd.`id_comp_contact`,dsg.`prod_order_cop_pd_addcost`=copd.`add_cost`"
-                    execute_non_query(query, True, "", "", "", "")
+                execute_non_query(query, True, "", "", "", "")
                 End If
                 'update status
                 query = String.Format("UPDATE tb_design_cop_propose SET id_report_status='{0}' WHERE id_design_cop_propose ='{1}'", id_status_reportx, id_report)
@@ -6391,9 +6391,9 @@ SELECT '" & data_det.Rows(i)("id_sample_purc_budget").ToString & "' AS id_det,id
         Dim confirm As DialogResult
         confirm = DevExpress.XtraEditors.XtraMessageBox.Show("Reset all mark on this document, continue?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
         If confirm = Windows.Forms.DialogResult.Yes Then
-            query = String.Format("UPDATE tb_report_mark SET id_mark='1',report_mark_lead_time=NULL,report_mark_start_datetime=NULL,report_mark_datetime=NULL WHERE report_mark_type='{0}' AND id_report='{1}' AND id_report_status>'{2}'", report_mark_type, id_report, 1)
+            query = String.Format("UPDATE tb_report_mark SET id_mark='1',is_use=IF(ISNULL(`level`) OR `level`=1,1,2),report_mark_lead_time=NULL,report_mark_start_datetime=NULL,report_mark_datetime=NULL WHERE report_mark_type='{0}' AND id_report='{1}' AND id_report_status>'{2}'", report_mark_type, id_report, 1)
             execute_non_query(query, True, "", "", "", "")
-            change_status(1)
+
             view_mark()
         End If
     End Sub

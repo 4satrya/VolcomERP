@@ -957,11 +957,12 @@
 
             FormMasterDesignSingle.ShowDialog()
         ElseIf report_mark_type = "180" Then
-            Dim data_pps As DataTable = execute_query("SELECT id_type, id_employee FROM tb_employee_pps WHERE id_employee_pps = '" + id_report + "'", -1, True, "", "", "", "")
+            Dim data_pps As DataTable = execute_query("SELECT id_type, is_hrd, id_employee FROM tb_employee_pps WHERE id_employee_pps = '" + id_report + "'", -1, True, "", "", "", "")
 
             FormEmployeePpsDet.id_pps = id_report
             FormEmployeePpsDet.is_new = If(data_pps.Rows(0)("id_type").ToString = "1", "-1", "1")
             FormEmployeePpsDet.id_employee = If(data_pps.Rows(0)("id_employee").ToString = "", "-1", data_pps.Rows(0)("id_employee").ToString)
+            FormEmployeePpsDet.is_hrd = data_pps.Rows(0)("is_hrd").ToString
 
             FormEmployeePpsDet.ShowDialog()
         Else

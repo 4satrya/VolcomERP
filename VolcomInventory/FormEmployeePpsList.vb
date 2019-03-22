@@ -1,4 +1,6 @@
 ﻿Public Class FormEmployeePpsList
+    Public is_hrd As String = "-1"
+
     Private Sub FormEmployeePpsList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim query As String = "
             SELECT e.id_employee, d.departement, e.employee_code, e.employee_name, e.employee_position, ls.employee_status, la.employee_active
@@ -22,6 +24,7 @@
             Close()
 
             FormEmployeePpsDet.id_employee = GVEmployeeList.GetFocusedRowCellValue("id_employee")
+            FormEmployeePpsDet.is_hrd = is_hrd
 
             FormEmployeePpsDet.ShowDialog()
         End If
@@ -38,6 +41,7 @@
             Close()
 
             FormEmployeePpsDet.id_employee = GVEmployeeList.GetFocusedRowCellValue("id_employee")
+            FormEmployeePpsDet.is_hrd = is_hrd
 
             FormEmployeePpsDet.ShowDialog()
         End If

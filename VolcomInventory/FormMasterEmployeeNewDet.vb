@@ -41,7 +41,7 @@
     End Sub
 
     Sub viewEmployeeStatus()
-        Dim query As String = "SELECT * FROM tb_m_employee_status_det a INNER JOIN tb_lookup_employee_status b on b.id_employee_status=a.id_employee_status WHERE a.id_employee='" + id_employee + "' ORDER BY a.id_employee_status_det DESC "
+        Dim query As String = "SELECT *, '' AS attachment FROM tb_m_employee_status_det a INNER JOIN tb_lookup_employee_status b on b.id_employee_status=a.id_employee_status WHERE a.id_employee='" + id_employee + "' ORDER BY a.id_employee_status_det DESC "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCStatus.DataSource = data
         If GVStatus.RowCount > 0 Then
@@ -164,14 +164,20 @@
             DEJoinDate.EditValue = datarow("employee_join_date")
             DELastDay.EditValue = datarow("employee_last_date")
             LEActive.ItemIndex = LEActive.Properties.GetDataSourceRowIndex("id_employee_active", data.Rows(0)("id_employee_active").ToString)
+            LEActive.ReadOnly = True
             LESex.ItemIndex = LESex.Properties.GetDataSourceRowIndex("id_sex", data.Rows(0)("id_sex").ToString)
+            LESex.ReadOnly = True
             LEBloodType.ItemIndex = LEBloodType.Properties.GetDataSourceRowIndex("id_blood_type", data.Rows(0)("id_blood_type").ToString)
+            LEBloodType.ReadOnly = True
             TxtPOB.Text = datarow("employee_pob").ToString
             DEDOB.EditValue = datarow("employee_dob")
             LEReligion.ItemIndex = LEReligion.Properties.GetDataSourceRowIndex("id_religion", data.Rows(0)("id_religion").ToString)
+            LEReligion.ReadOnly = True
             LECountry.ItemIndex = LECountry.Properties.GetDataSourceRowIndex("id_country", data.Rows(0)("id_country").ToString)
+            LECountry.ReadOnly = True
             TxtEthnic.Text = datarow("employee_ethnic").ToString
             LEDegree.ItemIndex = LEDegree.Properties.GetDataSourceRowIndex("id_education", data.Rows(0)("id_education").ToString)
+            LEDegree.ReadOnly = True
             TxtKTP.Text = datarow("employee_ktp").ToString
             DEKTP.EditValue = datarow("employee_ktp_period")
             TxtPassport.Text = datarow("employee_passport").ToString
@@ -230,6 +236,8 @@
             '
             'load img
             pre_viewImages("4", PEEmployee, id_employee, False)
+            pre_viewImages("4", PEKTP, id_employee + "_ktp", False)
+            pre_viewImages("4", PEKK, id_employee + "_kk", False)
         End If
     End Sub
 
@@ -242,6 +250,7 @@
     Private Sub XTPEmployee_SelectedPageChanged(sender As Object, e As DevExpress.XtraTab.TabPageChangedEventArgs) Handles XTPEmployee.SelectedPageChanged
         If XTPEmployee.TabPages.Item(XTPEmployee.SelectedTabPageIndex).Name.ToString = "XTPDependent" Then
             LEMarriageStatus.ItemIndex = LEMarriageStatus.Properties.GetDataSourceRowIndex("id_marriage_status", id_marriage_stattus_db)
+            LEMarriageStatus.ReadOnly = True
         End If
     End Sub
 
@@ -781,5 +790,76 @@
 
     Private Sub BtnEditTraining_Click(sender As Object, e As EventArgs) Handles BtnEditTraining.Click
         view_training()
+    End Sub
+
+    Private Sub SBKtpAtt_Click(sender As Object, e As EventArgs) Handles SBKtpAtt.Click
+        Dim images As DataTable = New DataTable
+
+        images.Columns.Add("image", GetType(Byte()))
+
+        Dim con As ImageConverter = New ImageConverter
+
+        images.Rows.Add(con.ConvertTo(PEKTP.EditValue, GetType(Byte())))
+
+        FormEmployeePpsAtt.type = "ktp"
+        FormEmployeePpsAtt.images = images
+        FormEmployeePpsAtt.read_only = True
+        FormEmployeePpsAtt.is_single = True
+
+        FormEmployeePpsAtt.ShowDialog()
+    End Sub
+
+    Private Sub SBKkAtt_Click(sender As Object, e As EventArgs) Handles SBKkAtt.Click
+        Dim images As DataTable = New DataTable
+
+        images.Columns.Add("image", GetType(Byte()))
+
+        Dim con As ImageConverter = New ImageConverter
+
+        images.Rows.Add(con.ConvertTo(PEKK.EditValue, GetType(Byte())))
+
+        FormEmployeePpsAtt.type = "kk"
+        FormEmployeePpsAtt.images = images
+        FormEmployeePpsAtt.read_only = True
+        FormEmployeePpsAtt.is_single = True
+
+        FormEmployeePpsAtt.ShowDialog()
+    End Sub
+
+    Private Sub RepositoryItemTextEdit1_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub RepositoryItemCheckEdit1_Click(sender As Object, e As EventArgs) Handles RepositoryItemCheckEdit1.Click
+        PCPosAtt.Controls.Clear()
+
+        Dim query As String = "
+            SELECT IFNULL((SELECT MAX(id_employee_pps) FROM tb_employee_pps WHERE id_employee_status_det = '" + GVStatus.GetFocusedRowCellValue("id_employee_status_det").ToString + "' AND id_report_status = '6'), 0)
+        "
+
+        Dim id_pps As String = execute_query(query, 0, True, "", "", "", "")
+
+        Dim images As DataTable = New DataTable
+
+        images.Columns.Add("image", GetType(Byte()))
+
+        If id_pps = 0 Then
+            images.Rows.Add(System.IO.File.ReadAllBytes(FormEmployeePpsDet.pps_path + "default.jpg"))
+        Else
+            For i = 1 To 100
+                If System.IO.File.Exists(FormEmployeePpsDet.pps_path + id_pps + "_position_" + i.ToString + ".jpg") Then
+                    images.Rows.Add(System.IO.File.ReadAllBytes(FormEmployeePpsDet.pps_path + id_pps + "_position_" + i.ToString + ".jpg"))
+                Else
+                    Exit For
+                End If
+            Next
+        End If
+
+        FormEmployeePpsAtt.type = "position"
+        FormEmployeePpsAtt.images = images
+        FormEmployeePpsAtt.read_only = True
+        FormEmployeePpsAtt.is_single = False
+
+        FormEmployeePpsAtt.ShowDialog()
     End Sub
 End Class

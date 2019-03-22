@@ -269,6 +269,10 @@ Public Class ClassSalesOrder
         GVNewPrepare.Columns("DESIGN").FieldNameSortGroup = "id_design"
         GVNewPrepare.GroupFormat = "{1}{2}"
 
+        'order
+        GVNewPrepare.Columns("STORE ACCOUNT").SortMode = DevExpress.XtraGrid.ColumnSortMode.Value
+        GVNewPrepare.Columns("STORE ACCOUNT").SortOrder = DevExpress.Data.ColumnSortOrder.Ascending
+
         ' 'hide PBC & Show GRID
         GCNewPrepare.RefreshDataSource()
         GVNewPrepare.RefreshData()

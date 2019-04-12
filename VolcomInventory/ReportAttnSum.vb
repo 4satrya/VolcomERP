@@ -9,8 +9,10 @@
     End Sub
 
     Private Sub GVSchedule_RowCellStyle(sender As Object, e As DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs) Handles GVSchedule.RowCellStyle
-        If id_report_type = "1" AndAlso GVSchedule.GetRowCellValue(e.RowHandle, "id_employee_active").ToString = "1" AndAlso GVSchedule.GetRowCellValue(e.RowHandle, "id_schedule_type").ToString = "1" AndAlso Date.Parse(GVSchedule.GetRowCellValue(e.RowHandle, "date").ToString).Date < Now.Date AndAlso GVSchedule.GetRowCellValue(e.RowHandle, "present").ToString = "0" AndAlso GVSchedule.GetRowCellValue(e.RowHandle, "id_leave_type").ToString = "" Then
-            e.Appearance.BackColor = Color.Yellow
+        If id_report_type = "1" Then
+            If GVSchedule.GetRowCellValue(e.RowHandle, "id_employee_active").ToString = "1" AndAlso GVSchedule.GetRowCellValue(e.RowHandle, "id_schedule_type").ToString = "1" AndAlso Date.Parse(GVSchedule.GetRowCellValue(e.RowHandle, "date").ToString).Date < Now.Date AndAlso GVSchedule.GetRowCellValue(e.RowHandle, "present").ToString = "0" AndAlso GVSchedule.GetRowCellValue(e.RowHandle, "id_leave_type").ToString = "" Then
+                e.Appearance.BackColor = Color.Yellow
+            End If
         End If
     End Sub
 End Class

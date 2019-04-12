@@ -643,7 +643,7 @@ Partial Class FormEmpPayroll
         Me.BandedGridColumnAdjustment.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.BandedGridColumnAdjustment.AppearanceHeader.Options.UseTextOptions = True
         Me.BandedGridColumnAdjustment.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.BandedGridColumnAdjustment.Caption = "Adjustment"
+        Me.BandedGridColumnAdjustment.Caption = "Other"
         Me.BandedGridColumnAdjustment.DisplayFormat.FormatString = "N0"
         Me.BandedGridColumnAdjustment.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.BandedGridColumnAdjustment.FieldName = "a_adjustment"
@@ -658,7 +658,7 @@ Partial Class FormEmpPayroll
         Me.BandedGridColumnRapel.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.BandedGridColumnRapel.AppearanceHeader.Options.UseTextOptions = True
         Me.BandedGridColumnRapel.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.BandedGridColumnRapel.Caption = "Rapel"
+        Me.BandedGridColumnRapel.Caption = "Adjustment"
         Me.BandedGridColumnRapel.DisplayFormat.FormatString = "N0"
         Me.BandedGridColumnRapel.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.BandedGridColumnRapel.FieldName = "a_rapel"
@@ -1019,7 +1019,7 @@ Partial Class FormEmpPayroll
         Me.GridColumnPinjamanKoperasi.AppearanceHeader.Options.UseTextOptions = True
         Me.GridColumnPinjamanKoperasi.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GridColumnPinjamanKoperasi.Caption = "Pinjaman Koperasi"
-        Me.GridColumnPinjamanKoperasi.DisplayFormat.FormatString = "N0"
+        Me.GridColumnPinjamanKoperasi.DisplayFormat.FormatString = "N2"
         Me.GridColumnPinjamanKoperasi.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnPinjamanKoperasi.FieldName = "d_pinjaman_koperasi"
         Me.GridColumnPinjamanKoperasi.Name = "GridColumnPinjamanKoperasi"

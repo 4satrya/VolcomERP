@@ -12,6 +12,20 @@
         Dispose()
     End Sub
 
+    Sub load_dp_or_not()
+        Dim query As String = "SELECT '1' AS is_not_dp,'Convert to Salary' AS type 
+                                UNION
+                               SELECT '2' AS is_not_dp,'Convert to DP' AS type "
+        viewLookupQuery(LEOVertimeDPOrNot, query, 0, "type", "is_not_dp")
+    End Sub
+
+    Sub load_dp_type()
+        Dim query As String = "SELECT '1' AS id_dp_type,'Convert based on hours' AS type 
+                                UNION
+                               SELECT '2' AS id_dp_type,'Convert based on point' AS type "
+        viewLookupQuery(LEDPType, query, 0, "type", "id_dp_type")
+    End Sub
+
     Private Sub FormEmpPayrollOvertimeDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         TEPoint.EditValue = 0.0
         TETotHour.EditValue = 0.0
@@ -19,7 +33,10 @@
         TEPointWages.EditValue = 0.00
         load_dayoff()
         load_ot_type()
-
+        '
+        load_dp_or_not()
+        load_dp_type()
+        '
         If Not id_overtime = "-1" Then 'edit
             Dim query As String = "SELECT p.id_payroll_ot,p.`id_payroll`,p.`id_employee`,p.`id_ot_type`,p.total_break,p.`ot_start`,p.`ot_end`,p.`total_hour`,p.`total_point`,IF(p.`is_day_off`=1,'Yes','No') AS day_off,p.`is_day_off`,lvl.`employee_level`,emp.`employee_name`,emp.`employee_code`,ott.`ot_type`,ott.id_ot_type,p.note,p.wages_per_point
                                 FROM tb_emp_payroll_ot p
@@ -44,6 +61,10 @@
                 TEPoint.EditValue = data.Rows(0)("total_point")
                 TEPointWages.EditValue = data.Rows(0)("wages_per_point")
                 MENote.Text = data.Rows(0)("note")
+                '
+                LEOVertimeDPOrNot.Enabled = False
+                LEDPType.Enabled = False
+                '
             End If
         End If
     End Sub
@@ -206,19 +227,51 @@
         Dim note As String = MENote.Text
 
         If id_overtime = "-1" Then 'new
-            Dim query As String = "INSERT INTO tb_emp_payroll_ot(id_payroll,id_employee,id_ot_type,ot_start,ot_end,total_break,total_hour,total_point,is_day_off,wages_per_point,note)
+            If LEOVertimeDPOrNot.EditValue.ToString = "1" Then 'salary
+                Dim query As String = "INSERT INTO tb_emp_payroll_ot(id_payroll,id_employee,id_ot_type,ot_start,ot_end,total_break,total_hour,total_point,is_day_off,wages_per_point,note)
                                     VALUES('" & id_payroll & "','" & id_employee & "','" & LECategory.EditValue.ToString & "','" & Date.Parse(dt_start.ToString).ToString("yyyy-MM-dd H:mm:ss") & "','" & Date.Parse(dt_end.ToString).ToString("yyyy-MM-dd H:mm:ss") & "','" & tot_break & "','" & tot_hour & "','" & tot_poin & "','" & LEDayoff.EditValue.ToString & "','" & wages_per_point & "','" & note & "');SELECT LAST_INSERT_ID();"
-            id_overtime = execute_query(query, 0, True, "", "", "", "")
-            FormEmpPayrollOvertime.load_payroll_ot()
-            FormEmpPayrollOvertime.GVOverTime.FocusedRowHandle = find_row(FormEmpPayrollOvertime.GVOverTime, "id_payroll_ot", id_overtime)
-            Close()
+                id_overtime = execute_query(query, 0, True, "", "", "", "")
+                FormEmpPayrollOvertime.load_payroll_ot()
+                FormEmpPayrollOvertime.GVOverTime.FocusedRowHandle = find_row(FormEmpPayrollOvertime.GVOverTime, "id_payroll_ot", id_overtime)
+                Close()
+            Else 'DP
+                Dim id_sch As String = ""
+                Dim query_sch As String = "SELECT sch.id_schedule,sch.`date` FROM tb_emp_schedule sch
+                                            WHERE sch.id_employee='" & id_employee & "'  
+                                            AND sch.`date`='" & Date.Parse(dt_start.ToString).ToString("yyyy-MM-dd") & "'"
+                Dim data_sch As DataTable = execute_query(query_sch, -1, True, "", "", "", "")
+                '
+                If data_sch.Rows.Count > 0 Then
+                    Dim tot_dp As String = ""
+
+                    If LEDPType.EditValue.ToString = "1" Then 'convert based hours
+                        tot_dp = tot_hour
+                    Else 'convert based point
+                        tot_dp = Math.Floor(TEPoint.EditValue).ToString
+                    End If
+                    Dim query_dp As String = "INSERT INTO tb_emp_dp(dp_number,id_employee,dp_date_created,dp_total,dp_note,id_payroll)
+                                    VALUES('" & header_number_emp("2") & "','" & id_employee & "',NOW(),'0','" & note & "','" & id_payroll & "');SELECT LAST_INSERT_ID();"
+                    Dim id_dp_parent As String = execute_query(query_dp, 0, True, "", "", "", "")
+                    increase_inc_emp("2")
+                    'detail
+                    query_dp = "INSERT INTO tb_emp_dp_det(id_dp,dp_time_start,dp_time_end,remark,subtotal_hour) VALUES"
+                    query_dp += "('" & id_dp_parent & "','" & Date.Parse(dt_start.ToString).ToString("yyyy-MM-dd H:mm:ss") & "','" & Date.Parse(dt_end.ToString).ToString("yyyy-MM-dd H:mm:ss") & "','" & note & "','" & tot_dp & "')"
+                    execute_non_query(query_dp, True, "", "", "", "")
+                    Close()
+                Else
+                    stopCustom("Please assign this employee a schedule for this date first!")
+                End If
+                '
+            End If
         Else 'edit
             Dim query As String = "UPDATE tb_emp_payroll_ot SET id_payroll='" & id_payroll & "',id_employee='" & id_employee & "',id_ot_type='" & LECategory.EditValue.ToString & "',ot_start='" & Date.Parse(dt_start.ToString).ToString("yyyy-MM-dd H:mm:ss") & "',ot_end='" & Date.Parse(dt_end.ToString).ToString("yyyy-MM-dd H:mm:ss") & "',total_break='" & tot_break & "',total_hour='" & tot_hour & "',total_point='" & tot_poin & "',is_day_off='" & LEDayoff.EditValue.ToString & "',wages_per_point='" & wages_per_point & "',note='" & note & "'
                                     WHERE id_payroll_ot='" & id_overtime & "'"
             execute_non_query(query, True, "", "", "", "")
 
             FormEmpPayrollOvertime.load_payroll_ot()
+            FormEmpPayrollOvertime.load_payroll_dp()
             FormEmpPayrollOvertime.GVOverTime.FocusedRowHandle = find_row(FormEmpPayrollOvertime.GVOverTime, "id_payroll_ot", id_overtime)
+
             execute_non_query(query, True, "", "", "", "")
             Close()
         End If
@@ -234,5 +287,18 @@
         Catch ex As Exception
             TEPointWages.EditValue = 0.00
         End Try
+    End Sub
+
+    Private Sub LEOVertimeDPOrNot_EditValueChanged(sender As Object, e As EventArgs) Handles LEOVertimeDPOrNot.EditValueChanged
+        If LEOVertimeDPOrNot.EditValue.ToString = "1" Then
+            'not dp
+            LEDPType.Visible = False
+        Else
+            LEDPType.Visible = True
+        End If
+    End Sub
+
+    Private Sub LEDayoff_EditValueChanged(sender As Object, e As EventArgs) Handles LEDayoff.EditValueChanged
+        calc_point()
     End Sub
 End Class

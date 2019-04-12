@@ -1719,6 +1719,7 @@ Partial Class FormProdDuty
         Me.ClientSize = New System.Drawing.Size(1241, 515)
         Me.Controls.Add(Me.GCProd)
         Me.Controls.Add(Me.PanelControl1)
+        Me.MinimizeBox = False
         Me.Name = "FormProdDuty"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Duty Report"

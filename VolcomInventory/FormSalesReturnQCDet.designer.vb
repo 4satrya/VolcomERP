@@ -52,6 +52,7 @@ Partial Class FormSalesReturnQCDet
         Me.BtnXlsBOF = New DevExpress.XtraEditors.SimpleButton()
         Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
         Me.BtnAttachment = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnPrintDetailScan = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnTest = New DevExpress.XtraEditors.SimpleButton()
         Me.BMark = New DevExpress.XtraEditors.SimpleButton()
         Me.DDBPrint = New DevExpress.XtraEditors.DropDownButton()
@@ -549,6 +550,7 @@ Partial Class FormSalesReturnQCDet
         '
         Me.PanelControl3.Controls.Add(Me.BtnXlsBOF)
         Me.PanelControl3.Controls.Add(Me.BtnAttachment)
+        Me.PanelControl3.Controls.Add(Me.BtnPrintDetailScan)
         Me.PanelControl3.Controls.Add(Me.BtnTest)
         Me.PanelControl3.Controls.Add(Me.BMark)
         Me.PanelControl3.Controls.Add(Me.DDBPrint)
@@ -569,7 +571,7 @@ Partial Class FormSalesReturnQCDet
         Me.BtnXlsBOF.Image = CType(resources.GetObject("BtnXlsBOF.Image"), System.Drawing.Image)
         Me.BtnXlsBOF.ImageIndex = 11
         Me.BtnXlsBOF.ImageList = Me.LargeImageCollection
-        Me.BtnXlsBOF.Location = New System.Drawing.Point(385, 2)
+        Me.BtnXlsBOF.Location = New System.Drawing.Point(270, 2)
         Me.BtnXlsBOF.Name = "BtnXlsBOF"
         Me.BtnXlsBOF.Size = New System.Drawing.Size(116, 34)
         Me.BtnXlsBOF.TabIndex = 27
@@ -597,11 +599,22 @@ Partial Class FormSalesReturnQCDet
         Me.BtnAttachment.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnAttachment.ImageIndex = 10
         Me.BtnAttachment.ImageList = Me.LargeImageCollection
-        Me.BtnAttachment.Location = New System.Drawing.Point(501, 2)
+        Me.BtnAttachment.Location = New System.Drawing.Point(386, 2)
         Me.BtnAttachment.Name = "BtnAttachment"
         Me.BtnAttachment.Size = New System.Drawing.Size(97, 34)
         Me.BtnAttachment.TabIndex = 13
         Me.BtnAttachment.Text = "Attachment"
+        '
+        'BtnPrintDetailScan
+        '
+        Me.BtnPrintDetailScan.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnPrintDetailScan.ImageIndex = 6
+        Me.BtnPrintDetailScan.ImageList = Me.LargeImageCollection
+        Me.BtnPrintDetailScan.Location = New System.Drawing.Point(483, 2)
+        Me.BtnPrintDetailScan.Name = "BtnPrintDetailScan"
+        Me.BtnPrintDetailScan.Size = New System.Drawing.Size(115, 34)
+        Me.BtnPrintDetailScan.TabIndex = 28
+        Me.BtnPrintDetailScan.Text = "Print Detail Scan"
         '
         'BtnTest
         '
@@ -1863,4 +1876,5 @@ Partial Class FormSalesReturnQCDet
     Friend WithEvents GridColumnNumber As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnFrom As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnTo As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BtnPrintDetailScan As DevExpress.XtraEditors.SimpleButton
 End Class

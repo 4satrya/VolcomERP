@@ -51,8 +51,55 @@ Public Class FormAccounting
     End Sub
 
     Private Sub FormAccounting_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        For Each t As DevExpress.XtraTab.XtraTabPage In XTCGeneral.TabPages
+            XTCGeneral.SelectedTabPage = t
+        Next t
+        XTCGeneral.SelectedTabPage = XTCGeneral.TabPages(0)
         view_acc()
+        viewCategory()
         CreateNodes(TreeList1)
+
+        'tab general
+        actionLoadGeneralSetup()
+    End Sub
+
+    Sub viewCompany()
+        Cursor = Cursors.WaitCursor
+        Dim id_comp_cat As String = LECompanyCategory.EditValue.ToString
+        Dim query As String = "SELECT tb_m_comp.id_comp as id_comp,tb_m_comp.comp_number as comp_number,
+        tb_m_comp.comp_name as comp_name,tb_m_comp.address_primary as address_primary,tb_m_comp.is_active as is_active,
+        tb_m_comp_cat.comp_cat_name as company_category ,
+        IFNULL(tb_m_comp.id_acc_ap,0) AS `id_acc_ap`, 
+        IFNULL(tb_m_comp.id_acc_dp,0) AS `id_acc_dp`,
+        IFNULL(tb_m_comp.id_acc_ar,0) AS `id_acc_ar`,
+        IFNULL(tb_m_comp.id_acc_sales,0) AS `id_acc_sales`,
+        IFNULL(tb_m_comp.id_acc_sales_return,0) AS `id_acc_sales_return`,
+        CONCAT(ap.acc_name,' - ', ap.acc_description) AS `acc_ap`,
+        CONCAT(dp.acc_name,' - ', dp.acc_description) AS `acc_dp`,
+        CONCAT(ar.acc_name,' - ', ar.acc_description) AS `acc_ar`,
+        CONCAT(sal.acc_name,' - ', sal.acc_description) AS `acc_sales`,
+        CONCAT(sal_ret.acc_name,' - ', sal_ret.acc_description) AS `acc_sales_return`
+        FROM tb_m_comp
+        INNER JOIN tb_m_comp_cat ON tb_m_comp.id_comp_cat=tb_m_comp_cat.id_comp_cat
+        LEFT JOIN tb_a_acc ap ON ap.id_acc = tb_m_comp.id_acc_ap
+        LEFT JOIN tb_a_acc dp ON dp.id_acc = tb_m_comp.id_acc_dp
+        LEFT JOIN tb_a_acc ar ON ar.id_acc = tb_m_comp.id_acc_ar
+        LEFT JOIN tb_a_acc sal ON sal.id_acc = tb_m_comp.id_acc_sales
+        LEFT JOIN tb_a_acc sal_ret ON sal_ret.id_acc = tb_m_comp.id_acc_sales_return
+        WHERE tb_m_comp.id_comp>0 "
+        If id_comp_cat <> "0" Then
+            query += "AND tb_m_comp.id_comp_cat='" + id_comp_cat + "' "
+        End If
+        query += "ORDER BY comp_name ASC "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCCompany.DataSource = data
+        GVCompany.BestFitColumns()
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub viewCategory()
+        Dim query As String = "SELECT 0 AS `id_comp_cat`, 'All Category' AS `comp_cat_name` UNION ALL SELECT id_comp_cat,comp_cat_name FROM tb_m_comp_cat"
+        viewLookupQuery(LECompanyCategory, query, 0, "comp_cat_name", "id_comp_cat")
     End Sub
 
     Sub view_acc()
@@ -176,5 +223,75 @@ Public Class FormAccounting
         If GVAcc.RowCount > 0 And GVAcc.FocusedRowHandle >= 0 Then
             FormMain.but_edit()
         End If
+    End Sub
+
+    Private Sub BtnViewCompany_Click(sender As Object, e As EventArgs) Handles BtnViewCompany.Click
+        viewCompany()
+    End Sub
+
+    Private Sub GVCompany_DoubleClick(sender As Object, e As EventArgs) Handles GVCompany.DoubleClick
+        If GVCompany.RowCount > 0 And GVCompany.FocusedRowHandle >= 0 Then
+            Cursor = Cursors.WaitCursor
+            FormAccountingARAP.ShowDialog()
+            Cursor = Cursors.Default
+        End If
+    End Sub
+
+    '------ TAB GENERAL SETUP
+    Public acc_coa_receive As String = "-1"
+    Public acc_coa_vat_in As String = "-1"
+    Sub actionLoadGeneralSetup()
+        Cursor = Cursors.WaitCursor
+        Dim query As String = "SELECT IFNULL(o.acc_coa_receive,0) AS `acc_coa_receive`, rec.acc_name AS `rec_account`, rec.acc_description AS `rec_desc`,
+        IFNULL(o.acc_coa_vat_in,0) AS `acc_coa_vat_in`, vat.acc_name AS `vat_account`, vat.acc_description AS `vat_desc`
+        FROM tb_opt_purchasing o 
+        LEFT JOIN tb_a_acc rec ON rec.id_acc = o.acc_coa_receive
+        LEFT JOIN tb_a_acc vat ON vat.id_acc = o.acc_coa_vat_in "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        acc_coa_receive = data.Rows(0)("acc_coa_receive").ToString
+        TxtRecAccount.Text = data.Rows(0)("rec_account").ToString
+        TxtRecDesc.Text = data.Rows(0)("rec_desc").ToString
+        acc_coa_vat_in = data.Rows(0)("acc_coa_vat_in").ToString
+        TxtVATAccount.Text = data.Rows(0)("vat_account").ToString
+        TxtVATDesc.Text = data.Rows(0)("vat_desc").ToString
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnDiscard_Click(sender As Object, e As EventArgs) Handles BtnDiscard.Click
+        Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure you want to discard this changes ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+        If confirm = Windows.Forms.DialogResult.Yes Then
+            actionLoadGeneralSetup()
+        End If
+    End Sub
+
+    Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles BtnSave.Click
+        Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure you want to discard this changes ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+        If confirm = Windows.Forms.DialogResult.Yes Then
+            Cursor = Cursors.WaitCursor
+            If acc_coa_receive = "0" Then
+                acc_coa_receive = "NULL"
+            End If
+            If acc_coa_vat_in = "0" Then
+                acc_coa_vat_in = "NULL"
+            End If
+
+            Dim query As String = "UPDATE tb_opt_purchasing SET acc_coa_receive=" + acc_coa_receive + ", acc_coa_vat_in=" + acc_coa_vat_in + " "
+            execute_non_query(query, True, "", "", "", "")
+            Cursor = Cursors.Default
+        End If
+    End Sub
+
+    Private Sub BtnBrowseRec_Click(sender As Object, e As EventArgs) Handles BtnBrowseRec.Click
+        Cursor = Cursors.WaitCursor
+        FormPopUpCOA.id_pop_up = "11"
+        FormPopUpCOA.ShowDialog()
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnBrowseVAT_Click(sender As Object, e As EventArgs) Handles BtnBrowseVAT.Click
+        Cursor = Cursors.WaitCursor
+        FormPopUpCOA.id_pop_up = "12"
+        FormPopUpCOA.ShowDialog()
+        Cursor = Cursors.Default
     End Sub
 End Class

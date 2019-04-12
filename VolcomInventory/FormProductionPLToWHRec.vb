@@ -6,7 +6,11 @@
 
     'Form Load
     Private Sub FormProductionPLToWHRec_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        viewPL()
+        Dim dt_now As DateTime = getTimeDB()
+        DEFrom.EditValue = dt_now
+        DEUntil.EditValue = dt_now
+
+        'list PL
         view_sample_purc()
     End Sub
 
@@ -23,11 +27,29 @@
     'View Data
     'View Packing List
     Sub viewPL()
+        Cursor = Cursors.WaitCursor
+
+        'Prepare paramater
+        Dim date_from_selected As String = "0000-01-01"
+        Dim date_until_selected As String = "9999-01-01"
+        Try
+            date_from_selected = DateTime.Parse(DEFrom.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+
+        Try
+            date_until_selected = DateTime.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+
+
         Dim query_c As ClassProductionPLToWHRec = New ClassProductionPLToWHRec()
-        Dim query As String = query_c.queryMain("-1", "2")
+        Dim query As String = query_c.queryMain("AND (a0.pl_prod_order_rec_date>='" + date_from_selected + "' AND a0.pl_prod_order_rec_date<='" + date_until_selected + "') ", "2")
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCPL.DataSource = data
+        GVPL.BestFitColumns()
         check_menu()
+        Cursor = Cursors.Default
     End Sub
 
     Private Sub GVPL_CustomColumnDisplayText(ByVal sender As System.Object, ByVal e As DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs) Handles GVPL.CustomColumnDisplayText
@@ -120,12 +142,19 @@
     '=================Tab REC Waiting===========================
     Sub view_sample_purc()
         Dim query = "Select "
-        query += "a.id_pl_prod_order,d.id_sample, a.pl_prod_order_number, d.design_display_name,d.design_name , d.design_code, g.pl_category, "
+        query += "a.id_pl_prod_order,d.id_sample, a.pl_prod_order_number, d.design_display_name,d.design_name , d.design_code, IFNULL(ad.total_qty,0) AS `total_qty`, g.pl_category, "
         query += "(a.pl_prod_order_date) As pl_prod_order_date, a.id_report_status,c.report_status, "
         query += "d.id_design,b.id_delivery, e.delivery, f.season, e.id_season, "
         query += "a.id_comp_contact_from, a.id_comp_contact_to, (i.comp_name) As comp_name_to, (i.comp_number) As comp_number_to, (k.comp_name) As comp_name_from, (k.comp_number) As comp_number_from, "
         query += "alloc.id_pd_alloc, alloc.pd_alloc "
-        query += "FROM tb_pl_prod_order a "
+        query += "FROM tb_pl_prod_order a 
+        LEFT JOIN (
+	        SELECT pl.id_pl_prod_order, SUM(pld.pl_prod_order_det_qty) AS `total_qty`
+	        FROM tb_pl_prod_order_det pld
+	        INNER JOIN tb_pl_prod_order pl ON pl.id_pl_prod_order = pld.id_pl_prod_order
+	        WHERE pl.id_report_status=6
+	        GROUP BY pl.id_pl_prod_order
+        ) ad ON ad.id_pl_prod_order = a.id_pl_prod_order "
         query += "INNER JOIN tb_m_comp_contact h On h.id_comp_contact = a.id_comp_contact_to "
         query += "INNER JOIN tb_m_comp i On h.id_comp = i.id_comp "
         query += "INNER JOIN tb_m_comp_contact j On j.id_comp_contact = a.id_comp_contact_from "
@@ -143,6 +172,7 @@
         query += "ORDER BY a.id_pl_prod_order ASC "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCProd.DataSource = data
+        GVProd.BestFitColumns()
         check_menu()
 
         Dim id_pl_prod_order_param As String = "-1"
@@ -232,5 +262,9 @@
         FormProductionPLToWHRecDet.id_pre = "2"
         FormMain.but_edit()
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnView_Click(sender As Object, e As EventArgs) Handles BtnView.Click
+        viewPL()
     End Sub
 End Class

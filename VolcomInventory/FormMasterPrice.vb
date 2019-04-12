@@ -5,12 +5,13 @@
     Dim super_user As String = get_setup_field("id_role_super_admin")
 
     Private Sub FormMasterPrice_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        viewPrice()
         viewSeason()
 
         'set default
         Dim dt_now As DataTable = execute_query("SELECT DATE(NOW()) as tgl", -1, True, "", "", "", "")
         DEFrom.EditValue = dt_now.Rows(0)("tgl")
+        DEFromList.EditValue = dt_now.Rows(0)("tgl")
+        DEUntilList.EditValue = dt_now.Rows(0)("tgl")
     End Sub
 
     Sub viewSeason()
@@ -37,6 +38,7 @@
     End Sub
 
     Sub browsePrice()
+        Cursor = Cursors.WaitCursor
         Dim cond As String = "-1"
         Dim date_from_selected As String = ""
         Try
@@ -60,18 +62,37 @@
         End If
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCBrowsePrice.DataSource = data
+        GVBrowsePrice.BestFitColumns()
+        Cursor = Cursors.Default
     End Sub
 
     Sub viewPrice()
+        Cursor = Cursors.WaitCursor
         Dim query_c As ClassDesign = New ClassDesign()
-        Dim cond As String = "-1"
+        Dim cond As String = ""
         If id_role_login <> super_user Then
             cond = "AND prc.id_user_created='" + id_user + "' "
         End If
+
+        'date
+        Dim date_from_selected As String = "0000-01-01"
+        Dim date_until_selected As String = "9999-01-01"
+        Try
+            date_from_selected = DateTime.Parse(DEFromList.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+        Try
+            date_until_selected = DateTime.Parse(DEUntilList.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+        cond += "AND (prc.fg_price_date>='" + date_from_selected + "' AND prc.fg_price_date<='" + date_until_selected + "') "
+
         Dim query As String = query_c.queryPriceExcelMain(cond, "2")
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCPrice.DataSource = data
+        GVPrice.BestFitColumns()
         check_menu()
+        Cursor = Cursors.Default
     End Sub
 
     Private Sub FormMasterPrice_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
@@ -167,6 +188,9 @@
 
     Private Sub XTCPrice_SelectedPageChanged(sender As Object, e As DevExpress.XtraTab.TabPageChangedEventArgs) Handles XTCPrice.SelectedPageChanged
         check_menu()
+        If XTCPrice.SelectedTabPageIndex = 0 Then
+        ElseIf XTCPrice.SelectedTabPageIndex = 1 Then
+        End If
     End Sub
 
     Private Sub BtnView_Click(sender As Object, e As EventArgs) Handles BtnView.Click
@@ -181,5 +205,9 @@
 
     Private Sub SLESeason_EditValueChanged(sender As Object, e As EventArgs) Handles SLESeason.EditValueChanged
         viewDel()
+    End Sub
+
+    Private Sub BtnViewList_Click(sender As Object, e As EventArgs) Handles BtnViewList.Click
+        viewPrice()
     End Sub
 End Class

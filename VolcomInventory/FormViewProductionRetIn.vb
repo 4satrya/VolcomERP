@@ -50,7 +50,7 @@
             TxtCodeCompFrom.Text = data.Rows(0)("comp_code_contact_from").ToString
             TxtNameCompFrom.Text = data.Rows(0)("comp_name_contact_from").ToString
             id_comp_contact_to = data.Rows(0)("id_comp_contact_to").ToString
-            TxtCodeCompTo.Text = data.Rows(0)("comp_code_contact_from").ToString
+            TxtCodeCompTo.Text = data.Rows(0)("comp_code_contact_to").ToString
             TxtNameCompTo.Text = data.Rows(0)("comp_name_contact_to").ToString
             MEAdrressCompTo.Text = data.Rows(0)("comp_address_contact_to").ToString
             'Dim start_date_arr() As String = data.Rows(0)("prod_order_ret_in_date").ToString.Split(" ")

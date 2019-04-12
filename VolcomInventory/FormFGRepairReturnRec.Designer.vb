@@ -53,6 +53,7 @@ Partial Class FormFGRepairReturnRec
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnWH = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XTCRepairRec, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCRepairRec.SuspendLayout()
         Me.XTPTransList.SuspendLayout()
@@ -120,7 +121,7 @@ Partial Class FormFGRepairReturnRec
         '
         'GVRepairRec
         '
-        Me.GVRepairRec.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnID, Me.GridColumnNumber, Me.GridColumnRepair, Me.GridColumnCreatedDate, Me.GridColumnFGRepairNote, Me.GridColumnStatus, Me.GridColumnCompFrom, Me.GridColumnCompTo})
+        Me.GVRepairRec.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnID, Me.GridColumnNumber, Me.GridColumnRepair, Me.GridColumnCreatedDate, Me.GridColumnFGRepairNote, Me.GridColumnStatus, Me.GridColumnCompFrom, Me.GridColumnCompTo, Me.GridColumnWH})
         Me.GVRepairRec.GridControl = Me.GCRepairRec
         Me.GVRepairRec.Name = "GVRepairRec"
         Me.GVRepairRec.OptionsBehavior.Editable = False
@@ -156,7 +157,7 @@ Partial Class FormFGRepairReturnRec
         Me.GridColumnCreatedDate.FieldName = "fg_repair_return_rec_date"
         Me.GridColumnCreatedDate.Name = "GridColumnCreatedDate"
         Me.GridColumnCreatedDate.Visible = True
-        Me.GridColumnCreatedDate.VisibleIndex = 4
+        Me.GridColumnCreatedDate.VisibleIndex = 5
         '
         'GridColumnFGRepairNote
         '
@@ -164,7 +165,7 @@ Partial Class FormFGRepairReturnRec
         Me.GridColumnFGRepairNote.FieldName = "fg_repair_return_rec_note"
         Me.GridColumnFGRepairNote.Name = "GridColumnFGRepairNote"
         Me.GridColumnFGRepairNote.Visible = True
-        Me.GridColumnFGRepairNote.VisibleIndex = 5
+        Me.GridColumnFGRepairNote.VisibleIndex = 6
         '
         'GridColumnStatus
         '
@@ -172,7 +173,7 @@ Partial Class FormFGRepairReturnRec
         Me.GridColumnStatus.FieldName = "report_status"
         Me.GridColumnStatus.Name = "GridColumnStatus"
         Me.GridColumnStatus.Visible = True
-        Me.GridColumnStatus.VisibleIndex = 6
+        Me.GridColumnStatus.VisibleIndex = 7
         '
         'GridColumnCompFrom
         '
@@ -358,6 +359,14 @@ Partial Class FormFGRepairReturnRec
         Me.GridColumn7.Visible = True
         Me.GridColumn7.VisibleIndex = 2
         '
+        'GridColumnWH
+        '
+        Me.GridColumnWH.Caption = "WH"
+        Me.GridColumnWH.FieldName = "wh"
+        Me.GridColumnWH.Name = "GridColumnWH"
+        Me.GridColumnWH.Visible = True
+        Me.GridColumnWH.VisibleIndex = 4
+        '
         'FormFGRepairReturnRec
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -421,4 +430,5 @@ Partial Class FormFGRepairReturnRec
     Friend WithEvents ViewMenu As ContextMenuStrip
     Friend WithEvents SMPrePrint As ToolStripMenuItem
     Friend WithEvents SMPrint As ToolStripMenuItem
+    Friend WithEvents GridColumnWH As DevExpress.XtraGrid.Columns.GridColumn
 End Class

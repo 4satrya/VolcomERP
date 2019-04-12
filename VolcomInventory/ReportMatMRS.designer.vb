@@ -308,7 +308,7 @@ Partial Public Class ReportMatMRS
         'XrLabel6
         '
         Me.XrLabel6.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.XrLabel6.LocationFloat = New DevExpress.Utils.PointFloat(689.1667!, 20.83333!)
+        Me.XrLabel6.LocationFloat = New DevExpress.Utils.PointFloat(632.9167!, 20.83333!)
         Me.XrLabel6.Name = "XrLabel6"
         Me.XrLabel6.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel6.SizeF = New System.Drawing.SizeF(11.45844!, 25.08334!)
@@ -323,7 +323,7 @@ Partial Public Class ReportMatMRS
         Me.zxc.LocationFloat = New DevExpress.Utils.PointFloat(588.9586!, 20.83333!)
         Me.zxc.Name = "zxc"
         Me.zxc.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.zxc.SizeF = New System.Drawing.SizeF(100.2081!, 25.08334!)
+        Me.zxc.SizeF = New System.Drawing.SizeF(43.95813!, 25.08334!)
         Me.zxc.StylePriority.UseFont = False
         Me.zxc.StylePriority.UseTextAlignment = False
         Me.zxc.Text = "DATE"
@@ -346,10 +346,10 @@ Partial Public Class ReportMatMRS
         'LMRSDate
         '
         Me.LMRSDate.Font = New System.Drawing.Font("Times New Roman", 10.0!)
-        Me.LMRSDate.LocationFloat = New DevExpress.Utils.PointFloat(700.6249!, 20.83333!)
+        Me.LMRSDate.LocationFloat = New DevExpress.Utils.PointFloat(644.3752!, 20.83333!)
         Me.LMRSDate.Name = "LMRSDate"
         Me.LMRSDate.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LMRSDate.SizeF = New System.Drawing.SizeF(89.37506!, 25.08334!)
+        Me.LMRSDate.SizeF = New System.Drawing.SizeF(145.6248!, 25.08334!)
         Me.LMRSDate.StylePriority.UseFont = False
         Me.LMRSDate.StylePriority.UseTextAlignment = False
         Me.LMRSDate.TextAlignment = DevExpress.XtraPrinting.TextAlignment.BottomLeft

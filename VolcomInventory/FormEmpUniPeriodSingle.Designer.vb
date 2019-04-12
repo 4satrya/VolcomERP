@@ -25,6 +25,8 @@ Partial Class FormEmpUniPeriodSingle
         Me.BtnClose = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnOK = New DevExpress.XtraEditors.SimpleButton()
         Me.GCDetail = New DevExpress.XtraGrid.GridControl()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.AmbilSisaBudgetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GVDetail = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumnIdEmployee = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnNik = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -34,20 +36,21 @@ Partial Class FormEmpUniPeriodSingle
         Me.GridColumnLevel = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnBudget = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemTextEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
+        Me.GridColumnIsDeptHead = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
         Me.LEDeptSum = New DevExpress.XtraEditors.LookUpEdit()
         Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
-        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.AmbilSisaBudgetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
         CType(Me.GCDetail, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.GVDetail, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.LEDeptSum.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'PanelControl2
@@ -87,14 +90,27 @@ Partial Class FormEmpUniPeriodSingle
         Me.GCDetail.Location = New System.Drawing.Point(0, 37)
         Me.GCDetail.MainView = Me.GVDetail
         Me.GCDetail.Name = "GCDetail"
-        Me.GCDetail.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemTextEdit1})
+        Me.GCDetail.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemTextEdit1, Me.RepositoryItemCheckEdit1})
         Me.GCDetail.Size = New System.Drawing.Size(663, 275)
         Me.GCDetail.TabIndex = 2
         Me.GCDetail.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVDetail})
         '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AmbilSisaBudgetToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(170, 48)
+        '
+        'AmbilSisaBudgetToolStripMenuItem
+        '
+        Me.AmbilSisaBudgetToolStripMenuItem.Name = "AmbilSisaBudgetToolStripMenuItem"
+        Me.AmbilSisaBudgetToolStripMenuItem.Size = New System.Drawing.Size(169, 22)
+        Me.AmbilSisaBudgetToolStripMenuItem.Text = "Ambil sisa budget"
+        Me.AmbilSisaBudgetToolStripMenuItem.Visible = False
+        '
         'GVDetail
         '
-        Me.GVDetail.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdEmployee, Me.GridColumnNik, Me.GridColumnName, Me.GridColumnDept, Me.GridColumnPosition, Me.GridColumnLevel, Me.GridColumnBudget})
+        Me.GVDetail.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdEmployee, Me.GridColumnNik, Me.GridColumnName, Me.GridColumnDept, Me.GridColumnPosition, Me.GridColumnLevel, Me.GridColumnBudget, Me.GridColumnIsDeptHead})
         Me.GVDetail.GridControl = Me.GCDetail
         Me.GVDetail.GroupCount = 1
         Me.GVDetail.Name = "GVDetail"
@@ -118,7 +134,7 @@ Partial Class FormEmpUniPeriodSingle
         Me.GridColumnNik.OptionsColumn.AllowEdit = False
         Me.GridColumnNik.Visible = True
         Me.GridColumnNik.VisibleIndex = 0
-        Me.GridColumnNik.Width = 122
+        Me.GridColumnNik.Width = 172
         '
         'GridColumnName
         '
@@ -128,7 +144,7 @@ Partial Class FormEmpUniPeriodSingle
         Me.GridColumnName.OptionsColumn.AllowEdit = False
         Me.GridColumnName.Visible = True
         Me.GridColumnName.VisibleIndex = 1
-        Me.GridColumnName.Width = 334
+        Me.GridColumnName.Width = 472
         '
         'GridColumnDept
         '
@@ -138,7 +154,7 @@ Partial Class FormEmpUniPeriodSingle
         Me.GridColumnDept.OptionsColumn.AllowEdit = False
         Me.GridColumnDept.Visible = True
         Me.GridColumnDept.VisibleIndex = 2
-        Me.GridColumnDept.Width = 137
+        Me.GridColumnDept.Width = 193
         '
         'GridColumnPosition
         '
@@ -148,7 +164,7 @@ Partial Class FormEmpUniPeriodSingle
         Me.GridColumnPosition.OptionsColumn.AllowEdit = False
         Me.GridColumnPosition.Visible = True
         Me.GridColumnPosition.VisibleIndex = 3
-        Me.GridColumnPosition.Width = 117
+        Me.GridColumnPosition.Width = 165
         '
         'GridColumnLevel
         '
@@ -159,7 +175,7 @@ Partial Class FormEmpUniPeriodSingle
         Me.GridColumnLevel.OptionsColumn.AllowEdit = False
         Me.GridColumnLevel.Visible = True
         Me.GridColumnLevel.VisibleIndex = 4
-        Me.GridColumnLevel.Width = 136
+        Me.GridColumnLevel.Width = 192
         '
         'GridColumnBudget
         '
@@ -171,7 +187,7 @@ Partial Class FormEmpUniPeriodSingle
         Me.GridColumnBudget.Name = "GridColumnBudget"
         Me.GridColumnBudget.Visible = True
         Me.GridColumnBudget.VisibleIndex = 5
-        Me.GridColumnBudget.Width = 232
+        Me.GridColumnBudget.Width = 359
         '
         'RepositoryItemTextEdit1
         '
@@ -182,6 +198,23 @@ Partial Class FormEmpUniPeriodSingle
         Me.RepositoryItemTextEdit1.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
         Me.RepositoryItemTextEdit1.Mask.UseMaskAsDisplayFormat = True
         Me.RepositoryItemTextEdit1.Name = "RepositoryItemTextEdit1"
+        '
+        'GridColumnIsDeptHead
+        '
+        Me.GridColumnIsDeptHead.Caption = "Dept Head"
+        Me.GridColumnIsDeptHead.ColumnEdit = Me.RepositoryItemCheckEdit1
+        Me.GridColumnIsDeptHead.FieldName = "dept_head"
+        Me.GridColumnIsDeptHead.Name = "GridColumnIsDeptHead"
+        Me.GridColumnIsDeptHead.Visible = True
+        Me.GridColumnIsDeptHead.VisibleIndex = 6
+        Me.GridColumnIsDeptHead.Width = 79
+        '
+        'RepositoryItemCheckEdit1
+        '
+        Me.RepositoryItemCheckEdit1.AutoHeight = False
+        Me.RepositoryItemCheckEdit1.Name = "RepositoryItemCheckEdit1"
+        Me.RepositoryItemCheckEdit1.ValueChecked = "Yes"
+        Me.RepositoryItemCheckEdit1.ValueUnchecked = "No"
         '
         'PanelControl1
         '
@@ -211,18 +244,6 @@ Partial Class FormEmpUniPeriodSingle
         Me.LabelControl6.TabIndex = 9
         Me.LabelControl6.Text = "Departement"
         '
-        'ContextMenuStrip1
-        '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AmbilSisaBudgetToolStripMenuItem})
-        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(170, 48)
-        '
-        'AmbilSisaBudgetToolStripMenuItem
-        '
-        Me.AmbilSisaBudgetToolStripMenuItem.Name = "AmbilSisaBudgetToolStripMenuItem"
-        Me.AmbilSisaBudgetToolStripMenuItem.Size = New System.Drawing.Size(169, 22)
-        Me.AmbilSisaBudgetToolStripMenuItem.Text = "Ambil sisa budget"
-        '
         'FormEmpUniPeriodSingle
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -240,13 +261,14 @@ Partial Class FormEmpUniPeriodSingle
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl2.ResumeLayout(False)
         CType(Me.GCDetail, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ContextMenuStrip1.ResumeLayout(False)
         CType(Me.GVDetail, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         Me.PanelControl1.PerformLayout()
         CType(Me.LEDeptSum.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -268,4 +290,6 @@ Partial Class FormEmpUniPeriodSingle
     Friend WithEvents LabelControl6 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
     Friend WithEvents AmbilSisaBudgetToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents GridColumnIsDeptHead As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RepositoryItemCheckEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
 End Class

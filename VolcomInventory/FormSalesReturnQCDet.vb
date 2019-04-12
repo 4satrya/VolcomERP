@@ -72,6 +72,7 @@ Public Class FormSalesReturnQCDet
             BtnAttachment.Enabled = False
             BMark.Enabled = False
             DDBPrint.Enabled = False
+            BtnPrintDetailScan.Enabled = False
             DEForm.Text = view_date(0)
             check_but()
 
@@ -86,6 +87,7 @@ Public Class FormSalesReturnQCDet
             BtnInfoSrs.Enabled = True
             BtnBrowseContactTo.Enabled = False
             DDBPrint.Enabled = True
+            BtnPrintDetailScan.Enabled = True
             BMark.Enabled = True
 
             'query view based on edit id's
@@ -145,6 +147,9 @@ Public Class FormSalesReturnQCDet
                 Close()
             ElseIf id_pre = "2" Then
                 printing()
+                Close()
+            ElseIf id_pre = "3" Then
+                printingDetailScan()
                 Close()
             End If
         End If
@@ -398,8 +403,10 @@ Public Class FormSalesReturnQCDet
         'Pre Print
         If check_pre_print_report_status(id_report_status) Then
             BtnPrint.Enabled = True
+            BtnPrintDetailScan.Enabled = True
         Else
             BtnPrint.Enabled = False
+            BtnPrintDetailScan.Enabled = False
         End If
 
         'Print
@@ -661,6 +668,7 @@ Public Class FormSalesReturnQCDet
             Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure to continue this process?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
             If confirm = Windows.Forms.DialogResult.Yes Then
                 Cursor = Cursors.WaitCursor
+                BtnSave.Enabled = False
                 Dim sales_return_qc_note As String = MENote.Text
                 Dim id_pl_category As String = LEPLCategory.EditValue.ToString
 
@@ -1246,16 +1254,25 @@ Public Class FormSalesReturnQCDet
         Tool.ShowPreview()
     End Sub
 
-    Sub getReport()
-        ReportSalesReturnQC.dt = GCItemList.DataSource
+    Sub getReport(ByVal is_detail_scan As Boolean)
+        If Not is_detail_scan Then
+            ReportSalesReturnQC.dt = GCItemList.DataSource
+        Else
+            ReportSalesReturnQC.dt = GCBarcode.DataSource
+        End If
         ReportSalesReturnQC.id_sales_return_qc = id_sales_return_qc
+        ReportSalesReturnQC.rmt = report_mark_type_loc
         Dim Report As New ReportSalesReturnQC()
 
         ' '... 
         ' ' creating and saving the view's layout to a new memory stream 
         Dim str As System.IO.Stream
         str = New System.IO.MemoryStream()
-        GVItemList.SaveLayoutToStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+        If Not is_detail_scan Then
+            GVItemList.SaveLayoutToStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+        Else
+            GVBarcode.SaveLayoutToStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+        End If
         str.Seek(0, System.IO.SeekOrigin.Begin)
         Report.GVSalesReturnQC.RestoreLayoutFromStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
         str.Seek(0, System.IO.SeekOrigin.Begin)
@@ -1469,7 +1486,7 @@ Public Class FormSalesReturnQCDet
     Sub prePrinting()
         Cursor = Cursors.WaitCursor
         ReportSalesReturnQC.id_pre = "1"
-        getReport()
+        getReport(False)
         Cursor = Cursors.Default
     End Sub
 
@@ -1480,7 +1497,18 @@ Public Class FormSalesReturnQCDet
     Sub printing()
         Cursor = Cursors.WaitCursor
         ReportSalesReturnQC.id_pre = "-1"
-        getReport()
+        getReport(False)
+        Cursor = Cursors.Default
+    End Sub
+
+    Sub printingDetailScan()
+        Cursor = Cursors.WaitCursor
+        If id_report_status = "6" Then
+            ReportSalesReturnQC.id_pre = "-1"
+        Else
+            ReportSalesReturnQC.id_pre = "1"
+        End If
+        getReport(True)
         Cursor = Cursors.Default
     End Sub
 
@@ -1755,4 +1783,10 @@ Public Class FormSalesReturnQCDet
         End If
         Return stt
     End Function
+
+    Private Sub BtnPrintDetailScan_Click(sender As Object, e As EventArgs) Handles BtnPrintDetailScan.Click
+        Cursor = Cursors.WaitCursor
+        printingDetailScan()
+        Cursor = Cursors.Default
+    End Sub
 End Class

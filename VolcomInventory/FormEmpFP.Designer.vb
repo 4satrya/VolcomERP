@@ -35,6 +35,7 @@ Partial Class FormEmpFP
         Me.DownloadFaceTemplateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UploadFingerTemplateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UploadFaceTemplateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.UploadFingerFacespesifikToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DeviceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RestartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TurnOffToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -70,19 +71,19 @@ Partial Class FormEmpFP
         '
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TestConnectionToolStripMenuItem, Me.MasterMachineToolStripMenuItem, Me.DataToolStripMenuItem, Me.DeviceToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(162, 92)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(161, 114)
         '
         'TestConnectionToolStripMenuItem
         '
         Me.TestConnectionToolStripMenuItem.Name = "TestConnectionToolStripMenuItem"
-        Me.TestConnectionToolStripMenuItem.Size = New System.Drawing.Size(161, 22)
+        Me.TestConnectionToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
         Me.TestConnectionToolStripMenuItem.Text = "Test Connection"
         '
         'MasterMachineToolStripMenuItem
         '
         Me.MasterMachineToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddMachineToolStripMenuItem, Me.EditMachineToolStripMenuItem, Me.DeleteMachineToolStripMenuItem, Me.ToolStripMenuItem1})
         Me.MasterMachineToolStripMenuItem.Name = "MasterMachineToolStripMenuItem"
-        Me.MasterMachineToolStripMenuItem.Size = New System.Drawing.Size(161, 22)
+        Me.MasterMachineToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
         Me.MasterMachineToolStripMenuItem.Text = "Master Machine"
         '
         'AddMachineToolStripMenuItem
@@ -111,52 +112,58 @@ Partial Class FormEmpFP
         '
         'DataToolStripMenuItem
         '
-        Me.DataToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DownloadTemplateToolStripMenuItem, Me.ShowFingerTemplateToolStripMenuItem, Me.DownloadFingerTemplateToolStripMenuItem, Me.DownloadFaceTemplateToolStripMenuItem, Me.UploadFingerTemplateToolStripMenuItem, Me.UploadFaceTemplateToolStripMenuItem})
+        Me.DataToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DownloadTemplateToolStripMenuItem, Me.ShowFingerTemplateToolStripMenuItem, Me.DownloadFingerTemplateToolStripMenuItem, Me.DownloadFaceTemplateToolStripMenuItem, Me.UploadFingerTemplateToolStripMenuItem, Me.UploadFaceTemplateToolStripMenuItem, Me.UploadFingerFacespesifikToolStripMenuItem})
         Me.DataToolStripMenuItem.Name = "DataToolStripMenuItem"
-        Me.DataToolStripMenuItem.Size = New System.Drawing.Size(161, 22)
+        Me.DataToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
         Me.DataToolStripMenuItem.Text = "Data"
         '
         'DownloadTemplateToolStripMenuItem
         '
         Me.DownloadTemplateToolStripMenuItem.Name = "DownloadTemplateToolStripMenuItem"
-        Me.DownloadTemplateToolStripMenuItem.Size = New System.Drawing.Size(217, 22)
+        Me.DownloadTemplateToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
         Me.DownloadTemplateToolStripMenuItem.Text = "Show Finger Template"
         '
         'ShowFingerTemplateToolStripMenuItem
         '
         Me.ShowFingerTemplateToolStripMenuItem.Name = "ShowFingerTemplateToolStripMenuItem"
-        Me.ShowFingerTemplateToolStripMenuItem.Size = New System.Drawing.Size(217, 22)
+        Me.ShowFingerTemplateToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
         Me.ShowFingerTemplateToolStripMenuItem.Text = "Show Face Template"
         '
         'DownloadFingerTemplateToolStripMenuItem
         '
         Me.DownloadFingerTemplateToolStripMenuItem.Name = "DownloadFingerTemplateToolStripMenuItem"
-        Me.DownloadFingerTemplateToolStripMenuItem.Size = New System.Drawing.Size(217, 22)
+        Me.DownloadFingerTemplateToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
         Me.DownloadFingerTemplateToolStripMenuItem.Text = "Download Finger Template"
         '
         'DownloadFaceTemplateToolStripMenuItem
         '
         Me.DownloadFaceTemplateToolStripMenuItem.Name = "DownloadFaceTemplateToolStripMenuItem"
-        Me.DownloadFaceTemplateToolStripMenuItem.Size = New System.Drawing.Size(217, 22)
+        Me.DownloadFaceTemplateToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
         Me.DownloadFaceTemplateToolStripMenuItem.Text = "Download Face Template"
         '
         'UploadFingerTemplateToolStripMenuItem
         '
         Me.UploadFingerTemplateToolStripMenuItem.Name = "UploadFingerTemplateToolStripMenuItem"
-        Me.UploadFingerTemplateToolStripMenuItem.Size = New System.Drawing.Size(217, 22)
+        Me.UploadFingerTemplateToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
         Me.UploadFingerTemplateToolStripMenuItem.Text = "Upload Finger Template"
         '
         'UploadFaceTemplateToolStripMenuItem
         '
         Me.UploadFaceTemplateToolStripMenuItem.Name = "UploadFaceTemplateToolStripMenuItem"
-        Me.UploadFaceTemplateToolStripMenuItem.Size = New System.Drawing.Size(217, 22)
+        Me.UploadFaceTemplateToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
         Me.UploadFaceTemplateToolStripMenuItem.Text = "Upload Face Template"
+        '
+        'UploadFingerFacespesifikToolStripMenuItem
+        '
+        Me.UploadFingerFacespesifikToolStripMenuItem.Name = "UploadFingerFacespesifikToolStripMenuItem"
+        Me.UploadFingerFacespesifikToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
+        Me.UploadFingerFacespesifikToolStripMenuItem.Text = "Upload Finger & Face (spesifik)"
         '
         'DeviceToolStripMenuItem
         '
         Me.DeviceToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RestartToolStripMenuItem, Me.TurnOffToolStripMenuItem})
         Me.DeviceToolStripMenuItem.Name = "DeviceToolStripMenuItem"
-        Me.DeviceToolStripMenuItem.Size = New System.Drawing.Size(161, 22)
+        Me.DeviceToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
         Me.DeviceToolStripMenuItem.Text = "Device"
         '
         'RestartToolStripMenuItem
@@ -300,4 +307,5 @@ Partial Class FormEmpFP
     Friend WithEvents TurnOffToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents TestConnectionToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SplashScreenManager1 As DevExpress.XtraSplashScreen.SplashScreenManager
+    Friend WithEvents UploadFingerFacespesifikToolStripMenuItem As ToolStripMenuItem
 End Class

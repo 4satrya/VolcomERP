@@ -11,6 +11,7 @@
     Public id_wh_rack As String = "-1"
     Public id_wh_locator As String = "-1"
     Dim id_prepare_status As String = "-1"
+    Public is_ro_only_offline As String = "-1"
 
     Private Sub FormSalesReturnOrderDet_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         viewReportStatus()
@@ -19,6 +20,7 @@
 
     Sub actionLoad()
         If action = "ins" Then
+            is_ro_only_offline = get_setup_field("is_ro_only_offline")
             TxtSalesOrderNumber.Text = ""
             BtnPrint.Enabled = False
             BMark.Enabled = False
@@ -145,7 +147,7 @@
             stopCustom("Item list can't blank !")
         Else
             Dim sales_return_order_number As String = TxtSalesOrderNumber.Text
-            Dim sales_return_order_note As String = MENote.Text
+            Dim sales_return_order_note As String = addSlashes(MENote.Text)
             Dim sales_return_order_est_date As String = DateTime.Parse(DERetDueDate.EditValue.ToString).ToString("yyyy-MM-dd")
             Dim id_report_status As String = LEReportStatus.EditValue
 
@@ -495,7 +497,11 @@
 
     Private Sub TxtCodeCompTo_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtCodeCompTo.KeyDown
         If e.KeyCode = Keys.Enter Then
-            Dim data As DataTable = get_company_by_code(TxtCodeCompTo.Text, "AND comp.id_comp_cat=6 AND comp.id_commerce_type=1 ")
+            Dim spesial_cond As String = ""
+            If is_ro_only_offline = "1" Then
+                spesial_cond = "AND comp.id_commerce_type=1 "
+            End If
+            Dim data As DataTable = get_company_by_code(TxtCodeCompTo.Text, "AND comp.id_comp_cat=6 " + spesial_cond + " ")
             If data.Rows.Count = 0 Then
                 stopCustom("Account not found !")
                 id_comp = "-1"

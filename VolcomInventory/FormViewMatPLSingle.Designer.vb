@@ -29,6 +29,7 @@ Partial Class FormViewMatPLSingle
         Me.GridColumnSize = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnUOM = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnQtyNeed = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn27 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnQty = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemSpinEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
         Me.GridColumnNote = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -98,7 +99,8 @@ Partial Class FormViewMatPLSingle
         Me.TxtCodeCompTo = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.TxtNameCompTo = New DevExpress.XtraEditors.TextEdit()
-        Me.GridColumn27 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl8 = New DevExpress.XtraEditors.LabelControl()
+        Me.LEPLType = New DevExpress.XtraEditors.LookUpEdit()
         CType(Me.SplitContainerControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainerControl1.SuspendLayout()
         CType(Me.GroupControlDetailSingle, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -137,19 +139,20 @@ Partial Class FormViewMatPLSingle
         CType(Me.TxtCodeCompFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtCodeCompTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtNameCompTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LEPLType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'SplitContainerControl1
         '
         Me.SplitContainerControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SplitContainerControl1.Horizontal = False
-        Me.SplitContainerControl1.Location = New System.Drawing.Point(0, 92)
+        Me.SplitContainerControl1.Location = New System.Drawing.Point(0, 120)
         Me.SplitContainerControl1.Name = "SplitContainerControl1"
         Me.SplitContainerControl1.Panel1.Controls.Add(Me.GroupControlDetailSingle)
         Me.SplitContainerControl1.Panel1.Text = "Panel1"
         Me.SplitContainerControl1.Panel2.Controls.Add(Me.GroupControlDrawer)
         Me.SplitContainerControl1.Panel2.Text = "Panel2"
-        Me.SplitContainerControl1.Size = New System.Drawing.Size(884, 317)
+        Me.SplitContainerControl1.Size = New System.Drawing.Size(884, 295)
         Me.SplitContainerControl1.SplitterPosition = 182
         Me.SplitContainerControl1.TabIndex = 54
         Me.SplitContainerControl1.Text = "SplitContainerControl1"
@@ -262,6 +265,21 @@ Partial Class FormViewMatPLSingle
         Me.GridColumnQtyNeed.Name = "GridColumnQtyNeed"
         Me.GridColumnQtyNeed.OptionsColumn.AllowEdit = False
         Me.GridColumnQtyNeed.Width = 160
+        '
+        'GridColumn27
+        '
+        Me.GridColumn27.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn27.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn27.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn27.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn27.Caption = "Qty MRS"
+        Me.GridColumn27.DisplayFormat.FormatString = "N2"
+        Me.GridColumn27.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn27.FieldName = "prod_order_mrs_det_qty"
+        Me.GridColumn27.Name = "GridColumn27"
+        Me.GridColumn27.Visible = True
+        Me.GridColumn27.VisibleIndex = 5
+        Me.GridColumn27.Width = 107
         '
         'GridColumnQty
         '
@@ -493,7 +511,7 @@ Partial Class FormViewMatPLSingle
         Me.GroupControlDrawer.Enabled = False
         Me.GroupControlDrawer.Location = New System.Drawing.Point(0, 0)
         Me.GroupControlDrawer.Name = "GroupControlDrawer"
-        Me.GroupControlDrawer.Size = New System.Drawing.Size(884, 130)
+        Me.GroupControlDrawer.Size = New System.Drawing.Size(884, 108)
         Me.GroupControlDrawer.TabIndex = 0
         Me.GroupControlDrawer.Text = "Detail"
         '
@@ -504,7 +522,7 @@ Partial Class FormViewMatPLSingle
         Me.GCRoll.MainView = Me.GVRoll
         Me.GCRoll.Name = "GCRoll"
         Me.GCRoll.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckEdit2, Me.RepositoryItemSpinEdit4, Me.RepositoryItemSpinEdit2})
-        Me.GCRoll.Size = New System.Drawing.Size(862, 126)
+        Me.GCRoll.Size = New System.Drawing.Size(862, 104)
         Me.GCRoll.TabIndex = 8
         Me.GCRoll.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVRoll})
         '
@@ -640,9 +658,9 @@ Partial Class FormViewMatPLSingle
         Me.GroupControlBottom.Controls.Add(Me.MENote)
         Me.GroupControlBottom.Controls.Add(Me.LabelControl18)
         Me.GroupControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.GroupControlBottom.Location = New System.Drawing.Point(0, 409)
+        Me.GroupControlBottom.Location = New System.Drawing.Point(0, 415)
         Me.GroupControlBottom.Name = "GroupControlBottom"
-        Me.GroupControlBottom.Size = New System.Drawing.Size(884, 102)
+        Me.GroupControlBottom.Size = New System.Drawing.Size(884, 96)
         Me.GroupControlBottom.TabIndex = 53
         '
         'MENote
@@ -694,6 +712,8 @@ Partial Class FormViewMatPLSingle
         'GroupGeneralHeader
         '
         Me.GroupGeneralHeader.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupGeneralHeader.Controls.Add(Me.LabelControl8)
+        Me.GroupGeneralHeader.Controls.Add(Me.LEPLType)
         Me.GroupGeneralHeader.Controls.Add(Me.TEDesignName)
         Me.GroupGeneralHeader.Controls.Add(Me.TEDesignCode)
         Me.GroupGeneralHeader.Controls.Add(Me.LabelControl6)
@@ -719,7 +739,7 @@ Partial Class FormViewMatPLSingle
         Me.GroupGeneralHeader.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupGeneralHeader.Location = New System.Drawing.Point(0, 0)
         Me.GroupGeneralHeader.Name = "GroupGeneralHeader"
-        Me.GroupGeneralHeader.Size = New System.Drawing.Size(884, 92)
+        Me.GroupGeneralHeader.Size = New System.Drawing.Size(884, 120)
         Me.GroupGeneralHeader.TabIndex = 51
         '
         'TEDesignName
@@ -860,9 +880,9 @@ Partial Class FormViewMatPLSingle
         Me.LabelControl2.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelControl2.Location = New System.Drawing.Point(468, 68)
         Me.LabelControl2.Name = "LabelControl2"
-        Me.LabelControl2.Size = New System.Drawing.Size(67, 13)
+        Me.LabelControl2.Size = New System.Drawing.Size(35, 13)
         Me.LabelControl2.TabIndex = 149
-        Me.LabelControl2.Text = "Request From"
+        Me.LabelControl2.Text = "Ship To"
         '
         'TxtNameCompFrom
         '
@@ -938,9 +958,9 @@ Partial Class FormViewMatPLSingle
         Me.LabelControl1.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelControl1.Location = New System.Drawing.Point(468, 42)
         Me.LabelControl1.Name = "LabelControl1"
-        Me.LabelControl1.Size = New System.Drawing.Size(33, 13)
+        Me.LabelControl1.Size = New System.Drawing.Size(24, 13)
         Me.LabelControl1.TabIndex = 145
-        Me.LabelControl1.Text = "Source"
+        Me.LabelControl1.Text = "From"
         '
         'TxtNameCompTo
         '
@@ -955,20 +975,27 @@ Partial Class FormViewMatPLSingle
         Me.TxtNameCompTo.TabIndex = 5
         Me.TxtNameCompTo.TabStop = False
         '
-        'GridColumn27
+        'LabelControl8
         '
-        Me.GridColumn27.AppearanceCell.Options.UseTextOptions = True
-        Me.GridColumn27.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumn27.AppearanceHeader.Options.UseTextOptions = True
-        Me.GridColumn27.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumn27.Caption = "Qty MRS"
-        Me.GridColumn27.DisplayFormat.FormatString = "N2"
-        Me.GridColumn27.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn27.FieldName = "prod_order_mrs_det_qty"
-        Me.GridColumn27.Name = "GridColumn27"
-        Me.GridColumn27.Visible = True
-        Me.GridColumn27.VisibleIndex = 5
-        Me.GridColumn27.Width = 107
+        Me.LabelControl8.Location = New System.Drawing.Point(468, 94)
+        Me.LabelControl8.Name = "LabelControl8"
+        Me.LabelControl8.Size = New System.Drawing.Size(38, 13)
+        Me.LabelControl8.TabIndex = 177
+        Me.LabelControl8.Text = "PL Type"
+        '
+        'LEPLType
+        '
+        Me.LEPLType.Enabled = False
+        Me.LEPLType.Location = New System.Drawing.Point(556, 91)
+        Me.LEPLType.Name = "LEPLType"
+        Me.LEPLType.Properties.Appearance.Options.UseTextOptions = True
+        Me.LEPLType.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near
+        Me.LEPLType.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.LEPLType.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_pl_mat_type", "ID PL Type", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("pl_mat_type", "PL Type")})
+        Me.LEPLType.Properties.NullText = ""
+        Me.LEPLType.Properties.ShowFooter = False
+        Me.LEPLType.Size = New System.Drawing.Size(315, 20)
+        Me.LEPLType.TabIndex = 176
         '
         'FormViewMatPLSingle
         '
@@ -1026,6 +1053,7 @@ Partial Class FormViewMatPLSingle
         CType(Me.TxtCodeCompFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtCodeCompTo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtNameCompTo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LEPLType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1109,4 +1137,6 @@ Partial Class FormViewMatPLSingle
     Friend WithEvents LabelControl4 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents TEPONumber As DevExpress.XtraEditors.TextEdit
     Friend WithEvents GridColumn27 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LabelControl8 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LEPLType As DevExpress.XtraEditors.LookUpEdit
 End Class

@@ -105,7 +105,14 @@
     Private Sub submitProcess()
         ' makeSafeGV(GVProdList)
         GVProdList.ExpandAllGroups()
-        GVProdList.ActiveFilterString = "[total_order]>0 "
+
+        'kondisi jika tujuan normal/sale
+        Dim cond_acc As String = ""
+        If FormSalesOrderDet.id_account_type = "1" Or FormSalesOrderDet.id_account_type = "2" Then
+            cond_acc = "AND [id_design_cat]='" + FormSalesOrderDet.id_account_type + "' "
+        End If
+
+        GVProdList.ActiveFilterString = "[total_order]>0 " + cond_acc
         If GVProdList.RowCount > 0 Then
             Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure you want to choose these item?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
             If confirm = Windows.Forms.DialogResult.Yes Then

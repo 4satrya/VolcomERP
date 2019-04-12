@@ -2,12 +2,17 @@
     Dim bnew_active As String = "1"
     Dim bedit_active As String = "1"
     Dim bdel_active As String = "1"
+    Public is_from_vendor As Boolean = False
 
     Private Sub FormFGRepairReturn_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'date now
         Dim data As DataTable = execute_query("SELECT DATE(NOW()) AS `tgl`", -1, True, "", "", "", "")
         DEFrom.EditValue = data.Rows(0)("tgl")
         DEUntil.EditValue = data.Rows(0)("tgl")
+
+        If is_from_vendor = True Then
+            Text = "Receive Repair from Vendor"
+        End If
     End Sub
 
     Private Sub FormFGRepairReturn_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
@@ -78,8 +83,15 @@
         Catch ex As Exception
         End Try
 
+        Dim is_vendor As String = ""
+        If is_from_vendor = True Then
+            is_vendor = "1"
+        Else
+            is_vendor = "2"
+        End If
+
         Dim query_c As New ClassFGRepairReturn()
-        Dim query As String = query_c.queryMain("AND (r.fg_repair_return_date>='" + date_from_selected + "' AND r.fg_repair_return_date<='" + date_until_selected + "') ", "2")
+        Dim query As String = query_c.queryMain("AND r.is_from_vendor=" + is_vendor + " AND (r.fg_repair_return_date>='" + date_from_selected + "' AND r.fg_repair_return_date<='" + date_until_selected + "') ", "2")
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCRepairReturn.DataSource = data
         check_menu()

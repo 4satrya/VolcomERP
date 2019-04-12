@@ -15,6 +15,8 @@
     Public dt As New DataTable
     Dim is_delete_scan As Boolean = False
     Public id_type As String = "-1"
+    Dim rmt As String = ""
+    Dim is_from_vendor As String = ""
 
     Private Sub FormFGRepairReturnDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewReportStatus()
@@ -44,6 +46,12 @@
         TxtNameCompFrom.Text = data.Rows(0)("comp_name_from").ToString
         TxtCodeCompTo.Text = data.Rows(0)("comp_number_to").ToString
         TxtNameCompTo.Text = data.Rows(0)("comp_name_to").ToString
+        is_from_vendor = data.Rows(0)("is_from_vendor").ToString
+        If is_from_vendor = "1" Then
+            rmt = "141"
+        Else
+            rmt = "93"
+        End If
         setDefaultDrawerFrom()
         setDefaultDrawerTo()
 
@@ -69,7 +77,7 @@
         GVScan.OptionsCustomization.AllowGroup = True
 
         'ATTACH
-        If check_attach_report_status(id_report_status, "93", id_fg_repair_return) Then
+        If check_attach_report_status(id_report_status, rmt, id_fg_repair_return) Then
             BtnAttachment.Enabled = True
         Else
             BtnAttachment.Enabled = False
@@ -343,7 +351,7 @@
     Private Sub BtnAttachment_Click(sender As Object, e As EventArgs) Handles BtnAttachment.Click
         Cursor = Cursors.WaitCursor
         FormDocumentUpload.is_view = "1"
-        FormDocumentUpload.report_mark_type = "93"
+        FormDocumentUpload.report_mark_type = rmt
         FormDocumentUpload.id_report = id_fg_repair_return
         FormDocumentUpload.ShowDialog()
         Cursor = Cursors.Default
@@ -351,7 +359,7 @@
 
     Private Sub BMark_Click(sender As Object, e As EventArgs) Handles BMark.Click
         Cursor = Cursors.WaitCursor
-        FormReportMark.report_mark_type = "93"
+        FormReportMark.report_mark_type = rmt
         FormReportMark.is_view = "1"
         FormReportMark.id_report = id_fg_repair_return
         FormReportMark.form_origin = Name

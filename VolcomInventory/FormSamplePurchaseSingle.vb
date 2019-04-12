@@ -3,7 +3,7 @@
     Public id_sample_price As String = "-1"
     Public id_sample_purc As String = "-1"
     Dim sample_image_path As String = get_setup_field("pic_path_sample") & "\"
-
+    Public filter_string As String = ""
     Private Sub FormSamplePurchaseSingle_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         view_currency(LECurrency)
         LECurrency.EditValue = Nothing
@@ -28,7 +28,12 @@
                     GVSample.FocusedRowHandle = find_row(GVSample, "id_sample", id_sample)
                     '
                 End If
-                GVSample.ActiveFilterString = "[id_season_orign] = '" & FormSamplePurchaseDet.LESeason.EditValue.ToString & "'"
+                'add filter division 
+                If Not filter_string = "" Then
+                    filter_string = " AND (" & filter_string & ")"
+                End If
+                '
+                GVSample.ActiveFilterString = "[id_season_orign] = '" & FormSamplePurchaseDet.LESeason.EditValue.ToString & "' " & filter_string
                 view_image()
                 view_sample_price(GVSample.GetFocusedRowCellDisplayText("id_sample").ToString)
             End If
@@ -47,6 +52,7 @@
         Dim query As String = "SELECT tb_lookup_currency.currency,tb_m_sample_price.id_sample_price,tb_m_sample_price.sample_price_name,tb_m_sample_price.sample_price,tb_m_sample_price.sample_price_date FROM tb_m_sample_price,tb_lookup_currency WHERE tb_m_sample_price.id_currency=tb_lookup_currency.id_currency AND tb_m_sample_price.id_sample='" & id_samplex & "' ORDER BY tb_m_sample_price.id_sample_price DESC"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCSamplePrice.DataSource = data
+        GVSamplePrice.BestFitColumns()
 
         If id_sample_price <> "-1" Then
             If Not data.Rows.Count < 1 Then

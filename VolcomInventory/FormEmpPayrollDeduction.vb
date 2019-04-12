@@ -61,6 +61,7 @@
     End Sub
 
     Private Sub BarButtonItem3_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem3.ItemClick
+        FormImportExcel.id_pop_up = "36"
         FormImportExcel.ShowDialog()
     End Sub
 End Class

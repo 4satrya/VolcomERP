@@ -40,6 +40,11 @@
         LTerm.Text = get_term_production_x(data.Rows(0)("id_term_production").ToString)
         LCur.Text = get_currency(get_setup_field("id_currency_default"))
         LNote.Text = data.Rows(0)("prod_order_note").ToString
+        '
+        'printed date & approved date
+        Dim qpd As String = "SELECT DATE_FORMAT(NOW(), '%d/%M/%Y %H:%i') AS `printed_date` "
+        Dim dpd As DataTable = execute_query(qpd, -1, True, "", "", "", "")
+        DataSource = dpd
     End Sub
 
     Private Sub ReportMatPurchase_BeforePrint(ByVal sender As System.Object, ByVal e As System.Drawing.Printing.PrintEventArgs) Handles MyBase.BeforePrint

@@ -34,6 +34,8 @@ Partial Class FormBOMDuplicateDesign
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
         Me.BCancel = New DevExpress.XtraEditors.SimpleButton()
         Me.BDuplicate = New DevExpress.XtraEditors.SimpleButton()
+        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl3.SuspendLayout()
         CType(Me.TEProduct.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -96,7 +98,7 @@ Partial Class FormBOMDuplicateDesign
         '
         'GVDesign
         '
-        Me.GVDesign.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ColIdDesign, Me.ColIdSeason, Me.ColNamaDesign, Me.ColProductCode, Me.ColProductname, Me.ColSeason})
+        Me.GVDesign.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ColIdDesign, Me.ColIdSeason, Me.ColNamaDesign, Me.ColProductCode, Me.ColProductname, Me.GridColumn1, Me.GridColumn2, Me.ColSeason})
         Me.GVDesign.GridControl = Me.GCDesign
         Me.GVDesign.GroupCount = 1
         Me.GVDesign.Name = "GVDesign"
@@ -181,6 +183,20 @@ Partial Class FormBOMDuplicateDesign
         Me.BDuplicate.TabIndex = 11
         Me.BDuplicate.Text = "Duplicate"
         '
+        'GridColumn1
+        '
+        Me.GridColumn1.Caption = "ID Prod Demand Design"
+        Me.GridColumn1.FieldName = "id_prod_demand_design"
+        Me.GridColumn1.Name = "GridColumn1"
+        '
+        'GridColumn2
+        '
+        Me.GridColumn2.Caption = "PO Processed"
+        Me.GridColumn2.FieldName = "jml_po"
+        Me.GridColumn2.Name = "GridColumn2"
+        Me.GridColumn2.Visible = True
+        Me.GridColumn2.VisibleIndex = 2
+        '
         'FormBOMDuplicateDesign
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -224,4 +240,6 @@ Partial Class FormBOMDuplicateDesign
     Friend WithEvents PanelControl2 As DevExpress.XtraEditors.PanelControl
     Friend WithEvents BCancel As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BDuplicate As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn2 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

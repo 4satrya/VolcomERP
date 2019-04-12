@@ -24,7 +24,8 @@
             BtnAttachment.Enabled = False
             BMark.Enabled = False
             DDBPrint.Enabled = False
-            DEForm.Text = view_date(0)
+            DEEffDate.Text = DateTime.Now.ToString("dd MMMM yyyy")
+            DEForm.Text = view_date_from(DateTime.Now.ToString("yyyy-MM-dd"), 0)
             check_but()
         ElseIf action = "upd" Then
             BtnImport.Enabled = True
@@ -43,6 +44,7 @@
             LEPriceType.ItemIndex = LEPriceType.Properties.GetDataSourceRowIndex("id_design_price_type", data.Rows(0)("id_design_price_type").ToString)
             LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", data.Rows(0)("id_report_status").ToString)
             TxtNumber.Text = data.Rows(0)("fg_price_number").ToString
+            DEEffDate.Text = Date.Parse(data.Rows(0)("fg_effective_date").ToString).ToString("dd MMMM yyyy")
             DEForm.Text = view_date_from(data.Rows(0)("fg_price_datex").ToString, 0)
             MENote.Text = data.Rows(0)("fg_price_note").ToString
 
@@ -97,6 +99,7 @@
             GVItemList.OptionsCustomization.AllowGroup = False
             BtnSave.Enabled = True
             LEPriceType.Enabled = False
+            DEEffDate.Enabled = False
         Else
             BtnImport.Enabled = False
             PanelControlNav.Enabled = False
@@ -104,6 +107,7 @@
             GVItemList.OptionsCustomization.AllowGroup = False
             BtnSave.Enabled = False
             LEPriceType.Enabled = False
+            DEEffDate.Enabled = False
         End If
 
         'ATTACH
@@ -172,8 +176,8 @@
                 Dim id_currency As String = get_setup_field("id_currency_default")
                 If action = "ins" Then
                     'query main table
-                    Dim query_main As String = "INSERT tb_fg_price(id_design_price_type, fg_price_number, fg_price_date, fg_price_note, id_report_status,id_user_created) "
-                    query_main += "VALUES('" + id_design_price_type + "','" + header_number_sales("25") + "', NOW(), '" + fg_price_note + "', '1','" + id_user + "'); SELECT LAST_INSERT_ID(); "
+                    Dim query_main As String = "INSERT tb_fg_price(id_design_price_type, fg_price_number, fg_price_date, fg_effective_date, fg_price_note, id_report_status, id_user_created) "
+                    query_main += "VALUES('" + id_design_price_type + "','" + header_number_sales("25") + "', NOW(), '" + Date.Parse(DEEffDate.EditValue.ToString).ToString("yyyy-MM-dd") + "', '" + fg_price_note + "', '1','" + id_user + "'); SELECT LAST_INSERT_ID(); "
                     id_fg_price = execute_query(query_main, 0, True, "", "", "", "")
                     increase_inc_sales("25")
 
@@ -188,7 +192,7 @@
                     infoCustom("Document #" + fg_price_number + " was created successfully.")
                 ElseIf action = "upd" Then
                     'update main table
-                    Dim query_main As String = "UPDATE tb_fg_price SET id_design_price_type='" + id_design_price_type + "', fg_price_number = '" + fg_price_number + "', fg_price_note = '" + fg_price_note + "' WHERE id_fg_price = '" + id_fg_price + "' "
+                    Dim query_main As String = "UPDATE tb_fg_price SET id_design_price_type='" + id_design_price_type + "', fg_price_number = '" + fg_price_number + "', fg_effective_date = '" + Date.Parse(DEEffDate.EditValue.ToString).ToString("yyyy-MM-dd") + "', fg_price_note = '" + fg_price_note + "' WHERE id_fg_price = '" + id_fg_price + "' "
                     execute_non_query(query_main, True, "", "", "", "")
 
                     FormMasterPrice.viewPrice()
@@ -244,6 +248,7 @@
         'Parse val
         Report.LabelNumber.Text = TxtNumber.Text
         Report.LabelPriceType.Text = LEPriceType.Text.ToUpper
+        Report.LabelEffective.Text = DEEffDate.Text
         Report.LabelCreated.Text = DEForm.Text
         Report.LabelNote.Text = MENote.Text
 

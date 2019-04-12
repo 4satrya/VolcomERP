@@ -86,6 +86,7 @@ Partial Class FormProdDemand
         Me.GVProdDemand.GridControl = Me.GCProdDemand
         Me.GVProdDemand.GroupCount = 1
         Me.GVProdDemand.Name = "GVProdDemand"
+        Me.GVProdDemand.OptionsBehavior.AutoExpandAllGroups = True
         Me.GVProdDemand.OptionsBehavior.Editable = False
         Me.GVProdDemand.OptionsFind.AlwaysVisible = True
         Me.GVProdDemand.OptionsView.ShowGroupPanel = False
@@ -294,7 +295,6 @@ Partial Class FormProdDemand
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FormProdDemand"
-        Me.ShowInTaskbar = False
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Production Demand"

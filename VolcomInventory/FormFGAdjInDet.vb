@@ -17,7 +17,9 @@
             BMark.Enabled = False
             BtnPrint.Enabled = False
             viewDetailReturn()
+            PCEdit.Visible = True
         ElseIf action = "upd" Then
+            PCEdit.Visible = False
             BtnCancel.Text = "Close"
             GVDetail.OptionsBehavior.AutoExpandAllGroups = True
 
@@ -108,6 +110,7 @@
         query += "CALL view_fg_adj_in('" + id_adj_in_fg + "')"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCDetail.DataSource = data
+        GVDetail.BestFitColumns()
         'GVDetail.Columns("id_product").GroupIndex = 0
     End Sub
 
@@ -240,7 +243,7 @@
                 increase_inc_sales("14")
 
                 'preapred default
-                insert_who_prepared("41", id_adj_in_fg, id_user)
+                submit_who_prepared("41", id_adj_in_fg, id_user)
 
                 'detail table
                 For i As Integer = 0 To GVDetail.RowCount - 1
@@ -299,11 +302,19 @@
     End Sub
 
     Private Sub BtnPrint_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnPrint.Click
-        'ReportMatAdjIn.id_adj_in_fg = id_adj_in_fg
-        'Dim Report As New ReportMatAdjIn()
-        '' Show the report's preview. 
-        'Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
-        'Tool.ShowPreview()
+        ReportFGAdjIn.id_adj_in_fg = id_adj_in_fg
+        Dim Report As New ReportFGAdjIn()
+
+        Dim str As System.IO.Stream
+        str = New System.IO.MemoryStream()
+        GVDetail.SaveLayoutToStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+        str.Seek(0, System.IO.SeekOrigin.Begin)
+        Report.GVDetail.RestoreLayoutFromStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+        str.Seek(0, System.IO.SeekOrigin.Begin)
+
+        ' Show the report's preview. 
+        Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
+        Tool.ShowPreview()
     End Sub
 
     Private Sub SimpleButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SimpleButton1.Click

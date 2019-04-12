@@ -107,12 +107,12 @@
     Sub allow_status_po()
         Dim query As String = "SELECT id_prod_order FROM tb_prod_order po
                                 INNER JOIN `tb_prod_demand_design` pdd ON pdd.`id_prod_demand_design`=po.`id_prod_demand_design`
-                                WHERE (po.`id_report_status`!= 1 OR po.`id_report_status`!= 5)
+                                WHERE (po.`id_report_status`!= 1 AND po.`id_report_status`!= 5)
                                 AND pdd.id_design='" & id_design & "'"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         If data.Rows.Count > 0 Then
             'sudah ada approved
-            LPOApproved.Text = "PO approved : " & data.Rows.Count.ToString
+            LPOApproved.Text = "PO processed : " & data.Rows.Count.ToString
             'hide all button
             BDuplicate.Visible = False
             BSave.Visible = False
@@ -428,6 +428,10 @@
 
     Private Sub FormBOMSingle_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
         '
+        If Not id_bom_approve = "-1" Then
+            Dim query_upd As String = "UPDATE tb_bom SET `bom_last_updated`=NOW() WHERE tb_bom.`id_bom_approve`='" & id_bom_approve & "' "
+            execute_non_query(query_upd, True, "", "", "", "")
+        End If
         Dispose()
     End Sub
 

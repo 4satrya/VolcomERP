@@ -35,10 +35,15 @@ Partial Class FormEmpAttnSum
         Me.GridColumn33 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn34 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn35 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn36 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn37 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn71 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn70 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn36 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn40 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn19 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn72 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn99 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn73 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn41 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.XTPD2D = New DevExpress.XtraTab.XtraTabPage()
         Me.GCSchedule = New DevExpress.XtraGrid.GridControl()
@@ -116,8 +121,42 @@ Partial Class FormEmpAttnSum
         Me.XTPScheduleTable = New DevExpress.XtraTab.XtraTabPage()
         Me.GCScheduleTable = New DevExpress.XtraGrid.GridControl()
         Me.GVScheduleTable = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.XTPSumMonthly = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCSumMonthly = New DevExpress.XtraGrid.GridControl()
+        Me.GVSumMonthly = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn74 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn75 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn76 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn77 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn78 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn79 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn80 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn93 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn81 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn82 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn83 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn84 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn85 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn86 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn87 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn88 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn89 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn90 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn100 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn91 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn92 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
+        Me.XtraScrollableControl1 = New DevExpress.XtraEditors.XtraScrollableControl()
+        Me.SLUEEmployee = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.SearchLookUpEditEmp = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn94 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn97 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn95 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn98 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn96 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
+        Me.BHeadAndPIC = New DevExpress.XtraEditors.SimpleButton()
         Me.LEEmployeeStatus = New DevExpress.XtraEditors.LookUpEdit()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.LEDeptSum = New DevExpress.XtraEditors.LookUpEdit()
@@ -142,9 +181,15 @@ Partial Class FormEmpAttnSum
         Me.XTPScheduleTable.SuspendLayout()
         CType(Me.GCScheduleTable, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVScheduleTable, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTPSumMonthly.SuspendLayout()
+        CType(Me.GCSumMonthly, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVSumMonthly, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
+        Me.XtraScrollableControl1.SuspendLayout()
+        CType(Me.SLUEEmployee.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SearchLookUpEditEmp, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LEEmployeeStatus.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LEDeptSum.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEUntilSum.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -157,18 +202,18 @@ Partial Class FormEmpAttnSum
         '
         Me.XTCReportAttendance.Dock = System.Windows.Forms.DockStyle.Fill
         Me.XTCReportAttendance.HeaderLocation = DevExpress.XtraTab.TabHeaderLocation.Bottom
-        Me.XTCReportAttendance.Location = New System.Drawing.Point(0, 38)
+        Me.XTCReportAttendance.Location = New System.Drawing.Point(0, 58)
         Me.XTCReportAttendance.Name = "XTCReportAttendance"
         Me.XTCReportAttendance.SelectedTabPage = Me.XTPMonthly
-        Me.XTCReportAttendance.Size = New System.Drawing.Size(844, 290)
+        Me.XTCReportAttendance.Size = New System.Drawing.Size(1166, 270)
         Me.XTCReportAttendance.TabIndex = 0
-        Me.XTCReportAttendance.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPMonthly, Me.XTPD2D, Me.XTPSchedule, Me.XTPScheduleTable})
+        Me.XTCReportAttendance.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPMonthly, Me.XTPD2D, Me.XTPSchedule, Me.XTPScheduleTable, Me.XTPSumMonthly})
         '
         'XTPMonthly
         '
         Me.XTPMonthly.Controls.Add(Me.GCSum)
         Me.XTPMonthly.Name = "XTPMonthly"
-        Me.XTPMonthly.Size = New System.Drawing.Size(838, 262)
+        Me.XTPMonthly.Size = New System.Drawing.Size(1160, 242)
         Me.XTPMonthly.Text = "Summary"
         '
         'GCSum
@@ -177,16 +222,16 @@ Partial Class FormEmpAttnSum
         Me.GCSum.Location = New System.Drawing.Point(0, 0)
         Me.GCSum.MainView = Me.GVSum
         Me.GCSum.Name = "GCSum"
-        Me.GCSum.Size = New System.Drawing.Size(838, 262)
+        Me.GCSum.Size = New System.Drawing.Size(1160, 242)
         Me.GCSum.TabIndex = 8
         Me.GCSum.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVSum})
         '
         'GVSum
         '
-        Me.GVSum.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn14, Me.GridColumn15, Me.GridColumnPositiion, Me.GridColumnLevels, Me.GridColumn22, Me.GridColumn16, Me.GridColumn17, Me.GridColumn33, Me.GridColumn34, Me.GridColumn35, Me.GridColumn36, Me.GridColumn37, Me.GridColumn40, Me.GridColumn19, Me.GridColumn41})
+        Me.GVSum.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn14, Me.GridColumn15, Me.GridColumnPositiion, Me.GridColumnLevels, Me.GridColumn22, Me.GridColumn16, Me.GridColumn17, Me.GridColumn33, Me.GridColumn34, Me.GridColumn35, Me.GridColumn37, Me.GridColumn71, Me.GridColumn70, Me.GridColumn36, Me.GridColumn40, Me.GridColumn19, Me.GridColumn72, Me.GridColumn99, Me.GridColumn73, Me.GridColumn41})
         Me.GVSum.GridControl = Me.GCSum
         Me.GVSum.GroupCount = 1
-        Me.GVSum.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "work_hour", Me.GridColumn33, "{0:0.##}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "actual_work_hour", Me.GridColumn34, "{0:0.##}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "late", Me.GridColumn35, "{0:0.##}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "over", Me.GridColumn36, "{0:0.##}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "balance", Me.GridColumn37, "{0:0.##}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "over_break", Me.GridColumn40, "{0:0.##}")})
+        Me.GVSum.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "work_hour", Me.GridColumn33, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "actual_work_hour", Me.GridColumn34, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "late", Me.GridColumn35, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "over", Me.GridColumn70, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "balance", Me.GridColumn37, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "over_break", Me.GridColumn40, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "early_home", Me.GridColumn36, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_minus", Me.GridColumn71, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.None, "balance", Nothing, ""), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "tot_sick", Me.GridColumn72, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sum_sick", Me.GridColumn99, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "tot_eval", Me.GridColumn73, "{0:N2}", "grup")})
         Me.GVSum.Name = "GVSum"
         Me.GVSum.OptionsBehavior.Editable = False
         Me.GVSum.OptionsView.ColumnAutoWidth = False
@@ -232,7 +277,7 @@ Partial Class FormEmpAttnSum
         Me.GridColumn22.FieldName = "employee_active"
         Me.GridColumn22.Name = "GridColumn22"
         Me.GridColumn22.Visible = True
-        Me.GridColumn22.VisibleIndex = 11
+        Me.GridColumn22.VisibleIndex = 15
         '
         'GridColumn16
         '
@@ -254,6 +299,8 @@ Partial Class FormEmpAttnSum
         Me.GridColumn33.AppearanceHeader.Options.UseTextOptions = True
         Me.GridColumn33.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GridColumn33.Caption = "Working Minutes"
+        Me.GridColumn33.DisplayFormat.FormatString = "N0"
+        Me.GridColumn33.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn33.FieldName = "work_hour"
         Me.GridColumn33.Name = "GridColumn33"
         Me.GridColumn33.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "work_hour", "{0:0.##}")})
@@ -266,11 +313,13 @@ Partial Class FormEmpAttnSum
         Me.GridColumn34.AppearanceHeader.Options.UseTextOptions = True
         Me.GridColumn34.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GridColumn34.Caption = "Actual Working Minutes"
+        Me.GridColumn34.DisplayFormat.FormatString = "N0"
+        Me.GridColumn34.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn34.FieldName = "actual_work_hour"
         Me.GridColumn34.Name = "GridColumn34"
         Me.GridColumn34.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "actual_work_hour", "{0:0.##}")})
         Me.GridColumn34.Visible = True
-        Me.GridColumn34.VisibleIndex = 8
+        Me.GridColumn34.VisibleIndex = 12
         Me.GridColumn34.Width = 123
         '
         'GridColumn35
@@ -278,6 +327,8 @@ Partial Class FormEmpAttnSum
         Me.GridColumn35.AppearanceHeader.Options.UseTextOptions = True
         Me.GridColumn35.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GridColumn35.Caption = "Late"
+        Me.GridColumn35.DisplayFormat.FormatString = "N0"
+        Me.GridColumn35.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn35.FieldName = "late"
         Me.GridColumn35.Name = "GridColumn35"
         Me.GridColumn35.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "late", "{0:0.##}")})
@@ -285,40 +336,67 @@ Partial Class FormEmpAttnSum
         Me.GridColumn35.VisibleIndex = 3
         Me.GridColumn35.Width = 87
         '
+        'GridColumn37
+        '
+        Me.GridColumn37.Caption = "Balance"
+        Me.GridColumn37.DisplayFormat.FormatString = "N0"
+        Me.GridColumn37.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn37.FieldName = "balance"
+        Me.GridColumn37.Name = "GridColumn37"
+        Me.GridColumn37.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "balance", "{0:N0}")})
+        Me.GridColumn37.Visible = True
+        Me.GridColumn37.VisibleIndex = 11
+        '
+        'GridColumn71
+        '
+        Me.GridColumn71.Caption = "Total Minus"
+        Me.GridColumn71.DisplayFormat.FormatString = "N0"
+        Me.GridColumn71.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn71.FieldName = "total_minus"
+        Me.GridColumn71.Name = "GridColumn71"
+        Me.GridColumn71.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_minus", "{0:N0}")})
+        Me.GridColumn71.ToolTip = "Early Home + Over Break"
+        Me.GridColumn71.Visible = True
+        Me.GridColumn71.VisibleIndex = 8
+        Me.GridColumn71.Width = 177
+        '
+        'GridColumn70
+        '
+        Me.GridColumn70.Caption = "Over (actual)"
+        Me.GridColumn70.DisplayFormat.FormatString = "N0"
+        Me.GridColumn70.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn70.FieldName = "over"
+        Me.GridColumn70.Name = "GridColumn70"
+        Me.GridColumn70.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "over", "{0:N0}")})
+        Me.GridColumn70.Visible = True
+        Me.GridColumn70.VisibleIndex = 6
+        '
         'GridColumn36
         '
         Me.GridColumn36.AppearanceHeader.Options.UseTextOptions = True
         Me.GridColumn36.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumn36.Caption = "Over"
-        Me.GridColumn36.FieldName = "over"
+        Me.GridColumn36.Caption = "Early Home"
+        Me.GridColumn36.DisplayFormat.FormatString = "N0"
+        Me.GridColumn36.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn36.FieldName = "early_home"
         Me.GridColumn36.Name = "GridColumn36"
-        Me.GridColumn36.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "over", "{0:0.##}")})
+        Me.GridColumn36.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "early_home", "{0:0.##}")})
         Me.GridColumn36.Visible = True
-        Me.GridColumn36.VisibleIndex = 4
+        Me.GridColumn36.VisibleIndex = 5
         Me.GridColumn36.Width = 87
-        '
-        'GridColumn37
-        '
-        Me.GridColumn37.AppearanceHeader.Options.UseTextOptions = True
-        Me.GridColumn37.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumn37.Caption = "Balance"
-        Me.GridColumn37.FieldName = "balance"
-        Me.GridColumn37.Name = "GridColumn37"
-        Me.GridColumn37.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "balance", "{0:0.##}")})
-        Me.GridColumn37.Visible = True
-        Me.GridColumn37.VisibleIndex = 6
-        Me.GridColumn37.Width = 87
         '
         'GridColumn40
         '
         Me.GridColumn40.AppearanceHeader.Options.UseTextOptions = True
         Me.GridColumn40.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GridColumn40.Caption = "Over Break"
+        Me.GridColumn40.DisplayFormat.FormatString = "N0"
+        Me.GridColumn40.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn40.FieldName = "over_break"
         Me.GridColumn40.Name = "GridColumn40"
         Me.GridColumn40.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "over_break", "{0:0.##}")})
         Me.GridColumn40.Visible = True
-        Me.GridColumn40.VisibleIndex = 5
+        Me.GridColumn40.VisibleIndex = 4
         Me.GridColumn40.Width = 87
         '
         'GridColumn19
@@ -326,28 +404,69 @@ Partial Class FormEmpAttnSum
         Me.GridColumn19.AppearanceHeader.Options.UseTextOptions = True
         Me.GridColumn19.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GridColumn19.Caption = "Work days"
+        Me.GridColumn19.DisplayFormat.FormatString = "N0"
+        Me.GridColumn19.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn19.FieldName = "workday"
         Me.GridColumn19.Name = "GridColumn19"
         Me.GridColumn19.Visible = True
-        Me.GridColumn19.VisibleIndex = 9
+        Me.GridColumn19.VisibleIndex = 13
         Me.GridColumn19.Width = 74
+        '
+        'GridColumn72
+        '
+        Me.GridColumn72.Caption = "Total Sick"
+        Me.GridColumn72.DisplayFormat.FormatString = "N0"
+        Me.GridColumn72.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn72.FieldName = "tot_sick"
+        Me.GridColumn72.Name = "GridColumn72"
+        Me.GridColumn72.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "tot_sick", "{0:N0}")})
+        Me.GridColumn72.Visible = True
+        Me.GridColumn72.VisibleIndex = 9
+        '
+        'GridColumn99
+        '
+        Me.GridColumn99.Caption = "Total Sick (request)"
+        Me.GridColumn99.DisplayFormat.FormatString = "N0"
+        Me.GridColumn99.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn99.FieldName = "sum_sick"
+        Me.GridColumn99.Name = "GridColumn99"
+        Me.GridColumn99.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sum_sick", "{0:N0}")})
+        Me.GridColumn99.Visible = True
+        Me.GridColumn99.VisibleIndex = 10
+        Me.GridColumn99.Width = 93
+        '
+        'GridColumn73
+        '
+        Me.GridColumn73.Caption = "Total Evaluation"
+        Me.GridColumn73.DisplayFormat.FormatString = "N2"
+        Me.GridColumn73.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn73.FieldName = "tot_eval"
+        Me.GridColumn73.Name = "GridColumn73"
+        Me.GridColumn73.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "tot_eval", "{0:N2}", "footer")})
+        Me.GridColumn73.ToolTip = "((Late + Total Minus + Total Sick)/Working Minutes) x 100"
+        Me.GridColumn73.UnboundExpression = "([late] + [total_minus] + [tot_sick]) / [work_hour] * 100"
+        Me.GridColumn73.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
+        Me.GridColumn73.Visible = True
+        Me.GridColumn73.VisibleIndex = 16
         '
         'GridColumn41
         '
         Me.GridColumn41.AppearanceHeader.Options.UseTextOptions = True
         Me.GridColumn41.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GridColumn41.Caption = "Work Present (days)"
+        Me.GridColumn41.DisplayFormat.FormatString = "N0"
+        Me.GridColumn41.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn41.FieldName = "present"
         Me.GridColumn41.Name = "GridColumn41"
         Me.GridColumn41.Visible = True
-        Me.GridColumn41.VisibleIndex = 10
+        Me.GridColumn41.VisibleIndex = 14
         Me.GridColumn41.Width = 71
         '
         'XTPD2D
         '
         Me.XTPD2D.Controls.Add(Me.GCSchedule)
         Me.XTPD2D.Name = "XTPD2D"
-        Me.XTPD2D.Size = New System.Drawing.Size(838, 262)
+        Me.XTPD2D.Size = New System.Drawing.Size(1160, 242)
         Me.XTPD2D.Text = "Detail"
         '
         'GCSchedule
@@ -356,7 +475,7 @@ Partial Class FormEmpAttnSum
         Me.GCSchedule.Location = New System.Drawing.Point(0, 0)
         Me.GCSchedule.MainView = Me.GVSchedule
         Me.GCSchedule.Name = "GCSchedule"
-        Me.GCSchedule.Size = New System.Drawing.Size(838, 262)
+        Me.GCSchedule.Size = New System.Drawing.Size(1160, 242)
         Me.GCSchedule.TabIndex = 7
         Me.GCSchedule.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVSchedule})
         '
@@ -655,7 +774,7 @@ Partial Class FormEmpAttnSum
         '
         Me.XTPSchedule.Controls.Add(Me.GCListSchedule)
         Me.XTPSchedule.Name = "XTPSchedule"
-        Me.XTPSchedule.Size = New System.Drawing.Size(838, 262)
+        Me.XTPSchedule.Size = New System.Drawing.Size(1160, 242)
         Me.XTPSchedule.Text = "Schedule"
         '
         'GCListSchedule
@@ -664,7 +783,7 @@ Partial Class FormEmpAttnSum
         Me.GCListSchedule.Location = New System.Drawing.Point(0, 0)
         Me.GCListSchedule.MainView = Me.GVListSchedule
         Me.GCListSchedule.Name = "GCListSchedule"
-        Me.GCListSchedule.Size = New System.Drawing.Size(838, 262)
+        Me.GCListSchedule.Size = New System.Drawing.Size(1160, 242)
         Me.GCListSchedule.TabIndex = 8
         Me.GCListSchedule.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVListSchedule})
         '
@@ -946,7 +1065,7 @@ Partial Class FormEmpAttnSum
         '
         Me.XTPScheduleTable.Controls.Add(Me.GCScheduleTable)
         Me.XTPScheduleTable.Name = "XTPScheduleTable"
-        Me.XTPScheduleTable.Size = New System.Drawing.Size(838, 262)
+        Me.XTPScheduleTable.Size = New System.Drawing.Size(1160, 242)
         Me.XTPScheduleTable.Text = "Schedule Table"
         '
         'GCScheduleTable
@@ -955,7 +1074,7 @@ Partial Class FormEmpAttnSum
         Me.GCScheduleTable.Location = New System.Drawing.Point(0, 0)
         Me.GCScheduleTable.MainView = Me.GVScheduleTable
         Me.GCScheduleTable.Name = "GCScheduleTable"
-        Me.GCScheduleTable.Size = New System.Drawing.Size(838, 262)
+        Me.GCScheduleTable.Size = New System.Drawing.Size(1160, 242)
         Me.GCScheduleTable.TabIndex = 4
         Me.GCScheduleTable.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVScheduleTable})
         '
@@ -965,6 +1084,267 @@ Partial Class FormEmpAttnSum
         Me.GVScheduleTable.Name = "GVScheduleTable"
         Me.GVScheduleTable.OptionsView.ColumnAutoWidth = False
         Me.GVScheduleTable.OptionsView.ShowGroupPanel = False
+        '
+        'XTPSumMonthly
+        '
+        Me.XTPSumMonthly.Controls.Add(Me.GCSumMonthly)
+        Me.XTPSumMonthly.Name = "XTPSumMonthly"
+        Me.XTPSumMonthly.Size = New System.Drawing.Size(1160, 242)
+        Me.XTPSumMonthly.Text = "Summary Monthly"
+        '
+        'GCSumMonthly
+        '
+        Me.GCSumMonthly.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCSumMonthly.Location = New System.Drawing.Point(0, 0)
+        Me.GCSumMonthly.MainView = Me.GVSumMonthly
+        Me.GCSumMonthly.Name = "GCSumMonthly"
+        Me.GCSumMonthly.Size = New System.Drawing.Size(1160, 242)
+        Me.GCSumMonthly.TabIndex = 9
+        Me.GCSumMonthly.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVSumMonthly})
+        '
+        'GVSumMonthly
+        '
+        Me.GVSumMonthly.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn74, Me.GridColumn75, Me.GridColumn76, Me.GridColumn77, Me.GridColumn78, Me.GridColumn79, Me.GridColumn80, Me.GridColumn93, Me.GridColumn81, Me.GridColumn82, Me.GridColumn83, Me.GridColumn84, Me.GridColumn85, Me.GridColumn86, Me.GridColumn87, Me.GridColumn88, Me.GridColumn89, Me.GridColumn90, Me.GridColumn100, Me.GridColumn91, Me.GridColumn92})
+        Me.GVSumMonthly.GridControl = Me.GCSumMonthly
+        Me.GVSumMonthly.GroupCount = 2
+        Me.GVSumMonthly.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "work_hour", Me.GridColumn81, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "actual_work_hour", Me.GridColumn82, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "late", Me.GridColumn83, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "over", Me.GridColumn86, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "balance", Me.GridColumn84, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "over_break", Me.GridColumn88, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "early_home", Me.GridColumn87, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_minus", Me.GridColumn85, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.None, "balance", Nothing, ""), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "tot_sick", Me.GridColumn90, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sum_sick", Me.GridColumn100, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "tot_eval", Me.GridColumn91, "{0:N2}", "grup")})
+        Me.GVSumMonthly.Name = "GVSumMonthly"
+        Me.GVSumMonthly.OptionsBehavior.Editable = False
+        Me.GVSumMonthly.OptionsView.ColumnAutoWidth = False
+        Me.GVSumMonthly.OptionsView.ShowFooter = True
+        Me.GVSumMonthly.OptionsView.ShowGroupPanel = False
+        Me.GVSumMonthly.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumn79, DevExpress.Data.ColumnSortOrder.Ascending), New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumn75, DevExpress.Data.ColumnSortOrder.Ascending)})
+        '
+        'GridColumn74
+        '
+        Me.GridColumn74.Caption = "ID Employee"
+        Me.GridColumn74.FieldName = "id_employee"
+        Me.GridColumn74.Name = "GridColumn74"
+        '
+        'GridColumn75
+        '
+        Me.GridColumn75.Caption = "Employee"
+        Me.GridColumn75.FieldName = "employee_name"
+        Me.GridColumn75.FieldNameSortGroup = "id_employee"
+        Me.GridColumn75.Name = "GridColumn75"
+        Me.GridColumn75.Visible = True
+        Me.GridColumn75.VisibleIndex = 0
+        Me.GridColumn75.Width = 96
+        '
+        'GridColumn76
+        '
+        Me.GridColumn76.Caption = "Position"
+        Me.GridColumn76.FieldName = "employee_position"
+        Me.GridColumn76.Name = "GridColumn76"
+        Me.GridColumn76.Visible = True
+        Me.GridColumn76.VisibleIndex = 1
+        '
+        'GridColumn77
+        '
+        Me.GridColumn77.Caption = "Level"
+        Me.GridColumn77.FieldName = "employee_level"
+        Me.GridColumn77.Name = "GridColumn77"
+        Me.GridColumn77.Visible = True
+        Me.GridColumn77.VisibleIndex = 0
+        '
+        'GridColumn78
+        '
+        Me.GridColumn78.Caption = "Status"
+        Me.GridColumn78.FieldName = "employee_active"
+        Me.GridColumn78.Name = "GridColumn78"
+        Me.GridColumn78.Visible = True
+        Me.GridColumn78.VisibleIndex = 15
+        '
+        'GridColumn79
+        '
+        Me.GridColumn79.Caption = "Departement"
+        Me.GridColumn79.FieldName = "departement"
+        Me.GridColumn79.FieldNameSortGroup = "id_departement"
+        Me.GridColumn79.Name = "GridColumn79"
+        Me.GridColumn79.Visible = True
+        Me.GridColumn79.VisibleIndex = 3
+        '
+        'GridColumn80
+        '
+        Me.GridColumn80.Caption = "ID Departement"
+        Me.GridColumn80.FieldName = "id_departement"
+        Me.GridColumn80.Name = "GridColumn80"
+        '
+        'GridColumn93
+        '
+        Me.GridColumn93.Caption = "Month"
+        Me.GridColumn93.FieldName = "month_year"
+        Me.GridColumn93.Name = "GridColumn93"
+        Me.GridColumn93.Visible = True
+        Me.GridColumn93.VisibleIndex = 2
+        '
+        'GridColumn81
+        '
+        Me.GridColumn81.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn81.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn81.Caption = "Working Minutes"
+        Me.GridColumn81.DisplayFormat.FormatString = "N0"
+        Me.GridColumn81.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn81.FieldName = "work_hour"
+        Me.GridColumn81.Name = "GridColumn81"
+        Me.GridColumn81.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "work_hour", "{0:0.##}")})
+        Me.GridColumn81.Visible = True
+        Me.GridColumn81.VisibleIndex = 7
+        Me.GridColumn81.Width = 87
+        '
+        'GridColumn82
+        '
+        Me.GridColumn82.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn82.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn82.Caption = "Actual Working Minutes"
+        Me.GridColumn82.DisplayFormat.FormatString = "N0"
+        Me.GridColumn82.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn82.FieldName = "actual_work_hour"
+        Me.GridColumn82.Name = "GridColumn82"
+        Me.GridColumn82.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "actual_work_hour", "{0:0.##}")})
+        Me.GridColumn82.Visible = True
+        Me.GridColumn82.VisibleIndex = 12
+        Me.GridColumn82.Width = 123
+        '
+        'GridColumn83
+        '
+        Me.GridColumn83.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn83.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn83.Caption = "Late"
+        Me.GridColumn83.DisplayFormat.FormatString = "N0"
+        Me.GridColumn83.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn83.FieldName = "late"
+        Me.GridColumn83.Name = "GridColumn83"
+        Me.GridColumn83.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "late", "{0:0.##}")})
+        Me.GridColumn83.Visible = True
+        Me.GridColumn83.VisibleIndex = 3
+        Me.GridColumn83.Width = 87
+        '
+        'GridColumn84
+        '
+        Me.GridColumn84.Caption = "Balance"
+        Me.GridColumn84.DisplayFormat.FormatString = "N0"
+        Me.GridColumn84.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn84.FieldName = "balance"
+        Me.GridColumn84.Name = "GridColumn84"
+        Me.GridColumn84.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "balance", "{0:N0}")})
+        Me.GridColumn84.Visible = True
+        Me.GridColumn84.VisibleIndex = 11
+        '
+        'GridColumn85
+        '
+        Me.GridColumn85.Caption = "Total Minus"
+        Me.GridColumn85.DisplayFormat.FormatString = "N0"
+        Me.GridColumn85.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn85.FieldName = "total_minus"
+        Me.GridColumn85.Name = "GridColumn85"
+        Me.GridColumn85.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_minus", "{0:N0}")})
+        Me.GridColumn85.ToolTip = "Early Home + Over Break"
+        Me.GridColumn85.Visible = True
+        Me.GridColumn85.VisibleIndex = 8
+        Me.GridColumn85.Width = 177
+        '
+        'GridColumn86
+        '
+        Me.GridColumn86.Caption = "Over (actual)"
+        Me.GridColumn86.DisplayFormat.FormatString = "N0"
+        Me.GridColumn86.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn86.FieldName = "over"
+        Me.GridColumn86.Name = "GridColumn86"
+        Me.GridColumn86.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "over", "{0:N0}")})
+        Me.GridColumn86.Visible = True
+        Me.GridColumn86.VisibleIndex = 6
+        '
+        'GridColumn87
+        '
+        Me.GridColumn87.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn87.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn87.Caption = "Early Home"
+        Me.GridColumn87.DisplayFormat.FormatString = "N0"
+        Me.GridColumn87.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn87.FieldName = "early_home"
+        Me.GridColumn87.Name = "GridColumn87"
+        Me.GridColumn87.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "early_home", "{0:0.##}")})
+        Me.GridColumn87.Visible = True
+        Me.GridColumn87.VisibleIndex = 5
+        Me.GridColumn87.Width = 87
+        '
+        'GridColumn88
+        '
+        Me.GridColumn88.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn88.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn88.Caption = "Over Break"
+        Me.GridColumn88.DisplayFormat.FormatString = "N0"
+        Me.GridColumn88.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn88.FieldName = "over_break"
+        Me.GridColumn88.Name = "GridColumn88"
+        Me.GridColumn88.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "over_break", "{0:0.##}")})
+        Me.GridColumn88.Visible = True
+        Me.GridColumn88.VisibleIndex = 4
+        Me.GridColumn88.Width = 87
+        '
+        'GridColumn89
+        '
+        Me.GridColumn89.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn89.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn89.Caption = "Work days"
+        Me.GridColumn89.DisplayFormat.FormatString = "N0"
+        Me.GridColumn89.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn89.FieldName = "workday"
+        Me.GridColumn89.Name = "GridColumn89"
+        Me.GridColumn89.Visible = True
+        Me.GridColumn89.VisibleIndex = 13
+        Me.GridColumn89.Width = 74
+        '
+        'GridColumn90
+        '
+        Me.GridColumn90.Caption = "Total Sick"
+        Me.GridColumn90.DisplayFormat.FormatString = "N0"
+        Me.GridColumn90.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn90.FieldName = "tot_sick"
+        Me.GridColumn90.Name = "GridColumn90"
+        Me.GridColumn90.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "tot_sick", "{0:N0}")})
+        Me.GridColumn90.Visible = True
+        Me.GridColumn90.VisibleIndex = 9
+        '
+        'GridColumn100
+        '
+        Me.GridColumn100.Caption = "Total Sick (request)"
+        Me.GridColumn100.DisplayFormat.FormatString = "N0"
+        Me.GridColumn100.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn100.FieldName = "sum_sick"
+        Me.GridColumn100.Name = "GridColumn100"
+        Me.GridColumn100.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sum_sick", "{0:N0}")})
+        Me.GridColumn100.Visible = True
+        Me.GridColumn100.VisibleIndex = 10
+        Me.GridColumn100.Width = 99
+        '
+        'GridColumn91
+        '
+        Me.GridColumn91.Caption = "Total Evaluation"
+        Me.GridColumn91.DisplayFormat.FormatString = "N2"
+        Me.GridColumn91.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn91.FieldName = "tot_eval"
+        Me.GridColumn91.Name = "GridColumn91"
+        Me.GridColumn91.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "tot_eval", "{0:N2}", "footer")})
+        Me.GridColumn91.ToolTip = "((Late + Total Minus + Total Sick)/Working Minutes) x 100"
+        Me.GridColumn91.UnboundExpression = "([late] + [total_minus] + [tot_sick]) / [work_hour] * 100"
+        Me.GridColumn91.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
+        Me.GridColumn91.Visible = True
+        Me.GridColumn91.VisibleIndex = 16
+        '
+        'GridColumn92
+        '
+        Me.GridColumn92.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn92.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn92.Caption = "Work Present (days)"
+        Me.GridColumn92.DisplayFormat.FormatString = "N0"
+        Me.GridColumn92.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn92.FieldName = "present"
+        Me.GridColumn92.Name = "GridColumn92"
+        Me.GridColumn92.Visible = True
+        Me.GridColumn92.VisibleIndex = 14
+        Me.GridColumn92.Width = 71
         '
         'LargeImageCollection
         '
@@ -993,21 +1373,100 @@ Partial Class FormEmpAttnSum
         '
         'PanelControl2
         '
-        Me.PanelControl2.Controls.Add(Me.LEEmployeeStatus)
-        Me.PanelControl2.Controls.Add(Me.LabelControl2)
-        Me.PanelControl2.Controls.Add(Me.LEDeptSum)
-        Me.PanelControl2.Controls.Add(Me.LabelControl1)
-        Me.PanelControl2.Controls.Add(Me.BPrintSum)
-        Me.PanelControl2.Controls.Add(Me.DEUntilSum)
-        Me.PanelControl2.Controls.Add(Me.Label3)
-        Me.PanelControl2.Controls.Add(Me.DEStartSum)
-        Me.PanelControl2.Controls.Add(Me.Label4)
-        Me.PanelControl2.Controls.Add(Me.BViewSum)
+        Me.PanelControl2.Controls.Add(Me.XtraScrollableControl1)
         Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl2.Location = New System.Drawing.Point(0, 0)
         Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(844, 38)
+        Me.PanelControl2.Size = New System.Drawing.Size(1166, 58)
         Me.PanelControl2.TabIndex = 3
+        '
+        'XtraScrollableControl1
+        '
+        Me.XtraScrollableControl1.Controls.Add(Me.SLUEEmployee)
+        Me.XtraScrollableControl1.Controls.Add(Me.LabelControl3)
+        Me.XtraScrollableControl1.Controls.Add(Me.BHeadAndPIC)
+        Me.XtraScrollableControl1.Controls.Add(Me.LEEmployeeStatus)
+        Me.XtraScrollableControl1.Controls.Add(Me.LabelControl2)
+        Me.XtraScrollableControl1.Controls.Add(Me.LEDeptSum)
+        Me.XtraScrollableControl1.Controls.Add(Me.LabelControl1)
+        Me.XtraScrollableControl1.Controls.Add(Me.BPrintSum)
+        Me.XtraScrollableControl1.Controls.Add(Me.DEUntilSum)
+        Me.XtraScrollableControl1.Controls.Add(Me.Label3)
+        Me.XtraScrollableControl1.Controls.Add(Me.DEStartSum)
+        Me.XtraScrollableControl1.Controls.Add(Me.Label4)
+        Me.XtraScrollableControl1.Controls.Add(Me.BViewSum)
+        Me.XtraScrollableControl1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.XtraScrollableControl1.Location = New System.Drawing.Point(2, 2)
+        Me.XtraScrollableControl1.Name = "XtraScrollableControl1"
+        Me.XtraScrollableControl1.Size = New System.Drawing.Size(1162, 54)
+        Me.XtraScrollableControl1.TabIndex = 20
+        '
+        'SLUEEmployee
+        '
+        Me.SLUEEmployee.Location = New System.Drawing.Point(750, 9)
+        Me.SLUEEmployee.Name = "SLUEEmployee"
+        Me.SLUEEmployee.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLUEEmployee.Properties.ShowClearButton = False
+        Me.SLUEEmployee.Properties.View = Me.SearchLookUpEditEmp
+        Me.SLUEEmployee.Size = New System.Drawing.Size(209, 20)
+        Me.SLUEEmployee.TabIndex = 19
+        '
+        'SearchLookUpEditEmp
+        '
+        Me.SearchLookUpEditEmp.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn94, Me.GridColumn97, Me.GridColumn95, Me.GridColumn98, Me.GridColumn96})
+        Me.SearchLookUpEditEmp.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.SearchLookUpEditEmp.Name = "SearchLookUpEditEmp"
+        Me.SearchLookUpEditEmp.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.SearchLookUpEditEmp.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never
+        Me.SearchLookUpEditEmp.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn94
+        '
+        Me.GridColumn94.FieldName = "id_employee"
+        Me.GridColumn94.Name = "GridColumn94"
+        '
+        'GridColumn97
+        '
+        Me.GridColumn97.Caption = "Code"
+        Me.GridColumn97.FieldName = "employee_code"
+        Me.GridColumn97.Name = "GridColumn97"
+        Me.GridColumn97.Visible = True
+        Me.GridColumn97.VisibleIndex = 0
+        '
+        'GridColumn95
+        '
+        Me.GridColumn95.Caption = "Employee"
+        Me.GridColumn95.FieldName = "employee_name"
+        Me.GridColumn95.Name = "GridColumn95"
+        Me.GridColumn95.Visible = True
+        Me.GridColumn95.VisibleIndex = 1
+        '
+        'GridColumn98
+        '
+        Me.GridColumn98.FieldName = "id_departement"
+        Me.GridColumn98.Name = "GridColumn98"
+        '
+        'GridColumn96
+        '
+        Me.GridColumn96.FieldName = "id_employee_active"
+        Me.GridColumn96.Name = "GridColumn96"
+        '
+        'LabelControl3
+        '
+        Me.LabelControl3.Location = New System.Drawing.Point(701, 12)
+        Me.LabelControl3.Name = "LabelControl3"
+        Me.LabelControl3.Size = New System.Drawing.Size(46, 13)
+        Me.LabelControl3.TabIndex = 18
+        Me.LabelControl3.Text = "Employee"
+        '
+        'BHeadAndPIC
+        '
+        Me.BHeadAndPIC.ImageList = Me.LargeImageCollection
+        Me.BHeadAndPIC.Location = New System.Drawing.Point(1043, 6)
+        Me.BHeadAndPIC.Name = "BHeadAndPIC"
+        Me.BHeadAndPIC.Size = New System.Drawing.Size(65, 25)
+        Me.BHeadAndPIC.TabIndex = 17
+        Me.BHeadAndPIC.Text = "Head & PIC"
         '
         'LEEmployeeStatus
         '
@@ -1015,7 +1474,7 @@ Partial Class FormEmpAttnSum
         Me.LEEmployeeStatus.Name = "LEEmployeeStatus"
         Me.LEEmployeeStatus.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.LEEmployeeStatus.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_employee_active", "Id", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("employee_active", "Status")})
-        Me.LEEmployeeStatus.Size = New System.Drawing.Size(87, 20)
+        Me.LEEmployeeStatus.Size = New System.Drawing.Size(144, 20)
         Me.LEEmployeeStatus.TabIndex = 16
         '
         'LabelControl2
@@ -1046,11 +1505,11 @@ Partial Class FormEmpAttnSum
         'BPrintSum
         '
         Me.BPrintSum.ImageList = Me.LargeImageCollection
-        Me.BPrintSum.Location = New System.Drawing.Point(736, 6)
+        Me.BPrintSum.Location = New System.Drawing.Point(1114, 6)
         Me.BPrintSum.Name = "BPrintSum"
-        Me.BPrintSum.Size = New System.Drawing.Size(86, 25)
+        Me.BPrintSum.Size = New System.Drawing.Size(59, 25)
         Me.BPrintSum.TabIndex = 12
-        Me.BPrintSum.Text = "print"
+        Me.BPrintSum.Text = "Print"
         '
         'DEUntilSum
         '
@@ -1097,17 +1556,17 @@ Partial Class FormEmpAttnSum
         'BViewSum
         '
         Me.BViewSum.ImageList = Me.LargeImageCollection
-        Me.BViewSum.Location = New System.Drawing.Point(644, 6)
+        Me.BViewSum.Location = New System.Drawing.Point(978, 6)
         Me.BViewSum.Name = "BViewSum"
-        Me.BViewSum.Size = New System.Drawing.Size(86, 25)
+        Me.BViewSum.Size = New System.Drawing.Size(59, 25)
         Me.BViewSum.TabIndex = 1
-        Me.BViewSum.Text = "view"
+        Me.BViewSum.Text = "View"
         '
         'FormEmpAttnSum
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(844, 328)
+        Me.ClientSize = New System.Drawing.Size(1166, 328)
         Me.Controls.Add(Me.XTCReportAttendance)
         Me.Controls.Add(Me.PanelControl2)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
@@ -1129,10 +1588,16 @@ Partial Class FormEmpAttnSum
         Me.XTPScheduleTable.ResumeLayout(False)
         CType(Me.GCScheduleTable, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVScheduleTable, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTPSumMonthly.ResumeLayout(False)
+        CType(Me.GCSumMonthly, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVSumMonthly, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl2.ResumeLayout(False)
-        Me.PanelControl2.PerformLayout()
+        Me.XtraScrollableControl1.ResumeLayout(False)
+        Me.XtraScrollableControl1.PerformLayout()
+        CType(Me.SLUEEmployee.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SearchLookUpEditEmp, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LEEmployeeStatus.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LEDeptSum.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEUntilSum.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1192,7 +1657,6 @@ Partial Class FormEmpAttnSum
     Friend WithEvents GridColumn34 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn35 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn36 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn37 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn40 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn41 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn18 As DevExpress.XtraGrid.Columns.GridColumn
@@ -1250,4 +1714,44 @@ Partial Class FormEmpAttnSum
     Friend WithEvents GridColumn69 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents LEEmployeeStatus As DevExpress.XtraEditors.LookUpEdit
     Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents BHeadAndPIC As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GridColumn71 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn70 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn37 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn72 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn73 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents XTPSumMonthly As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents GCSumMonthly As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVSumMonthly As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn74 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn75 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn76 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn77 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn79 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn80 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn81 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn82 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn83 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn84 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn85 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn86 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn87 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn88 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn89 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn90 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn91 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn92 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn93 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LabelControl3 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents SLUEEmployee As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents SearchLookUpEditEmp As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn94 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn97 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn95 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn98 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn96 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn78 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents XtraScrollableControl1 As DevExpress.XtraEditors.XtraScrollableControl
+    Friend WithEvents GridColumn99 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn100 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

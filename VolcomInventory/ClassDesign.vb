@@ -8,7 +8,7 @@
         query += "Select CAST(prod.id_product AS CHAR(15)) AS `id_product`, ('0') AS `id_pl_prod_order_rec_det_unique`, "
         query += "(prod.product_full_code) As `product_code`, ('') As `product_counting_code`, "
         query += "(prod.product_full_code) AS `product_full_code`, (dsg.design_display_name) AS `name`,  cod.display_name AS `size`, ('1') AS `is_old_design`, ('2') AS `is_rec`, "
-        query += "(dsg.design_cop) AS `bom_unit_price`, CAST(prc.id_design_price AS CHAR(15)) AS `id_design_price`, prc.design_price, prc.id_design_price_type, prc.design_price_type, prc.id_design_cat, prc.design_cat, ('0') AS `id_sales_return_det_counting` "
+        query += "(dsg.design_cop) AS `bom_unit_price`, CAST(prc.id_design_price AS CHAR(15)) AS `id_design_price`, prc.design_price, prc.id_design_price_type, prc.design_price_type, prc.id_design_cat, prc.design_cat, ('0') AS `id_sales_return_det_counting`, 2 AS `is_unique_report` "
         query += "From tb_m_product prod "
         query += "JOIN tb_opt o
         INNER JOIN tb_m_product_code cc ON cc.id_product = prod.id_product 
@@ -32,6 +32,36 @@
             query += "prod.id_product='" + product_arr(i).ToString + "' "
         Next
         query += ") "
+        Return query
+    End Function
+
+    Public Function queryOldDesignCodeByDrawer(ByVal id_drawer As String)
+        Dim query As String = "SELECT 0 AS `id_pl_prod_order_rec_det_unique`,j.id_product, prod.product_full_code AS `product_code`, '' AS `counting_code`, '' AS `product_counting_code`, prod.product_full_code, prod.product_full_code AS `code`,
+        d.design_display_name AS `name`, cd.code_detail_name AS `size`, d.design_cop AS `bom_unit_price`,
+        SUM(IF(j.id_storage_category=2, CONCAT('-', j.storage_product_qty), j.storage_product_qty)) AS qty,
+        2 AS `is_rec`, d.is_old_design,
+        prc.id_design_price, prc.design_price, prc.id_design_price_type, prc.design_price_type, prc.id_design_cat, prc.design_cat
+        FROM tb_storage_fg j
+        INNER JOIN tb_m_product prod ON prod.id_product = j.id_product
+        INNER JOIN tb_m_product_code prodc ON prodc.id_product = prod.id_product
+        INNER JOIN tb_m_code_detail cd ON cd.id_code_detail = prodc.id_code_detail
+        INNER JOIN tb_m_design d ON d.id_design = prod.id_design
+        LEFT JOIN( 
+          Select * FROM ( 
+	          Select price.id_design, price.design_price, price.design_price_date, price.id_design_price, 
+	          price.id_design_price_type, price_type.design_price_type,
+	          cat.id_design_cat, cat.design_cat
+	          From tb_m_design_price price 
+	          INNER Join tb_lookup_design_price_type price_type On price.id_design_price_type = price_type.id_design_price_type 
+	          INNER JOIN tb_lookup_design_cat cat ON cat.id_design_cat = price_type.id_design_cat
+	          WHERE price.is_active_wh=1 AND price.design_price_start_date <= NOW() 
+  	        ORDER BY price.design_price_start_date DESC, price.id_design_price DESC 
+          ) a 
+          GROUP BY a.id_design 
+        ) prc ON prc.id_design = prod.id_design 
+        WHERE j.id_wh_drawer=" + id_drawer + " AND d.is_old_design=1
+        GROUP BY j.id_product
+        HAVING qty>0 "
         Return query
     End Function
 
@@ -1731,7 +1761,7 @@
             condition = ""
         End If
 
-        Dim query As String = "SELECT prc.id_fg_price, prc.id_design_price_type, prc.fg_price_number, prc.fg_price_date, DATE_FORMAT(prc.fg_price_date, '%Y-%m-%d') AS fg_price_datex,prc.fg_price_note, prc.id_report_status,stt.report_status "
+        Dim query As String = "SELECT prc.id_fg_price, prc.id_design_price_type, prc.fg_price_number, prc.fg_price_date, DATE_FORMAT(prc.fg_price_date, '%Y-%m-%d') AS fg_price_datex, IF(prc.fg_effective_date = '0000-00-00', prc.fg_price_date, prc.fg_effective_date) fg_effective_date, prc.fg_price_note, prc.id_report_status,stt.report_status "
         query += "FROM tb_fg_price prc "
         query += "INNER JOIN tb_lookup_report_status stt ON stt.id_report_status = prc.id_report_status "
         query += "LEFT JOIN tb_report_mark rm ON rm.id_report = prc.id_fg_price AND rm.report_mark_type=82 AND rm.id_report_status=1 "
@@ -1745,4 +1775,109 @@
         Return query
     End Function
 
+    Public Function dataMasterSalUnique(ByVal id_store As String) As DataTable
+        Dim query As String = "SELECT a.id_product, a.`id_pl_prod_order_rec_det_unique`, a.`full_code`, a.`code`, a.counting, a.`name`, cd.code_detail_name AS `size`, a.`is_old_design`, a.is_unique_report
+        FROM (
+	        SELECT u.id_product, NULL AS `id_pl_prod_order_rec_det_unique`, prod.product_full_code AS `full_code`, prod.product_full_code AS `code`, '' AS `counting`, prod.product_display_name AS `name`, 2 AS `is_old_design`, 1 AS `qty`, u.is_unique_report
+	        FROM tb_m_unique_code u
+	        INNER JOIN tb_m_product prod ON prod.id_product = u.id_product
+	        WHERE u.id_comp=" + id_store + " AND u.is_unique_report=2
+	        GROUP BY u.id_product
+	        UNION ALL
+	        SELECT u.id_product, c.id_pl_prod_order_rec_det_unique,u.unique_code AS `full_code`, prod.product_full_code AS `code`, RIGHT(u.unique_code,4) AS `counting`, prod.product_display_name AS `name`, 2 AS `is_old_design`, IFNULL(SUM(u.qty),0) AS `qty`, u.is_unique_report
+	        FROM tb_m_unique_code u
+	        INNER JOIN tb_m_product prod ON prod.id_product = u.id_product
+	        INNER JOIN tb_pl_prod_order_rec_det_counting c ON c.id_product = u.id_product AND c.pl_prod_order_rec_det_counting = RIGHT(u.unique_code,4)
+            WHERE u.id_comp=" + id_store + " AND u.is_unique_report=1
+	        GROUP BY u.unique_code
+            HAVING qty=1
+	        UNION ALL
+	        SELECT deld.id_product, NULL AS `id_pl_prod_order_rec_det_unique`, prod.product_code AS `full_code`, prod.product_full_code AS `code`, '' AS `counting`, prod.product_display_name AS `name`, dsg.is_old_design, 1 AS `qty`, 2 AS `is_unique_report`
+	        FROM tb_pl_sales_order_del del
+	        INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = del.id_store_contact_to
+	        INNER JOIN tb_pl_sales_order_del_det deld ON deld.id_pl_sales_order_del = del.id_pl_sales_order_del
+	        INNER JOIN tb_m_product prod ON prod.id_product = deld.id_product
+	        INNER JOIN tb_m_design dsg ON dsg.id_design = prod.id_design
+	        WHERE del.id_report_status=6 AND cc.id_comp=" + id_store + " AND dsg.is_old_design=1
+	        GROUP BY deld.id_product
+        ) a
+        INNER JOIN tb_m_product_code prodcode ON prodcode.id_product = a.id_product
+        INNER JOIN tb_m_code_detail cd ON cd.id_code_detail = prodcode.id_code_detail "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        Return data
+    End Function
+
+    Public Function dataMasterCNUnique(ByVal id_store As String) As DataTable
+        Dim query As String = "SELECT a.id_product, a.`id_pl_prod_order_rec_det_unique`, a.`full_code`, a.`code`, a.counting, a.`name`, cd.code_detail_name AS `size`, a.`is_old_design`, a.is_unique_report
+        FROM (
+	        SELECT u.id_product, NULL AS `id_pl_prod_order_rec_det_unique`, prod.product_full_code AS `full_code`, prod.product_full_code AS `code`, '' AS `counting`, prod.product_display_name AS `name`, 2 AS `is_old_design`, 1 AS `qty`, u.is_unique_report
+	        FROM tb_m_unique_code u
+	        INNER JOIN tb_m_product prod ON prod.id_product = u.id_product
+	        WHERE u.id_comp=" + id_store + " AND u.is_unique_report=2
+	        GROUP BY u.id_product
+	        UNION ALL
+	        SELECT u.id_product, c.id_pl_prod_order_rec_det_unique,u.unique_code AS `full_code`, prod.product_full_code AS `code`, RIGHT(u.unique_code,4) AS `counting`, prod.product_display_name AS `name`, 2 AS `is_old_design`, IFNULL(SUM(u.qty),0) AS `qty`, u.is_unique_report
+            FROM tb_m_unique_code u
+            INNER JOIN tb_m_product prod ON prod.id_product = u.id_product
+            INNER JOIN tb_pl_prod_order_rec_det_counting c ON c.id_product = u.id_product AND c.pl_prod_order_rec_det_counting = RIGHT(u.unique_code,4)
+            LEFT JOIN (
+	            SELECT * FROM (
+		            SELECT u.id_unique_code, u.id_type, u.unique_code, u.input_date
+		            FROM tb_m_unique_code u
+		            INNER JOIN tb_pl_sales_order_del_det_counting delc ON delc.id_pl_sales_order_del_det_counting = u.id_pl_sales_order_del_det_counting
+		            WHERE u.id_comp=" + id_store + " AND u.is_unique_report=1 AND u.id_type=1
+		            UNION ALL
+		            SELECT u.id_unique_code, u.id_type, u.unique_code, u.input_date
+		            FROM tb_m_unique_code u
+		            INNER JOIN tb_sales_pos_det_counting salc ON salc.id_sales_pos_det_counting = u.id_sales_pos_det_counting
+		            INNER JOIN tb_sales_pos sal ON sal.id_sales_pos = salc.id_sales_pos
+		            WHERE u.id_comp=" + id_store + " AND u.is_unique_report=1 AND u.id_type=2 AND sal.id_report_status=6
+		            UNION ALL
+		            SELECT u.id_unique_code, u.id_type, u.unique_code, u.input_date
+		            FROM tb_m_unique_code u
+		            INNER JOIN tb_sales_pos_det_counting cnc ON cnc.id_sales_pos_det_counting = u.id_sales_pos_det_counting_cn
+		            INNER JOIN tb_sales_pos cn ON cn.id_sales_pos = cnc.id_sales_pos
+		            WHERE u.id_comp=" + id_store + " AND u.is_unique_report=1 AND u.id_type=3 AND cn.id_report_status!=5
+		            UNION ALL
+		            SELECT u.id_unique_code, u.id_type, u.unique_code, u.input_date
+		            FROM tb_m_unique_code u
+		            INNER JOIN tb_sales_return_det_counting retc ON retc.id_sales_return_det_counting = u.id_sales_return_det_counting
+		            INNER JOIN tb_sales_return_det retd ON retd.id_sales_return_det = retc.id_sales_return_det
+		            INNER JOIN tb_sales_return ret ON ret.id_sales_return = retd.id_sales_return
+		            WHERE u.id_comp=" + id_store + " AND u.is_unique_report=1 AND u.id_type=4 AND ret.id_report_status!=5
+		            UNION ALL
+		            SELECT u.id_unique_code, u.id_type, u.unique_code, u.input_date
+		            FROM tb_m_unique_code u
+		            WHERE u.id_comp=" + id_store + " AND u.is_unique_report=1 AND u.id_type=5
+		            ORDER BY input_date DESC
+	            ) a 
+	            GROUP BY a.unique_code
+            ) lt ON lt.unique_code = u.unique_code
+            LEFT JOIN (
+                SELECT cnc.full_code
+                FROM tb_sales_pos_det_counting cnc
+                INNER JOIN tb_sales_pos_det_counting
+                INNER JOIN tb_sales_pos cn ON cn.id_sales_pos = cnc.id_sales_pos
+                INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = cn.id_store_contact_from
+                WHERE cc.id_comp=" + id_store + " AND (cn.report_mark_type=66 OR cn.report_mark_type=67 OR cn.report_mark_type=118)
+                AND (cn.id_report_status<5)  
+                GROUP BY cnc.full_code
+            ) o ON o.full_code =  u.unique_code
+            WHERE u.id_comp=" + id_store + " AND u.is_unique_report=1 AND lt.id_type=2 AND ISNULL(o.`full_code`)
+            GROUP BY u.unique_code
+	        UNION ALL
+	        SELECT deld.id_product, NULL AS `id_pl_prod_order_rec_det_unique`, prod.product_code AS `full_code`, prod.product_full_code AS `code`, '' AS `counting`, prod.product_display_name AS `name`, dsg.is_old_design, 1 AS `qty`, 2 AS `is_unique_report`
+	        FROM tb_pl_sales_order_del del
+	        INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = del.id_store_contact_to
+	        INNER JOIN tb_pl_sales_order_del_det deld ON deld.id_pl_sales_order_del = del.id_pl_sales_order_del
+	        INNER JOIN tb_m_product prod ON prod.id_product = deld.id_product
+	        INNER JOIN tb_m_design dsg ON dsg.id_design = prod.id_design
+	        WHERE del.id_report_status=6 AND cc.id_comp=" + id_store + " AND dsg.is_old_design=1
+	        GROUP BY deld.id_product
+        ) a
+        INNER JOIN tb_m_product_code prodcode ON prodcode.id_product = a.id_product
+        INNER JOIN tb_m_code_detail cd ON cd.id_code_detail = prodcode.id_code_detail "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        Return data
+    End Function
 End Class

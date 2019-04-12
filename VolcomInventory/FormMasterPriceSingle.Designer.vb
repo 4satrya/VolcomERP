@@ -22,6 +22,16 @@ Partial Class FormMasterPriceSingle
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMasterPriceSingle))
         Me.GroupGeneralHeader = New DevExpress.XtraEditors.GroupControl()
+        Me.DEEffDate = New DevExpress.XtraEditors.DateEdit()
+        Me.BMDD = New DevExpress.XtraBars.BarManager(Me.components)
+        Me.barDockControlTop = New DevExpress.XtraBars.BarDockControl()
+        Me.barDockControlBottom = New DevExpress.XtraBars.BarDockControl()
+        Me.barDockControlLeft = New DevExpress.XtraBars.BarDockControl()
+        Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl()
+        Me.BarButtonItem1 = New DevExpress.XtraBars.BarButtonItem()
+        Me.BtnPrint = New DevExpress.XtraBars.BarLargeButtonItem()
+        Me.BtnPrePrinting = New DevExpress.XtraBars.BarButtonItem()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.LEPriceType = New DevExpress.XtraEditors.LookUpEdit()
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
         Me.PanelHeaderLeft = New DevExpress.XtraEditors.PanelControl()
@@ -37,14 +47,6 @@ Partial Class FormMasterPriceSingle
         Me.BMark = New DevExpress.XtraEditors.SimpleButton()
         Me.DDBPrint = New DevExpress.XtraEditors.DropDownButton()
         Me.PUDD = New DevExpress.XtraBars.PopupMenu(Me.components)
-        Me.BtnPrePrinting = New DevExpress.XtraBars.BarButtonItem()
-        Me.BtnPrint = New DevExpress.XtraBars.BarLargeButtonItem()
-        Me.BMDD = New DevExpress.XtraBars.BarManager(Me.components)
-        Me.barDockControlTop = New DevExpress.XtraBars.BarDockControl()
-        Me.barDockControlBottom = New DevExpress.XtraBars.BarDockControl()
-        Me.barDockControlLeft = New DevExpress.XtraBars.BarDockControl()
-        Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl()
-        Me.BarButtonItem1 = New DevExpress.XtraBars.BarButtonItem()
         Me.BtnCancel = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnSave = New DevExpress.XtraEditors.SimpleButton()
         Me.GroupControl3 = New DevExpress.XtraEditors.GroupControl()
@@ -66,13 +68,16 @@ Partial Class FormMasterPriceSingle
         Me.GridColumnIsPrint = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdDesign = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdPlSalesOrderDel = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnCostPre = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemSpinEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
         Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.PanelControlNav = New DevExpress.XtraEditors.PanelControl()
         Me.BtnImport = New DevExpress.XtraEditors.SimpleButton()
-        Me.GridColumnCostPre = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
+        CType(Me.DEEffDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEEffDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.BMDD, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LEPriceType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelHeaderLeft, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelHeaderLeft.SuspendLayout()
@@ -83,7 +88,6 @@ Partial Class FormMasterPriceSingle
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl3.SuspendLayout()
         CType(Me.PUDD, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.BMDD, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl3.SuspendLayout()
         CType(Me.PanelBottomRight, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -104,6 +108,8 @@ Partial Class FormMasterPriceSingle
         'GroupGeneralHeader
         '
         Me.GroupGeneralHeader.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupGeneralHeader.Controls.Add(Me.DEEffDate)
+        Me.GroupGeneralHeader.Controls.Add(Me.LabelControl1)
         Me.GroupGeneralHeader.Controls.Add(Me.LEPriceType)
         Me.GroupGeneralHeader.Controls.Add(Me.LabelControl3)
         Me.GroupGeneralHeader.Controls.Add(Me.PanelHeaderLeft)
@@ -113,9 +119,87 @@ Partial Class FormMasterPriceSingle
         Me.GroupGeneralHeader.Size = New System.Drawing.Size(951, 74)
         Me.GroupGeneralHeader.TabIndex = 191
         '
+        'DEEffDate
+        '
+        Me.DEEffDate.EditValue = Nothing
+        Me.DEEffDate.Location = New System.Drawing.Point(115, 33)
+        Me.DEEffDate.MenuManager = Me.BMDD
+        Me.DEEffDate.Name = "DEEffDate"
+        Me.DEEffDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[False]
+        Me.DEEffDate.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEEffDate.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEEffDate.Properties.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.DEEffDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEEffDate.Size = New System.Drawing.Size(261, 20)
+        Me.DEEffDate.TabIndex = 10013
+        '
+        'BMDD
+        '
+        Me.BMDD.DockControls.Add(Me.barDockControlTop)
+        Me.BMDD.DockControls.Add(Me.barDockControlBottom)
+        Me.BMDD.DockControls.Add(Me.barDockControlLeft)
+        Me.BMDD.DockControls.Add(Me.barDockControlRight)
+        Me.BMDD.Form = Me
+        Me.BMDD.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.BarButtonItem1, Me.BtnPrint, Me.BtnPrePrinting})
+        Me.BMDD.MaxItemId = 3
+        '
+        'barDockControlTop
+        '
+        Me.barDockControlTop.CausesValidation = False
+        Me.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top
+        Me.barDockControlTop.Location = New System.Drawing.Point(0, 0)
+        Me.barDockControlTop.Size = New System.Drawing.Size(951, 0)
+        '
+        'barDockControlBottom
+        '
+        Me.barDockControlBottom.CausesValidation = False
+        Me.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.barDockControlBottom.Location = New System.Drawing.Point(0, 646)
+        Me.barDockControlBottom.Size = New System.Drawing.Size(951, 0)
+        '
+        'barDockControlLeft
+        '
+        Me.barDockControlLeft.CausesValidation = False
+        Me.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left
+        Me.barDockControlLeft.Location = New System.Drawing.Point(0, 0)
+        Me.barDockControlLeft.Size = New System.Drawing.Size(0, 646)
+        '
+        'barDockControlRight
+        '
+        Me.barDockControlRight.CausesValidation = False
+        Me.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right
+        Me.barDockControlRight.Location = New System.Drawing.Point(951, 0)
+        Me.barDockControlRight.Size = New System.Drawing.Size(0, 646)
+        '
+        'BarButtonItem1
+        '
+        Me.BarButtonItem1.Id = 0
+        Me.BarButtonItem1.Name = "BarButtonItem1"
+        '
+        'BtnPrint
+        '
+        Me.BtnPrint.Caption = "Print"
+        Me.BtnPrint.Id = 1
+        Me.BtnPrint.Name = "BtnPrint"
+        '
+        'BtnPrePrinting
+        '
+        Me.BtnPrePrinting.Caption = "Pre Printing"
+        Me.BtnPrePrinting.Id = 2
+        Me.BtnPrePrinting.Name = "BtnPrePrinting"
+        '
+        'LabelControl1
+        '
+        Me.LabelControl1.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl1.Location = New System.Drawing.Point(30, 36)
+        Me.LabelControl1.Name = "LabelControl1"
+        Me.LabelControl1.Size = New System.Drawing.Size(69, 13)
+        Me.LabelControl1.TabIndex = 10012
+        Me.LabelControl1.Text = "Effective Date"
+        '
         'LEPriceType
         '
-        Me.LEPriceType.Location = New System.Drawing.Point(86, 9)
+        Me.LEPriceType.Location = New System.Drawing.Point(115, 9)
         Me.LEPriceType.Name = "LEPriceType"
         Me.LEPriceType.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.LEPriceType.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_design_price_type", "Id", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("design_price_type", "Type")})
@@ -271,61 +355,6 @@ Partial Class FormMasterPriceSingle
         Me.PUDD.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.BtnPrePrinting), New DevExpress.XtraBars.LinkPersistInfo(Me.BtnPrint)})
         Me.PUDD.Manager = Me.BMDD
         Me.PUDD.Name = "PUDD"
-        '
-        'BtnPrePrinting
-        '
-        Me.BtnPrePrinting.Caption = "Pre Printing"
-        Me.BtnPrePrinting.Id = 2
-        Me.BtnPrePrinting.Name = "BtnPrePrinting"
-        '
-        'BtnPrint
-        '
-        Me.BtnPrint.Caption = "Print"
-        Me.BtnPrint.Id = 1
-        Me.BtnPrint.Name = "BtnPrint"
-        '
-        'BMDD
-        '
-        Me.BMDD.DockControls.Add(Me.barDockControlTop)
-        Me.BMDD.DockControls.Add(Me.barDockControlBottom)
-        Me.BMDD.DockControls.Add(Me.barDockControlLeft)
-        Me.BMDD.DockControls.Add(Me.barDockControlRight)
-        Me.BMDD.Form = Me
-        Me.BMDD.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.BarButtonItem1, Me.BtnPrint, Me.BtnPrePrinting})
-        Me.BMDD.MaxItemId = 3
-        '
-        'barDockControlTop
-        '
-        Me.barDockControlTop.CausesValidation = False
-        Me.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top
-        Me.barDockControlTop.Location = New System.Drawing.Point(0, 0)
-        Me.barDockControlTop.Size = New System.Drawing.Size(951, 0)
-        '
-        'barDockControlBottom
-        '
-        Me.barDockControlBottom.CausesValidation = False
-        Me.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.barDockControlBottom.Location = New System.Drawing.Point(0, 646)
-        Me.barDockControlBottom.Size = New System.Drawing.Size(951, 0)
-        '
-        'barDockControlLeft
-        '
-        Me.barDockControlLeft.CausesValidation = False
-        Me.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left
-        Me.barDockControlLeft.Location = New System.Drawing.Point(0, 0)
-        Me.barDockControlLeft.Size = New System.Drawing.Size(0, 646)
-        '
-        'barDockControlRight
-        '
-        Me.barDockControlRight.CausesValidation = False
-        Me.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right
-        Me.barDockControlRight.Location = New System.Drawing.Point(951, 0)
-        Me.barDockControlRight.Size = New System.Drawing.Size(0, 646)
-        '
-        'BarButtonItem1
-        '
-        Me.BarButtonItem1.Id = 0
-        Me.BarButtonItem1.Name = "BarButtonItem1"
         '
         'BtnCancel
         '
@@ -543,6 +572,16 @@ Partial Class FormMasterPriceSingle
         Me.GridColumnIdPlSalesOrderDel.Name = "GridColumnIdPlSalesOrderDel"
         Me.GridColumnIdPlSalesOrderDel.OptionsColumn.AllowEdit = False
         '
+        'GridColumnCostPre
+        '
+        Me.GridColumnCostPre.Caption = "Cost Pre Final"
+        Me.GridColumnCostPre.DisplayFormat.FormatString = "N2"
+        Me.GridColumnCostPre.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnCostPre.FieldName = "prod_order_cop_mng"
+        Me.GridColumnCostPre.Name = "GridColumnCostPre"
+        Me.GridColumnCostPre.Visible = True
+        Me.GridColumnCostPre.VisibleIndex = 4
+        '
         'RepositoryItemSpinEdit1
         '
         Me.RepositoryItemSpinEdit1.AutoHeight = False
@@ -579,16 +618,6 @@ Partial Class FormMasterPriceSingle
         Me.BtnImport.TabIndex = 3
         Me.BtnImport.Text = "Import from Excel"
         '
-        'GridColumnCostPre
-        '
-        Me.GridColumnCostPre.Caption = "Cost Pre Final"
-        Me.GridColumnCostPre.DisplayFormat.FormatString = "N2"
-        Me.GridColumnCostPre.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumnCostPre.FieldName = "prod_order_cop_mng"
-        Me.GridColumnCostPre.Name = "GridColumnCostPre"
-        Me.GridColumnCostPre.Visible = True
-        Me.GridColumnCostPre.VisibleIndex = 4
-        '
         'FormMasterPriceSingle
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -610,6 +639,9 @@ Partial Class FormMasterPriceSingle
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupGeneralHeader.ResumeLayout(False)
         Me.GroupGeneralHeader.PerformLayout()
+        CType(Me.DEEffDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEEffDate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BMDD, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LEPriceType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelHeaderLeft, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelHeaderLeft.ResumeLayout(False)
@@ -621,7 +653,6 @@ Partial Class FormMasterPriceSingle
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl3.ResumeLayout(False)
         CType(Me.PUDD, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.BMDD, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControl3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControl3.ResumeLayout(False)
         Me.GroupControl3.PerformLayout()
@@ -694,4 +725,6 @@ Partial Class FormMasterPriceSingle
     Friend WithEvents RepositoryItemCheckEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
     Friend WithEvents GridColumnIsPrint As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnCostPre As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents DEEffDate As DevExpress.XtraEditors.DateEdit
 End Class

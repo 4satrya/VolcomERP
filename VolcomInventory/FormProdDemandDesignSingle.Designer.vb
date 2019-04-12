@@ -111,6 +111,8 @@ Partial Class FormProdDemandDesignSingle
         Me.BtnRefresh = New DevExpress.XtraEditors.SimpleButton()
         Me.GroupControlAllocation = New DevExpress.XtraEditors.GroupControl()
         Me.SCCBreak = New DevExpress.XtraEditors.SplitContainerControl()
+        Me.TxtRateManagement = New DevExpress.XtraEditors.TextEdit()
+        Me.BtnRateCurrent = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.EPDesign, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
@@ -163,6 +165,7 @@ Partial Class FormProdDemandDesignSingle
         Me.GroupControlAllocation.SuspendLayout()
         CType(Me.SCCBreak, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SCCBreak.SuspendLayout()
+        CType(Me.TxtRateManagement.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'EPDesign
@@ -296,11 +299,12 @@ Partial Class FormProdDemandDesignSingle
         '
         Me.BtnCheckPrice.Dock = System.Windows.Forms.DockStyle.Top
         Me.BtnCheckPrice.Location = New System.Drawing.Point(20, 2)
-        Me.BtnCheckPrice.LookAndFeel.SkinName = "Blue"
+        Me.BtnCheckPrice.LookAndFeel.SkinName = "Office 2010 Blue"
+        Me.BtnCheckPrice.LookAndFeel.UseDefaultLookAndFeel = False
         Me.BtnCheckPrice.Name = "BtnCheckPrice"
         Me.BtnCheckPrice.Size = New System.Drawing.Size(492, 25)
         Me.BtnCheckPrice.TabIndex = 6
-        Me.BtnCheckPrice.Text = "Estimate COP"
+        Me.BtnCheckPrice.Text = "Get Estimate COP"
         '
         'GroupControlBreakDown
         '
@@ -657,7 +661,7 @@ Partial Class FormProdDemandDesignSingle
         '
         Me.TxtTotalCost.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtTotalCost.Location = New System.Drawing.Point(164, 104)
+        Me.TxtTotalCost.Location = New System.Drawing.Point(164, 131)
         Me.TxtTotalCost.Name = "TxtTotalCost"
         Me.TxtTotalCost.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtTotalCost.Properties.Appearance.Options.UseFont = True
@@ -674,7 +678,7 @@ Partial Class FormProdDemandDesignSingle
         'LabelControl8
         '
         Me.LabelControl8.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl8.Location = New System.Drawing.Point(164, 85)
+        Me.LabelControl8.Location = New System.Drawing.Point(164, 112)
         Me.LabelControl8.Name = "LabelControl8"
         Me.LabelControl8.Size = New System.Drawing.Size(22, 13)
         Me.LabelControl8.TabIndex = 112
@@ -736,7 +740,7 @@ Partial Class FormProdDemandDesignSingle
         '
         Me.TxtMarkup.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtMarkup.Location = New System.Drawing.Point(32, 194)
+        Me.TxtMarkup.Location = New System.Drawing.Point(32, 221)
         Me.TxtMarkup.Name = "TxtMarkup"
         Me.TxtMarkup.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtMarkup.Properties.Appearance.Options.UseFont = True
@@ -753,7 +757,7 @@ Partial Class FormProdDemandDesignSingle
         'LabelControl5
         '
         Me.LabelControl5.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl5.Location = New System.Drawing.Point(32, 178)
+        Me.LabelControl5.Location = New System.Drawing.Point(32, 205)
         Me.LabelControl5.Name = "LabelControl5"
         Me.LabelControl5.Size = New System.Drawing.Size(39, 13)
         Me.LabelControl5.TabIndex = 103
@@ -761,7 +765,7 @@ Partial Class FormProdDemandDesignSingle
         '
         'TxtProposePrice
         '
-        Me.TxtProposePrice.Location = New System.Drawing.Point(164, 149)
+        Me.TxtProposePrice.Location = New System.Drawing.Point(164, 176)
         Me.TxtProposePrice.Name = "TxtProposePrice"
         Me.TxtProposePrice.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtProposePrice.Properties.Appearance.Options.UseFont = True
@@ -778,7 +782,7 @@ Partial Class FormProdDemandDesignSingle
         'LabelControl2
         '
         Me.LabelControl2.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl2.Location = New System.Drawing.Point(164, 130)
+        Me.LabelControl2.Location = New System.Drawing.Point(164, 157)
         Me.LabelControl2.Name = "LabelControl2"
         Me.LabelControl2.Size = New System.Drawing.Size(65, 13)
         Me.LabelControl2.TabIndex = 102
@@ -837,6 +841,8 @@ Partial Class FormProdDemandDesignSingle
         'GroupControlRetail
         '
         Me.GroupControlRetail.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupControlRetail.Controls.Add(Me.BtnRateCurrent)
+        Me.GroupControlRetail.Controls.Add(Me.TxtRateManagement)
         Me.GroupControlRetail.Controls.Add(Me.LabelControl17)
         Me.GroupControlRetail.Controls.Add(Me.TxtAdditionalPrice)
         Me.GroupControlRetail.Controls.Add(Me.LabelControl16)
@@ -855,20 +861,19 @@ Partial Class FormProdDemandDesignSingle
         Me.GroupControlRetail.Controls.Add(Me.TxtMSRP)
         Me.GroupControlRetail.Controls.Add(Me.TxtProposePrice)
         Me.GroupControlRetail.Controls.Add(Me.LabelControl5)
-        Me.GroupControlRetail.Controls.Add(Me.TxtRate)
         Me.GroupControlRetail.Controls.Add(Me.TxtMarkup)
         Me.GroupControlRetail.Controls.Add(Me.LabelControl12)
         Me.GroupControlRetail.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GroupControlRetail.Location = New System.Drawing.Point(0, 176)
+        Me.GroupControlRetail.Location = New System.Drawing.Point(0, 163)
         Me.GroupControlRetail.Name = "GroupControlRetail"
-        Me.GroupControlRetail.Size = New System.Drawing.Size(514, 375)
+        Me.GroupControlRetail.Size = New System.Drawing.Size(514, 388)
         Me.GroupControlRetail.TabIndex = 8929
         Me.GroupControlRetail.Text = "Calculate Retail Price"
         '
         'LabelControl17
         '
         Me.LabelControl17.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl17.Location = New System.Drawing.Point(32, 130)
+        Me.LabelControl17.Location = New System.Drawing.Point(32, 157)
         Me.LabelControl17.Name = "LabelControl17"
         Me.LabelControl17.Size = New System.Drawing.Size(73, 13)
         Me.LabelControl17.TabIndex = 8941
@@ -876,7 +881,7 @@ Partial Class FormProdDemandDesignSingle
         '
         'TxtAdditionalPrice
         '
-        Me.TxtAdditionalPrice.Location = New System.Drawing.Point(32, 149)
+        Me.TxtAdditionalPrice.Location = New System.Drawing.Point(32, 176)
         Me.TxtAdditionalPrice.Name = "TxtAdditionalPrice"
         Me.TxtAdditionalPrice.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtAdditionalPrice.Properties.Appearance.Options.UseFont = True
@@ -893,7 +898,7 @@ Partial Class FormProdDemandDesignSingle
         'LabelControl16
         '
         Me.LabelControl16.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl16.Location = New System.Drawing.Point(322, 130)
+        Me.LabelControl16.Location = New System.Drawing.Point(322, 157)
         Me.LabelControl16.Name = "LabelControl16"
         Me.LabelControl16.Size = New System.Drawing.Size(137, 13)
         Me.LabelControl16.TabIndex = 8939
@@ -901,7 +906,7 @@ Partial Class FormProdDemandDesignSingle
         '
         'TxtPriceNonAdditional
         '
-        Me.TxtPriceNonAdditional.Location = New System.Drawing.Point(322, 149)
+        Me.TxtPriceNonAdditional.Location = New System.Drawing.Point(322, 176)
         Me.TxtPriceNonAdditional.Name = "TxtPriceNonAdditional"
         Me.TxtPriceNonAdditional.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtPriceNonAdditional.Properties.Appearance.Options.UseFont = True
@@ -918,7 +923,7 @@ Partial Class FormProdDemandDesignSingle
         'LabelControl15
         '
         Me.LabelControl15.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl15.Location = New System.Drawing.Point(32, 85)
+        Me.LabelControl15.Location = New System.Drawing.Point(32, 112)
         Me.LabelControl15.Name = "LabelControl15"
         Me.LabelControl15.Size = New System.Drawing.Size(72, 13)
         Me.LabelControl15.TabIndex = 8937
@@ -928,7 +933,7 @@ Partial Class FormProdDemandDesignSingle
         '
         Me.TxtAdditionalCost.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtAdditionalCost.Location = New System.Drawing.Point(32, 104)
+        Me.TxtAdditionalCost.Location = New System.Drawing.Point(32, 131)
         Me.TxtAdditionalCost.Name = "TxtAdditionalCost"
         Me.TxtAdditionalCost.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtAdditionalCost.Properties.Appearance.Options.UseFont = True
@@ -946,7 +951,7 @@ Partial Class FormProdDemandDesignSingle
         '
         Me.TxtCostNonAdditional.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtCostNonAdditional.Location = New System.Drawing.Point(322, 104)
+        Me.TxtCostNonAdditional.Location = New System.Drawing.Point(322, 131)
         Me.TxtCostNonAdditional.Name = "TxtCostNonAdditional"
         Me.TxtCostNonAdditional.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtCostNonAdditional.Properties.Appearance.Options.UseFont = True
@@ -963,7 +968,7 @@ Partial Class FormProdDemandDesignSingle
         'LabelControl11
         '
         Me.LabelControl11.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl11.Location = New System.Drawing.Point(322, 85)
+        Me.LabelControl11.Location = New System.Drawing.Point(322, 112)
         Me.LabelControl11.Name = "LabelControl11"
         Me.LabelControl11.Size = New System.Drawing.Size(94, 13)
         Me.LabelControl11.TabIndex = 8934
@@ -972,7 +977,7 @@ Partial Class FormProdDemandDesignSingle
         'LabelControl14
         '
         Me.LabelControl14.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl14.Location = New System.Drawing.Point(322, 40)
+        Me.LabelControl14.Location = New System.Drawing.Point(322, 67)
         Me.LabelControl14.Name = "LabelControl14"
         Me.LabelControl14.Size = New System.Drawing.Size(51, 13)
         Me.LabelControl14.TabIndex = 8933
@@ -982,7 +987,7 @@ Partial Class FormProdDemandDesignSingle
         '
         Me.TxtMSRPRp.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtMSRPRp.Location = New System.Drawing.Point(322, 59)
+        Me.TxtMSRPRp.Location = New System.Drawing.Point(322, 86)
         Me.TxtMSRPRp.Name = "TxtMSRPRp"
         Me.TxtMSRPRp.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtMSRPRp.Properties.Appearance.Options.UseFont = True
@@ -1000,7 +1005,7 @@ Partial Class FormProdDemandDesignSingle
         'LabelControl13
         '
         Me.LabelControl13.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl13.Location = New System.Drawing.Point(164, 40)
+        Me.LabelControl13.Location = New System.Drawing.Point(164, 67)
         Me.LabelControl13.Name = "LabelControl13"
         Me.LabelControl13.Size = New System.Drawing.Size(27, 13)
         Me.LabelControl13.TabIndex = 8931
@@ -1010,7 +1015,7 @@ Partial Class FormProdDemandDesignSingle
         '
         Me.TxtMSRP.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtMSRP.Location = New System.Drawing.Point(164, 59)
+        Me.TxtMSRP.Location = New System.Drawing.Point(164, 86)
         Me.TxtMSRP.Name = "TxtMSRP"
         Me.TxtMSRP.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtMSRP.Properties.Appearance.Options.UseFont = True
@@ -1026,7 +1031,7 @@ Partial Class FormProdDemandDesignSingle
         '
         'TxtRate
         '
-        Me.TxtRate.Location = New System.Drawing.Point(32, 59)
+        Me.TxtRate.Location = New System.Drawing.Point(41, 44)
         Me.TxtRate.Name = "TxtRate"
         Me.TxtRate.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtRate.Properties.Appearance.Options.UseFont = True
@@ -1043,7 +1048,7 @@ Partial Class FormProdDemandDesignSingle
         'LabelControl12
         '
         Me.LabelControl12.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl12.Location = New System.Drawing.Point(30, 40)
+        Me.LabelControl12.Location = New System.Drawing.Point(30, 67)
         Me.LabelControl12.Name = "LabelControl12"
         Me.LabelControl12.Size = New System.Drawing.Size(63, 13)
         Me.LabelControl12.TabIndex = 8929
@@ -1060,10 +1065,11 @@ Partial Class FormProdDemandDesignSingle
         Me.GroupControlMSRP.Controls.Add(Me.TxtRoyaltySpecial)
         Me.GroupControlMSRP.Controls.Add(Me.TxtInflasi)
         Me.GroupControlMSRP.Controls.Add(Me.LabelControl7)
+        Me.GroupControlMSRP.Controls.Add(Me.TxtRate)
         Me.GroupControlMSRP.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupControlMSRP.Location = New System.Drawing.Point(0, 153)
         Me.GroupControlMSRP.Name = "GroupControlMSRP"
-        Me.GroupControlMSRP.Size = New System.Drawing.Size(514, 23)
+        Me.GroupControlMSRP.Size = New System.Drawing.Size(514, 10)
         Me.GroupControlMSRP.TabIndex = 8930
         Me.GroupControlMSRP.Text = "MSRP"
         '
@@ -1235,6 +1241,33 @@ Partial Class FormProdDemandDesignSingle
         Me.SCCBreak.TabIndex = 8933
         Me.SCCBreak.Text = "SplitContainerControl1"
         '
+        'TxtRateManagement
+        '
+        Me.TxtRateManagement.Location = New System.Drawing.Point(30, 86)
+        Me.TxtRateManagement.Name = "TxtRateManagement"
+        Me.TxtRateManagement.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtRateManagement.Properties.Appearance.Options.UseFont = True
+        Me.TxtRateManagement.Properties.Mask.EditMask = "n2"
+        Me.TxtRateManagement.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
+        Me.TxtRateManagement.Properties.Mask.SaveLiteral = False
+        Me.TxtRateManagement.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.TxtRateManagement.Properties.MaxLength = 50
+        Me.TxtRateManagement.Size = New System.Drawing.Size(130, 20)
+        Me.TxtRateManagement.TabIndex = 110
+        Me.TxtRateManagement.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Information
+        Me.TxtRateManagement.ToolTipTitle = "Information"
+        '
+        'BtnRateCurrent
+        '
+        Me.BtnRateCurrent.Dock = System.Windows.Forms.DockStyle.Top
+        Me.BtnRateCurrent.Location = New System.Drawing.Point(20, 27)
+        Me.BtnRateCurrent.LookAndFeel.SkinName = "Office 2007 Green"
+        Me.BtnRateCurrent.LookAndFeel.UseDefaultLookAndFeel = False
+        Me.BtnRateCurrent.Name = "BtnRateCurrent"
+        Me.BtnRateCurrent.Size = New System.Drawing.Size(492, 25)
+        Me.BtnRateCurrent.TabIndex = 8942
+        Me.BtnRateCurrent.Text = "Get Rate Current"
+        '
         'FormProdDemandDesignSingle
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1306,6 +1339,7 @@ Partial Class FormProdDemandDesignSingle
         Me.GroupControlAllocation.ResumeLayout(False)
         CType(Me.SCCBreak, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SCCBreak.ResumeLayout(False)
+        CType(Me.TxtRateManagement.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1399,4 +1433,6 @@ Partial Class FormProdDemandDesignSingle
     Friend WithEvents TxtAdditionalCost As DevExpress.XtraEditors.TextEdit
     Friend WithEvents TxtCostNonAdditional As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelControl11 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents TxtRateManagement As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents BtnRateCurrent As DevExpress.XtraEditors.SimpleButton
 End Class

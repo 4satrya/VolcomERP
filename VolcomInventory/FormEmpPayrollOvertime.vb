@@ -7,6 +7,7 @@
     Private Sub FormEmpPayrollOvertime_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         load_payroll_periode()
         load_payroll_ot()
+        load_payroll_dp()
     End Sub
 
     Sub load_payroll_periode()
@@ -27,7 +28,19 @@
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCOverTime.DataSource = data
     End Sub
-
+    Sub load_payroll_dp()
+        Dim query As String = "SELECT det.start_dp,det.end_dp,emp.employee_name,emp.employee_position,dep.departement,rpt.report_status,emp.employee_code,dp.* FROM tb_emp_dp dp
+                                INNER JOIN tb_m_employee emp ON emp.id_employee=dp.id_employee
+                                INNER JOIN tb_m_departement dep ON dep.id_departement=emp.id_departement
+                                INNER JOIN tb_lookup_report_status rpt ON rpt.id_report_status=dp.id_report_status
+                                INNER JOIN 
+                                (SELECT id_dp,MIN(dp_time_start) AS start_dp,MAX(dp_time_end) AS end_dp 
+                                FROM tb_emp_dp_det 
+                                GROUP BY id_dp) det ON det.id_dp=dp.id_dp
+                                WHERE id_payroll='" & LEPayrollPeriode.EditValue.ToString & "'"
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCDP.DataSource = data
+    End Sub
     Private Sub BAdd_Click(sender As Object, e As EventArgs) Handles BAdd.Click
         load_add()
     End Sub
@@ -39,6 +52,7 @@
 
     Private Sub LEPayrollPeriode_EditValueChanged(sender As Object, e As EventArgs) Handles LEPayrollPeriode.EditValueChanged
         load_payroll_ot()
+        load_payroll_dp()
     End Sub
 
     Private Sub BEdit_Click(sender As Object, e As EventArgs) Handles BEdit.Click
@@ -70,5 +84,10 @@
         FormEmpPayrollOvertimePick.date_start = Date.Parse(row("ot_periode_start").ToString).ToString("yyyy-MM-dd")
         FormEmpPayrollOvertimePick.date_end = Date.Parse(row("ot_periode_end").ToString).ToString("yyyy-MM-dd")
         FormEmpPayrollOvertimePick.ShowDialog()
+    End Sub
+
+    Private Sub BRefresh_Click(sender As Object, e As EventArgs) Handles BRefresh.Click
+        load_payroll_ot()
+        load_payroll_dp()
     End Sub
 End Class

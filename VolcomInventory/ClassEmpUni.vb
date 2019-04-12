@@ -40,7 +40,7 @@
         Dim query As String = "SELECT so.id_sales_order, so.sales_order_number, so.sales_order_date, so.sales_order_note, SUM(IFNULL(sod.sales_order_det_qty,0)) AS `total_order`, SUM(IFNULL(udd.point,0)) AS `amount`,
         so.id_emp_uni_budget, b.id_emp_uni_period, p.period_name, (b.budget/p.budget_point)*100 AS `budget`, so.tolerance, so.discount,
         b.id_employee, e.employee_code, e.employee_name, e.employee_position, e.id_employee_level, lvl.employee_level, e.id_departement, d.departement, e.id_sex,
-        so.id_report_status, rs.report_status, so.sales_order_note, so.sales_order_date, eu.employee_name AS `prepared_by`, c.id_drawer_def, IFNULL(so.is_selected,2) AS is_selected
+        so.id_report_status, rs.report_status, so.sales_order_note, so.sales_order_date, eu.employee_name AS `prepared_by`, c.id_drawer_def, IFNULL(so.is_selected,2) AS is_selected, b.is_dept_head
         FROM tb_sales_order so
         LEFT JOIN tb_sales_order_det sod ON sod.id_sales_order = so.id_sales_order
         LEFT JOIN tb_m_product prod ON prod.id_product = sod.id_product
@@ -78,7 +78,7 @@
             condition = ""
         End If
 
-        Dim query As String = "SELECT d.id_emp_uni_design, d.id_emp_uni_period, pr.period_name, d.id_wh_drawer, d.note, d.created_date, d.id_report_status, rs.report_status
+        Dim query As String = "SELECT d.id_emp_uni_design, d.id_emp_uni_period, pr.period_name, d.id_wh_drawer, d.note, d.created_date, d.id_report_status, rs.report_status, d.is_dept_head
         FROM tb_emp_uni_design d
         INNER JOIN tb_emp_uni_period pr ON pr.id_emp_uni_period = d.id_emp_uni_period
         INNER JOIN tb_lookup_report_status rs ON rs.id_report_status = d.id_report_status

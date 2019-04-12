@@ -2,14 +2,37 @@
     Public is_view As String = "-1"
     Public id_report As String = "0"
     Public report_mark_type As String = "0"
+    '
+    Public is_no_delete As String = "-1"
+    Public form_orign As String = ""
+    '
     Public cond As String = ""
 
     Dim source_path As String = get_setup_field("upload_dir")
+    Public is_only_pdf As Boolean = False
+
+    Sub refresh_load(ByVal rmt As String)
+        If rmt = "149" Then
+            FormPurcItemDet.load_doc()
+        Else
+            If form_orign = "FormReportMarkDet" Then
+                FormReportMarkDet.load_form()
+            End If
+            view_file()
+        End If
+    End Sub
+
     Private Sub FormDocumentUpload_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         If is_view = "1" Then
             PCNav.Visible = False
         End If
         view_file()
+        '
+        If is_only_pdf = True Then
+            BScanAndUpload.Visible = False
+        Else
+            BScanAndUpload.Visible = True
+        End If
     End Sub
 
     Private Sub BClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BClose.Click
@@ -17,20 +40,33 @@
     End Sub
 
     Private Sub Bupload_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Bupload.Click
+        FormDocumentUploadDet.is_only_pdf = is_only_pdf
         FormDocumentUploadDet.id_report = id_report
         FormDocumentUploadDet.report_mark_type = report_mark_type
         FormDocumentUploadDet.ShowDialog()
     End Sub
 
     Sub view_file()
-        Dim query As String = "SELECT id_doc,doc_desc,datetime,'yes' as is_download,CONCAT(id_doc,'_" & report_mark_type & "_" & id_report & "',ext) AS filename FROM tb_doc WHERE report_mark_type='" & report_mark_type & "' AND id_report='" & id_report & "' " + cond
+        Dim query As String = "SELECT doc.id_doc,doc.doc_desc,doc.datetime,'yes' as is_download,CONCAT(doc.id_doc,'_" & report_mark_type & "_" & id_report & "',doc.ext) AS filename,emp.employee_name 
+                               FROM tb_doc doc
+                               LEFT JOIN tb_m_user usr ON usr.id_user=doc.id_user_upload
+                               LEFT JOIN tb_m_employee emp ON emp.id_employee=usr.id_employee
+                               WHERE report_mark_type='" & report_mark_type & "' AND id_report='" & id_report & "' " + cond
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCFileList.DataSource = data
 
         If GVFileList.RowCount > 0 Then
-            BDelete.Visible = True
+            If is_no_delete = "1" Then
+                BDelete.Visible = False
+            Else
+                BDelete.Visible = True
+            End If
         Else
             BDelete.Visible = False
+        End If
+        '
+        If report_mark_type = "142" Then
+            FormReportMarkCancel.act_load()
         End If
     End Sub
 
@@ -98,5 +134,11 @@
 
     Private Sub FormDocumentUpload_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
         Dispose()
+    End Sub
+
+    Private Sub BScanAndUpload_Click(sender As Object, e As EventArgs) Handles BScanAndUpload.Click
+        FormDocumentScanUpload.id_report = id_report
+        FormDocumentScanUpload.report_mark_type = report_mark_type
+        FormDocumentScanUpload.ShowDialog()
     End Sub
 End Class

@@ -27,7 +27,7 @@
         query += "CALL view_fg_adj_out('" + id_adj_out_fg + "')"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCDetail.DataSource = data
-        GVDetail.Columns("adj_out_fg_det_amount").SummaryItem.DisplayFormat = currency + " {0:n2} "
+        GVDetail.Columns("adj_out_fg_det_amount").SummaryItem.DisplayFormat = " {0:n2} "
     End Sub
 
     Private Sub GVDetail_CustomColumnDisplayText(ByVal sender As System.Object, ByVal e As DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs) Handles GVDetail.CustomColumnDisplayText

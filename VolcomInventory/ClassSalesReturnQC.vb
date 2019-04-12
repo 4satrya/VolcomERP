@@ -18,7 +18,7 @@
         query += "CONCAT(c.comp_number,' - ',c.comp_name) AS store_name_from, (c.comp_number) AS store_number_from, "
         query += "CONCAT(e.comp_number,' - ',e.comp_name) AS comp_name_to, (e.comp_number) AS comp_number_to, get_custom_rmk(e.id_wh_type,49) AS `rmk`, "
         query += "f.sales_return_number, g.report_status, h.pl_category, det.`total`, "
-        query += "a.last_update, getUserEmp(a.last_update_by, 1) AS last_user, ('No') AS is_select "
+        query += "a.last_update, getUserEmp(a.last_update_by, 1) AS last_user, ('No') AS is_select, IFNULL(pb.prepared_by,'-') AS `prepared_by`  "
         query += "FROM tb_sales_return_qc a  "
         query += "INNER JOIN tb_m_comp_contact b ON a.id_store_contact_from = b.id_comp_contact "
         query += "INNER JOIN tb_m_comp c ON c.id_comp = b.id_comp "
@@ -31,7 +31,14 @@
         SELECT d.id_sales_return_qc, SUM(d.sales_return_qc_det_qty) AS `total` 
         FROM tb_sales_return_qc_det d
         GROUP BY d.id_sales_return_qc
-        ) det ON det.id_sales_return_qc = a.id_sales_return_qc "
+        ) det ON det.id_sales_return_qc = a.id_sales_return_qc 
+        LEFT JOIN (
+            SELECT rm.id_report, e.employee_name AS `prepared_by` 
+            FROM tb_report_mark rm
+            INNER JOIN tb_m_employee e ON e.id_employee = rm.id_employee
+            WHERE (rm.report_mark_type=49 OR rm.report_mark_type=106) AND rm.id_report_status=1
+            GROUP BY rm.id_report
+        ) pb ON pb.id_report = a.id_sales_return_qc "
         query += "WHERE a.id_sales_return_qc>0 "
         query += condition + " "
         query += "ORDER BY a.id_sales_return_qc " + order_type
@@ -46,6 +53,10 @@
 
     Public Sub changeStatus(ByVal id_report_par As String, ByVal id_status_reportx_par As String)
         If id_status_reportx_par = "6" Then
+            'clean storage related report
+            Dim query_clean As String = "DELETE FROM tb_storage_fg WHERE report_mark_type=49 AND id_report=" + id_report_par + " "
+            execute_non_query(query_clean, True, "", "", "", "")
+
             ' jika complete
             Dim query_del_zero As String = ""
             Dim query_save_out As String = ""

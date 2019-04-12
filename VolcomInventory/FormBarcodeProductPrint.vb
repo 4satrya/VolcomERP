@@ -11,6 +11,8 @@ Public Class FormBarcodeProductPrint
 
     Dim add_sato_vpx As Integer = Integer.Parse(get_opt_prod_field("sato_add_vpx"))
     Dim add_zebra_vpx As Integer = Integer.Parse(get_opt_prod_field("zebra_add_vpx"))
+    Dim add_sato_hpx As Integer = Integer.Parse(get_opt_prod_field("sato_add_hpx"))
+    Dim add_zebra_hpx As Integer = Integer.Parse(get_opt_prod_field("zebra_add_hpx"))
 
     Private Sub FormBarcodeProductPrint_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         TEHeightError.EditValue = 0
@@ -164,16 +166,16 @@ Public Class FormBarcodeProductPrint
                         '
                         print_command += "<ESC>A"
                         print_command += "<ESC>#E5"
-                        print_command += "<ESC>H580<ESC>V00" & (add_sato_vpx + 10).ToString & "<ESC>L0200<ESC>S" & TEProdCode.Text & vbNewLine
-                        print_command += "<ESC>H610<ESC>V00" & (add_sato_vpx + 30).ToString & "<ESC>D202160" & TEProdCode.Text & vbNewLine 'UBAH HXXX POSISI BARCODENYA
-                        print_command += "<ESC>H580<ESC>V0" & (add_sato_vpx + 200).ToString & "<ESC>L0200<ESC>S" & TEDesignName.Text & vbNewLine
-                        print_command += "<ESC>H650<ESC>V0" & (add_sato_vpx + 220).ToString & "<ESC>L0200<ESC>XUsize" & vbNewLine
-                        print_command += "<ESC>H740<ESC>V0" & (add_sato_vpx + 220).ToString & "<ESC>L0200<ESC>XUcolor" & vbNewLine
-                        print_command += "<ESC>H580<ESC>V0" & (add_sato_vpx + 240).ToString & "<ESC>L0202<ESC>S" & TERetCode.Text & vbNewLine
-                        print_command += "<ESC>H650<ESC>V0" & (add_sato_vpx + 240).ToString & "<ESC>L0202<ESC>S" & TESize.Text & vbNewLine
-                        print_command += "<ESC>H645<ESC>V0" & (add_sato_vpx + 235).ToString & "<ESC>(65,40" & vbNewLine
-                        print_command += "<ESC>H740<ESC>V0" & (add_sato_vpx + 240).ToString & "<ESC>L0202<ESC>S" & TEColor.Text & vbNewLine
-                        print_command += "<ESC>H580<ESC>V0" & (add_sato_vpx + 280).ToString & "<ESC>L0202<ESC>S" & TECurPrice.Text & " " & TEPrice.Text & vbNewLine
+                        print_command += "<ESC>H" & (add_sato_hpx + 580).ToString & "<ESC>V00" & (add_sato_vpx + 10).ToString & "<ESC>L0200<ESC>S" & TEProdCode.Text & vbNewLine
+                        print_command += "<ESC>H" & (add_sato_hpx + 610).ToString & "<ESC>V00" & (add_sato_vpx + 30).ToString & "<ESC>D202160" & TEProdCode.Text & vbNewLine 'UBAH HXXX POSISI BARCODENYA
+                        print_command += "<ESC>H" & (add_sato_hpx + 580).ToString & "<ESC>V0" & (add_sato_vpx + 200).ToString & "<ESC>L0200<ESC>S" & TEDesignName.Text & vbNewLine
+                        print_command += "<ESC>H" & (add_sato_hpx + 650).ToString & "<ESC>V0" & (add_sato_vpx + 220).ToString & "<ESC>L0200<ESC>XUsize" & vbNewLine
+                        print_command += "<ESC>H" & (add_sato_hpx + 740).ToString & "<ESC>V0" & (add_sato_vpx + 220).ToString & "<ESC>L0200<ESC>XUcolor" & vbNewLine
+                        print_command += "<ESC>H" & (add_sato_hpx + 580).ToString & "<ESC>V0" & (add_sato_vpx + 240).ToString & "<ESC>L0202<ESC>S" & TERetCode.Text & vbNewLine
+                        print_command += "<ESC>H" & (add_sato_hpx + 650).ToString & "<ESC>V0" & (add_sato_vpx + 240).ToString & "<ESC>L0202<ESC>S" & TESize.Text & vbNewLine
+                        print_command += "<ESC>H" & (add_sato_hpx + 645).ToString & "<ESC>V0" & (add_sato_vpx + 235).ToString & "<ESC>(65,40" & vbNewLine
+                        print_command += "<ESC>H" & (add_sato_hpx + 740).ToString & "<ESC>V0" & (add_sato_vpx + 240).ToString & "<ESC>L0202<ESC>S" & TEColor.Text & vbNewLine
+                        print_command += "<ESC>H" & (add_sato_hpx + 580).ToString & "<ESC>V0" & (add_sato_vpx + 280).ToString & "<ESC>L0202<ESC>S" & TECurPrice.Text & " " & TEPrice.Text & vbNewLine
                         print_command += "<ESC>Q1" & vbNewLine
                         print_command += "<ESC>Z" & vbNewLine
                         print_command += "" & vbNewLine
@@ -181,18 +183,18 @@ Public Class FormBarcodeProductPrint
                         'baru
                         print_command += "<ESC>A"
                         print_command += "<ESC>#E5"
-                        print_command += "<ESC>H580<ESC>V00" & (add_sato_vpx + 10).ToString & "<ESC>L0200<ESC>S" & TEProdCode.Text & vbNewLine
-                        print_command += "<ESC>H610<ESC>V00" & (add_sato_vpx + 30).ToString & "<ESC>D202100" & TEProdCode.Text & vbNewLine
-                        print_command += "<ESC>H580<ESC>V0" & (add_sato_vpx + 140).ToString & "<ESC>L0200<ESC>S" & TEDesignName.Text & vbNewLine
-                        print_command += "<ESC>H650<ESC>V0" & (add_sato_vpx + 160).ToString & "<ESC>L0200<ESC>XUsize" & vbNewLine
-                        print_command += "<ESC>H740<ESC>V0" & (add_sato_vpx + 160).ToString & "<ESC>L0200<ESC>XUcolor" & vbNewLine
-                        print_command += "<ESC>H580<ESC>V0" & (add_sato_vpx + 180).ToString & "<ESC>L0202<ESC>S" & TERetCode.Text & vbNewLine
-                        print_command += "<ESC>H650<ESC>V0" & (add_sato_vpx + 180).ToString & "<ESC>L0202<ESC>S" & TESize.Text & vbNewLine
-                        print_command += "<ESC>H645<ESC>V0" & (add_sato_vpx + 175).ToString & "<ESC>(65,40" & vbNewLine
-                        print_command += "<ESC>H740<ESC>V0" & (add_sato_vpx + 180).ToString & "<ESC>L0202<ESC>S" & TEColor.Text & vbNewLine
-                        print_command += "<ESC>H580<ESC>V0" & (add_sato_vpx + 220).ToString & "<ESC>L0202<ESC>S" & TECurPrice.Text & " " & TEPrice.Text & vbNewLine
-                        print_command += "<ESC>H580<ESC>V0" & (add_sato_vpx + 260).ToString & "<ESC>L0101<ESC>S" & i.ToString(format_string) & vbNewLine
-                        print_command += "<ESC>H580<ESC>V0" & (add_sato_vpx + 280).ToString & "<ESC>L0202<ESC>BG02070>I" & TEProdCode.Text & i.ToString(format_string) & vbNewLine
+                        print_command += "<ESC>H" & (add_sato_hpx + 580).ToString & "<ESC>V00" & (add_sato_vpx + 10).ToString & "<ESC>L0200<ESC>S" & TEProdCode.Text & vbNewLine
+                        print_command += "<ESC>H" & (add_sato_hpx + 610).ToString & "<ESC>V00" & (add_sato_vpx + 30).ToString & "<ESC>D202100" & TEProdCode.Text & vbNewLine
+                        print_command += "<ESC>H" & (add_sato_hpx + 580).ToString & "<ESC>V0" & (add_sato_vpx + 140).ToString & "<ESC>L0200<ESC>S" & TEDesignName.Text & vbNewLine
+                        print_command += "<ESC>H" & (add_sato_hpx + 650).ToString & "<ESC>V0" & (add_sato_vpx + 160).ToString & "<ESC>L0200<ESC>XUsize" & vbNewLine
+                        print_command += "<ESC>H" & (add_sato_hpx + 740).ToString & "<ESC>V0" & (add_sato_vpx + 160).ToString & "<ESC>L0200<ESC>XUcolor" & vbNewLine
+                        print_command += "<ESC>H" & (add_sato_hpx + 580).ToString & "<ESC>V0" & (add_sato_vpx + 180).ToString & "<ESC>L0202<ESC>S" & TERetCode.Text & vbNewLine
+                        print_command += "<ESC>H" & (add_sato_hpx + 650).ToString & "<ESC>V0" & (add_sato_vpx + 180).ToString & "<ESC>L0202<ESC>S" & TESize.Text & vbNewLine
+                        print_command += "<ESC>H" & (add_sato_hpx + 645).ToString & "<ESC>V0" & (add_sato_vpx + 175).ToString & "<ESC>(65,40" & vbNewLine
+                        print_command += "<ESC>H" & (add_sato_hpx + 740).ToString & "<ESC>V0" & (add_sato_vpx + 180).ToString & "<ESC>L0202<ESC>S" & TEColor.Text & vbNewLine
+                        print_command += "<ESC>H" & (add_sato_hpx + 580).ToString & "<ESC>V0" & (add_sato_vpx + 220).ToString & "<ESC>L0202<ESC>S" & TECurPrice.Text & " " & TEPrice.Text & vbNewLine
+                        print_command += "<ESC>H" & (add_sato_hpx + 580).ToString & "<ESC>V0" & (add_sato_vpx + 260).ToString & "<ESC>L0101<ESC>S" & i.ToString(format_string) & vbNewLine
+                        print_command += "<ESC>H" & (add_sato_hpx + 580).ToString & "<ESC>V0" & (add_sato_vpx + 280).ToString & "<ESC>L0202<ESC>BG02070>I" & TEProdCode.Text & i.ToString(format_string) & vbNewLine
                         print_command += "<ESC>Q1" & vbNewLine
                         print_command += "<ESC>Z" & vbNewLine
                         print_command += "" & vbNewLine
@@ -209,20 +211,20 @@ Public Class FormBarcodeProductPrint
                         print_command += "^XA" & vbNewLine
                         print_command += "^CI28" & vbNewLine
                         print_command += "^MMT" & vbNewLine
-                        print_command += "^PW277" & vbNewLine
+                        print_command += "^PW800" & vbNewLine
                         print_command += "^LL0406" & vbNewLine
                         print_command += "^LS0" & vbNewLine
-                        print_command += "^FT159," & (add_zebra_vpx + 285).ToString & "^A0N,34,33^FH\^FD" & TEColor.Text & "^FS" & vbNewLine
-                        print_command += "^FO86," & (add_zebra_vpx + 252).ToString & "^GB54,42,42^FS" & vbNewLine
-                        print_command += "^FT86," & (add_zebra_vpx + 285).ToString & "^A0N,34,33^FR^FH\^FD" & TESize.Text & "^FS" & vbNewLine
-                        print_command += "^FT3," & (add_zebra_vpx + 333).ToString & "^A0N,39,38^FH\^FD" & TECurPrice.Text & " " & TEPrice.Text & "^FS" & vbNewLine
-                        print_command += "^FT3," & (add_zebra_vpx + 285).ToString & "^A0N,34,33^FH\^FD" & TERetCode.Text & "^FS" & vbNewLine
-                        print_command += "^FT1," & (add_zebra_vpx + 215).ToString & "^A0N,17,16^FH\^FD" & TEDesignName.Text & "^FS" & vbNewLine
-                        print_command += "^FT2," & (add_zebra_vpx + 25).ToString & "^A0N,24,40^FH\^FD" & TEProdCode.Text & "^FS" & vbNewLine
-                        print_command += "^BY2,2,162^FT23," & (add_zebra_vpx + 194).ToString & "^B2N,,N,N" & vbNewLine
+                        print_command += "^FT" & (add_zebra_hpx + 159).ToString & "," & (add_zebra_vpx + 285).ToString & "^A0N,34,33^FH\^FD" & TEColor.Text & "^FS" & vbNewLine
+                        print_command += "^FO" & (add_zebra_hpx + 86).ToString & "," & (add_zebra_vpx + 252).ToString & "^GB54,42,42^FS" & vbNewLine
+                        print_command += "^FT" & (add_zebra_hpx + 86).ToString & "," & (add_zebra_vpx + 285).ToString & "^A0N,34,33^FR^FH\^FD" & TESize.Text & "^FS" & vbNewLine
+                        print_command += "^FT" & (add_zebra_hpx + 3).ToString & "," & (add_zebra_vpx + 333).ToString & "^A0N,39,38^FH\^FD" & TECurPrice.Text & " " & TEPrice.Text & "^FS" & vbNewLine
+                        print_command += "^FT" & (add_zebra_hpx + 3).ToString & "," & (add_zebra_vpx + 285).ToString & "^A0N,34,33^FH\^FD" & TERetCode.Text & "^FS" & vbNewLine
+                        print_command += "^FT" & (add_zebra_hpx + 1).ToString & "," & (add_zebra_vpx + 215).ToString & "^A0N,17,16^FH\^FD" & TEDesignName.Text & "^FS" & vbNewLine
+                        print_command += "^FT" & (add_zebra_hpx + 2).ToString & "," & (add_zebra_vpx + 25).ToString & "^A0N,24,40^FH\^FD" & TEProdCode.Text & "^FS" & vbNewLine
+                        print_command += "^BY2,2,162^FT" & (add_zebra_hpx + 23).ToString & "," & (add_zebra_vpx + 194).ToString & "^B2N,,N,N" & vbNewLine
                         print_command += "^FD" & TEProdCode.Text & "^FS" & vbNewLine
-                        print_command += "^FT159," & (add_zebra_vpx + 247).ToString & "^A0N,14,14^FH\^FDcolor^FS" & vbNewLine
-                        print_command += "^FT87," & (add_zebra_vpx + 247).ToString & "^A0N,14,14^FH\^FDsize^FS" & vbNewLine
+                        print_command += "^FT" & (add_zebra_hpx + 159).ToString & "," & (add_zebra_vpx + 247).ToString & "^A0N,14,14^FH\^FDcolor^FS" & vbNewLine
+                        print_command += "^FT" & (add_zebra_hpx + 87).ToString & "," & (add_zebra_vpx + 247).ToString & "^A0N,14,14^FH\^FDsize^FS" & vbNewLine
                         print_command += "^PQ1,0,1,Y^XZ" & vbNewLine
 
                         'back
@@ -231,22 +233,22 @@ Public Class FormBarcodeProductPrint
                         print_command += "^XA" & vbNewLine
                         print_command += "^CI28" & vbNewLine
                         print_command += "^MMT" & vbNewLine
-                        print_command += "^PW277" & vbNewLine
+                        print_command += "^PW800" & vbNewLine
                         print_command += "^LL0406" & vbNewLine
                         print_command += "^LS0" & vbNewLine
-                        print_command += "^FT159," & (add_zebra_vpx + 225).ToString & "^A0N,34,33^FH\^FD" & TEColor.Text & "  ^FS" & vbNewLine
-                        print_command += "^FO86," & (add_zebra_vpx + 192).ToString & "^GB54,42,42^FS" & vbNewLine
-                        print_command += "^FT86," & (add_zebra_vpx + 225).ToString & "^A0N,34,33^FR^FH\^FD" & TESize.Text & "^FS" & vbNewLine
-                        print_command += "^FT3," & (add_zebra_vpx + 268).ToString & "^A0N,34,33^FH\^FD" & TECurPrice.Text & " " & TEPrice.Text & "^FS" & vbNewLine
-                        print_command += "^FT3," & (add_zebra_vpx + 225).ToString & "^A0N,34,33^FH\^FD" & TERetCode.Text & "^FS" & vbNewLine
-                        print_command += "^FT2," & (add_zebra_vpx + 161).ToString & "^A0N,17,16^FH\^FD" & TEDesignName.Text & "^FS" & vbNewLine
-                        print_command += "^FT3," & (add_zebra_vpx + 307).ToString & "^A0N,17,16^FH\^FD" & i.ToString(format_string) & " ^FS" & vbNewLine
-                        print_command += "^FT3," & (add_zebra_vpx + 28).ToString & "^A0N,24,40^FH\^FD" & TEProdCode.Text & "^FS" & vbNewLine
-                        print_command += "^BY2,2,111^FT23," & (add_zebra_vpx + 143).ToString & "^B2N,,N,N" & vbNewLine
+                        print_command += "^FT" & (add_zebra_hpx + 159).ToString & "," & (add_zebra_vpx + 225).ToString & "^A0N,34,33^FH\^FD" & TEColor.Text & "  ^FS" & vbNewLine
+                        print_command += "^FO" & (add_zebra_hpx + 86).ToString & "," & (add_zebra_vpx + 192).ToString & "^GB54,42,42^FS" & vbNewLine
+                        print_command += "^FT" & (add_zebra_hpx + 86).ToString & "," & (add_zebra_vpx + 225).ToString & "^A0N,34,33^FR^FH\^FD" & TESize.Text & "^FS" & vbNewLine
+                        print_command += "^FT" & (add_zebra_hpx + 3).ToString & "," & (add_zebra_vpx + 268).ToString & "^A0N,34,33^FH\^FD" & TECurPrice.Text & " " & TEPrice.Text & "^FS" & vbNewLine
+                        print_command += "^FT" & (add_zebra_hpx + 3).ToString & "," & (add_zebra_vpx + 225).ToString & "^A0N,34,33^FH\^FD" & TERetCode.Text & "^FS" & vbNewLine
+                        print_command += "^FT" & (add_zebra_hpx + 2).ToString & "," & (add_zebra_vpx + 161).ToString & "^A0N,17,16^FH\^FD" & TEDesignName.Text & "^FS" & vbNewLine
+                        print_command += "^FT" & (add_zebra_hpx + 3).ToString & "," & (add_zebra_vpx + 307).ToString & "^A0N,17,16^FH\^FD" & i.ToString(format_string) & " ^FS" & vbNewLine
+                        print_command += "^FT" & (add_zebra_hpx + 3).ToString & "," & (add_zebra_vpx + 28).ToString & "^A0N,24,40^FH\^FD" & TEProdCode.Text & "^FS" & vbNewLine
+                        print_command += "^BY2,2,111^FT" & (add_zebra_hpx + 23).ToString & "," & (add_zebra_vpx + 143).ToString & "^B2N,,N,N" & vbNewLine
                         print_command += "^FD" & TEProdCode.Text & "^FS" & vbNewLine
-                        print_command += "^FT159," & (add_zebra_vpx + 187).ToString & "^A0N,14,14^FH\^FDcolor^FS" & vbNewLine
-                        print_command += "^FT87," & (add_zebra_vpx + 187).ToString & "^A0N,14,14^FH\^FDsize^FS" & vbNewLine
-                        print_command += "^BY2,3,43^FT3," & (add_zebra_vpx + 354).ToString & "^BCN,,N,N" & vbNewLine
+                        print_command += "^FT" & (add_zebra_hpx + 159).ToString & "," & (add_zebra_vpx + 187).ToString & "^A0N,14,14^FH\^FDcolor^FS" & vbNewLine
+                        print_command += "^FT" & (add_zebra_hpx + 87).ToString & "," & (add_zebra_vpx + 187).ToString & "^A0N,14,14^FH\^FDsize^FS" & vbNewLine
+                        print_command += "^BY2,3,43^FT" & (add_zebra_hpx + 3).ToString & "," & (add_zebra_vpx + 354).ToString & "^BCN,,N,N" & vbNewLine
                         print_command += "^FD>;" & TEProdCode.Text & i.ToString(format_string) & "^FS" & vbNewLine
                         print_command += "^PQ1,0,1,Y^XZ" & vbNewLine
                     Next
@@ -317,18 +319,18 @@ Public Class FormBarcodeProductPrint
                     'baru
                     print_command += "<ESC>A"
                     print_command += "<ESC>#E5"
-                    print_command += "<ESC>H580<ESC>V00" & (add_sato_vpx + 10).ToString & "<ESC>L0200<ESC>S" & TEProdCode.Text & vbNewLine
-                    print_command += "<ESC>H610<ESC>V00" & (add_sato_vpx + 30).ToString & "<ESC>D202100" & TEProdCode.Text & vbNewLine
-                    print_command += "<ESC>H580<ESC>V0" & (add_sato_vpx + 140).ToString & "<ESC>L0200<ESC>S" & TEDesignName.Text & vbNewLine
-                    print_command += "<ESC>H650<ESC>V0" & (add_sato_vpx + 160).ToString & "<ESC>L0200<ESC>XUsize" & vbNewLine
-                    print_command += "<ESC>H740<ESC>V0" & (add_sato_vpx + 160).ToString & "<ESC>L0200<ESC>XUcolor" & vbNewLine
-                    print_command += "<ESC>H580<ESC>V0" & (add_sato_vpx + 180).ToString & "<ESC>L0202<ESC>S" & TERetCode.Text & vbNewLine
-                    print_command += "<ESC>H650<ESC>V0" & (add_sato_vpx + 180).ToString & "<ESC>L0202<ESC>S" & TESize.Text & vbNewLine
-                    print_command += "<ESC>H645<ESC>V0" & (add_sato_vpx + 175).ToString & "<ESC>(65,40" & vbNewLine
-                    print_command += "<ESC>H740<ESC>V0" & (add_sato_vpx + 180).ToString & "<ESC>L0202<ESC>S" & TEColor.Text & vbNewLine
-                    print_command += "<ESC>H580<ESC>V0" & (add_sato_vpx + 220).ToString & "<ESC>L0202<ESC>S" & TECurPrice.Text & " " & TEPrice.Text & vbNewLine
-                    print_command += "<ESC>H580<ESC>V0" & (add_sato_vpx + 260).ToString & "<ESC>L0101<ESC>S" & i.ToString(format_string) & vbNewLine
-                    print_command += "<ESC>H580<ESC>V0" & (add_sato_vpx + 280).ToString & "<ESC>L0202<ESC>BG02070>I" & TEProdCode.Text & i.ToString(format_string) & vbNewLine
+                    print_command += "<ESC>H" & (add_sato_hpx + 580).ToString & "<ESC>V00" & (add_sato_vpx + 10).ToString & "<ESC>L0200<ESC>S" & TEProdCode.Text & vbNewLine
+                    print_command += "<ESC>H" & (add_sato_hpx + 610).ToString & "<ESC>V00" & (add_sato_vpx + 30).ToString & "<ESC>D202100" & TEProdCode.Text & vbNewLine
+                    print_command += "<ESC>H" & (add_sato_hpx + 580).ToString & "<ESC>V0" & (add_sato_vpx + 140).ToString & "<ESC>L0200<ESC>S" & TEDesignName.Text & vbNewLine
+                    print_command += "<ESC>H" & (add_sato_hpx + 650).ToString & "<ESC>V0" & (add_sato_vpx + 160).ToString & "<ESC>L0200<ESC>XUsize" & vbNewLine
+                    print_command += "<ESC>H" & (add_sato_hpx + 740).ToString & "<ESC>V0" & (add_sato_vpx + 160).ToString & "<ESC>L0200<ESC>XUcolor" & vbNewLine
+                    print_command += "<ESC>H" & (add_sato_hpx + 580).ToString & "<ESC>V0" & (add_sato_vpx + 180).ToString & "<ESC>L0202<ESC>S" & TERetCode.Text & vbNewLine
+                    print_command += "<ESC>H" & (add_sato_hpx + 650).ToString & "<ESC>V0" & (add_sato_vpx + 180).ToString & "<ESC>L0202<ESC>S" & TESize.Text & vbNewLine
+                    print_command += "<ESC>H" & (add_sato_hpx + 645).ToString & "<ESC>V0" & (add_sato_vpx + 175).ToString & "<ESC>(65,40" & vbNewLine
+                    print_command += "<ESC>H" & (add_sato_hpx + 740).ToString & "<ESC>V0" & (add_sato_vpx + 180).ToString & "<ESC>L0202<ESC>S" & TEColor.Text & vbNewLine
+                    print_command += "<ESC>H" & (add_sato_hpx + 580).ToString & "<ESC>V0" & (add_sato_vpx + 220).ToString & "<ESC>L0202<ESC>S" & TECurPrice.Text & " " & TEPrice.Text & vbNewLine
+                    print_command += "<ESC>H" & (add_sato_hpx + 580).ToString & "<ESC>V0" & (add_sato_vpx + 260).ToString & "<ESC>L0101<ESC>S" & i.ToString(format_string) & vbNewLine
+                    print_command += "<ESC>H" & (add_sato_hpx + 580).ToString & "<ESC>V0" & (add_sato_vpx + 280).ToString & "<ESC>L0202<ESC>BG02070>I" & TEProdCode.Text & i.ToString(format_string) & vbNewLine
                     print_command += "<ESC>Q1" & vbNewLine
                     print_command += "<ESC>Z" & vbNewLine
                     print_command += "" & vbNewLine
@@ -343,22 +345,22 @@ Public Class FormBarcodeProductPrint
                     print_command += "^XA" & vbNewLine
                     print_command += "^CI28" & vbNewLine
                     print_command += "^MMT" & vbNewLine
-                    print_command += "^PW277" & vbNewLine
+                    print_command += "^PW800" & vbNewLine
                     print_command += "^LL0406" & vbNewLine
                     print_command += "^LS0" & vbNewLine
-                    print_command += "^FT159," & (add_zebra_vpx + 225).ToString & "^A0N,34,33^FH\^FD" & TEColor.Text & "  ^FS" & vbNewLine
-                    print_command += "^FO86," & (add_zebra_vpx + 192).ToString & "^GB54,42,42^FS" & vbNewLine
-                    print_command += "^FT86," & (add_zebra_vpx + 225).ToString & "^A0N,34,33^FR^FH\^FD" & TESize.Text & "^FS" & vbNewLine
-                    print_command += "^FT3," & (add_zebra_vpx + 268).ToString & "^A0N,34,33^FH\^FD" & TECurPrice.Text & " " & TEPrice.Text & "^FS" & vbNewLine
-                    print_command += "^FT3," & (add_zebra_vpx + 225).ToString & "^A0N,34,33^FH\^FD" & TERetCode.Text & "^FS" & vbNewLine
-                    print_command += "^FT2," & (add_zebra_vpx + 161).ToString & "^A0N,17,16^FH\^FD" & TEDesignName.Text & "^FS" & vbNewLine
-                    print_command += "^FT3," & (add_zebra_vpx + 307).ToString & "^A0N,17,16^FH\^FD" & i.ToString(format_string) & " ^FS" & vbNewLine
-                    print_command += "^FT3," & (add_zebra_vpx + 28).ToString & "^A0N,24,40^FH\^FD" & TEProdCode.Text & "^FS" & vbNewLine
-                    print_command += "^BY2,2,111^FT23," & (add_zebra_vpx + 143).ToString & "^B2N,,N,N" & vbNewLine
+                    print_command += "^FT" & (add_zebra_hpx + 159).ToString & "," & (add_zebra_vpx + 225).ToString & "^A0N,34,33^FH\^FD" & TEColor.Text & "  ^FS" & vbNewLine
+                    print_command += "^FO" & (add_zebra_hpx + 86).ToString & "," & (add_zebra_vpx + 192).ToString & "^GB54,42,42^FS" & vbNewLine
+                    print_command += "^FT" & (add_zebra_hpx + 86).ToString & "," & (add_zebra_vpx + 225).ToString & "^A0N,34,33^FR^FH\^FD" & TESize.Text & "^FS" & vbNewLine
+                    print_command += "^FT" & (add_zebra_hpx + 3).ToString & "," & (add_zebra_vpx + 268).ToString & "^A0N,34,33^FH\^FD" & TECurPrice.Text & " " & TEPrice.Text & "^FS" & vbNewLine
+                    print_command += "^FT" & (add_zebra_hpx + 3).ToString & "," & (add_zebra_vpx + 225).ToString & "^A0N,34,33^FH\^FD" & TERetCode.Text & "^FS" & vbNewLine
+                    print_command += "^FT" & (add_zebra_hpx + 2).ToString & "," & (add_zebra_vpx + 161).ToString & "^A0N,17,16^FH\^FD" & TEDesignName.Text & "^FS" & vbNewLine
+                    print_command += "^FT" & (add_zebra_hpx + 3).ToString & "," & (add_zebra_vpx + 307).ToString & "^A0N,17,16^FH\^FD" & i.ToString(format_string) & " ^FS" & vbNewLine
+                    print_command += "^FT" & (add_zebra_hpx + 3).ToString & "," & (add_zebra_vpx + 28).ToString & "^A0N,24,40^FH\^FD" & TEProdCode.Text & "^FS" & vbNewLine
+                    print_command += "^BY2,2,111^FT" & (add_zebra_hpx + 23).ToString & "," & (add_zebra_vpx + 143).ToString & "^B2N,,N,N" & vbNewLine
                     print_command += "^FD" & TEProdCode.Text & "^FS" & vbNewLine
-                    print_command += "^FT159," & (add_zebra_vpx + 187).ToString & "^A0N,14,14^FH\^FDcolor^FS" & vbNewLine
-                    print_command += "^FT87," & (add_zebra_vpx + 187).ToString & "^A0N,14,14^FH\^FDsize^FS" & vbNewLine
-                    print_command += "^BY2,3,43^FT3," & (add_zebra_vpx + 354).ToString & "^BCN,,N,N" & vbNewLine
+                    print_command += "^FT" & (add_zebra_hpx + 159).ToString & "," & (add_zebra_vpx + 187).ToString & "^A0N,14,14^FH\^FDcolor^FS" & vbNewLine
+                    print_command += "^FT" & (add_zebra_hpx + 87).ToString & "," & (add_zebra_vpx + 187).ToString & "^A0N,14,14^FH\^FDsize^FS" & vbNewLine
+                    print_command += "^BY2,3,43^FT" & (add_zebra_hpx + 3).ToString & "," & (add_zebra_vpx + 354).ToString & "^BCN,,N,N" & vbNewLine
                     print_command += "^FD>;" & TEProdCode.Text & i.ToString(format_string) & "^FS" & vbNewLine
                     print_command += "^PQ1,0,1,Y^XZ" & vbNewLine
                 Next
@@ -404,16 +406,16 @@ Public Class FormBarcodeProductPrint
 
                 print_command += "<ESC>A"
                 print_command += "<ESC>#E5"
-                print_command += "<ESC>H580<ESC>V00" & (add_sato_vpx + 10).ToString & "<ESC>L0200<ESC>S" & TEProdCode.Text & vbNewLine
-                print_command += "<ESC>H610<ESC>V00" & (add_sato_vpx + 30).ToString & "<ESC>D202160" & TEProdCode.Text & vbNewLine
-                print_command += "<ESC>H580<ESC>V0" & (add_sato_vpx + 200).ToString & "<ESC>L0200<ESC>S" & TEDesignName.Text & vbNewLine
-                print_command += "<ESC>H650<ESC>V0" & (add_sato_vpx + 220).ToString & "<ESC>L0200<ESC>XUsize" & vbNewLine
-                print_command += "<ESC>H740<ESC>V0" & (add_sato_vpx + 220).ToString & "<ESC>L0200<ESC>XUcolor" & vbNewLine
-                print_command += "<ESC>H580<ESC>V0" & (add_sato_vpx + 240).ToString & "<ESC>L0202<ESC>S" & TERetCode.Text & vbNewLine
-                print_command += "<ESC>H650<ESC>V0" & (add_sato_vpx + 240).ToString & "<ESC>L0202<ESC>S" & TESize.Text & vbNewLine
-                print_command += "<ESC>H645<ESC>V0" & (add_sato_vpx + 235).ToString & "<ESC>(65,40" & vbNewLine
-                print_command += "<ESC>H740<ESC>V0" & (add_sato_vpx + 240).ToString & "<ESC>L0202<ESC>S" & TEColor.Text & vbNewLine
-                print_command += "<ESC>H580<ESC>V0" & (add_sato_vpx + 280).ToString & "<ESC>L0202<ESC>S" & TECurPrice.Text & " " & TEPrice.Text & vbNewLine
+                print_command += "<ESC>H" & (add_sato_hpx + 580).ToString & "<ESC>V00" & (add_sato_vpx + 10).ToString & "<ESC>L0200<ESC>S" & TEProdCode.Text & vbNewLine
+                print_command += "<ESC>H" & (add_sato_hpx + 610).ToString & "<ESC>V00" & (add_sato_vpx + 30).ToString & "<ESC>D202160" & TEProdCode.Text & vbNewLine 'UBAH HXXX POSISI BARCODENYA
+                print_command += "<ESC>H" & (add_sato_hpx + 580).ToString & "<ESC>V0" & (add_sato_vpx + 200).ToString & "<ESC>L0200<ESC>S" & TEDesignName.Text & vbNewLine
+                print_command += "<ESC>H" & (add_sato_hpx + 650).ToString & "<ESC>V0" & (add_sato_vpx + 220).ToString & "<ESC>L0200<ESC>XUsize" & vbNewLine
+                print_command += "<ESC>H" & (add_sato_hpx + 740).ToString & "<ESC>V0" & (add_sato_vpx + 220).ToString & "<ESC>L0200<ESC>XUcolor" & vbNewLine
+                print_command += "<ESC>H" & (add_sato_hpx + 580).ToString & "<ESC>V0" & (add_sato_vpx + 240).ToString & "<ESC>L0202<ESC>S" & TERetCode.Text & vbNewLine
+                print_command += "<ESC>H" & (add_sato_hpx + 650).ToString & "<ESC>V0" & (add_sato_vpx + 240).ToString & "<ESC>L0202<ESC>S" & TESize.Text & vbNewLine
+                print_command += "<ESC>H" & (add_sato_hpx + 645).ToString & "<ESC>V0" & (add_sato_vpx + 235).ToString & "<ESC>(65,40" & vbNewLine
+                print_command += "<ESC>H" & (add_sato_hpx + 740).ToString & "<ESC>V0" & (add_sato_vpx + 240).ToString & "<ESC>L0202<ESC>S" & TEColor.Text & vbNewLine
+                print_command += "<ESC>H" & (add_sato_hpx + 580).ToString & "<ESC>V0" & (add_sato_vpx + 280).ToString & "<ESC>L0202<ESC>S" & TECurPrice.Text & " " & TEPrice.Text & vbNewLine
                 print_command += "<ESC>Q1" & vbNewLine
                 print_command += "<ESC>Z" & vbNewLine
                 print_command += "" & vbNewLine
@@ -426,20 +428,20 @@ Public Class FormBarcodeProductPrint
                 print_command += "^XA" & vbNewLine
                 print_command += "^CI28" & vbNewLine
                 print_command += "^MMT" & vbNewLine
-                print_command += "^PW277" & vbNewLine
+                print_command += "^PW800" & vbNewLine
                 print_command += "^LL0406" & vbNewLine
                 print_command += "^LS0" & vbNewLine
-                print_command += "^FT159," & (add_zebra_vpx + 285).ToString & "^A0N,34,33^FH\^FD" & TEColor.Text & "^FS" & vbNewLine
-                print_command += "^FO86," & (add_zebra_vpx + 252).ToString & "^GB54,42,42^FS" & vbNewLine
-                print_command += "^FT86," & (add_zebra_vpx + 285).ToString & "^A0N,34,33^FR^FH\^FD" & TESize.Text & "^FS" & vbNewLine
-                print_command += "^FT3," & (add_zebra_vpx + 333).ToString & "^A0N,39,38^FH\^FD" & TECurPrice.Text & " " & TEPrice.Text & "^FS" & vbNewLine
-                print_command += "^FT3," & (add_zebra_vpx + 285).ToString & "^A0N,34,33^FH\^FD" & TERetCode.Text & "^FS" & vbNewLine
-                print_command += "^FT1," & (add_zebra_vpx + 215).ToString & "^A0N,17,16^FH\^FD" & TEDesignName.Text & "^FS" & vbNewLine
-                print_command += "^FT2," & (add_zebra_vpx + 25).ToString & "^A0N,24,40^FH\^FD" & TEProdCode.Text & "^FS" & vbNewLine
-                print_command += "^BY2,2,162^FT23," & (add_zebra_vpx + 194).ToString & "^B2N,,N,N" & vbNewLine
+                print_command += "^FT" & (add_zebra_hpx + 159).ToString & "," & (add_zebra_vpx + 285).ToString & "^A0N,34,33^FH\^FD" & TEColor.Text & "^FS" & vbNewLine
+                print_command += "^FO" & (add_zebra_hpx + 86).ToString & "," & (add_zebra_vpx + 252).ToString & "^GB54,42,42^FS" & vbNewLine
+                print_command += "^FT" & (add_zebra_hpx + 86).ToString & "," & (add_zebra_vpx + 285).ToString & "^A0N,34,33^FR^FH\^FD" & TESize.Text & "^FS" & vbNewLine
+                print_command += "^FT" & (add_zebra_hpx + 3).ToString & "," & (add_zebra_vpx + 333).ToString & "^A0N,39,38^FH\^FD" & TECurPrice.Text & " " & TEPrice.Text & "^FS" & vbNewLine
+                print_command += "^FT" & (add_zebra_hpx + 3).ToString & "," & (add_zebra_vpx + 285).ToString & "^A0N,34,33^FH\^FD" & TERetCode.Text & "^FS" & vbNewLine
+                print_command += "^FT" & (add_zebra_hpx + 1).ToString & "," & (add_zebra_vpx + 215).ToString & "^A0N,17,16^FH\^FD" & TEDesignName.Text & "^FS" & vbNewLine
+                print_command += "^FT" & (add_zebra_hpx + 2).ToString & "," & (add_zebra_vpx + 25).ToString & "^A0N,24,40^FH\^FD" & TEProdCode.Text & "^FS" & vbNewLine
+                print_command += "^BY2,2,162^FT" & (add_zebra_hpx + 23).ToString & "," & (add_zebra_vpx + 194).ToString & "^B2N,,N,N" & vbNewLine
                 print_command += "^FD" & TEProdCode.Text & "^FS" & vbNewLine
-                print_command += "^FT159," & (add_zebra_vpx + 247).ToString & "^A0N,14,14^FH\^FDcolor^FS" & vbNewLine
-                print_command += "^FT87," & (add_zebra_vpx + 247).ToString & "^A0N,14,14^FH\^FDsize^FS" & vbNewLine
+                print_command += "^FT" & (add_zebra_hpx + 159).ToString & "," & (add_zebra_vpx + 247).ToString & "^A0N,14,14^FH\^FDcolor^FS" & vbNewLine
+                print_command += "^FT" & (add_zebra_hpx + 87).ToString & "," & (add_zebra_vpx + 247).ToString & "^A0N,14,14^FH\^FDsize^FS" & vbNewLine
                 print_command += "^PQ1,0,1,Y^XZ" & vbNewLine
             End If
 
@@ -500,10 +502,14 @@ Public Class FormBarcodeProductPrint
         If Not LEPrinter.EditValue.ToString = "" Then
             If LEPrinter.EditValue.ToString = "1" Then
                 add_sato_vpx = Integer.Parse(get_opt_prod_field("sato_add_vpx"))
+                add_sato_hpx = Integer.Parse(get_opt_prod_field("sato_add_hpx"))
                 TEHeightError.EditValue = add_sato_vpx
+                TEHorizontalError.EditValue = add_sato_hpx
             ElseIf LEPrinter.EditValue.ToString = "2" Then
                 add_zebra_vpx = Integer.Parse(get_opt_prod_field("zebra_add_vpx"))
+                add_zebra_hpx = Integer.Parse(get_opt_prod_field("zebra_add_hpx"))
                 TEHeightError.EditValue = add_zebra_vpx
+                TEHorizontalError.EditValue = add_zebra_hpx
             End If
         End If
     End Sub
@@ -520,6 +526,22 @@ Public Class FormBarcodeProductPrint
                 execute_non_query(query, True, "", "", "", "")
                 add_zebra_vpx = Integer.Parse(get_opt_prod_field("zebra_add_vpx"))
                 infoCustom("Zebra error height settled")
+            End If
+        End If
+    End Sub
+
+    Private Sub BSetHorizontalError_Click(sender As Object, e As EventArgs) Handles BSetHorizontalError.Click
+        If Not LEPrinter.EditValue.ToString = "" Then
+            If LEPrinter.EditValue.ToString = "1" Then
+                Dim query As String = "UPDATE tb_opt_prod SET sato_add_hpx='" & TEHorizontalError.EditValue.ToString & "'"
+                execute_non_query(query, True, "", "", "", "")
+                add_sato_hpx = Integer.Parse(get_opt_prod_field("sato_add_hpx"))
+                infoCustom("SATO error horizontal settled")
+            ElseIf LEPrinter.EditValue.ToString = "2" Then
+                Dim query As String = "UPDATE tb_opt_prod SET zebra_add_hpx='" & TEHorizontalError.EditValue.ToString & "'"
+                execute_non_query(query, True, "", "", "", "")
+                add_zebra_hpx = Integer.Parse(get_opt_prod_field("zebra_add_hpx"))
+                infoCustom("Zebra error horizontal settled")
             End If
         End If
     End Sub

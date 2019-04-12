@@ -46,7 +46,6 @@
             MEAccDesc.Text = data.Rows(0)("acc_description").ToString
 
             SLEParentAccount.Properties.ReadOnly = True
-            TEAccountDetail.Properties.ReadOnly = True
             LEAccCat.Properties.ReadOnly = True
             MEAccDesc.Properties.ReadOnly = True
             LEDetail.Properties.ReadOnly = True

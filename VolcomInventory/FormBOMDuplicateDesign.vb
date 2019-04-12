@@ -30,13 +30,17 @@
     End Sub
 
     Private Sub BDuplicate_Click(sender As Object, e As EventArgs) Handles BDuplicate.Click
-        id_design = FormBOMDesignSingle.id_design
-        id_bom_approve = FormBOMDesignSingle.id_bom_approve
-        '
-        id_design_to = GVDesign.GetFocusedRowCellValue("id_design").ToString
-        '
-        act_dupe()
-        Close()
+        If GVDesign.GetFocusedRowCellValue("jml_po") > 0 Then
+            warningCustom("PO already processed for this design")
+        Else
+            id_design = FormBOMDesignSingle.id_design
+            id_bom_approve = FormBOMDesignSingle.id_bom_approve
+            '
+            id_design_to = GVDesign.GetFocusedRowCellValue("id_design").ToString
+            '
+            act_dupe()
+            Close()
+        End If
     End Sub
 
     Sub act_dupe()

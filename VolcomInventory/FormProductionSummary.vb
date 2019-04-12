@@ -38,6 +38,18 @@
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCDesign.DataSource = data
         Cursor = Cursors.Default
+        bestfit_band()
+    End Sub
+
+    Sub bestfit_band()
+        Using g = GCDesign.CreateGraphics()
+
+            For Each band As DevExpress.XtraGrid.Views.BandedGrid.GridBand In GVDesign.Bands
+                band.MinWidth = CInt(g.MeasureString(band.Caption, band.AppearanceHeader.Font).Width)
+            Next
+        End Using
+
+        GVDesign.BestFitColumns()
     End Sub
 
     Private Sub BtnView_Click(sender As Object, e As EventArgs) Handles BtnView.Click
@@ -374,6 +386,7 @@
         GCDesign.DataSource = data
         Cursor = Cursors.Default
         GVDesign.BestFitColumns()
+        bestfit_band()
     End Sub
 
     Private Sub SMEditEcopFinal_Click(sender As Object, e As EventArgs) Handles SMEditEcopFinal.Click
@@ -383,5 +396,18 @@
         FormProductionCOP.is_view = "1"
         FormProductionCOP.ShowDialog()
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub GVPD_DoubleClick(sender As Object, e As EventArgs) Handles GVPD.DoubleClick
+
+    End Sub
+
+    Private Sub ViewDetailPDToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ViewDetailPDToolStripMenuItem.Click
+        If GVPD.RowCount > 0 And GVPD.FocusedRowHandle >= 0 Then
+            Dim m As New ClassShowPopUp()
+            m.id_report = GVPD.GetFocusedRowCellValue("id_prod_demand").ToString
+            m.report_mark_type = GVPD.GetFocusedRowCellValue("report_mark_type").ToString
+            m.show()
+        End If
     End Sub
 End Class

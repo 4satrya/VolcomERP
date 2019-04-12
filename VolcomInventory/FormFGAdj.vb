@@ -82,4 +82,18 @@
     Private Sub XTCReturn_SelectedPageChanged(ByVal sender As System.Object, ByVal e As DevExpress.XtraTab.TabPageChangedEventArgs) Handles XTCAdj.SelectedPageChanged
         check_menu()
     End Sub
+
+    Private Sub BtnSummaryOut_Click(sender As Object, e As EventArgs) Handles BtnSummaryOut.Click
+        Cursor = Cursors.WaitCursor
+        FormFGAdjReport.is_out = True
+        FormFGAdjReport.ShowDialog()
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnSummaryIn_Click(sender As Object, e As EventArgs) Handles BtnSummaryIn.Click
+        Cursor = Cursors.WaitCursor
+        FormFGAdjReport.is_out = False
+        FormFGAdjReport.ShowDialog()
+        Cursor = Cursors.Default
+    End Sub
 End Class

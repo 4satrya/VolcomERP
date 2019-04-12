@@ -29,10 +29,13 @@ Partial Class FormSalesReturnOrderOLSingle
         Me.GridColumnQty = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnOrder = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemTextEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
-        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
-        Me.BtnOK = New DevExpress.XtraEditors.SimpleButton()
         Me.GridColumnPrice = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdPrice = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.BtnOK = New DevExpress.XtraEditors.SimpleButton()
+        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GCList, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVList, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -53,7 +56,7 @@ Partial Class FormSalesReturnOrderOLSingle
         '
         'GVList
         '
-        Me.GVList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdProduct, Me.GridColumnCode, Me.GridColumnName, Me.GridColumnSize, Me.GridColumnQty, Me.GridColumnOrder, Me.GridColumnPrice, Me.GridColumnIdPrice})
+        Me.GVList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdProduct, Me.GridColumnCode, Me.GridColumnName, Me.GridColumnSize, Me.GridColumnQty, Me.GridColumnOrder, Me.GridColumnPrice, Me.GridColumnIdPrice, Me.GridColumn1, Me.GridColumn2, Me.GridColumn3})
         Me.GVList.GridControl = Me.GCList
         Me.GVList.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty", Me.GridColumnQty, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "order", Me.GridColumnOrder, "{0:N0}")})
         Me.GVList.Name = "GVList"
@@ -76,7 +79,7 @@ Partial Class FormSalesReturnOrderOLSingle
         Me.GridColumnCode.OptionsColumn.AllowEdit = False
         Me.GridColumnCode.Visible = True
         Me.GridColumnCode.VisibleIndex = 0
-        Me.GridColumnCode.Width = 237
+        Me.GridColumnCode.Width = 214
         '
         'GridColumnName
         '
@@ -85,8 +88,8 @@ Partial Class FormSalesReturnOrderOLSingle
         Me.GridColumnName.Name = "GridColumnName"
         Me.GridColumnName.OptionsColumn.AllowEdit = False
         Me.GridColumnName.Visible = True
-        Me.GridColumnName.VisibleIndex = 1
-        Me.GridColumnName.Width = 614
+        Me.GridColumnName.VisibleIndex = 3
+        Me.GridColumnName.Width = 535
         '
         'GridColumnSize
         '
@@ -95,8 +98,8 @@ Partial Class FormSalesReturnOrderOLSingle
         Me.GridColumnSize.Name = "GridColumnSize"
         Me.GridColumnSize.OptionsColumn.AllowEdit = False
         Me.GridColumnSize.Visible = True
-        Me.GridColumnSize.VisibleIndex = 2
-        Me.GridColumnSize.Width = 129
+        Me.GridColumnSize.VisibleIndex = 4
+        Me.GridColumnSize.Width = 111
         '
         'GridColumnQty
         '
@@ -108,8 +111,8 @@ Partial Class FormSalesReturnOrderOLSingle
         Me.GridColumnQty.OptionsColumn.AllowEdit = False
         Me.GridColumnQty.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty", "{0:N0}")})
         Me.GridColumnQty.Visible = True
-        Me.GridColumnQty.VisibleIndex = 4
-        Me.GridColumnQty.Width = 211
+        Me.GridColumnQty.VisibleIndex = 6
+        Me.GridColumnQty.Width = 183
         '
         'GridColumnOrder
         '
@@ -121,8 +124,8 @@ Partial Class FormSalesReturnOrderOLSingle
         Me.GridColumnOrder.Name = "GridColumnOrder"
         Me.GridColumnOrder.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "order", "{0:N0}")})
         Me.GridColumnOrder.Visible = True
-        Me.GridColumnOrder.VisibleIndex = 5
-        Me.GridColumnOrder.Width = 254
+        Me.GridColumnOrder.VisibleIndex = 7
+        Me.GridColumnOrder.Width = 228
         '
         'RepositoryItemTextEdit1
         '
@@ -130,6 +133,23 @@ Partial Class FormSalesReturnOrderOLSingle
         Me.RepositoryItemTextEdit1.Mask.EditMask = "n0"
         Me.RepositoryItemTextEdit1.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
         Me.RepositoryItemTextEdit1.Name = "RepositoryItemTextEdit1"
+        '
+        'GridColumnPrice
+        '
+        Me.GridColumnPrice.Caption = "Price"
+        Me.GridColumnPrice.DisplayFormat.FormatString = "N2"
+        Me.GridColumnPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnPrice.FieldName = "design_price"
+        Me.GridColumnPrice.Name = "GridColumnPrice"
+        Me.GridColumnPrice.Visible = True
+        Me.GridColumnPrice.VisibleIndex = 5
+        Me.GridColumnPrice.Width = 162
+        '
+        'GridColumnIdPrice
+        '
+        Me.GridColumnIdPrice.Caption = "Id Design Price"
+        Me.GridColumnIdPrice.FieldName = "id_design_price"
+        Me.GridColumnIdPrice.Name = "GridColumnIdPrice"
         '
         'PanelControl1
         '
@@ -151,22 +171,29 @@ Partial Class FormSalesReturnOrderOLSingle
         Me.BtnOK.TabIndex = 0
         Me.BtnOK.Text = "OK"
         '
-        'GridColumnPrice
+        'GridColumn1
         '
-        Me.GridColumnPrice.Caption = "Price"
-        Me.GridColumnPrice.DisplayFormat.FormatString = "N2"
-        Me.GridColumnPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumnPrice.FieldName = "design_price"
-        Me.GridColumnPrice.Name = "GridColumnPrice"
-        Me.GridColumnPrice.Visible = True
-        Me.GridColumnPrice.VisibleIndex = 3
-        Me.GridColumnPrice.Width = 187
+        Me.GridColumn1.Caption = "Item Id"
+        Me.GridColumn1.FieldName = "item_id"
+        Me.GridColumn1.Name = "GridColumn1"
+        Me.GridColumn1.Visible = True
+        Me.GridColumn1.VisibleIndex = 1
+        Me.GridColumn1.Width = 68
         '
-        'GridColumnIdPrice
+        'GridColumn2
         '
-        Me.GridColumnIdPrice.Caption = "Id Design Price"
-        Me.GridColumnIdPrice.FieldName = "id_design_price"
-        Me.GridColumnIdPrice.Name = "GridColumnIdPrice"
+        Me.GridColumn2.Caption = "OL Store Id"
+        Me.GridColumn2.FieldName = "ol_store_id"
+        Me.GridColumn2.Name = "GridColumn2"
+        Me.GridColumn2.Visible = True
+        Me.GridColumn2.VisibleIndex = 2
+        Me.GridColumn2.Width = 115
+        '
+        'GridColumn3
+        '
+        Me.GridColumn3.Caption = "Id Sales Order Det"
+        Me.GridColumn3.FieldName = "id_sales_order_det"
+        Me.GridColumn3.Name = "GridColumn3"
         '
         'FormSalesReturnOrderOLSingle
         '
@@ -201,4 +228,7 @@ Partial Class FormSalesReturnOrderOLSingle
     Friend WithEvents BtnOK As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents GridColumnPrice As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnIdPrice As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn2 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn3 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

@@ -344,7 +344,7 @@
                         newRow("code") = GVItemList.GetRowCellValue(ls, "code").ToString
                         newRow("name") = GVItemList.GetRowCellValue(ls, "name").ToString
                         newRow("size") = GVItemList.GetRowCellValue(ls, "size").ToString
-                        newRow("color") = GVItemList.GetRowCellValue(ls, "color").ToString
+                        'newRow("color") = GVItemList.GetRowCellValue(ls, "color").ToString
                         newRow("sales_pos_det_qty") = GVItemList.GetRowCellValue(ls, "sales_pos_det_qty_credit_note")
                         newRow("sales_pos_det_amount") = GVItemList.GetRowCellValue(ls, "sales_pos_det_qty_credit_note") * GVItemList.GetRowCellValue(ls, "design_price_retail")
                         newRow("design_price_retail") = GVItemList.GetRowCellValue(ls, "design_price_retail")

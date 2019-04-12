@@ -83,10 +83,25 @@ Partial Class FormProductionRec
         Me.GridColumnStyleCode = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnPoTypeRec = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnQty = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnArriveDate = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemDateEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemDateEdit()
         Me.GridView3 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.SLESeasonByCode = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView4 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.BSearchByCode = New DevExpress.XtraEditors.SimpleButton()
+        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
+        Me.SLESeason = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.BSearch = New DevExpress.XtraEditors.SimpleButton()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.XTCTabReceive = New DevExpress.XtraTab.XtraTabControl()
-        Me.GridColumnArriveDate = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.XTPListPO.SuspendLayout()
         CType(Me.SCCRec, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SCCRec.SuspendLayout()
@@ -110,6 +125,12 @@ Partial Class FormProductionRec
         CType(Me.RepositoryItemDateEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemDateEdit1.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl1.SuspendLayout()
+        CType(Me.SLESeasonByCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView4, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SLESeason.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XTCTabReceive, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCTabReceive.SuspendLayout()
         Me.SuspendLayout()
@@ -164,6 +185,7 @@ Partial Class FormProductionRec
         Me.GVProd.GridControl = Me.GCProd
         Me.GVProd.GroupCount = 2
         Me.GVProd.Name = "GVProd"
+        Me.GVProd.OptionsBehavior.AutoExpandAllGroups = True
         Me.GVProd.OptionsBehavior.Editable = False
         Me.GVProd.OptionsFind.AlwaysVisible = True
         Me.GVProd.OptionsView.ShowGroupPanel = False
@@ -492,6 +514,7 @@ Partial Class FormProductionRec
         'XTPListReceive
         '
         Me.XTPListReceive.Controls.Add(Me.GCProdRec)
+        Me.XTPListReceive.Controls.Add(Me.PanelControl1)
         Me.XTPListReceive.Name = "XTPListReceive"
         Me.XTPListReceive.Size = New System.Drawing.Size(803, 466)
         Me.XTPListReceive.Text = "List Receive"
@@ -499,11 +522,11 @@ Partial Class FormProductionRec
         'GCProdRec
         '
         Me.GCProdRec.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCProdRec.Location = New System.Drawing.Point(0, 0)
+        Me.GCProdRec.Location = New System.Drawing.Point(0, 38)
         Me.GCProdRec.MainView = Me.GVProdRec
         Me.GCProdRec.Name = "GCProdRec"
         Me.GCProdRec.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemDateEdit1, Me.RepositoryItemTextEdit1})
-        Me.GCProdRec.Size = New System.Drawing.Size(803, 466)
+        Me.GCProdRec.Size = New System.Drawing.Size(803, 428)
         Me.GCProdRec.TabIndex = 2
         Me.GCProdRec.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVProdRec, Me.GridView3})
         '
@@ -602,7 +625,7 @@ Partial Class FormProductionRec
         '
         'ColDONumber
         '
-        Me.ColDONumber.Caption = "DO Number"
+        Me.ColDONumber.Caption = "Del. Ref#"
         Me.ColDONumber.FieldName = "delivery_order_number"
         Me.ColDONumber.Name = "ColDONumber"
         Me.ColDONumber.Visible = True
@@ -674,6 +697,16 @@ Partial Class FormProductionRec
         Me.GridColumnQty.VisibleIndex = 7
         Me.GridColumnQty.Width = 52
         '
+        'GridColumnArriveDate
+        '
+        Me.GridColumnArriveDate.Caption = "Arrive in QC"
+        Me.GridColumnArriveDate.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.GridColumnArriveDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumnArriveDate.FieldName = "arrive_date"
+        Me.GridColumnArriveDate.Name = "GridColumnArriveDate"
+        Me.GridColumnArriveDate.Visible = True
+        Me.GridColumnArriveDate.VisibleIndex = 10
+        '
         'RepositoryItemDateEdit1
         '
         Me.RepositoryItemDateEdit1.AutoHeight = False
@@ -687,6 +720,136 @@ Partial Class FormProductionRec
         Me.GridView3.GridControl = Me.GCProdRec
         Me.GridView3.Name = "GridView3"
         '
+        'PanelControl1
+        '
+        Me.PanelControl1.Controls.Add(Me.SLESeasonByCode)
+        Me.PanelControl1.Controls.Add(Me.BSearchByCode)
+        Me.PanelControl1.Controls.Add(Me.LabelControl2)
+        Me.PanelControl1.Controls.Add(Me.SLESeason)
+        Me.PanelControl1.Controls.Add(Me.BSearch)
+        Me.PanelControl1.Controls.Add(Me.LabelControl1)
+        Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelControl1.Location = New System.Drawing.Point(0, 0)
+        Me.PanelControl1.Name = "PanelControl1"
+        Me.PanelControl1.Size = New System.Drawing.Size(803, 38)
+        Me.PanelControl1.TabIndex = 6
+        '
+        'SLESeasonByCode
+        '
+        Me.SLESeasonByCode.Location = New System.Drawing.Point(430, 8)
+        Me.SLESeasonByCode.Name = "SLESeasonByCode"
+        Me.SLESeasonByCode.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SLESeasonByCode.Properties.Appearance.Options.UseFont = True
+        Me.SLESeasonByCode.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLESeasonByCode.Properties.View = Me.GridView4
+        Me.SLESeasonByCode.Size = New System.Drawing.Size(146, 20)
+        Me.SLESeasonByCode.TabIndex = 8909
+        '
+        'GridView4
+        '
+        Me.GridView4.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn4})
+        Me.GridView4.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView4.Name = "GridView4"
+        Me.GridView4.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView4.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn1
+        '
+        Me.GridColumn1.Caption = "Id Season"
+        Me.GridColumn1.FieldName = "id_season"
+        Me.GridColumn1.Name = "GridColumn1"
+        '
+        'GridColumn2
+        '
+        Me.GridColumn2.Caption = "Season"
+        Me.GridColumn2.FieldName = "season"
+        Me.GridColumn2.Name = "GridColumn2"
+        Me.GridColumn2.Visible = True
+        Me.GridColumn2.VisibleIndex = 1
+        '
+        'GridColumn4
+        '
+        Me.GridColumn4.Caption = "Range"
+        Me.GridColumn4.FieldName = "range"
+        Me.GridColumn4.Name = "GridColumn4"
+        Me.GridColumn4.Visible = True
+        Me.GridColumn4.VisibleIndex = 0
+        '
+        'BSearchByCode
+        '
+        Me.BSearchByCode.Location = New System.Drawing.Point(582, 6)
+        Me.BSearchByCode.Name = "BSearchByCode"
+        Me.BSearchByCode.Size = New System.Drawing.Size(83, 23)
+        Me.BSearchByCode.TabIndex = 8908
+        Me.BSearchByCode.Text = "Search"
+        '
+        'LabelControl2
+        '
+        Me.LabelControl2.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl2.Location = New System.Drawing.Point(346, 11)
+        Me.LabelControl2.Name = "LabelControl2"
+        Me.LabelControl2.Size = New System.Drawing.Size(78, 13)
+        Me.LabelControl2.TabIndex = 8907
+        Me.LabelControl2.Text = "Season By Code"
+        '
+        'SLESeason
+        '
+        Me.SLESeason.Location = New System.Drawing.Point(95, 8)
+        Me.SLESeason.Name = "SLESeason"
+        Me.SLESeason.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SLESeason.Properties.Appearance.Options.UseFont = True
+        Me.SLESeason.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLESeason.Properties.View = Me.SearchLookUpEdit1View
+        Me.SLESeason.Size = New System.Drawing.Size(146, 20)
+        Me.SLESeason.TabIndex = 8904
+        '
+        'SearchLookUpEdit1View
+        '
+        Me.SearchLookUpEdit1View.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn6, Me.GridColumn8, Me.GridColumn3})
+        Me.SearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.SearchLookUpEdit1View.Name = "SearchLookUpEdit1View"
+        Me.SearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.SearchLookUpEdit1View.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn6
+        '
+        Me.GridColumn6.Caption = "Id Season"
+        Me.GridColumn6.FieldName = "id_season"
+        Me.GridColumn6.Name = "GridColumn6"
+        '
+        'GridColumn8
+        '
+        Me.GridColumn8.Caption = "Season"
+        Me.GridColumn8.FieldName = "season"
+        Me.GridColumn8.Name = "GridColumn8"
+        Me.GridColumn8.Visible = True
+        Me.GridColumn8.VisibleIndex = 1
+        '
+        'GridColumn3
+        '
+        Me.GridColumn3.Caption = "Range"
+        Me.GridColumn3.FieldName = "range"
+        Me.GridColumn3.Name = "GridColumn3"
+        Me.GridColumn3.Visible = True
+        Me.GridColumn3.VisibleIndex = 0
+        '
+        'BSearch
+        '
+        Me.BSearch.Location = New System.Drawing.Point(247, 6)
+        Me.BSearch.Name = "BSearch"
+        Me.BSearch.Size = New System.Drawing.Size(83, 23)
+        Me.BSearch.TabIndex = 8903
+        Me.BSearch.Text = "Search"
+        '
+        'LabelControl1
+        '
+        Me.LabelControl1.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl1.Location = New System.Drawing.Point(12, 11)
+        Me.LabelControl1.Name = "LabelControl1"
+        Me.LabelControl1.Size = New System.Drawing.Size(77, 13)
+        Me.LabelControl1.TabIndex = 8897
+        Me.LabelControl1.Text = "Season Delivery"
+        '
         'XTCTabReceive
         '
         Me.XTCTabReceive.Dock = System.Windows.Forms.DockStyle.Fill
@@ -697,16 +860,6 @@ Partial Class FormProductionRec
         Me.XTCTabReceive.Size = New System.Drawing.Size(809, 494)
         Me.XTCTabReceive.TabIndex = 8
         Me.XTCTabReceive.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPListReceive, Me.XTPListPO})
-        '
-        'GridColumnArriveDate
-        '
-        Me.GridColumnArriveDate.Caption = "Arrive in QC"
-        Me.GridColumnArriveDate.DisplayFormat.FormatString = "dd MMMM yyyy"
-        Me.GridColumnArriveDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.GridColumnArriveDate.FieldName = "arrive_date"
-        Me.GridColumnArriveDate.Name = "GridColumnArriveDate"
-        Me.GridColumnArriveDate.Visible = True
-        Me.GridColumnArriveDate.VisibleIndex = 10
         '
         'FormProductionRec
         '
@@ -744,6 +897,13 @@ Partial Class FormProductionRec
         CType(Me.RepositoryItemDateEdit1.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemDateEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl1.ResumeLayout(False)
+        Me.PanelControl1.PerformLayout()
+        CType(Me.SLESeasonByCode.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SLESeason.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XTCTabReceive, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XTCTabReceive.ResumeLayout(False)
         Me.ResumeLayout(False)
@@ -816,4 +976,19 @@ Partial Class FormProductionRec
     Friend WithEvents GridColumnStyleCode As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnQty As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnArriveDate As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents PanelControl1 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents SLESeasonByCode As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView4 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn2 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BSearchByCode As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents SLESeason As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents SearchLookUpEdit1View As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn8 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn3 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BSearch As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
 End Class

@@ -59,12 +59,14 @@
         Dim query = "CALL view_purc_rec_sample_det('" & id_receive & "')"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCListPurchase.DataSource = data
+        GVListPurchase.BestFitColumns()
     End Sub
 
     Sub view_list_purchase()
         Dim query = "CALL view_purc_sample_det('" & id_order & "')"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCListPurchase.DataSource = data
+        GVListPurchase.BestFitColumns()
     End Sub
 
     Sub view_report_status(ByVal lookup As DevExpress.XtraEditors.LookUpEdit)
@@ -77,7 +79,7 @@
         lookup.Properties.ValueMember = "id_report_status"
         lookup.ItemIndex = 0
     End Sub
-    Private Sub GVListPurchase_CustomColumnDisplayText(ByVal sender As System.Object, ByVal e As DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs) Handles GVListPurchase.CustomColumnDisplayText
+    Private Sub GVListPurchase_CustomColumnDisplayText(ByVal sender As System.Object, ByVal e As DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs)
         If e.Column.FieldName = "no" Then
             e.DisplayText = (e.ListSourceRowIndex + 1).ToString()
         End If

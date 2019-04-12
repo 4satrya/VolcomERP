@@ -45,7 +45,7 @@
 	                SELECT udd.`no`,udd.id_design,udd.`point` 
 	                FROM tb_emp_uni_design_det udd 
 	                INNER JOIN tb_emp_uni_design ud ON ud.id_emp_uni_design = udd.id_emp_uni_design
-	                WHERE ud.id_emp_uni_period=" + id_periode + "
+	                WHERE ud.id_emp_uni_period=" + id_periode + " AND ud.id_report_status=6
 	                GROUP BY udd.id_design
 	                ORDER BY udd.`no` ASC
                 ) l ON l.id_design = p.id_design

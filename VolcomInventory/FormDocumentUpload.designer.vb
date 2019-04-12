@@ -31,12 +31,14 @@ Partial Class FormDocumentUpload
         Me.GVFileList = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumnNo = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdUpload = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnUploadBy = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnFile = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnDate = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnOpt = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RICE = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.GridColumnFilename = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.BScanAndUpload = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.PCNav, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PCNav.SuspendLayout()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -51,6 +53,7 @@ Partial Class FormDocumentUpload
         'PCNav
         '
         Me.PCNav.Controls.Add(Me.BDelete)
+        Me.PCNav.Controls.Add(Me.BScanAndUpload)
         Me.PCNav.Controls.Add(Me.Bupload)
         Me.PCNav.Dock = System.Windows.Forms.DockStyle.Top
         Me.PCNav.Location = New System.Drawing.Point(0, 0)
@@ -63,7 +66,7 @@ Partial Class FormDocumentUpload
         Me.BDelete.Dock = System.Windows.Forms.DockStyle.Right
         Me.BDelete.ImageIndex = 4
         Me.BDelete.ImageList = Me.LargeImageCollection
-        Me.BDelete.Location = New System.Drawing.Point(558, 2)
+        Me.BDelete.Location = New System.Drawing.Point(427, 2)
         Me.BDelete.Name = "BDelete"
         Me.BDelete.Size = New System.Drawing.Size(102, 36)
         Me.BDelete.TabIndex = 5
@@ -121,7 +124,7 @@ Partial Class FormDocumentUpload
         '
         'GVFileList
         '
-        Me.GVFileList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumnIdUpload, Me.GridColumnFile, Me.GridColumnDate, Me.GridColumnOpt, Me.GridColumnFilename})
+        Me.GVFileList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumnIdUpload, Me.GridColumnUploadBy, Me.GridColumnFile, Me.GridColumnDate, Me.GridColumnOpt, Me.GridColumnFilename})
         Me.GVFileList.GridControl = Me.GCFileList
         Me.GVFileList.Name = "GVFileList"
         Me.GVFileList.OptionsBehavior.ReadOnly = True
@@ -147,13 +150,21 @@ Partial Class FormDocumentUpload
         Me.GridColumnIdUpload.Name = "GridColumnIdUpload"
         Me.GridColumnIdUpload.Width = 181
         '
+        'GridColumnUploadBy
+        '
+        Me.GridColumnUploadBy.Caption = "Upload By"
+        Me.GridColumnUploadBy.FieldName = "employee_name"
+        Me.GridColumnUploadBy.Name = "GridColumnUploadBy"
+        Me.GridColumnUploadBy.Visible = True
+        Me.GridColumnUploadBy.VisibleIndex = 1
+        '
         'GridColumnFile
         '
         Me.GridColumnFile.Caption = "File Description"
         Me.GridColumnFile.FieldName = "doc_desc"
         Me.GridColumnFile.Name = "GridColumnFile"
         Me.GridColumnFile.Visible = True
-        Me.GridColumnFile.VisibleIndex = 1
+        Me.GridColumnFile.VisibleIndex = 2
         Me.GridColumnFile.Width = 365
         '
         'GridColumnDate
@@ -164,7 +175,7 @@ Partial Class FormDocumentUpload
         Me.GridColumnDate.FieldName = "datetime"
         Me.GridColumnDate.Name = "GridColumnDate"
         Me.GridColumnDate.Visible = True
-        Me.GridColumnDate.VisibleIndex = 2
+        Me.GridColumnDate.VisibleIndex = 3
         Me.GridColumnDate.Width = 115
         '
         'GridColumnOpt
@@ -178,7 +189,7 @@ Partial Class FormDocumentUpload
         Me.GridColumnOpt.FieldName = "is_download"
         Me.GridColumnOpt.Name = "GridColumnOpt"
         Me.GridColumnOpt.Visible = True
-        Me.GridColumnOpt.VisibleIndex = 3
+        Me.GridColumnOpt.VisibleIndex = 4
         Me.GridColumnOpt.Width = 67
         '
         'RICE
@@ -201,6 +212,17 @@ Partial Class FormDocumentUpload
         '
         Me.GridView2.GridControl = Me.GCFileList
         Me.GridView2.Name = "GridView2"
+        '
+        'BScanAndUpload
+        '
+        Me.BScanAndUpload.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BScanAndUpload.ImageIndex = 3
+        Me.BScanAndUpload.ImageList = Me.LargeImageCollection
+        Me.BScanAndUpload.Location = New System.Drawing.Point(529, 2)
+        Me.BScanAndUpload.Name = "BScanAndUpload"
+        Me.BScanAndUpload.Size = New System.Drawing.Size(131, 36)
+        Me.BScanAndUpload.TabIndex = 6
+        Me.BScanAndUpload.Text = "Scan and Upload"
         '
         'FormDocumentUpload
         '
@@ -245,4 +267,6 @@ Partial Class FormDocumentUpload
     Friend WithEvents Bupload As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents GridColumnDate As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnFilename As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnUploadBy As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BScanAndUpload As DevExpress.XtraEditors.SimpleButton
 End Class

@@ -4,16 +4,9 @@
     End Sub
 
     Sub view_comp_group()
-        Dim query As String = "SELECT id_comp_group,comp_group FROM tb_m_comp_group"
+        Dim query As String = "SELECT id_comp_group,comp_group,description FROM tb_m_comp_group"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCGroupComp.DataSource = data
-        If data.Rows.Count > 0 Then
-            BEditComp.Visible = True
-            BDelComp.Visible = True
-        Else
-            BEditComp.Visible = False
-            BDelComp.Visible = False
-        End If
     End Sub
 
     Private Sub BAddComp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BAddComp.Click
@@ -21,14 +14,14 @@
         FormMasterCompGroupDet.ShowDialog()
     End Sub
 
-    Private Sub BEditComp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BEditComp.Click
+    Private Sub BEditComp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         FormMasterCompGroupDet.id_comp_group = GVGroupComp.GetFocusedRowCellValue("id_comp_group").ToString
         FormMasterCompGroupDet.TECompanyGroup.Text = GVGroupComp.GetFocusedRowCellValue("comp_group").ToString
         FormMasterCompGroupDet.ShowDialog()
     End Sub
 
 
-    Private Sub BDelComp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BDelComp.Click
+    Private Sub BDelComp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim confirm As DialogResult
         Dim query As String
 

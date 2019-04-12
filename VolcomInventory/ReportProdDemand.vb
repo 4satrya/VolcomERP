@@ -46,18 +46,18 @@ Public Class ReportProdDemand
                 e.TotalValue = summary_gr
             End If
         ElseIf frm_origin = "FormProdDemandSingle" Then
-            Dim gv As DevExpress.XtraGrid.Views.BandedGrid.BandedGridView = CType(FormProdDemandSingle.GVDesign, DevExpress.XtraGrid.Views.BandedGrid.BandedGridView)
-            If (Not e.IsGroupSummary) Then Return
-            Dim item As DevExpress.XtraGrid.GridGroupSummaryItem = New DevExpress.XtraGrid.GridGroupSummaryItem()
-            item = e.Item
-            If e.SummaryProcess = DevExpress.Data.CustomSummaryProcess.Finalize AndAlso item.FieldName.ToString = "MARK UP_add_report_column" Then
-                Dim summary_gr As Double = 0.0
-                Try
-                    summary_gr = gv.GetGroupSummaryValue(e.GroupRowHandle, CType(gv.GroupSummary("TOTAL AMOUNT NON ADDITIONAL_add_report_column"), DevExpress.XtraGrid.GridGroupSummaryItem)) / gv.GetGroupSummaryValue(e.GroupRowHandle, CType(gv.GroupSummary("TOTAL COST NON ADDITIONAL_add_report_column"), DevExpress.XtraGrid.GridGroupSummaryItem))
-                Catch ex As Exception
-                End Try
-                e.TotalValue = summary_gr
-            End If
+            'Dim gv As DevExpress.XtraGrid.Views.BandedGrid.BandedGridView = CType(FormProdDemandSingle.GVDesign, DevExpress.XtraGrid.Views.my)
+            'If (Not e.IsGroupSummary) Then Return
+            'Dim item As DevExpress.XtraGrid.GridGroupSummaryItem = New DevExpress.XtraGrid.GridGroupSummaryItem()
+            'item = e.Item
+            'If e.SummaryProcess = DevExpress.Data.CustomSummaryProcess.Finalize AndAlso item.FieldName.ToString = "MARK UP_add_report_column" Then
+            '    Dim summary_gr As Double = 0.0
+            '    Try
+            '        summary_gr = gv.GetGroupSummaryValue(e.GroupRowHandle, CType(gv.GroupSummary("TOTAL AMOUNT NON ADDITIONAL_add_report_column"), DevExpress.XtraGrid.GridGroupSummaryItem)) / gv.GetGroupSummaryValue(e.GroupRowHandle, CType(gv.GroupSummary("TOTAL COST NON ADDITIONAL_add_report_column"), DevExpress.XtraGrid.GridGroupSummaryItem))
+            '    Catch ex As Exception
+            '    End Try
+            '    e.TotalValue = summary_gr
+            'End If
         End If
 
 

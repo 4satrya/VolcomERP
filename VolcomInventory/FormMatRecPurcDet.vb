@@ -220,7 +220,6 @@
 
     Sub allow_status()
         If LEReportStatus.EditValue.ToString = "3" Or LEReportStatus.EditValue.ToString = "4" Or LEReportStatus.EditValue.ToString = "6" Or LEReportStatus.EditValue.ToString = "7" Then
-            BPrint.Enabled = True
             BSave.Enabled = False
             '
             PCRoll.Visible = False
@@ -257,7 +256,6 @@
                 PCRoll.Visible = True
                 GVRoll.OptionsBehavior.ReadOnly = False
             End If
-            BPrint.Enabled = False
 
             SLEDrawer.Enabled = True
             SLERack.Enabled = True
@@ -278,6 +276,11 @@
         ReportMatRecPurc.id_receive = id_receive
 
         Dim Report As New ReportMatRecPurc()
+        If LEReportStatus.EditValue.ToString = "3" Or LEReportStatus.EditValue.ToString = "4" Or LEReportStatus.EditValue.ToString = "6" Or LEReportStatus.EditValue.ToString = "7" Then
+            ReportMatRecPurc.is_pre = "2"
+        Else
+            ReportMatRecPurc.is_pre = "1"
+        End If
         ' Show the report's preview. 
         Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
         Tool.ShowPreview()

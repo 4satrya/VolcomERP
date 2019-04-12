@@ -22,6 +22,17 @@ Partial Class FormEmpPayrollDeduction
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormEmpPayrollDeduction))
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.DropDownButton1 = New DevExpress.XtraEditors.DropDownButton()
+        Me.PopupMenu1 = New DevExpress.XtraBars.PopupMenu(Me.components)
+        Me.BarButtonItem3 = New DevExpress.XtraBars.BarButtonItem()
+        Me.BarButtonItem1 = New DevExpress.XtraBars.BarButtonItem()
+        Me.BarButtonItem2 = New DevExpress.XtraBars.BarButtonItem()
+        Me.BarManager1 = New DevExpress.XtraBars.BarManager(Me.components)
+        Me.BarDockControl1 = New DevExpress.XtraBars.BarDockControl()
+        Me.BarDockControl2 = New DevExpress.XtraBars.BarDockControl()
+        Me.BarDockControl3 = New DevExpress.XtraBars.BarDockControl()
+        Me.BarDockControl4 = New DevExpress.XtraBars.BarDockControl()
+        Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
         Me.BtnDropQuickMenu = New DevExpress.XtraEditors.DropDownButton()
         Me.PopupMenu = New DevExpress.XtraBars.PopupMenu(Me.components)
         Me.BBJamsostek = New DevExpress.XtraBars.BarButtonItem()
@@ -31,7 +42,6 @@ Partial Class FormEmpPayrollDeduction
         Me.barDockControlBottom = New DevExpress.XtraBars.BarDockControl()
         Me.barDockControlLeft = New DevExpress.XtraBars.BarDockControl()
         Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl()
-        Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
         Me.BDel = New DevExpress.XtraEditors.SimpleButton()
         Me.BEdit = New DevExpress.XtraEditors.SimpleButton()
         Me.BAdd = New DevExpress.XtraEditors.SimpleButton()
@@ -47,25 +57,15 @@ Partial Class FormEmpPayrollDeduction
         Me.GridColumnDeductType = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnValue = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnNote = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.PopupMenu1 = New DevExpress.XtraBars.PopupMenu(Me.components)
-        Me.BarButtonItem1 = New DevExpress.XtraBars.BarButtonItem()
-        Me.BarButtonItem2 = New DevExpress.XtraBars.BarButtonItem()
-        Me.BarManager1 = New DevExpress.XtraBars.BarManager(Me.components)
-        Me.BarDockControl1 = New DevExpress.XtraBars.BarDockControl()
-        Me.BarDockControl2 = New DevExpress.XtraBars.BarDockControl()
-        Me.BarDockControl3 = New DevExpress.XtraBars.BarDockControl()
-        Me.BarDockControl4 = New DevExpress.XtraBars.BarDockControl()
-        Me.DropDownButton1 = New DevExpress.XtraEditors.DropDownButton()
-        Me.BarButtonItem3 = New DevExpress.XtraBars.BarButtonItem()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
-        CType(Me.PopupMenu, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.BarManager, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GCDeduction, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GVDeduction, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PopupMenu1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PopupMenu, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.BarManager, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GCDeduction, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVDeduction, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl1
@@ -80,6 +80,105 @@ Partial Class FormEmpPayrollDeduction
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(1253, 38)
         Me.PanelControl1.TabIndex = 0
+        '
+        'DropDownButton1
+        '
+        Me.DropDownButton1.Dock = System.Windows.Forms.DockStyle.Left
+        Me.DropDownButton1.DropDownControl = Me.PopupMenu1
+        Me.DropDownButton1.ImageIndex = 19
+        Me.DropDownButton1.ImageList = Me.LargeImageCollection
+        Me.DropDownButton1.Location = New System.Drawing.Point(146, 2)
+        Me.DropDownButton1.Name = "DropDownButton1"
+        Me.DropDownButton1.Size = New System.Drawing.Size(114, 34)
+        Me.DropDownButton1.TabIndex = 110
+        Me.DropDownButton1.Text = "Import"
+        '
+        'PopupMenu1
+        '
+        Me.PopupMenu1.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.BarButtonItem3), New DevExpress.XtraBars.LinkPersistInfo(Me.BarButtonItem1), New DevExpress.XtraBars.LinkPersistInfo(Me.BarButtonItem2)})
+        Me.PopupMenu1.Manager = Me.BarManager1
+        Me.PopupMenu1.Name = "PopupMenu1"
+        '
+        'BarButtonItem3
+        '
+        Me.BarButtonItem3.Caption = "Import Cicilan Koperasi"
+        Me.BarButtonItem3.Id = 14
+        Me.BarButtonItem3.Name = "BarButtonItem3"
+        '
+        'BarButtonItem1
+        '
+        Me.BarButtonItem1.Caption = "Jamsostek"
+        Me.BarButtonItem1.Id = 12
+        Me.BarButtonItem1.Name = "BarButtonItem1"
+        '
+        'BarButtonItem2
+        '
+        Me.BarButtonItem2.Caption = "Koperasi"
+        Me.BarButtonItem2.Id = 13
+        Me.BarButtonItem2.Name = "BarButtonItem2"
+        '
+        'BarManager1
+        '
+        Me.BarManager1.DockControls.Add(Me.BarDockControl1)
+        Me.BarManager1.DockControls.Add(Me.BarDockControl2)
+        Me.BarManager1.DockControls.Add(Me.BarDockControl3)
+        Me.BarManager1.DockControls.Add(Me.BarDockControl4)
+        Me.BarManager1.Form = Me
+        Me.BarManager1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.BarButtonItem1, Me.BarButtonItem2, Me.BarButtonItem3})
+        Me.BarManager1.MaxItemId = 15
+        '
+        'BarDockControl1
+        '
+        Me.BarDockControl1.CausesValidation = False
+        Me.BarDockControl1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.BarDockControl1.Location = New System.Drawing.Point(0, 0)
+        Me.BarDockControl1.Size = New System.Drawing.Size(1253, 0)
+        '
+        'BarDockControl2
+        '
+        Me.BarDockControl2.CausesValidation = False
+        Me.BarDockControl2.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.BarDockControl2.Location = New System.Drawing.Point(0, 541)
+        Me.BarDockControl2.Size = New System.Drawing.Size(1253, 0)
+        '
+        'BarDockControl3
+        '
+        Me.BarDockControl3.CausesValidation = False
+        Me.BarDockControl3.Dock = System.Windows.Forms.DockStyle.Left
+        Me.BarDockControl3.Location = New System.Drawing.Point(0, 0)
+        Me.BarDockControl3.Size = New System.Drawing.Size(0, 541)
+        '
+        'BarDockControl4
+        '
+        Me.BarDockControl4.CausesValidation = False
+        Me.BarDockControl4.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BarDockControl4.Location = New System.Drawing.Point(1253, 0)
+        Me.BarDockControl4.Size = New System.Drawing.Size(0, 541)
+        '
+        'LargeImageCollection
+        '
+        Me.LargeImageCollection.ImageSize = New System.Drawing.Size(24, 24)
+        Me.LargeImageCollection.ImageStream = CType(resources.GetObject("LargeImageCollection.ImageStream"), DevExpress.Utils.ImageCollectionStreamer)
+        Me.LargeImageCollection.Images.SetKeyName(0, "20_24x24.png")
+        Me.LargeImageCollection.Images.SetKeyName(1, "8_24x24.png")
+        Me.LargeImageCollection.Images.SetKeyName(2, "23_24x24.png")
+        Me.LargeImageCollection.Images.SetKeyName(3, "arrow_refresh.png")
+        Me.LargeImageCollection.Images.SetKeyName(4, "check_mark.png")
+        Me.LargeImageCollection.Images.SetKeyName(5, "gnome_application_exit (1).png")
+        Me.LargeImageCollection.Images.SetKeyName(6, "printer_3.png")
+        Me.LargeImageCollection.Images.SetKeyName(7, "save.png")
+        Me.LargeImageCollection.Images.SetKeyName(8, "31_24x24.png")
+        Me.LargeImageCollection.Images.SetKeyName(9, "18_24x24.png")
+        Me.LargeImageCollection.Images.SetKeyName(10, "1415351112474759854-32.png")
+        Me.LargeImageCollection.Images.SetKeyName(11, "icon_merchandise_clothes32.png")
+        Me.LargeImageCollection.Images.SetKeyName(12, "t_shirtgreen.png")
+        Me.LargeImageCollection.Images.SetKeyName(13, "lock red.png")
+        Me.LargeImageCollection.Images.SetKeyName(14, "ordering32.png")
+        Me.LargeImageCollection.Images.SetKeyName(15, "kghostview.png")
+        Me.LargeImageCollection.Images.SetKeyName(16, "MetroUI-Folder-OS-Configure-icon.png")
+        Me.LargeImageCollection.Images.SetKeyName(17, "Setting(32).png")
+        Me.LargeImageCollection.Images.SetKeyName(18, "estimate_icon32.png")
+        Me.LargeImageCollection.Images.SetKeyName(19, "copy_icon.png")
         '
         'BtnDropQuickMenu
         '
@@ -148,31 +247,6 @@ Partial Class FormEmpPayrollDeduction
         Me.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right
         Me.barDockControlRight.Location = New System.Drawing.Point(1253, 0)
         Me.barDockControlRight.Size = New System.Drawing.Size(0, 541)
-        '
-        'LargeImageCollection
-        '
-        Me.LargeImageCollection.ImageSize = New System.Drawing.Size(24, 24)
-        Me.LargeImageCollection.ImageStream = CType(resources.GetObject("LargeImageCollection.ImageStream"), DevExpress.Utils.ImageCollectionStreamer)
-        Me.LargeImageCollection.Images.SetKeyName(0, "20_24x24.png")
-        Me.LargeImageCollection.Images.SetKeyName(1, "8_24x24.png")
-        Me.LargeImageCollection.Images.SetKeyName(2, "23_24x24.png")
-        Me.LargeImageCollection.Images.SetKeyName(3, "arrow_refresh.png")
-        Me.LargeImageCollection.Images.SetKeyName(4, "check_mark.png")
-        Me.LargeImageCollection.Images.SetKeyName(5, "gnome_application_exit (1).png")
-        Me.LargeImageCollection.Images.SetKeyName(6, "printer_3.png")
-        Me.LargeImageCollection.Images.SetKeyName(7, "save.png")
-        Me.LargeImageCollection.Images.SetKeyName(8, "31_24x24.png")
-        Me.LargeImageCollection.Images.SetKeyName(9, "18_24x24.png")
-        Me.LargeImageCollection.Images.SetKeyName(10, "1415351112474759854-32.png")
-        Me.LargeImageCollection.Images.SetKeyName(11, "icon_merchandise_clothes32.png")
-        Me.LargeImageCollection.Images.SetKeyName(12, "t_shirtgreen.png")
-        Me.LargeImageCollection.Images.SetKeyName(13, "lock red.png")
-        Me.LargeImageCollection.Images.SetKeyName(14, "ordering32.png")
-        Me.LargeImageCollection.Images.SetKeyName(15, "kghostview.png")
-        Me.LargeImageCollection.Images.SetKeyName(16, "MetroUI-Folder-OS-Configure-icon.png")
-        Me.LargeImageCollection.Images.SetKeyName(17, "Setting(32).png")
-        Me.LargeImageCollection.Images.SetKeyName(18, "estimate_icon32.png")
-        Me.LargeImageCollection.Images.SetKeyName(19, "copy_icon.png")
         '
         'BDel
         '
@@ -313,80 +387,6 @@ Partial Class FormEmpPayrollDeduction
         Me.GridColumnNote.VisibleIndex = 7
         Me.GridColumnNote.Width = 101
         '
-        'PopupMenu1
-        '
-        Me.PopupMenu1.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.BarButtonItem3), New DevExpress.XtraBars.LinkPersistInfo(Me.BarButtonItem1), New DevExpress.XtraBars.LinkPersistInfo(Me.BarButtonItem2)})
-        Me.PopupMenu1.Manager = Me.BarManager1
-        Me.PopupMenu1.Name = "PopupMenu1"
-        '
-        'BarButtonItem1
-        '
-        Me.BarButtonItem1.Caption = "Jamsostek"
-        Me.BarButtonItem1.Id = 12
-        Me.BarButtonItem1.Name = "BarButtonItem1"
-        '
-        'BarButtonItem2
-        '
-        Me.BarButtonItem2.Caption = "Koperasi"
-        Me.BarButtonItem2.Id = 13
-        Me.BarButtonItem2.Name = "BarButtonItem2"
-        '
-        'BarManager1
-        '
-        Me.BarManager1.DockControls.Add(Me.BarDockControl1)
-        Me.BarManager1.DockControls.Add(Me.BarDockControl2)
-        Me.BarManager1.DockControls.Add(Me.BarDockControl3)
-        Me.BarManager1.DockControls.Add(Me.BarDockControl4)
-        Me.BarManager1.Form = Me
-        Me.BarManager1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.BarButtonItem1, Me.BarButtonItem2, Me.BarButtonItem3})
-        Me.BarManager1.MaxItemId = 15
-        '
-        'BarDockControl1
-        '
-        Me.BarDockControl1.CausesValidation = False
-        Me.BarDockControl1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.BarDockControl1.Location = New System.Drawing.Point(0, 0)
-        Me.BarDockControl1.Size = New System.Drawing.Size(1253, 0)
-        '
-        'BarDockControl2
-        '
-        Me.BarDockControl2.CausesValidation = False
-        Me.BarDockControl2.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.BarDockControl2.Location = New System.Drawing.Point(0, 541)
-        Me.BarDockControl2.Size = New System.Drawing.Size(1253, 0)
-        '
-        'BarDockControl3
-        '
-        Me.BarDockControl3.CausesValidation = False
-        Me.BarDockControl3.Dock = System.Windows.Forms.DockStyle.Left
-        Me.BarDockControl3.Location = New System.Drawing.Point(0, 0)
-        Me.BarDockControl3.Size = New System.Drawing.Size(0, 541)
-        '
-        'BarDockControl4
-        '
-        Me.BarDockControl4.CausesValidation = False
-        Me.BarDockControl4.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BarDockControl4.Location = New System.Drawing.Point(1253, 0)
-        Me.BarDockControl4.Size = New System.Drawing.Size(0, 541)
-        '
-        'DropDownButton1
-        '
-        Me.DropDownButton1.Dock = System.Windows.Forms.DockStyle.Left
-        Me.DropDownButton1.DropDownControl = Me.PopupMenu1
-        Me.DropDownButton1.ImageIndex = 19
-        Me.DropDownButton1.ImageList = Me.LargeImageCollection
-        Me.DropDownButton1.Location = New System.Drawing.Point(146, 2)
-        Me.DropDownButton1.Name = "DropDownButton1"
-        Me.DropDownButton1.Size = New System.Drawing.Size(114, 34)
-        Me.DropDownButton1.TabIndex = 110
-        Me.DropDownButton1.Text = "Import"
-        '
-        'BarButtonItem3
-        '
-        Me.BarButtonItem3.Caption = "Import Cicilan Koperasi"
-        Me.BarButtonItem3.Id = 14
-        Me.BarButtonItem3.Name = "BarButtonItem3"
-        '
         'FormEmpPayrollDeduction
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -394,14 +394,14 @@ Partial Class FormEmpPayrollDeduction
         Me.ClientSize = New System.Drawing.Size(1253, 541)
         Me.Controls.Add(Me.GCDeduction)
         Me.Controls.Add(Me.PanelControl1)
+        Me.Controls.Add(Me.BarDockControl3)
+        Me.Controls.Add(Me.BarDockControl4)
+        Me.Controls.Add(Me.BarDockControl2)
+        Me.Controls.Add(Me.BarDockControl1)
         Me.Controls.Add(Me.barDockControlLeft)
         Me.Controls.Add(Me.barDockControlRight)
         Me.Controls.Add(Me.barDockControlBottom)
         Me.Controls.Add(Me.barDockControlTop)
-        Me.Controls.Add(Me.BarDockControl1)
-        Me.Controls.Add(Me.BarDockControl2)
-        Me.Controls.Add(Me.BarDockControl3)
-        Me.Controls.Add(Me.BarDockControl4)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MinimizeBox = False
         Me.Name = "FormEmpPayrollDeduction"
@@ -410,13 +410,13 @@ Partial Class FormEmpPayrollDeduction
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
-        CType(Me.PopupMenu, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.BarManager, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GCDeduction, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GVDeduction, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PopupMenu1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PopupMenu, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BarManager, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GCDeduction, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVDeduction, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

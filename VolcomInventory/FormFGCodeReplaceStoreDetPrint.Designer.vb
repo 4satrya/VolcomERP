@@ -30,11 +30,15 @@ Partial Class FormFGCodeReplaceStoreDetPrint
         Me.LabelControl13 = New DevExpress.XtraEditors.LabelControl()
         Me.LEPrinter = New DevExpress.XtraEditors.LookUpEdit()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
+        Me.BSetHorizontalError = New DevExpress.XtraEditors.SimpleButton()
+        Me.TEHorizontalError = New DevExpress.XtraEditors.TextEdit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEHeightError.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LEPrinter.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TEHorizontalError.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl1
@@ -42,7 +46,7 @@ Partial Class FormFGCodeReplaceStoreDetPrint
         Me.PanelControl1.Controls.Add(Me.BClose)
         Me.PanelControl1.Controls.Add(Me.BPrint)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl1.Location = New System.Drawing.Point(0, 74)
+        Me.PanelControl1.Location = New System.Drawing.Point(0, 103)
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(387, 39)
         Me.PanelControl1.TabIndex = 0
@@ -90,7 +94,7 @@ Partial Class FormFGCodeReplaceStoreDetPrint
         '
         'BSetHeightError
         '
-        Me.BSetHeightError.Location = New System.Drawing.Point(303, 36)
+        Me.BSetHeightError.Location = New System.Drawing.Point(307, 40)
         Me.BSetHeightError.Name = "BSetHeightError"
         Me.BSetHeightError.Size = New System.Drawing.Size(63, 23)
         Me.BSetHeightError.TabIndex = 173
@@ -99,7 +103,7 @@ Partial Class FormFGCodeReplaceStoreDetPrint
         'TEHeightError
         '
         Me.TEHeightError.EditValue = ""
-        Me.TEHeightError.Location = New System.Drawing.Point(97, 38)
+        Me.TEHeightError.Location = New System.Drawing.Point(101, 42)
         Me.TEHeightError.Name = "TEHeightError"
         Me.TEHeightError.Properties.EditValueChangedDelay = 1
         Me.TEHeightError.Size = New System.Drawing.Size(200, 20)
@@ -109,7 +113,7 @@ Partial Class FormFGCodeReplaceStoreDetPrint
         'LabelControl13
         '
         Me.LabelControl13.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!)
-        Me.LabelControl13.Location = New System.Drawing.Point(12, 14)
+        Me.LabelControl13.Location = New System.Drawing.Point(12, 18)
         Me.LabelControl13.Name = "LabelControl13"
         Me.LabelControl13.Size = New System.Drawing.Size(36, 14)
         Me.LabelControl13.TabIndex = 171
@@ -117,7 +121,7 @@ Partial Class FormFGCodeReplaceStoreDetPrint
         '
         'LEPrinter
         '
-        Me.LEPrinter.Location = New System.Drawing.Point(97, 12)
+        Me.LEPrinter.Location = New System.Drawing.Point(101, 16)
         Me.LEPrinter.Name = "LEPrinter"
         Me.LEPrinter.Properties.Appearance.Options.UseTextOptions = True
         Me.LEPrinter.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near
@@ -137,11 +141,41 @@ Partial Class FormFGCodeReplaceStoreDetPrint
         Me.LabelControl1.TabIndex = 174
         Me.LabelControl1.Text = "Height Error"
         '
+        'LabelControl2
+        '
+        Me.LabelControl2.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!)
+        Me.LabelControl2.Location = New System.Drawing.Point(12, 70)
+        Me.LabelControl2.Name = "LabelControl2"
+        Me.LabelControl2.Size = New System.Drawing.Size(83, 14)
+        Me.LabelControl2.TabIndex = 177
+        Me.LabelControl2.Text = "Horizontal Error"
+        '
+        'BSetHorizontalError
+        '
+        Me.BSetHorizontalError.Location = New System.Drawing.Point(307, 66)
+        Me.BSetHorizontalError.Name = "BSetHorizontalError"
+        Me.BSetHorizontalError.Size = New System.Drawing.Size(63, 23)
+        Me.BSetHorizontalError.TabIndex = 176
+        Me.BSetHorizontalError.Text = "Set"
+        '
+        'TEHorizontalError
+        '
+        Me.TEHorizontalError.EditValue = ""
+        Me.TEHorizontalError.Location = New System.Drawing.Point(101, 68)
+        Me.TEHorizontalError.Name = "TEHorizontalError"
+        Me.TEHorizontalError.Properties.EditValueChangedDelay = 1
+        Me.TEHorizontalError.Size = New System.Drawing.Size(200, 20)
+        Me.TEHorizontalError.TabIndex = 175
+        Me.TEHorizontalError.TabStop = False
+        '
         'FormFGCodeReplaceStoreDetPrint
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(387, 113)
+        Me.ClientSize = New System.Drawing.Size(387, 142)
+        Me.Controls.Add(Me.LabelControl2)
+        Me.Controls.Add(Me.BSetHorizontalError)
+        Me.Controls.Add(Me.TEHorizontalError)
         Me.Controls.Add(Me.LabelControl1)
         Me.Controls.Add(Me.BSetHeightError)
         Me.Controls.Add(Me.TEHeightError)
@@ -159,6 +193,7 @@ Partial Class FormFGCodeReplaceStoreDetPrint
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEHeightError.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LEPrinter.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TEHorizontalError.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -173,4 +208,7 @@ Partial Class FormFGCodeReplaceStoreDetPrint
     Friend WithEvents LabelControl13 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LEPrinter As DevExpress.XtraEditors.LookUpEdit
     Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents BSetHorizontalError As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents TEHorizontalError As DevExpress.XtraEditors.TextEdit
 End Class

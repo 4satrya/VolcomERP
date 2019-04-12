@@ -51,8 +51,9 @@ Partial Class FormSalesReportTrackingParam
         Me.GroupControl2 = New DevExpress.XtraEditors.GroupControl()
         Me.GroupControl3 = New DevExpress.XtraEditors.GroupControl()
         Me.GroupControl4 = New DevExpress.XtraEditors.GroupControl()
-        Me.LabelControl9 = New DevExpress.XtraEditors.LabelControl()
         Me.LEPRiceType = New DevExpress.XtraEditors.LookUpEdit()
+        Me.LabelControl9 = New DevExpress.XtraEditors.LabelControl()
+        Me.BReset = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -85,7 +86,7 @@ Partial Class FormSalesReportTrackingParam
         Me.PanelControl1.Controls.Add(Me.BtnCancel)
         Me.PanelControl1.Controls.Add(Me.BtnSave)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl1.Location = New System.Drawing.Point(0, 396)
+        Me.PanelControl1.Location = New System.Drawing.Point(0, 352)
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(458, 37)
         Me.PanelControl1.TabIndex = 0
@@ -218,7 +219,7 @@ Partial Class FormSalesReportTrackingParam
         Me.TxtNameCompFrom.Properties.AppearanceReadOnly.Options.UseBackColor = True
         Me.TxtNameCompFrom.Properties.EditValueChangedDelay = 1
         Me.TxtNameCompFrom.Properties.ReadOnly = True
-        Me.TxtNameCompFrom.Size = New System.Drawing.Size(210, 20)
+        Me.TxtNameCompFrom.Size = New System.Drawing.Size(168, 20)
         Me.TxtNameCompFrom.TabIndex = 8934
         Me.TxtNameCompFrom.TabStop = False
         '
@@ -227,7 +228,7 @@ Partial Class FormSalesReportTrackingParam
         Me.BtnBrowseContactFrom.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnBrowseContactFrom.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnBrowseContactFrom.Appearance.Options.UseFont = True
-        Me.BtnBrowseContactFrom.Location = New System.Drawing.Point(405, 13)
+        Me.BtnBrowseContactFrom.Location = New System.Drawing.Point(363, 13)
         Me.BtnBrowseContactFrom.Name = "BtnBrowseContactFrom"
         Me.BtnBrowseContactFrom.Size = New System.Drawing.Size(23, 20)
         Me.BtnBrowseContactFrom.TabIndex = 8931
@@ -412,6 +413,7 @@ Partial Class FormSalesReportTrackingParam
         'GroupControl2
         '
         Me.GroupControl2.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupControl2.Controls.Add(Me.BReset)
         Me.GroupControl2.Controls.Add(Me.LabelStore)
         Me.GroupControl2.Controls.Add(Me.BtnBrowseContactFrom)
         Me.GroupControl2.Controls.Add(Me.TxtNameCompFrom)
@@ -452,21 +454,12 @@ Partial Class FormSalesReportTrackingParam
         Me.GroupControl4.CaptionLocation = DevExpress.Utils.Locations.Left
         Me.GroupControl4.Controls.Add(Me.LEPRiceType)
         Me.GroupControl4.Controls.Add(Me.LabelControl9)
-        Me.GroupControl4.Dock = System.Windows.Forms.DockStyle.Top
+        Me.GroupControl4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupControl4.Location = New System.Drawing.Point(0, 302)
         Me.GroupControl4.Name = "GroupControl4"
-        Me.GroupControl4.Size = New System.Drawing.Size(458, 49)
+        Me.GroupControl4.Size = New System.Drawing.Size(458, 50)
         Me.GroupControl4.TabIndex = 8952
         Me.GroupControl4.Text = "Value"
-        '
-        'LabelControl9
-        '
-        Me.LabelControl9.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl9.Location = New System.Drawing.Point(27, 15)
-        Me.LabelControl9.Name = "LabelControl9"
-        Me.LabelControl9.Size = New System.Drawing.Size(50, 13)
-        Me.LabelControl9.TabIndex = 8929
-        Me.LabelControl9.Text = "Price Type"
         '
         'LEPRiceType
         '
@@ -483,11 +476,32 @@ Partial Class FormSalesReportTrackingParam
         Me.LEPRiceType.Size = New System.Drawing.Size(324, 20)
         Me.LEPRiceType.TabIndex = 8948
         '
+        'LabelControl9
+        '
+        Me.LabelControl9.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl9.Location = New System.Drawing.Point(27, 15)
+        Me.LabelControl9.Name = "LabelControl9"
+        Me.LabelControl9.Size = New System.Drawing.Size(50, 13)
+        Me.LabelControl9.TabIndex = 8929
+        Me.LabelControl9.Text = "Price Type"
+        '
+        'BReset
+        '
+        Me.BReset.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BReset.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BReset.Appearance.Options.UseFont = True
+        Me.BReset.Location = New System.Drawing.Point(392, 13)
+        Me.BReset.Name = "BReset"
+        Me.BReset.Size = New System.Drawing.Size(36, 20)
+        Me.BReset.TabIndex = 8941
+        Me.BReset.TabStop = False
+        Me.BReset.Text = "reset"
+        '
         'FormSalesReportTrackingParam
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(458, 433)
+        Me.ClientSize = New System.Drawing.Size(458, 389)
         Me.Controls.Add(Me.GroupControl4)
         Me.Controls.Add(Me.GroupControl3)
         Me.Controls.Add(Me.GroupControl2)
@@ -564,4 +578,5 @@ Partial Class FormSalesReportTrackingParam
     Friend WithEvents GroupControl4 As DevExpress.XtraEditors.GroupControl
     Friend WithEvents LEPRiceType As DevExpress.XtraEditors.LookUpEdit
     Friend WithEvents LabelControl9 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents BReset As DevExpress.XtraEditors.SimpleButton
 End Class

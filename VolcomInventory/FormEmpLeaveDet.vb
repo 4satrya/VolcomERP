@@ -357,17 +357,25 @@
             stopCustom("Sisa cuti tidak mencukupi.")
         ElseIf LELeaveType.EditValue.ToString = "2" And LEFormDC.EditValue.ToString = "1" Then
             stopCustom("Sakit harus menggunakan form atau DC.")
-        ElseIf TEAdvLeaveTot.EditValue > Integer.Parse(get_opt_emp_field("notif_max_adv_hour")) Then
+        ElseIf TEAdvLeaveTot.EditValue > Integer.Parse(get_opt_emp_field("notif_max_adv_hour")) And LELeaveType.EditValue.ToString = "4" Then
             stopCustom("Advance Leave sudah melebihi batas yang ditentukan.")
         Else
-            If LELeaveType.EditValue.ToString = "2" And LEFormDC.EditValue.ToString = "2" Then
+            If LELeaveType.EditValue.ToString = "2" And LEFormDC.EditValue.ToString = "2" And GVLeaveDet.RowCount > 1 Then
+                'lebih dari 1 hari sakit pakai form
+                stopCustom("Hanya dapat mengajukan sakit dengan form satu hari dalam satu bulan." & vbNewLine & "Ajukan surat keterangan sakit dari dokter (DC) untuk pengajuan sakit.")
+                problem = True
+            ElseIf LELeaveType.EditValue.ToString = "2" And LEFormDC.EditValue.ToString = "2" Then
                 'check if sudah form sekali dalam sebulan.
+                Dim date_sick As String = Date.Parse(GVLeaveDet.GetRowCellValue(0, "datetime_start")).ToString("yyyy-MM-dd")
+                '
                 Dim query_cek As String = "SELECT COUNT(lvd.id_emp_leave) FROM tb_emp_leave_det lvd
                                         INNER JOIN tb_emp_leave lv ON lv.id_emp_leave=lvd.id_emp_leave
-                                        WHERE DATE_FORMAT(lvd.datetime_start, '%Y-%m') = DATE_FORMAT(NOW(), '%Y-%m') AND lv.id_emp='" & id_employee & "' AND lv.id_form_dc='2' AND lv.id_leave_type='2' AND lv.id_report_status!='5' "
+                                        WHERE DATE_FORMAT(lvd.datetime_start, '%Y-%m') = DATE_FORMAT('" & date_sick & "', '%Y-%m') AND lv.id_emp='" & id_employee & "' AND lv.id_form_dc='2' AND lv.id_leave_type='2' AND lv.id_report_status!='5' "
                 Dim cek As String = execute_query(query_cek, 0, True, "", "", "", "")
+                Console.WriteLine(query_cek)
+                Console.WriteLine(cek)
                 If Not cek.ToString = "0" Then
-                    stopCustom("Hanya dapat mengajukan sakit dengan form satu kali dalam satu bulan." & vbNewLine & "Please provide DC for sick leave.")
+                    stopCustom("Hanya dapat mengajukan sakit dengan form satu hari dalam satu bulan." & vbNewLine & "Ajukan surat keterangan sakit dari dokter (DC) untuk pengajuan sakit.")
                     problem = True
                 End If
             End If
@@ -447,7 +455,7 @@
                         query = "UPDATE tb_emp_leave SET report_mark_type='104' WHERE id_emp_leave='" & id_emp_leave & "'"
                         execute_non_query(query, True, "", "", "", "")
                     Else
-                        Dim query_kkunit As String = "SELECT `is_kk_unit` FROM tb_m_employee emp INNER JOIN tb_m_departement dep ON dep.`id_departement`=emp.`id_departement` WHERE id_employee='" & id_employee & "'"
+                        Dim query_kkunit As String = "SELECT `is_kk_unit`,`is_store` FROM tb_m_employee emp INNER JOIN tb_m_departement dep ON dep.`id_departement`=emp.`id_departement` WHERE id_employee='" & id_employee & "'"
                         Dim data As DataTable = execute_query(query_kkunit, -1, True, "", "", "", "")
 
                         If data.Rows(0)("is_kk_unit") = 1 Then
@@ -480,6 +488,18 @@
                             Else
                                 submit_who_prepared_no_user("108", id_emp_leave, id_employee)
                                 query = "UPDATE tb_emp_leave SET report_mark_type='108' WHERE id_emp_leave='" & id_emp_leave & "'"
+                                execute_non_query(query, True, "", "", "", "")
+                            End If
+                        ElseIf data.Rows(0)("is_store").ToString = "1" Then
+                            Dim query_pic As String = "SELECT is_pic FROM tb_m_employee WHERE id_employee='" & id_employee & "'"
+                            Dim data_pic As DataTable = execute_query(query_pic, -1, True, "", "", "", "")
+                            If data_pic.Rows(0)("is_pic").ToString = "1" Then 'pic
+                                submit_who_prepared_no_user("164", id_emp_leave, id_employee)
+                                query = "UPDATE tb_emp_leave SET report_mark_type='164' WHERE id_emp_leave='" & id_emp_leave & "'"
+                                execute_non_query(query, True, "", "", "", "")
+                            Else 'non pic
+                                submit_who_prepared_no_user("165", id_emp_leave, id_employee)
+                                query = "UPDATE tb_emp_leave SET report_mark_type='165' WHERE id_emp_leave='" & id_emp_leave & "'"
                                 execute_non_query(query, True, "", "", "", "")
                             End If
                         Else

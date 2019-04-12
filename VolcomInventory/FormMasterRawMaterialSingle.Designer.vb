@@ -19,33 +19,33 @@ Partial Class FormMasterRawMaterialSingle
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
-        Me.PCSave = New DevExpress.XtraEditors.PanelControl
-        Me.BGenerate = New DevExpress.XtraEditors.SimpleButton
-        Me.BtnSave = New DevExpress.XtraEditors.SimpleButton
-        Me.LabelDisplayName = New DevExpress.XtraEditors.LabelControl
-        Me.TxtMatDisplayName = New DevExpress.XtraEditors.TextEdit
-        Me.TxtMatName = New DevExpress.XtraEditors.TextEdit
-        Me.LabelMatName = New DevExpress.XtraEditors.LabelControl
-        Me.LabelUOM = New DevExpress.XtraEditors.LabelControl
-        Me.LEUOM = New DevExpress.XtraEditors.LookUpEdit
+        Me.components = New System.ComponentModel.Container()
+        Me.PCSave = New DevExpress.XtraEditors.PanelControl()
+        Me.BGenerate = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnSave = New DevExpress.XtraEditors.SimpleButton()
+        Me.LabelDisplayName = New DevExpress.XtraEditors.LabelControl()
+        Me.TxtMatDisplayName = New DevExpress.XtraEditors.TextEdit()
+        Me.TxtMatName = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelMatName = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelUOM = New DevExpress.XtraEditors.LabelControl()
+        Me.LEUOM = New DevExpress.XtraEditors.LookUpEdit()
         Me.EPMaterialType = New System.Windows.Forms.ErrorProvider(Me.components)
-        Me.DNCodeMaterial = New DevExpress.XtraEditors.DataNavigator
-        Me.GCCodeMaterial = New DevExpress.XtraGrid.GridControl
-        Me.GVCodeMaterial = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.ColCodeParam = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColCodeValue = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.LETemplate = New DevExpress.XtraEditors.SearchLookUpEdit
-        Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.LabelControl7 = New DevExpress.XtraEditors.LabelControl
-        Me.TxtMaterialCode = New DevExpress.XtraEditors.TextEdit
-        Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl
-        Me.LEMatCat = New DevExpress.XtraEditors.LookUpEdit
-        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl
-        Me.BRefreshCode = New DevExpress.XtraEditors.SimpleButton
-        Me.BeditCode = New DevExpress.XtraEditors.SimpleButton
+        Me.DNCodeMaterial = New DevExpress.XtraEditors.DataNavigator()
+        Me.GCCodeMaterial = New DevExpress.XtraGrid.GridControl()
+        Me.GVCodeMaterial = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.ColCodeParam = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColCodeValue = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LETemplate = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl7 = New DevExpress.XtraEditors.LabelControl()
+        Me.TxtMaterialCode = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
+        Me.LEMatCat = New DevExpress.XtraEditors.LookUpEdit()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
+        Me.BRefreshCode = New DevExpress.XtraEditors.SimpleButton()
+        Me.BeditCode = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.PCSave, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PCSave.SuspendLayout()
         CType(Me.TxtMatDisplayName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -104,7 +104,7 @@ Partial Class FormMasterRawMaterialSingle
         Me.TxtMatDisplayName.Properties.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtMatDisplayName.Properties.Appearance.Options.UseFont = True
         Me.TxtMatDisplayName.Properties.MaxLength = 30
-        Me.TxtMatDisplayName.Size = New System.Drawing.Size(261, 22)
+        Me.TxtMatDisplayName.Size = New System.Drawing.Size(271, 22)
         Me.TxtMatDisplayName.TabIndex = 2
         Me.TxtMatDisplayName.ToolTip = "Max : 30 character."
         Me.TxtMatDisplayName.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Information
@@ -117,7 +117,7 @@ Partial Class FormMasterRawMaterialSingle
         Me.TxtMatName.Properties.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtMatName.Properties.Appearance.Options.UseFont = True
         Me.TxtMatName.Properties.MaxLength = 50
-        Me.TxtMatName.Size = New System.Drawing.Size(261, 22)
+        Me.TxtMatName.Size = New System.Drawing.Size(271, 22)
         Me.TxtMatName.TabIndex = 1
         Me.TxtMatName.ToolTip = "Example : Jersey 32'S. Max :  50 character"
         Me.TxtMatName.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Information
@@ -150,7 +150,7 @@ Partial Class FormMasterRawMaterialSingle
         Me.LEUOM.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.LEUOM.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_uom", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("uom", "Unit of measure")})
         Me.LEUOM.Properties.NullText = ""
-        Me.LEUOM.Size = New System.Drawing.Size(261, 22)
+        Me.LEUOM.Size = New System.Drawing.Size(271, 22)
         Me.LEUOM.TabIndex = 4
         Me.LEUOM.ToolTip = "Unit of measure that stored in warehouse."
         Me.LEUOM.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Information
@@ -281,7 +281,7 @@ Partial Class FormMasterRawMaterialSingle
         Me.LEMatCat.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.LEMatCat.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_mat_cat", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("mat_cat", "Material Category")})
         Me.LEMatCat.Properties.NullText = ""
-        Me.LEMatCat.Size = New System.Drawing.Size(261, 22)
+        Me.LEMatCat.Size = New System.Drawing.Size(271, 22)
         Me.LEMatCat.TabIndex = 3
         Me.LEMatCat.ToolTip = "Unit of measure that stored in warehouse."
         Me.LEMatCat.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Information
@@ -339,7 +339,6 @@ Partial Class FormMasterRawMaterialSingle
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FormMasterRawMaterialSingle"
-        Me.ShowInTaskbar = False
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Material Type"

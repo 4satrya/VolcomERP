@@ -9,6 +9,24 @@
     Private Sub FormSamplePurchaseDet_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         action_load()
     End Sub
+
+    Sub load_kurs()
+        'check kurs first
+        Dim query_kurs As String = "SELECT * FROM tb_kurs_trans WHERE DATE(created_date) = DATE(NOW()) ORDER BY id_kurs_trans DESC"
+        Dim data_kurs As DataTable = execute_query(query_kurs, -1, True, "", "", "", "")
+
+        If Not data_kurs.Rows.Count > 0 Then
+            warningCustom("Today transaction kurs still not submitted, please contact accounting.")
+            TEKurs.EditValue = 0.00
+        Else
+            If LECurrency.EditValue.ToString = "2" Then
+                TEKurs.EditValue = data_kurs.Rows(0)("kurs_trans")
+            Else
+                TEKurs.EditValue = 1
+            End If
+        End If
+    End Sub
+
     Sub action_load()
         view_currency(LECurrency)
         view_po_type(LEPOType)
@@ -16,8 +34,7 @@
         'view delivery
         view_payment_type(LEpayment)
 
-        Dim default_kurs As Decimal = 1.0
-        TEKurs.EditValue = default_kurs
+        load_kurs()
 
         If id_purc = "-1" Then
             'new
@@ -82,6 +99,7 @@
             TEVat.Text = data.Rows(0)("mat_purc_vat").ToString
             calculate()
         End If
+
         allow_status()
     End Sub
     Sub action_load_sub(ByVal id_old_po As String)
@@ -125,6 +143,7 @@
         TEVat.Text = data.Rows(0)("mat_purc_vat").ToString
         calculate()
     End Sub
+
     Sub view_delivery(ByVal id_season As String, ByVal lookup As DevExpress.XtraEditors.SearchLookUpEdit)
         Dim query As String = "SELECT id_delivery,delivery FROM tb_season_delivery WHERE id_season='" & id_season & "' ORDER BY id_delivery DESC"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
@@ -143,6 +162,7 @@
         Dim query = "CALL view_mat_purc_det('" & id_purcx & "')"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCListPurchase.DataSource = data
+        GVListPurchase.BestFitColumns()
         show_but()
         calculate()
     End Sub
@@ -233,6 +253,8 @@
         ValidateChildren()
         If id_comp_to = "-1" Or id_comp_ship_to = "-1" Then
             stopCustom("Please fill all field.")
+        ElseIf TEKurs.EditValue <= 0 Then
+            stopCustom("Please fill kurs first")
         Else
             If id_purc <> "-1" Then
                 'edit
@@ -442,7 +464,11 @@
         ReportMatPurchase.id_mat_purc = id_purc
         'ReportMatPurchase.is_pre = "1"
         Dim Report As New ReportMatPurchase()
-
+        '
+        GridColumnColor.Visible = False
+        GridColumnDiscount.Visible = False
+        GVListPurchase.BestFitColumns()
+        '
         ' '... 
         ' ' creating and saving the view's layout to a new memory stream 
         Dim str As System.IO.Stream
@@ -454,7 +480,10 @@
 
         'Grid Detail
         ReportStyleGridview(Report.GVListPurchase)
+        '
+        Report.GVListPurchase.AppearancePrint.Row.Font = New Font("Tahoma", 8, FontStyle.Regular)
 
+        '
         'Parse val
         Report.LPORev.Text = TEPORevNumber.Text
         Report.LPONumber.Text = TEPONumber.Text
@@ -499,6 +528,10 @@
         'Show the report's preview. 
         Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
         Tool.ShowPreview()
+        '
+        GridColumnColor.Visible = True
+        GridColumnDiscount.Visible = True
+        '
         Cursor = Cursors.Default
     End Sub
 
@@ -593,6 +626,8 @@
         Dim Report As New ReportMatPurchase()
 
         ' '... 
+        GridColumnDiscount.Visible = False
+        GVListPurchase.BestFitColumns()
         ' ' creating and saving the view's layout to a new memory stream 
         Dim str As System.IO.Stream
         str = New System.IO.MemoryStream()
@@ -603,7 +638,8 @@
 
         'Grid Detail
         ReportStyleGridview(Report.GVListPurchase)
-
+        '
+        Report.GVListPurchase.AppearancePrint.Row.Font = New Font("Tahoma", 8, FontStyle.Regular)
         'Parse val
         Report.LPORev.Text = TEPORevNumber.Text
         Report.LPONumber.Text = TEPONumber.Text
@@ -630,17 +666,18 @@
 
         Report.LPayment.Text = LEpayment.Text
         Report.LPOType.Text = LEPOType.Text
-        '    id_cur = data.Rows(0)("id_currency").ToString
+
+        'id_cur = data.Rows(0)("id_currency").ToString
         Report.LCur.Text = LECurrency.Text
         Report.LKurs.Text = TEKurs.Text
         Report.LVat.Text = TEVat.Text
         Report.LDiscount.Text = TEDiscount.Text
         Report.LVatTot.Text = TEVatTot.Text
 
-        '    gross_tot = sub_tot + discount
+        'gross_tot = sub_tot + discount
         Report.LGrossTot.Text = TEGrossTot.Text
 
-        '    total = sub_tot + vat
+        'total = sub_tot + vat
         Report.LTot.Text = TETot.Text
         Report.LSay.Text = METotSay.Text.ToString
         Report.LNote.Text = MENote.Text
@@ -648,10 +685,15 @@
         'Show the report's preview. 
         Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
         Tool.ShowPreview()
+
+        GridColumnColor.Visible = True
+        GridColumnDiscount.Visible = True
+
         Cursor = Cursors.Default
     End Sub
 
     Private Sub LECurrency_EditValueChanged(sender As Object, e As EventArgs) Handles LECurrency.EditValueChanged
+        load_kurs()
         calculate()
     End Sub
 End Class

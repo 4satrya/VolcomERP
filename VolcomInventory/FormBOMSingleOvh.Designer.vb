@@ -41,6 +41,7 @@ Partial Class FormBOMSingleOvh
         Me.GridColumnIDCurrency = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GroupControl2 = New DevExpress.XtraEditors.GroupControl()
+        Me.BGetKurs = New DevExpress.XtraEditors.SimpleButton()
         Me.CEOVHMain = New DevExpress.XtraEditors.CheckEdit()
         Me.TEPriceTot = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl7 = New DevExpress.XtraEditors.LabelControl()
@@ -61,6 +62,7 @@ Partial Class FormBOMSingleOvh
         Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
         Me.BCancel = New DevExpress.XtraEditors.SimpleButton()
         Me.BSave = New DevExpress.XtraEditors.SimpleButton()
+        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.SplitContainerControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainerControl1.SuspendLayout()
         CType(Me.GroupGeneral, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -204,7 +206,7 @@ Partial Class FormBOMSingleOvh
         '
         'GVOVHPrice
         '
-        Me.GVOVHPrice.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ColMatPirce, Me.ColPriceName, Me.ColCompany, Me.ColPrice, Me.ColDate, Me.ColCurrenct, Me.GridColumnIDCurrency})
+        Me.GVOVHPrice.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ColMatPirce, Me.GridColumn2, Me.ColPriceName, Me.ColCompany, Me.ColPrice, Me.ColDate, Me.ColCurrenct, Me.GridColumnIDCurrency})
         Me.GVOVHPrice.GridControl = Me.GCOVHPrice
         Me.GVOVHPrice.Name = "GVOVHPrice"
         Me.GVOVHPrice.OptionsBehavior.Editable = False
@@ -223,7 +225,7 @@ Partial Class FormBOMSingleOvh
         Me.ColPriceName.Name = "ColPriceName"
         Me.ColPriceName.Visible = True
         Me.ColPriceName.VisibleIndex = 0
-        Me.ColPriceName.Width = 174
+        Me.ColPriceName.Width = 239
         '
         'ColCompany
         '
@@ -231,8 +233,8 @@ Partial Class FormBOMSingleOvh
         Me.ColCompany.FieldName = "comp_name"
         Me.ColCompany.Name = "ColCompany"
         Me.ColCompany.Visible = True
-        Me.ColCompany.VisibleIndex = 1
-        Me.ColCompany.Width = 174
+        Me.ColCompany.VisibleIndex = 2
+        Me.ColCompany.Width = 348
         '
         'ColPrice
         '
@@ -246,8 +248,8 @@ Partial Class FormBOMSingleOvh
         Me.ColPrice.FieldName = "ovh_price"
         Me.ColPrice.Name = "ColPrice"
         Me.ColPrice.Visible = True
-        Me.ColPrice.VisibleIndex = 3
-        Me.ColPrice.Width = 174
+        Me.ColPrice.VisibleIndex = 4
+        Me.ColPrice.Width = 348
         '
         'ColDate
         '
@@ -255,8 +257,8 @@ Partial Class FormBOMSingleOvh
         Me.ColDate.FieldName = "ovh_price_date"
         Me.ColDate.Name = "ColDate"
         Me.ColDate.Visible = True
-        Me.ColDate.VisibleIndex = 4
-        Me.ColDate.Width = 174
+        Me.ColDate.VisibleIndex = 5
+        Me.ColDate.Width = 359
         '
         'ColCurrenct
         '
@@ -268,8 +270,8 @@ Partial Class FormBOMSingleOvh
         Me.ColCurrenct.FieldName = "currency"
         Me.ColCurrenct.Name = "ColCurrenct"
         Me.ColCurrenct.Visible = True
-        Me.ColCurrenct.VisibleIndex = 2
-        Me.ColCurrenct.Width = 60
+        Me.ColCurrenct.VisibleIndex = 3
+        Me.ColCurrenct.Width = 119
         '
         'GridColumnIDCurrency
         '
@@ -288,6 +290,7 @@ Partial Class FormBOMSingleOvh
         'GroupControl2
         '
         Me.GroupControl2.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupControl2.Controls.Add(Me.BGetKurs)
         Me.GroupControl2.Controls.Add(Me.CEOVHMain)
         Me.GroupControl2.Controls.Add(Me.TEPriceTot)
         Me.GroupControl2.Controls.Add(Me.LabelControl7)
@@ -305,10 +308,18 @@ Partial Class FormBOMSingleOvh
         Me.GroupControl2.TabIndex = 27
         Me.GroupControl2.Text = "Detail"
         '
+        'BGetKurs
+        '
+        Me.BGetKurs.Location = New System.Drawing.Point(158, 24)
+        Me.BGetKurs.Name = "BGetKurs"
+        Me.BGetKurs.Size = New System.Drawing.Size(70, 23)
+        Me.BGetKurs.TabIndex = 119
+        Me.BGetKurs.Text = "Get Kurs"
+        '
         'CEOVHMain
         '
         Me.CEOVHMain.EditValue = True
-        Me.CEOVHMain.Location = New System.Drawing.Point(691, 23)
+        Me.CEOVHMain.Location = New System.Drawing.Point(691, 27)
         Me.CEOVHMain.Name = "CEOVHMain"
         Me.CEOVHMain.Properties.Caption = "Set as main Vendor"
         Me.CEOVHMain.Size = New System.Drawing.Size(128, 19)
@@ -317,7 +328,7 @@ Partial Class FormBOMSingleOvh
         'TEPriceTot
         '
         Me.TEPriceTot.Enabled = False
-        Me.TEPriceTot.Location = New System.Drawing.Point(534, 23)
+        Me.TEPriceTot.Location = New System.Drawing.Point(534, 27)
         Me.TEPriceTot.Name = "TEPriceTot"
         Me.TEPriceTot.Properties.Appearance.Options.UseTextOptions = True
         Me.TEPriceTot.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near
@@ -330,7 +341,7 @@ Partial Class FormBOMSingleOvh
         '
         'LabelControl7
         '
-        Me.LabelControl7.Location = New System.Drawing.Point(534, 7)
+        Me.LabelControl7.Location = New System.Drawing.Point(534, 11)
         Me.LabelControl7.Name = "LabelControl7"
         Me.LabelControl7.Size = New System.Drawing.Size(50, 13)
         Me.LabelControl7.TabIndex = 116
@@ -338,7 +349,7 @@ Partial Class FormBOMSingleOvh
         '
         'TEPrice
         '
-        Me.TEPrice.Location = New System.Drawing.Point(158, 22)
+        Me.TEPrice.Location = New System.Drawing.Point(234, 27)
         Me.TEPrice.Name = "TEPrice"
         Me.TEPrice.Properties.Appearance.Options.UseTextOptions = True
         Me.TEPrice.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
@@ -346,12 +357,12 @@ Partial Class FormBOMSingleOvh
         Me.TEPrice.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
         Me.TEPrice.Properties.Mask.SaveLiteral = False
         Me.TEPrice.Properties.Mask.UseMaskAsDisplayFormat = True
-        Me.TEPrice.Size = New System.Drawing.Size(159, 20)
+        Me.TEPrice.Size = New System.Drawing.Size(141, 20)
         Me.TEPrice.TabIndex = 3
         '
         'TEKurs
         '
-        Me.TEKurs.Location = New System.Drawing.Point(23, 22)
+        Me.TEKurs.Location = New System.Drawing.Point(23, 26)
         Me.TEKurs.Name = "TEKurs"
         Me.TEKurs.Properties.Appearance.Options.UseTextOptions = True
         Me.TEKurs.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
@@ -359,12 +370,13 @@ Partial Class FormBOMSingleOvh
         Me.TEKurs.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
         Me.TEKurs.Properties.Mask.SaveLiteral = False
         Me.TEKurs.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.TEKurs.Properties.ReadOnly = True
         Me.TEKurs.Size = New System.Drawing.Size(129, 20)
         Me.TEKurs.TabIndex = 2
         '
         'LabelControl2
         '
-        Me.LabelControl2.Location = New System.Drawing.Point(158, 7)
+        Me.LabelControl2.Location = New System.Drawing.Point(234, 11)
         Me.LabelControl2.Name = "LabelControl2"
         Me.LabelControl2.Size = New System.Drawing.Size(23, 13)
         Me.LabelControl2.TabIndex = 114
@@ -373,16 +385,16 @@ Partial Class FormBOMSingleOvh
         'TEUOM
         '
         Me.TEUOM.Enabled = False
-        Me.TEUOM.Location = New System.Drawing.Point(444, 22)
+        Me.TEUOM.Location = New System.Drawing.Point(470, 26)
         Me.TEUOM.Name = "TEUOM"
         Me.TEUOM.Properties.Appearance.Options.UseTextOptions = True
         Me.TEUOM.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.TEUOM.Size = New System.Drawing.Size(84, 20)
+        Me.TEUOM.Size = New System.Drawing.Size(58, 20)
         Me.TEUOM.TabIndex = 5
         '
         'LabelControl3
         '
-        Me.LabelControl3.Location = New System.Drawing.Point(23, 7)
+        Me.LabelControl3.Location = New System.Drawing.Point(23, 11)
         Me.LabelControl3.Name = "LabelControl3"
         Me.LabelControl3.Size = New System.Drawing.Size(21, 13)
         Me.LabelControl3.TabIndex = 88
@@ -390,7 +402,7 @@ Partial Class FormBOMSingleOvh
         '
         'TEQty
         '
-        Me.TEQty.Location = New System.Drawing.Point(323, 22)
+        Me.TEQty.Location = New System.Drawing.Point(381, 27)
         Me.TEQty.Name = "TEQty"
         Me.TEQty.Properties.Appearance.Options.UseTextOptions = True
         Me.TEQty.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
@@ -399,12 +411,12 @@ Partial Class FormBOMSingleOvh
         Me.TEQty.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
         Me.TEQty.Properties.Mask.SaveLiteral = False
         Me.TEQty.Properties.Mask.UseMaskAsDisplayFormat = True
-        Me.TEQty.Size = New System.Drawing.Size(115, 20)
+        Me.TEQty.Size = New System.Drawing.Size(83, 20)
         Me.TEQty.TabIndex = 4
         '
         'LabelControl1
         '
-        Me.LabelControl1.Location = New System.Drawing.Point(323, 5)
+        Me.LabelControl1.Location = New System.Drawing.Point(381, 11)
         Me.LabelControl1.Name = "LabelControl1"
         Me.LabelControl1.Size = New System.Drawing.Size(18, 13)
         Me.LabelControl1.TabIndex = 84
@@ -525,6 +537,15 @@ Partial Class FormBOMSingleOvh
         Me.BSave.TabIndex = 1
         Me.BSave.Text = " Save"
         '
+        'GridColumn2
+        '
+        Me.GridColumn2.Caption = "Contact Person"
+        Me.GridColumn2.FieldName = "cp"
+        Me.GridColumn2.Name = "GridColumn2"
+        Me.GridColumn2.Visible = True
+        Me.GridColumn2.VisibleIndex = 1
+        Me.GridColumn2.Width = 219
+        '
         'FormBOMSingleOvh
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -612,4 +633,6 @@ Partial Class FormBOMSingleOvh
     Friend WithEvents GridColumnCat As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents CEOVHMain As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents GridColumnIDCurrency As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BGetKurs As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GridColumn2 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

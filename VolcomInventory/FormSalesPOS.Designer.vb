@@ -59,6 +59,7 @@ Partial Class FormSalesPOS
         Me.GridColumnLastMark = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIsSubmit = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GCFilter = New DevExpress.XtraEditors.GroupControl()
+        Me.BtnNoStock = New DevExpress.XtraEditors.SimpleButton()
         Me.LEOptionView = New DevExpress.XtraEditors.LookUpEdit()
         Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
         Me.BHide = New DevExpress.XtraEditors.SimpleButton()
@@ -356,7 +357,7 @@ Partial Class FormSalesPOS
         Me.GCSalesPOS.Location = New System.Drawing.Point(20, 2)
         Me.GCSalesPOS.MainView = Me.GVSalesPOS
         Me.GCSalesPOS.Name = "GCSalesPOS"
-        Me.GCSalesPOS.Size = New System.Drawing.Size(1065, 451)
+        Me.GCSalesPOS.Size = New System.Drawing.Size(1212, 451)
         Me.GCSalesPOS.TabIndex = 0
         Me.GCSalesPOS.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVSalesPOS, Me.GVSalesPOSDet})
         '
@@ -539,6 +540,7 @@ Partial Class FormSalesPOS
         'GCFilter
         '
         Me.GCFilter.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GCFilter.Controls.Add(Me.BtnNoStock)
         Me.GCFilter.Controls.Add(Me.LEOptionView)
         Me.GCFilter.Controls.Add(Me.LabelControl4)
         Me.GCFilter.Controls.Add(Me.BHide)
@@ -553,12 +555,26 @@ Partial Class FormSalesPOS
         Me.GCFilter.Dock = System.Windows.Forms.DockStyle.Top
         Me.GCFilter.Location = New System.Drawing.Point(0, 0)
         Me.GCFilter.Name = "GCFilter"
-        Me.GCFilter.Size = New System.Drawing.Size(1087, 50)
+        Me.GCFilter.Size = New System.Drawing.Size(1234, 50)
         Me.GCFilter.TabIndex = 1
+        '
+        'BtnNoStock
+        '
+        Me.BtnNoStock.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnNoStock.Appearance.ForeColor = System.Drawing.Color.White
+        Me.BtnNoStock.Appearance.Options.UseFont = True
+        Me.BtnNoStock.Appearance.Options.UseForeColor = True
+        Me.BtnNoStock.Location = New System.Drawing.Point(636, 15)
+        Me.BtnNoStock.LookAndFeel.SkinName = "Office 2010 Black"
+        Me.BtnNoStock.LookAndFeel.UseDefaultLookAndFeel = False
+        Me.BtnNoStock.Name = "BtnNoStock"
+        Me.BtnNoStock.Size = New System.Drawing.Size(75, 20)
+        Me.BtnNoStock.TabIndex = 8901
+        Me.BtnNoStock.Text = "No Stock"
         '
         'LEOptionView
         '
-        Me.LEOptionView.Location = New System.Drawing.Point(706, 14)
+        Me.LEOptionView.Location = New System.Drawing.Point(782, 15)
         Me.LEOptionView.Name = "LEOptionView"
         Me.LEOptionView.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.LEOptionView.Size = New System.Drawing.Size(123, 20)
@@ -567,7 +583,7 @@ Partial Class FormSalesPOS
         '
         'LabelControl4
         '
-        Me.LabelControl4.Location = New System.Drawing.Point(643, 17)
+        Me.LabelControl4.Location = New System.Drawing.Point(719, 18)
         Me.LabelControl4.Name = "LabelControl4"
         Me.LabelControl4.Size = New System.Drawing.Size(57, 13)
         Me.LabelControl4.TabIndex = 8899
@@ -577,7 +593,7 @@ Partial Class FormSalesPOS
         'BHide
         '
         Me.BHide.ImageIndex = 9
-        Me.BHide.Location = New System.Drawing.Point(938, 14)
+        Me.BHide.Location = New System.Drawing.Point(1014, 15)
         Me.BHide.Name = "BHide"
         Me.BHide.Size = New System.Drawing.Size(104, 20)
         Me.BHide.TabIndex = 8898
@@ -587,7 +603,7 @@ Partial Class FormSalesPOS
         'BExpand
         '
         Me.BExpand.ImageIndex = 8
-        Me.BExpand.Location = New System.Drawing.Point(835, 14)
+        Me.BExpand.Location = New System.Drawing.Point(911, 15)
         Me.BExpand.Name = "BExpand"
         Me.BExpand.Size = New System.Drawing.Size(99, 20)
         Me.BExpand.TabIndex = 8897
@@ -683,7 +699,7 @@ Partial Class FormSalesPOS
         Me.GCView.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GCView.Location = New System.Drawing.Point(0, 50)
         Me.GCView.Name = "GCView"
-        Me.GCView.Size = New System.Drawing.Size(1087, 455)
+        Me.GCView.Size = New System.Drawing.Size(1234, 455)
         Me.GCView.TabIndex = 2
         '
         'XTCPOS
@@ -694,7 +710,7 @@ Partial Class FormSalesPOS
         Me.XTCPOS.Name = "XTCPOS"
         Me.XTCPOS.SelectedTabPage = Me.XTPDailySales
         Me.XTCPOS.ShowTabHeader = DevExpress.Utils.DefaultBoolean.[False]
-        Me.XTCPOS.Size = New System.Drawing.Size(1099, 539)
+        Me.XTCPOS.Size = New System.Drawing.Size(1246, 539)
         Me.XTCPOS.TabIndex = 3
         Me.XTCPOS.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPDailySales})
         '
@@ -702,7 +718,7 @@ Partial Class FormSalesPOS
         '
         Me.XTPDailySales.Controls.Add(Me.XTCInvoice)
         Me.XTPDailySales.Name = "XTPDailySales"
-        Me.XTPDailySales.Size = New System.Drawing.Size(1093, 533)
+        Me.XTPDailySales.Size = New System.Drawing.Size(1240, 533)
         Me.XTPDailySales.Text = "Daily Transaction"
         '
         'XTCInvoice
@@ -712,7 +728,7 @@ Partial Class FormSalesPOS
         Me.XTCInvoice.Location = New System.Drawing.Point(0, 0)
         Me.XTCInvoice.Name = "XTCInvoice"
         Me.XTCInvoice.SelectedTabPage = Me.XTPListInv
-        Me.XTCInvoice.Size = New System.Drawing.Size(1093, 533)
+        Me.XTCInvoice.Size = New System.Drawing.Size(1240, 533)
         Me.XTCInvoice.TabIndex = 3
         Me.XTCInvoice.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPListInv, Me.XTPListWholesale})
         '
@@ -721,7 +737,7 @@ Partial Class FormSalesPOS
         Me.XTPListInv.Controls.Add(Me.GCView)
         Me.XTPListInv.Controls.Add(Me.GCFilter)
         Me.XTPListInv.Name = "XTPListInv"
-        Me.XTPListInv.Size = New System.Drawing.Size(1087, 505)
+        Me.XTPListInv.Size = New System.Drawing.Size(1234, 505)
         Me.XTPListInv.Text = "List Invoice"
         '
         'XTPListWholesale
@@ -729,7 +745,7 @@ Partial Class FormSalesPOS
         Me.XTPListWholesale.Controls.Add(Me.GroupControl1)
         Me.XTPListWholesale.Controls.Add(Me.GroupControl2)
         Me.XTPListWholesale.Name = "XTPListWholesale"
-        Me.XTPListWholesale.Size = New System.Drawing.Size(1087, 505)
+        Me.XTPListWholesale.Size = New System.Drawing.Size(1234, 505)
         Me.XTPListWholesale.Text = "Waiting List Wholesale"
         '
         'GroupControl1
@@ -739,7 +755,7 @@ Partial Class FormSalesPOS
         Me.GroupControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupControl1.Location = New System.Drawing.Point(0, 50)
         Me.GroupControl1.Name = "GroupControl1"
-        Me.GroupControl1.Size = New System.Drawing.Size(1087, 455)
+        Me.GroupControl1.Size = New System.Drawing.Size(1234, 455)
         Me.GroupControl1.TabIndex = 4
         '
         'GCDelWholesale
@@ -748,7 +764,7 @@ Partial Class FormSalesPOS
         Me.GCDelWholesale.Location = New System.Drawing.Point(20, 2)
         Me.GCDelWholesale.MainView = Me.GVDelWholesale
         Me.GCDelWholesale.Name = "GCDelWholesale"
-        Me.GCDelWholesale.Size = New System.Drawing.Size(1065, 451)
+        Me.GCDelWholesale.Size = New System.Drawing.Size(1212, 451)
         Me.GCDelWholesale.TabIndex = 3
         Me.GCDelWholesale.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVDelWholesale, Me.GridView1})
         '
@@ -874,7 +890,7 @@ Partial Class FormSalesPOS
         Me.GroupControl2.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupControl2.Location = New System.Drawing.Point(0, 0)
         Me.GroupControl2.Name = "GroupControl2"
-        Me.GroupControl2.Size = New System.Drawing.Size(1087, 50)
+        Me.GroupControl2.Size = New System.Drawing.Size(1234, 50)
         Me.GroupControl2.TabIndex = 3
         '
         'BViewWholesale
@@ -1029,7 +1045,7 @@ Partial Class FormSalesPOS
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1099, 539)
+        Me.ClientSize = New System.Drawing.Size(1246, 539)
         Me.Controls.Add(Me.XTCPOS)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
@@ -1172,4 +1188,5 @@ Partial Class FormSalesPOS
     Friend WithEvents GridView1 As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumnLastMark As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnIsSubmit As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BtnNoStock As DevExpress.XtraEditors.SimpleButton
 End Class

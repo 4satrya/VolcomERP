@@ -77,10 +77,11 @@ Partial Class FormEmpUniListDet
         Me.GridColumnCurStatus = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnPoint = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnNo = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.SimpleButton1 = New DevExpress.XtraEditors.SimpleButton()
+        Me.BAccept = New DevExpress.XtraEditors.SimpleButton()
         Me.PanelControlNav = New DevExpress.XtraEditors.PanelControl()
         Me.BtnImportExcelNew = New DevExpress.XtraEditors.SimpleButton()
-        Me.BAccept = New DevExpress.XtraEditors.SimpleButton()
-        Me.SimpleButton1 = New DevExpress.XtraEditors.SimpleButton()
+        Me.CEforDeptHead = New DevExpress.XtraEditors.CheckEdit()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl3.SuspendLayout()
@@ -109,6 +110,7 @@ Partial Class FormEmpUniListDet
         CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControlNav, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlNav.SuspendLayout()
+        CType(Me.CEforDeptHead.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LargeImageCollection
@@ -201,6 +203,7 @@ Partial Class FormEmpUniListDet
         'GroupUni
         '
         Me.GroupUni.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupUni.Controls.Add(Me.CEforDeptHead)
         Me.GroupUni.Controls.Add(Me.SLEWH)
         Me.GroupUni.Controls.Add(Me.LabelControl2)
         Me.GroupUni.Controls.Add(Me.LEPeriodx)
@@ -743,6 +746,44 @@ Partial Class FormEmpUniListDet
         Me.GridColumnNo.VisibleIndex = 0
         Me.GridColumnNo.Width = 73
         '
+        'SimpleButton1
+        '
+        Me.SimpleButton1.Appearance.BackColor = System.Drawing.SystemColors.Highlight
+        Me.SimpleButton1.Appearance.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SimpleButton1.Appearance.ForeColor = System.Drawing.Color.White
+        Me.SimpleButton1.Appearance.Options.UseBackColor = True
+        Me.SimpleButton1.Appearance.Options.UseFont = True
+        Me.SimpleButton1.Appearance.Options.UseForeColor = True
+        Me.SimpleButton1.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.SimpleButton1.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.SimpleButton1.Location = New System.Drawing.Point(0, 339)
+        Me.SimpleButton1.LookAndFeel.SkinName = "Metropolis"
+        Me.SimpleButton1.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.UltraFlat
+        Me.SimpleButton1.LookAndFeel.UseDefaultLookAndFeel = False
+        Me.SimpleButton1.Name = "SimpleButton1"
+        Me.SimpleButton1.Size = New System.Drawing.Size(1047, 28)
+        Me.SimpleButton1.TabIndex = 140
+        Me.SimpleButton1.Text = "Only this list"
+        '
+        'BAccept
+        '
+        Me.BAccept.Appearance.BackColor = System.Drawing.Color.Crimson
+        Me.BAccept.Appearance.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BAccept.Appearance.ForeColor = System.Drawing.Color.White
+        Me.BAccept.Appearance.Options.UseBackColor = True
+        Me.BAccept.Appearance.Options.UseFont = True
+        Me.BAccept.Appearance.Options.UseForeColor = True
+        Me.BAccept.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.BAccept.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.BAccept.Location = New System.Drawing.Point(0, 367)
+        Me.BAccept.LookAndFeel.SkinName = "Metropolis"
+        Me.BAccept.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.UltraFlat
+        Me.BAccept.LookAndFeel.UseDefaultLookAndFeel = False
+        Me.BAccept.Name = "BAccept"
+        Me.BAccept.Size = New System.Drawing.Size(1047, 28)
+        Me.BAccept.TabIndex = 139
+        Me.BAccept.Text = "All Design"
+        '
         'PanelControlNav
         '
         Me.PanelControlNav.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
@@ -765,43 +806,14 @@ Partial Class FormEmpUniListDet
         Me.BtnImportExcelNew.TabStop = False
         Me.BtnImportExcelNew.Text = "Import Excel"
         '
-        'BAccept
+        'CEforDeptHead
         '
-        Me.BAccept.Appearance.BackColor = System.Drawing.Color.Crimson
-        Me.BAccept.Appearance.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BAccept.Appearance.ForeColor = System.Drawing.Color.White
-        Me.BAccept.Appearance.Options.UseBackColor = True
-        Me.BAccept.Appearance.Options.UseFont = True
-        Me.BAccept.Appearance.Options.UseForeColor = True
-        Me.BAccept.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.BAccept.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
-        Me.BAccept.Location = New System.Drawing.Point(0, 367)
-        Me.BAccept.LookAndFeel.SkinName = "Metropolis"
-        Me.BAccept.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.UltraFlat
-        Me.BAccept.LookAndFeel.UseDefaultLookAndFeel = False
-        Me.BAccept.Name = "BAccept"
-        Me.BAccept.Size = New System.Drawing.Size(1047, 28)
-        Me.BAccept.TabIndex = 139
-        Me.BAccept.Text = "All Design"
-        '
-        'SimpleButton1
-        '
-        Me.SimpleButton1.Appearance.BackColor = System.Drawing.SystemColors.Highlight
-        Me.SimpleButton1.Appearance.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SimpleButton1.Appearance.ForeColor = System.Drawing.Color.White
-        Me.SimpleButton1.Appearance.Options.UseBackColor = True
-        Me.SimpleButton1.Appearance.Options.UseFont = True
-        Me.SimpleButton1.Appearance.Options.UseForeColor = True
-        Me.SimpleButton1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.SimpleButton1.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
-        Me.SimpleButton1.Location = New System.Drawing.Point(0, 339)
-        Me.SimpleButton1.LookAndFeel.SkinName = "Metropolis"
-        Me.SimpleButton1.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.UltraFlat
-        Me.SimpleButton1.LookAndFeel.UseDefaultLookAndFeel = False
-        Me.SimpleButton1.Name = "SimpleButton1"
-        Me.SimpleButton1.Size = New System.Drawing.Size(1047, 28)
-        Me.SimpleButton1.TabIndex = 140
-        Me.SimpleButton1.Text = "Only this list"
+        Me.CEforDeptHead.Enabled = False
+        Me.CEforDeptHead.Location = New System.Drawing.Point(566, 13)
+        Me.CEforDeptHead.Name = "CEforDeptHead"
+        Me.CEforDeptHead.Properties.Caption = "List for Dept. Head"
+        Me.CEforDeptHead.Size = New System.Drawing.Size(116, 19)
+        Me.CEforDeptHead.TabIndex = 8908
         '
         'FormEmpUniListDet
         '
@@ -848,6 +860,7 @@ Partial Class FormEmpUniListDet
         CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControlNav, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControlNav.ResumeLayout(False)
+        CType(Me.CEforDeptHead.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -912,4 +925,5 @@ Partial Class FormEmpUniListDet
     Friend WithEvents GridColumnSizeChart As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents SimpleButton1 As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BAccept As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents CEforDeptHead As DevExpress.XtraEditors.CheckEdit
 End Class

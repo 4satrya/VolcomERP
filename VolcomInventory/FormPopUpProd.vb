@@ -10,6 +10,7 @@
     '7 = qc adj out
     '8 = return in prod mat
     '10 = pr production
+    '11 = Claim return
 
     Private Sub FormPopUpProd_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         view_sample_purc()
@@ -37,7 +38,7 @@
         LEFT JOIN tb_m_ovh_price ovh ON ovh.id_ovh_price = wo.id_ovh_price
         LEFT JOIN tb_m_comp_contact cc ON cc.id_comp_contact = ovh.id_comp_contact
         LEFT JOIN tb_m_comp cm ON cm.id_comp = cc.id_comp "
-        query += "WHERE (a.id_report_status = '3' OR a.id_report_status = '4') "
+        query += "WHERE (a.id_report_status = '6') "
         If id_prod_order <> "-1" Then
             query += "AND a.id_prod_order = '" + id_prod_order + "' "
         End If
@@ -312,6 +313,35 @@
 
                 FormProdPRWODet.GConListPurchase.Enabled = True
                 Close()
+            Else
+                warningCustom("No data selected.")
+            End If
+        ElseIf id_pop_up = "11" Then
+            If GVProd.RowCount > 0 And GVProd.FocusedRowHandle >= 0 Then
+                Dim id_prod_order As String = GVProd.GetFocusedRowCellValue("id_prod_order").ToString
+                Dim id_design As String = GVProd.GetFocusedRowCellValue("id_design").ToString
+                Dim qw As String = "SELECT c.id_comp, cc.id_comp_contact, c.comp_number, c.comp_name, po.id_prod_order, po.prod_order_number 
+                FROM tb_prod_order_wo wo
+                INNER JOIN tb_prod_order po ON po.id_prod_order = wo.id_prod_order
+                INNER JOIN tb_m_ovh_price o ON o.id_ovh_price = wo.id_ovh_price
+                INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = o.id_comp_contact
+                INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp
+                WHERE wo.id_report_status!=5 AND wo.is_main_vendor=1 AND wo.id_prod_order=" + id_prod_order + " "
+                Dim dw As DataTable = execute_query(qw, -1, True, "", "", "", "")
+                If dw.Rows.Count > 0 Then
+                    FormProductionClaimReturnDet.id_prod_order = id_prod_order
+                    FormProductionClaimReturnDet.id_comp_contact = dw.Rows(0)("id_comp_contact").ToString
+                    FormProductionClaimReturnDet.id_design = id_design
+                    FormProductionClaimReturnDet.TxtVendor.Text = dw.Rows(0)("comp_number").ToString + " - " + dw.Rows(0)("comp_name").ToString
+                    FormProductionClaimReturnDet.TxtOrderNumber.Text = GVProd.GetFocusedRowCellValue("prod_order_number").ToString
+                    FormProductionClaimReturnDet.TxtDesignCode.Text = GVProd.GetFocusedRowCellValue("design_code").ToString
+                    FormProductionClaimReturnDet.TxtDesignName.Text = GVProd.GetFocusedRowCellValue("design_name").ToString
+                    pre_viewImages("2", FormProductionClaimReturnDet.PEView, GVProd.GetFocusedRowCellValue("id_design").ToString, False)
+                    FormProductionClaimReturnDet.viewDetail()
+                    Close()
+                Else
+                    warningCustom("Vendor not found")
+                End If
             Else
                 warningCustom("No data selected.")
             End If

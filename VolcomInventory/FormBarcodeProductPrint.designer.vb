@@ -60,6 +60,8 @@ Partial Class FormBarcodeProductPrint
         Me.BtnPrintFront = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnPrintBack = New DevExpress.XtraEditors.SimpleButton()
         Me.BPrint = New DevExpress.XtraEditors.SimpleButton()
+        Me.BSetHorizontalError = New DevExpress.XtraEditors.SimpleButton()
+        Me.TEHorizontalError = New DevExpress.XtraEditors.TextEdit()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
         CType(Me.TEPrice.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -84,6 +86,7 @@ Partial Class FormBarcodeProductPrint
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TEHorizontalError.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupGeneralHeader
@@ -273,6 +276,8 @@ Partial Class FormBarcodeProductPrint
         'GroupControl1
         '
         Me.GroupControl1.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupControl1.Controls.Add(Me.BSetHorizontalError)
+        Me.GroupControl1.Controls.Add(Me.TEHorizontalError)
         Me.GroupControl1.Controls.Add(Me.BSetHeightError)
         Me.GroupControl1.Controls.Add(Me.TEHeightError)
         Me.GroupControl1.Controls.Add(Me.LabelControl13)
@@ -291,14 +296,14 @@ Partial Class FormBarcodeProductPrint
         Me.GroupControl1.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupControl1.Location = New System.Drawing.Point(0, 201)
         Me.GroupControl1.Name = "GroupControl1"
-        Me.GroupControl1.Size = New System.Drawing.Size(752, 129)
+        Me.GroupControl1.Size = New System.Drawing.Size(752, 139)
         Me.GroupControl1.TabIndex = 35
         '
         'BSetHeightError
         '
         Me.BSetHeightError.Location = New System.Drawing.Point(384, 78)
         Me.BSetHeightError.Name = "BSetHeightError"
-        Me.BSetHeightError.Size = New System.Drawing.Size(102, 23)
+        Me.BSetHeightError.Size = New System.Drawing.Size(112, 23)
         Me.BSetHeightError.TabIndex = 169
         Me.BSetHeightError.Text = "Set Height Error"
         '
@@ -474,9 +479,9 @@ Partial Class FormBarcodeProductPrint
         Me.PanelControl1.Controls.Add(Me.BtnPrintBack)
         Me.PanelControl1.Controls.Add(Me.BPrint)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PanelControl1.Location = New System.Drawing.Point(0, 330)
+        Me.PanelControl1.Location = New System.Drawing.Point(0, 340)
         Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(752, 44)
+        Me.PanelControl1.Size = New System.Drawing.Size(752, 40)
         Me.PanelControl1.TabIndex = 36
         '
         'BLogUnique
@@ -486,7 +491,7 @@ Partial Class FormBarcodeProductPrint
         Me.BLogUnique.ImageList = Me.LargeImageCollection
         Me.BLogUnique.Location = New System.Drawing.Point(2, 2)
         Me.BLogUnique.Name = "BLogUnique"
-        Me.BLogUnique.Size = New System.Drawing.Size(101, 40)
+        Me.BLogUnique.Size = New System.Drawing.Size(101, 36)
         Me.BLogUnique.TabIndex = 15
         Me.BLogUnique.Text = "Log Unique"
         '
@@ -514,7 +519,7 @@ Partial Class FormBarcodeProductPrint
         Me.BtnPrintFront.ImageList = Me.LargeImageCollection
         Me.BtnPrintFront.Location = New System.Drawing.Point(445, 2)
         Me.BtnPrintFront.Name = "BtnPrintFront"
-        Me.BtnPrintFront.Size = New System.Drawing.Size(114, 40)
+        Me.BtnPrintFront.Size = New System.Drawing.Size(114, 36)
         Me.BtnPrintFront.TabIndex = 14
         Me.BtnPrintFront.Text = "Print Front Only"
         '
@@ -525,7 +530,7 @@ Partial Class FormBarcodeProductPrint
         Me.BtnPrintBack.ImageList = Me.LargeImageCollection
         Me.BtnPrintBack.Location = New System.Drawing.Point(559, 2)
         Me.BtnPrintBack.Name = "BtnPrintBack"
-        Me.BtnPrintBack.Size = New System.Drawing.Size(109, 40)
+        Me.BtnPrintBack.Size = New System.Drawing.Size(109, 36)
         Me.BtnPrintBack.TabIndex = 13
         Me.BtnPrintBack.Text = "Print Back Only"
         '
@@ -536,15 +541,33 @@ Partial Class FormBarcodeProductPrint
         Me.BPrint.ImageList = Me.LargeImageCollection
         Me.BPrint.Location = New System.Drawing.Point(668, 2)
         Me.BPrint.Name = "BPrint"
-        Me.BPrint.Size = New System.Drawing.Size(82, 40)
+        Me.BPrint.Size = New System.Drawing.Size(82, 36)
         Me.BPrint.TabIndex = 12
         Me.BPrint.Text = "Print"
+        '
+        'BSetHorizontalError
+        '
+        Me.BSetHorizontalError.Location = New System.Drawing.Point(384, 107)
+        Me.BSetHorizontalError.Name = "BSetHorizontalError"
+        Me.BSetHorizontalError.Size = New System.Drawing.Size(112, 23)
+        Me.BSetHorizontalError.TabIndex = 171
+        Me.BSetHorizontalError.Text = "Set Horizontal Error"
+        '
+        'TEHorizontalError
+        '
+        Me.TEHorizontalError.EditValue = ""
+        Me.TEHorizontalError.Location = New System.Drawing.Point(277, 109)
+        Me.TEHorizontalError.Name = "TEHorizontalError"
+        Me.TEHorizontalError.Properties.EditValueChangedDelay = 1
+        Me.TEHorizontalError.Size = New System.Drawing.Size(101, 20)
+        Me.TEHorizontalError.TabIndex = 170
+        Me.TEHorizontalError.TabStop = False
         '
         'FormBarcodeProductPrint
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(752, 374)
+        Me.ClientSize = New System.Drawing.Size(752, 380)
         Me.Controls.Add(Me.PanelControl1)
         Me.Controls.Add(Me.GroupControl1)
         Me.Controls.Add(Me.GroupGeneralHeader)
@@ -581,6 +604,7 @@ Partial Class FormBarcodeProductPrint
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TEHorizontalError.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -623,4 +647,6 @@ Partial Class FormBarcodeProductPrint
     Friend WithEvents BLogUnique As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BSetHeightError As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents TEHeightError As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents BSetHorizontalError As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents TEHorizontalError As DevExpress.XtraEditors.TextEdit
 End Class

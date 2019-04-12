@@ -14,6 +14,8 @@
     Public id_wh_drawer_to As String = "-1"
     Public dt As New DataTable
     Dim is_delete_scan As Boolean = False
+    Dim is_to_vendor As String = ""
+    Dim rmt As String = ""
 
     Private Sub FormFGRepairDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewReportStatus()
@@ -46,6 +48,12 @@
         TxtNameCompTo.Text = data.Rows(0)("comp_name_to").ToString
         setDefaultDrawerFrom()
         setDefaultDrawerTo()
+        is_to_vendor = data.Rows(0)("is_to_vendor").ToString
+        If is_to_vendor = "1" Then
+            rmt = "140"
+        Else
+            rmt = "91"
+        End If
 
         'detail2
         viewDetail()
@@ -282,7 +290,7 @@
     Private Sub BtnAttachment_Click(sender As Object, e As EventArgs) Handles BtnAttachment.Click
         Cursor = Cursors.WaitCursor
         FormDocumentUpload.is_view = "1"
-        FormDocumentUpload.report_mark_type = "91"
+        FormDocumentUpload.report_mark_type = rmt
         FormDocumentUpload.id_report = id_fg_repair
         FormDocumentUpload.ShowDialog()
         Cursor = Cursors.Default
@@ -291,7 +299,7 @@
     Private Sub BMark_Click(sender As Object, e As EventArgs) Handles BMark.Click
         Cursor = Cursors.WaitCursor
         FormReportMark.is_view = "1"
-        FormReportMark.report_mark_type = "91"
+        FormReportMark.report_mark_type = rmt
         FormReportMark.id_report = id_fg_repair
         FormReportMark.form_origin = Name
         FormReportMark.ShowDialog()

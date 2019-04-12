@@ -137,7 +137,7 @@
 
     Sub viewRepairList()
         Dim query_c As New ClassFGRepairReturnRec()
-        Dim query As String = query_c.queryRepairList("-1", "1")
+        Dim query As String = query_c.queryRepairList("AND r.is_from_vendor=2", "1")
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCRepairList.DataSource = data
         check_menu()

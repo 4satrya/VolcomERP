@@ -26,9 +26,9 @@ Partial Class FormEmpInitialize
         Me.RepositoryItemPictureEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit()
         Me.GridColumn2 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.GridColumn1 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.GridBandGeneral = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         Me.BandedGridColumnIsSelect = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.GridBandGeneral = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         Me.GridColumn3 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumnActiveStatus = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.GridColumn4 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
@@ -101,6 +101,7 @@ Partial Class FormEmpInitialize
         Me.GVEmployee.GroupCount = 1
         Me.GVEmployee.Name = "GVEmployee"
         Me.GVEmployee.OptionsBehavior.AutoExpandAllGroups = True
+        Me.GVEmployee.OptionsFind.AlwaysVisible = True
         Me.GVEmployee.OptionsView.ColumnAutoWidth = False
         Me.GVEmployee.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.[True]
         Me.GVEmployee.OptionsView.RowAutoHeight = True
@@ -161,6 +162,25 @@ Partial Class FormEmpInitialize
         Me.GridColumn1.Visible = True
         Me.GridColumn1.Width = 169
         '
+        'BandedGridColumnIsSelect
+        '
+        Me.BandedGridColumnIsSelect.AppearanceCell.Options.UseTextOptions = True
+        Me.BandedGridColumnIsSelect.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.BandedGridColumnIsSelect.AppearanceHeader.Options.UseTextOptions = True
+        Me.BandedGridColumnIsSelect.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.BandedGridColumnIsSelect.Caption = "Select"
+        Me.BandedGridColumnIsSelect.ColumnEdit = Me.RepositoryItemCheckEdit1
+        Me.BandedGridColumnIsSelect.FieldName = "is_select"
+        Me.BandedGridColumnIsSelect.Name = "BandedGridColumnIsSelect"
+        Me.BandedGridColumnIsSelect.Visible = True
+        '
+        'RepositoryItemCheckEdit1
+        '
+        Me.RepositoryItemCheckEdit1.AutoHeight = False
+        Me.RepositoryItemCheckEdit1.Name = "RepositoryItemCheckEdit1"
+        Me.RepositoryItemCheckEdit1.ValueChecked = "Yes"
+        Me.RepositoryItemCheckEdit1.ValueUnchecked = "No"
+        '
         'GridBandGeneral
         '
         Me.GridBandGeneral.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
@@ -188,25 +208,6 @@ Partial Class FormEmpInitialize
         Me.GridBandGeneral.Name = "GridBandGeneral"
         Me.GridBandGeneral.VisibleIndex = 1
         Me.GridBandGeneral.Width = 1486
-        '
-        'BandedGridColumnIsSelect
-        '
-        Me.BandedGridColumnIsSelect.AppearanceCell.Options.UseTextOptions = True
-        Me.BandedGridColumnIsSelect.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.BandedGridColumnIsSelect.AppearanceHeader.Options.UseTextOptions = True
-        Me.BandedGridColumnIsSelect.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.BandedGridColumnIsSelect.Caption = "Select"
-        Me.BandedGridColumnIsSelect.ColumnEdit = Me.RepositoryItemCheckEdit1
-        Me.BandedGridColumnIsSelect.FieldName = "is_select"
-        Me.BandedGridColumnIsSelect.Name = "BandedGridColumnIsSelect"
-        Me.BandedGridColumnIsSelect.Visible = True
-        '
-        'RepositoryItemCheckEdit1
-        '
-        Me.RepositoryItemCheckEdit1.AutoHeight = False
-        Me.RepositoryItemCheckEdit1.Name = "RepositoryItemCheckEdit1"
-        Me.RepositoryItemCheckEdit1.ValueChecked = "Yes"
-        Me.RepositoryItemCheckEdit1.ValueUnchecked = "No"
         '
         'GridColumn3
         '

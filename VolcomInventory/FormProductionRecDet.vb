@@ -133,7 +133,6 @@ Public Class FormProductionRecDet
             TEDesign.Text = data.Rows(0)("design_name")
 
             BShowOrder.Enabled = False
-            BShowContact.Enabled = False
             BShowContact2.Enabled = False
             GConListPurchase.Enabled = True
             GroupControlListBarcode.Enabled = True
@@ -483,6 +482,7 @@ Public Class FormProductionRecDet
                 Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure to save changes?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
                 If confirm = Windows.Forms.DialogResult.Yes Then
                     Cursor = Cursors.WaitCursor
+                    BSave.Enabled = False
                     Try
                         'insert rec
                         If do_date = "0000-00-00" Then
@@ -510,6 +510,13 @@ Public Class FormProductionRecDet
                             End Try
                         Next
 
+                        'submit
+                        If is_over_tol = "1" Then
+                            submit_who_prepared("127", id_rec_new, id_user)
+                        Else
+                            submit_who_prepared("28", id_rec_new, id_user)
+                        End If
+
                         'end insert who prepared
                         FormProductionRec.view_prod_order_rec()
                         FormProductionRec.view_prod_order()
@@ -524,7 +531,7 @@ Public Class FormProductionRecDet
 
                         infoCustom("Document #" + rec_number + " was created successfully.")
                     Catch ex As Exception
-                        errorConnection()
+                        stopCustom(ex.ToString)
                     End Try
                     Cursor = Cursors.Default
                 End If
@@ -607,7 +614,7 @@ Public Class FormProductionRecDet
 
     End Sub
 
-    Private Sub BShowContact_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BShowContact.Click
+    Private Sub BShowContact_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         FormPopUpContact.id_pop_up = "25"
         FormPopUpContact.ShowDialog()
     End Sub
@@ -654,7 +661,6 @@ Public Class FormProductionRecDet
         TEDONumber.Enabled = False
         TEDODate.Enabled = False
         BShowOrder.Enabled = False
-        BShowContact.Enabled = False
         BShowContact2.Enabled = False
         BSave.Enabled = False
         BScan.Enabled = False
@@ -685,7 +691,6 @@ Public Class FormProductionRecDet
         MENote.Enabled = True
         TEDONumber.Enabled = True
         TEDODate.Enabled = True
-        BShowContact.Enabled = True
         BShowContact2.Enabled = True
         BSave.Enabled = True
         BScan.Enabled = True
@@ -1022,5 +1027,12 @@ Public Class FormProductionRecDet
 
     Private Sub DEArrive_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles DEArrive.Validating
         EP_DE_cant_blank(EPSampleRec, DEArrive)
+    End Sub
+
+    Private Sub TEDODate_EditValueChanged(sender As Object, e As EventArgs) Handles TEDODate.EditValueChanged
+        Try
+            DEArrive.Properties.MinValue = TEDODate.EditValue
+        Catch ex As Exception
+        End Try
     End Sub
 End Class

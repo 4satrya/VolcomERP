@@ -36,8 +36,9 @@ Partial Class FormFGRepairDet
         Me.LabelControl7 = New DevExpress.XtraEditors.LabelControl()
         Me.DEForm = New DevExpress.XtraEditors.TextEdit()
         Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
-        Me.BtnAttachment = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnXlsBOF = New DevExpress.XtraEditors.SimpleButton()
         Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
+        Me.BtnAttachment = New DevExpress.XtraEditors.SimpleButton()
         Me.BMark = New DevExpress.XtraEditors.SimpleButton()
         Me.DDBPrint = New DevExpress.XtraEditors.DropDownButton()
         Me.PUDD = New DevExpress.XtraBars.PopupMenu(Me.components)
@@ -76,7 +77,7 @@ Partial Class FormFGRepairDet
         Me.GCScanSum = New DevExpress.XtraGrid.GridControl()
         Me.GVScanSum = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumnNoSum = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnCodeSum = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnQty = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -87,6 +88,7 @@ Partial Class FormFGRepairDet
         Me.GridColumnStatus = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.EPForm = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.SplashScreenManager1 = New DevExpress.XtraSplashScreen.SplashScreenManager(Me, GetType(Global.VolcomMRP.WaitForm), True, True)
+        Me.GridColumnIsOldDesign = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
         CType(Me.TxtNameCompTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -293,6 +295,7 @@ Partial Class FormFGRepairDet
         '
         'PanelControl3
         '
+        Me.PanelControl3.Controls.Add(Me.BtnXlsBOF)
         Me.PanelControl3.Controls.Add(Me.BtnAttachment)
         Me.PanelControl3.Controls.Add(Me.BMark)
         Me.PanelControl3.Controls.Add(Me.DDBPrint)
@@ -306,16 +309,18 @@ Partial Class FormFGRepairDet
         Me.PanelControl3.Size = New System.Drawing.Size(859, 37)
         Me.PanelControl3.TabIndex = 203
         '
-        'BtnAttachment
+        'BtnXlsBOF
         '
-        Me.BtnAttachment.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BtnAttachment.ImageIndex = 13
-        Me.BtnAttachment.ImageList = Me.LargeImageCollection
-        Me.BtnAttachment.Location = New System.Drawing.Point(492, 2)
-        Me.BtnAttachment.Name = "BtnAttachment"
-        Me.BtnAttachment.Size = New System.Drawing.Size(100, 33)
-        Me.BtnAttachment.TabIndex = 9
-        Me.BtnAttachment.Text = "Attachment"
+        Me.BtnXlsBOF.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnXlsBOF.Image = CType(resources.GetObject("BtnXlsBOF.Image"), System.Drawing.Image)
+        Me.BtnXlsBOF.ImageIndex = 11
+        Me.BtnXlsBOF.ImageList = Me.LargeImageCollection
+        Me.BtnXlsBOF.Location = New System.Drawing.Point(376, 2)
+        Me.BtnXlsBOF.Name = "BtnXlsBOF"
+        Me.BtnXlsBOF.Size = New System.Drawing.Size(116, 33)
+        Me.BtnXlsBOF.TabIndex = 16
+        Me.BtnXlsBOF.Text = "Generate XLS"
+        Me.BtnXlsBOF.Visible = False
         '
         'LargeImageCollection
         '
@@ -335,6 +340,17 @@ Partial Class FormFGRepairDet
         Me.LargeImageCollection.Images.SetKeyName(11, "18_32x32.png")
         Me.LargeImageCollection.Images.SetKeyName(12, "31_32x32.png")
         Me.LargeImageCollection.Images.SetKeyName(13, "attachment-icon.png")
+        '
+        'BtnAttachment
+        '
+        Me.BtnAttachment.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnAttachment.ImageIndex = 13
+        Me.BtnAttachment.ImageList = Me.LargeImageCollection
+        Me.BtnAttachment.Location = New System.Drawing.Point(492, 2)
+        Me.BtnAttachment.Name = "BtnAttachment"
+        Me.BtnAttachment.Size = New System.Drawing.Size(100, 33)
+        Me.BtnAttachment.TabIndex = 9
+        Me.BtnAttachment.Text = "Attachment"
         '
         'BMark
         '
@@ -539,7 +555,7 @@ Partial Class FormFGRepairDet
         '
         'GVScan
         '
-        Me.GVScan.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumnFullCode, Me.GridColumnCode, Me.GridColumnStyle, Me.GridColumnSize})
+        Me.GVScan.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumnFullCode, Me.GridColumnCode, Me.GridColumnStyle, Me.GridColumnSize, Me.GridColumnIsOldDesign})
         Me.GVScan.GridControl = Me.GCScan
         Me.GVScan.Name = "GVScan"
         Me.GVScan.OptionsView.ShowGroupPanel = False
@@ -680,7 +696,7 @@ Partial Class FormFGRepairDet
         '
         'GVScanSum
         '
-        Me.GVScanSum.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNoSum, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumnQty, Me.GridColumnQtyAvail, Me.GridColumn2, Me.GridColumn6, Me.GridColumnAmount, Me.GridColumnStatus})
+        Me.GVScanSum.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNoSum, Me.GridColumnCodeSum, Me.GridColumn4, Me.GridColumn5, Me.GridColumnQty, Me.GridColumnQtyAvail, Me.GridColumn2, Me.GridColumn6, Me.GridColumnAmount, Me.GridColumnStatus})
         Me.GVScanSum.GridControl = Me.GCScanSum
         Me.GVScanSum.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty", Me.GridColumnQty, "{0:n0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "available_qty", Me.GridColumnQtyAvail, "{0:n0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount", Me.GridColumnAmount, "{0:n0}")})
         Me.GVScanSum.Name = "GVScanSum"
@@ -697,14 +713,14 @@ Partial Class FormFGRepairDet
         Me.GridColumnNoSum.VisibleIndex = 0
         Me.GridColumnNoSum.Width = 39
         '
-        'GridColumn3
+        'GridColumnCodeSum
         '
-        Me.GridColumn3.Caption = "Code"
-        Me.GridColumn3.FieldName = "code"
-        Me.GridColumn3.Name = "GridColumn3"
-        Me.GridColumn3.Visible = True
-        Me.GridColumn3.VisibleIndex = 1
-        Me.GridColumn3.Width = 189
+        Me.GridColumnCodeSum.Caption = "Code"
+        Me.GridColumnCodeSum.FieldName = "code"
+        Me.GridColumnCodeSum.Name = "GridColumnCodeSum"
+        Me.GridColumnCodeSum.Visible = True
+        Me.GridColumnCodeSum.VisibleIndex = 1
+        Me.GridColumnCodeSum.Width = 189
         '
         'GridColumn4
         '
@@ -795,6 +811,13 @@ Partial Class FormFGRepairDet
         'SplashScreenManager1
         '
         Me.SplashScreenManager1.ClosingDelay = 500
+        '
+        'GridColumnIsOldDesign
+        '
+        Me.GridColumnIsOldDesign.Caption = "Is Old Design"
+        Me.GridColumnIsOldDesign.FieldName = "is_old_design"
+        Me.GridColumnIsOldDesign.Name = "GridColumnIsOldDesign"
+        Me.GridColumnIsOldDesign.OptionsColumn.AllowEdit = False
         '
         'FormFGRepairDet
         '
@@ -908,7 +931,7 @@ Partial Class FormFGRepairDet
     Friend WithEvents GCScanSum As DevExpress.XtraGrid.GridControl
     Friend WithEvents GVScanSum As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumnNoSum As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn3 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnCodeSum As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnQty As DevExpress.XtraGrid.Columns.GridColumn
@@ -924,4 +947,6 @@ Partial Class FormFGRepairDet
     Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnAmount As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnStatus As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BtnXlsBOF As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GridColumnIsOldDesign As DevExpress.XtraGrid.Columns.GridColumn
 End Class

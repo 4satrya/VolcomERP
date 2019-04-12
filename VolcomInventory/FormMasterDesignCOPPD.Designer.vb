@@ -67,7 +67,7 @@ Partial Class FormMasterDesignCOPPD
         'TEVendor
         '
         Me.TEVendor.EditValue = ""
-        Me.TEVendor.Location = New System.Drawing.Point(90, 48)
+        Me.TEVendor.Location = New System.Drawing.Point(138, 48)
         Me.TEVendor.Name = "TEVendor"
         Me.TEVendor.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TEVendor.Properties.Appearance.Options.UseFont = True
@@ -80,13 +80,13 @@ Partial Class FormMasterDesignCOPPD
         Me.TEVendorName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TEVendorName.EditValue = ""
-        Me.TEVendorName.Location = New System.Drawing.Point(221, 48)
+        Me.TEVendorName.Location = New System.Drawing.Point(272, 48)
         Me.TEVendorName.Name = "TEVendorName"
         Me.TEVendorName.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TEVendorName.Properties.Appearance.Options.UseFont = True
         Me.TEVendorName.Properties.EditValueChangedDelay = 1
         Me.TEVendorName.Properties.ReadOnly = True
-        Me.TEVendorName.Size = New System.Drawing.Size(269, 20)
+        Me.TEVendorName.Size = New System.Drawing.Size(324, 20)
         Me.TEVendorName.TabIndex = 8892
         Me.TEVendorName.TabStop = False
         '
@@ -95,7 +95,7 @@ Partial Class FormMasterDesignCOPPD
         Me.BtnBrowseContactFrom.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnBrowseContactFrom.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnBrowseContactFrom.Appearance.Options.UseFont = True
-        Me.BtnBrowseContactFrom.Location = New System.Drawing.Point(496, 48)
+        Me.BtnBrowseContactFrom.Location = New System.Drawing.Point(602, 48)
         Me.BtnBrowseContactFrom.Name = "BtnBrowseContactFrom"
         Me.BtnBrowseContactFrom.Size = New System.Drawing.Size(23, 20)
         Me.BtnBrowseContactFrom.TabIndex = 8890
@@ -133,7 +133,7 @@ Partial Class FormMasterDesignCOPPD
         Me.PanelControl3.LookAndFeel.SkinName = "Blue"
         Me.PanelControl3.LookAndFeel.UseDefaultLookAndFeel = False
         Me.PanelControl3.Name = "PanelControl3"
-        Me.PanelControl3.Size = New System.Drawing.Size(529, 38)
+        Me.PanelControl3.Size = New System.Drawing.Size(635, 38)
         Me.PanelControl3.TabIndex = 5
         Me.PanelControl3.TabStop = True
         '
@@ -142,7 +142,7 @@ Partial Class FormMasterDesignCOPPD
         Me.BtnCancel.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnCancel.ImageIndex = 5
         Me.BtnCancel.ImageList = Me.LargeImageCollection
-        Me.BtnCancel.Location = New System.Drawing.Point(377, 2)
+        Me.BtnCancel.Location = New System.Drawing.Point(483, 2)
         Me.BtnCancel.Name = "BtnCancel"
         Me.BtnCancel.Size = New System.Drawing.Size(75, 34)
         Me.BtnCancel.TabIndex = 7
@@ -153,7 +153,7 @@ Partial Class FormMasterDesignCOPPD
         Me.BtnSave.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnSave.ImageIndex = 7
         Me.BtnSave.ImageList = Me.LargeImageCollection
-        Me.BtnSave.Location = New System.Drawing.Point(452, 2)
+        Me.BtnSave.Location = New System.Drawing.Point(558, 2)
         Me.BtnSave.Name = "BtnSave"
         Me.BtnSave.Size = New System.Drawing.Size(75, 34)
         Me.BtnSave.TabIndex = 6
@@ -171,7 +171,7 @@ Partial Class FormMasterDesignCOPPD
         'TECode
         '
         Me.TECode.EditValue = ""
-        Me.TECode.Location = New System.Drawing.Point(90, 22)
+        Me.TECode.Location = New System.Drawing.Point(138, 22)
         Me.TECode.Name = "TECode"
         Me.TECode.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TECode.Properties.Appearance.Options.UseFont = True
@@ -186,19 +186,19 @@ Partial Class FormMasterDesignCOPPD
         Me.TEDesc.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TEDesc.EditValue = ""
-        Me.TEDesc.Location = New System.Drawing.Point(221, 22)
+        Me.TEDesc.Location = New System.Drawing.Point(272, 22)
         Me.TEDesc.Name = "TEDesc"
         Me.TEDesc.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TEDesc.Properties.Appearance.Options.UseFont = True
         Me.TEDesc.Properties.EditValueChangedDelay = 1
         Me.TEDesc.Properties.ReadOnly = True
-        Me.TEDesc.Size = New System.Drawing.Size(298, 20)
+        Me.TEDesc.Size = New System.Drawing.Size(353, 20)
         Me.TEDesc.TabIndex = 8897
         Me.TEDesc.TabStop = False
         '
         'LECurrency
         '
-        Me.LECurrency.Location = New System.Drawing.Point(90, 74)
+        Me.LECurrency.Location = New System.Drawing.Point(138, 74)
         Me.LECurrency.Name = "LECurrency"
         Me.LECurrency.Properties.Appearance.Options.UseTextOptions = True
         Me.LECurrency.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near
@@ -229,7 +229,7 @@ Partial Class FormMasterDesignCOPPD
         'TEKurs
         '
         Me.TEKurs.EditValue = ""
-        Me.TEKurs.Location = New System.Drawing.Point(90, 100)
+        Me.TEKurs.Location = New System.Drawing.Point(138, 100)
         Me.TEKurs.Name = "TEKurs"
         Me.TEKurs.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TEKurs.Properties.Appearance.Options.UseFont = True
@@ -245,14 +245,14 @@ Partial Class FormMasterDesignCOPPD
         Me.LabelControl4.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelControl4.Location = New System.Drawing.Point(12, 129)
         Me.LabelControl4.Name = "LabelControl4"
-        Me.LabelControl4.Size = New System.Drawing.Size(27, 13)
+        Me.LabelControl4.Size = New System.Drawing.Size(120, 13)
         Me.LabelControl4.TabIndex = 8903
-        Me.LabelControl4.Text = "ECOP"
+        Me.LabelControl4.Text = "ECOP (include additional)"
         '
         'TEEcop
         '
         Me.TEEcop.EditValue = ""
-        Me.TEEcop.Location = New System.Drawing.Point(90, 126)
+        Me.TEEcop.Location = New System.Drawing.Point(138, 126)
         Me.TEEcop.Name = "TEEcop"
         Me.TEEcop.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TEEcop.Properties.Appearance.Options.UseFont = True
@@ -291,7 +291,7 @@ Partial Class FormMasterDesignCOPPD
         'TEAdditionalCost
         '
         Me.TEAdditionalCost.EditValue = ""
-        Me.TEAdditionalCost.Location = New System.Drawing.Point(90, 152)
+        Me.TEAdditionalCost.Location = New System.Drawing.Point(138, 152)
         Me.TEAdditionalCost.Name = "TEAdditionalCost"
         Me.TEAdditionalCost.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TEAdditionalCost.Properties.Appearance.Options.UseFont = True
@@ -310,7 +310,7 @@ Partial Class FormMasterDesignCOPPD
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(529, 229)
+        Me.ClientSize = New System.Drawing.Size(635, 229)
         Me.Controls.Add(Me.LabelControl5)
         Me.Controls.Add(Me.TEAdditionalCost)
         Me.Controls.Add(Me.PictureSeason)

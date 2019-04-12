@@ -4,7 +4,10 @@
         Dispose()
     End Sub
     Private Sub FormMarkAssignUser_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Dim query As String = "SELECT a.id_mark_asg,a.id_report_status,a.report_mark_type,b.report_mark_type_name,c.report_status,IF(a.is_requisite='2','No','Yes') AS requisite "
+        Dim query As String = "SELECT a.id_mark_asg,a.id_report_status,a.report_mark_type,b.report_mark_type_name,c.report_status,
+        IF(a.is_requisite='2','No','Yes') AS requisite, 
+        IF(a.is_need_print='2','No','Yes') AS `need_print`, 
+        IF(a.is_need_upload='2','No','Yes') AS `need_upload` "
         query += "FROM tb_mark_asg a "
         query += "INNER JOIN tb_lookup_report_mark_type b ON a.report_mark_type=b.report_mark_type "
         query += "INNER JOIN tb_lookup_report_status c ON a.id_report_status=c.id_report_status "
@@ -13,6 +16,9 @@
         LReport.Text = data.Rows(0)("report_mark_type_name").ToString()
         LStatus.Text = data.Rows(0)("report_status").ToString()
         LRequisite.Text = data.Rows(0)("requisite").ToString
+        LNeedPrint.Text = data.Rows(0)("need_print").ToString
+        LNeedUpload.Text = data.Rows(0)("need_upload").ToString
+
         '
         view_user()
         re_order()

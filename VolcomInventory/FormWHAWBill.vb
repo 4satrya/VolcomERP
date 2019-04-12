@@ -2,7 +2,9 @@
     Dim bnew_active As String = "1"
     Dim bedit_active As String = "1"
     Dim bdel_active As String = "1"
-
+    '
+    Public is_lock As String = "2"
+    '
     Private Sub FormWHAWBill_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
         FormMain.show_rb(Name)
         check_but()
@@ -548,7 +550,15 @@
             '
             Cursor = Cursors.Default
         Else
-            stopCustom("Please choose employee first.")
+            stopCustom("Please choose collie first.")
+        End If
+    End Sub
+
+    Private Sub FormWHAWBill_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If is_lock = "1" Then
+            PCLock.Visible = True
+        Else
+            PCLock.Visible = False
         End If
     End Sub
 End Class

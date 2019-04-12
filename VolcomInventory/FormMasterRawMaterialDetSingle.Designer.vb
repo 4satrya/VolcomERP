@@ -32,6 +32,7 @@ Partial Class FormMasterRawMaterialDetSingle
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnDescRange = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl9 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.TxtMaterialFullCode = New DevExpress.XtraEditors.TextEdit()
@@ -40,7 +41,7 @@ Partial Class FormMasterRawMaterialDetSingle
         Me.GVCodeMaterial = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.ColCodeParam = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ColCodeValue = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
+        Me.PCSave = New DevExpress.XtraEditors.PanelControl()
         Me.BGenerate = New DevExpress.XtraEditors.SimpleButton()
         Me.BSave = New DevExpress.XtraEditors.SimpleButton()
         Me.PanC1 = New DevExpress.XtraEditors.PanelControl()
@@ -102,7 +103,6 @@ Partial Class FormMasterRawMaterialDetSingle
         Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridView5 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.EPMaterial = New System.Windows.Forms.ErrorProvider(Me.components)
-        Me.GridColumnDescRange = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.RepositoryItemSearchLookUpEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PCLotTitle, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -115,8 +115,8 @@ Partial Class FormMasterRawMaterialDetSingle
         CType(Me.TxtMaterialFullCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GCCodeMaterial, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVCodeMaterial, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.PanelControl2.SuspendLayout()
+        CType(Me.PCSave, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PCSave.SuspendLayout()
         CType(Me.PanC1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanC1.SuspendLayout()
         CType(Me.LETemplate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -224,7 +224,7 @@ Partial Class FormMasterRawMaterialDetSingle
         Me.XTPGeneral.Controls.Add(Me.TxtMaterialFullCode)
         Me.XTPGeneral.Controls.Add(Me.DNCodeMaterial)
         Me.XTPGeneral.Controls.Add(Me.GCCodeMaterial)
-        Me.XTPGeneral.Controls.Add(Me.PanelControl2)
+        Me.XTPGeneral.Controls.Add(Me.PCSave)
         Me.XTPGeneral.Controls.Add(Me.PanC1)
         Me.XTPGeneral.Controls.Add(Me.PanC2)
         Me.XTPGeneral.ImageIndex = 3
@@ -266,6 +266,14 @@ Partial Class FormMasterRawMaterialDetSingle
         Me.GridColumn11.Name = "GridColumn11"
         Me.GridColumn11.Visible = True
         Me.GridColumn11.VisibleIndex = 0
+        '
+        'GridColumnDescRange
+        '
+        Me.GridColumnDescRange.Caption = "Description"
+        Me.GridColumnDescRange.FieldName = "description_range"
+        Me.GridColumnDescRange.Name = "GridColumnDescRange"
+        Me.GridColumnDescRange.Visible = True
+        Me.GridColumnDescRange.VisibleIndex = 1
         '
         'LabelControl9
         '
@@ -344,16 +352,16 @@ Partial Class FormMasterRawMaterialDetSingle
         Me.ColCodeValue.Visible = True
         Me.ColCodeValue.VisibleIndex = 1
         '
-        'PanelControl2
+        'PCSave
         '
-        Me.PanelControl2.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
-        Me.PanelControl2.Controls.Add(Me.BGenerate)
-        Me.PanelControl2.Controls.Add(Me.BSave)
-        Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl2.Location = New System.Drawing.Point(416, 337)
-        Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(458, 36)
-        Me.PanelControl2.TabIndex = 10
+        Me.PCSave.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PCSave.Controls.Add(Me.BGenerate)
+        Me.PCSave.Controls.Add(Me.BSave)
+        Me.PCSave.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.PCSave.Location = New System.Drawing.Point(416, 337)
+        Me.PCSave.Name = "PCSave"
+        Me.PCSave.Size = New System.Drawing.Size(458, 36)
+        Me.PCSave.TabIndex = 10
         '
         'BGenerate
         '
@@ -936,14 +944,6 @@ Partial Class FormMasterRawMaterialDetSingle
         Me.EPMaterial.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink
         Me.EPMaterial.ContainerControl = Me
         '
-        'GridColumnDescRange
-        '
-        Me.GridColumnDescRange.Caption = "Description"
-        Me.GridColumnDescRange.FieldName = "description_range"
-        Me.GridColumnDescRange.Name = "GridColumnDescRange"
-        Me.GridColumnDescRange.Visible = True
-        Me.GridColumnDescRange.VisibleIndex = 1
-        '
         'FormMasterRawMaterialDetSingle
         '
         Me.AcceptButton = Me.BSave
@@ -956,7 +956,6 @@ Partial Class FormMasterRawMaterialDetSingle
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FormMasterRawMaterialDetSingle"
-        Me.ShowInTaskbar = False
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Detail Material"
@@ -974,8 +973,8 @@ Partial Class FormMasterRawMaterialDetSingle
         CType(Me.TxtMaterialFullCode.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GCCodeMaterial, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVCodeMaterial, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.PanelControl2.ResumeLayout(False)
+        CType(Me.PCSave, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PCSave.ResumeLayout(False)
         CType(Me.PanC1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanC1.ResumeLayout(False)
         Me.PanC1.PerformLayout()
@@ -1068,7 +1067,7 @@ Partial Class FormMasterRawMaterialDetSingle
     Friend WithEvents GridView5 As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents EPMaterial As System.Windows.Forms.ErrorProvider
     Friend WithEvents TxtLifetime As DevExpress.XtraEditors.SpinEdit
-    Friend WithEvents PanelControl2 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents PCSave As DevExpress.XtraEditors.PanelControl
     Friend WithEvents BGenerate As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BSave As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents LEMethod As DevExpress.XtraEditors.LookUpEdit

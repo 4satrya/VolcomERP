@@ -3,6 +3,7 @@
     Dim bnew_active As String = "1"
     Dim bedit_active As String = "1"
     Dim bdel_active As String = "1"
+    Public is_to_vendor As Boolean = False
 
     Private Sub FormFGRepair_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'date now
@@ -76,7 +77,7 @@
         End Try
 
         Dim query_c As New ClassFGRepair()
-        Dim query As String = query_c.queryMain("AND (r.fg_repair_date>='" + date_from_selected + "' AND r.fg_repair_date<='" + date_until_selected + "') ", "2")
+        Dim query As String = query_c.queryMain("AND comp_frm.id_departement=" + id_departement_user + " AND (r.fg_repair_date>='" + date_from_selected + "' AND r.fg_repair_date<='" + date_until_selected + "') ", "2")
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCRepair.DataSource = data
         check_menu()
@@ -103,6 +104,14 @@
         Cursor = Cursors.WaitCursor
         FormFGRepairDet.id_pre = "2"
         FormMain.but_edit()
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub GVRepair_DoubleClick(sender As Object, e As EventArgs) Handles GVRepair.DoubleClick
+        Cursor = Cursors.WaitCursor
+        If GVRepair.RowCount > 0 And GVRepair.FocusedRowHandle >= 0 Then
+            FormMain.but_edit()
+        End If
         Cursor = Cursors.Default
     End Sub
 End Class

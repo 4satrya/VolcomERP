@@ -2,6 +2,7 @@
     Dim id_comp_cat_store As String = "-1"
     Public id_comp As String = "0"
     Public id_store_contact_from As String = "0"
+    Public is_load As Boolean = False
 
     Private Sub TxtCodeCompFrom_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtCodeCompFrom.KeyDown
         If e.KeyCode = Keys.Enter Then
@@ -37,19 +38,23 @@
     End Sub
 
     Private Sub FormSalesReportTrackingParam_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        DEStart.EditValue = Now
-        DEEnd.EditValue = Now
-        '
-        id_comp_cat_store = execute_query("SELECT id_comp_cat_store FROM tb_opt", 0, True, "", "", "", "")
-        load_rep()
-        load_island()
-        load_group()
-        load_price_cat()
-        load_promo()
-        load_division()
-        load_season()
+        If is_load = False Then
+            DEStart.EditValue = Now
+            DEEnd.EditValue = Now
+            '
+            id_comp_cat_store = execute_query("SELECT id_comp_cat_store FROM tb_opt", 0, True, "", "", "", "")
+            load_rep()
+            load_island()
+            load_group()
+            load_price_cat()
+            load_promo()
+            load_division()
+            load_season()
 
-        load_price_type()
+            load_price_type()
+            '
+            is_load = False
+        End If
     End Sub
 
     Sub load_rep()
@@ -121,27 +126,56 @@
 
         date_start = Date.Parse(DEStart.EditValue.ToString).ToString("yyyy-MM-dd")
         date_end = Date.Parse(DEEnd.EditValue.ToString).ToString("yyyy-MM-dd")
-        id_rep = LERepArea.EditValue.ToString
-        island = LEIsland.EditValue.ToString
-        id_group = LEGroupAccount.EditValue.ToString
-        id_price_cat = LEPriceCat.EditValue.ToString
-        id_promo = LEPromo.EditValue.ToString
-        id_season = LESeason.EditValue.ToString
-        id_division = LEDivision.EditValue.ToString
-        id_price_type = LEPRiceType.EditValue.ToString
+        FormSalesReportTracking.var_periode = Date.Parse(DEStart.EditValue.ToString).ToString("dd MMMM yyyy") & " until " & Date.Parse(DEEnd.EditValue.ToString).ToString("dd MMMM yyyy")
 
+        id_rep = LERepArea.EditValue.ToString
+        FormSalesReportTracking.var_rep_area = LERepArea.Text.ToString
+
+        island = LEIsland.EditValue.ToString
+        FormSalesReportTracking.var_island = LEIsland.Text.ToString
+
+        id_group = LEGroupAccount.EditValue.ToString
+        FormSalesReportTracking.var_grup = LEGroupAccount.Text.ToString
+
+        id_price_cat = LEPriceCat.EditValue.ToString
+        FormSalesReportTracking.var_price_cat = LEPriceCat.Text.ToString
+
+        id_promo = LEPromo.EditValue.ToString
+        FormSalesReportTracking.var_promo = LEPromo.Text.ToString
+
+        id_season = LESeason.EditValue.ToString
+        FormSalesReportTracking.var_season = LESeason.Text.ToString
+
+        id_division = LEDivision.EditValue.ToString
+        FormSalesReportTracking.var_division = LEDivision.Text.ToString
+
+        id_price_type = LEPRiceType.EditValue.ToString
+        FormSalesReportTracking.var_prc_type = LEPRiceType.Text.ToString
+        '
+        If id_comp = "0" Then
+            FormSalesReportTracking.var_store = "All Store"
+        Else
+            FormSalesReportTracking.var_store = TxtCodeCompFrom.Text & " - " & TxtNameCompFrom.Text
+        End If
+        '
         FormSalesReportTracking.load_data(id_comp, date_start, date_end, id_rep, island, id_group, id_price_cat, id_promo, id_division, id_season, id_price_type)
 
         Close()
     End Sub
 
     Private Sub FormSalesReportTrackingParam_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
-        Dispose()
+
     End Sub
 
     Private Sub BtnBrowseContactFrom_Click(sender As Object, e As EventArgs) Handles BtnBrowseContactFrom.Click
         FormPopUpContact.id_pop_up = "85"
         FormPopUpContact.id_cat = id_comp_cat_store
         FormPopUpContact.ShowDialog()
+    End Sub
+
+    Private Sub BReset_Click(sender As Object, e As EventArgs) Handles BReset.Click
+        id_comp = "0"
+        TxtCodeCompFrom.Text = ""
+        TxtNameCompFrom.Text = ""
     End Sub
 End Class

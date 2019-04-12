@@ -22,8 +22,9 @@ Partial Class FormSalesReportTracking
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormSalesReportTracking))
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
-        Me.BSearch = New DevExpress.XtraEditors.SimpleButton()
+        Me.BPrint = New DevExpress.XtraEditors.SimpleButton()
         Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
+        Me.BSearch = New DevExpress.XtraEditors.SimpleButton()
         Me.GCListDesign = New DevExpress.XtraGrid.GridControl()
         Me.BGVListDesign = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridView()
         Me.gbDetail = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
@@ -61,6 +62,7 @@ Partial Class FormSalesReportTracking
         '
         'PanelControl1
         '
+        Me.PanelControl1.Controls.Add(Me.BPrint)
         Me.PanelControl1.Controls.Add(Me.BSearch)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl1.Location = New System.Drawing.Point(0, 0)
@@ -68,16 +70,16 @@ Partial Class FormSalesReportTracking
         Me.PanelControl1.Size = New System.Drawing.Size(1080, 42)
         Me.PanelControl1.TabIndex = 0
         '
-        'BSearch
+        'BPrint
         '
-        Me.BSearch.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BSearch.ImageIndex = 15
-        Me.BSearch.ImageList = Me.LargeImageCollection
-        Me.BSearch.Location = New System.Drawing.Point(933, 2)
-        Me.BSearch.Name = "BSearch"
-        Me.BSearch.Size = New System.Drawing.Size(145, 38)
-        Me.BSearch.TabIndex = 16
-        Me.BSearch.Text = "Search Parameter"
+        Me.BPrint.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BPrint.ImageIndex = 6
+        Me.BPrint.ImageList = Me.LargeImageCollection
+        Me.BPrint.Location = New System.Drawing.Point(833, 2)
+        Me.BPrint.Name = "BPrint"
+        Me.BPrint.Size = New System.Drawing.Size(100, 38)
+        Me.BPrint.TabIndex = 17
+        Me.BPrint.Text = "Print"
         '
         'LargeImageCollection
         '
@@ -103,6 +105,17 @@ Partial Class FormSalesReportTracking
         Me.LargeImageCollection.Images.SetKeyName(17, "Setting(32).png")
         Me.LargeImageCollection.Images.SetKeyName(18, "estimate_icon32.png")
         Me.LargeImageCollection.Images.SetKeyName(19, "copy_icon.png")
+        '
+        'BSearch
+        '
+        Me.BSearch.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BSearch.ImageIndex = 15
+        Me.BSearch.ImageList = Me.LargeImageCollection
+        Me.BSearch.Location = New System.Drawing.Point(933, 2)
+        Me.BSearch.Name = "BSearch"
+        Me.BSearch.Size = New System.Drawing.Size(145, 38)
+        Me.BSearch.TabIndex = 16
+        Me.BSearch.Text = "Search Parameter"
         '
         'GCListDesign
         '
@@ -334,7 +347,7 @@ Partial Class FormSalesReportTracking
         Me.GridColumnPercentSaasDel.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
         Me.GridColumnPercentSaasDel.AppearanceHeader.Options.UseTextOptions = True
         Me.GridColumnPercentSaasDel.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.GridColumnPercentSaasDel.Caption = "% SAS SAL/DEL"
+        Me.GridColumnPercentSaasDel.Caption = "SAL/DEL"
         Me.GridColumnPercentSaasDel.DisplayFormat.FormatString = "{0:N2}%"
         Me.GridColumnPercentSaasDel.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnPercentSaasDel.FieldName = "percent_sas_sal_del"
@@ -437,7 +450,7 @@ Partial Class FormSalesReportTracking
         Me.BandedGridColumnValSaasDel.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
         Me.BandedGridColumnValSaasDel.AppearanceHeader.Options.UseTextOptions = True
         Me.BandedGridColumnValSaasDel.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.BandedGridColumnValSaasDel.Caption = "% SAS SAL/DEL"
+        Me.BandedGridColumnValSaasDel.Caption = "SAL/DEL"
         Me.BandedGridColumnValSaasDel.DisplayFormat.FormatString = "{0:N2}%"
         Me.BandedGridColumnValSaasDel.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.BandedGridColumnValSaasDel.FieldName = "percent_sas_sal_del_val"
@@ -457,7 +470,7 @@ Partial Class FormSalesReportTracking
         Me.MinimizeBox = False
         Me.Name = "FormSalesReportTracking"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = " "
+        Me.Text = " Sales Tracking"
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).EndInit()
@@ -498,4 +511,5 @@ Partial Class FormSalesReportTracking
     Friend WithEvents BandedGridColumnValSOH As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents BandedGridColumnValSaas As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents BandedGridColumnValSaasDel As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BPrint As DevExpress.XtraEditors.SimpleButton
 End Class

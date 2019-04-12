@@ -17,7 +17,9 @@
             BMark.Enabled = False
             BtnPrint.Enabled = False
             viewDetailReturn()
+            PCEdit.Visible = True
         ElseIf action = "upd" Then
+            PCEdit.Visible = False
             BtnCancel.Text = "Close"
             GVDetail.OptionsBehavior.AutoExpandAllGroups = True
 
@@ -108,6 +110,7 @@
         query += "CALL view_fg_adj_out('" + id_adj_out_fg + "')"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCDetail.DataSource = data
+        GVDetail.BestFitColumns()
         'GVDetail.Columns("id_product").GroupIndex = 0
     End Sub
 
@@ -164,10 +167,10 @@
         FormFGAdjOutSingle.SLELocator.Enabled = True
         FormFGAdjOutSingle.SLERack.Enabled = True
         FormFGAdjOutSingle.SLEDrawer.Enabled = True
-        FormFGAdjOutSingle.allow_all_locator = True
-        FormFGAdjOutSingle.allow_all_rack = True
-        FormFGAdjOutSingle.allow_all_drawer = True
-        FormFGAdjOutSingle.allow_all_wh = True
+        FormFGAdjOutSingle.allow_all_locator = False
+        FormFGAdjOutSingle.allow_all_rack = False
+        FormFGAdjOutSingle.allow_all_drawer = False
+        FormFGAdjOutSingle.allow_all_wh = False
         FormFGAdjOutSingle.GroupControlInput.Visible = True
         If action = "ins" Then
             FormFGAdjOutSingle.id_adj_out_fg = "0"
@@ -261,7 +264,7 @@
                 increase_inc_sales("13")
 
                 'preapred default
-                insert_who_prepared("42", id_adj_out_fg, id_user)
+                submit_who_prepared("42", id_adj_out_fg, id_user)
 
                 'detail table
                 For i As Integer = 0 To GVDetail.RowCount - 1
@@ -328,6 +331,14 @@
         Cursor = Cursors.WaitCursor
         ReportFGAdjOut.id_adj_out_fg = id_adj_out_fg
         Dim Report As New ReportFGAdjOut()
+
+        Dim str As System.IO.Stream
+        str = New System.IO.MemoryStream()
+        GVDetail.SaveLayoutToStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+        str.Seek(0, System.IO.SeekOrigin.Begin)
+        Report.GVDetail.RestoreLayoutFromStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+        str.Seek(0, System.IO.SeekOrigin.Begin)
+
         ' Show the report's preview. 
         Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
         Tool.ShowPreview()

@@ -2,17 +2,22 @@
     Public id_notif As String = "-1"
 
     Private Sub FormNotification_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        viewNotif()
+
     End Sub
 
     Sub viewNotif()
+        Cursor = Cursors.WaitCursor
         Dim query_notif As String = "CALL view_notif_list('" + id_user + "','-1')"
         Dim data_notif As DataTable = execute_query(query_notif, -1, True, "", "", "", "")
         GCNotif.DataSource = data_notif
+        Cursor = Cursors.Default
     End Sub
 
     Private Sub FormNotification_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
+        Cursor = Cursors.WaitCursor
         FormMain.show_rb(Name)
+        viewNotif()
+        Cursor = Cursors.Default
     End Sub
 
     Private Sub FormNotification_Deactivate(sender As Object, e As EventArgs) Handles MyBase.Deactivate
@@ -148,8 +153,14 @@
             Dim id_report As String = GVNotif.GetFocusedRowCellValue("id_report").ToString
             Dim report_number As String = GVNotif.GetFocusedRowCellValue("report_number").ToString
             Dim id_type As String = GVNotif.GetFocusedRowCellValue("id_type").ToString
+            Dim rmt As String = ""
+            Try
+                rmt = GVNotif.GetFocusedRowCellValue("report_mark_type").ToString
+            Catch ex As Exception
+                rmt = ""
+            End Try
             If id_notif_detx <> "0" Then
-                frmNotif(GVNotif.GetFocusedRowCellValue("notif_frm_to").ToString, id_report, report_number, notif_tag)
+                frmNotif(GVNotif.GetFocusedRowCellValue("notif_frm_to").ToString, id_report, rmt, report_number, notif_tag)
                 viewNotif()
                 GVNotif.FocusedRowHandle = find_row(GVNotif, "id_notif_det", id_notif_detx)
             Else

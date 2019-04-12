@@ -49,6 +49,9 @@ Partial Class FormEmpPayrollOvertimeDet
         Me.TEPointWages = New DevExpress.XtraEditors.TextEdit()
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
         Me.PictureSeason = New DevExpress.XtraEditors.PictureEdit()
+        Me.LEOVertimeDPOrNot = New DevExpress.XtraEditors.LookUpEdit()
+        Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
+        Me.LEDPType = New DevExpress.XtraEditors.LookUpEdit()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl3.SuspendLayout()
@@ -68,6 +71,8 @@ Partial Class FormEmpPayrollOvertimeDet
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
         CType(Me.PictureSeason.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LEOVertimeDPOrNot.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LEDPType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LargeImageCollection
@@ -100,7 +105,7 @@ Partial Class FormEmpPayrollOvertimeDet
         Me.PanelControl3.Controls.Add(Me.BCancel)
         Me.PanelControl3.Controls.Add(Me.BSave)
         Me.PanelControl3.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl3.Location = New System.Drawing.Point(0, 223)
+        Me.PanelControl3.Location = New System.Drawing.Point(0, 247)
         Me.PanelControl3.Name = "PanelControl3"
         Me.PanelControl3.Size = New System.Drawing.Size(721, 39)
         Me.PanelControl3.TabIndex = 6
@@ -206,7 +211,7 @@ Partial Class FormEmpPayrollOvertimeDet
         '
         'MENote
         '
-        Me.MENote.Location = New System.Drawing.Point(271, 168)
+        Me.MENote.Location = New System.Drawing.Point(271, 194)
         Me.MENote.Name = "MENote"
         Me.MENote.Properties.MaxLength = 200
         Me.MENote.Size = New System.Drawing.Size(438, 46)
@@ -214,7 +219,7 @@ Partial Class FormEmpPayrollOvertimeDet
         '
         'LabelControl6
         '
-        Me.LabelControl6.Location = New System.Drawing.Point(152, 170)
+        Me.LabelControl6.Location = New System.Drawing.Point(152, 196)
         Me.LabelControl6.Name = "LabelControl6"
         Me.LabelControl6.Size = New System.Drawing.Size(23, 13)
         Me.LabelControl6.TabIndex = 111
@@ -379,13 +384,13 @@ Partial Class FormEmpPayrollOvertimeDet
         Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Left
         Me.PanelControl2.Location = New System.Drawing.Point(0, 0)
         Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(143, 223)
+        Me.PanelControl2.Size = New System.Drawing.Size(143, 247)
         Me.PanelControl2.TabIndex = 154
         '
         'PictureSeason
         '
         Me.PictureSeason.EditValue = CType(resources.GetObject("PictureSeason.EditValue"), Object)
-        Me.PictureSeason.Location = New System.Drawing.Point(12, 93)
+        Me.PictureSeason.Location = New System.Drawing.Point(12, 119)
         Me.PictureSeason.Name = "PictureSeason"
         Me.PictureSeason.Properties.Appearance.BackColor = System.Drawing.Color.Transparent
         Me.PictureSeason.Properties.Appearance.Options.UseBackColor = True
@@ -394,11 +399,56 @@ Partial Class FormEmpPayrollOvertimeDet
         Me.PictureSeason.Size = New System.Drawing.Size(124, 113)
         Me.PictureSeason.TabIndex = 19
         '
+        'LEOVertimeDPOrNot
+        '
+        Me.LEOVertimeDPOrNot.Location = New System.Drawing.Point(271, 168)
+        Me.LEOVertimeDPOrNot.Name = "LEOVertimeDPOrNot"
+        Me.LEOVertimeDPOrNot.Properties.Appearance.Options.UseTextOptions = True
+        Me.LEOVertimeDPOrNot.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near
+        Me.LEOVertimeDPOrNot.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.LEOVertimeDPOrNot.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Black
+        Me.LEOVertimeDPOrNot.Properties.AppearanceDisabled.Options.UseBackColor = True
+        Me.LEOVertimeDPOrNot.Properties.AppearanceDisabled.Options.UseForeColor = True
+        Me.LEOVertimeDPOrNot.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.LEOVertimeDPOrNot.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("is_not_dp", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("type", "Type")})
+        Me.LEOVertimeDPOrNot.Properties.NullText = ""
+        Me.LEOVertimeDPOrNot.Properties.ShowFooter = False
+        Me.LEOVertimeDPOrNot.Size = New System.Drawing.Size(154, 20)
+        Me.LEOVertimeDPOrNot.TabIndex = 155
+        '
+        'LabelControl5
+        '
+        Me.LabelControl5.Location = New System.Drawing.Point(152, 171)
+        Me.LabelControl5.Name = "LabelControl5"
+        Me.LabelControl5.Size = New System.Drawing.Size(81, 13)
+        Me.LabelControl5.TabIndex = 156
+        Me.LabelControl5.Text = "Conversion Type"
+        '
+        'LEDPType
+        '
+        Me.LEDPType.Location = New System.Drawing.Point(429, 168)
+        Me.LEDPType.Name = "LEDPType"
+        Me.LEDPType.Properties.Appearance.Options.UseTextOptions = True
+        Me.LEDPType.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near
+        Me.LEDPType.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.LEDPType.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Black
+        Me.LEDPType.Properties.AppearanceDisabled.Options.UseBackColor = True
+        Me.LEDPType.Properties.AppearanceDisabled.Options.UseForeColor = True
+        Me.LEDPType.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.LEDPType.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_dp_type", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("type", "Type")})
+        Me.LEDPType.Properties.NullText = ""
+        Me.LEDPType.Properties.ShowFooter = False
+        Me.LEDPType.Size = New System.Drawing.Size(154, 20)
+        Me.LEDPType.TabIndex = 157
+        '
         'FormEmpPayrollOvertimeDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(721, 262)
+        Me.ClientSize = New System.Drawing.Size(721, 286)
+        Me.Controls.Add(Me.LEDPType)
+        Me.Controls.Add(Me.LEOVertimeDPOrNot)
+        Me.Controls.Add(Me.LabelControl5)
         Me.Controls.Add(Me.PanelControl2)
         Me.Controls.Add(Me.TEPoint)
         Me.Controls.Add(Me.TEPointWages)
@@ -448,6 +498,8 @@ Partial Class FormEmpPayrollOvertimeDet
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl2.ResumeLayout(False)
         CType(Me.PictureSeason.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LEOVertimeDPOrNot.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LEDPType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -481,4 +533,7 @@ Partial Class FormEmpPayrollOvertimeDet
     Friend WithEvents TEPointWages As DevExpress.XtraEditors.TextEdit
     Friend WithEvents PanelControl2 As DevExpress.XtraEditors.PanelControl
     Friend WithEvents PictureSeason As DevExpress.XtraEditors.PictureEdit
+    Friend WithEvents LEOVertimeDPOrNot As DevExpress.XtraEditors.LookUpEdit
+    Friend WithEvents LabelControl5 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LEDPType As DevExpress.XtraEditors.LookUpEdit
 End Class

@@ -77,6 +77,7 @@ Partial Class FormProductionDet
         Me.BarButtonItem1 = New DevExpress.XtraBars.BarButtonItem()
         Me.BarLargeButtonItem1 = New DevExpress.XtraBars.BarLargeButtonItem()
         Me.BarButtonItem2 = New DevExpress.XtraBars.BarButtonItem()
+        Me.BarButtonItem3 = New DevExpress.XtraBars.BarButtonItem()
         Me.XTPListWO = New DevExpress.XtraTab.XtraTabPage()
         Me.GCWO = New DevExpress.XtraGrid.GridControl()
         Me.ViewMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -137,6 +138,8 @@ Partial Class FormProductionDet
         Me.BPrint = New DevExpress.XtraEditors.SimpleButton()
         Me.GroupGeneralHeader = New DevExpress.XtraEditors.GroupControl()
         Me.PanelControl6 = New DevExpress.XtraEditors.PanelControl()
+        Me.TEVendorName = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl14 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl8 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
         Me.TEDesign = New DevExpress.XtraEditors.TextEdit()
@@ -273,6 +276,7 @@ Partial Class FormProductionDet
         Me.GroupGeneralHeader.SuspendLayout()
         CType(Me.PanelControl6, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl6.SuspendLayout()
+        CType(Me.TEVendorName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEDesign.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEDesignCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEUSCOde.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -650,7 +654,7 @@ Partial Class FormProductionDet
         Me.GridColumn14.Name = "GridColumn14"
         Me.GridColumn14.Visible = True
         Me.GridColumn14.VisibleIndex = 0
-        Me.GridColumn14.Width = 152
+        Me.GridColumn14.Width = 110
         '
         'GridColumn18
         '
@@ -663,7 +667,7 @@ Partial Class FormProductionDet
         Me.GridColumn18.Name = "GridColumn18"
         Me.GridColumn18.Visible = True
         Me.GridColumn18.VisibleIndex = 1
-        Me.GridColumn18.Width = 295
+        Me.GridColumn18.Width = 215
         '
         'GridColumn22
         '
@@ -676,7 +680,7 @@ Partial Class FormProductionDet
         Me.GridColumn22.Name = "GridColumn22"
         Me.GridColumn22.Visible = True
         Me.GridColumn22.VisibleIndex = 3
-        Me.GridColumn22.Width = 57
+        Me.GridColumn22.Width = 41
         '
         'GridColumn23
         '
@@ -685,13 +689,13 @@ Partial Class FormProductionDet
         Me.GridColumn23.AppearanceHeader.Options.UseTextOptions = True
         Me.GridColumn23.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GridColumn23.Caption = "Qty"
-        Me.GridColumn23.DisplayFormat.FormatString = "N4"
+        Me.GridColumn23.DisplayFormat.FormatString = "N0"
         Me.GridColumn23.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn23.FieldName = "qty"
         Me.GridColumn23.Name = "GridColumn23"
         Me.GridColumn23.Visible = True
         Me.GridColumn23.VisibleIndex = 7
-        Me.GridColumn23.Width = 77
+        Me.GridColumn23.Width = 83
         '
         'GridColumn36
         '
@@ -700,6 +704,7 @@ Partial Class FormProductionDet
         Me.GridColumn36.Name = "GridColumn36"
         Me.GridColumn36.Visible = True
         Me.GridColumn36.VisibleIndex = 4
+        Me.GridColumn36.Width = 54
         '
         'GridColumn35
         '
@@ -714,6 +719,7 @@ Partial Class FormProductionDet
         Me.GridColumn35.Name = "GridColumn35"
         Me.GridColumn35.Visible = True
         Me.GridColumn35.VisibleIndex = 5
+        Me.GridColumn35.Width = 54
         '
         'GridColumn34
         '
@@ -728,6 +734,7 @@ Partial Class FormProductionDet
         Me.GridColumn34.Name = "GridColumn34"
         Me.GridColumn34.Visible = True
         Me.GridColumn34.VisibleIndex = 6
+        Me.GridColumn34.Width = 54
         '
         'GridColumn24
         '
@@ -743,7 +750,7 @@ Partial Class FormProductionDet
         Me.GridColumn24.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "price", "Total")})
         Me.GridColumn24.Visible = True
         Me.GridColumn24.VisibleIndex = 9
-        Me.GridColumn24.Width = 160
+        Me.GridColumn24.Width = 104
         '
         'ColTotal
         '
@@ -759,7 +766,7 @@ Partial Class FormProductionDet
         Me.ColTotal.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total", "{0:N4}")})
         Me.ColTotal.Visible = True
         Me.ColTotal.VisibleIndex = 10
-        Me.ColTotal.Width = 178
+        Me.ColTotal.Width = 127
         '
         'Cat
         '
@@ -799,7 +806,7 @@ Partial Class FormProductionDet
         Me.GridColumnUOM.Name = "GridColumnUOM"
         Me.GridColumnUOM.Visible = True
         Me.GridColumnUOM.VisibleIndex = 8
-        Me.GridColumnUOM.Width = 69
+        Me.GridColumnUOM.Width = 43
         '
         'GridColumn26
         '
@@ -812,7 +819,7 @@ Partial Class FormProductionDet
         Me.GridColumn26.Name = "GridColumn26"
         Me.GridColumn26.Visible = True
         Me.GridColumn26.VisibleIndex = 2
-        Me.GridColumn26.Width = 78
+        Me.GridColumn26.Width = 56
         '
         'GridColumnIsCost
         '
@@ -853,8 +860,8 @@ Partial Class FormProductionDet
         Me.BMDD.DockControls.Add(Me.barDockControlLeft)
         Me.BMDD.DockControls.Add(Me.barDockControlRight)
         Me.BMDD.Form = Me
-        Me.BMDD.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.BarButtonItem1, Me.BarLargeButtonItem1, Me.BarButtonItem2})
-        Me.BMDD.MaxItemId = 3
+        Me.BMDD.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.BarButtonItem1, Me.BarLargeButtonItem1, Me.BarButtonItem2, Me.BarButtonItem3})
+        Me.BMDD.MaxItemId = 4
         '
         'barDockControlTop
         '
@@ -900,6 +907,12 @@ Partial Class FormProductionDet
         Me.BarButtonItem2.Caption = "Print BOM"
         Me.BarButtonItem2.Id = 2
         Me.BarButtonItem2.Name = "BarButtonItem2"
+        '
+        'BarButtonItem3
+        '
+        Me.BarButtonItem3.Caption = "Print PD"
+        Me.BarButtonItem3.Id = 3
+        Me.BarButtonItem3.Name = "BarButtonItem3"
         '
         'XTPListWO
         '
@@ -1334,7 +1347,7 @@ Partial Class FormProductionDet
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.MENote.Location = New System.Drawing.Point(52, 10)
         Me.MENote.Name = "MENote"
-        Me.MENote.Properties.MaxLength = 100
+        Me.MENote.Properties.MaxLength = 250
         Me.MENote.Size = New System.Drawing.Size(376, 56)
         Me.MENote.TabIndex = 137
         '
@@ -1437,7 +1450,7 @@ Partial Class FormProductionDet
         '
         'PUDD
         '
-        Me.PUDD.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.BarLargeButtonItem1), New DevExpress.XtraBars.LinkPersistInfo(Me.BarButtonItem2)})
+        Me.PUDD.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.BarLargeButtonItem1), New DevExpress.XtraBars.LinkPersistInfo(Me.BarButtonItem2), New DevExpress.XtraBars.LinkPersistInfo(Me.BarButtonItem3)})
         Me.PUDD.Manager = Me.BMDD
         Me.PUDD.Name = "PUDD"
         '
@@ -1502,6 +1515,8 @@ Partial Class FormProductionDet
         'PanelControl6
         '
         Me.PanelControl6.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelControl6.Controls.Add(Me.TEVendorName)
+        Me.PanelControl6.Controls.Add(Me.LabelControl14)
         Me.PanelControl6.Controls.Add(Me.LabelControl8)
         Me.PanelControl6.Controls.Add(Me.LabelControl4)
         Me.PanelControl6.Controls.Add(Me.TEDesign)
@@ -1517,6 +1532,27 @@ Partial Class FormProductionDet
         Me.PanelControl6.Name = "PanelControl6"
         Me.PanelControl6.Size = New System.Drawing.Size(370, 131)
         Me.PanelControl6.TabIndex = 177
+        '
+        'TEVendorName
+        '
+        Me.TEVendorName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TEVendorName.EditValue = ""
+        Me.TEVendorName.Location = New System.Drawing.Point(70, 95)
+        Me.TEVendorName.Name = "TEVendorName"
+        Me.TEVendorName.Properties.EditValueChangedDelay = 1
+        Me.TEVendorName.Properties.ReadOnly = True
+        Me.TEVendorName.Size = New System.Drawing.Size(294, 20)
+        Me.TEVendorName.TabIndex = 159
+        Me.TEVendorName.TabStop = False
+        '
+        'LabelControl14
+        '
+        Me.LabelControl14.Location = New System.Drawing.Point(191, 69)
+        Me.LabelControl14.Name = "LabelControl14"
+        Me.LabelControl14.Size = New System.Drawing.Size(41, 13)
+        Me.LabelControl14.TabIndex = 158
+        Me.LabelControl14.Text = "US Code"
         '
         'LabelControl8
         '
@@ -1539,24 +1575,22 @@ Partial Class FormProductionDet
         Me.TEDesign.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TEDesign.EditValue = ""
-        Me.TEDesign.Location = New System.Drawing.Point(66, 37)
+        Me.TEDesign.Location = New System.Drawing.Point(70, 37)
         Me.TEDesign.Name = "TEDesign"
         Me.TEDesign.Properties.EditValueChangedDelay = 1
         Me.TEDesign.Properties.ReadOnly = True
-        Me.TEDesign.Size = New System.Drawing.Size(270, 20)
+        Me.TEDesign.Size = New System.Drawing.Size(266, 20)
         Me.TEDesign.TabIndex = 0
         Me.TEDesign.TabStop = False
         '
         'TEDesignCode
         '
-        Me.TEDesignCode.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TEDesignCode.EditValue = ""
-        Me.TEDesignCode.Location = New System.Drawing.Point(66, 66)
+        Me.TEDesignCode.Location = New System.Drawing.Point(70, 66)
         Me.TEDesignCode.Name = "TEDesignCode"
         Me.TEDesignCode.Properties.EditValueChangedDelay = 1
         Me.TEDesignCode.Properties.ReadOnly = True
-        Me.TEDesignCode.Size = New System.Drawing.Size(299, 20)
+        Me.TEDesignCode.Size = New System.Drawing.Size(115, 20)
         Me.TEDesignCode.TabIndex = 157
         Me.TEDesignCode.TabStop = False
         '
@@ -1580,11 +1614,11 @@ Partial Class FormProductionDet
         '
         'LabelControl7
         '
-        Me.LabelControl7.Location = New System.Drawing.Point(5, 98)
+        Me.LabelControl7.Location = New System.Drawing.Point(5, 97)
         Me.LabelControl7.Name = "LabelControl7"
-        Me.LabelControl7.Size = New System.Drawing.Size(41, 13)
+        Me.LabelControl7.Size = New System.Drawing.Size(34, 13)
         Me.LabelControl7.TabIndex = 149
-        Me.LabelControl7.Text = "US Code"
+        Me.LabelControl7.Text = "Vendor"
         '
         'BPickPD
         '
@@ -1600,11 +1634,11 @@ Partial Class FormProductionDet
         Me.TEUSCOde.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TEUSCOde.EditValue = ""
-        Me.TEUSCOde.Location = New System.Drawing.Point(66, 97)
+        Me.TEUSCOde.Location = New System.Drawing.Point(238, 66)
         Me.TEUSCOde.Name = "TEUSCOde"
         Me.TEUSCOde.Properties.EditValueChangedDelay = 1
         Me.TEUSCOde.Properties.ReadOnly = True
-        Me.TEUSCOde.Size = New System.Drawing.Size(299, 20)
+        Me.TEUSCOde.Size = New System.Drawing.Size(126, 20)
         Me.TEUSCOde.TabIndex = 150
         Me.TEUSCOde.TabStop = False
         '
@@ -1613,11 +1647,11 @@ Partial Class FormProductionDet
         Me.TEPDNo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TEPDNo.EditValue = ""
-        Me.TEPDNo.Location = New System.Drawing.Point(66, 7)
+        Me.TEPDNo.Location = New System.Drawing.Point(70, 7)
         Me.TEPDNo.Name = "TEPDNo"
         Me.TEPDNo.Properties.EditValueChangedDelay = 1
         Me.TEPDNo.Properties.ReadOnly = True
-        Me.TEPDNo.Size = New System.Drawing.Size(270, 20)
+        Me.TEPDNo.Size = New System.Drawing.Size(266, 20)
         Me.TEPDNo.TabIndex = 151
         Me.TEPDNo.TabStop = False
         '
@@ -2391,6 +2425,7 @@ Partial Class FormProductionDet
         CType(Me.PanelControl6, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl6.ResumeLayout(False)
         Me.PanelControl6.PerformLayout()
+        CType(Me.TEVendorName.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEDesign.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEDesignCode.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEUSCOde.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -2632,4 +2667,7 @@ Partial Class FormProductionDet
     Friend WithEvents SplashScreenManager1 As DevExpress.XtraSplashScreen.SplashScreenManager
     Friend WithEvents GridColumn41 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RILETermOfPayment As DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit
+    Friend WithEvents TEVendorName As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LabelControl14 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents BarButtonItem3 As DevExpress.XtraBars.BarButtonItem
 End Class

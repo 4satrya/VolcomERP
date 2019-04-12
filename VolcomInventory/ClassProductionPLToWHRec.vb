@@ -15,7 +15,7 @@
         Dim query As String = "SELECT CONCAT(vend_c.comp_number, ' - ', vend_c.comp_name) AS vendor, i.prod_order_number,dsg.id_design, (dsg.design_display_name) AS `design_name`, dsg.design_code AS `code`, k.pl_category, i.prod_order_number, a0.id_pl_prod_order_rec , a0.id_comp_contact_from , a0.id_comp_contact_to, a0.pl_prod_order_rec_note, a0.pl_prod_order_rec_number, a.pl_prod_order_number, "
         query += "CONCAT(d.comp_number,' - ',d.comp_name) AS comp_name_from, CONCAT(f.comp_number,' - ',f.comp_name) AS comp_name_to, h.report_status, a0.id_report_status, "
         query += "a0.pl_prod_order_rec_date, ss.id_season, ss.season, IFNULL(det.total_qty,0) AS `total_qty`, "
-        query += "a0.last_update, getUserEmp(a0.last_update_by, '1') AS last_user, ('No') AS is_select "
+        query += "a0.last_update, getUserEmp(a0.last_update_by, '1') AS last_user, ('No') AS is_select,IFNULL(pb.prepared_by,'-') AS `prepared_by` "
         query += "FROM tb_pl_prod_order_rec a0 "
         query += "INNER JOIN tb_pl_prod_order a ON a.id_pl_prod_order = a0.id_pl_prod_order "
         query += "INNER JOIN tb_m_comp_contact c ON a0.id_comp_contact_from = c.id_comp_contact "
@@ -38,7 +38,14 @@
         query += "Select det.id_pl_prod_order_rec, SUM(det.pl_prod_order_rec_det_qty) As `total_qty` "
         query += "FROM tb_pl_prod_order_rec_det det "
         query += "GROUP BY det.id_pl_prod_order_rec "
-        query += ") det On det.id_pl_prod_order_rec = a0.id_pl_prod_order_rec "
+        query += ") det On det.id_pl_prod_order_rec = a0.id_pl_prod_order_rec 
+        LEFT JOIN (
+            SELECT rm.id_report, e.employee_name AS `prepared_by` 
+            FROM tb_report_mark rm
+            INNER JOIN tb_m_employee e ON e.id_employee = rm.id_employee
+            WHERE rm.report_mark_type=37 AND rm.id_report_status=1
+            GROUP BY rm.id_report
+        ) pb ON pb.id_report = a0.id_pl_prod_order_rec "
         query += "WHERE a0.id_pl_prod_order_rec>0 "
         query += condition
         query += "GROUP BY a0.id_pl_prod_order_rec "
@@ -55,7 +62,7 @@
     Public Sub changeStatus(ByVal id_report_par As String, ByVal id_status_reportx_par As String)
         If id_status_reportx_par = "6" Then
             'insert stock
-            Dim query_stc As String = ""
+            Dim query_stc As String = "DELETE FROM tb_storage_fg WHERE report_mark_type=37 AND id_report=" + id_report_par + "; "
             query_stc += "INSERT INTO tb_storage_fg(id_wh_drawer, id_storage_category, id_product, bom_unit_price, report_mark_type, id_report, storage_product_qty, storage_product_datetime, storage_product_notes, id_stock_status) "
             query_stc += "SELECT pl.id_wh_drawer, '1', pd_prod.id_product, dsg.design_cop , '37' , '" + id_report_par + "', pl_det.pl_prod_order_rec_det_qty, "
             query_stc += "NOW(), CONCAT('Completed, Receiving Warehouse : ', pl.pl_prod_order_rec_number), '1'   "

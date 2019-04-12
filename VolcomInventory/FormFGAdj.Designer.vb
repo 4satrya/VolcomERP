@@ -19,43 +19,42 @@ Partial Class FormFGAdj
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.XTCAdj = New DevExpress.XtraTab.XtraTabControl
-        Me.XTPAdjIn = New DevExpress.XtraTab.XtraTabPage
-        Me.GCAdjIn = New DevExpress.XtraGrid.GridControl
-        Me.GVAdjIn = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.GridColumnIdAdjInSample = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnNumberAdjInSampleNumber = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnAdjInSampleDate = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnCurrencyAdjInSample = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnAmount = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnReportStatus = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.XTPAdjOut = New DevExpress.XtraTab.XtraTabPage
-        Me.GCAdjOut = New DevExpress.XtraGrid.GridControl
-        Me.GVAdjOut = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GCAdjSampleOut = New DevExpress.XtraGrid.GridControl
-        Me.GVAdjSampleOut = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormFGAdj))
+        Me.XTCAdj = New DevExpress.XtraTab.XtraTabControl()
+        Me.XTPAdjIn = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCAdjIn = New DevExpress.XtraGrid.GridControl()
+        Me.GVAdjIn = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumnIdAdjInSample = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnNumberAdjInSampleNumber = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnAdjInSampleDate = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnCurrencyAdjInSample = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnAmount = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnReportStatus = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.BtnSummaryIn = New DevExpress.XtraEditors.SimpleButton()
+        Me.XTPAdjOut = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCAdjOut = New DevExpress.XtraGrid.GridControl()
+        Me.GVAdjOut = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
+        Me.BtnSummaryOut = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.XTCAdj, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCAdj.SuspendLayout()
         Me.XTPAdjIn.SuspendLayout()
         CType(Me.GCAdjIn, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVAdjIn, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl1.SuspendLayout()
         Me.XTPAdjOut.SuspendLayout()
         CType(Me.GCAdjOut, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVAdjOut, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GCAdjSampleOut, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GVAdjSampleOut, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl2.SuspendLayout()
         Me.SuspendLayout()
         '
         'XTCAdj
@@ -73,17 +72,18 @@ Partial Class FormFGAdj
         'XTPAdjIn
         '
         Me.XTPAdjIn.Controls.Add(Me.GCAdjIn)
+        Me.XTPAdjIn.Controls.Add(Me.PanelControl1)
         Me.XTPAdjIn.Name = "XTPAdjIn"
-        Me.XTPAdjIn.Size = New System.Drawing.Size(660, 445)
+        Me.XTPAdjIn.Size = New System.Drawing.Size(658, 445)
         Me.XTPAdjIn.Text = "Adjustment In"
         '
         'GCAdjIn
         '
         Me.GCAdjIn.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCAdjIn.Location = New System.Drawing.Point(0, 0)
+        Me.GCAdjIn.Location = New System.Drawing.Point(0, 42)
         Me.GCAdjIn.MainView = Me.GVAdjIn
         Me.GCAdjIn.Name = "GCAdjIn"
-        Me.GCAdjIn.Size = New System.Drawing.Size(660, 445)
+        Me.GCAdjIn.Size = New System.Drawing.Size(658, 403)
         Me.GCAdjIn.TabIndex = 0
         Me.GCAdjIn.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVAdjIn})
         '
@@ -144,21 +144,40 @@ Partial Class FormFGAdj
         Me.GridColumnReportStatus.Visible = True
         Me.GridColumnReportStatus.VisibleIndex = 4
         '
+        'PanelControl1
+        '
+        Me.PanelControl1.Controls.Add(Me.BtnSummaryIn)
+        Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelControl1.Location = New System.Drawing.Point(0, 0)
+        Me.PanelControl1.Name = "PanelControl1"
+        Me.PanelControl1.Size = New System.Drawing.Size(658, 42)
+        Me.PanelControl1.TabIndex = 1
+        '
+        'BtnSummaryIn
+        '
+        Me.BtnSummaryIn.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnSummaryIn.Image = CType(resources.GetObject("BtnSummaryIn.Image"), System.Drawing.Image)
+        Me.BtnSummaryIn.Location = New System.Drawing.Point(562, 2)
+        Me.BtnSummaryIn.Name = "BtnSummaryIn"
+        Me.BtnSummaryIn.Size = New System.Drawing.Size(94, 38)
+        Me.BtnSummaryIn.TabIndex = 0
+        Me.BtnSummaryIn.Text = "Summary"
+        '
         'XTPAdjOut
         '
         Me.XTPAdjOut.Controls.Add(Me.GCAdjOut)
-        Me.XTPAdjOut.Controls.Add(Me.GCAdjSampleOut)
+        Me.XTPAdjOut.Controls.Add(Me.PanelControl2)
         Me.XTPAdjOut.Name = "XTPAdjOut"
-        Me.XTPAdjOut.Size = New System.Drawing.Size(660, 445)
+        Me.XTPAdjOut.Size = New System.Drawing.Size(658, 445)
         Me.XTPAdjOut.Text = "Adjustment Out"
         '
         'GCAdjOut
         '
         Me.GCAdjOut.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCAdjOut.Location = New System.Drawing.Point(0, 0)
+        Me.GCAdjOut.Location = New System.Drawing.Point(0, 42)
         Me.GCAdjOut.MainView = Me.GVAdjOut
         Me.GCAdjOut.Name = "GCAdjOut"
-        Me.GCAdjOut.Size = New System.Drawing.Size(660, 445)
+        Me.GCAdjOut.Size = New System.Drawing.Size(658, 403)
         Me.GCAdjOut.TabIndex = 2
         Me.GCAdjOut.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVAdjOut})
         '
@@ -219,70 +238,24 @@ Partial Class FormFGAdj
         Me.GridColumn12.Visible = True
         Me.GridColumn12.VisibleIndex = 4
         '
-        'GCAdjSampleOut
+        'PanelControl2
         '
-        Me.GCAdjSampleOut.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCAdjSampleOut.Location = New System.Drawing.Point(0, 0)
-        Me.GCAdjSampleOut.MainView = Me.GVAdjSampleOut
-        Me.GCAdjSampleOut.Name = "GCAdjSampleOut"
-        Me.GCAdjSampleOut.Size = New System.Drawing.Size(660, 445)
-        Me.GCAdjSampleOut.TabIndex = 1
-        Me.GCAdjSampleOut.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVAdjSampleOut})
+        Me.PanelControl2.Controls.Add(Me.BtnSummaryOut)
+        Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelControl2.Location = New System.Drawing.Point(0, 0)
+        Me.PanelControl2.Name = "PanelControl2"
+        Me.PanelControl2.Size = New System.Drawing.Size(658, 42)
+        Me.PanelControl2.TabIndex = 3
         '
-        'GVAdjSampleOut
+        'BtnSummaryOut
         '
-        Me.GVAdjSampleOut.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6})
-        Me.GVAdjSampleOut.GridControl = Me.GCAdjSampleOut
-        Me.GVAdjSampleOut.Name = "GVAdjSampleOut"
-        Me.GVAdjSampleOut.OptionsBehavior.Editable = False
-        Me.GVAdjSampleOut.OptionsFind.AlwaysVisible = True
-        Me.GVAdjSampleOut.OptionsView.ShowGroupPanel = False
-        '
-        'GridColumn1
-        '
-        Me.GridColumn1.Caption = "Id Sample Return"
-        Me.GridColumn1.FieldName = "id_sample_return"
-        Me.GridColumn1.Name = "GridColumn1"
-        '
-        'GridColumn2
-        '
-        Me.GridColumn2.Caption = "Number"
-        Me.GridColumn2.FieldName = "sample_return_number"
-        Me.GridColumn2.Name = "GridColumn2"
-        Me.GridColumn2.Visible = True
-        Me.GridColumn2.VisibleIndex = 0
-        '
-        'GridColumn3
-        '
-        Me.GridColumn3.Caption = "From"
-        Me.GridColumn3.FieldName = "comp_from"
-        Me.GridColumn3.Name = "GridColumn3"
-        Me.GridColumn3.Visible = True
-        Me.GridColumn3.VisibleIndex = 1
-        '
-        'GridColumn4
-        '
-        Me.GridColumn4.Caption = "To"
-        Me.GridColumn4.FieldName = "comp_to"
-        Me.GridColumn4.Name = "GridColumn4"
-        Me.GridColumn4.Visible = True
-        Me.GridColumn4.VisibleIndex = 2
-        '
-        'GridColumn5
-        '
-        Me.GridColumn5.Caption = "Created Date"
-        Me.GridColumn5.FieldName = "sample_return_date"
-        Me.GridColumn5.Name = "GridColumn5"
-        Me.GridColumn5.Visible = True
-        Me.GridColumn5.VisibleIndex = 3
-        '
-        'GridColumn6
-        '
-        Me.GridColumn6.Caption = "Status"
-        Me.GridColumn6.FieldName = "report_status"
-        Me.GridColumn6.Name = "GridColumn6"
-        Me.GridColumn6.Visible = True
-        Me.GridColumn6.VisibleIndex = 4
+        Me.BtnSummaryOut.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnSummaryOut.Image = CType(resources.GetObject("BtnSummaryOut.Image"), System.Drawing.Image)
+        Me.BtnSummaryOut.Location = New System.Drawing.Point(562, 2)
+        Me.BtnSummaryOut.Name = "BtnSummaryOut"
+        Me.BtnSummaryOut.Size = New System.Drawing.Size(94, 38)
+        Me.BtnSummaryOut.TabIndex = 0
+        Me.BtnSummaryOut.Text = "Summary"
         '
         'FormFGAdj
         '
@@ -302,11 +275,13 @@ Partial Class FormFGAdj
         Me.XTPAdjIn.ResumeLayout(False)
         CType(Me.GCAdjIn, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVAdjIn, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl1.ResumeLayout(False)
         Me.XTPAdjOut.ResumeLayout(False)
         CType(Me.GCAdjOut, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVAdjOut, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GCAdjSampleOut, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GVAdjSampleOut, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl2.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -329,12 +304,8 @@ Partial Class FormFGAdj
     Friend WithEvents GridColumn10 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn11 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn12 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GCAdjSampleOut As DevExpress.XtraGrid.GridControl
-    Friend WithEvents GVAdjSampleOut As DevExpress.XtraGrid.Views.Grid.GridView
-    Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn2 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn3 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents PanelControl1 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents BtnSummaryIn As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents PanelControl2 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents BtnSummaryOut As DevExpress.XtraEditors.SimpleButton
 End Class

@@ -38,8 +38,8 @@ Partial Class FormEmpPayrollAdjustment
         Me.GridColumnType = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnTotDays = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnValue = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnNote = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIncrease = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnNote = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
@@ -222,14 +222,22 @@ Partial Class FormEmpPayrollAdjustment
         Me.GridColumnValue.AppearanceHeader.Options.UseTextOptions = True
         Me.GridColumnValue.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GridColumnValue.Caption = "Value"
-        Me.GridColumnValue.DisplayFormat.FormatString = "N0"
+        Me.GridColumnValue.DisplayFormat.FormatString = "N2"
         Me.GridColumnValue.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnValue.FieldName = "value"
         Me.GridColumnValue.Name = "GridColumnValue"
-        Me.GridColumnValue.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "value", "{0:N0}")})
+        Me.GridColumnValue.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "value", "{0:N2}")})
         Me.GridColumnValue.Visible = True
         Me.GridColumnValue.VisibleIndex = 7
         Me.GridColumnValue.Width = 86
+        '
+        'GridColumnIncrease
+        '
+        Me.GridColumnIncrease.Caption = "Increase"
+        Me.GridColumnIncrease.DisplayFormat.FormatString = "N0"
+        Me.GridColumnIncrease.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnIncrease.FieldName = "increase"
+        Me.GridColumnIncrease.Name = "GridColumnIncrease"
         '
         'GridColumnNote
         '
@@ -239,14 +247,6 @@ Partial Class FormEmpPayrollAdjustment
         Me.GridColumnNote.Visible = True
         Me.GridColumnNote.VisibleIndex = 8
         Me.GridColumnNote.Width = 101
-        '
-        'GridColumnIncrease
-        '
-        Me.GridColumnIncrease.Caption = "Increase"
-        Me.GridColumnIncrease.DisplayFormat.FormatString = "N0"
-        Me.GridColumnIncrease.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumnIncrease.FieldName = "increase"
-        Me.GridColumnIncrease.Name = "GridColumnIncrease"
         '
         'FormEmpPayrollAdjustment
         '

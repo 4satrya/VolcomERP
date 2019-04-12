@@ -21,10 +21,15 @@
             TETolerance.EditValue = 0
         Else
             'edit
-            Dim query As String = String.Format("SELECT *,DATE_FORMAT(prod_order_date,'%Y-%m-%d') as prod_order_datex FROM tb_prod_order WHERE id_prod_order = '{0}'", id_prod_order)
+            Dim query As String = String.Format("SELECT po.*,DATE_FORMAT(po.prod_order_date,'%Y-%m-%d') AS prod_order_datex,comp.`comp_name`,comp.`comp_number` FROM tb_prod_order po
+LEFT JOIN tb_prod_order_wo wo ON wo.`id_prod_order`=po.`id_prod_order` AND wo.`is_main_vendor`='1'
+LEFT JOIN tb_m_ovh_price ovhp ON ovhp.`id_ovh_price`=wo.`id_ovh_price`
+LEFT JOIN tb_m_comp_contact cc ON cc.`id_comp_contact`=ovhp.`id_comp_contact`
+LEFT JOIN tb_m_comp comp ON comp.`id_comp`=cc.`id_comp` WHERE po.id_prod_order = '{0}'", id_prod_order)
             Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
             TEPONumber.Text = data.Rows(0)("prod_order_number").ToString
+            TEVendorName.Text = data.Rows(0)("comp_number").ToString & " - " & data.Rows(0)("comp_name").ToString
 
             LEPOType.EditValue = data.Rows(0)("id_po_type").ToString()
             LECategory.EditValue = data.Rows(0)("id_term_production").ToString()
@@ -110,7 +115,7 @@
             GVBOM.ExpandAllGroups()
             If GVBOM.RowCount > 0 Then
                 METotSay.Text = ConvertCurrencyToEnglish(GVBOM.Columns("total").SummaryItem.SummaryValue.ToString, get_setup_field("id_currency_default"))
-                TEUnitCost.EditValue = GVBOM.Columns("total").SummaryItem.SummaryValue
+                TEUnitCost.EditValue = GVBOM.Columns("total").SummaryItem.SummaryValue / GVListProduct.Columns("prod_order_qty").SummaryItem.SummaryValue
             End If
             'search note
             If GVBOM.RowCount > 0 Then
@@ -208,6 +213,15 @@
         FormDocumentUpload.id_report = id_prod_order
         FormDocumentUpload.report_mark_type = "22"
         FormDocumentUpload.ShowDialog()
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub TEPDNo_Click(sender As Object, e As EventArgs) Handles TEPDNo.Click
+        Cursor = Cursors.WaitCursor
+        Dim showpopup As ClassShowPopUp = New ClassShowPopUp()
+        showpopup.report_mark_type = "9"
+        showpopup.double_click(addSlashes(TEPDNo.Text.ToString))
+        showpopup.show()
         Cursor = Cursors.Default
     End Sub
 End Class

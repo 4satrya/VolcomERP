@@ -99,7 +99,7 @@
             Dim fp As New ClassFingerPrint()
             fp.ip = GVFP.GetFocusedRowCellValue("ip").ToString
             fp.port = GVFP.GetFocusedRowCellValue("port").ToString
-            fp.upload_fp_temp_single()
+            fp.upload_fp_temp_single("")
             infoCustom("Process completed")
             SplashScreenManager1.CloseWaitForm()
         End If
@@ -112,7 +112,7 @@
             Dim fp As New ClassFingerPrint()
             fp.ip = GVFP.GetFocusedRowCellValue("ip").ToString
             fp.port = GVFP.GetFocusedRowCellValue("port").ToString
-            fp.upload_face_temp_single()
+            fp.upload_face_temp_single("")
             infoCustom("Process completed")
             SplashScreenManager1.CloseWaitForm()
         End If
@@ -154,5 +154,9 @@
             fp.power_off()
             Cursor = Cursors.Default
         End If
+    End Sub
+
+    Private Sub UploadFingerFacespesifikToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UploadFingerFacespesifikToolStripMenuItem.Click
+        FormEmpFPSingle.ShowDialog()
     End Sub
 End Class

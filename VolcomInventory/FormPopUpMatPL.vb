@@ -65,4 +65,8 @@
     Private Sub GVProdPL_FocusedRowChanged(ByVal sender As System.Object, ByVal e As DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs) Handles GVProdPL.FocusedRowChanged
         viewFillEmptyData()
     End Sub
+
+    Private Sub GVProdPL_ColumnFilterChanged(sender As Object, e As EventArgs) Handles GVProdPL.ColumnFilterChanged
+        viewFillEmptyData()
+    End Sub
 End Class

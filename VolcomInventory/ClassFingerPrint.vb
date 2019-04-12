@@ -362,9 +362,14 @@
     End Sub
 
     'UPLOAD FINGER TEMPLATE BERDASRKAN IP DAN PORT YANG DI SET
-    Sub upload_fp_temp_single()
+    Sub upload_fp_temp_single(ByVal nik As String)
         'data fp employee
-        Dim query_fp As String = "SELECT * FROM tb_m_employee_finger"
+        Dim cond As String = ""
+        If nik <> "" Then
+            cond = "WHERE user_id='" + nik + "'"
+        End If
+
+        Dim query_fp As String = "SELECT * FROM tb_m_employee_finger " + cond
         Dim data_fp As DataTable = execute_query(query_fp, -1, True, "", "", "", "")
 
         connect()
@@ -409,9 +414,13 @@
     End Sub
 
     'UPLOAD FACE TEMPLATE BERDASRKAN IP DAN PORT YANG DI SET
-    Sub upload_face_temp_single()
+    Sub upload_face_temp_single(ByVal nik As String)
         'data fp employee
-        Dim query_face As String = "SELECT * FROM tb_m_employee_face"
+        Dim cond As String = ""
+        If nik <> "" Then
+            cond = "WHERE user_id='" + nik + "'"
+        End If
+        Dim query_face As String = "SELECT * FROM tb_m_employee_face " + cond
         Dim data_face As DataTable = execute_query(query_face, -1, True, "", "", "", "")
 
         connect()

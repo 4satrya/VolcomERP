@@ -1,4 +1,6 @@
-﻿Public Class FormFGRepairDet
+﻿Imports Microsoft.Office.Interop
+
+Public Class FormFGRepairDet
     Public id_fg_repair As String = "-1"
     Public action As String = "-1"
     Public id_report_status As String = "-1"
@@ -15,8 +17,17 @@
     Public dt As New DataTable
     Dim is_delete_scan As Boolean = False
     Public id_type As String = "-1"
+    Public bof_column As String = get_setup_field("bof_column")
+    Public bof_xls_repair As String = get_setup_field("bof_xls_repair")
+    Dim rmt As String = ""
 
     Private Sub FormFGRepairDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If FormFGRepair.is_to_vendor = True Then
+            bof_xls_repair = get_setup_field("bof_xls_repair_to_vendor")
+            rmt = "140"
+        Else
+            rmt = "91"
+        End If
         viewReportStatus()
         actionLoad()
         WindowState = FormWindowState.Maximized
@@ -65,16 +76,16 @@
                 prePrinting()
                 Close()
             ElseIf id_pre = "2" Then
-                Printing()
+                printing()
                 Close()
             End If
         End If
     End Sub
 
     Sub allow_status()
-        If check_edit_report_status(id_report_status, "91", id_fg_repair) Then
-            MENote.Enabled = True
-            BtnSave.Enabled = True
+        If check_edit_report_status(id_report_status, rmt, id_fg_repair) Then
+            MENote.Enabled = False
+            BtnSave.Enabled = False
         Else
             MENote.Enabled = False
             BtnSave.Enabled = False
@@ -88,7 +99,7 @@
         GVScan.OptionsCustomization.AllowGroup = True
 
         'ATTACH
-        If check_attach_report_status(id_report_status, "91", id_fg_repair) Then
+        If check_attach_report_status(id_report_status, rmt, id_fg_repair) Then
             BtnAttachment.Enabled = True
         Else
             BtnAttachment.Enabled = False
@@ -104,6 +115,12 @@
             BtnPrint.Enabled = True
         Else
             BtnPrint.Enabled = False
+        End If
+
+        If id_report_status <> "5" And bof_column = "1" Then
+            BtnXlsBOF.Visible = True
+        Else
+            BtnXlsBOF.Visible = False
         End If
         TxtNumber.Focus()
     End Sub
@@ -222,6 +239,20 @@
         dt.Clear()
         Dim query As String = "CALL view_stock_fg_unique_del(0) "
         dt = execute_query(query, -1, True, "", "", "", "")
+
+        'not unique 
+        Dim query_c As ClassDesign = New ClassDesign()
+        Dim query_not As String = query_c.queryOldDesignCodeByDrawer(id_wh_drawer_from)
+        Dim data_not As DataTable = execute_query(query_not, -1, True, "", "", "", "")
+        'merge with not unique
+        If data_not.Rows.Count > 0 Then
+            If dt.Rows.Count = 0 Then
+                dt = data_not
+            Else
+                dt.Merge(data_not, True, MissingSchemaAction.Ignore)
+            End If
+        End If
+
         SplashScreenManager1.CloseWaitForm()
     End Sub
 
@@ -325,30 +356,35 @@
 
     Private Sub checkAvailable(ByVal code_par As String)
         'check in GV
-        GVScan.ActiveFilterString = "[code]='" + code_par + "'"
-        If GVScan.RowCount > 0 Then
-            GVScan.ActiveFilterString = ""
-            stopCustom("Duplicate code")
-        Else
-            GVScan.ActiveFilterString = ""
-            Dim dt_filter As DataRow() = dt.Select("[product_full_code]='" + code_par + "' ")
-            If dt_filter.Length > 0 Then
-                Dim newRow As DataRow = (TryCast(GCScan.DataSource, DataTable)).NewRow()
-                newRow("id_fg_repair_det") = "0"
-                newRow("id_fg_repair") = 0
-                newRow("id_product") = dt_filter(0)("id_product").ToString
-                newRow("code") = dt_filter(0)("product_full_code").ToString
-                newRow("product_code") = dt_filter(0)("product_code").ToString
-                newRow("name") = dt_filter(0)("name").ToString
-                newRow("size") = dt_filter(0)("size").ToString
-                newRow("id_pl_prod_order_rec_det_unique") = dt_filter(0)("id_pl_prod_order_rec_det_unique").ToString
-                newRow("fg_repair_det_counting") = dt_filter(0)("product_counting_code").ToString
-                TryCast(GCScan.DataSource, DataTable).Rows.Add(newRow)
-                GCScan.RefreshDataSource()
-                GVScan.RefreshData()
-            Else
-                stopCustom("Code not found!")
+        Dim dt_filter As DataRow() = dt.Select("[product_full_code]='" + code_par + "' ")
+        If dt_filter.Length > 0 Then
+            If dt_filter(0)("is_old_design").ToString = "2" Then
+                GVScan.ActiveFilterString = "[code]='" + code_par + "'"
+                If GVScan.RowCount > 0 Then
+                    GVScan.ActiveFilterString = ""
+                    stopCustom("Duplicate code")
+                    Exit Sub
+                Else
+                    GVScan.ActiveFilterString = ""
+                End If
             End If
+
+            Dim newRow As DataRow = (TryCast(GCScan.DataSource, DataTable)).NewRow()
+            newRow("id_fg_repair_det") = "0"
+            newRow("id_fg_repair") = 0
+            newRow("id_product") = dt_filter(0)("id_product").ToString
+            newRow("code") = dt_filter(0)("product_full_code").ToString
+            newRow("product_code") = dt_filter(0)("product_code").ToString
+            newRow("name") = dt_filter(0)("name").ToString
+            newRow("size") = dt_filter(0)("size").ToString
+            newRow("id_pl_prod_order_rec_det_unique") = dt_filter(0)("id_pl_prod_order_rec_det_unique").ToString
+            newRow("fg_repair_det_counting") = dt_filter(0)("product_counting_code").ToString
+            TryCast(GCScan.DataSource, DataTable).Rows.Add(newRow)
+            GCScan.RefreshDataSource()
+            GVScan.RefreshData()
+            GVScan.FocusedRowHandle = GVScan.RowCount - 1
+        Else
+            stopCustom("Code not found!")
         End If
     End Sub
 
@@ -422,6 +458,7 @@
             Tool.ShowPreview()
         Else
             GridColumnStatus.Visible = False
+            ReportFGRepair.rmt = rmt
             ReportFGRepair.id_fg_repair = id_fg_repair
             ReportFGRepair.id_type = id_type
             ReportFGRepair.dt = GCScanSum.DataSource
@@ -466,7 +503,7 @@
 
     Private Sub BtnAttachment_Click(sender As Object, e As EventArgs) Handles BtnAttachment.Click
         Cursor = Cursors.WaitCursor
-        FormDocumentUpload.report_mark_type = "91"
+        FormDocumentUpload.report_mark_type = rmt
         FormDocumentUpload.id_report = id_fg_repair
         FormDocumentUpload.ShowDialog()
         Cursor = Cursors.Default
@@ -474,7 +511,7 @@
 
     Private Sub BMark_Click(sender As Object, e As EventArgs) Handles BMark.Click
         Cursor = Cursors.WaitCursor
-        FormReportMark.report_mark_type = "91"
+        FormReportMark.report_mark_type = rmt
         FormReportMark.id_report = id_fg_repair
         FormReportMark.form_origin = Name
         FormReportMark.ShowDialog()
@@ -536,14 +573,14 @@
                         From y1 In Group.DefaultIfEmpty()
                         Select New With
                         {
-                            .code = table1.Field(Of String)("code").ToString,
-                            .name = table1.Field(Of String)("name").ToString,
-                            .size = table1.Field(Of String)("size").ToString,
+                            .code = table1("code").ToString,
+                            .name = table1("name").ToString,
+                            .size = table1("size").ToString,
                             .qty = table1("qty"),
                             .available_qty = If(y1 Is Nothing, 0, y1("qty_all_product")),
                             .design_price_retail = If(y1 Is Nothing, 0, y1("design_price_retail")),
                             .id_product = If(y1 Is Nothing, 0, y1("id_product")),
-                            .status = If(table1("qty") <= If(y1 Is Nothing, 0, y1("qty_all_product")), "OK", "Can't exceed " + If(y1 Is Nothing, 0, y1("qty_all_product").ToString))
+                            .status = If(table1("qty") <= If(y1 Is Nothing, 0, y1("qty_all_product")), "OK", "Can't exceed " + If(y1 Is Nothing, "0", y1("qty_all_product").ToString))
                         }
             GCScanSum.DataSource = Nothing
             GCScanSum.DataSource = query.ToList()
@@ -573,13 +610,19 @@
                 If confirm = Windows.Forms.DialogResult.Yes Then
                     Cursor = Cursors.WaitCursor
                     'main query
-                    Dim query As String = "INSERT INTO tb_fg_repair(id_wh_drawer_from, id_wh_drawer_to, fg_repair_number, fg_repair_date, fg_repair_note, id_report_status) 
-                                           VALUES('" + id_wh_drawer_from + "', '" + id_wh_drawer_to + "','" + header_number_sales("27") + "', NOW(), '" + fg_repair_note + "', '1'); SELECT LAST_INSERT_ID(); "
+                    Dim is_to_vendor As String = ""
+                    If FormFGRepair.is_to_vendor = True Then
+                        is_to_vendor = "1"
+                    Else
+                        is_to_vendor = "2"
+                    End If
+                    Dim query As String = "INSERT INTO tb_fg_repair(id_wh_drawer_from, id_wh_drawer_to, fg_repair_number, fg_repair_date, fg_repair_note, id_report_status, is_to_vendor) 
+                                           VALUES('" + id_wh_drawer_from + "', '" + id_wh_drawer_to + "','" + header_number_sales("27") + "', NOW(), '" + fg_repair_note + "', '1', '" + is_to_vendor + "'); SELECT LAST_INSERT_ID(); "
                     id_fg_repair = execute_query(query, 0, True, "", "", "", "")
                     increase_inc_sales("27")
 
                     'insert who prepared
-                    insert_who_prepared("91", id_fg_repair, id_user)
+                    submit_who_prepared(rmt, id_fg_repair, id_user)
 
                     'Detail 
                     Dim jum_ins_j As Integer = 0
@@ -590,12 +633,15 @@
                     For j As Integer = 0 To ((GVScan.RowCount - 1) - GetGroupRowCount(GVScan))
                         Dim id_product = GVScan.GetRowCellValue(j, "id_product").ToString
                         Dim id_pl_prod_order_rec_det_unique = GVScan.GetRowCellValue(j, "id_pl_prod_order_rec_det_unique").ToString
+                        If id_pl_prod_order_rec_det_unique = "0" Then
+                            id_pl_prod_order_rec_det_unique = "NULL"
+                        End If
                         Dim fg_repair_det_counting As String = GVScan.GetRowCellValue(j, "fg_repair_det_counting").ToString
 
                         If jum_ins_j > 0 Then
                             query_detail += ", "
                         End If
-                        query_detail += "('" + id_fg_repair + "', '" + id_product + "', '" + id_pl_prod_order_rec_det_unique + "', '" + fg_repair_det_counting + "') "
+                        query_detail += "('" + id_fg_repair + "', '" + id_product + "', " + id_pl_prod_order_rec_det_unique + ", '" + fg_repair_det_counting + "') "
                         jum_ins_j = jum_ins_j + 1
                     Next
                     If jum_ins_j > 0 Then
@@ -611,6 +657,10 @@
                     FormFGRepair.GVRepair.FocusedRowHandle = find_row(FormFGRepair.GVRepair, "id_fg_repair", id_fg_repair)
                     action = "upd"
                     actionLoad()
+
+                    'bof
+                    exportToBOF(False)
+
                     infoCustom("Document #" + TxtNumber.Text + " was created successfully.")
                     Cursor = Cursors.Default
                 End If
@@ -639,4 +689,127 @@
     Private Sub BtnPrint_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BtnPrint.ItemClick
         printing()
     End Sub
+
+    Private Sub BtnXlsBOF_Click(sender As Object, e As EventArgs) Handles BtnXlsBOF.Click
+        exportToBOF(True)
+    End Sub
+
+    Sub exportToBOF(ByVal show_msg As Boolean)
+        If bof_column = "1" Then
+            Cursor = Cursors.WaitCursor
+
+            'kolom ori - creating and saving the view's layout to a new memory stream 
+            Dim str As System.IO.Stream
+            str = New System.IO.MemoryStream()
+            GVScanSum.SaveLayoutToStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+            str.Seek(0, System.IO.SeekOrigin.Begin)
+
+
+            'hide column
+            For c As Integer = 0 To GVScanSum.Columns.Count - 1
+                GVScanSum.Columns(c).Visible = False
+            Next
+            GridColumnCodeSum.VisibleIndex = 0
+            GridColumnQty.VisibleIndex = 1
+            'GVItemList.OptionsPrint.PrintFooter = False
+            'GVItemList.OptionsPrint.PrintHeader = False
+
+
+            'export excel
+            Dim path_root As String = ""
+            Try
+                ' Open the file using a stream reader.
+                Using sr As New IO.StreamReader(Application.StartupPath & "\bof_path.txt")
+                    ' Read the stream to a string and write the string to the console.
+                    path_root = sr.ReadToEnd()
+                End Using
+            Catch ex As Exception
+            End Try
+
+            Dim fileName As String = bof_xls_repair + ".xls"
+            Dim exp As String = IO.Path.Combine(path_root, fileName)
+            Try
+                ExportToExcel(GVScanSum, exp, show_msg)
+            Catch ex As Exception
+                stopCustom("Please close your excel file first then try again later")
+            End Try
+
+            'show column
+            GVScanSum.RestoreLayoutFromStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+            str.Seek(0, System.IO.SeekOrigin.Begin)
+            Cursor = Cursors.Default
+        End If
+    End Sub
+
+    Private Sub ExportToExcel(ByVal dtTemp As DevExpress.XtraGrid.Views.Grid.GridView, ByVal filepath As String, show_msg As Boolean)
+        Dim strFileName As String = filepath
+        If System.IO.File.Exists(strFileName) Then
+            System.IO.File.Delete(strFileName)
+        End If
+        Dim _excel As New Excel.Application
+        Dim wBook As Excel.Workbook
+        Dim wSheet As Excel.Worksheet
+
+        wBook = _excel.Workbooks.Add()
+        wSheet = wBook.ActiveSheet()
+
+
+        Dim colIndex As Integer = 0
+        Dim rowIndex As Integer = -1
+
+        ' export the Columns 
+        'If CheckBox1.Checked Then
+        '    For Each dc In dt.Columns
+        '        colIndex = colIndex + 1
+        '        wSheet.Cells(1, colIndex) = dc.ColumnName
+        '    Next
+        'End If
+
+        'export the rows 
+        For i As Integer = 0 To dtTemp.RowCount - 1
+            rowIndex = rowIndex + 1
+            colIndex = 0
+            For j As Integer = 0 To 4
+                colIndex = colIndex + 1
+                If j = 0 Then 'code
+                    wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, "code").ToString
+                ElseIf j = 1 Then 'qty
+                    wSheet.Cells(rowIndex + 1, colIndex) = dtTemp.GetRowCellValue(i, "qty")
+                ElseIf j = 2 Then 'number
+                    wSheet.Cells(rowIndex + 1, colIndex) = TxtNumber.Text.ToString
+                ElseIf j = 3 Then 'from
+                    wSheet.Cells(rowIndex + 1, colIndex) = TxtCodeCompFrom.Text.ToString
+                ElseIf j = 4 Then 'to
+                    wSheet.Cells(rowIndex + 1, colIndex) = TxtCodeCompTo.Text.ToString
+                End If
+            Next
+        Next
+
+        wSheet.Columns.AutoFit()
+        wBook.SaveAs(strFileName, Excel.XlFileFormat.xlExcel5)
+
+        'release the objects
+        ReleaseObject(wSheet)
+        wBook.Close(False)
+        ReleaseObject(wBook)
+        _excel.Quit()
+        ReleaseObject(_excel)
+        ' some time Office application does not quit after automation: so i am calling GC.Collect method.
+        GC.Collect()
+
+        If show_msg Then
+            infoCustom("File exported successfully")
+        End If
+    End Sub
+
+    Private Sub ReleaseObject(ByVal o As Object)
+        Try
+            While (System.Runtime.InteropServices.Marshal.ReleaseComObject(o) > 0)
+            End While
+        Catch
+        Finally
+            o = Nothing
+        End Try
+    End Sub
+
 End Class

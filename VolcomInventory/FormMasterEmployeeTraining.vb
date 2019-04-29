@@ -28,9 +28,10 @@
         Else
             Dim course As String = TxtCourse.EditValue.ToString
             Dim institution As String = TxtInstitution.EditValue.ToString
-            Dim date_training As String = Date.Parse(TxtDate.EditValue.ToString).ToString("yyyy-MM-dd")
+            Dim date_from As String = Date.Parse(TxtDateFrom.EditValue.ToString).ToString("yyyy-MM-dd")
+            Dim date_until As String = Date.Parse(TxtDateUntil.EditValue.ToString).ToString("yyyy-MM-dd")
 
-            Dim query As String = "INSERT INTO tb_m_employee_training(id_employee, course, institution, date, is_cancel) VALUES ('" + id_employee + "', '" + course + "', '" + institution + "', '" + date_training + "', '2'); SELECT LAST_INSERT_ID();"
+            Dim query As String = "INSERT INTO tb_m_employee_training(id_employee, course, institution, date_from, date_until, is_cancel) VALUES ('" + id_employee + "', '" + addSlashes(course) + "', '" + addSlashes(institution) + "', '" + date_from + "', '" + date_until + "', '2'); SELECT LAST_INSERT_ID();"
 
             id_employee_training = execute_query(query, 0, True, "", "", "", "")
 
@@ -39,8 +40,12 @@
         End If
     End Sub
 
-    Private Sub TxtDate_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles TxtDate.Validating
-        EP_DE_cant_blank(ErrorProvider1, TxtDate)
+    Private Sub TxtDateFrom_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles TxtDateFrom.Validating
+        EP_DE_cant_blank(ErrorProvider1, TxtDateFrom)
+    End Sub
+
+    Private Sub TxtDateUntil_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles TxtDateUntil.Validating
+        EP_DE_cant_blank(ErrorProvider1, TxtDateUntil)
     End Sub
 
     Private Sub TxtCourse_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles TxtCourse.Validating
@@ -55,7 +60,8 @@
         If id_employee_training = "-1" Then
             TxtCourse.Enabled = True
             TxtInstitution.Enabled = True
-            TxtDate.Enabled = True
+            TxtDateFrom.Enabled = True
+            TxtDateUntil.Enabled = True
             BtnSave.Enabled = True
 
             LabelDocument.Enabled = False
@@ -65,7 +71,8 @@
         Else
             TxtCourse.Enabled = False
             TxtInstitution.Enabled = False
-            TxtDate.Enabled = False
+            TxtDateFrom.Enabled = False
+            TxtDateUntil.Enabled = False
             BtnSave.Enabled = False
 
             LabelDocument.Enabled = True
@@ -73,13 +80,14 @@
             BtnAddDocument.Enabled = True
             BtnDelDocument.Enabled = True
 
-            Dim query As String = "SELECT id_employee_training, course, institution, DATE_FORMAT(date, '%d %M %Y') date FROM tb_m_employee_training WHERE id_employee_training = '" + id_employee_training + "'"
+            Dim query As String = "SELECT id_employee_training, course, institution, DATE_FORMAT(date_from, '%d %M %Y') date_from, DATE_FORMAT(date_until, '%d %M %Y') date_until FROM tb_m_employee_training WHERE id_employee_training = '" + id_employee_training + "'"
 
             Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
             TxtCourse.EditValue = data.Rows(0)("course").ToString
             TxtInstitution.EditValue = data.Rows(0)("institution").ToString
-            TxtDate.EditValue = data.Rows(0)("date").ToString
+            TxtDateFrom.EditValue = data.Rows(0)("date_from").ToString
+            TxtDateUntil.EditValue = data.Rows(0)("date_until").ToString
 
             'document
             load_document()

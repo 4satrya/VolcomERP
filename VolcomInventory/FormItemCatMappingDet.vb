@@ -41,7 +41,7 @@
         Dim query As String = "SELECT 0 AS `id_item_cat`, 'All Category' AS `item_cat`
         UNION ALL
         SELECT c.id_item_cat, c.item_cat FROM tb_item_cat c ORDER BY id_item_cat ASC"
-        viewLookupQuery(LECategory, query, 0, "item_cat", "id_item_cat")
+        viewSearchLookupQuery(SLECat, query, "id_item_cat", "item_cat", "id_item_cat")
         Cursor = Cursors.Default
     End Sub
 
@@ -113,8 +113,8 @@
 
         'cat
         Dim cat As String = ""
-        If LECategory.EditValue.ToString <> "0" Then
-            cat = "AND m.id_item_cat='" + LECategory.EditValue.ToString + "' "
+        If SLECat.EditValue.ToString <> "0" Then
+            cat = "AND m.id_item_cat='" + SLECat.EditValue.ToString + "' "
         Else
             cat = ""
         End If
@@ -348,7 +348,7 @@
         viewDetail()
     End Sub
 
-    Private Sub LECategory_EditValueChanged(sender As Object, e As EventArgs) Handles LECategory.EditValueChanged
+    Private Sub LECategory_EditValueChanged(sender As Object, e As EventArgs)
         viewDetail()
     End Sub
 
@@ -412,5 +412,9 @@
 
     Private Sub EditToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditToolStripMenuItem.Click
         edit()
+    End Sub
+
+    Private Sub SLECat_EditValueChanged(sender As Object, e As EventArgs) Handles SLECat.EditValueChanged
+        viewDetail()
     End Sub
 End Class

@@ -54,11 +54,7 @@
             End If
             My.Computer.Network.UploadFile(file_address, path & last_id & "_" & report_mark_type & "_" & id_report & file_ext, "", "", True, 100, True)
             '
-            If report_mark_type = "149" Then
-                FormPurcItemDet.load_doc()
-            Else
-                FormDocumentUpload.view_file()
-            End If
+            FormDocumentUpload.refresh_load(report_mark_type)
             '
             Close()
         Catch ex As Exception

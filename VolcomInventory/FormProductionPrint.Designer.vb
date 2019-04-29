@@ -34,6 +34,10 @@ Partial Class FormProductionPrint
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnProdNo = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnTerm = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn13 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnDesign = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnDescription = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnColor = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -45,6 +49,7 @@ Partial Class FormProductionPrint
         Me.GridColumnDelivery = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -61,6 +66,9 @@ Partial Class FormProductionPrint
         Me.Label1 = New System.Windows.Forms.Label()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
+        Me.GCDesignCode = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GCDesignCodeImport = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.BToggleView = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl3.SuspendLayout()
@@ -98,6 +106,7 @@ Partial Class FormProductionPrint
         '
         'PanelControl3
         '
+        Me.PanelControl3.Controls.Add(Me.BToggleView)
         Me.PanelControl3.Controls.Add(Me.BGenKO)
         Me.PanelControl3.Controls.Add(Me.BCancel)
         Me.PanelControl3.Controls.Add(Me.BPrint)
@@ -160,7 +169,7 @@ Partial Class FormProductionPrint
         Me.GVProd.AppearancePrint.HeaderPanel.Options.UseTextOptions = True
         Me.GVProd.AppearancePrint.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
         Me.GVProd.ColumnPanelRowHeight = 50
-        Me.GVProd.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumnPOType, Me.GridColumnCompName, Me.GridColumn1, Me.GridColumnProdNo, Me.GridColumnTerm, Me.GridColumnDesign, Me.GridColumnDescription, Me.GridColumnColor, Me.GridColumnOrderQty, Me.GridColumnRecQty, Me.GridColumnIdPO, Me.GridColumnRange, Me.GridColumnIdDelivery, Me.GridColumnDelivery, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn8, Me.GridColumn6, Me.GridColumnPOCurr, Me.GridColumnPOAmount, Me.GridColumnPOKurs, Me.GridColumn7})
+        Me.GVProd.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumnPOType, Me.GridColumnCompName, Me.GridColumn1, Me.GridColumnProdNo, Me.GridColumnTerm, Me.GridColumn10, Me.GridColumn13, Me.GridColumn12, Me.GridColumn9, Me.GridColumnDesign, Me.GCDesignCodeImport, Me.GCDesignCode, Me.GridColumnDescription, Me.GridColumnColor, Me.GridColumnOrderQty, Me.GridColumnRecQty, Me.GridColumnIdPO, Me.GridColumnRange, Me.GridColumnIdDelivery, Me.GridColumnDelivery, Me.GridColumn2, Me.GridColumn3, Me.GridColumn11, Me.GridColumn4, Me.GridColumn5, Me.GridColumn8, Me.GridColumn6, Me.GridColumnPOCurr, Me.GridColumnPOAmount, Me.GridColumnPOKurs, Me.GridColumn7})
         Me.GVProd.GridControl = Me.GCProd
         Me.GVProd.Name = "GVProd"
         Me.GVProd.OptionsBehavior.Editable = False
@@ -224,6 +233,32 @@ Partial Class FormProductionPrint
         Me.GridColumnTerm.Visible = True
         Me.GridColumnTerm.VisibleIndex = 4
         Me.GridColumnTerm.Width = 78
+        '
+        'GridColumn10
+        '
+        Me.GridColumn10.Caption = "ID Term Of Production"
+        Me.GridColumn10.FieldName = "id_term_production"
+        Me.GridColumn10.Name = "GridColumn10"
+        '
+        'GridColumn13
+        '
+        Me.GridColumn13.Caption = "VAT"
+        Me.GridColumn13.DisplayFormat.FormatString = "N2"
+        Me.GridColumn13.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn13.FieldName = "vat"
+        Me.GridColumn13.Name = "GridColumn13"
+        '
+        'GridColumn12
+        '
+        Me.GridColumn12.Caption = "ID Comp"
+        Me.GridColumn12.FieldName = "id_comp"
+        Me.GridColumn12.Name = "GridColumn12"
+        '
+        'GridColumn9
+        '
+        Me.GridColumn9.Caption = "ID Contact"
+        Me.GridColumn9.FieldName = "id_comp_contact"
+        Me.GridColumn9.Name = "GridColumn9"
         '
         'GridColumnDesign
         '
@@ -326,6 +361,12 @@ Partial Class FormProductionPrint
         Me.GridColumn3.Name = "GridColumn3"
         Me.GridColumn3.Visible = True
         Me.GridColumn3.VisibleIndex = 11
+        '
+        'GridColumn11
+        '
+        Me.GridColumn11.Caption = "Lead Time Payment"
+        Me.GridColumn11.FieldName = "lead_time_pay"
+        Me.GridColumn11.Name = "GridColumn11"
         '
         'GridColumn4
         '
@@ -477,6 +518,29 @@ Partial Class FormProductionPrint
         Me.LabelControl1.TabIndex = 0
         Me.LabelControl1.Text = "Season"
         '
+        'GCDesignCode
+        '
+        Me.GCDesignCode.Caption = "Design Code"
+        Me.GCDesignCode.FieldName = "design_code"
+        Me.GCDesignCode.Name = "GCDesignCode"
+        '
+        'GCDesignCodeImport
+        '
+        Me.GCDesignCodeImport.Caption = "Code Import"
+        Me.GCDesignCodeImport.FieldName = "design_code_import"
+        Me.GCDesignCodeImport.Name = "GCDesignCodeImport"
+        '
+        'BToggleView
+        '
+        Me.BToggleView.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BToggleView.ImageIndex = 12
+        Me.BToggleView.ImageList = Me.LargeImageCollection
+        Me.BToggleView.Location = New System.Drawing.Point(434, 2)
+        Me.BToggleView.Name = "BToggleView"
+        Me.BToggleView.Size = New System.Drawing.Size(103, 33)
+        Me.BToggleView.TabIndex = 5
+        Me.BToggleView.Text = "Toggle View"
+        '
         'FormProductionPrint
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -544,4 +608,12 @@ Partial Class FormProductionPrint
     Friend WithEvents GridColumnPOCurr As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnPOAmount As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnPOKurs As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn9 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn10 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn11 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn12 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn13 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GCDesignCodeImport As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GCDesignCode As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BToggleView As DevExpress.XtraEditors.SimpleButton
 End Class

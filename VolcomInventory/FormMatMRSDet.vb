@@ -15,6 +15,7 @@
             TEDate.Text = view_date(0)
             id_report_status_g = 1
             BSave.Enabled = True
+            BPrint.Visible = False
             If mrs_type = "1" Then 'other
                 TEWONumber.Text = "-"
                 TEWONumber.Enabled = False
@@ -23,6 +24,7 @@
                 BAddMat.Visible = True
                 BEditMat.Visible = True
                 BDelMat.Visible = True
+
                 '
             Else 'mat wo
                 TEWONumber.Enabled = True
@@ -47,6 +49,9 @@
             TEDate.Text = view_date_from(data.Rows(0)("prod_order_mrs_datex").ToString, 0)
 
             MENote.Text = data.Rows(0)("prod_order_mrs_note").ToString
+
+            BPrint.Visible = True
+
             If mrs_type = "1" Then 'other
                 TEWONumber.Enabled = False
                 BPickMatWO.Enabled = False
@@ -54,6 +59,7 @@
                 BAddMat.Enabled = True
                 BEditMat.Enabled = True
                 BDelMat.Enabled = True
+
                 '
             Else 'mat wo
                 TEWONumber.Enabled = True
@@ -98,11 +104,6 @@
             '
             BPickReqFrom.Enabled = False
             BPickCompTo.Enabled = False
-        End If
-        If check_print_report_status(id_report_status_g) Then
-            BPrint.Enabled = True
-        Else
-            BPrint.Enabled = False
         End If
     End Sub
 

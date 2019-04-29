@@ -93,9 +93,13 @@
             MENote.Text = data.Rows(0)("awbill_note").ToString
 
             BMark.Visible = True
+
+            If data.Rows(0)("is_lock").ToString = "1" Then
+                BSave.Visible = False
+            End If
         End If
 
-        If id_awb_type = "1" Then
+            If id_awb_type = "1" Then
             TEAwbType.Text = "Outbound"
             CEPaid.Visible = True
             SLECargo.Width = 100

@@ -9,8 +9,18 @@
         '
         viewSeason()
         view_mat_purc()
+        '
+        viewVendorKO()
         'GVMatPurchase.ActiveFilterString = "[id_mat_purc] > 1 AND [id_mat_purc] < 6"
         viewProdDemand()
+    End Sub
+
+    Sub viewVendorKO()
+        Dim query As String = ""
+        query += "SELECT ('0') AS id_comp, ('-') AS comp_number, ('All Vendor') AS comp_name, ('ALL Vendor') AS comp_name_label UNION ALL "
+        query += "SELECT comp.id_comp,comp.comp_number, comp.comp_name, CONCAT_WS(' - ', comp.comp_number,comp.comp_name) AS comp_name_label FROM tb_m_comp comp "
+        query += "WHERE comp.id_comp_cat='1'"
+        viewSearchLookupQuery(SLEVendorKO, query, "id_comp", "comp_name_label", "id_comp")
     End Sub
 
     Private Sub viewSeason()
@@ -31,8 +41,8 @@
             query_where += " AND del.id_season='" & LESeason.EditValue.ToString & "'"
         End If
 
-        Dim query = "SELECT '' AS `no`,'no' AS is_check,IFNULL(rev.mat_purc_number,'-') AS mat_purc_rev_number,a.id_report_status,h.report_status,a.id_mat_purc, 
-DATE_ADD(a.`mat_purc_date`,INTERVAL a.`mat_purc_lead_time` DAY) AS est_del_date,
+        Dim query = "SELECT '' AS `no`,a.mat_purc_vat as vat,'no' AS is_check,IFNULL(rev.mat_purc_number,'-') AS mat_purc_rev_number,a.id_report_status,h.report_status,a.id_mat_purc, 
+DATE_ADD(a.`mat_purc_date`,INTERVAL a.`mat_purc_lead_time` DAY) AS est_del_date,a.id_comp_contact_to AS id_comp_contact,d.id_comp AS id_comp,
 DATE_ADD(a.`mat_purc_date`,INTERVAL (a.`mat_purc_lead_time`+a.`mat_purc_top`) DAY) AS payment_due_date,
 a.`mat_purc_lead_time` AS lead_time,a.`mat_purc_top` AS top,
 b.id_season,a.id_delivery,i.delivery, rang.`range`,
@@ -44,9 +54,9 @@ a.mat_purc_date, del.`id_season`,
 DATE_ADD(a.mat_purc_date,INTERVAL a.mat_purc_lead_time DAY) AS mat_purc_lead_time, 
 DATE_ADD(a.mat_purc_date,INTERVAL (a.mat_purc_top+a.mat_purc_lead_time) DAY) AS mat_purc_top 
 ,cur.`currency` AS po_curr,a.`mat_purc_kurs` AS po_kurs
-,SUM(mpd.`mat_purc_det_price` * mpd.`mat_purc_det_qty`) AS po_amount
+,SUM(mpd.`mat_purc_det_price` * mpd.`mat_purc_det_qty`)* ((100 + a.mat_purc_vat)/100) AS po_amount
 ,SUM(mpd.`mat_purc_det_qty`) AS qty_order
-,SUM(IF(a.`id_currency`=1,1,a.`mat_purc_kurs`) * mpd.`mat_purc_det_price` * mpd.`mat_purc_det_qty`) AS po_amount_rp
+,SUM(IF(a.`id_currency`=1,1,a.`mat_purc_kurs`) * mpd.`mat_purc_det_price` * mpd.`mat_purc_det_qty`) * ((100 + a.mat_purc_vat)/100) AS po_amount_rp
 ,uom.`uom`
 FROM tb_mat_purc a INNER JOIN tb_season_delivery i ON a.id_delivery = i.id_delivery 
 INNER JOIN tb_season b ON i.id_season = b.id_season 
@@ -276,5 +286,34 @@ GROUP BY mpd.`id_mat_purc`"
                 End If
             Next
         End If
+    End Sub
+
+    Private Sub BViewKO_Click(sender As Object, e As EventArgs) Handles BViewKO.Click
+        Dim query_where As String = ""
+        '
+        If Not SLEVendorKO.EditValue.ToString = "0" Then
+            query_where += " AND c.id_comp='" & SLEVendorKO.EditValue.ToString & "'"
+        End If
+        '
+        Dim query As String = "SELECT ko.*,c.`comp_name` FROM tb_prod_order_ko ko
+INNER JOIN tb_m_comp_contact cc ON cc.`id_comp_contact`=ko.`id_comp_contact`
+INNER JOIN tb_m_comp c ON c.`id_comp`=cc.`id_comp`
+WHERE ko.id_prod_order_ko 
+IN (SELECT MAX(id_prod_order_ko) AS id FROM `tb_prod_order_ko`
+GROUP BY id_prod_order_ko_reff) AND is_purc_mat=1 " & query_where & " ORDER BY ko.id_prod_order_ko DESC"
+
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCKO.DataSource = data
+        If GVKO.RowCount > 0 Then
+            BEditKO.Visible = True
+        Else
+            BEditKO.Visible = False
+        End If
+        GVKO.BestFitColumns()
+    End Sub
+
+    Private Sub BEditKO_Click(sender As Object, e As EventArgs) Handles BEditKO.Click
+        FormProductionKO.id_ko = GVKO.GetFocusedRowCellValue("id_prod_order_ko").ToString
+        FormProductionKO.ShowDialog()
     End Sub
 End Class

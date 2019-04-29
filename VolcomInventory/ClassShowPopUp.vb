@@ -19,6 +19,7 @@
 
     Public is_qb As String = ""
     Public qb_id_not_include As String = ""
+    Public opt As String = ""
     '
     Sub double_click(ByVal var As String)
         If report_mark_type = "9" Then
@@ -107,13 +108,19 @@
         ElseIf report_mark_type = "36" Then
             'entry journal
             FormViewJournal.Close()
+        ElseIf report_mark_type = "41" Then
+            'Adj In Fg
+            FormFGAdjInDet.Close()
+        ElseIf report_mark_type = "42" Then
+            'Adj Out Fg
+            FormFGAdjOutDet.Close()
         ElseIf report_mark_type = "44" Then
             'non production MRS
             FormViewMatMRS.Close()
         ElseIf report_mark_type = "47" Then
             'return in mat
             FormViewMatRetInProd.Close()
-        ElseIf report_mark_type = "48" Or report_mark_type = "66" Or report_mark_type = "118" Or report_mark_type = "54" Or report_mark_type = "67" Or report_mark_type = "116" Or report_mark_type = "117" Then
+        ElseIf report_mark_type = "48" Or report_mark_type = "66" Or report_mark_type = "118" Or report_mark_type = "54" Or report_mark_type = "67" Or report_mark_type = "116" Or report_mark_type = "117" Or report_mark_type = "183" Then
             'invoice/missing/credit note
             FormViewSalesPOS.Close()
         ElseIf report_mark_type = "50" Then
@@ -122,6 +129,9 @@
         ElseIf report_mark_type = "65" Then
             'code replacement
             FormViewFGCodeReplaceStore.Close()
+        ElseIf report_mark_type = "70" Then
+            'propose price
+            FormFGProposePriceDetail.Close()
         ElseIf report_mark_type = "95" Or report_mark_type = "164" Or report_mark_type = "165" Then
             'propose leave
             FormEmpLeaveDet.Close()
@@ -203,7 +213,7 @@
         ElseIf report_mark_type = "148" Then
             'purchase receive non asset
             'FormPurcReceiveDet.Close()
-        ElseIf report_mark_type = "150" Or report_mark_type = "155" Then
+        ElseIf report_mark_type = "150" Or report_mark_type = "155" Or report_mark_type = "172" Or report_mark_type = "173" Then
             'Prpose Cost
             FormMasterDesignCOPPropose.Close()
         ElseIf report_mark_type = "151" Then
@@ -239,6 +249,42 @@
         ElseIf report_mark_type = "169" Then
             'value-added asset
             FormPurcAssetValueAdded.Close()
+        ElseIf report_mark_type = "174" Then
+            'Cash Advance Reconcile
+            FormCashAdvanceReconcile.Close()
+        ElseIf report_mark_type = "175" Then
+            'Sample budget propose
+            FormSampleBudgetDet.Close()
+        ElseIf report_mark_type = "176" Or report_mark_type = "177" Or report_mark_type = "178" Then
+            'Propose Changes
+            FormMasterDesignSingle.Close()
+        ElseIf report_mark_type = "180" Then
+            'Employee Propose
+            FormEmployeePpsDet.Close()
+        ElseIf report_mark_type = "184" Then
+            'Overtime employee
+            FormEmpOvertimeDet.Close()
+        ElseIf report_mark_type = "185" Then
+            'Sample Purchase Closing
+            FormSamplePurcClose.Close()
+        ElseIf report_mark_type = "187" Then
+            'Overtime employee report
+            FormEmpOvertimeDet.Close()
+        ElseIf report_mark_type = "188" Then
+            'propose price new product-revision
+            FormFGProposePriceRev.Close()
+        ElseIf report_mark_type = "190" Or report_mark_type = "193" Then
+            'propose work order MTC/IT
+            FormWorkOrderDet.Close()
+        ElseIf report_mark_type = "192" Then
+            'payroll
+            Dim id_payroll As String = FormEmpPayroll.GVPayrollPeriode.GetFocusedRowCellValue("id_payroll").ToString
+
+            FormEmpPayroll.load_payroll()
+
+            FormEmpPayroll.GVPayrollPeriode.FocusedRowHandle = find_row(FormEmpPayroll.GVPayrollPeriode, "id_payroll", id_payroll)
+
+            FormEmpPayroll.load_payroll_detail()
         End If
     End Sub
     Sub show()
@@ -336,6 +382,9 @@
         ElseIf report_mark_type = "22" Then
             'Production Order
             FormViewProduction.id_prod_order = id_report
+            If opt = "no cost" Then
+                FormViewProduction.is_no_cost = "1"
+            End If
             FormViewProduction.ShowDialog()
         ElseIf report_mark_type = "23" Then
             'Production Work Order
@@ -411,6 +460,10 @@
             'FG IN
             FormViewFGAdjIn.id_adj_in_fg = id_report
             FormViewFGAdjIn.ShowDialog()
+        ElseIf report_mark_type = "42" Then
+            'FG OUT
+            FormViewFGAdjOut.id_adj_out_fg = id_report
+            FormViewFGAdjOut.ShowDialog()
         ElseIf report_mark_type = "43" Then
             'SALES ORDER DEL
             FormViewSalesDelOrder.id_pl_sales_order_del = id_report
@@ -516,8 +569,9 @@
             FormViewFGWoff.ShowDialog()
         ElseIf report_mark_type = "70" Then
             'PROPOSE PRICE
-            FormViewFGProposePrice.id_fg_propose_price = id_report
-            FormViewFGProposePrice.ShowDialog()
+            FormFGProposePriceDetail.id = id_report
+            FormFGProposePriceDetail.is_view = "1"
+            FormFGProposePriceDetail.ShowDialog()
         ElseIf report_mark_type = "72" Then
             'QC Adj In
             FormViewProdQCAdjIn.id_adj_in = id_report
@@ -815,7 +869,7 @@
             FormPurcReceiveDet.id = id_report
             FormPurcReceiveDet.is_view = "1"
             FormPurcReceiveDet.ShowDialog()
-        ElseIf report_mark_type = "150" Or report_mark_type = "155" Then
+        ElseIf report_mark_type = "150" Or report_mark_type = "155" Or report_mark_type = "172" Or report_mark_type = "173" Then
             'COP Propose
             FormMasterDesignCOPPropose.id_propose = id_report
             FormMasterDesignCOPPropose.is_view = "1"
@@ -898,6 +952,92 @@
             FormPurcAssetValueAdded.id = id_report
             FormPurcAssetValueAdded.is_view = "1"
             FormPurcAssetValueAdded.ShowDialog()
+        ElseIf report_mark_type = "174" Then
+            'Cash Advance Reconcile
+            FormCashAdvanceReconcile.id_ca = id_report
+            FormCashAdvanceReconcile.is_view = "1"
+            FormCashAdvanceReconcile.ShowDialog()
+        ElseIf report_mark_type = "175" Then
+            'Sample budget propose
+            FormSampleBudgetDet.id_pps = id_report
+            FormSampleBudgetDet.is_view = "1"
+            FormSampleBudgetDet.ShowDialog()
+        ElseIf report_mark_type = "176" Or report_mark_type = "177" Or report_mark_type = "178" Then
+            'Propose Changes
+            Dim id_pop_up As String = ""
+            Dim form_name As String = ""
+
+            If report_mark_type = "177" Then
+                id_pop_up = "-1"
+                form_name = "FormFGLineList"
+            ElseIf report_mark_type = "178" Then
+                id_pop_up = "3"
+                form_name = "FormFGLineList"
+            ElseIf report_mark_type = "176" Then
+                id_pop_up = "5"
+                form_name = "FormFGDesignList"
+            End If
+
+            Dim id_dsg As String = execute_query("SELECT id_design FROM tb_m_design_rev WHERE id_design_rev = '" + id_report + "'", 0, True, "", "", "", "")
+
+            FormMasterDesignSingle.id_pop_up = id_pop_up
+            FormMasterDesignSingle.form_name = form_name
+            FormMasterDesignSingle.id_design = id_dsg
+            FormMasterDesignSingle.WindowState = FormWindowState.Maximized
+            FormMasterDesignSingle.is_propose_changes = True
+            FormMasterDesignSingle.id_propose_changes = id_report
+
+            FormMasterDesignSingle.ShowDialog()
+        ElseIf report_mark_type = "180" Then
+            Dim data_pps As DataTable = execute_query("SELECT id_type, id_employee FROM tb_employee_pps WHERE id_employee_pps = '" + id_report + "'", -1, True, "", "", "", "")
+
+            FormEmployeePpsDet.id_pps = id_report
+            FormEmployeePpsDet.is_new = If(data_pps.Rows(0)("id_type").ToString = "1", "-1", "1")
+            FormEmployeePpsDet.id_employee = If(data_pps.Rows(0)("id_employee").ToString = "", "-1", data_pps.Rows(0)("id_employee").ToString)
+            FormEmployeePpsDet.show_payroll = True
+
+            FormEmployeePpsDet.ShowDialog()
+        ElseIf report_mark_type = "184" Then
+            FormEmpOvertimeDet.id = id_report
+            FormEmpOvertimeDet.is_hrd = "1"
+            FormEmpOvertimeDet.is_check = "-1"
+
+            FormEmpOvertimeDet.ShowDialog()
+        ElseIf report_mark_type = "185" Then
+            'Sample Purchase Closing
+            FormSamplePurcCloseDet.id_close = id_report
+            FormSamplePurcCloseDet.is_view = "1"
+
+            FormSamplePurcCloseDet.ShowDialog()
+        ElseIf report_mark_type = "187" Then
+            FormEmpOvertimeDet.id = id_report
+            FormEmpOvertimeDet.is_hrd = "1"
+            FormEmpOvertimeDet.is_check = "1"
+
+            FormEmpOvertimeDet.ShowDialog()
+        ElseIf report_mark_type = "183" Then
+            'sales invuuce diff margin
+            FormViewSalesPOS.id_menu = "4"
+            FormViewSalesPOS.id_sales_pos = id_report
+            FormViewSalesPOS.ShowDialog()
+        ElseIf report_mark_type = "188" Then
+            'propose price new product-revision
+            FormFGProposePriceRev.is_view = "1"
+            FormFGProposePriceRev.id = id_report
+            FormFGProposePriceRev.ShowDialog()
+        ElseIf report_mark_type = "190" Or report_mark_type = "193" Then
+            'work order MTC/IT
+            FormWorkOrderDet.is_view = " Then1"
+            FormWorkOrderDet.id_wo = id_report
+            FormWorkOrderDet.ShowDialog()
+        ElseIf report_mark_type = "192" Then
+            FormEmpPayroll.MdiParent = FormMain
+            FormEmpPayroll.Show()
+            FormEmpPayroll.WindowState = FormWindowState.Maximized
+            FormEmpPayroll.Focus()
+
+            FormEmpPayroll.GVPayrollPeriode.FocusedRowHandle = find_row(FormEmpPayroll.GVPayrollPeriode, "id_payroll", id_report)
+            FormEmpPayroll.XTCPayroll.SelectedTabPageIndex = 1
         Else
             'MsgBox(id_report)
             stopCustom("Document Not Found")
@@ -958,7 +1098,7 @@
             field_date = "receipt_sample_date"
         ElseIf report_mark_type = "8" Then
             'bom
-            table_name = "tb_bom a INNER JOIN tb_m_product b ON a.id_product = b.id_product"
+            table_name = "tb_bom a INNER JOIN tb_m_product b On a.id_product = b.id_product"
             field_id = "a.id_bom"
             field_number = "CONCAT_WS('/',b.product_full_code,a.bom_name)"
             field_date = "bom_date_created"
@@ -1017,13 +1157,13 @@
             field_number = "mat_wo_rec_number"
             field_date = "mat_wo_rec_date"
         ElseIf report_mark_type = "18" Then
-            'return out material 
+            'return out material
             table_name = "tb_mat_purc_ret_out"
             field_id = "id_mat_purc_ret_out"
             field_number = "mat_purc_ret_out_number"
             field_date = "mat_purc_ret_out_date"
         ElseIf report_mark_type = "19" Then
-            'return in material 
+            'return in material
             table_name = "tb_mat_purc_ret_in"
             field_id = "id_mat_purc_ret_in"
             field_number = "mat_purc_ret_in_number"
@@ -1636,7 +1776,7 @@
             field_id = "id_purc_rec"
             field_number = "purc_rec_number"
             field_date = "date_created"
-        ElseIf report_mark_type = "150" Or report_mark_type = "155" Then
+        ElseIf report_mark_type = "150" Or report_mark_type = "155" Or report_mark_type = "172" Or report_mark_type = "173" Then
             'Design COP Propose
             table_name = "tb_design_cop_propose"
             field_id = "id_design_cop_propose"
@@ -1708,6 +1848,42 @@
             field_id = "id_sales_return_rec"
             field_number = "number"
             field_date = "created_date"
+        ElseIf report_mark_type = "174" Then
+            'Cash Advance Reconcile
+            table_name = "tb_cash_advance"
+            field_id = "id_cash_advance"
+            field_number = "number"
+            field_date = "date_created"
+        ElseIf report_mark_type = "175" Then
+            'Sample budget propose
+            table_name = "tb_sample_budget_pps"
+            field_id = "id_sample_budget_pps"
+            field_number = "number"
+            field_date = "date_created"
+        ElseIf report_mark_type = "183" Then
+            'sales invoice diff margin
+            table_name = "tb_sales_pos"
+            field_id = "id_sales_pos"
+            field_number = "sales_pos_number"
+            field_date = "sales_pos_date"
+        ElseIf report_mark_type = "185" Then
+            'sample purchase close
+            table_name = "tb_sample_purc_close"
+            field_id = "id_sample_purc_close"
+            field_number = "number"
+            field_date = "date_created"
+        ElseIf report_mark_type = "188" Then
+            'propose price new product-revision
+            table_name = "tb_fg_propose_price_rev"
+            field_id = "id_fg_propose_price_rev"
+            field_number = "rev_count"
+            field_date = "created_date"
+        ElseIf report_mark_type = "190" Or report_mark_type = "193" Then
+            'work order MTC/IT
+            table_name = "tb_work_order"
+            field_id = "id_work_order"
+            field_number = "number"
+            field_date = "created_date"
         Else
             query = "Select '-' AS report_number, NOW() as report_date"
         End If
@@ -1726,7 +1902,7 @@
                     'po production
                     query = "SELECT desg.design_code,desg.design_display_name, pot.po_type FROM tb_prod_order po
                         INNER JOIN tb_prod_demand_design pdd ON pdd.id_prod_demand_design=po.id_prod_demand_design
-                        INNER JOIN tb_m_design desg ON desg.id_design=pdd.id_design 
+                        INNER JOIN tb_m_design desg ON desg.id_design=pdd.id_design
                         INNER JOIN tb_lookup_po_type pot ON pot.id_po_type=po.id_po_type WHERE po.id_prod_order='" & id_report & "'"
                     Dim datax As DataTable = execute_query(query, -1, True, "", "", "", "")
                     If datax.Rows.Count > 0 Then
@@ -1740,7 +1916,7 @@
                     query = "SELECT desg.design_code,desg.design_display_name,pot.po_type,po.prod_order_number FROM tb_prod_order_wo wo
                         INNER JOIN tb_prod_order po ON po.id_prod_order=wo.id_prod_order
                         INNER JOIN tb_prod_demand_design pdd ON pdd.id_prod_demand_design=po.id_prod_demand_design
-                        INNER JOIN tb_m_design desg ON desg.id_design=pdd.id_design 
+                        INNER JOIN tb_m_design desg ON desg.id_design=pdd.id_design
                         INNER JOIN tb_lookup_po_type pot ON pot.id_po_type=po.id_po_type WHERE wo.id_prod_order_wo='" & id_report & "'"
                     Dim datax As DataTable = execute_query(query, -1, True, "", "", "", "")
                     If datax.Rows.Count > 0 Then
@@ -1776,12 +1952,12 @@
                     End If
                 ElseIf report_mark_type = "29" Then
                     'mrs production
-                    query = "SELECT desg.design_code,desg.design_display_name,pot.po_type,po.prod_order_number 
+                    query = "SELECT desg.design_code,desg.design_display_name,pot.po_type,po.prod_order_number
                             FROM tb_prod_order_mrs mrs
                             INNER JOIN tb_prod_order po ON po.id_prod_order=mrs.id_prod_order
                             INNER JOIN tb_prod_demand_design pdd ON pdd.id_prod_demand_design=po.id_prod_demand_design
-                            INNER JOIN tb_m_design desg ON desg.id_design=pdd.id_design 
-                            INNER JOIN tb_lookup_po_type pot ON pot.id_po_type=po.id_po_type 
+                            INNER JOIN tb_m_design desg ON desg.id_design=pdd.id_design
+                            INNER JOIN tb_lookup_po_type pot ON pot.id_po_type=po.id_po_type
                             WHERE mrs.`id_prod_order_mrs`='" & id_report & "'"
                     Dim datax As DataTable = execute_query(query, -1, True, "", "", "", "")
                     If datax.Rows.Count > 0 Then
@@ -1796,7 +1972,7 @@
                         INNER JOIN tb_prod_order_mrs pom ON pom.id_prod_order_mrs=plm.id_prod_order_mrs
                         INNER JOIN tb_prod_order po ON po.id_prod_order=pom.id_prod_order
                         INNER JOIN tb_prod_demand_design pdd ON pdd.id_prod_demand_design=po.id_prod_demand_design
-                        INNER JOIN tb_m_design desg ON desg.id_design=pdd.id_design 
+                        INNER JOIN tb_m_design desg ON desg.id_design=pdd.id_design
                         WHERE plm.id_pl_mrs='" & id_report & "'"
                     Dim datax As DataTable = execute_query(query, -1, True, "", "", "", "")
                     If datax.Rows.Count > 0 Then
@@ -1862,8 +2038,8 @@
                 ElseIf report_mark_type = "37" Then
                     'rec wh
                     query = "SELECT CONCAT(c.comp_number,' - ', c.comp_name) AS `vendor`,
-                d.design_code AS `code`, d.design_display_name AS `name`, 
-                CAST(IFNULL(SUM(recd.pl_prod_order_rec_det_qty),0) AS DECIMAL(10,0)) AS `total_qty` 
+                d.design_code AS `code`, d.design_display_name AS `name`,
+                CAST(IFNULL(SUM(recd.pl_prod_order_rec_det_qty),0) AS DECIMAL(10,0)) AS `total_qty`
                 FROM tb_pl_prod_order_rec rec
                 LEFT JOIN tb_pl_prod_order_rec_det recd ON recd.id_pl_prod_order_rec = rec.id_pl_prod_order_rec
                 INNER JOIN tb_pl_prod_order pl ON pl.id_pl_prod_order = rec.id_pl_prod_order
@@ -1871,7 +2047,7 @@
                 LEFT JOIN tb_prod_order_wo wo ON wo.id_prod_order = po.id_prod_order AND wo.is_main_vendor=1
                 LEFT JOIN tb_m_ovh_price op ON op.id_ovh_price = wo.id_ovh_price
                 LEFT JOIN tb_m_comp_contact cc ON cc.id_comp_contact = op.id_comp_contact
-                LEFT JOIN tb_m_comp c ON c.id_comp = cc.id_comp 
+                LEFT JOIN tb_m_comp c ON c.id_comp = cc.id_comp
                 INNER JOIN tb_prod_demand_design pdd ON pdd.id_prod_demand_design = po.id_prod_demand_design
                 INNER JOIN tb_m_design d ON d.id_design = pdd.id_design
                 WHERE rec.id_pl_prod_order_rec=" + id_report + "
@@ -1885,12 +2061,12 @@
                     End If
                 ElseIf report_mark_type = "43" Then
                     'pre delivery
-                    query = "SELECT CONCAT(c.comp_number,' - ', c.comp_name) AS `store`, 
+                    query = "SELECT CONCAT(c.comp_number,' - ', c.comp_name) AS `store`,
                 CAST(IFNULL(SUM(delt.pl_sales_order_del_det_qty),0) AS DECIMAL(10,0)) AS `total_qty`
                 FROM tb_pl_sales_order_del del
                 LEFT JOIN tb_pl_sales_order_del_det delt ON delt.id_pl_sales_order_del = del.id_pl_sales_order_del
                 INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = del.id_store_contact_to
-                INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp 
+                INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp
                 WHERE del.id_pl_sales_order_del=" + id_report + "
                 GROUP BY del.id_pl_sales_order_del "
                     Dim datax As DataTable = execute_query(query, -1, True, "", "", "", "")
@@ -1905,8 +2081,8 @@
                 FROM tb_sales_return r
                 LEFT JOIN tb_sales_return_det rd ON rd.id_sales_return = r.id_sales_return
                 INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = r.id_store_contact_from
-                INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp 
-                WHERE r.id_sales_return=" + id_report + " 
+                INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp
+                WHERE r.id_sales_return=" + id_report + "
                 GROUP BY r.id_sales_return "
                     Dim datax As DataTable = execute_query(query, -1, True, "", "", "", "")
                     If datax.Rows.Count > 0 Then
@@ -1927,20 +2103,21 @@
                     Dim datax As DataTable = execute_query(query, -1, True, "", "", "", "")
                     If datax.Rows.Count > 0 Then
                         info_col = datax.Rows(0)("po_type").ToString
-                        info_report = datax.Rows(0)("prod_order_number").ToString
+                        'info_report = datax.Rows(0)("prod_order_number").ToString
+                        info_report = datax.Rows(0)("mat_prod_ret_in_number").ToString
                         info_design_code = datax.Rows(0)("design_code").ToString
                         info_design = datax.Rows(0)("design_display_name").ToString
                     End If
                 ElseIf report_mark_type = "49" Or report_mark_type = "106" Then
                     'return transfer
-                    query = "SELECT r.sales_return_number AS `return`, 
+                    query = "SELECT r.sales_return_number AS `return`,
                 CONCAT(c.comp_number,' - ', c.comp_name) AS `store`,
                 CAST(IFNULL(SUM(rtd.sales_return_qc_det_qty),0) AS DECIMAL(10,0)) AS `total_qty`
                 FROM tb_sales_return_qc rt
                 LEFT JOIN tb_sales_return_qc_det rtd ON rtd.id_sales_return_qc = rt.id_sales_return_qc
                 INNER JOIN tb_sales_return r ON r.id_sales_return = rt.id_sales_return
                 INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = rt.id_store_contact_from
-                INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp 
+                INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp
                 WHERE rt.id_sales_return_qc=" + id_report + "
                 GROUP BY rt.id_sales_return_qc "
                     Dim datax As DataTable = execute_query(query, -1, True, "", "", "", "")
@@ -1951,12 +2128,12 @@
                     End If
                 ElseIf report_mark_type = "50" Then
                     'PR Production
-                    query = "SELECT desg.design_code,desg.design_display_name,po.prod_order_number 
+                    query = "SELECT desg.design_code,desg.design_display_name,po.prod_order_number
                         FROM tb_pr_prod_order pr
                         INNER JOIN `tb_prod_order_wo` wo ON wo.id_prod_order_wo=pr.id_prod_order_wo
                         INNER JOIN tb_prod_order po ON po.id_prod_order=wo.id_prod_order
                         INNER JOIN tb_prod_demand_design pdd ON pdd.id_prod_demand_design=po.id_prod_demand_design
-                        INNER JOIN tb_m_design desg ON desg.id_design=pdd.id_design  
+                        INNER JOIN tb_m_design desg ON desg.id_design=pdd.id_design
                         WHERE pr.id_pr_prod_order='" & id_report & "'"
                     Dim datax As DataTable = execute_query(query, -1, True, "", "", "", "")
                     If datax.Rows.Count > 0 Then
@@ -1967,13 +2144,13 @@
                     End If
                 ElseIf report_mark_type = "57" Then
                     'transfer
-                    query = "SELECT 
+                    query = "SELECT
                 CONCAT(c.comp_number,' - ', c.comp_name) AS `to`,
                 CAST(IFNULL(SUM(td.fg_trf_det_qty),0) AS DECIMAL(10,0)) AS `total_qty`
                 FROM tb_fg_trf t
                 LEFT JOIN tb_fg_trf_det td ON td.id_fg_trf = t.id_fg_trf
                 INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = t.id_comp_contact_to
-                INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp 
+                INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp
                 WHERE t.id_fg_trf=" + id_report + "
                 GROUP BY t.id_fg_trf "
                     Dim datax As DataTable = execute_query(query, -1, True, "", "", "", "")
@@ -1999,13 +2176,13 @@
                     End If
                 ElseIf report_mark_type = "103" Then
                     'combine delivery
-                    query = "SELECT CONCAT(c.comp_number,' - ', c.comp_name) AS `store`, 
+                    query = "SELECT CONCAT(c.comp_number,' - ', c.comp_name) AS `store`,
                 CAST(IFNULL(SUM(delt.pl_sales_order_del_det_qty),0) AS DECIMAL(10,0)) AS `total_qty`
                 FROM tb_pl_sales_order_del del
                 LEFT JOIN tb_pl_sales_order_del_det delt ON delt.id_pl_sales_order_del = del.id_pl_sales_order_del
                 INNER JOIN tb_pl_sales_order_del_combine comb ON comb.id_combine = del.id_combine
                 INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = comb.id_store_contact_to
-                INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp 
+                INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp
                 WHERE del.id_combine=" + id_report + "
                 GROUP BY del.id_combine "
                     Dim datax As DataTable = execute_query(query, -1, True, "", "", "", "")
@@ -2043,8 +2220,8 @@
                 FROM tb_sales_return r
                 LEFT JOIN tb_sales_return_problem rd ON rd.id_sales_return = r.id_sales_return
                 INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = r.id_store_contact_from
-                INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp 
-                WHERE r.id_sales_return=" + id_report + " 
+                INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp
+                WHERE r.id_sales_return=" + id_report + "
                 GROUP BY r.id_sales_return "
                     Dim datax As DataTable = execute_query(query, -1, True, "", "", "", "")
                     If datax.Rows.Count > 0 Then
@@ -2053,7 +2230,7 @@
                     End If
                 ElseIf report_mark_type = "130" Then
                     'uniform ordder
-                    query = "SELECT sod.id_sales_order, e.id_employee, e.employee_code,e.employee_name, SUM(sod.sales_order_det_qty) AS `total_qty` 
+                    query = "SELECT sod.id_sales_order, e.id_employee, e.employee_code,e.employee_name, SUM(sod.sales_order_det_qty) AS `total_qty`
                 FROM tb_sales_order_det sod
                 INNER JOIN tb_sales_order so ON so.id_sales_order = sod.id_sales_order
                 LEFT JOIN tb_emp_uni_budget b ON b.id_emp_uni_budget = so.id_emp_uni_budget
@@ -2075,9 +2252,9 @@
                     End If
                 ElseIf report_mark_type = "143" Or report_mark_type = "144" Or report_mark_type = "145" Then
                     'pd revision
-                    query = "SELECT tb_prod_demand_rev.id_report_status,CONCAT(tb_prod_demand.prod_demand_number,'/REV ', tb_prod_demand_rev.rev_count) as report_number 
-                    FROM tb_prod_demand_rev 
-                    INNER JOIN tb_prod_demand ON tb_prod_demand.id_prod_demand = tb_prod_demand_rev.id_prod_demand 
+                    query = "SELECT tb_prod_demand_rev.id_report_status,CONCAT(tb_prod_demand.prod_demand_number,'/REV ', tb_prod_demand_rev.rev_count) as report_number
+                    FROM tb_prod_demand_rev
+                    INNER JOIN tb_prod_demand ON tb_prod_demand.id_prod_demand = tb_prod_demand_rev.id_prod_demand
                     WHERE id_prod_demand_rev=" + id_report + " "
                     Dim datax As DataTable = execute_query(query, -1, True, "", "", "", "")
                     If datax.Rows.Count > 0 Then
@@ -2094,7 +2271,7 @@
                     'purchase receive non asset
                 ElseIf report_mark_type = "151" Then
                     'claim return
-                    query = "SELECT po.prod_order_number, d.design_code, d.design_display_name 
+                    query = "SELECT po.prod_order_number, d.design_code, d.design_display_name
                     FROM tb_prod_claim_return cr
                     INNER JOIN tb_prod_order po ON po.id_prod_order = cr.id_prod_order
                     INNER JOIN tb_prod_demand_design pdd ON pdd.id_prod_demand_design = po.id_prod_demand_design
@@ -2108,13 +2285,23 @@
                     End If
                 ElseIf report_mark_type = "152" Then
                     'purchase return
-                    query = "SELECT po.purc_order_number 
+                    query = "SELECT po.purc_order_number
                     FROM tb_purc_return ret
                     INNER JOIN tb_purc_order po ON po.id_purc_order = ret.id_purc_order
                     WHERE ret.id_purc_return=" + id_report + ""
                     Dim datax As DataTable = execute_query(query, -1, True, "", "", "", "")
                     If datax.Rows.Count > 0 Then
                         info_report = datax.Rows(0)("purc_order_number").ToString
+                    End If
+                ElseIf report_mark_type = "188" Then
+                    'propose price new product-revision
+                    query = "SELECT tb_fg_propose_price_rev.id_report_status,CONCAT(tb_fg_propose_price.fg_propose_price_number,'/REV ', tb_fg_propose_price_rev.rev_count) as report_number
+                    FROM tb_fg_propose_price_rev
+                    INNER JOIN tb_fg_propose_price ON tb_fg_propose_price.id_fg_propose_price = tb_fg_propose_price_rev.id_fg_propose_price
+                    WHERE tb_fg_propose_price_rev.id_fg_propose_price_rev=" + id_report + " "
+                    Dim datax As DataTable = execute_query(query, -1, True, "", "", "", "")
+                    If datax.Rows.Count > 0 Then
+                        report_number = datax.Rows(0)("report_number").ToString
                     End If
                 End If
             End If
@@ -2126,8 +2313,8 @@
 
             ElseIf report_mark_type = "13" Then
                 query_view = "SELECT 'no' AS is_check,tb." & field_id & " AS id_report,tb." & field_number & " AS number,tb." & field_date & " AS date_created
-                                ,c.`comp_name`,SUM(det.`mat_purc_det_qty`) AS tot_qty,SUM(det.`mat_purc_det_qty`*IF(tb.`id_currency`=1,det.`mat_purc_det_price`,tb.`mat_purc_kurs`*det.`mat_purc_det_price`)) AS tot_amount 
-                                FROM " & table_name & " tb 
+                                ,c.`comp_name`,SUM(det.`mat_purc_det_qty`) AS tot_qty,SUM(det.`mat_purc_det_qty`*IF(tb.`id_currency`=1,det.`mat_purc_det_price`,tb.`mat_purc_kurs`*det.`mat_purc_det_price`)) AS tot_amount
+                                FROM " & table_name & " tb
                                 INNER JOIN `tb_m_comp_contact` cc ON cc.`id_comp_contact`=tb.`id_comp_contact_to`
                                 INNER JOIN `tb_m_comp` c ON c.`id_comp`=cc.`id_comp`
                                 INNER JOIN `tb_mat_purc_det` det ON det.`id_mat_purc`=tb.`id_mat_purc`
@@ -2137,18 +2324,18 @@
                 End If
                 query_view += " GROUP BY tb." & field_id & ""
                 '
-                query_view_blank = "SELECT tb. " & field_id & " AS id_report,tb." & field_number & " AS number,tb." & field_date & " AS date_created 
+                query_view_blank = "SELECT tb. " & field_id & " AS id_report,tb." & field_number & " AS number,tb." & field_date & " AS date_created
                                     ,c.`comp_name`,0.00 AS tot_qty,0.00 AS tot_amount
-                                    FROM " & table_name & " tb 
+                                    FROM " & table_name & " tb
                                     INNER JOIN `tb_m_comp_contact` cc ON cc.`id_comp_contact`=tb.`id_comp_contact_to`
                                     INNER JOIN `tb_m_comp` c ON c.`id_comp`=cc.`id_comp`
-                                    INNER JOIN `tb_mat_purc_det` det ON det.`id_mat_purc`=tb.`id_mat_purc` 
+                                    INNER JOIN `tb_mat_purc_det` det ON det.`id_mat_purc`=tb.`id_mat_purc`
                                    WHERE tb.id_report_status='-1'"
                 query_view_edit = "SELECT rmcr.id_report,tb." & field_number & " AS number,tb." & field_date & " AS date_created,rmcr.id_report_mark_cancel_report as id_rmcr " & generate_left_join_cancel("column") & "
                                 ,c.`comp_name`,SUM(det.`mat_purc_det_qty`) AS tot_qty,SUM(det.`mat_purc_det_qty`*IF(tb.`id_currency`=1,det.`mat_purc_det_price`,tb.`mat_purc_kurs`*det.`mat_purc_det_price`)) AS tot_amount
                                 FROM tb_report_mark_cancel_report rmcr
                                " & generate_left_join_cancel("query") & "
-                               INNER JOIN " & table_name & " tb ON tb." & field_id & "=rmcr.id_report 
+                               INNER JOIN " & table_name & " tb ON tb." & field_id & "=rmcr.id_report
                                INNER JOIN `tb_m_comp_contact` cc ON cc.`id_comp_contact`=tb.`id_comp_contact_to`
                                 INNER JOIN `tb_m_comp` c ON c.`id_comp`=cc.`id_comp`
                                 INNER JOIN `tb_mat_purc_det` det ON det.`id_mat_purc`=tb.`id_mat_purc`
@@ -2165,8 +2352,8 @@
                                 INNER JOIN tb_prod_demand_design pdd ON pdd.`id_prod_demand_design`=tb.`id_prod_demand_design`
                                 INNER JOIN tb_m_design dsg ON dsg.`id_design`=pdd.`id_design`
                                 INNER JOIN (
-	                                SELECT wo.`id_prod_order`,c.`comp_name`,cur.`currency`,wod.`prod_order_wo_det_price` AS unit_price 
-                                    FROM tb_prod_order_wo wo 
+	                                SELECT wo.`id_prod_order`,c.`comp_name`,cur.`currency`,wod.`prod_order_wo_det_price` AS unit_price
+                                    FROM tb_prod_order_wo wo
                                     INNER JOIN tb_prod_order_wo_det wod ON wod.`id_prod_order_wo`=wo.`id_prod_order_wo`
                                     INNER JOIN tb_m_ovh_price ovhp ON ovhp.`id_ovh_price`=wo.`id_ovh_price` AND wo.`is_main_vendor`='1'
                                     INNER JOIN tb_lookup_currency cur ON cur.`id_currency`=ovhp.`id_currency`
@@ -2185,8 +2372,8 @@
                                     INNER JOIN tb_prod_demand_design pdd ON pdd.`id_prod_demand_design`=tb.`id_prod_demand_design`
                                     INNER JOIN tb_m_design dsg ON dsg.`id_design`=pdd.`id_design`
                                     INNER JOIN (
-	                                    SELECT wo.`id_prod_order`,c.`comp_name`,cur.`currency`,wod.`prod_order_wo_det_price` AS unit_price 
-                                        FROM tb_prod_order_wo wo 
+	                                    SELECT wo.`id_prod_order`,c.`comp_name`,cur.`currency`,wod.`prod_order_wo_det_price` AS unit_price
+                                        FROM tb_prod_order_wo wo
                                         INNER JOIN tb_prod_order_wo_det wod ON wod.`id_prod_order_wo`=wo.`id_prod_order_wo`
                                         INNER JOIN tb_m_ovh_price ovhp ON ovhp.`id_ovh_price`=wo.`id_ovh_price` AND wo.`is_main_vendor`='1'
                                         INNER JOIN tb_lookup_currency cur ON cur.`id_currency`=ovhp.`id_currency`
@@ -2206,8 +2393,8 @@
                                     INNER JOIN tb_prod_demand_design pdd ON pdd.`id_prod_demand_design`=tb.`id_prod_demand_design`
                                     INNER JOIN tb_m_design dsg ON dsg.`id_design`=pdd.`id_design`
                                     INNER JOIN (
-	                                    SELECT wo.`id_prod_order`,c.`comp_name`,cur.`currency`,wod.`prod_order_wo_det_price` AS unit_price 
-                                        FROM tb_prod_order_wo wo 
+	                                    SELECT wo.`id_prod_order`,c.`comp_name`,cur.`currency`,wod.`prod_order_wo_det_price` AS unit_price
+                                        FROM tb_prod_order_wo wo
                                         INNER JOIN tb_prod_order_wo_det wod ON wod.`id_prod_order_wo`=wo.`id_prod_order_wo`
                                         INNER JOIN tb_m_ovh_price ovhp ON ovhp.`id_ovh_price`=wo.`id_ovh_price` AND wo.`is_main_vendor`='1'
                                         INNER JOIN tb_lookup_currency cur ON cur.`id_currency`=ovhp.`id_currency`

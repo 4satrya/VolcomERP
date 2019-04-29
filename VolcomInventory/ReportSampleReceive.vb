@@ -19,8 +19,7 @@ Public Class ReportSampleReceive
     End Sub
 
     Private Sub ReportSampleReceive_BeforePrint(ByVal sender As System.Object, ByVal e As System.Drawing.Printing.PrintEventArgs) Handles MyBase.BeforePrint
-        Dim order_created As String
-        Dim query = "SELECT a.id_report_status,a.sample_purc_rec_note,b.id_comp_contact_to as id_comp_from,b.id_sample_purc,a.id_comp_contact_to as id_comp_to,g.season_orign,a.id_sample_purc_rec,a.sample_purc_rec_number,DATE_FORMAT(b.sample_purc_date,'%Y-%m-%d') as sample_purc_datex,b.sample_purc_lead_time,DATE_FORMAT(a.delivery_order_date,'%m/%d/%Y') AS delivery_order_date,a.delivery_order_number,b.sample_purc_number,DATE_FORMAT(a.sample_purc_rec_date,'%Y-%m-%d') AS sample_purc_rec_date, f.comp_name AS comp_from,d.comp_name AS comp_to "
+        Dim query = "SELECT a.id_report_status,a.sample_purc_rec_note,b.id_comp_contact_to as id_comp_from,b.id_sample_purc,a.id_comp_contact_to as id_comp_to,g.season_orign,a.id_sample_purc_rec,a.sample_purc_rec_number,b.sample_purc_date as sample_purc_datex,b.sample_purc_lead_time,a.delivery_order_date AS delivery_order_date,a.delivery_order_number,b.sample_purc_number,a.sample_purc_rec_date AS sample_purc_rec_date, f.comp_name AS comp_from,d.comp_name AS comp_to "
         query += "FROM tb_sample_purc_rec a INNER JOIN tb_sample_purc b ON a.id_sample_purc=b.id_sample_purc "
         query += "INNER JOIN tb_m_comp_contact c ON c.id_comp_contact=a.id_comp_contact_to "
         query += "INNER JOIN tb_m_comp d ON d.id_comp=c.id_comp "
@@ -38,11 +37,9 @@ Public Class ReportSampleReceive
         id_comp_to = data.Rows(0)("id_comp_to").ToString
         LToName.Text = data.Rows(0)("comp_to").ToString
 
-        order_created = data.Rows(0)("sample_purc_datex").ToString
-        LPODate.Text = view_date_from(order_created, 0)
-
-        LRecDate.Text = view_date_from(data.Rows(0)("sample_purc_rec_date").ToString, 0)
-        LDODate.Text = Date.Parse(data.Rows(0)("delivery_order_date").ToString).ToString("dd/MM/yyyy")
+        LPODate.Text = Date.Parse(data.Rows(0)("sample_purc_datex").ToString).ToString("dd MMMM yyyy")
+        LRecDate.Text = Date.Parse(data.Rows(0)("sample_purc_rec_date").ToString).ToString("dd MMMM yyyy")
+        LDODate.Text = Date.Parse(data.Rows(0)("delivery_order_date").ToString).ToString("dd MMMM yyyy")
 
         LNote.Text = data.Rows(0)("sample_purc_rec_note").ToString
 

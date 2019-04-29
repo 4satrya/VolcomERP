@@ -38,10 +38,20 @@
                 MENote.Text = data.Rows(0)("note").ToString
                 LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", data.Rows(0)("id_report_status").ToString)
                 '
+                If data.Rows(0)("is_promo").ToString = "1" Then
+                    CENeedMarketing.Checked = True
+                Else
+                    CENeedMarketing.Checked = False
+                End If
+                '
                 load_det()
+                '
+
             End If
 
+            CENeedMarketing.Enabled = False
             MENote.Enabled = False
+
             If is_view = "1" Then
                 BtnPrint.Visible = False
                 BAttach.Visible = True
@@ -159,12 +169,20 @@ VALUES('" & LECOPType.EditValue.ToString & "','" & id_user & "',NOW(),'" & MENot
         Next
         '
         If is_addcost = True Then
-            FormReportMark.report_mark_type = "150"
+            If CENeedMarketing.Checked = True Then
+                FormReportMark.report_mark_type = "173"
+            Else
+                FormReportMark.report_mark_type = "150"
+            End If
             FormReportMark.is_view = is_view
             FormReportMark.id_report = id_propose
             FormReportMark.ShowDialog()
         Else
-            FormReportMark.report_mark_type = "155"
+            If CENeedMarketing.Checked = True Then
+                FormReportMark.report_mark_type = "172"
+            Else
+                FormReportMark.report_mark_type = "155"
+            End If
             FormReportMark.is_view = is_view
             FormReportMark.id_report = id_propose
             FormReportMark.ShowDialog()
@@ -181,6 +199,35 @@ VALUES('" & LECOPType.EditValue.ToString & "','" & id_user & "',NOW(),'" & MENot
 
     Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles BtnPrint.Click
         ReportDesignCOPPropose.id_propose = id_propose
+        Dim is_addcost As Boolean = False
+        For i As Integer = 0 To BGVItemList.RowCount - 1
+            If Not BGVItemList.GetRowCellValue(i, "add_cost_before") = 0 Or Not BGVItemList.GetRowCellValue(i, "add_cost") = 0 Then
+                is_addcost = True
+            End If
+        Next
+        If is_addcost = True Then
+            If CENeedMarketing.Checked = True Then
+                ReportDesignCOPPropose.rmt = "173"
+                FormProdDemandPrintOpt.rmt = "173"
+            Else
+                ReportDesignCOPPropose.rmt = "150"
+                FormProdDemandPrintOpt.rmt = "150"
+            End If
+        Else
+            If CENeedMarketing.Checked = True Then
+                ReportDesignCOPPropose.rmt = "172"
+                FormProdDemandPrintOpt.rmt = "172"
+            Else
+                ReportDesignCOPPropose.rmt = "155"
+                FormProdDemandPrintOpt.rmt = "155"
+            End If
+        End If
+        '
+        If LEReportStatus.EditValue.ToString = "1" Or get_setup_field("id_role_super_admin") = id_role_login Then
+            FormProdDemandPrintOpt.id = id_propose
+            FormProdDemandPrintOpt.ShowDialog()
+        End If
+        '
         ReportDesignCOPPropose.dt = GCItemList.DataSource
 
         Dim Report As New ReportDesignCOPPropose()
@@ -201,9 +248,17 @@ VALUES('" & LECOPType.EditValue.ToString & "','" & id_user & "',NOW(),'" & MENot
         Next
         '
         If is_addcost = True Then
-            FormDocumentUpload.report_mark_type = "150"
+            If CENeedMarketing.Checked = True Then
+                FormDocumentUpload.report_mark_type = "173"
+            Else
+                FormDocumentUpload.report_mark_type = "150"
+            End If
         Else
-            FormDocumentUpload.report_mark_type = "155"
+            If CENeedMarketing.Checked = True Then
+                FormDocumentUpload.report_mark_type = "172"
+            Else
+                FormDocumentUpload.report_mark_type = "155"
+            End If
         End If
         '
         FormDocumentUpload.is_no_delete = "1"

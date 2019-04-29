@@ -27,6 +27,7 @@
         Dim query As String = query_c.queryMain("AND a.id_report_status='6' AND (a.sales_order_date>='" + date_from_selected + "' AND a.sales_order_date<='" + date_until_selected + "') " + cond_status, "1")
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCSalesOrder.DataSource = data
+        GVSalesOrder.BestFitColumns()
     End Sub
 
     Sub viewReturnOrder()

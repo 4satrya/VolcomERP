@@ -41,7 +41,6 @@ Partial Class FormItemCatMapping
         Me.BandedGridColumn2 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
         Me.BtnView = New DevExpress.XtraEditors.SimpleButton()
-        Me.LECat = New DevExpress.XtraEditors.LookUpEdit()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.LEDeptSum = New DevExpress.XtraEditors.LookUpEdit()
         Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
@@ -66,6 +65,10 @@ Partial Class FormItemCatMapping
         Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.SLECat = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumnIdItemCat = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnItemCat = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XTCMapping, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCMapping.SuspendLayout()
         Me.XTPMapping.SuspendLayout()
@@ -76,7 +79,6 @@ Partial Class FormItemCatMapping
         CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
-        CType(Me.LECat.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LEDeptSum.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl2.SuspendLayout()
@@ -93,6 +95,8 @@ Partial Class FormItemCatMapping
         Me.XTPPropose.SuspendLayout()
         CType(Me.GCPropose, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVPropose, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SLECat.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'XTCMapping
@@ -265,8 +269,8 @@ Partial Class FormItemCatMapping
         '
         'PanelControl1
         '
+        Me.PanelControl1.Controls.Add(Me.SLECat)
         Me.PanelControl1.Controls.Add(Me.BtnView)
-        Me.PanelControl1.Controls.Add(Me.LECat)
         Me.PanelControl1.Controls.Add(Me.LabelControl1)
         Me.PanelControl1.Controls.Add(Me.LEDeptSum)
         Me.PanelControl1.Controls.Add(Me.LabelControl6)
@@ -279,20 +283,11 @@ Partial Class FormItemCatMapping
         'BtnView
         '
         Me.BtnView.Image = CType(resources.GetObject("BtnView.Image"), System.Drawing.Image)
-        Me.BtnView.Location = New System.Drawing.Point(496, 12)
+        Me.BtnView.Location = New System.Drawing.Point(549, 12)
         Me.BtnView.Name = "BtnView"
         Me.BtnView.Size = New System.Drawing.Size(75, 23)
         Me.BtnView.TabIndex = 20
         Me.BtnView.Text = "View"
-        '
-        'LECat
-        '
-        Me.LECat.Location = New System.Drawing.Point(315, 14)
-        Me.LECat.Name = "LECat"
-        Me.LECat.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.LECat.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_item_cat", "Id", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("item_cat", "Category")})
-        Me.LECat.Size = New System.Drawing.Size(175, 20)
-        Me.LECat.TabIndex = 19
         '
         'LabelControl1
         '
@@ -504,6 +499,38 @@ Partial Class FormItemCatMapping
         Me.GridColumn5.Visible = True
         Me.GridColumn5.VisibleIndex = 3
         '
+        'SLECat
+        '
+        Me.SLECat.Location = New System.Drawing.Point(315, 14)
+        Me.SLECat.Name = "SLECat"
+        Me.SLECat.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLECat.Properties.ShowClearButton = False
+        Me.SLECat.Properties.View = Me.GridView1
+        Me.SLECat.Size = New System.Drawing.Size(228, 20)
+        Me.SLECat.TabIndex = 23
+        '
+        'GridView1
+        '
+        Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdItemCat, Me.GridColumnItemCat})
+        Me.GridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView1.Name = "GridView1"
+        Me.GridView1.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView1.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumnIdItemCat
+        '
+        Me.GridColumnIdItemCat.Caption = "Id"
+        Me.GridColumnIdItemCat.FieldName = "id_item_cat"
+        Me.GridColumnIdItemCat.Name = "GridColumnIdItemCat"
+        '
+        'GridColumnItemCat
+        '
+        Me.GridColumnItemCat.Caption = "Category"
+        Me.GridColumnItemCat.FieldName = "item_cat"
+        Me.GridColumnItemCat.Name = "GridColumnItemCat"
+        Me.GridColumnItemCat.Visible = True
+        Me.GridColumnItemCat.VisibleIndex = 0
+        '
         'FormItemCatMapping
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -525,7 +552,6 @@ Partial Class FormItemCatMapping
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         Me.PanelControl1.PerformLayout()
-        CType(Me.LECat.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LEDeptSum.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControl2.ResumeLayout(False)
@@ -544,6 +570,8 @@ Partial Class FormItemCatMapping
         Me.XTPPropose.ResumeLayout(False)
         CType(Me.GCPropose, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVPropose, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SLECat.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -555,7 +583,6 @@ Partial Class FormItemCatMapping
     Friend WithEvents PanelControl1 As DevExpress.XtraEditors.PanelControl
     Friend WithEvents LEDeptSum As DevExpress.XtraEditors.LookUpEdit
     Friend WithEvents LabelControl6 As DevExpress.XtraEditors.LabelControl
-    Friend WithEvents LECat As DevExpress.XtraEditors.LookUpEdit
     Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents BtnView As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents GCPropose As DevExpress.XtraGrid.GridControl
@@ -594,4 +621,8 @@ Partial Class FormItemCatMapping
     Friend WithEvents LabelControl3 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents TxtCurrentDescInvWH As DevExpress.XtraEditors.TextEdit
     Friend WithEvents TxtCurrentCodeInvWH As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents SLECat As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView1 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumnIdItemCat As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnItemCat As DevExpress.XtraGrid.Columns.GridColumn
 End Class

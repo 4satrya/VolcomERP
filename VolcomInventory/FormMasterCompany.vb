@@ -10,7 +10,11 @@
     End Sub
 
     Sub view_company()
-        Dim data As DataTable = execute_query("SELECT tb_m_comp.id_comp as id_comp,tb_m_comp.comp_number as comp_number,tb_m_comp.comp_name as comp_name,tb_m_comp.address_primary as address_primary,tb_m_comp.is_active as is_active,tb_m_comp_cat.comp_cat_name as company_category FROM tb_m_comp,tb_m_comp_cat WHERE tb_m_comp.id_comp_cat=tb_m_comp_cat.id_comp_cat ORDER BY comp_name", -1, True, "", "", "", "")
+        Dim data As DataTable = execute_query("
+            SELECT tb_m_comp.id_comp as id_comp, tb_m_comp.comp_number as comp_number, tb_m_comp.comp_name as comp_name, tb_m_comp.address_primary as address_primary, tb_m_comp.is_active as is_active, tb_m_comp_cat.comp_cat_name as company_category, (SELECT comp_status FROM tb_lookup_comp_status WHERE tb_m_comp.is_active = id_comp_status) AS comp_status, tb_m_comp_contact.contact_person, tb_m_comp_contact.contact_number, tb_m_comp_contact.email AS contact_email
+            FROM tb_m_comp, tb_m_comp_cat, (SELECT * FROM tb_m_comp_contact WHERE is_default = 1) AS tb_m_comp_contact WHERE tb_m_comp.id_comp_cat = tb_m_comp_cat.id_comp_cat AND tb_m_comp.id_comp = tb_m_comp_contact.id_comp
+            ORDER BY comp_name
+        ", -1, True, "", "", "", "")
         GCCompany.DataSource = data
         If data.Rows.Count > 0 Then
             'show all

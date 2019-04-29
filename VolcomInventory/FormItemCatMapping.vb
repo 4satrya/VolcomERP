@@ -44,8 +44,8 @@
 
         'cat
         Dim cat As String = ""
-        If LECat.EditValue.ToString <> "0" Then
-            cat = "AND m.id_item_cat='" + LECat.EditValue.ToString + "' "
+        If SLECat.EditValue.ToString <> "0" Then
+            cat = "AND m.id_item_cat='" + SLECat.EditValue.ToString + "' "
         Else
             cat = ""
         End If
@@ -80,7 +80,7 @@
         Dim query As String = "SELECT 0 AS `id_item_cat`, 'All Category' AS `item_cat`
         UNION ALL
         SELECT c.id_item_cat, c.item_cat FROM tb_item_cat c ORDER BY id_item_cat ASC"
-        viewLookupQuery(LECat, query, 0, "item_cat", "id_item_cat")
+        viewSearchLookupQuery(SLECat, query, "id_item_cat", "item_cat", "id_item_cat")
         Cursor = Cursors.Default
     End Sub
 
@@ -154,7 +154,11 @@
         GCMapping.DataSource = Nothing
     End Sub
 
-    Private Sub LECat_EditValueChanged(sender As Object, e As EventArgs) Handles LECat.EditValueChanged
+    Private Sub LECat_EditValueChanged(sender As Object, e As EventArgs)
+        GCMapping.DataSource = Nothing
+    End Sub
+
+    Private Sub SLECat_EditValueChanged(sender As Object, e As EventArgs) Handles SLECat.EditValueChanged
         GCMapping.DataSource = Nothing
     End Sub
 End Class

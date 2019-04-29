@@ -53,6 +53,11 @@ Partial Class FormMatPurcSum
         Me.GridColumnPOKurs = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RIPictureEdit = New DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit()
+        Me.BGenKO = New DevExpress.XtraEditors.SimpleButton()
+        Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn13 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -154,6 +159,7 @@ Partial Class FormMatPurcSum
         '
         'PanelControl3
         '
+        Me.PanelControl3.Controls.Add(Me.BGenKO)
         Me.PanelControl3.Controls.Add(Me.BCancel)
         Me.PanelControl3.Controls.Add(Me.BPrint)
         Me.PanelControl3.Dock = System.Windows.Forms.DockStyle.Bottom
@@ -204,7 +210,7 @@ Partial Class FormMatPurcSum
         Me.GVProd.AppearancePrint.HeaderPanel.Options.UseTextOptions = True
         Me.GVProd.AppearancePrint.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
         Me.GVProd.ColumnPanelRowHeight = 50
-        Me.GVProd.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumnProdNo, Me.GridColumn1, Me.GridColumnCompName, Me.GridColumn9, Me.GridColumnOrderQty, Me.GridColumn8, Me.GridColumnRange, Me.GridColumnDelivery, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumnPOCurr, Me.GridColumnPOAmount, Me.GridColumnPOKurs, Me.GridColumn7})
+        Me.GVProd.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumn13, Me.GridColumnProdNo, Me.GridColumn1, Me.GridColumn11, Me.GridColumn12, Me.GridColumnCompName, Me.GridColumn9, Me.GridColumnOrderQty, Me.GridColumn8, Me.GridColumnRange, Me.GridColumnDelivery, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumn10, Me.GridColumnPOCurr, Me.GridColumnPOAmount, Me.GridColumnPOKurs, Me.GridColumn7})
         Me.GVProd.GridControl = Me.GCProd
         Me.GVProd.Name = "GVProd"
         Me.GVProd.OptionsBehavior.Editable = False
@@ -393,6 +399,45 @@ Partial Class FormMatPurcSum
         Me.RIPictureEdit.Name = "RIPictureEdit"
         Me.RIPictureEdit.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch
         '
+        'BGenKO
+        '
+        Me.BGenKO.Dock = System.Windows.Forms.DockStyle.Left
+        Me.BGenKO.ImageIndex = 19
+        Me.BGenKO.ImageList = Me.LargeImageCollection
+        Me.BGenKO.Location = New System.Drawing.Point(2, 2)
+        Me.BGenKO.Name = "BGenKO"
+        Me.BGenKO.Size = New System.Drawing.Size(169, 33)
+        Me.BGenKO.TabIndex = 5
+        Me.BGenKO.Text = "Generate Konfirmasi Order"
+        '
+        'GridColumn10
+        '
+        Me.GridColumn10.Caption = "Vat"
+        Me.GridColumn10.DisplayFormat.FormatString = "N2"
+        Me.GridColumn10.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn10.FieldName = "vat"
+        Me.GridColumn10.Name = "GridColumn10"
+        Me.GridColumn10.Visible = True
+        Me.GridColumn10.VisibleIndex = 14
+        '
+        'GridColumn11
+        '
+        Me.GridColumn11.Caption = "ID Vendor Contact"
+        Me.GridColumn11.FieldName = "id_comp_contact"
+        Me.GridColumn11.Name = "GridColumn11"
+        '
+        'GridColumn12
+        '
+        Me.GridColumn12.Caption = "ID Vendor"
+        Me.GridColumn12.FieldName = "id_comp"
+        Me.GridColumn12.Name = "GridColumn12"
+        '
+        'GridColumn13
+        '
+        Me.GridColumn13.Caption = "ID PO"
+        Me.GridColumn13.FieldName = "id_mat_purc"
+        Me.GridColumn13.Name = "GridColumn13"
+        '
         'FormMatPurcSum
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -452,4 +497,9 @@ Partial Class FormMatPurcSum
     Friend WithEvents GridColumn9 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn8 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnNo As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BGenKO As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GridColumn10 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn11 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn12 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn13 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

@@ -984,7 +984,6 @@ Partial Class FormProdDemandSingle
         Me.GridColumnAdditionalCost.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnAdditionalCost.FieldName = "ADDITIONAL COST_add_report_column"
         Me.GridColumnAdditionalCost.Name = "GridColumnAdditionalCost"
-        Me.GridColumnAdditionalCost.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "ADDITIONAL COST_add_report_column", "{0:N2}")})
         Me.GridColumnAdditionalCost.Visible = True
         Me.GridColumnAdditionalCost.VisibleIndex = 18
         Me.GridColumnAdditionalCost.Width = 85

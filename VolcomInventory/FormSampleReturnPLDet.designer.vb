@@ -836,7 +836,7 @@ Partial Class FormSampleReturnPLDet
         Me.Name = "FormSampleReturnPLDet"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Inbound Sample"
+        Me.Text = "Receive Local Sample"
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EPForm, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControlItemList, System.ComponentModel.ISupportInitialize).EndInit()

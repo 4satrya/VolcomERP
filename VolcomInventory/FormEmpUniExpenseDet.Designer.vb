@@ -551,6 +551,7 @@ Partial Class FormEmpUniExpenseDet
         Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumnCode, Me.GridColumn3, Me.GridColumn4, Me.GridColumnQty, Me.GridColumnCost, Me.GridColumn7, Me.GridColumnIdPLDet, Me.GridColumnIdProduct, Me.GridColumnNumber, Me.GridColumnAccount, Me.GridColumnStart, Me.GridColumnEnd, Me.GridColumnDueEate, Me.GridColumnType})
         Me.GVData.GridControl = Me.GCData
         Me.GVData.Name = "GVData"
+        Me.GVData.OptionsBehavior.Editable = False
         Me.GVData.OptionsView.ShowFooter = True
         Me.GVData.OptionsView.ShowGroupPanel = False
         '

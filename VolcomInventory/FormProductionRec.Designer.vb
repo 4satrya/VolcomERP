@@ -102,6 +102,8 @@ Partial Class FormProductionRec
         Me.BSearch = New DevExpress.XtraEditors.SimpleButton()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.XTCTabReceive = New DevExpress.XtraTab.XtraTabControl()
+        Me.PCUpdateHO = New DevExpress.XtraEditors.PanelControl()
+        Me.BUpdate = New DevExpress.XtraEditors.SimpleButton()
         Me.XTPListPO.SuspendLayout()
         CType(Me.SCCRec, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SCCRec.SuspendLayout()
@@ -133,6 +135,8 @@ Partial Class FormProductionRec
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XTCTabReceive, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCTabReceive.SuspendLayout()
+        CType(Me.PCUpdateHO, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PCUpdateHO.SuspendLayout()
         Me.SuspendLayout()
         '
         'XTPListPO
@@ -514,6 +518,7 @@ Partial Class FormProductionRec
         'XTPListReceive
         '
         Me.XTPListReceive.Controls.Add(Me.GCProdRec)
+        Me.XTPListReceive.Controls.Add(Me.PCUpdateHO)
         Me.XTPListReceive.Controls.Add(Me.PanelControl1)
         Me.XTPListReceive.Name = "XTPListReceive"
         Me.XTPListReceive.Size = New System.Drawing.Size(803, 466)
@@ -526,7 +531,7 @@ Partial Class FormProductionRec
         Me.GCProdRec.MainView = Me.GVProdRec
         Me.GCProdRec.Name = "GCProdRec"
         Me.GCProdRec.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemDateEdit1, Me.RepositoryItemTextEdit1})
-        Me.GCProdRec.Size = New System.Drawing.Size(803, 428)
+        Me.GCProdRec.Size = New System.Drawing.Size(803, 390)
         Me.GCProdRec.TabIndex = 2
         Me.GCProdRec.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVProdRec, Me.GridView3})
         '
@@ -736,7 +741,7 @@ Partial Class FormProductionRec
         '
         'SLESeasonByCode
         '
-        Me.SLESeasonByCode.Location = New System.Drawing.Point(430, 8)
+        Me.SLESeasonByCode.Location = New System.Drawing.Point(420, 8)
         Me.SLESeasonByCode.Name = "SLESeasonByCode"
         Me.SLESeasonByCode.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SLESeasonByCode.Properties.Appearance.Options.UseFont = True
@@ -777,7 +782,7 @@ Partial Class FormProductionRec
         '
         'BSearchByCode
         '
-        Me.BSearchByCode.Location = New System.Drawing.Point(582, 6)
+        Me.BSearchByCode.Location = New System.Drawing.Point(572, 6)
         Me.BSearchByCode.Name = "BSearchByCode"
         Me.BSearchByCode.Size = New System.Drawing.Size(83, 23)
         Me.BSearchByCode.TabIndex = 8908
@@ -786,7 +791,7 @@ Partial Class FormProductionRec
         'LabelControl2
         '
         Me.LabelControl2.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl2.Location = New System.Drawing.Point(346, 11)
+        Me.LabelControl2.Location = New System.Drawing.Point(336, 11)
         Me.LabelControl2.Name = "LabelControl2"
         Me.LabelControl2.Size = New System.Drawing.Size(78, 13)
         Me.LabelControl2.TabIndex = 8907
@@ -861,6 +866,24 @@ Partial Class FormProductionRec
         Me.XTCTabReceive.TabIndex = 8
         Me.XTCTabReceive.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPListReceive, Me.XTPListPO})
         '
+        'PCUpdateHO
+        '
+        Me.PCUpdateHO.Controls.Add(Me.BUpdate)
+        Me.PCUpdateHO.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.PCUpdateHO.Location = New System.Drawing.Point(0, 428)
+        Me.PCUpdateHO.Name = "PCUpdateHO"
+        Me.PCUpdateHO.Size = New System.Drawing.Size(803, 38)
+        Me.PCUpdateHO.TabIndex = 7
+        '
+        'BUpdate
+        '
+        Me.BUpdate.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.BUpdate.Location = New System.Drawing.Point(2, 2)
+        Me.BUpdate.Name = "BUpdate"
+        Me.BUpdate.Size = New System.Drawing.Size(799, 34)
+        Me.BUpdate.TabIndex = 8908
+        Me.BUpdate.Text = "Update Target Handover"
+        '
         'FormProductionRec
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -906,6 +929,8 @@ Partial Class FormProductionRec
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XTCTabReceive, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XTCTabReceive.ResumeLayout(False)
+        CType(Me.PCUpdateHO, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PCUpdateHO.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -991,4 +1016,6 @@ Partial Class FormProductionRec
     Friend WithEvents GridColumn3 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents BSearch As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents PCUpdateHO As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents BUpdate As DevExpress.XtraEditors.SimpleButton
 End Class

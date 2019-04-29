@@ -110,12 +110,14 @@ Partial Class FormEmpPayrollDeduction
         Me.BarButtonItem1.Caption = "Jamsostek"
         Me.BarButtonItem1.Id = 12
         Me.BarButtonItem1.Name = "BarButtonItem1"
+        Me.BarButtonItem1.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
         '
         'BarButtonItem2
         '
         Me.BarButtonItem2.Caption = "Koperasi"
         Me.BarButtonItem2.Id = 13
         Me.BarButtonItem2.Name = "BarButtonItem2"
+        Me.BarButtonItem2.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
         '
         'BarManager1
         '
@@ -295,7 +297,7 @@ Partial Class FormEmpPayrollDeduction
         '
         Me.GVDeduction.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdDeduction, Me.GridColumnIdEmployee, Me.GridColumnDept, Me.GridColumnNIP, Me.GridColumnEmp, Me.GridColumnEmpPosition, Me.GridColumnEmpLvl, Me.GridColumnDeductType, Me.GridColumnValue, Me.GridColumnNote})
         Me.GVDeduction.GridControl = Me.GCDeduction
-        Me.GVDeduction.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "deduction", Me.GridColumnValue, "{0:N0}")})
+        Me.GVDeduction.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "deduction", Me.GridColumnValue, "{0:N2}")})
         Me.GVDeduction.Name = "GVDeduction"
         Me.GVDeduction.OptionsView.GroupFooterShowMode = DevExpress.XtraGrid.Views.Grid.GroupFooterShowMode.VisibleAlways
         Me.GVDeduction.OptionsView.ShowFooter = True
@@ -369,11 +371,11 @@ Partial Class FormEmpPayrollDeduction
         'GridColumnValue
         '
         Me.GridColumnValue.Caption = "Value"
-        Me.GridColumnValue.DisplayFormat.FormatString = "N0"
+        Me.GridColumnValue.DisplayFormat.FormatString = "N2"
         Me.GridColumnValue.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnValue.FieldName = "deduction"
         Me.GridColumnValue.Name = "GridColumnValue"
-        Me.GridColumnValue.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "deduction", "{0:N0}")})
+        Me.GridColumnValue.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "deduction", "{0:N2}")})
         Me.GridColumnValue.Visible = True
         Me.GridColumnValue.VisibleIndex = 6
         Me.GridColumnValue.Width = 86

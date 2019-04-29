@@ -79,7 +79,6 @@ Partial Class FormItemCatMappingDet
         Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.BandedGridColumn2 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.PanelControlNav = New DevExpress.XtraEditors.PanelControl()
-        Me.LECategory = New DevExpress.XtraEditors.LookUpEdit()
         Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
         Me.LEDept = New DevExpress.XtraEditors.LookUpEdit()
         Me.LabelControl9 = New DevExpress.XtraEditors.LabelControl()
@@ -87,6 +86,7 @@ Partial Class FormItemCatMappingDet
         Me.BtnEdit = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnAddMulti = New DevExpress.XtraEditors.SimpleButton()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DeleteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupControl3 = New DevExpress.XtraEditors.GroupControl()
         Me.GroupControl2 = New DevExpress.XtraEditors.GroupControl()
@@ -121,7 +121,10 @@ Partial Class FormItemCatMappingDet
         Me.LabelControl17 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl18 = New DevExpress.XtraEditors.LabelControl()
         Me.SplitContainerControl1 = New DevExpress.XtraEditors.SplitContainerControl()
-        Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SLECat = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumnIdItemCat = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnItemCat = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GroupControlHead, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControlHead.SuspendLayout()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -154,7 +157,6 @@ Partial Class FormItemCatMappingDet
         CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControlNav, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlNav.SuspendLayout()
-        CType(Me.LECategory.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LEDept.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.GroupControl3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -179,6 +181,8 @@ Partial Class FormItemCatMappingDet
         CType(Me.TxtCurrentCodeInvWH.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SplitContainerControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainerControl1.SuspendLayout()
+        CType(Me.SLECat.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupControlHead
@@ -737,7 +741,7 @@ Partial Class FormItemCatMappingDet
         'PanelControlNav
         '
         Me.PanelControlNav.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
-        Me.PanelControlNav.Controls.Add(Me.LECategory)
+        Me.PanelControlNav.Controls.Add(Me.SLECat)
         Me.PanelControlNav.Controls.Add(Me.LabelControl6)
         Me.PanelControlNav.Controls.Add(Me.LEDept)
         Me.PanelControlNav.Controls.Add(Me.LabelControl9)
@@ -749,15 +753,6 @@ Partial Class FormItemCatMappingDet
         Me.PanelControlNav.Name = "PanelControlNav"
         Me.PanelControlNav.Size = New System.Drawing.Size(875, 38)
         Me.PanelControlNav.TabIndex = 16
-        '
-        'LECategory
-        '
-        Me.LECategory.Location = New System.Drawing.Point(315, 10)
-        Me.LECategory.Name = "LECategory"
-        Me.LECategory.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.LECategory.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_item_cat", "Id", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("item_cat", "Category")})
-        Me.LECategory.Size = New System.Drawing.Size(175, 20)
-        Me.LECategory.TabIndex = 24
         '
         'LabelControl6
         '
@@ -818,7 +813,13 @@ Partial Class FormItemCatMappingDet
         '
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EditToolStripMenuItem, Me.DeleteToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(153, 70)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(108, 48)
+        '
+        'EditToolStripMenuItem
+        '
+        Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
+        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(107, 22)
+        Me.EditToolStripMenuItem.Text = "Edit"
         '
         'DeleteToolStripMenuItem
         '
@@ -1135,11 +1136,37 @@ Partial Class FormItemCatMappingDet
         Me.SplitContainerControl1.TabIndex = 19
         Me.SplitContainerControl1.Text = "SplitContainerControl1"
         '
-        'EditToolStripMenuItem
+        'SLECat
         '
-        Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
-        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.EditToolStripMenuItem.Text = "Edit"
+        Me.SLECat.Location = New System.Drawing.Point(315, 10)
+        Me.SLECat.Name = "SLECat"
+        Me.SLECat.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLECat.Properties.ShowClearButton = False
+        Me.SLECat.Properties.View = Me.GridView1
+        Me.SLECat.Size = New System.Drawing.Size(228, 20)
+        Me.SLECat.TabIndex = 22
+        '
+        'GridView1
+        '
+        Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdItemCat, Me.GridColumnItemCat})
+        Me.GridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView1.Name = "GridView1"
+        Me.GridView1.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView1.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumnIdItemCat
+        '
+        Me.GridColumnIdItemCat.Caption = "Id"
+        Me.GridColumnIdItemCat.FieldName = "id_item_cat"
+        Me.GridColumnIdItemCat.Name = "GridColumnIdItemCat"
+        '
+        'GridColumnItemCat
+        '
+        Me.GridColumnItemCat.Caption = "Category"
+        Me.GridColumnItemCat.FieldName = "item_cat"
+        Me.GridColumnItemCat.Name = "GridColumnItemCat"
+        Me.GridColumnItemCat.Visible = True
+        Me.GridColumnItemCat.VisibleIndex = 0
         '
         'FormItemCatMappingDet
         '
@@ -1192,7 +1219,6 @@ Partial Class FormItemCatMappingDet
         CType(Me.PanelControlNav, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControlNav.ResumeLayout(False)
         Me.PanelControlNav.PerformLayout()
-        CType(Me.LECategory.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LEDept.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ContextMenuStrip1.ResumeLayout(False)
         CType(Me.GroupControl3, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1219,6 +1245,8 @@ Partial Class FormItemCatMappingDet
         CType(Me.TxtCurrentCodeInvWH.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SplitContainerControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainerControl1.ResumeLayout(False)
+        CType(Me.SLECat.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1281,7 +1309,6 @@ Partial Class FormItemCatMappingDet
     Friend WithEvents BtnAddMulti As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
     Friend WithEvents DeleteToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents LECategory As DevExpress.XtraEditors.LookUpEdit
     Friend WithEvents LabelControl6 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LEDept As DevExpress.XtraEditors.LookUpEdit
     Friend WithEvents LabelControl9 As DevExpress.XtraEditors.LabelControl
@@ -1324,4 +1351,8 @@ Partial Class FormItemCatMappingDet
     Friend WithEvents LabelControl18 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents BtnEdit As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents EditToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SLECat As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView1 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumnIdItemCat As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnItemCat As DevExpress.XtraGrid.Columns.GridColumn
 End Class

@@ -72,6 +72,9 @@ Partial Public Class ReportSalesOrder
         Me.LabelNote = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel9 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel14 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LabelTitleOLStoreOrder = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LabelDotOLStoreOrder = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LabelOLStoreOrder = New DevExpress.XtraReports.UI.XRLabel()
         CType(Me.GCSalesOrder, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVSalesOrder, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XrTable1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -273,7 +276,7 @@ Partial Public Class ReportSalesOrder
         Me.XrPanel1.Borders = CType(((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top) _
             Or DevExpress.XtraPrinting.BorderSide.Right), DevExpress.XtraPrinting.BorderSide)
         Me.XrPanel1.CanGrow = False
-        Me.XrPanel1.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.LabelTitleName, Me.LabelName, Me.LabelNameDot, Me.LabelNIK, Me.LabelNIKDot, Me.LabelTitleNIK, Me.LabelWarehouse, Me.XrLabel8, Me.LabelCategory, Me.XrLabel7, Me.XrLabel6, Me.LabelType, Me.XrLabel5, Me.XrLabel4, Me.XrLabel21, Me.XrLabel13, Me.LabelReff, Me.XrLabel11, Me.LabelTo, Me.XrLabel3, Me.XrLabel2})
+        Me.XrPanel1.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.LabelOLStoreOrder, Me.LabelDotOLStoreOrder, Me.LabelTitleOLStoreOrder, Me.LabelTitleName, Me.LabelName, Me.LabelNameDot, Me.LabelNIK, Me.LabelNIKDot, Me.LabelTitleNIK, Me.LabelWarehouse, Me.XrLabel8, Me.LabelCategory, Me.XrLabel7, Me.XrLabel6, Me.LabelType, Me.XrLabel5, Me.XrLabel4, Me.XrLabel21, Me.XrLabel13, Me.LabelReff, Me.XrLabel11, Me.LabelTo, Me.XrLabel3, Me.XrLabel2})
         Me.XrPanel1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 50.08329!)
         Me.XrPanel1.Name = "XrPanel1"
         Me.XrPanel1.SizeF = New System.Drawing.SizeF(775.0001!, 112.4167!)
@@ -283,10 +286,10 @@ Partial Public Class ReportSalesOrder
         'LabelTitleName
         '
         Me.LabelTitleName.Borders = DevExpress.XtraPrinting.BorderSide.None
-        Me.LabelTitleName.LocationFloat = New DevExpress.Utils.PointFloat(481.9583!, 56.33356!)
+        Me.LabelTitleName.LocationFloat = New DevExpress.Utils.PointFloat(471.5415!, 56.33357!)
         Me.LabelTitleName.Name = "LabelTitleName"
         Me.LabelTitleName.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LabelTitleName.SizeF = New System.Drawing.SizeF(85.41647!, 13.58337!)
+        Me.LabelTitleName.SizeF = New System.Drawing.SizeF(95.83322!, 13.58337!)
         Me.LabelTitleName.StylePriority.UseBorders = False
         Me.LabelTitleName.Text = "Name"
         Me.LabelTitleName.Visible = False
@@ -340,10 +343,10 @@ Partial Public Class ReportSalesOrder
         'LabelTitleNIK
         '
         Me.LabelTitleNIK.Borders = DevExpress.XtraPrinting.BorderSide.None
-        Me.LabelTitleNIK.LocationFloat = New DevExpress.Utils.PointFloat(481.9583!, 42.75009!)
+        Me.LabelTitleNIK.LocationFloat = New DevExpress.Utils.PointFloat(471.5415!, 42.7501!)
         Me.LabelTitleNIK.Name = "LabelTitleNIK"
         Me.LabelTitleNIK.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LabelTitleNIK.SizeF = New System.Drawing.SizeF(85.41647!, 13.58337!)
+        Me.LabelTitleNIK.SizeF = New System.Drawing.SizeF(95.83322!, 13.58337!)
         Me.LabelTitleNIK.StylePriority.UseBorders = False
         Me.LabelTitleNIK.Text = "NIK"
         Me.LabelTitleNIK.Visible = False
@@ -393,10 +396,10 @@ Partial Public Class ReportSalesOrder
         'XrLabel6
         '
         Me.XrLabel6.Borders = DevExpress.XtraPrinting.BorderSide.None
-        Me.XrLabel6.LocationFloat = New DevExpress.Utils.PointFloat(481.9583!, 29.16676!)
+        Me.XrLabel6.LocationFloat = New DevExpress.Utils.PointFloat(471.5415!, 29.16676!)
         Me.XrLabel6.Name = "XrLabel6"
         Me.XrLabel6.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel6.SizeF = New System.Drawing.SizeF(85.41647!, 13.58337!)
+        Me.XrLabel6.SizeF = New System.Drawing.SizeF(95.83322!, 13.58337!)
         Me.XrLabel6.StylePriority.UseBorders = False
         Me.XrLabel6.Text = "Category"
         '
@@ -424,20 +427,20 @@ Partial Public Class ReportSalesOrder
         'XrLabel4
         '
         Me.XrLabel4.Borders = DevExpress.XtraPrinting.BorderSide.None
-        Me.XrLabel4.LocationFloat = New DevExpress.Utils.PointFloat(481.9583!, 15.58334!)
+        Me.XrLabel4.LocationFloat = New DevExpress.Utils.PointFloat(471.5415!, 15.58334!)
         Me.XrLabel4.Name = "XrLabel4"
         Me.XrLabel4.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel4.SizeF = New System.Drawing.SizeF(85.41647!, 13.58337!)
+        Me.XrLabel4.SizeF = New System.Drawing.SizeF(95.83322!, 13.58337!)
         Me.XrLabel4.StylePriority.UseBorders = False
         Me.XrLabel4.Text = "Type"
         '
         'XrLabel21
         '
         Me.XrLabel21.Borders = DevExpress.XtraPrinting.BorderSide.None
-        Me.XrLabel21.LocationFloat = New DevExpress.Utils.PointFloat(481.9583!, 2.000014!)
+        Me.XrLabel21.LocationFloat = New DevExpress.Utils.PointFloat(471.5415!, 2.000011!)
         Me.XrLabel21.Name = "XrLabel21"
         Me.XrLabel21.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel21.SizeF = New System.Drawing.SizeF(85.41647!, 13.58337!)
+        Me.XrLabel21.SizeF = New System.Drawing.SizeF(95.83322!, 13.58336!)
         Me.XrLabel21.StylePriority.UseBorders = False
         Me.XrLabel21.Text = "Reff."
         '
@@ -664,6 +667,40 @@ Partial Public Class ReportSalesOrder
         Me.XrLabel14.StylePriority.UseBorders = False
         Me.XrLabel14.Text = ":"
         '
+        'LabelTitleOLStoreOrder
+        '
+        Me.LabelTitleOLStoreOrder.Borders = DevExpress.XtraPrinting.BorderSide.None
+        Me.LabelTitleOLStoreOrder.LocationFloat = New DevExpress.Utils.PointFloat(471.5415!, 69.91692!)
+        Me.LabelTitleOLStoreOrder.Name = "LabelTitleOLStoreOrder"
+        Me.LabelTitleOLStoreOrder.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LabelTitleOLStoreOrder.SizeF = New System.Drawing.SizeF(95.83334!, 13.58338!)
+        Me.LabelTitleOLStoreOrder.StylePriority.UseBorders = False
+        Me.LabelTitleOLStoreOrder.Text = "OL Store Order"
+        Me.LabelTitleOLStoreOrder.Visible = False
+        '
+        'LabelDotOLStoreOrder
+        '
+        Me.LabelDotOLStoreOrder.Borders = DevExpress.XtraPrinting.BorderSide.None
+        Me.LabelDotOLStoreOrder.LocationFloat = New DevExpress.Utils.PointFloat(567.3747!, 69.91692!)
+        Me.LabelDotOLStoreOrder.Name = "LabelDotOLStoreOrder"
+        Me.LabelDotOLStoreOrder.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LabelDotOLStoreOrder.SizeF = New System.Drawing.SizeF(11.45837!, 13.58337!)
+        Me.LabelDotOLStoreOrder.StylePriority.UseBorders = False
+        Me.LabelDotOLStoreOrder.Text = ":"
+        Me.LabelDotOLStoreOrder.Visible = False
+        '
+        'LabelOLStoreOrder
+        '
+        Me.LabelOLStoreOrder.Borders = DevExpress.XtraPrinting.BorderSide.None
+        Me.LabelOLStoreOrder.Font = New System.Drawing.Font("Times New Roman", 9.75!)
+        Me.LabelOLStoreOrder.LocationFloat = New DevExpress.Utils.PointFloat(578.8331!, 69.91692!)
+        Me.LabelOLStoreOrder.Name = "LabelOLStoreOrder"
+        Me.LabelOLStoreOrder.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LabelOLStoreOrder.SizeF = New System.Drawing.SizeF(186.1669!, 13.58337!)
+        Me.LabelOLStoreOrder.StylePriority.UseBorders = False
+        Me.LabelOLStoreOrder.StylePriority.UseFont = False
+        Me.LabelOLStoreOrder.Visible = False
+        '
         'ReportSalesOrder
         '
         Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.Detail, Me.TopMargin, Me.BottomMargin, Me.PageFooter})
@@ -731,4 +768,7 @@ Partial Public Class ReportSalesOrder
     Friend WithEvents LabelNIK As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents LabelNIKDot As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents LabelTitleNIK As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents LabelOLStoreOrder As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents LabelDotOLStoreOrder As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents LabelTitleOLStoreOrder As DevExpress.XtraReports.UI.XRLabel
 End Class

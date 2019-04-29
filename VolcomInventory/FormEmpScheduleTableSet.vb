@@ -6,9 +6,10 @@
         If Not id_role_login = get_setup_field("id_role_super_admin") Then
             If Not (FormEmpSchedule.is_security = "1" And opt = "1") Then
                 Dim date_min As Date
-                Dim query_date As String = "SELECT IF(NOW()>=IF(DAYOFMONTH(LAST_DAY(NOW()))='31',LAST_DAY(NOW()),DATE_ADD(LAST_DAY(NOW()),INTERVAL 1 DAY)),
-                                    DATE_ADD(LAST_DAY(NOW()), INTERVAL 1 DAY),
-                                    DATE_FORMAT(NOW() ,'%Y-%m-01')) AS date_start"
+                'Dim query_date As String = "SELECT IF(NOW()>=IF(DAYOFMONTH(LAST_DAY(NOW()))='31',LAST_DAY(NOW()),DATE_ADD(LAST_DAY(NOW()),INTERVAL 1 DAY)),
+                '                    DATE_ADD(LAST_DAY(NOW()), INTERVAL 1 DAY),
+                '                    DATE_FORMAT(NOW() ,'%Y-%m-01')) AS date_start"
+                Dim query_date As String = "SELECT DATE_FORMAT(NOW() ,'%Y-%m-01') AS date_start"
                 date_min = Date.Parse(execute_query(query_date, 0, True, "", "", "", "").ToString)
                 DEStart.Properties.MinValue = date_min
                 DEUntil.Properties.MinValue = date_min

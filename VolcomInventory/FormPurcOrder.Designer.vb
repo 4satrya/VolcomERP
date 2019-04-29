@@ -87,8 +87,6 @@ Partial Class FormPurcOrder
         Me.XTPPO = New DevExpress.XtraTab.XtraTabPage()
         Me.GCPO = New DevExpress.XtraGrid.GridControl()
         Me.GVPO = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.GridColumn52 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.RICEIsCheckPO = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -99,6 +97,9 @@ Partial Class FormPurcOrder
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn61 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn60 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn59 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn53 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RPBRec = New DevExpress.XtraEditors.Repository.RepositoryItemProgressBar()
         Me.GridColumn54 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -106,11 +107,7 @@ Partial Class FormPurcOrder
         Me.GridColumn57 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn55 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn56 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.PanelControlNavLineListBottom = New DevExpress.XtraEditors.PanelControl()
-        Me.PCSelAll = New DevExpress.XtraEditors.PanelControl()
-        Me.CheckEditSelAll = New DevExpress.XtraEditors.CheckEdit()
-        Me.BtnDropQuickMenu = New DevExpress.XtraEditors.DropDownButton()
-        Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
+        Me.RICEIsCheckPO = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
         Me.SLERecStatus = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView7 = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -123,6 +120,43 @@ Partial Class FormPurcOrder
         Me.GridColumn13 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn14 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
+        Me.XTPPOList = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCPOItem = New DevExpress.XtraGrid.GridControl()
+        Me.GVPOItem = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn62 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.GridColumn52 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn63 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn68 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn69 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn65 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn64 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn66 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn67 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn70 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn76 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemProgressBar1 = New DevExpress.XtraEditors.Repository.RepositoryItemProgressBar()
+        Me.GridColumn78 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn79 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn80 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn81 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
+        Me.SearchLookUpEdit1 = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView9 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn82 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn83 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl8 = New DevExpress.XtraEditors.LabelControl()
+        Me.SimpleButton1 = New DevExpress.XtraEditors.SimpleButton()
+        Me.SLEVendorListPO = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView10 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn84 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn85 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl9 = New DevExpress.XtraEditors.LabelControl()
+        Me.PanelControlNavLineListBottom = New DevExpress.XtraEditors.PanelControl()
+        Me.PCSelAll = New DevExpress.XtraEditors.PanelControl()
+        Me.CheckEditSelAll = New DevExpress.XtraEditors.CheckEdit()
+        Me.BtnDropQuickMenu = New DevExpress.XtraEditors.DropDownButton()
+        Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
         Me.ViewMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.SMClose = New System.Windows.Forms.ToolStripMenuItem()
         Me.BarManager1 = New DevExpress.XtraBars.BarManager(Me.components)
@@ -140,9 +174,6 @@ Partial Class FormPurcOrder
         Me.BBSubOther = New DevExpress.XtraBars.BarSubItem()
         Me.BBSetAddPrc = New DevExpress.XtraBars.BarButtonItem()
         Me.PopupMenu1 = New DevExpress.XtraBars.PopupMenu(Me.components)
-        Me.GridColumn59 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn60 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn61 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XTCPO, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCPO.SuspendLayout()
         Me.XTPRequest.SuspendLayout()
@@ -166,20 +197,31 @@ Partial Class FormPurcOrder
         Me.XTPPO.SuspendLayout()
         CType(Me.GCPO, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVPO, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RICEIsCheckPO, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RPBRec, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PanelControlNavLineListBottom, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.PanelControlNavLineListBottom.SuspendLayout()
-        CType(Me.PCSelAll, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.PCSelAll.SuspendLayout()
-        CType(Me.CheckEditSelAll.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RICEIsCheckPO, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.SLERecStatus.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView7, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLEVendor.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTPPOList.SuspendLayout()
+        CType(Me.GCPOItem, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVPOItem, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemProgressBar1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl3.SuspendLayout()
+        CType(Me.SearchLookUpEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView9, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SLEVendorListPO.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView10, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControlNavLineListBottom, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControlNavLineListBottom.SuspendLayout()
+        CType(Me.PCSelAll, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PCSelAll.SuspendLayout()
+        CType(Me.CheckEditSelAll.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ViewMenu.SuspendLayout()
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PopupMenu1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -192,9 +234,9 @@ Partial Class FormPurcOrder
         Me.XTCPO.Location = New System.Drawing.Point(0, 0)
         Me.XTCPO.Name = "XTCPO"
         Me.XTCPO.SelectedTabPage = Me.XTPRequest
-        Me.XTCPO.Size = New System.Drawing.Size(1151, 594)
+        Me.XTCPO.Size = New System.Drawing.Size(1151, 400)
         Me.XTCPO.TabIndex = 0
-        Me.XTCPO.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPRequest, Me.XTPPO})
+        Me.XTCPO.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPRequest, Me.XTPPO, Me.XTPPOList})
         '
         'XTPRequest
         '
@@ -203,7 +245,7 @@ Partial Class FormPurcOrder
         Me.XTPRequest.Controls.Add(Me.BCantFulfill)
         Me.XTPRequest.Controls.Add(Me.PanelControl2)
         Me.XTPRequest.Name = "XTPRequest"
-        Me.XTPRequest.Size = New System.Drawing.Size(1145, 566)
+        Me.XTPRequest.Size = New System.Drawing.Size(1145, 372)
         Me.XTPRequest.Text = "Request List"
         '
         'GCPurcReq
@@ -213,7 +255,7 @@ Partial Class FormPurcOrder
         Me.GCPurcReq.MainView = Me.GVPurcReq
         Me.GCPurcReq.Name = "GCPurcReq"
         Me.GCPurcReq.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RICECheck, Me.RICEPurchase, Me.RITEQty})
-        Me.GCPurcReq.Size = New System.Drawing.Size(1145, 458)
+        Me.GCPurcReq.Size = New System.Drawing.Size(1145, 264)
         Me.GCPurcReq.TabIndex = 10
         Me.GCPurcReq.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVPurcReq})
         '
@@ -521,7 +563,7 @@ Partial Class FormPurcOrder
         Me.BCreatePO.Appearance.Options.UseFont = True
         Me.BCreatePO.Appearance.Options.UseForeColor = True
         Me.BCreatePO.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.BCreatePO.Location = New System.Drawing.Point(0, 502)
+        Me.BCreatePO.Location = New System.Drawing.Point(0, 308)
         Me.BCreatePO.LookAndFeel.SkinMaskColor = System.Drawing.Color.Blue
         Me.BCreatePO.LookAndFeel.SkinMaskColor2 = System.Drawing.Color.Blue
         Me.BCreatePO.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.UltraFlat
@@ -540,7 +582,7 @@ Partial Class FormPurcOrder
         Me.BCantFulfill.Appearance.Options.UseFont = True
         Me.BCantFulfill.Appearance.Options.UseForeColor = True
         Me.BCantFulfill.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.BCantFulfill.Location = New System.Drawing.Point(0, 534)
+        Me.BCantFulfill.Location = New System.Drawing.Point(0, 340)
         Me.BCantFulfill.LookAndFeel.SkinMaskColor = System.Drawing.Color.Red
         Me.BCantFulfill.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.UltraFlat
         Me.BCantFulfill.LookAndFeel.UseDefaultLookAndFeel = False
@@ -774,10 +816,9 @@ Partial Class FormPurcOrder
         'XTPPO
         '
         Me.XTPPO.Controls.Add(Me.GCPO)
-        Me.XTPPO.Controls.Add(Me.PanelControlNavLineListBottom)
         Me.XTPPO.Controls.Add(Me.PanelControl1)
         Me.XTPPO.Name = "XTPPO"
-        Me.XTPPO.Size = New System.Drawing.Size(1145, 566)
+        Me.XTPPO.Size = New System.Drawing.Size(1145, 372)
         Me.XTPPO.Text = "Purchase Order List"
         '
         'GCPO
@@ -787,36 +828,17 @@ Partial Class FormPurcOrder
         Me.GCPO.MainView = Me.GVPO
         Me.GCPO.Name = "GCPO"
         Me.GCPO.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RICEIsCheckPO, Me.RPBRec})
-        Me.GCPO.Size = New System.Drawing.Size(1145, 487)
+        Me.GCPO.Size = New System.Drawing.Size(1145, 330)
         Me.GCPO.TabIndex = 0
         Me.GCPO.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVPO})
         '
         'GVPO
         '
-        Me.GVPO.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn52, Me.GridColumn7, Me.GridColumn1, Me.GridColumn2, Me.GridColumn35, Me.GridColumn3, Me.GridColumn37, Me.GridColumn36, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumn61, Me.GridColumn60, Me.GridColumn59, Me.GridColumn53, Me.GridColumn54, Me.GridColumn58, Me.GridColumn57, Me.GridColumn55, Me.GridColumn56})
+        Me.GVPO.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn7, Me.GridColumn1, Me.GridColumn2, Me.GridColumn35, Me.GridColumn3, Me.GridColumn37, Me.GridColumn36, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumn61, Me.GridColumn60, Me.GridColumn59, Me.GridColumn53, Me.GridColumn54, Me.GridColumn58, Me.GridColumn57, Me.GridColumn55, Me.GridColumn56})
         Me.GVPO.GridControl = Me.GCPO
         Me.GVPO.Name = "GVPO"
-        Me.GVPO.OptionsBehavior.ReadOnly = True
         Me.GVPO.OptionsView.ColumnAutoWidth = False
         Me.GVPO.OptionsView.ShowGroupPanel = False
-        '
-        'GridColumn52
-        '
-        Me.GridColumn52.AppearanceHeader.Options.UseTextOptions = True
-        Me.GridColumn52.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.GridColumn52.Caption = "*"
-        Me.GridColumn52.ColumnEdit = Me.RICEIsCheckPO
-        Me.GridColumn52.FieldName = "is_check"
-        Me.GridColumn52.Name = "GridColumn52"
-        Me.GridColumn52.Visible = True
-        Me.GridColumn52.VisibleIndex = 0
-        '
-        'RICEIsCheckPO
-        '
-        Me.RICEIsCheckPO.AutoHeight = False
-        Me.RICEIsCheckPO.Name = "RICEIsCheckPO"
-        Me.RICEIsCheckPO.ValueChecked = "yes"
-        Me.RICEIsCheckPO.ValueUnchecked = "no"
         '
         'GridColumn7
         '
@@ -832,7 +854,7 @@ Partial Class FormPurcOrder
         Me.GridColumn1.Name = "GridColumn1"
         Me.GridColumn1.OptionsColumn.AllowEdit = False
         Me.GridColumn1.Visible = True
-        Me.GridColumn1.VisibleIndex = 1
+        Me.GridColumn1.VisibleIndex = 0
         '
         'GridColumn2
         '
@@ -841,7 +863,7 @@ Partial Class FormPurcOrder
         Me.GridColumn2.Name = "GridColumn2"
         Me.GridColumn2.OptionsColumn.AllowEdit = False
         Me.GridColumn2.Visible = True
-        Me.GridColumn2.VisibleIndex = 2
+        Me.GridColumn2.VisibleIndex = 1
         '
         'GridColumn35
         '
@@ -850,7 +872,7 @@ Partial Class FormPurcOrder
         Me.GridColumn35.Name = "GridColumn35"
         Me.GridColumn35.OptionsColumn.AllowEdit = False
         Me.GridColumn35.Visible = True
-        Me.GridColumn35.VisibleIndex = 4
+        Me.GridColumn35.VisibleIndex = 3
         '
         'GridColumn3
         '
@@ -859,7 +881,7 @@ Partial Class FormPurcOrder
         Me.GridColumn3.Name = "GridColumn3"
         Me.GridColumn3.OptionsColumn.AllowEdit = False
         Me.GridColumn3.Visible = True
-        Me.GridColumn3.VisibleIndex = 3
+        Me.GridColumn3.VisibleIndex = 2
         '
         'GridColumn37
         '
@@ -868,7 +890,7 @@ Partial Class FormPurcOrder
         Me.GridColumn37.Name = "GridColumn37"
         Me.GridColumn37.OptionsColumn.AllowEdit = False
         Me.GridColumn37.Visible = True
-        Me.GridColumn37.VisibleIndex = 5
+        Me.GridColumn37.VisibleIndex = 4
         Me.GridColumn37.Width = 84
         '
         'GridColumn36
@@ -878,7 +900,7 @@ Partial Class FormPurcOrder
         Me.GridColumn36.Name = "GridColumn36"
         Me.GridColumn36.OptionsColumn.AllowEdit = False
         Me.GridColumn36.Visible = True
-        Me.GridColumn36.VisibleIndex = 6
+        Me.GridColumn36.VisibleIndex = 5
         Me.GridColumn36.Width = 88
         '
         'GridColumn4
@@ -890,7 +912,7 @@ Partial Class FormPurcOrder
         Me.GridColumn4.Name = "GridColumn4"
         Me.GridColumn4.OptionsColumn.AllowEdit = False
         Me.GridColumn4.Visible = True
-        Me.GridColumn4.VisibleIndex = 7
+        Me.GridColumn4.VisibleIndex = 6
         '
         'GridColumn5
         '
@@ -899,7 +921,7 @@ Partial Class FormPurcOrder
         Me.GridColumn5.Name = "GridColumn5"
         Me.GridColumn5.OptionsColumn.AllowEdit = False
         Me.GridColumn5.Visible = True
-        Me.GridColumn5.VisibleIndex = 8
+        Me.GridColumn5.VisibleIndex = 7
         Me.GridColumn5.Width = 83
         '
         'GridColumn6
@@ -911,7 +933,52 @@ Partial Class FormPurcOrder
         Me.GridColumn6.Name = "GridColumn6"
         Me.GridColumn6.OptionsColumn.AllowEdit = False
         Me.GridColumn6.Visible = True
-        Me.GridColumn6.VisibleIndex = 9
+        Me.GridColumn6.VisibleIndex = 8
+        '
+        'GridColumn61
+        '
+        Me.GridColumn61.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn61.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn61.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn61.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn61.Caption = "PO Amount"
+        Me.GridColumn61.DisplayFormat.FormatString = "N2"
+        Me.GridColumn61.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn61.FieldName = "total_po"
+        Me.GridColumn61.Name = "GridColumn61"
+        Me.GridColumn61.OptionsColumn.AllowEdit = False
+        Me.GridColumn61.Visible = True
+        Me.GridColumn61.VisibleIndex = 9
+        '
+        'GridColumn60
+        '
+        Me.GridColumn60.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn60.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn60.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn60.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn60.Caption = "Receive Amount"
+        Me.GridColumn60.DisplayFormat.FormatString = "N2"
+        Me.GridColumn60.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn60.FieldName = "total_rec"
+        Me.GridColumn60.Name = "GridColumn60"
+        Me.GridColumn60.OptionsColumn.AllowEdit = False
+        Me.GridColumn60.Visible = True
+        Me.GridColumn60.VisibleIndex = 10
+        '
+        'GridColumn59
+        '
+        Me.GridColumn59.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn59.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn59.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn59.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn59.Caption = "Paid Amount"
+        Me.GridColumn59.DisplayFormat.FormatString = "N2"
+        Me.GridColumn59.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn59.FieldName = "val_pay"
+        Me.GridColumn59.Name = "GridColumn59"
+        Me.GridColumn59.OptionsColumn.AllowEdit = False
+        Me.GridColumn59.Visible = True
+        Me.GridColumn59.VisibleIndex = 14
         '
         'GridColumn53
         '
@@ -921,7 +988,7 @@ Partial Class FormPurcOrder
         Me.GridColumn53.Name = "GridColumn53"
         Me.GridColumn53.OptionsColumn.AllowEdit = False
         Me.GridColumn53.Visible = True
-        Me.GridColumn53.VisibleIndex = 12
+        Me.GridColumn53.VisibleIndex = 11
         Me.GridColumn53.Width = 93
         '
         'RPBRec
@@ -941,7 +1008,7 @@ Partial Class FormPurcOrder
         Me.GridColumn54.Name = "GridColumn54"
         Me.GridColumn54.OptionsColumn.AllowEdit = False
         Me.GridColumn54.Visible = True
-        Me.GridColumn54.VisibleIndex = 14
+        Me.GridColumn54.VisibleIndex = 13
         Me.GridColumn54.Width = 82
         '
         'GridColumn58
@@ -951,8 +1018,9 @@ Partial Class FormPurcOrder
         Me.GridColumn58.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.GridColumn58.FieldName = "est_date_receive"
         Me.GridColumn58.Name = "GridColumn58"
+        Me.GridColumn58.OptionsColumn.AllowEdit = False
         Me.GridColumn58.Visible = True
-        Me.GridColumn58.VisibleIndex = 13
+        Me.GridColumn58.VisibleIndex = 12
         Me.GridColumn58.Width = 96
         '
         'GridColumn57
@@ -964,7 +1032,7 @@ Partial Class FormPurcOrder
         Me.GridColumn57.Name = "GridColumn57"
         Me.GridColumn57.OptionsColumn.AllowEdit = False
         Me.GridColumn57.Visible = True
-        Me.GridColumn57.VisibleIndex = 17
+        Me.GridColumn57.VisibleIndex = 16
         Me.GridColumn57.Width = 100
         '
         'GridColumn55
@@ -973,7 +1041,7 @@ Partial Class FormPurcOrder
         Me.GridColumn55.Name = "GridColumn55"
         Me.GridColumn55.OptionsColumn.AllowEdit = False
         Me.GridColumn55.Visible = True
-        Me.GridColumn55.VisibleIndex = 16
+        Me.GridColumn55.VisibleIndex = 15
         Me.GridColumn55.Width = 97
         '
         'GridColumn56
@@ -983,72 +1051,15 @@ Partial Class FormPurcOrder
         Me.GridColumn56.Name = "GridColumn56"
         Me.GridColumn56.OptionsColumn.AllowEdit = False
         Me.GridColumn56.Visible = True
-        Me.GridColumn56.VisibleIndex = 18
+        Me.GridColumn56.VisibleIndex = 17
         Me.GridColumn56.Width = 86
         '
-        'PanelControlNavLineListBottom
+        'RICEIsCheckPO
         '
-        Me.PanelControlNavLineListBottom.Controls.Add(Me.PCSelAll)
-        Me.PanelControlNavLineListBottom.Controls.Add(Me.BtnDropQuickMenu)
-        Me.PanelControlNavLineListBottom.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControlNavLineListBottom.Location = New System.Drawing.Point(0, 529)
-        Me.PanelControlNavLineListBottom.Name = "PanelControlNavLineListBottom"
-        Me.PanelControlNavLineListBottom.Size = New System.Drawing.Size(1145, 37)
-        Me.PanelControlNavLineListBottom.TabIndex = 3
-        '
-        'PCSelAll
-        '
-        Me.PCSelAll.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
-        Me.PCSelAll.Controls.Add(Me.CheckEditSelAll)
-        Me.PCSelAll.Dock = System.Windows.Forms.DockStyle.Left
-        Me.PCSelAll.Location = New System.Drawing.Point(2, 2)
-        Me.PCSelAll.Name = "PCSelAll"
-        Me.PCSelAll.Size = New System.Drawing.Size(99, 33)
-        Me.PCSelAll.TabIndex = 108
-        '
-        'CheckEditSelAll
-        '
-        Me.CheckEditSelAll.Location = New System.Drawing.Point(5, 7)
-        Me.CheckEditSelAll.Name = "CheckEditSelAll"
-        Me.CheckEditSelAll.Properties.Caption = "Select All Item"
-        Me.CheckEditSelAll.Size = New System.Drawing.Size(92, 19)
-        Me.CheckEditSelAll.TabIndex = 102
-        '
-        'BtnDropQuickMenu
-        '
-        Me.BtnDropQuickMenu.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BtnDropQuickMenu.ImageIndex = 17
-        Me.BtnDropQuickMenu.ImageList = Me.LargeImageCollection
-        Me.BtnDropQuickMenu.Location = New System.Drawing.Point(1032, 2)
-        Me.BtnDropQuickMenu.Name = "BtnDropQuickMenu"
-        Me.BtnDropQuickMenu.Size = New System.Drawing.Size(111, 33)
-        Me.BtnDropQuickMenu.TabIndex = 107
-        Me.BtnDropQuickMenu.Text = "Quick Menu"
-        '
-        'LargeImageCollection
-        '
-        Me.LargeImageCollection.ImageSize = New System.Drawing.Size(24, 24)
-        Me.LargeImageCollection.ImageStream = CType(resources.GetObject("LargeImageCollection.ImageStream"), DevExpress.Utils.ImageCollectionStreamer)
-        Me.LargeImageCollection.Images.SetKeyName(0, "20_24x24.png")
-        Me.LargeImageCollection.Images.SetKeyName(1, "8_24x24.png")
-        Me.LargeImageCollection.Images.SetKeyName(2, "23_24x24.png")
-        Me.LargeImageCollection.Images.SetKeyName(3, "arrow_refresh.png")
-        Me.LargeImageCollection.Images.SetKeyName(4, "check_mark.png")
-        Me.LargeImageCollection.Images.SetKeyName(5, "gnome_application_exit (1).png")
-        Me.LargeImageCollection.Images.SetKeyName(6, "printer_3.png")
-        Me.LargeImageCollection.Images.SetKeyName(7, "save.png")
-        Me.LargeImageCollection.Images.SetKeyName(8, "31_24x24.png")
-        Me.LargeImageCollection.Images.SetKeyName(9, "18_24x24.png")
-        Me.LargeImageCollection.Images.SetKeyName(10, "1415351112474759854-32.png")
-        Me.LargeImageCollection.Images.SetKeyName(11, "icon_merchandise_clothes32.png")
-        Me.LargeImageCollection.Images.SetKeyName(12, "t_shirtgreen.png")
-        Me.LargeImageCollection.Images.SetKeyName(13, "lock red.png")
-        Me.LargeImageCollection.Images.SetKeyName(14, "ordering32.png")
-        Me.LargeImageCollection.Images.SetKeyName(15, "kghostview.png")
-        Me.LargeImageCollection.Images.SetKeyName(16, "MetroUI-Folder-OS-Configure-icon.png")
-        Me.LargeImageCollection.Images.SetKeyName(17, "Setting(32).png")
-        Me.LargeImageCollection.Images.SetKeyName(18, "estimate_icon32.png")
-        Me.LargeImageCollection.Images.SetKeyName(19, "copy_icon.png")
+        Me.RICEIsCheckPO.AutoHeight = False
+        Me.RICEIsCheckPO.Name = "RICEIsCheckPO"
+        Me.RICEIsCheckPO.ValueChecked = "yes"
+        Me.RICEIsCheckPO.ValueUnchecked = "no"
         '
         'PanelControl1
         '
@@ -1149,6 +1160,349 @@ Partial Class FormPurcOrder
         Me.LabelControl2.TabIndex = 8911
         Me.LabelControl2.Text = "Vendor"
         '
+        'XTPPOList
+        '
+        Me.XTPPOList.Controls.Add(Me.GCPOItem)
+        Me.XTPPOList.Controls.Add(Me.PanelControl3)
+        Me.XTPPOList.Controls.Add(Me.PanelControlNavLineListBottom)
+        Me.XTPPOList.Name = "XTPPOList"
+        Me.XTPPOList.Size = New System.Drawing.Size(1145, 372)
+        Me.XTPPOList.Text = "List Item PO"
+        '
+        'GCPOItem
+        '
+        Me.GCPOItem.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCPOItem.Location = New System.Drawing.Point(0, 42)
+        Me.GCPOItem.MainView = Me.GVPOItem
+        Me.GCPOItem.Name = "GCPOItem"
+        Me.GCPOItem.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckEdit1, Me.RepositoryItemProgressBar1})
+        Me.GCPOItem.Size = New System.Drawing.Size(1145, 293)
+        Me.GCPOItem.TabIndex = 4
+        Me.GCPOItem.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVPOItem})
+        '
+        'GVPOItem
+        '
+        Me.GVPOItem.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn62, Me.GridColumn52, Me.GridColumn63, Me.GridColumn68, Me.GridColumn69, Me.GridColumn65, Me.GridColumn64, Me.GridColumn66, Me.GridColumn67, Me.GridColumn70, Me.GridColumn76, Me.GridColumn78, Me.GridColumn79, Me.GridColumn80, Me.GridColumn81})
+        Me.GVPOItem.GridControl = Me.GCPOItem
+        Me.GVPOItem.Name = "GVPOItem"
+        Me.GVPOItem.OptionsView.ColumnAutoWidth = False
+        Me.GVPOItem.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn62
+        '
+        Me.GridColumn62.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn62.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn62.Caption = "*"
+        Me.GridColumn62.ColumnEdit = Me.RepositoryItemCheckEdit1
+        Me.GridColumn62.FieldName = "is_check"
+        Me.GridColumn62.Name = "GridColumn62"
+        Me.GridColumn62.Visible = True
+        Me.GridColumn62.VisibleIndex = 0
+        '
+        'RepositoryItemCheckEdit1
+        '
+        Me.RepositoryItemCheckEdit1.AutoHeight = False
+        Me.RepositoryItemCheckEdit1.Name = "RepositoryItemCheckEdit1"
+        Me.RepositoryItemCheckEdit1.ValueChecked = "yes"
+        Me.RepositoryItemCheckEdit1.ValueUnchecked = "no"
+        '
+        'GridColumn52
+        '
+        Me.GridColumn52.Caption = "ID PO Det"
+        Me.GridColumn52.FieldName = "id_purc_order_det"
+        Me.GridColumn52.Name = "GridColumn52"
+        '
+        'GridColumn63
+        '
+        Me.GridColumn63.Caption = "ID PO"
+        Me.GridColumn63.FieldName = "id_purc_order"
+        Me.GridColumn63.Name = "GridColumn63"
+        Me.GridColumn63.OptionsColumn.AllowEdit = False
+        '
+        'GridColumn68
+        '
+        Me.GridColumn68.Caption = "Id Req det"
+        Me.GridColumn68.FieldName = "id_purc_req_det"
+        Me.GridColumn68.Name = "GridColumn68"
+        '
+        'GridColumn69
+        '
+        Me.GridColumn69.Caption = "ID Item"
+        Me.GridColumn69.FieldName = "id_item"
+        Me.GridColumn69.Name = "GridColumn69"
+        '
+        'GridColumn65
+        '
+        Me.GridColumn65.Caption = "Item"
+        Me.GridColumn65.Name = "GridColumn65"
+        Me.GridColumn65.Visible = True
+        Me.GridColumn65.VisibleIndex = 2
+        '
+        'GridColumn64
+        '
+        Me.GridColumn64.Caption = "PO Number"
+        Me.GridColumn64.FieldName = "purc_order_number"
+        Me.GridColumn64.Name = "GridColumn64"
+        Me.GridColumn64.OptionsColumn.AllowEdit = False
+        Me.GridColumn64.Visible = True
+        Me.GridColumn64.VisibleIndex = 1
+        '
+        'GridColumn66
+        '
+        Me.GridColumn66.Caption = "Vendor Code"
+        Me.GridColumn66.FieldName = "comp_number"
+        Me.GridColumn66.Name = "GridColumn66"
+        Me.GridColumn66.OptionsColumn.AllowEdit = False
+        Me.GridColumn66.Visible = True
+        Me.GridColumn66.VisibleIndex = 4
+        '
+        'GridColumn67
+        '
+        Me.GridColumn67.Caption = "Vendor"
+        Me.GridColumn67.FieldName = "comp_name"
+        Me.GridColumn67.Name = "GridColumn67"
+        Me.GridColumn67.OptionsColumn.AllowEdit = False
+        Me.GridColumn67.Visible = True
+        Me.GridColumn67.VisibleIndex = 3
+        '
+        'GridColumn70
+        '
+        Me.GridColumn70.Caption = "Created Date"
+        Me.GridColumn70.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.GridColumn70.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn70.FieldName = "date_created"
+        Me.GridColumn70.Name = "GridColumn70"
+        Me.GridColumn70.OptionsColumn.AllowEdit = False
+        Me.GridColumn70.Visible = True
+        Me.GridColumn70.VisibleIndex = 5
+        '
+        'GridColumn76
+        '
+        Me.GridColumn76.Caption = "Receive Progress"
+        Me.GridColumn76.ColumnEdit = Me.RepositoryItemProgressBar1
+        Me.GridColumn76.FieldName = "rec_progress"
+        Me.GridColumn76.Name = "GridColumn76"
+        Me.GridColumn76.OptionsColumn.AllowEdit = False
+        Me.GridColumn76.Visible = True
+        Me.GridColumn76.VisibleIndex = 6
+        Me.GridColumn76.Width = 93
+        '
+        'RepositoryItemProgressBar1
+        '
+        Me.RepositoryItemProgressBar1.EndColor = System.Drawing.Color.LawnGreen
+        Me.RepositoryItemProgressBar1.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat
+        Me.RepositoryItemProgressBar1.LookAndFeel.UseDefaultLookAndFeel = False
+        Me.RepositoryItemProgressBar1.Name = "RepositoryItemProgressBar1"
+        Me.RepositoryItemProgressBar1.ProgressViewStyle = DevExpress.XtraEditors.Controls.ProgressViewStyle.Solid
+        Me.RepositoryItemProgressBar1.ShowTitle = True
+        Me.RepositoryItemProgressBar1.Step = 1
+        '
+        'GridColumn78
+        '
+        Me.GridColumn78.Caption = "Est. Receive Date"
+        Me.GridColumn78.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.GridColumn78.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn78.FieldName = "est_date_receive"
+        Me.GridColumn78.Name = "GridColumn78"
+        Me.GridColumn78.OptionsColumn.AllowEdit = False
+        Me.GridColumn78.Visible = True
+        Me.GridColumn78.VisibleIndex = 7
+        Me.GridColumn78.Width = 96
+        '
+        'GridColumn79
+        '
+        Me.GridColumn79.Caption = "Payment Due Date"
+        Me.GridColumn79.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.GridColumn79.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn79.FieldName = "pay_due_date"
+        Me.GridColumn79.Name = "GridColumn79"
+        Me.GridColumn79.OptionsColumn.AllowEdit = False
+        Me.GridColumn79.Visible = True
+        Me.GridColumn79.VisibleIndex = 9
+        Me.GridColumn79.Width = 100
+        '
+        'GridColumn80
+        '
+        Me.GridColumn80.Caption = "Payment Progress"
+        Me.GridColumn80.Name = "GridColumn80"
+        Me.GridColumn80.OptionsColumn.AllowEdit = False
+        Me.GridColumn80.Visible = True
+        Me.GridColumn80.VisibleIndex = 8
+        Me.GridColumn80.Width = 97
+        '
+        'GridColumn81
+        '
+        Me.GridColumn81.Caption = "Payment Status"
+        Me.GridColumn81.FieldName = "pay_status"
+        Me.GridColumn81.Name = "GridColumn81"
+        Me.GridColumn81.OptionsColumn.AllowEdit = False
+        Me.GridColumn81.Visible = True
+        Me.GridColumn81.VisibleIndex = 10
+        Me.GridColumn81.Width = 86
+        '
+        'PanelControl3
+        '
+        Me.PanelControl3.Controls.Add(Me.SearchLookUpEdit1)
+        Me.PanelControl3.Controls.Add(Me.LabelControl8)
+        Me.PanelControl3.Controls.Add(Me.SimpleButton1)
+        Me.PanelControl3.Controls.Add(Me.SLEVendorListPO)
+        Me.PanelControl3.Controls.Add(Me.LabelControl9)
+        Me.PanelControl3.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelControl3.Location = New System.Drawing.Point(0, 0)
+        Me.PanelControl3.Name = "PanelControl3"
+        Me.PanelControl3.Size = New System.Drawing.Size(1145, 42)
+        Me.PanelControl3.TabIndex = 5
+        '
+        'SearchLookUpEdit1
+        '
+        Me.SearchLookUpEdit1.Location = New System.Drawing.Point(320, 10)
+        Me.SearchLookUpEdit1.Name = "SearchLookUpEdit1"
+        Me.SearchLookUpEdit1.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SearchLookUpEdit1.Properties.View = Me.GridView9
+        Me.SearchLookUpEdit1.Size = New System.Drawing.Size(124, 20)
+        Me.SearchLookUpEdit1.TabIndex = 8917
+        '
+        'GridView9
+        '
+        Me.GridView9.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn82, Me.GridColumn83})
+        Me.GridView9.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView9.Name = "GridView9"
+        Me.GridView9.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView9.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn82
+        '
+        Me.GridColumn82.Caption = "ID"
+        Me.GridColumn82.FieldName = "id_rec_status"
+        Me.GridColumn82.Name = "GridColumn82"
+        '
+        'GridColumn83
+        '
+        Me.GridColumn83.Caption = "Status"
+        Me.GridColumn83.FieldName = "rec_status"
+        Me.GridColumn83.Name = "GridColumn83"
+        Me.GridColumn83.Visible = True
+        Me.GridColumn83.VisibleIndex = 0
+        '
+        'LabelControl8
+        '
+        Me.LabelControl8.Location = New System.Drawing.Point(234, 13)
+        Me.LabelControl8.Name = "LabelControl8"
+        Me.LabelControl8.Size = New System.Drawing.Size(80, 13)
+        Me.LabelControl8.TabIndex = 8916
+        Me.LabelControl8.Text = "Status Receiving"
+        '
+        'SimpleButton1
+        '
+        Me.SimpleButton1.Location = New System.Drawing.Point(450, 8)
+        Me.SimpleButton1.Name = "SimpleButton1"
+        Me.SimpleButton1.Size = New System.Drawing.Size(60, 23)
+        Me.SimpleButton1.TabIndex = 8913
+        Me.SimpleButton1.Text = "view"
+        '
+        'SLEVendorListPO
+        '
+        Me.SLEVendorListPO.Location = New System.Drawing.Point(51, 10)
+        Me.SLEVendorListPO.Name = "SLEVendorListPO"
+        Me.SLEVendorListPO.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEVendorListPO.Properties.View = Me.GridView10
+        Me.SLEVendorListPO.Size = New System.Drawing.Size(177, 20)
+        Me.SLEVendorListPO.TabIndex = 8912
+        '
+        'GridView10
+        '
+        Me.GridView10.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn84, Me.GridColumn85})
+        Me.GridView10.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView10.Name = "GridView10"
+        Me.GridView10.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView10.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn84
+        '
+        Me.GridColumn84.Caption = "ID Departement"
+        Me.GridColumn84.FieldName = "id_departement"
+        Me.GridColumn84.Name = "GridColumn84"
+        '
+        'GridColumn85
+        '
+        Me.GridColumn85.Caption = "Departement"
+        Me.GridColumn85.FieldName = "departement"
+        Me.GridColumn85.Name = "GridColumn85"
+        Me.GridColumn85.Visible = True
+        Me.GridColumn85.VisibleIndex = 0
+        '
+        'LabelControl9
+        '
+        Me.LabelControl9.Location = New System.Drawing.Point(11, 13)
+        Me.LabelControl9.Name = "LabelControl9"
+        Me.LabelControl9.Size = New System.Drawing.Size(34, 13)
+        Me.LabelControl9.TabIndex = 8911
+        Me.LabelControl9.Text = "Vendor"
+        '
+        'PanelControlNavLineListBottom
+        '
+        Me.PanelControlNavLineListBottom.Controls.Add(Me.PCSelAll)
+        Me.PanelControlNavLineListBottom.Controls.Add(Me.BtnDropQuickMenu)
+        Me.PanelControlNavLineListBottom.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.PanelControlNavLineListBottom.Location = New System.Drawing.Point(0, 335)
+        Me.PanelControlNavLineListBottom.Name = "PanelControlNavLineListBottom"
+        Me.PanelControlNavLineListBottom.Size = New System.Drawing.Size(1145, 37)
+        Me.PanelControlNavLineListBottom.TabIndex = 3
+        '
+        'PCSelAll
+        '
+        Me.PCSelAll.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PCSelAll.Controls.Add(Me.CheckEditSelAll)
+        Me.PCSelAll.Dock = System.Windows.Forms.DockStyle.Left
+        Me.PCSelAll.Location = New System.Drawing.Point(2, 2)
+        Me.PCSelAll.Name = "PCSelAll"
+        Me.PCSelAll.Size = New System.Drawing.Size(99, 33)
+        Me.PCSelAll.TabIndex = 108
+        '
+        'CheckEditSelAll
+        '
+        Me.CheckEditSelAll.Location = New System.Drawing.Point(5, 7)
+        Me.CheckEditSelAll.Name = "CheckEditSelAll"
+        Me.CheckEditSelAll.Properties.Caption = "Select All Item"
+        Me.CheckEditSelAll.Size = New System.Drawing.Size(92, 19)
+        Me.CheckEditSelAll.TabIndex = 102
+        '
+        'BtnDropQuickMenu
+        '
+        Me.BtnDropQuickMenu.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnDropQuickMenu.ImageIndex = 17
+        Me.BtnDropQuickMenu.ImageList = Me.LargeImageCollection
+        Me.BtnDropQuickMenu.Location = New System.Drawing.Point(1032, 2)
+        Me.BtnDropQuickMenu.Name = "BtnDropQuickMenu"
+        Me.BtnDropQuickMenu.Size = New System.Drawing.Size(111, 33)
+        Me.BtnDropQuickMenu.TabIndex = 107
+        Me.BtnDropQuickMenu.Text = "Quick Menu"
+        '
+        'LargeImageCollection
+        '
+        Me.LargeImageCollection.ImageSize = New System.Drawing.Size(24, 24)
+        Me.LargeImageCollection.ImageStream = CType(resources.GetObject("LargeImageCollection.ImageStream"), DevExpress.Utils.ImageCollectionStreamer)
+        Me.LargeImageCollection.Images.SetKeyName(0, "20_24x24.png")
+        Me.LargeImageCollection.Images.SetKeyName(1, "8_24x24.png")
+        Me.LargeImageCollection.Images.SetKeyName(2, "23_24x24.png")
+        Me.LargeImageCollection.Images.SetKeyName(3, "arrow_refresh.png")
+        Me.LargeImageCollection.Images.SetKeyName(4, "check_mark.png")
+        Me.LargeImageCollection.Images.SetKeyName(5, "gnome_application_exit (1).png")
+        Me.LargeImageCollection.Images.SetKeyName(6, "printer_3.png")
+        Me.LargeImageCollection.Images.SetKeyName(7, "save.png")
+        Me.LargeImageCollection.Images.SetKeyName(8, "31_24x24.png")
+        Me.LargeImageCollection.Images.SetKeyName(9, "18_24x24.png")
+        Me.LargeImageCollection.Images.SetKeyName(10, "1415351112474759854-32.png")
+        Me.LargeImageCollection.Images.SetKeyName(11, "icon_merchandise_clothes32.png")
+        Me.LargeImageCollection.Images.SetKeyName(12, "t_shirtgreen.png")
+        Me.LargeImageCollection.Images.SetKeyName(13, "lock red.png")
+        Me.LargeImageCollection.Images.SetKeyName(14, "ordering32.png")
+        Me.LargeImageCollection.Images.SetKeyName(15, "kghostview.png")
+        Me.LargeImageCollection.Images.SetKeyName(16, "MetroUI-Folder-OS-Configure-icon.png")
+        Me.LargeImageCollection.Images.SetKeyName(17, "Setting(32).png")
+        Me.LargeImageCollection.Images.SetKeyName(18, "estimate_icon32.png")
+        Me.LargeImageCollection.Images.SetKeyName(19, "copy_icon.png")
+        '
         'ViewMenu
         '
         Me.ViewMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SMClose})
@@ -1182,7 +1536,7 @@ Partial Class FormPurcOrder
         '
         Me.barDockControlBottom.CausesValidation = False
         Me.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.barDockControlBottom.Location = New System.Drawing.Point(0, 594)
+        Me.barDockControlBottom.Location = New System.Drawing.Point(0, 400)
         Me.barDockControlBottom.Size = New System.Drawing.Size(1151, 0)
         '
         'barDockControlLeft
@@ -1190,14 +1544,14 @@ Partial Class FormPurcOrder
         Me.barDockControlLeft.CausesValidation = False
         Me.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left
         Me.barDockControlLeft.Location = New System.Drawing.Point(0, 0)
-        Me.barDockControlLeft.Size = New System.Drawing.Size(0, 594)
+        Me.barDockControlLeft.Size = New System.Drawing.Size(0, 400)
         '
         'barDockControlRight
         '
         Me.barDockControlRight.CausesValidation = False
         Me.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right
         Me.barDockControlRight.Location = New System.Drawing.Point(1151, 0)
-        Me.barDockControlRight.Size = New System.Drawing.Size(0, 594)
+        Me.barDockControlRight.Size = New System.Drawing.Size(0, 400)
         '
         'BBPD
         '
@@ -1262,53 +1616,11 @@ Partial Class FormPurcOrder
         Me.PopupMenu1.Manager = Me.BarManager1
         Me.PopupMenu1.Name = "PopupMenu1"
         '
-        'GridColumn59
-        '
-        Me.GridColumn59.AppearanceCell.Options.UseTextOptions = True
-        Me.GridColumn59.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumn59.AppearanceHeader.Options.UseTextOptions = True
-        Me.GridColumn59.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumn59.Caption = "Paid Amount"
-        Me.GridColumn59.DisplayFormat.FormatString = "N2"
-        Me.GridColumn59.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn59.FieldName = "val_pay"
-        Me.GridColumn59.Name = "GridColumn59"
-        Me.GridColumn59.Visible = True
-        Me.GridColumn59.VisibleIndex = 15
-        '
-        'GridColumn60
-        '
-        Me.GridColumn60.AppearanceCell.Options.UseTextOptions = True
-        Me.GridColumn60.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumn60.AppearanceHeader.Options.UseTextOptions = True
-        Me.GridColumn60.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumn60.Caption = "Receive Amount"
-        Me.GridColumn60.DisplayFormat.FormatString = "N2"
-        Me.GridColumn60.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn60.FieldName = "total_rec"
-        Me.GridColumn60.Name = "GridColumn60"
-        Me.GridColumn60.Visible = True
-        Me.GridColumn60.VisibleIndex = 11
-        '
-        'GridColumn61
-        '
-        Me.GridColumn61.AppearanceCell.Options.UseTextOptions = True
-        Me.GridColumn61.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumn61.AppearanceHeader.Options.UseTextOptions = True
-        Me.GridColumn61.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumn61.Caption = "PO Amount"
-        Me.GridColumn61.DisplayFormat.FormatString = "N2"
-        Me.GridColumn61.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn61.FieldName = "total_po"
-        Me.GridColumn61.Name = "GridColumn61"
-        Me.GridColumn61.Visible = True
-        Me.GridColumn61.VisibleIndex = 10
-        '
         'FormPurcOrder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1151, 594)
+        Me.ClientSize = New System.Drawing.Size(1151, 400)
         Me.Controls.Add(Me.XTCPO)
         Me.Controls.Add(Me.barDockControlLeft)
         Me.Controls.Add(Me.barDockControlRight)
@@ -1344,14 +1656,8 @@ Partial Class FormPurcOrder
         Me.XTPPO.ResumeLayout(False)
         CType(Me.GCPO, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVPO, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RICEIsCheckPO, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RPBRec, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PanelControlNavLineListBottom, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.PanelControlNavLineListBottom.ResumeLayout(False)
-        CType(Me.PCSelAll, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.PCSelAll.ResumeLayout(False)
-        CType(Me.CheckEditSelAll.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RICEIsCheckPO, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         Me.PanelControl1.PerformLayout()
@@ -1359,6 +1665,24 @@ Partial Class FormPurcOrder
         CType(Me.GridView7, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SLEVendor.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTPPOList.ResumeLayout(False)
+        CType(Me.GCPOItem, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVPOItem, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemProgressBar1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl3.ResumeLayout(False)
+        Me.PanelControl3.PerformLayout()
+        CType(Me.SearchLookUpEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView9, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SLEVendorListPO.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView10, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControlNavLineListBottom, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControlNavLineListBottom.ResumeLayout(False)
+        CType(Me.PCSelAll, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PCSelAll.ResumeLayout(False)
+        CType(Me.CheckEditSelAll.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ViewMenu.ResumeLayout(False)
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PopupMenu1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1481,7 +1805,6 @@ Partial Class FormPurcOrder
     Friend WithEvents BBSubOther As DevExpress.XtraBars.BarSubItem
     Friend WithEvents BBSetAddPrc As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents PopupMenu1 As DevExpress.XtraBars.PopupMenu
-    Friend WithEvents GridColumn52 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RICEIsCheckPO As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
     Friend WithEvents GridColumn57 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RPBRec As DevExpress.XtraEditors.Repository.RepositoryItemProgressBar
@@ -1489,4 +1812,36 @@ Partial Class FormPurcOrder
     Friend WithEvents GridColumn61 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn60 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn59 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents XTPPOList As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents GCPOItem As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVPOItem As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn62 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RepositoryItemCheckEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+    Friend WithEvents GridColumn63 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn64 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn66 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn67 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn70 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn76 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RepositoryItemProgressBar1 As DevExpress.XtraEditors.Repository.RepositoryItemProgressBar
+    Friend WithEvents GridColumn78 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn79 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn80 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn81 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents PanelControl3 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents SearchLookUpEdit1 As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView9 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn82 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn83 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LabelControl8 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents SimpleButton1 As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents SLEVendorListPO As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView10 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn84 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn85 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LabelControl9 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents GridColumn52 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn68 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn69 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn65 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

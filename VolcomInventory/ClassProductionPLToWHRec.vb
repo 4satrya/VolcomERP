@@ -62,7 +62,7 @@
     Public Sub changeStatus(ByVal id_report_par As String, ByVal id_status_reportx_par As String)
         If id_status_reportx_par = "6" Then
             'insert stock
-            Dim query_stc As String = ""
+            Dim query_stc As String = "DELETE FROM tb_storage_fg WHERE report_mark_type=37 AND id_report=" + id_report_par + "; "
             query_stc += "INSERT INTO tb_storage_fg(id_wh_drawer, id_storage_category, id_product, bom_unit_price, report_mark_type, id_report, storage_product_qty, storage_product_datetime, storage_product_notes, id_stock_status) "
             query_stc += "SELECT pl.id_wh_drawer, '1', pd_prod.id_product, dsg.design_cop , '37' , '" + id_report_par + "', pl_det.pl_prod_order_rec_det_qty, "
             query_stc += "NOW(), CONCAT('Completed, Receiving Warehouse : ', pl.pl_prod_order_rec_number), '1'   "

@@ -58,5 +58,10 @@
         LTerm.Text = bom_term
 
         load_mark_horz("8", id_bom, "2", "1", XrTable1)
+        '
+        'printed date & approved date
+        Dim qpd As String = "SELECT DATE_FORMAT(NOW(), '%d/%M/%Y %H:%i') AS `printed_date` "
+        Dim dpd As DataTable = execute_query(qpd, -1, True, "", "", "", "")
+        DataSource = dpd
     End Sub
 End Class

@@ -23,9 +23,12 @@ Partial Class FormProdTemplateKO
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormProdTemplateKO))
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
         Me.BSave = New DevExpress.XtraEditors.SimpleButton()
-        Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
         Me.GroupControl1 = New DevExpress.XtraEditors.GroupControl()
-        Me.RichEditControl1 = New DevExpress.XtraRichEdit.RichEditControl()
+        Me.XtraTabControl1 = New DevExpress.XtraTab.XtraTabControl()
+        Me.XTPUpper = New DevExpress.XtraTab.XtraTabPage()
+        Me.REUpperPart = New DevExpress.XtraRichEdit.RichEditControl()
+        Me.XTPBottom = New DevExpress.XtraTab.XtraTabPage()
+        Me.REBottomPart = New DevExpress.XtraRichEdit.RichEditControl()
         Me.GroupControl2 = New DevExpress.XtraEditors.GroupControl()
         Me.GCKOHead = New DevExpress.XtraGrid.GridControl()
         Me.GVKOHead = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -39,17 +42,22 @@ Partial Class FormProdTemplateKO
         Me.BDelHead = New DevExpress.XtraEditors.SimpleButton()
         Me.BEditHead = New DevExpress.XtraEditors.SimpleButton()
         Me.BAddHead = New DevExpress.XtraEditors.SimpleButton()
+        Me.ImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
-        CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl1.SuspendLayout()
+        CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XtraTabControl1.SuspendLayout()
+        Me.XTPUpper.SuspendLayout()
+        Me.XTPBottom.SuspendLayout()
         CType(Me.GroupControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl2.SuspendLayout()
         CType(Me.GCKOHead, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVKOHead, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl4.SuspendLayout()
+        CType(Me.ImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl2
@@ -64,25 +72,18 @@ Partial Class FormProdTemplateKO
         'BSave
         '
         Me.BSave.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BSave.ImageIndex = 7
+        Me.BSave.ImageList = Me.ImageCollection
         Me.BSave.Location = New System.Drawing.Point(766, 2)
         Me.BSave.Name = "BSave"
         Me.BSave.Size = New System.Drawing.Size(107, 34)
         Me.BSave.TabIndex = 8908
         Me.BSave.Text = "Save"
         '
-        'LargeImageCollection
-        '
-        Me.LargeImageCollection.ImageSize = New System.Drawing.Size(24, 24)
-        Me.LargeImageCollection.ImageStream = CType(resources.GetObject("LargeImageCollection.ImageStream"), DevExpress.Utils.ImageCollectionStreamer)
-        Me.LargeImageCollection.Images.SetKeyName(0, "20_24x24.png")
-        Me.LargeImageCollection.Images.SetKeyName(1, "8_24x24.png")
-        Me.LargeImageCollection.Images.SetKeyName(2, "23_24x24.png")
-        Me.LargeImageCollection.Images.SetKeyName(3, "document_32.png")
-        '
         'GroupControl1
         '
         Me.GroupControl1.CaptionLocation = DevExpress.Utils.Locations.Left
-        Me.GroupControl1.Controls.Add(Me.RichEditControl1)
+        Me.GroupControl1.Controls.Add(Me.XtraTabControl1)
         Me.GroupControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupControl1.Location = New System.Drawing.Point(0, 215)
         Me.GroupControl1.Name = "GroupControl1"
@@ -90,16 +91,50 @@ Partial Class FormProdTemplateKO
         Me.GroupControl1.TabIndex = 8907
         Me.GroupControl1.Text = "Detail"
         '
-        'RichEditControl1
+        'XtraTabControl1
         '
-        Me.RichEditControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.RichEditControl1.EnableToolTips = True
-        Me.RichEditControl1.Location = New System.Drawing.Point(20, 2)
-        Me.RichEditControl1.Name = "RichEditControl1"
-        Me.RichEditControl1.Options.Bookmarks.AllowNameResolution = False
-        Me.RichEditControl1.Size = New System.Drawing.Size(853, 263)
-        Me.RichEditControl1.TabIndex = 25
-        Me.RichEditControl1.Text = "RichEditControl1"
+        Me.XtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.XtraTabControl1.HeaderLocation = DevExpress.XtraTab.TabHeaderLocation.Bottom
+        Me.XtraTabControl1.Location = New System.Drawing.Point(20, 2)
+        Me.XtraTabControl1.Name = "XtraTabControl1"
+        Me.XtraTabControl1.SelectedTabPage = Me.XTPUpper
+        Me.XtraTabControl1.Size = New System.Drawing.Size(853, 263)
+        Me.XtraTabControl1.TabIndex = 26
+        Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPUpper, Me.XTPBottom})
+        '
+        'XTPUpper
+        '
+        Me.XTPUpper.Controls.Add(Me.REUpperPart)
+        Me.XTPUpper.Name = "XTPUpper"
+        Me.XTPUpper.Size = New System.Drawing.Size(847, 235)
+        Me.XTPUpper.Text = "Upper Part"
+        '
+        'REUpperPart
+        '
+        Me.REUpperPart.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.REUpperPart.EnableToolTips = True
+        Me.REUpperPart.Location = New System.Drawing.Point(0, 0)
+        Me.REUpperPart.Name = "REUpperPart"
+        Me.REUpperPart.Options.Bookmarks.AllowNameResolution = False
+        Me.REUpperPart.Size = New System.Drawing.Size(847, 235)
+        Me.REUpperPart.TabIndex = 25
+        '
+        'XTPBottom
+        '
+        Me.XTPBottom.Controls.Add(Me.REBottomPart)
+        Me.XTPBottom.Name = "XTPBottom"
+        Me.XTPBottom.Size = New System.Drawing.Size(847, 235)
+        Me.XTPBottom.Text = "Bottom Part"
+        '
+        'REBottomPart
+        '
+        Me.REBottomPart.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.REBottomPart.EnableToolTips = True
+        Me.REBottomPart.Location = New System.Drawing.Point(0, 0)
+        Me.REBottomPart.Name = "REBottomPart"
+        Me.REBottomPart.Options.Bookmarks.AllowNameResolution = False
+        Me.REBottomPart.Size = New System.Drawing.Size(847, 235)
+        Me.REBottomPart.TabIndex = 26
         '
         'GroupControl2
         '
@@ -200,7 +235,6 @@ Partial Class FormProdTemplateKO
         '
         Me.BDelHead.Dock = System.Windows.Forms.DockStyle.Right
         Me.BDelHead.ImageIndex = 1
-        Me.BDelHead.ImageList = Me.LargeImageCollection
         Me.BDelHead.Location = New System.Drawing.Point(578, 2)
         Me.BDelHead.Name = "BDelHead"
         Me.BDelHead.Size = New System.Drawing.Size(91, 33)
@@ -211,7 +245,6 @@ Partial Class FormProdTemplateKO
         '
         Me.BEditHead.Dock = System.Windows.Forms.DockStyle.Right
         Me.BEditHead.ImageIndex = 2
-        Me.BEditHead.ImageList = Me.LargeImageCollection
         Me.BEditHead.Location = New System.Drawing.Point(669, 2)
         Me.BEditHead.Name = "BEditHead"
         Me.BEditHead.Size = New System.Drawing.Size(91, 33)
@@ -222,12 +255,32 @@ Partial Class FormProdTemplateKO
         '
         Me.BAddHead.Dock = System.Windows.Forms.DockStyle.Right
         Me.BAddHead.ImageIndex = 0
-        Me.BAddHead.ImageList = Me.LargeImageCollection
         Me.BAddHead.Location = New System.Drawing.Point(760, 2)
         Me.BAddHead.Name = "BAddHead"
         Me.BAddHead.Size = New System.Drawing.Size(91, 33)
         Me.BAddHead.TabIndex = 18
         Me.BAddHead.Text = "Add"
+        '
+        'ImageCollection
+        '
+        Me.ImageCollection.ImageSize = New System.Drawing.Size(24, 24)
+        Me.ImageCollection.ImageStream = CType(resources.GetObject("ImageCollection.ImageStream"), DevExpress.Utils.ImageCollectionStreamer)
+        Me.ImageCollection.Images.SetKeyName(0, "20_24x24.png")
+        Me.ImageCollection.Images.SetKeyName(1, "8_24x24.png")
+        Me.ImageCollection.Images.SetKeyName(2, "23_24x24.png")
+        Me.ImageCollection.Images.SetKeyName(3, "arrow_refresh.png")
+        Me.ImageCollection.Images.SetKeyName(4, "check_mark.png")
+        Me.ImageCollection.Images.SetKeyName(5, "gnome_application_exit (1).png")
+        Me.ImageCollection.Images.SetKeyName(6, "printer_3.png")
+        Me.ImageCollection.Images.SetKeyName(7, "save.png")
+        Me.ImageCollection.Images.SetKeyName(8, "31_24x24.png")
+        Me.ImageCollection.Images.SetKeyName(9, "18_24x24.png")
+        Me.ImageCollection.Images.SetKeyName(10, "10_32x32.png")
+        Me.ImageCollection.Images.SetKeyName(11, "18_32x32.png")
+        Me.ImageCollection.Images.SetKeyName(12, "31_32x32.png")
+        Me.ImageCollection.Images.SetKeyName(13, "folder-documents-icon.png")
+        Me.ImageCollection.Images.SetKeyName(14, "mail_attachment.png")
+        Me.ImageCollection.Images.SetKeyName(15, "attachment-icon.png")
         '
         'FormProdTemplateKO
         '
@@ -245,20 +298,23 @@ Partial Class FormProdTemplateKO
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl2.ResumeLayout(False)
-        CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControl1.ResumeLayout(False)
+        CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XtraTabControl1.ResumeLayout(False)
+        Me.XTPUpper.ResumeLayout(False)
+        Me.XTPBottom.ResumeLayout(False)
         CType(Me.GroupControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControl2.ResumeLayout(False)
         CType(Me.GCKOHead, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVKOHead, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl4.ResumeLayout(False)
+        CType(Me.ImageCollection, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
     Friend WithEvents PanelControl2 As DevExpress.XtraEditors.PanelControl
-    Public WithEvents LargeImageCollection As DevExpress.Utils.ImageCollection
     Friend WithEvents GroupControl1 As DevExpress.XtraEditors.GroupControl
     Friend WithEvents GroupControl2 As DevExpress.XtraEditors.GroupControl
     Friend WithEvents GCKOHead As DevExpress.XtraGrid.GridControl
@@ -274,5 +330,10 @@ Partial Class FormProdTemplateKO
     Friend WithEvents GridColumn7 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn8 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents BSave As DevExpress.XtraEditors.SimpleButton
-    Friend WithEvents RichEditControl1 As DevExpress.XtraRichEdit.RichEditControl
+    Friend WithEvents REUpperPart As DevExpress.XtraRichEdit.RichEditControl
+    Friend WithEvents XtraTabControl1 As DevExpress.XtraTab.XtraTabControl
+    Friend WithEvents XTPUpper As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents XTPBottom As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents REBottomPart As DevExpress.XtraRichEdit.RichEditControl
+    Public WithEvents ImageCollection As DevExpress.Utils.ImageCollection
 End Class

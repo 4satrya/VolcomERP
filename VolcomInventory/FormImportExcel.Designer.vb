@@ -25,6 +25,7 @@ Partial Class FormImportExcel
         Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
         Me.BtnPrint = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnAction = New DevExpress.XtraEditors.SimpleButton()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.PBC = New DevExpress.XtraEditors.ProgressBarControl()
         Me.BCancel = New DevExpress.XtraEditors.SimpleButton()
@@ -84,6 +85,7 @@ Partial Class FormImportExcel
         'PanelControl2
         '
         Me.PanelControl2.Controls.Add(Me.BtnPrint)
+        Me.PanelControl2.Controls.Add(Me.BtnAction)
         Me.PanelControl2.Controls.Add(Me.LabelControl1)
         Me.PanelControl2.Controls.Add(Me.PBC)
         Me.PanelControl2.Controls.Add(Me.BCancel)
@@ -97,11 +99,21 @@ Partial Class FormImportExcel
         'BtnPrint
         '
         Me.BtnPrint.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BtnPrint.Location = New System.Drawing.Point(562, 2)
+        Me.BtnPrint.Location = New System.Drawing.Point(446, 2)
         Me.BtnPrint.Name = "BtnPrint"
         Me.BtnPrint.Size = New System.Drawing.Size(90, 28)
         Me.BtnPrint.TabIndex = 93
         Me.BtnPrint.Text = "Print"
+        '
+        'BtnAction
+        '
+        Me.BtnAction.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnAction.Location = New System.Drawing.Point(536, 2)
+        Me.BtnAction.Name = "BtnAction"
+        Me.BtnAction.Size = New System.Drawing.Size(116, 28)
+        Me.BtnAction.TabIndex = 94
+        Me.BtnAction.Text = "Other Action"
+        Me.BtnAction.Visible = False
         '
         'LabelControl1
         '
@@ -247,4 +259,5 @@ Partial Class FormImportExcel
     Friend WithEvents PBC As DevExpress.XtraEditors.ProgressBarControl
     Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents BtnPrint As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BtnAction As DevExpress.XtraEditors.SimpleButton
 End Class

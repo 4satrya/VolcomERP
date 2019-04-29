@@ -26,6 +26,7 @@ Partial Class FormEmpLeave
         Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnSubDept = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -40,7 +41,6 @@ Partial Class FormEmpLeave
         Me.Label2 = New System.Windows.Forms.Label()
         Me.DEStart = New DevExpress.XtraEditors.DateEdit()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GCLeave, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVLeave, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -112,6 +112,15 @@ Partial Class FormEmpLeave
         Me.GridColumnSubDept.Name = "GridColumnSubDept"
         Me.GridColumnSubDept.Visible = True
         Me.GridColumnSubDept.VisibleIndex = 4
+        '
+        'GridColumn10
+        '
+        Me.GridColumn10.Caption = "Employee Level"
+        Me.GridColumn10.FieldName = "employee_level"
+        Me.GridColumn10.Name = "GridColumn10"
+        Me.GridColumn10.OptionsFilter.FilterPopupMode = DevExpress.XtraGrid.Columns.FilterPopupMode.CheckedList
+        Me.GridColumn10.Visible = True
+        Me.GridColumn10.VisibleIndex = 5
         '
         'GridColumn3
         '
@@ -249,15 +258,6 @@ Partial Class FormEmpLeave
         Me.Label1.Size = New System.Drawing.Size(41, 13)
         Me.Label1.TabIndex = 8
         Me.Label1.Text = "From : "
-        '
-        'GridColumn10
-        '
-        Me.GridColumn10.Caption = "Employee Level"
-        Me.GridColumn10.FieldName = "employee_level"
-        Me.GridColumn10.Name = "GridColumn10"
-        Me.GridColumn10.OptionsFilter.FilterPopupMode = DevExpress.XtraGrid.Columns.FilterPopupMode.CheckedList
-        Me.GridColumn10.Visible = True
-        Me.GridColumn10.VisibleIndex = 5
         '
         'FormEmpLeave
         '

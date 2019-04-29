@@ -18,7 +18,7 @@
     Sub load_emp()
         Dim query As String = ""
         If id_payroll_type = "1" Then
-            query = "SELECT 'no' AS is_check,emp.id_employee,dep.total_workdays,dep.is_store,emp.employee_code,emp.employee_name,dep.departement,emp.employee_join_date,emp.employee_position,active.employee_active,salx.*
+            query = "SELECT 'no' AS is_check,emp.id_employee,(SELECT COUNT(*) FROM tb_emp_schedule WHERE id_schedule_type IN (1, 3) AND id_employee = emp.id_employee AND date BETWEEN (SELECT periode_start FROM tb_emp_payroll WHERE id_payroll = '" + id_payroll + "') AND (SELECT periode_end FROM tb_emp_payroll WHERE id_payroll = '" + id_payroll + "')) AS actual_workdays,dep.total_workdays,dep.is_store,emp.employee_code,emp.employee_name,dep.departement,emp.employee_join_date,emp.employee_position,active.employee_active,salx.*
                                 FROM tb_m_employee emp
                                 INNER JOIN tb_m_departement dep ON dep.id_departement=emp.id_departement
                                 INNER JOIN tb_lookup_employee_level lvl ON lvl.id_employee_level=emp.id_employee_level 
@@ -27,12 +27,12 @@
 	                                SELECT sal.* FROM (
 		                                SELECT * FROM tb_m_employee_salary sal
 		                                WHERE is_cancel='2'
-		                                ORDER BY sal.`effective_date` DESC,sal.`id_employee_salary` DESC
+		                                ORDER BY sal.`id_employee_salary` DESC
 	                                ) sal GROUP BY id_employee
                                 ) salx ON salx.id_employee = emp.`id_employee`
                                 WHERE emp.id_employee NOT IN (SELECT id_employee FROM tb_emp_payroll_det WHERE id_payroll='" & id_payroll & "')"
         ElseIf id_payroll_type = "2" Then 'thr
-            query = "SELECT 'no' AS is_check,emp.id_employee,dep.total_workdays,dep.is_store,emp.employee_code,emp.employee_name,dep.departement,emp.employee_join_date,emp.employee_position,active.employee_active,salx.*
+            query = "SELECT 'no' AS is_check,emp.id_employee,(SELECT COUNT(*) FROM tb_emp_schedule WHERE id_schedule_type IN (1, 3) AND id_employee = emp.id_employee AND date BETWEEN (SELECT periode_start FROM tb_emp_payroll WHERE id_payroll = '" + id_payroll + "') AND (SELECT periode_end FROM tb_emp_payroll WHERE id_payroll = '" + id_payroll + "')) AS actual_workdays,dep.total_workdays,dep.is_store,emp.employee_code,emp.employee_name,dep.departement,emp.employee_join_date,emp.employee_position,active.employee_active,salx.*
                     ,TIMESTAMPDIFF(MONTH, emp.`employee_join_date`, DATE(NOW())) AS month_diff
                     FROM tb_m_employee emp
                     INNER JOIN tb_m_departement dep ON dep.id_departement=emp.id_departement
@@ -42,7 +42,7 @@
 	                    SELECT sal.* FROM (
 		                    SELECT * FROM tb_m_employee_salary sal
 		                    WHERE is_cancel='2'
-		                    ORDER BY sal.`effective_date` DESC,sal.`id_employee_salary` DESC
+		                    ORDER BY sal.`id_employee_salary` DESC
 	                    ) sal GROUP BY id_employee
                     ) salx ON salx.id_employee = emp.`id_employee`
                     WHERE 
@@ -50,7 +50,7 @@
                     AND emp.`id_employee_active`='1'
                     AND TIMESTAMPDIFF(MONTH, emp.`employee_join_date`, DATE(NOW())) >= (SELECT min_month_bonus FROM tb_opt_emp LIMIT 1)"
         ElseIf id_payroll_type = "3" Then 'bonus
-            query = "SELECT 'no' AS is_check,emp.id_employee,dep.total_workdays,dep.is_store,emp.employee_code,emp.employee_name,dep.departement,emp.employee_join_date,emp.employee_position,active.employee_active,salx.*
+            query = "SELECT 'no' AS is_check,emp.id_employee,(SELECT COUNT(*) FROM tb_emp_schedule WHERE id_schedule_type IN (1, 3) AND id_employee = emp.id_employee AND date BETWEEN (SELECT periode_start FROM tb_emp_payroll WHERE id_payroll = '" + id_payroll + "') AND (SELECT periode_end FROM tb_emp_payroll WHERE id_payroll = '" + id_payroll + "')) AS actual_workdays,dep.total_workdays,dep.is_store,emp.employee_code,emp.employee_name,dep.departement,emp.employee_join_date,emp.employee_position,active.employee_active,salx.*
                     ,TIMESTAMPDIFF(MONTH, emp.`employee_join_date`, DATE(NOW())) AS month_diff
                     FROM tb_m_employee emp
                     INNER JOIN tb_m_departement dep ON dep.id_departement=emp.id_departement
@@ -60,7 +60,7 @@
 	                    SELECT sal.* FROM (
 		                    SELECT * FROM tb_m_employee_salary sal
 		                    WHERE is_cancel='2'
-		                    ORDER BY sal.`effective_date` DESC,sal.`id_employee_salary` DESC
+		                    ORDER BY sal.`id_employee_salary` DESC
 	                    ) sal GROUP BY id_employee
                     ) salx ON salx.id_employee = emp.`id_employee`
                     WHERE 
@@ -114,10 +114,11 @@
                 Dim id_employee As String = GVEmployee.GetRowCellValue(i, "id_employee").ToString
                 Dim id_salary As String = GVEmployee.GetRowCellValue(i, "id_employee_salary").ToString
                 Dim workdays As String = decimalSQL(GVEmployee.GetRowCellValue(i, "total_workdays").ToString)
+                Dim actual_workdays As String = decimalSQL(GVEmployee.GetRowCellValue(i, "actual_workdays").ToString)
                 If Not i = 0 Then
                     query += ","
                 End If
-                query += "('" & id_payroll & "','" & id_employee & "','" & id_salary & "','" & workdays & "','" & workdays & "')"
+                query += "('" & id_payroll & "','" & id_employee & "','" & id_salary & "','" & workdays & "','" & actual_workdays & "')"
             Next
             execute_non_query(query, True, "", "", "", "")
         End If
@@ -132,8 +133,8 @@
         Dim query As String = ""
 
         If id_payroll_type = "1" Then
-            query = "INSERT INTO tb_emp_payroll_det(id_payroll,id_employee,id_salary,workdays)
-                                SELECT '" & id_payroll & "' as id_payroll,emp.id_employee,salx.id_employee_salary,dep.total_workdays
+            query = "INSERT INTO tb_emp_payroll_det(id_payroll,id_employee,id_salary,workdays,actual_workdays)
+                                SELECT '" & id_payroll & "' as id_payroll,emp.id_employee,salx.id_employee_salary,dep.total_workdays,(SELECT COUNT(*) FROM tb_emp_schedule WHERE id_schedule_type IN (1, 3) AND id_employee = emp.id_employee AND date BETWEEN (SELECT periode_start FROM tb_emp_payroll WHERE id_payroll = '" + id_payroll + "') AND (SELECT periode_end FROM tb_emp_payroll WHERE id_payroll = '" + id_payroll + "')) AS actual_workdays
                                 FROM tb_m_employee emp
                                 INNER JOIN tb_m_departement dep ON dep.id_departement=emp.id_departement
                                 INNER JOIN tb_lookup_employee_level lvl ON lvl.id_employee_level=emp.id_employee_level 
@@ -147,8 +148,8 @@
                                 ) salx ON salx.id_employee = emp.`id_employee`
                                 WHERE emp.id_employee_active='1' AND emp.id_employee NOT IN (SELECT id_employee FROM tb_emp_payroll_det WHERE id_payroll='" & id_payroll & "')"
         ElseIf id_payroll_type = "2" Then 'thr
-            query = "INSERT INTO tb_emp_payroll_det(id_payroll,id_employee,id_salary,workdays)
-                        SELECT '" & id_payroll & "' AS id_payroll,emp.id_employee,salx.id_employee_salary,dep.total_workdays
+            query = "INSERT INTO tb_emp_payroll_det(id_payroll,id_employee,id_salary,workdays,actual_workdays)
+                        SELECT '" & id_payroll & "' AS id_payroll,emp.id_employee,salx.id_employee_salary,dep.total_workdays,(SELECT COUNT(*) FROM tb_emp_schedule WHERE id_schedule_type IN (1, 3) AND id_employee = emp.id_employee AND date BETWEEN (SELECT periode_start FROM tb_emp_payroll WHERE id_payroll = '" + id_payroll + "') AND (SELECT periode_end FROM tb_emp_payroll WHERE id_payroll = '" + id_payroll + "')) AS actual_workdays
                         FROM tb_m_employee emp
                         INNER JOIN tb_m_departement dep ON dep.id_departement=emp.id_departement
                         INNER JOIN tb_lookup_employee_level lvl ON lvl.id_employee_level=emp.id_employee_level 
@@ -163,8 +164,8 @@
                         WHERE emp.id_employee_active='1' AND emp.id_employee NOT IN (SELECT id_employee FROM tb_emp_payroll_det WHERE id_payroll='" & id_payroll & "')
                         AND TIMESTAMPDIFF(MONTH, emp.`employee_join_date`, DATE(NOW())) >= (SELECT min_month_thr FROM tb_opt_emp LIMIT 1)"
         ElseIf id_payroll_type = "3" Then 'bonus
-            query = "INSERT INTO tb_emp_payroll_det(id_payroll,id_employee,id_salary,workdays)
-                        SELECT '" & id_payroll & "' AS id_payroll,emp.id_employee,salx.id_employee_salary,dep.total_workdays
+            query = "INSERT INTO tb_emp_payroll_det(id_payroll,id_employee,id_salary,workdays,actual_workdays)
+                        SELECT '" & id_payroll & "' AS id_payroll,emp.id_employee,salx.id_employee_salary,dep.total_workdays,(SELECT COUNT(*) FROM tb_emp_schedule WHERE id_schedule_type IN (1, 3) AND id_employee = emp.id_employee AND date BETWEEN (SELECT periode_start FROM tb_emp_payroll WHERE id_payroll = '" + id_payroll + "') AND (SELECT periode_end FROM tb_emp_payroll WHERE id_payroll = '" + id_payroll + "')) AS actual_workdays
                         FROM tb_m_employee emp
                         INNER JOIN tb_m_departement dep ON dep.id_departement=emp.id_departement
                         INNER JOIN tb_lookup_employee_level lvl ON lvl.id_employee_level=emp.id_employee_level 

@@ -40,18 +40,6 @@
         ElseIf data.Rows(0)("id_pd_kind").ToString = "3" Then
             rmt = "145"
         End If
-
-
-        If is_view = "1" Then
-            'cek file
-            Dim query_file As String = "SELECT * FROM tb_doc d WHERE d.report_mark_type=" + rmt + " AND d.id_report=" + id + ""
-            Dim data_file As DataTable = execute_query(query_file, -1, True, "", "", "", "")
-            If data_file.Rows.Count <= 0 Then
-                warningCustom("No file attached, can't process this PD")
-                Close()
-            End If
-        End If
-
         viewDetail()
         allow_status()
     End Sub
@@ -84,11 +72,13 @@
             BtnMark.Visible = False
             MENote.Enabled = False
             PanelControlNav.Visible = True
+            BtnPrint.Visible = False
         Else
             BtnConfirm.Visible = False
             BtnMark.Visible = True
             MENote.Enabled = False
             PanelControlNav.Visible = False
+            BtnPrint.Visible = True
         End If
 
         If id_report_status = "6" Then
@@ -186,11 +176,11 @@
         Cursor = Cursors.WaitCursor
         'cek file
         Dim cond_exist_file As Boolean = True
-        Dim query_file As String = "SELECT * FROM tb_doc d WHERE d.report_mark_type=" + rmt + " AND d.id_report=" + id + ""
-        Dim data_file As DataTable = execute_query(query_file, -1, True, "", "", "", "")
-        If data_file.Rows.Count <= 0 Then
-            cond_exist_file = False
-        End If
+        'Dim query_file As String = "SELECT * FROM tb_doc d WHERE d.report_mark_type=" + rmt + " AND d.id_report=" + id + ""
+        'Dim data_file As DataTable = execute_query(query_file, -1, True, "", "", "", "")
+        'If data_file.Rows.Count <= 0 Then
+        '    cond_exist_file = False
+        'End If
 
         If Not cond_exist_file Then
             stopCustom("Please attach document first")
@@ -204,8 +194,8 @@
                 Dim query As String = "UPDATE tb_prod_demand_rev SET is_confirm=1 WHERE id_prod_demand_rev='" + id + "'"
                 execute_non_query(query, True, "", "", "", "")
 
-                'submit approval move to create new
-                'submit_who_prepared(rmt, id, id_user)
+                'submit approval 
+                submit_who_prepared(rmt, id, id_user)
                 BtnConfirm.Visible = False
                 actionLoad()
                 infoCustom("PD Revision submitted. Waiting for approval.")
@@ -217,123 +207,81 @@
 
     Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles BtnPrint.Click
         Cursor = Cursors.WaitCursor
-        Dim gv As DevExpress.XtraGrid.Views.Grid.GridView = Nothing
-        If XTCRevision.SelectedTabPageIndex = 0 Then
-            gv = GVRevision
-            ReportProdDemandRev.dt = GCRevision.DataSource
-            ReportProdDemandRev.type = "1"
-        ElseIf XTCRevision.SelectedTabPageIndex = 1 Then
-            gv = GVData
-            ReportProdDemandRev.dt = GCData.DataSource
-            ReportProdDemandRev.type = "2"
-        End If
-        ReportProdDemandRev.id = id
-        If id_report_status <> "6" Then
-            FormProdDemandPrintOpt.id = id
-            FormProdDemandPrintOpt.rmt = rmt
-            FormProdDemandPrintOpt.ShowDialog()
-            ReportProdDemandRev.is_pre = "1"
+        If Not check_allow_print(id_report_status, rmt, id) Then
+            warningCustom("Can't print, please complete all approval on system first")
         Else
-            ReportProdDemandRev.is_pre = "-1"
+            Dim gv As DevExpress.XtraGrid.Views.Grid.GridView = Nothing
+            If XTCRevision.SelectedTabPageIndex = 0 Then
+                gv = GVRevision
+                ReportProdDemandRev.dt = GCRevision.DataSource
+                ReportProdDemandRev.type = "1"
+            ElseIf XTCRevision.SelectedTabPageIndex = 1 Then
+                gv = GVData
+                ReportProdDemandRev.dt = GCData.DataSource
+                ReportProdDemandRev.type = "2"
+            End If
+            ReportProdDemandRev.id = id
+            If id_report_status <> "6" Then
+                ReportProdDemandRev.is_pre = "1"
+            Else
+                ReportProdDemandRev.is_pre = "-1"
+            End If
+            ReportProdDemandRev.id_report_status = LEReportStatus.EditValue.ToString
+
+            ReportProdDemandRev.rmt = rmt
+            Dim Report As New ReportProdDemandRev()
+
+            '' '... 
+            '' ' creating and saving the view's layout to a new memory stream 
+            Dim str As System.IO.Stream
+            str = New System.IO.MemoryStream()
+            gv.SaveLayoutToStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+            str.Seek(0, System.IO.SeekOrigin.Begin)
+            Report.GVData.RestoreLayoutFromStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+            str.Seek(0, System.IO.SeekOrigin.Begin)
+
+            'style
+            Report.GVData.OptionsPrint.UsePrintStyles = True
+            Report.GVData.AppearancePrint.FilterPanel.BackColor = Color.Transparent
+            Report.GVData.AppearancePrint.FilterPanel.ForeColor = Color.Black
+            Report.GVData.AppearancePrint.FilterPanel.Font = New Font("Tahoma", 5, FontStyle.Regular)
+
+            Report.GVData.AppearancePrint.GroupFooter.BackColor = Color.Transparent
+            Report.GVData.AppearancePrint.GroupFooter.ForeColor = Color.Black
+            Report.GVData.AppearancePrint.GroupFooter.Font = New Font("Tahoma", 5, FontStyle.Bold)
+
+            Report.GVData.AppearancePrint.GroupRow.BackColor = Color.Transparent
+            Report.GVData.AppearancePrint.GroupRow.ForeColor = Color.Black
+            Report.GVData.AppearancePrint.GroupRow.Font = New Font("Tahoma", 5, FontStyle.Bold)
+
+
+            Report.GVData.AppearancePrint.HeaderPanel.BackColor = Color.Transparent
+            Report.GVData.AppearancePrint.HeaderPanel.ForeColor = Color.Black
+            Report.GVData.AppearancePrint.HeaderPanel.Font = New Font("Tahoma", 5, FontStyle.Bold)
+
+            Report.GVData.AppearancePrint.FooterPanel.BackColor = Color.Transparent
+            Report.GVData.AppearancePrint.FooterPanel.ForeColor = Color.Black
+            Report.GVData.AppearancePrint.FooterPanel.Font = New Font("Tahoma", 5.3, FontStyle.Bold)
+
+            Report.GVData.AppearancePrint.Row.Font = New Font("Tahoma", 5.3, FontStyle.Regular)
+
+            Report.GVData.OptionsPrint.ExpandAllDetails = True
+            Report.GVData.OptionsPrint.UsePrintStyles = True
+            Report.GVData.OptionsPrint.PrintDetails = True
+            Report.GVData.OptionsPrint.PrintFooter = True
+
+            Report.LabelNumber.Text = TxtProdDemandNumber.Text
+            Report.LabelRev.Text = TxtRevision.Text
+            Report.LabelDate.Text = DECreated.Text.ToUpper
+            Report.LabelSeason.Text = season.ToUpper
+            Report.LabelStatus.Text = LEReportStatus.Text.ToUpper
+            Report.LNote.Text = MENote.Text
+
+            ' Show the report's preview. 
+            Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
+            Tool.ShowPreviewDialog()
         End If
-        ReportProdDemandRev.id_report_status = LEReportStatus.EditValue.ToString
-
-        ReportProdDemandRev.rmt = rmt
-        Dim Report As New ReportProdDemandRev()
-
-        '' '... 
-        '' ' creating and saving the view's layout to a new memory stream 
-        Dim str As System.IO.Stream
-        str = New System.IO.MemoryStream()
-        gv.SaveLayoutToStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
-        str.Seek(0, System.IO.SeekOrigin.Begin)
-        Report.GVData.RestoreLayoutFromStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
-        str.Seek(0, System.IO.SeekOrigin.Begin)
-
-        'style
-        Report.GVData.OptionsPrint.UsePrintStyles = True
-        Report.GVData.AppearancePrint.FilterPanel.BackColor = Color.Transparent
-        Report.GVData.AppearancePrint.FilterPanel.ForeColor = Color.Black
-        Report.GVData.AppearancePrint.FilterPanel.Font = New Font("Tahoma", 5, FontStyle.Regular)
-
-        Report.GVData.AppearancePrint.GroupFooter.BackColor = Color.Transparent
-        Report.GVData.AppearancePrint.GroupFooter.ForeColor = Color.Black
-        Report.GVData.AppearancePrint.GroupFooter.Font = New Font("Tahoma", 5, FontStyle.Bold)
-
-        Report.GVData.AppearancePrint.GroupRow.BackColor = Color.Transparent
-        Report.GVData.AppearancePrint.GroupRow.ForeColor = Color.Black
-        Report.GVData.AppearancePrint.GroupRow.Font = New Font("Tahoma", 5, FontStyle.Bold)
-
-
-        Report.GVData.AppearancePrint.HeaderPanel.BackColor = Color.Transparent
-        Report.GVData.AppearancePrint.HeaderPanel.ForeColor = Color.Black
-        Report.GVData.AppearancePrint.HeaderPanel.Font = New Font("Tahoma", 5, FontStyle.Bold)
-
-        Report.GVData.AppearancePrint.FooterPanel.BackColor = Color.Transparent
-        Report.GVData.AppearancePrint.FooterPanel.ForeColor = Color.Black
-        Report.GVData.AppearancePrint.FooterPanel.Font = New Font("Tahoma", 5.3, FontStyle.Bold)
-
-        Report.GVData.AppearancePrint.Row.Font = New Font("Tahoma", 5.3, FontStyle.Regular)
-
-        Report.GVData.OptionsPrint.ExpandAllDetails = True
-        Report.GVData.OptionsPrint.UsePrintStyles = True
-        Report.GVData.OptionsPrint.PrintDetails = True
-        Report.GVData.OptionsPrint.PrintFooter = True
-
-        Report.LabelNumber.Text = TxtProdDemandNumber.Text
-        Report.LabelRev.Text = TxtRevision.Text
-        Report.LabelDate.Text = DECreated.Text.ToUpper
-        Report.LabelSeason.Text = season.ToUpper
-        Report.LabelStatus.Text = LEReportStatus.Text.ToUpper
-        Report.LNote.Text = MENote.Text
-
-        ' Show the report's preview. 
-        Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
-        Tool.ShowPreviewDialog()
         Cursor = Cursors.Default
-
-        'If id_report_status = "6" Then
-        '    Cursor = Cursors.WaitCursor
-        '    ReportProdDemandRev.id = id
-        '    ReportProdDemandRev.rmt = rmt
-        '    If XTCRevision.SelectedTabPageIndex = 0 Then
-        '        ReportProdDemandRev.dt = GCRevision.DataSource
-        '        ReportProdDemandRev.type = "1"
-        '    ElseIf XTCRevision.SelectedTabPageIndex = 1 Then
-        '        ReportProdDemandRev.dt = GCData.DataSource
-        '        ReportProdDemandRev.type = "2"
-        '    End If
-        '    Dim Report As New ReportProdDemandRev()
-
-        '    ' '... 
-        '    ' ' creating and saving the view's layout to a new memory stream 
-        '    Dim str As System.IO.Stream
-        '    str = New System.IO.MemoryStream()
-        '    GVData.SaveLayoutToStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
-        '    str.Seek(0, System.IO.SeekOrigin.Begin)
-        '    Report.GVData.RestoreLayoutFromStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
-        '    str.Seek(0, System.IO.SeekOrigin.Begin)
-
-        '    'Grid Detail
-        '    ReportStyleGridview(Report.GVData)
-
-        '    'Parse val
-        '    Report.LabelNumber.Text = TxtProdDemandNumber.Text
-        '    Report.LabelRev.Text = TxtRevision.Text
-
-        '    'Show the report's preview. 
-        '    Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
-        '    Tool.PrintingSystem.SetCommandVisibility(DevExpress.XtraPrinting.PrintingSystemCommand.ExportFile, DevExpress.XtraPrinting.CommandVisibility.None)
-        '    Tool.PrintingSystem.SetCommandVisibility(DevExpress.XtraPrinting.PrintingSystemCommand.SendFile, DevExpress.XtraPrinting.CommandVisibility.None)
-        '    Tool.ShowRibbonPreviewDialog()
-        '    Cursor = Cursors.Default
-        'Else
-        '    If XTCRevision.SelectedTabPageIndex = 0 Then
-        '        print_raw_no_export(GCRevision)
-        '    ElseIf XTCRevision.SelectedTabPageIndex = 1 Then
-        '        print_raw_no_export(GCData)
-        '    End If
-        'End If
     End Sub
 
     Private Sub BtnAttachment_Click(sender As Object, e As EventArgs) Handles BtnAttachment.Click
@@ -351,7 +299,7 @@
         Cursor = Cursors.WaitCursor
         FormReportMark.report_mark_type = rmt
         FormReportMark.id_report = id
-        FormReportMark.is_view = "1"
+        FormReportMark.is_view = is_view
         FormReportMark.form_origin = Name
         FormReportMark.ShowDialog()
         Cursor = Cursors.Default

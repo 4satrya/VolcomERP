@@ -3,6 +3,7 @@
     Dim bedit_active As String = "1"
     Dim bdel_active As String = "1"
     Public is_new As Boolean = False
+    Public is_admin As String = "-1"
 
     Private Sub FormBudgetExpensePropose_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewData()
@@ -10,7 +11,10 @@
 
     Sub viewData()
         Cursor = Cursors.WaitCursor
-        Dim cond_dept As String = "AND p.id_departement='" + id_departement_user + "' "
+        Dim cond_dept As String = ""
+        If is_admin = "-1" Then
+            cond_dept = "AND p.id_departement='" + id_departement_user + "' "
+        End If
         Dim r As New ClassBudgetExpensePropose()
         Dim query As String = r.queryMain(cond_dept, "2")
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")

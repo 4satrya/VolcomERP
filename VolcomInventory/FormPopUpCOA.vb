@@ -10,7 +10,7 @@ Public Class FormPopUpCOA
     Private helpery As MyTreeListSearchHelper
 
     Private Sub FormPopUpCOA_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        If id_pop_up = "8" Or id_pop_up = "9" Or id_pop_up = "10" Then
+        If id_pop_up = "8" Or id_pop_up = "9" Or id_pop_up = "10" Or id_pop_up = "11" Or id_pop_up = "12" Then
             XTPOpenTrans.PageVisible = False
             XTPAccount.PageVisible = False
         End If
@@ -340,6 +340,18 @@ Public Class FormPopUpCOA
             Dim query As String = "UPDATE tb_item_coa_propose SET acc_coa_trf='" + GVAcc.GetFocusedRowCellValue("id_acc").ToString + "' WHERE id_item_coa_propose='" + id + "' "
             execute_non_query(query, True, "", "", "", "")
             FormItemCatMappingDet.loadMain()
+            Close()
+        ElseIf id_pop_up = "11" Then 'general setup
+            'receive account
+            FormAccounting.acc_coa_receive = GVAcc.GetFocusedRowCellValue("id_acc").ToString
+            FormAccounting.TxtRecAccount.Text = GVAcc.GetFocusedRowCellValue("acc_name").ToString
+            FormAccounting.TxtRecDesc.Text = GVAcc.GetFocusedRowCellValue("acc_description").ToString
+            Close()
+        ElseIf id_pop_up = "12" Then 'general setup
+            'vat account
+            FormAccounting.acc_coa_vat_in = GVAcc.GetFocusedRowCellValue("id_acc").ToString
+            FormAccounting.TxtVATAccount.Text = GVAcc.GetFocusedRowCellValue("acc_name").ToString
+            FormAccounting.TxtVATDesc.Text = GVAcc.GetFocusedRowCellValue("acc_description").ToString
             Close()
         End If
     End Sub

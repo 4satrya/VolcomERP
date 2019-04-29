@@ -11,10 +11,30 @@
                                 INNER jOIN tb_m_departement dep ON dep.id_departement=emp.id_departement
                                 INNER JOIN `tb_lookup_employee_level` lvl ON lvl.`id_employee_level`=emp.`id_employee_level`
                                 INNER JOIN `tb_lookup_salary_deduction` sald ON sald.`id_salary_deduction`=pyd.`id_salary_deduction`
-                                WHERE pyd.`id_payroll`='" & id_payroll & "'"
+                                WHERE pyd.`id_payroll`='" & id_payroll & "'
+                                ORDER BY emp.`id_employee` ASC, sald.`id_salary_deduction` ASC"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCDeduction.DataSource = data
         GVDeduction.BestFitColumns()
+
+        'controls
+        Dim id_report_status As String = execute_query("SELECT id_report_status FROM tb_emp_payroll WHERE id_payroll = '" + id_payroll + "'", 0, True, "", "", "", "")
+
+        If id_report_status = "0" Then
+            BAdd.Enabled = True
+            BEdit.Enabled = True
+            BDel.Enabled = True
+
+            BtnDropQuickMenu.Enabled = True
+            DropDownButton1.Enabled = True
+        Else
+            BAdd.Enabled = False
+            BEdit.Enabled = False
+            BDel.Enabled = False
+
+            BtnDropQuickMenu.Enabled = False
+            DropDownButton1.Enabled = False
+        End If
     End Sub
 
     Private Sub BBJamsostek_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BBJamsostek.ItemClick
@@ -63,5 +83,11 @@
     Private Sub BarButtonItem3_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem3.ItemClick
         FormImportExcel.id_pop_up = "36"
         FormImportExcel.ShowDialog()
+    End Sub
+
+    Private Sub FormEmpPayrollDeduction_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        FormEmpPayroll.load_payroll_detail()
+
+        Dispose()
     End Sub
 End Class

@@ -63,6 +63,6 @@ Public Class ReportMatMRS
     End Sub
 
     Private Sub ReportMatWO_BeforePrint(ByVal sender As System.Object, ByVal e As System.Drawing.Printing.PrintEventArgs) Handles MyBase.BeforePrint
-        load_mark_horz("44", id_mrs, "2", "1", XrTable1)
+        pre_load_mark_horz("44", id_mrs, "2", "2", XrTable1)
     End Sub
 End Class

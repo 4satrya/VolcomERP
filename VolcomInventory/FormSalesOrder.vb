@@ -268,7 +268,20 @@
 
     Public Function isWHProcess() As Boolean
         Dim so As New ClassSalesOrder()
-        Dim qcek As String = so.queryMain("AND a.id_sales_order='" + GVSalesOrder.GetFocusedRowCellValue("id_sales_order").ToString + "' AND ISNULL(lp.printed_by) ", "1")
+        Dim qcek As String = "SELECT a.id_sales_order 
+        FROM tb_sales_order a
+        LEFT JOIN (
+           SELECT a.id_sales_order, a.log_date AS `printed_date`, e.employee_name AS `printed_by` 
+           FROM (
+              SELECT * FROM tb_sales_order_log_print lp
+              ORDER BY lp.log_date ASC
+           ) a 
+           INNER JOIN tb_m_user u ON u.id_user = a.id_user
+           INNER JOIN tb_m_employee e ON e.id_employee = u.id_employee
+           GROUP BY a.id_sales_order
+        ) lp ON lp.id_sales_order = a.id_sales_order 
+        WHERE a.id_sales_order>0 AND a.id_sales_order='" + GVSalesOrder.GetFocusedRowCellValue("id_sales_order").ToString + "' AND ISNULL(lp.printed_by) "
+        'Dim qcek As String = so.queryMain("AND a.id_sales_order='" + GVSalesOrder.GetFocusedRowCellValue("id_sales_order").ToString + "' AND ISNULL(lp.printed_by) ", "1")
         Dim dcek As DataTable = execute_query(qcek, -1, True, "", "", "", "")
         If dcek.Rows.Count > 0 Then
             Return False
@@ -291,6 +304,14 @@
                 warningCustom("Already process by Warehouse Department")
             End If
             Cursor = Cursors.Default
+        End If
+    End Sub
+
+    Private Sub ContextMenuStrip1_Opened(sender As Object, e As EventArgs) Handles ContextMenuStrip1.Opened
+        If GVSalesOrder.GetFocusedRowCellValue("id_report_status").ToString <> "6" Then
+            CancellOrderToolStripMenuItem1.Enabled = False
+        Else
+            CancellOrderToolStripMenuItem1.Enabled = True
         End If
     End Sub
 End Class

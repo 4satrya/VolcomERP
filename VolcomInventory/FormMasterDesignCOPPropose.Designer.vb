@@ -23,6 +23,7 @@ Partial Class FormMasterDesignCOPPropose
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMasterDesignCOPPropose))
         Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.BAttach = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnPrint = New DevExpress.XtraEditors.SimpleButton()
         Me.BMark = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnCancel = New DevExpress.XtraEditors.SimpleButton()
@@ -81,7 +82,7 @@ Partial Class FormMasterDesignCOPPropose
         Me.LabelControl18 = New DevExpress.XtraEditors.LabelControl()
         Me.LEReportStatus = New DevExpress.XtraEditors.LookUpEdit()
         Me.PanelControlBottomLeft = New DevExpress.XtraEditors.PanelControl()
-        Me.BAttach = New DevExpress.XtraEditors.SimpleButton()
+        Me.CENeedMarketing = New DevExpress.XtraEditors.CheckEdit()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
@@ -107,6 +108,7 @@ Partial Class FormMasterDesignCOPPropose
         CType(Me.LEReportStatus.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControlBottomLeft, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlBottomLeft.SuspendLayout()
+        CType(Me.CENeedMarketing.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LargeImageCollection
@@ -142,6 +144,18 @@ Partial Class FormMasterDesignCOPPropose
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(886, 41)
         Me.PanelControl1.TabIndex = 1
+        '
+        'BAttach
+        '
+        Me.BAttach.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BAttach.ImageIndex = 16
+        Me.BAttach.ImageList = Me.LargeImageCollection
+        Me.BAttach.Location = New System.Drawing.Point(554, 2)
+        Me.BAttach.Name = "BAttach"
+        Me.BAttach.Size = New System.Drawing.Size(105, 37)
+        Me.BAttach.TabIndex = 16
+        Me.BAttach.TabStop = False
+        Me.BAttach.Text = "Attachment"
         '
         'BtnPrint
         '
@@ -352,7 +366,7 @@ Partial Class FormMasterDesignCOPPropose
         Me.GCItemList.MainView = Me.BGVItemList
         Me.GCItemList.Name = "GCItemList"
         Me.GCItemList.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemSpinEdit1, Me.RISLEItem})
-        Me.GCItemList.Size = New System.Drawing.Size(886, 268)
+        Me.GCItemList.Size = New System.Drawing.Size(886, 243)
         Me.GCItemList.TabIndex = 6
         Me.GCItemList.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.BGVItemList})
         '
@@ -684,7 +698,7 @@ Partial Class FormMasterDesignCOPPropose
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.MENote.Location = New System.Drawing.Point(61, 35)
         Me.MENote.Name = "MENote"
-        Me.MENote.Properties.MaxLength = 100
+        Me.MENote.Properties.MaxLength = 1000
         Me.MENote.Size = New System.Drawing.Size(809, 49)
         Me.MENote.TabIndex = 6
         '
@@ -715,27 +729,24 @@ Partial Class FormMasterDesignCOPPropose
         'PanelControlBottomLeft
         '
         Me.PanelControlBottomLeft.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelControlBottomLeft.Controls.Add(Me.CENeedMarketing)
         Me.PanelControlBottomLeft.Controls.Add(Me.LabelControl21)
         Me.PanelControlBottomLeft.Controls.Add(Me.MENote)
         Me.PanelControlBottomLeft.Controls.Add(Me.LEReportStatus)
         Me.PanelControlBottomLeft.Controls.Add(Me.LabelControl18)
         Me.PanelControlBottomLeft.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControlBottomLeft.Location = New System.Drawing.Point(0, 378)
+        Me.PanelControlBottomLeft.Location = New System.Drawing.Point(0, 353)
         Me.PanelControlBottomLeft.Name = "PanelControlBottomLeft"
-        Me.PanelControlBottomLeft.Size = New System.Drawing.Size(886, 97)
+        Me.PanelControlBottomLeft.Size = New System.Drawing.Size(886, 122)
         Me.PanelControlBottomLeft.TabIndex = 172
         '
-        'BAttach
+        'CENeedMarketing
         '
-        Me.BAttach.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BAttach.ImageIndex = 16
-        Me.BAttach.ImageList = Me.LargeImageCollection
-        Me.BAttach.Location = New System.Drawing.Point(554, 2)
-        Me.BAttach.Name = "BAttach"
-        Me.BAttach.Size = New System.Drawing.Size(105, 37)
-        Me.BAttach.TabIndex = 16
-        Me.BAttach.TabStop = False
-        Me.BAttach.Text = "Attachment"
+        Me.CENeedMarketing.Location = New System.Drawing.Point(61, 90)
+        Me.CENeedMarketing.Name = "CENeedMarketing"
+        Me.CENeedMarketing.Properties.Caption = "Need Marketing Approval"
+        Me.CENeedMarketing.Size = New System.Drawing.Size(151, 19)
+        Me.CENeedMarketing.TabIndex = 145
         '
         'FormMasterDesignCOPPropose
         '
@@ -781,6 +792,7 @@ Partial Class FormMasterDesignCOPPropose
         CType(Me.PanelControlBottomLeft, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControlBottomLeft.ResumeLayout(False)
         Me.PanelControlBottomLeft.PerformLayout()
+        CType(Me.CENeedMarketing.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -846,4 +858,5 @@ Partial Class FormMasterDesignCOPPropose
     Friend WithEvents GridColumnECOPExclude As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents GridColumnECOPExcludeBefore As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents BAttach As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents CENeedMarketing As DevExpress.XtraEditors.CheckEdit
 End Class

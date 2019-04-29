@@ -6,7 +6,7 @@
         GCProd.DataSource = dt
 
         If rmt = "-1" Then
-            pre_load_list_horz("22", 2, 1, XrTable1)
+            pre_load_list_horz("13", 2, 1, XrTable1)
         Else
             pre_load_list_horz(rmt, 2, 1, XrTable1)
         End If

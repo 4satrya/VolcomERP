@@ -10,14 +10,29 @@
                                 INNER JOIN tb_m_departement dep ON dep.`id_departement`=emp.`id_departement`
                                 INNER JOIN `tb_lookup_employee_level` lvl ON lvl.`id_employee_level`=emp.`id_employee_level`
                                 INNER JOIN `tb_lookup_salary_adjustment` adj ON adj.`id_salary_adjustment`=pya.`id_salary_adj`
-                                WHERE pya.`id_payroll`='" & id_payroll & "'"
+                                WHERE pya.`id_payroll`='" & id_payroll & "'
+                                ORDER BY pya.id_employee ASC, pya.id_salary_adj ASC"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
         GCDeduction.DataSource = data
         GVDeduction.BestFitColumns()
+
+        'controls
+        Dim id_report_status As String = execute_query("SELECT id_report_status FROM tb_emp_payroll WHERE id_payroll = '" + id_payroll + "'", 0, True, "", "", "", "")
+
+        If id_report_status = "0" Then
+            BAdd.Enabled = True
+            BEdit.Enabled = True
+            BDel.Enabled = True
+        Else
+            BAdd.Enabled = False
+            BEdit.Enabled = False
+            BDel.Enabled = False
+        End If
     End Sub
 
     Private Sub FormEmpPayrollAdjustment_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        FormEmpPayroll.load_payroll_detail()
         Dispose()
     End Sub
 

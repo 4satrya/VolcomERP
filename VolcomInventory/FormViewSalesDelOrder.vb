@@ -12,6 +12,7 @@
     Dim id_delivery_default As String
     Public id_comp_user As String = "-1"
     Public dt As New DataTable
+    Public id_commerce_type As String = ""
     'Dim is_scan As Boolean = False
 
 
@@ -47,7 +48,7 @@
         XTPOutboundScanNew.PageEnabled = True
 
         'query view based on edit id's
-        Dim query As String = "SELECT b.id_so_status, b.id_sales_order, a.id_store_contact_to, a.id_comp_contact_from, (d.comp_name) AS store_name_to, (d1.comp_name) AS comp_name_from, (d.comp_number) AS store_number_to, (d1.comp_number) AS comp_number_from, (d.address_primary) AS store_address_to, a.id_report_status, f.report_status, "
+        Dim query As String = "SELECT b.id_so_status, b.id_sales_order, a.id_store_contact_to, a.id_comp_contact_from, d.id_commerce_type, (d.comp_name) AS store_name_to, (d1.comp_name) AS comp_name_from, (d.comp_number) AS store_number_to, (d1.comp_number) AS comp_number_from, (d.address_primary) AS store_address_to, a.id_report_status, f.report_status, "
         query += "a.pl_sales_order_del_note, a.pl_sales_order_del_date, a.pl_sales_order_del_number, b.sales_order_number, b.sales_order_ol_shop_number, "
         query += "DATE_FORMAT(a.pl_sales_order_del_date,'%Y-%m-%d') AS pl_sales_order_del_datex, b.id_so_type, IFNULL(ac.combine_number,'-') AS `combine_number` "
         query += "FROM tb_pl_sales_order_del a "
@@ -80,6 +81,7 @@
         id_sales_order = data.Rows(0)("id_sales_order").ToString
         TxtOLShopNumber.Text = data.Rows(0)("sales_order_ol_shop_number").ToString
         TxtCombineNumber.Text = data.Rows(0)("combine_number").ToString
+        id_commerce_type = data.Rows(0)("id_commerce_type").ToString
 
         'detail2
         viewDetail()

@@ -26,7 +26,7 @@ Partial Class FormMasterEmployeeTraining
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
         Me.BtnSave = New DevExpress.XtraEditors.SimpleButton()
-        Me.TxtDate = New DevExpress.XtraEditors.DateEdit()
+        Me.TxtDateFrom = New DevExpress.XtraEditors.DateEdit()
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
         Me.TxtInstitution = New DevExpress.XtraEditors.TextEdit()
@@ -41,17 +41,21 @@ Partial Class FormMasterEmployeeTraining
         Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
         Me.BtnAddDocument = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnDelDocument = New DevExpress.XtraEditors.SimpleButton()
+        Me.TxtDateUntil = New DevExpress.XtraEditors.DateEdit()
+        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.TxtCourse.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
-        CType(Me.TxtDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TxtDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtDateFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtDateFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtInstitution.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GCDocument, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVDocument, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RICE, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtDateUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtDateUntil.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TxtCourse
@@ -74,15 +78,15 @@ Partial Class FormMasterEmployeeTraining
         '
         Me.LabelControl2.Location = New System.Drawing.Point(12, 102)
         Me.LabelControl2.Name = "LabelControl2"
-        Me.LabelControl2.Size = New System.Drawing.Size(23, 13)
+        Me.LabelControl2.Size = New System.Drawing.Size(24, 13)
         Me.LabelControl2.TabIndex = 3
-        Me.LabelControl2.Text = "Date"
+        Me.LabelControl2.Text = "From"
         '
         'PanelControl1
         '
         Me.PanelControl1.Controls.Add(Me.BtnSave)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl1.Location = New System.Drawing.Point(0, 376)
+        Me.PanelControl1.Location = New System.Drawing.Point(0, 421)
         Me.PanelControl1.LookAndFeel.SkinName = "Blue"
         Me.PanelControl1.LookAndFeel.UseDefaultLookAndFeel = False
         Me.PanelControl1.Name = "PanelControl1"
@@ -98,17 +102,17 @@ Partial Class FormMasterEmployeeTraining
         Me.BtnSave.TabIndex = 6
         Me.BtnSave.Text = "Save"
         '
-        'TxtDate
+        'TxtDateFrom
         '
-        Me.TxtDate.EditValue = Nothing
-        Me.TxtDate.Location = New System.Drawing.Point(12, 121)
-        Me.TxtDate.Name = "TxtDate"
-        Me.TxtDate.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.TxtDate.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.TxtDate.Properties.DisplayFormat.FormatString = "dd MMMM yyyy"
-        Me.TxtDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.TxtDate.Size = New System.Drawing.Size(462, 20)
-        Me.TxtDate.TabIndex = 102
+        Me.TxtDateFrom.EditValue = Nothing
+        Me.TxtDateFrom.Location = New System.Drawing.Point(12, 121)
+        Me.TxtDateFrom.Name = "TxtDateFrom"
+        Me.TxtDateFrom.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.TxtDateFrom.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.TxtDateFrom.Properties.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.TxtDateFrom.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.TxtDateFrom.Size = New System.Drawing.Size(462, 20)
+        Me.TxtDateFrom.TabIndex = 102
         '
         'ErrorProvider1
         '
@@ -132,7 +136,7 @@ Partial Class FormMasterEmployeeTraining
         '
         'LabelDocument
         '
-        Me.LabelDocument.Location = New System.Drawing.Point(12, 147)
+        Me.LabelDocument.Location = New System.Drawing.Point(12, 192)
         Me.LabelDocument.Name = "LabelDocument"
         Me.LabelDocument.Size = New System.Drawing.Size(48, 13)
         Me.LabelDocument.TabIndex = 105
@@ -140,7 +144,7 @@ Partial Class FormMasterEmployeeTraining
         '
         'GCDocument
         '
-        Me.GCDocument.Location = New System.Drawing.Point(12, 176)
+        Me.GCDocument.Location = New System.Drawing.Point(12, 221)
         Me.GCDocument.MainView = Me.GVDocument
         Me.GCDocument.Name = "GCDocument"
         Me.GCDocument.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RICE})
@@ -215,7 +219,7 @@ Partial Class FormMasterEmployeeTraining
         'BtnAddDocument
         '
         Me.BtnAddDocument.Image = CType(resources.GetObject("BtnAddDocument.Image"), System.Drawing.Image)
-        Me.BtnAddDocument.Location = New System.Drawing.Point(413, 147)
+        Me.BtnAddDocument.Location = New System.Drawing.Point(413, 192)
         Me.BtnAddDocument.Name = "BtnAddDocument"
         Me.BtnAddDocument.Size = New System.Drawing.Size(61, 23)
         Me.BtnAddDocument.TabIndex = 107
@@ -224,24 +228,46 @@ Partial Class FormMasterEmployeeTraining
         'BtnDelDocument
         '
         Me.BtnDelDocument.Image = CType(resources.GetObject("BtnDelDocument.Image"), System.Drawing.Image)
-        Me.BtnDelDocument.Location = New System.Drawing.Point(340, 147)
+        Me.BtnDelDocument.Location = New System.Drawing.Point(340, 192)
         Me.BtnDelDocument.Name = "BtnDelDocument"
         Me.BtnDelDocument.Size = New System.Drawing.Size(67, 23)
         Me.BtnDelDocument.TabIndex = 108
         Me.BtnDelDocument.Text = "Delete"
         '
+        'TxtDateUntil
+        '
+        Me.TxtDateUntil.EditValue = Nothing
+        Me.TxtDateUntil.Location = New System.Drawing.Point(12, 166)
+        Me.TxtDateUntil.Name = "TxtDateUntil"
+        Me.TxtDateUntil.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.TxtDateUntil.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.TxtDateUntil.Properties.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.TxtDateUntil.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.TxtDateUntil.Size = New System.Drawing.Size(462, 20)
+        Me.TxtDateUntil.TabIndex = 110
+        '
+        'LabelControl4
+        '
+        Me.LabelControl4.Location = New System.Drawing.Point(12, 147)
+        Me.LabelControl4.Name = "LabelControl4"
+        Me.LabelControl4.Size = New System.Drawing.Size(21, 13)
+        Me.LabelControl4.TabIndex = 109
+        Me.LabelControl4.Text = "Until"
+        '
         'FormMasterEmployeeTraining
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(490, 414)
+        Me.ClientSize = New System.Drawing.Size(490, 459)
+        Me.Controls.Add(Me.TxtDateUntil)
+        Me.Controls.Add(Me.LabelControl4)
         Me.Controls.Add(Me.BtnDelDocument)
         Me.Controls.Add(Me.BtnAddDocument)
         Me.Controls.Add(Me.GCDocument)
         Me.Controls.Add(Me.LabelDocument)
         Me.Controls.Add(Me.LabelControl3)
         Me.Controls.Add(Me.TxtInstitution)
-        Me.Controls.Add(Me.TxtDate)
+        Me.Controls.Add(Me.TxtDateFrom)
         Me.Controls.Add(Me.PanelControl1)
         Me.Controls.Add(Me.LabelControl2)
         Me.Controls.Add(Me.LabelControl1)
@@ -255,14 +281,16 @@ Partial Class FormMasterEmployeeTraining
         CType(Me.TxtCourse.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
-        CType(Me.TxtDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TxtDate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtDateFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtDateFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtInstitution.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GCDocument, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVDocument, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RICE, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtDateUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtDateUntil.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -271,7 +299,7 @@ Partial Class FormMasterEmployeeTraining
     Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents PanelControl1 As DevExpress.XtraEditors.PanelControl
     Friend WithEvents BtnSave As DevExpress.XtraEditors.SimpleButton
-    Friend WithEvents TxtDate As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents TxtDateFrom As DevExpress.XtraEditors.DateEdit
     Friend WithEvents ErrorProvider1 As ErrorProvider
     Friend WithEvents GCDocument As DevExpress.XtraGrid.GridControl
     Friend WithEvents GVDocument As DevExpress.XtraGrid.Views.Grid.GridView
@@ -287,4 +315,6 @@ Partial Class FormMasterEmployeeTraining
     Friend WithEvents RICE As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
     Public WithEvents LargeImageCollection As DevExpress.Utils.ImageCollection
     Friend WithEvents GCExt As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents TxtDateUntil As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents LabelControl4 As DevExpress.XtraEditors.LabelControl
 End Class

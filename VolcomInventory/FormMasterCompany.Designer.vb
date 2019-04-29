@@ -19,16 +19,20 @@ Partial Class FormMasterCompany
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.GCCompany = New DevExpress.XtraGrid.GridControl
-        Me.GVCompany = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.id_company = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.CompanyCode = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.company = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.address_primary = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.is_active = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
-        Me.Category = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.is_active_company = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+        Me.GCCompany = New DevExpress.XtraGrid.GridControl()
+        Me.GVCompany = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.id_company = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.CompanyCode = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.company = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.address_primary = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.is_active = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.GCStatus = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.Category = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.is_active_company = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GCCompany, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVCompany, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -42,13 +46,13 @@ Partial Class FormMasterCompany
         Me.GCCompany.MainView = Me.GVCompany
         Me.GCCompany.Name = "GCCompany"
         Me.GCCompany.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.is_active_company, Me.RepositoryItemCheckEdit1})
-        Me.GCCompany.Size = New System.Drawing.Size(602, 292)
+        Me.GCCompany.Size = New System.Drawing.Size(1008, 729)
         Me.GCCompany.TabIndex = 3
         Me.GCCompany.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVCompany})
         '
         'GVCompany
         '
-        Me.GVCompany.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.id_company, Me.CompanyCode, Me.company, Me.address_primary, Me.is_active, Me.Category})
+        Me.GVCompany.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.id_company, Me.CompanyCode, Me.company, Me.address_primary, Me.is_active, Me.Category, Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GCStatus})
         Me.GVCompany.GridControl = Me.GCCompany
         Me.GVCompany.Name = "GVCompany"
         Me.GVCompany.OptionsBehavior.Editable = False
@@ -95,8 +99,6 @@ Partial Class FormMasterCompany
         Me.is_active.ColumnEdit = Me.RepositoryItemCheckEdit1
         Me.is_active.FieldName = "is_active"
         Me.is_active.Name = "is_active"
-        Me.is_active.Visible = True
-        Me.is_active.VisibleIndex = 4
         Me.is_active.Width = 52
         '
         'RepositoryItemCheckEdit1
@@ -105,6 +107,14 @@ Partial Class FormMasterCompany
         Me.RepositoryItemCheckEdit1.Name = "RepositoryItemCheckEdit1"
         Me.RepositoryItemCheckEdit1.ValueChecked = New Decimal(New Integer() {1, 0, 0, 0})
         Me.RepositoryItemCheckEdit1.ValueUnchecked = New Decimal(New Integer() {2, 0, 0, 0})
+        '
+        'GCStatus
+        '
+        Me.GCStatus.Caption = "Status"
+        Me.GCStatus.FieldName = "comp_status"
+        Me.GCStatus.Name = "GCStatus"
+        Me.GCStatus.Visible = True
+        Me.GCStatus.VisibleIndex = 7
         '
         'Category
         '
@@ -122,17 +132,40 @@ Partial Class FormMasterCompany
         Me.is_active_company.DisplayValueUnchecked = "0"
         Me.is_active_company.Name = "is_active_company"
         '
+        'GridColumn1
+        '
+        Me.GridColumn1.Caption = "Contact Person"
+        Me.GridColumn1.FieldName = "contact_person"
+        Me.GridColumn1.Name = "GridColumn1"
+        Me.GridColumn1.Visible = True
+        Me.GridColumn1.VisibleIndex = 4
+        '
+        'GridColumn2
+        '
+        Me.GridColumn2.Caption = "Number"
+        Me.GridColumn2.FieldName = "contact_number"
+        Me.GridColumn2.Name = "GridColumn2"
+        Me.GridColumn2.Visible = True
+        Me.GridColumn2.VisibleIndex = 5
+        '
+        'GridColumn3
+        '
+        Me.GridColumn3.Caption = "Email"
+        Me.GridColumn3.FieldName = "contact_email"
+        Me.GridColumn3.Name = "GridColumn3"
+        Me.GridColumn3.Visible = True
+        Me.GridColumn3.VisibleIndex = 6
+        '
         'FormMasterCompany
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(602, 292)
+        Me.ClientSize = New System.Drawing.Size(1008, 729)
         Me.Controls.Add(Me.GCCompany)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FormMasterCompany"
-        Me.ShowInTaskbar = False
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Company"
@@ -153,4 +186,8 @@ Partial Class FormMasterCompany
     Friend WithEvents RepositoryItemCheckEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
     Friend WithEvents Category As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents is_active_company As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+    Friend WithEvents GCStatus As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn2 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn3 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

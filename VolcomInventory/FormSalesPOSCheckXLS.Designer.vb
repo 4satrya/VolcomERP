@@ -35,6 +35,10 @@ Partial Class FormSalesPOSCheckXLS
         Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnItemId = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnOLStoreId = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnRetOrder = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnComp = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.GCData, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -94,7 +98,7 @@ Partial Class FormSalesPOSCheckXLS
         '
         'GVData
         '
-        Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnOrder, Me.GridColumnERPOrder, Me.GridColumn1, Me.GridColumnQty, Me.GridColumnStatus, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5})
+        Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnOrder, Me.GridColumnERPOrder, Me.GridColumn1, Me.GridColumnQty, Me.GridColumnStatus, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumnItemId, Me.GridColumnOLStoreId, Me.GridColumnRetOrder, Me.GridColumnComp})
         Me.GVData.GridControl = Me.GCData
         Me.GVData.Name = "GVData"
         Me.GVData.OptionsBehavior.ReadOnly = True
@@ -104,7 +108,7 @@ Partial Class FormSalesPOSCheckXLS
         '
         'GridColumnOrder
         '
-        Me.GridColumnOrder.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GridColumnOrder.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
         Me.GridColumnOrder.AppearanceHeader.Options.UseFont = True
         Me.GridColumnOrder.Caption = "Order"
         Me.GridColumnOrder.FieldName = "order"
@@ -114,7 +118,7 @@ Partial Class FormSalesPOSCheckXLS
         '
         'GridColumnERPOrder
         '
-        Me.GridColumnERPOrder.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GridColumnERPOrder.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
         Me.GridColumnERPOrder.AppearanceHeader.Options.UseFont = True
         Me.GridColumnERPOrder.Caption = "ERP Order#"
         Me.GridColumnERPOrder.FieldName = "sales_order_number"
@@ -124,17 +128,17 @@ Partial Class FormSalesPOSCheckXLS
         '
         'GridColumn1
         '
-        Me.GridColumn1.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GridColumn1.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
         Me.GridColumn1.AppearanceHeader.Options.UseFont = True
         Me.GridColumn1.Caption = "Delivery#"
         Me.GridColumn1.FieldName = "del_number"
         Me.GridColumn1.Name = "GridColumn1"
         Me.GridColumn1.Visible = True
-        Me.GridColumn1.VisibleIndex = 2
+        Me.GridColumn1.VisibleIndex = 3
         '
         'GridColumnQty
         '
-        Me.GridColumnQty.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GridColumnQty.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
         Me.GridColumnQty.AppearanceHeader.Options.UseFont = True
         Me.GridColumnQty.Caption = "Qty"
         Me.GridColumnQty.DisplayFormat.FormatString = "N0"
@@ -143,59 +147,99 @@ Partial Class FormSalesPOSCheckXLS
         Me.GridColumnQty.Name = "GridColumnQty"
         Me.GridColumnQty.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty", "{0:N0}")})
         Me.GridColumnQty.Visible = True
-        Me.GridColumnQty.VisibleIndex = 7
+        Me.GridColumnQty.VisibleIndex = 11
         '
         'GridColumnStatus
         '
         Me.GridColumnStatus.AppearanceCell.Options.UseTextOptions = True
         Me.GridColumnStatus.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
-        Me.GridColumnStatus.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GridColumnStatus.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
         Me.GridColumnStatus.AppearanceHeader.Options.UseFont = True
         Me.GridColumnStatus.Caption = "Status"
         Me.GridColumnStatus.FieldName = "status"
         Me.GridColumnStatus.Name = "GridColumnStatus"
         Me.GridColumnStatus.Visible = True
-        Me.GridColumnStatus.VisibleIndex = 8
+        Me.GridColumnStatus.VisibleIndex = 12
         '
         'GridColumn2
         '
-        Me.GridColumn2.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GridColumn2.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
         Me.GridColumn2.AppearanceHeader.Options.UseFont = True
         Me.GridColumn2.Caption = "Invoice#"
         Me.GridColumn2.FieldName = "sales_pos_number"
         Me.GridColumn2.Name = "GridColumn2"
         Me.GridColumn2.Visible = True
-        Me.GridColumn2.VisibleIndex = 3
+        Me.GridColumn2.VisibleIndex = 4
         '
         'GridColumn3
         '
-        Me.GridColumn3.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GridColumn3.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
         Me.GridColumn3.AppearanceHeader.Options.UseFont = True
         Me.GridColumn3.Caption = "Code"
         Me.GridColumn3.FieldName = "code"
         Me.GridColumn3.Name = "GridColumn3"
         Me.GridColumn3.Visible = True
-        Me.GridColumn3.VisibleIndex = 4
+        Me.GridColumn3.VisibleIndex = 8
         '
         'GridColumn4
         '
-        Me.GridColumn4.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GridColumn4.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
         Me.GridColumn4.AppearanceHeader.Options.UseFont = True
         Me.GridColumn4.Caption = "Description"
         Me.GridColumn4.FieldName = "name"
         Me.GridColumn4.Name = "GridColumn4"
         Me.GridColumn4.Visible = True
-        Me.GridColumn4.VisibleIndex = 5
+        Me.GridColumn4.VisibleIndex = 9
         '
         'GridColumn5
         '
-        Me.GridColumn5.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GridColumn5.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
         Me.GridColumn5.AppearanceHeader.Options.UseFont = True
         Me.GridColumn5.Caption = "Size"
         Me.GridColumn5.FieldName = "size"
         Me.GridColumn5.Name = "GridColumn5"
         Me.GridColumn5.Visible = True
-        Me.GridColumn5.VisibleIndex = 6
+        Me.GridColumn5.VisibleIndex = 10
+        '
+        'GridColumnItemId
+        '
+        Me.GridColumnItemId.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.GridColumnItemId.AppearanceHeader.Options.UseFont = True
+        Me.GridColumnItemId.Caption = "Item Id"
+        Me.GridColumnItemId.FieldName = "item_id"
+        Me.GridColumnItemId.Name = "GridColumnItemId"
+        Me.GridColumnItemId.Visible = True
+        Me.GridColumnItemId.VisibleIndex = 6
+        '
+        'GridColumnOLStoreId
+        '
+        Me.GridColumnOLStoreId.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.GridColumnOLStoreId.AppearanceHeader.Options.UseFont = True
+        Me.GridColumnOLStoreId.Caption = "OL Store Id"
+        Me.GridColumnOLStoreId.FieldName = "ol_store_id"
+        Me.GridColumnOLStoreId.Name = "GridColumnOLStoreId"
+        Me.GridColumnOLStoreId.Visible = True
+        Me.GridColumnOLStoreId.VisibleIndex = 7
+        '
+        'GridColumnRetOrder
+        '
+        Me.GridColumnRetOrder.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.GridColumnRetOrder.AppearanceHeader.Options.UseFont = True
+        Me.GridColumnRetOrder.Caption = "Return Order#"
+        Me.GridColumnRetOrder.FieldName = "sales_return_order_number"
+        Me.GridColumnRetOrder.Name = "GridColumnRetOrder"
+        Me.GridColumnRetOrder.Visible = True
+        Me.GridColumnRetOrder.VisibleIndex = 5
+        '
+        'GridColumnComp
+        '
+        Me.GridColumnComp.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.GridColumnComp.AppearanceHeader.Options.UseFont = True
+        Me.GridColumnComp.Caption = "ERP Order - Store"
+        Me.GridColumnComp.FieldName = "comp"
+        Me.GridColumnComp.Name = "GridColumnComp"
+        Me.GridColumnComp.Visible = True
+        Me.GridColumnComp.VisibleIndex = 2
         '
         'FormSalesPOSCheckXLS
         '
@@ -232,4 +276,8 @@ Partial Class FormSalesPOSCheckXLS
     Friend WithEvents GridColumn3 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnItemId As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnOLStoreId As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnRetOrder As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnComp As DevExpress.XtraGrid.Columns.GridColumn
 End Class

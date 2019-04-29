@@ -21,10 +21,11 @@ INNER JOIN tb_m_employee emp ON emp.`id_employee`=usr.`id_employee`"
     End Sub
 
     Sub load_content()
-        Dim query As String = "SELECT content FROM tb_ko_template WHERE id_ko_template='" & GVKOHead.GetFocusedRowCellValue("id_ko_template").ToString & "'"
+        Dim query As String = "SELECT upper_part,bottom_part FROM tb_ko_template WHERE id_ko_template='" & GVKOHead.GetFocusedRowCellValue("id_ko_template").ToString & "'"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         Try
-            RichEditControl1.RtfText = data.Rows(0)("content").ToString
+            REUpperPart.RtfText = data.Rows(0)("upper_part").ToString
+            REBottomPart.RtfText = data.Rows(0)("bottom_part").ToString
         Catch ex As Exception
             Console.WriteLine(ex.ToString)
         End Try
@@ -83,7 +84,7 @@ SELECT id_ko_template FROM tb_m_comp WHERE id_ko_template= '" & GVKOHead.GetFocu
     End Sub
 
     Private Sub BSave_Click(sender As Object, e As EventArgs) Handles BSave.Click
-        Dim query As String = String.Format("UPDATE tb_ko_template SET content='{0}' WHERE id_ko_template = '{1}'", addSlashes(RichEditControl1.RtfText.ToString), GVKOHead.GetFocusedRowCellValue("id_ko_template").ToString)
+        Dim query As String = String.Format("UPDATE tb_ko_template SET upper_part='{0}',bottom_part='{2}' WHERE id_ko_template = '{1}'", addSlashes(REUpperPart.RtfText.ToString), GVKOHead.GetFocusedRowCellValue("id_ko_template").ToString, addSlashes(REBottomPart.RtfText.ToString))
         execute_non_query(query, True, "", "", "", "")
     End Sub
 End Class

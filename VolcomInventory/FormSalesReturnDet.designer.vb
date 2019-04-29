@@ -105,6 +105,7 @@ Partial Class FormSalesReturnDet
         Me.GridColumnNumber = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnFrom = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnTo = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnDiff = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemSpinEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
         Me.PanelControlNav = New DevExpress.XtraEditors.PanelControl()
         Me.BtnDel = New DevExpress.XtraEditors.SimpleButton()
@@ -127,6 +128,7 @@ Partial Class FormSalesReturnDet
         Me.GridColumnDesignPriceBc = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnNameBC = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnSizeBC = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn15 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemCheckEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.RepositoryItemSpinEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
         Me.PanelNavBarcode = New DevExpress.XtraEditors.PanelControl()
@@ -922,7 +924,7 @@ Partial Class FormSalesReturnDet
         '
         'GVItemList
         '
-        Me.GVItemList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumnCode, Me.GridColumnEanCode, Me.GridColumnName, Me.GridColumnSize, Me.GridColumnPriceType, Me.GridColumnUOM, Me.GridColumnQtyWH, Me.GridColumnQty, Me.GridColumnQtyLimit, Me.GridColumnPrice, Me.GridColumnAmount, Me.GridColumnRemark, Me.GridColumnIdSalesOrderDet, Me.GridColumn2, Me.GridColumnIdDesignPrice, Me.GridColumnIdDesign, Me.GridColumnIdSample, Me.GridColumnIdPlSalesOrderDel, Me.GridColumnStt, Me.GridColumnNumber, Me.GridColumnFrom, Me.GridColumnTo})
+        Me.GVItemList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumnCode, Me.GridColumnEanCode, Me.GridColumnName, Me.GridColumnSize, Me.GridColumnPriceType, Me.GridColumnUOM, Me.GridColumnQtyWH, Me.GridColumnQty, Me.GridColumnQtyLimit, Me.GridColumnPrice, Me.GridColumnAmount, Me.GridColumnRemark, Me.GridColumnIdSalesOrderDet, Me.GridColumn2, Me.GridColumnIdDesignPrice, Me.GridColumnIdDesign, Me.GridColumnIdSample, Me.GridColumnIdPlSalesOrderDel, Me.GridColumnStt, Me.GridColumnNumber, Me.GridColumnFrom, Me.GridColumnTo, Me.GridColumnDiff})
         Me.GVItemList.GridControl = Me.GCItemList
         Me.GVItemList.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_det_qty", Me.GridColumnQty, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_det_qty_limit", Me.GridColumnQtyLimit, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_det_amount", Me.GridColumnAmount, "{0:n2}")})
         Me.GVItemList.IndicatorWidth = 30
@@ -1191,6 +1193,16 @@ Partial Class FormSalesReturnDet
         Me.GridColumnTo.Name = "GridColumnTo"
         Me.GridColumnTo.UnboundType = DevExpress.Data.UnboundColumnType.[String]
         '
+        'GridColumnDiff
+        '
+        Me.GridColumnDiff.Caption = "Different"
+        Me.GridColumnDiff.DisplayFormat.FormatString = "N0"
+        Me.GridColumnDiff.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnDiff.FieldName = "diff"
+        Me.GridColumnDiff.Name = "GridColumnDiff"
+        Me.GridColumnDiff.UnboundExpression = "[sales_return_det_qty_limit] - [sales_return_det_qty]"
+        Me.GridColumnDiff.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
+        '
         'RepositoryItemSpinEdit1
         '
         Me.RepositoryItemSpinEdit1.AutoHeight = False
@@ -1289,7 +1301,7 @@ Partial Class FormSalesReturnDet
         '
         'GVBarcode
         '
-        Me.GVBarcode.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn5, Me.GridColumnBarcode, Me.GridColumnCountingCode, Me.GridColumnIdPLCounting, Me.GridColumnIsFix, Me.GridColumnIdUniqueReceiving, Me.GridColumnIdProductScan, Me.GridColumnBomUnitPricex, Me.GridColumnIdDesignPriceBc, Me.GridColumnDesignPriceBc, Me.GridColumnNameBC, Me.GridColumnSizeBC})
+        Me.GVBarcode.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn5, Me.GridColumnBarcode, Me.GridColumnCountingCode, Me.GridColumnIdPLCounting, Me.GridColumnIsFix, Me.GridColumnIdUniqueReceiving, Me.GridColumnIdProductScan, Me.GridColumnBomUnitPricex, Me.GridColumnIdDesignPriceBc, Me.GridColumnDesignPriceBc, Me.GridColumnNameBC, Me.GridColumnSizeBC, Me.GridColumn15})
         Me.GVBarcode.GridControl = Me.GCBarcode
         Me.GVBarcode.Name = "GVBarcode"
         Me.GVBarcode.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[False]
@@ -1402,6 +1414,12 @@ Partial Class FormSalesReturnDet
         Me.GridColumnSizeBC.VisibleIndex = 3
         Me.GridColumnSizeBC.Width = 59
         '
+        'GridColumn15
+        '
+        Me.GridColumn15.Caption = "Is unik "
+        Me.GridColumn15.FieldName = "is_unique_report"
+        Me.GridColumn15.Name = "GridColumn15"
+        '
         'RepositoryItemCheckEdit2
         '
         Me.RepositoryItemCheckEdit2.AutoHeight = False
@@ -1490,7 +1508,7 @@ Partial Class FormSalesReturnDet
         Me.XTPStorage.Controls.Add(Me.SCCStorage)
         Me.XTPStorage.Name = "XTPStorage"
         Me.XTPStorage.PageVisible = False
-        Me.XTPStorage.Size = New System.Drawing.Size(899, 126)
+        Me.XTPStorage.Size = New System.Drawing.Size(899, 201)
         Me.XTPStorage.Text = "Save to Storage"
         '
         'SCCStorage
@@ -1503,7 +1521,7 @@ Partial Class FormSalesReturnDet
         Me.SCCStorage.Panel1.Text = "Panel1"
         Me.SCCStorage.Panel2.Controls.Add(Me.GroupControl1)
         Me.SCCStorage.Panel2.Text = "Panel2"
-        Me.SCCStorage.Size = New System.Drawing.Size(899, 126)
+        Me.SCCStorage.Size = New System.Drawing.Size(899, 201)
         Me.SCCStorage.SplitterPosition = 900
         Me.SCCStorage.TabIndex = 0
         Me.SCCStorage.Text = "SplitContainerControl2"
@@ -1516,7 +1534,7 @@ Partial Class FormSalesReturnDet
         Me.GroupControlListStorage.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupControlListStorage.Location = New System.Drawing.Point(0, 0)
         Me.GroupControlListStorage.Name = "GroupControlListStorage"
-        Me.GroupControlListStorage.Size = New System.Drawing.Size(894, 126)
+        Me.GroupControlListStorage.Size = New System.Drawing.Size(894, 201)
         Me.GroupControlListStorage.TabIndex = 0
         Me.GroupControlListStorage.Text = "Item Based On Cost"
         '
@@ -1526,7 +1544,7 @@ Partial Class FormSalesReturnDet
         Me.GCDrawer.Location = New System.Drawing.Point(20, 38)
         Me.GCDrawer.MainView = Me.GVDrawer
         Me.GCDrawer.Name = "GCDrawer"
-        Me.GCDrawer.Size = New System.Drawing.Size(872, 86)
+        Me.GCDrawer.Size = New System.Drawing.Size(872, 161)
         Me.GCDrawer.TabIndex = 4
         Me.GCDrawer.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVDrawer, Me.GridView2})
         '
@@ -2334,4 +2352,6 @@ Partial Class FormSalesReturnDet
     Friend WithEvents BtnCreateNonStock As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents TxtOLStoreOrder As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelOLStoreOrder As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents GridColumn15 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnDiff As DevExpress.XtraGrid.Columns.GridColumn
 End Class

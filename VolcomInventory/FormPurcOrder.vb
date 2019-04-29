@@ -325,4 +325,16 @@ WHERE 1=1 " & where_string & " GROUP BY po.id_purc_order ORDER BY po.id_purc_ord
         FormPurcReqItemUnableFulfill.ShowDialog()
         GVPO.ActiveFilterString = ""
     End Sub
+
+    Private Sub CheckEditSelAll_CheckedChanged(sender As Object, e As EventArgs) Handles CheckEditSelAll.CheckedChanged
+        If GVPO.RowCount > 0 Then
+            For i As Integer = 0 To ((GVPO.RowCount - 1) - GetGroupRowCount(GVPO))
+                If CheckEditSelAll.Checked = False Then
+                    GVPO.SetRowCellValue(i, "is_check", "no")
+                Else
+                    GVPO.SetRowCellValue(i, "is_check", "yes")
+                End If
+            Next
+        End If
+    End Sub
 End Class

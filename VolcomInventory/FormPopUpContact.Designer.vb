@@ -50,6 +50,7 @@ Partial Class FormPopUpContact
         Me.GridColumnDrawer = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnRack = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnLocaltor = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnEmail = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemCheckedComboBoxEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckedComboBoxEdit()
         Me.BCancel = New DevExpress.XtraEditors.SimpleButton()
         Me.BSave = New DevExpress.XtraEditors.SimpleButton()
@@ -204,6 +205,7 @@ Partial Class FormPopUpContact
         Me.PanelControl3.Name = "PanelControl3"
         Me.PanelControl3.Size = New System.Drawing.Size(825, 36)
         Me.PanelControl3.TabIndex = 30
+        Me.PanelControl3.Visible = False
         '
         'BContact
         '
@@ -282,7 +284,7 @@ Partial Class FormPopUpContact
         '
         'GVCompanyContactList
         '
-        Me.GVCompanyContactList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.id_contact, Me.contact_person, Me.number, Me.default_status, Me.GridColumnDrawer, Me.GridColumnRack, Me.GridColumnLocaltor})
+        Me.GVCompanyContactList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.id_contact, Me.contact_person, Me.number, Me.default_status, Me.GridColumnDrawer, Me.GridColumnRack, Me.GridColumnLocaltor, Me.GridColumnEmail})
         Me.GVCompanyContactList.GridControl = Me.GCCompanyContactList
         Me.GVCompanyContactList.Name = "GVCompanyContactList"
         Me.GVCompanyContactList.OptionsBehavior.Editable = False
@@ -326,7 +328,7 @@ Partial Class FormPopUpContact
         Me.default_status.Name = "default_status"
         Me.default_status.Tag = True
         Me.default_status.Visible = True
-        Me.default_status.VisibleIndex = 2
+        Me.default_status.VisibleIndex = 3
         '
         'RepositoryItemCheckEdit2
         '
@@ -353,6 +355,14 @@ Partial Class FormPopUpContact
         Me.GridColumnLocaltor.FieldName = "id_wh_locator"
         Me.GridColumnLocaltor.Name = "GridColumnLocaltor"
         Me.GridColumnLocaltor.OptionsColumn.AllowEdit = False
+        '
+        'GridColumnEmail
+        '
+        Me.GridColumnEmail.Caption = "Email"
+        Me.GridColumnEmail.FieldName = "email"
+        Me.GridColumnEmail.Name = "GridColumnEmail"
+        Me.GridColumnEmail.Visible = True
+        Me.GridColumnEmail.VisibleIndex = 2
         '
         'RepositoryItemCheckedComboBoxEdit1
         '
@@ -480,4 +490,5 @@ Partial Class FormPopUpContact
     Friend WithEvents GridColumnDrawer As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnRack As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnLocaltor As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnEmail As DevExpress.XtraGrid.Columns.GridColumn
 End Class

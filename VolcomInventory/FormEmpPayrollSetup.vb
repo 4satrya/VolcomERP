@@ -1,6 +1,7 @@
 ﻿Public Class FormEmpPayrollSetup
     Public id_payroll As String = "-1"
     Private Sub FormEmpPayrollSetup_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        FormEmpPayroll.load_payroll_detail()
         Dispose()
     End Sub
 
@@ -17,6 +18,9 @@
         TEPenyebut.EditValue = 0
         TEKoperasiIuran.EditValue = 0
 
+        'controls
+        BPick.Enabled = True
+
         If Not id_payroll = "-1" Then
             Dim query As String = "SELECT * FROM tb_emp_payroll WHERE id_payroll='" & id_payroll & "'"
             Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
@@ -30,6 +34,11 @@
                 TEKoperasiIuran.EditValue = data.Rows(0)("koperasi_iuran")
                 DEEffDate.EditValue = data.Rows(0)("eff_trans_date")
                 MemoEdit1.Text = data.Rows(0)("note").ToString
+
+                'controls
+                If Not data.Rows(0)("id_report_status").ToString = "0" Then
+                    BPick.Enabled = False
+                End If
             End If
         End If
     End Sub

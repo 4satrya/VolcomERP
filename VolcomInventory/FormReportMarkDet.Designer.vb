@@ -27,6 +27,7 @@ Partial Class FormReportMarkDet
         Me.TEEmployee = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
         Me.PictureSeason = New DevExpress.XtraEditors.PictureEdit()
+        Me.BAttachment = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.MEComment.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEEmployee.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureSeason.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -40,7 +41,7 @@ Partial Class FormReportMarkDet
         Me.BRefuse.Appearance.Options.UseBackColor = True
         Me.BRefuse.Appearance.Options.UseFont = True
         Me.BRefuse.Appearance.Options.UseForeColor = True
-        Me.BRefuse.Location = New System.Drawing.Point(159, 153)
+        Me.BRefuse.Location = New System.Drawing.Point(159, 173)
         Me.BRefuse.LookAndFeel.SkinMaskColor = System.Drawing.Color.DarkRed
         Me.BRefuse.LookAndFeel.SkinMaskColor2 = System.Drawing.Color.Black
         Me.BRefuse.LookAndFeel.SkinName = "Metropolis"
@@ -59,7 +60,7 @@ Partial Class FormReportMarkDet
         Me.BAccept.Appearance.Options.UseBackColor = True
         Me.BAccept.Appearance.Options.UseFont = True
         Me.BAccept.Appearance.Options.UseForeColor = True
-        Me.BAccept.Location = New System.Drawing.Point(293, 153)
+        Me.BAccept.Location = New System.Drawing.Point(293, 173)
         Me.BAccept.LookAndFeel.SkinName = "Metropolis"
         Me.BAccept.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.UltraFlat
         Me.BAccept.LookAndFeel.UseDefaultLookAndFeel = False
@@ -116,11 +117,29 @@ Partial Class FormReportMarkDet
         Me.PictureSeason.Size = New System.Drawing.Size(113, 109)
         Me.PictureSeason.TabIndex = 131
         '
+        'BAttachment
+        '
+        Me.BAttachment.Appearance.BackColor = System.Drawing.Color.SteelBlue
+        Me.BAttachment.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.BAttachment.Appearance.ForeColor = System.Drawing.Color.White
+        Me.BAttachment.Appearance.Options.UseBackColor = True
+        Me.BAttachment.Appearance.Options.UseFont = True
+        Me.BAttachment.Appearance.Options.UseForeColor = True
+        Me.BAttachment.Location = New System.Drawing.Point(159, 144)
+        Me.BAttachment.LookAndFeel.SkinName = "Metropolis"
+        Me.BAttachment.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.UltraFlat
+        Me.BAttachment.LookAndFeel.UseDefaultLookAndFeel = False
+        Me.BAttachment.Name = "BAttachment"
+        Me.BAttachment.Size = New System.Drawing.Size(271, 23)
+        Me.BAttachment.TabIndex = 139
+        Me.BAttachment.Text = "Attachment"
+        '
         'FormReportMarkDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(448, 199)
+        Me.ClientSize = New System.Drawing.Size(448, 225)
+        Me.Controls.Add(Me.BAttachment)
         Me.Controls.Add(Me.BRefuse)
         Me.Controls.Add(Me.BAccept)
         Me.Controls.Add(Me.LabelControl1)
@@ -151,4 +170,5 @@ Partial Class FormReportMarkDet
     Friend WithEvents TEEmployee As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelControl4 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents PictureSeason As DevExpress.XtraEditors.PictureEdit
+    Friend WithEvents BAttachment As DevExpress.XtraEditors.SimpleButton
 End Class

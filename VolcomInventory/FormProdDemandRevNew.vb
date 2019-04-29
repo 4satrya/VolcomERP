@@ -7,7 +7,11 @@
 
     Sub view_division_fg(ByVal SLE As DevExpress.XtraEditors.LookUpEdit)
         Dim id_code As String = get_setup_field("id_code_fg_division")
-        Dim query As String = "SELECT id_code_detail,code_detail_name,display_name FROM tb_m_code_detail a WHERE a.id_code='" + id_code + "' ORDER BY a.id_code_detail "
+        Dim query As String = "
+        SELECT '0' AS `id_code_detail`, '-' AS `code_detail_name`, '-' AS `display_name`
+        UNION ALL
+        SELECT id_code_detail,code_detail_name,display_name 
+        FROM tb_m_code_detail a WHERE a.id_code='" + id_code + "' ORDER BY id_code_detail ASC "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         viewLookupQuery(SLE, query, 0, "display_name", "id_code_detail")
     End Sub
@@ -67,18 +71,18 @@
                 FormProdDemandRev.GVData.FocusedRowHandle = find_row(FormProdDemandRev.GVData, "id_prod_demand_rev", id)
 
                 'approval
-                Dim rmt As String = ""
-                Dim r As New ClassProdDemand
-                Dim qgr As String = r.queryMainRev("AND r.id_prod_demand_rev='" + id + "' ", "1")
-                Dim dgr As DataTable = execute_query(qgr, -1, True, "", "", "", "")
-                If dgr.Rows(0)("id_pd_kind").ToString = "1" Then
-                    rmt = "143"
-                ElseIf dgr.Rows(0)("id_pd_kind").ToString = "2" Then
-                    rmt = "144"
-                ElseIf dgr.Rows(0)("id_pd_kind").ToString = "3" Then
-                    rmt = "145"
-                End If
-                submit_who_prepared(rmt, id, id_user)
+                'Dim rmt As String = ""
+                'Dim r As New ClassProdDemand
+                'Dim qgr As String = r.queryMainRev("AND r.id_prod_demand_rev='" + id + "' ", "1")
+                'Dim dgr As DataTable = execute_query(qgr, -1, True, "", "", "", "")
+                'If dgr.Rows(0)("id_pd_kind").ToString = "1" Then
+                'rmt = "143"
+                'ElseIf dgr.Rows(0)("id_pd_kind").ToString = "2" Then
+                'rmt = "144"
+                'ElseIf dgr.Rows(0)("id_pd_kind").ToString = "3" Then
+                'rmt = "145"
+                'End If
+                'submit_who_prepared(rmt, id, id_user)
 
                 Close()
                 FormProdDemandRevDet.id = id

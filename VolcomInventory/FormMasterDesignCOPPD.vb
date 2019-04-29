@@ -36,6 +36,12 @@ WHERE pd.`id_report_status` != '5' AND pdd.`id_design`='" & id_design & "' AND p
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         If data.Rows.Count > 0 Then
             warningCustom("PD already created, COP already locked.")
+            '
+            BUpdateVendor.Visible = True
+            BtnSave.Visible = False
+        Else
+            BUpdateVendor.Visible = False
+            BtnSave.Visible = True
         End If
     End Sub
 
@@ -96,30 +102,59 @@ WHERE pd.`id_report_status` != '5' AND pdd.`id_design`='" & id_design & "' AND p
     End Sub
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles BtnSave.Click
-        If id_comp = "-1" Or id_comp = "" Then
-            stopCustom("Please select vendor first")
-        Else
-            Dim query As String = ""
-            query = "SELECT pdd.`id_prod_demand`,pd.`id_report_status`,pdd.`id_design` FROM tb_prod_demand_design pdd
+        'If id_comp = "-1" Or id_comp = "" Then
+        'stopCustom("Please select vendor first")
+        'Else
+        Dim query As String = ""
+        query = "SELECT pdd.`id_prod_demand`,pd.`id_report_status`,pdd.`id_design` FROM tb_prod_demand_design pdd
 INNER JOIN tb_prod_demand pd ON pd.`id_prod_demand`=pdd.`id_prod_demand`
 WHERE pd.`id_report_status` != '5' AND pdd.`id_design`='" & id_design & "' AND pd.is_pd='1'"
-            Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
-            If data.Rows.Count > 0 Then
-                warningCustom("PD already created, COP already locked.")
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        If data.Rows.Count > 0 Then
+            warningCustom("PD already created, COP already locked.")
+        Else
+            Dim id_c As String = ""
+            If id_comp = "-1" Or id_comp = "" Then
+                id_c = "NULL"
             Else
-                query = String.Format("UPDATE tb_m_design SET prod_order_cop_pd='{1}',prod_order_cop_pd_addcost='{5}',prod_order_cop_kurs_pd='{2}',prod_order_cop_pd_vendor='{3}',prod_order_cop_pd_curr='{4}' WHERE id_design='{0}'", id_design, decimalSQL(TEEcop.EditValue.ToString), decimalSQL(TEKurs.EditValue.ToString), id_comp_contact, LECurrency.EditValue.ToString, decimalSQL(TEAdditionalCost.EditValue.ToString))
-                execute_non_query(query, True, "", "", "", "")
-                infoCustom("ECOP entry success.")
-                FormMasterDesignCOP.view_design()
-                FormMasterDesignCOP.BGVDesign.FocusedRowHandle = find_row_as_is(FormMasterDesignCOP.BGVDesign, "id_design", id_design)
-                Close()
+                id_c = "'" & id_comp_contact & "'"
             End If
+            query = String.Format("UPDATE tb_m_design SET prod_order_cop_pd='{1}',prod_order_cop_pd_addcost='{5}',prod_order_cop_kurs_pd='{2}',prod_order_cop_pd_vendor='{3}',prod_order_cop_pd_curr='{4}' WHERE id_design='{0}'", id_design, decimalSQL(TEEcop.EditValue.ToString), decimalSQL(TEKurs.EditValue.ToString), id_c, LECurrency.EditValue.ToString, decimalSQL(TEAdditionalCost.EditValue.ToString))
+            execute_non_query(query, True, "", "", "", "")
+            infoCustom("ECOP entry success.")
+            FormMasterDesignCOP.view_design()
+            FormMasterDesignCOP.BGVDesign.FocusedRowHandle = find_row_as_is(FormMasterDesignCOP.BGVDesign, "id_design", id_design)
+            Close()
         End If
+        'End If
     End Sub
 
     Private Sub BtnBrowseContactFrom_Click(sender As Object, e As EventArgs) Handles BtnBrowseContactFrom.Click
         FormPopUpContact.id_pop_up = "68"
         FormPopUpContact.id_cat = 1
         FormPopUpContact.ShowDialog()
+    End Sub
+
+    Private Sub BUpdateVendor_Click(sender As Object, e As EventArgs) Handles BUpdateVendor.Click
+        'check cop propose if any
+        Dim query_cek As String = "SELECT * FROM `tb_design_cop_propose_det` cpd 
+INNER JOIN `tb_design_cop_propose` cp ON cp.id_design_cop_propose=cpd.id_design_cop_propose AND NOT (cp.id_report_status='6' OR cp.id_report_status='5')
+WHERE cpd.id_design='" & id_design & "'"
+        Dim data_cek As DataTable = execute_query(query_cek, -1, True, "", "", "", "")
+        If data_cek.Rows.Count > 0 Then
+            'ada pengajuan masih blm proses
+            warningCustom("Cant update vendor, another COP Propose in process.")
+        Else
+            If id_comp = "-1" Or id_comp = "" Then
+                stopCustom("Please select vendor first")
+            Else
+                Dim query As String = ""
+                query = String.Format("UPDATE tb_m_design SET prod_order_cop_pd_vendor='{1}' WHERE id_design='{0}'", id_design, id_comp_contact)
+                execute_non_query(query, True, "", "", "", "")
+                infoCustom("Update vendor success.")
+                FormMasterDesignCOP.view_design()
+                FormMasterDesignCOP.BGVDesign.FocusedRowHandle = find_row_as_is(FormMasterDesignCOP.BGVDesign, "id_design", id_design)
+            End If
+        End If
     End Sub
 End Class

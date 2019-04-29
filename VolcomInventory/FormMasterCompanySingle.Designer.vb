@@ -133,6 +133,8 @@ Partial Class FormMasterCompanySingle
         Me.GridColumn16 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RICEDownload = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.PCVendorLegal = New DevExpress.XtraEditors.PanelControl()
+        Me.BrefreshTemplateContract = New DevExpress.XtraEditors.SimpleButton()
+        Me.BSetContract = New DevExpress.XtraEditors.SimpleButton()
         Me.BManageContractVendor = New DevExpress.XtraEditors.SimpleButton()
         Me.LEContractTemplate = New DevExpress.XtraEditors.LookUpEdit()
         Me.LabelControl37 = New DevExpress.XtraEditors.LabelControl()
@@ -162,8 +164,6 @@ Partial Class FormMasterCompanySingle
         Me.LabelControl32 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl31 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl30 = New DevExpress.XtraEditors.LabelControl()
-        Me.BSetContract = New DevExpress.XtraEditors.SimpleButton()
-        Me.BrefreshTemplateContract = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.EPCompany, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl3.SuspendLayout()
@@ -1420,6 +1420,30 @@ Partial Class FormMasterCompanySingle
         Me.PCVendorLegal.Size = New System.Drawing.Size(635, 39)
         Me.PCVendorLegal.TabIndex = 2
         '
+        'BrefreshTemplateContract
+        '
+        Me.BrefreshTemplateContract.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BrefreshTemplateContract.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BrefreshTemplateContract.Appearance.Options.UseFont = True
+        Me.BrefreshTemplateContract.Location = New System.Drawing.Point(376, 5)
+        Me.BrefreshTemplateContract.Name = "BrefreshTemplateContract"
+        Me.BrefreshTemplateContract.Size = New System.Drawing.Size(57, 26)
+        Me.BrefreshTemplateContract.TabIndex = 8902
+        Me.BrefreshTemplateContract.TabStop = False
+        Me.BrefreshTemplateContract.Text = "Refresh"
+        '
+        'BSetContract
+        '
+        Me.BSetContract.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BSetContract.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BSetContract.Appearance.Options.UseFont = True
+        Me.BSetContract.Location = New System.Drawing.Point(515, 5)
+        Me.BSetContract.Name = "BSetContract"
+        Me.BSetContract.Size = New System.Drawing.Size(57, 26)
+        Me.BSetContract.TabIndex = 8901
+        Me.BSetContract.TabStop = False
+        Me.BSetContract.Text = "Set"
+        '
         'BManageContractVendor
         '
         Me.BManageContractVendor.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -1698,30 +1722,6 @@ Partial Class FormMasterCompanySingle
         Me.LabelControl30.Size = New System.Drawing.Size(54, 13)
         Me.LabelControl30.TabIndex = 30
         Me.LabelControl30.Text = "Destination"
-        '
-        'BSetContract
-        '
-        Me.BSetContract.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BSetContract.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BSetContract.Appearance.Options.UseFont = True
-        Me.BSetContract.Location = New System.Drawing.Point(515, 5)
-        Me.BSetContract.Name = "BSetContract"
-        Me.BSetContract.Size = New System.Drawing.Size(57, 26)
-        Me.BSetContract.TabIndex = 8901
-        Me.BSetContract.TabStop = False
-        Me.BSetContract.Text = "Set"
-        '
-        'BrefreshTemplateContract
-        '
-        Me.BrefreshTemplateContract.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BrefreshTemplateContract.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BrefreshTemplateContract.Appearance.Options.UseFont = True
-        Me.BrefreshTemplateContract.Location = New System.Drawing.Point(376, 5)
-        Me.BrefreshTemplateContract.Name = "BrefreshTemplateContract"
-        Me.BrefreshTemplateContract.Size = New System.Drawing.Size(57, 26)
-        Me.BrefreshTemplateContract.TabIndex = 8902
-        Me.BrefreshTemplateContract.TabStop = False
-        Me.BrefreshTemplateContract.Text = "Refresh"
         '
         'FormMasterCompanySingle
         '

@@ -285,6 +285,7 @@ WHERE po.id_purc_order='" & id_po & "'"
     Private Sub BPickVendor_Click(sender As Object, e As EventArgs) Handles BPickVendor.Click
         FormPopUpContact.id_pop_up = "86"
         FormPopUpContact.id_cat = "8"
+        FormPopUpContact.is_must_active = "1"
         FormPopUpContact.ShowDialog()
     End Sub
 

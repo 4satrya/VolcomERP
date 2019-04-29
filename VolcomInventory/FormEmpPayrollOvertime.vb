@@ -1,6 +1,7 @@
 ﻿Public Class FormEmpPayrollOvertime
     Public id_periode As String = "-1"
     Private Sub FormEmpPayrollOvertime_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        FormEmpPayroll.load_payroll_detail()
         Dispose()
     End Sub
 
@@ -19,27 +20,29 @@
     End Sub
 
     Sub load_payroll_ot()
-        Dim query As String = "SELECT p.id_payroll_ot,p.`id_payroll`,p.`id_employee`,p.`id_ot_type`,p.`ot_start`,p.`ot_end`,p.`total_hour`,p.`total_point`,IF(p.`is_day_off`=1,'Yes','No') AS day_off,lvl.`employee_level`,emp.`employee_name`,emp.`employee_code`,ott.`ot_type`
+        Dim query As String = "SELECT p.id_payroll_ot,p.`id_payroll`,p.`id_employee`,p.`id_ot_type`,DATE_FORMAT(p.`ot_start`, '%d %M %Y') AS ot_date, DATE_FORMAT(p.`ot_start`, '%l:%i:%s %p') AS ot_start, DATE_FORMAT(p.`ot_end`, '%l:%i:%s %p') AS ot_end,p.`total_break`,p.`total_hour`,p.`total_point`,IF(p.`is_day_off`=1,'Yes','No') AS day_off,emp.employee_position,lvl.`employee_level`,emp.`employee_name`,emp.`employee_code`,CONCAT(IF(ott.`is_event` = 1, 'Event ', ''), ott.`ot_type`) AS ot_type, IF(ott.`is_event` = 1, p.wages_per_point, ((SELECT (sal.`basic_salary` + sal.`allow_job` + sal.`allow_meal` + sal.`allow_trans`) FROM tb_emp_payroll_det AS pd INNER JOIN tb_m_employee_salary AS sal ON pd.id_salary = sal.id_employee_salary WHERE pd.id_employee = p.`id_employee`) * pay.ot_reg_pembilang / pay.ot_reg_penyebut)) AS wages_per_point, IF(ott.`is_event` = 1, p.`total_point` * p.wages_per_point, p.`total_point` * ((SELECT (sal.`basic_salary` + sal.`allow_job` + sal.`allow_meal` + sal.`allow_trans`) FROM tb_emp_payroll_det AS pd INNER JOIN tb_m_employee_salary AS sal ON pd.id_salary = sal.id_employee_salary WHERE pd.id_employee = p.`id_employee`) * pay.ot_reg_pembilang / pay.ot_reg_penyebut)) AS wages_per_point_total, p.note
                                 FROM tb_emp_payroll_ot p
                                 INNER JOIN `tb_lookup_ot_type` ott ON ott.`id_ot_type`=p.`id_ot_type`
                                 INNER JOIN tb_m_employee emp ON emp.`id_employee`=p.`id_employee`
+                                INNER JOIN tb_emp_payroll pay ON p.`id_payroll`=pay.`id_payroll`
                                 INNER JOIN `tb_lookup_employee_level` lvl ON lvl.`id_employee_level`=emp.`id_employee_level`
-                                WHERE p.`id_payroll`='" & LEPayrollPeriode.EditValue.ToString & "'"
+                                WHERE p.`id_payroll`='" & LEPayrollPeriode.EditValue.ToString & "'
+                                ORDER BY p.`id_employee` ASC, p.`ot_start` ASC"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCOverTime.DataSource = data
+        GVOverTime.BestFitColumns()
     End Sub
     Sub load_payroll_dp()
-        Dim query As String = "SELECT det.start_dp,det.end_dp,emp.employee_name,emp.employee_position,dep.departement,rpt.report_status,emp.employee_code,dp.* FROM tb_emp_dp dp
-                                INNER JOIN tb_m_employee emp ON emp.id_employee=dp.id_employee
-                                INNER JOIN tb_m_departement dep ON dep.id_departement=emp.id_departement
-                                INNER JOIN tb_lookup_report_status rpt ON rpt.id_report_status=dp.id_report_status
-                                INNER JOIN 
-                                (SELECT id_dp,MIN(dp_time_start) AS start_dp,MAX(dp_time_end) AS end_dp 
-                                FROM tb_emp_dp_det 
-                                GROUP BY id_dp) det ON det.id_dp=dp.id_dp
-                                WHERE id_payroll='" & LEPayrollPeriode.EditValue.ToString & "'"
+        Dim query As String = "SELECT ot_det.id_employee, employee.employee_code, employee.employee_name, employee.employee_position, employee_level.employee_level, DATE_FORMAT(ot.ot_date, '%d %M %Y') AS ot_date, DATE_FORMAT(ot_det.start_work, '%l:%i:%s %p') AS ot_start, DATE_FORMAT(ot_det.end_work, '%l:%i:%s %p') AS ot_end, ot_det.break_hours AS total_break, (TIMESTAMPDIFF(HOUR, ot_det.start_work, ot_det.end_work) - ot_det.break_hours) AS total_hour, ot.ot_note AS note
+                                FROM tb_ot_det AS ot_det
+                                LEFT JOIN tb_ot AS ot ON ot_det.id_ot = ot.id_ot
+                                LEFT JOIN tb_m_employee AS employee ON ot_det.id_employee = employee.id_employee
+                                LEFT JOIN tb_lookup_employee_level AS employee_level ON ot_det.id_employee_level = employee_level.id_employee_level
+                                WHERE ot_det.conversion_type = 2 AND ot_det.is_valid = 1 AND ot.id_check_status = 6 AND ot.id_payroll = '" + LEPayrollPeriode.EditValue.ToString + "'
+                                ORDER BY ot_det.id_employee ASC, ot.ot_date ASC"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCDP.DataSource = data
+        GVDP.BestFitColumns()
     End Sub
     Private Sub BAdd_Click(sender As Object, e As EventArgs) Handles BAdd.Click
         load_add()

@@ -90,7 +90,7 @@
         query += "INNER JOIN tb_m_comp_contact e ON a.id_comp_contact_ship_to = e.id_comp_contact "
         query += "INNER JOIN tb_m_comp f ON e.id_comp = f.id_comp "
         query += "INNER JOIN tb_lookup_payment g ON a.id_payment = g.id_payment "
-        query += "WHERE a.id_report_status = '3' OR a.id_report_status = '4' "
+        query += "WHERE a.id_report_status = '6' "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCSamplePurchaseNeed.DataSource = data
         check_menu()

@@ -68,6 +68,7 @@ Partial Class FormMasterPrice
         Me.DEFromList = New DevExpress.XtraEditors.DateEdit()
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
+        Me.GridColumnEffective = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GCPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XTCPrice, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -104,7 +105,7 @@ Partial Class FormMasterPrice
         '
         'GVPrice
         '
-        Me.GVPrice.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnId, Me.GridColumnPriceNumber, Me.GridColumnPriceCreated, Me.GridColumnPriceNote, Me.GridColumnStatus})
+        Me.GVPrice.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnId, Me.GridColumnPriceNumber, Me.GridColumnPriceCreated, Me.GridColumnEffective, Me.GridColumnPriceNote, Me.GridColumnStatus})
         Me.GVPrice.GridControl = Me.GCPrice
         Me.GVPrice.Name = "GVPrice"
         Me.GVPrice.OptionsView.ShowGroupPanel = False
@@ -140,7 +141,7 @@ Partial Class FormMasterPrice
         Me.GridColumnPriceNote.FieldName = "fg_price_note"
         Me.GridColumnPriceNote.Name = "GridColumnPriceNote"
         Me.GridColumnPriceNote.Visible = True
-        Me.GridColumnPriceNote.VisibleIndex = 2
+        Me.GridColumnPriceNote.VisibleIndex = 3
         '
         'GridColumnStatus
         '
@@ -149,7 +150,7 @@ Partial Class FormMasterPrice
         Me.GridColumnStatus.FieldNameSortGroup = "id_report_status"
         Me.GridColumnStatus.Name = "GridColumnStatus"
         Me.GridColumnStatus.Visible = True
-        Me.GridColumnStatus.VisibleIndex = 3
+        Me.GridColumnStatus.VisibleIndex = 4
         '
         'XTCPrice
         '
@@ -537,6 +538,16 @@ Partial Class FormMasterPrice
         Me.LabelControl5.TabIndex = 8892
         Me.LabelControl5.Text = "From"
         '
+        'GridColumnEffective
+        '
+        Me.GridColumnEffective.Caption = "Effective Date"
+        Me.GridColumnEffective.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.GridColumnEffective.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumnEffective.FieldName = "fg_effective_date"
+        Me.GridColumnEffective.Name = "GridColumnEffective"
+        Me.GridColumnEffective.Visible = True
+        Me.GridColumnEffective.VisibleIndex = 2
+        '
         'FormMasterPrice
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -624,4 +635,5 @@ Partial Class FormMasterPrice
     Friend WithEvents DEFromList As DevExpress.XtraEditors.DateEdit
     Friend WithEvents LabelControl3 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LabelControl5 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents GridColumnEffective As DevExpress.XtraGrid.Columns.GridColumn
 End Class

@@ -301,6 +301,7 @@ Partial Class FormMatPurchaseDet
         Me.TEKurs.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
         Me.TEKurs.Properties.Mask.SaveLiteral = False
         Me.TEKurs.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.TEKurs.Properties.ReadOnly = True
         Me.TEKurs.Size = New System.Drawing.Size(144, 20)
         Me.TEKurs.TabIndex = 145
         '
@@ -865,7 +866,7 @@ Partial Class FormMatPurchaseDet
         '
         'LEpayment
         '
-        Me.LEpayment.Location = New System.Drawing.Point(448, 40)
+        Me.LEpayment.Location = New System.Drawing.Point(453, 40)
         Me.LEpayment.Name = "LEpayment"
         Me.LEpayment.Properties.Appearance.Options.UseTextOptions = True
         Me.LEpayment.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near
@@ -965,7 +966,7 @@ Partial Class FormMatPurchaseDet
         '
         'LabelControl9
         '
-        Me.LabelControl9.Location = New System.Drawing.Point(373, 43)
+        Me.LabelControl9.Location = New System.Drawing.Point(378, 43)
         Me.LabelControl9.Name = "LabelControl9"
         Me.LabelControl9.Size = New System.Drawing.Size(69, 13)
         Me.LabelControl9.TabIndex = 133
@@ -1011,7 +1012,7 @@ Partial Class FormMatPurchaseDet
         'TETOP
         '
         Me.TETOP.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.TETOP.Location = New System.Drawing.Point(448, 104)
+        Me.TETOP.Location = New System.Drawing.Point(453, 104)
         Me.TETOP.Name = "TETOP"
         Me.TETOP.Properties.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TETOP.Properties.Appearance.Options.UseFont = True
@@ -1024,7 +1025,7 @@ Partial Class FormMatPurchaseDet
         '
         'LabelControl8
         '
-        Me.LabelControl8.Location = New System.Drawing.Point(373, 108)
+        Me.LabelControl8.Location = New System.Drawing.Point(378, 108)
         Me.LabelControl8.Name = "LabelControl8"
         Me.LabelControl8.Size = New System.Drawing.Size(20, 13)
         Me.LabelControl8.TabIndex = 129
@@ -1033,7 +1034,7 @@ Partial Class FormMatPurchaseDet
         'TELeadTime
         '
         Me.TELeadTime.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.TELeadTime.Location = New System.Drawing.Point(448, 71)
+        Me.TELeadTime.Location = New System.Drawing.Point(453, 71)
         Me.TELeadTime.Name = "TELeadTime"
         Me.TELeadTime.Properties.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TELeadTime.Properties.Appearance.Options.UseFont = True
@@ -1046,7 +1047,7 @@ Partial Class FormMatPurchaseDet
         '
         'LabelControl7
         '
-        Me.LabelControl7.Location = New System.Drawing.Point(373, 75)
+        Me.LabelControl7.Location = New System.Drawing.Point(378, 75)
         Me.LabelControl7.Name = "LabelControl7"
         Me.LabelControl7.Size = New System.Drawing.Size(48, 13)
         Me.LabelControl7.TabIndex = 126
@@ -1157,7 +1158,7 @@ Partial Class FormMatPurchaseDet
         'TEPONumber
         '
         Me.TEPONumber.EditValue = ""
-        Me.TEPONumber.Location = New System.Drawing.Point(448, 9)
+        Me.TEPONumber.Location = New System.Drawing.Point(453, 9)
         Me.TEPONumber.Name = "TEPONumber"
         Me.TEPONumber.Properties.EditValueChangedDelay = 1
         Me.TEPONumber.Size = New System.Drawing.Size(148, 20)
@@ -1165,7 +1166,7 @@ Partial Class FormMatPurchaseDet
         '
         'LabelControl3
         '
-        Me.LabelControl3.Location = New System.Drawing.Point(373, 12)
+        Me.LabelControl3.Location = New System.Drawing.Point(378, 12)
         Me.LabelControl3.Name = "LabelControl3"
         Me.LabelControl3.Size = New System.Drawing.Size(54, 13)
         Me.LabelControl3.TabIndex = 86

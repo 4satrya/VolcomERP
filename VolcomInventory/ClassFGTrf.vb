@@ -18,7 +18,17 @@
     Public Sub changeStatus(ByVal id_report_par As String, ByVal id_status_reportx_par As String)
         'rollback stock if cancelled and complerted
         If id_status_reportx_par = "6" Then
-            Dim query_complete As String = "INSERT INTO tb_storage_fg(id_wh_drawer, id_storage_category, id_product, bom_unit_price, report_mark_type, id_report, storage_product_qty, storage_product_datetime, storage_product_notes, id_stock_status) "
+            Dim id_so As String = execute_query("SELECT id_sales_order FROM tb_fg_trf WHERE id_fg_trf='" + id_report_par + "' ", 0, True, "", "", "", "")
+
+            Dim query_complete As String = "
+             -- delete so first (strage)
+            DELETE FROM tb_storage_fg 
+            WHERE report_mark_type=39 AND id_report=" + id_so + " AND id_storage_category=1 AND id_stock_status=2 ;
+            -- delete del first (strage)
+            DELETE FROM tb_storage_fg 
+            WHERE report_mark_type=57 AND id_report=" + id_report_par + ";
+            -- insert storage
+            INSERT INTO tb_storage_fg(id_wh_drawer, id_storage_category, id_product, bom_unit_price, report_mark_type, id_report, storage_product_qty, storage_product_datetime, storage_product_notes, id_stock_status) "
             query_complete += "SELECT (getCompByContact(trf.id_comp_contact_from, 4)) AS `drawer`, '1', trf_det.id_product, dsg.design_cop, '39' AS `report_mark_type`, trf.id_sales_order AS `id_report`, trf_det.fg_trf_det_qty, NOW(), '', '2' "
             query_complete += "FROM tb_fg_trf trf "
             query_complete += "INNER JOIN tb_fg_trf_det trf_det ON trf_det.id_fg_trf = trf.id_fg_trf "

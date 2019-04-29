@@ -10,38 +10,54 @@
         Dim id_ap As String = FormAccounting.GVCompany.GetFocusedRowCellValue("id_acc_ap").ToString
         If id_ap = "0" Then
             SLEAP.EditValue = Nothing
+            TxtAPCode.Text = ""
         Else
             SLEAP.EditValue = id_ap
+            TxtAPCode.Text = getAccNo(id_ap)
         End If
 
         Dim id_dp As String = FormAccounting.GVCompany.GetFocusedRowCellValue("id_acc_dp").ToString
         If id_dp = "0" Then
             SLEDP.EditValue = Nothing
+            TxtDPCode.Text = ""
         Else
             SLEDP.EditValue = id_dp
+            TxtDPCode.Text = getAccNo(id_dp)
         End If
 
         Dim id_sales As String = FormAccounting.GVCompany.GetFocusedRowCellValue("id_acc_sales").ToString
         If id_sales = "0" Then
             SLESales.EditValue = Nothing
+            TxtSalesCode.Text = ""
         Else
             SLESales.EditValue = id_sales
+            TxtSalesCode.Text = getAccNo(id_sales)
         End If
 
         Dim id_sales_return As String = FormAccounting.GVCompany.GetFocusedRowCellValue("id_acc_sales_return").ToString
         If id_sales_return = "0" Then
             SLESalesReturn.EditValue = Nothing
+            TxtSalesReturnCode.Text = ""
         Else
             SLESalesReturn.EditValue = id_sales_return
+            TxtSalesReturnCode.Text = getAccNo(id_sales_return)
         End If
 
         Dim id_ar As String = FormAccounting.GVCompany.GetFocusedRowCellValue("id_acc_ar").ToString
         If id_ar = "0" Then
             SLEAR.EditValue = Nothing
+            TxtARCode.Text = ""
         Else
             SLEAR.EditValue = id_ar
+            TxtARCode.Text = getAccNo(id_ar)
         End If
     End Sub
+
+    Private Function getAccNo(ByVal id_acc As String) As String
+        Dim code As String = execute_query("SELECT acc_name FROM tb_a_acc WHERE id_acc='" + id_acc + "' ", 0, True, "", "", "", "")
+        Return code
+    End Function
+
 
     Sub viewCOA()
         Dim query As String = "SELECT a.id_acc, a.acc_name, a.acc_description, a.id_acc_parent, 
@@ -64,14 +80,17 @@
 
     Private Sub SimpleButton1_Click(sender As Object, e As EventArgs) Handles BClearAP.Click
         SLEAP.EditValue = Nothing
+        TxtAPCode.Text = ""
     End Sub
 
     Private Sub SimpleButton2_Click(sender As Object, e As EventArgs) Handles BClearAR.Click
         SLEAR.EditValue = Nothing
+        TxtARCode.Text = ""
     End Sub
 
     Private Sub BClearDP_Click(sender As Object, e As EventArgs) Handles BClearDP.Click
         SLEDP.EditValue = Nothing
+        TxtDPCode.Text = ""
     End Sub
 
     Private Sub BtnConfirm_Click(sender As Object, e As EventArgs) Handles BtnConfirm.Click
@@ -123,9 +142,66 @@
 
     Private Sub BtnClearSales_Click(sender As Object, e As EventArgs) Handles BtnClearSales.Click
         SLESales.EditValue = Nothing
+        TxtSalesCode.Text = ""
     End Sub
 
     Private Sub SimpleButton1_Click_1(sender As Object, e As EventArgs) Handles SimpleButton1.Click
         SLESalesReturn.EditValue = Nothing
+        TxtSalesReturnCode.Text = ""
+    End Sub
+
+    Private Sub SLEAR_EditValueChanged(sender As Object, e As EventArgs) Handles SLEAR.EditValueChanged
+        If SLEAR.EditValue = Nothing Then
+            TxtARCode.Text = ""
+        Else
+            Try
+                TxtARCode.Text = SLEAR.Properties.View.GetFocusedRowCellValue("acc_name").ToString
+            Catch ex As Exception
+            End Try
+        End If
+    End Sub
+
+    Private Sub SLESales_EditValueChanged(sender As Object, e As EventArgs) Handles SLESales.EditValueChanged
+        If SLESales.EditValue = Nothing Then
+            TxtSalesCode.Text = ""
+        Else
+            Try
+                TxtSalesCode.Text = SLESales.Properties.View.GetFocusedRowCellValue("acc_name").ToString
+            Catch ex As Exception
+            End Try
+        End If
+    End Sub
+
+    Private Sub SLESalesReturn_EditValueChanged(sender As Object, e As EventArgs) Handles SLESalesReturn.EditValueChanged
+        If SLESalesReturn.EditValue = Nothing Then
+            TxtSalesReturnCode.Text = ""
+        Else
+            Try
+                TxtSalesReturnCode.Text = SLESalesReturn.Properties.View.GetFocusedRowCellValue("acc_name").ToString
+            Catch ex As Exception
+            End Try
+        End If
+    End Sub
+
+    Private Sub SLEAP_EditValueChanged(sender As Object, e As EventArgs) Handles SLEAP.EditValueChanged
+        If SLEAP.EditValue = Nothing Then
+            TxtAPCode.Text = ""
+        Else
+            Try
+                TxtAPCode.Text = SLEAP.Properties.View.GetFocusedRowCellValue("acc_name").ToString
+            Catch ex As Exception
+            End Try
+        End If
+    End Sub
+
+    Private Sub SLEDP_EditValueChanged(sender As Object, e As EventArgs) Handles SLEDP.EditValueChanged
+        If SLEDP.EditValue = Nothing Then
+            TxtDPCode.Text = ""
+        Else
+            Try
+                TxtDPCode.Text = SLEDP.Properties.View.GetFocusedRowCellValue("acc_name").ToString
+            Catch ex As Exception
+            End Try
+        End If
     End Sub
 End Class

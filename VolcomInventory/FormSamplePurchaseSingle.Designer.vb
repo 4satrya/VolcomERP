@@ -19,57 +19,58 @@ Partial Class FormSamplePurchaseSingle
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.SplitContainerControl1 = New DevExpress.XtraEditors.SplitContainerControl
-        Me.GroupGeneral = New DevExpress.XtraEditors.GroupControl
-        Me.GCSample = New DevExpress.XtraGrid.GridControl
-        Me.GVSample = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColSize = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnColor = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridView3 = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.SplitContainerControl2 = New DevExpress.XtraEditors.SplitContainerControl
-        Me.PictureEdit1 = New DevExpress.XtraEditors.PictureEdit
-        Me.BView = New DevExpress.XtraEditors.SimpleButton
-        Me.GroupControl1 = New DevExpress.XtraEditors.GroupControl
-        Me.GCSamplePrice = New DevExpress.XtraGrid.GridControl
-        Me.GVSamplePrice = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.ColSamplePirce = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColPriceName = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColPrice = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColDate = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColCurrenct = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl
-        Me.Brefresh = New DevExpress.XtraEditors.SimpleButton
-        Me.BPrice = New DevExpress.XtraEditors.SimpleButton
-        Me.GroupControlDetail = New DevExpress.XtraEditors.GroupControl
-        Me.TENote = New DevExpress.XtraEditors.TextEdit
-        Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl
-        Me.TEDiscount = New DevExpress.XtraEditors.TextEdit
-        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl
-        Me.TEPriceTot = New DevExpress.XtraEditors.TextEdit
-        Me.LabelControl7 = New DevExpress.XtraEditors.LabelControl
-        Me.TEPrice = New DevExpress.XtraEditors.TextEdit
-        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl
-        Me.TEUOM = New DevExpress.XtraEditors.TextEdit
-        Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl
-        Me.LECurrency = New DevExpress.XtraEditors.LookUpEdit
-        Me.TEVendCur = New DevExpress.XtraEditors.TextEdit
-        Me.TEKurs = New DevExpress.XtraEditors.TextEdit
-        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl
-        Me.TEQty = New DevExpress.XtraEditors.TextEdit
-        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl
-        Me.TEVendPrice = New DevExpress.XtraEditors.TextEdit
-        Me.LabelControlUpdateName = New DevExpress.XtraEditors.LabelControl
-        Me.PanelControlButton = New DevExpress.XtraEditors.PanelControl
-        Me.BCancel = New DevExpress.XtraEditors.SimpleButton
-        Me.BSave = New DevExpress.XtraEditors.SimpleButton
+        Me.SplitContainerControl1 = New DevExpress.XtraEditors.SplitContainerControl()
+        Me.GroupGeneral = New DevExpress.XtraEditors.GroupControl()
+        Me.GCSample = New DevExpress.XtraGrid.GridControl()
+        Me.GVSample = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColSize = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnColor = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridView3 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.SplitContainerControl2 = New DevExpress.XtraEditors.SplitContainerControl()
+        Me.PictureEdit1 = New DevExpress.XtraEditors.PictureEdit()
+        Me.BView = New DevExpress.XtraEditors.SimpleButton()
+        Me.GroupControl1 = New DevExpress.XtraEditors.GroupControl()
+        Me.GCSamplePrice = New DevExpress.XtraGrid.GridControl()
+        Me.GVSamplePrice = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.ColSamplePirce = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColPriceName = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColPrice = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColDate = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColCurrenct = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.Brefresh = New DevExpress.XtraEditors.SimpleButton()
+        Me.BPrice = New DevExpress.XtraEditors.SimpleButton()
+        Me.GroupControlDetail = New DevExpress.XtraEditors.GroupControl()
+        Me.TENote = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
+        Me.TEDiscount = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
+        Me.TEPriceTot = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl7 = New DevExpress.XtraEditors.LabelControl()
+        Me.TEPrice = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
+        Me.TEUOM = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
+        Me.LECurrency = New DevExpress.XtraEditors.LookUpEdit()
+        Me.TEVendCur = New DevExpress.XtraEditors.TextEdit()
+        Me.TEKurs = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
+        Me.TEQty = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
+        Me.TEVendPrice = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControlUpdateName = New DevExpress.XtraEditors.LabelControl()
+        Me.PanelControlButton = New DevExpress.XtraEditors.PanelControl()
+        Me.BCancel = New DevExpress.XtraEditors.SimpleButton()
+        Me.BSave = New DevExpress.XtraEditors.SimpleButton()
+        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.SplitContainerControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainerControl1.SuspendLayout()
         CType(Me.GroupGeneral, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -132,16 +133,16 @@ Partial Class FormSamplePurchaseSingle
         'GCSample
         '
         Me.GCSample.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCSample.Location = New System.Drawing.Point(2, 22)
+        Me.GCSample.Location = New System.Drawing.Point(2, 20)
         Me.GCSample.MainView = Me.GVSample
         Me.GCSample.Name = "GCSample"
-        Me.GCSample.Size = New System.Drawing.Size(820, 176)
+        Me.GCSample.Size = New System.Drawing.Size(820, 178)
         Me.GCSample.TabIndex = 11
         Me.GCSample.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVSample, Me.GridView3})
         '
         'GVSample
         '
-        Me.GVSample.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn6, Me.GridColumn5, Me.GridColumn3, Me.GridColumn4, Me.ColSize, Me.GridColumn2, Me.GridColumnColor, Me.GridColumn7})
+        Me.GVSample.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn8, Me.GridColumn6, Me.GridColumn5, Me.GridColumn3, Me.GridColumn4, Me.ColSize, Me.GridColumn2, Me.GridColumnColor, Me.GridColumn7})
         Me.GVSample.GridControl = Me.GCSample
         Me.GVSample.GroupCount = 1
         Me.GVSample.Name = "GVSample"
@@ -275,10 +276,10 @@ Partial Class FormSamplePurchaseSingle
         'GCSamplePrice
         '
         Me.GCSamplePrice.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCSamplePrice.Location = New System.Drawing.Point(2, 54)
+        Me.GCSamplePrice.Location = New System.Drawing.Point(2, 52)
         Me.GCSamplePrice.MainView = Me.GVSamplePrice
         Me.GCSamplePrice.Name = "GCSamplePrice"
-        Me.GCSamplePrice.Size = New System.Drawing.Size(638, 171)
+        Me.GCSamplePrice.Size = New System.Drawing.Size(638, 173)
         Me.GCSamplePrice.TabIndex = 3
         Me.GCSamplePrice.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVSamplePrice, Me.GridView1})
         '
@@ -352,7 +353,7 @@ Partial Class FormSamplePurchaseSingle
         Me.PanelControl1.Controls.Add(Me.Brefresh)
         Me.PanelControl1.Controls.Add(Me.BPrice)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.PanelControl1.Location = New System.Drawing.Point(2, 22)
+        Me.PanelControl1.Location = New System.Drawing.Point(2, 20)
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(638, 32)
         Me.PanelControl1.TabIndex = 4
@@ -406,7 +407,7 @@ Partial Class FormSamplePurchaseSingle
         'TENote
         '
         Me.TENote.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TENote.Location = New System.Drawing.Point(67, 93)
         Me.TENote.Name = "TENote"
         Me.TENote.Properties.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -451,7 +452,7 @@ Partial Class FormSamplePurchaseSingle
         'TEPriceTot
         '
         Me.TEPriceTot.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TEPriceTot.EditValue = "0"
         Me.TEPriceTot.Enabled = False
         Me.TEPriceTot.Location = New System.Drawing.Point(574, 63)
@@ -499,7 +500,7 @@ Partial Class FormSamplePurchaseSingle
         'TEUOM
         '
         Me.TEUOM.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TEUOM.Enabled = False
         Me.TEUOM.Location = New System.Drawing.Point(754, 21)
         Me.TEUOM.Name = "TEUOM"
@@ -640,6 +641,12 @@ Partial Class FormSamplePurchaseSingle
         Me.BSave.TabIndex = 1
         Me.BSave.Text = "Save"
         '
+        'GridColumn8
+        '
+        Me.GridColumn8.Caption = "ID Code Division"
+        Me.GridColumn8.FieldName = "div_code"
+        Me.GridColumn8.Name = "GridColumn8"
+        '
         'FormSamplePurchaseSingle
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -651,7 +658,6 @@ Partial Class FormSamplePurchaseSingle
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MinimizeBox = False
         Me.Name = "FormSamplePurchaseSingle"
-        Me.ShowInTaskbar = False
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Pick Sample"
@@ -741,4 +747,5 @@ Partial Class FormSamplePurchaseSingle
     Friend WithEvents SplitContainerControl2 As DevExpress.XtraEditors.SplitContainerControl
     Friend WithEvents Brefresh As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BPrice As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GridColumn8 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

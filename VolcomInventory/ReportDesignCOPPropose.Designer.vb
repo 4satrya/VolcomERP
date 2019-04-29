@@ -81,6 +81,7 @@ Partial Public Class ReportDesignCOPPropose
         Me.LNote = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel5 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel4 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel3 = New DevExpress.XtraReports.UI.XRLabel()
         CType(Me.GCItemList, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BGVItemList, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemSpinEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -631,7 +632,7 @@ Partial Public Class ReportDesignCOPPropose
         'XrTable1
         '
         Me.XrTable1.Font = New System.Drawing.Font("Consolas", 8.0!)
-        Me.XrTable1.LocationFloat = New DevExpress.Utils.PointFloat(0.0001271566!, 47.99998!)
+        Me.XrTable1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 59.45829!)
         Me.XrTable1.Name = "XrTable1"
         Me.XrTable1.Rows.AddRange(New DevExpress.XtraReports.UI.XRTableRow() {Me.XrTableRow1})
         Me.XrTable1.SizeF = New System.Drawing.SizeF(969.0!, 25.0!)
@@ -654,14 +655,15 @@ Partial Public Class ReportDesignCOPPropose
         '
         'ReportFooter
         '
-        Me.ReportFooter.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.LNote, Me.XrLabel5, Me.XrLabel4, Me.XrTable1})
-        Me.ReportFooter.HeightF = 72.99998!
+        Me.ReportFooter.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel3, Me.LNote, Me.XrLabel5, Me.XrLabel4, Me.XrTable1})
+        Me.ReportFooter.HeightF = 84.45829!
         Me.ReportFooter.Name = "ReportFooter"
         '
         'LNote
         '
         Me.LNote.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.LNote.LocationFloat = New DevExpress.Utils.PointFloat(67.00004!, 0!)
+        Me.LNote.Multiline = True
         Me.LNote.Name = "LNote"
         Me.LNote.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.LNote.SizeF = New System.Drawing.SizeF(901.9998!, 47.99998!)
@@ -692,6 +694,18 @@ Partial Public Class ReportDesignCOPPropose
         Me.XrLabel4.StylePriority.UseTextAlignment = False
         Me.XrLabel4.Text = "Note "
         Me.XrLabel4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+        '
+        'XrLabel3
+        '
+        Me.XrLabel3.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.XrLabel3.LocationFloat = New DevExpress.Utils.PointFloat(0.0001271566!, 47.99995!)
+        Me.XrLabel3.Multiline = True
+        Me.XrLabel3.Name = "XrLabel3"
+        Me.XrLabel3.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel3.SizeF = New System.Drawing.SizeF(968.9998!, 11.45833!)
+        Me.XrLabel3.StylePriority.UseFont = False
+        Me.XrLabel3.StylePriority.UseTextAlignment = False
+        Me.XrLabel3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
         '
         'ReportDesignCOPPropose
         '
@@ -773,4 +787,5 @@ Partial Public Class ReportDesignCOPPropose
     Friend WithEvents LType As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel11 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel12 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents XrLabel3 As DevExpress.XtraReports.UI.XRLabel
 End Class

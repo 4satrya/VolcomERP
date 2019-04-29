@@ -22,11 +22,18 @@ Public Class FormProductionRetInSingle
         actionLoad()
     End Sub
 
+    Sub load_type_ret()
+        Dim query As String = "SELECT id_return_qc_type,return_qc_type FROM `tb_lookup_return_qc_type` "
+        viewLookupQuery(LERetType, query, 0, "return_qc_type", "id_return_qc_type")
+    End Sub
+
     Private Sub FormProductionRetOutSingle_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
         Dispose()
     End Sub
 
     Sub actionLoad()
+        load_type_ret()
+
         If action = "ins" Then
             TxtRetOutNumber.Text = ""
             BtnPrint.Enabled = False
@@ -59,7 +66,7 @@ Public Class FormProductionRetInSingle
 
             'View data
             Try
-                Dim query As String = "SELECT (h.design_display_name) AS `design_name`, h.id_sample, DATE_FORMAT(a.prod_order_ret_in_date,'%Y-%m-%d') as prod_order_ret_in_datex, a.id_report_status, a.id_prod_order, a.id_prod_order_ret_in, a.prod_order_ret_in_date, "
+                Dim query As String = "SELECT a.id_return_qc_type,(h.design_display_name) AS `design_name`, h.id_sample, DATE_FORMAT(a.prod_order_ret_in_date,'%Y-%m-%d') as prod_order_ret_in_datex, a.id_report_status, a.id_prod_order, a.id_prod_order_ret_in, a.prod_order_ret_in_date, "
                 query += "g.id_design,a.prod_order_ret_in_note, a.prod_order_ret_in_number,  "
                 query += "b.prod_order_number, (c.id_comp_contact) AS id_comp_contact_from, (d.comp_name) AS comp_name_contact_from, (d.comp_number) AS comp_code_contact_from, (d.address_primary) AS comp_address_contact_from, "
                 query += "(e.id_comp_contact) AS id_comp_contact_to, (f.comp_name) AS comp_name_contact_to, (f.comp_number) AS comp_code_contact_to,(f.address_primary) AS comp_address_contact_to, ss.season "
@@ -88,6 +95,7 @@ Public Class FormProductionRetInSingle
                 TxtRetOutNumber.Text = data.Rows(0)("prod_order_ret_in_number").ToString
                 MENote.Text = data.Rows(0)("prod_order_ret_in_note").ToString
                 LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", data.Rows(0)("id_report_status").ToString)
+                LERetType.ItemIndex = LERetType.Properties.GetDataSourceRowIndex("id_return_qc_type", data.Rows(0)("id_return_qc_type").ToString)
                 id_report_status = data.Rows(0)("id_report_status").ToString
                 id_prod_order = data.Rows(0)("id_prod_order").ToString
                 id_design = data.Rows(0)("id_design").ToString
@@ -133,11 +141,11 @@ Public Class FormProductionRetInSingle
         End If
 
         'attachment
-        If check_attach_report_status(id_report_status, "32", id_prod_order_ret_in) Then
-            BtnAttachment.Enabled = True
-        Else
-            BtnAttachment.Enabled = False
-        End If
+        'If check_attach_report_status(id_report_status, "32", id_prod_order_ret_in) Then
+        '    BtnAttachment.Enabled = True
+        'Else
+        '    BtnAttachment.Enabled = False
+        'End If
 
         If check_print_report_status(id_report_status) Then
             BtnPrint.Enabled = True
@@ -220,6 +228,7 @@ Public Class FormProductionRetInSingle
             GCBarcode.RefreshDataSource()
             GVBarcode.RefreshData()
         End If
+        LERetType.Enabled = False
         check_but()
     End Sub
     'Button
@@ -263,6 +272,10 @@ Public Class FormProductionRetInSingle
             Dim id_report_status As String = LEReportStatus.EditValue
             Dim id_prod_order_det, prod_order_ret_in_det_qty, prod_order_ret_in_det_note As String
             Dim id_prod_order_ret_in_det As String
+            Dim id_return_qc_type As String = "1"
+            '
+            id_return_qc_type = LERetType.EditValue.ToString
+            '
             If action = "ins" Then
                 Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure to continue this process?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
                 If confirm = Windows.Forms.DialogResult.Yes Then
@@ -272,8 +285,8 @@ Public Class FormProductionRetInSingle
                         prod_order_ret_in_number = header_number_prod("5")
 
                         'Main tbale
-                        query = "INSERT INTO tb_prod_order_ret_in(id_prod_order, prod_order_ret_in_number, id_comp_contact_to, id_comp_contact_from, prod_order_ret_in_date, prod_order_ret_in_note, id_report_status) "
-                        query += "VALUES('" + id_prod_order + "', '" + prod_order_ret_in_number + "', '" + id_comp_contact_to + "', '" + id_comp_contact_from + "', NOW(), '" + prod_order_ret_in_note + "', '" + id_report_status + "'); SELECT LAST_INSERT_ID(); "
+                        query = "INSERT INTO tb_prod_order_ret_in(id_prod_order, prod_order_ret_in_number, id_comp_contact_to, id_comp_contact_from, prod_order_ret_in_date, prod_order_ret_in_note, id_report_status,id_return_qc_type) "
+                        query += "VALUES('" + id_prod_order + "', '" + prod_order_ret_in_number + "', '" + id_comp_contact_to + "', '" + id_comp_contact_from + "', NOW(), '" + prod_order_ret_in_note + "', '" + id_report_status + "','" + id_return_qc_type + "'); SELECT LAST_INSERT_ID(); "
                         id_prod_order_ret_in = execute_query(query, 0, True, "", "", "", "")
                         increase_inc_prod("5")
 
@@ -319,7 +332,7 @@ Public Class FormProductionRetInSingle
                         prod_order_ret_in_number = TxtRetOutNumber.Text
 
                         'edit main table
-                        query = "UPDATE tb_prod_order_ret_in SET id_prod_order = '" + id_prod_order + "', prod_order_ret_in_number = '" + prod_order_ret_in_number + "', id_comp_contact_to = '" + id_comp_contact_to + "', id_comp_contact_from = '" + id_comp_contact_from + "', id_report_status = '" + id_report_status + "', prod_order_ret_in_note = '" + prod_order_ret_in_note + "' WHERE id_prod_order_ret_in = '" + id_prod_order_ret_in + "' "
+                        query = "UPDATE tb_prod_order_ret_in SET id_prod_order = '" + id_prod_order + "', prod_order_ret_in_number = '" + prod_order_ret_in_number + "', id_comp_contact_to = '" + id_comp_contact_to + "', id_comp_contact_from = '" + id_comp_contact_from + "', id_report_status = '" + id_report_status + "', prod_order_ret_in_note = '" + prod_order_ret_in_note + "',id_return_qc_type='" + id_return_qc_type + "' WHERE id_prod_order_ret_in = '" + id_prod_order_ret_in + "' "
                         execute_non_query(query, True, "", "", "", "")
 
                         'edit detail table
@@ -380,8 +393,13 @@ Public Class FormProductionRetInSingle
         FormPopUpProd.ShowDialog()
     End Sub
     Private Sub BtnBrowseContactFrom_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnBrowseContactFrom.Click
-        FormPopUpContact.id_pop_up = "33"
-        FormPopUpContact.ShowDialog()
+        If TxtOrderNumber.Text = "" Then
+            warningCustom("Please select order first")
+        Else
+            FormPopUpContact.id_pop_up = "33"
+            FormPopUpContact.id_cat = "1"
+            FormPopUpContact.ShowDialog()
+        End If
     End Sub
     Private Sub BtnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnAdd.Click
         FormPopUpProdDet.id_pop_up = "2"
@@ -700,6 +718,11 @@ Public Class FormProductionRetInSingle
         Cursor = Cursors.WaitCursor
         FormDocumentUpload.id_report = id_prod_order_ret_in
         FormDocumentUpload.report_mark_type = "32"
+        '
+        If Not check_attach_report_status(id_report_status, "32", id_prod_order_ret_in) Then
+            FormDocumentUpload.is_no_delete = "1"
+        End If
+        '
         FormDocumentUpload.ShowDialog()
         Cursor = Cursors.Default
     End Sub

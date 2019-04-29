@@ -142,12 +142,19 @@
     '=================Tab REC Waiting===========================
     Sub view_sample_purc()
         Dim query = "Select "
-        query += "a.id_pl_prod_order,d.id_sample, a.pl_prod_order_number, d.design_display_name,d.design_name , d.design_code, g.pl_category, "
+        query += "a.id_pl_prod_order,d.id_sample, a.pl_prod_order_number, d.design_display_name,d.design_name , d.design_code, IFNULL(ad.total_qty,0) AS `total_qty`, g.pl_category, "
         query += "(a.pl_prod_order_date) As pl_prod_order_date, a.id_report_status,c.report_status, "
         query += "d.id_design,b.id_delivery, e.delivery, f.season, e.id_season, "
         query += "a.id_comp_contact_from, a.id_comp_contact_to, (i.comp_name) As comp_name_to, (i.comp_number) As comp_number_to, (k.comp_name) As comp_name_from, (k.comp_number) As comp_number_from, "
         query += "alloc.id_pd_alloc, alloc.pd_alloc "
-        query += "FROM tb_pl_prod_order a "
+        query += "FROM tb_pl_prod_order a 
+        LEFT JOIN (
+	        SELECT pl.id_pl_prod_order, SUM(pld.pl_prod_order_det_qty) AS `total_qty`
+	        FROM tb_pl_prod_order_det pld
+	        INNER JOIN tb_pl_prod_order pl ON pl.id_pl_prod_order = pld.id_pl_prod_order
+	        WHERE pl.id_report_status=6
+	        GROUP BY pl.id_pl_prod_order
+        ) ad ON ad.id_pl_prod_order = a.id_pl_prod_order "
         query += "INNER JOIN tb_m_comp_contact h On h.id_comp_contact = a.id_comp_contact_to "
         query += "INNER JOIN tb_m_comp i On h.id_comp = i.id_comp "
         query += "INNER JOIN tb_m_comp_contact j On j.id_comp_contact = a.id_comp_contact_from "
@@ -165,6 +172,7 @@
         query += "ORDER BY a.id_pl_prod_order ASC "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCProd.DataSource = data
+        GVProd.BestFitColumns()
         check_menu()
 
         Dim id_pl_prod_order_param As String = "-1"

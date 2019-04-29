@@ -157,6 +157,7 @@
             FormSalesPOSDet.SPVat.EditValue = GVSalesPOS.GetFocusedRowCellValue("sales_pos_vat")
             FormSalesPOSDet.calculate()
             FormSalesPOSDet.viewDetail()
+            FormSalesPOSDet.viewDetailCode()
             Close()
         End If
         Cursor = Cursors.Default

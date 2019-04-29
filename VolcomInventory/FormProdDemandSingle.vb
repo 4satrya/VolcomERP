@@ -203,7 +203,6 @@
 
     Sub allow_status()
         'Based on report status
-        BtnPrint.Enabled = True
         BtnCancellPropose.Visible = True
         BtnSave.Visible = False
         LEBudget.Enabled = False
@@ -215,6 +214,7 @@
         SLESeason.Enabled = False
         If is_confirm = "2" And check_edit_report_status(id_report_status, report_mark_type, id_prod_demand) Then
             'MsgBox("Masih Boleh"
+            BtnPrint.Enabled = False
             BtnConfirm.Visible = True
             BMark.Visible = False
             PanelControlNav.Visible = True
@@ -222,6 +222,7 @@
             LECat.Enabled = True
         Else
             'MsgBox("Nggak Boleh"
+            BtnPrint.Enabled = True
             BtnConfirm.Visible = False
             BMark.Visible = True
             PanelControlNav.Visible = False
@@ -306,9 +307,6 @@
                         Dim query_det_new As String = "CALL generate_pd_line_list('" + id_prod_demand + "', '" + type_line_list + "', '" + dsg_line_list + "')"
                         execute_non_query(query_det_new, True, "", "", "", "")
                     End If
-
-                    'submit
-                    submit_who_prepared(rmt, id_prod_demand, id_user)
 
 
                     FormProdDemand.viewProdDemand()
@@ -567,7 +565,7 @@
         FormDocumentUpload.report_mark_type = report_mark_type
 
         'cek ud submit ato blm
-        If id_report_status = "6" Or id_report_status = "5" Or is_confirm = "1" Then
+        If id_report_status = "6" Or id_report_status = "5" Then
             FormDocumentUpload.is_view = "1"
         End If
 
@@ -587,72 +585,73 @@
 
     Private Sub BtnPrint_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnPrint.Click
         Cursor = Cursors.WaitCursor
-        ReportProdDemandNew.dt = GCDesign.DataSource
-        ReportProdDemandNew.id_prod_demand = id_prod_demand
-        If id_report_status <> "6" Then
-            FormProdDemandPrintOpt.id = id_prod_demand
-            FormProdDemandPrintOpt.rmt = report_mark_type
-            FormProdDemandPrintOpt.ShowDialog()
-            ReportProdDemandNew.is_pre = "1"
+        If Not check_allow_print(id_report_status, report_mark_type, id_prod_demand) Then
+            warningCustom("Can't print, please complete all approval on system first")
         Else
-            ReportProdDemandNew.is_pre = "-1"
+            ReportProdDemandNew.dt = GCDesign.DataSource
+            ReportProdDemandNew.id_prod_demand = id_prod_demand
+            If id_report_status <> "6" Then
+                ReportProdDemandNew.is_pre = "1"
+            Else
+                ReportProdDemandNew.is_pre = "-1"
+            End If
+            ReportProdDemandNew.id_report_status = LEReportStatus.EditValue.ToString
+
+            ReportProdDemandNew.rmt = report_mark_type
+            Dim Report As New ReportProdDemandNew()
+
+            '' '... 
+            '' ' creating and saving the view's layout to a new memory stream 
+            Dim str As System.IO.Stream
+            str = New System.IO.MemoryStream()
+            GVDesign.SaveLayoutToStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+            str.Seek(0, System.IO.SeekOrigin.Begin)
+            Report.GVDesign.RestoreLayoutFromStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+            str.Seek(0, System.IO.SeekOrigin.Begin)
+
+            'style
+            Report.GVDesign.OptionsPrint.UsePrintStyles = True
+            Report.GVDesign.AppearancePrint.FilterPanel.BackColor = Color.Transparent
+            Report.GVDesign.AppearancePrint.FilterPanel.ForeColor = Color.Black
+            Report.GVDesign.AppearancePrint.FilterPanel.Font = New Font("Tahoma", 5, FontStyle.Regular)
+
+            Report.GVDesign.AppearancePrint.GroupFooter.BackColor = Color.Transparent
+            Report.GVDesign.AppearancePrint.GroupFooter.ForeColor = Color.Black
+            Report.GVDesign.AppearancePrint.GroupFooter.Font = New Font("Tahoma", 5, FontStyle.Bold)
+
+            Report.GVDesign.AppearancePrint.GroupRow.BackColor = Color.Transparent
+            Report.GVDesign.AppearancePrint.GroupRow.ForeColor = Color.Black
+            Report.GVDesign.AppearancePrint.GroupRow.Font = New Font("Tahoma", 5, FontStyle.Bold)
+
+
+            Report.GVDesign.AppearancePrint.HeaderPanel.BackColor = Color.Transparent
+            Report.GVDesign.AppearancePrint.HeaderPanel.ForeColor = Color.Black
+            Report.GVDesign.AppearancePrint.HeaderPanel.Font = New Font("Tahoma", 5, FontStyle.Bold)
+
+            Report.GVDesign.AppearancePrint.FooterPanel.BackColor = Color.Transparent
+            Report.GVDesign.AppearancePrint.FooterPanel.ForeColor = Color.Black
+            Report.GVDesign.AppearancePrint.FooterPanel.Font = New Font("Tahoma", 5.3, FontStyle.Bold)
+
+            Report.GVDesign.AppearancePrint.Row.Font = New Font("Tahoma", 5.3, FontStyle.Regular)
+
+            Report.GVDesign.OptionsPrint.ExpandAllDetails = True
+            Report.GVDesign.OptionsPrint.UsePrintStyles = True
+            Report.GVDesign.OptionsPrint.PrintDetails = True
+            Report.GVDesign.OptionsPrint.PrintFooter = True
+
+
+            Report.LabelNumber.Text = TxtProdDemandNumber.Text
+            Report.LabelDate.Text = DEForm.Text.ToUpper
+            Report.LabelSeason.Text = SLESeason.Text
+            Report.LabelDivision.Text = LESampleDivision.Text
+            Report.LabelStatus.Text = LEReportStatus.Text.ToUpper
+            Report.LabelRateCurrent.Text = TxtRateCurrent.Text
+            Report.LNote.Text = MENote.Text
+
+            ' Show the report's preview. 
+            Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
+            Tool.ShowPreviewDialog()
         End If
-        ReportProdDemandNew.id_report_status = LEReportStatus.EditValue.ToString
-
-        ReportProdDemandNew.rmt = report_mark_type
-        Dim Report As New ReportProdDemandNew()
-
-        '' '... 
-        '' ' creating and saving the view's layout to a new memory stream 
-        Dim str As System.IO.Stream
-        str = New System.IO.MemoryStream()
-        GVDesign.SaveLayoutToStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
-        str.Seek(0, System.IO.SeekOrigin.Begin)
-        Report.GVDesign.RestoreLayoutFromStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
-        str.Seek(0, System.IO.SeekOrigin.Begin)
-
-        'style
-        Report.GVDesign.OptionsPrint.UsePrintStyles = True
-        Report.GVDesign.AppearancePrint.FilterPanel.BackColor = Color.Transparent
-        Report.GVDesign.AppearancePrint.FilterPanel.ForeColor = Color.Black
-        Report.GVDesign.AppearancePrint.FilterPanel.Font = New Font("Tahoma", 5, FontStyle.Regular)
-
-        Report.GVDesign.AppearancePrint.GroupFooter.BackColor = Color.Transparent
-        Report.GVDesign.AppearancePrint.GroupFooter.ForeColor = Color.Black
-        Report.GVDesign.AppearancePrint.GroupFooter.Font = New Font("Tahoma", 5, FontStyle.Bold)
-
-        Report.GVDesign.AppearancePrint.GroupRow.BackColor = Color.Transparent
-        Report.GVDesign.AppearancePrint.GroupRow.ForeColor = Color.Black
-        Report.GVDesign.AppearancePrint.GroupRow.Font = New Font("Tahoma", 5, FontStyle.Bold)
-
-
-        Report.GVDesign.AppearancePrint.HeaderPanel.BackColor = Color.Transparent
-        Report.GVDesign.AppearancePrint.HeaderPanel.ForeColor = Color.Black
-        Report.GVDesign.AppearancePrint.HeaderPanel.Font = New Font("Tahoma", 5, FontStyle.Bold)
-
-        Report.GVDesign.AppearancePrint.FooterPanel.BackColor = Color.Transparent
-        Report.GVDesign.AppearancePrint.FooterPanel.ForeColor = Color.Black
-        Report.GVDesign.AppearancePrint.FooterPanel.Font = New Font("Tahoma", 5.3, FontStyle.Bold)
-
-        Report.GVDesign.AppearancePrint.Row.Font = New Font("Tahoma", 5.3, FontStyle.Regular)
-
-        Report.GVDesign.OptionsPrint.ExpandAllDetails = True
-        Report.GVDesign.OptionsPrint.UsePrintStyles = True
-        Report.GVDesign.OptionsPrint.PrintDetails = True
-        Report.GVDesign.OptionsPrint.PrintFooter = True
-
-
-        Report.LabelNumber.Text = TxtProdDemandNumber.Text
-        Report.LabelDate.Text = DEForm.Text.ToUpper
-        Report.LabelSeason.Text = SLESeason.Text
-        Report.LabelDivision.Text = LESampleDivision.Text
-        Report.LabelStatus.Text = LEReportStatus.Text.ToUpper
-        Report.LabelRateCurrent.Text = TxtRateCurrent.Text
-        Report.LNote.Text = MENote.Text
-
-        ' Show the report's preview. 
-        Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
-        Tool.ShowPreviewDialog()
         Cursor = Cursors.Default
     End Sub
 
@@ -921,18 +920,7 @@
 
     Private Sub BtnConfirm_Click_1(sender As Object, e As EventArgs) Handles BtnConfirm.Click
         Cursor = Cursors.WaitCursor
-
-        'cek file
-        Dim cond_exist_file As Boolean = True
-        Dim query_file As String = "SELECT * FROM tb_doc d WHERE d.report_mark_type=" + report_mark_type + " AND d.id_report=" + id_prod_demand + ""
-        Dim data_file As DataTable = execute_query(query_file, -1, True, "", "", "", "")
-        If data_file.Rows.Count <= 0 Then
-            cond_exist_file = False
-        End If
-
-        If Not cond_exist_file Then
-            warningCustom("Please attach document first")
-        ElseIf GVDesign.RowCount <= 0 Then
+        If GVDesign.RowCount <= 0 Then
             stopCustom("Detailed data not found. If you want to cancel this revision, please click 'Cancel Propose'")
         Else
             Dim prod_demand_note As String = addSlashes(MENote.Text)
@@ -942,6 +930,9 @@
                 'update confirm
                 Dim query As String = "UPDATE tb_prod_demand SET is_confirm=1,prod_demand_note='" + prod_demand_note + "'  WHERE id_prod_demand='" + id_prod_demand + "'"
                 execute_non_query(query, True, "", "", "", "")
+
+                'submit
+                submit_who_prepared(report_mark_type, id_prod_demand, id_user)
 
                 'refresh
                 FormProdDemand.viewProdDemand()

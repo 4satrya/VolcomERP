@@ -23,6 +23,8 @@ Partial Class FormSalesReturnOrderDet
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormSalesReturnOrderDet))
         Me.GroupGeneralHeader = New DevExpress.XtraEditors.GroupControl()
         Me.PanelControlTopRight = New DevExpress.XtraEditors.PanelControl()
+        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
+        Me.DEDelDate = New DevExpress.XtraEditors.DateEdit()
         Me.DERetDueDate = New DevExpress.XtraEditors.DateEdit()
         Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
@@ -30,6 +32,7 @@ Partial Class FormSalesReturnOrderDet
         Me.LabelControl7 = New DevExpress.XtraEditors.LabelControl()
         Me.DEForm = New DevExpress.XtraEditors.TextEdit()
         Me.PanelControlTopLeft = New DevExpress.XtraEditors.PanelControl()
+        Me.CEOnHold = New DevExpress.XtraEditors.CheckEdit()
         Me.MEAdrressCompTo = New DevExpress.XtraEditors.MemoEdit()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.TxtCodeCompTo = New DevExpress.XtraEditors.TextEdit()
@@ -75,7 +78,9 @@ Partial Class FormSalesReturnOrderDet
         Me.GridColumnPriceType = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnQtyAvail = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnFound = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnid_detail_on_hold = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControlNav = New DevExpress.XtraEditors.PanelControl()
+        Me.BtnOnHoldList = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnImport2 = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnEdit = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnImport = New DevExpress.XtraEditors.SimpleButton()
@@ -86,16 +91,29 @@ Partial Class FormSalesReturnOrderDet
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.AddAnotherProductToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReviseQtyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.XTCRO = New DevExpress.XtraTab.XtraTabControl()
+        Me.XTPItems = New DevExpress.XtraTab.XtraTabPage()
+        Me.XTPRate = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCRate = New DevExpress.XtraGrid.GridControl()
+        Me.GVRate = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumnid_cargo = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumncargo_name = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumncargo_rate = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumncargo_lead_time = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumncargo_min_weight = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
         CType(Me.PanelControlTopRight, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlTopRight.SuspendLayout()
+        CType(Me.DEDelDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEDelDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DERetDueDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DERetDueDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtSalesOrderNumber.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEForm.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControlTopLeft, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlTopLeft.SuspendLayout()
+        CType(Me.CEOnHold.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.MEAdrressCompTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtCodeCompTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtNameCompTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -117,6 +135,12 @@ Partial Class FormSalesReturnOrderDet
         Me.PanelControlNav.SuspendLayout()
         CType(Me.EPForm, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip1.SuspendLayout()
+        CType(Me.XTCRO, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTCRO.SuspendLayout()
+        Me.XTPItems.SuspendLayout()
+        Me.XTPRate.SuspendLayout()
+        CType(Me.GCRate, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVRate, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupGeneralHeader
@@ -127,12 +151,14 @@ Partial Class FormSalesReturnOrderDet
         Me.GroupGeneralHeader.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupGeneralHeader.Location = New System.Drawing.Point(0, 0)
         Me.GroupGeneralHeader.Name = "GroupGeneralHeader"
-        Me.GroupGeneralHeader.Size = New System.Drawing.Size(785, 109)
+        Me.GroupGeneralHeader.Size = New System.Drawing.Size(785, 134)
         Me.GroupGeneralHeader.TabIndex = 184
         '
         'PanelControlTopRight
         '
         Me.PanelControlTopRight.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelControlTopRight.Controls.Add(Me.LabelControl4)
+        Me.PanelControlTopRight.Controls.Add(Me.DEDelDate)
         Me.PanelControlTopRight.Controls.Add(Me.DERetDueDate)
         Me.PanelControlTopRight.Controls.Add(Me.LabelControl5)
         Me.PanelControlTopRight.Controls.Add(Me.LabelControl2)
@@ -142,17 +168,44 @@ Partial Class FormSalesReturnOrderDet
         Me.PanelControlTopRight.Dock = System.Windows.Forms.DockStyle.Right
         Me.PanelControlTopRight.Location = New System.Drawing.Point(520, 2)
         Me.PanelControlTopRight.Name = "PanelControlTopRight"
-        Me.PanelControlTopRight.Size = New System.Drawing.Size(263, 105)
+        Me.PanelControlTopRight.Size = New System.Drawing.Size(263, 130)
         Me.PanelControlTopRight.TabIndex = 8892
+        '
+        'LabelControl4
+        '
+        Me.LabelControl4.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl4.Location = New System.Drawing.Point(12, 88)
+        Me.LabelControl4.Name = "LabelControl4"
+        Me.LabelControl4.Size = New System.Drawing.Size(87, 13)
+        Me.LabelControl4.TabIndex = 8892
+        Me.LabelControl4.Text = "Est. Delivery Date"
+        '
+        'DEDelDate
+        '
+        Me.DEDelDate.EditValue = Nothing
+        Me.DEDelDate.Location = New System.Drawing.Point(110, 85)
+        Me.DEDelDate.Name = "DEDelDate"
+        Me.DEDelDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[False]
+        Me.DEDelDate.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEDelDate.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.DEDelDate.Properties.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.DEDelDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEDelDate.Properties.Mask.EditMask = "dd\/MM\/yyyy"
+        Me.DEDelDate.Size = New System.Drawing.Size(132, 20)
+        Me.DEDelDate.TabIndex = 8891
+        Me.DEDelDate.ToolTip = "Estimate date for next delivery"
+        Me.DEDelDate.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Information
         '
         'DERetDueDate
         '
         Me.DERetDueDate.EditValue = Nothing
+        Me.DERetDueDate.Enabled = False
         Me.DERetDueDate.Location = New System.Drawing.Point(110, 59)
         Me.DERetDueDate.Name = "DERetDueDate"
+        Me.DERetDueDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[False]
         Me.DERetDueDate.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.DERetDueDate.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
-        Me.DERetDueDate.Properties.DisplayFormat.FormatString = "dd\/MM\/yyyy"
+        Me.DERetDueDate.Properties.DisplayFormat.FormatString = "dd MMMM yyyy"
         Me.DERetDueDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.DERetDueDate.Properties.Mask.EditMask = "dd\/MM\/yyyy"
         Me.DERetDueDate.Size = New System.Drawing.Size(132, 20)
@@ -172,9 +225,9 @@ Partial Class FormSalesReturnOrderDet
         Me.LabelControl2.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelControl2.Location = New System.Drawing.Point(12, 62)
         Me.LabelControl2.Name = "LabelControl2"
-        Me.LabelControl2.Size = New System.Drawing.Size(77, 13)
+        Me.LabelControl2.Size = New System.Drawing.Size(81, 13)
         Me.LabelControl2.TabIndex = 8890
-        Me.LabelControl2.Text = "Est Return Date"
+        Me.LabelControl2.Text = "Est. Return Date"
         '
         'TxtSalesOrderNumber
         '
@@ -210,6 +263,7 @@ Partial Class FormSalesReturnOrderDet
         'PanelControlTopLeft
         '
         Me.PanelControlTopLeft.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelControlTopLeft.Controls.Add(Me.CEOnHold)
         Me.PanelControlTopLeft.Controls.Add(Me.MEAdrressCompTo)
         Me.PanelControlTopLeft.Controls.Add(Me.LabelControl1)
         Me.PanelControlTopLeft.Controls.Add(Me.TxtCodeCompTo)
@@ -219,8 +273,16 @@ Partial Class FormSalesReturnOrderDet
         Me.PanelControlTopLeft.Dock = System.Windows.Forms.DockStyle.Left
         Me.PanelControlTopLeft.Location = New System.Drawing.Point(21, 2)
         Me.PanelControlTopLeft.Name = "PanelControlTopLeft"
-        Me.PanelControlTopLeft.Size = New System.Drawing.Size(761, 105)
+        Me.PanelControlTopLeft.Size = New System.Drawing.Size(761, 130)
         Me.PanelControlTopLeft.TabIndex = 8891
+        '
+        'CEOnHold
+        '
+        Me.CEOnHold.Location = New System.Drawing.Point(55, 87)
+        Me.CEOnHold.Name = "CEOnHold"
+        Me.CEOnHold.Properties.Caption = "On Hold"
+        Me.CEOnHold.Size = New System.Drawing.Size(64, 19)
+        Me.CEOnHold.TabIndex = 8889
         '
         'MEAdrressCompTo
         '
@@ -300,7 +362,7 @@ Partial Class FormSalesReturnOrderDet
         Me.PanelControl3.Controls.Add(Me.BtnCancel)
         Me.PanelControl3.Controls.Add(Me.BtnSave)
         Me.PanelControl3.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl3.Location = New System.Drawing.Point(0, 455)
+        Me.PanelControl3.Location = New System.Drawing.Point(0, 503)
         Me.PanelControl3.LookAndFeel.SkinName = "Blue"
         Me.PanelControl3.LookAndFeel.UseDefaultLookAndFeel = False
         Me.PanelControl3.Name = "PanelControl3"
@@ -396,7 +458,7 @@ Partial Class FormSalesReturnOrderDet
         Me.GroupControl3.Controls.Add(Me.MENote)
         Me.GroupControl3.Controls.Add(Me.LabelControl18)
         Me.GroupControl3.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.GroupControl3.Location = New System.Drawing.Point(0, 380)
+        Me.GroupControl3.Location = New System.Drawing.Point(0, 428)
         Me.GroupControl3.Name = "GroupControl3"
         Me.GroupControl3.Size = New System.Drawing.Size(785, 75)
         Me.GroupControl3.TabIndex = 186
@@ -456,9 +518,9 @@ Partial Class FormSalesReturnOrderDet
         Me.GroupControlList.Controls.Add(Me.GCItemList)
         Me.GroupControlList.Controls.Add(Me.PanelControlNav)
         Me.GroupControlList.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GroupControlList.Location = New System.Drawing.Point(0, 109)
+        Me.GroupControlList.Location = New System.Drawing.Point(0, 0)
         Me.GroupControlList.Name = "GroupControlList"
-        Me.GroupControlList.Size = New System.Drawing.Size(785, 271)
+        Me.GroupControlList.Size = New System.Drawing.Size(779, 266)
         Me.GroupControlList.TabIndex = 185
         Me.GroupControlList.Text = "Item List"
         '
@@ -470,13 +532,13 @@ Partial Class FormSalesReturnOrderDet
         Me.GCItemList.MainView = Me.GVItemList
         Me.GCItemList.Name = "GCItemList"
         Me.GCItemList.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemSpinEdit1})
-        Me.GCItemList.Size = New System.Drawing.Size(762, 232)
+        Me.GCItemList.Size = New System.Drawing.Size(756, 227)
         Me.GCItemList.TabIndex = 2
         Me.GCItemList.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVItemList})
         '
         'GVItemList
         '
-        Me.GVItemList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumnCode, Me.GridColumnName, Me.GridColumnSize, Me.GridColumnQty, Me.GridColumnPrice, Me.GridColumnAmount, Me.GridColumnRemark, Me.GridColumnIdSalesTarget, Me.GridColumnUOM, Me.GridColumnReturnCategory, Me.GridColumnIdDesign, Me.GridColumnIdProduct, Me.GridColumnIdSample, Me.GridColumnIdSalesOrderDet, Me.GridColumnProductName, Me.GridColumnIdReturnCat, Me.GridColumnIdDesignPrice, Me.GridColumnPriceType, Me.GridColumnQtyAvail, Me.GridColumnFound})
+        Me.GVItemList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumnCode, Me.GridColumnName, Me.GridColumnSize, Me.GridColumnQty, Me.GridColumnPrice, Me.GridColumnAmount, Me.GridColumnRemark, Me.GridColumnIdSalesTarget, Me.GridColumnUOM, Me.GridColumnReturnCategory, Me.GridColumnIdDesign, Me.GridColumnIdProduct, Me.GridColumnIdSample, Me.GridColumnIdSalesOrderDet, Me.GridColumnProductName, Me.GridColumnIdReturnCat, Me.GridColumnIdDesignPrice, Me.GridColumnPriceType, Me.GridColumnQtyAvail, Me.GridColumnFound, Me.GridColumnid_detail_on_hold})
         Me.GVItemList.GridControl = Me.GCItemList
         Me.GVItemList.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_order_det_qty", Me.GridColumnQty, "{0:f2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount", Me.GridColumnAmount, "{0:n2}")})
         Me.GVItemList.Name = "GVItemList"
@@ -692,9 +754,16 @@ Partial Class FormSalesReturnOrderDet
         Me.GridColumnFound.FieldName = "is_found"
         Me.GridColumnFound.Name = "GridColumnFound"
         '
+        'GridColumnid_detail_on_hold
+        '
+        Me.GridColumnid_detail_on_hold.Caption = "Id Detail On Hold"
+        Me.GridColumnid_detail_on_hold.FieldName = "id_detail_on_hold"
+        Me.GridColumnid_detail_on_hold.Name = "GridColumnid_detail_on_hold"
+        '
         'PanelControlNav
         '
         Me.PanelControlNav.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelControlNav.Controls.Add(Me.BtnOnHoldList)
         Me.PanelControlNav.Controls.Add(Me.BtnImport2)
         Me.PanelControlNav.Controls.Add(Me.BtnEdit)
         Me.PanelControlNav.Controls.Add(Me.BtnImport)
@@ -704,8 +773,19 @@ Partial Class FormSalesReturnOrderDet
         Me.PanelControlNav.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControlNav.Location = New System.Drawing.Point(21, 2)
         Me.PanelControlNav.Name = "PanelControlNav"
-        Me.PanelControlNav.Size = New System.Drawing.Size(762, 35)
+        Me.PanelControlNav.Size = New System.Drawing.Size(756, 35)
         Me.PanelControlNav.TabIndex = 0
+        '
+        'BtnOnHoldList
+        '
+        Me.BtnOnHoldList.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnOnHoldList.Image = CType(resources.GetObject("BtnOnHoldList.Image"), System.Drawing.Image)
+        Me.BtnOnHoldList.ImageList = Me.LargeImageCollection
+        Me.BtnOnHoldList.Location = New System.Drawing.Point(329, 0)
+        Me.BtnOnHoldList.Name = "BtnOnHoldList"
+        Me.BtnOnHoldList.Size = New System.Drawing.Size(112, 35)
+        Me.BtnOnHoldList.TabIndex = 7
+        Me.BtnOnHoldList.Text = "On Hold List"
         '
         'BtnImport2
         '
@@ -723,7 +803,7 @@ Partial Class FormSalesReturnOrderDet
         Me.BtnEdit.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnEdit.ImageIndex = 2
         Me.BtnEdit.ImageList = Me.LargeImageCollection
-        Me.BtnEdit.Location = New System.Drawing.Point(447, 0)
+        Me.BtnEdit.Location = New System.Drawing.Point(441, 0)
         Me.BtnEdit.Name = "BtnEdit"
         Me.BtnEdit.Size = New System.Drawing.Size(34, 35)
         Me.BtnEdit.TabIndex = 4
@@ -746,7 +826,7 @@ Partial Class FormSalesReturnOrderDet
         Me.BtnDel.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnDel.ImageIndex = 1
         Me.BtnDel.ImageList = Me.LargeImageCollection
-        Me.BtnDel.Location = New System.Drawing.Point(481, 0)
+        Me.BtnDel.Location = New System.Drawing.Point(475, 0)
         Me.BtnDel.Name = "BtnDel"
         Me.BtnDel.Size = New System.Drawing.Size(80, 35)
         Me.BtnDel.TabIndex = 4
@@ -757,7 +837,7 @@ Partial Class FormSalesReturnOrderDet
         Me.BtnAdd.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnAdd.ImageIndex = 0
         Me.BtnAdd.ImageList = Me.LargeImageCollection
-        Me.BtnAdd.Location = New System.Drawing.Point(561, 0)
+        Me.BtnAdd.Location = New System.Drawing.Point(555, 0)
         Me.BtnAdd.Name = "BtnAdd"
         Me.BtnAdd.Size = New System.Drawing.Size(78, 35)
         Me.BtnAdd.TabIndex = 2
@@ -768,7 +848,7 @@ Partial Class FormSalesReturnOrderDet
         Me.BtnAddMultiple.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnAddMultiple.ImageIndex = 11
         Me.BtnAddMultiple.ImageList = Me.LargeImageCollection
-        Me.BtnAddMultiple.Location = New System.Drawing.Point(639, 0)
+        Me.BtnAddMultiple.Location = New System.Drawing.Point(633, 0)
         Me.BtnAddMultiple.Name = "BtnAddMultiple"
         Me.BtnAddMultiple.Size = New System.Drawing.Size(123, 35)
         Me.BtnAddMultiple.TabIndex = 3
@@ -796,12 +876,99 @@ Partial Class FormSalesReturnOrderDet
         Me.ReviseQtyToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
         Me.ReviseQtyToolStripMenuItem.Text = "Revise Qty"
         '
+        'XTCRO
+        '
+        Me.XTCRO.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.XTCRO.Location = New System.Drawing.Point(0, 134)
+        Me.XTCRO.Name = "XTCRO"
+        Me.XTCRO.SelectedTabPage = Me.XTPItems
+        Me.XTCRO.Size = New System.Drawing.Size(785, 294)
+        Me.XTCRO.TabIndex = 188
+        Me.XTCRO.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPItems, Me.XTPRate})
+        '
+        'XTPItems
+        '
+        Me.XTPItems.Controls.Add(Me.GroupControlList)
+        Me.XTPItems.Name = "XTPItems"
+        Me.XTPItems.Size = New System.Drawing.Size(779, 266)
+        Me.XTPItems.Text = "Items"
+        '
+        'XTPRate
+        '
+        Me.XTPRate.Controls.Add(Me.GCRate)
+        Me.XTPRate.Name = "XTPRate"
+        Me.XTPRate.Size = New System.Drawing.Size(779, 266)
+        Me.XTPRate.Text = "Cargo Rate"
+        '
+        'GCRate
+        '
+        Me.GCRate.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCRate.Location = New System.Drawing.Point(0, 0)
+        Me.GCRate.MainView = Me.GVRate
+        Me.GCRate.Name = "GCRate"
+        Me.GCRate.Size = New System.Drawing.Size(779, 266)
+        Me.GCRate.TabIndex = 0
+        Me.GCRate.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVRate})
+        '
+        'GVRate
+        '
+        Me.GVRate.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnid_cargo, Me.GridColumncargo_name, Me.GridColumncargo_rate, Me.GridColumncargo_lead_time, Me.GridColumncargo_min_weight})
+        Me.GVRate.GridControl = Me.GCRate
+        Me.GVRate.Name = "GVRate"
+        Me.GVRate.OptionsBehavior.Editable = False
+        Me.GVRate.OptionsFind.AlwaysVisible = True
+        Me.GVRate.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumnid_cargo
+        '
+        Me.GridColumnid_cargo.Caption = "Id Cargo"
+        Me.GridColumnid_cargo.FieldName = "id_cargo"
+        Me.GridColumnid_cargo.Name = "GridColumnid_cargo"
+        '
+        'GridColumncargo_name
+        '
+        Me.GridColumncargo_name.Caption = "Cargo"
+        Me.GridColumncargo_name.FieldName = "cargo_name"
+        Me.GridColumncargo_name.Name = "GridColumncargo_name"
+        Me.GridColumncargo_name.Visible = True
+        Me.GridColumncargo_name.VisibleIndex = 0
+        '
+        'GridColumncargo_rate
+        '
+        Me.GridColumncargo_rate.Caption = "Rate"
+        Me.GridColumncargo_rate.DisplayFormat.FormatString = "N2"
+        Me.GridColumncargo_rate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumncargo_rate.FieldName = "cargo_rate"
+        Me.GridColumncargo_rate.Name = "GridColumncargo_rate"
+        Me.GridColumncargo_rate.Visible = True
+        Me.GridColumncargo_rate.VisibleIndex = 1
+        '
+        'GridColumncargo_lead_time
+        '
+        Me.GridColumncargo_lead_time.Caption = "Lead Time (day)"
+        Me.GridColumncargo_lead_time.DisplayFormat.FormatString = "N0"
+        Me.GridColumncargo_lead_time.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumncargo_lead_time.FieldName = "cargo_lead_time"
+        Me.GridColumncargo_lead_time.Name = "GridColumncargo_lead_time"
+        Me.GridColumncargo_lead_time.Visible = True
+        Me.GridColumncargo_lead_time.VisibleIndex = 2
+        '
+        'GridColumncargo_min_weight
+        '
+        Me.GridColumncargo_min_weight.Caption = "Minimum Weight (kg)"
+        Me.GridColumncargo_min_weight.DisplayFormat.FormatString = "N2"
+        Me.GridColumncargo_min_weight.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumncargo_min_weight.FieldName = "cargo_min_weight"
+        Me.GridColumncargo_min_weight.Name = "GridColumncargo_min_weight"
+        Me.GridColumncargo_min_weight.Visible = True
+        Me.GridColumncargo_min_weight.VisibleIndex = 3
+        '
         'FormSalesReturnOrderDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(785, 493)
-        Me.Controls.Add(Me.GroupControlList)
+        Me.ClientSize = New System.Drawing.Size(785, 541)
+        Me.Controls.Add(Me.XTCRO)
         Me.Controls.Add(Me.GroupControl3)
         Me.Controls.Add(Me.PanelControl3)
         Me.Controls.Add(Me.GroupGeneralHeader)
@@ -819,6 +986,8 @@ Partial Class FormSalesReturnOrderDet
         CType(Me.PanelControlTopRight, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControlTopRight.ResumeLayout(False)
         Me.PanelControlTopRight.PerformLayout()
+        CType(Me.DEDelDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEDelDate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DERetDueDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DERetDueDate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtSalesOrderNumber.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -826,6 +995,7 @@ Partial Class FormSalesReturnOrderDet
         CType(Me.PanelControlTopLeft, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControlTopLeft.ResumeLayout(False)
         Me.PanelControlTopLeft.PerformLayout()
+        CType(Me.CEOnHold.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.MEAdrressCompTo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtCodeCompTo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtNameCompTo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -849,6 +1019,12 @@ Partial Class FormSalesReturnOrderDet
         Me.PanelControlNav.ResumeLayout(False)
         CType(Me.EPForm, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ContextMenuStrip1.ResumeLayout(False)
+        CType(Me.XTCRO, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTCRO.ResumeLayout(False)
+        Me.XTPItems.ResumeLayout(False)
+        Me.XTPRate.ResumeLayout(False)
+        CType(Me.GCRate, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVRate, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -917,4 +1093,19 @@ Partial Class FormSalesReturnOrderDet
     Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
     Friend WithEvents AddAnotherProductToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ReviseQtyToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents LabelControl4 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents DEDelDate As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents XTCRO As DevExpress.XtraTab.XtraTabControl
+    Friend WithEvents XTPItems As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents XTPRate As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents GCRate As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVRate As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumnid_cargo As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumncargo_name As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumncargo_rate As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumncargo_lead_time As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumncargo_min_weight As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnid_detail_on_hold As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents CEOnHold As DevExpress.XtraEditors.CheckEdit
+    Friend WithEvents BtnOnHoldList As DevExpress.XtraEditors.SimpleButton
 End Class

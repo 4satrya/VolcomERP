@@ -109,10 +109,10 @@ Partial Public Class ReportSampleReturnPLDet
         Me.XrLabel1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 0!)
         Me.XrLabel1.Name = "XrLabel1"
         Me.XrLabel1.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel1.SizeF = New System.Drawing.SizeF(231.6543!, 25.08334!)
+        Me.XrLabel1.SizeF = New System.Drawing.SizeF(342.071!, 25.08334!)
         Me.XrLabel1.StylePriority.UseFont = False
         Me.XrLabel1.StylePriority.UseTextAlignment = False
-        Me.XrLabel1.Text = "RETURN SAMPLE"
+        Me.XrLabel1.Text = "RECEIVE LOCAL SAMPLE"
         Me.XrLabel1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.BottomLeft
         '
         'XrLabel4

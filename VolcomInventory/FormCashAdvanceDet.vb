@@ -33,8 +33,8 @@
         TENumber.Text = "[auto generate]"
         '
         If id_ca = "-1" Then 'new
-            BMark.Visible = False
-            BPrint.Visible = False
+            BMark.Enabled = False
+            BPrint.Enabled = False
         Else 'edit
             Dim query As String = "SELECT * FROM tb_cash_advance WHERE id_cash_advance='" & id_ca & "'"
             Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
@@ -54,33 +54,47 @@
             MENote.Text = data.Rows(0)("note").ToString
             LEReportStatus.EditValue = data.Rows(0)("id_report_status")
             '
-            BSave.Visible = False
+            BSave.Enabled = False
             '
-            BMark.Visible = True
-            BPrint.Visible = True
+            BMark.Enabled = True
+            BPrint.Enabled = True
             '
             If LEReportStatus.EditValue.ToString = "6" Then
-
+                BtnViewJournal.Enabled = True
             End If
+
+            '
+            SLEType.Properties.ReadOnly = True
+            DEAdvanceEnd.Properties.ReadOnly = True
+            SLEPayFrom.Properties.ReadOnly = True
+            SLEEmployee.Properties.ReadOnly = True
+            SLEDepartement.Properties.ReadOnly = True
+            SLEPayTo.Properties.ReadOnly = True
+            TETotal.Enabled = False
+            MENote.Properties.ReadOnly = True
         End If
 
         is_load = True
+
+        If id_ca = "-1" Then
+            calculate_report_day()
+        End If
     End Sub
 
 
     Sub load_type()
-        Dim query As String = "SELECT id_cash_advance_type,cash_advance_type FROM tb_lookup_cash_advance_type"
+        Dim query As String = "SELECT id_cash_advance_type,cash_advance_type,day_limit FROM tb_lookup_cash_advance_type"
         viewSearchLookupQuery(SLEType, query, "id_cash_advance_type", "cash_advance_type", "id_cash_advance_type")
     End Sub
 
     Sub load_pay_from()
-        Dim query As String = "SELECT id_acc,acc_name,acc_description FROM `tb_a_acc` WHERE id_status='1' AND id_is_det='2'"
-        viewSearchLookupQuery(SLEPayFrom, query, "id_acc", "acc_description", "id_acc")
+        Dim query As String = "SELECT id_acc,acc_name,acc_description,CONCAT(acc_name,' - ',acc_description) as acc FROM `tb_a_acc` WHERE id_status='1' AND id_is_det='2'"
+        viewSearchLookupQuery(SLEPayFrom, query, "id_acc", "acc", "id_acc")
     End Sub
 
     Sub load_pay_to()
-        Dim query As String = "SELECT id_acc,acc_name,acc_description FROM `tb_a_acc` WHERE id_status='1' AND id_is_det='2'"
-        viewSearchLookupQuery(SLEPayTo, query, "id_acc", "acc_description", "id_acc")
+        Dim query As String = "SELECT id_acc,acc_name,acc_description,CONCAT(acc_name,' - ',acc_description) as acc FROM `tb_a_acc` WHERE id_status='1' AND id_is_det='2'"
+        viewSearchLookupQuery(SLEPayTo, query, "id_acc", "acc", "id_acc")
     End Sub
 
     Sub load_dep()
@@ -89,7 +103,7 @@
     End Sub
 
     Sub load_employee()
-        Dim query As String = "SELECT id_employee,id_departement,employee_name FROM tb_m_employee"
+        Dim query As String = "SELECT id_employee,id_departement,employee_name,(SELECT departement FROM tb_m_departement WHERE id_departement = tb_m_employee.id_departement) AS departement FROM tb_m_employee"
         viewSearchLookupQuery(SLEEmployee, query, "id_employee", "employee_name", "id_employee")
     End Sub
 
@@ -106,17 +120,19 @@
         If is_load = True Then
             Try
                 Dim date_start As String = Date.Parse(DEAdvanceEnd.EditValue.ToString).ToString("yyyy-MM-dd")
+                Dim dayLimit As String = execute_query("SELECT day_limit FROM tb_lookup_cash_advance_type WHERE id_cash_advance_type = " + SLEType.EditValue.ToString, 0, True, "", "", "", "")
                 Dim query As String = ""
 
-                If SLEType.EditValue.ToString = "1" Then 'dinas H+3
-                    query = "CALL work_days(3,'" & date_start & "','" & SLEEmployee.EditValue.ToString & "')"
-                ElseIf SLEType.EditValue.ToString = "2" Then 'operation H+1
-                    query = "CALL work_days(1,'" & date_start & "','" & SLEEmployee.EditValue.ToString & "')"
-                End If
+                query = "SELECT ('" + date_start + "' + INTERVAL " + dayLimit + " DAY) AS date"
+                'If SLEType.EditValue.ToString = "1" Then 'dinas H+3
+                '    query = "CALL work_days(3,'" & date_start & "','" & SLEEmployee.EditValue.ToString & "')"
+                'ElseIf SLEType.EditValue.ToString = "2" Then 'operation H+1
+                '    query = "CALL work_days(1,'" & date_start & "','" & SLEEmployee.EditValue.ToString & "')"
+                'End If
 
                 Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
                 If data.Rows.Count > 0 Then
-                    DEDueDate.EditValue = data.Rows(0)("date")
+                    DEDueDate.EditValue = Date.Parse(data.Rows(0)("date").ToString).ToString("dd MMMM yyyy")
                     is_no_schedule = False
                 Else
                     warningCustom("Please register schedule for this employee first, contact HRD for further detail.")
@@ -148,10 +164,24 @@
     Private Sub BSave_Click(sender As Object, e As EventArgs) Handles BSave.Click
         calculate_report_day()
 
+        Dim check_user_cashadvance As String = execute_query("
+            SELECT COUNT(`status`) AS `status`
+            FROM (
+                SELECT IF(id_report_status = 6, IF(rb_id_report_status = 6, 1, 0), IF(id_report_status = 5, 1, 0)) AS `status` 
+                FROM tb_cash_advance 
+                WHERE id_employee = '" + SLEEmployee.EditValue.ToString + "'
+            ) AS tb
+            WHERE `status` = 0
+        ", 0, True, "", "", "", "")
+
         If is_no_schedule = True Then
             'already warning
         ElseIf TETotal.EditValue <= 0 Then
-            warningCustom("Please make sure amount is not zero")
+            warningCustom("Please make sure amount is not zero.")
+        ElseIf MENote.Text = "" Then
+            warningCustom("Please input cash advance purpose.")
+        ElseIf Not check_user_cashadvance = "0" Then
+            warningCustom("Employee still has cash advance.")
         Else
             Dim query As String = "INSERT INTO `tb_cash_advance`(id_cash_advance_type,date_created,created_by,id_employee,report_back_date,report_back_due_date,id_departement,id_acc_from,id_acc_to,val_ca,note,id_report_status)
 VALUES('" & SLEType.EditValue.ToString & "',NOW(),'" & id_user & "','" & SLEEmployee.EditValue.ToString & "','" & Date.Parse(DEAdvanceEnd.EditValue.ToString).ToString("yyyy-MM-dd") & "','" & Date.Parse(DEDueDate.EditValue.ToString).ToString("yyyy-MM-dd") & "','" & SLEDepartement.EditValue.ToString & "','" & SLEPayFrom.EditValue.ToString & "','" & SLEPayTo.EditValue.ToString & "','" & decimalSQL(TETotal.EditValue.ToString) & "','" & addSlashes(MENote.Text) & "',1); SELECT LAST_INSERT_ID();"
@@ -172,6 +202,8 @@ VALUES('" & SLEType.EditValue.ToString & "',NOW(),'" & id_user & "','" & SLEEmpl
 
             FormCashAdvance.GVListOpen.FocusedRowHandle = find_row(FormCashAdvance.GVListOpen, "id_cash_advance", id_ca)
             FormCashAdvance.XTCPO.SelectedTabPageIndex = 0
+
+            Close()
         End If
     End Sub
 
@@ -197,7 +229,7 @@ VALUES('" & SLEType.EditValue.ToString & "',NOW(),'" & id_user & "','" & SLEEmpl
         Report.LNote.Text = MENote.Text
 
         If LEReportStatus.EditValue.ToString = "6" Then
-            Report.id_pre = "2"
+            Report.id_pre = "-1"
         Else
             Report.id_pre = "1"
         End If
@@ -205,6 +237,30 @@ VALUES('" & SLEType.EditValue.ToString & "',NOW(),'" & id_user & "','" & SLEEmpl
         'Show the report's preview. 
         Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
         Tool.ShowPreview()
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnViewJournal_Click(sender As Object, e As EventArgs) Handles BtnViewJournal.Click
+        Cursor = Cursors.WaitCursor
+        Dim id_acc_trans As String = ""
+        Try
+            id_acc_trans = execute_query("SELECT ad.id_acc_trans FROM tb_a_acc_trans_det ad
+            WHERE ad.report_mark_type=167 AND ad.id_report=" + id_ca + "
+            GROUP BY ad.id_acc_trans ", 0, True, "", "", "", "")
+        Catch ex As Exception
+            id_acc_trans = ""
+        End Try
+
+        If id_acc_trans <> "" Then
+            Dim s As New ClassShowPopUp()
+            FormViewJournal.is_enable_view_doc = False
+            FormViewJournal.BMark.Visible = False
+            s.id_report = id_acc_trans
+            s.report_mark_type = "36"
+            s.show()
+        Else
+            warningCustom("Auto journal not found.")
+        End If
         Cursor = Cursors.Default
     End Sub
 End Class

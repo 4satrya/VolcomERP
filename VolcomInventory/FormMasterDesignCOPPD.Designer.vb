@@ -41,6 +41,7 @@ Partial Class FormMasterDesignCOPPD
         Me.PictureSeason = New DevExpress.XtraEditors.PictureEdit()
         Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
         Me.TEAdditionalCost = New DevExpress.XtraEditors.TextEdit()
+        Me.BUpdateVendor = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.TEVendor.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEVendorName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -86,7 +87,7 @@ Partial Class FormMasterDesignCOPPD
         Me.TEVendorName.Properties.Appearance.Options.UseFont = True
         Me.TEVendorName.Properties.EditValueChangedDelay = 1
         Me.TEVendorName.Properties.ReadOnly = True
-        Me.TEVendorName.Size = New System.Drawing.Size(324, 20)
+        Me.TEVendorName.Size = New System.Drawing.Size(230, 20)
         Me.TEVendorName.TabIndex = 8892
         Me.TEVendorName.TabStop = False
         '
@@ -95,7 +96,7 @@ Partial Class FormMasterDesignCOPPD
         Me.BtnBrowseContactFrom.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnBrowseContactFrom.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnBrowseContactFrom.Appearance.Options.UseFont = True
-        Me.BtnBrowseContactFrom.Location = New System.Drawing.Point(602, 48)
+        Me.BtnBrowseContactFrom.Location = New System.Drawing.Point(508, 48)
         Me.BtnBrowseContactFrom.Name = "BtnBrowseContactFrom"
         Me.BtnBrowseContactFrom.Size = New System.Drawing.Size(23, 20)
         Me.BtnBrowseContactFrom.TabIndex = 8890
@@ -306,11 +307,24 @@ Partial Class FormMasterDesignCOPPD
         Me.TEAdditionalCost.Size = New System.Drawing.Size(226, 20)
         Me.TEAdditionalCost.TabIndex = 8905
         '
+        'BUpdateVendor
+        '
+        Me.BUpdateVendor.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BUpdateVendor.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BUpdateVendor.Appearance.Options.UseFont = True
+        Me.BUpdateVendor.Location = New System.Drawing.Point(537, 48)
+        Me.BUpdateVendor.Name = "BUpdateVendor"
+        Me.BUpdateVendor.Size = New System.Drawing.Size(88, 20)
+        Me.BUpdateVendor.TabIndex = 8907
+        Me.BUpdateVendor.TabStop = False
+        Me.BUpdateVendor.Text = "update vendor"
+        '
         'FormMasterDesignCOPPD
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(635, 229)
+        Me.Controls.Add(Me.BUpdateVendor)
         Me.Controls.Add(Me.LabelControl5)
         Me.Controls.Add(Me.TEAdditionalCost)
         Me.Controls.Add(Me.PictureSeason)
@@ -372,4 +386,5 @@ Partial Class FormMasterDesignCOPPD
     Friend WithEvents PictureSeason As DevExpress.XtraEditors.PictureEdit
     Friend WithEvents LabelControl5 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents TEAdditionalCost As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents BUpdateVendor As DevExpress.XtraEditors.SimpleButton
 End Class

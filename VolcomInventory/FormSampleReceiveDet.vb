@@ -97,6 +97,7 @@
         query += "INNER JOIN tb_m_wh_locator c ON a.id_comp = c.id_comp "
         query += "INNER JOIN tb_m_wh_rack d ON c.id_wh_locator = d.id_wh_locator "
         query += "INNER JOIN tb_m_wh_drawer e ON e.id_wh_rack = d.id_wh_rack "
+        query += " WHERE a.id_comp='" & get_setup_field("id_def_sample_storage").ToString & "' "
         query += "GROUP BY a.id_comp ORDER BY comp_number ASC "
         viewSearchLookupQuery(SLEStorage, query, "id_comp", "comp_name", "id_comp")
     End Sub
@@ -187,6 +188,7 @@
         Dim query = "CALL view_purc_sample_det_limit('" & id_order & "')"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCListPurchase.DataSource = data
+        GVListPurchase.BestFitColumns()
     End Sub
 
     Sub view_report_status(ByVal lookup As DevExpress.XtraEditors.LookUpEdit)
@@ -255,6 +257,7 @@
             GridColumnQtyStored.Visible = False
             ColQty.Visible = True
             'ColQty.VisibleIndex = 4
+            PCStorage.Enabled = False
         End If
     End Sub
 
@@ -367,13 +370,13 @@
 
                     increase_inc("2")
                     'insert who prepared
-                    insert_who_prepared("2", id_sample_rec_new, id_user)
+                    submit_who_prepared("2", id_sample_rec_new, id_user)
 
                     'rec detail
                     For i As Integer = 0 To GVListPurchase.RowCount - 1
                         Try
                             If Not GVListPurchase.GetRowCellValue(i, "id_sample_purc_det").ToString = "" And isDecimal(nominalWrite(GVListPurchase.GetRowCellValue(i, "sample_purc_rec_det_qty").ToString)) Then
-                                query = String.Format("INSERT INTO tb_sample_purc_rec_det(id_sample_purc_det,id_sample_purc_rec,sample_purc_rec_det_qty,sample_purc_rec_det_note) VALUES('{0}','{1}','{2}','{3}')", GVListPurchase.GetRowCellValue(i, "id_sample_purc_det").ToString, id_sample_rec_new, nominalWrite(GVListPurchase.GetRowCellValue(i, "sample_purc_rec_det_qty").ToString), GVListPurchase.GetRowCellValue(i, "sample_purc_rec_det_note").ToString)
+                                query = String.Format("INSERT INTO tb_sample_purc_rec_det(id_sample_purc_det,id_sample_purc_rec,sample_purc_rec_det_qty,fob_price_update,sample_purc_rec_det_note) VALUES('{0}','{1}','{2}','{3}','{4}')", GVListPurchase.GetRowCellValue(i, "id_sample_purc_det").ToString, id_sample_rec_new, decimalSQL(GVListPurchase.GetRowCellValue(i, "sample_purc_rec_det_qty").ToString), decimalSQL(GVListPurchase.GetRowCellValue(i, "fob_price_update").ToString), GVListPurchase.GetRowCellValue(i, "sample_purc_rec_det_note").ToString)
                                 execute_non_query(query, True, "", "", "", "")
                             End If
                         Catch ex As Exception
@@ -396,14 +399,14 @@
                 errorInput()
             Else
                 Try
-                    'UPDATE rec
+                    'Update rec
                     query = String.Format("UPDATE tb_sample_purc_rec SET delivery_order_number='{0}',delivery_order_date='{1}',sample_purc_rec_note='{2}',id_report_status='{3}',id_comp_contact_to='{4}',id_wh_drawer='{6}' WHERE id_sample_purc_rec='{5}'", do_number, do_date, rec_note, rec_stats, id_comp_to, id_receive, SLEDrawer.EditValue.ToString)
                     execute_non_query(query, True, "", "", "", "")
                     'rec detail
                     For i As Integer = 0 To GVListPurchase.RowCount - 1
                         Try
                             If Not GVListPurchase.GetRowCellValue(i, "id_sample_purc_det").ToString = "" And isDecimal(nominalWrite(GVListPurchase.GetRowCellValue(i, "sample_purc_rec_det_qty").ToString)) Then
-                                query = String.Format("UPDATE tb_sample_purc_rec_det SET sample_purc_rec_det_qty='{0}',sample_purc_rec_det_note='{1}' WHERE id_sample_purc_rec_det='{2}'", nominalWrite(GVListPurchase.GetRowCellValue(i, "sample_purc_rec_det_qty").ToString), GVListPurchase.GetRowCellValue(i, "sample_purc_rec_det_note").ToString, GVListPurchase.GetRowCellValue(i, "id_sample_purc_rec_det").ToString)
+                                query = String.Format("UPDATE tb_sample_purc_rec_det SET sample_purc_rec_det_qty='{0}',sample_purc_rec_det_note='{1}',fob_price_update='{3}' WHERE id_sample_purc_rec_det='{2}'", nominalWrite(GVListPurchase.GetRowCellValue(i, "sample_purc_rec_det_qty").ToString), GVListPurchase.GetRowCellValue(i, "sample_purc_rec_det_note").ToString, GVListPurchase.GetRowCellValue(i, "id_sample_purc_rec_det").ToString, decimalSQL(GVListPurchase.GetRowCellValue(i, "fob_price_update").ToString))
                                 execute_non_query(query, True, "", "", "", "")
                             End If
                         Catch ex As Exception
@@ -429,14 +432,6 @@
         End Try
     End Sub
 
-    'Private Sub BtnSaveToStorage_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnSaveToStorage.Click
-    '    FormSampleStorageIn.id_sample_purc_rec_det = GVListPurchase.GetFocusedRowCellValue("id_sample_purc_rec_det").ToString
-    '    FormSampleStorageIn.action = "ins"
-    '    FormSampleStorageIn.id_report = id_receive
-    '    FormSampleStorageIn.report_mark_type = "2"
-    '    FormSampleStorageIn.ShowDialog()
-    'End Sub
-
     Private Sub GVListPurchase_CustomColumnDisplayText(ByVal sender As System.Object, ByVal e As DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs) Handles GVListPurchase.CustomColumnDisplayText
         If e.Column.FieldName = "no" Then
             e.DisplayText = (e.ListSourceRowIndex + 1).ToString()
@@ -444,7 +439,6 @@
     End Sub
 
     Private Sub SimpleButton2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BPrePrint.Click
-        '
         ReportSampleReceive.id_receive = id_receive
         ReportSampleReceive.id_pre = "1"
 
@@ -461,6 +455,7 @@
             startScan()
         End If
     End Sub
+
     Sub startScan()
         If GVListPurchase.RowCount > 0 Then
             BSave.Enabled = False
@@ -479,6 +474,7 @@
     Private Sub BStop_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BStop.Click
         stopScan()
     End Sub
+
     Sub stopScan()
         For i As Integer = 0 To (GVBarcode.RowCount - 1)
             Dim check_code As String = ""
@@ -600,16 +596,18 @@
 
         GVListPurchase.FocusedRowHandle = find_row(GVListPurchase, "id_sample", id_sample_param)
         GVListPurchase.SetFocusedRowCellValue("sample_purc_rec_det_qty", tot)
-       
+
         GCListPurchase.RefreshDataSource()
         GVListPurchase.RefreshData()
     End Sub
+
     Sub viewDetailBC()
         Dim query As String = "SELECT ('0') AS id_sample, ('') AS code, ('') AS no, ('1') AS is_fix "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCBarcode.DataSource = data
         GVBarcode.DeleteSelectedRows()
     End Sub
+
     Sub allowDelete()
         If GVBarcode.RowCount <= 0 Then
             BDelete.Enabled = False
@@ -617,6 +615,7 @@
             BDelete.Enabled = True
         End If
     End Sub
+
     Private Sub BDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BDelete.Click
         Dim id_samplex As String = "-1"
 
@@ -633,6 +632,7 @@
             If id_sample <> "" Or id_sample <> Nothing Then
                 GVBarcode.ApplyFindFilter("")
                 countQty(id_sample)
+                warningCustom("tes")
             End If
 
             allowDelete()

@@ -248,4 +248,11 @@
         End Try
         print(GCItemList, nbr)
     End Sub
+
+    Private Sub PrintDetailScanToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PrintDetailScanToolStripMenuItem.Click
+        Cursor = Cursors.WaitCursor
+        FormSalesReturnQCDet.id_pre = "3"
+        FormMain.but_edit()
+        Cursor = Cursors.Default
+    End Sub
 End Class

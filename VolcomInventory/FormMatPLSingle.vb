@@ -101,15 +101,7 @@
             GVRoll.Columns("qty").OptionsColumn.ReadOnly = True
             '
 
-            If id_report_status = "3" Or id_report_status = "4" Or id_report_status = "6" Then
-                BtnSave.Enabled = False
-                BtnPrint.Enabled = True
-                BtnPopTo.Enabled = False
-                BtnPopFrom.Enabled = False
-                BAdd.Enabled = False
-                Bdel.Enabled = False
-                MENote.Properties.ReadOnly = True
-            ElseIf id_report_status = "5" Then
+            If id_report_status = "5" Then
                 BtnSave.Enabled = False
                 BtnPrint.Enabled = False
                 BtnPopTo.Enabled = False
@@ -122,15 +114,18 @@
                 GroupControlDrawer.Enabled = False
             Else
                 If check_edit_report_status(id_report_status, "30", id_pl_mrs) Then
-                    BtnPrint.Enabled = False
-                    BtnPopTo.Enabled = True
-                    BtnPopFrom.Enabled = True
-                    BAdd.Enabled = True
-                    Bdel.Enabled = True
+                    'can edit note
+                    BtnSave.Enabled = True
+                    BtnPopTo.Enabled = False
+                    BtnPopFrom.Enabled = False
+                    BAdd.Enabled = False
+                    Bdel.Enabled = False
                     MENote.Properties.ReadOnly = False
                 Else
-                    BtnPrint.Enabled = False
+                    'can not edit note
+                    BtnSave.Enabled = False
                     BtnPopTo.Enabled = False
+                    BtnPopFrom.Enabled = False
                     BAdd.Enabled = False
                     Bdel.Enabled = False
                     MENote.Properties.ReadOnly = True
@@ -386,7 +381,7 @@
                 Close()
             ElseIf action = "upd" Then
                 'update main table
-                query = "UPDATE tb_pl_mrs SET pl_mrs_number = '" + pl_mrs_number + "', id_comp_contact_to = '" + id_comp_contact_to + "', id_pl_mat_type = '" + id_pl_mat_Type + "', id_comp_contact_from = '" + id_comp_contact_from + "', pl_mrs_note = '" + pl_mrs_note + "', id_report_status = '" + id_report_status + "' WHERE id_pl_mrs = '" + id_pl_mrs + "'"
+                query = "UPDATE tb_pl_mrs SET pl_mrs_note = '" + pl_mrs_note + "' WHERE id_pl_mrs = '" + id_pl_mrs + "'"
                 execute_non_query(query, True, "", "", "", "")
                 'update detail and stock
                 '
@@ -461,25 +456,7 @@
                 '    End If
                 'Next
 
-
-
-                If FormMatPL.XTCPL.SelectedTabPageIndex = 0 Then 'production
-                    FormMatPL.viewPL()
-                    FormMatPL.GVProdPL.FocusedRowHandle = find_row(FormMatPL.GVProdPL, "id_pl_mrs", id_pl_mrs)
-                    FormMatPL.XTCPL.SelectedTabPageIndex = 0
-                    FormMatPL.XTCTabProduction.SelectedTabPageIndex = 0
-                ElseIf FormMatPL.XTCPL.SelectedTabPageIndex = 1 Then 'wo
-                    FormMatPL.viewPLWO()
-                    FormMatPL.GVProdPL.FocusedRowHandle = find_row(FormMatPL.GVPLWO, "id_pl_mrs", id_pl_mrs)
-                    FormMatPL.XTCPL.SelectedTabPageIndex = 1
-                    FormMatPL.XTCPLWO.SelectedTabPageIndex = 0
-                ElseIf FormMatPL.XTCPL.SelectedTabPageIndex = 2 Then 'other
-                    FormMatPL.viewPLOther()
-                    FormMatPL.GVPLOther.FocusedRowHandle = find_row(FormMatPL.GVPLOther, "id_pl_mrs", id_pl_mrs)
-                    FormMatPL.XTCPL.SelectedTabPageIndex = 2
-                    FormMatPL.XTCPLOther.SelectedTabPageIndex = 0
-                End If
-                Close()
+                infoCustom("PL Updated")
             End If
         End If
         Cursor = Cursors.Default
@@ -640,6 +617,14 @@
     Private Sub BtnPrint_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnPrint.Click
         ReportPLMat.id_pl_mrs = id_pl_mrs
         Dim Report As New ReportPLMat()
+        '
+        If Not id_report_status = "6" Then
+            Report.is_pre = "1"
+        End If
+        '
+        If LEPLType.EditValue.ToString = "2" Then
+            Report.is_sell = "1"
+        End If
         ' Show the report's preview. 
         Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
         Tool.ShowPreview()

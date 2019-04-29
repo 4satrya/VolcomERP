@@ -17,7 +17,9 @@
             BMark.Enabled = False
             BtnPrint.Enabled = False
             viewDetailReturn()
+            PCEdit.Visible = True
         ElseIf action = "upd" Then
+            PCEdit.Visible = False
             BtnCancel.Text = "Close"
             GVDetail.OptionsBehavior.AutoExpandAllGroups = True
 
@@ -41,20 +43,14 @@
             If check_edit_report_status(id_report_status, "41", id_adj_in_fg) Then
                 BMark.Enabled = True
                 BtnSave.Enabled = True
-                BtnPrint.Enabled = False
                 MENote.Properties.ReadOnly = False
             Else
                 BMark.Enabled = True
                 BtnSave.Enabled = False
-                BtnPrint.Enabled = False
                 MENote.Properties.ReadOnly = True
             End If
 
-            If check_print_report_status(id_report_status) Then
-                BtnPrint.Enabled = True
-            Else
-                BtnPrint.Enabled = False
-            End If
+            BtnPrint.Enabled = True
 
             'Fetch db detail
             viewDetailReturn()
@@ -241,7 +237,7 @@
                 increase_inc_sales("14")
 
                 'preapred default
-                insert_who_prepared("41", id_adj_in_fg, id_user)
+                submit_who_prepared("41", id_adj_in_fg, id_user)
 
                 'detail table
                 For i As Integer = 0 To GVDetail.RowCount - 1
@@ -302,6 +298,10 @@
     Private Sub BtnPrint_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnPrint.Click
         ReportFGAdjIn.id_adj_in_fg = id_adj_in_fg
         Dim Report As New ReportFGAdjIn()
+
+        If id_report_status!= "6" Then
+            Report.is_pre = "1"
+        End If
 
         Dim str As System.IO.Stream
         str = New System.IO.MemoryStream()

@@ -1,5 +1,6 @@
 ﻿Public Class FormSalesPOSCheckXLS
     Public dt As DataTable
+    Public id_pop_up As String = "-1"
 
     Private Sub FormSalesPOSCheckXLS_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Cursor = Cursors.WaitCursor
@@ -19,7 +20,11 @@
     End Sub
 
     Private Sub BtnDiscard_Click(sender As Object, e As EventArgs) Handles BtnDiscard.Click
-        FormSalesPOSDet.is_continue_load = False
+        If id_pop_up = "-1" Then
+            FormSalesPOSDet.is_continue_load = False
+        ElseIf id_pop_up = "1" Then
+            FormSalesPOSDet.is_continue_load_det = False
+        End If
         Close()
     End Sub
 

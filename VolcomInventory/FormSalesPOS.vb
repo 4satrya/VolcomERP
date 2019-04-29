@@ -37,7 +37,7 @@
         ElseIf id_menu = "3" Then
             Text = "Invoice Missing Promo"
         ElseIf id_menu = "4" Then
-            Text = "Invoice Missing Staff"
+            Text = "Invoice Different Margin"
         ElseIf id_menu = "5" Then
             Text = "Credit Note Online Store"
         End If
@@ -62,7 +62,7 @@
             ElseIf id_menu = "3" Then
                 query = query_c.queryMain("AND (a.id_memo_type=''5'') AND c.id_comp LIKE ''" + id_store_selected + "'' AND (a.sales_pos_end_period >=''" + date_from_selected + "'' AND a.sales_pos_end_period <=''" + date_until_selected + "'') ", "2")
             ElseIf id_menu = "4" Then
-                query = query_c.queryMain("AND (a.id_memo_type=''8'') AND c.id_comp LIKE ''" + id_store_selected + "'' AND (a.sales_pos_end_period >=''" + date_from_selected + "'' AND a.sales_pos_end_period <=''" + date_until_selected + "'') ", "2")
+                query = query_c.queryMain("AND (a.id_memo_type=''8'' OR a.id_memo_type=''9'') AND c.id_comp LIKE ''" + id_store_selected + "'' AND (a.sales_pos_end_period >=''" + date_from_selected + "'' AND a.sales_pos_end_period <=''" + date_until_selected + "'') ", "2")
             ElseIf id_menu = "5" Then
                 query = query_c.queryMain("AND a.id_memo_type=''2'' AND !ISNULL(a.id_sales_pos_ref) AND c.id_comp LIKE ''" + id_store_selected + "'' AND (a.sales_pos_end_period >=''" + date_from_selected + "'' AND a.sales_pos_end_period <=''" + date_until_selected + "'') ", "2")
             End If

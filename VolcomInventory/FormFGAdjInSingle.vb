@@ -58,6 +58,7 @@
             If action = "ins" Then
                 checkExistInput()
             End If
+            load_cost()
         End If
     End Sub
 
@@ -152,7 +153,7 @@
                             FormFGAdjInDet.GVDetail.CloseEditor()
                             FormFGAdjInDet.GCDetail.RefreshDataSource()
                             FormFGAdjInDet.GVDetail.RefreshData()
-                            Close()
+                            'Close()
                         End If
                     Else
                         If id_pop_up = 1 Then 'Ins Standard Adj In
@@ -179,7 +180,7 @@
                             FormFGAdjInDet.GVDetail.CloseEditor()
                             FormFGAdjInDet.GCDetail.RefreshDataSource()
                             FormFGAdjInDet.GVDetail.RefreshData()
-                            Close()
+                            'Close()
                         End If
                     End If
                 Else
@@ -362,6 +363,10 @@
     End Sub
 
     Private Sub GVFG_FocusedRowChanged(ByVal sender As System.Object, ByVal e As DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs) Handles GVFG.FocusedRowChanged
+        load_cost()
+    End Sub
+
+    Sub load_cost()
         Dim cost As Decimal = 0.0
         Try
             cost = Decimal.Parse(GVFG.GetFocusedRowCellValue("design_cop").ToString)
@@ -380,6 +385,7 @@
             getAmount()
         End If
     End Sub
+
     Sub getRealCost()
         Try
             Dim po_price_dec As Decimal = TxtCost.EditValue

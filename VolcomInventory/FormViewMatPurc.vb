@@ -53,7 +53,8 @@
         TERecDate.Text = view_date_from(date_created, Integer.Parse(data.Rows(0)("mat_purc_lead_time").ToString))
         TETOP.Text = data.Rows(0)("mat_purc_top").ToString
         TEDueDate.Text = view_date_from(date_created, (Integer.Parse(data.Rows(0)("mat_purc_lead_time").ToString) + Integer.Parse(data.Rows(0)("mat_purc_top").ToString)))
-
+        '
+        TEKurs.EditValue = data.Rows(0)("mat_purc_kurs")
         '
         GConListPurchase.Enabled = True
         TEVat.Properties.ReadOnly = False

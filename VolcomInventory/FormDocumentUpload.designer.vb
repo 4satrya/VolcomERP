@@ -38,6 +38,7 @@ Partial Class FormDocumentUpload
         Me.RICE = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.GridColumnFilename = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.BScanAndUpload = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.PCNav, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PCNav.SuspendLayout()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -52,6 +53,7 @@ Partial Class FormDocumentUpload
         'PCNav
         '
         Me.PCNav.Controls.Add(Me.BDelete)
+        Me.PCNav.Controls.Add(Me.BScanAndUpload)
         Me.PCNav.Controls.Add(Me.Bupload)
         Me.PCNav.Dock = System.Windows.Forms.DockStyle.Top
         Me.PCNav.Location = New System.Drawing.Point(0, 0)
@@ -64,7 +66,7 @@ Partial Class FormDocumentUpload
         Me.BDelete.Dock = System.Windows.Forms.DockStyle.Right
         Me.BDelete.ImageIndex = 4
         Me.BDelete.ImageList = Me.LargeImageCollection
-        Me.BDelete.Location = New System.Drawing.Point(558, 2)
+        Me.BDelete.Location = New System.Drawing.Point(427, 2)
         Me.BDelete.Name = "BDelete"
         Me.BDelete.Size = New System.Drawing.Size(102, 36)
         Me.BDelete.TabIndex = 5
@@ -211,6 +213,17 @@ Partial Class FormDocumentUpload
         Me.GridView2.GridControl = Me.GCFileList
         Me.GridView2.Name = "GridView2"
         '
+        'BScanAndUpload
+        '
+        Me.BScanAndUpload.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BScanAndUpload.ImageIndex = 3
+        Me.BScanAndUpload.ImageList = Me.LargeImageCollection
+        Me.BScanAndUpload.Location = New System.Drawing.Point(529, 2)
+        Me.BScanAndUpload.Name = "BScanAndUpload"
+        Me.BScanAndUpload.Size = New System.Drawing.Size(131, 36)
+        Me.BScanAndUpload.TabIndex = 6
+        Me.BScanAndUpload.Text = "Scan and Upload"
+        '
         'FormDocumentUpload
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -255,4 +268,5 @@ Partial Class FormDocumentUpload
     Friend WithEvents GridColumnDate As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnFilename As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnUploadBy As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BScanAndUpload As DevExpress.XtraEditors.SimpleButton
 End Class

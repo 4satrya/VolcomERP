@@ -27,6 +27,7 @@
     Private Sub SimpleButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SimpleButton1.Click
         Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure want to update Order Status?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
         If confirm = Windows.Forms.DialogResult.Yes Then
+            SimpleButton1.Enabled = False
             If id_pop_up = "-1" Then
                 Cursor = Cursors.WaitCursor
                 Dim query_upd As String = "UPDATE tb_sales_order SET id_prepare_status='" + SLEPackingStatus.EditValue.ToString + "' WHERE id_sales_order='" + id_trans + "' "

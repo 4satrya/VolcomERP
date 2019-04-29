@@ -5,11 +5,19 @@
     Dim bcontact_active As String = "1"
     Dim product_image_path As String = get_setup_field("pic_path_product") & "\"
 
+    Public is_ho_target As String = "-1"
+
     Private Sub FormProductionRec_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         view_prod_order()
         '
         viewSeason()
         check_menu()
+        '
+        If is_ho_target = "1" Then
+            PCUpdateHO.Visible = True
+        Else
+            PCUpdateHO.Visible = False
+        End If
     End Sub
 
     Sub viewSeason()
@@ -356,5 +364,12 @@
             GVProdRec.FocusedRowHandle = 0
         End If
         check_menu()
+    End Sub
+
+    Private Sub BUpdate_Click(sender As Object, e As EventArgs) Handles BUpdate.Click
+        If GVProdRec.RowCount > 0 Then
+            FormProductionRecTargetHO.id_rec = GVProdRec.GetFocusedRowCellValue("id_prod_order_rec").ToString
+            FormProductionRecTargetHO.ShowDialog()
+        End If
     End Sub
 End Class

@@ -45,12 +45,11 @@
             CheckEditInvType.Visible = False
             TxtCodeCompFrom.Focus()
         ElseIf id_menu = "4" Then
-            Text = "Invoice Missing Staff"
+            Text = "Invoice Different Margin"
             LEInvType.Enabled = False
             TEDO.Enabled = False
-            CheckEditInvType.Visible = False
+            CheckEditInvType.Visible = True
             TxtCodeCompFrom.Focus()
-            LabelControl1.Text = "Missing From"
             LabelBillTo.Visible = True
             TxtCodeBillTo.Visible = True
             TxtNameBillTo.Visible = True
@@ -157,12 +156,14 @@
             report_mark_type = "116"
         ElseIf id_memo_type = "8" Then ' missing staff
             report_mark_type = "117"
+        ElseIf id_memo_type = "9" Then 'invoice diff margin
+            report_mark_type = "183"
         End If
         LEInvType.ItemIndex = LETypeSO.Properties.GetDataSourceRowIndex("id_inv_type", data.Rows(0)("id_inv_type").ToString)
         TEDO.Text = data.Rows(0)("pl_sales_order_del_number").ToString
-        If id_memo_type = "1" Or id_memo_type = "2" Or id_memo_type = "5" Or id_memo_type = "8" Then
+        If id_memo_type = "1" Or id_memo_type = "2" Or id_memo_type = "5" Or id_memo_type = "9" Then
             CheckEditInvType.EditValue = False
-        ElseIf id_memo_type = "3" Or id_memo_type = "4" Then
+        ElseIf id_memo_type = "3" Or id_memo_type = "4" Or id_memo_type = "8" Then
             CheckEditInvType.EditValue = True
         End If
         id_comp_contact_bill = data.Rows(0)("id_comp_contact_bill").ToString
@@ -171,6 +172,7 @@
 
         ''detail2
         viewDetail()
+        viewDetailCode()
         check_but()
         calculate()
         allow_status()
@@ -216,7 +218,20 @@
         GCItemList.DataSource = data
     End Sub
 
-  
+    Sub viewDetailCode()
+        Dim query As String = "SELECT c.id_sales_pos_det_counting, c.id_sales_pos, c.id_product, c.id_pl_prod_order_rec_det_unique, c.counting_code, 
+        c.full_code, prod.product_full_code AS `code`, prod.product_display_name AS `name`, cd.code_detail_name AS `size`, c.id_design_price, c.design_price
+        FROM tb_sales_pos_det_counting c
+        INNER JOIN tb_m_product prod ON prod.id_product = c.id_product
+        INNER JOIN tb_m_product_code pc ON pc.id_product = prod.id_product
+        INNER JOIN tb_m_code_detail cd ON cd.id_code_detail = pc.id_code_detail
+        WHERE c.id_sales_pos=" + id_sales_pos + " "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCCode.DataSource = data
+        GVCode.BestFitColumns()
+    End Sub
+
+
     'sub check_but
     Sub check_but()
        
@@ -355,5 +370,11 @@
         FormAccountingDraftJournal.report_mark_type = report_mark_type
         FormAccountingDraftJournal.ShowDialog()
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub GVCode_CustomColumnDisplayText(sender As Object, e As DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs) Handles GVCode.CustomColumnDisplayText
+        If e.Column.FieldName = "no" Then
+            e.DisplayText = (e.ListSourceRowIndex + 1).ToString()
+        End If
     End Sub
 End Class

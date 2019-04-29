@@ -1,6 +1,7 @@
 ﻿Public Class ReportDesignCOPPropose
     Public Shared id_propose As String = "-1"
     Public Shared dt As DataTable
+    Public Shared rmt As String = "-1"
 
     Private Sub ReportDesignCOPPropose_BeforePrint(sender As Object, e As Printing.PrintEventArgs) Handles MyBase.BeforePrint
         GCItemList.DataSource = dt
@@ -18,7 +19,7 @@ WHERE id_design_cop_propose='" & id_propose & "'"
             LRequestedBy.Text = data.Rows(0)("employee_name").ToString
             LDateCreated.Text = Date.Parse(data.Rows(0)("created_date").ToString).ToString("dd MMMM yyyy")
             LType.Text = data.Rows(0)("cop_propose_type").ToString
-            load_mark_horz("150", id_propose, "2", "1", XrTable1)
+            pre_load_mark_horz(rmt, id_propose, "2", "2", XrTable1)
         End If
     End Sub
 End Class

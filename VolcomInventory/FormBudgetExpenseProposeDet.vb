@@ -6,6 +6,7 @@
     Dim is_confirm As String = "2"
     Public id_departement As String = "-1"
     Dim is_allow_print As Boolean = False
+    Dim is_admin As String = FormBudgetExpensePropose.is_admin
 
     Private Sub FormBudgetExpenseProposeDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewReportStatus()
@@ -29,6 +30,7 @@
 
     Sub actionLoad()
         If action = "upd" Then
+            LEDeptSum.Enabled = False
             Dim query_c As New ClassBudgetExpensePropose()
             Dim query As String = query_c.queryMain("AND p.id_b_expense_propose=" + id + "", "2")
             Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
@@ -45,6 +47,9 @@
             id_departement = data.Rows(0)("id_departement").ToString
             allow_status()
         Else
+            If is_admin = "1" Then
+                LEDeptSum.Enabled = True
+            End If
             TxtTotal.EditValue = 0.00
             LEDeptSum.ItemIndex = LEDeptSum.Properties.GetDataSourceRowIndex("id_departement", id_departement_user)
             XTCBudget.ShowTabHeader = DevExpress.Utils.DefaultBoolean.False

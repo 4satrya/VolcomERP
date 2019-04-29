@@ -365,6 +365,39 @@ Public Class FormFGLineList
                 SMEditDesign.Visible = False
                 SMViewDupe.Visible = False
             End If
+
+            'check changes
+            If BGVLineList.GetFocusedRowCellValue("TOTAL PD CREATED").ToString = "0" Then
+                ProposeChangesToolStripMenuItem.Visible = False
+            Else
+                ProposeChangesToolStripMenuItem.Visible = True
+            End If
+
+            Dim report_mark_type = "-1"
+
+            If id_pop_up = "-1" Then
+                report_mark_type = "177"
+            ElseIf id_pop_up = "3" Then
+                report_mark_type = "178"
+            ElseIf id_pop_up = "5" Then
+                report_mark_type = "176"
+            End If
+
+            Dim query_propose_changes As String = "SELECT(
+	            SELECT CONCAT(e.employee_name, ' | ', DATE_FORMAT(dr.created_at, '%d %M %Y %h:%i %p'))
+	            FROM tb_m_design_rev AS dr 
+	            LEFT JOIN tb_m_employee AS e ON dr.created_by = e.id_employee 
+	            LEFT JOIN tb_lookup_report_status AS rs ON dr.id_report_status = rs.id_report_status 
+	            WHERE dr.id_report_status = '1' AND dr.id_design = '" + BGVLineList.GetFocusedRowCellValue("id_design").ToString + "' AND dr.report_mark_type = '" + report_mark_type + "'
+            ) AS propose_changes"
+            Dim propose_changes As String = execute_query(query_propose_changes, 0, True, "", "", "", "")
+
+            If propose_changes = "" Then
+                ProposeChangesToolStripMenuItem.Text = "Propose Changes"
+            Else
+                ProposeChangesToolStripMenuItem.Text = "View Request Changes (" + propose_changes + ")"
+            End If
+
             Dim view As DevExpress.XtraGrid.Views.Grid.GridView = CType(sender, DevExpress.XtraGrid.Views.Grid.GridView)
             Dim hitInfo As DevExpress.XtraGrid.Views.Grid.ViewInfo.GridHitInfo = view.CalcHitInfo(e.Point)
             If hitInfo.InRow And hitInfo.RowHandle >= 0 Then
@@ -1217,6 +1250,64 @@ Public Class FormFGLineList
                 stopCustom("Nothing item selected!")
             End If
         End If
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub ProposeChangesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProposeChangesToolStripMenuItem.Click
+        Cursor = Cursors.WaitCursor
+        Dim query_c As ClassDesign = New ClassDesign()
+        Dim line_act As String = "-1"
+        Try
+            line_act = query_c.getLineActFocus(SLETypeLineList.EditValue.ToString, BGVLineList)
+        Catch ex As Exception
+        End Try
+        If BGVLineList.RowCount > 0 And line_act = "1" Then
+            Dim id_dsg As String = "-1"
+            Try
+                id_dsg = BGVLineList.GetFocusedRowCellValue("id_design").ToString
+            Catch ex As Exception
+            End Try
+
+            If id_dsg <> "-1" And id_dsg <> "" Then
+                FormMasterDesignSingle.id_pop_up = id_pop_up
+                FormMasterDesignSingle.form_name = Name
+                FormMasterDesignSingle.id_design = id_dsg
+                FormMasterDesignSingle.WindowState = FormWindowState.Maximized
+
+                Dim report_mark_type = "-1"
+
+                If id_pop_up = "-1" Then
+                    report_mark_type = "177"
+                ElseIf id_pop_up = "3" Then
+                    report_mark_type = "178"
+                ElseIf id_pop_up = "5" Then
+                    report_mark_type = "176"
+                End If
+
+                Dim id_design_rev As String = execute_query("SELECT IFNULL((SELECT id_design_rev FROM tb_m_design_rev WHERE id_design = '" + id_dsg + "' AND id_report_status = 1 AND report_mark_type = '" + report_mark_type + "'), -1)", 0, True, "", "", "", "")
+
+                FormMasterDesignSingle.is_propose_changes = True
+                FormMasterDesignSingle.id_propose_changes = id_design_rev
+
+                FormMasterDesignSingle.ShowDialog()
+            Else
+                stopCustom("Design not found.")
+            End If
+        End If
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub ViewHistoryProposeChangesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ViewHistoryProposeChangesToolStripMenuItem.Click
+        FormHistoryProposeChanges.id_design = BGVLineList.GetFocusedRowCellValue("id_design").ToString
+        FormHistoryProposeChanges.id_pop_up = id_pop_up
+        FormHistoryProposeChanges.form_name = Name
+
+        FormHistoryProposeChanges.ShowDialog()
+    End Sub
+
+    Private Sub BBQuickUpdate_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BBQuickUpdate.ItemClick
+        Cursor = Cursors.WaitCursor
+        FormFGLineListQuickUpdDel.ShowDialog()
         Cursor = Cursors.Default
     End Sub
 End Class

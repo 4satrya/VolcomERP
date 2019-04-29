@@ -47,8 +47,8 @@
             query = "UPDATE tb_m_comp_legal SET is_default='2' WHERE id_legal_type='" & LELegalType.EditValue.ToString & "' AND id_comp='" & id_comp & "'"
             execute_non_query(query, True, "", "", "", "")
             '
-            query = "INSERT INTO tb_m_comp_legal(`id_comp`,`id_legal_type`,`number`,`file_name`,`active_until`,`upload_datetime`,`upload_by`,`is_default`)
-VALUES('" & id_comp & "','" & LELegalType.EditValue.ToString & "','" & addSlashes(TENumber.Text) & "','" & addSlashes(TEFileName.Text) & "'," & date_until & ",NOW(),'" & id_user & "','1');SELECT LAST_INSERT_ID() "
+            query = "INSERT INTO tb_m_comp_legal(`id_comp`,`id_legal_type`,`number`,`file_name`,`ext`,`active_until`,`upload_datetime`,`upload_by`,`is_default`)
+VALUES('" & id_comp & "','" & LELegalType.EditValue.ToString & "','" & addSlashes(TENumber.Text) & "','" & addSlashes(TEFileName.Text) & "','" & addSlashes(file_ext) & "'," & date_until & ",NOW(),'" & id_user & "','1');SELECT LAST_INSERT_ID() "
             Dim last_id As String = execute_query(query, 0, True, "", "", "", "")
             'upload
             Dim directory_upload As String = get_setup_field("upload_legal_dir")

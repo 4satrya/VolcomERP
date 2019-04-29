@@ -1,5 +1,6 @@
 ﻿Public Class ReportFGAdjOut
     Public Shared id_adj_out_fg As String
+    Public is_pre As String = "2"
     Dim currency As String
     Private Sub ReportFGAdjIn_BeforePrint(ByVal sender As System.Object, ByVal e As System.Drawing.Printing.PrintEventArgs) Handles MyBase.BeforePrint
         'Fetch from db main
@@ -19,7 +20,12 @@
         viewDetailReturn()
 
         'Mark
-        load_mark_horz("42", id_adj_out_fg, "2", "1", XrTable1)
+        If is_pre = "1" Then
+            pre_load_mark_horz("42", id_adj_out_fg, "2", "2", XrTable1)
+        Else
+            load_mark_horz("42", id_adj_out_fg, "2", "1", XrTable1)
+        End If
+
     End Sub
 
     Sub viewDetailReturn()

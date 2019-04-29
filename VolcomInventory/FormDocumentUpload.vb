@@ -4,12 +4,23 @@
     Public report_mark_type As String = "0"
     '
     Public is_no_delete As String = "-1"
+    Public form_orign As String = ""
     '
     Public cond As String = ""
 
     Dim source_path As String = get_setup_field("upload_dir")
     Public is_only_pdf As Boolean = False
 
+    Sub refresh_load(ByVal rmt As String)
+        If rmt = "149" Then
+            FormPurcItemDet.load_doc()
+        Else
+            If form_orign = "FormReportMarkDet" Then
+                FormReportMarkDet.load_form()
+            End If
+            view_file()
+        End If
+    End Sub
 
     Private Sub FormDocumentUpload_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         If is_view = "1" Then
@@ -17,8 +28,10 @@
         End If
         view_file()
         '
-        If report_mark_type = "" Then
-
+        If is_only_pdf = True Then
+            BScanAndUpload.Visible = False
+        Else
+            BScanAndUpload.Visible = True
         End If
     End Sub
 
@@ -121,5 +134,11 @@
 
     Private Sub FormDocumentUpload_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
         Dispose()
+    End Sub
+
+    Private Sub BScanAndUpload_Click(sender As Object, e As EventArgs) Handles BScanAndUpload.Click
+        FormDocumentScanUpload.id_report = id_report
+        FormDocumentScanUpload.report_mark_type = report_mark_type
+        FormDocumentScanUpload.ShowDialog()
     End Sub
 End Class

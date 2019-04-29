@@ -654,7 +654,7 @@ Partial Class FormProductionDet
         Me.GridColumn14.Name = "GridColumn14"
         Me.GridColumn14.Visible = True
         Me.GridColumn14.VisibleIndex = 0
-        Me.GridColumn14.Width = 152
+        Me.GridColumn14.Width = 110
         '
         'GridColumn18
         '
@@ -667,7 +667,7 @@ Partial Class FormProductionDet
         Me.GridColumn18.Name = "GridColumn18"
         Me.GridColumn18.Visible = True
         Me.GridColumn18.VisibleIndex = 1
-        Me.GridColumn18.Width = 295
+        Me.GridColumn18.Width = 215
         '
         'GridColumn22
         '
@@ -680,7 +680,7 @@ Partial Class FormProductionDet
         Me.GridColumn22.Name = "GridColumn22"
         Me.GridColumn22.Visible = True
         Me.GridColumn22.VisibleIndex = 3
-        Me.GridColumn22.Width = 57
+        Me.GridColumn22.Width = 41
         '
         'GridColumn23
         '
@@ -689,13 +689,13 @@ Partial Class FormProductionDet
         Me.GridColumn23.AppearanceHeader.Options.UseTextOptions = True
         Me.GridColumn23.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GridColumn23.Caption = "Qty"
-        Me.GridColumn23.DisplayFormat.FormatString = "N4"
+        Me.GridColumn23.DisplayFormat.FormatString = "N0"
         Me.GridColumn23.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn23.FieldName = "qty"
         Me.GridColumn23.Name = "GridColumn23"
         Me.GridColumn23.Visible = True
         Me.GridColumn23.VisibleIndex = 7
-        Me.GridColumn23.Width = 77
+        Me.GridColumn23.Width = 83
         '
         'GridColumn36
         '
@@ -704,6 +704,7 @@ Partial Class FormProductionDet
         Me.GridColumn36.Name = "GridColumn36"
         Me.GridColumn36.Visible = True
         Me.GridColumn36.VisibleIndex = 4
+        Me.GridColumn36.Width = 54
         '
         'GridColumn35
         '
@@ -718,6 +719,7 @@ Partial Class FormProductionDet
         Me.GridColumn35.Name = "GridColumn35"
         Me.GridColumn35.Visible = True
         Me.GridColumn35.VisibleIndex = 5
+        Me.GridColumn35.Width = 54
         '
         'GridColumn34
         '
@@ -732,6 +734,7 @@ Partial Class FormProductionDet
         Me.GridColumn34.Name = "GridColumn34"
         Me.GridColumn34.Visible = True
         Me.GridColumn34.VisibleIndex = 6
+        Me.GridColumn34.Width = 54
         '
         'GridColumn24
         '
@@ -747,7 +750,7 @@ Partial Class FormProductionDet
         Me.GridColumn24.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "price", "Total")})
         Me.GridColumn24.Visible = True
         Me.GridColumn24.VisibleIndex = 9
-        Me.GridColumn24.Width = 160
+        Me.GridColumn24.Width = 104
         '
         'ColTotal
         '
@@ -763,7 +766,7 @@ Partial Class FormProductionDet
         Me.ColTotal.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total", "{0:N4}")})
         Me.ColTotal.Visible = True
         Me.ColTotal.VisibleIndex = 10
-        Me.ColTotal.Width = 178
+        Me.ColTotal.Width = 127
         '
         'Cat
         '
@@ -803,7 +806,7 @@ Partial Class FormProductionDet
         Me.GridColumnUOM.Name = "GridColumnUOM"
         Me.GridColumnUOM.Visible = True
         Me.GridColumnUOM.VisibleIndex = 8
-        Me.GridColumnUOM.Width = 69
+        Me.GridColumnUOM.Width = 43
         '
         'GridColumn26
         '
@@ -816,7 +819,7 @@ Partial Class FormProductionDet
         Me.GridColumn26.Name = "GridColumn26"
         Me.GridColumn26.Visible = True
         Me.GridColumn26.VisibleIndex = 2
-        Me.GridColumn26.Width = 78
+        Me.GridColumn26.Width = 56
         '
         'GridColumnIsCost
         '
@@ -1344,7 +1347,7 @@ Partial Class FormProductionDet
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.MENote.Location = New System.Drawing.Point(52, 10)
         Me.MENote.Name = "MENote"
-        Me.MENote.Properties.MaxLength = 100
+        Me.MENote.Properties.MaxLength = 250
         Me.MENote.Size = New System.Drawing.Size(376, 56)
         Me.MENote.TabIndex = 137
         '

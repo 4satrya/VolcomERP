@@ -5,6 +5,7 @@
     Public id_comp As String = "-1"
     Public is_view As String = "-1"
     Dim created_date As String = ""
+    Public is_from_inv As String = "-1"
 
     Private Sub FormSalesPOSNoStockDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewReportStatus()
@@ -23,6 +24,39 @@
             TxtNumber.Text = "[auto generate]"
             DECreated.EditValue = getTimeDB()
             viewDetail()
+
+            'load from invoice
+            If is_from_inv = "1" Then
+                BtnBrowse.Enabled = False
+                id_comp = FormSalesPOSDet.id_comp
+                TxtCompNumber.Text = FormSalesPOSDet.TxtCodeCompFrom.Text
+                TxtCompName.Text = FormSalesPOSDet.TxtNameCompFrom.Text
+                DEStart.EditValue = FormSalesPOSDet.DEStart.EditValue
+                DEEnd.EditValue = FormSalesPOSDet.DEEnd.EditValue
+                DEStart.Enabled = False
+                DEEnd.Enabled = False
+
+                'load detail
+                For i As Integer = 0 To ((FormSalesPOSDet.GVItemList.RowCount - 1) - GetGroupRowCount(FormSalesPOSDet.GVItemList))
+                    Dim newRow As DataRow = (TryCast(GCData.DataSource, DataTable)).NewRow()
+                    newRow("id_product") = FormSalesPOSDet.GVItemList.GetRowCellValue(i, "id_product").ToString
+                    newRow("code") = FormSalesPOSDet.GVItemList.GetRowCellValue(i, "code").ToString
+                    newRow("name") = FormSalesPOSDet.GVItemList.GetRowCellValue(i, "name").ToString
+                    newRow("size") = FormSalesPOSDet.GVItemList.GetRowCellValue(i, "size").ToString
+                    newRow("id_design_price") = FormSalesPOSDet.GVItemList.GetRowCellValue(i, "id_design_price_retail").ToString
+                    newRow("design_price") = FormSalesPOSDet.GVItemList.GetRowCellValue(i, "design_price_retail")
+                    newRow("qty") = FormSalesPOSDet.GVItemList.GetRowCellValue(i, "sales_pos_det_qty")
+                    newRow("note") = ""
+                    TryCast(GCData.DataSource, DataTable).Rows.Add(newRow)
+                    GCData.RefreshDataSource()
+                    GVData.RefreshData()
+                Next
+
+                'editing
+                GVData.OptionsBehavior.Editable = True
+                GridColumn4.OptionsColumn.AllowEdit = True
+                GridColumn7.OptionsColumn.AllowEdit = True
+            End If
         Else
             Dim ns As New ClassSalesPOS()
             Dim query As String = ns.queryMainNoStock("AND ns.id_sales_pos_no_stock='" + id + "' ", "1")

@@ -123,6 +123,7 @@ Partial Class FormMatPLSingle
         Me.TxtCodeCompTo = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.TxtNameCompTo = New DevExpress.XtraEditors.TextEdit()
+        Me.GridColumn29 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.ErrorProviderPL, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SplitContainerControl1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -243,7 +244,7 @@ Partial Class FormMatPLSingle
         '
         'GVDetail
         '
-        Me.GVDetail.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnCodeSample, Me.GridColumnSize, Me.GridColumnUOM, Me.GridColumnQtyNeed, Me.GridColumnQty, Me.GridColumnNote, Me.GridColumnName, Me.GridColumn10, Me.GridColumnMatDetPrice, Me.GridColumn17, Me.GridColumnCurr, Me.GridColumn27, Me.GridColumn28})
+        Me.GVDetail.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnCodeSample, Me.GridColumnSize, Me.GridColumnUOM, Me.GridColumnQtyNeed, Me.GridColumnQty, Me.GridColumnNote, Me.GridColumnName, Me.GridColumn29, Me.GridColumn10, Me.GridColumnMatDetPrice, Me.GridColumn17, Me.GridColumnCurr, Me.GridColumn27, Me.GridColumn28})
         Me.GVDetail.GridControl = Me.GCDetail
         Me.GVDetail.Name = "GVDetail"
         Me.GVDetail.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[True]
@@ -262,7 +263,7 @@ Partial Class FormMatPLSingle
         Me.GridColumnCodeSample.OptionsColumn.ShowInCustomizationForm = False
         Me.GridColumnCodeSample.Visible = True
         Me.GridColumnCodeSample.VisibleIndex = 0
-        Me.GridColumnCodeSample.Width = 130
+        Me.GridColumnCodeSample.Width = 232
         '
         'GridColumnSize
         '
@@ -276,8 +277,8 @@ Partial Class FormMatPLSingle
         Me.GridColumnSize.OptionsColumn.AllowEdit = False
         Me.GridColumnSize.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.[False]
         Me.GridColumnSize.Visible = True
-        Me.GridColumnSize.VisibleIndex = 2
-        Me.GridColumnSize.Width = 57
+        Me.GridColumnSize.VisibleIndex = 3
+        Me.GridColumnSize.Width = 107
         '
         'GridColumnUOM
         '
@@ -292,8 +293,8 @@ Partial Class FormMatPLSingle
         Me.GridColumnUOM.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.[False]
         Me.GridColumnUOM.OptionsColumn.ShowInCustomizationForm = False
         Me.GridColumnUOM.Visible = True
-        Me.GridColumnUOM.VisibleIndex = 5
-        Me.GridColumnUOM.Width = 54
+        Me.GridColumnUOM.VisibleIndex = 6
+        Me.GridColumnUOM.Width = 101
         '
         'GridColumnQtyNeed
         '
@@ -322,8 +323,8 @@ Partial Class FormMatPLSingle
         Me.GridColumnQty.OptionsColumn.AllowEdit = False
         Me.GridColumnQty.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.[False]
         Me.GridColumnQty.Visible = True
-        Me.GridColumnQty.VisibleIndex = 4
-        Me.GridColumnQty.Width = 73
+        Me.GridColumnQty.VisibleIndex = 5
+        Me.GridColumnQty.Width = 138
         '
         'RepositoryItemSpinEdit1
         '
@@ -352,7 +353,7 @@ Partial Class FormMatPLSingle
         Me.GridColumnName.OptionsColumn.ShowInCustomizationForm = False
         Me.GridColumnName.Visible = True
         Me.GridColumnName.VisibleIndex = 1
-        Me.GridColumnName.Width = 246
+        Me.GridColumnName.Width = 439
         '
         'GridColumn10
         '
@@ -374,8 +375,8 @@ Partial Class FormMatPLSingle
         Me.GridColumnMatDetPrice.FieldName = "mat_det_price"
         Me.GridColumnMatDetPrice.Name = "GridColumnMatDetPrice"
         Me.GridColumnMatDetPrice.Visible = True
-        Me.GridColumnMatDetPrice.VisibleIndex = 7
-        Me.GridColumnMatDetPrice.Width = 90
+        Me.GridColumnMatDetPrice.VisibleIndex = 8
+        Me.GridColumnMatDetPrice.Width = 169
         '
         'GridColumn17
         '
@@ -393,8 +394,8 @@ Partial Class FormMatPLSingle
         Me.GridColumnCurr.FieldName = "currency"
         Me.GridColumnCurr.Name = "GridColumnCurr"
         Me.GridColumnCurr.Visible = True
-        Me.GridColumnCurr.VisibleIndex = 6
-        Me.GridColumnCurr.Width = 55
+        Me.GridColumnCurr.VisibleIndex = 7
+        Me.GridColumnCurr.Width = 103
         '
         'GridColumn27
         '
@@ -408,8 +409,8 @@ Partial Class FormMatPLSingle
         Me.GridColumn27.FieldName = "tot_price"
         Me.GridColumn27.Name = "GridColumn27"
         Me.GridColumn27.Visible = True
-        Me.GridColumn27.VisibleIndex = 8
-        Me.GridColumn27.Width = 64
+        Me.GridColumn27.VisibleIndex = 9
+        Me.GridColumn27.Width = 133
         '
         'GridColumn28
         '
@@ -421,8 +422,8 @@ Partial Class FormMatPLSingle
         Me.GridColumn28.FieldName = "prod_order_mrs_det_qty"
         Me.GridColumn28.Name = "GridColumn28"
         Me.GridColumn28.Visible = True
-        Me.GridColumn28.VisibleIndex = 3
-        Me.GridColumn28.Width = 69
+        Me.GridColumn28.VisibleIndex = 4
+        Me.GridColumn28.Width = 130
         '
         'XtraTabPage2
         '
@@ -713,6 +714,7 @@ Partial Class FormMatPLSingle
         Me.GVRoll.OptionsCustomization.AllowColumnMoving = False
         Me.GVRoll.OptionsCustomization.AllowGroup = False
         Me.GVRoll.OptionsCustomization.AllowQuickHideColumns = False
+        Me.GVRoll.OptionsView.ShowFooter = True
         Me.GVRoll.OptionsView.ShowGroupPanel = False
         '
         'GridColumn18
@@ -765,6 +767,7 @@ Partial Class FormMatPLSingle
         Me.GridColumn22.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn22.FieldName = "qty"
         Me.GridColumn22.Name = "GridColumn22"
+        Me.GridColumn22.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty", "{0:N2}")})
         Me.GridColumn22.Visible = True
         Me.GridColumn22.VisibleIndex = 5
         Me.GridColumn22.Width = 189
@@ -980,6 +983,7 @@ Partial Class FormMatPLSingle
         'BtnPrint
         '
         Me.BtnPrint.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnPrint.ImageList = Me.LargeImageCollection
         Me.BtnPrint.Location = New System.Drawing.Point(134, 0)
         Me.BtnPrint.Name = "BtnPrint"
         Me.BtnPrint.Size = New System.Drawing.Size(75, 31)
@@ -1260,6 +1264,19 @@ Partial Class FormMatPLSingle
         Me.TxtNameCompTo.TabIndex = 5
         Me.TxtNameCompTo.TabStop = False
         '
+        'GridColumn29
+        '
+        Me.GridColumn29.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn29.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn29.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn29.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn29.Caption = "Color"
+        Me.GridColumn29.FieldName = "color"
+        Me.GridColumn29.Name = "GridColumn29"
+        Me.GridColumn29.Visible = True
+        Me.GridColumn29.VisibleIndex = 2
+        Me.GridColumn29.Width = 80
+        '
         'FormMatPLSingle
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1430,4 +1447,5 @@ Partial Class FormMatPLSingle
     Friend WithEvents GridColumn28 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents LabelControl4 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LEPLType As DevExpress.XtraEditors.LookUpEdit
+    Friend WithEvents GridColumn29 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

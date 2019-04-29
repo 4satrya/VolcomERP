@@ -28,6 +28,8 @@ Partial Class FormSalesOrder
         Me.SCCSalesOrder = New DevExpress.XtraEditors.SplitContainerControl()
         Me.GroupControlSSalesOrderList = New DevExpress.XtraEditors.GroupControl()
         Me.GCSalesOrder = New DevExpress.XtraGrid.GridControl()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.CancellOrderToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.GVSalesOrder = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumnSalesTargetNumb = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnTo = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -85,8 +87,6 @@ Partial Class FormSalesOrder
         Me.DEFrom = New DevExpress.XtraEditors.DateEdit()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
-        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.CancellOrderToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.XTCSalesOrder, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCSalesOrder.SuspendLayout()
         Me.XTPList.SuspendLayout()
@@ -98,6 +98,7 @@ Partial Class FormSalesOrder
         CType(Me.GroupControlSSalesOrderList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControlSSalesOrderList.SuspendLayout()
         CType(Me.GCSalesOrder, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.GVSalesOrder, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemProgressBar1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -117,7 +118,6 @@ Partial Class FormSalesOrder
         CType(Me.DEUntil.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'XTCSalesOrder
@@ -195,6 +195,18 @@ Partial Class FormSalesOrder
         Me.GCSalesOrder.Size = New System.Drawing.Size(708, 219)
         Me.GCSalesOrder.TabIndex = 1
         Me.GCSalesOrder.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVSalesOrder, Me.GridView2})
+        '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CancellOrderToolStripMenuItem1})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(153, 48)
+        '
+        'CancellOrderToolStripMenuItem1
+        '
+        Me.CancellOrderToolStripMenuItem1.Name = "CancellOrderToolStripMenuItem1"
+        Me.CancellOrderToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
+        Me.CancellOrderToolStripMenuItem1.Text = "Cancell Order"
         '
         'GVSalesOrder
         '
@@ -728,18 +740,6 @@ Partial Class FormSalesOrder
         Me.LabelControl3.TabIndex = 8892
         Me.LabelControl3.Text = "From"
         '
-        'ContextMenuStrip1
-        '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CancellOrderToolStripMenuItem1})
-        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(153, 48)
-        '
-        'CancellOrderToolStripMenuItem1
-        '
-        Me.CancellOrderToolStripMenuItem1.Name = "CancellOrderToolStripMenuItem1"
-        Me.CancellOrderToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
-        Me.CancellOrderToolStripMenuItem1.Text = "Cancell Order"
-        '
         'FormSalesOrder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -765,6 +765,7 @@ Partial Class FormSalesOrder
         CType(Me.GroupControlSSalesOrderList, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControlSSalesOrderList.ResumeLayout(False)
         CType(Me.GCSalesOrder, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ContextMenuStrip1.ResumeLayout(False)
         CType(Me.GVSalesOrder, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemProgressBar1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
@@ -785,7 +786,6 @@ Partial Class FormSalesOrder
         CType(Me.DEUntil.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub

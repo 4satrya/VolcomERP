@@ -9,6 +9,24 @@
     Private Sub FormSamplePurchaseDet_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         action_load()
     End Sub
+
+    Sub load_kurs()
+        'check kurs first
+        Dim query_kurs As String = "SELECT * FROM tb_kurs_trans WHERE DATE(created_date) = DATE(NOW()) ORDER BY id_kurs_trans DESC"
+        Dim data_kurs As DataTable = execute_query(query_kurs, -1, True, "", "", "", "")
+
+        If Not data_kurs.Rows.Count > 0 Then
+            warningCustom("Today transaction kurs still not submitted, please contact accounting.")
+            TEKurs.EditValue = 0.00
+        Else
+            If LECurrency.EditValue.ToString = "2" Then
+                TEKurs.EditValue = data_kurs.Rows(0)("kurs_trans")
+            Else
+                TEKurs.EditValue = 1
+            End If
+        End If
+    End Sub
+
     Sub action_load()
         view_currency(LECurrency)
         view_po_type(LEPOType)
@@ -16,8 +34,7 @@
         'view delivery
         view_payment_type(LEpayment)
 
-        Dim default_kurs As Decimal = 1.0
-        TEKurs.EditValue = default_kurs
+        load_kurs()
 
         If id_purc = "-1" Then
             'new
@@ -236,6 +253,8 @@
         ValidateChildren()
         If id_comp_to = "-1" Or id_comp_ship_to = "-1" Then
             stopCustom("Please fill all field.")
+        ElseIf TEKurs.EditValue <= 0 Then
+            stopCustom("Please fill kurs first")
         Else
             If id_purc <> "-1" Then
                 'edit
@@ -607,7 +626,6 @@
         Dim Report As New ReportMatPurchase()
 
         ' '... 
-        GridColumnColor.Visible = False
         GridColumnDiscount.Visible = False
         GVListPurchase.BestFitColumns()
         ' ' creating and saving the view's layout to a new memory stream 
@@ -675,6 +693,7 @@
     End Sub
 
     Private Sub LECurrency_EditValueChanged(sender As Object, e As EventArgs) Handles LECurrency.EditValueChanged
+        load_kurs()
         calculate()
     End Sub
 End Class

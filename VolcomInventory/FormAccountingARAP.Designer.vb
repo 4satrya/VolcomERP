@@ -61,6 +61,11 @@ Partial Class FormAccountingARAP
         Me.GridColumn15 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
         Me.SimpleButton1 = New DevExpress.XtraEditors.SimpleButton()
+        Me.TxtARCode = New DevExpress.XtraEditors.TextEdit()
+        Me.TxtSalesCode = New DevExpress.XtraEditors.TextEdit()
+        Me.TxtSalesReturnCode = New DevExpress.XtraEditors.TextEdit()
+        Me.TxtAPCode = New DevExpress.XtraEditors.TextEdit()
+        Me.TxtDPCode = New DevExpress.XtraEditors.TextEdit()
         CType(Me.TxtCompNumber.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtCompName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLEAP.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -75,6 +80,11 @@ Partial Class FormAccountingARAP
         CType(Me.GridView3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLESalesReturn.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView4, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtARCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtSalesCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtSalesReturnCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtAPCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtDPCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LabelControl1
@@ -98,7 +108,7 @@ Partial Class FormAccountingARAP
         Me.TxtCompName.Enabled = False
         Me.TxtCompName.Location = New System.Drawing.Point(121, 35)
         Me.TxtCompName.Name = "TxtCompName"
-        Me.TxtCompName.Size = New System.Drawing.Size(281, 20)
+        Me.TxtCompName.Size = New System.Drawing.Size(384, 20)
         Me.TxtCompName.TabIndex = 2
         '
         'LabelControl2
@@ -111,7 +121,7 @@ Partial Class FormAccountingARAP
         '
         'SLEAP
         '
-        Me.SLEAP.Location = New System.Drawing.Point(18, 256)
+        Me.SLEAP.Location = New System.Drawing.Point(121, 256)
         Me.SLEAP.Name = "SLEAP"
         Me.SLEAP.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.SLEAP.Properties.NullText = ""
@@ -161,7 +171,7 @@ Partial Class FormAccountingARAP
         '
         'SLEAR
         '
-        Me.SLEAR.Location = New System.Drawing.Point(18, 101)
+        Me.SLEAR.Location = New System.Drawing.Point(121, 101)
         Me.SLEAR.Name = "SLEAR"
         Me.SLEAR.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.SLEAR.Properties.NullText = ""
@@ -205,7 +215,7 @@ Partial Class FormAccountingARAP
         '
         Me.BtnConfirm.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnConfirm.Image = CType(resources.GetObject("BtnConfirm.Image"), System.Drawing.Image)
-        Me.BtnConfirm.Location = New System.Drawing.Point(328, 2)
+        Me.BtnConfirm.Location = New System.Drawing.Point(431, 2)
         Me.BtnConfirm.Name = "BtnConfirm"
         Me.BtnConfirm.Size = New System.Drawing.Size(86, 35)
         Me.BtnConfirm.TabIndex = 6
@@ -218,14 +228,14 @@ Partial Class FormAccountingARAP
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.PanelControl1.Location = New System.Drawing.Point(0, 366)
         Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(416, 39)
+        Me.PanelControl1.Size = New System.Drawing.Size(519, 39)
         Me.PanelControl1.TabIndex = 8
         '
         'BtnCancel
         '
         Me.BtnCancel.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnCancel.Image = CType(resources.GetObject("BtnCancel.Image"), System.Drawing.Image)
-        Me.BtnCancel.Location = New System.Drawing.Point(242, 2)
+        Me.BtnCancel.Location = New System.Drawing.Point(345, 2)
         Me.BtnCancel.Name = "BtnCancel"
         Me.BtnCancel.Size = New System.Drawing.Size(86, 35)
         Me.BtnCancel.TabIndex = 7
@@ -233,7 +243,7 @@ Partial Class FormAccountingARAP
         '
         'BClearAP
         '
-        Me.BClearAP.Location = New System.Drawing.Point(360, 254)
+        Me.BClearAP.Location = New System.Drawing.Point(463, 254)
         Me.BClearAP.Name = "BClearAP"
         Me.BClearAP.Size = New System.Drawing.Size(42, 23)
         Me.BClearAP.TabIndex = 9
@@ -241,7 +251,7 @@ Partial Class FormAccountingARAP
         '
         'BClearAR
         '
-        Me.BClearAR.Location = New System.Drawing.Point(360, 99)
+        Me.BClearAR.Location = New System.Drawing.Point(463, 99)
         Me.BClearAR.Name = "BClearAR"
         Me.BClearAR.Size = New System.Drawing.Size(42, 23)
         Me.BClearAR.TabIndex = 10
@@ -249,7 +259,7 @@ Partial Class FormAccountingARAP
         '
         'BClearDP
         '
-        Me.BClearDP.Location = New System.Drawing.Point(360, 305)
+        Me.BClearDP.Location = New System.Drawing.Point(463, 305)
         Me.BClearDP.Name = "BClearDP"
         Me.BClearDP.Size = New System.Drawing.Size(42, 23)
         Me.BClearDP.TabIndex = 13
@@ -257,7 +267,7 @@ Partial Class FormAccountingARAP
         '
         'SLEDP
         '
-        Me.SLEDP.Location = New System.Drawing.Point(18, 307)
+        Me.SLEDP.Location = New System.Drawing.Point(121, 307)
         Me.SLEDP.Name = "SLEDP"
         Me.SLEDP.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.SLEDP.Properties.NullText = ""
@@ -315,7 +325,7 @@ Partial Class FormAccountingARAP
         '
         'SLESales
         '
-        Me.SLESales.Location = New System.Drawing.Point(18, 148)
+        Me.SLESales.Location = New System.Drawing.Point(121, 148)
         Me.SLESales.Name = "SLESales"
         Me.SLESales.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.SLESales.Properties.NullText = ""
@@ -357,7 +367,7 @@ Partial Class FormAccountingARAP
         '
         'BtnClearSales
         '
-        Me.BtnClearSales.Location = New System.Drawing.Point(360, 146)
+        Me.BtnClearSales.Location = New System.Drawing.Point(463, 146)
         Me.BtnClearSales.Name = "BtnClearSales"
         Me.BtnClearSales.Size = New System.Drawing.Size(42, 23)
         Me.BtnClearSales.TabIndex = 16
@@ -365,7 +375,7 @@ Partial Class FormAccountingARAP
         '
         'SLESalesReturn
         '
-        Me.SLESalesReturn.Location = New System.Drawing.Point(18, 193)
+        Me.SLESalesReturn.Location = New System.Drawing.Point(121, 193)
         Me.SLESalesReturn.Name = "SLESalesReturn"
         Me.SLESalesReturn.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.SLESalesReturn.Properties.NullText = ""
@@ -415,17 +425,62 @@ Partial Class FormAccountingARAP
         '
         'SimpleButton1
         '
-        Me.SimpleButton1.Location = New System.Drawing.Point(360, 191)
+        Me.SimpleButton1.Location = New System.Drawing.Point(463, 191)
         Me.SimpleButton1.Name = "SimpleButton1"
         Me.SimpleButton1.Size = New System.Drawing.Size(42, 23)
         Me.SimpleButton1.TabIndex = 19
         Me.SimpleButton1.Text = "clear"
         '
+        'TxtARCode
+        '
+        Me.TxtARCode.Enabled = False
+        Me.TxtARCode.Location = New System.Drawing.Point(18, 101)
+        Me.TxtARCode.Name = "TxtARCode"
+        Me.TxtARCode.Size = New System.Drawing.Size(100, 20)
+        Me.TxtARCode.TabIndex = 20
+        '
+        'TxtSalesCode
+        '
+        Me.TxtSalesCode.Enabled = False
+        Me.TxtSalesCode.Location = New System.Drawing.Point(18, 148)
+        Me.TxtSalesCode.Name = "TxtSalesCode"
+        Me.TxtSalesCode.Size = New System.Drawing.Size(100, 20)
+        Me.TxtSalesCode.TabIndex = 21
+        '
+        'TxtSalesReturnCode
+        '
+        Me.TxtSalesReturnCode.Enabled = False
+        Me.TxtSalesReturnCode.Location = New System.Drawing.Point(18, 193)
+        Me.TxtSalesReturnCode.Name = "TxtSalesReturnCode"
+        Me.TxtSalesReturnCode.Size = New System.Drawing.Size(100, 20)
+        Me.TxtSalesReturnCode.TabIndex = 22
+        '
+        'TxtAPCode
+        '
+        Me.TxtAPCode.Enabled = False
+        Me.TxtAPCode.Location = New System.Drawing.Point(18, 256)
+        Me.TxtAPCode.Name = "TxtAPCode"
+        Me.TxtAPCode.Size = New System.Drawing.Size(100, 20)
+        Me.TxtAPCode.TabIndex = 23
+        '
+        'TxtDPCode
+        '
+        Me.TxtDPCode.Enabled = False
+        Me.TxtDPCode.Location = New System.Drawing.Point(18, 307)
+        Me.TxtDPCode.Name = "TxtDPCode"
+        Me.TxtDPCode.Size = New System.Drawing.Size(100, 20)
+        Me.TxtDPCode.TabIndex = 24
+        '
         'FormAccountingARAP
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(416, 405)
+        Me.ClientSize = New System.Drawing.Size(519, 405)
+        Me.Controls.Add(Me.TxtDPCode)
+        Me.Controls.Add(Me.TxtAPCode)
+        Me.Controls.Add(Me.TxtSalesReturnCode)
+        Me.Controls.Add(Me.TxtSalesCode)
+        Me.Controls.Add(Me.TxtARCode)
         Me.Controls.Add(Me.SimpleButton1)
         Me.Controls.Add(Me.LabelControl6)
         Me.Controls.Add(Me.SLESalesReturn)
@@ -465,6 +520,11 @@ Partial Class FormAccountingARAP
         CType(Me.GridView3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SLESalesReturn.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtARCode.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtSalesCode.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtSalesReturnCode.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtAPCode.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtDPCode.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -511,4 +571,9 @@ Partial Class FormAccountingARAP
     Friend WithEvents GridColumn15 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents LabelControl6 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents SimpleButton1 As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents TxtARCode As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents TxtSalesCode As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents TxtSalesReturnCode As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents TxtAPCode As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents TxtDPCode As DevExpress.XtraEditors.TextEdit
 End Class

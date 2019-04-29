@@ -36,6 +36,7 @@ Partial Class FormFGCodeReplace
         Me.RepositoryItemTextEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIsPrinted = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnPrintStatus = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
         Me.CENotPrintedYet = New DevExpress.XtraEditors.CheckEdit()
         Me.CEAll = New DevExpress.XtraEditors.CheckEdit()
@@ -47,7 +48,25 @@ Partial Class FormFGCodeReplace
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnPrintStatus = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.XTCList = New DevExpress.XtraTab.XtraTabControl()
+        Me.XTPList = New DevExpress.XtraTab.XtraTabPage()
+        Me.XTPTracking = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCComplete = New DevExpress.XtraGrid.GridControl()
+        Me.GVComplete = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemTextEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
+        Me.GridColumn13 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn14 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn15 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn16 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn17 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XTCFGCodeReplace, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCFGCodeReplace.SuspendLayout()
         Me.XTPFGCodeReplaceStore.SuspendLayout()
@@ -63,6 +82,14 @@ Partial Class FormFGCodeReplace
         Me.XTPFGCodeReplaceWH.SuspendLayout()
         CType(Me.GCFGCodeReplaceWH, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVFGCodeReplaceWH, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.XTCList, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTCList.SuspendLayout()
+        Me.XTPList.SuspendLayout()
+        Me.XTPTracking.SuspendLayout()
+        CType(Me.GCComplete, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVComplete, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'XTCFGCodeReplace
@@ -73,16 +100,15 @@ Partial Class FormFGCodeReplace
         Me.XTCFGCodeReplace.Location = New System.Drawing.Point(0, 0)
         Me.XTCFGCodeReplace.Name = "XTCFGCodeReplace"
         Me.XTCFGCodeReplace.SelectedTabPage = Me.XTPFGCodeReplaceStore
-        Me.XTCFGCodeReplace.Size = New System.Drawing.Size(707, 453)
+        Me.XTCFGCodeReplace.Size = New System.Drawing.Size(1268, 559)
         Me.XTCFGCodeReplace.TabIndex = 0
         Me.XTCFGCodeReplace.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPFGCodeReplaceStore, Me.XTPFGCodeReplaceWH})
         '
         'XTPFGCodeReplaceStore
         '
-        Me.XTPFGCodeReplaceStore.Controls.Add(Me.GCFGCodeReplaceStore)
-        Me.XTPFGCodeReplaceStore.Controls.Add(Me.PanelControl1)
+        Me.XTPFGCodeReplaceStore.Controls.Add(Me.XTCList)
         Me.XTPFGCodeReplaceStore.Name = "XTPFGCodeReplaceStore"
-        Me.XTPFGCodeReplaceStore.Size = New System.Drawing.Size(657, 447)
+        Me.XTPFGCodeReplaceStore.Size = New System.Drawing.Size(1218, 553)
         Me.XTPFGCodeReplaceStore.Text = "List"
         '
         'GCFGCodeReplaceStore
@@ -92,7 +118,7 @@ Partial Class FormFGCodeReplace
         Me.GCFGCodeReplaceStore.MainView = Me.GVFGCodeReplaceStore
         Me.GCFGCodeReplaceStore.Name = "GCFGCodeReplaceStore"
         Me.GCFGCodeReplaceStore.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RICECheck, Me.RepositoryItemTextEdit1})
-        Me.GCFGCodeReplaceStore.Size = New System.Drawing.Size(657, 404)
+        Me.GCFGCodeReplaceStore.Size = New System.Drawing.Size(1212, 482)
         Me.GCFGCodeReplaceStore.TabIndex = 0
         Me.GCFGCodeReplaceStore.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVFGCodeReplaceStore})
         '
@@ -215,6 +241,14 @@ Partial Class FormFGCodeReplace
         Me.GridColumnIsPrinted.Name = "GridColumnIsPrinted"
         Me.GridColumnIsPrinted.OptionsColumn.AllowEdit = False
         '
+        'GridColumnPrintStatus
+        '
+        Me.GridColumnPrintStatus.Caption = "Print Status"
+        Me.GridColumnPrintStatus.FieldName = "print_status"
+        Me.GridColumnPrintStatus.Name = "GridColumnPrintStatus"
+        Me.GridColumnPrintStatus.Visible = True
+        Me.GridColumnPrintStatus.VisibleIndex = 4
+        '
         'PanelControl1
         '
         Me.PanelControl1.Controls.Add(Me.CENotPrintedYet)
@@ -223,7 +257,7 @@ Partial Class FormFGCodeReplace
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl1.Location = New System.Drawing.Point(0, 0)
         Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(657, 43)
+        Me.PanelControl1.Size = New System.Drawing.Size(1212, 43)
         Me.PanelControl1.TabIndex = 1
         '
         'CENotPrintedYet
@@ -248,7 +282,7 @@ Partial Class FormFGCodeReplace
         Me.BViewUnique.Image = CType(resources.GetObject("BViewUnique.Image"), System.Drawing.Image)
         Me.BViewUnique.ImageIndex = 13
         Me.BViewUnique.ImageList = Me.LargeImageCollection
-        Me.BViewUnique.Location = New System.Drawing.Point(518, 2)
+        Me.BViewUnique.Location = New System.Drawing.Point(1073, 2)
         Me.BViewUnique.Name = "BViewUnique"
         Me.BViewUnique.Size = New System.Drawing.Size(137, 39)
         Me.BViewUnique.TabIndex = 25
@@ -327,19 +361,196 @@ Partial Class FormFGCodeReplace
         Me.GridColumn3.Visible = True
         Me.GridColumn3.VisibleIndex = 2
         '
-        'GridColumnPrintStatus
+        'XTCList
         '
-        Me.GridColumnPrintStatus.Caption = "Print Status"
-        Me.GridColumnPrintStatus.FieldName = "print_status"
-        Me.GridColumnPrintStatus.Name = "GridColumnPrintStatus"
-        Me.GridColumnPrintStatus.Visible = True
-        Me.GridColumnPrintStatus.VisibleIndex = 4
+        Me.XTCList.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.XTCList.HeaderLocation = DevExpress.XtraTab.TabHeaderLocation.Bottom
+        Me.XTCList.Location = New System.Drawing.Point(0, 0)
+        Me.XTCList.Name = "XTCList"
+        Me.XTCList.SelectedTabPage = Me.XTPList
+        Me.XTCList.Size = New System.Drawing.Size(1218, 553)
+        Me.XTCList.TabIndex = 2
+        Me.XTCList.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPList, Me.XTPTracking})
+        '
+        'XTPList
+        '
+        Me.XTPList.Controls.Add(Me.GCFGCodeReplaceStore)
+        Me.XTPList.Controls.Add(Me.PanelControl1)
+        Me.XTPList.Name = "XTPList"
+        Me.XTPList.Size = New System.Drawing.Size(1212, 525)
+        Me.XTPList.Text = "Proposed"
+        '
+        'XTPTracking
+        '
+        Me.XTPTracking.Controls.Add(Me.GCComplete)
+        Me.XTPTracking.Name = "XTPTracking"
+        Me.XTPTracking.Size = New System.Drawing.Size(1212, 525)
+        Me.XTPTracking.Text = "Track Status"
+        '
+        'GCComplete
+        '
+        Me.GCComplete.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCComplete.Location = New System.Drawing.Point(0, 0)
+        Me.GCComplete.MainView = Me.GVComplete
+        Me.GCComplete.Name = "GCComplete"
+        Me.GCComplete.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckEdit1, Me.RepositoryItemTextEdit2})
+        Me.GCComplete.Size = New System.Drawing.Size(1212, 525)
+        Me.GCComplete.TabIndex = 1
+        Me.GCComplete.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVComplete})
+        '
+        'GVComplete
+        '
+        Me.GVComplete.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn5, Me.GridColumn7, Me.GridColumn8, Me.GridColumn16, Me.GridColumn17, Me.GridColumn9, Me.GridColumn10, Me.GridColumn11, Me.GridColumn12, Me.GridColumn13, Me.GridColumn14, Me.GridColumn15})
+        Me.GVComplete.GridControl = Me.GCComplete
+        Me.GVComplete.Name = "GVComplete"
+        Me.GVComplete.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn5
+        '
+        Me.GridColumn5.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn5.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn5.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn5.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn5.Caption = "*"
+        Me.GridColumn5.ColumnEdit = Me.RepositoryItemCheckEdit1
+        Me.GridColumn5.FieldName = "is_check"
+        Me.GridColumn5.Name = "GridColumn5"
+        Me.GridColumn5.Visible = True
+        Me.GridColumn5.VisibleIndex = 0
+        Me.GridColumn5.Width = 64
+        '
+        'RepositoryItemCheckEdit1
+        '
+        Me.RepositoryItemCheckEdit1.AutoHeight = False
+        Me.RepositoryItemCheckEdit1.Name = "RepositoryItemCheckEdit1"
+        Me.RepositoryItemCheckEdit1.ValueChecked = "yes"
+        Me.RepositoryItemCheckEdit1.ValueUnchecked = "no"
+        '
+        'GridColumn7
+        '
+        Me.GridColumn7.Caption = "Number"
+        Me.GridColumn7.FieldName = "fg_code_replace_store_number"
+        Me.GridColumn7.Name = "GridColumn7"
+        Me.GridColumn7.OptionsColumn.AllowEdit = False
+        Me.GridColumn7.Visible = True
+        Me.GridColumn7.VisibleIndex = 1
+        Me.GridColumn7.Width = 169
+        '
+        'GridColumn8
+        '
+        Me.GridColumn8.Caption = "Created Date"
+        Me.GridColumn8.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.GridColumn8.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn8.FieldName = "fg_code_replace_store_date"
+        Me.GridColumn8.Name = "GridColumn8"
+        Me.GridColumn8.OptionsColumn.AllowEdit = False
+        Me.GridColumn8.Visible = True
+        Me.GridColumn8.VisibleIndex = 2
+        Me.GridColumn8.Width = 122
+        '
+        'GridColumn9
+        '
+        Me.GridColumn9.Caption = "Status"
+        Me.GridColumn9.FieldName = "report_status"
+        Me.GridColumn9.Name = "GridColumn9"
+        Me.GridColumn9.OptionsColumn.AllowEdit = False
+        Me.GridColumn9.Visible = True
+        Me.GridColumn9.VisibleIndex = 3
+        Me.GridColumn9.Width = 200
+        '
+        'GridColumn10
+        '
+        Me.GridColumn10.Caption = "Verified By"
+        Me.GridColumn10.FieldName = "verified_by_name"
+        Me.GridColumn10.Name = "GridColumn10"
+        Me.GridColumn10.OptionsColumn.AllowEdit = False
+        Me.GridColumn10.Visible = True
+        Me.GridColumn10.VisibleIndex = 10
+        Me.GridColumn10.Width = 335
+        '
+        'GridColumn11
+        '
+        Me.GridColumn11.Caption = "Verified Date"
+        Me.GridColumn11.DisplayFormat.FormatString = "dd MMMM yyyy HH:mm"
+        Me.GridColumn11.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn11.FieldName = "verified_date"
+        Me.GridColumn11.Name = "GridColumn11"
+        Me.GridColumn11.OptionsColumn.AllowEdit = False
+        Me.GridColumn11.Visible = True
+        Me.GridColumn11.VisibleIndex = 9
+        Me.GridColumn11.Width = 137
+        '
+        'GridColumn12
+        '
+        Me.GridColumn12.Caption = "Printed by"
+        Me.GridColumn12.ColumnEdit = Me.RepositoryItemTextEdit2
+        Me.GridColumn12.FieldName = "printed_by_name"
+        Me.GridColumn12.Name = "GridColumn12"
+        Me.GridColumn12.OptionsColumn.AllowEdit = False
+        Me.GridColumn12.Visible = True
+        Me.GridColumn12.VisibleIndex = 8
+        Me.GridColumn12.Width = 202
+        '
+        'RepositoryItemTextEdit2
+        '
+        Me.RepositoryItemTextEdit2.AutoHeight = False
+        Me.RepositoryItemTextEdit2.Name = "RepositoryItemTextEdit2"
+        Me.RepositoryItemTextEdit2.NullText = "-"
+        '
+        'GridColumn13
+        '
+        Me.GridColumn13.Caption = "Printed Date"
+        Me.GridColumn13.ColumnEdit = Me.RepositoryItemTextEdit2
+        Me.GridColumn13.DisplayFormat.FormatString = "dd MMMM yyyy HH:mm"
+        Me.GridColumn13.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn13.FieldName = "printed_date"
+        Me.GridColumn13.Name = "GridColumn13"
+        Me.GridColumn13.OptionsColumn.AllowEdit = False
+        Me.GridColumn13.Visible = True
+        Me.GridColumn13.VisibleIndex = 7
+        Me.GridColumn13.Width = 125
+        '
+        'GridColumn14
+        '
+        Me.GridColumn14.Caption = "Is Print"
+        Me.GridColumn14.FieldName = "is_printed"
+        Me.GridColumn14.Name = "GridColumn14"
+        Me.GridColumn14.OptionsColumn.AllowEdit = False
+        '
+        'GridColumn15
+        '
+        Me.GridColumn15.Caption = "Print Status"
+        Me.GridColumn15.FieldName = "print_status"
+        Me.GridColumn15.Name = "GridColumn15"
+        Me.GridColumn15.Visible = True
+        Me.GridColumn15.VisibleIndex = 6
+        Me.GridColumn15.Width = 162
+        '
+        'GridColumn16
+        '
+        Me.GridColumn16.Caption = "Complete Date"
+        Me.GridColumn16.DisplayFormat.FormatString = "dd MMMM yyyy HH:mm"
+        Me.GridColumn16.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn16.FieldName = "completed_date"
+        Me.GridColumn16.Name = "GridColumn16"
+        Me.GridColumn16.Visible = True
+        Me.GridColumn16.VisibleIndex = 4
+        Me.GridColumn16.Width = 134
+        '
+        'GridColumn17
+        '
+        Me.GridColumn17.Caption = "Complete By"
+        Me.GridColumn17.FieldName = "complete_by"
+        Me.GridColumn17.Name = "GridColumn17"
+        Me.GridColumn17.Visible = True
+        Me.GridColumn17.VisibleIndex = 5
+        Me.GridColumn17.Width = 182
         '
         'FormFGCodeReplace
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(707, 453)
+        Me.ClientSize = New System.Drawing.Size(1268, 559)
         Me.Controls.Add(Me.XTCFGCodeReplace)
         Me.Name = "FormFGCodeReplace"
         Me.ShowInTaskbar = False
@@ -360,6 +571,14 @@ Partial Class FormFGCodeReplace
         Me.XTPFGCodeReplaceWH.ResumeLayout(False)
         CType(Me.GCFGCodeReplaceWH, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVFGCodeReplaceWH, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.XTCList, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTCList.ResumeLayout(False)
+        Me.XTPList.ResumeLayout(False)
+        Me.XTPTracking.ResumeLayout(False)
+        CType(Me.GCComplete, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVComplete, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -390,4 +609,23 @@ Partial Class FormFGCodeReplace
     Friend WithEvents GridColumnIsPrinted As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents CENotPrintedYet As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents GridColumnPrintStatus As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents XTCList As DevExpress.XtraTab.XtraTabControl
+    Friend WithEvents XTPList As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents XTPTracking As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents GCComplete As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVComplete As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RepositoryItemCheckEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+    Friend WithEvents GridColumn7 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn8 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn16 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn17 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn9 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn10 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn11 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn12 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RepositoryItemTextEdit2 As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
+    Friend WithEvents GridColumn13 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn14 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn15 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

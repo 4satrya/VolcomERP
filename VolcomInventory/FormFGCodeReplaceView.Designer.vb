@@ -98,8 +98,9 @@ Partial Class FormFGCodeReplaceView
         Me.GridColumnReportNumber.Caption = "Report Number"
         Me.GridColumnReportNumber.FieldName = "fg_code_replace_store_number"
         Me.GridColumnReportNumber.Name = "GridColumnReportNumber"
+        Me.GridColumnReportNumber.OptionsColumn.ReadOnly = True
         Me.GridColumnReportNumber.Visible = True
-        Me.GridColumnReportNumber.VisibleIndex = 1
+        Me.GridColumnReportNumber.VisibleIndex = 0
         '
         'GridColumn3
         '
@@ -108,7 +109,7 @@ Partial Class FormFGCodeReplaceView
         Me.GridColumn3.Name = "GridColumn3"
         Me.GridColumn3.OptionsColumn.ReadOnly = True
         Me.GridColumn3.Visible = True
-        Me.GridColumn3.VisibleIndex = 4
+        Me.GridColumn3.VisibleIndex = 3
         Me.GridColumn3.Width = 136
         '
         'GridColumnUnqueCode
@@ -116,19 +117,20 @@ Partial Class FormFGCodeReplaceView
         Me.GridColumnUnqueCode.Caption = "Unique Code"
         Me.GridColumnUnqueCode.FieldName = "unique_code"
         Me.GridColumnUnqueCode.Name = "GridColumnUnqueCode"
+        Me.GridColumnUnqueCode.OptionsColumn.ReadOnly = True
         Me.GridColumnUnqueCode.Visible = True
-        Me.GridColumnUnqueCode.VisibleIndex = 5
+        Me.GridColumnUnqueCode.VisibleIndex = 4
         Me.GridColumnUnqueCode.Width = 303
         '
         'GridColumn4
         '
         Me.GridColumn4.Caption = "Description"
         Me.GridColumn4.FieldName = "name"
-        Me.GridColumn4.FieldNameSortGroup = "id_design"
         Me.GridColumn4.Name = "GridColumn4"
+        Me.GridColumn4.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.[True]
         Me.GridColumn4.OptionsColumn.ReadOnly = True
         Me.GridColumn4.Visible = True
-        Me.GridColumn4.VisibleIndex = 6
+        Me.GridColumn4.VisibleIndex = 5
         Me.GridColumn4.Width = 389
         '
         'GridColumn5
@@ -142,7 +144,7 @@ Partial Class FormFGCodeReplaceView
         Me.GridColumn5.Name = "GridColumn5"
         Me.GridColumn5.OptionsColumn.ReadOnly = True
         Me.GridColumn5.Visible = True
-        Me.GridColumn5.VisibleIndex = 7
+        Me.GridColumn5.VisibleIndex = 6
         Me.GridColumn5.Width = 109
         '
         'GridColumn6
@@ -165,8 +167,9 @@ Partial Class FormFGCodeReplaceView
         Me.GridColumn8.Caption = "Account Name"
         Me.GridColumn8.FieldName = "comp_name"
         Me.GridColumn8.Name = "GridColumn8"
+        Me.GridColumn8.OptionsColumn.ReadOnly = True
         Me.GridColumn8.Visible = True
-        Me.GridColumn8.VisibleIndex = 3
+        Me.GridColumn8.VisibleIndex = 2
         Me.GridColumn8.Width = 204
         '
         'GridColumn9
@@ -174,8 +177,9 @@ Partial Class FormFGCodeReplaceView
         Me.GridColumn9.Caption = "Account#"
         Me.GridColumn9.FieldName = "comp_number"
         Me.GridColumn9.Name = "GridColumn9"
+        Me.GridColumn9.OptionsColumn.ReadOnly = True
         Me.GridColumn9.Visible = True
-        Me.GridColumn9.VisibleIndex = 2
+        Me.GridColumn9.VisibleIndex = 1
         Me.GridColumn9.Width = 64
         '
         'GridColumn14
@@ -183,7 +187,7 @@ Partial Class FormFGCodeReplaceView
         Me.GridColumn14.Caption = "Id Product"
         Me.GridColumn14.FieldName = "id_product"
         Me.GridColumn14.Name = "GridColumn14"
-        Me.GridColumn14.OptionsColumn.AllowEdit = False
+        Me.GridColumn14.OptionsColumn.ReadOnly = True
         Me.GridColumn14.OptionsColumn.ShowInCustomizationForm = False
         '
         'GridColumn15
@@ -191,7 +195,7 @@ Partial Class FormFGCodeReplaceView
         Me.GridColumn15.Caption = "Id Det"
         Me.GridColumn15.FieldName = "id_fg_code_replace_store_det"
         Me.GridColumn15.Name = "GridColumn15"
-        Me.GridColumn15.OptionsColumn.AllowEdit = False
+        Me.GridColumn15.OptionsColumn.ReadOnly = True
         Me.GridColumn15.OptionsColumn.ShowInCustomizationForm = False
         '
         'GridColumn16
@@ -199,6 +203,7 @@ Partial Class FormFGCodeReplaceView
         Me.GridColumn16.Caption = "Id Comp"
         Me.GridColumn16.FieldName = "id_comp"
         Me.GridColumn16.Name = "GridColumn16"
+        Me.GridColumn16.OptionsColumn.ReadOnly = True
         '
         'GridColumnCost
         '
@@ -207,7 +212,7 @@ Partial Class FormFGCodeReplaceView
         Me.GridColumnCost.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnCost.FieldName = "design_cop"
         Me.GridColumnCost.Name = "GridColumnCost"
-        Me.GridColumnCost.OptionsColumn.AllowEdit = False
+        Me.GridColumnCost.OptionsColumn.ReadOnly = True
         '
         'GridColumnPrice
         '
@@ -216,8 +221,9 @@ Partial Class FormFGCodeReplaceView
         Me.GridColumnPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnPrice.FieldName = "price"
         Me.GridColumnPrice.Name = "GridColumnPrice"
+        Me.GridColumnPrice.OptionsColumn.ReadOnly = True
         Me.GridColumnPrice.Visible = True
-        Me.GridColumnPrice.VisibleIndex = 8
+        Me.GridColumnPrice.VisibleIndex = 7
         Me.GridColumnPrice.Width = 234
         '
         'GridColumncounting
@@ -225,6 +231,7 @@ Partial Class FormFGCodeReplaceView
         Me.GridColumncounting.Caption = "counting"
         Me.GridColumncounting.FieldName = "counting"
         Me.GridColumncounting.Name = "GridColumncounting"
+        Me.GridColumncounting.OptionsColumn.ReadOnly = True
         '
         'RepositoryItemSpinEdit2
         '

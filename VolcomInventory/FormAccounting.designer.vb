@@ -20,6 +20,7 @@ Partial Class FormAccounting
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormAccounting))
         Me.XTCGeneral = New DevExpress.XtraTab.XtraTabControl()
         Me.XTPAccount = New DevExpress.XtraTab.XtraTabPage()
         Me.GCAcc = New DevExpress.XtraGrid.GridControl()
@@ -60,14 +61,27 @@ Partial Class FormAccounting
         Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnSalesAccount = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnSalesReturnAccount = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemCheckEdit3 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
         Me.BtnViewCompany = New DevExpress.XtraEditors.SimpleButton()
         Me.LECompanyCategory = New DevExpress.XtraEditors.LookUpEdit()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
+        Me.XTPGeneral = New DevExpress.XtraTab.XtraTabPage()
+        Me.XTCGeneralSetup = New DevExpress.XtraTab.XtraTabControl()
+        Me.XTPPurchasing = New DevExpress.XtraTab.XtraTabPage()
+        Me.BtnBrowseVAT = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnBrowseRec = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnDiscard = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnSave = New DevExpress.XtraEditors.SimpleButton()
+        Me.TxtVATDesc = New DevExpress.XtraEditors.TextEdit()
+        Me.TxtVATAccount = New DevExpress.XtraEditors.TextEdit()
+        Me.TxtRecDesc = New DevExpress.XtraEditors.TextEdit()
+        Me.TxtRecAccount = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.BalanceMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.SMViewTransaction = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GridColumnSalesReturnAccount = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XTCGeneral, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCGeneral.SuspendLayout()
         Me.XTPAccount.SuspendLayout()
@@ -86,6 +100,14 @@ Partial Class FormAccounting
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.LECompanyCategory.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTPGeneral.SuspendLayout()
+        CType(Me.XTCGeneralSetup, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTCGeneralSetup.SuspendLayout()
+        Me.XTPPurchasing.SuspendLayout()
+        CType(Me.TxtVATDesc.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtVATAccount.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtRecDesc.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtRecAccount.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.BalanceMenu.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -99,7 +121,7 @@ Partial Class FormAccounting
         Me.XTCGeneral.SelectedTabPage = Me.XTPAccount
         Me.XTCGeneral.Size = New System.Drawing.Size(812, 366)
         Me.XTCGeneral.TabIndex = 0
-        Me.XTCGeneral.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPAccount, Me.XTPTreeList, Me.XTPARAP})
+        Me.XTCGeneral.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPAccount, Me.XTPTreeList, Me.XTPARAP, Me.XTPGeneral})
         '
         'XTPAccount
         '
@@ -453,6 +475,15 @@ Partial Class FormAccounting
         Me.GridColumnSalesAccount.Visible = True
         Me.GridColumnSalesAccount.VisibleIndex = 3
         '
+        'GridColumnSalesReturnAccount
+        '
+        Me.GridColumnSalesReturnAccount.Caption = "Sales Return Account"
+        Me.GridColumnSalesReturnAccount.ColumnEdit = Me.RepositoryItemTextEdit1
+        Me.GridColumnSalesReturnAccount.FieldName = "acc_sales_return"
+        Me.GridColumnSalesReturnAccount.Name = "GridColumnSalesReturnAccount"
+        Me.GridColumnSalesReturnAccount.Visible = True
+        Me.GridColumnSalesReturnAccount.VisibleIndex = 4
+        '
         'RepositoryItemCheckEdit3
         '
         Me.RepositoryItemCheckEdit3.AutoHeight = False
@@ -499,6 +530,146 @@ Partial Class FormAccounting
         Me.LabelControl1.TabIndex = 0
         Me.LabelControl1.Text = "Category"
         '
+        'XTPGeneral
+        '
+        Me.XTPGeneral.Controls.Add(Me.XTCGeneralSetup)
+        Me.XTPGeneral.Name = "XTPGeneral"
+        Me.XTPGeneral.Size = New System.Drawing.Size(708, 360)
+        Me.XTPGeneral.Text = "General Setup"
+        '
+        'XTCGeneralSetup
+        '
+        Me.XTCGeneralSetup.AppearancePage.Header.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.XTCGeneralSetup.AppearancePage.Header.Options.UseFont = True
+        Me.XTCGeneralSetup.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.XTCGeneralSetup.HeaderLocation = DevExpress.XtraTab.TabHeaderLocation.Bottom
+        Me.XTCGeneralSetup.Location = New System.Drawing.Point(0, 0)
+        Me.XTCGeneralSetup.LookAndFeel.SkinName = "Metropolis"
+        Me.XTCGeneralSetup.LookAndFeel.UseDefaultLookAndFeel = False
+        Me.XTCGeneralSetup.Name = "XTCGeneralSetup"
+        Me.XTCGeneralSetup.SelectedTabPage = Me.XTPPurchasing
+        Me.XTCGeneralSetup.Size = New System.Drawing.Size(708, 360)
+        Me.XTCGeneralSetup.TabIndex = 0
+        Me.XTCGeneralSetup.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPPurchasing})
+        '
+        'XTPPurchasing
+        '
+        Me.XTPPurchasing.Controls.Add(Me.BtnBrowseVAT)
+        Me.XTPPurchasing.Controls.Add(Me.BtnBrowseRec)
+        Me.XTPPurchasing.Controls.Add(Me.BtnDiscard)
+        Me.XTPPurchasing.Controls.Add(Me.BtnSave)
+        Me.XTPPurchasing.Controls.Add(Me.TxtVATDesc)
+        Me.XTPPurchasing.Controls.Add(Me.TxtVATAccount)
+        Me.XTPPurchasing.Controls.Add(Me.TxtRecDesc)
+        Me.XTPPurchasing.Controls.Add(Me.TxtRecAccount)
+        Me.XTPPurchasing.Controls.Add(Me.LabelControl3)
+        Me.XTPPurchasing.Controls.Add(Me.LabelControl2)
+        Me.XTPPurchasing.Name = "XTPPurchasing"
+        Me.XTPPurchasing.Size = New System.Drawing.Size(706, 334)
+        Me.XTPPurchasing.Text = "Purchasing"
+        '
+        'BtnBrowseVAT
+        '
+        Me.BtnBrowseVAT.Image = CType(resources.GetObject("BtnBrowseVAT.Image"), System.Drawing.Image)
+        Me.BtnBrowseVAT.Location = New System.Drawing.Point(613, 81)
+        Me.BtnBrowseVAT.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat
+        Me.BtnBrowseVAT.LookAndFeel.UseDefaultLookAndFeel = False
+        Me.BtnBrowseVAT.Name = "BtnBrowseVAT"
+        Me.BtnBrowseVAT.Size = New System.Drawing.Size(27, 20)
+        Me.BtnBrowseVAT.TabIndex = 9
+        Me.BtnBrowseVAT.ToolTip = "Browse"
+        '
+        'BtnBrowseRec
+        '
+        Me.BtnBrowseRec.Image = CType(resources.GetObject("BtnBrowseRec.Image"), System.Drawing.Image)
+        Me.BtnBrowseRec.Location = New System.Drawing.Point(613, 36)
+        Me.BtnBrowseRec.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat
+        Me.BtnBrowseRec.LookAndFeel.UseDefaultLookAndFeel = False
+        Me.BtnBrowseRec.Name = "BtnBrowseRec"
+        Me.BtnBrowseRec.Size = New System.Drawing.Size(27, 20)
+        Me.BtnBrowseRec.TabIndex = 8
+        Me.BtnBrowseRec.ToolTip = "Browse"
+        '
+        'BtnDiscard
+        '
+        Me.BtnDiscard.Appearance.BackColor = System.Drawing.Color.Crimson
+        Me.BtnDiscard.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnDiscard.Appearance.ForeColor = System.Drawing.Color.White
+        Me.BtnDiscard.Appearance.Options.UseBackColor = True
+        Me.BtnDiscard.Appearance.Options.UseFont = True
+        Me.BtnDiscard.Appearance.Options.UseForeColor = True
+        Me.BtnDiscard.Location = New System.Drawing.Point(426, 117)
+        Me.BtnDiscard.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.UltraFlat
+        Me.BtnDiscard.LookAndFeel.UseDefaultLookAndFeel = False
+        Me.BtnDiscard.Name = "BtnDiscard"
+        Me.BtnDiscard.Size = New System.Drawing.Size(104, 29)
+        Me.BtnDiscard.TabIndex = 7
+        Me.BtnDiscard.Text = "Discard"
+        '
+        'BtnSave
+        '
+        Me.BtnSave.Appearance.BackColor = System.Drawing.SystemColors.Highlight
+        Me.BtnSave.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnSave.Appearance.ForeColor = System.Drawing.Color.White
+        Me.BtnSave.Appearance.Options.UseBackColor = True
+        Me.BtnSave.Appearance.Options.UseFont = True
+        Me.BtnSave.Appearance.Options.UseForeColor = True
+        Me.BtnSave.Location = New System.Drawing.Point(536, 117)
+        Me.BtnSave.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.UltraFlat
+        Me.BtnSave.LookAndFeel.UseDefaultLookAndFeel = False
+        Me.BtnSave.Name = "BtnSave"
+        Me.BtnSave.Size = New System.Drawing.Size(104, 29)
+        Me.BtnSave.TabIndex = 6
+        Me.BtnSave.Text = "Save Changes"
+        '
+        'TxtVATDesc
+        '
+        Me.TxtVATDesc.Enabled = False
+        Me.TxtVATDesc.Location = New System.Drawing.Point(189, 81)
+        Me.TxtVATDesc.Name = "TxtVATDesc"
+        Me.TxtVATDesc.Size = New System.Drawing.Size(420, 20)
+        Me.TxtVATDesc.TabIndex = 5
+        '
+        'TxtVATAccount
+        '
+        Me.TxtVATAccount.Enabled = False
+        Me.TxtVATAccount.Location = New System.Drawing.Point(19, 81)
+        Me.TxtVATAccount.Name = "TxtVATAccount"
+        Me.TxtVATAccount.Size = New System.Drawing.Size(164, 20)
+        Me.TxtVATAccount.TabIndex = 4
+        '
+        'TxtRecDesc
+        '
+        Me.TxtRecDesc.Enabled = False
+        Me.TxtRecDesc.Location = New System.Drawing.Point(189, 36)
+        Me.TxtRecDesc.Name = "TxtRecDesc"
+        Me.TxtRecDesc.Size = New System.Drawing.Size(420, 20)
+        Me.TxtRecDesc.TabIndex = 3
+        '
+        'TxtRecAccount
+        '
+        Me.TxtRecAccount.Enabled = False
+        Me.TxtRecAccount.Location = New System.Drawing.Point(19, 36)
+        Me.TxtRecAccount.Name = "TxtRecAccount"
+        Me.TxtRecAccount.Size = New System.Drawing.Size(164, 20)
+        Me.TxtRecAccount.TabIndex = 2
+        '
+        'LabelControl3
+        '
+        Me.LabelControl3.Location = New System.Drawing.Point(19, 62)
+        Me.LabelControl3.Name = "LabelControl3"
+        Me.LabelControl3.Size = New System.Drawing.Size(74, 13)
+        Me.LabelControl3.TabIndex = 1
+        Me.LabelControl3.Text = "VAT In Account"
+        '
+        'LabelControl2
+        '
+        Me.LabelControl2.Location = New System.Drawing.Point(19, 17)
+        Me.LabelControl2.Name = "LabelControl2"
+        Me.LabelControl2.Size = New System.Drawing.Size(80, 13)
+        Me.LabelControl2.TabIndex = 0
+        Me.LabelControl2.Text = "Receive Account"
+        '
         'BalanceMenu
         '
         Me.BalanceMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SMViewTransaction})
@@ -510,15 +681,6 @@ Partial Class FormAccounting
         Me.SMViewTransaction.Name = "SMViewTransaction"
         Me.SMViewTransaction.Size = New System.Drawing.Size(135, 22)
         Me.SMViewTransaction.Text = "Transaction"
-        '
-        'GridColumnSalesReturnAccount
-        '
-        Me.GridColumnSalesReturnAccount.Caption = "Sales Return Account"
-        Me.GridColumnSalesReturnAccount.ColumnEdit = Me.RepositoryItemTextEdit1
-        Me.GridColumnSalesReturnAccount.FieldName = "acc_sales_return"
-        Me.GridColumnSalesReturnAccount.Name = "GridColumnSalesReturnAccount"
-        Me.GridColumnSalesReturnAccount.Visible = True
-        Me.GridColumnSalesReturnAccount.VisibleIndex = 4
         '
         'FormAccounting
         '
@@ -552,6 +714,15 @@ Partial Class FormAccounting
         Me.PanelControl1.ResumeLayout(False)
         Me.PanelControl1.PerformLayout()
         CType(Me.LECompanyCategory.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTPGeneral.ResumeLayout(False)
+        CType(Me.XTCGeneralSetup, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTCGeneralSetup.ResumeLayout(False)
+        Me.XTPPurchasing.ResumeLayout(False)
+        Me.XTPPurchasing.PerformLayout()
+        CType(Me.TxtVATDesc.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtVATAccount.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtRecDesc.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtRecAccount.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.BalanceMenu.ResumeLayout(False)
         Me.ResumeLayout(False)
 
@@ -604,4 +775,17 @@ Partial Class FormAccounting
     Friend WithEvents GridColumn10 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnSalesAccount As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnSalesReturnAccount As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents XTPGeneral As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents XTCGeneralSetup As DevExpress.XtraTab.XtraTabControl
+    Friend WithEvents XTPPurchasing As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents BtnBrowseVAT As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BtnBrowseRec As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BtnDiscard As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BtnSave As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents TxtVATDesc As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents TxtVATAccount As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents TxtRecDesc As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents TxtRecAccount As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LabelControl3 As DevExpress.XtraEditors.LabelControl
 End Class

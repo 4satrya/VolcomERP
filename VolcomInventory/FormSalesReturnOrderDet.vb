@@ -12,6 +12,8 @@
     Public id_wh_locator As String = "-1"
     Dim id_prepare_status As String = "-1"
     Public is_ro_only_offline As String = "-1"
+    Dim lead_time_ro As String = "0"
+
 
     Private Sub FormSalesReturnOrderDet_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         viewReportStatus()
@@ -20,14 +22,16 @@
 
     Sub actionLoad()
         If action = "ins" Then
+            lead_time_ro = get_setup_field("lead_time_ro")
             is_ro_only_offline = get_setup_field("is_ro_only_offline")
             TxtSalesOrderNumber.Text = ""
             BtnPrint.Enabled = False
             BMark.Enabled = False
             BtnAttachment.Enabled = False
             DEForm.Text = view_date(0)
-            Dim data As DataTable = execute_query("SELECT DATE(NOW()) AS `tgl`", -1, True, "", "", "", "")
-            DERetDueDate.EditValue = data.Rows(0)("tgl")
+            Dim data As DataTable = execute_query("SELECT DATE(NOW()) AS `tgl`, DATE_ADD(NOW(),INTERVAL " + lead_time_ro + " DAY) AS `tgl_ret`, DATE_ADD(NOW(),INTERVAL 1 MONTH) AS `tgl_del` ", -1, True, "", "", "", "")
+            DERetDueDate.EditValue = data.Rows(0)("tgl_ret")
+            DEDelDate.EditValue = data.Rows(0)("tgl_del")
         ElseIf action = "upd" Then
             GVItemList.OptionsBehavior.AutoExpandAllGroups = True
             BtnBrowseContactTo.Enabled = False
@@ -36,7 +40,7 @@
             'query view based on edit id's
             Dim query As String = "SELECT d.id_comp, a.id_sales_return_order, a.id_store_contact_to, getCompByContact(a.id_store_contact_to, 4) AS `id_wh_drawer_store`, getCompByContact(a.id_store_contact_to, 6) AS `id_wh_rack_store`, getCompByContact(a.id_store_contact_to, 7) AS `id_wh_locator_store`, (d.comp_name) AS store_name_to, (d.comp_number) AS store_number_to, (d.address_primary) AS store_address_to, a.id_report_status, f.report_status, "
             query += "a.sales_return_order_note, a.sales_return_order_date, a.sales_return_order_note, a.sales_return_order_number, "
-            query += "DATE_FORMAT(a.sales_return_order_date,'%Y-%m-%d') AS sales_return_order_datex, a.sales_return_order_est_date, a.id_prepare_status "
+            query += "DATE_FORMAT(a.sales_return_order_date,'%Y-%m-%d') AS sales_return_order_datex, a.sales_return_order_est_date, a.sales_return_order_est_del_date, a.id_prepare_status, a.is_on_hold "
             query += "FROM tb_sales_return_order a "
             query += "INNER JOIN tb_m_comp_contact c ON c.id_comp_contact = a.id_store_contact_to "
             query += "INNER JOIN tb_m_comp d ON c.id_comp = d.id_comp "
@@ -56,14 +60,58 @@
             TxtSalesOrderNumber.Text = data.Rows(0)("sales_return_order_number").ToString
             MENote.Text = data.Rows(0)("sales_return_order_note").ToString
             DERetDueDate.EditValue = data.Rows(0)("sales_return_order_est_date")
+            DEDelDate.EditValue = data.Rows(0)("sales_return_order_est_del_date")
             LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", data.Rows(0)("id_report_status").ToString)
             id_prepare_status = data.Rows(0)("id_prepare_status").ToString
+            If data.Rows(0)("is_on_hold").ToString = "1" Then
+                CEOnHold.EditValue = True
+                BMark.Visible = False
+            Else
+                CEOnHold.EditValue = False
+            End If
+
             'detail2
             viewDetail()
-            checkStockAvail()
+            viewCargoRate()
+            'checkStockAvail()
             noEdit()
             check_but()
             allow_status()
+        End If
+    End Sub
+
+    Sub checkOnHold()
+        Dim ro As New ClassSalesReturnOrder()
+        Dim query As String = ro.queryOnHold("AND c.id_comp='" + id_comp + "' AND ISNULL(rof.id_detail_on_hold) ", "1", False, "0")
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        If data.Rows.Count > 0 Then
+            FormSalesReturnOrderOnHoldList.BtnCancell.Text = "Skip"
+            viewOnHold()
+        End If
+    End Sub
+
+    Sub viewCargoRate()
+        If action = "ins" Then
+            Dim query As String = "SELECT r.id_cargo, c.comp_name AS `cargo_name`, r.cargo_rate, r.cargo_lead_time, r.cargo_min_weight
+            FROM tb_wh_cargo_rate r 
+            INNER JOIN tb_m_comp c ON c.id_comp = r.id_cargo
+            WHERE r.id_store=" + id_comp + " AND r.id_rate_type=2 "
+            Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+            GCRate.DataSource = data
+            If GVRate.RowCount > 0 Then
+                GVRate.BestFitColumns()
+            Else
+                warningCustom("Cargo rate not found")
+            End If
+        ElseIf action = "upd" Then
+            Dim query As String = "SELECT r.id_sales_return_order_rate,r.id_sales_return_order, r.id_cargo, c.comp_name AS `cargo_name`, 
+            r.cargo_rate, r.cargo_lead_time, r.cargo_min_weight
+            FROM tb_sales_return_order_rate r
+            INNER JOIN tb_m_comp c ON c.id_comp = r.id_cargo
+            WHERE r.id_sales_return_order=" + id_sales_return_order + " "
+            Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+            GCRate.DataSource = data
+            GVRate.BestFitColumns()
         End If
     End Sub
 
@@ -149,7 +197,14 @@
             Dim sales_return_order_number As String = TxtSalesOrderNumber.Text
             Dim sales_return_order_note As String = addSlashes(MENote.Text)
             Dim sales_return_order_est_date As String = DateTime.Parse(DERetDueDate.EditValue.ToString).ToString("yyyy-MM-dd")
+            Dim sales_return_order_est_del_date As String = DateTime.Parse(DEDelDate.EditValue.ToString).ToString("yyyy-MM-dd")
             Dim id_report_status As String = LEReportStatus.EditValue
+            Dim is_on_hold As String = ""
+            If CEOnHold.EditValue = True Then
+                is_on_hold = "1"
+            Else
+                is_on_hold = "2"
+            End If
 
             If action = "ins" Then
                 Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure want to save this data ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
@@ -157,8 +212,14 @@
                     Cursor = Cursors.WaitCursor
                     Try
                         'Main tbale
-                        Dim query As String = "INSERT INTO tb_sales_return_order(id_store_contact_to, sales_return_order_number, sales_return_order_date, sales_return_order_note, id_report_status, sales_return_order_est_date) "
-                        query += "VALUES('" + id_store_contact_to + "', '" + header_number_sales("4") + "', NOW(), '" + sales_return_order_note + "', '" + id_report_status + "', '" + sales_return_order_est_date + "'); SELECT LAST_INSERT_ID(); "
+                        If is_on_hold = "1" Then
+                            sales_return_order_number = ""
+                        Else
+                            sales_return_order_number = header_number_sales("4")
+                        End If
+
+                        Dim query As String = "INSERT INTO tb_sales_return_order(id_store_contact_to, sales_return_order_number, sales_return_order_date, sales_return_order_note, id_report_status, sales_return_order_est_date, sales_return_order_est_del_date, is_on_hold) "
+                        query += "VALUES('" + id_store_contact_to + "', '" + sales_return_order_number + "', NOW(), '" + sales_return_order_note + "', '" + id_report_status + "', DATE_ADD(NOW(),INTERVAL " + lead_time_ro + " DAY), '" + sales_return_order_est_del_date + "', '" + is_on_hold + "'); SELECT LAST_INSERT_ID(); "
                         id_sales_return_order = execute_query(query, 0, True, "", "", "", "")
                         increase_inc_sales("4")
 
@@ -169,7 +230,7 @@
                         Dim jum_ins_i As Integer = 0
                         Dim query_detail As String = ""
                         If GVItemList.RowCount > 0 Then
-                            query_detail = "INSERT INTO tb_sales_return_order_det(id_sales_return_order, id_product, id_design_price, design_price, sales_return_order_det_qty, sales_return_order_det_note, id_return_cat) VALUES "
+                            query_detail = "INSERT INTO tb_sales_return_order_det(id_detail_on_hold, id_sales_return_order, id_product, id_design_price, design_price, sales_return_order_det_qty, sales_return_order_det_note, id_return_cat) VALUES "
                         End If
                         For i As Integer = 0 To (GVItemList.RowCount - 1)
                             Try
@@ -179,11 +240,15 @@
                                 Dim sales_return_order_det_qty As String = decimalSQL(GVItemList.GetRowCellValue(i, "sales_return_order_det_qty").ToString)
                                 Dim sales_return_order_det_note As String = GVItemList.GetRowCellValue(i, "sales_return_order_det_note").ToString
                                 Dim id_return_cat As String = GVItemList.GetRowCellValue(i, "id_return_cat").ToString
+                                Dim id_detail_on_hold As String = GVItemList.GetRowCellValue(i, "id_detail_on_hold").ToString
+                                If id_detail_on_hold = "0" Then
+                                    id_detail_on_hold = "NULL "
+                                End If
 
                                 If jum_ins_i > 0 Then
                                     query_detail += ", "
                                 End If
-                                query_detail += "('" + id_sales_return_order + "', '" + id_product + "', '" + id_design_price + "', '" + design_price + "', '" + sales_return_order_det_qty + "', '" + sales_return_order_det_note + "', '" + id_return_cat + "')"
+                                query_detail += "(" + id_detail_on_hold + ",'" + id_sales_return_order + "', '" + id_product + "', '" + id_design_price + "', '" + design_price + "', '" + sales_return_order_det_qty + "', '" + sales_return_order_det_note + "', '" + id_return_cat + "')"
                                 jum_ins_i = jum_ins_i + 1
                             Catch ex As Exception
 
@@ -193,13 +258,40 @@
                             execute_non_query(query_detail, True, "", "", "", "")
                         End If
 
-                        FormSalesReturnOrder.viewSalesReturnOrder()
-                        FormSalesReturnOrder.GVSalesReturnOrder.FocusedRowHandle = find_row(FormSalesReturnOrder.GVSalesReturnOrder, "id_sales_return_order", id_sales_return_order)
-                        action = "upd"
-                        actionLoad()
-                        infoCustom("Document #" + TxtSalesOrderNumber.Text + " was created successfully.")
+                        'cargo rate
+                        makeSafeGV(GVRate)
+                        If GVRate.RowCount > 0 Then
+                            Dim query_rate As String = "INSERT INTO tb_sales_return_order_rate(id_sales_return_order, id_cargo, cargo_rate, cargo_lead_time, cargo_min_weight) VALUES "
+                            For r As Integer = 0 To GVRate.RowCount - 1
+                                Dim id_cargo As String = GVRate.GetRowCellValue(r, "id_cargo").ToString
+                                Dim cargo_rate As String = decimalSQL(GVRate.GetRowCellValue(r, "cargo_rate").ToString)
+                                Dim cargo_lead_time As String = decimalSQL(GVRate.GetRowCellValue(r, "cargo_lead_time").ToString)
+                                Dim cargo_min_weight As String = decimalSQL(GVRate.GetRowCellValue(r, "cargo_min_weight").ToString)
+
+                                If r > 0 Then
+                                    query_rate += ", "
+                                End If
+                                query_rate += "('" + id_sales_return_order + "', '" + id_cargo + "', '" + cargo_rate + "', '" + cargo_lead_time + "', '" + cargo_min_weight + "') "
+                            Next
+                            execute_non_query(query_rate, True, "", "", "", "")
+                        End If
+
+                        If is_on_hold = "1" Then
+                            FormSalesReturnOrder.XTCROR.SelectedTabPageIndex = 1
+                            FormSalesReturnOrder.SLEStore.EditValue = id_comp
+                            FormSalesReturnOrder.viewOnHold()
+                            FormSalesReturnOrder.GVOnHold.FocusedRowHandle = find_row(FormSalesReturnOrder.GVOnHold, "id_sales_return_order", id_sales_return_order)
+                            Close()
+                        Else
+                            FormSalesReturnOrder.XTCROR.SelectedTabPageIndex = 0
+                            FormSalesReturnOrder.viewSalesReturnOrder()
+                            FormSalesReturnOrder.GVSalesReturnOrder.FocusedRowHandle = find_row(FormSalesReturnOrder.GVSalesReturnOrder, "id_sales_return_order", id_sales_return_order)
+                            action = "upd"
+                            actionLoad()
+                            infoCustom("Document #" + TxtSalesOrderNumber.Text + " was created successfully.")
+                        End If
                     Catch ex As Exception
-                        errorConnection()
+                        stopCustom(ex.ToString)
                         Close()
                     End Try
                     Cursor = Cursors.Default
@@ -209,53 +301,53 @@
                 If confirm = Windows.Forms.DialogResult.Yes Then
                     Cursor = Cursors.WaitCursor
                     Try
-                        Dim query As String = "UPDATE tb_sales_return_order SET id_store_contact_to='" + id_store_contact_to + "', sales_return_order_number = '" + sales_return_order_number + "', sales_return_order_note='" + sales_return_order_note + "', sales_return_order_est_date = '" + sales_return_order_est_date + "' WHERE id_sales_return_order='" + id_sales_return_order + "' "
+                        Dim query As String = "UPDATE tb_sales_return_order SET id_store_contact_to='" + id_store_contact_to + "', sales_return_order_number = '" + sales_return_order_number + "', sales_return_order_note='" + sales_return_order_note + "', sales_return_order_est_date = '" + sales_return_order_est_date + "', sales_return_order_est_del_date='" + sales_return_order_est_del_date + "' WHERE id_sales_return_order='" + id_sales_return_order + "' "
                         execute_non_query(query, True, "", "", "", "")
 
                         'edit detail table
-                        Dim jum_ins_i As Integer = 0
-                        Dim query_detail As String = ""
-                        If GVItemList.RowCount > 0 Then
-                            query_detail = "INSERT INTO tb_sales_return_order_det(id_sales_return_order, id_product, id_design_price, design_price, sales_return_order_det_qty, sales_return_order_det_note, id_return_cat) VALUES "
-                        End If
-                        For i As Integer = 0 To (GVItemList.RowCount - 1)
-                            Try
-                                Dim id_sales_return_order_det As String = GVItemList.GetRowCellValue(i, "id_sales_return_order_det").ToString
-                                Dim id_product As String = GVItemList.GetRowCellValue(i, "id_product").ToString
-                                Dim id_design_price As String = GVItemList.GetRowCellValue(i, "id_design_price").ToString
-                                Dim design_price As String = decimalSQL(GVItemList.GetRowCellValue(i, "design_price").ToString)
-                                Dim sales_return_order_det_qty As String = decimalSQL(GVItemList.GetRowCellValue(i, "sales_return_order_det_qty").ToString)
-                                Dim sales_return_order_det_note As String = GVItemList.GetRowCellValue(i, "sales_return_order_det_note").ToString
-                                Dim id_return_cat As String = GVItemList.GetRowCellValue(i, "id_return_cat").ToString
+                        'Dim jum_ins_i As Integer = 0
+                        'Dim query_detail As String = ""
+                        'If GVItemList.RowCount > 0 Then
+                        '    query_detail = "INSERT INTO tb_sales_return_order_det(id_sales_return_order, id_product, id_design_price, design_price, sales_return_order_det_qty, sales_return_order_det_note, id_return_cat) VALUES "
+                        'End If
+                        'For i As Integer = 0 To (GVItemList.RowCount - 1)
+                        '    Try
+                        '        Dim id_sales_return_order_det As String = GVItemList.GetRowCellValue(i, "id_sales_return_order_det").ToString
+                        '        Dim id_product As String = GVItemList.GetRowCellValue(i, "id_product").ToString
+                        '        Dim id_design_price As String = GVItemList.GetRowCellValue(i, "id_design_price").ToString
+                        '        Dim design_price As String = decimalSQL(GVItemList.GetRowCellValue(i, "design_price").ToString)
+                        '        Dim sales_return_order_det_qty As String = decimalSQL(GVItemList.GetRowCellValue(i, "sales_return_order_det_qty").ToString)
+                        '        Dim sales_return_order_det_note As String = GVItemList.GetRowCellValue(i, "sales_return_order_det_note").ToString
+                        '        Dim id_return_cat As String = GVItemList.GetRowCellValue(i, "id_return_cat").ToString
 
-                                If id_sales_return_order_det = "0" Then
-                                    If jum_ins_i > 0 Then
-                                        query_detail += ", "
-                                    End If
-                                    query_detail += "('" + id_sales_return_order + "', '" + id_product + "', '" + id_design_price + "', '" + design_price + "', '" + sales_return_order_det_qty + "', '" + sales_return_order_det_note + "', '" + id_return_cat + "')"
-                                    jum_ins_i = jum_ins_i + 1
-                                Else
-                                    Dim query_edit As String = "UPDATE tb_sales_return_order_det SET id_product = '" + id_product + "', id_design_price='" + id_design_price + "', design_price = '" + design_price + "', sales_return_order_det_qty = '" + sales_return_order_det_qty + "', sales_return_order_det_note='" + sales_return_order_det_note + "', id_return_cat = '" + id_return_cat + "' WHERE id_sales_return_order_det = '" + id_sales_return_order_det + "' "
-                                    execute_non_query(query_edit, True, "", "", "", "")
-                                    id_sales_return_order_det_list.Remove(id_sales_return_order_det)
-                                End If
-                            Catch ex As Exception
-                                ex.ToString()
-                            End Try
-                        Next
-                        If jum_ins_i > 0 Then
-                            execute_non_query(query_detail, True, "", "", "", "")
-                        End If
+                        '        If id_sales_return_order_det = "0" Then
+                        '            If jum_ins_i > 0 Then
+                        '                query_detail += ", "
+                        '            End If
+                        '            query_detail += "('" + id_sales_return_order + "', '" + id_product + "', '" + id_design_price + "', '" + design_price + "', '" + sales_return_order_det_qty + "', '" + sales_return_order_det_note + "', '" + id_return_cat + "')"
+                        '            jum_ins_i = jum_ins_i + 1
+                        '        Else
+                        '            Dim query_edit As String = "UPDATE tb_sales_return_order_det SET id_product = '" + id_product + "', id_design_price='" + id_design_price + "', design_price = '" + design_price + "', sales_return_order_det_qty = '" + sales_return_order_det_qty + "', sales_return_order_det_note='" + sales_return_order_det_note + "', id_return_cat = '" + id_return_cat + "' WHERE id_sales_return_order_det = '" + id_sales_return_order_det + "' "
+                        '            execute_non_query(query_edit, True, "", "", "", "")
+                        '            id_sales_return_order_det_list.Remove(id_sales_return_order_det)
+                        '        End If
+                        '    Catch ex As Exception
+                        '        ex.ToString()
+                        '    End Try
+                        'Next
+                        'If jum_ins_i > 0 Then
+                        '    execute_non_query(query_detail, True, "", "", "", "")
+                        'End If
 
-                        'delete sisa
-                        For k As Integer = 0 To (id_sales_return_order_det_list.Count - 1)
-                            Try
-                                Dim querydel As String = "DELETE FROM tb_sales_return_order_det WHERE id_sales_return_order_det = '" + id_sales_return_order_det_list(k) + "' "
-                                execute_non_query(querydel, True, "", "", "", "")
-                            Catch ex As Exception
-                                ex.ToString()
-                            End Try
-                        Next
+                        ''delete sisa
+                        'For k As Integer = 0 To (id_sales_return_order_det_list.Count - 1)
+                        '    Try
+                        '        Dim querydel As String = "DELETE FROM tb_sales_return_order_det WHERE id_sales_return_order_det = '" + id_sales_return_order_det_list(k) + "' "
+                        '        execute_non_query(querydel, True, "", "", "", "")
+                        '    Catch ex As Exception
+                        '        ex.ToString()
+                        '    End Try
+                        'Next
 
                         FormSalesReturnOrder.viewSalesReturnOrder()
                         FormSalesReturnOrder.GVSalesReturnOrder.FocusedRowHandle = find_row(FormSalesReturnOrder.GVSalesReturnOrder, "id_sales_return_order", id_sales_return_order)
@@ -294,22 +386,26 @@
     End Sub
 
     Sub allow_status()
+        CEOnHold.Enabled = False
         If check_edit_report_status(id_report_status, "45", id_sales_return_order) Then
-            PanelControlNav.Enabled = True
+            PanelControlNav.Enabled = False
             MENote.Properties.ReadOnly = False
             BtnSave.Enabled = True
-            DERetDueDate.Enabled = True
+            DERetDueDate.Enabled = False
+            DEDelDate.Enabled = True
             TxtCodeCompTo.Properties.ReadOnly = True
         Else
             PanelControlNav.Enabled = False
             MENote.Properties.ReadOnly = True
             BtnSave.Enabled = False
             DERetDueDate.Enabled = False
+            DEDelDate.Enabled = False
             TxtCodeCompTo.Properties.ReadOnly = True
         End If
 
         If id_report_status = "6" Then
             GCItemList.ContextMenuStrip = ContextMenuStrip1
+            'GCItemList.ContextMenuStrip = Nothing
         Else
             GCItemList.ContextMenuStrip = Nothing
         End If
@@ -513,6 +609,7 @@
                 TxtCodeCompTo.Text = ""
                 MEAdrressCompTo.Text = ""
                 viewDetail()
+                viewCargoRate()
                 check_but()
                 TxtCodeCompTo.Focus()
             Else
@@ -525,6 +622,8 @@
                 TxtCodeCompTo.Text = data.Rows(0)("comp_number").ToString
                 MEAdrressCompTo.Text = data.Rows(0)("address_primary").ToString
                 viewDetail()
+                viewCargoRate()
+                checkOnHold()
                 check_but()
                 DERetDueDate.Focus()
             End If
@@ -574,6 +673,7 @@
         newRow("id_sample") = "0"
         newRow("is_found") = "2"
         newRow("error_status") = ""
+        newRow("id_detail_on_hold") = "0"
         TryCast(GCItemList.DataSource, DataTable).Rows.Add(newRow)
         GCItemList.RefreshDataSource()
         GVItemList.RefreshData()
@@ -715,5 +815,19 @@
             stopCustom("Return Order already closed")
         End If
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnOnHoldList_Click(sender As Object, e As EventArgs) Handles BtnOnHoldList.Click
+        viewOnHold()
+    End Sub
+
+    Sub viewOnHold()
+        If id_comp = "-1" Then
+            stopCustom("Please select store first")
+        Else
+            Cursor = Cursors.WaitCursor
+            FormSalesReturnOrderOnHoldList.ShowDialog()
+            Cursor = Cursors.Default
+        End If
     End Sub
 End Class

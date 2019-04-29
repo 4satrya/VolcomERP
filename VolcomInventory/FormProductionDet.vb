@@ -7,7 +7,9 @@
     Public is_pd_base As String = "-1"
     Public date_created As Date
     Public is_wo_view As String = "-1"
-
+    '
+    Public is_no_cost As String = "-1"
+    '
     Private Sub FormProductionDet_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         RCIMainVendor.ValueChecked = Convert.ToSByte(1)
         RCIMainVendor.ValueUnchecked = Convert.ToSByte(2)
@@ -51,6 +53,7 @@
                 BPickDesign.Enabled = True
                 BPickPD.Enabled = True
             End If
+            check_design_vendor()
         Else
             'edit
             Dim query As String = String.Format("SELECT po.*,DATE_FORMAT(po.prod_order_date,'%Y-%m-%d') AS prod_order_datex,comp.`comp_name`,comp.`comp_number` FROM tb_prod_order po
@@ -100,7 +103,40 @@ LEFT JOIN tb_m_comp comp ON comp.`id_comp`=cc.`id_comp` WHERE po.id_prod_order =
             view_wo()
             view_mrs()
         End If
+        '
+        If is_no_cost = "1" Then
+            XTPBOM.PageVisible = False
+            XTPListWO.PageVisible = False
+        Else
+            XTPBOM.PageVisible = True
+            XTPListWO.PageVisible = True
+        End If
     End Sub
+
+    Sub check_design_vendor()
+        Dim query As String = "SELECT m_ovh_p.id_ovh AS id_component
+FROM tb_prod_demand_product pd_p
+INNER JOIN tb_prod_demand_design pd_d ON pd_d.id_prod_demand_design=pd_p.id_prod_demand_design
+INNER JOIN tb_bom bom ON bom.id_product=pd_p.id_product
+INNER JOIN tb_bom_det bom_d ON bom.id_bom=bom_d.id_bom
+INNER JOIN tb_m_ovh_price m_ovh_p ON m_ovh_p.id_ovh_price=bom_d.id_ovh_price
+INNER JOIN tb_lookup_currency cur ON cur.id_currency=m_ovh_p.id_currency
+INNER JOIN tb_m_ovh m_ovh ON m_ovh.id_ovh=m_ovh_p.id_ovh
+INNER JOIN tb_m_ovh_cat ovh_c ON ovh_c.id_ovh_cat=m_ovh.id_ovh_cat
+INNER JOIN tb_lookup_component_category cat ON cat.id_component_category=bom_d.id_component_category
+INNER JOIN tb_m_uom uom ON uom.id_uom=m_ovh.id_uom 
+INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact=m_ovh_p.id_comp_contact
+INNER JOIN tb_m_comp comp ON comp.id_comp=cc.id_comp
+WHERE bom.is_default='1' AND bom_d.id_component_category='2' AND pd_d.id_prod_demand_design='" & id_prod_demand_design & "'
+AND comp.`is_active`!=1
+GROUP BY m_ovh_p.id_ovh_price"
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        If data.Rows.Count > 0 Then
+            stopCustom("This vendor is not active, please contact administrator.")
+            Close()
+        End If
+    End Sub
+
     Private Sub view_currency(ByVal lookup As DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit)
         Dim query As String = "SELECT id_currency,currency FROM tb_lookup_currency"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
@@ -676,7 +712,7 @@ LEFT JOIN tb_m_comp comp ON comp.`id_comp`=cc.`id_comp` WHERE po.id_prod_order =
         'cost here
         Report.LTotCost.Text = Decimal.Parse(GVBOM.Columns("total").SummaryItem.SummaryValue).ToString("N2")
         Report.LSay.Text = ConvertCurrencyToEnglish(GVBOM.Columns("total").SummaryItem.SummaryValue.ToString, get_setup_field("id_currency_default"))
-        Report.Lqty.Text = Decimal.Parse(GVListProduct.Columns("prod_order_qty").SummaryItem.SummaryValue).ToString("N2")
+        Report.Lqty.Text = Decimal.Parse(GVListProduct.Columns("prod_order_qty").SummaryItem.SummaryValue).ToString("N0")
         Report.LUnitCost.Text = Decimal.Parse((GVBOM.Columns("total").SummaryItem.SummaryValue / GVListProduct.Columns("prod_order_qty").SummaryItem.SummaryValue)).ToString("N2")
         '
         ReportStyleGridview(Report.GVBOM)
@@ -692,7 +728,7 @@ LEFT JOIN tb_m_comp comp ON comp.`id_comp`=cc.`id_comp` WHERE po.id_prod_order =
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         If data.Rows.Count > 0 Then
             Report.LCur.Text = get_currency(data.Rows(0)("id_currency").ToString)
-            Report.LKurs.Text = Decimal.Parse(data.Rows(0)("kurs")).ToString("N2")
+            'Report.LKurs.Text = Decimal.Parse(data.Rows(0)("kurs")).ToString("N2")
             'Report.LNote.Text = Decimal.Parse((GVBOM.Columns("total").SummaryItem.SummaryValue / GVListProduct.Columns("prod_order_qty").SummaryItem.SummaryValue) * data.Rows(0)("kurs")).ToString("N2")
         End If
         ' Show the report's preview. 
@@ -769,6 +805,12 @@ LEFT JOIN tb_m_comp comp ON comp.`id_comp`=cc.`id_comp` WHERE po.id_prod_order =
                 id_payment = GVWO.GetRowCellValue(i, "id_payment").ToString
                 '
                 query += "UPDATE tb_prod_order_wo SET prod_order_wo_del_date='" & mat_sent_date & "',id_currency='" & id_curr & "',id_payment='" & id_payment & "',prod_order_wo_kurs='" & kurs & "',prod_order_wo_vat='" & vat & "',prod_order_wo_top='" & top & "',prod_order_wo_lead_time='" & lead_time & "',prod_order_wo_amount='" & gross_amount & "' WHERE id_prod_order_wo='" & id_wo & "';UPDATE tb_prod_order_wo_det SET prod_order_wo_det_price='" & price & "' WHERE id_prod_order_wo='" & id_wo & "';"
+
+                'Prod Order And KO
+                If GVWO.GetRowCellValue(i, "is_main_vendor").ToString = "1" Then
+                    query += "UPDATE tb_prod_order SET prod_order_lead_time='" & lead_time & "' WHERE id_prod_order='" & id_prod_order & "';"
+                    query += "UPDATE tb_prod_order_ko_det SET lead_time_prod='" & lead_time & "',lead_time_payment='" & top & "' WHERE id_prod_order='" & id_prod_order & "' AND revision=0;"
+                End If
             Next
             execute_non_query(query, True, "", "", "", "")
         Else

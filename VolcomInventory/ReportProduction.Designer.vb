@@ -62,7 +62,6 @@ Partial Public Class ReportProduction
         Me.XrLabel2 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel3 = New DevExpress.XtraReports.UI.XRLabel()
         Me.BottomMargin = New DevExpress.XtraReports.UI.BottomMarginBand()
-        Me.XrPageInfo1 = New DevExpress.XtraReports.UI.XRPageInfo()
         Me.PageFooter = New DevExpress.XtraReports.UI.PageFooterBand()
         Me.XrLabel31 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel5 = New DevExpress.XtraReports.UI.XRLabel()
@@ -91,6 +90,8 @@ Partial Public Class ReportProduction
         Me.XrTable1 = New DevExpress.XtraReports.UI.XRTable()
         Me.XrTableRow1 = New DevExpress.XtraReports.UI.XRTableRow()
         Me.XrTableCell1 = New DevExpress.XtraReports.UI.XRTableCell()
+        Me.XrPageInfo1 = New DevExpress.XtraReports.UI.XRPageInfo()
+        Me.XrLabel38 = New DevExpress.XtraReports.UI.XRLabel()
         CType(Me.GCListProduct, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVListProduct, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XrTable1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -590,25 +591,11 @@ Partial Public Class ReportProduction
         '
         'BottomMargin
         '
-        Me.BottomMargin.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrPageInfo1})
-        Me.BottomMargin.HeightF = 18.71793!
+        Me.BottomMargin.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrPageInfo1, Me.XrLabel38})
+        Me.BottomMargin.HeightF = 34.34296!
         Me.BottomMargin.Name = "BottomMargin"
         Me.BottomMargin.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
         Me.BottomMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
-        '
-        'XrPageInfo1
-        '
-        Me.XrPageInfo1.Borders = DevExpress.XtraPrinting.BorderSide.None
-        Me.XrPageInfo1.Font = New System.Drawing.Font("Lucida Sans", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrPageInfo1.Format = "Page {0} of {1}"
-        Me.XrPageInfo1.LocationFloat = New DevExpress.Utils.PointFloat(638.0!, 0!)
-        Me.XrPageInfo1.Name = "XrPageInfo1"
-        Me.XrPageInfo1.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrPageInfo1.SizeF = New System.Drawing.SizeF(150.0!, 18.71793!)
-        Me.XrPageInfo1.StylePriority.UseBorders = False
-        Me.XrPageInfo1.StylePriority.UseFont = False
-        Me.XrPageInfo1.StylePriority.UseTextAlignment = False
-        Me.XrPageInfo1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
         '
         'PageFooter
         '
@@ -1005,11 +992,42 @@ Partial Public Class ReportProduction
         Me.XrTableCell1.Visible = False
         Me.XrTableCell1.Weight = 2.99999986405489R
         '
+        'XrPageInfo1
+        '
+        Me.XrPageInfo1.Borders = DevExpress.XtraPrinting.BorderSide.None
+        Me.XrPageInfo1.Font = New System.Drawing.Font("Lucida Sans", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.XrPageInfo1.ForeColor = System.Drawing.Color.Gray
+        Me.XrPageInfo1.Format = "Page {0} of {1}"
+        Me.XrPageInfo1.LocationFloat = New DevExpress.Utils.PointFloat(638.0!, 0!)
+        Me.XrPageInfo1.Name = "XrPageInfo1"
+        Me.XrPageInfo1.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrPageInfo1.SizeF = New System.Drawing.SizeF(150.0!, 18.71793!)
+        Me.XrPageInfo1.StylePriority.UseBorders = False
+        Me.XrPageInfo1.StylePriority.UseFont = False
+        Me.XrPageInfo1.StylePriority.UseForeColor = False
+        Me.XrPageInfo1.StylePriority.UseTextAlignment = False
+        Me.XrPageInfo1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
+        '
+        'XrLabel38
+        '
+        Me.XrLabel38.Font = New System.Drawing.Font("Lucida Sans", 8.25!, System.Drawing.FontStyle.Italic)
+        Me.XrLabel38.ForeColor = System.Drawing.Color.Gray
+        Me.XrLabel38.LocationFloat = New DevExpress.Utils.PointFloat(0.0001271566!, 0!)
+        Me.XrLabel38.Name = "XrLabel38"
+        Me.XrLabel38.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel38.SizeF = New System.Drawing.SizeF(476.9999!, 16.04167!)
+        Me.XrLabel38.StylePriority.UseBorderColor = False
+        Me.XrLabel38.StylePriority.UseFont = False
+        Me.XrLabel38.StylePriority.UseForeColor = False
+        Me.XrLabel38.StylePriority.UseTextAlignment = False
+        Me.XrLabel38.Text = "Printed from Volcom ERP ([printed_date])"
+        Me.XrLabel38.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        '
         'ReportProduction
         '
         Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.Detail, Me.TopMargin, Me.BottomMargin, Me.PageFooter})
         Me.Font = New System.Drawing.Font("Times New Roman", 9.75!)
-        Me.Margins = New System.Drawing.Printing.Margins(12, 50, 94, 19)
+        Me.Margins = New System.Drawing.Printing.Margins(12, 50, 94, 34)
         Me.PageHeight = 550
         Me.PaperKind = System.Drawing.Printing.PaperKind.Custom
         Me.Version = "15.1"
@@ -1091,4 +1109,5 @@ Partial Public Class ReportProduction
     Friend WithEvents XrTableRow1 As DevExpress.XtraReports.UI.XRTableRow
     Friend WithEvents XrTableCell1 As DevExpress.XtraReports.UI.XRTableCell
     Friend WithEvents XrPageInfo1 As DevExpress.XtraReports.UI.XRPageInfo
+    Friend WithEvents XrLabel38 As DevExpress.XtraReports.UI.XRLabel
 End Class

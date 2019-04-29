@@ -7,7 +7,7 @@ Public Class ReportMatRecPurc
     Public Shared id_receive As String = "-1"
     Public Shared id_comp_from As String = "-1"
     Public Shared id_comp_to As String = "-1"
-
+    Public Shared is_pre As String = "-1"
     Sub view_list_rec()
         Dim query = "CALL view_purc_rec_mat_det('" & id_receive & "')"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
@@ -70,7 +70,13 @@ Public Class ReportMatRecPurc
         LNote.Text = data.Rows(0)("mat_purc_rec_note").ToString
 
         view_list_rec()
-        load_mark_horz("16", id_receive, "2", "1", XrTable1)
+
+        If is_pre = "1" Then
+            pre_load_mark_horz("16", id_receive, "2", "2", XrTable1)
+        Else
+            load_mark_horz("16", id_receive, "2", "1", XrTable1)
+        End If
+
     End Sub
 
     Private Sub PageFooter_BeforePrint(ByVal sender As System.Object, ByVal e As System.Drawing.Printing.PrintEventArgs) Handles PageFooter.BeforePrint

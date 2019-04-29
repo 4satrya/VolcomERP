@@ -179,7 +179,7 @@
     '===========TAB INFO PL===================
     Sub view_sample_purc()
         Dim query = "SELECT "
-        query += "a.id_prod_order,d.id_sample, a.prod_order_number, d.design_display_name,d.design_name , d.design_code, d.design_cop, h.term_production, g.po_type, "
+        query += "a.id_prod_order,d.id_sample, a.prod_order_number, d.design_display_name,d.design_name , d.design_code, d.design_cop, IFNULL(d.id_cop_status,0) AS `id_cop_status`, h.term_production, g.po_type, "
         query += "DATE_FORMAT(a.prod_order_date,'%d %M %Y') AS prod_order_date,a.id_report_status,c.report_status, "
         query += "b.id_design,b.id_delivery, e.delivery, f.season, e.id_season, "
         query += "prod_order_date, "

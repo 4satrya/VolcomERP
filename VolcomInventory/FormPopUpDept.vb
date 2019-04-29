@@ -22,6 +22,18 @@
                 FormEmpUniExpenseDet.TxtDepartement.Text = GVData.GetFocusedRowCellValue("departement").ToString
                 Close()
                 Cursor = Cursors.Default
+            ElseIf id_pop_up = "2" Then
+                Cursor = Cursors.WaitCursor
+                FormBudgetExpenseProposeFormatXLS.id_dept = GVData.GetFocusedRowCellValue("id_departement").ToString
+                Close()
+                Cursor = Cursors.Default
+            ElseIf id_pop_up = "3" Then
+                Cursor = Cursors.WaitCursor
+                FormBudgetExpenseRevisionNew.id_dept = GVData.GetFocusedRowCellValue("id_departement").ToString
+                FormBudgetExpenseRevisionNew.TxtDept.Text = GVData.GetFocusedRowCellValue("departement").ToString
+                FormBudgetExpenseRevisionNew.viewAnnual()
+                Close()
+                Cursor = Cursors.Default
             End If
         End If
     End Sub

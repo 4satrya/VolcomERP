@@ -49,6 +49,7 @@ Partial Class FormFGLineList
         Me.BBPrepEstPrice = New DevExpress.XtraBars.BarButtonItem()
         Me.BtnImportEstPrice = New DevExpress.XtraBars.BarButtonItem()
         Me.BBSubEstPrice = New DevExpress.XtraBars.BarSubItem()
+        Me.BBQuickUpdate = New DevExpress.XtraBars.BarButtonItem()
         Me.BBSubOther = New DevExpress.XtraBars.BarSubItem()
         Me.BBSetAddPrc = New DevExpress.XtraBars.BarButtonItem()
         Me.PanelImg = New DevExpress.XtraEditors.PanelControl()
@@ -63,6 +64,7 @@ Partial Class FormFGLineList
         Me.PanelControlNavLineListBottom = New DevExpress.XtraEditors.PanelControl()
         Me.BtnCreateNewPD = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnPlanStatus = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnGetRateCurrent = New DevExpress.XtraEditors.SimpleButton()
         Me.PCUnlock = New DevExpress.XtraEditors.PanelControl()
         Me.CheckEditUnlock = New DevExpress.XtraEditors.CheckEdit()
         Me.BtnProposePrice = New DevExpress.XtraEditors.SimpleButton()
@@ -81,7 +83,8 @@ Partial Class FormFGLineList
         Me.SMViewHistoryPD = New System.Windows.Forms.ToolStripMenuItem()
         Me.SMViewPD = New System.Windows.Forms.ToolStripMenuItem()
         Me.SMViewCostHist = New System.Windows.Forms.ToolStripMenuItem()
-        Me.BtnGetRateCurrent = New DevExpress.XtraEditors.SimpleButton()
+        Me.ViewHistoryProposeChangesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ProposeChangesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.PanelControlNavLineList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlNavLineList.SuspendLayout()
         CType(Me.PCNavLineList, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -271,8 +274,8 @@ Partial Class FormFGLineList
         Me.BarManager1.DockControls.Add(Me.barDockControlLeft)
         Me.BarManager1.DockControls.Add(Me.barDockControlRight)
         Me.BarManager1.Form = Me
-        Me.BarManager1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.BBPD, Me.BBProposePrice, Me.BBMasterSeason, Me.BBDs, Me.BBPrepEstPrice, Me.BtnImportEstPrice, Me.BBSubEstPrice, Me.BBSubOther, Me.BBSetAddPrc})
-        Me.BarManager1.MaxItemId = 12
+        Me.BarManager1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.BBPD, Me.BBProposePrice, Me.BBMasterSeason, Me.BBDs, Me.BBPrepEstPrice, Me.BtnImportEstPrice, Me.BBSubEstPrice, Me.BBSubOther, Me.BBSetAddPrc, Me.BBQuickUpdate})
+        Me.BarManager1.MaxItemId = 13
         '
         'barDockControlTop
         '
@@ -343,8 +346,14 @@ Partial Class FormFGLineList
         Me.BBSubEstPrice.Border = DevExpress.XtraEditors.Controls.BorderStyles.[Default]
         Me.BBSubEstPrice.Caption = "Quick Add"
         Me.BBSubEstPrice.Id = 9
-        Me.BBSubEstPrice.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.BBPrepEstPrice), New DevExpress.XtraBars.LinkPersistInfo(Me.BtnImportEstPrice)})
+        Me.BBSubEstPrice.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.BBPrepEstPrice), New DevExpress.XtraBars.LinkPersistInfo(Me.BtnImportEstPrice), New DevExpress.XtraBars.LinkPersistInfo(Me.BBQuickUpdate)})
         Me.BBSubEstPrice.Name = "BBSubEstPrice"
+        '
+        'BBQuickUpdate
+        '
+        Me.BBQuickUpdate.Caption = "Quick Update"
+        Me.BBQuickUpdate.Id = 12
+        Me.BBQuickUpdate.Name = "BBQuickUpdate"
         '
         'BBSubOther
         '
@@ -496,6 +505,18 @@ Partial Class FormFGLineList
         Me.BtnPlanStatus.TabIndex = 114
         Me.BtnPlanStatus.Text = "Move/Drop"
         '
+        'BtnGetRateCurrent
+        '
+        Me.BtnGetRateCurrent.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnGetRateCurrent.Image = CType(resources.GetObject("BtnGetRateCurrent.Image"), System.Drawing.Image)
+        Me.BtnGetRateCurrent.ImageIndex = 18
+        Me.BtnGetRateCurrent.ImageList = Me.LargeImageCollection
+        Me.BtnGetRateCurrent.Location = New System.Drawing.Point(528, 2)
+        Me.BtnGetRateCurrent.Name = "BtnGetRateCurrent"
+        Me.BtnGetRateCurrent.Size = New System.Drawing.Size(134, 33)
+        Me.BtnGetRateCurrent.TabIndex = 115
+        Me.BtnGetRateCurrent.Text = "Get Rate Current"
+        '
         'PCUnlock
         '
         Me.PCUnlock.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
@@ -613,58 +634,58 @@ Partial Class FormFGLineList
         '
         'ViewMenu
         '
-        Me.ViewMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SMEditDesign, Me.SMViewDupe, Me.SMDeleteDesign, Me.SMViewHistoryPD, Me.SMViewPD, Me.SMViewCostHist})
+        Me.ViewMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SMEditDesign, Me.SMViewDupe, Me.SMDeleteDesign, Me.SMViewHistoryPD, Me.SMViewPD, Me.SMViewCostHist, Me.ViewHistoryProposeChangesToolStripMenuItem, Me.ProposeChangesToolStripMenuItem})
         Me.ViewMenu.Name = "ContextMenuStripYM"
-        Me.ViewMenu.Size = New System.Drawing.Size(201, 136)
+        Me.ViewMenu.Size = New System.Drawing.Size(236, 180)
         '
         'SMEditDesign
         '
         Me.SMEditDesign.Name = "SMEditDesign"
-        Me.SMEditDesign.Size = New System.Drawing.Size(200, 22)
+        Me.SMEditDesign.Size = New System.Drawing.Size(235, 22)
         Me.SMEditDesign.Text = "Edit"
         '
         'SMViewDupe
         '
         Me.SMViewDupe.Name = "SMViewDupe"
-        Me.SMViewDupe.Size = New System.Drawing.Size(200, 22)
+        Me.SMViewDupe.Size = New System.Drawing.Size(235, 22)
         Me.SMViewDupe.Text = "Create Duplicate Design"
         Me.SMViewDupe.Visible = False
         '
         'SMDeleteDesign
         '
         Me.SMDeleteDesign.Name = "SMDeleteDesign"
-        Me.SMDeleteDesign.Size = New System.Drawing.Size(200, 22)
+        Me.SMDeleteDesign.Size = New System.Drawing.Size(235, 22)
         Me.SMDeleteDesign.Text = "Delete"
         '
         'SMViewHistoryPD
         '
         Me.SMViewHistoryPD.Name = "SMViewHistoryPD"
-        Me.SMViewHistoryPD.Size = New System.Drawing.Size(200, 22)
+        Me.SMViewHistoryPD.Size = New System.Drawing.Size(235, 22)
         Me.SMViewHistoryPD.Text = "View History PD"
         '
         'SMViewPD
         '
         Me.SMViewPD.Name = "SMViewPD"
-        Me.SMViewPD.Size = New System.Drawing.Size(200, 22)
+        Me.SMViewPD.Size = New System.Drawing.Size(235, 22)
         Me.SMViewPD.Text = "View Last PD Document"
         '
         'SMViewCostHist
         '
         Me.SMViewCostHist.Name = "SMViewCostHist"
-        Me.SMViewCostHist.Size = New System.Drawing.Size(200, 22)
+        Me.SMViewCostHist.Size = New System.Drawing.Size(235, 22)
         Me.SMViewCostHist.Text = "View History Cost"
         '
-        'BtnGetRateCurrent
+        'ViewHistoryProposeChangesToolStripMenuItem
         '
-        Me.BtnGetRateCurrent.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BtnGetRateCurrent.Image = CType(resources.GetObject("BtnGetRateCurrent.Image"), System.Drawing.Image)
-        Me.BtnGetRateCurrent.ImageIndex = 18
-        Me.BtnGetRateCurrent.ImageList = Me.LargeImageCollection
-        Me.BtnGetRateCurrent.Location = New System.Drawing.Point(528, 2)
-        Me.BtnGetRateCurrent.Name = "BtnGetRateCurrent"
-        Me.BtnGetRateCurrent.Size = New System.Drawing.Size(134, 33)
-        Me.BtnGetRateCurrent.TabIndex = 115
-        Me.BtnGetRateCurrent.Text = "Get Rate Current"
+        Me.ViewHistoryProposeChangesToolStripMenuItem.Name = "ViewHistoryProposeChangesToolStripMenuItem"
+        Me.ViewHistoryProposeChangesToolStripMenuItem.Size = New System.Drawing.Size(235, 22)
+        Me.ViewHistoryProposeChangesToolStripMenuItem.Text = "View History Propose Changes"
+        '
+        'ProposeChangesToolStripMenuItem
+        '
+        Me.ProposeChangesToolStripMenuItem.Name = "ProposeChangesToolStripMenuItem"
+        Me.ProposeChangesToolStripMenuItem.Size = New System.Drawing.Size(235, 22)
+        Me.ProposeChangesToolStripMenuItem.Text = "[changes]"
         '
         'FormFGLineList
         '
@@ -781,4 +802,7 @@ Partial Class FormFGLineList
     Friend WithEvents CheckImg As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents BBSetAddPrc As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents BtnGetRateCurrent As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents ProposeChangesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ViewHistoryProposeChangesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents BBQuickUpdate As DevExpress.XtraBars.BarButtonItem
 End Class

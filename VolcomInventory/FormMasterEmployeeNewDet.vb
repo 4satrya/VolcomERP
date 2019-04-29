@@ -40,8 +40,23 @@
         viewLookupQuery(LEMarriageStatus, query, 0, "marriage_status", "id_marriage_status")
     End Sub
 
+    Sub viewNPWPStatus()
+        Dim query As String = "SELECT * FROM tb_lookup_npwp_status"
+        viewLookupQuery(LENPWPStatus, query, 0, "npwp_status", "id_npwp_status")
+    End Sub
+
+    Sub viewBPJSStatus()
+        Dim query As String = "SELECT * FROM tb_lookup_bpjs_status"
+        viewLookupQuery(LEBPJSStatus, query, 0, "bpjs_status", "id_bpjs_status")
+        viewLookupQuery(LEBPJSStatusHusband, query, 0, "bpjs_status", "id_bpjs_status")
+        viewLookupQuery(LEBPJSStatusWife, query, 0, "bpjs_status", "id_bpjs_status")
+        viewLookupQuery(LEBPJSStatusChild1, query, 0, "bpjs_status", "id_bpjs_status")
+        viewLookupQuery(LEBPJSStatusChild2, query, 0, "bpjs_status", "id_bpjs_status")
+        viewLookupQuery(LEBPJSStatusChild3, query, 0, "bpjs_status", "id_bpjs_status")
+    End Sub
+
     Sub viewEmployeeStatus()
-        Dim query As String = "SELECT * FROM tb_m_employee_status_det a INNER JOIN tb_lookup_employee_status b on b.id_employee_status=a.id_employee_status WHERE a.id_employee='" + id_employee + "' ORDER BY a.id_employee_status_det DESC "
+        Dim query As String = "SELECT *, '' AS attachment FROM tb_m_employee_status_det a INNER JOIN tb_lookup_employee_status b on b.id_employee_status=a.id_employee_status WHERE a.id_employee='" + id_employee + "' ORDER BY a.id_employee_status_det DESC "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCStatus.DataSource = data
         If GVStatus.RowCount > 0 Then
@@ -77,7 +92,7 @@
 
     Sub viewEmployeeTraining()
         Dim query As String = "
-            SELECT et.id_employee_training, et.course, et.institution, DATE_FORMAT(et.date, '%d %M %Y') date, (
+            SELECT et.id_employee_training, et.course, et.institution, DATE_FORMAT(et.date_from, '%d %M %Y') date_from, DATE_FORMAT(et.date_until, '%d %M %Y') date_until, (
 	            SELECT COUNT(etd.id_employee_training_doc)
 	            FROM tb_m_employee_training_doc etd
 	            WHERE etd.id_employee_training = et.id_employee_training AND etd.is_cancel = '2'
@@ -109,6 +124,8 @@
         viewActive()
         viewDegree()
         viewMarriageStatus()
+        viewNPWPStatus()
+        viewBPJSStatus()
         viewEmployeeStatus()
         viewEmployeePosition()
         viewEmployeeTraining()
@@ -117,8 +134,10 @@
         '
         If is_salary = "1" Then
             XTPSalary.PageVisible = True
+            GridColumnAttachment.Visible = True
         Else
             XTPSalary.PageVisible = False
+            GridColumnAttachment.Visible = False
         End If
         '
     End Sub
@@ -164,14 +183,20 @@
             DEJoinDate.EditValue = datarow("employee_join_date")
             DELastDay.EditValue = datarow("employee_last_date")
             LEActive.ItemIndex = LEActive.Properties.GetDataSourceRowIndex("id_employee_active", data.Rows(0)("id_employee_active").ToString)
+            LEActive.ReadOnly = True
             LESex.ItemIndex = LESex.Properties.GetDataSourceRowIndex("id_sex", data.Rows(0)("id_sex").ToString)
+            LESex.ReadOnly = True
             LEBloodType.ItemIndex = LEBloodType.Properties.GetDataSourceRowIndex("id_blood_type", data.Rows(0)("id_blood_type").ToString)
+            LEBloodType.ReadOnly = True
             TxtPOB.Text = datarow("employee_pob").ToString
             DEDOB.EditValue = datarow("employee_dob")
             LEReligion.ItemIndex = LEReligion.Properties.GetDataSourceRowIndex("id_religion", data.Rows(0)("id_religion").ToString)
+            LEReligion.ReadOnly = True
             LECountry.ItemIndex = LECountry.Properties.GetDataSourceRowIndex("id_country", data.Rows(0)("id_country").ToString)
+            LECountry.ReadOnly = True
             TxtEthnic.Text = datarow("employee_ethnic").ToString
             LEDegree.ItemIndex = LEDegree.Properties.GetDataSourceRowIndex("id_education", data.Rows(0)("id_education").ToString)
+            LEDegree.ReadOnly = True
             TxtKTP.Text = datarow("employee_ktp").ToString
             DEKTP.EditValue = datarow("employee_ktp_period")
             TxtPassport.Text = datarow("employee_passport").ToString
@@ -179,8 +204,32 @@
             TxtBPJSTK.Text = datarow("employee_bpjs_tk").ToString
             DERegBPJSTK.EditValue = datarow("employee_bpjs_tk_date")
             TxtBPJSSehat.Text = datarow("employee_bpjs_kesehatan").ToString
+            TxtBPJSSehatHusband.Text = datarow("employee_bpjs_kesehatan_husband").ToString
+            TxtBPJSSehatWife.Text = datarow("employee_bpjs_kesehatan_wife").ToString
+            TxtBPJSSehatChild1.Text = datarow("employee_bpjs_kesehatan_child1").ToString
+            TxtBPJSSehatChild2.Text = datarow("employee_bpjs_kesehatan_child2").ToString
+            TxtBPJSSehatChild3.Text = datarow("employee_bpjs_kesehatan_child3").ToString
+            LEBPJSStatus.ItemIndex = LEBPJSStatus.Properties.GetDataSourceRowIndex("id_bpjs_status", data.Rows(0)("id_bpjs_status").ToString)
+            LEBPJSStatus.ReadOnly = True
+            LEBPJSStatusHusband.ItemIndex = LEBPJSStatusHusband.Properties.GetDataSourceRowIndex("id_bpjs_status", data.Rows(0)("id_bpjs_status_husband").ToString)
+            LEBPJSStatusHusband.ReadOnly = True
+            LEBPJSStatusWife.ItemIndex = LEBPJSStatusWife.Properties.GetDataSourceRowIndex("id_bpjs_status", data.Rows(0)("id_bpjs_status_wife").ToString)
+            LEBPJSStatusWife.ReadOnly = True
+            LEBPJSStatusChild1.ItemIndex = LEBPJSStatusChild1.Properties.GetDataSourceRowIndex("id_bpjs_status", data.Rows(0)("id_bpjs_status_child1").ToString)
+            LEBPJSStatusChild1.ReadOnly = True
+            LEBPJSStatusChild2.ItemIndex = LEBPJSStatusChild2.Properties.GetDataSourceRowIndex("id_bpjs_status", data.Rows(0)("id_bpjs_status_child2").ToString)
+            LEBPJSStatusChild2.ReadOnly = True
+            LEBPJSStatusChild3.ItemIndex = LEBPJSStatusChild3.Properties.GetDataSourceRowIndex("id_bpjs_status", data.Rows(0)("id_bpjs_status_child3").ToString)
+            LEBPJSStatusChild3.ReadOnly = True
             DERegBPJSKes.EditValue = datarow("employee_bpjs_kesehatan_date")
+            DERegBPJSKesHusband.EditValue = datarow("employee_bpjs_kesehatan_date_husband")
+            DERegBPJSKesWife.EditValue = datarow("employee_bpjs_kesehatan_date_wife")
+            DERegBPJSKesChild1.EditValue = datarow("employee_bpjs_kesehatan_date_child1")
+            DERegBPJSKesChild2.EditValue = datarow("employee_bpjs_kesehatan_date_child2")
+            DERegBPJSKesChild3.EditValue = datarow("employee_bpjs_kesehatan_date_child3")
             TxtNpwp.Text = datarow("employee_npwp").ToString
+            LENPWPStatus.ItemIndex = LENPWPStatus.Properties.GetDataSourceRowIndex("id_npwp_status", data.Rows(0)("id_npwp_status").ToString)
+            LENPWPStatus.ReadOnly = True
             TENoRek.Text = datarow("employee_no_rek").ToString
             TENoRek.Text = datarow("employee_rek_name").ToString
             TxtPhone.Text = datarow("phone").ToString
@@ -210,6 +259,36 @@
                 CEBPJS.Checked = False
             End If
             '
+            If data.Rows(0)("is_bpjs_volcom_husband").ToString = "yes" Then
+                CEBPJSHusband.Checked = True
+            Else
+                CEBPJSHusband.Checked = False
+            End If
+            '
+            If data.Rows(0)("is_bpjs_volcom_wife").ToString = "yes" Then
+                CEBPJSWife.Checked = True
+            Else
+                CEBPJSWife.Checked = False
+            End If
+            '
+            If data.Rows(0)("is_bpjs_volcom_child1").ToString = "yes" Then
+                CEBPJSChild1.Checked = True
+            Else
+                CEBPJSChild1.Checked = False
+            End If
+            '
+            If data.Rows(0)("is_bpjs_volcom_child2").ToString = "yes" Then
+                CEBPJSChild2.Checked = True
+            Else
+                CEBPJSChild2.Checked = False
+            End If
+            '
+            If data.Rows(0)("is_bpjs_volcom_child3").ToString = "yes" Then
+                CEBPJSChild3.Checked = True
+            Else
+                CEBPJSChild3.Checked = False
+            End If
+            '
             If data.Rows(0)("is_jp").ToString = "yes" Then
                 CEJP.Checked = True
             Else
@@ -230,6 +309,9 @@
             '
             'load img
             pre_viewImages("4", PEEmployee, id_employee, False)
+            pre_viewImages("4", PEKTP, id_employee + "_ktp", False)
+            pre_viewImages("4", PEKK, id_employee + "_kk", False)
+            pre_viewImages("4", PEREK, id_employee + "_rek", False)
         End If
     End Sub
 
@@ -242,6 +324,7 @@
     Private Sub XTPEmployee_SelectedPageChanged(sender As Object, e As DevExpress.XtraTab.TabPageChangedEventArgs) Handles XTPEmployee.SelectedPageChanged
         If XTPEmployee.TabPages.Item(XTPEmployee.SelectedTabPageIndex).Name.ToString = "XTPDependent" Then
             LEMarriageStatus.ItemIndex = LEMarriageStatus.Properties.GetDataSourceRowIndex("id_marriage_status", id_marriage_stattus_db)
+            LEMarriageStatus.ReadOnly = True
         End If
     End Sub
 
@@ -307,7 +390,15 @@
                 fp.port = data_fp.Rows(0)("port").ToString
                 fp.connect()
                 fp.disable_fp()
-                fp.setUserInfo(emp_code, emp_name, "", 0, True)
+                'search privilege
+                Dim privelege As String = ""
+                Dim q As String = "SELECT * FROM tb_m_employee_finger WHERE user_id='" & emp_code & "'"
+                Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
+                If dt.Rows.Count > 0 Then
+                    privelege = dt.Rows(0)("privilege").ToString
+                End If
+                '
+                fp.setUserInfo(emp_code, emp_name, privelege, 0, True)
                 fp.refresh_fp()
                 fp.enable_fp()
                 fp.disconnect()
@@ -523,7 +614,7 @@
                     infoCustom(ex.ToString)
                 End Try
 
-                'fp
+                'fp 
                 setFP(employee_code, employee_name, id_employee_active)
 
                 'info & refresh
@@ -773,5 +864,89 @@
 
     Private Sub BtnEditTraining_Click(sender As Object, e As EventArgs) Handles BtnEditTraining.Click
         view_training()
+    End Sub
+
+    Private Sub SBKtpAtt_Click(sender As Object, e As EventArgs) Handles SBKtpAtt.Click
+        Dim images As DataTable = New DataTable
+
+        images.Columns.Add("image", GetType(Byte()))
+
+        Dim con As ImageConverter = New ImageConverter
+
+        images.Rows.Add(con.ConvertTo(PEKTP.EditValue, GetType(Byte())))
+
+        FormEmployeePpsAtt.type = "ktp"
+        FormEmployeePpsAtt.images = images
+        FormEmployeePpsAtt.read_only = True
+        FormEmployeePpsAtt.is_single = True
+
+        FormEmployeePpsAtt.ShowDialog()
+    End Sub
+
+    Private Sub SBKkAtt_Click(sender As Object, e As EventArgs) Handles SBKkAtt.Click
+        Dim images As DataTable = New DataTable
+
+        images.Columns.Add("image", GetType(Byte()))
+
+        Dim con As ImageConverter = New ImageConverter
+
+        images.Rows.Add(con.ConvertTo(PEKK.EditValue, GetType(Byte())))
+
+        FormEmployeePpsAtt.type = "kk"
+        FormEmployeePpsAtt.images = images
+        FormEmployeePpsAtt.read_only = True
+        FormEmployeePpsAtt.is_single = True
+
+        FormEmployeePpsAtt.ShowDialog()
+    End Sub
+
+    Private Sub SBRekAtt_Click(sender As Object, e As EventArgs) Handles SBRekAtt.Click
+        Dim images As DataTable = New DataTable
+
+        images.Columns.Add("image", GetType(Byte()))
+
+        Dim con As ImageConverter = New ImageConverter
+
+        images.Rows.Add(con.ConvertTo(PEREK.EditValue, GetType(Byte())))
+
+        FormEmployeePpsAtt.type = "rek"
+        FormEmployeePpsAtt.images = images
+        FormEmployeePpsAtt.read_only = True
+        FormEmployeePpsAtt.is_single = True
+
+        FormEmployeePpsAtt.ShowDialog()
+    End Sub
+
+    Private Sub RepositoryItemCheckEdit1_Click(sender As Object, e As EventArgs) Handles RepositoryItemCheckEdit1.Click
+        PCPosAtt.Controls.Clear()
+
+        Dim query As String = "
+            SELECT IFNULL((SELECT MAX(id_employee_pps) FROM tb_employee_pps WHERE id_employee_status_det = '" + GVStatus.GetFocusedRowCellValue("id_employee_status_det").ToString + "' AND id_report_status = '6'), 0)
+        "
+
+        Dim id_pps As String = execute_query(query, 0, True, "", "", "", "")
+
+        Dim images As DataTable = New DataTable
+
+        images.Columns.Add("image", GetType(Byte()))
+
+        If id_pps = 0 Then
+            images.Rows.Add(System.IO.File.ReadAllBytes(FormEmployeePpsDet.pps_path + "default.jpg"))
+        Else
+            For i = 1 To 100
+                If System.IO.File.Exists(FormEmployeePpsDet.pps_path + id_pps + "_position_" + i.ToString + ".jpg") Then
+                    images.Rows.Add(System.IO.File.ReadAllBytes(FormEmployeePpsDet.pps_path + id_pps + "_position_" + i.ToString + ".jpg"))
+                Else
+                    Exit For
+                End If
+            Next
+        End If
+
+        FormEmployeePpsAtt.type = "position"
+        FormEmployeePpsAtt.images = images
+        FormEmployeePpsAtt.read_only = True
+        FormEmployeePpsAtt.is_single = False
+
+        FormEmployeePpsAtt.ShowDialog()
     End Sub
 End Class

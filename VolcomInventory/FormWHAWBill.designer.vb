@@ -101,6 +101,7 @@ Partial Class FormWHAWBill
         Me.XTCAwb = New DevExpress.XtraTab.XtraTabControl()
         Me.XTPOutbound = New DevExpress.XtraTab.XtraTabPage()
         Me.PCLock = New DevExpress.XtraEditors.PanelControl()
+        Me.BReportInvoice = New DevExpress.XtraEditors.SimpleButton()
         Me.CESelectAll = New DevExpress.XtraEditors.CheckEdit()
         Me.BLock = New DevExpress.XtraEditors.SimpleButton()
         Me.XTPInbound = New DevExpress.XtraTab.XtraTabPage()
@@ -236,7 +237,7 @@ Partial Class FormWHAWBill
         Me.GridBandAWB.Children.AddRange(New DevExpress.XtraGrid.Views.BandedGrid.GridBand() {Me.GBNo, Me.gridBandDO, Me.gridBand1, Me.GBResult})
         Me.GridBandAWB.Name = "GridBandAWB"
         Me.GridBandAWB.VisibleIndex = 0
-        Me.GridBandAWB.Width = 1073
+        Me.GridBandAWB.Width = 1328
         '
         'GBNo
         '
@@ -446,7 +447,7 @@ Partial Class FormWHAWBill
         Me.GBResult.Columns.Add(Me.BandedGridColumn40)
         Me.GBResult.Name = "GBResult"
         Me.GBResult.VisibleIndex = 3
-        Me.GBResult.Width = 615
+        Me.GBResult.Width = 870
         '
         'GridColumnWeight
         '
@@ -537,7 +538,7 @@ Partial Class FormWHAWBill
         Me.BandedGridColumnPBS.Name = "BandedGridColumnPBS"
         Me.BandedGridColumnPBS.OptionsColumn.AllowEdit = False
         Me.BandedGridColumnPBS.Visible = True
-        Me.BandedGridColumnPBS.Width = 26
+        Me.BandedGridColumnPBS.Width = 90
         '
         'RCICOD
         '
@@ -557,7 +558,7 @@ Partial Class FormWHAWBill
         Me.BandedGridColumnLaedTime.Name = "BandedGridColumnLaedTime"
         Me.BandedGridColumnLaedTime.OptionsColumn.AllowEdit = False
         Me.BandedGridColumnLaedTime.Visible = True
-        Me.BandedGridColumnLaedTime.Width = 31
+        Me.BandedGridColumnLaedTime.Width = 119
         '
         'GridColumnCargoRate
         '
@@ -572,7 +573,7 @@ Partial Class FormWHAWBill
         Me.GridColumnCargoRate.Name = "GridColumnCargoRate"
         Me.GridColumnCargoRate.OptionsColumn.AllowEdit = False
         Me.GridColumnCargoRate.Visible = True
-        Me.GridColumnCargoRate.Width = 40
+        Me.GridColumnCargoRate.Width = 79
         '
         'GridColumnTotalAmount
         '
@@ -588,7 +589,7 @@ Partial Class FormWHAWBill
         Me.GridColumnTotalAmount.OptionsColumn.AllowEdit = False
         Me.GridColumnTotalAmount.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "c_tot_price", "{0:N0}")})
         Me.GridColumnTotalAmount.Visible = True
-        Me.GridColumnTotalAmount.Width = 34
+        Me.GridColumnTotalAmount.Width = 98
         '
         'GridColumndate
         '
@@ -668,7 +669,7 @@ Partial Class FormWHAWBill
         Me.gridBandAwbDetail.Children.AddRange(New DevExpress.XtraGrid.Views.BandedGrid.GridBand() {Me.gridBandInvoice, Me.gbAirport, Me.gbETALT})
         Me.gridBandAwbDetail.Name = "gridBandAwbDetail"
         Me.gridBandAwbDetail.VisibleIndex = 1
-        Me.gridBandAwbDetail.Width = 285
+        Me.gridBandAwbDetail.Width = 245
         '
         'gridBandInvoice
         '
@@ -750,7 +751,7 @@ Partial Class FormWHAWBill
         Me.gbAirport.Columns.Add(Me.BandedGridColumnDiffAmount)
         Me.gbAirport.Name = "gbAirport"
         Me.gbAirport.VisibleIndex = 1
-        Me.gbAirport.Width = 80
+        Me.gbAirport.Width = 40
         '
         'BandedGridColumnAirportWeight
         '
@@ -758,7 +759,7 @@ Partial Class FormWHAWBill
         Me.BandedGridColumnAirportWeight.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.BandedGridColumnAirportWeight.AppearanceHeader.Options.UseTextOptions = True
         Me.BandedGridColumnAirportWeight.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.BandedGridColumnAirportWeight.Caption = "Cargo Weight"
+        Me.BandedGridColumnAirportWeight.Caption = "Cargo Weight (Per AWB)"
         Me.BandedGridColumnAirportWeight.DisplayFormat.FormatString = "N0"
         Me.BandedGridColumnAirportWeight.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.BandedGridColumnAirportWeight.FieldName = "a_weight"
@@ -774,7 +775,7 @@ Partial Class FormWHAWBill
         Me.BandedGridColumnAirportAmount.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.BandedGridColumnAirportAmount.AppearanceHeader.Options.UseTextOptions = True
         Me.BandedGridColumnAirportAmount.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.BandedGridColumnAirportAmount.Caption = "Cargo Amount"
+        Me.BandedGridColumnAirportAmount.Caption = "Cargo Amount (Per AWB)"
         Me.BandedGridColumnAirportAmount.DisplayFormat.FormatString = "N2"
         Me.BandedGridColumnAirportAmount.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.BandedGridColumnAirportAmount.FieldName = "a_tot_price"
@@ -792,7 +793,6 @@ Partial Class FormWHAWBill
         Me.BandedGridColumnDiffweight.FieldName = "weight_diff"
         Me.BandedGridColumnDiffweight.Name = "BandedGridColumnDiffweight"
         Me.BandedGridColumnDiffweight.OptionsColumn.AllowEdit = False
-        Me.BandedGridColumnDiffweight.Visible = True
         Me.BandedGridColumnDiffweight.Width = 20
         '
         'BandedGridColumnDiffAmount
@@ -803,7 +803,6 @@ Partial Class FormWHAWBill
         Me.BandedGridColumnDiffAmount.FieldName = "amount_diff"
         Me.BandedGridColumnDiffAmount.Name = "BandedGridColumnDiffAmount"
         Me.BandedGridColumnDiffAmount.OptionsColumn.AllowEdit = False
-        Me.BandedGridColumnDiffAmount.Visible = True
         Me.BandedGridColumnDiffAmount.Width = 20
         '
         'gbETALT
@@ -1046,6 +1045,7 @@ Partial Class FormWHAWBill
         '
         'PCLock
         '
+        Me.PCLock.Controls.Add(Me.BReportInvoice)
         Me.PCLock.Controls.Add(Me.CESelectAll)
         Me.PCLock.Controls.Add(Me.BLock)
         Me.PCLock.Dock = System.Windows.Forms.DockStyle.Bottom
@@ -1053,6 +1053,16 @@ Partial Class FormWHAWBill
         Me.PCLock.Name = "PCLock"
         Me.PCLock.Size = New System.Drawing.Size(1273, 39)
         Me.PCLock.TabIndex = 3
+        '
+        'BReportInvoice
+        '
+        Me.BReportInvoice.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BReportInvoice.Image = CType(resources.GetObject("BReportInvoice.Image"), System.Drawing.Image)
+        Me.BReportInvoice.Location = New System.Drawing.Point(1131, 2)
+        Me.BReportInvoice.Name = "BReportInvoice"
+        Me.BReportInvoice.Size = New System.Drawing.Size(140, 35)
+        Me.BReportInvoice.TabIndex = 109
+        Me.BReportInvoice.Text = "Report Per Invoice"
         '
         'CESelectAll
         '
@@ -1742,7 +1752,7 @@ Partial Class FormWHAWBill
         Me.Name = "FormWHAWBill"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Air Ways Bill"
+        Me.Text = "Delivery Monitoring"
         CType(Me.GCAWBill, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVAWBill, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RICECheck, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1931,4 +1941,5 @@ Partial Class FormWHAWBill
     Friend WithEvents gridBandInvoice As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents gbAirport As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents gbETALT As DevExpress.XtraGrid.Views.BandedGrid.GridBand
+    Friend WithEvents BReportInvoice As DevExpress.XtraEditors.SimpleButton
 End Class

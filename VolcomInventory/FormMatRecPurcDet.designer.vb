@@ -358,7 +358,7 @@ Partial Class FormMatRecPurcDet
         Me.ColNote.FieldName = "mat_purc_rec_det_note"
         Me.ColNote.Name = "ColNote"
         Me.ColNote.Visible = True
-        Me.ColNote.VisibleIndex = 10
+        Me.ColNote.VisibleIndex = 11
         Me.ColNote.Width = 76
         '
         'ColMatDetPrice
@@ -440,13 +440,15 @@ Partial Class FormMatRecPurcDet
         Me.GridColumn1.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GridColumn1.AppearanceHeader.Options.UseTextOptions = True
         Me.GridColumn1.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumn1.Caption = "Total Cost"
+        Me.GridColumn1.Caption = "Amount"
         Me.GridColumn1.DisplayFormat.FormatString = "N2"
         Me.GridColumn1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn1.FieldName = "tot_cost"
         Me.GridColumn1.Name = "GridColumn1"
         Me.GridColumn1.OptionsColumn.AllowEdit = False
         Me.GridColumn1.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "tot_cost", "{0:N2}")})
+        Me.GridColumn1.Visible = True
+        Me.GridColumn1.VisibleIndex = 10
         '
         'GridColumn18
         '
@@ -485,7 +487,6 @@ Partial Class FormMatRecPurcDet
         'BPrint
         '
         Me.BPrint.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BPrint.Enabled = False
         Me.BPrint.Location = New System.Drawing.Point(682, 2)
         Me.BPrint.Name = "BPrint"
         Me.BPrint.Size = New System.Drawing.Size(75, 32)
@@ -634,6 +635,7 @@ Partial Class FormMatRecPurcDet
         Me.GVRoll.OptionsCustomization.AllowColumnMoving = False
         Me.GVRoll.OptionsCustomization.AllowGroup = False
         Me.GVRoll.OptionsCustomization.AllowQuickHideColumns = False
+        Me.GVRoll.OptionsView.ShowFooter = True
         Me.GVRoll.OptionsView.ShowGroupPanel = False
         '
         'GridColumn5
@@ -686,6 +688,7 @@ Partial Class FormMatRecPurcDet
         Me.GridColumn14.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn14.FieldName = "qty"
         Me.GridColumn14.Name = "GridColumn14"
+        Me.GridColumn14.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty", "{0:N2}")})
         Me.GridColumn14.Visible = True
         Me.GridColumn14.VisibleIndex = 4
         Me.GridColumn14.Width = 250

@@ -29,11 +29,15 @@ Partial Class FormMarkAssignSingle
         Me.LabelControl17 = New DevExpress.XtraEditors.LabelControl()
         Me.CERequisite = New DevExpress.XtraEditors.CheckEdit()
         Me.CEOnHold = New DevExpress.XtraEditors.CheckEdit()
+        Me.CENeedPrint = New DevExpress.XtraEditors.CheckEdit()
+        Me.CENeedUpload = New DevExpress.XtraEditors.CheckEdit()
         CType(Me.PictureEditIcon.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LEMarkType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LEReportStatus.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CERequisite.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CEOnHold.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CENeedPrint.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CENeedUpload.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PictureEditIcon
@@ -51,7 +55,7 @@ Partial Class FormMarkAssignSingle
         'BCancel
         '
         Me.BCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.BCancel.Location = New System.Drawing.Point(270, 107)
+        Me.BCancel.Location = New System.Drawing.Point(270, 132)
         Me.BCancel.Name = "BCancel"
         Me.BCancel.Size = New System.Drawing.Size(75, 23)
         Me.BCancel.TabIndex = 51
@@ -59,7 +63,7 @@ Partial Class FormMarkAssignSingle
         '
         'BSave
         '
-        Me.BSave.Location = New System.Drawing.Point(351, 107)
+        Me.BSave.Location = New System.Drawing.Point(351, 132)
         Me.BSave.Name = "BSave"
         Me.BSave.Size = New System.Drawing.Size(75, 23)
         Me.BSave.TabIndex = 50
@@ -117,17 +121,35 @@ Partial Class FormMarkAssignSingle
         '
         'CEOnHold
         '
-        Me.CEOnHold.Location = New System.Drawing.Point(264, 82)
+        Me.CEOnHold.Location = New System.Drawing.Point(270, 82)
         Me.CEOnHold.Name = "CEOnHold"
         Me.CEOnHold.Properties.Caption = "On Hold"
         Me.CEOnHold.Size = New System.Drawing.Size(109, 19)
         Me.CEOnHold.TabIndex = 165
         '
+        'CENeedPrint
+        '
+        Me.CENeedPrint.Location = New System.Drawing.Point(189, 107)
+        Me.CENeedPrint.Name = "CENeedPrint"
+        Me.CENeedPrint.Properties.Caption = "Need Print"
+        Me.CENeedPrint.Size = New System.Drawing.Size(77, 19)
+        Me.CENeedPrint.TabIndex = 166
+        '
+        'CENeedUpload
+        '
+        Me.CENeedUpload.Location = New System.Drawing.Point(270, 107)
+        Me.CENeedUpload.Name = "CENeedUpload"
+        Me.CENeedUpload.Properties.Caption = "Need Upload"
+        Me.CENeedUpload.Size = New System.Drawing.Size(93, 19)
+        Me.CENeedUpload.TabIndex = 167
+        '
         'FormMarkAssignSingle
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(443, 142)
+        Me.ClientSize = New System.Drawing.Size(443, 170)
+        Me.Controls.Add(Me.CENeedUpload)
+        Me.Controls.Add(Me.CENeedPrint)
         Me.Controls.Add(Me.CEOnHold)
         Me.Controls.Add(Me.CERequisite)
         Me.Controls.Add(Me.PictureEditIcon)
@@ -149,6 +171,8 @@ Partial Class FormMarkAssignSingle
         CType(Me.LEReportStatus.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CERequisite.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CEOnHold.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CENeedPrint.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CENeedUpload.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -162,4 +186,6 @@ Partial Class FormMarkAssignSingle
     Friend WithEvents LabelControl17 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents CERequisite As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents CEOnHold As DevExpress.XtraEditors.CheckEdit
+    Friend WithEvents CENeedPrint As DevExpress.XtraEditors.CheckEdit
+    Friend WithEvents CENeedUpload As DevExpress.XtraEditors.CheckEdit
 End Class

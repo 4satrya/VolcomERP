@@ -264,7 +264,7 @@
                             FormFGAdjOutDet.check_but()
                             FormFGAdjOutDet.total_amount = Double.Parse(FormFGAdjOutDet.GVDetail.Columns("adj_out_fg_det_amount").SummaryItem.SummaryValue.ToString)
                             FormFGAdjOutDet.METotSay.Text = ConvertCurrencyToEnglish(FormFGAdjOutDet.total_amount, FormFGAdjOutDet.LECurrency.EditValue.ToString)
-                            Close()
+                            'Close()
                         Else
                             stopCustom("This product already on list.")
                         End If
@@ -312,7 +312,7 @@
                             FormFGAdjOutDet.check_but()
                             FormFGAdjOutDet.total_amount = Double.Parse(FormFGAdjOutDet.GVDetail.Columns("adj_out_fg_det_amount").SummaryItem.SummaryValue.ToString)
                             FormFGAdjOutDet.METotSay.Text = ConvertCurrencyToEnglish(FormFGAdjOutDet.total_amount, FormFGAdjOutDet.LECurrency.EditValue.ToString)
-                            Close()
+                            'Close()
                         Else
                             stopCustom("This product already on list.")
                         End If

@@ -33,7 +33,13 @@
     End Sub
 
     Sub viewListSalesOrderDet(ByVal id_sales_order As String)
-        Dim query As String = "CALL view_sales_order('" + id_sales_order + "')"
+        Dim query As String = ""
+        If id_pop_up = "4" Then
+            query = "CALL view_sales_order_ol_store('" + id_sales_order + "')"
+        Else
+            query = "CALL view_sales_order('" + id_sales_order + "')"
+        End If
+
         Dim data As DataTable = execute_query(query, "-1", True, "", "", "", "")
         GCItemList.DataSource = data
     End Sub

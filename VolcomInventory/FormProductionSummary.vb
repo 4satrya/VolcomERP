@@ -397,4 +397,17 @@
         FormProductionCOP.ShowDialog()
         Cursor = Cursors.Default
     End Sub
+
+    Private Sub GVPD_DoubleClick(sender As Object, e As EventArgs) Handles GVPD.DoubleClick
+
+    End Sub
+
+    Private Sub ViewDetailPDToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ViewDetailPDToolStripMenuItem.Click
+        If GVPD.RowCount > 0 And GVPD.FocusedRowHandle >= 0 Then
+            Dim m As New ClassShowPopUp()
+            m.id_report = GVPD.GetFocusedRowCellValue("id_prod_demand").ToString
+            m.report_mark_type = GVPD.GetFocusedRowCellValue("report_mark_type").ToString
+            m.show()
+        End If
+    End Sub
 End Class

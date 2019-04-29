@@ -132,7 +132,7 @@ Partial Class FormSampleReturnPL
         Me.Name = "FormSampleReturnPL"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Inbound Sample"
+        Me.Text = "Receive Local Sample"
         CType(Me.GCSamplePL, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVSamplePL, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)

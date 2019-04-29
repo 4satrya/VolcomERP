@@ -37,6 +37,7 @@ Partial Class FormSalesReturn
         Me.GridColumnTotalNonStock = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnRty = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnOLStoreOrderNumber = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnPreparedBy = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GCFilter = New DevExpress.XtraEditors.GroupControl()
         Me.BtnView = New DevExpress.XtraEditors.SimpleButton()
         Me.BHide = New DevExpress.XtraEditors.SimpleButton()
@@ -98,7 +99,6 @@ Partial Class FormSalesReturn
         Me.ViewMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.SMPrePrint = New System.Windows.Forms.ToolStripMenuItem()
         Me.SMPrint = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GridColumnPreparedBy = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XTCSalesReturn, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCSalesReturn.SuspendLayout()
         Me.XTPSalesReturnList.SuspendLayout()
@@ -294,6 +294,14 @@ Partial Class FormSalesReturn
         Me.GridColumnOLStoreOrderNumber.Visible = True
         Me.GridColumnOLStoreOrderNumber.VisibleIndex = 1
         '
+        'GridColumnPreparedBy
+        '
+        Me.GridColumnPreparedBy.Caption = "Prepared By"
+        Me.GridColumnPreparedBy.FieldName = "prepared_by"
+        Me.GridColumnPreparedBy.Name = "GridColumnPreparedBy"
+        Me.GridColumnPreparedBy.Visible = True
+        Me.GridColumnPreparedBy.VisibleIndex = 10
+        '
         'GCFilter
         '
         Me.GCFilter.CaptionLocation = DevExpress.Utils.Locations.Left
@@ -430,6 +438,7 @@ Partial Class FormSalesReturn
         Me.GVSalesReturnOrder.GridControl = Me.GCSalesReturnOrder
         Me.GVSalesReturnOrder.Name = "GVSalesReturnOrder"
         Me.GVSalesReturnOrder.OptionsBehavior.ReadOnly = True
+        Me.GVSalesReturnOrder.OptionsView.ShowFooter = True
         Me.GVSalesReturnOrder.OptionsView.ShowGroupPanel = False
         '
         'GridColumnSalesTargetNumb
@@ -474,8 +483,11 @@ Partial Class FormSalesReturn
         'GridColumn1
         '
         Me.GridColumn1.Caption = "Created Return"
+        Me.GridColumn1.DisplayFormat.FormatString = "N0"
+        Me.GridColumn1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn1.FieldName = "created_return"
         Me.GridColumn1.Name = "GridColumn1"
+        Me.GridColumn1.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "created_return", "{0:N0}")})
         Me.GridColumn1.Visible = True
         Me.GridColumn1.VisibleIndex = 5
         '
@@ -492,6 +504,7 @@ Partial Class FormSalesReturn
         Me.GridColumnReturnQty.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnReturnQty.FieldName = "return_qty"
         Me.GridColumnReturnQty.Name = "GridColumnReturnQty"
+        Me.GridColumnReturnQty.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "return_qty", "{0:n2}")})
         Me.GridColumnReturnQty.Visible = True
         Me.GridColumnReturnQty.VisibleIndex = 4
         '
@@ -502,6 +515,7 @@ Partial Class FormSalesReturn
         Me.GridColumnOrderQty.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnOrderQty.FieldName = "order_qty"
         Me.GridColumnOrderQty.Name = "GridColumnOrderQty"
+        Me.GridColumnOrderQty.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "order_qty", "{0:n2}")})
         Me.GridColumnOrderQty.Visible = True
         Me.GridColumnOrderQty.VisibleIndex = 3
         '
@@ -877,14 +891,6 @@ Partial Class FormSalesReturn
         Me.SMPrint.Name = "SMPrint"
         Me.SMPrint.Size = New System.Drawing.Size(136, 22)
         Me.SMPrint.Text = "Print"
-        '
-        'GridColumnPreparedBy
-        '
-        Me.GridColumnPreparedBy.Caption = "Prepared By"
-        Me.GridColumnPreparedBy.FieldName = "prepared_by"
-        Me.GridColumnPreparedBy.Name = "GridColumnPreparedBy"
-        Me.GridColumnPreparedBy.Visible = True
-        Me.GridColumnPreparedBy.VisibleIndex = 10
         '
         'FormSalesReturn
         '

@@ -171,4 +171,49 @@
         postingJournal(id_report_param, report_mark_type_param)
     End Sub
 
+
+    Public Sub cancellUnique(ByVal id_report_param As String, ByVal report_mark_type_param As String)
+        Dim id_type_unik As String = ""
+        Dim qty_unik As String = ""
+        Dim col_unik As String = ""
+
+        If report_mark_type_param = "48" Or report_mark_type_param = "54" Or report_mark_type_param = "116" Or report_mark_type_param = "117" Then
+            id_type_unik = "2"
+            qty_unik = "1"
+            col_unik = "id_sales_pos_det_counting"
+        End If
+
+        Dim query As String = "INSERT INTO tb_m_unique_code(id_comp, id_product, " + col_unik + ", id_type, unique_code, id_design_price, design_price, qty, is_unique_report, input_date)  
+        SELECT cc.id_comp, c.id_product, c.id_sales_pos_det_counting, '" + id_type_unik + "', c.full_code, c.id_design_price, c.design_price, '" + qty_unik + "', 1, NOW() 
+        FROM tb_sales_pos pos
+        INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = pos.id_store_contact_from
+        INNER JOIN tb_sales_pos_det_counting c ON c.id_sales_pos = pos.id_sales_pos
+        WHERE pos.id_sales_pos=" + id_report_param + " "
+        execute_non_query(query, True, "", "", "", "")
+    End Sub
+
+    Public Sub insertUnique(ByVal id_report_param As String, ByVal report_mark_type_param As String)
+        Dim id_type_unik As String = ""
+        Dim qty_unik As String = ""
+        Dim col_unik As String = ""
+
+        If report_mark_type_param = "48" Or report_mark_type_param = "54" Or report_mark_type_param = "116" Or report_mark_type_param = "117" Then
+            id_type_unik = "2"
+            qty_unik = "-1"
+            col_unik = "id_sales_pos_det_counting"
+        ElseIf report_mark_type_param = "66" Or report_mark_type_param = "67" Or report_mark_type_param = "118" Then
+            id_type_unik = "3"
+            qty_unik = "1"
+            col_unik = "id_sales_pos_det_counting_cn"
+        End If
+
+        Dim query As String = "INSERT INTO tb_m_unique_code(id_comp, id_product, " + col_unik + ", id_type, unique_code, id_design_price, design_price, qty, is_unique_report, input_date)  
+        SELECT cc.id_comp, c.id_product, c.id_sales_pos_det_counting, '" + id_type_unik + "', c.full_code, c.id_design_price, c.design_price, '" + qty_unik + "', 1, NOW() 
+        FROM tb_sales_pos pos
+        INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = pos.id_store_contact_from
+        INNER JOIN tb_sales_pos_det_counting c ON c.id_sales_pos = pos.id_sales_pos
+        WHERE pos.id_sales_pos=" + id_report_param + " "
+        execute_non_query(query, True, "", "", "", "")
+    End Sub
+
 End Class

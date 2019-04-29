@@ -53,6 +53,10 @@
 
     Public Sub changeStatus(ByVal id_report_par As String, ByVal id_status_reportx_par As String)
         If id_status_reportx_par = "6" Then
+            'clean storage related report
+            Dim query_clean As String = "DELETE FROM tb_storage_fg WHERE report_mark_type=49 AND id_report=" + id_report_par + " "
+            execute_non_query(query_clean, True, "", "", "", "")
+
             ' jika complete
             Dim query_del_zero As String = ""
             Dim query_save_out As String = ""

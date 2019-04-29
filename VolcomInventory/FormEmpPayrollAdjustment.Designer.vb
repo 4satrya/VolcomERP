@@ -130,7 +130,7 @@ Partial Class FormEmpPayrollAdjustment
         '
         Me.GVDeduction.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdDeduction, Me.GridColumnIdEmployee, Me.GridColumnDept, Me.GridColumnNIP, Me.GridColumnEmp, Me.GridColumnEmpPosition, Me.GridColumnEmpLvl, Me.GridColumnType, Me.GridColumnTotDays, Me.GridColumnValue, Me.GridColumnIncrease, Me.GridColumnNote})
         Me.GVDeduction.GridControl = Me.GCDeduction
-        Me.GVDeduction.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "value", Me.GridColumnValue, "{0:N0}")})
+        Me.GVDeduction.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "value", Me.GridColumnValue, "{0:N2}")})
         Me.GVDeduction.Name = "GVDeduction"
         Me.GVDeduction.OptionsView.GroupFooterShowMode = DevExpress.XtraGrid.Views.Grid.GroupFooterShowMode.VisibleAlways
         Me.GVDeduction.OptionsView.ShowFooter = True

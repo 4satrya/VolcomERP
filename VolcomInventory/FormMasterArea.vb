@@ -257,5 +257,9 @@
         If id_pop_up = "1" Then
             FormMasterEmployeeNewDet.viewCountry()
         End If
+
+        If id_pop_up = "2" Then
+            FormEmployeePpsDet.viewCountry()
+        End If
     End Sub
 End Class

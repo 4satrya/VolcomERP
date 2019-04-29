@@ -344,6 +344,7 @@ Public Class FormSalesDelOrderSlip
             Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure you want to continue this process?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
             If confirm = Windows.Forms.DialogResult.Yes Then
                 Cursor = Cursors.WaitCursor
+                BtnSave.Enabled = False
                 Dim combine_note As String = MENote.Text.ToString
                 If action = "ins" Then
                     'query main table

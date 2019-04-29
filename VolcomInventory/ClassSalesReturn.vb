@@ -67,6 +67,11 @@
 
     Public Sub changeStatus(ByVal id_report_par As String, ByVal id_status_reportx_par As String)
         If id_status_reportx_par = "5" Then
+            Dim is_use_unique_code As String = execute_query("SELECT is_use_unique_code FROM tb_sales_return WHERE id_sales_return='" + id_report_par + "' ", 0, True, "", "", "", "")
+            If is_use_unique_code = "1" Then
+                cancellUnique(id_report_par)
+            End If
+
             'cancel reserved stock store
             Dim stc_cancel As ClassSalesReturn = New ClassSalesReturn()
             stc_cancel.cancelReservedStock(id_report_par)
@@ -86,7 +91,17 @@
     Public Sub changeStatusOLStore(ByVal id_report_par As String, ByVal id_status_reportx_par As String)
         If id_status_reportx_par = "6" Then
             ' jika complete
-            Dim query_stc As String = "INSERT INTO tb_storage_fg(id_wh_drawer, id_storage_category, id_product, bom_unit_price, report_mark_type, id_report, storage_product_qty, storage_product_datetime, storage_product_notes, id_stock_status) 
+            Dim id_ro As String = execute_query("SELECT id_sales_return_order FROM tb_sales_return WHERE id_sales_return='" + id_report_par + "' ", 0, True, "", "", "", "")
+
+            Dim query_stc As String = "
+            -- delete ro first (strage)
+             DELETE FROM tb_storage_fg 
+            WHERE report_mark_type=119 AND id_report=" + id_ro + " AND id_storage_category=1 AND id_stock_status=2 ;
+              -- delete ret first (strage)
+            DELETE FROM tb_storage_fg 
+            WHERE report_mark_type=120 AND id_report=" + id_report_par + ";
+            -- insert storaghe
+            INSERT INTO tb_storage_fg(id_wh_drawer, id_storage_category, id_product, bom_unit_price, report_mark_type, id_report, storage_product_qty, storage_product_datetime, storage_product_notes, id_stock_status) 
             SELECT getCompByContact(ro.id_store_contact_to, 4), '1', rd.id_product, IFNULL(dsg.design_cop,0), '119', ro.id_sales_return_order, rd.sales_return_det_qty, NOW(), '', '2' 
             FROM tb_sales_return r 
             INNER JOIN tb_sales_return_order ro ON ro.id_sales_return_order = r.id_sales_return_order
@@ -112,6 +127,11 @@
 
             'save unreg unique
             execute_non_query("CALL generate_unreg_barcode(" + id_report_par + ",3)", True, "", "", "", "")
+        ElseIf id_status_reportx_par = "5" Then
+            Dim is_use_unique_code As String = execute_query("SELECT is_use_unique_code FROM tb_sales_return WHERE id_sales_return='" + id_report_par + "' ", 0, True, "", "", "", "")
+            If is_use_unique_code = "1" Then
+                cancellUnique(id_report_par)
+            End If
         End If
         Dim query As String = String.Format("UPDATE tb_sales_return SET id_report_status='{0}', last_update=NOW(), last_update_by=" + id_user + " WHERE id_sales_return ='{1}'", id_status_reportx_par, id_report_par)
         execute_non_query(query, True, "", "", "", "")
@@ -164,7 +184,13 @@
     End Sub
 
     Public Sub completeReservedStock(ByVal id_report_param As String)
-        Dim query As String = "INSERT INTO tb_storage_fg(id_wh_drawer, id_storage_category, id_product, bom_unit_price, report_mark_type, id_report, storage_product_qty, storage_product_datetime, storage_product_notes, id_stock_status) 
+        Dim query As String = "
+        -- delete storage reserved
+        DELETE FROM tb_storage_fg WHERE report_mark_type=46 AND id_report=" + id_report_param + " AND id_storage_category=1 AND id_stock_status=2;
+        -- delete storage
+        DELETE FROM tb_storage_fg WHERE report_mark_type=46 AND id_report=" + id_report_param + " AND id_stock_status=1;
+        -- insert storage
+        INSERT INTO tb_storage_fg(id_wh_drawer, id_storage_category, id_product, bom_unit_price, report_mark_type, id_report, storage_product_qty, storage_product_datetime, storage_product_notes, id_stock_status) 
         SELECT getCompByContact(r.id_store_contact_from, 4), '1', rd.id_product, IFNULL(dsg.design_cop,0), '46', '" + id_report_param + "', rd.sales_return_det_qty, NOW(), '', '2' 
         FROM tb_sales_return r 
         INNER JOIN tb_sales_return_det rd ON rd.id_sales_return = r.id_sales_return 
@@ -239,6 +265,32 @@
     Public Sub orderLog(ByVal id_order As String, ByVal log_type As String, ByVal log As String)
         Dim query As String = "INSERT INTO tb_sales_return_order_log (id_sales_return_order, id_user, ret_order_log_type, log, log_time)
         VALUES ('" + id_order + "', '" + id_user + "','" + log_type + "','" + log + "', NOW()) "
+        execute_non_query(query, True, "", "", "", "")
+    End Sub
+
+    Public Sub insertUnique(ByVal id_report_par As String)
+        Dim query As String = "INSERT INTO tb_m_unique_code(id_comp, id_product, id_sales_return_det_counting, id_type, unique_code, id_design_price, design_price, qty, is_unique_report, input_date)  
+        SELECT cc.id_comp, retd.id_product, c.id_sales_return_det_counting, 4, CONCAT(prod.product_full_code, c.sales_return_det_counting), 
+        retd.id_design_price, retd.design_price,-1, c.is_unique_report, NOW()
+        FROM tb_sales_return_det_counting c
+        INNER JOIN tb_sales_return_det retd ON retd.id_sales_return_det = c.id_sales_return_det
+        INNER JOIN tb_sales_return ret ON ret.id_sales_return = retd.id_sales_return
+        INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = ret.id_store_contact_from
+        INNER JOIN tb_m_product prod ON prod.id_product = retd.id_product
+        WHERE retd.id_sales_return=" + id_report_par + " "
+        execute_non_query(query, True, "", "", "", "")
+    End Sub
+
+    Public Sub cancellUnique(ByVal id_report_par As String)
+        Dim query As String = "INSERT INTO tb_m_unique_code(id_comp, id_product, id_sales_return_det_counting, id_type, unique_code, id_design_price, design_price, qty, is_unique_report, input_date)  
+        SELECT cc.id_comp, retd.id_product, c.id_sales_return_det_counting, 4, CONCAT(prod.product_full_code, c.sales_return_det_counting), 
+        retd.id_design_price, retd.design_price,1, c.is_unique_report, NOW()
+        FROM tb_sales_return_det_counting c
+        INNER JOIN tb_sales_return_det retd ON retd.id_sales_return_det = c.id_sales_return_det
+        INNER JOIN tb_sales_return ret ON ret.id_sales_return = retd.id_sales_return
+        INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = ret.id_store_contact_from
+        INNER JOIN tb_m_product prod ON prod.id_product = retd.id_product
+        WHERE retd.id_sales_return=" + id_report_par + " "
         execute_non_query(query, True, "", "", "", "")
     End Sub
 

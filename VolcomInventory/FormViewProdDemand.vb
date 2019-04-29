@@ -23,7 +23,7 @@
         INNER JOIN tb_season b ON a.id_season = b.id_season 
         INNER JOIN tb_lookup_report_status stt ON stt.id_report_status = a.id_report_status
         INNER JOIN tb_lookup_pd_budget bt ON bt.id_pd_budget = a.id_pd_budget
-        INNER JOIN tb_m_code_detail cd ON cd.id_code_detail = a.id_division
+        LEFT JOIN tb_m_code_detail cd ON cd.id_code_detail = a.id_division
         WHERE a.id_prod_demand = '" + id_prod_demand + "'"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         LabelTitle.Text = data.Rows(0)("prod_demand_number").ToString
@@ -103,26 +103,11 @@
 
     Private Sub BMark_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BMark.Click
         Cursor = Cursors.WaitCursor
-
-        'cek file
-        Dim cond_exist_file As Boolean = True
-        Dim query_file As String = "SELECT * FROM tb_doc d WHERE d.report_mark_type=" + report_mark_type + " AND d.id_report=" + id_prod_demand + ""
-        Dim data_file As DataTable = execute_query(query_file, -1, True, "", "", "", "")
-        If data_file.Rows.Count <= 0 Then
-            cond_exist_file = False
-        End If
-
-        If Not is_confirm Then
-            warningCustom("No file attached, can't process this PD")
-        ElseIf Not cond_exist_file Then
-            warningCustom("No file attached, can't process this PD")
-        Else
-            FormReportMark.id_report = id_prod_demand
-            FormReportMark.report_mark_type = report_mark_type
-            FormReportMark.is_view = "1"
-            FormReportMark.form_origin = Name
-            FormReportMark.ShowDialog()
-        End If
+        FormReportMark.id_report = id_prod_demand
+        FormReportMark.report_mark_type = report_mark_type
+        FormReportMark.is_view = "1"
+        FormReportMark.form_origin = Name
+        FormReportMark.ShowDialog()
         Cursor = Cursors.Default
     End Sub
 

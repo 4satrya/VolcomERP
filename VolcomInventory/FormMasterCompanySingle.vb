@@ -96,7 +96,8 @@
             Dim phone As String = data.Rows(0)("phone").ToString
             Dim id_dept As String = data.Rows(0)("id_departement").ToString
             Dim id_comp_group As String = data.Rows(0)("id_comp_group").ToString
-
+            '
+            '
             id_def_drawer = data.Rows(0)("id_drawer_def").ToString
             TEDefDrawer.Text = data.Rows(0)("wh_drawer").ToString
             '
@@ -192,12 +193,20 @@
 
             'load button approval
             BPrint.Visible = True
-            BApproval.Visible = True
-            If LEStatus.EditValue.ToString = "3" Then
-                BApproval.Text = "Submit"
+
+            If is_active = "1" Or is_active = "2" Then
+                BApproval.Visible = False
             Else
-                BApproval.Text = "Approval"
+                BApproval.Visible = True
+                '
+                BApproval.Visible = True
+                If LEStatus.EditValue.ToString = "3" Then
+                    BApproval.Text = "Submit"
+                Else
+                    BApproval.Text = "Approval"
+                End If
             End If
+
             '
             If LEStatus.EditValue.ToString = "3" Then 'created
                 BSave.Visible = True
@@ -465,7 +474,7 @@
                 errorInput()
             Else
                 'update company
-                query = "UPDATE tb_m_comp SET comp_name='{0}',comp_display_name='{1}',comp_number='{2}',address_primary='{3}',address_other='{4}',postal_code='{5}',email='{6}',website='{7}',id_city='{8}',id_comp_cat='{9}',is_active='{10}',id_tax='{11}',npwp='{12}',fax='{13}',id_comp_group='{14}',awb_destination='{15}',awb_zone='{16}',awb_cargo_code='{17}',phone='{18}' "
+                query = "UPDATE tb_m_comp SET comp_name='{0}',comp_display_name='{1}',comp_number='{2}',address_primary='{3}',address_other='{4}',postal_code='{5}',email='{6}',website='{7}',id_city='{8}',id_comp_cat='{9}',is_active='{10}',id_tax='{11}',npwp='{12}',fax='{13}',id_comp_group='{14}',awb_destination='{15}',awb_zone='{16}',awb_cargo_code='{17}',phone='{18}', "
                 If id_dept = "0" Then
                     query += "id_departement = NULL, "
                 Else
@@ -675,7 +684,7 @@
         lookup.ItemIndex = 0
     End Sub
     Private Sub view_category(ByVal lookup As DevExpress.XtraEditors.LookUpEdit)
-        Dim query As String = "SELECT id_comp_cat,comp_cat_name FROM tb_m_comp_cat"
+        Dim query As String = "SELECT id_comp_cat,comp_cat_name FROM tb_m_comp_cat ORDER BY id_comp_cat DESC"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
         lookup.Properties.DataSource = Nothing
@@ -922,5 +931,45 @@ WHERE lgl.`id_comp`='" & id_company & "'" & query_where
 
     Private Sub BrefreshTemplateContract_Click(sender As Object, e As EventArgs) Handles BrefreshTemplateContract.Click
         load_contract_template()
+    End Sub
+
+    Private Sub BPrint_Click(sender As Object, e As EventArgs) Handles BPrint.Click
+        Dim Report As New ReportMasterCompanySingle()
+
+        LELegalType.ItemIndex = 0
+
+        load_legal()
+
+        Report.DTLegal = GCLegal.DataSource
+
+        Report.XLCompanyCode.Text = TECompanyCode.Text
+        Report.XLCompanyName.Text = TECompanyName.Text
+        Report.XLShortName.Text = TECompanyPrintedName.Text
+        Report.XLCategory.Text = LECompanyCategory.Text
+        Report.XLCompanyGroup.Text = SLEGroup.Text
+        Report.XLPhone.Text = TEPhoneComp.Text
+        Report.XLWeb.Text = TEWeb.Text
+        Report.XLFax.Text = TEFax.Text
+        Report.XLEmail.Text = TEEMail.Text
+        Report.XLTax.Text = LETax.Text
+        Report.XLStatus.Text = LEStatus.Text
+        Report.XLNPWP.Text = TENPWP.Text
+
+        Report.XLAddress.Text = MEAddress.Text
+        Report.XLOtherAddress.Text = MEOAddress.Text
+        Report.XLACountry.Text = LECountry.Text
+        Report.XLARegion.Text = LERegion.Text
+        Report.XLAState.Text = LEState.Text
+        Report.XLACity.Text = LECity.Text
+        Report.XLAPostalCode.Text = TEPostalCode.Text
+
+        Report.XLContactPerson.Text = TECPName.Text
+        Report.XLNumber.Text = TECPPhone.Text
+        Report.XLPosition.Text = TECPPosition.Text
+        Report.XLCPEmail.Text = TECPEmail.Text
+
+        Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
+
+        Tool.ShowPreview()
     End Sub
 End Class

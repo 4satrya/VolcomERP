@@ -16,9 +16,4 @@
             dept_head_email = data_dt.Rows(0)("email_lokal").ToString
         End If
     End Sub
-
-    Public Sub test()
-        Dim send_mail As ClassSendingMail = New ClassSendingMail()
-        send_mail.send_email_html(dept_head, dept_head_email, "Tes", "Tes0001", "")
-    End Sub
 End Class

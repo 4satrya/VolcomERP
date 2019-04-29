@@ -105,7 +105,52 @@
         Cursor = Cursors.Default
     End Sub
 
+    Sub viewDetailByDate()
+        Cursor = Cursors.WaitCursor
+
+        Dim date_from_selected As String = "0000-01-01"
+        Dim date_until_selected As String = "9999-01-01"
+
+        Try
+            date_from_selected = DateTime.Parse(DEDFrom.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+
+        Try
+            date_until_selected = DateTime.Parse(DEDTo.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+
+        Dim query As String = "
+            SELECT so.id_sales_order, so.sales_order_number, DATE_FORMAT(so.sales_order_date, '%d %M %Y') sales_order_date, so.id_so_status, (SELECT so_status FROM tb_lookup_so_status WHERE id_so_status = so.id_so_status) AS so_status, so.id_report_status AS id_report_status_so, (SELECT report_status FROM tb_lookup_report_status WHERE id_report_status = so.id_report_status) AS report_status_so, sod.id_sales_order_det, sode.id_pl_sales_order_del, sode.pl_sales_order_del_number, DATE_FORMAT(sode.pl_sales_order_del_date, '%d %M %Y') pl_sales_order_del_date, sode.id_report_status AS id_report_status_del, (SELECT report_status FROM tb_lookup_report_status WHERE id_report_status = sode.id_report_status) AS report_status_del, ex.id_emp_uni_ex, ex.emp_uni_ex_number, DATE_FORMAT(ex.emp_uni_ex_date, '%d %M %Y') emp_uni_ex_date, (SELECT report_status FROM tb_lookup_report_status WHERE id_report_status = ex.id_report_status) AS report_status_ex, sod.id_product, sod.sales_order_det_qty, p.product_display_name, p.product_full_code, cd.code_detail_name, p.id_design, d.design_code, d.design_display_name, sod.sales_order_det_qty * d.design_cop AS design_cop, b.id_emp_uni_period, pr.period_name, b.id_employee, e.employee_code, e.employee_name, b.id_departement, (SELECT departement FROM tb_m_departement WHERE id_departement = b.id_departement) AS departement
+            FROM tb_sales_order AS so
+            LEFT JOIN tb_sales_order_det AS sod ON sod.id_sales_order = so.id_sales_order
+            LEFT JOIN tb_pl_sales_order_del AS sode ON sode.id_sales_order = so.id_sales_order
+            LEFT JOIN tb_emp_uni_ex AS ex ON ex.id_pl_sales_order_del = sode.id_pl_sales_order_del
+            LEFT JOIN tb_m_product AS p ON p.id_product = sod.id_product
+            LEFT JOIN tb_m_product_code AS pc ON pc.id_product = p.id_product
+            LEFT JOIN tb_m_code_detail AS cd ON cd.id_code_detail = pc.id_code_detail
+            LEFT JOIN tb_m_design AS d ON d.id_design = p.id_design
+            LEFT JOIN tb_emp_uni_budget AS b ON b.id_emp_uni_budget = so.id_emp_uni_budget
+            LEFT JOIN tb_emp_uni_period AS pr ON pr.id_emp_uni_period = b.id_emp_uni_period
+            LEFT JOIN tb_m_employee AS e ON e.id_employee = b.id_employee
+            WHERE so.id_report_status = 6 AND so.id_so_status IN (7, 9) AND so.sales_order_date BETWEEN '" + date_from_selected + "' AND '" + date_until_selected + "'
+        "
+
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+
+        GCDetail.DataSource = data
+
+        GVDetail.BestFitColumns()
+
+        Cursor = Cursors.Default
+    End Sub
+
     Private Sub BtnViewByDate_Click(sender As Object, e As EventArgs) Handles BtnViewByDate.Click
         viewSummaryByDate()
+    End Sub
+
+    Private Sub SBDView_Click(sender As Object, e As EventArgs) Handles SBDView.Click
+        viewDetailByDate()
     End Sub
 End Class

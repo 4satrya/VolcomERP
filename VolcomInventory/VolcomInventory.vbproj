@@ -1459,6 +1459,12 @@
     <Compile Include="FormFGLineListAddPrice.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormFGLineListInStoreDateActual.Designer.vb">
+      <DependentUpon>FormFGLineListInStoreDateActual.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormFGLineListInStoreDateActual.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormFGLineListMoveSeason.Designer.vb">
       <DependentUpon>FormFGLineListMoveSeason.vb</DependentUpon>
     </Compile>
@@ -7337,6 +7343,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormFGLineListAddPrice.resx">
       <DependentUpon>FormFGLineListAddPrice.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormFGLineListInStoreDateActual.resx">
+      <DependentUpon>FormFGLineListInStoreDateActual.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormFGLineListMoveSeason.resx">
       <DependentUpon>FormFGLineListMoveSeason.vb</DependentUpon>

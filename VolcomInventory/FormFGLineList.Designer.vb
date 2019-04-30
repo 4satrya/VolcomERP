@@ -63,6 +63,7 @@ Partial Class FormFGLineList
         Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.PanelControlNavLineListBottom = New DevExpress.XtraEditors.PanelControl()
         Me.BtnCreateNewPD = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnSetActualInStoreDate = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnPlanStatus = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnGetRateCurrent = New DevExpress.XtraEditors.SimpleButton()
         Me.PCUnlock = New DevExpress.XtraEditors.PanelControl()
@@ -129,7 +130,7 @@ Partial Class FormFGLineList
         Me.PanelControlNavLineList.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControlNavLineList.Location = New System.Drawing.Point(0, 0)
         Me.PanelControlNavLineList.Name = "PanelControlNavLineList"
-        Me.PanelControlNavLineList.Size = New System.Drawing.Size(1362, 39)
+        Me.PanelControlNavLineList.Size = New System.Drawing.Size(1753, 39)
         Me.PanelControlNavLineList.TabIndex = 0
         '
         'PCNavLineList
@@ -140,7 +141,7 @@ Partial Class FormFGLineList
         Me.PCNavLineList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PCNavLineList.Location = New System.Drawing.Point(2, 2)
         Me.PCNavLineList.Name = "PCNavLineList"
-        Me.PCNavLineList.Size = New System.Drawing.Size(747, 35)
+        Me.PCNavLineList.Size = New System.Drawing.Size(1138, 35)
         Me.PCNavLineList.TabIndex = 105
         '
         'SLESeason
@@ -153,7 +154,7 @@ Partial Class FormFGLineList
         Me.SLESeason.Properties.Appearance.Options.UseFont = True
         Me.SLESeason.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.SLESeason.Properties.View = Me.SearchLookUpEdit1View
-        Me.SLESeason.Size = New System.Drawing.Size(686, 20)
+        Me.SLESeason.Size = New System.Drawing.Size(1077, 20)
         Me.SLESeason.TabIndex = 95
         '
         'SearchLookUpEdit1View
@@ -200,7 +201,7 @@ Partial Class FormFGLineList
         Me.PCType.Controls.Add(Me.SLETypeLineList)
         Me.PCType.Controls.Add(Me.LabelControl1)
         Me.PCType.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PCType.Location = New System.Drawing.Point(749, 2)
+        Me.PCType.Location = New System.Drawing.Point(1140, 2)
         Me.PCType.Name = "PCType"
         Me.PCType.Size = New System.Drawing.Size(279, 35)
         Me.PCType.TabIndex = 106
@@ -253,7 +254,7 @@ Partial Class FormFGLineList
         Me.PanelOpt.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
         Me.PanelOpt.Controls.Add(Me.CheckEditOpt)
         Me.PanelOpt.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PanelOpt.Location = New System.Drawing.Point(1028, 2)
+        Me.PanelOpt.Location = New System.Drawing.Point(1419, 2)
         Me.PanelOpt.Name = "PanelOpt"
         Me.PanelOpt.Size = New System.Drawing.Size(137, 35)
         Me.PanelOpt.TabIndex = 107
@@ -282,14 +283,14 @@ Partial Class FormFGLineList
         Me.barDockControlTop.CausesValidation = False
         Me.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top
         Me.barDockControlTop.Location = New System.Drawing.Point(0, 0)
-        Me.barDockControlTop.Size = New System.Drawing.Size(1362, 0)
+        Me.barDockControlTop.Size = New System.Drawing.Size(1753, 0)
         '
         'barDockControlBottom
         '
         Me.barDockControlBottom.CausesValidation = False
         Me.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.barDockControlBottom.Location = New System.Drawing.Point(0, 532)
-        Me.barDockControlBottom.Size = New System.Drawing.Size(1362, 0)
+        Me.barDockControlBottom.Size = New System.Drawing.Size(1753, 0)
         '
         'barDockControlLeft
         '
@@ -302,7 +303,7 @@ Partial Class FormFGLineList
         '
         Me.barDockControlRight.CausesValidation = False
         Me.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right
-        Me.barDockControlRight.Location = New System.Drawing.Point(1362, 0)
+        Me.barDockControlRight.Location = New System.Drawing.Point(1753, 0)
         Me.barDockControlRight.Size = New System.Drawing.Size(0, 532)
         '
         'BBPD
@@ -373,7 +374,7 @@ Partial Class FormFGLineList
         Me.PanelImg.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
         Me.PanelImg.Controls.Add(Me.CheckImg)
         Me.PanelImg.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PanelImg.Location = New System.Drawing.Point(1165, 2)
+        Me.PanelImg.Location = New System.Drawing.Point(1556, 2)
         Me.PanelImg.Name = "PanelImg"
         Me.PanelImg.Size = New System.Drawing.Size(91, 35)
         Me.PanelImg.TabIndex = 108
@@ -393,7 +394,7 @@ Partial Class FormFGLineList
         Me.BtnView.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnView.ImageIndex = 15
         Me.BtnView.ImageList = Me.LargeImageCollection
-        Me.BtnView.Location = New System.Drawing.Point(1256, 2)
+        Me.BtnView.Location = New System.Drawing.Point(1647, 2)
         Me.BtnView.Name = "BtnView"
         Me.BtnView.Size = New System.Drawing.Size(104, 35)
         Me.BtnView.TabIndex = 94
@@ -438,7 +439,7 @@ Partial Class FormFGLineList
         Me.GCLineList.Location = New System.Drawing.Point(0, 39)
         Me.GCLineList.MainView = Me.BGVLineList
         Me.GCLineList.Name = "GCLineList"
-        Me.GCLineList.Size = New System.Drawing.Size(1362, 456)
+        Me.GCLineList.Size = New System.Drawing.Size(1753, 451)
         Me.GCLineList.TabIndex = 1
         Me.GCLineList.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.BGVLineList, Me.GridView2})
         '
@@ -466,6 +467,7 @@ Partial Class FormFGLineList
         'PanelControlNavLineListBottom
         '
         Me.PanelControlNavLineListBottom.Controls.Add(Me.BtnCreateNewPD)
+        Me.PanelControlNavLineListBottom.Controls.Add(Me.BtnSetActualInStoreDate)
         Me.PanelControlNavLineListBottom.Controls.Add(Me.BtnPlanStatus)
         Me.PanelControlNavLineListBottom.Controls.Add(Me.BtnGetRateCurrent)
         Me.PanelControlNavLineListBottom.Controls.Add(Me.PCUnlock)
@@ -478,9 +480,9 @@ Partial Class FormFGLineList
         Me.PanelControlNavLineListBottom.Controls.Add(Me.BtnDesign)
         Me.PanelControlNavLineListBottom.Controls.Add(Me.BtnDropQuickMenu)
         Me.PanelControlNavLineListBottom.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControlNavLineListBottom.Location = New System.Drawing.Point(0, 495)
+        Me.PanelControlNavLineListBottom.Location = New System.Drawing.Point(0, 490)
         Me.PanelControlNavLineListBottom.Name = "PanelControlNavLineListBottom"
-        Me.PanelControlNavLineListBottom.Size = New System.Drawing.Size(1362, 37)
+        Me.PanelControlNavLineListBottom.Size = New System.Drawing.Size(1753, 42)
         Me.PanelControlNavLineListBottom.TabIndex = 2
         '
         'BtnCreateNewPD
@@ -488,20 +490,30 @@ Partial Class FormFGLineList
         Me.BtnCreateNewPD.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnCreateNewPD.ImageIndex = 10
         Me.BtnCreateNewPD.ImageList = Me.LargeImageCollection
-        Me.BtnCreateNewPD.Location = New System.Drawing.Point(307, 2)
+        Me.BtnCreateNewPD.Location = New System.Drawing.Point(527, 2)
         Me.BtnCreateNewPD.Name = "BtnCreateNewPD"
-        Me.BtnCreateNewPD.Size = New System.Drawing.Size(114, 33)
+        Me.BtnCreateNewPD.Size = New System.Drawing.Size(114, 38)
         Me.BtnCreateNewPD.TabIndex = 113
         Me.BtnCreateNewPD.Text = "Create New PD"
+        '
+        'BtnSetActualInStoreDate
+        '
+        Me.BtnSetActualInStoreDate.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnSetActualInStoreDate.Image = CType(resources.GetObject("BtnSetActualInStoreDate.Image"), System.Drawing.Image)
+        Me.BtnSetActualInStoreDate.Location = New System.Drawing.Point(641, 2)
+        Me.BtnSetActualInStoreDate.Name = "BtnSetActualInStoreDate"
+        Me.BtnSetActualInStoreDate.Size = New System.Drawing.Size(171, 38)
+        Me.BtnSetActualInStoreDate.TabIndex = 116
+        Me.BtnSetActualInStoreDate.Text = "Set Actual In Store Date"
         '
         'BtnPlanStatus
         '
         Me.BtnPlanStatus.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnPlanStatus.ImageIndex = 3
         Me.BtnPlanStatus.ImageList = Me.LargeImageCollection
-        Me.BtnPlanStatus.Location = New System.Drawing.Point(421, 2)
+        Me.BtnPlanStatus.Location = New System.Drawing.Point(812, 2)
         Me.BtnPlanStatus.Name = "BtnPlanStatus"
-        Me.BtnPlanStatus.Size = New System.Drawing.Size(107, 33)
+        Me.BtnPlanStatus.Size = New System.Drawing.Size(107, 38)
         Me.BtnPlanStatus.TabIndex = 114
         Me.BtnPlanStatus.Text = "Move/Drop"
         '
@@ -511,9 +523,9 @@ Partial Class FormFGLineList
         Me.BtnGetRateCurrent.Image = CType(resources.GetObject("BtnGetRateCurrent.Image"), System.Drawing.Image)
         Me.BtnGetRateCurrent.ImageIndex = 18
         Me.BtnGetRateCurrent.ImageList = Me.LargeImageCollection
-        Me.BtnGetRateCurrent.Location = New System.Drawing.Point(528, 2)
+        Me.BtnGetRateCurrent.Location = New System.Drawing.Point(919, 2)
         Me.BtnGetRateCurrent.Name = "BtnGetRateCurrent"
-        Me.BtnGetRateCurrent.Size = New System.Drawing.Size(134, 33)
+        Me.BtnGetRateCurrent.Size = New System.Drawing.Size(134, 38)
         Me.BtnGetRateCurrent.TabIndex = 115
         Me.BtnGetRateCurrent.Text = "Get Rate Current"
         '
@@ -524,7 +536,7 @@ Partial Class FormFGLineList
         Me.PCUnlock.Dock = System.Windows.Forms.DockStyle.Left
         Me.PCUnlock.Location = New System.Drawing.Point(249, 2)
         Me.PCUnlock.Name = "PCUnlock"
-        Me.PCUnlock.Size = New System.Drawing.Size(108, 33)
+        Me.PCUnlock.Size = New System.Drawing.Size(108, 38)
         Me.PCUnlock.TabIndex = 104
         '
         'CheckEditUnlock
@@ -541,9 +553,9 @@ Partial Class FormFGLineList
         Me.BtnProposePrice.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnProposePrice.ImageIndex = 14
         Me.BtnProposePrice.ImageList = Me.LargeImageCollection
-        Me.BtnProposePrice.Location = New System.Drawing.Point(662, 2)
+        Me.BtnProposePrice.Location = New System.Drawing.Point(1053, 2)
         Me.BtnProposePrice.Name = "BtnProposePrice"
-        Me.BtnProposePrice.Size = New System.Drawing.Size(122, 33)
+        Me.BtnProposePrice.Size = New System.Drawing.Size(122, 38)
         Me.BtnProposePrice.TabIndex = 109
         Me.BtnProposePrice.Text = "Get Propose Price"
         Me.BtnProposePrice.Visible = False
@@ -553,9 +565,9 @@ Partial Class FormFGLineList
         Me.BtnActualCost.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnActualCost.ImageIndex = 10
         Me.BtnActualCost.ImageList = Me.LargeImageCollection
-        Me.BtnActualCost.Location = New System.Drawing.Point(784, 2)
+        Me.BtnActualCost.Location = New System.Drawing.Point(1175, 2)
         Me.BtnActualCost.Name = "BtnActualCost"
-        Me.BtnActualCost.Size = New System.Drawing.Size(138, 33)
+        Me.BtnActualCost.Size = New System.Drawing.Size(138, 38)
         Me.BtnActualCost.TabIndex = 111
         Me.BtnActualCost.Text = "Actual Cost and Price"
         Me.BtnActualCost.Visible = False
@@ -565,9 +577,9 @@ Partial Class FormFGLineList
         Me.BtnEstimateCost.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnEstimateCost.ImageIndex = 18
         Me.BtnEstimateCost.ImageList = Me.LargeImageCollection
-        Me.BtnEstimateCost.Location = New System.Drawing.Point(922, 2)
+        Me.BtnEstimateCost.Location = New System.Drawing.Point(1313, 2)
         Me.BtnEstimateCost.Name = "BtnEstimateCost"
-        Me.BtnEstimateCost.Size = New System.Drawing.Size(125, 33)
+        Me.BtnEstimateCost.Size = New System.Drawing.Size(125, 38)
         Me.BtnEstimateCost.TabIndex = 110
         Me.BtnEstimateCost.Text = "Get Estimate Cost"
         '
@@ -578,7 +590,7 @@ Partial Class FormFGLineList
         Me.PCSelAll.Dock = System.Windows.Forms.DockStyle.Left
         Me.PCSelAll.Location = New System.Drawing.Point(150, 2)
         Me.PCSelAll.Name = "PCSelAll"
-        Me.PCSelAll.Size = New System.Drawing.Size(99, 33)
+        Me.PCSelAll.Size = New System.Drawing.Size(99, 38)
         Me.PCSelAll.TabIndex = 103
         '
         'PBCLineList
@@ -587,7 +599,7 @@ Partial Class FormFGLineList
         Me.PBCLineList.Location = New System.Drawing.Point(2, 2)
         Me.PBCLineList.Name = "PBCLineList"
         Me.PBCLineList.Properties.ShowTitle = True
-        Me.PBCLineList.Size = New System.Drawing.Size(148, 33)
+        Me.PBCLineList.Size = New System.Drawing.Size(148, 38)
         Me.PBCLineList.TabIndex = 96
         Me.PBCLineList.Visible = False
         '
@@ -596,9 +608,9 @@ Partial Class FormFGLineList
         Me.BtnCopyFrom.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnCopyFrom.ImageIndex = 19
         Me.BtnCopyFrom.ImageList = Me.LargeImageCollection
-        Me.BtnCopyFrom.Location = New System.Drawing.Point(1047, 2)
+        Me.BtnCopyFrom.Location = New System.Drawing.Point(1438, 2)
         Me.BtnCopyFrom.Name = "BtnCopyFrom"
-        Me.BtnCopyFrom.Size = New System.Drawing.Size(98, 33)
+        Me.BtnCopyFrom.Size = New System.Drawing.Size(98, 38)
         Me.BtnCopyFrom.TabIndex = 112
         Me.BtnCopyFrom.Text = "Copy From"
         '
@@ -607,9 +619,9 @@ Partial Class FormFGLineList
         Me.BtnDesign.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnDesign.ImageIndex = 12
         Me.BtnDesign.ImageList = Me.LargeImageCollection
-        Me.BtnDesign.Location = New System.Drawing.Point(1145, 2)
+        Me.BtnDesign.Location = New System.Drawing.Point(1536, 2)
         Me.BtnDesign.Name = "BtnDesign"
-        Me.BtnDesign.Size = New System.Drawing.Size(104, 33)
+        Me.BtnDesign.Size = New System.Drawing.Size(104, 38)
         Me.BtnDesign.TabIndex = 106
         Me.BtnDesign.Text = "Add Design"
         Me.BtnDesign.Visible = False
@@ -620,9 +632,9 @@ Partial Class FormFGLineList
         Me.BtnDropQuickMenu.DropDownControl = Me.PopupMenu1
         Me.BtnDropQuickMenu.ImageIndex = 17
         Me.BtnDropQuickMenu.ImageList = Me.LargeImageCollection
-        Me.BtnDropQuickMenu.Location = New System.Drawing.Point(1249, 2)
+        Me.BtnDropQuickMenu.Location = New System.Drawing.Point(1640, 2)
         Me.BtnDropQuickMenu.Name = "BtnDropQuickMenu"
-        Me.BtnDropQuickMenu.Size = New System.Drawing.Size(111, 33)
+        Me.BtnDropQuickMenu.Size = New System.Drawing.Size(111, 38)
         Me.BtnDropQuickMenu.TabIndex = 107
         Me.BtnDropQuickMenu.Text = "Quick Menu"
         '
@@ -691,7 +703,7 @@ Partial Class FormFGLineList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1362, 532)
+        Me.ClientSize = New System.Drawing.Size(1753, 532)
         Me.Controls.Add(Me.GCLineList)
         Me.Controls.Add(Me.PanelControlNavLineListBottom)
         Me.Controls.Add(Me.PanelControlNavLineList)
@@ -805,4 +817,5 @@ Partial Class FormFGLineList
     Friend WithEvents ProposeChangesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ViewHistoryProposeChangesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents BBQuickUpdate As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents BtnSetActualInStoreDate As DevExpress.XtraEditors.SimpleButton
 End Class

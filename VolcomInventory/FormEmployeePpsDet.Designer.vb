@@ -165,7 +165,6 @@ Partial Class FormEmployeePpsDet
         Me.CEJP = New DevExpress.XtraEditors.CheckEdit()
         Me.TxtPOB = New DevExpress.XtraEditors.TextEdit()
         Me.Label52 = New System.Windows.Forms.Label()
-        Me.TxtMobilePhone = New DevExpress.XtraEditors.TextEdit()
         Me.Label53 = New System.Windows.Forms.Label()
         Me.Label54 = New System.Windows.Forms.Label()
         Me.TxtPhone = New DevExpress.XtraEditors.TextEdit()
@@ -382,6 +381,11 @@ Partial Class FormEmployeePpsDet
         Me.MENote = New DevExpress.XtraEditors.MemoEdit()
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.ChangesProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.Label104 = New System.Windows.Forms.Label()
+        Me.TxtMobilePhone = New DevExpress.XtraEditors.TextEdit()
+        Me.TxtPersonalEmail = New DevExpress.XtraEditors.TextEdit()
+        Me.TxtPersonalEmailB = New DevExpress.XtraEditors.TextEdit()
+        Me.Label105 = New System.Windows.Forms.Label()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -487,7 +491,6 @@ Partial Class FormEmployeePpsDet
         CType(Me.TxtBPJSTK.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CEJP.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtPOB.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TxtMobilePhone.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtPhone.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtNpwp.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEPassport.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -648,6 +651,9 @@ Partial Class FormEmployeePpsDet
         CType(Me.MENote.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ChangesProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtMobilePhone.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtPersonalEmail.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtPersonalEmailB.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl1
@@ -1465,6 +1471,8 @@ Partial Class FormEmployeePpsDet
         '
         'GCDetailPropose
         '
+        Me.GCDetailPropose.Controls.Add(Me.TxtPersonalEmail)
+        Me.GCDetailPropose.Controls.Add(Me.Label104)
         Me.GCDetailPropose.Controls.Add(Me.PanelControl7)
         Me.GCDetailPropose.Controls.Add(Me.Label90)
         Me.GCDetailPropose.Controls.Add(Me.Label88)
@@ -1912,7 +1920,7 @@ Partial Class FormEmployeePpsDet
         'CEKoperasi
         '
         Me.CEKoperasi.EditValue = "no"
-        Me.CEKoperasi.Location = New System.Drawing.Point(653, 411)
+        Me.CEKoperasi.Location = New System.Drawing.Point(536, 411)
         Me.CEKoperasi.Name = "CEKoperasi"
         Me.CEKoperasi.Properties.Caption = "Koperasi Member"
         Me.CEKoperasi.Properties.ValueChecked = "yes"
@@ -1931,7 +1939,7 @@ Partial Class FormEmployeePpsDet
         '
         'LENPWPStatus
         '
-        Me.LENPWPStatus.Location = New System.Drawing.Point(484, 411)
+        Me.LENPWPStatus.Location = New System.Drawing.Point(379, 411)
         Me.LENPWPStatus.Name = "LENPWPStatus"
         Me.LENPWPStatus.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.LENPWPStatus.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_npwp_status", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("npwp_status", "NPWP Status")})
@@ -1941,7 +1949,7 @@ Partial Class FormEmployeePpsDet
         'Label76
         '
         Me.Label76.AutoSize = True
-        Me.Label76.Location = New System.Drawing.Point(408, 414)
+        Me.Label76.Location = New System.Drawing.Point(303, 414)
         Me.Label76.Name = "Label76"
         Me.Label76.Size = New System.Drawing.Size(38, 13)
         Me.Label76.TabIndex = 8936
@@ -2222,17 +2230,10 @@ Partial Class FormEmployeePpsDet
         Me.Label52.TabIndex = 8911
         Me.Label52.Text = "Place of Birth"
         '
-        'TxtMobilePhone
-        '
-        Me.TxtMobilePhone.Location = New System.Drawing.Point(484, 437)
-        Me.TxtMobilePhone.Name = "TxtMobilePhone"
-        Me.TxtMobilePhone.Size = New System.Drawing.Size(272, 20)
-        Me.TxtMobilePhone.TabIndex = 8916
-        '
         'Label53
         '
         Me.Label53.AutoSize = True
-        Me.Label53.Location = New System.Drawing.Point(408, 440)
+        Me.Label53.Location = New System.Drawing.Point(303, 440)
         Me.Label53.Name = "Label53"
         Me.Label53.Size = New System.Drawing.Size(70, 13)
         Me.Label53.TabIndex = 8927
@@ -2251,7 +2252,7 @@ Partial Class FormEmployeePpsDet
         '
         Me.TxtPhone.Location = New System.Drawing.Point(107, 437)
         Me.TxtPhone.Name = "TxtPhone"
-        Me.TxtPhone.Size = New System.Drawing.Size(286, 20)
+        Me.TxtPhone.Size = New System.Drawing.Size(179, 20)
         Me.TxtPhone.TabIndex = 8915
         '
         'Label55
@@ -2267,7 +2268,7 @@ Partial Class FormEmployeePpsDet
         '
         Me.TxtNpwp.Location = New System.Drawing.Point(107, 411)
         Me.TxtNpwp.Name = "TxtNpwp"
-        Me.TxtNpwp.Size = New System.Drawing.Size(286, 20)
+        Me.TxtNpwp.Size = New System.Drawing.Size(179, 20)
         Me.TxtNpwp.TabIndex = 8913
         '
         'DEPassport
@@ -3302,6 +3303,8 @@ Partial Class FormEmployeePpsDet
         '
         'GCDetailProposeB
         '
+        Me.GCDetailProposeB.Controls.Add(Me.TxtPersonalEmailB)
+        Me.GCDetailProposeB.Controls.Add(Me.Label105)
         Me.GCDetailProposeB.Controls.Add(Me.Label98)
         Me.GCDetailProposeB.Controls.Add(Me.Label99)
         Me.GCDetailProposeB.Controls.Add(Me.Label100)
@@ -3760,7 +3763,7 @@ Partial Class FormEmployeePpsDet
         '
         'LENPWPStatusB
         '
-        Me.LENPWPStatusB.Location = New System.Drawing.Point(484, 411)
+        Me.LENPWPStatusB.Location = New System.Drawing.Point(379, 411)
         Me.LENPWPStatusB.Name = "LENPWPStatusB"
         Me.LENPWPStatusB.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.LENPWPStatusB.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_npwp_status", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("npwp_status", "NPWP Status")})
@@ -3770,7 +3773,7 @@ Partial Class FormEmployeePpsDet
         'Label77
         '
         Me.Label77.AutoSize = True
-        Me.Label77.Location = New System.Drawing.Point(408, 414)
+        Me.Label77.Location = New System.Drawing.Point(303, 414)
         Me.Label77.Name = "Label77"
         Me.Label77.Size = New System.Drawing.Size(38, 13)
         Me.Label77.TabIndex = 8938
@@ -3891,7 +3894,7 @@ Partial Class FormEmployeePpsDet
         'CEKoperasiB
         '
         Me.CEKoperasiB.EditValue = "no"
-        Me.CEKoperasiB.Location = New System.Drawing.Point(653, 411)
+        Me.CEKoperasiB.Location = New System.Drawing.Point(536, 411)
         Me.CEKoperasiB.Name = "CEKoperasiB"
         Me.CEKoperasiB.Properties.Caption = "Koperasi Member"
         Me.CEKoperasiB.Properties.ReadOnly = True
@@ -4097,16 +4100,16 @@ Partial Class FormEmployeePpsDet
         '
         'TxtMobilePhoneB
         '
-        Me.TxtMobilePhoneB.Location = New System.Drawing.Point(484, 437)
+        Me.TxtMobilePhoneB.Location = New System.Drawing.Point(379, 437)
         Me.TxtMobilePhoneB.Name = "TxtMobilePhoneB"
         Me.TxtMobilePhoneB.Properties.ReadOnly = True
-        Me.TxtMobilePhoneB.Size = New System.Drawing.Size(272, 20)
+        Me.TxtMobilePhoneB.Size = New System.Drawing.Size(140, 20)
         Me.TxtMobilePhoneB.TabIndex = 8916
         '
         'Label19
         '
         Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(408, 440)
+        Me.Label19.Location = New System.Drawing.Point(303, 440)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(70, 13)
         Me.Label19.TabIndex = 8927
@@ -4126,7 +4129,7 @@ Partial Class FormEmployeePpsDet
         Me.TxtPhoneB.Location = New System.Drawing.Point(107, 437)
         Me.TxtPhoneB.Name = "TxtPhoneB"
         Me.TxtPhoneB.Properties.ReadOnly = True
-        Me.TxtPhoneB.Size = New System.Drawing.Size(286, 20)
+        Me.TxtPhoneB.Size = New System.Drawing.Size(179, 20)
         Me.TxtPhoneB.TabIndex = 8915
         '
         'Label24
@@ -4143,7 +4146,7 @@ Partial Class FormEmployeePpsDet
         Me.TxtNpwpB.Location = New System.Drawing.Point(107, 411)
         Me.TxtNpwpB.Name = "TxtNpwpB"
         Me.TxtNpwpB.Properties.ReadOnly = True
-        Me.TxtNpwpB.Size = New System.Drawing.Size(286, 20)
+        Me.TxtNpwpB.Size = New System.Drawing.Size(179, 20)
         Me.TxtNpwpB.TabIndex = 8913
         '
         'DEPassportB
@@ -4576,6 +4579,46 @@ Partial Class FormEmployeePpsDet
         Me.ChangesProvider1.ContainerControl = Me
         Me.ChangesProvider1.Icon = CType(resources.GetObject("ChangesProvider1.Icon"), System.Drawing.Icon)
         '
+        'Label104
+        '
+        Me.Label104.AutoSize = True
+        Me.Label104.Location = New System.Drawing.Point(535, 440)
+        Me.Label104.Name = "Label104"
+        Me.Label104.Size = New System.Drawing.Size(75, 13)
+        Me.Label104.TabIndex = 9032
+        Me.Label104.Text = "Personal Email"
+        '
+        'TxtMobilePhone
+        '
+        Me.TxtMobilePhone.Location = New System.Drawing.Point(379, 437)
+        Me.TxtMobilePhone.Name = "TxtMobilePhone"
+        Me.TxtMobilePhone.Size = New System.Drawing.Size(140, 20)
+        Me.TxtMobilePhone.TabIndex = 8916
+        '
+        'TxtPersonalEmail
+        '
+        Me.TxtPersonalEmail.Location = New System.Drawing.Point(616, 437)
+        Me.TxtPersonalEmail.Name = "TxtPersonalEmail"
+        Me.TxtPersonalEmail.Size = New System.Drawing.Size(140, 20)
+        Me.TxtPersonalEmail.TabIndex = 9033
+        '
+        'TxtPersonalEmailB
+        '
+        Me.TxtPersonalEmailB.Location = New System.Drawing.Point(616, 437)
+        Me.TxtPersonalEmailB.Name = "TxtPersonalEmailB"
+        Me.TxtPersonalEmailB.Properties.ReadOnly = True
+        Me.TxtPersonalEmailB.Size = New System.Drawing.Size(140, 20)
+        Me.TxtPersonalEmailB.TabIndex = 9035
+        '
+        'Label105
+        '
+        Me.Label105.AutoSize = True
+        Me.Label105.Location = New System.Drawing.Point(535, 440)
+        Me.Label105.Name = "Label105"
+        Me.Label105.Size = New System.Drawing.Size(75, 13)
+        Me.Label105.TabIndex = 9034
+        Me.Label105.Text = "Personal Email"
+        '
         'FormEmployeePpsDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -4700,7 +4743,6 @@ Partial Class FormEmployeePpsDet
         CType(Me.TxtBPJSTK.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CEJP.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtPOB.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TxtMobilePhone.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtPhone.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtNpwp.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEPassport.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -4869,6 +4911,9 @@ Partial Class FormEmployeePpsDet
         CType(Me.MENote.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ChangesProvider1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtMobilePhone.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtPersonalEmail.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtPersonalEmailB.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -4921,7 +4966,6 @@ Partial Class FormEmployeePpsDet
     Friend WithEvents Label51 As Label
     Friend WithEvents TxtPOB As DevExpress.XtraEditors.TextEdit
     Friend WithEvents Label52 As Label
-    Friend WithEvents TxtMobilePhone As DevExpress.XtraEditors.TextEdit
     Friend WithEvents Label53 As Label
     Friend WithEvents Label54 As Label
     Friend WithEvents TxtPhone As DevExpress.XtraEditors.TextEdit
@@ -5233,4 +5277,9 @@ Partial Class FormEmployeePpsDet
     Friend WithEvents PanelControl8 As DevExpress.XtraEditors.PanelControl
     Friend WithEvents PanelControl9 As DevExpress.XtraEditors.PanelControl
     Friend WithEvents TxtBPJSSehat As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents TxtPersonalEmail As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents Label104 As Label
+    Friend WithEvents TxtMobilePhone As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents TxtPersonalEmailB As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents Label105 As Label
 End Class

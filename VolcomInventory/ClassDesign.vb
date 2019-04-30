@@ -294,6 +294,7 @@
                 End If
 
                 If data.Columns(i).ColumnName.ToString = "EOS" Or data.Columns(i).ColumnName.ToString = "IN STORE DATE" _
+                Or data.Columns(i).ColumnName.ToString = "IN STORE DATE ACTUAL" _
                 Or data.Columns(i).ColumnName.ToString = "RET DATE" _
                 Or data.Columns(i).ColumnName.ToString = "ESTIMATE WH DATE" _
                 Then

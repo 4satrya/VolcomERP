@@ -238,6 +238,7 @@
             TxtEmailLocal.Text = datarow("email_lokal").ToString
             TxtEmailExternal.Text = datarow("email_external").ToString
             TxtOtherEmail.Text = datarow("email_other").ToString
+            TxtPersonalEmail.Text = datarow("email_personal").ToString
             MEAddress.Text = datarow("address_primary").ToString
             MEAddressBoarding.Text = datarow("address_additional").ToString
             id_marriage_stattus_db = data.Rows(0)("id_marriage_status").ToString

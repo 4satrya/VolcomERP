@@ -468,11 +468,11 @@ Public Class FormAccountingFakturScanSingle
 
     Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles BtnPrint.Click
         If LEType.EditValue.ToString = "1" Then
-            print(GCData, "")
+            print_raw(GCData, "")
         ElseIf LEType.EditValue.ToString = "2" Then
-            print(GCFK, "")
+            print_raw(GCFK, "")
         Else
-            print(GCDM, "")
+            print_raw(GCDM, "")
         End If
     End Sub
 

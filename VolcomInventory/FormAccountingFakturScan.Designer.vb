@@ -28,8 +28,19 @@ Partial Class FormAccountingFakturScan
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnUpdate = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnFakturDate = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.XTCData = New DevExpress.XtraTab.XtraTabControl()
+        Me.XTPList = New DevExpress.XtraTab.XtraTabPage()
+        Me.XTPInv = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCInv = New DevExpress.XtraGrid.GridControl()
+        Me.GVInv = New DevExpress.XtraGrid.Views.Grid.GridView()
         CType(Me.GCFak, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVFak, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.XTCData, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTCData.SuspendLayout()
+        Me.XTPList.SuspendLayout()
+        Me.XTPInv.SuspendLayout()
+        CType(Me.GCInv, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVInv, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GCFak
@@ -38,7 +49,7 @@ Partial Class FormAccountingFakturScan
         Me.GCFak.Location = New System.Drawing.Point(0, 0)
         Me.GCFak.MainView = Me.GVFak
         Me.GCFak.Name = "GCFak"
-        Me.GCFak.Size = New System.Drawing.Size(655, 363)
+        Me.GCFak.Size = New System.Drawing.Size(649, 335)
         Me.GCFak.TabIndex = 0
         Me.GCFak.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVFak})
         '
@@ -108,16 +119,64 @@ Partial Class FormAccountingFakturScan
         Me.GridColumnFakturDate.Visible = True
         Me.GridColumnFakturDate.VisibleIndex = 3
         '
+        'XTCData
+        '
+        Me.XTCData.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.XTCData.HeaderLocation = DevExpress.XtraTab.TabHeaderLocation.Bottom
+        Me.XTCData.Location = New System.Drawing.Point(0, 0)
+        Me.XTCData.Name = "XTCData"
+        Me.XTCData.SelectedTabPage = Me.XTPList
+        Me.XTCData.Size = New System.Drawing.Size(655, 363)
+        Me.XTCData.TabIndex = 1
+        Me.XTCData.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPList, Me.XTPInv})
+        '
+        'XTPList
+        '
+        Me.XTPList.Controls.Add(Me.GCFak)
+        Me.XTPList.Name = "XTPList"
+        Me.XTPList.Size = New System.Drawing.Size(649, 335)
+        Me.XTPList.Text = "List"
+        '
+        'XTPInv
+        '
+        Me.XTPInv.Controls.Add(Me.GCInv)
+        Me.XTPInv.Name = "XTPInv"
+        Me.XTPInv.Size = New System.Drawing.Size(649, 335)
+        Me.XTPInv.Text = "Sales Invoice"
+        '
+        'GCInv
+        '
+        Me.GCInv.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCInv.Location = New System.Drawing.Point(0, 0)
+        Me.GCInv.MainView = Me.GVInv
+        Me.GCInv.Name = "GCInv"
+        Me.GCInv.Size = New System.Drawing.Size(649, 335)
+        Me.GCInv.TabIndex = 0
+        Me.GCInv.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVInv})
+        '
+        'GVInv
+        '
+        Me.GVInv.GridControl = Me.GCInv
+        Me.GVInv.Name = "GVInv"
+        Me.GVInv.OptionsFind.AlwaysVisible = True
+        Me.GVInv.OptionsView.ShowGroupPanel = False
+        '
         'FormAccountingFakturScan
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(655, 363)
-        Me.Controls.Add(Me.GCFak)
+        Me.Controls.Add(Me.XTCData)
         Me.Name = "FormAccountingFakturScan"
         Me.Text = "E-Faktur"
         CType(Me.GCFak, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVFak, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.XTCData, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTCData.ResumeLayout(False)
+        Me.XTPList.ResumeLayout(False)
+        Me.XTPInv.ResumeLayout(False)
+        CType(Me.GCInv, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVInv, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -131,4 +190,9 @@ Partial Class FormAccountingFakturScan
     Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnUpdate As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnFakturDate As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents XTCData As DevExpress.XtraTab.XtraTabControl
+    Friend WithEvents XTPList As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents XTPInv As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents GCInv As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVInv As DevExpress.XtraGrid.Views.Grid.GridView
 End Class

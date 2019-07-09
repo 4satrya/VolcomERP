@@ -5,6 +5,17 @@
     Public id_dept As String = "-1"
     Private Sub FormAccountingFakturScan_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewTrans()
+
+        'cek user
+        Dim query As String = "SELECT * 
+        FROM tb_m_user u 
+        INNER JOIN tb_m_employee e ON e.id_employee = u.id_employee
+        INNER JOIN tb_m_departement d ON d.id_departement = e.id_departement
+        WHERE u.id_user=" + id_user + " AND d.is_office_dept=1 "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        If data.Rows.Count <= 0 Then
+            XTPInv.PageVisible = False
+        End If
     End Sub
 
     Sub viewTrans()

@@ -9,6 +9,7 @@
     Private Sub FormWHAWBillDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         load_awb()
     End Sub
+
     Sub load_awb()
         'TELength.EditValue = 0.00
         'TEWidth.EditValue = 0.00
@@ -200,14 +201,29 @@
 
             auto_cargo()
         Else 'edit
-            Dim query As String = "SELECT awb.id_cargo,awb.id_store,comp_c.comp_name AS cargo,awb.cargo_min_weight,awb.cargo_rate
-                                    ,awb.c_weight AS weight
-                                    ,awb.`c_tot_price` AS amount
-                                    ,awb.cargo_lead_time
-                                    ,comp_c.awb_rank
-                                    FROM tb_wh_awbill awb
-                                    INNER JOIN tb_m_comp comp_c ON comp_c.id_comp=awb.id_cargo 
-                                    WHERE awb.id_awbill='" & id_awb & "'"
+            'no edit
+            Dim query As String = ""
+
+            If FormWHAWBill.is_lock = "1" Then
+                query = "SELECT rate.id_cargo,rate.id_store,comp.comp_name AS cargo,rate.cargo_min_weight,rate.cargo_rate"
+                query += " ,IF(" + berat_terpakai.ToString + " < Rate.cargo_min_weight, Rate.cargo_min_weight, " + berat_terpakai.ToString + ") As weight"
+                query += " ,(If(" + berat_terpakai.ToString + "<rate.cargo_min_weight,rate.cargo_min_weight," + berat_terpakai.ToString + ") * cargo_rate) As amount"
+                query += " ,rate.cargo_lead_time"
+                query += " ,comp.awb_rank"
+                query += " FROM tb_wh_cargo_rate As rate"
+                query += " INNER JOIN tb_m_comp comp ON comp.id_comp=rate.id_cargo"
+                query += " WHERE rate.id_store='" + id_comp + "' AND rate.id_rate_type='" + id_awb_type + "'"
+                query += " ORDER BY amount ASC,awb_rank ASC"
+            Else
+                query = "SELECT awb.id_cargo,awb.id_store,comp_c.comp_name AS cargo,awb.cargo_min_weight,awb.cargo_rate
+                        ,awb.c_weight AS weight
+                        ,awb.`c_tot_price` AS amount
+                        ,awb.cargo_lead_time
+                        ,comp_c.awb_rank
+                        FROM tb_wh_awbill awb
+                        INNER JOIN tb_m_comp comp_c ON comp_c.id_comp=awb.id_cargo 
+                        WHERE awb.id_awbill='" & id_awb & "'"
+            End If
 
             Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
             GCCargoRate.DataSource = data
@@ -233,6 +249,7 @@
         auto_cargo()
         calculate_amount()
     End Sub
+
     Sub auto_cargo()
         If GVCargoRate.RowCount > 0 Then
             SLECargo.EditValue = Nothing
@@ -241,6 +258,7 @@
             SLVCargo.FocusedRowHandle = find_row(SLVCargo, "id_cargo", GVCargoRate.GetRowCellValue(0, "id_cargo").ToString)
         End If
     End Sub
+
     Sub calculate_amount()
         If SLECargo.EditValue = Nothing Then
             TEChargeRate.EditValue = 0

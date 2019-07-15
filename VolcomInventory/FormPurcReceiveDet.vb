@@ -91,7 +91,7 @@
         Dim query As String = ""
         If action = "ins" Then
             Dim po As New ClassPurcOrder()
-            query = po.queryOrderDetails(id_purc_order, "HAVING qty_remaining>0")
+            query = po.queryOrderDetails(id_purc_order, "HAVING qty_remaining>0 AND is_drop='2'")
             Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
             GCDetail.DataSource = data
 
@@ -171,7 +171,7 @@
 	            WHERE ret.id_purc_order=" + id_purc_order + " AND ret.id_report_status=6
 	            GROUP BY retd.id_item
             ) retd ON retd.id_item = pod.id_item
-            WHERE pod.id_purc_order=" + id_purc_order + "
+            WHERE pod.is_drop='2' AND pod.id_purc_order=" + id_purc_order + "
             GROUP BY pod.id_item "
         ElseIf action = "upd" Then
             query = "SELECT rd.id_purc_rec_det, rd.id_purc_rec, 

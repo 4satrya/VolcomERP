@@ -42,6 +42,8 @@ Partial Class FormMasterDesignCOPPD
         Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
         Me.TEAdditionalCost = New DevExpress.XtraEditors.TextEdit()
         Me.BUpdateVendor = New DevExpress.XtraEditors.SimpleButton()
+        Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
+        Me.TETargetCost = New DevExpress.XtraEditors.TextEdit()
         CType(Me.TEVendor.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEVendorName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -54,6 +56,7 @@ Partial Class FormMasterDesignCOPPD
         CType(Me.TEEcop.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureSeason.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEAdditionalCost.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TETargetCost.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LabelControl1
@@ -130,7 +133,7 @@ Partial Class FormMasterDesignCOPPD
         Me.PanelControl3.Controls.Add(Me.BtnCancel)
         Me.PanelControl3.Controls.Add(Me.BtnSave)
         Me.PanelControl3.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl3.Location = New System.Drawing.Point(0, 191)
+        Me.PanelControl3.Location = New System.Drawing.Point(0, 205)
         Me.PanelControl3.LookAndFeel.SkinName = "Blue"
         Me.PanelControl3.LookAndFeel.UseDefaultLookAndFeel = False
         Me.PanelControl3.Name = "PanelControl3"
@@ -244,7 +247,7 @@ Partial Class FormMasterDesignCOPPD
         'LabelControl4
         '
         Me.LabelControl4.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl4.Location = New System.Drawing.Point(12, 129)
+        Me.LabelControl4.Location = New System.Drawing.Point(12, 155)
         Me.LabelControl4.Name = "LabelControl4"
         Me.LabelControl4.Size = New System.Drawing.Size(99, 13)
         Me.LabelControl4.TabIndex = 8903
@@ -253,7 +256,7 @@ Partial Class FormMasterDesignCOPPD
         'TEEcop
         '
         Me.TEEcop.EditValue = ""
-        Me.TEEcop.Location = New System.Drawing.Point(138, 126)
+        Me.TEEcop.Location = New System.Drawing.Point(138, 152)
         Me.TEEcop.Name = "TEEcop"
         Me.TEEcop.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TEEcop.Properties.Appearance.Options.UseFont = True
@@ -271,7 +274,7 @@ Partial Class FormMasterDesignCOPPD
         'PictureSeason
         '
         Me.PictureSeason.EditValue = CType(resources.GetObject("PictureSeason.EditValue"), Object)
-        Me.PictureSeason.Location = New System.Drawing.Point(396, 78)
+        Me.PictureSeason.Location = New System.Drawing.Point(529, 103)
         Me.PictureSeason.Name = "PictureSeason"
         Me.PictureSeason.Properties.Appearance.BackColor = System.Drawing.Color.Transparent
         Me.PictureSeason.Properties.Appearance.Options.UseBackColor = True
@@ -283,7 +286,7 @@ Partial Class FormMasterDesignCOPPD
         'LabelControl5
         '
         Me.LabelControl5.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl5.Location = New System.Drawing.Point(12, 155)
+        Me.LabelControl5.Location = New System.Drawing.Point(12, 181)
         Me.LabelControl5.Name = "LabelControl5"
         Me.LabelControl5.Size = New System.Drawing.Size(72, 13)
         Me.LabelControl5.TabIndex = 8906
@@ -292,7 +295,7 @@ Partial Class FormMasterDesignCOPPD
         'TEAdditionalCost
         '
         Me.TEAdditionalCost.EditValue = ""
-        Me.TEAdditionalCost.Location = New System.Drawing.Point(138, 152)
+        Me.TEAdditionalCost.Location = New System.Drawing.Point(138, 178)
         Me.TEAdditionalCost.Name = "TEAdditionalCost"
         Me.TEAdditionalCost.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TEAdditionalCost.Properties.Appearance.Options.UseFont = True
@@ -319,11 +322,41 @@ Partial Class FormMasterDesignCOPPD
         Me.BUpdateVendor.TabStop = False
         Me.BUpdateVendor.Text = "update vendor"
         '
+        'LabelControl6
+        '
+        Me.LabelControl6.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl6.Location = New System.Drawing.Point(12, 129)
+        Me.LabelControl6.Name = "LabelControl6"
+        Me.LabelControl6.Size = New System.Drawing.Size(57, 13)
+        Me.LabelControl6.TabIndex = 8909
+        Me.LabelControl6.Text = "Target Cost"
+        '
+        'TETargetCost
+        '
+        Me.TETargetCost.EditValue = ""
+        Me.TETargetCost.Location = New System.Drawing.Point(138, 126)
+        Me.TETargetCost.Name = "TETargetCost"
+        Me.TETargetCost.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TETargetCost.Properties.Appearance.Options.UseFont = True
+        Me.TETargetCost.Properties.DisplayFormat.FormatString = "N2"
+        Me.TETargetCost.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.TETargetCost.Properties.EditFormat.FormatString = "N2"
+        Me.TETargetCost.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.TETargetCost.Properties.EditValueChangedDelay = 1
+        Me.TETargetCost.Properties.Mask.EditMask = "N2"
+        Me.TETargetCost.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
+        Me.TETargetCost.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.TETargetCost.Properties.ReadOnly = True
+        Me.TETargetCost.Size = New System.Drawing.Size(226, 20)
+        Me.TETargetCost.TabIndex = 8908
+        '
         'FormMasterDesignCOPPD
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(635, 229)
+        Me.ClientSize = New System.Drawing.Size(635, 243)
+        Me.Controls.Add(Me.LabelControl6)
+        Me.Controls.Add(Me.TETargetCost)
         Me.Controls.Add(Me.BUpdateVendor)
         Me.Controls.Add(Me.LabelControl5)
         Me.Controls.Add(Me.TEAdditionalCost)
@@ -361,6 +394,7 @@ Partial Class FormMasterDesignCOPPD
         CType(Me.TEEcop.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureSeason.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEAdditionalCost.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TETargetCost.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -387,4 +421,6 @@ Partial Class FormMasterDesignCOPPD
     Friend WithEvents LabelControl5 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents TEAdditionalCost As DevExpress.XtraEditors.TextEdit
     Friend WithEvents BUpdateVendor As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents LabelControl6 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents TETargetCost As DevExpress.XtraEditors.TextEdit
 End Class

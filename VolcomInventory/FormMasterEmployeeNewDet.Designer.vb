@@ -1852,6 +1852,8 @@ Partial Class FormMasterEmployeeNewDet
         Me.GVPosition.Name = "GVPosition"
         Me.GVPosition.OptionsBehavior.Editable = False
         Me.GVPosition.OptionsCustomization.AllowSort = False
+        Me.GVPosition.OptionsPrint.AutoWidth = False
+        Me.GVPosition.OptionsView.ColumnAutoWidth = False
         Me.GVPosition.OptionsView.ShowGroupPanel = False
         '
         'GridColumn4
@@ -1872,9 +1874,10 @@ Partial Class FormMasterEmployeeNewDet
         'GridColumn2
         '
         Me.GridColumn2.Caption = "Orign Sub Dept"
+        Me.GridColumn2.FieldName = "org_departement_sub"
         Me.GridColumn2.Name = "GridColumn2"
         Me.GridColumn2.Visible = True
-        Me.GridColumn2.VisibleIndex = 2
+        Me.GridColumn2.VisibleIndex = 6
         '
         'GridColumn6
         '
@@ -1905,9 +1908,10 @@ Partial Class FormMasterEmployeeNewDet
         'GridColumn3
         '
         Me.GridColumn3.Caption = "Sub Dept"
+        Me.GridColumn3.FieldName = "departement_sub"
         Me.GridColumn3.Name = "GridColumn3"
         Me.GridColumn3.Visible = True
-        Me.GridColumn3.VisibleIndex = 6
+        Me.GridColumn3.VisibleIndex = 2
         '
         'GridColumn9
         '

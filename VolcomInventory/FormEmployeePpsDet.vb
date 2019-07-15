@@ -131,6 +131,8 @@
         End If
 
         viewLookupQuery(LESubDepartement, query, index, "departement_sub", "id_departement_sub")
+
+        LESubDepartement.Properties.ForceInitialize()
     End Sub
 
     Sub viewSubDepartementB(ByVal id_departement As String, ByVal id_departement_sub As String)
@@ -533,8 +535,8 @@
             LEEmployeeStatus.ItemIndex = LEEmployeeStatus.Properties.GetDataSourceRowIndex("id_employee_status", data.Rows(0)("id_employee_status").ToString)
             DEEmployeeStatusStart.EditValue = data.Rows(0)("start_period")
             DEEmployeeStatusEnd.EditValue = data.Rows(0)("end_period")
-            LESubDepartement.ItemIndex = LESubDepartement.Properties.GetDataSourceRowIndex("id_departement_sub", data.Rows(0)("id_departement_sub").ToString)
             LEDepartement.ItemIndex = LEDepartement.Properties.GetDataSourceRowIndex("id_departement", data.Rows(0)("id_departement").ToString)
+            LESubDepartement.ItemIndex = LESubDepartement.Properties.GetDataSourceRowIndex("id_departement_sub", data.Rows(0)("id_departement_sub").ToString)
             LELevel.ItemIndex = LELevel.Properties.GetDataSourceRowIndex("id_employee_level", data.Rows(0)("id_employee_level").ToString)
             TxtPosition.EditValue = data.Rows(0)("employee_position").ToString
             DEEffectiveDate.EditValue = data.Rows(0)("employee_position_date")
@@ -621,8 +623,8 @@
                 LEEmployeeStatus.ItemIndex = LEEmployeeStatus.Properties.GetDataSourceRowIndex("id_employee_status", data.Rows(0)("id_employee_status").ToString)
                 DEEmployeeStatusStart.EditValue = data.Rows(0)("start_period")
                 DEEmployeeStatusEnd.EditValue = data.Rows(0)("end_period")
-                LESubDepartement.ItemIndex = LESubDepartement.Properties.GetDataSourceRowIndex("id_departement_sub", data.Rows(0)("id_departement_sub").ToString)
                 LEDepartement.ItemIndex = LEDepartement.Properties.GetDataSourceRowIndex("id_departement", data.Rows(0)("id_departement").ToString)
+                LESubDepartement.ItemIndex = LESubDepartement.Properties.GetDataSourceRowIndex("id_departement_sub", data.Rows(0)("id_departement_sub").ToString)
                 LELevel.ItemIndex = LELevel.Properties.GetDataSourceRowIndex("id_employee_level", data.Rows(0)("id_employee_level").ToString)
                 TxtPosition.EditValue = data.Rows(0)("employee_position").ToString
                 DEEffectiveDate.EditValue = data.Rows(0)("employee_position_date")
@@ -729,10 +731,10 @@
             LEEmployeeStatusB.ReadOnly = True
             DEEmployeeStatusStartB.EditValue = data.Rows(0)("start_period")
             DEEmployeeStatusEndB.EditValue = data.Rows(0)("end_period")
-            LESubDepartementB.ItemIndex = LESubDepartementB.Properties.GetDataSourceRowIndex("id_departement_sub", data.Rows(0)("id_departement_sub").ToString)
-            LESubDepartementB.ReadOnly = True
             LEDepartementB.ItemIndex = LEDepartementB.Properties.GetDataSourceRowIndex("id_departement", data.Rows(0)("id_departement").ToString)
             LEDepartementB.ReadOnly = True
+            LESubDepartementB.ItemIndex = LESubDepartementB.Properties.GetDataSourceRowIndex("id_departement_sub", data.Rows(0)("id_departement_sub").ToString)
+            LESubDepartementB.ReadOnly = True
             LELevelB.ItemIndex = LELevelB.Properties.GetDataSourceRowIndex("id_employee_level", data.Rows(0)("id_employee_level").ToString)
             LELevelB.ReadOnly = True
             TxtPositionB.EditValue = data.Rows(0)("employee_position").ToString

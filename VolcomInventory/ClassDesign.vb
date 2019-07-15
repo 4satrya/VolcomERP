@@ -455,7 +455,9 @@
                     And Not data.Columns(i).ColumnName.ToString = "CURRENCY ORIGIN_Prc" _
                     And Not data.Columns(i).ColumnName.ToString = "MSRP_Prc" _
                        And Not data.Columns(i).ColumnName.ToString = "MSRP IN RP_Prc" _
-                       And Not data.Columns(i).ColumnName.ToString = "TARGET PRICE BASE ON MARKUP_Prc" Then
+                       And Not data.Columns(i).ColumnName.ToString = "TARGET PRICE BASE ON MARKUP_Prc" _
+                       And Not data.Columns(i).ColumnName.ToString = "TARGET PRICE_Prc" _
+                       And Not data.Columns(i).ColumnName.ToString = "TARGET COST_Prc" Then
                     BGVParam.Columns(data.Columns(i).ColumnName.ToString).SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum
                     BGVParam.Columns(data.Columns(i).ColumnName.ToString).SummaryItem.DisplayFormat = "{0:n2}"
 
@@ -554,6 +556,7 @@
         BGVParam.Columns("id_prod_demand_design_line").Visible = False
         BGVParam.Columns("id_prod_demand_design_line_upd").Visible = False
         BGVParam.Columns("id_prod_demand_design_line_final").Visible = False
+        BGVParam.Columns("TARGET PRICE BASE ON MARKUP_Prc").Visible = False
 
 
         'hide band

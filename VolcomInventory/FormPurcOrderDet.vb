@@ -153,6 +153,9 @@ WHERE po.id_purc_order='" & id_po & "'"
                 LEOrderTerm.Enabled = False
                 LEShipVia.Enabled = False
                 '
+                TEVATPercent.Enabled = False
+                DEDueDate.Enabled = False
+                '
                 Dim rmt As String = "-1"
                 If SLEPurcType.EditValue.ToString = "1" Then
                     rmt = "139"
@@ -168,10 +171,12 @@ WHERE po.id_purc_order='" & id_po & "'"
                     BtnSave.Visible = True
                 End If
                 GridColumnBudgetStatus.Visible = False
+                PCPrice.Visible = False
             Else 'not yet submitted
                 BMark.Visible = False
                 BSubmit.Visible = True
                 GridColumnBudgetStatus.Visible = True
+                PCPrice.Visible = True
             End If
         End If
     End Sub

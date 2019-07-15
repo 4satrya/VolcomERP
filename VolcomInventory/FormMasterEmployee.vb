@@ -15,6 +15,13 @@
         Dim query As String = "CALL view_employee('" + cond_param + "', '2')"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCEmployee.DataSource = data
+        GVEmployee.Columns("employee_no_rek").BestFit()
+        GVEmployee.Columns("employee_rek_name").BestFit()
+        GVEmployee.Columns("email_lokal").BestFit()
+        GVEmployee.Columns("email_external").BestFit()
+        GVEmployee.Columns("email_other").BestFit()
+        GVEmployee.Columns("email_personal").BestFit()
+
         '
         If Not is_salary = "1" Then
             GVEmployee.Columns("basic_salary").Visible = False

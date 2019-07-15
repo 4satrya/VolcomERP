@@ -59,7 +59,7 @@ Public Class ReportProductionWO
         Dim query = "SELECT dsg.design_code_import,po.`id_po_type`,pd.prod_demand_number,a.id_report_status,h.report_status,a.id_prod_order,a.id_prod_order_wo,a.id_ovh_price,a.id_payment, 
 g.payment,a.id_currency,a.prod_order_wo_kurs,a.prod_order_wo_note, b.id_comp_contact, (SELECT id_own_company_contact FROM tb_opt) AS id_comp_contact_ship_to,
 a.prod_order_wo_number,a.id_ovh_price,j.overhead,
-DATE_FORMAT(a.prod_order_wo_date,'%Y-%m-%d') AS prod_order_wo_datex,a.prod_order_wo_lead_time,a.prod_order_wo_top,a.prod_order_wo_vat 
+DATE_FORMAT(po.prod_order_date,'%Y-%m-%d') AS prod_order_wo_datex,a.prod_order_wo_lead_time,a.prod_order_wo_top,a.prod_order_wo_vat 
 ,dsg.design_code_import
 ,po_type.`po_type`,po.prod_order_number,po.prod_order_note 
 FROM tb_prod_order_wo a INNER JOIN tb_m_ovh_price b ON a.id_ovh_price=b.id_ovh_price 

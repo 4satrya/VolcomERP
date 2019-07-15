@@ -12,6 +12,8 @@
     End Sub
 
     Private Sub FormMasterDesignCOPPD_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim id_season As Integer = FormMasterDesignCOP.BGVDesign.GetFocusedRowCellValue("id_season")
+
         TEEcop.EditValue = 0.00
         TEKurs.EditValue = 1.0
         TEAdditionalCost.EditValue = 0.00
@@ -40,8 +42,36 @@ WHERE pd.`id_report_status` != '5' AND pdd.`id_design`='" & id_design & "' AND p
             BUpdateVendor.Visible = True
             BtnSave.Visible = False
         Else
-            BUpdateVendor.Visible = False
-            BtnSave.Visible = True
+            'check if target cost already input
+            Dim target_ok As Boolean = True
+
+            If id_season >= get_opt_prod_field("ecop_limit_start") Then
+                Dim query_target As String = "SELECT dsg.id_fg_line_plan,(fg_lp.`target_price`/fg_lp.`mark_up`) AS target_cost
+FROM tb_m_design dsg
+INNER JOIN tb_fg_line_plan fg_lp ON fg_lp.`id_fg_line_plan`=dsg.`id_fg_line_plan` 
+WHERE dsg.id_design='" & id_design & "'"
+                Dim plan_dt As DataTable = execute_query(query_target, -1, True, "", "", "", "")
+                If plan_dt.Rows.Count > 0 Then
+                    If plan_dt.Rows(0)("target_cost") = 0 Then
+                        target_ok = False
+                    Else
+                        target_ok = True
+                    End If
+                Else
+                    target_ok = False
+                End If
+            End If
+            '
+            If target_ok = True Then
+                BUpdateVendor.Visible = False
+                BtnSave.Visible = True
+            Else
+                'warningCustom("Estimasti Cost melewati batas target cost. " & vbNewLine & "Untuk melanjutkan, silahkan negosiasi dengan vendor atau koordinasikan dengan Merchandise dan Design")
+                warningCustom("Target cost belum terdaftar, silahkan hubungi merchandise.")
+                '
+                BUpdateVendor.Visible = False
+                BtnSave.Visible = False
+            End If
         End If
     End Sub
 

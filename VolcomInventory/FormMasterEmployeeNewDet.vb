@@ -83,6 +83,7 @@
         query += "ORDER BY pos.id_employee_position DESC "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCPosition.DataSource = data
+        GVPosition.BestFitColumns()
         If GVPosition.RowCount > 0 Then
             BtnDeletePosition.Enabled = True
         Else

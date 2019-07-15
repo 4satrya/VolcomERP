@@ -6,6 +6,12 @@
     Private Sub FormAccountingFakturScan_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewTrans()
 
+        'invoice
+        Dim data_dt As DataTable = execute_query("SELECT DATE(NOW()) AS `dt`", -1, True, "", "", "", "")
+        DEFrom.EditValue = data_dt.Rows(0)("dt")
+        DEUntil.EditValue = data_dt.Rows(0)("dt")
+        viewStore()
+
         'cek user
         Dim query As String = "SELECT * 
         FROM tb_m_user u 
@@ -23,6 +29,13 @@
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCFak.DataSource = data
         check_menu()
+    End Sub
+
+    Sub viewStore()
+        Dim query As String = "SELECT 0 AS `id_comp`, 'All' AS `comp_number`, 'All Store' AS `comp_name`, 'All Store' AS `comp`
+        UNION
+        SELECT c.id_comp, c.comp_number, c.comp_name, CONCAT(c.comp_number, ' - ', c.comp_name) AS `comp` FROM tb_m_comp c WHERE c.id_comp_cat=6 "
+        viewSearchLookupQuery(SLEStore, query, "id_comp", "comp", "id_comp")
     End Sub
 
     Private Sub FormAccountingFakturScan_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated

@@ -7,6 +7,11 @@
         GCItemList.DataSource = dt
         BGVItemList.BestFitColumns()
         '
+        If Not FormMasterDesignCOPPropose.LECOPType.EditValue.ToString = "1" Then
+            GBBefore.Visible = False
+            GBAfter.Caption = "Propose"
+        End If
+        '
         Dim query As String = "SELECT copp.`number`,copp.`note`,copp.`id_report_status`,copp.`created_date`,emp.`employee_name`,typ.`cop_propose_type` FROM `tb_design_cop_propose` copp
 INNER JOIN tb_m_user usr ON usr.`id_user`=copp.`created_by`
 INNER JOIN tb_m_employee emp ON emp.`id_employee`=usr.`id_employee`

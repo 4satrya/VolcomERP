@@ -669,7 +669,7 @@ Public Class FormSalesReturnQCDet
             If confirm = Windows.Forms.DialogResult.Yes Then
                 Cursor = Cursors.WaitCursor
                 BtnSave.Enabled = False
-                Dim sales_return_qc_note As String = MENote.Text
+                Dim sales_return_qc_note As String = addSlashes(MENote.Text)
                 Dim id_pl_category As String = LEPLCategory.EditValue.ToString
 
                 If action = "ins" Then

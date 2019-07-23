@@ -45,6 +45,7 @@ Partial Public Class ReportPayrollAll
         Me.GCBasicSalaryDW = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.GBGrandTotal = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         Me.GCGrandTotal = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.GCSubDepartement = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.RICEPending = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.RICESelect = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.XrLabel1 = New DevExpress.XtraReports.UI.XRLabel()
@@ -140,10 +141,11 @@ Partial Public Class ReportPayrollAll
         Me.GVPayroll.BandPanelRowHeight = 16
         Me.GVPayroll.Bands.AddRange(New DevExpress.XtraGrid.Views.BandedGrid.GridBand() {Me.GBEmployee, Me.GBWorkingDays, Me.GBSalary, Me.GBDW, Me.GBGrandTotal})
         Me.GVPayroll.ColumnPanelRowHeight = 32
-        Me.GVPayroll.Columns.AddRange(New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn() {Me.GCDepartement, Me.GCNIP, Me.GCName, Me.GCPosition, Me.GCStatus, Me.GCWorkingDays, Me.GCActualWorkingDays, Me.GCOvertimeHours, Me.GCTotalTHP, Me.GCTotalAdjustment, Me.GCTotalPaymentOvertime, Me.GCTotalDeduction, Me.GCActualWorkingDaysDW, Me.GCBasicSalaryDW, Me.GCGrandTotal})
+        Me.GVPayroll.Columns.AddRange(New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn() {Me.GCDepartement, Me.GCSubDepartement, Me.GCNIP, Me.GCName, Me.GCPosition, Me.GCStatus, Me.GCWorkingDays, Me.GCActualWorkingDays, Me.GCOvertimeHours, Me.GCTotalTHP, Me.GCTotalAdjustment, Me.GCTotalPaymentOvertime, Me.GCTotalDeduction, Me.GCActualWorkingDaysDW, Me.GCBasicSalaryDW, Me.GCGrandTotal})
         Me.GVPayroll.GridControl = Me.GCPayroll
-        Me.GVPayroll.GroupCount = 1
-        Me.GVPayroll.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "tot_thp", Me.GCTotalTHP, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_adjustment", Me.GCTotalAdjustment, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_deduction", Me.GCTotalDeduction, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_ot_wages", Me.GCTotalPaymentOvertime, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "grand_total", Me.GCGrandTotal, "{0:N0}")})
+        Me.GVPayroll.GroupCount = 2
+        Me.GVPayroll.GroupFormat = "{1} {2}"
+        Me.GVPayroll.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "tot_thp", Me.GCTotalTHP, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "total_adjustment", Me.GCTotalAdjustment, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "total_deduction", Me.GCTotalDeduction, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "total_ot_wages", Me.GCTotalPaymentOvertime, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "grand_total", Me.GCGrandTotal, "{0:N0}")})
         Me.GVPayroll.Name = "GVPayroll"
         Me.GVPayroll.OptionsBehavior.AutoExpandAllGroups = True
         Me.GVPayroll.OptionsMenu.ShowConditionalFormattingItem = True
@@ -151,7 +153,7 @@ Partial Public Class ReportPayrollAll
         Me.GVPayroll.OptionsView.GroupFooterShowMode = DevExpress.XtraGrid.Views.Grid.GroupFooterShowMode.VisibleAlways
         Me.GVPayroll.OptionsView.ShowFooter = True
         Me.GVPayroll.OptionsView.ShowGroupPanel = False
-        Me.GVPayroll.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GCDepartement, DevExpress.Data.ColumnSortOrder.Ascending)})
+        Me.GVPayroll.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GCDepartement, DevExpress.Data.ColumnSortOrder.Ascending), New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GCSubDepartement, DevExpress.Data.ColumnSortOrder.Ascending)})
         '
         'GBEmployee
         '
@@ -164,7 +166,7 @@ Partial Public Class ReportPayrollAll
         Me.GBEmployee.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left
         Me.GBEmployee.Name = "GBEmployee"
         Me.GBEmployee.VisibleIndex = 0
-        Me.GBEmployee.Width = 496
+        Me.GBEmployee.Width = 512
         '
         'GCNIP
         '
@@ -174,7 +176,7 @@ Partial Public Class ReportPayrollAll
         Me.GCNIP.Name = "GCNIP"
         Me.GCNIP.OptionsColumn.AllowEdit = False
         Me.GCNIP.Visible = True
-        Me.GCNIP.Width = 86
+        Me.GCNIP.Width = 107
         '
         'GCName
         '
@@ -182,11 +184,11 @@ Partial Public Class ReportPayrollAll
         Me.GCName.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
         Me.GCName.Caption = "Employee"
         Me.GCName.FieldName = "employee_name"
-        Me.GCName.MinWidth = 200
+        Me.GCName.MinWidth = 195
         Me.GCName.Name = "GCName"
         Me.GCName.OptionsColumn.AllowEdit = False
         Me.GCName.Visible = True
-        Me.GCName.Width = 200
+        Me.GCName.Width = 195
         '
         'GCDepartement
         '
@@ -227,7 +229,7 @@ Partial Public Class ReportPayrollAll
         Me.GBWorkingDays.Columns.Add(Me.GCOvertimeHours)
         Me.GBWorkingDays.Name = "GBWorkingDays"
         Me.GBWorkingDays.VisibleIndex = 1
-        Me.GBWorkingDays.Width = 130
+        Me.GBWorkingDays.Width = 116
         '
         'GCWorkingDays
         '
@@ -240,7 +242,7 @@ Partial Public Class ReportPayrollAll
         Me.GCWorkingDays.Name = "GCWorkingDays"
         Me.GCWorkingDays.OptionsColumn.AllowEdit = False
         Me.GCWorkingDays.Visible = True
-        Me.GCWorkingDays.Width = 40
+        Me.GCWorkingDays.Width = 35
         '
         'GCActualWorkingDays
         '
@@ -253,7 +255,7 @@ Partial Public Class ReportPayrollAll
         Me.GCActualWorkingDays.Name = "GCActualWorkingDays"
         Me.GCActualWorkingDays.OptionsColumn.AllowEdit = False
         Me.GCActualWorkingDays.Visible = True
-        Me.GCActualWorkingDays.Width = 40
+        Me.GCActualWorkingDays.Width = 35
         '
         'GCOvertimeHours
         '
@@ -266,7 +268,7 @@ Partial Public Class ReportPayrollAll
         Me.GCOvertimeHours.Name = "GCOvertimeHours"
         Me.GCOvertimeHours.OptionsColumn.AllowEdit = False
         Me.GCOvertimeHours.Visible = True
-        Me.GCOvertimeHours.Width = 50
+        Me.GCOvertimeHours.Width = 46
         '
         'GBSalary
         '
@@ -278,7 +280,7 @@ Partial Public Class ReportPayrollAll
         Me.GBSalary.Columns.Add(Me.GCTotalDeduction)
         Me.GBSalary.Name = "GBSalary"
         Me.GBSalary.VisibleIndex = 2
-        Me.GBSalary.Width = 260
+        Me.GBSalary.Width = 232
         '
         'GCTotalTHP
         '
@@ -292,7 +294,7 @@ Partial Public Class ReportPayrollAll
         Me.GCTotalTHP.OptionsColumn.AllowEdit = False
         Me.GCTotalTHP.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "tot_thp", "{0:N0}")})
         Me.GCTotalTHP.Visible = True
-        Me.GCTotalTHP.Width = 65
+        Me.GCTotalTHP.Width = 57
         '
         'GCTotalAdjustment
         '
@@ -306,7 +308,7 @@ Partial Public Class ReportPayrollAll
         Me.GCTotalAdjustment.OptionsColumn.AllowEdit = False
         Me.GCTotalAdjustment.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_adjustment", "{0:N0}")})
         Me.GCTotalAdjustment.Visible = True
-        Me.GCTotalAdjustment.Width = 65
+        Me.GCTotalAdjustment.Width = 57
         '
         'GCTotalPaymentOvertime
         '
@@ -320,7 +322,7 @@ Partial Public Class ReportPayrollAll
         Me.GCTotalPaymentOvertime.OptionsColumn.AllowEdit = False
         Me.GCTotalPaymentOvertime.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_ot_wages", "{0:N0}")})
         Me.GCTotalPaymentOvertime.Visible = True
-        Me.GCTotalPaymentOvertime.Width = 65
+        Me.GCTotalPaymentOvertime.Width = 57
         '
         'GCTotalDeduction
         '
@@ -334,7 +336,7 @@ Partial Public Class ReportPayrollAll
         Me.GCTotalDeduction.OptionsColumn.AllowEdit = False
         Me.GCTotalDeduction.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_deduction", "{0:N0}")})
         Me.GCTotalDeduction.Visible = True
-        Me.GCTotalDeduction.Width = 65
+        Me.GCTotalDeduction.Width = 61
         '
         'GBDW
         '
@@ -342,7 +344,7 @@ Partial Public Class ReportPayrollAll
         Me.GBDW.Columns.Add(Me.GCBasicSalaryDW)
         Me.GBDW.Name = "GBDW"
         Me.GBDW.VisibleIndex = 3
-        Me.GBDW.Width = 150
+        Me.GBDW.Width = 134
         '
         'GCActualWorkingDaysDW
         '
@@ -355,6 +357,7 @@ Partial Public Class ReportPayrollAll
         Me.GCActualWorkingDaysDW.Name = "GCActualWorkingDaysDW"
         Me.GCActualWorkingDaysDW.OptionsColumn.AllowEdit = False
         Me.GCActualWorkingDaysDW.Visible = True
+        Me.GCActualWorkingDaysDW.Width = 66
         '
         'GCBasicSalaryDW
         '
@@ -365,13 +368,14 @@ Partial Public Class ReportPayrollAll
         Me.GCBasicSalaryDW.Name = "GCBasicSalaryDW"
         Me.GCBasicSalaryDW.OptionsColumn.AllowEdit = False
         Me.GCBasicSalaryDW.Visible = True
+        Me.GCBasicSalaryDW.Width = 68
         '
         'GBGrandTotal
         '
         Me.GBGrandTotal.Columns.Add(Me.GCGrandTotal)
         Me.GBGrandTotal.Name = "GBGrandTotal"
         Me.GBGrandTotal.VisibleIndex = 4
-        Me.GBGrandTotal.Width = 65
+        Me.GBGrandTotal.Width = 60
         '
         'GCGrandTotal
         '
@@ -385,7 +389,13 @@ Partial Public Class ReportPayrollAll
         Me.GCGrandTotal.OptionsColumn.AllowEdit = False
         Me.GCGrandTotal.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "grand_total", "{0:N0}")})
         Me.GCGrandTotal.Visible = True
-        Me.GCGrandTotal.Width = 65
+        Me.GCGrandTotal.Width = 60
+        '
+        'GCSubDepartement
+        '
+        Me.GCSubDepartement.Caption = "Sub Departement"
+        Me.GCSubDepartement.FieldName = "departement_sub"
+        Me.GCSubDepartement.Name = "GCSubDepartement"
         '
         'RICEPending
         '
@@ -404,7 +414,7 @@ Partial Public Class ReportPayrollAll
         'XrLabel1
         '
         Me.XrLabel1.Font = New System.Drawing.Font("Tahoma", 9.75!)
-        Me.XrLabel1.LocationFloat = New DevExpress.Utils.PointFloat(898.9992!, 32.99999!)
+        Me.XrLabel1.LocationFloat = New DevExpress.Utils.PointFloat(898.9996!, 33.99998!)
         Me.XrLabel1.Name = "XrLabel1"
         Me.XrLabel1.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel1.SizeF = New System.Drawing.SizeF(60.0!, 23.0!)
@@ -416,7 +426,7 @@ Partial Public Class ReportPayrollAll
         'XrLabel2
         '
         Me.XrLabel2.Font = New System.Drawing.Font("Tahoma", 9.75!)
-        Me.XrLabel2.LocationFloat = New DevExpress.Utils.PointFloat(898.9991!, 56.00001!)
+        Me.XrLabel2.LocationFloat = New DevExpress.Utils.PointFloat(898.9995!, 57.0!)
         Me.XrLabel2.Name = "XrLabel2"
         Me.XrLabel2.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel2.SizeF = New System.Drawing.SizeF(60.0!, 23.0!)
@@ -428,7 +438,7 @@ Partial Public Class ReportPayrollAll
         'XrLabel3
         '
         Me.XrLabel3.Font = New System.Drawing.Font("Tahoma", 9.75!)
-        Me.XrLabel3.LocationFloat = New DevExpress.Utils.PointFloat(958.9999!, 32.99999!)
+        Me.XrLabel3.LocationFloat = New DevExpress.Utils.PointFloat(959.0002!, 33.99998!)
         Me.XrLabel3.Name = "XrLabel3"
         Me.XrLabel3.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel3.SizeF = New System.Drawing.SizeF(15.0!, 23.0!)
@@ -440,7 +450,7 @@ Partial Public Class ReportPayrollAll
         'XrLabel4
         '
         Me.XrLabel4.Font = New System.Drawing.Font("Tahoma", 9.75!)
-        Me.XrLabel4.LocationFloat = New DevExpress.Utils.PointFloat(958.9999!, 56.00001!)
+        Me.XrLabel4.LocationFloat = New DevExpress.Utils.PointFloat(959.0002!, 57.0!)
         Me.XrLabel4.Name = "XrLabel4"
         Me.XrLabel4.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel4.SizeF = New System.Drawing.SizeF(15.0!, 23.0!)
@@ -452,7 +462,7 @@ Partial Public Class ReportPayrollAll
         'XLType
         '
         Me.XLType.Font = New System.Drawing.Font("Tahoma", 9.75!)
-        Me.XLType.LocationFloat = New DevExpress.Utils.PointFloat(973.9999!, 32.99999!)
+        Me.XLType.LocationFloat = New DevExpress.Utils.PointFloat(974.0002!, 33.99998!)
         Me.XLType.Name = "XLType"
         Me.XLType.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XLType.SizeF = New System.Drawing.SizeF(145.0!, 23.0!)
@@ -464,7 +474,7 @@ Partial Public Class ReportPayrollAll
         'XLLocation
         '
         Me.XLLocation.Font = New System.Drawing.Font("Tahoma", 9.75!)
-        Me.XLLocation.LocationFloat = New DevExpress.Utils.PointFloat(973.9999!, 56.00001!)
+        Me.XLLocation.LocationFloat = New DevExpress.Utils.PointFloat(974.0002!, 57.0!)
         Me.XLLocation.Name = "XLLocation"
         Me.XLLocation.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XLLocation.SizeF = New System.Drawing.SizeF(144.9993!, 23.0!)
@@ -483,7 +493,7 @@ Partial Public Class ReportPayrollAll
         'XLTitle
         '
         Me.XLTitle.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Bold)
-        Me.XLTitle.LocationFloat = New DevExpress.Utils.PointFloat(220.0!, 32.99999!)
+        Me.XLTitle.LocationFloat = New DevExpress.Utils.PointFloat(220.0004!, 33.99998!)
         Me.XLTitle.Name = "XLTitle"
         Me.XLTitle.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XLTitle.SizeF = New System.Drawing.SizeF(678.9993!, 23.0!)
@@ -495,7 +505,7 @@ Partial Public Class ReportPayrollAll
         'XLPeriod
         '
         Me.XLPeriod.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold)
-        Me.XLPeriod.LocationFloat = New DevExpress.Utils.PointFloat(898.9991!, 10.00001!)
+        Me.XLPeriod.LocationFloat = New DevExpress.Utils.PointFloat(898.9995!, 11.0!)
         Me.XLPeriod.Name = "XLPeriod"
         Me.XLPeriod.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XLPeriod.SizeF = New System.Drawing.SizeF(220.0!, 23.0!)
@@ -506,7 +516,7 @@ Partial Public Class ReportPayrollAll
         '
         'XrLine1
         '
-        Me.XrLine1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 79.0!)
+        Me.XrLine1.LocationFloat = New DevExpress.Utils.PointFloat(0.0004053116!, 79.99998!)
         Me.XrLine1.Name = "XrLine1"
         Me.XrLine1.SizeF = New System.Drawing.SizeF(1119.0!, 20.0!)
         '
@@ -514,7 +524,7 @@ Partial Public Class ReportPayrollAll
         '
         Me.XrPictureBox1.AnchorHorizontal = DevExpress.XtraReports.UI.HorizontalAnchorStyles.Left
         Me.XrPictureBox1.Image = CType(resources.GetObject("XrPictureBox1.Image"), System.Drawing.Image)
-        Me.XrPictureBox1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 21.99999!)
+        Me.XrPictureBox1.LocationFloat = New DevExpress.Utils.PointFloat(0.0004053116!, 22.99999!)
         Me.XrPictureBox1.Name = "XrPictureBox1"
         Me.XrPictureBox1.SizeF = New System.Drawing.SizeF(220.0!, 41.15!)
         Me.XrPictureBox1.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage
@@ -548,7 +558,7 @@ Partial Public Class ReportPayrollAll
         'ReportHeader
         '
         Me.ReportHeader.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLine1, Me.XLLocation, Me.XrLabel2, Me.XLType, Me.XLTitle, Me.XLPeriod, Me.XrLabel4, Me.XrLabel3, Me.XrPictureBox1, Me.XrLabel1})
-        Me.ReportHeader.HeightF = 99.0!
+        Me.ReportHeader.HeightF = 100.0!
         Me.ReportHeader.Name = "ReportHeader"
         '
         'ReportFooter
@@ -654,4 +664,5 @@ Partial Public Class ReportPayrollAll
     Friend WithEvents XrTable1 As DevExpress.XtraReports.UI.XRTable
     Friend WithEvents XrTableRow1 As DevExpress.XtraReports.UI.XRTableRow
     Friend WithEvents XrTableCell13 As DevExpress.XtraReports.UI.XRTableCell
+    Friend WithEvents GCSubDepartement As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
 End Class

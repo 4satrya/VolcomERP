@@ -37,12 +37,12 @@ Partial Public Class ReportProductionHOAttachment
         Me.GridColumnsize = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnqty_pl_total = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnho_status = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnbalance_rec = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.TopMargin = New DevExpress.XtraReports.UI.TopMarginBand()
         Me.BottomMargin = New DevExpress.XtraReports.UI.BottomMarginBand()
         Me.ReportHeader = New DevExpress.XtraReports.UI.ReportHeaderBand()
         Me.XrLabel1 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.GridColumnbalance_rec = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GCList, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVList, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -113,7 +113,6 @@ Partial Public Class ReportProductionHOAttachment
         Me.GridColumnqty_po.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnqty_po.FieldName = "qty_po"
         Me.GridColumnqty_po.Name = "GridColumnqty_po"
-        Me.GridColumnqty_po.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_po", "{0:N0}")})
         Me.GridColumnqty_po.Visible = True
         Me.GridColumnqty_po.VisibleIndex = 5
         Me.GridColumnqty_po.Width = 130
@@ -125,7 +124,6 @@ Partial Public Class ReportProductionHOAttachment
         Me.GridColumnqty_rec.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnqty_rec.FieldName = "qty_rec"
         Me.GridColumnqty_rec.Name = "GridColumnqty_rec"
-        Me.GridColumnqty_rec.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_rec", "{0:N0}")})
         Me.GridColumnqty_rec.Visible = True
         Me.GridColumnqty_rec.VisibleIndex = 6
         Me.GridColumnqty_rec.Width = 130
@@ -157,7 +155,6 @@ Partial Public Class ReportProductionHOAttachment
         Me.GridColumnbalance.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnbalance.FieldName = "balance"
         Me.GridColumnbalance.Name = "GridColumnbalance"
-        Me.GridColumnbalance.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "balance", "{0:N0}")})
         Me.GridColumnbalance.Visible = True
         Me.GridColumnbalance.VisibleIndex = 10
         Me.GridColumnbalance.Width = 136
@@ -221,7 +218,6 @@ Partial Public Class ReportProductionHOAttachment
         Me.GridColumnqty_pl_total.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnqty_pl_total.FieldName = "qty_pl_total"
         Me.GridColumnqty_pl_total.Name = "GridColumnqty_pl_total"
-        Me.GridColumnqty_pl_total.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_pl_total", "{0:N0}")})
         Me.GridColumnqty_pl_total.Visible = True
         Me.GridColumnqty_pl_total.VisibleIndex = 9
         Me.GridColumnqty_pl_total.Width = 144
@@ -234,6 +230,19 @@ Partial Public Class ReportProductionHOAttachment
         Me.GridColumnho_status.Visible = True
         Me.GridColumnho_status.VisibleIndex = 11
         Me.GridColumnho_status.Width = 312
+        '
+        'GridColumnbalance_rec
+        '
+        Me.GridColumnbalance_rec.Caption = "Balance Rec"
+        Me.GridColumnbalance_rec.DisplayFormat.FormatString = "N0"
+        Me.GridColumnbalance_rec.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnbalance_rec.FieldName = "balance_rec"
+        Me.GridColumnbalance_rec.Name = "GridColumnbalance_rec"
+        Me.GridColumnbalance_rec.UnboundExpression = "[qty_po] - [qty_rec]"
+        Me.GridColumnbalance_rec.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
+        Me.GridColumnbalance_rec.Visible = True
+        Me.GridColumnbalance_rec.VisibleIndex = 7
+        Me.GridColumnbalance_rec.Width = 132
         '
         'RepositoryItemCheckEdit1
         '
@@ -271,20 +280,6 @@ Partial Public Class ReportProductionHOAttachment
         Me.XrLabel1.SizeF = New System.Drawing.SizeF(279.1667!, 23.0!)
         Me.XrLabel1.StylePriority.UseFont = False
         Me.XrLabel1.Text = "HANDOVER REPORT"
-        '
-        'GridColumnbalance_rec
-        '
-        Me.GridColumnbalance_rec.Caption = "Balance Rec"
-        Me.GridColumnbalance_rec.DisplayFormat.FormatString = "N0"
-        Me.GridColumnbalance_rec.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumnbalance_rec.FieldName = "balance_rec"
-        Me.GridColumnbalance_rec.Name = "GridColumnbalance_rec"
-        Me.GridColumnbalance_rec.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "balance_rec", "{0:N0}")})
-        Me.GridColumnbalance_rec.UnboundExpression = "[qty_po] - [qty_rec]"
-        Me.GridColumnbalance_rec.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
-        Me.GridColumnbalance_rec.Visible = True
-        Me.GridColumnbalance_rec.VisibleIndex = 7
-        Me.GridColumnbalance_rec.Width = 132
         '
         'ReportProductionHOAttachment
         '

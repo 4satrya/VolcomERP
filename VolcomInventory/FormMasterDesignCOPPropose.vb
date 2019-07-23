@@ -24,6 +24,7 @@
             PCAddDel.Visible = True
         Else
             'edit
+            LECOPType.Enabled = False
             Dim query As String = "SELECT cp.*,emp.employee_name FROM `tb_design_cop_propose` cp
                                     INNER JOIN tb_m_user usr ON usr.`id_user`=cp.`created_by`
                                     INNER JOIN tb_m_employee emp ON emp.`id_employee`=usr.`id_employee`
@@ -45,8 +46,6 @@
                 End If
                 '
                 load_det()
-                '
-
             End If
 
             CENeedMarketing.Enabled = False
@@ -72,17 +71,17 @@
     End Sub
 
     Sub load_det()
-        Dim query As String = "SELECT pd.`id_design_cop_propose_det`,pd.`id_design`,dsg.`design_code`,dsg.`design_display_name`
+        Dim query As String = "SELECT pd.target_cost,pd.`id_design_cop_propose_det`,pd.`id_design`,dsg.`design_code`,dsg.`design_display_name`
 ,pd.`id_currency_before`,cur_before.`currency` AS currency_before,pd.`id_comp_contact_before`,c_before.`comp_number` AS comp_number_before,c_before.`comp_name` AS comp_name_before,pd.`kurs_before`,pd.`design_cop_before`,pd.`add_cost_before`,(pd.`design_cop_before`-pd.`add_cost_before`) AS design_cop_ex_before
 ,pd.`id_currency`,cur.`currency`,pd.`id_comp_contact`,c.`comp_number`,c.`comp_name`,pd.`kurs`,pd.`design_cop`,pd.`add_cost`,(pd.`design_cop`-pd.`add_cost`) AS design_cop_ex
 FROM `tb_design_cop_propose_det` pd
 INNER JOIN tb_m_design dsg ON dsg.`id_design`=pd.`id_design`
 INNER JOIN tb_lookup_currency cur ON cur.`id_currency`=pd.`id_currency`
-INNER JOIN tb_lookup_currency cur_before ON cur_before.`id_currency`=pd.`id_currency_before`
+LEFT JOIN tb_lookup_currency cur_before ON cur_before.`id_currency`=pd.`id_currency_before`
 INNER JOIN tb_m_comp_contact cc ON cc.`id_comp_contact`=pd.`id_comp_contact`
 INNER JOIN tb_m_comp c ON c.`id_comp`=cc.`id_comp`
-INNER JOIN tb_m_comp_contact cc_before ON cc_before.`id_comp_contact`=pd.`id_comp_contact_before`
-INNER JOIN tb_m_comp c_before ON c_before.`id_comp`=cc_before.`id_comp`
+LEFT JOIN tb_m_comp_contact cc_before ON cc_before.`id_comp_contact`=pd.`id_comp_contact_before`
+LEFT JOIN tb_m_comp c_before ON c_before.`id_comp`=cc_before.`id_comp`
 WHERE pd.id_design_cop_propose='" & id_propose & "'"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCItemList.DataSource = data
@@ -122,11 +121,22 @@ VALUES('" & LECOPType.EditValue.ToString & "','" & id_user & "',NOW(),'" & MENot
                 query = ""
                 For i As Integer = 0 To BGVItemList.RowCount - 1
                     Dim id_design As String = BGVItemList.GetRowCellValue(i, "id_design").ToString
-                    Dim id_currency_before As String = BGVItemList.GetRowCellValue(i, "id_currency_before").ToString
-                    Dim kurs_before As String = decimalSQL(BGVItemList.GetRowCellValue(i, "kurs_before").ToString)
-                    Dim design_cop_before As String = decimalSQL(BGVItemList.GetRowCellValue(i, "design_cop_before").ToString)
-                    Dim id_comp_contact_before As String = BGVItemList.GetRowCellValue(i, "id_comp_contact_before").ToString
-                    Dim add_cost_before As String = decimalSQL(BGVItemList.GetRowCellValue(i, "add_cost_before").ToString)
+                    Dim target_cost As String = decimalSQL(BGVItemList.GetRowCellValue(i, "target_cost").ToString)
+
+                    Dim id_currency_before As String = "NULL"
+                    Dim kurs_before As String = "NULL"
+                    Dim design_cop_before As String = "NULL"
+                    Dim id_comp_contact_before As String = "NULL"
+                    Dim add_cost_before As String = "NULL"
+
+                    If LECOPType.EditValue.ToString = "1" Then
+                        id_currency_before = "'" & BGVItemList.GetRowCellValue(i, "id_currency_before").ToString & "'"
+                        kurs_before = "'" & decimalSQL(BGVItemList.GetRowCellValue(i, "kurs_before").ToString) & "'"
+                        design_cop_before = "'" & decimalSQL(BGVItemList.GetRowCellValue(i, "design_cop_before").ToString) & "'"
+                        id_comp_contact_before = "'" & BGVItemList.GetRowCellValue(i, "id_comp_contact_before").ToString & "'"
+                        add_cost_before = "'" & decimalSQL(BGVItemList.GetRowCellValue(i, "add_cost_before").ToString) & "'"
+                    End If
+
                     '
                     Dim id_currency As String = BGVItemList.GetRowCellValue(i, "id_currency").ToString
                     Dim kurs As String = decimalSQL(BGVItemList.GetRowCellValue(i, "kurs").ToString)
@@ -137,9 +147,9 @@ VALUES('" & LECOPType.EditValue.ToString & "','" & id_user & "',NOW(),'" & MENot
                     If Not i = 0 Then
                         query += ","
                     End If
-                    query += "('" & id_propose & "','" & id_design & "','" & id_currency_before & "','" & kurs_before & "','" & design_cop_before & "','" & id_comp_contact_before & "','" & add_cost_before & "','" & id_currency & "','" & kurs & "','" & design_cop & "','" & id_comp_contact & "','" & add_cost & "')"
+                    query += "('" & id_propose & "','" & target_cost & "','" & id_design & "'," & id_currency_before & "," & kurs_before & "," & design_cop_before & "," & id_comp_contact_before & "," & add_cost_before & ",'" & id_currency & "','" & kurs & "','" & design_cop & "','" & id_comp_contact & "','" & add_cost & "')"
                 Next
-                query = "INSERT INTO tb_design_cop_propose_det(id_design_cop_propose,id_design,id_currency_before,kurs_before,design_cop_before,id_comp_contact_before,add_cost_before,id_currency,kurs,design_cop,id_comp_contact,add_cost) VALUES" & query
+                query = "INSERT INTO tb_design_cop_propose_det(id_design_cop_propose,target_cost,id_design,id_currency_before,kurs_before,design_cop_before,id_comp_contact_before,add_cost_before,id_currency,kurs,design_cop,id_comp_contact,add_cost) VALUES" & query
                 execute_non_query(query, True, "", "", "", "")
                 query = "CALL gen_number('" & id_propose & "','150')"
                 execute_non_query(query, True, "", "", "", "")
@@ -163,8 +173,14 @@ VALUES('" & LECOPType.EditValue.ToString & "','" & id_user & "',NOW(),'" & MENot
         Dim is_addcost As Boolean = False
         '
         For i As Integer = 0 To BGVItemList.RowCount - 1
-            If Not BGVItemList.GetRowCellValue(i, "add_cost_before") = 0 Or Not BGVItemList.GetRowCellValue(i, "add_cost") = 0 Then
-                is_addcost = True
+            If LECOPType.EditValue.ToString = "1" Then
+                If Not BGVItemList.GetRowCellValue(i, "add_cost_before") = 0 Or Not BGVItemList.GetRowCellValue(i, "add_cost") = 0 Then
+                    is_addcost = True
+                End If
+            Else
+                If Not BGVItemList.GetRowCellValue(i, "add_cost") = 0 Then
+                    is_addcost = True
+                End If
             End If
         Next
         '
@@ -201,8 +217,14 @@ VALUES('" & LECOPType.EditValue.ToString & "','" & id_user & "',NOW(),'" & MENot
         ReportDesignCOPPropose.id_propose = id_propose
         Dim is_addcost As Boolean = False
         For i As Integer = 0 To BGVItemList.RowCount - 1
-            If Not BGVItemList.GetRowCellValue(i, "add_cost_before") = 0 Or Not BGVItemList.GetRowCellValue(i, "add_cost") = 0 Then
-                is_addcost = True
+            If LECOPType.EditValue.ToString = "1" Then
+                If Not BGVItemList.GetRowCellValue(i, "add_cost_before") = 0 Or Not BGVItemList.GetRowCellValue(i, "add_cost") = 0 Then
+                    is_addcost = True
+                End If
+            Else
+                If Not BGVItemList.GetRowCellValue(i, "add_cost") = 0 Then
+                    is_addcost = True
+                End If
             End If
         Next
         If is_addcost = True Then
@@ -265,5 +287,24 @@ VALUES('" & LECOPType.EditValue.ToString & "','" & id_user & "',NOW(),'" & MENot
 
         FormDocumentUpload.ShowDialog()
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub LECOPType_EditValueChanged(sender As Object, e As EventArgs) Handles LECOPType.EditValueChanged
+        If BGVItemList.RowCount > 0 Then
+            Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you want to change type? All record will be reset", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+            If confirm = Windows.Forms.DialogResult.Yes Then
+                For i As Integer = BGVItemList.RowCount To 0 Step -1
+                    BGVItemList.DeleteRow(i)
+                Next
+            End If
+        End If
+        '
+        If LECOPType.EditValue.ToString = "1" Then
+            GBAfter.Caption = "After"
+            GBBefore.Visible = True
+        Else
+            GBAfter.Caption = "Propose"
+            GBBefore.Visible = False
+        End If
     End Sub
 End Class

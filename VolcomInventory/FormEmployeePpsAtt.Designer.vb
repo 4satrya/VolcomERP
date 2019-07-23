@@ -22,10 +22,10 @@ Partial Class FormEmployeePpsAtt
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormEmployeePpsAtt))
         Me.PictureEdit = New DevExpress.XtraEditors.PictureEdit()
         Me.PCAction = New DevExpress.XtraEditors.PanelControl()
-        Me.SBDelete = New DevExpress.XtraEditors.SimpleButton()
         Me.SBClose = New DevExpress.XtraEditors.SimpleButton()
         Me.SBScanUpload = New DevExpress.XtraEditors.SimpleButton()
         Me.SBSave = New DevExpress.XtraEditors.SimpleButton()
+        Me.SBDelete = New DevExpress.XtraEditors.SimpleButton()
         Me.SBAdd = New DevExpress.XtraEditors.SimpleButton()
         Me.XSCImageList = New DevExpress.XtraEditors.XtraScrollableControl()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
@@ -61,19 +61,9 @@ Partial Class FormEmployeePpsAtt
         Me.PCAction.Size = New System.Drawing.Size(584, 41)
         Me.PCAction.TabIndex = 1
         '
-        'SBDelete
-        '
-        Me.SBDelete.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat
-        Me.SBDelete.Dock = System.Windows.Forms.DockStyle.Right
-        Me.SBDelete.Image = CType(resources.GetObject("SBDelete.Image"), System.Drawing.Image)
-        Me.SBDelete.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
-        Me.SBDelete.Location = New System.Drawing.Point(482, 2)
-        Me.SBDelete.Name = "SBDelete"
-        Me.SBDelete.Size = New System.Drawing.Size(50, 48)
-        Me.SBDelete.TabIndex = 4
-        '
         'SBClose
         '
+        Me.SBClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.SBClose.Image = CType(resources.GetObject("SBClose.Image"), System.Drawing.Image)
         Me.SBClose.Location = New System.Drawing.Point(441, 6)
         Me.SBClose.Name = "SBClose"
@@ -92,12 +82,24 @@ Partial Class FormEmployeePpsAtt
         '
         'SBSave
         '
+        Me.SBSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.SBSave.Image = CType(resources.GetObject("SBSave.Image"), System.Drawing.Image)
         Me.SBSave.Location = New System.Drawing.Point(514, 6)
         Me.SBSave.Name = "SBSave"
         Me.SBSave.Size = New System.Drawing.Size(65, 29)
         Me.SBSave.TabIndex = 1
         Me.SBSave.Text = "Save"
+        '
+        'SBDelete
+        '
+        Me.SBDelete.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat
+        Me.SBDelete.Dock = System.Windows.Forms.DockStyle.Right
+        Me.SBDelete.Image = CType(resources.GetObject("SBDelete.Image"), System.Drawing.Image)
+        Me.SBDelete.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.SBDelete.Location = New System.Drawing.Point(482, 2)
+        Me.SBDelete.Name = "SBDelete"
+        Me.SBDelete.Size = New System.Drawing.Size(50, 48)
+        Me.SBDelete.TabIndex = 4
         '
         'SBAdd
         '
@@ -131,6 +133,7 @@ Partial Class FormEmployeePpsAtt
         '
         'SBRotate
         '
+        Me.SBRotate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.SBRotate.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat
         Me.SBRotate.Image = CType(resources.GetObject("SBRotate.Image"), System.Drawing.Image)
         Me.SBRotate.Location = New System.Drawing.Point(12, 416)
@@ -147,7 +150,6 @@ Partial Class FormEmployeePpsAtt
         Me.Controls.Add(Me.PictureEdit)
         Me.Controls.Add(Me.PanelControl1)
         Me.Controls.Add(Me.PCAction)
-        Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FormEmployeePpsAtt"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

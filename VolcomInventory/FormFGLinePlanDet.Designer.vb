@@ -33,14 +33,25 @@ Partial Class FormFGLinePlanDet
         Me.LabelControl11 = New DevExpress.XtraEditors.LabelControl()
         Me.SLESex = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnDisplayName = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.SLECat = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.SLESource = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.SLEClass = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView3 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.SLEColor = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView4 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.TxtDescription = New DevExpress.XtraEditors.TextEdit()
         Me.TxtBenchmark = New DevExpress.XtraEditors.TextEdit()
         Me.TxtQty = New DevExpress.XtraEditors.TextEdit()
@@ -54,19 +65,10 @@ Partial Class FormFGLinePlanDet
         Me.LabelControl13 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl14 = New DevExpress.XtraEditors.LabelControl()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
-        Me.BtnSave = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnClose = New DevExpress.XtraEditors.SimpleButton()
-        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnDisplayName = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.BtnSave = New DevExpress.XtraEditors.SimpleButton()
+        Me.LabelControl15 = New DevExpress.XtraEditors.LabelControl()
+        Me.LECat = New DevExpress.XtraEditors.LookUpEdit()
         CType(Me.SLESex.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLECat.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -88,11 +90,12 @@ Partial Class FormFGLinePlanDet
         CType(Me.TxtTotalValue.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
+        CType(Me.LECat.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LabelControl1
         '
-        Me.LabelControl1.Location = New System.Drawing.Point(23, 15)
+        Me.LabelControl1.Location = New System.Drawing.Point(23, 41)
         Me.LabelControl1.Name = "LabelControl1"
         Me.LabelControl1.Size = New System.Drawing.Size(18, 13)
         Me.LabelControl1.TabIndex = 90
@@ -100,7 +103,7 @@ Partial Class FormFGLinePlanDet
         '
         'LabelControl2
         '
-        Me.LabelControl2.Location = New System.Drawing.Point(23, 41)
+        Me.LabelControl2.Location = New System.Drawing.Point(23, 67)
         Me.LabelControl2.Name = "LabelControl2"
         Me.LabelControl2.Size = New System.Drawing.Size(45, 13)
         Me.LabelControl2.TabIndex = 91
@@ -108,7 +111,7 @@ Partial Class FormFGLinePlanDet
         '
         'LabelControl3
         '
-        Me.LabelControl3.Location = New System.Drawing.Point(23, 67)
+        Me.LabelControl3.Location = New System.Drawing.Point(23, 93)
         Me.LabelControl3.Name = "LabelControl3"
         Me.LabelControl3.Size = New System.Drawing.Size(68, 13)
         Me.LabelControl3.TabIndex = 92
@@ -116,7 +119,7 @@ Partial Class FormFGLinePlanDet
         '
         'LabelControl4
         '
-        Me.LabelControl4.Location = New System.Drawing.Point(23, 119)
+        Me.LabelControl4.Location = New System.Drawing.Point(23, 145)
         Me.LabelControl4.Name = "LabelControl4"
         Me.LabelControl4.Size = New System.Drawing.Size(39, 13)
         Me.LabelControl4.TabIndex = 93
@@ -124,7 +127,7 @@ Partial Class FormFGLinePlanDet
         '
         'LabelControl5
         '
-        Me.LabelControl5.Location = New System.Drawing.Point(23, 93)
+        Me.LabelControl5.Location = New System.Drawing.Point(23, 119)
         Me.LabelControl5.Name = "LabelControl5"
         Me.LabelControl5.Size = New System.Drawing.Size(25, 13)
         Me.LabelControl5.TabIndex = 94
@@ -132,7 +135,7 @@ Partial Class FormFGLinePlanDet
         '
         'LabelControl6
         '
-        Me.LabelControl6.Location = New System.Drawing.Point(23, 145)
+        Me.LabelControl6.Location = New System.Drawing.Point(23, 171)
         Me.LabelControl6.Name = "LabelControl6"
         Me.LabelControl6.Size = New System.Drawing.Size(53, 13)
         Me.LabelControl6.TabIndex = 95
@@ -140,7 +143,7 @@ Partial Class FormFGLinePlanDet
         '
         'LabelControl7
         '
-        Me.LabelControl7.Location = New System.Drawing.Point(23, 171)
+        Me.LabelControl7.Location = New System.Drawing.Point(23, 197)
         Me.LabelControl7.Name = "LabelControl7"
         Me.LabelControl7.Size = New System.Drawing.Size(25, 13)
         Me.LabelControl7.TabIndex = 96
@@ -180,14 +183,14 @@ Partial Class FormFGLinePlanDet
         '
         'SLESex
         '
-        Me.SLESex.Location = New System.Drawing.Point(107, 12)
+        Me.SLESex.Location = New System.Drawing.Point(107, 38)
         Me.SLESex.Name = "SLESex"
         Me.SLESex.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.SLESex.Properties.NullText = ""
         Me.SLESex.Properties.ShowClearButton = False
         Me.SLESex.Properties.View = Me.SearchLookUpEdit1View
         Me.SLESex.Size = New System.Drawing.Size(229, 20)
-        Me.SLESex.TabIndex = 0
+        Me.SLESex.TabIndex = 1
         '
         'SearchLookUpEdit1View
         '
@@ -197,16 +200,30 @@ Partial Class FormFGLinePlanDet
         Me.SearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = False
         Me.SearchLookUpEdit1View.OptionsView.ShowGroupPanel = False
         '
+        'GridColumn1
+        '
+        Me.GridColumn1.Caption = "Id Code Detail"
+        Me.GridColumn1.FieldName = "id_code_detail"
+        Me.GridColumn1.Name = "GridColumn1"
+        '
+        'GridColumnDisplayName
+        '
+        Me.GridColumnDisplayName.Caption = "Description"
+        Me.GridColumnDisplayName.FieldName = "display_name"
+        Me.GridColumnDisplayName.Name = "GridColumnDisplayName"
+        Me.GridColumnDisplayName.Visible = True
+        Me.GridColumnDisplayName.VisibleIndex = 0
+        '
         'SLECat
         '
-        Me.SLECat.Location = New System.Drawing.Point(107, 38)
+        Me.SLECat.Location = New System.Drawing.Point(107, 64)
         Me.SLECat.Name = "SLECat"
         Me.SLECat.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.SLECat.Properties.NullText = ""
         Me.SLECat.Properties.ShowClearButton = False
         Me.SLECat.Properties.View = Me.GridView1
         Me.SLECat.Size = New System.Drawing.Size(229, 20)
-        Me.SLECat.TabIndex = 1
+        Me.SLECat.TabIndex = 2
         '
         'GridView1
         '
@@ -216,16 +233,38 @@ Partial Class FormFGLinePlanDet
         Me.GridView1.OptionsSelection.EnableAppearanceFocusedCell = False
         Me.GridView1.OptionsView.ShowGroupPanel = False
         '
+        'GridColumn2
+        '
+        Me.GridColumn2.Caption = "Id Code Detail"
+        Me.GridColumn2.FieldName = "id_code_detail"
+        Me.GridColumn2.Name = "GridColumn2"
+        '
+        'GridColumn3
+        '
+        Me.GridColumn3.Caption = "Display Name"
+        Me.GridColumn3.FieldName = "display_name"
+        Me.GridColumn3.Name = "GridColumn3"
+        Me.GridColumn3.Visible = True
+        Me.GridColumn3.VisibleIndex = 0
+        '
+        'GridColumn10
+        '
+        Me.GridColumn10.Caption = "Description"
+        Me.GridColumn10.FieldName = "code_detail_name"
+        Me.GridColumn10.Name = "GridColumn10"
+        Me.GridColumn10.Visible = True
+        Me.GridColumn10.VisibleIndex = 1
+        '
         'SLESource
         '
-        Me.SLESource.Location = New System.Drawing.Point(107, 64)
+        Me.SLESource.Location = New System.Drawing.Point(107, 90)
         Me.SLESource.Name = "SLESource"
         Me.SLESource.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.SLESource.Properties.NullText = ""
         Me.SLESource.Properties.ShowClearButton = False
         Me.SLESource.Properties.View = Me.GridView2
         Me.SLESource.Size = New System.Drawing.Size(229, 20)
-        Me.SLESource.TabIndex = 2
+        Me.SLESource.TabIndex = 3
         '
         'GridView2
         '
@@ -235,16 +274,30 @@ Partial Class FormFGLinePlanDet
         Me.GridView2.OptionsSelection.EnableAppearanceFocusedCell = False
         Me.GridView2.OptionsView.ShowGroupPanel = False
         '
+        'GridColumn4
+        '
+        Me.GridColumn4.Caption = "Id Code Detail"
+        Me.GridColumn4.FieldName = "id_code_detail"
+        Me.GridColumn4.Name = "GridColumn4"
+        '
+        'GridColumn5
+        '
+        Me.GridColumn5.Caption = "Description"
+        Me.GridColumn5.FieldName = "display_name"
+        Me.GridColumn5.Name = "GridColumn5"
+        Me.GridColumn5.Visible = True
+        Me.GridColumn5.VisibleIndex = 0
+        '
         'SLEClass
         '
-        Me.SLEClass.Location = New System.Drawing.Point(107, 90)
+        Me.SLEClass.Location = New System.Drawing.Point(107, 116)
         Me.SLEClass.Name = "SLEClass"
         Me.SLEClass.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.SLEClass.Properties.NullText = ""
         Me.SLEClass.Properties.ShowClearButton = False
         Me.SLEClass.Properties.View = Me.GridView3
         Me.SLEClass.Size = New System.Drawing.Size(229, 20)
-        Me.SLEClass.TabIndex = 3
+        Me.SLEClass.TabIndex = 4
         '
         'GridView3
         '
@@ -254,15 +307,29 @@ Partial Class FormFGLinePlanDet
         Me.GridView3.OptionsSelection.EnableAppearanceFocusedCell = False
         Me.GridView3.OptionsView.ShowGroupPanel = False
         '
+        'GridColumn6
+        '
+        Me.GridColumn6.Caption = "Id Code Detail"
+        Me.GridColumn6.FieldName = "id_code_detail"
+        Me.GridColumn6.Name = "GridColumn6"
+        '
+        'GridColumn7
+        '
+        Me.GridColumn7.Caption = "Description"
+        Me.GridColumn7.FieldName = "display_name"
+        Me.GridColumn7.Name = "GridColumn7"
+        Me.GridColumn7.Visible = True
+        Me.GridColumn7.VisibleIndex = 0
+        '
         'SLEColor
         '
-        Me.SLEColor.Location = New System.Drawing.Point(107, 168)
+        Me.SLEColor.Location = New System.Drawing.Point(107, 194)
         Me.SLEColor.Name = "SLEColor"
         Me.SLEColor.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.SLEColor.Properties.NullText = ""
         Me.SLEColor.Properties.View = Me.GridView4
         Me.SLEColor.Size = New System.Drawing.Size(229, 20)
-        Me.SLEColor.TabIndex = 6
+        Me.SLEColor.TabIndex = 7
         '
         'GridView4
         '
@@ -272,19 +339,33 @@ Partial Class FormFGLinePlanDet
         Me.GridView4.OptionsSelection.EnableAppearanceFocusedCell = False
         Me.GridView4.OptionsView.ShowGroupPanel = False
         '
+        'GridColumn8
+        '
+        Me.GridColumn8.Caption = "Id Code Detail"
+        Me.GridColumn8.FieldName = "id_code_detail"
+        Me.GridColumn8.Name = "GridColumn8"
+        '
+        'GridColumn9
+        '
+        Me.GridColumn9.Caption = "Description"
+        Me.GridColumn9.FieldName = "display_name"
+        Me.GridColumn9.Name = "GridColumn9"
+        Me.GridColumn9.Visible = True
+        Me.GridColumn9.VisibleIndex = 0
+        '
         'TxtDescription
         '
-        Me.TxtDescription.Location = New System.Drawing.Point(107, 142)
+        Me.TxtDescription.Location = New System.Drawing.Point(107, 168)
         Me.TxtDescription.Name = "TxtDescription"
         Me.TxtDescription.Size = New System.Drawing.Size(229, 20)
-        Me.TxtDescription.TabIndex = 5
+        Me.TxtDescription.TabIndex = 6
         '
         'TxtBenchmark
         '
         Me.TxtBenchmark.Location = New System.Drawing.Point(437, 12)
         Me.TxtBenchmark.Name = "TxtBenchmark"
         Me.TxtBenchmark.Size = New System.Drawing.Size(229, 20)
-        Me.TxtBenchmark.TabIndex = 7
+        Me.TxtBenchmark.TabIndex = 8
         '
         'TxtQty
         '
@@ -295,16 +376,16 @@ Partial Class FormFGLinePlanDet
         Me.TxtQty.Properties.Mask.EditMask = "N0"
         Me.TxtQty.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
         Me.TxtQty.Size = New System.Drawing.Size(229, 20)
-        Me.TxtQty.TabIndex = 8
+        Me.TxtQty.TabIndex = 9
         '
         'LEDelivery
         '
-        Me.LEDelivery.Location = New System.Drawing.Point(107, 116)
+        Me.LEDelivery.Location = New System.Drawing.Point(107, 142)
         Me.LEDelivery.Name = "LEDelivery"
         Me.LEDelivery.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.LEDelivery.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_delivery", "Id", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("delivery", "Delivery")})
         Me.LEDelivery.Size = New System.Drawing.Size(229, 20)
-        Me.LEDelivery.TabIndex = 4
+        Me.LEDelivery.TabIndex = 5
         '
         'TxtMarkUp
         '
@@ -315,7 +396,7 @@ Partial Class FormFGLinePlanDet
         Me.TxtMarkUp.Properties.Mask.EditMask = "N2"
         Me.TxtMarkUp.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
         Me.TxtMarkUp.Size = New System.Drawing.Size(229, 20)
-        Me.TxtMarkUp.TabIndex = 9
+        Me.TxtMarkUp.TabIndex = 10
         '
         'TxtTargetPrice
         '
@@ -326,7 +407,7 @@ Partial Class FormFGLinePlanDet
         Me.TxtTargetPrice.Properties.Mask.EditMask = "N0"
         Me.TxtTargetPrice.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
         Me.TxtTargetPrice.Size = New System.Drawing.Size(229, 20)
-        Me.TxtTargetPrice.TabIndex = 10
+        Me.TxtTargetPrice.TabIndex = 11
         '
         'TxtTargetCost
         '
@@ -336,7 +417,7 @@ Partial Class FormFGLinePlanDet
         Me.TxtTargetCost.Properties.DisplayFormat.FormatString = "N2"
         Me.TxtTargetCost.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.TxtTargetCost.Size = New System.Drawing.Size(229, 20)
-        Me.TxtTargetCost.TabIndex = 11
+        Me.TxtTargetCost.TabIndex = 12
         '
         'LabelControl12
         '
@@ -354,7 +435,7 @@ Partial Class FormFGLinePlanDet
         Me.TxtTotalCost.Properties.DisplayFormat.FormatString = "N0"
         Me.TxtTotalCost.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.TxtTotalCost.Size = New System.Drawing.Size(229, 20)
-        Me.TxtTotalCost.TabIndex = 12
+        Me.TxtTotalCost.TabIndex = 13
         '
         'TxtTotalValue
         '
@@ -364,7 +445,7 @@ Partial Class FormFGLinePlanDet
         Me.TxtTotalValue.Properties.DisplayFormat.FormatString = "N0"
         Me.TxtTotalValue.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.TxtTotalValue.Size = New System.Drawing.Size(229, 20)
-        Me.TxtTotalValue.TabIndex = 13
+        Me.TxtTotalValue.TabIndex = 14
         '
         'LabelControl13
         '
@@ -387,20 +468,10 @@ Partial Class FormFGLinePlanDet
         Me.PanelControl1.Controls.Add(Me.BtnClose)
         Me.PanelControl1.Controls.Add(Me.BtnSave)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl1.Location = New System.Drawing.Point(0, 213)
+        Me.PanelControl1.Location = New System.Drawing.Point(0, 234)
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(687, 44)
         Me.PanelControl1.TabIndex = 28
-        '
-        'BtnSave
-        '
-        Me.BtnSave.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BtnSave.Image = CType(resources.GetObject("BtnSave.Image"), System.Drawing.Image)
-        Me.BtnSave.Location = New System.Drawing.Point(596, 2)
-        Me.BtnSave.Name = "BtnSave"
-        Me.BtnSave.Size = New System.Drawing.Size(89, 40)
-        Me.BtnSave.TabIndex = 14
-        Me.BtnSave.Text = "Save"
         '
         'BtnClose
         '
@@ -409,92 +480,43 @@ Partial Class FormFGLinePlanDet
         Me.BtnClose.Location = New System.Drawing.Point(511, 2)
         Me.BtnClose.Name = "BtnClose"
         Me.BtnClose.Size = New System.Drawing.Size(85, 40)
-        Me.BtnClose.TabIndex = 15
+        Me.BtnClose.TabIndex = 16
         Me.BtnClose.Text = "Close"
         '
-        'GridColumn8
+        'BtnSave
         '
-        Me.GridColumn8.Caption = "Id Code Detail"
-        Me.GridColumn8.FieldName = "id_code_detail"
-        Me.GridColumn8.Name = "GridColumn8"
+        Me.BtnSave.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnSave.Image = CType(resources.GetObject("BtnSave.Image"), System.Drawing.Image)
+        Me.BtnSave.Location = New System.Drawing.Point(596, 2)
+        Me.BtnSave.Name = "BtnSave"
+        Me.BtnSave.Size = New System.Drawing.Size(89, 40)
+        Me.BtnSave.TabIndex = 15
+        Me.BtnSave.Text = "Save"
         '
-        'GridColumn9
+        'LabelControl15
         '
-        Me.GridColumn9.Caption = "Description"
-        Me.GridColumn9.FieldName = "display_name"
-        Me.GridColumn9.Name = "GridColumn9"
-        Me.GridColumn9.Visible = True
-        Me.GridColumn9.VisibleIndex = 0
+        Me.LabelControl15.Location = New System.Drawing.Point(23, 15)
+        Me.LabelControl15.Name = "LabelControl15"
+        Me.LabelControl15.Size = New System.Drawing.Size(69, 13)
+        Me.LabelControl15.TabIndex = 104
+        Me.LabelControl15.Text = "Line Plan Type"
         '
-        'GridColumn6
+        'LECat
         '
-        Me.GridColumn6.Caption = "Id Code Detail"
-        Me.GridColumn6.FieldName = "id_code_detail"
-        Me.GridColumn6.Name = "GridColumn6"
-        '
-        'GridColumn7
-        '
-        Me.GridColumn7.Caption = "Description"
-        Me.GridColumn7.FieldName = "display_name"
-        Me.GridColumn7.Name = "GridColumn7"
-        Me.GridColumn7.Visible = True
-        Me.GridColumn7.VisibleIndex = 0
-        '
-        'GridColumn4
-        '
-        Me.GridColumn4.Caption = "Id Code Detail"
-        Me.GridColumn4.FieldName = "id_code_detail"
-        Me.GridColumn4.Name = "GridColumn4"
-        '
-        'GridColumn5
-        '
-        Me.GridColumn5.Caption = "Description"
-        Me.GridColumn5.FieldName = "display_name"
-        Me.GridColumn5.Name = "GridColumn5"
-        Me.GridColumn5.Visible = True
-        Me.GridColumn5.VisibleIndex = 0
-        '
-        'GridColumn2
-        '
-        Me.GridColumn2.Caption = "Id Code Detail"
-        Me.GridColumn2.FieldName = "id_code_detail"
-        Me.GridColumn2.Name = "GridColumn2"
-        '
-        'GridColumn3
-        '
-        Me.GridColumn3.Caption = "Display Name"
-        Me.GridColumn3.FieldName = "display_name"
-        Me.GridColumn3.Name = "GridColumn3"
-        Me.GridColumn3.Visible = True
-        Me.GridColumn3.VisibleIndex = 0
-        '
-        'GridColumn1
-        '
-        Me.GridColumn1.Caption = "Id Code Detail"
-        Me.GridColumn1.FieldName = "id_code_detail"
-        Me.GridColumn1.Name = "GridColumn1"
-        '
-        'GridColumnDisplayName
-        '
-        Me.GridColumnDisplayName.Caption = "Description"
-        Me.GridColumnDisplayName.FieldName = "display_name"
-        Me.GridColumnDisplayName.Name = "GridColumnDisplayName"
-        Me.GridColumnDisplayName.Visible = True
-        Me.GridColumnDisplayName.VisibleIndex = 0
-        '
-        'GridColumn10
-        '
-        Me.GridColumn10.Caption = "Description"
-        Me.GridColumn10.FieldName = "code_detail_name"
-        Me.GridColumn10.Name = "GridColumn10"
-        Me.GridColumn10.Visible = True
-        Me.GridColumn10.VisibleIndex = 1
+        Me.LECat.Location = New System.Drawing.Point(107, 12)
+        Me.LECat.Name = "LECat"
+        Me.LECat.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.LECat.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_lookup_line_plan_cat", "id", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("line_plan_cat", "Type")})
+        Me.LECat.Size = New System.Drawing.Size(229, 20)
+        Me.LECat.TabIndex = 0
         '
         'FormFGLinePlanDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(687, 257)
+        Me.ClientSize = New System.Drawing.Size(687, 278)
+        Me.Controls.Add(Me.LECat)
+        Me.Controls.Add(Me.LabelControl15)
         Me.Controls.Add(Me.PanelControl1)
         Me.Controls.Add(Me.LabelControl14)
         Me.Controls.Add(Me.LabelControl13)
@@ -551,6 +573,7 @@ Partial Class FormFGLinePlanDet
         CType(Me.TxtTotalValue.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
+        CType(Me.LECat.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -603,4 +626,6 @@ Partial Class FormFGLinePlanDet
     Friend WithEvents BtnClose As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BtnSave As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents GridColumn10 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LabelControl15 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LECat As DevExpress.XtraEditors.LookUpEdit
 End Class

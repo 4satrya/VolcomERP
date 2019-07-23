@@ -72,17 +72,17 @@ Partial Class FormMasterCompanySingle
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
         Me.GroupControl1 = New DevExpress.XtraEditors.GroupControl()
         Me.TEBankAddress = New DevExpress.XtraEditors.TextEdit()
-        Me.LabelControl41 = New DevExpress.XtraEditors.LabelControl()
+        Me.LBankAddress = New DevExpress.XtraEditors.LabelControl()
         Me.TEBankAtasNama = New DevExpress.XtraEditors.TextEdit()
-        Me.LabelControl40 = New DevExpress.XtraEditors.LabelControl()
+        Me.LRekName = New DevExpress.XtraEditors.LabelControl()
         Me.TEBankRek = New DevExpress.XtraEditors.TextEdit()
-        Me.LabelControl39 = New DevExpress.XtraEditors.LabelControl()
+        Me.LNoRek = New DevExpress.XtraEditors.LabelControl()
         Me.SLEBankAccount = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView4 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn21 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn22 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn23 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.LabelControl38 = New DevExpress.XtraEditors.LabelControl()
+        Me.LBankAccount = New DevExpress.XtraEditors.LabelControl()
         Me.SLEVendorType = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn17 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -783,13 +783,13 @@ Partial Class FormMasterCompanySingle
         'GroupControl1
         '
         Me.GroupControl1.Controls.Add(Me.TEBankAddress)
-        Me.GroupControl1.Controls.Add(Me.LabelControl41)
+        Me.GroupControl1.Controls.Add(Me.LBankAddress)
         Me.GroupControl1.Controls.Add(Me.TEBankAtasNama)
-        Me.GroupControl1.Controls.Add(Me.LabelControl40)
+        Me.GroupControl1.Controls.Add(Me.LRekName)
         Me.GroupControl1.Controls.Add(Me.TEBankRek)
-        Me.GroupControl1.Controls.Add(Me.LabelControl39)
+        Me.GroupControl1.Controls.Add(Me.LNoRek)
         Me.GroupControl1.Controls.Add(Me.SLEBankAccount)
-        Me.GroupControl1.Controls.Add(Me.LabelControl38)
+        Me.GroupControl1.Controls.Add(Me.LBankAccount)
         Me.GroupControl1.Controls.Add(Me.LETax)
         Me.GroupControl1.Controls.Add(Me.LabelControl17)
         Me.GroupControl1.Controls.Add(Me.SLEVendorType)
@@ -830,14 +830,14 @@ Partial Class FormMasterCompanySingle
         Me.TEBankAddress.Size = New System.Drawing.Size(526, 20)
         Me.TEBankAddress.TabIndex = 8917
         '
-        'LabelControl41
+        'LBankAddress
         '
-        Me.LabelControl41.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl41.Location = New System.Drawing.Point(12, 213)
-        Me.LabelControl41.Name = "LabelControl41"
-        Me.LabelControl41.Size = New System.Drawing.Size(65, 13)
-        Me.LabelControl41.TabIndex = 8916
-        Me.LabelControl41.Text = "Bank Address"
+        Me.LBankAddress.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBankAddress.Location = New System.Drawing.Point(12, 213)
+        Me.LBankAddress.Name = "LBankAddress"
+        Me.LBankAddress.Size = New System.Drawing.Size(65, 13)
+        Me.LBankAddress.TabIndex = 8916
+        Me.LBankAddress.Text = "Bank Address"
         '
         'TEBankAtasNama
         '
@@ -848,14 +848,14 @@ Partial Class FormMasterCompanySingle
         Me.TEBankAtasNama.Size = New System.Drawing.Size(177, 20)
         Me.TEBankAtasNama.TabIndex = 8915
         '
-        'LabelControl40
+        'LRekName
         '
-        Me.LabelControl40.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl40.Location = New System.Drawing.Point(410, 187)
-        Me.LabelControl40.Name = "LabelControl40"
-        Me.LabelControl40.Size = New System.Drawing.Size(27, 13)
-        Me.LabelControl40.TabIndex = 8914
-        Me.LabelControl40.Text = "Name"
+        Me.LRekName.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LRekName.Location = New System.Drawing.Point(410, 187)
+        Me.LRekName.Name = "LRekName"
+        Me.LRekName.Size = New System.Drawing.Size(27, 13)
+        Me.LRekName.TabIndex = 8914
+        Me.LRekName.Text = "Name"
         '
         'TEBankRek
         '
@@ -866,14 +866,14 @@ Partial Class FormMasterCompanySingle
         Me.TEBankRek.Size = New System.Drawing.Size(135, 20)
         Me.TEBankRek.TabIndex = 8913
         '
-        'LabelControl39
+        'LNoRek
         '
-        Me.LabelControl39.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl39.Location = New System.Drawing.Point(229, 187)
-        Me.LabelControl39.Name = "LabelControl39"
-        Me.LabelControl39.Size = New System.Drawing.Size(34, 13)
-        Me.LabelControl39.TabIndex = 8912
-        Me.LabelControl39.Text = "No Rek"
+        Me.LNoRek.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LNoRek.Location = New System.Drawing.Point(229, 187)
+        Me.LNoRek.Name = "LNoRek"
+        Me.LNoRek.Size = New System.Drawing.Size(34, 13)
+        Me.LNoRek.TabIndex = 8912
+        Me.LNoRek.Text = "No Rek"
         '
         'SLEBankAccount
         '
@@ -916,14 +916,14 @@ Partial Class FormMasterCompanySingle
         Me.GridColumn23.Visible = True
         Me.GridColumn23.VisibleIndex = 1
         '
-        'LabelControl38
+        'LBankAccount
         '
-        Me.LabelControl38.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl38.Location = New System.Drawing.Point(13, 187)
-        Me.LabelControl38.Name = "LabelControl38"
-        Me.LabelControl38.Size = New System.Drawing.Size(65, 13)
-        Me.LabelControl38.TabIndex = 8910
-        Me.LabelControl38.Text = "Bank Account"
+        Me.LBankAccount.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBankAccount.Location = New System.Drawing.Point(13, 187)
+        Me.LBankAccount.Name = "LBankAccount"
+        Me.LBankAccount.Size = New System.Drawing.Size(65, 13)
+        Me.LBankAccount.TabIndex = 8910
+        Me.LBankAccount.Text = "Bank Account"
         '
         'SLEVendorType
         '
@@ -2234,15 +2234,15 @@ Partial Class FormMasterCompanySingle
     Friend WithEvents GridColumn19 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn20 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents TEBankAtasNama As DevExpress.XtraEditors.TextEdit
-    Friend WithEvents LabelControl40 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LRekName As DevExpress.XtraEditors.LabelControl
     Friend WithEvents TEBankRek As DevExpress.XtraEditors.TextEdit
-    Friend WithEvents LabelControl39 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LNoRek As DevExpress.XtraEditors.LabelControl
     Friend WithEvents SLEBankAccount As DevExpress.XtraEditors.SearchLookUpEdit
     Friend WithEvents GridView4 As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumn21 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn22 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents LabelControl38 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LBankAccount As DevExpress.XtraEditors.LabelControl
     Friend WithEvents TEBankAddress As DevExpress.XtraEditors.TextEdit
-    Friend WithEvents LabelControl41 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LBankAddress As DevExpress.XtraEditors.LabelControl
     Friend WithEvents GridColumn23 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

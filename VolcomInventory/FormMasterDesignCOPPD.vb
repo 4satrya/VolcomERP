@@ -2,7 +2,8 @@
     Public id_comp_contact As String = "-1"
     Public id_comp As String = "-1"
     Public id_design As String = "-1"
-
+    '
+    '
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles BtnCancel.Click
         Close()
     End Sub
@@ -55,6 +56,7 @@ WHERE dsg.id_design='" & id_design & "'"
                     If plan_dt.Rows(0)("target_cost") = 0 Then
                         target_ok = False
                     Else
+                        TETargetCost.EditValue = plan_dt.Rows(0)("target_cost")
                         target_ok = True
                     End If
                 Else
@@ -66,7 +68,6 @@ WHERE dsg.id_design='" & id_design & "'"
                 BUpdateVendor.Visible = False
                 BtnSave.Visible = True
             Else
-                'warningCustom("Estimasti Cost melewati batas target cost. " & vbNewLine & "Untuk melanjutkan, silahkan negosiasi dengan vendor atau koordinasikan dengan Merchandise dan Design")
                 warningCustom("Target cost belum terdaftar, silahkan hubungi merchandise.")
                 '
                 BUpdateVendor.Visible = False
@@ -135,26 +136,47 @@ WHERE dsg.id_design='" & id_design & "'"
         'If id_comp = "-1" Or id_comp = "" Then
         'stopCustom("Please select vendor first")
         'Else
-        Dim query As String = ""
-        query = "SELECT pdd.`id_prod_demand`,pd.`id_report_status`,pdd.`id_design` FROM tb_prod_demand_design pdd
+        Dim id_season As Integer = FormMasterDesignCOP.BGVDesign.GetFocusedRowCellValue("id_season")
+        Dim is_more_than_limit As Boolean = False
+
+        'check limit
+        If id_season >= get_opt_prod_field("ecop_limit_start") Then
+            Dim limit As Decimal = 0.00
+            Dim target_cost As Decimal = TETargetCost.EditValue
+            Dim ecop As Decimal = TEEcop.EditValue
+            '
+            limit = Decimal.Parse(get_opt_prod_field("ecop_limit_upper_percent"))
+
+            If ecop > (target_cost * ((100 + limit) / 100)) Then
+                is_more_than_limit = True
+            End If
+        End If
+
+        If is_more_than_limit = True Then
+            warningCustom("Estimasti Cost melewati batas target cost. " & vbNewLine & "Untuk melanjutkan, silahkan negosiasi dengan vendor atau koordinasikan dengan Merchandise dan Design")
+        Else
+            Dim query As String = ""
+            'check 
+            query = "SELECT pdd.`id_prod_demand`,pd.`id_report_status`,pdd.`id_design` FROM tb_prod_demand_design pdd
 INNER JOIN tb_prod_demand pd ON pd.`id_prod_demand`=pdd.`id_prod_demand`
 WHERE pd.`id_report_status` != '5' AND pdd.`id_design`='" & id_design & "' AND pd.is_pd='1'"
-        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
-        If data.Rows.Count > 0 Then
-            warningCustom("PD already created, COP already locked.")
-        Else
-            Dim id_c As String = ""
-            If id_comp = "-1" Or id_comp = "" Then
-                id_c = "NULL"
+            Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+            If data.Rows.Count > 0 Then
+                warningCustom("PD already created, COP already locked.")
             Else
-                id_c = "'" & id_comp_contact & "'"
+                Dim id_c As String = ""
+                If id_comp = "-1" Or id_comp = "" Then
+                    id_c = "NULL"
+                Else
+                    id_c = "'" & id_comp_contact & "'"
+                End If
+                query = String.Format("UPDATE tb_m_design SET prod_order_cop_pd='{1}',prod_order_cop_pd_addcost='{5}',prod_order_cop_kurs_pd='{2}',prod_order_cop_pd_vendor={3},prod_order_cop_pd_curr='{4}' WHERE id_design='{0}'", id_design, decimalSQL((TEEcop.EditValue + TEAdditionalCost.EditValue).ToString), decimalSQL(TEKurs.EditValue.ToString), id_c, LECurrency.EditValue.ToString, decimalSQL(TEAdditionalCost.EditValue.ToString))
+                execute_non_query(query, True, "", "", "", "")
+                infoCustom("ECOP entry success.")
+                FormMasterDesignCOP.view_design()
+                FormMasterDesignCOP.BGVDesign.FocusedRowHandle = find_row_as_is(FormMasterDesignCOP.BGVDesign, "id_design", id_design)
+                Close()
             End If
-            query = String.Format("UPDATE tb_m_design SET prod_order_cop_pd='{1}',prod_order_cop_pd_addcost='{5}',prod_order_cop_kurs_pd='{2}',prod_order_cop_pd_vendor={3},prod_order_cop_pd_curr='{4}' WHERE id_design='{0}'", id_design, decimalSQL((TEEcop.EditValue + TEAdditionalCost.EditValue).ToString), decimalSQL(TEKurs.EditValue.ToString), id_c, LECurrency.EditValue.ToString, decimalSQL(TEAdditionalCost.EditValue.ToString))
-            execute_non_query(query, True, "", "", "", "")
-            infoCustom("ECOP entry success.")
-            FormMasterDesignCOP.view_design()
-            FormMasterDesignCOP.BGVDesign.FocusedRowHandle = find_row_as_is(FormMasterDesignCOP.BGVDesign, "id_design", id_design)
-            Close()
         End If
         'End If
     End Sub
@@ -187,4 +209,21 @@ WHERE cpd.id_design='" & id_design & "'"
             End If
         End If
     End Sub
+
+    Private Sub BHistoryCOP_Click(sender As Object, e As EventArgs) Handles BHistoryCOP.Click
+        FormMasterDesignCOPHistory.id_source = get_id_from_design(id_design, "5")
+        FormMasterDesignCOPHistory.id_class = get_id_from_design(id_design, "30")
+        FormMasterDesignCOPHistory.ShowDialog()
+    End Sub
+
+    Function get_id_from_design(ByVal id_design As String, ByVal id_code As String)
+        Dim id As String = "0"
+        Dim query As String = "SELECT dsgc.id_code_detail FROM tb_m_design_code dsgc
+INNER JOIN tb_m_code_detail cd ON dsgc.`id_code_detail`=cd.`id_code_detail` AND cd.`id_code`='" & id_code & "' AND dsgc.`id_design`='" & id_design & "' LIMIT 1"
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        If data.Rows.Count > 0 Then
+            id = data.Rows(0)("id_code_detail").ToString
+        End If
+        Return id
+    End Function
 End Class

@@ -2,12 +2,38 @@
     Public id_employee_sal_pps As String = "-1"
     Public is_duplicate As String = "-1"
 
+    Public Sub load_contract()
+        Dim id_employee As List(Of String) = New List(Of String)
+
+        id_employee.Add("-1")
+
+        For i = 0 To GVEmployee.RowCount - 1
+            If GVEmployee.IsValidRowHandle(i) Then
+                id_employee.Add(GVEmployee.GetRowCellValue(i, "id_employee").ToString)
+            End If
+        Next
+
+        Dim query As String = "
+            SELECT * FROM (SELECT 0 AS id_employee_status_det, 0 AS id_employee, '-' AS contract) AS tba
+            UNION ALL
+            SELECT * FROM (SELECT id_employee_status_det, id_employee, IF(a.id_employee_status = 2, CONCAT(b.employee_status, ' (', DATE_FORMAT(a.start_period, '%d %b %Y'), ')'), CONCAT(b.employee_status, ' (', DATE_FORMAT(a.start_period, '%d %b %Y'), ' - ', DATE_FORMAT(a.end_period, '%d %b %Y'), ')')) AS contract
+            FROM tb_m_employee_status_det AS a 
+            INNER JOIN tb_lookup_employee_status AS b ON b.id_employee_status = a.id_employee_status 
+            WHERE a.id_employee IN (" + String.Join(", ", id_employee.ToArray) + ")
+            ORDER BY a.id_employee ASC, a.id_employee_status_det DESC) AS tbb
+        "
+
+        viewSearchLookupRepositoryQuery(RepositoryItemSearchLookUpEdit, query, 0, "contract", "id_employee_status_det")
+    End Sub
+
     Private Sub FormProposeEmpSalaryDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         view_type()
 
         form_load()
 
         permission_load()
+
+        load_contract()
     End Sub
 
     Private Sub FormProposeEmpSalaryDet_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
@@ -53,7 +79,7 @@
 
         'load detail
         Dim query_detail As String = "
-            SELECT det.id_employee, emp.employee_code, emp.employee_name, det.id_departement, dp.departement, det.employee_position, det.id_employee_level, lv.employee_level, det.id_employee_status, sts.employee_status, ROUND(det.basic_salary, 0) AS basic_salary, ROUND(det.allow_job, 0) AS allow_job, ROUND(det.allow_meal, 0) AS allow_meal, ROUND(det.allow_trans, 0) AS allow_trans, ROUND(det.allow_house, 0) AS allow_house, ROUND(det.allow_car, 0) AS allow_car
+            SELECT det.id_employee, emp.employee_code, emp.employee_name, det.id_departement, dp.departement, det.employee_position, det.id_employee_level, lv.employee_level, det.id_employee_status, sts.employee_status, ROUND(det.basic_salary, 0) AS basic_salary, ROUND(det.allow_job, 0) AS allow_job, ROUND(det.allow_meal, 0) AS allow_meal, ROUND(det.allow_trans, 0) AS allow_trans, ROUND(det.allow_house, 0) AS allow_house, ROUND(det.allow_car, 0) AS allow_car, CONCAT(ROUND(((ROUND(det.basic_salary, 0) + ROUND(det.allow_job, 0) + ROUND(det.allow_meal, 0) + ROUND(det.allow_trans, 0)) / (ROUND(det.basic_salary, 0) + ROUND(det.allow_job, 0) + ROUND(det.allow_meal, 0) + ROUND(det.allow_trans, 0) + ROUND(det.allow_house, 0) + ROUND(det.allow_car, 0)) * 100), 2), '%') AS fixed_salary, CONCAT(ROUND(((ROUND(det.allow_house, 0) + ROUND(det.allow_car, 0)) / (ROUND(det.basic_salary, 0) + ROUND(det.allow_job, 0) + ROUND(det.allow_meal, 0) + ROUND(det.allow_trans, 0) + ROUND(det.allow_house, 0) + ROUND(det.allow_car, 0)) * 100), 2), '%') AS non_fixed_salary, id_employee_status_det
             FROM tb_employee_sal_pps_det AS det
             LEFT JOIN tb_m_employee AS emp ON det.id_employee = emp.id_employee
             LEFT JOIN tb_m_departement AS dp ON det.id_departement = dp.id_departement
@@ -96,6 +122,8 @@
             LUEType.ReadOnly = True
 
             RemoveEmployeeToolStripMenuItem.Visible = False
+
+            RepositoryItemSearchLookUpEdit.ReadOnly = True
         End If
     End Sub
 
@@ -144,15 +172,16 @@
                 Dim allow_trans As String = GVEmployee.GetRowCellValue(i, "allow_trans").ToString
                 Dim allow_house As String = GVEmployee.GetRowCellValue(i, "allow_house").ToString
                 Dim allow_car As String = GVEmployee.GetRowCellValue(i, "allow_car").ToString
+                Dim id_employee_status_det As String = GVEmployee.GetRowCellValue(i, "id_employee_status_det").ToString
 
-                values += "(" + id_employee_sal_pps + ", " + id_employee + ", " + id_departement + ", '" + employee_position + "', " + id_employee_level + ", " + id_employee_status + ", " + basic_salary + ", " + allow_job + ", " + allow_meal + ", " + allow_trans + ", " + allow_house + ", " + allow_car + "), "
+                values += "(" + id_employee_sal_pps + ", " + id_employee + ", " + id_departement + ", '" + employee_position + "', " + id_employee_level + ", " + id_employee_status + ", " + basic_salary + ", " + allow_job + ", " + allow_meal + ", " + allow_trans + ", " + allow_house + ", " + allow_car + ", " + id_employee_status_det + "), "
             End If
         Next
 
         If Not values = "" Then
             values = values.Substring(0, values.Length - 2)
 
-            query = "INSERT INTO tb_employee_sal_pps_det (id_employee_sal_pps, id_employee, id_departement, employee_position, id_employee_level, id_employee_status, basic_salary, allow_job, allow_meal, allow_trans, allow_house, allow_car) VALUES " + values + ""
+            query = "INSERT INTO tb_employee_sal_pps_det (id_employee_sal_pps, id_employee, id_departement, employee_position, id_employee_level, id_employee_status, basic_salary, allow_job, allow_meal, allow_trans, allow_house, allow_car, id_employee_status_det) VALUES " + values + ""
 
             execute_non_query(query, True, "", "", "", "")
         End If
@@ -273,6 +302,7 @@
         report.id_employee_sal_pps = id_employee_sal_pps
         report.data = GCEmployee.DataSource
         report.is_pre = If(id_report_status = "6", "-1", "1")
+        report.type = LUEType.EditValue.ToString
 
         report.XLNumber.Text = TENumber.Text
         report.XLEffectiveDate.Text = DEEffectiveDate.Text
@@ -305,7 +335,7 @@
     Private Sub LUEType_EditValueChanged(sender As Object, e As EventArgs) Handles LUEType.EditValueChanged
         'reset datasource
         Dim query As String = "
-            SELECT det.id_employee, emp.employee_code, emp.employee_name, det.id_departement, dp.departement, det.employee_position, det.id_employee_level, lv.employee_level, det.id_employee_status, sts.employee_status, ROUND(det.basic_salary, 0) AS basic_salary, ROUND(det.allow_job, 0) AS allow_job, ROUND(det.allow_meal, 0) AS allow_meal, ROUND(det.allow_trans, 0) AS allow_trans, ROUND(det.allow_house, 0) AS allow_house, ROUND(det.allow_car, 0) AS allow_car
+            SELECT det.id_employee, emp.employee_code, emp.employee_name, det.id_departement, dp.departement, det.employee_position, det.id_employee_level, lv.employee_level, det.id_employee_status, sts.employee_status, ROUND(det.basic_salary, 0) AS basic_salary, ROUND(det.allow_job, 0) AS allow_job, ROUND(det.allow_meal, 0) AS allow_meal, ROUND(det.allow_trans, 0) AS allow_trans, ROUND(det.allow_house, 0) AS allow_house, ROUND(det.allow_car, 0) AS allow_car, '50.00%' AS fixed_salary, '50.00%' AS non_fixed_salary, id_employee_status_det
             FROM tb_employee_sal_pps_det AS det
             LEFT JOIN tb_m_employee AS emp ON det.id_employee = emp.id_employee
             LEFT JOIN tb_m_departement AS dp ON det.id_departement = dp.id_departement
@@ -329,6 +359,8 @@
             GCHouseAllowance.VisibleIndex = 9
             GCAttendanceAllowance.VisibleIndex = 10
             GCTotalSalary.VisibleIndex = 11
+
+            GBComposition.Visible = True
         ElseIf LUEType.EditValue.ToString = "2" Then
             GCBasicSalary.Caption = "Daily Salary"
 
@@ -338,6 +370,62 @@
             GCHouseAllowance.VisibleIndex = -1
             GCAttendanceAllowance.VisibleIndex = -1
             GCTotalSalary.VisibleIndex = -1
+
+            GBComposition.Visible = False
+        End If
+    End Sub
+
+    Private Sub RepositoryItemCheckEdit_Click(sender As Object, e As EventArgs) Handles RepositoryItemCheckEdit.Click
+        FormProposeEmpSalaryAtt.id_employee_status_det = GVEmployee.GetFocusedRowCellValue("id_employee_status_det").ToString
+
+        FormProposeEmpSalaryAtt.ShowDialog()
+    End Sub
+
+    Private Sub GVEmployee_CellValueChanged(sender As Object, e As DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs) Handles GVEmployee.CellValueChanged
+        If e.Column.FieldName.ToString = "basic_salary" Or e.Column.FieldName.ToString = "allow_job" Or e.Column.FieldName.ToString = "allow_meal" Or e.Column.FieldName.ToString = "allow_trans" Or e.Column.FieldName.ToString = "allow_house" Or e.Column.FieldName.ToString = "allow_car" Then
+            'calculate fixed & non-fixed salary
+            Dim i As Integer = GVEmployee.GetFocusedDataSourceRowIndex()
+
+            Try
+                Dim fixed_salary As Decimal = (GVEmployee.GetRowCellValue(i, "basic_salary") + GVEmployee.GetRowCellValue(i, "allow_job") + GVEmployee.GetRowCellValue(i, "allow_meal") + GVEmployee.GetRowCellValue(i, "allow_trans")) / (GVEmployee.GetRowCellValue(i, "basic_salary") + GVEmployee.GetRowCellValue(i, "allow_job") + GVEmployee.GetRowCellValue(i, "allow_meal") + GVEmployee.GetRowCellValue(i, "allow_trans") + GVEmployee.GetRowCellValue(i, "allow_house") + GVEmployee.GetRowCellValue(i, "allow_car")) * 100
+                Dim non_fixed_salary As Decimal = (GVEmployee.GetRowCellValue(i, "allow_house") + GVEmployee.GetRowCellValue(i, "allow_car")) / (GVEmployee.GetRowCellValue(i, "basic_salary") + GVEmployee.GetRowCellValue(i, "allow_job") + GVEmployee.GetRowCellValue(i, "allow_meal") + GVEmployee.GetRowCellValue(i, "allow_trans") + GVEmployee.GetRowCellValue(i, "allow_house") + GVEmployee.GetRowCellValue(i, "allow_car")) * 100
+
+                GVEmployee.SetRowCellValue(i, "fixed_salary", Math.Round(fixed_salary, 2).ToString + "%")
+                GVEmployee.SetRowCellValue(i, "non_fixed_salary", Math.Round(non_fixed_salary, 2).ToString + "%")
+            Catch ex As Exception
+            End Try
+        End If
+
+        If e.Column.FieldName.ToString = "id_employee_status_det" Then
+            GVEmployee.BestFitColumns()
+        End If
+    End Sub
+
+    Private clone As DataView = Nothing
+
+    Private Sub GVEmployee_ShownEditor(sender As Object, e As EventArgs) Handles GVEmployee.ShownEditor
+        Dim view As DevExpress.XtraGrid.Views.Grid.GridView = CType(sender, DevExpress.XtraGrid.Views.Grid.GridView)
+
+        If view.FocusedColumn.FieldName = "id_employee_status_det" AndAlso TypeOf view.ActiveEditor Is DevExpress.XtraEditors.SearchLookUpEdit Then
+            Dim edit As DevExpress.XtraEditors.SearchLookUpEdit
+            Dim table As DataTable
+            Dim row As DataRow
+
+            edit = CType(view.ActiveEditor, DevExpress.XtraEditors.SearchLookUpEdit)
+
+            Try
+                table = CType(edit.Properties.DataSource, DataTable)
+            Catch ex As Exception
+                table = CType(edit.Properties.DataSource, DataView).Table
+            End Try
+
+            clone = New DataView(table)
+
+            row = view.GetDataRow(view.FocusedRowHandle)
+
+            clone.RowFilter = "[id_employee] = " + view.GetFocusedRowCellValue("id_employee").ToString + "OR [id_employee] = 0"
+
+            edit.Properties.DataSource = clone
         End If
     End Sub
 End Class

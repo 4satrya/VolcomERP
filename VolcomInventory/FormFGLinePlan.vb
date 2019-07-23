@@ -4,6 +4,7 @@
 
     Private Sub FormFGLinePlan_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewSeason()
+        viewlinePlanCat()
 
         'opt view 
         If is_view = "1" Then
@@ -31,6 +32,14 @@
         viewSearchLookupQuery(SLESeason, query, "id_season", "season", "id_season")
     End Sub
 
+    Sub viewlinePlanCat()
+        Dim query As String = "SELECT 0 AS `id_line_plan_cat`, 'All' AS `line_plan_cat`
+        UNION
+        SELECT c.id_line_plan_cat, c.line_plan_cat 
+        FROM tb_lookup_line_plan_cat c "
+        viewLookupQuery(LECat, query, 0, "line_plan_cat", "id_line_plan_cat")
+    End Sub
+
     Private Sub FormFGLinePlan_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
         FormMain.show_rb(Name)
         checkFormAccess(Name)
@@ -46,7 +55,14 @@
     End Sub
 
     Sub viewData()
-        Dim query As String = "SELECT 'No' AS `is_select`,l.id_fg_line_plan, l.id_season, ss.season, l.id_delivery, del.delivery,
+        Dim cond As String = ""
+        If LECat.EditValue.ToString <> "0" Then
+            cond = "AND l.id_line_plan_cat=" + LECat.EditValue.ToString + " "
+        End If
+
+        Dim query As String = "SELECT 'No' AS `is_select`,l.id_fg_line_plan, l.id_season, ss.season, 
+        l.id_line_plan_cat, lpcat.line_plan_cat,
+        l.id_delivery, del.delivery,
         l.id_division, UPPER(dv.display_name) AS `division`,
         l.id_category, cat.display_name AS `category`,
         l.id_source, UPPER(src.display_name) AS `source`,
@@ -56,6 +72,7 @@
         l.qty, l.mark_up, l.target_price
         FROM tb_fg_line_plan l
         INNER JOIN tb_season ss ON ss.id_season = l.id_season
+        INNER JOIN tb_lookup_line_plan_cat lpcat ON lpcat.id_line_plan_cat = l.id_line_plan_cat
         INNER JOIN tb_season_delivery del ON del.id_delivery = l.id_delivery
         INNER JOIN tb_m_code_detail dv ON dv.id_code_detail = l.id_division
         INNER JOIN tb_m_code_detail cat ON cat.id_code_detail = l.id_category
@@ -63,6 +80,7 @@
         INNER JOIN tb_m_code_detail cls ON cls.id_code_detail = l.id_class
         LEFT JOIN tb_m_code_detail col ON col.id_code_detail = l.id_color
         WHERE l.id_season=" + SLESeason.EditValue.ToString + " 
+        " + cond + "
         ORDER BY cls.display_name ASC, l.description ASC "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCData.DataSource = data
@@ -131,5 +149,9 @@
         If GVData.RowCount > 0 And GVData.FocusedRowHandle >= 0 Then
             FormMain.but_edit()
         End If
+    End Sub
+
+    Private Sub LECat_EditValueChanged(sender As Object, e As EventArgs) Handles LECat.EditValueChanged
+        GCData.DataSource = Nothing
     End Sub
 End Class

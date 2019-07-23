@@ -14,7 +14,7 @@
             load_mark_horz(rmt, id, "2", "1", XrTable1)
         End If
 
-        'sattus
+        'status
         If id_report_status = "6" Then
             LabelTitleApprovedDate.Visible = True
             LabelDotApprovedDate.Visible = True
@@ -35,7 +35,6 @@
             e.DisplayText = (e.ListSourceRowIndex + 1).ToString()
         End If
     End Sub
-
 
     Dim tot_cost As Decimal
     Dim tot_prc As Decimal
@@ -156,5 +155,4 @@
             e.Appearance.FontStyleDelta = FontStyle.Regular
         End If
     End Sub
-
 End Class

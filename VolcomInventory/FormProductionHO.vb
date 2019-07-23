@@ -7,12 +7,25 @@
         DEUntil.EditValue = time_now
         DEFromDetail.EditValue = time_now
         DEUntilDetail.EditValue = time_now
+        DEUntilSummary.EditValue = time_now
 
         If is_public_form Then
             BtnViewPending.Visible = False
             PanelControlSendEmail.Visible = False
             GridColumnis_select.Visible = False
         End If
+
+        viewSeason()
+    End Sub
+
+    Sub viewSeason()
+        Dim query As String = "SELECT 0 AS `id_season`, 0 AS `range`, 'All Season' AS `season`
+        UNION
+        SELECT ss.id_season, r.`range`, ss.season 
+        FROM tb_season ss
+        INNER JOIN tb_range r ON r.id_range = ss.id_range
+        ORDER BY `range` ASC "
+        viewSearchLookupQuery(SLESeason, query, "id_season", "season", "id_season")
     End Sub
 
     Sub viewHOStatus()
@@ -168,7 +181,7 @@
 
     Sub viewDetail(ByVal cond As String)
         Cursor = Cursors.WaitCursor
-        Dim query As String = "CALL view_pl_prod_report_det('" + cond + "') "
+        Dim query As String = "CALL view_pl_prod_report_det_ver2('" + cond + "') "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCDetail.DataSource = data
         GVDetail.BestFitColumns()
@@ -177,5 +190,28 @@
 
     Private Sub GVList_CellValueChanged(sender As Object, e As DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs) Handles GVList.CellValueChanged
         GVList.BestFitColumns()
+    End Sub
+
+    Private Sub BtnViewSummary_Click(sender As Object, e As EventArgs) Handles BtnViewSummary.Click
+        viewSummary()
+    End Sub
+
+    Sub viewSummary()
+        Cursor = Cursors.WaitCursor
+        Dim date_until_selected As String = "9999-01-01"
+        Try
+            date_until_selected = DateTime.Parse(DEUntilDetail.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+        Dim cond As String = "AND pl.pl_prod_order_date<=""" + date_until_selected + """ "
+        Dim id_season As String = SLESeason.EditValue.ToString
+        If id_season <> "0" Then
+            cond += "AND d.id_season=" + id_season + " "
+        End If
+        Dim query As String = "CALL view_pl_prod_report_summary('" + cond + "')"
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCSummary.DataSource = data
+        GVSummary.BestFitColumns()
+        Cursor = Cursors.Default
     End Sub
 End Class

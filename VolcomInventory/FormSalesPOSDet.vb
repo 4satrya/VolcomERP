@@ -1134,9 +1134,9 @@ Public Class FormSalesPOSDet
         command.Dispose()
         'check order
         Dim data As New DataTable
-        Dim query_check_order As String = "SELECT o.`order`, so.id_sales_order,so.sales_order_number, so.sales_order_ol_shop_number, del.id_pl_sales_order_del,(del.pl_sales_order_del_number) AS `del_number`, sal.sales_pos_number,
+        Dim query_check_order As String = "SELECT o.`order`, so.id_sales_order,so.sales_order_number, so.sales_order_ol_shop_number, del.id_pl_sales_order_del,(del.pl_sales_order_del_number) AS `del_number`, sal.sales_pos_number, ro.sales_return_order_number,
         IFNULL(deld.pl_sales_order_del_det_qty,0) AS `qty`, p.product_full_code AS `code`, p.product_display_name AS `name`, cd.code_detail_name AS `size`,
-        CONCAT(IF(ISNULL(so.id_sales_order),'ERP order not found; ',''), IF(ISNULL(del.id_pl_sales_order_del),'Delivery not found;',''), IF(!ISNULL(sal.id_sales_pos),'Invoice already created;','')) AS `status`
+        CONCAT(IF(ISNULL(so.id_sales_order),'ERP order not found; ',''), IF(ISNULL(del.id_pl_sales_order_del),'Delivery not found;',''), IF(!ISNULL(sal.id_sales_pos),'Invoice already created;',''), IF(!ISNULL(ro.id_sales_return_order),'Return Order already created;','')) AS `status`
         FROM tb_ol_order_temp o
         LEFT JOIN tb_sales_order so ON so.sales_order_ol_shop_number = o.`order` AND so.id_store_contact_to=" + id_store_contact_from + " AND so.id_report_status=6
         LEFT JOIN tb_pl_sales_order_del del ON del.id_sales_order = so.id_sales_order AND del.id_report_status=6
@@ -1146,7 +1146,10 @@ Public Class FormSalesPOSDet
         LEFT JOIN tb_m_product p ON p.id_product = deld.id_product
         LEFT JOIN tb_m_product_code pc ON pc.id_product = p.id_product
         LEFT JOIN tb_m_code_detail cd ON cd.id_code_detail = pc.id_code_detail
-        WHERE ISNULL(so.id_sales_order) OR ISNULL(del.id_pl_sales_order_del) OR !ISNULL(sal.id_sales_pos) "
+        LEFT JOIN tb_sales_return_order_det rod ON rod.id_sales_order_det = deld.id_sales_order_det
+        LEFT JOIN tb_sales_return_order ro ON ro.id_sales_return_order = rod.id_sales_return_order AND ro.id_report_status!=5
+        WHERE ISNULL(so.id_sales_order) OR ISNULL(del.id_pl_sales_order_del) OR !ISNULL(sal.id_sales_pos) OR !ISNULL(ro.id_sales_return_order) "
+        'Console.WriteLine(query_check_order)
         Dim adapter As New MySql.Data.MySqlClient.MySqlDataAdapter(query_check_order, connection)
         adapter.SelectCommand.CommandTimeout = 300
         adapter.Fill(data)
@@ -1179,13 +1182,19 @@ Public Class FormSalesPOSDet
 	        INNER JOIN tb_sales_pos inv ON inv.id_sales_pos = ind.id_sales_pos
 	        WHERE inv.id_report_status!=5
         ) ind ON ind.id_pl_sales_order_del_det = dd.id_pl_sales_order_del_det
+        LEFT JOIN (
+            SELECT rod.id_sales_return_order_det, rod.id_sales_order_det
+            FROM tb_sales_return_order_det rod
+            INNER JOIN tb_sales_return_order ro ON ro.id_sales_return_order = rod.id_sales_return_order
+            WHERE ro.id_report_status!=5
+        ) rod ON rod.id_sales_order_det = sod.id_sales_order_det
         INNER JOIN tb_m_product p ON p.id_product = dd.id_product
         INNER JOIN tb_m_product_code pc ON pc.id_product = p.id_product 
         INNER JOIN tb_m_code_detail cd ON cd.id_code_detail = pc.id_code_detail AND cd.id_code=33
         INNER JOIN tb_m_design dsg ON dsg.id_design = p.id_design
         INNER JOIN tb_m_design_price prc ON prc.id_design_price = dd.id_design_price
         INNER JOIN tb_lookup_design_price_type prct ON prct.id_design_price_type = prc.id_design_price_type
-        WHERE d.id_store_contact_to='" + id_store_contact_from + "' AND d.id_report_status=6 AND !ISNULL(so.sales_order_ol_shop_number) AND so.sales_order_ol_shop_number!='' AND ISNULL(ind.id_sales_pos_det) "
+        WHERE d.id_store_contact_to='" + id_store_contact_from + "' AND d.id_report_status=6 AND !ISNULL(so.sales_order_ol_shop_number) AND so.sales_order_ol_shop_number!='' AND ISNULL(ind.id_sales_pos_det) AND ISNULL(rod.id_sales_return_order_det) "
         If LEInvType.EditValue.ToString = "4" Then
             query_del += "HAVING design_price_retail=0 "
         Else
@@ -1207,7 +1216,7 @@ Public Class FormSalesPOSDet
             GCItemList.DataSource = dtr
             GCItemList.RefreshDataSource()
         Catch ex As Exception
-            stopCustom("Order not found or invoice is already created".ToUpper + System.Environment.NewLine + "Error Detail : " + ex.ToString)
+            stopCustom("Order not found or invoice/return order is already created".ToUpper + System.Environment.NewLine + "Error Detail : " + ex.ToString)
         End Try
     End Sub
 

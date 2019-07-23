@@ -1765,6 +1765,12 @@
     <Compile Include="FormInvoiceFGPODPPop.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormInvoiceFGPODPSplit.Designer.vb">
+      <DependentUpon>FormInvoiceFGPODPSplit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormInvoiceFGPODPSplit.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormItemCatMapping.Designer.vb">
       <DependentUpon>FormItemCatMapping.vb</DependentUpon>
     </Compile>
@@ -1967,6 +1973,12 @@
       <DependentUpon>FormMasterDesignComment.vb</DependentUpon>
     </Compile>
     <Compile Include="FormMasterDesignComment.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMasterDesignCOPHistory.Designer.vb">
+      <DependentUpon>FormMasterDesignCOPHistory.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMasterDesignCOPHistory.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormMasterDesignCOPPD.Designer.vb">
@@ -2477,6 +2489,12 @@
       <DependentUpon>FormProposeEmpSalary.vb</DependentUpon>
     </Compile>
     <Compile Include="FormProposeEmpSalary.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormProposeEmpSalaryAtt.Designer.vb">
+      <DependentUpon>FormProposeEmpSalaryAtt.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormProposeEmpSalaryAtt.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormProposeEmpSalaryDet.Designer.vb">
@@ -4597,6 +4615,18 @@
     <Compile Include="FormSampleDelSingle.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormSampleDevelopment.Designer.vb">
+      <DependentUpon>FormSampleDevelopment.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormSampleDevelopment.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSampleDevelopmentDet.Designer.vb">
+      <DependentUpon>FormSampleDevelopmentDet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormSampleDevelopmentDet.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormSampleExpense.Designer.vb">
       <DependentUpon>FormSampleExpense.vb</DependentUpon>
     </Compile>
@@ -6026,6 +6056,18 @@
       <DependentUpon>ReportEmpPayrollDeduction.vb</DependentUpon>
     </Compile>
     <Compile Include="ReportEmpPayrollDeduction.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportEmpPayrollOvertime.Designer.vb">
+      <DependentUpon>ReportEmpPayrollOvertime.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportEmpPayrollOvertime.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportEmpPayrollReportAllDepartement.Designer.vb">
+      <DependentUpon>ReportEmpPayrollReportAllDepartement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportEmpPayrollReportAllDepartement.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ReportEmpPayrollReportBPJSKesehatan.Designer.vb">
@@ -7777,6 +7819,9 @@
     <EmbeddedResource Include="FormInvoiceFGPODPPop.resx">
       <DependentUpon>FormInvoiceFGPODPPop.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormInvoiceFGPODPSplit.resx">
+      <DependentUpon>FormInvoiceFGPODPSplit.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormItemCatMapping.resx">
       <DependentUpon>FormItemCatMapping.vb</DependentUpon>
     </EmbeddedResource>
@@ -7878,6 +7923,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormMasterDesignComment.resx">
       <DependentUpon>FormMasterDesignComment.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMasterDesignCOPHistory.resx">
+      <DependentUpon>FormMasterDesignCOPHistory.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMasterDesignCOPPD.resx">
       <DependentUpon>FormMasterDesignCOPPD.vb</DependentUpon>
@@ -8134,6 +8182,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormProposeEmpSalary.resx">
       <DependentUpon>FormProposeEmpSalary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormProposeEmpSalaryAtt.resx">
+      <DependentUpon>FormProposeEmpSalaryAtt.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormProposeEmpSalaryDet.resx">
       <DependentUpon>FormProposeEmpSalaryDet.vb</DependentUpon>
@@ -9470,6 +9521,12 @@
       <DependentUpon>FormSampleDelSingle.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormSampleDevelopment.resx">
+      <DependentUpon>FormSampleDevelopment.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSampleDevelopmentDet.resx">
+      <DependentUpon>FormSampleDevelopmentDet.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormSampleExpense.resx">
       <DependentUpon>FormSampleExpense.vb</DependentUpon>
     </EmbeddedResource>
@@ -10328,6 +10385,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportEmpPayrollDeduction.resx">
       <DependentUpon>ReportEmpPayrollDeduction.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportEmpPayrollOvertime.resx">
+      <DependentUpon>ReportEmpPayrollOvertime.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportEmpPayrollReportAllDepartement.resx">
+      <DependentUpon>ReportEmpPayrollReportAllDepartement.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportEmpPayrollReportBPJSKesehatan.resx">
       <DependentUpon>ReportEmpPayrollReportBPJSKesehatan.vb</DependentUpon>

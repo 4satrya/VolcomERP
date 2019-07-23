@@ -44,6 +44,7 @@ Partial Class FormMasterDesignCOPPD
         Me.BUpdateVendor = New DevExpress.XtraEditors.SimpleButton()
         Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
         Me.TETargetCost = New DevExpress.XtraEditors.TextEdit()
+        Me.BHistoryCOP = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.TEVendor.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEVendorName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -130,6 +131,7 @@ Partial Class FormMasterDesignCOPPD
         '
         'PanelControl3
         '
+        Me.PanelControl3.Controls.Add(Me.BHistoryCOP)
         Me.PanelControl3.Controls.Add(Me.BtnCancel)
         Me.PanelControl3.Controls.Add(Me.BtnSave)
         Me.PanelControl3.Dock = System.Windows.Forms.DockStyle.Bottom
@@ -350,6 +352,17 @@ Partial Class FormMasterDesignCOPPD
         Me.TETargetCost.Size = New System.Drawing.Size(226, 20)
         Me.TETargetCost.TabIndex = 8908
         '
+        'BHistoryCOP
+        '
+        Me.BHistoryCOP.Dock = System.Windows.Forms.DockStyle.Left
+        Me.BHistoryCOP.ImageIndex = 13
+        Me.BHistoryCOP.ImageList = Me.LargeImageCollection
+        Me.BHistoryCOP.Location = New System.Drawing.Point(2, 2)
+        Me.BHistoryCOP.Name = "BHistoryCOP"
+        Me.BHistoryCOP.Size = New System.Drawing.Size(138, 34)
+        Me.BHistoryCOP.TabIndex = 8
+        Me.BHistoryCOP.Text = "History COP (Similar)"
+        '
         'FormMasterDesignCOPPD
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -423,4 +436,5 @@ Partial Class FormMasterDesignCOPPD
     Friend WithEvents BUpdateVendor As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents LabelControl6 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents TETargetCost As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents BHistoryCOP As DevExpress.XtraEditors.SimpleButton
 End Class

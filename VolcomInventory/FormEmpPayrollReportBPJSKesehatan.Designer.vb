@@ -26,7 +26,6 @@ Partial Class FormEmpPayrollReportBPJSKesehatan
         Me.GVAllDepartements = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GCANo = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GCADepartement = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GCAEqual = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GCAConpanyContribution = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GCAEmployeeContribution = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GCATotalContribution = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -87,7 +86,7 @@ Partial Class FormEmpPayrollReportBPJSKesehatan
         '
         'GVAllDepartements
         '
-        Me.GVAllDepartements.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GCANo, Me.GCADepartement, Me.GCAEqual, Me.GCAConpanyContribution, Me.GCAEmployeeContribution, Me.GCATotalContribution})
+        Me.GVAllDepartements.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GCANo, Me.GCADepartement, Me.GCAConpanyContribution, Me.GCAEmployeeContribution, Me.GCATotalContribution})
         Me.GVAllDepartements.GridControl = Me.GCAllDepartements
         Me.GVAllDepartements.Name = "GVAllDepartements"
         Me.GVAllDepartements.OptionsBehavior.AutoExpandAllGroups = True
@@ -113,15 +112,6 @@ Partial Class FormEmpPayrollReportBPJSKesehatan
         Me.GCADepartement.Visible = True
         Me.GCADepartement.VisibleIndex = 1
         '
-        'GCAEqual
-        '
-        Me.GCAEqual.Caption = " "
-        Me.GCAEqual.FieldName = "equal"
-        Me.GCAEqual.Name = "GCAEqual"
-        Me.GCAEqual.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "equal", "=")})
-        Me.GCAEqual.Visible = True
-        Me.GCAEqual.VisibleIndex = 2
-        '
         'GCAConpanyContribution
         '
         Me.GCAConpanyContribution.Caption = "Dibayar Oleh Perusahaan"
@@ -131,7 +121,7 @@ Partial Class FormEmpPayrollReportBPJSKesehatan
         Me.GCAConpanyContribution.Name = "GCAConpanyContribution"
         Me.GCAConpanyContribution.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "company_contribution", "{0:N0}")})
         Me.GCAConpanyContribution.Visible = True
-        Me.GCAConpanyContribution.VisibleIndex = 3
+        Me.GCAConpanyContribution.VisibleIndex = 2
         '
         'GCAEmployeeContribution
         '
@@ -142,7 +132,7 @@ Partial Class FormEmpPayrollReportBPJSKesehatan
         Me.GCAEmployeeContribution.Name = "GCAEmployeeContribution"
         Me.GCAEmployeeContribution.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "employee_contribution", "{0:N0}")})
         Me.GCAEmployeeContribution.Visible = True
-        Me.GCAEmployeeContribution.VisibleIndex = 4
+        Me.GCAEmployeeContribution.VisibleIndex = 3
         '
         'GCATotalContribution
         '
@@ -153,7 +143,7 @@ Partial Class FormEmpPayrollReportBPJSKesehatan
         Me.GCATotalContribution.Name = "GCATotalContribution"
         Me.GCATotalContribution.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_contribution", "{0:N0}")})
         Me.GCATotalContribution.Visible = True
-        Me.GCATotalContribution.VisibleIndex = 5
+        Me.GCATotalContribution.VisibleIndex = 4
         '
         'XtraTabPage2
         '
@@ -350,7 +340,6 @@ Partial Class FormEmpPayrollReportBPJSKesehatan
     Friend WithEvents GVAllDepartements As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GCANo As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GCADepartement As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GCAEqual As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GCAConpanyContribution As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GCAEmployeeContribution As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GCATotalContribution As DevExpress.XtraGrid.Columns.GridColumn

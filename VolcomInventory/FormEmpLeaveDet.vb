@@ -372,8 +372,6 @@
                                         INNER JOIN tb_emp_leave lv ON lv.id_emp_leave=lvd.id_emp_leave
                                         WHERE DATE_FORMAT(lvd.datetime_start, '%Y-%m') = DATE_FORMAT('" & date_sick & "', '%Y-%m') AND lv.id_emp='" & id_employee & "' AND lv.id_form_dc='2' AND lv.id_leave_type='2' AND lv.id_report_status!='5' "
                 Dim cek As String = execute_query(query_cek, 0, True, "", "", "", "")
-                Console.WriteLine(query_cek)
-                Console.WriteLine(cek)
                 If Not cek.ToString = "0" Then
                     stopCustom("Hanya dapat mengajukan sakit dengan form satu hari dalam satu bulan." & vbNewLine & "Ajukan surat keterangan sakit dari dokter (DC) untuk pengajuan sakit.")
                     problem = True
@@ -405,7 +403,7 @@
             If problem = False Then
                 'add parent
                 Dim number As String = header_number_emp("1")
-                query = "INSERT INTO tb_emp_leave(emp_leave_number,id_emp,emp_leave_date,id_report_status,id_emp_change,leave_purpose,leave_remaining,leave_total,id_leave_type,id_form_dc,id_user_who_create) VALUES('" & number & "','" & id_employee & "',NOW(),1,'" & id_employee_change & "','" & MELeavePurpose.Text & "','" & (TERemainingLeave.EditValue * 60) & "','" & (TETotLeave.EditValue * 60) & "','" & LELeaveType.EditValue.ToString & "','" & LEFormDC.EditValue.ToString & "','" & id_user & "');SELECT LAST_INSERT_ID(); "
+                query = "INSERT INTO tb_emp_leave(emp_leave_number,id_emp,emp_leave_date,id_report_status,id_emp_change,leave_purpose,leave_remaining,leave_total,id_leave_type,id_form_dc,id_user_who_create) VALUES('" & number & "','" & id_employee & "',NOW(),1,'" & id_employee_change & "','" & addSlashes(MELeavePurpose.Text) & "','" & (TERemainingLeave.EditValue * 60) & "','" & (TETotLeave.EditValue * 60) & "','" & LELeaveType.EditValue.ToString & "','" & LEFormDC.EditValue.ToString & "','" & id_user & "');SELECT LAST_INSERT_ID(); "
                 id_emp_leave = execute_query(query, 0, True, "", "", "", "")
                 increase_inc_emp("1")
                 'add detail

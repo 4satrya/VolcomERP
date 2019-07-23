@@ -39,7 +39,7 @@
                 Dim total_text As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(2)
 
                 total_text.Text = "TOTAL"
-                total_text.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+                total_text.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter
                 total_text.BackColor = Color.LightGray
 
                 'company 1
@@ -110,7 +110,7 @@
 
             employee_name.Text = data.Rows(i)("employee_name").ToString
             employee_name.Borders = DevExpress.XtraPrinting.BorderSide.Top Or DevExpress.XtraPrinting.BorderSide.Left
-            employee_name.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+            employee_name.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter
             employee_name.BackColor = Color.White
 
             'jenis kelamin
@@ -183,6 +183,26 @@
             keterangan.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
             keterangan.BackColor = Color.Transparent
 
+            If Not last_departement = data.Rows(i)("departement").ToString Then
+                departement_company_contribution_1 = 0
+                departement_company_contribution_2 = 0
+                departement_employee_contribution_1 = 0
+                departement_employee_contribution_2 = 0
+                departement_total = 0
+            End If
+
+            departement_company_contribution_1 += data.Rows(i)("company_contribution_1")
+            departement_company_contribution_2 += data.Rows(i)("company_contribution_2")
+            departement_employee_contribution_1 += data.Rows(i)("employee_contribution_1")
+            departement_employee_contribution_2 += data.Rows(i)("employee_contribution_2")
+            departement_total += data.Rows(i)("company_contribution_1") + data.Rows(i)("company_contribution_2") + data.Rows(i)("employee_contribution_1") + data.Rows(i)("employee_contribution_2")
+
+            total_company_contribution_1 += data.Rows(i)("company_contribution_1")
+            total_company_contribution_2 += data.Rows(i)("company_contribution_2")
+            total_employee_contribution_1 += data.Rows(i)("employee_contribution_1")
+            total_employee_contribution_2 += data.Rows(i)("employee_contribution_2")
+            total += data.Rows(i)("company_contribution_1") + data.Rows(i)("company_contribution_2") + data.Rows(i)("employee_contribution_1") + data.Rows(i)("employee_contribution_2")
+
             'total departement last
             If i = data.Rows.Count - 1 Then
                 row = XTable.InsertRowBelow(row)
@@ -201,7 +221,7 @@
                 Dim total_text As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(2)
 
                 total_text.Text = "TOTAL"
-                total_text.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+                total_text.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter
                 total_text.BackColor = Color.LightGray
 
                 'company 1
@@ -239,26 +259,6 @@
                 total_departement.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
                 total_departement.BackColor = Color.LightGray
             End If
-
-            If Not last_departement = data.Rows(i)("departement").ToString Then
-                departement_company_contribution_1 = 0
-                departement_company_contribution_2 = 0
-                departement_employee_contribution_1 = 0
-                departement_employee_contribution_2 = 0
-                departement_total = 0
-            End If
-
-            departement_company_contribution_1 += data.Rows(i)("company_contribution_1")
-            departement_company_contribution_2 += data.Rows(i)("company_contribution_2")
-            departement_employee_contribution_1 += data.Rows(i)("employee_contribution_1")
-            departement_employee_contribution_2 += data.Rows(i)("employee_contribution_2")
-            departement_total += data.Rows(i)("company_contribution_1") + data.Rows(i)("company_contribution_2") + data.Rows(i)("employee_contribution_1") + data.Rows(i)("employee_contribution_2")
-
-            total_company_contribution_1 += data.Rows(i)("company_contribution_1")
-            total_company_contribution_2 += data.Rows(i)("company_contribution_2")
-            total_employee_contribution_1 += data.Rows(i)("employee_contribution_1")
-            total_employee_contribution_2 += data.Rows(i)("employee_contribution_2")
-            total += data.Rows(i)("company_contribution_1") + data.Rows(i)("company_contribution_2") + data.Rows(i)("employee_contribution_1") + data.Rows(i)("employee_contribution_2")
 
             last_departement = data.Rows(i)("departement").ToString
         Next

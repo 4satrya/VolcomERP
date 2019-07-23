@@ -23,6 +23,8 @@ Partial Class FormFGLinePlan
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormFGLinePlan))
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
         Me.PanelControlNav = New DevExpress.XtraEditors.PanelControl()
+        Me.LECat = New DevExpress.XtraEditors.LookUpEdit()
+        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.SLESeason = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -63,10 +65,12 @@ Partial Class FormFGLinePlan
         Me.GridColumnis_select = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.GridColumnGroup = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnline_plan_cat = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.PanelControlNav, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlNav.SuspendLayout()
+        CType(Me.LECat.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLESeason.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CESelectAll.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -91,17 +95,36 @@ Partial Class FormFGLinePlan
         'PanelControlNav
         '
         Me.PanelControlNav.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelControlNav.Controls.Add(Me.LECat)
+        Me.PanelControlNav.Controls.Add(Me.LabelControl2)
         Me.PanelControlNav.Controls.Add(Me.SLESeason)
         Me.PanelControlNav.Controls.Add(Me.LabelControl1)
         Me.PanelControlNav.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PanelControlNav.Location = New System.Drawing.Point(345, 2)
+        Me.PanelControlNav.Location = New System.Drawing.Point(209, 2)
         Me.PanelControlNav.Name = "PanelControlNav"
-        Me.PanelControlNav.Size = New System.Drawing.Size(291, 40)
+        Me.PanelControlNav.Size = New System.Drawing.Size(427, 40)
         Me.PanelControlNav.TabIndex = 8915
+        '
+        'LECat
+        '
+        Me.LECat.Location = New System.Drawing.Point(273, 10)
+        Me.LECat.Name = "LECat"
+        Me.LECat.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.LECat.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_lookup_line_plan_cat", "id", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("line_plan_cat", "Type")})
+        Me.LECat.Size = New System.Drawing.Size(141, 20)
+        Me.LECat.TabIndex = 8912
+        '
+        'LabelControl2
+        '
+        Me.LabelControl2.Location = New System.Drawing.Point(243, 13)
+        Me.LabelControl2.Name = "LabelControl2"
+        Me.LabelControl2.Size = New System.Drawing.Size(24, 13)
+        Me.LabelControl2.TabIndex = 8911
+        Me.LabelControl2.Text = "Type"
         '
         'SLESeason
         '
-        Me.SLESeason.Location = New System.Drawing.Point(98, 10)
+        Me.SLESeason.Location = New System.Drawing.Point(50, 10)
         Me.SLESeason.Name = "SLESeason"
         Me.SLESeason.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SLESeason.Properties.Appearance.Options.UseFont = True
@@ -143,7 +166,7 @@ Partial Class FormFGLinePlan
         '
         'LabelControl1
         '
-        Me.LabelControl1.Location = New System.Drawing.Point(57, 13)
+        Me.LabelControl1.Location = New System.Drawing.Point(9, 13)
         Me.LabelControl1.Name = "LabelControl1"
         Me.LabelControl1.Size = New System.Drawing.Size(35, 13)
         Me.LabelControl1.TabIndex = 8909
@@ -210,7 +233,7 @@ Partial Class FormFGLinePlan
         '
         'GVData
         '
-        Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnId, Me.GridColumnid_season, Me.GridColumnseason, Me.GridColumnid_delivery, Me.GridColumndelivery, Me.GridColumnid_division, Me.GridColumndivision, Me.GridColumncategory, Me.GridColumnid_category, Me.GridColumnid_source, Me.GridColumnsource, Me.GridColumnid_class, Me.GridColumnClass, Me.GridColumnid_color, Me.GridColumncolor, Me.GridColumndescription, Me.GridColumnbenchmark, Me.GridColumnQty, Me.GridColumntarget_cost, Me.GridColumntarget_price, Me.GridColumnmark_up, Me.GridColumntotal_cost, Me.GridColumntotal_value, Me.GridColumnis_select, Me.GridColumnGroup})
+        Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnId, Me.GridColumnid_season, Me.GridColumnseason, Me.GridColumnid_delivery, Me.GridColumndelivery, Me.GridColumnid_division, Me.GridColumndivision, Me.GridColumncategory, Me.GridColumnid_category, Me.GridColumnid_source, Me.GridColumnsource, Me.GridColumnid_class, Me.GridColumnClass, Me.GridColumnid_color, Me.GridColumncolor, Me.GridColumndescription, Me.GridColumnbenchmark, Me.GridColumnQty, Me.GridColumntarget_cost, Me.GridColumntarget_price, Me.GridColumnmark_up, Me.GridColumntotal_cost, Me.GridColumntotal_value, Me.GridColumnis_select, Me.GridColumnGroup, Me.GridColumnline_plan_cat})
         Me.GVData.GridControl = Me.GCData
         Me.GVData.GroupCount = 1
         Me.GVData.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty", Me.GridColumnQty, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_cost", Me.GridColumntotal_cost, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_value", Me.GridColumntotal_value, "{0:N0}")})
@@ -270,7 +293,7 @@ Partial Class FormFGLinePlan
         Me.GridColumndelivery.Name = "GridColumndelivery"
         Me.GridColumndelivery.OptionsColumn.ReadOnly = True
         Me.GridColumndelivery.Visible = True
-        Me.GridColumndelivery.VisibleIndex = 4
+        Me.GridColumndelivery.VisibleIndex = 5
         Me.GridColumndelivery.Width = 119
         '
         'GridColumnid_division
@@ -291,7 +314,7 @@ Partial Class FormFGLinePlan
         Me.GridColumndivision.Name = "GridColumndivision"
         Me.GridColumndivision.OptionsColumn.ReadOnly = True
         Me.GridColumndivision.Visible = True
-        Me.GridColumndivision.VisibleIndex = 1
+        Me.GridColumndivision.VisibleIndex = 2
         Me.GridColumndivision.Width = 116
         '
         'GridColumncategory
@@ -303,7 +326,7 @@ Partial Class FormFGLinePlan
         Me.GridColumncategory.Name = "GridColumncategory"
         Me.GridColumncategory.OptionsColumn.ReadOnly = True
         Me.GridColumncategory.Visible = True
-        Me.GridColumncategory.VisibleIndex = 2
+        Me.GridColumncategory.VisibleIndex = 3
         Me.GridColumncategory.Width = 116
         '
         'GridColumnid_category
@@ -333,7 +356,7 @@ Partial Class FormFGLinePlan
         Me.GridColumnsource.Name = "GridColumnsource"
         Me.GridColumnsource.OptionsColumn.ReadOnly = True
         Me.GridColumnsource.Visible = True
-        Me.GridColumnsource.VisibleIndex = 3
+        Me.GridColumnsource.VisibleIndex = 4
         Me.GridColumnsource.Width = 73
         '
         'GridColumnid_class
@@ -354,7 +377,7 @@ Partial Class FormFGLinePlan
         Me.GridColumnClass.Name = "GridColumnClass"
         Me.GridColumnClass.OptionsColumn.ReadOnly = True
         Me.GridColumnClass.Visible = True
-        Me.GridColumnClass.VisibleIndex = 5
+        Me.GridColumnClass.VisibleIndex = 6
         Me.GridColumnClass.Width = 119
         '
         'GridColumnid_color
@@ -375,7 +398,7 @@ Partial Class FormFGLinePlan
         Me.GridColumncolor.Name = "GridColumncolor"
         Me.GridColumncolor.OptionsColumn.ReadOnly = True
         Me.GridColumncolor.Visible = True
-        Me.GridColumncolor.VisibleIndex = 7
+        Me.GridColumncolor.VisibleIndex = 8
         Me.GridColumncolor.Width = 119
         '
         'GridColumndescription
@@ -387,7 +410,7 @@ Partial Class FormFGLinePlan
         Me.GridColumndescription.Name = "GridColumndescription"
         Me.GridColumndescription.OptionsColumn.ReadOnly = True
         Me.GridColumndescription.Visible = True
-        Me.GridColumndescription.VisibleIndex = 6
+        Me.GridColumndescription.VisibleIndex = 7
         Me.GridColumndescription.Width = 119
         '
         'GridColumnbenchmark
@@ -399,7 +422,7 @@ Partial Class FormFGLinePlan
         Me.GridColumnbenchmark.Name = "GridColumnbenchmark"
         Me.GridColumnbenchmark.OptionsColumn.ReadOnly = True
         Me.GridColumnbenchmark.Visible = True
-        Me.GridColumnbenchmark.VisibleIndex = 8
+        Me.GridColumnbenchmark.VisibleIndex = 9
         Me.GridColumnbenchmark.Width = 119
         '
         'GridColumnQty
@@ -414,7 +437,7 @@ Partial Class FormFGLinePlan
         Me.GridColumnQty.OptionsColumn.ReadOnly = True
         Me.GridColumnQty.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty", "{0:N0}")})
         Me.GridColumnQty.Visible = True
-        Me.GridColumnQty.VisibleIndex = 9
+        Me.GridColumnQty.VisibleIndex = 10
         Me.GridColumnQty.Width = 119
         '
         'GridColumntarget_cost
@@ -430,7 +453,7 @@ Partial Class FormFGLinePlan
         Me.GridColumntarget_cost.UnboundExpression = "[target_price] / [mark_up]"
         Me.GridColumntarget_cost.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
         Me.GridColumntarget_cost.Visible = True
-        Me.GridColumntarget_cost.VisibleIndex = 10
+        Me.GridColumntarget_cost.VisibleIndex = 11
         Me.GridColumntarget_cost.Width = 119
         '
         'GridColumntarget_price
@@ -444,7 +467,7 @@ Partial Class FormFGLinePlan
         Me.GridColumntarget_price.Name = "GridColumntarget_price"
         Me.GridColumntarget_price.OptionsColumn.ReadOnly = True
         Me.GridColumntarget_price.Visible = True
-        Me.GridColumntarget_price.VisibleIndex = 12
+        Me.GridColumntarget_price.VisibleIndex = 13
         Me.GridColumntarget_price.Width = 119
         '
         'GridColumnmark_up
@@ -458,7 +481,7 @@ Partial Class FormFGLinePlan
         Me.GridColumnmark_up.Name = "GridColumnmark_up"
         Me.GridColumnmark_up.OptionsColumn.ReadOnly = True
         Me.GridColumnmark_up.Visible = True
-        Me.GridColumnmark_up.VisibleIndex = 11
+        Me.GridColumnmark_up.VisibleIndex = 12
         Me.GridColumnmark_up.Width = 119
         '
         'GridColumntotal_cost
@@ -475,7 +498,7 @@ Partial Class FormFGLinePlan
         Me.GridColumntotal_cost.UnboundExpression = "[qty] * [target_cost]"
         Me.GridColumntotal_cost.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
         Me.GridColumntotal_cost.Visible = True
-        Me.GridColumntotal_cost.VisibleIndex = 13
+        Me.GridColumntotal_cost.VisibleIndex = 14
         Me.GridColumntotal_cost.Width = 119
         '
         'GridColumntotal_value
@@ -492,7 +515,7 @@ Partial Class FormFGLinePlan
         Me.GridColumntotal_value.UnboundExpression = "[qty] * [target_price]"
         Me.GridColumntotal_value.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
         Me.GridColumntotal_value.Visible = True
-        Me.GridColumntotal_value.VisibleIndex = 14
+        Me.GridColumntotal_value.VisibleIndex = 15
         Me.GridColumntotal_value.Width = 137
         '
         'GridColumnis_select
@@ -521,6 +544,14 @@ Partial Class FormFGLinePlan
         Me.GridColumnGroup.UnboundExpression = "Concat([division], '  ', [category], ' ', [class])"
         Me.GridColumnGroup.UnboundType = DevExpress.Data.UnboundColumnType.[String]
         '
+        'GridColumnline_plan_cat
+        '
+        Me.GridColumnline_plan_cat.Caption = "PLAN TYPE"
+        Me.GridColumnline_plan_cat.FieldName = "line_plan_cat"
+        Me.GridColumnline_plan_cat.Name = "GridColumnline_plan_cat"
+        Me.GridColumnline_plan_cat.Visible = True
+        Me.GridColumnline_plan_cat.VisibleIndex = 1
+        '
         'FormFGLinePlan
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -537,6 +568,7 @@ Partial Class FormFGLinePlan
         CType(Me.PanelControlNav, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControlNav.ResumeLayout(False)
         Me.PanelControlNav.PerformLayout()
+        CType(Me.LECat.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SLESeason.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CESelectAll.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -590,4 +622,7 @@ Partial Class FormFGLinePlan
     Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
     Friend WithEvents DeleteThisRowToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents EditToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents LECat As DevExpress.XtraEditors.LookUpEdit
+    Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents GridColumnline_plan_cat As DevExpress.XtraGrid.Columns.GridColumn
 End Class

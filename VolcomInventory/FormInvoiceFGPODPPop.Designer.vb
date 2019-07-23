@@ -64,7 +64,7 @@ Partial Class FormInvoiceFGPODPPop
         Me.BtnCancel.Size = New System.Drawing.Size(112, 43)
         Me.BtnCancel.TabIndex = 18
         Me.BtnCancel.TabStop = False
-        Me.BtnCancel.Text = "Cancel"
+        Me.BtnCancel.Text = "Close"
         '
         'BtnSave
         '

@@ -198,7 +198,7 @@
             If confirm = Windows.Forms.DialogResult.Yes Then
                 Cursor = Cursors.WaitCursor
                 Dim fg_code_replace_store_number As String = TxtNumber.Text
-                Dim fg_code_replace_store_note As String = MENote.Text
+                Dim fg_code_replace_store_note As String = addSlashes(MENote.Text)
                 Dim id_report_status As String = LEReportStatus.EditValue
 
                 If action = "ins" Then

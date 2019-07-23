@@ -96,7 +96,7 @@
                 BMark.Enabled = False
                 BandedGridColumnPending.OptionsColumn.AllowEdit = True
                 BandedGridColumnCash.OptionsColumn.AllowEdit = True
-                BReport.Enabled = False
+                'BReport.Enabled = False
                 BPrintSlip.Enabled = False
                 SBSendSlip.Enabled = False
                 BPrint.Enabled = False
@@ -110,20 +110,18 @@
                 BandedGridColumnActWorkdaysDW.OptionsColumn.AllowEdit = False
                 BandedGridColumnPending.OptionsColumn.AllowEdit = False
                 BandedGridColumnCash.OptionsColumn.AllowEdit = False
-                BReport.Enabled = False
+                'BReport.Enabled = True
                 BPrintSlip.Enabled = False
                 SBSendSlip.Enabled = False
-                BPrint.Enabled = False
+                BPrint.Enabled = True
                 BReset.Visible = True
                 BSubmit.Visible = False
                 CMDelEmp.Enabled = False
             End If
 
             If id_report_status = "6" Then
-                BReport.Enabled = True
                 BPrintSlip.Enabled = True
                 SBSendSlip.Enabled = True
-                BPrint.Enabled = True
                 BReset.Visible = False
             End If
 
@@ -744,6 +742,29 @@
                 End If
                 GVPayroll.ActiveFilterString = ""
             End If
+        End If
+    End Sub
+
+    Private Sub GVPayroll_CustomDrawRowFooter(sender As Object, e As DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventArgs) Handles GVPayroll.CustomDrawRowFooter
+        e.Graphics.FillRectangle(New SolidBrush(Color.White), e.Bounds)
+
+        e.Handled = True
+    End Sub
+
+    Private Sub GVPayroll_CustomDrawRowFooterCell(sender As Object, e As DevExpress.XtraGrid.Views.Grid.FooterCellCustomDrawEventArgs) Handles GVPayroll.CustomDrawRowFooterCell
+        Dim view As DevExpress.XtraGrid.Views.Grid.GridView = sender
+
+        If view.GetGroupRowDisplayText(e.RowHandle).Contains("Sub Departement") And Not view.GetGroupRowValue(e.RowHandle).ToString.Contains("SOGO") Then
+            e.Appearance.ForeColor = Color.White
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub GVPayroll_CustomDrawGroupRow(sender As Object, e As DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventArgs) Handles GVPayroll.CustomDrawGroupRow
+        Dim info As DevExpress.XtraGrid.Views.Grid.ViewInfo.GridGroupRowInfo = TryCast(e.Info, DevExpress.XtraGrid.Views.Grid.ViewInfo.GridGroupRowInfo)
+
+        If info.Column.Caption = "Sub Departement" And Not info.EditValue.ToString.Contains("SOGO") Then
+            info.GroupText = " "
         End If
     End Sub
 End Class

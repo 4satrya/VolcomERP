@@ -1043,7 +1043,7 @@ Public Class FormSalesReturnDet
                 Cursor = Cursors.WaitCursor
                 BtnSave.Enabled = False
                 Dim sales_return_store_number As String = TxtStoreReturnNumber.Text
-                Dim sales_return_note As String = MENote.Text
+                Dim sales_return_note As String = addSlashes(MENote.Text)
 
                 If action = "ins" Then
                     'query main table

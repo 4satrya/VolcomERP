@@ -1062,7 +1062,7 @@ Public Class FormFGTrfNewDet
                 Cursor = Cursors.WaitCursor
                 BtnSave.Enabled = False
 
-                Dim fg_trf_note As String = MENote.Text.ToString
+                Dim fg_trf_note As String = addSlashes(MENote.Text.ToString)
                 If action = "ins" Then
                     'query main table
                     Dim fg_trf_number As String = header_number_sales("15")

@@ -1043,6 +1043,7 @@
             FormWorkOrderDet.id_wo = id_report
             FormWorkOrderDet.ShowDialog()
         ElseIf report_mark_type = "192" Then
+            FormEmpPayroll.is_view = "1"
             FormEmpPayroll.MdiParent = FormMain
             FormEmpPayroll.Show()
             FormEmpPayroll.WindowState = FormWindowState.Maximized
@@ -2370,6 +2371,24 @@
                     If datax.Rows.Count > 0 Then
                         report_number = datax.Rows(0)("report_number").ToString
                     End If
+                ElseIf report_mark_type = "180" Then
+                    'employee propose
+                    query = "SELECT employee_name
+                    FROM tb_employee_pps
+                    WHERE id_employee_pps = " + id_report + ""
+                    Dim datax As DataTable = execute_query(query, -1, True, "", "", "", "")
+                    If datax.Rows.Count > 0 Then
+                        info_design = "Employee: " + datax.Rows(0)("employee_name").ToString
+                    End If
+                ElseIf report_mark_type = "192" Then
+                    'payroll
+                    query = "SELECT DATE_FORMAT(periode_end,'%M %Y') AS period
+                    FROM tb_emp_payroll
+                    WHERE id_payroll = " + id_report + ""
+                    Dim datax As DataTable = execute_query(query, -1, True, "", "", "", "")
+                    If datax.Rows.Count > 0 Then
+                        info_design = "Period: " + datax.Rows(0)("period").ToString
+                    End If
                 End If
             End If
         Else
@@ -2379,7 +2398,7 @@
             If report_mark_type = "x" Then
 
             ElseIf report_mark_type = "13" Then
-                query_view = "SELECT 'no' AS is_check,tb." & field_id & " AS id_report,tb." & field_number & " AS number,tb." & field_date & " AS date_created
+                query_view = "Select 'no' AS is_check,tb." & field_id & " AS id_report,tb." & field_number & " AS number,tb." & field_date & " AS date_created
                                 ,c.`comp_name`,SUM(det.`mat_purc_det_qty`) AS tot_qty,SUM(det.`mat_purc_det_qty`*IF(tb.`id_currency`=1,det.`mat_purc_det_price`,tb.`mat_purc_kurs`*det.`mat_purc_det_price`)) AS tot_amount
                                 FROM " & table_name & " tb
                                 INNER JOIN `tb_m_comp_contact` cc ON cc.`id_comp_contact`=tb.`id_comp_contact_to`

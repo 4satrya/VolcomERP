@@ -3,6 +3,7 @@
     Public action As String = "-1"
 
     Private Sub FormFGLinePlanDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        viewlinePlanCat()
         viewCode(SLESex, "1")
         viewCode(SLECat, "2")
         viewCode(SLESource, "3")
@@ -12,6 +13,12 @@
         actionLoad()
     End Sub
 
+    Sub viewlinePlanCat()
+        Dim query As String = "SELECT c.id_line_plan_cat, c.line_plan_cat 
+        FROM tb_lookup_line_plan_cat c "
+        viewLookupQuery(LECat, query, 0, "line_plan_cat", "id_line_plan_cat")
+    End Sub
+
     Sub actionLoad()
         TxtQty.EditValue = 0.00
         TxtMarkUp.EditValue = 0.00
@@ -19,12 +26,13 @@
         TxtTargetCost.EditValue = 0.00
         TxtTotalCost.EditValue = 0.00
         TxtTotalValue.EditValue = 0.00
-        SLESex.Focus()
+        LECat.Focus()
 
         If action = "upd" Then
             Dim query As String = "SELECT * 
             FROM tb_fg_line_plan WHERE id_fg_line_plan='" + id + "' "
             Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+            LECat.ItemIndex = LECat.Properties.GetDataSourceRowIndex("id_line_plan_cat", data.Rows(0)("id_line_plan_cat").ToString)
             LEDelivery.ItemIndex = LEDelivery.Properties.GetDataSourceRowIndex("id_delivery", data.Rows(0)("id_delivery").ToString)
             SLESex.EditValue = data.Rows(0)("id_division").ToString
             SLECat.EditValue = data.Rows(0)("id_category").ToString
@@ -117,6 +125,8 @@
     End Sub
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles BtnSave.Click
+        FormFGLinePlan.LECat.ItemIndex = FormFGLinePlan.LECat.Properties.GetDataSourceRowIndex("id_line_plan_cat", "0")
+        Dim id_line_plan_cat As String = LECat.EditValue.ToString
         Dim id_season As String = FormFGLinePlan.SLESeason.EditValue.ToString
         Dim id_delivery As String = LEDelivery.EditValue.ToString
         Dim id_division As String = SLESex.EditValue.ToString
@@ -136,7 +146,7 @@
         Dim target_price As String = decimalSQL(TxtTargetPrice.EditValue.ToString)
 
         If action = "upd" Then
-            Dim query As String = "UPDATE tb_fg_line_plan SET id_delivery='" + id_delivery + "', id_division='" + id_division + "', 
+            Dim query As String = "UPDATE tb_fg_line_plan SET id_line_plan_cat='" + id_line_plan_cat + "',id_delivery='" + id_delivery + "', id_division='" + id_division + "', 
             id_category=" + id_category + ", id_source=" + id_source + ", id_class=" + id_class + ", id_color=" + id_color + ",
             description='" + description + "', benchmark='" + benchmark + "', qty='" + qty + "', mark_up='" + mark_up + "', target_price='" + target_price + "'
             WHERE id_fg_line_plan='" + id + "' "
@@ -145,9 +155,9 @@
             FormFGLinePlan.GVData.FocusedRowHandle = find_row(FormFGLinePlan.GVData, "id_fg_line_plan", id)
             Close()
         ElseIf action = "ins" Then
-            Dim query As String = "INSERT INTO tb_fg_line_plan(id_season,id_delivery, id_division, id_category, id_source, id_class, id_color, 
+            Dim query As String = "INSERT INTO tb_fg_line_plan(id_line_plan_cat,id_season,id_delivery, id_division, id_category, id_source, id_class, id_color, 
             description,benchmark, qty, mark_up, target_price, input_date) 
-            VALUES('" + id_season + "','" + id_delivery + "', " + id_division + ", " + id_category + ", " + id_source + ", " + id_class + ", " + id_color + ",
+            VALUES(" + id_line_plan_cat + ",'" + id_season + "','" + id_delivery + "', " + id_division + ", " + id_category + ", " + id_source + ", " + id_class + ", " + id_color + ",
             '" + description + "', '" + benchmark + "', '" + qty + "', '" + mark_up + "', " + target_price + ", NOW()
             ); SELECT LAST_INSERT_ID(); "
             Dim id_new As String = execute_query(query, 0, True, "", "", "", "")

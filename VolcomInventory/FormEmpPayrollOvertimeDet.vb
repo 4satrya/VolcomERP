@@ -232,7 +232,7 @@
                                     VALUES('" & id_payroll & "','" & id_employee & "','" & LECategory.EditValue.ToString & "','" & Date.Parse(dt_start.ToString).ToString("yyyy-MM-dd H:mm:ss") & "','" & Date.Parse(dt_end.ToString).ToString("yyyy-MM-dd H:mm:ss") & "','" & tot_break & "','" & tot_hour & "','" & tot_poin & "','" & LEDayoff.EditValue.ToString & "','" & wages_per_point & "','" & note & "');SELECT LAST_INSERT_ID();"
                 id_overtime = execute_query(query, 0, True, "", "", "", "")
                 FormEmpPayrollOvertime.load_payroll_ot()
-                FormEmpPayrollOvertime.GVOverTime.FocusedRowHandle = find_row(FormEmpPayrollOvertime.GVOverTime, "id_payroll_ot", id_overtime)
+                FormEmpPayrollOvertime.GVOvertime.FocusedRowHandle = find_row(FormEmpPayrollOvertime.GVOvertime, "id_payroll_ot", id_overtime)
                 Close()
             Else 'DP
                 Dim id_sch As String = ""
@@ -270,7 +270,7 @@
 
             FormEmpPayrollOvertime.load_payroll_ot()
             FormEmpPayrollOvertime.load_payroll_dp()
-            FormEmpPayrollOvertime.GVOverTime.FocusedRowHandle = find_row(FormEmpPayrollOvertime.GVOverTime, "id_payroll_ot", id_overtime)
+            FormEmpPayrollOvertime.GVOvertime.FocusedRowHandle = find_row(FormEmpPayrollOvertime.GVOvertime, "id_payroll_ot", id_overtime)
 
             execute_non_query(query, True, "", "", "", "")
             Close()

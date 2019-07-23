@@ -6,6 +6,8 @@
     Public is_view As String = "-1"
     Dim id_vendor_type As String = "-1"
     '
+    Public is_need_bank_account As String = "-1"
+    '
     Dim data_map As DataTable
 
     Private Sub FormMasterCompanySingle_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
@@ -87,7 +89,7 @@
             BApproval.Visible = True
             BPrint.Visible = True
             '
-            Dim query As String = String.Format("SELECT comp.*,ccat.is_advance_setup,drawer.wh_drawer FROM tb_m_comp comp LEFT JOIN tb_m_wh_drawer drawer ON drawer.id_wh_drawer=comp.id_drawer_def INNER JOIN tb_m_comp_cat ccat ON ccat.id_comp_cat=comp.id_comp_cat WHERE id_comp = '{0}'", id_company)
+            Dim query As String = String.Format("SELECT comp.*,ccat.is_need_bank_account,ccat.is_advance_setup,drawer.wh_drawer FROM tb_m_comp comp LEFT JOIN tb_m_wh_drawer drawer ON drawer.id_wh_drawer=comp.id_drawer_def INNER JOIN tb_m_comp_cat ccat ON ccat.id_comp_cat=comp.id_comp_cat WHERE id_comp = '{0}'", id_company)
             Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
             Dim id_company_category As String = data.Rows(0)("id_comp_cat").ToString
@@ -119,6 +121,8 @@
             Dim id_comp_group As String = data.Rows(0)("id_comp_group").ToString
             Dim id_vendor_type As String = data.Rows(0)("id_vendor_type").ToString
             Dim id_bank As String = data.Rows(0)("id_bank").ToString
+            '
+            is_need_bank_account = data.Rows(0)("is_need_bank_account").ToString
             '
             id_def_drawer = data.Rows(0)("id_drawer_def").ToString
             TEDefDrawer.Text = data.Rows(0)("wh_drawer").ToString
@@ -1037,6 +1041,35 @@ WHERE c.id_comp='" & id_company & "' AND ISNULL(cl.`id_comp_legal`)"
                 LVendorType.Visible = False
                 SLEVendorType.Visible = False
             End If
+            '
+            Dim query As String = "SELECT is_need_bank_account 
+FROM tb_m_comp_cat ccat WHERE ccat.id_comp_cat='" & LECompanyCategory.EditValue.ToString & "'"
+            Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+            If data.Rows.Count > 0 Then
+                is_need_bank_account = data.Rows(0)("is_need_bank_account").ToString
+            End If
+            '
+            If is_need_bank_account = "1" Then
+                SLEBankAccount.Visible = True
+                TEBankRek.Visible = True
+                TEBankAtasNama.Visible = True
+                TEBankAddress.Visible = True
+                '
+                LBankAccount.Visible = True
+                LBankAddress.Visible = True
+                LRekName.Visible = True
+                LNoRek.Visible = True
+            Else
+                SLEBankAccount.Visible = False
+                TEBankRek.Visible = False
+                TEBankAtasNama.Visible = False
+                TEBankAddress.Visible = False
+                '
+                LBankAccount.Visible = False
+                LBankAddress.Visible = False
+                LRekName.Visible = False
+                LNoRek.Visible = False
+            End If
         Catch ex As Exception
 
         End Try
@@ -1067,7 +1100,7 @@ WHERE c.id_comp='" & id_company & "' AND ISNULL(cl.`id_comp_legal`)"
     End Sub
 
     Private Sub TEBankRek_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles TEBankRek.Validating
-        If TEBankRek.Text.Length < 1 Then
+        If TEBankRek.Text.Length < 1 And is_need_bank_account = "1" Then
             EPCompany.SetError(TEBankRek, "Rekening is not valid.")
         Else
             EPCompany.SetError(TEBankRek, String.Empty)
@@ -1075,7 +1108,7 @@ WHERE c.id_comp='" & id_company & "' AND ISNULL(cl.`id_comp_legal`)"
     End Sub
 
     Private Sub TEBankAtasNama_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles TEBankAtasNama.Validating
-        If TEBankAtasNama.Text.Length < 1 Then
+        If TEBankAtasNama.Text.Length < 1 And is_need_bank_account = "1" Then
             EPCompany.SetError(TEBankAtasNama, "Atas Nama Rekening is not valid.")
         Else
             EPCompany.SetError(TEBankAtasNama, String.Empty)
@@ -1083,7 +1116,7 @@ WHERE c.id_comp='" & id_company & "' AND ISNULL(cl.`id_comp_legal`)"
     End Sub
 
     Private Sub TEBankAddress_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles TEBankAddress.Validating
-        If TEBankAddress.Text.Length < 1 Then
+        If TEBankAddress.Text.Length < 1 And is_need_bank_account = "1" Then
             EPCompany.SetError(TEBankAddress, "Bank Address is not valid.")
         Else
             EPCompany.SetError(TEBankAddress, String.Empty)

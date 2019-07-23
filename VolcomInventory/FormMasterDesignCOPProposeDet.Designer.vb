@@ -40,19 +40,16 @@ Partial Class FormMasterDesignCOPProposeDet
         Me.BtnBrowseContactFrom = New DevExpress.XtraEditors.SimpleButton()
         Me.GCItemList = New DevExpress.XtraGrid.GridControl()
         Me.BGVItemList = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridView()
-        Me.GridBand1 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         Me.GridColumnIdDesign = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.GridColumnDesignCode = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.GridColumnDesign = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumnStatus = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.gridBand2 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         Me.GridColumnVendorCodeBefore = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.GridColumnVendorNameBefore = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.GridColumnCurrencyBefore = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.GridColumnKursBefore = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.GridColumnECOPBefore = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.GridColumnAddCostBefore = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.gridBand3 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         Me.BandedGridColumnIdCurrencyBefore = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumnIdCompContactBefore = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumnIDStatusOrder = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
@@ -79,6 +76,10 @@ Partial Class FormMasterDesignCOPProposeDet
         Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.BSearch = New DevExpress.XtraEditors.SimpleButton()
         Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
+        Me.BandedGridColumn1 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.GridBand1 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
+        Me.gridBand2 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
+        Me.gridBand3 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
@@ -131,7 +132,7 @@ Partial Class FormMasterDesignCOPProposeDet
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.PanelControl1.Location = New System.Drawing.Point(0, 427)
         Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(698, 39)
+        Me.PanelControl1.Size = New System.Drawing.Size(1011, 39)
         Me.PanelControl1.TabIndex = 0
         '
         'BtnCancel
@@ -139,7 +140,7 @@ Partial Class FormMasterDesignCOPProposeDet
         Me.BtnCancel.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnCancel.ImageIndex = 5
         Me.BtnCancel.ImageList = Me.LargeImageCollection
-        Me.BtnCancel.Location = New System.Drawing.Point(546, 2)
+        Me.BtnCancel.Location = New System.Drawing.Point(859, 2)
         Me.BtnCancel.Name = "BtnCancel"
         Me.BtnCancel.Size = New System.Drawing.Size(75, 35)
         Me.BtnCancel.TabIndex = 9
@@ -150,7 +151,7 @@ Partial Class FormMasterDesignCOPProposeDet
         Me.BtnSave.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnSave.ImageIndex = 4
         Me.BtnSave.ImageList = Me.LargeImageCollection
-        Me.BtnSave.Location = New System.Drawing.Point(621, 2)
+        Me.BtnSave.Location = New System.Drawing.Point(934, 2)
         Me.BtnSave.Name = "BtnSave"
         Me.BtnSave.Size = New System.Drawing.Size(75, 35)
         Me.BtnSave.TabIndex = 8
@@ -173,7 +174,7 @@ Partial Class FormMasterDesignCOPProposeDet
         Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.PanelControl2.Location = New System.Drawing.Point(0, 280)
         Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(698, 147)
+        Me.PanelControl2.Size = New System.Drawing.Size(1011, 147)
         Me.PanelControl2.TabIndex = 1
         '
         'LabelControl5
@@ -305,7 +306,7 @@ Partial Class FormMasterDesignCOPProposeDet
         Me.TEVendorName.Properties.Appearance.Options.UseFont = True
         Me.TEVendorName.Properties.EditValueChangedDelay = 1
         Me.TEVendorName.Properties.ReadOnly = True
-        Me.TEVendorName.Size = New System.Drawing.Size(244, 20)
+        Me.TEVendorName.Size = New System.Drawing.Size(281, 20)
         Me.TEVendorName.TabIndex = 8913
         Me.TEVendorName.TabStop = False
         '
@@ -314,9 +315,9 @@ Partial Class FormMasterDesignCOPProposeDet
         Me.BtnBrowseContactFrom.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnBrowseContactFrom.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnBrowseContactFrom.Appearance.Options.UseFont = True
-        Me.BtnBrowseContactFrom.Location = New System.Drawing.Point(525, 12)
+        Me.BtnBrowseContactFrom.Location = New System.Drawing.Point(562, 13)
         Me.BtnBrowseContactFrom.Name = "BtnBrowseContactFrom"
-        Me.BtnBrowseContactFrom.Size = New System.Drawing.Size(23, 20)
+        Me.BtnBrowseContactFrom.Size = New System.Drawing.Size(69, 20)
         Me.BtnBrowseContactFrom.TabIndex = 8911
         Me.BtnBrowseContactFrom.TabStop = False
         Me.BtnBrowseContactFrom.Text = "..."
@@ -329,14 +330,14 @@ Partial Class FormMasterDesignCOPProposeDet
         Me.GCItemList.MainView = Me.BGVItemList
         Me.GCItemList.Name = "GCItemList"
         Me.GCItemList.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemSpinEdit1, Me.RISLEItem})
-        Me.GCItemList.Size = New System.Drawing.Size(698, 242)
+        Me.GCItemList.Size = New System.Drawing.Size(1011, 242)
         Me.GCItemList.TabIndex = 7
         Me.GCItemList.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.BGVItemList})
         '
         'BGVItemList
         '
         Me.BGVItemList.Bands.AddRange(New DevExpress.XtraGrid.Views.BandedGrid.GridBand() {Me.GridBand1, Me.gridBand2, Me.gridBand3})
-        Me.BGVItemList.Columns.AddRange(New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn() {Me.GridColumnIdDesign, Me.GridColumnDesignCode, Me.GridColumnDesign, Me.BandedGridColumnIdCurrencyBefore, Me.BandedGridColumnIdCompContactBefore, Me.GridColumnVendorCodeBefore, Me.GridColumnVendorNameBefore, Me.GridColumnCurrencyBefore, Me.GridColumnKursBefore, Me.GridColumnECOPBefore, Me.GridColumnAddCostBefore, Me.BandedGridColumnIDStatusOrder, Me.BandedGridColumnStatus})
+        Me.BGVItemList.Columns.AddRange(New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn() {Me.GridColumnIdDesign, Me.GridColumnDesignCode, Me.GridColumnDesign, Me.BandedGridColumn1, Me.BandedGridColumnIdCurrencyBefore, Me.BandedGridColumnIdCompContactBefore, Me.GridColumnVendorCodeBefore, Me.GridColumnVendorNameBefore, Me.GridColumnCurrencyBefore, Me.GridColumnKursBefore, Me.GridColumnECOPBefore, Me.GridColumnAddCostBefore, Me.BandedGridColumnIDStatusOrder, Me.BandedGridColumnStatus})
         Me.BGVItemList.GridControl = Me.GCItemList
         Me.BGVItemList.Name = "BGVItemList"
         Me.BGVItemList.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[True]
@@ -348,17 +349,6 @@ Partial Class FormMasterDesignCOPProposeDet
         Me.BGVItemList.OptionsFilter.AllowFilterEditor = False
         Me.BGVItemList.OptionsView.ShowFooter = True
         Me.BGVItemList.OptionsView.ShowGroupPanel = False
-        '
-        'GridBand1
-        '
-        Me.GridBand1.Caption = "Detail"
-        Me.GridBand1.Columns.Add(Me.GridColumnIdDesign)
-        Me.GridBand1.Columns.Add(Me.GridColumnDesignCode)
-        Me.GridBand1.Columns.Add(Me.GridColumnDesign)
-        Me.GridBand1.Columns.Add(Me.BandedGridColumnStatus)
-        Me.GridBand1.Name = "GridBand1"
-        Me.GridBand1.VisibleIndex = 0
-        Me.GridBand1.Width = 225
         '
         'GridColumnIdDesign
         '
@@ -388,19 +378,6 @@ Partial Class FormMasterDesignCOPProposeDet
         Me.BandedGridColumnStatus.UnboundExpression = "Iif([id_lookup_status_order] = 2, 'Drop', '-')"
         Me.BandedGridColumnStatus.UnboundType = DevExpress.Data.UnboundColumnType.[String]
         Me.BandedGridColumnStatus.Visible = True
-        '
-        'gridBand2
-        '
-        Me.gridBand2.Caption = "Before"
-        Me.gridBand2.Columns.Add(Me.GridColumnVendorCodeBefore)
-        Me.gridBand2.Columns.Add(Me.GridColumnVendorNameBefore)
-        Me.gridBand2.Columns.Add(Me.GridColumnCurrencyBefore)
-        Me.gridBand2.Columns.Add(Me.GridColumnKursBefore)
-        Me.gridBand2.Columns.Add(Me.GridColumnECOPBefore)
-        Me.gridBand2.Columns.Add(Me.GridColumnAddCostBefore)
-        Me.gridBand2.Name = "gridBand2"
-        Me.gridBand2.VisibleIndex = 1
-        Me.gridBand2.Width = 469
         '
         'GridColumnVendorCodeBefore
         '
@@ -467,14 +444,6 @@ Partial Class FormMasterDesignCOPProposeDet
         Me.GridColumnAddCostBefore.Name = "GridColumnAddCostBefore"
         Me.GridColumnAddCostBefore.Visible = True
         Me.GridColumnAddCostBefore.Width = 79
-        '
-        'gridBand3
-        '
-        Me.gridBand3.Caption = "After"
-        Me.gridBand3.Name = "gridBand3"
-        Me.gridBand3.Visible = False
-        Me.gridBand3.VisibleIndex = -1
-        Me.gridBand3.Width = 75
         '
         'BandedGridColumnIdCurrencyBefore
         '
@@ -569,7 +538,7 @@ Partial Class FormMasterDesignCOPProposeDet
         Me.PanelControl3.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl3.Location = New System.Drawing.Point(0, 0)
         Me.PanelControl3.Name = "PanelControl3"
-        Me.PanelControl3.Size = New System.Drawing.Size(698, 38)
+        Me.PanelControl3.Size = New System.Drawing.Size(1011, 38)
         Me.PanelControl3.TabIndex = 8
         '
         'SLESeasonByCode
@@ -688,11 +657,57 @@ Partial Class FormMasterDesignCOPProposeDet
         Me.LabelControl6.TabIndex = 8897
         Me.LabelControl6.Text = "Season Delivery"
         '
+        'BandedGridColumn1
+        '
+        Me.BandedGridColumn1.AppearanceCell.Options.UseTextOptions = True
+        Me.BandedGridColumn1.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.BandedGridColumn1.AppearanceHeader.Options.UseTextOptions = True
+        Me.BandedGridColumn1.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.BandedGridColumn1.Caption = "Target Cost"
+        Me.BandedGridColumn1.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumn1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumn1.FieldName = "target_cost"
+        Me.BandedGridColumn1.Name = "BandedGridColumn1"
+        Me.BandedGridColumn1.Visible = True
+        '
+        'GridBand1
+        '
+        Me.GridBand1.Caption = "Detail"
+        Me.GridBand1.Columns.Add(Me.GridColumnIdDesign)
+        Me.GridBand1.Columns.Add(Me.GridColumnDesignCode)
+        Me.GridBand1.Columns.Add(Me.GridColumnDesign)
+        Me.GridBand1.Columns.Add(Me.BandedGridColumnStatus)
+        Me.GridBand1.Columns.Add(Me.BandedGridColumn1)
+        Me.GridBand1.Name = "GridBand1"
+        Me.GridBand1.VisibleIndex = 0
+        Me.GridBand1.Width = 300
+        '
+        'gridBand2
+        '
+        Me.gridBand2.Caption = "Before"
+        Me.gridBand2.Columns.Add(Me.GridColumnVendorCodeBefore)
+        Me.gridBand2.Columns.Add(Me.GridColumnVendorNameBefore)
+        Me.gridBand2.Columns.Add(Me.GridColumnCurrencyBefore)
+        Me.gridBand2.Columns.Add(Me.GridColumnKursBefore)
+        Me.gridBand2.Columns.Add(Me.GridColumnECOPBefore)
+        Me.gridBand2.Columns.Add(Me.GridColumnAddCostBefore)
+        Me.gridBand2.Name = "gridBand2"
+        Me.gridBand2.VisibleIndex = 1
+        Me.gridBand2.Width = 469
+        '
+        'gridBand3
+        '
+        Me.gridBand3.Caption = "After"
+        Me.gridBand3.Name = "gridBand3"
+        Me.gridBand3.Visible = False
+        Me.gridBand3.VisibleIndex = -1
+        Me.gridBand3.Width = 75
+        '
         'FormMasterDesignCOPProposeDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(698, 466)
+        Me.ClientSize = New System.Drawing.Size(1011, 466)
         Me.Controls.Add(Me.GCItemList)
         Me.Controls.Add(Me.PanelControl3)
         Me.Controls.Add(Me.PanelControl2)
@@ -785,8 +800,9 @@ Partial Class FormMasterDesignCOPProposeDet
     Friend WithEvents BSearch As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents LabelControl6 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents BandedGridColumnStatus As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BandedGridColumnIDStatusOrder As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents GridBand1 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
+    Friend WithEvents BandedGridColumn1 As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents gridBand2 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents gridBand3 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
-    Friend WithEvents BandedGridColumnIDStatusOrder As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
 End Class

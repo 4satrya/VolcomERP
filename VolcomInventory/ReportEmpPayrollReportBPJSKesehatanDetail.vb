@@ -34,7 +34,7 @@
                 Dim departement_name As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(1)
 
                 departement_name.Text = "TOTAL " + data.Rows(i - 1)("departement").ToString.ToUpper
-                departement_name.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+                departement_name.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter
                 departement_name.BackColor = Color.FromArgb(196, 215, 155)
 
                 'departement company
@@ -81,7 +81,7 @@
             Dim name As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(1)
 
             name.Text = data.Rows(i)("employee_name").ToString
-            name.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+            name.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter
             name.BackColor = Color.Transparent
 
             'bpjs
@@ -133,6 +133,24 @@
             bpjs_class.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter
             bpjs_class.BackColor = Color.Transparent
 
+            If Not last_departement = data.Rows(i)("departement").ToString Then
+                'reset total
+                departement_total_company = 0
+                departement_total_employee = 0
+            End If
+
+            departement_total_company += data.Rows(i)("company_contribution")
+            departement_total_employee += data.Rows(i)("employee_contribution")
+
+            total_company += data.Rows(i)("company_contribution")
+            total_employee += data.Rows(i)("employee_contribution")
+
+            If data.Rows(i)("class").ToString = "I" Then
+                total_class1 += 1
+            ElseIf data.Rows(i)("class").ToString = "II" Then
+                total_class2 += 1
+            End If
+
             'total departement last
             If i = data.Rows.Count - 1 Then
                 row = XTable.InsertRowBelow(row)
@@ -149,7 +167,7 @@
                 Dim departement_name As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(1)
 
                 departement_name.Text = "TOTAL " + data.Rows(i)("departement").ToString.ToUpper
-                departement_name.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+                departement_name.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter
                 departement_name.BackColor = Color.FromArgb(196, 215, 155)
 
                 'departement company
@@ -172,24 +190,6 @@
                 departement_total.Text = Format(departement_total_company + departement_total_employee, "##,##0")
                 departement_total.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
                 departement_total.BackColor = Color.FromArgb(196, 215, 155)
-            End If
-
-            If Not last_departement = data.Rows(i)("departement").ToString Then
-                'reset total
-                departement_total_company = 0
-                departement_total_employee = 0
-            End If
-
-            departement_total_company += data.Rows(i)("company_contribution")
-            departement_total_employee += data.Rows(i)("employee_contribution")
-
-            total_company += data.Rows(i)("company_contribution")
-            total_employee += data.Rows(i)("employee_contribution")
-
-            If data.Rows(i)("class").ToString = "I" Then
-                total_class1 += 1
-            ElseIf data.Rows(i)("class").ToString = "II" Then
-                total_class2 += 1
             End If
 
             last_departement = data.Rows(i)("departement").ToString

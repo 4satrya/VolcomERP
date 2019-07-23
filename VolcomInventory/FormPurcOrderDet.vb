@@ -753,7 +753,6 @@ WHERE bdg.`id_b_expense`='" & GVPurcReq.GetRowCellValue(i, "id_b_expense").ToStr
                                             INNER JOIN `tb_purc_req_det` prd ON prd.`id_purc_req_det`=pod.`id_purc_req_det`
                                             WHERE pod.`id_purc_order`='" & id_po & "'"
             End If
-
             '
             execute_non_query(query_trans, True, "", "", "", "")
             submit_who_prepared(rmt, id_po, id_user)

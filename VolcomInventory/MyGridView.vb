@@ -11,10 +11,16 @@ Namespace MyXtraGrid
 			MyBase.New(grid)
 			' put your initialization code here
 		End Sub
-		Protected Overrides ReadOnly Property ViewName() As String
-			Get
-				Return "MyGridView"
-			End Get
-		End Property
-	End Class
+        Protected Overrides ReadOnly Property ViewName() As String
+            Get
+                Return "MyGridView"
+            End Get
+        End Property
+
+        Friend Sub RaiseViewInfoShowGroupFooter(ByVal sender As Object, ByVal e As ShowGroupFooterEventArgs)
+            RaiseEvent ShowGroupFooter(sender, e)
+        End Sub
+
+        Public Event ShowGroupFooter As ShowGroupFooterEventHandler
+    End Class
 End Namespace

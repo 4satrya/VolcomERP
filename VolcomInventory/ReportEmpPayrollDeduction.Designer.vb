@@ -30,10 +30,12 @@ Partial Public Class ReportEmpPayrollDeduction
         Me.GCEmployee = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.GCEmployeePosition = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.GCEmployeeStatus = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.GCSubDepartement = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.TopMargin = New DevExpress.XtraReports.UI.TopMarginBand()
         Me.BottomMargin = New DevExpress.XtraReports.UI.BottomMarginBand()
         Me.XrPageInfo1 = New DevExpress.XtraReports.UI.XRPageInfo()
         Me.ReportFooter = New DevExpress.XtraReports.UI.ReportFooterBand()
+        Me.XrPanel1 = New DevExpress.XtraReports.UI.XRPanel()
         Me.XrTable1 = New DevExpress.XtraReports.UI.XRTable()
         Me.XrTableRow1 = New DevExpress.XtraReports.UI.XRTableRow()
         Me.XrTableCell13 = New DevExpress.XtraReports.UI.XRTableCell()
@@ -48,7 +50,6 @@ Partial Public Class ReportEmpPayrollDeduction
         Me.XrLabel2 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XLLocation = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLine1 = New DevExpress.XtraReports.UI.XRLine()
-        Me.XrPanel1 = New DevExpress.XtraReports.UI.XRPanel()
         CType(Me.GCDeduction, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVDeduction, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XrTable1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -119,9 +120,10 @@ Partial Public Class ReportEmpPayrollDeduction
         Me.GVDeduction.BandPanelRowHeight = 16
         Me.GVDeduction.Bands.AddRange(New DevExpress.XtraGrid.Views.BandedGrid.GridBand() {Me.GBEmployee})
         Me.GVDeduction.ColumnPanelRowHeight = 32
-        Me.GVDeduction.Columns.AddRange(New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn() {Me.GCDepartement, Me.GCNIP, Me.GCEmployee, Me.GCEmployeePosition, Me.GCEmployeeStatus})
+        Me.GVDeduction.Columns.AddRange(New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn() {Me.GCDepartement, Me.GCSubDepartement, Me.GCNIP, Me.GCEmployee, Me.GCEmployeePosition, Me.GCEmployeeStatus})
         Me.GVDeduction.GridControl = Me.GCDeduction
-        Me.GVDeduction.GroupCount = 1
+        Me.GVDeduction.GroupCount = 2
+        Me.GVDeduction.GroupFormat = "{1} {2}"
         Me.GVDeduction.Name = "GVDeduction"
         Me.GVDeduction.OptionsBehavior.AutoExpandAllGroups = True
         Me.GVDeduction.OptionsBehavior.Editable = False
@@ -129,7 +131,7 @@ Partial Public Class ReportEmpPayrollDeduction
         Me.GVDeduction.OptionsView.GroupFooterShowMode = DevExpress.XtraGrid.Views.Grid.GroupFooterShowMode.VisibleAlways
         Me.GVDeduction.OptionsView.ShowFooter = True
         Me.GVDeduction.OptionsView.ShowGroupPanel = False
-        Me.GVDeduction.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GCDepartement, DevExpress.Data.ColumnSortOrder.Ascending)})
+        Me.GVDeduction.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GCDepartement, DevExpress.Data.ColumnSortOrder.Ascending), New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GCSubDepartement, DevExpress.Data.ColumnSortOrder.Ascending)})
         '
         'GBEmployee
         '
@@ -141,7 +143,7 @@ Partial Public Class ReportEmpPayrollDeduction
         Me.GBEmployee.Columns.Add(Me.GCEmployeeStatus)
         Me.GBEmployee.Name = "GBEmployee"
         Me.GBEmployee.VisibleIndex = 0
-        Me.GBEmployee.Width = 496
+        Me.GBEmployee.Width = 1056
         '
         'GCDepartement
         '
@@ -156,7 +158,7 @@ Partial Public Class ReportEmpPayrollDeduction
         Me.GCNIP.MinWidth = 65
         Me.GCNIP.Name = "GCNIP"
         Me.GCNIP.Visible = True
-        Me.GCNIP.Width = 86
+        Me.GCNIP.Width = 218
         '
         'GCEmployee
         '
@@ -164,10 +166,10 @@ Partial Public Class ReportEmpPayrollDeduction
         Me.GCEmployee.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
         Me.GCEmployee.Caption = "Employee"
         Me.GCEmployee.FieldName = "Employee"
-        Me.GCEmployee.MinWidth = 200
+        Me.GCEmployee.MinWidth = 195
         Me.GCEmployee.Name = "GCEmployee"
         Me.GCEmployee.Visible = True
-        Me.GCEmployee.Width = 200
+        Me.GCEmployee.Width = 195
         '
         'GCEmployeePosition
         '
@@ -178,7 +180,7 @@ Partial Public Class ReportEmpPayrollDeduction
         Me.GCEmployeePosition.MinWidth = 150
         Me.GCEmployeePosition.Name = "GCEmployeePosition"
         Me.GCEmployeePosition.Visible = True
-        Me.GCEmployeePosition.Width = 150
+        Me.GCEmployeePosition.Width = 457
         '
         'GCEmployeeStatus
         '
@@ -187,7 +189,13 @@ Partial Public Class ReportEmpPayrollDeduction
         Me.GCEmployeeStatus.MinWidth = 60
         Me.GCEmployeeStatus.Name = "GCEmployeeStatus"
         Me.GCEmployeeStatus.Visible = True
-        Me.GCEmployeeStatus.Width = 60
+        Me.GCEmployeeStatus.Width = 186
+        '
+        'GCSubDepartement
+        '
+        Me.GCSubDepartement.Caption = "Sub Departement"
+        Me.GCSubDepartement.FieldName = "Sub Departement"
+        Me.GCSubDepartement.Name = "GCSubDepartement"
         '
         'TopMargin
         '
@@ -223,6 +231,13 @@ Partial Public Class ReportEmpPayrollDeduction
         Me.ReportFooter.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrPanel1})
         Me.ReportFooter.HeightF = 100.0!
         Me.ReportFooter.Name = "ReportFooter"
+        '
+        'XrPanel1
+        '
+        Me.XrPanel1.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrTable1})
+        Me.XrPanel1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 0!)
+        Me.XrPanel1.Name = "XrPanel1"
+        Me.XrPanel1.SizeF = New System.Drawing.SizeF(1119.0!, 100.0!)
         '
         'XrTable1
         '
@@ -365,13 +380,6 @@ Partial Public Class ReportEmpPayrollDeduction
         Me.XrLine1.Name = "XrLine1"
         Me.XrLine1.SizeF = New System.Drawing.SizeF(1119.0!, 20.0!)
         '
-        'XrPanel1
-        '
-        Me.XrPanel1.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrTable1})
-        Me.XrPanel1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 0!)
-        Me.XrPanel1.Name = "XrPanel1"
-        Me.XrPanel1.SizeF = New System.Drawing.SizeF(1119.0!, 100.0!)
-        '
         'ReportEmpPayrollDeduction
         '
         Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.Detail, Me.TopMargin, Me.BottomMargin, Me.ReportFooter, Me.ReportHeader})
@@ -417,4 +425,5 @@ Partial Public Class ReportEmpPayrollDeduction
     Friend WithEvents XLLocation As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLine1 As DevExpress.XtraReports.UI.XRLine
     Friend WithEvents XrPanel1 As DevExpress.XtraReports.UI.XRPanel
+    Friend WithEvents GCSubDepartement As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
 End Class

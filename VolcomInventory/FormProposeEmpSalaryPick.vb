@@ -69,11 +69,13 @@
                     Dim id_employee_status As String = GVEmployee.GetRowCellValue(selected_row, "id_employee_status").ToString
                     Dim employee_status As String = GVEmployee.GetRowCellValue(selected_row, "employee_status").ToString
 
-                    data.Rows.Add(id_employee, employee_code, employee_name, id_departement, departement, employee_position, id_employee_level, employee_level, id_employee_status, employee_status, 0, 0, 0, 0, 0, 0)
+                    data.Rows.Add(id_employee, employee_code, employee_name, id_departement, departement, employee_position, id_employee_level, employee_level, id_employee_status, employee_status, 0, 0, 0, 0, 0, 0, "50.00%", "50.00%", 0)
                 End If
             Next
 
             FormProposeEmpSalaryDet.GVEmployee.BestFitColumns()
+
+            FormProposeEmpSalaryDet.load_contract()
 
             Close()
         Else

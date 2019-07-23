@@ -644,7 +644,7 @@ Public Class FormSalesDelOrderDet
             If confirm = Windows.Forms.DialogResult.Yes Then
                 Cursor = Cursors.WaitCursor
                 BtnSave.Enabled = False
-                Dim pl_sales_order_del_note As String = MENote.Text.ToString
+                Dim pl_sales_order_del_note As String = addSlashes(MENote.Text.ToString)
                 If action = "ins" Then
                     'query main table
                     Dim pl_sales_order_del_number As String = ""

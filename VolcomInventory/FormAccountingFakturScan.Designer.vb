@@ -19,8 +19,8 @@ Partial Class FormAccountingFakturScan
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormAccountingFakturScan))
         Dim GridColumncomp As DevExpress.XtraGrid.Columns.GridColumn
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormAccountingFakturScan))
         Me.GCFak = New DevExpress.XtraGrid.GridControl()
         Me.GVFak = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumnId = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -35,19 +35,30 @@ Partial Class FormAccountingFakturScan
         Me.XTPInv = New DevExpress.XtraTab.XtraTabPage()
         Me.GCInv = New DevExpress.XtraGrid.GridControl()
         Me.GVInv = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumnis_select = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.GridColumnid_sales_pos = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnsales_pos_number = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumncompinv = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnsales_pos_date = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnsales_pos_start_period = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnsales_pos_end_period = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnsales_pos_total_qty = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnsales_pos_total = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
-        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
-        Me.DEFrom = New DevExpress.XtraEditors.DateEdit()
-        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
+        Me.CESelAll = New DevExpress.XtraEditors.CheckEdit()
+        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
         Me.DEUntil = New DevExpress.XtraEditors.DateEdit()
-        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.SLEStore = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.SimpleButton1 = New DevExpress.XtraEditors.SimpleButton()
-        Me.SimpleButton2 = New DevExpress.XtraEditors.SimpleButton()
-        Me.SimpleButton3 = New DevExpress.XtraEditors.SimpleButton()
         Me.GridColumnid_comp = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncomp_number = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
+        Me.DEFrom = New DevExpress.XtraEditors.DateEdit()
+        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
+        Me.BtnView = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnCreateFaktur = New DevExpress.XtraEditors.SimpleButton()
         GridColumncomp = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GCFak, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVFak, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -57,15 +68,27 @@ Partial Class FormAccountingFakturScan
         Me.XTPInv.SuspendLayout()
         CType(Me.GCInv, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVInv, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
-        CType(Me.DEFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DEFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CESelAll.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl2.SuspendLayout()
         CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEUntil.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLEStore.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
+        '
+        'GridColumncomp
+        '
+        GridColumncomp.Caption = "Account Description"
+        GridColumncomp.FieldName = "comp"
+        GridColumncomp.Name = "GridColumncomp"
+        GridColumncomp.Visible = True
+        GridColumncomp.VisibleIndex = 1
         '
         'GCFak
         '
@@ -73,7 +96,7 @@ Partial Class FormAccountingFakturScan
         Me.GCFak.Location = New System.Drawing.Point(0, 0)
         Me.GCFak.MainView = Me.GVFak
         Me.GCFak.Name = "GCFak"
-        Me.GCFak.Size = New System.Drawing.Size(649, 335)
+        Me.GCFak.Size = New System.Drawing.Size(1185, 434)
         Me.GCFak.TabIndex = 0
         Me.GCFak.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVFak})
         '
@@ -158,7 +181,7 @@ Partial Class FormAccountingFakturScan
         '
         Me.XTPList.Controls.Add(Me.GCFak)
         Me.XTPList.Name = "XTPList"
-        Me.XTPList.Size = New System.Drawing.Size(649, 335)
+        Me.XTPList.Size = New System.Drawing.Size(1185, 434)
         Me.XTPList.Text = "List"
         '
         'XTPInv
@@ -175,70 +198,169 @@ Partial Class FormAccountingFakturScan
         Me.GCInv.Location = New System.Drawing.Point(0, 45)
         Me.GCInv.MainView = Me.GVInv
         Me.GCInv.Name = "GCInv"
+        Me.GCInv.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckEdit1})
         Me.GCInv.Size = New System.Drawing.Size(1185, 389)
         Me.GCInv.TabIndex = 0
         Me.GCInv.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVInv})
         '
         'GVInv
         '
+        Me.GVInv.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnis_select, Me.GridColumnid_sales_pos, Me.GridColumnsales_pos_number, Me.GridColumncompinv, Me.GridColumnsales_pos_date, Me.GridColumnsales_pos_start_period, Me.GridColumnsales_pos_end_period, Me.GridColumnsales_pos_total_qty, Me.GridColumnsales_pos_total})
         Me.GVInv.GridControl = Me.GCInv
         Me.GVInv.Name = "GVInv"
         Me.GVInv.OptionsBehavior.AutoExpandAllGroups = True
         Me.GVInv.OptionsFind.AlwaysVisible = True
+        Me.GVInv.OptionsView.ColumnAutoWidth = False
+        Me.GVInv.OptionsView.ShowFooter = True
         Me.GVInv.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumnis_select
+        '
+        Me.GridColumnis_select.Caption = "Select"
+        Me.GridColumnis_select.ColumnEdit = Me.RepositoryItemCheckEdit1
+        Me.GridColumnis_select.FieldName = "is_select"
+        Me.GridColumnis_select.Name = "GridColumnis_select"
+        Me.GridColumnis_select.Visible = True
+        Me.GridColumnis_select.VisibleIndex = 0
+        Me.GridColumnis_select.Width = 56
+        '
+        'RepositoryItemCheckEdit1
+        '
+        Me.RepositoryItemCheckEdit1.AutoHeight = False
+        Me.RepositoryItemCheckEdit1.Name = "RepositoryItemCheckEdit1"
+        Me.RepositoryItemCheckEdit1.ValueChecked = "Yes"
+        Me.RepositoryItemCheckEdit1.ValueUnchecked = "No"
+        '
+        'GridColumnid_sales_pos
+        '
+        Me.GridColumnid_sales_pos.Caption = "id_sales_pos"
+        Me.GridColumnid_sales_pos.FieldName = "id_sales_pos"
+        Me.GridColumnid_sales_pos.Name = "GridColumnid_sales_pos"
+        Me.GridColumnid_sales_pos.OptionsColumn.AllowEdit = False
+        Me.GridColumnid_sales_pos.OptionsColumn.ReadOnly = True
+        '
+        'GridColumnsales_pos_number
+        '
+        Me.GridColumnsales_pos_number.Caption = "Invoice#"
+        Me.GridColumnsales_pos_number.FieldName = "sales_pos_number"
+        Me.GridColumnsales_pos_number.Name = "GridColumnsales_pos_number"
+        Me.GridColumnsales_pos_number.OptionsColumn.ReadOnly = True
+        Me.GridColumnsales_pos_number.Visible = True
+        Me.GridColumnsales_pos_number.VisibleIndex = 1
+        Me.GridColumnsales_pos_number.Width = 104
+        '
+        'GridColumncompinv
+        '
+        Me.GridColumncompinv.Caption = "Store"
+        Me.GridColumncompinv.FieldName = "comp"
+        Me.GridColumncompinv.Name = "GridColumncompinv"
+        Me.GridColumncompinv.OptionsColumn.ReadOnly = True
+        Me.GridColumncompinv.Visible = True
+        Me.GridColumncompinv.VisibleIndex = 2
+        Me.GridColumncompinv.Width = 139
+        '
+        'GridColumnsales_pos_date
+        '
+        Me.GridColumnsales_pos_date.Caption = "Created Date"
+        Me.GridColumnsales_pos_date.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.GridColumnsales_pos_date.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumnsales_pos_date.FieldName = "sales_pos_date"
+        Me.GridColumnsales_pos_date.Name = "GridColumnsales_pos_date"
+        Me.GridColumnsales_pos_date.OptionsColumn.ReadOnly = True
+        Me.GridColumnsales_pos_date.Visible = True
+        Me.GridColumnsales_pos_date.VisibleIndex = 3
+        Me.GridColumnsales_pos_date.Width = 140
+        '
+        'GridColumnsales_pos_start_period
+        '
+        Me.GridColumnsales_pos_start_period.Caption = "Start Period"
+        Me.GridColumnsales_pos_start_period.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.GridColumnsales_pos_start_period.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumnsales_pos_start_period.FieldName = "sales_pos_start_period"
+        Me.GridColumnsales_pos_start_period.Name = "GridColumnsales_pos_start_period"
+        Me.GridColumnsales_pos_start_period.OptionsColumn.ReadOnly = True
+        Me.GridColumnsales_pos_start_period.Visible = True
+        Me.GridColumnsales_pos_start_period.VisibleIndex = 4
+        Me.GridColumnsales_pos_start_period.Width = 148
+        '
+        'GridColumnsales_pos_end_period
+        '
+        Me.GridColumnsales_pos_end_period.Caption = "End Period"
+        Me.GridColumnsales_pos_end_period.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.GridColumnsales_pos_end_period.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumnsales_pos_end_period.FieldName = "sales_pos_end_period"
+        Me.GridColumnsales_pos_end_period.Name = "GridColumnsales_pos_end_period"
+        Me.GridColumnsales_pos_end_period.OptionsColumn.ReadOnly = True
+        Me.GridColumnsales_pos_end_period.Visible = True
+        Me.GridColumnsales_pos_end_period.VisibleIndex = 5
+        Me.GridColumnsales_pos_end_period.Width = 164
+        '
+        'GridColumnsales_pos_total_qty
+        '
+        Me.GridColumnsales_pos_total_qty.Caption = "Total Qty"
+        Me.GridColumnsales_pos_total_qty.DisplayFormat.FormatString = "N0"
+        Me.GridColumnsales_pos_total_qty.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnsales_pos_total_qty.FieldName = "sales_pos_total_qty"
+        Me.GridColumnsales_pos_total_qty.Name = "GridColumnsales_pos_total_qty"
+        Me.GridColumnsales_pos_total_qty.OptionsColumn.ReadOnly = True
+        Me.GridColumnsales_pos_total_qty.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_pos_total_qty", "{0:N0}")})
+        Me.GridColumnsales_pos_total_qty.Visible = True
+        Me.GridColumnsales_pos_total_qty.VisibleIndex = 6
+        Me.GridColumnsales_pos_total_qty.Width = 865
+        '
+        'GridColumnsales_pos_total
+        '
+        Me.GridColumnsales_pos_total.Caption = "Amount"
+        Me.GridColumnsales_pos_total.DisplayFormat.FormatString = "N2"
+        Me.GridColumnsales_pos_total.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnsales_pos_total.FieldName = "sales_pos_total"
+        Me.GridColumnsales_pos_total.Name = "GridColumnsales_pos_total"
+        Me.GridColumnsales_pos_total.OptionsColumn.ReadOnly = True
+        Me.GridColumnsales_pos_total.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_pos_total", "{0:N2}")})
+        Me.GridColumnsales_pos_total.Visible = True
+        Me.GridColumnsales_pos_total.VisibleIndex = 7
         '
         'PanelControl1
         '
-        Me.PanelControl1.Controls.Add(Me.SimpleButton3)
-        Me.PanelControl1.Controls.Add(Me.SimpleButton2)
-        Me.PanelControl1.Controls.Add(Me.SimpleButton1)
-        Me.PanelControl1.Controls.Add(Me.SLEStore)
-        Me.PanelControl1.Controls.Add(Me.LabelControl3)
-        Me.PanelControl1.Controls.Add(Me.DEUntil)
-        Me.PanelControl1.Controls.Add(Me.LabelControl2)
-        Me.PanelControl1.Controls.Add(Me.DEFrom)
-        Me.PanelControl1.Controls.Add(Me.LabelControl1)
+        Me.PanelControl1.Controls.Add(Me.CESelAll)
+        Me.PanelControl1.Controls.Add(Me.PanelControl2)
+        Me.PanelControl1.Controls.Add(Me.BtnView)
+        Me.PanelControl1.Controls.Add(Me.BtnCreateFaktur)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl1.Location = New System.Drawing.Point(0, 0)
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(1185, 45)
         Me.PanelControl1.TabIndex = 1
         '
-        'LabelControl1
+        'CESelAll
         '
-        Me.LabelControl1.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl1.Location = New System.Drawing.Point(13, 15)
-        Me.LabelControl1.Name = "LabelControl1"
-        Me.LabelControl1.Size = New System.Drawing.Size(69, 13)
-        Me.LabelControl1.TabIndex = 0
-        Me.LabelControl1.Text = "Sales Period"
+        Me.CESelAll.Location = New System.Drawing.Point(11, 13)
+        Me.CESelAll.Name = "CESelAll"
+        Me.CESelAll.Properties.Caption = "Select All"
+        Me.CESelAll.Size = New System.Drawing.Size(75, 19)
+        Me.CESelAll.TabIndex = 8903
         '
-        'DEFrom
+        'PanelControl2
         '
-        Me.DEFrom.EditValue = Nothing
-        Me.DEFrom.Location = New System.Drawing.Point(92, 12)
-        Me.DEFrom.Name = "DEFrom"
-        Me.DEFrom.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.DEFrom.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
-        Me.DEFrom.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
-        Me.DEFrom.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.DEFrom.Properties.Mask.EditMask = "dd\/MM\/yyyy"
-        Me.DEFrom.Size = New System.Drawing.Size(138, 20)
-        Me.DEFrom.TabIndex = 8895
-        '
-        'LabelControl2
-        '
-        Me.LabelControl2.Location = New System.Drawing.Point(232, 15)
-        Me.LabelControl2.Name = "LabelControl2"
-        Me.LabelControl2.Size = New System.Drawing.Size(4, 13)
-        Me.LabelControl2.TabIndex = 8896
-        Me.LabelControl2.Text = "-"
+        Me.PanelControl2.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelControl2.Controls.Add(Me.DEUntil)
+        Me.PanelControl2.Controls.Add(Me.LabelControl1)
+        Me.PanelControl2.Controls.Add(Me.SLEStore)
+        Me.PanelControl2.Controls.Add(Me.LabelControl3)
+        Me.PanelControl2.Controls.Add(Me.DEFrom)
+        Me.PanelControl2.Controls.Add(Me.LabelControl2)
+        Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Right
+        Me.PanelControl2.Location = New System.Drawing.Point(320, 2)
+        Me.PanelControl2.Name = "PanelControl2"
+        Me.PanelControl2.Size = New System.Drawing.Size(674, 41)
+        Me.PanelControl2.TabIndex = 8902
         '
         'DEUntil
         '
         Me.DEUntil.EditValue = Nothing
-        Me.DEUntil.Location = New System.Drawing.Point(239, 12)
+        Me.DEUntil.Location = New System.Drawing.Point(238, 11)
         Me.DEUntil.Name = "DEUntil"
+        Me.DEUntil.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[False]
         Me.DEUntil.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.DEUntil.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.DEUntil.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
@@ -247,18 +369,18 @@ Partial Class FormAccountingFakturScan
         Me.DEUntil.Size = New System.Drawing.Size(138, 20)
         Me.DEUntil.TabIndex = 8897
         '
-        'LabelControl3
+        'LabelControl1
         '
-        Me.LabelControl3.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl3.Location = New System.Drawing.Point(389, 15)
-        Me.LabelControl3.Name = "LabelControl3"
-        Me.LabelControl3.Size = New System.Drawing.Size(31, 13)
-        Me.LabelControl3.TabIndex = 8898
-        Me.LabelControl3.Text = "Store"
+        Me.LabelControl1.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl1.Location = New System.Drawing.Point(12, 14)
+        Me.LabelControl1.Name = "LabelControl1"
+        Me.LabelControl1.Size = New System.Drawing.Size(69, 13)
+        Me.LabelControl1.TabIndex = 0
+        Me.LabelControl1.Text = "Sales Period"
         '
         'SLEStore
         '
-        Me.SLEStore.Location = New System.Drawing.Point(426, 12)
+        Me.SLEStore.Location = New System.Drawing.Point(419, 11)
         Me.SLEStore.Name = "SLEStore"
         Me.SLEStore.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.SLEStore.Properties.View = Me.SearchLookUpEdit1View
@@ -272,35 +394,6 @@ Partial Class FormAccountingFakturScan
         Me.SearchLookUpEdit1View.Name = "SearchLookUpEdit1View"
         Me.SearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = False
         Me.SearchLookUpEdit1View.OptionsView.ShowGroupPanel = False
-        '
-        'SimpleButton1
-        '
-        Me.SimpleButton1.Image = CType(resources.GetObject("SimpleButton1.Image"), System.Drawing.Image)
-        Me.SimpleButton1.Location = New System.Drawing.Point(677, 11)
-        Me.SimpleButton1.Name = "SimpleButton1"
-        Me.SimpleButton1.Size = New System.Drawing.Size(75, 23)
-        Me.SimpleButton1.TabIndex = 8900
-        Me.SimpleButton1.Text = "View"
-        '
-        'SimpleButton2
-        '
-        Me.SimpleButton2.Enabled = False
-        Me.SimpleButton2.Image = CType(resources.GetObject("SimpleButton2.Image"), System.Drawing.Image)
-        Me.SimpleButton2.Location = New System.Drawing.Point(758, 11)
-        Me.SimpleButton2.Name = "SimpleButton2"
-        Me.SimpleButton2.Size = New System.Drawing.Size(104, 23)
-        Me.SimpleButton2.TabIndex = 8901
-        Me.SimpleButton2.Text = "Edit No Faktur"
-        '
-        'SimpleButton3
-        '
-        Me.SimpleButton3.Enabled = False
-        Me.SimpleButton3.Image = CType(resources.GetObject("SimpleButton3.Image"), System.Drawing.Image)
-        Me.SimpleButton3.Location = New System.Drawing.Point(868, 10)
-        Me.SimpleButton3.Name = "SimpleButton3"
-        Me.SimpleButton3.Size = New System.Drawing.Size(73, 23)
-        Me.SimpleButton3.TabIndex = 8902
-        Me.SimpleButton3.Text = "Done"
         '
         'GridColumnid_comp
         '
@@ -316,13 +409,57 @@ Partial Class FormAccountingFakturScan
         Me.GridColumncomp_number.Visible = True
         Me.GridColumncomp_number.VisibleIndex = 0
         '
-        'GridColumncomp
+        'LabelControl3
         '
-        GridColumncomp.Caption = "Account Description"
-        GridColumncomp.FieldName = "comp"
-        GridColumncomp.Name = "GridColumncomp"
-        GridColumncomp.Visible = True
-        GridColumncomp.VisibleIndex = 1
+        Me.LabelControl3.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl3.Location = New System.Drawing.Point(382, 14)
+        Me.LabelControl3.Name = "LabelControl3"
+        Me.LabelControl3.Size = New System.Drawing.Size(31, 13)
+        Me.LabelControl3.TabIndex = 8898
+        Me.LabelControl3.Text = "Store"
+        '
+        'DEFrom
+        '
+        Me.DEFrom.EditValue = Nothing
+        Me.DEFrom.Location = New System.Drawing.Point(91, 11)
+        Me.DEFrom.Name = "DEFrom"
+        Me.DEFrom.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[False]
+        Me.DEFrom.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEFrom.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.DEFrom.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.DEFrom.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEFrom.Properties.Mask.EditMask = "dd\/MM\/yyyy"
+        Me.DEFrom.Size = New System.Drawing.Size(138, 20)
+        Me.DEFrom.TabIndex = 8895
+        '
+        'LabelControl2
+        '
+        Me.LabelControl2.Location = New System.Drawing.Point(231, 14)
+        Me.LabelControl2.Name = "LabelControl2"
+        Me.LabelControl2.Size = New System.Drawing.Size(4, 13)
+        Me.LabelControl2.TabIndex = 8896
+        Me.LabelControl2.Text = "-"
+        '
+        'BtnView
+        '
+        Me.BtnView.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnView.Image = CType(resources.GetObject("BtnView.Image"), System.Drawing.Image)
+        Me.BtnView.Location = New System.Drawing.Point(994, 2)
+        Me.BtnView.Name = "BtnView"
+        Me.BtnView.Size = New System.Drawing.Size(91, 41)
+        Me.BtnView.TabIndex = 8900
+        Me.BtnView.Text = "View"
+        '
+        'BtnCreateFaktur
+        '
+        Me.BtnCreateFaktur.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnCreateFaktur.Enabled = False
+        Me.BtnCreateFaktur.Image = CType(resources.GetObject("BtnCreateFaktur.Image"), System.Drawing.Image)
+        Me.BtnCreateFaktur.Location = New System.Drawing.Point(1085, 2)
+        Me.BtnCreateFaktur.Name = "BtnCreateFaktur"
+        Me.BtnCreateFaktur.Size = New System.Drawing.Size(98, 41)
+        Me.BtnCreateFaktur.TabIndex = 8901
+        Me.BtnCreateFaktur.Text = "Create FK"
         '
         'FormAccountingFakturScan
         '
@@ -340,15 +477,19 @@ Partial Class FormAccountingFakturScan
         Me.XTPInv.ResumeLayout(False)
         CType(Me.GCInv, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVInv, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
-        Me.PanelControl1.PerformLayout()
-        CType(Me.DEFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DEFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CESelAll.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl2.ResumeLayout(False)
+        Me.PanelControl2.PerformLayout()
         CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEUntil.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SLEStore.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -375,9 +516,20 @@ Partial Class FormAccountingFakturScan
     Friend WithEvents DEUntil As DevExpress.XtraEditors.DateEdit
     Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents DEFrom As DevExpress.XtraEditors.DateEdit
-    Friend WithEvents SimpleButton3 As DevExpress.XtraEditors.SimpleButton
-    Friend WithEvents SimpleButton2 As DevExpress.XtraEditors.SimpleButton
-    Friend WithEvents SimpleButton1 As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BtnCreateFaktur As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BtnView As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents GridColumnid_comp As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumncomp_number As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents CESelAll As DevExpress.XtraEditors.CheckEdit
+    Friend WithEvents PanelControl2 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents GridColumnis_select As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RepositoryItemCheckEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+    Friend WithEvents GridColumnid_sales_pos As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnsales_pos_number As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumncompinv As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnsales_pos_date As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnsales_pos_start_period As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnsales_pos_end_period As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnsales_pos_total_qty As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnsales_pos_total As DevExpress.XtraGrid.Columns.GridColumn
 End Class

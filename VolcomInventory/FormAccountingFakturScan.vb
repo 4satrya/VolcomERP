@@ -95,4 +95,60 @@
             FormMain.but_edit()
         End If
     End Sub
+
+    Private Sub BtnView_Click(sender As Object, e As EventArgs) Handles BtnView.Click
+        viewSalesInvoice()
+    End Sub
+
+    Sub viewSalesInvoice()
+        Cursor = Cursors.WaitCursor
+        Dim date_from_selected, date_until_selected As String
+        date_from_selected = "0000-01-01"
+        date_until_selected = "9999-01-01"
+        Try
+            date_from_selected = DateTime.Parse(DEFrom.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+        Try
+            date_until_selected = DateTime.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+        Dim cond As String = "AND (p.sales_pos_end_period>='" + date_from_selected + "' AND p.sales_pos_end_period<='" + date_until_selected + "') "
+
+        Dim id_store As String = SLEStore.EditValue.ToString
+        If id_store <> "0" Then
+            cond += "HAVING id_comp=" + id_store + " "
+        End If
+        Dim query As String = "SELECT 'No' AS `is_select`,p.id_sales_pos, p.sales_pos_number, f.id_sales_pos_faktur,f.no_faktur, p.id_comp_contact_bill, 
+        IF(ISNULL(p.id_comp_contact_bill), c.id_comp, cb.id_comp) AS `id_comp`, 
+        IF(ISNULL(p.id_comp_contact_bill), CONCAT(c.comp_number, ' - ', c.comp_name) , CONCAT(cb.comp_number, ' - ', cb.comp_name) ) AS `comp`,
+        IF(!ISNULL(f.id_sales_pos_faktur), f.npwp, IF(ISNULL(p.id_comp_contact_bill), c.npwp, cb.npwp)) AS `npwp`, 
+        IF(!ISNULL(f.id_sales_pos_faktur), f.npwp_name, IF(ISNULL(p.id_comp_contact_bill), c.npwp_name, cb.npwp_name)) AS `npwp_name`, 
+        IF(!ISNULL(f.id_sales_pos_faktur), f.npwp_address, IF(ISNULL(p.id_comp_contact_bill), c.npwp_address, cb.npwp_address)) AS `npwp_address`, 
+        p.sales_pos_date, p.sales_pos_start_period, p.sales_pos_end_period, 
+        p.sales_pos_total_qty, p.sales_pos_total
+        FROM tb_sales_pos p 
+        INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = p.id_store_contact_from
+        INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp
+        LEFT JOIN tb_m_comp_contact ccb ON ccb.id_comp_contact = p.id_comp_contact_bill
+        LEFT JOIN tb_m_comp cb ON cb.id_comp = ccb.id_comp
+        LEFT JOIN (
+	        SELECT a.*, e.employee_name AS `updated_by_name`
+        FROM  (	
+	        SELECT f.id_sales_pos_faktur, f.id_sales_pos, f.no_faktur, f.npwp, f.npwp_name, f.npwp_address,
+		        f.updated_at, f.updated_by, f.exported_date, f.exported_by 
+		        FROM tb_sales_pos_faktur f
+		        ORDER BY f.id_sales_pos_faktur DESC
+	        ) a
+	        INNER JOIN tb_m_user u ON u.id_user = a.updated_by
+	        INNER JOIN tb_m_employee e ON e.id_employee = u.id_employee
+	        GROUP BY a.id_sales_pos
+        ) f ON f.id_sales_pos = p.id_sales_pos
+        WHERE p.id_report_status=6 " + cond + "
+        ORDER BY p.id_sales_pos ASC "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCInv.DataSource = data
+        GVInv.BestFitColumns()
+        Cursor = Cursors.Default
+    End Sub
 End Class

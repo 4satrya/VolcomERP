@@ -28,7 +28,7 @@
                         .counting = If(y1 Is Nothing, "", y1("counting")),
                         .name = If(y1 Is Nothing, "", y1("name")),
                         .size = If(y1 Is Nothing, "", y1("size")),
-                        .qty = table1("qty"),
+                        .qty = If(y1 Is Nothing, 0, If(y1("is_unique_report").ToString = "1", 1, table1("qty"))),
                         .status = If(y1 Is Nothing, "Product not found", "OK")
                     }
         GCData.DataSource = Nothing

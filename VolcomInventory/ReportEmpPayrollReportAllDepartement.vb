@@ -43,6 +43,9 @@
         Else
             pre_load_mark_horz("192", id_payroll, "2", "2", XrTable1)
         End If
+
+        GVSummaryOffice.AppearancePrint.Row.BorderColor = Color.Black
+        GVSummaryOffice.AppearancePrint.Row.Options.UseBorderColor = True
     End Sub
 
     Dim tot_salary As Decimal = 0
@@ -139,7 +142,7 @@
             End Select
         End If
 
-        If item.FieldName.ToString = "d_cooperative_contributtion" Then
+        If item.FieldName.ToString = "d_cooperative_contribution" Then
             Select Case e.SummaryProcess
                 Case DevExpress.Data.CustomSummaryProcess.Start
                     tot_d_cooperative_contributtion = 0

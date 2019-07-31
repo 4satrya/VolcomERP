@@ -346,7 +346,7 @@
 	        INNER JOIN tb_m_design dsg ON dsg.id_design = p.id_design
 	        WHERE dsg.is_old_design=2 AND (" + del + ")
 	        AND mc.is_unique_report=1
-	        GROUP BY dd.id_product, mc.id_unique_code
+	        GROUP BY dd.id_product
         ) m
         INNER JOIN tb_m_product_code pc ON pc.id_product = m.id_product
         INNER JOIN tb_m_code_detail cd ON cd.id_code_detail = pc.id_code_detail

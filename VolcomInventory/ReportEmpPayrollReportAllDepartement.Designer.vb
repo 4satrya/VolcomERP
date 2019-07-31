@@ -122,9 +122,9 @@ Partial Public Class ReportEmpPayrollReportAllDepartement
         'WinControlContainer2
         '
         Me.WinControlContainer2.AnchorHorizontal = DevExpress.XtraReports.UI.HorizontalAnchorStyles.Right
-        Me.WinControlContainer2.LocationFloat = New DevExpress.Utils.PointFloat(0.00003973643!, 0!)
+        Me.WinControlContainer2.LocationFloat = New DevExpress.Utils.PointFloat(0!, 0!)
         Me.WinControlContainer2.Name = "WinControlContainer2"
-        Me.WinControlContainer2.SizeF = New System.Drawing.SizeF(1119.0!, 150.0!)
+        Me.WinControlContainer2.SizeF = New System.Drawing.SizeF(1075.0!, 150.0!)
         Me.WinControlContainer2.WinControl = Me.GCSummaryAll
         '
         'GCSummaryAll
@@ -133,7 +133,7 @@ Partial Public Class ReportEmpPayrollReportAllDepartement
         Me.GCSummaryAll.Location = New System.Drawing.Point(2, 48)
         Me.GCSummaryAll.MainView = Me.GVSummaryAll
         Me.GCSummaryAll.Name = "GCSummaryAll"
-        Me.GCSummaryAll.Size = New System.Drawing.Size(1074, 144)
+        Me.GCSummaryAll.Size = New System.Drawing.Size(1032, 144)
         Me.GCSummaryAll.TabIndex = 0
         Me.GCSummaryAll.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVSummaryAll})
         '
@@ -163,6 +163,8 @@ Partial Public Class ReportEmpPayrollReportAllDepartement
         Me.GVSummaryAll.AppearancePrint.HeaderPanel.Options.UseBackColor = True
         Me.GVSummaryAll.AppearancePrint.HeaderPanel.Options.UseBorderColor = True
         Me.GVSummaryAll.AppearancePrint.HeaderPanel.Options.UseFont = True
+        Me.GVSummaryAll.AppearancePrint.Lines.BackColor = System.Drawing.Color.Black
+        Me.GVSummaryAll.AppearancePrint.Lines.Options.UseBackColor = True
         Me.GVSummaryAll.AppearancePrint.Row.BackColor = System.Drawing.Color.White
         Me.GVSummaryAll.AppearancePrint.Row.BorderColor = System.Drawing.Color.Black
         Me.GVSummaryAll.AppearancePrint.Row.Font = New System.Drawing.Font("Tahoma", 7.25!)
@@ -321,9 +323,9 @@ Partial Public Class ReportEmpPayrollReportAllDepartement
         '
         'WinControlContainer1
         '
-        Me.WinControlContainer1.LocationFloat = New DevExpress.Utils.PointFloat(0.00003973643!, 23.00002!)
+        Me.WinControlContainer1.LocationFloat = New DevExpress.Utils.PointFloat(0.00002649095!, 23.00003!)
         Me.WinControlContainer1.Name = "WinControlContainer1"
-        Me.WinControlContainer1.SizeF = New System.Drawing.SizeF(1119.0!, 150.0!)
+        Me.WinControlContainer1.SizeF = New System.Drawing.SizeF(1075.0!, 150.0!)
         Me.WinControlContainer1.WinControl = Me.GCSummaryOffice
         '
         'GCSummaryOffice
@@ -331,7 +333,7 @@ Partial Public Class ReportEmpPayrollReportAllDepartement
         Me.GCSummaryOffice.Location = New System.Drawing.Point(2, 48)
         Me.GCSummaryOffice.MainView = Me.GVSummaryOffice
         Me.GCSummaryOffice.Name = "GCSummaryOffice"
-        Me.GCSummaryOffice.Size = New System.Drawing.Size(1074, 144)
+        Me.GCSummaryOffice.Size = New System.Drawing.Size(1032, 144)
         Me.GCSummaryOffice.TabIndex = 0
         Me.GCSummaryOffice.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVSummaryOffice})
         '
@@ -361,11 +363,9 @@ Partial Public Class ReportEmpPayrollReportAllDepartement
         Me.GVSummaryOffice.AppearancePrint.HeaderPanel.Options.UseBackColor = True
         Me.GVSummaryOffice.AppearancePrint.HeaderPanel.Options.UseBorderColor = True
         Me.GVSummaryOffice.AppearancePrint.HeaderPanel.Options.UseFont = True
-        Me.GVSummaryOffice.AppearancePrint.Row.BackColor = System.Drawing.Color.White
-        Me.GVSummaryOffice.AppearancePrint.Row.BorderColor = System.Drawing.Color.Black
+        Me.GVSummaryOffice.AppearancePrint.Lines.BackColor = System.Drawing.Color.Black
+        Me.GVSummaryOffice.AppearancePrint.Lines.Options.UseBackColor = True
         Me.GVSummaryOffice.AppearancePrint.Row.Font = New System.Drawing.Font("Tahoma", 7.25!)
-        Me.GVSummaryOffice.AppearancePrint.Row.Options.UseBackColor = True
-        Me.GVSummaryOffice.AppearancePrint.Row.Options.UseBorderColor = True
         Me.GVSummaryOffice.AppearancePrint.Row.Options.UseFont = True
         Me.GVSummaryOffice.ColumnPanelRowHeight = 32
         Me.GVSummaryOffice.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumn7, Me.GridColumn8, Me.GridColumn9, Me.GridColumn10, Me.GridColumn11, Me.GridColumn12, Me.GridColumn13})
@@ -373,11 +373,14 @@ Partial Public Class ReportEmpPayrollReportAllDepartement
         Me.GVSummaryOffice.Name = "GVSummaryOffice"
         Me.GVSummaryOffice.OptionsBehavior.Editable = False
         Me.GVSummaryOffice.OptionsPrint.AllowMultilineHeaders = True
+        Me.GVSummaryOffice.OptionsPrint.PrintPreview = True
         Me.GVSummaryOffice.OptionsView.ShowFooter = True
         Me.GVSummaryOffice.OptionsView.ShowGroupPanel = False
         '
         'GridColumn1
         '
+        Me.GridColumn1.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn1.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
         Me.GridColumn1.Caption = "No"
         Me.GridColumn1.FieldName = "no"
         Me.GridColumn1.Name = "GridColumn1"
@@ -387,6 +390,8 @@ Partial Public Class ReportEmpPayrollReportAllDepartement
         '
         'GridColumn2
         '
+        Me.GridColumn2.AppearanceHeader.BorderColor = System.Drawing.Color.Red
+        Me.GridColumn2.AppearanceHeader.Options.UseBorderColor = True
         Me.GridColumn2.Caption = "Departement"
         Me.GridColumn2.FieldName = "departement"
         Me.GridColumn2.MinWidth = 200
@@ -584,9 +589,9 @@ Partial Public Class ReportEmpPayrollReportAllDepartement
         '
         'WinControlContainer4
         '
-        Me.WinControlContainer4.LocationFloat = New DevExpress.Utils.PointFloat(0!, 23.00001!)
+        Me.WinControlContainer4.LocationFloat = New DevExpress.Utils.PointFloat(0!, 23.00003!)
         Me.WinControlContainer4.Name = "WinControlContainer4"
-        Me.WinControlContainer4.SizeF = New System.Drawing.SizeF(1119.0!, 150.0!)
+        Me.WinControlContainer4.SizeF = New System.Drawing.SizeF(1075.0!, 150.0!)
         Me.WinControlContainer4.WinControl = Me.GCSummaryStore
         '
         'GCSummaryStore
@@ -594,7 +599,7 @@ Partial Public Class ReportEmpPayrollReportAllDepartement
         Me.GCSummaryStore.Location = New System.Drawing.Point(2, 48)
         Me.GCSummaryStore.MainView = Me.GVSummaryStore
         Me.GCSummaryStore.Name = "GCSummaryStore"
-        Me.GCSummaryStore.Size = New System.Drawing.Size(1074, 144)
+        Me.GCSummaryStore.Size = New System.Drawing.Size(1032, 144)
         Me.GCSummaryStore.TabIndex = 0
         Me.GCSummaryStore.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVSummaryStore})
         '
@@ -624,6 +629,8 @@ Partial Public Class ReportEmpPayrollReportAllDepartement
         Me.GVSummaryStore.AppearancePrint.HeaderPanel.Options.UseBackColor = True
         Me.GVSummaryStore.AppearancePrint.HeaderPanel.Options.UseBorderColor = True
         Me.GVSummaryStore.AppearancePrint.HeaderPanel.Options.UseFont = True
+        Me.GVSummaryStore.AppearancePrint.Lines.BackColor = System.Drawing.Color.Black
+        Me.GVSummaryStore.AppearancePrint.Lines.Options.UseBackColor = True
         Me.GVSummaryStore.AppearancePrint.Row.BackColor = System.Drawing.Color.White
         Me.GVSummaryStore.AppearancePrint.Row.BorderColor = System.Drawing.Color.Black
         Me.GVSummaryStore.AppearancePrint.Row.Font = New System.Drawing.Font("Tahoma", 7.25!)
@@ -641,6 +648,8 @@ Partial Public Class ReportEmpPayrollReportAllDepartement
         '
         'GridColumn27
         '
+        Me.GridColumn27.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn27.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
         Me.GridColumn27.Caption = "No"
         Me.GridColumn27.FieldName = "no"
         Me.GridColumn27.Name = "GridColumn27"
@@ -904,7 +913,7 @@ Partial Public Class ReportEmpPayrollReportAllDepartement
         'XrLabel1
         '
         Me.XrLabel1.Font = New System.Drawing.Font("Tahoma", 9.75!)
-        Me.XrLabel1.LocationFloat = New DevExpress.Utils.PointFloat(898.9992!, 33.99998!)
+        Me.XrLabel1.LocationFloat = New DevExpress.Utils.PointFloat(855.0001!, 33.99998!)
         Me.XrLabel1.Name = "XrLabel1"
         Me.XrLabel1.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel1.SizeF = New System.Drawing.SizeF(60.0!, 23.0!)
@@ -925,7 +934,7 @@ Partial Public Class ReportEmpPayrollReportAllDepartement
         'XrLabel3
         '
         Me.XrLabel3.Font = New System.Drawing.Font("Tahoma", 9.75!)
-        Me.XrLabel3.LocationFloat = New DevExpress.Utils.PointFloat(958.9999!, 33.99998!)
+        Me.XrLabel3.LocationFloat = New DevExpress.Utils.PointFloat(915.0001!, 33.99998!)
         Me.XrLabel3.Name = "XrLabel3"
         Me.XrLabel3.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel3.SizeF = New System.Drawing.SizeF(15.0!, 23.0!)
@@ -937,7 +946,7 @@ Partial Public Class ReportEmpPayrollReportAllDepartement
         'XLPeriod
         '
         Me.XLPeriod.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold)
-        Me.XLPeriod.LocationFloat = New DevExpress.Utils.PointFloat(898.9991!, 11.0!)
+        Me.XLPeriod.LocationFloat = New DevExpress.Utils.PointFloat(855.0!, 11.0!)
         Me.XLPeriod.Name = "XLPeriod"
         Me.XLPeriod.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XLPeriod.SizeF = New System.Drawing.SizeF(220.0!, 23.0!)
@@ -949,10 +958,10 @@ Partial Public Class ReportEmpPayrollReportAllDepartement
         'XLTitle
         '
         Me.XLTitle.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Bold)
-        Me.XLTitle.LocationFloat = New DevExpress.Utils.PointFloat(220.0!, 33.99998!)
+        Me.XLTitle.LocationFloat = New DevExpress.Utils.PointFloat(220.0!, 33.99997!)
         Me.XLTitle.Name = "XLTitle"
         Me.XLTitle.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XLTitle.SizeF = New System.Drawing.SizeF(678.9993!, 23.0!)
+        Me.XLTitle.SizeF = New System.Drawing.SizeF(635.0!, 23.0!)
         Me.XLTitle.StylePriority.UseFont = False
         Me.XLTitle.StylePriority.UseTextAlignment = False
         Me.XLTitle.Text = "Monthly Payroll"
@@ -961,7 +970,7 @@ Partial Public Class ReportEmpPayrollReportAllDepartement
         'XLType
         '
         Me.XLType.Font = New System.Drawing.Font("Tahoma", 9.75!)
-        Me.XLType.LocationFloat = New DevExpress.Utils.PointFloat(973.9998!, 33.99998!)
+        Me.XLType.LocationFloat = New DevExpress.Utils.PointFloat(930.0001!, 33.99998!)
         Me.XLType.Name = "XLType"
         Me.XLType.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XLType.SizeF = New System.Drawing.SizeF(145.0!, 23.0!)
@@ -974,7 +983,7 @@ Partial Public Class ReportEmpPayrollReportAllDepartement
         '
         Me.XrLine1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 79.99998!)
         Me.XrLine1.Name = "XrLine1"
-        Me.XrLine1.SizeF = New System.Drawing.SizeF(1119.0!, 20.0!)
+        Me.XrLine1.SizeF = New System.Drawing.SizeF(1075.0!, 20.0!)
         '
         'ReportFooter
         '
@@ -985,10 +994,10 @@ Partial Public Class ReportEmpPayrollReportAllDepartement
         'XrTable1
         '
         Me.XrTable1.Font = New System.Drawing.Font("Tahoma", 7.25!)
-        Me.XrTable1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 20.0!)
+        Me.XrTable1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 20.00003!)
         Me.XrTable1.Name = "XrTable1"
         Me.XrTable1.Rows.AddRange(New DevExpress.XtraReports.UI.XRTableRow() {Me.XrTableRow1})
-        Me.XrTable1.SizeF = New System.Drawing.SizeF(1118.999!, 25.0!)
+        Me.XrTable1.SizeF = New System.Drawing.SizeF(1075.0!, 25.0!)
         Me.XrTable1.StylePriority.UseFont = False
         '
         'XrTableRow1
@@ -1281,7 +1290,7 @@ Partial Public Class ReportEmpPayrollReportAllDepartement
         '
         Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.Detail, Me.TopMargin, Me.BottomMargin, Me.ReportHeader, Me.ReportFooter, Me.DetailReport, Me.DetailReport1, Me.DetailReport2})
         Me.Landscape = True
-        Me.Margins = New System.Drawing.Printing.Margins(25, 25, 50, 50)
+        Me.Margins = New System.Drawing.Printing.Margins(25, 69, 50, 50)
         Me.PageHeight = 827
         Me.PageWidth = 1169
         Me.PaperKind = System.Drawing.Printing.PaperKind.A4

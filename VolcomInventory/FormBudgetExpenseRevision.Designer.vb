@@ -130,7 +130,7 @@ Partial Class FormBudgetExpenseRevision
         Me.MinimizeBox = False
         Me.Name = "FormBudgetExpenseRevision"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Revision Expense Budget"
+        Me.Text = "Revision Budget CAPEX"
         CType(Me.GCData, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVData, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)

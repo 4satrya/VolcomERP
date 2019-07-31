@@ -772,7 +772,7 @@
             Cursor = Cursors.WaitCursor
             'generate
             Dim query As String = "CALL ins_unique_code_migration(" + id_store + "); UPDATE tb_m_comp SET is_use_unique_code=1 WHERE id_comp=" + id_store + ";"
-            execute_non_query(query, True, "", "", "", "")
+            execute_non_query_long(query, True, "", "", "", "")
             TxtUseUniqueCode.Text = "Yes"
             BtnSet.Enabled = False
             infoCustom("Aktifasi sukses")
@@ -782,7 +782,7 @@
 
     Sub loadUniqueCode()
         Cursor = Cursors.WaitCursor
-        Dim query As String = "SELECT u.id_unique_code, u.id_comp, u.id_product, p.product_display_name, u.id_pl_sales_order_del_det, d.pl_sales_order_del_number, 
+        Dim query As String = "SELECT u.id_comp, u.id_product, p.product_display_name, u.id_pl_sales_order_del_det, d.pl_sales_order_del_number, 
         u.id_sales_pos_det, sal.sales_pos_number AS `sal_number`,
         u.id_sales_pos_cn_det, cn.sales_pos_number AS `cn_number`, 
         u.id_sales_return_det, r.sales_return_number,

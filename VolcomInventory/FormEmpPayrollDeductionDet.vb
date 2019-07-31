@@ -13,10 +13,18 @@
             column = "adjustment"
         End If
 
-        Dim query_type As String = "SELECT id_salary_" + column + "_cat AS id_salary_deduction_cat, salary_" + column + "_cat AS salary_deduction_cat FROM tb_lookup_salary_" + column + "_cat"
+        Dim query_where_typ As String = ""
+        Dim query_where_cat As String = ""
+
+        If Not FormEmpPayroll.GVPayrollPeriode.GetFocusedRowCellValue("id_payroll_type").ToString = "1" Then
+            query_where_typ = "WHERE id_salary_" + column + "_cat IN (SELECT id_salary_" + column + "_cat FROM tb_lookup_salary_" + column + " WHERE use_dw = 1)"
+            query_where_cat = "WHERE use_dw = 1"
+        End If
+
+        Dim query_type As String = "SELECT id_salary_" + column + "_cat AS id_salary_deduction_cat, salary_" + column + "_cat AS salary_deduction_cat FROM tb_lookup_salary_" + column + "_cat" + " " + query_where_typ
         viewSearchLookupQuery(SLUEType, query_type, "id_salary_deduction_cat", "salary_deduction_cat", "id_salary_deduction_cat")
 
-        Dim query_category As String = "SELECT id_salary_" + column + " AS id_salary_deduction, id_salary_" + column + "_cat AS id_salary_deduction_cat, salary_" + column + " AS salary_deduction, use_days FROM tb_lookup_salary_" + column + ""
+        Dim query_category As String = "SELECT id_salary_" + column + " AS id_salary_deduction, id_salary_" + column + "_cat AS id_salary_deduction_cat, salary_" + column + " AS salary_deduction, use_days FROM tb_lookup_salary_" + column + " " + query_where_cat
         viewSearchLookupQuery(SLUECategory, query_category, "id_salary_deduction", "salary_deduction", "id_salary_deduction")
 
         SLUECategory.EditValue = Nothing

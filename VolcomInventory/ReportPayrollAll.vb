@@ -25,15 +25,16 @@
         End If
 
         If type = "4" Then
+            GCActualWorkingDaysDW.Caption = "Actual" + Environment.NewLine + "Working Days"
+
             GBWorkingDays.Visible = False
 
             GCTotalTHP.Visible = False
             GCTotalAdjustment.Visible = False
-            GCTotalDeduction.Visible = False
 
             GBDW.Visible = True
 
-            GCStatus.Width = 150
+            GCStatus.Width = 100
         End If
 
         'mark

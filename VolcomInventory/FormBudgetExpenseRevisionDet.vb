@@ -83,7 +83,7 @@
         IFNULL(r.`11_rev`,IFNULL(v.`11_budget`,0)) AS `11_actual`,
         IFNULL(r.`12_rev`,IFNULL(v.`12_budget`,0)) AS `12_actual`
         FROM tb_item_coa c
-        INNER JOIN tb_item_cat cat ON cat.id_item_cat = c.id_item_cat
+        INNER JOIN tb_item_cat cat ON cat.id_item_cat = c.id_item_cat AND cat.id_expense_type=2
         INNER JOIN tb_lookup_expense_type et ON et.id_expense_type = cat.id_expense_type
         INNER JOIN tb_a_acc coa ON coa.id_acc = c.id_coa_out
         LEFT JOIN (

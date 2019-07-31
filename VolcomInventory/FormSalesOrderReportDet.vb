@@ -5,6 +5,7 @@
     Public dest_to As String = "-1"
     Public created_date As DateTime = Nothing
     Public id_so_status As String = "-1"
+    Public id_design As String = "-1"
 
     Private Sub FormSalesOrderReportDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         TxtFrom.Text = from
@@ -16,6 +17,14 @@
 
     Sub viewDetail()
         Cursor = Cursors.WaitCursor
+        Dim cond_prod As String = ""
+        Dim cond_prod2 As String = ""
+        If id_design <> "-1" Then
+            cond_prod = "AND d.id_design=" + id_design + " "
+            cond_prod2 = "INNER JOIN tb_m_product prod ON prod.id_product = deld.id_product
+            INNER JOIN tb_m_design dsg ON dsg.id_design = prod.id_design AND dsg.id_design=" + id_design + " "
+        End If
+
         Dim query As String = "SELECT so.id_sales_order, sod.id_sales_order_det, 
         p.product_full_code AS `barcode`, d.design_code AS `code`, d.design_display_name AS `name`, cd.code_detail_name AS `size`,
         sod.design_price, dpt.design_price_type, 
@@ -23,7 +32,7 @@
         FROM tb_sales_order so 
         INNER JOIN tb_sales_order_det sod ON sod.id_sales_order = so.id_sales_order
         INNER JOIN tb_m_product p ON p.id_product = sod.id_product
-        INNER JOIN tb_m_design d ON d.id_design = p.id_design
+        INNER JOIN tb_m_design d ON d.id_design = p.id_design " + cond_prod + "
         INNER JOIN tb_m_design_price dp ON dp.id_design_price = sod.id_design_price
         INNER JOIN tb_lookup_design_price_type dpt ON dpt.id_design_price_type = dp.id_design_price_type
         INNER JOIN tb_m_product_code pc ON pc.id_product = p.id_product
@@ -33,6 +42,7 @@
 	            SELECT deld.id_sales_order_det, SUM(deld.pl_sales_order_del_det_qty) AS `total_trs`
 	            FROM tb_pl_sales_order_del del
 	            INNER JOIN tb_pl_sales_order_del_det deld ON deld.id_pl_sales_order_del = del.id_pl_sales_order_del
+                 " + cond_prod2 + "
 	            WHERE del.id_sales_order=" + id_so + " AND del.id_report_status!=5
 	            GROUP BY deld.id_sales_order_det
             ) scan ON scan.id_sales_order_det = sod.id_sales_order_det
@@ -40,6 +50,7 @@
 	            SELECT deld.id_sales_order_det, SUM(deld.pl_sales_order_del_det_qty) AS `total_trs`
 	            FROM tb_pl_sales_order_del del
 	            INNER JOIN tb_pl_sales_order_del_det deld ON deld.id_pl_sales_order_del = del.id_pl_sales_order_del
+                " + cond_prod2 + "
 	            WHERE del.id_sales_order=" + id_so + " AND del.id_report_status=6
 	            GROUP BY deld.id_sales_order_det
             ) comp ON comp.id_sales_order_det = sod.id_sales_order_det "
@@ -48,14 +59,16 @@
 	            SELECT deld.id_sales_order_det, SUM(deld.fg_trf_det_qty) AS `total_trs`
 	            FROM tb_fg_trf del
 	            INNER JOIN tb_fg_trf_det deld ON deld.id_fg_trf = del.id_fg_trf
-	            WHERE del.id_sales_order=" + id_so + " AND del.id_report_status!=5
+	              " + cond_prod2 + "
+                WHERE del.id_sales_order=" + id_so + " AND del.id_report_status!=5
 	            GROUP BY deld.id_sales_order_det
             ) scan ON scan.id_sales_order_det = sod.id_sales_order_det
             LEFT JOIN (
 	           SELECT deld.id_sales_order_det, SUM(deld.fg_trf_det_qty) AS `total_trs`
 	            FROM tb_fg_trf del
 	            INNER JOIN tb_fg_trf_det deld ON deld.id_fg_trf = del.id_fg_trf
-	            WHERE del.id_sales_order=" + id_so + " AND del.id_report_status=6
+	            " + cond_prod2 + "
+                WHERE del.id_sales_order=" + id_so + " AND del.id_report_status=6
 	            GROUP BY deld.id_sales_order_det
             ) comp ON comp.id_sales_order_det = sod.id_sales_order_det "
         End If

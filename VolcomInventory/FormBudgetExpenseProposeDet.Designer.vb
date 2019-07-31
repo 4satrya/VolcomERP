@@ -1193,7 +1193,7 @@ Partial Class FormBudgetExpenseProposeDet
         Me.MinimizeBox = False
         Me.Name = "FormBudgetExpenseProposeDet"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Propose Expense Budget"
+        Me.Text = "Propose Budget CAPEX"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.PanelControlBottom, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControlBottom.ResumeLayout(False)

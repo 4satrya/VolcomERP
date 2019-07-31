@@ -1836,7 +1836,7 @@
 	        GROUP BY u.unique_code
             HAVING qty=1
 	        UNION ALL
-	        SELECT deld.id_product, NULL AS `id_pl_prod_order_rec_det_unique`, prod.product_code AS `full_code`, prod.product_full_code AS `code`, '' AS `counting`, prod.product_display_name AS `name`, dsg.is_old_design, 1 AS `qty`, 2 AS `is_unique_report`
+            SELECT deld.id_product, NULL AS `id_pl_prod_order_rec_det_unique`, prod.product_full_code AS `full_code`, prod.product_full_code AS `code`, '' AS `counting`, prod.product_display_name AS `name`, dsg.is_old_design, 1 AS `qty`, 2 AS `is_unique_report`
 	        FROM tb_pl_sales_order_del del
 	        INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = del.id_store_contact_to
 	        INNER JOIN tb_pl_sales_order_del_det deld ON deld.id_pl_sales_order_del = del.id_pl_sales_order_del
@@ -1844,6 +1844,12 @@
 	        INNER JOIN tb_m_design dsg ON dsg.id_design = prod.id_design
 	        WHERE del.id_report_status=6 AND cc.id_comp=" + id_store + " AND dsg.is_old_design=1
 	        GROUP BY deld.id_product
+            UNION
+            SELECT prod.id_product, NULL AS `id_pl_prod_order_rec_det_unique`, prod.product_full_code AS `full_code`, prod.product_full_code AS `code`, '' AS `counting`, prod.product_display_name AS `name`, dsg.is_old_design, 1 AS `qty`, 2 AS `is_unique_report`
+            FROM tb_m_product prod 
+            INNER JOIN tb_m_design dsg ON dsg.id_design = prod.id_design
+            WHERE dsg.is_old_design=1 
+            GROUP BY prod.id_product
         ) a
         INNER JOIN tb_m_product_code prodcode ON prodcode.id_product = a.id_product
         INNER JOIN tb_m_code_detail cd ON cd.id_code_detail = prodcode.id_code_detail "
@@ -1866,31 +1872,31 @@
             INNER JOIN tb_pl_prod_order_rec_det_counting c ON c.id_product = u.id_product AND c.pl_prod_order_rec_det_counting = RIGHT(u.unique_code,4)
             LEFT JOIN (
 	            SELECT * FROM (
-		            SELECT u.id_unique_code, u.id_type, u.unique_code, u.input_date
+		            SELECT u.id_type, u.unique_code, u.input_date
 		            FROM tb_m_unique_code u
 		            INNER JOIN tb_pl_sales_order_del_det_counting delc ON delc.id_pl_sales_order_del_det_counting = u.id_pl_sales_order_del_det_counting
 		            WHERE u.id_comp=" + id_store + " AND u.is_unique_report=1 AND u.id_type=1
 		            UNION ALL
-		            SELECT u.id_unique_code, u.id_type, u.unique_code, u.input_date
+		            SELECT u.id_type, u.unique_code, u.input_date
 		            FROM tb_m_unique_code u
 		            INNER JOIN tb_sales_pos_det_counting salc ON salc.id_sales_pos_det_counting = u.id_sales_pos_det_counting
 		            INNER JOIN tb_sales_pos sal ON sal.id_sales_pos = salc.id_sales_pos
 		            WHERE u.id_comp=" + id_store + " AND u.is_unique_report=1 AND u.id_type=2 AND sal.id_report_status=6
 		            UNION ALL
-		            SELECT u.id_unique_code, u.id_type, u.unique_code, u.input_date
+		            SELECT u.id_type, u.unique_code, u.input_date
 		            FROM tb_m_unique_code u
 		            INNER JOIN tb_sales_pos_det_counting cnc ON cnc.id_sales_pos_det_counting = u.id_sales_pos_det_counting_cn
 		            INNER JOIN tb_sales_pos cn ON cn.id_sales_pos = cnc.id_sales_pos
 		            WHERE u.id_comp=" + id_store + " AND u.is_unique_report=1 AND u.id_type=3 AND cn.id_report_status!=5
 		            UNION ALL
-		            SELECT u.id_unique_code, u.id_type, u.unique_code, u.input_date
+		            SELECT u.id_type, u.unique_code, u.input_date
 		            FROM tb_m_unique_code u
 		            INNER JOIN tb_sales_return_det_counting retc ON retc.id_sales_return_det_counting = u.id_sales_return_det_counting
 		            INNER JOIN tb_sales_return_det retd ON retd.id_sales_return_det = retc.id_sales_return_det
 		            INNER JOIN tb_sales_return ret ON ret.id_sales_return = retd.id_sales_return
 		            WHERE u.id_comp=" + id_store + " AND u.is_unique_report=1 AND u.id_type=4 AND ret.id_report_status!=5
 		            UNION ALL
-		            SELECT u.id_unique_code, u.id_type, u.unique_code, u.input_date
+		            SELECT u.id_type, u.unique_code, u.input_date
 		            FROM tb_m_unique_code u
 		            WHERE u.id_comp=" + id_store + " AND u.is_unique_report=1 AND u.id_type=5
 		            ORDER BY input_date DESC
@@ -1910,7 +1916,7 @@
             WHERE u.id_comp=" + id_store + " AND u.is_unique_report=1 AND lt.id_type=2 AND ISNULL(o.`full_code`)
             GROUP BY u.unique_code
 	        UNION ALL
-	        SELECT deld.id_product, NULL AS `id_pl_prod_order_rec_det_unique`, prod.product_code AS `full_code`, prod.product_full_code AS `code`, '' AS `counting`, prod.product_display_name AS `name`, dsg.is_old_design, 1 AS `qty`, 2 AS `is_unique_report`
+	        SELECT deld.id_product, NULL AS `id_pl_prod_order_rec_det_unique`, prod.product_full_code AS `full_code`, prod.product_full_code AS `code`, '' AS `counting`, prod.product_display_name AS `name`, dsg.is_old_design, 1 AS `qty`, 2 AS `is_unique_report`
 	        FROM tb_pl_sales_order_del del
 	        INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = del.id_store_contact_to
 	        INNER JOIN tb_pl_sales_order_del_det deld ON deld.id_pl_sales_order_del = del.id_pl_sales_order_del
@@ -1918,6 +1924,12 @@
 	        INNER JOIN tb_m_design dsg ON dsg.id_design = prod.id_design
 	        WHERE del.id_report_status=6 AND cc.id_comp=" + id_store + " AND dsg.is_old_design=1
 	        GROUP BY deld.id_product
+            UNION
+            SELECT prod.id_product, NULL AS `id_pl_prod_order_rec_det_unique`, prod.product_full_code AS `full_code`, prod.product_full_code AS `code`, '' AS `counting`, prod.product_display_name AS `name`, dsg.is_old_design, 1 AS `qty`, 2 AS `is_unique_report`
+            FROM tb_m_product prod 
+            INNER JOIN tb_m_design dsg ON dsg.id_design = prod.id_design
+            WHERE dsg.is_old_design=1 
+            GROUP BY prod.id_product
         ) a
         INNER JOIN tb_m_product_code prodcode ON prodcode.id_product = a.id_product
         INNER JOIN tb_m_code_detail cd ON cd.id_code_detail = prodcode.id_code_detail "

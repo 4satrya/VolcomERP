@@ -52,7 +52,7 @@
                 FormEmpPayroll.GVPayrollPeriode.FocusedRowHandle = find_row(FormEmpPayroll.GVPayrollPeriode, "id_payroll", id_payroll)
                 Close()
             Else 'edit
-                Dim query As String = "UPDATE tb_emp_payroll SET periode_start='" & date_start & "',periode_end='" & date_end & "',ot_periode_start='" & ot_date_start & "',ot_periode_end='" & ot_date_end & "',note='" & note & "',last_upd=NOW(),id_user_upd='" & id_user & "',id_payroll_type='" & id_payroll_type & "' WHERE id_payroll='" & id_payroll & "'"
+                Dim query As String = "UPDATE tb_emp_payroll SET periode_start='" & date_start & "',periode_end='" & date_end & "',ot_periode_start=" & ot_date_start & ",ot_periode_end=" & ot_date_end & ",note='" & note & "',last_upd=NOW(),id_user_upd='" & id_user & "',id_payroll_type='" & id_payroll_type & "' WHERE id_payroll='" & id_payroll & "'"
                 execute_non_query(query, True, "", "", "", "")
                 '
                 FormEmpPayroll.load_payroll()

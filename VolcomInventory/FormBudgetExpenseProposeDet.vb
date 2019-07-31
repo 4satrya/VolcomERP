@@ -68,7 +68,7 @@
         Dim qd As String = "SELECT ic.id_item_coa, ic.id_item_cat, cat.item_cat, ic.id_departement, d.departement,
         ic.id_coa_out,  coa.acc_name AS `exp_acc`, coa.acc_description AS `exp_description`, IFNULL(py.id_b_expense_propose_year,0) AS `id_b_expense_propose_year`, IFNULL(py.value_expense,0) AS `val`
         FROM tb_item_coa ic 
-        INNER JOIN tb_item_cat cat ON cat.id_item_cat = ic.id_item_cat
+        INNER JOIN tb_item_cat cat ON cat.id_item_cat = ic.id_item_cat AND cat.id_expense_type=2
         INNER JOIN tb_m_departement d ON d.id_departement = ic.id_departement
         INNER JOIN tb_a_acc coa ON coa.id_acc = ic.id_coa_out
         LEFT JOIN tb_b_expense_propose_year py ON py.id_item_coa = ic.id_item_coa AND py.id_b_expense_propose=" + id + "

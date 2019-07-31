@@ -70,7 +70,7 @@ Partial Public Class ReportEmpPayrollOvertime
         '
         Me.WinControlContainer1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 0!)
         Me.WinControlContainer1.Name = "WinControlContainer1"
-        Me.WinControlContainer1.SizeF = New System.Drawing.SizeF(1118.999!, 260.0!)
+        Me.WinControlContainer1.SizeF = New System.Drawing.SizeF(1075.0!, 260.0!)
         Me.WinControlContainer1.WinControl = Me.GCOvertime
         '
         'GCOvertime
@@ -78,7 +78,7 @@ Partial Public Class ReportEmpPayrollOvertime
         Me.GCOvertime.Location = New System.Drawing.Point(0, 40)
         Me.GCOvertime.MainView = Me.GVOverTime
         Me.GCOvertime.Name = "GCOvertime"
-        Me.GCOvertime.Size = New System.Drawing.Size(1074, 250)
+        Me.GCOvertime.Size = New System.Drawing.Size(1032, 250)
         Me.GCOvertime.TabIndex = 1
         Me.GCOvertime.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVOverTime})
         '
@@ -108,6 +108,8 @@ Partial Public Class ReportEmpPayrollOvertime
         Me.GVOverTime.AppearancePrint.HeaderPanel.Options.UseBackColor = True
         Me.GVOverTime.AppearancePrint.HeaderPanel.Options.UseBorderColor = True
         Me.GVOverTime.AppearancePrint.HeaderPanel.Options.UseFont = True
+        Me.GVOverTime.AppearancePrint.Lines.BackColor = System.Drawing.Color.Black
+        Me.GVOverTime.AppearancePrint.Lines.Options.UseBackColor = True
         Me.GVOverTime.AppearancePrint.Row.BackColor = System.Drawing.Color.White
         Me.GVOverTime.AppearancePrint.Row.BorderColor = System.Drawing.Color.Black
         Me.GVOverTime.AppearancePrint.Row.Font = New System.Drawing.Font("Tahoma", 7.25!)
@@ -119,6 +121,7 @@ Partial Public Class ReportEmpPayrollOvertime
         Me.GVOverTime.GroupCount = 2
         Me.GVOverTime.GroupFormat = "{1} {2}"
         Me.GVOverTime.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "Point Reguler", Me.GridColumn6, "{0:N1}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "Overtime Reguler", Me.GridColumn7, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "Point Event", Me.GridColumn8, "{0:N1}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "Overtime Event", Me.GridColumn9, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "Total Overtime", Me.GridColumn10, "{0:N0}")})
+        Me.GVOverTime.LevelIndent = 0
         Me.GVOverTime.Name = "GVOverTime"
         Me.GVOverTime.OptionsBehavior.AutoExpandAllGroups = True
         Me.GVOverTime.OptionsBehavior.Editable = False
@@ -263,7 +266,7 @@ Partial Public Class ReportEmpPayrollOvertime
         Me.XrPageInfo1.Borders = DevExpress.XtraPrinting.BorderSide.None
         Me.XrPageInfo1.Font = New System.Drawing.Font("Tahoma", 7.25!)
         Me.XrPageInfo1.Format = "Page {0} of {1}"
-        Me.XrPageInfo1.LocationFloat = New DevExpress.Utils.PointFloat(968.9991!, 0!)
+        Me.XrPageInfo1.LocationFloat = New DevExpress.Utils.PointFloat(925.0!, 0!)
         Me.XrPageInfo1.Name = "XrPageInfo1"
         Me.XrPageInfo1.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrPageInfo1.SizeF = New System.Drawing.SizeF(150.0!, 18.71793!)
@@ -282,12 +285,12 @@ Partial Public Class ReportEmpPayrollOvertime
         '
         Me.XrLine1.LocationFloat = New DevExpress.Utils.PointFloat(0.00003973643!, 79.99998!)
         Me.XrLine1.Name = "XrLine1"
-        Me.XrLine1.SizeF = New System.Drawing.SizeF(1119.0!, 20.0!)
+        Me.XrLine1.SizeF = New System.Drawing.SizeF(1075.0!, 20.0!)
         '
         'XLLocation
         '
         Me.XLLocation.Font = New System.Drawing.Font("Tahoma", 9.75!)
-        Me.XLLocation.LocationFloat = New DevExpress.Utils.PointFloat(973.9999!, 57.0!)
+        Me.XLLocation.LocationFloat = New DevExpress.Utils.PointFloat(930.0007!, 56.99997!)
         Me.XLLocation.Name = "XLLocation"
         Me.XLLocation.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XLLocation.SizeF = New System.Drawing.SizeF(144.9993!, 23.0!)
@@ -299,7 +302,7 @@ Partial Public Class ReportEmpPayrollOvertime
         'XrLabel2
         '
         Me.XrLabel2.Font = New System.Drawing.Font("Tahoma", 9.75!)
-        Me.XrLabel2.LocationFloat = New DevExpress.Utils.PointFloat(898.9991!, 57.0!)
+        Me.XrLabel2.LocationFloat = New DevExpress.Utils.PointFloat(855.0001!, 56.99997!)
         Me.XrLabel2.Name = "XrLabel2"
         Me.XrLabel2.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel2.SizeF = New System.Drawing.SizeF(60.0!, 23.0!)
@@ -311,7 +314,7 @@ Partial Public Class ReportEmpPayrollOvertime
         'XLType
         '
         Me.XLType.Font = New System.Drawing.Font("Tahoma", 9.75!)
-        Me.XLType.LocationFloat = New DevExpress.Utils.PointFloat(973.9999!, 33.99998!)
+        Me.XLType.LocationFloat = New DevExpress.Utils.PointFloat(930.0007!, 33.99995!)
         Me.XLType.Name = "XLType"
         Me.XLType.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XLType.SizeF = New System.Drawing.SizeF(145.0!, 23.0!)
@@ -326,7 +329,7 @@ Partial Public Class ReportEmpPayrollOvertime
         Me.XLTitle.LocationFloat = New DevExpress.Utils.PointFloat(220.0!, 33.99998!)
         Me.XLTitle.Name = "XLTitle"
         Me.XLTitle.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XLTitle.SizeF = New System.Drawing.SizeF(678.9993!, 23.0!)
+        Me.XLTitle.SizeF = New System.Drawing.SizeF(635.0!, 23.0!)
         Me.XLTitle.StylePriority.UseFont = False
         Me.XLTitle.StylePriority.UseTextAlignment = False
         Me.XLTitle.Text = "Overtime"
@@ -335,7 +338,7 @@ Partial Public Class ReportEmpPayrollOvertime
         'XLPeriod
         '
         Me.XLPeriod.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold)
-        Me.XLPeriod.LocationFloat = New DevExpress.Utils.PointFloat(898.9991!, 11.0!)
+        Me.XLPeriod.LocationFloat = New DevExpress.Utils.PointFloat(855.0001!, 10.99997!)
         Me.XLPeriod.Name = "XLPeriod"
         Me.XLPeriod.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XLPeriod.SizeF = New System.Drawing.SizeF(220.0!, 23.0!)
@@ -347,7 +350,7 @@ Partial Public Class ReportEmpPayrollOvertime
         'XrLabel4
         '
         Me.XrLabel4.Font = New System.Drawing.Font("Tahoma", 9.75!)
-        Me.XrLabel4.LocationFloat = New DevExpress.Utils.PointFloat(958.9999!, 57.0!)
+        Me.XrLabel4.LocationFloat = New DevExpress.Utils.PointFloat(915.0009!, 56.99997!)
         Me.XrLabel4.Name = "XrLabel4"
         Me.XrLabel4.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel4.SizeF = New System.Drawing.SizeF(15.0!, 23.0!)
@@ -359,7 +362,7 @@ Partial Public Class ReportEmpPayrollOvertime
         'XrLabel3
         '
         Me.XrLabel3.Font = New System.Drawing.Font("Tahoma", 9.75!)
-        Me.XrLabel3.LocationFloat = New DevExpress.Utils.PointFloat(958.9999!, 33.99998!)
+        Me.XrLabel3.LocationFloat = New DevExpress.Utils.PointFloat(915.0009!, 33.99995!)
         Me.XrLabel3.Name = "XrLabel3"
         Me.XrLabel3.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel3.SizeF = New System.Drawing.SizeF(15.0!, 23.0!)
@@ -380,7 +383,7 @@ Partial Public Class ReportEmpPayrollOvertime
         'XrLabel1
         '
         Me.XrLabel1.Font = New System.Drawing.Font("Tahoma", 9.75!)
-        Me.XrLabel1.LocationFloat = New DevExpress.Utils.PointFloat(898.9993!, 33.99998!)
+        Me.XrLabel1.LocationFloat = New DevExpress.Utils.PointFloat(855.0003!, 33.99995!)
         Me.XrLabel1.Name = "XrLabel1"
         Me.XrLabel1.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel1.SizeF = New System.Drawing.SizeF(60.0!, 23.0!)
@@ -398,10 +401,10 @@ Partial Public Class ReportEmpPayrollOvertime
         'XrTable1
         '
         Me.XrTable1.Font = New System.Drawing.Font("Tahoma", 7.25!)
-        Me.XrTable1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 20.0!)
+        Me.XrTable1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 20.00001!)
         Me.XrTable1.Name = "XrTable1"
         Me.XrTable1.Rows.AddRange(New DevExpress.XtraReports.UI.XRTableRow() {Me.XrTableRow1})
-        Me.XrTable1.SizeF = New System.Drawing.SizeF(1118.999!, 25.0!)
+        Me.XrTable1.SizeF = New System.Drawing.SizeF(1075.0!, 25.0!)
         Me.XrTable1.StylePriority.UseFont = False
         '
         'XrTableRow1
@@ -423,7 +426,7 @@ Partial Public Class ReportEmpPayrollOvertime
         '
         Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.Detail, Me.TopMargin, Me.BottomMargin, Me.ReportHeader, Me.ReportFooter})
         Me.Landscape = True
-        Me.Margins = New System.Drawing.Printing.Margins(25, 25, 50, 50)
+        Me.Margins = New System.Drawing.Printing.Margins(25, 69, 50, 50)
         Me.PageHeight = 827
         Me.PageWidth = 1169
         Me.PaperKind = System.Drawing.Printing.PaperKind.A4

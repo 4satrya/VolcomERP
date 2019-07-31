@@ -1381,7 +1381,7 @@ Partial Class FormBudgetExpenseRevisionDet
         Me.MinimizeBox = False
         Me.Name = "FormBudgetExpenseRevisionDet"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Revision Expense Budget"
+        Me.Text = "Revision Budget CAPEX"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.GroupControlHead, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControlHead.ResumeLayout(False)

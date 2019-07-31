@@ -1,14 +1,30 @@
 ﻿Public Class FormSalesOrderReportDetNew
     Public id_gen As String = "-1"
     Public gen_number As String = "-1"
+    Public id_design As String = "-1"
 
     Private Sub FormSalesOrderReportDetNew_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Text = gen_number + " " + Text
+        Dim ttp As String = ""
+        If id_design <> "-1" Then
+            ttp = " (" + FormSalesOrderReport.TxtProduct.Text + ")"
+        Else
+            ttp = ""
+        End If
+        Text = gen_number + ttp + " " + Text
         viewDetail()
     End Sub
 
     Sub viewDetail()
         Cursor = Cursors.WaitCursor
+        Dim cond_prod As String = ""
+        Dim cond_prod2 As String = ""
+        If id_design <> "-1" Then
+            cond_prod = "INNER JOIN tb_m_product prod ON prod.id_product = sod.id_product
+            INNER JOIN tb_m_design dsg ON dsg.id_design = prod.id_design AND dsg.id_design=" + id_design + " "
+            cond_prod2 = "INNER JOIN tb_m_product prod ON prod.id_product = deld.id_product
+            INNER JOIN tb_m_design dsg ON dsg.id_design = prod.id_design AND dsg.id_design=" + id_design + " "
+        End If
+
         Dim query As String = "SELECT so.id_sales_order, so.sales_order_number, so.sales_order_date, so.id_so_status, so_stt.so_status, 
         so.id_prepare_status, ps.prepare_status, so.final_comment, so.final_date, ef.employee_name AS `final_by_name`,
         CONCAT(wh.comp_number, ' - ', wh.comp_name) AS `wh`, CONCAT(s.comp_number, ' - ', s.comp_name) AS `destination`,
@@ -21,6 +37,7 @@
         INNER JOIN tb_m_comp s ON s.id_comp = sc.id_comp
         INNER JOIN tb_lookup_prepare_status ps ON ps.id_prepare_status = so.id_prepare_status
         INNER JOIN tb_sales_order_det sod ON sod.id_sales_order = so.id_sales_order
+        " + cond_prod + "
         LEFT JOIN (
 	        SELECT trs.id_sales_order, SUM(total_trs) AS `total_trs`
 	        FROM (
@@ -28,14 +45,16 @@
 		        FROM tb_pl_sales_order_del del
 		        INNER JOIN tb_sales_order so ON so.id_sales_order = del.id_sales_order
 		        INNER JOIN tb_pl_sales_order_del_det deld ON deld.id_pl_sales_order_del = del.id_pl_sales_order_del
-		        WHERE del.id_report_status!=5 AND so.id_so_status=1 AND !ISNULL(so.id_sales_order_gen)
+		        " + cond_prod2 + "
+                WHERE del.id_report_status!=5 AND so.id_so_status=1 AND !ISNULL(so.id_sales_order_gen)
 		        AND so.id_sales_order_gen=" + id_gen + "
 		        UNION ALL
 		        SELECT so.id_sales_order, (deld.fg_trf_det_qty) AS `total_trs`
 		        FROM tb_fg_trf del
 		        INNER JOIN tb_sales_order so ON so.id_sales_order = del.id_sales_order
 		        INNER JOIN tb_fg_trf_det deld ON deld.id_fg_trf = del.id_fg_trf
-		        WHERE del.id_report_status!=5 AND so.id_so_status=5 AND !ISNULL(so.id_sales_order_gen)
+		        " + cond_prod2 + "
+                WHERE del.id_report_status!=5 AND so.id_so_status=5 AND !ISNULL(so.id_sales_order_gen)
 		        AND so.id_sales_order_gen=" + id_gen + "
 	        ) trs 
 	        GROUP BY trs.id_sales_order
@@ -47,14 +66,16 @@
 		        FROM tb_pl_sales_order_del del
 		        INNER JOIN tb_sales_order so ON so.id_sales_order = del.id_sales_order
 		        INNER JOIN tb_pl_sales_order_del_det deld ON deld.id_pl_sales_order_del = del.id_pl_sales_order_del
-		        WHERE del.id_report_status=6 AND so.id_so_status=1 AND !ISNULL(so.id_sales_order_gen)
+		        " + cond_prod2 + "
+                WHERE del.id_report_status=6 AND so.id_so_status=1 AND !ISNULL(so.id_sales_order_gen)
 		        AND so.id_sales_order_gen=" + id_gen + "
 		        UNION ALL
 		        SELECT so.id_sales_order, (deld.fg_trf_det_qty) AS `total_trs`
 		        FROM tb_fg_trf del
 		        INNER JOIN tb_sales_order so ON so.id_sales_order = del.id_sales_order
 		        INNER JOIN tb_fg_trf_det deld ON deld.id_fg_trf = del.id_fg_trf
-		        WHERE del.id_report_status=6 AND so.id_so_status=5 AND !ISNULL(so.id_sales_order_gen)
+		        " + cond_prod2 + "
+                WHERE del.id_report_status=6 AND so.id_so_status=5 AND !ISNULL(so.id_sales_order_gen)
 		        AND so.id_sales_order_gen=" + id_gen + "
 	        ) trs 
 	        GROUP BY trs.id_sales_order
@@ -86,6 +107,7 @@
 
     Private Sub GVNew_DoubleClick(sender As Object, e As EventArgs) Handles GVNew.DoubleClick
         If GVNew.RowCount > 0 And GVNew.FocusedRowHandle >= 0 Then
+            FormSalesOrderReportDet.id_design = id_design
             FormSalesOrderReportDet.id_so = GVNew.GetFocusedRowCellValue("id_sales_order").ToString
             FormSalesOrderReportDet.id_so_status = GVNew.GetFocusedRowCellValue("id_so_status").ToString
             FormSalesOrderReportDet.so_number = GVNew.GetFocusedRowCellValue("sales_order_number").ToString

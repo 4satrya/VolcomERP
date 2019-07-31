@@ -31,7 +31,7 @@
         NULL AS `11`,
         NULL AS `12`
         FROM tb_item_coa c
-        INNER JOIN tb_item_cat cat ON cat.id_item_cat = c.id_item_cat
+        INNER JOIN tb_item_cat cat ON cat.id_item_cat = c.id_item_cat AND cat.id_expense_type=2
         INNER JOIN tb_a_acc coa ON coa.id_acc = c.id_coa_out
         WHERE c.id_departement=" + id_dept + " "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")

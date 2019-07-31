@@ -85,9 +85,9 @@ Partial Public Class ReportPayrollAll
         '
         'WinControlContainer1
         '
-        Me.WinControlContainer1.LocationFloat = New DevExpress.Utils.PointFloat(0.0004053116!, 0!)
+        Me.WinControlContainer1.LocationFloat = New DevExpress.Utils.PointFloat(0.0004132589!, 0!)
         Me.WinControlContainer1.Name = "WinControlContainer1"
-        Me.WinControlContainer1.SizeF = New System.Drawing.SizeF(1119.0!, 260.0!)
+        Me.WinControlContainer1.SizeF = New System.Drawing.SizeF(1075.0!, 260.0!)
         Me.WinControlContainer1.WinControl = Me.GCPayroll
         '
         'GCPayroll
@@ -96,7 +96,7 @@ Partial Public Class ReportPayrollAll
         Me.GCPayroll.MainView = Me.GVPayroll
         Me.GCPayroll.Name = "GCPayroll"
         Me.GCPayroll.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RICEPending, Me.RICESelect})
-        Me.GCPayroll.Size = New System.Drawing.Size(1074, 250)
+        Me.GCPayroll.Size = New System.Drawing.Size(1032, 250)
         Me.GCPayroll.TabIndex = 1
         Me.GCPayroll.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVPayroll})
         '
@@ -132,6 +132,8 @@ Partial Public Class ReportPayrollAll
         Me.GVPayroll.AppearancePrint.HeaderPanel.Options.UseBackColor = True
         Me.GVPayroll.AppearancePrint.HeaderPanel.Options.UseBorderColor = True
         Me.GVPayroll.AppearancePrint.HeaderPanel.Options.UseFont = True
+        Me.GVPayroll.AppearancePrint.Lines.BackColor = System.Drawing.Color.Black
+        Me.GVPayroll.AppearancePrint.Lines.Options.UseBackColor = True
         Me.GVPayroll.AppearancePrint.Row.BackColor = System.Drawing.Color.White
         Me.GVPayroll.AppearancePrint.Row.BorderColor = System.Drawing.Color.Black
         Me.GVPayroll.AppearancePrint.Row.Font = New System.Drawing.Font("Tahoma", 7.25!)
@@ -146,6 +148,7 @@ Partial Public Class ReportPayrollAll
         Me.GVPayroll.GroupCount = 2
         Me.GVPayroll.GroupFormat = "{1} {2}"
         Me.GVPayroll.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "tot_thp", Me.GCTotalTHP, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "total_adjustment", Me.GCTotalAdjustment, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "total_deduction", Me.GCTotalDeduction, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "total_ot_wages", Me.GCTotalPaymentOvertime, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "grand_total", Me.GCGrandTotal, "{0:N0}")})
+        Me.GVPayroll.LevelIndent = 0
         Me.GVPayroll.Name = "GVPayroll"
         Me.GVPayroll.OptionsBehavior.AutoExpandAllGroups = True
         Me.GVPayroll.OptionsMenu.ShowConditionalFormattingItem = True
@@ -229,7 +232,7 @@ Partial Public Class ReportPayrollAll
         Me.GBWorkingDays.Columns.Add(Me.GCOvertimeHours)
         Me.GBWorkingDays.Name = "GBWorkingDays"
         Me.GBWorkingDays.VisibleIndex = 1
-        Me.GBWorkingDays.Width = 116
+        Me.GBWorkingDays.Width = 81
         '
         'GCWorkingDays
         '
@@ -241,7 +244,6 @@ Partial Public Class ReportPayrollAll
         Me.GCWorkingDays.FieldName = "workdays"
         Me.GCWorkingDays.Name = "GCWorkingDays"
         Me.GCWorkingDays.OptionsColumn.AllowEdit = False
-        Me.GCWorkingDays.Visible = True
         Me.GCWorkingDays.Width = 35
         '
         'GCActualWorkingDays
@@ -350,6 +352,7 @@ Partial Public Class ReportPayrollAll
         '
         Me.GCActualWorkingDaysDW.AppearanceCell.Options.UseTextOptions = True
         Me.GCActualWorkingDaysDW.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GCActualWorkingDaysDW.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
         Me.GCActualWorkingDaysDW.Caption = "Actual Working Days"
         Me.GCActualWorkingDaysDW.DisplayFormat.FormatString = "N1"
         Me.GCActualWorkingDaysDW.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
@@ -414,7 +417,7 @@ Partial Public Class ReportPayrollAll
         'XrLabel1
         '
         Me.XrLabel1.Font = New System.Drawing.Font("Tahoma", 9.75!)
-        Me.XrLabel1.LocationFloat = New DevExpress.Utils.PointFloat(898.9996!, 33.99998!)
+        Me.XrLabel1.LocationFloat = New DevExpress.Utils.PointFloat(855.0!, 33.99998!)
         Me.XrLabel1.Name = "XrLabel1"
         Me.XrLabel1.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel1.SizeF = New System.Drawing.SizeF(60.0!, 23.0!)
@@ -426,7 +429,7 @@ Partial Public Class ReportPayrollAll
         'XrLabel2
         '
         Me.XrLabel2.Font = New System.Drawing.Font("Tahoma", 9.75!)
-        Me.XrLabel2.LocationFloat = New DevExpress.Utils.PointFloat(898.9995!, 57.0!)
+        Me.XrLabel2.LocationFloat = New DevExpress.Utils.PointFloat(855.0!, 57.0!)
         Me.XrLabel2.Name = "XrLabel2"
         Me.XrLabel2.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel2.SizeF = New System.Drawing.SizeF(60.0!, 23.0!)
@@ -438,7 +441,7 @@ Partial Public Class ReportPayrollAll
         'XrLabel3
         '
         Me.XrLabel3.Font = New System.Drawing.Font("Tahoma", 9.75!)
-        Me.XrLabel3.LocationFloat = New DevExpress.Utils.PointFloat(959.0002!, 33.99998!)
+        Me.XrLabel3.LocationFloat = New DevExpress.Utils.PointFloat(915.0!, 33.99998!)
         Me.XrLabel3.Name = "XrLabel3"
         Me.XrLabel3.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel3.SizeF = New System.Drawing.SizeF(15.0!, 23.0!)
@@ -450,7 +453,7 @@ Partial Public Class ReportPayrollAll
         'XrLabel4
         '
         Me.XrLabel4.Font = New System.Drawing.Font("Tahoma", 9.75!)
-        Me.XrLabel4.LocationFloat = New DevExpress.Utils.PointFloat(959.0002!, 57.0!)
+        Me.XrLabel4.LocationFloat = New DevExpress.Utils.PointFloat(915.0!, 57.0!)
         Me.XrLabel4.Name = "XrLabel4"
         Me.XrLabel4.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel4.SizeF = New System.Drawing.SizeF(15.0!, 23.0!)
@@ -462,7 +465,7 @@ Partial Public Class ReportPayrollAll
         'XLType
         '
         Me.XLType.Font = New System.Drawing.Font("Tahoma", 9.75!)
-        Me.XLType.LocationFloat = New DevExpress.Utils.PointFloat(974.0002!, 33.99998!)
+        Me.XLType.LocationFloat = New DevExpress.Utils.PointFloat(930.0007!, 33.99998!)
         Me.XLType.Name = "XLType"
         Me.XLType.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XLType.SizeF = New System.Drawing.SizeF(145.0!, 23.0!)
@@ -474,7 +477,7 @@ Partial Public Class ReportPayrollAll
         'XLLocation
         '
         Me.XLLocation.Font = New System.Drawing.Font("Tahoma", 9.75!)
-        Me.XLLocation.LocationFloat = New DevExpress.Utils.PointFloat(974.0002!, 57.0!)
+        Me.XLLocation.LocationFloat = New DevExpress.Utils.PointFloat(930.0007!, 57.0!)
         Me.XLLocation.Name = "XLLocation"
         Me.XLLocation.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XLLocation.SizeF = New System.Drawing.SizeF(144.9993!, 23.0!)
@@ -496,7 +499,7 @@ Partial Public Class ReportPayrollAll
         Me.XLTitle.LocationFloat = New DevExpress.Utils.PointFloat(220.0004!, 33.99998!)
         Me.XLTitle.Name = "XLTitle"
         Me.XLTitle.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XLTitle.SizeF = New System.Drawing.SizeF(678.9993!, 23.0!)
+        Me.XLTitle.SizeF = New System.Drawing.SizeF(634.9996!, 23.0!)
         Me.XLTitle.StylePriority.UseFont = False
         Me.XLTitle.StylePriority.UseTextAlignment = False
         Me.XLTitle.Text = "Monthly Payroll"
@@ -505,7 +508,7 @@ Partial Public Class ReportPayrollAll
         'XLPeriod
         '
         Me.XLPeriod.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold)
-        Me.XLPeriod.LocationFloat = New DevExpress.Utils.PointFloat(898.9995!, 11.0!)
+        Me.XLPeriod.LocationFloat = New DevExpress.Utils.PointFloat(855.0!, 11.0!)
         Me.XLPeriod.Name = "XLPeriod"
         Me.XLPeriod.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XLPeriod.SizeF = New System.Drawing.SizeF(220.0!, 23.0!)
@@ -516,9 +519,9 @@ Partial Public Class ReportPayrollAll
         '
         'XrLine1
         '
-        Me.XrLine1.LocationFloat = New DevExpress.Utils.PointFloat(0.0004053116!, 79.99998!)
+        Me.XrLine1.LocationFloat = New DevExpress.Utils.PointFloat(0.0004132589!, 79.99998!)
         Me.XrLine1.Name = "XrLine1"
-        Me.XrLine1.SizeF = New System.Drawing.SizeF(1119.0!, 20.0!)
+        Me.XrLine1.SizeF = New System.Drawing.SizeF(1075.0!, 20.0!)
         '
         'XrPictureBox1
         '
@@ -542,7 +545,7 @@ Partial Public Class ReportPayrollAll
         Me.XrPageInfo1.Borders = DevExpress.XtraPrinting.BorderSide.None
         Me.XrPageInfo1.Font = New System.Drawing.Font("Tahoma", 7.25!)
         Me.XrPageInfo1.Format = "Page {0} of {1}"
-        Me.XrPageInfo1.LocationFloat = New DevExpress.Utils.PointFloat(969.0!, 0!)
+        Me.XrPageInfo1.LocationFloat = New DevExpress.Utils.PointFloat(925.0007!, 0!)
         Me.XrPageInfo1.Name = "XrPageInfo1"
         Me.XrPageInfo1.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrPageInfo1.SizeF = New System.Drawing.SizeF(150.0!, 18.71793!)
@@ -572,15 +575,15 @@ Partial Public Class ReportPayrollAll
         Me.XrPanel1.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrTable1})
         Me.XrPanel1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 0!)
         Me.XrPanel1.Name = "XrPanel1"
-        Me.XrPanel1.SizeF = New System.Drawing.SizeF(1119.0!, 100.0!)
+        Me.XrPanel1.SizeF = New System.Drawing.SizeF(1075.0!, 100.0!)
         '
         'XrTable1
         '
         Me.XrTable1.Font = New System.Drawing.Font("Tahoma", 7.25!)
-        Me.XrTable1.LocationFloat = New DevExpress.Utils.PointFloat(0.00007947286!, 20.0!)
+        Me.XrTable1.LocationFloat = New DevExpress.Utils.PointFloat(0.00009536743!, 19.99995!)
         Me.XrTable1.Name = "XrTable1"
         Me.XrTable1.Rows.AddRange(New DevExpress.XtraReports.UI.XRTableRow() {Me.XrTableRow1})
-        Me.XrTable1.SizeF = New System.Drawing.SizeF(1118.999!, 25.0!)
+        Me.XrTable1.SizeF = New System.Drawing.SizeF(1075.0!, 25.0!)
         Me.XrTable1.StylePriority.UseFont = False
         '
         'XrTableRow1
@@ -603,7 +606,7 @@ Partial Public Class ReportPayrollAll
         Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.Detail, Me.TopMargin, Me.BottomMargin, Me.ReportHeader, Me.ReportFooter})
         Me.ComponentStorage.AddRange(New System.ComponentModel.IComponent() {Me.SqlDataSource1})
         Me.Landscape = True
-        Me.Margins = New System.Drawing.Printing.Margins(25, 25, 50, 50)
+        Me.Margins = New System.Drawing.Printing.Margins(25, 69, 50, 50)
         Me.PageHeight = 827
         Me.PageWidth = 1169
         Me.PaperKind = System.Drawing.Printing.PaperKind.A4

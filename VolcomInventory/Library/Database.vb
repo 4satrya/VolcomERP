@@ -42,6 +42,40 @@ Module Database
         Return True
     End Function
 
+    Function execute_non_query_long(ByVal command_text As String, ByVal is_local As Boolean, ByVal host As String, ByVal username As String, ByVal password As String, ByVal database As String)
+        If is_local = True Then
+            host = app_host
+            username = app_username
+            password = app_password
+            database = app_database
+        End If
+
+        'Enable when developing
+        'Console.WriteLine(command_text)
+
+        Dim connection_string As String = String.Format("Data Source={0};User Id={1};Password={2};Database={3};Convert Zero Datetime=True; Allow User Variables=True;", host, username, password, database)
+
+        Dim connection As MySqlConnection = New MySqlConnection(connection_string)
+        connection.Open()
+        Dim command As MySqlCommand = connection.CreateCommand()
+        command.CommandTimeout = 300
+        command.CommandText = command_text
+        command.ExecuteNonQuery()
+        command.Dispose()
+        connection.Close()
+        connection.Dispose()
+
+        ''insert log
+        'Dim query As String = "SELECT is_log_active FROM tb_opt"
+        'Dim is_log_active As Integer = execute_query(query, 0, True, "", "", "", "")
+        'If is_log_active = 1 Then
+        '    query = String.Format("INSERT INTO tb_log VALUES('{0}', '{1}', NOW())", id_user, command_text)
+        '    execute_non_query(query, True, "", "", "", "")
+        'End If
+
+        Return True
+    End Function
+
     Function execute_query(ByVal command_text As String, ByVal col_index As Integer, ByVal is_local As Boolean, ByVal host As String, ByVal username As String, ByVal password As String, ByVal database As String)
         If is_local = True Then
             host = app_host

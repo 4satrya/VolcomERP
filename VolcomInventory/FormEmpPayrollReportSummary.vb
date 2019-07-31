@@ -184,7 +184,7 @@
 
         data.Rows.Add("TRANSFER BCA EFEKTIF " + Date.Parse(FormEmpPayroll.GVPayrollPeriode.GetFocusedRowCellValue("eff_trans_date").ToString).ToString("dd MMMM yyyy").ToUpper, 0, 0, 0, 0)
         data.Rows.Add("CASH EFEKTIF " + Date.Parse(FormEmpPayroll.GVPayrollPeriode.GetFocusedRowCellValue("eff_trans_date").ToString).ToString("dd MMMM yyyy").ToUpper, 0, 0, 0, 0)
-        data.Rows.Add("Cooperative Contribution", 0, 0, 0, 0)
+        data.Rows.Add("Cooperative ", 0, 0, 0, 0)
 
         Dim transfer As Decimal = 0.00
         Dim cash As Decimal = 0.00
@@ -194,7 +194,7 @@
             If Not data_ori.Rows(i)("no").ToString = "" Then
                 transfer = data_ori.Rows(i)("salary") + data_ori.Rows(i)("event_overtime") - data_ori.Rows(i)("d_cooperative_loan") - data_ori.Rows(i)("d_bpjskes") - data_ori.Rows(i)("d_jaminan_pensiun") - data_ori.Rows(i)("d_bpjstk") - data_ori.Rows(i)("d_cooperative_contribution") - data_ori.Rows(i)("d_missing") - data_ori.Rows(i)("d_meditation_cash") - data_ori.Rows(i)("d_other") - data_ori.Rows(i)("total_cash")
                 cash = data_ori.Rows(i)("total_cash")
-                cooperative = data_ori.Rows(i)("d_cooperative_contribution")
+                cooperative = data_ori.Rows(i)("d_cooperative_contribution") + data_ori.Rows(i)("d_cooperative_loan")
 
                 If data_ori.Rows(i)("id_departement").ToString = "16" Then
                     'bemo corner
@@ -316,7 +316,7 @@
             End Select
         End If
 
-        If item.FieldName.ToString = "d_cooperative_contributtion" Then
+        If item.FieldName.ToString = "d_cooperative_contribution" Then
             Select Case e.SummaryProcess
                 Case DevExpress.Data.CustomSummaryProcess.Start
                     tot_d_cooperative_contributtion = 0

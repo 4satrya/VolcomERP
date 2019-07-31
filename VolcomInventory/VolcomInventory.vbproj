@@ -5023,6 +5023,12 @@
     <Compile Include="FormSampleTrf.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormSearchDesign.Designer.vb">
+      <DependentUpon>FormSearchDesign.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormSearchDesign.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormSeason.Designer.vb">
       <DependentUpon>FormSeason.vb</DependentUpon>
     </Compile>
@@ -9777,6 +9783,9 @@
     <EmbeddedResource Include="FormSampleTrf.resx">
       <DependentUpon>FormSampleTrf.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSearchDesign.resx">
+      <DependentUpon>FormSearchDesign.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormSeason.resx">
       <DependentUpon>FormSeason.vb</DependentUpon>

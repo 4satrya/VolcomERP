@@ -74,8 +74,10 @@
                 Cursor = Cursors.WaitCursor
 
                 For i = 0 To GVDeduction.RowCount - 1
-                    Dim query As String = "DELETE FROM tb_emp_payroll_adj WHERE id_payroll_adj='" & GVDeduction.GetRowCellValue(i, "id_payroll_adj").ToString & "'"
-                    execute_non_query(query, True, "", "", "", "")
+                    If GVDeduction.IsValidRowHandle(i) Then
+                        Dim query As String = "DELETE FROM tb_emp_payroll_adj WHERE id_payroll_adj='" & GVDeduction.GetRowCellValue(i, "id_payroll_adj").ToString & "'"
+                        execute_non_query(query, True, "", "", "", "")
+                    End If
                 Next
 
                 load_adjustment()
@@ -85,6 +87,8 @@
         Else
             stopCustom("Please choose employee first.")
         End If
+
+        GVDeduction.ActiveFilterString = ""
     End Sub
 
     Private Sub SBPrint_Click(sender As Object, e As EventArgs) Handles SBPrint.Click

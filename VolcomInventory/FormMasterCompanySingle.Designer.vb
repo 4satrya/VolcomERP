@@ -186,6 +186,10 @@ Partial Class FormMasterCompanySingle
         Me.LabelControl32 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl31 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl30 = New DevExpress.XtraEditors.LabelControl()
+        Me.TENPWPName = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl38 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl39 = New DevExpress.XtraEditors.LabelControl()
+        Me.TENPWPAddress = New DevExpress.XtraEditors.TextEdit()
         CType(Me.EPCompany, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl3.SuspendLayout()
@@ -271,6 +275,8 @@ Partial Class FormMasterCompanySingle
         CType(Me.TECargoCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TECargoZone.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TECargoDest.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TENPWPName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TENPWPAddress.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'EPCompany
@@ -291,9 +297,9 @@ Partial Class FormMasterCompanySingle
         Me.GroupControl3.Controls.Add(Me.TECPName)
         Me.GroupControl3.Controls.Add(Me.LabelControl10)
         Me.GroupControl3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GroupControl3.Location = New System.Drawing.Point(0, 381)
+        Me.GroupControl3.Location = New System.Drawing.Point(0, 406)
         Me.GroupControl3.Name = "GroupControl3"
-        Me.GroupControl3.Size = New System.Drawing.Size(639, 113)
+        Me.GroupControl3.Size = New System.Drawing.Size(639, 119)
         Me.GroupControl3.TabIndex = 14
         Me.GroupControl3.Text = "Contact Person"
         '
@@ -336,7 +342,7 @@ Partial Class FormMasterCompanySingle
         Me.BCPSetup.Appearance.Options.UseFont = True
         Me.BCPSetup.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.BCPSetup.ImageList = Me.LargeImageCollection
-        Me.BCPSetup.Location = New System.Drawing.Point(2, 86)
+        Me.BCPSetup.Location = New System.Drawing.Point(2, 92)
         Me.BCPSetup.Name = "BCPSetup"
         Me.BCPSetup.Size = New System.Drawing.Size(635, 25)
         Me.BCPSetup.TabIndex = 13
@@ -456,7 +462,7 @@ Partial Class FormMasterCompanySingle
         'LabelControl16
         '
         Me.LabelControl16.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl16.Location = New System.Drawing.Point(12, 161)
+        Me.LabelControl16.Location = New System.Drawing.Point(336, 135)
         Me.LabelControl16.Name = "LabelControl16"
         Me.LabelControl16.Size = New System.Drawing.Size(31, 13)
         Me.LabelControl16.TabIndex = 15
@@ -465,19 +471,19 @@ Partial Class FormMasterCompanySingle
         'LEStatus
         '
         Me.LEStatus.Enabled = False
-        Me.LEStatus.Location = New System.Drawing.Point(93, 158)
+        Me.LEStatus.Location = New System.Drawing.Point(399, 132)
         Me.LEStatus.Name = "LEStatus"
         Me.LEStatus.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LEStatus.Properties.Appearance.Options.UseFont = True
         Me.LEStatus.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.LEStatus.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_status", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("status", "Status")})
         Me.LEStatus.Properties.NullText = ""
-        Me.LEStatus.Size = New System.Drawing.Size(230, 20)
-        Me.LEStatus.TabIndex = 11
+        Me.LEStatus.Size = New System.Drawing.Size(220, 20)
+        Me.LEStatus.TabIndex = 10
         '
         'LETax
         '
-        Me.LETax.Location = New System.Drawing.Point(399, 132)
+        Me.LETax.Location = New System.Drawing.Point(399, 158)
         Me.LETax.Name = "LETax"
         Me.LETax.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LETax.Properties.Appearance.Options.UseFont = True
@@ -485,12 +491,12 @@ Partial Class FormMasterCompanySingle
         Me.LETax.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_tax", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("tax", "Tax")})
         Me.LETax.Properties.NullText = ""
         Me.LETax.Size = New System.Drawing.Size(221, 20)
-        Me.LETax.TabIndex = 10
+        Me.LETax.TabIndex = 12
         '
         'LabelControl17
         '
         Me.LabelControl17.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl17.Location = New System.Drawing.Point(337, 135)
+        Me.LabelControl17.Location = New System.Drawing.Point(335, 161)
         Me.LabelControl17.Name = "LabelControl17"
         Me.LabelControl17.Size = New System.Drawing.Size(18, 13)
         Me.LabelControl17.TabIndex = 26
@@ -498,21 +504,21 @@ Partial Class FormMasterCompanySingle
         '
         'TENPWP
         '
-        Me.TENPWP.Location = New System.Drawing.Point(399, 158)
+        Me.TENPWP.Location = New System.Drawing.Point(93, 158)
         Me.TENPWP.Name = "TENPWP"
         Me.TENPWP.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TENPWP.Properties.Appearance.Options.UseFont = True
-        Me.TENPWP.Size = New System.Drawing.Size(221, 20)
-        Me.TENPWP.TabIndex = 12
+        Me.TENPWP.Size = New System.Drawing.Size(230, 20)
+        Me.TENPWP.TabIndex = 11
         '
         'LabelControl12
         '
         Me.LabelControl12.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl12.Location = New System.Drawing.Point(336, 161)
+        Me.LabelControl12.Location = New System.Drawing.Point(11, 161)
         Me.LabelControl12.Name = "LabelControl12"
-        Me.LabelControl12.Size = New System.Drawing.Size(29, 13)
+        Me.LabelControl12.Size = New System.Drawing.Size(69, 13)
         Me.LabelControl12.TabIndex = 24
-        Me.LabelControl12.Text = "NPWP"
+        Me.LabelControl12.Text = "NPWP Number"
         '
         'TEWeb
         '
@@ -636,7 +642,7 @@ Partial Class FormMasterCompanySingle
         Me.GroupControl2.Controls.Add(Me.MEAddress)
         Me.GroupControl2.Controls.Add(Me.LabelControl3)
         Me.GroupControl2.Dock = System.Windows.Forms.DockStyle.Top
-        Me.GroupControl2.Location = New System.Drawing.Point(0, 239)
+        Me.GroupControl2.Location = New System.Drawing.Point(0, 264)
         Me.GroupControl2.Name = "GroupControl2"
         Me.GroupControl2.Size = New System.Drawing.Size(639, 142)
         Me.GroupControl2.TabIndex = 13
@@ -782,6 +788,10 @@ Partial Class FormMasterCompanySingle
         '
         'GroupControl1
         '
+        Me.GroupControl1.Controls.Add(Me.TENPWPAddress)
+        Me.GroupControl1.Controls.Add(Me.LabelControl39)
+        Me.GroupControl1.Controls.Add(Me.TENPWPName)
+        Me.GroupControl1.Controls.Add(Me.LabelControl38)
         Me.GroupControl1.Controls.Add(Me.TEBankAddress)
         Me.GroupControl1.Controls.Add(Me.LBankAddress)
         Me.GroupControl1.Controls.Add(Me.TEBankAtasNama)
@@ -817,23 +827,23 @@ Partial Class FormMasterCompanySingle
         Me.GroupControl1.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupControl1.Location = New System.Drawing.Point(0, 0)
         Me.GroupControl1.Name = "GroupControl1"
-        Me.GroupControl1.Size = New System.Drawing.Size(639, 239)
+        Me.GroupControl1.Size = New System.Drawing.Size(639, 264)
         Me.GroupControl1.TabIndex = 12
         Me.GroupControl1.Text = "Description"
         '
         'TEBankAddress
         '
-        Me.TEBankAddress.Location = New System.Drawing.Point(93, 210)
+        Me.TEBankAddress.Location = New System.Drawing.Point(93, 238)
         Me.TEBankAddress.Name = "TEBankAddress"
         Me.TEBankAddress.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TEBankAddress.Properties.Appearance.Options.UseFont = True
         Me.TEBankAddress.Size = New System.Drawing.Size(526, 20)
-        Me.TEBankAddress.TabIndex = 8917
+        Me.TEBankAddress.TabIndex = 18
         '
         'LBankAddress
         '
         Me.LBankAddress.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LBankAddress.Location = New System.Drawing.Point(12, 213)
+        Me.LBankAddress.Location = New System.Drawing.Point(12, 241)
         Me.LBankAddress.Name = "LBankAddress"
         Me.LBankAddress.Size = New System.Drawing.Size(65, 13)
         Me.LBankAddress.TabIndex = 8916
@@ -841,17 +851,17 @@ Partial Class FormMasterCompanySingle
         '
         'TEBankAtasNama
         '
-        Me.TEBankAtasNama.Location = New System.Drawing.Point(443, 184)
+        Me.TEBankAtasNama.Location = New System.Drawing.Point(443, 212)
         Me.TEBankAtasNama.Name = "TEBankAtasNama"
         Me.TEBankAtasNama.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TEBankAtasNama.Properties.Appearance.Options.UseFont = True
         Me.TEBankAtasNama.Size = New System.Drawing.Size(177, 20)
-        Me.TEBankAtasNama.TabIndex = 8915
+        Me.TEBankAtasNama.TabIndex = 17
         '
         'LRekName
         '
         Me.LRekName.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LRekName.Location = New System.Drawing.Point(410, 187)
+        Me.LRekName.Location = New System.Drawing.Point(410, 215)
         Me.LRekName.Name = "LRekName"
         Me.LRekName.Size = New System.Drawing.Size(27, 13)
         Me.LRekName.TabIndex = 8914
@@ -859,17 +869,17 @@ Partial Class FormMasterCompanySingle
         '
         'TEBankRek
         '
-        Me.TEBankRek.Location = New System.Drawing.Point(269, 184)
+        Me.TEBankRek.Location = New System.Drawing.Point(269, 212)
         Me.TEBankRek.Name = "TEBankRek"
         Me.TEBankRek.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TEBankRek.Properties.Appearance.Options.UseFont = True
         Me.TEBankRek.Size = New System.Drawing.Size(135, 20)
-        Me.TEBankRek.TabIndex = 8913
+        Me.TEBankRek.TabIndex = 16
         '
         'LNoRek
         '
         Me.LNoRek.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LNoRek.Location = New System.Drawing.Point(229, 187)
+        Me.LNoRek.Location = New System.Drawing.Point(229, 215)
         Me.LNoRek.Name = "LNoRek"
         Me.LNoRek.Size = New System.Drawing.Size(34, 13)
         Me.LNoRek.TabIndex = 8912
@@ -877,14 +887,14 @@ Partial Class FormMasterCompanySingle
         '
         'SLEBankAccount
         '
-        Me.SLEBankAccount.Location = New System.Drawing.Point(93, 184)
+        Me.SLEBankAccount.Location = New System.Drawing.Point(93, 212)
         Me.SLEBankAccount.Name = "SLEBankAccount"
         Me.SLEBankAccount.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SLEBankAccount.Properties.Appearance.Options.UseFont = True
         Me.SLEBankAccount.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.SLEBankAccount.Properties.View = Me.GridView4
         Me.SLEBankAccount.Size = New System.Drawing.Size(130, 20)
-        Me.SLEBankAccount.TabIndex = 8911
+        Me.SLEBankAccount.TabIndex = 15
         '
         'GridView4
         '
@@ -919,7 +929,7 @@ Partial Class FormMasterCompanySingle
         'LBankAccount
         '
         Me.LBankAccount.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LBankAccount.Location = New System.Drawing.Point(13, 187)
+        Me.LBankAccount.Location = New System.Drawing.Point(13, 215)
         Me.LBankAccount.Name = "LBankAccount"
         Me.LBankAccount.Size = New System.Drawing.Size(65, 13)
         Me.LBankAccount.TabIndex = 8910
@@ -1475,7 +1485,7 @@ Partial Class FormMasterCompanySingle
         Me.PanelControl1.Controls.Add(Me.BCancel)
         Me.PanelControl1.Controls.Add(Me.BSave)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl1.Location = New System.Drawing.Point(0, 522)
+        Me.PanelControl1.Location = New System.Drawing.Point(0, 553)
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(645, 44)
         Me.PanelControl1.TabIndex = 16
@@ -1508,7 +1518,7 @@ Partial Class FormMasterCompanySingle
         Me.XTCCompany.Location = New System.Drawing.Point(0, 0)
         Me.XTCCompany.Name = "XTCCompany"
         Me.XTCCompany.SelectedTabPage = Me.XTPDesc
-        Me.XTCCompany.Size = New System.Drawing.Size(645, 522)
+        Me.XTCCompany.Size = New System.Drawing.Size(645, 553)
         Me.XTCCompany.TabIndex = 28
         Me.XTCCompany.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPDesc, Me.XTPLegal, Me.XTPSetup})
         '
@@ -1518,7 +1528,7 @@ Partial Class FormMasterCompanySingle
         Me.XTPDesc.Controls.Add(Me.GroupControl2)
         Me.XTPDesc.Controls.Add(Me.GroupControl1)
         Me.XTPDesc.Name = "XTPDesc"
-        Me.XTPDesc.Size = New System.Drawing.Size(639, 494)
+        Me.XTPDesc.Size = New System.Drawing.Size(639, 525)
         Me.XTPDesc.Text = "General"
         '
         'XTPLegal
@@ -1971,11 +1981,49 @@ Partial Class FormMasterCompanySingle
         Me.LabelControl30.TabIndex = 30
         Me.LabelControl30.Text = "Destination"
         '
+        'TENPWPName
+        '
+        Me.TENPWPName.Location = New System.Drawing.Point(93, 184)
+        Me.TENPWPName.Name = "TENPWPName"
+        Me.TENPWPName.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TENPWPName.Properties.Appearance.Options.UseFont = True
+        Me.TENPWPName.Size = New System.Drawing.Size(170, 20)
+        Me.TENPWPName.TabIndex = 13
+        '
+        'LabelControl38
+        '
+        Me.LabelControl38.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl38.Location = New System.Drawing.Point(11, 187)
+        Me.LabelControl38.Name = "LabelControl38"
+        Me.LabelControl38.Size = New System.Drawing.Size(48, 13)
+        Me.LabelControl38.TabIndex = 8919
+        Me.LabelControl38.Text = "NPWP a/n"
+        '
+        'LabelControl39
+        '
+        Me.LabelControl39.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl39.Location = New System.Drawing.Point(269, 187)
+        Me.LabelControl39.Name = "LabelControl39"
+        Me.LabelControl39.Size = New System.Drawing.Size(70, 13)
+        Me.LabelControl39.TabIndex = 8920
+        Me.LabelControl39.Text = "NPWP address"
+        '
+        'TENPWPAddress
+        '
+        Me.TENPWPAddress.Location = New System.Drawing.Point(345, 184)
+        Me.TENPWPAddress.Name = "TENPWPAddress"
+        Me.TENPWPAddress.Properties.Appearance.BackColor = System.Drawing.Color.White
+        Me.TENPWPAddress.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TENPWPAddress.Properties.Appearance.Options.UseBackColor = True
+        Me.TENPWPAddress.Properties.Appearance.Options.UseFont = True
+        Me.TENPWPAddress.Size = New System.Drawing.Size(275, 20)
+        Me.TENPWPAddress.TabIndex = 14
+        '
         'FormMasterCompanySingle
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(645, 566)
+        Me.ClientSize = New System.Drawing.Size(645, 597)
         Me.Controls.Add(Me.XTCCompany)
         Me.Controls.Add(Me.PanelControl1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
@@ -2077,6 +2125,8 @@ Partial Class FormMasterCompanySingle
         CType(Me.TECargoCode.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TECargoZone.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TECargoDest.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TENPWPName.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TENPWPAddress.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -2245,4 +2295,8 @@ Partial Class FormMasterCompanySingle
     Friend WithEvents TEBankAddress As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LBankAddress As DevExpress.XtraEditors.LabelControl
     Friend WithEvents GridColumn23 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents TENPWPAddress As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LabelControl39 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents TENPWPName As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LabelControl38 As DevExpress.XtraEditors.LabelControl
 End Class

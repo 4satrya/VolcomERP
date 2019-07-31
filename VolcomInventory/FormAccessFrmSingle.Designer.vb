@@ -75,7 +75,7 @@ Partial Class FormAccessFrmSingle
         Me.BtnCancel.Location = New System.Drawing.Point(227, 2)
         Me.BtnCancel.Name = "BtnCancel"
         Me.BtnCancel.Size = New System.Drawing.Size(75, 24)
-        Me.BtnCancel.TabIndex = 2
+        Me.BtnCancel.TabIndex = 3
         Me.BtnCancel.Text = "Cancel"
         '
         'BtnSave
@@ -84,7 +84,7 @@ Partial Class FormAccessFrmSingle
         Me.BtnSave.Location = New System.Drawing.Point(302, 2)
         Me.BtnSave.Name = "BtnSave"
         Me.BtnSave.Size = New System.Drawing.Size(75, 24)
-        Me.BtnSave.TabIndex = 1
+        Me.BtnSave.TabIndex = 2
         Me.BtnSave.Text = "Save"
         '
         'EPForm
@@ -106,7 +106,7 @@ Partial Class FormAccessFrmSingle
         Me.MENote.Location = New System.Drawing.Point(12, 82)
         Me.MENote.Name = "MENote"
         Me.MENote.Size = New System.Drawing.Size(355, 44)
-        Me.MENote.TabIndex = 50
+        Me.MENote.TabIndex = 1
         '
         'FormAccessFrmSingle
         '
@@ -124,7 +124,6 @@ Partial Class FormAccessFrmSingle
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FormAccessFrmSingle"
-        Me.ShowInTaskbar = False
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Master Form"

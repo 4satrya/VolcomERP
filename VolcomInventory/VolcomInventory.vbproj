@@ -349,6 +349,12 @@
     <Compile Include="FormAccountingFakturScanSingle.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormAccountingFKDetail.Designer.vb">
+      <DependentUpon>FormAccountingFKDetail.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormAccountingFKDetail.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormAccountingFYear.designer.vb">
       <DependentUpon>FormAccountingFYear.vb</DependentUpon>
     </Compile>
@@ -7070,6 +7076,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormAccountingFakturScanSingle.resx">
       <DependentUpon>FormAccountingFakturScanSingle.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAccountingFKDetail.resx">
+      <DependentUpon>FormAccountingFKDetail.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormAccountingFYear.resx">
       <DependentUpon>FormAccountingFYear.vb</DependentUpon>

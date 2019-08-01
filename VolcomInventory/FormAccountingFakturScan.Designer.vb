@@ -45,6 +45,8 @@ Partial Class FormAccountingFakturScan
         Me.GridColumnsales_pos_end_period = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnsales_pos_total_qty = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnsales_pos_total = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnexported_date = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnexported_by_name = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
         Me.CESelAll = New DevExpress.XtraEditors.CheckEdit()
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
@@ -205,7 +207,7 @@ Partial Class FormAccountingFakturScan
         '
         'GVInv
         '
-        Me.GVInv.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnis_select, Me.GridColumnid_sales_pos, Me.GridColumnsales_pos_number, Me.GridColumncompinv, Me.GridColumnsales_pos_date, Me.GridColumnsales_pos_start_period, Me.GridColumnsales_pos_end_period, Me.GridColumnsales_pos_total_qty, Me.GridColumnsales_pos_total})
+        Me.GVInv.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnis_select, Me.GridColumnid_sales_pos, Me.GridColumnsales_pos_number, Me.GridColumncompinv, Me.GridColumnsales_pos_date, Me.GridColumnsales_pos_start_period, Me.GridColumnsales_pos_end_period, Me.GridColumnsales_pos_total_qty, Me.GridColumnsales_pos_total, Me.GridColumnexported_date, Me.GridColumnexported_by_name})
         Me.GVInv.GridControl = Me.GCInv
         Me.GVInv.Name = "GVInv"
         Me.GVInv.OptionsBehavior.AutoExpandAllGroups = True
@@ -319,6 +321,24 @@ Partial Class FormAccountingFakturScan
         Me.GridColumnsales_pos_total.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_pos_total", "{0:N2}")})
         Me.GridColumnsales_pos_total.Visible = True
         Me.GridColumnsales_pos_total.VisibleIndex = 7
+        '
+        'GridColumnexported_date
+        '
+        Me.GridColumnexported_date.Caption = "Last Created FK"
+        Me.GridColumnexported_date.DisplayFormat.FormatString = "dd MMMM yyyy HH:mm"
+        Me.GridColumnexported_date.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumnexported_date.FieldName = "exported_date"
+        Me.GridColumnexported_date.Name = "GridColumnexported_date"
+        Me.GridColumnexported_date.Visible = True
+        Me.GridColumnexported_date.VisibleIndex = 8
+        '
+        'GridColumnexported_by_name
+        '
+        Me.GridColumnexported_by_name.Caption = "Created FK by"
+        Me.GridColumnexported_by_name.FieldName = "exported_by_name"
+        Me.GridColumnexported_by_name.Name = "GridColumnexported_by_name"
+        Me.GridColumnexported_by_name.Visible = True
+        Me.GridColumnexported_by_name.VisibleIndex = 9
         '
         'PanelControl1
         '
@@ -532,4 +552,6 @@ Partial Class FormAccountingFakturScan
     Friend WithEvents GridColumnsales_pos_end_period As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnsales_pos_total_qty As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnsales_pos_total As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnexported_date As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnexported_by_name As DevExpress.XtraGrid.Columns.GridColumn
 End Class

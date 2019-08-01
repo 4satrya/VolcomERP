@@ -126,7 +126,8 @@
         IF(!ISNULL(f.id_sales_pos_faktur), f.npwp_name, IF(ISNULL(p.id_comp_contact_bill), c.npwp_name, cb.npwp_name)) AS `npwp_name`, 
         IF(!ISNULL(f.id_sales_pos_faktur), f.npwp_address, IF(ISNULL(p.id_comp_contact_bill), c.npwp_address, cb.npwp_address)) AS `npwp_address`, 
         p.sales_pos_date, p.sales_pos_start_period, p.sales_pos_end_period, 
-        p.sales_pos_total_qty, p.sales_pos_total
+        p.sales_pos_total_qty, p.sales_pos_total,
+        f.exported_date, e.employee_name AS `exported_by_name`
         FROM tb_sales_pos p 
         INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = p.id_store_contact_from
         INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp
@@ -134,8 +135,8 @@
         LEFT JOIN tb_m_comp cb ON cb.id_comp = ccb.id_comp
         LEFT JOIN (
 	        SELECT a.*, e.employee_name AS `updated_by_name`
-        FROM  (	
-	        SELECT f.id_sales_pos_faktur, f.id_sales_pos, f.no_faktur, f.npwp, f.npwp_name, f.npwp_address,
+            FROM  (	
+	            SELECT f.id_sales_pos_faktur, f.id_sales_pos, f.no_faktur, f.npwp, f.npwp_name, f.npwp_address,
 		        f.updated_at, f.updated_by, f.exported_date, f.exported_by 
 		        FROM tb_sales_pos_faktur f
 		        ORDER BY f.id_sales_pos_faktur DESC
@@ -144,6 +145,8 @@
 	        INNER JOIN tb_m_employee e ON e.id_employee = u.id_employee
 	        GROUP BY a.id_sales_pos
         ) f ON f.id_sales_pos = p.id_sales_pos
+        LEFT JOIN tb_m_user u ON u.id_user = f.exported_by
+        LEFT JOIN tb_m_employee e ON e.id_employee = u.id_employee
         WHERE p.id_report_status=6 " + cond + "
         ORDER BY p.id_sales_pos ASC "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")

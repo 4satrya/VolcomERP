@@ -53,7 +53,7 @@
         Else
             cond = "And f1.id_season=" + id_ss + " "
         End If
-        Dim query As String = "CALL view_all_design_param('" + cond + "')"
+        Dim query As String = "CALL view_sample_dev('" + cond + "')"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
         GCDesign.DataSource = data
@@ -65,6 +65,15 @@
     End Sub
 
     Private Sub ViewDetailToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ViewDetailToolStripMenuItem.Click
+        FormSampleDevelopmentDet.id_design = GVDesign.GetFocusedRowCellValue("id_design").ToString
         FormSampleDevelopmentDet.ShowDialog()
+    End Sub
+
+    Private Sub CheckEditFreeze_CheckedChanged(sender As Object, e As EventArgs) Handles CheckEditFreeze.CheckedChanged
+        If CheckEditFreeze.Checked = True Then
+            GBDesign.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left
+        Else
+            GBDesign.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.None
+        End If
     End Sub
 End Class

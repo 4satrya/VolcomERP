@@ -663,6 +663,7 @@ Partial Class FormSalesDelOrderSlip
         Me.PanelSelect.Name = "PanelSelect"
         Me.PanelSelect.Size = New System.Drawing.Size(86, 31)
         Me.PanelSelect.TabIndex = 0
+        Me.PanelSelect.Visible = False
         '
         'CheckSelAll
         '

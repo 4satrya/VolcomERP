@@ -67,6 +67,7 @@ Partial Class FormFGDesignListChanges
         Me.BandedGridColumndesign_fabrication_new = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.gridBandDesignDetail = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         Me.BandedGridColumndesign_detail = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.RepositoryItemMemoEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit()
         Me.BandedGridColumndesign_detail_new = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.gridBandSource = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         Me.BandedGridColumnsource = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
@@ -92,7 +93,6 @@ Partial Class FormFGDesignListChanges
         Me.XTCType = New DevExpress.XtraTab.XtraTabControl()
         Me.XTPMDProduct = New DevExpress.XtraTab.XtraTabPage()
         Me.XTPNonMDProduct = New DevExpress.XtraTab.XtraTabPage()
-        Me.RepositoryItemMemoEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit()
         CType(Me.GroupControlHead, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControlHead.SuspendLayout()
         CType(Me.MENote.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -111,12 +111,12 @@ Partial Class FormFGDesignListChanges
         CType(Me.GCData, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVData, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepoLinkPD, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemMemoEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepoLEPriceMaster, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepoLEPricePrint, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XTCType, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCType.SuspendLayout()
         Me.XTPMDProduct.SuspendLayout()
-        CType(Me.RepositoryItemMemoEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupControlHead
@@ -405,6 +405,7 @@ Partial Class FormFGDesignListChanges
         Me.GVData.OptionsPrint.AllowMultilineHeaders = True
         Me.GVData.OptionsView.ColumnAutoWidth = False
         Me.GVData.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.[True]
+        Me.GVData.OptionsView.RowAutoHeight = True
         Me.GVData.OptionsView.ShowFooter = True
         Me.GVData.OptionsView.ShowGroupPanel = False
         Me.GVData.RowHeight = 17
@@ -628,6 +629,12 @@ Partial Class FormFGDesignListChanges
         Me.BandedGridColumndesign_detail.Name = "BandedGridColumndesign_detail"
         Me.BandedGridColumndesign_detail.OptionsColumn.AllowEdit = False
         Me.BandedGridColumndesign_detail.Visible = True
+        '
+        'RepositoryItemMemoEdit1
+        '
+        Me.RepositoryItemMemoEdit1.Appearance.Options.UseTextOptions = True
+        Me.RepositoryItemMemoEdit1.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
+        Me.RepositoryItemMemoEdit1.Name = "RepositoryItemMemoEdit1"
         '
         'BandedGridColumndesign_detail_new
         '
@@ -869,12 +876,6 @@ Partial Class FormFGDesignListChanges
         Me.XTPNonMDProduct.Size = New System.Drawing.Size(1001, 338)
         Me.XTPNonMDProduct.Text = "Non MD Product"
         '
-        'RepositoryItemMemoEdit1
-        '
-        Me.RepositoryItemMemoEdit1.Appearance.Options.UseTextOptions = True
-        Me.RepositoryItemMemoEdit1.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
-        Me.RepositoryItemMemoEdit1.Name = "RepositoryItemMemoEdit1"
-        '
         'FormFGDesignListChanges
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -908,12 +909,12 @@ Partial Class FormFGDesignListChanges
         CType(Me.GCData, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVData, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepoLinkPD, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemMemoEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepoLEPriceMaster, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepoLEPricePrint, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XTCType, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XTCType.ResumeLayout(False)
         Me.XTPMDProduct.ResumeLayout(False)
-        CType(Me.RepositoryItemMemoEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

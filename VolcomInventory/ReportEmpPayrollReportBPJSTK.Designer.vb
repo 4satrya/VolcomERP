@@ -69,7 +69,7 @@ Partial Public Class ReportEmpPayrollReportBPJSTK
         Me.XTable.LocationFloat = New DevExpress.Utils.PointFloat(0!, 0!)
         Me.XTable.Name = "XTable"
         Me.XTable.Rows.AddRange(New DevExpress.XtraReports.UI.XRTableRow() {Me.XTRow, Me.XTRowTotal})
-        Me.XTable.SizeF = New System.Drawing.SizeF(727.0!, 62.0!)
+        Me.XTable.SizeF = New System.Drawing.SizeF(733.0!, 62.0!)
         Me.XTable.StylePriority.UseFont = False
         '
         'XTRow
@@ -90,7 +90,7 @@ Partial Public Class ReportEmpPayrollReportBPJSTK
         Me.XrTableCell1.StylePriority.UseTextAlignment = False
         Me.XrTableCell1.Text = "NO"
         Me.XrTableCell1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        Me.XrTableCell1.Weight = 0.22181029386263942R
+        Me.XrTableCell1.Weight = 0.221810293862639R
         '
         'XrTableCell6
         '
@@ -102,7 +102,7 @@ Partial Public Class ReportEmpPayrollReportBPJSTK
         Me.XrTableCell6.StylePriority.UseTextAlignment = False
         Me.XrTableCell6.Text = "DEPARTEMEN"
         Me.XrTableCell6.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        Me.XrTableCell6.Weight = 1.6857581760764728R
+        Me.XrTableCell6.Weight = 1.68575817607647R
         '
         'XrTableCell4
         '
@@ -115,7 +115,7 @@ Partial Public Class ReportEmpPayrollReportBPJSTK
         Me.XrTableCell4.StylePriority.UseTextAlignment = False
         Me.XrTableCell4.Text = "DIBAYAR OLEH PERUSAHAAN" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(JHT, JKK, JKM)"
         Me.XrTableCell4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        Me.XrTableCell4.Weight = 1.3726684890855216R
+        Me.XrTableCell4.Weight = 1.37266848908552R
         '
         'XrTableCell2
         '
@@ -185,7 +185,7 @@ Partial Public Class ReportEmpPayrollReportBPJSTK
         Me.XrTableCell7.StylePriority.UseBorders = False
         Me.XrTableCell7.StylePriority.UseTextAlignment = False
         Me.XrTableCell7.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        Me.XrTableCell7.Weight = 0.22181027440801795R
+        Me.XrTableCell7.Weight = 0.221810274408018R
         '
         'XrTableCell8
         '
@@ -200,7 +200,7 @@ Partial Public Class ReportEmpPayrollReportBPJSTK
         Me.XrTableCell8.StylePriority.UseTextAlignment = False
         Me.XrTableCell8.Text = "TOTAL"
         Me.XrTableCell8.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        Me.XrTableCell8.Weight = 1.685758209711109R
+        Me.XrTableCell8.Weight = 1.68575820971111R
         '
         'XrTableCell10
         '
@@ -214,7 +214,7 @@ Partial Public Class ReportEmpPayrollReportBPJSTK
         Me.XrTableCell10.StylePriority.UseFont = False
         Me.XrTableCell10.StylePriority.UseTextAlignment = False
         Me.XrTableCell10.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
-        Me.XrTableCell10.Weight = 1.3726681082348968R
+        Me.XrTableCell10.Weight = 1.3726681082349R
         '
         'XrTableCell11
         '
@@ -284,20 +284,20 @@ Partial Public Class ReportEmpPayrollReportBPJSTK
         'XrLabel4
         '
         Me.XrLabel4.Font = New System.Drawing.Font("Tahoma", 7.25!)
-        Me.XrLabel4.LocationFloat = New DevExpress.Utils.PointFloat(0.00001324548!, 0!)
+        Me.XrLabel4.LocationFloat = New DevExpress.Utils.PointFloat(0.00001402462!, 0!)
         Me.XrLabel4.Name = "XrLabel4"
         Me.XrLabel4.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel4.SizeF = New System.Drawing.SizeF(727.0!, 16.0!)
+        Me.XrLabel4.SizeF = New System.Drawing.SizeF(733.0!, 16.0!)
         Me.XrLabel4.StylePriority.UseFont = False
         Me.XrLabel4.Text = "Note :"
         '
         'XrLabel3
         '
         Me.XrLabel3.Font = New System.Drawing.Font("Tahoma", 7.25!)
-        Me.XrLabel3.LocationFloat = New DevExpress.Utils.PointFloat(0.00001324548!, 15.99998!)
+        Me.XrLabel3.LocationFloat = New DevExpress.Utils.PointFloat(0.00001402462!, 15.99998!)
         Me.XrLabel3.Name = "XrLabel3"
         Me.XrLabel3.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel3.SizeF = New System.Drawing.SizeF(727.0!, 16.0!)
+        Me.XrLabel3.SizeF = New System.Drawing.SizeF(733.0!, 16.0!)
         Me.XrLabel3.StylePriority.UseFont = False
         Me.XrLabel3.Text = "- Iuran BPJSTK dibayarkan ke BPJS KETENAGAKERJAAN (JAMSOSTEK) paling lambat tgl. " &
     "24 bulan berjalan "
@@ -358,7 +358,7 @@ Partial Public Class ReportEmpPayrollReportBPJSTK
         Me.XrTable1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 0!)
         Me.XrTable1.Name = "XrTable1"
         Me.XrTable1.Rows.AddRange(New DevExpress.XtraReports.UI.XRTableRow() {Me.XrTableRow1})
-        Me.XrTable1.SizeF = New System.Drawing.SizeF(727.0!, 25.00001!)
+        Me.XrTable1.SizeF = New System.Drawing.SizeF(733.0!, 25.00001!)
         Me.XrTable1.StylePriority.UseFont = False
         '
         'XrTableRow1
@@ -379,7 +379,7 @@ Partial Public Class ReportEmpPayrollReportBPJSTK
         'ReportEmpPayrollReportBPJSTK
         '
         Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.Detail, Me.TopMargin, Me.BottomMargin, Me.ReportFooter})
-        Me.Margins = New System.Drawing.Printing.Margins(50, 50, 68, 50)
+        Me.Margins = New System.Drawing.Printing.Margins(25, 69, 68, 50)
         Me.PageHeight = 1169
         Me.PageWidth = 827
         Me.PaperKind = System.Drawing.Printing.PaperKind.A4

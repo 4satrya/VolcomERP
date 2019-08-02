@@ -63,7 +63,7 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatan
         Me.XTable.LocationFloat = New DevExpress.Utils.PointFloat(0!, 0!)
         Me.XTable.Name = "XTable"
         Me.XTable.Rows.AddRange(New DevExpress.XtraReports.UI.XRTableRow() {Me.XTRow, Me.XTRowTotal})
-        Me.XTable.SizeF = New System.Drawing.SizeF(727.0!, 48.0!)
+        Me.XTable.SizeF = New System.Drawing.SizeF(733.0!, 48.0!)
         Me.XTable.StylePriority.UseFont = False
         '
         'XTRow
@@ -224,7 +224,7 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatan
         Me.XrLabel3.LocationFloat = New DevExpress.Utils.PointFloat(0!, 0!)
         Me.XrLabel3.Name = "XrLabel3"
         Me.XrLabel3.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel3.SizeF = New System.Drawing.SizeF(727.0!, 16.0!)
+        Me.XrLabel3.SizeF = New System.Drawing.SizeF(733.0!, 16.0!)
         Me.XrLabel3.StylePriority.UseFont = False
         Me.XrLabel3.Text = "1. Pembayaran paling lambat tgl. 10 bulan berjalan, jika lewat tgl. 10 akan kena " &
     "denda 2,5 % dari total tagihan"
@@ -235,7 +235,7 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatan
         Me.XrTable1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 0!)
         Me.XrTable1.Name = "XrTable1"
         Me.XrTable1.Rows.AddRange(New DevExpress.XtraReports.UI.XRTableRow() {Me.XrTableRow1})
-        Me.XrTable1.SizeF = New System.Drawing.SizeF(727.0!, 25.00001!)
+        Me.XrTable1.SizeF = New System.Drawing.SizeF(733.0!, 25.00001!)
         Me.XrTable1.StylePriority.UseFont = False
         '
         'XrTableRow1
@@ -307,7 +307,7 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatan
         '
         Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.Detail, Me.TopMargin, Me.BottomMargin, Me.ReportFooter})
         Me.Font = New System.Drawing.Font("Tahoma", 9.75!)
-        Me.Margins = New System.Drawing.Printing.Margins(50, 50, 68, 50)
+        Me.Margins = New System.Drawing.Printing.Margins(25, 69, 68, 50)
         Me.PageHeight = 1169
         Me.PageWidth = 827
         Me.PaperKind = System.Drawing.Printing.PaperKind.A4

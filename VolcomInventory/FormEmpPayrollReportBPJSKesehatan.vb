@@ -61,14 +61,14 @@
 
         Dim id_payroll_before As String = execute_query("SELECT id_payroll FROM tb_emp_payroll WHERE periode_end LIKE CONCAT((SELECT DATE_FORMAT(DATE_SUB(periode_end, INTERVAL 1 MONTH), '%Y-%m') FROM tb_emp_payroll WHERE id_payroll = " + id_payroll + "), '%') AND id_payroll_type = (SELECT id_payroll_type FROM tb_emp_payroll WHERE id_payroll = " + id_payroll + ")", 0, True, "", "", "", "")
 
-        Dim total_before As String = execute_query("
-        SELECT (IFNULL(company_contribution, 0) + IFNULL(employee_contribution, 0)) AS deduction
-        FROM (
-	        SELECT SUM(IF(ded.id_salary_deduction = 1, (ded.deduction / 0.01) * 0.04, 0)) AS company_contribution, SUM(ded.deduction) AS employee_contribution
-	        FROM tb_emp_payroll_deduction AS ded
-	        LEFT JOIN tb_lookup_salary_deduction AS ded_lookup ON ded.id_salary_deduction = ded_lookup.id_salary_deduction
-	        WHERE ded.id_payroll = " + id_payroll_before + " AND ded_lookup.id_salary_deduction_cat = 2
-        ) AS tb", 0, True, "", "", "", "")
+        'Dim total_before As String = execute_query("
+        'SELECT (IFNULL(company_contribution, 0) + IFNULL(employee_contribution, 0)) AS deduction
+        'FROM (
+        ' SELECT SUM(IF(ded.id_salary_deduction = 1, (ded.deduction / 0.01) * 0.04, 0)) AS company_contribution, SUM(ded.deduction) AS employee_contribution
+        ' FROM tb_emp_payroll_deduction AS ded
+        ' LEFT JOIN tb_lookup_salary_deduction AS ded_lookup ON ded.id_salary_deduction = ded_lookup.id_salary_deduction
+        ' WHERE ded.id_payroll = " + id_payroll_before + " AND ded_lookup.id_salary_deduction_cat = 2
+        ') AS tb", 0, True, "", "", "", "")
 
         'all
         Dim report As ReportEmpPayrollReportBPJSKesehatan = New ReportEmpPayrollReportBPJSKesehatan
@@ -86,16 +86,16 @@
         'detail
         Dim data_class As DataTable = execute_query("CALL view_payroll_bpjs_detail(" + id_payroll_before + ")", -1, True, "", "", "", "")
 
-        Dim total_class1_before As Integer = 0
-        Dim total_class2_before As Integer = 0
+        'Dim total_class1_before As Integer = 0
+        'Dim total_class2_before As Integer = 0
 
-        For i = 0 To data_class.Rows.Count - 1
-            If data_class.Rows(i)("class").ToString = "I" Then
-                total_class1_before += 1
-            ElseIf data_class.Rows(i)("class").ToString = "II" Then
-                total_class2_before += 1
-            End If
-        Next
+        'For i = 0 To data_class.Rows.Count - 1
+        '    If data_class.Rows(i)("class").ToString = "I" Then
+        '        total_class1_before += 1
+        '    ElseIf data_class.Rows(i)("class").ToString = "II" Then
+        '        total_class2_before += 1
+        '    End If
+        'Next
 
         Dim report_detail As ReportEmpPayrollReportBPJSKesehatanDetail = New ReportEmpPayrollReportBPJSKesehatanDetail
 
@@ -106,9 +106,9 @@
         report_detail.XLMaxKelas2.Text = Format(data.Rows(0)("bpjs_max_kelas_2"), "##,##0")
         report_detail.XLUMK.Text = Format(data.Rows(0)("ump"), "##,##0")
 
-        report_detail.XLTotalBefore.Text = Format(Decimal.Parse(total_before), "##,##0")
-        report_detail.XLClass1Before.Text = total_class1_before
-        report_detail.XLClass2Before.Text = total_class2_before
+        'report_detail.XLTotalBefore.Text = Format(Decimal.Parse(total_before), "##,##0")
+        'report_detail.XLClass1Before.Text = total_class1_before
+        'report_detail.XLClass2Before.Text = total_class2_before
 
         report_detail.id_pre = If(id_report_status = "6", "-1", "1")
         report_detail.id_payroll = id_payroll

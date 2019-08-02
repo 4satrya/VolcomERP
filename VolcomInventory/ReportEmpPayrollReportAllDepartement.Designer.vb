@@ -958,13 +958,14 @@ Partial Public Class ReportEmpPayrollReportAllDepartement
         'XLTitle
         '
         Me.XLTitle.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Bold)
-        Me.XLTitle.LocationFloat = New DevExpress.Utils.PointFloat(220.0!, 33.99997!)
+        Me.XLTitle.LocationFloat = New DevExpress.Utils.PointFloat(220.0!, 22.99995!)
+        Me.XLTitle.Multiline = True
         Me.XLTitle.Name = "XLTitle"
         Me.XLTitle.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XLTitle.SizeF = New System.Drawing.SizeF(635.0!, 23.0!)
+        Me.XLTitle.SizeF = New System.Drawing.SizeF(635.0!, 41.15005!)
         Me.XLTitle.StylePriority.UseFont = False
         Me.XLTitle.StylePriority.UseTextAlignment = False
-        Me.XLTitle.Text = "Monthly Payroll"
+        Me.XLTitle.Text = "Summary Monthly Payroll"
         Me.XLTitle.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
         '
         'XLType

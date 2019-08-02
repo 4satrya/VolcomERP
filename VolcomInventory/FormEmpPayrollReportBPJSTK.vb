@@ -20,6 +20,7 @@
 
         '== detail ==
         GCEmployeeSalary.Caption = "Upah " + Date.Parse(FormEmpPayroll.GVPayrollPeriode.GetFocusedRowCellValue("periode_end").ToString).ToString("MMMM yyyy")
+        GCEmployeeSalaryBefore.Caption = "Upah " + Date.Parse(FormEmpPayroll.GVPayrollPeriode.GetFocusedRowCellValue("periode_end").ToString).AddMonths(-1).ToString("MMMM yyyy")
 
         Dim query As String = "CALL view_payroll_bpjstk_detail(" + id_payroll + ")"
 
@@ -97,6 +98,9 @@
             report_detail.data = data_new
 
             report_detail.XLLocation.Text = "PT. VOLCOM INDONESIA (" + location(i).ToString + ")"
+
+            report_detail.XrTableCell15.Text = "UPAH " + Environment.NewLine + Date.Parse(FormEmpPayroll.GVPayrollPeriode.GetFocusedRowCellValue("periode_end").ToString).ToString("MMMM yyyy").ToUpper
+            report_detail.XrTableCell11.Text = "UPAH " + Environment.NewLine + Date.Parse(FormEmpPayroll.GVPayrollPeriode.GetFocusedRowCellValue("periode_end").ToString).AddMonths(-1).ToString("MMMM yyyy").ToUpper
 
             report_detail.CreateDocument()
 

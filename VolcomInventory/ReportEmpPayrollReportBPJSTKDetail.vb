@@ -33,7 +33,7 @@
                 row.Cells.Item(4).BackColor = Color.LightGray
                 row.Cells.Item(5).BackColor = Color.LightGray
                 row.Cells.Item(6).BackColor = Color.LightGray
-                row.Cells.Item(12).BackColor = Color.LightGray
+                row.Cells.Item(7).BackColor = Color.LightGray
 
                 'total
                 Dim total_text As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(2)
@@ -43,35 +43,35 @@
                 total_text.BackColor = Color.LightGray
 
                 'company 1
-                Dim departement_company_1 As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(7)
+                Dim departement_company_1 As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(8)
 
                 departement_company_1.Text = Format(departement_company_contribution_1, "##,##0")
                 departement_company_1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
                 departement_company_1.BackColor = Color.LightGray
 
                 'company 2
-                Dim departement_company_2 As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(8)
+                Dim departement_company_2 As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(9)
 
                 departement_company_2.Text = Format(departement_company_contribution_2, "##,##0")
                 departement_company_2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
                 departement_company_2.BackColor = Color.LightGray
 
                 'employee 1
-                Dim employee_company_1 As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(9)
+                Dim employee_company_1 As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(10)
 
                 employee_company_1.Text = Format(departement_employee_contribution_1, "##,##0")
                 employee_company_1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
                 employee_company_1.BackColor = Color.LightGray
 
                 'employee 2
-                Dim employee_company_2 As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(10)
+                Dim employee_company_2 As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(11)
 
                 employee_company_2.Text = Format(departement_employee_contribution_2, "##,##0")
                 employee_company_2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
                 employee_company_2.BackColor = Color.LightGray
 
                 'total
-                Dim total_departement As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(11)
+                Dim total_departement As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(12)
 
                 total_departement.Text = Format(departement_total, "##,##0")
                 total_departement.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
@@ -134,54 +134,54 @@
             kep_prog.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter
             kep_prog.BackColor = Color.Transparent
 
+            'salary before
+            Dim employee_salary_before As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(6)
+
+            employee_salary_before.Text = Format(data.Rows(i)("employee_salary_before"), "##,##0")
+            employee_salary_before.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
+            employee_salary_before.BackColor = Color.Transparent
+
             'salary
-            Dim employee_salary As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(6)
+            Dim employee_salary As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(7)
 
             employee_salary.Text = Format(data.Rows(i)("employee_salary"), "##,##0")
             employee_salary.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
             employee_salary.BackColor = Color.Transparent
 
             'company 1
-            Dim company_contribution_1 As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(7)
+            Dim company_contribution_1 As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(8)
 
             company_contribution_1.Text = Format(data.Rows(i)("company_contribution_1"), "##,##0")
             company_contribution_1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
             company_contribution_1.BackColor = Color.Transparent
 
             'company 2
-            Dim company_contribution_2 As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(8)
+            Dim company_contribution_2 As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(9)
 
             company_contribution_2.Text = Format(data.Rows(i)("company_contribution_2"), "##,##0")
             company_contribution_2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
             company_contribution_2.BackColor = Color.Transparent
 
             'employee 1
-            Dim employee_contribution_1 As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(9)
+            Dim employee_contribution_1 As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(10)
 
             employee_contribution_1.Text = Format(data.Rows(i)("employee_contribution_1"), "##,##0")
             employee_contribution_1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
             employee_contribution_1.BackColor = Color.Transparent
 
             'employee 2
-            Dim employee_contribution_2 As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(10)
+            Dim employee_contribution_2 As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(11)
 
             employee_contribution_2.Text = Format(data.Rows(i)("employee_contribution_2"), "##,##0")
             employee_contribution_2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
             employee_contribution_2.BackColor = Color.Transparent
 
             'total
-            Dim total_contribution As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(11)
+            Dim total_contribution As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(12)
 
             total_contribution.Text = Format((data.Rows(i)("company_contribution_1") + data.Rows(i)("company_contribution_2") + data.Rows(i)("employee_contribution_1") + data.Rows(i)("employee_contribution_2")), "##,##0")
             total_contribution.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
             total_contribution.BackColor = Color.Transparent
-
-            'keterangan
-            Dim keterangan As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(12)
-
-            keterangan.Text = data.Rows(i)("keterangan").ToString
-            keterangan.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
-            keterangan.BackColor = Color.Transparent
 
             If Not last_departement = data.Rows(i)("departement").ToString Then
                 departement_company_contribution_1 = 0
@@ -215,7 +215,7 @@
                 row.Cells.Item(4).BackColor = Color.LightGray
                 row.Cells.Item(5).BackColor = Color.LightGray
                 row.Cells.Item(6).BackColor = Color.LightGray
-                row.Cells.Item(12).BackColor = Color.LightGray
+                row.Cells.Item(7).BackColor = Color.LightGray
 
                 'total
                 Dim total_text As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(2)
@@ -225,35 +225,35 @@
                 total_text.BackColor = Color.LightGray
 
                 'company 1
-                Dim departement_company_1 As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(7)
+                Dim departement_company_1 As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(8)
 
                 departement_company_1.Text = Format(departement_company_contribution_1, "##,##0")
                 departement_company_1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
                 departement_company_1.BackColor = Color.LightGray
 
                 'company 2
-                Dim departement_company_2 As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(8)
+                Dim departement_company_2 As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(9)
 
                 departement_company_2.Text = Format(departement_company_contribution_2, "##,##0")
                 departement_company_2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
                 departement_company_2.BackColor = Color.LightGray
 
                 'employee 1
-                Dim employee_company_1 As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(9)
+                Dim employee_company_1 As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(10)
 
                 employee_company_1.Text = Format(departement_employee_contribution_1, "##,##0")
                 employee_company_1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
                 employee_company_1.BackColor = Color.LightGray
 
                 'employee 2
-                Dim employee_company_2 As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(10)
+                Dim employee_company_2 As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(11)
 
                 employee_company_2.Text = Format(departement_employee_contribution_2, "##,##0")
                 employee_company_2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
                 employee_company_2.BackColor = Color.LightGray
 
                 'total
-                Dim total_departement As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(11)
+                Dim total_departement As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(12)
 
                 total_departement.Text = Format(departement_total, "##,##0")
                 total_departement.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
@@ -265,11 +265,11 @@
 
         XTTotal.HeightF = 16
 
-        XTTotal.Cells.Item(3).Text = Format(total_company_contribution_1, "##,##0")
-        XTTotal.Cells.Item(4).Text = Format(total_company_contribution_2, "##,##0")
-        XTTotal.Cells.Item(5).Text = Format(total_employee_contribution_1, "##,##0")
-        XTTotal.Cells.Item(6).Text = Format(total_employee_contribution_2, "##,##0")
-        XTTotal.Cells.Item(7).Text = Format(total, "##,##0")
+        XTTotal.Cells.Item(4).Text = Format(total_company_contribution_1, "##,##0")
+        XTTotal.Cells.Item(5).Text = Format(total_company_contribution_2, "##,##0")
+        XTTotal.Cells.Item(6).Text = Format(total_employee_contribution_1, "##,##0")
+        XTTotal.Cells.Item(7).Text = Format(total_employee_contribution_2, "##,##0")
+        XTTotal.Cells.Item(8).Text = Format(total, "##,##0")
 
         'mark
         If id_pre = "-1" Then

@@ -198,23 +198,23 @@
         'total all
         XTRowSpace.HeightF = 16
         XTRowTotal.HeightF = 16
-        XrTableRow1.HeightF = 16
-        XrTableRow2.HeightF = 16
-        XrTableRow3.HeightF = 16
-        XrTableRow4.HeightF = 16
-        XrTableRow5.HeightF = 16
-        XrTableRow6.HeightF = 16
-        XrTableRow7.HeightF = 16
+        'XrTableRow1.HeightF = 16
+        'XrTableRow2.HeightF = 16
+        'XrTableRow3.HeightF = 16
+        'XrTableRow4.HeightF = 16
+        'XrTableRow5.HeightF = 16
+        'XrTableRow6.HeightF = 16
+        'XrTableRow7.HeightF = 16
 
         XTRowTotal.Cells.Item(1).Text = data.Rows.Count
         XTRowTotal.Cells.Item(4).Text = Format(total_company, "##,##0")
         XTRowTotal.Cells.Item(5).Text = Format(total_employee, "##,##0")
         XTRowTotal.Cells.Item(6).Text = Format(total_company + total_employee, "##,##0")
 
-        XLClass1.Text = total_class1
-        XLClass2.Text = total_class2
+        'XLClass1.Text = total_class1
+        'XLClass2.Text = total_class2
 
-        XLTotal.Text = Format(total_company + total_employee, "##,##0")
+        'XLTotal.Text = Format(total_company + total_employee, "##,##0")
 
         'mark
         If id_pre = "-1" Then

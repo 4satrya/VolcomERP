@@ -473,7 +473,6 @@ Partial Class FormAccountingFakturScan
         'BtnCreateFaktur
         '
         Me.BtnCreateFaktur.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BtnCreateFaktur.Enabled = False
         Me.BtnCreateFaktur.Image = CType(resources.GetObject("BtnCreateFaktur.Image"), System.Drawing.Image)
         Me.BtnCreateFaktur.Location = New System.Drawing.Point(1085, 2)
         Me.BtnCreateFaktur.Name = "BtnCreateFaktur"

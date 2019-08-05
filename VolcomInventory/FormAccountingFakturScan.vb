@@ -100,26 +100,9 @@
         viewSalesInvoice()
     End Sub
 
-    Sub viewSalesInvoice()
+    Function viewHeader(ByVal cond As String) As String
         Cursor = Cursors.WaitCursor
-        Dim date_from_selected, date_until_selected As String
-        date_from_selected = "0000-01-01"
-        date_until_selected = "9999-01-01"
-        Try
-            date_from_selected = DateTime.Parse(DEFrom.EditValue.ToString).ToString("yyyy-MM-dd")
-        Catch ex As Exception
-        End Try
-        Try
-            date_until_selected = DateTime.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd")
-        Catch ex As Exception
-        End Try
-        Dim cond As String = "AND (p.sales_pos_end_period>='" + date_from_selected + "' AND p.sales_pos_end_period<='" + date_until_selected + "') "
-
-        Dim id_store As String = SLEStore.EditValue.ToString
-        If id_store <> "0" Then
-            cond += "HAVING id_comp=" + id_store + " "
-        End If
-        Dim query As String = "SELECT 'No' AS `is_select`,p.id_sales_pos, p.sales_pos_number, f.id_sales_pos_faktur,f.no_faktur, p.id_comp_contact_bill, 
+        Dim query As String = "SELECT 'No' AS `is_select`,p.id_sales_pos, p.sales_pos_number, IFNULL(f.id_sales_pos_faktur,0) AS `id_sales_pos_faktur`,f.no_faktur, p.id_comp_contact_bill, 
         IF(ISNULL(p.id_comp_contact_bill), c.id_comp, cb.id_comp) AS `id_comp`, 
         IF(ISNULL(p.id_comp_contact_bill), CONCAT(c.comp_number, ' - ', c.comp_name) , CONCAT(cb.comp_number, ' - ', cb.comp_name) ) AS `comp`,
         IF(!ISNULL(f.id_sales_pos_faktur), f.npwp, IF(ISNULL(p.id_comp_contact_bill), c.npwp, cb.npwp)) AS `npwp`, 
@@ -149,9 +132,55 @@
         LEFT JOIN tb_m_employee e ON e.id_employee = u.id_employee
         WHERE p.id_report_status=6 " + cond + "
         ORDER BY p.id_sales_pos ASC "
+        Return query
+        Cursor = Cursors.Default
+    End Function
+
+    Sub viewSalesInvoice()
+        Cursor = Cursors.WaitCursor
+        Dim date_from_selected, date_until_selected As String
+        date_from_selected = "0000-01-01"
+        date_until_selected = "9999-01-01"
+        Try
+            date_from_selected = DateTime.Parse(DEFrom.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+        Try
+            date_until_selected = DateTime.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+        Dim cond As String = "AND (p.sales_pos_end_period>='" + date_from_selected + "' AND p.sales_pos_end_period<='" + date_until_selected + "') "
+
+        Dim id_store As String = SLEStore.EditValue.ToString
+        If id_store <> "0" Then
+            cond += "HAVING id_comp=" + id_store + " "
+        End If
+
+        Dim query As String = viewHeader(cond)
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCInv.DataSource = data
         GVInv.BestFitColumns()
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnCreateFaktur_Click(sender As Object, e As EventArgs) Handles BtnCreateFaktur.Click
+        Cursor = Cursors.WaitCursor
+        makeSafeGV(GVInv)
+        GVInv.ActiveFilterString = "[is_select]='Yes'"
+        If GVInv.RowCount > 0 Then
+            Dim id As String = ""
+            For i As Integer = 0 To GVInv.RowCount - 1
+                If i > 0 Then
+                    id += "OR "
+                End If
+                id += "p.id_sales_pos=" + GVInv.GetRowCellValue(i, "id_sales_pos").ToString + " "
+            Next
+            FormAccountingFKDetail.id = id
+            FormAccountingFKDetail.ShowDialog()
+        Else
+            stopCustom("No data selected")
+        End If
+        makeSafeGV(GVInv)
         Cursor = Cursors.Default
     End Sub
 End Class

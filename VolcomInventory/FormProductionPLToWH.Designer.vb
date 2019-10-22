@@ -76,6 +76,7 @@ Partial Class FormProductionPLToWH
         Me.ColColor = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ColSize = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ToolTipControllerNew = New DevExpress.Utils.ToolTipController(Me.components)
+        Me.GridColumnis_use_qc_report = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XTCPL, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCPL.SuspendLayout()
         Me.XTPPList.SuspendLayout()
@@ -336,7 +337,7 @@ Partial Class FormProductionPLToWH
         '
         'GVProd
         '
-        Me.GVProd.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnProdNo, Me.GridColumnReportStatus, Me.GridColumnIdReportStatus, Me.GridColumnProdDate, Me.GridColumnLeadTime, Me.GridColumnPOType, Me.GridColumnTerm, Me.GridColumnDesign, Me.GridColumnCode, Me.GridColumnIdPO, Me.GridColumnSeason, Me.GridColumnPLCreated})
+        Me.GVProd.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnProdNo, Me.GridColumnReportStatus, Me.GridColumnIdReportStatus, Me.GridColumnProdDate, Me.GridColumnLeadTime, Me.GridColumnPOType, Me.GridColumnTerm, Me.GridColumnDesign, Me.GridColumnCode, Me.GridColumnIdPO, Me.GridColumnSeason, Me.GridColumnPLCreated, Me.GridColumnis_use_qc_report})
         Me.GVProd.GridControl = Me.GCProd
         Me.GVProd.GroupCount = 1
         Me.GVProd.Name = "GVProd"
@@ -628,6 +629,13 @@ Partial Class FormProductionPLToWH
         Me.ToolTipControllerNew.InitialDelay = 100
         Me.ToolTipControllerNew.ReshowDelay = 50
         '
+        'GridColumnis_use_qc_report
+        '
+        Me.GridColumnis_use_qc_report.Caption = "is_use_qc_report"
+        Me.GridColumnis_use_qc_report.FieldName = "is_use_qc_report"
+        Me.GridColumnis_use_qc_report.Name = "GridColumnis_use_qc_report"
+        Me.GridColumnis_use_qc_report.OptionsColumn.AllowEdit = False
+        '
         'FormProductionPLToWH
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -717,4 +725,5 @@ Partial Class FormProductionPLToWH
     Friend WithEvents GridColumnDesignCode As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnDesignName As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnTotal As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnis_use_qc_report As DevExpress.XtraGrid.Columns.GridColumn
 End Class

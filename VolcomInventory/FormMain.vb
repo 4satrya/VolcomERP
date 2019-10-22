@@ -1121,15 +1121,24 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
                 FormProductionPLToWHDet.ShowDialog()
             Else
                 If FormProductionPLToWH.GVProd.RowCount > 0 And FormProductionPLToWH.GVProd.FocusedRowHandle >= 0 Then
-                    Dim id_cop_status As String = FormProductionPLToWH.GVProd.GetFocusedRowCellValue("id_cop_status").ToString
-                    Dim cost As Decimal = FormProductionPLToWH.GVProd.GetFocusedRowCellValue("design_cop")
-                    If id_cop_status = "2" Then
+                    Dim is_use_qc_report As String = FormProductionPLToWH.GVProd.GetFocusedRowCellValue("is_use_qc_report").ToString
+                    If is_use_qc_report = "1" Then
                         FormProductionPLToWHDet.action = "ins"
                         FormProductionPLToWHDet.id_pl_prod_order = "0"
                         FormProductionPLToWHDet.id_prod_order = FormProductionPLToWH.GVProd.GetFocusedRowCellValue("id_prod_order").ToString
                         FormProductionPLToWHDet.ShowDialog()
                     Else
-                        stopCustom("Packing list can't continue process, because there is no final cost for this style.")
+                        'harus final cost
+                        Dim id_cop_status As String = FormProductionPLToWH.GVProd.GetFocusedRowCellValue("id_cop_status").ToString
+                        Dim cost As Decimal = FormProductionPLToWH.GVProd.GetFocusedRowCellValue("design_cop")
+                        If id_cop_status = "2" Then
+                            FormProductionPLToWHDet.action = "ins"
+                            FormProductionPLToWHDet.id_pl_prod_order = "0"
+                            FormProductionPLToWHDet.id_prod_order = FormProductionPLToWH.GVProd.GetFocusedRowCellValue("id_prod_order").ToString
+                            FormProductionPLToWHDet.ShowDialog()
+                        Else
+                            stopCustom("Packing list can't continue process, because there is no final cost for this style.")
+                        End If
                     End If
                 End If
             End If

@@ -39,6 +39,7 @@ Public Class FormProductionPLToWHDet
     Private Sub FormProductionPLToWHDet_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         viewReportStatus() 'get report status
         viewPLCat()
+        viewPLCatSub()
         viewPDAlloc()
         actionLoad()
     End Sub
@@ -187,7 +188,8 @@ Public Class FormProductionPLToWHDet
             BScan.Enabled = True
             BDelete.Enabled = True
             BtnInfoSrs.Enabled = True
-            LEPLCategory.Enabled = False
+            LEPLCategory.Enabled = True
+            LECLaim.Enabled = True
             GVRetDetail.OptionsBehavior.ReadOnly = False
         Else
             BtnBrowseContactFrom.Enabled = False
@@ -202,6 +204,7 @@ Public Class FormProductionPLToWHDet
             BDelete.Enabled = False
             BtnInfoSrs.Enabled = False
             LEPLCategory.Enabled = False
+            LECLaim.Enabled = False
             GVRetDetail.OptionsBehavior.ReadOnly = True
         End If
         PanelNavBarcode.Enabled = False
@@ -412,6 +415,20 @@ Public Class FormProductionPLToWHDet
         viewLookupQuery(LEPLCategory, query, 0, "pl_category", "id_pl_category")
     End Sub
 
+    'View PL Claim
+    Sub viewPLCatSub()
+        If is_use_qc_report = "1" Then
+            Dim id_cat As String = "-1"
+            Try
+                id_cat = LEPLCategory.EditValue.ToString
+            Catch ex As Exception
+            End Try
+            Dim query As String = "SELECT * FROM tb_lookup_pl_category_sub a WHERE a.id_pl_category='" + id_cat + "' ORDER BY a.id_pl_category_sub ASC  "
+            Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+            viewLookupQuery(LECLaim, query, 0, "pl_category_sub", "id_pl_category_sub")
+        End If
+    End Sub
+
     'Button
     Private Sub BtnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnSave.Click
         Cursor = Cursors.WaitCursor
@@ -487,8 +504,11 @@ Public Class FormProductionPLToWHDet
             Dim pl_prod_order_note As String = addSlashes(MENote.Text)
             Dim id_report_status As String = LEReportStatus.EditValue
             Dim id_prod_order_det, pl_prod_order_det_qty, pl_prod_order_det_note As String
-            Dim id_pl_prod_order_det As String
             Dim id_pl_category As String = LEPLCategory.EditValue.ToString
+            Dim id_pl_category_sub As String = "NULL"
+            If is_use_qc_report = "1" Then
+                id_pl_category_sub = LECLaim.EditValue.ToString
+            End If
             Dim id_pd_alloc As String = LEPDAlloc.EditValue.ToString
             If action = "ins" Then
                 Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure to save changes this data?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
@@ -498,8 +518,8 @@ Public Class FormProductionPLToWHDet
                         'Main tbale
                         BtnSave.Enabled = False
                         pl_prod_order_number = header_number_prod("7")
-                        query = "INSERT INTO tb_pl_prod_order(id_prod_order, pl_prod_order_number, id_comp_contact_to, id_comp_contact_from, pl_prod_order_date, pl_prod_order_note, id_report_status, id_pl_category, id_pd_alloc) "
-                        query += "VALUES('" + id_prod_order + "', '" + pl_prod_order_number + "', '" + id_comp_contact_to + "', '" + id_comp_contact_from + "', NOW(), '" + pl_prod_order_note + "', '" + id_report_status + "', '" + id_pl_category + "', NULL); SELECT LAST_INSERT_ID(); "
+                        query = "INSERT INTO tb_pl_prod_order(id_prod_order, pl_prod_order_number, id_comp_contact_to, id_comp_contact_from, pl_prod_order_date, pl_prod_order_note, id_report_status, id_pl_category, id_pd_alloc, id_pl_category_sub) "
+                        query += "VALUES('" + id_prod_order + "', '" + pl_prod_order_number + "', '" + id_comp_contact_to + "', '" + id_comp_contact_from + "', NOW(), '" + pl_prod_order_note + "', '" + id_report_status + "', '" + id_pl_category + "', NULL, " + id_pl_category_sub + "); SELECT LAST_INSERT_ID(); "
                         id_pl_prod_order = execute_query(query, 0, True, "", "", "", "")
 
                         increase_inc_prod("7")
@@ -583,6 +603,20 @@ Public Class FormProductionPLToWHDet
                     Cursor = Cursors.Default
                 End If
             ElseIf action = "upd" Then
+                'cek report status
+                Dim id_rs As String = execute_query("SELECT id_report_status FROM tb_pl_prod_order WHERE id_pl_prod_order='" + id_pl_prod_order + "' ", 0, True, "", "", "", "")
+                If id_rs <> "1" Then
+                    Cursor = Cursors.Default
+                    FormProductionPLToWH.viewPL()
+                    FormProductionPLToWH.view_sample_purc()
+                    FormProductionPLToWH.GVPL.FocusedRowHandle = find_row(FormProductionPLToWH.GVPL, "id_pl_prod_order", id_pl_prod_order)
+                    action = "upd"
+                    actionLoad()
+                    stopCustom("Can't update, because this transaction already approved")
+                    Exit Sub
+                End If
+
+
                 Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure to save changes this data?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
                 If confirm = Windows.Forms.DialogResult.Yes Then
                     Cursor = Cursors.WaitCursor
@@ -590,96 +624,10 @@ Public Class FormProductionPLToWHDet
                         pl_prod_order_number = addSlashes(TxtRetOutNumber.Text)
 
                         'edit main table
-                        query = "UPDATE tb_pl_prod_order SET id_prod_order = '" + id_prod_order + "', pl_prod_order_number = '" + pl_prod_order_number + "', id_comp_contact_to = '" + id_comp_contact_to + "', id_comp_contact_from = '" + id_comp_contact_from + "', id_report_status = '" + id_report_status + "', pl_prod_order_note = '" + pl_prod_order_note + "', id_pl_category = '" + id_pl_category + "', id_pd_alloc = NULL WHERE id_pl_prod_order = '" + id_pl_prod_order + "' "
+                        'id_prod_order = '" + id_prod_order + "', pl_prod_order_number = '" + pl_prod_order_number + "', id_comp_contact_to = '" + id_comp_contact_to + "', id_comp_contact_from = '" + id_comp_contact_from + "', id_report_status = '" + id_report_status + "',  id_pd_alloc = NULL 
+                        query = "UPDATE tb_pl_prod_order SET pl_prod_order_note = '" + pl_prod_order_note + "', id_pl_category = '" + id_pl_category + "', id_pl_category_sub=" + id_pl_category_sub + " WHERE id_pl_prod_order = '" + id_pl_prod_order + "' "
                         execute_non_query(query, True, "", "", "", "")
 
-                        'edit detail table
-                        Dim jum_ins_j As Integer = 0
-                        Dim query_detail As String = ""
-                        If GVRetDetail.RowCount > 0 Then
-                            query_detail = "INSERT tb_pl_prod_order_det(id_pl_prod_order, id_prod_order_det, pl_prod_order_det_qty, pl_prod_order_det_note) VALUES "
-                        End If
-                        For j As Integer = 0 To (GVRetDetail.RowCount - 1)
-                            Try
-                                id_pl_prod_order_det = GVRetDetail.GetRowCellValue(j, "id_pl_prod_order_det").ToString
-                                id_prod_order_det = GVRetDetail.GetRowCellValue(j, "id_prod_order_det").ToString
-                                pl_prod_order_det_qty = decimalSQL(GVRetDetail.GetRowCellValue(j, "pl_prod_order_det_qty").ToString)
-                                pl_prod_order_det_note = GVRetDetail.GetRowCellValue(j, "pl_prod_order_det_note").ToString
-
-                                If id_pl_prod_order_det = "0" Then
-                                    If jum_ins_j > 0 Then
-                                        query_detail += ", "
-                                    End If
-                                    query_detail += "('" + id_pl_prod_order + "', '" + id_prod_order_det + "', '" + pl_prod_order_det_qty + "', '" + pl_prod_order_det_note + "') "
-                                    jum_ins_j = jum_ins_j + 1
-                                Else
-                                    Dim query_upd As String = "UPDATE tb_pl_prod_order_det SET id_prod_order_det = '" + id_prod_order_det + "', pl_prod_order_det_qty = '" + pl_prod_order_det_qty + "', pl_prod_order_det_note = '" + pl_prod_order_det_note + "' WHERE id_pl_prod_order_det = '" + id_pl_prod_order_det + "'"
-                                    execute_non_query(query_upd, True, "", "", "", "")
-                                    id_pl_prod_order_det_list.Remove(id_pl_prod_order_det)
-                                End If
-                            Catch ex As Exception
-                                ex.ToString()
-                            End Try
-                        Next
-                        If jum_ins_j > 0 Then
-                            execute_non_query(query_detail, True, "", "", "", "")
-                        End If
-
-                        'delete sisa
-                        For k As Integer = 0 To (id_pl_prod_order_det_list.Count - 1)
-                            Try
-                                query = "DELETE FROM tb_pl_prod_order_det WHERE id_pl_prod_order_det = '" + id_pl_prod_order_det_list(k) + "' "
-                                execute_non_query(query, True, "", "", "", "")
-                            Catch ex As Exception
-                                ex.ToString()
-                            End Try
-                        Next
-
-                        'get all detail
-                        Dim query_get_detail As String = "SELECT a.id_pl_prod_order_det, a.id_prod_order_det, c.id_product FROM tb_pl_prod_order_det a "
-                        query_get_detail += "INNER JOIN tb_prod_order_det b ON a.id_prod_order_det = b.id_prod_order_det "
-                        query_get_detail += "INNER JOIN tb_prod_demand_product c ON b.id_prod_demand_product = c.id_prod_demand_product "
-                        query_get_detail += "WHERE a.id_pl_prod_order = '" + id_pl_prod_order + "' "
-                        Dim data_get_detail As DataTable = execute_query(query_get_detail, True, -1, "", "", "", "")
-
-                        'counting
-                        Dim query_counting As String = ""
-                        If GVBarcode.RowCount > 0 Then
-                            query_counting = "INSERT INTO tb_pl_prod_order_det_counting(id_pl_prod_order_det, pl_prod_order_det_counting, id_product) VALUES "
-                        End If
-                        Dim jum_ins As Integer = 0
-                        For k As Integer = 0 To (GVBarcode.RowCount - 1)
-                            Dim id_prod_order_det_counting As String = GVBarcode.GetRowCellValue(k, "id_prod_order_det").ToString
-                            Dim pl_prod_order_det_counting As String = GVBarcode.GetRowCellValue(k, "counting_code").ToString
-                            Dim id_pl_prod_order_det_unique As String = GVBarcode.GetRowCellValue(k, "id_pl_prod_order_det_unique").ToString
-                            If id_pl_prod_order_det_unique = "0" Then
-                                For kx As Integer = 0 To (data_get_detail.Rows.Count - 1)
-                                    If id_prod_order_det_counting = data_get_detail.Rows(kx)("id_prod_order_det").ToString Then
-                                        If jum_ins > 0 Then
-                                            query_counting += ", "
-                                        End If
-                                        query_counting += "('" + data_get_detail.Rows(kx)("id_pl_prod_order_det").ToString + "', '" + pl_prod_order_det_counting + "', '" + data_get_detail.Rows(kx)("id_product").ToString + "') "
-                                        jum_ins = jum_ins + 1
-                                        Exit For
-                                    End If
-                                Next
-                            Else
-                                id_pl_prod_order_det_unique_list.Remove(id_pl_prod_order_det_unique)
-                            End If
-                        Next
-                        If jum_ins > 0 Then
-                            execute_non_query(query_counting, True, "", "", "", "")
-                        End If
-
-                        'delete sisa unique
-                        For k As Integer = 0 To (id_pl_prod_order_det_unique_list.Count - 1)
-                            Try
-                                query = "DELETE FROM tb_pl_prod_order_det_counting WHERE id_pl_prod_order_det_unique = '" + id_pl_prod_order_det_unique_list(k) + "' "
-                                execute_non_query(query, True, "", "", "", "")
-                            Catch ex As Exception
-                                ex.ToString()
-                            End Try
-                        Next
 
                         'View
                         FormProductionPLToWH.viewPL()
@@ -691,7 +639,7 @@ Public Class FormProductionPLToWHDet
                         'gen xls
                         exportToBOF(False)
 
-                        infoCustom("PL was edited successfully!")
+                        infoCustom("PL was updated successfully!")
                     Catch ex As Exception
                         errorConnection()
                     End Try
@@ -1334,17 +1282,18 @@ Public Class FormProductionPLToWHDet
     End Sub
 
     Private Sub LEPLCategory_EditValueChanged(sender As Object, e As EventArgs) Handles LEPLCategory.EditValueChanged
-        If (Not LEPLCategory.EditValue = LEPLCategory.OldEditValue) And is_use_qc_report = "1" Then
-            If GVBarcode.RowCount > 0 Then
-                Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("This action will be reset your scanned list, are you sure want to continue this action?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
-                If confirm = Windows.Forms.DialogResult.Yes Then
-                    viewDetail()
-                    view_barcode_list()
-                Else
-                    LEPLCategory.EditValue = LEPLCategory.OldEditValue
-                End If
-            End If
-        End If
+        viewPLCatSub()
+        'If (Not LEPLCategory.EditValue = LEPLCategory.OldEditValue) And is_use_qc_report = "1" Then
+        '    If GVBarcode.RowCount > 0 Then
+        '        Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("This action will be reset your scanned list, are you sure want to continue this action?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+        '        If confirm = Windows.Forms.DialogResult.Yes Then
+        '            viewDetail()
+        '            view_barcode_list()
+        '        Else
+        '            LEPLCategory.EditValue = LEPLCategory.OldEditValue
+        '        End If
+        '    End If
+        'End If
     End Sub
 
     Private Sub ExportToExcel(ByVal dtTemp As DevExpress.XtraGrid.Views.Grid.GridView, ByVal filepath As String, show_msg As Boolean)

@@ -115,6 +115,8 @@ Partial Class FormProductionPLToWHDet
         Me.BStop = New DevExpress.XtraEditors.SimpleButton()
         Me.BScan = New DevExpress.XtraEditors.SimpleButton()
         Me.EPRet = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.LabelControl11 = New DevExpress.XtraEditors.LabelControl()
+        Me.LECLaim = New DevExpress.XtraEditors.LookUpEdit()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
         CType(Me.PanelControlTopMain, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -163,6 +165,7 @@ Partial Class FormProductionPLToWHDet
         Me.PanelNavBarcode.SuspendLayout()
         CType(Me.TxtDeleteScan.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EPRet, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LECLaim.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupGeneralHeader
@@ -462,6 +465,8 @@ Partial Class FormProductionPLToWHDet
         'PanelControlTopRight
         '
         Me.PanelControlTopRight.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelControlTopRight.Controls.Add(Me.LabelControl11)
+        Me.PanelControlTopRight.Controls.Add(Me.LECLaim)
         Me.PanelControlTopRight.Controls.Add(Me.LEPLCategory)
         Me.PanelControlTopRight.Controls.Add(Me.LabelControl8)
         Me.PanelControlTopRight.Controls.Add(Me.LabelControl5)
@@ -477,7 +482,7 @@ Partial Class FormProductionPLToWHDet
         '
         'LEPLCategory
         '
-        Me.LEPLCategory.Location = New System.Drawing.Point(123, 59)
+        Me.LEPLCategory.Location = New System.Drawing.Point(90, 59)
         Me.LEPLCategory.Name = "LEPLCategory"
         Me.LEPLCategory.Properties.Appearance.Options.UseTextOptions = True
         Me.LEPLCategory.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near
@@ -485,7 +490,7 @@ Partial Class FormProductionPLToWHDet
         Me.LEPLCategory.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_pl_category", "Id  PL Category", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("pl_category", "PL Category")})
         Me.LEPLCategory.Properties.NullText = ""
         Me.LEPLCategory.Properties.ShowFooter = False
-        Me.LEPLCategory.Size = New System.Drawing.Size(144, 20)
+        Me.LEPLCategory.Size = New System.Drawing.Size(173, 20)
         Me.LEPLCategory.TabIndex = 4
         '
         'LabelControl8
@@ -502,18 +507,18 @@ Partial Class FormProductionPLToWHDet
         Me.LabelControl5.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelControl5.Location = New System.Drawing.Point(10, 36)
         Me.LabelControl5.Name = "LabelControl5"
-        Me.LabelControl5.Size = New System.Drawing.Size(95, 13)
+        Me.LabelControl5.Size = New System.Drawing.Size(37, 13)
         Me.LabelControl5.TabIndex = 155
-        Me.LabelControl5.Text = "Packing List Number"
+        Me.LabelControl5.Text = "Number"
         '
         'TxtRetOutNumber
         '
         Me.TxtRetOutNumber.EditValue = ""
-        Me.TxtRetOutNumber.Location = New System.Drawing.Point(123, 33)
+        Me.TxtRetOutNumber.Location = New System.Drawing.Point(90, 33)
         Me.TxtRetOutNumber.Name = "TxtRetOutNumber"
         Me.TxtRetOutNumber.Properties.EditValueChangedDelay = 1
         Me.TxtRetOutNumber.Properties.ReadOnly = True
-        Me.TxtRetOutNumber.Size = New System.Drawing.Size(144, 20)
+        Me.TxtRetOutNumber.Size = New System.Drawing.Size(173, 20)
         Me.TxtRetOutNumber.TabIndex = 8
         Me.TxtRetOutNumber.TabStop = False
         '
@@ -529,11 +534,11 @@ Partial Class FormProductionPLToWHDet
         'DERet
         '
         Me.DERet.EditValue = ""
-        Me.DERet.Location = New System.Drawing.Point(123, 9)
+        Me.DERet.Location = New System.Drawing.Point(90, 9)
         Me.DERet.Name = "DERet"
         Me.DERet.Properties.EditValueChangedDelay = 1
         Me.DERet.Properties.ReadOnly = True
-        Me.DERet.Size = New System.Drawing.Size(144, 20)
+        Me.DERet.Size = New System.Drawing.Size(173, 20)
         Me.DERet.TabIndex = 162
         Me.DERet.TabStop = False
         '
@@ -542,7 +547,7 @@ Partial Class FormProductionPLToWHDet
         Me.BtnBrowsePO.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnBrowsePO.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnBrowsePO.Appearance.Options.UseFont = True
-        Me.BtnBrowsePO.Location = New System.Drawing.Point(6, 84)
+        Me.BtnBrowsePO.Location = New System.Drawing.Point(6, 113)
         Me.BtnBrowsePO.Name = "BtnBrowsePO"
         Me.BtnBrowsePO.Size = New System.Drawing.Size(23, 20)
         Me.BtnBrowsePO.TabIndex = 2
@@ -1217,6 +1222,30 @@ Partial Class FormProductionPLToWHDet
         '
         Me.EPRet.ContainerControl = Me
         '
+        'LabelControl11
+        '
+        Me.LabelControl11.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl11.Location = New System.Drawing.Point(10, 88)
+        Me.LabelControl11.Name = "LabelControl11"
+        Me.LabelControl11.Size = New System.Drawing.Size(25, 13)
+        Me.LabelControl11.TabIndex = 10011
+        Me.LabelControl11.Text = "Claim"
+        '
+        'LECLaim
+        '
+        Me.LECLaim.Location = New System.Drawing.Point(90, 85)
+        Me.LECLaim.Name = "LECLaim"
+        Me.LECLaim.Properties.Appearance.Options.UseTextOptions = True
+        Me.LECLaim.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near
+        Me.LECLaim.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.White
+        Me.LECLaim.Properties.AppearanceDisabled.Options.UseBackColor = True
+        Me.LECLaim.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.LECLaim.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_pl_category_sub", "Id  PL Category", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("pl_category_sub", "Claim")})
+        Me.LECLaim.Properties.NullText = ""
+        Me.LECLaim.Properties.ShowFooter = False
+        Me.LECLaim.Size = New System.Drawing.Size(173, 20)
+        Me.LECLaim.TabIndex = 10010
+        '
         'FormProductionPLToWHDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1285,6 +1314,7 @@ Partial Class FormProductionPLToWHDet
         Me.PanelNavBarcode.PerformLayout()
         CType(Me.TxtDeleteScan.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EPRet, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LECLaim.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1382,4 +1412,6 @@ Partial Class FormProductionPLToWHDet
     Friend WithEvents GridColumnLimitQty As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents TxtDeleteScan As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelDelScan As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LabelControl11 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LECLaim As DevExpress.XtraEditors.LookUpEdit
 End Class

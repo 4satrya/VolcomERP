@@ -77,6 +77,7 @@ Partial Class FormProductionPLToWH
         Me.ColSize = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ToolTipControllerNew = New DevExpress.Utils.ToolTipController(Me.components)
         Me.GridColumnis_use_qc_report = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnpl_category_sub = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XTCPL, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCPL.SuspendLayout()
         Me.XTPPList.SuspendLayout()
@@ -126,7 +127,7 @@ Partial Class FormProductionPLToWH
         '
         'GVPL
         '
-        Me.GVPL.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumnIdPLSample, Me.GridColumnIdContactFrom, Me.GridColumnIdCompContactTo, Me.GridColumn1, Me.GridColumnPLNumber, Me.GridColumnSRNumber, Me.GridColumnFrom, Me.GridColumnTo, Me.GridColumnPLDate, Me.GridColumnPLNote, Me.GridColumnSeasno, Me.GridColumnStatus, Me.GridColumnPLCategory, Me.GridColumnPDAlloc, Me.GridColumnDesignCode, Me.GridColumnDesignName, Me.GridColumnTotal})
+        Me.GVPL.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumnIdPLSample, Me.GridColumnIdContactFrom, Me.GridColumnIdCompContactTo, Me.GridColumn1, Me.GridColumnPLNumber, Me.GridColumnSRNumber, Me.GridColumnFrom, Me.GridColumnTo, Me.GridColumnPLDate, Me.GridColumnPLNote, Me.GridColumnSeasno, Me.GridColumnStatus, Me.GridColumnPLCategory, Me.GridColumnPDAlloc, Me.GridColumnDesignCode, Me.GridColumnDesignName, Me.GridColumnTotal, Me.GridColumnpl_category_sub})
         Me.GVPL.GridControl = Me.GCPL
         Me.GVPL.GroupCount = 1
         Me.GVPL.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total", Me.GridColumnTotal, "{0:n0}")})
@@ -242,7 +243,7 @@ Partial Class FormProductionPLToWH
         Me.GridColumnStatus.FieldName = "report_status"
         Me.GridColumnStatus.Name = "GridColumnStatus"
         Me.GridColumnStatus.Visible = True
-        Me.GridColumnStatus.VisibleIndex = 9
+        Me.GridColumnStatus.VisibleIndex = 10
         Me.GridColumnStatus.Width = 50
         '
         'GridColumnPLCategory
@@ -636,6 +637,15 @@ Partial Class FormProductionPLToWH
         Me.GridColumnis_use_qc_report.Name = "GridColumnis_use_qc_report"
         Me.GridColumnis_use_qc_report.OptionsColumn.AllowEdit = False
         '
+        'GridColumnpl_category_sub
+        '
+        Me.GridColumnpl_category_sub.Caption = "Claim"
+        Me.GridColumnpl_category_sub.FieldName = "pl_category_sub"
+        Me.GridColumnpl_category_sub.Name = "GridColumnpl_category_sub"
+        Me.GridColumnpl_category_sub.OptionsColumn.AllowEdit = False
+        Me.GridColumnpl_category_sub.Visible = True
+        Me.GridColumnpl_category_sub.VisibleIndex = 9
+        '
         'FormProductionPLToWH
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -726,4 +736,5 @@ Partial Class FormProductionPLToWH
     Friend WithEvents GridColumnDesignName As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnTotal As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnis_use_qc_report As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnpl_category_sub As DevExpress.XtraGrid.Columns.GridColumn
 End Class

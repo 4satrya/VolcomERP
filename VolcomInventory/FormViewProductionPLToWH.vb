@@ -24,6 +24,7 @@
     Public data_code As DataTable
     Dim myListOfDogs As New List(Of String)
     Public dt As New DataTable
+    Public is_use_qc_report As String = "-1"
 
 
     Public Class FileRecord
@@ -34,7 +35,13 @@
     Private Sub FormViewProductionPLToWH_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         viewReportStatus() 'get report status
         viewPLCat()
+        viewPLCatSub()
         actionLoad()
+
+        If is_use_qc_report = "2" Then
+            LECLaim.Visible = False
+            LabelControl11.Visible = False
+        End If
     End Sub
 
     Private Sub FormViewProductionPLToWH_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
@@ -49,10 +56,10 @@
 
         'View data
         Try
-            Dim query As String = "SELECT alloc.pd_alloc, a.id_pl_category, h.design_name, h.id_sample, DATE_FORMAT(a.pl_prod_order_date,'%Y-%m-%d') as pl_prod_order_datex, a.id_report_status, a.id_prod_order, a.id_pl_prod_order, a.pl_prod_order_date, "
+            Dim query As String = "SELECT alloc.pd_alloc, a.id_pl_category, IFNULL(a.id_pl_category_sub,0) AS `id_pl_category_sub`, h.design_name, h.id_sample, DATE_FORMAT(a.pl_prod_order_date,'%Y-%m-%d') as pl_prod_order_datex, a.id_report_status, a.id_prod_order, a.id_pl_prod_order, a.pl_prod_order_date, "
             query += "a.pl_prod_order_note, a.pl_prod_order_number,  "
             query += "g.id_design,b.prod_order_number, (c.id_comp_contact) AS id_comp_contact_from, (d.comp_name) AS comp_name_contact_from, (d.comp_number) AS comp_code_contact_from, (d.address_primary) AS comp_address_contact_from, "
-            query += "(e.id_comp_contact) AS id_comp_contact_to, (f.comp_name) AS comp_name_contact_to, (f.comp_number) AS comp_code_contact_to,(f.address_primary) AS comp_address_contact_to "
+            query += "(e.id_comp_contact) AS id_comp_contact_to, (f.comp_name) AS comp_name_contact_to, (f.comp_number) AS comp_code_contact_to,(f.address_primary) AS comp_address_contact_to, b.is_use_qc_report "
             query += "FROM tb_pl_prod_order a "
             query += "INNER JOIN tb_prod_order b ON a.id_prod_order = b.id_prod_order "
             query += "INNER JOIN tb_m_comp_contact c ON a.id_comp_contact_from = c.id_comp_contact "
@@ -79,14 +86,16 @@
             MENote.Text = data.Rows(0)("pl_prod_order_note").ToString
             LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", data.Rows(0)("id_report_status").ToString)
             LEPLCategory.ItemIndex = LEPLCategory.Properties.GetDataSourceRowIndex("id_pl_category", data.Rows(0)("id_pl_category").ToString)
+            LECLaim.ItemIndex = LECLaim.Properties.GetDataSourceRowIndex("id_pl_category_sub", data.Rows(0)("id_pl_category_sub").ToString)
             id_report_status = data.Rows(0)("id_report_status").ToString
             id_prod_order = data.Rows(0)("id_prod_order").ToString
             id_design = data.Rows(0)("id_design").ToString
+            is_use_qc_report = data.Rows(0)("is_use_qc_report").ToString
             pre_viewImages("2", PEView, id_design, False)
             TEDesign.Text = data.Rows(0)("design_name").ToString
             PEView.Enabled = True
         Catch ex As Exception
-            errorConnection()
+            stopCustom(ex.ToString)
         End Try
         view_barcode_list()
         viewDetail()
@@ -98,6 +107,7 @@
         MENote.Properties.ReadOnly = True
         DERet.Properties.ReadOnly = True
         LEPLCategory.Enabled = False
+        LECLaim.Enabled = False
         BtnAttachment.Enabled = True
         TxtRetOutNumber.Focus()
     End Sub
@@ -155,7 +165,17 @@
         viewLookupQuery(LEPLCategory, query, 0, "pl_category", "id_pl_category")
     End Sub
 
-   
+    'View PL Claim
+    Sub viewPLCatSub()
+        Dim id_cat As String = "-1"
+        Try
+            id_cat = LEPLCategory.EditValue.ToString
+        Catch ex As Exception
+        End Try
+        Dim query As String = "SELECT * FROM tb_lookup_pl_category_sub a WHERE a.id_pl_category='" + id_cat + "' ORDER BY a.id_pl_category_sub ASC  "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        viewLookupQuery(LECLaim, query, 0, "pl_category_sub", "id_pl_category_sub")
+    End Sub
 
     Sub deleteDetailBc(ByVal id_prod_order_det As String)
        
@@ -340,6 +360,10 @@
         FormDocumentUpload.report_mark_type = "33"
         FormDocumentUpload.ShowDialog()
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub LEPLCategory_EditValueChanged(sender As Object, e As EventArgs) Handles LEPLCategory.EditValueChanged
+        viewPLCatSub()
     End Sub
 
     Private Sub GVRetDetail_FocusedRowChanged(ByVal sender As System.Object, ByVal e As DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs) Handles GVRetDetail.FocusedRowChanged

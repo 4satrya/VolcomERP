@@ -29,7 +29,7 @@ Public Class FormProductionPLToWHDet
     Public data_code As DataTable
     Dim myListOfDogs As New List(Of String)
     Public dt As New DataTable
-    Dim is_use_qc_report As String = "-1"
+    Public is_use_qc_report As String = "-1"
 
     Public Class FileRecord
         Public Id As String
@@ -42,6 +42,11 @@ Public Class FormProductionPLToWHDet
         viewPLCatSub()
         viewPDAlloc()
         actionLoad()
+
+        If is_use_qc_report = "2" Then
+            LECLaim.Visible = False
+            LabelControl11.Visible = False
+        End If
     End Sub
 
     Sub viewPDAlloc()
@@ -106,10 +111,10 @@ Public Class FormProductionPLToWHDet
             'View data
             BMark.Enabled = True
             Try
-                Dim query As String = "SELECT a.id_pl_category, (h.design_display_name) AS `design_name`, h.id_sample, h.id_season, DATE_FORMAT(a.pl_prod_order_date,'%Y-%m-%d') as pl_prod_order_datex, a.id_report_status, a.id_prod_order, a.id_pl_prod_order, a.pl_prod_order_date, "
+                Dim query As String = "SELECT a.id_pl_category, IFNULL(a.id_pl_category_sub,0) AS `id_pl_category_sub`, (h.design_display_name) AS `design_name`, h.id_sample, h.id_season, DATE_FORMAT(a.pl_prod_order_date,'%Y-%m-%d') as pl_prod_order_datex, a.id_report_status, a.id_prod_order, a.id_pl_prod_order, a.pl_prod_order_date, "
                 query += "a.pl_prod_order_note, a.pl_prod_order_number,  "
                 query += "b.prod_order_number, (c.id_comp_contact) AS id_comp_contact_from, (d.comp_name) AS comp_name_contact_from, (d.comp_number) AS comp_code_contact_from, (d.address_primary) AS comp_address_contact_from, "
-                query += "g.id_design,(e.id_comp_contact) AS id_comp_contact_to, (f.comp_name) AS comp_name_contact_to, (f.comp_number) AS comp_code_contact_to,(f.address_primary) AS comp_address_contact_to, a.id_pd_alloc, ho.id_ho_type, ho.ho_type "
+                query += "g.id_design,(e.id_comp_contact) AS id_comp_contact_to, (f.comp_name) AS comp_name_contact_to, (f.comp_number) AS comp_code_contact_to,(f.address_primary) AS comp_address_contact_to, a.id_pd_alloc, ho.id_ho_type, ho.ho_type, b.is_use_qc_report "
                 query += "FROM tb_pl_prod_order a "
                 query += "INNER JOIN tb_prod_order b ON a.id_prod_order = b.id_prod_order "
                 query += "INNER JOIN tb_m_comp_contact c ON a.id_comp_contact_from = c.id_comp_contact "
@@ -136,12 +141,14 @@ Public Class FormProductionPLToWHDet
                 MENote.Text = data.Rows(0)("pl_prod_order_note").ToString
                 LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", data.Rows(0)("id_report_status").ToString)
                 LEPLCategory.ItemIndex = LEPLCategory.Properties.GetDataSourceRowIndex("id_pl_category", data.Rows(0)("id_pl_category").ToString)
+                LECLaim.ItemIndex = LECLaim.Properties.GetDataSourceRowIndex("id_pl_category_sub", data.Rows(0)("id_pl_category_sub").ToString)
                 id_report_status = data.Rows(0)("id_report_status").ToString
                 id_prod_order = data.Rows(0)("id_prod_order").ToString
                 id_design = data.Rows(0)("id_design").ToString
                 pre_viewImages("2", PEView, id_design, False)
                 TEDesign.Text = data.Rows(0)("design_name").ToString
                 id_season = data.Rows(0)("id_season").ToString
+                is_use_qc_report = data.Rows(0)("is_use_qc_report").ToString
                 PEView.Enabled = True
                 mainVendor()
             Catch ex As Exception
@@ -184,7 +191,7 @@ Public Class FormProductionPLToWHDet
             BtnEdit.Enabled = True
             BtnDel.Enabled = True
             MENote.Properties.ReadOnly = False
-            BtnSave.Enabled = False
+            BtnSave.Enabled = True
             BScan.Enabled = True
             BDelete.Enabled = True
             BtnInfoSrs.Enabled = True
@@ -310,44 +317,44 @@ Public Class FormProductionPLToWHDet
     Sub viewDetail()
         If action = "ins" Then
             'UPDATED 22 DECEMBER 2014
-            Dim query As String = ""
-            If is_use_qc_report = "1" Then
-                'berdasarkan QC Report
-                query = "SELECT 0.00 AS ovh_price,u.uom, pod.id_prod_order,pod.id_prod_order_det,pod.id_prod_demand_product,
-                p.id_product,p.product_full_code AS `code`, p.product_ean_code as ean_code,p.product_name as name, cd.id_code_detail AS `id_size`, cd.code_detail_name AS `size`,'' AS `color`,
-                del.delivery, (ss.season) AS season, (ss.season_printed_name) AS season_display,
-                '' AS `Product Division`, '' AS category,
-                pdd.prod_demand_design_propose_price,
-                p.id_design, d.design_name, d.design_display_name,
-                (pdd.prod_demand_design_estimate_price) AS estimate_cost, 0 as qty,
-                0 AS `jum_alloc`,0 AS `jum_alloc_real`,0 AS `jum_alloc_allow`,
-                0 as qty_pl, 0 as total_cost,
-                CONCAT_WS('-', k.range_awal, k.range_akhir) AS range_qty, 0 AS id_pl_prod_order_det, 0 AS pl_prod_order_det_qty, 
-                '' AS `pl_prod_order_det_note`,
-                ('0') AS id_prod_order_ret_out_det, (0.00) AS prod_order_ret_out_det_qty, ('') AS prod_order_ret_out_det_note,
-                0 AS `qty_sel`, '' AS `info`, 0 AS `limit_qty`
-                FROM tb_prod_order po
-                INNER JOIN tb_prod_order_det pod ON pod.id_prod_order = po.id_prod_order
-                INNER JOIN tb_prod_demand_product pdp ON pdp.id_prod_demand_product = pod.id_prod_demand_product
-                INNER JOIN tb_prod_demand_design pdd ON pdd.id_prod_demand_design = pdp.id_prod_demand_design
-                INNER JOIN tb_m_product p ON p.id_product = pdp.id_product
-                INNER JOIN tb_m_product_code pc ON pc.id_product = p.id_product
-                INNER JOIN tb_m_code_detail cd ON cd.id_code_detail = pc.id_code_detail
-                INNER JOIN tb_m_design d ON d.id_design = p.id_design
-                INNER JOIN tb_m_uom u ON u.id_uom = d.id_uom
-                INNER JOIN tb_season_delivery del ON del.id_delivery = po.id_delivery
-                INNER JOIN tb_season ss ON ss.id_season = del.id_season
-                LEFT JOIN(
-	                SELECT  k1.id_product, k1.id_prod_order_det, MIN(k1.range_awal) AS range_awal, MAX(k1.range_akhir) AS range_akhir 
-	                FROM tb_m_product_range k1
-	                INNER JOIN tb_prod_order_det k2 ON k1.id_prod_order_det = k2.id_prod_order_det AND k2.id_prod_order=" + id_prod_order + "
-	                GROUP BY k1.id_product
-                ) k ON k.id_product = p.id_product
-                WHERE po.id_prod_order=" + id_prod_order + " AND po.id_report_status=6 "
-            Else
-                'berdasarkan PL
-                query = "CALL view_stock_prod_rec('" + id_prod_order + "', '0', '0', '0', '" + id_pl_prod_order + "','0', '" + LEPDAlloc.EditValue.ToString + "')"
-            End If
+            Dim query As String = "CALL view_stock_prod_rec('" + id_prod_order + "', '0', '0', '0', '" + id_pl_prod_order + "','0', '" + LEPDAlloc.EditValue.ToString + "')"
+            'If is_use_qc_report = "1" Then
+            '    'berdasarkan QC Report
+            '    query = "SELECT 0.00 AS ovh_price,u.uom, pod.id_prod_order,pod.id_prod_order_det,pod.id_prod_demand_product,
+            '    p.id_product,p.product_full_code AS `code`, p.product_ean_code as ean_code,p.product_name as name, cd.id_code_detail AS `id_size`, cd.code_detail_name AS `size`,'' AS `color`,
+            '    del.delivery, (ss.season) AS season, (ss.season_printed_name) AS season_display,
+            '    '' AS `Product Division`, '' AS category,
+            '    pdd.prod_demand_design_propose_price,
+            '    p.id_design, d.design_name, d.design_display_name,
+            '    (pdd.prod_demand_design_estimate_price) AS estimate_cost, 0 as qty,
+            '    0 AS `jum_alloc`,0 AS `jum_alloc_real`,0 AS `jum_alloc_allow`,
+            '    0 as qty_pl, 0 as total_cost,
+            '    CONCAT_WS('-', k.range_awal, k.range_akhir) AS range_qty, 0 AS id_pl_prod_order_det, 0 AS pl_prod_order_det_qty, 
+            '    '' AS `pl_prod_order_det_note`,
+            '    ('0') AS id_prod_order_ret_out_det, (0.00) AS prod_order_ret_out_det_qty, ('') AS prod_order_ret_out_det_note,
+            '    0 AS `qty_sel`, '' AS `info`, 0 AS `limit_qty`
+            '    FROM tb_prod_order po
+            '    INNER JOIN tb_prod_order_det pod ON pod.id_prod_order = po.id_prod_order
+            '    INNER JOIN tb_prod_demand_product pdp ON pdp.id_prod_demand_product = pod.id_prod_demand_product
+            '    INNER JOIN tb_prod_demand_design pdd ON pdd.id_prod_demand_design = pdp.id_prod_demand_design
+            '    INNER JOIN tb_m_product p ON p.id_product = pdp.id_product
+            '    INNER JOIN tb_m_product_code pc ON pc.id_product = p.id_product
+            '    INNER JOIN tb_m_code_detail cd ON cd.id_code_detail = pc.id_code_detail
+            '    INNER JOIN tb_m_design d ON d.id_design = p.id_design
+            '    INNER JOIN tb_m_uom u ON u.id_uom = d.id_uom
+            '    INNER JOIN tb_season_delivery del ON del.id_delivery = po.id_delivery
+            '    INNER JOIN tb_season ss ON ss.id_season = del.id_season
+            '    LEFT JOIN(
+            '     SELECT  k1.id_product, k1.id_prod_order_det, MIN(k1.range_awal) AS range_awal, MAX(k1.range_akhir) AS range_akhir 
+            '     FROM tb_m_product_range k1
+            '     INNER JOIN tb_prod_order_det k2 ON k1.id_prod_order_det = k2.id_prod_order_det AND k2.id_prod_order=" + id_prod_order + "
+            '     GROUP BY k1.id_product
+            '    ) k ON k.id_product = p.id_product
+            '    WHERE po.id_prod_order=" + id_prod_order + " AND po.id_report_status=6 "
+            'Else
+            '    'berdasarkan PL
+            '    query = "CALL view_stock_prod_rec('" + id_prod_order + "', '0', '0', '0', '" + id_pl_prod_order + "','0', '" + LEPDAlloc.EditValue.ToString + "')"
+            'End If
             Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
             For i As Integer = 0 To (data.Rows.Count - 1)
                 id_prod_order_det_list.Add(data.Rows(i)("id_prod_order_det").ToString)
@@ -417,16 +424,14 @@ Public Class FormProductionPLToWHDet
 
     'View PL Claim
     Sub viewPLCatSub()
-        If is_use_qc_report = "1" Then
-            Dim id_cat As String = "-1"
-            Try
-                id_cat = LEPLCategory.EditValue.ToString
-            Catch ex As Exception
-            End Try
-            Dim query As String = "SELECT * FROM tb_lookup_pl_category_sub a WHERE a.id_pl_category='" + id_cat + "' ORDER BY a.id_pl_category_sub ASC  "
-            Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
-            viewLookupQuery(LECLaim, query, 0, "pl_category_sub", "id_pl_category_sub")
-        End If
+        Dim id_cat As String = "-1"
+        Try
+            id_cat = LEPLCategory.EditValue.ToString
+        Catch ex As Exception
+        End Try
+        Dim query As String = "SELECT * FROM tb_lookup_pl_category_sub a WHERE a.id_pl_category='" + id_cat + "' ORDER BY a.id_pl_category_sub ASC  "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        viewLookupQuery(LECLaim, query, 0, "pl_category_sub", "id_pl_category_sub")
     End Sub
 
     'Button
@@ -508,6 +513,8 @@ Public Class FormProductionPLToWHDet
             Dim id_pl_category_sub As String = "NULL"
             If is_use_qc_report = "1" Then
                 id_pl_category_sub = LECLaim.EditValue.ToString
+            Else
+                id_pl_category_sub = "NULL"
             End If
             Dim id_pd_alloc As String = LEPDAlloc.EditValue.ToString
             If action = "ins" Then
@@ -829,29 +836,29 @@ Public Class FormProductionPLToWHDet
 
     Sub getLimitQty()
         Cursor = Cursors.WaitCursor
-        Dim query As String = ""
-        If is_use_qc_report = "1" Then
-            query = "SELECT pod.id_prod_order_det, IFNULL(f.qty_fc,0) AS `qty_fc`, IFNULL(pl.qty_pl,0) AS `qty_pl`,
-            (IFNULL(f.qty_fc,0) - IFNULL(pl.qty_pl,0)) AS `qty`
-            FROM tb_prod_order_det pod
-            LEFT JOIN (
-	            SELECT fd.id_prod_order_det, SUM(fd.prod_fc_det_qty) AS `qty_fc`
-	            FROM tb_prod_fc f
-	            INNER JOIN tb_prod_fc_det fd ON fd.id_prod_fc = f.id_prod_fc
-	            WHERE f.id_report_status=6 AND f.id_prod_order=" + id_prod_order + " AND f.id_pl_category=" + LEPLCategory.EditValue.ToString + "
-	            GROUP BY fd.id_prod_order_det
-            ) f ON f.id_prod_order_det = pod.id_prod_order_det
-            LEFT JOIN (
-	            SELECT  pld.id_prod_order_det, SUM(pld.pl_prod_order_det_qty) AS `qty_pl`
-	            FROM tb_pl_prod_order pl
-	            INNER JOIN tb_pl_prod_order_det pld ON pld.id_pl_prod_order = pl.id_pl_prod_order
-	            WHERE pl.id_report_status!=5 AND pl.id_prod_order=" + id_prod_order + " AND pl.id_pl_category=" + LEPLCategory.EditValue.ToString + "
-	            GROUP BY pld.id_prod_order_det
-            ) pl ON pl.id_prod_order_det = pod.id_prod_order_det
-            WHERE pod.id_prod_order=" + id_prod_order + " "
-        Else
-            query = "CALL view_stock_prod_rec('" + id_prod_order + "', '0', '0', '0', '" + id_pl_prod_order + "','0', '" + LEPDAlloc.EditValue.ToString + "')"
-        End If
+        Dim query As String = "CALL view_stock_prod_rec('" + id_prod_order + "', '0', '0', '0', '" + id_pl_prod_order + "','0', '" + LEPDAlloc.EditValue.ToString + "')"
+        'If is_use_qc_report = "1" Then
+        '    query = "SELECT pod.id_prod_order_det, IFNULL(f.qty_fc,0) AS `qty_fc`, IFNULL(pl.qty_pl,0) AS `qty_pl`,
+        '    (IFNULL(f.qty_fc,0) - IFNULL(pl.qty_pl,0)) AS `qty`
+        '    FROM tb_prod_order_det pod
+        '    LEFT JOIN (
+        '     SELECT fd.id_prod_order_det, SUM(fd.prod_fc_det_qty) AS `qty_fc`
+        '     FROM tb_prod_fc f
+        '     INNER JOIN tb_prod_fc_det fd ON fd.id_prod_fc = f.id_prod_fc
+        '     WHERE f.id_report_status=6 AND f.id_prod_order=" + id_prod_order + " AND f.id_pl_category=" + LEPLCategory.EditValue.ToString + "
+        '     GROUP BY fd.id_prod_order_det
+        '    ) f ON f.id_prod_order_det = pod.id_prod_order_det
+        '    LEFT JOIN (
+        '     SELECT  pld.id_prod_order_det, SUM(pld.pl_prod_order_det_qty) AS `qty_pl`
+        '     FROM tb_pl_prod_order pl
+        '     INNER JOIN tb_pl_prod_order_det pld ON pld.id_pl_prod_order = pl.id_pl_prod_order
+        '     WHERE pl.id_report_status!=5 AND pl.id_prod_order=" + id_prod_order + " AND pl.id_pl_category=" + LEPLCategory.EditValue.ToString + "
+        '     GROUP BY pld.id_prod_order_det
+        '    ) pl ON pl.id_prod_order_det = pod.id_prod_order_det
+        '    WHERE pod.id_prod_order=" + id_prod_order + " "
+        'Else
+        '    query = "CALL view_stock_prod_rec('" + id_prod_order + "', '0', '0', '0', '" + id_pl_prod_order + "','0', '" + LEPDAlloc.EditValue.ToString + "')"
+        'End If
         Dim dt_cek As DataTable = execute_query(query, -1, True, "", "", "", "")
         For i As Integer = 0 To ((GVRetDetail.RowCount - 1) - GetGroupRowCount(GVRetDetail))
             Dim id_prod_order_det_cekya As String = GVRetDetail.GetRowCellValue(i, "id_prod_order_det").ToString

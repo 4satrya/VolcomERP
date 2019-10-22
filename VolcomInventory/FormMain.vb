@@ -1123,6 +1123,7 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
                 If FormProductionPLToWH.GVProd.RowCount > 0 And FormProductionPLToWH.GVProd.FocusedRowHandle >= 0 Then
                     Dim is_use_qc_report As String = FormProductionPLToWH.GVProd.GetFocusedRowCellValue("is_use_qc_report").ToString
                     If is_use_qc_report = "1" Then
+                        FormProductionPLToWHDet.is_use_qc_report = is_use_qc_report
                         FormProductionPLToWHDet.action = "ins"
                         FormProductionPLToWHDet.id_pl_prod_order = "0"
                         FormProductionPLToWHDet.id_prod_order = FormProductionPLToWH.GVProd.GetFocusedRowCellValue("id_prod_order").ToString

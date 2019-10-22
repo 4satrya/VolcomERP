@@ -27,7 +27,7 @@
     'View Data
     'View Packing List
     Sub viewPL()
-        Dim query As String = "SELECT ssd.id_season, ssd.season, k.pl_category, i.prod_order_number, dsg.design_code AS `code`, dsg.design_display_name AS `name`, a.id_pl_prod_order ,a.id_comp_contact_from , a.id_comp_contact_to, a.pl_prod_order_note, a.pl_prod_order_number, "
+        Dim query As String = "SELECT ssd.id_season, ssd.season, k.pl_category, sub.pl_category_sub, i.prod_order_number, dsg.design_code AS `code`, dsg.design_display_name AS `name`, a.id_pl_prod_order ,a.id_comp_contact_from , a.id_comp_contact_to, a.pl_prod_order_note, a.pl_prod_order_number, "
         query += "CONCAT(d.comp_number,' - ',d.comp_name) AS comp_name_from, CONCAT(f.comp_number,' - ',f.comp_name) AS comp_name_to, h.report_status, a.id_report_status, "
         query += "pl_prod_order_date, a.id_pd_alloc, pd_alloc.pd_alloc, det.total "
         query += "FROM tb_pl_prod_order a "
@@ -40,6 +40,7 @@
         INNER JOIN tb_prod_demand_design pd_dsg ON pd_dsg.id_prod_demand_design = i.id_prod_demand_design
         INNER JOIN tb_m_design dsg ON dsg.id_design = pd_dsg.id_design "
         query += "INNER JOIN tb_lookup_pl_category k ON k.id_pl_category = a.id_pl_category "
+        query += "LEFT JOIN tb_lookup_pl_category_sub sub ON sub.id_pl_category_sub = a.id_pl_category_sub "
         query += "LEFT JOIN tb_lookup_pd_alloc pd_alloc ON pd_alloc.id_pd_alloc = a.id_pd_alloc "
         query += "INNER JOIN tb_season_delivery del ON del.id_delivery = i.id_delivery "
         query += "INNER JOIN tb_season ss ON ss.id_season = del.id_season 

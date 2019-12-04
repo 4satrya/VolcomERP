@@ -29,7 +29,7 @@
 
         Try
             If Not DateEditTo.EditValue.ToString = "" Then
-                where_date_to = "AND fc.prod_fc_date <= '" + Date.Parse(DateEditFrom.EditValue.ToString).ToString("yyyy-MM-dd") + "'"
+                where_date_to = "AND fc.prod_fc_date <= '" + Date.Parse(DateEditTo.EditValue.ToString).ToString("yyyy-MM-dd") + "'"
             End If
         Catch ex As Exception
         End Try

@@ -28,6 +28,10 @@
                 FormSalesOrderReport.id_design_all_order = data.Rows("0")("id_design").ToString
                 FormSalesOrderReport.TxtProductSO.Text = data.Rows("0")("code").ToString + " - " + data.Rows("0")("name").ToString
                 Close()
+            ElseIf id_pop_up = "3" Then
+                FormStockQC.id_dsg = data.Rows("0")("id_design").ToString
+                FormStockQC.TxtProduct.Text = data.Rows("0")("code").ToString + " - " + data.Rows("0")("name").ToString
+                Close()
             End If
         Else
             stopCustom("Product not found")

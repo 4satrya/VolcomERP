@@ -18,6 +18,8 @@
         DEUntil.EditValue = data_dt.Rows(0)("dt")
         DEFromDetail.EditValue = data_dt.Rows(0)("dt")
         DEUntilDetail.EditValue = data_dt.Rows(0)("dt")
+        DEUpdatedFrom.EditValue = data_dt.Rows(0)("dt")
+        DEUpdatedUntil.EditValue = data_dt.Rows(0)("dt")
         viewComp()
         viewCompGroup()
     End Sub
@@ -236,23 +238,37 @@
 
     Private Sub BtnViewDetail_Click(sender As Object, e As EventArgs) Handles BtnViewDetail.Click
         viewRmtDetail()
-        viewDetail()
+        viewDetail("1")
     End Sub
 
-    Sub viewDetail()
+    Sub viewDetail(ByVal type_par As String)
         Cursor = Cursors.WaitCursor
-        'Prepare paramater
+        'Prepare paramater date
+        Dim cond_date As String = ""
         Dim date_from_selected As String = "0000-01-01"
         Dim date_until_selected As String = "9999-01-01"
         Try
             date_from_selected = DateTime.Parse(DEFromDetail.EditValue.ToString).ToString("yyyy-MM-dd")
         Catch ex As Exception
         End Try
-
         Try
             date_until_selected = DateTime.Parse(DEUntilDetail.EditValue.ToString).ToString("yyyy-MM-dd")
         Catch ex As Exception
         End Try
+        If type_par = "1" Then
+            cond_date = "AND (so.sales_order_date>='" + date_from_selected + "' AND so.sales_order_date<='" + date_until_selected + "') "
+        End If
+        Dim upd_date_from_selected As String = "0000-01-01"
+        Dim upd_date_until_selected As String = "9999-01-01"
+        Try
+            upd_date_from_selected = DateTime.Parse(DEUpdatedFrom.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+        Try
+            upd_date_until_selected = DateTime.Parse(DEUpdatedUntil.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+
 
         Dim id_comp As String = SLECompDetail.EditValue.ToString
         Dim qcomp1 As String = ""
@@ -265,6 +281,12 @@
             qcomp2 = "AND c.id_comp=" + id_comp + " "
         End If
 
+        'having
+        Dim cond_having As String = ""
+        If type_par = "2" Then
+            cond_having = "AND (DATE(ol_store_date)>='" + upd_date_from_selected + "' AND DATE(ol_store_date)<='" + upd_date_until_selected + "') "
+        End If
+
         Dim query As String = "SELECT c.id_comp, c.comp_number, c.comp_name,
         IFNULL(so.id_sales_order,0) AS `id_order`, so.sales_order_number AS `order_number`, so.sales_order_ol_shop_number AS `ol_store_order_number`, so.sales_order_date AS `order_date`, cg.description AS `store_group`,CONCAT(c.comp_number,' - ', c.comp_name) AS `store`, CONCAT(w.comp_number,' - ', w.comp_name) AS `wh`,
         sod.id_sales_order_det, sod.item_id, sod.ol_store_id, sod.id_product, prod.product_full_code AS `code`, prod.product_display_name AS `name`, sz.code_detail_name AS `size`, sod.id_design_price, sod.design_price, sod.sales_order_det_qty AS `order_qty`, sod.sales_order_det_note,
@@ -275,7 +297,8 @@
         IFNULL(cn.id_sales_pos,0) AS `id_cn`, cn.sales_pos_number AS `cn_number`, cn.sales_pos_date AS `cn_date`, cn_stt.report_status AS `cn_status`,
         IFNULL(rec_pay.id_rec_payment,0) AS `id_rec_pay`,rec_pay.`number` AS `rec_pay_number`, rec_pay.date_created AS `rec_pay_date`,IF(inv.is_close_rec_payment=1,'Paid','Pending') AS `rec_pay_status`,
         IFNULL(ret_pay.id_rec_payment,0) AS `id_ret_pay`,ret_pay.`number` AS `ret_pay_number`, ret_pay.date_created AS `ret_pay_date`, IF(!ISNULL(ret_pay.id_report),'Returned', NULL) AS `ret_pay_status`,
-        '0' AS `report_mark_type`, IFNULL(stt.`status`, '-') AS `ol_store_status`, stt.status_date AS `ol_store_date`,
+        '0' AS `report_mark_type`, 
+        IFNULL(stt.`status`, 'Pending') AS `ol_store_status`, IFNULL(stt.status_date, sales_order_ol_shop_date) AS `ol_store_date`,
         so.sales_order_ol_shop_date,  so.`customer_name` , so.`shipping_name` , so.`shipping_address`, so.`shipping_phone` , so.`shipping_city` , 
         so.`shipping_post_code` , so.`shipping_region` , so.`payment_method`, so.`tracking_code`
         FROM tb_sales_order so
@@ -349,7 +372,11 @@
         INNER JOIN tb_m_comp_group cg ON cg.id_comp_group = c.id_comp_group
         INNER JOIN tb_m_comp_contact wc ON wc.id_comp_contact = so.id_warehouse_contact_to
         INNER JOIN tb_m_comp w ON w.id_comp = wc.id_comp
-        WHERE so.id_report_status=6 AND (so.sales_order_date>='" + date_from_selected + "' AND so.sales_order_date<='" + date_until_selected + "') AND ISNULL(oc.id_sales_order) AND c.id_commerce_type=2 " + qcomp2 + " "
+        WHERE so.id_report_status=6  
+        " + cond_date + "
+        AND ISNULL(oc.id_sales_order) AND c.id_commerce_type=2 " + qcomp2 + " 
+        HAVING 1=1 
+        " + cond_having + " "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCDetail.DataSource = data
         GVDetail.BestFitColumns()
@@ -520,5 +547,18 @@
             End If
             Cursor = Cursors.Default
         End If
+    End Sub
+
+    Private Sub LabelControl5_Click(sender As Object, e As EventArgs) Handles LabelControl5.Click
+
+    End Sub
+
+    Private Sub BtnViewUpdated_Click(sender As Object, e As EventArgs) Handles BtnViewUpdated.Click
+        viewRmtDetail()
+        viewDetail("2")
+    End Sub
+
+    Private Sub PanelControl3_Paint(sender As Object, e As PaintEventArgs) Handles PanelControl3.Paint
+
     End Sub
 End Class

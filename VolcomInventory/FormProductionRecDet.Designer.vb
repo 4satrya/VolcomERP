@@ -83,6 +83,7 @@ Partial Class FormProductionRecDet
         Me.ColNote = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnPOQty = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnRemainingQty = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnExtra = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnNumber = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnFrom = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnTo = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -101,7 +102,6 @@ Partial Class FormProductionRecDet
         Me.BDelete = New DevExpress.XtraEditors.SimpleButton()
         Me.BStop = New DevExpress.XtraEditors.SimpleButton()
         Me.BScan = New DevExpress.XtraEditors.SimpleButton()
-        Me.GridColumnExtra = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
         CType(Me.DEArrive.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -832,6 +832,22 @@ Partial Class FormProductionRecDet
         Me.GridColumnRemainingQty.VisibleIndex = 7
         Me.GridColumnRemainingQty.Width = 140
         '
+        'GridColumnExtra
+        '
+        Me.GridColumnExtra.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumnExtra.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumnExtra.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumnExtra.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumnExtra.Caption = "Total Extra"
+        Me.GridColumnExtra.DisplayFormat.FormatString = "N0"
+        Me.GridColumnExtra.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnExtra.FieldName = "extra"
+        Me.GridColumnExtra.Name = "GridColumnExtra"
+        Me.GridColumnExtra.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "extra", "{0:N0}")})
+        Me.GridColumnExtra.Visible = True
+        Me.GridColumnExtra.VisibleIndex = 8
+        Me.GridColumnExtra.Width = 93
+        '
         'GridColumnNumber
         '
         Me.GridColumnNumber.Caption = "Number"
@@ -1002,22 +1018,6 @@ Partial Class FormProductionRecDet
         Me.BScan.TabIndex = 6
         Me.BScan.Text = "Start Scan"
         '
-        'GridColumnExtra
-        '
-        Me.GridColumnExtra.AppearanceCell.Options.UseTextOptions = True
-        Me.GridColumnExtra.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumnExtra.AppearanceHeader.Options.UseTextOptions = True
-        Me.GridColumnExtra.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumnExtra.Caption = "Total Extra"
-        Me.GridColumnExtra.DisplayFormat.FormatString = "N0"
-        Me.GridColumnExtra.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumnExtra.FieldName = "extra"
-        Me.GridColumnExtra.Name = "GridColumnExtra"
-        Me.GridColumnExtra.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "extra", "{0:N0}")})
-        Me.GridColumnExtra.Visible = True
-        Me.GridColumnExtra.VisibleIndex = 8
-        Me.GridColumnExtra.Width = 93
-        '
         'FormProductionRecDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1035,7 +1035,7 @@ Partial Class FormProductionRecDet
         Me.Name = "FormProductionRecDet"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Receiving Detail Fiinished Goods  in QC"
+        Me.Text = "Pre Receiving"
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupGeneralHeader.ResumeLayout(False)
         Me.GroupGeneralHeader.PerformLayout()

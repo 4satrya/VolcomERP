@@ -46,6 +46,7 @@
 
         BMark.Enabled = False
         BPrint.Enabled = False
+        SBReset.Enabled = False
 
         'check status
         query = "
@@ -56,10 +57,6 @@
             ) recon ON recon.id_cash_advance = ca.id_cash_advance
              WHERE ca.id_cash_advance = '" & id_ca & "'"
         Dim dataCash As DataTable = execute_query(query, -1, True, "", "", "", "")
-
-        If dataCash.Rows(0)("rb_id_report_status").ToString = "6" Then
-            BtnViewJournal.Enabled = True
-        End If
 
         'load status
         TEStatus.EditValue = dataCash.Rows(0)("rb_status").ToString
@@ -74,6 +71,9 @@
         'report detail
         query = "SELECT *, (SELECT acc_description FROM tb_a_acc WHERE id_acc = tb_cash_advance_report_det.id_acc) AS acc_description, (SELECT acc_name FROM tb_a_acc WHERE id_acc = tb_cash_advance_report_det.id_acc) AS acc_name FROM tb_cash_advance_report_det WHERE id_cash_advance='" & id_ca & "'"
         Dim dataDetail As DataTable = execute_query(query, -1, True, "", "", "", "")
+
+        GVBankWithdrawal.OptionsBehavior.Editable = True
+        GVBankDeposit.OptionsBehavior.Editable = True
 
         If dataDetail.Rows.Count > 0 Then
             If dataDetail.Rows(0)("id_bill_type").ToString = "22" Then
@@ -93,11 +93,19 @@
             End If
         End If
 
+        BLock.Enabled = True
+
         If dataReport.Rows.Count > 0 Then
             BSave.Enabled = False
             BLock.Enabled = False
             BMark.Enabled = True
             BPrint.Enabled = True
+            SBReset.Enabled = True
+        End If
+
+        If dataCash.Rows(0)("rb_id_report_status").ToString = "6" Then
+            BtnViewJournal.Enabled = True
+            SBReset.Enabled = False
         End If
     End Sub
 
@@ -482,6 +490,43 @@
         If GVBankDeposit.RowCount > 0 Then
             GVBankDeposit.DeleteSelectedRows()
             check_but()
+        End If
+    End Sub
+
+    Private Sub SBReset_Click(sender As Object, e As EventArgs) Handles SBReset.Click
+        Dim confirm As DialogResult
+
+        confirm = DevExpress.XtraEditors.XtraMessageBox.Show("All approval will be reset. Are you sure want to reset ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+
+        If confirm = DialogResult.Yes Then
+            Cursor = Cursors.WaitCursor
+
+            Dim query As String = ""
+
+            query = "DELETE FROM tb_cash_advance_report WHERE id_cash_advance = " + id_ca
+
+            execute_non_query(query, True, "", "", "", "")
+
+            query = "DELETE FROM tb_cash_advance_report_det WHERE id_cash_advance = " + id_ca
+
+            execute_non_query(query, True, "", "", "", "")
+
+            query = "UPDATE tb_cash_advance SET act_report_back_date = NULL, rb_id_report_status = 1 WHERE id_cash_advance = " + id_ca
+
+            execute_non_query(query, True, "", "", "", "")
+
+            query = "DELETE FROM tb_report_mark WHERE report_mark_type = 174 AND id_report = " + id_ca
+
+            execute_non_query(query, True, "", "", "", "")
+
+            XTPWithdrawal.PageVisible = False
+            XTPDeposit.PageVisible = False
+
+            lock = False
+
+            load_form()
+
+            Cursor = Cursors.Default
         End If
     End Sub
 End Class

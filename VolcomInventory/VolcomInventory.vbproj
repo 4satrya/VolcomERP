@@ -5482,6 +5482,12 @@
     <Compile Include="FormSOHSum.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormStockQC.Designer.vb">
+      <DependentUpon>FormStockQC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormStockQC.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormStockUniS78New.Designer.vb">
       <DependentUpon>FormStockUniS78New.vb</DependentUpon>
     </Compile>
@@ -10471,6 +10477,9 @@
     <EmbeddedResource Include="FormSOHSum.resx">
       <DependentUpon>FormSOHSum.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormStockQC.resx">
+      <DependentUpon>FormStockQC.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormStockUniS78New.resx">
       <DependentUpon>FormStockUniS78New.vb</DependentUpon>

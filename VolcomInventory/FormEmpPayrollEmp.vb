@@ -74,7 +74,7 @@
                     GROUP BY id_employee
                 ) salx ON salx.id_employee = emp.id_employee
                 LEFT JOIN tb_lookup_religion rlg ON rlg.id_religion = emp.id_religion
-                WHERE emp.id_employee NOT IN (SELECT id_employee FROM tb_emp_payroll_det WHERE id_payroll = '" & id_payroll & "') " + where_dw + " AND TIMESTAMPDIFF(MONTH, emp.employee_join_date, (" + query_period_end + ")) >= (SELECT min_month_thr FROM tb_opt_emp LIMIT 1) AND emp.id_religion IN (" & id_religion & ")
+                WHERE emp.id_employee NOT IN (SELECT id_employee FROM tb_emp_payroll_det WHERE id_payroll = '" & id_payroll & "') " + where_dw + " AND TIMESTAMPDIFF(MONTH, emp.employee_actual_join_date, (" + query_period_end + ")) >= (SELECT min_month_thr FROM tb_opt_emp LIMIT 1) AND emp.id_religion IN (" & id_religion & ")
             "
         End If
 
@@ -106,8 +106,17 @@
     Sub pick()
         GVEmployee.ApplyFindFilter("")
 
+        'get thr dw salary from latest bpjstk
+        Dim data_bpjstk As DataTable = New DataTable
+
+        Dim payroll_type As DataTable = execute_query("SELECT is_thr, is_dw FROM tb_emp_payroll_type WHERE id_payroll_type = " + id_payroll_type, -1, True, "", "", "", "")
+
+        If payroll_type.Rows(0)("is_thr").ToString = "1" And payroll_type.Rows(0)("is_dw").ToString = "1" Then
+            data_bpjstk = execute_query("CALL view_payroll_bpjstk_detail((SELECT id_payroll FROM tb_emp_payroll WHERE id_payroll_type = 4 AND id_report_status = 6 AND periode_end <= (SELECT periode_end FROM tb_emp_payroll WHERE id_payroll = " + id_payroll + ") ORDER BY id_payroll DESC LIMIT 1))", -1, True, "", "", "", "")
+        End If
+
         If GVEmployee.SelectedRowsCount > 0 Then
-            Dim query As String = "INSERT INTO tb_emp_payroll_det(id_payroll, id_employee,id_salary, workdays, actual_workdays) VALUES "
+            Dim query As String = "INSERT INTO tb_emp_payroll_det(id_payroll, id_employee, id_salary, workdays, actual_workdays, total_salary_thr) VALUES "
 
             Dim selected_rows As Integer() = GVEmployee.GetSelectedRows()
 
@@ -119,8 +128,16 @@
                     Dim id_salary As String = GVEmployee.GetRowCellValue(selected_row, "id_employee_salary").ToString
                     Dim workdays As String = GVEmployee.GetRowCellValue(selected_row, "total_workdays").ToString
                     Dim actual_workdays As String = GVEmployee.GetRowCellValue(selected_row, "actual_workdays").ToString
+                    Dim total_salary_thr As String = "NULL"
 
-                    query += "('" & id_payroll & "', '" & id_employee & "', '" & id_salary & "', '" & workdays & "', " & decimalSQL(actual_workdays) & "), "
+                    'get total salary from latest bpjstk
+                    For j = 0 To data_bpjstk.Rows.Count - 1
+                        If data_bpjstk.Rows(j)("id_employee").ToString = GVEmployee.GetRowCellValue(selected_row, "id_employee").ToString Then
+                            total_salary_thr = Decimal.Round(Decimal.Parse(data_bpjstk.Rows(j)("employee_salary").ToString), 0).ToString
+                        End If
+                    Next
+
+                    query += "('" & id_payroll & "', '" & id_employee & "', '" & id_salary & "', '" & workdays & "', " & decimalSQL(actual_workdays) & ", " + total_salary_thr + "), "
                 End If
             Next
 

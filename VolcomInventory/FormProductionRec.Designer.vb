@@ -86,6 +86,8 @@ Partial Class FormProductionRec
         Me.GridColumnArriveDate = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemDateEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemDateEdit()
         Me.GridView3 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.PCUpdateHO = New DevExpress.XtraEditors.PanelControl()
+        Me.BUpdate = New DevExpress.XtraEditors.SimpleButton()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
         Me.SLESeasonByCode = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView4 = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -102,8 +104,6 @@ Partial Class FormProductionRec
         Me.BSearch = New DevExpress.XtraEditors.SimpleButton()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.XTCTabReceive = New DevExpress.XtraTab.XtraTabControl()
-        Me.PCUpdateHO = New DevExpress.XtraEditors.PanelControl()
-        Me.BUpdate = New DevExpress.XtraEditors.SimpleButton()
         Me.XTPListPO.SuspendLayout()
         CType(Me.SCCRec, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SCCRec.SuspendLayout()
@@ -127,6 +127,8 @@ Partial Class FormProductionRec
         CType(Me.RepositoryItemDateEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemDateEdit1.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PCUpdateHO, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PCUpdateHO.SuspendLayout()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.SLESeasonByCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -135,8 +137,6 @@ Partial Class FormProductionRec
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XTCTabReceive, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCTabReceive.SuspendLayout()
-        CType(Me.PCUpdateHO, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.PCUpdateHO.SuspendLayout()
         Me.SuspendLayout()
         '
         'XTPListPO
@@ -725,6 +725,24 @@ Partial Class FormProductionRec
         Me.GridView3.GridControl = Me.GCProdRec
         Me.GridView3.Name = "GridView3"
         '
+        'PCUpdateHO
+        '
+        Me.PCUpdateHO.Controls.Add(Me.BUpdate)
+        Me.PCUpdateHO.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.PCUpdateHO.Location = New System.Drawing.Point(0, 428)
+        Me.PCUpdateHO.Name = "PCUpdateHO"
+        Me.PCUpdateHO.Size = New System.Drawing.Size(803, 38)
+        Me.PCUpdateHO.TabIndex = 7
+        '
+        'BUpdate
+        '
+        Me.BUpdate.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.BUpdate.Location = New System.Drawing.Point(2, 2)
+        Me.BUpdate.Name = "BUpdate"
+        Me.BUpdate.Size = New System.Drawing.Size(799, 34)
+        Me.BUpdate.TabIndex = 8908
+        Me.BUpdate.Text = "Update Target Handover"
+        '
         'PanelControl1
         '
         Me.PanelControl1.Controls.Add(Me.SLESeasonByCode)
@@ -866,24 +884,6 @@ Partial Class FormProductionRec
         Me.XTCTabReceive.TabIndex = 8
         Me.XTCTabReceive.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPListReceive, Me.XTPListPO})
         '
-        'PCUpdateHO
-        '
-        Me.PCUpdateHO.Controls.Add(Me.BUpdate)
-        Me.PCUpdateHO.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PCUpdateHO.Location = New System.Drawing.Point(0, 428)
-        Me.PCUpdateHO.Name = "PCUpdateHO"
-        Me.PCUpdateHO.Size = New System.Drawing.Size(803, 38)
-        Me.PCUpdateHO.TabIndex = 7
-        '
-        'BUpdate
-        '
-        Me.BUpdate.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.BUpdate.Location = New System.Drawing.Point(2, 2)
-        Me.BUpdate.Name = "BUpdate"
-        Me.BUpdate.Size = New System.Drawing.Size(799, 34)
-        Me.BUpdate.TabIndex = 8908
-        Me.BUpdate.Text = "Update Target Handover"
-        '
         'FormProductionRec
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -896,7 +896,7 @@ Partial Class FormProductionRec
         Me.Name = "FormProductionRec"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Receiving QC"
+        Me.Text = "Pre Receiving"
         Me.XTPListPO.ResumeLayout(False)
         CType(Me.SCCRec, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SCCRec.ResumeLayout(False)
@@ -920,6 +920,8 @@ Partial Class FormProductionRec
         CType(Me.RepositoryItemDateEdit1.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemDateEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PCUpdateHO, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PCUpdateHO.ResumeLayout(False)
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         Me.PanelControl1.PerformLayout()
@@ -929,8 +931,6 @@ Partial Class FormProductionRec
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XTCTabReceive, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XTCTabReceive.ResumeLayout(False)
-        CType(Me.PCUpdateHO, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.PCUpdateHO.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub

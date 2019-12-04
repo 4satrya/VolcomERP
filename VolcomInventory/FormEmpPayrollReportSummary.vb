@@ -202,7 +202,7 @@
         report.XLType.Text = FormEmpPayroll.GVPayrollPeriode.GetFocusedRowCellValue("payroll_type_name").ToString
 
         If is_thr = "1" Then
-            report.XLTitle.Text = "Summary " + Environment.NewLine + execute_query("SELECT REPLACE(payroll_type, 'Daily Worker', '') AS payroll_type FROM tb_emp_payroll_type WHERE id_payroll_type = " + FormEmpPayroll.GVPayrollPeriode.GetFocusedRowCellValue("id_payroll_type").ToString, 0, True, "", "", "", "")
+            report.XLTitle.Text = "Summary THR"
             report.XLPeriod.Text = "Period " + Date.Parse(FormEmpPayroll.GVPayrollPeriode.GetFocusedRowCellValue("periode_end").ToString).ToString("yyyy")
         End If
 

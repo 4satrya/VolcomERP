@@ -11,7 +11,7 @@
     End Sub
     '
     Sub load_payroll()
-        Dim query As String = "SELECT 'no' AS is_check, pr.*,emp.`employee_name`,type.payroll_type as payroll_type_name,DATE_FORMAT(pr.periode_end,'%M %Y') AS payroll_name, IFNULL((SELECT report_status FROM tb_lookup_report_status WHERE id_report_status = pr.id_report_status), 'Not Submitted') AS report_status FROM tb_emp_payroll pr
+        Dim query As String = "SELECT 'no' AS is_check, pr.*,emp.`employee_name`,type.payroll_type as payroll_type_name,DATE_FORMAT(pr.periode_end,'%M %Y') AS payroll_name, IFNULL((SELECT report_status FROM tb_lookup_report_status WHERE id_report_status = pr.id_report_status), 'Not Submitted') AS report_status, type.is_thr, type.is_dw FROM tb_emp_payroll pr
                                 INNER JOIn tb_emp_payroll_type type ON type.id_payroll_type=pr.id_payroll_type
                                 INNER JOIN tb_m_user usr ON usr.id_user=pr.id_user_upd
                                 INNER JOIN tb_m_employee emp ON emp.`id_employee`=usr.id_employee
@@ -187,9 +187,6 @@
                 BBIBPJSTK.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
                 BBIPajak.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
 
-                SBSendSlip.Visible = True
-                BPrintSlip.Visible = True
-
                 BBonusAdjustment.Text = "Bonus / Adjustment"
                 BandedGridColumnTotalAdjustment.Caption = "Total Bonus / Adjustment"
                 GBBonusAdjustment.Caption = "Bonus / Adjustment"
@@ -216,9 +213,6 @@
                 BBIBPJSKesehatan.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
                 BBIBPJSTK.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
                 BBIPajak.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
-
-                SBSendSlip.Visible = False
-                BPrintSlip.Visible = False
 
                 BBonusAdjustment.Text = "Adjustment"
                 BandedGridColumnTotalAdjustment.Caption = "Adjustment"
@@ -531,7 +525,7 @@
         report.XLType.Text = GVPayrollPeriode.GetFocusedRowCellValue("payroll_type_name").ToString
 
         If is_thr = "1" Then
-            report.XLTitle.Text = execute_query("SELECT REPLACE(payroll_type, 'Daily Worker', '') AS payroll_type FROM tb_emp_payroll_type WHERE id_payroll_type = " + GVPayrollPeriode.GetFocusedRowCellValue("id_payroll_type").ToString, 0, True, "", "", "", "")
+            report.XLTitle.Text = "Detail THR"
             report.XLPeriod.Text = "Period " + Date.Parse(GVPayrollPeriode.GetFocusedRowCellValue("periode_end").ToString).ToString("yyyy")
         End If
 
@@ -793,6 +787,10 @@
                                 Dim employee_name As String = GVPayroll.GetRowCellValue(i, "employee_name").ToString
                                 Dim email_personal As String = GVPayroll.GetRowCellValue(i, "email_personal").ToString
 
+                                If GVPayrollPeriode.GetFocusedRowCellValue("is_thr").ToString = "1" Then
+                                    period = GVPayrollPeriode.GetFocusedRowCellValue("payroll_type_name").ToString.Replace(" Daily Worker", "") + " " + Date.Parse(GVPayrollPeriode.GetFocusedRowCellValue("periode_end").ToString).ToString("yyyy")
+                                End If
+
                                 Dim mem As New IO.MemoryStream()
 
                                 Dim report As ReportSalarySlip = New ReportSalarySlip
@@ -827,7 +825,7 @@
                                     <p style='font: normal 10.00pt/14.25pt Arial; margin: 0;'>Yang Terhormat Bapak/Ibu</p>
                                     <p style='font: normal 10.00pt/14.25pt Arial; margin: 0;'>" + employee_name + "</p>
                                     <br>
-                                    <p style='font: normal 10.00pt/14.25pt Arial; margin: 0;'>Bersama ini kami lampirkan slip gaji Anda untuk bulan <b>" + period + "</b>,  slip gaji Anda ini bersifat pribadi dan sangat rahasia.</p>
+                                    <p style='font: normal 10.00pt/14.25pt Arial; margin: 0;'>Bersama ini kami lampirkan slip gaji Anda untuk " + If(GVPayrollPeriode.GetFocusedRowCellValue("is_thr").ToString = "1", "", "bulan") + " <b>" + period + "</b>,  slip gaji Anda ini bersifat pribadi dan sangat rahasia.</p>
                                     <p style='font: normal 10.00pt/14.25pt Arial; margin: 0;'>Gunakan password Anda untuk melihat slip gaji tersebut.</p>
                                     <br>
                                     <p style='font: normal 10.00pt/14.25pt Arial; margin: 0;'>Pasword slip gaji Anda adalah ddMmmyyyy (contoh: 01Aug1995)</p>

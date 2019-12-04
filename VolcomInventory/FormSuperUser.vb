@@ -32,6 +32,12 @@
         'nm.report_mark_type = "186"
         'nm.send_email()
 
+        'send mail final
+        'Dim nm As New ClassSendEmail
+        'nm.par1 = "5078"
+        'nm.report_mark_type = "185"
+        'nm.send_email()
+
         'Dim mail As ClassSendEmail = New ClassSendEmail()
         'mail.report_mark_type = "96"
         'mail.send_email_appr("96", "6978", True)

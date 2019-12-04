@@ -29,6 +29,9 @@ Partial Class FormBankWithdrawalAdd
         Me.LEDK = New DevExpress.XtraEditors.LookUpEdit()
         Me.SLEComp = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn13 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn14 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumncomp_number = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
         Me.TxtDescription = New DevExpress.XtraEditors.TextEdit()
@@ -39,14 +42,11 @@ Partial Class FormBankWithdrawalAdd
         Me.BtnAdd = New DevExpress.XtraEditors.SimpleButton()
         Me.SLECOA = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.TxtCOA = New DevExpress.XtraEditors.TextEdit()
-        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
-        Me.GridColumn13 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn14 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumncomp_number = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.TxtCOA = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.TxtSupplier.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtAmount.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtComp.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -118,6 +118,7 @@ Partial Class FormBankWithdrawalAdd
         Me.LEDK.Location = New System.Drawing.Point(19, 254)
         Me.LEDK.Name = "LEDK"
         Me.LEDK.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.LEDK.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_dc", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("dc_code", "D/K"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("dc", "Description")})
         Me.LEDK.Size = New System.Drawing.Size(100, 20)
         Me.LEDK.TabIndex = 8926
         '
@@ -138,6 +139,28 @@ Partial Class FormBankWithdrawalAdd
         Me.GridView2.Name = "GridView2"
         Me.GridView2.OptionsSelection.EnableAppearanceFocusedCell = False
         Me.GridView2.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn13
+        '
+        Me.GridColumn13.Caption = "ID Comp Contact"
+        Me.GridColumn13.FieldName = "id_comp_contact"
+        Me.GridColumn13.Name = "GridColumn13"
+        '
+        'GridColumn14
+        '
+        Me.GridColumn14.Caption = "Name"
+        Me.GridColumn14.FieldName = "comp_name"
+        Me.GridColumn14.Name = "GridColumn14"
+        Me.GridColumn14.Visible = True
+        Me.GridColumn14.VisibleIndex = 1
+        '
+        'GridColumncomp_number
+        '
+        Me.GridColumncomp_number.Caption = "Code"
+        Me.GridColumncomp_number.FieldName = "comp_number"
+        Me.GridColumncomp_number.Name = "GridColumncomp_number"
+        Me.GridColumncomp_number.Visible = True
+        Me.GridColumncomp_number.VisibleIndex = 0
         '
         'LabelControl4
         '
@@ -182,7 +205,7 @@ Partial Class FormBankWithdrawalAdd
         Me.PanelControl1.Controls.Add(Me.BtnClose)
         Me.PanelControl1.Controls.Add(Me.BtnAdd)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl1.Location = New System.Drawing.Point(0, 310)
+        Me.PanelControl1.Location = New System.Drawing.Point(0, 290)
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(403, 45)
         Me.PanelControl1.TabIndex = 8932
@@ -226,44 +249,6 @@ Partial Class FormBankWithdrawalAdd
         Me.GridView1.OptionsSelection.EnableAppearanceFocusedCell = False
         Me.GridView1.OptionsView.ShowGroupPanel = False
         '
-        'TxtCOA
-        '
-        Me.TxtCOA.Enabled = False
-        Me.TxtCOA.Location = New System.Drawing.Point(19, 25)
-        Me.TxtCOA.Name = "TxtCOA"
-        Me.TxtCOA.Size = New System.Drawing.Size(100, 20)
-        Me.TxtCOA.TabIndex = 8928
-        '
-        'LabelControl1
-        '
-        Me.LabelControl1.Location = New System.Drawing.Point(19, 6)
-        Me.LabelControl1.Name = "LabelControl1"
-        Me.LabelControl1.Size = New System.Drawing.Size(22, 13)
-        Me.LabelControl1.TabIndex = 8919
-        Me.LabelControl1.Text = "COA"
-        '
-        'GridColumn13
-        '
-        Me.GridColumn13.Caption = "ID Comp Contact"
-        Me.GridColumn13.FieldName = "id_comp_contact"
-        Me.GridColumn13.Name = "GridColumn13"
-        '
-        'GridColumn14
-        '
-        Me.GridColumn14.Caption = "Name"
-        Me.GridColumn14.FieldName = "comp_name"
-        Me.GridColumn14.Name = "GridColumn14"
-        Me.GridColumn14.Visible = True
-        Me.GridColumn14.VisibleIndex = 1
-        '
-        'GridColumncomp_number
-        '
-        Me.GridColumncomp_number.Caption = "Code"
-        Me.GridColumncomp_number.FieldName = "comp_number"
-        Me.GridColumncomp_number.Name = "GridColumncomp_number"
-        Me.GridColumncomp_number.Visible = True
-        Me.GridColumncomp_number.VisibleIndex = 0
-        '
         'GridColumn1
         '
         Me.GridColumn1.Caption = "Id"
@@ -287,11 +272,27 @@ Partial Class FormBankWithdrawalAdd
         Me.GridColumn6.Visible = True
         Me.GridColumn6.VisibleIndex = 1
         '
+        'TxtCOA
+        '
+        Me.TxtCOA.Enabled = False
+        Me.TxtCOA.Location = New System.Drawing.Point(19, 25)
+        Me.TxtCOA.Name = "TxtCOA"
+        Me.TxtCOA.Size = New System.Drawing.Size(100, 20)
+        Me.TxtCOA.TabIndex = 8928
+        '
+        'LabelControl1
+        '
+        Me.LabelControl1.Location = New System.Drawing.Point(19, 6)
+        Me.LabelControl1.Name = "LabelControl1"
+        Me.LabelControl1.Size = New System.Drawing.Size(22, 13)
+        Me.LabelControl1.TabIndex = 8919
+        Me.LabelControl1.Text = "COA"
+        '
         'FormBankWithdrawalAdd
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(403, 355)
+        Me.ClientSize = New System.Drawing.Size(403, 335)
         Me.Controls.Add(Me.TxtSupplier)
         Me.Controls.Add(Me.LabelControl7)
         Me.Controls.Add(Me.TxtAmount)

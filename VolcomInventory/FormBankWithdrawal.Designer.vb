@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FormBankWithdrawal
     Inherits DevExpress.XtraEditors.XtraForm
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         If disposing AndAlso components IsNot Nothing Then
             components.Dispose()
@@ -17,7 +17,7 @@ Partial Class FormBankWithdrawal
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.XTCPO = New DevExpress.XtraTab.XtraTabControl()
         Me.XTPPO = New DevExpress.XtraTab.XtraTabPage()
@@ -113,24 +113,24 @@ Partial Class FormBankWithdrawal
         Me.GridColumnIsOpenExpense = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControl4 = New DevExpress.XtraEditors.PanelControl()
         Me.PanelControl5 = New DevExpress.XtraEditors.PanelControl()
+        Me.BCreateExpense = New DevExpress.XtraEditors.SimpleButton()
+        Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
         Me.SLEPayTypeExpense = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView7 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn35 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn36 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl7 = New DevExpress.XtraEditors.LabelControl()
-        Me.BCreateExpense = New DevExpress.XtraEditors.SimpleButton()
-        Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
         Me.SLEStatusPaymentExpense = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView6 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn33 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn34 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl8 = New DevExpress.XtraEditors.LabelControl()
         Me.BtnViewExpense = New DevExpress.XtraEditors.SimpleButton()
+        Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
         Me.SLEVendorExpense = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView8 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn37 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn38 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.LabelControl8 = New DevExpress.XtraEditors.LabelControl()
         Me.XTPFGPO = New DevExpress.XtraTab.XtraTabPage()
         Me.GCFGPO = New DevExpress.XtraGrid.GridControl()
         Me.GVFGPO = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -188,11 +188,10 @@ Partial Class FormBankWithdrawal
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl4.SuspendLayout()
         CType(Me.PanelControl5, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.PanelControl5.SuspendLayout()
-        CType(Me.SLEPayTypeExpense.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GridView7, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl3.SuspendLayout()
+        CType(Me.SLEPayTypeExpense.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView7, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLEStatusPaymentExpense.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLEVendorExpense.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -325,7 +324,7 @@ Partial Class FormBankWithdrawal
         Me.GridColumnNote.Name = "GridColumnNote"
         Me.GridColumnNote.OptionsColumn.AllowEdit = False
         Me.GridColumnNote.Visible = True
-        Me.GridColumnNote.VisibleIndex = 9
+        Me.GridColumnNote.VisibleIndex = 11
         '
         'GridColumn4
         '
@@ -355,7 +354,7 @@ Partial Class FormBankWithdrawal
         Me.GridColumn3.Name = "GridColumn3"
         Me.GridColumn3.OptionsColumn.AllowEdit = False
         Me.GridColumn3.Visible = True
-        Me.GridColumn3.VisibleIndex = 6
+        Me.GridColumn3.VisibleIndex = 8
         '
         'GridColumn24
         '
@@ -370,7 +369,7 @@ Partial Class FormBankWithdrawal
         Me.GridColumn24.Name = "GridColumn24"
         Me.GridColumn24.OptionsColumn.AllowEdit = False
         Me.GridColumn24.Visible = True
-        Me.GridColumn24.VisibleIndex = 7
+        Me.GridColumn24.VisibleIndex = 9
         Me.GridColumn24.Width = 113
         '
         'GridColumn23
@@ -386,7 +385,7 @@ Partial Class FormBankWithdrawal
         Me.GridColumn23.Name = "GridColumn23"
         Me.GridColumn23.OptionsColumn.AllowEdit = False
         Me.GridColumn23.Visible = True
-        Me.GridColumn23.VisibleIndex = 8
+        Me.GridColumn23.VisibleIndex = 10
         Me.GridColumn23.Width = 118
         '
         'GridColumn19
@@ -402,7 +401,7 @@ Partial Class FormBankWithdrawal
         Me.GridColumn19.Name = "GridColumn19"
         Me.GridColumn19.OptionsColumn.AllowEdit = False
         Me.GridColumn19.Visible = True
-        Me.GridColumn19.VisibleIndex = 12
+        Me.GridColumn19.VisibleIndex = 14
         '
         'GridColumn27
         '
@@ -417,7 +416,7 @@ Partial Class FormBankWithdrawal
         Me.GridColumn27.Name = "GridColumn27"
         Me.GridColumn27.OptionsColumn.AllowEdit = False
         Me.GridColumn27.Visible = True
-        Me.GridColumn27.VisibleIndex = 13
+        Me.GridColumn27.VisibleIndex = 15
         Me.GridColumn27.Width = 153
         '
         'GridColumn28
@@ -433,7 +432,7 @@ Partial Class FormBankWithdrawal
         Me.GridColumn28.Name = "GridColumn28"
         Me.GridColumn28.OptionsColumn.AllowEdit = False
         Me.GridColumn28.Visible = True
-        Me.GridColumn28.VisibleIndex = 14
+        Me.GridColumn28.VisibleIndex = 16
         '
         'GridColumnVendor
         '
@@ -463,7 +462,7 @@ Partial Class FormBankWithdrawal
         Me.GridColumn25.Name = "GridColumn25"
         Me.GridColumn25.OptionsColumn.AllowEdit = False
         Me.GridColumn25.Visible = True
-        Me.GridColumn25.VisibleIndex = 10
+        Me.GridColumn25.VisibleIndex = 12
         '
         'GridColumn26
         '
@@ -472,7 +471,7 @@ Partial Class FormBankWithdrawal
         Me.GridColumn26.Name = "GridColumn26"
         Me.GridColumn26.OptionsColumn.AllowEdit = False
         Me.GridColumn26.Visible = True
-        Me.GridColumn26.VisibleIndex = 11
+        Me.GridColumn26.VisibleIndex = 13
         '
         'GridColumn12
         '
@@ -483,7 +482,7 @@ Partial Class FormBankWithdrawal
         Me.GridColumn12.Name = "GridColumn12"
         Me.GridColumn12.OptionsColumn.AllowEdit = False
         Me.GridColumn12.Visible = True
-        Me.GridColumn12.VisibleIndex = 15
+        Me.GridColumn12.VisibleIndex = 17
         '
         'BCreatePO
         '
@@ -675,7 +674,7 @@ Partial Class FormBankWithdrawal
         'GridColumn8
         '
         Me.GridColumn8.Caption = "ID"
-        Me.GridColumn8.FieldName = "id_payment"
+        Me.GridColumn8.FieldName = "id_pn"
         Me.GridColumn8.Name = "GridColumn8"
         Me.GridColumn8.OptionsColumn.AllowEdit = False
         '
@@ -1110,19 +1109,51 @@ Partial Class FormBankWithdrawal
         'PanelControl5
         '
         Me.PanelControl5.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
-        Me.PanelControl5.Controls.Add(Me.SLEPayTypeExpense)
-        Me.PanelControl5.Controls.Add(Me.LabelControl7)
         Me.PanelControl5.Dock = System.Windows.Forms.DockStyle.Right
         Me.PanelControl5.Location = New System.Drawing.Point(741, 2)
         Me.PanelControl5.Name = "PanelControl5"
         Me.PanelControl5.Size = New System.Drawing.Size(210, 39)
         Me.PanelControl5.TabIndex = 8918
         '
+        'BCreateExpense
+        '
+        Me.BCreateExpense.Appearance.BackColor = System.Drawing.Color.CornflowerBlue
+        Me.BCreateExpense.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.BCreateExpense.Appearance.ForeColor = System.Drawing.Color.White
+        Me.BCreateExpense.Appearance.Options.UseBackColor = True
+        Me.BCreateExpense.Appearance.Options.UseFont = True
+        Me.BCreateExpense.Appearance.Options.UseForeColor = True
+        Me.BCreateExpense.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BCreateExpense.Location = New System.Drawing.Point(951, 2)
+        Me.BCreateExpense.LookAndFeel.SkinMaskColor = System.Drawing.Color.Blue
+        Me.BCreateExpense.LookAndFeel.SkinMaskColor2 = System.Drawing.Color.Blue
+        Me.BCreateExpense.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.UltraFlat
+        Me.BCreateExpense.LookAndFeel.UseDefaultLookAndFeel = False
+        Me.BCreateExpense.Name = "BCreateExpense"
+        Me.BCreateExpense.Size = New System.Drawing.Size(138, 39)
+        Me.BCreateExpense.TabIndex = 19
+        Me.BCreateExpense.Text = "Create Payment"
+        '
+        'PanelControl3
+        '
+        Me.PanelControl3.Controls.Add(Me.SLEPayTypeExpense)
+        Me.PanelControl3.Controls.Add(Me.LabelControl7)
+        Me.PanelControl3.Controls.Add(Me.SLEStatusPaymentExpense)
+        Me.PanelControl3.Controls.Add(Me.LabelControl8)
+        Me.PanelControl3.Controls.Add(Me.BtnViewExpense)
+        Me.PanelControl3.Controls.Add(Me.LabelControl6)
+        Me.PanelControl3.Controls.Add(Me.SLEVendorExpense)
+        Me.PanelControl3.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelControl3.Location = New System.Drawing.Point(0, 0)
+        Me.PanelControl3.Name = "PanelControl3"
+        Me.PanelControl3.Size = New System.Drawing.Size(1091, 42)
+        Me.PanelControl3.TabIndex = 3
+        '
         'SLEPayTypeExpense
         '
-        Me.SLEPayTypeExpense.Location = New System.Drawing.Point(76, 10)
+        Me.SLEPayTypeExpense.Location = New System.Drawing.Point(86, 12)
         Me.SLEPayTypeExpense.Name = "SLEPayTypeExpense"
-        Me.SLEPayTypeExpense.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SLEPayTypeExpense.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SLEPayTypeExpense.Properties.Appearance.Options.UseFont = True
         Me.SLEPayTypeExpense.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.SLEPayTypeExpense.Properties.View = Me.GridView7
@@ -1153,48 +1184,16 @@ Partial Class FormBankWithdrawal
         '
         'LabelControl7
         '
-        Me.LabelControl7.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl7.Location = New System.Drawing.Point(8, 13)
+        Me.LabelControl7.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl7.Location = New System.Drawing.Point(11, 15)
         Me.LabelControl7.Name = "LabelControl7"
-        Me.LabelControl7.Size = New System.Drawing.Size(66, 13)
+        Me.LabelControl7.Size = New System.Drawing.Size(69, 13)
         Me.LabelControl7.TabIndex = 8914
-        Me.LabelControl7.Text = "Select Type"
-        '
-        'BCreateExpense
-        '
-        Me.BCreateExpense.Appearance.BackColor = System.Drawing.Color.CornflowerBlue
-        Me.BCreateExpense.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
-        Me.BCreateExpense.Appearance.ForeColor = System.Drawing.Color.White
-        Me.BCreateExpense.Appearance.Options.UseBackColor = True
-        Me.BCreateExpense.Appearance.Options.UseFont = True
-        Me.BCreateExpense.Appearance.Options.UseForeColor = True
-        Me.BCreateExpense.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BCreateExpense.Location = New System.Drawing.Point(951, 2)
-        Me.BCreateExpense.LookAndFeel.SkinMaskColor = System.Drawing.Color.Blue
-        Me.BCreateExpense.LookAndFeel.SkinMaskColor2 = System.Drawing.Color.Blue
-        Me.BCreateExpense.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.UltraFlat
-        Me.BCreateExpense.LookAndFeel.UseDefaultLookAndFeel = False
-        Me.BCreateExpense.Name = "BCreateExpense"
-        Me.BCreateExpense.Size = New System.Drawing.Size(138, 39)
-        Me.BCreateExpense.TabIndex = 19
-        Me.BCreateExpense.Text = "Create Payment"
-        '
-        'PanelControl3
-        '
-        Me.PanelControl3.Controls.Add(Me.SLEStatusPaymentExpense)
-        Me.PanelControl3.Controls.Add(Me.LabelControl6)
-        Me.PanelControl3.Controls.Add(Me.BtnViewExpense)
-        Me.PanelControl3.Controls.Add(Me.SLEVendorExpense)
-        Me.PanelControl3.Controls.Add(Me.LabelControl8)
-        Me.PanelControl3.Dock = System.Windows.Forms.DockStyle.Top
-        Me.PanelControl3.Location = New System.Drawing.Point(0, 0)
-        Me.PanelControl3.Name = "PanelControl3"
-        Me.PanelControl3.Size = New System.Drawing.Size(1091, 42)
-        Me.PanelControl3.TabIndex = 3
+        Me.LabelControl7.Text = "Payment Type"
         '
         'SLEStatusPaymentExpense
         '
-        Me.SLEStatusPaymentExpense.Location = New System.Drawing.Point(322, 11)
+        Me.SLEStatusPaymentExpense.Location = New System.Drawing.Point(520, 12)
         Me.SLEStatusPaymentExpense.Name = "SLEStatusPaymentExpense"
         Me.SLEStatusPaymentExpense.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.SLEStatusPaymentExpense.Properties.View = Me.GridView6
@@ -1223,25 +1222,33 @@ Partial Class FormBankWithdrawal
         Me.GridColumn34.Visible = True
         Me.GridColumn34.VisibleIndex = 0
         '
-        'LabelControl6
+        'LabelControl8
         '
-        Me.LabelControl6.Location = New System.Drawing.Point(240, 14)
-        Me.LabelControl6.Name = "LabelControl6"
-        Me.LabelControl6.Size = New System.Drawing.Size(76, 13)
-        Me.LabelControl6.TabIndex = 8918
-        Me.LabelControl6.Text = "Status Payment"
+        Me.LabelControl8.Location = New System.Drawing.Point(215, 15)
+        Me.LabelControl8.Name = "LabelControl8"
+        Me.LabelControl8.Size = New System.Drawing.Size(34, 13)
+        Me.LabelControl8.TabIndex = 8911
+        Me.LabelControl8.Text = "Vendor"
         '
         'BtnViewExpense
         '
-        Me.BtnViewExpense.Location = New System.Drawing.Point(451, 9)
+        Me.BtnViewExpense.Location = New System.Drawing.Point(649, 10)
         Me.BtnViewExpense.Name = "BtnViewExpense"
         Me.BtnViewExpense.Size = New System.Drawing.Size(60, 23)
         Me.BtnViewExpense.TabIndex = 8913
         Me.BtnViewExpense.Text = "view"
         '
+        'LabelControl6
+        '
+        Me.LabelControl6.Location = New System.Drawing.Point(438, 15)
+        Me.LabelControl6.Name = "LabelControl6"
+        Me.LabelControl6.Size = New System.Drawing.Size(76, 13)
+        Me.LabelControl6.TabIndex = 8918
+        Me.LabelControl6.Text = "Status Payment"
+        '
         'SLEVendorExpense
         '
-        Me.SLEVendorExpense.Location = New System.Drawing.Point(57, 11)
+        Me.SLEVendorExpense.Location = New System.Drawing.Point(255, 12)
         Me.SLEVendorExpense.Name = "SLEVendorExpense"
         Me.SLEVendorExpense.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.SLEVendorExpense.Properties.View = Me.GridView8
@@ -1269,14 +1276,6 @@ Partial Class FormBankWithdrawal
         Me.GridColumn38.Name = "GridColumn38"
         Me.GridColumn38.Visible = True
         Me.GridColumn38.VisibleIndex = 0
-        '
-        'LabelControl8
-        '
-        Me.LabelControl8.Location = New System.Drawing.Point(17, 14)
-        Me.LabelControl8.Name = "LabelControl8"
-        Me.LabelControl8.Size = New System.Drawing.Size(34, 13)
-        Me.LabelControl8.TabIndex = 8911
-        Me.LabelControl8.Text = "Vendor"
         '
         'XTPFGPO
         '
@@ -1569,13 +1568,11 @@ Partial Class FormBankWithdrawal
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl4.ResumeLayout(False)
         CType(Me.PanelControl5, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.PanelControl5.ResumeLayout(False)
-        Me.PanelControl5.PerformLayout()
-        CType(Me.SLEPayTypeExpense.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GridView7, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl3.ResumeLayout(False)
         Me.PanelControl3.PerformLayout()
+        CType(Me.SLEPayTypeExpense.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView7, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SLEStatusPaymentExpense.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SLEVendorExpense.Properties, System.ComponentModel.ISupportInitialize).EndInit()

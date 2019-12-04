@@ -11835,8 +11835,11 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
         Dim confirm As DialogResult = XtraMessageBox.Show("Are you sure want to close application?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
         If confirm = DialogResult.Yes Then
             'log
-            Dim u As New ClassUser()
-            u.logLogin("2")
+            Try
+                Dim u As New ClassUser()
+                u.logLogin("2")
+            Catch ex As Exception
+            End Try
         Else
             e.Cancel = True
         End If

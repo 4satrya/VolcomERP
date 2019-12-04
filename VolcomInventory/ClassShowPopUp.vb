@@ -1929,8 +1929,8 @@ GROUP BY rec.`id_prod_order`"
             field_date = "created_date"
         ElseIf report_mark_type = "159" Then
             'item del
-            table_name = "tb_payment"
-            field_id = "id_payment"
+            table_name = "tb_pn"
+            field_id = "id_pn"
             field_number = "number"
             field_date = "date_created"
         ElseIf report_mark_type = "160" Or report_mark_type = "169" Then

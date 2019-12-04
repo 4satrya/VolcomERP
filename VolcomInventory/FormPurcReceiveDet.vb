@@ -73,7 +73,14 @@ WHERE pod.`id_purc_order`='1' AND ISNULL(coa.id_item_coa)"
             End If
 
             'cek coa biaya
-
+            Dim q_pn As String = "SELECT pnd.number FROM tb_pn_det pnd
+INNER JOIN tb_pn pn ON pn.id_pn=pnd.`id_pn`
+WHERE pn.`id_report_status`!=6 AND pn.`id_report_status`!=5 AND pnd.`report_mark_type`='148' AND pnd.`id_report`='" & id_purc_order & "'"
+            Dim dt_pn As DataTable = execute_query(q_pn, -1, True, "", "", "", "")
+            If dt_pn.Rows.Count > 0 Then
+                stopCustom("Please contact accounting, please complete DP for PO number : " & dt_pn.Rows(0)("number").ToString)
+                Close()
+            End If
 
             'purc order detail
             TxtDO.Focus()
@@ -395,7 +402,7 @@ WHERE pod.`id_purc_order`='1' AND ISNULL(coa.id_item_coa)"
 	                GROUP BY retd.id_item
                 ) retd ON retd.id_item = pod.id_item
                 INNER JOIN tb_purc_req_det prd ON prd.id_purc_req_det=pod.id_purc_req_det
-                WHERE pod.id_purc_order=" + id_purc_order + " AND pod.id_item=" + id_item + " AND prd.item_detail='" & item_detail & "'
+                WHERE pod.id_purc_order=" + id_purc_order + " AND pod.id_item=" + id_item + " AND IFNULL(prd.item_detail,'')='" & item_detail & "'
                 GROUP BY pod.id_item, prd.item_detail "
                 Dim dcek As DataTable = execute_query(qcek, -1, True, "", "", "", "")
                 If e.Value > dcek.Rows(0)("qty_remaining") Then

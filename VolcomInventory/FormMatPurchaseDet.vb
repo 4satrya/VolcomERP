@@ -863,7 +863,7 @@ INNER JOIN tb_m_mat_det_price mdp ON mdp.id_mat_det_price = '" & GVListMatPD.Get
             End If
             rpt.dt_head = data
             'detail
-            query = "SELECT class.display_name AS class,dsg.`design_name`,color.display_name AS color
+            query = "SELECT class.display_name AS class,IF(pl.is_breakdown=1,CONCAT(dsg.`design_name`,' ',pc.size),dsg.`design_name`) AS `design_name`,color.display_name AS color
 ,FORMAT(plp.total_qty_pd,0,'id_ID') AS total_qty_pd
 ,FORMAT(CEIL(pl.`qty_consumption`),0,'id_ID') AS qty_consumption
 ,FORMAT(CEIL(plp.total_qty_pd*pl.`qty_consumption`),0,'id_ID') AS qty_order
@@ -881,6 +881,13 @@ LEFT JOIN
 	SELECT mdc.id_design,mcd.display_name FROM `tb_m_design_code` mdc
 	INNER JOIN tb_m_code_detail mcd ON mcd.id_code_detail=mdc.id_code_detail AND mcd.id_code=14
 ) color ON color.id_design=dsg.id_design
+LEFT JOIN tb_prod_demand_product pdp ON pdp.id_prod_demand_product=plp.id_prod_demand_product
+LEFT JOIN 
+(
+	SELECT pc.`id_product`,cd.`code_detail_name` AS size FROM 
+	tb_m_product_code pc 
+	INNER JOIN tb_m_code_detail cd ON cd.`id_code_detail`=pc.`id_code_detail` AND cd.`id_code`='33'
+)pc ON pc.`id_product`=pdp.`id_product`
 ORDER BY class.display_name"
             data = execute_query(query, -1, True, "", "", "", "")
             rpt.dt_det = data

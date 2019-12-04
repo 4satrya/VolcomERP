@@ -574,6 +574,31 @@
         Cursor = Cursors.Default
     End Sub
 
+    Sub logFollowUpInvoice()
+        If rmt = "225" Or rmt = "226" Or rmt = "227" Then
+            Dim query As String = "INSERT INTO tb_follow_up_ar(id_sales_pos, total_amount, follow_up, follow_up_result, follow_up_date)
+            SELECT sp.id_sales_pos, 
+            CAST(IF(typ.`is_receive_payment`=2,-1,1) * ((sp.`sales_pos_total`*((100-sp.sales_pos_discount)/100))-sp.`sales_pos_potongan`) AS DECIMAL(15,2))-IFNULL(pyd.`value`,0.00) AS amount,
+            IF(m.report_mark_type=225,'Email Invoice', IF(m.report_mark_type=226,'Email Pemberitahuan','Email Perimgatan')) AS `follow_up`,
+            '' AS `follow_up_result`,NOW()
+            FROM tb_mail_manage_det md
+            INNER JOIN tb_mail_manage m ON m.id_mail_manage = md.id_mail_manage
+            INNER JOIN tb_sales_pos sp ON sp.id_sales_pos = md.id_report
+            LEFT JOIN (
+               SELECT pyd.id_report, pyd.report_mark_type, 
+               COUNT(IF(py.id_report_status!=5 AND py.id_report_status!=6,py.id_rec_payment,NULL)) AS `total_pending`,
+               SUM(pyd.value) AS  `value`
+               FROM tb_rec_payment_det pyd
+               INNER JOIN tb_rec_payment py ON py.`id_rec_payment`=pyd.`id_rec_payment`
+               WHERE py.`id_report_status`=6
+               GROUP BY pyd.id_report, pyd.report_mark_type
+            ) pyd ON pyd.id_report = sp.id_sales_pos AND pyd.report_mark_type = sp.report_mark_type
+            INNER JOIN tb_lookup_memo_type typ ON typ.`id_memo_type`=sp.`id_memo_type`
+            WHERE md.id_mail_manage=" + id + " "
+            execute_non_query(query, True, "", "", "", "")
+        End If
+    End Sub
+
     Sub sendEmail()
         'send mail
         Dim sm As New ClassSendEmail()
@@ -599,6 +624,7 @@
             Dim querylog As String = "UPDATE tb_mail_manage SET updated_date=NOW(), updated_by='" + id_user + "', 
             id_mail_status=2, mail_status_note='Sent successfully' WHERE id_mail_manage='" + id + "'; " + queryInsertLog("2", "Sent successfully") + "; "
             execute_non_query(querylog, True, "", "", "", "")
+            logFollowUpInvoice()
         Catch ex As Exception
             Dim query As String = "UPDATE tb_mail_manage SET updated_date=NOW(), updated_by='" + id_user + "', 
             id_mail_status=3, mail_status_note='" + addSlashes(ex.ToString) + "' WHERE id_mail_manage='" + id + "';" + queryInsertLog("3", ex.ToString) + "; "

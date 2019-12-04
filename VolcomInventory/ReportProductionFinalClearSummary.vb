@@ -1,5 +1,7 @@
 ﻿Public Class ReportProductionFinalClearSummary
+    Public id As String = "0"
     Public data As DataTable = New DataTable
+    Public id_pre As String = "-1"
 
     Private Sub ReportProductionFinalClearSummary_BeforePrint(sender As Object, e As Printing.PrintEventArgs) Handles MyBase.BeforePrint
         GCSummary.DataSource = data
@@ -11,6 +13,12 @@
         GVSummary.Columns("prod_fc_date").Caption = GVSummary.Columns("prod_fc_date").Caption.Replace(" ", Environment.NewLine)
 
         GVSummary.BestFitColumns()
+
+        If id_pre = "-1" Then
+            load_mark_horz("222", id, "2", "1", XrTable)
+        Else
+            pre_load_mark_horz("222", id, "2", "2", XrTable)
+        End If
     End Sub
 
     Private Sub GVSummary_CustomSummaryCalculate(sender As Object, e As DevExpress.Data.CustomSummaryEventArgs) Handles GVSummary.CustomSummaryCalculate

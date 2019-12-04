@@ -1553,6 +1553,7 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             ElseIf FormProductionFinalClear.XTCQCReport.SelectedTabPageIndex = 2 Then
                 'propose summary
                 FormProductionFinalClearSummary.id_prod_fc_sum = "0"
+                FormProductionFinalClearSummary.is_vew = "0"
                 FormProductionFinalClearSummary.ShowDialog()
             End If
         ElseIf formName = "FormProductionAssembly" Then
@@ -2697,6 +2698,7 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
                 ElseIf FormProductionFinalClear.XTCQCReport.SelectedTabPageIndex = 2 Then
                     'propose summary
                     FormProductionFinalClearSummary.id_prod_fc_sum = FormProductionFinalClear.GVSum.GetFocusedRowCellValue("id_prod_fc_sum").ToString
+                    FormProductionFinalClearSummary.is_vew = "0"
                     FormProductionFinalClearSummary.ShowDialog()
                 End If
             ElseIf formName = "FormProductionAssembly" Then
@@ -13823,6 +13825,17 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             FormInvoiceTracking.Show()
             FormInvoiceTracking.WindowState = FormWindowState.Maximized
             FormInvoiceTracking.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+    End Sub
+
+    Private Sub NBFolluwUpAR_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBFolluwUpAR.LinkClicked
+        Try
+            FormFollowUpAR.MdiParent = Me
+            FormFollowUpAR.Show()
+            FormFollowUpAR.WindowState = FormWindowState.Maximized
+            FormFollowUpAR.Focus()
         Catch ex As Exception
             errorProcess()
         End Try

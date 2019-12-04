@@ -1888,6 +1888,12 @@
     <Compile Include="FormFingerPrint.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormFollowUpAR.Designer.vb">
+      <DependentUpon>FormFollowUpAR.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormFollowUpAR.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormGuide.Designer.vb">
       <DependentUpon>FormGuide.vb</DependentUpon>
     </Compile>
@@ -8334,6 +8340,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormFingerPrint.resx">
       <DependentUpon>FormFingerPrint.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormFollowUpAR.resx">
+      <DependentUpon>FormFollowUpAR.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormGuide.resx">
       <DependentUpon>FormGuide.vb</DependentUpon>

@@ -21,10 +21,12 @@ Partial Class FormProductionFinalClearSummary
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormProductionFinalClearSummary))
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TENumber = New DevExpress.XtraEditors.TextEdit()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.TEReportStatus = New DevExpress.XtraEditors.TextEdit()
         Me.TEUpdatedBy = New DevExpress.XtraEditors.TextEdit()
         Me.DEUpdatedDate = New DevExpress.XtraEditors.DateEdit()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -32,22 +34,24 @@ Partial Class FormProductionFinalClearSummary
         Me.TECreatedBy = New DevExpress.XtraEditors.TextEdit()
         Me.DECreatedDate = New DevExpress.XtraEditors.DateEdit()
         Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.SBCancel = New DevExpress.XtraEditors.SimpleButton()
+        Me.SBMark = New DevExpress.XtraEditors.SimpleButton()
         Me.SBAttachment = New DevExpress.XtraEditors.SimpleButton()
         Me.SBPrint = New DevExpress.XtraEditors.SimpleButton()
-        Me.TEReportStatus = New DevExpress.XtraEditors.TextEdit()
         Me.SBSave = New DevExpress.XtraEditors.SimpleButton()
-        Me.SBComplete = New DevExpress.XtraEditors.SimpleButton()
+        Me.SBSubmit = New DevExpress.XtraEditors.SimpleButton()
         Me.XtraTabControl = New DevExpress.XtraTab.XtraTabControl()
         Me.XTPList = New DevExpress.XtraTab.XtraTabPage()
         Me.GCList = New DevExpress.XtraGrid.GridControl()
         Me.GVList = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumnIdProdFc = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnNo = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnVendor = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnDesign = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnNumber = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnCategory = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnQtyPO = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnQtyRec = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnTanggalInput = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
         Me.SBRemove = New DevExpress.XtraEditors.SimpleButton()
         Me.SBAdd = New DevExpress.XtraEditors.SimpleButton()
@@ -73,13 +77,11 @@ Partial Class FormProductionFinalClearSummary
         Me.GridColumn13 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.GridColumn14 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.GridColumn15 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.GridColumnDesign = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnCategory = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnTanggalInput = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnNo = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.SBReset = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.TENumber.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TEReportStatus.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEUpdatedBy.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEUpdatedDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEUpdatedDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -88,7 +90,6 @@ Partial Class FormProductionFinalClearSummary
         CType(Me.DECreatedDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl3.SuspendLayout()
-        CType(Me.TEReportStatus.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XtraTabControl, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XtraTabControl.SuspendLayout()
         Me.XTPList.SuspendLayout()
@@ -103,10 +104,12 @@ Partial Class FormProductionFinalClearSummary
         '
         'PanelControl1
         '
+        Me.PanelControl1.Controls.Add(Me.Label8)
         Me.PanelControl1.Controls.Add(Me.Label1)
         Me.PanelControl1.Controls.Add(Me.TENumber)
         Me.PanelControl1.Controls.Add(Me.Label4)
         Me.PanelControl1.Controls.Add(Me.Label5)
+        Me.PanelControl1.Controls.Add(Me.TEReportStatus)
         Me.PanelControl1.Controls.Add(Me.TEUpdatedBy)
         Me.PanelControl1.Controls.Add(Me.DEUpdatedDate)
         Me.PanelControl1.Controls.Add(Me.Label3)
@@ -119,6 +122,15 @@ Partial Class FormProductionFinalClearSummary
         Me.PanelControl1.Size = New System.Drawing.Size(1008, 71)
         Me.PanelControl1.TabIndex = 0
         '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(12, 41)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(74, 13)
+        Me.Label8.TabIndex = 18
+        Me.Label8.Text = "Report Status"
+        '
         'Label1
         '
         Me.Label1.AutoSize = True
@@ -130,7 +142,7 @@ Partial Class FormProductionFinalClearSummary
         '
         'TENumber
         '
-        Me.TENumber.Location = New System.Drawing.Point(86, 12)
+        Me.TENumber.Location = New System.Drawing.Point(97, 12)
         Me.TENumber.Name = "TENumber"
         Me.TENumber.Properties.ReadOnly = True
         Me.TENumber.Size = New System.Drawing.Size(200, 20)
@@ -155,6 +167,14 @@ Partial Class FormProductionFinalClearSummary
         Me.Label5.Size = New System.Drawing.Size(63, 13)
         Me.Label5.TabIndex = 14
         Me.Label5.Text = "Updated By"
+        '
+        'TEReportStatus
+        '
+        Me.TEReportStatus.Location = New System.Drawing.Point(97, 38)
+        Me.TEReportStatus.Name = "TEReportStatus"
+        Me.TEReportStatus.Properties.ReadOnly = True
+        Me.TEReportStatus.Size = New System.Drawing.Size(200, 20)
+        Me.TEReportStatus.TabIndex = 17
         '
         'TEUpdatedBy
         '
@@ -232,43 +252,33 @@ Partial Class FormProductionFinalClearSummary
         '
         'PanelControl3
         '
-        Me.PanelControl3.Controls.Add(Me.Label8)
-        Me.PanelControl3.Controls.Add(Me.SBCancel)
+        Me.PanelControl3.Controls.Add(Me.SBMark)
         Me.PanelControl3.Controls.Add(Me.SBAttachment)
         Me.PanelControl3.Controls.Add(Me.SBPrint)
-        Me.PanelControl3.Controls.Add(Me.TEReportStatus)
+        Me.PanelControl3.Controls.Add(Me.SBReset)
         Me.PanelControl3.Controls.Add(Me.SBSave)
-        Me.PanelControl3.Controls.Add(Me.SBComplete)
+        Me.PanelControl3.Controls.Add(Me.SBSubmit)
         Me.PanelControl3.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.PanelControl3.Location = New System.Drawing.Point(0, 680)
         Me.PanelControl3.Name = "PanelControl3"
         Me.PanelControl3.Size = New System.Drawing.Size(1008, 49)
         Me.PanelControl3.TabIndex = 2
         '
-        'Label8
+        'SBMark
         '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(7, 18)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(74, 13)
-        Me.Label8.TabIndex = 18
-        Me.Label8.Text = "Report Status"
-        '
-        'SBCancel
-        '
-        Me.SBCancel.Dock = System.Windows.Forms.DockStyle.Right
-        Me.SBCancel.Image = CType(resources.GetObject("SBCancel.Image"), System.Drawing.Image)
-        Me.SBCancel.Location = New System.Drawing.Point(459, 2)
-        Me.SBCancel.Name = "SBCancel"
-        Me.SBCancel.Size = New System.Drawing.Size(129, 45)
-        Me.SBCancel.TabIndex = 16
-        Me.SBCancel.Text = "Cancel Propose"
+        Me.SBMark.Dock = System.Windows.Forms.DockStyle.Left
+        Me.SBMark.Image = CType(resources.GetObject("SBMark.Image"), System.Drawing.Image)
+        Me.SBMark.Location = New System.Drawing.Point(2, 2)
+        Me.SBMark.Name = "SBMark"
+        Me.SBMark.Size = New System.Drawing.Size(84, 45)
+        Me.SBMark.TabIndex = 21
+        Me.SBMark.Text = "Mark"
         '
         'SBAttachment
         '
         Me.SBAttachment.Dock = System.Windows.Forms.DockStyle.Right
         Me.SBAttachment.Image = CType(resources.GetObject("SBAttachment.Image"), System.Drawing.Image)
-        Me.SBAttachment.Location = New System.Drawing.Point(588, 2)
+        Me.SBAttachment.Location = New System.Drawing.Point(493, 2)
         Me.SBAttachment.Name = "SBAttachment"
         Me.SBAttachment.Size = New System.Drawing.Size(111, 45)
         Me.SBAttachment.TabIndex = 19
@@ -278,19 +288,11 @@ Partial Class FormProductionFinalClearSummary
         '
         Me.SBPrint.Dock = System.Windows.Forms.DockStyle.Right
         Me.SBPrint.Image = CType(resources.GetObject("SBPrint.Image"), System.Drawing.Image)
-        Me.SBPrint.Location = New System.Drawing.Point(699, 2)
+        Me.SBPrint.Location = New System.Drawing.Point(604, 2)
         Me.SBPrint.Name = "SBPrint"
         Me.SBPrint.Size = New System.Drawing.Size(83, 45)
         Me.SBPrint.TabIndex = 20
         Me.SBPrint.Text = "Print"
-        '
-        'TEReportStatus
-        '
-        Me.TEReportStatus.Location = New System.Drawing.Point(92, 15)
-        Me.TEReportStatus.Name = "TEReportStatus"
-        Me.TEReportStatus.Properties.ReadOnly = True
-        Me.TEReportStatus.Size = New System.Drawing.Size(200, 20)
-        Me.TEReportStatus.TabIndex = 17
         '
         'SBSave
         '
@@ -302,15 +304,15 @@ Partial Class FormProductionFinalClearSummary
         Me.SBSave.TabIndex = 15
         Me.SBSave.Text = "Save Changes"
         '
-        'SBComplete
+        'SBSubmit
         '
-        Me.SBComplete.Dock = System.Windows.Forms.DockStyle.Right
-        Me.SBComplete.Image = CType(resources.GetObject("SBComplete.Image"), System.Drawing.Image)
-        Me.SBComplete.Location = New System.Drawing.Point(905, 2)
-        Me.SBComplete.Name = "SBComplete"
-        Me.SBComplete.Size = New System.Drawing.Size(101, 45)
-        Me.SBComplete.TabIndex = 14
-        Me.SBComplete.Text = "Complete"
+        Me.SBSubmit.Dock = System.Windows.Forms.DockStyle.Right
+        Me.SBSubmit.Image = CType(resources.GetObject("SBSubmit.Image"), System.Drawing.Image)
+        Me.SBSubmit.Location = New System.Drawing.Point(905, 2)
+        Me.SBSubmit.Name = "SBSubmit"
+        Me.SBSubmit.Size = New System.Drawing.Size(101, 45)
+        Me.SBSubmit.TabIndex = 14
+        Me.SBSubmit.Text = "Submit"
         '
         'XtraTabControl
         '
@@ -355,6 +357,15 @@ Partial Class FormProductionFinalClearSummary
         Me.GridColumnIdProdFc.Name = "GridColumnIdProdFc"
         Me.GridColumnIdProdFc.OptionsColumn.AllowEdit = False
         '
+        'GridColumnNo
+        '
+        Me.GridColumnNo.Caption = "No"
+        Me.GridColumnNo.FieldName = "no"
+        Me.GridColumnNo.Name = "GridColumnNo"
+        Me.GridColumnNo.OptionsColumn.AllowEdit = False
+        Me.GridColumnNo.Visible = True
+        Me.GridColumnNo.VisibleIndex = 0
+        '
         'GridColumnVendor
         '
         Me.GridColumnVendor.Caption = "Vendor"
@@ -364,6 +375,15 @@ Partial Class FormProductionFinalClearSummary
         Me.GridColumnVendor.Visible = True
         Me.GridColumnVendor.VisibleIndex = 1
         '
+        'GridColumnDesign
+        '
+        Me.GridColumnDesign.Caption = "Design"
+        Me.GridColumnDesign.FieldName = "name"
+        Me.GridColumnDesign.Name = "GridColumnDesign"
+        Me.GridColumnDesign.OptionsColumn.AllowEdit = False
+        Me.GridColumnDesign.Visible = True
+        Me.GridColumnDesign.VisibleIndex = 2
+        '
         'GridColumnNumber
         '
         Me.GridColumnNumber.Caption = "Number"
@@ -372,6 +392,15 @@ Partial Class FormProductionFinalClearSummary
         Me.GridColumnNumber.OptionsColumn.AllowEdit = False
         Me.GridColumnNumber.Visible = True
         Me.GridColumnNumber.VisibleIndex = 3
+        '
+        'GridColumnCategory
+        '
+        Me.GridColumnCategory.Caption = "Category"
+        Me.GridColumnCategory.FieldName = "pl_category"
+        Me.GridColumnCategory.Name = "GridColumnCategory"
+        Me.GridColumnCategory.OptionsColumn.AllowEdit = False
+        Me.GridColumnCategory.Visible = True
+        Me.GridColumnCategory.VisibleIndex = 4
         '
         'GridColumnQtyPO
         '
@@ -394,6 +423,17 @@ Partial Class FormProductionFinalClearSummary
         Me.GridColumnQtyRec.OptionsColumn.AllowEdit = False
         Me.GridColumnQtyRec.Visible = True
         Me.GridColumnQtyRec.VisibleIndex = 6
+        '
+        'GridColumnTanggalInput
+        '
+        Me.GridColumnTanggalInput.Caption = "Tanggal Input"
+        Me.GridColumnTanggalInput.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.GridColumnTanggalInput.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumnTanggalInput.FieldName = "prod_fc_date"
+        Me.GridColumnTanggalInput.Name = "GridColumnTanggalInput"
+        Me.GridColumnTanggalInput.OptionsColumn.AllowEdit = False
+        Me.GridColumnTanggalInput.Visible = True
+        Me.GridColumnTanggalInput.VisibleIndex = 7
         '
         'PanelControl2
         '
@@ -674,43 +714,15 @@ Partial Class FormProductionFinalClearSummary
         Me.GridColumn15.Visible = True
         Me.GridColumn15.Width = 77
         '
-        'GridColumnDesign
+        'SBReset
         '
-        Me.GridColumnDesign.Caption = "Design"
-        Me.GridColumnDesign.FieldName = "name"
-        Me.GridColumnDesign.Name = "GridColumnDesign"
-        Me.GridColumnDesign.OptionsColumn.AllowEdit = False
-        Me.GridColumnDesign.Visible = True
-        Me.GridColumnDesign.VisibleIndex = 2
-        '
-        'GridColumnCategory
-        '
-        Me.GridColumnCategory.Caption = "Category"
-        Me.GridColumnCategory.FieldName = "pl_category"
-        Me.GridColumnCategory.Name = "GridColumnCategory"
-        Me.GridColumnCategory.OptionsColumn.AllowEdit = False
-        Me.GridColumnCategory.Visible = True
-        Me.GridColumnCategory.VisibleIndex = 4
-        '
-        'GridColumnTanggalInput
-        '
-        Me.GridColumnTanggalInput.Caption = "Tanggal Input"
-        Me.GridColumnTanggalInput.DisplayFormat.FormatString = "dd MMM yyyy"
-        Me.GridColumnTanggalInput.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.GridColumnTanggalInput.FieldName = "prod_fc_date"
-        Me.GridColumnTanggalInput.Name = "GridColumnTanggalInput"
-        Me.GridColumnTanggalInput.OptionsColumn.AllowEdit = False
-        Me.GridColumnTanggalInput.Visible = True
-        Me.GridColumnTanggalInput.VisibleIndex = 7
-        '
-        'GridColumnNo
-        '
-        Me.GridColumnNo.Caption = "No"
-        Me.GridColumnNo.FieldName = "no"
-        Me.GridColumnNo.Name = "GridColumnNo"
-        Me.GridColumnNo.OptionsColumn.AllowEdit = False
-        Me.GridColumnNo.Visible = True
-        Me.GridColumnNo.VisibleIndex = 0
+        Me.SBReset.Dock = System.Windows.Forms.DockStyle.Right
+        Me.SBReset.Image = CType(resources.GetObject("SBReset.Image"), System.Drawing.Image)
+        Me.SBReset.Location = New System.Drawing.Point(687, 2)
+        Me.SBReset.Name = "SBReset"
+        Me.SBReset.Size = New System.Drawing.Size(95, 45)
+        Me.SBReset.TabIndex = 22
+        Me.SBReset.Text = "Reset"
         '
         'FormProductionFinalClearSummary
         '
@@ -729,6 +741,7 @@ Partial Class FormProductionFinalClearSummary
         Me.PanelControl1.ResumeLayout(False)
         Me.PanelControl1.PerformLayout()
         CType(Me.TENumber.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TEReportStatus.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEUpdatedBy.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEUpdatedDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEUpdatedDate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -737,8 +750,6 @@ Partial Class FormProductionFinalClearSummary
         CType(Me.DECreatedDate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl3.ResumeLayout(False)
-        Me.PanelControl3.PerformLayout()
-        CType(Me.TEReportStatus.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XtraTabControl, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XtraTabControl.ResumeLayout(False)
         Me.XTPList.ResumeLayout(False)
@@ -765,10 +776,9 @@ Partial Class FormProductionFinalClearSummary
     Friend WithEvents SBRemove As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents SBAdd As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents Label8 As Label
-    Friend WithEvents SBCancel As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents TEReportStatus As DevExpress.XtraEditors.TextEdit
     Friend WithEvents SBSave As DevExpress.XtraEditors.SimpleButton
-    Friend WithEvents SBComplete As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents SBSubmit As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents Label4 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents TEUpdatedBy As DevExpress.XtraEditors.TextEdit
@@ -810,4 +820,6 @@ Partial Class FormProductionFinalClearSummary
     Friend WithEvents GridColumnCategory As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnTanggalInput As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnNo As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents SBMark As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents SBReset As DevExpress.XtraEditors.SimpleButton
 End Class

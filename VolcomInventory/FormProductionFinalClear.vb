@@ -285,6 +285,7 @@
     Private Sub GVSum_DoubleClick(sender As Object, e As EventArgs) Handles GVSum.DoubleClick
         Try
             FormProductionFinalClearSummary.id_prod_fc_sum = GVSum.GetFocusedRowCellValue("id_prod_fc_sum").ToString
+            FormProductionFinalClearSummary.is_vew = "0"
             FormProductionFinalClearSummary.ShowDialog()
         Catch ex As Exception
         End Try

@@ -1,5 +1,6 @@
 ﻿Public Class FormProductionFinalClearSummary
     Public id_prod_fc_sum As String = "0"
+    Public is_vew As String = "0"
 
     Private id_report_status As String = "-1"
 
@@ -50,11 +51,12 @@
         'controls
         SBAdd.Enabled = True
         SBRemove.Enabled = True
-        SBComplete.Enabled = True
+        SBSubmit.Enabled = True
         SBSave.Enabled = True
         SBAttachment.Enabled = False
-        SBCancel.Enabled = False
+        SBReset.Enabled = False
         SBPrint.Enabled = False
+        SBMark.Enabled = False
     End Sub
 
     Sub load_form()
@@ -102,19 +104,29 @@
         If id_report_status = "0" Then
             SBAdd.Enabled = True
             SBRemove.Enabled = True
-            SBComplete.Enabled = True
+            SBSubmit.Enabled = True
             SBSave.Enabled = True
             SBAttachment.Enabled = True
-            SBCancel.Enabled = True
+            SBReset.Enabled = False
             SBPrint.Enabled = False
+            SBMark.Enabled = False
         Else
             SBAdd.Enabled = False
             SBRemove.Enabled = False
-            SBComplete.Enabled = False
+            SBSubmit.Enabled = False
             SBSave.Enabled = False
             SBAttachment.Enabled = True
-            SBCancel.Enabled = False
+            SBReset.Enabled = True
             SBPrint.Enabled = False
+            SBMark.Enabled = True
+        End If
+
+        If id_report_status = "5" Or id_report_status = "6" Then
+            SBReset.Enabled = False
+        End If
+
+        If is_vew = "1" Then
+            SBReset.Visible = False
         End If
     End Sub
 
@@ -126,16 +138,16 @@
         GVList.DeleteSelectedRows()
     End Sub
 
-    Private Sub SBComplete_Click(sender As Object, e As EventArgs) Handles SBComplete.Click
+    Private Sub SBSubmit_Click(sender As Object, e As EventArgs) Handles SBSubmit.Click
         If GVList.RowCount <= 0 Then
             errorCustom("No qc report selected")
         Else
             Dim confirm As DialogResult
 
-            confirm = DevExpress.XtraEditors.XtraMessageBox.Show("All data will be locked. Are you sure want to complete ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+            confirm = DevExpress.XtraEditors.XtraMessageBox.Show("All data will be locked. Are you sure want to submit ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
 
             If confirm = Windows.Forms.DialogResult.Yes Then
-                save("complete")
+                save("submit")
 
                 Close()
             End If
@@ -163,24 +175,10 @@
         Cursor = Cursors.Default
     End Sub
 
-    Private Sub SBCancel_Click(sender As Object, e As EventArgs) Handles SBCancel.Click
-        Dim confirm As DialogResult
-
-        confirm = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure want to cancel propose ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
-
-        If confirm = Windows.Forms.DialogResult.Yes Then
-            Dim query As String = "UPDATE tb_prod_fc_sum SET id_report_status = 5 WHERE id_prod_fc_sum = " + id_prod_fc_sum
-
-            execute_non_query(query, True, "", "", "", "")
-
-            Close()
-        End If
-    End Sub
-
     Sub save(type As String)
         Dim query As String = ""
 
-        Dim id_report_status As String = If(type = "complete", "6", "0")
+        Dim id_report_status As String = If(type = "submit", "1", "0")
 
         'tb_prod_fc_sum
         If id_prod_fc_sum = "0" Then
@@ -216,6 +214,11 @@
         query = query.Substring(0, query.Length - 2)
 
         execute_non_query(query, True, "", "", "", "")
+
+        'submit
+        If type = "submit" Then
+            submit_who_prepared("222", id_prod_fc_sum, id_user)
+        End If
     End Sub
 
     Private Sub GVList_RowCountChanged(sender As Object, e As EventArgs) Handles GVList.RowCountChanged
@@ -299,10 +302,10 @@
         If XtraTabControl.SelectedTabPageIndex = 1 Then
             view_summary()
 
-            If id_report_status = "6" Then
-                SBPrint.Enabled = True
-            Else
+            If id_report_status = "0" Or id_report_status = "-1" Then
                 SBPrint.Enabled = False
+            Else
+                SBPrint.Enabled = True
             End If
         Else
             SBPrint.Enabled = False
@@ -342,15 +345,51 @@
     End Sub
 
     Private Sub SBPrint_Click(sender As Object, e As EventArgs) Handles SBPrint.Click
-        Dim Report As New ReportProductionFinalClearSummary()
+        If Not check_allow_print(id_report_status, "222", id_prod_fc_sum) Then
+            warningCustom("Can't print, please complete all approval on system first")
+        Else
+            Dim Report As New ReportProductionFinalClearSummary()
 
-        Report.XLDepartement.Text = execute_query("SELECT departement FROM tb_m_departement WHERE id_departement = 4", 0, True, "", "", "", "")
-        Report.XLNumber.Text = TENumber.EditValue.ToString
+            Report.XLDepartement.Text = execute_query("SELECT departement FROM tb_m_departement WHERE id_departement = 4", 0, True, "", "", "", "")
+            Report.XLNumber.Text = TENumber.EditValue.ToString
 
-        Report.data = GCSummary.DataSource
+            Report.id = id_prod_fc_sum
+            Report.data = GCSummary.DataSource
+            Report.id_pre = If(id_report_status = "6", "-1", "1")
 
-        Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
+            Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
 
-        Tool.ShowPreviewDialog()
+            Tool.ShowPreviewDialog()
+        End If
+    End Sub
+
+    Private Sub SBMark_Click(sender As Object, e As EventArgs) Handles SBMark.Click
+        FormReportMark.id_report = id_prod_fc_sum
+        FormReportMark.report_mark_type = "222"
+        FormReportMark.is_view = is_vew
+
+        FormReportMark.ShowDialog()
+    End Sub
+
+    Private Sub SBReset_Click(sender As Object, e As EventArgs) Handles SBReset.Click
+        Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("This action will be reset approval and you can update this propose. Are you sure you want to reset this propose ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+
+        If confirm = Windows.Forms.DialogResult.Yes Then
+            Try
+                Dim query_upd As String = "
+                    -- delete report mark
+                    DELETE FROM tb_report_mark WHERE report_mark_type = 222 AND id_report = " + id_prod_fc_sum + "; 
+                    -- reset confirm
+                    UPDATE tb_prod_fc_sum SET id_report_status = 0 WHERE id_prod_fc_sum = " + id_prod_fc_sum + ";
+                "
+
+                execute_non_query(query_upd, True, "", "", "", "")
+
+                load_form()
+            Catch ex As Exception
+                stopCustom(ex.ToString)
+                Close()
+            End Try
+        End If
     End Sub
 End Class

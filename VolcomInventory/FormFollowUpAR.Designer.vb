@@ -31,6 +31,15 @@ Partial Class FormFollowUpAR
         Me.GCData = New DevExpress.XtraGrid.GridControl()
         Me.GVData = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.XTPInvoiceOpen = New DevExpress.XtraTab.XtraTabPage()
+        Me.GridColumnid_follow_up_ar = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnid_comp_group = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumngroup = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumndue_date = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumngroup_description = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnfollow_up = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnfollow_up_result = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnfollow_up_date = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnfollow_up_input = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -139,10 +148,12 @@ Partial Class FormFollowUpAR
         '
         'GVData
         '
+        Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnid_follow_up_ar, Me.GridColumnid_comp_group, Me.GridColumngroup, Me.GridColumngroup_description, Me.GridColumndue_date, Me.GridColumnfollow_up, Me.GridColumnfollow_up_result, Me.GridColumnfollow_up_date, Me.GridColumnfollow_up_input})
         Me.GVData.GridControl = Me.GCData
         Me.GVData.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_rec", Nothing, "{0:N2}")})
         Me.GVData.Name = "GVData"
         Me.GVData.OptionsBehavior.AutoExpandAllGroups = True
+        Me.GVData.OptionsBehavior.ReadOnly = True
         Me.GVData.OptionsFind.AlwaysVisible = True
         Me.GVData.OptionsSelection.EnableAppearanceFocusedRow = False
         Me.GVData.OptionsView.ColumnAutoWidth = False
@@ -155,6 +166,80 @@ Partial Class FormFollowUpAR
         Me.XTPInvoiceOpen.Name = "XTPInvoiceOpen"
         Me.XTPInvoiceOpen.Size = New System.Drawing.Size(1013, 500)
         Me.XTPInvoiceOpen.Text = "Current Invoice Open"
+        '
+        'GridColumnid_follow_up_ar
+        '
+        Me.GridColumnid_follow_up_ar.Caption = "id_follow_up_ar"
+        Me.GridColumnid_follow_up_ar.FieldName = "id_follow_up_ar"
+        Me.GridColumnid_follow_up_ar.Name = "GridColumnid_follow_up_ar"
+        '
+        'GridColumnid_comp_group
+        '
+        Me.GridColumnid_comp_group.Caption = "id_comp_group"
+        Me.GridColumnid_comp_group.FieldName = "id_comp_group"
+        Me.GridColumnid_comp_group.Name = "GridColumnid_comp_group"
+        '
+        'GridColumngroup
+        '
+        Me.GridColumngroup.Caption = "Group"
+        Me.GridColumngroup.FieldName = "group"
+        Me.GridColumngroup.Name = "GridColumngroup"
+        Me.GridColumngroup.Visible = True
+        Me.GridColumngroup.VisibleIndex = 0
+        '
+        'GridColumndue_date
+        '
+        Me.GridColumndue_date.Caption = "Due Date"
+        Me.GridColumndue_date.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.GridColumndue_date.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumndue_date.FieldName = "due_date"
+        Me.GridColumndue_date.Name = "GridColumndue_date"
+        Me.GridColumndue_date.Visible = True
+        Me.GridColumndue_date.VisibleIndex = 2
+        '
+        'GridColumngroup_description
+        '
+        Me.GridColumngroup_description.Caption = "Group Description"
+        Me.GridColumngroup_description.FieldName = "group_description"
+        Me.GridColumngroup_description.Name = "GridColumngroup_description"
+        Me.GridColumngroup_description.Visible = True
+        Me.GridColumngroup_description.VisibleIndex = 1
+        '
+        'GridColumnfollow_up
+        '
+        Me.GridColumnfollow_up.Caption = "Follow Up"
+        Me.GridColumnfollow_up.FieldName = "follow_up"
+        Me.GridColumnfollow_up.Name = "GridColumnfollow_up"
+        Me.GridColumnfollow_up.Visible = True
+        Me.GridColumnfollow_up.VisibleIndex = 3
+        '
+        'GridColumnfollow_up_result
+        '
+        Me.GridColumnfollow_up_result.Caption = "Follow Up Result"
+        Me.GridColumnfollow_up_result.FieldName = "follow_up_result"
+        Me.GridColumnfollow_up_result.Name = "GridColumnfollow_up_result"
+        Me.GridColumnfollow_up_result.Visible = True
+        Me.GridColumnfollow_up_result.VisibleIndex = 4
+        '
+        'GridColumnfollow_up_date
+        '
+        Me.GridColumnfollow_up_date.Caption = "Date"
+        Me.GridColumnfollow_up_date.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.GridColumnfollow_up_date.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumnfollow_up_date.FieldName = "follow_up_date"
+        Me.GridColumnfollow_up_date.Name = "GridColumnfollow_up_date"
+        Me.GridColumnfollow_up_date.Visible = True
+        Me.GridColumnfollow_up_date.VisibleIndex = 5
+        '
+        'GridColumnfollow_up_input
+        '
+        Me.GridColumnfollow_up_input.Caption = "Updated at"
+        Me.GridColumnfollow_up_input.DisplayFormat.FormatString = "dd MMMM yyyy HH:mm:ss"
+        Me.GridColumnfollow_up_input.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumnfollow_up_input.FieldName = "follow_up_input"
+        Me.GridColumnfollow_up_input.Name = "GridColumnfollow_up_input"
+        Me.GridColumnfollow_up_input.Visible = True
+        Me.GridColumnfollow_up_input.VisibleIndex = 6
         '
         'FormFollowUpAR
         '
@@ -192,4 +277,13 @@ Partial Class FormFollowUpAR
     Friend WithEvents DEFrom As DevExpress.XtraEditors.DateEdit
     Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LabelControl3 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents GridColumnid_follow_up_ar As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnid_comp_group As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumngroup As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumngroup_description As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumndue_date As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnfollow_up As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnfollow_up_result As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnfollow_up_date As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnfollow_up_input As DevExpress.XtraGrid.Columns.GridColumn
 End Class

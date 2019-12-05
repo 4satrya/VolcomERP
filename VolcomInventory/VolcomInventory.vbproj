@@ -231,6 +231,7 @@
     <Compile Include="ClassFGWHAlloc.vb" />
     <Compile Include="ClassFGWoff.vb" />
     <Compile Include="ClassFingerPrint.vb" />
+    <Compile Include="ClassFollowUpAR.vb" />
     <Compile Include="ClassItemCat.vb" />
     <Compile Include="ClassItemDel.vb" />
     <Compile Include="ClassItemExpense.vb" />

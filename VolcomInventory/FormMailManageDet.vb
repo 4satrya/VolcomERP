@@ -576,13 +576,15 @@
 
     Sub logFollowUpInvoice()
         If rmt = "225" Or rmt = "226" Or rmt = "227" Then
-            Dim query As String = "INSERT INTO tb_follow_up_ar(due_date, follow_up, follow_up_result, follow_up_date,follow_up_input)
-            SELECT sp.sales_pos_due_date,
+            Dim query As String = "INSERT INTO tb_follow_up_ar(id_comp_group,due_date, follow_up, follow_up_result, follow_up_date,follow_up_input)
+            SELECT c.id_comp_group, sp.sales_pos_due_date,
             IF(m.report_mark_type=225,'Email Invoice', IF(m.report_mark_type=226,'Email Pemberitahuan','Email Perimgatan')) AS `follow_up`,
             '' AS `follow_up_result`,DATE(NOW()), NOW()
             FROM tb_mail_manage_det md
             INNER JOIN tb_mail_manage m ON m.id_mail_manage = md.id_mail_manage
             INNER JOIN tb_sales_pos sp ON sp.id_sales_pos = md.id_report
+            INNER JOIN tb_m_comp_contact cc ON cc.`id_comp_contact`= IF(sp.id_memo_type=8 OR sp.id_memo_type=9, sp.id_comp_contact_bill,sp.`id_store_contact_from`)
+            INNER JOIN tb_m_comp c ON c.`id_comp`=cc.`id_comp`
             INNER JOIN tb_lookup_memo_type typ ON typ.`id_memo_type`=sp.`id_memo_type`
             WHERE md.id_mail_manage=" + id + "
             GROUP BY sp.sales_pos_due_date "

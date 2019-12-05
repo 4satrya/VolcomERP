@@ -11,14 +11,18 @@
     End Sub
 
     Private Sub FormFollowUpARDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        actionLoad()
     End Sub
 
-    Private Sub DateEdit1_EditValueChanged(sender As Object, e As EventArgs) Handles DEDueDate.EditValueChanged
+    Sub actionLoad()
+        Cursor = Cursors.WaitCursor
+        SLEStoreGroup.Focus()
+        If action = "ins" Then
 
+        ElseIf action = "upd" Then
+
+        End If
+        Cursor = Cursors.Default
     End Sub
 
-    Private Sub DateEdit2_EditValueChanged(sender As Object, e As EventArgs) Handles DEFollowUpDate.EditValueChanged
-
-    End Sub
 End Class

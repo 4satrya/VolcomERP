@@ -87,7 +87,7 @@ Partial Class FormFollowUpARDet
         Me.SLEStoreGroup.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.SLEStoreGroup.Properties.View = Me.GridView3
         Me.SLEStoreGroup.Size = New System.Drawing.Size(313, 20)
-        Me.SLEStoreGroup.TabIndex = 8925
+        Me.SLEStoreGroup.TabIndex = 0
         '
         'GridView3
         '
@@ -153,7 +153,7 @@ Partial Class FormFollowUpARDet
         Me.BtnBrowseDate.Location = New System.Drawing.Point(391, 47)
         Me.BtnBrowseDate.Name = "BtnBrowseDate"
         Me.BtnBrowseDate.Size = New System.Drawing.Size(34, 20)
-        Me.BtnBrowseDate.TabIndex = 8928
+        Me.BtnBrowseDate.TabIndex = 1
         Me.BtnBrowseDate.Text = "..."
         '
         'MEFollowUp
@@ -161,7 +161,7 @@ Partial Class FormFollowUpARDet
         Me.MEFollowUp.Location = New System.Drawing.Point(112, 99)
         Me.MEFollowUp.Name = "MEFollowUp"
         Me.MEFollowUp.Size = New System.Drawing.Size(313, 50)
-        Me.MEFollowUp.TabIndex = 8929
+        Me.MEFollowUp.TabIndex = 3
         '
         'LabelControl2
         '
@@ -176,7 +176,7 @@ Partial Class FormFollowUpARDet
         Me.MEFollowUpResult.Location = New System.Drawing.Point(112, 155)
         Me.MEFollowUpResult.Name = "MEFollowUpResult"
         Me.MEFollowUpResult.Size = New System.Drawing.Size(313, 50)
-        Me.MEFollowUpResult.TabIndex = 8931
+        Me.MEFollowUpResult.TabIndex = 4
         '
         'LabelControl4
         '
@@ -205,7 +205,7 @@ Partial Class FormFollowUpARDet
         Me.DEFollowUpDate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.DEFollowUpDate.Properties.Mask.EditMask = "dd\/MM\/yyyy"
         Me.DEFollowUpDate.Size = New System.Drawing.Size(313, 20)
-        Me.DEFollowUpDate.TabIndex = 8934
+        Me.DEFollowUpDate.TabIndex = 2
         '
         'FormFollowUpARDet
         '

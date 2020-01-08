@@ -43,8 +43,16 @@ Partial Class FormAccountingJournalBill
         Me.GridColumnIdReport = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnReportMarkType = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnReff = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnNumberReff = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdCompany = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RISLEVendor = New DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit()
+        Me.RISLEVendorView = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn13 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdAccSrc = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemComboBox1 = New DevExpress.XtraEditors.Repository.RepositoryItemComboBox()
         Me.PanelControl4 = New DevExpress.XtraEditors.PanelControl()
         Me.PanelBottomRight = New DevExpress.XtraEditors.PanelControl()
@@ -74,7 +82,6 @@ Partial Class FormAccountingJournalBill
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.LTransNo = New DevExpress.XtraEditors.LabelControl()
-        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.BalanceMenu.SuspendLayout()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ImgBut, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -85,6 +92,8 @@ Partial Class FormAccountingJournalBill
         CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RSLEStatusOpen, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemSearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RISLEVendor, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RISLEVendorView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemComboBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl4.SuspendLayout()
@@ -156,7 +165,7 @@ Partial Class FormAccountingJournalBill
         Me.GCJournalDet.Location = New System.Drawing.Point(0, 134)
         Me.GCJournalDet.MainView = Me.GVJournalDet
         Me.GCJournalDet.Name = "GCJournalDet"
-        Me.GCJournalDet.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemTextEdit1, Me.RepositoryItemTextEdit2, Me.RepositoryItemComboBox1, Me.RSLEStatusOpen})
+        Me.GCJournalDet.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemTextEdit1, Me.RepositoryItemTextEdit2, Me.RepositoryItemComboBox1, Me.RSLEStatusOpen, Me.RISLEVendor})
         Me.GCJournalDet.Size = New System.Drawing.Size(826, 266)
         Me.GCJournalDet.TabIndex = 16
         Me.GCJournalDet.TabStop = False
@@ -164,7 +173,7 @@ Partial Class FormAccountingJournalBill
         '
         'GVJournalDet
         '
-        Me.GVJournalDet.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn6, Me.GridColumn7, Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumnStatus, Me.GridColumnIdReport, Me.GridColumnReportMarkType, Me.GridColumnReff, Me.GridColumnIdCompany, Me.GridColumnIdAccSrc, Me.GridColumn8})
+        Me.GVJournalDet.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn6, Me.GridColumn7, Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumnStatus, Me.GridColumnIdReport, Me.GridColumnReportMarkType, Me.GridColumnReff, Me.GridColumnNumberReff, Me.GridColumnIdCompany, Me.GridColumnIdAccSrc, Me.GridColumn8})
         Me.GVJournalDet.GridControl = Me.GCJournalDet
         Me.GVJournalDet.Name = "GVJournalDet"
         Me.GVJournalDet.OptionsLayout.Columns.StoreAllOptions = True
@@ -313,23 +322,85 @@ Partial Class FormAccountingJournalBill
         '
         'GridColumnReff
         '
-        Me.GridColumnReff.Caption = "Reff"
+        Me.GridColumnReff.Caption = "Report Number"
         Me.GridColumnReff.FieldName = "report_number"
         Me.GridColumnReff.Name = "GridColumnReff"
         Me.GridColumnReff.Visible = True
-        Me.GridColumnReff.VisibleIndex = 6
+        Me.GridColumnReff.VisibleIndex = 7
+        '
+        'GridColumnNumberReff
+        '
+        Me.GridColumnNumberReff.Caption = "Report Number Reff"
+        Me.GridColumnNumberReff.FieldName = "report_number_ref"
+        Me.GridColumnNumberReff.Name = "GridColumnNumberReff"
+        Me.GridColumnNumberReff.Visible = True
+        Me.GridColumnNumberReff.VisibleIndex = 8
         '
         'GridColumnIdCompany
         '
-        Me.GridColumnIdCompany.Caption = "Id Company"
+        Me.GridColumnIdCompany.Caption = "Vendor"
+        Me.GridColumnIdCompany.ColumnEdit = Me.RISLEVendor
         Me.GridColumnIdCompany.FieldName = "id_comp"
         Me.GridColumnIdCompany.Name = "GridColumnIdCompany"
+        Me.GridColumnIdCompany.Visible = True
+        Me.GridColumnIdCompany.VisibleIndex = 6
+        '
+        'RISLEVendor
+        '
+        Me.RISLEVendor.AutoHeight = False
+        Me.RISLEVendor.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.RISLEVendor.Name = "RISLEVendor"
+        Me.RISLEVendor.View = Me.RISLEVendorView
+        '
+        'RISLEVendorView
+        '
+        Me.RISLEVendorView.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn10, Me.GridColumn11, Me.GridColumn12, Me.GridColumn13})
+        Me.RISLEVendorView.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.RISLEVendorView.Name = "RISLEVendorView"
+        Me.RISLEVendorView.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.RISLEVendorView.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn10
+        '
+        Me.GridColumn10.Caption = "GridColumn10"
+        Me.GridColumn10.FieldName = "id_comp"
+        Me.GridColumn10.Name = "GridColumn10"
+        '
+        'GridColumn11
+        '
+        Me.GridColumn11.Caption = "Code"
+        Me.GridColumn11.FieldName = "comp_number"
+        Me.GridColumn11.Name = "GridColumn11"
+        Me.GridColumn11.Visible = True
+        Me.GridColumn11.VisibleIndex = 0
+        '
+        'GridColumn12
+        '
+        Me.GridColumn12.Caption = "Vendor"
+        Me.GridColumn12.FieldName = "comp_name"
+        Me.GridColumn12.Name = "GridColumn12"
+        Me.GridColumn12.Visible = True
+        Me.GridColumn12.VisibleIndex = 1
+        '
+        'GridColumn13
+        '
+        Me.GridColumn13.FieldName = "description"
+        Me.GridColumn13.Name = "GridColumn13"
         '
         'GridColumnIdAccSrc
         '
         Me.GridColumnIdAccSrc.Caption = "GridColumn8"
         Me.GridColumnIdAccSrc.FieldName = "id_acc_src"
         Me.GridColumnIdAccSrc.Name = "GridColumnIdAccSrc"
+        '
+        'GridColumn8
+        '
+        Me.GridColumn8.Caption = "Account Description"
+        Me.GridColumn8.FieldName = "acc_description"
+        Me.GridColumn8.Name = "GridColumn8"
+        Me.GridColumn8.OptionsColumn.AllowEdit = False
+        Me.GridColumn8.Visible = True
+        Me.GridColumn8.VisibleIndex = 2
         '
         'RepositoryItemComboBox1
         '
@@ -524,6 +595,7 @@ Partial Class FormAccountingJournalBill
         '
         'LabelControl5
         '
+        Me.LabelControl5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LabelControl5.Location = New System.Drawing.Point(560, 41)
         Me.LabelControl5.Name = "LabelControl5"
         Me.LabelControl5.Size = New System.Drawing.Size(76, 13)
@@ -532,6 +604,7 @@ Partial Class FormAccountingJournalBill
         '
         'DERefDate
         '
+        Me.DERefDate.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DERefDate.EditValue = Nothing
         Me.DERefDate.Location = New System.Drawing.Point(642, 38)
         Me.DERefDate.Name = "DERefDate"
@@ -545,6 +618,7 @@ Partial Class FormAccountingJournalBill
         '
         'TEDate
         '
+        Me.TEDate.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TEDate.EditValue = Nothing
         Me.TEDate.Enabled = False
         Me.TEDate.Location = New System.Drawing.Point(642, 12)
@@ -613,6 +687,7 @@ Partial Class FormAccountingJournalBill
         '
         'TEUserEntry
         '
+        Me.TEUserEntry.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TEUserEntry.Location = New System.Drawing.Point(642, 64)
         Me.TEUserEntry.Name = "TEUserEntry"
         Me.TEUserEntry.Properties.ReadOnly = True
@@ -622,6 +697,7 @@ Partial Class FormAccountingJournalBill
         '
         'LabelControl2
         '
+        Me.LabelControl2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LabelControl2.Location = New System.Drawing.Point(560, 67)
         Me.LabelControl2.Name = "LabelControl2"
         Me.LabelControl2.Size = New System.Drawing.Size(51, 13)
@@ -638,20 +714,12 @@ Partial Class FormAccountingJournalBill
         '
         'LTransNo
         '
+        Me.LTransNo.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LTransNo.Location = New System.Drawing.Point(560, 15)
         Me.LTransNo.Name = "LTransNo"
         Me.LTransNo.Size = New System.Drawing.Size(23, 13)
         Me.LTransNo.TabIndex = 0
         Me.LTransNo.Text = "Date"
-        '
-        'GridColumn8
-        '
-        Me.GridColumn8.Caption = "Account Description"
-        Me.GridColumn8.FieldName = "acc_description"
-        Me.GridColumn8.Name = "GridColumn8"
-        Me.GridColumn8.OptionsColumn.AllowEdit = False
-        Me.GridColumn8.Visible = True
-        Me.GridColumn8.VisibleIndex = 2
         '
         'FormAccountingJournalBill
         '
@@ -666,12 +734,12 @@ Partial Class FormAccountingJournalBill
         Me.Controls.Add(Me.PanelControl2)
         Me.Controls.Add(Me.PCGeneralheader)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
-        Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FormAccountingJournalBill"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Entry Journal"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.BalanceMenu.ResumeLayout(False)
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ImgBut, System.ComponentModel.ISupportInitialize).EndInit()
@@ -682,6 +750,8 @@ Partial Class FormAccountingJournalBill
         CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RSLEStatusOpen, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemSearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RISLEVendor, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RISLEVendorView, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemComboBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl4.ResumeLayout(False)
@@ -763,4 +833,11 @@ Partial Class FormAccountingJournalBill
     Friend WithEvents LabelControl5 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents DERefDate As DevExpress.XtraEditors.DateEdit
     Friend WithEvents GridColumn8 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RISLEVendor As DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit
+    Friend WithEvents RISLEVendorView As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn10 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn11 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn12 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn13 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnNumberReff As DevExpress.XtraGrid.Columns.GridColumn
 End Class

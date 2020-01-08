@@ -4,6 +4,7 @@
     Dim is_submit As String = "2"
     Public id_report_status As String = "-1"
     Public id_pre As String = "-1"
+    Dim id_wh_normal As String = get_setup_field("id_wh_normal")
 
     Private Sub FormSalesOrderGen_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewSoStatus()
@@ -72,7 +73,7 @@
                 prePrinting()
                 Close()
             ElseIf id_pre = "2" Then
-                Printing()
+                printing()
                 Close()
             End If
         End If
@@ -84,38 +85,40 @@
         GCItemList.DataSource = data
 
         If is_submit = "2" Then
-            'sum
-            Dim query_sum As String = "CALL view_sales_order_gen_sum(" + id_sales_order_gen + ")"
-            Dim data_sum As DataTable = execute_query(query_sum, -1, True, "", "", "", "")
+            If GVItemList.RowCount > 0 Then
+                'sum
+                Dim query_sum As String = "CALL view_sales_order_gen_sum(" + id_sales_order_gen + ")"
+                Dim data_sum As DataTable = execute_query(query_sum, -1, True, "", "", "", "")
 
-            Dim query_stock As String = "CALL view_sales_order_prod_list(0, 0, 0)"
-            Dim data_stock As DataTable = execute_query(query_stock, -1, True, "", "", "", "")
-            Dim tb1 = data_sum.AsEnumerable() 'sum
-            Dim tb2 = data_stock.AsEnumerable() 'allow stock fo so
+                Dim query_stock As String = "CALL view_sales_order_prod_list_less(0, " + id_wh_normal + ")"
+                Dim data_stock As DataTable = execute_query(query_stock, -1, True, "", "", "", "")
+                Dim tb1 = data_sum.AsEnumerable() 'sum
+                Dim tb2 = data_stock.AsEnumerable() 'allow stock fo so
 
-            Dim queryx = From sum In tb1 'left join sum dgn stock menjadi stockjoin
-                         Group Join stc In tb2
-                         On sum("code") Equals stc("product_full_code") And sum("id_comp_from") Equals stc("id_comp") Into stcjoin = Group
-                         From resultstc In stcjoin.DefaultIfEmpty()
-                         Select New With
-                                {
-                                    .code = sum("code").ToString,
-                                    .id_product = If(resultstc Is Nothing, "", resultstc("id_product").ToString),
-                                    .name = If(resultstc Is Nothing, "", resultstc("design_display_name").ToString),
-                                    .size = If(resultstc Is Nothing, "", resultstc("Size").ToString),
-                                    .comp_from = If(resultstc Is Nothing, "", resultstc("comp_number").ToString + " - " + resultstc("comp_name").ToString),
-                                    .id_comp_from = If(resultstc Is Nothing, "", resultstc("id_comp").ToString),
-                                    .id_comp_contact_from = If(resultstc Is Nothing, "", resultstc("id_comp_contact").ToString),
-                                    .id_design_price = If(resultstc Is Nothing, "", resultstc("id_design_price").ToString),
-                                    .design_price = If(resultstc Is Nothing, "", resultstc("design_price")),
-                                    .sales_order_gen_det_qty = sum("sales_order_gen_det_qty"),
-                                    .total_allow = If(resultstc Is Nothing, 0, resultstc("total_allow")),
-                                    .note = If(resultstc Is Nothing Or sum("sales_order_gen_det_qty") > If(resultstc Is Nothing, 0, resultstc("total_allow")), If(resultstc Is Nothing, "This product is not available for prepare order; ", "") + If(sum("sales_order_gen_det_qty") > If(resultstc Is Nothing, 0, resultstc("total_allow")), "Qty can't exceed " + If(resultstc Is Nothing, 0, resultstc("total_allow")).ToString + ";", ""), "OK")
-                                }
+                Dim queryx = From sum In tb1 'left join sum dgn stock menjadi stockjoin
+                             Group Join stc In tb2
+                             On sum("code") Equals stc("product_full_code") And sum("id_comp_from") Equals stc("id_comp") Into stcjoin = Group
+                             From resultstc In stcjoin.DefaultIfEmpty()
+                             Select New With
+                                    {
+                                        .code = sum("code").ToString,
+                                        .id_product = If(resultstc Is Nothing, "", resultstc("id_product").ToString),
+                                        .name = If(resultstc Is Nothing, "", resultstc("design_display_name").ToString),
+                                        .size = If(resultstc Is Nothing, "", resultstc("Size").ToString),
+                                        .comp_from = If(resultstc Is Nothing, "", resultstc("comp_number").ToString + " - " + resultstc("comp_name").ToString),
+                                        .id_comp_from = If(resultstc Is Nothing, "", resultstc("id_comp").ToString),
+                                        .id_comp_contact_from = If(resultstc Is Nothing, "", resultstc("id_comp_contact").ToString),
+                                        .id_design_price = If(resultstc Is Nothing, "", resultstc("id_design_price").ToString),
+                                        .design_price = If(resultstc Is Nothing, "", resultstc("design_price")),
+                                        .sales_order_gen_det_qty = sum("sales_order_gen_det_qty"),
+                                        .total_allow = If(resultstc Is Nothing, 0, resultstc("total_allow")),
+                                        .note = If(resultstc Is Nothing Or sum("sales_order_gen_det_qty") > If(resultstc Is Nothing, 0, resultstc("total_allow")), If(resultstc Is Nothing, "This product is not available for prepare order; ", "") + If(sum("sales_order_gen_det_qty") > If(resultstc Is Nothing, 0, resultstc("total_allow")), "Qty can't exceed " + If(resultstc Is Nothing, 0, resultstc("total_allow")).ToString + ";", ""), "OK")
+                                    }
 
-            GCSummary.DataSource = queryx.ToList()
-            XTPSummary.PageVisible = True
-            XTPOrder.PageVisible = False
+                GCSummary.DataSource = queryx.ToList()
+                XTPSummary.PageVisible = True
+                XTPOrder.PageVisible = False
+            End If
         Else
             Dim view_reff As New ClassSalesOrder()
             view_reff.viewReff(id_sales_order_gen, "-1", GCNewPrepare, GVNewPrepare)

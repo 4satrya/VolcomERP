@@ -16,9 +16,10 @@
     End Sub
 
     Sub view_comp_group()
-        Dim query As String = "SELECT cgroup.id_comp_group,cgroup.comp_group,cgroup.description,ccontact.id_comp,ccontact.contact_person,ccontact.contact_number,ccontact.position,ccontact.email,(SELECT comp_status FROM tb_lookup_comp_status WHERE comp.is_active = id_comp_status) AS comp_status FROM tb_m_comp_group AS cgroup LEFT JOIN tb_m_comp AS comp ON cgroup.id_comp = comp.id_comp LEFT JOIN tb_m_comp_contact AS ccontact ON cgroup.id_comp = ccontact.id_comp AND ccontact.is_default = 1"
+        Dim query As String = "SELECT cgroup.id_comp_group,CONCAT(cgrouphead.comp_group_header, ' - ', cgrouphead.description) AS comp_group_header,cgroup.comp_group,cgroup.description,ccontact.id_comp,comp.comp_name,ccontact.contact_person,ccontact.contact_number,ccontact.position,ccontact.email,(SELECT comp_status FROM tb_lookup_comp_status WHERE comp.is_active = id_comp_status) AS comp_status FROM tb_m_comp_group AS cgroup LEFT JOIN tb_m_comp AS comp ON cgroup.id_comp = comp.id_comp LEFT JOIN tb_m_comp_contact AS ccontact ON cgroup.id_comp = ccontact.id_comp AND ccontact.is_default = 1 LEFT JOIN tb_m_comp_group_header AS cgrouphead ON cgroup.id_comp_group_header = cgrouphead.id_comp_group_header"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCGroupComp.DataSource = data
+        GVGroupComp.BestFitColumns()
     End Sub
 
     Private Sub BAddComp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BAddComp.Click

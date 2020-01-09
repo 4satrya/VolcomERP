@@ -25,6 +25,7 @@ Public Class FormSalesDelOrderDet
     Dim id_so_status As String = ""
     Dim id_commerce_type As String = "-1"
     Dim id_comp_group As String = "-1"
+    Dim id_comp_group_header As String = "-1"
 
 
 
@@ -115,6 +116,7 @@ Public Class FormSalesDelOrderDet
             TxtCombineNumber.Text = data.Rows(0)("combine_number").ToString
             is_use_unique_code = data.Rows(0)("is_use_unique_code").ToString
             id_comp_group = data.Rows(0)("id_comp_group").ToString
+            id_comp_group_header = data.Rows(0)("id_comp_group_header").ToString
             id_commerce_type = data.Rows(0)("id_commerce_type").ToString
 
             'uniform
@@ -1255,7 +1257,7 @@ Public Class FormSalesDelOrderDet
     Sub getReport()
         'cek boleh print ato tidak
         Dim del As New ClassSalesDelOrder()
-        If is_block_del_store = "1" And del.checkUnpaidInvoice(id_comp_group) Then
+        If is_block_del_store = "1" And del.checkUnpaidInvoiceGroup(id_comp_group_header) Then
             stopCustom("Hold delivery")
             Cursor = Cursors.Default
             Exit Sub

@@ -5573,11 +5573,12 @@ WHERE pd.`id_pn`='" & id_report & "'"
 
                     '=== checking release hanya utk keperluan email
                     'check apakah invoice yang di BBM ada di evaluasi ato tidak
-                    Dim query_in_evaluation As String = "SELECT rd.id_rec_payment_det, c.id_comp_group
+                    Dim query_in_evaluation As String = "SELECT rd.id_rec_payment_det, cg.id_comp_group_header
                     FROM tb_rec_payment_det rd
                     INNER JOIN tb_sales_pos sp ON sp.id_sales_pos = rd.id_report
                     INNER JOIN tb_m_comp_contact cc ON cc.`id_comp_contact`= IF(sp.id_memo_type=8 OR sp.id_memo_type=9, sp.id_comp_contact_bill,sp.`id_store_contact_from`)
                     INNER JOIN tb_m_comp c ON c.`id_comp`=cc.`id_comp`
+                    INNER JOIN tb_m_comp_group cg ON cg.id_comp_group = c.id_comp_group
                     LEFT JOIN (
 	                    SELECT e.id_sales_pos, e.id_ar_eval
 	                    FROM tb_ar_eval e 
@@ -5587,13 +5588,13 @@ WHERE pd.`id_pn`='" & id_report & "'"
                     Dim data_in_evaluation As DataTable = execute_query(query_in_evaluation, -1, True, "", "", "", "")
                     If data_in_evaluation.Rows.Count > 0 Then
                         'jika ada cek apakah  ada email release ato tidak
-                        Dim dtg As DataTable = data_in_evaluation.DefaultView.ToTable(True, "id_comp_group")
+                        Dim dtg As DataTable = data_in_evaluation.DefaultView.ToTable(True, "id_comp_group_header")
                         Dim id_comp_group As String = ""
                         For i As Integer = 0 To dtg.Rows.Count - 1
                             If i > 0 Then
                                 id_comp_group += ","
                             End If
-                            id_comp_group += dtg.Rows(i)("id_comp_group").ToString
+                            id_comp_group += dtg.Rows(i)("id_comp_group_header").ToString
                         Next
 
                         Dim ev As New ClassAREvaluation()

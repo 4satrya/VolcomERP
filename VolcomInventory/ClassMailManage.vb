@@ -102,8 +102,9 @@
             query_mail_detail += "SELECT " + id_mail_manage + " AS `id_mail_manage`, e.report_mark_type, e.id_sales_pos, e.report_number, " + id_report_ref + ", " + report_mark_type_ref + ", '" + report_number_ref + "'
             FROM tb_ar_eval e WHERE e.eval_date='" + par1 + "'; "
         ElseIf rmt = "230" Then 'email release delivery
-            query_mail_detail += "SELECT " + id_mail_manage + ", " + rmt + ", g.id_comp_group AS `id_report`, NULL AS `report_number`, " + id_report_ref + ", " + report_mark_type_ref + ", '" + report_number_ref + "'
-            FROM tb_m_comp_group g WHERE g.id_comp_group IN(" + par1 + ") "
+            query_mail_detail += "SELECT " + id_mail_manage + ", " + rmt + ", g.id_comp_group_header AS `id_report`, NULL AS `report_number`, " + id_report_ref + ", " + report_mark_type_ref + ", '" + report_number_ref + "'
+            FROM tb_m_comp_group g 
+            WHERE g.id_comp_group_header IN(" + par1 + ") "
         End If
         execute_non_query(query_mail_detail, True, "", "", "", "")
     End Sub
@@ -125,13 +126,13 @@
             INNER JOIN tb_m_comp_group g ON g.id_comp_group = c.id_comp_group
             INNER JOIN tb_lookup_memo_type typ ON typ.`id_memo_type`=sp.`id_memo_type`
             WHERE sp.id_sales_pos IN (" + id_trans + ") 
-            GROUP BY g.id_comp_group
+            GROUP BY g.id_comp_group_header
             ORDER BY g.id_comp_group ASC "
             dt = execute_query(query, -1, True, "", "", "", "")
         ElseIf rmt = "230" Then
             Dim query As String = "SELECT  g.id_comp_group,g.description AS `group_store`
             FROM tb_m_comp_group g
-            WHERE g.id_comp_group IN (" + id_trans + "); "
+            WHERE g.id_comp_group_header IN (" + id_trans + "); "
             dt = execute_query(query, -1, True, "", "", "", "")
         End If
         Return dt

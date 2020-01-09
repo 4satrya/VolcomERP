@@ -30,7 +30,8 @@
         'chek invoice
         Dim del As New ClassSalesDelOrder()
 
-        If is_block_del_store = "1" And del.checkUnpaidInvoice(SLUECompanyGroup.EditValue.ToString) Then
+        Dim id_comp_group_header As String = execute_query("SELECT id_comp_group_header FROM tb_m_comp_group WHERE id_comp_group='" + SLUECompanyGroup.EditValue.ToString + "'", 0, True, "", "", "", "")
+        If is_block_del_store = "1" And del.checkUnpaidInvoiceGroup(id_comp_group_header) Then
             stopCustom("Hold delivery")
 
             Cursor = Cursors.Default

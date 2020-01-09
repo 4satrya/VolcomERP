@@ -7,19 +7,19 @@
         GVManifest.ActiveFilterString = ftr
 
         'check group
-        Dim is_block_del_store As String = get_setup_field("is_block_del_store")
-        If is_block_del_store = "1" Then
-            For i As Integer = 0 To GVManifest.RowCount - 1
-                Dim id_comp_group As String = GVManifest.GetRowCellValue(i, "id_comp_group").ToString
-                Dim del As New ClassSalesDelOrder()
-                If del.checkUnpaidInvoice(id_comp_group) Then
-                    stopCustom("Slips cannot be printed , because invoice has not been paid by " + GVManifest.GetRowCellValue(i, "comp_group").ToString)
-                    Cursor = Cursors.Default
-                    Close()
-                    Exit Sub
-                End If
-            Next
-        End If
+        'Dim is_block_del_store As String = get_setup_field("is_block_del_store")
+        'If is_block_del_store = "1" Then
+        '    For i As Integer = 0 To GVManifest.RowCount - 1
+        '        Dim id_comp_group As String = GVManifest.GetRowCellValue(i, "id_comp_group").ToString
+        '        Dim del As New ClassSalesDelOrder()
+        '        If del.checkUnpaidInvoiceGroup(id_comp_group) Then
+        '            stopCustom("Slips cannot be printed , because invoice has not been paid by " + GVManifest.GetRowCellValue(i, "comp_group").ToString)
+        '            Cursor = Cursors.Default
+        '            Close()
+        '            Exit Sub
+        '        End If
+        '    Next
+        'End If
 
         'For i As Integer = 0 To GVManifest.Columns.Count - 1
         '    GVManifest.Columns(i).Visible = False

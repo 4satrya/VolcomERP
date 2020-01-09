@@ -59,11 +59,12 @@
         TEReportStatus.EditValue = data.Rows(0)("report_status").ToString
 
         Dim query_det As String = "
-            SELECT 0 AS no, mdet.id_wh_awb_det, c.id_comp_group, a.awbill_date, adet.do_no, pdel.pl_sales_order_del_number, c.comp_number, c.comp_name, adet.qty, ct.city, a.weight, a.width, a.length, a.height, ((a.width * a.length * a.height) / 6000) AS volume, a.c_weight
+            SELECT 0 AS no, mdet.id_wh_awb_det, c.id_comp_group, cg.id_comp_group_header, a.awbill_date, adet.do_no, pdel.pl_sales_order_del_number, c.comp_number, c.comp_name, adet.qty, ct.city, a.weight, a.width, a.length, a.height, ((a.width * a.length * a.height) / 6000) AS volume, a.c_weight
             FROM tb_del_manifest_det AS mdet
             LEFT JOIN tb_wh_awbill_det AS adet ON mdet.id_wh_awb_det = adet.id_wh_awb_det
             LEFT JOIN tb_wh_awbill AS a ON adet.id_awbill = a.id_awbill
             LEFT JOIN tb_m_comp AS c ON a.id_store = c.id_comp
+            LEFT JOIN tb_m_comp_group AS cg ON cg.id_comp_group = c.id_comp_group
             LEFT JOIN tb_m_city AS ct ON c.id_city = ct.id_city
             LEFT JOIN tb_pl_sales_order_del AS pdel ON adet.id_pl_sales_order_del = pdel.id_pl_sales_order_del
             WHERE mdet.id_del_manifest = " + id_del_manifest + "
@@ -194,8 +195,8 @@
 
         For i = 0 To GVList.RowCount - 1
             If GVList.IsValidRowHandle(i) Then
-                If Not id_group.Contains(GVList.GetRowCellValue(i, "id_comp_group").ToString) Then
-                    id_group.Add(GVList.GetRowCellValue(i, "id_comp_group").ToString)
+                If Not id_group.Contains(GVList.GetRowCellValue(i, "id_comp_group_header").ToString) Then
+                    id_group.Add(GVList.GetRowCellValue(i, "id_comp_group_header").ToString)
                 End If
             End If
         Next
@@ -206,7 +207,7 @@
             'chek invoice
             Dim del As New ClassSalesDelOrder()
 
-            If is_block_del_store = "1" And del.checkUnpaidInvoice(id_group(i)) Then
+            If is_block_del_store = "1" And del.checkUnpaidInvoiceGroup(id_group(i)) Then
                 on_hold = True
             End If
         Next

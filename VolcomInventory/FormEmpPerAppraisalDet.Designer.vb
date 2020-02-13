@@ -1093,7 +1093,7 @@ Partial Class FormEmpPerAppraisalDet
         Me.GVSummary.GroupCount = 1
         Me.GVSummary.GroupFormat = "{1} {2}"
         Me.GVSummary.GroupRowHeight = 25
-        Me.GVSummary.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "result", Me.GCSFormulaResult, "{0:N2}%")})
+        Me.GVSummary.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "result", Me.GCSFormulaResult, "{0:N2}%"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "max_value", Me.GCSStandard, "")})
         Me.GVSummary.Name = "GVSummary"
         Me.GVSummary.OptionsBehavior.AllowFixedGroups = DevExpress.Utils.DefaultBoolean.[True]
         Me.GVSummary.OptionsBehavior.AutoExpandAllGroups = True

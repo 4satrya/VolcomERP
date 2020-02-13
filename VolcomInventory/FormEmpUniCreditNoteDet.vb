@@ -13,6 +13,8 @@
     Private bof_column As String = get_setup_field("bof_column")
     Private bof_xls_so As String = get_setup_field("bof_xls_inv")
 
+    Private printed_name As String = ""
+
     Private Sub FormEmpUniCreditNoteDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         view_category()
         view_report_status()
@@ -51,6 +53,8 @@
             id_pl_sales_order_del = data.Rows(0)("id_pl_sales_order_del").ToString
             id_departement = data.Rows(0)("id_departement").ToString
             id_comp_contact = data.Rows(0)("id_comp_contact").ToString
+
+            printed_name = data.Rows(0)("printed_name").ToString
 
             'detail
             Dim data_detail As DataTable = execute_query("CALL view_emp_uni_ex(" + id_emp_uni_ex + ")", -1, True, "", "", "", "")
@@ -170,7 +174,7 @@
             SELECT d.id_emp_uni_ex_det, (d.qty - IFNULL(t_used.used, 0)) AS max_qty
             FROM tb_emp_uni_ex_det AS d
             LEFT JOIN (
-	            SELECT d.id_emp_uni_ex_det_ref, SUM(d.qty) AS used
+	            SELECT d.id_emp_uni_ex_det_ref, SUM(ABS(d.qty)) AS used
 	            FROM tb_emp_uni_ex_det AS d
 	            LEFT JOIN tb_emp_uni_ex AS a ON d.id_emp_uni_ex = a.id_emp_uni_ex
 	            WHERE a.id_report_status <> 5 AND d.id_emp_uni_ex_det_ref IN (" + q_in + ")
@@ -261,7 +265,7 @@
 
                 For i As Integer = 0 To ((GVData.RowCount - 1) - GetGroupRowCount(GVData))
                     If GVData.GetRowCellValue(i, "qty") > 0 Then
-                        qd += "('" + id_emp_uni_ex + "', '" + GVData.GetRowCellValue(i, "id_emp_uni_ex_det").ToString + "', '" + GVData.GetRowCellValue(i, "id_pl_sales_order_del_det").ToString + "', '" + GVData.GetRowCellValue(i, "id_product").ToString + "', '" + decimalSQL(GVData.GetRowCellValue(i, "qty").ToString) + "', '" + decimalSQL(GVData.GetRowCellValue(i, "design_cop").ToString) + "', '" + GVData.GetRowCellValue(i, "remark").ToString + "'), "
+                        qd += "('" + id_emp_uni_ex + "', '" + GVData.GetRowCellValue(i, "id_emp_uni_ex_det").ToString + "', '" + GVData.GetRowCellValue(i, "id_pl_sales_order_del_det").ToString + "', '" + GVData.GetRowCellValue(i, "id_product").ToString + "', '-" + decimalSQL(GVData.GetRowCellValue(i, "qty").ToString) + "', '" + decimalSQL(GVData.GetRowCellValue(i, "design_cop").ToString) + "', '" + GVData.GetRowCellValue(i, "remark").ToString + "'), "
                     End If
                 Next
 
@@ -270,9 +274,11 @@
                 execute_non_query(qd, True, "", "", "", "")
 
                 'draft journal
-                Dim acc As New ClassAccounting()
+                If Not GridColumn7.SummaryItem.SummaryValue = 0 Then
+                    Dim acc As New ClassAccounting()
 
-                acc.generateJournalSalesDraft(id_emp_uni_ex, "236")
+                    acc.generateJournalSalesDraft(id_emp_uni_ex, "236")
+                End If
 
                 'submit mark
                 submit_who_prepared("236", id_emp_uni_ex, id_user)
@@ -368,25 +374,27 @@
         ReportEmpUniExpense.dt = GCData.DataSource
         Dim Report As New ReportEmpUniExpense()
 
-        ' '... 
-        ' ' creating and saving the view's layout to a new memory stream 
-        Dim str As System.IO.Stream
-        str = New System.IO.MemoryStream()
-        GVData.SaveLayoutToStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
-        str.Seek(0, System.IO.SeekOrigin.Begin)
-        Report.GVData.RestoreLayoutFromStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
-        str.Seek(0, System.IO.SeekOrigin.Begin)
-
-        'Grid Detail
-        ReportStyleGridview(Report.GVData)
+        Report.XrLabel1.Visible = True
+        Report.XrLabel2.Visible = True
+        Report.XrLabel3.Visible = True
 
         'Parse val
-        Report.LabelTitle.Text = "BUKTI CREDIT NOTE UNIFORM"
-        Report.LabelNumber.Text = TxtNumber.Text.ToUpper
-        Report.LabelNIK.Text = TxtNIP.Text.ToUpper
-        Report.LabelName.Text = TxtEmployeeName.Text.ToUpper
-        Report.LabelDate.Text = DECreated.Text.ToString
-        Report.LNote.Text = MENote.Text.ToString
+        'Report.LabelTitle.Text = "UNIFORM ORDER"
+        Report.LabelCat.Text = SLECat.Text.ToUpper
+        Report.LabelDel.Text = TxtDel.Text.ToUpper
+        Report.LabelAcc.Text = TxtAccNo.Text.ToUpper + " - " + TxtAcc.Text.ToUpper
+        Report.LabelEmp.Text = TxtNIP.Text.ToUpper + " - " + TxtEmployeeName.Text.ToUpper
+        Report.LabelDepartement.Text = TxtDepartement.Text.ToUpper
+        Report.LabelPeriod.Text = DEStart.Text.ToUpper + " - " + DEEnd.Text.ToUpper
+
+        Report.LabelTitleNumber.Text = "NO. " + TxtNumber.Text.ToUpper
+
+        Report.LabelTitle.Text = printed_name
+        Report.LabelDate.Text = Date.Parse(DECreated.EditValue.ToString).ToString("dd MMMM yyyy")
+        Report.XrLabel3.Text = TEExpense.Text
+
+        Report.XrLabel34.Text = "Note : " + MENote.Text
+        Report.LabelSay.Text = "Say : " + ConvertCurrencyToEnglish(GridColumn7.SummaryItem.SummaryValue, get_setup_field("id_currency_default"))
 
         'Show the report's preview. 
         Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)

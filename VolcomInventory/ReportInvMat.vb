@@ -36,35 +36,45 @@ WHERE inv.`id_inv_mat`='" & id_inv_mat & "' "
             Dim row As DevExpress.XtraReports.UI.XRTableRow = New DevExpress.XtraReports.UI.XRTableRow
             row.HeightF = 15
 
-            'header packing list
-            Dim no_pl As DevExpress.XtraReports.UI.XRTableCell = New DevExpress.XtraReports.UI.XRTableCell
-            no_pl.Text = dt.Rows(i)("report_number").ToString & " - " & " (PO Number : " & dt.Rows(i)("prod_order_number").ToString & " - " & dt.Rows(i)("info_design").ToString & ") "
-            no_pl.Borders = DevExpress.XtraPrinting.BorderSide.Top
-            no_pl.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
-            no_pl.BackColor = Color.Transparent
-            no_pl.Font = font_row_style
-            no_pl.WidthF = 772
+            If Not FormInvMatDet.is_deposit = "1" Then
+                'header packing list
+                Dim no_pl As DevExpress.XtraReports.UI.XRTableCell = New DevExpress.XtraReports.UI.XRTableCell
+                no_pl.Text = dt.Rows(i)("report_number").ToString & " - " & " (PO Number : " & dt.Rows(i)("prod_order_number").ToString & " - " & dt.Rows(i)("info_design").ToString & ") "
+                no_pl.Borders = DevExpress.XtraPrinting.BorderSide.Top
+                no_pl.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+                no_pl.BackColor = Color.Transparent
+                no_pl.Font = font_row_style
+                no_pl.WidthF = 772
 
-            row.Cells.Add(no_pl)
-            XTable.Rows.Add(row)
-            '
+                row.Cells.Add(no_pl)
+                XTable.Rows.Add(row)
+            End If
 
             'detail
             Dim query As String = ""
-            If FormInvMatDet.SLEPayType.EditValue.ToString = "1" Then 'packing list
-                query = "SELECT md.`mat_det_code`,md.`mat_det_name`,pld.`pl_mrs_det_qty` AS qty,pld.`pl_mrs_det_price` AS price,(pld.`pl_mrs_det_qty`*pld.`pl_mrs_det_price`) AS amount
+            If FormInvMatDet.is_deposit = "1" Then
+                query = "SELECT md.`mat_det_code`,md.`mat_det_name`,pld.`pl_mrs_det_qty` AS qty," & decimalSQL(dt.Rows(i)("price").ToString) & " AS price,(pld.`pl_mrs_det_qty`*" & decimalSQL(dt.Rows(i)("price").ToString) & ") AS amount
+FROM tb_pl_mrs_det pld
+INNER JOIN tb_m_mat_det_price prc ON prc.`id_mat_det_price`=pld.`id_mat_det_price`
+INNER JOIN tb_m_mat_det md ON md.`id_mat_det`=prc.`id_mat_det`
+WHERE pld.`id_pl_mrs`='" & dt.Rows(i)("id_report").ToString & "' AND CONCAT(md.mat_det_code,' - ',md.mat_det_name)='" & dt.Rows(i)("info_design").ToString & "'"
+            Else
+                If FormInvMatDet.SLEPayType.EditValue.ToString = "1" Then 'packing list
+                    query = "SELECT md.`mat_det_code`,md.`mat_det_name`,pld.`pl_mrs_det_qty` AS qty,pld.`pl_mrs_det_price` AS price,(pld.`pl_mrs_det_qty`*pld.`pl_mrs_det_price`) AS amount
 FROM tb_pl_mrs_det pld
 INNER JOIN tb_m_mat_det_price prc ON prc.`id_mat_det_price`=pld.`id_mat_det_price`
 INNER JOIN tb_m_mat_det md ON md.`id_mat_det`=prc.`id_mat_det`
 WHERE pld.`id_pl_mrs`='" & dt.Rows(i)("id_report").ToString & "'"
-            ElseIf FormInvMatDet.SLEPayType.EditValue.ToString = "1" Then 'retur
-                query = "SELECT md.`mat_det_code`,md.`mat_det_name`,retd.`mat_prod_ret_in_det_qty` AS qty,retd.`mat_prod_ret_in_det_price` AS price,(retd.`mat_prod_ret_in_det_qty`*retd.`mat_prod_ret_in_det_price`) AS amount
+                ElseIf FormInvMatDet.SLEPayType.EditValue.ToString = "1" Then 'retur
+                    query = "SELECT md.`mat_det_code`,md.`mat_det_name`,retd.`mat_prod_ret_in_det_qty` AS qty,retd.`mat_prod_ret_in_det_price` AS price,(retd.`mat_prod_ret_in_det_qty`*retd.`mat_prod_ret_in_det_price`) AS amount
 FROM tb_mat_prod_ret_in_det retd
 INNER JOIN tb_pl_mrs_det pld ON pld.`id_pl_mrs_det`=retd.`id_pl_mrs_det`
 INNER JOIN tb_m_mat_det_price prc ON prc.`id_mat_det_price`=pld.`id_mat_det_price`
 INNER JOIN tb_m_mat_det md ON md.`id_mat_det`=prc.`id_mat_det`
 WHERE retd.`id_mat_prod_ret_in`='" & dt.Rows(i)("id_report").ToString & "'"
+                End If
             End If
+
             '
             Dim dt_det As DataTable = execute_query(query, -1, True, "", "", "", "")
             For j = 0 To dt_det.Rows.Count - 1

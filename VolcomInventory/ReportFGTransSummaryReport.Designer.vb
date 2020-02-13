@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Public Class ReportFGTransSummaryReport
     Inherits DevExpress.XtraReports.UI.XtraReport
 
     'XtraReport overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         If disposing AndAlso components IsNot Nothing Then
             components.Dispose()
@@ -17,10 +17,13 @@ Partial Public Class ReportFGTransSummaryReport
     'NOTE: The following procedure is required by the Designer
     'It can be modified using the Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.Detail = New DevExpress.XtraReports.UI.DetailBand()
-        Me.WinControlContainer1 = New DevExpress.XtraReports.UI.WinControlContainer()
+        Me.WCDesign = New DevExpress.XtraReports.UI.WinControlContainer()
+        Me.GCDesign = New DevExpress.XtraGrid.GridControl()
+        Me.GVDesign = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridView()
+        Me.WCData = New DevExpress.XtraReports.UI.WinControlContainer()
         Me.GCData = New DevExpress.XtraGrid.GridControl()
         Me.GVData = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.TopMargin = New DevExpress.XtraReports.UI.TopMarginBand()
@@ -34,32 +37,88 @@ Partial Public Class ReportFGTransSummaryReport
         Me.XrLabel7 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel8 = New DevExpress.XtraReports.UI.XRLabel()
         Me.LabelPeriod = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel4 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabelCompany = New DevExpress.XtraReports.UI.XRLabel()
+        CType(Me.GCDesign, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVDesign, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GCData, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVData, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         '
         'Detail
         '
-        Me.Detail.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.WinControlContainer1})
-        Me.Detail.HeightF = 273.9583!
+        Me.Detail.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.WCDesign, Me.WCData})
+        Me.Detail.HeightF = 208.0!
         Me.Detail.Name = "Detail"
         Me.Detail.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
         Me.Detail.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
         '
-        'WinControlContainer1
+        'WCDesign
         '
-        Me.WinControlContainer1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 0!)
-        Me.WinControlContainer1.Name = "WinControlContainer1"
-        Me.WinControlContainer1.SizeF = New System.Drawing.SizeF(775.9999!, 273.9583!)
-        Me.WinControlContainer1.WinControl = Me.GCData
+        Me.WCDesign.LocationFloat = New DevExpress.Utils.PointFloat(0!, 0!)
+        Me.WCDesign.Name = "WCDesign"
+        Me.WCDesign.SizeF = New System.Drawing.SizeF(776.0!, 208.0!)
+        Me.WCDesign.WinControl = Me.GCDesign
+        '
+        'GCDesign
+        '
+        Me.GCDesign.Location = New System.Drawing.Point(0, 0)
+        Me.GCDesign.MainView = Me.GVDesign
+        Me.GCDesign.Name = "GCDesign"
+        Me.GCDesign.Size = New System.Drawing.Size(745, 200)
+        Me.GCDesign.TabIndex = 5
+        Me.GCDesign.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVDesign})
+        '
+        'GVDesign
+        '
+        Me.GVDesign.AppearancePrint.BandPanel.BackColor = System.Drawing.Color.White
+        Me.GVDesign.AppearancePrint.BandPanel.BorderColor = System.Drawing.Color.Black
+        Me.GVDesign.AppearancePrint.BandPanel.Options.UseBackColor = True
+        Me.GVDesign.AppearancePrint.BandPanel.Options.UseBorderColor = True
+        Me.GVDesign.AppearancePrint.FooterPanel.BackColor = System.Drawing.Color.White
+        Me.GVDesign.AppearancePrint.FooterPanel.BorderColor = System.Drawing.Color.Black
+        Me.GVDesign.AppearancePrint.FooterPanel.Options.UseBackColor = True
+        Me.GVDesign.AppearancePrint.FooterPanel.Options.UseBorderColor = True
+        Me.GVDesign.AppearancePrint.GroupFooter.BackColor = System.Drawing.Color.White
+        Me.GVDesign.AppearancePrint.GroupFooter.BorderColor = System.Drawing.Color.Black
+        Me.GVDesign.AppearancePrint.GroupFooter.Options.UseBackColor = True
+        Me.GVDesign.AppearancePrint.GroupFooter.Options.UseBorderColor = True
+        Me.GVDesign.AppearancePrint.GroupRow.BackColor = System.Drawing.Color.White
+        Me.GVDesign.AppearancePrint.GroupRow.BorderColor = System.Drawing.Color.Black
+        Me.GVDesign.AppearancePrint.GroupRow.Options.UseBackColor = True
+        Me.GVDesign.AppearancePrint.GroupRow.Options.UseBorderColor = True
+        Me.GVDesign.AppearancePrint.HeaderPanel.BackColor = System.Drawing.Color.White
+        Me.GVDesign.AppearancePrint.HeaderPanel.BorderColor = System.Drawing.Color.Black
+        Me.GVDesign.AppearancePrint.HeaderPanel.Options.UseBackColor = True
+        Me.GVDesign.AppearancePrint.HeaderPanel.Options.UseBorderColor = True
+        Me.GVDesign.AppearancePrint.Lines.BackColor = System.Drawing.Color.Black
+        Me.GVDesign.AppearancePrint.Lines.Options.UseBackColor = True
+        Me.GVDesign.AppearancePrint.Row.BackColor = System.Drawing.Color.White
+        Me.GVDesign.AppearancePrint.Row.BorderColor = System.Drawing.Color.Black
+        Me.GVDesign.AppearancePrint.Row.Options.UseBackColor = True
+        Me.GVDesign.AppearancePrint.Row.Options.UseBorderColor = True
+        Me.GVDesign.GridControl = Me.GCDesign
+        Me.GVDesign.Name = "GVDesign"
+        Me.GVDesign.OptionsBehavior.AutoExpandAllGroups = True
+        Me.GVDesign.OptionsBehavior.ReadOnly = True
+        Me.GVDesign.OptionsView.ColumnAutoWidth = False
+        Me.GVDesign.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.[True]
+        Me.GVDesign.OptionsView.GroupFooterShowMode = DevExpress.XtraGrid.Views.Grid.GroupFooterShowMode.VisibleAlways
+        Me.GVDesign.OptionsView.ShowFooter = True
+        Me.GVDesign.OptionsView.ShowGroupPanel = False
+        '
+        'WCData
+        '
+        Me.WCData.LocationFloat = New DevExpress.Utils.PointFloat(0!, 0!)
+        Me.WCData.Name = "WCData"
+        Me.WCData.SizeF = New System.Drawing.SizeF(776.0!, 208.0!)
+        Me.WCData.WinControl = Me.GCData
         '
         'GCData
         '
         Me.GCData.Location = New System.Drawing.Point(0, 39)
         Me.GCData.MainView = Me.GVData
         Me.GCData.Name = "GCData"
-        Me.GCData.Size = New System.Drawing.Size(745, 263)
+        Me.GCData.Size = New System.Drawing.Size(745, 200)
         Me.GCData.TabIndex = 5
         Me.GCData.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVData})
         '
@@ -142,7 +201,7 @@ Partial Public Class ReportFGTransSummaryReport
         '
         'PageHeader
         '
-        Me.PageHeader.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XLTitle, Me.XrLabel7, Me.XrLabel8, Me.LabelPeriod, Me.XrLabel4})
+        Me.PageHeader.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XLTitle, Me.XrLabel7, Me.XrLabel8, Me.LabelPeriod, Me.XrLabelCompany})
         Me.PageHeader.HeightF = 63.14526!
         Me.PageHeader.Name = "PageHeader"
         '
@@ -194,17 +253,17 @@ Partial Public Class ReportFGTransSummaryReport
         Me.LabelPeriod.Text = "-"
         Me.LabelPeriod.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         '
-        'XrLabel4
+        'XrLabelCompany
         '
-        Me.XrLabel4.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel4.LocationFloat = New DevExpress.Utils.PointFloat(407.2499!, 0!)
-        Me.XrLabel4.Name = "XrLabel4"
-        Me.XrLabel4.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel4.SizeF = New System.Drawing.SizeF(368.7501!, 22.99999!)
-        Me.XrLabel4.StylePriority.UseFont = False
-        Me.XrLabel4.StylePriority.UseTextAlignment = False
-        Me.XrLabel4.Text = "PT VOLCOM INDONESIA"
-        Me.XrLabel4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
+        Me.XrLabelCompany.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.XrLabelCompany.LocationFloat = New DevExpress.Utils.PointFloat(407.2499!, 0!)
+        Me.XrLabelCompany.Name = "XrLabelCompany"
+        Me.XrLabelCompany.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabelCompany.SizeF = New System.Drawing.SizeF(368.7501!, 22.99999!)
+        Me.XrLabelCompany.StylePriority.UseFont = False
+        Me.XrLabelCompany.StylePriority.UseTextAlignment = False
+        Me.XrLabelCompany.Text = "PT VOLCOM INDONESIA"
+        Me.XrLabelCompany.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
         '
         'ReportFGTransSummaryReport
         '
@@ -215,6 +274,8 @@ Partial Public Class ReportFGTransSummaryReport
         Me.PaperKind = System.Drawing.Printing.PaperKind.A4
         Me.ScriptLanguage = DevExpress.XtraReports.ScriptLanguage.VisualBasic
         Me.Version = "15.1"
+        CType(Me.GCDesign, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVDesign, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GCData, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVData, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
@@ -228,12 +289,15 @@ Partial Public Class ReportFGTransSummaryReport
     Friend WithEvents XrLabel7 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel8 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents LabelPeriod As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel4 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents XrLabelCompany As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel2 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrPageInfo1 As DevExpress.XtraReports.UI.XRPageInfo
     Friend WithEvents XrLabel5 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel3 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents WinControlContainer1 As DevExpress.XtraReports.UI.WinControlContainer
+    Friend WithEvents WCData As DevExpress.XtraReports.UI.WinControlContainer
     Friend WithEvents GCData As DevExpress.XtraGrid.GridControl
     Friend WithEvents GVData As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents WCDesign As DevExpress.XtraReports.UI.WinControlContainer
+    Friend WithEvents GCDesign As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVDesign As DevExpress.XtraGrid.Views.BandedGrid.BandedGridView
 End Class

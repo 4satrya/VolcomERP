@@ -53,7 +53,7 @@
         Dim tgl As DateTime = getTimeDB()
 
         'tab daily
-        viewStore()
+        load_group_store()
         viewOption()
         DEFrom.EditValue = tgl
         DEUntil.EditValue = tgl
@@ -68,6 +68,16 @@
         viewDay()
         viewFilterMonth()
         viewFilterYear()
+    End Sub
+
+    Sub load_group_store()
+        Cursor = Cursors.WaitCursor
+        Dim query As String = "SELECT 0 AS id_comp_group, 'All' AS comp_group, 'All Group' AS description 
+        UNION
+        SELECT cg.id_comp_group, cg.comp_group, cg.description 
+        FROM tb_m_comp_group cg "
+        viewSearchLookupQuery(SLEStoreGroup, query, "id_comp_group", "comp_group", "id_comp_group")
+        Cursor = Cursors.Default
     End Sub
 
     Sub check_menu()
@@ -130,6 +140,13 @@
             label_store_selected = SLEStore.Properties.View.GetFocusedRowCellValue("comp_name_label").ToString
         End If
 
+        'filter grup
+        Dim id_comp_group As String = SLEStoreGroup.EditValue.ToString
+        Dim cond_group As String = ""
+        If id_comp_group <> "0" Then
+            cond_group = "AND c.id_comp_group=" + id_comp_group + " "
+        End If
+
         'selected store
         Dim cond_store As String = ""
         If id_store_selected <> "0" Then
@@ -148,7 +165,7 @@
         End If
 
         Dim query_c As ClassSalesInv = New ClassSalesInv()
-        Dim query As String = query_c.queryMainReport("AND a.id_report_status=6 " + cond_store + " " + cond_promo + " " + cond_promo_trans + " AND (a.sales_pos_end_period >=''" + date_from_selected + "'' AND a.sales_pos_end_period <=''" + date_until_selected + "'') ", "1")
+        Dim query As String = query_c.queryMainReport("AND a.id_report_status=6 " + cond_group + " " + cond_store + " " + cond_promo + " " + cond_promo_trans + " AND (a.sales_pos_end_period >=''" + date_from_selected + "'' AND a.sales_pos_end_period <=''" + date_until_selected + "'') ", "1")
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCSalesPOS.DataSource = data
         dt = data
@@ -182,7 +199,22 @@
     End Function
 
     Sub viewStore()
-        Dim query As String = getQueryStore()
+        Dim id_group As String = "-1"
+        Try
+            id_group = SLEStoreGroup.EditValue.ToString
+        Catch ex As Exception
+        End Try
+
+        Dim cond_group As String = ""
+        If id_group <> "0" Then
+            cond_group = "AND a.id_comp_group='" + id_group + "' "
+        End If
+
+        Dim query As String = ""
+        Dim id_comp_cat_store As String = "6"
+        query += "SELECT ('0') AS id_comp, ('-') AS comp_number, ('All WH') AS comp_name, ('ALL Store') AS comp_name_label UNION ALL "
+        query += "SELECT a.id_comp, a.comp_number, a.comp_name, CONCAT_WS(' - ', a.comp_number, a.comp_name) AS comp_name_label FROM tb_m_comp a WHERE a.id_comp_cat='" + id_comp_cat_store + "' " + cond_group + " "
+        query += "ORDER BY comp_number ASC "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         For i As Integer = 0 To data.Rows.Count - 1
             If i = 0 Then
@@ -1193,5 +1225,9 @@
         BGVSalesWeeklyByDate.Columns("id_city").Visible = False
         BGVSalesWeeklyByDate.Columns("id_store_type").Visible = False
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub SLEStoreGroup_EditValueChanged(sender As Object, e As EventArgs) Handles SLEStoreGroup.EditValueChanged
+        viewStore()
     End Sub
 End Class

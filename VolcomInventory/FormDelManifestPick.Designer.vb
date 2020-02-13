@@ -55,6 +55,7 @@ Partial Class FormDelManifestPick
         Me.DateEditCreatedDateTo = New DevExpress.XtraEditors.DateEdit()
         Me.DateEditCreatedDateFrom = New DevExpress.XtraEditors.DateEdit()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.GridColumnIdCompGroup = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
         CType(Me.RICESelect, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -201,7 +202,7 @@ Partial Class FormDelManifestPick
         '
         'GVList
         '
-        Me.GVList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIsSelect, Me.GridColumnIdWhAwbDet, Me.GridColumnCreatedDate, Me.GridColumnCollie, Me.GridColumnCombinedNumber, Me.GridColumnDeliverySlip, Me.GridColumnSDO, Me.GridColumnStoreAccount, Me.GridColumnStoreName, Me.GridColumnQty, Me.GridColumnDestination, Me.GridColumnWeight, Me.GridColumnP, Me.GridColumnL, Me.GridColumnT, Me.GridColumnDim, Me.GridColumnFinal, Me.GridColumnRemark})
+        Me.GVList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIsSelect, Me.GridColumnIdWhAwbDet, Me.GridColumnIdCompGroup, Me.GridColumnCreatedDate, Me.GridColumnCollie, Me.GridColumnCombinedNumber, Me.GridColumnDeliverySlip, Me.GridColumnSDO, Me.GridColumnStoreAccount, Me.GridColumnStoreName, Me.GridColumnQty, Me.GridColumnDestination, Me.GridColumnWeight, Me.GridColumnP, Me.GridColumnL, Me.GridColumnT, Me.GridColumnDim, Me.GridColumnFinal, Me.GridColumnRemark})
         Me.GVList.GridControl = Me.GCList
         Me.GVList.Name = "GVList"
         Me.GVList.OptionsFind.AlwaysVisible = True
@@ -427,6 +428,11 @@ Partial Class FormDelManifestPick
         Me.Label1.TabIndex = 18
         Me.Label1.Text = "Created Date"
         '
+        'GridColumnIdCompGroup
+        '
+        Me.GridColumnIdCompGroup.FieldName = "id_comp_group"
+        Me.GridColumnIdCompGroup.Name = "GridColumnIdCompGroup"
+        '
         'FormDelManifestPick
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -491,4 +497,5 @@ Partial Class FormDelManifestPick
     Friend WithEvents GridColumnCreatedDate As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnCollie As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnCombinedNumber As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnIdCompGroup As DevExpress.XtraGrid.Columns.GridColumn
 End Class

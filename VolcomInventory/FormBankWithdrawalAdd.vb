@@ -109,6 +109,9 @@
                 newRow("value") = TxtAmount.EditValue
                 newRow("balance_due") = TxtAmount.EditValue
             End If
+            newRow("kurs") = 0
+            newRow("id_currency") = "1"
+            newRow("val_bef_kurs") = 0
             newRow("note") = addSlashes(TxtDescription.Text)
             newRow("id_dc") = LEDK.EditValue.ToString
             newRow("dc_code") = LEDK.Text

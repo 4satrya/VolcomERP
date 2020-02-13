@@ -40,6 +40,7 @@ Partial Class FormPurcAsset
         Me.ValueaddedAssetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.InputEmployeeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MoveLocationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ViewMoveHistoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GVActive = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -53,6 +54,7 @@ Partial Class FormPurcAsset
         Me.GridColumnaccumDepVA = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnaccumDepTotal = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnAssetNumber = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -87,7 +89,7 @@ Partial Class FormPurcAsset
         Me.PanelNavDep = New DevExpress.XtraEditors.PanelControl()
         Me.BtnHistory = New DevExpress.XtraEditors.SimpleButton()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
-        Me.ViewMoveHistoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.InputDescriptionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.XTCAsset, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCAsset.SuspendLayout()
         Me.XTPPending.SuspendLayout()
@@ -224,20 +226,20 @@ Partial Class FormPurcAsset
         '
         'ContextMenuStrip1
         '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RecordToolStripMenuItem, Me.ValueaddedAssetToolStripMenuItem, Me.InputEmployeeToolStripMenuItem, Me.MoveLocationToolStripMenuItem, Me.ViewMoveHistoryToolStripMenuItem})
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RecordToolStripMenuItem, Me.ValueaddedAssetToolStripMenuItem, Me.InputEmployeeToolStripMenuItem, Me.InputDescriptionToolStripMenuItem, Me.MoveLocationToolStripMenuItem, Me.ViewMoveHistoryToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(174, 114)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(174, 136)
         '
         'RecordToolStripMenuItem
         '
         Me.RecordToolStripMenuItem.Name = "RecordToolStripMenuItem"
-        Me.RecordToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
+        Me.RecordToolStripMenuItem.Size = New System.Drawing.Size(173, 22)
         Me.RecordToolStripMenuItem.Text = "Record"
         '
         'ValueaddedAssetToolStripMenuItem
         '
         Me.ValueaddedAssetToolStripMenuItem.Name = "ValueaddedAssetToolStripMenuItem"
-        Me.ValueaddedAssetToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
+        Me.ValueaddedAssetToolStripMenuItem.Size = New System.Drawing.Size(173, 22)
         Me.ValueaddedAssetToolStripMenuItem.Text = "Value-added asset"
         Me.ValueaddedAssetToolStripMenuItem.Visible = False
         '
@@ -250,18 +252,25 @@ Partial Class FormPurcAsset
         'MoveLocationToolStripMenuItem
         '
         Me.MoveLocationToolStripMenuItem.Name = "MoveLocationToolStripMenuItem"
-        Me.MoveLocationToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
+        Me.MoveLocationToolStripMenuItem.Size = New System.Drawing.Size(173, 22)
         Me.MoveLocationToolStripMenuItem.Text = "Move Location"
+        '
+        'ViewMoveHistoryToolStripMenuItem
+        '
+        Me.ViewMoveHistoryToolStripMenuItem.Name = "ViewMoveHistoryToolStripMenuItem"
+        Me.ViewMoveHistoryToolStripMenuItem.Size = New System.Drawing.Size(173, 22)
+        Me.ViewMoveHistoryToolStripMenuItem.Text = "View Move History"
         '
         'GVActive
         '
-        Me.GVActive.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumnacqCost, Me.GridColumnacqCostVA, Me.GridColumnacqCostTotal, Me.GridColumnBookValue, Me.GridColumnaccumDep, Me.GridColumnaccumDepVA, Me.GridColumnaccumDepTotal, Me.GridColumnAssetNumber, Me.GridColumn5, Me.GridColumn6, Me.GridColumn7})
+        Me.GVActive.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumnacqCost, Me.GridColumnacqCostVA, Me.GridColumnacqCostTotal, Me.GridColumnBookValue, Me.GridColumnaccumDep, Me.GridColumnaccumDepVA, Me.GridColumnaccumDepTotal, Me.GridColumnAssetNumber, Me.GridColumn8, Me.GridColumn5, Me.GridColumn6, Me.GridColumn7})
         Me.GVActive.GridControl = Me.GCActive
         Me.GVActive.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "acq_cost", Me.GridColumnacqCost, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "book_value", Me.GridColumnBookValue, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "accum_value", Me.GridColumnaccumDep, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "acq_cost_va", Me.GridColumnacqCostVA, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "acq_cost_total", Me.GridColumnacqCostTotal, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "accum_value_va", Me.GridColumnaccumDepVA, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "accum_value_total", Me.GridColumnaccumDepTotal, "{0:N2}")})
         Me.GVActive.Name = "GVActive"
         Me.GVActive.OptionsBehavior.AutoExpandAllGroups = True
         Me.GVActive.OptionsBehavior.Editable = False
         Me.GVActive.OptionsFind.AlwaysVisible = True
+        Me.GVActive.OptionsView.ColumnAutoWidth = False
         Me.GVActive.OptionsView.ShowFooter = True
         Me.GVActive.OptionsView.ShowGroupPanel = False
         '
@@ -382,13 +391,21 @@ Partial Class FormPurcAsset
         Me.GridColumnAssetNumber.Visible = True
         Me.GridColumnAssetNumber.VisibleIndex = 0
         '
+        'GridColumn8
+        '
+        Me.GridColumn8.Caption = "Description"
+        Me.GridColumn8.FieldName = "asset_note"
+        Me.GridColumn8.Name = "GridColumn8"
+        Me.GridColumn8.Visible = True
+        Me.GridColumn8.VisibleIndex = 8
+        '
         'GridColumn5
         '
         Me.GridColumn5.Caption = "Employee (current)"
         Me.GridColumn5.FieldName = "employee_name_current"
         Me.GridColumn5.Name = "GridColumn5"
         Me.GridColumn5.Visible = True
-        Me.GridColumn5.VisibleIndex = 8
+        Me.GridColumn5.VisibleIndex = 9
         '
         'GridColumn6
         '
@@ -396,7 +413,7 @@ Partial Class FormPurcAsset
         Me.GridColumn6.FieldName = "departement_current"
         Me.GridColumn6.Name = "GridColumn6"
         Me.GridColumn6.Visible = True
-        Me.GridColumn6.VisibleIndex = 9
+        Me.GridColumn6.VisibleIndex = 10
         '
         'GridColumn7
         '
@@ -404,7 +421,7 @@ Partial Class FormPurcAsset
         Me.GridColumn7.FieldName = "location_current"
         Me.GridColumn7.Name = "GridColumn7"
         Me.GridColumn7.Visible = True
-        Me.GridColumn7.VisibleIndex = 10
+        Me.GridColumn7.VisibleIndex = 11
         '
         'XTPSold
         '
@@ -734,11 +751,11 @@ Partial Class FormPurcAsset
         Me.LabelControl1.TabIndex = 0
         Me.LabelControl1.Text = "Depreciation Schedule"
         '
-        'ViewMoveHistoryToolStripMenuItem
+        'InputDescriptionToolStripMenuItem
         '
-        Me.ViewMoveHistoryToolStripMenuItem.Name = "ViewMoveHistoryToolStripMenuItem"
-        Me.ViewMoveHistoryToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
-        Me.ViewMoveHistoryToolStripMenuItem.Text = "View Move History"
+        Me.InputDescriptionToolStripMenuItem.Name = "InputDescriptionToolStripMenuItem"
+        Me.InputDescriptionToolStripMenuItem.Size = New System.Drawing.Size(173, 22)
+        Me.InputDescriptionToolStripMenuItem.Text = "Input Description"
         '
         'FormPurcAsset
         '
@@ -840,4 +857,6 @@ Partial Class FormPurcAsset
     Friend WithEvents GridColumn7 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents MoveLocationToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ViewMoveHistoryToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents GridColumn8 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents InputDescriptionToolStripMenuItem As ToolStripMenuItem
 End Class

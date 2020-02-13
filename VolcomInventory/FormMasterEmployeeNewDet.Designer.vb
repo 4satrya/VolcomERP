@@ -61,6 +61,20 @@ Partial Class FormMasterEmployeeNewDet
         Me.PanelControlMain = New DevExpress.XtraEditors.PanelControl()
         Me.XTPEmployee = New DevExpress.XtraTab.XtraTabControl()
         Me.XTPGeneral = New DevExpress.XtraTab.XtraTabPage()
+        Me.TEEmergencyPhone2 = New DevExpress.XtraEditors.TextEdit()
+        Me.Label112 = New System.Windows.Forms.Label()
+        Me.TEEmergencyRelation2 = New DevExpress.XtraEditors.TextEdit()
+        Me.Label113 = New System.Windows.Forms.Label()
+        Me.Label114 = New System.Windows.Forms.Label()
+        Me.TEEmergencyName2 = New DevExpress.XtraEditors.TextEdit()
+        Me.TEEmergencyPhone1 = New DevExpress.XtraEditors.TextEdit()
+        Me.Label111 = New System.Windows.Forms.Label()
+        Me.TEEmergencyRelation1 = New DevExpress.XtraEditors.TextEdit()
+        Me.Label110 = New System.Windows.Forms.Label()
+        Me.Label109 = New System.Windows.Forms.Label()
+        Me.TEEmergencyName1 = New DevExpress.XtraEditors.TextEdit()
+        Me.Label108 = New System.Windows.Forms.Label()
+        Me.PanelControl14 = New DevExpress.XtraEditors.PanelControl()
         Me.TxtPersonalEmail = New DevExpress.XtraEditors.TextEdit()
         Me.Label46 = New System.Windows.Forms.Label()
         Me.PanelControl7 = New DevExpress.XtraEditors.PanelControl()
@@ -235,20 +249,6 @@ Partial Class FormMasterEmployeeNewDet
         Me.BtnNext = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnSaveChanges = New DevExpress.XtraEditors.SimpleButton()
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
-        Me.TEEmergencyPhone2 = New DevExpress.XtraEditors.TextEdit()
-        Me.Label112 = New System.Windows.Forms.Label()
-        Me.TEEmergencyRelation2 = New DevExpress.XtraEditors.TextEdit()
-        Me.Label113 = New System.Windows.Forms.Label()
-        Me.Label114 = New System.Windows.Forms.Label()
-        Me.TEEmergencyName2 = New DevExpress.XtraEditors.TextEdit()
-        Me.TEEmergencyPhone1 = New DevExpress.XtraEditors.TextEdit()
-        Me.Label111 = New System.Windows.Forms.Label()
-        Me.TEEmergencyRelation1 = New DevExpress.XtraEditors.TextEdit()
-        Me.Label110 = New System.Windows.Forms.Label()
-        Me.Label109 = New System.Windows.Forms.Label()
-        Me.TEEmergencyName1 = New DevExpress.XtraEditors.TextEdit()
-        Me.Label108 = New System.Windows.Forms.Label()
-        Me.PanelControl14 = New DevExpress.XtraEditors.PanelControl()
         CType(Me.PanelControlTop, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlTop.SuspendLayout()
         CType(Me.PanelControl8, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -285,6 +285,13 @@ Partial Class FormMasterEmployeeNewDet
         CType(Me.XTPEmployee, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTPEmployee.SuspendLayout()
         Me.XTPGeneral.SuspendLayout()
+        CType(Me.TEEmergencyPhone2.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TEEmergencyRelation2.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TEEmergencyName2.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TEEmergencyPhone1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TEEmergencyRelation1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TEEmergencyName1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl14, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtPersonalEmail.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl7, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl5, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -390,13 +397,6 @@ Partial Class FormMasterEmployeeNewDet
         Me.PCKtpAtt.SuspendLayout()
         CType(Me.PEKTP.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TEEmergencyPhone2.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TEEmergencyRelation2.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TEEmergencyName2.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TEEmergencyPhone1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TEEmergencyRelation1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TEEmergencyName1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PanelControl14, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControlTop
@@ -725,7 +725,7 @@ Partial Class FormMasterEmployeeNewDet
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(11, -293)
+        Me.Label6.Location = New System.Drawing.Point(11, 15)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(25, 13)
         Me.Label6.TabIndex = 11
@@ -734,7 +734,7 @@ Partial Class FormMasterEmployeeNewDet
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(587, -293)
+        Me.Label5.Location = New System.Drawing.Point(584, 15)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(60, 13)
         Me.Label5.TabIndex = 9
@@ -742,7 +742,7 @@ Partial Class FormMasterEmployeeNewDet
         '
         'LEBloodType
         '
-        Me.LEBloodType.Location = New System.Drawing.Point(667, -296)
+        Me.LEBloodType.Location = New System.Drawing.Point(667, 12)
         Me.LEBloodType.Name = "LEBloodType"
         Me.LEBloodType.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.LEBloodType.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_blood_type", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("blood_type", "Blood Type")})
@@ -752,7 +752,7 @@ Partial Class FormMasterEmployeeNewDet
         'Label16
         '
         Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(587, -189)
+        Me.Label16.Location = New System.Drawing.Point(587, 119)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(74, 13)
         Me.Label16.TabIndex = 52
@@ -762,7 +762,7 @@ Partial Class FormMasterEmployeeNewDet
         'TxtAge
         '
         Me.TxtAge.Enabled = False
-        Me.TxtAge.Location = New System.Drawing.Point(667, -270)
+        Me.TxtAge.Location = New System.Drawing.Point(667, 38)
         Me.TxtAge.Name = "TxtAge"
         Me.TxtAge.Properties.ReadOnly = True
         Me.TxtAge.Size = New System.Drawing.Size(115, 20)
@@ -772,7 +772,7 @@ Partial Class FormMasterEmployeeNewDet
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(587, -267)
+        Me.Label9.Location = New System.Drawing.Point(587, 41)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(26, 13)
         Me.Label9.TabIndex = 17
@@ -781,7 +781,7 @@ Partial Class FormMasterEmployeeNewDet
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(278, -267)
+        Me.Label8.Location = New System.Drawing.Point(278, 41)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(68, 13)
         Me.Label8.TabIndex = 15
@@ -789,7 +789,7 @@ Partial Class FormMasterEmployeeNewDet
         '
         'TxtPOB
         '
-        Me.TxtPOB.Location = New System.Drawing.Point(107, -270)
+        Me.TxtPOB.Location = New System.Drawing.Point(107, 38)
         Me.TxtPOB.Name = "TxtPOB"
         Me.TxtPOB.Properties.ReadOnly = True
         Me.TxtPOB.Size = New System.Drawing.Size(167, 20)
@@ -798,7 +798,7 @@ Partial Class FormMasterEmployeeNewDet
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(11, -267)
+        Me.Label7.Location = New System.Drawing.Point(11, 41)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(70, 13)
         Me.Label7.TabIndex = 13
@@ -949,6 +949,124 @@ Partial Class FormMasterEmployeeNewDet
         Me.XTPGeneral.Name = "XTPGeneral"
         Me.XTPGeneral.Size = New System.Drawing.Size(809, 405)
         Me.XTPGeneral.Text = "General"
+        '
+        'TEEmergencyPhone2
+        '
+        Me.TEEmergencyPhone2.Location = New System.Drawing.Point(584, 679)
+        Me.TEEmergencyPhone2.Name = "TEEmergencyPhone2"
+        Me.TEEmergencyPhone2.Properties.ReadOnly = True
+        Me.TEEmergencyPhone2.Size = New System.Drawing.Size(171, 20)
+        Me.TEEmergencyPhone2.TabIndex = 9059
+        '
+        'Label112
+        '
+        Me.Label112.AutoSize = True
+        Me.Label112.Location = New System.Drawing.Point(541, 682)
+        Me.Label112.Name = "Label112"
+        Me.Label112.Size = New System.Drawing.Size(37, 13)
+        Me.Label112.TabIndex = 9058
+        Me.Label112.Text = "Phone"
+        '
+        'TEEmergencyRelation2
+        '
+        Me.TEEmergencyRelation2.Location = New System.Drawing.Point(358, 679)
+        Me.TEEmergencyRelation2.Name = "TEEmergencyRelation2"
+        Me.TEEmergencyRelation2.Properties.ReadOnly = True
+        Me.TEEmergencyRelation2.Size = New System.Drawing.Size(160, 20)
+        Me.TEEmergencyRelation2.TabIndex = 9056
+        '
+        'Label113
+        '
+        Me.Label113.AutoSize = True
+        Me.Label113.Location = New System.Drawing.Point(302, 682)
+        Me.Label113.Name = "Label113"
+        Me.Label113.Size = New System.Drawing.Size(46, 13)
+        Me.Label113.TabIndex = 9057
+        Me.Label113.Text = "Relation"
+        '
+        'Label114
+        '
+        Me.Label114.AutoSize = True
+        Me.Label114.Location = New System.Drawing.Point(30, 682)
+        Me.Label114.Name = "Label114"
+        Me.Label114.Size = New System.Drawing.Size(34, 13)
+        Me.Label114.TabIndex = 9055
+        Me.Label114.Text = "Name"
+        '
+        'TEEmergencyName2
+        '
+        Me.TEEmergencyName2.Location = New System.Drawing.Point(106, 679)
+        Me.TEEmergencyName2.Name = "TEEmergencyName2"
+        Me.TEEmergencyName2.Properties.ReadOnly = True
+        Me.TEEmergencyName2.Size = New System.Drawing.Size(179, 20)
+        Me.TEEmergencyName2.TabIndex = 9054
+        '
+        'TEEmergencyPhone1
+        '
+        Me.TEEmergencyPhone1.Location = New System.Drawing.Point(584, 653)
+        Me.TEEmergencyPhone1.Name = "TEEmergencyPhone1"
+        Me.TEEmergencyPhone1.Properties.ReadOnly = True
+        Me.TEEmergencyPhone1.Size = New System.Drawing.Size(171, 20)
+        Me.TEEmergencyPhone1.TabIndex = 9053
+        '
+        'Label111
+        '
+        Me.Label111.AutoSize = True
+        Me.Label111.Location = New System.Drawing.Point(541, 656)
+        Me.Label111.Name = "Label111"
+        Me.Label111.Size = New System.Drawing.Size(37, 13)
+        Me.Label111.TabIndex = 9052
+        Me.Label111.Text = "Phone"
+        '
+        'TEEmergencyRelation1
+        '
+        Me.TEEmergencyRelation1.Location = New System.Drawing.Point(358, 653)
+        Me.TEEmergencyRelation1.Name = "TEEmergencyRelation1"
+        Me.TEEmergencyRelation1.Properties.ReadOnly = True
+        Me.TEEmergencyRelation1.Size = New System.Drawing.Size(160, 20)
+        Me.TEEmergencyRelation1.TabIndex = 9050
+        '
+        'Label110
+        '
+        Me.Label110.AutoSize = True
+        Me.Label110.Location = New System.Drawing.Point(302, 656)
+        Me.Label110.Name = "Label110"
+        Me.Label110.Size = New System.Drawing.Size(46, 13)
+        Me.Label110.TabIndex = 9051
+        Me.Label110.Text = "Relation"
+        '
+        'Label109
+        '
+        Me.Label109.AutoSize = True
+        Me.Label109.Location = New System.Drawing.Point(30, 656)
+        Me.Label109.Name = "Label109"
+        Me.Label109.Size = New System.Drawing.Size(34, 13)
+        Me.Label109.TabIndex = 9049
+        Me.Label109.Text = "Name"
+        '
+        'TEEmergencyName1
+        '
+        Me.TEEmergencyName1.Location = New System.Drawing.Point(106, 653)
+        Me.TEEmergencyName1.Name = "TEEmergencyName1"
+        Me.TEEmergencyName1.Properties.ReadOnly = True
+        Me.TEEmergencyName1.Size = New System.Drawing.Size(179, 20)
+        Me.TEEmergencyName1.TabIndex = 9048
+        '
+        'Label108
+        '
+        Me.Label108.AutoSize = True
+        Me.Label108.Location = New System.Drawing.Point(9, 631)
+        Me.Label108.Name = "Label108"
+        Me.Label108.Size = New System.Drawing.Size(80, 13)
+        Me.Label108.TabIndex = 9047
+        Me.Label108.Text = "Emergency Call"
+        '
+        'PanelControl14
+        '
+        Me.PanelControl14.Location = New System.Drawing.Point(105, 639)
+        Me.PanelControl14.Name = "PanelControl14"
+        Me.PanelControl14.Size = New System.Drawing.Size(649, 2)
+        Me.PanelControl14.TabIndex = 9046
         '
         'TxtPersonalEmail
         '
@@ -2624,124 +2742,6 @@ Partial Class FormMasterEmployeeNewDet
         '
         Me.ErrorProvider1.ContainerControl = Me
         '
-        'TEEmergencyPhone2
-        '
-        Me.TEEmergencyPhone2.Location = New System.Drawing.Point(584, 679)
-        Me.TEEmergencyPhone2.Name = "TEEmergencyPhone2"
-        Me.TEEmergencyPhone2.Properties.ReadOnly = True
-        Me.TEEmergencyPhone2.Size = New System.Drawing.Size(171, 20)
-        Me.TEEmergencyPhone2.TabIndex = 9059
-        '
-        'Label112
-        '
-        Me.Label112.AutoSize = True
-        Me.Label112.Location = New System.Drawing.Point(541, 682)
-        Me.Label112.Name = "Label112"
-        Me.Label112.Size = New System.Drawing.Size(37, 13)
-        Me.Label112.TabIndex = 9058
-        Me.Label112.Text = "Phone"
-        '
-        'TEEmergencyRelation2
-        '
-        Me.TEEmergencyRelation2.Location = New System.Drawing.Point(358, 679)
-        Me.TEEmergencyRelation2.Name = "TEEmergencyRelation2"
-        Me.TEEmergencyRelation2.Properties.ReadOnly = True
-        Me.TEEmergencyRelation2.Size = New System.Drawing.Size(160, 20)
-        Me.TEEmergencyRelation2.TabIndex = 9056
-        '
-        'Label113
-        '
-        Me.Label113.AutoSize = True
-        Me.Label113.Location = New System.Drawing.Point(302, 682)
-        Me.Label113.Name = "Label113"
-        Me.Label113.Size = New System.Drawing.Size(46, 13)
-        Me.Label113.TabIndex = 9057
-        Me.Label113.Text = "Relation"
-        '
-        'Label114
-        '
-        Me.Label114.AutoSize = True
-        Me.Label114.Location = New System.Drawing.Point(30, 682)
-        Me.Label114.Name = "Label114"
-        Me.Label114.Size = New System.Drawing.Size(34, 13)
-        Me.Label114.TabIndex = 9055
-        Me.Label114.Text = "Name"
-        '
-        'TEEmergencyName2
-        '
-        Me.TEEmergencyName2.Location = New System.Drawing.Point(106, 679)
-        Me.TEEmergencyName2.Name = "TEEmergencyName2"
-        Me.TEEmergencyName2.Properties.ReadOnly = True
-        Me.TEEmergencyName2.Size = New System.Drawing.Size(179, 20)
-        Me.TEEmergencyName2.TabIndex = 9054
-        '
-        'TEEmergencyPhone1
-        '
-        Me.TEEmergencyPhone1.Location = New System.Drawing.Point(584, 653)
-        Me.TEEmergencyPhone1.Name = "TEEmergencyPhone1"
-        Me.TEEmergencyPhone1.Properties.ReadOnly = True
-        Me.TEEmergencyPhone1.Size = New System.Drawing.Size(171, 20)
-        Me.TEEmergencyPhone1.TabIndex = 9053
-        '
-        'Label111
-        '
-        Me.Label111.AutoSize = True
-        Me.Label111.Location = New System.Drawing.Point(541, 656)
-        Me.Label111.Name = "Label111"
-        Me.Label111.Size = New System.Drawing.Size(37, 13)
-        Me.Label111.TabIndex = 9052
-        Me.Label111.Text = "Phone"
-        '
-        'TEEmergencyRelation1
-        '
-        Me.TEEmergencyRelation1.Location = New System.Drawing.Point(358, 653)
-        Me.TEEmergencyRelation1.Name = "TEEmergencyRelation1"
-        Me.TEEmergencyRelation1.Properties.ReadOnly = True
-        Me.TEEmergencyRelation1.Size = New System.Drawing.Size(160, 20)
-        Me.TEEmergencyRelation1.TabIndex = 9050
-        '
-        'Label110
-        '
-        Me.Label110.AutoSize = True
-        Me.Label110.Location = New System.Drawing.Point(302, 656)
-        Me.Label110.Name = "Label110"
-        Me.Label110.Size = New System.Drawing.Size(46, 13)
-        Me.Label110.TabIndex = 9051
-        Me.Label110.Text = "Relation"
-        '
-        'Label109
-        '
-        Me.Label109.AutoSize = True
-        Me.Label109.Location = New System.Drawing.Point(30, 656)
-        Me.Label109.Name = "Label109"
-        Me.Label109.Size = New System.Drawing.Size(34, 13)
-        Me.Label109.TabIndex = 9049
-        Me.Label109.Text = "Name"
-        '
-        'TEEmergencyName1
-        '
-        Me.TEEmergencyName1.Location = New System.Drawing.Point(106, 653)
-        Me.TEEmergencyName1.Name = "TEEmergencyName1"
-        Me.TEEmergencyName1.Properties.ReadOnly = True
-        Me.TEEmergencyName1.Size = New System.Drawing.Size(179, 20)
-        Me.TEEmergencyName1.TabIndex = 9048
-        '
-        'Label108
-        '
-        Me.Label108.AutoSize = True
-        Me.Label108.Location = New System.Drawing.Point(9, 631)
-        Me.Label108.Name = "Label108"
-        Me.Label108.Size = New System.Drawing.Size(80, 13)
-        Me.Label108.TabIndex = 9047
-        Me.Label108.Text = "Emergency Call"
-        '
-        'PanelControl14
-        '
-        Me.PanelControl14.Location = New System.Drawing.Point(105, 639)
-        Me.PanelControl14.Name = "PanelControl14"
-        Me.PanelControl14.Size = New System.Drawing.Size(649, 2)
-        Me.PanelControl14.TabIndex = 9046
-        '
         'FormMasterEmployeeNewDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2796,6 +2796,13 @@ Partial Class FormMasterEmployeeNewDet
         Me.XTPEmployee.ResumeLayout(False)
         Me.XTPGeneral.ResumeLayout(False)
         Me.XTPGeneral.PerformLayout()
+        CType(Me.TEEmergencyPhone2.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TEEmergencyRelation2.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TEEmergencyName2.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TEEmergencyPhone1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TEEmergencyRelation1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TEEmergencyName1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl14, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtPersonalEmail.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl7, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl5, System.ComponentModel.ISupportInitialize).EndInit()
@@ -2902,13 +2909,6 @@ Partial Class FormMasterEmployeeNewDet
         Me.PCKtpAtt.ResumeLayout(False)
         CType(Me.PEKTP.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TEEmergencyPhone2.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TEEmergencyRelation2.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TEEmergencyName2.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TEEmergencyPhone1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TEEmergencyRelation1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TEEmergencyName1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PanelControl14, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

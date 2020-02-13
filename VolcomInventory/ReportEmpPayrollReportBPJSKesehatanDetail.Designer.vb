@@ -113,7 +113,7 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         '
         'XrTableCell1
         '
-        Me.XrTableCell1.BackColor = System.Drawing.Color.FromArgb(CType(CType(14, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(36, Byte), Integer))
+        Me.XrTableCell1.BackColor = System.Drawing.Color.LightGray
         Me.XrTableCell1.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top), DevExpress.XtraPrinting.BorderSide)
         Me.XrTableCell1.Name = "XrTableCell1"
         Me.XrTableCell1.StylePriority.UseBackColor = False
@@ -125,7 +125,7 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         '
         'XrTableCell6
         '
-        Me.XrTableCell6.BackColor = System.Drawing.Color.FromArgb(CType(CType(14, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(36, Byte), Integer))
+        Me.XrTableCell6.BackColor = System.Drawing.Color.LightGray
         Me.XrTableCell6.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top), DevExpress.XtraPrinting.BorderSide)
         Me.XrTableCell6.Name = "XrTableCell6"
         Me.XrTableCell6.StylePriority.UseBackColor = False
@@ -133,11 +133,11 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         Me.XrTableCell6.StylePriority.UseTextAlignment = False
         Me.XrTableCell6.Text = "NAMA KARYAWAN"
         Me.XrTableCell6.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        Me.XrTableCell6.Weight = 2.15579389577971R
+        Me.XrTableCell6.Weight = 2.05780326230184R
         '
         'XrTableCell5
         '
-        Me.XrTableCell5.BackColor = System.Drawing.Color.FromArgb(CType(CType(14, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(36, Byte), Integer))
+        Me.XrTableCell5.BackColor = System.Drawing.Color.LightGray
         Me.XrTableCell5.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top), DevExpress.XtraPrinting.BorderSide)
         Me.XrTableCell5.Name = "XrTableCell5"
         Me.XrTableCell5.StylePriority.UseBackColor = False
@@ -149,7 +149,7 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         '
         'XrTableCell4
         '
-        Me.XrTableCell4.BackColor = System.Drawing.Color.FromArgb(CType(CType(14, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(36, Byte), Integer))
+        Me.XrTableCell4.BackColor = System.Drawing.Color.LightGray
         Me.XrTableCell4.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top), DevExpress.XtraPrinting.BorderSide)
         Me.XrTableCell4.Name = "XrTableCell4"
         Me.XrTableCell4.StylePriority.UseBackColor = False
@@ -161,7 +161,7 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         '
         'XrTableCell2
         '
-        Me.XrTableCell2.BackColor = System.Drawing.Color.FromArgb(CType(CType(14, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(36, Byte), Integer))
+        Me.XrTableCell2.BackColor = System.Drawing.Color.LightGray
         Me.XrTableCell2.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top), DevExpress.XtraPrinting.BorderSide)
         Me.XrTableCell2.Name = "XrTableCell2"
         Me.XrTableCell2.StylePriority.UseBackColor = False
@@ -169,11 +169,11 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         Me.XrTableCell2.StylePriority.UseTextAlignment = False
         Me.XrTableCell2.Text = "TOTAL  GAJI POKOK + TUNJ TETAP"
         Me.XrTableCell2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        Me.XrTableCell2.Weight = 0.656537225965427R
+        Me.XrTableCell2.Weight = 0.636939099269852R
         '
         'XrTableCell3
         '
-        Me.XrTableCell3.BackColor = System.Drawing.Color.FromArgb(CType(CType(14, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(36, Byte), Integer))
+        Me.XrTableCell3.BackColor = System.Drawing.Color.LightGray
         Me.XrTableCell3.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top), DevExpress.XtraPrinting.BorderSide)
         Me.XrTableCell3.Name = "XrTableCell3"
         Me.XrTableCell3.StylePriority.UseBackColor = False
@@ -181,11 +181,11 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         Me.XrTableCell3.StylePriority.UseTextAlignment = False
         Me.XrTableCell3.Text = "IURAN PEMBERI KERJA (4%)"
         Me.XrTableCell3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        Me.XrTableCell3.Weight = 0.656537208600927R
+        Me.XrTableCell3.Weight = 0.7545278420788R
         '
         'XrTableCell7
         '
-        Me.XrTableCell7.BackColor = System.Drawing.Color.FromArgb(CType(CType(14, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(36, Byte), Integer))
+        Me.XrTableCell7.BackColor = System.Drawing.Color.LightGray
         Me.XrTableCell7.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top), DevExpress.XtraPrinting.BorderSide)
         Me.XrTableCell7.Name = "XrTableCell7"
         Me.XrTableCell7.StylePriority.UseBackColor = False
@@ -193,11 +193,11 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         Me.XrTableCell7.StylePriority.UseTextAlignment = False
         Me.XrTableCell7.Text = "IURAN KARYAWAN (1%)"
         Me.XrTableCell7.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        Me.XrTableCell7.Weight = 0.656537208600926R
+        Me.XrTableCell7.Weight = 0.705532525339863R
         '
         'XrTableCell8
         '
-        Me.XrTableCell8.BackColor = System.Drawing.Color.FromArgb(CType(CType(14, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(36, Byte), Integer))
+        Me.XrTableCell8.BackColor = System.Drawing.Color.LightGray
         Me.XrTableCell8.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top), DevExpress.XtraPrinting.BorderSide)
         Me.XrTableCell8.Name = "XrTableCell8"
         Me.XrTableCell8.StylePriority.UseBackColor = False
@@ -205,11 +205,11 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         Me.XrTableCell8.StylePriority.UseTextAlignment = False
         Me.XrTableCell8.Text = "TOTAL IURAN"
         Me.XrTableCell8.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        Me.XrTableCell8.Weight = 0.597743565490997R
+        Me.XrTableCell8.Weight = 0.578144728566679R
         '
         'XrTableCell9
         '
-        Me.XrTableCell9.BackColor = System.Drawing.Color.FromArgb(CType(CType(14, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(36, Byte), Integer))
+        Me.XrTableCell9.BackColor = System.Drawing.Color.LightGray
         Me.XrTableCell9.Borders = CType(((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top) _
             Or DevExpress.XtraPrinting.BorderSide.Right), DevExpress.XtraPrinting.BorderSide)
         Me.XrTableCell9.Name = "XrTableCell9"
@@ -218,7 +218,7 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         Me.XrTableCell9.StylePriority.UseTextAlignment = False
         Me.XrTableCell9.Text = "HAK KELAS RAWAT"
         Me.XrTableCell9.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        Me.XrTableCell9.Weight = 0.401762174600784R
+        Me.XrTableCell9.Weight = 0.39196382148174R
         '
         'XTRowSpace
         '
@@ -246,7 +246,7 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         Me.XrTableCell11.StylePriority.UseBorders = False
         Me.XrTableCell11.StylePriority.UseTextAlignment = False
         Me.XrTableCell11.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        Me.XrTableCell11.Weight = 2.15579376375407R
+        Me.XrTableCell11.Weight = 2.05780327979804R
         '
         'XrTableCell12
         '
@@ -257,7 +257,7 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         Me.XrTableCell12.StylePriority.UseBorders = False
         Me.XrTableCell12.StylePriority.UseTextAlignment = False
         Me.XrTableCell12.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        Me.XrTableCell12.Weight = 0.734930049015442R
+        Me.XrTableCell12.Weight = 0.734929301406239R
         '
         'XrTableCell13
         '
@@ -268,7 +268,7 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         Me.XrTableCell13.StylePriority.UseBorders = False
         Me.XrTableCell13.StylePriority.UseTextAlignment = False
         Me.XrTableCell13.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        Me.XrTableCell13.Weight = 0.881915721626216R
+        Me.XrTableCell13.Weight = 0.881916020669897R
         '
         'XrTableCell14
         '
@@ -279,7 +279,7 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         Me.XrTableCell14.StylePriority.UseBorders = False
         Me.XrTableCell14.StylePriority.UseTextAlignment = False
         Me.XrTableCell14.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        Me.XrTableCell14.Weight = 0.656536940177896R
+        Me.XrTableCell14.Weight = 0.636939411569684R
         '
         'XrTableCell15
         '
@@ -290,7 +290,7 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         Me.XrTableCell15.StylePriority.UseBorders = False
         Me.XrTableCell15.StylePriority.UseTextAlignment = False
         Me.XrTableCell15.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        Me.XrTableCell15.Weight = 0.656536637025865R
+        Me.XrTableCell15.Weight = 0.754527270503738R
         '
         'XrTableCell16
         '
@@ -301,7 +301,7 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         Me.XrTableCell16.StylePriority.UseBorders = False
         Me.XrTableCell16.StylePriority.UseTextAlignment = False
         Me.XrTableCell16.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        Me.XrTableCell16.Weight = 0.656537806688289R
+        Me.XrTableCell16.Weight = 0.705532525339863R
         '
         'XrTableCell17
         '
@@ -312,7 +312,7 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         Me.XrTableCell17.StylePriority.UseBorders = False
         Me.XrTableCell17.StylePriority.UseTextAlignment = False
         Me.XrTableCell17.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        Me.XrTableCell17.Weight = 0.597742967403584R
+        Me.XrTableCell17.Weight = 0.57814502761031R
         '
         'XrTableCell18
         '
@@ -324,7 +324,7 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         Me.XrTableCell18.StylePriority.UseBorders = False
         Me.XrTableCell18.StylePriority.UseTextAlignment = False
         Me.XrTableCell18.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        Me.XrTableCell18.Weight = 0.401762827564896R
+        Me.XrTableCell18.Weight = 0.391963876358489R
         '
         'XTRowTotal
         '
@@ -334,7 +334,7 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         '
         'XrTableCell19
         '
-        Me.XrTableCell19.BackColor = System.Drawing.Color.FromArgb(CType(CType(238, Byte), Integer), CType(CType(236, Byte), Integer), CType(CType(225, Byte), Integer))
+        Me.XrTableCell19.BackColor = System.Drawing.Color.LightGray
         Me.XrTableCell19.Borders = CType(((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top) _
             Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
         Me.XrTableCell19.Font = New System.Drawing.Font("Tahoma", 7.25!, System.Drawing.FontStyle.Bold)
@@ -349,7 +349,7 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         '
         'XrTableCell20
         '
-        Me.XrTableCell20.BackColor = System.Drawing.Color.FromArgb(CType(CType(238, Byte), Integer), CType(CType(236, Byte), Integer), CType(CType(225, Byte), Integer))
+        Me.XrTableCell20.BackColor = System.Drawing.Color.LightGray
         Me.XrTableCell20.Borders = CType(((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top) _
             Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
         Me.XrTableCell20.Font = New System.Drawing.Font("Tahoma", 7.25!, System.Drawing.FontStyle.Bold)
@@ -359,11 +359,11 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         Me.XrTableCell20.StylePriority.UseFont = False
         Me.XrTableCell20.StylePriority.UseTextAlignment = False
         Me.XrTableCell20.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter
-        Me.XrTableCell20.Weight = 2.15579414418675R
+        Me.XrTableCell20.Weight = 2.05780306214335R
         '
         'XrTableCell22
         '
-        Me.XrTableCell22.BackColor = System.Drawing.Color.FromArgb(CType(CType(238, Byte), Integer), CType(CType(236, Byte), Integer), CType(CType(225, Byte), Integer))
+        Me.XrTableCell22.BackColor = System.Drawing.Color.LightGray
         Me.XrTableCell22.Borders = CType(((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top) _
             Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
         Me.XrTableCell22.Name = "XrTableCell22"
@@ -371,11 +371,11 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         Me.XrTableCell22.StylePriority.UseBorders = False
         Me.XrTableCell22.StylePriority.UseTextAlignment = False
         Me.XrTableCell22.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        Me.XrTableCell22.Weight = 1.61684546165586R
+        Me.XrTableCell22.Weight = 1.61684501309034R
         '
         'XrTableCell23
         '
-        Me.XrTableCell23.BackColor = System.Drawing.Color.FromArgb(CType(CType(238, Byte), Integer), CType(CType(236, Byte), Integer), CType(CType(225, Byte), Integer))
+        Me.XrTableCell23.BackColor = System.Drawing.Color.LightGray
         Me.XrTableCell23.Borders = CType(((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top) _
             Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
         Me.XrTableCell23.Font = New System.Drawing.Font("Tahoma", 7.25!, System.Drawing.FontStyle.Bold)
@@ -385,11 +385,11 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         Me.XrTableCell23.StylePriority.UseFont = False
         Me.XrTableCell23.StylePriority.UseTextAlignment = False
         Me.XrTableCell23.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
-        Me.XrTableCell23.Weight = 0.656536774816813R
+        Me.XrTableCell23.Weight = 0.636939395730441R
         '
         'XrTableCell24
         '
-        Me.XrTableCell24.BackColor = System.Drawing.Color.FromArgb(CType(CType(238, Byte), Integer), CType(CType(236, Byte), Integer), CType(CType(225, Byte), Integer))
+        Me.XrTableCell24.BackColor = System.Drawing.Color.LightGray
         Me.XrTableCell24.Borders = CType(((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top) _
             Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
         Me.XrTableCell24.Font = New System.Drawing.Font("Tahoma", 7.25!, System.Drawing.FontStyle.Bold)
@@ -399,11 +399,11 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         Me.XrTableCell24.StylePriority.UseFont = False
         Me.XrTableCell24.StylePriority.UseTextAlignment = False
         Me.XrTableCell24.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
-        Me.XrTableCell24.Weight = 0.656536412743179R
+        Me.XrTableCell24.Weight = 0.754527270503813R
         '
         'XrTableCell25
         '
-        Me.XrTableCell25.BackColor = System.Drawing.Color.FromArgb(CType(CType(238, Byte), Integer), CType(CType(236, Byte), Integer), CType(CType(225, Byte), Integer))
+        Me.XrTableCell25.BackColor = System.Drawing.Color.LightGray
         Me.XrTableCell25.Borders = CType(((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top) _
             Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
         Me.XrTableCell25.Font = New System.Drawing.Font("Tahoma", 7.25!, System.Drawing.FontStyle.Bold)
@@ -413,11 +413,11 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         Me.XrTableCell25.StylePriority.UseFont = False
         Me.XrTableCell25.StylePriority.UseTextAlignment = False
         Me.XrTableCell25.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
-        Me.XrTableCell25.Weight = 0.656538207005142R
+        Me.XrTableCell25.Weight = 0.705532551852115R
         '
         'XrTableCell26
         '
-        Me.XrTableCell26.BackColor = System.Drawing.Color.FromArgb(CType(CType(238, Byte), Integer), CType(CType(236, Byte), Integer), CType(CType(225, Byte), Integer))
+        Me.XrTableCell26.BackColor = System.Drawing.Color.LightGray
         Me.XrTableCell26.Borders = CType(((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top) _
             Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
         Me.XrTableCell26.Font = New System.Drawing.Font("Tahoma", 7.25!, System.Drawing.FontStyle.Bold)
@@ -427,11 +427,11 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         Me.XrTableCell26.StylePriority.UseFont = False
         Me.XrTableCell26.StylePriority.UseTextAlignment = False
         Me.XrTableCell26.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
-        Me.XrTableCell26.Weight = 0.597742979928764R
+        Me.XrTableCell26.Weight = 0.57814504013549R
         '
         'XrTableCell27
         '
-        Me.XrTableCell27.BackColor = System.Drawing.Color.FromArgb(CType(CType(238, Byte), Integer), CType(CType(236, Byte), Integer), CType(CType(225, Byte), Integer))
+        Me.XrTableCell27.BackColor = System.Drawing.Color.LightGray
         Me.XrTableCell27.Borders = CType((((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top) _
             Or DevExpress.XtraPrinting.BorderSide.Right) _
             Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
@@ -440,7 +440,7 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         Me.XrTableCell27.StylePriority.UseBorders = False
         Me.XrTableCell27.StylePriority.UseTextAlignment = False
         Me.XrTableCell27.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        Me.XrTableCell27.Weight = 0.401762732919744R
+        Me.XrTableCell27.Weight = 0.3919643798007R
         '
         'TopMargin
         '
@@ -453,17 +453,19 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         '
         'XrPanel1
         '
-        Me.XrPanel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(22, Byte), Integer), CType(CType(54, Byte), Integer), CType(CType(92, Byte), Integer))
+        Me.XrPanel1.BackColor = System.Drawing.Color.Transparent
+        Me.XrPanel1.BorderColor = System.Drawing.Color.Transparent
         Me.XrPanel1.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XLMaxKelas1, Me.XLMaxKelas2, Me.XLUMK, Me.XrLabel13, Me.XrLabel14, Me.XrLabel15, Me.XrLabel16, Me.XrLabel17, Me.XrLabel18, Me.XLKodeBU, Me.XLVirtualAcc, Me.XLPeriod, Me.XrLabel7, Me.XrLabel6, Me.XrLabel5, Me.XrLabel4, Me.XrLabel3, Me.XrLabel2, Me.XrLabel1})
         Me.XrPanel1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 0!)
         Me.XrPanel1.Name = "XrPanel1"
         Me.XrPanel1.SizeF = New System.Drawing.SizeF(733.0!, 80.0!)
         Me.XrPanel1.StylePriority.UseBackColor = False
+        Me.XrPanel1.StylePriority.UseBorderColor = False
         '
         'XLMaxKelas1
         '
         Me.XLMaxKelas1.Font = New System.Drawing.Font("Tahoma", 7.25!)
-        Me.XLMaxKelas1.ForeColor = System.Drawing.Color.White
+        Me.XLMaxKelas1.ForeColor = System.Drawing.Color.Black
         Me.XLMaxKelas1.LocationFloat = New DevExpress.Utils.PointFloat(580.0!, 31.00001!)
         Me.XLMaxKelas1.Name = "XLMaxKelas1"
         Me.XLMaxKelas1.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -474,7 +476,7 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         'XLMaxKelas2
         '
         Me.XLMaxKelas2.Font = New System.Drawing.Font("Tahoma", 7.25!)
-        Me.XLMaxKelas2.ForeColor = System.Drawing.Color.White
+        Me.XLMaxKelas2.ForeColor = System.Drawing.Color.Black
         Me.XLMaxKelas2.LocationFloat = New DevExpress.Utils.PointFloat(580.0!, 47.0!)
         Me.XLMaxKelas2.Name = "XLMaxKelas2"
         Me.XLMaxKelas2.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -485,7 +487,7 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         'XLUMK
         '
         Me.XLUMK.Font = New System.Drawing.Font("Tahoma", 7.25!)
-        Me.XLUMK.ForeColor = System.Drawing.Color.White
+        Me.XLUMK.ForeColor = System.Drawing.Color.Black
         Me.XLUMK.LocationFloat = New DevExpress.Utils.PointFloat(580.0!, 62.99997!)
         Me.XLUMK.Name = "XLUMK"
         Me.XLUMK.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -496,7 +498,7 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         'XrLabel13
         '
         Me.XrLabel13.Font = New System.Drawing.Font("Tahoma", 7.25!)
-        Me.XrLabel13.ForeColor = System.Drawing.Color.White
+        Me.XrLabel13.ForeColor = System.Drawing.Color.Black
         Me.XrLabel13.LocationFloat = New DevExpress.Utils.PointFloat(560.0001!, 62.99997!)
         Me.XrLabel13.Name = "XrLabel13"
         Me.XrLabel13.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -508,7 +510,7 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         'XrLabel14
         '
         Me.XrLabel14.Font = New System.Drawing.Font("Tahoma", 7.25!)
-        Me.XrLabel14.ForeColor = System.Drawing.Color.White
+        Me.XrLabel14.ForeColor = System.Drawing.Color.Black
         Me.XrLabel14.LocationFloat = New DevExpress.Utils.PointFloat(560.0001!, 47.0!)
         Me.XrLabel14.Name = "XrLabel14"
         Me.XrLabel14.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -520,7 +522,7 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         'XrLabel15
         '
         Me.XrLabel15.Font = New System.Drawing.Font("Tahoma", 7.25!)
-        Me.XrLabel15.ForeColor = System.Drawing.Color.White
+        Me.XrLabel15.ForeColor = System.Drawing.Color.Black
         Me.XrLabel15.LocationFloat = New DevExpress.Utils.PointFloat(560.0001!, 31.00001!)
         Me.XrLabel15.Name = "XrLabel15"
         Me.XrLabel15.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -532,7 +534,7 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         'XrLabel16
         '
         Me.XrLabel16.Font = New System.Drawing.Font("Tahoma", 7.25!)
-        Me.XrLabel16.ForeColor = System.Drawing.Color.White
+        Me.XrLabel16.ForeColor = System.Drawing.Color.Black
         Me.XrLabel16.LocationFloat = New DevExpress.Utils.PointFloat(440.0!, 62.99999!)
         Me.XrLabel16.Name = "XrLabel16"
         Me.XrLabel16.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -544,7 +546,7 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         'XrLabel17
         '
         Me.XrLabel17.Font = New System.Drawing.Font("Tahoma", 7.25!)
-        Me.XrLabel17.ForeColor = System.Drawing.Color.White
+        Me.XrLabel17.ForeColor = System.Drawing.Color.Black
         Me.XrLabel17.LocationFloat = New DevExpress.Utils.PointFloat(440.0!, 47.0!)
         Me.XrLabel17.Name = "XrLabel17"
         Me.XrLabel17.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -556,7 +558,7 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         'XrLabel18
         '
         Me.XrLabel18.Font = New System.Drawing.Font("Tahoma", 7.25!)
-        Me.XrLabel18.ForeColor = System.Drawing.Color.White
+        Me.XrLabel18.ForeColor = System.Drawing.Color.Black
         Me.XrLabel18.LocationFloat = New DevExpress.Utils.PointFloat(440.0!, 31.00001!)
         Me.XrLabel18.Name = "XrLabel18"
         Me.XrLabel18.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -568,7 +570,7 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         'XLKodeBU
         '
         Me.XLKodeBU.Font = New System.Drawing.Font("Tahoma", 7.25!)
-        Me.XLKodeBU.ForeColor = System.Drawing.Color.White
+        Me.XLKodeBU.ForeColor = System.Drawing.Color.Black
         Me.XLKodeBU.LocationFloat = New DevExpress.Utils.PointFloat(140.0!, 31.00001!)
         Me.XLKodeBU.Name = "XLKodeBU"
         Me.XLKodeBU.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -579,7 +581,7 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         'XLVirtualAcc
         '
         Me.XLVirtualAcc.Font = New System.Drawing.Font("Tahoma", 7.25!)
-        Me.XLVirtualAcc.ForeColor = System.Drawing.Color.White
+        Me.XLVirtualAcc.ForeColor = System.Drawing.Color.Black
         Me.XLVirtualAcc.LocationFloat = New DevExpress.Utils.PointFloat(140.0!, 47.0!)
         Me.XLVirtualAcc.Name = "XLVirtualAcc"
         Me.XLVirtualAcc.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -590,7 +592,7 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         'XLPeriod
         '
         Me.XLPeriod.Font = New System.Drawing.Font("Tahoma", 7.25!)
-        Me.XLPeriod.ForeColor = System.Drawing.Color.White
+        Me.XLPeriod.ForeColor = System.Drawing.Color.Black
         Me.XLPeriod.LocationFloat = New DevExpress.Utils.PointFloat(140.0!, 62.99998!)
         Me.XLPeriod.Name = "XLPeriod"
         Me.XLPeriod.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -601,7 +603,7 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         'XrLabel7
         '
         Me.XrLabel7.Font = New System.Drawing.Font("Tahoma", 7.25!)
-        Me.XrLabel7.ForeColor = System.Drawing.Color.White
+        Me.XrLabel7.ForeColor = System.Drawing.Color.Black
         Me.XrLabel7.LocationFloat = New DevExpress.Utils.PointFloat(120.0!, 62.99998!)
         Me.XrLabel7.Name = "XrLabel7"
         Me.XrLabel7.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -613,7 +615,7 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         'XrLabel6
         '
         Me.XrLabel6.Font = New System.Drawing.Font("Tahoma", 7.25!)
-        Me.XrLabel6.ForeColor = System.Drawing.Color.White
+        Me.XrLabel6.ForeColor = System.Drawing.Color.Black
         Me.XrLabel6.LocationFloat = New DevExpress.Utils.PointFloat(120.0!, 47.0!)
         Me.XrLabel6.Name = "XrLabel6"
         Me.XrLabel6.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -625,7 +627,7 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         'XrLabel5
         '
         Me.XrLabel5.Font = New System.Drawing.Font("Tahoma", 7.25!)
-        Me.XrLabel5.ForeColor = System.Drawing.Color.White
+        Me.XrLabel5.ForeColor = System.Drawing.Color.Black
         Me.XrLabel5.LocationFloat = New DevExpress.Utils.PointFloat(120.0!, 31.00001!)
         Me.XrLabel5.Name = "XrLabel5"
         Me.XrLabel5.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -637,7 +639,7 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         'XrLabel4
         '
         Me.XrLabel4.Font = New System.Drawing.Font("Tahoma", 7.25!)
-        Me.XrLabel4.ForeColor = System.Drawing.Color.White
+        Me.XrLabel4.ForeColor = System.Drawing.Color.Black
         Me.XrLabel4.LocationFloat = New DevExpress.Utils.PointFloat(0!, 63.0!)
         Me.XrLabel4.Name = "XrLabel4"
         Me.XrLabel4.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -649,7 +651,7 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         'XrLabel3
         '
         Me.XrLabel3.Font = New System.Drawing.Font("Tahoma", 7.25!)
-        Me.XrLabel3.ForeColor = System.Drawing.Color.White
+        Me.XrLabel3.ForeColor = System.Drawing.Color.Black
         Me.XrLabel3.LocationFloat = New DevExpress.Utils.PointFloat(0!, 47.0!)
         Me.XrLabel3.Name = "XrLabel3"
         Me.XrLabel3.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -661,7 +663,7 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         'XrLabel2
         '
         Me.XrLabel2.Font = New System.Drawing.Font("Tahoma", 7.25!)
-        Me.XrLabel2.ForeColor = System.Drawing.Color.White
+        Me.XrLabel2.ForeColor = System.Drawing.Color.Black
         Me.XrLabel2.LocationFloat = New DevExpress.Utils.PointFloat(0!, 31.00001!)
         Me.XrLabel2.Name = "XrLabel2"
         Me.XrLabel2.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -673,7 +675,7 @@ Partial Public Class ReportEmpPayrollReportBPJSKesehatanDetail
         'XrLabel1
         '
         Me.XrLabel1.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
-        Me.XrLabel1.ForeColor = System.Drawing.Color.White
+        Me.XrLabel1.ForeColor = System.Drawing.Color.Black
         Me.XrLabel1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 0!)
         Me.XrLabel1.Name = "XrLabel1"
         Me.XrLabel1.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)

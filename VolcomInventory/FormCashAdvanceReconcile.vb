@@ -20,6 +20,7 @@
         load_dep()
         '
         load_acc()
+        load_comp()
         '
         load_det()
         load_ca()
@@ -30,6 +31,11 @@
         viewSearchLookupRepositoryQuery(RSLECOA, query, 0, "acc_name", "id_acc")
         viewSearchLookupRepositoryQuery(RSLECOABW, query, 0, "acc_name", "id_acc")
         viewSearchLookupRepositoryQuery(RSLECOABD, query, 0, "acc_name", "id_acc")
+    End Sub
+
+    Sub load_comp()
+        Dim query As String = "SELECT id_comp, comp_number, comp_name FROM tb_m_comp"
+        viewSearchLookupRepositoryQuery(RSLEComp, query, 0, "comp_number", "id_comp")
     End Sub
 
     Sub load_det()
@@ -209,6 +215,7 @@
     Private Sub BAdd_Click(sender As Object, e As EventArgs) Handles BAdd.Click
         GVJournalDet.AddNewRow()
         GVJournalDet.FocusedRowHandle = GVJournalDet.RowCount - 1
+        GVJournalDet.SetRowCellValue(GVJournalDet.RowCount - 1, "id_comp", "1")
         check_but()
     End Sub
 
@@ -267,11 +274,11 @@
 
             If GVJournalDet.RowCount > 0 Then
                 'report
-                query = "INSERT INTO tb_cash_advance_report(id_cash_advance,id_acc,description,value,note) VALUES"
+                query = "INSERT INTO tb_cash_advance_report(id_cash_advance,id_acc,id_comp,description,value,note) VALUES"
                 For i As Integer = 0 To GVJournalDet.RowCount - 1
                     query += If(Not i = 0, ",", "")
 
-                    query += "('" & id_ca & "','" & GVJournalDet.GetRowCellValue(i, "id_acc").ToString & "','" & GVJournalDet.GetRowCellValue(i, "description").ToString & "','" & decimalSQL(GVJournalDet.GetRowCellValue(i, "value").ToString) & "','" & addSlashes(GVJournalDet.GetRowCellValue(i, "note").ToString) & "')"
+                    query += "('" & id_ca & "','" & GVJournalDet.GetRowCellValue(i, "id_acc").ToString & "','" & GVJournalDet.GetRowCellValue(i, "id_comp").ToString & "','" & GVJournalDet.GetRowCellValue(i, "description").ToString & "','" & decimalSQL(GVJournalDet.GetRowCellValue(i, "value").ToString) & "','" & addSlashes(GVJournalDet.GetRowCellValue(i, "note").ToString) & "')"
                 Next
 
                 execute_non_query(query, True, "", "", "", "")

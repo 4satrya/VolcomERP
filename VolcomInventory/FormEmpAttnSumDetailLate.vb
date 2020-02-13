@@ -18,6 +18,22 @@
             where_month = "AND YEAR(sch.date) = " + month.ToString("yyyy") + " AND MONTH(sch.date) = " + month.ToString("MM")
         End If
 
+        Dim tb_attn As String = "
+            (SELECT * FROM tb_emp_attn WHERE id_employee LIKE '" & id_employee & "' AND `datetime` >= DATE_ADD('" & date_from.ToString("yyyy-MM-dd") & "', INTERVAL 1 DAY) AND `datetime` <= DATE_ADD('" & date_to.ToString("yyyy-MM-dd") & "', INTERVAL -1 DAY))
+            UNION ALL
+            (SELECT 0 AS id_emp_attn, 0 AS id_fingerprint, e.employee_code, d.id_employee, d.time_in AS `datetime`, 1 AS type_log, 0 AS scan_method
+            FROM `tb_emp_attn_input_det` AS d
+            LEFT JOIN `tb_emp_attn_input` AS a ON d.id_emp_attn_input = a.id_emp_attn_input
+            LEFT JOIN `tb_m_employee` AS e ON d.id_employee = e.id_employee
+            WHERE d.id_departement = 17 AND d.id_employee LIKE '" & id_employee & "' AND d.date >= DATE_ADD('" & date_from.ToString("yyyy-MM-dd") & "', INTERVAL 1 DAY) AND d.date <= DATE_ADD('" & date_to.ToString("yyyy-MM-dd") & "', INTERVAL -1 DAY))
+            UNION ALL
+            (SELECT 0 AS id_emp_attn, 0 AS id_fingerprint, e.employee_code, d.id_employee, d.time_out AS `datetime`, 2 AS type_log, 0 AS scan_method
+            FROM `tb_emp_attn_input_det` AS d
+            LEFT JOIN `tb_emp_attn_input` AS a ON d.id_emp_attn_input = a.id_emp_attn_input
+            LEFT JOIN `tb_m_employee` AS e ON d.id_employee = e.id_employee
+            WHERE d.id_departement = 17 AND d.id_employee LIKE '" & id_employee & "' AND d.date >= DATE_ADD('" & date_from.ToString("yyyy-MM-dd") & "', INTERVAL 1 DAY) AND d.date <= DATE_ADD('" & date_to.ToString("yyyy-MM-dd") & "', INTERVAL -1 DAY))
+        "
+
         Dim query_list As String = "
             SELECT *
             FROM (
@@ -36,10 +52,10 @@
                     WHERE el.id_report_status = '6' AND el.id_emp = " + id_employee + " AND eld.datetime_start BETWEEN '" + date_from.ToString("yyyy-MM-dd") + "' AND '" + date_to.ToString("yyyy-MM-dd") + "'
                     GROUP BY eld.id_schedule
                 ) lv ON lv.id_schedule = sch.id_schedule
-                LEFT JOIN tb_emp_attn at_in ON at_in.id_employee = sch.id_employee AND (at_in.datetime >= (sch.out - INTERVAL 1 DAY) AND at_in.datetime <= sch.out) AND at_in.type_log = 1 
-                LEFT JOIN tb_emp_attn at_out ON at_out.id_employee = sch.id_employee AND (at_out.datetime >= sch.in AND at_out.datetime <= (sch.in + INTERVAL 1 DAY)) AND at_out.type_log = 2 
-                LEFT JOIN tb_emp_attn at_in_hol ON at_in_hol.id_employee = sch.id_employee AND DATE(at_in_hol.datetime) = sch.Date AND at_in_hol.type_log = 1 
-                LEFT JOIN tb_emp_attn at_out_hol ON at_out_hol.id_employee = sch.id_employee AND DATE(at_out_hol.datetime) = sch.Date AND at_out_hol.type_log = 2   
+                LEFT JOIN (" + tb_attn + ") at_in ON at_in.id_employee = sch.id_employee AND (at_in.datetime >= (sch.out - INTERVAL 1 DAY) AND at_in.datetime <= sch.out) AND at_in.type_log = 1 
+                LEFT JOIN (" + tb_attn + ") at_out ON at_out.id_employee = sch.id_employee AND (at_out.datetime >= sch.in AND at_out.datetime <= (sch.in + INTERVAL 1 DAY)) AND at_out.type_log = 2 
+                LEFT JOIN (" + tb_attn + ") at_in_hol ON at_in_hol.id_employee = sch.id_employee AND DATE(at_in_hol.datetime) = sch.Date AND at_in_hol.type_log = 1 
+                LEFT JOIN (" + tb_attn + ") at_out_hol ON at_out_hol.id_employee = sch.id_employee AND DATE(at_out_hol.datetime) = sch.Date AND at_out_hol.type_log = 2   
                 WHERE sch.date BETWEEN '" + date_from.ToString("yyyy-MM-dd") + "' AND '" + date_to.ToString("yyyy-MM-dd") + "' AND sch.id_employee = " + id_employee + " " + where_month + "
                 GROUP BY sch.id_schedule
             ) tb

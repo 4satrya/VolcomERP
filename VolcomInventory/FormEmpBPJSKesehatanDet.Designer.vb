@@ -344,7 +344,7 @@ Partial Class FormEmpBPJSKesehatanDet
         'GCBPJSKesehatanContribution
         '
         Me.GCBPJSKesehatanContribution.Caption = "BPJS Kesehatan Contribution"
-        Me.GCBPJSKesehatanContribution.DisplayFormat.FormatString = "N0"
+        Me.GCBPJSKesehatanContribution.DisplayFormat.FormatString = "N2"
         Me.GCBPJSKesehatanContribution.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GCBPJSKesehatanContribution.FieldName = "bpjs_kesehatan_contribution"
         Me.GCBPJSKesehatanContribution.Name = "GCBPJSKesehatanContribution"
@@ -625,22 +625,22 @@ Partial Class FormEmpBPJSKesehatanDet
         'GCAConpanyContribution
         '
         Me.GCAConpanyContribution.Caption = "Dibayar Oleh Perusahaan"
-        Me.GCAConpanyContribution.DisplayFormat.FormatString = "N0"
+        Me.GCAConpanyContribution.DisplayFormat.FormatString = "N2"
         Me.GCAConpanyContribution.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GCAConpanyContribution.FieldName = "company_contribution"
         Me.GCAConpanyContribution.Name = "GCAConpanyContribution"
-        Me.GCAConpanyContribution.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "company_contribution", "{0:N0}")})
+        Me.GCAConpanyContribution.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "company_contribution", "{0:N2}")})
         Me.GCAConpanyContribution.Visible = True
         Me.GCAConpanyContribution.VisibleIndex = 2
         '
         'GCAEmployeeContribution
         '
         Me.GCAEmployeeContribution.Caption = "Dibayar Oleh Karyawan"
-        Me.GCAEmployeeContribution.DisplayFormat.FormatString = "N0"
+        Me.GCAEmployeeContribution.DisplayFormat.FormatString = "N2"
         Me.GCAEmployeeContribution.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GCAEmployeeContribution.FieldName = "employee_contribution"
         Me.GCAEmployeeContribution.Name = "GCAEmployeeContribution"
-        Me.GCAEmployeeContribution.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "employee_contribution", "{0:N0}")})
+        Me.GCAEmployeeContribution.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "employee_contribution", "{0:N2}")})
         Me.GCAEmployeeContribution.Visible = True
         Me.GCAEmployeeContribution.VisibleIndex = 3
         '
@@ -677,7 +677,7 @@ Partial Class FormEmpBPJSKesehatanDet
         Me.GVEmployee.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn9, Me.GridColumn1, Me.GridColumn8, Me.GCNo, Me.GridColumn2, Me.GCEmployeeBpjs, Me.GCEmployeeDOB, Me.GCEmployeeSalary, Me.GCCompanyContribution, Me.GCEmployeeContribution, Me.GCTotalContribution, Me.GCClass})
         Me.GVEmployee.GridControl = Me.GCEmployee
         Me.GVEmployee.GroupCount = 2
-        Me.GVEmployee.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Count, "employee_name", Me.GridColumn2, "{0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "company_contribution", Me.GCCompanyContribution, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "employee_contribution", Me.GCEmployeeContribution, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_contribution", Me.GCTotalContribution, "{0:N0}")})
+        Me.GVEmployee.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Count, "employee_name", Me.GridColumn2, "{0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "company_contribution", Me.GCCompanyContribution, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "employee_contribution", Me.GCEmployeeContribution, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_contribution", Me.GCTotalContribution, "{0:N0}")})
         Me.GVEmployee.Name = "GVEmployee"
         Me.GVEmployee.OptionsBehavior.AutoExpandAllGroups = True
         Me.GVEmployee.OptionsBehavior.Editable = False
@@ -757,11 +757,11 @@ Partial Class FormEmpBPJSKesehatanDet
         'GCCompanyContribution
         '
         Me.GCCompanyContribution.Caption = "Iuran Pemberi Kerja 4%"
-        Me.GCCompanyContribution.DisplayFormat.FormatString = "N0"
+        Me.GCCompanyContribution.DisplayFormat.FormatString = "N2"
         Me.GCCompanyContribution.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GCCompanyContribution.FieldName = "company_contribution"
         Me.GCCompanyContribution.Name = "GCCompanyContribution"
-        Me.GCCompanyContribution.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "company_contribution", "{0:N0}")})
+        Me.GCCompanyContribution.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "company_contribution", "{0:N2}")})
         Me.GCCompanyContribution.Visible = True
         Me.GCCompanyContribution.VisibleIndex = 5
         Me.GCCompanyContribution.Width = 125
@@ -769,11 +769,11 @@ Partial Class FormEmpBPJSKesehatanDet
         'GCEmployeeContribution
         '
         Me.GCEmployeeContribution.Caption = "Iuran Karyawan 1%"
-        Me.GCEmployeeContribution.DisplayFormat.FormatString = "N0"
+        Me.GCEmployeeContribution.DisplayFormat.FormatString = "N2"
         Me.GCEmployeeContribution.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GCEmployeeContribution.FieldName = "employee_contribution"
         Me.GCEmployeeContribution.Name = "GCEmployeeContribution"
-        Me.GCEmployeeContribution.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "employee_contribution", "{0:N0}")})
+        Me.GCEmployeeContribution.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "employee_contribution", "{0:N2}")})
         Me.GCEmployeeContribution.Visible = True
         Me.GCEmployeeContribution.VisibleIndex = 6
         Me.GCEmployeeContribution.Width = 107

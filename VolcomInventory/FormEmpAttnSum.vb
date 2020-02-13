@@ -29,6 +29,22 @@
             employee = SLUEEmployee.EditValue.ToString
         End If
 
+        Dim tb_attn As String = "
+            (SELECT * FROM tb_emp_attn WHERE id_employee LIKE '" & employee & "' AND DATE(`datetime`) >= DATE_ADD('" & date_start & "', INTERVAL -1 DAY) AND DATE(`datetime`) <= DATE_ADD('" & date_until & "', INTERVAL 1 DAY))
+            UNION ALL
+            (SELECT 0 AS id_emp_attn, 0 AS id_fingerprint, e.employee_code, d.id_employee, d.time_in AS `datetime`, 1 AS type_log, 0 AS scan_method
+            FROM `tb_emp_attn_input_det` AS d
+            LEFT JOIN `tb_emp_attn_input` AS a ON d.id_emp_attn_input = a.id_emp_attn_input
+            LEFT JOIN `tb_m_employee` AS e ON d.id_employee = e.id_employee
+            WHERE d.id_departement = 17 AND d.id_employee LIKE '" & employee & "' AND d.date >= DATE_ADD('" & date_start & "', INTERVAL 1 DAY) AND d.date <= DATE_ADD('" & date_until & "', INTERVAL -1 DAY))
+            UNION ALL
+            (SELECT 0 AS id_emp_attn, 0 AS id_fingerprint, e.employee_code, d.id_employee, d.time_out AS `datetime`, 2 AS type_log, 0 AS scan_method
+            FROM `tb_emp_attn_input_det` AS d
+            LEFT JOIN `tb_emp_attn_input` AS a ON d.id_emp_attn_input = a.id_emp_attn_input
+            LEFT JOIN `tb_m_employee` AS e ON d.id_employee = e.id_employee
+            WHERE d.id_departement = 17 AND d.id_employee LIKE '" & employee & "' AND d.date >= DATE_ADD('" & date_start & "', INTERVAL 1 DAY) AND d.date <= DATE_ADD('" & date_until & "', INTERVAL -1 DAY))
+        "
+
         Dim query As String = "SELECT tb.*,IF(NOT ISNULL(tb.att_in) AND NOT ISNULL(tb.att_out),(tb.minutes_work-tb.over_break-tb.late+IF(tb.over<0,tb.over,0)),0) AS work_hour,(tb.over-tb.late-tb.over_break) AS balance,IF(NOT ISNULL(tb.att_in) AND NOT ISNULL(tb.att_out),1,0) AS present FROM
                                 (
                                  SELECT sch.id_schedule,lvl.employee_level,emp.employee_position,ket.id_leave_type,ket.leave_type,sch.info_leave,active.employee_active,active.id_employee_active,sch.id_employee,emp.employee_name,emp.employee_code,emp.id_departement,dept.departement,sch.date, 
@@ -41,7 +57,7 @@
                                  scht.id_schedule_type,
                                  scht.schedule_type,note ,
                                  sch.minutes_work,
-                                 IF(lv.is_full_day=1,0,IF(IF(MIN(at_in.datetime)>sch.in_tolerance,TIMESTAMPDIFF(MINUTE,sch.in_tolerance,MIN(at_in.datetime)),0) - IF(lv.is_full_day=1 OR ISNULL(lv.datetime_until),0,IF(lv.datetime_until=sch.out,0,IF(lv.id_leave_type=5 OR lv.id_leave_type=6,lv.minutes_total,lv.minutes_total+60)))<0,0,IF(MIN(at_in.datetime)>sch.in_tolerance,TIMESTAMPDIFF(MINUTE,sch.in_tolerance,MIN(at_in.datetime)),0) - IF(lv.is_full_day=1 OR ISNULL(lv.datetime_until),0,IF(lv.datetime_until=sch.out,0,IF(lv.id_leave_type=5 OR lv.id_leave_type=6,lv.minutes_total,lv.minutes_total+60))))) AS late ,
+                                 IF(IF(MIN(at_in.datetime)>sch.in_tolerance,TIMESTAMPDIFF(MINUTE,sch.in_tolerance,MIN(at_in.datetime)),0) - IF(lv.is_full_day=1 OR ISNULL(lv.datetime_until),0,IF(lv.datetime_until=sch.out,0,lv.minutes_total+60))<0,0,IF(MIN(at_in.datetime)>sch.in_tolerance,TIMESTAMPDIFF(MINUTE,sch.in_tolerance,MIN(at_in.datetime)),0) - IF(lv.is_full_day=1 OR ISNULL(lv.datetime_until),0,IF(lv.datetime_until=sch.out,0,lv.minutes_total+60))) AS late,
                                  IF(lv.is_full_day=1,0,IF(TIMESTAMPDIFF(MINUTE,sch.out,MAX(at_out.datetime)) + IF(lv.is_full_day=1 OR ISNULL(lv.datetime_until),0,IF(lv.datetime_start=sch.in_tolerance,0,IF(lv.id_leave_type=5 OR lv.id_leave_type=6,lv.minutes_total,lv.minutes_total+60)))<-(sch.out_tolerance),TIMESTAMPDIFF(MINUTE,sch.out,MAX(at_out.datetime)) + IF(lv.is_full_day=1 OR ISNULL(lv.datetime_until),0,IF(lv.datetime_start=sch.in_tolerance,0,IF(lv.id_leave_type=5 OR lv.id_leave_type=6,lv.minutes_total,lv.minutes_total+60))),TIMESTAMPDIFF(MINUTE,sch.out,MAX(at_out.datetime)) + IF(lv.is_full_day=1 OR ISNULL(lv.datetime_until),0,IF(lv.datetime_start=sch.in_tolerance,0,IF(lv.id_leave_type=5 OR lv.id_leave_type=6,lv.minutes_total,lv.minutes_total+60))))) AS over,
                                  IF(lv.is_full_day=1,0,IF(TIMESTAMPDIFF(MINUTE,MIN(at_brout.datetime),MAX(at_brin.datetime))>TIMESTAMPDIFF(MINUTE,sch.break_out,sch.break_in),
                                  TIMESTAMPDIFF(MINUTE,MIN(at_brout.datetime),MAX(at_brin.datetime))-TIMESTAMPDIFF(MINUTE,sch.break_out,sch.break_in),0)) AS over_break ,
@@ -73,12 +89,12 @@
                                 INNER JOIN tb_m_departement dept ON dept.id_departement=emp.id_departement 
                                 INNER JOIN tb_lookup_schedule_type scht ON scht.id_schedule_type=sch.id_schedule_type 
                                 INNER JOIN tb_lookup_employee_active active ON emp.id_employee_active=active.id_employee_active
-                                LEFT JOIN tb_emp_attn at_in ON at_in.id_employee = sch.id_employee AND (at_in.datetime>=(sch.out - INTERVAL 1 DAY) AND at_in.datetime<=sch.out) AND at_in.type_log = 1 
-                                LEFT JOIN tb_emp_attn at_out ON at_out.id_employee = sch.id_employee AND (at_out.datetime>=sch.in AND at_out.datetime<=(sch.in + INTERVAL 1 DAY)) AND at_out.type_log = 2 
-                                LEFT JOIN tb_emp_attn at_brout ON at_brout.id_employee=sch.id_employee AND DATE(at_brout.datetime) = sch.Date AND at_brout.type_log = 3 
-                                LEFT JOIN tb_emp_attn at_brin ON at_brin.id_employee=sch.id_employee AND DATE(at_brin.datetime) = sch.Date AND at_brin.type_log = 4
-                                LEFT JOIN tb_emp_attn at_in_hol ON at_in_hol.id_employee = sch.id_employee AND DATE(at_in_hol.datetime) = sch.Date AND at_in_hol.type_log = 1 
-                                LEFT JOIN tb_emp_attn at_out_hol ON at_out_hol.id_employee = sch.id_employee AND DATE(at_out_hol.datetime) = sch.Date AND at_out_hol.type_log = 2   
+                                LEFT JOIN (" + tb_attn + ") at_in ON at_in.id_employee = sch.id_employee AND (at_in.datetime>=(sch.out - INTERVAL 1 DAY) AND at_in.datetime<=sch.out) AND at_in.type_log = 1 
+                                LEFT JOIN (" + tb_attn + ") at_out ON at_out.id_employee = sch.id_employee AND (at_out.datetime>=sch.in AND at_out.datetime<=(sch.in + INTERVAL 1 DAY)) AND at_out.type_log = 2 
+                                LEFT JOIN (" + tb_attn + ") at_brout ON at_brout.id_employee=sch.id_employee AND DATE(at_brout.datetime) = sch.Date AND at_brout.type_log = 3 
+                                LEFT JOIN (" + tb_attn + ") at_brin ON at_brin.id_employee=sch.id_employee AND DATE(at_brin.datetime) = sch.Date AND at_brin.type_log = 4
+                                LEFT JOIN (" + tb_attn + ") at_in_hol ON at_in_hol.id_employee = sch.id_employee AND DATE(at_in_hol.datetime) = sch.Date AND at_in_hol.type_log = 1 
+                                LEFT JOIN (" + tb_attn + ") at_out_hol ON at_out_hol.id_employee = sch.id_employee AND DATE(at_out_hol.datetime) = sch.Date AND at_out_hol.type_log = 2   
                                 WHERE emp.id_departement Like '" & dept & "'
                                 AND sch.date >='" & date_start & "'
                                 AND sch.date <='" & date_until & "'
@@ -108,6 +124,22 @@
         Else
             status = LEEmployeeStatus.EditValue.ToString
         End If
+
+        Dim tb_attn As String = "
+            (SELECT * FROM tb_emp_attn WHERE DATE(`datetime`) >= DATE_ADD('" & date_start & "', INTERVAL -1 DAY) AND DATE(`datetime`) <= DATE_ADD('" & date_until & "', INTERVAL 1 DAY))
+            UNION ALL
+            (SELECT 0 AS id_emp_attn, 0 AS id_fingerprint, e.employee_code, d.id_employee, d.time_in AS `datetime`, 1 AS type_log, 0 AS scan_method
+            FROM `tb_emp_attn_input_det` AS d
+            LEFT JOIN `tb_emp_attn_input` AS a ON d.id_emp_attn_input = a.id_emp_attn_input
+            LEFT JOIN `tb_m_employee` AS e ON d.id_employee = e.id_employee
+            WHERE d.id_departement = 17 AND d.date >= DATE_ADD('" & date_start & "', INTERVAL 1 DAY) AND d.date <= DATE_ADD('" & date_until & "', INTERVAL -1 DAY))
+            UNION ALL
+            (SELECT 0 AS id_emp_attn, 0 AS id_fingerprint, e.employee_code, d.id_employee, d.time_out AS `datetime`, 2 AS type_log, 0 AS scan_method
+            FROM `tb_emp_attn_input_det` AS d
+            LEFT JOIN `tb_emp_attn_input` AS a ON d.id_emp_attn_input = a.id_emp_attn_input
+            LEFT JOIN `tb_m_employee` AS e ON d.id_employee = e.id_employee
+            WHERE d.id_departement = 17 AND d.date >= DATE_ADD('" & date_start & "', INTERVAL 1 DAY) AND d.date <= DATE_ADD('" & date_until & "', INTERVAL -1 DAY))
+        "
 
         Dim query As String = "SELECT tb.*,IF(NOT ISNULL(tb.att_in) AND NOT ISNULL(tb.att_out),(tb.minutes_work-tb.over_break-tb.late+IF(tb.over<0,tb.over,0)),0) AS work_hour,(tb.over-tb.late-tb.over_break) AS balance,IF(NOT ISNULL(tb.att_in) AND NOT ISNULL(tb.att_out),1,0) AS present FROM
                                 (
@@ -151,12 +183,12 @@
                                 INNER JOIN tb_m_departement dept ON dept.id_departement=emp.id_departement 
                                 INNER JOIN tb_lookup_schedule_type scht ON scht.id_schedule_type=sch.id_schedule_type 
                                 INNER JOIN tb_lookup_employee_active active ON emp.id_employee_active=active.id_employee_active
-                                LEFT JOIN tb_emp_attn at_in ON at_in.id_employee = sch.id_employee AND (at_in.datetime>=(sch.out - INTERVAL 1 DAY) AND at_in.datetime<=sch.out) AND at_in.type_log = 1 
-                                LEFT JOIN tb_emp_attn at_out ON at_out.id_employee = sch.id_employee AND (at_out.datetime>=sch.in AND at_out.datetime<=(sch.in + INTERVAL 1 DAY)) AND at_out.type_log = 2 
-                                LEFT JOIN tb_emp_attn at_brout ON at_brout.id_employee=sch.id_employee AND DATE(at_brout.datetime) = sch.Date AND at_brout.type_log = 3 
-                                LEFT JOIN tb_emp_attn at_brin ON at_brin.id_employee=sch.id_employee AND DATE(at_brin.datetime) = sch.Date AND at_brin.type_log = 4
-                                LEFT JOIN tb_emp_attn at_in_hol ON at_in_hol.id_employee = sch.id_employee AND DATE(at_in_hol.datetime) = sch.Date AND at_in_hol.type_log = 1 
-                                LEFT JOIN tb_emp_attn at_out_hol ON at_out_hol.id_employee = sch.id_employee AND DATE(at_out_hol.datetime) = sch.Date AND at_out_hol.type_log = 2   
+                                LEFT JOIN (" + tb_attn + ") at_in ON at_in.id_employee = sch.id_employee AND (at_in.datetime>=(sch.out - INTERVAL 1 DAY) AND at_in.datetime<=sch.out) AND at_in.type_log = 1 
+                                LEFT JOIN (" + tb_attn + ") at_out ON at_out.id_employee = sch.id_employee AND (at_out.datetime>=sch.in AND at_out.datetime<=(sch.in + INTERVAL 1 DAY)) AND at_out.type_log = 2 
+                                LEFT JOIN (" + tb_attn + ") at_brout ON at_brout.id_employee=sch.id_employee AND DATE(at_brout.datetime) = sch.Date AND at_brout.type_log = 3 
+                                LEFT JOIN (" + tb_attn + ") at_brin ON at_brin.id_employee=sch.id_employee AND DATE(at_brin.datetime) = sch.Date AND at_brin.type_log = 4
+                                LEFT JOIN (" + tb_attn + ") at_in_hol ON at_in_hol.id_employee = sch.id_employee AND DATE(at_in_hol.datetime) = sch.Date AND at_in_hol.type_log = 1 
+                                LEFT JOIN (" + tb_attn + ") at_out_hol ON at_out_hol.id_employee = sch.id_employee AND DATE(at_out_hol.datetime) = sch.Date AND at_out_hol.type_log = 2   
                                 WHERE emp.id_departement Like '" & dept & "'
                                 AND sch.date >='" & date_start & "'
                                 AND sch.date <='" & date_until & "'
@@ -192,6 +224,22 @@
             employee = SLUEEmployee.EditValue.ToString
         End If
 
+        Dim tb_attn As String = "
+            (SELECT * FROM tb_emp_attn WHERE id_employee LIKE '" & employee & "' AND DATE(`datetime`) >= DATE_ADD('" & date_start & "', INTERVAL -1 DAY) AND DATE(`datetime`) <= DATE_ADD('" & date_until & "', INTERVAL 1 DAY))
+            UNION ALL
+            (SELECT 0 AS id_emp_attn, 0 AS id_fingerprint, e.employee_code, d.id_employee, d.time_in AS `datetime`, 1 AS type_log, 0 AS scan_method
+            FROM `tb_emp_attn_input_det` AS d
+            LEFT JOIN `tb_emp_attn_input` AS a ON d.id_emp_attn_input = a.id_emp_attn_input
+            LEFT JOIN `tb_m_employee` AS e ON d.id_employee = e.id_employee
+            WHERE d.id_departement = 17 AND d.id_employee LIKE '" & employee & "' AND d.date >= DATE_ADD('" & date_start & "', INTERVAL 1 DAY) AND d.date <= DATE_ADD('" & date_until & "', INTERVAL -1 DAY))
+            UNION ALL
+            (SELECT 0 AS id_emp_attn, 0 AS id_fingerprint, e.employee_code, d.id_employee, d.time_out AS `datetime`, 2 AS type_log, 0 AS scan_method
+            FROM `tb_emp_attn_input_det` AS d
+            LEFT JOIN `tb_emp_attn_input` AS a ON d.id_emp_attn_input = a.id_emp_attn_input
+            LEFT JOIN `tb_m_employee` AS e ON d.id_employee = e.id_employee
+            WHERE d.id_departement = 17 AND d.id_employee LIKE '" & employee & "' AND d.date >= DATE_ADD('" & date_start & "', INTERVAL 1 DAY) AND d.date <= DATE_ADD('" & date_until & "', INTERVAL -1 DAY))
+        "
+
         Dim query As String = "SELECT tb.*,IF(NOT ISNULL(tb.att_in) AND NOT ISNULL(tb.att_out),(tb.minutes_work-tb.over_break-tb.late+IF(tb.over<0,tb.over,0)),0) AS work_hour,(tb.over-tb.late-tb.over_break) AS balance,IF(NOT ISNULL(tb.att_in) AND NOT ISNULL(tb.att_out),1,0) AS present FROM
                                 (
                                  SELECT sch.id_schedule,lvl.employee_level,emp.employee_position,ket.id_leave_type,ket.leave_type,sch.info_leave,active.employee_active,active.id_employee_active,sch.id_employee,emp.employee_name,emp.employee_code,emp.id_departement,dept.departement,sch.date, 
@@ -226,12 +274,12 @@
                                 INNER JOIN tb_m_departement dept ON dept.id_departement=emp.id_departement 
                                 INNER JOIN tb_lookup_schedule_type scht ON scht.id_schedule_type=sch.id_schedule_type 
                                 INNER JOIN tb_lookup_employee_active active ON emp.id_employee_active=active.id_employee_active
-                                LEFT JOIN tb_emp_attn at_in ON at_in.id_employee = sch.id_employee AND (at_in.datetime>=(sch.out - INTERVAL 1 DAY) AND at_in.datetime<=sch.out) AND at_in.type_log = 1 
-                                LEFT JOIN tb_emp_attn at_out ON at_out.id_employee = sch.id_employee AND (at_out.datetime>=sch.in AND at_out.datetime<=(sch.in + INTERVAL 1 DAY)) AND at_out.type_log = 2 
-                                LEFT JOIN tb_emp_attn at_brout ON at_brout.id_employee=sch.id_employee AND DATE(at_brout.datetime) = sch.Date AND at_brout.type_log = 3 
-                                LEFT JOIN tb_emp_attn at_brin ON at_brin.id_employee=sch.id_employee AND DATE(at_brin.datetime) = sch.Date AND at_brin.type_log = 4 
-                                LEFT JOIN tb_emp_attn at_in_hol ON at_in_hol.id_employee = sch.id_employee AND DATE(at_in_hol.datetime) = sch.Date AND at_in_hol.type_log = 1 
-                                LEFT JOIN tb_emp_attn at_out_hol ON at_out_hol.id_employee = sch.id_employee AND DATE(at_out_hol.datetime) = sch.Date AND at_out_hol.type_log = 2
+                                LEFT JOIN (" + tb_attn + ") at_in ON at_in.id_employee = sch.id_employee AND (at_in.datetime>=(sch.out - INTERVAL 1 DAY) AND at_in.datetime<=sch.out) AND at_in.type_log = 1 
+                                LEFT JOIN (" + tb_attn + ") at_out ON at_out.id_employee = sch.id_employee AND (at_out.datetime>=sch.in AND at_out.datetime<=(sch.in + INTERVAL 1 DAY)) AND at_out.type_log = 2 
+                                LEFT JOIN (" + tb_attn + ") at_brout ON at_brout.id_employee=sch.id_employee AND DATE(at_brout.datetime) = sch.Date AND at_brout.type_log = 3 
+                                LEFT JOIN (" + tb_attn + ") at_brin ON at_brin.id_employee=sch.id_employee AND DATE(at_brin.datetime) = sch.Date AND at_brin.type_log = 4 
+                                LEFT JOIN (" + tb_attn + ") at_in_hol ON at_in_hol.id_employee = sch.id_employee AND DATE(at_in_hol.datetime) = sch.Date AND at_in_hol.type_log = 1 
+                                LEFT JOIN (" + tb_attn + ") at_out_hol ON at_out_hol.id_employee = sch.id_employee AND DATE(at_out_hol.datetime) = sch.Date AND at_out_hol.type_log = 2
                                 WHERE emp.id_departement Like '" & dept & "'
                                 AND sch.date >='" & date_start & "'
                                 AND sch.date <='" & date_until & "'
@@ -261,6 +309,22 @@
         Else
             status = LEEmployeeStatus.EditValue.ToString
         End If
+
+        Dim tb_attn As String = "
+            (SELECT * FROM tb_emp_attn WHERE DATE(`datetime`)>= DATE_ADD('" & date_start & "', INTERVAL -1 DAY) AND DATE(`datetime`)<= DATE_ADD('" & date_until & "', INTERVAL 1 DAY))
+            UNION ALL
+            (SELECT 0 AS id_emp_attn, 0 AS id_fingerprint, e.employee_code, d.id_employee, d.time_in AS `datetime`, 1 AS type_log, 0 AS scan_method
+            FROM `tb_emp_attn_input_det` AS d
+            LEFT JOIN `tb_emp_attn_input` AS a ON d.id_emp_attn_input = a.id_emp_attn_input
+            LEFT JOIN `tb_m_employee` AS e ON d.id_employee = e.id_employee
+            WHERE d.id_departement = 17 AND d.date >= DATE_ADD('" & date_start & "', INTERVAL 1 DAY) AND d.date <= DATE_ADD('" & date_until & "', INTERVAL -1 DAY))
+            UNION ALL
+            (SELECT 0 AS id_emp_attn, 0 AS id_fingerprint, e.employee_code, d.id_employee, d.time_out AS `datetime`, 2 AS type_log, 0 AS scan_method
+            FROM `tb_emp_attn_input_det` AS d
+            LEFT JOIN `tb_emp_attn_input` AS a ON d.id_emp_attn_input = a.id_emp_attn_input
+            LEFT JOIN `tb_m_employee` AS e ON d.id_employee = e.id_employee
+            WHERE d.id_departement = 17 AND d.date >= DATE_ADD('" & date_start & "', INTERVAL 1 DAY) AND d.date <= DATE_ADD('" & date_until & "', INTERVAL -1 DAY))
+        "
 
         Dim query As String = "SELECT tb.*,IF(NOT ISNULL(tb.att_in) AND NOT ISNULL(tb.att_out),(tb.minutes_work-tb.over_break-tb.late+IF(tb.over<0,tb.over,0)),0) AS work_hour,(tb.over-tb.late-tb.over_break) AS balance,IF(NOT ISNULL(tb.att_in) AND NOT ISNULL(tb.att_out),1,0) AS present FROM
                                 (
@@ -294,12 +358,12 @@
                                 INNER JOIN tb_m_departement dept ON dept.id_departement=emp.id_departement 
                                 INNER JOIN tb_lookup_schedule_type scht ON scht.id_schedule_type=sch.id_schedule_type 
                                 INNER JOIN tb_lookup_employee_active active ON emp.id_employee_active=active.id_employee_active
-                                LEFT JOIN tb_emp_attn at_in ON at_in.id_employee = sch.id_employee AND (at_in.datetime>=(sch.out - INTERVAL 1 DAY) AND at_in.datetime<=sch.out) AND at_in.type_log = 1 
-                                LEFT JOIN tb_emp_attn at_out ON at_out.id_employee = sch.id_employee AND (at_out.datetime>=sch.in AND at_out.datetime<=(sch.in + INTERVAL 1 DAY)) AND at_out.type_log = 2 
-                                LEFT JOIN tb_emp_attn at_brout ON at_brout.id_employee=sch.id_employee AND DATE(at_brout.datetime) = sch.Date AND at_brout.type_log = 3 
-                                LEFT JOIN tb_emp_attn at_brin ON at_brin.id_employee=sch.id_employee AND DATE(at_brin.datetime) = sch.Date AND at_brin.type_log = 4 
-                                LEFT JOIN tb_emp_attn at_in_hol ON at_in_hol.id_employee = sch.id_employee AND DATE(at_in_hol.datetime) = sch.Date AND at_in_hol.type_log = 1 
-                                LEFT JOIN tb_emp_attn at_out_hol ON at_out_hol.id_employee = sch.id_employee AND DATE(at_out_hol.datetime) = sch.Date AND at_out_hol.type_log = 2
+                                LEFT JOIN (" + tb_attn + ") at_in ON at_in.id_employee = sch.id_employee AND (at_in.datetime>=(sch.out - INTERVAL 1 DAY) AND at_in.datetime<=sch.out) AND at_in.type_log = 1 
+                                LEFT JOIN (" + tb_attn + ") at_out ON at_out.id_employee = sch.id_employee AND (at_out.datetime>=sch.in AND at_out.datetime<=(sch.in + INTERVAL 1 DAY)) AND at_out.type_log = 2 
+                                LEFT JOIN (" + tb_attn + ") at_brout ON at_brout.id_employee=sch.id_employee AND DATE(at_brout.datetime) = sch.Date AND at_brout.type_log = 3 
+                                LEFT JOIN (" + tb_attn + ") at_brin ON at_brin.id_employee=sch.id_employee AND DATE(at_brin.datetime) = sch.Date AND at_brin.type_log = 4 
+                                LEFT JOIN (" + tb_attn + ") at_in_hol ON at_in_hol.id_employee = sch.id_employee AND DATE(at_in_hol.datetime) = sch.Date AND at_in_hol.type_log = 1 
+                                LEFT JOIN (" + tb_attn + ") at_out_hol ON at_out_hol.id_employee = sch.id_employee AND DATE(at_out_hol.datetime) = sch.Date AND at_out_hol.type_log = 2
                                 WHERE emp.id_departement Like '" & dept & "'
                                 AND sch.date >='" & date_start & "'
                                 AND sch.date <='" & date_until & "'
@@ -618,6 +682,22 @@
             employee = SLUEEmployee.EditValue.ToString
         End If
 
+        Dim tb_attn As String = "
+            (SELECT * FROM tb_emp_attn WHERE id_employee LIKE '" & employee & "' AND DATE(`datetime`) >= DATE_ADD('" & date_start & "', INTERVAL -1 DAY) AND DATE(`datetime`) <= DATE_ADD('" & date_until & "', INTERVAL 1 DAY))
+            UNION ALL
+            (SELECT 0 AS id_emp_attn, 0 AS id_fingerprint, e.employee_code, d.id_employee, d.time_in AS `datetime`, 1 AS type_log, 0 AS scan_method
+            FROM `tb_emp_attn_input_det` AS d
+            LEFT JOIN `tb_emp_attn_input` AS a ON d.id_emp_attn_input = a.id_emp_attn_input
+            LEFT JOIN `tb_m_employee` AS e ON d.id_employee = e.id_employee
+            WHERE d.id_departement = 17 AND d.id_employee LIKE '" & employee & "' AND d.date >= DATE_ADD('" & date_start & "', INTERVAL 1 DAY) AND d.date <= DATE_ADD('" & date_until & "', INTERVAL -1 DAY))
+            UNION ALL
+            (SELECT 0 AS id_emp_attn, 0 AS id_fingerprint, e.employee_code, d.id_employee, d.time_out AS `datetime`, 2 AS type_log, 0 AS scan_method
+            FROM `tb_emp_attn_input_det` AS d
+            LEFT JOIN `tb_emp_attn_input` AS a ON d.id_emp_attn_input = a.id_emp_attn_input
+            LEFT JOIN `tb_m_employee` AS e ON d.id_employee = e.id_employee
+            WHERE d.id_departement = 17 AND d.id_employee LIKE '" & employee & "' AND d.date >= DATE_ADD('" & date_start & "', INTERVAL 1 DAY) AND d.date <= DATE_ADD('" & date_until & "', INTERVAL -1 DAY))
+        "
+
         Dim query As String = ""
         query = "SELECT tb.id_schedule,tb.employee_level,tb.employee_position,tb.employee_active,tb.id_employee_active,tb.id_employee,tb.employee_name,tb.employee_code,tb.id_departement,dep.departement,SUM(tb.late) AS late,SUM(tb.early_home) AS early_home,SUM(tb.over) AS over,SUM(tb.over_break) AS over_break,
                 SUM(IF(NOT ISNULL(tb.att_in) AND NOT ISNULL(tb.att_out),(tb.minutes_work-tb.over_break-tb.late-tb.early_home),0)) AS work_hour,
@@ -636,7 +716,7 @@
 	                sch.minutes_work,
                     IF(IFNULL(lv.id_leave_type,0)=2,lv.minutes_total,0) as tot_sick,
                     IF(IFNULL(lv.id_leave_type,0)=2,1,0) as sum_sick,
-	                IF(lv.is_full_day=1,0,IF(IF(MIN(at_in.datetime)>sch.in_tolerance,TIMESTAMPDIFF(MINUTE,sch.in_tolerance,MIN(at_in.datetime)),0) - IF(lv.is_full_day=1 OR ISNULL(lv.datetime_until),0,IF(lv.datetime_until=sch.out,0,lv.minutes_total+60))<0,0,IF(MIN(at_in.datetime)>sch.in_tolerance,TIMESTAMPDIFF(MINUTE,sch.in_tolerance,MIN(at_in.datetime)),0) - IF(lv.is_full_day=1 OR ISNULL(lv.datetime_until),0,IF(lv.datetime_until=sch.out,0,lv.minutes_total+60)))) AS late ,
+	                IF(IF(MIN(at_in.datetime)>sch.in_tolerance,TIMESTAMPDIFF(MINUTE,sch.in_tolerance,MIN(at_in.datetime)),0) - IF(lv.is_full_day=1 OR ISNULL(lv.datetime_until),0,IF(lv.datetime_until=sch.out,0,lv.minutes_total+60))<0,0,IF(MIN(at_in.datetime)>sch.in_tolerance,TIMESTAMPDIFF(MINUTE,sch.in_tolerance,MIN(at_in.datetime)),0) - IF(lv.is_full_day=1 OR ISNULL(lv.datetime_until),0,IF(lv.datetime_until=sch.out,0,lv.minutes_total+60))) AS late ,
 	                IF(lv.is_full_day=1,0,IF(TIMESTAMPDIFF(MINUTE,sch.out,MAX(at_out.datetime)) + IF(lv.is_full_day=1 OR ISNULL(lv.datetime_until),0,IF(lv.datetime_start=sch.in_tolerance,0,IF(lv.id_leave_type=5 OR lv.id_leave_type=6,lv.minutes_total,lv.minutes_total+60)))<-(sch.out_tolerance),-(TIMESTAMPDIFF(MINUTE,sch.out,MAX(at_out.datetime)) + IF(lv.is_full_day=1 OR ISNULL(lv.datetime_until),0,IF(lv.datetime_start=sch.in_tolerance,0,IF(lv.id_leave_type=5 OR lv.id_leave_type=6,lv.minutes_total,lv.minutes_total+60)))),0)) AS early_home ,
 	                IF(lv.is_full_day=1,0,IF(TIMESTAMPDIFF(MINUTE,sch.out,MAX(at_out.datetime)) + IF(lv.is_full_day=1 OR ISNULL(lv.datetime_until),0,IF(lv.datetime_start=sch.in_tolerance,0,IF(lv.id_leave_type=5 OR lv.id_leave_type=6,lv.minutes_total,lv.minutes_total+60)))<-(sch.out_tolerance),TIMESTAMPDIFF(MINUTE,sch.out,MAX(at_out.datetime)) + IF(lv.is_full_day=1 OR ISNULL(lv.datetime_until),0,IF(lv.datetime_start=sch.in_tolerance,0,IF(lv.id_leave_type=5 OR lv.id_leave_type=6,lv.minutes_total,lv.minutes_total+60))),TIMESTAMPDIFF(MINUTE,sch.out,MAX(at_out.datetime)) + IF(lv.is_full_day=1 OR ISNULL(lv.datetime_until),0,IF(lv.datetime_start=sch.in_tolerance,0,IF(lv.id_leave_type=5 OR lv.id_leave_type=6,lv.minutes_total,lv.minutes_total+60))))) AS over,
 	                IF(lv.is_full_day=1,0,IF(TIMESTAMPDIFF(MINUTE,MIN(at_brout.datetime),MAX(at_brin.datetime))>TIMESTAMPDIFF(MINUTE,sch.break_out,sch.break_in),
@@ -668,12 +748,12 @@
 	                INNER JOIN tb_m_departement dept ON dept.id_departement=emp.id_departement 
 	                INNER JOIN tb_lookup_schedule_type scht ON scht.id_schedule_type=sch.id_schedule_type 
 	                INNER JOIN tb_lookup_employee_active active ON emp.id_employee_active=active.id_employee_active
-	                LEFT JOIN tb_emp_attn at_in ON at_in.id_employee = sch.id_employee AND (at_in.datetime>=(sch.out - INTERVAL 1 DAY) AND at_in.datetime<=sch.out) AND at_in.type_log = 1 
-	                LEFT JOIN tb_emp_attn at_out ON at_out.id_employee = sch.id_employee AND (at_out.datetime>=sch.in AND at_out.datetime<=(sch.in + INTERVAL 1 DAY)) AND at_out.type_log = 2 
-	                LEFT JOIN tb_emp_attn at_brout ON at_brout.id_employee=sch.id_employee AND DATE(at_brout.datetime) = sch.Date AND at_brout.type_log = 3 
-	                LEFT JOIN tb_emp_attn at_brin ON at_brin.id_employee=sch.id_employee AND DATE(at_brin.datetime) = sch.Date AND at_brin.type_log = 4
-	                LEFT JOIN tb_emp_attn at_in_hol ON at_in_hol.id_employee = sch.id_employee AND DATE(at_in_hol.datetime) = sch.Date AND at_in_hol.type_log = 1 
-	                LEFT JOIN tb_emp_attn at_out_hol ON at_out_hol.id_employee = sch.id_employee AND DATE(at_out_hol.datetime) = sch.Date AND at_out_hol.type_log = 2     
+	                LEFT JOIN (" + tb_attn + ") at_in ON at_in.id_employee = sch.id_employee AND (at_in.datetime>=(sch.out - INTERVAL 1 DAY) AND at_in.datetime<=sch.out) AND at_in.type_log = 1 
+	                LEFT JOIN (" + tb_attn + ") at_out ON at_out.id_employee = sch.id_employee AND (at_out.datetime>=sch.in AND at_out.datetime<=(sch.in + INTERVAL 1 DAY)) AND at_out.type_log = 2 
+	                LEFT JOIN (" + tb_attn + ") at_brout ON at_brout.id_employee=sch.id_employee AND DATE(at_brout.datetime) = sch.Date AND at_brout.type_log = 3 
+	                LEFT JOIN (" + tb_attn + ") at_brin ON at_brin.id_employee=sch.id_employee AND DATE(at_brin.datetime) = sch.Date AND at_brin.type_log = 4
+	                LEFT JOIN (" + tb_attn + ") at_in_hol ON at_in_hol.id_employee = sch.id_employee AND DATE(at_in_hol.datetime) = sch.Date AND at_in_hol.type_log = 1 
+	                LEFT JOIN (" + tb_attn + ") at_out_hol ON at_out_hol.id_employee = sch.id_employee AND DATE(at_out_hol.datetime) = sch.Date AND at_out_hol.type_log = 2     
 	                WHERE emp.id_departement LIKE '" & dept & "' AND sch.date >='" & date_start & "' AND sch.date <='" & date_until & "' AND emp.id_employee_active LIKE '" & status & "' AND emp.id_employee LIKE '" & employee & "'
 	                GROUP BY sch.id_schedule
                 )tb
@@ -703,6 +783,22 @@
         Else
             status = LEEmployeeStatus.EditValue.ToString
         End If
+
+        Dim tb_attn As String = "
+            (SELECT * FROM tb_emp_attn WHERE DATE(`datetime`) >= DATE_ADD('" & date_start & "', INTERVAL -1 DAY) AND DATE(`datetime`) <= DATE_ADD('" & date_until & "', INTERVAL 1 DAY))
+            UNION ALL
+            (SELECT 0 AS id_emp_attn, 0 AS id_fingerprint, e.employee_code, d.id_employee, d.time_in AS `datetime`, 1 AS type_log, 0 AS scan_method
+            FROM `tb_emp_attn_input_det` AS d
+            LEFT JOIN `tb_emp_attn_input` AS a ON d.id_emp_attn_input = a.id_emp_attn_input
+            LEFT JOIN `tb_m_employee` AS e ON d.id_employee = e.id_employee
+            WHERE d.id_departement = 17 AND d.date >= DATE_ADD('" & date_start & "', INTERVAL 1 DAY) AND d.date <= DATE_ADD('" & date_until & "', INTERVAL -1 DAY))
+            UNION ALL
+            (SELECT 0 AS id_emp_attn, 0 AS id_fingerprint, e.employee_code, d.id_employee, d.time_out AS `datetime`, 2 AS type_log, 0 AS scan_method
+            FROM `tb_emp_attn_input_det` AS d
+            LEFT JOIN `tb_emp_attn_input` AS a ON d.id_emp_attn_input = a.id_emp_attn_input
+            LEFT JOIN `tb_m_employee` AS e ON d.id_employee = e.id_employee
+            WHERE d.id_departement = 17 AND d.date >= DATE_ADD('" & date_start & "', INTERVAL 1 DAY) AND d.date <= DATE_ADD('" & date_until & "', INTERVAL -1 DAY))
+        "
 
         Dim query As String = ""
         query = "SELECT tb.id_schedule,tb.employee_level,tb.employee_position,tb.id_leave_type,tb.leave_type,tb.info_leave,tb.employee_active,tb.id_employee_active,tb.id_employee,tb.employee_name,tb.employee_code,tb.id_departement,dep.departement,SUM(tb.late) AS late,SUM(tb.over) AS over,SUM(tb.over_break) AS over_break,
@@ -748,12 +844,12 @@
 	                INNER JOIN tb_m_departement dept ON dept.id_departement=emp.id_departement 
 	                INNER JOIN tb_lookup_schedule_type scht ON scht.id_schedule_type=sch.id_schedule_type 
 	                INNER JOIN tb_lookup_employee_active active ON emp.id_employee_active=active.id_employee_active
-	                LEFT JOIN tb_emp_attn at_in ON at_in.id_employee = sch.id_employee AND (at_in.datetime>=(sch.out - INTERVAL 1 DAY) AND at_in.datetime<=sch.out) AND at_in.type_log = 1 
-	                LEFT JOIN tb_emp_attn at_out ON at_out.id_employee = sch.id_employee AND (at_out.datetime>=sch.in AND at_out.datetime<=(sch.in + INTERVAL 1 DAY)) AND at_out.type_log = 2 
-	                LEFT JOIN tb_emp_attn at_brout ON at_brout.id_employee=sch.id_employee AND DATE(at_brout.datetime) = sch.Date AND at_brout.type_log = 3 
-	                LEFT JOIN tb_emp_attn at_brin ON at_brin.id_employee=sch.id_employee AND DATE(at_brin.datetime) = sch.Date AND at_brin.type_log = 4
-	                LEFT JOIN tb_emp_attn at_in_hol ON at_in_hol.id_employee = sch.id_employee AND DATE(at_in_hol.datetime) = sch.Date AND at_in_hol.type_log = 1 
-	                LEFT JOIN tb_emp_attn at_out_hol ON at_out_hol.id_employee = sch.id_employee AND DATE(at_out_hol.datetime) = sch.Date AND at_out_hol.type_log = 2   
+	                LEFT JOIN (" + tb_attn + ") at_in ON at_in.id_employee = sch.id_employee AND (at_in.datetime>=(sch.out - INTERVAL 1 DAY) AND at_in.datetime<=sch.out) AND at_in.type_log = 1 
+	                LEFT JOIN (" + tb_attn + ") at_out ON at_out.id_employee = sch.id_employee AND (at_out.datetime>=sch.in AND at_out.datetime<=(sch.in + INTERVAL 1 DAY)) AND at_out.type_log = 2 
+	                LEFT JOIN (" + tb_attn + ") at_brout ON at_brout.id_employee=sch.id_employee AND DATE(at_brout.datetime) = sch.Date AND at_brout.type_log = 3 
+	                LEFT JOIN (" + tb_attn + ") at_brin ON at_brin.id_employee=sch.id_employee AND DATE(at_brin.datetime) = sch.Date AND at_brin.type_log = 4
+	                LEFT JOIN (" + tb_attn + ") at_in_hol ON at_in_hol.id_employee = sch.id_employee AND DATE(at_in_hol.datetime) = sch.Date AND at_in_hol.type_log = 1 
+	                LEFT JOIN (" + tb_attn + ") at_out_hol ON at_out_hol.id_employee = sch.id_employee AND DATE(at_out_hol.datetime) = sch.Date AND at_out_hol.type_log = 2   
 	                WHERE emp.id_departement LIKE '" & dept & "' AND sch.date >='" & date_start & "' AND sch.date <='" & date_until & "' AND emp.id_employee_active LIKE '" & status & "'
 	                GROUP BY sch.id_schedule
                 )tb
@@ -790,6 +886,22 @@
             employee = SLUEEmployee.EditValue.ToString
         End If
 
+        Dim tb_attn As String = "
+            (SELECT * FROM tb_emp_attn WHERE id_employee LIKE '" & employee & "' AND DATE(`datetime`) >= DATE_ADD('" & date_start & "', INTERVAL -1 DAY) AND DATE(`datetime`) <= DATE_ADD('" & date_until & "', INTERVAL 1 DAY))
+            UNION ALL
+            (SELECT 0 AS id_emp_attn, 0 AS id_fingerprint, e.employee_code, d.id_employee, d.time_in AS `datetime`, 1 AS type_log, 0 AS scan_method
+            FROM `tb_emp_attn_input_det` AS d
+            LEFT JOIN `tb_emp_attn_input` AS a ON d.id_emp_attn_input = a.id_emp_attn_input
+            LEFT JOIN `tb_m_employee` AS e ON d.id_employee = e.id_employee
+            WHERE d.id_departement = 17 AND d.id_employee LIKE '" & employee & "' AND d.date >= DATE_ADD('" & date_start & "', INTERVAL 1 DAY) AND d.date <= DATE_ADD('" & date_until & "', INTERVAL -1 DAY))
+            UNION ALL
+            (SELECT 0 AS id_emp_attn, 0 AS id_fingerprint, e.employee_code, d.id_employee, d.time_out AS `datetime`, 2 AS type_log, 0 AS scan_method
+            FROM `tb_emp_attn_input_det` AS d
+            LEFT JOIN `tb_emp_attn_input` AS a ON d.id_emp_attn_input = a.id_emp_attn_input
+            LEFT JOIN `tb_m_employee` AS e ON d.id_employee = e.id_employee
+            WHERE d.id_departement = 17 AND d.id_employee LIKE '" & employee & "' AND d.date >= DATE_ADD('" & date_start & "', INTERVAL 1 DAY) AND d.date <= DATE_ADD('" & date_until & "', INTERVAL -1 DAY))
+        "
+
         Dim query As String = ""
         query = "SELECT tb.id_schedule,tb.employee_level,tb.employee_position,tb.employee_active,tb.id_employee_active,tb.id_employee,tb.employee_name,tb.employee_code,tb.id_departement,dep.departement,DATE_FORMAT(tb.date,'%M %Y') AS month_year,SUM(tb.late) AS late,SUM(tb.early_home) AS early_home,SUM(tb.over) AS over,SUM(tb.over_break) AS over_break,
                 SUM(IF(NOT ISNULL(tb.att_in) AND NOT ISNULL(tb.att_out),(tb.minutes_work-tb.over_break-tb.late-tb.early_home),0)) AS work_hour,
@@ -808,7 +920,7 @@
 	                sch.minutes_work,
                     IF(IFNULL(lv.id_leave_type,0)=2,lv.minutes_total,0) as tot_sick,
                     IF(IFNULL(lv.id_leave_type,0)=2,1,0) as sum_sick,
-	                IF(lv.is_full_day=1,0,IF(IF(MIN(at_in.datetime)>sch.in_tolerance,TIMESTAMPDIFF(MINUTE,sch.in_tolerance,MIN(at_in.datetime)),0) - IF(lv.is_full_day=1 OR ISNULL(lv.datetime_until),0,IF(lv.datetime_until=sch.out,0,lv.minutes_total+60))<0,0,IF(MIN(at_in.datetime)>sch.in_tolerance,TIMESTAMPDIFF(MINUTE,sch.in_tolerance,MIN(at_in.datetime)),0) - IF(lv.is_full_day=1 OR ISNULL(lv.datetime_until),0,IF(lv.datetime_until=sch.out,0,lv.minutes_total+60)))) AS late ,
+	                IF(IF(MIN(at_in.datetime)>sch.in_tolerance,TIMESTAMPDIFF(MINUTE,sch.in_tolerance,MIN(at_in.datetime)),0) - IF(lv.is_full_day=1 OR ISNULL(lv.datetime_until),0,IF(lv.datetime_until=sch.out,0,lv.minutes_total+60))<0,0,IF(MIN(at_in.datetime)>sch.in_tolerance,TIMESTAMPDIFF(MINUTE,sch.in_tolerance,MIN(at_in.datetime)),0) - IF(lv.is_full_day=1 OR ISNULL(lv.datetime_until),0,IF(lv.datetime_until=sch.out,0,lv.minutes_total+60))) AS late ,
 	                IF(lv.is_full_day=1,0,IF(TIMESTAMPDIFF(MINUTE,sch.out,MAX(at_out.datetime)) + IF(lv.is_full_day=1 OR ISNULL(lv.datetime_until),0,IF(lv.datetime_start=sch.in_tolerance,0,IF(lv.id_leave_type=5 OR lv.id_leave_type=6,lv.minutes_total,lv.minutes_total+60)))<-(sch.out_tolerance),-(TIMESTAMPDIFF(MINUTE,sch.out,MAX(at_out.datetime)) + IF(lv.is_full_day=1 OR ISNULL(lv.datetime_until),0,IF(lv.datetime_start=sch.in_tolerance,0,IF(lv.id_leave_type=5 OR lv.id_leave_type=6,lv.minutes_total,lv.minutes_total+60)))),0)) AS early_home ,
 	                IF(lv.is_full_day=1,0,IF(TIMESTAMPDIFF(MINUTE,sch.out,MAX(at_out.datetime)) + IF(lv.is_full_day=1 OR ISNULL(lv.datetime_until),0,IF(lv.datetime_start=sch.in_tolerance,0,IF(lv.id_leave_type=5 OR lv.id_leave_type=6,lv.minutes_total,lv.minutes_total+60)))<-(sch.out_tolerance),TIMESTAMPDIFF(MINUTE,sch.out,MAX(at_out.datetime)) + IF(lv.is_full_day=1 OR ISNULL(lv.datetime_until),0,IF(lv.datetime_start=sch.in_tolerance,0,IF(lv.id_leave_type=5 OR lv.id_leave_type=6,lv.minutes_total,lv.minutes_total+60))),TIMESTAMPDIFF(MINUTE,sch.out,MAX(at_out.datetime)) + IF(lv.is_full_day=1 OR ISNULL(lv.datetime_until),0,IF(lv.datetime_start=sch.in_tolerance,0,IF(lv.id_leave_type=5 OR lv.id_leave_type=6,lv.minutes_total,lv.minutes_total+60))))) AS over,
 	                IF(lv.is_full_day=1,0,IF(TIMESTAMPDIFF(MINUTE,MIN(at_brout.datetime),MAX(at_brin.datetime))>TIMESTAMPDIFF(MINUTE,sch.break_out,sch.break_in),
@@ -840,12 +952,12 @@
 	                INNER JOIN tb_m_departement dept ON dept.id_departement=emp.id_departement 
 	                INNER JOIN tb_lookup_schedule_type scht ON scht.id_schedule_type=sch.id_schedule_type 
 	                INNER JOIN tb_lookup_employee_active active ON emp.id_employee_active=active.id_employee_active
-	                LEFT JOIN tb_emp_attn at_in ON at_in.id_employee = sch.id_employee AND (at_in.datetime>=(sch.out - INTERVAL 1 DAY) AND at_in.datetime<=sch.out) AND at_in.type_log = 1 
-	                LEFT JOIN tb_emp_attn at_out ON at_out.id_employee = sch.id_employee AND (at_out.datetime>=sch.in AND at_out.datetime<=(sch.in + INTERVAL 1 DAY)) AND at_out.type_log = 2 
-	                LEFT JOIN tb_emp_attn at_brout ON at_brout.id_employee=sch.id_employee AND DATE(at_brout.datetime) = sch.Date AND at_brout.type_log = 3 
-	                LEFT JOIN tb_emp_attn at_brin ON at_brin.id_employee=sch.id_employee AND DATE(at_brin.datetime) = sch.Date AND at_brin.type_log = 4
-	                LEFT JOIN tb_emp_attn at_in_hol ON at_in_hol.id_employee = sch.id_employee AND DATE(at_in_hol.datetime) = sch.Date AND at_in_hol.type_log = 1 
-	                LEFT JOIN tb_emp_attn at_out_hol ON at_out_hol.id_employee = sch.id_employee AND DATE(at_out_hol.datetime) = sch.Date AND at_out_hol.type_log = 2     
+	                LEFT JOIN (" + tb_attn + ") at_in ON at_in.id_employee = sch.id_employee AND (at_in.datetime>=(sch.out - INTERVAL 1 DAY) AND at_in.datetime<=sch.out) AND at_in.type_log = 1 
+	                LEFT JOIN (" + tb_attn + ") at_out ON at_out.id_employee = sch.id_employee AND (at_out.datetime>=sch.in AND at_out.datetime<=(sch.in + INTERVAL 1 DAY)) AND at_out.type_log = 2 
+	                LEFT JOIN (" + tb_attn + ") at_brout ON at_brout.id_employee=sch.id_employee AND DATE(at_brout.datetime) = sch.Date AND at_brout.type_log = 3 
+	                LEFT JOIN (" + tb_attn + ") at_brin ON at_brin.id_employee=sch.id_employee AND DATE(at_brin.datetime) = sch.Date AND at_brin.type_log = 4
+	                LEFT JOIN (" + tb_attn + ") at_in_hol ON at_in_hol.id_employee = sch.id_employee AND DATE(at_in_hol.datetime) = sch.Date AND at_in_hol.type_log = 1 
+	                LEFT JOIN (" + tb_attn + ") at_out_hol ON at_out_hol.id_employee = sch.id_employee AND DATE(at_out_hol.datetime) = sch.Date AND at_out_hol.type_log = 2     
 	                WHERE emp.id_departement LIKE '" & dept & "' AND sch.date >='" & date_start & "' AND sch.date <='" & date_until & "' AND emp.id_employee_active LIKE '" & status & "' AND emp.id_employee LIKE '" & employee & "'
 	                GROUP BY sch.id_schedule
                 )tb

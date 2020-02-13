@@ -49,7 +49,7 @@
         viewSearchLookupQuery(SLUE3PL, query, "id_comp", "comp_name", "id_comp")
     End Sub
 
-    Private Sub SBView_Click(sender As Object, e As EventArgs)
+    Private Sub SBView_Click(sender As Object, e As EventArgs) Handles SBView.Click
         form_load()
     End Sub
 

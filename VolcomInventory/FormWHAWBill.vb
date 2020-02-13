@@ -214,7 +214,7 @@
                 query += " DATEDIFF(awb.rec_by_store_date, awb.pick_up_date) AS del_time,"
                 query += " (DATEDIFF(awb.rec_by_store_date, awb.pick_up_date) - awb.cargo_lead_time) AS lead_time_diff,"
                 query += " (IF(DATEDIFF(awb.rec_by_store_date, awb.pick_up_date) - awb.cargo_lead_time=0, 'ON TIME', IF(DATEDIFF(awb.rec_by_store_date, awb.pick_up_date) - awb.cargo_lead_time>0, 'LATE', IF(DATEDIFF(awb.rec_by_store_date, awb.pick_up_date) - awb.cargo_lead_time<0, 'EARLY', 'ON DELIVERY')))) AS time_remark,"
-                query += " (awb.c_weight-awb.a_weight) as weight_diff,(awb.c_tot_price-awb.a_tot_price) as amount_diff,2 as penanda"
+                query += " (awb.c_weight-awb.a_weight) as weight_diff,(awb.c_tot_price-awb.a_tot_price) as amount_diff,('') AS `no`,2 as penanda"
                 query += " FROM tb_wh_awbill awb"
                 query += " inner join tb_m_comp comp_store On comp_store.id_comp=awb.id_store"
                 query += " inner join tb_m_comp comp_cargo On comp_cargo.id_comp=awb.id_cargo"
@@ -235,6 +235,9 @@
         Else
             BtnManifest.Visible = False
         End If
+
+        numbering()
+
         check_but()
     End Sub
     Sub load_inbound()
@@ -409,7 +412,7 @@
     End Sub
 
     Private Sub GVAWBill_CellMerge(sender As Object, e As DevExpress.XtraGrid.Views.Grid.CellMergeEventArgs) Handles GVAWBill.CellMerge
-        If (e.Column.FieldName = "id_awbill" Or e.Column.FieldName = "weight" Or e.Column.FieldName = "length" Or e.Column.FieldName = "width" Or e.Column.FieldName = "height" Or e.Column.FieldName = "volume" Or e.Column.FieldName = "c_weight" Or e.Column.FieldName = "c_tot_price" Or e.Column.FieldName = "a_weight" Or e.Column.FieldName = "a_tot_price" Or e.Column.FieldName = "weight_diff" Or e.Column.FieldName = "amount_diff") Then
+        If (e.Column.FieldName = "no" Or e.Column.FieldName = "id_awbill" Or e.Column.FieldName = "weight" Or e.Column.FieldName = "length" Or e.Column.FieldName = "width" Or e.Column.FieldName = "height" Or e.Column.FieldName = "volume" Or e.Column.FieldName = "c_weight" Or e.Column.FieldName = "c_tot_price" Or e.Column.FieldName = "a_weight" Or e.Column.FieldName = "a_tot_price" Or e.Column.FieldName = "weight_diff" Or e.Column.FieldName = "amount_diff") Then
             Dim view As DevExpress.XtraGrid.Views.Grid.GridView = CType(sender, DevExpress.XtraGrid.Views.Grid.GridView)
             Dim val1 As String = view.GetRowCellValue(e.RowHandle1, "id_awbill")
             Dim val2 As String = view.GetRowCellValue(e.RowHandle2, "id_awbill")
@@ -618,5 +621,29 @@
         Else
             stopCustom("Please choose collie first.")
         End If
+    End Sub
+
+    Sub numbering()
+        Dim last_collie As String = ""
+
+        Dim no As Integer = 1
+
+        For i = 0 To GVAWBill.RowCount - 1
+            If GVAWBill.IsValidRowHandle(i) Then
+                If i = 0 Then
+                    last_collie = GVAWBill.GetRowCellValue(i, "id_awbill").ToString
+
+                End If
+
+                'numbering
+                If Not last_collie = GVAWBill.GetRowCellValue(i, "id_awbill").ToString Then
+                    no = no + 1
+                End If
+
+                GVAWBill.SetRowCellValue(i, "no", no)
+
+                last_collie = GVAWBill.GetRowCellValue(i, "id_awbill").ToString
+            End If
+        Next
     End Sub
 End Class

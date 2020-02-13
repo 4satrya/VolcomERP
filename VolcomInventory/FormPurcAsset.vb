@@ -75,11 +75,11 @@
 
     Private Sub GVPending_DoubleClick(sender As Object, e As EventArgs) Handles GVPending.DoubleClick
         If GVPending.RowCount > 0 And GVPending.FocusedRowHandle >= 0 Then
-            viewDetail(GVPending.GetFocusedRowCellValue("id_purc_rec_asset").ToString, "-1", False, False, False)
+            viewDetail(GVPending.GetFocusedRowCellValue("id_purc_rec_asset").ToString, "-1", False, False, False, False)
         End If
     End Sub
 
-    Sub viewDetail(ByVal id As String, ByVal is_view As String, ByVal find_accum As Boolean, ByVal view_current As Boolean, ByVal move_location As Boolean)
+    Sub viewDetail(ByVal id As String, ByVal is_view As String, ByVal find_accum As Boolean, ByVal view_current As Boolean, ByVal move_location As Boolean, ByVal input_description As Boolean)
         Cursor = Cursors.WaitCursor
         FormPurcAssetDet.is_view = is_view
         FormPurcAssetDet.action = "upd"
@@ -87,6 +87,7 @@
         FormPurcAssetDet.find_accum = find_accum
         FormPurcAssetDet.view_current = view_current
         FormPurcAssetDet.move_location = move_location
+        FormPurcAssetDet.input_description = input_description
         FormPurcAssetDet.ShowDialog()
         Cursor = Cursors.Default
     End Sub
@@ -104,7 +105,7 @@
 
     Private Sub GVActive_DoubleClick(sender As Object, e As EventArgs) Handles GVActive.DoubleClick
         If GVActive.RowCount > 0 And GVActive.FocusedRowHandle >= 0 Then
-            viewDetail(GVActive.GetFocusedRowCellValue("id_purc_rec_asset").ToString, "1", True, False, False)
+            viewDetail(GVActive.GetFocusedRowCellValue("id_purc_rec_asset").ToString, "1", True, False, False, False)
         End If
     End Sub
 
@@ -283,26 +284,32 @@
 
     Private Sub InputEmployeeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InputEmployeeToolStripMenuItem.Click
         If GVActive.RowCount > 0 And GVActive.FocusedRowHandle >= 0 Then
-            viewDetail(GVActive.GetFocusedRowCellValue("id_purc_rec_asset").ToString, "1", True, True, False)
+            viewDetail(GVActive.GetFocusedRowCellValue("id_purc_rec_asset").ToString, "1", True, True, False, False)
         End If
     End Sub
 
     Private Sub MoveLocationToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MoveLocationToolStripMenuItem.Click
         If GVActive.RowCount > 0 And GVActive.FocusedRowHandle >= 0 Then
-            viewDetail(GVActive.GetFocusedRowCellValue("id_purc_rec_asset").ToString, "1", True, True, True)
+            viewDetail(GVActive.GetFocusedRowCellValue("id_purc_rec_asset").ToString, "1", True, True, True, False)
         End If
     End Sub
 
     Private Sub GVActive_PopupMenuShowing(sender As Object, e As DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs) Handles GVActive.PopupMenuShowing
-        Dim dt_current As DataTable = execute_query("SELECT id_employee_current FROM tb_purc_rec_asset WHERE id_purc_rec_asset = " + GVActive.GetFocusedRowCellValue("id_purc_rec_asset").ToString, -1, True, "", "", "", "")
+        Dim dt_current As DataTable = execute_query("SELECT id_departement_current, asset_note FROM tb_purc_rec_asset WHERE id_purc_rec_asset = " + GVActive.GetFocusedRowCellValue("id_purc_rec_asset").ToString, -1, True, "", "", "", "")
         Dim dt_history As String = execute_query("SELECT COUNT(id_purc_rec_asset) FROM tb_purc_rec_asset_history WHERE id_purc_rec_asset = " + GVActive.GetFocusedRowCellValue("id_purc_rec_asset").ToString, 0, True, "", "", "", "")
 
-        If dt_current.Rows(0)("id_employee_current").ToString = "" Then
+        If dt_current.Rows(0)("id_departement_current").ToString = "" Then
             InputEmployeeToolStripMenuItem.Visible = True
             MoveLocationToolStripMenuItem.Visible = False
         Else
             InputEmployeeToolStripMenuItem.Visible = False
             MoveLocationToolStripMenuItem.Visible = True
+        End If
+
+        If dt_current.Rows(0)("asset_note").ToString = "" Then
+            InputDescriptionToolStripMenuItem.Visible = True
+        Else
+            InputDescriptionToolStripMenuItem.Visible = False
         End If
 
         If dt_history = "0" Then
@@ -316,5 +323,11 @@
         FormPurcAssetHistory.id_purc_rec_asset = GVActive.GetFocusedRowCellValue("id_purc_rec_asset").ToString
 
         FormPurcAssetHistory.ShowDialog()
+    End Sub
+
+    Private Sub InputDescriptionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InputDescriptionToolStripMenuItem.Click
+        If GVActive.RowCount > 0 And GVActive.FocusedRowHandle >= 0 Then
+            viewDetail(GVActive.GetFocusedRowCellValue("id_purc_rec_asset").ToString, "-1", False, False, False, True)
+        End If
     End Sub
 End Class

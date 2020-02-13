@@ -43,6 +43,9 @@ Partial Class FormAccountingJournal
         Me.LEBilling = New DevExpress.XtraEditors.LookUpEdit()
         Me.XtraTabPage2 = New DevExpress.XtraTab.XtraTabPage()
         Me.GCJournalDet = New DevExpress.XtraGrid.GridControl()
+        Me.ViewMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ViewDetailToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SMEditEcopPD = New System.Windows.Forms.ToolStripMenuItem()
         Me.GVJournalDet = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -56,13 +59,6 @@ Partial Class FormAccountingJournal
         Me.GridColumnJurnalNumber = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnJournalDate = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnAccDesc = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
-        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
-        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
-        Me.DETo = New DevExpress.XtraEditors.DateEdit()
-        Me.DEFrom = New DevExpress.XtraEditors.DateEdit()
-        Me.BView = New DevExpress.XtraEditors.SimpleButton()
-        Me.LEBillingView = New DevExpress.XtraEditors.LookUpEdit()
         Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn15 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn16 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -70,9 +66,13 @@ Partial Class FormAccountingJournal
         Me.GridColumn18 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn19 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn20 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.ViewMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.ViewDetailToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SMEditEcopPD = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.LEBillingView = New DevExpress.XtraEditors.LookUpEdit()
+        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
+        Me.DETo = New DevExpress.XtraEditors.DateEdit()
+        Me.DEFrom = New DevExpress.XtraEditors.DateEdit()
+        Me.BView = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.GCAccTrans, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVAccTrans, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XTCJurnal, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -87,17 +87,17 @@ Partial Class FormAccountingJournal
         CType(Me.LEBilling.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XtraTabPage2.SuspendLayout()
         CType(Me.GCJournalDet, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ViewMenu.SuspendLayout()
         CType(Me.GVJournalDet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
+        CType(Me.LEBillingView.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DETo.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DETo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LEBillingView.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.ViewMenu.SuspendLayout()
         Me.SuspendLayout()
         '
         'GCAccTrans
@@ -319,6 +319,24 @@ Partial Class FormAccountingJournal
         Me.GCJournalDet.TabIndex = 12
         Me.GCJournalDet.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVJournalDet})
         '
+        'ViewMenu
+        '
+        Me.ViewMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewDetailToolStripMenuItem, Me.SMEditEcopPD})
+        Me.ViewMenu.Name = "ContextMenuStripYM"
+        Me.ViewMenu.Size = New System.Drawing.Size(138, 48)
+        '
+        'ViewDetailToolStripMenuItem
+        '
+        Me.ViewDetailToolStripMenuItem.Name = "ViewDetailToolStripMenuItem"
+        Me.ViewDetailToolStripMenuItem.Size = New System.Drawing.Size(137, 22)
+        Me.ViewDetailToolStripMenuItem.Text = "View Report"
+        '
+        'SMEditEcopPD
+        '
+        Me.SMEditEcopPD.Name = "SMEditEcopPD"
+        Me.SMEditEcopPD.Size = New System.Drawing.Size(137, 22)
+        Me.SMEditEcopPD.Text = "View Reff"
+        '
         'GVJournalDet
         '
         Me.GVJournalDet.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn9, Me.GridColumn10, Me.GridColumn11, Me.GridColumn12, Me.GridColumn13, Me.GridColumn14, Me.GridColumnIdJurnal, Me.GridColumnJurnalNumber, Me.GridColumnJournalDate, Me.GridColumnAccDesc, Me.GridColumn8, Me.GridColumn15, Me.GridColumn16, Me.GridColumn17, Me.GridColumn18, Me.GridColumn19, Me.GridColumn20})
@@ -458,85 +476,6 @@ Partial Class FormAccountingJournal
         Me.GridColumnAccDesc.VisibleIndex = 5
         Me.GridColumnAccDesc.Width = 164
         '
-        'PanelControl1
-        '
-        Me.PanelControl1.Controls.Add(Me.LEBillingView)
-        Me.PanelControl1.Controls.Add(Me.LabelControl2)
-        Me.PanelControl1.Controls.Add(Me.LabelControl1)
-        Me.PanelControl1.Controls.Add(Me.DETo)
-        Me.PanelControl1.Controls.Add(Me.DEFrom)
-        Me.PanelControl1.Controls.Add(Me.BView)
-        Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl1.Location = New System.Drawing.Point(0, 305)
-        Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(753, 43)
-        Me.PanelControl1.TabIndex = 13
-        '
-        'LabelControl2
-        '
-        Me.LabelControl2.Location = New System.Drawing.Point(332, 14)
-        Me.LabelControl2.Name = "LabelControl2"
-        Me.LabelControl2.Size = New System.Drawing.Size(17, 13)
-        Me.LabelControl2.TabIndex = 4
-        Me.LabelControl2.Text = "to :"
-        '
-        'LabelControl1
-        '
-        Me.LabelControl1.Location = New System.Drawing.Point(110, 14)
-        Me.LabelControl1.Name = "LabelControl1"
-        Me.LabelControl1.Size = New System.Drawing.Size(31, 13)
-        Me.LabelControl1.TabIndex = 3
-        Me.LabelControl1.Text = "From :"
-        '
-        'DETo
-        '
-        Me.DETo.EditValue = Nothing
-        Me.DETo.Location = New System.Drawing.Point(360, 11)
-        Me.DETo.Name = "DETo"
-        Me.DETo.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.DETo.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
-        Me.DETo.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
-        Me.DETo.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.DETo.Size = New System.Drawing.Size(172, 20)
-        Me.DETo.TabIndex = 2
-        '
-        'DEFrom
-        '
-        Me.DEFrom.EditValue = Nothing
-        Me.DEFrom.Location = New System.Drawing.Point(147, 11)
-        Me.DEFrom.Name = "DEFrom"
-        Me.DEFrom.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.DEFrom.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
-        Me.DEFrom.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
-        Me.DEFrom.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.DEFrom.Size = New System.Drawing.Size(172, 20)
-        Me.DEFrom.TabIndex = 1
-        '
-        'BView
-        '
-        Me.BView.Location = New System.Drawing.Point(538, 10)
-        Me.BView.Name = "BView"
-        Me.BView.Size = New System.Drawing.Size(119, 22)
-        Me.BView.TabIndex = 0
-        Me.BView.Text = "View Transaction"
-        '
-        'LEBillingView
-        '
-        Me.LEBillingView.Location = New System.Drawing.Point(11, 11)
-        Me.LEBillingView.Name = "LEBillingView"
-        Me.LEBillingView.Properties.Appearance.Options.UseTextOptions = True
-        Me.LEBillingView.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near
-        Me.LEBillingView.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.LEBillingView.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Black
-        Me.LEBillingView.Properties.AppearanceDisabled.Options.UseBackColor = True
-        Me.LEBillingView.Properties.AppearanceDisabled.Options.UseForeColor = True
-        Me.LEBillingView.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.LEBillingView.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_bill_type", "Id Billing Type", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("bill_type", "Billing Type")})
-        Me.LEBillingView.Properties.NullText = ""
-        Me.LEBillingView.Properties.ShowFooter = False
-        Me.LEBillingView.Size = New System.Drawing.Size(93, 20)
-        Me.LEBillingView.TabIndex = 147
-        '
         'GridColumn8
         '
         Me.GridColumn8.Caption = "Id Report"
@@ -592,23 +531,84 @@ Partial Class FormAccountingJournal
         Me.GridColumn20.VisibleIndex = 1
         Me.GridColumn20.Width = 67
         '
-        'ViewMenu
+        'PanelControl1
         '
-        Me.ViewMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewDetailToolStripMenuItem, Me.SMEditEcopPD})
-        Me.ViewMenu.Name = "ContextMenuStripYM"
-        Me.ViewMenu.Size = New System.Drawing.Size(153, 70)
+        Me.PanelControl1.Controls.Add(Me.LEBillingView)
+        Me.PanelControl1.Controls.Add(Me.LabelControl2)
+        Me.PanelControl1.Controls.Add(Me.LabelControl1)
+        Me.PanelControl1.Controls.Add(Me.DETo)
+        Me.PanelControl1.Controls.Add(Me.DEFrom)
+        Me.PanelControl1.Controls.Add(Me.BView)
+        Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.PanelControl1.Location = New System.Drawing.Point(0, 305)
+        Me.PanelControl1.Name = "PanelControl1"
+        Me.PanelControl1.Size = New System.Drawing.Size(753, 43)
+        Me.PanelControl1.TabIndex = 13
         '
-        'ViewDetailToolStripMenuItem
+        'LEBillingView
         '
-        Me.ViewDetailToolStripMenuItem.Name = "ViewDetailToolStripMenuItem"
-        Me.ViewDetailToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.ViewDetailToolStripMenuItem.Text = "View Report"
+        Me.LEBillingView.Location = New System.Drawing.Point(11, 11)
+        Me.LEBillingView.Name = "LEBillingView"
+        Me.LEBillingView.Properties.Appearance.Options.UseTextOptions = True
+        Me.LEBillingView.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near
+        Me.LEBillingView.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.LEBillingView.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Black
+        Me.LEBillingView.Properties.AppearanceDisabled.Options.UseBackColor = True
+        Me.LEBillingView.Properties.AppearanceDisabled.Options.UseForeColor = True
+        Me.LEBillingView.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.LEBillingView.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_bill_type", "Id Billing Type", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("bill_type", "Billing Type")})
+        Me.LEBillingView.Properties.NullText = ""
+        Me.LEBillingView.Properties.ShowFooter = False
+        Me.LEBillingView.Size = New System.Drawing.Size(93, 20)
+        Me.LEBillingView.TabIndex = 147
         '
-        'SMEditEcopPD
+        'LabelControl2
         '
-        Me.SMEditEcopPD.Name = "SMEditEcopPD"
-        Me.SMEditEcopPD.Size = New System.Drawing.Size(152, 22)
-        Me.SMEditEcopPD.Text = "View Reff"
+        Me.LabelControl2.Location = New System.Drawing.Point(332, 14)
+        Me.LabelControl2.Name = "LabelControl2"
+        Me.LabelControl2.Size = New System.Drawing.Size(17, 13)
+        Me.LabelControl2.TabIndex = 4
+        Me.LabelControl2.Text = "to :"
+        '
+        'LabelControl1
+        '
+        Me.LabelControl1.Location = New System.Drawing.Point(110, 14)
+        Me.LabelControl1.Name = "LabelControl1"
+        Me.LabelControl1.Size = New System.Drawing.Size(31, 13)
+        Me.LabelControl1.TabIndex = 3
+        Me.LabelControl1.Text = "From :"
+        '
+        'DETo
+        '
+        Me.DETo.EditValue = Nothing
+        Me.DETo.Location = New System.Drawing.Point(360, 11)
+        Me.DETo.Name = "DETo"
+        Me.DETo.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DETo.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.DETo.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.DETo.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DETo.Size = New System.Drawing.Size(172, 20)
+        Me.DETo.TabIndex = 2
+        '
+        'DEFrom
+        '
+        Me.DEFrom.EditValue = Nothing
+        Me.DEFrom.Location = New System.Drawing.Point(147, 11)
+        Me.DEFrom.Name = "DEFrom"
+        Me.DEFrom.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEFrom.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.DEFrom.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.DEFrom.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEFrom.Size = New System.Drawing.Size(172, 20)
+        Me.DEFrom.TabIndex = 1
+        '
+        'BView
+        '
+        Me.BView.Location = New System.Drawing.Point(538, 10)
+        Me.BView.Name = "BView"
+        Me.BView.Size = New System.Drawing.Size(119, 22)
+        Me.BView.TabIndex = 0
+        Me.BView.Text = "View Transaction"
         '
         'FormAccountingJournal
         '
@@ -638,18 +638,18 @@ Partial Class FormAccountingJournal
         CType(Me.LEBilling.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XtraTabPage2.ResumeLayout(False)
         CType(Me.GCJournalDet, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ViewMenu.ResumeLayout(False)
         CType(Me.GVJournalDet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         Me.PanelControl1.PerformLayout()
+        CType(Me.LEBillingView.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DETo.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DETo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LEBillingView.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ViewMenu.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub

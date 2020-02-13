@@ -15,9 +15,9 @@
         load_dep()
         DEUntil.EditValue = Now
         '
-        ArcScaleComponent3.EnableAnimation = True
-        ArcScaleComponent3.EasingMode = DevExpress.XtraGauges.Core.Model.EasingMode.EaseIn
-        ArcScaleComponent3.EasingFunction = New DevExpress.XtraGauges.Core.Model.BounceEase
+        ASSum.EnableAnimation = True
+        ASSum.EasingMode = DevExpress.XtraGauges.Core.Model.EasingMode.EaseIn
+        ASSum.EasingFunction = New DevExpress.XtraGauges.Core.Model.BounceEase
     End Sub
 
     Sub load_budget()
@@ -44,8 +44,8 @@
         ,(IFNULL(SUM(trx.`value`),0)/op.value_expense)*100 AS used_percent
         FROM tb_b_expense_opex op
         LEFT JOIN tb_b_expense_opex_trans trx ON op.`id_b_expense_opex`=trx.`id_b_expense_opex` AND DATE(trx.date_trans) <= DATE('" & Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd") & "')
-        INNER JOIN tb_item_cat_main cm ON cm.`id_item_cat_main`=op.`id_item_cat_main`
-        INNER JOIN tb_lookup_expense_type et ON et.`id_expense_type`=cm.`id_expense_type`
+        LEFT JOIN tb_item_cat_main cm ON cm.`id_item_cat_main`=op.`id_item_cat_main`
+        LEFT JOIN tb_lookup_expense_type et ON et.`id_expense_type`=cm.`id_expense_type`
         WHERE op.`year`='" & LEYear.Text.ToString & "' 
         " & where_opex & "
         GROUP BY op.`id_item_cat_main`)
@@ -59,27 +59,64 @@
         ,(IFNULL(SUM(trx.`value`),0)/op.value_expense)*100 AS used_percent
         FROM tb_b_expense op
         LEFT JOIN tb_b_expense_trans trx ON op.`id_b_expense`=trx.`id_b_expense` AND DATE(trx.date_trans) <= DATE('" & Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd") & "')
-        INNER JOIN tb_item_cat_main cm ON cm.`id_item_cat_main`=op.`id_item_cat_main`
-        INNER JOIN tb_lookup_expense_type et ON et.`id_expense_type`=cm.`id_expense_type`
+        LEFT JOIN tb_item_cat_main cm ON cm.`id_item_cat_main`=op.`id_item_cat_main`
+        LEFT JOIN tb_lookup_expense_type et ON et.`id_expense_type`=cm.`id_expense_type`
         INNER JOIN tb_m_departement dep ON dep.id_departement=op.id_departement
         WHERE op.`year`='" & LEYear.Text.ToString & "'
         " & where_capex & "
-        GROUP BY op.`id_item_cat_main`)"
+        GROUP BY op.`id_item_cat_main`,op.id_departement)"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCItemCat.DataSource = data
         GVItemCat.BestFitColumns()
         '
         PanelChart.Visible = True
-        TxtBudget.EditValue = GVItemCat.Columns("budget").SummaryItem.SummaryValue
-        TxtActual.EditValue = GVItemCat.Columns("val_used").SummaryItem.SummaryValue
+
 
         setGaugeInfo()
     End Sub
 
     Sub setGaugeInfo()
-        'isi gauge
-        ArcScaleComponent3.Value = GVItemCat.Columns("val_used").SummaryItem.SummaryValue / GVItemCat.Columns("budget").SummaryItem.SummaryValue * 100
-        LabelComponent3.Text = Decimal.Parse((GVItemCat.Columns("val_used").SummaryItem.SummaryValue / GVItemCat.Columns("budget").SummaryItem.SummaryValue) * 100).ToString("N2") + "%"
+
+        'isi gauge summary
+        TEBudgetSum.EditValue = GVItemCat.Columns("budget").SummaryItem.SummaryValue
+        TEActualSum.EditValue = GVItemCat.Columns("val_used").SummaryItem.SummaryValue
+
+        ASSum.Value = GVItemCat.Columns("val_used").SummaryItem.SummaryValue / GVItemCat.Columns("budget").SummaryItem.SummaryValue * 100
+        LCSummary.Text = Decimal.Parse((GVItemCat.Columns("val_used").SummaryItem.SummaryValue / GVItemCat.Columns("budget").SummaryItem.SummaryValue) * 100).ToString("N2") + "%"
+        'opex capex
+
+        Dim b_opex As Decimal = 0.0
+        Dim b_capex As Decimal = 0.0
+        '
+        Dim u_opex As Decimal = 0.0
+        Dim u_capex As Decimal = 0.0
+
+        For i As Integer = 0 To GVItemCat.RowCount - 1
+            If GVItemCat.GetRowCellValue(i, "expense_type").ToString.ToUpper = "CAPEX" Then
+                b_capex += GVItemCat.GetRowCellValue(i, "budget")
+                u_capex += GVItemCat.GetRowCellValue(i, "val_used")
+            Else
+                b_opex += GVItemCat.GetRowCellValue(i, "budget")
+                u_opex += GVItemCat.GetRowCellValue(i, "val_used")
+            End If
+        Next
+
+        TEBudgetCapex.EditValue = b_capex
+        TEUsedCapex.EditValue = u_capex
+        TEBudgetOpex.EditValue = b_opex
+        TEUsedOpex.EditValue = u_opex
+
+        If Not b_capex = 0 Then
+            'isi gauge capex
+            ASCapex.Value = u_capex / b_capex * 100
+            LCCapex.Text = Decimal.Parse((u_capex / b_capex) * 100).ToString("N2") + "%"
+        End If
+
+        If Not b_opex = 0 Then
+            'isi gauge opex
+            ASOpex.Value = u_opex / b_opex * 100
+            LCOpex.Text = Decimal.Parse((u_opex / b_opex) * 100).ToString("N2") + "%"
+        End If
     End Sub
 
     Sub viewMainCategory()
@@ -147,6 +184,16 @@ GROUP BY `year`"
                 Case DevExpress.Data.CustomSummaryProcess.Finalize
                     e.TotalValue = (tot_used / tot_budget) * 100
             End Select
+        End If
+    End Sub
+
+    Private Sub ViewDetailToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ViewDetailToolStripMenuItem.Click
+        If GVItemCat.RowCount > 0 Then
+            Dim id_cat_main As String = GVItemCat.GetFocusedRowCellValue("id_item_cat_main").ToString
+            FormReportBudgetList.id_cat_main = id_cat_main
+            FormReportBudgetList.date_time = Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd")
+            FormReportBudgetList.year = LEYear.Text
+            FormReportBudgetList.ShowDialog()
         End If
     End Sub
 End Class

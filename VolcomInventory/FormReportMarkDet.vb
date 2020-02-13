@@ -219,6 +219,10 @@
                 'cancell asset
                 Dim a As New ClassPurcAsset()
                 a.cancellPropose(id_report, FormPurcAssetDet.id_purc_rec)
+            ElseIf report_mark_type = "100" Then
+                'propose schedule
+                Dim qupd As String = "UPDATE tb_emp_assign_sch SET id_report_status=5 WHERE id_assign_sch=" + id_report + " "
+                execute_non_query(qupd, True, "", "", "", "")
             End If
             FormReportMark.sendNotif("2")
             close_form(FormReportMark.report_mark_type)

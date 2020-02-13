@@ -3,6 +3,9 @@
 
     Private Sub ReportFGTransSummaryReport_BeforePrint(sender As Object, e As Printing.PrintEventArgs) Handles MyBase.BeforePrint
         GCData.DataSource = dt
+        GCDesign.DataSource = dt
+
+        XrLabelCompany.Text = execute_query("SELECT comp_name FROM tb_m_comp WHERE id_comp = (SELECT id_own_company FROM tb_opt LIMIT 1)", 0, True, "", "", "", "")
 
         'printed
         Dim qpd As String = "SELECT DATE_FORMAT(NOW(), '%d-%m-%Y %H:%i') AS `printed_date`, '" + name_user + "' AS `printed_by`"
@@ -66,6 +69,30 @@
             Dim qty As Decimal = Convert.ToDecimal(e.Value)
             If qty = 0 Then
                 e.DisplayText = "-"
+            End If
+        ElseIf e.Column.FieldName = "no" Then
+            Dim view As DevExpress.XtraGrid.Views.Grid.GridView = TryCast(sender, DevExpress.XtraGrid.Views.Grid.GridView)
+            If view.GroupedColumns.Count <> 0 AndAlso Not e.IsForGroupRow Then
+                Dim rowHandle As Integer = view.GetRowHandle(e.ListSourceRowIndex)
+                e.DisplayText = (view.GetRowGroupIndexByRowHandle(rowHandle) + 1).ToString()
+            End If
+        End If
+    End Sub
+
+    Private Sub GVDesign_CustomColumnDisplayText(sender As Object, e As DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs) Handles GVDesign.CustomColumnDisplayText
+        If (e.Column.FieldName.Contains("qty") Or e.Column.FieldName.Contains("amount") Or e.Column.FieldName.Contains("pros")) Then
+            Dim qty As Decimal = Convert.ToDecimal(e.Value)
+            If qty = 0 Then
+                e.DisplayText = "-"
+            End If
+        ElseIf e.Column.FieldName = "no" Then
+            Dim view As DevExpress.XtraGrid.Views.Grid.GridView = TryCast(sender, DevExpress.XtraGrid.Views.Grid.GridView)
+            If view.GroupedColumns.Count <> 0 AndAlso Not e.IsForGroupRow Then
+                Dim rowHandle As Integer = view.GetRowHandle(e.ListSourceRowIndex)
+                e.DisplayText = (view.GetRowGroupIndexByRowHandle(rowHandle) + 1).ToString()
+            Else
+                Dim rowHandle As Integer = view.GetRowHandle(e.ListSourceRowIndex)
+                e.DisplayText = (rowHandle + 1).ToString()
             End If
         End If
     End Sub

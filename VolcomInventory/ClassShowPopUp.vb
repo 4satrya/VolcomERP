@@ -240,6 +240,9 @@
         ElseIf report_mark_type = "162" Then
             'Rec Payment
             FormBankDepositDet.Close()
+        ElseIf report_mark_type = "237" Then
+            'Tabungan Missing
+            FormPaymentMissingDet.Close()
         ElseIf report_mark_type = "167" Then
             'Cash Advance
             FormCashAdvanceDet.Close()
@@ -273,6 +276,9 @@
         ElseIf report_mark_type = "188" Then
             'propose price new product-revision
             FormFGProposePriceRev.Close()
+        ElseIf report_mark_type = "189" Then
+            'Bukti Pembelian
+            FormInvoiceFGPODP.Close()
         ElseIf report_mark_type = "190" Or report_mark_type = "193" Then
             'propose work order MTC/IT
             FormWorkOrderDet.Close()
@@ -986,6 +992,11 @@ GROUP BY rec.`id_prod_order`"
             FormBankDepositDet.id_deposit = id_report
             FormBankDepositDet.is_view = "1"
             FormBankDepositDet.ShowDialog()
+        ElseIf report_mark_type = "237" Then
+            'Tabungan Missing
+            FormPaymentMissingDet.id_missing_payment = id_report
+            FormPaymentMissingDet.is_view = "1"
+            FormPaymentMissingDet.ShowDialog()
         ElseIf report_mark_type = "164" Then
             'propose leave
             FormEmpLeaveDet.id_emp_leave = id_report
@@ -1090,9 +1101,15 @@ GROUP BY rec.`id_prod_order`"
             FormFGProposePriceRev.is_view = "1"
             FormFGProposePriceRev.id = id_report
             FormFGProposePriceRev.ShowDialog()
+        ElseIf report_mark_type = "189" Then
+            'Bukti Pembelian
+            FormInvoiceFGPODP.id_invoice = id_report
+            FormInvoiceFGPODP.is_view = "1"
+
+            FormInvoiceFGPODP.ShowDialog()
         ElseIf report_mark_type = "190" Or report_mark_type = "193" Then
             'work order MTC/IT
-            FormWorkOrderDet.is_view = " Then1"
+            FormWorkOrderDet.is_view = "1"
             FormWorkOrderDet.id_wo = id_report
             FormWorkOrderDet.ShowDialog()
         ElseIf report_mark_type = "192" Then
@@ -1977,6 +1994,12 @@ GROUP BY rec.`id_prod_order`"
             field_id = "id_rec_payment"
             field_number = "number"
             field_date = "date_created"
+        ElseIf report_mark_type = "237" Then
+            'Tabungan Missing
+            table_name = "tb_missing_payment"
+            field_id = "id_missing_payment"
+            field_number = "number"
+            field_date = "date_created"
         ElseIf report_mark_type = "167" Then
             'item del
             table_name = "tb_cash_advance"
@@ -2019,6 +2042,12 @@ GROUP BY rec.`id_prod_order`"
             field_id = "id_fg_propose_price_rev"
             field_number = "rev_count"
             field_date = "created_date"
+        ElseIf report_mark_type = "189" Then
+            'bukti pembelian
+            table_name = "tb_pn_fgpo"
+            field_id = "id_pn_fgpo"
+            field_number = "number"
+            field_date = "date_created"
         ElseIf report_mark_type = "190" Or report_mark_type = "193" Then
             'work order MTC/IT
             table_name = "tb_work_order"

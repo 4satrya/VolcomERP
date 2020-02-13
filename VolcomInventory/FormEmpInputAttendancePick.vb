@@ -15,7 +15,7 @@
             FROM tb_m_employee AS e
             LEFT JOIN tb_m_departement AS d ON e.id_departement = d.id_departement
             LEFT JOIN tb_lookup_employee_status AS sts ON e.id_employee_status = sts.id_employee_status
-            WHERE e.id_employee_active = 1 " + departement_include + " AND e.id_employee NOT IN (" + not_include + ")
+            WHERE 1 " + departement_include + " AND e.id_employee NOT IN (" + not_include + ")
             ORDER BY d.departement ASC, e.id_employee_level ASC, e.employee_code ASC
         "
 

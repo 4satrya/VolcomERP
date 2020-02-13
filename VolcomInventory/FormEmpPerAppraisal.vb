@@ -5,6 +5,8 @@ Public Class FormEmpPerAppraisal
     Public is_dephead As String = "-1"
     Public is_hrd As String = "-1"
 
+    Public is_only_absensi As Boolean = False
+
     Sub load_employee()
         Dim where_dephead As String = ""
 
@@ -134,6 +136,8 @@ Public Class FormEmpPerAppraisal
         If GridView.GetFocusedRowCellValue("id_employee") IsNot Nothing Then
             FormEmpPerAppraisalDet.is_dephead = is_dephead
             FormEmpPerAppraisalDet.is_hrd = is_hrd
+
+            FormEmpPerAppraisalDet.is_only_absensi = is_only_absensi
 
             FormEmpPerAppraisalDet.id_employee = GridView.GetFocusedRowCellValue("id_employee")
 

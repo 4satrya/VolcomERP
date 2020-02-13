@@ -1,4 +1,5 @@
-﻿Imports Microsoft.Office.Interop
+﻿Imports DevExpress.XtraReports.UI
+Imports Microsoft.Office.Interop
 
 Public Class FormEmpUniExpenseDet
     Public id_emp_uni_ex As String = "-1"
@@ -11,6 +12,8 @@ Public Class FormEmpUniExpenseDet
     Public id_departement As String = "-1"
     Public bof_column As String = get_setup_field("bof_column")
     Public bof_xls_so As String = get_setup_field("bof_xls_inv")
+
+    Private printed_name As String = ""
 
     Private Sub FormEmpUniExpenseDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewItemCat()
@@ -67,6 +70,8 @@ Public Class FormEmpUniExpenseDet
             id_departement = data.Rows(0)("id_departement").ToString
             TxtDepartement.Text = data.Rows(0)("departement").ToString
             SLECat.EditValue = data.Rows(0)("id_item_cat").ToString
+
+            printed_name = data.Rows(0)("printed_name").ToString
 
             'employee info
             If data.Rows(0)("id_so_status").ToString = "7" Then
@@ -216,8 +221,10 @@ Public Class FormEmpUniExpenseDet
                 rsv_stock.reservedStock(id_emp_uni_ex, 132)
 
                 'draft journal
-                Dim acc As New ClassAccounting()
-                acc.generateJournalSalesDraft(id_emp_uni_ex, "132")
+                If Not GridColumn7.SummaryItem.SummaryValue = 0 Then
+                    Dim acc As New ClassAccounting()
+                    acc.generateJournalSalesDraft(id_emp_uni_ex, "132")
+                End If
 
                 'submit mark
                 submit_who_prepared("132", id_emp_uni_ex, id_user)
@@ -342,29 +349,38 @@ Public Class FormEmpUniExpenseDet
         ReportEmpUniExpense.dt = GCData.DataSource
         Dim Report As New ReportEmpUniExpense()
 
-        ' '... 
-        ' ' creating and saving the view's layout to a new memory stream 
-        Dim str As System.IO.Stream
-        str = New System.IO.MemoryStream()
-        GVData.SaveLayoutToStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
-        str.Seek(0, System.IO.SeekOrigin.Begin)
-        Report.GVData.RestoreLayoutFromStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
-        str.Seek(0, System.IO.SeekOrigin.Begin)
-
-        'Grid Detail
-        ReportStyleGridview(Report.GVData)
-
         'Parse val
         'Report.LabelTitle.Text = "UNIFORM ORDER"
-        Report.LabelNumber.Text = TxtNumber.Text.ToUpper
-        Report.LabelNIK.Text = TxtNIP.Text.ToUpper
-        Report.LabelName.Text = TxtEmployeeName.Text.ToUpper
-        Report.LabelDate.Text = DECreated.Text.ToString
-        Report.LNote.Text = MENote.Text.ToString
+        Report.LabelCat.Text = SLECat.Text.ToUpper
+        Report.LabelDel.Text = TxtDel.Text.ToUpper
+        Report.LabelAcc.Text = TxtAccNo.Text.ToUpper + " - " + TxtAcc.Text.ToUpper
+        Report.LabelEmp.Text = TxtNIP.Text.ToUpper + " - " + TxtEmployeeName.Text.ToUpper
+        Report.LabelDepartement.Text = TxtDepartement.Text.ToUpper
+        Report.LabelPeriod.Text = DEStart.Text.ToUpper + " - " + DEEnd.Text.ToUpper
 
-        'Show the report's preview. 
-        Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
-        Tool.ShowPreviewDialog()
+        Report.LabelTitleNumber.Text = "NO. " + TxtNumber.Text.ToUpper
+
+        Report.LabelTitle.Text = printed_name
+        Report.LabelDate.Text = Date.Parse(DECreated.EditValue.ToString).ToString("dd MMMM yyyy")
+
+        Report.XrLabel34.Text = "Note : " + MENote.Text
+        Report.LabelSay.Text = "Say : " + ConvertCurrencyToEnglish(GridColumn7.SummaryItem.SummaryValue, get_setup_field("id_currency_default"))
+
+        If CheckEditPreview.EditValue = True Then
+            'Show the report's preview. 
+            Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
+            Tool.ShowPreviewDialog()
+        Else
+            Dim instance As New Printing.PrinterSettings
+            Dim DefaultPrinter As String = instance.PrinterName
+
+            ' THIS IS TO PRINT THE REPORT
+            Report.PrinterName = DefaultPrinter
+            Report.CreateDocument()
+            Report.PrintingSystem.ShowMarginsWarning = False
+            Report.Print()
+        End If
+
         Cursor = Cursors.Default
     End Sub
 

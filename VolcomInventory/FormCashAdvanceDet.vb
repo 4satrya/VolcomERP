@@ -31,6 +31,7 @@
         DEDueDate.EditValue = Now
         '
         TENumber.Text = "[auto generate]"
+        SLEPayFrom.EditValue = 11
         '
         If id_ca = "-1" Then 'new
             BMark.Enabled = False
@@ -139,9 +140,7 @@
                     is_no_schedule = True
                 End If
                 '
-                Console.WriteLine(query)
             Catch ex As Exception
-                Console.WriteLine(ex.ToString)
             End Try
         End If
     End Sub

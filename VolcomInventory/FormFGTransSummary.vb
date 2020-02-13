@@ -39,12 +39,89 @@
             GVData.BestFitColumns()
         ElseIf XtraTabControl.SelectedTabPageIndex = 1 Then
             If id_typ = "1" Then
-                GridColumnPriceDesign.VisibleIndex = GridColumnEndDesign.VisibleIndex + 1
+                GridColumnPriceDesign.Visible = True
+                GridColumnPriceDesignBeg.Visible = True
+                GridColumnPriceDesignRec.Visible = True
+                GridColumnPriceDesignTrf.Visible = True
+                GridColumnPriceDesignDel.Visible = True
+                GridColumnPriceDesignSal.Visible = True
+                GridColumnPriceDesignExp.Visible = True
+                GridColumnPriceDesignRet.Visible = True
+                GridColumnPriceDesignRetTrf.Visible = True
+                GridColumnPriceDesignAdjOut.Visible = True
+                GridColumnPriceDesignAdjIn.Visible = True
+                GridColumnPriceDesignRep.Visible = True
+                GridColumnPriceDesignRepRet.Visible = True
+
+                GridColumnCostDesign.Visible = False
+                GridColumnCostDesignBeg.Visible = False
+                GridColumnCostDesignRec.Visible = False
+                GridColumnCostDesignTrf.Visible = False
+                GridColumnCostDesignDel.Visible = False
+                GridColumnCostDesignSal.Visible = False
+                GridColumnCostDesignExp.Visible = False
+                GridColumnCostDesignRet.Visible = False
+                GridColumnCostDesignRetTrf.Visible = False
+                GridColumnCostDesignAdjOut.Visible = False
+                GridColumnCostDesignAdjIn.Visible = False
+                GridColumnCostDesignRep.Visible = False
+                GridColumnCostDesignRepRet.Visible = False
             ElseIf id_typ = "2" Then
-                GridColumnCostDesign.VisibleIndex = GridColumnEndDesign.VisibleIndex + 1
+                GridColumnPriceDesign.Visible = False
+                GridColumnPriceDesignBeg.Visible = False
+                GridColumnPriceDesignRec.Visible = False
+                GridColumnPriceDesignTrf.Visible = False
+                GridColumnPriceDesignDel.Visible = False
+                GridColumnPriceDesignSal.Visible = False
+                GridColumnPriceDesignExp.Visible = False
+                GridColumnPriceDesignRet.Visible = False
+                GridColumnPriceDesignRetTrf.Visible = False
+                GridColumnPriceDesignAdjOut.Visible = False
+                GridColumnPriceDesignAdjIn.Visible = False
+                GridColumnPriceDesignRep.Visible = False
+                GridColumnPriceDesignRepRet.Visible = False
+
+                GridColumnCostDesign.Visible = True
+                GridColumnCostDesignBeg.Visible = True
+                GridColumnCostDesignRec.Visible = True
+                GridColumnCostDesignTrf.Visible = True
+                GridColumnCostDesignDel.Visible = True
+                GridColumnCostDesignSal.Visible = True
+                GridColumnCostDesignExp.Visible = True
+                GridColumnCostDesignRet.Visible = True
+                GridColumnCostDesignRetTrf.Visible = True
+                GridColumnCostDesignAdjOut.Visible = True
+                GridColumnCostDesignAdjIn.Visible = True
+                GridColumnCostDesignRep.Visible = True
+                GridColumnCostDesignRepRet.Visible = True
             Else
                 GridColumnPriceDesign.Visible = False
+                GridColumnPriceDesignBeg.Visible = False
+                GridColumnPriceDesignRec.Visible = False
+                GridColumnPriceDesignTrf.Visible = False
+                GridColumnPriceDesignDel.Visible = False
+                GridColumnPriceDesignSal.Visible = False
+                GridColumnPriceDesignExp.Visible = False
+                GridColumnPriceDesignRet.Visible = False
+                GridColumnPriceDesignRetTrf.Visible = False
+                GridColumnPriceDesignAdjOut.Visible = False
+                GridColumnPriceDesignAdjIn.Visible = False
+                GridColumnPriceDesignRep.Visible = False
+                GridColumnPriceDesignRepRet.Visible = False
+
                 GridColumnCostDesign.Visible = False
+                GridColumnCostDesignBeg.Visible = False
+                GridColumnCostDesignRec.Visible = False
+                GridColumnCostDesignTrf.Visible = False
+                GridColumnCostDesignDel.Visible = False
+                GridColumnCostDesignSal.Visible = False
+                GridColumnCostDesignExp.Visible = False
+                GridColumnCostDesignRet.Visible = False
+                GridColumnCostDesignRetTrf.Visible = False
+                GridColumnCostDesignAdjOut.Visible = False
+                GridColumnCostDesignAdjIn.Visible = False
+                GridColumnCostDesignRep.Visible = False
+                GridColumnCostDesignRepRet.Visible = False
             End If
 
             Dim query As String = "CALL view_trans_summary_design('" + date_from_selected + "','" + date_until_selected + "'," + id_typ + ") "
@@ -179,6 +256,12 @@
             If qty = 0 Then
                 e.DisplayText = "-"
             End If
+        ElseIf e.Column.FieldName = "no" Then
+            Dim view As DevExpress.XtraGrid.Views.Grid.GridView = TryCast(sender, DevExpress.XtraGrid.Views.Grid.GridView)
+            If view.GroupedColumns.Count <> 0 AndAlso Not e.IsForGroupRow Then
+                Dim rowHandle As Integer = view.GetRowHandle(e.ListSourceRowIndex)
+                e.DisplayText = (view.GetRowGroupIndexByRowHandle(rowHandle) + 1).ToString()
+            End If
         End If
     End Sub
 
@@ -186,7 +269,7 @@
     Dim tot_end_design As Decimal
     Dim tot_sal_grp_design As Decimal
     Dim tot_end_grp_design As Decimal
-    Private Sub GVDesign_CustomSummaryCalculate(sender As Object, e As DevExpress.Data.CustomSummaryEventArgs) Handles GVDesign.CustomSummaryCalculate
+    Private Sub GVDesign_CustomSummaryCalculate(sender As Object, e As DevExpress.Data.CustomSummaryEventArgs)
         Dim summaryID As String = Convert.ToString(CType(e.Item, DevExpress.XtraGrid.GridSummaryItem).Tag)
         Dim View As DevExpress.XtraGrid.Views.Grid.GridView = CType(sender, DevExpress.XtraGrid.Views.Grid.GridView)
 
@@ -238,6 +321,15 @@
             Dim qty As Decimal = Convert.ToDecimal(e.Value)
             If qty = 0 Then
                 e.DisplayText = "-"
+            End If
+        ElseIf e.Column.FieldName = "no" Then
+            Dim view As DevExpress.XtraGrid.Views.Grid.GridView = TryCast(sender, DevExpress.XtraGrid.Views.Grid.GridView)
+            If view.GroupedColumns.Count <> 0 AndAlso Not e.IsForGroupRow Then
+                Dim rowHandle As Integer = view.GetRowHandle(e.ListSourceRowIndex)
+                e.DisplayText = (view.GetRowGroupIndexByRowHandle(rowHandle) + 1).ToString()
+            Else
+                Dim rowHandle As Integer = view.GetRowHandle(e.ListSourceRowIndex)
+                e.DisplayText = (rowHandle + 1).ToString()
             End If
         End If
     End Sub

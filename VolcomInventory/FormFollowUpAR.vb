@@ -54,6 +54,7 @@
         LEFT JOIN tb_follow_up_ar far ON far.id_comp_group = c.id_comp_group AND far.due_date = sp.sales_pos_due_date
         WHERE sp.is_close_rec_payment=2 AND sp.id_report_status=6
         AND sp.sales_pos_total>0
+        AND sp.report_mark_type!=66 AND sp.report_mark_type!=67 AND sp.report_mark_type!=118  
         AND DATEDIFF(NOW(),sp.sales_pos_due_date)>0
         " + cond + "
         GROUP BY c.id_comp_group, sp.sales_pos_due_date, far.id_follow_up_ar
@@ -149,7 +150,13 @@
 
                 For i = 0 To GVActive.RowCount - 1
                     If GVActive.IsValidRowHandle(i) Then
-                        query_det += "(" + id_follow_up_recap + ", " + GVActive.GetRowCellValue(i, "id_comp_group").ToString + ", '" + addSlashes(GVActive.GetRowCellValue(i, "group").ToString) + "', " + decimalSQL(GVActive.GetRowCellValue(i, "amount").ToString) + ", '" + Date.Parse(GVActive.GetRowCellValue(i, "sales_pos_due_date")).ToString("yyyy-MM-dd") + "', '" + Date.Parse(GVActive.GetRowCellValue(i, "follow_up_date")).ToString("yyyy-MM-dd") + "', '" + addSlashes(GVActive.GetRowCellValue(i, "follow_up").ToString) + "', '" + addSlashes(GVActive.GetRowCellValue(i, "follow_up_result").ToString) + "'), "
+                        Dim follow_up_date As String = "NULL"
+
+                        If Not GVActive.GetRowCellValue(i, "follow_up_date").ToString = "" Then
+                            follow_up_date = "'" + Date.Parse(GVActive.GetRowCellValue(i, "follow_up_date")).ToString("yyyy-MM-dd") + "'"
+                        End If
+
+                        query_det += "(" + id_follow_up_recap + ", " + GVActive.GetRowCellValue(i, "id_comp_group").ToString + ", '" + addSlashes(GVActive.GetRowCellValue(i, "group").ToString) + "', " + decimalSQL(GVActive.GetRowCellValue(i, "amount").ToString) + ", '" + Date.Parse(GVActive.GetRowCellValue(i, "sales_pos_due_date")).ToString("yyyy-MM-dd") + "', " + follow_up_date + ", '" + addSlashes(GVActive.GetRowCellValue(i, "follow_up").ToString) + "', '" + addSlashes(GVActive.GetRowCellValue(i, "follow_up_result").ToString) + "'), "
                     End If
                 Next
 

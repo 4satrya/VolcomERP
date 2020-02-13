@@ -715,7 +715,7 @@ Partial Class FormFGLineList
         Me.Name = "FormFGLineList"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Line List"
+        Me.Text = "Line Sheet"
         CType(Me.PanelControlNavLineList, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControlNavLineList.ResumeLayout(False)
         CType(Me.PCNavLineList, System.ComponentModel.ISupportInitialize).EndInit()

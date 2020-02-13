@@ -17,6 +17,20 @@
 
     Private Sub FormEmpLeaveDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         load_form()
+
+        If FormEmpLeave.is_single_user And id_emp_leave = "-1" Then
+            Dim data_emp As DataTable = execute_query("SELECT *, (SELECT departement FROM tb_m_departement WHERE id_departement = tb_m_employee.id_departement) AS departement FROM tb_m_employee WHERE id_employee = " + id_employee_user, -1, True, "", "", "", "")
+
+            id_employee = id_employee_user
+            TEEmployeeCode.Text = data_emp.Rows(0)("employee_code").ToString
+            TEEmployeeName.Text = data_emp.Rows(0)("employee_name").ToString
+            TEDept.Text = data_emp.Rows(0)("departement").ToString
+            TEPosition.Text = data_emp.Rows(0)("employee_position").ToString
+            DEJoinDate.EditValue = data_emp.Rows(0)("employee_join_date")
+            load_emp_detail()
+
+            BPickEmployee.Enabled = False
+        End If
     End Sub
 
     Sub load_form()

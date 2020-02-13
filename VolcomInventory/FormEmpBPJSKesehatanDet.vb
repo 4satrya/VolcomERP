@@ -84,7 +84,7 @@
         data.Columns.Add("id_employee_status", GetType(String))
         data.Columns.Add("employee_status", GetType(String))
         data.Columns.Add("fixed_salary", GetType(Integer))
-        data.Columns.Add("bpjs_kesehatan_contribution", GetType(Integer))
+        data.Columns.Add("bpjs_kesehatan_contribution", GetType(Decimal))
 
         GCInput.DataSource = data
 
@@ -148,7 +148,7 @@
             End If
 
             Dim query As String = "
-                SELECT emp.id_departement, emp.id_departement_sub, dep.departement, IF(emp.id_departement = 17, dep_sub.departement_sub, dep.departement) AS departement_sub, emp.id_employee, emp.employee_code, emp.employee_name, emp.employee_position, emp.employee_bpjs_kesehatan, DATE_FORMAT(emp.employee_dob, '%d %M %Y') AS employee_dob, emp.id_employee_status, sts.employee_status, IF(emp.id_employee_status = 3, (emp.basic_salary * dep.total_workdays), (emp.basic_salary + emp.allow_job + emp.allow_meal + emp.allow_trans)) AS fixed_salary, CAST(IF((SELECT fixed_salary) < py.ump, (py.ump * 0.01), IF((SELECT fixed_salary) >= py.bpjs_max, py.bpjs_max * 0.01, (SELECT fixed_salary) * 0.01)) AS DECIMAL(13, 0)) AS bpjs_kesehatan_contribution
+                SELECT emp.id_departement, emp.id_departement_sub, dep.departement, IF(emp.id_departement = 17, dep_sub.departement_sub, dep.departement) AS departement_sub, emp.id_employee, emp.employee_code, emp.employee_name, emp.employee_position, emp.employee_bpjs_kesehatan, DATE_FORMAT(emp.employee_dob, '%d %M %Y') AS employee_dob, emp.id_employee_status, sts.employee_status, IF(emp.id_employee_status = 3, (emp.basic_salary * dep.total_workdays), (emp.basic_salary + emp.allow_job + emp.allow_meal + emp.allow_trans)) AS fixed_salary, CAST(IF((SELECT fixed_salary) < py.ump, (py.ump * 0.01), IF((SELECT fixed_salary) >= py.bpjs_max, py.bpjs_max * 0.01, (SELECT fixed_salary) * 0.01)) AS DECIMAL(13, 2)) AS bpjs_kesehatan_contribution
                 FROM tb_m_employee AS emp
                 LEFT JOIN tb_m_departement AS dep ON emp.id_departement = dep.id_departement
                 LEFT JOIN tb_m_departement_sub AS dep_sub ON emp.id_departement_sub = dep_sub.id_departement_sub
@@ -347,7 +347,7 @@
         data.Columns.Add("employee_salary", GetType(Decimal))
         data.Columns.Add("company_contribution", GetType(Decimal))
         data.Columns.Add("employee_contribution", GetType(Decimal))
-        data.Columns.Add("total_contribution", GetType(Decimal))
+        data.Columns.Add("total_contribution", GetType(Integer))
         data.Columns.Add("class", GetType(String))
 
         'departement
@@ -358,7 +358,7 @@
         data_dept.Columns.Add("departement", GetType(String))
         data_dept.Columns.Add("company_contribution", GetType(Decimal))
         data_dept.Columns.Add("employee_contribution", GetType(Decimal))
-        data_dept.Columns.Add("total_contribution", GetType(Decimal))
+        data_dept.Columns.Add("total_contribution", GetType(Integer))
 
         For i = 0 To GVInput.RowCount - 1
             If GVInput.IsValidRowHandle(i) Then
@@ -375,6 +375,8 @@
                 Dim employee_contribution As String = GVInput.GetRowCellValue(i, "bpjs_kesehatan_contribution")
                 Dim total_contribution As String = (GVInput.GetRowCellValue(i, "bpjs_kesehatan_contribution") * 100 * 0.04) + GVInput.GetRowCellValue(i, "bpjs_kesehatan_contribution")
                 Dim bpjs_class As String = If(GVInput.GetRowCellValue(i, "fixed_salary") > Decimal.Parse(bpjs_max_kelas_2), "I", "II")
+
+                total_contribution = Decimal.Round(Decimal.Parse(total_contribution.ToString)).ToString
 
                 data.Rows.Add(id_departement, departement, departement_sub, no, employee_name, employee_bpjs_kesehatan, employee_dob, employee_salary, company_contribution, employee_contribution, total_contribution, bpjs_class)
 

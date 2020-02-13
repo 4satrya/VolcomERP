@@ -214,6 +214,10 @@
         'check empty
         Dim check_blank As String = ""
 
+        If GVScheduleAfter.RowCount <= 0 Then
+            check_blank = "Please do not leave shift code blank."
+        End If
+
         For i As Integer = 0 To GVScheduleAfter.RowCount - 1
             For j As Integer = 0 To GVScheduleAfter.Columns.Count - 1
                 If Not (GVScheduleAfter.Columns(j).FieldName = "id_employee" Or GVScheduleAfter.Columns(j).FieldName = "employee_code" Or GVScheduleAfter.Columns(j).FieldName = "employee_name") Then
@@ -286,6 +290,12 @@
             End If
         Else
             stopCustom(check_blank)
+
+            'select date & employee
+            If GVScheduleAfter.RowCount <= 0 Then
+                FormEmpScheduleTableSet.opt = "2"
+                FormEmpScheduleTableSet.ShowDialog()
+            End If
         End If
         Cursor = Cursors.Default
     End Sub

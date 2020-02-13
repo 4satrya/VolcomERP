@@ -29,6 +29,13 @@ Module Common
         emp_image_path = get_setup_field("pic_path_emp") & "\"
     End Sub
 
+    Sub set_min_date_reference(ByRef date_edit As DateEdit)
+        Dim q As String = "SELECT DATE_ADD(MAX(date_until),INTERVAL 1 DAY) AS min_date FROM `tb_closing_log` 
+WHERE note='Closing End'"
+        Dim min_date As Date = Date.Parse(execute_query(q, 0, True, "", "", "", "").ToString)
+        date_edit.Properties.MinValue = min_date
+    End Sub
+
     '============ = OPT CODE HEAD ======================================
     Function get_setup_field(ByVal field As String)
         'opt as var choose field
@@ -6862,4 +6869,13 @@ WHERE b.report_mark_type='" & report_mark_type_to_cancel & "' AND a.id_mark_asg!
             Return True
         End If
     End Function
+    '
+    Public Sub onlyPreview(ByRef tool As ReportPrintTool)
+        tool.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.ExportFile, CommandVisibility.None)
+        tool.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.SendFile, CommandVisibility.None)
+        tool.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.Print, CommandVisibility.None)
+        tool.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.PrintDirect, CommandVisibility.None)
+        tool.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.Save, CommandVisibility.None)
+        tool.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.Open, CommandVisibility.None)
+    End Sub
 End Module

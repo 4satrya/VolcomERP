@@ -38,6 +38,18 @@
                         FormFGStock.show_cost = True
                     End If
                 End If
+
+                'new soh
+                FormFGStock.GVSOH.Columns("unit_cost").VisibleIndex = FormFGStock.GVSOH.Columns("amount").VisibleIndex + 1
+                FormFGStock.GVSOH.Columns("unit_cost").OptionsColumn.ShowInCustomizationForm = True
+                FormFGStock.GVSOH.Columns("amount_cost").VisibleIndex = FormFGStock.GVSOH.Columns("unit_cost").VisibleIndex + 1
+                FormFGStock.GVSOH.Columns("amount_cost").OptionsColumn.ShowInCustomizationForm = True
+                FormFGStock.gridBandTotal.Columns.Add(FormFGStock.GVSOHCode.Columns("unit_cost"))
+                FormFGStock.GVSOHCode.Columns("unit_cost").VisibleIndex = FormFGStock.GVSOHCode.Columns("amount").VisibleIndex + 1
+                FormFGStock.GVSOHCode.Columns("unit_cost").OptionsColumn.ShowInCustomizationForm = True
+                FormFGStock.gridBandTotal.Columns.Add(FormFGStock.GVSOHCode.Columns("amount_cost"))
+                FormFGStock.GVSOHCode.Columns("amount_cost").VisibleIndex = FormFGStock.GVSOHCode.Columns("unit_cost").VisibleIndex + 1
+                FormFGStock.GVSOHCode.Columns("amount_cost").OptionsColumn.ShowInCustomizationForm = True
             ElseIf type = "3" Then
                 'cancell order by MD
                 FormSalesOrder.id_user_special = data.Rows(0)("id_user").ToString

@@ -2852,7 +2852,6 @@ Public Class FormImportExcel
                     LEFT JOIN tb_m_departement dep ON dep.id_departement = emp.id_departement
                     LEFT JOIN tb_m_departement_sub dep_sub ON dep_sub.id_departement_sub = emp.id_departement_sub
                     LEFT JOIN tb_lookup_employee_status sts ON emp.id_employee_status = sts.id_employee_status
-                    WHERE emp.id_employee_active = '1'
                 "
                 Dim dt As DataTable = execute_query(queryx, -1, True, "", "", "", "")
 

@@ -20,6 +20,8 @@
     Public is_md As String = "1"
     Public id_pop_up As String = "-1"
 
+    Public from_menu As String = ""
+
     'load
     Private Sub FormSeason_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         viewRange()
@@ -175,6 +177,7 @@
             mainSubPageChanged()
         Else 'Orign Season
             ''MsgBox("Season Orign")
+            checkFormAccess(Name)
             button_main(bnew_active21, bedit_active21, bdel_active21)
         End If
     End Sub
@@ -184,6 +187,11 @@
             ''MsgBox("Range")
             checkFormAccess(Name)
             button_main(bnew_active11, bedit_active11, bdel_active11)
+
+            'check from menu
+            If from_menu = "delivery" Then
+                button_main("0", "0", "0")
+            End If
         ElseIf XTCSeason.SelectedTabPageIndex = 1 Then 'season
             ''MsgBox("Season")
             checkFormAccess(Name)
@@ -192,6 +200,11 @@
             '' MsgBox("Delivery")
             checkFormAccess(Name)
             button_main(bnew_active13, bedit_active13, bdel_active13)
+
+            'check from menu
+            If from_menu = "season" Then
+                button_main("0", "0", "0")
+            End If
         End If
     End Sub
     'Event Sub Page Changed
@@ -337,6 +350,11 @@
     Private Sub GVRange_FocusedRowChanged(sender As Object, e As DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs) Handles GVRange.FocusedRowChanged
         getSeasonInformation()
         viewDelivery(id_season)
+
+        'check from menu
+        If from_menu = "delivery" Then
+            button_main("0", "0", "0")
+        End If
     End Sub
 
     Private Sub AddOrigin_Click(sender As Object, e As EventArgs) Handles AddOrigin.Click

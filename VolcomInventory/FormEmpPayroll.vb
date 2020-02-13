@@ -7,8 +7,6 @@
     Public no_column As String = 16
     '
     Private Sub FormEmpPayroll_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        BtnViewJournal.Visible = False
-
         load_payroll()
     End Sub
     '
@@ -132,7 +130,7 @@
                 BReset.Visible = False
                 BSubmit.Visible = True
                 CMDelEmp.Enabled = True
-                BtnViewJournal.Enabled = False
+                BtnViewJournal.Visible = False
             Else
                 BGetEmployee.Enabled = False
                 BRemoveEmployee.Enabled = False
@@ -145,7 +143,7 @@
                 'BReport.Enabled = True
                 BPrintSlip.Enabled = False
                 SBSendSlip.Enabled = False
-                BtnViewJournal.Enabled = False
+                BtnViewJournal.Visible = False
                 BPrint.Enabled = True
                 BReset.Visible = True
                 BSubmit.Visible = False
@@ -155,7 +153,7 @@
             If id_report_status = "6" Then
                 BPrintSlip.Enabled = True
                 SBSendSlip.Enabled = True
-                BtnViewJournal.Enabled = True
+                BtnViewJournal.Visible = True
                 BReset.Visible = False
             End If
 
@@ -1014,7 +1012,7 @@
 
             Dim rmt As DataTable = execute_query("SELECT rm.id_user, rm.report_number FROM tb_report_mark rm WHERE rm.report_mark_type = 192 AND rm.id_report = '" + id_payroll + "' AND rm.id_report_status = 1", -1, True, "", "", "", "")
 
-            Dim insert_jurnal As String = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created, acc_trans_note, id_report_status) VALUES ('" + header_number_acc("1") + "', '" + rmt.Rows(0)("report_number").ToString + "', '25', '" + rmt.Rows(0)("id_user").ToString + "', (SELECT eff_trans_date FROM tb_emp_payroll WHERE id_payroll = " + id_payroll + "), 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
+            Dim insert_jurnal As String = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created, date_reference, acc_trans_note, id_report_status) VALUES ('" + header_number_acc("1") + "', '" + rmt.Rows(0)("report_number").ToString + "', '25', '" + rmt.Rows(0)("id_user").ToString + "', NOW(), (SELECT eff_trans_date FROM tb_emp_payroll WHERE id_payroll = " + id_payroll + "), 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
 
             Dim id_acc_trans As String = execute_query(insert_jurnal, 0, True, "", "", "", "")
 
@@ -1170,6 +1168,33 @@
             End If
 
             execute_non_query(insert_detail.Substring(0, insert_detail.Length - 2), True, "", "", "", "")
+        End If
+    End Sub
+
+    Sub insert_expense(ByVal id_payroll As String)
+        Dim is_thr As String = execute_query("SELECT is_thr FROM tb_emp_payroll_type WHERE id_payroll_type = (SELECT id_payroll_type FROM tb_emp_payroll WHERE id_payroll = " + id_payroll + ")", 0, True, "", "", "", "")
+
+        If is_thr = "2" Then
+            Dim payroll_det As DataTable = execute_query("SELECT DATE_FORMAT(periode_end, '%Y') AS year FROM tb_emp_payroll WHERE id_payroll = " + id_payroll, -1, True, "", "", "", "")
+
+            Dim data_sum As DataTable = execute_query("CALL view_payroll_sum(" + id_payroll + ")", -1, True, "", "", "", "")
+
+            Dim year As String = execute_query("SELECT IFNULL((SELECT id_b_expense_opex FROM tb_b_expense_opex WHERE `year` = '" + payroll_det.Rows(0)("year").ToString + "' AND id_item_cat_main = '9'), 0) AS `year`", 0, True, "", "", "", "")
+
+            If Not year = "0" Then
+                Dim query As String = "INSERT INTO tb_b_expense_opex_trans (id_b_expense_opex, is_po, id_departement, date_trans, value, id_item, id_report, report_mark_type, note) VALUES "
+
+                For i = 0 To data_sum.Rows.Count - 1
+                    Dim id_departement As String = data_sum.Rows(i)("id_departement").ToString
+                    Dim salary As Decimal = data_sum.Rows(i)("salary") - data_sum.Rows(i)("d_other")
+
+                    query += "(" + year + ", 2, " + id_departement + ", NOW(), " + decimalSQL(salary) + ", NULL, " + id_payroll + ", 192, 'Biaya Gaji'), "
+                Next
+
+                query = query.Substring(0, query.Length - 2)
+
+                execute_non_query(query, True, "", "", "", "")
+            End If
         End If
     End Sub
 

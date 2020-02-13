@@ -212,5 +212,9 @@
                 Me.XPResume.Controls.Add(tb_tm)
             End If
         Next
+
+        If FormEmpPerAppraisalDet.is_only_absensi Then
+            SubBandTitle.Visible = False
+        End If
     End Sub
 End Class

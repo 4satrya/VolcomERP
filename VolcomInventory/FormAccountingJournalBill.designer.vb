@@ -19,12 +19,13 @@ Partial Class FormAccountingJournalBill
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormAccountingJournalBill))
-        Me.BalanceMenu = New System.Windows.Forms.ContextMenuStrip()
+        Me.BalanceMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.SMBalance = New System.Windows.Forms.ToolStripMenuItem()
-        Me.LargeImageCollection = New DevExpress.Utils.ImageCollection()
-        Me.ImgBut = New DevExpress.Utils.ImageCollection()
-        Me.EPJournal = New System.Windows.Forms.ErrorProvider()
+        Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
+        Me.ImgBut = New DevExpress.Utils.ImageCollection(Me.components)
+        Me.EPJournal = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.GCJournalDet = New DevExpress.XtraGrid.GridControl()
         Me.GVJournalDet = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -42,6 +43,8 @@ Partial Class FormAccountingJournalBill
         Me.GridColumnIdReport = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnReportMarkType = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnReff = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn14 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnNumberReff = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdCompany = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RISLEVendor = New DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit()
@@ -81,8 +84,6 @@ Partial Class FormAccountingJournalBill
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.LTransNo = New DevExpress.XtraEditors.LabelControl()
-        Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn14 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.BalanceMenu.SuspendLayout()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ImgBut, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -227,7 +228,7 @@ Partial Class FormAccountingJournalBill
         Me.GridColumn3.FieldName = "note"
         Me.GridColumn3.Name = "GridColumn3"
         Me.GridColumn3.Visible = True
-        Me.GridColumn3.VisibleIndex = 3
+        Me.GridColumn3.VisibleIndex = 4
         Me.GridColumn3.Width = 300
         '
         'GridColumn4
@@ -244,7 +245,7 @@ Partial Class FormAccountingJournalBill
         Me.GridColumn4.Name = "GridColumn4"
         Me.GridColumn4.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "debit", "{0:N2}")})
         Me.GridColumn4.Visible = True
-        Me.GridColumn4.VisibleIndex = 4
+        Me.GridColumn4.VisibleIndex = 5
         Me.GridColumn4.Width = 138
         '
         'RepositoryItemTextEdit1
@@ -273,7 +274,7 @@ Partial Class FormAccountingJournalBill
         Me.GridColumn5.Name = "GridColumn5"
         Me.GridColumn5.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "credit", "{0:N2}")})
         Me.GridColumn5.Visible = True
-        Me.GridColumn5.VisibleIndex = 5
+        Me.GridColumn5.VisibleIndex = 6
         Me.GridColumn5.Width = 134
         '
         'RepositoryItemTextEdit2
@@ -329,6 +330,18 @@ Partial Class FormAccountingJournalBill
         Me.GridColumnReff.Visible = True
         Me.GridColumnReff.VisibleIndex = 7
         '
+        'GridColumn14
+        '
+        Me.GridColumn14.Caption = "GridColumn14"
+        Me.GridColumn14.FieldName = "report_mark_type_ref"
+        Me.GridColumn14.Name = "GridColumn14"
+        '
+        'GridColumn9
+        '
+        Me.GridColumn9.Caption = "GridColumn9"
+        Me.GridColumn9.FieldName = "id_report_ref"
+        Me.GridColumn9.Name = "GridColumn9"
+        '
         'GridColumnNumberReff
         '
         Me.GridColumnNumberReff.Caption = "Report Number Reff"
@@ -339,12 +352,12 @@ Partial Class FormAccountingJournalBill
         '
         'GridColumnIdCompany
         '
-        Me.GridColumnIdCompany.Caption = "Vendor"
+        Me.GridColumnIdCompany.Caption = "CC"
         Me.GridColumnIdCompany.ColumnEdit = Me.RISLEVendor
         Me.GridColumnIdCompany.FieldName = "id_comp"
         Me.GridColumnIdCompany.Name = "GridColumnIdCompany"
         Me.GridColumnIdCompany.Visible = True
-        Me.GridColumnIdCompany.VisibleIndex = 6
+        Me.GridColumnIdCompany.VisibleIndex = 3
         '
         'RISLEVendor
         '
@@ -721,18 +734,6 @@ Partial Class FormAccountingJournalBill
         Me.LTransNo.Size = New System.Drawing.Size(23, 13)
         Me.LTransNo.TabIndex = 0
         Me.LTransNo.Text = "Date"
-        '
-        'GridColumn9
-        '
-        Me.GridColumn9.Caption = "GridColumn9"
-        Me.GridColumn9.FieldName = "id_report_ref"
-        Me.GridColumn9.Name = "GridColumn9"
-        '
-        'GridColumn14
-        '
-        Me.GridColumn14.Caption = "GridColumn14"
-        Me.GridColumn14.FieldName = "report_mark_type_ref"
-        Me.GridColumn14.Name = "GridColumn14"
         '
         'FormAccountingJournalBill
         '

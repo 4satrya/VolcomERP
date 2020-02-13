@@ -425,7 +425,7 @@
         WHERE 1=1 "
         query += condition
         query += "GROUP BY IF(dsg.is_old_design=1,p.product_full_code, IF(ISNULL(u.is_unique_report), CONCAT(p.product_full_code,ddc.pl_sales_order_del_det_counting), p.product_full_code))
-        ORDER BY dsg.design_display_name ASC, p.product_full_code ASC "
+        ORDER BY pt.design_price_type ASC, dsg.design_display_name ASC, p.product_full_code ASC "
         Return query
     End Function
 
@@ -457,7 +457,7 @@
         WHERE 1=1 "
         query += condition
         query += "GROUP BY p.id_product
-        ORDER BY dsg.design_display_name ASC, p.product_full_code ASC "
+        ORDER BY pt.design_price_type ASC, dsg.design_display_name ASC, p.product_full_code ASC "
         Return query
     End Function
 

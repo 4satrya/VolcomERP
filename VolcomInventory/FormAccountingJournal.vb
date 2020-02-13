@@ -138,4 +138,8 @@ LEFT JOIN tb_m_comp comp ON comp.id_comp=a.id_comp"
         showpopup.show()
         Cursor = Cursors.Default
     End Sub
+
+    Private Sub GVAccTrans_DoubleClick(sender As Object, e As EventArgs) Handles GVAccTrans.DoubleClick
+        FormMain.but_edit()
+    End Sub
 End Class

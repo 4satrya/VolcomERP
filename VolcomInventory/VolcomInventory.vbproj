@@ -2262,6 +2262,12 @@
     <Compile Include="FormItemSubCatDet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormLineList.Designer.vb">
+      <DependentUpon>FormLineList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormLineList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormListPOMat.Designer.vb">
       <DependentUpon>FormListPOMat.vb</DependentUpon>
     </Compile>
@@ -2620,6 +2626,24 @@
       <DependentUpon>FormOutlet.vb</DependentUpon>
     </Compile>
     <Compile Include="FormOutlet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPaymentMissing.Designer.vb">
+      <DependentUpon>FormPaymentMissing.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormPaymentMissing.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPaymentMissingAdd.Designer.vb">
+      <DependentUpon>FormPaymentMissingAdd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormPaymentMissingAdd.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPaymentMissingDet.Designer.vb">
+      <DependentUpon>FormPaymentMissingDet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormPaymentMissingDet.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormPopUpDept.Designer.vb">
@@ -3136,6 +3160,12 @@
       <DependentUpon>FormReportBudget.vb</DependentUpon>
     </Compile>
     <Compile Include="FormReportBudget.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReportBudgetList.Designer.vb">
+      <DependentUpon>FormReportBudgetList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormReportBudgetList.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormReportEstWHInQty.Designer.vb">
@@ -6813,6 +6843,12 @@
     <Compile Include="ReportFGMissingInvoice.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ReportFGPODP.Designer.vb">
+      <DependentUpon>ReportFGPODP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportFGPODP.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ReportFGProposePrice.Designer.vb">
       <DependentUpon>ReportFGProposePrice.vb</DependentUpon>
     </Compile>
@@ -7173,6 +7209,12 @@
     <Compile Include="ReportOutboundManifest.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ReportPaymentMissing.Designer.vb">
+      <DependentUpon>ReportPaymentMissing.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportPaymentMissing.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ReportPayrollAll.Designer.vb">
       <DependentUpon>ReportPayrollAll.vb</DependentUpon>
     </Compile>
@@ -7429,6 +7471,12 @@
     <Compile Include="ReportSalesDelOrderSlip.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ReportSalesInv.Designer.vb">
+      <DependentUpon>ReportSalesInv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportSalesInv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ReportSalesInvoceDelSlip.Designer.vb">
       <DependentUpon>ReportSalesInvoceDelSlip.vb</DependentUpon>
     </Compile>
@@ -7451,6 +7499,12 @@
       <DependentUpon>ReportSalesInvoiceNew.vb</DependentUpon>
     </Compile>
     <Compile Include="ReportSalesInvoiceNew.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportSalesInvReport.Designer.vb">
+      <DependentUpon>ReportSalesInvReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportSalesInvReport.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ReportSalesOrder.Designer.vb">
@@ -8803,6 +8857,9 @@
     <EmbeddedResource Include="FormItemSubCatDet.resx">
       <DependentUpon>FormItemSubCatDet.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormLineList.resx">
+      <DependentUpon>FormLineList.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormListPOMat.resx">
       <DependentUpon>FormListPOMat.vb</DependentUpon>
     </EmbeddedResource>
@@ -8982,6 +9039,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormOutlet.resx">
       <DependentUpon>FormOutlet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPaymentMissing.resx">
+      <DependentUpon>FormPaymentMissing.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPaymentMissingAdd.resx">
+      <DependentUpon>FormPaymentMissingAdd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPaymentMissingDet.resx">
+      <DependentUpon>FormPaymentMissingDet.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormPopUpDept.resx">
       <DependentUpon>FormPopUpDept.vb</DependentUpon>
@@ -9241,6 +9307,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormReportBudget.resx">
       <DependentUpon>FormReportBudget.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormReportBudgetList.resx">
+      <DependentUpon>FormReportBudgetList.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormReportEstWHInQty.resx">
       <DependentUpon>FormReportEstWHInQty.vb</DependentUpon>
@@ -11507,6 +11576,9 @@
       <DependentUpon>ReportFGMissingInvoice.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportFGPODP.resx">
+      <DependentUpon>ReportFGPODP.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportFGProposePrice.resx">
       <DependentUpon>ReportFGProposePrice.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -11714,6 +11786,9 @@
     <EmbeddedResource Include="ReportOutboundManifest.resx">
       <DependentUpon>ReportOutboundManifest.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportPaymentMissing.resx">
+      <DependentUpon>ReportPaymentMissing.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportPayrollAll.resx">
       <DependentUpon>ReportPayrollAll.vb</DependentUpon>
     </EmbeddedResource>
@@ -11870,6 +11945,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportSalesInvoiceNew.resx">
       <DependentUpon>ReportSalesInvoiceNew.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportSalesInvReport.resx">
+      <DependentUpon>ReportSalesInvReport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportSalesOrder.resx">
       <DependentUpon>ReportSalesOrder.vb</DependentUpon>

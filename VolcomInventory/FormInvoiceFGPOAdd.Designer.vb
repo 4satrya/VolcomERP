@@ -25,7 +25,7 @@ Partial Class FormInvoiceFGPOAdd
         Me.BPick = New DevExpress.XtraEditors.SimpleButton()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
-        Me.SLEFGPO = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.SLEReport = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -73,7 +73,7 @@ Partial Class FormInvoiceFGPOAdd
         Me.LabelControl15 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.PanelControl7, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl7.SuspendLayout()
-        CType(Me.SLEFGPO.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SLEReport.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEInfoDesign.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XTCAdd, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -151,14 +151,14 @@ Partial Class FormInvoiceFGPOAdd
         Me.LabelControl2.TabIndex = 6
         Me.LabelControl2.Text = "Description"
         '
-        'SLEFGPO
+        'SLEReport
         '
-        Me.SLEFGPO.Location = New System.Drawing.Point(248, 18)
-        Me.SLEFGPO.Name = "SLEFGPO"
-        Me.SLEFGPO.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.SLEFGPO.Properties.View = Me.GridView1
-        Me.SLEFGPO.Size = New System.Drawing.Size(243, 20)
-        Me.SLEFGPO.TabIndex = 1
+        Me.SLEReport.Location = New System.Drawing.Point(248, 18)
+        Me.SLEReport.Name = "SLEReport"
+        Me.SLEReport.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEReport.Properties.View = Me.GridView1
+        Me.SLEReport.Size = New System.Drawing.Size(243, 20)
+        Me.SLEReport.TabIndex = 1
         '
         'GridView1
         '
@@ -241,7 +241,7 @@ Partial Class FormInvoiceFGPOAdd
         Me.XTPFGPO.Controls.Add(Me.LabelControl1)
         Me.XTPFGPO.Controls.Add(Me.LabelControl2)
         Me.XTPFGPO.Controls.Add(Me.TEInfoDesign)
-        Me.XTPFGPO.Controls.Add(Me.SLEFGPO)
+        Me.XTPFGPO.Controls.Add(Me.SLEReport)
         Me.XTPFGPO.Name = "XTPFGPO"
         Me.XTPFGPO.Size = New System.Drawing.Size(498, 245)
         Me.XTPFGPO.Text = "FGPO"
@@ -709,7 +709,7 @@ Partial Class FormInvoiceFGPOAdd
         Me.Text = "Add Item"
         CType(Me.PanelControl7, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl7.ResumeLayout(False)
-        CType(Me.SLEFGPO.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SLEReport.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEInfoDesign.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XTCAdd, System.ComponentModel.ISupportInitialize).EndInit()
@@ -746,7 +746,7 @@ Partial Class FormInvoiceFGPOAdd
     Friend WithEvents BPick As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
-    Friend WithEvents SLEFGPO As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents SLEReport As DevExpress.XtraEditors.SearchLookUpEdit
     Friend WithEvents GridView1 As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn2 As DevExpress.XtraGrid.Columns.GridColumn

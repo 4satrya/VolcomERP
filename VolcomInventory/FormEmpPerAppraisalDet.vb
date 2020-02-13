@@ -2,6 +2,8 @@
     Public is_dephead As String = "-1"
     Public is_hrd As String = "-1"
 
+    Public is_only_absensi As Boolean = False
+
     Public id_employee As Integer = 0
 
     Public grup_penilaian As Integer = 0
@@ -191,28 +193,51 @@
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
         'late, minus work
+        Dim tb_attn As String = "
+            (SELECT * FROM tb_emp_attn WHERE id_employee LIKE '" & id_employee.ToString & "' AND DATE(`datetime`) >= DATE_ADD('" & Date.Parse(TEStartPeriod.EditValue.ToString).ToString("yyyy-MM-dd") & "', INTERVAL -1 DAY) AND DATE(`datetime`) <= DATE_ADD('" & Date.Parse(TEEndPeriod.EditValue.ToString).AddDays(-45).ToString("yyyy-MM-dd") & "', INTERVAL 1 DAY))
+            UNION ALL
+            (SELECT 0 AS id_emp_attn, 0 AS id_fingerprint, e.employee_code, d.id_employee, d.time_in AS `datetime`, 1 AS type_log, 0 AS scan_method
+            FROM `tb_emp_attn_input_det` AS d
+            LEFT JOIN `tb_emp_attn_input` AS a ON d.id_emp_attn_input = a.id_emp_attn_input
+            LEFT JOIN `tb_m_employee` AS e ON d.id_employee = e.id_employee
+            WHERE d.id_departement = 17 AND d.id_employee LIKE '" & id_employee.ToString & "' AND d.date >= DATE_ADD('" & Date.Parse(TEStartPeriod.EditValue.ToString).ToString("yyyy-MM-dd") & "', INTERVAL 1 DAY) AND d.date <= DATE_ADD('" & Date.Parse(TEEndPeriod.EditValue.ToString).AddDays(-45).ToString("yyyy-MM-dd") & "', INTERVAL -1 DAY))
+            UNION ALL
+            (SELECT 0 AS id_emp_attn, 0 AS id_fingerprint, e.employee_code, d.id_employee, d.time_out AS `datetime`, 2 AS type_log, 0 AS scan_method
+            FROM `tb_emp_attn_input_det` AS d
+            LEFT JOIN `tb_emp_attn_input` AS a ON d.id_emp_attn_input = a.id_emp_attn_input
+            LEFT JOIN `tb_m_employee` AS e ON d.id_employee = e.id_employee
+            WHERE d.id_departement = 17 AND d.id_employee LIKE '" & id_employee.ToString & "' AND d.date >= DATE_ADD('" & Date.Parse(TEStartPeriod.EditValue.ToString).ToString("yyyy-MM-dd") & "', INTERVAL 1 DAY) AND d.date <= DATE_ADD('" & Date.Parse(TEEndPeriod.EditValue.ToString).AddDays(-45).ToString("yyyy-MM-dd") & "', INTERVAL -1 DAY))
+        "
+
         Dim query_detail As String = "
             SELECT SUM(tb.late) AS late, ABS(SUM(tb.minus_work)) AS minus_work
             FROM
             (
-	            SELECT tb.*, IF(tb.id_leave_type IS NULL, tb.minutes_work - tb.work_hour, 0) AS minus_work
+	            SELECT tb.*, IF(tb.id_leave_type IS NULL, tb.over_break + tb.early_home, 0) AS minus_work
 	            FROM 
 	            (
 	                SELECT tb.*, IF(NOT ISNULL(tb.att_in) AND NOT ISNULL(tb.att_out), (tb.minutes_work - tb.over_break - tb.late + IF(tb.over < 0, tb.over, 0)), 0) AS work_hour
 	                FROM 
 	                (   
-		            SELECT ket.id_leave_type, ket.leave_type, sch.id_employee, sch.date, sch.in, sch.in_tolerance, IF(sch.id_schedule_type = '1', MIN(at_in.datetime), MIN(at_in_hol.datetime)) AS att_in, sch.out, IF(sch.id_schedule_type = '1', MAX(at_out.datetime), MAX(at_out_hol.datetime)) AS att_out, sch.break_out, MIN(at_brout.datetime) AS start_break, sch.break_in, MAX(at_brin.datetime) AS end_break, sch.minutes_work, sch.out_tolerance, IF(ket.id_leave_type IS NULL, IF(MIN(at_in.datetime) > sch.in_tolerance, TIMESTAMPDIFF(MINUTE, sch.in_tolerance, MIN(at_in.datetime)), 0), 0) AS late, TIMESTAMPDIFF(MINUTE, sch.out, MAX(at_out.datetime)) AS over, IF(TIMESTAMPDIFF(MINUTE, MIN(at_brout.datetime), MAX(at_brin.datetime)) > TIMESTAMPDIFF(MINUTE, sch.break_out, sch.break_in), TIMESTAMPDIFF(MINUTE, MIN(at_brout.datetime), MAX(at_brin.datetime)) - TIMESTAMPDIFF(MINUTE, sch.break_out, sch.break_in), 0) AS over_break, TIMESTAMPDIFF(MINUTE, MIN(at_in.datetime), MAX(at_out.datetime)) AS actual_work_hour 
+		            SELECT ket.id_leave_type, ket.leave_type, sch.id_employee, sch.date, sch.in, sch.in_tolerance, IF(sch.id_schedule_type = '1', MIN(at_in.datetime), MIN(at_in_hol.datetime)) AS att_in, sch.out, IF(sch.id_schedule_type = '1', MAX(at_out.datetime), MAX(at_out_hol.datetime)) AS att_out, sch.break_out, MIN(at_brout.datetime) AS start_break, sch.break_in, MAX(at_brin.datetime) AS end_break, sch.minutes_work, sch.out_tolerance, 
+                    IF(IF(MIN(at_in.datetime) > sch.in_tolerance, TIMESTAMPDIFF(MINUTE, sch.in_tolerance, MIN(at_in.datetime)), 0) - IF(lv.is_full_day = 1 OR ISNULL(lv.datetime_until), 0, IF(lv.datetime_until = sch.out, 0, lv.minutes_total + 60)) < 0, 0, IF(MIN(at_in.datetime) > sch.in_tolerance, TIMESTAMPDIFF(MINUTE, sch.in_tolerance,MIN(at_in.datetime)), 0) - IF(lv.is_full_day = 1 OR ISNULL(lv.datetime_until), 0, IF(lv.datetime_until = sch.out, 0, lv.minutes_total + 60))) AS late,
+                    IF(ket.id_leave_type IS NULL, IF(MIN(at_out.datetime) < sch.out, TIMESTAMPDIFF(MINUTE, MIN(at_out.datetime), sch.out), 0), 0) AS early_home, TIMESTAMPDIFF(MINUTE, sch.out, MAX(at_out.datetime)) AS over, IF(TIMESTAMPDIFF(MINUTE, MIN(at_brout.datetime), MAX(at_brin.datetime)) > TIMESTAMPDIFF(MINUTE, sch.break_out, sch.break_in), TIMESTAMPDIFF(MINUTE, MIN(at_brout.datetime), MAX(at_brin.datetime)) - TIMESTAMPDIFF(MINUTE, sch.break_out, sch.break_in), 0) AS over_break, TIMESTAMPDIFF(MINUTE, MIN(at_in.datetime), MAX(at_out.datetime)) AS actual_work_hour 
 		            FROM tb_emp_schedule sch 
 		            LEFT JOIN tb_lookup_leave_type ket ON ket.id_leave_type = sch.id_leave_type 
 		            INNER JOIN tb_m_employee emp ON emp.id_employee = sch.id_employee 
 		            INNER JOIN tb_lookup_employee_level lvl ON lvl.id_employee_level = emp.id_employee_level 
 		            INNER JOIN tb_lookup_schedule_type scht ON scht.id_schedule_type = sch.id_schedule_type 
-		            LEFT JOIN tb_emp_attn at_in ON at_in.id_employee = sch.id_employee AND (at_in.datetime >= (sch.out - INTERVAL 1 DAY) AND at_in.datetime <= sch.out) AND at_in.type_log = 1 
-		            LEFT JOIN tb_emp_attn at_out ON at_out.id_employee = sch.id_employee AND (at_out.datetime >= sch.in AND at_out.datetime <= (sch.in + INTERVAL 1 DAY)) AND at_out.type_log = 2 
-		            LEFT JOIN tb_emp_attn at_brout ON at_brout.id_employee = sch.id_employee AND DATE(at_brout.datetime) = sch.date AND at_brout.type_log = 3 
-		            LEFT JOIN tb_emp_attn at_brin ON at_brin.id_employee = sch.id_employee AND DATE(at_brin.datetime) = sch.date AND at_brin.type_log = 4 
-		            LEFT JOIN tb_emp_attn at_in_hol ON at_in_hol.id_employee = sch.id_employee AND DATE(at_in_hol.datetime) = sch.date AND at_in_hol.type_log = 1 
-		            LEFT JOIN tb_emp_attn at_out_hol ON at_out_hol.id_employee = sch.id_employee AND DATE(at_out_hol.datetime) = sch.date AND at_out_hol.type_log = 2
+		            LEFT JOIN (" + tb_attn + ") at_in ON at_in.id_employee = sch.id_employee AND (at_in.datetime >= (sch.out - INTERVAL 1 DAY) AND at_in.datetime <= sch.out) AND at_in.type_log = 1 
+		            LEFT JOIN (" + tb_attn + ") at_out ON at_out.id_employee = sch.id_employee AND (at_out.datetime >= sch.in AND at_out.datetime <= (sch.in + INTERVAL 1 DAY)) AND at_out.type_log = 2 
+		            LEFT JOIN (" + tb_attn + ") at_brout ON at_brout.id_employee = sch.id_employee AND DATE(at_brout.datetime) = sch.date AND at_brout.type_log = 3 
+		            LEFT JOIN (" + tb_attn + ") at_brin ON at_brin.id_employee = sch.id_employee AND DATE(at_brin.datetime) = sch.date AND at_brin.type_log = 4 
+		            LEFT JOIN (" + tb_attn + ") at_in_hol ON at_in_hol.id_employee = sch.id_employee AND DATE(at_in_hol.datetime) = sch.date AND at_in_hol.type_log = 1 
+		            LEFT JOIN (" + tb_attn + ") at_out_hol ON at_out_hol.id_employee = sch.id_employee AND DATE(at_out_hol.datetime) = sch.date AND at_out_hol.type_log = 2
+                    LEFT JOIN (
+	                    SELECT eld.*, el.id_leave_type FROM tb_emp_leave_det eld
+	                    INNER JOIN tb_emp_leave el ON el.id_emp_leave=eld.id_emp_leave
+	                    WHERE el.id_report_status = 6 
+	                ) lv ON lv.id_schedule=sch.id_schedule
 		            WHERE sch.id_employee = " + id_employee.ToString + "
 		            AND sch.date >= '" + Date.Parse(TEStartPeriod.EditValue.ToString).ToString("yyyy-MM-dd") + "'
 		            AND sch.date <= '" + Date.Parse(TEEndPeriod.EditValue.ToString).AddDays(-45).ToString("yyyy-MM-dd") + "'
@@ -247,38 +272,38 @@
                 End If
 
                 If data.Rows(i)("formula") = "sick" Then
-                    Dim sick As Integer = 10
+                    'Dim sick As Integer = 10
                     Dim sick_total As Integer = 0
 
                     If data_sick.Rows.Count > 0 Then
                         For j = 0 To data_sick.Rows.Count - 1
-                            If j = 0 Then
-                                If data_sick.Rows(j)("total") >= 2 Then
-                                    sick = sick - 1
-                                End If
-                            End If
+                            'If j = 0 Then
+                            '    If data_sick.Rows(j)("total") >= 2 Then
+                            '        sick = sick - 1
+                            '    End If
+                            'End If
 
-                            If j = 1 Then
-                                If data_sick.Rows(j)("total") >= 2 Then
-                                    sick = sick - 2
-                                End If
-                            End If
+                            'If j = 1 Then
+                            '    If data_sick.Rows(j)("total") >= 2 Then
+                            '        sick = sick - 2
+                            '    End If
+                            'End If
 
-                            If j = 3 Then
-                                If data_sick.Rows(j)("total") >= 2 Then
-                                    sick = sick - 3
-                                End If
-                            End If
+                            'If j = 3 Then
+                            '    If data_sick.Rows(j)("total") >= 2 Then
+                            '        sick = sick - 3
+                            '    End If
+                            'End If
 
                             sick_total = sick_total + data_sick.Rows(j)("total")
                         Next
 
-                        If sick_total >= 6 Then
-                            sick = sick - 4
-                        End If
+                        'If sick_total >= 6 Then
+                        '    sick = sick - 4
+                        'End If
                     End If
 
-                    data.Rows(i)("value") = sick
+                    data.Rows(i)("value") = sick_total
                 End If
 
                 If data.Rows(i)("formula") = "wh" Then
@@ -323,7 +348,9 @@
 
             GVSummary.SetRowCellValue(i, "result", result)
         ElseIf GVSummary.GetRowCellValue(i, "formula") = "sick" Then
-            GVSummary.SetRowCellValue(i, "result", GVSummary.GetRowCellValue(i, "value"))
+            result = If(GVSummary.GetRowCellValue(i, "value") > 4, 10, GVSummary.GetRowCellValue(i, "value"))
+
+            GVSummary.SetRowCellValue(i, "result", 10 - result)
         ElseIf GVSummary.GetRowCellValue(i, "formula") = "pu" Then
             Dim pu As Decimal = GVGroupQuestion.GetRowCellValue(GVGroupQuestion.RowCount - 1, "total")
 
@@ -354,9 +381,9 @@
             GVSummary.Columns("max_value").SummaryItem.DisplayFormat = "Perlu Perbaikan"
         ElseIf GVSummary.Columns("result").SummaryItem.SummaryValue <= 80 Then
             GVSummary.Columns("max_value").SummaryItem.DisplayFormat = "Baik"
-        ElseIf GVSummary.Columns("result").SummaryItem.SummaryValue <= 80 Then
-            GVSummary.Columns("max_value").SummaryItem.DisplayFormat = "Baik Sekali"
         ElseIf GVSummary.Columns("result").SummaryItem.SummaryValue <= 90 Then
+            GVSummary.Columns("max_value").SummaryItem.DisplayFormat = "Baik Sekali"
+        Else
             GVSummary.Columns("max_value").SummaryItem.DisplayFormat = "Memuaskan"
         End If
     End Sub
@@ -426,6 +453,18 @@
         generate_number(GVListQuestion, "no")
         generate_number(GVConclusion, "no")
         generate_number(GVComment, "no")
+
+        'menu absensi
+        If is_only_absensi Then
+            XTPPAU.PageVisible = False
+            XTPPAP.PageVisible = False
+            XTPPA.PageVisible = True
+
+            BtnSave.Visible = False
+            BtnPrint.Enabled = True
+
+            GCSummary.DataSource = CType(CType(GCSummary.DataSource, DataTable).Select("id_question_sum_group = 1"), DataRow()).CopyToDataTable()
+        End If
 
         Cursor = Cursors.Default
     End Sub
@@ -788,20 +827,11 @@
         Report.XLStatus.Text = TEEmployeeStatus.EditValue.ToString
         Report.XLPeriod.Text = TEStartPeriod.EditValue.ToString + " s/d " + TEEndPeriod.EditValue.ToString
         Report.XLPurpose.Text = TEPurpose.EditValue.ToString
+        Report.XLNote.Text = LCAttNote.Text
 
-        Report.XLGrandTotal.Text = FormatNumber(GVSummary.Columns("result").SummaryItem.SummaryValue, 2).ToString + "%"
+        Report.XLGrandTotal.Text = FormatNumber(GVSummary.Columns("result").SummaryItem.SummaryValue, 2).ToString + GVSummary.Columns("result").SummaryItem.DisplayFormat.Replace("{0:N2}", "")
 
-        If GVSummary.Columns("result").SummaryItem.SummaryValue <= 40 Then
-            Report.XLKategori.Text = "Kurang"
-        ElseIf GVSummary.Columns("result").SummaryItem.SummaryValue <= 60 Then
-            Report.XLKategori.Text = "Perlu Perbaikan"
-        ElseIf GVSummary.Columns("result").SummaryItem.SummaryValue <= 80 Then
-            Report.XLKategori.Text = "Baik"
-        ElseIf GVSummary.Columns("result").SummaryItem.SummaryValue <= 80 Then
-            Report.XLKategori.Text = "Baik Sekali"
-        ElseIf GVSummary.Columns("result").SummaryItem.SummaryValue <= 90 Then
-            Report.XLKategori.Text = "Memuaskan"
-        End If
+        Report.XLKategori.Text = GVSummary.Columns("max_value").SummaryItem.DisplayFormat
 
         Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
         Tool.ShowPreview()
@@ -967,6 +997,47 @@
             ErrorProvider1.SetError(TEPriCon, "Mohon diisi.")
         Else
             ErrorProvider1.SetError(TEPriCon, String.Empty)
+        End If
+    End Sub
+
+    Dim max_absensi As Decimal = 0.00
+    Dim total_absensi As Decimal = 0.00
+
+    Private Sub GVSummary_CustomSummaryCalculate(sender As Object, e As DevExpress.Data.CustomSummaryEventArgs) Handles GVSummary.CustomSummaryCalculate
+        If is_only_absensi Then
+            Dim item As DevExpress.XtraGrid.GridSummaryItem = TryCast(e.Item, DevExpress.XtraGrid.GridSummaryItem)
+
+            If item.FieldName.ToString = "max_value" Then
+                Select Case e.SummaryProcess
+                    Case DevExpress.Data.CustomSummaryProcess.Start
+                        max_absensi = 0.00
+                        total_absensi = 0.00
+                    Case DevExpress.Data.CustomSummaryProcess.Calculate
+                        If GVSummary.GetRowCellValue(e.RowHandle, "id_question_sum_group").ToString = "1" Then
+                            max_absensi += GVSummary.GetRowCellValue(e.RowHandle, "max_value")
+                            total_absensi += GVSummary.GetRowCellValue(e.RowHandle, "result")
+                        End If
+                    Case DevExpress.Data.CustomSummaryProcess.Finalize
+                        If GVSummary.GetRowCellValue(e.RowHandle, "id_question_sum_group").ToString = "1" Then
+                            e.TotalValue = Decimal.Round(total_absensi / max_absensi * 100, 2).ToString + "%"
+
+                            GVSummary.Columns("result").SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Custom
+                            GVSummary.Columns("result").SummaryItem.DisplayFormat = e.TotalValue
+
+                            If Decimal.Round(total_absensi / max_absensi * 100, 2) <= 40 Then
+                                GVSummary.Columns("max_value").SummaryItem.DisplayFormat = "Kurang"
+                            ElseIf Decimal.Round(total_absensi / max_absensi * 100, 2) <= 60 Then
+                                GVSummary.Columns("max_value").SummaryItem.DisplayFormat = "Perlu Perbaikan"
+                            ElseIf Decimal.Round(total_absensi / max_absensi * 100, 2) <= 80 Then
+                                GVSummary.Columns("max_value").SummaryItem.DisplayFormat = "Baik"
+                            ElseIf Decimal.Round(total_absensi / max_absensi * 100, 2) <= 90 Then
+                                GVSummary.Columns("max_value").SummaryItem.DisplayFormat = "Baik Sekali"
+                            Else
+                                GVSummary.Columns("max_value").SummaryItem.DisplayFormat = "Memuaskan"
+                            End If
+                        End If
+                End Select
+            End If
         End If
     End Sub
 End Class

@@ -7,9 +7,9 @@
     Private Sub ReportEmpPayrollReportBPJSKesehatan_BeforePrint(sender As Object, e As Printing.PrintEventArgs) Handles MyBase.BeforePrint
         Dim row As DevExpress.XtraReports.UI.XRTableRow = New DevExpress.XtraReports.UI.XRTableRow
 
-        Dim total_company As Integer = 0
-        Dim total_employee As Integer = 0
-        Dim total As Integer = 0
+        Dim total_company As Decimal = 0
+        Dim total_employee As Decimal = 0
+        Dim total As Decimal = 0
 
         For i = 0 To data.Rows.Count - 1
             'row
@@ -39,7 +39,7 @@
             'company contribution
             Dim company_contribution As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(2)
 
-            company_contribution.Text = Format(data.Rows(i)("company_contribution"), "##,##0")
+            company_contribution.Text = Format(data.Rows(i)("company_contribution"), "##,##0.00")
             company_contribution.Borders = DevExpress.XtraPrinting.BorderSide.Top Or DevExpress.XtraPrinting.BorderSide.Left
             company_contribution.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
             company_contribution.BackColor = Color.Transparent
@@ -47,7 +47,7 @@
             'employee contribution
             Dim employee_contribution As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(3)
 
-            employee_contribution.Text = Format(data.Rows(i)("employee_contribution"), "##,##0")
+            employee_contribution.Text = Format(data.Rows(i)("employee_contribution"), "##,##0.00")
             employee_contribution.Borders = DevExpress.XtraPrinting.BorderSide.Top Or DevExpress.XtraPrinting.BorderSide.Left
             employee_contribution.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
             employee_contribution.BackColor = Color.Transparent
@@ -71,8 +71,8 @@
 
         XTRowTotal.HeightF = 16
 
-        XTRowTotal.Cells.Item(2).Text = Format(total_company, "##,##0")
-        XTRowTotal.Cells.Item(3).Text = Format(total_employee, "##,##0")
+        XTRowTotal.Cells.Item(2).Text = Format(total_company, "##,##0.00")
+        XTRowTotal.Cells.Item(3).Text = Format(total_employee, "##,##0.00")
         XTRowTotal.Cells.Item(4).Text = Format(total, "##,##0")
 
         'mark

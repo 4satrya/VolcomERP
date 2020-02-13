@@ -1413,7 +1413,6 @@ Partial Class FormEmpPayroll
         'BtnViewJournal
         '
         Me.BtnViewJournal.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BtnViewJournal.Enabled = False
         Me.BtnViewJournal.Image = CType(resources.GetObject("BtnViewJournal.Image"), System.Drawing.Image)
         Me.BtnViewJournal.Location = New System.Drawing.Point(547, 2)
         Me.BtnViewJournal.Name = "BtnViewJournal"

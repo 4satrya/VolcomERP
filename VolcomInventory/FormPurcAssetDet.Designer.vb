@@ -47,9 +47,6 @@ Partial Class FormPurcAssetDet
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
         Me.SLEAccountFixedAsset = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.TxtAssetNumber = New DevExpress.XtraEditors.TextEdit()
         Me.TxtAssetName = New DevExpress.XtraEditors.TextEdit()
@@ -65,25 +62,16 @@ Partial Class FormPurcAssetDet
         Me.TxtComp = New DevExpress.XtraEditors.TextEdit()
         Me.SLEComp = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView4 = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.GridColumn13 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumncomp_number = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn14 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl12 = New DevExpress.XtraEditors.LabelControl()
         Me.TxtAccumDep = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl16 = New DevExpress.XtraEditors.LabelControl()
         Me.SLEAccumDep = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView3 = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl15 = New DevExpress.XtraEditors.LabelControl()
         Me.TxtUseful = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl10 = New DevExpress.XtraEditors.LabelControl()
         Me.SLEDep = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl11 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl14 = New DevExpress.XtraEditors.LabelControl()
         Me.PanelCHeck = New DevExpress.XtraEditors.PanelControl()
@@ -95,10 +83,23 @@ Partial Class FormPurcAssetDet
         Me.LabelControl21 = New DevExpress.XtraEditors.LabelControl()
         Me.SLUEDepartmentCurrent = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridViewSLUEDepartmentCurrent = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.GridColumn15 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn16 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.SLUEEmployeeCurrent = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridViewSLUEEmployeeCurrent = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.LabelControl20 = New DevExpress.XtraEditors.LabelControl()
+        Me.SLUELocationCurrent = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl18 = New DevExpress.XtraEditors.LabelControl()
+        Me.SBSaveDescription = New DevExpress.XtraEditors.SimpleButton()
+        Me.GridColumn13 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumncomp_number = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn14 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn15 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn16 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -106,9 +107,9 @@ Partial Class FormPurcAssetDet
         Me.GridColumn19 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn20 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn21 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.LabelControl20 = New DevExpress.XtraEditors.LabelControl()
-        Me.SLUELocationCurrent = New DevExpress.XtraEditors.TextEdit()
-        Me.LabelControl18 = New DevExpress.XtraEditors.LabelControl()
+        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.PanelApp, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -169,7 +170,7 @@ Partial Class FormPurcAssetDet
         Me.PanelControl1.Controls.Add(Me.BtnCreate)
         Me.PanelControl1.Controls.Add(Me.PanelApp)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl1.Location = New System.Drawing.Point(0, 485)
+        Me.PanelControl1.Location = New System.Drawing.Point(0, 506)
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(803, 47)
         Me.PanelControl1.TabIndex = 300
@@ -254,6 +255,7 @@ Partial Class FormPurcAssetDet
         '
         Me.GroupControl1.AppearanceCaption.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupControl1.AppearanceCaption.Options.UseFont = True
+        Me.GroupControl1.Controls.Add(Me.SBSaveDescription)
         Me.GroupControl1.Controls.Add(Me.LabelControl17)
         Me.GroupControl1.Controls.Add(Me.CheckEditIsNonDep)
         Me.GroupControl1.Controls.Add(Me.LabelControl19)
@@ -280,7 +282,7 @@ Partial Class FormPurcAssetDet
         Me.GroupControl1.Location = New System.Drawing.Point(0, 0)
         Me.GroupControl1.LookAndFeel.SkinName = "Office 2010 Silver"
         Me.GroupControl1.Name = "GroupControl1"
-        Me.GroupControl1.Size = New System.Drawing.Size(803, 217)
+        Me.GroupControl1.Size = New System.Drawing.Size(803, 238)
         Me.GroupControl1.TabIndex = 100
         Me.GroupControl1.Text = "Asset Details"
         '
@@ -446,29 +448,6 @@ Partial Class FormPurcAssetDet
         Me.GridView1.OptionsSelection.EnableAppearanceFocusedCell = False
         Me.GridView1.OptionsView.ShowGroupPanel = False
         '
-        'GridColumn1
-        '
-        Me.GridColumn1.Caption = "Id"
-        Me.GridColumn1.FieldName = "id_acc"
-        Me.GridColumn1.Name = "GridColumn1"
-        Me.GridColumn1.OptionsColumn.AllowEdit = False
-        '
-        'GridColumn5
-        '
-        Me.GridColumn5.Caption = "Account"
-        Me.GridColumn5.FieldName = "acc_name"
-        Me.GridColumn5.Name = "GridColumn5"
-        Me.GridColumn5.Visible = True
-        Me.GridColumn5.VisibleIndex = 0
-        '
-        'GridColumn6
-        '
-        Me.GridColumn6.Caption = "Description"
-        Me.GridColumn6.FieldName = "acc_description"
-        Me.GridColumn6.Name = "GridColumn6"
-        Me.GridColumn6.Visible = True
-        Me.GridColumn6.VisibleIndex = 1
-        '
         'LabelControl2
         '
         Me.LabelControl2.Location = New System.Drawing.Point(16, 68)
@@ -570,10 +549,10 @@ Partial Class FormPurcAssetDet
         Me.GroupControl2.Controls.Add(Me.PanelDepDetail)
         Me.GroupControl2.Controls.Add(Me.PanelCHeck)
         Me.GroupControl2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GroupControl2.Location = New System.Drawing.Point(0, 217)
+        Me.GroupControl2.Location = New System.Drawing.Point(0, 238)
         Me.GroupControl2.LookAndFeel.SkinName = "Office 2007 Blue"
         Me.GroupControl2.Name = "GroupControl2"
-        Me.GroupControl2.Size = New System.Drawing.Size(803, 166)
+        Me.GroupControl2.Size = New System.Drawing.Size(803, 170)
         Me.GroupControl2.TabIndex = 200
         Me.GroupControl2.Text = "Depreciation"
         '
@@ -595,7 +574,7 @@ Partial Class FormPurcAssetDet
         Me.PanelDepDetail.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelDepDetail.Location = New System.Drawing.Point(2, 33)
         Me.PanelDepDetail.Name = "PanelDepDetail"
-        Me.PanelDepDetail.Size = New System.Drawing.Size(799, 131)
+        Me.PanelDepDetail.Size = New System.Drawing.Size(799, 135)
         Me.PanelDepDetail.TabIndex = 26
         '
         'TxtComp
@@ -625,28 +604,6 @@ Partial Class FormPurcAssetDet
         Me.GridView4.Name = "GridView4"
         Me.GridView4.OptionsSelection.EnableAppearanceFocusedCell = False
         Me.GridView4.OptionsView.ShowGroupPanel = False
-        '
-        'GridColumn13
-        '
-        Me.GridColumn13.Caption = "ID Comp Contact"
-        Me.GridColumn13.FieldName = "id_comp_contact"
-        Me.GridColumn13.Name = "GridColumn13"
-        '
-        'GridColumncomp_number
-        '
-        Me.GridColumncomp_number.Caption = "Code"
-        Me.GridColumncomp_number.FieldName = "comp_number"
-        Me.GridColumncomp_number.Name = "GridColumncomp_number"
-        Me.GridColumncomp_number.Visible = True
-        Me.GridColumncomp_number.VisibleIndex = 0
-        '
-        'GridColumn14
-        '
-        Me.GridColumn14.Caption = "Name"
-        Me.GridColumn14.FieldName = "comp_name"
-        Me.GridColumn14.Name = "GridColumn14"
-        Me.GridColumn14.Visible = True
-        Me.GridColumn14.VisibleIndex = 1
         '
         'LabelControl12
         '
@@ -694,29 +651,6 @@ Partial Class FormPurcAssetDet
         Me.GridView3.OptionsSelection.EnableAppearanceFocusedCell = False
         Me.GridView3.OptionsView.ShowGroupPanel = False
         '
-        'GridColumn7
-        '
-        Me.GridColumn7.Caption = "Id"
-        Me.GridColumn7.FieldName = "id_acc"
-        Me.GridColumn7.Name = "GridColumn7"
-        Me.GridColumn7.OptionsColumn.AllowEdit = False
-        '
-        'GridColumn8
-        '
-        Me.GridColumn8.Caption = "Account"
-        Me.GridColumn8.FieldName = "acc_name"
-        Me.GridColumn8.Name = "GridColumn8"
-        Me.GridColumn8.Visible = True
-        Me.GridColumn8.VisibleIndex = 0
-        '
-        'GridColumn9
-        '
-        Me.GridColumn9.Caption = "Description"
-        Me.GridColumn9.FieldName = "acc_description"
-        Me.GridColumn9.Name = "GridColumn9"
-        Me.GridColumn9.Visible = True
-        Me.GridColumn9.VisibleIndex = 1
-        '
         'LabelControl15
         '
         Me.LabelControl15.Location = New System.Drawing.Point(305, 71)
@@ -762,29 +696,6 @@ Partial Class FormPurcAssetDet
         Me.GridView2.Name = "GridView2"
         Me.GridView2.OptionsSelection.EnableAppearanceFocusedCell = False
         Me.GridView2.OptionsView.ShowGroupPanel = False
-        '
-        'GridColumn2
-        '
-        Me.GridColumn2.Caption = "Id"
-        Me.GridColumn2.FieldName = "id_acc"
-        Me.GridColumn2.Name = "GridColumn2"
-        Me.GridColumn2.OptionsColumn.AllowEdit = False
-        '
-        'GridColumn3
-        '
-        Me.GridColumn3.Caption = "Account"
-        Me.GridColumn3.FieldName = "acc_name"
-        Me.GridColumn3.Name = "GridColumn3"
-        Me.GridColumn3.Visible = True
-        Me.GridColumn3.VisibleIndex = 0
-        '
-        'GridColumn4
-        '
-        Me.GridColumn4.Caption = "Description"
-        Me.GridColumn4.FieldName = "acc_description"
-        Me.GridColumn4.Name = "GridColumn4"
-        Me.GridColumn4.Visible = True
-        Me.GridColumn4.VisibleIndex = 1
         '
         'LabelControl11
         '
@@ -833,15 +744,15 @@ Partial Class FormPurcAssetDet
         Me.GCCurrent.Controls.Add(Me.SLUELocationCurrent)
         Me.GCCurrent.Controls.Add(Me.LabelControl18)
         Me.GCCurrent.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.GCCurrent.Location = New System.Drawing.Point(0, 383)
+        Me.GCCurrent.Location = New System.Drawing.Point(0, 408)
         Me.GCCurrent.Name = "GCCurrent"
-        Me.GCCurrent.Size = New System.Drawing.Size(803, 102)
+        Me.GCCurrent.Size = New System.Drawing.Size(803, 98)
         Me.GCCurrent.TabIndex = 301
         Me.GCCurrent.Text = "Employee"
         '
         'DELocationDate
         '
-        Me.DELocationDate.EditValue = Nothing
+        Me.DELocationDate.EditValue = ""
         Me.DELocationDate.Location = New System.Drawing.Point(475, 59)
         Me.DELocationDate.Name = "DELocationDate"
         Me.DELocationDate.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -898,21 +809,6 @@ Partial Class FormPurcAssetDet
         Me.GridViewSLUEDepartmentCurrent.OptionsSelection.EnableAppearanceFocusedCell = False
         Me.GridViewSLUEDepartmentCurrent.OptionsView.ShowGroupPanel = False
         '
-        'GridColumn15
-        '
-        Me.GridColumn15.Caption = "Id"
-        Me.GridColumn15.FieldName = "id_departement"
-        Me.GridColumn15.Name = "GridColumn15"
-        Me.GridColumn15.OptionsColumn.AllowEdit = False
-        '
-        'GridColumn16
-        '
-        Me.GridColumn16.Caption = "Department"
-        Me.GridColumn16.FieldName = "departement"
-        Me.GridColumn16.Name = "GridColumn16"
-        Me.GridColumn16.Visible = True
-        Me.GridColumn16.VisibleIndex = 0
-        '
         'SLUEEmployeeCurrent
         '
         Me.SLUEEmployeeCurrent.Location = New System.Drawing.Point(77, 33)
@@ -931,6 +827,121 @@ Partial Class FormPurcAssetDet
         Me.GridViewSLUEEmployeeCurrent.Name = "GridViewSLUEEmployeeCurrent"
         Me.GridViewSLUEEmployeeCurrent.OptionsSelection.EnableAppearanceFocusedCell = False
         Me.GridViewSLUEEmployeeCurrent.OptionsView.ShowGroupPanel = False
+        '
+        'LabelControl20
+        '
+        Me.LabelControl20.Location = New System.Drawing.Point(15, 36)
+        Me.LabelControl20.Name = "LabelControl20"
+        Me.LabelControl20.Size = New System.Drawing.Size(46, 13)
+        Me.LabelControl20.TabIndex = 21
+        Me.LabelControl20.Text = "Employee"
+        '
+        'SLUELocationCurrent
+        '
+        Me.SLUELocationCurrent.Location = New System.Drawing.Point(77, 59)
+        Me.SLUELocationCurrent.Name = "SLUELocationCurrent"
+        Me.SLUELocationCurrent.Size = New System.Drawing.Size(300, 20)
+        Me.SLUELocationCurrent.TabIndex = 3
+        '
+        'LabelControl18
+        '
+        Me.LabelControl18.Location = New System.Drawing.Point(15, 62)
+        Me.LabelControl18.Name = "LabelControl18"
+        Me.LabelControl18.Size = New System.Drawing.Size(40, 13)
+        Me.LabelControl18.TabIndex = 2
+        Me.LabelControl18.Text = "Location"
+        '
+        'SBSaveDescription
+        '
+        Me.SBSaveDescription.Image = CType(resources.GetObject("SBSaveDescription.Image"), System.Drawing.Image)
+        Me.SBSaveDescription.Location = New System.Drawing.Point(139, 206)
+        Me.SBSaveDescription.Name = "SBSaveDescription"
+        Me.SBSaveDescription.Size = New System.Drawing.Size(233, 24)
+        Me.SBSaveDescription.TabIndex = 35
+        Me.SBSaveDescription.Text = "Save"
+        '
+        'GridColumn13
+        '
+        Me.GridColumn13.Caption = "ID Comp Contact"
+        Me.GridColumn13.FieldName = "id_comp_contact"
+        Me.GridColumn13.Name = "GridColumn13"
+        '
+        'GridColumncomp_number
+        '
+        Me.GridColumncomp_number.Caption = "Code"
+        Me.GridColumncomp_number.FieldName = "comp_number"
+        Me.GridColumncomp_number.Name = "GridColumncomp_number"
+        Me.GridColumncomp_number.Visible = True
+        Me.GridColumncomp_number.VisibleIndex = 0
+        '
+        'GridColumn14
+        '
+        Me.GridColumn14.Caption = "Name"
+        Me.GridColumn14.FieldName = "comp_name"
+        Me.GridColumn14.Name = "GridColumn14"
+        Me.GridColumn14.Visible = True
+        Me.GridColumn14.VisibleIndex = 1
+        '
+        'GridColumn7
+        '
+        Me.GridColumn7.Caption = "Id"
+        Me.GridColumn7.FieldName = "id_acc"
+        Me.GridColumn7.Name = "GridColumn7"
+        Me.GridColumn7.OptionsColumn.AllowEdit = False
+        '
+        'GridColumn8
+        '
+        Me.GridColumn8.Caption = "Account"
+        Me.GridColumn8.FieldName = "acc_name"
+        Me.GridColumn8.Name = "GridColumn8"
+        Me.GridColumn8.Visible = True
+        Me.GridColumn8.VisibleIndex = 0
+        '
+        'GridColumn9
+        '
+        Me.GridColumn9.Caption = "Description"
+        Me.GridColumn9.FieldName = "acc_description"
+        Me.GridColumn9.Name = "GridColumn9"
+        Me.GridColumn9.Visible = True
+        Me.GridColumn9.VisibleIndex = 1
+        '
+        'GridColumn2
+        '
+        Me.GridColumn2.Caption = "Id"
+        Me.GridColumn2.FieldName = "id_acc"
+        Me.GridColumn2.Name = "GridColumn2"
+        Me.GridColumn2.OptionsColumn.AllowEdit = False
+        '
+        'GridColumn3
+        '
+        Me.GridColumn3.Caption = "Account"
+        Me.GridColumn3.FieldName = "acc_name"
+        Me.GridColumn3.Name = "GridColumn3"
+        Me.GridColumn3.Visible = True
+        Me.GridColumn3.VisibleIndex = 0
+        '
+        'GridColumn4
+        '
+        Me.GridColumn4.Caption = "Description"
+        Me.GridColumn4.FieldName = "acc_description"
+        Me.GridColumn4.Name = "GridColumn4"
+        Me.GridColumn4.Visible = True
+        Me.GridColumn4.VisibleIndex = 1
+        '
+        'GridColumn15
+        '
+        Me.GridColumn15.Caption = "Id"
+        Me.GridColumn15.FieldName = "id_departement"
+        Me.GridColumn15.Name = "GridColumn15"
+        Me.GridColumn15.OptionsColumn.AllowEdit = False
+        '
+        'GridColumn16
+        '
+        Me.GridColumn16.Caption = "Department"
+        Me.GridColumn16.FieldName = "departement"
+        Me.GridColumn16.Name = "GridColumn16"
+        Me.GridColumn16.Visible = True
+        Me.GridColumn16.VisibleIndex = 0
         '
         'GridColumn10
         '
@@ -982,34 +993,34 @@ Partial Class FormPurcAssetDet
         Me.GridColumn21.Visible = True
         Me.GridColumn21.VisibleIndex = 3
         '
-        'LabelControl20
+        'GridColumn1
         '
-        Me.LabelControl20.Location = New System.Drawing.Point(15, 36)
-        Me.LabelControl20.Name = "LabelControl20"
-        Me.LabelControl20.Size = New System.Drawing.Size(46, 13)
-        Me.LabelControl20.TabIndex = 21
-        Me.LabelControl20.Text = "Employee"
+        Me.GridColumn1.Caption = "Id"
+        Me.GridColumn1.FieldName = "id_acc"
+        Me.GridColumn1.Name = "GridColumn1"
+        Me.GridColumn1.OptionsColumn.AllowEdit = False
         '
-        'SLUELocationCurrent
+        'GridColumn5
         '
-        Me.SLUELocationCurrent.Location = New System.Drawing.Point(77, 59)
-        Me.SLUELocationCurrent.Name = "SLUELocationCurrent"
-        Me.SLUELocationCurrent.Size = New System.Drawing.Size(300, 20)
-        Me.SLUELocationCurrent.TabIndex = 3
+        Me.GridColumn5.Caption = "Account"
+        Me.GridColumn5.FieldName = "acc_name"
+        Me.GridColumn5.Name = "GridColumn5"
+        Me.GridColumn5.Visible = True
+        Me.GridColumn5.VisibleIndex = 0
         '
-        'LabelControl18
+        'GridColumn6
         '
-        Me.LabelControl18.Location = New System.Drawing.Point(15, 62)
-        Me.LabelControl18.Name = "LabelControl18"
-        Me.LabelControl18.Size = New System.Drawing.Size(40, 13)
-        Me.LabelControl18.TabIndex = 2
-        Me.LabelControl18.Text = "Location"
+        Me.GridColumn6.Caption = "Description"
+        Me.GridColumn6.FieldName = "acc_description"
+        Me.GridColumn6.Name = "GridColumn6"
+        Me.GridColumn6.Visible = True
+        Me.GridColumn6.VisibleIndex = 1
         '
         'FormPurcAssetDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(803, 532)
+        Me.ClientSize = New System.Drawing.Size(803, 553)
         Me.Controls.Add(Me.GroupControl2)
         Me.Controls.Add(Me.GCCurrent)
         Me.Controls.Add(Me.PanelControl1)
@@ -1165,4 +1176,5 @@ Partial Class FormPurcAssetDet
     Friend WithEvents GridColumn21 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents DELocationDate As DevExpress.XtraEditors.DateEdit
     Friend WithEvents LCLocationDate As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents SBSaveDescription As DevExpress.XtraEditors.SimpleButton
 End Class

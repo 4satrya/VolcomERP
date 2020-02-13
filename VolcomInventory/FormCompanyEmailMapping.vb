@@ -25,7 +25,7 @@
             LEFT JOIN tb_m_comp AS comp ON mcc.id_comp = comp.id_comp
             LEFT JOIN tb_lookup_report_mark_type AS rmt ON mm.report_mark_type = rmt.report_mark_type
             LEFT JOIN tb_lookup_mail_member_type AS mmt ON mm.id_mail_member_type = mmt.id_mail_member_type
-            ORDER BY mcg.comp_group ASC, rmt.report_mark_type_name ASC, mmt.mail_member_type ASC
+            ORDER BY mcg.comp_group ASC, comp.comp_name ASC, rmt.report_mark_type_name ASC, mmt.mail_member_type ASC
         "
 
         Dim data_store As DataTable = execute_query(query_store, -1, True, "", "", "", "")

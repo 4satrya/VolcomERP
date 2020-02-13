@@ -79,6 +79,8 @@ Partial Class FormEmpUniExpenseDet
         Me.GridColumnEnd = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnDueEate = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnType = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
+        Me.CheckEditPreview = New DevExpress.XtraEditors.CheckEdit()
         CType(Me.GroupControlTop, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControlTop.SuspendLayout()
         CType(Me.SLECat.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -110,6 +112,9 @@ Partial Class FormEmpUniExpenseDet
         Me.GroupControlMiddle.SuspendLayout()
         CType(Me.GCData, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVData, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl2.SuspendLayout()
+        CType(Me.CheckEditPreview.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupControlTop
@@ -369,6 +374,7 @@ Partial Class FormEmpUniExpenseDet
         Me.PanelControlBottom.Controls.Add(Me.BtnDraftJournal)
         Me.PanelControlBottom.Controls.Add(Me.BtnMark)
         Me.PanelControlBottom.Controls.Add(Me.BtnAttachment)
+        Me.PanelControlBottom.Controls.Add(Me.PanelControl2)
         Me.PanelControlBottom.Controls.Add(Me.BtnPrint)
         Me.PanelControlBottom.Controls.Add(Me.BtnClose)
         Me.PanelControlBottom.Controls.Add(Me.BtnSave)
@@ -382,7 +388,7 @@ Partial Class FormEmpUniExpenseDet
         '
         Me.BtnViewJournal.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnViewJournal.Image = CType(resources.GetObject("BtnViewJournal.Image"), System.Drawing.Image)
-        Me.BtnViewJournal.Location = New System.Drawing.Point(288, 2)
+        Me.BtnViewJournal.Location = New System.Drawing.Point(219, 2)
         Me.BtnViewJournal.Name = "BtnViewJournal"
         Me.BtnViewJournal.Size = New System.Drawing.Size(105, 41)
         Me.BtnViewJournal.TabIndex = 26
@@ -394,7 +400,7 @@ Partial Class FormEmpUniExpenseDet
         Me.BtnXlsBOF.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnXlsBOF.Image = CType(resources.GetObject("BtnXlsBOF.Image"), System.Drawing.Image)
         Me.BtnXlsBOF.ImageIndex = 11
-        Me.BtnXlsBOF.Location = New System.Drawing.Point(393, 2)
+        Me.BtnXlsBOF.Location = New System.Drawing.Point(324, 2)
         Me.BtnXlsBOF.Name = "BtnXlsBOF"
         Me.BtnXlsBOF.Size = New System.Drawing.Size(116, 41)
         Me.BtnXlsBOF.TabIndex = 25
@@ -406,7 +412,7 @@ Partial Class FormEmpUniExpenseDet
         Me.BtnDraftJournal.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnDraftJournal.Image = CType(resources.GetObject("BtnDraftJournal.Image"), System.Drawing.Image)
         Me.BtnDraftJournal.ImageIndex = 13
-        Me.BtnDraftJournal.Location = New System.Drawing.Point(509, 2)
+        Me.BtnDraftJournal.Location = New System.Drawing.Point(440, 2)
         Me.BtnDraftJournal.Name = "BtnDraftJournal"
         Me.BtnDraftJournal.Size = New System.Drawing.Size(109, 41)
         Me.BtnDraftJournal.TabIndex = 15
@@ -427,7 +433,7 @@ Partial Class FormEmpUniExpenseDet
         '
         Me.BtnAttachment.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnAttachment.Image = CType(resources.GetObject("BtnAttachment.Image"), System.Drawing.Image)
-        Me.BtnAttachment.Location = New System.Drawing.Point(618, 2)
+        Me.BtnAttachment.Location = New System.Drawing.Point(549, 2)
         Me.BtnAttachment.Name = "BtnAttachment"
         Me.BtnAttachment.Size = New System.Drawing.Size(106, 41)
         Me.BtnAttachment.TabIndex = 4
@@ -684,6 +690,24 @@ Partial Class FormEmpUniExpenseDet
         Me.GridColumnType.FieldName = "type"
         Me.GridColumnType.Name = "GridColumnType"
         '
+        'PanelControl2
+        '
+        Me.PanelControl2.Controls.Add(Me.CheckEditPreview)
+        Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Right
+        Me.PanelControl2.Location = New System.Drawing.Point(655, 2)
+        Me.PanelControl2.Name = "PanelControl2"
+        Me.PanelControl2.Size = New System.Drawing.Size(69, 41)
+        Me.PanelControl2.TabIndex = 27
+        '
+        'CheckEditPreview
+        '
+        Me.CheckEditPreview.EditValue = True
+        Me.CheckEditPreview.Location = New System.Drawing.Point(5, 11)
+        Me.CheckEditPreview.Name = "CheckEditPreview"
+        Me.CheckEditPreview.Properties.Caption = "Preview"
+        Me.CheckEditPreview.Size = New System.Drawing.Size(75, 19)
+        Me.CheckEditPreview.TabIndex = 0
+        '
         'FormEmpUniExpenseDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -733,6 +757,9 @@ Partial Class FormEmpUniExpenseDet
         Me.GroupControlMiddle.ResumeLayout(False)
         CType(Me.GCData, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVData, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl2.ResumeLayout(False)
+        CType(Me.CheckEditPreview.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -796,4 +823,6 @@ Partial Class FormEmpUniExpenseDet
     Friend WithEvents GridColumnDueEate As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnType As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents BtnViewJournal As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents PanelControl2 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents CheckEditPreview As DevExpress.XtraEditors.CheckEdit
 End Class

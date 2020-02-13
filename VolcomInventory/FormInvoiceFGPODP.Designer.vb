@@ -72,7 +72,7 @@ Partial Class FormInvoiceFGPODP
         Me.GVList = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumnIdRec = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnAccPick = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RISLECOA = New DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit()
         Me.GridView3 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn16 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -87,6 +87,7 @@ Partial Class FormInvoiceFGPODP
         Me.RepositoryItemSearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GCCurHide = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GCKurs = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GCBeforeKurs = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GCQty = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -106,6 +107,7 @@ Partial Class FormInvoiceFGPODP
         Me.GCDraft = New DevExpress.XtraGrid.GridControl()
         Me.GVDraft = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumnNoDraft = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnacc_name_Draft = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnacc_description_draft = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnreport_number_draft = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -113,7 +115,7 @@ Partial Class FormInvoiceFGPODP
         Me.GridColumndebit_draft = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncredit_draft = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncc = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.BAttachment = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl7, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl7.SuspendLayout()
@@ -191,6 +193,7 @@ Partial Class FormInvoiceFGPODP
         '
         'PanelControl7
         '
+        Me.PanelControl7.Controls.Add(Me.BAttachment)
         Me.PanelControl7.Controls.Add(Me.BtnViewJournal)
         Me.PanelControl7.Controls.Add(Me.BtnPrint)
         Me.PanelControl7.Controls.Add(Me.BMark)
@@ -668,7 +671,7 @@ Partial Class FormInvoiceFGPODP
         '
         'GVList
         '
-        Me.GVList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdRec, Me.GridColumn6, Me.GridColumn12, Me.GCDescription, Me.GCReff, Me.GCInvNumber, Me.GridColumnNote, Me.GCCur, Me.GCKurs, Me.GCBeforeKurs, Me.GCQty, Me.GridColumnPayment, Me.GCVat})
+        Me.GVList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdRec, Me.GridColumn6, Me.GridColumnAccPick, Me.GCDescription, Me.GCReff, Me.GCInvNumber, Me.GridColumnNote, Me.GCCur, Me.GCCurHide, Me.GCKurs, Me.GCBeforeKurs, Me.GCQty, Me.GridColumnPayment, Me.GCVat})
         Me.GVList.GridControl = Me.GCList
         Me.GVList.Name = "GVList"
         Me.GVList.OptionsBehavior.AutoExpandAllGroups = True
@@ -693,15 +696,15 @@ Partial Class FormInvoiceFGPODP
         Me.GridColumn6.OptionsColumn.AllowEdit = False
         Me.GridColumn6.OptionsColumn.AllowFocus = False
         '
-        'GridColumn12
+        'GridColumnAccPick
         '
-        Me.GridColumn12.Caption = "COA"
-        Me.GridColumn12.ColumnEdit = Me.RISLECOA
-        Me.GridColumn12.FieldName = "id_acc"
-        Me.GridColumn12.Name = "GridColumn12"
-        Me.GridColumn12.Visible = True
-        Me.GridColumn12.VisibleIndex = 0
-        Me.GridColumn12.Width = 119
+        Me.GridColumnAccPick.Caption = "COA"
+        Me.GridColumnAccPick.ColumnEdit = Me.RISLECOA
+        Me.GridColumnAccPick.FieldName = "id_acc"
+        Me.GridColumnAccPick.Name = "GridColumnAccPick"
+        Me.GridColumnAccPick.Visible = True
+        Me.GridColumnAccPick.VisibleIndex = 0
+        Me.GridColumnAccPick.Width = 119
         '
         'RISLECOA
         '
@@ -817,6 +820,16 @@ Partial Class FormInvoiceFGPODP
         Me.GridColumn8.Name = "GridColumn8"
         Me.GridColumn8.Visible = True
         Me.GridColumn8.VisibleIndex = 0
+        '
+        'GCCurHide
+        '
+        Me.GCCurHide.AppearanceCell.Options.UseTextOptions = True
+        Me.GCCurHide.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GCCurHide.AppearanceHeader.Options.UseTextOptions = True
+        Me.GCCurHide.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GCCurHide.Caption = "Currency"
+        Me.GCCurHide.FieldName = "currency"
+        Me.GCCurHide.Name = "GCCurHide"
         '
         'GCKurs
         '
@@ -1018,6 +1031,12 @@ Partial Class FormInvoiceFGPODP
         Me.GridColumnNoDraft.Name = "GridColumnNoDraft"
         Me.GridColumnNoDraft.Width = 38
         '
+        'GridColumn4
+        '
+        Me.GridColumn4.Caption = "ID ACC"
+        Me.GridColumn4.FieldName = "id_acc"
+        Me.GridColumn4.Name = "GridColumn4"
+        '
         'GridColumnacc_name_Draft
         '
         Me.GridColumnacc_name_Draft.Caption = "Account"
@@ -1085,11 +1104,16 @@ Partial Class FormInvoiceFGPODP
         Me.GridColumncc.VisibleIndex = 1
         Me.GridColumncc.Width = 39
         '
-        'GridColumn4
+        'BAttachment
         '
-        Me.GridColumn4.Caption = "ID ACC"
-        Me.GridColumn4.FieldName = "id_acc"
-        Me.GridColumn4.Name = "GridColumn4"
+        Me.BAttachment.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BAttachment.Image = CType(resources.GetObject("BAttachment.Image"), System.Drawing.Image)
+        Me.BAttachment.Location = New System.Drawing.Point(566, 2)
+        Me.BAttachment.Name = "BAttachment"
+        Me.BAttachment.Size = New System.Drawing.Size(105, 36)
+        Me.BAttachment.TabIndex = 21
+        Me.BAttachment.Text = "Attachment"
+        Me.BAttachment.Visible = False
         '
         'FormInvoiceFGPODP
         '
@@ -1248,7 +1272,7 @@ Partial Class FormInvoiceFGPODP
     Friend WithEvents GridColumn7 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn8 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents BAddNewRow As DevExpress.XtraEditors.SimpleButton
-    Friend WithEvents GridColumn12 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnAccPick As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RISLECOA As DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit
     Friend WithEvents GridView3 As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumn16 As DevExpress.XtraGrid.Columns.GridColumn
@@ -1260,4 +1284,6 @@ Partial Class FormInvoiceFGPODP
     Friend WithEvents GridColumn3 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents BPickDP As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GCCurHide As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BAttachment As DevExpress.XtraEditors.SimpleButton
 End Class

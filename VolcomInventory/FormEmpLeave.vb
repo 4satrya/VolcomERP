@@ -6,6 +6,7 @@
     Public is_propose As String = "-1"
     '
     Public is_hrd As String = "-1"
+    Public is_single_user As Boolean = False
     Private Sub FormEmpLeave_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         DEStart.EditValue = Now
         DEUntil.EditValue = Now
@@ -66,6 +67,9 @@
             '    query += " AND (dep.id_user_admin='" & id_user & "' OR dep.id_user_admin_backup='" & id_user & "')"
             'End If
         End If
+        If is_single_user Then
+            query += " AND empl.id_emp=" + id_employee_user
+        End If
         Dim data As DataTable = execute_query(query, "-1", True, "", "", "", "")
         GCLeave.DataSource = data
         GVLeave.BestFitColumns()
@@ -80,9 +84,9 @@
                                 LEFT JOIN tb_m_departement_sub dep_sub ON dep_sub.id_departement_sub=emp.id_departement_sub
                                 INNER JOIN tb_lookup_employee_level lvl ON lvl.id_employee_level=emp.id_employee_level  
                                 INNER JOIN (SELECT * FROM (SELECT * FROM tb_emp_leave_det empld_wh WHERE (DATE(empld_wh.datetime_start) >= DATE('" & date_from & "') AND DATE(empld_wh.datetime_start) <= DATE('" & date_end & "'))) empx GROUP BY empx.id_emp_leave) empldwh ON empldwh.id_emp_leave=empl.id_emp_leave 
-                                INNER JOIN (SELECT id_emp_leave,MIN(datetime_start) AS min_date,MAX(datetime_until) AS max_date,ROUND(SUM(minutes_total)/60) AS hours_total FROM tb_emp_leave_det GROUP BY id_emp_leave) empld ON empld.id_emp_leave=empldwh.id_emp_leave"
+                                INNER JOIN (SELECT id_emp_leave,MIN(datetime_start) AS min_date,MAX(datetime_until) AS max_date,ROUND(SUM(minutes_total)/60) AS hours_total FROM tb_emp_leave_det GROUP BY id_emp_leave) empld ON empld.id_emp_leave=empldwh.id_emp_leave WHERE 1"
         If is_propose = "1" Then
-            query += " WHERE empl.id_leave_type!=5"
+            query += " AND empl.id_leave_type!=5"
             'Dim id_user_admin_management As String = get_opt_emp_field("id_user_admin_mng").ToString
             'If id_user_admin_management = id_user Then
             '    Dim id_min_lvl As String = get_opt_emp_field("leave_asst_mgr_level").ToString
@@ -90,6 +94,9 @@
             'Else
             '    query += " AND (dep.id_user_admin='" & id_user & "' OR dep.id_user_admin_backup='" & id_user & "')"
             'End If
+        End If
+        If is_single_user Then
+            query += " AND empl.id_emp=" + id_employee_user
         End If
         Dim data As DataTable = execute_query(query, "-1", True, "", "", "", "")
         GCLeave.DataSource = data

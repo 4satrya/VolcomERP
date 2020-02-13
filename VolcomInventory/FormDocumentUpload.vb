@@ -99,6 +99,17 @@
                 open_folder.FileName = "explorer.exe"
                 open_folder.Arguments = "/select,""" & path & GVFileList.GetFocusedRowCellValue("doc_desc").ToString & "_" & GVFileList.GetFocusedRowCellValue("filename").ToString & """"
                 Process.Start(open_folder)
+
+                System.Threading.Thread.Sleep(100)
+
+                'open file
+                Dim FILE_NAME As String = path & GVFileList.GetFocusedRowCellValue("doc_desc").ToString & "_" & GVFileList.GetFocusedRowCellValue("filename").ToString
+
+                If IO.File.Exists(FILE_NAME) = True Then
+                    Process.Start(FILE_NAME)
+                Else
+                    MsgBox("File Does Not Exist")
+                End If
             Else
                 stopCustom("No Supporting Document !")
             End If

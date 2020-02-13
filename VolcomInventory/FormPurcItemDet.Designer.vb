@@ -98,10 +98,10 @@ Partial Class FormPurcItemDet
         Me.GVHistory = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn20 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn19 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn24 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn21 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn22 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn23 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn24 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XTCDetail, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCDetail.SuspendLayout()
         Me.XtraTabPage1.SuspendLayout()
@@ -385,7 +385,7 @@ Partial Class FormPurcItemDet
         Me.BClose.Name = "BClose"
         Me.BClose.Size = New System.Drawing.Size(96, 36)
         Me.BClose.TabIndex = 1
-        Me.BClose.Text = "Cancel"
+        Me.BClose.Text = "Close"
         '
         'BSave
         '
@@ -870,6 +870,14 @@ Partial Class FormPurcItemDet
         Me.GridColumn19.Visible = True
         Me.GridColumn19.VisibleIndex = 2
         '
+        'GridColumn24
+        '
+        Me.GridColumn24.Caption = "Item Detail"
+        Me.GridColumn24.FieldName = "item_detail"
+        Me.GridColumn24.Name = "GridColumn24"
+        Me.GridColumn24.Visible = True
+        Me.GridColumn24.VisibleIndex = 3
+        '
         'GridColumn21
         '
         Me.GridColumn21.Caption = "Date"
@@ -903,14 +911,6 @@ Partial Class FormPurcItemDet
         Me.GridColumn23.OptionsColumn.ReadOnly = True
         Me.GridColumn23.Visible = True
         Me.GridColumn23.VisibleIndex = 5
-        '
-        'GridColumn24
-        '
-        Me.GridColumn24.Caption = "Item Detail"
-        Me.GridColumn24.FieldName = "item_detail"
-        Me.GridColumn24.Name = "GridColumn24"
-        Me.GridColumn24.Visible = True
-        Me.GridColumn24.VisibleIndex = 3
         '
         'FormPurcItemDet
         '

@@ -45,6 +45,8 @@
         Else
             SBPrint.Enabled = True
         End If
+
+        SBPrint.Enabled = True
     End Sub
 
     Private Sub FormEmpPayrollReportBPJSTK_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed

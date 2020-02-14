@@ -59,12 +59,12 @@ Partial Class FormEmpPayrollDeductionDet
         Me.SBInsert = New DevExpress.XtraEditors.SimpleButton()
         Me.ErrorProvider = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.PMSalary = New DevExpress.XtraBars.PopupMenu(Me.components)
-        Me.BarButtonItem1 = New DevExpress.XtraBars.BarButtonItem()
         Me.BMSalary = New DevExpress.XtraBars.BarManager(Me.components)
         Me.barDockControlTop = New DevExpress.XtraBars.BarDockControl()
         Me.barDockControlBottom = New DevExpress.XtraBars.BarDockControl()
         Me.barDockControlLeft = New DevExpress.XtraBars.BarDockControl()
         Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl()
+        Me.BarButtonItem1 = New DevExpress.XtraBars.BarButtonItem()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl3.SuspendLayout()
@@ -287,17 +287,24 @@ Partial Class FormEmpPayrollDeductionDet
         '
         Me.GCValue.Caption = "Value"
         Me.GCValue.ColumnEdit = Me.RITEValue
-        Me.GCValue.DisplayFormat.FormatString = "N0"
+        Me.GCValue.DisplayFormat.FormatString = "N2"
         Me.GCValue.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GCValue.FieldName = "value"
         Me.GCValue.Name = "GCValue"
-        Me.GCValue.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "value", "{0:N0}")})
+        Me.GCValue.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "value", "{0:N2}")})
         Me.GCValue.Visible = True
         Me.GCValue.VisibleIndex = 8
         '
         'RITEValue
         '
         Me.RITEValue.AutoHeight = False
+        Me.RITEValue.DisplayFormat.FormatString = "N2"
+        Me.RITEValue.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.RITEValue.EditFormat.FormatString = "N2"
+        Me.RITEValue.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.RITEValue.Mask.EditMask = "N2"
+        Me.RITEValue.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
+        Me.RITEValue.Mask.UseMaskAsDisplayFormat = True
         Me.RITEValue.Name = "RITEValue"
         '
         'PanelControl1
@@ -435,12 +442,6 @@ Partial Class FormEmpPayrollDeductionDet
         Me.PMSalary.Manager = Me.BMSalary
         Me.PMSalary.Name = "PMSalary"
         '
-        'BarButtonItem1
-        '
-        Me.BarButtonItem1.Caption = "BarButtonItem1"
-        Me.BarButtonItem1.Id = 0
-        Me.BarButtonItem1.Name = "BarButtonItem1"
-        '
         'BMSalary
         '
         Me.BMSalary.DockControls.Add(Me.barDockControlTop)
@@ -478,6 +479,12 @@ Partial Class FormEmpPayrollDeductionDet
         Me.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right
         Me.barDockControlRight.Location = New System.Drawing.Point(1008, 0)
         Me.barDockControlRight.Size = New System.Drawing.Size(0, 729)
+        '
+        'BarButtonItem1
+        '
+        Me.BarButtonItem1.Caption = "BarButtonItem1"
+        Me.BarButtonItem1.Id = 0
+        Me.BarButtonItem1.Name = "BarButtonItem1"
         '
         'FormEmpPayrollDeductionDet
         '

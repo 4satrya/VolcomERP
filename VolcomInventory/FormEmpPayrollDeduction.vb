@@ -82,6 +82,8 @@
             BtnDropQuickMenu.Enabled = False
             DropDownButton1.Enabled = False
         End If
+
+        SBPrint.Enabled = True
     End Sub
 
     Private Sub BBJamsostek_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BBJamsostek.ItemClick

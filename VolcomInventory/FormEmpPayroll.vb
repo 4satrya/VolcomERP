@@ -238,6 +238,9 @@
             CheckEditViewSend.Visible = False
         End If
 
+        BPrintSlip.Enabled = True
+        BPrint.Enabled = True
+
         Cursor = Cursors.Default
     End Sub
 
@@ -621,11 +624,12 @@
         'column
         Dim where_adj_c As String = ""
 
-        Dim query_adj_c As String = "SELECT cat.salary_" + type + "_cat, (SELECT MIN(use_dw) FROM tb_lookup_salary_" + type + " WHERE id_salary_" + type + "_cat = cat.id_salary_" + type + "_cat) AS use_dw, (SELECT MIN(use_thr) FROM tb_lookup_salary_" + type + " WHERE id_salary_" + type + "_cat = cat.id_salary_" + type + "_cat) AS use_thr FROM tb_lookup_salary_" + type + "_cat AS cat"
+        Dim query_adj_c As String = "SELECT cat.id_salary_" + type + "_cat, cat.salary_" + type + "_cat, (SELECT MIN(use_dw) FROM tb_lookup_salary_" + type + " WHERE id_salary_" + type + "_cat = cat.id_salary_" + type + "_cat) AS use_dw, (SELECT MIN(use_thr) FROM tb_lookup_salary_" + type + " WHERE id_salary_" + type + "_cat = cat.id_salary_" + type + "_cat) AS use_thr FROM tb_lookup_salary_" + type + "_cat AS cat"
 
         Dim data_adj_c As DataTable = execute_query(query_adj_c, -1, True, "", "", "", "")
 
         For i = 0 To data_adj_c.Rows.Count - 1
+            Dim id_salary_cat As String = data_adj_c.Rows(i)("id_salary_" + type + "_cat").ToString
             Dim field_name As String = data_adj_c.Rows(i)("salary_" + type + "_cat").ToString + " " + type
 
             'remove if exist
@@ -646,9 +650,8 @@
                 Dim column_datasource As DataColumn = New DataColumn()
 
                 column_datasource.ColumnName = field_name
-                column_datasource.DataType = GetType(Integer)
-                column_datasource.DefaultValue = 0
-
+                column_datasource.DataType = GetType(Decimal)
+                column_datasource.DefaultValue = 0.00
                 GCPayroll.DataSource.Columns.Add(column_datasource)
             End If
 
@@ -660,8 +663,8 @@
             column.Visible = True
             column.OptionsColumn.AllowEdit = False
             column.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-            column.DisplayFormat.FormatString = "N0"
-            column.SummaryItem.DisplayFormat = "{0:N0}"
+            column.DisplayFormat.FormatString = "N2"
+            column.SummaryItem.DisplayFormat = "{0:N2}"
             column.SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum
 
             If type = "adjustment" Then
@@ -672,8 +675,7 @@
 
             'add group summary
             Dim group_summary As DevExpress.XtraGrid.GridGroupSummaryItem = New DevExpress.XtraGrid.GridGroupSummaryItem()
-
-            group_summary.DisplayFormat = "{0:N0}"
+            group_summary.DisplayFormat = "{0:N2}"
             group_summary.FieldName = field_name
             group_summary.ShowInGroupColumnFooter = column
             group_summary.SummaryType = DevExpress.Data.SummaryItemType.Sum
@@ -691,7 +693,7 @@
 
         If type = "adjustment" Then
             query_adj_v = "
-                SELECT adj.id_employee, ladjc.salary_adjustment_cat, ROUND(SUM(adj.value), 0) AS value
+                SELECT adj.id_employee, ladjc.salary_adjustment_cat, SUM(adj.value) AS value
                 FROM tb_emp_payroll_adj AS adj
                 LEFT JOIN tb_lookup_salary_adjustment AS ladj ON adj.id_salary_adj = ladj.id_salary_adjustment
                 LEFT JOIN tb_lookup_salary_adjustment_cat AS ladjc ON ladj.id_salary_adjustment_cat = ladjc.id_salary_adjustment_cat
@@ -700,7 +702,7 @@
             "
         ElseIf type = "deduction" Then
             query_adj_v = "
-                SELECT adj.id_employee, ladjc.salary_deduction_cat, ROUND(SUM(adj.deduction), 0) AS value
+                SELECT adj.id_employee, ladjc.salary_deduction_cat, SUM(adj.deduction) AS value
                 FROM tb_emp_payroll_deduction AS adj
                 LEFT JOIN tb_lookup_salary_deduction AS ladj ON adj.id_salary_deduction = ladj.id_salary_deduction
                 LEFT JOIN tb_lookup_salary_deduction_cat AS ladjc ON ladj.id_salary_deduction_cat = ladjc.id_salary_deduction_cat

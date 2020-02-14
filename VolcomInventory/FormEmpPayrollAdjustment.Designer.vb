@@ -152,7 +152,7 @@ Partial Class FormEmpPayrollAdjustment
         Me.GVDeduction.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GCSelect, Me.GridColumnIdDeduction, Me.GridColumnIdEmployee, Me.GCIsOfficePayroll, Me.GridColumnGroup, Me.GridColumnDept, Me.GCSubDept, Me.GridColumnNIP, Me.GridColumnEmp, Me.GridColumnEmpPosition, Me.GridColumnEmpSts, Me.GridColumnType, Me.GridColumnCategory, Me.GridColumnTotDays, Me.GridColumnValue, Me.GridColumnNote})
         Me.GVDeduction.GridControl = Me.GCDeduction
         Me.GVDeduction.GroupCount = 3
-        Me.GVDeduction.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "value", Me.GridColumnValue, "{0:N0}")})
+        Me.GVDeduction.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "value", Me.GridColumnValue, "{0:N2}")})
         Me.GVDeduction.Name = "GVDeduction"
         Me.GVDeduction.OptionsBehavior.AutoExpandAllGroups = True
         Me.GVDeduction.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.[True]
@@ -308,12 +308,12 @@ Partial Class FormEmpPayrollAdjustment
         Me.GridColumnValue.AppearanceHeader.Options.UseTextOptions = True
         Me.GridColumnValue.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GridColumnValue.Caption = "Value"
-        Me.GridColumnValue.DisplayFormat.FormatString = "N0"
+        Me.GridColumnValue.DisplayFormat.FormatString = "N2"
         Me.GridColumnValue.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnValue.FieldName = "value"
         Me.GridColumnValue.Name = "GridColumnValue"
         Me.GridColumnValue.OptionsColumn.AllowEdit = False
-        Me.GridColumnValue.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "value", "{0:N0}")})
+        Me.GridColumnValue.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "value", "{0:N2}")})
         Me.GridColumnValue.Visible = True
         Me.GridColumnValue.VisibleIndex = 8
         Me.GridColumnValue.Width = 86

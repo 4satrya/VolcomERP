@@ -142,7 +142,7 @@ Partial Public Class ReportEmpPayrollOvertime
         Me.GVOvertimeOffice.GridControl = Me.GCOvertimeOffice
         Me.GVOvertimeOffice.GroupCount = 2
         Me.GVOvertimeOffice.GroupFormat = "{1} {2}"
-        Me.GVOvertimeOffice.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "Point Reguler", Me.GridColumn6, "{0:N1}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "Overtime Reguler", Me.GridColumn7, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "Point Event", Me.GridColumn8, "{0:N1}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "Overtime Event", Me.GridColumn9, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "Total Overtime", Me.GridColumn10, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "Employee", Me.GridColumn3, "", "")})
+        Me.GVOvertimeOffice.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "Point Reguler", Me.GridColumn6, "{0:N1}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "Overtime Reguler", Me.GridColumn7, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "Point Event", Me.GridColumn8, "{0:N1}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "Overtime Event", Me.GridColumn9, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "Total Overtime", Me.GridColumn10, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "Employee", Me.GridColumn3, "", "")})
         Me.GVOvertimeOffice.LevelIndent = 0
         Me.GVOvertimeOffice.Name = "GVOvertimeOffice"
         Me.GVOvertimeOffice.OptionsBehavior.AutoExpandAllGroups = True
@@ -224,11 +224,11 @@ Partial Public Class ReportEmpPayrollOvertime
         'GridColumn7
         '
         Me.GridColumn7.Caption = "Overtime Reguler"
-        Me.GridColumn7.DisplayFormat.FormatString = "N0"
+        Me.GridColumn7.DisplayFormat.FormatString = "N2"
         Me.GridColumn7.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn7.FieldName = "Overtime Reguler"
         Me.GridColumn7.Name = "GridColumn7"
-        Me.GridColumn7.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Overtime Reguler", "{0:N0}")})
+        Me.GridColumn7.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Overtime Reguler", "{0:N2}")})
         Me.GridColumn7.Visible = True
         Me.GridColumn7.VisibleIndex = 5
         Me.GridColumn7.Width = 95
@@ -248,11 +248,11 @@ Partial Public Class ReportEmpPayrollOvertime
         'GridColumn9
         '
         Me.GridColumn9.Caption = "Overtime Event"
-        Me.GridColumn9.DisplayFormat.FormatString = "N0"
+        Me.GridColumn9.DisplayFormat.FormatString = "N2"
         Me.GridColumn9.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn9.FieldName = "Overtime Event"
         Me.GridColumn9.Name = "GridColumn9"
-        Me.GridColumn9.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Overtime Event", "{0:N0}")})
+        Me.GridColumn9.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Overtime Event", "{0:N2}")})
         Me.GridColumn9.Visible = True
         Me.GridColumn9.VisibleIndex = 7
         Me.GridColumn9.Width = 95
@@ -260,11 +260,11 @@ Partial Public Class ReportEmpPayrollOvertime
         'GridColumn10
         '
         Me.GridColumn10.Caption = "Total Overtime"
-        Me.GridColumn10.DisplayFormat.FormatString = "N0"
+        Me.GridColumn10.DisplayFormat.FormatString = "N2"
         Me.GridColumn10.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn10.FieldName = "Total Overtime"
         Me.GridColumn10.Name = "GridColumn10"
-        Me.GridColumn10.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Total Overtime", "{0:N0}")})
+        Me.GridColumn10.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Total Overtime", "{0:N2}")})
         Me.GridColumn10.Visible = True
         Me.GridColumn10.VisibleIndex = 8
         Me.GridColumn10.Width = 108
@@ -525,7 +525,7 @@ Partial Public Class ReportEmpPayrollOvertime
         Me.GVOvertimeStore.GridControl = Me.GCOvertimeStore
         Me.GVOvertimeStore.GroupCount = 2
         Me.GVOvertimeStore.GroupFormat = "{1} {2}"
-        Me.GVOvertimeStore.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "Point Reguler", Me.GridColumn18, "{0:N1}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "Overtime Reguler", Me.GridColumn19, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "Point Event", Me.GridColumn20, "{0:N1}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "Overtime Event", Me.GridColumn21, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "Total Overtime", Me.GridColumn22, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "Employee", Me.GridColumn15, "", "")})
+        Me.GVOvertimeStore.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "Point Reguler", Me.GridColumn18, "{0:N1}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "Overtime Reguler", Me.GridColumn19, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "Point Event", Me.GridColumn20, "{0:N1}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "Overtime Event", Me.GridColumn21, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "Total Overtime", Me.GridColumn22, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "Employee", Me.GridColumn15, "", "")})
         Me.GVOvertimeStore.LevelIndent = 0
         Me.GVOvertimeStore.Name = "GVOvertimeStore"
         Me.GVOvertimeStore.OptionsBehavior.AutoExpandAllGroups = True
@@ -607,11 +607,11 @@ Partial Public Class ReportEmpPayrollOvertime
         'GridColumn19
         '
         Me.GridColumn19.Caption = "Overtime Reguler"
-        Me.GridColumn19.DisplayFormat.FormatString = "N0"
+        Me.GridColumn19.DisplayFormat.FormatString = "N2"
         Me.GridColumn19.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn19.FieldName = "Overtime Reguler"
         Me.GridColumn19.Name = "GridColumn19"
-        Me.GridColumn19.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Overtime Reguler", "{0:N0}")})
+        Me.GridColumn19.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Overtime Reguler", "{0:N2}")})
         Me.GridColumn19.Visible = True
         Me.GridColumn19.VisibleIndex = 5
         Me.GridColumn19.Width = 95
@@ -631,11 +631,11 @@ Partial Public Class ReportEmpPayrollOvertime
         'GridColumn21
         '
         Me.GridColumn21.Caption = "Overtime Event"
-        Me.GridColumn21.DisplayFormat.FormatString = "N0"
+        Me.GridColumn21.DisplayFormat.FormatString = "N2"
         Me.GridColumn21.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn21.FieldName = "Overtime Event"
         Me.GridColumn21.Name = "GridColumn21"
-        Me.GridColumn21.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Overtime Event", "{0:N0}")})
+        Me.GridColumn21.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Overtime Event", "{0:N2}")})
         Me.GridColumn21.Visible = True
         Me.GridColumn21.VisibleIndex = 7
         Me.GridColumn21.Width = 95
@@ -643,11 +643,11 @@ Partial Public Class ReportEmpPayrollOvertime
         'GridColumn22
         '
         Me.GridColumn22.Caption = "Total Overtime"
-        Me.GridColumn22.DisplayFormat.FormatString = "N0"
+        Me.GridColumn22.DisplayFormat.FormatString = "N2"
         Me.GridColumn22.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn22.FieldName = "Total Overtime"
         Me.GridColumn22.Name = "GridColumn22"
-        Me.GridColumn22.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Total Overtime", "{0:N0}")})
+        Me.GridColumn22.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Total Overtime", "{0:N2}")})
         Me.GridColumn22.Visible = True
         Me.GridColumn22.VisibleIndex = 8
         Me.GridColumn22.Width = 108

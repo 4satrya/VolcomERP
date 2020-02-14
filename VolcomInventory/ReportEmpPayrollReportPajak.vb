@@ -41,7 +41,7 @@
         End If
     End Sub
 
-    Private Sub GVPajak_CustomSummaryCalculate(sender As Object, e As DevExpress.Data.CustomSummaryEventArgs) Handles GVPajak.CustomSummaryCalculate
+    Private Sub GVPajak_CustomSummaryCalculate(sender As Object, e As DevExpress.Data.CustomSummaryEventArgs)
         Dim item As DevExpress.XtraGrid.GridSummaryItem = TryCast(e.Item, DevExpress.XtraGrid.GridSummaryItem)
 
         If item.FieldName.ToString = "employee_name" Then

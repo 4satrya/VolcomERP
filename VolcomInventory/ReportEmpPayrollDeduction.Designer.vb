@@ -175,7 +175,7 @@ Partial Public Class ReportEmpPayrollDeduction
         Me.GBEmployee.Columns.Add(Me.GCEmployeeStatus)
         Me.GBEmployee.Name = "GBEmployee"
         Me.GBEmployee.VisibleIndex = 0
-        Me.GBEmployee.Width = 1056
+        Me.GBEmployee.Width = 997
         '
         'GCDepartement
         '
@@ -190,7 +190,7 @@ Partial Public Class ReportEmpPayrollDeduction
         Me.GCNIP.MinWidth = 45
         Me.GCNIP.Name = "GCNIP"
         Me.GCNIP.Visible = True
-        Me.GCNIP.Width = 218
+        Me.GCNIP.Width = 205
         '
         'GCEmployee
         '
@@ -202,7 +202,7 @@ Partial Public Class ReportEmpPayrollDeduction
         Me.GCEmployee.Name = "GCEmployee"
         Me.GCEmployee.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom)})
         Me.GCEmployee.Visible = True
-        Me.GCEmployee.Width = 195
+        Me.GCEmployee.Width = 180
         '
         'GCEmployeePosition
         '
@@ -210,10 +210,10 @@ Partial Public Class ReportEmpPayrollDeduction
         Me.GCEmployeePosition.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
         Me.GCEmployeePosition.Caption = "Employee Position"
         Me.GCEmployeePosition.FieldName = "Employee Position"
-        Me.GCEmployeePosition.MinWidth = 150
+        Me.GCEmployeePosition.MinWidth = 125
         Me.GCEmployeePosition.Name = "GCEmployeePosition"
         Me.GCEmployeePosition.Visible = True
-        Me.GCEmployeePosition.Width = 457
+        Me.GCEmployeePosition.Width = 433
         '
         'GCEmployeeStatus
         '
@@ -222,7 +222,7 @@ Partial Public Class ReportEmpPayrollDeduction
         Me.GCEmployeeStatus.MinWidth = 55
         Me.GCEmployeeStatus.Name = "GCEmployeeStatus"
         Me.GCEmployeeStatus.Visible = True
-        Me.GCEmployeeStatus.Width = 186
+        Me.GCEmployeeStatus.Width = 179
         '
         'GCSubDepartement
         '
@@ -559,7 +559,7 @@ Partial Public Class ReportEmpPayrollDeduction
         Me.GridBand1.Columns.Add(Me.GCEmployeeStatusStore)
         Me.GridBand1.Name = "GridBand1"
         Me.GridBand1.VisibleIndex = 0
-        Me.GridBand1.Width = 1056
+        Me.GridBand1.Width = 997
         '
         'GCDepartementStore
         '
@@ -574,7 +574,7 @@ Partial Public Class ReportEmpPayrollDeduction
         Me.GCNIPStore.MinWidth = 45
         Me.GCNIPStore.Name = "GCNIPStore"
         Me.GCNIPStore.Visible = True
-        Me.GCNIPStore.Width = 218
+        Me.GCNIPStore.Width = 205
         '
         'GCEmployeeStore
         '
@@ -586,7 +586,7 @@ Partial Public Class ReportEmpPayrollDeduction
         Me.GCEmployeeStore.Name = "GCEmployeeStore"
         Me.GCEmployeeStore.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom)})
         Me.GCEmployeeStore.Visible = True
-        Me.GCEmployeeStore.Width = 195
+        Me.GCEmployeeStore.Width = 180
         '
         'GCEmployeePositionStore
         '
@@ -594,10 +594,10 @@ Partial Public Class ReportEmpPayrollDeduction
         Me.GCEmployeePositionStore.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
         Me.GCEmployeePositionStore.Caption = "Employee Position"
         Me.GCEmployeePositionStore.FieldName = "Employee Position"
-        Me.GCEmployeePositionStore.MinWidth = 150
+        Me.GCEmployeePositionStore.MinWidth = 125
         Me.GCEmployeePositionStore.Name = "GCEmployeePositionStore"
         Me.GCEmployeePositionStore.Visible = True
-        Me.GCEmployeePositionStore.Width = 457
+        Me.GCEmployeePositionStore.Width = 433
         '
         'GCEmployeeStatusStore
         '
@@ -606,7 +606,7 @@ Partial Public Class ReportEmpPayrollDeduction
         Me.GCEmployeeStatusStore.MinWidth = 55
         Me.GCEmployeeStatusStore.Name = "GCEmployeeStatusStore"
         Me.GCEmployeeStatusStore.Visible = True
-        Me.GCEmployeeStatusStore.Width = 186
+        Me.GCEmployeeStatusStore.Width = 179
         '
         'GCSubDepartementStore
         '

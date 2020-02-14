@@ -25,6 +25,7 @@ Partial Class FormEmpPayrollReportSummary
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
         Me.GCSummary = New DevExpress.XtraGrid.GridControl()
         Me.GVSummary = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn14 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -40,7 +41,6 @@ Partial Class FormEmpPayrollReportSummary
         Me.GridColumn13 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
         Me.SBPrint = New DevExpress.XtraEditors.SimpleButton()
-        Me.GridColumn14 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
@@ -108,6 +108,14 @@ Partial Class FormEmpPayrollReportSummary
         Me.GVSummary.OptionsView.ShowGroupPanel = False
         Me.GVSummary.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumn14, DevExpress.Data.ColumnSortOrder.Ascending)})
         '
+        'GridColumn14
+        '
+        Me.GridColumn14.Caption = "Group"
+        Me.GridColumn14.FieldName = "group_report"
+        Me.GridColumn14.Name = "GridColumn14"
+        Me.GridColumn14.Visible = True
+        Me.GridColumn14.VisibleIndex = 0
+        '
         'GridColumn2
         '
         Me.GridColumn2.Caption = "Departement"
@@ -131,7 +139,7 @@ Partial Class FormEmpPayrollReportSummary
         Me.GridColumn3.AppearanceHeader.Options.UseTextOptions = True
         Me.GridColumn3.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GridColumn3.Caption = "Salary"
-        Me.GridColumn3.DisplayFormat.FormatString = "N0"
+        Me.GridColumn3.DisplayFormat.FormatString = "N2"
         Me.GridColumn3.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn3.FieldName = "salary"
         Me.GridColumn3.Name = "GridColumn3"
@@ -146,7 +154,7 @@ Partial Class FormEmpPayrollReportSummary
         Me.GridColumn4.AppearanceHeader.Options.UseTextOptions = True
         Me.GridColumn4.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GridColumn4.Caption = "Overtime Event"
-        Me.GridColumn4.DisplayFormat.FormatString = "N0"
+        Me.GridColumn4.DisplayFormat.FormatString = "N2"
         Me.GridColumn4.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn4.FieldName = "event_overtime"
         Me.GridColumn4.Name = "GridColumn4"
@@ -161,7 +169,7 @@ Partial Class FormEmpPayrollReportSummary
         Me.GridColumn5.AppearanceHeader.Options.UseTextOptions = True
         Me.GridColumn5.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GridColumn5.Caption = "Cooperative Loan"
-        Me.GridColumn5.DisplayFormat.FormatString = "N0"
+        Me.GridColumn5.DisplayFormat.FormatString = "N2"
         Me.GridColumn5.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn5.FieldName = "d_cooperative_loan"
         Me.GridColumn5.Name = "GridColumn5"
@@ -176,7 +184,7 @@ Partial Class FormEmpPayrollReportSummary
         Me.GridColumn6.AppearanceHeader.Options.UseTextOptions = True
         Me.GridColumn6.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GridColumn6.Caption = "BPJS Kesehatan"
-        Me.GridColumn6.DisplayFormat.FormatString = "N0"
+        Me.GridColumn6.DisplayFormat.FormatString = "N2"
         Me.GridColumn6.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn6.FieldName = "d_bpjskes"
         Me.GridColumn6.Name = "GridColumn6"
@@ -191,7 +199,7 @@ Partial Class FormEmpPayrollReportSummary
         Me.GridColumn7.AppearanceHeader.Options.UseTextOptions = True
         Me.GridColumn7.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GridColumn7.Caption = "JP Contribution"
-        Me.GridColumn7.DisplayFormat.FormatString = "N0"
+        Me.GridColumn7.DisplayFormat.FormatString = "N2"
         Me.GridColumn7.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn7.FieldName = "d_jaminan_pensiun"
         Me.GridColumn7.Name = "GridColumn7"
@@ -206,7 +214,7 @@ Partial Class FormEmpPayrollReportSummary
         Me.GridColumn8.AppearanceHeader.Options.UseTextOptions = True
         Me.GridColumn8.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GridColumn8.Caption = "BPJSTK"
-        Me.GridColumn8.DisplayFormat.FormatString = "N0"
+        Me.GridColumn8.DisplayFormat.FormatString = "N2"
         Me.GridColumn8.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn8.FieldName = "d_bpjstk"
         Me.GridColumn8.Name = "GridColumn8"
@@ -221,7 +229,7 @@ Partial Class FormEmpPayrollReportSummary
         Me.GridColumn9.AppearanceHeader.Options.UseTextOptions = True
         Me.GridColumn9.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GridColumn9.Caption = "Cooperative Contribution"
-        Me.GridColumn9.DisplayFormat.FormatString = "N0"
+        Me.GridColumn9.DisplayFormat.FormatString = "N2"
         Me.GridColumn9.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn9.FieldName = "d_cooperative_contribution"
         Me.GridColumn9.Name = "GridColumn9"
@@ -236,7 +244,7 @@ Partial Class FormEmpPayrollReportSummary
         Me.GridColumn10.AppearanceHeader.Options.UseTextOptions = True
         Me.GridColumn10.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GridColumn10.Caption = "Saving Missing"
-        Me.GridColumn10.DisplayFormat.FormatString = "N0"
+        Me.GridColumn10.DisplayFormat.FormatString = "N2"
         Me.GridColumn10.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn10.FieldName = "d_missing"
         Me.GridColumn10.Name = "GridColumn10"
@@ -251,7 +259,7 @@ Partial Class FormEmpPayrollReportSummary
         Me.GridColumn11.AppearanceHeader.Options.UseTextOptions = True
         Me.GridColumn11.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GridColumn11.Caption = "Meditation / Cash Receipt"
-        Me.GridColumn11.DisplayFormat.FormatString = "N0"
+        Me.GridColumn11.DisplayFormat.FormatString = "N2"
         Me.GridColumn11.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn11.FieldName = "d_meditation_cash"
         Me.GridColumn11.Name = "GridColumn11"
@@ -266,7 +274,7 @@ Partial Class FormEmpPayrollReportSummary
         Me.GridColumn12.AppearanceHeader.Options.UseTextOptions = True
         Me.GridColumn12.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GridColumn12.Caption = "Other"
-        Me.GridColumn12.DisplayFormat.FormatString = "N0"
+        Me.GridColumn12.DisplayFormat.FormatString = "N2"
         Me.GridColumn12.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn12.FieldName = "d_other"
         Me.GridColumn12.Name = "GridColumn12"
@@ -311,14 +319,6 @@ Partial Class FormEmpPayrollReportSummary
         Me.SBPrint.Size = New System.Drawing.Size(85, 42)
         Me.SBPrint.TabIndex = 0
         Me.SBPrint.Text = "Print"
-        '
-        'GridColumn14
-        '
-        Me.GridColumn14.Caption = "Group"
-        Me.GridColumn14.FieldName = "group_report"
-        Me.GridColumn14.Name = "GridColumn14"
-        Me.GridColumn14.Visible = True
-        Me.GridColumn14.VisibleIndex = 0
         '
         'FormEmpPayrollReportSummary
         '

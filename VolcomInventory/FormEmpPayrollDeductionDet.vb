@@ -71,7 +71,7 @@
         data.Columns.Add("actual_workdays", GetType(Decimal))
         data.Columns.Add("total_salary", GetType(Integer))
         data.Columns.Add("total_days", GetType(Decimal))
-        data.Columns.Add("value", GetType(Integer))
+        data.Columns.Add("value", GetType(Decimal))
 
         GCDeduction.DataSource = data
 

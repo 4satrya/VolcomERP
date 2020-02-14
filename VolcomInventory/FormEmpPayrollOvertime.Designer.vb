@@ -34,6 +34,7 @@ Partial Class FormEmpPayrollOvertime
         Me.GVOvertime = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn32 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn30 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn26 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn29 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -73,8 +74,6 @@ Partial Class FormEmpPayrollOvertime
         Me.GridColumn31 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn23 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PMSalary = New DevExpress.XtraBars.PopupMenu(Me.components)
-        Me.BarEditItem2 = New DevExpress.XtraBars.BarEditItem()
-        Me.RepositoryItemTextEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.BMSalary = New DevExpress.XtraBars.BarManager(Me.components)
         Me.barDockControlTop = New DevExpress.XtraBars.BarDockControl()
         Me.barDockControlBottom = New DevExpress.XtraBars.BarDockControl()
@@ -82,7 +81,8 @@ Partial Class FormEmpPayrollOvertime
         Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl()
         Me.BarEditItem1 = New DevExpress.XtraBars.BarEditItem()
         Me.RepositoryItemTextEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
-        Me.GridColumn32 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.BarEditItem2 = New DevExpress.XtraBars.BarEditItem()
+        Me.RepositoryItemTextEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.LEPayrollPeriode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -98,9 +98,9 @@ Partial Class FormEmpPayrollOvertime
         CType(Me.GCDP, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVDP, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PMSalary, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BMSalary, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl1
@@ -233,7 +233,7 @@ Partial Class FormEmpPayrollOvertime
         Me.GVOvertime.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn32, Me.GridColumn30, Me.GridColumn26, Me.GridColumn29, Me.GridColumn11, Me.GridColumn3, Me.GridColumn24, Me.GridColumn4, Me.GridColumn18, Me.GridColumn7, Me.GridColumn5, Me.GridColumn6, Me.GridColumn8, Me.GridColumn9, Me.GridColumn28, Me.GridColumnTotHour, Me.GridColumnTotPoint, Me.GridColumn14, Me.GridColumn21, Me.GridColumn22})
         Me.GVOvertime.GridControl = Me.GCOvertime
         Me.GVOvertime.GroupCount = 3
-        Me.GVOvertime.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_hour_actual", Me.GridColumn28, "{0:N1}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_hour", Me.GridColumnTotHour, "{0:N1}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_point", Me.GridColumnTotPoint, "{0:N1}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "wages_per_point_total", Me.GridColumn21, "{0:N0}")})
+        Me.GVOvertime.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_hour_actual", Me.GridColumn28, "{0:N1}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_hour", Me.GridColumnTotHour, "{0:N1}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_point", Me.GridColumnTotPoint, "{0:N1}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "wages_per_point_total", Me.GridColumn21, "{0:N2}")})
         Me.GVOvertime.Name = "GVOvertime"
         Me.GVOvertime.OptionsBehavior.AutoExpandAllGroups = True
         Me.GVOvertime.OptionsBehavior.Editable = False
@@ -255,6 +255,11 @@ Partial Class FormEmpPayrollOvertime
         Me.GridColumn2.Caption = "Id Employee"
         Me.GridColumn2.FieldName = "id_employee"
         Me.GridColumn2.Name = "GridColumn2"
+        '
+        'GridColumn32
+        '
+        Me.GridColumn32.FieldName = "id_ot_type"
+        Me.GridColumn32.Name = "GridColumn32"
         '
         'GridColumn30
         '
@@ -407,7 +412,7 @@ Partial Class FormEmpPayrollOvertime
         'GridColumn14
         '
         Me.GridColumn14.Caption = "Wages"
-        Me.GridColumn14.DisplayFormat.FormatString = "N0"
+        Me.GridColumn14.DisplayFormat.FormatString = "N2"
         Me.GridColumn14.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn14.FieldName = "wages_per_point"
         Me.GridColumn14.Name = "GridColumn14"
@@ -417,11 +422,11 @@ Partial Class FormEmpPayrollOvertime
         'GridColumn21
         '
         Me.GridColumn21.Caption = "Wages X Point"
-        Me.GridColumn21.DisplayFormat.FormatString = "N0"
+        Me.GridColumn21.DisplayFormat.FormatString = "N2"
         Me.GridColumn21.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn21.FieldName = "wages_per_point_total"
         Me.GridColumn21.Name = "GridColumn21"
-        Me.GridColumn21.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "wages_per_point_total", "{0:N0}")})
+        Me.GridColumn21.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "wages_per_point_total", "{0:N2}")})
         Me.GridColumn21.Visible = True
         Me.GridColumn21.VisibleIndex = 14
         '
@@ -613,19 +618,6 @@ Partial Class FormEmpPayrollOvertime
         Me.PMSalary.Manager = Me.BMSalary
         Me.PMSalary.Name = "PMSalary"
         '
-        'BarEditItem2
-        '
-        Me.BarEditItem2.Caption = "Insert Fixed Salary"
-        Me.BarEditItem2.Edit = Me.RepositoryItemTextEdit2
-        Me.BarEditItem2.Id = 1
-        Me.BarEditItem2.Name = "BarEditItem2"
-        Me.BarEditItem2.Width = 200
-        '
-        'RepositoryItemTextEdit2
-        '
-        Me.RepositoryItemTextEdit2.AutoHeight = False
-        Me.RepositoryItemTextEdit2.Name = "RepositoryItemTextEdit2"
-        '
         'BMSalary
         '
         Me.BMSalary.DockControls.Add(Me.barDockControlTop)
@@ -678,10 +670,18 @@ Partial Class FormEmpPayrollOvertime
         Me.RepositoryItemTextEdit1.AutoHeight = False
         Me.RepositoryItemTextEdit1.Name = "RepositoryItemTextEdit1"
         '
-        'GridColumn32
+        'BarEditItem2
         '
-        Me.GridColumn32.FieldName = "id_ot_type"
-        Me.GridColumn32.Name = "GridColumn32"
+        Me.BarEditItem2.Caption = "Insert Fixed Salary"
+        Me.BarEditItem2.Edit = Me.RepositoryItemTextEdit2
+        Me.BarEditItem2.Id = 1
+        Me.BarEditItem2.Name = "BarEditItem2"
+        Me.BarEditItem2.Width = 200
+        '
+        'RepositoryItemTextEdit2
+        '
+        Me.RepositoryItemTextEdit2.AutoHeight = False
+        Me.RepositoryItemTextEdit2.Name = "RepositoryItemTextEdit2"
         '
         'FormEmpPayrollOvertime
         '
@@ -717,9 +717,9 @@ Partial Class FormEmpPayrollOvertime
         CType(Me.GCDP, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVDP, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PMSalary, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BMSalary, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

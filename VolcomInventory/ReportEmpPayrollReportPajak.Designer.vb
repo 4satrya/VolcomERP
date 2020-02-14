@@ -20,38 +20,6 @@ Partial Public Class ReportEmpPayrollReportPajak
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.Detail = New DevExpress.XtraReports.UI.DetailBand()
-        Me.WinControlContainer1 = New DevExpress.XtraReports.UI.WinControlContainer()
-        Me.GCPajak = New DevExpress.XtraGrid.GridControl()
-        Me.GVPajak = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridView()
-        Me.GridColumnNIP = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.GridColumnName = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.BandedGridColumnNPWP = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.BandedGridColumnJenisKelamin = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.BandedGridColumnNPWPStatus = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.BandedGridColumnDepartement = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.GridColumnPosition = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.GridColumnStatus = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.BandedGridColumnActWorkdays = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.BandedGridColumnOvertimeHours = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.GridColumnTotTHP = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.BandedGridColumnTotalAdjustment = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.BandedGridColumnTotalPaymentOt = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.BandedGridColumnTotal1 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.BandedGridColumnGrandTotal = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.BandedGridColumnTotalDeduction = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.BandedGridColumnTotal2 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.BandedGridColumnJHTK = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.BandedGridColumnJPK = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.BandedGridColumnBPJSKESK = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.BandedGridColumnTotalK = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.BandedGridColumnJHTC = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.BandedGridColumnJKKC = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.BandedGridColumnJKMC = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.BandedGridColumnJPC = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.BandedGridColumnBPJSKESC = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.BandedGridColumnTotalC = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.BandedGridColumnTotalBPJSC = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.BandedGridColumnGroup = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.TopMargin = New DevExpress.XtraReports.UI.TopMarginBand()
         Me.BottomMargin = New DevExpress.XtraReports.UI.BottomMarginBand()
         Me.XrPageInfo1 = New DevExpress.XtraReports.UI.XRPageInfo()
@@ -62,18 +30,50 @@ Partial Public Class ReportEmpPayrollReportPajak
         Me.XrTable1 = New DevExpress.XtraReports.UI.XRTable()
         Me.XrTableRow1 = New DevExpress.XtraReports.UI.XRTableRow()
         Me.XrTableCell13 = New DevExpress.XtraReports.UI.XRTableCell()
-        Me.BandedGridColumnTHR = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.GCPajak = New DevExpress.XtraGrid.GridControl()
+        Me.GVPajak = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridView()
         Me.gridBand8 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
+        Me.GridColumnNIP = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.GridColumnName = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnNPWP = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnJenisKelamin = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnNPWPStatus = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnDepartement = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.GridColumnPosition = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.GridColumnStatus = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.GBWorkingDays = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
+        Me.BandedGridColumnActWorkdays = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnOvertimeHours = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.GBSalary = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
+        Me.GridColumnTotTHP = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnTotalAdjustment = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnTotalPaymentOt = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnTotal1 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.GBTotal = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
+        Me.BandedGridColumnGrandTotal = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.gridBand1 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
+        Me.BandedGridColumnTotalDeduction = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnTotal2 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.GBTHR = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
+        Me.BandedGridColumnTHR = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.gridBand3 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
+        Me.BandedGridColumnJHTK = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnJPK = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnBPJSKESK = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnTotalK = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.gridBand2 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
+        Me.BandedGridColumnJHTC = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnJKKC = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnJKMC = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnJPC = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnBPJSKESC = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnTotalC = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnTotalBPJSC = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnGroup = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.WinControlContainer1 = New DevExpress.XtraReports.UI.WinControlContainer()
+        CType(Me.XrTable1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GCPajak, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVPajak, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.XrTable1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         '
         'Detail
@@ -84,12 +84,90 @@ Partial Public Class ReportEmpPayrollReportPajak
         Me.Detail.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
         Me.Detail.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
         '
-        'WinControlContainer1
+        'TopMargin
         '
-        Me.WinControlContainer1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 0!)
-        Me.WinControlContainer1.Name = "WinControlContainer1"
-        Me.WinControlContainer1.SizeF = New System.Drawing.SizeF(1075.0!, 312.0!)
-        Me.WinControlContainer1.WinControl = Me.GCPajak
+        Me.TopMargin.HeightF = 30.0!
+        Me.TopMargin.Name = "TopMargin"
+        Me.TopMargin.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
+        Me.TopMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+        '
+        'BottomMargin
+        '
+        Me.BottomMargin.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrPageInfo1})
+        Me.BottomMargin.HeightF = 50.0!
+        Me.BottomMargin.Name = "BottomMargin"
+        Me.BottomMargin.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
+        Me.BottomMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+        '
+        'XrPageInfo1
+        '
+        Me.XrPageInfo1.Borders = DevExpress.XtraPrinting.BorderSide.None
+        Me.XrPageInfo1.Font = New System.Drawing.Font("Tahoma", 7.25!)
+        Me.XrPageInfo1.Format = "Page {0} of {1}"
+        Me.XrPageInfo1.LocationFloat = New DevExpress.Utils.PointFloat(925.0001!, 0!)
+        Me.XrPageInfo1.Name = "XrPageInfo1"
+        Me.XrPageInfo1.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrPageInfo1.SizeF = New System.Drawing.SizeF(150.0!, 18.71793!)
+        Me.XrPageInfo1.StylePriority.UseBorders = False
+        Me.XrPageInfo1.StylePriority.UseFont = False
+        Me.XrPageInfo1.StylePriority.UseTextAlignment = False
+        Me.XrPageInfo1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
+        '
+        'ReportHeader
+        '
+        Me.ReportHeader.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XLTitle, Me.XLPeriod})
+        Me.ReportHeader.HeightF = 63.99998!
+        Me.ReportHeader.Name = "ReportHeader"
+        '
+        'XLTitle
+        '
+        Me.XLTitle.Font = New System.Drawing.Font("Tahoma", 7.25!, System.Drawing.FontStyle.Bold)
+        Me.XLTitle.LocationFloat = New DevExpress.Utils.PointFloat(0!, 16.0!)
+        Me.XLTitle.Name = "XLTitle"
+        Me.XLTitle.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XLTitle.SizeF = New System.Drawing.SizeF(350.0!, 16.0!)
+        Me.XLTitle.StylePriority.UseFont = False
+        Me.XLTitle.Text = "PT. VOLCOM INDONESIA"
+        '
+        'XLPeriod
+        '
+        Me.XLPeriod.Font = New System.Drawing.Font("Tahoma", 7.25!, System.Drawing.FontStyle.Bold)
+        Me.XLPeriod.LocationFloat = New DevExpress.Utils.PointFloat(0!, 32.0!)
+        Me.XLPeriod.Name = "XLPeriod"
+        Me.XLPeriod.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XLPeriod.SizeF = New System.Drawing.SizeF(350.0!, 16.0!)
+        Me.XLPeriod.StylePriority.UseFont = False
+        '
+        'ReportFooter
+        '
+        Me.ReportFooter.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrTable1})
+        Me.ReportFooter.HeightF = 100.0!
+        Me.ReportFooter.KeepTogether = True
+        Me.ReportFooter.Name = "ReportFooter"
+        '
+        'XrTable1
+        '
+        Me.XrTable1.Font = New System.Drawing.Font("Tahoma", 7.25!)
+        Me.XrTable1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 20.0!)
+        Me.XrTable1.Name = "XrTable1"
+        Me.XrTable1.Rows.AddRange(New DevExpress.XtraReports.UI.XRTableRow() {Me.XrTableRow1})
+        Me.XrTable1.SizeF = New System.Drawing.SizeF(1075.0!, 25.0!)
+        Me.XrTable1.StylePriority.UseFont = False
+        '
+        'XrTableRow1
+        '
+        Me.XrTableRow1.Cells.AddRange(New DevExpress.XtraReports.UI.XRTableCell() {Me.XrTableCell13})
+        Me.XrTableRow1.Name = "XrTableRow1"
+        Me.XrTableRow1.Weight = 1.0R
+        '
+        'XrTableCell13
+        '
+        Me.XrTableCell13.Font = New System.Drawing.Font("Tahoma", 9.75!)
+        Me.XrTableCell13.Name = "XrTableCell13"
+        Me.XrTableCell13.StylePriority.UseFont = False
+        Me.XrTableCell13.Text = "Here Table Mark Goes, Please Ignore This"
+        Me.XrTableCell13.Visible = False
+        Me.XrTableCell13.Weight = 2.99999986405489R
         '
         'GCPajak
         '
@@ -146,7 +224,7 @@ Partial Public Class ReportEmpPayrollReportPajak
         Me.GVPajak.Columns.AddRange(New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn() {Me.BandedGridColumnGroup, Me.BandedGridColumnDepartement, Me.GridColumnNIP, Me.GridColumnName, Me.GridColumnPosition, Me.GridColumnStatus, Me.BandedGridColumnNPWP, Me.BandedGridColumnJenisKelamin, Me.BandedGridColumnNPWPStatus, Me.BandedGridColumnActWorkdays, Me.BandedGridColumnOvertimeHours, Me.GridColumnTotTHP, Me.BandedGridColumnTotalAdjustment, Me.BandedGridColumnTotalPaymentOt, Me.BandedGridColumnTotal1, Me.BandedGridColumnTHR, Me.BandedGridColumnTotalDeduction, Me.BandedGridColumnTotal2, Me.BandedGridColumnGrandTotal, Me.BandedGridColumnJHTK, Me.BandedGridColumnJPK, Me.BandedGridColumnBPJSKESK, Me.BandedGridColumnTotalK, Me.BandedGridColumnJHTC, Me.BandedGridColumnJKKC, Me.BandedGridColumnJKMC, Me.BandedGridColumnJPC, Me.BandedGridColumnBPJSKESC, Me.BandedGridColumnTotalC, Me.BandedGridColumnTotalBPJSC})
         Me.GVPajak.GridControl = Me.GCPajak
         Me.GVPajak.GroupCount = 2
-        Me.GVPajak.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "tot_thp", Me.GridColumnTotTHP, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_adjustment", Me.BandedGridColumnTotalAdjustment, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_ot_wages", Me.BandedGridColumnTotalPaymentOt, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_1", Me.BandedGridColumnTotal1, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_deduction", Me.BandedGridColumnTotalDeduction, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_2", Me.BandedGridColumnTotal2, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "grand_total", Me.BandedGridColumnGrandTotal, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "jht", Me.BandedGridColumnJHTC, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "jkk", Me.BandedGridColumnJKKC, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "jkm", Me.BandedGridColumnJKMC, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "jp", Me.BandedGridColumnJPC, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "bpjs", Me.BandedGridColumnBPJSKESC, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_jamsostek1", Me.BandedGridColumnTotalC, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_jamsostek2", Me.BandedGridColumnTotalBPJSC, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "employee_name", Me.GridColumnName, ""), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "jht_k", Me.BandedGridColumnJHTK, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "jp_k", Me.BandedGridColumnJPK, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "bpjs_k", Me.BandedGridColumnBPJSKESK, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_k", Me.BandedGridColumnTotalK, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_salary_thr", Me.BandedGridColumnTHR, "{0:N0}")})
+        Me.GVPajak.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "tot_thp", Me.GridColumnTotTHP, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_adjustment", Me.BandedGridColumnTotalAdjustment, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_ot_wages", Me.BandedGridColumnTotalPaymentOt, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_1", Me.BandedGridColumnTotal1, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_deduction", Me.BandedGridColumnTotalDeduction, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_2", Me.BandedGridColumnTotal2, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "grand_total", Me.BandedGridColumnGrandTotal, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "jht", Me.BandedGridColumnJHTC, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "jkk", Me.BandedGridColumnJKKC, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "jkm", Me.BandedGridColumnJKMC, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "jp", Me.BandedGridColumnJPC, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "bpjs", Me.BandedGridColumnBPJSKESC, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_jamsostek1", Me.BandedGridColumnTotalC, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_jamsostek2", Me.BandedGridColumnTotalBPJSC, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "employee_name", Me.GridColumnName, ""), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "jht_k", Me.BandedGridColumnJHTK, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "jp_k", Me.BandedGridColumnJPK, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "bpjs_k", Me.BandedGridColumnBPJSKESK, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_k", Me.BandedGridColumnTotalK, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_salary_thr", Me.BandedGridColumnTHR, "{0:N2}")})
         Me.GVPajak.LevelIndent = 0
         Me.GVPajak.Name = "GVPajak"
         Me.GVPajak.OptionsBehavior.AutoExpandAllGroups = True
@@ -158,6 +236,23 @@ Partial Public Class ReportEmpPayrollReportPajak
         Me.GVPajak.OptionsView.ShowGroupExpandCollapseButtons = False
         Me.GVPajak.OptionsView.ShowGroupPanel = False
         Me.GVPajak.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.BandedGridColumnGroup, DevExpress.Data.ColumnSortOrder.Descending), New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.BandedGridColumnDepartement, DevExpress.Data.ColumnSortOrder.Ascending)})
+        '
+        'gridBand8
+        '
+        Me.gridBand8.AppearanceHeader.Options.UseTextOptions = True
+        Me.gridBand8.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.gridBand8.Caption = "Karyawan"
+        Me.gridBand8.Columns.Add(Me.GridColumnNIP)
+        Me.gridBand8.Columns.Add(Me.GridColumnName)
+        Me.gridBand8.Columns.Add(Me.BandedGridColumnNPWP)
+        Me.gridBand8.Columns.Add(Me.BandedGridColumnJenisKelamin)
+        Me.gridBand8.Columns.Add(Me.BandedGridColumnNPWPStatus)
+        Me.gridBand8.Columns.Add(Me.BandedGridColumnDepartement)
+        Me.gridBand8.Columns.Add(Me.GridColumnPosition)
+        Me.gridBand8.Columns.Add(Me.GridColumnStatus)
+        Me.gridBand8.Name = "gridBand8"
+        Me.gridBand8.VisibleIndex = 0
+        Me.gridBand8.Width = 430
         '
         'GridColumnNIP
         '
@@ -249,6 +344,18 @@ Partial Public Class ReportEmpPayrollReportPajak
         Me.GridColumnStatus.OptionsColumn.AllowEdit = False
         Me.GridColumnStatus.Width = 90
         '
+        'GBWorkingDays
+        '
+        Me.GBWorkingDays.AppearanceHeader.Options.UseTextOptions = True
+        Me.GBWorkingDays.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GBWorkingDays.Caption = "Working Days (WD)"
+        Me.GBWorkingDays.Columns.Add(Me.BandedGridColumnActWorkdays)
+        Me.GBWorkingDays.Columns.Add(Me.BandedGridColumnOvertimeHours)
+        Me.GBWorkingDays.Name = "GBWorkingDays"
+        Me.GBWorkingDays.Visible = False
+        Me.GBWorkingDays.VisibleIndex = -1
+        Me.GBWorkingDays.Width = 105
+        '
         'BandedGridColumnActWorkdays
         '
         Me.BandedGridColumnActWorkdays.AppearanceCell.Options.UseTextOptions = True
@@ -277,6 +384,20 @@ Partial Public Class ReportEmpPayrollReportPajak
         Me.BandedGridColumnOvertimeHours.Visible = True
         Me.BandedGridColumnOvertimeHours.Width = 93
         '
+        'GBSalary
+        '
+        Me.GBSalary.AppearanceHeader.Options.UseTextOptions = True
+        Me.GBSalary.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GBSalary.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
+        Me.GBSalary.Caption = "Penghasilan Bruto"
+        Me.GBSalary.Columns.Add(Me.GridColumnTotTHP)
+        Me.GBSalary.Columns.Add(Me.BandedGridColumnTotalAdjustment)
+        Me.GBSalary.Columns.Add(Me.BandedGridColumnTotalPaymentOt)
+        Me.GBSalary.Columns.Add(Me.BandedGridColumnTotal1)
+        Me.GBSalary.Name = "GBSalary"
+        Me.GBSalary.VisibleIndex = 1
+        Me.GBSalary.Width = 86
+        '
         'GridColumnTotTHP
         '
         Me.GridColumnTotTHP.AppearanceCell.Options.UseTextOptions = True
@@ -285,12 +406,12 @@ Partial Public Class ReportEmpPayrollReportPajak
         Me.GridColumnTotTHP.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GridColumnTotTHP.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
         Me.GridColumnTotTHP.Caption = "Total THP"
-        Me.GridColumnTotTHP.DisplayFormat.FormatString = "N0"
+        Me.GridColumnTotTHP.DisplayFormat.FormatString = "N2"
         Me.GridColumnTotTHP.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnTotTHP.FieldName = "tot_thp"
         Me.GridColumnTotTHP.Name = "GridColumnTotTHP"
         Me.GridColumnTotTHP.OptionsColumn.AllowEdit = False
-        Me.GridColumnTotTHP.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "tot_thp", "{0:N0}")})
+        Me.GridColumnTotTHP.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "tot_thp", "{0:N2}")})
         '
         'BandedGridColumnTotalAdjustment
         '
@@ -300,12 +421,12 @@ Partial Public Class ReportEmpPayrollReportPajak
         Me.BandedGridColumnTotalAdjustment.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.BandedGridColumnTotalAdjustment.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
         Me.BandedGridColumnTotalAdjustment.Caption = "Total Bonus / Adjustment"
-        Me.BandedGridColumnTotalAdjustment.DisplayFormat.FormatString = "N0"
+        Me.BandedGridColumnTotalAdjustment.DisplayFormat.FormatString = "N2"
         Me.BandedGridColumnTotalAdjustment.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.BandedGridColumnTotalAdjustment.FieldName = "total_adjustment"
         Me.BandedGridColumnTotalAdjustment.Name = "BandedGridColumnTotalAdjustment"
         Me.BandedGridColumnTotalAdjustment.OptionsColumn.AllowEdit = False
-        Me.BandedGridColumnTotalAdjustment.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_adjustment", "{0:N0}")})
+        Me.BandedGridColumnTotalAdjustment.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_adjustment", "{0:N2}")})
         Me.BandedGridColumnTotalAdjustment.Width = 131
         '
         'BandedGridColumnTotalPaymentOt
@@ -316,12 +437,12 @@ Partial Public Class ReportEmpPayrollReportPajak
         Me.BandedGridColumnTotalPaymentOt.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.BandedGridColumnTotalPaymentOt.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
         Me.BandedGridColumnTotalPaymentOt.Caption = "Total Overtime"
-        Me.BandedGridColumnTotalPaymentOt.DisplayFormat.FormatString = "N0"
+        Me.BandedGridColumnTotalPaymentOt.DisplayFormat.FormatString = "N2"
         Me.BandedGridColumnTotalPaymentOt.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.BandedGridColumnTotalPaymentOt.FieldName = "total_ot_wages"
         Me.BandedGridColumnTotalPaymentOt.Name = "BandedGridColumnTotalPaymentOt"
         Me.BandedGridColumnTotalPaymentOt.OptionsColumn.AllowEdit = False
-        Me.BandedGridColumnTotalPaymentOt.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_ot_wages", "{0:N0}")})
+        Me.BandedGridColumnTotalPaymentOt.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_ot_wages", "{0:N2}")})
         Me.BandedGridColumnTotalPaymentOt.Width = 81
         '
         'BandedGridColumnTotal1
@@ -329,14 +450,22 @@ Partial Public Class ReportEmpPayrollReportPajak
         Me.BandedGridColumnTotal1.AppearanceHeader.Options.UseTextOptions = True
         Me.BandedGridColumnTotal1.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
         Me.BandedGridColumnTotal1.Caption = "Total I"
-        Me.BandedGridColumnTotal1.DisplayFormat.FormatString = "N0"
+        Me.BandedGridColumnTotal1.DisplayFormat.FormatString = "N2"
         Me.BandedGridColumnTotal1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.BandedGridColumnTotal1.FieldName = "total_1"
         Me.BandedGridColumnTotal1.Name = "BandedGridColumnTotal1"
         Me.BandedGridColumnTotal1.OptionsColumn.AllowEdit = False
-        Me.BandedGridColumnTotal1.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_1", "{0:N0}")})
+        Me.BandedGridColumnTotal1.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_1", "{0:N2}")})
         Me.BandedGridColumnTotal1.Visible = True
         Me.BandedGridColumnTotal1.Width = 86
+        '
+        'GBTotal
+        '
+        Me.GBTotal.Columns.Add(Me.BandedGridColumnGrandTotal)
+        Me.GBTotal.Name = "GBTotal"
+        Me.GBTotal.Visible = False
+        Me.GBTotal.VisibleIndex = -1
+        Me.GBTotal.Width = 75
         '
         'BandedGridColumnGrandTotal
         '
@@ -354,340 +483,6 @@ Partial Public Class ReportEmpPayrollReportPajak
         Me.BandedGridColumnGrandTotal.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "grand_total", "{0:N0}")})
         Me.BandedGridColumnGrandTotal.Visible = True
         '
-        'BandedGridColumnTotalDeduction
-        '
-        Me.BandedGridColumnTotalDeduction.AppearanceCell.Options.UseTextOptions = True
-        Me.BandedGridColumnTotalDeduction.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.BandedGridColumnTotalDeduction.AppearanceHeader.Options.UseTextOptions = True
-        Me.BandedGridColumnTotalDeduction.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.BandedGridColumnTotalDeduction.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
-        Me.BandedGridColumnTotalDeduction.Caption = "Total Deduction"
-        Me.BandedGridColumnTotalDeduction.DisplayFormat.FormatString = "N0"
-        Me.BandedGridColumnTotalDeduction.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.BandedGridColumnTotalDeduction.FieldName = "total_deduction"
-        Me.BandedGridColumnTotalDeduction.Name = "BandedGridColumnTotalDeduction"
-        Me.BandedGridColumnTotalDeduction.OptionsColumn.AllowEdit = False
-        Me.BandedGridColumnTotalDeduction.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_deduction", "{0:N0}")})
-        Me.BandedGridColumnTotalDeduction.Visible = True
-        Me.BandedGridColumnTotalDeduction.Width = 90
-        '
-        'BandedGridColumnTotal2
-        '
-        Me.BandedGridColumnTotal2.AppearanceHeader.Options.UseTextOptions = True
-        Me.BandedGridColumnTotal2.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
-        Me.BandedGridColumnTotal2.Caption = "Total II"
-        Me.BandedGridColumnTotal2.DisplayFormat.FormatString = "N0"
-        Me.BandedGridColumnTotal2.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.BandedGridColumnTotal2.FieldName = "total_2"
-        Me.BandedGridColumnTotal2.Name = "BandedGridColumnTotal2"
-        Me.BandedGridColumnTotal2.OptionsColumn.AllowEdit = False
-        Me.BandedGridColumnTotal2.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_2", "{0:N0}")})
-        Me.BandedGridColumnTotal2.Visible = True
-        '
-        'BandedGridColumnJHTK
-        '
-        Me.BandedGridColumnJHTK.AppearanceHeader.Options.UseTextOptions = True
-        Me.BandedGridColumnJHTK.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
-        Me.BandedGridColumnJHTK.Caption = "JHT 2%"
-        Me.BandedGridColumnJHTK.DisplayFormat.FormatString = "N0"
-        Me.BandedGridColumnJHTK.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.BandedGridColumnJHTK.FieldName = "jht_k"
-        Me.BandedGridColumnJHTK.Name = "BandedGridColumnJHTK"
-        Me.BandedGridColumnJHTK.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "jht_k", "{0:N0}")})
-        Me.BandedGridColumnJHTK.Visible = True
-        '
-        'BandedGridColumnJPK
-        '
-        Me.BandedGridColumnJPK.AppearanceHeader.Options.UseTextOptions = True
-        Me.BandedGridColumnJPK.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
-        Me.BandedGridColumnJPK.Caption = "JP 1%"
-        Me.BandedGridColumnJPK.DisplayFormat.FormatString = "N0"
-        Me.BandedGridColumnJPK.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.BandedGridColumnJPK.FieldName = "jp_k"
-        Me.BandedGridColumnJPK.Name = "BandedGridColumnJPK"
-        Me.BandedGridColumnJPK.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "jp_k", "{0:N0}")})
-        Me.BandedGridColumnJPK.Visible = True
-        '
-        'BandedGridColumnBPJSKESK
-        '
-        Me.BandedGridColumnBPJSKESK.AppearanceHeader.Options.UseTextOptions = True
-        Me.BandedGridColumnBPJSKESK.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
-        Me.BandedGridColumnBPJSKESK.Caption = "BPJSKES 1%"
-        Me.BandedGridColumnBPJSKESK.DisplayFormat.FormatString = "N0"
-        Me.BandedGridColumnBPJSKESK.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.BandedGridColumnBPJSKESK.FieldName = "bpjs_k"
-        Me.BandedGridColumnBPJSKESK.Name = "BandedGridColumnBPJSKESK"
-        Me.BandedGridColumnBPJSKESK.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "bpjs_k", "{0:N0}")})
-        Me.BandedGridColumnBPJSKESK.Visible = True
-        '
-        'BandedGridColumnTotalK
-        '
-        Me.BandedGridColumnTotalK.AppearanceHeader.Options.UseTextOptions = True
-        Me.BandedGridColumnTotalK.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
-        Me.BandedGridColumnTotalK.Caption = "Total"
-        Me.BandedGridColumnTotalK.DisplayFormat.FormatString = "N0"
-        Me.BandedGridColumnTotalK.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.BandedGridColumnTotalK.FieldName = "total_k"
-        Me.BandedGridColumnTotalK.Name = "BandedGridColumnTotalK"
-        Me.BandedGridColumnTotalK.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_k", "{0:N0}")})
-        Me.BandedGridColumnTotalK.Visible = True
-        '
-        'BandedGridColumnJHTC
-        '
-        Me.BandedGridColumnJHTC.AppearanceHeader.Options.UseTextOptions = True
-        Me.BandedGridColumnJHTC.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
-        Me.BandedGridColumnJHTC.Caption = "JHT 3.7%"
-        Me.BandedGridColumnJHTC.DisplayFormat.FormatString = "N0"
-        Me.BandedGridColumnJHTC.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.BandedGridColumnJHTC.FieldName = "jht"
-        Me.BandedGridColumnJHTC.Name = "BandedGridColumnJHTC"
-        Me.BandedGridColumnJHTC.OptionsColumn.AllowEdit = False
-        Me.BandedGridColumnJHTC.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "jht", "{0:N0}")})
-        Me.BandedGridColumnJHTC.Visible = True
-        Me.BandedGridColumnJHTC.Width = 58
-        '
-        'BandedGridColumnJKKC
-        '
-        Me.BandedGridColumnJKKC.AppearanceHeader.Options.UseTextOptions = True
-        Me.BandedGridColumnJKKC.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
-        Me.BandedGridColumnJKKC.Caption = "JKK 0.24%"
-        Me.BandedGridColumnJKKC.DisplayFormat.FormatString = "N0"
-        Me.BandedGridColumnJKKC.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.BandedGridColumnJKKC.FieldName = "jkk"
-        Me.BandedGridColumnJKKC.Name = "BandedGridColumnJKKC"
-        Me.BandedGridColumnJKKC.OptionsColumn.AllowEdit = False
-        Me.BandedGridColumnJKKC.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "jkk", "{0:N0}")})
-        Me.BandedGridColumnJKKC.Visible = True
-        Me.BandedGridColumnJKKC.Width = 63
-        '
-        'BandedGridColumnJKMC
-        '
-        Me.BandedGridColumnJKMC.AppearanceHeader.Options.UseTextOptions = True
-        Me.BandedGridColumnJKMC.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
-        Me.BandedGridColumnJKMC.Caption = "JKM 0.3%"
-        Me.BandedGridColumnJKMC.DisplayFormat.FormatString = "N0"
-        Me.BandedGridColumnJKMC.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.BandedGridColumnJKMC.FieldName = "jkm"
-        Me.BandedGridColumnJKMC.Name = "BandedGridColumnJKMC"
-        Me.BandedGridColumnJKMC.OptionsColumn.AllowEdit = False
-        Me.BandedGridColumnJKMC.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "jkm", "{0:N0}")})
-        Me.BandedGridColumnJKMC.Visible = True
-        Me.BandedGridColumnJKMC.Width = 59
-        '
-        'BandedGridColumnJPC
-        '
-        Me.BandedGridColumnJPC.AppearanceHeader.Options.UseTextOptions = True
-        Me.BandedGridColumnJPC.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
-        Me.BandedGridColumnJPC.Caption = "JP 2%"
-        Me.BandedGridColumnJPC.DisplayFormat.FormatString = "N0"
-        Me.BandedGridColumnJPC.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.BandedGridColumnJPC.FieldName = "jp"
-        Me.BandedGridColumnJPC.Name = "BandedGridColumnJPC"
-        Me.BandedGridColumnJPC.OptionsColumn.AllowEdit = False
-        Me.BandedGridColumnJPC.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "jp", "{0:N0}")})
-        Me.BandedGridColumnJPC.Visible = True
-        Me.BandedGridColumnJPC.Width = 41
-        '
-        'BandedGridColumnBPJSKESC
-        '
-        Me.BandedGridColumnBPJSKESC.AppearanceHeader.Options.UseTextOptions = True
-        Me.BandedGridColumnBPJSKESC.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
-        Me.BandedGridColumnBPJSKESC.Caption = "BPJSKES 4%"
-        Me.BandedGridColumnBPJSKESC.DisplayFormat.FormatString = "N0"
-        Me.BandedGridColumnBPJSKESC.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.BandedGridColumnBPJSKESC.FieldName = "bpjs"
-        Me.BandedGridColumnBPJSKESC.Name = "BandedGridColumnBPJSKESC"
-        Me.BandedGridColumnBPJSKESC.OptionsColumn.AllowEdit = False
-        Me.BandedGridColumnBPJSKESC.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "bpjs", "{0:N0}")})
-        Me.BandedGridColumnBPJSKESC.Visible = True
-        Me.BandedGridColumnBPJSKESC.Width = 71
-        '
-        'BandedGridColumnTotalC
-        '
-        Me.BandedGridColumnTotalC.AppearanceHeader.Options.UseTextOptions = True
-        Me.BandedGridColumnTotalC.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
-        Me.BandedGridColumnTotalC.Caption = "Total"
-        Me.BandedGridColumnTotalC.DisplayFormat.FormatString = "N0"
-        Me.BandedGridColumnTotalC.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.BandedGridColumnTotalC.FieldName = "total_jamsostek1"
-        Me.BandedGridColumnTotalC.Name = "BandedGridColumnTotalC"
-        Me.BandedGridColumnTotalC.OptionsColumn.AllowEdit = False
-        Me.BandedGridColumnTotalC.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_jamsostek1", "{0:N0}")})
-        Me.BandedGridColumnTotalC.Visible = True
-        Me.BandedGridColumnTotalC.Width = 37
-        '
-        'BandedGridColumnTotalBPJSC
-        '
-        Me.BandedGridColumnTotalBPJSC.AppearanceHeader.Options.UseTextOptions = True
-        Me.BandedGridColumnTotalBPJSC.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
-        Me.BandedGridColumnTotalBPJSC.Caption = "Total BPJS (JKK, JKM, BPJSKES)"
-        Me.BandedGridColumnTotalBPJSC.DisplayFormat.FormatString = "N0"
-        Me.BandedGridColumnTotalBPJSC.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.BandedGridColumnTotalBPJSC.FieldName = "total_jamsostek2"
-        Me.BandedGridColumnTotalBPJSC.Name = "BandedGridColumnTotalBPJSC"
-        Me.BandedGridColumnTotalBPJSC.OptionsColumn.AllowEdit = False
-        Me.BandedGridColumnTotalBPJSC.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_jamsostek2", "{0:N0}")})
-        Me.BandedGridColumnTotalBPJSC.Visible = True
-        Me.BandedGridColumnTotalBPJSC.Width = 144
-        '
-        'BandedGridColumnGroup
-        '
-        Me.BandedGridColumnGroup.AppearanceHeader.Options.UseTextOptions = True
-        Me.BandedGridColumnGroup.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
-        Me.BandedGridColumnGroup.Caption = "Group"
-        Me.BandedGridColumnGroup.FieldName = "group_report"
-        Me.BandedGridColumnGroup.Name = "BandedGridColumnGroup"
-        Me.BandedGridColumnGroup.OptionsColumn.AllowEdit = False
-        '
-        'TopMargin
-        '
-        Me.TopMargin.HeightF = 30.0!
-        Me.TopMargin.Name = "TopMargin"
-        Me.TopMargin.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
-        Me.TopMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
-        '
-        'BottomMargin
-        '
-        Me.BottomMargin.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrPageInfo1})
-        Me.BottomMargin.HeightF = 50.0!
-        Me.BottomMargin.Name = "BottomMargin"
-        Me.BottomMargin.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
-        Me.BottomMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
-        '
-        'XrPageInfo1
-        '
-        Me.XrPageInfo1.Borders = DevExpress.XtraPrinting.BorderSide.None
-        Me.XrPageInfo1.Font = New System.Drawing.Font("Tahoma", 7.25!)
-        Me.XrPageInfo1.Format = "Page {0} of {1}"
-        Me.XrPageInfo1.LocationFloat = New DevExpress.Utils.PointFloat(925.0001!, 0!)
-        Me.XrPageInfo1.Name = "XrPageInfo1"
-        Me.XrPageInfo1.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrPageInfo1.SizeF = New System.Drawing.SizeF(150.0!, 18.71793!)
-        Me.XrPageInfo1.StylePriority.UseBorders = False
-        Me.XrPageInfo1.StylePriority.UseFont = False
-        Me.XrPageInfo1.StylePriority.UseTextAlignment = False
-        Me.XrPageInfo1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
-        '
-        'ReportHeader
-        '
-        Me.ReportHeader.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XLTitle, Me.XLPeriod})
-        Me.ReportHeader.HeightF = 63.99998!
-        Me.ReportHeader.Name = "ReportHeader"
-        '
-        'XLTitle
-        '
-        Me.XLTitle.Font = New System.Drawing.Font("Tahoma", 7.25!, System.Drawing.FontStyle.Bold)
-        Me.XLTitle.LocationFloat = New DevExpress.Utils.PointFloat(0!, 16.0!)
-        Me.XLTitle.Name = "XLTitle"
-        Me.XLTitle.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XLTitle.SizeF = New System.Drawing.SizeF(350.0!, 16.0!)
-        Me.XLTitle.StylePriority.UseFont = False
-        Me.XLTitle.Text = "PT. VOLCOM INDONESIA"
-        '
-        'XLPeriod
-        '
-        Me.XLPeriod.Font = New System.Drawing.Font("Tahoma", 7.25!, System.Drawing.FontStyle.Bold)
-        Me.XLPeriod.LocationFloat = New DevExpress.Utils.PointFloat(0!, 32.0!)
-        Me.XLPeriod.Name = "XLPeriod"
-        Me.XLPeriod.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XLPeriod.SizeF = New System.Drawing.SizeF(350.0!, 16.0!)
-        Me.XLPeriod.StylePriority.UseFont = False
-        '
-        'ReportFooter
-        '
-        Me.ReportFooter.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrTable1})
-        Me.ReportFooter.HeightF = 100.0!
-        Me.ReportFooter.KeepTogether = True
-        Me.ReportFooter.Name = "ReportFooter"
-        '
-        'XrTable1
-        '
-        Me.XrTable1.Font = New System.Drawing.Font("Tahoma", 7.25!)
-        Me.XrTable1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 20.0!)
-        Me.XrTable1.Name = "XrTable1"
-        Me.XrTable1.Rows.AddRange(New DevExpress.XtraReports.UI.XRTableRow() {Me.XrTableRow1})
-        Me.XrTable1.SizeF = New System.Drawing.SizeF(1075.0!, 25.0!)
-        Me.XrTable1.StylePriority.UseFont = False
-        '
-        'XrTableRow1
-        '
-        Me.XrTableRow1.Cells.AddRange(New DevExpress.XtraReports.UI.XRTableCell() {Me.XrTableCell13})
-        Me.XrTableRow1.Name = "XrTableRow1"
-        Me.XrTableRow1.Weight = 1.0R
-        '
-        'XrTableCell13
-        '
-        Me.XrTableCell13.Font = New System.Drawing.Font("Tahoma", 9.75!)
-        Me.XrTableCell13.Name = "XrTableCell13"
-        Me.XrTableCell13.StylePriority.UseFont = False
-        Me.XrTableCell13.Text = "Here Table Mark Goes, Please Ignore This"
-        Me.XrTableCell13.Visible = False
-        Me.XrTableCell13.Weight = 2.99999986405489R
-        '
-        'BandedGridColumnTHR
-        '
-        Me.BandedGridColumnTHR.AppearanceHeader.Options.UseTextOptions = True
-        Me.BandedGridColumnTHR.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
-        Me.BandedGridColumnTHR.Caption = "Total 1"
-        Me.BandedGridColumnTHR.DisplayFormat.FormatString = "N0"
-        Me.BandedGridColumnTHR.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.BandedGridColumnTHR.FieldName = "total_salary_thr"
-        Me.BandedGridColumnTHR.Name = "BandedGridColumnTHR"
-        Me.BandedGridColumnTHR.OptionsColumn.AllowEdit = False
-        Me.BandedGridColumnTHR.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_salary_thr", "{0:N0}")})
-        Me.BandedGridColumnTHR.Visible = True
-        '
-        'gridBand8
-        '
-        Me.gridBand8.AppearanceHeader.Options.UseTextOptions = True
-        Me.gridBand8.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.gridBand8.Caption = "Karyawan"
-        Me.gridBand8.Columns.Add(Me.GridColumnNIP)
-        Me.gridBand8.Columns.Add(Me.GridColumnName)
-        Me.gridBand8.Columns.Add(Me.BandedGridColumnNPWP)
-        Me.gridBand8.Columns.Add(Me.BandedGridColumnJenisKelamin)
-        Me.gridBand8.Columns.Add(Me.BandedGridColumnNPWPStatus)
-        Me.gridBand8.Columns.Add(Me.BandedGridColumnDepartement)
-        Me.gridBand8.Columns.Add(Me.GridColumnPosition)
-        Me.gridBand8.Columns.Add(Me.GridColumnStatus)
-        Me.gridBand8.Name = "gridBand8"
-        Me.gridBand8.VisibleIndex = 0
-        Me.gridBand8.Width = 430
-        '
-        'GBWorkingDays
-        '
-        Me.GBWorkingDays.AppearanceHeader.Options.UseTextOptions = True
-        Me.GBWorkingDays.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.GBWorkingDays.Caption = "Working Days (WD)"
-        Me.GBWorkingDays.Columns.Add(Me.BandedGridColumnActWorkdays)
-        Me.GBWorkingDays.Columns.Add(Me.BandedGridColumnOvertimeHours)
-        Me.GBWorkingDays.Name = "GBWorkingDays"
-        Me.GBWorkingDays.Visible = False
-        Me.GBWorkingDays.VisibleIndex = -1
-        Me.GBWorkingDays.Width = 105
-        '
-        'GBSalary
-        '
-        Me.GBSalary.AppearanceHeader.Options.UseTextOptions = True
-        Me.GBSalary.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.GBSalary.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
-        Me.GBSalary.Caption = "Penghasilan Bruto"
-        Me.GBSalary.Columns.Add(Me.GridColumnTotTHP)
-        Me.GBSalary.Columns.Add(Me.BandedGridColumnTotalAdjustment)
-        Me.GBSalary.Columns.Add(Me.BandedGridColumnTotalPaymentOt)
-        Me.GBSalary.Columns.Add(Me.BandedGridColumnTotal1)
-        Me.GBSalary.Name = "GBSalary"
-        Me.GBSalary.VisibleIndex = 1
-        Me.GBSalary.Width = 86
-        '
-        'GBTotal
-        '
-        Me.GBTotal.Columns.Add(Me.BandedGridColumnGrandTotal)
-        Me.GBTotal.Name = "GBTotal"
-        Me.GBTotal.Visible = False
-        Me.GBTotal.VisibleIndex = -1
-        Me.GBTotal.Width = 75
-        '
         'gridBand1
         '
         Me.gridBand1.Columns.Add(Me.BandedGridColumnTotalDeduction)
@@ -696,6 +491,36 @@ Partial Public Class ReportEmpPayrollReportPajak
         Me.gridBand1.Visible = False
         Me.gridBand1.VisibleIndex = -1
         Me.gridBand1.Width = 165
+        '
+        'BandedGridColumnTotalDeduction
+        '
+        Me.BandedGridColumnTotalDeduction.AppearanceCell.Options.UseTextOptions = True
+        Me.BandedGridColumnTotalDeduction.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.BandedGridColumnTotalDeduction.AppearanceHeader.Options.UseTextOptions = True
+        Me.BandedGridColumnTotalDeduction.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.BandedGridColumnTotalDeduction.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
+        Me.BandedGridColumnTotalDeduction.Caption = "Total Deduction"
+        Me.BandedGridColumnTotalDeduction.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumnTotalDeduction.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumnTotalDeduction.FieldName = "total_deduction"
+        Me.BandedGridColumnTotalDeduction.Name = "BandedGridColumnTotalDeduction"
+        Me.BandedGridColumnTotalDeduction.OptionsColumn.AllowEdit = False
+        Me.BandedGridColumnTotalDeduction.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_deduction", "{0:N2}")})
+        Me.BandedGridColumnTotalDeduction.Visible = True
+        Me.BandedGridColumnTotalDeduction.Width = 90
+        '
+        'BandedGridColumnTotal2
+        '
+        Me.BandedGridColumnTotal2.AppearanceHeader.Options.UseTextOptions = True
+        Me.BandedGridColumnTotal2.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
+        Me.BandedGridColumnTotal2.Caption = "Total II"
+        Me.BandedGridColumnTotal2.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumnTotal2.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumnTotal2.FieldName = "total_2"
+        Me.BandedGridColumnTotal2.Name = "BandedGridColumnTotal2"
+        Me.BandedGridColumnTotal2.OptionsColumn.AllowEdit = False
+        Me.BandedGridColumnTotal2.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_2", "{0:N2}")})
+        Me.BandedGridColumnTotal2.Visible = True
         '
         'GBTHR
         '
@@ -707,6 +532,17 @@ Partial Public Class ReportEmpPayrollReportPajak
         Me.GBTHR.Name = "GBTHR"
         Me.GBTHR.VisibleIndex = 2
         Me.GBTHR.Width = 75
+        '
+        'BandedGridColumnTHR
+        '
+        Me.BandedGridColumnTHR.Caption = "Total I"
+        Me.BandedGridColumnTHR.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumnTHR.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumnTHR.FieldName = "total_salary_thr"
+        Me.BandedGridColumnTHR.Name = "BandedGridColumnTHR"
+        Me.BandedGridColumnTHR.OptionsColumn.AllowEdit = False
+        Me.BandedGridColumnTHR.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_salary_thr", "{0:N2}")})
+        Me.BandedGridColumnTHR.Visible = True
         '
         'gridBand3
         '
@@ -720,6 +556,54 @@ Partial Public Class ReportEmpPayrollReportPajak
         Me.gridBand3.Name = "gridBand3"
         Me.gridBand3.VisibleIndex = 3
         Me.gridBand3.Width = 300
+        '
+        'BandedGridColumnJHTK
+        '
+        Me.BandedGridColumnJHTK.AppearanceHeader.Options.UseTextOptions = True
+        Me.BandedGridColumnJHTK.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
+        Me.BandedGridColumnJHTK.Caption = "JHT 2%"
+        Me.BandedGridColumnJHTK.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumnJHTK.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumnJHTK.FieldName = "jht_k"
+        Me.BandedGridColumnJHTK.Name = "BandedGridColumnJHTK"
+        Me.BandedGridColumnJHTK.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "jht_k", "{0:N2}")})
+        Me.BandedGridColumnJHTK.Visible = True
+        '
+        'BandedGridColumnJPK
+        '
+        Me.BandedGridColumnJPK.AppearanceHeader.Options.UseTextOptions = True
+        Me.BandedGridColumnJPK.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
+        Me.BandedGridColumnJPK.Caption = "JP 1%"
+        Me.BandedGridColumnJPK.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumnJPK.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumnJPK.FieldName = "jp_k"
+        Me.BandedGridColumnJPK.Name = "BandedGridColumnJPK"
+        Me.BandedGridColumnJPK.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "jp_k", "{0:N2}")})
+        Me.BandedGridColumnJPK.Visible = True
+        '
+        'BandedGridColumnBPJSKESK
+        '
+        Me.BandedGridColumnBPJSKESK.AppearanceHeader.Options.UseTextOptions = True
+        Me.BandedGridColumnBPJSKESK.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
+        Me.BandedGridColumnBPJSKESK.Caption = "BPJSKES 1%"
+        Me.BandedGridColumnBPJSKESK.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumnBPJSKESK.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumnBPJSKESK.FieldName = "bpjs_k"
+        Me.BandedGridColumnBPJSKESK.Name = "BandedGridColumnBPJSKESK"
+        Me.BandedGridColumnBPJSKESK.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "bpjs_k", "{0:N2}")})
+        Me.BandedGridColumnBPJSKESK.Visible = True
+        '
+        'BandedGridColumnTotalK
+        '
+        Me.BandedGridColumnTotalK.AppearanceHeader.Options.UseTextOptions = True
+        Me.BandedGridColumnTotalK.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
+        Me.BandedGridColumnTotalK.Caption = "Total"
+        Me.BandedGridColumnTotalK.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumnTotalK.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumnTotalK.FieldName = "total_k"
+        Me.BandedGridColumnTotalK.Name = "BandedGridColumnTotalK"
+        Me.BandedGridColumnTotalK.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_k", "{0:N2}")})
+        Me.BandedGridColumnTotalK.Visible = True
         '
         'gridBand2
         '
@@ -737,6 +621,120 @@ Partial Public Class ReportEmpPayrollReportPajak
         Me.gridBand2.VisibleIndex = 4
         Me.gridBand2.Width = 473
         '
+        'BandedGridColumnJHTC
+        '
+        Me.BandedGridColumnJHTC.AppearanceHeader.Options.UseTextOptions = True
+        Me.BandedGridColumnJHTC.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
+        Me.BandedGridColumnJHTC.Caption = "JHT 3.7%"
+        Me.BandedGridColumnJHTC.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumnJHTC.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumnJHTC.FieldName = "jht"
+        Me.BandedGridColumnJHTC.Name = "BandedGridColumnJHTC"
+        Me.BandedGridColumnJHTC.OptionsColumn.AllowEdit = False
+        Me.BandedGridColumnJHTC.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "jht", "{0:N2}")})
+        Me.BandedGridColumnJHTC.Visible = True
+        Me.BandedGridColumnJHTC.Width = 58
+        '
+        'BandedGridColumnJKKC
+        '
+        Me.BandedGridColumnJKKC.AppearanceHeader.Options.UseTextOptions = True
+        Me.BandedGridColumnJKKC.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
+        Me.BandedGridColumnJKKC.Caption = "JKK 0.24%"
+        Me.BandedGridColumnJKKC.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumnJKKC.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumnJKKC.FieldName = "jkk"
+        Me.BandedGridColumnJKKC.Name = "BandedGridColumnJKKC"
+        Me.BandedGridColumnJKKC.OptionsColumn.AllowEdit = False
+        Me.BandedGridColumnJKKC.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "jkk", "{0:N2}")})
+        Me.BandedGridColumnJKKC.Visible = True
+        Me.BandedGridColumnJKKC.Width = 63
+        '
+        'BandedGridColumnJKMC
+        '
+        Me.BandedGridColumnJKMC.AppearanceHeader.Options.UseTextOptions = True
+        Me.BandedGridColumnJKMC.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
+        Me.BandedGridColumnJKMC.Caption = "JKM 0.3%"
+        Me.BandedGridColumnJKMC.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumnJKMC.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumnJKMC.FieldName = "jkm"
+        Me.BandedGridColumnJKMC.Name = "BandedGridColumnJKMC"
+        Me.BandedGridColumnJKMC.OptionsColumn.AllowEdit = False
+        Me.BandedGridColumnJKMC.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "jkm", "{0:N2}")})
+        Me.BandedGridColumnJKMC.Visible = True
+        Me.BandedGridColumnJKMC.Width = 59
+        '
+        'BandedGridColumnJPC
+        '
+        Me.BandedGridColumnJPC.AppearanceHeader.Options.UseTextOptions = True
+        Me.BandedGridColumnJPC.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
+        Me.BandedGridColumnJPC.Caption = "JP 2%"
+        Me.BandedGridColumnJPC.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumnJPC.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumnJPC.FieldName = "jp"
+        Me.BandedGridColumnJPC.Name = "BandedGridColumnJPC"
+        Me.BandedGridColumnJPC.OptionsColumn.AllowEdit = False
+        Me.BandedGridColumnJPC.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "jp", "{0:N2}")})
+        Me.BandedGridColumnJPC.Visible = True
+        Me.BandedGridColumnJPC.Width = 41
+        '
+        'BandedGridColumnBPJSKESC
+        '
+        Me.BandedGridColumnBPJSKESC.AppearanceHeader.Options.UseTextOptions = True
+        Me.BandedGridColumnBPJSKESC.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
+        Me.BandedGridColumnBPJSKESC.Caption = "BPJSKES 4%"
+        Me.BandedGridColumnBPJSKESC.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumnBPJSKESC.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumnBPJSKESC.FieldName = "bpjs"
+        Me.BandedGridColumnBPJSKESC.Name = "BandedGridColumnBPJSKESC"
+        Me.BandedGridColumnBPJSKESC.OptionsColumn.AllowEdit = False
+        Me.BandedGridColumnBPJSKESC.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "bpjs", "{0:N2}")})
+        Me.BandedGridColumnBPJSKESC.Visible = True
+        Me.BandedGridColumnBPJSKESC.Width = 71
+        '
+        'BandedGridColumnTotalC
+        '
+        Me.BandedGridColumnTotalC.AppearanceHeader.Options.UseTextOptions = True
+        Me.BandedGridColumnTotalC.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
+        Me.BandedGridColumnTotalC.Caption = "Total"
+        Me.BandedGridColumnTotalC.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumnTotalC.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumnTotalC.FieldName = "total_jamsostek1"
+        Me.BandedGridColumnTotalC.Name = "BandedGridColumnTotalC"
+        Me.BandedGridColumnTotalC.OptionsColumn.AllowEdit = False
+        Me.BandedGridColumnTotalC.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_jamsostek1", "{0:N2}")})
+        Me.BandedGridColumnTotalC.Visible = True
+        Me.BandedGridColumnTotalC.Width = 37
+        '
+        'BandedGridColumnTotalBPJSC
+        '
+        Me.BandedGridColumnTotalBPJSC.AppearanceHeader.Options.UseTextOptions = True
+        Me.BandedGridColumnTotalBPJSC.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
+        Me.BandedGridColumnTotalBPJSC.Caption = "Total BPJS (JKK, JKM, BPJSKES)"
+        Me.BandedGridColumnTotalBPJSC.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumnTotalBPJSC.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumnTotalBPJSC.FieldName = "total_jamsostek2"
+        Me.BandedGridColumnTotalBPJSC.Name = "BandedGridColumnTotalBPJSC"
+        Me.BandedGridColumnTotalBPJSC.OptionsColumn.AllowEdit = False
+        Me.BandedGridColumnTotalBPJSC.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_jamsostek2", "{0:N2}")})
+        Me.BandedGridColumnTotalBPJSC.Visible = True
+        Me.BandedGridColumnTotalBPJSC.Width = 144
+        '
+        'BandedGridColumnGroup
+        '
+        Me.BandedGridColumnGroup.AppearanceHeader.Options.UseTextOptions = True
+        Me.BandedGridColumnGroup.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
+        Me.BandedGridColumnGroup.Caption = "Group"
+        Me.BandedGridColumnGroup.FieldName = "group_report"
+        Me.BandedGridColumnGroup.Name = "BandedGridColumnGroup"
+        Me.BandedGridColumnGroup.OptionsColumn.AllowEdit = False
+        '
+        'WinControlContainer1
+        '
+        Me.WinControlContainer1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 0!)
+        Me.WinControlContainer1.Name = "WinControlContainer1"
+        Me.WinControlContainer1.SizeF = New System.Drawing.SizeF(1075.0!, 312.0!)
+        Me.WinControlContainer1.WinControl = Me.GCPajak
+        '
         'ReportEmpPayrollReportPajak
         '
         Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.Detail, Me.TopMargin, Me.BottomMargin, Me.ReportHeader, Me.ReportFooter})
@@ -747,9 +745,9 @@ Partial Public Class ReportEmpPayrollReportPajak
         Me.PaperKind = System.Drawing.Printing.PaperKind.A4
         Me.ScriptLanguage = DevExpress.XtraReports.ScriptLanguage.VisualBasic
         Me.Version = "15.1"
+        CType(Me.XrTable1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GCPajak, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVPajak, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.XrTable1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
 
     End Sub
@@ -760,9 +758,14 @@ Partial Public Class ReportEmpPayrollReportPajak
     Friend WithEvents ReportFooter As DevExpress.XtraReports.UI.ReportFooterBand
     Friend WithEvents XLTitle As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XLPeriod As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents XrTable1 As DevExpress.XtraReports.UI.XRTable
+    Friend WithEvents XrTableRow1 As DevExpress.XtraReports.UI.XRTableRow
+    Friend WithEvents XrTableCell13 As DevExpress.XtraReports.UI.XRTableCell
+    Friend WithEvents XrPageInfo1 As DevExpress.XtraReports.UI.XRPageInfo
     Friend WithEvents WinControlContainer1 As DevExpress.XtraReports.UI.WinControlContainer
     Friend WithEvents GCPajak As DevExpress.XtraGrid.GridControl
     Friend WithEvents GVPajak As DevExpress.XtraGrid.Views.BandedGrid.BandedGridView
+    Friend WithEvents gridBand8 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents GridColumnNIP As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents GridColumnName As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents BandedGridColumnNPWP As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
@@ -771,19 +774,27 @@ Partial Public Class ReportEmpPayrollReportPajak
     Friend WithEvents BandedGridColumnDepartement As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents GridColumnPosition As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents GridColumnStatus As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents GBWorkingDays As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents BandedGridColumnActWorkdays As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents BandedGridColumnOvertimeHours As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents GBSalary As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents GridColumnTotTHP As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents BandedGridColumnTotalAdjustment As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents BandedGridColumnTotalPaymentOt As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents BandedGridColumnTotal1 As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents GBTotal As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents BandedGridColumnGrandTotal As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents gridBand1 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents BandedGridColumnTotalDeduction As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents BandedGridColumnTotal2 As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents GBTHR As DevExpress.XtraGrid.Views.BandedGrid.GridBand
+    Friend WithEvents BandedGridColumnTHR As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents gridBand3 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents BandedGridColumnJHTK As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents BandedGridColumnJPK As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents BandedGridColumnBPJSKESK As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents BandedGridColumnTotalK As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents gridBand2 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents BandedGridColumnJHTC As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents BandedGridColumnJKKC As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents BandedGridColumnJKMC As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
@@ -792,17 +803,4 @@ Partial Public Class ReportEmpPayrollReportPajak
     Friend WithEvents BandedGridColumnTotalC As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents BandedGridColumnTotalBPJSC As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents BandedGridColumnGroup As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
-    Friend WithEvents XrTable1 As DevExpress.XtraReports.UI.XRTable
-    Friend WithEvents XrTableRow1 As DevExpress.XtraReports.UI.XRTableRow
-    Friend WithEvents XrTableCell13 As DevExpress.XtraReports.UI.XRTableCell
-    Friend WithEvents XrPageInfo1 As DevExpress.XtraReports.UI.XRPageInfo
-    Friend WithEvents BandedGridColumnTHR As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
-    Friend WithEvents gridBand8 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
-    Friend WithEvents GBWorkingDays As DevExpress.XtraGrid.Views.BandedGrid.GridBand
-    Friend WithEvents GBSalary As DevExpress.XtraGrid.Views.BandedGrid.GridBand
-    Friend WithEvents GBTotal As DevExpress.XtraGrid.Views.BandedGrid.GridBand
-    Friend WithEvents gridBand1 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
-    Friend WithEvents GBTHR As DevExpress.XtraGrid.Views.BandedGrid.GridBand
-    Friend WithEvents gridBand3 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
-    Friend WithEvents gridBand2 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
 End Class

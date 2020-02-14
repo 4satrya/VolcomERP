@@ -96,13 +96,20 @@
 
         For i = 0 To data_column.Rows.Count - 1
             Dim salary_adjustment As String = data_column.Rows(i)("salary_" + type + "").ToString
+            Dim id_salary_cat As String = data_column.Rows(i)("id_salary_" + type + "_cat")
 
             For j = 1 To data_column.Rows(i)("total")
                 Dim column As DataColumn = New DataColumn()
 
                 column.ColumnName = salary_adjustment + " " + j.ToString
-                column.DataType = GetType(Integer)
-                column.DefaultValue = 0
+
+                If type = "deduction" And (id_salary_cat = "1" Or id_salary_cat = "2" Or id_salary_cat = "99") Then
+                    column.DataType = GetType(Decimal)
+                    column.DefaultValue = 0.00
+                Else
+                    column.DataType = GetType(Integer)
+                    column.DefaultValue = 0
+                End If
 
                 data.Columns.Add(column)
             Next
@@ -126,7 +133,7 @@
 
             Dim k As Integer = 1
 
-            Dim total As Integer = 0
+            Dim total As Decimal = 0.00
 
             For j = 0 To column.Count - 1
                 If first_column = column(j).ToString Then
@@ -138,10 +145,10 @@
                 Dim row_column As String = column(j).ToString + " " + k.ToString
 
                 'add to row
-                row(row_column) = Convert.ToDecimal(value(j))
+                row(row_column) = Convert.ToDecimal(value(j).Replace(".", ","))
 
                 'calculate total
-                total = total + Convert.ToDecimal(value(j))
+                total = total + Convert.ToDecimal(value(j).Replace(".", ","))
 
                 first_column = column(j).ToString
             Next
@@ -160,6 +167,7 @@
         For i = 0 To data_column.Rows.Count - 1
             Dim salary_adjustment_cat As String = data_column.Rows(i)("salary_" + type + "_cat").ToString
             Dim salary_adjustment As String = data_column.Rows(i)("salary_" + type + "").ToString
+            Dim id_salary_cat As String = data_column.Rows(i)("id_salary_" + type + "_cat")
 
             For j = 1 To data_column.Rows(i)("total")
                 'band
@@ -180,15 +188,18 @@
                 column.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
                 column.Caption = salary_adjustment.Replace(" ", Environment.NewLine)
                 column.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-                column.DisplayFormat.FormatString = "N0"
                 column.Visible = True
                 column.SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum
-                column.SummaryItem.DisplayFormat = "{0:N0}"
+                column.DisplayFormat.FormatString = "N2"
+                column.SummaryItem.DisplayFormat = "{0:N2}"
 
                 'width
-                If salary_adjustment = "Missing Staff Toko" Or salary_adjustment = "Missing Staff Security" Or salary_adjustment = "Internal Sale" Or salary_adjustment = "Meditation" Or salary_adjustment = "Cash Receipt" Or salary_adjustment = "Tax Penalty" Or salary_adjustment = "Unpaid Leave" Or salary_adjustment = "Total" Then
+                If salary_adjustment = "Missing Staff Toko" Or salary_adjustment = "Missing Staff Security" Or salary_adjustment = "Internal Sale" Or salary_adjustment = "Meditation" Or salary_adjustment = "Cash Receipt" Or salary_adjustment = "Tax Penalty" Or salary_adjustment = "Unpaid Leave" Or salary_adjustment = "Other" Then
                     column.MinWidth = 50
                     column.Width = 50
+                ElseIf salary_adjustment = "Total" Then
+                    column.MinWidth = 67
+                    column.Width = 67
                 Else
                     column.MinWidth = 65
                     column.Width = 65
@@ -199,10 +210,10 @@
                 'grup summary
                 Dim group_summary As DevExpress.XtraGrid.GridGroupSummaryItem = New DevExpress.XtraGrid.GridGroupSummaryItem()
 
-                group_summary.DisplayFormat = "{0:N0}"
                 group_summary.FieldName = salary_adjustment + " " + j.ToString
                 group_summary.ShowInGroupColumnFooter = column
                 group_summary.SummaryType = DevExpress.Data.SummaryItemType.Custom
+                group_summary.DisplayFormat = "{0:N2}"
 
                 If is_office_payroll = "1" Then
                     GVDeductionOffice.GroupSummary.Add(group_summary)
@@ -273,7 +284,7 @@
         Dim query_employee As String = "
             SELECT IFNULL(dep.departement, dep_ori.departement) AS departement,IF(dep.id_departement = 17, IFNULL(sub.departement_sub, sub_ori.departement_sub), IFNULL(dep.departement, dep_ori.departement)) AS departement_sub,emp.employee_code,emp.employee_name,IFNULL(emp_pos.employee_position,emp.`employee_position`) AS employee_position,IFNULL(sts.`employee_status`, sts_ori.`employee_status`) AS employee_status,
                 GROUP_CONCAT(sald.salary_" + type + " ORDER BY sald.id_salary_" + type + "_cat ASC, sald.id_salary_" + type + " ASC) AS salary_" + type + "_c,
-                GROUP_CONCAT(ROUND(pyd." + If(type = "deduction", "deduction", "value") + ", 0) ORDER BY sald.id_salary_" + type + "_cat ASC, sald.id_salary_" + type + " ASC) AS salary_" + type + "_v
+                GROUP_CONCAT(IF(sald.id_salary_" + type + "_cat = 1 OR sald.id_salary_" + type + "_cat = 2, CAST(pyd." + If(type = "deduction", "deduction", "value") + " AS CHAR), CAST((pyd." + If(type = "deduction", "deduction", "value") + ") AS CHAR)) ORDER BY sald.id_salary_" + type + "_cat ASC, sald.id_salary_" + type + " ASC) AS salary_" + type + "_v
             FROM tb_emp_payroll_" + If(type = "adjustment", "adj", type) + " AS pyd
             LEFT JOIN tb_m_employee emp ON emp.id_employee=pyd.id_employee
             LEFT JOIN (

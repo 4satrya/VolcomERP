@@ -42,6 +42,8 @@
 
             GVSummary.Columns("balance").Caption = "Total THR"
         End If
+
+        SBPrint.Enabled = True
     End Sub
 
     Sub load_sum()
@@ -305,7 +307,7 @@
                         tot_salary += e.FieldValue
                     End If
                 Case DevExpress.Data.CustomSummaryProcess.Finalize
-                    e.TotalValue = Format(tot_salary, "##,##0")
+                    e.TotalValue = Format(tot_salary, "##,##0.00")
             End Select
         End If
 
@@ -318,7 +320,7 @@
                         tot_event_overtime += e.FieldValue
                     End If
                 Case DevExpress.Data.CustomSummaryProcess.Finalize
-                    e.TotalValue = Format(tot_event_overtime, "##,##0")
+                    e.TotalValue = Format(tot_event_overtime, "##,##0.00")
             End Select
         End If
 
@@ -331,7 +333,7 @@
                         tot_d_cooperative_loan += e.FieldValue
                     End If
                 Case DevExpress.Data.CustomSummaryProcess.Finalize
-                    e.TotalValue = Format(tot_d_cooperative_loan, "##,##0")
+                    e.TotalValue = Format(tot_d_cooperative_loan, "##,##0.00")
             End Select
         End If
 
@@ -344,7 +346,7 @@
                         tot_d_bpjskes += e.FieldValue
                     End If
                 Case DevExpress.Data.CustomSummaryProcess.Finalize
-                    e.TotalValue = Format(tot_d_bpjskes, "##,##0")
+                    e.TotalValue = Format(tot_d_bpjskes, "##,##0.00")
             End Select
         End If
 
@@ -357,7 +359,7 @@
                         tot_d_jaminan_pensiun += e.FieldValue
                     End If
                 Case DevExpress.Data.CustomSummaryProcess.Finalize
-                    e.TotalValue = Format(tot_d_jaminan_pensiun, "##,##0")
+                    e.TotalValue = Format(tot_d_jaminan_pensiun, "##,##0.00")
             End Select
         End If
 
@@ -370,7 +372,7 @@
                         tot_d_bpjstk += e.FieldValue
                     End If
                 Case DevExpress.Data.CustomSummaryProcess.Finalize
-                    e.TotalValue = Format(tot_d_bpjstk, "##,##0")
+                    e.TotalValue = Format(tot_d_bpjstk, "##,##0.00")
             End Select
         End If
 
@@ -383,7 +385,7 @@
                         tot_d_cooperative_contributtion += e.FieldValue
                     End If
                 Case DevExpress.Data.CustomSummaryProcess.Finalize
-                    e.TotalValue = Format(tot_d_cooperative_contributtion, "##,##0")
+                    e.TotalValue = Format(tot_d_cooperative_contributtion, "##,##0.00")
             End Select
         End If
 
@@ -396,7 +398,7 @@
                         tot_d_missing += e.FieldValue
                     End If
                 Case DevExpress.Data.CustomSummaryProcess.Finalize
-                    e.TotalValue = Format(tot_d_missing, "##,##0")
+                    e.TotalValue = Format(tot_d_missing, "##,##0.00")
             End Select
         End If
 
@@ -409,7 +411,7 @@
                         tot_d_meditation_cash += e.FieldValue
                     End If
                 Case DevExpress.Data.CustomSummaryProcess.Finalize
-                    e.TotalValue = Format(tot_d_meditation_cash, "##,##0")
+                    e.TotalValue = Format(tot_d_meditation_cash, "##,##0.00")
             End Select
         End If
 
@@ -422,7 +424,7 @@
                         tot_d_other += e.FieldValue
                     End If
                 Case DevExpress.Data.CustomSummaryProcess.Finalize
-                    e.TotalValue = Format(tot_d_other, "##,##0")
+                    e.TotalValue = Format(tot_d_other, "##,##0.00")
             End Select
         End If
 
@@ -435,7 +437,7 @@
                         tot_total_cash += e.FieldValue
                     End If
                 Case DevExpress.Data.CustomSummaryProcess.Finalize
-                    e.TotalValue = Format(tot_total_cash, "##,##0")
+                    e.TotalValue = Format(tot_total_cash, "##,##0.00")
             End Select
         End If
 

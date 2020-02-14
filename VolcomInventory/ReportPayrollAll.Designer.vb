@@ -227,7 +227,7 @@ Partial Public Class ReportPayrollAll
         Me.GVPayrollStore.GridControl = Me.GCPayrollStore
         Me.GVPayrollStore.GroupCount = 2
         Me.GVPayrollStore.GroupFormat = "{1} {2}"
-        Me.GVPayrollStore.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "tot_thp", Me.GCTotalTHPStore, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "total_adjustment", Me.GCTotalAdjustmentStore, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "total_deduction", Me.GCTotalDeductionStore, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "total_ot_wages", Me.GCTotalPaymentOvertimeStore, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "grand_total", Me.GCGrandTotalStore, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "total_salary_dw", Me.GCTotalSalaryDWStore, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "employee_name", Me.GCNameStore, "", ""), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "total_salary_thr", Me.GCTotalSalaryTHRStore, "{0:N0}")})
+        Me.GVPayrollStore.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "tot_thp", Me.GCTotalTHPStore, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "total_adjustment", Me.GCTotalAdjustmentStore, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "total_deduction", Me.GCTotalDeductionStore, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "total_ot_wages", Me.GCTotalPaymentOvertimeStore, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "grand_total", Me.GCGrandTotalStore, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "total_salary_dw", Me.GCTotalSalaryDWStore, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "employee_name", Me.GCNameStore, "", ""), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "total_salary_thr", Me.GCTotalSalaryTHRStore, "{0:N0}")})
         Me.GVPayrollStore.LevelIndent = 0
         Me.GVPayrollStore.Name = "GVPayrollStore"
         Me.GVPayrollStore.OptionsBehavior.AutoExpandAllGroups = True
@@ -452,12 +452,12 @@ Partial Public Class ReportPayrollAll
         Me.GCTotalTHPStore.AppearanceCell.Options.UseTextOptions = True
         Me.GCTotalTHPStore.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GCTotalTHPStore.Caption = "Total THP"
-        Me.GCTotalTHPStore.DisplayFormat.FormatString = "N0"
+        Me.GCTotalTHPStore.DisplayFormat.FormatString = "N2"
         Me.GCTotalTHPStore.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GCTotalTHPStore.FieldName = "tot_thp"
         Me.GCTotalTHPStore.Name = "GCTotalTHPStore"
         Me.GCTotalTHPStore.OptionsColumn.AllowEdit = False
-        Me.GCTotalTHPStore.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "tot_thp", "{0:N0}")})
+        Me.GCTotalTHPStore.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "tot_thp", "{0:N2}")})
         Me.GCTotalTHPStore.Visible = True
         Me.GCTotalTHPStore.Width = 57
         '
@@ -466,12 +466,12 @@ Partial Public Class ReportPayrollAll
         Me.GCTotalAdjustmentStore.AppearanceCell.Options.UseTextOptions = True
         Me.GCTotalAdjustmentStore.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GCTotalAdjustmentStore.Caption = "Total Bonus / Adj"
-        Me.GCTotalAdjustmentStore.DisplayFormat.FormatString = "N0"
+        Me.GCTotalAdjustmentStore.DisplayFormat.FormatString = "N2"
         Me.GCTotalAdjustmentStore.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GCTotalAdjustmentStore.FieldName = "total_adjustment"
         Me.GCTotalAdjustmentStore.Name = "GCTotalAdjustmentStore"
         Me.GCTotalAdjustmentStore.OptionsColumn.AllowEdit = False
-        Me.GCTotalAdjustmentStore.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_adjustment", "{0:N0}")})
+        Me.GCTotalAdjustmentStore.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_adjustment", "{0:N2}")})
         Me.GCTotalAdjustmentStore.Visible = True
         Me.GCTotalAdjustmentStore.Width = 57
         '
@@ -480,12 +480,12 @@ Partial Public Class ReportPayrollAll
         Me.GCTotalPaymentOvertimeStore.AppearanceCell.Options.UseTextOptions = True
         Me.GCTotalPaymentOvertimeStore.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GCTotalPaymentOvertimeStore.Caption = "Total Overtime"
-        Me.GCTotalPaymentOvertimeStore.DisplayFormat.FormatString = "N0"
+        Me.GCTotalPaymentOvertimeStore.DisplayFormat.FormatString = "N2"
         Me.GCTotalPaymentOvertimeStore.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GCTotalPaymentOvertimeStore.FieldName = "total_ot_wages"
         Me.GCTotalPaymentOvertimeStore.Name = "GCTotalPaymentOvertimeStore"
         Me.GCTotalPaymentOvertimeStore.OptionsColumn.AllowEdit = False
-        Me.GCTotalPaymentOvertimeStore.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_ot_wages", "{0:N0}")})
+        Me.GCTotalPaymentOvertimeStore.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_ot_wages", "{0:N2}")})
         Me.GCTotalPaymentOvertimeStore.Visible = True
         Me.GCTotalPaymentOvertimeStore.Width = 57
         '
@@ -494,12 +494,12 @@ Partial Public Class ReportPayrollAll
         Me.GCTotalDeductionStore.AppearanceCell.Options.UseTextOptions = True
         Me.GCTotalDeductionStore.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GCTotalDeductionStore.Caption = "Total Deduction"
-        Me.GCTotalDeductionStore.DisplayFormat.FormatString = "N0"
+        Me.GCTotalDeductionStore.DisplayFormat.FormatString = "N2"
         Me.GCTotalDeductionStore.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GCTotalDeductionStore.FieldName = "total_deduction"
         Me.GCTotalDeductionStore.Name = "GCTotalDeductionStore"
         Me.GCTotalDeductionStore.OptionsColumn.AllowEdit = False
-        Me.GCTotalDeductionStore.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_deduction", "{0:N0}")})
+        Me.GCTotalDeductionStore.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_deduction", "{0:N2}")})
         Me.GCTotalDeductionStore.Visible = True
         Me.GCTotalDeductionStore.Width = 61
         '
@@ -703,7 +703,7 @@ Partial Public Class ReportPayrollAll
         Me.GVPayrollOffice.GridControl = Me.GCPayrollOffice
         Me.GVPayrollOffice.GroupCount = 2
         Me.GVPayrollOffice.GroupFormat = "{1} {2}"
-        Me.GVPayrollOffice.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "tot_thp", Me.GCTotalTHP, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "total_adjustment", Me.GCTotalAdjustment, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "total_deduction", Me.GCTotalDeduction, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "total_ot_wages", Me.GCTotalPaymentOvertime, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "grand_total", Me.GCGrandTotal, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "total_salary_dw", Me.GCTotalSalaryDW, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "employee_name", Me.GCName, "", ""), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "total_salary_thr", Me.GCTotalSalaryTHR, "{0:N0}")})
+        Me.GVPayrollOffice.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "tot_thp", Me.GCTotalTHP, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "total_adjustment", Me.GCTotalAdjustment, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "total_deduction", Me.GCTotalDeduction, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "total_ot_wages", Me.GCTotalPaymentOvertime, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "grand_total", Me.GCGrandTotal, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "total_salary_dw", Me.GCTotalSalaryDW, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "employee_name", Me.GCName, "", ""), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "total_salary_thr", Me.GCTotalSalaryTHR, "{0:N0}")})
         Me.GVPayrollOffice.LevelIndent = 0
         Me.GVPayrollOffice.Name = "GVPayrollOffice"
         Me.GVPayrollOffice.OptionsBehavior.AutoExpandAllGroups = True
@@ -930,12 +930,12 @@ Partial Public Class ReportPayrollAll
         Me.GCTotalTHP.AppearanceCell.Options.UseTextOptions = True
         Me.GCTotalTHP.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GCTotalTHP.Caption = "Total THP"
-        Me.GCTotalTHP.DisplayFormat.FormatString = "N0"
+        Me.GCTotalTHP.DisplayFormat.FormatString = "N2"
         Me.GCTotalTHP.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GCTotalTHP.FieldName = "tot_thp"
         Me.GCTotalTHP.Name = "GCTotalTHP"
         Me.GCTotalTHP.OptionsColumn.AllowEdit = False
-        Me.GCTotalTHP.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "tot_thp", "{0:N0}")})
+        Me.GCTotalTHP.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "tot_thp", "{0:N2}")})
         Me.GCTotalTHP.Visible = True
         Me.GCTotalTHP.Width = 57
         '
@@ -944,12 +944,12 @@ Partial Public Class ReportPayrollAll
         Me.GCTotalAdjustment.AppearanceCell.Options.UseTextOptions = True
         Me.GCTotalAdjustment.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GCTotalAdjustment.Caption = "Total Bonus / Adj"
-        Me.GCTotalAdjustment.DisplayFormat.FormatString = "N0"
+        Me.GCTotalAdjustment.DisplayFormat.FormatString = "N2"
         Me.GCTotalAdjustment.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GCTotalAdjustment.FieldName = "total_adjustment"
         Me.GCTotalAdjustment.Name = "GCTotalAdjustment"
         Me.GCTotalAdjustment.OptionsColumn.AllowEdit = False
-        Me.GCTotalAdjustment.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_adjustment", "{0:N0}")})
+        Me.GCTotalAdjustment.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_adjustment", "{0:N2}")})
         Me.GCTotalAdjustment.Visible = True
         Me.GCTotalAdjustment.Width = 57
         '
@@ -958,12 +958,12 @@ Partial Public Class ReportPayrollAll
         Me.GCTotalPaymentOvertime.AppearanceCell.Options.UseTextOptions = True
         Me.GCTotalPaymentOvertime.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GCTotalPaymentOvertime.Caption = "Total Overtime"
-        Me.GCTotalPaymentOvertime.DisplayFormat.FormatString = "N0"
+        Me.GCTotalPaymentOvertime.DisplayFormat.FormatString = "N2"
         Me.GCTotalPaymentOvertime.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GCTotalPaymentOvertime.FieldName = "total_ot_wages"
         Me.GCTotalPaymentOvertime.Name = "GCTotalPaymentOvertime"
         Me.GCTotalPaymentOvertime.OptionsColumn.AllowEdit = False
-        Me.GCTotalPaymentOvertime.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_ot_wages", "{0:N0}")})
+        Me.GCTotalPaymentOvertime.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_ot_wages", "{0:N2}")})
         Me.GCTotalPaymentOvertime.Visible = True
         Me.GCTotalPaymentOvertime.Width = 57
         '
@@ -972,12 +972,12 @@ Partial Public Class ReportPayrollAll
         Me.GCTotalDeduction.AppearanceCell.Options.UseTextOptions = True
         Me.GCTotalDeduction.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GCTotalDeduction.Caption = "Total Deduction"
-        Me.GCTotalDeduction.DisplayFormat.FormatString = "N0"
+        Me.GCTotalDeduction.DisplayFormat.FormatString = "N2"
         Me.GCTotalDeduction.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GCTotalDeduction.FieldName = "total_deduction"
         Me.GCTotalDeduction.Name = "GCTotalDeduction"
         Me.GCTotalDeduction.OptionsColumn.AllowEdit = False
-        Me.GCTotalDeduction.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_deduction", "{0:N0}")})
+        Me.GCTotalDeduction.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_deduction", "{0:N2}")})
         Me.GCTotalDeduction.Visible = True
         Me.GCTotalDeduction.Width = 61
         '

@@ -4,6 +4,8 @@
     Private Sub FormDelManifestPick_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         view_comp()
 
+        DateEditCreatedDateFrom.Properties.MinValue = Date.Parse(get_setup_field("manifest_min_date").ToString)
+
         DateEditCreatedDateFrom.EditValue = Now
         DateEditCreatedDateTo.EditValue = Now
     End Sub
@@ -14,10 +16,12 @@
 
     Sub view_comp()
         Dim query As String = "
-            SELECT cg.id_comp_group, CONCAT(cg.comp_group, ' - ', cg.description) AS comp_group
-            FROM tb_m_comp AS c
+            SELECT c.id_comp_group, CONCAT(cg.comp_group, ' - ', cg.description) AS comp_group
+            FROM tb_wh_awbill_det AS adet
+            LEFT JOIN tb_wh_awbill AS a ON adet.id_awbill = a.id_awbill
+            LEFT JOIN tb_m_comp AS c ON a.id_store = c.id_comp
             LEFT JOIN tb_m_comp_group AS cg ON c.id_comp_group = cg.id_comp_group
-            WHERE c.id_comp_cat = 6
+            WHERE a.id_cargo = " + FormDelManifestDet.SLUE3PL.EditValue.ToString + " AND adet.id_wh_awb_det NOT IN (SELECT x.id_wh_awb_det FROM tb_del_manifest_det AS x LEFT JOIN tb_del_manifest AS y ON x.id_del_manifest = y.id_del_manifest WHERE y.id_report_status <> 5 AND x.id_del_manifest <> " + FormDelManifestDet.id_del_manifest + ") AND DATE(a.awbill_date) >= '" + Date.Parse(get_setup_field("manifest_min_date").ToString).ToString("yyyy-MM-dd") + "'
             GROUP BY c.id_comp_group
         "
 
@@ -54,7 +58,7 @@
         Dim query As String = "
             SELECT *
             FROM (
-                SELECT 'no' AS is_select, adet.id_wh_awb_det, c.id_comp_group, a.awbill_date, a.id_awbill, IFNULL(pdelc.combine_number, adet.do_no) AS combine_number, adet.do_no, pdel.pl_sales_order_del_number, c.comp_number, c.comp_name, adet.qty, ct.city, a.weight, a.width, a.length, a.height, ((a.width * a.length * a.height) / 6000) AS volume, a.c_weight
+                SELECT 'yes' AS is_select, adet.id_wh_awb_det, c.id_comp_group, a.awbill_date, a.id_awbill, IFNULL(pdelc.combine_number, adet.do_no) AS combine_number, adet.do_no, pdel.pl_sales_order_del_number, c.comp_number, c.comp_name, adet.qty, ct.city, a.weight, a.width, a.length, a.height, ((a.width * a.length * a.height) / 6000) AS volume, a.c_weight
                 FROM tb_wh_awbill_det AS adet
                 LEFT JOIN tb_wh_awbill AS a ON adet.id_awbill = a.id_awbill
                 LEFT JOIN tb_m_comp AS c ON a.id_store = c.id_comp
@@ -123,5 +127,21 @@
 
     Private Sub DateEditCreatedDateFrom_EditValueChanged(sender As Object, e As EventArgs) Handles DateEditCreatedDateFrom.EditValueChanged
         DateEditCreatedDateTo.Properties.MinValue = DateEditCreatedDateFrom.EditValue
+    End Sub
+
+    Private Sub CheckEditSelectAll_EditValueChanged(sender As Object, e As EventArgs) Handles CheckEditSelectAll.EditValueChanged
+        If CheckEditSelectAll.EditValue Then
+            For i = 0 To GVList.RowCount - 1
+                If GVList.IsValidRowHandle(i) Then
+                    GVList.SetRowCellValue(i, "is_select", "yes")
+                End If
+            Next
+        Else
+            For i = 0 To GVList.RowCount - 1
+                If GVList.IsValidRowHandle(i) Then
+                    GVList.SetRowCellValue(i, "is_select", "no")
+                End If
+            Next
+        End If
     End Sub
 End Class

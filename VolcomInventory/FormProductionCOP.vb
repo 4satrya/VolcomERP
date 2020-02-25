@@ -201,6 +201,7 @@ rate_management,prod_order_cop_kurs_mng,prod_order_cop_mng,prod_order_cop_mng_ad
 
     Sub view_list_cost(ByVal id_designx As String)
         Dim query = ""
+        '
         If LEStatus.EditValue.ToString = "1" Then
             query = "CALL view_cop_design_po('" & id_designx & "')"
         Else

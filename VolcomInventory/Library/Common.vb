@@ -5234,8 +5234,7 @@ WHERE b.report_mark_type='" & report_mark_type_to_cancel & "' AND a.id_mark_asg!
     Function getQueryVendorSimple() As String
         'no all vendor
         Dim query As String = ""
-        Dim id_comp_cat_store As String = execute_query("SELECT id_comp_cat_vendor FROM tb_opt", 0, True, "", "", "", "")
-        query += "SELECT a.id_comp, a.comp_number, a.comp_name,a.address_primary, CONCAT_WS(' - ', a.comp_number, a.comp_name) AS comp_name_label FROM tb_m_comp a WHERE a.id_comp_cat='" + id_comp_cat_store + "' "
+        query += "SELECT a.id_comp, a.comp_number, a.comp_name,a.address_primary, CONCAT_WS(' - ', a.comp_number, a.comp_name) AS comp_name_label FROM tb_m_comp a WHERE a.id_comp_cat='1' OR a.id_comp_cat='8' "
         query += "ORDER BY comp_number ASC "
         Return query
     End Function
@@ -6877,5 +6876,9 @@ WHERE b.report_mark_type='" & report_mark_type_to_cancel & "' AND a.id_mark_asg!
         tool.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.PrintDirect, CommandVisibility.None)
         tool.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.Save, CommandVisibility.None)
         tool.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.Open, CommandVisibility.None)
+    End Sub
+    '
+    Public Sub send_mail_app()
+
     End Sub
 End Module

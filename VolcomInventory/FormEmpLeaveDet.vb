@@ -163,6 +163,11 @@
                     End If
                 End If
             End If
+
+            'button attachment for DC
+            If LEFormDC.EditValue.ToString = "3" Then
+                SBAttachment.Visible = True
+            End If
         End If
         '
     End Sub
@@ -494,11 +499,12 @@
             Next
 
             Dim query_schedule As String = "
-                SELECT sch.date, IF(lvd.id_schedule IS NULL, 0, 1) AS is_leave
+                SELECT sch.date, IF(lv.id_leave_type = 1, 1, 0) AS is_leave
                 FROM tb_emp_schedule AS sch
                 LEFT JOIN tb_emp_leave_det AS lvd ON sch.id_schedule = lvd.id_schedule
+                LEFT JOIN tb_emp_leave AS lv ON lvd.id_emp_leave = lv.id_emp_leave
                 WHERE sch.id_schedule_type = 1 AND (" + query_in.Substring(0, query_in.Length - 4) + ") AND sch.id_employee = " + id_employee + "
-                ORDER BY sch.date ASC
+                GROUP BY sch.date
             "
 
             Dim data_sch As DataTable = execute_query(query_schedule, -1, True, "", "", "", "")
@@ -894,10 +900,29 @@
     End Sub
 
     Private Sub BMark_Click(sender As Object, e As EventArgs) Handles BMark.Click
-        FormReportMark.report_mark_type = report_mark_type
-        FormReportMark.is_view = is_view
-        FormReportMark.id_report = id_emp_leave
-        FormReportMark.ShowDialog()
+        'sakit upload dc
+        Dim already_upload As Boolean = True
+
+        If LEFormDC.EditValue.ToString = "3" Then
+            Dim is_approve As String = execute_query("SELECT COUNT(*) FROM tb_report_mark WHERE id_report = " + id_emp_leave + " AND id_user = " + id_user + " AND id_report_status = 3 AND report_mark_type = " + report_mark_type, 0, True, "", "", "", "")
+
+            If Not is_approve = "0" Then
+                Dim attachment As String = execute_query("SELECT COUNT(*) FROM tb_doc WHERE report_mark_type = " + report_mark_type + " AND id_report = " + id_emp_leave, 0, True, "", "", "", "")
+
+                If Not attachment = "0" Then
+                    already_upload = False
+                End If
+            End If
+        End If
+
+        If already_upload Then
+            FormReportMark.report_mark_type = report_mark_type
+            FormReportMark.is_view = is_view
+            FormReportMark.id_report = id_emp_leave
+            FormReportMark.ShowDialog()
+        Else
+            stopCustom("Please upload DC.")
+        End If
     End Sub
 
     Private Sub BPrint_Click(sender As Object, e As EventArgs) Handles BPrint.Click
@@ -1053,7 +1078,7 @@
         Dim data As DataTable = execute_query("SELECT id_report_status, report_mark_type FROM tb_emp_leave WHERE id_emp_leave = " + id_emp_leave, -1, True, "", "", "", "")
 
         FormDocumentUpload.is_no_delete = "2"
-        FormDocumentUpload.is_view = If(data.Rows(0)("id_report_status").ToString = "0", "-1", "1")
+        FormDocumentUpload.is_view = If(LEFormDC.EditValue.ToString = "3", If(data.Rows(0)("id_report_status").ToString = "6", "1", If(is_hrd = "1", "-1", "1")), If(data.Rows(0)("id_report_status").ToString = "0", "-1", "1"))
         FormDocumentUpload.id_report = id_emp_leave
         FormDocumentUpload.report_mark_type = data.Rows(0)("report_mark_type").ToString
         FormDocumentUpload.ShowDialog()

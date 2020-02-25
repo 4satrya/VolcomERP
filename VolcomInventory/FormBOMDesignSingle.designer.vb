@@ -969,12 +969,12 @@ Partial Class FormBOMDesignSingle
         '
         Me.LPOApproved.Appearance.Font = New System.Drawing.Font("Calibri", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LPOApproved.Dock = System.Windows.Forms.DockStyle.Right
-        Me.LPOApproved.Location = New System.Drawing.Point(980, 2)
+        Me.LPOApproved.Location = New System.Drawing.Point(973, 2)
         Me.LPOApproved.Name = "LPOApproved"
         Me.LPOApproved.Padding = New System.Windows.Forms.Padding(0, 5, 10, 0)
-        Me.LPOApproved.Size = New System.Drawing.Size(149, 31)
+        Me.LPOApproved.Size = New System.Drawing.Size(156, 31)
         Me.LPOApproved.TabIndex = 15
-        Me.LPOApproved.Text = "PO Approved : 0"
+        Me.LPOApproved.Text = "PO Submitted : 0"
         '
         'LabelPrintedName
         '

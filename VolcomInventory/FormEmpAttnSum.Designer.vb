@@ -169,12 +169,12 @@ Partial Class FormEmpAttnSum
         Me.BViewSum = New DevExpress.XtraEditors.SimpleButton()
         Me.PopupMenu = New DevExpress.XtraBars.PopupMenu(Me.components)
         Me.BBIDetailSick = New DevExpress.XtraBars.BarButtonItem()
+        Me.BBIDetailLate = New DevExpress.XtraBars.BarButtonItem()
         Me.BarManager = New DevExpress.XtraBars.BarManager(Me.components)
         Me.barDockControlTop = New DevExpress.XtraBars.BarDockControl()
         Me.barDockControlBottom = New DevExpress.XtraBars.BarDockControl()
         Me.barDockControlLeft = New DevExpress.XtraBars.BarDockControl()
         Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl()
-        Me.BBIDetailLate = New DevExpress.XtraBars.BarButtonItem()
         CType(Me.XTCReportAttendance, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCReportAttendance.SuspendLayout()
         Me.XTPMonthly.SuspendLayout()
@@ -648,9 +648,7 @@ Partial Class FormEmpAttnSum
         'GridColumn9
         '
         Me.GridColumn9.Caption = "Weekday"
-        Me.GridColumn9.DisplayFormat.FormatString = "dddd"
-        Me.GridColumn9.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.GridColumn9.FieldName = "date"
+        Me.GridColumn9.FieldName = "weekday"
         Me.GridColumn9.Name = "GridColumn9"
         Me.GridColumn9.Visible = True
         Me.GridColumn9.VisibleIndex = 15
@@ -965,9 +963,7 @@ Partial Class FormEmpAttnSum
         'GridColumn53
         '
         Me.GridColumn53.Caption = "Weekday"
-        Me.GridColumn53.DisplayFormat.FormatString = "dddd"
-        Me.GridColumn53.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.GridColumn53.FieldName = "date"
+        Me.GridColumn53.FieldName = "weekday"
         Me.GridColumn53.Name = "GridColumn53"
         Me.GridColumn53.Visible = True
         Me.GridColumn53.VisibleIndex = 11
@@ -1584,6 +1580,12 @@ Partial Class FormEmpAttnSum
         Me.BBIDetailSick.Id = 0
         Me.BBIDetailSick.Name = "BBIDetailSick"
         '
+        'BBIDetailLate
+        '
+        Me.BBIDetailLate.Caption = "Detail Late"
+        Me.BBIDetailLate.Id = 1
+        Me.BBIDetailLate.Name = "BBIDetailLate"
+        '
         'BarManager
         '
         Me.BarManager.DockControls.Add(Me.barDockControlTop)
@@ -1621,12 +1623,6 @@ Partial Class FormEmpAttnSum
         Me.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right
         Me.barDockControlRight.Location = New System.Drawing.Point(1166, 0)
         Me.barDockControlRight.Size = New System.Drawing.Size(0, 328)
-        '
-        'BBIDetailLate
-        '
-        Me.BBIDetailLate.Caption = "Detail Late"
-        Me.BBIDetailLate.Id = 1
-        Me.BBIDetailLate.Name = "BBIDetailLate"
         '
         'FormEmpAttnSum
         '

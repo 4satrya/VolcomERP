@@ -23,6 +23,16 @@
 
         'lookup
         viewPeriodType()
+        viewStatus()
+
+        SLStatus1.EditValue = "6"
+        SLStatus2.EditValue = "6"
+        SLStatus3.EditValue = "6"
+        SLStatus4.EditValue = "6"
+        SLStatus5.EditValue = "6"
+        SLStatus6.EditValue = "6"
+        SLStatus7.EditValue = "6"
+        SLStatus8.EditValue = "6"
 
         ActiveControl = DEFromRec
         page_active = "rec"
@@ -34,6 +44,22 @@
         UNION
         SELECT '2' AS `id_period_type`,'Entry Date' AS `period_type` "
         viewSearchLookupQuery(SLEPeriodType, query, "id_period_type", "period_type", "id_period_type")
+        Cursor = Cursors.Default
+    End Sub
+
+    Sub viewStatus()
+        Cursor = Cursors.WaitCursor
+        Dim query As String = "SELECT id_report_status, report_status FROM tb_lookup_report_status
+        UNION
+        SELECT 0 AS id_report_status, 'All Status' AS report_status"
+        viewSearchLookupQuery(SLStatus1, query, "id_report_status", "report_status", "id_report_status")
+        viewSearchLookupQuery(SLStatus2, query, "id_report_status", "report_status", "id_report_status")
+        viewSearchLookupQuery(SLStatus3, query, "id_report_status", "report_status", "id_report_status")
+        viewSearchLookupQuery(SLStatus4, query, "id_report_status", "report_status", "id_report_status")
+        viewSearchLookupQuery(SLStatus5, query, "id_report_status", "report_status", "id_report_status")
+        viewSearchLookupQuery(SLStatus6, query, "id_report_status", "report_status", "id_report_status")
+        viewSearchLookupQuery(SLStatus7, query, "id_report_status", "report_status", "id_report_status")
+        viewSearchLookupQuery(SLStatus8, query, "id_report_status", "report_status", "id_report_status")
         Cursor = Cursors.Default
     End Sub
 
@@ -53,8 +79,10 @@
         End Try
 
         'prepare query
+        Dim w_status As String = If(SLStatus1.EditValue.ToString = "0", "", "AND a0.id_report_status = " + SLStatus1.EditValue.ToString)
+
         Dim query_c As ClassProductionPLToWHRec = New ClassProductionPLToWHRec()
-        Dim data As DataTable = query_c.transactionList("AND (a0.pl_prod_order_rec_date>='" + date_from_selected + "' AND a0.pl_prod_order_rec_date<='" + date_until_selected + "') ", "1")
+        Dim data As DataTable = query_c.transactionList("AND (a0.pl_prod_order_rec_date>='" + date_from_selected + "' AND a0.pl_prod_order_rec_date<='" + date_until_selected + "') " + w_status, "1")
         GCPL.DataSource = data
         Cursor = Cursors.Default
     End Sub
@@ -75,8 +103,10 @@
         End Try
 
         'prepare query
+        Dim w_status As String = If(SLStatus2.EditValue.ToString = "0", "", "AND a.id_report_status = " + SLStatus2.EditValue.ToString)
+
         Dim query_c As ClassSalesDelOrder = New ClassSalesDelOrder()
-        Dim data As DataTable = query_c.transactionList("AND (a.pl_sales_order_del_date>='" + date_from_selected + "' AND a.pl_sales_order_del_date<='" + date_until_selected + "') ", "1")
+        Dim data As DataTable = query_c.transactionList("AND (a.pl_sales_order_del_date>='" + date_from_selected + "' AND a.pl_sales_order_del_date<='" + date_until_selected + "') " + w_status, "1")
         GCSalesDelOrder.DataSource = data
         Cursor = Cursors.Default
     End Sub
@@ -101,8 +131,10 @@
         End Try
 
         'prepare query
+        Dim w_status As String = If(SLStatus3.EditValue.ToString = "0", "", "AND a.id_report_status = " + SLStatus3.EditValue.ToString)
+
         Dim query_c As ClassSalesReturn = New ClassSalesReturn()
-        Dim data As DataTable = query_c.transactionList("AND (a.id_ret_type!=2) AND (a.sales_return_date>='" + date_from_selected + "' AND a.sales_return_date<='" + date_until_selected + "') ", "1")
+        Dim data As DataTable = query_c.transactionList("AND (a.id_ret_type!=2) AND (a.sales_return_date>='" + date_from_selected + "' AND a.sales_return_date<='" + date_until_selected + "') " + w_status, "1")
         GCSalesReturn.DataSource = data
         Cursor = Cursors.Default
     End Sub
@@ -127,8 +159,10 @@
         End Try
 
         'prepare query
+        Dim w_status As String = If(SLStatus4.EditValue.ToString = "0", "", "AND a.id_report_status = " + SLStatus4.EditValue.ToString)
+
         Dim query_c As ClassSalesReturn = New ClassSalesReturn()
-        Dim data As DataTable = query_c.transactionListNSI("AND a.id_ret_type=2 AND (a.sales_return_date>='" + date_from_selected + "' AND a.sales_return_date<='" + date_until_selected + "') ", "1")
+        Dim data As DataTable = query_c.transactionListNSI("AND a.id_ret_type=2 AND (a.sales_return_date>='" + date_from_selected + "' AND a.sales_return_date<='" + date_until_selected + "') " + w_status, "1")
         GCNonStock.DataSource = data
         Cursor = Cursors.Default
     End Sub
@@ -157,8 +191,10 @@
         End Try
 
         'prepare query
+        Dim w_status As String = If(SLStatus6.EditValue.ToString = "0", "", "AND trf.id_report_status = " + SLStatus6.EditValue.ToString)
+
         Dim query_c As ClassFGTrf = New ClassFGTrf()
-        Dim data As DataTable = query_c.transactionList("AND (trf.fg_trf_date>='" + date_from_selected + "' AND trf.fg_trf_date<='" + date_until_selected + "') ", "1")
+        Dim data As DataTable = query_c.transactionList("AND (trf.fg_trf_date>='" + date_from_selected + "' AND trf.fg_trf_date<='" + date_until_selected + "') " + w_status, "1")
         GCFGTrf.DataSource = data
         Cursor = Cursors.Default
     End Sub
@@ -183,8 +219,10 @@
         End Try
 
         'prepare query
+        Dim w_status As String = If(SLStatus5.EditValue.ToString = "0", "", "AND a.id_report_status = " + SLStatus5.EditValue.ToString)
+
         Dim query_c As ClassSalesReturnQC = New ClassSalesReturnQC()
-        Dim data As DataTable = query_c.transactionList("AND (a.sales_return_qc_date>='" + date_from_selected + "' AND a.sales_return_qc_date<='" + date_until_selected + "') ", "1")
+        Dim data As DataTable = query_c.transactionList("AND (a.sales_return_qc_date>='" + date_from_selected + "' AND a.sales_return_qc_date<='" + date_until_selected + "') " + w_status, "1")
         GCSalesReturnQC.DataSource = data
         Cursor = Cursors.Default
     End Sub
@@ -460,6 +498,8 @@
         Catch ex As Exception
         End Try
 
+        Dim w_status As String = If(SLStatus7.EditValue.ToString = "0", "", " AND sp.id_report_status = " + SLStatus7.EditValue.ToString)
+
         Dim query As String = "SELECT spd.id_sales_pos_det, spd.id_sales_pos, sp.sales_pos_number, rmt.report_mark_type_name, 
         c.comp_number, c.comp_name, cg.comp_group, cg.description AS `comp_group_name`,
         sp.sales_pos_date, sp.sales_pos_due_date,
@@ -485,8 +525,8 @@
 	        WHERE dsg.id_lookup_status_order!=2
         ) prod ON prod.id_product = spd.id_product
         INNER JOIN tb_lookup_report_status stt ON stt.id_report_status = sp.id_report_status
-        WHERE 1=1 AND (" + col_date + ">='" + date_from_selected + "' AND " + col_date + "<='" + date_until_selected + "') " + cond_promo + cond_promo_trans
-        query += "ORDER BY spd.id_sales_pos ASC "
+        WHERE 1=1 AND (" + col_date + ">='" + date_from_selected + "' AND " + col_date + "<='" + date_until_selected + "') " + cond_promo + cond_promo_trans + w_status
+        query += " ORDER BY sp.id_report_status DESC, spd.id_sales_pos ASC "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCSales.DataSource = data
         Cursor = Cursors.Default
@@ -525,6 +565,8 @@
         Catch ex As Exception
         End Try
 
+        Dim w_status As String = If(SLStatus8.EditValue.ToString = "0", "", "AND so.id_report_status = " + SLStatus8.EditValue.ToString)
+
         Dim query As String = "SELECT so.id_sales_order, so.sales_order_number, ot.order_type, so.id_so_status, cat.so_status, gen.sales_order_gen_reff, so.sales_order_date,
         rs.id_report_status, rs.report_status,
         wh.comp_number AS `wh_account`, wh.comp_name AS `wh`, 
@@ -557,7 +599,7 @@
             GROUP BY f.id_product
         ) prod ON prod.id_product = so_det.id_product
         INNER JOIN tb_lookup_report_status rs ON rs.id_report_status = so.id_report_status
-        WHERE 1=1 AND (so.sales_order_date>='" + date_from_selected + "' AND so.sales_order_date<='" + date_until_selected + "')
+        WHERE 1=1 AND (so.sales_order_date>='" + date_from_selected + "' AND so.sales_order_date<='" + date_until_selected + "') " + w_status + "
         ORDER BY so.id_sales_order ASC , prod.`class` ASC, product_full_code ASC "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCSO.DataSource = data

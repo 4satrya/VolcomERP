@@ -4,6 +4,7 @@
     Dim bdel_active As String = "1"
 
     Public is_dep As Boolean = False
+    Public is_emp As Boolean = False
 
     Private Sub FormEmpAttnInd_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
         FormMain.show_rb(Name)
@@ -29,6 +30,9 @@
         query += " INNER JOIN tb_m_departement dep ON dep.id_departement=emp.id_departement"
         If is_dep = True Then
             query += " AND dep.id_departement='" & id_departement_user & "'"
+        End If
+        If is_emp = True Then
+            query += " AND emp.id_employee='" & id_employee_user & "'"
         End If
         query += " INNER JOIN tb_lookup_employee_active active On active.id_employee_active=emp.id_employee_active"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")

@@ -2065,6 +2065,50 @@ Public Class ClassSendEmail
             client.Send(mail)
         End If
     End Sub
+
+    Sub send_mail_complete(ByVal report_mark_type As String, ByVal id_report As String, ByVal report_number As String)
+        Dim query As String = "SELECT emp.`employee_name`,emp.`email_external`,rmt.`report_mark_type_name`
+FROM tb_report_mark rm
+INNER JOIN tb_m_employee emp ON emp.`id_employee`=rm.`id_employee`
+INNER JOIN tb_lookup_report_mark_type rmt ON rmt.`report_mark_type`=rm.`report_mark_type`
+WHERE rm.id_report='" & id_report & "' AND rm.report_mark_type='" & report_mark_type & "' AND rm.id_report_status='1' LIMIT 1"
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+
+        If data.Rows.Count > 0 Then
+            Dim is_ssl = get_setup_field("system_email_is_ssl").ToString
+            Dim client As SmtpClient = New SmtpClient()
+            If is_ssl = "1" Then
+                client.Port = get_setup_field("system_email_ssl_port").ToString
+                client.DeliveryMethod = SmtpDeliveryMethod.Network
+                client.UseDefaultCredentials = False
+                client.Host = get_setup_field("system_email_ssl_server").ToString
+                client.EnableSsl = True
+                client.Credentials = New System.Net.NetworkCredential(get_setup_field("system_email_ssl").ToString, get_setup_field("system_email_ssl_pass").ToString)
+            Else
+                client.Port = get_setup_field("system_email_port").ToString
+                client.DeliveryMethod = SmtpDeliveryMethod.Network
+                client.UseDefaultCredentials = False
+                client.Host = get_setup_field("system_email_server").ToString
+                client.Credentials = New System.Net.NetworkCredential(get_setup_field("system_email").ToString, get_setup_field("system_email_pass").ToString)
+            End If
+
+            Dim report_type As String = data.Rows(0)("report_mark_type_name").ToString
+            Dim dear_to As String = data.Rows(0)("employee_name").ToString
+            Dim dear_to_mail As String = data.Rows(0)("email_external").ToString
+
+            'to list : dep head 
+            Dim to_mail As MailAddress = New MailAddress(dear_to_mail, dear_to)
+            Dim from_mail As MailAddress = New MailAddress(get_setup_field("system_email_ssl").ToString, get_setup_field("app_name").ToString)
+            Dim mail As MailMessage = New MailMessage(from_mail, to_mail)
+
+            mail.Subject = report_type & " (" & report_number & ") Completed"
+
+            mail.IsBodyHtml = True
+            mail.Body = email_complete_body(report_type, report_number, dear_to)
+            client.Send(mail)
+        End If
+    End Sub
+
     Sub send_email_appr(ByVal report_mark_type As String, ByVal id_leave As String, ByVal is_appr As Boolean)
         Dim is_ssl = get_setup_field("system_email_is_ssl").ToString
         Dim client As SmtpClient = New SmtpClient()
@@ -2159,6 +2203,7 @@ Public Class ClassSendEmail
         mail.Body = email_appr_body(id_leave, is_appr)
         client.Send(mail)
     End Sub
+
     Function email_appr_body(ByVal id_leave As String, ByVal is_appr As Boolean)
         Dim query As String = ""
         query = "SELECT empl.*,lt.leave_type,empl.leave_purpose,empx.email_external as dept_head_email,empx.id_employee as id_dep_head,empx.employee_name as dep_head,empld.min_date,empld.max_date,status.report_status,emp.employee_name,emp.employee_code,empld.hours_total,empl.report_mark_type 
@@ -2489,6 +2534,84 @@ Public Class ClassSendEmail
                     </tbody></table>"
         Return body_temp
     End Function
+
+    Function email_complete_body(ByVal report_type As String, ByVal report_number As String, ByVal dear_to As String)
+        Dim body_temp As String = ""
+        body_temp = "<table class='m_1811720018273078822MsoNormalTable' border='0' cellspacing='0' cellpadding='0' width='100%' style='width:100.0%;background:#eeeeee'>
+                     <tbody><tr>
+                      <td style='padding:30.0pt 30.0pt 30.0pt 30.0pt'>
+                      <div align='center'>
+
+                      <table class='m_1811720018273078822MsoNormalTable' border='0' cellspacing='0' cellpadding='0' width='600' style='width:6.25in;background:white'>
+                       <tbody><tr>
+                        <td style='padding:0in 0in 0in 0in'></td>
+                       </tr>
+                       <tr>
+                        <td style='padding:0in 0in 0in 0in'>
+                        <p class='MsoNormal' align='center' style='text-align:center'><a href='http://www.volcom.co.id/' title='Volcom' target='_blank' data-saferedirecturl='https://www.google.com/url?hl=en&amp;q=http://www.volcom.co.id/&amp;source=gmail&amp;ust=1480121870771000&amp;usg=AFQjCNEjXvEZWgDdR-Wlke7nn0fmc1ZUuA'><span style='text-decoration:none'><img border='0' width='180' id='m_1811720018273078822_x0000_i1025' src='https://ci3.googleusercontent.com/proxy/x-zXDZUS-2knkEkbTh3HzgyAAusw1Wz7dqV-lbnl39W_4F6T97fJ2_b9doP3nYi0B6KHstdb-tK8VAF_kOaLt2OH=s0-d-e1-ft#http://www.volcom.co.id/enews/img/volcom.jpg' alt='Volcom' class='CToWUd'></span></a><u></u><u></u></p>
+                        </td>
+                       </tr>
+                       <tr>
+                        <td style='padding:0in 0in 0in 0in'></td>
+                       </tr>
+                       <tr>
+                        <td style='padding:0in 0in 0in 0in'>
+                        <table class='m_1811720018273078822MsoNormalTable' border='0' cellspacing='0' cellpadding='0' width='600' style='width:6.25in;background:white'>
+                         <tbody><tr>
+                          <td style='padding:0in 0in 0in 0in'>
+      
+                          </td>
+                         </tr>
+                        </tbody></table>
+                        <p class='MsoNormal' style='background-color:#eff0f1'><span style='display:block;background-color:#eff0f1;height: 5px;'><u></u>&nbsp;<u></u></span></p>
+                        <p class='MsoNormal'><span style='display:none'><u></u>&nbsp;<u></u></span></p>
+                        <table class='m_1811720018273078822MsoNormalTable' border='0' cellspacing='0' cellpadding='0' style='background:white'>
+                         <tbody>
+                         <tr>
+                          <td style='padding:15.0pt 15.0pt 15.0pt 15.0pt' colspan='3'>
+                          <div>
+                          <p class='MsoNormal' style='line-height:14.25pt'><b><span style='font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060'>Dear " & dear_to & ",</span></b><span style='font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060;letter-spacing:.4pt'><u></u><u></u></span></p>
+                          </div>
+                          </td>
+                         </tr>
+                         <tr>
+                          <td style='padding:15.0pt 15.0pt 8.0pt 15.0pt' colspan='3'>
+                          <div>
+                          <p class='MsoNormal' style='line-height:14.25pt'><span style='font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060;letter-spacing:.4pt'>Approval <b>" & report_type & "</b> with number <b>" & report_number & "</b>, has been completed. </span></b><span style='font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060;letter-spacing:.4pt'><u></u><u></u></span>
+                          </div>
+                          </td>
+                         </tr>
+                         <tr>
+                          <td style='padding:15.0pt 15.0pt 15.0pt 15.0pt' colspan='3'>
+                          <div>
+                          <p class='MsoNormal' style='line-height:14.25pt'><span style='font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060;letter-spacing:.4pt'>Thank you<br /><b>Volcom ERP</b><u></u><u></u></span></p>
+
+                          </div>
+                          </td>
+                         </tr>
+                        </tbody></table>
+                        <p class='MsoNormal' style='background-color:#eff0f1'><span style='display:block;height: 10px;'><u></u>&nbsp;<u></u></span></p>
+                        <p class='MsoNormal'><span style='display:none'><u></u>&nbsp;<u></u></span></p>
+                        <div align='center'>
+                        <table class='m_1811720018273078822MsoNormalTable' border='0' cellspacing='0' cellpadding='0' style='background:white'>
+                         <tbody><tr>
+                          <td style='padding:6.0pt 6.0pt 6.0pt 6.0pt;text-align:center;'>
+                            <span style='text-align:center;font-size:7.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#a0a0a0;letter-spacing:.4pt;'>This email send directly from system. Do not reply.</b><u></u><u></u></span>
+                          <p class='MsoNormal' align='center' style='margin-bottom:12.0pt;text-align:center;padding-top:0px;'><img border='0' width='300' id='m_1811720018273078822_x0000_i1028' src='https://ci6.googleusercontent.com/proxy/xq6o45mp_D9Z7DHCK5WT7GKuQ2QDaLg1hyMxoHX5ofUIv_m7GwasoczpbAOn6l6Ze-UfLuIUAndSokPvO633nnO9=s0-d-e1-ft#http://www.volcom.co.id/enews/img/footer.jpg' class='CToWUd'><u></u><u></u></p>
+                          </td>
+                         </tr>
+                        </tbody></table>
+                        </div>
+                        </td>
+                       </tr>
+                      </tbody></table>
+                      </div>
+                      </td>
+                     </tr>
+                    </tbody></table>"
+        Return body_temp
+    End Function
+
     Function email_body_comment(ByVal season As String, ByVal design_name As String, ByVal design_code As String, ByVal comment_by As String, ByVal date_string As String, ByVal comment As String)
         Dim body_temp As String = ""
         body_temp = "<table class='m_1811720018273078822MsoNormalTable' border='0' cellspacing='0' cellpadding='0' width='100%' style='width:100.0%;background:#eeeeee'>

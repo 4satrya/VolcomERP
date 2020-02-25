@@ -1803,6 +1803,9 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
         ElseIf formName = "FormPaymentMissing" Then
             FormPaymentMissingDet.id_missing_payment = "-1"
             FormPaymentMissingDet.ShowDialog()
+        ElseIf formName = "FormBudgetProdDemand" Then
+            FormBudgetProdDemand.XTCBudget.SelectedTabPageIndex = 1
+            FormBudgetProdDemandNew.ShowDialog()
         Else
             RPSubMenu.Visible = False
         End If
@@ -2961,6 +2964,13 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             ElseIf Formname = "FormPaymentMissing" Then
                 FormPaymentMissingDet.id_missing_payment = FormPaymentMissing.GridViewMissing.GetFocusedRowCellValue("id_missing_payment").ToString
                 FormPaymentMissingDet.ShowDialog()
+            ElseIf formName = "FormBudgetProdDemand" Then
+                If FormBudgetProdDemand.XTCBudget.SelectedTabPageIndex = 1 Then
+                    If FormBudgetProdDemand.GVProposed.RowCount > 0 And FormBudgetProdDemand.GVProposed.FocusedRowHandle >= 0 Then
+                        FormBudgetProdDemandDet.id = FormBudgetProdDemand.GVProposed.GetFocusedRowCellValue("id_b_prod_demand_propose").ToString
+                        FormBudgetProdDemandDet.ShowDialog()
+                    End If
+                End If
             Else
                 RPSubMenu.Visible = False
             End If
@@ -6286,6 +6296,7 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
                     errorDelete()
                 End Try
             End If
+        ElseIf formName = "FormBudgetProdDemand" Then
         Else
             RPSubMenu.Visible = False
         End If
@@ -6564,7 +6575,7 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             If FormProduction.XTCTabProduction.SelectedTabPageIndex = 0 Then
                 print(FormProduction.GCProd, "Production Order")
             ElseIf FormProduction.XTCTabProduction.SelectedTabPageIndex = 1 Then
-
+                print(FormProduction.GCDesign, "List Production Demand")
             ElseIf FormProduction.XTCTabProduction.SelectedTabPageIndex = 2 Then
                 print(FormProduction.GCProdWO, "Production Order WO")
             ElseIf FormProduction.XTCTabProduction.SelectedTabPageIndex = 3 Then
@@ -6913,12 +6924,68 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
                 Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
                 Tool.ShowPreview()
             ElseIf FormFGStock.XTCFGStock.SelectedTabPageIndex = 4 Then 'RSV STOCK
-                print(FormFGStock.GCRsv, "RESERVED STOCK")
+                '... 
+                ' creating and saving the view's layout to a new memory stream 
+                Dim str As System.IO.Stream
+                str = New System.IO.MemoryStream()
+                FormFGStock.GVRsv.SaveLayoutToStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+                str.Seek(0, System.IO.SeekOrigin.Begin)
+                ReportFGStockRSV.dt = FormFGStock.GCRsv.DataSource
+                Dim Report As New ReportFGStockRSV()
+                Report.GVRsv.RestoreLayoutFromStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+                str.Seek(0, System.IO.SeekOrigin.Begin)
+                Report.LabelDesign.Text = If(FormFGStock.CheckEditAllDsgRsv.EditValue, "ALL DESIGN", FormFGStock.TxtCodeDsgRsv.Text + " - " + FormFGStock.TxtNameDsgRsv.Text)
+                Report.LabelAccount.Text = FormFGStock.TxtCodeAccRsv.Text + " - " + FormFGStock.TxtNameAccRsv.Text
+                ReportStyleGridview(Report.GVRsv)
+
+                ' Show the report's preview. 
+                Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
+                Tool.ShowPreview()
             ElseIf FormFGStock.XTCFGStock.SelectedTabPageIndex = 5 Then 'SOH
                 If FormFGStock.XTCStockOnHandNew.SelectedTabPageIndex = 0 Then
-                    print_raw(FormFGStock.GCSOH, "STOCK ON HAND")
+                    '... 
+                    ' creating and saving the view's layout to a new memory stream 
+                    Dim str As System.IO.Stream
+                    str = New System.IO.MemoryStream()
+                    FormFGStock.GVSOH.SaveLayoutToStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+                    str.Seek(0, System.IO.SeekOrigin.Begin)
+                    ReportFGStockSOH.dt = FormFGStock.GCSOH.DataSource
+                    Dim Report As New ReportFGStockSOH()
+                    Report.XrLabeltitle.Text = "STOCK ON HAND (BY SIZE BARCODE)"
+                    Report.DetailReportSize.Visible = True
+                    Report.DetailReportCode.Visible = False
+                    Report.GVSOH.RestoreLayoutFromStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+                    str.Seek(0, System.IO.SeekOrigin.Begin)
+                    Report.LabelDesign.Text = If(FormFGStock.CEFindAllProduct.Checked, "ALL DESIGN", FormFGStock.TxtProduct.Text)
+                    Report.LabelAccount.Text = FormFGStock.SLEAccount.Text
+                    Report.LabelUnit.Text = FormFGStock.DEUntilAcc.Text
+                    ReportStyleGridview(Report.GVSOH)
+
+                    ' Show the report's preview. 
+                    Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
+                    Tool.ShowPreview()
                 ElseIf FormFGStock.XTCStockOnHandNew.SelectedTabPageIndex = 1 Then
-                    print_raw(FormFGStock.GCSOHCode, "STOCK ON HAND")
+                    '... 
+                    ' creating and saving the view's layout to a new memory stream 
+                    Dim str As System.IO.Stream
+                    str = New System.IO.MemoryStream()
+                    FormFGStock.GVSOHCode.SaveLayoutToStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+                    str.Seek(0, System.IO.SeekOrigin.Begin)
+                    ReportFGStockSOH.dt = FormFGStock.GCSOHCode.DataSource
+                    Dim Report As New ReportFGStockSOH()
+                    Report.XrLabeltitle.Text = "STOCK ON HAND (BY CODE)"
+                    Report.DetailReportSize.Visible = False
+                    Report.DetailReportCode.Visible = True
+                    Report.GVSOHCode.RestoreLayoutFromStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+                    str.Seek(0, System.IO.SeekOrigin.Begin)
+                    Report.LabelDesign.Text = If(FormFGStock.CEFindAllProduct.Checked, "ALL DESIGN", FormFGStock.TxtProduct.Text)
+                    Report.LabelAccount.Text = FormFGStock.SLEAccount.Text
+                    Report.LabelUnit.Text = FormFGStock.DEUntilAcc.Text
+                    ReportStyleBanded(Report.GVSOHCode)
+
+                    ' Show the report's preview. 
+                    Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
+                    Tool.ShowPreview()
                 End If
             End If
             Cursor = Cursors.Default
@@ -8063,6 +8130,12 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             print_raw(FormLineList.GCData, "")
         ElseIf formName = "FormPaymentMissing" Then
             FormPaymentMissing.form_print()
+        ElseIf formName = "FormBudgetProdDemand" Then
+            If FormBudgetProdDemand.XTCBudget.SelectedTabPageIndex = 0 Then
+                print_raw(FormBudgetProdDemand.GCApprovedBudget, "")
+            ElseIf FormBudgetProdDemand.XTCBudget.SelectedTabPageIndex = 1 Then
+                print_raw(FormBudgetProdDemand.GCProposed, "")
+            End If
         Else
             RPSubMenu.Visible = False
         End If
@@ -8920,6 +8993,9 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
         ElseIf formName = "FormLineList" Then
             FormLineList.Close()
             FormLineList.Dispose()
+        ElseIf formName = "FormBudgetProdDemand" Then
+            FormBudgetProdDemand.Close()
+            FormBudgetProdDemand.Dispose()
         Else
             RPSubMenu.Visible = False
         End If
@@ -9815,6 +9891,12 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             FormEmpUniCreditNote.view_form()
         ElseIf formName = "FormPaymentMissing" Then
             FormPaymentMissingDet.form_load()
+        ElseIf formName = "FormBudgetProdDemand" Then
+            If FormBudgetProdDemand.XTCBudget.SelectedTabPageIndex = 0 Then
+                FormBudgetProdDemand.viewAppBudget()
+            ElseIf FormBudgetProdDemand.XTCBudget.SelectedTabPageIndex = 1 Then
+                FormBudgetProdDemand.viewPropose(FormBudgetProdDemand.last_cond)
+            End If
         End If
     End Sub
     'Switch
@@ -14437,11 +14519,69 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
     Private Sub NBLineListMKT_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBLineListMKT.LinkClicked
         Cursor = Cursors.WaitCursor
         Try
+            FormLineList.id_menu = "1"
             FormLineList.show_spesific_col = True
             FormLineList.MdiParent = Me
             FormLineList.Show()
             FormLineList.WindowState = FormWindowState.Maximized
             FormLineList.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBLineListRetail_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBLineListRetail.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormLineList.id_menu = "2"
+            FormLineList.show_spesific_col = True
+            FormLineList.MdiParent = Me
+            FormLineList.Show()
+            FormLineList.WindowState = FormWindowState.Maximized
+            FormLineList.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBLineListVM_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBLineListVM.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormLineList.id_menu = "3"
+            FormLineList.show_spesific_col = True
+            FormLineList.MdiParent = Me
+            FormLineList.Show()
+            FormLineList.WindowState = FormWindowState.Maximized
+            FormLineList.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBSetupBudgetProdDemand_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBSetupBudgetProdDemand.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormBudgetProdDemand.MdiParent = Me
+            FormBudgetProdDemand.Show()
+            FormBudgetProdDemand.WindowState = FormWindowState.Maximized
+            FormBudgetProdDemand.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBAttnIndEmp_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBAttnIndEmp.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormEmpAttnInd.MdiParent = Me
+            FormEmpAttnInd.is_emp = True
+            FormEmpAttnInd.Show()
+            FormEmpAttnInd.WindowState = FormWindowState.Maximized
+            FormEmpAttnInd.Focus()
         Catch ex As Exception
             errorProcess()
         End Try

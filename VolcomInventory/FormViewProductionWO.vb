@@ -343,7 +343,7 @@
 
     Private Sub BMark_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BMark.Click
         FormReportMark.id_report = id_wo
-        FormReportMark.report_mark_type = "22"
+        FormReportMark.report_mark_type = "23"
         FormReportMark.is_view = "1"
         FormReportMark.ShowDialog()
     End Sub
@@ -356,7 +356,7 @@
         Cursor = Cursors.WaitCursor
         FormDocumentUpload.is_view = "1"
         FormDocumentUpload.id_report = id_wo
-        FormDocumentUpload.report_mark_type = "22"
+        FormDocumentUpload.report_mark_type = "23"
         FormDocumentUpload.ShowDialog()
         Cursor = Cursors.Default
     End Sub

@@ -15,7 +15,7 @@
         Dim query As String = "SELECT report_mark_type,report_mark_type_name FROM `tb_lookup_report_mark_type` WHERE is_able_cancel='1'"
         viewLookupQuery(LEReportMarkType, query, 0, "report_mark_type_name", "report_mark_type")
     End Sub
-
+    '
     Sub act_load()
         load_report_mark_type()
         If is_view = "1" Then
@@ -109,6 +109,7 @@
         '
         but_show()
     End Sub
+    '
     Sub load_det()
         Dim qb As New ClassShowPopUp()
         qb.is_qb = "1"

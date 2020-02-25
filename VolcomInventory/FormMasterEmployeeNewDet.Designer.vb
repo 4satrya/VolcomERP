@@ -249,6 +249,8 @@ Partial Class FormMasterEmployeeNewDet
         Me.BtnNext = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnSaveChanges = New DevExpress.XtraEditors.SimpleButton()
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.Label122 = New System.Windows.Forms.Label()
+        Me.LEHomebase = New DevExpress.XtraEditors.LookUpEdit()
         CType(Me.PanelControlTop, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlTop.SuspendLayout()
         CType(Me.PanelControl8, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -397,6 +399,7 @@ Partial Class FormMasterEmployeeNewDet
         Me.PCKtpAtt.SuspendLayout()
         CType(Me.PEKTP.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LEHomebase.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControlTop
@@ -407,7 +410,7 @@ Partial Class FormMasterEmployeeNewDet
         Me.PanelControlTop.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControlTop.Location = New System.Drawing.Point(0, 0)
         Me.PanelControlTop.Name = "PanelControlTop"
-        Me.PanelControlTop.Size = New System.Drawing.Size(838, 201)
+        Me.PanelControlTop.Size = New System.Drawing.Size(838, 230)
         Me.PanelControlTop.TabIndex = 0
         '
         'PanelControl8
@@ -420,7 +423,7 @@ Partial Class FormMasterEmployeeNewDet
         Me.PanelControl8.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelControl8.Location = New System.Drawing.Point(125, 0)
         Me.PanelControl8.Name = "PanelControl8"
-        Me.PanelControl8.Size = New System.Drawing.Size(713, 201)
+        Me.PanelControl8.Size = New System.Drawing.Size(713, 230)
         Me.PanelControl8.TabIndex = 8909
         '
         'TxtFocus
@@ -436,6 +439,8 @@ Partial Class FormMasterEmployeeNewDet
         'PanelControl11
         '
         Me.PanelControl11.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelControl11.Controls.Add(Me.Label122)
+        Me.PanelControl11.Controls.Add(Me.LEHomebase)
         Me.PanelControl11.Controls.Add(Me.DEActualJoinDate)
         Me.PanelControl11.Controls.Add(Me.TxtFullName)
         Me.PanelControl11.Controls.Add(Me.TxtInitialName)
@@ -454,7 +459,7 @@ Partial Class FormMasterEmployeeNewDet
         Me.PanelControl11.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl11.Location = New System.Drawing.Point(0, 63)
         Me.PanelControl11.Name = "PanelControl11"
-        Me.PanelControl11.Size = New System.Drawing.Size(713, 138)
+        Me.PanelControl11.Size = New System.Drawing.Size(713, 164)
         Me.PanelControl11.TabIndex = 8913
         '
         'DEActualJoinDate
@@ -698,7 +703,7 @@ Partial Class FormMasterEmployeeNewDet
         Me.PanelControlPic.Dock = System.Windows.Forms.DockStyle.Left
         Me.PanelControlPic.Location = New System.Drawing.Point(0, 0)
         Me.PanelControlPic.Name = "PanelControlPic"
-        Me.PanelControlPic.Size = New System.Drawing.Size(125, 201)
+        Me.PanelControlPic.Size = New System.Drawing.Size(125, 230)
         Me.PanelControlPic.TabIndex = 0
         '
         'PEEmployee
@@ -809,9 +814,9 @@ Partial Class FormMasterEmployeeNewDet
         Me.PanelControlMain.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
         Me.PanelControlMain.Controls.Add(Me.XTPEmployee)
         Me.PanelControlMain.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PanelControlMain.Location = New System.Drawing.Point(0, 201)
+        Me.PanelControlMain.Location = New System.Drawing.Point(0, 230)
         Me.PanelControlMain.Name = "PanelControlMain"
-        Me.PanelControlMain.Size = New System.Drawing.Size(838, 411)
+        Me.PanelControlMain.Size = New System.Drawing.Size(838, 382)
         Me.PanelControlMain.TabIndex = 1
         '
         'XTPEmployee
@@ -822,7 +827,7 @@ Partial Class FormMasterEmployeeNewDet
         Me.XTPEmployee.Name = "XTPEmployee"
         Me.XTPEmployee.SelectedTabPage = Me.XTPGeneral
         Me.XTPEmployee.ShowTabHeader = DevExpress.Utils.DefaultBoolean.[True]
-        Me.XTPEmployee.Size = New System.Drawing.Size(838, 411)
+        Me.XTPEmployee.Size = New System.Drawing.Size(838, 382)
         Me.XTPEmployee.TabIndex = 1
         Me.XTPEmployee.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPGeneral, Me.XTPStatus, Me.XTPPosition, Me.XTPDependent, Me.XTPSalary, Me.XTPTraining})
         '
@@ -947,7 +952,7 @@ Partial Class FormMasterEmployeeNewDet
         Me.XTPGeneral.Controls.Add(Me.LEReligion)
         Me.XTPGeneral.Controls.Add(Me.Label10)
         Me.XTPGeneral.Name = "XTPGeneral"
-        Me.XTPGeneral.Size = New System.Drawing.Size(809, 405)
+        Me.XTPGeneral.Size = New System.Drawing.Size(809, 376)
         Me.XTPGeneral.Text = "General"
         '
         'TEEmergencyPhone2
@@ -2742,6 +2747,25 @@ Partial Class FormMasterEmployeeNewDet
         '
         Me.ErrorProvider1.ContainerControl = Me
         '
+        'Label122
+        '
+        Me.Label122.AutoSize = True
+        Me.Label122.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label122.Location = New System.Drawing.Point(4, 138)
+        Me.Label122.Name = "Label122"
+        Me.Label122.Size = New System.Drawing.Size(60, 13)
+        Me.Label122.TabIndex = 8927
+        Me.Label122.Text = "Home Base"
+        '
+        'LEHomebase
+        '
+        Me.LEHomebase.Location = New System.Drawing.Point(105, 135)
+        Me.LEHomebase.Name = "LEHomebase"
+        Me.LEHomebase.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.LEHomebase.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_fingerprint", "Id", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("display_name", "Active Status")})
+        Me.LEHomebase.Size = New System.Drawing.Size(596, 20)
+        Me.LEHomebase.TabIndex = 8926
+        '
         'FormMasterEmployeeNewDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2909,6 +2933,7 @@ Partial Class FormMasterEmployeeNewDet
         Me.PCKtpAtt.ResumeLayout(False)
         CType(Me.PEKTP.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LEHomebase.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -3141,4 +3166,6 @@ Partial Class FormMasterEmployeeNewDet
     Friend WithEvents TEEmergencyName1 As DevExpress.XtraEditors.TextEdit
     Friend WithEvents Label108 As Label
     Friend WithEvents PanelControl14 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents Label122 As Label
+    Friend WithEvents LEHomebase As DevExpress.XtraEditors.LookUpEdit
 End Class

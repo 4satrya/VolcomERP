@@ -54,7 +54,7 @@
 
         TEPPH.EditValue = 0.00
 
-        TEGrandTotal.EditValue = TETotal.EditValue - TEDiscTotal.EditValue + TEVATValue.EditValue + TEPPH.EditValue
+        TEGrandTotal.EditValue = TETotal.EditValue - TEDiscTotal.EditValue + TEVATValue.EditValue - TEPPH.EditValue
     End Sub
 
     Private Sub SimpleButtonAttachment_Click(sender As Object, e As EventArgs) Handles SimpleButtonAttachment.Click
@@ -112,12 +112,12 @@
 
         TEPPH.EditValue = pph
 
-        TEGrandTotal.EditValue = TETotal.EditValue - TEDiscTotal.EditValue + TEVATValue.EditValue + TEPPH.EditValue
+        TEGrandTotal.EditValue = TETotal.EditValue - TEDiscTotal.EditValue + TEVATValue.EditValue - TEPPH.EditValue
     End Sub
 
     Private Sub TEPPH_EditValueChanged(sender As Object, e As EventArgs) Handles TEPPH.EditValueChanged
         Try
-            TEGrandTotal.EditValue = TETotal.EditValue - TEDiscTotal.EditValue + TEVATValue.EditValue + TEPPH.EditValue
+            TEGrandTotal.EditValue = TETotal.EditValue - TEDiscTotal.EditValue + TEVATValue.EditValue - TEPPH.EditValue
         Catch ex As Exception
         End Try
     End Sub

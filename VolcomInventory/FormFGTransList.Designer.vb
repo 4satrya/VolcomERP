@@ -51,6 +51,11 @@ Partial Class FormFGTransList
         Me.GridColumnSizeRec = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnClassRec = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GCFilterRec = New DevExpress.XtraEditors.GroupControl()
+        Me.SLStatus1 = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn19 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn27 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
         Me.BtnExportToXLSRec = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnViewRec = New DevExpress.XtraEditors.SimpleButton()
         Me.SimpleButton4 = New DevExpress.XtraEditors.SimpleButton()
@@ -86,6 +91,11 @@ Partial Class FormFGTransList
         Me.GridColumnAmountDel = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridView6 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GroupControl1 = New DevExpress.XtraEditors.GroupControl()
+        Me.SLStatus2 = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn28 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn39 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl7 = New DevExpress.XtraEditors.LabelControl()
         Me.BtnExportToXLS = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnViewDO = New DevExpress.XtraEditors.SimpleButton()
         Me.SimpleButton7 = New DevExpress.XtraEditors.SimpleButton()
@@ -121,6 +131,11 @@ Partial Class FormFGTransList
         Me.GridColumnIsNonListReturn = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepoCENonList = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.GroupControl2 = New DevExpress.XtraEditors.GroupControl()
+        Me.SLStatus3 = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView3 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn40 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn44 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl10 = New DevExpress.XtraEditors.LabelControl()
         Me.BtnExportToXLSRet = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnViewReturn = New DevExpress.XtraEditors.SimpleButton()
         Me.SimpleButton9 = New DevExpress.XtraEditors.SimpleButton()
@@ -152,6 +167,11 @@ Partial Class FormFGTransList
         Me.GridColumn32 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnRemarkNonStock = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GroupControl5 = New DevExpress.XtraEditors.GroupControl()
+        Me.SLStatus4 = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView4 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn45 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn46 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl13 = New DevExpress.XtraEditors.LabelControl()
         Me.BtnExportToXLSNonStock = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnViewNonStock = New DevExpress.XtraEditors.SimpleButton()
         Me.SimpleButton16 = New DevExpress.XtraEditors.SimpleButton()
@@ -183,6 +203,11 @@ Partial Class FormFGTransList
         Me.GridColumnQtyRQC = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnAmountRQC = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GroupControl3 = New DevExpress.XtraEditors.GroupControl()
+        Me.SLStatus5 = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView5 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn47 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn48 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl16 = New DevExpress.XtraEditors.LabelControl()
         Me.BtnExportToXLSRetTrf = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnViewReturnQC = New DevExpress.XtraEditors.SimpleButton()
         Me.SimpleButton11 = New DevExpress.XtraEditors.SimpleButton()
@@ -212,6 +237,11 @@ Partial Class FormFGTransList
         Me.GridColumnQtyTrf = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnClassTrf = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GroupControl4 = New DevExpress.XtraEditors.GroupControl()
+        Me.SLStatus6 = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView7 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn49 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn50 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl19 = New DevExpress.XtraEditors.LabelControl()
         Me.BtnExportToXLSTrf = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnViewTrf = New DevExpress.XtraEditors.SimpleButton()
         Me.SimpleButton13 = New DevExpress.XtraEditors.SimpleButton()
@@ -247,6 +277,11 @@ Partial Class FormFGTransList
         Me.GridColumnamount = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnreport_status = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GroupControl6 = New DevExpress.XtraEditors.GroupControl()
+        Me.SLStatus7 = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView8 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn51 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn52 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl22 = New DevExpress.XtraEditors.LabelControl()
         Me.CEPromo = New DevExpress.XtraEditors.CheckEdit()
         Me.SLEPeriodType = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -262,15 +297,6 @@ Partial Class FormFGTransList
         Me.XTPOrder = New DevExpress.XtraTab.XtraTabPage()
         Me.GCSO = New DevExpress.XtraGrid.GridControl()
         Me.GVSO = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.GroupControl7 = New DevExpress.XtraEditors.GroupControl()
-        Me.BtnExportToXLSSO = New DevExpress.XtraEditors.SimpleButton()
-        Me.BtnViewSO = New DevExpress.XtraEditors.SimpleButton()
-        Me.SimpleButton15 = New DevExpress.XtraEditors.SimpleButton()
-        Me.SimpleButton18 = New DevExpress.XtraEditors.SimpleButton()
-        Me.DEUntilSO = New DevExpress.XtraEditors.DateEdit()
-        Me.DEFromSO = New DevExpress.XtraEditors.DateEdit()
-        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
-        Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
         Me.GridColumnid_sales_order = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnsales_order_number = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnorder_type = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -298,6 +324,20 @@ Partial Class FormFGTransList
         Me.GridColumnid_prepare_status_so = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnprepare_status = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnfinal_comment = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GroupControl7 = New DevExpress.XtraEditors.GroupControl()
+        Me.SLStatus8 = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView9 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn53 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn54 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl25 = New DevExpress.XtraEditors.LabelControl()
+        Me.BtnExportToXLSSO = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnViewSO = New DevExpress.XtraEditors.SimpleButton()
+        Me.SimpleButton15 = New DevExpress.XtraEditors.SimpleButton()
+        Me.SimpleButton18 = New DevExpress.XtraEditors.SimpleButton()
+        Me.DEUntilSO = New DevExpress.XtraEditors.DateEdit()
+        Me.DEFromSO = New DevExpress.XtraEditors.DateEdit()
+        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.XTCSvcLevel, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCSvcLevel.SuspendLayout()
         Me.XTPRec.SuspendLayout()
@@ -306,6 +346,8 @@ Partial Class FormFGTransList
         CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GCFilterRec, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GCFilterRec.SuspendLayout()
+        CType(Me.SLStatus1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEUntilRec.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEUntilRec.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEFromRec.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -317,6 +359,8 @@ Partial Class FormFGTransList
         CType(Me.GridView6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl1.SuspendLayout()
+        CType(Me.SLStatus2.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEUntilDO.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEUntilDO.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEFromDO.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -328,6 +372,8 @@ Partial Class FormFGTransList
         CType(Me.RepoCENonList, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl2.SuspendLayout()
+        CType(Me.SLStatus3.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEUntilReturn.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEUntilReturn.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEFromReturn.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -338,6 +384,8 @@ Partial Class FormFGTransList
         CType(Me.RepositoryItemCheckEdit6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl5, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl5.SuspendLayout()
+        CType(Me.SLStatus4.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEUntilNonStock.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEUntilNonStock.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEFromNonStock.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -348,6 +396,8 @@ Partial Class FormFGTransList
         CType(Me.RepositoryItemCheckEdit4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl3.SuspendLayout()
+        CType(Me.SLStatus5.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView5, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEUntilReturnQC.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEUntilReturnQC.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEFromReturnQC.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -359,6 +409,8 @@ Partial Class FormFGTransList
         CType(Me.RepositoryItemCheckEdit5, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl4.SuspendLayout()
+        CType(Me.SLStatus6.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView7, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEUntilTrf.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEUntilTrf.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEFromTrf.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -368,6 +420,8 @@ Partial Class FormFGTransList
         CType(Me.GVSales, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl6, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl6.SuspendLayout()
+        CType(Me.SLStatus7.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView8, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CEPromo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLEPeriodType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -380,6 +434,8 @@ Partial Class FormFGTransList
         CType(Me.GVSO, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl7, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl7.SuspendLayout()
+        CType(Me.SLStatus8.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView9, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEUntilSO.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEUntilSO.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEFromSO.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -678,6 +734,8 @@ Partial Class FormFGTransList
         'GCFilterRec
         '
         Me.GCFilterRec.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GCFilterRec.Controls.Add(Me.SLStatus1)
+        Me.GCFilterRec.Controls.Add(Me.LabelControl6)
         Me.GCFilterRec.Controls.Add(Me.BtnExportToXLSRec)
         Me.GCFilterRec.Controls.Add(Me.BtnViewRec)
         Me.GCFilterRec.Controls.Add(Me.SimpleButton4)
@@ -692,9 +750,48 @@ Partial Class FormFGTransList
         Me.GCFilterRec.Size = New System.Drawing.Size(1165, 39)
         Me.GCFilterRec.TabIndex = 3
         '
+        'SLStatus1
+        '
+        Me.SLStatus1.Location = New System.Drawing.Point(357, 9)
+        Me.SLStatus1.Name = "SLStatus1"
+        Me.SLStatus1.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLStatus1.Properties.View = Me.GridView1
+        Me.SLStatus1.Size = New System.Drawing.Size(150, 20)
+        Me.SLStatus1.TabIndex = 8902
+        '
+        'GridView1
+        '
+        Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn19, Me.GridColumn27})
+        Me.GridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView1.Name = "GridView1"
+        Me.GridView1.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView1.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn19
+        '
+        Me.GridColumn19.Caption = "GridColumn19"
+        Me.GridColumn19.FieldName = "id_report_status"
+        Me.GridColumn19.Name = "GridColumn19"
+        '
+        'GridColumn27
+        '
+        Me.GridColumn27.Caption = "Status"
+        Me.GridColumn27.FieldName = "report_status"
+        Me.GridColumn27.Name = "GridColumn27"
+        Me.GridColumn27.Visible = True
+        Me.GridColumn27.VisibleIndex = 0
+        '
+        'LabelControl6
+        '
+        Me.LabelControl6.Location = New System.Drawing.Point(320, 12)
+        Me.LabelControl6.Name = "LabelControl6"
+        Me.LabelControl6.Size = New System.Drawing.Size(31, 13)
+        Me.LabelControl6.TabIndex = 8901
+        Me.LabelControl6.Text = "Status"
+        '
         'BtnExportToXLSRec
         '
-        Me.BtnExportToXLSRec.Location = New System.Drawing.Point(380, 9)
+        Me.BtnExportToXLSRec.Location = New System.Drawing.Point(574, 9)
         Me.BtnExportToXLSRec.LookAndFeel.SkinName = "Blue"
         Me.BtnExportToXLSRec.Name = "BtnExportToXLSRec"
         Me.BtnExportToXLSRec.Size = New System.Drawing.Size(92, 20)
@@ -703,7 +800,7 @@ Partial Class FormFGTransList
         '
         'BtnViewRec
         '
-        Me.BtnViewRec.Location = New System.Drawing.Point(319, 9)
+        Me.BtnViewRec.Location = New System.Drawing.Point(513, 9)
         Me.BtnViewRec.LookAndFeel.SkinName = "Blue"
         Me.BtnViewRec.Name = "BtnViewRec"
         Me.BtnViewRec.Size = New System.Drawing.Size(55, 20)
@@ -1033,6 +1130,8 @@ Partial Class FormFGTransList
         'GroupControl1
         '
         Me.GroupControl1.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupControl1.Controls.Add(Me.SLStatus2)
+        Me.GroupControl1.Controls.Add(Me.LabelControl7)
         Me.GroupControl1.Controls.Add(Me.BtnExportToXLS)
         Me.GroupControl1.Controls.Add(Me.BtnViewDO)
         Me.GroupControl1.Controls.Add(Me.SimpleButton7)
@@ -1047,9 +1146,48 @@ Partial Class FormFGTransList
         Me.GroupControl1.Size = New System.Drawing.Size(1165, 39)
         Me.GroupControl1.TabIndex = 4
         '
+        'SLStatus2
+        '
+        Me.SLStatus2.Location = New System.Drawing.Point(356, 9)
+        Me.SLStatus2.Name = "SLStatus2"
+        Me.SLStatus2.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLStatus2.Properties.View = Me.GridView2
+        Me.SLStatus2.Size = New System.Drawing.Size(150, 20)
+        Me.SLStatus2.TabIndex = 8904
+        '
+        'GridView2
+        '
+        Me.GridView2.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn28, Me.GridColumn39})
+        Me.GridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView2.Name = "GridView2"
+        Me.GridView2.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView2.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn28
+        '
+        Me.GridColumn28.Caption = "GridColumn19"
+        Me.GridColumn28.FieldName = "id_report_status"
+        Me.GridColumn28.Name = "GridColumn28"
+        '
+        'GridColumn39
+        '
+        Me.GridColumn39.Caption = "Status"
+        Me.GridColumn39.FieldName = "report_status"
+        Me.GridColumn39.Name = "GridColumn39"
+        Me.GridColumn39.Visible = True
+        Me.GridColumn39.VisibleIndex = 0
+        '
+        'LabelControl7
+        '
+        Me.LabelControl7.Location = New System.Drawing.Point(319, 12)
+        Me.LabelControl7.Name = "LabelControl7"
+        Me.LabelControl7.Size = New System.Drawing.Size(31, 13)
+        Me.LabelControl7.TabIndex = 8903
+        Me.LabelControl7.Text = "Status"
+        '
         'BtnExportToXLS
         '
-        Me.BtnExportToXLS.Location = New System.Drawing.Point(380, 9)
+        Me.BtnExportToXLS.Location = New System.Drawing.Point(573, 9)
         Me.BtnExportToXLS.LookAndFeel.SkinName = "Blue"
         Me.BtnExportToXLS.Name = "BtnExportToXLS"
         Me.BtnExportToXLS.Size = New System.Drawing.Size(92, 20)
@@ -1058,7 +1196,7 @@ Partial Class FormFGTransList
         '
         'BtnViewDO
         '
-        Me.BtnViewDO.Location = New System.Drawing.Point(319, 9)
+        Me.BtnViewDO.Location = New System.Drawing.Point(512, 9)
         Me.BtnViewDO.LookAndFeel.SkinName = "Blue"
         Me.BtnViewDO.Name = "BtnViewDO"
         Me.BtnViewDO.Size = New System.Drawing.Size(55, 20)
@@ -1393,6 +1531,8 @@ Partial Class FormFGTransList
         'GroupControl2
         '
         Me.GroupControl2.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupControl2.Controls.Add(Me.SLStatus3)
+        Me.GroupControl2.Controls.Add(Me.LabelControl10)
         Me.GroupControl2.Controls.Add(Me.BtnExportToXLSRet)
         Me.GroupControl2.Controls.Add(Me.BtnViewReturn)
         Me.GroupControl2.Controls.Add(Me.SimpleButton9)
@@ -1407,9 +1547,48 @@ Partial Class FormFGTransList
         Me.GroupControl2.Size = New System.Drawing.Size(1165, 39)
         Me.GroupControl2.TabIndex = 5
         '
+        'SLStatus3
+        '
+        Me.SLStatus3.Location = New System.Drawing.Point(356, 9)
+        Me.SLStatus3.Name = "SLStatus3"
+        Me.SLStatus3.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLStatus3.Properties.View = Me.GridView3
+        Me.SLStatus3.Size = New System.Drawing.Size(150, 20)
+        Me.SLStatus3.TabIndex = 8906
+        '
+        'GridView3
+        '
+        Me.GridView3.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn40, Me.GridColumn44})
+        Me.GridView3.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView3.Name = "GridView3"
+        Me.GridView3.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView3.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn40
+        '
+        Me.GridColumn40.Caption = "GridColumn19"
+        Me.GridColumn40.FieldName = "id_report_status"
+        Me.GridColumn40.Name = "GridColumn40"
+        '
+        'GridColumn44
+        '
+        Me.GridColumn44.Caption = "Status"
+        Me.GridColumn44.FieldName = "report_status"
+        Me.GridColumn44.Name = "GridColumn44"
+        Me.GridColumn44.Visible = True
+        Me.GridColumn44.VisibleIndex = 0
+        '
+        'LabelControl10
+        '
+        Me.LabelControl10.Location = New System.Drawing.Point(319, 12)
+        Me.LabelControl10.Name = "LabelControl10"
+        Me.LabelControl10.Size = New System.Drawing.Size(31, 13)
+        Me.LabelControl10.TabIndex = 8905
+        Me.LabelControl10.Text = "Status"
+        '
         'BtnExportToXLSRet
         '
-        Me.BtnExportToXLSRet.Location = New System.Drawing.Point(380, 9)
+        Me.BtnExportToXLSRet.Location = New System.Drawing.Point(573, 9)
         Me.BtnExportToXLSRet.LookAndFeel.SkinName = "Blue"
         Me.BtnExportToXLSRet.Name = "BtnExportToXLSRet"
         Me.BtnExportToXLSRet.Size = New System.Drawing.Size(92, 20)
@@ -1418,7 +1597,7 @@ Partial Class FormFGTransList
         '
         'BtnViewReturn
         '
-        Me.BtnViewReturn.Location = New System.Drawing.Point(319, 9)
+        Me.BtnViewReturn.Location = New System.Drawing.Point(512, 9)
         Me.BtnViewReturn.LookAndFeel.SkinName = "Blue"
         Me.BtnViewReturn.Name = "BtnViewReturn"
         Me.BtnViewReturn.Size = New System.Drawing.Size(55, 20)
@@ -1707,6 +1886,8 @@ Partial Class FormFGTransList
         'GroupControl5
         '
         Me.GroupControl5.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupControl5.Controls.Add(Me.SLStatus4)
+        Me.GroupControl5.Controls.Add(Me.LabelControl13)
         Me.GroupControl5.Controls.Add(Me.BtnExportToXLSNonStock)
         Me.GroupControl5.Controls.Add(Me.BtnViewNonStock)
         Me.GroupControl5.Controls.Add(Me.SimpleButton16)
@@ -1721,9 +1902,48 @@ Partial Class FormFGTransList
         Me.GroupControl5.Size = New System.Drawing.Size(1165, 39)
         Me.GroupControl5.TabIndex = 8
         '
+        'SLStatus4
+        '
+        Me.SLStatus4.Location = New System.Drawing.Point(356, 9)
+        Me.SLStatus4.Name = "SLStatus4"
+        Me.SLStatus4.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLStatus4.Properties.View = Me.GridView4
+        Me.SLStatus4.Size = New System.Drawing.Size(150, 20)
+        Me.SLStatus4.TabIndex = 8908
+        '
+        'GridView4
+        '
+        Me.GridView4.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn45, Me.GridColumn46})
+        Me.GridView4.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView4.Name = "GridView4"
+        Me.GridView4.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView4.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn45
+        '
+        Me.GridColumn45.Caption = "GridColumn19"
+        Me.GridColumn45.FieldName = "id_report_status"
+        Me.GridColumn45.Name = "GridColumn45"
+        '
+        'GridColumn46
+        '
+        Me.GridColumn46.Caption = "Status"
+        Me.GridColumn46.FieldName = "report_status"
+        Me.GridColumn46.Name = "GridColumn46"
+        Me.GridColumn46.Visible = True
+        Me.GridColumn46.VisibleIndex = 0
+        '
+        'LabelControl13
+        '
+        Me.LabelControl13.Location = New System.Drawing.Point(319, 12)
+        Me.LabelControl13.Name = "LabelControl13"
+        Me.LabelControl13.Size = New System.Drawing.Size(31, 13)
+        Me.LabelControl13.TabIndex = 8907
+        Me.LabelControl13.Text = "Status"
+        '
         'BtnExportToXLSNonStock
         '
-        Me.BtnExportToXLSNonStock.Location = New System.Drawing.Point(380, 9)
+        Me.BtnExportToXLSNonStock.Location = New System.Drawing.Point(573, 9)
         Me.BtnExportToXLSNonStock.LookAndFeel.SkinName = "Blue"
         Me.BtnExportToXLSNonStock.Name = "BtnExportToXLSNonStock"
         Me.BtnExportToXLSNonStock.Size = New System.Drawing.Size(92, 20)
@@ -1732,7 +1952,7 @@ Partial Class FormFGTransList
         '
         'BtnViewNonStock
         '
-        Me.BtnViewNonStock.Location = New System.Drawing.Point(319, 9)
+        Me.BtnViewNonStock.Location = New System.Drawing.Point(512, 9)
         Me.BtnViewNonStock.LookAndFeel.SkinName = "Blue"
         Me.BtnViewNonStock.Name = "BtnViewNonStock"
         Me.BtnViewNonStock.Size = New System.Drawing.Size(55, 20)
@@ -2026,6 +2246,8 @@ Partial Class FormFGTransList
         'GroupControl3
         '
         Me.GroupControl3.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupControl3.Controls.Add(Me.SLStatus5)
+        Me.GroupControl3.Controls.Add(Me.LabelControl16)
         Me.GroupControl3.Controls.Add(Me.BtnExportToXLSRetTrf)
         Me.GroupControl3.Controls.Add(Me.BtnViewReturnQC)
         Me.GroupControl3.Controls.Add(Me.SimpleButton11)
@@ -2040,9 +2262,48 @@ Partial Class FormFGTransList
         Me.GroupControl3.Size = New System.Drawing.Size(1165, 39)
         Me.GroupControl3.TabIndex = 6
         '
+        'SLStatus5
+        '
+        Me.SLStatus5.Location = New System.Drawing.Point(356, 9)
+        Me.SLStatus5.Name = "SLStatus5"
+        Me.SLStatus5.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLStatus5.Properties.View = Me.GridView5
+        Me.SLStatus5.Size = New System.Drawing.Size(150, 20)
+        Me.SLStatus5.TabIndex = 8910
+        '
+        'GridView5
+        '
+        Me.GridView5.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn47, Me.GridColumn48})
+        Me.GridView5.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView5.Name = "GridView5"
+        Me.GridView5.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView5.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn47
+        '
+        Me.GridColumn47.Caption = "GridColumn19"
+        Me.GridColumn47.FieldName = "id_report_status"
+        Me.GridColumn47.Name = "GridColumn47"
+        '
+        'GridColumn48
+        '
+        Me.GridColumn48.Caption = "Status"
+        Me.GridColumn48.FieldName = "report_status"
+        Me.GridColumn48.Name = "GridColumn48"
+        Me.GridColumn48.Visible = True
+        Me.GridColumn48.VisibleIndex = 0
+        '
+        'LabelControl16
+        '
+        Me.LabelControl16.Location = New System.Drawing.Point(319, 12)
+        Me.LabelControl16.Name = "LabelControl16"
+        Me.LabelControl16.Size = New System.Drawing.Size(31, 13)
+        Me.LabelControl16.TabIndex = 8909
+        Me.LabelControl16.Text = "Status"
+        '
         'BtnExportToXLSRetTrf
         '
-        Me.BtnExportToXLSRetTrf.Location = New System.Drawing.Point(380, 9)
+        Me.BtnExportToXLSRetTrf.Location = New System.Drawing.Point(573, 9)
         Me.BtnExportToXLSRetTrf.LookAndFeel.SkinName = "Blue"
         Me.BtnExportToXLSRetTrf.Name = "BtnExportToXLSRetTrf"
         Me.BtnExportToXLSRetTrf.Size = New System.Drawing.Size(92, 20)
@@ -2051,7 +2312,7 @@ Partial Class FormFGTransList
         '
         'BtnViewReturnQC
         '
-        Me.BtnViewReturnQC.Location = New System.Drawing.Point(319, 9)
+        Me.BtnViewReturnQC.Location = New System.Drawing.Point(512, 9)
         Me.BtnViewReturnQC.LookAndFeel.SkinName = "Blue"
         Me.BtnViewReturnQC.Name = "BtnViewReturnQC"
         Me.BtnViewReturnQC.Size = New System.Drawing.Size(55, 20)
@@ -2321,6 +2582,8 @@ Partial Class FormFGTransList
         'GroupControl4
         '
         Me.GroupControl4.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupControl4.Controls.Add(Me.SLStatus6)
+        Me.GroupControl4.Controls.Add(Me.LabelControl19)
         Me.GroupControl4.Controls.Add(Me.BtnExportToXLSTrf)
         Me.GroupControl4.Controls.Add(Me.BtnViewTrf)
         Me.GroupControl4.Controls.Add(Me.SimpleButton13)
@@ -2335,9 +2598,48 @@ Partial Class FormFGTransList
         Me.GroupControl4.Size = New System.Drawing.Size(1165, 39)
         Me.GroupControl4.TabIndex = 7
         '
+        'SLStatus6
+        '
+        Me.SLStatus6.Location = New System.Drawing.Point(356, 9)
+        Me.SLStatus6.Name = "SLStatus6"
+        Me.SLStatus6.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLStatus6.Properties.View = Me.GridView7
+        Me.SLStatus6.Size = New System.Drawing.Size(150, 20)
+        Me.SLStatus6.TabIndex = 8912
+        '
+        'GridView7
+        '
+        Me.GridView7.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn49, Me.GridColumn50})
+        Me.GridView7.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView7.Name = "GridView7"
+        Me.GridView7.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView7.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn49
+        '
+        Me.GridColumn49.Caption = "GridColumn19"
+        Me.GridColumn49.FieldName = "id_report_status"
+        Me.GridColumn49.Name = "GridColumn49"
+        '
+        'GridColumn50
+        '
+        Me.GridColumn50.Caption = "Status"
+        Me.GridColumn50.FieldName = "report_status"
+        Me.GridColumn50.Name = "GridColumn50"
+        Me.GridColumn50.Visible = True
+        Me.GridColumn50.VisibleIndex = 0
+        '
+        'LabelControl19
+        '
+        Me.LabelControl19.Location = New System.Drawing.Point(319, 12)
+        Me.LabelControl19.Name = "LabelControl19"
+        Me.LabelControl19.Size = New System.Drawing.Size(31, 13)
+        Me.LabelControl19.TabIndex = 8911
+        Me.LabelControl19.Text = "Status"
+        '
         'BtnExportToXLSTrf
         '
-        Me.BtnExportToXLSTrf.Location = New System.Drawing.Point(380, 9)
+        Me.BtnExportToXLSTrf.Location = New System.Drawing.Point(573, 9)
         Me.BtnExportToXLSTrf.LookAndFeel.SkinName = "Blue"
         Me.BtnExportToXLSTrf.Name = "BtnExportToXLSTrf"
         Me.BtnExportToXLSTrf.Size = New System.Drawing.Size(92, 20)
@@ -2346,7 +2648,7 @@ Partial Class FormFGTransList
         '
         'BtnViewTrf
         '
-        Me.BtnViewTrf.Location = New System.Drawing.Point(319, 9)
+        Me.BtnViewTrf.Location = New System.Drawing.Point(512, 9)
         Me.BtnViewTrf.LookAndFeel.SkinName = "Blue"
         Me.BtnViewTrf.Name = "BtnViewTrf"
         Me.BtnViewTrf.Size = New System.Drawing.Size(55, 20)
@@ -2641,6 +2943,8 @@ Partial Class FormFGTransList
         'GroupControl6
         '
         Me.GroupControl6.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupControl6.Controls.Add(Me.SLStatus7)
+        Me.GroupControl6.Controls.Add(Me.LabelControl22)
         Me.GroupControl6.Controls.Add(Me.CEPromo)
         Me.GroupControl6.Controls.Add(Me.SLEPeriodType)
         Me.GroupControl6.Controls.Add(Me.LabelControl3)
@@ -2658,9 +2962,48 @@ Partial Class FormFGTransList
         Me.GroupControl6.Size = New System.Drawing.Size(1165, 40)
         Me.GroupControl6.TabIndex = 8
         '
+        'SLStatus7
+        '
+        Me.SLStatus7.Location = New System.Drawing.Point(356, 9)
+        Me.SLStatus7.Name = "SLStatus7"
+        Me.SLStatus7.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLStatus7.Properties.View = Me.GridView8
+        Me.SLStatus7.Size = New System.Drawing.Size(150, 20)
+        Me.SLStatus7.TabIndex = 8928
+        '
+        'GridView8
+        '
+        Me.GridView8.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn51, Me.GridColumn52})
+        Me.GridView8.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView8.Name = "GridView8"
+        Me.GridView8.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView8.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn51
+        '
+        Me.GridColumn51.Caption = "GridColumn19"
+        Me.GridColumn51.FieldName = "id_report_status"
+        Me.GridColumn51.Name = "GridColumn51"
+        '
+        'GridColumn52
+        '
+        Me.GridColumn52.Caption = "Status"
+        Me.GridColumn52.FieldName = "report_status"
+        Me.GridColumn52.Name = "GridColumn52"
+        Me.GridColumn52.Visible = True
+        Me.GridColumn52.VisibleIndex = 0
+        '
+        'LabelControl22
+        '
+        Me.LabelControl22.Location = New System.Drawing.Point(319, 12)
+        Me.LabelControl22.Name = "LabelControl22"
+        Me.LabelControl22.Size = New System.Drawing.Size(31, 13)
+        Me.LabelControl22.TabIndex = 8927
+        Me.LabelControl22.Text = "Status"
+        '
         'CEPromo
         '
-        Me.CEPromo.Location = New System.Drawing.Point(527, 9)
+        Me.CEPromo.Location = New System.Drawing.Point(720, 9)
         Me.CEPromo.Name = "CEPromo"
         Me.CEPromo.Properties.Caption = "Include Promo"
         Me.CEPromo.Size = New System.Drawing.Size(89, 19)
@@ -2668,7 +3011,7 @@ Partial Class FormFGTransList
         '
         'SLEPeriodType
         '
-        Me.SLEPeriodType.Location = New System.Drawing.Point(382, 9)
+        Me.SLEPeriodType.Location = New System.Drawing.Point(575, 9)
         Me.SLEPeriodType.Name = "SLEPeriodType"
         Me.SLEPeriodType.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.SLEPeriodType.Properties.ShowClearButton = False
@@ -2685,7 +3028,7 @@ Partial Class FormFGTransList
         '
         'LabelControl3
         '
-        Me.LabelControl3.Location = New System.Drawing.Point(319, 12)
+        Me.LabelControl3.Location = New System.Drawing.Point(512, 12)
         Me.LabelControl3.Name = "LabelControl3"
         Me.LabelControl3.Size = New System.Drawing.Size(57, 13)
         Me.LabelControl3.TabIndex = 8905
@@ -2693,7 +3036,7 @@ Partial Class FormFGTransList
         '
         'BtnExportToXLSSal
         '
-        Me.BtnExportToXLSSal.Location = New System.Drawing.Point(679, 9)
+        Me.BtnExportToXLSSal.Location = New System.Drawing.Point(872, 9)
         Me.BtnExportToXLSSal.LookAndFeel.SkinName = "Blue"
         Me.BtnExportToXLSSal.Name = "BtnExportToXLSSal"
         Me.BtnExportToXLSSal.Size = New System.Drawing.Size(92, 20)
@@ -2702,7 +3045,7 @@ Partial Class FormFGTransList
         '
         'BtnViewSal
         '
-        Me.BtnViewSal.Location = New System.Drawing.Point(618, 9)
+        Me.BtnViewSal.Location = New System.Drawing.Point(811, 9)
         Me.BtnViewSal.LookAndFeel.SkinName = "Blue"
         Me.BtnViewSal.Name = "BtnViewSal"
         Me.BtnViewSal.Size = New System.Drawing.Size(55, 20)
@@ -2712,7 +3055,7 @@ Partial Class FormFGTransList
         'SimpleButton3
         '
         Me.SimpleButton3.ImageIndex = 9
-        Me.SimpleButton3.Location = New System.Drawing.Point(1054, 9)
+        Me.SimpleButton3.Location = New System.Drawing.Point(1083, 9)
         Me.SimpleButton3.Name = "SimpleButton3"
         Me.SimpleButton3.Size = New System.Drawing.Size(104, 20)
         Me.SimpleButton3.TabIndex = 8898
@@ -2722,7 +3065,7 @@ Partial Class FormFGTransList
         'SimpleButton6
         '
         Me.SimpleButton6.ImageIndex = 8
-        Me.SimpleButton6.Location = New System.Drawing.Point(951, 9)
+        Me.SimpleButton6.Location = New System.Drawing.Point(980, 9)
         Me.SimpleButton6.Name = "SimpleButton6"
         Me.SimpleButton6.Size = New System.Drawing.Size(99, 20)
         Me.SimpleButton6.TabIndex = 8897
@@ -2803,103 +3146,6 @@ Partial Class FormFGTransList
         Me.GVSO.OptionsView.ColumnAutoWidth = False
         Me.GVSO.OptionsView.ShowFooter = True
         Me.GVSO.OptionsView.ShowGroupPanel = False
-        '
-        'GroupControl7
-        '
-        Me.GroupControl7.CaptionLocation = DevExpress.Utils.Locations.Left
-        Me.GroupControl7.Controls.Add(Me.BtnExportToXLSSO)
-        Me.GroupControl7.Controls.Add(Me.BtnViewSO)
-        Me.GroupControl7.Controls.Add(Me.SimpleButton15)
-        Me.GroupControl7.Controls.Add(Me.SimpleButton18)
-        Me.GroupControl7.Controls.Add(Me.DEUntilSO)
-        Me.GroupControl7.Controls.Add(Me.DEFromSO)
-        Me.GroupControl7.Controls.Add(Me.LabelControl4)
-        Me.GroupControl7.Controls.Add(Me.LabelControl5)
-        Me.GroupControl7.Dock = System.Windows.Forms.DockStyle.Top
-        Me.GroupControl7.Location = New System.Drawing.Point(0, 0)
-        Me.GroupControl7.Name = "GroupControl7"
-        Me.GroupControl7.Size = New System.Drawing.Size(1165, 39)
-        Me.GroupControl7.TabIndex = 8
-        '
-        'BtnExportToXLSSO
-        '
-        Me.BtnExportToXLSSO.Location = New System.Drawing.Point(380, 9)
-        Me.BtnExportToXLSSO.LookAndFeel.SkinName = "Blue"
-        Me.BtnExportToXLSSO.Name = "BtnExportToXLSSO"
-        Me.BtnExportToXLSSO.Size = New System.Drawing.Size(92, 20)
-        Me.BtnExportToXLSSO.TabIndex = 8904
-        Me.BtnExportToXLSSO.Text = "Export to XLS"
-        '
-        'BtnViewSO
-        '
-        Me.BtnViewSO.Location = New System.Drawing.Point(319, 9)
-        Me.BtnViewSO.LookAndFeel.SkinName = "Blue"
-        Me.BtnViewSO.Name = "BtnViewSO"
-        Me.BtnViewSO.Size = New System.Drawing.Size(55, 20)
-        Me.BtnViewSO.TabIndex = 8896
-        Me.BtnViewSO.Text = "View"
-        '
-        'SimpleButton15
-        '
-        Me.SimpleButton15.ImageIndex = 9
-        Me.SimpleButton15.Location = New System.Drawing.Point(938, 14)
-        Me.SimpleButton15.Name = "SimpleButton15"
-        Me.SimpleButton15.Size = New System.Drawing.Size(104, 20)
-        Me.SimpleButton15.TabIndex = 8898
-        Me.SimpleButton15.Text = "Hide All Detail"
-        Me.SimpleButton15.Visible = False
-        '
-        'SimpleButton18
-        '
-        Me.SimpleButton18.ImageIndex = 8
-        Me.SimpleButton18.Location = New System.Drawing.Point(835, 14)
-        Me.SimpleButton18.Name = "SimpleButton18"
-        Me.SimpleButton18.Size = New System.Drawing.Size(99, 20)
-        Me.SimpleButton18.TabIndex = 8897
-        Me.SimpleButton18.Text = "Expand All Detail"
-        Me.SimpleButton18.Visible = False
-        '
-        'DEUntilSO
-        '
-        Me.DEUntilSO.EditValue = Nothing
-        Me.DEUntilSO.Location = New System.Drawing.Point(202, 9)
-        Me.DEUntilSO.Name = "DEUntilSO"
-        Me.DEUntilSO.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.DEUntilSO.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
-        Me.DEUntilSO.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
-        Me.DEUntilSO.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.DEUntilSO.Properties.Mask.EditMask = "dd\/MM\/yyyy"
-        Me.DEUntilSO.Size = New System.Drawing.Size(111, 20)
-        Me.DEUntilSO.TabIndex = 8895
-        '
-        'DEFromSO
-        '
-        Me.DEFromSO.EditValue = Nothing
-        Me.DEFromSO.Location = New System.Drawing.Point(58, 9)
-        Me.DEFromSO.Name = "DEFromSO"
-        Me.DEFromSO.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.DEFromSO.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
-        Me.DEFromSO.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
-        Me.DEFromSO.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.DEFromSO.Properties.Mask.EditMask = "dd\/MM\/yyyy"
-        Me.DEFromSO.Size = New System.Drawing.Size(111, 20)
-        Me.DEFromSO.TabIndex = 8894
-        '
-        'LabelControl4
-        '
-        Me.LabelControl4.Location = New System.Drawing.Point(175, 12)
-        Me.LabelControl4.Name = "LabelControl4"
-        Me.LabelControl4.Size = New System.Drawing.Size(21, 13)
-        Me.LabelControl4.TabIndex = 8893
-        Me.LabelControl4.Text = "Until"
-        '
-        'LabelControl5
-        '
-        Me.LabelControl5.Location = New System.Drawing.Point(28, 12)
-        Me.LabelControl5.Name = "LabelControl5"
-        Me.LabelControl5.Size = New System.Drawing.Size(24, 13)
-        Me.LabelControl5.TabIndex = 8892
-        Me.LabelControl5.Text = "From"
         '
         'GridColumnid_sales_order
         '
@@ -3115,6 +3361,144 @@ Partial Class FormFGTransList
         Me.GridColumnfinal_comment.FieldName = "final_comment"
         Me.GridColumnfinal_comment.Name = "GridColumnfinal_comment"
         '
+        'GroupControl7
+        '
+        Me.GroupControl7.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupControl7.Controls.Add(Me.SLStatus8)
+        Me.GroupControl7.Controls.Add(Me.LabelControl25)
+        Me.GroupControl7.Controls.Add(Me.BtnExportToXLSSO)
+        Me.GroupControl7.Controls.Add(Me.BtnViewSO)
+        Me.GroupControl7.Controls.Add(Me.SimpleButton15)
+        Me.GroupControl7.Controls.Add(Me.SimpleButton18)
+        Me.GroupControl7.Controls.Add(Me.DEUntilSO)
+        Me.GroupControl7.Controls.Add(Me.DEFromSO)
+        Me.GroupControl7.Controls.Add(Me.LabelControl4)
+        Me.GroupControl7.Controls.Add(Me.LabelControl5)
+        Me.GroupControl7.Dock = System.Windows.Forms.DockStyle.Top
+        Me.GroupControl7.Location = New System.Drawing.Point(0, 0)
+        Me.GroupControl7.Name = "GroupControl7"
+        Me.GroupControl7.Size = New System.Drawing.Size(1165, 39)
+        Me.GroupControl7.TabIndex = 8
+        '
+        'SLStatus8
+        '
+        Me.SLStatus8.Location = New System.Drawing.Point(356, 9)
+        Me.SLStatus8.Name = "SLStatus8"
+        Me.SLStatus8.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLStatus8.Properties.View = Me.GridView9
+        Me.SLStatus8.Size = New System.Drawing.Size(150, 20)
+        Me.SLStatus8.TabIndex = 8930
+        '
+        'GridView9
+        '
+        Me.GridView9.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn53, Me.GridColumn54})
+        Me.GridView9.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView9.Name = "GridView9"
+        Me.GridView9.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView9.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn53
+        '
+        Me.GridColumn53.Caption = "GridColumn19"
+        Me.GridColumn53.FieldName = "id_report_status"
+        Me.GridColumn53.Name = "GridColumn53"
+        '
+        'GridColumn54
+        '
+        Me.GridColumn54.Caption = "Status"
+        Me.GridColumn54.FieldName = "report_status"
+        Me.GridColumn54.Name = "GridColumn54"
+        Me.GridColumn54.Visible = True
+        Me.GridColumn54.VisibleIndex = 0
+        '
+        'LabelControl25
+        '
+        Me.LabelControl25.Location = New System.Drawing.Point(319, 12)
+        Me.LabelControl25.Name = "LabelControl25"
+        Me.LabelControl25.Size = New System.Drawing.Size(31, 13)
+        Me.LabelControl25.TabIndex = 8929
+        Me.LabelControl25.Text = "Status"
+        '
+        'BtnExportToXLSSO
+        '
+        Me.BtnExportToXLSSO.Location = New System.Drawing.Point(573, 9)
+        Me.BtnExportToXLSSO.LookAndFeel.SkinName = "Blue"
+        Me.BtnExportToXLSSO.Name = "BtnExportToXLSSO"
+        Me.BtnExportToXLSSO.Size = New System.Drawing.Size(92, 20)
+        Me.BtnExportToXLSSO.TabIndex = 8904
+        Me.BtnExportToXLSSO.Text = "Export to XLS"
+        '
+        'BtnViewSO
+        '
+        Me.BtnViewSO.Location = New System.Drawing.Point(512, 9)
+        Me.BtnViewSO.LookAndFeel.SkinName = "Blue"
+        Me.BtnViewSO.Name = "BtnViewSO"
+        Me.BtnViewSO.Size = New System.Drawing.Size(55, 20)
+        Me.BtnViewSO.TabIndex = 8896
+        Me.BtnViewSO.Text = "View"
+        '
+        'SimpleButton15
+        '
+        Me.SimpleButton15.ImageIndex = 9
+        Me.SimpleButton15.Location = New System.Drawing.Point(938, 14)
+        Me.SimpleButton15.Name = "SimpleButton15"
+        Me.SimpleButton15.Size = New System.Drawing.Size(104, 20)
+        Me.SimpleButton15.TabIndex = 8898
+        Me.SimpleButton15.Text = "Hide All Detail"
+        Me.SimpleButton15.Visible = False
+        '
+        'SimpleButton18
+        '
+        Me.SimpleButton18.ImageIndex = 8
+        Me.SimpleButton18.Location = New System.Drawing.Point(835, 14)
+        Me.SimpleButton18.Name = "SimpleButton18"
+        Me.SimpleButton18.Size = New System.Drawing.Size(99, 20)
+        Me.SimpleButton18.TabIndex = 8897
+        Me.SimpleButton18.Text = "Expand All Detail"
+        Me.SimpleButton18.Visible = False
+        '
+        'DEUntilSO
+        '
+        Me.DEUntilSO.EditValue = Nothing
+        Me.DEUntilSO.Location = New System.Drawing.Point(202, 9)
+        Me.DEUntilSO.Name = "DEUntilSO"
+        Me.DEUntilSO.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEUntilSO.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.DEUntilSO.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.DEUntilSO.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEUntilSO.Properties.Mask.EditMask = "dd\/MM\/yyyy"
+        Me.DEUntilSO.Size = New System.Drawing.Size(111, 20)
+        Me.DEUntilSO.TabIndex = 8895
+        '
+        'DEFromSO
+        '
+        Me.DEFromSO.EditValue = Nothing
+        Me.DEFromSO.Location = New System.Drawing.Point(58, 9)
+        Me.DEFromSO.Name = "DEFromSO"
+        Me.DEFromSO.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEFromSO.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.DEFromSO.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.DEFromSO.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEFromSO.Properties.Mask.EditMask = "dd\/MM\/yyyy"
+        Me.DEFromSO.Size = New System.Drawing.Size(111, 20)
+        Me.DEFromSO.TabIndex = 8894
+        '
+        'LabelControl4
+        '
+        Me.LabelControl4.Location = New System.Drawing.Point(175, 12)
+        Me.LabelControl4.Name = "LabelControl4"
+        Me.LabelControl4.Size = New System.Drawing.Size(21, 13)
+        Me.LabelControl4.TabIndex = 8893
+        Me.LabelControl4.Text = "Until"
+        '
+        'LabelControl5
+        '
+        Me.LabelControl5.Location = New System.Drawing.Point(28, 12)
+        Me.LabelControl5.Name = "LabelControl5"
+        Me.LabelControl5.Size = New System.Drawing.Size(24, 13)
+        Me.LabelControl5.TabIndex = 8892
+        Me.LabelControl5.Text = "From"
+        '
         'FormFGTransList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -3133,6 +3517,8 @@ Partial Class FormFGTransList
         CType(Me.GCFilterRec, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GCFilterRec.ResumeLayout(False)
         Me.GCFilterRec.PerformLayout()
+        CType(Me.SLStatus1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEUntilRec.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEUntilRec.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEFromRec.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -3145,6 +3531,8 @@ Partial Class FormFGTransList
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControl1.ResumeLayout(False)
         Me.GroupControl1.PerformLayout()
+        CType(Me.SLStatus2.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEUntilDO.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEUntilDO.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEFromDO.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -3157,6 +3545,8 @@ Partial Class FormFGTransList
         CType(Me.GroupControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControl2.ResumeLayout(False)
         Me.GroupControl2.PerformLayout()
+        CType(Me.SLStatus3.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEUntilReturn.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEUntilReturn.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEFromReturn.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -3168,6 +3558,8 @@ Partial Class FormFGTransList
         CType(Me.GroupControl5, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControl5.ResumeLayout(False)
         Me.GroupControl5.PerformLayout()
+        CType(Me.SLStatus4.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEUntilNonStock.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEUntilNonStock.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEFromNonStock.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -3179,6 +3571,8 @@ Partial Class FormFGTransList
         CType(Me.GroupControl3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControl3.ResumeLayout(False)
         Me.GroupControl3.PerformLayout()
+        CType(Me.SLStatus5.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView5, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEUntilReturnQC.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEUntilReturnQC.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEFromReturnQC.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -3191,6 +3585,8 @@ Partial Class FormFGTransList
         CType(Me.GroupControl4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControl4.ResumeLayout(False)
         Me.GroupControl4.PerformLayout()
+        CType(Me.SLStatus6.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView7, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEUntilTrf.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEUntilTrf.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEFromTrf.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -3201,6 +3597,8 @@ Partial Class FormFGTransList
         CType(Me.GroupControl6, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControl6.ResumeLayout(False)
         Me.GroupControl6.PerformLayout()
+        CType(Me.SLStatus7.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView8, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CEPromo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SLEPeriodType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
@@ -3214,6 +3612,8 @@ Partial Class FormFGTransList
         CType(Me.GroupControl7, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControl7.ResumeLayout(False)
         Me.GroupControl7.PerformLayout()
+        CType(Me.SLStatus8.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView9, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEUntilSO.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEUntilSO.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEFromSO.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -3500,4 +3900,44 @@ Partial Class FormFGTransList
     Friend WithEvents GridColumnid_prepare_status_so As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnprepare_status As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnfinal_comment As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents SLStatus1 As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView1 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents LabelControl6 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents GridColumn19 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn27 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents SLStatus2 As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView2 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn28 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn39 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LabelControl7 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents SLStatus3 As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView3 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn40 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn44 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LabelControl10 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents SLStatus4 As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView4 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn45 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn46 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LabelControl13 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents SLStatus5 As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView5 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn47 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn48 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LabelControl16 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents SLStatus6 As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView7 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn49 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn50 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LabelControl19 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents SLStatus7 As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView8 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn51 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn52 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LabelControl22 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents SLStatus8 As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView9 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn53 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn54 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LabelControl25 As DevExpress.XtraEditors.LabelControl
 End Class

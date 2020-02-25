@@ -94,15 +94,6 @@
 
             'open folder
             If IO.File.Exists(path & GVFileList.GetFocusedRowCellValue("doc_desc").ToString & "_" & GVFileList.GetFocusedRowCellValue("filename").ToString) Then
-                Dim open_folder As ProcessStartInfo = New ProcessStartInfo()
-                open_folder.WindowStyle = ProcessWindowStyle.Maximized
-                open_folder.FileName = "explorer.exe"
-                open_folder.Arguments = "/select,""" & path & GVFileList.GetFocusedRowCellValue("doc_desc").ToString & "_" & GVFileList.GetFocusedRowCellValue("filename").ToString & """"
-                Process.Start(open_folder)
-
-                System.Threading.Thread.Sleep(100)
-
-                'open file
                 Dim FILE_NAME As String = path & GVFileList.GetFocusedRowCellValue("doc_desc").ToString & "_" & GVFileList.GetFocusedRowCellValue("filename").ToString
 
                 If IO.File.Exists(FILE_NAME) = True Then
@@ -160,5 +151,45 @@
         FormDocumentScanUpload.id_report = id_report
         FormDocumentScanUpload.report_mark_type = report_mark_type
         FormDocumentScanUpload.ShowDialog()
+    End Sub
+
+    Private Sub RICEShowinFolder_MouseLeave(sender As Object, e As EventArgs) Handles RICEShowinFolder.MouseLeave
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub RICEShowinFolder_MouseHover(sender As Object, e As EventArgs) Handles RICEShowinFolder.MouseHover
+        Cursor = Cursors.Hand
+    End Sub
+
+    Private Sub RICEShowinFolder_Click(sender As Object, e As EventArgs) Handles RICEShowinFolder.Click
+        Try
+            Dim path As String = Application.StartupPath & "\download\"
+            'create directory if not exist
+            If Not IO.Directory.Exists(path) Then
+                System.IO.Directory.CreateDirectory(path)
+            End If
+            'download
+            If GVFileList.GetFocusedRowCellValue("is_encrypted").ToString = "1" Then
+                'My.Computer.Network.DownloadFile(source_path & report_mark_type & "\" & GVFileList.GetFocusedRowCellValue("filename").ToString, path & "temp_" & GVFileList.GetFocusedRowCellValue("doc_desc").ToString & "_" & GVFileList.GetFocusedRowCellValue("filename").ToString, "", "", True, 100, True)
+
+                CryptFile.DecryptFile(get_setup_field("en_phrase"), source_path & report_mark_type & "\" & GVFileList.GetFocusedRowCellValue("filename").ToString, path & GVFileList.GetFocusedRowCellValue("doc_desc").ToString & "_" & GVFileList.GetFocusedRowCellValue("filename").ToString)
+
+                'My.Computer.FileSystem.DeleteFile(path & "temp_" & GVFileList.GetFocusedRowCellValue("doc_desc").ToString & "_" & GVFileList.GetFocusedRowCellValue("filename").ToString)
+            Else
+                My.Computer.Network.DownloadFile(source_path & report_mark_type & "\" & GVFileList.GetFocusedRowCellValue("filename").ToString, path & GVFileList.GetFocusedRowCellValue("doc_desc").ToString & "_" & GVFileList.GetFocusedRowCellValue("filename").ToString, "", "", True, 100, True)
+            End If
+
+            'open folder
+            If IO.File.Exists(path & GVFileList.GetFocusedRowCellValue("doc_desc").ToString & "_" & GVFileList.GetFocusedRowCellValue("filename").ToString) Then
+                Dim open_folder As ProcessStartInfo = New ProcessStartInfo()
+                open_folder.WindowStyle = ProcessWindowStyle.Maximized
+                open_folder.FileName = "explorer.exe"
+                open_folder.Arguments = "/select,""" & path & GVFileList.GetFocusedRowCellValue("doc_desc").ToString & "_" & GVFileList.GetFocusedRowCellValue("filename").ToString & """"
+                Process.Start(open_folder)
+            Else
+                stopCustom("No Supporting Document !")
+            End If
+        Catch ex As Exception
+        End Try
     End Sub
 End Class

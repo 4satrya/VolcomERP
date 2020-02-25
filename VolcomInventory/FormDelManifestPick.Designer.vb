@@ -35,6 +35,7 @@ Partial Class FormDelManifestPick
         Me.GVList = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumnIsSelect = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdWhAwbDet = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnIdCompGroup = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnCreatedDate = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnCollie = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnCombinedNumber = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -55,7 +56,7 @@ Partial Class FormDelManifestPick
         Me.DateEditCreatedDateTo = New DevExpress.XtraEditors.DateEdit()
         Me.DateEditCreatedDateFrom = New DevExpress.XtraEditors.DateEdit()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.GridColumnIdCompGroup = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.CheckEditSelectAll = New DevExpress.XtraEditors.CheckEdit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
         CType(Me.RICESelect, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -69,6 +70,7 @@ Partial Class FormDelManifestPick
         CType(Me.DateEditCreatedDateTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DateEditCreatedDateFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DateEditCreatedDateFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CheckEditSelectAll.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'SBAdd
@@ -83,6 +85,7 @@ Partial Class FormDelManifestPick
         '
         'PanelControl2
         '
+        Me.PanelControl2.Controls.Add(Me.CheckEditSelectAll)
         Me.PanelControl2.Controls.Add(Me.SBClose)
         Me.PanelControl2.Controls.Add(Me.SBAdd)
         Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Bottom
@@ -227,6 +230,11 @@ Partial Class FormDelManifestPick
         Me.GridColumnIdWhAwbDet.Name = "GridColumnIdWhAwbDet"
         Me.GridColumnIdWhAwbDet.OptionsColumn.AllowEdit = False
         Me.GridColumnIdWhAwbDet.OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.[False]
+        '
+        'GridColumnIdCompGroup
+        '
+        Me.GridColumnIdCompGroup.FieldName = "id_comp_group"
+        Me.GridColumnIdCompGroup.Name = "GridColumnIdCompGroup"
         '
         'GridColumnCreatedDate
         '
@@ -428,10 +436,14 @@ Partial Class FormDelManifestPick
         Me.Label1.TabIndex = 18
         Me.Label1.Text = "Created Date"
         '
-        'GridColumnIdCompGroup
+        'CheckEditSelectAll
         '
-        Me.GridColumnIdCompGroup.FieldName = "id_comp_group"
-        Me.GridColumnIdCompGroup.Name = "GridColumnIdCompGroup"
+        Me.CheckEditSelectAll.EditValue = True
+        Me.CheckEditSelectAll.Location = New System.Drawing.Point(15, 15)
+        Me.CheckEditSelectAll.Name = "CheckEditSelectAll"
+        Me.CheckEditSelectAll.Properties.Caption = "Select All"
+        Me.CheckEditSelectAll.Size = New System.Drawing.Size(75, 19)
+        Me.CheckEditSelectAll.TabIndex = 5
         '
         'FormDelManifestPick
         '
@@ -458,6 +470,7 @@ Partial Class FormDelManifestPick
         CType(Me.DateEditCreatedDateTo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DateEditCreatedDateFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DateEditCreatedDateFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CheckEditSelectAll.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -498,4 +511,5 @@ Partial Class FormDelManifestPick
     Friend WithEvents GridColumnCollie As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnCombinedNumber As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnIdCompGroup As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents CheckEditSelectAll As DevExpress.XtraEditors.CheckEdit
 End Class

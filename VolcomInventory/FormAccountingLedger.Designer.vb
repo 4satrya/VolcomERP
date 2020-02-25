@@ -448,6 +448,8 @@ Partial Class FormAccountingLedger
         Me.ClientSize = New System.Drawing.Size(1008, 729)
         Me.Controls.Add(Me.GCAccountingLedger)
         Me.Controls.Add(Me.PanelControl1)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "FormAccountingLedger"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Buku Besar"

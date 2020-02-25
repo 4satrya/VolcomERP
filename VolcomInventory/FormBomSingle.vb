@@ -1,4 +1,5 @@
 ﻿Public Class FormBOMSingle
+    '============================ THIS BOM IS NOT USED =====================================
     Public id_bom As String = "-1"
     Public id_bom_approve As String = "-1"
     Public id_product As String = "-1"

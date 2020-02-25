@@ -10,21 +10,21 @@
 
         Dim number As Integer = 1
 
-        Dim departement_company_contribution_1 As Integer = 0
-        Dim departement_company_contribution_2 As Integer = 0
-        Dim departement_employee_contribution_1 As Integer = 0
-        Dim departement_employee_contribution_2 As Integer = 0
-        Dim departement_salary_before As Integer = 0
-        Dim departement_salary As Integer = 0
-        Dim departement_total As Integer = 0
+        Dim departement_company_contribution_1 As Decimal = 0
+        Dim departement_company_contribution_2 As Decimal = 0
+        Dim departement_employee_contribution_1 As Decimal = 0
+        Dim departement_employee_contribution_2 As Decimal = 0
+        Dim departement_salary_before As Decimal = 0
+        Dim departement_salary As Decimal = 0
+        Dim departement_total As Decimal = 0
 
-        Dim total_company_contribution_1 As Integer = 0
-        Dim total_company_contribution_2 As Integer = 0
-        Dim total_employee_contribution_1 As Integer = 0
-        Dim total_employee_contribution_2 As Integer = 0
-        Dim total_salary_before As Integer = 0
-        Dim total_salary As Integer = 0
-        Dim total As Integer = 0
+        Dim total_company_contribution_1 As Decimal = 0
+        Dim total_company_contribution_2 As Decimal = 0
+        Dim total_employee_contribution_1 As Decimal = 0
+        Dim total_employee_contribution_2 As Decimal = 0
+        Dim total_salary_before As Decimal = 0
+        Dim total_salary As Decimal = 0
+        Dim total As Decimal = 0
 
         For i = 0 To data.Rows.Count - 1
             'total departement

@@ -155,6 +155,8 @@ WHERE 1=1 " & where_string & " ORDER BY ca.`date_created` DESC"
     End Sub
 
     Private Sub BPrint_Click(sender As Object, e As EventArgs) Handles BPrint.Click
+        load_cash_advance()
+
         print_list()
     End Sub
 

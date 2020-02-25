@@ -31,6 +31,7 @@ Partial Class FormEmpAttnIndView
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnIDScheduleType = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -72,7 +73,6 @@ Partial Class FormEmpAttnIndView
         Me.GridColumn21 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn23 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn20 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnIDScheduleType = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GCSchedule, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVSchedule, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -202,6 +202,12 @@ Partial Class FormEmpAttnIndView
         Me.GridColumn7.VisibleIndex = 11
         Me.GridColumn7.Width = 66
         '
+        'GridColumnIDScheduleType
+        '
+        Me.GridColumnIDScheduleType.Caption = "ID Schedule Type"
+        Me.GridColumnIDScheduleType.FieldName = "id_schedule_type"
+        Me.GridColumnIDScheduleType.Name = "GridColumnIDScheduleType"
+        '
         'GridColumn8
         '
         Me.GridColumn8.Caption = "Type"
@@ -214,9 +220,7 @@ Partial Class FormEmpAttnIndView
         'GridColumn9
         '
         Me.GridColumn9.Caption = "Weekday"
-        Me.GridColumn9.DisplayFormat.FormatString = "dddd"
-        Me.GridColumn9.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.GridColumn9.FieldName = "date"
+        Me.GridColumn9.FieldName = "weekday"
         Me.GridColumn9.Name = "GridColumn9"
         Me.GridColumn9.Visible = True
         Me.GridColumn9.VisibleIndex = 13
@@ -603,12 +607,6 @@ Partial Class FormEmpAttnIndView
         Me.GridColumn20.Visible = True
         Me.GridColumn20.VisibleIndex = 2
         Me.GridColumn20.Width = 112
-        '
-        'GridColumnIDScheduleType
-        '
-        Me.GridColumnIDScheduleType.Caption = "ID Schedule Type"
-        Me.GridColumnIDScheduleType.FieldName = "id_schedule_type"
-        Me.GridColumnIDScheduleType.Name = "GridColumnIDScheduleType"
         '
         'FormEmpAttnIndView
         '

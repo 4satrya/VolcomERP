@@ -476,7 +476,7 @@ Public Class FormProduction
         query += "INNER JOIN tb_m_ovh j ON b.id_ovh = j.id_ovh "
         query += "LEFT JOIN 
                     (
-	                    SELECT * FROM tb_report_mark WHERE mark.report_mark_type='23' GROUP BY report_mark_type,id_report
+	                    SELECT * FROM tb_report_mark WHERE report_mark_type='23' GROUP BY report_mark_type,id_report
                     ) mark ON mark.id_report=a.id_prod_order_wo AND mark.report_mark_type='23' "
         '
         query += "LEFT JOIN

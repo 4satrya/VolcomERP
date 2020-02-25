@@ -33,6 +33,8 @@
     End Sub
 
     Private Sub BPrint_Click(sender As Object, e As EventArgs) Handles BPrint.Click
+        load_ca()
+
         GridColumnDateCreated.Visible = False
         GridColumnStatus.Visible = False
         GridColumnReconcileDueDate.Visible = False
@@ -67,6 +69,8 @@
     End Sub
 
     Private Sub BPrintAdvance_Click(sender As Object, e As EventArgs) Handles BPrintAdvance.Click
+        load_ca()
+
         GridColumnDateCreated.Visible = False
         GridColumnStatus.Visible = False
         GridColumnReconcileActualDate.Visible = False

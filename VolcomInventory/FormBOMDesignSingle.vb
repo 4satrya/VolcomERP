@@ -107,12 +107,12 @@
     Sub allow_status_po()
         Dim query As String = "SELECT id_prod_order FROM tb_prod_order po
                                 INNER JOIN `tb_prod_demand_design` pdd ON pdd.`id_prod_demand_design`=po.`id_prod_demand_design`
-                                WHERE po.`id_report_status`!= 5
+                                WHERE po.`id_report_status`!= 5 and po.is_submit='1'
                                 AND pdd.id_design='" & id_design & "'"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         If data.Rows.Count > 0 Then
             'sudah ada approved
-            LPOApproved.Text = "PO processed : " & data.Rows.Count.ToString
+            LPOApproved.Text = "PO Submitted : " & data.Rows.Count.ToString
             'hide all button
             BDuplicate.Visible = False
             BSave.Visible = False

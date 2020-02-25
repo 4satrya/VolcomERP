@@ -41,12 +41,14 @@
             '
             BPrint.Visible = False
             BtnAttachment.Visible = False
+            BMark.Visible = False
             '
         Else
             load_po(id_po)
 
             BPrint.Visible = True
             BtnAttachment.Visible = True
+            BMark.Visible = True
 
             Dim query = "SELECT a.id_report_status,h.report_status,a.id_prod_order_wo,a.id_ovh_price,a.id_payment, "
             query += "a.id_prod_order,g.payment,b.id_currency,a.prod_order_wo_note,a.prod_order_wo_kurs, "
@@ -490,9 +492,7 @@
     End Sub
 
     Private Sub BMark_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        FormReportMark.id_report = id_wo
-        FormReportMark.report_mark_type = "23"
-        FormReportMark.ShowDialog()
+
     End Sub
 
     Private Sub BCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BCancel.Click
@@ -591,5 +591,11 @@
         FormDocumentUpload.id_report = id_wo
         FormDocumentUpload.report_mark_type = "23"
         FormDocumentUpload.ShowDialog()
+    End Sub
+
+    Private Sub BMark_Click_1(sender As Object, e As EventArgs) Handles BMark.Click
+        FormReportMark.id_report = id_wo
+        FormReportMark.report_mark_type = "23"
+        FormReportMark.ShowDialog()
     End Sub
 End Class

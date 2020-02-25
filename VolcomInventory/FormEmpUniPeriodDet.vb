@@ -216,7 +216,76 @@
 
     Private Sub BtnPrintBudget_Click(sender As Object, e As EventArgs) Handles BtnPrintBudget.Click
         Cursor = Cursors.WaitCursor
-        print(GCDetail, "UNIFORM BUDGET : " + TxtPeriodName.Text.ToUpper)
+        Dim gv As DevExpress.XtraGrid.Views.Grid.GridView = Nothing
+        gv = GVDetail
+        ReportEmpUniPeriod.dt = GCDetail.DataSource
+        Dim Report As New ReportEmpUniPeriod()
+
+        'save ori col
+        Dim str_origin As System.IO.Stream
+        str_origin = New System.IO.MemoryStream()
+        gv.SaveLayoutToStream(str_origin, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+        str_origin.Seek(0, System.IO.SeekOrigin.Begin)
+        GridColumnDeptHead.Visible = False
+        GridColumnOrderNumber.Visible = False
+        'GridColumnOrderStatus.Visible = False
+        GVDetail.OptionsView.ShowGroupedColumns = False
+        GVDetail.BestFitColumns()
+
+        '... 
+        ' creating And saving the view's layout to a new memory stream 
+        Dim str As System.IO.Stream
+        str = New System.IO.MemoryStream()
+        gv.SaveLayoutToStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+        str.Seek(0, System.IO.SeekOrigin.Begin)
+        Report.GVDetail.RestoreLayoutFromStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+        str.Seek(0, System.IO.SeekOrigin.Begin)
+
+        'style
+        Report.GVDetail.OptionsPrint.UsePrintStyles = True
+        Report.GVDetail.AppearancePrint.FilterPanel.BackColor = Color.Transparent
+        Report.GVDetail.AppearancePrint.FilterPanel.ForeColor = Color.Black
+        Report.GVDetail.AppearancePrint.FilterPanel.Font = New Font("Tahoma", 7, FontStyle.Regular)
+
+        Report.GVDetail.AppearancePrint.GroupFooter.BackColor = Color.WhiteSmoke
+        Report.GVDetail.AppearancePrint.GroupFooter.ForeColor = Color.Black
+        Report.GVDetail.AppearancePrint.GroupFooter.Font = New Font("Tahoma", 7, FontStyle.Bold)
+
+        Report.GVDetail.AppearancePrint.GroupRow.BackColor = Color.Transparent
+        Report.GVDetail.AppearancePrint.GroupRow.ForeColor = Color.Black
+        Report.GVDetail.AppearancePrint.GroupRow.Font = New Font("Tahoma", 7, FontStyle.Bold)
+
+        Report.GVDetail.AppearancePrint.HeaderPanel.BorderColor = Color.Black
+        Report.GVDetail.AppearancePrint.HeaderPanel.BackColor = Color.Transparent
+        Report.GVDetail.AppearancePrint.HeaderPanel.ForeColor = Color.Black
+        Report.GVDetail.AppearancePrint.HeaderPanel.Font = New Font("Tahoma", 7, FontStyle.Bold)
+
+        Report.GVDetail.AppearancePrint.FooterPanel.BackColor = Color.Gainsboro
+        Report.GVDetail.AppearancePrint.FooterPanel.ForeColor = Color.Black
+        Report.GVDetail.AppearancePrint.FooterPanel.Font = New Font("Tahoma", 7.3, FontStyle.Bold)
+
+        Report.GVDetail.AppearancePrint.Row.ForeColor = Color.Black
+        Report.GVDetail.AppearancePrint.Row.Font = New Font("Tahoma", 7.3, FontStyle.Regular)
+
+        Report.GVDetail.AppearancePrint.Lines.BackColor = Color.Black
+
+        Report.GVDetail.OptionsPrint.ExpandAllDetails = True
+        Report.GVDetail.OptionsPrint.UsePrintStyles = True
+        Report.GVDetail.OptionsPrint.PrintDetails = True
+        Report.GVDetail.OptionsPrint.PrintFooter = True
+
+        'data
+        Report.LabelPeriodName.Text = TxtPeriodName.Text.ToUpper
+        Report.LabelPeriodDate.Text = DEStart.Text + " - " + DEEnd.Text
+        Report.LabelBudget.Text = TxtBudget.Text
+
+        ' Show the report's preview. 
+        Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
+        Tool.ShowPreviewDialog()
+
+        'restore col
+        GVDetail.RestoreLayoutFromStream(str_origin, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+        str_origin.Seek(0, System.IO.SeekOrigin.Begin)
         Cursor = Cursors.Default
     End Sub
 

@@ -213,6 +213,7 @@
     </Compile>
     <Compile Include="ClassBudgetExpensePropose.vb" />
     <Compile Include="ClassBudgetExpenseRevision.vb" />
+    <Compile Include="ClassBudgetProdDemand.vb" />
     <Compile Include="ClassBudgetRevPropose.vb" />
     <Compile Include="ClassDelayPayment.vb" />
     <Compile Include="ClassDelEmpty.vb" />
@@ -349,6 +350,24 @@
       <DependentUpon>FormBankWithdrawalAttachement.vb</DependentUpon>
     </Compile>
     <Compile Include="FormBankWithdrawalAttachement.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormBudgetProdDemand.Designer.vb">
+      <DependentUpon>FormBudgetProdDemand.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormBudgetProdDemand.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormBudgetProdDemandDet.Designer.vb">
+      <DependentUpon>FormBudgetProdDemandDet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormBudgetProdDemandDet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormBudgetProdDemandNew.Designer.vb">
+      <DependentUpon>FormBudgetProdDemandNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormBudgetProdDemandNew.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormCompanyEmailMapping.Designer.vb">
@@ -6789,6 +6808,12 @@
     <Compile Include="ReportEmpUniOrder.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ReportEmpUniPeriod.Designer.vb">
+      <DependentUpon>ReportEmpUniPeriod.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportEmpUniPeriod.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ReportFGAdjIn.Designer.vb">
       <DependentUpon>ReportFGAdjIn.vb</DependentUpon>
     </Compile>
@@ -6949,6 +6974,18 @@
       <DependentUpon>ReportFGStockQC.vb</DependentUpon>
     </Compile>
     <Compile Include="ReportFGStockQC.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportFGStockRSV.Designer.vb">
+      <DependentUpon>ReportFGStockRSV.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportFGStockRSV.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportFGStockSOH.Designer.vb">
+      <DependentUpon>ReportFGStockSOH.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportFGStockSOH.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ReportFGStockStore.Designer.vb">
@@ -7850,6 +7887,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormBankWithdrawalAttachement.resx">
       <DependentUpon>FormBankWithdrawalAttachement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormBudgetProdDemand.resx">
+      <DependentUpon>FormBudgetProdDemand.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormBudgetProdDemandDet.resx">
+      <DependentUpon>FormBudgetProdDemandDet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormBudgetProdDemandNew.resx">
+      <DependentUpon>FormBudgetProdDemandNew.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormCompanyEmailMapping.resx">
       <DependentUpon>FormCompanyEmailMapping.vb</DependentUpon>
@@ -11541,6 +11587,9 @@
     <EmbeddedResource Include="ReportEmpUniOrder.resx">
       <DependentUpon>ReportEmpUniOrder.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportEmpUniPeriod.resx">
+      <DependentUpon>ReportEmpUniPeriod.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportFGAdjIn.resx">
       <DependentUpon>ReportFGAdjIn.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -11635,6 +11684,12 @@
     <EmbeddedResource Include="ReportFGStockQC.resx">
       <DependentUpon>ReportFGStockQC.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportFGStockRSV.resx">
+      <DependentUpon>ReportFGStockRSV.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportFGStockSOH.resx">
+      <DependentUpon>ReportFGStockSOH.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportFGStockStore.resx">
       <DependentUpon>ReportFGStockStore.vb</DependentUpon>

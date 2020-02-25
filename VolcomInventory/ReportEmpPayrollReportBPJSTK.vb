@@ -8,17 +8,17 @@
 
         Dim last_location As String = ""
 
-        Dim location_total_company_contribution_1 As Integer = 0
-        Dim location_total_company_contribution_2 As Integer = 0
-        Dim location_total_employee_contribution_1 As Integer = 0
-        Dim location_total_employee_contribution_2 As Integer = 0
-        Dim location_total As Integer = 0
+        Dim location_total_company_contribution_1 As Decimal = 0
+        Dim location_total_company_contribution_2 As Decimal = 0
+        Dim location_total_employee_contribution_1 As Decimal = 0
+        Dim location_total_employee_contribution_2 As Decimal = 0
+        Dim location_total As Decimal = 0
 
-        Dim total_company_contribution_1 As Integer = 0
-        Dim total_company_contribution_2 As Integer = 0
-        Dim total_employee_contribution_1 As Integer = 0
-        Dim total_employee_contribution_2 As Integer = 0
-        Dim total As Integer = 0
+        Dim total_company_contribution_1 As Decimal = 0
+        Dim total_company_contribution_2 As Decimal = 0
+        Dim total_employee_contribution_1 As Decimal = 0
+        Dim total_employee_contribution_2 As Decimal = 0
+        Dim total As Decimal = 0
 
         For i = 0 To data.Rows.Count - 1
             'total location

@@ -49,6 +49,9 @@
             load_price_cat()
             load_promo()
             load_division()
+            load_class()
+            load_cat()
+            load_sub_cat()
             load_season()
 
             load_price_type()
@@ -68,9 +71,9 @@
     End Sub
 
     Sub load_season()
-        Dim query As String = "SELECT 0 AS id_code_detail,'All Division' AS display_name
-                                UNION
-                                SELECT cd.id_code_detail,cd.display_name FROM `tb_m_code_detail` cd WHERE cd.id_code='3'"
+        Dim query As String = "SELECT 0 AS id_code_detail,'All Season' AS display_name
+                               UNION
+                               SELECT ss.id_season AS `id_code_detail`, ss.season AS `display_name` FROM tb_season ss "
         viewLookupQuery(LESeason, query, 0, "display_name", "id_code_detail")
     End Sub
 
@@ -112,6 +115,27 @@
         viewLookupQuery(LEDivision, query, 0, "display_name", "id_code_detail")
     End Sub
 
+    Sub load_class()
+        Dim query As String = "SELECT 0 AS id_code_detail,'All Class' AS display_name
+                                UNION
+                                SELECT cd.id_code_detail,cd.display_name FROM `tb_m_code_detail` cd WHERE cd.id_code='30'"
+        viewLookupQuery(LEClass, query, 0, "display_name", "id_code_detail")
+    End Sub
+
+    Sub load_cat()
+        Dim query As String = "SELECT 'All' AS id_code_detail,'All Category' AS display_name
+        UNION
+        SELECT cd.display_name AS `id_code_detail`,cd.display_name FROM `tb_m_code_detail` cd WHERE cd.id_code='4' "
+        viewLookupQuery(LECat, query, 0, "display_name", "id_code_detail")
+    End Sub
+
+    Sub load_sub_cat()
+        Dim query As String = "SELECT 0 AS id_code_detail,'All Sub Category' AS display_name
+                                UNION
+                                SELECT cd.id_code_detail,cd.display_name FROM `tb_m_code_detail` cd WHERE cd.id_code='31'"
+        viewLookupQuery(LESubCat, query, 0, "display_name", "id_code_detail")
+    End Sub
+
     Sub load_price_type()
         Dim query As String = "SELECT 1 AS id_price_type,'Normal' AS price_type
                                 UNION
@@ -122,7 +146,10 @@
     End Sub
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles BtnSave.Click
-        Dim date_start, date_end, id_rep, island, id_group, id_price_cat, id_promo, id_season, id_division, id_price_type As String
+        Cursor = Cursors.WaitCursor
+        FormMain.SplashScreenManager1.ShowWaitForm()
+
+        Dim date_start, date_end, id_rep, island, id_group, id_price_cat, id_promo, id_season, id_division, id_class, id_cat, id_sub_cat, id_price_type As String
 
         date_start = Date.Parse(DEStart.EditValue.ToString).ToString("yyyy-MM-dd")
         date_end = Date.Parse(DEEnd.EditValue.ToString).ToString("yyyy-MM-dd")
@@ -149,6 +176,15 @@
         id_division = LEDivision.EditValue.ToString
         FormSalesReportTracking.var_division = LEDivision.Text.ToString
 
+        id_class = LEClass.EditValue.ToString
+        FormSalesReportTracking.var_class = LEClass.Text.ToString
+
+        id_cat = LECat.EditValue.ToString
+        FormSalesReportTracking.var_cat = LECat.Text.ToString
+
+        id_sub_cat = LESubCat.EditValue.ToString
+        FormSalesReportTracking.var_sub_cat = LESubCat.Text.ToString
+
         id_price_type = LEPRiceType.EditValue.ToString
         FormSalesReportTracking.var_prc_type = LEPRiceType.Text.ToString
         '
@@ -158,9 +194,12 @@
             FormSalesReportTracking.var_store = TxtCodeCompFrom.Text & " - " & TxtNameCompFrom.Text
         End If
         '
-        FormSalesReportTracking.load_data(id_comp, date_start, date_end, id_rep, island, id_group, id_price_cat, id_promo, id_division, id_season, id_price_type)
+        FormSalesReportTracking.load_data(id_comp, date_start, date_end, id_rep, island, id_group, id_price_cat, id_promo, id_division, id_class, id_cat, id_sub_cat, id_season, id_price_type)
 
         Close()
+
+        FormMain.SplashScreenManager1.CloseWaitForm()
+        Cursor = Cursors.Default
     End Sub
 
     Private Sub FormSalesReportTrackingParam_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed

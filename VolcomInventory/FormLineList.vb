@@ -1,22 +1,30 @@
 ﻿Public Class FormLineList
     Public show_spesific_col As Boolean = False
+    Dim dtsize As New DataTable
+    Dim dt As New DataTable
+    Public id_menu As String = "-1"
+    Dim is_dept As String = "-1"
+    Dim str As System.IO.Stream
 
     Private Sub FormLineList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewSeason()
 
-        'fill col
-        'For i As Integer = 0 To GVData.Columns.Count - 1
-        '    If GVData.Columns(i).Visible = True Then
-        '        Dim query As String = "INSERT INTO tb_col_line_list(fieldname, is_md, is_mkt) VALUES('" + addSlashes(GVData.Columns(i).FieldName.ToString) + "',1,2); "
-        '        execute_non_query(query, True, "", "", "", "")
-        '    End If
-        'Next
+        'col
+        Dim qry As String = "SELECT * FROM tb_col_line_list l "
+        dt = execute_query(qry, -1, True, "", "", "", "")
+        If id_menu = "1" Then
+            is_dept = "is_mkt"
+        ElseIf id_menu = "2" Then
+            is_dept = "is_retail"
+        ElseIf id_menu = "3" Then
+            is_dept = "is_vm"
+        Else
+            is_dept = "is_md"
+        End If
         If show_spesific_col Then
-            Dim qry As String = "SELECT * FROM tb_col_line_list l "
-            Dim dt As DataTable = execute_query(qry, -1, True, "", "", "", "")
             For j As Integer = 0 To dt.Rows.Count - 1
                 Dim col_name As String = dt.Rows(j)("fieldname").ToString
-                Dim is_mkt As String = dt.Rows(j)("is_mkt").ToString
+                Dim is_mkt As String = dt.Rows(j)(is_dept).ToString
                 If is_mkt = "2" Then
                     Try
                         GVData.Columns(col_name).Visible = False
@@ -26,6 +34,11 @@
                 End If
             Next
         End If
+
+        'copy stream
+        str = New System.IO.MemoryStream()
+        GVData.SaveLayoutToStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+        str.Seek(0, System.IO.SeekOrigin.Begin)
     End Sub
 
     Private Sub FormLineList_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
@@ -51,13 +64,212 @@
         viewData()
     End Sub
 
+    Sub setPropertiesBZColumn(ByVal col_name As String, ByVal field_name As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn)
+        'display format
+        field_name.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        field_name.DisplayFormat.FormatString = "{0:N0}"
+        'summary
+        field_name.SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum
+        field_name.SummaryItem.DisplayFormat = "{0:N0}"
+        'grup summary
+        Dim item As DevExpress.XtraGrid.GridGroupSummaryItem = New DevExpress.XtraGrid.GridGroupSummaryItem()
+        item.FieldName = col_name
+        item.SummaryType = DevExpress.Data.SummaryItemType.Sum
+        item.DisplayFormat = "{0:n0}"
+        item.ShowInGroupColumnFooter = GVData.Columns(col_name)
+        GVData.GroupSummary.Add(item)
+        'custom
+        GVData.Columns(col_name).OptionsColumn.ShowInCustomizationForm = True
+    End Sub
+
     Sub viewData()
         FormMain.SplashScreenManager1.ShowWaitForm()
+
+        'fill col
+        'For i As Integer = 0 To GVData.Columns.Count - 1
+        '    If GVData.Columns(i).Visible = True And GVData.Columns(i).FieldName.Contains("#bz#") Then
+        '        Dim querycol As String = "INSERT INTO tb_col_line_list(fieldname, is_md, is_mkt) VALUES('" + addSlashes(GVData.Columns(i).FieldName.ToString) + "',1,2); "
+        '        execute_non_query(querycol, True, "", "", "", "")
+        '    End If
+        'Next
+
+        ' show breakdown size
+        Dim break_size As String = ""
+        If CEBreakSize.EditValue = True Then
+            break_size = "1"
+        Else
+            break_size = "2"
+        End If
+
         Dim id_ss As String = SLESeason.EditValue.ToString
-        Dim query As String = "CALL view_line_list_all_new(" + id_ss + ")"
+        Dim query As String = "CALL view_line_list_all_new_bz(" + id_ss + "," + break_size + ")"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCData.DataSource = data
+
+        ' show caption breakdown size
+        'GVData.BeginUpdate()
+        If CEBreakSize.EditValue = True Then
+            'header heigt
+            GVData.ColumnPanelRowHeight = 100
+
+            'set size
+            break_size = "1"
+
+            'get caption
+            makeSafeGV(GVData)
+            GVData.ActiveFilterString = "[id_prod_demand]>0"
+            Dim id_pd As String = ""
+            For g As Integer = 0 To GVData.RowCount - 1
+                If g > 0 Then
+                    id_pd += ","
+                End If
+                id_pd += GVData.GetRowCellValue(g, "id_prod_demand").ToString
+            Next
+            GVData.ActiveFilterString = ""
+
+            'set breakdown size
+            If id_pd <> "" Then
+                Dim query_caption As String = " SELECT cd.index_size,CONCAT('qty',cd.index_size) AS `col`,GROUP_CONCAT(DISTINCT cd.code_detail_name ORDER BY cd.code_detail_name ASC SEPARATOR '\n') AS `caption` FROM tb_m_code_detail cd
+                WHERE cd.id_code='33'
+                AND cd.`index_size` IN (
+                    SELECT cd.`index_size` FROM tb_prod_demand_design pdd 
+                    INNER JOIN tb_prod_demand_product pdp ON pdp.id_prod_demand_design =  pdd.id_prod_demand_design
+                    INNER JOIN tb_m_product p ON p.id_product = pdp.id_product
+                    INNER JOIN tb_m_product_code pc ON pc.id_product = p.id_product
+                    INNER JOIN tb_m_code_detail cd ON cd.id_code_detail = pc.id_code_detail
+                    WHERE pdd.id_prod_demand IN(" + id_pd + ") AND pdp.prod_demand_product_qty>0
+                    GROUP BY cd.`index_size`
+                )
+                AND cd.`size_type` IN (
+                    SELECT cd.`size_type` FROM tb_prod_demand_design pdd 
+                    INNER JOIN tb_prod_demand_product pdp ON pdp.id_prod_demand_design =  pdd.id_prod_demand_design
+                    INNER JOIN tb_m_product p ON p.id_product = pdp.id_product
+                    INNER JOIN tb_m_product_code pc ON pc.id_product = p.id_product
+                    INNER JOIN tb_m_code_detail cd ON cd.id_code_detail = pc.id_code_detail
+                    WHERE pdd.id_prod_demand IN(" + id_pd + ") AND pdp.prod_demand_product_qty>0
+                    GROUP BY cd.`size_type`
+                )
+                GROUP BY cd.index_size "
+                dtsize = execute_query(query_caption, -1, True, "", "", "", "")
+
+                Dim last_ttl As String = ""
+                Dim ix As Integer = 0
+                Dim last_ttl_actual As String = ""
+                Dim ix_actual As Integer = 0
+                For j As Integer = 0 To GVData.Columns.Count - 1
+                    Dim col_name As String = GVData.Columns(j).FieldName.ToString
+
+                    'check  allow column
+                    Dim dtcol_filter As DataRow() = dt.Select("[fieldname]='" + col_name + "' AND [" + is_dept + "]=1 ")
+
+                    'bz
+                    If col_name.Contains("#bz#") And dtcol_filter.Length > 0 Then
+                        'explodde column
+                        Dim col_arr As String() = Split(col_name, "#bz#")
+                        Dim col_ttl As String = col_arr(0)
+                        Dim col_size As String = "qty" + col_arr(1).ToString
+
+                        'viisible index
+                        If last_ttl <> col_ttl Then
+                            If last_ttl <> "" Then
+                                gridBandPD.Columns.MoveTo(ix, GVData.Columns(last_ttl))
+                                ix += 1
+                            End If
+                            last_ttl = col_ttl
+                        End If
+                        gridBandPD.Columns.Add(GVData.Columns.AddVisible(col_name))
+                        gridBandPD.Columns.MoveTo(ix, GVData.Columns(col_name))
+
+                        'caption
+                        Dim dtsize_filter As DataRow() = dtsize.Select("[col]='" + col_size + "' ")
+                        If dtsize_filter.Length > 0 Then
+                            GVData.Columns(col_name).Caption = dtsize_filter(0)("caption").ToString
+                        End If
+                        'set properti
+                        setPropertiesBZColumn(col_name, GVData.Columns(col_name))
+                        'jika 0 divisible
+                        If GVData.Columns(col_name).SummaryItem.SummaryValue = 0 Then
+                            GVData.Columns(col_name).Visible = False
+                        End If
+
+                        ix += 1
+                    ElseIf col_name.Contains("#abz#") And dtcol_filter.Length > 0 Then
+                        'explodde column
+                        Dim col_arr As String() = Split(col_name, "#abz#")
+                        Dim col_ttl_actual As String = col_arr(0)
+                        Dim col_size As String = "qty" + col_arr(1).ToString
+
+                        'viisible index
+                        If last_ttl_actual <> col_ttl_actual Then
+                            If last_ttl_actual <> "" Then
+                                gridBandActual.Columns.MoveTo(ix_actual, GVData.Columns(last_ttl_actual))
+                                ix_actual += 1
+                            End If
+                            last_ttl_actual = col_ttl_actual
+                        End If
+                        gridBandActual.Columns.Add(GVData.Columns.AddVisible(col_name))
+                        gridBandActual.Columns.MoveTo(ix_actual, GVData.Columns(col_name))
+
+                        'caption
+                        Dim dtsize_filter As DataRow() = dtsize.Select("[col]='" + col_size + "' ")
+                        If dtsize_filter.Length > 0 Then
+                            GVData.Columns(col_name).Caption = dtsize_filter(0)("caption").ToString
+                        End If
+                        'set properti
+                        setPropertiesBZColumn(col_name, GVData.Columns(col_name))
+                        'jika 0 divisible
+                        If GVData.Columns(col_name).SummaryItem.SummaryValue = 0 Then
+                            GVData.Columns(col_name).Visible = False
+                        End If
+
+                        ix_actual += 1
+                    End If
+                Next
+                If last_ttl <> "" Then
+                    gridBandPD.Columns.MoveTo(ix, GVData.Columns(last_ttl))
+                End If
+                If last_ttl_actual <> "" Then
+                    gridBandActual.Columns.MoveTo(ix_actual, GVData.Columns(last_ttl_actual))
+                End If
+            End If
+        Else
+            'header heigt
+            GVData.ColumnPanelRowHeight = 35
+
+            'set size
+            break_size = "2"
+            hideColBreakSize()
+        End If
+        'GVData.EndUpdate()
+
         FormMain.SplashScreenManager1.CloseWaitForm()
+    End Sub
+
+    Sub hideColBreakSize()
+        For k As Integer = 1 To 10
+            Dim col_mkt As String = "pd_qty_mkt#bz#" + k.ToString
+            Dim col_buff As String = "pd_qty_buff#bz#" + k.ToString
+            Dim col_core As String = "pd_qty_core#bz#" + k.ToString
+            Dim col_dev As String = "pd_qty_dev#bz#" + k.ToString
+            Dim col_act_order_sales As String = "pd_qty_act_order_sales#bz#" + k.ToString
+            Dim col_ttl As String = "pd_qty_ttl#bz#" + k.ToString
+
+            'visible
+            GVData.Columns(col_mkt).Visible = False
+            GVData.Columns(col_buff).Visible = False
+            GVData.Columns(col_core).Visible = False
+            GVData.Columns(col_dev).Visible = False
+            GVData.Columns(col_act_order_sales).Visible = False
+            GVData.Columns(col_ttl).Visible = False
+
+            'show custom colown
+            GVData.Columns(col_mkt).OptionsColumn.ShowInCustomizationForm = False
+            GVData.Columns(col_buff).OptionsColumn.ShowInCustomizationForm = False
+            GVData.Columns(col_core).OptionsColumn.ShowInCustomizationForm = False
+            GVData.Columns(col_dev).OptionsColumn.ShowInCustomizationForm = False
+            GVData.Columns(col_act_order_sales).OptionsColumn.ShowInCustomizationForm = False
+            GVData.Columns(col_ttl).OptionsColumn.ShowInCustomizationForm = False
+        Next
     End Sub
 
     Private Sub GVData_CustomColumnDisplayText(sender As Object, e As DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs) Handles GVData.CustomColumnDisplayText
@@ -288,6 +500,7 @@
 
         ' Customize export options 
         CType(gc_par.MainView, DevExpress.XtraGrid.Views.Grid.GridView).OptionsPrint.PrintHeader = True
+        CType(gc_par.MainView, DevExpress.XtraGrid.Views.Grid.GridView).OptionsPrint.AllowMultilineHeaders = True
         Dim advOptions As DevExpress.XtraPrinting.XlsxExportOptionsEx = New DevExpress.XtraPrinting.XlsxExportOptionsEx()
         advOptions.AllowSortingAndFiltering = DevExpress.Utils.DefaultBoolean.False
         advOptions.ShowGridLines = DevExpress.Utils.DefaultBoolean.False
@@ -304,5 +517,25 @@
             stopCustom(ex.ToString)
         End Try
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub SLESeason_EditValueChanged(sender As Object, e As EventArgs) Handles SLESeason.EditValueChanged
+        resetview()
+    End Sub
+
+    Sub resetview()
+        GCData.DataSource = Nothing
+        hideColBreakSize()
+
+        'restore column opt
+        Try
+            GVData.RestoreLayoutFromStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+            str.Seek(0, System.IO.SeekOrigin.Begin)
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Private Sub CEBreakSize_EditValueChanged(sender As Object, e As EventArgs) Handles CEBreakSize.EditValueChanged
+        resetview()
     End Sub
 End Class

@@ -1350,7 +1350,7 @@ Partial Class FormProductionDet
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.MENote.Location = New System.Drawing.Point(52, 10)
         Me.MENote.Name = "MENote"
-        Me.MENote.Properties.MaxLength = 250
+        Me.MENote.Properties.MaxLength = 350
         Me.MENote.Size = New System.Drawing.Size(376, 56)
         Me.MENote.TabIndex = 137
         '
@@ -1959,7 +1959,6 @@ Partial Class FormProductionDet
         Me.XTPWorkOrder.Controls.Add(Me.GCProdWO)
         Me.XTPWorkOrder.Controls.Add(Me.PanelControl2)
         Me.XTPWorkOrder.Name = "XTPWorkOrder"
-        Me.XTPWorkOrder.PageVisible = False
         Me.XTPWorkOrder.Size = New System.Drawing.Size(971, 547)
         Me.XTPWorkOrder.Text = "Work Order"
         '

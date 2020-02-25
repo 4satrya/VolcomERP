@@ -30,6 +30,11 @@
         viewLookupQuery(LEActive, query, 0, "employee_active", "id_employee_active")
     End Sub
 
+    Sub viewHomeBase()
+        Dim query As String = "SELECT * FROM tb_m_fingerprint"
+        viewLookupQuery(LEHomebase, query, 0, "display_name", "id_fingerprint")
+    End Sub
+
     Sub viewDegree()
         Dim query As String = "SELECT * FROM tb_lookup_education a ORDER BY a.id_education ASC "
         viewLookupQuery(LEDegree, query, 0, "education", "id_education")
@@ -124,6 +129,7 @@
         viewReligion()
         viewCountry()
         viewActive()
+        viewHomeBase()
         viewDegree()
         viewMarriageStatus()
         viewNPWPStatus()
@@ -180,10 +186,10 @@
 
             If datarow("id_departement").ToString = "17" Then
                 PCSogo.Visible = True
-                PanelControlTop.Size = New Size(838, 201)
+                'PanelControlTop.Size = New Size(838, 201)
             Else
                 PCSogo.Visible = False
-                PanelControlTop.Size = New Size(838, 173)
+                'PanelControlTop.Size = New Size(838, 173)
             End If
 
             'general tab
@@ -197,6 +203,8 @@
             DELastDay.EditValue = datarow("employee_last_date")
             LEActive.ItemIndex = LEActive.Properties.GetDataSourceRowIndex("id_employee_active", data.Rows(0)("id_employee_active").ToString)
             LEActive.ReadOnly = True
+            LEHomebase.ItemIndex = LEHomebase.Properties.GetDataSourceRowIndex("id_fingerprint", data.Rows(0)("id_fingerprint").ToString)
+            LEHomebase.ReadOnly = True
             LESex.ItemIndex = LESex.Properties.GetDataSourceRowIndex("id_sex", data.Rows(0)("id_sex").ToString)
             LESex.ReadOnly = True
             LEBloodType.ItemIndex = LEBloodType.Properties.GetDataSourceRowIndex("id_blood_type", data.Rows(0)("id_blood_type").ToString)

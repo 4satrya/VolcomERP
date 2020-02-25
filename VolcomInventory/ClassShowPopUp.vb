@@ -2047,7 +2047,7 @@ GROUP BY rec.`id_prod_order`"
             table_name = "tb_pn_fgpo"
             field_id = "id_pn_fgpo"
             field_number = "number"
-            field_date = "date_created"
+            field_date = "created_date"
         ElseIf report_mark_type = "190" Or report_mark_type = "193" Then
             'work order MTC/IT
             table_name = "tb_work_order"

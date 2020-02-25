@@ -67,6 +67,7 @@ Partial Class FormEmpUniPeriodDet
         Me.GridColumnOrderPoint = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnDeptHead = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepoDeptHead = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.GridColumnOrderTotalPrice = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
         Me.BtnOrderDetail = New DevExpress.XtraEditors.SimpleButton()
         Me.LEDeptSum = New DevExpress.XtraEditors.LookUpEdit()
@@ -135,6 +136,8 @@ Partial Class FormEmpUniPeriodDet
         Me.GridColumnSC9 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnSC10 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnSC11 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnSC12 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnSC13 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepoBtnAddSize = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
         Me.PanelControl7 = New DevExpress.XtraEditors.PanelControl()
         Me.PanelControl8 = New DevExpress.XtraEditors.PanelControl()
@@ -170,8 +173,6 @@ Partial Class FormEmpUniPeriodDet
         Me.ContextMenuStrip2 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.AddSizeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EditSizeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GridColumnSC12 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnSC13 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl1.SuspendLayout()
         CType(Me.TxtBudget.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -456,10 +457,10 @@ Partial Class FormEmpUniPeriodDet
         '
         'GVDetail
         '
-        Me.GVDetail.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdEmployee, Me.GridColumnIdBudget, Me.GridColumnNik, Me.GridColumnName, Me.GridColumnDept, Me.GridColumnPosition, Me.GridColumnLevel, Me.GridColumnBudget, Me.GridColumnActual, Me.GridColumn1, Me.GridColumnStatus, Me.GridColumnIdOrder, Me.GridColumnOrderNumber, Me.GridColumnOrderStatus, Me.GridColumnOrderAmount, Me.GridColumnBugdetDiff, Me.GridColumnOrderQty, Me.GridColumnOrderPoint, Me.GridColumnDeptHead})
+        Me.GVDetail.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdEmployee, Me.GridColumnIdBudget, Me.GridColumnNik, Me.GridColumnName, Me.GridColumnDept, Me.GridColumnPosition, Me.GridColumnLevel, Me.GridColumnBudget, Me.GridColumnActual, Me.GridColumn1, Me.GridColumnStatus, Me.GridColumnIdOrder, Me.GridColumnOrderNumber, Me.GridColumnOrderStatus, Me.GridColumnOrderAmount, Me.GridColumnBugdetDiff, Me.GridColumnOrderQty, Me.GridColumnOrderPoint, Me.GridColumnDeptHead, Me.GridColumnOrderTotalPrice})
         Me.GVDetail.GridControl = Me.GCDetail
         Me.GVDetail.GroupCount = 1
-        Me.GVDetail.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "budget", Me.GridColumnBudget, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "order_amount", Me.GridColumnOrderAmount, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "budget_diff", Me.GridColumnBugdetDiff, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "order_qty", Me.GridColumnOrderQty, "{0:N0}")})
+        Me.GVDetail.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "budget", Me.GridColumnBudget, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "order_amount", Me.GridColumnOrderAmount, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "budget_diff", Me.GridColumnBugdetDiff, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "order_qty", Me.GridColumnOrderQty, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "order_price_total", Me.GridColumnOrderTotalPrice, "{0:N0}")})
         Me.GVDetail.Name = "GVDetail"
         Me.GVDetail.OptionsBehavior.AutoExpandAllGroups = True
         Me.GVDetail.OptionsBehavior.Editable = False
@@ -490,7 +491,7 @@ Partial Class FormEmpUniPeriodDet
         Me.GridColumnNik.Name = "GridColumnNik"
         Me.GridColumnNik.Visible = True
         Me.GridColumnNik.VisibleIndex = 1
-        Me.GridColumnNik.Width = 158
+        Me.GridColumnNik.Width = 86
         '
         'GridColumnName
         '
@@ -499,7 +500,7 @@ Partial Class FormEmpUniPeriodDet
         Me.GridColumnName.Name = "GridColumnName"
         Me.GridColumnName.Visible = True
         Me.GridColumnName.VisibleIndex = 2
-        Me.GridColumnName.Width = 303
+        Me.GridColumnName.Width = 166
         '
         'GridColumnDept
         '
@@ -508,7 +509,7 @@ Partial Class FormEmpUniPeriodDet
         Me.GridColumnDept.Name = "GridColumnDept"
         Me.GridColumnDept.Visible = True
         Me.GridColumnDept.VisibleIndex = 3
-        Me.GridColumnDept.Width = 168
+        Me.GridColumnDept.Width = 92
         '
         'GridColumnPosition
         '
@@ -517,7 +518,7 @@ Partial Class FormEmpUniPeriodDet
         Me.GridColumnPosition.Name = "GridColumnPosition"
         Me.GridColumnPosition.Visible = True
         Me.GridColumnPosition.VisibleIndex = 4
-        Me.GridColumnPosition.Width = 135
+        Me.GridColumnPosition.Width = 74
         '
         'GridColumnLevel
         '
@@ -527,7 +528,7 @@ Partial Class FormEmpUniPeriodDet
         Me.GridColumnLevel.Name = "GridColumnLevel"
         Me.GridColumnLevel.Visible = True
         Me.GridColumnLevel.VisibleIndex = 5
-        Me.GridColumnLevel.Width = 84
+        Me.GridColumnLevel.Width = 46
         '
         'GridColumnBudget
         '
@@ -540,7 +541,7 @@ Partial Class FormEmpUniPeriodDet
         Me.GridColumnBudget.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "budget", "{0:N2}")})
         Me.GridColumnBudget.Visible = True
         Me.GridColumnBudget.VisibleIndex = 6
-        Me.GridColumnBudget.Width = 147
+        Me.GridColumnBudget.Width = 80
         '
         'GridColumnActual
         '
@@ -584,8 +585,8 @@ Partial Class FormEmpUniPeriodDet
         Me.GridColumnOrderNumber.FieldName = "order_number"
         Me.GridColumnOrderNumber.Name = "GridColumnOrderNumber"
         Me.GridColumnOrderNumber.Visible = True
-        Me.GridColumnOrderNumber.VisibleIndex = 9
-        Me.GridColumnOrderNumber.Width = 94
+        Me.GridColumnOrderNumber.VisibleIndex = 10
+        Me.GridColumnOrderNumber.Width = 38
         '
         'RepositoryItemTextEdit1
         '
@@ -600,12 +601,12 @@ Partial Class FormEmpUniPeriodDet
         Me.GridColumnOrderStatus.FieldName = "order_status"
         Me.GridColumnOrderStatus.Name = "GridColumnOrderStatus"
         Me.GridColumnOrderStatus.Visible = True
-        Me.GridColumnOrderStatus.VisibleIndex = 12
-        Me.GridColumnOrderStatus.Width = 148
+        Me.GridColumnOrderStatus.VisibleIndex = 13
+        Me.GridColumnOrderStatus.Width = 54
         '
         'GridColumnOrderAmount
         '
-        Me.GridColumnOrderAmount.Caption = "Order Amount"
+        Me.GridColumnOrderAmount.Caption = "Total Cost"
         Me.GridColumnOrderAmount.ColumnEdit = Me.RepositoryItemTextEdit1
         Me.GridColumnOrderAmount.DisplayFormat.FormatString = "N2"
         Me.GridColumnOrderAmount.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
@@ -615,7 +616,7 @@ Partial Class FormEmpUniPeriodDet
         Me.GridColumnOrderAmount.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "order_amount", "{0:N2}")})
         Me.GridColumnOrderAmount.Visible = True
         Me.GridColumnOrderAmount.VisibleIndex = 7
-        Me.GridColumnOrderAmount.Width = 131
+        Me.GridColumnOrderAmount.Width = 72
         '
         'GridColumnBugdetDiff
         '
@@ -630,7 +631,7 @@ Partial Class FormEmpUniPeriodDet
         Me.GridColumnBugdetDiff.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
         Me.GridColumnBugdetDiff.Visible = True
         Me.GridColumnBugdetDiff.VisibleIndex = 8
-        Me.GridColumnBugdetDiff.Width = 118
+        Me.GridColumnBugdetDiff.Width = 64
         '
         'GridColumnOrderQty
         '
@@ -641,8 +642,8 @@ Partial Class FormEmpUniPeriodDet
         Me.GridColumnOrderQty.Name = "GridColumnOrderQty"
         Me.GridColumnOrderQty.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "order_qty", "{0:N0}")})
         Me.GridColumnOrderQty.Visible = True
-        Me.GridColumnOrderQty.VisibleIndex = 10
-        Me.GridColumnOrderQty.Width = 51
+        Me.GridColumnOrderQty.VisibleIndex = 11
+        Me.GridColumnOrderQty.Width = 20
         '
         'GridColumnOrderPoint
         '
@@ -652,8 +653,8 @@ Partial Class FormEmpUniPeriodDet
         Me.GridColumnOrderPoint.FieldName = "order_point"
         Me.GridColumnOrderPoint.Name = "GridColumnOrderPoint"
         Me.GridColumnOrderPoint.Visible = True
-        Me.GridColumnOrderPoint.VisibleIndex = 11
-        Me.GridColumnOrderPoint.Width = 70
+        Me.GridColumnOrderPoint.VisibleIndex = 12
+        Me.GridColumnOrderPoint.Width = 28
         '
         'GridColumnDeptHead
         '
@@ -675,6 +676,18 @@ Partial Class FormEmpUniPeriodDet
         Me.RepoDeptHead.PictureChecked = CType(resources.GetObject("RepoDeptHead.PictureChecked"), System.Drawing.Image)
         Me.RepoDeptHead.ValueChecked = "Yes"
         Me.RepoDeptHead.ValueUnchecked = "No"
+        '
+        'GridColumnOrderTotalPrice
+        '
+        Me.GridColumnOrderTotalPrice.Caption = "Total Price"
+        Me.GridColumnOrderTotalPrice.DisplayFormat.FormatString = "N0"
+        Me.GridColumnOrderTotalPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnOrderTotalPrice.FieldName = "order_price_total"
+        Me.GridColumnOrderTotalPrice.Name = "GridColumnOrderTotalPrice"
+        Me.GridColumnOrderTotalPrice.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "order_price_total", "{0:N0}")})
+        Me.GridColumnOrderTotalPrice.Visible = True
+        Me.GridColumnOrderTotalPrice.VisibleIndex = 9
+        Me.GridColumnOrderTotalPrice.Width = 86
         '
         'PanelControl2
         '
@@ -730,6 +743,7 @@ Partial Class FormEmpUniPeriodDet
         Me.BtnPrintForm.Size = New System.Drawing.Size(110, 37)
         Me.BtnPrintForm.TabIndex = 10
         Me.BtnPrintForm.Text = "Print Form"
+        Me.BtnPrintForm.Visible = False
         '
         'BtnPrintBudget
         '
@@ -1368,6 +1382,22 @@ Partial Class FormEmpUniPeriodDet
         Me.GridColumnSC11.Visible = True
         Me.GridColumnSC11.VisibleIndex = 14
         '
+        'GridColumnSC12
+        '
+        Me.GridColumnSC12.Caption = "12"
+        Me.GridColumnSC12.FieldName = "12"
+        Me.GridColumnSC12.Name = "GridColumnSC12"
+        Me.GridColumnSC12.Visible = True
+        Me.GridColumnSC12.VisibleIndex = 5
+        '
+        'GridColumnSC13
+        '
+        Me.GridColumnSC13.Caption = "13"
+        Me.GridColumnSC13.FieldName = "13"
+        Me.GridColumnSC13.Name = "GridColumnSC13"
+        Me.GridColumnSC13.Visible = True
+        Me.GridColumnSC13.VisibleIndex = 12
+        '
         'RepoBtnAddSize
         '
         Me.RepoBtnAddSize.AutoHeight = False
@@ -1679,22 +1709,6 @@ Partial Class FormEmpUniPeriodDet
         Me.EditSizeToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
         Me.EditSizeToolStripMenuItem.Text = "Reset Size"
         '
-        'GridColumnSC12
-        '
-        Me.GridColumnSC12.Caption = "12"
-        Me.GridColumnSC12.FieldName = "12"
-        Me.GridColumnSC12.Name = "GridColumnSC12"
-        Me.GridColumnSC12.Visible = True
-        Me.GridColumnSC12.VisibleIndex = 5
-        '
-        'GridColumnSC13
-        '
-        Me.GridColumnSC13.Caption = "13"
-        Me.GridColumnSC13.FieldName = "13"
-        Me.GridColumnSC13.Name = "GridColumnSC13"
-        Me.GridColumnSC13.Visible = True
-        Me.GridColumnSC13.VisibleIndex = 12
-        '
         'FormEmpUniPeriodDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1919,4 +1933,5 @@ Partial Class FormEmpUniPeriodDet
     Friend WithEvents GridColumnSC11 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnSC12 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnSC13 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnOrderTotalPrice As DevExpress.XtraGrid.Columns.GridColumn
 End Class

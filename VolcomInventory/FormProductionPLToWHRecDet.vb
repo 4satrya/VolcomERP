@@ -181,7 +181,7 @@ Public Class FormProductionPLToWHRecDet
         query += "INNER JOIN tb_m_wh_drawer e ON e.id_wh_rack = d.id_wh_rack "
         query += "JOIN tb_opt opt "
         query += "WHERE a.id_departement = '" + id_departement_user + "' "
-        query += "AND a.id_comp_cat = opt.id_comp_cat_wh "
+        query += "AND a.id_comp_cat = opt.id_comp_cat_wh AND a.is_active=1 "
         query += "GROUP BY a.id_comp "
         query += "ORDER BY a.id_wh_type ASC)"
         viewSearchLookupQuery(SLEStorage, query, "id_comp", "comp_name", "id_comp")

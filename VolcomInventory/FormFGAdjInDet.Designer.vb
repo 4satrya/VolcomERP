@@ -74,6 +74,7 @@ Partial Class FormFGAdjInDet
         Me.BMark = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnSave = New DevExpress.XtraEditors.SimpleButton()
         Me.EPAdj = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.BImport = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
         CType(Me.LECurrency.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -461,6 +462,7 @@ Partial Class FormFGAdjInDet
         Me.PCEdit.Appearance.BackColor = System.Drawing.Color.Transparent
         Me.PCEdit.Appearance.Options.UseBackColor = True
         Me.PCEdit.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PCEdit.Controls.Add(Me.BImport)
         Me.PCEdit.Controls.Add(Me.BtnDel)
         Me.PCEdit.Controls.Add(Me.BtnEdit)
         Me.PCEdit.Controls.Add(Me.BtnAdd)
@@ -650,6 +652,17 @@ Partial Class FormFGAdjInDet
         '
         Me.EPAdj.ContainerControl = Me
         '
+        'BImport
+        '
+        Me.BImport.Dock = System.Windows.Forms.DockStyle.Left
+        Me.BImport.Image = CType(resources.GetObject("BImport.Image"), System.Drawing.Image)
+        Me.BImport.ImageList = Me.LargeImageCollection
+        Me.BImport.Location = New System.Drawing.Point(0, 0)
+        Me.BImport.Name = "BImport"
+        Me.BImport.Size = New System.Drawing.Size(118, 44)
+        Me.BImport.TabIndex = 20
+        Me.BImport.Text = "Import Data"
+        '
         'FormFGAdjInDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -750,4 +763,5 @@ Partial Class FormFGAdjInDet
     Friend WithEvents EPAdj As System.Windows.Forms.ErrorProvider
     Friend WithEvents SimpleButton1 As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents GridColumnAccount As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BImport As DevExpress.XtraEditors.SimpleButton
 End Class

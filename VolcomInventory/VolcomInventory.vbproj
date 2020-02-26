@@ -6976,6 +6976,18 @@
     <Compile Include="ReportFGStockQC.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ReportFGStockRSV.Designer.vb">
+      <DependentUpon>ReportFGStockRSV.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportFGStockRSV.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportFGStockSOH.Designer.vb">
+      <DependentUpon>ReportFGStockSOH.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportFGStockSOH.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ReportFGStockStore.Designer.vb">
       <DependentUpon>ReportFGStockStore.vb</DependentUpon>
     </Compile>
@@ -11672,6 +11684,12 @@
     <EmbeddedResource Include="ReportFGStockQC.resx">
       <DependentUpon>ReportFGStockQC.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportFGStockRSV.resx">
+      <DependentUpon>ReportFGStockRSV.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportFGStockSOH.resx">
+      <DependentUpon>ReportFGStockSOH.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportFGStockStore.resx">
       <DependentUpon>ReportFGStockStore.vb</DependentUpon>

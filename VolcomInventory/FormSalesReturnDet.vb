@@ -940,6 +940,7 @@ Public Class FormSalesReturnDet
 
     Private Sub BtnBrowseContactTo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnBrowseContactTo.Click
         FormPopUpContact.id_pop_up = "41"
+        FormPopUpContact.is_must_active = "1"
         FormPopUpContact.id_departement = id_departement_user
         FormPopUpContact.ShowDialog()
     End Sub

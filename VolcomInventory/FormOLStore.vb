@@ -359,14 +359,18 @@
                             FormMain.SplashScreenManager1.SetWaitFormDescription("Processing order : " + (i + 1).ToString + " of " + data.Rows.Count.ToString)
 
                             'send email
-                            Dim em As New ClassSendEmail()
-                            em.report_mark_type = "39"
-                            em.id_report = id_so
-                            em.design = data.Rows(i)("group_store").ToString
-                            em.design_code = data.Rows(i)("sales_order_ol_shop_number").ToString
-                            em.comment_by = data.Rows(i)("customer_name").ToString
-                            em.comment = source_path
-                            em.send_email()
+                            Try
+                                Dim em As New ClassSendEmail()
+                                em.report_mark_type = "39"
+                                em.id_report = id_so
+                                em.design = data.Rows(i)("group_store").ToString
+                                em.design_code = data.Rows(i)("sales_order_ol_shop_number").ToString
+                                em.comment_by = data.Rows(i)("customer_name").ToString
+                                em.comment = source_path
+                                em.send_email()
+                            Catch ex As Exception
+                                execute_non_query("INSERT INTO tb_error_mail (`date`, description) VALUES (NOW(), 'Failed Send Online Store number = " + data.Rows(i)("sales_order_ol_shop_number").ToString + "')", True, "", "", "", "")
+                            End Try
 
                             'completed status
                             Dim query_comp As String = "UPDATE tb_sales_order so SET so.id_report_status=6 

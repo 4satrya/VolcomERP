@@ -2308,22 +2308,29 @@
         ElseIf report_mark_type = "41" Then
             'FG Adj In
             If id_status_reportx = 6 Then 'completed
-                Dim query_cancel As String = "SELECT * FROM tb_adj_in_fg a "
-                query_cancel += "INNER JOIN tb_adj_in_fg_det b ON a.id_adj_in_fg = b.id_adj_in_fg "
-                query_cancel += "WHERE a.id_adj_in_fg = '" + id_report + "' "
-                Dim data As DataTable = execute_query(query_cancel, -1, True, "", "", "", "")
-                For i As Integer = 0 To (data.Rows.Count - 1)
-                    Dim id_wh_drawer As String = data.Rows(i)("id_wh_drawer").ToString
-                    Dim id_product As String = data.Rows(i)("id_product").ToString
-                    Dim adj_in_fg_det_qty As String = decimalSQL(data.Rows(i)("adj_in_fg_det_qty").ToString)
-                    Dim adj_in_fg_det_price As String = decimalSQL(data.Rows(i)("adj_in_fg_det_price").ToString)
-                    Dim adj_in_fg_number As String = data.Rows(i)("adj_in_fg_number").ToString
+                'Dim query_cancel As String = "SELECT * FROM tb_adj_in_fg a "
+                'query_cancel += "INNER JOIN tb_adj_in_fg_det b ON a.id_adj_in_fg = b.id_adj_in_fg "
+                'query_cancel += "WHERE a.id_adj_in_fg = '" + id_report + "' "
+                'Dim data As DataTable = execute_query(query_cancel, -1, True, "", "", "", "")
+                'For i As Integer = 0 To (data.Rows.Count - 1)
+                '    Dim id_wh_drawer As String = data.Rows(i)("id_wh_drawer").ToString
+                '    Dim id_product As String = data.Rows(i)("id_product").ToString
+                '    Dim adj_in_fg_det_qty As String = decimalSQL(data.Rows(i)("adj_in_fg_det_qty").ToString)
+                '    Dim adj_in_fg_det_price As String = decimalSQL(data.Rows(i)("adj_in_fg_det_price").ToString)
+                '    Dim adj_in_fg_number As String = data.Rows(i)("adj_in_fg_number").ToString
 
-                    Dim query_upd_storage As String = ""
-                    query_upd_storage = "INSERT tb_storage_fg(id_wh_drawer, id_storage_category, id_product, bom_unit_price, storage_product_qty, storage_product_datetime, storage_product_notes,report_mark_type,id_report,id_stock_status) "
-                    query_upd_storage += "VALUES('" + id_wh_drawer + "', '1', '" + id_product + "'," + adj_in_fg_det_price + ",'" + adj_in_fg_det_qty + "', NOW(), 'Completed, Adjustment In : " + adj_in_fg_number + "','41','" & id_report & "','1')"
-                    execute_non_query(query_upd_storage, True, "", "", "", "")
-                Next
+                '    Dim query_upd_storage As String = ""
+                '    query_upd_storage = "INSERT tb_storage_fg(id_wh_drawer, id_storage_category, id_product, bom_unit_price, storage_product_qty, storage_product_datetime, storage_product_notes,report_mark_type,id_report,id_stock_status) "
+                '    query_upd_storage += "VALUES('" + id_wh_drawer + "', '1', '" + id_product + "'," + adj_in_fg_det_price + ",'" + adj_in_fg_det_qty + "', NOW(), 'Completed, Adjustment In : " + adj_in_fg_number + "','41','" & id_report & "','1')"
+                '    execute_non_query(query_upd_storage, True, "", "", "", "")
+                'Next
+
+                Dim q As String = "INSERT tb_storage_fg(id_wh_drawer, id_storage_category, id_product, bom_unit_price, storage_product_qty, storage_product_datetime, storage_product_notes,report_mark_type,id_report,id_stock_status)
+SELECT b.`id_wh_drawer`,'1',b.`id_product`,b.`adj_in_fg_det_price`,b.`adj_in_fg_det_qty`,NOW(),CONCAT('Completed, Adjustment In : ',a.`adj_in_fg_number`) AS note,'41',a.`id_adj_in_fg`,'1'
+FROM tb_adj_in_fg a 
+INNER JOIN tb_adj_in_fg_det b ON a.id_adj_in_fg = b.id_adj_in_fg 
+WHERE a.id_adj_in_fg = '" & id_report & "'"
+                execute_non_query(q, True, "", "", "", "")
             End If
 
             query = String.Format("UPDATE tb_adj_in_fg SET id_report_status='{0}' WHERE id_adj_in_fg = '{1}'", id_status_reportx, id_report)

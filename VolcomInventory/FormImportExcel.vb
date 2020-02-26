@@ -2946,22 +2946,31 @@ Public Class FormImportExcel
             End Try
         ElseIf id_pop_up = "47" Then 'adj inn
             'vendor code 
-            Dim queryx As String = "SELECT id_product,product_full_code,product_name FROM tb_m_product"
+            Dim queryx As String = "SELECT p.id_product,p.product_full_code,p.product_name,dsg.design_cop FROM tb_m_product p INNER JOIN tb_m_design dsg ON dsg.id_design=p.id_design WHERE dsg.`id_lookup_status_order`!='2'"
             Dim dt As DataTable = execute_query(queryx, -1, True, "", "", "", "")
             Dim tb1 = data_temp.AsEnumerable()
             Dim tb2 = dt.AsEnumerable()
 
             Dim query = From table1 In tb1
-                        Group Join table_tmp In tb2 On table1("pr_code").ToString Equals table_tmp("product_full_code").ToString
+                        Group Join table_tmp In tb2 On table1("product_code").ToString Equals table_tmp("product_full_code").ToString
                             Into Group
                         From y1 In Group.DefaultIfEmpty()
                         Select New With
                             {
-                                .IdProduct = If(y1 Is Nothing, "0", y1("id_product")),
-                                .Code = If(y1 Is Nothing, "0", y1("product_full_code")),
-                                .Description = If(y1 Is Nothing, "0", y1("product_name")),
-                                .Color = table1("pr_colnm"),
-                                .UPC = table1("pr_upc")
+                                .id_product = If(y1 Is Nothing, "0", y1("id_product")),
+                                .code = If(y1 Is Nothing, "0", y1("product_full_code")),
+                                .name = If(y1 Is Nothing, "0", y1("product_name")),
+                                .qty = table1("qty"),
+                                .design_cop = If(y1 Is Nothing, "0", y1("design_cop")),
+                                .id_comp = FormFGAdjInDet.id_comp,
+                                .comp = FormFGAdjInDet.comp_name,
+                                .id_locator = FormFGAdjInDet.id_locator,
+                                .locator = FormFGAdjInDet.locator_name,
+                                .id_rack = FormFGAdjInDet.id_rack,
+                                .rack = FormFGAdjInDet.rack_name,
+                                .id_drawer = FormFGAdjInDet.id_drawer,
+                                .drawer = FormFGAdjInDet.drawer_name,
+                                .note = table1("note")
                             }
 
             GCData.DataSource = Nothing
@@ -2970,7 +2979,25 @@ Public Class FormImportExcel
             GVData.PopulateColumns()
 
             'Customize column
-            GVData.Columns("IdProduct").Visible = False
+            GVData.Columns("id_product").Visible = False
+            GVData.Columns("id_comp").Visible = False
+            GVData.Columns("id_locator").Visible = False
+            GVData.Columns("id_rack").Visible = False
+            GVData.Columns("id_drawer").Visible = False
+
+            GVData.Columns("code").Caption = "Code"
+            GVData.Columns("name").Caption = "Description"
+            GVData.Columns("qty").Caption = "Qty"
+            GVData.Columns("design_cop").Caption = "Cost"
+            GVData.Columns("comp").Caption = "Warehouse"
+            GVData.Columns("locator").Caption = "Locator"
+            GVData.Columns("rack").Caption = "Rack"
+            GVData.Columns("drawer").Caption = "Drawer"
+
+            GVData.Columns("qty").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+            GVData.Columns("qty").DisplayFormat.FormatString = "N0"
+            GVData.Columns("design_cop").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+            GVData.Columns("design_cop").DisplayFormat.FormatString = "N2"
         End If
         data_temp.Dispose()
         oledbconn.Close()
@@ -5051,7 +5078,7 @@ Public Class FormImportExcel
                     Close()
                 End If
             ElseIf id_pop_up = "47" Then 'adj inn
-                Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure want to import this " & GVData.RowCount.ToString & " data ? Only 'OK' data will updated.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+                Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure want to import this " & GVData.RowCount.ToString & " data ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
                 If confirm = Windows.Forms.DialogResult.Yes Then
                     makeSafeGV(GVData)
                     PBC.Properties.Minimum = 0
@@ -5063,23 +5090,23 @@ Public Class FormImportExcel
                         If Not GVData.GetRowCellValue(i, "id_product").ToString = "0" Then
                             Dim R As DataRow = (TryCast(FormFGAdjInDet.GCDetail.DataSource, DataTable)).NewRow()
                             R("id_product") = GVData.GetRowCellValue(i, "id_product").ToString
-                            R("name") = GVData.GetRowCellValue(i, "design_display_name").ToString
-                            R("size") = GVData.GetRowCellValue(i, "size").ToString
-                            R("uom") = GVData.GetRowCellValue(i, "uom").ToString
+                            R("name") = GVData.GetRowCellValue(i, "name").ToString
+                            R("size") = ""
+                            R("uom") = "pcs"
                             R("code") = GVData.GetRowCellValue(i, "code").ToString
                             R("adj_in_fg_det_qty") = Decimal.Parse(GVData.GetRowCellValue(i, "qty").ToString)
                             R("adj_in_fg_det_price") = Decimal.Parse(GVData.GetRowCellValue(i, "design_cop").ToString)
                             R("adj_in_fg_det_amount") = Decimal.Parse(GVData.GetRowCellValue(i, "qty").ToString) * Decimal.Parse(GVData.GetRowCellValue(i, "design_cop").ToString)
                             R("adj_in_fg_det_note") = GVData.GetRowCellValue(i, "note").ToString
-                            R("id_wh_drawer") = GVData.GetRowCellValue(i, "id_wh_drawer").ToString
-                            R("id_wh_rack") = GVData.GetRowCellValue(i, "id_wh_rack").ToString
-                            R("id_wh_locator") = GVData.GetRowCellValue(i, "id_wh_locator").ToString
+                            R("id_wh_drawer") = GVData.GetRowCellValue(i, "id_drawer").ToString
+                            R("id_wh_rack") = GVData.GetRowCellValue(i, "id_rack").ToString
+                            R("id_wh_locator") = GVData.GetRowCellValue(i, "id_locator").ToString
                             R("id_comp") = GVData.GetRowCellValue(i, "id_comp").ToString
                             R("comp") = GVData.GetRowCellValue(i, "comp").ToString
-                            R("wh_drawer") = GVData.GetRowCellValue(i, "wh_drawer").ToString
-                            R("wh_rack") = GVData.GetRowCellValue(i, "wh_rack").ToString
-                            R("wh_locator") = GVData.GetRowCellValue(i, "wh_locator").ToString
-                            R("comp_name") = GVData.GetRowCellValue(i, "comp_name").ToString
+                            R("wh_drawer") = GVData.GetRowCellValue(i, "drawer").ToString
+                            R("wh_rack") = GVData.GetRowCellValue(i, "rack").ToString
+                            R("wh_locator") = GVData.GetRowCellValue(i, "locator").ToString
+                            R("comp_name") = GVData.GetRowCellValue(i, "comp").ToString
                             TryCast(FormFGAdjInDet.GCDetail.DataSource, DataTable).Rows.Add(R)
                             FormFGAdjInDet.GCDetail.RefreshDataSource()
                             FormFGAdjInDet.GVDetail.RefreshData()

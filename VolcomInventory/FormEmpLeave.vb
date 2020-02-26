@@ -7,6 +7,7 @@
     '
     Public is_hrd As String = "-1"
     Public is_single_user As Boolean = False
+    Public is_departement_sub As Boolean = False
     Private Sub FormEmpLeave_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         DEStart.EditValue = Now
         DEUntil.EditValue = Now
@@ -70,6 +71,9 @@
         If is_single_user Then
             query += " AND empl.id_emp=" + id_employee_user
         End If
+        If is_departement_sub Then
+            query += " AND emp.id_departement_sub IN (SELECT id_departement_sub_map FROM tb_emp_leave_mapping WHERE id_departement_sub = " + id_departement_sub_user + ") "
+        End If
         Dim data As DataTable = execute_query(query, "-1", True, "", "", "", "")
         GCLeave.DataSource = data
         GVLeave.BestFitColumns()
@@ -97,6 +101,9 @@
         End If
         If is_single_user Then
             query += " AND empl.id_emp=" + id_employee_user
+        End If
+        If is_departement_sub Then
+            query += " AND emp.id_departement_sub IN (SELECT id_departement_sub_map FROM tb_emp_leave_mapping WHERE id_departement_sub = " + id_departement_sub_user + ") "
         End If
         Dim data As DataTable = execute_query(query, "-1", True, "", "", "", "")
         GCLeave.DataSource = data

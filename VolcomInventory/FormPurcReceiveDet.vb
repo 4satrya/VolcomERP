@@ -148,7 +148,7 @@ WHERE pn.`id_report_status`!=6 AND pn.`id_report_status`!=5 AND pnd.`report_mark
                     End If
                 Next
             Next
-            'makeSafeGV(GVDetail)
+            makeSafeGV(GVDetail)
             GVDetail.BestFitColumns()
         ElseIf action = "upd" Then
             query = "SELECT rd.id_purc_order_det,req.purc_req_number,d.departement, 

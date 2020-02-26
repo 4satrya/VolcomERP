@@ -395,11 +395,16 @@
                 WHERE del.id_pl_sales_order_del='" + id_report + "' "
                 Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
                 If data.Rows.Count > 0 Then
-                    Dim em As New ClassSendEmail
-                    em.report_mark_type = "43_confirm"
-                    em.id_report = id_report
-                    em.dt = data
-                    em.send_email()
+                    Try
+                        Dim em As New ClassSendEmail
+                        em.report_mark_type = "43_confirm"
+                        em.id_report = id_report
+                        em.dt = data
+                        em.send_email()
+                    Catch ex As Exception
+                        Dim qerr As String = "INSERT INTO tb_error_mail(date,description, note_penyelesaian) VALUES(NOW(), 'Failed send delivery confirmation; id del:" + id_report + "; error:" + addSlashes(ex.ToString) + "', ''); "
+                        execute_non_query(qerr, True, "", "", "", "")
+                    End Try
                 End If
             End If
         End If

@@ -707,6 +707,7 @@ Public Class FormSalesOrderDet
     Private Sub SimpleButton2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnBrowseWH.Click
         Cursor = Cursors.WaitCursor
         FormPopUpContact.id_pop_up = "62"
+        FormPopUpContact.is_must_active = "1"
         FormPopUpContact.id_cat = id_comp_cat_wh
         FormPopUpContact.ShowDialog()
         Cursor = Cursors.Default
@@ -834,7 +835,7 @@ Public Class FormSalesOrderDet
 
     Private Sub TxtWHCodeTo_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtWHCodeTo.KeyDown
         If e.KeyCode = Keys.Enter Then
-            Dim data As DataTable = get_company_by_code(TxtWHCodeTo.Text, "AND id_comp_cat = '" + id_comp_cat_wh + "' ")
+            Dim data As DataTable = get_company_by_code(TxtWHCodeTo.Text, "AND id_comp_cat = '" + id_comp_cat_wh + "' AND comp.is_active=1 ")
             If data.Rows.Count = 0 Then
                 stopCustom("Warehouse not found!")
                 viewDetail("-1")

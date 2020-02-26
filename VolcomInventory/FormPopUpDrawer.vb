@@ -195,10 +195,10 @@
                 FormFGAdjInDet.drawer_name = SLEDrawer.Text
 
                 FormFGAdjInDet.id_locator = SLELocator.EditValue.ToString
-                FormFGAdjInDet.locator_name = SLELocator.EditValue.ToString
+                FormFGAdjInDet.locator_name = SLELocator.Text
 
                 FormFGAdjInDet.id_rack = SLERack.EditValue.ToString
-                FormFGAdjInDet.rack_name = SLELocator.EditValue.ToString
+                FormFGAdjInDet.rack_name = SLELocator.Text
 
                 FormImportExcel.id_pop_up = "47"
                 FormImportExcel.ShowDialog()

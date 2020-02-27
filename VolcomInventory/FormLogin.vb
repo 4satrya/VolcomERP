@@ -45,28 +45,30 @@ Public Class FormLogin
 
                     'log + season
                     Dim u As New ClassUser()
-                    u.logLogin("1")
+                    If u.logLogin("1") Then
+                        Close()
+                        FormMain.Visible = True
+                        FormMain.Opacity = 100
+                        'FormMain.Badge1.Visible = True
+                        FormMain.BringToFront()
+                        FormMain.Focus()
 
-                    Close()
-                    FormMain.Visible = True
-                    FormMain.Opacity = 100
-                    'FormMain.Badge1.Visible = True
-                    FormMain.BringToFront()
-                    FormMain.Focus()
+                        FormMain.checkNumberNotif()
+                        Dim interval As Integer = Integer.Parse(get_setup_field("load_notif").ToString)
+                        FormMain.TimerNotif.Interval = interval
+                        If show_notif = "1" Then
+                            FormMain.TimerNotif.Enabled = True
+                        Else
+                            FormMain.TimerNotif.Enabled = False
+                        End If
 
-                    FormMain.checkNumberNotif()
-                    Dim interval As Integer = Integer.Parse(get_setup_field("load_notif").ToString)
-                    FormMain.TimerNotif.Interval = interval
-                    If show_notif = "1" Then
-                        FormMain.TimerNotif.Enabled = True
+                        FormMain.LoginToolStripMenuItem.Visible = False
+                        FormMain.LogoutToolStripMenuItem.Visible = True
+                        FormMain.DashboardToolStripMenuItem.Visible = True
+                        FormMain.checkChangePass()
                     Else
-                        FormMain.TimerNotif.Enabled = False
+                        FormMain.logOutCmd()
                     End If
-
-                    FormMain.LoginToolStripMenuItem.Visible = False
-                    FormMain.LogoutToolStripMenuItem.Visible = True
-                    FormMain.DashboardToolStripMenuItem.Visible = True
-                    FormMain.checkChangePass()
                 Else
                     XtraMessageBox.Show("Login failure, please check your input !", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If

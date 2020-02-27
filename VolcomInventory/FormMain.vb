@@ -226,84 +226,88 @@ Public Class FormMain
     End Sub
     'Show Ribbon
     Sub show_rb(ByVal formnamex As String)
-        formName = formnamex
-        RPSubMenu.Visible = True
-        RibbonControl.SelectedPage = RPSubMenu
+        If Not check_login_session() Then
+            logOutCmd()
+        Else
+            formName = formnamex
+            RPSubMenu.Visible = True
+            RibbonControl.SelectedPage = RPSubMenu
 
-        'show contact
-        If formName = "FormMasterCompany" Then
-            BBContact.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
-        End If
+            'show contact
+            If formName = "FormMasterCompany" Then
+                BBContact.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
+            End If
 
-        'show mapping
-        If formName = "FormAccess" Or formName = "FormMarkAssign" Then
-            BBMapping.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
-        End If
+            'show mapping
+            If formName = "FormAccess" Or formName = "FormMarkAssign" Then
+                BBMapping.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
+            End If
 
-        'show duplicate
-        If formName = "FormAccess" Or formName = "FormMasterSample" Or formName = "FormFGDesignList" Or formName = "FormProposeEmpSalary" Then
-            BBDuplicate.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
-        End If
+            'show duplicate
+            If formName = "FormAccess" Or formName = "FormMasterSample" Or formName = "FormFGDesignList" Or formName = "FormProposeEmpSalary" Then
+                BBDuplicate.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
+            End If
 
-        If formName = "FormMasterWH" Then
-            If FormMasterWH.XTCWHMain.SelectedTabPageIndex = 0 Then
-                BBNew.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
-                BBEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
-                BBDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
-            Else
+            If formName = "FormMasterWH" Then
+                If FormMasterWH.XTCWHMain.SelectedTabPageIndex = 0 Then
+                    BBNew.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
+                    BBEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
+                    BBDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
+                Else
+                    BBNew.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+                    BBEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+                    BBDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+                End If
+            End If
+
+            If formName = "FormAccountingFYear" Then
+                BBNew.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+                BBEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+                BBDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+
+                BBView.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
+            End If
+
+            If formName = "formemployeepps" Or formName = "FormEmpPerAppraisal" Or formName = "FormOpt" Or formName = "FormAccountingSummary" Or formName = "FormAccountingSummary" Or formName = "FormMasterDesignCOP" Or formName = "FormSalesOrderList" Or formName = "FormSalesOrderSvcLevel" Or formName = "FormWHImportDO" Or formName = "FormWHSvcLevel" Then
                 BBNew.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
                 BBEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
                 BBDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
             End If
-        End If
 
-        If formName = "FormAccountingFYear" Then
-            BBNew.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
-            BBEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
-            BBDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+            If formName = "FormFGStockOpnameStore" Or formName = "FormFGStockOpnameWH" Or formName = "FormMatStockOpname" Then
+                BBView.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
+            End If
 
-            BBView.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
-        End If
+            If formName = "FormFGTrfReceive" Or formName = "FormSOHPrice" Or formName = "FormMasterProduct" Then
+                BBNew.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+                BBDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+            End If
 
-        If formName = "formemployeepps" Or formName = "FormEmpPerAppraisal" Or formName = "FormOpt" Or formName = "FormAccountingSummary" Or formName = "FormAccountingSummary" Or formName = "FormMasterDesignCOP" Or formName = "FormSalesOrderList" Or formName = "FormSalesOrderSvcLevel" Or formName = "FormWHImportDO" Or formName = "FormWHSvcLevel" Then
-            BBNew.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
-            BBEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
-            BBDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
-        End If
+            If formName = "FormBarcodeProduct" Or formName = "FormReportBudget" Or formName = "FormInvMat" Or formName = "FormWork" Or formName = "FormSOHSum" Or formName = "FormPurcAsset" Or formName = "FormProductionWOList" Or formName = "FormFGDistScheme" Or formName = "FormFGLineList" Or formName = "FormFGTracking" Or formName = "FormFGStock" Or formName = "FormMatStock" Or formName = "FormSalesWeekly" Or formName = "FormFGWoffList" Or formName = "FormFGDistSchemaSetup" Or formName = "FormFGProdList" Or formName = "FormSamplePLExport" Or formName = "FormFGWHAllocLog" Or formName = "FormEmpReview" Or formName = "FormProductionSummary" Or formName = "FormWHDelEmptyStock" Or formName = "FormFGTransList" Or formName = "FormProdClosing" Or formName = "FormOLStoreSummary" Or formName = "FormFGAging" Or formName = "FormFGTransSummary" Or formName = "FormFGFirstDel" Or formName = "FormFGCompareStockCard" Or formName = "FormEmpUniReport" Or formName = "FormBudgetExpenseView" Or formName = "FormPurcItemStock" Or formName = "FormEmpUniSumReport" Or formName = "FormProductionHO" Or formName = "FormSalesOrderReport" Or formName = "FormSalesRecord" Or formName = "FormARAging" Or formName = "FormInvoiceTracking" Or formName = "FormAREvaluation" Or formName = "FormARCollectionAvg" Or formName = "FormDocTracking" Or formName = "FormSalesInv" Or formName = "FormLineList" Then
+                RGAreaManage.Visible = False
+            End If
 
-        If formName = "FormFGStockOpnameStore" Or formName = "FormFGStockOpnameWH" Or formName = "FormMatStockOpname" Then
-            BBView.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
-        End If
+            If formName = "FormSampleStock" Then
+                BBNew.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+                BBDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+                BBEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+                BBRefresh.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+                BBSwitch.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
+            End If
 
-        If formName = "FormFGTrfReceive" Or formName = "FormSOHPrice" Or formName = "FormMasterProduct" Then
-            BBNew.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
-            BBDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
-        End If
+            If formName = "FormAccountingJournal" Then
+                BBDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+                BBRefresh.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+            End If
 
-        If formName = "FormBarcodeProduct" Or formName = "FormReportBudget" Or formName = "FormInvMat" Or formName = "FormWork" Or formName = "FormSOHSum" Or formName = "FormPurcAsset" Or formName = "FormProductionWOList" Or formName = "FormFGDistScheme" Or formName = "FormFGLineList" Or formName = "FormFGTracking" Or formName = "FormFGStock" Or formName = "FormMatStock" Or formName = "FormSalesWeekly" Or formName = "FormFGWoffList" Or formName = "FormFGDistSchemaSetup" Or formName = "FormFGProdList" Or formName = "FormSamplePLExport" Or formName = "FormFGWHAllocLog" Or formName = "FormEmpReview" Or formName = "FormProductionSummary" Or formName = "FormWHDelEmptyStock" Or formName = "FormFGTransList" Or formName = "FormProdClosing" Or formName = "FormOLStoreSummary" Or formName = "FormFGAging" Or formName = "FormFGTransSummary" Or formName = "FormFGFirstDel" Or formName = "FormFGCompareStockCard" Or formName = "FormEmpUniReport" Or formName = "FormBudgetExpenseView" Or formName = "FormPurcItemStock" Or formName = "FormEmpUniSumReport" Or formName = "FormProductionHO" Or formName = "FormSalesOrderReport" Or formName = "FormSalesRecord" Or formName = "FormARAging" Or formName = "FormInvoiceTracking" Or formName = "FormAREvaluation" Or formName = "FormARCollectionAvg" Or formName = "FormDocTracking" Or formName = "FormSalesInv" Or formName = "FormLineList" Then
-            RGAreaManage.Visible = False
-        End If
+            If formName = "FormGuide" Or formName = "FormNotification" Then
+                RGAreaManage.Visible = False
+                RGAreaPrint.Visible = False
+            End If
 
-        If formName = "FormSampleStock" Then
-            BBNew.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
-            BBDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
-            BBEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
-            BBRefresh.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
-            BBSwitch.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
-        End If
-
-        If formName = "FormAccountingJournal" Then
-            BBDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
-            BBRefresh.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
-        End If
-
-        If formName = "FormGuide" Or formName = "FormNotification" Then
-            RGAreaManage.Visible = False
-            RGAreaPrint.Visible = False
-        End If
-
-        If formName = "FormEmpLeave" Then
-            BBDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+            If formName = "FormEmpLeave" Then
+                BBDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+            End If
         End If
     End Sub
     'Hide Ribbon
@@ -504,7 +508,6 @@ Public Class FormMain
             TimerNotif.Enabled = False
             Badge1.Visible = False
             Opacity = 0
-
 
             'close all notif
             Dim array = AlertControlNotif.AlertFormList.ToArray()

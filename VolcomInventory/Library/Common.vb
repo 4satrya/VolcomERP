@@ -23,16 +23,32 @@ Module Common
     Public emp_image_path As String = ""
     Public is_change_pass_user As String = ""
     Public again_awb As String = ""
-    Public id_login_season As String = ""
+    Public id_login_session As String = ""
 
-    Sub check_login_season()
-        Dim q As String = "SELECT is_season_over FROM tb_log_login WHERE id_season='" & id_login_season & "'"
+    Function check_login_session()
+        'check multiple login
+        Dim q As String = "SELECT is_season_over FROM tb_log_login WHERE id_user='" & id_user & "' AND is_season_over='2' AND NOT id_season='" & id_login_session & "'"
         Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
         If dt.Rows.Count > 0 Then
-            If dt.Rows(0)("is_season_over").ToString = "1" Then
-                warningCustom("Multiple login detected, please login again.")
-                FormMain.logOutCmd()
+            warningCustom("Multiple login detected, system will log out other computer. Please login again.")
+            forcelogoutseason()
+            Return False
+        Else 'check if already logout
+            q = "SELECT * FROM tb_log_login WHERE id_user='" & id_user & "' AND is_season_over='1' AND id_season='" & id_login_session & "'"
+            dt = execute_query(q, -1, True, "", "", "", "")
+            If dt.Rows.Count > 0 Then
+                warningCustom("You are already logout, please login again.")
+                Return False
+            Else
+                Return True
             End If
+        End If
+    End Function
+
+    Sub forcelogoutseason()
+        If get_setup_field("is_enable_season") = "1" Then
+            Dim q As String = "UPDATE tb_log_login SET is_season_over='1' WHERE id_user='" & id_user & "' AND is_season_over='2'"
+            execute_non_query(q, True, "", "", "", "")
         End If
     End Sub
 

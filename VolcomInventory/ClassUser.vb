@@ -2,7 +2,8 @@
 Imports System.Reflection
 
 Public Class ClassUser
-    Sub logLogin(ByVal type As String)
+    Function logLogin(ByVal type As String)
+        Dim sts As Boolean = True
         'type 1=login; 2=logout
         Dim id_season_temp As String = ""
         Dim season_over As String = "2"
@@ -20,33 +21,24 @@ Public Class ClassUser
             id_season_temp = execute_query(query, 0, True, "", "", "", "")
             '
             If type = "1" Then
-                id_login_season = id_season_temp
-                checkSeasonLogin()
+                id_login_session = id_season_temp
+                sts = check_login_session()
             ElseIf type = "2" Then
                 checkSeasonLogout()
             End If
         End If
-    End Sub
 
-    Sub checkSeasonLogin()
-        If get_setup_field("is_enable_season") = "1" Then 'login
-            'check user already login or not
-            Dim q As String = "SELECT * FROM tb_log_login WHERE id_user='" & id_user & "' AND is_season_over='2' AND id_season!='" & id_login_season & "'"
-            Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
-            If dt.Rows.Count > 0 Then
-                q = "UPDATE tb_log_login SET is_season_over='1' WHERE id_user='" & id_user & "' AND is_season_over='2' AND id_season!='" & id_login_season & "'"
-                execute_non_query(q, True, "", "", "", "")
-            End If
-        End If
-    End Sub
+        Return sts
+    End Function
 
     Sub checkSeasonLogout()
         If get_setup_field("is_enable_season") = "1" Then 'logout
-            'check user already login or not
-            Dim q As String = "UPDATE tb_log_login  SET is_season_over='1' WHERE id_user='" & id_user & "' AND is_season_over='2' AND id_season='" & id_login_season & "'"
+            Dim q As String = "UPDATE tb_log_login SET is_season_over='1' WHERE id_user='" & id_user & "' AND is_season_over='2' AND id_season='" & id_login_session & "'"
             execute_non_query(q, True, "", "", "", "")
         End If
     End Sub
+
+
 
     Private Function GetIPv4Address() As String
         GetIPv4Address = String.Empty

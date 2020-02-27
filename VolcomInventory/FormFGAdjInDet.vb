@@ -347,6 +347,7 @@
 
     Private Sub BImport_Click(sender As Object, e As EventArgs) Handles BImport.Click
         'import excel
+        FormPopUpDrawer.include_all = False
         FormPopUpDrawer.id_pop_up = "7"
         FormPopUpDrawer.ShowDialog()
     End Sub

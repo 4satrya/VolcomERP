@@ -74,6 +74,7 @@ Partial Class FormFGAdjOutDet
         Me.BMark = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnSave = New DevExpress.XtraEditors.SimpleButton()
         Me.EPAdj = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.BtnImportExcel = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
         CType(Me.LECurrency.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -460,6 +461,7 @@ Partial Class FormFGAdjOutDet
         Me.PCEdit.Appearance.BackColor = System.Drawing.Color.Transparent
         Me.PCEdit.Appearance.Options.UseBackColor = True
         Me.PCEdit.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PCEdit.Controls.Add(Me.BtnImportExcel)
         Me.PCEdit.Controls.Add(Me.BtnDel)
         Me.PCEdit.Controls.Add(Me.BtnEdit)
         Me.PCEdit.Controls.Add(Me.BtnAdd)
@@ -649,6 +651,17 @@ Partial Class FormFGAdjOutDet
         '
         Me.EPAdj.ContainerControl = Me
         '
+        'BtnImportExcel
+        '
+        Me.BtnImportExcel.Dock = System.Windows.Forms.DockStyle.Left
+        Me.BtnImportExcel.Image = CType(resources.GetObject("BtnImportExcel.Image"), System.Drawing.Image)
+        Me.BtnImportExcel.ImageIndex = 1
+        Me.BtnImportExcel.Location = New System.Drawing.Point(0, 0)
+        Me.BtnImportExcel.Name = "BtnImportExcel"
+        Me.BtnImportExcel.Size = New System.Drawing.Size(127, 38)
+        Me.BtnImportExcel.TabIndex = 20
+        Me.BtnImportExcel.Text = "Import Excel"
+        '
         'FormFGAdjOutDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -747,4 +760,5 @@ Partial Class FormFGAdjOutDet
     Public WithEvents LargeImageCollection As DevExpress.Utils.ImageCollection
     Friend WithEvents EPAdj As System.Windows.Forms.ErrorProvider
     Friend WithEvents GridColumnAccount As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BtnImportExcel As DevExpress.XtraEditors.SimpleButton
 End Class

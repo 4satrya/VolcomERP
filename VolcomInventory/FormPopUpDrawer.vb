@@ -1,6 +1,7 @@
 ﻿Public Class FormPopUpDrawer
     Public id_comp As String = "-1"
     Public id_pop_up As String = "-1"
+    Public include_all As Boolean = True
 
     Private Sub FormPopUpDrawer_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         viewWHStockFG()
@@ -24,7 +25,10 @@
         End Try
 
         Dim query As String = ""
-        query += "SELECT ('0') AS id_comp, ('0') AS id_wh_locator, ('-') AS wh_locator_code, ('All Loactor') AS wh_locator, ('-') AS wh_locator_description UNION ALL "
+        If include_all Then
+            query += "SELECT ('0') AS id_comp, ('0') AS id_wh_locator, ('-') AS wh_locator_code, ('All Loactor') AS wh_locator, ('-') AS wh_locator_description UNION ALL "
+        End If
+
         query += "SELECT a.id_comp, a.id_wh_locator, a.wh_locator_code, a.wh_locator, a.wh_locator_description FROM tb_m_wh_locator a WHERE a.id_comp = '" + id_comp + "' "
         viewSearchLookupQuery(SLELocator, query, "id_wh_locator", "wh_locator_code", "id_wh_locator")
     End Sub
@@ -36,7 +40,10 @@
         Catch ex As Exception
         End Try
 
-        Dim query As String = "SELECT ('0') AS id_locator, ('0') AS id_wh_rack, ('-') AS wh_rack_code, ('All Rack') AS wh_rack, ('-') AS wh_rack_description UNION ALL "
+        Dim query As String = ""
+        If include_all Then
+            query = "SELECT ('0') AS id_locator, ('0') AS id_wh_rack, ('-') AS wh_rack_code, ('All Rack') AS wh_rack, ('-') AS wh_rack_description UNION ALL "
+        End If
         query += "SELECT a.id_wh_locator, a.id_wh_rack, a.wh_rack_code, a.wh_rack, a.wh_rack_description FROM tb_m_wh_rack a WHERE a.id_wh_locator = '" + id_locator + "' "
         viewSearchLookupQuery(SLERack, query, "id_wh_rack", "wh_rack_code", "id_wh_rack")
     End Sub
@@ -48,7 +55,10 @@
         Catch ex As Exception
         End Try
 
-        Dim query As String = "SELECT ('0') AS id_rack, ('0') AS id_wh_drawer, ('-') AS wh_drawer_code, ('All Drawer') AS wh_drawer, ('-') AS wh_drawer_description UNION ALL "
+        Dim query As String = ""
+        If include_all Then
+            query = "SELECT ('0') AS id_rack, ('0') AS id_wh_drawer, ('-') AS wh_drawer_code, ('All Drawer') AS wh_drawer, ('-') AS wh_drawer_description UNION ALL "
+        End If
         query += "SELECT a.id_wh_rack, a.id_wh_drawer, a.wh_drawer_code, a.wh_drawer, a.wh_drawer_description FROM tb_m_wh_drawer a WHERE a.id_wh_rack = '" + id_rack + "'"
         viewSearchLookupQuery(SLEDrawer, query, "id_wh_drawer", "wh_drawer_code", "id_wh_drawer")
     End Sub
@@ -198,9 +208,37 @@
                 FormFGAdjInDet.locator_name = SLELocator.Text
 
                 FormFGAdjInDet.id_rack = SLERack.EditValue.ToString
-                FormFGAdjInDet.rack_name = SLELocator.Text
+                FormFGAdjInDet.rack_name = SLERack.Text
 
                 FormImportExcel.id_pop_up = "47"
+                FormImportExcel.ShowDialog()
+                Close()
+            End If
+        ElseIf id_pop_up = "8" Then 'adj out import
+            Dim val_cek As String = "-1"
+            Try
+                val_cek = SLEDrawer.EditValue.ToString
+                If val_cek = "" Or val_cek = "0" Then
+                    val_cek = "-1"
+                End If
+            Catch ex As Exception
+            End Try
+            If val_cek = "-1" Then
+                stopCustom("Please choose the drawer first.")
+            Else
+                FormFGAdjOutDet.comp_name = SLEWH.Text
+                FormFGAdjOutDet.id_comp = SLEWH.EditValue.ToString
+
+                FormFGAdjOutDet.id_drawer = SLEDrawer.EditValue.ToString
+                FormFGAdjOutDet.drawer_name = SLEDrawer.Text
+
+                FormFGAdjOutDet.id_locator = SLELocator.EditValue.ToString
+                FormFGAdjOutDet.locator_name = SLELocator.Text
+
+                FormFGAdjOutDet.id_rack = SLERack.EditValue.ToString
+                FormFGAdjOutDet.rack_name = SLERack.Text
+
+                FormImportExcel.id_pop_up = "48"
                 FormImportExcel.ShowDialog()
                 Close()
             End If

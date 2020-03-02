@@ -4559,6 +4559,24 @@ WHERE a.id_adj_in_fg = '" & id_report & "'"
             'auto completed
             If id_status_reportx = "3" Then
                 id_status_reportx = "6"
+            ElseIf id_status_reportx = "5" Then
+                'balik budget
+                If report_mark_type = "139" Then 'opex
+                    query = "INSERT INTO `tb_b_expense_opex_trans`(id_b_expense_opex,id_departement,date_trans,`value`,id_item,id_report,report_mark_type,note) 
+                                SELECT prd.id_b_expense_opex,pr.id_departement,NOW(),-(pod.`value` * pod.qty),prd.id_item,pod.`id_purc_order` AS id_report,'202' AS report_mark_type,'Purchase Order'
+                                FROM `tb_purc_order_det` pod
+                                INNER JOIN `tb_purc_req_det` prd ON prd.`id_purc_req_det`=pod.`id_purc_req_det`
+                                INNER JOIN tb_purc_req pr ON pr.id_purc_req=prd.id_purc_req
+                                WHERE pod.`id_purc_order`='" & id_report & "'"
+                Else 'capex
+                    query = "INSERT INTO `tb_b_expense_trans`(id_b_expense,id_departement,date_trans,`value`,id_item,id_report,report_mark_type,note) 
+                                SELECT prd.id_b_expense,pr.id_departement,NOW(),-(pod.`value` * pod.qty),prd.id_item,pod.`id_purc_order` AS id_report,'139' AS report_mark_type,'Purchase Order'
+                                FROM `tb_purc_order_det` pod
+                                INNER JOIN `tb_purc_req_det` prd ON prd.`id_purc_req_det`=pod.`id_purc_req_det`
+                                INNER JOIN tb_purc_req pr ON pr.id_purc_req=prd.id_purc_req
+                                WHERE pod.`id_purc_order`='" & id_report & "'"
+                End If
+                query = String.Format("INSERT tb_purc_order SET id_report_status='{0}' WHERE id_purc_order ='{1}'", id_status_reportx, id_report)
             End If
 
             'update status

@@ -23,8 +23,9 @@ Partial Class FormProductionWO
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormProductionWO))
         Me.EPMatWO = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.GroupControl3 = New DevExpress.XtraEditors.GroupControl()
-        Me.BReviseWO = New DevExpress.XtraEditors.SimpleButton()
+        Me.BMark = New DevExpress.XtraEditors.SimpleButton()
         Me.ImgBut = New DevExpress.Utils.ImageCollection(Me.components)
+        Me.BReviseWO = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnAttachment = New DevExpress.XtraEditors.SimpleButton()
         Me.BPrint = New DevExpress.XtraEditors.SimpleButton()
         Me.BCancel = New DevExpress.XtraEditors.SimpleButton()
@@ -112,7 +113,6 @@ Partial Class FormProductionWO
         Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
         Me.TEWONumber = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
-        Me.BMark = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.EPMatWO, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl3.SuspendLayout()
@@ -185,16 +185,16 @@ Partial Class FormProductionWO
         Me.GroupControl3.Size = New System.Drawing.Size(909, 41)
         Me.GroupControl3.TabIndex = 56
         '
-        'BReviseWO
+        'BMark
         '
-        Me.BReviseWO.Dock = System.Windows.Forms.DockStyle.Left
-        Me.BReviseWO.ImageIndex = 3
-        Me.BReviseWO.ImageList = Me.ImgBut
-        Me.BReviseWO.Location = New System.Drawing.Point(20, 2)
-        Me.BReviseWO.Name = "BReviseWO"
-        Me.BReviseWO.Size = New System.Drawing.Size(92, 37)
-        Me.BReviseWO.TabIndex = 17
-        Me.BReviseWO.Text = "Revise"
+        Me.BMark.Dock = System.Windows.Forms.DockStyle.Left
+        Me.BMark.ImageIndex = 4
+        Me.BMark.ImageList = Me.ImgBut
+        Me.BMark.Location = New System.Drawing.Point(112, 2)
+        Me.BMark.Name = "BMark"
+        Me.BMark.Size = New System.Drawing.Size(75, 37)
+        Me.BMark.TabIndex = 18
+        Me.BMark.Text = "Mark"
         '
         'ImgBut
         '
@@ -212,6 +212,17 @@ Partial Class FormProductionWO
         Me.ImgBut.Images.SetKeyName(9, "18_24x24.png")
         Me.ImgBut.Images.SetKeyName(10, "attachment-icon.png")
         Me.ImgBut.Images.SetKeyName(11, "document_32.png")
+        '
+        'BReviseWO
+        '
+        Me.BReviseWO.Dock = System.Windows.Forms.DockStyle.Left
+        Me.BReviseWO.ImageIndex = 3
+        Me.BReviseWO.ImageList = Me.ImgBut
+        Me.BReviseWO.Location = New System.Drawing.Point(20, 2)
+        Me.BReviseWO.Name = "BReviseWO"
+        Me.BReviseWO.Size = New System.Drawing.Size(92, 37)
+        Me.BReviseWO.TabIndex = 17
+        Me.BReviseWO.Text = "Revise"
         '
         'BtnAttachment
         '
@@ -824,6 +835,7 @@ Partial Class FormProductionWO
         Me.CheckEditMainVendor.Properties.Caption = "Set as main vendor"
         Me.CheckEditMainVendor.Size = New System.Drawing.Size(115, 19)
         Me.CheckEditMainVendor.TabIndex = 169
+        Me.CheckEditMainVendor.Visible = False
         '
         'LabelControl16
         '
@@ -1177,17 +1189,6 @@ Partial Class FormProductionWO
         Me.LabelControl3.Size = New System.Drawing.Size(58, 13)
         Me.LabelControl3.TabIndex = 86
         Me.LabelControl3.Text = "WO Number"
-        '
-        'BMark
-        '
-        Me.BMark.Dock = System.Windows.Forms.DockStyle.Left
-        Me.BMark.ImageIndex = 4
-        Me.BMark.ImageList = Me.ImgBut
-        Me.BMark.Location = New System.Drawing.Point(112, 2)
-        Me.BMark.Name = "BMark"
-        Me.BMark.Size = New System.Drawing.Size(75, 37)
-        Me.BMark.TabIndex = 18
-        Me.BMark.Text = "Mark"
         '
         'FormProductionWO
         '

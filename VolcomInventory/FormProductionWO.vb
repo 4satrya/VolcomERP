@@ -261,9 +261,9 @@
         Dim id_currency, err_txt, query, ovh_type, wo_number, lead_time, top, payment_type, notex, vat, id_wo_new, del_date As String
         err_txt = "-1"
         Dim kurs As Decimal = 0.0
-        Dim is_main_vendor As String = CheckEditMainVendor.EditValue.ToString
+        Dim is_main_vendor As String = "2"
 
-        If is_main_vendor = "True" Then
+        If CheckEditMainVendor.Checked = True Then
             is_main_vendor = "1"
         Else
             is_main_vendor = "2"
@@ -365,17 +365,6 @@
             End If
         End If
     End Sub
-
-    'Private Sub TEPONumber_Validating(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles TEWONumber.Validating
-    'Dim query_jml As String
-    '    query_jml = String.Format("SELECT COUNT(id_prod_order_wo) FROM tb_prod_order_wo WHERE prod_order_wo_number='{0}' AND id_prod_order_wo!='{1}'", TEWONumber.Text, id_wo)
-    'Dim jml As Integer = execute_query(query_jml, 0, True, "", "", "", "")
-    'If Not jml < 1 Then
-    '        EP_TE_already_used(EPMatWO, TEWONumber, "1")
-    'Else
-    '        EP_TE_cant_blank(EPMatWO, TEWONumber)
-    'End If
-    'End Sub
 
     Private Sub TELeadTime_EditValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TELeadTime.EditValueChanged
         If id_wo <> "-1" Then

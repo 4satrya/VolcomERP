@@ -42,6 +42,7 @@
         ,IFNULL(SUM(trx.`value`),0) AS val_used
         ,(op.`value_expense`-IFNULL(SUM(trx.`value`),0)) AS val_remaining
         ,(IFNULL(SUM(trx.`value`),0)/op.value_expense)*100 AS used_percent
+        ,0 AS id_departement
         FROM tb_b_expense_opex op
         LEFT JOIN tb_b_expense_opex_trans trx ON op.`id_b_expense_opex`=trx.`id_b_expense_opex` AND DATE(trx.date_trans) <= DATE('" & Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd") & "')
         LEFT JOIN tb_item_cat_main cm ON cm.`id_item_cat_main`=op.`id_item_cat_main`
@@ -57,6 +58,7 @@
         ,IFNULL(SUM(trx.`value`),0) AS val_used
         ,IFNULL((op.`value_expense`-SUM(trx.`value`)),0) AS val_remaining
         ,(IFNULL(SUM(trx.`value`),0)/op.value_expense)*100 AS used_percent
+        ,dep.id_departement AS id_departement
         FROM tb_b_expense op
         LEFT JOIN tb_b_expense_trans trx ON op.`id_b_expense`=trx.`id_b_expense` AND DATE(trx.date_trans) <= DATE('" & Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd") & "')
         LEFT JOIN tb_item_cat_main cm ON cm.`id_item_cat_main`=op.`id_item_cat_main`
@@ -189,8 +191,8 @@ GROUP BY `year`"
 
     Private Sub ViewDetailToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ViewDetailToolStripMenuItem.Click
         If GVItemCat.RowCount > 0 Then
-            Dim id_cat_main As String = GVItemCat.GetFocusedRowCellValue("id_item_cat_main").ToString
-            FormReportBudgetList.id_cat_main = id_cat_main
+            FormReportBudgetList.id_cat_main = GVItemCat.GetFocusedRowCellValue("id_item_cat_main").ToString
+            FormReportBudgetList.id_departement = GVItemCat.GetFocusedRowCellValue("id_departement").ToString
             FormReportBudgetList.date_time = Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd")
             FormReportBudgetList.year = LEYear.Text
             FormReportBudgetList.ShowDialog()

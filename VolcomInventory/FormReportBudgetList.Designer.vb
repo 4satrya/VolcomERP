@@ -19,6 +19,7 @@ Partial Class FormReportBudgetList
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.GCBudgetCard = New DevExpress.XtraGrid.GridControl()
         Me.GVBudgetCard = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -26,12 +27,17 @@ Partial Class FormReportBudgetList
         Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ViewReport = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ViewDetailToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.GCBudgetCard, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVBudgetCard, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ViewReport.SuspendLayout()
         Me.SuspendLayout()
         '
         'GCBudgetCard
         '
+        Me.GCBudgetCard.ContextMenuStrip = Me.ViewReport
         Me.GCBudgetCard.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GCBudgetCard.Location = New System.Drawing.Point(0, 0)
         Me.GCBudgetCard.MainView = Me.GVBudgetCard
@@ -42,9 +48,10 @@ Partial Class FormReportBudgetList
         '
         'GVBudgetCard
         '
-        Me.GVBudgetCard.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5})
+        Me.GVBudgetCard.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn6, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5})
         Me.GVBudgetCard.GridControl = Me.GCBudgetCard
         Me.GVBudgetCard.Name = "GVBudgetCard"
+        Me.GVBudgetCard.OptionsView.ShowFooter = True
         Me.GVBudgetCard.OptionsView.ShowGroupPanel = False
         '
         'GridColumn1
@@ -54,22 +61,29 @@ Partial Class FormReportBudgetList
         Me.GridColumn1.Name = "GridColumn1"
         Me.GridColumn1.Visible = True
         Me.GridColumn1.VisibleIndex = 0
+        Me.GridColumn1.Width = 544
         '
         'GridColumn2
         '
+        Me.GridColumn2.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn2.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn2.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn2.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GridColumn2.Caption = "Used Budget"
+        Me.GridColumn2.DisplayFormat.FormatString = "N2"
+        Me.GridColumn2.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn2.FieldName = "value"
         Me.GridColumn2.Name = "GridColumn2"
+        Me.GridColumn2.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "value", "{0:N2}")})
         Me.GridColumn2.Visible = True
-        Me.GridColumn2.VisibleIndex = 1
+        Me.GridColumn2.VisibleIndex = 2
+        Me.GridColumn2.Width = 842
         '
         'GridColumn3
         '
         Me.GridColumn3.Caption = "Remaining"
         Me.GridColumn3.FieldName = "remaining_budget"
         Me.GridColumn3.Name = "GridColumn3"
-        Me.GridColumn3.Visible = True
-        Me.GridColumn3.VisibleIndex = 2
         '
         'GridColumn4
         '
@@ -82,6 +96,27 @@ Partial Class FormReportBudgetList
         Me.GridColumn5.Caption = "Report Mark Type"
         Me.GridColumn5.FieldName = "report_mark_type"
         Me.GridColumn5.Name = "GridColumn5"
+        '
+        'GridColumn6
+        '
+        Me.GridColumn6.Caption = "Report Number"
+        Me.GridColumn6.FieldName = "report_number"
+        Me.GridColumn6.Name = "GridColumn6"
+        Me.GridColumn6.Visible = True
+        Me.GridColumn6.VisibleIndex = 1
+        Me.GridColumn6.Width = 246
+        '
+        'ViewReport
+        '
+        Me.ViewReport.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewDetailToolStripMenuItem})
+        Me.ViewReport.Name = "ContextMenuStripYM"
+        Me.ViewReport.Size = New System.Drawing.Size(153, 48)
+        '
+        'ViewDetailToolStripMenuItem
+        '
+        Me.ViewDetailToolStripMenuItem.Name = "ViewDetailToolStripMenuItem"
+        Me.ViewDetailToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ViewDetailToolStripMenuItem.Text = "View Report"
         '
         'FormReportBudgetList
         '
@@ -97,6 +132,7 @@ Partial Class FormReportBudgetList
         Me.Text = "Budget Card List"
         CType(Me.GCBudgetCard, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVBudgetCard, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ViewReport.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -108,4 +144,7 @@ Partial Class FormReportBudgetList
     Friend WithEvents GridColumn3 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ViewReport As ContextMenuStrip
+    Friend WithEvents ViewDetailToolStripMenuItem As ToolStripMenuItem
 End Class

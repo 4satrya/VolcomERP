@@ -1,6 +1,7 @@
 ﻿Public Class FormProposeEmpSalaryDet
     Public id_employee_sal_pps As String = "-1"
     Public is_duplicate As String = "-1"
+    Public id_employee_pps As String = "-1"
 
     Public Sub load_contract()
         Dim id_employee As List(Of String) = New List(Of String)
@@ -35,6 +36,89 @@
         permission_load()
 
         load_contract()
+
+        'from propose employee
+        If Not id_employee_pps = "-1" Then
+            SBInsertEmployee.Visible = False
+            SBRemoveEmployee.Visible = False
+
+            Dim query As String = "
+                SELECT pps.*, dep.departement, dep.total_workdays, lvl.employee_level, sts.employee_status, IF(pps.id_employee_active = 1, TIMESTAMPDIFF(MONTH, pps.employee_actual_join_date, DATE(NOW())), TIMESTAMPDIFF(MONTH, pps.employee_actual_join_date, pps.employee_last_date)) AS tmp_length_work, IF((SELECT tmp_length_work) < 12, CONCAT((SELECT tmp_length_work), ' month'), CONCAT(FLOOR((SELECT tmp_length_work) / 12), ' year')) AS length_work
+                FROM tb_employee_pps AS pps
+                LEFT JOIN tb_m_departement AS dep ON pps.id_departement = dep.id_departement
+                LEFT JOIN tb_lookup_employee_level AS lvl ON pps.id_employee_level = lvl.id_employee_level
+                LEFT JOIN tb_lookup_employee_status AS sts ON pps.id_employee_status = sts.id_employee_status
+                WHERE pps.id_employee_pps = " + id_employee_pps + "
+            "
+
+            Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+
+            DEEffectiveDate.EditValue = data.Rows(0)("start_period")
+            LUEType.EditValue = If(data.Rows(0)("id_employee_status").ToString = "3", "2", "1")
+
+            CType(GCEmployee.DataSource, DataTable).Rows.Add(
+                data.Rows(0)("id_employee").ToString,
+                data.Rows(0)("employee_code").ToString,
+                data.Rows(0)("employee_name").ToString,
+                data.Rows(0)("id_departement").ToString,
+                data.Rows(0)("departement").ToString,
+                data.Rows(0)("total_workdays").ToString,
+                data.Rows(0)("employee_position").ToString,
+                data.Rows(0)("tmp_length_work").ToString,
+                data.Rows(0)("length_work").ToString,
+                data.Rows(0)("id_employee_level").ToString,
+                data.Rows(0)("employee_level").ToString,
+                data.Rows(0)("id_employee_status").ToString,
+                data.Rows(0)("employee_status").ToString,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            )
+
+            'det.id_employee, 
+            'emp.employee_code, 
+            'emp.employee_name, 
+            'det.id_departement, 
+            'dp.departement, 
+            'dp.total_workdays, 
+            'det.employee_position, 
+            'IF(emp.id_employee_active = 1, TIMESTAMPDIFF(MONTH, emp.employee_actual_join_date, DATE(NOW())), TIMESTAMPDIFF(MONTH, emp.employee_actual_join_date, emp.employee_last_date)) AS tmp_length_work, 
+            'IF((SELECT tmp_length_work) < 12, CONCAT((SELECT tmp_length_work), ' month'), CONCAT(FLOOR((SELECT tmp_length_work) / 12), ' year')) AS length_work, 
+            'det.id_employee_level, 
+            'lv.employee_level, 
+            'det.id_employee_status, 
+            'sts.employee_status, 
+            'IFNULL(det.id_employee_salary, 0) AS id_employee_salary, 
+            'ROUND(IFNULL(sal.basic_salary, 0), 0) AS basic_salary_current, 
+            'ROUND(IFNULL(sal.allow_job, 0), 0) AS allow_job_current, 
+            'ROUND(IFNULL(sal.allow_meal, 0), 0) AS allow_meal_current, 
+            'ROUND(IFNULL(sal.allow_trans, 0), 0) AS allow_trans_current, 
+            'ROUND(IFNULL(sal.allow_house, 0), 0) AS allow_house_current, 
+            'ROUND(IFNULL(sal.allow_car, 0), 0) AS allow_car_current, 
+            '((SELECT basic_salary_current) + (SELECT allow_job_current) + (SELECT allow_meal_current) + (SELECT allow_trans_current) + (SELECT allow_house_current) + (SELECT allow_car_current)) AS total_salary_current, 
+            'ROUND(IFNULL(det.basic_salary, 0), 0) AS basic_salary, 
+            'ROUND(det.allow_job, 0) AS allow_job, 
+            'ROUND(det.allow_meal, 0) AS allow_meal, 
+            'ROUND(det.allow_trans, 0) AS allow_trans, 
+            'ROUND(det.allow_house, 0) AS allow_house, 
+            'ROUND(det.allow_car, 0) AS allow_car, 
+            'CONCAT(ROUND(((det.basic_salary + det.allow_job + det.allow_meal + det.allow_trans + det.allow_house + det.allow_car) - (IFNULL(sal.basic_salary, 0) + IFNULL(sal.allow_job, 0) + IFNULL(sal.allow_meal, 0) + IFNULL(sal.allow_trans, 0) + IFNULL(sal.allow_house, 0) + IFNULL(sal.allow_car, 0))) / (IFNULL(sal.basic_salary, 0) + IFNULL(sal.allow_job, 0) + IFNULL(sal.allow_meal, 0) + IFNULL(sal.allow_trans, 0) + IFNULL(sal.allow_house, 0) + IFNULL(sal.allow_car, 0)) * 100, 2), '%') AS increase, CONCAT(ROUND(((ROUND(det.basic_salary, 0) + ROUND(det.allow_job, 0) + ROUND(det.allow_meal, 0) + ROUND(det.allow_trans, 0)) / (ROUND(det.basic_salary, 0) + ROUND(det.allow_job, 0) + ROUND(det.allow_meal, 0) + ROUND(det.allow_trans, 0) + ROUND(det.allow_house, 0) + ROUND(det.allow_car, 0)) * 100), 2), '%') AS fixed_salary, 
+            'CONCAT(ROUND(((ROUND(det.allow_house, 0) + ROUND(det.allow_car, 0)) / (ROUND(det.basic_salary, 0) + ROUND(det.allow_job, 0) + ROUND(det.allow_meal, 0) + ROUND(det.allow_trans, 0) + ROUND(det.allow_house, 0) + ROUND(det.allow_car, 0)) * 100), 2), '%') AS non_fixed_salary, 
+            'det.id_employee_status_det, 
+            'det.reason
+        End If
     End Sub
 
     Private Sub FormProposeEmpSalaryDet_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed

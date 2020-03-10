@@ -2424,4 +2424,11 @@
             End If
         End If
     End Sub
+
+    Private Sub SBSaveUpdateSalary_Click(sender As Object, e As EventArgs) Handles SBSaveUpdateSalary.Click
+        'SBSave_Click(SBSave, New EventArgs)
+
+        FormProposeEmpSalaryDet.id_employee_pps = 1090
+        FormProposeEmpSalaryDet.ShowDialog()
+    End Sub
 End Class

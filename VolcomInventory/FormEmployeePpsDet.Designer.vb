@@ -204,6 +204,8 @@ Partial Class FormEmployeePpsDet
         Me.LEReligion = New DevExpress.XtraEditors.LookUpEdit()
         Me.Label60 = New System.Windows.Forms.Label()
         Me.GCGeneralPropose = New DevExpress.XtraEditors.GroupControl()
+        Me.Label122 = New System.Windows.Forms.Label()
+        Me.LEHomebase = New DevExpress.XtraEditors.LookUpEdit()
         Me.DEActualJoinDate = New DevExpress.XtraEditors.DateEdit()
         Me.Label106 = New System.Windows.Forms.Label()
         Me.CEPIC = New DevExpress.XtraEditors.CheckEdit()
@@ -397,6 +399,8 @@ Partial Class FormEmployeePpsDet
         Me.LEReligionB = New DevExpress.XtraEditors.LookUpEdit()
         Me.Label30 = New System.Windows.Forms.Label()
         Me.GCGeneralProposeB = New DevExpress.XtraEditors.GroupControl()
+        Me.Label123 = New System.Windows.Forms.Label()
+        Me.LEHomebaseB = New DevExpress.XtraEditors.LookUpEdit()
         Me.DEActualJoinDateB = New DevExpress.XtraEditors.DateEdit()
         Me.Label107 = New System.Windows.Forms.Label()
         Me.LEActiveB = New DevExpress.XtraEditors.LookUpEdit()
@@ -428,10 +432,7 @@ Partial Class FormEmployeePpsDet
         Me.MENote = New DevExpress.XtraEditors.MemoEdit()
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.ChangesProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
-        Me.Label122 = New System.Windows.Forms.Label()
-        Me.LEHomebase = New DevExpress.XtraEditors.LookUpEdit()
-        Me.Label123 = New System.Windows.Forms.Label()
-        Me.LEHomebaseB = New DevExpress.XtraEditors.LookUpEdit()
+        Me.SBSaveUpdateSalary = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -565,6 +566,7 @@ Partial Class FormEmployeePpsDet
         CType(Me.LEReligion.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GCGeneralPropose, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GCGeneralPropose.SuspendLayout()
+        CType(Me.LEHomebase.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEActualJoinDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEActualJoinDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CEPIC.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -707,6 +709,7 @@ Partial Class FormEmployeePpsDet
         CType(Me.LEReligionB.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GCGeneralProposeB, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GCGeneralProposeB.SuspendLayout()
+        CType(Me.LEHomebaseB.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEActualJoinDateB.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEActualJoinDateB.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LEActiveB.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -732,8 +735,6 @@ Partial Class FormEmployeePpsDet
         CType(Me.MENote.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ChangesProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LEHomebase.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LEHomebaseB.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl1
@@ -742,6 +743,7 @@ Partial Class FormEmployeePpsDet
         Me.PanelControl1.Controls.Add(Me.SBClose)
         Me.PanelControl1.Controls.Add(Me.SBSaveDraft)
         Me.PanelControl1.Controls.Add(Me.SBSave)
+        Me.PanelControl1.Controls.Add(Me.SBSaveUpdateSalary)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.PanelControl1.Location = New System.Drawing.Point(0, 524)
         Me.PanelControl1.Name = "PanelControl1"
@@ -790,7 +792,7 @@ Partial Class FormEmployeePpsDet
         Me.SBClose.Dock = System.Windows.Forms.DockStyle.Right
         Me.SBClose.ImageIndex = 5
         Me.SBClose.ImageList = Me.LargeImageCollection
-        Me.SBClose.Location = New System.Drawing.Point(566, 2)
+        Me.SBClose.Location = New System.Drawing.Point(408, 2)
         Me.SBClose.Name = "SBClose"
         Me.SBClose.Size = New System.Drawing.Size(75, 33)
         Me.SBClose.TabIndex = 6
@@ -801,7 +803,7 @@ Partial Class FormEmployeePpsDet
         Me.SBSaveDraft.Dock = System.Windows.Forms.DockStyle.Right
         Me.SBSaveDraft.ImageIndex = 7
         Me.SBSaveDraft.ImageList = Me.LargeImageCollection
-        Me.SBSaveDraft.Location = New System.Drawing.Point(641, 2)
+        Me.SBSaveDraft.Location = New System.Drawing.Point(483, 2)
         Me.SBSaveDraft.Name = "SBSaveDraft"
         Me.SBSaveDraft.Size = New System.Drawing.Size(74, 33)
         Me.SBSaveDraft.TabIndex = 8
@@ -812,7 +814,7 @@ Partial Class FormEmployeePpsDet
         Me.SBSave.Dock = System.Windows.Forms.DockStyle.Right
         Me.SBSave.ImageIndex = 19
         Me.SBSave.ImageList = Me.LargeImageCollection
-        Me.SBSave.Location = New System.Drawing.Point(715, 2)
+        Me.SBSave.Location = New System.Drawing.Point(557, 2)
         Me.SBSave.Name = "SBSave"
         Me.SBSave.Size = New System.Drawing.Size(79, 33)
         Me.SBSave.TabIndex = 5
@@ -2689,6 +2691,25 @@ Partial Class FormEmployeePpsDet
         Me.GCGeneralPropose.Size = New System.Drawing.Size(773, 220)
         Me.GCGeneralPropose.TabIndex = 0
         Me.GCGeneralPropose.Text = "Employee"
+        '
+        'Label122
+        '
+        Me.Label122.AutoSize = True
+        Me.Label122.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label122.Location = New System.Drawing.Point(159, 188)
+        Me.Label122.Name = "Label122"
+        Me.Label122.Size = New System.Drawing.Size(60, 13)
+        Me.Label122.TabIndex = 8925
+        Me.Label122.Text = "Home Base"
+        '
+        'LEHomebase
+        '
+        Me.LEHomebase.Location = New System.Drawing.Point(260, 185)
+        Me.LEHomebase.Name = "LEHomebase"
+        Me.LEHomebase.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.LEHomebase.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_fingerprint", "Id", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("display_name", "Active Status")})
+        Me.LEHomebase.Size = New System.Drawing.Size(496, 20)
+        Me.LEHomebase.TabIndex = 8924
         '
         'DEActualJoinDate
         '
@@ -4799,6 +4820,25 @@ Partial Class FormEmployeePpsDet
         Me.GCGeneralProposeB.TabIndex = 1
         Me.GCGeneralProposeB.Text = "Employee"
         '
+        'Label123
+        '
+        Me.Label123.AutoSize = True
+        Me.Label123.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label123.Location = New System.Drawing.Point(159, 188)
+        Me.Label123.Name = "Label123"
+        Me.Label123.Size = New System.Drawing.Size(60, 13)
+        Me.Label123.TabIndex = 8927
+        Me.Label123.Text = "Home Base"
+        '
+        'LEHomebaseB
+        '
+        Me.LEHomebaseB.Location = New System.Drawing.Point(260, 185)
+        Me.LEHomebaseB.Name = "LEHomebaseB"
+        Me.LEHomebaseB.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.LEHomebaseB.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_fingerprint", "Id", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("display_name", "Home Base")})
+        Me.LEHomebaseB.Size = New System.Drawing.Size(496, 20)
+        Me.LEHomebaseB.TabIndex = 8926
+        '
         'DEActualJoinDateB
         '
         Me.DEActualJoinDateB.EditValue = Nothing
@@ -5123,43 +5163,16 @@ Partial Class FormEmployeePpsDet
         Me.ChangesProvider1.ContainerControl = Me
         Me.ChangesProvider1.Icon = CType(resources.GetObject("ChangesProvider1.Icon"), System.Drawing.Icon)
         '
-        'Label122
+        'SBSaveUpdateSalary
         '
-        Me.Label122.AutoSize = True
-        Me.Label122.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label122.Location = New System.Drawing.Point(159, 188)
-        Me.Label122.Name = "Label122"
-        Me.Label122.Size = New System.Drawing.Size(60, 13)
-        Me.Label122.TabIndex = 8925
-        Me.Label122.Text = "Home Base"
-        '
-        'LEHomebase
-        '
-        Me.LEHomebase.Location = New System.Drawing.Point(260, 185)
-        Me.LEHomebase.Name = "LEHomebase"
-        Me.LEHomebase.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.LEHomebase.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_fingerprint", "Id", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("display_name", "Active Status")})
-        Me.LEHomebase.Size = New System.Drawing.Size(496, 20)
-        Me.LEHomebase.TabIndex = 8924
-        '
-        'Label123
-        '
-        Me.Label123.AutoSize = True
-        Me.Label123.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label123.Location = New System.Drawing.Point(159, 188)
-        Me.Label123.Name = "Label123"
-        Me.Label123.Size = New System.Drawing.Size(60, 13)
-        Me.Label123.TabIndex = 8927
-        Me.Label123.Text = "Home Base"
-        '
-        'LEHomebaseB
-        '
-        Me.LEHomebaseB.Location = New System.Drawing.Point(260, 185)
-        Me.LEHomebaseB.Name = "LEHomebaseB"
-        Me.LEHomebaseB.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.LEHomebaseB.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_fingerprint", "Id", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("display_name", "Home Base")})
-        Me.LEHomebaseB.Size = New System.Drawing.Size(496, 20)
-        Me.LEHomebaseB.TabIndex = 8926
+        Me.SBSaveUpdateSalary.Dock = System.Windows.Forms.DockStyle.Right
+        Me.SBSaveUpdateSalary.ImageIndex = 19
+        Me.SBSaveUpdateSalary.ImageList = Me.LargeImageCollection
+        Me.SBSaveUpdateSalary.Location = New System.Drawing.Point(636, 2)
+        Me.SBSaveUpdateSalary.Name = "SBSaveUpdateSalary"
+        Me.SBSaveUpdateSalary.Size = New System.Drawing.Size(158, 33)
+        Me.SBSaveUpdateSalary.TabIndex = 9
+        Me.SBSaveUpdateSalary.Text = "Submit && Update Salary"
         '
         'FormEmployeePpsDet
         '
@@ -5316,6 +5329,7 @@ Partial Class FormEmployeePpsDet
         CType(Me.GCGeneralPropose, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GCGeneralPropose.ResumeLayout(False)
         Me.GCGeneralPropose.PerformLayout()
+        CType(Me.LEHomebase.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEActualJoinDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEActualJoinDate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CEPIC.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -5465,6 +5479,7 @@ Partial Class FormEmployeePpsDet
         CType(Me.GCGeneralProposeB, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GCGeneralProposeB.ResumeLayout(False)
         Me.GCGeneralProposeB.PerformLayout()
+        CType(Me.LEHomebaseB.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEActualJoinDateB.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEActualJoinDateB.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LEActiveB.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -5492,8 +5507,6 @@ Partial Class FormEmployeePpsDet
         CType(Me.MENote.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ChangesProvider1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LEHomebase.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LEHomebaseB.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -5908,4 +5921,5 @@ Partial Class FormEmployeePpsDet
     Friend WithEvents LEHomebase As DevExpress.XtraEditors.LookUpEdit
     Friend WithEvents Label123 As Label
     Friend WithEvents LEHomebaseB As DevExpress.XtraEditors.LookUpEdit
+    Friend WithEvents SBSaveUpdateSalary As DevExpress.XtraEditors.SimpleButton
 End Class

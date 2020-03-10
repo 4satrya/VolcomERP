@@ -2308,22 +2308,29 @@
         ElseIf report_mark_type = "41" Then
             'FG Adj In
             If id_status_reportx = 6 Then 'completed
-                Dim query_cancel As String = "SELECT * FROM tb_adj_in_fg a "
-                query_cancel += "INNER JOIN tb_adj_in_fg_det b ON a.id_adj_in_fg = b.id_adj_in_fg "
-                query_cancel += "WHERE a.id_adj_in_fg = '" + id_report + "' "
-                Dim data As DataTable = execute_query(query_cancel, -1, True, "", "", "", "")
-                For i As Integer = 0 To (data.Rows.Count - 1)
-                    Dim id_wh_drawer As String = data.Rows(i)("id_wh_drawer").ToString
-                    Dim id_product As String = data.Rows(i)("id_product").ToString
-                    Dim adj_in_fg_det_qty As String = decimalSQL(data.Rows(i)("adj_in_fg_det_qty").ToString)
-                    Dim adj_in_fg_det_price As String = decimalSQL(data.Rows(i)("adj_in_fg_det_price").ToString)
-                    Dim adj_in_fg_number As String = data.Rows(i)("adj_in_fg_number").ToString
+                'Dim query_cancel As String = "SELECT * FROM tb_adj_in_fg a "
+                'query_cancel += "INNER JOIN tb_adj_in_fg_det b ON a.id_adj_in_fg = b.id_adj_in_fg "
+                'query_cancel += "WHERE a.id_adj_in_fg = '" + id_report + "' "
+                'Dim data As DataTable = execute_query(query_cancel, -1, True, "", "", "", "")
+                'For i As Integer = 0 To (data.Rows.Count - 1)
+                '    Dim id_wh_drawer As String = data.Rows(i)("id_wh_drawer").ToString
+                '    Dim id_product As String = data.Rows(i)("id_product").ToString
+                '    Dim adj_in_fg_det_qty As String = decimalSQL(data.Rows(i)("adj_in_fg_det_qty").ToString)
+                '    Dim adj_in_fg_det_price As String = decimalSQL(data.Rows(i)("adj_in_fg_det_price").ToString)
+                '    Dim adj_in_fg_number As String = data.Rows(i)("adj_in_fg_number").ToString
 
-                    Dim query_upd_storage As String = ""
-                    query_upd_storage = "INSERT tb_storage_fg(id_wh_drawer, id_storage_category, id_product, bom_unit_price, storage_product_qty, storage_product_datetime, storage_product_notes,report_mark_type,id_report,id_stock_status) "
-                    query_upd_storage += "VALUES('" + id_wh_drawer + "', '1', '" + id_product + "'," + adj_in_fg_det_price + ",'" + adj_in_fg_det_qty + "', NOW(), 'Completed, Adjustment In : " + adj_in_fg_number + "','41','" & id_report & "','1')"
-                    execute_non_query(query_upd_storage, True, "", "", "", "")
-                Next
+                '    Dim query_upd_storage As String = ""
+                '    query_upd_storage = "INSERT tb_storage_fg(id_wh_drawer, id_storage_category, id_product, bom_unit_price, storage_product_qty, storage_product_datetime, storage_product_notes,report_mark_type,id_report,id_stock_status) "
+                '    query_upd_storage += "VALUES('" + id_wh_drawer + "', '1', '" + id_product + "'," + adj_in_fg_det_price + ",'" + adj_in_fg_det_qty + "', NOW(), 'Completed, Adjustment In : " + adj_in_fg_number + "','41','" & id_report & "','1')"
+                '    execute_non_query(query_upd_storage, True, "", "", "", "")
+                'Next
+
+                Dim q As String = "INSERT tb_storage_fg(id_wh_drawer, id_storage_category, id_product, bom_unit_price, storage_product_qty, storage_product_datetime, storage_product_notes,report_mark_type,id_report,id_stock_status)
+SELECT b.`id_wh_drawer`,'1',b.`id_product`,b.`adj_in_fg_det_price`,b.`adj_in_fg_det_qty`,NOW(),CONCAT('Completed, Adjustment In : ',a.`adj_in_fg_number`) AS note,'41',a.`id_adj_in_fg`,'1'
+FROM tb_adj_in_fg a 
+INNER JOIN tb_adj_in_fg_det b ON a.id_adj_in_fg = b.id_adj_in_fg 
+WHERE a.id_adj_in_fg = '" & id_report & "'"
+                execute_non_query(q, True, "", "", "", "")
             End If
 
             query = String.Format("UPDATE tb_adj_in_fg SET id_report_status='{0}' WHERE id_adj_in_fg = '{1}'", id_status_reportx, id_report)
@@ -2351,40 +2358,54 @@
             'FG Adj Out
             Cursor = Cursors.WaitCursor
             If id_status_reportx = 5 Then 'Cancel
-                Dim query_cancel As String = "SELECT * FROM tb_adj_out_fg a "
-                query_cancel += "INNER JOIN tb_adj_out_fg_det b ON a.id_adj_out_fg = b.id_adj_out_fg "
-                query_cancel += "WHERE a.id_adj_out_fg = '" + id_report + "' "
-                Dim data As DataTable = execute_query(query_cancel, -1, True, "", "", "", "")
-                For i As Integer = 0 To (data.Rows.Count - 1)
-                    Dim id_wh_drawer As String = data.Rows(i)("id_wh_drawer").ToString
-                    Dim id_product As String = data.Rows(i)("id_product").ToString
-                    Dim adj_out_fg_det_qty As Decimal = data.Rows(i)("adj_out_fg_det_qty")
-                    Dim adj_out_fg_det_price As Decimal = data.Rows(i)("adj_out_fg_det_price")
-                    Dim adj_out_fg_number As String = data.Rows(i)("adj_out_fg_number").ToString
-                    Dim query_upd_storage As String = "INSERT tb_storage_fg(id_wh_drawer, id_storage_category, id_product, storage_product_qty, storage_product_datetime, storage_product_notes, bom_unit_price,id_stock_status,report_mark_type,id_report) "
-                    query_upd_storage += "VALUES('" + id_wh_drawer + "', '1', '" + id_product + "', '" + decimalSQL(adj_out_fg_det_qty.ToString) + "', NOW(), 'Finished Goods Out cancelled, Adjustment Out : " + adj_out_fg_number + "','" & decimalSQL(adj_out_fg_det_price.ToString) & "','2','42','" & id_report & "')"
-                    execute_non_query(query_upd_storage, True, "", "", "", "")
-                Next
+                'Dim query_cancel As String = "SELECT * FROM tb_adj_out_fg a "
+                'query_cancel += "INNER JOIN tb_adj_out_fg_det b ON a.id_adj_out_fg = b.id_adj_out_fg "
+                'query_cancel += "WHERE a.id_adj_out_fg = '" + id_report + "' "
+                'Dim data As DataTable = execute_query(query_cancel, -1, True, "", "", "", "")
+                'For i As Integer = 0 To (data.Rows.Count - 1)
+                '    Dim id_wh_drawer As String = data.Rows(i)("id_wh_drawer").ToString
+                '    Dim id_product As String = data.Rows(i)("id_product").ToString
+                '    Dim adj_out_fg_det_qty As Decimal = data.Rows(i)("adj_out_fg_det_qty")
+                '    Dim adj_out_fg_det_price As Decimal = data.Rows(i)("adj_out_fg_det_price")
+                '    Dim adj_out_fg_number As String = data.Rows(i)("adj_out_fg_number").ToString
+                '    Dim query_upd_storage As String = "INSERT tb_storage_fg(id_wh_drawer, id_storage_category, id_product, storage_product_qty, storage_product_datetime, storage_product_notes, bom_unit_price,id_stock_status,report_mark_type,id_report) "
+                '    query_upd_storage += "VALUES('" + id_wh_drawer + "', '1', '" + id_product + "', '" + decimalSQL(adj_out_fg_det_qty.ToString) + "', NOW(), 'Finished Goods Out cancelled, Adjustment Out : " + adj_out_fg_number + "','" & decimalSQL(adj_out_fg_det_price.ToString) & "','2','42','" & id_report & "')"
+                '    execute_non_query(query_upd_storage, True, "", "", "", "")
+                'Next
+                Dim qry As String = "INSERT tb_storage_fg(id_wh_drawer, id_storage_category, id_product, storage_product_qty, storage_product_datetime, storage_product_notes, bom_unit_price,id_stock_status,report_mark_type,id_report) 
+                SELECT d.id_wh_drawer, '1', d.id_product, d.adj_out_fg_det_qty, NOW(), '',d.adj_out_fg_det_price,'2','42', d.id_adj_out_fg 
+                FROM tb_adj_out_fg_det d
+                WHERE d.id_adj_out_fg=" + id_report + " "
+                execute_non_query(qry, True, "", "", "", "")
             ElseIf id_status_reportx = 6 Then 'completed
                 'stock
-                Dim query_cancel As String = "SELECT * FROM tb_adj_out_fg a "
-                query_cancel += "INNER JOIN tb_adj_out_fg_det b ON a.id_adj_out_fg = b.id_adj_out_fg "
-                query_cancel += "WHERE a.id_adj_out_fg = '" + id_report + "' "
-                Dim data As DataTable = execute_query(query_cancel, -1, True, "", "", "", "")
-                For i As Integer = 0 To (data.Rows.Count - 1)
-                    Dim id_wh_drawer As String = data.Rows(i)("id_wh_drawer").ToString
-                    Dim id_product As String = data.Rows(i)("id_product").ToString
-                    Dim adj_out_fg_det_qty As Decimal = data.Rows(i)("adj_out_fg_det_qty")
-                    Dim adj_out_fg_det_price As Decimal = data.Rows(i)("adj_out_fg_det_price")
-                    Dim adj_out_fg_number As String = data.Rows(i)("adj_out_fg_number").ToString
-                    Dim query_upd_storage As String = "INSERT tb_storage_fg(id_wh_drawer, id_storage_category, id_product, storage_product_qty, storage_product_datetime, storage_product_notes, bom_unit_price,id_stock_status,report_mark_type,id_report) "
-                    query_upd_storage += "VALUES('" + id_wh_drawer + "', '1', '" + id_product + "', '" + decimalSQL(adj_out_fg_det_qty.ToString) + "', NOW(), 'Completed, Adjustment Out : " + adj_out_fg_number + "','" & decimalSQL(adj_out_fg_det_price.ToString) & "','2','42','" & id_report & "')"
-                    execute_non_query(query_upd_storage, True, "", "", "", "")
+                'Dim query_cancel As String = "SELECT * FROM tb_adj_out_fg a "
+                'query_cancel += "INNER JOIN tb_adj_out_fg_det b ON a.id_adj_out_fg = b.id_adj_out_fg "
+                'query_cancel += "WHERE a.id_adj_out_fg = '" + id_report + "' "
+                'Dim data As DataTable = execute_query(query_cancel, -1, True, "", "", "", "")
+                'For i As Integer = 0 To (data.Rows.Count - 1)
+                '    Dim id_wh_drawer As String = data.Rows(i)("id_wh_drawer").ToString
+                '    Dim id_product As String = data.Rows(i)("id_product").ToString
+                '    Dim adj_out_fg_det_qty As Decimal = data.Rows(i)("adj_out_fg_det_qty")
+                '    Dim adj_out_fg_det_price As Decimal = data.Rows(i)("adj_out_fg_det_price")
+                '    Dim adj_out_fg_number As String = data.Rows(i)("adj_out_fg_number").ToString
+                '    Dim query_upd_storage As String = "INSERT tb_storage_fg(id_wh_drawer, id_storage_category, id_product, storage_product_qty, storage_product_datetime, storage_product_notes, bom_unit_price,id_stock_status,report_mark_type,id_report) "
+                '    query_upd_storage += "VALUES('" + id_wh_drawer + "', '1', '" + id_product + "', '" + decimalSQL(adj_out_fg_det_qty.ToString) + "', NOW(), 'Completed, Adjustment Out : " + adj_out_fg_number + "','" & decimalSQL(adj_out_fg_det_price.ToString) & "','2','42','" & id_report & "')"
+                '    execute_non_query(query_upd_storage, True, "", "", "", "")
 
-                    query_upd_storage = "INSERT tb_storage_fg(id_wh_drawer, id_storage_category, id_product, storage_product_qty, storage_product_datetime, storage_product_notes, bom_unit_price, id_stock_status, report_mark_type, id_report) "
-                    query_upd_storage += "VALUES('" + id_wh_drawer + "', '2', '" + id_product + "', '" + decimalSQL(adj_out_fg_det_qty.ToString) + "', NOW(), 'Completed, Adjustment Out : " + adj_out_fg_number + "','" & decimalSQL(adj_out_fg_det_price.ToString) & "','1','42','" & id_report & "')"
-                    execute_non_query(query_upd_storage, True, "", "", "", "")
-                Next
+                '    query_upd_storage = "INSERT tb_storage_fg(id_wh_drawer, id_storage_category, id_product, storage_product_qty, storage_product_datetime, storage_product_notes, bom_unit_price, id_stock_status, report_mark_type, id_report) "
+                '    query_upd_storage += "VALUES('" + id_wh_drawer + "', '2', '" + id_product + "', '" + decimalSQL(adj_out_fg_det_qty.ToString) + "', NOW(), 'Completed, Adjustment Out : " + adj_out_fg_number + "','" & decimalSQL(adj_out_fg_det_price.ToString) & "','1','42','" & id_report & "')"
+                '    execute_non_query(query_upd_storage, True, "", "", "", "")
+                'Next
+                Dim qry As String = "INSERT tb_storage_fg(id_wh_drawer, id_storage_category, id_product, storage_product_qty, storage_product_datetime, storage_product_notes, bom_unit_price,id_stock_status,report_mark_type,id_report) 
+                SELECT d.id_wh_drawer, '1', d.id_product, d.adj_out_fg_det_qty, NOW(), '',d.adj_out_fg_det_price,'2','42', d.id_adj_out_fg 
+                FROM tb_adj_out_fg_det d
+                WHERE d.id_adj_out_fg=" + id_report + " 
+                UNION ALL
+                SELECT d.id_wh_drawer, '2', d.id_product, d.adj_out_fg_det_qty, NOW(), '',d.adj_out_fg_det_price,'1','42', d.id_adj_out_fg 
+                FROM tb_adj_out_fg_det d
+                WHERE d.id_adj_out_fg=" + id_report + " "
+                execute_non_query(qry, True, "", "", "", "")
             End If
 
             query = String.Format("UPDATE tb_adj_out_fg SET id_report_status='{0}' WHERE id_adj_out_fg='{1}'", id_status_reportx, id_report)
@@ -3639,9 +3660,65 @@
             If id_status_reportx = "5" Then
                 Dim cancel As New ClassFGRepair()
                 cancel.cancelReservedStock(id_report)
+                '
+                Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique` ,`id_fg_repair_det`,`report_mark_type`,`unique_code`,
+                        `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
+                        SELECT c.id_comp, t.`id_wh_drawer_from`, td.id_product, td.id_pl_prod_order_rec_det_unique,  td.id_fg_repair_det, '8', 
+                        CONCAT(p.product_full_code,td.fg_repair_det_counting), sod.id_design_price, sod.design_price, 1, 1, NOW() 
+                        FROM tb_fg_repair_det td
+                        INNER JOIN tb_fg_repair t ON t.id_fg_repair = td.id_fg_repair
+                        INNER JOIN tb_m_wh_drawer drw_frm ON drw_frm.id_wh_drawer = t.id_wh_drawer_from  
+                        INNER JOIN tb_m_wh_rack rack_frm ON rack_frm.id_wh_rack = drw_frm.id_wh_rack  
+                        INNER JOIN tb_m_wh_locator loc_frm ON loc_frm.id_wh_locator = rack_frm.id_wh_locator  
+                        INNER JOIN tb_m_comp c ON c.id_comp = loc_frm.id_comp  
+                        INNER JOIN tb_m_product p ON p.id_product = td.id_product
+                        INNER JOIN tb_m_design d ON d.id_design = p.id_design
+                        LEFT JOIN( 
+                            SELECT * FROM ( 
+	                        SELECT price.id_design, price.design_price, price.design_price_date, price.id_design_price, 
+	                        price.id_design_price_type, price_type.design_price_type,
+	                        cat.id_design_cat, cat.design_cat
+	                        FROM tb_m_design_price price 
+	                        INNER JOIN tb_lookup_design_price_type price_type ON price.id_design_price_type = price_type.id_design_price_type 
+	                        INNER JOIN tb_lookup_design_cat cat ON cat.id_design_cat = price_type.id_design_cat
+	                        WHERE price.is_active_wh ='1' AND price.design_price_start_date <= NOW() 
+	                        ORDER BY price.design_price_start_date DESC, price.id_design_price DESC 
+                            ) a 
+                            GROUP BY a.id_design 
+                        ) sod ON sod.id_design = d.id_design 
+                                                WHERE t.id_fg_repair=" & id_report & " AND d.is_old_design=2  AND t.is_use_unique_code=1 "
+                execute_non_query(quniq, True, "", "", "", "")
             ElseIf id_status_reportx = "6" Then
                 Dim compl As New ClassFGRepair()
                 compl.completedStock(id_report)
+                '
+                Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_fg_repair_det`,`report_mark_type`,`unique_code`,
+                        `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
+                        SELECT c.id_comp, t.`id_wh_drawer_to`, td.id_product, td.id_pl_prod_order_rec_det_unique,  td.id_fg_repair_det, '8', 
+                        CONCAT(p.product_full_code,td.fg_repair_det_counting), sod.id_design_price, sod.design_price, 1, 1, NOW() 
+                        FROM tb_fg_repair_det td
+                        INNER JOIN tb_fg_repair t ON t.id_fg_repair = td.id_fg_repair
+                        INNER JOIN tb_m_wh_drawer drw_frm ON drw_frm.id_wh_drawer = t.id_wh_drawer_to  
+                        INNER JOIN tb_m_wh_rack rack_frm ON rack_frm.id_wh_rack = drw_frm.id_wh_rack  
+                        INNER JOIN tb_m_wh_locator loc_frm ON loc_frm.id_wh_locator = rack_frm.id_wh_locator  
+                        INNER JOIN tb_m_comp c ON c.id_comp = loc_frm.id_comp  
+                        INNER JOIN tb_m_product p ON p.id_product = td.id_product
+                        INNER JOIN tb_m_design d ON d.id_design = p.id_design
+                        LEFT JOIN( 
+                            SELECT * FROM ( 
+	                        SELECT price.id_design, price.design_price, price.design_price_date, price.id_design_price, 
+	                        price.id_design_price_type, price_type.design_price_type,
+	                        cat.id_design_cat, cat.design_cat
+	                        FROM tb_m_design_price price 
+	                        INNER JOIN tb_lookup_design_price_type price_type ON price.id_design_price_type = price_type.id_design_price_type 
+	                        INNER JOIN tb_lookup_design_cat cat ON cat.id_design_cat = price_type.id_design_cat
+	                        WHERE price.is_active_wh ='1' AND price.design_price_start_date <= NOW() 
+	                        ORDER BY price.design_price_start_date DESC, price.id_design_price DESC 
+                            ) a 
+                            GROUP BY a.id_design 
+                        ) sod ON sod.id_design = d.id_design 
+                                                WHERE t.id_fg_repair=" & id_report & " AND d.is_old_design=2  AND t.is_use_unique_code=1 "
+                execute_non_query(quniq, True, "", "", "", "")
             End If
 
             query = String.Format("UPDATE tb_fg_repair SET id_report_status='{0}' WHERE id_fg_repair ='{1}'", id_status_reportx, id_report)
@@ -3663,6 +3740,63 @@
             If id_status_reportx = "6" Then
                 Dim compl As New ClassFGRepairRec()
                 compl.completedStock(id_report)
+                'put unique code wh drawer to
+                Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_fg_repair_rec_det`,`report_mark_type`,`unique_code`,
+                        `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
+                        SELECT c.id_comp, t.`id_wh_drawer_to`, td.id_product, td.id_pl_prod_order_rec_det_unique,  td.id_fg_repair_rec_det, '9', 
+                        CONCAT(p.product_full_code,td.fg_repair_rec_det_counting), sod.id_design_price, sod.design_price, 1, 1, NOW() 
+                        FROM tb_fg_repair_rec_det td
+                        INNER JOIN tb_fg_repair_rec t ON t.id_fg_repair_rec = td.id_fg_repair_rec
+                        INNER JOIN tb_m_wh_drawer drw_frm ON drw_frm.id_wh_drawer = t.id_wh_drawer_to  
+                        INNER JOIN tb_m_wh_rack rack_frm ON rack_frm.id_wh_rack = drw_frm.id_wh_rack  
+                        INNER JOIN tb_m_wh_locator loc_frm ON loc_frm.id_wh_locator = rack_frm.id_wh_locator  
+                        INNER JOIN tb_m_comp c ON c.id_comp = loc_frm.id_comp  
+                        INNER JOIN tb_m_product p ON p.id_product = td.id_product
+                        INNER JOIN tb_m_design d ON d.id_design = p.id_design
+                        LEFT JOIN( 
+                            SELECT * FROM ( 
+	                        SELECT price.id_design, price.design_price, price.design_price_date, price.id_design_price, 
+	                        price.id_design_price_type, price_type.design_price_type,
+	                        cat.id_design_cat, cat.design_cat
+	                        FROM tb_m_design_price price 
+	                        INNER JOIN tb_lookup_design_price_type price_type ON price.id_design_price_type = price_type.id_design_price_type 
+	                        INNER JOIN tb_lookup_design_cat cat ON cat.id_design_cat = price_type.id_design_cat
+	                        WHERE price.is_active_wh ='1' AND price.design_price_start_date <= NOW() 
+	                        ORDER BY price.design_price_start_date DESC, price.id_design_price DESC 
+                            ) a 
+                            GROUP BY a.id_design 
+                        ) sod ON sod.id_design = d.id_design 
+                        WHERE t.id_fg_repair_rec=" & id_report & " AND d.is_old_design=2 AND t.is_use_unique_code=1 "
+                execute_non_query(quniq, True, "", "", "", "")
+            ElseIf id_status_reportx = "5" Then
+                'cancel reserved unique code
+                Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_fg_repair_rec_det`,`report_mark_type`,`unique_code`,
+                        `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
+                        SELECT c.id_comp, t.`id_wh_drawer_from`, td.id_product, td.id_pl_prod_order_rec_det_unique,  td.id_fg_repair_rec_det, '9', 
+                        CONCAT(p.product_full_code,td.fg_repair_rec_det_counting), sod.id_design_price, sod.design_price, 1, 1, NOW() 
+                        FROM tb_fg_repair_rec_det td
+                        INNER JOIN tb_fg_repair_rec t ON t.id_fg_repair_rec = td.id_fg_repair_rec
+                        INNER JOIN tb_m_wh_drawer drw_frm ON drw_frm.id_wh_drawer = t.id_wh_drawer_from  
+                        INNER JOIN tb_m_wh_rack rack_frm ON rack_frm.id_wh_rack = drw_frm.id_wh_rack  
+                        INNER JOIN tb_m_wh_locator loc_frm ON loc_frm.id_wh_locator = rack_frm.id_wh_locator  
+                        INNER JOIN tb_m_comp c ON c.id_comp = loc_frm.id_comp  
+                        INNER JOIN tb_m_product p ON p.id_product = td.id_product
+                        INNER JOIN tb_m_design d ON d.id_design = p.id_design
+                        LEFT JOIN( 
+                            SELECT * FROM ( 
+	                        SELECT price.id_design, price.design_price, price.design_price_date, price.id_design_price, 
+	                        price.id_design_price_type, price_type.design_price_type,
+	                        cat.id_design_cat, cat.design_cat
+	                        FROM tb_m_design_price price 
+	                        INNER JOIN tb_lookup_design_price_type price_type ON price.id_design_price_type = price_type.id_design_price_type 
+	                        INNER JOIN tb_lookup_design_cat cat ON cat.id_design_cat = price_type.id_design_cat
+	                        WHERE price.is_active_wh ='1' AND price.design_price_start_date <= NOW() 
+	                        ORDER BY price.design_price_start_date DESC, price.id_design_price DESC 
+                            ) a 
+                            GROUP BY a.id_design 
+                        ) sod ON sod.id_design = d.id_design 
+                        WHERE t.id_fg_repair_rec=" & id_report & " AND d.is_old_design=2 AND t.is_use_unique_code=1 "
+                execute_non_query(quniq, True, "", "", "", "")
             End If
 
             query = String.Format("UPDATE tb_fg_repair_rec SET id_report_status='{0}' WHERE id_fg_repair_rec ='{1}'", id_status_reportx, id_report)
@@ -3687,9 +3821,66 @@
                     Dim cancel As New ClassFGRepairReturn()
                     cancel.cancelReservedStock(id_report)
                 End If
+                'cancel reserved unique
+                Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_fg_repair_return_det`,`report_mark_type`,`unique_code`,
+                        `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
+                        SELECT c.id_comp, t.`id_wh_drawer_from`, td.id_product, td.id_pl_prod_order_rec_det_unique, td.id_fg_repair_return_det, '10', 
+                        CONCAT(p.product_full_code,td.fg_repair_return_det_counting), sod.id_design_price, sod.design_price, 1, 1, NOW() 
+                        FROM tb_fg_repair_return_det td
+                        INNER JOIN tb_fg_repair_return t ON t.id_fg_repair_return = td.id_fg_repair_return
+                        INNER JOIN tb_m_wh_drawer drw_frm ON drw_frm.id_wh_drawer = t.id_wh_drawer_from  
+                        INNER JOIN tb_m_wh_rack rack_frm ON rack_frm.id_wh_rack = drw_frm.id_wh_rack  
+                        INNER JOIN tb_m_wh_locator loc_frm ON loc_frm.id_wh_locator = rack_frm.id_wh_locator  
+                        INNER JOIN tb_m_comp c ON c.id_comp = loc_frm.id_comp  
+                        INNER JOIN tb_m_product p ON p.id_product = td.id_product
+                        INNER JOIN tb_m_design d ON d.id_design = p.id_design
+                        LEFT JOIN( 
+                            SELECT * FROM ( 
+	                        SELECT price.id_design, price.design_price, price.design_price_date, price.id_design_price, 
+	                        price.id_design_price_type, price_type.design_price_type,
+	                        cat.id_design_cat, cat.design_cat
+	                        FROM tb_m_design_price price 
+	                        INNER JOIN tb_lookup_design_price_type price_type ON price.id_design_price_type = price_type.id_design_price_type 
+	                        INNER JOIN tb_lookup_design_cat cat ON cat.id_design_cat = price_type.id_design_cat
+	                        WHERE price.is_active_wh ='1' AND price.design_price_start_date <= NOW() 
+	                        ORDER BY price.design_price_start_date DESC, price.id_design_price DESC 
+                            ) a 
+                            GROUP BY a.id_design 
+                        ) sod ON sod.id_design = d.id_design 
+                        WHERE t.id_fg_repair_return=" & id_report & " AND d.is_old_design=2 AND t.is_use_unique_code=1 "
+                execute_non_query(quniq, True, "", "", "", "")
             ElseIf id_status_reportx = "6" Then
                 Dim compl As New ClassFGRepairReturn()
                 compl.completedStock(id_report, report_mark_type)
+
+                'insert unique drawer to
+                Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_fg_repair_return_det`,`report_mark_type`,`unique_code`,
+                        `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
+                        SELECT c.id_comp, t.`id_wh_drawer_to`, td.id_product, td.id_pl_prod_order_rec_det_unique, td.id_fg_repair_return_det, '10', 
+                        CONCAT(p.product_full_code,td.fg_repair_return_det_counting), sod.id_design_price, sod.design_price, 1, 1, NOW() 
+                        FROM tb_fg_repair_return_det td
+                        INNER JOIN tb_fg_repair_return t ON t.id_fg_repair_return = td.id_fg_repair_return
+                        INNER JOIN tb_m_wh_drawer drw_frm ON drw_frm.id_wh_drawer = t.id_wh_drawer_to  
+                        INNER JOIN tb_m_wh_rack rack_frm ON rack_frm.id_wh_rack = drw_frm.id_wh_rack  
+                        INNER JOIN tb_m_wh_locator loc_frm ON loc_frm.id_wh_locator = rack_frm.id_wh_locator  
+                        INNER JOIN tb_m_comp c ON c.id_comp = loc_frm.id_comp  
+                        INNER JOIN tb_m_product p ON p.id_product = td.id_product
+                        INNER JOIN tb_m_design d ON d.id_design = p.id_design
+                        LEFT JOIN( 
+                            SELECT * FROM ( 
+	                        SELECT price.id_design, price.design_price, price.design_price_date, price.id_design_price, 
+	                        price.id_design_price_type, price_type.design_price_type,
+	                        cat.id_design_cat, cat.design_cat
+	                        FROM tb_m_design_price price 
+	                        INNER JOIN tb_lookup_design_price_type price_type ON price.id_design_price_type = price_type.id_design_price_type 
+	                        INNER JOIN tb_lookup_design_cat cat ON cat.id_design_cat = price_type.id_design_cat
+	                        WHERE price.is_active_wh ='1' AND price.design_price_start_date <= NOW() 
+	                        ORDER BY price.design_price_start_date DESC, price.id_design_price DESC 
+                            ) a 
+                            GROUP BY a.id_design 
+                        ) sod ON sod.id_design = d.id_design 
+                        WHERE t.id_fg_repair_return=" & id_report & " AND d.is_old_design=2 AND t.is_use_unique_code=1 "
+                execute_non_query(quniq, True, "", "", "", "")
             End If
 
             query = String.Format("UPDATE tb_fg_repair_return SET id_report_status='{0}' WHERE id_fg_repair_return ='{1}'", id_status_reportx, id_report)
@@ -3711,6 +3902,63 @@
             If id_status_reportx = "6" Then
                 Dim compl As New ClassFGRepairReturnRec()
                 compl.completedStock(id_report)
+                'insert unique drawer to
+                Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_fg_repair_return_rec_det`,`report_mark_type`,`unique_code`,
+                        `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
+                        SELECT c.id_comp, t.`id_wh_drawer_to`, td.id_product, td.id_pl_prod_order_rec_det_unique, td.id_fg_repair_return_rec_det, '11', 
+                        CONCAT(p.product_full_code,td.fg_repair_return_rec_det_counting), sod.id_design_price, sod.design_price, 1, 1, NOW() 
+                        FROM tb_fg_repair_return_rec_det td
+                        INNER JOIN tb_fg_repair_return_rec t ON t.id_fg_repair_return_rec = td.id_fg_repair_return_rec
+                        INNER JOIN tb_m_wh_drawer drw_frm ON drw_frm.id_wh_drawer = t.id_wh_drawer_to 
+                        INNER JOIN tb_m_wh_rack rack_frm ON rack_frm.id_wh_rack = drw_frm.id_wh_rack  
+                        INNER JOIN tb_m_wh_locator loc_frm ON loc_frm.id_wh_locator = rack_frm.id_wh_locator  
+                        INNER JOIN tb_m_comp c ON c.id_comp = loc_frm.id_comp  
+                        INNER JOIN tb_m_product p ON p.id_product = td.id_product
+                        INNER JOIN tb_m_design d ON d.id_design = p.id_design
+                        LEFT JOIN( 
+                            SELECT * FROM ( 
+	                        SELECT price.id_design, price.design_price, price.design_price_date, price.id_design_price, 
+	                        price.id_design_price_type, price_type.design_price_type,
+	                        cat.id_design_cat, cat.design_cat
+	                        FROM tb_m_design_price price 
+	                        INNER JOIN tb_lookup_design_price_type price_type ON price.id_design_price_type = price_type.id_design_price_type 
+	                        INNER JOIN tb_lookup_design_cat cat ON cat.id_design_cat = price_type.id_design_cat
+	                        WHERE price.is_active_wh ='1' AND price.design_price_start_date <= NOW() 
+	                        ORDER BY price.design_price_start_date DESC, price.id_design_price DESC 
+                            ) a 
+                            GROUP BY a.id_design 
+                        ) sod ON sod.id_design = d.id_design 
+                        WHERE t.id_fg_repair_return_rec=" & id_report & " AND d.is_old_design=2 AND t.is_use_unique_code=1 "
+                execute_non_query(quniq, True, "", "", "", "")
+            ElseIf id_status_reportx = "5" Then
+                'cancel reserved unique
+                Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique` ,`id_fg_repair_return_rec_det`,`report_mark_type`,`unique_code`,
+                        `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
+                        SELECT c.id_comp, t.`id_wh_drawer_from`, td.id_product, td.id_pl_prod_order_rec_det_unique, td.id_fg_repair_return_rec_det, '11', 
+                        CONCAT(p.product_full_code,td.fg_repair_return_rec_det_counting), sod.id_design_price, sod.design_price, 1, 1, NOW() 
+                        FROM tb_fg_repair_return_rec_det td
+                        INNER JOIN tb_fg_repair_return_rec t ON t.id_fg_repair_return_rec = td.id_fg_repair_return_rec
+                        INNER JOIN tb_m_wh_drawer drw_frm ON drw_frm.id_wh_drawer = t.id_wh_drawer_from  
+                        INNER JOIN tb_m_wh_rack rack_frm ON rack_frm.id_wh_rack = drw_frm.id_wh_rack  
+                        INNER JOIN tb_m_wh_locator loc_frm ON loc_frm.id_wh_locator = rack_frm.id_wh_locator  
+                        INNER JOIN tb_m_comp c ON c.id_comp = loc_frm.id_comp  
+                        INNER JOIN tb_m_product p ON p.id_product = td.id_product
+                        INNER JOIN tb_m_design d ON d.id_design = p.id_design
+                        LEFT JOIN( 
+                            SELECT * FROM ( 
+	                        SELECT price.id_design, price.design_price, price.design_price_date, price.id_design_price, 
+	                        price.id_design_price_type, price_type.design_price_type,
+	                        cat.id_design_cat, cat.design_cat
+	                        FROM tb_m_design_price price 
+	                        INNER JOIN tb_lookup_design_price_type price_type ON price.id_design_price_type = price_type.id_design_price_type 
+	                        INNER JOIN tb_lookup_design_cat cat ON cat.id_design_cat = price_type.id_design_cat
+	                        WHERE price.is_active_wh ='1' AND price.design_price_start_date <= NOW() 
+	                        ORDER BY price.design_price_start_date DESC, price.id_design_price DESC 
+                            ) a 
+                            GROUP BY a.id_design 
+                        ) sod ON sod.id_design = d.id_design 
+                        WHERE t.id_fg_repair_return_rec=" & id_report & " AND d.is_old_design=2 AND t.is_use_unique_code=1 "
+                execute_non_query(quniq, True, "", "", "", "")
             End If
 
             query = String.Format("UPDATE tb_fg_repair_return_rec SET id_report_status='{0}' WHERE id_fg_repair_return_rec ='{1}'", id_status_reportx, id_report)
@@ -4538,6 +4786,24 @@
             'auto completed
             If id_status_reportx = "3" Then
                 id_status_reportx = "6"
+            ElseIf id_status_reportx = "5" Then
+                'balik budget
+                If report_mark_type = "139" Then 'opex
+                    query = "INSERT INTO `tb_b_expense_opex_trans`(id_b_expense_opex,id_departement,date_trans,`value`,id_item,id_report,report_mark_type,note) 
+                                SELECT prd.id_b_expense_opex,pr.id_departement,NOW(),-(pod.`value` * pod.qty),prd.id_item,pod.`id_purc_order` AS id_report,'202' AS report_mark_type,'Purchase Order'
+                                FROM `tb_purc_order_det` pod
+                                INNER JOIN `tb_purc_req_det` prd ON prd.`id_purc_req_det`=pod.`id_purc_req_det`
+                                INNER JOIN tb_purc_req pr ON pr.id_purc_req=prd.id_purc_req
+                                WHERE pod.`id_purc_order`='" & id_report & "'"
+                Else 'capex
+                    query = "INSERT INTO `tb_b_expense_trans`(id_b_expense,id_departement,date_trans,`value`,id_item,id_report,report_mark_type,note) 
+                                SELECT prd.id_b_expense,pr.id_departement,NOW(),-(pod.`value` * pod.qty),prd.id_item,pod.`id_purc_order` AS id_report,'139' AS report_mark_type,'Purchase Order'
+                                FROM `tb_purc_order_det` pod
+                                INNER JOIN `tb_purc_req_det` prd ON prd.`id_purc_req_det`=pod.`id_purc_req_det`
+                                INNER JOIN tb_purc_req pr ON pr.id_purc_req=prd.id_purc_req
+                                WHERE pod.`id_purc_order`='" & id_report & "'"
+                End If
+                query = String.Format("INSERT tb_purc_order SET id_report_status='{0}' WHERE id_purc_order ='{1}'", id_status_reportx, id_report)
             End If
 
             'update status
@@ -4700,6 +4966,15 @@
                     Next
 
                 Next
+
+                'notif email
+                Try
+                    Dim mail As ClassSendEmail = New ClassSendEmail()
+                    mail.report_mark_type = report_mark_type
+                    mail.send_email_notif(report_mark_type, id_report)
+                Catch ex As Exception
+                    execute_non_query("INSERT INTO tb_error_mail(date, description) VALUES(NOW(), 'PD REVISE;" + id_report + ";" + addSlashes(ex.ToString) + "'); ", True, "", "", "", "")
+                End Try
             End If
 
             'update status
@@ -4831,7 +5106,7 @@
                 'budget move to actual
                 Dim qb As String = "-- opex
                 INSERT INTO tb_b_expense_opex_trans(id_b_expense_opex,is_po,id_departement,date_trans,`value`,id_item,id_report,report_mark_type,note)
-                SELECT rqd.id_b_expense_opex,1,rq.id_departement,NOW(),-(pod.`value` * rd.qty),rd.id_item, pod.id_purc_order, 139 AS rmt, 'Receiving Reverse PO'
+                SELECT rqd.id_b_expense_opex,1,rq.id_departement,NOW(),-(pod.`value` * rd.qty),rd.id_item, pod.id_purc_order, 139 AS rmt, 'Adj Budget Booking PO'
                 FROM tb_purc_rec_det rd
                 INNER JOIN tb_purc_order_det pod ON pod.id_purc_order_det = rd.id_purc_order_det
                 INNER JOIN tb_purc_req_det rqd ON rqd.id_purc_req_det = pod.id_purc_req_det
@@ -4840,7 +5115,7 @@
                 INNER JOIN tb_item_cat cat ON cat.id_item_cat = i.id_item_cat
                 WHERE rd.id_purc_rec=" + id_report + " AND cat.id_expense_type=1 AND i.id_item_type='1'
                 UNION ALL
-                SELECT rqd.id_b_expense_opex,1,rq.id_departement,NOW(),(pod.`value` * rd.qty),rd.id_item, " + id_report + ", 148 AS rmt, 'Receiving PO'
+                SELECT rqd.id_b_expense_opex,2,rq.id_departement,NOW(),(pod.`value` * rd.qty),rd.id_item, " + id_report + ", 148 AS rmt, 'Receiving PO'
                 FROM tb_purc_rec_det rd
                 INNER JOIN tb_purc_order_det pod ON pod.id_purc_order_det = rd.id_purc_order_det
                 INNER JOIN tb_purc_req_det rqd ON rqd.id_purc_req_det = pod.id_purc_req_det
@@ -4850,7 +5125,7 @@
                 WHERE rd.id_purc_rec=" + id_report + " AND cat.id_expense_type=1 AND i.id_item_type='1';
                 -- capex
                 INSERT INTO tb_b_expense_trans(id_b_expense,is_po,id_departement,date_trans,`value`,id_item,id_report,report_mark_type,note)
-                SELECT rqd.id_b_expense,1,rq.id_departement,NOW(),-(pod.`value` * rd.qty),rd.id_item, pod.id_purc_order, 202, 'Receiving Reverse PO'
+                SELECT rqd.id_b_expense,1,rq.id_departement,NOW(),-(pod.`value` * rd.qty),rd.id_item, pod.id_purc_order, 202, 'Adj Budget Booking PO'
                 FROM tb_purc_rec_det rd
                 INNER JOIN tb_purc_order_det pod ON pod.id_purc_order_det = rd.id_purc_order_det
                 INNER JOIN tb_purc_req_det rqd ON rqd.id_purc_req_det = pod.id_purc_req_det
@@ -4859,7 +5134,7 @@
                 INNER JOIN tb_item_cat cat ON cat.id_item_cat = i.id_item_cat
                 WHERE rd.id_purc_rec=" + id_report + " AND cat.id_expense_type=2 AND i.id_item_type='1'
                 UNION ALL
-                SELECT rqd.id_b_expense,1,rq.id_departement,NOW(),(pod.`value` * rd.qty),rd.id_item, " + id_report + ", 148, 'Receiving'
+                SELECT rqd.id_b_expense,2,rq.id_departement,NOW(),(pod.`value` * rd.qty),rd.id_item, " + id_report + ", 148, 'Receiving'
                 FROM tb_purc_rec_det rd
                 INNER JOIN tb_purc_order_det pod ON pod.id_purc_order_det = rd.id_purc_order_det
                 INNER JOIN tb_purc_req_det rqd ON rqd.id_purc_req_det = pod.id_purc_req_det
@@ -4918,7 +5193,7 @@
                 'det journal
                 Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_comp, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number, report_mark_type_ref, id_report_ref, report_number_ref)
                 /*total biaya jasa atau non inventory */
-                SELECT " + id_acc_trans + ",o.id_coa_out AS `id_acc`, dep.id_main_comp,  SUM(rd.qty) AS `qty`,
+                SELECT " + id_acc_trans + ",o.id_coa_out AS `id_acc`, IF(reqd.ship_to=0,1,reqd.ship_to) AS id_comp,  SUM(rd.qty) AS `qty`,
                 SUM(rd.qty * (pod.`value`-pod.discount))-((SUM(rd.qty * (pod.`value`-pod.discount))/(poall.`value`))*poall.disc_value) AS `debit`,
                 0 AS `credit`,'' AS `note`,148,rd.id_purc_rec, r.purc_rec_number, IF(po.id_expense_type=1,139,202) as rmt_reff,  po.id_purc_order, po.purc_order_number
                 FROM tb_purc_rec_det rd
@@ -4940,7 +5215,7 @@
                 INNER JOIN tb_m_departement dep ON dep.id_departement=req.id_departement
                 INNER JOIN tb_item_coa o ON o.id_item_cat=i.id_item_cat AND o.id_departement=req.id_departement
                 WHERE rd.id_purc_rec=" + id_report + " AND cat.id_expense_type=1 AND i.id_item_type='2'
-                GROUP BY rd.id_purc_rec,dep.id_main_comp
+                GROUP BY rd.id_purc_rec,dep.id_main_comp,reqd.ship_to
                 UNION ALL
                 /*total value item inventory tanpa diskon*/
                 SELECT " + id_acc_trans + ",o.acc_coa_receive AS `id_acc`, dep.id_main_comp,  SUM(rd.qty) AS `qty`,
@@ -5423,6 +5698,19 @@ WHERE copd.id_design_cop_propose='" & id_report & "';"
                     WHERE e.id_item_expense=" + id_report + " "
                     execute_non_query(qjd, True, "", "", "", "")
                 End If
+                'budget
+                Dim q_budget As String = "INSERT INTO tb_b_expense_opex_trans(id_b_expense_opex,is_po,id_departement,date_trans,`value`,id_item,id_report,report_mark_type,note)
+                SELECT ied.id_b_expense,'2' AS is_po, '5' AS id_departement,NOW() AS date_trans,amount,NULL AS id_item,ie.id_item_expense,'157','Expense'
+                FROM tb_item_expense_det ied 
+                INNER JOIN tb_item_expense ie ON ie.id_item_expense=ied.id_item_expense
+                WHERE ied.id_expense_type='1' AND ied.id_item_expense='" + id_report + "';
+                INSERT INTO tb_b_expense_opex(id_b_expense,is_po,id_departement,date_trans,`value`,id_item,id_report,report_mark_type,note)
+                SELECT ied.id_b_expense,'2' AS is_po, be.id_departement AS id_departement,NOW() AS date_trans,amount,NULL AS id_item,ie.id_item_expense,'157','Expense'
+                FROM tb_item_expense_det ied 
+                INNER JOIN tb_item_expense ie ON ie.id_item_expense=ied.id_item_expense
+                INNER JOIN tb_b_expense be ON be.id_b_expense=ied.id_b_expense
+                WHERE ied.id_expense_type='2' AND ied.id_item_expense='" + id_report + "';"
+                execute_non_query(q_budget, True, "", "", "", "")
             End If
 
             'refresh view

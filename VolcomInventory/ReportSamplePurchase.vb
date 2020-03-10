@@ -57,11 +57,11 @@ WHERE sp.id_sample_purc ='{0}'", id_sample_purc)
         LToName.Text = get_company_x(get_id_company(id_comp_to), "1")
         LToAddress.Text = get_company_x(get_id_company(id_comp_to), "3")
         LToAttn.Text = get_company_contact_x(id_comp_to, "1")
-
+        '
         Dim id_comp_ship_to As String = data.Rows(0)("id_comp_contact_ship_to").ToString
         LShipToName.Text = get_company_x(get_id_company(id_comp_ship_to), "1")
         LShipToAddress.Text = get_company_x(get_id_company(id_comp_ship_to), "3")
-
+        '
         LSeason.Text = get_season_orign_x(data.Rows(0)("id_season_orign").ToString, "1")
         id_cur = data.Rows(0)("id_currency")
         LNote.Text = data.Rows(0)("sample_purc_note").ToString

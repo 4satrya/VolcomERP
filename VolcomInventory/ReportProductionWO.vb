@@ -11,7 +11,7 @@ Public Class ReportProductionWO
     '
     Public Shared is_main As String = "-1"
     Public Shared is_po_print As String = "-1"
-
+    Public Shared is_manual_add As String = "-1"
     Dim id_ovh_price As String = "-1"
 
     Sub view_wo()
@@ -177,10 +177,18 @@ WHERE a.id_prod_order_wo='" & id_prod_wo & "'"
         view_wo()
         view_top()
 
-        If is_pre = "1" Then
-            pre_load_mark_horz("22", id_po, LToName.Text, "2", XrTable1)
+        If is_manual_add = "1" Then
+            If is_pre = "1" Then
+                pre_load_mark_horz("23", id_prod_wo, LToName.Text, "2", XrTable1)
+            Else
+                load_mark_horz("23", id_prod_wo, LToName.Text, "2", XrTable1)
+            End If
         Else
-            load_mark_horz("22", id_po, LToName.Text, "2", XrTable1)
+            If is_pre = "1" Then
+                pre_load_mark_horz("22", id_po, LToName.Text, "2", XrTable1)
+            Else
+                load_mark_horz("22", id_po, LToName.Text, "2", XrTable1)
+            End If
         End If
         '
         'printed date 

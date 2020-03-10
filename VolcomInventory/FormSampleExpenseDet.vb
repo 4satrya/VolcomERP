@@ -330,11 +330,11 @@ VALUES('" & SLEBudget.EditValue.ToString & "','" & LECurrency.EditValue.ToString
             load_remaining_budget_after()
             If id_purc = "-1" Then
                 If LECurrency.EditValue.ToString = "2" Then
-                    Dim query_kurs As String = "SELECT * FROM tb_kurs_trans WHERE DATE(created_date) = DATE(NOW()) ORDER BY id_kurs_trans DESC"
+                    Dim query_kurs As String = "SELECT * FROM tb_kurs_trans WHERE DATE(DATE_ADD(created_date, INTERVAL 6 DAY)) >= DATE(NOW()) ORDER BY id_kurs_trans DESC LIMIT 1"
                     Dim data_kurs As DataTable = execute_query(query_kurs, -1, True, "", "", "", "")
 
                     If Not data_kurs.Rows.Count > 0 Then
-                        warningCustom("Today transaction kurs still not submitted, please contact FC.")
+                        warningCustom("Get kurs error")
                         TEKurs.EditValue = 0.0
                     Else
                         TEKurs.EditValue = data_kurs.Rows(0)("kurs_trans")

@@ -67,6 +67,7 @@ Partial Class FormEmpPayrollDeduction
         Me.GridColumnValue = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnNote = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.BBUnpaidLeave = New DevExpress.XtraBars.BarButtonItem()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -220,7 +221,7 @@ Partial Class FormEmpPayrollDeduction
         '
         'PopupMenu
         '
-        Me.PopupMenu.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.BBJamsostek), New DevExpress.XtraBars.LinkPersistInfo(Me.BBKoperasi)})
+        Me.PopupMenu.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.BBJamsostek), New DevExpress.XtraBars.LinkPersistInfo(Me.BBKoperasi), New DevExpress.XtraBars.LinkPersistInfo(Me.BBUnpaidLeave)})
         Me.PopupMenu.Manager = Me.BarManager
         Me.PopupMenu.Name = "PopupMenu"
         '
@@ -243,8 +244,8 @@ Partial Class FormEmpPayrollDeduction
         Me.BarManager.DockControls.Add(Me.barDockControlLeft)
         Me.BarManager.DockControls.Add(Me.barDockControlRight)
         Me.BarManager.Form = Me
-        Me.BarManager.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.BBJamsostek, Me.BBKoperasi})
-        Me.BarManager.MaxItemId = 14
+        Me.BarManager.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.BBJamsostek, Me.BBKoperasi, Me.BBUnpaidLeave})
+        Me.BarManager.MaxItemId = 15
         '
         'barDockControlTop
         '
@@ -502,6 +503,12 @@ Partial Class FormEmpPayrollDeduction
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
         Me.ContextMenuStrip1.Size = New System.Drawing.Size(61, 4)
         '
+        'BBUnpaidLeave
+        '
+        Me.BBUnpaidLeave.Caption = "Unpaid Leave"
+        Me.BBUnpaidLeave.Id = 14
+        Me.BBUnpaidLeave.Name = "BBUnpaidLeave"
+        '
         'FormEmpPayrollDeduction
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -584,4 +591,5 @@ Partial Class FormEmpPayrollDeduction
     Friend WithEvents GCCheck As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RepositoryItemCheckEdit As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
     Friend WithEvents GridColumnIdDeduct As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BBUnpaidLeave As DevExpress.XtraBars.BarButtonItem
 End Class

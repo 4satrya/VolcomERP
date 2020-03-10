@@ -2,6 +2,7 @@
     Dim bnew_active As String = "1"
     Dim bedit_active As String = "1"
     Dim bdel_active As String = "1"
+
     Private Sub FormAccountingJournalAdj_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         view_jurnal()
     End Sub

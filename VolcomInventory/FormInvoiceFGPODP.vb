@@ -474,7 +474,14 @@ VALUES('" & id_invoice & "','" & GVList.GetRowCellValue(i, "id_prod_order").ToSt
     Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles BtnPrint.Click
         Cursor = Cursors.WaitCursor
         ReportFGPODP.id_pn_fgpo = id_invoice
-        ReportFGPODP.dt = GCList.DataSource
+        Dim q_print As String = "Select pnd.`id_prod_order`,po.prod_order_number,pnd.id_acc,pnd.`id_report` As id_report,pnd.report_mark_type, pnd.`report_number`, pnd.`info_design`, pnd.`id_pn_fgpo_det`, pnd.`qty`,pnd.`vat`, pnd.`inv_number`,pnd.value_bef_kurs,pnd.kurs,pnd.id_currency,cur.currency, pnd.`note` 
+FROM tb_pn_fgpo_det pnd
+INNER JOIN tb_lookup_currency cur ON cur.id_currency=pnd.id_currency
+LEFT JOIN tb_prod_order po ON po.id_prod_order=pnd.id_prod_order 
+WHERE pnd.`id_pn_fgpo`='" & id_invoice & "' AND pnd.report_mark_type!='199'"
+        Dim dt As DataTable = execute_query(q_print, -1, True, "", "", "", "")
+        'ReportFGPODP.dt = GCList.DataSource
+        ReportFGPODP.dt = dt
         Dim Report As New ReportFGPODP()
         ' '... 
         ' ' creating and saving the view's layout to a new memory stream 
@@ -486,6 +493,7 @@ VALUES('" & id_invoice & "','" & GVList.GetRowCellValue(i, "id_prod_order").ToSt
         GCCurHide.VisibleIndex = 5
         GridColumnAccPick.VisibleIndex = -1
         GridColumnNote.VisibleIndex = -1
+        GCPORef.VisibleIndex = 1
 
         Dim str As System.IO.Stream
         str = New System.IO.MemoryStream()
@@ -496,14 +504,37 @@ VALUES('" & id_invoice & "','" & GVList.GetRowCellValue(i, "id_prod_order").ToSt
 
         'Grid Detail
         ReportStyleGridview(Report.GVList)
+        Report.GVList.OptionsPrint.PrintFooter = False
 
         GridColumnAccPick.VisibleIndex = 0
         GCCur.VisibleIndex = 5
         GCCurHide.VisibleIndex = -1
         GridColumnNote.VisibleIndex = 10
+        GCPORef.VisibleIndex = -1
 
+        'search total
+        Dim tot As String = Decimal.Parse("0").ToString("N2")
+        Dim tot_vat As String = Decimal.Parse("0").ToString("N2")
+        Dim q_tot As String = "SELECT IFNULL(SUM(pnd.value),0) AS tot,IFNULL(SUM(pnd.vat),0) AS tot_vat FROM tb_pn_fgpo_det pnd 
+INNER JOIN tb_lookup_currency cur ON cur.id_currency=pnd.id_currency 
+WHERE pnd.`id_pn_fgpo`='" & id_invoice & "' AND pnd.report_mark_type!='199'"
+        Dim dt_tot As DataTable = execute_query(q_tot, -1, True, "", "", "", "")
+        If dt_tot.Rows.Count > 0 Then
+            tot = Decimal.Parse(dt_tot.Rows(0)("tot").ToString).ToString("N2")
+            tot_vat = Decimal.Parse(dt_tot.Rows(0)("tot_vat").ToString).ToString("N2")
+        End If
+
+        'search dp
+        Dim dp As String = Decimal.Parse("0").ToString("N2")
+        Dim q_dp As String = "SELECT IFNULL(SUM(pnd.value+pnd.vat),0) AS tot_dp FROM tb_pn_fgpo_det pnd 
+INNER JOIN tb_lookup_currency cur ON cur.id_currency=pnd.id_currency 
+WHERE pnd.`id_pn_fgpo`='" & id_invoice & "' AND pnd.report_mark_type='199'"
+        Dim dt_dp As DataTable = execute_query(q_dp, -1, True, "", "", "", "")
+        If dt_dp.Rows.Count > 0 Then
+            dp = Decimal.Parse(dt_dp.Rows(0)("tot_dp").ToString).ToString("N2")
+        End If
         'Parse val
-        Dim query As String = "SELECT '" & TENumber.Text & "' AS number,'" & SLEPayType.Text & "' AS type,'" & SLEVendor.Text & "' AS comp_name,'" & DERefDate.Text & "' AS ref_date,'" & DEDueDate.Text & "' AS due_date,'" & DEDueDateInv.Text & "' AS due_date_inv,'" & TETotal.Text & "' AS total_amount,'" & TEVat.Text & "' AS total_vat,'" & TEGrandTotal.Text & "' AS total_after_vat,'" & DEDateCreated.Text & "' AS date_created,DATE_FORMAT(NOW(),'%d %M %Y') AS printed_date"
+        Dim query As String = "SELECT '" & TENumber.Text & "' AS number,'" & addSlashes(MENote.Text) & "' AS note,'" & ConvertCurrencyToIndonesian(TEGrandTotal.EditValue) & "' AS tot_say,'" & SLEPayType.Text & "' AS type,'" & SLEVendor.Text & "' AS comp_name,'" & DERefDate.Text & "' AS ref_date,'" & DEDueDate.Text & "' AS due_date,'" & DEDueDateInv.Text & "' AS due_date_inv,'" & tot & "' AS total_amount,'" & tot_vat & "' AS total_vat,'" & dp & "' AS tot_dp,'" & TEGrandTotal.Text & "' AS total_after_vat,'" & DEDateCreated.Text & "' AS date_created,DATE_FORMAT(NOW(),'%d %M %Y') AS printed_date"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         Report.DataSource = data
 

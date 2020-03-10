@@ -14,11 +14,11 @@
 
     Sub load_kurs()
         'check kurs first
-        Dim query_kurs As String = "SELECT * FROM tb_kurs_trans WHERE DATE(created_date) = DATE(NOW()) ORDER BY id_kurs_trans DESC"
+        Dim query_kurs As String = "SELECT * FROM tb_kurs_trans WHERE DATE(DATE_ADD(created_date, INTERVAL 6 DAY)) >= DATE(NOW()) ORDER BY id_kurs_trans DESC LIMIT 1"
         Dim data_kurs As DataTable = execute_query(query_kurs, -1, True, "", "", "", "")
 
         If Not data_kurs.Rows.Count > 0 Then
-            warningCustom("Today transaction kurs still not submitted, please contact accounting.")
+            warningCustom("Get kurs error.")
             TEKurs.EditValue = 0.00
         Else
             If LECurrency.EditValue.ToString = "2" Then

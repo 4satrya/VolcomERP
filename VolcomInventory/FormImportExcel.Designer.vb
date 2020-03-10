@@ -56,7 +56,7 @@ Partial Class FormImportExcel
         Me.GroupControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupControl1.Location = New System.Drawing.Point(0, 67)
         Me.GroupControl1.Name = "GroupControl1"
-        Me.GroupControl1.Size = New System.Drawing.Size(834, 253)
+        Me.GroupControl1.Size = New System.Drawing.Size(834, 243)
         Me.GroupControl1.TabIndex = 5
         Me.GroupControl1.Text = "Data"
         '
@@ -66,7 +66,7 @@ Partial Class FormImportExcel
         Me.GCData.Location = New System.Drawing.Point(2, 20)
         Me.GCData.MainView = Me.GVData
         Me.GCData.Name = "GCData"
-        Me.GCData.Size = New System.Drawing.Size(830, 231)
+        Me.GCData.Size = New System.Drawing.Size(830, 221)
         Me.GCData.TabIndex = 86
         Me.GCData.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVData, Me.GridView2})
         '
@@ -91,9 +91,9 @@ Partial Class FormImportExcel
         Me.PanelControl2.Controls.Add(Me.BCancel)
         Me.PanelControl2.Controls.Add(Me.BImport)
         Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl2.Location = New System.Drawing.Point(0, 320)
+        Me.PanelControl2.Location = New System.Drawing.Point(0, 310)
         Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(834, 32)
+        Me.PanelControl2.Size = New System.Drawing.Size(834, 42)
         Me.PanelControl2.TabIndex = 4
         '
         'BtnPrint
@@ -101,7 +101,7 @@ Partial Class FormImportExcel
         Me.BtnPrint.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnPrint.Location = New System.Drawing.Point(446, 2)
         Me.BtnPrint.Name = "BtnPrint"
-        Me.BtnPrint.Size = New System.Drawing.Size(90, 28)
+        Me.BtnPrint.Size = New System.Drawing.Size(90, 38)
         Me.BtnPrint.TabIndex = 93
         Me.BtnPrint.Text = "Print"
         '
@@ -110,14 +110,14 @@ Partial Class FormImportExcel
         Me.BtnAction.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnAction.Location = New System.Drawing.Point(536, 2)
         Me.BtnAction.Name = "BtnAction"
-        Me.BtnAction.Size = New System.Drawing.Size(116, 28)
+        Me.BtnAction.Size = New System.Drawing.Size(116, 38)
         Me.BtnAction.TabIndex = 94
         Me.BtnAction.Text = "Other Action"
         Me.BtnAction.Visible = False
         '
         'LabelControl1
         '
-        Me.LabelControl1.Location = New System.Drawing.Point(172, 9)
+        Me.LabelControl1.Location = New System.Drawing.Point(174, 14)
         Me.LabelControl1.Name = "LabelControl1"
         Me.LabelControl1.Size = New System.Drawing.Size(90, 13)
         Me.LabelControl1.TabIndex = 92
@@ -129,7 +129,7 @@ Partial Class FormImportExcel
         Me.PBC.Dock = System.Windows.Forms.DockStyle.Left
         Me.PBC.Location = New System.Drawing.Point(2, 2)
         Me.PBC.Name = "PBC"
-        Me.PBC.Size = New System.Drawing.Size(157, 28)
+        Me.PBC.Size = New System.Drawing.Size(157, 38)
         Me.PBC.TabIndex = 91
         '
         'BCancel
@@ -137,7 +137,7 @@ Partial Class FormImportExcel
         Me.BCancel.Dock = System.Windows.Forms.DockStyle.Right
         Me.BCancel.Location = New System.Drawing.Point(652, 2)
         Me.BCancel.Name = "BCancel"
-        Me.BCancel.Size = New System.Drawing.Size(90, 28)
+        Me.BCancel.Size = New System.Drawing.Size(90, 38)
         Me.BCancel.TabIndex = 90
         Me.BCancel.Text = "Cancel"
         '
@@ -146,7 +146,7 @@ Partial Class FormImportExcel
         Me.BImport.Dock = System.Windows.Forms.DockStyle.Right
         Me.BImport.Location = New System.Drawing.Point(742, 2)
         Me.BImport.Name = "BImport"
-        Me.BImport.Size = New System.Drawing.Size(90, 28)
+        Me.BImport.Size = New System.Drawing.Size(90, 38)
         Me.BImport.TabIndex = 89
         Me.BImport.Text = "Import"
         '

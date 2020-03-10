@@ -20,6 +20,34 @@ Partial Public Class ReportMatPD
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.Detail = New DevExpress.XtraReports.UI.DetailBand()
+        Me.LCons4 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LQty4 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LColor4 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LDesign4 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LClass4 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LNO4 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LTotal4 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LTotal3 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LNO3 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LClass3 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LDesign3 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LColor3 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LQty3 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LCons3 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LTotal2 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LNO2 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LClass2 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LDesign2 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LColor2 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LQty2 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LCons2 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LCons1 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LQty1 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LColor1 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LDesign1 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LClass1 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LNO1 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LTotal1 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel34 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel35 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel36 = New DevExpress.XtraReports.UI.XRLabel()
@@ -68,34 +96,6 @@ Partial Public Class ReportMatPD
         Me.XrTable1 = New DevExpress.XtraReports.UI.XRTable()
         Me.XrTableRow1 = New DevExpress.XtraReports.UI.XRTableRow()
         Me.XrTableCell1 = New DevExpress.XtraReports.UI.XRTableCell()
-        Me.LCons1 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.LQty1 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.LColor1 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.LDesign1 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.LClass1 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.LNO1 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.LTotal1 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.LTotal2 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.LNO2 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.LClass2 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.LDesign2 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.LColor2 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.LQty2 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.LCons2 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.LTotal3 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.LNO3 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.LClass3 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.LDesign3 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.LColor3 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.LQty3 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.LCons3 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.LCons4 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.LQty4 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.LColor4 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.LDesign4 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.LClass4 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.LNO4 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.LTotal4 = New DevExpress.XtraReports.UI.XRLabel()
         CType(Me.XrTable1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         '
@@ -106,6 +106,398 @@ Partial Public Class ReportMatPD
         Me.Detail.Name = "Detail"
         Me.Detail.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
         Me.Detail.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+        '
+        'LCons4
+        '
+        Me.LCons4.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.LCons4.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LCons4.LocationFloat = New DevExpress.Utils.PointFloat(425.0!, 256.875!)
+        Me.LCons4.Multiline = True
+        Me.LCons4.Name = "LCons4"
+        Me.LCons4.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LCons4.SizeF = New System.Drawing.SizeF(69.99976!, 20.0!)
+        Me.LCons4.StylePriority.UseBorders = False
+        Me.LCons4.StylePriority.UseFont = False
+        Me.LCons4.StylePriority.UseTextAlignment = False
+        Me.LCons4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+        '
+        'LQty4
+        '
+        Me.LQty4.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.LQty4.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LQty4.LocationFloat = New DevExpress.Utils.PointFloat(370.0001!, 256.875!)
+        Me.LQty4.Multiline = True
+        Me.LQty4.Name = "LQty4"
+        Me.LQty4.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LQty4.SizeF = New System.Drawing.SizeF(55.00006!, 20.0!)
+        Me.LQty4.StylePriority.UseBorders = False
+        Me.LQty4.StylePriority.UseFont = False
+        Me.LQty4.StylePriority.UseTextAlignment = False
+        Me.LQty4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+        '
+        'LColor4
+        '
+        Me.LColor4.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.LColor4.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LColor4.LocationFloat = New DevExpress.Utils.PointFloat(330.0!, 256.875!)
+        Me.LColor4.Multiline = True
+        Me.LColor4.Name = "LColor4"
+        Me.LColor4.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LColor4.SizeF = New System.Drawing.SizeF(40.0!, 20.0!)
+        Me.LColor4.StylePriority.UseBorders = False
+        Me.LColor4.StylePriority.UseFont = False
+        Me.LColor4.StylePriority.UseTextAlignment = False
+        Me.LColor4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+        '
+        'LDesign4
+        '
+        Me.LDesign4.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.LDesign4.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LDesign4.LocationFloat = New DevExpress.Utils.PointFloat(80.0!, 256.875!)
+        Me.LDesign4.Name = "LDesign4"
+        Me.LDesign4.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LDesign4.SizeF = New System.Drawing.SizeF(250.0!, 20.0!)
+        Me.LDesign4.StylePriority.UseBorders = False
+        Me.LDesign4.StylePriority.UseFont = False
+        Me.LDesign4.StylePriority.UseTextAlignment = False
+        Me.LDesign4.Text = "TOTAL QTY (PCS)"
+        Me.LDesign4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        '
+        'LClass4
+        '
+        Me.LClass4.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.LClass4.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LClass4.LocationFloat = New DevExpress.Utils.PointFloat(30.0!, 256.875!)
+        Me.LClass4.Name = "LClass4"
+        Me.LClass4.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LClass4.SizeF = New System.Drawing.SizeF(50.0!, 20.0!)
+        Me.LClass4.StylePriority.UseBorders = False
+        Me.LClass4.StylePriority.UseFont = False
+        Me.LClass4.StylePriority.UseTextAlignment = False
+        Me.LClass4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+        '
+        'LNO4
+        '
+        Me.LNO4.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.LNO4.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LNO4.LocationFloat = New DevExpress.Utils.PointFloat(0!, 256.875!)
+        Me.LNO4.Name = "LNO4"
+        Me.LNO4.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LNO4.SizeF = New System.Drawing.SizeF(30.0!, 20.0!)
+        Me.LNO4.StylePriority.UseBorders = False
+        Me.LNO4.StylePriority.UseFont = False
+        Me.LNO4.StylePriority.UseTextAlignment = False
+        Me.LNO4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+        '
+        'LTotal4
+        '
+        Me.LTotal4.Borders = CType(((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Right) _
+            Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.LTotal4.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LTotal4.LocationFloat = New DevExpress.Utils.PointFloat(494.9998!, 256.875!)
+        Me.LTotal4.Multiline = True
+        Me.LTotal4.Name = "LTotal4"
+        Me.LTotal4.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LTotal4.SizeF = New System.Drawing.SizeF(229.0002!, 20.0!)
+        Me.LTotal4.StylePriority.UseBorders = False
+        Me.LTotal4.StylePriority.UseFont = False
+        Me.LTotal4.StylePriority.UseTextAlignment = False
+        Me.LTotal4.Text = "[total_order]"
+        Me.LTotal4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
+        '
+        'LTotal3
+        '
+        Me.LTotal3.Borders = CType(((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Right) _
+            Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.LTotal3.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LTotal3.LocationFloat = New DevExpress.Utils.PointFloat(494.9998!, 236.875!)
+        Me.LTotal3.Multiline = True
+        Me.LTotal3.Name = "LTotal3"
+        Me.LTotal3.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LTotal3.SizeF = New System.Drawing.SizeF(229.0002!, 20.0!)
+        Me.LTotal3.StylePriority.UseBorders = False
+        Me.LTotal3.StylePriority.UseFont = False
+        Me.LTotal3.StylePriority.UseTextAlignment = False
+        Me.LTotal3.Text = "[total_qty_order_conv]"
+        Me.LTotal3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
+        '
+        'LNO3
+        '
+        Me.LNO3.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.LNO3.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LNO3.LocationFloat = New DevExpress.Utils.PointFloat(0!, 236.875!)
+        Me.LNO3.Name = "LNO3"
+        Me.LNO3.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LNO3.SizeF = New System.Drawing.SizeF(30.0!, 20.0!)
+        Me.LNO3.StylePriority.UseBorders = False
+        Me.LNO3.StylePriority.UseFont = False
+        Me.LNO3.StylePriority.UseTextAlignment = False
+        Me.LNO3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+        '
+        'LClass3
+        '
+        Me.LClass3.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.LClass3.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LClass3.LocationFloat = New DevExpress.Utils.PointFloat(30.0!, 236.875!)
+        Me.LClass3.Name = "LClass3"
+        Me.LClass3.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LClass3.SizeF = New System.Drawing.SizeF(50.0!, 20.0!)
+        Me.LClass3.StylePriority.UseBorders = False
+        Me.LClass3.StylePriority.UseFont = False
+        Me.LClass3.StylePriority.UseTextAlignment = False
+        Me.LClass3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+        '
+        'LDesign3
+        '
+        Me.LDesign3.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.LDesign3.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LDesign3.LocationFloat = New DevExpress.Utils.PointFloat(80.0!, 236.875!)
+        Me.LDesign3.Name = "LDesign3"
+        Me.LDesign3.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LDesign3.SizeF = New System.Drawing.SizeF(250.0!, 20.0!)
+        Me.LDesign3.StylePriority.UseBorders = False
+        Me.LDesign3.StylePriority.UseFont = False
+        Me.LDesign3.StylePriority.UseTextAlignment = False
+        Me.LDesign3.Text = "TOTAL [bulk_unit]"
+        Me.LDesign3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        '
+        'LColor3
+        '
+        Me.LColor3.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.LColor3.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LColor3.LocationFloat = New DevExpress.Utils.PointFloat(330.0!, 236.875!)
+        Me.LColor3.Multiline = True
+        Me.LColor3.Name = "LColor3"
+        Me.LColor3.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LColor3.SizeF = New System.Drawing.SizeF(40.0!, 20.0!)
+        Me.LColor3.StylePriority.UseBorders = False
+        Me.LColor3.StylePriority.UseFont = False
+        Me.LColor3.StylePriority.UseTextAlignment = False
+        Me.LColor3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+        '
+        'LQty3
+        '
+        Me.LQty3.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.LQty3.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LQty3.LocationFloat = New DevExpress.Utils.PointFloat(370.0001!, 236.875!)
+        Me.LQty3.Multiline = True
+        Me.LQty3.Name = "LQty3"
+        Me.LQty3.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LQty3.SizeF = New System.Drawing.SizeF(55.00006!, 20.0!)
+        Me.LQty3.StylePriority.UseBorders = False
+        Me.LQty3.StylePriority.UseFont = False
+        Me.LQty3.StylePriority.UseTextAlignment = False
+        Me.LQty3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+        '
+        'LCons3
+        '
+        Me.LCons3.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.LCons3.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LCons3.LocationFloat = New DevExpress.Utils.PointFloat(425.0!, 236.875!)
+        Me.LCons3.Multiline = True
+        Me.LCons3.Name = "LCons3"
+        Me.LCons3.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LCons3.SizeF = New System.Drawing.SizeF(69.99976!, 20.0!)
+        Me.LCons3.StylePriority.UseBorders = False
+        Me.LCons3.StylePriority.UseFont = False
+        Me.LCons3.StylePriority.UseTextAlignment = False
+        Me.LCons3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+        '
+        'LTotal2
+        '
+        Me.LTotal2.Borders = CType(((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Right) _
+            Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.LTotal2.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LTotal2.LocationFloat = New DevExpress.Utils.PointFloat(494.9998!, 216.875!)
+        Me.LTotal2.Multiline = True
+        Me.LTotal2.Name = "LTotal2"
+        Me.LTotal2.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LTotal2.SizeF = New System.Drawing.SizeF(229.0002!, 20.0!)
+        Me.LTotal2.StylePriority.UseBorders = False
+        Me.LTotal2.StylePriority.UseFont = False
+        Me.LTotal2.StylePriority.UseTextAlignment = False
+        Me.LTotal2.Text = "[total_qty_list_conv]"
+        Me.LTotal2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
+        '
+        'LNO2
+        '
+        Me.LNO2.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.LNO2.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LNO2.LocationFloat = New DevExpress.Utils.PointFloat(0!, 216.875!)
+        Me.LNO2.Name = "LNO2"
+        Me.LNO2.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LNO2.SizeF = New System.Drawing.SizeF(30.0!, 20.0!)
+        Me.LNO2.StylePriority.UseBorders = False
+        Me.LNO2.StylePriority.UseFont = False
+        Me.LNO2.StylePriority.UseTextAlignment = False
+        Me.LNO2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+        '
+        'LClass2
+        '
+        Me.LClass2.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.LClass2.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LClass2.LocationFloat = New DevExpress.Utils.PointFloat(30.0!, 216.875!)
+        Me.LClass2.Name = "LClass2"
+        Me.LClass2.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LClass2.SizeF = New System.Drawing.SizeF(50.0!, 20.0!)
+        Me.LClass2.StylePriority.UseBorders = False
+        Me.LClass2.StylePriority.UseFont = False
+        Me.LClass2.StylePriority.UseTextAlignment = False
+        Me.LClass2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+        '
+        'LDesign2
+        '
+        Me.LDesign2.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.LDesign2.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LDesign2.LocationFloat = New DevExpress.Utils.PointFloat(80.0!, 216.875!)
+        Me.LDesign2.Name = "LDesign2"
+        Me.LDesign2.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LDesign2.SizeF = New System.Drawing.SizeF(250.0!, 20.0!)
+        Me.LDesign2.StylePriority.UseBorders = False
+        Me.LDesign2.StylePriority.UseFont = False
+        Me.LDesign2.StylePriority.UseTextAlignment = False
+        Me.LDesign2.Text = "QTY [bulk_unit]"
+        Me.LDesign2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        '
+        'LColor2
+        '
+        Me.LColor2.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.LColor2.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LColor2.LocationFloat = New DevExpress.Utils.PointFloat(330.0!, 216.875!)
+        Me.LColor2.Multiline = True
+        Me.LColor2.Name = "LColor2"
+        Me.LColor2.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LColor2.SizeF = New System.Drawing.SizeF(40.0!, 20.0!)
+        Me.LColor2.StylePriority.UseBorders = False
+        Me.LColor2.StylePriority.UseFont = False
+        Me.LColor2.StylePriority.UseTextAlignment = False
+        Me.LColor2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+        '
+        'LQty2
+        '
+        Me.LQty2.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.LQty2.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LQty2.LocationFloat = New DevExpress.Utils.PointFloat(370.0001!, 216.875!)
+        Me.LQty2.Multiline = True
+        Me.LQty2.Name = "LQty2"
+        Me.LQty2.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LQty2.SizeF = New System.Drawing.SizeF(55.00006!, 20.0!)
+        Me.LQty2.StylePriority.UseBorders = False
+        Me.LQty2.StylePriority.UseFont = False
+        Me.LQty2.StylePriority.UseTextAlignment = False
+        Me.LQty2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+        '
+        'LCons2
+        '
+        Me.LCons2.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.LCons2.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LCons2.LocationFloat = New DevExpress.Utils.PointFloat(425.0!, 216.875!)
+        Me.LCons2.Multiline = True
+        Me.LCons2.Name = "LCons2"
+        Me.LCons2.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LCons2.SizeF = New System.Drawing.SizeF(69.99976!, 20.0!)
+        Me.LCons2.StylePriority.UseBorders = False
+        Me.LCons2.StylePriority.UseFont = False
+        Me.LCons2.StylePriority.UseTextAlignment = False
+        Me.LCons2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+        '
+        'LCons1
+        '
+        Me.LCons1.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.LCons1.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LCons1.LocationFloat = New DevExpress.Utils.PointFloat(425.0!, 196.875!)
+        Me.LCons1.Multiline = True
+        Me.LCons1.Name = "LCons1"
+        Me.LCons1.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LCons1.SizeF = New System.Drawing.SizeF(69.99976!, 20.0!)
+        Me.LCons1.StylePriority.UseBorders = False
+        Me.LCons1.StylePriority.UseFont = False
+        Me.LCons1.StylePriority.UseTextAlignment = False
+        Me.LCons1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+        '
+        'LQty1
+        '
+        Me.LQty1.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.LQty1.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LQty1.LocationFloat = New DevExpress.Utils.PointFloat(370.0001!, 196.875!)
+        Me.LQty1.Multiline = True
+        Me.LQty1.Name = "LQty1"
+        Me.LQty1.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LQty1.SizeF = New System.Drawing.SizeF(55.00006!, 20.0!)
+        Me.LQty1.StylePriority.UseBorders = False
+        Me.LQty1.StylePriority.UseFont = False
+        Me.LQty1.StylePriority.UseTextAlignment = False
+        Me.LQty1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+        '
+        'LColor1
+        '
+        Me.LColor1.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.LColor1.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LColor1.LocationFloat = New DevExpress.Utils.PointFloat(330.0!, 196.875!)
+        Me.LColor1.Multiline = True
+        Me.LColor1.Name = "LColor1"
+        Me.LColor1.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LColor1.SizeF = New System.Drawing.SizeF(40.0!, 20.0!)
+        Me.LColor1.StylePriority.UseBorders = False
+        Me.LColor1.StylePriority.UseFont = False
+        Me.LColor1.StylePriority.UseTextAlignment = False
+        Me.LColor1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+        '
+        'LDesign1
+        '
+        Me.LDesign1.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.LDesign1.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LDesign1.LocationFloat = New DevExpress.Utils.PointFloat(80.0!, 196.875!)
+        Me.LDesign1.Name = "LDesign1"
+        Me.LDesign1.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LDesign1.SizeF = New System.Drawing.SizeF(250.0!, 20.0!)
+        Me.LDesign1.StylePriority.UseBorders = False
+        Me.LDesign1.StylePriority.UseFont = False
+        Me.LDesign1.StylePriority.UseTextAlignment = False
+        Me.LDesign1.Text = "1 [bulk_unit]"
+        Me.LDesign1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        '
+        'LClass1
+        '
+        Me.LClass1.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.LClass1.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LClass1.LocationFloat = New DevExpress.Utils.PointFloat(30.0!, 196.875!)
+        Me.LClass1.Name = "LClass1"
+        Me.LClass1.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LClass1.SizeF = New System.Drawing.SizeF(50.0!, 20.0!)
+        Me.LClass1.StylePriority.UseBorders = False
+        Me.LClass1.StylePriority.UseFont = False
+        Me.LClass1.StylePriority.UseTextAlignment = False
+        Me.LClass1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+        '
+        'LNO1
+        '
+        Me.LNO1.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.LNO1.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LNO1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 196.875!)
+        Me.LNO1.Name = "LNO1"
+        Me.LNO1.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LNO1.SizeF = New System.Drawing.SizeF(30.0!, 20.0!)
+        Me.LNO1.StylePriority.UseBorders = False
+        Me.LNO1.StylePriority.UseFont = False
+        Me.LNO1.StylePriority.UseTextAlignment = False
+        Me.LNO1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+        '
+        'LTotal1
+        '
+        Me.LTotal1.Borders = CType(((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Right) _
+            Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.LTotal1.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LTotal1.LocationFloat = New DevExpress.Utils.PointFloat(494.9998!, 196.875!)
+        Me.LTotal1.Multiline = True
+        Me.LTotal1.Name = "LTotal1"
+        Me.LTotal1.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LTotal1.SizeF = New System.Drawing.SizeF(229.0002!, 20.0!)
+        Me.LTotal1.StylePriority.UseBorders = False
+        Me.LTotal1.StylePriority.UseFont = False
+        Me.LTotal1.StylePriority.UseTextAlignment = False
+        Me.LTotal1.Text = "[min_qty_in_bulk]"
+        Me.LTotal1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
         '
         'XrLabel34
         '
@@ -500,6 +892,7 @@ Partial Public Class ReportMatPD
         '
         'XPTableAmount
         '
+        Me.XPTableAmount.KeepTogether = False
         Me.XPTableAmount.LocationFloat = New DevExpress.Utils.PointFloat(0!, 96.875!)
         Me.XPTableAmount.Name = "XPTableAmount"
         Me.XPTableAmount.SizeF = New System.Drawing.SizeF(723.9999!, 20.00001!)
@@ -702,6 +1095,7 @@ Partial Public Class ReportMatPD
         '
         Me.ReportFooter.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrTable1})
         Me.ReportFooter.HeightF = 25.0!
+        Me.ReportFooter.KeepTogether = True
         Me.ReportFooter.Name = "ReportFooter"
         '
         'XrTable1
@@ -727,398 +1121,6 @@ Partial Public Class ReportMatPD
         Me.XrTableCell1.Text = "Here Table Mark Goes, Please Ignore This"
         Me.XrTableCell1.Visible = False
         Me.XrTableCell1.Weight = 2.99999986405489R
-        '
-        'LCons1
-        '
-        Me.LCons1.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
-        Me.LCons1.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LCons1.LocationFloat = New DevExpress.Utils.PointFloat(425.0!, 196.875!)
-        Me.LCons1.Multiline = True
-        Me.LCons1.Name = "LCons1"
-        Me.LCons1.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LCons1.SizeF = New System.Drawing.SizeF(69.99976!, 20.0!)
-        Me.LCons1.StylePriority.UseBorders = False
-        Me.LCons1.StylePriority.UseFont = False
-        Me.LCons1.StylePriority.UseTextAlignment = False
-        Me.LCons1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'LQty1
-        '
-        Me.LQty1.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
-        Me.LQty1.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LQty1.LocationFloat = New DevExpress.Utils.PointFloat(370.0001!, 196.875!)
-        Me.LQty1.Multiline = True
-        Me.LQty1.Name = "LQty1"
-        Me.LQty1.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LQty1.SizeF = New System.Drawing.SizeF(55.00006!, 20.0!)
-        Me.LQty1.StylePriority.UseBorders = False
-        Me.LQty1.StylePriority.UseFont = False
-        Me.LQty1.StylePriority.UseTextAlignment = False
-        Me.LQty1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'LColor1
-        '
-        Me.LColor1.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
-        Me.LColor1.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LColor1.LocationFloat = New DevExpress.Utils.PointFloat(330.0!, 196.875!)
-        Me.LColor1.Multiline = True
-        Me.LColor1.Name = "LColor1"
-        Me.LColor1.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LColor1.SizeF = New System.Drawing.SizeF(40.0!, 20.0!)
-        Me.LColor1.StylePriority.UseBorders = False
-        Me.LColor1.StylePriority.UseFont = False
-        Me.LColor1.StylePriority.UseTextAlignment = False
-        Me.LColor1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'LDesign1
-        '
-        Me.LDesign1.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
-        Me.LDesign1.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LDesign1.LocationFloat = New DevExpress.Utils.PointFloat(80.0!, 196.875!)
-        Me.LDesign1.Name = "LDesign1"
-        Me.LDesign1.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LDesign1.SizeF = New System.Drawing.SizeF(250.0!, 20.0!)
-        Me.LDesign1.StylePriority.UseBorders = False
-        Me.LDesign1.StylePriority.UseFont = False
-        Me.LDesign1.StylePriority.UseTextAlignment = False
-        Me.LDesign1.Text = "1 [bulk_unit]"
-        Me.LDesign1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
-        '
-        'LClass1
-        '
-        Me.LClass1.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
-        Me.LClass1.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LClass1.LocationFloat = New DevExpress.Utils.PointFloat(30.0!, 196.875!)
-        Me.LClass1.Name = "LClass1"
-        Me.LClass1.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LClass1.SizeF = New System.Drawing.SizeF(50.0!, 20.0!)
-        Me.LClass1.StylePriority.UseBorders = False
-        Me.LClass1.StylePriority.UseFont = False
-        Me.LClass1.StylePriority.UseTextAlignment = False
-        Me.LClass1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'LNO1
-        '
-        Me.LNO1.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
-        Me.LNO1.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LNO1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 196.875!)
-        Me.LNO1.Name = "LNO1"
-        Me.LNO1.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LNO1.SizeF = New System.Drawing.SizeF(30.0!, 20.0!)
-        Me.LNO1.StylePriority.UseBorders = False
-        Me.LNO1.StylePriority.UseFont = False
-        Me.LNO1.StylePriority.UseTextAlignment = False
-        Me.LNO1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'LTotal1
-        '
-        Me.LTotal1.Borders = CType(((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Right) _
-            Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
-        Me.LTotal1.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LTotal1.LocationFloat = New DevExpress.Utils.PointFloat(494.9998!, 196.875!)
-        Me.LTotal1.Multiline = True
-        Me.LTotal1.Name = "LTotal1"
-        Me.LTotal1.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LTotal1.SizeF = New System.Drawing.SizeF(229.0002!, 20.0!)
-        Me.LTotal1.StylePriority.UseBorders = False
-        Me.LTotal1.StylePriority.UseFont = False
-        Me.LTotal1.StylePriority.UseTextAlignment = False
-        Me.LTotal1.Text = "[min_qty_in_bulk]"
-        Me.LTotal1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
-        '
-        'LTotal2
-        '
-        Me.LTotal2.Borders = CType(((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Right) _
-            Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
-        Me.LTotal2.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LTotal2.LocationFloat = New DevExpress.Utils.PointFloat(494.9998!, 216.875!)
-        Me.LTotal2.Multiline = True
-        Me.LTotal2.Name = "LTotal2"
-        Me.LTotal2.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LTotal2.SizeF = New System.Drawing.SizeF(229.0002!, 20.0!)
-        Me.LTotal2.StylePriority.UseBorders = False
-        Me.LTotal2.StylePriority.UseFont = False
-        Me.LTotal2.StylePriority.UseTextAlignment = False
-        Me.LTotal2.Text = "[total_qty_list_conv]"
-        Me.LTotal2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
-        '
-        'LNO2
-        '
-        Me.LNO2.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
-        Me.LNO2.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LNO2.LocationFloat = New DevExpress.Utils.PointFloat(0!, 216.875!)
-        Me.LNO2.Name = "LNO2"
-        Me.LNO2.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LNO2.SizeF = New System.Drawing.SizeF(30.0!, 20.0!)
-        Me.LNO2.StylePriority.UseBorders = False
-        Me.LNO2.StylePriority.UseFont = False
-        Me.LNO2.StylePriority.UseTextAlignment = False
-        Me.LNO2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'LClass2
-        '
-        Me.LClass2.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
-        Me.LClass2.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LClass2.LocationFloat = New DevExpress.Utils.PointFloat(30.0!, 216.875!)
-        Me.LClass2.Name = "LClass2"
-        Me.LClass2.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LClass2.SizeF = New System.Drawing.SizeF(50.0!, 20.0!)
-        Me.LClass2.StylePriority.UseBorders = False
-        Me.LClass2.StylePriority.UseFont = False
-        Me.LClass2.StylePriority.UseTextAlignment = False
-        Me.LClass2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'LDesign2
-        '
-        Me.LDesign2.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
-        Me.LDesign2.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LDesign2.LocationFloat = New DevExpress.Utils.PointFloat(80.0!, 216.875!)
-        Me.LDesign2.Name = "LDesign2"
-        Me.LDesign2.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LDesign2.SizeF = New System.Drawing.SizeF(250.0!, 20.0!)
-        Me.LDesign2.StylePriority.UseBorders = False
-        Me.LDesign2.StylePriority.UseFont = False
-        Me.LDesign2.StylePriority.UseTextAlignment = False
-        Me.LDesign2.Text = "QTY [bulk_unit]"
-        Me.LDesign2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
-        '
-        'LColor2
-        '
-        Me.LColor2.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
-        Me.LColor2.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LColor2.LocationFloat = New DevExpress.Utils.PointFloat(330.0!, 216.875!)
-        Me.LColor2.Multiline = True
-        Me.LColor2.Name = "LColor2"
-        Me.LColor2.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LColor2.SizeF = New System.Drawing.SizeF(40.0!, 20.0!)
-        Me.LColor2.StylePriority.UseBorders = False
-        Me.LColor2.StylePriority.UseFont = False
-        Me.LColor2.StylePriority.UseTextAlignment = False
-        Me.LColor2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'LQty2
-        '
-        Me.LQty2.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
-        Me.LQty2.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LQty2.LocationFloat = New DevExpress.Utils.PointFloat(370.0001!, 216.875!)
-        Me.LQty2.Multiline = True
-        Me.LQty2.Name = "LQty2"
-        Me.LQty2.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LQty2.SizeF = New System.Drawing.SizeF(55.00006!, 20.0!)
-        Me.LQty2.StylePriority.UseBorders = False
-        Me.LQty2.StylePriority.UseFont = False
-        Me.LQty2.StylePriority.UseTextAlignment = False
-        Me.LQty2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'LCons2
-        '
-        Me.LCons2.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
-        Me.LCons2.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LCons2.LocationFloat = New DevExpress.Utils.PointFloat(425.0!, 216.875!)
-        Me.LCons2.Multiline = True
-        Me.LCons2.Name = "LCons2"
-        Me.LCons2.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LCons2.SizeF = New System.Drawing.SizeF(69.99976!, 20.0!)
-        Me.LCons2.StylePriority.UseBorders = False
-        Me.LCons2.StylePriority.UseFont = False
-        Me.LCons2.StylePriority.UseTextAlignment = False
-        Me.LCons2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'LTotal3
-        '
-        Me.LTotal3.Borders = CType(((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Right) _
-            Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
-        Me.LTotal3.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LTotal3.LocationFloat = New DevExpress.Utils.PointFloat(494.9998!, 236.875!)
-        Me.LTotal3.Multiline = True
-        Me.LTotal3.Name = "LTotal3"
-        Me.LTotal3.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LTotal3.SizeF = New System.Drawing.SizeF(229.0002!, 20.0!)
-        Me.LTotal3.StylePriority.UseBorders = False
-        Me.LTotal3.StylePriority.UseFont = False
-        Me.LTotal3.StylePriority.UseTextAlignment = False
-        Me.LTotal3.Text = "[total_qty_order_conv]"
-        Me.LTotal3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
-        '
-        'LNO3
-        '
-        Me.LNO3.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
-        Me.LNO3.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LNO3.LocationFloat = New DevExpress.Utils.PointFloat(0!, 236.875!)
-        Me.LNO3.Name = "LNO3"
-        Me.LNO3.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LNO3.SizeF = New System.Drawing.SizeF(30.0!, 20.0!)
-        Me.LNO3.StylePriority.UseBorders = False
-        Me.LNO3.StylePriority.UseFont = False
-        Me.LNO3.StylePriority.UseTextAlignment = False
-        Me.LNO3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'LClass3
-        '
-        Me.LClass3.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
-        Me.LClass3.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LClass3.LocationFloat = New DevExpress.Utils.PointFloat(30.0!, 236.875!)
-        Me.LClass3.Name = "LClass3"
-        Me.LClass3.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LClass3.SizeF = New System.Drawing.SizeF(50.0!, 20.0!)
-        Me.LClass3.StylePriority.UseBorders = False
-        Me.LClass3.StylePriority.UseFont = False
-        Me.LClass3.StylePriority.UseTextAlignment = False
-        Me.LClass3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'LDesign3
-        '
-        Me.LDesign3.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
-        Me.LDesign3.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LDesign3.LocationFloat = New DevExpress.Utils.PointFloat(80.0!, 236.875!)
-        Me.LDesign3.Name = "LDesign3"
-        Me.LDesign3.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LDesign3.SizeF = New System.Drawing.SizeF(250.0!, 20.0!)
-        Me.LDesign3.StylePriority.UseBorders = False
-        Me.LDesign3.StylePriority.UseFont = False
-        Me.LDesign3.StylePriority.UseTextAlignment = False
-        Me.LDesign3.Text = "TOTAL [bulk_unit]"
-        Me.LDesign3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
-        '
-        'LColor3
-        '
-        Me.LColor3.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
-        Me.LColor3.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LColor3.LocationFloat = New DevExpress.Utils.PointFloat(330.0!, 236.875!)
-        Me.LColor3.Multiline = True
-        Me.LColor3.Name = "LColor3"
-        Me.LColor3.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LColor3.SizeF = New System.Drawing.SizeF(40.0!, 20.0!)
-        Me.LColor3.StylePriority.UseBorders = False
-        Me.LColor3.StylePriority.UseFont = False
-        Me.LColor3.StylePriority.UseTextAlignment = False
-        Me.LColor3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'LQty3
-        '
-        Me.LQty3.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
-        Me.LQty3.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LQty3.LocationFloat = New DevExpress.Utils.PointFloat(370.0001!, 236.875!)
-        Me.LQty3.Multiline = True
-        Me.LQty3.Name = "LQty3"
-        Me.LQty3.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LQty3.SizeF = New System.Drawing.SizeF(55.00006!, 20.0!)
-        Me.LQty3.StylePriority.UseBorders = False
-        Me.LQty3.StylePriority.UseFont = False
-        Me.LQty3.StylePriority.UseTextAlignment = False
-        Me.LQty3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'LCons3
-        '
-        Me.LCons3.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
-        Me.LCons3.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LCons3.LocationFloat = New DevExpress.Utils.PointFloat(425.0!, 236.875!)
-        Me.LCons3.Multiline = True
-        Me.LCons3.Name = "LCons3"
-        Me.LCons3.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LCons3.SizeF = New System.Drawing.SizeF(69.99976!, 20.0!)
-        Me.LCons3.StylePriority.UseBorders = False
-        Me.LCons3.StylePriority.UseFont = False
-        Me.LCons3.StylePriority.UseTextAlignment = False
-        Me.LCons3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'LCons4
-        '
-        Me.LCons4.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
-        Me.LCons4.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LCons4.LocationFloat = New DevExpress.Utils.PointFloat(425.0!, 256.875!)
-        Me.LCons4.Multiline = True
-        Me.LCons4.Name = "LCons4"
-        Me.LCons4.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LCons4.SizeF = New System.Drawing.SizeF(69.99976!, 20.0!)
-        Me.LCons4.StylePriority.UseBorders = False
-        Me.LCons4.StylePriority.UseFont = False
-        Me.LCons4.StylePriority.UseTextAlignment = False
-        Me.LCons4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'LQty4
-        '
-        Me.LQty4.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
-        Me.LQty4.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LQty4.LocationFloat = New DevExpress.Utils.PointFloat(370.0001!, 256.875!)
-        Me.LQty4.Multiline = True
-        Me.LQty4.Name = "LQty4"
-        Me.LQty4.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LQty4.SizeF = New System.Drawing.SizeF(55.00006!, 20.0!)
-        Me.LQty4.StylePriority.UseBorders = False
-        Me.LQty4.StylePriority.UseFont = False
-        Me.LQty4.StylePriority.UseTextAlignment = False
-        Me.LQty4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'LColor4
-        '
-        Me.LColor4.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
-        Me.LColor4.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LColor4.LocationFloat = New DevExpress.Utils.PointFloat(330.0!, 256.875!)
-        Me.LColor4.Multiline = True
-        Me.LColor4.Name = "LColor4"
-        Me.LColor4.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LColor4.SizeF = New System.Drawing.SizeF(40.0!, 20.0!)
-        Me.LColor4.StylePriority.UseBorders = False
-        Me.LColor4.StylePriority.UseFont = False
-        Me.LColor4.StylePriority.UseTextAlignment = False
-        Me.LColor4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'LDesign4
-        '
-        Me.LDesign4.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
-        Me.LDesign4.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LDesign4.LocationFloat = New DevExpress.Utils.PointFloat(80.0!, 256.875!)
-        Me.LDesign4.Name = "LDesign4"
-        Me.LDesign4.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LDesign4.SizeF = New System.Drawing.SizeF(250.0!, 20.0!)
-        Me.LDesign4.StylePriority.UseBorders = False
-        Me.LDesign4.StylePriority.UseFont = False
-        Me.LDesign4.StylePriority.UseTextAlignment = False
-        Me.LDesign4.Text = "TOTAL QTY (PCS)"
-        Me.LDesign4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
-        '
-        'LClass4
-        '
-        Me.LClass4.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
-        Me.LClass4.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LClass4.LocationFloat = New DevExpress.Utils.PointFloat(30.0!, 256.875!)
-        Me.LClass4.Name = "LClass4"
-        Me.LClass4.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LClass4.SizeF = New System.Drawing.SizeF(50.0!, 20.0!)
-        Me.LClass4.StylePriority.UseBorders = False
-        Me.LClass4.StylePriority.UseFont = False
-        Me.LClass4.StylePriority.UseTextAlignment = False
-        Me.LClass4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'LNO4
-        '
-        Me.LNO4.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
-        Me.LNO4.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LNO4.LocationFloat = New DevExpress.Utils.PointFloat(0!, 256.875!)
-        Me.LNO4.Name = "LNO4"
-        Me.LNO4.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LNO4.SizeF = New System.Drawing.SizeF(30.0!, 20.0!)
-        Me.LNO4.StylePriority.UseBorders = False
-        Me.LNO4.StylePriority.UseFont = False
-        Me.LNO4.StylePriority.UseTextAlignment = False
-        Me.LNO4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'LTotal4
-        '
-        Me.LTotal4.Borders = CType(((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Right) _
-            Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
-        Me.LTotal4.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LTotal4.LocationFloat = New DevExpress.Utils.PointFloat(494.9998!, 256.875!)
-        Me.LTotal4.Multiline = True
-        Me.LTotal4.Name = "LTotal4"
-        Me.LTotal4.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LTotal4.SizeF = New System.Drawing.SizeF(229.0002!, 20.0!)
-        Me.LTotal4.StylePriority.UseBorders = False
-        Me.LTotal4.StylePriority.UseFont = False
-        Me.LTotal4.StylePriority.UseTextAlignment = False
-        Me.LTotal4.Text = "[total_order]"
-        Me.LTotal4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
         '
         'ReportMatPD
         '

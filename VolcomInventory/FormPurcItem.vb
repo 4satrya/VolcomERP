@@ -116,4 +116,19 @@
     Private Sub FormPurcItem_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
         Dispose()
     End Sub
+
+    Private Sub GVItem_DoubleClick(sender As Object, e As EventArgs) Handles GVItem.DoubleClick
+        If GVItem.RowCount > 0 Then
+            FormPurcItemDet.id_item = GVItem.GetFocusedRowCellValue("id_item").ToString
+            FormPurcItemDet.ShowDialog()
+        End If
+    End Sub
+
+    Private Sub VDItemList_Click(sender As Object, e As EventArgs) Handles VDItemList.Click
+        If GVItem.RowCount > 0 Then
+            FormPurcItemDet.id_item = GVItem.GetFocusedRowCellValue("id_item").ToString
+            FormPurcItemDet.XTCDetail.SelectedTabPageIndex = 3
+            FormPurcItemDet.ShowDialog()
+        End If
+    End Sub
 End Class

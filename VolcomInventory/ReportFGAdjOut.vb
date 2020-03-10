@@ -12,7 +12,7 @@
 
         ''tampung ke form
         LabelNo.Text = data.Rows(0)("adj_out_fg_number").ToString
-        LabelDate.Text = view_date_from(data.Rows(0)("adj_out_fg_datex").ToString, 0)
+        LabelDate.Text = view_date_from(data.Rows(0)("adj_out_fg_datex").ToString, 0).ToString.ToUpper
         LabelNote.Text = data.Rows(0)("adj_out_fg_note").ToString
         currency = data.Rows(0)("currency").ToString
 
@@ -20,11 +20,7 @@
         viewDetailReturn()
 
         'Mark
-        If is_pre = "1" Then
-            pre_load_mark_horz("42", id_adj_out_fg, "2", "2", XrTable1)
-        Else
-            load_mark_horz("42", id_adj_out_fg, "2", "1", XrTable1)
-        End If
+        pre_load_mark_horz_check("42", id_adj_out_fg, "2", "2", XrTable1)
 
     End Sub
 

@@ -19,7 +19,10 @@ Partial Class FormSetKurs
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormSetKurs))
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.TEFixFloating = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.BGetKurs = New DevExpress.XtraEditors.SimpleButton()
         Me.BSave = New DevExpress.XtraEditors.SimpleButton()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
@@ -30,16 +33,17 @@ Partial Class FormSetKurs
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
-        Me.TEFixFloating = New DevExpress.XtraEditors.TextEdit()
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemCheckEdit = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
+        CType(Me.TEFixFloating.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEKurs.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GCKursTrans, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVKursTrans, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TEFixFloating.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemCheckEdit, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl1
@@ -55,6 +59,24 @@ Partial Class FormSetKurs
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(870, 42)
         Me.PanelControl1.TabIndex = 0
+        '
+        'TEFixFloating
+        '
+        Me.TEFixFloating.Location = New System.Drawing.Point(361, 13)
+        Me.TEFixFloating.Name = "TEFixFloating"
+        Me.TEFixFloating.Properties.Mask.EditMask = "N2"
+        Me.TEFixFloating.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
+        Me.TEFixFloating.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.TEFixFloating.Size = New System.Drawing.Size(137, 20)
+        Me.TEFixFloating.TabIndex = 5
+        '
+        'LabelControl2
+        '
+        Me.LabelControl2.Location = New System.Drawing.Point(281, 16)
+        Me.LabelControl2.Name = "LabelControl2"
+        Me.LabelControl2.Size = New System.Drawing.Size(74, 13)
+        Me.LabelControl2.TabIndex = 4
+        Me.LabelControl2.Text = "Fixed Floating :"
         '
         'BGetKurs
         '
@@ -96,16 +118,16 @@ Partial Class FormSetKurs
         Me.GCKursTrans.Location = New System.Drawing.Point(0, 42)
         Me.GCKursTrans.MainView = Me.GVKursTrans
         Me.GCKursTrans.Name = "GCKursTrans"
+        Me.GCKursTrans.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckEdit})
         Me.GCKursTrans.Size = New System.Drawing.Size(870, 479)
         Me.GCKursTrans.TabIndex = 1
         Me.GCKursTrans.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVKursTrans})
         '
         'GVKursTrans
         '
-        Me.GVKursTrans.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6})
+        Me.GVKursTrans.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumn7})
         Me.GVKursTrans.GridControl = Me.GCKursTrans
         Me.GVKursTrans.Name = "GVKursTrans"
-        Me.GVKursTrans.OptionsBehavior.Editable = False
         Me.GVKursTrans.OptionsBehavior.ReadOnly = True
         Me.GVKursTrans.OptionsView.ShowGroupPanel = False
         '
@@ -146,24 +168,6 @@ Partial Class FormSetKurs
         Me.GridColumn4.VisibleIndex = 2
         Me.GridColumn4.Width = 167
         '
-        'LabelControl2
-        '
-        Me.LabelControl2.Location = New System.Drawing.Point(281, 16)
-        Me.LabelControl2.Name = "LabelControl2"
-        Me.LabelControl2.Size = New System.Drawing.Size(74, 13)
-        Me.LabelControl2.TabIndex = 4
-        Me.LabelControl2.Text = "Fixed Floating :"
-        '
-        'TEFixFloating
-        '
-        Me.TEFixFloating.Location = New System.Drawing.Point(361, 13)
-        Me.TEFixFloating.Name = "TEFixFloating"
-        Me.TEFixFloating.Properties.Mask.EditMask = "N2"
-        Me.TEFixFloating.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
-        Me.TEFixFloating.Properties.Mask.UseMaskAsDisplayFormat = True
-        Me.TEFixFloating.Size = New System.Drawing.Size(137, 20)
-        Me.TEFixFloating.TabIndex = 5
-        '
         'GridColumn5
         '
         Me.GridColumn5.Caption = "Fixed Floating"
@@ -186,6 +190,24 @@ Partial Class FormSetKurs
         Me.GridColumn6.VisibleIndex = 4
         Me.GridColumn6.Width = 213
         '
+        'GridColumn7
+        '
+        Me.GridColumn7.Caption = "Attachment"
+        Me.GridColumn7.ColumnEdit = Me.RepositoryItemCheckEdit
+        Me.GridColumn7.FieldName = "attachment"
+        Me.GridColumn7.Name = "GridColumn7"
+        Me.GridColumn7.Visible = True
+        Me.GridColumn7.VisibleIndex = 5
+        '
+        'RepositoryItemCheckEdit
+        '
+        Me.RepositoryItemCheckEdit.AutoHeight = False
+        Me.RepositoryItemCheckEdit.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.UserDefined
+        Me.RepositoryItemCheckEdit.Name = "RepositoryItemCheckEdit"
+        Me.RepositoryItemCheckEdit.PictureChecked = CType(resources.GetObject("RepositoryItemCheckEdit.PictureChecked"), System.Drawing.Image)
+        Me.RepositoryItemCheckEdit.PictureGrayed = CType(resources.GetObject("RepositoryItemCheckEdit.PictureGrayed"), System.Drawing.Image)
+        Me.RepositoryItemCheckEdit.PictureUnchecked = CType(resources.GetObject("RepositoryItemCheckEdit.PictureUnchecked"), System.Drawing.Image)
+        '
         'FormSetKurs
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -202,10 +224,11 @@ Partial Class FormSetKurs
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         Me.PanelControl1.PerformLayout()
+        CType(Me.TEFixFloating.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEKurs.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GCKursTrans, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVKursTrans, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TEFixFloating.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemCheckEdit, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -225,4 +248,6 @@ Partial Class FormSetKurs
     Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn7 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RepositoryItemCheckEdit As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
 End Class

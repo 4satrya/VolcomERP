@@ -82,6 +82,9 @@
             Dim stc_compl As ClassSalesReturn = New ClassSalesReturn()
             stc_compl.completeReservedStock(id_report_par)
 
+            'complete unique
+            completeUnique(id_report_par)
+
             'save unreg unique
             execute_non_query("CALL generate_unreg_barcode(" + id_report_par + ",3)", True, "", "", "", "")
         End If
@@ -128,6 +131,9 @@
             INNER JOIN tb_m_design dsg ON dsg.id_design = prod.id_design 
             WHERE r.id_sales_return=" + id_report_par + " AND rd.sales_return_det_qty>0; "
             execute_non_query(query_stc, True, "", "", "", "")
+
+            'complete unique
+            completeUnique(id_report_par)
 
             'save unreg unique
             execute_non_query("CALL generate_unreg_barcode(" + id_report_par + ",3)", True, "", "", "", "")
@@ -288,16 +294,38 @@
     End Sub
 
     Public Sub cancellUnique(ByVal id_report_par As String)
-        Dim query As String = "INSERT INTO tb_m_unique_code(id_comp, id_product, id_sales_return_det_counting, id_type, unique_code, id_design_price, design_price, qty, is_unique_report, input_date)  
-        SELECT cc.id_comp, retd.id_product, c.id_sales_return_det_counting, 4, CONCAT(prod.product_full_code, c.sales_return_det_counting), 
-        retd.id_design_price, retd.design_price,1, c.is_unique_report, NOW()
-        FROM tb_sales_return_det_counting c
-        INNER JOIN tb_sales_return_det retd ON retd.id_sales_return_det = c.id_sales_return_det
-        INNER JOIN tb_sales_return ret ON ret.id_sales_return = retd.id_sales_return
-        INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = ret.id_store_contact_from
-        INNER JOIN tb_m_product prod ON prod.id_product = retd.id_product
-        WHERE retd.id_sales_return=" + id_report_par + " "
+        Dim query As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_sales_return_det_counting`,`id_type`,`unique_code`,
+        `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
+        SELECT cc.id_comp, c.id_drawer_def, td.id_product, tc.id_pl_prod_order_rec_det_unique,tc.id_sales_return_det_counting, '4', 
+        CONCAT(p.product_full_code,tc.sales_return_det_counting), td.id_design_price, td.design_price, 1, tc.is_unique_report, NOW() 
+        FROM tb_sales_return_det td
+        INNER JOIN tb_sales_return t ON t.id_sales_return = td.id_sales_return
+        INNER JOIN tb_sales_return_det_counting tc ON tc.id_sales_return_det = td.id_sales_return_det
+        INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact =  t.id_store_contact_from
+        INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp
+        INNER JOIN tb_m_product p ON p.id_product = td.id_product
+        INNER JOIN tb_m_design d ON d.id_design = p.id_design
+        WHERE t.id_sales_return=" + id_report_par + "
+        AND d.is_old_design=2 
+        AND t.is_use_unique_code=1 "
         execute_non_query(query, True, "", "", "", "")
     End Sub
 
+    Public Sub completeUnique(ByVal id_report_par As String)
+        Dim query As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_sales_return_det_counting`,`id_type`,`unique_code`,
+        `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
+        SELECT cc.id_comp, t.id_wh_drawer, td.id_product, tc.id_pl_prod_order_rec_det_unique,tc.id_sales_return_det_counting, '4', 
+        CONCAT(p.product_full_code,tc.sales_return_det_counting), td.id_design_price, td.design_price, 1, 1, NOW() 
+        FROM tb_sales_return_det td
+        INNER JOIN tb_sales_return t ON t.id_sales_return = td.id_sales_return
+        INNER JOIN tb_sales_return_det_counting tc ON tc.id_sales_return_det = td.id_sales_return_det
+        INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact =  t.id_comp_contact_to
+        INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp
+        INNER JOIN tb_m_product p ON p.id_product = td.id_product
+        INNER JOIN tb_m_design d ON d.id_design = p.id_design
+        WHERE t.id_sales_return=" + id_report_par + "
+        AND d.is_old_design=2 
+        AND t.is_use_unique_code=1 "
+        execute_non_query(query, True, "", "", "", "")
+    End Sub
 End Class

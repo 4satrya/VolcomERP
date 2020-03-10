@@ -3,6 +3,15 @@
     Public action As String
     Public id_report_status As String
     Public total_amount As Double
+    '
+    Public id_drawer As String = ""
+    Public drawer_name As String = ""
+    Public id_rack As String = ""
+    Public rack_name As String = ""
+    Public id_locator As String = ""
+    Public locator_name As String = ""
+    Public id_comp As String = ""
+    Public comp_name As String = ""
 
     Private Sub FormFGAdjInDet_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         viewReportStatus()
@@ -240,6 +249,9 @@
                 submit_who_prepared("41", id_adj_in_fg, id_user)
 
                 'detail table
+                query = "INSERT tb_adj_in_fg_det(id_adj_in_fg, adj_in_fg_det_note, adj_in_fg_det_qty, id_wh_drawer, id_product, adj_in_fg_det_price) "
+                query += "VALUES "
+
                 For i As Integer = 0 To GVDetail.RowCount - 1
                     'Try
                     Dim adj_in_fg_det_note As String = GVDetail.GetRowCellValue(i, "adj_in_fg_det_note").ToString
@@ -249,12 +261,16 @@
                     Dim adj_in_fg_det_price As String = decimalSQL(GVDetail.GetRowCellValue(i, "adj_in_fg_det_price").ToString)
 
                     'INSERT TB DETAIL
-                    query = "INSERT tb_adj_in_fg_det(id_adj_in_fg, adj_in_fg_det_note, adj_in_fg_det_qty, id_wh_drawer, id_product, adj_in_fg_det_price) "
-                    query += "VALUES('" + id_adj_in_fg + "','" + adj_in_fg_det_note + "', '" + adj_in_fg_det_qty + "', '" + id_wh_drawer + "', '" + id_product + "', '" + adj_in_fg_det_price + "') "
-                    execute_non_query(query, True, "", "", "", "")
+                    If Not i = 0 Then
+                        query += ","
+                    End If
+                    query += "('" + id_adj_in_fg + "','" + adj_in_fg_det_note + "', '" + adj_in_fg_det_qty + "', '" + id_wh_drawer + "', '" + id_product + "', '" + adj_in_fg_det_price + "') "
                     'Catch ex As Exception
                     'End Try
                 Next
+
+                execute_non_query(query, True, "", "", "", "")
+
 
                 FormFGAdj.XTCAdj.SelectedTabPageIndex = 0
                 FormFGAdj.viewAdjIn()
@@ -321,5 +337,18 @@
         ' Show the report's preview. 
         Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
         Tool.ShowPreview()
+    End Sub
+
+    Private Sub FormFGAdjInDet_KeyUp(sender As Object, e As KeyEventArgs) Handles MyBase.KeyUp
+        If e.KeyCode = Keys.F1 Then
+
+        End If
+    End Sub
+
+    Private Sub BImport_Click(sender As Object, e As EventArgs) Handles BImport.Click
+        'import excel
+        FormPopUpDrawer.include_all = False
+        FormPopUpDrawer.id_pop_up = "7"
+        FormPopUpDrawer.ShowDialog()
     End Sub
 End Class

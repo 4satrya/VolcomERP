@@ -2689,6 +2689,12 @@
     <Compile Include="FormPopUpInvoiceMissing.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormPopUpListJournal.Designer.vb">
+      <DependentUpon>FormPopUpListJournal.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormPopUpListJournal.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormPopUpOVH.Designer.vb">
       <DependentUpon>FormPopUpOVH.vb</DependentUpon>
     </Compile>
@@ -5819,6 +5825,12 @@
       <DependentUpon>FormTrackingReturn.vb</DependentUpon>
     </Compile>
     <Compile Include="FormTrackingReturn.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormUniqueCode.Designer.vb">
+      <DependentUpon>FormUniqueCode.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormUniqueCode.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormUniqueDel.Designer.vb">
@@ -9108,6 +9120,9 @@
       <DependentUpon>FormPopUpInvoiceMissing.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormPopUpListJournal.resx">
+      <DependentUpon>FormPopUpListJournal.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormPopUpOVH.resx">
       <DependentUpon>FormPopUpOVH.vb</DependentUpon>
     </EmbeddedResource>
@@ -11019,6 +11034,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormTrackingReturn.resx">
       <DependentUpon>FormTrackingReturn.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormUniqueCode.resx">
+      <DependentUpon>FormUniqueCode.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormUniqueDel.resx">
       <DependentUpon>FormUniqueDel.vb</DependentUpon>

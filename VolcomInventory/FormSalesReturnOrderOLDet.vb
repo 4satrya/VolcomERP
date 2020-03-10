@@ -251,6 +251,7 @@
     Private Sub BtnBrowseWH_Click(sender As Object, e As EventArgs) Handles BtnBrowseWH.Click
         Cursor = Cursors.WaitCursor
         FormPopUpContact.id_cat = "5"
+        FormPopUpContact.is_must_active = "1"
         FormPopUpContact.id_pop_up = "82"
         FormPopUpContact.ShowDialog()
         Cursor = Cursors.Default
@@ -467,7 +468,7 @@
 
     Private Sub TxtWHCode_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtWHCode.KeyDown
         If e.KeyCode = Keys.Enter Then
-            Dim data As DataTable = get_company_by_code(addSlashes(TxtWHCode.Text), "AND comp.id_comp_cat=5 ")
+            Dim data As DataTable = get_company_by_code(addSlashes(TxtWHCode.Text), "AND comp.id_comp_cat=5 AND comp.is_active=1 ")
             If data.Rows.Count = 0 Then
                 stopCustom("Account not found !")
                 resetWH(True)

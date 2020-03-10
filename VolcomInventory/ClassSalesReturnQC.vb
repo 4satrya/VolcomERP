@@ -96,6 +96,42 @@
                 execute_non_query(query_save_out, True, "", "", "", "")
                 execute_non_query(query_save_st, True, "", "", "", "")
             End If
+
+            'completed unique
+            Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_sales_return_qc_det_counting`,`id_type`,`unique_code`,
+            `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
+            SELECT cc.id_comp, t.id_wh_drawer, td.id_product, tcr.id_pl_prod_order_rec_det_unique,tc.id_sales_return_qc_det_counting, '13', 
+            CONCAT(p.product_full_code,tc.sales_return_qc_det_counting), td.id_design_price, td.design_price, 1, 1, NOW() 
+            FROM tb_sales_return_qc_det td
+            INNER JOIN tb_sales_return_qc t ON t.id_sales_return_qc = td.id_sales_return_qc
+            INNER JOIN tb_sales_return_qc_det_counting tc ON tc.id_sales_return_qc_det = td.id_sales_return_qc_det
+            INNER JOIN tb_sales_return_det_counting tcr ON tcr.id_sales_return_det_counting = tc.id_sales_return_det_counting
+            INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact =  t.id_comp_contact_to
+            INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp
+            INNER JOIN tb_m_product p ON p.id_product = td.id_product
+            INNER JOIN tb_m_design d ON d.id_design = p.id_design
+            WHERE t.id_sales_return_qc=" + id_report_par + "
+            AND d.is_old_design=2 
+            AND t.is_use_unique_code=1 "
+            execute_non_query(quniq, True, "", "", "", "")
+        ElseIf id_status_reportx_par = "5" Then
+            Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_sales_return_qc_det_counting`,`id_type`,`unique_code`,
+            `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
+            SELECT cc.id_comp, tr.id_wh_drawer, td.id_product, tcr.id_pl_prod_order_rec_det_unique,tc.id_sales_return_qc_det_counting, '13', 
+            CONCAT(p.product_full_code,tc.sales_return_qc_det_counting), td.id_design_price, td.design_price, 1, 1, NOW() 
+            FROM tb_sales_return_qc_det td
+            INNER JOIN tb_sales_return_qc t ON t.id_sales_return_qc = td.id_sales_return_qc
+            INNER JOIN tb_sales_return tr ON tr.id_sales_return = t.id_sales_return
+            INNER JOIN tb_sales_return_qc_det_counting tc ON tc.id_sales_return_qc_det = td.id_sales_return_qc_det
+            INNER JOIN tb_sales_return_det_counting tcr ON tcr.id_sales_return_det_counting = tc.id_sales_return_det_counting
+            INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact =  tr.id_comp_contact_to
+            INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp
+            INNER JOIN tb_m_product p ON p.id_product = td.id_product
+            INNER JOIN tb_m_design d ON d.id_design = p.id_design
+            WHERE t.id_sales_return_qc=" + id_report_par + "
+            AND d.is_old_design=2 
+            AND t.is_use_unique_code=1 "
+            execute_non_query(quniq, True, "", "", "", "")
         End If
 
         Dim query As String = String.Format("UPDATE tb_sales_return_qc SET id_report_status='{0}', last_update = NOW(), last_update_by=" + id_user + " WHERE id_sales_return_qc ='{1}'", id_status_reportx_par, id_report_par)

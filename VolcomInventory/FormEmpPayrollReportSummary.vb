@@ -177,19 +177,19 @@
 
         Dim report As ReportEmpPayrollReportAllDepartement = New ReportEmpPayrollReportAllDepartement
 
-        If is_thr = "1" Then
-            report.Landscape = False
-            report.XrLine1.SizeF = New SizeF(733, 20)
-            report.XLTitle.SizeF = New SizeF(275, 41.15)
-            report.XLTitle.LocationF = New PointF(220, 23)
-            report.XLPeriod.SizeF = New SizeF(205, 23)
-            report.XLPeriod.LocationF = New PointF(525, 11)
-            report.XLType.SizeF = New SizeF(150, 23)
-            report.XrLabel1.LocationF = New PointF(525, 34)
-            report.XrLabel3.LocationF = New PointF(565, 34)
-            report.XLType.LocationF = New PointF(580, 34)
-            report.XrTable1.SizeF = New SizeF(733, 25)
-        End If
+        'If is_thr = "1" Then
+        '    report.Landscape = False
+        '    report.XrLine1.SizeF = New SizeF(733, 20)
+        '    report.XLTitle.SizeF = New SizeF(275, 41.15)
+        '    report.XLTitle.LocationF = New PointF(220, 23)
+        '    report.XLPeriod.SizeF = New SizeF(205, 23)
+        '    report.XLPeriod.LocationF = New PointF(525, 11)
+        '    report.XLType.SizeF = New SizeF(150, 23)
+        '    report.XrLabel1.LocationF = New PointF(525, 34)
+        '    report.XrLabel3.LocationF = New PointF(565, 34)
+        '    report.XLType.LocationF = New PointF(580, 34)
+        '    report.XrTable1.SizeF = New SizeF(733, 25)
+        'End If
 
         report.id_payroll = FormEmpPayroll.GVPayrollPeriode.GetFocusedRowCellValue("id_payroll").ToString
         report.data = total_all(data)

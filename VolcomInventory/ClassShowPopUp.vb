@@ -2677,7 +2677,8 @@ GROUP BY rec.`id_prod_order`"
                                 INNER JOIN `tb_m_comp_contact` cc ON cc.`id_comp_contact`=tb.`id_comp_contact`
                                 INNER JOIN `tb_m_comp` c ON c.`id_comp`=cc.`id_comp`
                                 INNER JOIN `tb_lookup_expense_type` et ON et.`id_expense_type`=tb.`id_expense_type`
-                                WHERE tb.id_report_status='6' AND tb.`id_expense_type`='1'"
+                                LEFT JOIN tb_purc_rec rec ON rec.`id_purc_order`=tb.`id_purc_order` AND rec.`id_report_status`!=5
+                                WHERE tb.id_report_status='6' AND tb.`id_expense_type`='1' AND ISNULL(rec.`id_purc_rec`)"
                 If Not qb_id_not_include = "" Then 'popup pick setelah ada isi tabelnya
                     query_view += " AND tb." & field_id & " NOT IN " & qb_id_not_include
                 End If
@@ -2695,9 +2696,10 @@ GROUP BY rec.`id_prod_order`"
                                " & generate_left_join_cancel("query") & "
                                INNER JOIN " & table_name & " tb ON tb." & field_id & "=rmcr.id_report
                                INNER JOIN `tb_m_comp_contact` cc ON cc.`id_comp_contact`=tb.`id_comp_contact`
-                                INNER JOIN `tb_m_comp` c ON c.`id_comp`=cc.`id_comp`
-                                INNER JOIN `tb_lookup_expense_type` et ON et.`id_expense_type`=tb.`id_expense_type`
-                               WHERE rmcr.id_report_mark_cancel='" & id_report_mark_cancel & "'
+                               INNER JOIN `tb_m_comp` c ON c.`id_comp`=cc.`id_comp`
+                               INNER JOIN `tb_lookup_expense_type` et ON et.`id_expense_type`=tb.`id_expense_type`
+                               LEFT JOIN tb_purc_rec rec ON rec.`id_purc_order`=tb.`id_purc_order` AND rec.`id_report_status`!=5
+                               WHERE rmcr.id_report_mark_cancel='" & id_report_mark_cancel & "' AND ISNULL(rec.`id_purc_rec`)
                                GROUP BY tb." & field_id
             ElseIf report_mark_type = "202" Then 'capex
                 query_view = "Select 'no' AS is_check,tb." & field_id & " AS id_report,tb." & field_number & " AS number,tb." & field_date & " AS date_created
@@ -2706,7 +2708,8 @@ GROUP BY rec.`id_prod_order`"
                                 INNER JOIN `tb_m_comp_contact` cc ON cc.`id_comp_contact`=tb.`id_comp_contact`
                                 INNER JOIN `tb_m_comp` c ON c.`id_comp`=cc.`id_comp`
                                 INNER JOIN `tb_lookup_expense_type` et ON et.`id_expense_type`=tb.`id_expense_type`
-                                WHERE tb.id_report_status='6' AND tb.`id_expense_type`='2'"
+                                LEFT JOIN tb_purc_rec rec ON rec.`id_purc_order`=tb.`id_purc_order` AND rec.`id_report_status`!=5
+                                WHERE tb.id_report_status='6' AND tb.`id_expense_type`='2' AND ISNULL(rec.`id_purc_rec`)"
                 If Not qb_id_not_include = "" Then 'popup pick setelah ada isi tabelnya
                     query_view += " AND tb." & field_id & " NOT IN " & qb_id_not_include
                 End If
@@ -2724,9 +2727,10 @@ GROUP BY rec.`id_prod_order`"
                                " & generate_left_join_cancel("query") & "
                                INNER JOIN " & table_name & " tb ON tb." & field_id & "=rmcr.id_report
                                INNER JOIN `tb_m_comp_contact` cc ON cc.`id_comp_contact`=tb.`id_comp_contact`
-                                INNER JOIN `tb_m_comp` c ON c.`id_comp`=cc.`id_comp`
-                                INNER JOIN `tb_lookup_expense_type` et ON et.`id_expense_type`=tb.`id_expense_type`
-                               WHERE rmcr.id_report_mark_cancel='" & id_report_mark_cancel & "'
+                               INNER JOIN `tb_m_comp` c ON c.`id_comp`=cc.`id_comp`
+                               INNER JOIN `tb_lookup_expense_type` et ON et.`id_expense_type`=tb.`id_expense_type`
+                               LEFT JOIN tb_purc_rec rec ON rec.`id_purc_order`=tb.`id_purc_order` AND rec.`id_report_status`!=5
+                               WHERE rmcr.id_report_mark_cancel='" & id_report_mark_cancel & "' AND ISNULL(rec.`id_purc_rec`)
                                GROUP BY tb." & field_id
             ElseIf report_mark_type = "22" Then
                 query_view = "SELECT 'no' AS is_check,tb.id_prod_order AS id_report,tb.prod_order_date AS date_created,ovh.comp_name,tb.prod_order_number AS number,dsg.`design_code_import`,dsg.design_code,dsg.`design_display_name`,SUM(det.prod_order_qty) AS qty,ovh.currency,ovh.unit_price,SUM(ovh.unit_price*det.prod_order_qty) AS amount FROM tb_prod_order tb

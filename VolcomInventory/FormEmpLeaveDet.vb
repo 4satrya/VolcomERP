@@ -30,6 +30,7 @@
             load_emp_detail()
 
             BPickEmployee.Enabled = False
+            TEEmployeeCode.Properties.ReadOnly = True
         End If
     End Sub
 
@@ -329,6 +330,11 @@
                                 INNER JOIN tb_m_departement dep ON dep.id_departement=emp.id_departement 
                                 INNER JOIN tb_lookup_employee_level lvl ON lvl.id_employee_level=emp.id_employee_level  
                                 WHERE employee_code='" & TEEmployeeCode.Text & "'"
+
+        If FormEmpLeave.is_departement_sub Then
+            query += " AND emp.id_departement_sub IN (SELECT id_departement_sub_map FROM tb_emp_leave_mapping WHERE id_departement_sub = " + id_departement_sub_user + ") "
+        End If
+
         If FormEmpLeave.is_propose = "1" Then
             'Dim id_user_admin_management As String = get_opt_emp_field("id_user_admin_mng").ToString
             'If id_user_admin_management = id_user Then

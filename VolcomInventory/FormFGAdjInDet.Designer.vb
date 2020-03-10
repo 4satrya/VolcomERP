@@ -56,8 +56,9 @@ Partial Class FormFGAdjInDet
         Me.GridColumnRemark = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.PCEdit = New DevExpress.XtraEditors.PanelControl()
-        Me.BtnDel = New DevExpress.XtraEditors.SimpleButton()
+        Me.BImport = New DevExpress.XtraEditors.SimpleButton()
         Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
+        Me.BtnDel = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnEdit = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnAdd = New DevExpress.XtraEditors.SimpleButton()
         Me.GroupGeneralFooter = New DevExpress.XtraEditors.GroupControl()
@@ -213,6 +214,24 @@ Partial Class FormFGAdjInDet
         '
         'GVDetail
         '
+        Me.GVDetail.AppearancePrint.FooterPanel.BackColor = System.Drawing.Color.White
+        Me.GVDetail.AppearancePrint.FooterPanel.BorderColor = System.Drawing.Color.Black
+        Me.GVDetail.AppearancePrint.FooterPanel.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.GVDetail.AppearancePrint.FooterPanel.Options.UseBackColor = True
+        Me.GVDetail.AppearancePrint.FooterPanel.Options.UseBorderColor = True
+        Me.GVDetail.AppearancePrint.FooterPanel.Options.UseFont = True
+        Me.GVDetail.AppearancePrint.HeaderPanel.BackColor = System.Drawing.Color.White
+        Me.GVDetail.AppearancePrint.HeaderPanel.BorderColor = System.Drawing.Color.Black
+        Me.GVDetail.AppearancePrint.HeaderPanel.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.GVDetail.AppearancePrint.HeaderPanel.Options.UseBackColor = True
+        Me.GVDetail.AppearancePrint.HeaderPanel.Options.UseBorderColor = True
+        Me.GVDetail.AppearancePrint.HeaderPanel.Options.UseFont = True
+        Me.GVDetail.AppearancePrint.Lines.BackColor = System.Drawing.Color.Black
+        Me.GVDetail.AppearancePrint.Lines.Options.UseBackColor = True
+        Me.GVDetail.AppearancePrint.Row.BackColor = System.Drawing.Color.White
+        Me.GVDetail.AppearancePrint.Row.BorderColor = System.Drawing.Color.Black
+        Me.GVDetail.AppearancePrint.Row.Options.UseBackColor = True
+        Me.GVDetail.AppearancePrint.Row.Options.UseBorderColor = True
         Me.GVDetail.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdAdj, Me.GridColumnNo, Me.GridColumnIdWHDrawer, Me.GridColumnIdWHRack, Me.GridColumnIdWHLOcator, Me.GridColumnIdWH, Me.GridColumnIdSample, Me.GridColumnIdAdjSampleDet, Me.GridColumnCode, Me.GridColumnName, Me.GridColumnSize, Me.GridColumnCompName, Me.GridColumnWHLoactor, Me.GridColumnWHRack, Me.GridColumnWHDrawer, Me.GridColumnUOM, Me.GridColumnAdjPrice, Me.GridColumnQty, Me.GridColumnAmount, Me.GridColumnAccount, Me.GridColumnRemark})
         Me.GVDetail.GridControl = Me.GCDetail
         Me.GVDetail.Name = "GVDetail"
@@ -461,6 +480,7 @@ Partial Class FormFGAdjInDet
         Me.PCEdit.Appearance.BackColor = System.Drawing.Color.Transparent
         Me.PCEdit.Appearance.Options.UseBackColor = True
         Me.PCEdit.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PCEdit.Controls.Add(Me.BImport)
         Me.PCEdit.Controls.Add(Me.BtnDel)
         Me.PCEdit.Controls.Add(Me.BtnEdit)
         Me.PCEdit.Controls.Add(Me.BtnAdd)
@@ -469,6 +489,25 @@ Partial Class FormFGAdjInDet
         Me.PCEdit.Name = "PCEdit"
         Me.PCEdit.Size = New System.Drawing.Size(806, 44)
         Me.PCEdit.TabIndex = 18
+        '
+        'BImport
+        '
+        Me.BImport.Dock = System.Windows.Forms.DockStyle.Left
+        Me.BImport.Image = CType(resources.GetObject("BImport.Image"), System.Drawing.Image)
+        Me.BImport.ImageList = Me.LargeImageCollection
+        Me.BImport.Location = New System.Drawing.Point(0, 0)
+        Me.BImport.Name = "BImport"
+        Me.BImport.Size = New System.Drawing.Size(118, 44)
+        Me.BImport.TabIndex = 20
+        Me.BImport.Text = "Import Data"
+        '
+        'LargeImageCollection
+        '
+        Me.LargeImageCollection.ImageSize = New System.Drawing.Size(24, 24)
+        Me.LargeImageCollection.ImageStream = CType(resources.GetObject("LargeImageCollection.ImageStream"), DevExpress.Utils.ImageCollectionStreamer)
+        Me.LargeImageCollection.Images.SetKeyName(0, "20_24x24.png")
+        Me.LargeImageCollection.Images.SetKeyName(1, "8_24x24.png")
+        Me.LargeImageCollection.Images.SetKeyName(2, "23_24x24.png")
         '
         'BtnDel
         '
@@ -480,14 +519,6 @@ Partial Class FormFGAdjInDet
         Me.BtnDel.Size = New System.Drawing.Size(91, 44)
         Me.BtnDel.TabIndex = 17
         Me.BtnDel.Text = "Delete"
-        '
-        'LargeImageCollection
-        '
-        Me.LargeImageCollection.ImageSize = New System.Drawing.Size(24, 24)
-        Me.LargeImageCollection.ImageStream = CType(resources.GetObject("LargeImageCollection.ImageStream"), DevExpress.Utils.ImageCollectionStreamer)
-        Me.LargeImageCollection.Images.SetKeyName(0, "20_24x24.png")
-        Me.LargeImageCollection.Images.SetKeyName(1, "8_24x24.png")
-        Me.LargeImageCollection.Images.SetKeyName(2, "23_24x24.png")
         '
         'BtnEdit
         '
@@ -750,4 +781,5 @@ Partial Class FormFGAdjInDet
     Friend WithEvents EPAdj As System.Windows.Forms.ErrorProvider
     Friend WithEvents SimpleButton1 As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents GridColumnAccount As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BImport As DevExpress.XtraEditors.SimpleButton
 End Class

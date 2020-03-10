@@ -224,11 +224,11 @@ Partial Class FormFGCodeReplaceStoreDet
         Me.PanelControl3.Controls.Add(Me.BtnCancel)
         Me.PanelControl3.Controls.Add(Me.BtnSave)
         Me.PanelControl3.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl3.Location = New System.Drawing.Point(0, 496)
+        Me.PanelControl3.Location = New System.Drawing.Point(0, 489)
         Me.PanelControl3.LookAndFeel.SkinName = "Blue"
         Me.PanelControl3.LookAndFeel.UseDefaultLookAndFeel = False
         Me.PanelControl3.Name = "PanelControl3"
-        Me.PanelControl3.Size = New System.Drawing.Size(1010, 31)
+        Me.PanelControl3.Size = New System.Drawing.Size(1010, 38)
         Me.PanelControl3.TabIndex = 188
         '
         'BtnPrint
@@ -238,7 +238,7 @@ Partial Class FormFGCodeReplaceStoreDet
         Me.BtnPrint.ImageList = Me.LargeImageCollection
         Me.BtnPrint.Location = New System.Drawing.Point(783, 2)
         Me.BtnPrint.Name = "BtnPrint"
-        Me.BtnPrint.Size = New System.Drawing.Size(75, 27)
+        Me.BtnPrint.Size = New System.Drawing.Size(75, 34)
         Me.BtnPrint.TabIndex = 9
         Me.BtnPrint.Text = "Print"
         '
@@ -247,7 +247,7 @@ Partial Class FormFGCodeReplaceStoreDet
         Me.BtnTest.Dock = System.Windows.Forms.DockStyle.Left
         Me.BtnTest.Location = New System.Drawing.Point(77, 2)
         Me.BtnTest.Name = "BtnTest"
-        Me.BtnTest.Size = New System.Drawing.Size(75, 27)
+        Me.BtnTest.Size = New System.Drawing.Size(75, 34)
         Me.BtnTest.TabIndex = 12
         Me.BtnTest.Text = "Test"
         Me.BtnTest.Visible = False
@@ -259,7 +259,7 @@ Partial Class FormFGCodeReplaceStoreDet
         Me.BMark.ImageList = Me.LargeImageCollection
         Me.BMark.Location = New System.Drawing.Point(2, 2)
         Me.BMark.Name = "BMark"
-        Me.BMark.Size = New System.Drawing.Size(75, 27)
+        Me.BMark.Size = New System.Drawing.Size(75, 34)
         Me.BMark.TabIndex = 11
         Me.BMark.Text = "Mark"
         '
@@ -270,7 +270,7 @@ Partial Class FormFGCodeReplaceStoreDet
         Me.BtnCancel.ImageList = Me.LargeImageCollection
         Me.BtnCancel.Location = New System.Drawing.Point(858, 2)
         Me.BtnCancel.Name = "BtnCancel"
-        Me.BtnCancel.Size = New System.Drawing.Size(75, 27)
+        Me.BtnCancel.Size = New System.Drawing.Size(75, 34)
         Me.BtnCancel.TabIndex = 10
         Me.BtnCancel.Text = "Close"
         '
@@ -281,7 +281,7 @@ Partial Class FormFGCodeReplaceStoreDet
         Me.BtnSave.ImageList = Me.LargeImageCollection
         Me.BtnSave.Location = New System.Drawing.Point(933, 2)
         Me.BtnSave.Name = "BtnSave"
-        Me.BtnSave.Size = New System.Drawing.Size(75, 27)
+        Me.BtnSave.Size = New System.Drawing.Size(75, 34)
         Me.BtnSave.TabIndex = 8
         Me.BtnSave.Text = "Save"
         '
@@ -292,7 +292,7 @@ Partial Class FormFGCodeReplaceStoreDet
         Me.GroupControl3.Controls.Add(Me.MENote)
         Me.GroupControl3.Controls.Add(Me.LabelControl18)
         Me.GroupControl3.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.GroupControl3.Location = New System.Drawing.Point(0, 428)
+        Me.GroupControl3.Location = New System.Drawing.Point(0, 421)
         Me.GroupControl3.Name = "GroupControl3"
         Me.GroupControl3.Size = New System.Drawing.Size(1010, 68)
         Me.GroupControl3.TabIndex = 190
@@ -355,7 +355,7 @@ Partial Class FormFGCodeReplaceStoreDet
         Me.GroupControlListItem.Enabled = False
         Me.GroupControlListItem.Location = New System.Drawing.Point(0, 0)
         Me.GroupControlListItem.Name = "GroupControlListItem"
-        Me.GroupControlListItem.Size = New System.Drawing.Size(1010, 428)
+        Me.GroupControlListItem.Size = New System.Drawing.Size(1010, 421)
         Me.GroupControlListItem.TabIndex = 191
         Me.GroupControlListItem.Text = "Item List"
         '
@@ -367,7 +367,7 @@ Partial Class FormFGCodeReplaceStoreDet
         Me.GCItemList.MainView = Me.GVItemList
         Me.GCItemList.Name = "GCItemList"
         Me.GCItemList.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemSpinEdit1})
-        Me.GCItemList.Size = New System.Drawing.Size(988, 389)
+        Me.GCItemList.Size = New System.Drawing.Size(988, 382)
         Me.GCItemList.TabIndex = 3
         Me.GCItemList.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVItemList})
         '

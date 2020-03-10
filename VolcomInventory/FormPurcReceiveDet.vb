@@ -204,7 +204,7 @@ WHERE pn.`id_report_status`!=6 AND pn.`id_report_status`!=5 AND pnd.`report_mark
             ) retd ON retd.id_item = pod.id_item
             INNER JOIN tb_purc_req_det reqd ON reqd.id_purc_req_det = pod.id_purc_req_det
             WHERE pod.is_drop='2' AND pod.id_purc_order=" + id_purc_order + "
-            GROUP BY pod.id_item,reqd.item_detail "
+            GROUP BY pod.id_item, BINARY reqd.item_detail "
         ElseIf action = "upd" Then
             query = "SELECT rd.id_purc_rec_det, rd.id_purc_rec,  
             rd.id_item, i.item_desc, i.id_uom, u.uom, reqd.item_detail,
@@ -215,7 +215,7 @@ WHERE pn.`id_report_status`!=6 AND pn.`id_report_status`!=5 AND pnd.`report_mark
             INNER JOIN tb_item i ON i.id_item = rd.id_item
             INNER JOIN tb_m_uom u ON u.id_uom = i.id_uom
             WHERE rd.id_purc_rec=" + id + " 
-            GROUP BY rd.id_item,reqd.item_detail "
+            GROUP BY rd.id_item,BINARY reqd.item_detail "
         End If
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCSummary.DataSource = data

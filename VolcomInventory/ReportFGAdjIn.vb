@@ -20,11 +20,8 @@
         viewDetailReturn()
 
         'Mark
-        If is_pre = "1" Then
-            pre_load_mark_horz("41", id_adj_in_fg, "2", "2", XrTable1)
-        Else
-            load_mark_horz("41", id_adj_in_fg, "2", "1", XrTable1)
-        End If
+        pre_load_mark_horz_check("41", id_adj_in_fg, "2", "2", XrTable1)
+
 
     End Sub
 

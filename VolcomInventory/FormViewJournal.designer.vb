@@ -34,10 +34,12 @@ Partial Class FormViewJournal
         Me.GridColumnIdReport = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnReportMT = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnDesc = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControl4 = New DevExpress.XtraEditors.PanelControl()
         Me.MENote = New DevExpress.XtraEditors.MemoEdit()
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
-        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
+        Me.PCButton = New DevExpress.XtraEditors.PanelControl()
+        Me.BPrint = New DevExpress.XtraEditors.SimpleButton()
         Me.BMark = New DevExpress.XtraEditors.SimpleButton()
         Me.PCGeneralheader = New DevExpress.XtraEditors.PanelControl()
         Me.LEBilling = New DevExpress.XtraEditors.LookUpEdit()
@@ -49,7 +51,6 @@ Partial Class FormViewJournal
         Me.LTransNo = New DevExpress.XtraEditors.LabelControl()
         Me.BalanceMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.SMViewTransaction = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GCJournalDet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVJournalDet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -57,8 +58,8 @@ Partial Class FormViewJournal
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl4.SuspendLayout()
         CType(Me.MENote.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.PanelControl2.SuspendLayout()
+        CType(Me.PCButton, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PCButton.SuspendLayout()
         CType(Me.PCGeneralheader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PCGeneralheader.SuspendLayout()
         CType(Me.LEBilling.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -75,7 +76,7 @@ Partial Class FormViewJournal
         Me.GCJournalDet.MainView = Me.GVJournalDet
         Me.GCJournalDet.Name = "GCJournalDet"
         Me.GCJournalDet.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemTextEdit1, Me.RepositoryItemTextEdit2})
-        Me.GCJournalDet.Size = New System.Drawing.Size(834, 326)
+        Me.GCJournalDet.Size = New System.Drawing.Size(834, 330)
         Me.GCJournalDet.TabIndex = 11
         Me.GCJournalDet.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVJournalDet})
         '
@@ -215,12 +216,20 @@ Partial Class FormViewJournal
         Me.GridColumnDesc.Visible = True
         Me.GridColumnDesc.VisibleIndex = 2
         '
+        'GridColumn8
+        '
+        Me.GridColumn8.Caption = "CC"
+        Me.GridColumn8.FieldName = "comp_number"
+        Me.GridColumn8.Name = "GridColumn8"
+        Me.GridColumn8.Visible = True
+        Me.GridColumn8.VisibleIndex = 3
+        '
         'PanelControl4
         '
         Me.PanelControl4.Controls.Add(Me.MENote)
         Me.PanelControl4.Controls.Add(Me.LabelControl3)
         Me.PanelControl4.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl4.Location = New System.Drawing.Point(0, 401)
+        Me.PanelControl4.Location = New System.Drawing.Point(0, 405)
         Me.PanelControl4.Name = "PanelControl4"
         Me.PanelControl4.Size = New System.Drawing.Size(834, 58)
         Me.PanelControl4.TabIndex = 13
@@ -240,19 +249,29 @@ Partial Class FormViewJournal
         Me.LabelControl3.TabIndex = 3
         Me.LabelControl3.Text = "Note"
         '
-        'PanelControl2
+        'PCButton
         '
-        Me.PanelControl2.Controls.Add(Me.BMark)
-        Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl2.Location = New System.Drawing.Point(0, 459)
-        Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(834, 33)
-        Me.PanelControl2.TabIndex = 10
+        Me.PCButton.Controls.Add(Me.BPrint)
+        Me.PCButton.Controls.Add(Me.BMark)
+        Me.PCButton.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.PCButton.Location = New System.Drawing.Point(0, 463)
+        Me.PCButton.Name = "PCButton"
+        Me.PCButton.Size = New System.Drawing.Size(834, 60)
+        Me.PCButton.TabIndex = 10
+        '
+        'BPrint
+        '
+        Me.BPrint.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.BPrint.Location = New System.Drawing.Point(2, 2)
+        Me.BPrint.Name = "BPrint"
+        Me.BPrint.Size = New System.Drawing.Size(830, 27)
+        Me.BPrint.TabIndex = 22
+        Me.BPrint.Text = "Print"
         '
         'BMark
         '
-        Me.BMark.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.BMark.Location = New System.Drawing.Point(2, 2)
+        Me.BMark.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.BMark.Location = New System.Drawing.Point(2, 29)
         Me.BMark.Name = "BMark"
         Me.BMark.Size = New System.Drawing.Size(830, 29)
         Me.BMark.TabIndex = 21
@@ -351,22 +370,14 @@ Partial Class FormViewJournal
         Me.SMViewTransaction.Size = New System.Drawing.Size(157, 22)
         Me.SMViewTransaction.Text = "View document"
         '
-        'GridColumn8
-        '
-        Me.GridColumn8.Caption = "CC"
-        Me.GridColumn8.FieldName = "comp_number"
-        Me.GridColumn8.Name = "GridColumn8"
-        Me.GridColumn8.Visible = True
-        Me.GridColumn8.VisibleIndex = 3
-        '
         'FormViewJournal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(834, 492)
+        Me.ClientSize = New System.Drawing.Size(834, 523)
         Me.Controls.Add(Me.GCJournalDet)
         Me.Controls.Add(Me.PanelControl4)
-        Me.Controls.Add(Me.PanelControl2)
+        Me.Controls.Add(Me.PCButton)
         Me.Controls.Add(Me.PCGeneralheader)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
@@ -383,8 +394,8 @@ Partial Class FormViewJournal
         Me.PanelControl4.ResumeLayout(False)
         Me.PanelControl4.PerformLayout()
         CType(Me.MENote.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.PanelControl2.ResumeLayout(False)
+        CType(Me.PCButton, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PCButton.ResumeLayout(False)
         CType(Me.PCGeneralheader, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PCGeneralheader.ResumeLayout(False)
         Me.PCGeneralheader.PerformLayout()
@@ -410,7 +421,7 @@ Partial Class FormViewJournal
     Friend WithEvents PanelControl4 As DevExpress.XtraEditors.PanelControl
     Friend WithEvents MENote As DevExpress.XtraEditors.MemoEdit
     Friend WithEvents LabelControl3 As DevExpress.XtraEditors.LabelControl
-    Friend WithEvents PanelControl2 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents PCButton As DevExpress.XtraEditors.PanelControl
     Friend WithEvents BMark As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents PCGeneralheader As DevExpress.XtraEditors.PanelControl
     Friend WithEvents TEUserEntry As DevExpress.XtraEditors.TextEdit
@@ -426,4 +437,5 @@ Partial Class FormViewJournal
     Friend WithEvents LEBilling As DevExpress.XtraEditors.LookUpEdit
     Friend WithEvents GridColumnDesc As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn8 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BPrint As DevExpress.XtraEditors.SimpleButton
 End Class

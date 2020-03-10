@@ -3374,6 +3374,10 @@ WHERE rm.id_report='" & id_report & "' AND rm.report_mark_type='" & report_mark_
             mail_subject = "PD Created"
         End If
 
+        If rmt = "143" Or rmt = "144" Or rmt = "145" Or rmt = "194" Or rmt = "210" Then
+            mail_subject = "PD Revised"
+        End If
+
         Dim from_mail As MailAddress = New MailAddress("system@volcom.co.id", "Volcom ERP")
         Dim mail As MailMessage = New MailMessage()
         mail.From = from_mail
@@ -3466,6 +3470,59 @@ GROUP BY pdp.`id_prod_demand_design`"
 								</tr>"
                 'number
                 number = data.Rows(0)("prod_demand_number").ToString
+            End If
+        End If
+
+        If rmt = "143" Or rmt = "144" Or rmt = "145" Or rmt = "194" Or rmt = "210" Then
+            Dim query As String = "CALL view_prod_demand_rev(" + id_report + ")"
+            Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+
+            number = execute_query("
+                SELECT CONCAT(pd.prod_demand_number, ' (Revision ', r.rev_count, ')')
+                FROM tb_prod_demand_rev AS r 
+                INNER JOIN tb_prod_demand pd ON pd.id_prod_demand = r.id_prod_demand
+                WHERE r.id_prod_demand_rev=" & id_report, 0, True, "", "", "", "")
+
+            If data.Rows.Count > 0 Then
+                'content
+                content += "<tr>
+									<td style='padding:15.0pt 15.0pt 8.0pt 15.0pt' colspan='3'>
+										<div>
+											<table class='content' style='padding:1.0pt 1.0pt 1.0pt 10.0pt;border-collapse: collapse'>
+												<tr>
+													<td>
+														Code
+													</td>
+													<td>
+														Design
+													</td>
+													<td style='text-align: center;'>
+														Total Qty
+													</td>
+                                                    <td>
+														Status
+													</td>
+												</tr>"
+                For i As Integer = 0 To data.Rows.Count - 1
+                    content += "<tr>
+										<td>
+											" & data.Rows(i)("CODE").ToString & "
+										</td>
+										<td>
+											" & data.Rows(i)("DESCRIPTION").ToString & "
+										</td>
+										<td style='text-align: center;'>
+											" & data.Rows(i)("TOTAL QTY").ToString & "
+										</td>
+                                        <td>
+											" & data.Rows(i)("pd_status_rev").ToString & "
+										</td>
+									</tr>"
+                Next
+                content += "</table>
+										</div>
+									</td>
+								</tr>"
             End If
         End If
 

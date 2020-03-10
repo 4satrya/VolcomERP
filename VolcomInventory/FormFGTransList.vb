@@ -33,6 +33,8 @@
         SLStatus6.EditValue = "6"
         SLStatus7.EditValue = "6"
         SLStatus8.EditValue = "6"
+        SLStatus9.EditValue = "6"
+        SLStatus10.EditValue = "6"
 
         ActiveControl = DEFromRec
         page_active = "rec"
@@ -60,6 +62,8 @@
         viewSearchLookupQuery(SLStatus6, query, "id_report_status", "report_status", "id_report_status")
         viewSearchLookupQuery(SLStatus7, query, "id_report_status", "report_status", "id_report_status")
         viewSearchLookupQuery(SLStatus8, query, "id_report_status", "report_status", "id_report_status")
+        viewSearchLookupQuery(SLStatus9, query, "id_report_status", "report_status", "id_report_status")
+        viewSearchLookupQuery(SLStatus10, query, "id_report_status", "report_status", "id_report_status")
         Cursor = Cursors.Default
     End Sub
 
@@ -618,5 +622,107 @@
             exportToXLS(path, "order", GCSO)
             Cursor = Cursors.Default
         End If
+    End Sub
+
+    Private Sub SBViewAdjIn_Click(sender As Object, e As EventArgs) Handles SBViewAdjIn.Click
+        Cursor = Cursors.WaitCursor
+
+        'date paramater
+        Dim date_from_selected As String = "0000-01-01"
+        Dim date_until_selected As String = "9999-01-01"
+
+        Try
+            date_from_selected = DateTime.Parse(DEFromAdjIn.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+
+        Try
+            date_until_selected = DateTime.Parse(DEUntilAdjIn.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+
+        Dim where_status As String = If(SLStatus9.EditValue.ToString = "0", "", "AND fg.id_report_status = " + SLStatus9.EditValue.ToString)
+
+        Dim query As String = "
+            SELECT *
+            FROM tb_adj_in_fg_det AS fg_det
+            LEFT JOIN tb_adj_in_fg AS fg ON fg_det.id_adj_in_fg = fg.id_adj_in_fg
+            LEFT JOIN (
+                SELECT a.id_product, f.product_full_code, f.product_ean_code, f.product_name, f.product_display_name, e.id_season,e.season,d.id_design, d.design_code, d.id_sample, d.design_name, e.id_range, d.design_display_name,
+                del.delivery_date AS design_del_date, del.est_wh_date AS design_wh_date, b.code_detail_name AS `size`, d2.display_name AS `class`
+                FROM tb_m_product f  
+                INNER JOIN tb_m_product_code a ON a.id_product = f.id_product 
+                INNER JOIN tb_m_code_detail b ON a.id_code_detail = b.id_code_detail 
+                INNER JOIN tb_m_design d ON f.id_design = d.id_design 
+                INNER JOIN tb_m_design_code d1 ON d.id_design = d1.id_design 
+                INNER JOIN tb_m_code_detail d2 ON d1.id_code_detail = d2.id_code_detail AND d2.id_code=30
+                INNER JOIN tb_season e ON d.id_season=e.id_season
+                INNER JOIN tb_season_delivery del ON d.id_delivery = del.id_delivery
+                GROUP BY f.id_product
+            ) prod ON prod.id_product = fg_det.id_product
+            LEFT JOIN tb_m_wh_drawer AS wd ON fg_det.id_wh_drawer = wd.id_wh_drawer
+            LEFT JOIN tb_m_wh_rack AS wr ON wd.id_wh_rack = wr.id_wh_rack
+            LEFT JOIN tb_m_wh_locator AS wl ON wr.id_wh_locator = wl.id_wh_locator
+            LEFT JOIN tb_m_comp AS comp ON wl.id_comp = comp.id_comp
+            LEFT JOIN tb_lookup_report_status AS rmt ON fg.id_report_status = rmt.id_report_status
+            WHERE fg.adj_in_fg_date BETWEEN '" + date_from_selected + "' AND '" + date_until_selected + "' " + where_status + "
+        "
+
+        GCAdjIn.DataSource = execute_query(query, -1, True, "", "", "", "")
+
+        GVAdjIn.BestFitColumns()
+
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub SBViewAdjOut_Click(sender As Object, e As EventArgs) Handles SBViewAdjOut.Click
+        Cursor = Cursors.WaitCursor
+
+        'date paramater
+        Dim date_from_selected As String = "0000-01-01"
+        Dim date_until_selected As String = "9999-01-01"
+
+        Try
+            date_from_selected = DateTime.Parse(DEFromAdjOut.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+
+        Try
+            date_until_selected = DateTime.Parse(DEUntilAdjOut.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+
+        Dim where_status As String = If(SLStatus10.EditValue.ToString = "0", "", "AND fg.id_report_status = " + SLStatus10.EditValue.ToString)
+
+        Dim query As String = "
+            SELECT *
+            FROM tb_adj_out_fg_det AS fg_det
+            LEFT JOIN tb_adj_out_fg AS fg ON fg_det.id_adj_out_fg = fg.id_adj_out_fg
+            LEFT JOIN (
+                SELECT a.id_product, f.product_full_code, f.product_ean_code, f.product_name, f.product_display_name, e.id_season,e.season,d.id_design, d.design_code, d.id_sample, d.design_name, e.id_range, d.design_display_name,
+                del.delivery_date AS design_del_date, del.est_wh_date AS design_wh_date, b.code_detail_name AS `size`, d2.display_name AS `class`
+                FROM tb_m_product f  
+                INNER JOIN tb_m_product_code a ON a.id_product = f.id_product 
+                INNER JOIN tb_m_code_detail b ON a.id_code_detail = b.id_code_detail 
+                INNER JOIN tb_m_design d ON f.id_design = d.id_design 
+                INNER JOIN tb_m_design_code d1 ON d.id_design = d1.id_design 
+                INNER JOIN tb_m_code_detail d2 ON d1.id_code_detail = d2.id_code_detail AND d2.id_code=30
+                INNER JOIN tb_season e ON d.id_season=e.id_season
+                INNER JOIN tb_season_delivery del ON d.id_delivery = del.id_delivery
+                GROUP BY f.id_product
+            ) prod ON prod.id_product = fg_det.id_product
+            LEFT JOIN tb_m_wh_drawer AS wd ON fg_det.id_wh_drawer = wd.id_wh_drawer
+            LEFT JOIN tb_m_wh_rack AS wr ON wd.id_wh_rack = wr.id_wh_rack
+            LEFT JOIN tb_m_wh_locator AS wl ON wr.id_wh_locator = wl.id_wh_locator
+            LEFT JOIN tb_m_comp AS comp ON wl.id_comp = comp.id_comp
+            LEFT JOIN tb_lookup_report_status AS rmt ON fg.id_report_status = rmt.id_report_status
+            WHERE fg.adj_out_fg_date BETWEEN '" + date_from_selected + "' AND '" + date_until_selected + "' " + where_status + "
+        "
+
+        GCAdjOut1.DataSource = execute_query(query, -1, True, "", "", "", "")
+
+        GVAdjOut1.BestFitColumns()
+
+        Cursor = Cursors.Default
     End Sub
 End Class

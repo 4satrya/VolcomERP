@@ -21,6 +21,7 @@ Public Class FormFGRepairRecDet
     Public bof_column As String = get_setup_field("bof_column")
     Public bof_xls_repair As String = get_setup_field("bof_xls_repair_rec")
 
+    Dim is_use_unique_code_wh As String = "-1"
 
     Private Sub FormFGRepairRecDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewReportStatus()
@@ -63,6 +64,7 @@ Public Class FormFGRepairRecDet
             TxtNameCompFrom.Text = data.Rows(0)("comp_name_from").ToString
             TxtCodeCompTo.Text = data.Rows(0)("comp_number_to").ToString
             TxtNameCompTo.Text = data.Rows(0)("comp_name_to").ToString
+            is_use_unique_code_wh = data.Rows(0)("is_use_unique_code").ToString
             setDefaultDrawerFrom()
             setDefaultDrawerTo()
 
@@ -91,8 +93,11 @@ Public Class FormFGRepairRecDet
         id_comp_to = data.Rows(0)("id_comp_to").ToString
         TxtCodeCompFrom.Text = data.Rows(0)("comp_number_from").ToString
         TxtNameCompFrom.Text = data.Rows(0)("comp_name_from").ToString
+        '
         TxtCodeCompTo.Text = data.Rows(0)("comp_number_to").ToString
         TxtNameCompTo.Text = data.Rows(0)("comp_name_to").ToString
+        is_use_unique_code_wh = data.Rows(0)("is_use_unique_code").ToString
+        '
         setDefaultDrawerFrom()
         setDefaultDrawerTo()
         codeAvailableIns()
@@ -105,7 +110,6 @@ Public Class FormFGRepairRecDet
         dt = execute_query(query, -1, True, "", "", "", "")
         SplashScreenManager1.CloseWaitForm()
     End Sub
-
 
     Sub setDefaultDrawerFrom()
         'get drw def
@@ -433,8 +437,8 @@ Public Class FormFGRepairRecDet
                 If confirm = Windows.Forms.DialogResult.Yes Then
                     Cursor = Cursors.WaitCursor
                     'main query
-                    Dim query As String = "INSERT INTO tb_fg_repair_rec(id_fg_repair,id_wh_drawer_from, id_wh_drawer_to, fg_repair_rec_number, fg_repair_rec_date, fg_repair_rec_note, id_report_status) 
-                                           VALUES('" + id_fg_repair_select + "','" + id_wh_drawer_from + "', '" + id_wh_drawer_to + "','" + header_number_sales("28") + "', NOW(), '" + fg_repair_rec_note + "', '1'); SELECT LAST_INSERT_ID(); "
+                    Dim query As String = "INSERT INTO tb_fg_repair_rec(id_fg_repair,id_wh_drawer_from, id_wh_drawer_to, fg_repair_rec_number, fg_repair_rec_date, fg_repair_rec_note, id_report_status ,is_use_unique_code) 
+                                           VALUES('" + id_fg_repair_select + "','" + id_wh_drawer_from + "', '" + id_wh_drawer_to + "','" + header_number_sales("28") + "', NOW(), '" + fg_repair_rec_note + "', '1','" + is_use_unique_code_wh + "'); SELECT LAST_INSERT_ID(); "
                     id_fg_repair_rec = execute_query(query, 0, True, "", "", "", "")
                     increase_inc_sales("28")
 
@@ -464,6 +468,37 @@ Public Class FormFGRepairRecDet
                     Next
                     If jum_ins_j > 0 Then
                         execute_non_query(query_detail, True, "", "", "", "")
+                    End If
+
+                    'reserved unique code
+                    If is_use_unique_code_wh = "1" Then
+                        Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`,`id_fg_repair_rec_det`,`report_mark_type`,`unique_code`,
+                        `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
+                        SELECT c.id_comp, t.`id_wh_drawer_from`, td.id_product, td.id_pl_prod_order_rec_det_unique, td.id_fg_repair_rec_det, '9', 
+                        CONCAT(p.product_full_code,td.fg_repair_rec_det_counting), sod.id_design_price, sod.design_price, -1, 1, NOW() 
+                        FROM tb_fg_repair_rec_det td
+                        INNER JOIN tb_fg_repair_rec t ON t.id_fg_repair_rec = td.id_fg_repair_rec
+                        INNER JOIN tb_m_wh_drawer drw_frm ON drw_frm.id_wh_drawer = t.id_wh_drawer_from  
+                        INNER JOIN tb_m_wh_rack rack_frm ON rack_frm.id_wh_rack = drw_frm.id_wh_rack  
+                        INNER JOIN tb_m_wh_locator loc_frm ON loc_frm.id_wh_locator = rack_frm.id_wh_locator  
+                        INNER JOIN tb_m_comp c ON c.id_comp = loc_frm.id_comp  
+                        INNER JOIN tb_m_product p ON p.id_product = td.id_product
+                        INNER JOIN tb_m_design d ON d.id_design = p.id_design
+                        LEFT JOIN( 
+                            SELECT * FROM ( 
+	                        SELECT price.id_design, price.design_price, price.design_price_date, price.id_design_price, 
+	                        price.id_design_price_type, price_type.design_price_type,
+	                        cat.id_design_cat, cat.design_cat
+	                        FROM tb_m_design_price price 
+	                        INNER JOIN tb_lookup_design_price_type price_type ON price.id_design_price_type = price_type.id_design_price_type 
+	                        INNER JOIN tb_lookup_design_cat cat ON cat.id_design_cat = price_type.id_design_cat
+	                        WHERE price.is_active_wh ='1' AND price.design_price_start_date <= NOW() 
+	                        ORDER BY price.design_price_start_date DESC, price.id_design_price DESC 
+                            ) a 
+                            GROUP BY a.id_design 
+                        ) sod ON sod.id_design = d.id_design 
+                        WHERE t.id_fg_repair_rec=" & id_fg_repair_rec & " AND d.is_old_design=2 AND t.is_use_unique_code=1 "
+                        execute_non_query(quniq, True, "", "", "", "")
                     End If
 
                     'refresh data

@@ -28,7 +28,7 @@
     Private Sub FormSetKurs_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         TEKurs.EditValue = 0.00
         'get today kurs
-        Dim query As String = "SELECT * FROM tb_kurs_trans WHERE DATE(created_date) = DATE(NOW()) ORDER BY id_kurs_trans DESC"
+        Dim query As String = "SELECT * FROM tb_kurs_trans WHERE DATE(DATE_ADD(created_date, INTERVAL 6 DAY)) >= DATE(NOW()) ORDER BY id_kurs_trans DESC LIMIT 1"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
         If data.Rows.Count > 0 Then
@@ -40,7 +40,12 @@
     End Sub
 
     Sub load_kurs()
-        Dim query As String = "SELECT kt.id_kurs_trans,kt.created_by,kt.created_date,kt.kurs_trans,kt.fixed_floating,(kt.kurs_trans + kt.fixed_floating) AS management_rate,emp.employee_name FROM tb_kurs_trans kt INNER JOIN tb_m_user usr ON usr.id_user=kt.created_by INNER JOIN tb_m_employee emp ON emp.id_employee=usr.id_employee ORDER BY kt.id_kurs_trans DESC"
+        Dim query As String = "
+            SELECT kt.id_kurs_trans, kt.created_by, kt.created_date, kt.kurs_trans, kt.fixed_floating, (kt.kurs_trans + kt.fixed_floating) AS management_rate, IF(kt.created_by = 0, 'Automatic Get Kurs', emp.employee_name) AS employee_name
+            FROM tb_kurs_trans kt 
+            LEFT JOIN tb_m_user usr ON usr.id_user = kt.created_by 
+            LEFT JOIN tb_m_employee emp ON emp.id_employee = usr.id_employee 
+            ORDER BY kt.id_kurs_trans DESC"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCKursTrans.DataSource = data
         GVKursTrans.BestFitColumns()
@@ -93,6 +98,15 @@ UPDATE tb_opt SET rate_management='" & decimalSQL((TEKurs.EditValue + TEFixFloat
             execute_non_query(query, True, "", "", "", "'")
             load_kurs()
         End If
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub RepositoryItemCheckEdit_Click(sender As Object, e As EventArgs) Handles RepositoryItemCheckEdit.Click
+        Cursor = Cursors.WaitCursor
+        FormDocumentUpload.is_no_delete = "1"
+        FormDocumentUpload.id_report = GVKursTrans.GetFocusedRowCellValue("id_kurs_trans").ToString
+        FormDocumentUpload.report_mark_type = "239"
+        FormDocumentUpload.ShowDialog()
         Cursor = Cursors.Default
     End Sub
 End Class

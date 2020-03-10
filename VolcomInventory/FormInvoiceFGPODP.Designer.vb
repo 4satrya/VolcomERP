@@ -23,6 +23,7 @@ Partial Class FormInvoiceFGPODP
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormInvoiceFGPODP))
         Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
         Me.PanelControl7 = New DevExpress.XtraEditors.PanelControl()
+        Me.BAttachment = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnViewJournal = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnPrint = New DevExpress.XtraEditors.SimpleButton()
         Me.BMark = New DevExpress.XtraEditors.SimpleButton()
@@ -115,7 +116,7 @@ Partial Class FormInvoiceFGPODP
         Me.GridColumndebit_draft = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncredit_draft = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncc = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.BAttachment = New DevExpress.XtraEditors.SimpleButton()
+        Me.GCPORef = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl7, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl7.SuspendLayout()
@@ -204,6 +205,17 @@ Partial Class FormInvoiceFGPODP
         Me.PanelControl7.Name = "PanelControl7"
         Me.PanelControl7.Size = New System.Drawing.Size(1003, 40)
         Me.PanelControl7.TabIndex = 3
+        '
+        'BAttachment
+        '
+        Me.BAttachment.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BAttachment.Image = CType(resources.GetObject("BAttachment.Image"), System.Drawing.Image)
+        Me.BAttachment.Location = New System.Drawing.Point(566, 2)
+        Me.BAttachment.Name = "BAttachment"
+        Me.BAttachment.Size = New System.Drawing.Size(105, 36)
+        Me.BAttachment.TabIndex = 21
+        Me.BAttachment.Text = "Attachment"
+        Me.BAttachment.Visible = False
         '
         'BtnViewJournal
         '
@@ -671,7 +683,7 @@ Partial Class FormInvoiceFGPODP
         '
         'GVList
         '
-        Me.GVList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdRec, Me.GridColumn6, Me.GridColumnAccPick, Me.GCDescription, Me.GCReff, Me.GCInvNumber, Me.GridColumnNote, Me.GCCur, Me.GCCurHide, Me.GCKurs, Me.GCBeforeKurs, Me.GCQty, Me.GridColumnPayment, Me.GCVat})
+        Me.GVList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdRec, Me.GridColumn6, Me.GridColumnAccPick, Me.GCDescription, Me.GCReff, Me.GCPORef, Me.GCInvNumber, Me.GridColumnNote, Me.GCCur, Me.GCCurHide, Me.GCKurs, Me.GCBeforeKurs, Me.GCQty, Me.GridColumnPayment, Me.GCVat})
         Me.GVList.GridControl = Me.GCList
         Me.GVList.Name = "GVList"
         Me.GVList.OptionsBehavior.AutoExpandAllGroups = True
@@ -756,7 +768,11 @@ Partial Class FormInvoiceFGPODP
         '
         'GCReff
         '
-        Me.GCReff.Caption = "Reffrence"
+        Me.GCReff.AppearanceCell.Options.UseTextOptions = True
+        Me.GCReff.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GCReff.AppearanceHeader.Options.UseTextOptions = True
+        Me.GCReff.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GCReff.Caption = "Reff"
         Me.GCReff.FieldName = "report_number"
         Me.GCReff.Name = "GCReff"
         Me.GCReff.Visible = True
@@ -765,7 +781,11 @@ Partial Class FormInvoiceFGPODP
         '
         'GCInvNumber
         '
-        Me.GCInvNumber.Caption = "Invoice Number"
+        Me.GCInvNumber.AppearanceCell.Options.UseTextOptions = True
+        Me.GCInvNumber.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GCInvNumber.AppearanceHeader.Options.UseTextOptions = True
+        Me.GCInvNumber.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GCInvNumber.Caption = "Inv Number"
         Me.GCInvNumber.FieldName = "inv_number"
         Me.GCInvNumber.Name = "GCInvNumber"
         Me.GCInvNumber.Visible = True
@@ -783,7 +803,7 @@ Partial Class FormInvoiceFGPODP
         '
         'GCCur
         '
-        Me.GCCur.Caption = "Currency"
+        Me.GCCur.Caption = "Curr"
         Me.GCCur.ColumnEdit = Me.RISLECurrency
         Me.GCCur.FieldName = "id_currency"
         Me.GCCur.Name = "GCCur"
@@ -827,7 +847,7 @@ Partial Class FormInvoiceFGPODP
         Me.GCCurHide.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
         Me.GCCurHide.AppearanceHeader.Options.UseTextOptions = True
         Me.GCCurHide.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.GCCurHide.Caption = "Currency"
+        Me.GCCurHide.Caption = "Curr"
         Me.GCCurHide.FieldName = "currency"
         Me.GCCurHide.Name = "GCCurHide"
         '
@@ -844,7 +864,7 @@ Partial Class FormInvoiceFGPODP
         '
         'GCBeforeKurs
         '
-        Me.GCBeforeKurs.Caption = "Value Before Kurs"
+        Me.GCBeforeKurs.Caption = "Amount"
         Me.GCBeforeKurs.DisplayFormat.FormatString = "N2"
         Me.GCBeforeKurs.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GCBeforeKurs.FieldName = "value_bef_kurs"
@@ -874,7 +894,7 @@ Partial Class FormInvoiceFGPODP
         Me.GridColumnPayment.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GridColumnPayment.AppearanceHeader.Options.UseTextOptions = True
         Me.GridColumnPayment.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumnPayment.Caption = "Sub Total Amount"
+        Me.GridColumnPayment.Caption = "Amount in Rp"
         Me.GridColumnPayment.DisplayFormat.FormatString = "N2"
         Me.GridColumnPayment.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnPayment.FieldName = "valuex"
@@ -894,7 +914,7 @@ Partial Class FormInvoiceFGPODP
         Me.GCVat.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GCVat.AppearanceHeader.Options.UseTextOptions = True
         Me.GCVat.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GCVat.Caption = "Sub Total VAT"
+        Me.GCVat.Caption = "Amount VAT"
         Me.GCVat.DisplayFormat.FormatString = "N2"
         Me.GCVat.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GCVat.FieldName = "vat"
@@ -1104,16 +1124,15 @@ Partial Class FormInvoiceFGPODP
         Me.GridColumncc.VisibleIndex = 1
         Me.GridColumncc.Width = 39
         '
-        'BAttachment
+        'GCPORef
         '
-        Me.BAttachment.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BAttachment.Image = CType(resources.GetObject("BAttachment.Image"), System.Drawing.Image)
-        Me.BAttachment.Location = New System.Drawing.Point(566, 2)
-        Me.BAttachment.Name = "BAttachment"
-        Me.BAttachment.Size = New System.Drawing.Size(105, 36)
-        Me.BAttachment.TabIndex = 21
-        Me.BAttachment.Text = "Attachment"
-        Me.BAttachment.Visible = False
+        Me.GCPORef.AppearanceCell.Options.UseTextOptions = True
+        Me.GCPORef.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GCPORef.AppearanceHeader.Options.UseTextOptions = True
+        Me.GCPORef.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GCPORef.Caption = "PO Reff"
+        Me.GCPORef.FieldName = "prod_order_number"
+        Me.GCPORef.Name = "GCPORef"
         '
         'FormInvoiceFGPODP
         '
@@ -1286,4 +1305,5 @@ Partial Class FormInvoiceFGPODP
     Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GCCurHide As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents BAttachment As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GCPORef As DevExpress.XtraGrid.Columns.GridColumn
 End Class

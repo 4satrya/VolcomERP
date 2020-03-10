@@ -147,7 +147,7 @@
                     FormSalesDelOrderDet.GVItemList.ExpandAllGroups()
                     FormSalesDelOrderDet.GVItemList.OptionsBehavior.AutoExpandAllGroups = True
                     FormSalesDelOrderDet.GVItemList.FocusedRowHandle = find_row(FormSalesDelOrderDet.GVItemList, "id_product", GVItemList.GetFocusedRowCellValue("id_product").ToString)
-                    FormSalesDelOrderDet.codeAvailableIns(GVItemList.GetFocusedRowCellValue("id_product").ToString)
+                    FormSalesDelOrderDet.codeAvailableIns(GVItemList.GetFocusedRowCellValue("id_product").ToString, "")
                     Close()
                 End If
             Else 'edit
@@ -186,7 +186,7 @@
                     FormSalesDelOrderDet.GVItemList.RefreshData()
                     FormSalesDelOrderDet.GVItemList.OptionsBehavior.AutoExpandAllGroups = True
                     FormSalesDelOrderDet.codeAvailableDel(GVItemList.GetFocusedRowCellValue("id_product").ToString)
-                    FormSalesDelOrderDet.codeAvailableIns(GVItemList.GetFocusedRowCellValue("id_product").ToString)
+                    FormSalesDelOrderDet.codeAvailableIns(GVItemList.GetFocusedRowCellValue("id_product").ToString, "")
                     Close()
                 End If
             End If

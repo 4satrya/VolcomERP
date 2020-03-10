@@ -56,7 +56,7 @@
                                 INNER JOIN tb_m_employee empc ON empc.`id_employee`=usrc.`id_employee`
                                 INNER JOIN tb_lookup_report_status sts ON sts.id_report_status=pr.id_report_status
                                 LEFT JOIN tb_m_user usru ON usru.`id_user`=pr.`id_user_last_upd`
-                                LEFT JOIN tb_m_employee empu ON empu.`id_employee`=usru.`id_employee` WHERE pr.ic_approval=1 AND pr.id_expense_type='2' AND pr.is_fixed_asset='1' " & where_dep & " ORDER BY pr.`id_purc_req` DESC"
+                                LEFT JOIN tb_m_employee empu ON empu.`id_employee`=usru.`id_employee` WHERE pr.ic_approval=1 AND pr.id_expense_type='2' AND pr.is_fixed_asset='1' AND pr.id_report_status!=5 " & where_dep & " ORDER BY pr.`id_purc_req` DESC"
             Else 'history
                 query = "SELECT pr.`id_purc_req`,pr.id_user_created,pr.requirement_date,sts.report_status,et.expense_type,pr.id_report_status,dep.`departement`,et.pr_report_mark_type,pr.`purc_req_number`,pr.`note`,empc.`employee_name` AS created_by,pr.`date_created`,empu.`employee_name` AS last_upd_by,pr.`date_last_upd` FROM `tb_purc_req` pr
                                 INNER JOIN tb_lookup_expense_type et ON et.id_expense_type=pr.id_expense_type
@@ -65,7 +65,7 @@
                                 INNER JOIN tb_m_employee empc ON empc.`id_employee`=usrc.`id_employee`
                                 INNER JOIN tb_lookup_report_status sts ON sts.id_report_status=pr.id_report_status
                                 LEFT JOIN tb_m_user usru ON usru.`id_user`=pr.`id_user_last_upd`
-                                LEFT JOIN tb_m_employee empu ON empu.`id_employee`=usru.`id_employee` WHERE pr.ic_approval!=1 AND pr.id_expense_type='2' AND pr.is_fixed_asset='1' " & where_dep & " ORDER BY pr.`id_purc_req` DESC"
+                                LEFT JOIN tb_m_employee empu ON empu.`id_employee`=usru.`id_employee` WHERE pr.ic_approval!=1 AND pr.id_expense_type='2' AND pr.is_fixed_asset='1' AND pr.id_report_status!=5 " & where_dep & " ORDER BY pr.`id_purc_req` DESC"
             End If
         ElseIf step_approve = "2" Then 'IA
             If XTCPurcReq.SelectedTabPageIndex = 0 Then 'need submit

@@ -498,8 +498,12 @@ WHERE c.id_comp='" & SLEVendorExpense.EditValue & "'"
     End Sub
 
     Private Sub ToolStripMenuItemAdd_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemAdd.Click
-        FormBankWithdrawalAttachement.id_purc_order = GVPOListNonActive.GetFocusedRowCellValue("id_purc_order").ToString
-        FormBankWithdrawalAttachement.ShowDialog()
+        If XTCPO.SelectedTabPageIndex = 0 Then
+            infoCustom("Already active.")
+        Else
+            FormBankWithdrawalAttachement.id_purc_order = GVPOListNonActive.GetFocusedRowCellValue("id_purc_order").ToString
+            FormBankWithdrawalAttachement.ShowDialog()
+        End If
     End Sub
 
     Private Sub RICEAttachment_Click(sender As Object, e As EventArgs) Handles RICEAttachment.Click
@@ -627,5 +631,19 @@ WHERE c.id_comp='" & SLEVendorExpense.EditValue & "'"
         End If
 
         GVTHR.ActiveFilterString = ""
+    End Sub
+
+    Private Sub ViewBPLToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ViewBPLToolStripMenuItem.Click
+        If XTPPOList.SelectedTabPageIndex = 0 Then
+            FormPopUpListJournal.id_pop_up = "1"
+            FormPopUpListJournal.id_ref = GVPOList.GetFocusedRowCellValue("id_purc_order").ToString
+            FormPopUpListJournal.title_for_print = "BPL List PO OG " & GVPOList.GetFocusedRowCellValue("purc_order_number").ToString
+            FormPopUpListJournal.ShowDialog()
+        Else
+            FormPopUpListJournal.id_pop_up = "1"
+            FormPopUpListJournal.id_ref = GVPOListNonActive.GetFocusedRowCellValue("id_purc_order").ToString
+            FormPopUpListJournal.title_for_print = "BPL List PO OG " & GVPOListNonActive.GetFocusedRowCellValue("purc_order_number").ToString
+            FormPopUpListJournal.ShowDialog()
+        End If
     End Sub
 End Class

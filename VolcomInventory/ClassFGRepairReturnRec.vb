@@ -18,7 +18,7 @@
         query += "rec.id_wh_drawer_to, comp_to.id_comp As `id_comp_to`, comp_to.comp_number As `comp_number_to`, comp_to.comp_name As `comp_name_to`, CONCAT(comp_to.comp_number,' - ', comp_to.comp_name) AS `comp_to`, "
         query += "rec.id_wh_drawer_dest, wh.id_comp As `id_wh`, wh.comp_number As `wh_number`, wh.comp_name As `wh_name`, CONCAT(wh.comp_number,' - ', wh.comp_name) AS `wh`, "
         query += "rec.fg_repair_return_rec_number, r.fg_repair_return_number, rec.fg_repair_return_rec_date, DATE_FORMAT(rec.fg_repair_return_rec_date, '%Y-%m-%d') AS fg_repair_return_rec_datex, "
-        query += "rec.fg_repair_return_rec_note, rec.id_report_status, stt.report_status "
+        query += "rec.fg_repair_return_rec_note, rec.id_report_status, stt.report_status,rec.is_use_unique_code "
         query += "From tb_fg_repair_return_rec rec "
         query += "INNER JOIN tb_fg_repair_return r ON r.id_fg_repair_return = rec.id_fg_repair_return "
         query += "INNER Join tb_m_wh_drawer drw_frm On drw_frm.id_wh_drawer = rec.id_wh_drawer_from  "

@@ -31,6 +31,8 @@ Partial Class FormEmpBPJSKesehatanPick
         Me.GCEmployeeCode = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GCEmployeeName = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GCEmployeePosition = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GCBPJSKesehatan = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GCDOB = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GCIdEmployeeStatus = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GCEmployeeStatus = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GCIdEmployeeSalary = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -39,8 +41,7 @@ Partial Class FormEmpBPJSKesehatanPick
         Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
         Me.SBClose = New DevExpress.XtraEditors.SimpleButton()
         Me.SBAdd = New DevExpress.XtraEditors.SimpleButton()
-        Me.GCBPJSKesehatan = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GCDOB = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GCEmployeeActive = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GCEmployee, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVEmployee, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RICECheck, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -61,7 +62,7 @@ Partial Class FormEmpBPJSKesehatanPick
         '
         'GVEmployee
         '
-        Me.GVEmployee.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GCCheck, Me.GCIdDepartement, Me.GCIdDepartementSub, Me.GCDepartement, Me.GCIdEmployee, Me.GCEmployeeCode, Me.GCEmployeeName, Me.GCEmployeePosition, Me.GCBPJSKesehatan, Me.GCDOB, Me.GCIdEmployeeStatus, Me.GCEmployeeStatus, Me.GCIdEmployeeSalary, Me.GCFixedSalary, Me.GCBPJSKesehatanContribution})
+        Me.GVEmployee.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GCCheck, Me.GCIdDepartement, Me.GCIdDepartementSub, Me.GCDepartement, Me.GCIdEmployee, Me.GCEmployeeCode, Me.GCEmployeeName, Me.GCEmployeePosition, Me.GCBPJSKesehatan, Me.GCDOB, Me.GCIdEmployeeStatus, Me.GCEmployeeStatus, Me.GCIdEmployeeSalary, Me.GCEmployeeActive, Me.GCFixedSalary, Me.GCBPJSKesehatanContribution})
         Me.GVEmployee.GridControl = Me.GCEmployee
         Me.GVEmployee.GroupCount = 1
         Me.GVEmployee.Name = "GVEmployee"
@@ -143,6 +144,16 @@ Partial Class FormEmpBPJSKesehatanPick
         Me.GCEmployeePosition.VisibleIndex = 3
         Me.GCEmployeePosition.Width = 96
         '
+        'GCBPJSKesehatan
+        '
+        Me.GCBPJSKesehatan.FieldName = "employee_bpjs_kesehatan"
+        Me.GCBPJSKesehatan.Name = "GCBPJSKesehatan"
+        '
+        'GCDOB
+        '
+        Me.GCDOB.FieldName = "employee_dob"
+        Me.GCDOB.Name = "GCDOB"
+        '
         'GCIdEmployeeStatus
         '
         Me.GCIdEmployeeStatus.FieldName = "id_employee_status"
@@ -174,7 +185,7 @@ Partial Class FormEmpBPJSKesehatanPick
         Me.GCFixedSalary.Name = "GCFixedSalary"
         Me.GCFixedSalary.OptionsColumn.AllowEdit = False
         Me.GCFixedSalary.Visible = True
-        Me.GCFixedSalary.VisibleIndex = 5
+        Me.GCFixedSalary.VisibleIndex = 6
         '
         'GCBPJSKesehatanContribution
         '
@@ -185,7 +196,7 @@ Partial Class FormEmpBPJSKesehatanPick
         Me.GCBPJSKesehatanContribution.Name = "GCBPJSKesehatanContribution"
         Me.GCBPJSKesehatanContribution.OptionsColumn.AllowEdit = False
         Me.GCBPJSKesehatanContribution.Visible = True
-        Me.GCBPJSKesehatanContribution.VisibleIndex = 6
+        Me.GCBPJSKesehatanContribution.VisibleIndex = 7
         Me.GCBPJSKesehatanContribution.Width = 149
         '
         'PanelControl3
@@ -218,15 +229,14 @@ Partial Class FormEmpBPJSKesehatanPick
         Me.SBAdd.TabIndex = 0
         Me.SBAdd.Text = "Add"
         '
-        'GCBPJSKesehatan
+        'GCEmployeeActive
         '
-        Me.GCBPJSKesehatan.FieldName = "employee_bpjs_kesehatan"
-        Me.GCBPJSKesehatan.Name = "GCBPJSKesehatan"
-        '
-        'GCDOB
-        '
-        Me.GCDOB.FieldName = "employee_dob"
-        Me.GCDOB.Name = "GCDOB"
+        Me.GCEmployeeActive.Caption = "Employee Active"
+        Me.GCEmployeeActive.FieldName = "employee_active"
+        Me.GCEmployeeActive.Name = "GCEmployeeActive"
+        Me.GCEmployeeActive.Visible = True
+        Me.GCEmployeeActive.VisibleIndex = 5
+        Me.GCEmployeeActive.Width = 89
         '
         'FormEmpBPJSKesehatanPick
         '
@@ -269,4 +279,5 @@ Partial Class FormEmpBPJSKesehatanPick
     Friend WithEvents GCBPJSKesehatanContribution As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GCBPJSKesehatan As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GCDOB As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GCEmployeeActive As DevExpress.XtraGrid.Columns.GridColumn
 End Class

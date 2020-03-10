@@ -57,6 +57,7 @@ Partial Class FormBankWithdrawal
         Me.GCPOListNonActive = New DevExpress.XtraGrid.GridControl()
         Me.ContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ToolStripMenuItemAdd = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ViewBPLToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GVPOListNonActive = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn61 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn62 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -226,6 +227,8 @@ Partial Class FormBankWithdrawal
         Me.GridColumn96 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn97 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.SBPayTHR = New DevExpress.XtraEditors.SimpleButton()
+        Me.ViewBPL = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.VDItemList = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.XTCPO, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCPO.SuspendLayout()
         Me.XTPPO.SuspendLayout()
@@ -292,6 +295,7 @@ Partial Class FormBankWithdrawal
         CType(Me.GCTHR, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVTHR, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemCheckEdit4, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ViewBPL.SuspendLayout()
         Me.SuspendLayout()
         '
         'XTCPO
@@ -333,6 +337,7 @@ Partial Class FormBankWithdrawal
         '
         'GCPOList
         '
+        Me.GCPOList.ContextMenuStrip = Me.ContextMenuStrip
         Me.GCPOList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GCPOList.Location = New System.Drawing.Point(0, 0)
         Me.GCPOList.MainView = Me.GVPOList
@@ -660,15 +665,21 @@ Partial Class FormBankWithdrawal
         '
         'ContextMenuStrip
         '
-        Me.ContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemAdd})
+        Me.ContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemAdd, Me.ViewBPLToolStripMenuItem})
         Me.ContextMenuStrip.Name = "ContextMenuStrip"
-        Me.ContextMenuStrip.Size = New System.Drawing.Size(254, 26)
+        Me.ContextMenuStrip.Size = New System.Drawing.Size(254, 70)
         '
         'ToolStripMenuItemAdd
         '
         Me.ToolStripMenuItemAdd.Name = "ToolStripMenuItemAdd"
         Me.ToolStripMenuItemAdd.Size = New System.Drawing.Size(253, 22)
         Me.ToolStripMenuItemAdd.Text = "Add Attachment, Due Date && Pph"
+        '
+        'ViewBPLToolStripMenuItem
+        '
+        Me.ViewBPLToolStripMenuItem.Name = "ViewBPLToolStripMenuItem"
+        Me.ViewBPLToolStripMenuItem.Size = New System.Drawing.Size(253, 22)
+        Me.ViewBPLToolStripMenuItem.Text = "View BPL"
         '
         'GVPOListNonActive
         '
@@ -2407,6 +2418,18 @@ Partial Class FormBankWithdrawal
         Me.SBPayTHR.TabIndex = 23
         Me.SBPayTHR.Text = "Create Payment"
         '
+        'ViewBPL
+        '
+        Me.ViewBPL.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.VDItemList})
+        Me.ViewBPL.Name = "ContextMenuStripYM"
+        Me.ViewBPL.Size = New System.Drawing.Size(113, 26)
+        '
+        'VDItemList
+        '
+        Me.VDItemList.Name = "VDItemList"
+        Me.VDItemList.Size = New System.Drawing.Size(112, 22)
+        Me.VDItemList.Text = "History"
+        '
         'FormBankWithdrawal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2489,6 +2512,7 @@ Partial Class FormBankWithdrawal
         CType(Me.GCTHR, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVTHR, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemCheckEdit4, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ViewBPL.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -2698,4 +2722,7 @@ Partial Class FormBankWithdrawal
     Friend WithEvents GridColumn97 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents SBPayTHR As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents GridColumn98 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ViewBPLToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ViewBPL As ContextMenuStrip
+    Friend WithEvents VDItemList As ToolStripMenuItem
 End Class

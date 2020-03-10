@@ -3,6 +3,14 @@
     Public action As String
     Public id_report_status As String
     Public total_amount As Double
+    Public id_drawer As String = ""
+    Public drawer_name As String = ""
+    Public id_rack As String = ""
+    Public rack_name As String = ""
+    Public id_locator As String = ""
+    Public locator_name As String = ""
+    Public id_comp As String = ""
+    Public comp_name As String = ""
 
     Private Sub FormFGAdjOutDet_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         viewReportStatus()
@@ -261,26 +269,29 @@
                 submit_who_prepared("42", id_adj_out_fg, id_user)
 
                 'detail table
+                'INSERT TB DETAIL
+                query = "INSERT tb_adj_out_fg_det(id_adj_out_fg, adj_out_fg_det_note, adj_out_fg_det_qty, id_wh_drawer, id_product, adj_out_fg_det_price) VALUES "
+                'INSERT TB PL STORAGE
+                Dim query_upd_storage As String = "INSERT INTO tb_storage_fg(id_wh_drawer, id_storage_category, id_product, bom_unit_price, storage_product_qty, storage_product_datetime, storage_product_notes,id_stock_status, report_mark_type, id_report) VALUES "
                 For i As Integer = 0 To GVDetail.RowCount - 1
-                    Try
-                        Dim adj_out_fg_det_note As String = GVDetail.GetRowCellValue(i, "adj_out_fg_det_note").ToString
-                        Dim adj_out_fg_det_qty As String = decimalSQL(GVDetail.GetRowCellValue(i, "adj_out_fg_det_qty").ToString)
-                        Dim id_wh_drawer As String = GVDetail.GetRowCellValue(i, "id_wh_drawer").ToString
-                        Dim id_product As String = GVDetail.GetRowCellValue(i, "id_product").ToString
-                        Dim adj_out_fg_det_price As String = decimalSQL(GVDetail.GetRowCellValue(i, "adj_out_fg_det_price").ToString)
+                    Dim adj_out_fg_det_note As String = GVDetail.GetRowCellValue(i, "adj_out_fg_det_note").ToString
+                    Dim adj_out_fg_det_qty As String = decimalSQL(GVDetail.GetRowCellValue(i, "adj_out_fg_det_qty").ToString)
+                    Dim id_wh_drawer As String = GVDetail.GetRowCellValue(i, "id_wh_drawer").ToString
+                    Dim id_product As String = GVDetail.GetRowCellValue(i, "id_product").ToString
+                    Dim adj_out_fg_det_price As String = decimalSQL(GVDetail.GetRowCellValue(i, "adj_out_fg_det_price").ToString)
 
-                        'INSERT TB DETAIL
-                        query = "INSERT tb_adj_out_fg_det(id_adj_out_fg, adj_out_fg_det_note, adj_out_fg_det_qty, id_wh_drawer, id_product, adj_out_fg_det_price) "
-                        query += "VALUES('" + id_adj_out_fg + "','" + adj_out_fg_det_note + "', '" + adj_out_fg_det_qty + "', '" + id_wh_drawer + "', '" + id_product + "', '" + adj_out_fg_det_price + "') "
-                        execute_non_query(query, True, "", "", "", "")
 
-                        'INSERT TB PL STORAGE
-                        Dim query_upd_storage As String = "INSERT INTO tb_storage_fg(id_wh_drawer, id_storage_category, id_product, bom_unit_price, storage_product_qty, storage_product_datetime, storage_product_notes,id_stock_status, report_mark_type, id_report) "
-                        query_upd_storage += "VALUES('" + id_wh_drawer + "', '2', '" + id_product + "', '" + decimalSQL(adj_out_fg_det_price.ToString) + "', '" + decimalSQL(adj_out_fg_det_qty) + "', NOW(), 'Adjustment Out : " + adj_out_fg_number + "','2','42','" + id_adj_out_fg + "')"
-                        execute_non_query(query_upd_storage, True, "", "", "", "")
-                    Catch ex As Exception
-                    End Try
+                    If Not i = 0 Then
+                        query += ","
+                        query_upd_storage += ","
+                    End If
+                    query += "('" + id_adj_out_fg + "','" + adj_out_fg_det_note + "', '" + adj_out_fg_det_qty + "', '" + id_wh_drawer + "', '" + id_product + "', '" + adj_out_fg_det_price + "') "
+                    query_upd_storage += "('" + id_wh_drawer + "', '2', '" + id_product + "', '" + decimalSQL(adj_out_fg_det_price.ToString) + "', '" + decimalSQL(adj_out_fg_det_qty) + "', NOW(), 'Adjustment Out : " + adj_out_fg_number + "','2','42','" + id_adj_out_fg + "') "
                 Next
+                If GVDetail.RowCount > 0 Then
+                    execute_non_query(query, True, "", "", "", "")
+                    execute_non_query(query_upd_storage, True, "", "", "", "")
+                End If
 
                 FormFGAdj.XTCAdj.SelectedTabPageIndex = 1
                 FormFGAdj.viewAdjOut()
@@ -345,5 +356,13 @@
 
     Private Sub SimpleButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SimpleButton1.Click
         
+    End Sub
+
+    Private Sub BtnImportExcel_Click(sender As Object, e As EventArgs) Handles BtnImportExcel.Click
+        Cursor = Cursors.WaitCursor
+        FormPopUpDrawer.include_all = False
+        FormPopUpDrawer.id_pop_up = "8"
+        FormPopUpDrawer.ShowDialog()
+        Cursor = Cursors.Default
     End Sub
 End Class

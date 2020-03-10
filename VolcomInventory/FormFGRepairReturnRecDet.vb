@@ -23,6 +23,7 @@ Public Class FormFGRepairReturnRecDet
     Public bof_xls_repair As String = get_setup_field("bof_xls_repair_return_rec")
     Public id_wh_type As String = "-1"
 
+    Dim is_use_unique_code_wh As String = get_setup_field("is_use_unique_code_all")
 
     Private Sub FormFGRepairRecDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewReportStatus()
@@ -68,6 +69,8 @@ Public Class FormFGRepairReturnRecDet
             id_wh_drawer_dest = data.Rows(0)("id_wh_drawer_dest").ToString
             TxtCodeWH.Text = data.Rows(0)("wh_number").ToString
             TxtNameWH.Text = data.Rows(0)("wh_name").ToString
+            is_use_unique_code_wh = data.Rows(0)("is_use_unique_code").ToString
+
             setDefaultDrawerFrom()
             setDefaultDrawerTo()
 
@@ -474,6 +477,38 @@ Public Class FormFGRepairReturnRecDet
                     If jum_ins_j > 0 Then
                         execute_non_query(query_detail, True, "", "", "", "")
                     End If
+
+                    'reserved unique code
+                    If is_use_unique_code_wh = "1" Then
+                        Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_fg_repair_return_rec_det`,`report_mark_type`,`unique_code`,
+                        `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
+                        SELECT c.id_comp, t.`id_wh_drawer_from`, td.id_product, td.id_pl_prod_order_rec_det_unique, td.id_fg_repair_return_rec_det, '11', 
+                        CONCAT(p.product_full_code,td.fg_repair_return_rec_det_counting), sod.id_design_price, sod.design_price, -1, 1, NOW() 
+                        FROM tb_fg_repair_return_rec_det td
+                        INNER JOIN tb_fg_repair_return_rec t ON t.id_fg_repair_return_rec = td.id_fg_repair_return_rec
+                        INNER JOIN tb_m_wh_drawer drw_frm ON drw_frm.id_wh_drawer = t.id_wh_drawer_from  
+                        INNER JOIN tb_m_wh_rack rack_frm ON rack_frm.id_wh_rack = drw_frm.id_wh_rack  
+                        INNER JOIN tb_m_wh_locator loc_frm ON loc_frm.id_wh_locator = rack_frm.id_wh_locator  
+                        INNER JOIN tb_m_comp c ON c.id_comp = loc_frm.id_comp  
+                        INNER JOIN tb_m_product p ON p.id_product = td.id_product
+                        INNER JOIN tb_m_design d ON d.id_design = p.id_design
+                        LEFT JOIN( 
+                            SELECT * FROM ( 
+	                        SELECT price.id_design, price.design_price, price.design_price_date, price.id_design_price, 
+	                        price.id_design_price_type, price_type.design_price_type,
+	                        cat.id_design_cat, cat.design_cat
+	                        FROM tb_m_design_price price 
+	                        INNER JOIN tb_lookup_design_price_type price_type ON price.id_design_price_type = price_type.id_design_price_type 
+	                        INNER JOIN tb_lookup_design_cat cat ON cat.id_design_cat = price_type.id_design_cat
+	                        WHERE price.is_active_wh ='1' AND price.design_price_start_date <= NOW() 
+	                        ORDER BY price.design_price_start_date DESC, price.id_design_price DESC 
+                            ) a 
+                            GROUP BY a.id_design 
+                        ) sod ON sod.id_design = d.id_design 
+                        WHERE t.id_fg_repair_return_rec=" & id_fg_repair_return_rec & " AND d.is_old_design=2 AND t.is_use_unique_code=1 "
+                        execute_non_query(quniq, True, "", "", "", "")
+                    End If
+
 
                     'refresh data
                     FormFGRepairReturnRec.viewData()

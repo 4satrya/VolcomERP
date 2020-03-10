@@ -57,7 +57,7 @@
         'blocking cancel
         If id_pop_up = "2" And SLEStatusRec.EditValue.ToString = "5" Then
             Dim am As String = ""
-            For a As Integer = 0 To gv.RowCount - 1
+            For a As Integer = 0 To ((gv.RowCount - 1) - GetGroupRowCount(gv))
                 Dim id_del_manifest As String = gv.GetRowCellValue(a, "id_del_manifest").ToString
                 Dim del_number As String = gv.GetRowCellValue(a, "pl_sales_order_del_number").ToString
                 If id_del_manifest <> "0" Then
@@ -395,11 +395,16 @@
                 WHERE del.id_pl_sales_order_del='" + id_report + "' "
                 Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
                 If data.Rows.Count > 0 Then
-                    Dim em As New ClassSendEmail
-                    em.report_mark_type = "43_confirm"
-                    em.id_report = id_report
-                    em.dt = data
-                    em.send_email()
+                    Try
+                        Dim em As New ClassSendEmail
+                        em.report_mark_type = "43_confirm"
+                        em.id_report = id_report
+                        em.dt = data
+                        em.send_email()
+                    Catch ex As Exception
+                        Dim qerr As String = "INSERT INTO tb_error_mail(date,description, note_penyelesaian) VALUES(NOW(), 'Failed send delivery confirmation; id del:" + id_report + "; error:" + addSlashes(ex.ToString) + "', ''); "
+                        execute_non_query(qerr, True, "", "", "", "")
+                    End Try
                 End If
             End If
         End If

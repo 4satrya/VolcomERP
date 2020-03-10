@@ -29,7 +29,7 @@
         query += " FROM tb_m_employee emp"
         query += " INNER JOIN tb_m_departement dep ON dep.id_departement=emp.id_departement"
         If is_dep = True Then
-            query += " AND dep.id_departement='" & id_departement_user & "'"
+            query += " AND emp.id_departement_sub IN (SELECT id_departement_sub_map FROM tb_emp_leave_mapping WHERE id_departement_sub = " + id_departement_sub_user + ") "
         End If
         If is_emp = True Then
             query += " AND emp.id_employee='" & id_employee_user & "'"

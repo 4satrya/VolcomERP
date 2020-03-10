@@ -22,11 +22,15 @@
         DEUpdatedUntil.EditValue = data_dt.Rows(0)("dt")
         viewComp()
         viewCompGroup()
+        viewCompDetail()
     End Sub
 
     Sub viewCompGroup()
         Cursor = Cursors.WaitCursor
-        Dim query As String = "SELECT cg.id_comp_group, cg.comp_group, cg.description 
+        Dim query As String = "
+        SELECT 0 AS id_comp_group, 'ALL' AS comp_group, 'ALL GROUP' AS description
+        UNION
+        SELECT cg.id_comp_group, cg.comp_group, cg.description 
         FROM tb_m_comp_group cg
         INNER JOIN tb_m_comp c ON c.id_comp_group = cg.id_comp_group AND c.id_commerce_type=2
         GROUP BY cg.id_comp_group "
@@ -42,6 +46,15 @@
         INNER JOIN tb_m_comp_contact cc ON cc.id_comp = c.id_comp AND cc.is_default=1 
         WHERE c.id_commerce_type=2 AND c.is_active=1 "
         viewSearchLookupQuery(SLEComp, query, "id_comp", "comp_name", "id_comp")
+    End Sub
+
+    Sub viewCompDetail()
+        Dim query As String = "SELECT 0 AS `id_comp`, 0 AS `id_comp_contact`, 'ALL' AS `comp_number`, 'ALL STORE' AS `comp_name`
+        UNION ALL
+        SELECT c.id_comp,cc.id_comp_contact, c.comp_number,c.comp_name 
+        FROM tb_m_comp c 
+        INNER JOIN tb_m_comp_contact cc ON cc.id_comp = c.id_comp AND cc.is_default=1 
+        WHERE c.id_commerce_type=2 AND c.is_active=1 " + If(SLECompGroup.EditValue.ToString = "0", "", "AND c.id_comp_group = " + SLECompGroup.EditValue.ToString)
         viewSearchLookupQuery(SLECompDetail, query, "id_comp", "comp_name", "id_comp")
     End Sub
 
@@ -281,6 +294,17 @@
             qcomp2 = "AND c.id_comp=" + id_comp + " "
         End If
 
+        Dim id_comp_group As String = SLECompGroup.EditValue.ToString
+        Dim qcomp1_group As String = ""
+        Dim qcomp2_group As String = ""
+        If id_comp_group = "0" Then
+            qcomp1_group = ""
+            qcomp2_group = ""
+        Else
+            qcomp1_group = "AND cc.id_comp_group=" + id_comp_group + " "
+            qcomp2_group = "AND c.id_comp_group=" + id_comp_group + " "
+        End If
+
         'having
         Dim cond_having As String = ""
         If type_par = "2" Then
@@ -393,7 +417,7 @@
         INNER JOIN tb_m_comp w ON w.id_comp = wc.id_comp
         WHERE so.id_report_status=6  
         " + cond_date + "
-        AND ISNULL(oc.id_sales_order) AND c.id_commerce_type=2 " + qcomp2 + " 
+        AND ISNULL(oc.id_sales_order) AND c.id_commerce_type=2 " + qcomp2 + " " + qcomp2_group + "
         HAVING 1=1 
         " + cond_having + " "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
@@ -577,7 +601,7 @@
         viewDetail("2")
     End Sub
 
-    Private Sub PanelControl3_Paint(sender As Object, e As PaintEventArgs) Handles PanelControl3.Paint
-
+    Private Sub SLECompGroup_EditValueChanged(sender As Object, e As EventArgs) Handles SLECompGroup.EditValueChanged
+        viewCompDetail()
     End Sub
 End Class

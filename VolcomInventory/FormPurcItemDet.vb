@@ -136,7 +136,7 @@ WHERE id_status='2'"
 
     Sub load_history()
         Dim query As String = "
-            SELECT o.purc_order_number,rd.item_detail, CONCAT(comp.comp_number, ' - ', comp.comp_name) AS vendor, DATE_FORMAT(o.date_created, '%d %M %Y') AS `date`, odet.qty, odet.value
+            SELECT o.id_purc_order,o.purc_order_number,rd.item_detail, CONCAT(comp.comp_number, ' - ', comp.comp_name) AS vendor, DATE_FORMAT(o.date_created, '%d %M %Y') AS `date`, odet.qty, odet.value
             FROM tb_purc_order_det AS odet
             LEFT JOIN tb_purc_req_det rd ON rd.id_purc_req_det=odet.id_purc_req_det
             LEFT JOIN tb_purc_order AS o ON odet.id_purc_order = o.id_purc_order
@@ -226,5 +226,13 @@ WHERE id_status='2'"
         infoCustom("Item non active")
         load_form()
         FormPurcItem.load_item()
+    End Sub
+
+    Private Sub VDItemList_Click(sender As Object, e As EventArgs) Handles VDItemList.Click
+        If GVHistory.RowCount > 0 Then
+            FormPurcOrderDet.id_po = GVHistory.GetFocusedRowCellValue("id_purc_order").ToString
+            FormPurcOrderDet.is_view = "1"
+            FormPurcOrderDet.ShowDialog()
+        End If
     End Sub
 End Class

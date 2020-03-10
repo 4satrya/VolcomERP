@@ -32,6 +32,9 @@ Partial Class FormSalesReturnOrderDet
         Me.LabelControl7 = New DevExpress.XtraEditors.LabelControl()
         Me.DEForm = New DevExpress.XtraEditors.TextEdit()
         Me.PanelControlTopLeft = New DevExpress.XtraEditors.PanelControl()
+        Me.TxtOrderType = New DevExpress.XtraEditors.TextEdit()
+        Me.LEOrderType = New DevExpress.XtraEditors.LookUpEdit()
+        Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
         Me.CEOnHold = New DevExpress.XtraEditors.CheckEdit()
         Me.MEAdrressCompTo = New DevExpress.XtraEditors.MemoEdit()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
@@ -102,9 +105,11 @@ Partial Class FormSalesReturnOrderDet
         Me.GridColumncargo_rate = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncargo_lead_time = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncargo_min_weight = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
-        Me.TxtOrderType = New DevExpress.XtraEditors.TextEdit()
-        Me.LEOrderType = New DevExpress.XtraEditors.LookUpEdit()
+        Me.SLUEClasification = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.LabelControl8 = New DevExpress.XtraEditors.LabelControl()
+        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
         CType(Me.PanelControlTopRight, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -117,6 +122,8 @@ Partial Class FormSalesReturnOrderDet
         CType(Me.DEForm.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControlTopLeft, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlTopLeft.SuspendLayout()
+        CType(Me.TxtOrderType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LEOrderType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CEOnHold.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.MEAdrressCompTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtCodeCompTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -145,8 +152,8 @@ Partial Class FormSalesReturnOrderDet
         Me.XTPRate.SuspendLayout()
         CType(Me.GCRate, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVRate, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TxtOrderType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LEOrderType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SLUEClasification.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupGeneralHeader
@@ -284,6 +291,42 @@ Partial Class FormSalesReturnOrderDet
         Me.PanelControlTopLeft.Name = "PanelControlTopLeft"
         Me.PanelControlTopLeft.Size = New System.Drawing.Size(761, 151)
         Me.PanelControlTopLeft.TabIndex = 8891
+        '
+        'TxtOrderType
+        '
+        Me.TxtOrderType.EditValue = ""
+        Me.TxtOrderType.Enabled = False
+        Me.TxtOrderType.Location = New System.Drawing.Point(143, 10)
+        Me.TxtOrderType.Name = "TxtOrderType"
+        Me.TxtOrderType.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtOrderType.Properties.Appearance.Options.UseFont = True
+        Me.TxtOrderType.Properties.EditValueChangedDelay = 1
+        Me.TxtOrderType.Properties.ReadOnly = True
+        Me.TxtOrderType.Size = New System.Drawing.Size(318, 20)
+        Me.TxtOrderType.TabIndex = 8911
+        Me.TxtOrderType.TabStop = False
+        '
+        'LEOrderType
+        '
+        Me.LEOrderType.Location = New System.Drawing.Point(55, 10)
+        Me.LEOrderType.Name = "LEOrderType"
+        Me.LEOrderType.Properties.Appearance.Options.UseTextOptions = True
+        Me.LEOrderType.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near
+        Me.LEOrderType.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.LEOrderType.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_order_type", "id", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("order_type", "Type"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("description", "Description")})
+        Me.LEOrderType.Properties.NullText = ""
+        Me.LEOrderType.Properties.ShowFooter = False
+        Me.LEOrderType.Size = New System.Drawing.Size(83, 20)
+        Me.LEOrderType.TabIndex = 0
+        '
+        'LabelControl6
+        '
+        Me.LabelControl6.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl6.Location = New System.Drawing.Point(10, 13)
+        Me.LabelControl6.Name = "LabelControl6"
+        Me.LabelControl6.Size = New System.Drawing.Size(24, 13)
+        Me.LabelControl6.TabIndex = 8890
+        Me.LabelControl6.Text = "Type"
         '
         'CEOnHold
         '
@@ -463,13 +506,15 @@ Partial Class FormSalesReturnOrderDet
         'GroupControl3
         '
         Me.GroupControl3.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupControl3.Controls.Add(Me.LabelControl8)
+        Me.GroupControl3.Controls.Add(Me.SLUEClasification)
         Me.GroupControl3.Controls.Add(Me.PanelControlBottomRight)
         Me.GroupControl3.Controls.Add(Me.MENote)
         Me.GroupControl3.Controls.Add(Me.LabelControl18)
         Me.GroupControl3.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.GroupControl3.Location = New System.Drawing.Point(0, 428)
+        Me.GroupControl3.Location = New System.Drawing.Point(0, 415)
         Me.GroupControl3.Name = "GroupControl3"
-        Me.GroupControl3.Size = New System.Drawing.Size(902, 75)
+        Me.GroupControl3.Size = New System.Drawing.Size(902, 88)
         Me.GroupControl3.TabIndex = 186
         '
         'PanelControlBottomRight
@@ -480,7 +525,7 @@ Partial Class FormSalesReturnOrderDet
         Me.PanelControlBottomRight.Dock = System.Windows.Forms.DockStyle.Right
         Me.PanelControlBottomRight.Location = New System.Drawing.Point(580, 2)
         Me.PanelControlBottomRight.Name = "PanelControlBottomRight"
-        Me.PanelControlBottomRight.Size = New System.Drawing.Size(320, 71)
+        Me.PanelControlBottomRight.Size = New System.Drawing.Size(320, 84)
         Me.PanelControlBottomRight.TabIndex = 145
         '
         'LEReportStatus
@@ -507,15 +552,15 @@ Partial Class FormSalesReturnOrderDet
         '
         'MENote
         '
-        Me.MENote.Location = New System.Drawing.Point(76, 12)
+        Me.MENote.Location = New System.Drawing.Point(126, 40)
         Me.MENote.Name = "MENote"
         Me.MENote.Properties.MaxLength = 100
-        Me.MENote.Size = New System.Drawing.Size(343, 43)
+        Me.MENote.Size = New System.Drawing.Size(293, 36)
         Me.MENote.TabIndex = 6
         '
         'LabelControl18
         '
-        Me.LabelControl18.Location = New System.Drawing.Point(27, 14)
+        Me.LabelControl18.Location = New System.Drawing.Point(27, 42)
         Me.LabelControl18.Name = "LabelControl18"
         Me.LabelControl18.Size = New System.Drawing.Size(23, 13)
         Me.LabelControl18.TabIndex = 138
@@ -529,7 +574,7 @@ Partial Class FormSalesReturnOrderDet
         Me.GroupControlList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupControlList.Location = New System.Drawing.Point(0, 0)
         Me.GroupControlList.Name = "GroupControlList"
-        Me.GroupControlList.Size = New System.Drawing.Size(896, 245)
+        Me.GroupControlList.Size = New System.Drawing.Size(896, 232)
         Me.GroupControlList.TabIndex = 185
         Me.GroupControlList.Text = "Item List"
         '
@@ -541,7 +586,7 @@ Partial Class FormSalesReturnOrderDet
         Me.GCItemList.MainView = Me.GVItemList
         Me.GCItemList.Name = "GCItemList"
         Me.GCItemList.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemSpinEdit1})
-        Me.GCItemList.Size = New System.Drawing.Size(873, 206)
+        Me.GCItemList.Size = New System.Drawing.Size(873, 193)
         Me.GCItemList.TabIndex = 2
         Me.GCItemList.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVItemList})
         '
@@ -903,7 +948,7 @@ Partial Class FormSalesReturnOrderDet
         Me.XTCRO.Location = New System.Drawing.Point(0, 155)
         Me.XTCRO.Name = "XTCRO"
         Me.XTCRO.SelectedTabPage = Me.XTPItems
-        Me.XTCRO.Size = New System.Drawing.Size(902, 273)
+        Me.XTCRO.Size = New System.Drawing.Size(902, 260)
         Me.XTCRO.TabIndex = 188
         Me.XTCRO.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPItems, Me.XTPRate})
         '
@@ -911,14 +956,14 @@ Partial Class FormSalesReturnOrderDet
         '
         Me.XTPItems.Controls.Add(Me.GroupControlList)
         Me.XTPItems.Name = "XTPItems"
-        Me.XTPItems.Size = New System.Drawing.Size(896, 245)
+        Me.XTPItems.Size = New System.Drawing.Size(896, 232)
         Me.XTPItems.Text = "Items"
         '
         'XTPRate
         '
         Me.XTPRate.Controls.Add(Me.GCRate)
         Me.XTPRate.Name = "XTPRate"
-        Me.XTPRate.Size = New System.Drawing.Size(896, 266)
+        Me.XTPRate.Size = New System.Drawing.Size(896, 245)
         Me.XTPRate.Text = "Cargo Rate"
         '
         'GCRate
@@ -927,7 +972,7 @@ Partial Class FormSalesReturnOrderDet
         Me.GCRate.Location = New System.Drawing.Point(0, 0)
         Me.GCRate.MainView = Me.GVRate
         Me.GCRate.Name = "GCRate"
-        Me.GCRate.Size = New System.Drawing.Size(896, 266)
+        Me.GCRate.Size = New System.Drawing.Size(896, 245)
         Me.GCRate.TabIndex = 0
         Me.GCRate.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVRate})
         '
@@ -984,41 +1029,44 @@ Partial Class FormSalesReturnOrderDet
         Me.GridColumncargo_min_weight.Visible = True
         Me.GridColumncargo_min_weight.VisibleIndex = 3
         '
-        'LabelControl6
+        'SLUEClasification
         '
-        Me.LabelControl6.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl6.Location = New System.Drawing.Point(10, 13)
-        Me.LabelControl6.Name = "LabelControl6"
-        Me.LabelControl6.Size = New System.Drawing.Size(24, 13)
-        Me.LabelControl6.TabIndex = 8890
-        Me.LabelControl6.Text = "Type"
+        Me.SLUEClasification.Location = New System.Drawing.Point(126, 14)
+        Me.SLUEClasification.Name = "SLUEClasification"
+        Me.SLUEClasification.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLUEClasification.Properties.View = Me.SearchLookUpEdit1View
+        Me.SLUEClasification.Size = New System.Drawing.Size(293, 20)
+        Me.SLUEClasification.TabIndex = 146
         '
-        'TxtOrderType
+        'SearchLookUpEdit1View
         '
-        Me.TxtOrderType.EditValue = ""
-        Me.TxtOrderType.Enabled = False
-        Me.TxtOrderType.Location = New System.Drawing.Point(143, 10)
-        Me.TxtOrderType.Name = "TxtOrderType"
-        Me.TxtOrderType.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtOrderType.Properties.Appearance.Options.UseFont = True
-        Me.TxtOrderType.Properties.EditValueChangedDelay = 1
-        Me.TxtOrderType.Properties.ReadOnly = True
-        Me.TxtOrderType.Size = New System.Drawing.Size(318, 20)
-        Me.TxtOrderType.TabIndex = 8911
-        Me.TxtOrderType.TabStop = False
+        Me.SearchLookUpEdit1View.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2})
+        Me.SearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.SearchLookUpEdit1View.Name = "SearchLookUpEdit1View"
+        Me.SearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.SearchLookUpEdit1View.OptionsView.ShowGroupPanel = False
         '
-        'LEOrderType
+        'LabelControl8
         '
-        Me.LEOrderType.Location = New System.Drawing.Point(55, 10)
-        Me.LEOrderType.Name = "LEOrderType"
-        Me.LEOrderType.Properties.Appearance.Options.UseTextOptions = True
-        Me.LEOrderType.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near
-        Me.LEOrderType.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.LEOrderType.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_order_type", "id", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("order_type", "Type"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("description", "Description")})
-        Me.LEOrderType.Properties.NullText = ""
-        Me.LEOrderType.Properties.ShowFooter = False
-        Me.LEOrderType.Size = New System.Drawing.Size(83, 20)
-        Me.LEOrderType.TabIndex = 0
+        Me.LabelControl8.Location = New System.Drawing.Point(27, 17)
+        Me.LabelControl8.Name = "LabelControl8"
+        Me.LabelControl8.Size = New System.Drawing.Size(93, 13)
+        Me.LabelControl8.TabIndex = 147
+        Me.LabelControl8.Text = "Return Clasification"
+        '
+        'GridColumn1
+        '
+        Me.GridColumn1.Caption = "GridColumn1"
+        Me.GridColumn1.FieldName = "id_return_clasification"
+        Me.GridColumn1.Name = "GridColumn1"
+        '
+        'GridColumn2
+        '
+        Me.GridColumn2.Caption = "Return Clasification"
+        Me.GridColumn2.FieldName = "return_clasification"
+        Me.GridColumn2.Name = "GridColumn2"
+        Me.GridColumn2.Visible = True
+        Me.GridColumn2.VisibleIndex = 0
         '
         'FormSalesReturnOrderDet
         '
@@ -1052,6 +1100,8 @@ Partial Class FormSalesReturnOrderDet
         CType(Me.PanelControlTopLeft, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControlTopLeft.ResumeLayout(False)
         Me.PanelControlTopLeft.PerformLayout()
+        CType(Me.TxtOrderType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LEOrderType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CEOnHold.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.MEAdrressCompTo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtCodeCompTo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1082,8 +1132,8 @@ Partial Class FormSalesReturnOrderDet
         Me.XTPRate.ResumeLayout(False)
         CType(Me.GCRate, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVRate, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TxtOrderType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LEOrderType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SLUEClasification.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1171,4 +1221,9 @@ Partial Class FormSalesReturnOrderDet
     Friend WithEvents LabelControl6 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents TxtOrderType As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LEOrderType As DevExpress.XtraEditors.LookUpEdit
+    Friend WithEvents LabelControl8 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents SLUEClasification As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents SearchLookUpEdit1View As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn2 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

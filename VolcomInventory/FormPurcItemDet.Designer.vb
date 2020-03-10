@@ -102,6 +102,8 @@ Partial Class FormPurcItemDet
         Me.GridColumn21 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn22 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn23 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ViewMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.VDItemList = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.XTCDetail, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCDetail.SuspendLayout()
         Me.XtraTabPage1.SuspendLayout()
@@ -141,6 +143,7 @@ Partial Class FormPurcItemDet
         Me.XTPHistory.SuspendLayout()
         CType(Me.GCHistory, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVHistory, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ViewMenu.SuspendLayout()
         Me.SuspendLayout()
         '
         'XTCDetail
@@ -832,6 +835,7 @@ Partial Class FormPurcItemDet
         '
         'GCHistory
         '
+        Me.GCHistory.ContextMenuStrip = Me.ViewMenu
         Me.GCHistory.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GCHistory.Location = New System.Drawing.Point(0, 0)
         Me.GCHistory.MainView = Me.GVHistory
@@ -912,6 +916,18 @@ Partial Class FormPurcItemDet
         Me.GridColumn23.Visible = True
         Me.GridColumn23.VisibleIndex = 5
         '
+        'ViewMenu
+        '
+        Me.ViewMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.VDItemList})
+        Me.ViewMenu.Name = "ContextMenuStripYM"
+        Me.ViewMenu.Size = New System.Drawing.Size(153, 48)
+        '
+        'VDItemList
+        '
+        Me.VDItemList.Name = "VDItemList"
+        Me.VDItemList.Size = New System.Drawing.Size(152, 22)
+        Me.VDItemList.Text = "View"
+        '
         'FormPurcItemDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -965,6 +981,7 @@ Partial Class FormPurcItemDet
         Me.XTPHistory.ResumeLayout(False)
         CType(Me.GCHistory, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVHistory, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ViewMenu.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -1050,4 +1067,6 @@ Partial Class FormPurcItemDet
     Friend WithEvents GridColumn22 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn23 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn24 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ViewMenu As ContextMenuStrip
+    Friend WithEvents VDItemList As ToolStripMenuItem
 End Class

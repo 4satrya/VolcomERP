@@ -92,9 +92,9 @@ HAVING SUM(IF(si.id_storage_category=1,si.storage_item_qty,-si.storage_item_qty)
 
         Dim cond As String = ""
         If CEStoreRequest.Checked = True Then
-            cond = "AND i.id_departement=" + id_departement + " AND i.id_item='" + id_item + "' "
-        Else
             cond = "AND i.id_departement=" + id_purc_store + " AND i.id_item='" + id_item + "' "
+        Else
+            cond = "AND i.id_departement=" + id_departement + " AND i.id_item='" + id_item + "' "
         End If
 
         Dim stc As New ClassPurcItemStock()

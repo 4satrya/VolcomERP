@@ -272,10 +272,10 @@
 
     Sub check_bpjs_kesehatan()
         Dim id_payroll_other As String = execute_query("
-            SELECT id_payroll FROM tb_emp_payroll 
+            SELECT IFNULL((SELECT id_payroll FROM tb_emp_payroll 
 	        WHERE periode_start = (SELECT periode_start FROM tb_emp_payroll WHERE id_payroll = " + id_payroll + ")
 	        AND periode_end = (SELECT periode_end FROM tb_emp_payroll WHERE id_payroll = " + id_payroll + ")
-	        AND id_payroll_type = (IF((SELECT id_payroll_type FROM tb_emp_payroll WHERE id_payroll = " + id_payroll + ") = 1, 4, 1))
+	        AND id_payroll_type = (IF((SELECT id_payroll_type FROM tb_emp_payroll WHERE id_payroll = " + id_payroll + ") = 1, 4, 1))), 0) AS id_payroll
         ", 0, True, "", "", "", "")
 
         Dim data_move As DataTable = execute_query("
@@ -287,5 +287,16 @@
 
             execute_non_query(query, True, "", "", "", "")
         Next
+    End Sub
+
+    Private Sub BBUnpaidLeave_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BBUnpaidLeave.ItemClick
+        Dim confirm As DialogResult
+        confirm = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure want to generate all Unpaid Leave ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+        If confirm = Windows.Forms.DialogResult.Yes Then
+            Dim query As String = "CALL generate_unpaid_leave(" & id_payroll & ");"
+            execute_non_query(query, True, "", "", "", "")
+            '
+            load_deduction()
+        End If
     End Sub
 End Class

@@ -39,6 +39,8 @@ Public Class FormSalesReturnQCDet
     Public id_wh_type As String = "-1"
     Dim id_comp_type As String = "-1"
     Dim report_mark_type_loc As String = "-1"
+    Public is_use_unique_code As String = "2"
+    Dim id_drawer_origin As String = "-1"
 
     Private Sub FormSalesReturnQCDet_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         viewReportStatus()
@@ -159,7 +161,7 @@ Public Class FormSalesReturnQCDet
         Dim query As String = ""
         query += "SELECT a.id_sales_return, getCompByContact(a.id_store_contact_from,'1') AS `id_comp_from`, a.id_store_contact_from, getCompByContact(a.id_comp_contact_to,'1') AS `id_comp_to`,a.id_comp_contact_to, (d.comp_number) AS store_code_from,(d.comp_name) AS store_name_from, (d1.comp_number) AS comp_code_to,(d1.comp_name) AS comp_name_to, IFNULL(d1.id_wh_type,0) AS `id_wh_type`,a.id_report_status, f.report_status, "
         query += "a.sales_return_note, a.sales_return_number, "
-        query += "DATE_FORMAT(a.sales_return_date,'%d %M %Y') AS sales_return_date "
+        query += "DATE_FORMAT(a.sales_return_date,'%d %M %Y') AS sales_return_date, a.id_wh_drawer AS `id_drawer_origin` "
         query += "FROM tb_sales_return a "
         query += "INNER JOIN tb_m_comp_contact c ON c.id_comp_contact = a.id_store_contact_from "
         query += "INNER JOIN tb_m_comp d ON c.id_comp = d.id_comp "
@@ -201,6 +203,8 @@ Public Class FormSalesReturnQCDet
         id_comp_contact_to_return = data.Rows(0)("id_comp_contact_to").ToString
         TxtCodeFrom.Text = data.Rows(0)("comp_code_to").ToString
         TxtNameFrom.Text = data.Rows(0)("comp_name_to").ToString
+        is_use_unique_code = get_setup_field("is_use_unique_code_all")
+        id_drawer_origin = data.Rows(0)("id_drawer_origin").ToString
 
         'general
         viewDetail()
@@ -304,7 +308,7 @@ Public Class FormSalesReturnQCDet
 
     End Sub
 
-    Sub codeAvailableIns(ByVal id_product_param As String, ByVal id_store_param As String, ByVal id_design_price_param As String)
+    Sub codeAvailableIns(ByVal id_product_param As String, ByVal id_product_param_comma As String, ByVal id_store_param As String, ByVal id_design_price_param As String)
         Dim query As String = ""
         If action = "ins" Then
             query = "CALL view_stock_fg_unique_ret_qc('" + id_product_param + "','" + id_store_param + "', '" + id_design_price_param + "', '" + id_sales_return + "','0')"
@@ -585,6 +589,7 @@ Public Class FormSalesReturnQCDet
 
     Private Sub BtnBrowseContactTo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnBrowseContactTo.Click
         FormPopUpContact.id_pop_up = "43"
+        FormPopUpContact.is_must_active = "1"
         FormPopUpContact.id_departement = id_departement_user
         FormPopUpContact.ShowDialog()
     End Sub
@@ -676,8 +681,8 @@ Public Class FormSalesReturnQCDet
                     Dim sales_return_qc_number As String = header_number_sales("7")
 
                     'query main table
-                    Dim query_main As String = "INSERT tb_sales_return_qc(id_store_contact_from, id_comp_contact_to, id_sales_return, sales_return_qc_number, sales_return_qc_date, sales_return_qc_note,id_report_status, id_pl_category, id_wh_drawer, last_update, last_update_by) "
-                    query_main += "VALUES('" + id_store_contact_from + "', '" + id_comp_contact_to + "', '" + id_sales_return + "', '" + sales_return_qc_number + "', NOW(), '" + sales_return_qc_note + "', '1', '" + id_pl_category + "', '" + id_wh_drawer_to + "', NOW(), " + id_user + "); SELECT LAST_INSERT_ID() "
+                    Dim query_main As String = "INSERT tb_sales_return_qc(id_store_contact_from, id_comp_contact_to, id_sales_return, sales_return_qc_number, sales_return_qc_date, sales_return_qc_note,id_report_status, id_pl_category, id_wh_drawer, last_update, last_update_by, is_use_unique_code) "
+                    query_main += "VALUES('" + id_store_contact_from + "', '" + id_comp_contact_to + "', '" + id_sales_return + "', '" + sales_return_qc_number + "', NOW(), '" + sales_return_qc_note + "', '1', '" + id_pl_category + "', '" + id_wh_drawer_to + "', NOW(), " + id_user + ", '" + is_use_unique_code + "'); SELECT LAST_INSERT_ID() "
                     id_sales_return_qc = execute_query(query_main, 0, True, "", "", "", "")
                     '
                     increase_inc_sales("7")
@@ -750,6 +755,27 @@ Public Class FormSalesReturnQCDet
                     Next
                     If jum_ins_p > 0 Then
                         execute_non_query(query_counting, True, "", "", "", "")
+                    End If
+
+                    'reserved unique code
+                    If is_use_unique_code = "1" Then
+                        Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_sales_return_qc_det_counting`,`id_type`,`unique_code`,
+                        `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
+                        SELECT cc.id_comp, tr.id_wh_drawer, td.id_product, tcr.id_pl_prod_order_rec_det_unique,tc.id_sales_return_qc_det_counting, '13', 
+                        CONCAT(p.product_full_code,tc.sales_return_qc_det_counting), td.id_design_price, td.design_price, -1, 1, NOW() 
+                        FROM tb_sales_return_qc_det td
+                        INNER JOIN tb_sales_return_qc t ON t.id_sales_return_qc = td.id_sales_return_qc
+                        INNER JOIN tb_sales_return tr ON tr.id_sales_return = t.id_sales_return
+                        INNER JOIN tb_sales_return_qc_det_counting tc ON tc.id_sales_return_qc_det = td.id_sales_return_qc_det
+                        INNER JOIN tb_sales_return_det_counting tcr ON tcr.id_sales_return_det_counting = tc.id_sales_return_det_counting
+                        INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact =  tr.id_comp_contact_to
+                        INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp
+                        INNER JOIN tb_m_product p ON p.id_product = td.id_product
+                        INNER JOIN tb_m_design d ON d.id_design = p.id_design
+                        WHERE t.id_sales_return_qc="+id_sales_return_qc+"
+                        AND d.is_old_design=2 
+                        AND t.is_use_unique_code=1 "
+                        execute_non_query(quniq, True, "", "", "", "")
                     End If
 
                     'submit who prepared
@@ -897,9 +923,11 @@ Public Class FormSalesReturnQCDet
         Cursor = Cursors.WaitCursor
         GVItemList.ActiveFilterString = "[sales_return_det_qty]>0 "
         Dim id_product_str As String = ""
+        Dim id_product_comma As String = ""
         For i As Integer = 0 To (Me.GVItemList.RowCount - 1)
             If i > 0 Then
                 id_product_str += ";"
+                id_product_comma += ","
             End If
             Dim id_product_param As String = "-1"
             Try
@@ -907,8 +935,9 @@ Public Class FormSalesReturnQCDet
             Catch ex As Exception
             End Try
             id_product_str += id_product_param
+            id_product_comma += id_product_param
         Next
-        codeAvailableIns(id_product_str, id_store, 0)
+        codeAvailableIns(id_product_str, id_product_comma, id_store, 0)
         GVItemList.ActiveFilterString = ""
         Cursor = Cursors.Default
     End Sub

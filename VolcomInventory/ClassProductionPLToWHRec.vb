@@ -83,6 +83,33 @@
                 Dim query_aging As String = "UPDATE tb_m_design SET design_first_rec_wh = NOW() WHERE id_design = '" + id_designx + "' "
                 execute_non_query(query_aging, True, "", "", "", "")
             End If
+
+            'insertUniqueCode
+            Dim qun As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`,`id_pl_prod_order_rec_det_unique`,`id_type`,`unique_code`,
+            `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
+            SELECT cc.id_comp, r.id_wh_drawer, rc.id_product,  rc.id_pl_prod_order_rec_det_unique, '6', CONCAT(p.product_full_code,rc.pl_prod_order_rec_det_counting),
+            prc.id_design_price, prc.design_price, 1, 1, NOW()
+            FROM tb_pl_prod_order_rec_det rd
+            INNER JOIN tb_pl_prod_order_rec r ON r.id_pl_prod_order_rec = rd.id_pl_prod_order_rec
+            INNER JOIN tb_pl_prod_order_rec_det_counting rc ON rc.id_pl_prod_order_rec_det = rd.id_pl_prod_order_rec_det
+            INNER JOIN tb_m_product p ON p.id_product = rc.id_product
+            INNER JOIN tb_m_design d ON d.id_design = p.id_design
+            INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact =  r.id_comp_contact_to
+            INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp
+            LEFT JOIN( 
+              Select * FROM ( 
+              Select price.id_design, price.design_price, price.design_price_date, price.id_design_price, 
+              price.id_design_price_type, price_type.design_price_type,
+              cat.id_design_cat, cat.design_cat
+              From tb_m_design_price price 
+              INNER Join tb_lookup_design_price_type price_type On price.id_design_price_type = price_type.id_design_price_type 
+              INNER JOIN tb_lookup_design_cat cat ON cat.id_design_cat = price_type.id_design_cat
+              WHERE price.is_active_wh =1 AND price.design_price_start_date <= NOW() 
+              ORDER BY price.design_price_start_date DESC, price.id_design_price DESC ) a 
+              GROUP BY a.id_design 
+            ) prc ON prc.id_design = d.id_design 
+            WHERE rd.id_pl_prod_order_rec=" + id_report_par + " AND d.is_old_design=2 AND r.is_use_unique_code=1 "
+            execute_non_query(qun, True, "", "", "", "")
         End If
 
         Dim query As String = String.Format("UPDATE tb_pl_prod_order_rec SET id_report_status='{0}', last_update=NOW(), last_update_by=" + id_user + " WHERE id_pl_prod_order_rec ='{1}'", id_status_reportx_par, id_report_par)

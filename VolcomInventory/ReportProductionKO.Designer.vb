@@ -425,7 +425,7 @@ Partial Public Class ReportProductionKO
         'TopMargin
         '
         Me.TopMargin.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrPictureBox1})
-        Me.TopMargin.HeightF = 109.8959!
+        Me.TopMargin.HeightF = 110.0!
         Me.TopMargin.Name = "TopMargin"
         Me.TopMargin.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
         Me.TopMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
@@ -440,7 +440,7 @@ Partial Public Class ReportProductionKO
         '
         'BottomMargin
         '
-        Me.BottomMargin.HeightF = 20.20811!
+        Me.BottomMargin.HeightF = 20.0!
         Me.BottomMargin.Name = "BottomMargin"
         Me.BottomMargin.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
         Me.BottomMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
@@ -627,7 +627,7 @@ Partial Public Class ReportProductionKO
         'ReportFooter
         '
         Me.ReportFooter.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel47, Me.XrLabel46, Me.XrLabel43, Me.XrLabel44, Me.XrLabel45, Me.XrLabel40, Me.XrLabel41, Me.XrLabel42, Me.XrLabel39, Me.XrLabel38, Me.XrLabel37, Me.XrLabel36, Me.XrLabel35, Me.XrLabel34, Me.XrLabel33, Me.XrLabel32, Me.XrLabel31, Me.XrLabel24, Me.XrLabel22, Me.XrLabel21})
-        Me.ReportFooter.HeightF = 269.8751!
+        Me.ReportFooter.HeightF = 289.6667!
         Me.ReportFooter.Name = "ReportFooter"
         '
         'XrLabel47
@@ -635,7 +635,7 @@ Partial Public Class ReportProductionKO
         Me.XrLabel47.Borders = DevExpress.XtraPrinting.BorderSide.None
         Me.XrLabel47.CanGrow = False
         Me.XrLabel47.Font = New System.Drawing.Font("Calibri", 11.0!)
-        Me.XrLabel47.LocationFloat = New DevExpress.Utils.PointFloat(345.8753!, 249.8751!)
+        Me.XrLabel47.LocationFloat = New DevExpress.Utils.PointFloat(345.8753!, 249.8752!)
         Me.XrLabel47.Multiline = True
         Me.XrLabel47.Name = "XrLabel47"
         Me.XrLabel47.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -651,7 +651,7 @@ Partial Public Class ReportProductionKO
         Me.XrLabel46.Borders = DevExpress.XtraPrinting.BorderSide.None
         Me.XrLabel46.CanGrow = False
         Me.XrLabel46.Font = New System.Drawing.Font("Calibri", 11.0!)
-        Me.XrLabel46.LocationFloat = New DevExpress.Utils.PointFloat(95.87523!, 249.8751!)
+        Me.XrLabel46.LocationFloat = New DevExpress.Utils.PointFloat(95.87523!, 269.6667!)
         Me.XrLabel46.Multiline = True
         Me.XrLabel46.Name = "XrLabel46"
         Me.XrLabel46.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -743,18 +743,17 @@ Partial Public Class ReportProductionKO
         'XrLabel42
         '
         Me.XrLabel42.Borders = DevExpress.XtraPrinting.BorderSide.None
-        Me.XrLabel42.CanGrow = False
         Me.XrLabel42.Font = New System.Drawing.Font("Calibri", 11.0!)
         Me.XrLabel42.LocationFloat = New DevExpress.Utils.PointFloat(95.87523!, 229.8751!)
         Me.XrLabel42.Multiline = True
         Me.XrLabel42.Name = "XrLabel42"
         Me.XrLabel42.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel42.SizeF = New System.Drawing.SizeF(250.0!, 20.0!)
+        Me.XrLabel42.SizeF = New System.Drawing.SizeF(219.1248!, 39.79163!)
         Me.XrLabel42.StylePriority.UseBorders = False
         Me.XrLabel42.StylePriority.UseFont = False
         Me.XrLabel42.StylePriority.UseTextAlignment = False
-        Me.XrLabel42.Text = "[emp_name_director]"
-        Me.XrLabel42.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        Me.XrLabel42.Text = "[emp_name_director] /" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "[emp_name_vice_director]" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        Me.XrLabel42.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
         '
         'XrLabel39
         '

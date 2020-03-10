@@ -19,6 +19,7 @@
     Private Sub FormSalesReturnOrderDet_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         viewOrderType()
         viewReportStatus()
+        view_clasification()
         actionLoad()
     End Sub
 
@@ -42,6 +43,7 @@
             Dim data As DataTable = execute_query("SELECT DATE(NOW()) AS `tgl`, DATE_ADD(NOW(),INTERVAL " + lead_time_ro + " DAY) AS `tgl_ret`, DATE_ADD(NOW(),INTERVAL 1 MONTH) AS `tgl_del` ", -1, True, "", "", "", "")
             DERetDueDate.EditValue = data.Rows(0)("tgl_ret")
             DEDelDate.EditValue = data.Rows(0)("tgl_del")
+            SLUEClasification.EditValue = "1"
         ElseIf action = "upd" Then
             GVItemList.OptionsBehavior.AutoExpandAllGroups = True
             BtnBrowseContactTo.Enabled = False
@@ -50,7 +52,7 @@
             'query view based on edit id's
             Dim query As String = "SELECT d.id_comp, a.id_sales_return_order, a.id_store_contact_to, getCompByContact(a.id_store_contact_to, 4) AS `id_wh_drawer_store`, getCompByContact(a.id_store_contact_to, 6) AS `id_wh_rack_store`, getCompByContact(a.id_store_contact_to, 7) AS `id_wh_locator_store`, (d.comp_name) AS store_name_to, (d.comp_number) AS store_number_to, (d.address_primary) AS store_address_to, a.id_report_status, f.report_status, "
             query += "a.sales_return_order_note, a.sales_return_order_date, a.sales_return_order_note, a.sales_return_order_number, "
-            query += "DATE_FORMAT(a.sales_return_order_date,'%Y-%m-%d') AS sales_return_order_datex, a.sales_return_order_est_date, a.sales_return_order_est_del_date, a.id_prepare_status, a.is_on_hold, IFNULL(a.id_order_type,0) AS `id_order_type`, ot.order_type "
+            query += "DATE_FORMAT(a.sales_return_order_date,'%Y-%m-%d') AS sales_return_order_datex, a.sales_return_order_est_date, a.sales_return_order_est_del_date, a.id_prepare_status, a.is_on_hold, IFNULL(a.id_order_type,0) AS `id_order_type`, ot.order_type, a.id_return_clasification "
             query += "FROM tb_sales_return_order a "
             query += "INNER JOIN tb_m_comp_contact c ON c.id_comp_contact = a.id_store_contact_to "
             query += "INNER JOIN tb_m_comp d ON c.id_comp = d.id_comp "
@@ -74,6 +76,7 @@
             DEDelDate.EditValue = data.Rows(0)("sales_return_order_est_del_date")
             LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", data.Rows(0)("id_report_status").ToString)
             id_prepare_status = data.Rows(0)("id_prepare_status").ToString
+            SLUEClasification.EditValue = data.Rows(0)("id_return_clasification")
             If data.Rows(0)("is_on_hold").ToString = "1" Then
                 CEOnHold.EditValue = True
                 BMark.Visible = False
@@ -266,13 +269,25 @@
                         If is_on_hold = "1" Then
                             sales_return_order_number = ""
                         Else
-                            sales_return_order_number = header_number_sales("4")
+                            If LEOrderType.EditValue.ToString = "4" Then
+                                sales_return_order_number = header_number_sales("41")
+                            ElseIf LEOrderType.EditValue.ToString = "6" Then
+                                sales_return_order_number = header_number_sales("42")
+                            Else
+                                sales_return_order_number = header_number_sales("4")
+                            End If
                         End If
 
-                        Dim query As String = "INSERT INTO tb_sales_return_order(id_store_contact_to, sales_return_order_number, sales_return_order_date, sales_return_order_note, id_report_status, sales_return_order_est_date, sales_return_order_est_del_date, is_on_hold, id_order_type) "
-                        query += "VALUES('" + id_store_contact_to + "', '" + sales_return_order_number + "', NOW(), '" + sales_return_order_note + "', '" + id_report_status + "', DATE_ADD(NOW(),INTERVAL " + lead_time_ro + " DAY), '" + sales_return_order_est_del_date + "', '" + is_on_hold + "', '" + id_order_type + "'); SELECT LAST_INSERT_ID(); "
+                        Dim query As String = "INSERT INTO tb_sales_return_order(id_store_contact_to, sales_return_order_number, sales_return_order_date, sales_return_order_note, id_report_status, sales_return_order_est_date, sales_return_order_est_del_date, is_on_hold, id_order_type, id_return_clasification) "
+                        query += "VALUES('" + id_store_contact_to + "', '" + sales_return_order_number + "', NOW(), '" + sales_return_order_note + "', '" + id_report_status + "', DATE_ADD(NOW(),INTERVAL " + lead_time_ro + " DAY), '" + sales_return_order_est_del_date + "', '" + is_on_hold + "', '" + id_order_type + "', '" + SLUEClasification.EditValue.ToString + "'); SELECT LAST_INSERT_ID(); "
                         id_sales_return_order = execute_query(query, 0, True, "", "", "", "")
-                        increase_inc_sales("4")
+                        If LEOrderType.EditValue.ToString = "4" Then
+                            increase_inc_sales("41")
+                        ElseIf LEOrderType.EditValue.ToString = "6" Then
+                            increase_inc_sales("42")
+                        Else
+                            increase_inc_sales("4")
+                        End If
 
                         'insert who prepared
                         insert_who_prepared("45", id_sales_return_order, id_user)
@@ -352,7 +367,7 @@
                 If confirm = Windows.Forms.DialogResult.Yes Then
                     Cursor = Cursors.WaitCursor
                     Try
-                        Dim query As String = "UPDATE tb_sales_return_order SET id_store_contact_to='" + id_store_contact_to + "', sales_return_order_number = '" + sales_return_order_number + "', sales_return_order_note='" + sales_return_order_note + "', sales_return_order_est_date = '" + sales_return_order_est_date + "', sales_return_order_est_del_date='" + sales_return_order_est_del_date + "' WHERE id_sales_return_order='" + id_sales_return_order + "' "
+                        Dim query As String = "UPDATE tb_sales_return_order SET id_store_contact_to='" + id_store_contact_to + "', sales_return_order_number = '" + sales_return_order_number + "', sales_return_order_note='" + sales_return_order_note + "', sales_return_order_est_date = '" + sales_return_order_est_date + "', sales_return_order_est_del_date='" + sales_return_order_est_del_date + "', id_return_clasification = '" + SLUEClasification.EditValue.ToString + "' WHERE id_sales_return_order='" + id_sales_return_order + "' "
                         execute_non_query(query, True, "", "", "", "")
 
                         'edit detail table
@@ -901,5 +916,9 @@
             TxtOrderType.Text = ""
         End Try
 
+    End Sub
+
+    Sub view_clasification()
+        viewSearchLookupQuery(SLUEClasification, "SELECT * FROM tb_lookup_return_clasification", "id_return_clasification", "return_clasification", "id_return_clasification")
     End Sub
 End Class

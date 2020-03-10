@@ -25,6 +25,7 @@ Public Class FormSalesDelOrderDet
     Dim id_so_status As String = ""
     Dim id_commerce_type As String = "-1"
     Dim id_comp_group As String = "-1"
+    Dim id_wh As String = "-1"
 
 
 
@@ -35,6 +36,7 @@ Public Class FormSalesDelOrderDet
     Public allow_sum As Decimal
     Dim id_store_type As String = "-1"
     Dim is_use_unique_code As String = "-1"
+    Dim is_use_unique_code_wh As String = "-1"
     Dim action_scan_btn As String = ""
     Dim id_combine As String = "-1"
 
@@ -147,7 +149,7 @@ Public Class FormSalesDelOrderDet
     Sub viewSalesOrder()
         'Dim query_c As New ClassSalesOrder()
         'Dim query As String = query_c.queryMain("AND a.id_sales_order=" + id_sales_order + " ", "2")
-        Dim qso As String = "SELECT a.id_sales_order, a.id_store_contact_to, d.id_commerce_type,d.id_comp AS `id_store`, d.is_use_unique_code, d.id_store_type, d.comp_number AS `store_number`, d.comp_name AS `store`, d.address_primary as `store_address`, CONCAT(d.comp_number,' - ',d.comp_name) AS store_name_to,a.id_report_status, f.report_status, a.id_warehouse_contact_to, CONCAT(wh.comp_number,' - ',wh.comp_name) AS warehouse_name_to, (wh.comp_number) AS warehouse_number_to,  (wh.comp_name) AS `warehouse`, wh.id_drawer_def AS `id_wh_drawer`, drw.wh_drawer_code, drw.wh_drawer, a.sales_order_note, a.sales_order_date, a.sales_order_note, a.sales_order_number, a.sales_order_ol_shop_number, a.sales_order_ol_shop_date, (a.sales_order_date) AS sales_order_date, ps.id_prepare_status, ps.prepare_status, ('No') AS `is_select`, cat.id_so_status, cat.so_status, del_cat.id_so_cat, del_cat.so_cat, IFNULL(so_item.tot_so,0.00) AS `total_order`,  
+        Dim qso As String = "SELECT a.id_sales_order, a.id_store_contact_to, d.id_commerce_type,d.id_comp AS `id_store`, d.is_use_unique_code, d.id_store_type, d.comp_number AS `store_number`, d.comp_name AS `store`, d.address_primary as `store_address`, CONCAT(d.comp_number,' - ',d.comp_name) AS store_name_to,a.id_report_status, f.report_status, a.id_warehouse_contact_to, CONCAT(wh.comp_number,' - ',wh.comp_name) AS warehouse_name_to, (wh.comp_number) AS warehouse_number_to,  (wh.comp_name) AS `warehouse`, wh.is_use_unique_code AS `is_use_unique_code_wh`, wh.id_comp AS `id_wh`, wh.id_drawer_def AS `id_wh_drawer`, drw.wh_drawer_code, drw.wh_drawer, a.sales_order_note, a.sales_order_date, a.sales_order_note, a.sales_order_number, a.sales_order_ol_shop_number, a.sales_order_ol_shop_date, (a.sales_order_date) AS sales_order_date, ps.id_prepare_status, ps.prepare_status, ('No') AS `is_select`, cat.id_so_status, cat.so_status, del_cat.id_so_cat, del_cat.so_cat, IFNULL(so_item.tot_so,0.00) AS `total_order`,  
         IFNULL(an.fg_so_reff_number,'-') AS `fg_so_reff_number`,a.id_so_type, a.final_comment, a.final_date, eu.period_name, ut.uni_type, ube.employee_code, ube.employee_name, a.id_prepare_status, a.customer_name
         FROM tb_sales_order a 
         INNER JOIN tb_m_comp_contact c ON c.id_comp_contact = a.id_store_contact_to 
@@ -190,7 +192,7 @@ Public Class FormSalesDelOrderDet
         TxtNameCompTo.Text = data.Rows(0)("store").ToString
         MEAdrressCompTo.Text = data.Rows(0)("store_address").ToString
         id_store_type = data.Rows(0)("id_store_type").ToString
-        is_use_unique_code = data.Rows(0)("is_use_unique_code").ToString
+        is_use_unique_code = get_setup_field("is_use_unique_code_all")
         If id_store_type = "3" Then 'big sale
             id_store_type = "2"
         End If
@@ -204,6 +206,8 @@ Public Class FormSalesDelOrderDet
         TxtDrawerCode.Text = data.Rows(0)("wh_drawer_code").ToString
         TxtDrawer.Text = data.Rows(0)("wh_drawer").ToString
         id_wh_drawer = data.Rows(0)("id_wh_drawer").ToString
+        is_use_unique_code_wh = get_setup_field("is_use_unique_code_all")
+        id_wh = data.Rows(0)("id_wh").ToString
 
         'tipe & status SO
         LETypeSO.ItemIndex = LETypeSO.Properties.GetDataSourceRowIndex("id_so_type", data.Rows(0)("id_so_type").ToString)
@@ -377,10 +381,15 @@ Public Class FormSalesDelOrderDet
     End Sub
 
 
-    Sub codeAvailableIns(ByVal id_product_param As String)
+    Sub codeAvailableIns(ByVal id_product_param As String, ByVal id_product_param_comma As String)
         'unique
         dt.Clear()
-        Dim query As String = "CALL view_stock_fg_unique_del('" + id_product_param + "') "
+        Dim query As String = ""
+        If is_use_unique_code_wh = "1" Then
+            query = "CALL view_stock_fg_unique_with_table('" + id_product_param_comma + "', '" + id_wh + "', '" + id_wh_drawer + "')"
+        Else
+            query = "CALL view_stock_fg_unique_del('" + id_product_param + "') "
+        End If
         Dim datax As DataTable = execute_query(query, -1, True, "", "", "", "")
         dt = datax
 
@@ -660,8 +669,8 @@ Public Class FormSalesDelOrderDet
                 If action = "ins" Then
                     'query main table
                     Dim pl_sales_order_del_number As String = ""
-                    Dim query_main As String = "INSERT tb_pl_sales_order_del(id_sales_order, pl_sales_order_del_number, id_comp_contact_from, id_store_contact_to, pl_sales_order_del_date, pl_sales_order_del_note, id_report_status, last_update, last_update_by, id_wh_drawer, is_use_unique_code) "
-                    query_main += "VALUES('" + id_sales_order + "', '', '" + id_comp_contact_from + "', '" + id_store_contact_to + "', NOW(), '" + pl_sales_order_del_note + "', '1', NOW(), " + id_user + ", '" + id_wh_drawer + "', '" + is_use_unique_code + "'); SELECT LAST_INSERT_ID(); "
+                    Dim query_main As String = "INSERT tb_pl_sales_order_del(id_sales_order, pl_sales_order_del_number, id_comp_contact_from, id_store_contact_to, pl_sales_order_del_date, pl_sales_order_del_note, id_report_status, last_update, last_update_by, id_wh_drawer, is_use_unique_code, is_use_unique_code_wh) "
+                    query_main += "VALUES('" + id_sales_order + "', '', '" + id_comp_contact_from + "', '" + id_store_contact_to + "', NOW(), '" + pl_sales_order_del_note + "', '1', NOW(), " + id_user + ", '" + id_wh_drawer + "', '" + is_use_unique_code + "', '" + is_use_unique_code_wh + "'); SELECT LAST_INSERT_ID(); "
                     id_pl_sales_order_del = execute_query(query_main, 0, True, "", "", "", "")
 
 
@@ -730,6 +739,25 @@ Public Class FormSalesDelOrderDet
                     If GVBarcode.RowCount > 0 Then
                         execute_non_query(query_counting, True, "", "", "", "")
                     End If
+
+                    'reserved unique code
+                    If is_use_unique_code_wh = "1" Then
+                        Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`,`id_pl_sales_order_del_det_counting`,`id_type`,`unique_code`,
+                        `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
+                        SELECT cc.id_comp, '" + id_wh_drawer + "', td.id_product,  tc.id_pl_prod_order_rec_det_unique,tc.id_pl_sales_order_del_det_counting, '1', 
+                        CONCAT(p.product_full_code,tc.pl_sales_order_del_det_counting), td.id_design_price, td.design_price, -1, 1, NOW() 
+                        FROM tb_pl_sales_order_del_det td
+                        INNER JOIN tb_pl_sales_order_del t ON t.id_pl_sales_order_del = td.id_pl_sales_order_del
+                        INNER JOIN tb_pl_sales_order_del_det_counting tc ON tc.id_pl_sales_order_del_det = td.id_pl_sales_order_del_det
+                        INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact =  t.id_comp_contact_from
+                        INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp
+                        INNER JOIN tb_m_product p ON p.id_product = td.id_product
+                        INNER JOIN tb_m_design d ON d.id_design = p.id_design
+                        WHERE t.id_pl_sales_order_del=" + id_pl_sales_order_del + "
+                        AND d.is_old_design=2 AND t.is_use_unique_code_wh=1 "
+                        execute_non_query(quniq, True, "", "", "", "")
+                    End If
+
 
                     'submit who prepared
                     submit_who_prepared("43", id_pl_sales_order_del, id_user)
@@ -926,13 +954,16 @@ Public Class FormSalesDelOrderDet
         GVItemList.ActiveFilterString = "[status]<>'0'"
         If GVItemList.RowCount > 0 Then
             Dim id_product_param As String = ""
+            Dim id_product_param_comma As String = ""
             For i As Integer = 0 To ((GVItemList.RowCount - 1) - GetGroupRowCount(GVItemList))
                 id_product_param += GVItemList.GetRowCellValue(i, "id_product").ToString
+                id_product_param_comma += GVItemList.GetRowCellValue(i, "id_product").ToString
                 If i < ((GVItemList.RowCount - 1) - GetGroupRowCount(GVItemList)) Then
                     id_product_param += ";"
+                    id_product_param_comma += ","
                 End If
             Next
-            codeAvailableIns(id_product_param)
+            codeAvailableIns(id_product_param, id_product_param_comma)
         End If
         GVItemList.ActiveFilterString = ""
         Cursor = Cursors.Default

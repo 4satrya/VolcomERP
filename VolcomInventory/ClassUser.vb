@@ -3,13 +3,48 @@ Imports System.Reflection
 
 Public Class ClassUser
     Sub logLogin(ByVal type As String)
+        'type 1=login; 2=logout
+        Dim id_season_temp As String = ""
+        Dim season_over As String = "2"
+
+        If type = "2" Then
+            season_over = "1"
+        End If
+
         If id_user > "0" And id_user <> "" Then
             Dim versionNumber As Version
             versionNumber = Assembly.GetExecutingAssembly().GetName().Version
 
-            Dim query As String = "INSERT INTO tb_log_login(id_user, time,type,ip_address,version_number) 
-            VALUES('" + id_user + "', NOW(), '" + type + "','" & GetIPv4Address() & "','" & versionNumber.ToString & "') "
-            execute_non_query(query, True, "", "", "", "")
+            Dim query As String = "INSERT INTO tb_log_login(id_user, time,type,ip_address,version_number,is_season_over) 
+            VALUES('" + id_user + "', NOW(), '" + type + "','" & GetIPv4Address() & "','" & versionNumber.ToString & "','" & season_over & "'); SELECT LAST_INSERT_ID(); "
+            id_season_temp = execute_query(query, 0, True, "", "", "", "")
+            '
+            If type = "1" Then
+                id_login_season = id_season_temp
+                checkSeasonLogin()
+            ElseIf type = "2" Then
+                checkSeasonLogout()
+            End If
+        End If
+    End Sub
+
+    Sub checkSeasonLogin()
+        If get_setup_field("is_enable_season") = "1" Then 'login
+            'check user already login or not
+            Dim q As String = "SELECT * FROM tb_log_login WHERE id_user='" & id_user & "' AND is_season_over='2' AND id_season!='" & id_login_season & "'"
+            Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
+            If dt.Rows.Count > 0 Then
+                q = "UPDATE tb_log_login SET is_season_over='1' WHERE id_user='" & id_user & "' AND is_season_over='2' AND id_season!='" & id_login_season & "'"
+                execute_non_query(q, True, "", "", "", "")
+            End If
+        End If
+    End Sub
+
+    Sub checkSeasonLogout()
+        If get_setup_field("is_enable_season") = "1" Then 'logout
+            'check user already login or not
+            Dim q As String = "UPDATE tb_log_login  SET is_season_over='1' WHERE id_user='" & id_user & "' AND is_season_over='2' AND id_season='" & id_login_season & "'"
+            execute_non_query(q, True, "", "", "", "")
         End If
     End Sub
 
@@ -23,7 +58,6 @@ Public Class ClassUser
                 GetIPv4Address = ipheal.ToString()
             End If
         Next
-
     End Function
 
     Public Function queryMain(ByVal condition As String, ByVal order_type As String) As String
@@ -50,5 +84,4 @@ Public Class ClassUser
         query += "ORDER BY l.time " + order_type
         Return query
     End Function
-
 End Class

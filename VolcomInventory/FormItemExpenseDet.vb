@@ -12,7 +12,30 @@
         viewCOA()
         viewCOARepo()
         viewPaymentMethod()
+        '
+        view_repo_cat()
+        view_repo_type()
+        '
         actionLoad()
+    End Sub
+
+    Sub view_repo_type()
+        Dim q As String = "SELECT id_expense_type,expense_type FROM tb_lookup_expense_type"
+        viewSearchLookupRepositoryQuery(RISLEType, q, 0, "expense_type", "id_expense_type")
+    End Sub
+
+    Sub view_repo_cat()
+        Dim q As String = "SELECT bo.`id_b_expense_opex` AS id_b_expense,icm.`id_item_cat_main`,icm.`item_cat_main`,icm.`id_expense_type`
+FROM tb_b_expense_opex bo
+INNER JOIN tb_item_cat_main icm ON icm.`id_item_cat_main`=bo.`id_item_cat_main`
+WHERE bo.`year`=YEAR(NOW()) AND bo.is_active='1'
+UNION ALL
+SELECT bo.`id_b_expense` AS id_b_expense,icm.`id_item_cat_main`,CONCAT('[',dep.departement,']',icm.`item_cat_main`) AS item_cat_main,icm.`id_expense_type`
+FROM tb_b_expense bo
+INNER JOIN tb_item_cat_main icm ON icm.`id_item_cat_main`=bo.`id_item_cat_main`
+INNER JOIN tb_m_departement dep ON dep.id_departement=bo.id_departement
+WHERE bo.`year`=YEAR(NOW()) AND bo.is_active='1'"
+        viewSearchLookupRepositoryQuery(RISLECatExpense, q, 0, "item_cat_main", "id_b_expense")
     End Sub
 
     Sub viewCOA()
@@ -130,7 +153,7 @@
 
     Sub viewDetail()
         Cursor = Cursors.WaitCursor
-        Dim query As String = "SELECT ed.id_item_expense_det, ed.id_item_expense, 
+        Dim query As String = "SELECT ed.id_item_expense_det, ed.id_item_expense,ed.id_expense_type,ed.id_b_expense, 
         ed.id_acc, a.acc_description AS `coa_desc`, ed.description, "
         If action = "ins" Then
             query += "0.00 AS tax_percent,0.00 AS `amount` "
@@ -324,18 +347,20 @@
                 execute_non_query("CALL gen_number(" + id + ",157); ", True, "", "", "", "")
 
                 'query det
-                Dim qd As String = "INSERT INTO tb_item_expense_det(id_item_expense, id_acc, description, tax_percent, tax_value, amount) VALUES "
+                Dim qd As String = "INSERT INTO tb_item_expense_det(id_item_expense, id_acc, description, tax_percent, tax_value, amount, id_expense_type, id_b_expense) VALUES "
                 For d As Integer = 0 To ((GVData.RowCount - 1) - GetGroupRowCount(GVData))
                     Dim id_acc As String = GVData.GetRowCellValue(d, "id_acc").ToString
                     Dim description As String = GVData.GetRowCellValue(d, "description").ToString
                     Dim tax_percent As String = decimalSQL(GVData.GetRowCellValue(d, "tax_percent").ToString)
                     Dim tax_value As String = decimalSQL(GVData.GetRowCellValue(d, "tax_value").ToString)
                     Dim amount As String = decimalSQL(GVData.GetRowCellValue(d, "amount").ToString)
+                    Dim id_expense_type As String = GVData.GetRowCellValue(d, "id_expense_type").ToString
+                    Dim id_b_expense As String = GVData.GetRowCellValue(d, "id_b_expense").ToString
 
                     If d > 0 Then
                         qd += ", "
                     End If
-                    qd += "('" + id + "','" + id_acc + "', '" + description + "', '" + tax_percent + "', '" + tax_value + "', '" + amount + "') "
+                    qd += "('" + id + "','" + id_acc + "', '" + description + "', '" + tax_percent + "', '" + tax_value + "', '" + amount + "', '" + id_expense_type + "', '" + id_b_expense + "') "
                 Next
                 If GVData.RowCount > 0 Then
                     execute_non_query(qd, True, "", "", "", "")
@@ -443,5 +468,10 @@
         FormPopUpContact.id_pop_up = "90"
         FormPopUpContact.ShowDialog()
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub RISLECatExpense_Popup(sender As Object, e As EventArgs) Handles RISLECatExpense.Popup
+        Dim editor As DevExpress.XtraEditors.SearchLookUpEdit = TryCast(GVData.ActiveEditor, DevExpress.XtraEditors.SearchLookUpEdit)
+        editor.Properties.View.ActiveFilterString = "[id_expense_type] ='" + GVData.GetFocusedRowCellValue("id_expense_type").ToString + "'"
     End Sub
 End Class

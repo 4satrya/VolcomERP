@@ -1256,4 +1256,16 @@ FROM tb_m_comp_cat ccat WHERE ccat.id_comp_cat='" & LECompanyCategory.EditValue.
     Private Sub SLEGroup_EditValueChanged(sender As Object, e As EventArgs) Handles SLEGroup.EditValueChanged
         view_store_company()
     End Sub
+
+    Private Sub TECompanyCode_EditValueChanged(sender As Object, e As EventArgs) Handles TECompanyCode.EditValueChanged
+        TECompanyCode.EditValue = trimSpace(TECompanyCode.EditValue.ToString)
+    End Sub
+
+    Private Sub TECompanyName_EditValueChanged(sender As Object, e As EventArgs) Handles TECompanyName.EditValueChanged
+        TECompanyName.EditValue = trimSpace(TECompanyName.EditValue.ToString)
+    End Sub
+
+    Private Sub TECompanyPrintedName_EditValueChanged(sender As Object, e As EventArgs) Handles TECompanyPrintedName.EditValueChanged
+        TECompanyPrintedName.EditValue = trimSpace(TECompanyPrintedName.EditValue.ToString)
+    End Sub
 End Class

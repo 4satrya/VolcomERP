@@ -90,4 +90,12 @@
             End If
         End If
     End Sub
+
+    Private Sub BPrint_Click(sender As Object, e As EventArgs) Handles BPrint.Click
+        ReportAccountingJournal.id_trans = id_trans
+
+        Dim Report As New ReportAccountingJournal()
+        Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
+        Tool.ShowPreview()
+    End Sub
 End Class

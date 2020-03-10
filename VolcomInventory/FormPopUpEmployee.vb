@@ -5,6 +5,7 @@
     End Sub
     Sub load_emp()
         Dim query As String = ""
+
         If id_popup = "7" Then
             Dim id_payroll As String = FormEmpPayroll.GVPayrollPeriode.GetFocusedRowCellValue("id_payroll").ToString
             query = "SELECT emp.id_employee,dep.is_store,emp.employee_code,emp.employee_name,dep.departement,emp.employee_join_date,emp.employee_position,active.employee_active
@@ -30,6 +31,10 @@
 		                    ORDER BY sal.`effective_date` DESC,sal.`id_employee_salary` DESC
 	                    ) sal GROUP BY id_employee
                     ) salx ON salx.id_employee = emp.`id_employee`"
+        End If
+
+        If FormEmpLeave.is_departement_sub Then
+            query += " WHERE emp.id_departement_sub IN (SELECT id_departement_sub_map FROM tb_emp_leave_mapping WHERE id_departement_sub = " + id_departement_sub_user + ") "
         End If
 
         If FormEmpLeave.is_propose = "1" Then

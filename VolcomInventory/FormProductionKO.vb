@@ -190,6 +190,7 @@ ORDER BY po.`id_prod_order` ASC"
 ,emp_purc_mngr.employee_name AS emp_name_purc_mngr,emp_purc_mngr.`employee_position` AS purc_mngr_pos
 ,emp_fc.employee_name AS emp_name_fc,emp_fc.`employee_position` AS fc_pos
 ,emp_director.employee_name AS emp_name_director,emp_director.`employee_position` AS director_pos
+,emp_vice.employee_name AS emp_name_vice_director
 FROM tb_prod_order_ko ko
 INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact=ko.id_comp_contact
 INNER JOIN tb_m_comp c ON c.id_comp=cc.id_comp
@@ -200,6 +201,7 @@ INNER JOIN tb_m_employee emp_created ON emp_created.`id_employee`=usr_created.`i
 INNER JOIN tb_m_employee emp_purc_mngr ON emp_purc_mngr.`id_employee`=ko.`id_emp_purc_mngr`
 INNER JOIN tb_m_employee emp_fc ON emp_fc.`id_employee`=ko.`id_emp_fc`
 INNER JOIN tb_m_employee emp_director ON emp_director.`id_employee`=ko.`id_emp_director`
+INNER JOIN tb_m_employee emp_vice ON emp_vice.`id_employee`=ko.`id_emp_vice_director`
 WHERE id_prod_order_ko='" & SLERevision.EditValue.ToString & "'"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         ReportProductionKO.dt_head = data
@@ -230,8 +232,8 @@ WHERE id_prod_order_ko='" & SLERevision.EditValue.ToString & "'"
         Dim check As String = "SELECT * FROM tb_prod_order_ko WHERE number='" & addSlashes(TEKONumber.Text) & "' ORDER BY id_prod_order_ko DESC"
         Dim data_check As DataTable = execute_query(check, -1, True, "", "", "", "")
         If id_ko = data_check.Rows(0)("id_prod_order_ko").ToString Then
-            Dim query As String = "INSERT INTO tb_prod_order_ko(`id_prod_order_ko_reff`,`number`,`revision`,`id_ko_template`,`id_comp_contact`,`vat`,`id_term_production`,`date_created`,`created_by`,`id_emp_purc_mngr`,`id_emp_fc`,`id_emp_director`,`is_purc_mat`)
-SELECT `id_prod_order_ko_reff`,`number`,(SELECT COUNT(id_prod_order_ko) FROM tb_prod_order_ko WHERE id_prod_order_ko_reff=(SELECT id_prod_order_ko_reff FROM tb_prod_order_ko WHERE id_prod_order_ko='" & id_ko & "')),`id_ko_template`,`id_comp_contact`,`vat`,`id_term_production`,`date_created`,`created_by`,`id_emp_purc_mngr`,`id_emp_fc`,`id_emp_director`,`is_purc_mat` FROM tb_prod_order_ko WHERE id_prod_order_ko='" & id_ko & "'; SELECT LAST_INSERT_ID(); "
+            Dim query As String = "INSERT INTO tb_prod_order_ko(`id_prod_order_ko_reff`,`number`,`revision`,`id_ko_template`,`id_comp_contact`,`vat`,`id_term_production`,`date_created`,`created_by`,`id_emp_purc_mngr`,`id_emp_fc`,`id_emp_director`,`id_emp_vice_director`,`is_purc_mat`)
+SELECT `id_prod_order_ko_reff`,`number`,(SELECT COUNT(id_prod_order_ko) FROM tb_prod_order_ko WHERE id_prod_order_ko_reff=(SELECT id_prod_order_ko_reff FROM tb_prod_order_ko WHERE id_prod_order_ko='" & id_ko & "')),`id_ko_template`,`id_comp_contact`,`vat`,`id_term_production`,`date_created`,`created_by`,`id_emp_purc_mngr`,`id_emp_fc`,`id_emp_director`,`id_emp_vice_director`,`is_purc_mat` FROM tb_prod_order_ko WHERE id_prod_order_ko='" & id_ko & "'; SELECT LAST_INSERT_ID(); "
             Dim new_id_ko As String = execute_query(query, 0, True, "", "", "", "")
             'det
             query = "INSERT INTO tb_prod_order_ko_det(`id_prod_order_ko`,`revision`,`id_prod_order`,`id_purc_order`,`lead_time_prod`,`lead_time_payment`)

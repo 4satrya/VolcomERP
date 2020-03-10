@@ -94,4 +94,10 @@
         FormPopUpProductUnique.ShowDialog()
         Cursor = Cursors.Default
     End Sub
+
+    Private Sub BtnUniqueAll_Click(sender As Object, e As EventArgs) Handles BtnUniqueAll.Click
+        Cursor = Cursors.WaitCursor
+        FormUniqueCode.ShowDialog()
+        Cursor = Cursors.Default
+    End Sub
 End Class

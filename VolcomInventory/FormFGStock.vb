@@ -163,8 +163,7 @@
     Sub viewWHStockCard()
         Dim query As String = ""
         query += "SELECT e.id_comp, e.comp_number, e.comp_name, CONCAT_WS(' - ', e.comp_number, e.comp_name) AS comp_name_label 
-        FROM tb_m_comp e 
-        WHERE e.is_active=1 "
+        FROM tb_m_comp e "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         For i As Integer = 0 To data.Rows.Count - 1
             If i = 0 Then
@@ -275,8 +274,7 @@
         query += "SELECT ('-1') AS id_comp, ('-') AS comp_number, ('Normal Warehouse') AS comp_name, ('Normal Warehouse') AS comp_name_label UNION ALL "
         query += "SELECT ('-2') AS id_comp, ('-') AS comp_number, ('Sale Warehouse') AS comp_name, ('Sale Warehouse') AS comp_name_label UNION ALL "
         query += "SELECT e.id_comp, e.comp_number, e.comp_name, CONCAT_WS(' - ', e.comp_number, e.comp_name) AS comp_name_label 
-        FROM tb_m_comp e 
-        WHERE e.is_active=1 "
+        FROM tb_m_comp e "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         For i As Integer = 0 To data.Rows.Count - 1
             If i = 0 Then
@@ -300,8 +298,7 @@
         Dim query As String = ""
         query += "SELECT ('0') AS id_comp, ('All') AS comp_number, ('All Store') AS comp_name, ('All Store') AS comp_name_label UNION ALL "
         query += "SELECT e.id_comp, e.comp_number, e.comp_name, CONCAT_WS(' - ', e.comp_number, e.comp_name) AS comp_name_label 
-        FROM tb_m_comp e 
-        WHERE e.is_active=1 "
+        FROM tb_m_comp e "
         viewSearchLookupQuery(SLEAccount, query, "id_comp", "comp_name_label", "id_comp")
         Cursor = Cursors.Default
     End Sub

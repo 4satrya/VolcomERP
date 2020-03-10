@@ -5,9 +5,6 @@ Public Class FormLogin
     Private Sub FormLogin_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         TxtUsername.Focus()
         apply_skin()
-        For Each ex As Control In Me.Controls
-            AddHandler ex.KeyDown, AddressOf FormLogin_KeyUp
-        Next
     End Sub
     'Form Close
     Private Sub FormLogin_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
@@ -46,7 +43,7 @@ Public Class FormLogin
                     Dim show_notif As String = data.Rows(0)("show_notif").ToString
                     checkMenu() 'check menu based on role
 
-                    'log
+                    'log + season
                     Dim u As New ClassUser()
                     u.logLogin("1")
 
@@ -84,29 +81,9 @@ Public Class FormLogin
     Private Sub TxtUsername_Validating(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles TxtUsername.Validating
         EP_TE_cant_blank(EPLogin, TxtUsername)
     End Sub
+
     'Validating Password
     Private Sub TxtPassword_Validating(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles TxtPassword.Validating
         EP_TE_cant_blank(EPLogin, TxtPassword)
     End Sub
-    Private Sub FormLogin_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs)
-        'testing purpose
-        If e.KeyCode = Keys.F1 Then
-            TxtUsername.Text = "catur"
-            TxtPassword.Text = "catur"
-        ElseIf e.KeyCode = Keys.F2 Then
-            TxtUsername.Text = "sfinance"
-            TxtPassword.Text = "sfinance"
-        ElseIf e.KeyCode = Keys.F3 Then
-            TxtUsername.Text = "director"
-            TxtPassword.Text = "director"
-        ElseIf e.KeyCode = Keys.F4 Then
-            TxtUsername.Text = "smarketing"
-            TxtPassword.Text = "smarketing"
-        End If
-
-        'If get_setup_field("login_shortkey") = "1" Then
-
-        'End If
-    End Sub
-
 End Class

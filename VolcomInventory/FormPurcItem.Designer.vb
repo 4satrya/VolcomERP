@@ -19,6 +19,7 @@ Partial Class FormPurcItem
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.GCItem = New DevExpress.XtraGrid.GridControl()
         Me.GVItem = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumnPick = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -50,6 +51,8 @@ Partial Class FormPurcItem
         Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
+        Me.ViewMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.VDItemList = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.GCItem, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVItem, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RICECheck, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -61,10 +64,12 @@ Partial Class FormPurcItem
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLECat.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ViewMenu.SuspendLayout()
         Me.SuspendLayout()
         '
         'GCItem
         '
+        Me.GCItem.ContextMenuStrip = Me.ViewMenu
         Me.GCItem.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GCItem.Location = New System.Drawing.Point(0, 36)
         Me.GCItem.MainView = Me.GVItem
@@ -317,6 +322,18 @@ Partial Class FormPurcItem
         Me.LabelControl1.TabIndex = 0
         Me.LabelControl1.Text = "Category"
         '
+        'ViewMenu
+        '
+        Me.ViewMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.VDItemList})
+        Me.ViewMenu.Name = "ContextMenuStripYM"
+        Me.ViewMenu.Size = New System.Drawing.Size(153, 48)
+        '
+        'VDItemList
+        '
+        Me.VDItemList.Name = "VDItemList"
+        Me.VDItemList.Size = New System.Drawing.Size(152, 22)
+        Me.VDItemList.Text = "History"
+        '
         'FormPurcItem
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -342,6 +359,7 @@ Partial Class FormPurcItem
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SLECat.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ViewMenu.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -377,4 +395,6 @@ Partial Class FormPurcItem
     Friend WithEvents LabelControl3 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents GridColumn17 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn2 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ViewMenu As ContextMenuStrip
+    Friend WithEvents VDItemList As ToolStripMenuItem
 End Class

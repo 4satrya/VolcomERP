@@ -277,7 +277,8 @@ Public Class FormSalesReturnDet
         id_store_contact_from = data.Rows(0)("id_store_contact_to").ToString
         id_store_type = data.Rows(0)("id_store_type").ToString
         id_commerce_type = data.Rows(0)("id_commerce_type").ToString
-        is_use_unique_code = data.Rows(0)("is_use_unique_code").ToString
+        'is_use_unique_code = data.Rows(0)("is_use_unique_code").ToString
+        is_use_unique_code = get_setup_field("is_use_unique_code_all")
         TxtCodeCompFrom.Text = get_company_x(id_comp_from, 2)
         TxtNameCompFrom.Text = get_company_x(id_comp_from, 1)
         id_wh_drawer_store = data.Rows(0)("id_wh_drawer_store").ToString
@@ -474,34 +475,11 @@ Public Class FormSalesReturnDet
 
 
 
-    Sub codeAvailableIns(ByVal id_product_param As String, ByVal id_product_param_or As String, ByVal id_store_param As String, ByVal id_design_price_param As String)
+    Sub codeAvailableIns(ByVal id_product_param As String, ByVal id_product_param_or As String, ByVal id_store_param As String, ByVal id_design_price_param As String, ByVal id_product_param_comma As String)
         'unique
         Dim query As String = ""
         If is_use_unique_code = "1" Then
-            query = "SELECT c.id_pl_prod_order_rec_det_unique, prc.design_price, prc.id_design_price, prc.design_price_type, 
-            u.id_product, prod.product_full_code AS `product_code`, prod.product_display_name AS `name`,cd.code_detail_name AS `size`, RIGHT(u.unique_code,4) AS `product_counting_code`,
-            u.unique_code AS `product_full_code`, dsg.design_cop AS `bom_unit_price`, SUM(u.qty) AS `qty`, 6 AS `id_report_status`, 2 AS `is_old_design`, '' AS `stt`, u.is_unique_report
-            FROM tb_m_unique_code u
-            INNER JOIN tb_m_product prod ON prod.id_product = u.id_product
-            INNER JOIN tb_m_product_code prodc ON prodc.id_product = prod.id_product
-            INNER JOIN tb_m_code_detail cd ON cd.id_code_detail = prodc.id_code_detail
-            INNER JOIN tb_m_design dsg ON dsg.id_design = prod.id_design
-            LEFT JOIN( 
-              Select * FROM ( 
-              Select price.id_design, price.design_price, price.design_price_date, price.id_design_price, 
-              price.id_design_price_type, price_type.design_price_type,
-              cat.id_design_cat, cat.design_cat
-              From tb_m_design_price price 
-              INNER Join tb_lookup_design_price_type price_type On price.id_design_price_type = price_type.id_design_price_type 
-              INNER JOIN tb_lookup_design_cat cat ON cat.id_design_cat = price_type.id_design_cat
-              WHERE price.is_active_wh =1 AND price.design_price_start_date <= NOW() 
-              ORDER BY price.design_price_start_date DESC, price.id_design_price DESC ) a 
-              GROUP BY a.id_design 
-            ) prc ON prc.id_design = prod.id_design 
-            INNER JOIN tb_pl_prod_order_rec_det_counting c ON c.id_product = u.id_product AND c.pl_prod_order_rec_det_counting = RIGHT(u.unique_code,4)
-            WHERE u.id_comp=" + id_store + " AND (" + id_product_param_or + ")
-            GROUP BY u.unique_code 
-            HAVING qty>0 "
+            query = "CALL view_stock_fg_unique_with_table('" + id_product_param_comma + "', '" + id_store + "', '" + id_wh_drawer_store + "')"
         Else
             query = "CALL view_stock_fg_unique_ret('" + id_product_param + "','" + id_store_param + "', '" + id_design_price_param + "','0')"
         End If
@@ -940,6 +918,7 @@ Public Class FormSalesReturnDet
 
     Private Sub BtnBrowseContactTo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnBrowseContactTo.Click
         FormPopUpContact.id_pop_up = "41"
+        FormPopUpContact.is_must_active = "1"
         FormPopUpContact.id_departement = id_departement_user
         FormPopUpContact.ShowDialog()
     End Sub
@@ -1154,9 +1133,28 @@ Public Class FormSalesReturnDet
                     End If
 
                     'unik record
+                    'If is_use_unique_code = "1" Then
+                    '    Dim un As New ClassSalesReturn()
+                    '    un.insertUnique(id_sales_return)
+                    'End If
+
+                    'reserved unique code
                     If is_use_unique_code = "1" Then
-                        Dim un As New ClassSalesReturn()
-                        un.insertUnique(id_sales_return)
+                        Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_sales_return_det_counting`,`id_type`,`unique_code`,
+                        `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
+                        SELECT cc.id_comp, '" + id_wh_drawer_store + "', td.id_product, tc.id_pl_prod_order_rec_det_unique,tc.id_sales_return_det_counting, '4', 
+                        CONCAT(p.product_full_code,tc.sales_return_det_counting), td.id_design_price, td.design_price, -1, tc.is_unique_report, NOW() 
+                        FROM tb_sales_return_det td
+                        INNER JOIN tb_sales_return t ON t.id_sales_return = td.id_sales_return
+                        INNER JOIN tb_sales_return_det_counting tc ON tc.id_sales_return_det = td.id_sales_return_det
+                        INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact =  t.id_store_contact_from
+                        INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp
+                        INNER JOIN tb_m_product p ON p.id_product = td.id_product
+                        INNER JOIN tb_m_design d ON d.id_design = p.id_design
+                        WHERE t.id_sales_return=" + id_sales_return + "
+                        AND d.is_old_design=2 
+                        AND t.is_use_unique_code=1 "
+                        execute_non_query(quniq, True, "", "", "", "")
                     End If
 
                     'code problem scan
@@ -1351,6 +1349,7 @@ Public Class FormSalesReturnDet
         GVItemList.ActiveFilterString = "[status]<>0 "
 
         Dim id_product_param As String = ""
+        Dim id_product_param_comma As String = ""
         Dim id_product_param_or As String = ""
         For i As Integer = 0 To ((GVItemList.RowCount - 1) - GetGroupRowCount(GVItemList))
             id_product_param += GVItemList.GetRowCellValue(i, "id_product").ToString
@@ -1360,11 +1359,13 @@ Public Class FormSalesReturnDet
 
             If i > 0 Then
                 id_product_param_or += "OR "
+                id_product_param_comma += ","
             End If
             id_product_param_or += "u.id_product='" + GVItemList.GetRowCellValue(i, "id_product").ToString + "' "
+            id_product_param_comma += GVItemList.GetRowCellValue(i, "id_product").ToString
         Next
         If GVItemList.RowCount > 0 Then
-            codeAvailableIns(id_product_param, id_product_param_or, id_store, "0")
+            codeAvailableIns(id_product_param, id_product_param_or, id_store, "0", id_product_param_comma)
         End If
 
         GVItemList.ActiveFilterString = ""

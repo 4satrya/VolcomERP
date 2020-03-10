@@ -36,7 +36,7 @@ Partial Class FormMasterCargoRate
         Me.GCCargoRate.Location = New System.Drawing.Point(0, 0)
         Me.GCCargoRate.MainView = Me.GVCargoRate
         Me.GCCargoRate.Name = "GCCargoRate"
-        Me.GCCargoRate.Size = New System.Drawing.Size(703, 310)
+        Me.GCCargoRate.Size = New System.Drawing.Size(831, 560)
         Me.GCCargoRate.TabIndex = 1
         Me.GCCargoRate.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVCargoRate})
         '
@@ -88,7 +88,7 @@ Partial Class FormMasterCargoRate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(703, 310)
+        Me.ClientSize = New System.Drawing.Size(831, 560)
         Me.Controls.Add(Me.GCCargoRate)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False

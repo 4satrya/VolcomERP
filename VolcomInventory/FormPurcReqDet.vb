@@ -12,7 +12,7 @@
     Public is_ic_ia As String = "-1"
     '
     Public rmt As String = "-1"
-
+    Public id_report_status = "-1"
     '
     Sub load_approval_ic_ia()
         Dim query As String = "SELECT '1' AS id_approval,'No Action' AS approval
@@ -85,6 +85,8 @@ SELECT '3' AS id_approval,'Not Approve' AS approval"
                 '
                 SLEPurcType.EditValue = data.Rows(0)("id_expense_type").ToString
                 LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", data.Rows(0)("id_report_status").ToString)
+                '
+                id_report_status = data.Rows(0)("id_report_status").ToString
                 '
                 is_submit = data.Rows(0)("is_submit").ToString
                 SLEICApproval.EditValue = data.Rows(0)("ic_approval").ToString
@@ -562,12 +564,11 @@ GROUP BY req.`id_purc_req`"
     Private Sub BtnAttachment_Click(sender As Object, e As EventArgs) Handles BtnAttachment.Click
         Cursor = Cursors.WaitCursor
 
-        Dim rmt As String = "1"
-
         FormDocumentUpload.report_mark_type = rmt
         FormDocumentUpload.id_report = id_req
 
-        If is_view = "1" Then
+        MsgBox(id_report_status)
+        If is_view = "1" Or Not id_report_status = "1" Then
             FormDocumentUpload.is_view = "1"
         End If
         FormDocumentUpload.ShowDialog()

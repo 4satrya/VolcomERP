@@ -10,7 +10,7 @@
             SELECT IFNULL((SELECT MAX(id_employee_pps) FROM tb_employee_pps WHERE id_employee_status_det = '" + id_employee_status_det + "' AND id_report_status = '6'), 0)
         "
 
-        Dim id_pps As String = execute_query(query, 0, True, "", "", "", "")
+        Dim id_pps As String = If(FormProposeEmpSalaryDet.id_employee_pps = "-1", (execute_query(query, 0, True, "", "", "", "")), FormProposeEmpSalaryDet.id_employee_pps)
 
         If id_pps = 0 Then
             addImage(pic_path_emp_pps, "default")

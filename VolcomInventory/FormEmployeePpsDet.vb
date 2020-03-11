@@ -196,6 +196,7 @@
             SBPosAttB.Visible = True
             LEEmployeeStatus.Size = New Size(512, 20)
             LEEmployeeStatusB.Size = New Size(512, 20)
+            SBSaveUpdateSalary.Visible = False
         End If
 
         load_all = True
@@ -473,6 +474,7 @@
             MENote.ReadOnly = True
             SBSaveDraft.Enabled = False
             SBSave.Enabled = False
+            SBSaveUpdateSalary.Enabled = False
             BMark.Enabled = True
 
             PE.ReadOnly = True
@@ -2426,9 +2428,9 @@
     End Sub
 
     Private Sub SBSaveUpdateSalary_Click(sender As Object, e As EventArgs) Handles SBSaveUpdateSalary.Click
-        'SBSave_Click(SBSave, New EventArgs)
+        SBSave_Click(SBSave, New EventArgs)
 
-        FormProposeEmpSalaryDet.id_employee_pps = 1090
+        FormProposeEmpSalaryDet.id_employee_pps = id_pps
         FormProposeEmpSalaryDet.ShowDialog()
     End Sub
 End Class

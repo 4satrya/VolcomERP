@@ -14,15 +14,27 @@
             End If
         Next
 
-        Dim query As String = "
-            SELECT * FROM (SELECT 0 AS id_employee_status_det, 0 AS id_employee, '-' AS contract) AS tba
-            UNION ALL
-            SELECT * FROM (SELECT id_employee_status_det, id_employee, IF(a.id_employee_status = 2, CONCAT(b.employee_status, ' (', DATE_FORMAT(a.start_period, '%d %b %Y'), ')'), CONCAT(b.employee_status, ' (', DATE_FORMAT(a.start_period, '%d %b %Y'), ' - ', DATE_FORMAT(a.end_period, '%d %b %Y'), ')')) AS contract
-            FROM tb_m_employee_status_det AS a 
-            INNER JOIN tb_lookup_employee_status AS b ON b.id_employee_status = a.id_employee_status 
-            WHERE a.id_employee IN (" + String.Join(", ", id_employee.ToArray) + ")
-            ORDER BY a.id_employee ASC, a.id_employee_status_det DESC) AS tbb
-        "
+        Dim query As String = ""
+
+        If id_employee_pps = "-1" Then
+            query = "
+                SELECT * FROM (SELECT 0 AS id_employee_status_det, 0 AS id_employee, '-' AS contract) AS tba
+                UNION ALL
+                SELECT * FROM (SELECT id_employee_status_det, id_employee, IF(a.id_employee_status = 2, CONCAT(b.employee_status, ' (', DATE_FORMAT(a.start_period, '%d %b %Y'), ')'), CONCAT(b.employee_status, ' (', DATE_FORMAT(a.start_period, '%d %b %Y'), ' - ', DATE_FORMAT(a.end_period, '%d %b %Y'), ')')) AS contract
+                FROM tb_m_employee_status_det AS a 
+                INNER JOIN tb_lookup_employee_status AS b ON b.id_employee_status = a.id_employee_status 
+                WHERE a.id_employee IN (" + String.Join(", ", id_employee.ToArray) + ")
+                ORDER BY a.id_employee ASC, a.id_employee_status_det DESC) AS tbb
+            "
+        Else
+            query = "
+                SELECT a.id_employee_pps AS id_employee_status_det, a.id_employee, IF(a.id_employee_status = 2, CONCAT(b.employee_status, ' (', DATE_FORMAT(a.start_period, '%d %b %Y'), ')'), CONCAT(b.employee_status, ' (', DATE_FORMAT(a.start_period, '%d %b %Y'), ' - ', DATE_FORMAT(a.end_period, '%d %b %Y'), ')')) AS contract
+                FROM tb_employee_pps AS a
+                INNER JOIN tb_lookup_employee_status AS b ON b.id_employee_status = a.id_employee_status
+                WHERE a.id_employee_pps = " + id_employee_pps + "
+            "
+        End If
+
 
         viewSearchLookupRepositoryQuery(RepositoryItemSearchLookUpEdit, query, 0, "contract", "id_employee_status_det")
     End Sub
@@ -38,7 +50,7 @@
         load_contract()
 
         'from propose employee
-        If Not id_employee_pps = "-1" Then
+        If id_employee_sal_pps = "-1" And Not id_employee_pps = "-1" Then
             SBInsertEmployee.Visible = False
             SBRemoveEmployee.Visible = False
 
@@ -87,37 +99,6 @@
                 0
             )
 
-            'det.id_employee, 
-            'emp.employee_code, 
-            'emp.employee_name, 
-            'det.id_departement, 
-            'dp.departement, 
-            'dp.total_workdays, 
-            'det.employee_position, 
-            'IF(emp.id_employee_active = 1, TIMESTAMPDIFF(MONTH, emp.employee_actual_join_date, DATE(NOW())), TIMESTAMPDIFF(MONTH, emp.employee_actual_join_date, emp.employee_last_date)) AS tmp_length_work, 
-            'IF((SELECT tmp_length_work) < 12, CONCAT((SELECT tmp_length_work), ' month'), CONCAT(FLOOR((SELECT tmp_length_work) / 12), ' year')) AS length_work, 
-            'det.id_employee_level, 
-            'lv.employee_level, 
-            'det.id_employee_status, 
-            'sts.employee_status, 
-            'IFNULL(det.id_employee_salary, 0) AS id_employee_salary, 
-            'ROUND(IFNULL(sal.basic_salary, 0), 0) AS basic_salary_current, 
-            'ROUND(IFNULL(sal.allow_job, 0), 0) AS allow_job_current, 
-            'ROUND(IFNULL(sal.allow_meal, 0), 0) AS allow_meal_current, 
-            'ROUND(IFNULL(sal.allow_trans, 0), 0) AS allow_trans_current, 
-            'ROUND(IFNULL(sal.allow_house, 0), 0) AS allow_house_current, 
-            'ROUND(IFNULL(sal.allow_car, 0), 0) AS allow_car_current, 
-            '((SELECT basic_salary_current) + (SELECT allow_job_current) + (SELECT allow_meal_current) + (SELECT allow_trans_current) + (SELECT allow_house_current) + (SELECT allow_car_current)) AS total_salary_current, 
-            'ROUND(IFNULL(det.basic_salary, 0), 0) AS basic_salary, 
-            'ROUND(det.allow_job, 0) AS allow_job, 
-            'ROUND(det.allow_meal, 0) AS allow_meal, 
-            'ROUND(det.allow_trans, 0) AS allow_trans, 
-            'ROUND(det.allow_house, 0) AS allow_house, 
-            'ROUND(det.allow_car, 0) AS allow_car, 
-            'CONCAT(ROUND(((det.basic_salary + det.allow_job + det.allow_meal + det.allow_trans + det.allow_house + det.allow_car) - (IFNULL(sal.basic_salary, 0) + IFNULL(sal.allow_job, 0) + IFNULL(sal.allow_meal, 0) + IFNULL(sal.allow_trans, 0) + IFNULL(sal.allow_house, 0) + IFNULL(sal.allow_car, 0))) / (IFNULL(sal.basic_salary, 0) + IFNULL(sal.allow_job, 0) + IFNULL(sal.allow_meal, 0) + IFNULL(sal.allow_trans, 0) + IFNULL(sal.allow_house, 0) + IFNULL(sal.allow_car, 0)) * 100, 2), '%') AS increase, CONCAT(ROUND(((ROUND(det.basic_salary, 0) + ROUND(det.allow_job, 0) + ROUND(det.allow_meal, 0) + ROUND(det.allow_trans, 0)) / (ROUND(det.basic_salary, 0) + ROUND(det.allow_job, 0) + ROUND(det.allow_meal, 0) + ROUND(det.allow_trans, 0) + ROUND(det.allow_house, 0) + ROUND(det.allow_car, 0)) * 100), 2), '%') AS fixed_salary, 
-            'CONCAT(ROUND(((ROUND(det.allow_house, 0) + ROUND(det.allow_car, 0)) / (ROUND(det.basic_salary, 0) + ROUND(det.allow_job, 0) + ROUND(det.allow_meal, 0) + ROUND(det.allow_trans, 0) + ROUND(det.allow_house, 0) + ROUND(det.allow_car, 0)) * 100), 2), '%') AS non_fixed_salary, 
-            'det.id_employee_status_det, 
-            'det.reason
         End If
     End Sub
 
@@ -150,7 +131,7 @@
     Sub form_load()
         'load
         Dim query As String = "
-            SELECT sal.id_employee_sal_pps, sal.id_sal_pps_category, sal.id_sal_pps_type, DATE_FORMAT(sal.effective_date, '%d %M %Y') AS effective_date, sal.id_report_status, sal.number, sal.note, emp.employee_name AS created_by, DATE_FORMAT(sal.created_at, '%d %M %Y %H:%i:%s') AS created_at
+            SELECT sal.id_employee_sal_pps, sal.id_sal_pps_category, sal.id_sal_pps_type, DATE_FORMAT(sal.effective_date, '%d %M %Y') AS effective_date, sal.id_report_status, sal.number, sal.note, emp.employee_name AS created_by, DATE_FORMAT(sal.created_at, '%d %M %Y %H:%i:%s') AS created_at, id_employee_pps
             FROM tb_employee_sal_pps AS sal
             LEFT JOIN tb_m_employee AS emp ON sal.created_by = emp.id_employee
             WHERE sal.id_employee_sal_pps = " + id_employee_sal_pps + "
@@ -158,7 +139,7 @@
             UNION ALL
             
             #default value
-            SELECT -1 AS id_employee_sal_pps, 1 AS id_sal_pps_category, 1 AS id_sal_pps_type, DATE_FORMAT(NOW(), '%d %M %Y') AS effective_date, -1 AS id_report_status, '[autogenerate]' AS number, '' AS note, (SELECT employee_name FROM tb_m_employee WHERE id_employee = " + id_employee_user + ") AS created_by, DATE_FORMAT(NOW(), '%d %M %Y %H:%i:%s') AS created_at
+            SELECT -1 AS id_employee_sal_pps, 1 AS id_sal_pps_category, 1 AS id_sal_pps_type, DATE_FORMAT(NOW(), '%d %M %Y') AS effective_date, -1 AS id_report_status, '[autogenerate]' AS number, '' AS note, (SELECT employee_name FROM tb_m_employee WHERE id_employee = " + id_employee_user + ") AS created_by, DATE_FORMAT(NOW(), '%d %M %Y %H:%i:%s') AS created_at, 0 AS id_employee_pps
         "
 
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
@@ -170,6 +151,10 @@
         DECreatedAt.EditValue = data.Rows(0)("created_at")
         LUECategory.ItemIndex = LUECategory.Properties.GetDataSourceRowIndex("id_sal_pps_category", data.Rows(0)("id_sal_pps_category").ToString)
         LUEType.ItemIndex = LUEType.Properties.GetDataSourceRowIndex("id_sal_pps_type", data.Rows(0)("id_sal_pps_type").ToString)
+
+        If id_employee_pps = "-1" Then
+            id_employee_pps = data.Rows(0)("id_employee_pps")
+        End If
 
         'load detail
         Dim query_detail As String = "
@@ -245,14 +230,14 @@
 
         If id_employee_sal_pps = "-1" Then
             query = "
-                INSERT INTO tb_employee_sal_pps (id_sal_pps_category, id_sal_pps_type, effective_date, id_report_status, note, created_by, created_at) 
-                VALUES (" + id_sal_pps_category + ", " + id_sal_pps_type + ", '" + effective_date + "', " + id_report_status + ", '" + note + "', " + id_employee_user + ", NOW());
+                INSERT INTO tb_employee_sal_pps (id_sal_pps_category, id_sal_pps_type, effective_date, id_report_status, note, created_by, created_at, id_employee_pps) 
+                VALUES (" + id_sal_pps_category + ", " + id_sal_pps_type + ", '" + effective_date + "', " + id_report_status + ", '" + note + "', " + id_employee_user + ", NOW(), " + id_employee_pps + ");
                 SELECT LAST_INSERT_ID();
             "
 
             id_employee_sal_pps = execute_query(query, 0, True, "", "", "", "")
         Else
-            query = "UPDATE tb_employee_sal_pps SET id_sal_pps_category = " + id_sal_pps_category + ", id_sal_pps_type = " + id_sal_pps_type + ", effective_date = '" + effective_date + "', id_report_status = " + id_report_status + ", note = '" + note + "' WHERE id_employee_sal_pps = " + id_employee_sal_pps + ""
+            query = "UPDATE tb_employee_sal_pps SET id_sal_pps_category = " + id_sal_pps_category + ", id_sal_pps_type = " + id_sal_pps_type + ", effective_date = '" + effective_date + "', id_report_status = " + id_report_status + ", note = '" + note + "', id_employee_pps = " + id_employee_pps + " WHERE id_employee_sal_pps = " + id_employee_sal_pps + ""
 
             execute_non_query(query, True, "", "", "", "")
         End If

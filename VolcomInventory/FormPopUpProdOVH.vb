@@ -10,7 +10,7 @@
     End Sub
 
     Sub load_wo()
-        Dim query As String = "SELECT ovhp.id_ovh_price,cc.id_comp_contact,comp.comp_name,ovh.id_ovh,ovh.overhead_code AS `code`,ovh.overhead AS `name`,cur.id_currency,cur.currency,uom.uom,ovhp.ovh_price AS price_ori,ovhp.ovh_price AS price,ovhp.ovh_price_name,cast_tinyint('1') as is_ovh_main,'1' as kurs "
+        Dim query As String = "SELECT ovhp.id_ovh_price,cc.id_comp_contact,comp.comp_name,ovh.id_ovh,ovh.overhead_code AS `code`,ovh.overhead AS `name`,cur.id_currency,cur.currency,uom.uom,ovhp.ovh_price AS price_ori,ovhp.ovh_price AS price,ovhp.ovh_price_name,cast_tinyint('2') as is_ovh_main,'1' as kurs "
         query += " FROM tb_m_ovh_price ovhp"
         query += " INNER JOIN tb_m_ovh ovh On ovh.id_ovh=ovhp.id_ovh"
         query += " INNER JOIN tb_m_comp_contact cc On cc.id_comp_contact=ovhp.id_comp_contact"

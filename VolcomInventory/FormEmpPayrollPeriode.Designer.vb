@@ -45,6 +45,12 @@ Partial Class FormEmpPayrollPeriode
         Me.PCEndOt = New DevExpress.XtraEditors.PanelControl()
         Me.PCPayrollNote = New DevExpress.XtraEditors.PanelControl()
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
+        Me.PCEndStore = New DevExpress.XtraEditors.PanelControl()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
+        Me.DEEndStore = New DevExpress.XtraEditors.DateEdit()
+        Me.PCStartStore = New DevExpress.XtraEditors.PanelControl()
+        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
+        Me.DEStartStore = New DevExpress.XtraEditors.DateEdit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -72,6 +78,14 @@ Partial Class FormEmpPayrollPeriode
         CType(Me.PCPayrollNote, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PCPayrollNote.SuspendLayout()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PCEndStore, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PCEndStore.SuspendLayout()
+        CType(Me.DEEndStore.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEEndStore.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PCStartStore, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PCStartStore.SuspendLayout()
+        CType(Me.DEStartStore.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEStartStore.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl1
@@ -79,7 +93,7 @@ Partial Class FormEmpPayrollPeriode
         Me.PanelControl1.Controls.Add(Me.BtnCancel)
         Me.PanelControl1.Controls.Add(Me.BtnSave)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl1.Location = New System.Drawing.Point(0, 243)
+        Me.PanelControl1.Location = New System.Drawing.Point(0, 306)
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(429, 38)
         Me.PanelControl1.TabIndex = 1
@@ -316,9 +330,9 @@ Partial Class FormEmpPayrollPeriode
         Me.PCPayrollNote.Controls.Add(Me.LCPayrollNote)
         Me.PCPayrollNote.Controls.Add(Me.MEPayrollNote)
         Me.PCPayrollNote.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PCPayrollNote.Location = New System.Drawing.Point(0, 160)
+        Me.PCPayrollNote.Location = New System.Drawing.Point(0, 220)
         Me.PCPayrollNote.Name = "PCPayrollNote"
-        Me.PCPayrollNote.Size = New System.Drawing.Size(429, 83)
+        Me.PCPayrollNote.Size = New System.Drawing.Size(429, 86)
         Me.PCPayrollNote.TabIndex = 8946
         '
         'PanelControl2
@@ -330,12 +344,80 @@ Partial Class FormEmpPayrollPeriode
         Me.PanelControl2.Size = New System.Drawing.Size(429, 10)
         Me.PanelControl2.TabIndex = 8947
         '
+        'PCEndStore
+        '
+        Me.PCEndStore.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PCEndStore.Controls.Add(Me.LabelControl1)
+        Me.PCEndStore.Controls.Add(Me.DEEndStore)
+        Me.PCEndStore.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PCEndStore.Location = New System.Drawing.Point(0, 190)
+        Me.PCEndStore.Name = "PCEndStore"
+        Me.PCEndStore.Size = New System.Drawing.Size(429, 30)
+        Me.PCEndStore.TabIndex = 8949
+        '
+        'LabelControl1
+        '
+        Me.LabelControl1.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl1.Location = New System.Drawing.Point(15, 8)
+        Me.LabelControl1.Name = "LabelControl1"
+        Me.LabelControl1.Size = New System.Drawing.Size(80, 13)
+        Me.LabelControl1.TabIndex = 8937
+        Me.LabelControl1.Text = "Store Period End"
+        '
+        'DEEndStore
+        '
+        Me.DEEndStore.EditValue = Nothing
+        Me.DEEndStore.Location = New System.Drawing.Point(125, 7)
+        Me.DEEndStore.Name = "DEEndStore"
+        Me.DEEndStore.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEEndStore.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.DEEndStore.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.DEEndStore.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEEndStore.Properties.Mask.EditMask = "dd\/MM\/yyyy"
+        Me.DEEndStore.Size = New System.Drawing.Size(290, 20)
+        Me.DEEndStore.TabIndex = 8935
+        '
+        'PCStartStore
+        '
+        Me.PCStartStore.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PCStartStore.Controls.Add(Me.LabelControl2)
+        Me.PCStartStore.Controls.Add(Me.DEStartStore)
+        Me.PCStartStore.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PCStartStore.Location = New System.Drawing.Point(0, 160)
+        Me.PCStartStore.Name = "PCStartStore"
+        Me.PCStartStore.Size = New System.Drawing.Size(429, 30)
+        Me.PCStartStore.TabIndex = 8948
+        '
+        'LabelControl2
+        '
+        Me.LabelControl2.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl2.Location = New System.Drawing.Point(15, 8)
+        Me.LabelControl2.Name = "LabelControl2"
+        Me.LabelControl2.Size = New System.Drawing.Size(86, 13)
+        Me.LabelControl2.TabIndex = 8936
+        Me.LabelControl2.Text = "Store Period Start"
+        '
+        'DEStartStore
+        '
+        Me.DEStartStore.EditValue = Nothing
+        Me.DEStartStore.Location = New System.Drawing.Point(125, 5)
+        Me.DEStartStore.Name = "DEStartStore"
+        Me.DEStartStore.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEStartStore.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.DEStartStore.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.DEStartStore.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEStartStore.Properties.Mask.EditMask = "dd\/MM\/yyyy"
+        Me.DEStartStore.Size = New System.Drawing.Size(290, 20)
+        Me.DEStartStore.TabIndex = 8934
+        '
         'FormEmpPayrollPeriode
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(429, 281)
+        Me.ClientSize = New System.Drawing.Size(429, 344)
         Me.Controls.Add(Me.PCPayrollNote)
+        Me.Controls.Add(Me.PCEndStore)
+        Me.Controls.Add(Me.PCStartStore)
         Me.Controls.Add(Me.PCEndOt)
         Me.Controls.Add(Me.PCStartOt)
         Me.Controls.Add(Me.PCPayrollType)
@@ -382,6 +464,16 @@ Partial Class FormEmpPayrollPeriode
         Me.PCPayrollNote.ResumeLayout(False)
         Me.PCPayrollNote.PerformLayout()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PCEndStore, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PCEndStore.ResumeLayout(False)
+        Me.PCEndStore.PerformLayout()
+        CType(Me.DEEndStore.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEEndStore.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PCStartStore, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PCStartStore.ResumeLayout(False)
+        Me.PCStartStore.PerformLayout()
+        CType(Me.DEStartStore.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEStartStore.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -410,4 +502,10 @@ Partial Class FormEmpPayrollPeriode
     Friend WithEvents PCPayrollType As DevExpress.XtraEditors.PanelControl
     Friend WithEvents PCEnd As DevExpress.XtraEditors.PanelControl
     Friend WithEvents PanelControl2 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents PCEndStore As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents DEEndStore As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents PCStartStore As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents DEStartStore As DevExpress.XtraEditors.DateEdit
 End Class

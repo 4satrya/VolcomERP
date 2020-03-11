@@ -79,13 +79,13 @@
         Dim where_string As String = ""
 
         If Not SLEVendor.EditValue.ToString = "0" Then
-            where_string = " AND c.id_comp='" & SLEVendor.EditValue.ToString & "'"
+            where_string += " AND c.id_comp='" & SLEVendor.EditValue.ToString & "'"
         End If
 
         If SLERecStatus.EditValue.ToString = "1" Then
-            where_string = " AND po.is_close_rec='2'"
+            where_string += " AND po.is_close_rec='2'"
         ElseIf SLERecStatus.EditValue.ToString = "2" Then
-            where_string = " AND po.is_close_rec='1'"
+            where_string += " AND po.is_close_rec='1'"
         End If
 
         Dim query As String = "SELECT 'no' AS is_check,po.est_date_receive,po.id_purc_order,c.comp_number,c.comp_name,cc.contact_person,cc.contact_number,po.purc_order_number,po.date_created,emp_cre.employee_name AS emp_created,po.last_update,emp_upd.employee_name AS emp_updated ,po.pay_due_date,po.date_created

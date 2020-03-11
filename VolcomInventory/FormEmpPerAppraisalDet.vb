@@ -4,6 +4,8 @@
 
     Public is_only_absensi As Boolean = False
 
+    Public is_pick As Boolean = False
+
     Public id_employee As Integer = 0
 
     Public grup_penilaian As Integer = 0
@@ -194,19 +196,19 @@
 
         'late, minus work
         Dim tb_attn As String = "
-            (SELECT * FROM tb_emp_attn WHERE id_employee LIKE '" & id_employee.ToString & "' AND DATE(`datetime`) >= DATE_ADD('" & Date.Parse(TEStartPeriod.EditValue.ToString).ToString("yyyy-MM-dd") & "', INTERVAL -1 DAY) AND DATE(`datetime`) <= DATE_ADD('" & Date.Parse(TEEndPeriod.EditValue.ToString).AddDays(-45).ToString("yyyy-MM-dd") & "', INTERVAL 1 DAY))
+            (SELECT * FROM tb_emp_attn WHERE id_employee LIKE '" & id_employee.ToString & "' AND DATE(`datetime`) >= DATE_ADD('" & Date.Parse(TEStartPeriod.EditValue.ToString).ToString("yyyy-MM-dd") & "', INTERVAL -1 DAY) AND DATE(`datetime`) <= DATE_ADD('" & If(is_pick, Date.Parse(TEEndPeriod.EditValue.ToString).ToString("yyyy-MM-dd"), Date.Parse(TEEndPeriod.EditValue.ToString).AddDays(-45).ToString("yyyy-MM-dd")) & "', INTERVAL 1 DAY))
             UNION ALL
             (SELECT 0 AS id_emp_attn, 0 AS id_fingerprint, e.employee_code, d.id_employee, d.time_in AS `datetime`, 1 AS type_log, 0 AS scan_method
             FROM `tb_emp_attn_input_det` AS d
             LEFT JOIN `tb_emp_attn_input` AS a ON d.id_emp_attn_input = a.id_emp_attn_input
             LEFT JOIN `tb_m_employee` AS e ON d.id_employee = e.id_employee
-            WHERE d.id_departement = 17 AND d.id_employee LIKE '" & id_employee.ToString & "' AND d.date >= DATE_ADD('" & Date.Parse(TEStartPeriod.EditValue.ToString).ToString("yyyy-MM-dd") & "', INTERVAL 1 DAY) AND d.date <= DATE_ADD('" & Date.Parse(TEEndPeriod.EditValue.ToString).AddDays(-45).ToString("yyyy-MM-dd") & "', INTERVAL -1 DAY))
+            WHERE d.id_departement = 17 AND d.id_employee LIKE '" & id_employee.ToString & "' AND d.date >= DATE_ADD('" & Date.Parse(TEStartPeriod.EditValue.ToString).ToString("yyyy-MM-dd") & "', INTERVAL 1 DAY) AND d.date <= DATE_ADD('" & If(is_pick, Date.Parse(TEEndPeriod.EditValue.ToString).ToString("yyyy-MM-dd"), Date.Parse(TEEndPeriod.EditValue.ToString).AddDays(-45).ToString("yyyy-MM-dd")) & "', INTERVAL -1 DAY))
             UNION ALL
             (SELECT 0 AS id_emp_attn, 0 AS id_fingerprint, e.employee_code, d.id_employee, d.time_out AS `datetime`, 2 AS type_log, 0 AS scan_method
             FROM `tb_emp_attn_input_det` AS d
             LEFT JOIN `tb_emp_attn_input` AS a ON d.id_emp_attn_input = a.id_emp_attn_input
             LEFT JOIN `tb_m_employee` AS e ON d.id_employee = e.id_employee
-            WHERE d.id_departement = 17 AND d.id_employee LIKE '" & id_employee.ToString & "' AND d.date >= DATE_ADD('" & Date.Parse(TEStartPeriod.EditValue.ToString).ToString("yyyy-MM-dd") & "', INTERVAL 1 DAY) AND d.date <= DATE_ADD('" & Date.Parse(TEEndPeriod.EditValue.ToString).AddDays(-45).ToString("yyyy-MM-dd") & "', INTERVAL -1 DAY))
+            WHERE d.id_departement = 17 AND d.id_employee LIKE '" & id_employee.ToString & "' AND d.date >= DATE_ADD('" & Date.Parse(TEStartPeriod.EditValue.ToString).ToString("yyyy-MM-dd") & "', INTERVAL 1 DAY) AND d.date <= DATE_ADD('" & If(is_pick, Date.Parse(TEEndPeriod.EditValue.ToString).ToString("yyyy-MM-dd"), Date.Parse(TEEndPeriod.EditValue.ToString).AddDays(-45).ToString("yyyy-MM-dd")) & "', INTERVAL -1 DAY))
         "
 
         Dim query_detail As String = "
@@ -240,7 +242,7 @@
 	                ) lv ON lv.id_schedule=sch.id_schedule
 		            WHERE sch.id_employee = " + id_employee.ToString + "
 		            AND sch.date >= '" + Date.Parse(TEStartPeriod.EditValue.ToString).ToString("yyyy-MM-dd") + "'
-		            AND sch.date <= '" + Date.Parse(TEEndPeriod.EditValue.ToString).AddDays(-45).ToString("yyyy-MM-dd") + "'
+		            AND sch.date <= '" + If(is_pick, Date.Parse(TEEndPeriod.EditValue.ToString).ToString("yyyy-MM-dd"), Date.Parse(TEEndPeriod.EditValue.ToString).AddDays(-45).ToString("yyyy-MM-dd")) + "'
 		            GROUP BY sch.id_schedule
 	                ) tb
 	            ) tb
@@ -257,7 +259,7 @@
             WHERE sch.id_employee = " + id_employee.ToString + "
             AND sch.id_leave_type = 2
             AND sch.date >= '" + Date.Parse(TEStartPeriod.EditValue.ToString).ToString("yyyy-MM-dd") + "'
-            AND sch.date <= '" + Date.Parse(TEEndPeriod.EditValue.ToString).AddDays(-45).ToString("yyyy-MM-dd") + "'
+            AND sch.date <= '" + If(is_pick, Date.Parse(TEEndPeriod.EditValue.ToString).ToString("yyyy-MM-dd"), Date.Parse(TEEndPeriod.EditValue.ToString).AddDays(-45).ToString("yyyy-MM-dd")) + "'
             GROUP BY MONTH(sch.date)
             ORDER BY sch.date
         "

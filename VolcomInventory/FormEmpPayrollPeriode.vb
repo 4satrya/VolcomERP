@@ -21,6 +21,9 @@
             DEStartOt.EditValue = data.Rows(0)("ot_periode_start")
             DEEndOt.EditValue = data.Rows(0)("ot_periode_end")
 
+            DEStartStore.EditValue = data.Rows(0)("store_periode_start")
+            DEEndStore.EditValue = data.Rows(0)("store_periode_end")
+
             MEPayrollNote.Text = data.Rows(0)("note").ToString
 
             LEPayrollType.ItemIndex = LEPayrollType.Properties.GetDataSourceRowIndex("id_payroll_type", data.Rows(0)("id_payroll_type").ToString)
@@ -55,18 +58,31 @@
             Catch ex As Exception
             End Try
 
+            Dim store_date_start As String = "NULL"
+            Dim store_date_end As String = "NULL"
+
+            Try
+                store_date_start = "'" + Date.Parse(DEStartStore.EditValue.ToString).ToString("yyyy-MM-dd") + "'"
+            Catch ex As Exception
+            End Try
+
+            Try
+                store_date_end = "'" + Date.Parse(DEEndStore.EditValue.ToString).ToString("yyyy-MM-dd") + "'"
+            Catch ex As Exception
+            End Try
+
             Dim note As String = addSlashes(MEPayrollNote.Text)
             Dim id_payroll_type As String = LEPayrollType.EditValue.ToString
 
             If id_payroll = "-1" Then
-                Dim query As String = "INSERT INTO tb_emp_payroll(periode_start,periode_end,ot_periode_start,ot_periode_end,note,last_upd,id_user_upd,id_payroll_type) VALUES(" & date_start & "," & date_end & "," & ot_date_start & "," & ot_date_end & ",'" & addSlashes(note) & "',NOW(),'" & id_user & "','" & id_payroll_type & "'); SELECT LAST_INSERT_ID();"
+                Dim query As String = "INSERT INTO tb_emp_payroll(periode_start,periode_end,ot_periode_start,ot_periode_end,store_periode_start,store_periode_end,note,last_upd,id_user_upd,id_payroll_type) VALUES(" & date_start & "," & date_end & "," & ot_date_start & "," & ot_date_end & "," & store_date_start & "," & store_date_end & ",'" & addSlashes(note) & "',NOW(),'" & id_user & "','" & id_payroll_type & "'); SELECT LAST_INSERT_ID();"
                 id_payroll = execute_query(query, 0, True, "", "", "", "")
                 '
                 FormEmpPayroll.load_payroll()
                 FormEmpPayroll.GVPayrollPeriode.FocusedRowHandle = find_row(FormEmpPayroll.GVPayrollPeriode, "id_payroll", id_payroll)
                 Close()
             Else 'edit
-                Dim query As String = "UPDATE tb_emp_payroll SET periode_start=" & date_start & ",periode_end=" & date_end & ",ot_periode_start=" & ot_date_start & ",ot_periode_end=" & ot_date_end & ",note='" & addSlashes(note) & "',last_upd=NOW(),id_user_upd='" & id_user & "',id_payroll_type='" & id_payroll_type & "' WHERE id_payroll='" & id_payroll & "'"
+                Dim query As String = "UPDATE tb_emp_payroll SET periode_start=" & date_start & ",periode_end=" & date_end & ",ot_periode_start=" & ot_date_start & ",ot_periode_end=" & ot_date_end & ",store_periode_start=" & store_date_start & ",store_periode_end=" & store_date_end & ",note='" & addSlashes(note) & "',last_upd=NOW(),id_user_upd='" & id_user & "',id_payroll_type='" & id_payroll_type & "' WHERE id_payroll='" & id_payroll & "'"
                 execute_non_query(query, True, "", "", "", "")
                 '
                 FormEmpPayroll.load_payroll()
@@ -111,6 +127,8 @@
             PCEnd.Visible = True
             PCStartOt.Visible = False
             PCEndOt.Visible = False
+            PCStartStore.Visible = False
+            PCEndStore.Visible = False
 
             Size = New Size(445, 230)
         Else
@@ -120,8 +138,10 @@
             PCEnd.Visible = True
             PCStartOt.Visible = True
             PCEndOt.Visible = True
+            PCStartStore.Visible = True
+            PCEndStore.Visible = True
 
-            Size = New Size(445, 320)
+            Size = New Size(445, 383)
         End If
     End Sub
 End Class

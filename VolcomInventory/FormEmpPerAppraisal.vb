@@ -15,7 +15,7 @@ Public Class FormEmpPerAppraisal
         End If
 
         Dim query As String = "
-            SELECT tb.*
+            (SELECT tb.*
             FROM (
 	            SELECT emp.id_departement, dept.departement, dept.id_employee_head, dept.employee_head_name, dept.employee_head_email,
 		            emp.id_employee_status, stt.employee_status,
@@ -32,7 +32,9 @@ Public Class FormEmpPerAppraisal
 		            DATE_FORMAT((jdate.end_period - INTERVAL 45 DAY), '%d %M %Y') start_evaluation_date,
 		            DATE_FORMAT((jdate.end_period - INTERVAL 45 DAY) + INTERVAL 3 DAY, '%d %M %Y') end_evaluation_date,
 		            IF(TIMESTAMPDIFF(DAY, ((jdate.end_period - INTERVAL 45 DAY)), DATE(CURDATE())) = 0, 1, 0) now,
-		            TIMESTAMPDIFF(DAY, ((jdate.end_period - INTERVAL 45 DAY) + INTERVAL 3 DAY), DATE(CURDATE())) late
+		            TIMESTAMPDIFF(DAY, ((jdate.end_period - INTERVAL 45 DAY) + INTERVAL 3 DAY), DATE(CURDATE())) late,
+                    DATE_FORMAT(emp.start_period, '%d %M %Y') c_start_period,
+		            DATE_FORMAT(emp.end_period, '%d %M %Y') c_end_period
 	            FROM tb_m_employee emp
 	            LEFT JOIN (
 		            SELECT d.id_departement, d.departement, e.id_employee id_employee_head, e.employee_name employee_head_name, e.email_lokal employee_head_email
@@ -56,7 +58,7 @@ Public Class FormEmpPerAppraisal
 				            DATE_ADD(employee_join_date, INTERVAL (TIMESTAMPDIFF(YEAR, employee_join_date, DATE(CURDATE()))) YEAR) first_evaluation_start,
 				            DATE_ADD(DATE_ADD(employee_join_date, INTERVAL (TIMESTAMPDIFF(YEAR, employee_join_date, DATE(CURDATE()))) YEAR), INTERVAL 6 MONTH) - INTERVAL 1 DAY first_evaluation_end,
 				            DATE_ADD(DATE_ADD(employee_join_date, INTERVAL (TIMESTAMPDIFF(YEAR, employee_join_date, DATE(CURDATE()))) YEAR), INTERVAL 6 MONTH) second_evaluation_start,
-				            DATE_ADD(DATE_ADD(employee_join_date, INTERVAL (TIMESTAMPDIFF(YEAR, employee_join_date, DATE(CURDATE()))) YEAR), INTERVAL 12 MONTH) - INTERVAL 1 DAY second_evaluation_end
+				            DATE_ADD(DATE_ADD(employee_join_date, INTERVAL (TIMESTAMPDIFF(YEAR, employee_join_date, DATE(CURDATE()))) YEAR), INTERVAL 12 MONTH) second_evaluation_end
 			            FROM tb_m_employee
 		            ) j ON e.id_employee = j.id_employee
 	            ) jdate ON emp.id_employee = jdate.id_employee
@@ -64,8 +66,39 @@ Public Class FormEmpPerAppraisal
 	            LEFT JOIN tb_lookup_question_status qps ON qp.id_question_status = qps.id_question_status
 	            WHERE emp.id_employee_active = 1 AND (CURDATE() >= (jdate.end_period - INTERVAL 45 DAY) AND CURDATE() <= jdate.end_period) AND dept.id_employee_head <> emp.id_employee " + where_dephead + "
             ) tb
-            WHERE tb.id_question_status <> 3
-            ORDER BY tb.id_employee ASC
+            WHERE tb.id_question_status <> 3 AND tb.id_departement NOT IN (22, 30, 31, 32)
+            ORDER BY tb.id_employee ASC)
+
+            UNION
+
+            (SELECT emp.id_departement, dept.departement, dept.id_employee_head, dept.employee_head_name, dept.employee_head_email,
+            emp.id_employee_status, stt.employee_status,
+            emp.id_employee, emp.employee_code, emp.employee_name,
+            emp.employee_position, emp.id_employee_level, lvl.employee_level, IF(lvl.grup_penilaian = 0, 1, lvl.grup_penilaian) grup_penilaian,
+            0 id_question_period, 1 id_question_status, 'Kontrak Habis' status,
+            0 appraiser_check,
+            '' appraiser_check_date,
+            0 hrd_check,
+            '' hrd_check_date,
+            DATE_FORMAT(emp.employee_join_date, '%d %M %Y') employee_join_date,
+            DATE_FORMAT((DATE_ADD(emp.start_period, INTERVAL 6 MONTH)), '%d %M %Y') start_period,
+            DATE_FORMAT((DATE_ADD(emp.start_period, INTERVAL 12 MONTH) - INTERVAL 1 DAY), '%d %M %Y') end_period,
+            DATE_FORMAT((emp.end_period - INTERVAL 45 DAY), '%d %M %Y') start_evaluation_date,
+            DATE_FORMAT((emp.end_period - INTERVAL 45 DAY) + INTERVAL 3 DAY, '%d %M %Y') end_evaluation_date,
+            IF(TIMESTAMPDIFF(DAY, ((emp.end_period - INTERVAL 45 DAY)), DATE(CURDATE())) = 0, 1, 0) now,
+            TIMESTAMPDIFF(DAY, ((emp.end_period - INTERVAL 45 DAY) + INTERVAL 3 DAY), DATE(CURDATE())) late,
+            DATE_FORMAT(emp.start_period, '%d %M %Y') c_start_period,
+            DATE_FORMAT(emp.end_period, '%d %M %Y') c_end_period
+            FROM tb_m_employee AS emp
+            LEFT JOIN (
+                SELECT d.id_departement, d.departement, e.id_employee id_employee_head, e.employee_name employee_head_name, e.email_lokal employee_head_email
+                FROM tb_m_departement d
+                LEFT JOIN tb_m_user u ON d.id_user_head = u.id_user
+                LEFT JOIN tb_m_employee e ON u.id_employee = e.id_employee
+            ) dept ON dept.id_departement = emp.id_departement 
+            LEFT JOIN tb_lookup_employee_status stt ON stt.id_employee_status = emp.id_employee_status 
+            LEFT JOIN tb_lookup_employee_level lvl ON lvl.id_employee_level = emp.id_employee_level
+            WHERE emp.end_period <= CURDATE() AND emp.id_employee_active = 1 AND emp.id_departement NOT IN (22, 30, 31, 32))
         "
 
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
@@ -120,6 +153,12 @@ Public Class FormEmpPerAppraisal
     Private Sub FormEmpPerAppraisal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         load_employee()
         load_history()
+
+        If is_only_absensi Then
+            PCPick.Visible = True
+        Else
+            PCPick.Visible = False
+        End If
     End Sub
 
     Private Sub FormEmpPerAppraisal_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
@@ -134,6 +173,8 @@ Public Class FormEmpPerAppraisal
 
     Sub load_detail(GridView As DevExpress.XtraGrid.Views.BandedGrid.BandedGridView)
         If GridView.GetFocusedRowCellValue("id_employee") IsNot Nothing Then
+            FormEmpPerAppraisalDet.is_pick = False
+
             FormEmpPerAppraisalDet.is_dephead = is_dephead
             FormEmpPerAppraisalDet.is_hrd = is_hrd
 
@@ -174,5 +215,9 @@ Public Class FormEmpPerAppraisal
 
     Private Sub GVHistory_DoubleClick(sender As Object, e As EventArgs) Handles GVHistory.DoubleClick
         load_detail(GVHistory)
+    End Sub
+
+    Private Sub SBSearch_Click(sender As Object, e As EventArgs) Handles SBSearch.Click
+        FormEmpPerAppraisalPick.ShowDialog()
     End Sub
 End Class

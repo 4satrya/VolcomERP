@@ -69,7 +69,8 @@
 
         RowTotalAmount.Text = Decimal.Parse(total.ToString).ToString("N2")
 
-        load_mark_horz(report_mark_type, id_emp_uni_ex, "2", "1", XrTable1)
+        pre_load_mark_horz_plain_acc(report_mark_type, id_emp_uni_ex, "(                       )", "2", XrTable1)
+        'load_mark_horz(report_mark_type, id_emp_uni_ex, "2", "1", XrTable1)
     End Sub
 
     Private Sub GVData_CustomColumnDisplayText(sender As Object, e As DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs)

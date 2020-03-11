@@ -104,11 +104,11 @@ Public Class FormEmpUniExpenseDet
         DEStart.Properties.ReadOnly = True
         DEEnd.Properties.ReadOnly = True
 
-        If check_print_report_status(id_report_status) Then
-            BtnPrint.Enabled = True
-        Else
-            BtnPrint.Enabled = False
-        End If
+        'If check_print_report_status(id_report_status) Then
+        'BtnPrint.Enabled = True
+        'Else
+        'BtnPrint.Enabled = False
+        'End If
 
         If id_report_status > 1 Then
             BtnDraftJournal.Visible = False

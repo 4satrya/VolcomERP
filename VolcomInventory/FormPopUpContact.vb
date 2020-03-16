@@ -131,8 +131,50 @@
         End If
 
         If id_pop_up = "38" Then
-            query += "AND (tb_m_comp.id_comp_cat = '5' OR tb_m_comp.id_comp_cat = '6') AND tb_m_comp.is_active=1 "
+            If FormSalesOrderDet.is_transfer_data = "2" Then
+                query += "AND (tb_m_comp.id_comp_cat = '5' OR tb_m_comp.id_comp_cat = '6') AND tb_m_comp.is_active=1 AND tb_m_comp.is_only_for_alloc=2 "
+            Else
+                query += "AND tb_m_comp.is_active=1 AND tb_m_comp.id_wh_group='" + FormSalesOrderDet.SLEAccount.EditValue.ToString + "' "
+            End If
         End If
+
+        If id_pop_up = "62" Then
+            If FormSalesOrderDet.is_transfer_data = "2" Then
+                query += "AND tb_m_comp.is_only_for_alloc=2 "
+            Else
+                query += "AND tb_m_comp.id_wh_group='" + FormSalesOrderDet.SLEAccount.EditValue.ToString + "' "
+            End If
+        End If
+
+        If id_pop_up = "82" Then
+            query += "AND tb_m_comp.is_only_for_alloc=2 "
+        End If
+
+        If id_pop_up = "43" Then
+            query += "AND tb_m_comp.is_only_for_alloc=2 "
+        End If
+
+        If id_pop_up = "69" Then
+            query += "AND tb_m_comp.is_only_for_alloc=2 "
+        End If
+
+        If id_pop_up = "70" Then
+            query += "AND tb_m_comp.is_only_for_alloc=2 "
+        End If
+
+        If id_pop_up = "71" Then
+            query += "AND tb_m_comp.is_only_for_alloc=2 "
+        End If
+
+        If id_pop_up = "72" Then
+            query += "AND tb_m_comp.is_only_for_alloc=2 AND tb_m_comp.id_comp_cat!=6 "
+        End If
+
+        If id_pop_up = "87" Then
+            query += "AND tb_m_comp.is_only_for_alloc=2 "
+        End If
+
+
 
         If id_pop_up = "40" Then 'ret order ofline
             If FormSalesReturnOrderDet.is_ro_only_offline = "1" Then
@@ -143,9 +185,9 @@
         If id_pop_up = "41" Then
             Dim id_ret_type = FormSalesReturnDet.id_ret_type
             If id_ret_type = "3" Then 'return direct/khusus
-                query += "AND tb_m_comp.id_comp<>" + get_setup_field("wh_temp") + " "
+                query += "AND tb_m_comp.is_only_for_alloc=2 AND tb_m_comp.id_comp<>" + get_setup_field("wh_temp") + " "
             ElseIf id_ret_type = "1" Then 'return reguler
-                query += "AND tb_m_comp.id_comp=" + get_setup_field("wh_temp") + " "
+                query += "AND tb_m_comp.is_only_for_alloc=2  AND tb_m_comp.id_comp=" + get_setup_field("wh_temp") + " "
             End If
         End If
 

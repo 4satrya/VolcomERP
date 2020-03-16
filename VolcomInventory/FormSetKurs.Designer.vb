@@ -31,6 +31,7 @@ Partial Class FormSetKurs
         Me.GVKursTrans = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -125,7 +126,7 @@ Partial Class FormSetKurs
         '
         'GVKursTrans
         '
-        Me.GVKursTrans.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumn7})
+        Me.GVKursTrans.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn8, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumn7})
         Me.GVKursTrans.GridControl = Me.GCKursTrans
         Me.GVKursTrans.Name = "GVKursTrans"
         Me.GVKursTrans.OptionsBehavior.ReadOnly = True
@@ -139,14 +140,24 @@ Partial Class FormSetKurs
         '
         'GridColumn2
         '
-        Me.GridColumn2.Caption = "Datetime"
-        Me.GridColumn2.DisplayFormat.FormatString = "dd MMMM yyyy hh:mm"
+        Me.GridColumn2.Caption = "Period Start"
+        Me.GridColumn2.DisplayFormat.FormatString = "dd MMMM yyyy"
         Me.GridColumn2.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.GridColumn2.FieldName = "created_date"
+        Me.GridColumn2.FieldName = "period_start"
         Me.GridColumn2.Name = "GridColumn2"
         Me.GridColumn2.Visible = True
         Me.GridColumn2.VisibleIndex = 0
         Me.GridColumn2.Width = 134
+        '
+        'GridColumn8
+        '
+        Me.GridColumn8.Caption = "Period End"
+        Me.GridColumn8.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.GridColumn8.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn8.FieldName = "period_end"
+        Me.GridColumn8.Name = "GridColumn8"
+        Me.GridColumn8.Visible = True
+        Me.GridColumn8.VisibleIndex = 1
         '
         'GridColumn3
         '
@@ -154,7 +165,7 @@ Partial Class FormSetKurs
         Me.GridColumn3.FieldName = "employee_name"
         Me.GridColumn3.Name = "GridColumn3"
         Me.GridColumn3.Visible = True
-        Me.GridColumn3.VisibleIndex = 1
+        Me.GridColumn3.VisibleIndex = 2
         Me.GridColumn3.Width = 146
         '
         'GridColumn4
@@ -165,7 +176,7 @@ Partial Class FormSetKurs
         Me.GridColumn4.FieldName = "kurs_trans"
         Me.GridColumn4.Name = "GridColumn4"
         Me.GridColumn4.Visible = True
-        Me.GridColumn4.VisibleIndex = 2
+        Me.GridColumn4.VisibleIndex = 3
         Me.GridColumn4.Width = 167
         '
         'GridColumn5
@@ -176,7 +187,7 @@ Partial Class FormSetKurs
         Me.GridColumn5.FieldName = "fixed_floating"
         Me.GridColumn5.Name = "GridColumn5"
         Me.GridColumn5.Visible = True
-        Me.GridColumn5.VisibleIndex = 3
+        Me.GridColumn5.VisibleIndex = 4
         Me.GridColumn5.Width = 192
         '
         'GridColumn6
@@ -187,7 +198,7 @@ Partial Class FormSetKurs
         Me.GridColumn6.FieldName = "management_rate"
         Me.GridColumn6.Name = "GridColumn6"
         Me.GridColumn6.Visible = True
-        Me.GridColumn6.VisibleIndex = 4
+        Me.GridColumn6.VisibleIndex = 5
         Me.GridColumn6.Width = 213
         '
         'GridColumn7
@@ -197,7 +208,7 @@ Partial Class FormSetKurs
         Me.GridColumn7.FieldName = "attachment"
         Me.GridColumn7.Name = "GridColumn7"
         Me.GridColumn7.Visible = True
-        Me.GridColumn7.VisibleIndex = 5
+        Me.GridColumn7.VisibleIndex = 6
         '
         'RepositoryItemCheckEdit
         '
@@ -250,4 +261,5 @@ Partial Class FormSetKurs
     Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn7 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RepositoryItemCheckEdit As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+    Friend WithEvents GridColumn8 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

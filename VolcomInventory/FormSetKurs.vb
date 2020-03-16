@@ -41,7 +41,7 @@
 
     Sub load_kurs()
         Dim query As String = "
-            SELECT kt.id_kurs_trans, kt.created_by, kt.created_date, kt.kurs_trans, kt.fixed_floating, (kt.kurs_trans + kt.fixed_floating) AS management_rate, IF(kt.created_by = 0, 'Automatic Get Kurs', emp.employee_name) AS employee_name
+            SELECT kt.id_kurs_trans, kt.created_by, kt.created_date AS period_start, DATE_ADD(kt.created_date, INTERVAL 6 DAY) AS period_end, kt.kurs_trans, kt.fixed_floating, (kt.kurs_trans + kt.fixed_floating) AS management_rate, IF(kt.created_by = 0, 'Automatic Get Kurs', emp.employee_name) AS employee_name
             FROM tb_kurs_trans kt 
             LEFT JOIN tb_m_user usr ON usr.id_user = kt.created_by 
             LEFT JOIN tb_m_employee emp ON emp.id_employee = usr.id_employee 
@@ -93,7 +93,7 @@
         If TEKurs.EditValue < 0 Then
             warningCustom("Please type kurs correctly")
         Else
-            Dim query As String = "INSERT INTO tb_kurs_trans(created_by,created_date,kurs_trans,fixed_floating) VALUES('" & id_user & "',NOW(),'" & decimalSQL(TEKurs.EditValue.ToString) & "','" & decimalSQL(TEFixFloating.EditValue.ToString) & "');
+            Dim query As String = "INSERT INTO tb_kurs_trans(created_by,created_date,kurs_trans,fixed_floating) VALUES('" & id_user & "',(DATE_SUB(NOW(), INTERVAL ((7 + WEEKDAY(DATE_SUB(NOW(), INTERVAL 1 WEEK)) - 2) % 7) DAY)),'" & decimalSQL(TEKurs.EditValue.ToString) & "','" & decimalSQL(TEFixFloating.EditValue.ToString) & "');
 UPDATE tb_opt SET rate_management='" & decimalSQL((TEKurs.EditValue + TEFixFloating.EditValue).ToString) & "'"
             execute_non_query(query, True, "", "", "", "'")
             load_kurs()

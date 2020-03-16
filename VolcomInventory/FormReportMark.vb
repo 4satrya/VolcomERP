@@ -2204,14 +2204,14 @@
                 cancel.cancelReservedStock(id_report)
             ElseIf id_status_reportx = "6" Then
                 'created transfer
+                'AND c.id_comp IN (SELECT id_comp FROM tb_wh_auto_trf) AND cf.id_comp IN (SELECT id_comp FROM tb_wh_auto_trf)
                 Dim qv As String = "SELECT so.id_warehouse_contact_to, so.id_store_contact_to, so.id_sales_order, c.id_drawer_def
                 FROM tb_sales_order so
                 INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = so.id_store_contact_to
                 INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp
                 INNER JOIN tb_m_comp_contact ccf ON ccf.id_comp_contact = so.id_warehouse_contact_to
                 INNER JOIN tb_m_comp cf ON cf.id_comp = ccf.id_comp
-                WHERE so.id_sales_order=" + id_report + " AND so.id_so_status=5
-                AND c.id_comp IN (SELECT id_comp FROM tb_wh_auto_trf) AND cf.id_comp IN (SELECT id_comp FROM tb_wh_auto_trf) "
+                WHERE so.id_sales_order=" + id_report + " AND so.id_so_status=5 AND so.is_transfer_data=1 "
                 Dim dtv As DataTable = execute_query(qv, -1, True, "", "", "", "")
                 If dtv.Rows.Count > 0 Then
                     For m As Integer = 0 To dtv.Rows.Count - 1
@@ -2307,6 +2307,10 @@
             End Try
         ElseIf report_mark_type = "41" Then
             'FG Adj In
+            If id_status_reportx = "3" Then
+                id_status_reportx = "6"
+            End If
+
             If id_status_reportx = 6 Then 'completed
                 'Dim query_cancel As String = "SELECT * FROM tb_adj_in_fg a "
                 'query_cancel += "INNER JOIN tb_adj_in_fg_det b ON a.id_adj_in_fg = b.id_adj_in_fg "
@@ -2356,6 +2360,10 @@ WHERE a.id_adj_in_fg = '" & id_report & "'"
             End Try
         ElseIf report_mark_type = "42" Then
             'FG Adj Out
+            If id_status_reportx = "3" Then
+                id_status_reportx = "6"
+            End If
+
             Cursor = Cursors.WaitCursor
             If id_status_reportx = 5 Then 'Cancel
                 'Dim query_cancel As String = "SELECT * FROM tb_adj_out_fg a "
@@ -3595,7 +3603,7 @@ WHERE a.id_adj_in_fg = '" & id_report & "'"
                 FROM tb_sales_order so
                 INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = so.id_store_contact_to
                 INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp
-                WHERE so.id_sales_order_gen=" + id_report + " AND so.id_so_status=5 AND c.is_only_for_alloc=1 "
+                WHERE so.id_sales_order_gen=" + id_report + " AND so.id_so_status=5 AND so.is_transfer_data=1 "
                 Dim dtv As DataTable = execute_query(qv, -1, True, "", "", "", "")
                 If dtv.Rows.Count > 0 Then
                     For m As Integer = 0 To dtv.Rows.Count - 1
@@ -5216,6 +5224,7 @@ WHERE a.id_adj_in_fg = '" & id_report & "'"
                 INNER JOIN tb_item_coa o ON o.id_item_cat=i.id_item_cat AND o.id_departement=req.id_departement
                 WHERE rd.id_purc_rec=" + id_report + " AND cat.id_expense_type=1 AND i.id_item_type='2'
                 GROUP BY rd.id_purc_rec,dep.id_main_comp,reqd.ship_to
+                HAVING debit>0 OR credit>0
                 UNION ALL
                 /*total value item inventory tanpa diskon*/
                 SELECT " + id_acc_trans + ",o.acc_coa_receive AS `id_acc`, dep.id_main_comp,  SUM(rd.qty) AS `qty`,

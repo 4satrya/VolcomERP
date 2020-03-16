@@ -154,7 +154,7 @@ Public Class FormEmpPerAppraisal
         load_employee()
         load_history()
 
-        If is_only_absensi Then
+        If is_hrd = "1" Then
             PCPick.Visible = True
         Else
             PCPick.Visible = False

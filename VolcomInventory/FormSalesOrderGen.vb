@@ -336,8 +336,21 @@
                             PBC.Properties.Step = 1
                         End If
                         For i As Integer = 0 To data_main_view.Rows.Count - 1
-                            Dim query_so_main As String = "INSERT INTO tb_sales_order(id_sales_order_gen, id_store_contact_to, id_warehouse_contact_to, sales_order_number, sales_order_date, sales_order_note, id_so_type, id_so_status, id_report_status, id_prepare_status, id_user_created) "
-                            query_so_main += "VALUES('" + id_sales_order_gen + "', '" + data_main_view.Rows(i)("id_comp_contact_to").ToString + "', '" + data_main_view.Rows(i)("id_comp_contact_from").ToString + "', '', NOW(), '', '" + data_main_view.Rows(i)("id_so_type").ToString + "', '" + data_main_view.Rows(i)("id_so_status").ToString + "', '1','1', '" + id_user + "'); SELECT LAST_INSERT_ID(); "
+                            'cek transfer data ato bukan
+                            Dim qct As String = "SELECT * 
+                            FROM tb_m_comp_contact cc
+                            INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp
+                            WHERE cc.id_comp_contact='" + data_main_view.Rows(i)("id_comp_contact_to").ToString + "' AND c.is_only_for_alloc=1 AND c.id_wh_group=getCompByContact(" + data_main_view.Rows(i)("id_comp_contact_from").ToString + ", 1) "
+                            Dim dct As DataTable = execute_query(qct, -1, True, "", "", "", "")
+                            Dim is_transfer_data As String = ""
+                            If dct.Rows.Count > 0 Then
+                                is_transfer_data = "1"
+                            Else
+                                is_transfer_data = "2"
+                            End If
+
+                            Dim query_so_main As String = "INSERT INTO tb_sales_order(id_sales_order_gen, id_store_contact_to, id_warehouse_contact_to, sales_order_number, sales_order_date, sales_order_note, id_so_type, id_so_status, id_report_status, id_prepare_status, id_user_created, is_transfer_data) "
+                            query_so_main += "VALUES('" + id_sales_order_gen + "', '" + data_main_view.Rows(i)("id_comp_contact_to").ToString + "', '" + data_main_view.Rows(i)("id_comp_contact_from").ToString + "', '', NOW(), '', '" + data_main_view.Rows(i)("id_so_type").ToString + "', '" + data_main_view.Rows(i)("id_so_status").ToString + "', '1','1', '" + id_user + "', '" + is_transfer_data + "'); SELECT LAST_INSERT_ID(); "
                             Dim id_so_created As String = execute_query(query_so_main, 0, True, "", "", "", "")
 
                             'insert detail

@@ -58,13 +58,14 @@
             CONCAT(p.product_full_code,tc.fg_trf_det_counting), sod.id_design_price, sod.design_price, 1, 1, NOW() 
             FROM tb_fg_trf_det td
             INNER JOIN tb_fg_trf t ON t.id_fg_trf = td.id_fg_trf
+            INNER JOIN tb_sales_order so ON so.id_sales_order = t.id_sales_order
             INNER JOIN tb_fg_trf_det_counting tc ON tc.id_fg_trf_det = td.id_fg_trf_det
             INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact =  t.id_comp_contact_to
             INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp
             INNER JOIN tb_m_product p ON p.id_product = td.id_product
             INNER JOIN tb_m_design d ON d.id_design = p.id_design
             INNER JOIN tb_sales_order_det sod ON sod.id_sales_order_det = td.id_sales_order_det
-            WHERE t.id_fg_trf=" + id_report_par + " AND d.is_old_design=2  AND t.is_use_unique_code=1 "
+            WHERE t.id_fg_trf=" + id_report_par + " AND d.is_old_design=2  AND t.is_use_unique_code=1 AND so.is_transfer_data=2 "
             execute_non_query(query_unique, True, "", "", "", "")
 
             'save unreg unique
@@ -77,13 +78,14 @@
             CONCAT(p.product_full_code,tc.fg_trf_det_counting), sod.id_design_price, sod.design_price, 1, 1, NOW() 
             FROM tb_fg_trf_det td
             INNER JOIN tb_fg_trf t ON t.id_fg_trf = td.id_fg_trf
+            INNER JOIN tb_sales_order so ON so.id_sales_order = t.id_sales_order
             INNER JOIN tb_fg_trf_det_counting tc ON tc.id_fg_trf_det = td.id_fg_trf_det
             INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact =  t.id_comp_contact_from
             INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp
             INNER JOIN tb_m_product p ON p.id_product = td.id_product
             INNER JOIN tb_m_design d ON d.id_design = p.id_design
             INNER JOIN tb_sales_order_det sod ON sod.id_sales_order_det = td.id_sales_order_det
-            WHERE t.id_fg_trf=" + id_report_par + " AND d.is_old_design=2  AND t.is_use_unique_code=1 "
+            WHERE t.id_fg_trf=" + id_report_par + " AND d.is_old_design=2  AND t.is_use_unique_code=1 AND so.is_transfer_data=2 "
             execute_non_query(query_cancel, True, "", "", "", "")
         End If
         Dim query As String = String.Format("UPDATE tb_fg_trf SET id_report_status='{0}', id_report_status_rec = '" + id_status_reportx_par + "', last_update=NOW(), last_update_by=" + id_user + " WHERE id_fg_trf ='{1}'", id_status_reportx_par, id_report_par)

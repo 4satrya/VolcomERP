@@ -1246,6 +1246,7 @@
                 FROM tb_m_employee_salary AS sal
                 LEFT JOIN tb_m_employee AS emp ON sal.id_employee = emp.id_employee
                 LEFT JOIN tb_m_departement AS dep ON emp.id_departement = dep.id_departement
+                WHERE sal.effective_date <= IF(dep.is_store = 2, (SELECT periode_end FROM tb_emp_payroll WHERE id_payroll = " + GVPayrollPeriode.GetFocusedRowCellValue("id_payroll").ToString + "), (SELECT store_periode_end FROM tb_emp_payroll WHERE id_payroll = " + GVPayrollPeriode.GetFocusedRowCellValue("id_payroll").ToString + "))
                 ORDER BY sal.id_employee_salary DESC, sal.effective_date DESC
             ) AS tb
             GROUP BY id_employee

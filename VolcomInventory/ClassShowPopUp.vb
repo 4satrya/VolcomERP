@@ -110,10 +110,10 @@
             FormViewJournal.Close()
         ElseIf report_mark_type = "41" Then
             'Adj In Fg
-            FormFGAdjInDet.Close()
+            FormViewFGAdjIn.Close()
         ElseIf report_mark_type = "42" Then
             'Adj Out Fg
-            FormFGAdjOutDet.Close()
+            FormViewFGAdjOut.Close()
         ElseIf report_mark_type = "44" Then
             'non production MRS
             FormViewMatMRS.Close()

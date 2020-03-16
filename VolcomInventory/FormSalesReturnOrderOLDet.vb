@@ -468,7 +468,7 @@
 
     Private Sub TxtWHCode_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtWHCode.KeyDown
         If e.KeyCode = Keys.Enter Then
-            Dim data As DataTable = get_company_by_code(addSlashes(TxtWHCode.Text), "AND comp.id_comp_cat=5 AND comp.is_active=1 ")
+            Dim data As DataTable = get_company_by_code(addSlashes(TxtWHCode.Text), "AND comp.is_only_for_alloc=2 AND comp.id_comp_cat=5 AND comp.is_active=1 ")
             If data.Rows.Count = 0 Then
                 stopCustom("Account not found !")
                 resetWH(True)

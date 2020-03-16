@@ -21,6 +21,7 @@ Public Class FormSalesOrderDet
     Public id_wh_type As String = "-1"
     Public id_account_type As String = "-1"
     Dim is_block_same_nw As String = get_setup_field("is_block_same_nw")
+    Public is_transfer_data As String = "2"
 
     Private Sub FormSalesOrderDet_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         id_type = FormSalesOrder.id_type
@@ -39,6 +40,18 @@ Public Class FormSalesOrderDet
 
 
         WindowState = FormWindowState.Maximized
+    End Sub
+
+    Sub viewWH()
+        Cursor = Cursors.WaitCursor
+        Dim query As String = ""
+        query += "SELECT er.id_comp, er.comp_number, er.comp_name, CONCAT_WS(' - ', er.comp_number, er.comp_name) AS comp_name_label 
+        FROM tb_m_comp e 
+        INNER JOIN tb_m_comp er ON er.id_comp = e.id_wh_group
+        WHERE e.is_only_for_alloc=1
+        GROUP BY e.id_wh_group  "
+        viewSearchLookupQuery(SLEAccount, query, "id_comp", "comp_name_label", "id_comp")
+        Cursor = Cursors.Default
     End Sub
 
     Private Sub getDataReference()
@@ -63,6 +76,16 @@ Public Class FormSalesOrderDet
             viewDetail(id_sales_order)
             noEdit()
             check_but()
+
+            'trf data
+            If is_transfer_data = "1" Then
+                GroupControlAlloc.Visible = True
+                viewWH()
+                LEOrderType.ItemIndex = LEOrderType.Properties.GetDataSourceRowIndex("id_order_type", "3")
+                LEOrderType.Enabled = False
+                LEStatusSO.ItemIndex = LEStatusSO.Properties.GetDataSourceRowIndex("id_so_status", "5")
+                LEStatusSO.Enabled = False
+            End If
         ElseIf action = "upd" Then
             GVItemList.OptionsBehavior.AutoExpandAllGroups = True
             BMark.Enabled = True
@@ -384,8 +407,8 @@ Public Class FormSalesOrderDet
                     Cursor = Cursors.WaitCursor
                     sales_order_number = ""
                     'Main tbale
-                    Dim query As String = "INSERT INTO tb_sales_order(id_store_contact_to, id_warehouse_contact_to, sales_order_number, sales_order_date, sales_order_note, id_so_type, id_report_status, id_so_status, id_user_created, id_emp_uni_period, id_uni_type, sales_order_ol_shop_number, sales_order_ol_shop_date) "
-                    query += "VALUES('" + id_store_contact_to + "', '" + id_comp_contact_par + "', '" + sales_order_number + "', NOW(), '" + sales_order_note + "', '" + id_so_type + "', '" + id_report_status + "', '" + id_so_status + "', '" + id_user + "'," + id_emp_uni_period + ", " + id_uni_type + ",'" + sales_order_ol_shop_number + "', " + sales_order_ol_shop_date + "); SELECT LAST_INSERT_ID(); "
+                    Dim query As String = "INSERT INTO tb_sales_order(id_store_contact_to, id_warehouse_contact_to, sales_order_number, sales_order_date, sales_order_note, id_so_type, id_report_status, id_so_status, id_user_created, id_emp_uni_period, id_uni_type, sales_order_ol_shop_number, sales_order_ol_shop_date, is_transfer_data) "
+                    query += "VALUES('" + id_store_contact_to + "', '" + id_comp_contact_par + "', '" + sales_order_number + "', NOW(), '" + sales_order_note + "', '" + id_so_type + "', '" + id_report_status + "', '" + id_so_status + "', '" + id_user + "'," + id_emp_uni_period + ", " + id_uni_type + ",'" + sales_order_ol_shop_number + "', " + sales_order_ol_shop_date + ", '" + is_transfer_data + "'); SELECT LAST_INSERT_ID(); "
                     id_sales_order = execute_query(query, 0, True, "", "", "", "")
 
                     'insert who prepared
@@ -739,7 +762,13 @@ Public Class FormSalesOrderDet
     Private Sub TxtCodeCompTo_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtCodeCompTo.KeyDown
         If e.KeyCode = Keys.Enter Then
             Dim id_so_type As String = LETypeSO.EditValue.ToString
-            Dim query_cond As String = "AND (comp.id_comp_cat=5 OR comp.id_comp_cat=6) AND comp.is_active=1 "
+            Dim query_cond As String = ""
+            If is_transfer_data = "2" Then
+                query_cond = "AND (comp.id_comp_cat=5 OR comp.id_comp_cat=6) AND comp.is_active=1 AND comp.is_only_for_alloc=2 "
+            Else
+                Dim id_wh_parent As String = SLEAccount.EditValue.ToString
+                query_cond = "AND comp.is_active=1 AND comp.id_wh_group='" + id_wh_parent + "' "
+            End If
             Dim data As DataTable = get_company_by_code(TxtCodeCompTo.Text, query_cond)
             If data.Rows.Count = 0 Then
                 stopCustom("Account not found!")
@@ -835,7 +864,13 @@ Public Class FormSalesOrderDet
 
     Private Sub TxtWHCodeTo_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtWHCodeTo.KeyDown
         If e.KeyCode = Keys.Enter Then
-            Dim data As DataTable = get_company_by_code(TxtWHCodeTo.Text, "AND id_comp_cat = '" + id_comp_cat_wh + "' AND comp.is_active=1 ")
+            Dim condwh As String = ""
+            If is_transfer_data = "2" Then
+                condwh = "AND id_comp_cat = '" + id_comp_cat_wh + "' AND comp.is_active=1 AND comp.is_only_for_alloc=2 "
+            Else
+                condwh = "AND comp.is_active=1 AND comp.id_wh_group='" + SLEAccount.EditValue.ToString + "' "
+            End If
+            Dim data As DataTable = get_company_by_code(TxtWHCodeTo.Text, condwh)
             If data.Rows.Count = 0 Then
                 stopCustom("Warehouse not found!")
                 viewDetail("-1")

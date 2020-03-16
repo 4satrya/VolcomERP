@@ -99,6 +99,7 @@ Partial Class FormEmpPayrollEmp
         Me.BPickAll.Size = New System.Drawing.Size(191, 33)
         Me.BPickAll.TabIndex = 2
         Me.BPickAll.Text = "Insert All Eligible Employee"
+        Me.BPickAll.Visible = False
         '
         'BCancel
         '

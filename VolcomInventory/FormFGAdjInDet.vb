@@ -235,11 +235,12 @@
             Dim id_report_status As String = LEReportStatus.EditValue
             Dim succes As Boolean = False
             Dim adj_in_fg_total As String = decimalSQL(GVDetail.Columns("adj_in_fg_det_amount").SummaryItem.SummaryValue.ToString)
+            Dim retail_price_total As String = decimalSQL(GVDetail.Columns("retail_price_amount").SummaryItem.SummaryValue.ToString)
             Dim id_currency As String = LECurrency.EditValue.ToString
             If action = "ins" Then
                 'Main table
-                query = "INSERT INTO tb_adj_in_fg(adj_in_fg_number, adj_in_fg_date, adj_in_fg_note, id_report_status, adj_in_fg_total, id_currency) "
-                query += "VALUES('" + adj_in_fg_number + "', NOW(), '" + adj_in_fg_note + "', '" + id_report_status + "', '" + adj_in_fg_total + "', '" + id_currency + "'); SELECT LAST_INSERT_ID(); "
+                query = "INSERT INTO tb_adj_in_fg(adj_in_fg_number, adj_in_fg_date, adj_in_fg_note, id_report_status, adj_in_fg_total, id_currency, retail_price_total) "
+                query += "VALUES('" + adj_in_fg_number + "', NOW(), '" + adj_in_fg_note + "', '" + id_report_status + "', '" + adj_in_fg_total + "', '" + id_currency + "', '" + retail_price_total + "'); SELECT LAST_INSERT_ID(); "
                 id_adj_in_fg = execute_query(query, 0, True, "", "", "", "")
                 'MsgBox(id_product_return)
 
@@ -249,7 +250,7 @@
                 submit_who_prepared("41", id_adj_in_fg, id_user)
 
                 'detail table
-                query = "INSERT tb_adj_in_fg_det(id_adj_in_fg, adj_in_fg_det_note, adj_in_fg_det_qty, id_wh_drawer, id_product, adj_in_fg_det_price) "
+                query = "INSERT tb_adj_in_fg_det(id_adj_in_fg, adj_in_fg_det_note, adj_in_fg_det_qty, id_wh_drawer, id_product, adj_in_fg_det_price, retail_price) "
                 query += "VALUES "
 
                 For i As Integer = 0 To GVDetail.RowCount - 1
@@ -259,12 +260,13 @@
                     Dim id_wh_drawer As String = GVDetail.GetRowCellValue(i, "id_wh_drawer").ToString
                     Dim id_product As String = GVDetail.GetRowCellValue(i, "id_product").ToString
                     Dim adj_in_fg_det_price As String = decimalSQL(GVDetail.GetRowCellValue(i, "adj_in_fg_det_price").ToString)
+                    Dim retail_price As String = decimalSQL(GVDetail.GetRowCellValue(i, "retail_price").ToString)
 
                     'INSERT TB DETAIL
                     If Not i = 0 Then
                         query += ","
                     End If
-                    query += "('" + id_adj_in_fg + "','" + adj_in_fg_det_note + "', '" + adj_in_fg_det_qty + "', '" + id_wh_drawer + "', '" + id_product + "', '" + adj_in_fg_det_price + "') "
+                    query += "('" + id_adj_in_fg + "','" + adj_in_fg_det_note + "', '" + adj_in_fg_det_qty + "', '" + id_wh_drawer + "', '" + id_product + "', '" + adj_in_fg_det_price + "', '" + retail_price + "') "
                     'Catch ex As Exception
                     'End Try
                 Next

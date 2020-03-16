@@ -349,4 +349,13 @@
             CancellOrderToolStripMenuItem1.Enabled = True
         End If
     End Sub
+
+    Private Sub BtnCreateNewAlloc_Click(sender As Object, e As EventArgs) Handles BtnCreateNewAlloc.Click
+        Cursor = Cursors.WaitCursor
+        FormSalesOrderDet.action = "ins"
+        FormSalesOrderDet.is_transfer_data = "1"
+        FormSalesOrderDet.id_sales_order = "-1"
+        FormSalesOrderDet.ShowDialog()
+        Cursor = Cursors.Default
+    End Sub
 End Class

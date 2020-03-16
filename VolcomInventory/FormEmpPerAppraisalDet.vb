@@ -212,18 +212,20 @@
         "
 
         Dim query_detail As String = "
-            SELECT SUM(tb.late) AS late, ABS(SUM(tb.minus_work)) AS minus_work
+            SELECT SUM(tb.late) AS late, ABS(SUM(tb.minus_work)) AS minus_work, SUM(tb.over) AS over
             FROM
             (
-	            SELECT tb.*, IF(tb.id_leave_type IS NULL, tb.over_break + tb.early_home, 0) AS minus_work
+	            SELECT tb.*, IF(tb.balance < 0, tb.balance, 0) AS minus_work
 	            FROM 
 	            (
-	                SELECT tb.*, IF(NOT ISNULL(tb.att_in) AND NOT ISNULL(tb.att_out), (tb.minutes_work - tb.over_break - tb.late + IF(tb.over < 0, tb.over, 0)), 0) AS work_hour
+	                SELECT tb.*, (tb.over - tb.late - tb.over_break) AS balance, IF(NOT ISNULL(tb.att_in) AND NOT ISNULL(tb.att_out), (tb.minutes_work - tb.over_break - tb.late + IF(tb.over < 0, tb.over, 0)), 0) AS work_hour
 	                FROM 
 	                (   
 		            SELECT ket.id_leave_type, ket.leave_type, sch.id_employee, sch.date, sch.in, sch.in_tolerance, IF(sch.id_schedule_type = '1', MIN(at_in.datetime), MIN(at_in_hol.datetime)) AS att_in, sch.out, IF(sch.id_schedule_type = '1', MAX(at_out.datetime), MAX(at_out_hol.datetime)) AS att_out, sch.break_out, MIN(at_brout.datetime) AS start_break, sch.break_in, MAX(at_brin.datetime) AS end_break, sch.minutes_work, sch.out_tolerance, 
                     IF(IF(MIN(at_in.datetime) > sch.in_tolerance, TIMESTAMPDIFF(MINUTE, sch.in_tolerance, MIN(at_in.datetime)), 0) - IF(lv.is_full_day = 1 OR ISNULL(lv.datetime_until), 0, IF(lv.datetime_until = sch.out, 0, lv.minutes_total + 60)) < 0, 0, IF(MIN(at_in.datetime) > sch.in_tolerance, TIMESTAMPDIFF(MINUTE, sch.in_tolerance,MIN(at_in.datetime)), 0) - IF(lv.is_full_day = 1 OR ISNULL(lv.datetime_until), 0, IF(lv.datetime_until = sch.out, 0, lv.minutes_total + 60))) AS late,
-                    IF(ket.id_leave_type IS NULL, IF(MIN(at_out.datetime) < sch.out, TIMESTAMPDIFF(MINUTE, MIN(at_out.datetime), sch.out), 0), 0) AS early_home, TIMESTAMPDIFF(MINUTE, sch.out, MAX(at_out.datetime)) AS over, IF(TIMESTAMPDIFF(MINUTE, MIN(at_brout.datetime), MAX(at_brin.datetime)) > TIMESTAMPDIFF(MINUTE, sch.break_out, sch.break_in), TIMESTAMPDIFF(MINUTE, MIN(at_brout.datetime), MAX(at_brin.datetime)) - TIMESTAMPDIFF(MINUTE, sch.break_out, sch.break_in), 0) AS over_break, TIMESTAMPDIFF(MINUTE, MIN(at_in.datetime), MAX(at_out.datetime)) AS actual_work_hour 
+                    IF(lv.is_full_day = 1, 0, IF(TIMESTAMPDIFF(MINUTE, sch.out, MAX(at_out.datetime)) + IF(lv.is_full_day = 1 OR ISNULL(lv.datetime_until), 0, IF(lv.datetime_start = sch.in_tolerance, 0, IF(lv.id_leave_type = 5 OR lv.id_leave_type = 6, lv.minutes_total, lv.minutes_total + 60))) < -(sch.out_tolerance), -(TIMESTAMPDIFF(MINUTE, sch.out, MAX(at_out.datetime)) + IF(lv.is_full_day = 1 OR ISNULL(lv.datetime_until), 0, IF(lv.datetime_start = sch.in_tolerance, 0, IF(lv.id_leave_type = 5 OR lv.id_leave_type = 6, lv.minutes_total, lv.minutes_total + 60)))), 0)) AS early_home,
+                    IF(lv.is_full_day = 1, 0, IF(TIMESTAMPDIFF(MINUTE, sch.out, MAX(at_out.datetime)) + IF(lv.is_full_day = 1 OR ISNULL(lv.datetime_until), 0, IF(lv.datetime_start = sch.in_tolerance, 0, IF(lv.id_leave_type = 5 OR lv.id_leave_type = 6, lv.minutes_total, lv.minutes_total + 60))) < -(sch.out_tolerance), TIMESTAMPDIFF(MINUTE, sch.out, MAX(at_out.datetime)) + IF(lv.is_full_day = 1 OR ISNULL(lv.datetime_until), 0, IF(lv.datetime_start = sch.in_tolerance, 0, IF(lv.id_leave_type = 5 OR lv.id_leave_type = 6, lv.minutes_total, lv.minutes_total + 60))), TIMESTAMPDIFF(MINUTE, sch.out, MAX(at_out.datetime)) + IF(lv.is_full_day = 1 OR ISNULL(lv.datetime_until), 0, IF(lv.datetime_start = sch.in_tolerance, 0, IF(lv.id_leave_type = 5 OR lv.id_leave_type = 6, lv.minutes_total, lv.minutes_total + 60))))) AS over,
+                    IF(TIMESTAMPDIFF(MINUTE, MIN(at_brout.datetime), MAX(at_brin.datetime)) > TIMESTAMPDIFF(MINUTE, sch.break_out, sch.break_in), TIMESTAMPDIFF(MINUTE, MIN(at_brout.datetime), MAX(at_brin.datetime)) - TIMESTAMPDIFF(MINUTE, sch.break_out, sch.break_in), 0) AS over_break, TIMESTAMPDIFF(MINUTE, MIN(at_in.datetime), MAX(at_out.datetime)) AS actual_work_hour 
 		            FROM tb_emp_schedule sch 
 		            LEFT JOIN tb_lookup_leave_type ket ON ket.id_leave_type = sch.id_leave_type 
 		            INNER JOIN tb_m_employee emp ON emp.id_employee = sch.id_employee 
@@ -318,6 +320,8 @@
         GVSummary.BestFitColumns()
 
         GCSummary.Height = (GVSummary.RowCount * 25) + 118
+
+        GCSQuestion.SummaryItem.DisplayFormat = "Kelebihan jam kerja: " + FormatNumber(data_detail.Rows(0)("over").ToString, 0)
 
         Dim query_lookup As String = "SELECT point FROM tb_lookup_question_point"
 
@@ -416,22 +420,22 @@
         End If
 
         If is_hrd = "1" Or id_question_status >= 2 Then
-            GCValue.OptionsColumn.AllowEdit = False
-            GCInformation.OptionsColumn.AllowEdit = False
-            GCConclusionResult.OptionsColumn.AllowEdit = False
-            SLUERec.Properties.ReadOnly = True
-            TERec.Properties.ReadOnly = True
-            MEEmployeeNote.Properties.ReadOnly = True
-            MEHRDNote.Properties.ReadOnly = False
-            GCPConclusionResult.OptionsColumn.AllowEdit = False
-            SLUERecPri.Properties.ReadOnly = True
-            TERecPri.Properties.ReadOnly = True
-            MEHRDNotePri.Properties.ReadOnly = False
-            RILUEValue.ReadOnly = True
+            'GCValue.OptionsColumn.AllowEdit = False
+            'GCInformation.OptionsColumn.AllowEdit = False
+            'GCConclusionResult.OptionsColumn.AllowEdit = False
+            'SLUERec.Properties.ReadOnly = True
+            'TERec.Properties.ReadOnly = True
+            'MEEmployeeNote.Properties.ReadOnly = True
+            'MEHRDNote.Properties.ReadOnly = False
+            'GCPConclusionResult.OptionsColumn.AllowEdit = False
+            'SLUERecPri.Properties.ReadOnly = True
+            'TERecPri.Properties.ReadOnly = True
+            'MEHRDNotePri.Properties.ReadOnly = False
+            'RILUEValue.ReadOnly = True
 
-            If hrd_check <> 0 Then
-                BtnSave.Enabled = False
-            End If
+            'If hrd_check <> 0 Then
+            '    BtnSave.Enabled = False
+            'End If
         End If
 
         If is_dephead = "1" Or id_question_status = 3 Then
@@ -448,7 +452,7 @@
             BtnPrint.Enabled = False
 
             If is_hrd = "1" Then
-                BtnSave.Enabled = False
+                'BtnSave.Enabled = False
             End If
         End If
 
@@ -834,6 +838,8 @@
         Report.XLGrandTotal.Text = FormatNumber(GVSummary.Columns("result").SummaryItem.SummaryValue, 2).ToString + GVSummary.Columns("result").SummaryItem.DisplayFormat.Replace("{0:N2}", "")
 
         Report.XLKategori.Text = GVSummary.Columns("max_value").SummaryItem.DisplayFormat
+
+        Report.XLOver.Text = GCSQuestion.SummaryItem.DisplayFormat
 
         Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
         Tool.ShowPreview()

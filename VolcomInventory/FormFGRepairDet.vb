@@ -136,7 +136,7 @@ Public Class FormFGRepairDet
 
     Private Sub TxtCodeCompFrom_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtCodeCompFrom.KeyDown
         If e.KeyCode = Keys.Enter Then
-            Dim query_cond As String = "AND comp.id_departement = '" + id_departement_user + "' "
+            Dim query_cond As String = "AND comp.id_departement = '" + id_departement_user + "' AND comp.is_only_for_alloc=2 AND comp.is_active=1 "
             Dim data As DataTable = get_company_by_code(TxtCodeCompFrom.Text, query_cond)
             If data.Rows.Count = 0 Then
                 stopCustom("Account not found!")
@@ -160,7 +160,7 @@ Public Class FormFGRepairDet
 
     Private Sub TxtCodeCompTo_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtCodeCompTo.KeyDown
         If e.KeyCode = Keys.Enter Then
-            Dim query_cond As String = "-1"
+            Dim query_cond As String = "AND comp.is_active=1 AND comp.is_only_for_alloc=2 "
             Dim data As DataTable = get_company_by_code(TxtCodeCompTo.Text, query_cond)
             If data.Rows.Count = 0 Then
                 stopCustom("Account not found!")
@@ -269,6 +269,7 @@ Public Class FormFGRepairDet
     Private Sub BtnBrowseFrom_Click(sender As Object, e As EventArgs) Handles BtnBrowseFrom.Click
         Cursor = Cursors.WaitCursor
         FormPopUpContact.id_pop_up = "69"
+        FormPopUpContact.is_must_active = "1"
         FormPopUpContact.id_departement = id_departement_user
         FormPopUpContact.ShowDialog()
         Cursor = Cursors.Default

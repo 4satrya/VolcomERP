@@ -447,7 +447,11 @@
                     Dim total_hours As String = GVAttendance.GetRowCellValue(i, "total_hours").ToString
                     Dim point_ot As String = GVAttendance.GetRowCellValue(i, "point_ot").ToString
 
-                    point_ot = If(to_salary = "1", calc_point(Decimal.Parse(total_hours), is_day_off, is_store), total_hours)
+                    If GVAttendance.GetRowCellValue(i, "id_departement_sub").ToString = "46" Then
+                        point_ot = If(to_salary = "1", calc_point(Decimal.Parse(total_hours), is_day_off, "1"), total_hours)
+                    Else
+                        point_ot = If(to_salary = "1", calc_point(Decimal.Parse(total_hours), is_day_off, is_store), total_hours)
+                    End If
 
                     GVAttendance.SetRowCellValue(i, "point_ot", point_ot)
                 End If

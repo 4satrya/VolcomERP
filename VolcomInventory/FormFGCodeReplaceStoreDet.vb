@@ -384,7 +384,7 @@
                     Dim id_pl As String = execute_query(query_ins_pl, 0, True, "", "", "", "")
 
                     'koleksi code unique
-                    Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`,`report_mark_type`,`unique_code`,
+                    Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`,`id_type`,`unique_code`,
                         `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
                         VALUES('" & GVBarcode.GetRowCellValue(i, "id_comp").ToString & "', '" & get_company_x(GVBarcode.GetRowCellValue(i, "id_comp").ToString, "11") & "', '" & GVBarcode.GetRowCellValue(i, "id_product").ToString & "', '" & id_pl & "', '12', 
                         '" & GVBarcode.GetRowCellValue(i, "unique_code").ToString & "', '" & GVBarcode.GetRowCellValue(i, "id_design_price").ToString & "', '" & GVBarcode.GetRowCellValue(i, "price").ToString & "', 1, 1, NOW())"

@@ -113,6 +113,13 @@ Partial Class FormSalesOrderDet
         Me.GroupUni = New DevExpress.XtraEditors.GroupControl()
         Me.LEUniType = New DevExpress.XtraEditors.LookUpEdit()
         Me.LEPeriodx = New DevExpress.XtraEditors.LookUpEdit()
+        Me.GroupControlAlloc = New DevExpress.XtraEditors.GroupControl()
+        Me.LabelControl12 = New DevExpress.XtraEditors.LabelControl()
+        Me.SLEAccount = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn31 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn32 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn33 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
         CType(Me.PanelControlTopLeft, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -158,6 +165,10 @@ Partial Class FormSalesOrderDet
         Me.GroupUni.SuspendLayout()
         CType(Me.LEUniType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LEPeriodx.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GroupControlAlloc, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupControlAlloc.SuspendLayout()
+        CType(Me.SLEAccount.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupGeneralHeader
@@ -167,7 +178,7 @@ Partial Class FormSalesOrderDet
         Me.GroupGeneralHeader.Controls.Add(Me.PanelControlTopMain)
         Me.GroupGeneralHeader.Controls.Add(Me.PanelControlTopRight)
         Me.GroupGeneralHeader.Dock = System.Windows.Forms.DockStyle.Top
-        Me.GroupGeneralHeader.Location = New System.Drawing.Point(0, 36)
+        Me.GroupGeneralHeader.Location = New System.Drawing.Point(0, 72)
         Me.GroupGeneralHeader.Name = "GroupGeneralHeader"
         Me.GroupGeneralHeader.Size = New System.Drawing.Size(896, 138)
         Me.GroupGeneralHeader.TabIndex = 183
@@ -731,9 +742,9 @@ Partial Class FormSalesOrderDet
         Me.GroupControlList.Controls.Add(Me.GCItemList)
         Me.GroupControlList.Controls.Add(Me.PanelControlNav)
         Me.GroupControlList.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GroupControlList.Location = New System.Drawing.Point(0, 174)
+        Me.GroupControlList.Location = New System.Drawing.Point(0, 210)
         Me.GroupControlList.Name = "GroupControlList"
-        Me.GroupControlList.Size = New System.Drawing.Size(896, 261)
+        Me.GroupControlList.Size = New System.Drawing.Size(896, 225)
         Me.GroupControlList.TabIndex = 184
         Me.GroupControlList.Text = "Item List"
         '
@@ -745,7 +756,7 @@ Partial Class FormSalesOrderDet
         Me.GCItemList.MainView = Me.GVItemList
         Me.GCItemList.Name = "GCItemList"
         Me.GCItemList.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemSpinEdit1})
-        Me.GCItemList.Size = New System.Drawing.Size(874, 222)
+        Me.GCItemList.Size = New System.Drawing.Size(874, 186)
         Me.GCItemList.TabIndex = 4
         Me.GCItemList.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVItemList})
         '
@@ -1149,7 +1160,7 @@ Partial Class FormSalesOrderDet
         Me.GroupUni.Controls.Add(Me.LEPeriodx)
         Me.GroupUni.Controls.Add(Me.LabelPeriod)
         Me.GroupUni.Dock = System.Windows.Forms.DockStyle.Top
-        Me.GroupUni.Location = New System.Drawing.Point(0, 0)
+        Me.GroupUni.Location = New System.Drawing.Point(0, 36)
         Me.GroupUni.Name = "GroupUni"
         Me.GroupUni.Size = New System.Drawing.Size(896, 36)
         Me.GroupUni.TabIndex = 182
@@ -1172,6 +1183,69 @@ Partial Class FormSalesOrderDet
         Me.LEPeriodx.Size = New System.Drawing.Size(172, 20)
         Me.LEPeriodx.TabIndex = 8901
         '
+        'GroupControlAlloc
+        '
+        Me.GroupControlAlloc.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupControlAlloc.Controls.Add(Me.SLEAccount)
+        Me.GroupControlAlloc.Controls.Add(Me.LabelControl12)
+        Me.GroupControlAlloc.Dock = System.Windows.Forms.DockStyle.Top
+        Me.GroupControlAlloc.Location = New System.Drawing.Point(0, 0)
+        Me.GroupControlAlloc.Name = "GroupControlAlloc"
+        Me.GroupControlAlloc.Size = New System.Drawing.Size(896, 36)
+        Me.GroupControlAlloc.TabIndex = 187
+        Me.GroupControlAlloc.Visible = False
+        '
+        'LabelControl12
+        '
+        Me.LabelControl12.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl12.Location = New System.Drawing.Point(31, 11)
+        Me.LabelControl12.Name = "LabelControl12"
+        Me.LabelControl12.Size = New System.Drawing.Size(74, 13)
+        Me.LabelControl12.TabIndex = 8895
+        Me.LabelControl12.Text = "Parent Account"
+        '
+        'SLEAccount
+        '
+        Me.SLEAccount.Location = New System.Drawing.Point(121, 8)
+        Me.SLEAccount.Name = "SLEAccount"
+        Me.SLEAccount.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SLEAccount.Properties.Appearance.Options.UseFont = True
+        Me.SLEAccount.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEAccount.Properties.ShowClearButton = False
+        Me.SLEAccount.Properties.View = Me.GridView2
+        Me.SLEAccount.Size = New System.Drawing.Size(319, 20)
+        Me.SLEAccount.TabIndex = 8929
+        '
+        'GridView2
+        '
+        Me.GridView2.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn31, Me.GridColumn32, Me.GridColumn33})
+        Me.GridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView2.Name = "GridView2"
+        Me.GridView2.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView2.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn31
+        '
+        Me.GridColumn31.Caption = "Id Comp"
+        Me.GridColumn31.FieldName = "id_comp"
+        Me.GridColumn31.Name = "GridColumn31"
+        '
+        'GridColumn32
+        '
+        Me.GridColumn32.Caption = "Account"
+        Me.GridColumn32.FieldName = "comp_number"
+        Me.GridColumn32.Name = "GridColumn32"
+        Me.GridColumn32.Visible = True
+        Me.GridColumn32.VisibleIndex = 0
+        '
+        'GridColumn33
+        '
+        Me.GridColumn33.Caption = "Description"
+        Me.GridColumn33.FieldName = "comp_name_label"
+        Me.GridColumn33.Name = "GridColumn33"
+        Me.GridColumn33.Visible = True
+        Me.GridColumn33.VisibleIndex = 1
+        '
         'FormSalesOrderDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1182,6 +1256,7 @@ Partial Class FormSalesOrderDet
         Me.Controls.Add(Me.PanelControl3)
         Me.Controls.Add(Me.GroupGeneralHeader)
         Me.Controls.Add(Me.GroupUni)
+        Me.Controls.Add(Me.GroupControlAlloc)
         Me.MinimizeBox = False
         Me.Name = "FormSalesOrderDet"
         Me.ShowInTaskbar = False
@@ -1238,6 +1313,11 @@ Partial Class FormSalesOrderDet
         Me.GroupUni.PerformLayout()
         CType(Me.LEUniType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LEPeriodx.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GroupControlAlloc, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupControlAlloc.ResumeLayout(False)
+        Me.GroupControlAlloc.PerformLayout()
+        CType(Me.SLEAccount.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1333,4 +1413,11 @@ Partial Class FormSalesOrderDet
     Friend WithEvents BtnExportAsFile As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents TxtOrderType As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LEOrderType As DevExpress.XtraEditors.LookUpEdit
+    Friend WithEvents GroupControlAlloc As DevExpress.XtraEditors.GroupControl
+    Friend WithEvents LabelControl12 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents SLEAccount As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView2 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn31 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn32 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn33 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

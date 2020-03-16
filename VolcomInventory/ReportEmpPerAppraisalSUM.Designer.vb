@@ -35,8 +35,12 @@ Partial Public Class ReportEmpPerAppraisalSUM
         Me.TopMargin = New DevExpress.XtraReports.UI.TopMarginBand()
         Me.BottomMargin = New DevExpress.XtraReports.UI.BottomMarginBand()
         Me.ReportHeader = New DevExpress.XtraReports.UI.ReportHeaderBand()
+        Me.SubBandTitle = New DevExpress.XtraReports.UI.SubBand()
+        Me.XrLine2 = New DevExpress.XtraReports.UI.XRLine()
         Me.XLTitle = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel12 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.SubBand2 = New DevExpress.XtraReports.UI.SubBand()
+        Me.XLNote = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel2 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel7 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XLComp = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel11 = New DevExpress.XtraReports.UI.XRLabel()
@@ -51,7 +55,7 @@ Partial Public Class ReportEmpPerAppraisalSUM
         Me.XrLabel8 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel3 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XLPurpose = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel2 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLine1 = New DevExpress.XtraReports.UI.XRLine()
         Me.XLJoinDate = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel20 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel19 = New DevExpress.XtraReports.UI.XRLabel()
@@ -61,17 +65,14 @@ Partial Public Class ReportEmpPerAppraisalSUM
         Me.XrLabel13 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XLStatus = New DevExpress.XtraReports.UI.XRLabel()
         Me.XLPeriod = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLine1 = New DevExpress.XtraReports.UI.XRLine()
-        Me.XrLine2 = New DevExpress.XtraReports.UI.XRLine()
-        Me.SubBandTitle = New DevExpress.XtraReports.UI.SubBand()
-        Me.SubBand2 = New DevExpress.XtraReports.UI.SubBand()
-        Me.XLNote = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel12 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XLOver = New DevExpress.XtraReports.UI.XRLabel()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         '
         'Detail
         '
-        Me.Detail.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel25, Me.XLKategori, Me.XrLabel27, Me.XrLabel24, Me.XLGrandTotal, Me.XPResume, Me.XrLabel1, Me.XrLabel21, Me.XrLabel17, Me.XrLabel16, Me.XrLabel22, Me.XrLabel23})
-        Me.Detail.HeightF = 111.9815!
+        Me.Detail.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XLOver, Me.XrLabel25, Me.XLKategori, Me.XrLabel27, Me.XrLabel24, Me.XLGrandTotal, Me.XPResume, Me.XrLabel1, Me.XrLabel21, Me.XrLabel17, Me.XrLabel16, Me.XrLabel22, Me.XrLabel23})
+        Me.Detail.HeightF = 128.9816!
         Me.Detail.Name = "Detail"
         Me.Detail.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
         Me.Detail.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
@@ -254,6 +255,20 @@ Partial Public Class ReportEmpPerAppraisalSUM
         Me.ReportHeader.Name = "ReportHeader"
         Me.ReportHeader.SubBands.AddRange(New DevExpress.XtraReports.UI.SubBand() {Me.SubBandTitle, Me.SubBand2})
         '
+        'SubBandTitle
+        '
+        Me.SubBandTitle.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLine2, Me.XLTitle})
+        Me.SubBandTitle.HeightF = 40.00001!
+        Me.SubBandTitle.Name = "SubBandTitle"
+        '
+        'XrLine2
+        '
+        Me.XrLine2.LineWidth = 2
+        Me.XrLine2.LocationFloat = New DevExpress.Utils.PointFloat(0!, 20.00001!)
+        Me.XrLine2.Name = "XrLine2"
+        Me.XrLine2.SizeF = New System.Drawing.SizeF(750.0!, 20.0!)
+        Me.XrLine2.StylePriority.UseBorderWidth = False
+        '
         'XLTitle
         '
         Me.XLTitle.Font = New System.Drawing.Font("Arial", 13.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -266,18 +281,37 @@ Partial Public Class ReportEmpPerAppraisalSUM
         Me.XLTitle.Text = "SUMMARY PENILAIAN INDIVIDU KARYAWAN"
         Me.XLTitle.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter
         '
-        'XrLabel12
+        'SubBand2
         '
-        Me.XrLabel12.AutoWidth = True
-        Me.XrLabel12.Font = New System.Drawing.Font("Arial", 8.0!)
-        Me.XrLabel12.LocationFloat = New DevExpress.Utils.PointFloat(99.99979!, 74.99999!)
-        Me.XrLabel12.Name = "XrLabel12"
-        Me.XrLabel12.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel12.SizeF = New System.Drawing.SizeF(18.74997!, 13.0!)
-        Me.XrLabel12.StylePriority.UseFont = False
-        Me.XrLabel12.StylePriority.UseTextAlignment = False
-        Me.XrLabel12.Text = ":"
-        Me.XrLabel12.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+        Me.SubBand2.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XLNote, Me.XrLabel2, Me.XrLabel7, Me.XLComp, Me.XrLabel11, Me.XrLabel6, Me.XLDept, Me.XrLabel10, Me.XrLabel5, Me.XLPosition, Me.XrLabel9, Me.XrLabel4, Me.XLNama, Me.XrLabel8, Me.XrLabel3, Me.XLPurpose, Me.XrLine1, Me.XLJoinDate, Me.XrLabel20, Me.XrLabel19, Me.XrLabel18, Me.XrLabel15, Me.XrLabel14, Me.XrLabel13, Me.XLStatus, Me.XLPeriod, Me.XrLabel12})
+        Me.SubBand2.HeightF = 108.0016!
+        Me.SubBand2.Name = "SubBand2"
+        '
+        'XLNote
+        '
+        Me.XLNote.AutoWidth = True
+        Me.XLNote.Font = New System.Drawing.Font("Arial", 8.0!)
+        Me.XLNote.LocationFloat = New DevExpress.Utils.PointFloat(381.2489!, 74.99999!)
+        Me.XLNote.Name = "XLNote"
+        Me.XLNote.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XLNote.SizeF = New System.Drawing.SizeF(368.7514!, 13.0!)
+        Me.XLNote.StylePriority.UseFont = False
+        Me.XLNote.StylePriority.UseTextAlignment = False
+        Me.XLNote.Text = "*periode"
+        Me.XLNote.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+        '
+        'XrLabel2
+        '
+        Me.XrLabel2.AutoWidth = True
+        Me.XrLabel2.Font = New System.Drawing.Font("Arial", 8.0!, System.Drawing.FontStyle.Bold)
+        Me.XrLabel2.LocationFloat = New DevExpress.Utils.PointFloat(0!, 0!)
+        Me.XrLabel2.Name = "XrLabel2"
+        Me.XrLabel2.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel2.SizeF = New System.Drawing.SizeF(146.875!, 13.0!)
+        Me.XrLabel2.StylePriority.UseFont = False
+        Me.XrLabel2.StylePriority.UseTextAlignment = False
+        Me.XrLabel2.Text = "A. DATA KARYAWAN"
+        Me.XrLabel2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
         '
         'XrLabel7
         '
@@ -456,18 +490,12 @@ Partial Public Class ReportEmpPerAppraisalSUM
         Me.XLPurpose.StylePriority.UseTextAlignment = False
         Me.XLPurpose.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
         '
-        'XrLabel2
+        'XrLine1
         '
-        Me.XrLabel2.AutoWidth = True
-        Me.XrLabel2.Font = New System.Drawing.Font("Arial", 8.0!, System.Drawing.FontStyle.Bold)
-        Me.XrLabel2.LocationFloat = New DevExpress.Utils.PointFloat(0!, 0!)
-        Me.XrLabel2.Name = "XrLabel2"
-        Me.XrLabel2.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel2.SizeF = New System.Drawing.SizeF(146.875!, 13.0!)
-        Me.XrLabel2.StylePriority.UseFont = False
-        Me.XrLabel2.StylePriority.UseTextAlignment = False
-        Me.XrLabel2.Text = "A. DATA KARYAWAN"
-        Me.XrLabel2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+        Me.XrLine1.LineWidth = 2
+        Me.XrLine1.LocationFloat = New DevExpress.Utils.PointFloat(0.00002649095!, 88.00159!)
+        Me.XrLine1.Name = "XrLine1"
+        Me.XrLine1.SizeF = New System.Drawing.SizeF(750.0!, 20.0!)
         '
         'XLJoinDate
         '
@@ -583,45 +611,37 @@ Partial Public Class ReportEmpPerAppraisalSUM
         Me.XLPeriod.StylePriority.UseTextAlignment = False
         Me.XLPeriod.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
         '
-        'XrLine1
+        'XrLabel12
         '
-        Me.XrLine1.LineWidth = 2
-        Me.XrLine1.LocationFloat = New DevExpress.Utils.PointFloat(0.00002649095!, 88.00159!)
-        Me.XrLine1.Name = "XrLine1"
-        Me.XrLine1.SizeF = New System.Drawing.SizeF(750.0!, 20.0!)
+        Me.XrLabel12.AutoWidth = True
+        Me.XrLabel12.Font = New System.Drawing.Font("Arial", 8.0!)
+        Me.XrLabel12.LocationFloat = New DevExpress.Utils.PointFloat(99.99979!, 74.99999!)
+        Me.XrLabel12.Name = "XrLabel12"
+        Me.XrLabel12.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel12.SizeF = New System.Drawing.SizeF(18.74997!, 13.0!)
+        Me.XrLabel12.StylePriority.UseFont = False
+        Me.XrLabel12.StylePriority.UseTextAlignment = False
+        Me.XrLabel12.Text = ":"
+        Me.XrLabel12.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
         '
-        'XrLine2
+        'XLOver
         '
-        Me.XrLine2.LineWidth = 2
-        Me.XrLine2.LocationFloat = New DevExpress.Utils.PointFloat(0!, 20.00001!)
-        Me.XrLine2.Name = "XrLine2"
-        Me.XrLine2.SizeF = New System.Drawing.SizeF(750.0!, 20.0!)
-        Me.XrLine2.StylePriority.UseBorderWidth = False
-        '
-        'SubBandTitle
-        '
-        Me.SubBandTitle.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLine2, Me.XLTitle})
-        Me.SubBandTitle.HeightF = 40.00001!
-        Me.SubBandTitle.Name = "SubBandTitle"
-        '
-        'SubBand2
-        '
-        Me.SubBand2.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XLNote, Me.XrLabel2, Me.XrLabel7, Me.XLComp, Me.XrLabel11, Me.XrLabel6, Me.XLDept, Me.XrLabel10, Me.XrLabel5, Me.XLPosition, Me.XrLabel9, Me.XrLabel4, Me.XLNama, Me.XrLabel8, Me.XrLabel3, Me.XLPurpose, Me.XrLine1, Me.XLJoinDate, Me.XrLabel20, Me.XrLabel19, Me.XrLabel18, Me.XrLabel15, Me.XrLabel14, Me.XrLabel13, Me.XLStatus, Me.XLPeriod, Me.XrLabel12})
-        Me.SubBand2.HeightF = 108.0016!
-        Me.SubBand2.Name = "SubBand2"
-        '
-        'XLNote
-        '
-        Me.XLNote.AutoWidth = True
-        Me.XLNote.Font = New System.Drawing.Font("Arial", 8.0!)
-        Me.XLNote.LocationFloat = New DevExpress.Utils.PointFloat(381.2489!, 74.99999!)
-        Me.XLNote.Name = "XLNote"
-        Me.XLNote.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XLNote.SizeF = New System.Drawing.SizeF(368.7514!, 13.0!)
-        Me.XLNote.StylePriority.UseFont = False
-        Me.XLNote.StylePriority.UseTextAlignment = False
-        Me.XLNote.Text = "*periode"
-        Me.XLNote.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+        Me.XLOver.BackColor = System.Drawing.Color.Black
+        Me.XLOver.BorderColor = System.Drawing.Color.Black
+        Me.XLOver.BorderWidth = 2.0!
+        Me.XLOver.Font = New System.Drawing.Font("Arial", 8.0!, System.Drawing.FontStyle.Bold)
+        Me.XLOver.ForeColor = System.Drawing.Color.White
+        Me.XLOver.LocationFloat = New DevExpress.Utils.PointFloat(0.00002649095!, 111.9815!)
+        Me.XLOver.Name = "XLOver"
+        Me.XLOver.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XLOver.SizeF = New System.Drawing.SizeF(749.9995!, 17.00001!)
+        Me.XLOver.StylePriority.UseBackColor = False
+        Me.XLOver.StylePriority.UseBorderColor = False
+        Me.XLOver.StylePriority.UseBorderWidth = False
+        Me.XLOver.StylePriority.UseFont = False
+        Me.XLOver.StylePriority.UseForeColor = False
+        Me.XLOver.StylePriority.UseTextAlignment = False
+        Me.XLOver.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         '
         'ReportEmpPerAppraisalSUM
         '
@@ -679,4 +699,5 @@ Partial Public Class ReportEmpPerAppraisalSUM
     Friend WithEvents SubBandTitle As DevExpress.XtraReports.UI.SubBand
     Friend WithEvents SubBand2 As DevExpress.XtraReports.UI.SubBand
     Friend WithEvents XLNote As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents XLOver As DevExpress.XtraReports.UI.XRLabel
 End Class

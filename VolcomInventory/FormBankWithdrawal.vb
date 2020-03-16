@@ -237,7 +237,6 @@ LEFT JOIN
 	GROUP BY pyd.id_report
 )payment_pending ON payment_pending.id_report=po.id_purc_order
 WHERE 1=1 " & where_string & " {query_active} GROUP BY po.id_purc_order " & having_string
-
         If XTPPOList.SelectedTabPageIndex = 0 Then
             'active
             query = query.Replace("{query_active}", "AND po.is_active_payment = 1")

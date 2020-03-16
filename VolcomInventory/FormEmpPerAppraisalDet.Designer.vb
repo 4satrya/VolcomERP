@@ -894,7 +894,7 @@ Partial Class FormEmpPerAppraisalDet
         Me.GroupControl11.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupControl11.Location = New System.Drawing.Point(0, 380)
         Me.GroupControl11.Name = "GroupControl11"
-        Me.GroupControl11.Size = New System.Drawing.Size(794, 150)
+        Me.GroupControl11.Size = New System.Drawing.Size(811, 150)
         Me.GroupControl11.TabIndex = 4
         Me.GroupControl11.Text = "Catatan HRD"
         '
@@ -904,13 +904,13 @@ Partial Class FormEmpPerAppraisalDet
         Me.MEHRDNotePri.EditValue = ""
         Me.MEHRDNotePri.Location = New System.Drawing.Point(2, 20)
         Me.MEHRDNotePri.Name = "MEHRDNotePri"
-        Me.MEHRDNotePri.Size = New System.Drawing.Size(772, 128)
+        Me.MEHRDNotePri.Size = New System.Drawing.Size(789, 128)
         Me.MEHRDNotePri.TabIndex = 0
         '
         'PanelControl4
         '
         Me.PanelControl4.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PanelControl4.Location = New System.Drawing.Point(774, 20)
+        Me.PanelControl4.Location = New System.Drawing.Point(791, 20)
         Me.PanelControl4.Name = "PanelControl4"
         Me.PanelControl4.Size = New System.Drawing.Size(18, 128)
         Me.PanelControl4.TabIndex = 2
@@ -922,7 +922,7 @@ Partial Class FormEmpPerAppraisalDet
         Me.GroupControl10.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupControl10.Location = New System.Drawing.Point(0, 300)
         Me.GroupControl10.Name = "GroupControl10"
-        Me.GroupControl10.Size = New System.Drawing.Size(794, 80)
+        Me.GroupControl10.Size = New System.Drawing.Size(811, 80)
         Me.GroupControl10.TabIndex = 2
         Me.GroupControl10.Text = "Rekomendasi Penilai"
         '
@@ -980,7 +980,7 @@ Partial Class FormEmpPerAppraisalDet
         Me.GroupControl9.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupControl9.Location = New System.Drawing.Point(0, 0)
         Me.GroupControl9.Name = "GroupControl9"
-        Me.GroupControl9.Size = New System.Drawing.Size(794, 300)
+        Me.GroupControl9.Size = New System.Drawing.Size(811, 300)
         Me.GroupControl9.TabIndex = 1
         Me.GroupControl9.Text = "B. Komentar"
         '
@@ -991,7 +991,7 @@ Partial Class FormEmpPerAppraisalDet
         Me.GCComment.MainView = Me.GVComment
         Me.GCComment.Name = "GCComment"
         Me.GCComment.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemMemoEdit1})
-        Me.GCComment.Size = New System.Drawing.Size(772, 278)
+        Me.GCComment.Size = New System.Drawing.Size(789, 278)
         Me.GCComment.TabIndex = 1
         Me.GCComment.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVComment})
         '
@@ -1052,7 +1052,7 @@ Partial Class FormEmpPerAppraisalDet
         '
         Me.PanelControl6.Controls.Add(Me.TEPriCon)
         Me.PanelControl6.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PanelControl6.Location = New System.Drawing.Point(774, 20)
+        Me.PanelControl6.Location = New System.Drawing.Point(791, 20)
         Me.PanelControl6.Name = "PanelControl6"
         Me.PanelControl6.Size = New System.Drawing.Size(18, 278)
         Me.PanelControl6.TabIndex = 4
@@ -1133,6 +1133,7 @@ Partial Class FormEmpPerAppraisalDet
         Me.GCSQuestion.FieldName = "question"
         Me.GCSQuestion.Name = "GCSQuestion"
         Me.GCSQuestion.OptionsColumn.AllowEdit = False
+        Me.GCSQuestion.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "question", "Over: 0")})
         Me.GCSQuestion.Visible = True
         Me.GCSQuestion.VisibleIndex = 0
         '

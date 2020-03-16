@@ -11,4 +11,10 @@
             pre_load_mark_horz("159", id_withdrawal, "2", "2", XrTable1)
         End If
     End Sub
+
+    Private Sub GVList_CustomColumnDisplayText(sender As Object, e As DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs) Handles GVList.CustomColumnDisplayText
+        If e.Column.FieldName = "no" Then
+            e.DisplayText = (e.ListSourceRowIndex + 1).ToString()
+        End If
+    End Sub
 End Class

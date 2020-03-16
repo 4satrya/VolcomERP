@@ -2961,6 +2961,7 @@ Public Class FormImportExcel
                                 .code = If(y1 Is Nothing, "0", y1("product_full_code")),
                                 .name = If(y1 Is Nothing, "0", y1("product_name")),
                                 .qty = table1("qty"),
+                            .retail_price = table1("retail_price"),
                                 .design_cop = If(y1 Is Nothing, "0", y1("design_cop")),
                                 .id_comp = FormFGAdjInDet.id_comp,
                                 .comp = FormFGAdjInDet.comp_name,
@@ -2989,6 +2990,7 @@ Public Class FormImportExcel
             GVData.Columns("name").Caption = "Description"
             GVData.Columns("qty").Caption = "Qty"
             GVData.Columns("design_cop").Caption = "Cost"
+            GVData.Columns("retail_price").Caption = "Retail Price"
             GVData.Columns("comp").Caption = "Warehouse"
             GVData.Columns("locator").Caption = "Locator"
             GVData.Columns("rack").Caption = "Rack"
@@ -2998,6 +3000,8 @@ Public Class FormImportExcel
             GVData.Columns("qty").DisplayFormat.FormatString = "N0"
             GVData.Columns("design_cop").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
             GVData.Columns("design_cop").DisplayFormat.FormatString = "N2"
+            GVData.Columns("retail_price").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+            GVData.Columns("retail_price").DisplayFormat.FormatString = "N0"
         ElseIf id_pop_up = "48" Then
             'vendor code 
             Dim queryx As String = "SELECT p.id_product,p.product_full_code,p.product_name,dsg.design_cop, cd.code_detail_name AS `size`
@@ -3021,6 +3025,7 @@ Public Class FormImportExcel
                                 .name = If(y1 Is Nothing, "0", y1("product_name")),
                                 .size = If(y1 Is Nothing, "0", y1("size")),
                                 .qty = table1("qty"),
+                                .retail_price = table1("retail_price"),
                                 .design_cop = If(y1 Is Nothing, "0", y1("design_cop")),
                                 .id_comp = FormFGAdjOutDet.id_comp,
                                 .comp = FormFGAdjOutDet.comp_name,
@@ -3050,6 +3055,7 @@ Public Class FormImportExcel
             GVData.Columns("size").Caption = "Size"
             GVData.Columns("qty").Caption = "Qty"
             GVData.Columns("design_cop").Caption = "Cost"
+            GVData.Columns("retail_price").Caption = "Retail Price"
             GVData.Columns("comp").Caption = "Warehouse"
             GVData.Columns("locator").Caption = "Locator"
             GVData.Columns("rack").Caption = "Rack"
@@ -3059,6 +3065,8 @@ Public Class FormImportExcel
             GVData.Columns("qty").DisplayFormat.FormatString = "N0"
             GVData.Columns("design_cop").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
             GVData.Columns("design_cop").DisplayFormat.FormatString = "N2"
+            GVData.Columns("retail_price").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+            GVData.Columns("retail_price").DisplayFormat.FormatString = "N0"
         End If
         data_temp.Dispose()
         oledbconn.Close()
@@ -5156,8 +5164,10 @@ Public Class FormImportExcel
                             R("uom") = "pcs"
                             R("code") = GVData.GetRowCellValue(i, "code").ToString
                             R("adj_in_fg_det_qty") = Decimal.Parse(GVData.GetRowCellValue(i, "qty").ToString)
+                            R("retail_price") = Decimal.Parse(GVData.GetRowCellValue(i, "retail_price").ToString)
                             R("adj_in_fg_det_price") = Decimal.Parse(GVData.GetRowCellValue(i, "design_cop").ToString)
                             R("adj_in_fg_det_amount") = Decimal.Parse(GVData.GetRowCellValue(i, "qty").ToString) * Decimal.Parse(GVData.GetRowCellValue(i, "design_cop").ToString)
+                            R("retail_price_amount") = Decimal.Parse(GVData.GetRowCellValue(i, "qty").ToString) * Decimal.Parse(GVData.GetRowCellValue(i, "retail_price").ToString)
                             R("adj_in_fg_det_note") = GVData.GetRowCellValue(i, "note").ToString
                             R("id_wh_drawer") = GVData.GetRowCellValue(i, "id_drawer").ToString
                             R("id_wh_rack") = GVData.GetRowCellValue(i, "id_rack").ToString
@@ -5197,8 +5207,10 @@ Public Class FormImportExcel
                             R("uom") = "pcs"
                             R("code") = GVData.GetRowCellValue(i, "code").ToString
                             R("adj_out_fg_det_qty") = Decimal.Parse(GVData.GetRowCellValue(i, "qty").ToString)
+                            R("retail_price") = Decimal.Parse(GVData.GetRowCellValue(i, "retail_price").ToString)
                             R("adj_out_fg_det_price") = Decimal.Parse(GVData.GetRowCellValue(i, "design_cop").ToString)
                             R("adj_out_fg_det_amount") = Decimal.Parse(GVData.GetRowCellValue(i, "qty").ToString) * Decimal.Parse(GVData.GetRowCellValue(i, "design_cop").ToString)
+                            R("retail_price_amount") = Decimal.Parse(GVData.GetRowCellValue(i, "qty").ToString) * Decimal.Parse(GVData.GetRowCellValue(i, "retail_price").ToString)
                             R("adj_out_fg_det_note") = GVData.GetRowCellValue(i, "note").ToString
                             R("id_wh_drawer") = GVData.GetRowCellValue(i, "id_drawer").ToString
                             R("id_wh_rack") = GVData.GetRowCellValue(i, "id_rack").ToString

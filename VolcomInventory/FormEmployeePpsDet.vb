@@ -926,6 +926,11 @@
 
             If confirm = Windows.Forms.DialogResult.Yes Then
                 save("")
+
+                If CType(sender, DevExpress.XtraEditors.SimpleButton).Name = "SBSaveUpdateSalary" Then
+                    FormProposeEmpSalaryDet.id_employee_pps = id_pps
+                    FormProposeEmpSalaryDet.ShowDialog()
+                End If
             End If
         End If
     End Sub
@@ -2428,9 +2433,6 @@
     End Sub
 
     Private Sub SBSaveUpdateSalary_Click(sender As Object, e As EventArgs) Handles SBSaveUpdateSalary.Click
-        SBSave_Click(SBSave, New EventArgs)
-
-        FormProposeEmpSalaryDet.id_employee_pps = id_pps
-        FormProposeEmpSalaryDet.ShowDialog()
+        SBSave_Click(SBSaveUpdateSalary, New EventArgs)
     End Sub
 End Class

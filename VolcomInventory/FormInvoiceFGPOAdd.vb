@@ -8,14 +8,14 @@
     End Sub
 
     Private Sub BPick_Click(sender As Object, e As EventArgs) Handles BPick.Click
-        Try
-            Dim newRow As DataRow = (TryCast(FormInvoiceFGPODP.GCList.DataSource, DataTable)).NewRow()
+        'Try
+        Dim newRow As DataRow = (TryCast(FormInvoiceFGPODP.GCList.DataSource, DataTable)).NewRow()
             '
             If SLEReportType.EditValue.ToString = "22" Then
                 newRow("id_prod_order") = SLEReport.EditValue.ToString
             Else
-                newRow("id_prod_order") = SLEReport.Properties.View.GetFocusedRowCellValue("id_prod_order").ToString
-            End If
+            newRow("id_prod_order") = SLEReport.Properties.View.GetFocusedRowCellValue("id_prod_order").ToString
+        End If
             newRow("id_report") = SLEReport.EditValue.ToString
 
             newRow("report_mark_type") = SLEReportType.EditValue.ToString
@@ -33,10 +33,10 @@
 
             TryCast(FormInvoiceFGPODP.GCList.DataSource, DataTable).Rows.Add(newRow)
             FormInvoiceFGPODP.calculate()
-        Catch ex As Exception
-            MsgBox(ex.ToString)
-        End Try
-        Close()
+            'Catch ex As Exception
+            '    MsgBox(ex.ToString)
+            'End Try
+            Close()
     End Sub
 
     Sub load_kurs()
@@ -101,7 +101,7 @@ INNER JOIN tb_m_design dsg ON dsg.`id_design`=pdd.`id_design`
 WHERE po.`id_report_status`='6'
 GROUP BY po.`id_prod_order`"
         ElseIf SLEReportType.EditValue.ToString = "13" Then 'material
-            query = "SELECT po.`id_mat_purc` AS id_report,po.`mat_purc_number` AS report_number,GROUP_CONCAT(TRIM(md.mat_det_name) SEPARATOR '\n') AS description,c.comp_name AS info
+            query = "SELECT po.`id_mat_purc` AS id_report,0 AS id_prod_order,po.`mat_purc_number` AS report_number,GROUP_CONCAT(TRIM(md.mat_det_name) SEPARATOR '\n') AS description,c.comp_name AS info
 ,po.id_currency,po.mat_purc_kurs as kurs,po.mat_purc_vat as vat,SUM(pod.mat_purc_det_price*pod.mat_purc_det_qty) as po_val
 FROM tb_mat_purc_det pod 
 INNER JOIN tb_m_mat_det_price mdp ON mdp.id_mat_det_price=pod.id_mat_det_price

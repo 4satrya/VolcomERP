@@ -58,7 +58,7 @@
         End If
 
         Dim stc As New ClassPurcItemStock()
-        Dim query As String = stc.queryGetStock(cond, date_until_selected)
+        Dim query As String = stc.queryGetStock(cond, "0", date_until_selected)
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
         'data

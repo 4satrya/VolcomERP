@@ -67,7 +67,6 @@
     End Sub
 
     Sub viewData()
-        Cursor = Cursors.WaitCursor
         'filter grup
         Dim id_comp_group As String = SLEStoreGroup.EditValue.ToString
         Dim cond_group As String = ""
@@ -121,7 +120,9 @@
             cond_period = "AND (sp.sales_pos_end_period>='" + date_from_selected + "' AND sp.sales_pos_end_period<='" + date_until_selected + "') "
         End If
 
-        Dim query As String = "SELECT 'no' AS is_check,sp.is_close_rec_payment,sp.`id_sales_pos`,sp.sales_pos_note,sp.`sales_pos_number`,sp.`id_memo_type`,typ.`memo_type`,typ.`is_receive_payment`,sp.`sales_pos_date`,sp.`id_store_contact_from`, c.id_comp,c.comp_number,c.`comp_name`, cg.comp_group,sp.`sales_pos_due_date`, sp.`sales_pos_start_period`, sp.`sales_pos_end_period`
+        If XTCInvTrack.SelectedTabPageIndex = 0 Then
+            Cursor = Cursors.WaitCursor
+            Dim query As String = "SELECT 'no' AS is_check,sp.is_close_rec_payment,sp.`id_sales_pos`,sp.sales_pos_note,sp.`sales_pos_number`,sp.`id_memo_type`,typ.`memo_type`,typ.`is_receive_payment`,sp.`sales_pos_date`,sp.`id_store_contact_from`, c.id_comp,c.comp_number,c.`comp_name`, cg.comp_group,sp.`sales_pos_due_date`, sp.`sales_pos_start_period`, sp.`sales_pos_end_period`
             ,sp.`sales_pos_total`,sp.`sales_pos_discount`,sp.`sales_pos_vat`,sp.`sales_pos_potongan`, sp.sales_pos_total_qty, IFNULL(pyd.`value`,0.00) AS total_rec, 
             IFNULL(pyd.`value`,0.00) - CAST(IF(typ.`is_receive_payment`=2,-1,1) * ((sp.`sales_pos_total`*((100-sp.sales_pos_discount)/100))-sp.`sales_pos_potongan`) AS DECIMAL(15,2)) AS total_due,
             CAST(IF(typ.`is_receive_payment`=2,-1,1) * ((sp.`sales_pos_total`*((100-sp.sales_pos_discount)/100))-sp.`sales_pos_potongan`) AS DECIMAL(15,2)) AS amount
@@ -214,9 +215,60 @@
             GROUP BY sp.`id_sales_pos` 
             HAVING 1=1 " + cond_having + "
             ORDER BY id_sales_pos ASC "
-        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
-        GCUnpaid.DataSource = data
-        Cursor = Cursors.Default
+            Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+            GCUnpaid.DataSource = data
+            Cursor = Cursors.Default
+        Else
+            Cursor = Cursors.WaitCursor
+
+            'overdue
+            Dim cond_ovd As String = ""
+            If id_status = "3" Then
+                cond_ovd = "AND DATEDIFF(NOW(),sp.sales_pos_due_date)>0 "
+            End If
+
+            Dim query As String = "SELECT sp.is_close_rec_payment, cg.id_comp_group,cg.comp_group, cg.description AS `comp_group_desc`,
+            SUM(sp.`sales_pos_total`) AS `sales_pos_total`, IFNULL(pyd.`value`,0.00) AS total_rec, 
+            IFNULL(pyd.`value`,0.00) - SUM(CAST(IF(typ.`is_receive_payment`=2,-1,1) * ((sp.`sales_pos_total`*((100-sp.sales_pos_discount)/100))-sp.`sales_pos_potongan`) AS DECIMAL(15,2))) AS total_due,
+            SUM(CAST(IF(typ.`is_receive_payment`=2,-1,1) * ((sp.`sales_pos_total`*((100-sp.sales_pos_discount)/100))-sp.`sales_pos_potongan`) AS DECIMAL(15,2))) AS amount
+            FROM tb_sales_pos sp 
+            INNER JOIN tb_m_comp_contact cc ON cc.`id_comp_contact`= IF(sp.id_memo_type=8 OR sp.id_memo_type=9, sp.id_comp_contact_bill,sp.`id_store_contact_from`)
+            INNER JOIN tb_lookup_report_mark_type rmt ON rmt.report_mark_type=sp.report_mark_type
+            INNER JOIN tb_m_comp c ON c.`id_comp`=cc.`id_comp`
+            INNER JOIN tb_m_comp_group cg ON cg.id_comp_group = c.id_comp_group
+            INNER JOIN tb_lookup_memo_type typ ON typ.`id_memo_type`=sp.`id_memo_type`
+            LEFT JOIN (
+	            SELECT c.id_comp_group, SUM(pyd.value) AS  `value`
+	            FROM tb_rec_payment_det pyd
+	            INNER JOIN tb_rec_payment py ON py.`id_rec_payment`=pyd.`id_rec_payment`
+                INNER JOIN tb_sales_pos sp ON sp.id_sales_pos = pyd.id_report AND sp.report_mark_type = pyd.report_mark_type
+                INNER JOIN tb_m_comp_contact cc ON cc.`id_comp_contact`= IF(sp.id_memo_type=8 OR sp.id_memo_type=9, sp.id_comp_contact_bill,sp.`id_store_contact_from`)
+                INNER JOIN tb_lookup_report_mark_type rmt ON rmt.report_mark_type=sp.report_mark_type
+                INNER JOIN tb_m_comp c ON c.`id_comp`=cc.`id_comp`
+                INNER JOIN tb_lookup_memo_type typ ON typ.`id_memo_type`=sp.`id_memo_type`
+	            WHERE py.`id_report_status`=6 AND pyd.report_mark_type IN (48, 54,66,67,116, 117, 118, 183)
+                " + cond_group + " 
+                " + cond_store + "
+                " + cond_status + "
+                " + cond_promo + "
+                " + cond_period + "
+                " + cond_ovd + "
+	            GROUP BY c.id_comp_group
+            ) pyd ON pyd.id_comp_group = c.id_comp_group
+            WHERE sp.`id_report_status`='6' 
+            " + cond_group + " 
+            " + cond_store + "
+            " + cond_status + "
+            " + cond_promo + "
+            " + cond_period + "
+            " + cond_ovd + "
+            GROUP BY c.id_comp_group
+            ORDER BY cg.description ASC "
+            Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+            GCSummary.DataSource = data
+            GVSummary.BestFitColumns()
+            Cursor = Cursors.Default
+        End If
     End Sub
 
     Private Sub RepoBtnMoreBBM_ButtonClick(sender As Object, e As DevExpress.XtraEditors.Controls.ButtonPressedEventArgs) Handles RepoBtnMoreBBM.ButtonClick
@@ -326,16 +378,30 @@
     End Sub
 
     Private Sub BtnExportToXLSTrf_Click(sender As Object, e As EventArgs) Handles BtnExportToXLSTrf.Click
-        If GVUnpaid.RowCount > 0 Then
-            Cursor = Cursors.WaitCursor
-            Dim path As String = Application.StartupPath & "\download\"
-            'create directory if not exist
-            If Not IO.Directory.Exists(path) Then
-                System.IO.Directory.CreateDirectory(path)
+        If XTCInvTrack.SelectedTabPageIndex = 0 Then
+            If GVUnpaid.RowCount > 0 Then
+                Cursor = Cursors.WaitCursor
+                Dim path As String = Application.StartupPath & "\download\"
+                'create directory if not exist
+                If Not IO.Directory.Exists(path) Then
+                    System.IO.Directory.CreateDirectory(path)
+                End If
+                path = path + "sal_inv_tracking.xlsx"
+                exportToXLS(path, "inv", GCUnpaid)
+                Cursor = Cursors.Default
             End If
-            path = path + "sal_inv_tracking.xlsx"
-            exportToXLS(path, "inv", GCUnpaid)
-            Cursor = Cursors.Default
+        Else
+            If GVSummary.RowCount > 0 Then
+                Cursor = Cursors.WaitCursor
+                Dim path As String = Application.StartupPath & "\download\"
+                'create directory if not exist
+                If Not IO.Directory.Exists(path) Then
+                    System.IO.Directory.CreateDirectory(path)
+                End If
+                path = path + "sal_inv_tracking_summary.xlsx"
+                exportToXLS(path, "inv", GCSummary)
+                Cursor = Cursors.Default
+            End If
         End If
     End Sub
 
@@ -412,5 +478,39 @@
             DEUntil.Enabled = True
             DEFrom.Focus()
         End If
+    End Sub
+
+    Private Sub BtnExpanseCollapse_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Sub print()
+        Dim report As ReportFormInvoiceTracking = New ReportFormInvoiceTracking
+
+        report.data = GCUnpaid.DataSource
+
+        report.XLStoreGroup.Text = SLEStoreGroup.Text
+        report.XLStore.Text = SLEStoreInvoice.Text
+        report.XLStatus.Text = SLEStatusInvoice.Text
+        report.XLPeriod.Text = If(CEPeriod.Checked, "All Period", DEFrom.Text + " - " + DEUntil.Text)
+
+        Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(report)
+
+        Tool.ShowPreviewDialog()
+    End Sub
+
+    Sub summary_print()
+        Dim report As ReportFormInvoiceTrackingSummary = New ReportFormInvoiceTrackingSummary
+
+        report.data = GCSummary.DataSource
+
+        report.XLStoreGroup.Text = SLEStoreGroup.Text
+        report.XLStore.Text = SLEStoreInvoice.Text
+        report.XLStatus.Text = SLEStatusInvoice.Text
+        report.XLPeriod.Text = If(CEPeriod.Checked, "All Period", DEFrom.Text + " - " + DEUntil.Text)
+
+        Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(report)
+
+        Tool.ShowPreviewDialog()
     End Sub
 End Class

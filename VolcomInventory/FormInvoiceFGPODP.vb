@@ -28,6 +28,8 @@
     Private Sub view_coa()
         Dim query As String = "SELECT id_acc,acc_name,CONCAT(acc_name,' - ',acc_description) AS acc_description FROM tb_a_acc WHERE id_is_det='2'"
         viewSearchLookupRepositoryQuery(RISLECOA, query, 0, "acc_description", "id_acc")
+
+        query = "SELECT id_acc,acc_name,CONCAT(acc_name,' - ',acc_description) AS acc_description FROM tb_a_acc WHERE id_is_det='2' AND acc_name LIKE '1115111%'"
         viewSearchLookupQuery(SLEVatAcc, query, "id_acc", "acc_description", "id_acc")
     End Sub
 

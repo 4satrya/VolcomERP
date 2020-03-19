@@ -31,9 +31,12 @@
             LEFT JOIN tb_m_departement_sub sub_ori ON sub_ori.id_departement_sub = emp.id_departement_sub
             LEFT JOIN (
                 SELECT * FROM (
-                    SELECT det.*, lookup.employee_status FROM tb_m_employee_status_det AS det
+                    SELECT det.*, lookup.employee_status 
+                    FROM tb_m_employee_status_det AS det
                     LEFT JOIN tb_lookup_employee_status AS lookup ON det.id_employee_status = lookup.id_employee_status
-                    WHERE det.start_period <= (SELECT periode_end FROM tb_emp_payroll WHERE id_payroll = '" & id_payroll & "')
+                    LEFT JOIN tb_m_employee AS emp ON det.id_employee = emp.id_employee
+		            LEFT JOIN tb_m_departement AS dep ON emp.id_departement = dep.id_departement
+                    WHERE det.start_period <= IF(dep.is_store = 2, (SELECT periode_end FROM tb_emp_payroll WHERE id_payroll = '" & id_payroll & "'), (SELECT store_periode_end FROM tb_emp_payroll WHERE id_payroll = '" & id_payroll & "'))
                     ORDER BY det.id_employee_status_det DESC
                 ) AS tab
                 GROUP BY id_employee
@@ -144,10 +147,16 @@
 
         If Not already_office Then
             report.DetailReportOffice.Visible = False
+
+            report.DetailReportStore.Level = 0
+            report.DetailReportStore.PageBreak = DevExpress.XtraReports.UI.PageBreak.None
         End If
 
         If Not already_store Then
             report.DetailReportStore.Visible = False
+
+            report.DetailReportOffice.Level = 0
+            report.DetailReportOffice.PageBreak = DevExpress.XtraReports.UI.PageBreak.None
         End If
 
         Dim tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(report)

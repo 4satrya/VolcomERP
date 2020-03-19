@@ -153,7 +153,7 @@ WHERE bo.`year`=YEAR(NOW()) AND bo.is_active='1'"
 
     Sub viewDetail()
         Cursor = Cursors.WaitCursor
-        Dim query As String = "SELECT ed.id_item_expense_det, ed.id_item_expense,ed.id_expense_type,ed.id_b_expense, 
+        Dim query As String = "SELECT ed.id_item_expense_det, ed.id_item_expense,ed.id_expense_type,ed.id_b_expense,bex.item_cat_main,typ.expense_type,
         ed.id_acc, a.acc_description AS `coa_desc`, ed.description, "
         If action = "ins" Then
             query += "0.00 AS tax_percent,0.00 AS `amount` "
@@ -162,6 +162,20 @@ WHERE bo.`year`=YEAR(NOW()) AND bo.is_active='1'"
         End If
         query += "From tb_item_expense_det ed
         INNER JOIN tb_a_acc a ON a.id_acc = ed.id_acc
+        INNER JOIN tb_lookup_expense_type typ ON typ.id_expense_type=ed.id_expense_type
+        INNER JOIN 
+        (
+	        SELECT bo.`id_b_expense_opex` AS id_b_expense,icm.`id_item_cat_main`,icm.`item_cat_main`,icm.`id_expense_type`
+	        FROM tb_b_expense_opex bo
+	        INNER JOIN tb_item_cat_main icm ON icm.`id_item_cat_main`=bo.`id_item_cat_main`
+	        WHERE bo.`year`=YEAR(NOW()) AND bo.is_active='1'
+	        UNION ALL
+	        SELECT bo.`id_b_expense` AS id_b_expense,icm.`id_item_cat_main`,CONCAT('[',dep.departement,']',icm.`item_cat_main`) AS item_cat_main,icm.`id_expense_type`
+	        FROM tb_b_expense bo
+	        INNER JOIN tb_item_cat_main icm ON icm.`id_item_cat_main`=bo.`id_item_cat_main`
+	        INNER JOIN tb_m_departement dep ON dep.id_departement=bo.id_departement
+	        WHERE bo.`year`=YEAR(NOW()) AND bo.is_active='1'
+        ) bex ON bex.id_b_expense=ed.id_b_expense AND ed.id_expense_type=bex.id_expense_type
         WHERE ed.id_item_expense=" + id + " "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCData.DataSource = data
@@ -184,9 +198,16 @@ WHERE bo.`year`=YEAR(NOW()) AND bo.is_active='1'"
         MENote.Enabled = False
         GCData.ContextMenuStrip = Nothing
         PanelControlNav.Visible = False
+        '
         GridColumnaccount.Visible = False
         GridColumnAccountDescription.VisibleIndex = 1
-
+        '
+        GridColumnBudgetType.Visible = False
+        GridColumnBudgetTypeDesc.VisibleIndex = 2
+        '
+        GridColumnBudget.Visible = False
+        GridColumnBudgetDesc.VisibleIndex = 3
+        '
         If id_report_status = "6" Then
             BtnCancell.Visible = False
             BtnViewJournal.Visible = True
@@ -220,49 +241,54 @@ WHERE bo.`year`=YEAR(NOW()) AND bo.is_active='1'"
 
     Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles BtnPrint.Click
         Cursor = Cursors.WaitCursor
+        'If id_report_status = "6" Then
         If id_report_status = "6" Then
-            ReportItemExpense.id = id
-            ReportItemExpense.dt = GCData.DataSource
-            Dim Report As New ReportItemExpense()
-
-            '... 
-            ' creating and saving the view's layout to a new memory stream 
-            Dim str As System.IO.Stream
-            str = New System.IO.MemoryStream()
-            GVData.SaveLayoutToStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
-            str.Seek(0, System.IO.SeekOrigin.Begin)
-            Report.GVData.RestoreLayoutFromStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
-            str.Seek(0, System.IO.SeekOrigin.Begin)
-
-            'Grid Detail
-            ReportStyleGridview(Report.GVData)
-
-            'Parse val
-            Report.LabelNumber.Text = TxtNumber.Text.ToUpper
-            Report.LabelDate.Text = DECreated.Text.ToString
-            Report.LNote.Text = MENote.Text.ToString
-            Report.LabelPaymentMethod.Text = LEPaymentMethod.Text
-            Report.LabelPaymentStatus.Text = TxtPaymentStatus.Text
-            If CEPayLater.EditValue = True Then
-                Report.LabelBeneficiary.Text = TxtCompName.Text
-                Report.LabelDUelDate.Visible = DEDueDate.Text
-            Else
-                Report.LabelBeneficiary.Visible = False
-                Report.LabelTitleBeneficiary.Visible = False
-                Report.LabelDotBeneficiary.Visible = False
-                Report.LabelDUelDate.Visible = False
-                Report.LabelTitleDueDate.Visible = False
-                Report.LabelDotDueDate.Visible = False
-            End If
-            Report.LabelPayFrom.Text = SLEPayFrom.Text
-            Report.LabelTotalPayment.Text = TxtTotal.Text
-
-            'Show the report's preview. 
-            Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
-            Tool.ShowPreviewDialog()
+            ReportItemExpense.is_pre = False
         Else
-            print_raw_no_export(GCData)
+            ReportItemExpense.is_pre = True
         End If
+        ReportItemExpense.id = id
+        ReportItemExpense.dt = GCData.DataSource
+        Dim Report As New ReportItemExpense()
+
+        '... 
+        ' creating and saving the view's layout to a new memory stream 
+        Dim str As System.IO.Stream
+        str = New System.IO.MemoryStream()
+        GVData.SaveLayoutToStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+        str.Seek(0, System.IO.SeekOrigin.Begin)
+        Report.GVData.RestoreLayoutFromStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+        str.Seek(0, System.IO.SeekOrigin.Begin)
+
+        'Grid Detail
+        ReportStyleGridview(Report.GVData)
+
+        'Parse val
+        Report.LabelNumber.Text = TxtNumber.Text.ToUpper
+        Report.LabelDate.Text = DECreated.Text.ToString
+        Report.LNote.Text = MENote.Text.ToString
+        Report.LabelPaymentMethod.Text = LEPaymentMethod.Text
+        Report.LabelPaymentStatus.Text = TxtPaymentStatus.Text
+        If CEPayLater.EditValue = True Then
+            Report.LabelBeneficiary.Text = TxtCompName.Text
+            Report.LabelDUelDate.Text = DEDueDate.Text
+        Else
+            Report.LabelBeneficiary.Visible = False
+            Report.LabelTitleBeneficiary.Visible = False
+            Report.LabelDotBeneficiary.Visible = False
+            Report.LabelDUelDate.Visible = False
+            Report.LabelTitleDueDate.Visible = False
+            Report.LabelDotDueDate.Visible = False
+        End If
+        Report.LPayFrom.Text = SLEPayFrom.Text
+        Report.LabelTotalPayment.Text = TxtTotal.Text
+
+        'Show the report's preview. 
+        Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
+        Tool.ShowPreviewDialog()
+        'Else
+        '    print_raw_no_export(GCData)
+        'End If
         Cursor = Cursors.Default
     End Sub
 

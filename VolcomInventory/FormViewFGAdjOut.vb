@@ -14,10 +14,18 @@
         GVDetail.OptionsBehavior.AutoExpandAllGroups = True
 
         'Fetch from db main
-        Dim query As String = "SELECT *, DATE_FORMAT(a.adj_out_fg_date, '%Y-%m-%d') AS adj_out_fg_datex FROM tb_adj_out_fg a "
+        Dim query As String = "SELECT *, DATE_FORMAT(a.adj_out_fg_date, '%Y-%m-%d') AS adj_out_fg_datex,
+        GROUP_CONCAT(DISTINCT comp.comp_number) AS `account`
+        FROM tb_adj_out_fg a 
+        INNER JOIN tb_adj_out_fg_det ad ON ad.id_adj_out_fg = a.id_adj_out_fg "
         query += "INNER JOIN tb_lookup_currency b ON a.id_currency = b.id_currency "
-        query += "INNER JOIN tb_lookup_report_status c ON a.id_report_status = c.id_report_status "
-        query += "WHERE a.id_adj_out_fg = '" + id_adj_out_fg + "' "
+        query += "INNER JOIN tb_lookup_report_status c ON a.id_report_status = c.id_report_status 
+        INNER JOIN tb_m_wh_drawer drw ON drw.id_wh_drawer = ad.id_wh_drawer
+        INNER JOIN tb_m_wh_rack rck ON rck.id_wh_rack = drw.id_wh_rack
+        INNER JOIN tb_m_wh_locator loc ON loc.id_wh_locator = rck.id_wh_locator
+        INNER JOIN tb_m_comp comp ON comp.id_comp = loc.id_comp "
+        query += "WHERE a.id_adj_out_fg = '" + id_adj_out_fg + "'
+        GROUP BY a.id_adj_out_fg  "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
         ''tampung ke form
@@ -27,6 +35,7 @@
         MENote.Text = data.Rows(0)("adj_out_fg_note").ToString
         LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", data.Rows(0)("id_report_status").ToString)
         LECurrency.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_currency", data.Rows(0)("id_currency").ToString)
+        MEAccount.Text = data.Rows(0)("account").ToString
 
         'based on sttatus
         id_report_status = data.Rows(0)("id_report_status").ToString
@@ -72,7 +81,7 @@
 
     Sub viewDetailReturn()
         Dim query As String = ""
-        query += "CALL view_fg_adj_out('" + id_adj_out_fg + "')"
+        query += "CALL view_fg_adj_out_less('" + id_adj_out_fg + "')"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCDetail.DataSource = data
         'GVDetail.Columns("id_product").GroupIndex = 0

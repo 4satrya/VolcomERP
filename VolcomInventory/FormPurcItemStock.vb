@@ -13,6 +13,9 @@
         viewDept()
         viewCat()
         DESOHUntil.EditValue = getTimeDB()
+        '
+        DEStart.EditValue = Now
+        DEUntil.EditValue = Now
     End Sub
 
     Sub viewItem()
@@ -49,6 +52,7 @@
         UNION ALL
         SELECT c.id_item_cat, c.item_cat FROM tb_item_cat c ORDER BY id_item_cat ASC"
         viewLookupQuery(LECat, query, 0, "item_cat", "id_item_cat")
+        viewLookupQuery(LECatPemakaian, query, 0, "item_cat", "id_item_cat")
         Cursor = Cursors.Default
     End Sub
 
@@ -71,6 +75,8 @@
         End Try
 
         Dim dept As String = LEDeptSum.EditValue.ToString
+        Dim cat As String = LECat.EditValue.ToString
+        '
         If dept <> "0" Then
             dept = "AND i.id_departement=" + dept + ""
         Else
@@ -78,7 +84,7 @@
         End If
 
         Dim stc As New ClassPurcItemStock()
-        Dim query As String = stc.queryGetStock(dept, date_until_selected)
+        Dim query As String = stc.queryGetStock(dept, cat, date_until_selected)
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCSOH.DataSource = data
         GVSOH.BestFitColumns()
@@ -132,6 +138,8 @@
         End Try
 
         Dim dept As String = LEDeptSum.EditValue.ToString
+        Dim cat As String = LECat.EditValue.ToString
+
         If dept <> "0" Then
             dept = "AND i.id_departement=" + dept + ""
         Else
@@ -140,7 +148,7 @@
 
         Dim stc As New ClassPurcItemStock()
         stc.opt = "fisik"
-        Dim query As String = stc.queryGetStock(dept, date_until_selected)
+        Dim query As String = stc.queryGetStock(dept, cat, date_until_selected)
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCSOH.DataSource = data
         GVSOH.BestFitColumns()
@@ -167,5 +175,76 @@
         GCSC.DataSource = data
         GVSC.BestFitColumns()
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub DEStart_EditValueChanged(sender As Object, e As EventArgs) Handles DEStart.EditValueChanged
+        DEUntil.Properties.MinValue = DEStart.EditValue
+    End Sub
+
+    Private Sub BView_Click(sender As Object, e As EventArgs) Handles BView.Click
+        load_pemakaian()
+    End Sub
+
+    Sub load_pemakaian()
+        Dim date_start As String = Date.Parse(DEStart.EditValue.ToString).ToString("yyyy-MM-dd")
+        Dim date_until As String = Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd")
+
+        Dim cat As String = ""
+
+        If Not LECatPemakaian.EditValue.ToString = "0" Then
+            cat = " AND it.id_item_cat='" & LECatPemakaian.EditValue.ToString & "'"
+        End If
+
+        Dim q As String = "SELECT it.`id_item`,it.`item_desc`,uom.uom
+,IFNULL(beg.qty_beg,0) AS qty_beg,IFNULL(beg.harga_satuan_beg,0) AS harga_satuan_beg,IFNULL(beg.amount_beg,0) AS amount_beg
+,IFNULL(rec.qty_rec,0) AS qty_rec,IFNULL(rec.harga_satuan_rec,0) AS harga_satuan_rec,IFNULL(rec.amount_rec,0) AS amount_rec
+,IFNULL(used.qty_used,0) AS qty_used,IFNULL(used.harga_satuan_used,0) AS harga_satuan_used,IFNULL(used.amount_used,0) AS amount_used
+,IFNULL(rem.qty_rem,0) AS qty_rem,IFNULL(rem.harga_satuan_rem,0) AS harga_satuan_rem,IFNULL(rem.amount_rem,0) AS amount_rem
+FROM tb_item it
+INNER JOIN tb_m_uom uom ON uom.id_uom=it.id_uom " & cat & "
+LEFT JOIN (
+	SELECT id_item,SUM(IF(id_storage_category=1,storage_item_qty,-storage_item_qty)) AS qty_beg
+	,SUM(IF(id_storage_category=1,storage_item_qty,-storage_item_qty)*`value`)/SUM(IF(id_storage_category=1,storage_item_qty,-storage_item_qty)) AS harga_satuan_beg
+	,SUM(IF(id_storage_category=1,storage_item_qty,-storage_item_qty)*`value`) AS amount_beg
+	FROM `tb_storage_item`
+	WHERE DATE(storage_item_datetime)<'" & date_start & "'
+	GROUP BY id_item
+	HAVING qty_beg!=0
+)beg ON beg.id_item=it.id_item
+LEFT JOIN (
+	SELECT id_item,SUM(IF(id_storage_category=1,storage_item_qty,-storage_item_qty)) AS qty_rec
+	,SUM(IF(id_storage_category=1,storage_item_qty,-storage_item_qty)*`value`)/SUM(IF(id_storage_category=1,storage_item_qty,-storage_item_qty)) AS harga_satuan_rec
+	,SUM(IF(id_storage_category=1,storage_item_qty,-storage_item_qty)*`value`) AS amount_rec
+	FROM `tb_storage_item`
+	WHERE DATE(storage_item_datetime)>='" & date_start & "' AND DATE(storage_item_datetime)<='" & date_until & "' AND report_mark_type='148'
+	GROUP BY id_item
+	HAVING qty_rec!=0
+)rec ON rec.id_item=it.id_item
+LEFT JOIN (
+	SELECT id_item,SUM(IF(id_storage_category=2,storage_item_qty,-storage_item_qty)) AS qty_used
+	,SUM(IF(id_storage_category=2,storage_item_qty,-storage_item_qty)*`value`)/SUM(IF(id_storage_category=2,storage_item_qty,-storage_item_qty)) AS harga_satuan_used
+	,SUM(IF(id_storage_category=2,storage_item_qty,-storage_item_qty)*`value`) AS amount_used
+	FROM `tb_storage_item`
+	WHERE DATE(storage_item_datetime)>='" & date_start & "' AND DATE(storage_item_datetime)<='" & date_until & "' AND NOT report_mark_type='148'
+	GROUP BY id_item
+	HAVING qty_used!=0
+)used ON used.id_item=it.id_item
+LEFT JOIN (
+	SELECT id_item,SUM(IF(id_storage_category=1,storage_item_qty,-storage_item_qty)) AS qty_rem
+	,SUM(IF(id_storage_category=1,storage_item_qty,-storage_item_qty)*`value`)/SUM(IF(id_storage_category=1,storage_item_qty,-storage_item_qty)) AS harga_satuan_rem
+	,SUM(IF(id_storage_category=1,storage_item_qty,-storage_item_qty)*`value`) AS amount_rem
+	FROM `tb_storage_item`
+	WHERE DATE(storage_item_datetime)<='" & date_until & "'
+	GROUP BY id_item
+	HAVING qty_rem!=0
+)rem ON rem.id_item=it.id_item
+WHERE NOT ISNULL(beg.id_item) OR NOT ISNULL(rec.id_item) OR NOT ISNULL(used.id_item) OR NOT ISNULL(rem.id_item)"
+        Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
+        GCPemakaian.DataSource = dt
+        GVPemakaian.BestFitColumns()
+    End Sub
+
+    Private Sub BPrint_Click(sender As Object, e As EventArgs) Handles BPrint.Click
+        print(GCPemakaian, "Report Pemakaian")
     End Sub
 End Class

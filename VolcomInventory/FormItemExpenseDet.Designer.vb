@@ -79,12 +79,12 @@ Partial Class FormItemExpenseDet
         Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnDescription = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnBudgetType = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RISLEType = New DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit()
         Me.RepositoryItemSearchLookUpEdit2View = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnBudget = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RISLECatExpense = New DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit()
         Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -95,6 +95,8 @@ Partial Class FormItemExpenseDet
         Me.GridColumnTaxValue = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnAmount = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnAccountDescription = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnBudgetTypeDesc = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnBudgetDesc = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemSpinEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
         CType(Me.LEPaymentMethod.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEDueDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -648,7 +650,7 @@ Partial Class FormItemExpenseDet
         '
         'GVData
         '
-        Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdAcc, Me.GridColumnNo, Me.GridColumnaccount, Me.GridColumnDescription, Me.GridColumn8, Me.GridColumn7, Me.GridColumnTaxPercent, Me.GridColumnTaxValue, Me.GridColumnAmount, Me.GridColumnAccountDescription})
+        Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdAcc, Me.GridColumnNo, Me.GridColumnaccount, Me.GridColumnDescription, Me.GridColumnBudgetType, Me.GridColumnBudget, Me.GridColumnTaxPercent, Me.GridColumnTaxValue, Me.GridColumnAmount, Me.GridColumnAccountDescription, Me.GridColumnBudgetTypeDesc, Me.GridColumnBudgetDesc})
         Me.GVData.GridControl = Me.GCData
         Me.GVData.Name = "GVData"
         Me.GVData.OptionsView.ShowFooter = True
@@ -667,6 +669,7 @@ Partial Class FormItemExpenseDet
         Me.GridColumnNo.Name = "GridColumnNo"
         Me.GridColumnNo.Visible = True
         Me.GridColumnNo.VisibleIndex = 0
+        Me.GridColumnNo.Width = 50
         '
         'GridColumnaccount
         '
@@ -676,6 +679,7 @@ Partial Class FormItemExpenseDet
         Me.GridColumnaccount.Name = "GridColumnaccount"
         Me.GridColumnaccount.Visible = True
         Me.GridColumnaccount.VisibleIndex = 1
+        Me.GridColumnaccount.Width = 123
         '
         'RepositoryItemSearchLookUpEdit1
         '
@@ -723,15 +727,17 @@ Partial Class FormItemExpenseDet
         Me.GridColumnDescription.Name = "GridColumnDescription"
         Me.GridColumnDescription.Visible = True
         Me.GridColumnDescription.VisibleIndex = 4
+        Me.GridColumnDescription.Width = 123
         '
-        'GridColumn8
+        'GridColumnBudgetType
         '
-        Me.GridColumn8.Caption = "Budget Type"
-        Me.GridColumn8.ColumnEdit = Me.RISLEType
-        Me.GridColumn8.FieldName = "id_expense_type"
-        Me.GridColumn8.Name = "GridColumn8"
-        Me.GridColumn8.Visible = True
-        Me.GridColumn8.VisibleIndex = 2
+        Me.GridColumnBudgetType.Caption = "Budget Type"
+        Me.GridColumnBudgetType.ColumnEdit = Me.RISLEType
+        Me.GridColumnBudgetType.FieldName = "id_expense_type"
+        Me.GridColumnBudgetType.Name = "GridColumnBudgetType"
+        Me.GridColumnBudgetType.Visible = True
+        Me.GridColumnBudgetType.VisibleIndex = 2
+        Me.GridColumnBudgetType.Width = 123
         '
         'RISLEType
         '
@@ -762,14 +768,15 @@ Partial Class FormItemExpenseDet
         Me.GridColumn10.Visible = True
         Me.GridColumn10.VisibleIndex = 0
         '
-        'GridColumn7
+        'GridColumnBudget
         '
-        Me.GridColumn7.Caption = "Budget"
-        Me.GridColumn7.ColumnEdit = Me.RISLECatExpense
-        Me.GridColumn7.FieldName = "id_b_expense"
-        Me.GridColumn7.Name = "GridColumn7"
-        Me.GridColumn7.Visible = True
-        Me.GridColumn7.VisibleIndex = 3
+        Me.GridColumnBudget.Caption = "Budget"
+        Me.GridColumnBudget.ColumnEdit = Me.RISLECatExpense
+        Me.GridColumnBudget.FieldName = "id_b_expense"
+        Me.GridColumnBudget.Name = "GridColumnBudget"
+        Me.GridColumnBudget.Visible = True
+        Me.GridColumnBudget.VisibleIndex = 3
+        Me.GridColumnBudget.Width = 123
         '
         'RISLECatExpense
         '
@@ -816,6 +823,7 @@ Partial Class FormItemExpenseDet
         Me.GridColumnTaxPercent.Name = "GridColumnTaxPercent"
         Me.GridColumnTaxPercent.Visible = True
         Me.GridColumnTaxPercent.VisibleIndex = 6
+        Me.GridColumnTaxPercent.Width = 123
         '
         'RepositoryItemTextEdit1
         '
@@ -839,6 +847,7 @@ Partial Class FormItemExpenseDet
         Me.GridColumnTaxValue.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
         Me.GridColumnTaxValue.Visible = True
         Me.GridColumnTaxValue.VisibleIndex = 7
+        Me.GridColumnTaxValue.Width = 128
         '
         'GridColumnAmount
         '
@@ -851,12 +860,25 @@ Partial Class FormItemExpenseDet
         Me.GridColumnAmount.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount", "{0:N2}")})
         Me.GridColumnAmount.Visible = True
         Me.GridColumnAmount.VisibleIndex = 5
+        Me.GridColumnAmount.Width = 123
         '
         'GridColumnAccountDescription
         '
         Me.GridColumnAccountDescription.Caption = "Account"
         Me.GridColumnAccountDescription.FieldName = "coa_desc"
         Me.GridColumnAccountDescription.Name = "GridColumnAccountDescription"
+        '
+        'GridColumnBudgetTypeDesc
+        '
+        Me.GridColumnBudgetTypeDesc.Caption = "Budget Type"
+        Me.GridColumnBudgetTypeDesc.FieldName = "expense_type"
+        Me.GridColumnBudgetTypeDesc.Name = "GridColumnBudgetTypeDesc"
+        '
+        'GridColumnBudgetDesc
+        '
+        Me.GridColumnBudgetDesc.Caption = "Budget"
+        Me.GridColumnBudgetDesc.FieldName = "item_cat_main"
+        Me.GridColumnBudgetDesc.Name = "GridColumnBudgetDesc"
         '
         'RepositoryItemSpinEdit1
         '
@@ -993,15 +1015,17 @@ Partial Class FormItemExpenseDet
     Friend WithEvents TxtPaymentStatus As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelControl5 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents GridColumnAccountDescription As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn8 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnBudgetType As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RISLEType As DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit
     Friend WithEvents RepositoryItemSearchLookUpEdit2View As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumn9 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn10 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn7 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnBudget As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RISLECatExpense As DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit
     Friend WithEvents GridView2 As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumn11 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn12 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn13 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnBudgetTypeDesc As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnBudgetDesc As DevExpress.XtraGrid.Columns.GridColumn
 End Class

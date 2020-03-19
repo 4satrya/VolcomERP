@@ -7066,6 +7066,18 @@
     <Compile Include="ReportFollowUpAR.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ReportFormInvoiceTracking.Designer.vb">
+      <DependentUpon>ReportFormInvoiceTracking.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportFormInvoiceTracking.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportFormInvoiceTrackingSummary.Designer.vb">
+      <DependentUpon>ReportFormInvoiceTrackingSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportFormInvoiceTrackingSummary.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ReportInvMat.Designer.vb">
       <DependentUpon>ReportInvMat.vb</DependentUpon>
     </Compile>
@@ -11749,6 +11761,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportFollowUpAR.resx">
       <DependentUpon>ReportFollowUpAR.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportFormInvoiceTracking.resx">
+      <DependentUpon>ReportFormInvoiceTracking.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportFormInvoiceTrackingSummary.resx">
+      <DependentUpon>ReportFormInvoiceTrackingSummary.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportInvMat.resx">
       <DependentUpon>ReportInvMat.vb</DependentUpon>

@@ -390,7 +390,7 @@
                 Dim st As New ClassPurcItemStock
                 Dim date_until_selected As String = "9999-01-01"
                 Dim cond As String = "AND i.id_departement=" + id_departement + " AND i.id_item = '" + id_item + "' "
-                Dim qst As String = st.queryGetStock(cond, date_until_selected)
+                Dim qst As String = st.queryGetStock(cond, "0", date_until_selected)
                 Dim dst As DataTable = execute_query(qst, -1, True, "", "", "", "")
                 If e.Value > dst.Rows(0)("qty") Then
                     err_stc += "No stock available. Maximum return : " + dst.Rows(0)("qty").ToString + System.Environment.NewLine
@@ -460,7 +460,7 @@
             Dim st As New ClassPurcItemStock
             Dim date_until_selected As String = "9999-01-01"
             Dim cond As String = "AND i.id_departement=" + id_departement + " AND i.id_item = '" + id_item + "' "
-            Dim qst As String = st.queryGetStock(cond, date_until_selected)
+            Dim qst As String = st.queryGetStock(cond, "0", date_until_selected)
             Dim dst As DataTable = execute_query(qst, -1, True, "", "", "", "")
             If val > dst.Rows(0)("qty") Then
                 err_stc += "No stock available. Maximum return : " + dst.Rows(0)("qty").ToString + System.Environment.NewLine

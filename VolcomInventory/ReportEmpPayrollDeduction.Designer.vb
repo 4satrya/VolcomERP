@@ -175,7 +175,7 @@ Partial Public Class ReportEmpPayrollDeduction
         Me.GBEmployee.Columns.Add(Me.GCEmployeeStatus)
         Me.GBEmployee.Name = "GBEmployee"
         Me.GBEmployee.VisibleIndex = 0
-        Me.GBEmployee.Width = 1056
+        Me.GBEmployee.Width = 997
         '
         'GCDepartement
         '
@@ -190,7 +190,7 @@ Partial Public Class ReportEmpPayrollDeduction
         Me.GCNIP.MinWidth = 45
         Me.GCNIP.Name = "GCNIP"
         Me.GCNIP.Visible = True
-        Me.GCNIP.Width = 218
+        Me.GCNIP.Width = 205
         '
         'GCEmployee
         '
@@ -198,11 +198,11 @@ Partial Public Class ReportEmpPayrollDeduction
         Me.GCEmployee.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
         Me.GCEmployee.Caption = "Employee"
         Me.GCEmployee.FieldName = "Employee"
-        Me.GCEmployee.MinWidth = 180
+        Me.GCEmployee.MinWidth = 160
         Me.GCEmployee.Name = "GCEmployee"
         Me.GCEmployee.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom)})
         Me.GCEmployee.Visible = True
-        Me.GCEmployee.Width = 195
+        Me.GCEmployee.Width = 160
         '
         'GCEmployeePosition
         '
@@ -213,7 +213,7 @@ Partial Public Class ReportEmpPayrollDeduction
         Me.GCEmployeePosition.MinWidth = 150
         Me.GCEmployeePosition.Name = "GCEmployeePosition"
         Me.GCEmployeePosition.Visible = True
-        Me.GCEmployeePosition.Width = 457
+        Me.GCEmployeePosition.Width = 446
         '
         'GCEmployeeStatus
         '
@@ -559,7 +559,7 @@ Partial Public Class ReportEmpPayrollDeduction
         Me.GridBand1.Columns.Add(Me.GCEmployeeStatusStore)
         Me.GridBand1.Name = "GridBand1"
         Me.GridBand1.VisibleIndex = 0
-        Me.GridBand1.Width = 1056
+        Me.GridBand1.Width = 997
         '
         'GCDepartementStore
         '
@@ -574,7 +574,7 @@ Partial Public Class ReportEmpPayrollDeduction
         Me.GCNIPStore.MinWidth = 45
         Me.GCNIPStore.Name = "GCNIPStore"
         Me.GCNIPStore.Visible = True
-        Me.GCNIPStore.Width = 218
+        Me.GCNIPStore.Width = 205
         '
         'GCEmployeeStore
         '
@@ -582,11 +582,11 @@ Partial Public Class ReportEmpPayrollDeduction
         Me.GCEmployeeStore.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
         Me.GCEmployeeStore.Caption = "Employee"
         Me.GCEmployeeStore.FieldName = "Employee"
-        Me.GCEmployeeStore.MinWidth = 180
+        Me.GCEmployeeStore.MinWidth = 160
         Me.GCEmployeeStore.Name = "GCEmployeeStore"
         Me.GCEmployeeStore.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom)})
         Me.GCEmployeeStore.Visible = True
-        Me.GCEmployeeStore.Width = 195
+        Me.GCEmployeeStore.Width = 160
         '
         'GCEmployeePositionStore
         '
@@ -597,7 +597,7 @@ Partial Public Class ReportEmpPayrollDeduction
         Me.GCEmployeePositionStore.MinWidth = 150
         Me.GCEmployeePositionStore.Name = "GCEmployeePositionStore"
         Me.GCEmployeePositionStore.Visible = True
-        Me.GCEmployeePositionStore.Width = 457
+        Me.GCEmployeePositionStore.Width = 446
         '
         'GCEmployeeStatusStore
         '

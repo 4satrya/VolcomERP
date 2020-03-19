@@ -635,6 +635,7 @@ WHERE pnd.id_pn='" & id_payment & "'"
 
         'Grid Detail
         ReportStyleGridview(Report.GVList)
+        Report.GVList.AppearancePrint.Row.Font = New Font("Segoe UI", 6.5, FontStyle.Regular)
 
         GridColumnCurrency.VisibleIndex = 9
         GridColumnCurrencyHide.VisibleIndex = -1

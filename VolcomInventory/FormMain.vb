@@ -7996,7 +7996,11 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
                 print_raw(FormMailManage.GCUnpaid, "")
             End If
         ElseIf formName = "FormInvoiceTracking" Then
-            print_raw(FormInvoiceTracking.GCUnpaid, "")
+            If FormInvoiceTracking.XTCInvTrack.SelectedTabPageIndex = 0 Then
+                FormInvoiceTracking.print()
+            Else
+                FormInvoiceTracking.summary_print()
+            End If
         ElseIf formName = "FormInvMat" Then
             FormInvMat.print_list()
         ElseIf formName = "FormAREvalScheduke" Then

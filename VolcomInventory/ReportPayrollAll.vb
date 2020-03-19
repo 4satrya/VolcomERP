@@ -473,4 +473,16 @@
             End Select
         End If
     End Sub
+
+    Private Sub GVPayrollOffice_RowCellStyle(sender As Object, e As DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs) Handles GVPayrollOffice.RowCellStyle
+        If GVPayrollOffice.GetRowCellValue(e.RowHandle, "is_resign").ToString = "1" Then
+            e.Appearance.BackColor = Color.Yellow
+        End If
+    End Sub
+
+    Private Sub GVPayrollStore_RowCellStyle(sender As Object, e As DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs) Handles GVPayrollStore.RowCellStyle
+        If GVPayrollStore.GetRowCellValue(e.RowHandle, "is_resign").ToString = "1" Then
+            e.Appearance.BackColor = Color.Yellow
+        End If
+    End Sub
 End Class

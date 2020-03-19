@@ -789,7 +789,7 @@ Partial Class FormBankWithdrawalDet
         Me.GridColumnCurrencyHide.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
         Me.GridColumnCurrencyHide.AppearanceHeader.Options.UseTextOptions = True
         Me.GridColumnCurrencyHide.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.GridColumnCurrencyHide.Caption = "Currency"
+        Me.GridColumnCurrencyHide.Caption = "Curr"
         Me.GridColumnCurrencyHide.DisplayFormat.FormatString = "N2"
         Me.GridColumnCurrencyHide.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnCurrencyHide.FieldName = "currency"

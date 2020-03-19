@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FormInvoiceTracking
     Inherits DevExpress.XtraEditors.XtraForm
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         If disposing AndAlso components IsNot Nothing Then
             components.Dispose()
@@ -17,10 +17,11 @@ Partial Class FormInvoiceTracking
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormInvoiceTracking))
         Dim SerializableAppearanceObject1 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
+        Dim SerializableAppearanceObject2 As DevExpress.Utils.SerializableAppearanceObject = New DevExpress.Utils.SerializableAppearanceObject()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
         Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
@@ -111,6 +112,37 @@ Partial Class FormInvoiceTracking
         Me.BandedGridColumnid_propose_delay_payment = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.RepositoryItemCheckEdit3 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.RepositoryItemCheckEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.XTCInvTrack = New DevExpress.XtraTab.XtraTabControl()
+        Me.XTPDetail = New DevExpress.XtraTab.XtraTabPage()
+        Me.XTPSummary = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCSummary = New DevExpress.XtraGrid.GridControl()
+        Me.GVSummary = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.BandedGridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemCheckEdit4 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.BandedGridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.BandedGridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemHyperLinkEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit()
+        Me.BandedGridColumn16 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.BandedGridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.BandedGridColumn24 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.BandedGridColumn19 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.BandedGridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.BandedGridColumn26 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.BandedGridColumn27 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.BandedGridColumn28 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.BandedGridColumn29 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.BandedGridColumn20 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.BandedGridColumn23 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.BandedGridColumn44 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemButtonEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit()
+        Me.RepositoryItemCheckEdit5 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.RepositoryItemCheckEdit6 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.RepositoryItemHyperLinkEdit6 = New DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit()
+        Me.RepositoryItemHyperLinkEdit4 = New DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit()
+        Me.RepositoryItemHyperLinkEdit5 = New DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit()
+        Me.RepositoryItemHyperLinkEdit3 = New DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit()
+        Me.RepositoryItemHyperLinkEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -142,6 +174,22 @@ Partial Class FormInvoiceTracking
         CType(Me.RepoBtnMoreBBM, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemCheckEdit3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemCheckEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.XTCInvTrack, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTCInvTrack.SuspendLayout()
+        Me.XTPDetail.SuspendLayout()
+        Me.XTPSummary.SuspendLayout()
+        CType(Me.GCSummary, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVSummary, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemCheckEdit4, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemHyperLinkEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemButtonEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemCheckEdit5, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemCheckEdit6, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemHyperLinkEdit6, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemHyperLinkEdit4, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemHyperLinkEdit5, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemHyperLinkEdit3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemHyperLinkEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl1
@@ -393,11 +441,11 @@ Partial Class FormInvoiceTracking
         'GCUnpaid
         '
         Me.GCUnpaid.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCUnpaid.Location = New System.Drawing.Point(0, 74)
+        Me.GCUnpaid.Location = New System.Drawing.Point(0, 0)
         Me.GCUnpaid.MainView = Me.GVUnpaid
         Me.GCUnpaid.Name = "GCUnpaid"
         Me.GCUnpaid.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckEdit1, Me.RepositoryItemCheckEdit3, Me.RepoBtnMoreBBM, Me.RepositoryItemCheckEdit2, Me.RepoLinkInvoice, Me.RepoLinkBBM, Me.RepoLinkEMailNotice, Me.RepoLinkEmailWarning, Me.RepoLinkEmailInvoice, Me.RepoLinkMemoPenangguhan})
-        Me.GCUnpaid.Size = New System.Drawing.Size(1173, 432)
+        Me.GCUnpaid.Size = New System.Drawing.Size(1167, 404)
         Me.GCUnpaid.TabIndex = 20
         Me.GCUnpaid.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVUnpaid})
         '
@@ -411,6 +459,8 @@ Partial Class FormInvoiceTracking
         Me.GVUnpaid.Name = "GVUnpaid"
         Me.GVUnpaid.OptionsBehavior.AutoExpandAllGroups = True
         Me.GVUnpaid.OptionsFind.AlwaysVisible = True
+        Me.GVUnpaid.OptionsMenu.ShowGroupSummaryEditorItem = True
+        Me.GVUnpaid.OptionsPrint.ExpandAllGroups = False
         Me.GVUnpaid.OptionsSelection.EnableAppearanceFocusedRow = False
         Me.GVUnpaid.OptionsView.ColumnAutoWidth = False
         Me.GVUnpaid.OptionsView.GroupFooterShowMode = DevExpress.XtraGrid.Views.Grid.GroupFooterShowMode.VisibleAlways
@@ -982,12 +1032,287 @@ Partial Class FormInvoiceTracking
         Me.RepositoryItemCheckEdit2.AutoHeight = False
         Me.RepositoryItemCheckEdit2.Name = "RepositoryItemCheckEdit2"
         '
+        'XTCInvTrack
+        '
+        Me.XTCInvTrack.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.XTCInvTrack.HeaderLocation = DevExpress.XtraTab.TabHeaderLocation.Bottom
+        Me.XTCInvTrack.Location = New System.Drawing.Point(0, 74)
+        Me.XTCInvTrack.Name = "XTCInvTrack"
+        Me.XTCInvTrack.SelectedTabPage = Me.XTPDetail
+        Me.XTCInvTrack.Size = New System.Drawing.Size(1173, 432)
+        Me.XTCInvTrack.TabIndex = 21
+        Me.XTCInvTrack.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPDetail, Me.XTPSummary})
+        '
+        'XTPDetail
+        '
+        Me.XTPDetail.Controls.Add(Me.GCUnpaid)
+        Me.XTPDetail.Name = "XTPDetail"
+        Me.XTPDetail.Size = New System.Drawing.Size(1167, 404)
+        Me.XTPDetail.Text = "Detail"
+        '
+        'XTPSummary
+        '
+        Me.XTPSummary.Controls.Add(Me.GCSummary)
+        Me.XTPSummary.Name = "XTPSummary"
+        Me.XTPSummary.Size = New System.Drawing.Size(1167, 404)
+        Me.XTPSummary.Text = "Summary"
+        '
+        'GCSummary
+        '
+        Me.GCSummary.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCSummary.Location = New System.Drawing.Point(0, 0)
+        Me.GCSummary.MainView = Me.GVSummary
+        Me.GCSummary.Name = "GCSummary"
+        Me.GCSummary.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckEdit4, Me.RepositoryItemCheckEdit5, Me.RepositoryItemButtonEdit1, Me.RepositoryItemCheckEdit6, Me.RepositoryItemHyperLinkEdit1, Me.RepositoryItemHyperLinkEdit6, Me.RepositoryItemHyperLinkEdit4, Me.RepositoryItemHyperLinkEdit5, Me.RepositoryItemHyperLinkEdit3, Me.RepositoryItemHyperLinkEdit2})
+        Me.GCSummary.Size = New System.Drawing.Size(1167, 404)
+        Me.GCSummary.TabIndex = 21
+        Me.GCSummary.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVSummary})
+        '
+        'GVSummary
+        '
+        Me.GVSummary.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.BandedGridColumn5, Me.BandedGridColumn10, Me.BandedGridColumn6, Me.BandedGridColumn16, Me.BandedGridColumn11, Me.BandedGridColumn24, Me.BandedGridColumn19, Me.BandedGridColumn9, Me.GridColumn1, Me.BandedGridColumn26, Me.BandedGridColumn27, Me.BandedGridColumn28, Me.BandedGridColumn29, Me.BandedGridColumn20, Me.BandedGridColumn23, Me.BandedGridColumn44})
+        Me.GVSummary.GridControl = Me.GCSummary
+        Me.GVSummary.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount", Me.BandedGridColumn24, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_rec", Me.BandedGridColumn28, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "bbm_value", Nothing, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_due", Me.BandedGridColumn29, "{0:N2}")})
+        Me.GVSummary.Name = "GVSummary"
+        Me.GVSummary.OptionsBehavior.AutoExpandAllGroups = True
+        Me.GVSummary.OptionsFind.AlwaysVisible = True
+        Me.GVSummary.OptionsMenu.ShowGroupSummaryEditorItem = True
+        Me.GVSummary.OptionsPrint.ExpandAllGroups = False
+        Me.GVSummary.OptionsSelection.EnableAppearanceFocusedRow = False
+        Me.GVSummary.OptionsView.ColumnAutoWidth = False
+        Me.GVSummary.OptionsView.GroupFooterShowMode = DevExpress.XtraGrid.Views.Grid.GroupFooterShowMode.VisibleAlways
+        Me.GVSummary.OptionsView.ShowFooter = True
+        Me.GVSummary.OptionsView.ShowGroupPanel = False
+        '
+        'BandedGridColumn5
+        '
+        Me.BandedGridColumn5.AppearanceHeader.Options.UseTextOptions = True
+        Me.BandedGridColumn5.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.BandedGridColumn5.Caption = "*"
+        Me.BandedGridColumn5.ColumnEdit = Me.RepositoryItemCheckEdit4
+        Me.BandedGridColumn5.FieldName = "is_check"
+        Me.BandedGridColumn5.Name = "BandedGridColumn5"
+        Me.BandedGridColumn5.OptionsColumn.AllowEdit = False
+        '
+        'RepositoryItemCheckEdit4
+        '
+        Me.RepositoryItemCheckEdit4.AutoHeight = False
+        Me.RepositoryItemCheckEdit4.Name = "RepositoryItemCheckEdit4"
+        Me.RepositoryItemCheckEdit4.ValueChecked = "yes"
+        Me.RepositoryItemCheckEdit4.ValueUnchecked = "no"
+        '
+        'BandedGridColumn10
+        '
+        Me.BandedGridColumn10.Caption = "ID"
+        Me.BandedGridColumn10.FieldName = "id_sales_pos"
+        Me.BandedGridColumn10.Name = "BandedGridColumn10"
+        Me.BandedGridColumn10.OptionsColumn.AllowEdit = False
+        '
+        'BandedGridColumn6
+        '
+        Me.BandedGridColumn6.Caption = "Number"
+        Me.BandedGridColumn6.ColumnEdit = Me.RepositoryItemHyperLinkEdit1
+        Me.BandedGridColumn6.FieldName = "sales_pos_number"
+        Me.BandedGridColumn6.Name = "BandedGridColumn6"
+        Me.BandedGridColumn6.OptionsColumn.ReadOnly = True
+        Me.BandedGridColumn6.Width = 165
+        '
+        'RepositoryItemHyperLinkEdit1
+        '
+        Me.RepositoryItemHyperLinkEdit1.AutoHeight = False
+        Me.RepositoryItemHyperLinkEdit1.Name = "RepositoryItemHyperLinkEdit1"
+        '
+        'BandedGridColumn16
+        '
+        Me.BandedGridColumn16.Caption = "Created Date"
+        Me.BandedGridColumn16.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.BandedGridColumn16.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.BandedGridColumn16.FieldName = "sales_pos_date"
+        Me.BandedGridColumn16.Name = "BandedGridColumn16"
+        Me.BandedGridColumn16.OptionsColumn.AllowEdit = False
+        Me.BandedGridColumn16.Width = 92
+        '
+        'BandedGridColumn11
+        '
+        Me.BandedGridColumn11.Caption = "Total Sales"
+        Me.BandedGridColumn11.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumn11.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumn11.FieldName = "sales_pos_total"
+        Me.BandedGridColumn11.Name = "BandedGridColumn11"
+        Me.BandedGridColumn11.OptionsColumn.AllowEdit = False
+        Me.BandedGridColumn11.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_pos_total", "{0:N2}")})
+        '
+        'BandedGridColumn24
+        '
+        Me.BandedGridColumn24.AppearanceCell.Options.UseTextOptions = True
+        Me.BandedGridColumn24.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.BandedGridColumn24.AppearanceHeader.Options.UseTextOptions = True
+        Me.BandedGridColumn24.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.BandedGridColumn24.Caption = "Invoice Amount"
+        Me.BandedGridColumn24.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumn24.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumn24.FieldName = "amount"
+        Me.BandedGridColumn24.Name = "BandedGridColumn24"
+        Me.BandedGridColumn24.OptionsColumn.AllowEdit = False
+        Me.BandedGridColumn24.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount", "{0:N2}")})
+        Me.BandedGridColumn24.Visible = True
+        Me.BandedGridColumn24.VisibleIndex = 2
+        Me.BandedGridColumn24.Width = 111
+        '
+        'BandedGridColumn19
+        '
+        Me.BandedGridColumn19.Caption = "Due Date"
+        Me.BandedGridColumn19.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.BandedGridColumn19.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.BandedGridColumn19.FieldName = "sales_pos_due_date"
+        Me.BandedGridColumn19.Name = "BandedGridColumn19"
+        Me.BandedGridColumn19.OptionsColumn.AllowEdit = False
+        Me.BandedGridColumn19.Width = 108
+        '
+        'BandedGridColumn9
+        '
+        Me.BandedGridColumn9.Caption = "Group Store"
+        Me.BandedGridColumn9.FieldName = "comp_group"
+        Me.BandedGridColumn9.Name = "BandedGridColumn9"
+        Me.BandedGridColumn9.OptionsColumn.AllowEdit = False
+        Me.BandedGridColumn9.Visible = True
+        Me.BandedGridColumn9.VisibleIndex = 0
+        '
+        'GridColumn1
+        '
+        Me.GridColumn1.Caption = "Group Store Desc."
+        Me.GridColumn1.FieldName = "comp_group_desc"
+        Me.GridColumn1.Name = "GridColumn1"
+        Me.GridColumn1.Visible = True
+        Me.GridColumn1.VisibleIndex = 1
+        Me.GridColumn1.Width = 110
+        '
+        'BandedGridColumn26
+        '
+        Me.BandedGridColumn26.Caption = "id_comp"
+        Me.BandedGridColumn26.FieldName = "id_comp"
+        Me.BandedGridColumn26.Name = "BandedGridColumn26"
+        Me.BandedGridColumn26.OptionsColumn.AllowEdit = False
+        '
+        'BandedGridColumn27
+        '
+        Me.BandedGridColumn27.Caption = "Total Qty"
+        Me.BandedGridColumn27.DisplayFormat.FormatString = "N0"
+        Me.BandedGridColumn27.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumn27.FieldName = "sales_pos_total_qty"
+        Me.BandedGridColumn27.Name = "BandedGridColumn27"
+        Me.BandedGridColumn27.OptionsColumn.AllowEdit = False
+        Me.BandedGridColumn27.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_pos_total_qty", "{0:N0}")})
+        '
+        'BandedGridColumn28
+        '
+        Me.BandedGridColumn28.Caption = "Amount Paid"
+        Me.BandedGridColumn28.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumn28.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumn28.FieldName = "total_rec"
+        Me.BandedGridColumn28.Name = "BandedGridColumn28"
+        Me.BandedGridColumn28.OptionsColumn.AllowEdit = False
+        Me.BandedGridColumn28.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_rec", "{0:N2}")})
+        Me.BandedGridColumn28.Visible = True
+        Me.BandedGridColumn28.VisibleIndex = 3
+        Me.BandedGridColumn28.Width = 116
+        '
+        'BandedGridColumn29
+        '
+        Me.BandedGridColumn29.Caption = "Diff"
+        Me.BandedGridColumn29.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumn29.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumn29.FieldName = "total_due"
+        Me.BandedGridColumn29.Name = "BandedGridColumn29"
+        Me.BandedGridColumn29.OptionsColumn.AllowEdit = False
+        Me.BandedGridColumn29.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_due", "{0:N2}")})
+        Me.BandedGridColumn29.Visible = True
+        Me.BandedGridColumn29.VisibleIndex = 4
+        '
+        'BandedGridColumn20
+        '
+        Me.BandedGridColumn20.Caption = "Due Days Origin"
+        Me.BandedGridColumn20.FieldName = "due_days"
+        Me.BandedGridColumn20.Name = "BandedGridColumn20"
+        Me.BandedGridColumn20.OptionsColumn.AllowEdit = False
+        Me.BandedGridColumn20.Width = 98
+        '
+        'BandedGridColumn23
+        '
+        Me.BandedGridColumn23.Caption = "Age (Day)"
+        Me.BandedGridColumn23.FieldName = "due_days_view"
+        Me.BandedGridColumn23.Name = "BandedGridColumn23"
+        Me.BandedGridColumn23.OptionsColumn.AllowEdit = False
+        Me.BandedGridColumn23.UnboundExpression = "Iif([due_days] = 0, [due_days], Iif([due_days] < 0, [due_days], Concat('+', [due_" &
+    "days])))"
+        Me.BandedGridColumn23.UnboundType = DevExpress.Data.UnboundColumnType.[String]
+        '
+        'BandedGridColumn44
+        '
+        Me.BandedGridColumn44.Caption = "  "
+        Me.BandedGridColumn44.ColumnEdit = Me.RepositoryItemButtonEdit1
+        Me.BandedGridColumn44.FieldName = "btn_more_bbm"
+        Me.BandedGridColumn44.Name = "BandedGridColumn44"
+        '
+        'RepositoryItemButtonEdit1
+        '
+        Me.RepositoryItemButtonEdit1.AutoHeight = False
+        SerializableAppearanceObject2.BackColor = System.Drawing.Color.Teal
+        SerializableAppearanceObject2.Font = New System.Drawing.Font("Tahoma", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        SerializableAppearanceObject2.ForeColor = System.Drawing.Color.White
+        SerializableAppearanceObject2.Options.UseBackColor = True
+        SerializableAppearanceObject2.Options.UseFont = True
+        SerializableAppearanceObject2.Options.UseForeColor = True
+        Me.RepositoryItemButtonEdit1.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "More BBM", -1, True, True, False, DevExpress.XtraEditors.ImageLocation.MiddleCenter, Nothing, New DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), SerializableAppearanceObject2, "", Nothing, Nothing, True)})
+        Me.RepositoryItemButtonEdit1.ButtonsStyle = DevExpress.XtraEditors.Controls.BorderStyles.UltraFlat
+        Me.RepositoryItemButtonEdit1.Name = "RepositoryItemButtonEdit1"
+        Me.RepositoryItemButtonEdit1.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor
+        '
+        'RepositoryItemCheckEdit5
+        '
+        Me.RepositoryItemCheckEdit5.AutoHeight = False
+        Me.RepositoryItemCheckEdit5.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.UserDefined
+        Me.RepositoryItemCheckEdit5.Name = "RepositoryItemCheckEdit5"
+        Me.RepositoryItemCheckEdit5.PictureChecked = CType(resources.GetObject("RepositoryItemCheckEdit5.PictureChecked"), System.Drawing.Image)
+        Me.RepositoryItemCheckEdit5.ValueChecked = "Yes"
+        Me.RepositoryItemCheckEdit5.ValueUnchecked = "No"
+        '
+        'RepositoryItemCheckEdit6
+        '
+        Me.RepositoryItemCheckEdit6.AutoHeight = False
+        Me.RepositoryItemCheckEdit6.Name = "RepositoryItemCheckEdit6"
+        '
+        'RepositoryItemHyperLinkEdit6
+        '
+        Me.RepositoryItemHyperLinkEdit6.AutoHeight = False
+        Me.RepositoryItemHyperLinkEdit6.Name = "RepositoryItemHyperLinkEdit6"
+        '
+        'RepositoryItemHyperLinkEdit4
+        '
+        Me.RepositoryItemHyperLinkEdit4.AutoHeight = False
+        Me.RepositoryItemHyperLinkEdit4.Name = "RepositoryItemHyperLinkEdit4"
+        '
+        'RepositoryItemHyperLinkEdit5
+        '
+        Me.RepositoryItemHyperLinkEdit5.AutoHeight = False
+        Me.RepositoryItemHyperLinkEdit5.Name = "RepositoryItemHyperLinkEdit5"
+        '
+        'RepositoryItemHyperLinkEdit3
+        '
+        Me.RepositoryItemHyperLinkEdit3.AutoHeight = False
+        Me.RepositoryItemHyperLinkEdit3.Name = "RepositoryItemHyperLinkEdit3"
+        '
+        'RepositoryItemHyperLinkEdit2
+        '
+        Me.RepositoryItemHyperLinkEdit2.AutoHeight = False
+        Me.RepositoryItemHyperLinkEdit2.Name = "RepositoryItemHyperLinkEdit2"
+        '
         'FormInvoiceTracking
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1173, 506)
-        Me.Controls.Add(Me.GCUnpaid)
+        Me.Controls.Add(Me.XTCInvTrack)
         Me.Controls.Add(Me.PanelControl1)
         Me.MinimizeBox = False
         Me.Name = "FormInvoiceTracking"
@@ -1025,6 +1350,22 @@ Partial Class FormInvoiceTracking
         CType(Me.RepoBtnMoreBBM, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemCheckEdit3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemCheckEdit2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.XTCInvTrack, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTCInvTrack.ResumeLayout(False)
+        Me.XTPDetail.ResumeLayout(False)
+        Me.XTPSummary.ResumeLayout(False)
+        CType(Me.GCSummary, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVSummary, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemCheckEdit4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemHyperLinkEdit1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemButtonEdit1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemCheckEdit5, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemCheckEdit6, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemHyperLinkEdit6, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemHyperLinkEdit4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemHyperLinkEdit5, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemHyperLinkEdit3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemHyperLinkEdit2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1119,4 +1460,35 @@ Partial Class FormInvoiceTracking
     Friend WithEvents CEPeriod As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents PanelControl3 As DevExpress.XtraEditors.PanelControl
     Friend WithEvents PanelControl2 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents XTCInvTrack As DevExpress.XtraTab.XtraTabControl
+    Friend WithEvents XTPDetail As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents XTPSummary As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents GCSummary As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVSummary As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents BandedGridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RepositoryItemCheckEdit4 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+    Friend WithEvents BandedGridColumn10 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BandedGridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RepositoryItemHyperLinkEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit
+    Friend WithEvents BandedGridColumn16 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BandedGridColumn11 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BandedGridColumn24 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BandedGridColumn19 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BandedGridColumn9 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BandedGridColumn26 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BandedGridColumn27 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BandedGridColumn28 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BandedGridColumn29 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BandedGridColumn20 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BandedGridColumn23 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BandedGridColumn44 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RepositoryItemButtonEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit
+    Friend WithEvents RepositoryItemCheckEdit5 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+    Friend WithEvents RepositoryItemCheckEdit6 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+    Friend WithEvents RepositoryItemHyperLinkEdit6 As DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit
+    Friend WithEvents RepositoryItemHyperLinkEdit4 As DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit
+    Friend WithEvents RepositoryItemHyperLinkEdit5 As DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit
+    Friend WithEvents RepositoryItemHyperLinkEdit3 As DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit
+    Friend WithEvents RepositoryItemHyperLinkEdit2 As DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit
 End Class

@@ -2946,7 +2946,12 @@ Public Class FormImportExcel
             End Try
         ElseIf id_pop_up = "47" Then 'adj inn
             'vendor code 
-            Dim queryx As String = "SELECT p.id_product,p.product_full_code,p.product_name,dsg.design_cop FROM tb_m_product p INNER JOIN tb_m_design dsg ON dsg.id_design=p.id_design WHERE dsg.`id_lookup_status_order`!='2'"
+            Dim queryx As String = "SELECT p.id_product,p.product_full_code,p.product_name,dsg.design_cop, cd.code_detail_name AS `size`
+            FROM tb_m_product p 
+            INNER JOIN tb_m_product_code pc ON pc.id_product = p.id_product
+            INNER JOIN tb_m_code_detail cd ON cd.id_code_detail = pc.id_code_detail
+            INNER JOIN tb_m_design dsg ON dsg.id_design=p.id_design 
+            WHERE dsg.`id_lookup_status_order`!='2'"
             Dim dt As DataTable = execute_query(queryx, -1, True, "", "", "", "")
             Dim tb1 = data_temp.AsEnumerable()
             Dim tb2 = dt.AsEnumerable()
@@ -2958,10 +2963,11 @@ Public Class FormImportExcel
                         Select New With
                             {
                                 .id_product = If(y1 Is Nothing, "0", y1("id_product")),
-                                .code = If(y1 Is Nothing, "0", y1("product_full_code")),
+                                .code = table1("product_code").ToString,
                                 .name = If(y1 Is Nothing, "0", y1("product_name")),
+                                 .size = If(y1 Is Nothing, "0", y1("size")),
                                 .qty = table1("qty"),
-                            .retail_price = table1("retail_price"),
+                                .retail_price = table1("retail_price"),
                                 .design_cop = If(y1 Is Nothing, "0", y1("design_cop")),
                                 .id_comp = FormFGAdjInDet.id_comp,
                                 .comp = FormFGAdjInDet.comp_name,
@@ -2971,7 +2977,8 @@ Public Class FormImportExcel
                                 .rack = FormFGAdjInDet.rack_name,
                                 .id_drawer = FormFGAdjInDet.id_drawer,
                                 .drawer = FormFGAdjInDet.drawer_name,
-                                .note = table1("note")
+                                .note = table1("note"),
+                                .Status = If(y1 Is Nothing, "Master product not found", "OK")
                             }
 
             GCData.DataSource = Nothing
@@ -3002,6 +3009,11 @@ Public Class FormImportExcel
             GVData.Columns("design_cop").DisplayFormat.FormatString = "N2"
             GVData.Columns("retail_price").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
             GVData.Columns("retail_price").DisplayFormat.FormatString = "N0"
+
+            'summary
+            GVData.OptionsView.ShowFooter = True
+            GVData.Columns("qty").SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum
+            GVData.Columns("qty").SummaryItem.DisplayFormat = "{0:n0}"
         ElseIf id_pop_up = "48" Then
             'vendor code 
             Dim queryx As String = "SELECT p.id_product,p.product_full_code,p.product_name,dsg.design_cop, cd.code_detail_name AS `size`
@@ -3021,7 +3033,7 @@ Public Class FormImportExcel
                         Select New With
                             {
                                 .id_product = If(y1 Is Nothing, "0", y1("id_product")),
-                                .code = If(y1 Is Nothing, "0", y1("product_full_code")),
+                                .code = table1("product_code").ToString,
                                 .name = If(y1 Is Nothing, "0", y1("product_name")),
                                 .size = If(y1 Is Nothing, "0", y1("size")),
                                 .qty = table1("qty"),
@@ -3035,7 +3047,8 @@ Public Class FormImportExcel
                                 .rack = FormFGAdjOutDet.rack_name,
                                 .id_drawer = FormFGAdjOutDet.id_drawer,
                                 .drawer = FormFGAdjOutDet.drawer_name,
-                                .note = table1("note")
+                                .note = table1("note"),
+                                .Status = If(y1 Is Nothing, "Master product not found", "OK")
                             }
 
             GCData.DataSource = Nothing
@@ -3067,6 +3080,11 @@ Public Class FormImportExcel
             GVData.Columns("design_cop").DisplayFormat.FormatString = "N2"
             GVData.Columns("retail_price").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
             GVData.Columns("retail_price").DisplayFormat.FormatString = "N0"
+
+            'summary
+            GVData.OptionsView.ShowFooter = True
+            GVData.Columns("qty").SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum
+            GVData.Columns("qty").SummaryItem.DisplayFormat = "{0:n0}"
         End If
         data_temp.Dispose()
         oledbconn.Close()
@@ -3113,7 +3131,7 @@ Public Class FormImportExcel
                 e.Appearance.BackColor = Color.Salmon
                 e.Appearance.BackColor2 = Color.WhiteSmoke
             End If
-        ElseIf id_pop_up = "11" Or id_pop_up = "13" Or id_pop_up = "14" Or id_pop_up = "15" Or id_pop_up = "17" Or id_pop_up = "19" Or id_pop_up = "20" Or id_pop_up = "21" Or id_pop_up = "25" Or id_pop_up = "31" Or id_pop_up = "33" Or id_pop_up = "37" Or id_pop_up = "40" Or id_pop_up = "42" Or id_pop_up = "43" Then
+        ElseIf id_pop_up = "11" Or id_pop_up = "13" Or id_pop_up = "14" Or id_pop_up = "15" Or id_pop_up = "17" Or id_pop_up = "19" Or id_pop_up = "20" Or id_pop_up = "21" Or id_pop_up = "25" Or id_pop_up = "31" Or id_pop_up = "33" Or id_pop_up = "37" Or id_pop_up = "40" Or id_pop_up = "42" Or id_pop_up = "43" Or id_pop_up = "47" Or id_pop_up = "48" Then
             Dim stt As String = sender.GetRowCellValue(e.RowHandle, sender.Columns("Status")).ToString
             If stt <> "OK" Then
                 e.Appearance.BackColor = Color.Salmon
@@ -5147,90 +5165,104 @@ Public Class FormImportExcel
                     Close()
                 End If
             ElseIf id_pop_up = "47" Then 'adj inn
-                Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure want to import this " & GVData.RowCount.ToString & " data ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+                Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Please make sure :            " + System.Environment.NewLine + "- Only 'OK' status will continue to next step." + System.Environment.NewLine + "- If this report is an important, please click 'No' button, and then click 'Print' button to export to multiple formats provided." + System.Environment.NewLine + " Are you sure want to import this " & GVData.RowCount.ToString & " data ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
                 If confirm = Windows.Forms.DialogResult.Yes Then
                     makeSafeGV(GVData)
-                    PBC.Properties.Minimum = 0
-                    PBC.Properties.Maximum = GVData.RowCount - 1
-                    PBC.Properties.Step = 1
-                    PBC.Properties.PercentView = True
-                    '
-                    For i As Integer = 0 To GVData.RowCount - 1
-                        If Not GVData.GetRowCellValue(i, "id_product").ToString = "0" Then
-                            Dim R As DataRow = (TryCast(FormFGAdjInDet.GCDetail.DataSource, DataTable)).NewRow()
-                            R("id_product") = GVData.GetRowCellValue(i, "id_product").ToString
-                            R("name") = GVData.GetRowCellValue(i, "name").ToString
-                            R("size") = ""
-                            R("uom") = "pcs"
-                            R("code") = GVData.GetRowCellValue(i, "code").ToString
-                            R("adj_in_fg_det_qty") = Decimal.Parse(GVData.GetRowCellValue(i, "qty").ToString)
-                            R("retail_price") = Decimal.Parse(GVData.GetRowCellValue(i, "retail_price").ToString)
-                            R("adj_in_fg_det_price") = Decimal.Parse(GVData.GetRowCellValue(i, "design_cop").ToString)
-                            R("adj_in_fg_det_amount") = Decimal.Parse(GVData.GetRowCellValue(i, "qty").ToString) * Decimal.Parse(GVData.GetRowCellValue(i, "design_cop").ToString)
-                            R("retail_price_amount") = Decimal.Parse(GVData.GetRowCellValue(i, "qty").ToString) * Decimal.Parse(GVData.GetRowCellValue(i, "retail_price").ToString)
-                            R("adj_in_fg_det_note") = GVData.GetRowCellValue(i, "note").ToString
-                            R("id_wh_drawer") = GVData.GetRowCellValue(i, "id_drawer").ToString
-                            R("id_wh_rack") = GVData.GetRowCellValue(i, "id_rack").ToString
-                            R("id_wh_locator") = GVData.GetRowCellValue(i, "id_locator").ToString
-                            R("id_comp") = GVData.GetRowCellValue(i, "id_comp").ToString
-                            R("comp") = GVData.GetRowCellValue(i, "comp").ToString
-                            R("wh_drawer") = GVData.GetRowCellValue(i, "drawer").ToString
-                            R("wh_rack") = GVData.GetRowCellValue(i, "rack").ToString
-                            R("wh_locator") = GVData.GetRowCellValue(i, "locator").ToString
-                            R("comp_name") = GVData.GetRowCellValue(i, "comp").ToString
-                            TryCast(FormFGAdjInDet.GCDetail.DataSource, DataTable).Rows.Add(R)
-                            FormFGAdjInDet.GCDetail.RefreshDataSource()
-                            FormFGAdjInDet.GVDetail.RefreshData()
-                        End If
+                    GVData.ActiveFilterString = "[Status] = 'OK'"
+
+                    If GVData.RowCount > 0 Then
+                        PBC.Properties.Minimum = 0
+                        PBC.Properties.Maximum = GVData.RowCount - 1
+                        PBC.Properties.Step = 1
+                        PBC.Properties.PercentView = True
                         '
-                        PBC.PerformStep()
-                        PBC.Update()
-                    Next
-                    infoCustom("Import Success")
-                    Close()
+                        For i As Integer = 0 To GVData.RowCount - 1
+                            If Not GVData.GetRowCellValue(i, "id_product").ToString = "0" Then
+                                Dim R As DataRow = (TryCast(FormFGAdjInDet.GCDetail.DataSource, DataTable)).NewRow()
+                                R("id_product") = GVData.GetRowCellValue(i, "id_product").ToString
+                                R("name") = GVData.GetRowCellValue(i, "name").ToString
+                                R("size") = GVData.GetRowCellValue(i, "size").ToString
+                                R("uom") = "pcs"
+                                R("code") = GVData.GetRowCellValue(i, "code").ToString
+                                R("adj_in_fg_det_qty") = Decimal.Parse(GVData.GetRowCellValue(i, "qty").ToString)
+                                R("retail_price") = Decimal.Parse(GVData.GetRowCellValue(i, "retail_price").ToString)
+                                R("adj_in_fg_det_price") = Decimal.Parse(GVData.GetRowCellValue(i, "design_cop").ToString)
+                                R("adj_in_fg_det_amount") = Decimal.Parse(GVData.GetRowCellValue(i, "qty").ToString) * Decimal.Parse(GVData.GetRowCellValue(i, "design_cop").ToString)
+                                R("retail_price_amount") = Decimal.Parse(GVData.GetRowCellValue(i, "qty").ToString) * Decimal.Parse(GVData.GetRowCellValue(i, "retail_price").ToString)
+                                R("adj_in_fg_det_note") = GVData.GetRowCellValue(i, "note").ToString
+                                R("id_wh_drawer") = GVData.GetRowCellValue(i, "id_drawer").ToString
+                                R("id_wh_rack") = GVData.GetRowCellValue(i, "id_rack").ToString
+                                R("id_wh_locator") = GVData.GetRowCellValue(i, "id_locator").ToString
+                                R("id_comp") = GVData.GetRowCellValue(i, "id_comp").ToString
+                                R("comp") = GVData.GetRowCellValue(i, "comp").ToString
+                                R("wh_drawer") = GVData.GetRowCellValue(i, "drawer").ToString
+                                R("wh_rack") = GVData.GetRowCellValue(i, "rack").ToString
+                                R("wh_locator") = GVData.GetRowCellValue(i, "locator").ToString
+                                R("comp_name") = GVData.GetRowCellValue(i, "comp").ToString
+                                TryCast(FormFGAdjInDet.GCDetail.DataSource, DataTable).Rows.Add(R)
+                                FormFGAdjInDet.GCDetail.RefreshDataSource()
+                                FormFGAdjInDet.GVDetail.RefreshData()
+                            End If
+                            '
+                            PBC.PerformStep()
+                            PBC.Update()
+                        Next
+                        infoCustom("Import Success")
+                        Close()
+                    Else
+                        stopCustom("There is no data for import process, please make sure your input !")
+                        makeSafeGV(GVData)
+                    End If
                 End If
             ElseIf id_pop_up = "48" Then 'adj inn
-                Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure want to import this " & GVData.RowCount.ToString & " data ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+                Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Please make sure :            " + System.Environment.NewLine + "- Only 'OK' status will continue to next step." + System.Environment.NewLine + "- If this report is an important, please click 'No' button, and then click 'Print' button to export to multiple formats provided." + System.Environment.NewLine + " Are you sure want to import this " & GVData.RowCount.ToString & " data ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
                 If confirm = Windows.Forms.DialogResult.Yes Then
                     makeSafeGV(GVData)
-                    PBC.Properties.Minimum = 0
-                    PBC.Properties.Maximum = GVData.RowCount - 1
-                    PBC.Properties.Step = 1
-                    PBC.Properties.PercentView = True
-                    '
-                    For i As Integer = 0 To GVData.RowCount - 1
-                        If Not GVData.GetRowCellValue(i, "id_product").ToString = "0" Then
-                            Dim R As DataRow = (TryCast(FormFGAdjOutDet.GCDetail.DataSource, DataTable)).NewRow()
-                            R("id_product") = GVData.GetRowCellValue(i, "id_product").ToString
-                            R("name") = GVData.GetRowCellValue(i, "name").ToString
-                            R("size") = GVData.GetRowCellValue(i, "size").ToString
-                            R("uom") = "pcs"
-                            R("code") = GVData.GetRowCellValue(i, "code").ToString
-                            R("adj_out_fg_det_qty") = Decimal.Parse(GVData.GetRowCellValue(i, "qty").ToString)
-                            R("retail_price") = Decimal.Parse(GVData.GetRowCellValue(i, "retail_price").ToString)
-                            R("adj_out_fg_det_price") = Decimal.Parse(GVData.GetRowCellValue(i, "design_cop").ToString)
-                            R("adj_out_fg_det_amount") = Decimal.Parse(GVData.GetRowCellValue(i, "qty").ToString) * Decimal.Parse(GVData.GetRowCellValue(i, "design_cop").ToString)
-                            R("retail_price_amount") = Decimal.Parse(GVData.GetRowCellValue(i, "qty").ToString) * Decimal.Parse(GVData.GetRowCellValue(i, "retail_price").ToString)
-                            R("adj_out_fg_det_note") = GVData.GetRowCellValue(i, "note").ToString
-                            R("id_wh_drawer") = GVData.GetRowCellValue(i, "id_drawer").ToString
-                            R("id_wh_rack") = GVData.GetRowCellValue(i, "id_rack").ToString
-                            R("id_wh_locator") = GVData.GetRowCellValue(i, "id_locator").ToString
-                            R("id_comp") = GVData.GetRowCellValue(i, "id_comp").ToString
-                            R("comp") = GVData.GetRowCellValue(i, "comp").ToString
-                            R("wh_drawer") = GVData.GetRowCellValue(i, "drawer").ToString
-                            'R("wh_rack") = GVData.GetRowCellValue(i, "rack").ToString
-                            'R("wh_locator") = GVData.GetRowCellValue(i, "locator").ToString
-                            'R("comp_name") = GVData.GetRowCellValue(i, "comp").ToString
-                            TryCast(FormFGAdjOutDet.GCDetail.DataSource, DataTable).Rows.Add(R)
-                            FormFGAdjOutDet.GCDetail.RefreshDataSource()
-                            FormFGAdjOutDet.GVDetail.RefreshData()
-                        End If
+                    GVData.ActiveFilterString = "[Status] = 'OK'"
+
+                    If GVData.RowCount > 0 Then
+                        PBC.Properties.Minimum = 0
+                        PBC.Properties.Maximum = GVData.RowCount - 1
+                        PBC.Properties.Step = 1
+                        PBC.Properties.PercentView = True
                         '
-                        PBC.PerformStep()
-                        PBC.Update()
-                    Next
-                    infoCustom("Import Success")
-                    Close()
+                        For i As Integer = 0 To GVData.RowCount - 1
+                            If Not GVData.GetRowCellValue(i, "id_product").ToString = "0" Then
+                                Dim R As DataRow = (TryCast(FormFGAdjOutDet.GCDetail.DataSource, DataTable)).NewRow()
+                                R("id_product") = GVData.GetRowCellValue(i, "id_product").ToString
+                                R("name") = GVData.GetRowCellValue(i, "name").ToString
+                                R("size") = GVData.GetRowCellValue(i, "size").ToString
+                                R("uom") = "pcs"
+                                R("code") = GVData.GetRowCellValue(i, "code").ToString
+                                R("adj_out_fg_det_qty") = Decimal.Parse(GVData.GetRowCellValue(i, "qty").ToString)
+                                R("retail_price") = Decimal.Parse(GVData.GetRowCellValue(i, "retail_price").ToString)
+                                R("adj_out_fg_det_price") = Decimal.Parse(GVData.GetRowCellValue(i, "design_cop").ToString)
+                                R("adj_out_fg_det_amount") = Decimal.Parse(GVData.GetRowCellValue(i, "qty").ToString) * Decimal.Parse(GVData.GetRowCellValue(i, "design_cop").ToString)
+                                R("retail_price_amount") = Decimal.Parse(GVData.GetRowCellValue(i, "qty").ToString) * Decimal.Parse(GVData.GetRowCellValue(i, "retail_price").ToString)
+                                R("adj_out_fg_det_note") = GVData.GetRowCellValue(i, "note").ToString
+                                R("id_wh_drawer") = GVData.GetRowCellValue(i, "id_drawer").ToString
+                                R("id_wh_rack") = GVData.GetRowCellValue(i, "id_rack").ToString
+                                R("id_wh_locator") = GVData.GetRowCellValue(i, "id_locator").ToString
+                                R("id_comp") = GVData.GetRowCellValue(i, "id_comp").ToString
+                                R("comp") = GVData.GetRowCellValue(i, "comp").ToString
+                                R("wh_drawer") = GVData.GetRowCellValue(i, "drawer").ToString
+                                'R("wh_rack") = GVData.GetRowCellValue(i, "rack").ToString
+                                'R("wh_locator") = GVData.GetRowCellValue(i, "locator").ToString
+                                'R("comp_name") = GVData.GetRowCellValue(i, "comp").ToString
+                                TryCast(FormFGAdjOutDet.GCDetail.DataSource, DataTable).Rows.Add(R)
+                                FormFGAdjOutDet.GCDetail.RefreshDataSource()
+                                FormFGAdjOutDet.GVDetail.RefreshData()
+                            End If
+                            '
+                            PBC.PerformStep()
+                            PBC.Update()
+                        Next
+                        infoCustom("Import Success")
+                        Close()
+                    Else
+                        stopCustom("There is no data for import process, please make sure your input !")
+                        makeSafeGV(GVData)
+                    End If
                 End If
             End If
         End If

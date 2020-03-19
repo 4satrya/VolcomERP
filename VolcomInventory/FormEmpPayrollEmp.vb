@@ -39,7 +39,7 @@
 		                    LEFT JOIN tb_lookup_employee_status AS l_sts ON sts.id_employee_status = l_sts.id_employee_status
 		                    LEFT JOIN tb_m_employee AS emp ON sts.id_employee = emp.id_employee
 		                    LEFT JOIN tb_m_departement AS dep ON emp.id_departement = dep.id_departement
-		                    WHERE sts.start_period <= IF(dep.is_store = 2, (SELECT periode_end FROM tb_emp_payroll WHERE id_payroll = 43), (SELECT store_periode_end FROM tb_emp_payroll WHERE id_payroll = 43))
+		                    WHERE sts.start_period <= IF(dep.is_store = 2, (SELECT periode_end FROM tb_emp_payroll WHERE id_payroll = '" & id_payroll & "'), (SELECT store_periode_end FROM tb_emp_payroll WHERE id_payroll = '" & id_payroll & "'))
 		                    ORDER BY sts.id_employee_status_det DESC
 	                    ) AS tb
 	                    GROUP BY tb.id_employee
@@ -70,7 +70,7 @@
 		                    LEFT JOIN tb_lookup_employee_status AS l_sts ON sts.id_employee_status = l_sts.id_employee_status
 		                    LEFT JOIN tb_m_employee AS emp ON sts.id_employee = emp.id_employee
 		                    LEFT JOIN tb_m_departement AS dep ON emp.id_departement = dep.id_departement
-		                    WHERE sts.start_period <= IF(dep.is_store = 2, (SELECT periode_end FROM tb_emp_payroll WHERE id_payroll = 43), (SELECT store_periode_end FROM tb_emp_payroll WHERE id_payroll = 43))
+		                    WHERE sts.start_period <= IF(dep.is_store = 2, (SELECT periode_end FROM tb_emp_payroll WHERE id_payroll = '" & id_payroll & "'), (SELECT store_periode_end FROM tb_emp_payroll WHERE id_payroll = '" & id_payroll & "'))
 		                    ORDER BY sts.id_employee_status_det DESC
 	                    ) AS tb
 	                    GROUP BY tb.id_employee
@@ -104,7 +104,7 @@
 		                    LEFT JOIN tb_lookup_employee_status AS l_sts ON sts.id_employee_status = l_sts.id_employee_status
 		                    LEFT JOIN tb_m_employee AS emp ON sts.id_employee = emp.id_employee
 		                    LEFT JOIN tb_m_departement AS dep ON emp.id_departement = dep.id_departement
-		                    WHERE sts.start_period <= IF(dep.is_store = 2, (SELECT periode_end FROM tb_emp_payroll WHERE id_payroll = 43), (SELECT store_periode_end FROM tb_emp_payroll WHERE id_payroll = 43))
+		                    WHERE sts.start_period <= IF(dep.is_store = 2, (SELECT periode_end FROM tb_emp_payroll WHERE id_payroll = '" & id_payroll & "'), (SELECT store_periode_end FROM tb_emp_payroll WHERE id_payroll = '" & id_payroll & "'))
 		                    ORDER BY sts.id_employee_status_det DESC
 	                    ) AS tb
 	                    GROUP BY tb.id_employee

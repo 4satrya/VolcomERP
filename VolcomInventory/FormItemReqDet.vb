@@ -303,7 +303,7 @@
         End If
         Dim cond_data As Boolean = True
         Dim st As New ClassPurcItemStock()
-        Dim qst As String = st.queryGetStock("AND (i.id_departement='" + id_dep + "' OR i.id_departement='" + id_purc_store + "') ", "9999-12-31")
+        Dim qst As String = st.queryGetStock("AND (i.id_departement='" + id_dep + "' OR i.id_departement='" + id_purc_store + "') ", "0", "9999-12-31")
         Dim dst As DataTable = execute_query(qst, -1, True, "", "", "", "")
         For i As Integer = 0 To ((GVData.RowCount - 1) - GetGroupRowCount(GVData))
             Dim id_item_cek As String = GVData.GetRowCellValue(i, "id_item").ToString

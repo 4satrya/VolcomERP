@@ -109,7 +109,7 @@
 
     Sub viewDetailReturn()
         Dim query As String = ""
-        query += "CALL view_fg_adj_out('" + id_adj_out_fg + "')"
+        query += "CALL view_fg_adj_out_less('" + id_adj_out_fg + "')"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCDetail.DataSource = data
         GVDetail.BestFitColumns()

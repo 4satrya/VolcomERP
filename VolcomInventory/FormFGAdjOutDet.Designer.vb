@@ -329,7 +329,7 @@ Partial Class FormFGAdjOutDet
         Me.GridColumnCode.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.[False]
         Me.GridColumnCode.OptionsColumn.ShowInCustomizationForm = False
         Me.GridColumnCode.Visible = True
-        Me.GridColumnCode.VisibleIndex = 1
+        Me.GridColumnCode.VisibleIndex = 2
         Me.GridColumnCode.Width = 93
         '
         'GridColumnName
@@ -353,7 +353,7 @@ Partial Class FormFGAdjOutDet
         Me.GridColumnSize.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.[False]
         Me.GridColumnSize.OptionsColumn.ShowInCustomizationForm = False
         Me.GridColumnSize.Visible = True
-        Me.GridColumnSize.VisibleIndex = 2
+        Me.GridColumnSize.VisibleIndex = 4
         Me.GridColumnSize.Width = 46
         '
         'GridColumnCompName
@@ -469,7 +469,7 @@ Partial Class FormFGAdjOutDet
         Me.GridColumnAccount.FieldName = "comp"
         Me.GridColumnAccount.Name = "GridColumnAccount"
         Me.GridColumnAccount.Visible = True
-        Me.GridColumnAccount.VisibleIndex = 4
+        Me.GridColumnAccount.VisibleIndex = 1
         '
         'GridColumnretail_price
         '

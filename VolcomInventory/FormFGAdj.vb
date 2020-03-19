@@ -20,10 +20,17 @@
     'View Data
     Sub viewAdjIn()
         Dim query As String = ""
-        query += "SELECT *, DATE_FORMAT(a.adj_in_fg_date, '%d %M %Y') AS adj_in_fg_datex "
-        query += "FROM tb_adj_in_fg a "
+        query += "SELECT *, DATE_FORMAT(a.adj_in_fg_date, '%d %M %Y') AS adj_in_fg_datex, SUM(adj_in_fg_det_qty) AS `total_qty`, 
+        GROUP_CONCAT(DISTINCT comp.comp_number) AS `account` "
+        query += "FROM tb_adj_in_fg a 
+        INNER JOIN tb_adj_in_fg_det ad ON ad.id_adj_in_fg = a.id_adj_in_fg 
+        INNER JOIN tb_m_wh_drawer drw ON drw.id_wh_drawer = ad.id_wh_drawer
+        INNER JOIN tb_m_wh_rack rck ON rck.id_wh_rack = drw.id_wh_rack
+        INNER JOIN tb_m_wh_locator loc ON loc.id_wh_locator = rck.id_wh_locator
+        INNER JOIN tb_m_comp comp ON comp.id_comp = loc.id_comp "
         query += "INNER JOIN tb_lookup_report_status b ON a.id_report_status = b.id_report_status "
-        query += "INNER JOIN tb_lookup_currency c ON a.id_currency = c.id_currency  "
+        query += "INNER JOIN tb_lookup_currency c ON a.id_currency = c.id_currency  
+        GROUP BY a.id_adj_in_fg "
         query += "ORDER BY a.id_adj_in_fg DESC "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCAdjIn.DataSource = data
@@ -31,10 +38,18 @@
     End Sub
     Sub viewAdjOut()
         Dim query As String = ""
-        query += "SELECT *, DATE_FORMAT(a.adj_out_fg_date, '%d %M %Y') AS adj_out_fg_datex "
-        query += "FROM tb_adj_out_fg a "
+        query += "SELECT *, DATE_FORMAT(a.adj_out_fg_date, '%d %M %Y') AS adj_out_fg_datex,
+        SUM(adj_out_fg_det_qty) AS `total_qty`, 
+        GROUP_CONCAT(DISTINCT comp.comp_number) AS `account` "
+        query += "FROM tb_adj_out_fg a 
+        INNER JOIN tb_adj_out_fg_det ad ON ad.id_adj_out_fg = a.id_adj_out_fg 
+        INNER JOIN tb_m_wh_drawer drw ON drw.id_wh_drawer = ad.id_wh_drawer
+        INNER JOIN tb_m_wh_rack rck ON rck.id_wh_rack = drw.id_wh_rack
+        INNER JOIN tb_m_wh_locator loc ON loc.id_wh_locator = rck.id_wh_locator
+        INNER JOIN tb_m_comp comp ON comp.id_comp = loc.id_comp "
         query += "INNER JOIN tb_lookup_report_status b ON a.id_report_status = b.id_report_status "
-        query += "INNER JOIN tb_lookup_currency c ON a.id_currency = c.id_currency  "
+        query += "INNER JOIN tb_lookup_currency c ON a.id_currency = c.id_currency  
+        GROUP BY a.id_adj_out_fg  "
         query += "ORDER BY a.id_adj_out_fg DESC "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCAdjOut.DataSource = data

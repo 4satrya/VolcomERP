@@ -1906,6 +1906,16 @@
             '    execute_non_query(query, True, "", "", "", "")
             'End If
 
+            'user
+            query = "
+                INSERT INTO tb_m_user (id_employee, username, `password`, id_role)
+                SELECT '" + id_employee + "' AS id_employee, employee_code AS username, MD5(employee_code) AS `password`, 99 AS id_role 
+                FROM tb_m_employee
+                WHERE id_employee = '" + id_employee + "'
+            "
+
+            execute_non_query(query, True, "", "", "", "")
+
             progress.ProgressBarControl.EditValue = 40
         End If
 

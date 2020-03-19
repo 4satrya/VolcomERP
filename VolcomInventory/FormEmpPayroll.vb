@@ -1380,4 +1380,10 @@
             End If
         Next
     End Sub
+
+    Private Sub GVPayroll_RowCellStyle(sender As Object, e As DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs) Handles GVPayroll.RowCellStyle
+        If GVPayroll.GetRowCellValue(e.RowHandle, "is_resign").ToString = "1" Then
+            e.Appearance.BackColor = Color.Yellow
+        End If
+    End Sub
 End Class

@@ -1,9 +1,13 @@
 ﻿Public Class ClassPurcItemStock
     Public opt As String = ""
-    Public Function queryGetStock(ByVal cond As String, ByVal date_until_selected As String) As String
+    Public Function queryGetStock(ByVal cond As String, ByVal cat As String, ByVal date_until_selected As String) As String
         Dim q_where As String = ""
         If opt = "fisik" Then
             q_where = " AND i.report_mark_type!='154' "
+        End If
+
+        If Not cat = "0" Then
+            q_where += " AND cat.id_item_cat='" & cat & "' "
         End If
 
         Dim query As String = "SELECT a.id_departement, IFNULL(dept.departement,'All Departement') AS departement,a.id_item, im.item_desc, im.id_item_cat, cat.item_cat, SUM(a.qty) AS `qty`, 0.00 AS `qty_req`, IFNULL(cst.avg_cost,0) AS `value`, '' AS `remark`

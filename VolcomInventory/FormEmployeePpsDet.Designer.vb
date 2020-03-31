@@ -27,6 +27,7 @@ Partial Class FormEmployeePpsDet
         Me.SBClose = New DevExpress.XtraEditors.SimpleButton()
         Me.SBSaveDraft = New DevExpress.XtraEditors.SimpleButton()
         Me.SBSave = New DevExpress.XtraEditors.SimpleButton()
+        Me.SBSaveUpdateSalary = New DevExpress.XtraEditors.SimpleButton()
         Me.TxtNumber = New DevExpress.XtraEditors.TextEdit()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -60,6 +61,12 @@ Partial Class FormEmployeePpsDet
         Me.LabelControl22 = New DevExpress.XtraEditors.LabelControl()
         Me.GCContractPropose = New DevExpress.XtraEditors.GroupControl()
         Me.PanelControl10 = New DevExpress.XtraEditors.PanelControl()
+        Me.SLUEJabatanTKDN = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl33 = New DevExpress.XtraEditors.LabelControl()
         Me.LELevel = New DevExpress.XtraEditors.LookUpEdit()
         Me.TxtPosition = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl29 = New DevExpress.XtraEditors.LabelControl()
@@ -255,6 +262,12 @@ Partial Class FormEmployeePpsDet
         Me.LabelControl15 = New DevExpress.XtraEditors.LabelControl()
         Me.GCContractProposeB = New DevExpress.XtraEditors.GroupControl()
         Me.PanelControl13 = New DevExpress.XtraEditors.PanelControl()
+        Me.SLUEJabatanTKDNB = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl34 = New DevExpress.XtraEditors.LabelControl()
         Me.LELevelB = New DevExpress.XtraEditors.LookUpEdit()
         Me.TxtPositionB = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl7 = New DevExpress.XtraEditors.LabelControl()
@@ -432,7 +445,6 @@ Partial Class FormEmployeePpsDet
         Me.MENote = New DevExpress.XtraEditors.MemoEdit()
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.ChangesProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
-        Me.SBSaveUpdateSalary = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -468,6 +480,8 @@ Partial Class FormEmployeePpsDet
         Me.GCContractPropose.SuspendLayout()
         CType(Me.PanelControl10, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl10.SuspendLayout()
+        CType(Me.SLUEJabatanTKDN.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LELevel.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtPosition.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEEffectiveDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -611,6 +625,8 @@ Partial Class FormEmployeePpsDet
         Me.GCContractProposeB.SuspendLayout()
         CType(Me.PanelControl13, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl13.SuspendLayout()
+        CType(Me.SLUEJabatanTKDNB.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LELevelB.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtPositionB.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEEffectiveDateB.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -792,7 +808,7 @@ Partial Class FormEmployeePpsDet
         Me.SBClose.Dock = System.Windows.Forms.DockStyle.Right
         Me.SBClose.ImageIndex = 5
         Me.SBClose.ImageList = Me.LargeImageCollection
-        Me.SBClose.Location = New System.Drawing.Point(408, 2)
+        Me.SBClose.Location = New System.Drawing.Point(405, 2)
         Me.SBClose.Name = "SBClose"
         Me.SBClose.Size = New System.Drawing.Size(75, 33)
         Me.SBClose.TabIndex = 6
@@ -803,7 +819,7 @@ Partial Class FormEmployeePpsDet
         Me.SBSaveDraft.Dock = System.Windows.Forms.DockStyle.Right
         Me.SBSaveDraft.ImageIndex = 7
         Me.SBSaveDraft.ImageList = Me.LargeImageCollection
-        Me.SBSaveDraft.Location = New System.Drawing.Point(483, 2)
+        Me.SBSaveDraft.Location = New System.Drawing.Point(480, 2)
         Me.SBSaveDraft.Name = "SBSaveDraft"
         Me.SBSaveDraft.Size = New System.Drawing.Size(74, 33)
         Me.SBSaveDraft.TabIndex = 8
@@ -814,11 +830,22 @@ Partial Class FormEmployeePpsDet
         Me.SBSave.Dock = System.Windows.Forms.DockStyle.Right
         Me.SBSave.ImageIndex = 19
         Me.SBSave.ImageList = Me.LargeImageCollection
-        Me.SBSave.Location = New System.Drawing.Point(557, 2)
+        Me.SBSave.Location = New System.Drawing.Point(554, 2)
         Me.SBSave.Name = "SBSave"
         Me.SBSave.Size = New System.Drawing.Size(79, 33)
         Me.SBSave.TabIndex = 5
         Me.SBSave.Text = "Submit"
+        '
+        'SBSaveUpdateSalary
+        '
+        Me.SBSaveUpdateSalary.Dock = System.Windows.Forms.DockStyle.Right
+        Me.SBSaveUpdateSalary.ImageIndex = 19
+        Me.SBSaveUpdateSalary.ImageList = Me.LargeImageCollection
+        Me.SBSaveUpdateSalary.Location = New System.Drawing.Point(633, 2)
+        Me.SBSaveUpdateSalary.Name = "SBSaveUpdateSalary"
+        Me.SBSaveUpdateSalary.Size = New System.Drawing.Size(161, 33)
+        Me.SBSaveUpdateSalary.TabIndex = 9
+        Me.SBSaveUpdateSalary.Text = "Submit && Update Salary"
         '
         'TxtNumber
         '
@@ -887,7 +914,7 @@ Partial Class FormEmployeePpsDet
         Me.GCAtt.Controls.Add(Me.PCKkAtt)
         Me.GCAtt.Controls.Add(Me.PCKtpAtt)
         Me.GCAtt.Dock = System.Windows.Forms.DockStyle.Top
-        Me.GCAtt.Location = New System.Drawing.Point(0, 1819)
+        Me.GCAtt.Location = New System.Drawing.Point(0, 1853)
         Me.GCAtt.Name = "GCAtt"
         Me.GCAtt.Size = New System.Drawing.Size(773, 150)
         Me.GCAtt.TabIndex = 8966
@@ -975,7 +1002,7 @@ Partial Class FormEmployeePpsDet
         Me.GCPayrollPropose.Controls.Add(Me.LabelControl21)
         Me.GCPayrollPropose.Controls.Add(Me.LabelControl22)
         Me.GCPayrollPropose.Dock = System.Windows.Forms.DockStyle.Top
-        Me.GCPayrollPropose.Location = New System.Drawing.Point(0, 1527)
+        Me.GCPayrollPropose.Location = New System.Drawing.Point(0, 1561)
         Me.GCPayrollPropose.Name = "GCPayrollPropose"
         Me.GCPayrollPropose.Size = New System.Drawing.Size(773, 292)
         Me.GCPayrollPropose.TabIndex = 4
@@ -1188,13 +1215,15 @@ Partial Class FormEmployeePpsDet
         Me.GCContractPropose.Dock = System.Windows.Forms.DockStyle.Top
         Me.GCContractPropose.Location = New System.Drawing.Point(0, 1224)
         Me.GCContractPropose.Name = "GCContractPropose"
-        Me.GCContractPropose.Size = New System.Drawing.Size(773, 303)
+        Me.GCContractPropose.Size = New System.Drawing.Size(773, 337)
         Me.GCContractPropose.TabIndex = 3
         Me.GCContractPropose.Text = "Status Contract And Position"
         '
         'PanelControl10
         '
         Me.PanelControl10.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelControl10.Controls.Add(Me.SLUEJabatanTKDN)
+        Me.PanelControl10.Controls.Add(Me.LabelControl33)
         Me.PanelControl10.Controls.Add(Me.LELevel)
         Me.PanelControl10.Controls.Add(Me.TxtPosition)
         Me.PanelControl10.Controls.Add(Me.LabelControl29)
@@ -1204,8 +1233,54 @@ Partial Class FormEmployeePpsDet
         Me.PanelControl10.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl10.Location = New System.Drawing.Point(2, 198)
         Me.PanelControl10.Name = "PanelControl10"
-        Me.PanelControl10.Size = New System.Drawing.Size(769, 104)
+        Me.PanelControl10.Size = New System.Drawing.Size(769, 138)
         Me.PanelControl10.TabIndex = 8937
+        '
+        'SLUEJabatanTKDN
+        '
+        Me.SLUEJabatanTKDN.Location = New System.Drawing.Point(135, 104)
+        Me.SLUEJabatanTKDN.Name = "SLUEJabatanTKDN"
+        Me.SLUEJabatanTKDN.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLUEJabatanTKDN.Properties.View = Me.SearchLookUpEdit1View
+        Me.SLUEJabatanTKDN.Size = New System.Drawing.Size(619, 20)
+        Me.SLUEJabatanTKDN.TabIndex = 130
+        '
+        'SearchLookUpEdit1View
+        '
+        Me.SearchLookUpEdit1View.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn3})
+        Me.SearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.SearchLookUpEdit1View.Name = "SearchLookUpEdit1View"
+        Me.SearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.SearchLookUpEdit1View.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn1
+        '
+        Me.GridColumn1.FieldName = "id_jabatan_tkdn"
+        Me.GridColumn1.Name = "GridColumn1"
+        '
+        'GridColumn2
+        '
+        Me.GridColumn2.Caption = "Kode"
+        Me.GridColumn2.FieldName = "kode_jabatan_tkdn"
+        Me.GridColumn2.Name = "GridColumn2"
+        Me.GridColumn2.Visible = True
+        Me.GridColumn2.VisibleIndex = 0
+        '
+        'GridColumn3
+        '
+        Me.GridColumn3.Caption = "Jabatan"
+        Me.GridColumn3.FieldName = "jabatan_tkdn"
+        Me.GridColumn3.Name = "GridColumn3"
+        Me.GridColumn3.Visible = True
+        Me.GridColumn3.VisibleIndex = 1
+        '
+        'LabelControl33
+        '
+        Me.LabelControl33.Location = New System.Drawing.Point(11, 107)
+        Me.LabelControl33.Name = "LabelControl33"
+        Me.LabelControl33.Size = New System.Drawing.Size(68, 13)
+        Me.LabelControl33.TabIndex = 129
+        Me.LabelControl33.Text = "Jabatan TKDN"
         '
         'LELevel
         '
@@ -2958,7 +3033,7 @@ Partial Class FormEmployeePpsDet
         Me.GCAttB.Controls.Add(Me.PCKkAttB)
         Me.GCAttB.Controls.Add(Me.PCKtpAttB)
         Me.GCAttB.Dock = System.Windows.Forms.DockStyle.Top
-        Me.GCAttB.Location = New System.Drawing.Point(0, 1819)
+        Me.GCAttB.Location = New System.Drawing.Point(0, 1853)
         Me.GCAttB.Name = "GCAttB"
         Me.GCAttB.Size = New System.Drawing.Size(773, 150)
         Me.GCAttB.TabIndex = 8967
@@ -3046,7 +3121,7 @@ Partial Class FormEmployeePpsDet
         Me.GCPayrollProposeB.Controls.Add(Me.LabelControl14)
         Me.GCPayrollProposeB.Controls.Add(Me.LabelControl15)
         Me.GCPayrollProposeB.Dock = System.Windows.Forms.DockStyle.Top
-        Me.GCPayrollProposeB.Location = New System.Drawing.Point(0, 1527)
+        Me.GCPayrollProposeB.Location = New System.Drawing.Point(0, 1561)
         Me.GCPayrollProposeB.Name = "GCPayrollProposeB"
         Me.GCPayrollProposeB.Size = New System.Drawing.Size(773, 292)
         Me.GCPayrollProposeB.TabIndex = 80
@@ -3259,13 +3334,15 @@ Partial Class FormEmployeePpsDet
         Me.GCContractProposeB.Dock = System.Windows.Forms.DockStyle.Top
         Me.GCContractProposeB.Location = New System.Drawing.Point(0, 1224)
         Me.GCContractProposeB.Name = "GCContractProposeB"
-        Me.GCContractProposeB.Size = New System.Drawing.Size(773, 303)
+        Me.GCContractProposeB.Size = New System.Drawing.Size(773, 337)
         Me.GCContractProposeB.TabIndex = 4
         Me.GCContractProposeB.Text = "Status Contract And Position"
         '
         'PanelControl13
         '
         Me.PanelControl13.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelControl13.Controls.Add(Me.SLUEJabatanTKDNB)
+        Me.PanelControl13.Controls.Add(Me.LabelControl34)
         Me.PanelControl13.Controls.Add(Me.LELevelB)
         Me.PanelControl13.Controls.Add(Me.TxtPositionB)
         Me.PanelControl13.Controls.Add(Me.LabelControl7)
@@ -3275,8 +3352,54 @@ Partial Class FormEmployeePpsDet
         Me.PanelControl13.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl13.Location = New System.Drawing.Point(2, 198)
         Me.PanelControl13.Name = "PanelControl13"
-        Me.PanelControl13.Size = New System.Drawing.Size(769, 104)
+        Me.PanelControl13.Size = New System.Drawing.Size(769, 138)
         Me.PanelControl13.TabIndex = 8941
+        '
+        'SLUEJabatanTKDNB
+        '
+        Me.SLUEJabatanTKDNB.Location = New System.Drawing.Point(135, 104)
+        Me.SLUEJabatanTKDNB.Name = "SLUEJabatanTKDNB"
+        Me.SLUEJabatanTKDNB.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLUEJabatanTKDNB.Properties.View = Me.GridView1
+        Me.SLUEJabatanTKDNB.Size = New System.Drawing.Size(619, 20)
+        Me.SLUEJabatanTKDNB.TabIndex = 8938
+        '
+        'GridView1
+        '
+        Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn4, Me.GridColumn5, Me.GridColumn6})
+        Me.GridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView1.Name = "GridView1"
+        Me.GridView1.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView1.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn4
+        '
+        Me.GridColumn4.FieldName = "id_jabatan_tkdn"
+        Me.GridColumn4.Name = "GridColumn4"
+        '
+        'GridColumn5
+        '
+        Me.GridColumn5.Caption = "Kode"
+        Me.GridColumn5.FieldName = "kode_jabatan_tkdn"
+        Me.GridColumn5.Name = "GridColumn5"
+        Me.GridColumn5.Visible = True
+        Me.GridColumn5.VisibleIndex = 0
+        '
+        'GridColumn6
+        '
+        Me.GridColumn6.Caption = "Jabatan"
+        Me.GridColumn6.FieldName = "jabatan_tkdn"
+        Me.GridColumn6.Name = "GridColumn6"
+        Me.GridColumn6.Visible = True
+        Me.GridColumn6.VisibleIndex = 1
+        '
+        'LabelControl34
+        '
+        Me.LabelControl34.Location = New System.Drawing.Point(11, 107)
+        Me.LabelControl34.Name = "LabelControl34"
+        Me.LabelControl34.Size = New System.Drawing.Size(68, 13)
+        Me.LabelControl34.TabIndex = 8937
+        Me.LabelControl34.Text = "Jabatan TKDN"
         '
         'LELevelB
         '
@@ -5163,17 +5286,6 @@ Partial Class FormEmployeePpsDet
         Me.ChangesProvider1.ContainerControl = Me
         Me.ChangesProvider1.Icon = CType(resources.GetObject("ChangesProvider1.Icon"), System.Drawing.Icon)
         '
-        'SBSaveUpdateSalary
-        '
-        Me.SBSaveUpdateSalary.Dock = System.Windows.Forms.DockStyle.Right
-        Me.SBSaveUpdateSalary.ImageIndex = 19
-        Me.SBSaveUpdateSalary.ImageList = Me.LargeImageCollection
-        Me.SBSaveUpdateSalary.Location = New System.Drawing.Point(636, 2)
-        Me.SBSaveUpdateSalary.Name = "SBSaveUpdateSalary"
-        Me.SBSaveUpdateSalary.Size = New System.Drawing.Size(158, 33)
-        Me.SBSaveUpdateSalary.TabIndex = 9
-        Me.SBSaveUpdateSalary.Text = "Submit && Update Salary"
-        '
         'FormEmployeePpsDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -5226,6 +5338,8 @@ Partial Class FormEmployeePpsDet
         CType(Me.PanelControl10, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl10.ResumeLayout(False)
         Me.PanelControl10.PerformLayout()
+        CType(Me.SLUEJabatanTKDN.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LELevel.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtPosition.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEEffectiveDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -5376,6 +5490,8 @@ Partial Class FormEmployeePpsDet
         CType(Me.PanelControl13, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl13.ResumeLayout(False)
         Me.PanelControl13.PerformLayout()
+        CType(Me.SLUEJabatanTKDNB.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LELevelB.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtPositionB.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEEffectiveDateB.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -5921,5 +6037,17 @@ Partial Class FormEmployeePpsDet
     Friend WithEvents LEHomebase As DevExpress.XtraEditors.LookUpEdit
     Friend WithEvents Label123 As Label
     Friend WithEvents LEHomebaseB As DevExpress.XtraEditors.LookUpEdit
+    Friend WithEvents SLUEJabatanTKDN As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents SearchLookUpEdit1View As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents LabelControl33 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn2 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn3 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents SLUEJabatanTKDNB As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView1 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LabelControl34 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents SBSaveUpdateSalary As DevExpress.XtraEditors.SimpleButton
 End Class

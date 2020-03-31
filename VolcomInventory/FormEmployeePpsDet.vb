@@ -203,7 +203,7 @@
             SBPosAttB.Visible = True
             LEEmployeeStatus.Size = New Size(512, 20)
             LEEmployeeStatusB.Size = New Size(512, 20)
-            SBSaveUpdateSalary.Visible = False
+            SBSaveUpdateSalary.Visible = True
         End If
 
         load_all = True

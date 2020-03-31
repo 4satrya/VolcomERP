@@ -14,7 +14,7 @@
         checkFormAccess(Name)
     End Sub
 
-    Private Sub BtnTracking_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnTracking.Click
+    Sub viewData(ByVal is_less_query As Boolean)
         Cursor = Cursors.WaitCursor
         Dim code As String = BtnEditCode.Text
         Dim date_from As String = "0000-01-01"
@@ -26,7 +26,12 @@
         End Try
 
         id_design_image = "0"
-        Dim query As String = "CALL view_fg_unique('" + code + "', '" + date_from + "', '" + date_until + "')"
+        Dim query As String = ""
+        If is_less_query Then
+            query += "CALL view_fg_unique_less('" + code + "', '" + date_from + "', '" + date_until + "')"
+        Else
+            query += "CALL view_fg_unique('" + code + "', '" + date_from + "', '" + date_until + "')"
+        End If
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         For i As Integer = 0 To data.Rows.Count - 1
             If i = 0 Then
@@ -49,6 +54,10 @@
         GroupControlTraccking.Enabled = True
         pre_viewImages("2", PictureEdit1, id_design_image, False)
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnTracking_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnTracking.Click
+        viewData(False)
     End Sub
 
     Private Sub FormFGTracking_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -99,5 +108,9 @@
         Cursor = Cursors.WaitCursor
         FormUniqueCode.ShowDialog()
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnViewLess_Click(sender As Object, e As EventArgs) Handles BtnViewLess.Click
+        viewData(True)
     End Sub
 End Class

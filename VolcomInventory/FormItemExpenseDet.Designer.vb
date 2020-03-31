@@ -664,6 +664,10 @@ Partial Class FormItemExpenseDet
         '
         'GridColumnNo
         '
+        Me.GridColumnNo.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumnNo.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumnNo.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumnNo.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
         Me.GridColumnNo.Caption = "No"
         Me.GridColumnNo.FieldName = "no"
         Me.GridColumnNo.Name = "GridColumnNo"
@@ -731,6 +735,10 @@ Partial Class FormItemExpenseDet
         '
         'GridColumnBudgetType
         '
+        Me.GridColumnBudgetType.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumnBudgetType.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumnBudgetType.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumnBudgetType.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
         Me.GridColumnBudgetType.Caption = "Budget Type"
         Me.GridColumnBudgetType.ColumnEdit = Me.RISLEType
         Me.GridColumnBudgetType.FieldName = "id_expense_type"

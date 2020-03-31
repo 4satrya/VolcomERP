@@ -1293,21 +1293,21 @@ Public Class FormSalesReturnQCDet
         ReportSalesReturnQC.rmt = report_mark_type_loc
         Dim Report As New ReportSalesReturnQC()
 
-        ' '... 
-        ' ' creating and saving the view's layout to a new memory stream 
-        Dim str As System.IO.Stream
-        str = New System.IO.MemoryStream()
-        If Not is_detail_scan Then
-            GVItemList.SaveLayoutToStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
-        Else
-            GVBarcode.SaveLayoutToStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
-        End If
-        str.Seek(0, System.IO.SeekOrigin.Begin)
-        Report.GVSalesReturnQC.RestoreLayoutFromStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
-        str.Seek(0, System.IO.SeekOrigin.Begin)
+        '' '... 
+        '' ' creating and saving the view's layout to a new memory stream 
+        'Dim str As System.IO.Stream
+        'str = New System.IO.MemoryStream()
+        'If Not is_detail_scan Then
+        '    GVItemList.SaveLayoutToStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+        'Else
+        '    GVBarcode.SaveLayoutToStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+        'End If
+        'str.Seek(0, System.IO.SeekOrigin.Begin)
+        'Report.GVSalesReturnQC.RestoreLayoutFromStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+        'str.Seek(0, System.IO.SeekOrigin.Begin)
 
-        'Grid Detail
-        ReportStyleGridview(Report.GVSalesReturnQC)
+        ''Grid Detail
+        'ReportStyleGridview(Report.GVSalesReturnQC)
 
         'Parse val
 

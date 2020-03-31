@@ -26,6 +26,9 @@ Partial Class FormBankWithdrawal
         Me.XTPPOList = New DevExpress.XtraTab.XtraTabControl()
         Me.XPOListActive = New DevExpress.XtraTab.XtraTabPage()
         Me.GCPOList = New DevExpress.XtraGrid.GridControl()
+        Me.ContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ToolStripMenuItemAdd = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ViewBPLToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GVPOList = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RICECheckReceive = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
@@ -55,9 +58,6 @@ Partial Class FormBankWithdrawal
         Me.RICEAttachment = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.XPOListNonActive = New DevExpress.XtraTab.XtraTabPage()
         Me.GCPOListNonActive = New DevExpress.XtraGrid.GridControl()
-        Me.ContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.ToolStripMenuItemAdd = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ViewBPLToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GVPOListNonActive = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn61 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn62 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -236,12 +236,12 @@ Partial Class FormBankWithdrawal
         Me.XTPPOList.SuspendLayout()
         Me.XPOListActive.SuspendLayout()
         CType(Me.GCPOList, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ContextMenuStrip.SuspendLayout()
         CType(Me.GVPOList, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RICECheckReceive, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RICEAttachment, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XPOListNonActive.SuspendLayout()
         CType(Me.GCPOListNonActive, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.ContextMenuStrip.SuspendLayout()
         CType(Me.GVPOListNonActive, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemCheckEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -346,6 +346,24 @@ Partial Class FormBankWithdrawal
         Me.GCPOList.Size = New System.Drawing.Size(1085, 383)
         Me.GCPOList.TabIndex = 17
         Me.GCPOList.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVPOList})
+        '
+        'ContextMenuStrip
+        '
+        Me.ContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemAdd, Me.ViewBPLToolStripMenuItem})
+        Me.ContextMenuStrip.Name = "ContextMenuStrip"
+        Me.ContextMenuStrip.Size = New System.Drawing.Size(254, 48)
+        '
+        'ToolStripMenuItemAdd
+        '
+        Me.ToolStripMenuItemAdd.Name = "ToolStripMenuItemAdd"
+        Me.ToolStripMenuItemAdd.Size = New System.Drawing.Size(253, 22)
+        Me.ToolStripMenuItemAdd.Text = "Add Attachment, Due Date && Pph"
+        '
+        'ViewBPLToolStripMenuItem
+        '
+        Me.ViewBPLToolStripMenuItem.Name = "ViewBPLToolStripMenuItem"
+        Me.ViewBPLToolStripMenuItem.Size = New System.Drawing.Size(253, 22)
+        Me.ViewBPLToolStripMenuItem.Text = "View BPL"
         '
         'GVPOList
         '
@@ -662,24 +680,6 @@ Partial Class FormBankWithdrawal
         Me.GCPOListNonActive.Size = New System.Drawing.Size(1085, 383)
         Me.GCPOListNonActive.TabIndex = 18
         Me.GCPOListNonActive.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVPOListNonActive})
-        '
-        'ContextMenuStrip
-        '
-        Me.ContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemAdd, Me.ViewBPLToolStripMenuItem})
-        Me.ContextMenuStrip.Name = "ContextMenuStrip"
-        Me.ContextMenuStrip.Size = New System.Drawing.Size(254, 70)
-        '
-        'ToolStripMenuItemAdd
-        '
-        Me.ToolStripMenuItemAdd.Name = "ToolStripMenuItemAdd"
-        Me.ToolStripMenuItemAdd.Size = New System.Drawing.Size(253, 22)
-        Me.ToolStripMenuItemAdd.Text = "Add Attachment, Due Date && Pph"
-        '
-        'ViewBPLToolStripMenuItem
-        '
-        Me.ViewBPLToolStripMenuItem.Name = "ViewBPLToolStripMenuItem"
-        Me.ViewBPLToolStripMenuItem.Size = New System.Drawing.Size(253, 22)
-        Me.ViewBPLToolStripMenuItem.Text = "View BPL"
         '
         'GVPOListNonActive
         '
@@ -2449,12 +2449,12 @@ Partial Class FormBankWithdrawal
         Me.XTPPOList.ResumeLayout(False)
         Me.XPOListActive.ResumeLayout(False)
         CType(Me.GCPOList, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ContextMenuStrip.ResumeLayout(False)
         CType(Me.GVPOList, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RICECheckReceive, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RICEAttachment, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XPOListNonActive.ResumeLayout(False)
         CType(Me.GCPOListNonActive, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ContextMenuStrip.ResumeLayout(False)
         CType(Me.GVPOListNonActive, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemCheckEdit2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()

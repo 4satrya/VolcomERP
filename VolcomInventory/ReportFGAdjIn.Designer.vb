@@ -480,6 +480,7 @@ Partial Public Class ReportFGAdjIn
         'XrTable1
         '
         Me.XrTable1.Font = New System.Drawing.Font("Consolas", 8.0!)
+        Me.XrTable1.KeepTogether = True
         Me.XrTable1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 65.00002!)
         Me.XrTable1.Name = "XrTable1"
         Me.XrTable1.Rows.AddRange(New DevExpress.XtraReports.UI.XRTableRow() {Me.XrTableRow1})
@@ -576,7 +577,6 @@ Partial Public Class ReportFGAdjIn
     Friend WithEvents LabelNote As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel9 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel14 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrTable1 As DevExpress.XtraReports.UI.XRTable
     Friend WithEvents XrTableRow1 As DevExpress.XtraReports.UI.XRTableRow
     Friend WithEvents XrTableCell1 As DevExpress.XtraReports.UI.XRTableCell
     Friend WithEvents WinControlContainer1 As DevExpress.XtraReports.UI.WinControlContainer
@@ -611,4 +611,5 @@ Partial Public Class ReportFGAdjIn
     Friend WithEvents LabelNo As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel3 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents ReportFooter As DevExpress.XtraReports.UI.ReportFooterBand
+    Friend WithEvents XrTable1 As DevExpress.XtraReports.UI.XRTable
 End Class

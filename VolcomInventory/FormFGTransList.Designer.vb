@@ -410,6 +410,7 @@ Partial Class FormFGTransList
         Me.DEFromAdjOut = New DevExpress.XtraEditors.DateEdit()
         Me.LabelControl27 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl28 = New DevExpress.XtraEditors.LabelControl()
+        Me.GridColumn85 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XTCSvcLevel, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCSvcLevel.SuspendLayout()
         Me.XTPRec.SuspendLayout()
@@ -1793,7 +1794,7 @@ Partial Class FormFGTransList
         '
         'GVNonStock
         '
-        Me.GVNonStock.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumn7, Me.GridColumn8, Me.GridColumn9, Me.GridColumn10, Me.GridColumn11, Me.GridColumn12, Me.GridColumn13, Me.GridColumn14, Me.GridColumn18, Me.GridColumn31, Me.GridColumn32, Me.GridColumnRemarkNonStock})
+        Me.GVNonStock.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumn7, Me.GridColumn8, Me.GridColumn9, Me.GridColumn10, Me.GridColumn11, Me.GridColumn12, Me.GridColumn13, Me.GridColumn14, Me.GridColumn18, Me.GridColumn85, Me.GridColumn31, Me.GridColumn32, Me.GridColumnRemarkNonStock})
         Me.GVNonStock.GridControl = Me.GCNonStock
         Me.GVNonStock.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty", Me.GridColumn18, "{0:n0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount", Nothing, "{0:n0}")})
         Me.GVNonStock.Name = "GVNonStock"
@@ -1865,7 +1866,7 @@ Partial Class FormFGTransList
         Me.GridColumn6.Name = "GridColumn6"
         Me.GridColumn6.OptionsColumn.AllowEdit = False
         Me.GridColumn6.Visible = True
-        Me.GridColumn6.VisibleIndex = 12
+        Me.GridColumn6.VisibleIndex = 13
         Me.GridColumn6.Width = 90
         '
         'GridColumn7
@@ -1887,7 +1888,7 @@ Partial Class FormFGTransList
         Me.GridColumn8.Name = "GridColumn8"
         Me.GridColumn8.OptionsColumn.AllowEdit = False
         Me.GridColumn8.Visible = True
-        Me.GridColumn8.VisibleIndex = 13
+        Me.GridColumn8.VisibleIndex = 14
         Me.GridColumn8.Width = 96
         '
         'GridColumn9
@@ -1897,7 +1898,7 @@ Partial Class FormFGTransList
         Me.GridColumn9.Name = "GridColumn9"
         Me.GridColumn9.OptionsColumn.AllowEdit = False
         Me.GridColumn9.Visible = True
-        Me.GridColumn9.VisibleIndex = 14
+        Me.GridColumn9.VisibleIndex = 15
         Me.GridColumn9.Width = 76
         '
         'GridColumn10
@@ -1986,7 +1987,7 @@ Partial Class FormFGTransList
         Me.GridColumnRemarkNonStock.FieldName = "remark"
         Me.GridColumnRemarkNonStock.Name = "GridColumnRemarkNonStock"
         Me.GridColumnRemarkNonStock.Visible = True
-        Me.GridColumnRemarkNonStock.VisibleIndex = 11
+        Me.GridColumnRemarkNonStock.VisibleIndex = 12
         Me.GridColumnRemarkNonStock.Width = 94
         '
         'GroupControl5
@@ -4245,6 +4246,14 @@ Partial Class FormFGTransList
         Me.LabelControl28.TabIndex = 8892
         Me.LabelControl28.Text = "From"
         '
+        'GridColumn85
+        '
+        Me.GridColumn85.Caption = "Type"
+        Me.GridColumn85.FieldName = "scan_type"
+        Me.GridColumn85.Name = "GridColumn85"
+        Me.GridColumn85.Visible = True
+        Me.GridColumn85.VisibleIndex = 11
+        '
         'FormFGTransList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -4784,4 +4793,5 @@ Partial Class FormFGTransList
     Friend WithEvents GridColumn80 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn81 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn82 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn85 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

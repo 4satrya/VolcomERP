@@ -190,7 +190,7 @@
 
     Private Sub Battach_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Battach.Click
         Cursor = Cursors.WaitCursor
-        FormDocumentUpload.id_report = id_order
+        FormDocumentUpload.id_report = id_receive
         FormDocumentUpload.is_view = "1"
         FormDocumentUpload.report_mark_type = "16"
         FormDocumentUpload.ShowDialog()

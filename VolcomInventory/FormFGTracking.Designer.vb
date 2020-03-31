@@ -22,6 +22,9 @@ Partial Class FormFGTracking
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormFGTracking))
         Me.GroupControlFilter = New DevExpress.XtraEditors.GroupControl()
+        Me.BtnViewLess = New DevExpress.XtraEditors.SimpleButton()
+        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.BtnUniqueAll = New DevExpress.XtraEditors.SimpleButton()
         Me.DEUntil = New DevExpress.XtraEditors.DateEdit()
         Me.DEFrom = New DevExpress.XtraEditors.DateEdit()
         Me.BtnTracking = New DevExpress.XtraEditors.SimpleButton()
@@ -75,10 +78,10 @@ Partial Class FormFGTracking
         Me.GridColumnCode = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnDesign = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnSize = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
-        Me.BtnUniqueAll = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.GroupControlFilter, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControlFilter.SuspendLayout()
+        CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl1.SuspendLayout()
         CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEUntil.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -94,12 +97,11 @@ Partial Class FormFGTracking
         CType(Me.GCTracking, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ViewMenu.SuspendLayout()
         CType(Me.GVTracking, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.PanelControl1.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupControlFilter
         '
+        Me.GroupControlFilter.Controls.Add(Me.BtnViewLess)
         Me.GroupControlFilter.Controls.Add(Me.PanelControl1)
         Me.GroupControlFilter.Controls.Add(Me.DEUntil)
         Me.GroupControlFilter.Controls.Add(Me.DEFrom)
@@ -114,6 +116,33 @@ Partial Class FormFGTracking
         Me.GroupControlFilter.Size = New System.Drawing.Size(1114, 60)
         Me.GroupControlFilter.TabIndex = 0
         Me.GroupControlFilter.Text = "Filter"
+        '
+        'BtnViewLess
+        '
+        Me.BtnViewLess.Location = New System.Drawing.Point(650, 28)
+        Me.BtnViewLess.Name = "BtnViewLess"
+        Me.BtnViewLess.Size = New System.Drawing.Size(91, 23)
+        Me.BtnViewLess.TabIndex = 8893
+        Me.BtnViewLess.Text = "View (Trial)"
+        '
+        'PanelControl1
+        '
+        Me.PanelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelControl1.Controls.Add(Me.BtnUniqueAll)
+        Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Right
+        Me.PanelControl1.Location = New System.Drawing.Point(977, 21)
+        Me.PanelControl1.Name = "PanelControl1"
+        Me.PanelControl1.Size = New System.Drawing.Size(135, 37)
+        Me.PanelControl1.TabIndex = 8892
+        '
+        'BtnUniqueAll
+        '
+        Me.BtnUniqueAll.Image = CType(resources.GetObject("BtnUniqueAll.Image"), System.Drawing.Image)
+        Me.BtnUniqueAll.Location = New System.Drawing.Point(9, 8)
+        Me.BtnUniqueAll.Name = "BtnUniqueAll"
+        Me.BtnUniqueAll.Size = New System.Drawing.Size(119, 23)
+        Me.BtnUniqueAll.TabIndex = 8893
+        Me.BtnUniqueAll.Text = "Show Unique List"
         '
         'DEUntil
         '
@@ -141,7 +170,7 @@ Partial Class FormFGTracking
         '
         'BtnTracking
         '
-        Me.BtnTracking.Location = New System.Drawing.Point(656, 28)
+        Me.BtnTracking.Location = New System.Drawing.Point(747, 29)
         Me.BtnTracking.Name = "BtnTracking"
         Me.BtnTracking.Size = New System.Drawing.Size(75, 23)
         Me.BtnTracking.TabIndex = 2
@@ -626,25 +655,6 @@ Partial Class FormFGTracking
         Me.GridColumnSize.VisibleIndex = 3
         Me.GridColumnSize.Width = 56
         '
-        'PanelControl1
-        '
-        Me.PanelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
-        Me.PanelControl1.Controls.Add(Me.BtnUniqueAll)
-        Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PanelControl1.Location = New System.Drawing.Point(977, 21)
-        Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(135, 37)
-        Me.PanelControl1.TabIndex = 8892
-        '
-        'BtnUniqueAll
-        '
-        Me.BtnUniqueAll.Image = CType(resources.GetObject("BtnUniqueAll.Image"), System.Drawing.Image)
-        Me.BtnUniqueAll.Location = New System.Drawing.Point(9, 8)
-        Me.BtnUniqueAll.Name = "BtnUniqueAll"
-        Me.BtnUniqueAll.Size = New System.Drawing.Size(119, 23)
-        Me.BtnUniqueAll.TabIndex = 8893
-        Me.BtnUniqueAll.Text = "Show Unique List"
-        '
         'FormFGTracking
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -665,6 +675,8 @@ Partial Class FormFGTracking
         CType(Me.GroupControlFilter, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControlFilter.ResumeLayout(False)
         Me.GroupControlFilter.PerformLayout()
+        CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl1.ResumeLayout(False)
         CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEUntil.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -681,8 +693,6 @@ Partial Class FormFGTracking
         CType(Me.GCTracking, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ViewMenu.ResumeLayout(False)
         CType(Me.GVTracking, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.PanelControl1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -742,4 +752,5 @@ Partial Class FormFGTracking
     Friend WithEvents LabelControl12 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents PanelControl1 As DevExpress.XtraEditors.PanelControl
     Friend WithEvents BtnUniqueAll As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BtnViewLess As DevExpress.XtraEditors.SimpleButton
 End Class

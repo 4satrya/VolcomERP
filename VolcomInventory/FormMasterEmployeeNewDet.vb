@@ -138,6 +138,7 @@
         viewEmployeePosition()
         viewEmployeeTraining()
         viewSalary()
+        viewJabatanTKDN()
         actionLoad()
         '
         If is_salary = "1" Then
@@ -159,6 +160,11 @@
         Else
             BtnDelSalary.Enabled = False
         End If
+    End Sub
+
+    Sub viewJabatanTKDN()
+        Dim query As String = "SELECT * FROM tb_lookup_jabatan_tkdn"
+        viewSearchLookupQuery(SLUEJabatanTKDN, query, "id_jabatan_tkdn", "jabatan_tkdn", "id_jabatan_tkdn")
     End Sub
 
     Sub actionLoad()
@@ -259,6 +265,8 @@
             TEEmergencyPhone1.EditValue = datarow("employee_emergency_phone1").ToString
             TEEmergencyName2.EditValue = datarow("employee_emergency_name2").ToString
             TEEmergencyRelation2.EditValue = datarow("employee_emergency_relation2").ToString
+            SLUEJabatanTKDN.EditValue = datarow("id_jabatan_tkdn")
+            SLUEJabatanTKDN.ReadOnly = True
             TEEmergencyPhone2.EditValue = datarow("employee_emergency_phone2").ToString
             TxtMobilePhone.Text = datarow("phone_mobile").ToString
             TxtPhoneExt.Text = datarow("phone_ext").ToString

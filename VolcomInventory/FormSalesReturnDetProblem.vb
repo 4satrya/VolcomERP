@@ -62,6 +62,8 @@
                 newRow("remark") = TxtRemark.Text
                 newRow("is_unique_not_found") = is_unique_not_found
                 newRow("is_no_stock") = is_no_stock
+                newRow("id_scan_type") = FormSalesReturnDet.LUETypeScan.EditValue
+                newRow("scan_type") = FormSalesReturnDet.LUETypeScan.Text
                 TryCast(FormSalesReturnDet.GCBarcodeProb.DataSource, DataTable).Rows.Add(newRow)
                 FormSalesReturnDet.GCBarcodeProb.RefreshDataSource()
                 FormSalesReturnDet.GVBarcodeProb.RefreshData()

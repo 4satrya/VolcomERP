@@ -22,7 +22,7 @@
     Sub actionLoad()
         If action = "ins" Then
             TxtAdjDate.Text = view_date(0)
-            TxtAdjNumber.Text = header_number_sales("14")
+            TxtAdjNumber.Text = ""
             BMark.Enabled = False
             BtnPrint.Enabled = False
             viewDetailReturn()
@@ -240,11 +240,12 @@
             If action = "ins" Then
                 'Main table
                 query = "INSERT INTO tb_adj_in_fg(adj_in_fg_number, adj_in_fg_date, adj_in_fg_note, id_report_status, adj_in_fg_total, id_currency, retail_price_total) "
-                query += "VALUES('" + adj_in_fg_number + "', NOW(), '" + adj_in_fg_note + "', '" + id_report_status + "', '" + adj_in_fg_total + "', '" + id_currency + "', '" + retail_price_total + "'); SELECT LAST_INSERT_ID(); "
+                query += "VALUES('', NOW(), '" + adj_in_fg_note + "', '" + id_report_status + "', '" + adj_in_fg_total + "', '" + id_currency + "', '" + retail_price_total + "'); SELECT LAST_INSERT_ID(); "
                 id_adj_in_fg = execute_query(query, 0, True, "", "", "", "")
+                execute_non_query("CALL gen_number(" + id_adj_in_fg + ",41); ", True, "", "", "", "")
                 'MsgBox(id_product_return)
 
-                increase_inc_sales("14")
+                'increase_inc_sales("14")
 
                 'preapred default
                 submit_who_prepared("41", id_adj_in_fg, id_user)
@@ -352,5 +353,47 @@
         FormPopUpDrawer.include_all = False
         FormPopUpDrawer.id_pop_up = "7"
         FormPopUpDrawer.ShowDialog()
+    End Sub
+
+    Private Sub SBExportToXLS_Click(sender As Object, e As EventArgs) Handles SBExportToXLS.Click
+        Cursor = Cursors.WaitCursor
+        If GVDetail.RowCount > 0 Then
+            Cursor = Cursors.WaitCursor
+            'Dim dt_from As String = DEFromRec.Text.Replace(" ", "")
+            'Dim dt_until As String = DEUntilRec.Text.Replace(" ", "")
+            Dim path As String = Application.StartupPath & "\download\"
+            'create directory if not exist
+            If Not IO.Directory.Exists(path) Then
+                System.IO.Directory.CreateDirectory(path)
+            End If
+            path = path + "adj_in.xlsx"
+            exportToXLS(path, "adj_in", GCDetail)
+            Cursor = Cursors.Default
+        End If
+        Cursor = Cursors.Default
+    End Sub
+
+    Sub exportToXLS(ByVal path_par As String, ByVal sheet_name_par As String, ByVal gc_par As DevExpress.XtraGrid.GridControl)
+        Cursor = Cursors.WaitCursor
+        Dim path As String = path_par
+
+        ' Customize export options 
+        CType(gc_par.MainView, DevExpress.XtraGrid.Views.Grid.GridView).OptionsPrint.PrintHeader = True
+        Dim advOptions As DevExpress.XtraPrinting.XlsxExportOptionsEx = New DevExpress.XtraPrinting.XlsxExportOptionsEx()
+        advOptions.AllowSortingAndFiltering = DevExpress.Utils.DefaultBoolean.False
+        advOptions.ShowGridLines = DevExpress.Utils.DefaultBoolean.False
+        advOptions.AllowGrouping = DevExpress.Utils.DefaultBoolean.False
+        advOptions.ShowTotalSummaries = DevExpress.Utils.DefaultBoolean.False
+        advOptions.SheetName = sheet_name_par
+        advOptions.ExportType = DevExpress.Export.ExportType.DataAware
+
+        Try
+            gc_par.ExportToXlsx(path, advOptions)
+            Process.Start(path)
+            ' Open the created XLSX file with the default application. 
+        Catch ex As Exception
+            stopCustom(ex.ToString)
+        End Try
+        Cursor = Cursors.Default
     End Sub
 End Class

@@ -10,7 +10,7 @@
         If id_pop_up = "1" Then 'popup BPL BBK OG
             Dim q As String = "SELECT a.`id_acc_trans`,a.`date_created`,a.`acc_trans_number`,SUM(ad.`debit`) AS debit, SUM(ad.`credit`) AS credit FROM tb_a_acc_trans_det ad
 INNER JOIN tb_a_acc_trans a ON a.`id_acc_trans`=ad.`id_acc_trans`
-WHERE (ad.report_mark_type_ref='139' OR ad.report_mark_type='202') AND ad.id_report_ref='" & id_ref & "'
+WHERE (ad.report_mark_type_ref='139' OR ad.report_mark_type_ref='202') AND ad.id_report_ref='" & id_ref & "'
 GROUP BY a.id_acc_trans"
             Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
             GCList.DataSource = dt

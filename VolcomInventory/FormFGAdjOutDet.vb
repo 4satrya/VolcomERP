@@ -112,7 +112,7 @@
         query += "CALL view_fg_adj_out_less('" + id_adj_out_fg + "')"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCDetail.DataSource = data
-        GVDetail.BestFitColumns()
+        'GVDetail.BestFitColumns()
         'GVDetail.Columns("id_product").GroupIndex = 0
     End Sub
 
@@ -133,21 +133,23 @@
     End Sub
 
     Sub cantEdit()
-        Dim id_product_curr As String = ""
-        Dim id_drawer_curr As String = ""
-        Try
-            'id_product_curr = GVDetail.GetFocusedRowCellDisplayText("id_product").ToString()
-            id_drawer_curr = GVDetail.GetFocusedRowCellDisplayText("id_wh_drawer").ToString()
-        Catch ex As Exception
+        If action = "ins" Then
+            Dim id_product_curr As String = ""
+            Dim id_drawer_curr As String = ""
+            Try
+                'id_product_curr = GVDetail.GetFocusedRowCellDisplayText("id_product").ToString()
+                id_drawer_curr = GVDetail.GetFocusedRowCellDisplayText("id_wh_drawer").ToString()
+            Catch ex As Exception
 
-        End Try
-        If GVDetail.RowCount < 1 Or id_drawer_curr = "" Then
-            BtnEdit.Enabled = False
-            BtnDel.Enabled = False
-        Else
-            If check_edit_report_status(id_report_status, "42", id_adj_out_fg) Or action = "ins" Then
-                BtnEdit.Enabled = True
-                BtnDel.Enabled = True
+            End Try
+            If GVDetail.RowCount < 1 Or id_drawer_curr = "" Then
+                BtnEdit.Enabled = False
+                BtnDel.Enabled = False
+            Else
+                If action = "ins" Then
+                    BtnEdit.Enabled = True
+                    BtnDel.Enabled = True
+                End If
             End If
         End If
     End Sub
@@ -336,6 +338,7 @@
 
     Private Sub BtnPrint_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnPrint.Click
         Cursor = Cursors.WaitCursor
+        GVDetail.BestFitColumns()
         ReportFGAdjOut.id_adj_out_fg = id_adj_out_fg
         Dim Report As New ReportFGAdjOut()
         '
@@ -365,6 +368,48 @@
         FormPopUpDrawer.include_all = False
         FormPopUpDrawer.id_pop_up = "8"
         FormPopUpDrawer.ShowDialog()
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub SBExportToXLS_Click(sender As Object, e As EventArgs) Handles SBExportToXLS.Click
+        Cursor = Cursors.WaitCursor
+        If GVDetail.RowCount > 0 Then
+            Cursor = Cursors.WaitCursor
+            'Dim dt_from As String = DEFromRec.Text.Replace(" ", "")
+            'Dim dt_until As String = DEUntilRec.Text.Replace(" ", "")
+            Dim path As String = Application.StartupPath & "\download\"
+            'create directory if not exist
+            If Not IO.Directory.Exists(path) Then
+                System.IO.Directory.CreateDirectory(path)
+            End If
+            path = path + "adj_out.xlsx"
+            exportToXLS(path, "adj_out", GCDetail)
+            Cursor = Cursors.Default
+        End If
+        Cursor = Cursors.Default
+    End Sub
+
+    Sub exportToXLS(ByVal path_par As String, ByVal sheet_name_par As String, ByVal gc_par As DevExpress.XtraGrid.GridControl)
+        Cursor = Cursors.WaitCursor
+        Dim path As String = path_par
+
+        ' Customize export options 
+        CType(gc_par.MainView, DevExpress.XtraGrid.Views.Grid.GridView).OptionsPrint.PrintHeader = True
+        Dim advOptions As DevExpress.XtraPrinting.XlsxExportOptionsEx = New DevExpress.XtraPrinting.XlsxExportOptionsEx()
+        advOptions.AllowSortingAndFiltering = DevExpress.Utils.DefaultBoolean.False
+        advOptions.ShowGridLines = DevExpress.Utils.DefaultBoolean.False
+        advOptions.AllowGrouping = DevExpress.Utils.DefaultBoolean.False
+        advOptions.ShowTotalSummaries = DevExpress.Utils.DefaultBoolean.False
+        advOptions.SheetName = sheet_name_par
+        advOptions.ExportType = DevExpress.Export.ExportType.DataAware
+
+        Try
+            gc_par.ExportToXlsx(path, advOptions)
+            Process.Start(path)
+            ' Open the created XLSX file with the default application. 
+        Catch ex As Exception
+            stopCustom(ex.ToString)
+        End Try
         Cursor = Cursors.Default
     End Sub
 End Class

@@ -6,9 +6,9 @@
     Private Sub ReportItemExpense_BeforePrint(sender As Object, e As Printing.PrintEventArgs) Handles MyBase.BeforePrint
         GCData.DataSource = dt
         If is_pre Then
-            pre_load_mark_horz("157", id, "2", "1", XrTable1)
+            pre_load_mark_horz("157", id, "2", "2", XrTable1)
         Else
-            load_mark_horz("157", id, "2", "1", XrTable1)
+            load_mark_horz("157", id, "2", "2", XrTable1)
         End If
     End Sub
 

@@ -665,7 +665,7 @@ Public Class FormFGRepairDet
 
                     'reserved unique code
                     If is_use_unique_code_wh = "1" Then
-                        Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`,`id_pl_prod_order_rec_det_unique`, `id_fg_repair_det`,`report_mark_type`,`unique_code`,
+                        Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`,`id_pl_prod_order_rec_det_unique`, `id_fg_repair_det`,`id_type`,`unique_code`,
                         `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
                         SELECT c.id_comp, t.`id_wh_drawer_from`, td.id_product, td.id_pl_prod_order_rec_det_unique,  td.id_fg_repair_det, '8', 
                         CONCAT(p.product_full_code,td.fg_repair_det_counting), sod.id_design_price, sod.design_price, -1, 1, NOW() 

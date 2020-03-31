@@ -450,7 +450,7 @@
 	        SELECT * FROM (
 		        SELECT prc.id_design, prc.design_price 
 		        FROM tb_m_design_price prc
-		        WHERE prc.design_price>0 AND prc.id_design_price_type=3 AND prc.design_price_start_date<=NOW()
+		        WHERE prc.design_price>0 AND prc.id_design_price_type=4 AND prc.design_price_start_date<=NOW()
 		        ORDER BY prc.design_price_start_date DESC, prc.id_design_price DESC
 	        ) p
 	        GROUP BY p.id_design

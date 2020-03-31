@@ -242,17 +242,20 @@ WHERE bo.`year`=YEAR(NOW()) AND bo.is_active='1'"
     Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles BtnPrint.Click
         Cursor = Cursors.WaitCursor
         'If id_report_status = "6" Then
+
         If id_report_status = "6" Then
             ReportItemExpense.is_pre = False
         Else
             ReportItemExpense.is_pre = True
         End If
+
         ReportItemExpense.id = id
         ReportItemExpense.dt = GCData.DataSource
         Dim Report As New ReportItemExpense()
 
-        '... 
-        ' creating and saving the view's layout to a new memory stream 
+        GVData.BestFitColumns()
+
+        'creating and saving the view's layout to a new memory stream 
         Dim str As System.IO.Stream
         str = New System.IO.MemoryStream()
         GVData.SaveLayoutToStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
@@ -282,6 +285,7 @@ WHERE bo.`year`=YEAR(NOW()) AND bo.is_active='1'"
         End If
         Report.LPayFrom.Text = SLEPayFrom.Text
         Report.LabelTotalPayment.Text = TxtTotal.Text
+        Report.LSay.Text = ConvertCurrencyToIndonesian(Decimal.Parse(TxtTotal.EditValue.ToString))
 
         'Show the report's preview. 
         Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)

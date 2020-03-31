@@ -5791,6 +5791,12 @@
     <Compile Include="FormSuperUserSubDept.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormTabunganMissing.Designer.vb">
+      <DependentUpon>FormTabunganMissing.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormTabunganMissing.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormTemplateCode.Designer.vb">
       <DependentUpon>FormTemplateCode.vb</DependentUpon>
     </Compile>
@@ -5873,6 +5879,12 @@
       <DependentUpon>FormUpload.vb</DependentUpon>
     </Compile>
     <Compile Include="FormUpload.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormValidateStock.Designer.vb">
+      <DependentUpon>FormValidateStock.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormValidateStock.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormVerifyMaster.Designer.vb">
@@ -11034,6 +11046,9 @@
     <EmbeddedResource Include="FormSuperUserSubDept.resx">
       <DependentUpon>FormSuperUserSubDept.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormTabunganMissing.resx">
+      <DependentUpon>FormTabunganMissing.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormTemplateCode.resx">
       <DependentUpon>FormTemplateCode.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -11077,6 +11092,9 @@
     <EmbeddedResource Include="FormUpload.resx">
       <DependentUpon>FormUpload.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormValidateStock.resx">
+      <DependentUpon>FormValidateStock.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormVerifyMaster.resx">
       <DependentUpon>FormVerifyMaster.vb</DependentUpon>

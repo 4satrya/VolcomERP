@@ -885,15 +885,15 @@
     End Sub
 
     Private Sub BtnExportToXLSDaily_Click(sender As Object, e As EventArgs) Handles BtnExportToXLSDaily.Click
-        If BGVSalesPOSWeekly.RowCount > 0 Then
+        If GVSalesPOS.RowCount > 0 Then
             Cursor = Cursors.WaitCursor
             Dim path As String = Application.StartupPath & "\download\"
             'create directory if not exist
             If Not IO.Directory.Exists(path) Then
                 System.IO.Directory.CreateDirectory(path)
             End If
-            path = path + "sr_weekly.xlsx"
-            exportToXLS(path, "weekly sales", GCSalesPOSWeekly)
+            path = path + "sr_daily.xlsx"
+            exportToXLS(path, "daily sales", GCSalesPOS)
             Cursor = Cursors.Default
         End If
     End Sub

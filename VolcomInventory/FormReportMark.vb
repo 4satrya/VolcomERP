@@ -3669,7 +3669,7 @@ WHERE a.id_adj_in_fg = '" & id_report & "'"
                 Dim cancel As New ClassFGRepair()
                 cancel.cancelReservedStock(id_report)
                 '
-                Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique` ,`id_fg_repair_det`,`report_mark_type`,`unique_code`,
+                Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique` ,`id_fg_repair_det`,`id_type`,`unique_code`,
                         `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
                         SELECT c.id_comp, t.`id_wh_drawer_from`, td.id_product, td.id_pl_prod_order_rec_det_unique,  td.id_fg_repair_det, '8', 
                         CONCAT(p.product_full_code,td.fg_repair_det_counting), sod.id_design_price, sod.design_price, 1, 1, NOW() 
@@ -3700,7 +3700,7 @@ WHERE a.id_adj_in_fg = '" & id_report & "'"
                 Dim compl As New ClassFGRepair()
                 compl.completedStock(id_report)
                 '
-                Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_fg_repair_det`,`report_mark_type`,`unique_code`,
+                Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_fg_repair_det`,`id_type`,`unique_code`,
                         `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
                         SELECT c.id_comp, t.`id_wh_drawer_to`, td.id_product, td.id_pl_prod_order_rec_det_unique,  td.id_fg_repair_det, '8', 
                         CONCAT(p.product_full_code,td.fg_repair_det_counting), sod.id_design_price, sod.design_price, 1, 1, NOW() 
@@ -3749,7 +3749,7 @@ WHERE a.id_adj_in_fg = '" & id_report & "'"
                 Dim compl As New ClassFGRepairRec()
                 compl.completedStock(id_report)
                 'put unique code wh drawer to
-                Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_fg_repair_rec_det`,`report_mark_type`,`unique_code`,
+                Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_fg_repair_rec_det`,`id_type`,`unique_code`,
                         `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
                         SELECT c.id_comp, t.`id_wh_drawer_to`, td.id_product, td.id_pl_prod_order_rec_det_unique,  td.id_fg_repair_rec_det, '9', 
                         CONCAT(p.product_full_code,td.fg_repair_rec_det_counting), sod.id_design_price, sod.design_price, 1, 1, NOW() 
@@ -3778,7 +3778,7 @@ WHERE a.id_adj_in_fg = '" & id_report & "'"
                 execute_non_query(quniq, True, "", "", "", "")
             ElseIf id_status_reportx = "5" Then
                 'cancel reserved unique code
-                Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_fg_repair_rec_det`,`report_mark_type`,`unique_code`,
+                Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_fg_repair_rec_det`,`id_type`,`unique_code`,
                         `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
                         SELECT c.id_comp, t.`id_wh_drawer_from`, td.id_product, td.id_pl_prod_order_rec_det_unique,  td.id_fg_repair_rec_det, '9', 
                         CONCAT(p.product_full_code,td.fg_repair_rec_det_counting), sod.id_design_price, sod.design_price, 1, 1, NOW() 
@@ -3830,7 +3830,7 @@ WHERE a.id_adj_in_fg = '" & id_report & "'"
                     cancel.cancelReservedStock(id_report)
                 End If
                 'cancel reserved unique
-                Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_fg_repair_return_det`,`report_mark_type`,`unique_code`,
+                Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_fg_repair_return_det`,`id_type`,`unique_code`,
                         `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
                         SELECT c.id_comp, t.`id_wh_drawer_from`, td.id_product, td.id_pl_prod_order_rec_det_unique, td.id_fg_repair_return_det, '10', 
                         CONCAT(p.product_full_code,td.fg_repair_return_det_counting), sod.id_design_price, sod.design_price, 1, 1, NOW() 
@@ -3862,7 +3862,7 @@ WHERE a.id_adj_in_fg = '" & id_report & "'"
                 compl.completedStock(id_report, report_mark_type)
 
                 'insert unique drawer to
-                Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_fg_repair_return_det`,`report_mark_type`,`unique_code`,
+                Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_fg_repair_return_det`,`id_type`,`unique_code`,
                         `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
                         SELECT c.id_comp, t.`id_wh_drawer_to`, td.id_product, td.id_pl_prod_order_rec_det_unique, td.id_fg_repair_return_det, '10', 
                         CONCAT(p.product_full_code,td.fg_repair_return_det_counting), sod.id_design_price, sod.design_price, 1, 1, NOW() 
@@ -3911,7 +3911,7 @@ WHERE a.id_adj_in_fg = '" & id_report & "'"
                 Dim compl As New ClassFGRepairReturnRec()
                 compl.completedStock(id_report)
                 'insert unique drawer to
-                Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_fg_repair_return_rec_det`,`report_mark_type`,`unique_code`,
+                Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_fg_repair_return_rec_det`,`id_type`,`unique_code`,
                         `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
                         SELECT c.id_comp, t.`id_wh_drawer_to`, td.id_product, td.id_pl_prod_order_rec_det_unique, td.id_fg_repair_return_rec_det, '11', 
                         CONCAT(p.product_full_code,td.fg_repair_return_rec_det_counting), sod.id_design_price, sod.design_price, 1, 1, NOW() 
@@ -3940,7 +3940,7 @@ WHERE a.id_adj_in_fg = '" & id_report & "'"
                 execute_non_query(quniq, True, "", "", "", "")
             ElseIf id_status_reportx = "5" Then
                 'cancel reserved unique
-                Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique` ,`id_fg_repair_return_rec_det`,`report_mark_type`,`unique_code`,
+                Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique` ,`id_fg_repair_return_rec_det`,`id_type`,`unique_code`,
                         `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
                         SELECT c.id_comp, t.`id_wh_drawer_from`, td.id_product, td.id_pl_prod_order_rec_det_unique, td.id_fg_repair_return_rec_det, '11', 
                         CONCAT(p.product_full_code,td.fg_repair_return_rec_det_counting), sod.id_design_price, sod.design_price, 1, 1, NOW() 
@@ -5828,9 +5828,9 @@ WHERE pd.`id_pn`='" & id_report & "'"
 
             'refresh view
 
-            FormBankWithdrawal.load_payment()
+            'FormBankWithdrawal.load_payment()
             FormBankWithdrawalDet.form_load()
-            FormBankWithdrawal.GVList.FocusedRowHandle = find_row(FormBankWithdrawal.GVList, "id_pn", id_report)
+            'FormBankWithdrawal.GVList.FocusedRowHandle = find_row(FormBankWithdrawal.GVList, "id_pn", id_report)
         ElseIf report_mark_type = "160" Then
             'Asset management
             'auto completed

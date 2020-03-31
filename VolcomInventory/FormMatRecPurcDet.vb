@@ -343,6 +343,15 @@
             End If
         End If
 
+        'validasi cost
+        Dim condc As Boolean = True
+        For i = 0 To GVListPurchase.RowCount - 1
+            If GVListPurchase.IsValidRowHandle(i) Then
+                If GVListPurchase.GetRowCellValue(i, "cost") = 0 Then
+                    condc = False
+                End If
+            End If
+        Next
 
         'end of validasi
         If id_receive = "-1" Then
@@ -351,6 +360,8 @@
                 errorInput()
             ElseIf Not condv Then
                 stopCustom("This vendor has not finished in setup. Please contact the administrator.")
+            ElseIf Not condc Then
+                stopCustom("Cost cannot zero.")
             Else
                 Try
                     'insert rec
@@ -397,6 +408,8 @@
                 errorInput()
             ElseIf Not condv Then
                 stopCustom("This vendor has not finished in setup. Please contact the administrator.")
+            ElseIf Not condc Then
+                stopCustom("Cost cannot zero.")
             Else
                 Try
                     'UPDATE rec
@@ -498,7 +511,7 @@
 
     Private Sub BAttach_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BAttach.Click
         Cursor = Cursors.WaitCursor
-        FormDocumentUpload.id_report = id_order
+        FormDocumentUpload.id_report = id_receive
         If LEReportStatus.EditValue.ToString = "6" Or LEReportStatus.EditValue.ToString = "5" Then
             FormDocumentUpload.is_view = "1"
         End If

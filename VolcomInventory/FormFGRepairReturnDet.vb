@@ -421,7 +421,7 @@ Public Class FormFGRepairReturnDet
     Private Sub checkAvailable(ByVal code_par As String)
         'check in GV
         GVScan.ActiveFilterString = ""
-        Dim dt_filter As DataRow() = dt.Select("[code]='" + code_par + "' ")
+        Dim dt_filter As DataRow() = dt.Select("[product_full_code]='" + code_par + "' ")
         If dt_filter.Length > 0 Then
             If dt_filter(0)("is_old_design").ToString = "2" Then
                 GVScan.ActiveFilterString = "[code]='" + code_par + "'"
@@ -438,7 +438,7 @@ Public Class FormFGRepairReturnDet
             newRow("id_fg_repair_return_det") = "0"
             newRow("id_fg_repair_return") = 0
             newRow("id_product") = dt_filter(0)("id_product").ToString
-            newRow("code") = dt_filter(0)("code").ToString
+            newRow("code") = dt_filter(0)("product_full_code").ToString
             newRow("product_code") = dt_filter(0)("product_code").ToString
             newRow("name") = dt_filter(0)("name").ToString
             newRow("size") = dt_filter(0)("size").ToString
@@ -745,7 +745,7 @@ Public Class FormFGRepairReturnDet
 
                     'reserved unique code
                     If is_use_unique_code_wh = "1" Then
-                        Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_fg_repair_return_det`,`report_mark_type`,`unique_code`,
+                        Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_fg_repair_return_det`,`id_type`,`unique_code`,
                         `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
                         SELECT c.id_comp, t.`id_wh_drawer_from`, td.id_product, td.id_pl_prod_order_rec_det_unique, td.id_fg_repair_return_det, '10', 
                         CONCAT(p.product_full_code,td.fg_repair_return_det_counting), sod.id_design_price, sod.design_price, -1, 1, NOW() 

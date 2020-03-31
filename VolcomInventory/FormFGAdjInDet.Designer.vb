@@ -77,6 +77,7 @@ Partial Class FormFGAdjInDet
         Me.BMark = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnSave = New DevExpress.XtraEditors.SimpleButton()
         Me.EPAdj = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.SBExportToXLS = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
         CType(Me.LECurrency.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -640,6 +641,7 @@ Partial Class FormFGAdjInDet
         '
         'PanelControl3
         '
+        Me.PanelControl3.Controls.Add(Me.SBExportToXLS)
         Me.PanelControl3.Controls.Add(Me.BtnPrint)
         Me.PanelControl3.Controls.Add(Me.BtnCancel)
         Me.PanelControl3.Controls.Add(Me.SimpleButton1)
@@ -705,6 +707,16 @@ Partial Class FormFGAdjInDet
         'EPAdj
         '
         Me.EPAdj.ContainerControl = Me
+        '
+        'SBExportToXLS
+        '
+        Me.SBExportToXLS.Dock = System.Windows.Forms.DockStyle.Right
+        Me.SBExportToXLS.Image = CType(resources.GetObject("SBExportToXLS.Image"), System.Drawing.Image)
+        Me.SBExportToXLS.Location = New System.Drawing.Point(420, 2)
+        Me.SBExportToXLS.Name = "SBExportToXLS"
+        Me.SBExportToXLS.Size = New System.Drawing.Size(121, 38)
+        Me.SBExportToXLS.TabIndex = 19
+        Me.SBExportToXLS.Text = "Export to XLS"
         '
         'FormFGAdjInDet
         '
@@ -809,4 +821,5 @@ Partial Class FormFGAdjInDet
     Friend WithEvents BImport As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents GridColumnretail_price As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents SBExportToXLS As DevExpress.XtraEditors.SimpleButton
 End Class

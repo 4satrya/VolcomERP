@@ -8091,6 +8091,8 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             ElseIf FormBudgetProdDemand.XTCBudget.SelectedTabPageIndex = 1 Then
                 print_raw(FormBudgetProdDemand.GCProposed, "")
             End If
+        ElseIf formName = "FormTabunganMissing" Then
+            FormTabunganMissing.print()
         Else
             RPSubMenu.Visible = False
         End If
@@ -8951,6 +8953,8 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
         ElseIf formName = "FormBudgetProdDemand" Then
             FormBudgetProdDemand.Close()
             FormBudgetProdDemand.Dispose()
+        ElseIf formName = "FormTabunganMissing" Then
+            FormTabunganMissing.Close()
         Else
             RPSubMenu.Visible = False
         End If
@@ -14559,6 +14563,19 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             FormEmpLeave.Show()
             FormEmpLeave.WindowState = FormWindowState.Maximized
             FormEmpLeave.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBTabunganMissing_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBTabunganMissing.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormTabunganMissing.MdiParent = Me
+            FormTabunganMissing.Show()
+            FormTabunganMissing.WindowState = FormWindowState.Maximized
+            FormTabunganMissing.Focus()
         Catch ex As Exception
             errorProcess()
         End Try

@@ -926,6 +926,28 @@
             If PE.EditValue Is Nothing Then
                 data_cek = "Please add employee photo."
             End If
+
+            If CType(sender, DevExpress.XtraEditors.SimpleButton).Name = "SBSave" Then
+                data_cek = "It's require salary update."
+            End If
+        End If
+
+        'salary update check
+        If CType(sender, DevExpress.XtraEditors.SimpleButton).Name = "SBSave" Then
+            Try
+                If Not LEEmployeeStatus.EditValue.ToString = LEEmployeeStatusB.EditValue.ToString Then
+                    data_cek = "It's require salary update."
+                End If
+
+                If Not DEEmployeeStatusStart.EditValue.ToString = DEEmployeeStatusStartB.EditValue.ToString Then
+                    data_cek = "It's require salary update."
+                End If
+
+                If Not DEEmployeeStatusEnd.EditValue.ToString = DEEmployeeStatusEndB.EditValue.ToString Then
+                    data_cek = "It's require salary update."
+                End If
+            Catch ex As Exception
+            End Try
         End If
 
         If Not formIsValidInGroup(ErrorProvider1, GCGeneralPropose) Or Not formIsValidInGroup(ErrorProvider1, GCDetailPropose) Or Not formIsValidInGroup(ErrorProvider1, GCContractPropose) Or Not formIsValidInGroup(ErrorProvider1, GCPayrollPropose) Then

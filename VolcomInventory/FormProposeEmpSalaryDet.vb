@@ -66,18 +66,18 @@
             Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
             DEEffectiveDate.EditValue = data.Rows(0)("start_period")
-            LUEType.EditValue = If(data.Rows(0)("id_employee_status").ToString = "3", "2", "1")
+            LUEType.EditValue = If(data.Rows(0)("id_employee_status").ToString = "3", 2, 1)
 
             CType(GCEmployee.DataSource, DataTable).Rows.Add(
-                data.Rows(0)("id_employee").ToString,
+                If(data.Rows(0)("id_employee").ToString = "", "0", data.Rows(0)("id_employee").ToString),
                 data.Rows(0)("employee_code").ToString,
                 data.Rows(0)("employee_name").ToString,
                 data.Rows(0)("id_departement").ToString,
                 data.Rows(0)("departement").ToString,
                 data.Rows(0)("total_workdays").ToString,
                 data.Rows(0)("employee_position").ToString,
-                data.Rows(0)("tmp_length_work").ToString,
-                data.Rows(0)("length_work").ToString,
+                If(data.Rows(0)("tmp_length_work").ToString = "", "0", data.Rows(0)("tmp_length_work").ToString),
+                If(data.Rows(0)("length_work").ToString = "", "0 month", data.Rows(0)("length_work").ToString),
                 data.Rows(0)("id_employee_level").ToString,
                 data.Rows(0)("employee_level").ToString,
                 data.Rows(0)("id_employee_status").ToString,
@@ -99,6 +99,9 @@
                 0
             )
 
+            DEEffectiveDate.ReadOnly = True
+            LUECategory.ReadOnly = True
+            LUEType.ReadOnly = True
         End If
     End Sub
 
@@ -139,7 +142,7 @@
             UNION ALL
             
             #default value
-            SELECT -1 AS id_employee_sal_pps, 1 AS id_sal_pps_category, 1 AS id_sal_pps_type, DATE_FORMAT(NOW(), '%d %M %Y') AS effective_date, -1 AS id_report_status, '[autogenerate]' AS number, '' AS note, (SELECT employee_name FROM tb_m_employee WHERE id_employee = " + id_employee_user + ") AS created_by, DATE_FORMAT(NOW(), '%d %M %Y %H:%i:%s') AS created_at, 0 AS id_employee_pps
+            SELECT -1 AS id_employee_sal_pps, 1 AS id_sal_pps_category, 1 AS id_sal_pps_type, DATE_FORMAT(NOW(), '%d %M %Y') AS effective_date, -1 AS id_report_status, '[autogenerate]' AS number, '' AS note, (SELECT employee_name FROM tb_m_employee WHERE id_employee = " + id_employee_user + ") AS created_by, DATE_FORMAT(NOW(), '%d %M %Y %H:%i:%s') AS created_at, -1 AS id_employee_pps
         "
 
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
@@ -153,7 +156,7 @@
         LUEType.ItemIndex = LUEType.Properties.GetDataSourceRowIndex("id_sal_pps_type", data.Rows(0)("id_sal_pps_type").ToString)
 
         If id_employee_pps = "-1" Then
-            id_employee_pps = data.Rows(0)("id_employee_pps")
+            id_employee_pps = If(data.Rows(0)("id_employee_pps").ToString = "", "-1", data.Rows(0)("id_employee_pps").ToString)
         End If
 
         'load detail

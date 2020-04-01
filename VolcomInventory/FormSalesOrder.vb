@@ -276,6 +276,11 @@
 
     Private Sub XTCSOGeneral_SelectedPageChanged(sender As Object, e As DevExpress.XtraTab.TabPageChangedEventArgs) Handles XTCSOGeneral.SelectedPageChanged
         check_menu()
+        If XTCSOGeneral.SelectedTabPageIndex = 0 Then
+            PanelControlAlloc.Visible = True
+        ElseIf XTCSOGeneral.SelectedTabPageIndex = 1 Then
+            PanelControlAlloc.Visible = False
+        End If
     End Sub
 
     Private Sub GVGen_DoubleClick(sender As Object, e As EventArgs) Handles GVGen.DoubleClick
@@ -356,6 +361,12 @@
         FormSalesOrderDet.is_transfer_data = "1"
         FormSalesOrderDet.id_sales_order = "-1"
         FormSalesOrderDet.ShowDialog()
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnAllocHist_Click(sender As Object, e As EventArgs) Handles BtnAllocHist.Click
+        Cursor = Cursors.WaitCursor
+        FormAllocationHist.ShowDialog()
         Cursor = Cursors.Default
     End Sub
 End Class

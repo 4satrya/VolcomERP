@@ -2227,6 +2227,15 @@
                         FROM tb_sales_order_det sd
                         WHERE sd.id_sales_order=" + dtv.Rows(m)("id_sales_order").ToString + " "
                         execute_non_query(qd, -1, True, "", "", "")
+
+                        'completed
+                        Dim stt As ClassFGTrf = New ClassFGTrf()
+                        stt.changeStatus(id_so, "6")
+
+                        'final comment
+                        Dim query_comment As String = "INSERT INTO tb_report_mark_final_comment(report_mark_type, id_report, id_report_status, id_user, final_comment, final_comment_date, ip_user) VALUES "
+                        query_comment += "('57', '" + id_so + "', '6', '" + id_user + "', '', NOW(), '" + GetIPv4AddressPublic() + "') "
+                        execute_non_query(query_comment, True, "", "", "", "")
                     Next
                 End If
             End If
@@ -3619,6 +3628,15 @@ WHERE a.id_adj_in_fg = '" & id_report & "'"
                         FROM tb_sales_order_det sd
                         WHERE sd.id_sales_order=" + dtv.Rows(m)("id_sales_order").ToString + " "
                         execute_non_query(qd, -1, True, "", "", "")
+
+                        'completed
+                        Dim stt As ClassFGTrf = New ClassFGTrf()
+                        stt.changeStatus(id_so, "6")
+
+                        'final comment
+                        Dim query_comment As String = "INSERT INTO tb_report_mark_final_comment(report_mark_type, id_report, id_report_status, id_user, final_comment, final_comment_date, ip_user) VALUES "
+                        query_comment += "('57', '" + id_so + "', '6', '" + id_user + "', '', NOW(), '" + GetIPv4AddressPublic() + "') "
+                        execute_non_query(query_comment, True, "", "", "", "")
                     Next
                 End If
             End If

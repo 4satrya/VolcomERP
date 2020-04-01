@@ -7130,4 +7130,17 @@ WHERE b.report_mark_type='" & report_mark_type_to_cancel & "' AND a.id_mark_asg!
     Public Sub send_mail_app()
 
     End Sub
+
+    Public Function GetIPv4AddressPublic() As String
+        GetIPv4AddressPublic = String.Empty
+        Dim strHostName As String = System.Net.Dns.GetHostName()
+        Dim iphe As System.Net.IPHostEntry = System.Net.Dns.GetHostEntry(strHostName)
+
+        For Each ipheal As System.Net.IPAddress In iphe.AddressList
+            If ipheal.AddressFamily = System.Net.Sockets.AddressFamily.InterNetwork Then
+                GetIPv4AddressPublic = ipheal.ToString()
+            End If
+        Next
+
+    End Function
 End Module

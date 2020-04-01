@@ -63,6 +63,13 @@ Partial Class FormMasterEmployeeNewDet
         Me.PanelControlMain = New DevExpress.XtraEditors.PanelControl()
         Me.XTPEmployee = New DevExpress.XtraTab.XtraTabControl()
         Me.XTPGeneral = New DevExpress.XtraTab.XtraTabPage()
+        Me.PanelControl10 = New DevExpress.XtraEditors.PanelControl()
+        Me.SLUEJabatanTKDN = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn13 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl33 = New DevExpress.XtraEditors.LabelControl()
         Me.TEEmergencyPhone2 = New DevExpress.XtraEditors.TextEdit()
         Me.Label112 = New System.Windows.Forms.Label()
         Me.TEEmergencyRelation2 = New DevExpress.XtraEditors.TextEdit()
@@ -251,13 +258,6 @@ Partial Class FormMasterEmployeeNewDet
         Me.BtnNext = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnSaveChanges = New DevExpress.XtraEditors.SimpleButton()
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
-        Me.SLUEJabatanTKDN = New DevExpress.XtraEditors.SearchLookUpEdit()
-        Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn13 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.LabelControl33 = New DevExpress.XtraEditors.LabelControl()
-        Me.PanelControl10 = New DevExpress.XtraEditors.PanelControl()
         CType(Me.PanelControlTop, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlTop.SuspendLayout()
         CType(Me.PanelControl8, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -295,6 +295,9 @@ Partial Class FormMasterEmployeeNewDet
         CType(Me.XTPEmployee, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTPEmployee.SuspendLayout()
         Me.XTPGeneral.SuspendLayout()
+        CType(Me.PanelControl10, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SLUEJabatanTKDN.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEEmergencyPhone2.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEEmergencyRelation2.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEEmergencyName2.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -407,9 +410,6 @@ Partial Class FormMasterEmployeeNewDet
         Me.PCKtpAtt.SuspendLayout()
         CType(Me.PEKTP.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.SLUEJabatanTKDN.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PanelControl10, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControlTop
@@ -759,7 +759,7 @@ Partial Class FormMasterEmployeeNewDet
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(11, -365)
+        Me.Label6.Location = New System.Drawing.Point(11, 15)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(25, 13)
         Me.Label6.TabIndex = 11
@@ -768,7 +768,7 @@ Partial Class FormMasterEmployeeNewDet
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(584, -365)
+        Me.Label5.Location = New System.Drawing.Point(587, 15)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(60, 13)
         Me.Label5.TabIndex = 9
@@ -776,7 +776,7 @@ Partial Class FormMasterEmployeeNewDet
         '
         'LEBloodType
         '
-        Me.LEBloodType.Location = New System.Drawing.Point(667, -368)
+        Me.LEBloodType.Location = New System.Drawing.Point(667, 12)
         Me.LEBloodType.Name = "LEBloodType"
         Me.LEBloodType.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.LEBloodType.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_blood_type", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("blood_type", "Blood Type")})
@@ -786,7 +786,7 @@ Partial Class FormMasterEmployeeNewDet
         'Label16
         '
         Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(587, -261)
+        Me.Label16.Location = New System.Drawing.Point(585, 119)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(74, 13)
         Me.Label16.TabIndex = 52
@@ -796,7 +796,7 @@ Partial Class FormMasterEmployeeNewDet
         'TxtAge
         '
         Me.TxtAge.Enabled = False
-        Me.TxtAge.Location = New System.Drawing.Point(667, -342)
+        Me.TxtAge.Location = New System.Drawing.Point(667, 38)
         Me.TxtAge.Name = "TxtAge"
         Me.TxtAge.Properties.ReadOnly = True
         Me.TxtAge.Size = New System.Drawing.Size(115, 20)
@@ -806,7 +806,7 @@ Partial Class FormMasterEmployeeNewDet
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(587, -339)
+        Me.Label9.Location = New System.Drawing.Point(587, 41)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(26, 13)
         Me.Label9.TabIndex = 17
@@ -815,7 +815,7 @@ Partial Class FormMasterEmployeeNewDet
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(278, -339)
+        Me.Label8.Location = New System.Drawing.Point(278, 41)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(68, 13)
         Me.Label8.TabIndex = 15
@@ -823,7 +823,7 @@ Partial Class FormMasterEmployeeNewDet
         '
         'TxtPOB
         '
-        Me.TxtPOB.Location = New System.Drawing.Point(107, -342)
+        Me.TxtPOB.Location = New System.Drawing.Point(107, 38)
         Me.TxtPOB.Name = "TxtPOB"
         Me.TxtPOB.Properties.ReadOnly = True
         Me.TxtPOB.Size = New System.Drawing.Size(167, 20)
@@ -832,7 +832,7 @@ Partial Class FormMasterEmployeeNewDet
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(11, -339)
+        Me.Label7.Location = New System.Drawing.Point(12, 41)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(70, 13)
         Me.Label7.TabIndex = 13
@@ -986,6 +986,59 @@ Partial Class FormMasterEmployeeNewDet
         Me.XTPGeneral.Name = "XTPGeneral"
         Me.XTPGeneral.Size = New System.Drawing.Size(809, 376)
         Me.XTPGeneral.Text = "General"
+        '
+        'PanelControl10
+        '
+        Me.PanelControl10.Location = New System.Drawing.Point(105, 710)
+        Me.PanelControl10.Name = "PanelControl10"
+        Me.PanelControl10.Size = New System.Drawing.Size(649, 2)
+        Me.PanelControl10.TabIndex = 9062
+        '
+        'SLUEJabatanTKDN
+        '
+        Me.SLUEJabatanTKDN.Location = New System.Drawing.Point(106, 723)
+        Me.SLUEJabatanTKDN.Name = "SLUEJabatanTKDN"
+        Me.SLUEJabatanTKDN.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLUEJabatanTKDN.Properties.View = Me.SearchLookUpEdit1View
+        Me.SLUEJabatanTKDN.Size = New System.Drawing.Size(648, 20)
+        Me.SLUEJabatanTKDN.TabIndex = 9061
+        '
+        'SearchLookUpEdit1View
+        '
+        Me.SearchLookUpEdit1View.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn11, Me.GridColumn12, Me.GridColumn13})
+        Me.SearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.SearchLookUpEdit1View.Name = "SearchLookUpEdit1View"
+        Me.SearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.SearchLookUpEdit1View.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn11
+        '
+        Me.GridColumn11.FieldName = "id_jabatan_tkdn"
+        Me.GridColumn11.Name = "GridColumn11"
+        '
+        'GridColumn12
+        '
+        Me.GridColumn12.Caption = "Kode"
+        Me.GridColumn12.FieldName = "kode_jabatan_tkdn"
+        Me.GridColumn12.Name = "GridColumn12"
+        Me.GridColumn12.Visible = True
+        Me.GridColumn12.VisibleIndex = 0
+        '
+        'GridColumn13
+        '
+        Me.GridColumn13.Caption = "Jabatan"
+        Me.GridColumn13.FieldName = "jabatan_tkdn"
+        Me.GridColumn13.Name = "GridColumn13"
+        Me.GridColumn13.Visible = True
+        Me.GridColumn13.VisibleIndex = 1
+        '
+        'LabelControl33
+        '
+        Me.LabelControl33.Location = New System.Drawing.Point(12, 726)
+        Me.LabelControl33.Name = "LabelControl33"
+        Me.LabelControl33.Size = New System.Drawing.Size(68, 13)
+        Me.LabelControl33.TabIndex = 9060
+        Me.LabelControl33.Text = "Jabatan TKDN"
         '
         'TEEmergencyPhone2
         '
@@ -2779,59 +2832,6 @@ Partial Class FormMasterEmployeeNewDet
         '
         Me.ErrorProvider1.ContainerControl = Me
         '
-        'SLUEJabatanTKDN
-        '
-        Me.SLUEJabatanTKDN.Location = New System.Drawing.Point(106, 723)
-        Me.SLUEJabatanTKDN.Name = "SLUEJabatanTKDN"
-        Me.SLUEJabatanTKDN.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.SLUEJabatanTKDN.Properties.View = Me.SearchLookUpEdit1View
-        Me.SLUEJabatanTKDN.Size = New System.Drawing.Size(648, 20)
-        Me.SLUEJabatanTKDN.TabIndex = 9061
-        '
-        'SearchLookUpEdit1View
-        '
-        Me.SearchLookUpEdit1View.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn11, Me.GridColumn12, Me.GridColumn13})
-        Me.SearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
-        Me.SearchLookUpEdit1View.Name = "SearchLookUpEdit1View"
-        Me.SearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = False
-        Me.SearchLookUpEdit1View.OptionsView.ShowGroupPanel = False
-        '
-        'GridColumn11
-        '
-        Me.GridColumn11.FieldName = "id_jabatan_tkdn"
-        Me.GridColumn11.Name = "GridColumn11"
-        '
-        'GridColumn12
-        '
-        Me.GridColumn12.Caption = "Kode"
-        Me.GridColumn12.FieldName = "kode_jabatan_tkdn"
-        Me.GridColumn12.Name = "GridColumn12"
-        Me.GridColumn12.Visible = True
-        Me.GridColumn12.VisibleIndex = 0
-        '
-        'GridColumn13
-        '
-        Me.GridColumn13.Caption = "Jabatan"
-        Me.GridColumn13.FieldName = "jabatan_tkdn"
-        Me.GridColumn13.Name = "GridColumn13"
-        Me.GridColumn13.Visible = True
-        Me.GridColumn13.VisibleIndex = 1
-        '
-        'LabelControl33
-        '
-        Me.LabelControl33.Location = New System.Drawing.Point(12, 726)
-        Me.LabelControl33.Name = "LabelControl33"
-        Me.LabelControl33.Size = New System.Drawing.Size(68, 13)
-        Me.LabelControl33.TabIndex = 9060
-        Me.LabelControl33.Text = "Jabatan TKDN"
-        '
-        'PanelControl10
-        '
-        Me.PanelControl10.Location = New System.Drawing.Point(105, 710)
-        Me.PanelControl10.Name = "PanelControl10"
-        Me.PanelControl10.Size = New System.Drawing.Size(649, 2)
-        Me.PanelControl10.TabIndex = 9062
-        '
         'FormMasterEmployeeNewDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2887,6 +2887,9 @@ Partial Class FormMasterEmployeeNewDet
         Me.XTPEmployee.ResumeLayout(False)
         Me.XTPGeneral.ResumeLayout(False)
         Me.XTPGeneral.PerformLayout()
+        CType(Me.PanelControl10, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SLUEJabatanTKDN.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEEmergencyPhone2.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEEmergencyRelation2.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEEmergencyName2.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -3000,9 +3003,6 @@ Partial Class FormMasterEmployeeNewDet
         Me.PCKtpAtt.ResumeLayout(False)
         CType(Me.PEKTP.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.SLUEJabatanTKDN.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PanelControl10, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

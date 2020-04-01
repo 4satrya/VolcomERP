@@ -12,6 +12,13 @@
 
 
     Private Sub ReportSalesReturn_BeforePrint(ByVal sender As System.Object, ByVal e As System.Drawing.Printing.PrintEventArgs) Handles MyBase.BeforePrint
+        'sorting
+        Dim dt2 As System.Data.DataView = dt.DefaultView
+
+        dt2.Sort = "design_price_type ASC, name ASC, code ASC"
+
+        dt = dt2.ToTable()
+
         Dim row As DevExpress.XtraReports.UI.XRTableRow = XTRow
 
         Dim total_sales_return_qc_det_qty As Integer = 0
@@ -57,7 +64,7 @@
 
             'design_price_type
             Dim design_price_type As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(5)
-            design_price_type.Text = dt.Rows(i)("design_price_type").ToString
+            design_price_type.Text = dt.Rows(i)("design_price_type").ToString.Substring(0, 1)
             design_price_type.BorderWidth = 0
             design_price_type.Font = New Font(design_price_type.Font.FontFamily, design_price_type.Font.Size, FontStyle.Regular)
 
@@ -72,12 +79,6 @@
             sales_return_qc_det_amount.Text = Format(dt.Rows(i)("sales_return_qc_det_amount"), "##,##0")
             sales_return_qc_det_amount.BorderWidth = 0
             sales_return_qc_det_amount.Font = New Font(sales_return_qc_det_amount.Font.FontFamily, sales_return_qc_det_amount.Font.Size, FontStyle.Regular)
-
-            'sales_return_qc_det_amount
-            Dim sales_return_qc_det_note As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(8)
-            sales_return_qc_det_note.Text = dt.Rows(i)("sales_return_qc_det_note").ToString
-            sales_return_qc_det_note.BorderWidth = 0
-            sales_return_qc_det_note.Font = New Font(sales_return_qc_det_note.Font.FontFamily, sales_return_qc_det_note.Font.Size, FontStyle.Regular)
         Next
 
         XrRowTotal.HeightF = 25
@@ -85,10 +86,120 @@
         XCReturnQty.Text = total_sales_return_qc_det_qty
         XCReturnAmount.Text = Format(total_sales_return_qc_det_amount, "##,##0")
 
-        If id_pre = "-1" Then
-            load_mark_horz(rmt, id_sales_return_qc, "2", "1", XrTable1)
-        Else
-            pre_load_mark_horz(rmt, id_sales_return_qc, "2", "2", XrTable1)
+        'custom mark
+        Dim query As String = "
+            SELECT report_status_display, employee_name, `role`, date_time
+            FROM (
+                (SELECT IF(b.id_report_status = 1, 1, 4) AS `order`, b.report_status_display, d.employee_name, d.employee_position AS `role`, DATE_FORMAT(a.report_mark_datetime, '%d-%m-%Y %H:%i') AS date_time
+                FROM tb_report_mark a
+                INNER JOIN tb_lookup_report_status b ON a.id_report_status = b.id_report_status
+                LEFT JOIN tb_m_employee d ON d.id_employee = a.id_employee
+                WHERE a.report_mark_type='" & rmt & "' AND a.id_report='" & id_sales_return_qc & "' " + If(id_pre = "-1", "AND a.is_use = 1 AND a.id_mark = 2", "AND (a.level IS NULL OR a.level = 1)") + " AND a.id_report_status = 1
+                ORDER BY a.id_report_status, a.id_mark_asg)
+                UNION
+                (SELECT 4 AS `order`, 'Approved By,' AS report_status_display, '' AS employee_name, 'Warehouse Staff' AS role, '' AS date_time)
+                UNION
+                (SELECT 5 AS `order`, 'Completed By,' AS report_status_display, '' AS employee_name, 'Dept. Head' AS role, '' AS date_time)
+            ) AS tb
+            ORDER BY `order`
+        "
+
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+
+        'head
+        Dim row_head As New DevExpress.XtraReports.UI.XRTableRow()
+
+        row_head.HeightF = 25.0F
+
+        For j As Integer = 0 To data.Rows.Count - 1
+            Dim cell As New DevExpress.XtraReports.UI.XRTableCell()
+
+            cell.Font = New Font(XrTable1.Font.FontFamily, XrTable1.Font.Size + 1, FontStyle.Bold)
+            cell.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+
+            'merge or not
+            If j > 0 Then
+                If data.Rows(j)("report_status_display").ToString = data.Rows(j - 1)("report_status_display").ToString Then
+                    cell.Text = ""
+                Else
+                    cell.Text = data.Rows(j)("report_status_display").ToString
+                End If
+            Else
+                cell.Text = data.Rows(j)("report_status_display").ToString
+            End If
+
+            row_head.Cells.Add(cell)
+        Next j
+
+        XrTable1.Rows.Add(row_head)
+
+        'blank
+        For i As Integer = 0 To 1
+            Dim row_blank As New DevExpress.XtraReports.UI.XRTableRow()
+
+            row_blank.HeightF = 10.0F
+
+            For j As Integer = 0 To data.Rows.Count - 1
+                Dim cell_blank As New DevExpress.XtraReports.UI.XRTableCell()
+
+                cell_blank.Text = " "
+
+                row_blank.Cells.Add(cell_blank)
+            Next j
+
+            XrTable1.Rows.Add(row_blank)
+        Next
+
+        'name
+        Dim row_name As New DevExpress.XtraReports.UI.XRTableRow()
+
+        row_name.HeightF = 25.0F
+
+        For j As Integer = 0 To data.Rows.Count - 1
+            Dim cell As New DevExpress.XtraReports.UI.XRTableCell()
+
+            cell.Font = New Font(XrTable1.Font.FontFamily, XrTable1.Font.Size, FontStyle.Bold)
+            cell.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+            cell.Text = data.Rows(j)("employee_name").ToString
+
+            row_name.Cells.Add(cell)
+        Next j
+
+        XrTable1.Rows.Add(row_name)
+
+        'role
+        Dim row_role As New DevExpress.XtraReports.UI.XRTableRow()
+
+        row_role.HeightF = 25.0F
+
+        For j As Integer = 0 To data.Rows.Count - 1
+            Dim cell As New DevExpress.XtraReports.UI.XRTableCell()
+
+            cell.Font = New Font(XrTable1.Font.FontFamily, XrTable1.Font.Size, FontStyle.Bold)
+            cell.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+            cell.Text = data.Rows(j)("role").ToString
+
+            row_role.Cells.Add(cell)
+        Next j
+
+        XrTable1.Rows.Add(row_role)
+
+        If id_pre = "-1" Then 'time included
+            Dim row_time As New DevExpress.XtraReports.UI.XRTableRow()
+
+            row_time.HeightF = 25.0F
+
+            For j As Integer = 0 To data.Rows.Count - 1
+                Dim cell As New DevExpress.XtraReports.UI.XRTableCell()
+
+                cell.Font = New Font(XrTable1.Font.FontFamily, XrTable1.Font.Size - 1, FontStyle.Italic)
+                cell.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+                cell.Text = data.Rows(j)("date_time").ToString
+
+                row_time.Cells.Add(cell)
+            Next j
+
+            XrTable1.Rows.Add(row_time)
         End If
 
         XRCompany.Text = execute_query("SELECT comp_name FROM tb_m_comp WHERE id_comp = (SELECT id_own_company FROM tb_opt LIMIT 1)", 0, True, "", "", "", "")

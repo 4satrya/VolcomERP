@@ -1423,7 +1423,7 @@ Public Class FormSalesPOSDet
 
         'get del
         Dim query_del As String = "SELECT dd.id_pl_sales_order_del_det, d.pl_sales_order_del_number AS `del`, so.sales_order_ol_shop_number AS `ol_store_order`,p.id_product, p.id_design, p.product_full_code AS `code`, dsg.design_display_name AS `name`, cd.code_detail_name AS `size`,
-        dd.pl_sales_order_del_det_qty AS `sales_pos_det_qty`, dd.id_design_price, dd.design_price, dd.id_design_price AS `id_design_price_retail`, dd.design_price AS `design_price_retail`, prct.design_price_type, '' AS `note`,'0' AS `id_sales_pos_det`
+        dd.pl_sales_order_del_det_qty AS `sales_pos_det_qty`, dd.id_design_price, dd.design_price, dd.id_design_price AS `id_design_price_retail`, dd.design_price AS `design_price_retail`, prct.design_price_type, 'OK' AS `note`,'0' AS `id_sales_pos_det`
         FROM tb_pl_sales_order_del_det dd
         INNER JOIN tb_pl_sales_order_del d ON d.id_pl_sales_order_del = dd.id_pl_sales_order_del
         INNER JOIN tb_sales_order_det sod ON sod.id_sales_order_det = dd.id_sales_order_det

@@ -298,6 +298,12 @@
     <Compile Include="FormAccountingWorksheet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormAllocationHist.Designer.vb">
+      <DependentUpon>FormAllocationHist.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormAllocationHist.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormAPReport.Designer.vb">
       <DependentUpon>FormAPReport.vb</DependentUpon>
     </Compile>
@@ -7902,6 +7908,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormAccountingWorksheet.resx">
       <DependentUpon>FormAccountingWorksheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAllocationHist.resx">
+      <DependentUpon>FormAllocationHist.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormAPReport.resx">
       <DependentUpon>FormAPReport.vb</DependentUpon>

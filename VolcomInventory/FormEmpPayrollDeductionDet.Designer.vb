@@ -59,12 +59,17 @@ Partial Class FormEmpPayrollDeductionDet
         Me.SBInsert = New DevExpress.XtraEditors.SimpleButton()
         Me.ErrorProvider = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.PMSalary = New DevExpress.XtraBars.PopupMenu(Me.components)
-        Me.BarButtonItem1 = New DevExpress.XtraBars.BarButtonItem()
         Me.BMSalary = New DevExpress.XtraBars.BarManager(Me.components)
         Me.barDockControlTop = New DevExpress.XtraBars.BarDockControl()
         Me.barDockControlBottom = New DevExpress.XtraBars.BarDockControl()
         Me.barDockControlLeft = New DevExpress.XtraBars.BarDockControl()
         Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl()
+        Me.BarButtonItem1 = New DevExpress.XtraBars.BarButtonItem()
+        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
+        Me.SLUEApplyText = New DevExpress.XtraEditors.TextEdit()
+        Me.SLUEApplyOption = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.SBApply = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl3.SuspendLayout()
@@ -82,6 +87,11 @@ Partial Class FormEmpPayrollDeductionDet
         CType(Me.ErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PMSalary, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BMSalary, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl2.SuspendLayout()
+        CType(Me.SLUEApplyText.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SLUEApplyOption.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LargeImageCollection
@@ -160,11 +170,11 @@ Partial Class FormEmpPayrollDeductionDet
         'GCDeduction
         '
         Me.GCDeduction.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCDeduction.Location = New System.Drawing.Point(0, 37)
+        Me.GCDeduction.Location = New System.Drawing.Point(0, 74)
         Me.GCDeduction.MainView = Me.GVDeduction
         Me.GCDeduction.Name = "GCDeduction"
         Me.GCDeduction.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RITEValue, Me.RITETotalDays})
-        Me.GCDeduction.Size = New System.Drawing.Size(1008, 635)
+        Me.GCDeduction.Size = New System.Drawing.Size(1008, 598)
         Me.GCDeduction.TabIndex = 151
         Me.GCDeduction.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVDeduction})
         '
@@ -435,12 +445,6 @@ Partial Class FormEmpPayrollDeductionDet
         Me.PMSalary.Manager = Me.BMSalary
         Me.PMSalary.Name = "PMSalary"
         '
-        'BarButtonItem1
-        '
-        Me.BarButtonItem1.Caption = "BarButtonItem1"
-        Me.BarButtonItem1.Id = 0
-        Me.BarButtonItem1.Name = "BarButtonItem1"
-        '
         'BMSalary
         '
         Me.BMSalary.DockControls.Add(Me.barDockControlTop)
@@ -479,12 +483,70 @@ Partial Class FormEmpPayrollDeductionDet
         Me.barDockControlRight.Location = New System.Drawing.Point(1008, 0)
         Me.barDockControlRight.Size = New System.Drawing.Size(0, 729)
         '
+        'BarButtonItem1
+        '
+        Me.BarButtonItem1.Caption = "BarButtonItem1"
+        Me.BarButtonItem1.Id = 0
+        Me.BarButtonItem1.Name = "BarButtonItem1"
+        '
+        'PanelControl2
+        '
+        Me.PanelControl2.Controls.Add(Me.SBApply)
+        Me.PanelControl2.Controls.Add(Me.SLUEApplyOption)
+        Me.PanelControl2.Controls.Add(Me.SLUEApplyText)
+        Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelControl2.Location = New System.Drawing.Point(0, 37)
+        Me.PanelControl2.Name = "PanelControl2"
+        Me.PanelControl2.Size = New System.Drawing.Size(1008, 37)
+        Me.PanelControl2.TabIndex = 157
+        '
+        'SLUEApplyText
+        '
+        Me.SLUEApplyText.Location = New System.Drawing.Point(738, 9)
+        Me.SLUEApplyText.MenuManager = Me.BMSalary
+        Me.SLUEApplyText.Name = "SLUEApplyText"
+        Me.SLUEApplyText.Properties.DisplayFormat.FormatString = "N2"
+        Me.SLUEApplyText.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.SLUEApplyText.Properties.EditFormat.FormatString = "N2"
+        Me.SLUEApplyText.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.SLUEApplyText.Properties.Mask.EditMask = "N2"
+        Me.SLUEApplyText.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
+        Me.SLUEApplyText.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.SLUEApplyText.Size = New System.Drawing.Size(178, 20)
+        Me.SLUEApplyText.TabIndex = 0
+        '
+        'SLUEApplyOption
+        '
+        Me.SLUEApplyOption.Location = New System.Drawing.Point(597, 9)
+        Me.SLUEApplyOption.MenuManager = Me.BMSalary
+        Me.SLUEApplyOption.Name = "SLUEApplyOption"
+        Me.SLUEApplyOption.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLUEApplyOption.Properties.View = Me.GridView2
+        Me.SLUEApplyOption.Size = New System.Drawing.Size(135, 20)
+        Me.SLUEApplyOption.TabIndex = 1
+        '
+        'GridView2
+        '
+        Me.GridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView2.Name = "GridView2"
+        Me.GridView2.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView2.OptionsView.ShowGroupPanel = False
+        '
+        'SBApply
+        '
+        Me.SBApply.Location = New System.Drawing.Point(922, 7)
+        Me.SBApply.Name = "SBApply"
+        Me.SBApply.Size = New System.Drawing.Size(75, 23)
+        Me.SBApply.TabIndex = 2
+        Me.SBApply.Text = "Apply"
+        '
         'FormEmpPayrollDeductionDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1008, 729)
         Me.Controls.Add(Me.GCDeduction)
+        Me.Controls.Add(Me.PanelControl2)
         Me.Controls.Add(Me.PanelControl1)
         Me.Controls.Add(Me.PanelControl3)
         Me.Controls.Add(Me.barDockControlLeft)
@@ -516,6 +578,11 @@ Partial Class FormEmpPayrollDeductionDet
         CType(Me.ErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PMSalary, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BMSalary, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl2.ResumeLayout(False)
+        CType(Me.SLUEApplyText.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SLUEApplyOption.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -564,4 +631,9 @@ Partial Class FormEmpPayrollDeductionDet
     Friend WithEvents barDockControlTop As DevExpress.XtraBars.BarDockControl
     Friend WithEvents BMSalary As DevExpress.XtraBars.BarManager
     Friend WithEvents BarButtonItem1 As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents PanelControl2 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents SLUEApplyOption As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView2 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents SLUEApplyText As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents SBApply As DevExpress.XtraEditors.SimpleButton
 End Class

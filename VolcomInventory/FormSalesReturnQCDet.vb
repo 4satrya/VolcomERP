@@ -1314,11 +1314,12 @@ Public Class FormSalesReturnQCDet
         Report.LabelFrom.Text = TxtCodeCompFrom.Text + "-" + TxtNameCompFrom.Text
         Report.LabelTo.Text = TxtCodeCompTo.Text + "-" + TxtNameCompTo.Text
         Report.LRecDate.Text = DEForm.Text
-        Report.LRecNumber.Text = TxtSalesReturnQCNumber.Text
+        Report.LRecNumber.Text = "NO. " + TxtSalesReturnQCNumber.Text
         Report.LabelReturn.Text = TxtSalesReturnNumber.Text
         Report.LabelNote.Text = MENote.Text
         Report.LabelPLCategory.Text = LEPLCategory.Text
-
+        Report.LabelDrawer.Text = TEDrawer.Text
+        Report.LabelDestination.Text = TxtCodeFrom.Text + "-" + TxtNameFrom.Text
 
         'Show the report's preview. 
         Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)

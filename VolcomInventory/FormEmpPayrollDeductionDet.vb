@@ -35,6 +35,9 @@
         viewSearchLookupQuery(SLUECategory, query_category, "id_salary_deduction", "salary_deduction", "id_salary_deduction")
 
         SLUECategory.EditValue = Nothing
+
+        Dim query_option As String = "SELECT 'total_days' AS `option` UNION ALL SELECT 'value' AS `option`"
+        viewSearchLookupQuery(SLUEApplyOption, query_option, "option", "option", "option")
     End Sub
 
     Private Sub FormEmpPayrollDeductionDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -346,5 +349,24 @@
         salary = salary.Replace(".", "").Replace(" ", "")
 
         GVDeduction.SetFocusedRowCellValue("total_salary", Decimal.Parse(salary))
+    End Sub
+
+    Private Sub SBApply_Click(sender As Object, e As EventArgs) Handles SBApply.Click
+        Dim con As Boolean = True
+
+        'check use day
+        If SLUEApplyOption.EditValue.ToString = "total_days" Then
+            If GCTotalDays.VisibleIndex = -1 Then
+                con = False
+            End If
+        End If
+
+        If con Then
+            For i = 0 To GVDeduction.RowCount - 1
+                If GVDeduction.IsValidRowHandle(i) Then
+                    GVDeduction.SetRowCellValue(i, SLUEApplyOption.EditValue.ToString, SLUEApplyText.EditValue)
+                End If
+            Next
+        End If
     End Sub
 End Class

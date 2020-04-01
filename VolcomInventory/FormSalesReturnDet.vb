@@ -1874,7 +1874,7 @@ Public Class FormSalesReturnDet
         'ReportStyleGridview(Report.GridView1)
 
         'Parse val
-        Report.LRecNumber.Text = TxtSalesReturnNumber.Text
+        Report.LRecNumber.Text = "NO. " + TxtSalesReturnNumber.Text
         Report.LRecDate.Text = DEForm.Text
         Report.LabelReturnOrder.Text = TxtSalesReturnOrderNumber.Text
         Report.LabelFrom.Text = TxtCodeCompFrom.Text + " - " + TxtNameCompFrom.Text
@@ -1884,8 +1884,10 @@ Public Class FormSalesReturnDet
         'Report.LRack.Text = rack_sel
         'Report.LDrawer.Text = drawer_sel
         Report.LabelNote.Text = MENote.Text
-        Report.LType.Text = TxtReturnType.Text
+        Report.LType.Text = TxtReturnType.Text + If(CENonList.EditValue, " Non List", "")
         Report.LReffNo.Text = TxtStoreReturnNumber.Text
+        Report.LabelDestination.Text = TxtCodeCompTo.Text + " - " + TxtNameCompTo.Text
+        Report.LabelDrawer.Text = TEDrawer.Text
 
         If id_ret_type = "1" Then
             Report.report_mark_type = "46"

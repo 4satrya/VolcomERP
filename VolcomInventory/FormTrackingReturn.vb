@@ -19,7 +19,20 @@
     End Sub
 
     Sub load_form()
-        Dim query As String = "CALL view_tracking_return(" + SLEStoreGroup.EditValue.ToString + ", " + SLUEStore.EditValue.ToString + ")"
+        Dim datefrom As String = "0000-01-01"
+        Dim dateto As String = "9999-12-31"
+
+        Try
+            datefrom = Date.Parse(DEFrom.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+
+        Try
+            dateto = Date.Parse(DETo.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+
+        Dim query As String = "CALL view_tracking_return(" + SLEStoreGroup.EditValue.ToString + ", " + SLUEStore.EditValue.ToString + ", '" + datefrom + "', '" + dateto + "')"
 
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 

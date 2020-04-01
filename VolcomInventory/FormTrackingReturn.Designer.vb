@@ -20,6 +20,12 @@ Partial Class FormTrackingReturn
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.PanelControlFilter = New DevExpress.XtraEditors.PanelControl()
+        Me.SLEStoreGroup = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView3 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumnid_comp_group = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumncomp_group = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumndescription = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.SBView = New DevExpress.XtraEditors.SimpleButton()
         Me.SLUEStore = New DevExpress.XtraEditors.SearchLookUpEdit()
@@ -31,6 +37,7 @@ Partial Class FormTrackingReturn
         Me.GCList = New DevExpress.XtraGrid.GridControl()
         Me.GVList = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridView()
         Me.GridBand1 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
+        Me.BandedGridColumn17 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumn1 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumn2 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumn3 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
@@ -49,25 +56,28 @@ Partial Class FormTrackingReturn
         Me.BandedGridColumn14 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumn15 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumn16 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
-        Me.SLEStoreGroup = New DevExpress.XtraEditors.SearchLookUpEdit()
-        Me.GridView3 = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.GridColumnid_comp_group = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumncomp_group = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumndescription = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.BandedGridColumn17 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
+        Me.DEFrom = New DevExpress.XtraEditors.DateEdit()
+        Me.DETo = New DevExpress.XtraEditors.DateEdit()
         CType(Me.PanelControlFilter, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlFilter.SuspendLayout()
+        CType(Me.SLEStoreGroup.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLUEStore.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLUEViewStore, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GCList, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVList, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.SLEStoreGroup.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GridView3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DETo.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DETo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControlFilter
         '
+        Me.PanelControlFilter.Controls.Add(Me.DETo)
+        Me.PanelControlFilter.Controls.Add(Me.DEFrom)
+        Me.PanelControlFilter.Controls.Add(Me.LabelControl3)
         Me.PanelControlFilter.Controls.Add(Me.SLEStoreGroup)
         Me.PanelControlFilter.Controls.Add(Me.LabelControl2)
         Me.PanelControlFilter.Controls.Add(Me.LabelControl1)
@@ -79,6 +89,53 @@ Partial Class FormTrackingReturn
         Me.PanelControlFilter.Size = New System.Drawing.Size(1008, 45)
         Me.PanelControlFilter.TabIndex = 0
         '
+        'SLEStoreGroup
+        '
+        Me.SLEStoreGroup.Location = New System.Drawing.Point(81, 12)
+        Me.SLEStoreGroup.Name = "SLEStoreGroup"
+        Me.SLEStoreGroup.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEStoreGroup.Properties.View = Me.GridView3
+        Me.SLEStoreGroup.Size = New System.Drawing.Size(150, 20)
+        Me.SLEStoreGroup.TabIndex = 8924
+        '
+        'GridView3
+        '
+        Me.GridView3.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnid_comp_group, Me.GridColumncomp_group, Me.GridColumndescription})
+        Me.GridView3.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView3.Name = "GridView3"
+        Me.GridView3.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView3.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumnid_comp_group
+        '
+        Me.GridColumnid_comp_group.Caption = "id_comp_group"
+        Me.GridColumnid_comp_group.FieldName = "id_comp_group"
+        Me.GridColumnid_comp_group.Name = "GridColumnid_comp_group"
+        '
+        'GridColumncomp_group
+        '
+        Me.GridColumncomp_group.Caption = "Group"
+        Me.GridColumncomp_group.FieldName = "comp_group"
+        Me.GridColumncomp_group.Name = "GridColumncomp_group"
+        Me.GridColumncomp_group.Visible = True
+        Me.GridColumncomp_group.VisibleIndex = 0
+        '
+        'GridColumndescription
+        '
+        Me.GridColumndescription.Caption = "Description"
+        Me.GridColumndescription.FieldName = "description"
+        Me.GridColumndescription.Name = "GridColumndescription"
+        Me.GridColumndescription.Visible = True
+        Me.GridColumndescription.VisibleIndex = 1
+        '
+        'LabelControl2
+        '
+        Me.LabelControl2.Location = New System.Drawing.Point(12, 15)
+        Me.LabelControl2.Name = "LabelControl2"
+        Me.LabelControl2.Size = New System.Drawing.Size(58, 13)
+        Me.LabelControl2.TabIndex = 4
+        Me.LabelControl2.Text = "Store Group"
+        '
         'LabelControl1
         '
         Me.LabelControl1.Location = New System.Drawing.Point(247, 15)
@@ -89,7 +146,7 @@ Partial Class FormTrackingReturn
         '
         'SBView
         '
-        Me.SBView.Location = New System.Drawing.Point(590, 10)
+        Me.SBView.Location = New System.Drawing.Point(788, 10)
         Me.SBView.Name = "SBView"
         Me.SBView.Size = New System.Drawing.Size(68, 23)
         Me.SBView.TabIndex = 1
@@ -101,7 +158,7 @@ Partial Class FormTrackingReturn
         Me.SLUEStore.Name = "SLUEStore"
         Me.SLUEStore.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.SLUEStore.Properties.View = Me.SLUEViewStore
-        Me.SLUEStore.Size = New System.Drawing.Size(300, 20)
+        Me.SLUEStore.Size = New System.Drawing.Size(200, 20)
         Me.SLUEStore.TabIndex = 0
         '
         'SLUEViewStore
@@ -177,6 +234,13 @@ Partial Class FormTrackingReturn
         Me.GridBand1.Name = "GridBand1"
         Me.GridBand1.VisibleIndex = 0
         Me.GridBand1.Width = 537
+        '
+        'BandedGridColumn17
+        '
+        Me.BandedGridColumn17.Caption = "Store Group"
+        Me.BandedGridColumn17.FieldName = "comp_group"
+        Me.BandedGridColumn17.Name = "BandedGridColumn17"
+        Me.BandedGridColumn17.Visible = True
         '
         'BandedGridColumn1
         '
@@ -366,59 +430,45 @@ Partial Class FormTrackingReturn
         Me.BandedGridColumn16.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
         Me.BandedGridColumn16.Visible = True
         '
-        'LabelControl2
+        'LabelControl3
         '
-        Me.LabelControl2.Location = New System.Drawing.Point(12, 15)
-        Me.LabelControl2.Name = "LabelControl2"
-        Me.LabelControl2.Size = New System.Drawing.Size(58, 13)
-        Me.LabelControl2.TabIndex = 4
-        Me.LabelControl2.Text = "Store Group"
+        Me.LabelControl3.Location = New System.Drawing.Point(502, 15)
+        Me.LabelControl3.Name = "LabelControl3"
+        Me.LabelControl3.Size = New System.Drawing.Size(23, 13)
+        Me.LabelControl3.TabIndex = 8925
+        Me.LabelControl3.Text = "Date"
         '
-        'SLEStoreGroup
+        'DEFrom
         '
-        Me.SLEStoreGroup.Location = New System.Drawing.Point(81, 12)
-        Me.SLEStoreGroup.Name = "SLEStoreGroup"
-        Me.SLEStoreGroup.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.SLEStoreGroup.Properties.View = Me.GridView3
-        Me.SLEStoreGroup.Size = New System.Drawing.Size(150, 20)
-        Me.SLEStoreGroup.TabIndex = 8924
+        Me.DEFrom.EditValue = Nothing
+        Me.DEFrom.Location = New System.Drawing.Point(536, 12)
+        Me.DEFrom.Name = "DEFrom"
+        Me.DEFrom.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEFrom.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEFrom.Properties.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.DEFrom.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEFrom.Properties.EditFormat.FormatString = "dd MMMM yyyy"
+        Me.DEFrom.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEFrom.Properties.Mask.EditMask = "dd MMMM yyyy"
+        Me.DEFrom.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.DEFrom.Size = New System.Drawing.Size(120, 20)
+        Me.DEFrom.TabIndex = 8926
         '
-        'GridView3
+        'DETo
         '
-        Me.GridView3.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnid_comp_group, Me.GridColumncomp_group, Me.GridColumndescription})
-        Me.GridView3.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
-        Me.GridView3.Name = "GridView3"
-        Me.GridView3.OptionsSelection.EnableAppearanceFocusedCell = False
-        Me.GridView3.OptionsView.ShowGroupPanel = False
-        '
-        'GridColumnid_comp_group
-        '
-        Me.GridColumnid_comp_group.Caption = "id_comp_group"
-        Me.GridColumnid_comp_group.FieldName = "id_comp_group"
-        Me.GridColumnid_comp_group.Name = "GridColumnid_comp_group"
-        '
-        'GridColumncomp_group
-        '
-        Me.GridColumncomp_group.Caption = "Group"
-        Me.GridColumncomp_group.FieldName = "comp_group"
-        Me.GridColumncomp_group.Name = "GridColumncomp_group"
-        Me.GridColumncomp_group.Visible = True
-        Me.GridColumncomp_group.VisibleIndex = 0
-        '
-        'GridColumndescription
-        '
-        Me.GridColumndescription.Caption = "Description"
-        Me.GridColumndescription.FieldName = "description"
-        Me.GridColumndescription.Name = "GridColumndescription"
-        Me.GridColumndescription.Visible = True
-        Me.GridColumndescription.VisibleIndex = 1
-        '
-        'BandedGridColumn17
-        '
-        Me.BandedGridColumn17.Caption = "Store Group"
-        Me.BandedGridColumn17.FieldName = "comp_group"
-        Me.BandedGridColumn17.Name = "BandedGridColumn17"
-        Me.BandedGridColumn17.Visible = True
+        Me.DETo.EditValue = Nothing
+        Me.DETo.Location = New System.Drawing.Point(662, 12)
+        Me.DETo.Name = "DETo"
+        Me.DETo.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DETo.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DETo.Properties.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.DETo.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DETo.Properties.EditFormat.FormatString = "dd MMMM yyyy"
+        Me.DETo.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DETo.Properties.Mask.EditMask = "dd MMMM yyyy"
+        Me.DETo.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.DETo.Size = New System.Drawing.Size(120, 20)
+        Me.DETo.TabIndex = 8927
         '
         'FormTrackingReturn
         '
@@ -432,12 +482,16 @@ Partial Class FormTrackingReturn
         CType(Me.PanelControlFilter, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControlFilter.ResumeLayout(False)
         Me.PanelControlFilter.PerformLayout()
+        CType(Me.SLEStoreGroup.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SLUEStore.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SLUEViewStore, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GCList, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVList, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.SLEStoreGroup.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GridView3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DETo.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DETo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -479,4 +533,7 @@ Partial Class FormTrackingReturn
     Friend WithEvents GridColumncomp_group As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumndescription As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents BandedGridColumn17 As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents LabelControl3 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents DETo As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents DEFrom As DevExpress.XtraEditors.DateEdit
 End Class

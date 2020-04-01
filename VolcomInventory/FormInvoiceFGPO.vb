@@ -112,7 +112,7 @@ INNER JOIN tb_lookup_currency cur ON cur.id_currency=wo.id_currency
 INNER JOIN tb_m_ovh_price ovhp ON ovhp.id_ovh_price=wo.id_ovh_price
 INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = ovhp.id_comp_contact
 INNER JOIN tb_m_comp c ON c.id_comp=cc.id_comp
-INNER JOIN tb_prod_order po ON po.id_prod_order=wo.`id_prod_order` 
+INNER JOIN tb_prod_order po ON po.id_prod_order=wo.`id_prod_order` AND po.id_report_status='6'
 INNER JOIN tb_prod_demand_design pdd ON pdd.id_prod_demand_design=po.`id_prod_demand_design` 
 INNER JOIN tb_m_design dsg ON dsg.id_design=pdd.id_design
 INNER JOIN tb_lookup_payment py ON py.`id_payment`=wo.`id_payment` AND py.`dp_amount` > 0

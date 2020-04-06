@@ -2,8 +2,10 @@
     Public id_store_par As String = "-1"
     Public id_wh_par As String = "-1"
     Public data_par As DataTable
+    Dim tgl As DateTime
 
     Private Sub FormSalesOrderSingleV2_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        tgl = getTimeDB()
         viewSeason()
         SLESeason.Focus()
     End Sub
@@ -221,5 +223,19 @@
     Private Sub GVProdList_HiddenEditor(sender As Object, e As EventArgs) Handles GVProdList.HiddenEditor
         GVProdList.RefreshData()
         LabelTotal.Text = GVProdList.Columns("total_order").SummaryItem.SummaryValue.ToString
+    End Sub
+
+    Private Sub CEAllPeriod_EditValueChanged(sender As Object, e As EventArgs) Handles CEAllPeriod.EditValueChanged
+        If CEAllPeriod.EditValue = True Then
+            DEFrom.EditValue = Nothing
+            DEUntil.EditValue = Nothing
+            DEFrom.Enabled = False
+            DEUntil.Enabled = False
+        Else
+            DEFrom.Enabled = True
+            DEUntil.Enabled = True
+            DEFrom.EditValue = tgl
+            DEUntil.EditValue = tgl
+        End If
     End Sub
 End Class

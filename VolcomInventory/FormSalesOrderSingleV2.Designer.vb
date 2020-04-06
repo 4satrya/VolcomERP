@@ -53,6 +53,7 @@ Partial Class FormSalesOrderSingleV2
         Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.GridColumnPriceType = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnPriceName = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnIdDesignCat = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemTextEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.RepositoryItemTextEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.RepositoryItemTextEdit3 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
@@ -68,7 +69,10 @@ Partial Class FormSalesOrderSingleV2
         Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
         Me.BtnView = New DevExpress.XtraEditors.SimpleButton()
         Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
-        Me.GridColumnIdDesignCat = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.CEAllPeriod = New DevExpress.XtraEditors.CheckEdit()
+        Me.DEFrom = New DevExpress.XtraEditors.DateEdit()
+        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
+        Me.DEUntil = New DevExpress.XtraEditors.DateEdit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.PCSelAll, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -87,6 +91,11 @@ Partial Class FormSalesOrderSingleV2
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl3.SuspendLayout()
+        CType(Me.CEAllPeriod.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEUntil.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl1
@@ -136,7 +145,7 @@ Partial Class FormSalesOrderSingleV2
         Me.GCProdList.MainView = Me.GVProdList
         Me.GCProdList.Name = "GCProdList"
         Me.GCProdList.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckEdit1, Me.RepositoryItemTextEdit1, Me.RepositoryItemTextEdit2, Me.RepositoryItemTextEdit3, Me.RepositoryItemSpinEdit1})
-        Me.GCProdList.Size = New System.Drawing.Size(995, 351)
+        Me.GCProdList.Size = New System.Drawing.Size(995, 349)
         Me.GCProdList.TabIndex = 1
         Me.GCProdList.TabStop = False
         Me.GCProdList.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVProdList})
@@ -146,11 +155,13 @@ Partial Class FormSalesOrderSingleV2
         Me.GVProdList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdProduct, Me.GridColumnIdDesignPrice, Me.GridColumnDesignCode, Me.GridColumnDesignDisplayName, Me.GridColumnProductCode, Me.GridColumnVendorCode, Me.GridColumnProductOrigin, Me.GridColumnColod, Me.GridColumnClass, Me.GridColumnDivision, Me.GridColumnProdSize, Me.GridColumnDelivery, Me.GridColumnPrice, Me.GridColumnWHStock, Me.GridColumnWHStockRes, Me.GridColumnWHStockAvailbale, Me.GridColumnOrder, Me.GridColumnStoreStock, Me.GridColumnTotalSales, Me.GridColumnIdDesign, Me.GridColumnIdSize, Me.GridColumnSeasonx, Me.GridColumnNote, Me.GridColumnIsSelect, Me.GridColumnPriceType, Me.GridColumnPriceName, Me.GridColumnIdDesignCat})
         Me.GVProdList.CustomizationFormBounds = New System.Drawing.Rectangle(908, 397, 216, 178)
         Me.GVProdList.GridControl = Me.GCProdList
-        Me.GVProdList.GroupCount = 3
         Me.GVProdList.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_stock", Me.GridColumnWHStock, ""), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_res", Me.GridColumnWHStockRes, ""), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_allow", Me.GridColumnWHStockAvailbale, ""), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_order", Me.GridColumnOrder, ""), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_stock_store", Me.GridColumnStoreStock, ""), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_sales", Me.GridColumnTotalSales, "")})
         Me.GVProdList.Name = "GVProdList"
+        Me.GVProdList.OptionsBehavior.AutoExpandAllGroups = True
+        Me.GVProdList.OptionsFind.AlwaysVisible = True
+        Me.GVProdList.OptionsView.ShowGroupedColumns = True
         Me.GVProdList.OptionsView.ShowGroupPanel = False
-        Me.GVProdList.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumnDivision, DevExpress.Data.ColumnSortOrder.Ascending), New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumnClass, DevExpress.Data.ColumnSortOrder.Ascending), New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumnDesignDisplayName, DevExpress.Data.ColumnSortOrder.Ascending), New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumnSeasonx, DevExpress.Data.ColumnSortOrder.Ascending), New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumnIdSize, DevExpress.Data.ColumnSortOrder.Ascending), New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumnProdSize, DevExpress.Data.ColumnSortOrder.Ascending)})
+        Me.GVProdList.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumnIdSize, DevExpress.Data.ColumnSortOrder.Ascending)})
         '
         'GridColumnIdProduct
         '
@@ -186,6 +197,8 @@ Partial Class FormSalesOrderSingleV2
         Me.GridColumnDesignDisplayName.Name = "GridColumnDesignDisplayName"
         Me.GridColumnDesignDisplayName.OptionsColumn.AllowEdit = False
         Me.GridColumnDesignDisplayName.OptionsColumn.ReadOnly = True
+        Me.GridColumnDesignDisplayName.Visible = True
+        Me.GridColumnDesignDisplayName.VisibleIndex = 1
         '
         'GridColumnProductCode
         '
@@ -250,7 +263,7 @@ Partial Class FormSalesOrderSingleV2
         Me.GridColumnProdSize.OptionsColumn.AllowEdit = False
         Me.GridColumnProdSize.OptionsColumn.ReadOnly = True
         Me.GridColumnProdSize.Visible = True
-        Me.GridColumnProdSize.VisibleIndex = 1
+        Me.GridColumnProdSize.VisibleIndex = 2
         Me.GridColumnProdSize.Width = 89
         '
         'GridColumnDelivery
@@ -278,7 +291,7 @@ Partial Class FormSalesOrderSingleV2
         Me.GridColumnPrice.OptionsColumn.AllowEdit = False
         Me.GridColumnPrice.OptionsColumn.ReadOnly = True
         Me.GridColumnPrice.Visible = True
-        Me.GridColumnPrice.VisibleIndex = 2
+        Me.GridColumnPrice.VisibleIndex = 3
         Me.GridColumnPrice.Width = 89
         '
         'GridColumnWHStock
@@ -322,7 +335,7 @@ Partial Class FormSalesOrderSingleV2
         Me.GridColumnWHStockAvailbale.OptionsColumn.ReadOnly = True
         Me.GridColumnWHStockAvailbale.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)})
         Me.GridColumnWHStockAvailbale.Visible = True
-        Me.GridColumnWHStockAvailbale.VisibleIndex = 8
+        Me.GridColumnWHStockAvailbale.VisibleIndex = 7
         Me.GridColumnWHStockAvailbale.Width = 101
         '
         'GridColumnOrder
@@ -337,7 +350,7 @@ Partial Class FormSalesOrderSingleV2
         Me.GridColumnOrder.Name = "GridColumnOrder"
         Me.GridColumnOrder.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)})
         Me.GridColumnOrder.Visible = True
-        Me.GridColumnOrder.VisibleIndex = 9
+        Me.GridColumnOrder.VisibleIndex = 8
         Me.GridColumnOrder.Width = 83
         '
         'RepositoryItemSpinEdit1
@@ -362,7 +375,7 @@ Partial Class FormSalesOrderSingleV2
         Me.GridColumnStoreStock.OptionsColumn.ReadOnly = True
         Me.GridColumnStoreStock.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)})
         Me.GridColumnStoreStock.Visible = True
-        Me.GridColumnStoreStock.VisibleIndex = 7
+        Me.GridColumnStoreStock.VisibleIndex = 6
         Me.GridColumnStoreStock.Width = 89
         '
         'GridColumnTotalSales
@@ -378,7 +391,7 @@ Partial Class FormSalesOrderSingleV2
         Me.GridColumnTotalSales.OptionsColumn.ReadOnly = True
         Me.GridColumnTotalSales.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)})
         Me.GridColumnTotalSales.Visible = True
-        Me.GridColumnTotalSales.VisibleIndex = 6
+        Me.GridColumnTotalSales.VisibleIndex = 5
         Me.GridColumnTotalSales.Width = 89
         '
         'GridColumnIdDesign
@@ -404,8 +417,6 @@ Partial Class FormSalesOrderSingleV2
         Me.GridColumnSeasonx.FieldNameSortGroup = "id_season"
         Me.GridColumnSeasonx.Name = "GridColumnSeasonx"
         Me.GridColumnSeasonx.OptionsColumn.AllowEdit = False
-        Me.GridColumnSeasonx.Visible = True
-        Me.GridColumnSeasonx.VisibleIndex = 5
         Me.GridColumnSeasonx.Width = 83
         '
         'GridColumnNote
@@ -441,15 +452,20 @@ Partial Class FormSalesOrderSingleV2
         Me.GridColumnPriceType.Name = "GridColumnPriceType"
         Me.GridColumnPriceType.OptionsColumn.AllowEdit = False
         Me.GridColumnPriceType.Visible = True
-        Me.GridColumnPriceType.VisibleIndex = 3
+        Me.GridColumnPriceType.VisibleIndex = 4
         '
         'GridColumnPriceName
         '
         Me.GridColumnPriceName.Caption = "Price Name"
         Me.GridColumnPriceName.FieldName = "design_price_name"
         Me.GridColumnPriceName.Name = "GridColumnPriceName"
-        Me.GridColumnPriceName.Visible = True
-        Me.GridColumnPriceName.VisibleIndex = 4
+        '
+        'GridColumnIdDesignCat
+        '
+        Me.GridColumnIdDesignCat.Caption = "Id Design Cat"
+        Me.GridColumnIdDesignCat.FieldName = "id_design_cat"
+        Me.GridColumnIdDesignCat.Name = "GridColumnIdDesignCat"
+        Me.GridColumnIdDesignCat.OptionsColumn.AllowEdit = False
         '
         'RepositoryItemTextEdit1
         '
@@ -480,6 +496,10 @@ Partial Class FormSalesOrderSingleV2
         '
         'PanelControl2
         '
+        Me.PanelControl2.Controls.Add(Me.DEUntil)
+        Me.PanelControl2.Controls.Add(Me.LabelControl3)
+        Me.PanelControl2.Controls.Add(Me.DEFrom)
+        Me.PanelControl2.Controls.Add(Me.CEAllPeriod)
         Me.PanelControl2.Controls.Add(Me.LabelControl2)
         Me.PanelControl2.Controls.Add(Me.LabelControl1)
         Me.PanelControl2.Controls.Add(Me.LabelTotal)
@@ -489,7 +509,7 @@ Partial Class FormSalesOrderSingleV2
         Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl2.Location = New System.Drawing.Point(0, 0)
         Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(995, 45)
+        Me.PanelControl2.Size = New System.Drawing.Size(995, 47)
         Me.PanelControl2.TabIndex = 100
         '
         'LabelControl2
@@ -530,7 +550,7 @@ Partial Class FormSalesOrderSingleV2
         '
         'SLESeason
         '
-        Me.SLESeason.Location = New System.Drawing.Point(53, 13)
+        Me.SLESeason.Location = New System.Drawing.Point(55, 53)
         Me.SLESeason.Name = "SLESeason"
         Me.SLESeason.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SLESeason.Properties.Appearance.Options.UseFont = True
@@ -571,7 +591,7 @@ Partial Class FormSalesOrderSingleV2
         '
         'LabelControl4
         '
-        Me.LabelControl4.Location = New System.Drawing.Point(12, 16)
+        Me.LabelControl4.Location = New System.Drawing.Point(14, 56)
         Me.LabelControl4.Name = "LabelControl4"
         Me.LabelControl4.Size = New System.Drawing.Size(35, 13)
         Me.LabelControl4.TabIndex = 96
@@ -579,7 +599,7 @@ Partial Class FormSalesOrderSingleV2
         '
         'BtnView
         '
-        Me.BtnView.Location = New System.Drawing.Point(249, 13)
+        Me.BtnView.Location = New System.Drawing.Point(459, 13)
         Me.BtnView.Name = "BtnView"
         Me.BtnView.Size = New System.Drawing.Size(70, 20)
         Me.BtnView.TabIndex = 1
@@ -591,17 +611,53 @@ Partial Class FormSalesOrderSingleV2
         Me.PanelControl3.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
         Me.PanelControl3.Controls.Add(Me.GCProdList)
         Me.PanelControl3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PanelControl3.Location = New System.Drawing.Point(0, 45)
+        Me.PanelControl3.Location = New System.Drawing.Point(0, 47)
         Me.PanelControl3.Name = "PanelControl3"
-        Me.PanelControl3.Size = New System.Drawing.Size(995, 351)
+        Me.PanelControl3.Size = New System.Drawing.Size(995, 349)
         Me.PanelControl3.TabIndex = 101
         '
-        'GridColumnIdDesignCat
+        'CEAllPeriod
         '
-        Me.GridColumnIdDesignCat.Caption = "Id Design Cat"
-        Me.GridColumnIdDesignCat.FieldName = "id_design_cat"
-        Me.GridColumnIdDesignCat.Name = "GridColumnIdDesignCat"
-        Me.GridColumnIdDesignCat.OptionsColumn.AllowEdit = False
+        Me.CEAllPeriod.EditValue = True
+        Me.CEAllPeriod.Location = New System.Drawing.Point(13, 13)
+        Me.CEAllPeriod.Name = "CEAllPeriod"
+        Me.CEAllPeriod.Properties.Caption = "All Period Sales"
+        Me.CEAllPeriod.Size = New System.Drawing.Size(104, 19)
+        Me.CEAllPeriod.TabIndex = 102
+        '
+        'DEFrom
+        '
+        Me.DEFrom.EditValue = Nothing
+        Me.DEFrom.Enabled = False
+        Me.DEFrom.Location = New System.Drawing.Point(110, 13)
+        Me.DEFrom.Name = "DEFrom"
+        Me.DEFrom.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEFrom.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEFrom.Properties.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.DEFrom.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEFrom.Size = New System.Drawing.Size(155, 20)
+        Me.DEFrom.TabIndex = 103
+        '
+        'LabelControl3
+        '
+        Me.LabelControl3.Location = New System.Drawing.Point(271, 16)
+        Me.LabelControl3.Name = "LabelControl3"
+        Me.LabelControl3.Size = New System.Drawing.Size(21, 13)
+        Me.LabelControl3.TabIndex = 104
+        Me.LabelControl3.Text = "Until"
+        '
+        'DEUntil
+        '
+        Me.DEUntil.EditValue = Nothing
+        Me.DEUntil.Enabled = False
+        Me.DEUntil.Location = New System.Drawing.Point(298, 13)
+        Me.DEUntil.Name = "DEUntil"
+        Me.DEUntil.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEUntil.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEUntil.Properties.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.DEUntil.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEUntil.Size = New System.Drawing.Size(155, 20)
+        Me.DEUntil.TabIndex = 105
         '
         'FormSalesOrderSingleV2
         '
@@ -637,6 +693,11 @@ Partial Class FormSalesOrderSingleV2
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl3.ResumeLayout(False)
+        CType(Me.CEAllPeriod.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEUntil.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -690,4 +751,8 @@ Partial Class FormSalesOrderSingleV2
     Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LabelTotal As DevExpress.XtraEditors.LabelControl
     Friend WithEvents GridColumnIdDesignCat As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents DEUntil As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents LabelControl3 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents DEFrom As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents CEAllPeriod As DevExpress.XtraEditors.CheckEdit
 End Class

@@ -5753,7 +5753,7 @@ WHERE copd.id_design_cop_propose='" & id_report & "';"
             'completed
             If id_status_reportx = "6" Then
                 'select header
-                Dim qu_payment As String = "SELECT id_pay_type,report_mark_type,date_created FROM tb_pn py WHERE py.id_pn='" & id_report & "'"
+                Dim qu_payment As String = "SELECT id_pay_type,report_mark_type,date_created,date_payment FROM tb_pn py WHERE py.id_pn='" & id_report & "'"
                 Dim data_payment As DataTable = execute_query(qu_payment, -1, True, "", "", "", "")
 
                 'auto journal
@@ -5762,7 +5762,7 @@ WHERE copd.id_design_cop_propose='" & id_report & "';"
                 Dim id_user_prepared As String = du.Rows(0)("id_user").ToString
                 Dim report_number As String = du.Rows(0)("report_number").ToString
 
-                Dim date_created As String = Date.Parse(data_payment.Rows(0)("date_created").ToString).ToString("yyyy-MM-dd")
+                Dim date_created As String = Date.Parse(data_payment.Rows(0)("date_payment").ToString).ToString("yyyy-MM-dd")
 
                 'main journal
                 Dim qjm As String = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created, acc_trans_note, id_report_status)

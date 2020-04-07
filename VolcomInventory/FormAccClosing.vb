@@ -47,13 +47,33 @@ HAVING NOT sts='Ok'"
         GCClosing.DataSource = data
         GVClosing.BestFitColumns()
 
-        If Not data.Rows.Count > 0 Then
+        'report check
+        query = ""
+        'BPL
+        query += "SELECT pn.id_pn_fgpo AS id_report,'189' AS report_mark_type,pn.ref_date AS date_reference,'BPL' AS `type`
+,sts.report_status AS report_status,pn.created_date AS date_created,pn.number AS report_number
+FROM `tb_pn_fgpo` pn 
+INNER JOIN tb_lookup_report_status sts ON sts.id_report_status=pn.id_report_status
+WHERE DATE(pn.ref_date) <= '" & Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd") & "' AND pn.id_report_status !=5 AND pn.id_report_status !=6"
+        'BBK
+        query += " UNION
+SELECT pn.id_pn AS id_report,'159' AS report_mark_type,pn.date_payment AS date_reference,'BBK' AS `type`
+,sts.report_status AS report_status,pn.date_created AS date_created,pn.number AS report_number
+FROM `tb_pn` pn 
+INNER JOIN tb_lookup_report_status sts ON sts.id_report_status=pn.id_report_status
+WHERE DATE(pn.date_payment) <= '" & Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd") & "' AND pn.id_report_status !=5 AND pn.id_report_status !=6"
+
+        Dim data_report As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCReport.DataSource = data_report
+        GVReport.BestFitColumns()
+
+        If data.Rows.Count > 0 Or data_report.Rows.Count > 0 Then
+            DEUntil.Enabled = True
+            BClosing.Visible = False
+        Else
             infoCustom("No transaction problem, click closing to do monthly posting.")
             DEUntil.Enabled = False
             BClosing.Visible = True
-        Else
-            DEUntil.Enabled = True
-            BClosing.Visible = False
         End If
     End Sub
 

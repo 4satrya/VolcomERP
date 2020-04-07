@@ -1329,6 +1329,20 @@
         If e.KeyCode = Keys.F7 Then
             FormMenuAuth.type = "2"
             FormMenuAuth.ShowDialog()
+        ElseIf e.KeyCode = Keys.F8 Then
+            'column option creating and saving the view's layout to a new memory stream 
+            Dim str As System.IO.Stream
+            str = New System.IO.MemoryStream()
+            GVSOH.SaveLayoutToStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+            str.Seek(0, System.IO.SeekOrigin.Begin)
+
+            'hide all column
+
+
+            'restore column opt
+            GVSOH.RestoreLayoutFromStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+            str.Seek(0, System.IO.SeekOrigin.Begin)
+            Cursor = Cursors.Default
         End If
     End Sub
 

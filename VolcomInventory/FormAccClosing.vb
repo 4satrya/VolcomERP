@@ -98,7 +98,7 @@ HAVING NOT sts='Ok'"
         FROM tb_a_acc_trans_det trxd
         INNER JOIN tb_a_acc_trans trx ON trx.`id_acc_trans`=trxd.`id_acc_trans`
         INNER JOIN tb_a_acc acc ON acc.id_acc=trxd.id_acc AND (LEFT(acc.acc_name,1)='3' OR LEFT(acc.acc_name,1)='4')
-        INNER JOIN tb_lookup_coa_laba coal ON coal.id_month=MONTH('2019-09-30')
+        INNER JOIN tb_lookup_coa_laba coal ON coal.id_month=MONTH('" & Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-01") & "')
         WHERE trx.`is_close`='2' AND trx.id_report_status!=5 AND DATE(trx.`date_reference`)<='" & Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd") & "' AND DATE(trx.`date_reference`)>='" & Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-01") & "' 
         GROUP BY trxd.id_comp
         HAVING credit>0"

@@ -158,6 +158,12 @@ Public Class FormSalesPOSDet
             If is_use_inv_mapping = "1" Then
                 SPDiscount.Enabled = False
             End If
+
+            'minimum date
+            Dim query_closing As String = "SELECT DATE_ADD(l.date_until,INTERVAL 1 DAY) AS `first_date` FROM tb_closing_log l WHERE l.note='Closing End' ORDER BY l.id DESC LIMIT 1 "
+            Dim data_closing As DataTable = execute_query(query_closing, -1, True, "", "", "", "")
+            DEStart.Properties.MinValue = data_closing(0)("first_date")
+            DEEnd.Properties.MinValue = data_closing(0)("first_date")
         ElseIf action = "upd" Then
             GroupControlList.Enabled = True
             GVItemList.OptionsBehavior.AutoExpandAllGroups = True

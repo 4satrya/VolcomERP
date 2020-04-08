@@ -47,16 +47,16 @@ Partial Public Class ReportFGTransSummaryReport
         'Detail
         '
         Me.Detail.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.WCDesign, Me.WCData})
-        Me.Detail.HeightF = 208.0!
+        Me.Detail.HeightF = 266.3333!
         Me.Detail.Name = "Detail"
         Me.Detail.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
         Me.Detail.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
         '
         'WCDesign
         '
-        Me.WCDesign.LocationFloat = New DevExpress.Utils.PointFloat(0!, 0!)
+        Me.WCDesign.LocationFloat = New DevExpress.Utils.PointFloat(0.0001271566!, 0!)
         Me.WCDesign.Name = "WCDesign"
-        Me.WCDesign.SizeF = New System.Drawing.SizeF(776.0!, 208.0!)
+        Me.WCDesign.SizeF = New System.Drawing.SizeF(1118.0!, 266.3333!)
         Me.WCDesign.WinControl = Me.GCDesign
         '
         'GCDesign
@@ -64,7 +64,7 @@ Partial Public Class ReportFGTransSummaryReport
         Me.GCDesign.Location = New System.Drawing.Point(0, 0)
         Me.GCDesign.MainView = Me.GVDesign
         Me.GCDesign.Name = "GCDesign"
-        Me.GCDesign.Size = New System.Drawing.Size(745, 200)
+        Me.GCDesign.Size = New System.Drawing.Size(1073, 256)
         Me.GCDesign.TabIndex = 5
         Me.GCDesign.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVDesign})
         '
@@ -108,9 +108,9 @@ Partial Public Class ReportFGTransSummaryReport
         '
         'WCData
         '
-        Me.WCData.LocationFloat = New DevExpress.Utils.PointFloat(0!, 0!)
+        Me.WCData.LocationFloat = New DevExpress.Utils.PointFloat(0.0001271566!, 0!)
         Me.WCData.Name = "WCData"
-        Me.WCData.SizeF = New System.Drawing.SizeF(776.0!, 208.0!)
+        Me.WCData.SizeF = New System.Drawing.SizeF(1118.0!, 266.3333!)
         Me.WCData.WinControl = Me.GCData
         '
         'GCData
@@ -118,7 +118,7 @@ Partial Public Class ReportFGTransSummaryReport
         Me.GCData.Location = New System.Drawing.Point(0, 39)
         Me.GCData.MainView = Me.GVData
         Me.GCData.Name = "GCData"
-        Me.GCData.Size = New System.Drawing.Size(745, 200)
+        Me.GCData.Size = New System.Drawing.Size(1073, 256)
         Me.GCData.TabIndex = 5
         Me.GCData.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVData})
         '
@@ -144,7 +144,7 @@ Partial Public Class ReportFGTransSummaryReport
         'BottomMargin
         '
         Me.BottomMargin.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel5, Me.XrLabel3, Me.XrLabel2, Me.XrPageInfo1})
-        Me.BottomMargin.HeightF = 48.92626!
+        Me.BottomMargin.HeightF = 49.25963!
         Me.BottomMargin.Name = "BottomMargin"
         Me.BottomMargin.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
         Me.BottomMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
@@ -190,7 +190,7 @@ Partial Public Class ReportFGTransSummaryReport
         Me.XrPageInfo1.Borders = DevExpress.XtraPrinting.BorderSide.None
         Me.XrPageInfo1.Font = New System.Drawing.Font("Lucida Sans", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.XrPageInfo1.Format = "Page {0} of {1}"
-        Me.XrPageInfo1.LocationFloat = New DevExpress.Utils.PointFloat(625.9999!, 0!)
+        Me.XrPageInfo1.LocationFloat = New DevExpress.Utils.PointFloat(968.0!, 0!)
         Me.XrPageInfo1.Name = "XrPageInfo1"
         Me.XrPageInfo1.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrPageInfo1.SizeF = New System.Drawing.SizeF(150.0!, 18.71793!)
@@ -256,7 +256,7 @@ Partial Public Class ReportFGTransSummaryReport
         'XrLabelCompany
         '
         Me.XrLabelCompany.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabelCompany.LocationFloat = New DevExpress.Utils.PointFloat(407.2499!, 0!)
+        Me.XrLabelCompany.LocationFloat = New DevExpress.Utils.PointFloat(749.2499!, 0!)
         Me.XrLabelCompany.Name = "XrLabelCompany"
         Me.XrLabelCompany.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabelCompany.SizeF = New System.Drawing.SizeF(368.7501!, 22.99999!)
@@ -268,9 +268,10 @@ Partial Public Class ReportFGTransSummaryReport
         'ReportFGTransSummaryReport
         '
         Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.Detail, Me.TopMargin, Me.BottomMargin, Me.PageHeader})
+        Me.Landscape = True
         Me.Margins = New System.Drawing.Printing.Margins(29, 22, 24, 49)
-        Me.PageHeight = 1169
-        Me.PageWidth = 827
+        Me.PageHeight = 827
+        Me.PageWidth = 1169
         Me.PaperKind = System.Drawing.Printing.PaperKind.A4
         Me.ScriptLanguage = DevExpress.XtraReports.ScriptLanguage.VisualBasic
         Me.Version = "15.1"

@@ -34,61 +34,96 @@
             'pick from type
             If id_dn_type = "1" Then 'reject claim
                 TEDNType.Text = "Claim Reject"
+                Dim j As Integer = 0
+
                 For i As Integer = 0 To FormDebitNote.GVSumClaimReject.RowCount - 1
                     'add row
-                    If (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_normal_minor") + FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_minor")) > 0 Then 'reject minor
-                        Dim newRow As DataRow = (TryCast(GCItemList.DataSource, DataTable)).NewRow()
-                        newRow("number") = i + 1
-                        newRow("id_report") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "id_prod_order").ToString
-                        newRow("report_mark_type") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "report_mark_type").ToString
-                        newRow("report_number") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "prod_order_number").ToString
-                        newRow("info_design") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "design_display_name").ToString
-                        newRow("description") = "REJECT MINOR"
-                        newRow("claim_percent") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "p_minor")
-                        newRow("unit_price") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "prod_order_wo_det_price")
-                        newRow("qty") = (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_normal_minor") + FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_minor"))
-                        newRow("claim_pcs") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "prod_order_wo_det_price") * (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "p_minor") / 100)
-                        newRow("claim_amo") = (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "prod_order_wo_det_price") * (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "p_minor") / 100)) * (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_normal_minor") + FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_minor"))
-                        TryCast(GCItemList.DataSource, DataTable).Rows.Add(newRow)
-                        GCItemList.RefreshDataSource()
-                        GVItemList.RefreshData()
+                    Dim found As Boolean = False
+                    'Try
+                    '    For k = 0 To GVItemList.RowCount - 1
+                    '        'reject minor
+                    '        If GVItemList.GetRowCellValue(k, "unit_price") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "prod_order_wo_det_price") And GVItemList.GetRowCellValue(k, "description").ToString = "REJECT MINOR" And GVItemList.GetRowCellValue(k, "id_report").ToString = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "id_prod_order").ToString And (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_normal_minor") + FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_minor")) > 0 Then
+                    '            GVItemList.SetRowCellValue(k, "qty", GVItemList.GetRowCellValue(k, "qty") + (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_normal_minor") + FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_minor")))
+                    '            GVItemList.SetRowCellValue(k, "claim_amo", GVItemList.GetRowCellValue(k, "claim_amo") + (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "prod_order_wo_det_price") * (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "p_minor") / 100)) * (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_normal_minor") + FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_minor")))
+                    '            found = True
+                    '        End If
+                    '        'reject major
+                    '        If GVItemList.GetRowCellValue(k, "unit_price") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "prod_order_wo_det_price") And GVItemList.GetRowCellValue(k, "description").ToString = "REJECT MAJOR" And GVItemList.GetRowCellValue(k, "id_report").ToString = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "id_prod_order").ToString And (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_minor_major") + FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_major")) > 0 Then
+                    '            GVItemList.SetRowCellValue(k, "qty", GVItemList.GetRowCellValue(k, "qty") + (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_minor_major") + FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_major")))
+                    '            GVItemList.SetRowCellValue(k, "claim_amo", GVItemList.GetRowCellValue(k, "claim_amo") + (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "prod_order_wo_det_price") * (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "p_major") / 100)) * (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_minor_major") + FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_major")))
+                    '            found = True
+                    '        End If
+                    '        'afkir
+                    '        If GVItemList.GetRowCellValue(k, "unit_price") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "prod_order_wo_det_price") And GVItemList.GetRowCellValue(k, "description").ToString = "AFKIR" And GVItemList.GetRowCellValue(k, "id_report").ToString = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "id_prod_order").ToString And FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_afkir") > 0 Then
+                    '            GVItemList.SetRowCellValue(k, "qty", GVItemList.GetRowCellValue(k, "qty") + FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_afkir"))
+                    '            GVItemList.SetRowCellValue(k, "claim_amo", GVItemList.GetRowCellValue(k, "claim_amo") + (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "prod_order_wo_det_price") * (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "p_afkir") / 100)) * FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_afkir"))
+                    '            found = True
+                    '        End If
+                    '    Next
+                    'Catch ex As Exception
+                    '    MsgBox(ex.ToString)
+                    'End Try
+
+                    If Not found Then
+                        j = j + 1
+                        If (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_normal_minor") + FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_minor")) > 0 Then 'reject minor
+                            Dim newRow As DataRow = (TryCast(GCItemList.DataSource, DataTable)).NewRow()
+                            newRow("number") = j
+                            newRow("id_reff") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "id_reff").ToString
+                            newRow("id_report") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "id_prod_order").ToString
+                            newRow("report_mark_type") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "report_mark_type").ToString
+                            newRow("report_number") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "prod_order_number").ToString
+                            newRow("info_design") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "design_display_name").ToString
+                            newRow("description") = "REJECT MINOR"
+                            newRow("claim_percent") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "p_minor")
+                            newRow("unit_price") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "prod_order_wo_det_price")
+                            newRow("qty") = (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_normal_minor") + FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_minor"))
+                            newRow("claim_pcs") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "prod_order_wo_det_price") * (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "p_minor") / 100)
+                            newRow("claim_amo") = (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "prod_order_wo_det_price") * (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "p_minor") / 100)) * (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_normal_minor") + FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_minor"))
+                            TryCast(GCItemList.DataSource, DataTable).Rows.Add(newRow)
+                            GCItemList.RefreshDataSource()
+                            GVItemList.RefreshData()
+                        End If
+
+                        If (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_minor_major") + FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_major")) > 0 Then 'reject major
+                            Dim newRow As DataRow = (TryCast(GCItemList.DataSource, DataTable)).NewRow()
+                            newRow("number") = j
+                            newRow("id_reff") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "id_reff").ToString
+                            newRow("id_report") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "id_prod_order").ToString
+                            newRow("report_mark_type") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "report_mark_type").ToString
+                            newRow("report_number") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "prod_order_number").ToString
+                            newRow("info_design") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "design_display_name").ToString
+                            newRow("description") = "REJECT MAJOR"
+                            newRow("claim_percent") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "p_major")
+                            newRow("unit_price") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "prod_order_wo_det_price")
+                            newRow("qty") = (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_minor_major") + FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_major"))
+                            newRow("claim_pcs") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "prod_order_wo_det_price") * (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "p_major") / 100)
+                            newRow("claim_amo") = (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "prod_order_wo_det_price") * (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "p_major") / 100)) * (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_minor_major") + FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_major"))
+                            TryCast(GCItemList.DataSource, DataTable).Rows.Add(newRow)
+                            GCItemList.RefreshDataSource()
+                            GVItemList.RefreshData()
+                        End If
+
+                        If FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_afkir") > 0 Then 'reject afkir
+                            Dim newRow As DataRow = (TryCast(GCItemList.DataSource, DataTable)).NewRow()
+                            newRow("number") = j
+                            newRow("id_reff") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "id_reff").ToString
+                            newRow("id_report") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "id_prod_order").ToString
+                            newRow("report_mark_type") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "report_mark_type").ToString
+                            newRow("report_number") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "prod_order_number").ToString
+                            newRow("info_design") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "design_display_name").ToString
+                            newRow("description") = "AFKIR"
+                            newRow("claim_percent") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "p_afkir")
+                            newRow("unit_price") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "prod_order_wo_det_price")
+                            newRow("qty") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_afkir")
+                            newRow("claim_pcs") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "prod_order_wo_det_price") * (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "p_afkir") / 100)
+                            newRow("claim_amo") = (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "prod_order_wo_det_price") * (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "p_afkir") / 100)) * FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_afkir")
+                            TryCast(GCItemList.DataSource, DataTable).Rows.Add(newRow)
+                            GCItemList.RefreshDataSource()
+                            GVItemList.RefreshData()
+                        End If
                     End If
 
-                    If (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_minor_major") + FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_major")) > 0 Then 'reject major
-                        Dim newRow As DataRow = (TryCast(GCItemList.DataSource, DataTable)).NewRow()
-                        newRow("number") = i + 1
-                        newRow("id_report") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "id_prod_order").ToString
-                        newRow("report_mark_type") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "report_mark_type").ToString
-                        newRow("report_number") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "prod_order_number").ToString
-                        newRow("info_design") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "design_display_name").ToString
-                        newRow("description") = "REJECT MAJOR"
-                        newRow("claim_percent") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "p_major")
-                        newRow("unit_price") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "prod_order_wo_det_price")
-                        newRow("qty") = (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_minor_major") + FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_major"))
-                        newRow("claim_pcs") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "prod_order_wo_det_price") * (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "p_major") / 100)
-                        newRow("claim_amo") = (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "prod_order_wo_det_price") * (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "p_major") / 100)) * (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_minor_major") + FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_major"))
-                        TryCast(GCItemList.DataSource, DataTable).Rows.Add(newRow)
-                        GCItemList.RefreshDataSource()
-                        GVItemList.RefreshData()
-                    End If
-
-                    If FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_afkir") > 0 Then 'reject afkir
-                        Dim newRow As DataRow = (TryCast(GCItemList.DataSource, DataTable)).NewRow()
-                        newRow("number") = i + 1
-                        newRow("id_report") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "id_prod_order").ToString
-                        newRow("report_mark_type") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "report_mark_type").ToString
-                        newRow("report_number") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "prod_order_number").ToString
-                        newRow("info_design") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "design_display_name").ToString
-                        newRow("description") = "AFKIR"
-                        newRow("claim_percent") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "p_afkir")
-                        newRow("unit_price") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "prod_order_wo_det_price")
-                        newRow("qty") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_afkir")
-                        newRow("claim_pcs") = FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "prod_order_wo_det_price") * (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "p_afkir") / 100)
-                        newRow("claim_amo") = (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "prod_order_wo_det_price") * (FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "p_afkir") / 100)) * FormDebitNote.GVSumClaimReject.GetRowCellValue(i, "qc_afkir")
-                        TryCast(GCItemList.DataSource, DataTable).Rows.Add(newRow)
-                        GCItemList.RefreshDataSource()
-                        GVItemList.RefreshData()
-                    End If
                     GVItemList.BestFitColumns()
                 Next
             ElseIf id_dn_type = "2" Then 'late claim
@@ -187,7 +222,7 @@ WHERE dn.id_debit_note='" & id_dn & "'"
     End Sub
 
     Sub load_det()
-        Dim query As String = "SELECT dnd.`report_number`,dnd.`info_design`,dnd.`description`,dnd.`claim_percent`,dnd.`unit_price`,dnd.`qty`,dnd.`id_report`,dnd.`report_mark_type`,((dnd.`claim_percent`/100)*dnd.`unit_price`) as claim_pcs, ((dnd.`claim_percent`/100)*dnd.`unit_price`) * dnd.`qty` as claim_amo
+        Dim query As String = "SELECT dnd.id_reff,dnd.`report_number`,dnd.`info_design`,dnd.`description`,dnd.`claim_percent`,dnd.`unit_price`,dnd.`qty`,dnd.`id_report`,dnd.`report_mark_type`,((dnd.`claim_percent`/100)*dnd.`unit_price`) as claim_pcs, ((dnd.`claim_percent`/100)*dnd.`unit_price`) * dnd.`qty` as claim_amo
 ,@curRow := @curRow + 1 AS `number`
 FROM tb_debit_note_det dnd
 JOIN (SELECT @curRow := 0) r
@@ -243,12 +278,12 @@ WHERE dnd.id_debit_note='" & id_dn & "'"
                 query = "CALL gen_number('" & id_dn & "','221')"
                 execute_non_query(query, True, "", "", "", "")
 
-                Dim q_det As String = "INSERT INTO tb_debit_note_det(id_debit_note,id_report,report_mark_type,report_number,info_design,description,claim_percent,unit_price,qty) VALUES"
+                Dim q_det As String = "INSERT INTO tb_debit_note_det(id_debit_note,id_reff,id_report,report_mark_type,report_number,info_design,description,claim_percent,unit_price,qty) VALUES"
                 For i As Integer = 0 To GVItemList.RowCount - 1
                     If i > 0 Then
                         q_det += ","
                     End If
-                    q_det += "('" & id_dn & "','" & GVItemList.GetRowCellValue(i, "id_report").ToString & "','" & GVItemList.GetRowCellValue(i, "report_mark_type").ToString & "','" & GVItemList.GetRowCellValue(i, "report_number").ToString & "','" & GVItemList.GetRowCellValue(i, "info_design").ToString & "','" & addSlashes(GVItemList.GetRowCellValue(i, "description").ToString) & "','" & decimalSQL(GVItemList.GetRowCellValue(i, "claim_percent").ToString) & "','" & decimalSQL(GVItemList.GetRowCellValue(i, "unit_price").ToString) & "','" & decimalSQL(GVItemList.GetRowCellValue(i, "qty").ToString) & "')"
+                    q_det += "('" & id_dn & "','" & GVItemList.GetRowCellValue(i, "id_reff").ToString & "','" & GVItemList.GetRowCellValue(i, "id_report").ToString & "','" & GVItemList.GetRowCellValue(i, "report_mark_type").ToString & "','" & GVItemList.GetRowCellValue(i, "report_number").ToString & "','" & GVItemList.GetRowCellValue(i, "info_design").ToString & "','" & addSlashes(GVItemList.GetRowCellValue(i, "description").ToString) & "','" & decimalSQL(GVItemList.GetRowCellValue(i, "claim_percent").ToString) & "','" & decimalSQL(GVItemList.GetRowCellValue(i, "unit_price").ToString) & "','" & decimalSQL(GVItemList.GetRowCellValue(i, "qty").ToString) & "')"
                 Next
                 execute_non_query(q_det, True, "", "", "", "")
 
@@ -266,7 +301,19 @@ WHERE dnd.id_debit_note='" & id_dn & "'"
         Cursor = Cursors.WaitCursor
 
         ReportDebitNote.id_report = id_dn
-        ReportDebitNote.dt = GCItemList.DataSource
+        'add datasource
+        Dim q As String = "SELECT dnd.`report_number`,dnd.`info_design`,dnd.`description`,dnd.`claim_percent`,dnd.`unit_price`,dnd.`qty`,dnd.`id_report`,dnd.`report_mark_type`,((dnd.`claim_percent`/100)*dnd.`unit_price`) AS claim_pcs, ((dnd.`claim_percent`/100)*dnd.`unit_price`) * dnd.`qty` AS claim_amo
+,@curRow := @curRow + 1 AS `number`
+FROM 
+(
+	SELECT dnd.`report_number`,dnd.`info_design`,dnd.`description`,dnd.`claim_percent`,dnd.`unit_price`,SUM(dnd.`qty`) AS qty,dnd.`id_report`,dnd.`report_mark_type`,SUM((dnd.`claim_percent`/100)*dnd.`unit_price`) AS claim_pcs, SUM(((dnd.`claim_percent`/100)*dnd.`unit_price`) * dnd.`qty`) AS claim_amo
+	FROM tb_debit_note_det dnd
+	WHERE dnd.id_debit_note='" & id_dn & "'
+	GROUP BY dnd.id_report,dnd.`unit_price`,dnd.description
+) dnd
+JOIN (SELECT @curRow := 0) r"
+        Dim dtq As DataTable = execute_query(q, -1, True, "", "", "", "")
+        ReportDebitNote.dt = dtq
         Dim Report As New ReportDebitNote()
 
         Report.LSay.Text = METotSay.Text

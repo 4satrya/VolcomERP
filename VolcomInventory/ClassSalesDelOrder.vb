@@ -284,8 +284,10 @@
                 LEFT JOIN tb_store_due sd ON sd.id_comp = c.id_comp
                 WHERE del.id_pl_sales_order_del=" + id_report_par + "; SELECT LAST_INSERT_ID(); "
                 Dim id_sales_pos As String = execute_query(query_inv, 0, True, "", "", "", "")
+                'gen number
+                execute_non_query("CALL gen_number(" + id_sales_pos + ", 48);", True, "", "", "", "")
                 'increase number
-                increase_inc_sales("6")
+                'increase_inc_sales("6")
                 'detail
                 Dim query_detail_inv As String = "INSERT INTO tb_sales_pos_det(id_sales_pos, id_product, id_design_price, design_price, sales_pos_det_qty, id_design_price_retail, design_price_retail, note, id_sales_pos_det_ref, id_pl_sales_order_del_det, id_pos_combine_summary) 
                 SELECT " + id_sales_pos + ", id_product, id_design_price, design_price, dd.pl_sales_order_del_det_qty AS sales_pos_det_qty, 
@@ -304,7 +306,11 @@
                 SET main.sales_pos_total_qty = src.total, main.sales_pos_total=src.total_amount; "
                 execute_non_query(query_detail_inv, True, "", "", "", "")
                 'submit prepared
-                submit_only_prepared("48", id_sales_pos, id_user)
+                Dim id_user_prepared_inv As String = get_opt_acc_field("invoice_prepared_by")
+                submit_who_prepared("48", id_sales_pos, id_user_prepared_inv)
+                'nonaktif mark
+                Dim queryrm = String.Format("UPDATE tb_report_mark SET report_mark_lead_time=NULL,report_mark_start_datetime=NULL WHERE report_mark_type='{0}' AND id_report='{1}' AND id_report_status>'1'", "48", id_sales_pos)
+                execute_non_query(queryrm, True, "", "", "", "")
                 'journal draft
                 Dim acc As New ClassAccounting()
                 Try

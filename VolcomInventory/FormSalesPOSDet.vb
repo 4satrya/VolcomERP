@@ -489,43 +489,51 @@ Public Class FormSalesPOSDet
                 If CheckEditInvType.EditValue = True Then
                     report_mark_type = "54"
                     id_memo_type = "3"
-                    sales_pos_number = header_number_sales("6")
+                    'sales_pos_number = header_number_sales("6")
+                    sales_pos_number = ""
                 Else
                     report_mark_type = "48"
                     id_memo_type = "1"
-                    sales_pos_number = header_number_sales("6")
+                    'sales_pos_number = header_number_sales("6")
+                    sales_pos_number = ""
                 End If
             ElseIf id_menu = "2" Then
                 'credit note
                 If CheckEditInvType.EditValue = True Then
                     report_mark_type = "67"
                     id_memo_type = "4"
-                    sales_pos_number = header_number_sales("17")
+                    'sales_pos_number = header_number_sales("17")
+                    sales_pos_number = ""
                 Else
                     report_mark_type = "66"
                     id_memo_type = "2"
-                    sales_pos_number = header_number_sales("17")
+                    'sales_pos_number = header_number_sales("17")
+                    sales_pos_number = ""
                 End If
             ElseIf id_menu = "3" Then
                 'invoice missing promo
                 report_mark_type = "116"
                 id_memo_type = "5"
-                sales_pos_number = header_number_sales("33")
+                'sales_pos_number = header_number_sales("33")
+                sales_pos_number = ""
             ElseIf id_menu = "4" Then
                 'invoice diff margin
                 If CheckEditInvType.EditValue = True Then
                     report_mark_type = "117"
                     id_memo_type = "8"
-                    sales_pos_number = header_number_sales("6")
+                    'sales_pos_number = header_number_sales("6")
+                    sales_pos_number = ""
                 Else
                     report_mark_type = "183"
                     id_memo_type = "9"
-                    sales_pos_number = header_number_sales("6")
+                    'sales_pos_number = header_number_sales("6")
+                    sales_pos_number = ""
                 End If
             ElseIf id_menu = "5" Then
                 report_mark_type = "118"
                 id_memo_type = "2"
-                sales_pos_number = header_number_sales("17")
+                'sales_pos_number = header_number_sales("17")
+                sales_pos_number = ""
             End If
             Dim id_inv_type As String = LEInvType.EditValue.ToString
             If id_comp_contact_bill = "-1" Then
@@ -593,14 +601,14 @@ Public Class FormSalesPOSDet
                     Cursor = Cursors.WaitCursor
 
                     'cek duplicat number
-                    Dim qnum As String = "SELECT * FROM tb_sales_pos WHERE sales_pos_number='" + sales_pos_number + "' AND id_report_status!=5 "
-                    Dim dnum As DataTable = execute_query(qnum, -1, True, "", "", "", "")
-                    If dnum.Rows.Count > 0 Then
-                        'jika nomer sudah ada
-                        Cursor = Cursors.Default
-                        stopCustom("Invoice number : " + sales_pos_number + " already exist. Please save again to get new register number")
-                        Exit Sub
-                    End If
+                    'Dim qnum As String = "SELECT * FROM tb_sales_pos WHERE sales_pos_number='" + sales_pos_number + "' AND id_report_status!=5 "
+                    'Dim dnum As DataTable = execute_query(qnum, -1, True, "", "", "", "")
+                    'If dnum.Rows.Count > 0 Then
+                    '    'jika nomer sudah ada
+                    '    Cursor = Cursors.Default
+                    '    stopCustom("Invoice number : " + sales_pos_number + " already exist. Please save again to get new register number")
+                    '    Exit Sub
+                    'End If
 
                     'cek stok
                     If (id_menu = "1" Or id_menu = "4") And is_block_no_stock = "1" And cond_no_stock = False Then
@@ -633,18 +641,20 @@ Public Class FormSalesPOSDet
                     Dim query As String = "INSERT INTO tb_sales_pos(id_store_contact_from,id_comp_contact_bill , sales_pos_number, sales_pos_date, sales_pos_note, id_report_status, id_so_type, sales_pos_total, sales_pos_due_date, sales_pos_start_period, sales_pos_end_period, sales_pos_discount, sales_pos_potongan, sales_pos_vat, id_pl_sales_order_del,id_memo_type,id_inv_type, id_sales_pos_ref, report_mark_type, is_use_unique_code, id_acc_ar, id_acc_sales, id_acc_sales_return, bof_number, bof_date) "
                     query += "VALUES('" + id_store_contact_from + "'," + id_comp_contact_bill + ", '" + sales_pos_number + "', NOW(), '" + sales_pos_note + "', '" + id_report_status + "', '" + id_so_type + "', '" + decimalSQL(total_amount.ToString) + "', '" + sales_pos_due_date + "', '" + sales_pos_start_period + "', '" + sales_pos_end_period + "', '" + sales_pos_discount + "', '" + sales_pos_potongan + "', '" + sales_pos_vat + "'," + do_q + "," + id_memo_type + "," + id_inv_type + "," + id_sales_pos_ref + ", '" + report_mark_type + "', '" + is_use_unique_code + "', " + id_acc_ar + ", " + id_acc_sales + ", " + id_acc_sales_return + ", '" + bof_number + "'," + bof_date + "); SELECT LAST_INSERT_ID(); "
                     id_sales_pos = execute_query(query, 0, True, "", "", "", "")
+                    'gen number
+                    execute_non_query("CALL gen_number(" + id_sales_pos + ", " + report_mark_type + ");", True, "", "", "", "")
 
-
-                    If report_mark_type = "48" Or report_mark_type = "54" Or report_mark_type = "117" Or report_mark_type = "183" Then
-                        'invoice
-                        increase_inc_sales("6")
-                    ElseIf report_mark_type = "66" Or report_mark_type = "67" Or report_mark_type = "118" Then
-                        'credit note
-                        increase_inc_sales("17")
-                    ElseIf report_mark_type = "116" Then
-                        'invoice missing promo
-                        increase_inc_sales("33")
-                    End If
+                    'disable increase inc sales
+                    'If report_mark_type = "48" Or report_mark_type = "54" Or report_mark_type = "117" Or report_mark_type = "183" Then
+                    '    'invoice
+                    '    increase_inc_sales("6")
+                    'ElseIf report_mark_type = "66" Or report_mark_type = "67" Or report_mark_type = "118" Then
+                    '    'credit note
+                    '    increase_inc_sales("17")
+                    'ElseIf report_mark_type = "116" Then
+                    '    'invoice missing promo
+                    '    increase_inc_sales("33")
+                    'End If
 
                     'insert who prepared
                     insert_who_prepared(report_mark_type, id_sales_pos, id_user)

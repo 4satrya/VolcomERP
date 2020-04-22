@@ -81,7 +81,6 @@ Partial Class FormMasterDesignSingle
         Me.LabelControl22 = New DevExpress.XtraEditors.LabelControl()
         Me.TEFabricLifetime = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl21 = New DevExpress.XtraEditors.LabelControl()
-        Me.LEFabricType = New DevExpress.XtraEditors.LookUpEdit()
         Me.SLELinePlan = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView16 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumnid_fg_line_plan = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -162,6 +161,12 @@ Partial Class FormMasterDesignSingle
         Me.GridColumnDelDate = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelSeason = New DevExpress.XtraEditors.LabelControl()
         Me.TELifetime = New DevExpress.XtraEditors.TextEdit()
+        Me.SLEFabricType = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView17 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn53 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn54 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn55 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn56 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.TEDisplayName = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.XTCDesign = New DevExpress.XtraTab.XtraTabControl()
@@ -307,7 +312,6 @@ Partial Class FormMasterDesignSingle
         CType(Me.PanC2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanC2.SuspendLayout()
         CType(Me.TEFabricLifetime.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LEFabricType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLELinePlan.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView16, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PCChanges, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -342,6 +346,8 @@ Partial Class FormMasterDesignSingle
         CType(Me.SLEDel.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TELifetime.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SLEFabricType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView17, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEDisplayName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XTCDesign, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCDesign.SuspendLayout()
@@ -978,7 +984,6 @@ Partial Class FormMasterDesignSingle
         Me.PanC2.Controls.Add(Me.LabelControl22)
         Me.PanC2.Controls.Add(Me.TEFabricLifetime)
         Me.PanC2.Controls.Add(Me.LabelControl21)
-        Me.PanC2.Controls.Add(Me.LEFabricType)
         Me.PanC2.Controls.Add(Me.SLELinePlan)
         Me.PanC2.Controls.Add(Me.LabelControl20)
         Me.PanC2.Controls.Add(Me.PCChanges)
@@ -1019,6 +1024,7 @@ Partial Class FormMasterDesignSingle
         Me.PanC2.Controls.Add(Me.SLEDel)
         Me.PanC2.Controls.Add(Me.LabelSeason)
         Me.PanC2.Controls.Add(Me.TELifetime)
+        Me.PanC2.Controls.Add(Me.SLEFabricType)
         Me.PanC2.Dock = System.Windows.Forms.DockStyle.Left
         Me.PanC2.Location = New System.Drawing.Point(0, 0)
         Me.PanC2.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
@@ -1055,6 +1061,7 @@ Partial Class FormMasterDesignSingle
         Me.TEFabricLifetime.Properties.Mask.EditMask = "n1"
         Me.TEFabricLifetime.Properties.Mask.SaveLiteral = False
         Me.TEFabricLifetime.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.TEFabricLifetime.Properties.ReadOnly = True
         Me.TEFabricLifetime.Size = New System.Drawing.Size(98, 20)
         Me.TEFabricLifetime.TabIndex = 142
         Me.TEFabricLifetime.TabStop = False
@@ -1067,19 +1074,6 @@ Partial Class FormMasterDesignSingle
         Me.LabelControl21.Size = New System.Drawing.Size(56, 13)
         Me.LabelControl21.TabIndex = 141
         Me.LabelControl21.Text = "Fabric Type"
-        '
-        'LEFabricType
-        '
-        Me.LEFabricType.Location = New System.Drawing.Point(10, 479)
-        Me.LEFabricType.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.LEFabricType.Name = "LEFabricType"
-        Me.LEFabricType.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup
-        Me.LEFabricType.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.LEFabricType.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_ret_code", "Id Ret Code", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.Center), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ret_code", "Retur Code", 20, DevExpress.Utils.FormatType.None, "", True, DevExpress.Utils.HorzAlignment.Center), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("ret_date", "Return Date", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default])})
-        Me.LEFabricType.Properties.NullText = ""
-        Me.LEFabricType.Properties.ShowFooter = False
-        Me.LEFabricType.Size = New System.Drawing.Size(236, 20)
-        Me.LEFabricType.TabIndex = 140
         '
         'SLELinePlan
         '
@@ -1459,6 +1453,7 @@ Partial Class FormMasterDesignSingle
         Me.TxtFabrication.Location = New System.Drawing.Point(10, 517)
         Me.TxtFabrication.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.TxtFabrication.Name = "TxtFabrication"
+        Me.TxtFabrication.Properties.ReadOnly = True
         Me.TxtFabrication.Size = New System.Drawing.Size(371, 20)
         Me.TxtFabrication.TabIndex = 12
         '
@@ -1834,6 +1829,57 @@ Partial Class FormMasterDesignSingle
         Me.TELifetime.Size = New System.Drawing.Size(338, 20)
         Me.TELifetime.TabIndex = 10
         Me.TELifetime.TabStop = False
+        '
+        'SLEFabricType
+        '
+        Me.SLEFabricType.Location = New System.Drawing.Point(10, 479)
+        Me.SLEFabricType.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.SLEFabricType.Name = "SLEFabricType"
+        Me.SLEFabricType.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup
+        Me.SLEFabricType.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEFabricType.Properties.NullText = ""
+        Me.SLEFabricType.Properties.ShowFooter = False
+        Me.SLEFabricType.Properties.View = Me.GridView17
+        Me.SLEFabricType.Size = New System.Drawing.Size(236, 20)
+        Me.SLEFabricType.TabIndex = 140
+        '
+        'GridView17
+        '
+        Me.GridView17.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn53, Me.GridColumn54, Me.GridColumn55, Me.GridColumn56})
+        Me.GridView17.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView17.Name = "GridView17"
+        Me.GridView17.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView17.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn53
+        '
+        Me.GridColumn53.Caption = "Id Fabric Type"
+        Me.GridColumn53.FieldName = "id_fabric_type"
+        Me.GridColumn53.Name = "GridColumn53"
+        '
+        'GridColumn54
+        '
+        Me.GridColumn54.Caption = "Fabric Type"
+        Me.GridColumn54.FieldName = "fabric_type_name"
+        Me.GridColumn54.Name = "GridColumn54"
+        Me.GridColumn54.Visible = True
+        Me.GridColumn54.VisibleIndex = 0
+        '
+        'GridColumn55
+        '
+        Me.GridColumn55.Caption = "Fabrication"
+        Me.GridColumn55.FieldName = "fabrication"
+        Me.GridColumn55.Name = "GridColumn55"
+        Me.GridColumn55.Visible = True
+        Me.GridColumn55.VisibleIndex = 1
+        '
+        'GridColumn56
+        '
+        Me.GridColumn56.Caption = "Age"
+        Me.GridColumn56.FieldName = "age"
+        Me.GridColumn56.Name = "GridColumn56"
+        Me.GridColumn56.Visible = True
+        Me.GridColumn56.VisibleIndex = 2
         '
         'TEDisplayName
         '
@@ -3029,7 +3075,6 @@ Partial Class FormMasterDesignSingle
         Me.PanC2.ResumeLayout(False)
         Me.PanC2.PerformLayout()
         CType(Me.TEFabricLifetime.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LEFabricType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SLELinePlan.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView16, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PCChanges, System.ComponentModel.ISupportInitialize).EndInit()
@@ -3065,6 +3110,8 @@ Partial Class FormMasterDesignSingle
         CType(Me.SLEDel.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TELifetime.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SLEFabricType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView17, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEDisplayName.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XTCDesign, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XTCDesign.ResumeLayout(False)
@@ -3391,6 +3438,11 @@ Partial Class FormMasterDesignSingle
     Friend WithEvents LabelControl22 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents TEFabricLifetime As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelControl21 As DevExpress.XtraEditors.LabelControl
-    Friend WithEvents LEFabricType As DevExpress.XtraEditors.LookUpEdit
     Friend WithEvents LabelControl23 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents SLEFabricType As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView17 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn53 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn54 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn55 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn56 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

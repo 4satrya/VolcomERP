@@ -393,8 +393,14 @@
         viewSearchLookupQuery(SLEActive, query, "id_status", "status", "id_status")
     End Sub
 
+    Sub viewFabrication()
+        Dim query As String = "SELECT * FROM tb_m_fabric_type"
+        viewSearchLookupQuery(SLEFabricType, query, "id_fabric_type", "fabric_type_name", "id_fabric_type")
+    End Sub
+
     Sub actionLoad()
         viewUOM(LEUOM)
+        viewFabrication()
         viewSeason(LESeason)
         viewSeasonOrign(SLESeasonOrigin)
         viewSampleOrign(LESampleOrign)
@@ -3140,5 +3146,13 @@
 
     Private Sub MEDetail_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles MEDetail.Validating
         EP_ME_cant_blank(EPMasterDesign, MEDetail)
+    End Sub
+
+    Private Sub LEFabricType_EditValueChanged(sender As Object, e As EventArgs) Handles SLEFabricType.EditValueChanged
+        Try
+            TxtFabrication.Text = SLEFabricType.Properties.View.GetFocusedRowCellValue("fabrication").ToString
+            TEFabricLifetime.EditValue = SLEFabricType.Properties.View.GetFocusedRowCellValue("age").ToString
+        Catch ex As Exception
+        End Try
     End Sub
 End Class

@@ -471,6 +471,7 @@
                 query += "INNER JOIN tb_lookup_status d ON d.id_status = a.id_active  "
                 query += "INNER JOIN tb_lookup_ret_code ret ON ret.id_ret_code = a.id_ret_code "
                 query += "INNER JOIN tb_fg_line_plan lp ON lp.id_fg_line_plan = a.id_fg_line_plan "
+                query += "INNER JOIN tb_m_fabric_type ft ON ft.id_fabric_type = IFNULL(a.id_fabric_type,1)  "
                 query += "WHERE a.id_design = '" + id_design + "' "
                 Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
@@ -520,6 +521,8 @@
                 TxtDelDate.EditValue = data.Rows(0)("delivery_date")
                 DEWHDate.EditValue = data.Rows(0)("est_wh_date")
                 TxtFabrication.Text = data.Rows(0)("design_fabrication").ToString
+                SLEFabricType.EditValue = data.Rows(0)("id_fabric_type").ToString
+                TEFabricLifetime.Text = data.Rows(0)("age").ToString
                 LEPlanStatus.EditValue = data.Rows(0)("id_lookup_status_order")
                 SLEDesign.EditValue = data.Rows(0)("id_design_ref")
                 MEDetail.Text = data.Rows(0)("design_detail").ToString
@@ -985,6 +988,7 @@
             BGenerateDesc.Enabled = False
             LESampleOrign.Enabled = False
             TxtFabrication.Enabled = False
+            SLEFabricType.Properties.ReadOnly = True
             SLEDesign.Enabled = False
             GCCodeDsg.Enabled = False
             XTPPrice.PageVisible = False
@@ -1107,6 +1111,7 @@
             LEPlanStatus.Enabled = False
             LESampleOrign.Enabled = False
             TxtFabrication.Enabled = False
+            SLEFabricType.Properties.ReadOnly = True
             BtnGetLastCount.Enabled = False
             SLEDesign.Enabled = False
             GCCode.Enabled = False
@@ -1148,6 +1153,7 @@
                 BGenerateDesc.Enabled = False
                 LESampleOrign.Enabled = False
                 TxtFabrication.Enabled = False
+                SLEFabricType.Properties.ReadOnly = True
                 SLEDesign.Enabled = False
                 GCCodeDsg.Enabled = False
                 MEDetail.ReadOnly = True
@@ -1201,6 +1207,7 @@
             LEPlanStatus.Enabled = False
             LESampleOrign.Enabled = False
             TxtFabrication.Enabled = False
+            SLEFabricType.Properties.ReadOnly = True
             BtnGetLastCount.Enabled = False
             SLEDesign.Enabled = False
             GCCode.Enabled = False
@@ -1232,6 +1239,7 @@
                 BGenerateDesc.Enabled = False
                 LESampleOrign.Enabled = False
                 TxtFabrication.Enabled = False
+                SLEFabricType.Properties.ReadOnly = True
                 SLEDesign.Enabled = False
                 GCCodeDsg.Enabled = False
                 BtnAddSeaason.Enabled = False
@@ -1479,7 +1487,7 @@
         End If
 
         ValidateChildren()
-        Dim id_lookup_status_order, id_design_tersimpan, query, namex, display_name, code, id_uom, id_season, sample_orign, id_fg_line_plan, id_design_type, design_ret_code, id_delivery, id_delivery_act, design_eos, design_fabrication, id_design_ref, id_active, design_detail, code_import, id_season_orign, is_old_design As String
+        Dim id_fabric_type, id_lookup_status_order, id_design_tersimpan, query, namex, display_name, code, id_uom, id_season, sample_orign, id_fg_line_plan, id_design_type, design_ret_code, id_delivery, id_delivery_act, design_eos, design_fabrication, id_design_ref, id_active, design_detail, code_import, id_season_orign, is_old_design As String
         namex = addSlashes(TEName.Text.TrimStart(" ").TrimEnd(" "))
 
         'code & display name
@@ -1501,6 +1509,7 @@
         id_season = LESeason.EditValue
         id_season_orign = SLESeasonOrigin.EditValue
         design_ret_code = LERetCode.EditValue.ToString
+        id_fabric_type = SLEFabricType.EditValue.ToString
         If id_pop_up = "3" Then 'non merch
             id_design_type = "2"
             is_old_design = "1"
@@ -1586,7 +1595,7 @@
                 'check changes
                 Dim is_changes As Boolean = False
 
-                query = "SELECT design_name, design_code, design_code_import, id_delivery, id_delivery_act, design_display_name, id_season, id_season_orign, id_sample, design_eos, id_ret_code, design_fabrication, id_design_ref, design_detail FROM tb_m_design WHERE id_design = '" + id_design + "'"
+                query = "SELECT design_name, design_code, design_code_import, id_delivery, id_delivery_act, design_display_name, id_season, id_season_orign, id_sample, design_eos, id_ret_code, id_fabric_type,design_fabrication, id_design_ref, design_detail FROM tb_m_design WHERE id_design = '" + id_design + "'"
                 Dim data_check As DataTable = execute_query(query, -1, True, "", "", "", "")
 
                 If Not data_check.Rows(0)("design_name").ToString = namex Then
@@ -1619,7 +1628,7 @@
                 If Not data_check.Rows(0)("id_ret_code").ToString = design_ret_code Then
                     is_changes = True
                 End If
-                If Not data_check.Rows(0)("design_fabrication").ToString = TxtFabrication.Text.ToString Then
+                If Not data_check.Rows(0)("id_fabric_type").ToString = SLEFabricType.EditValue.ToString Then
                     is_changes = True
                 End If
                 If Not data_check.Rows(0)("id_design_ref").ToString = id_design_ref.ToString Then
@@ -1807,7 +1816,7 @@
                                 is_process = "2"
                             End If
 
-                            query = "INSERT INTO tb_m_design(design_name,design_display_name,design_code, design_code_import,id_uom,id_season, id_season_orign,id_ret_code,id_design_type, id_delivery, id_delivery_act, design_eos, design_fabrication, id_sample, id_design_ref, id_lookup_status_order, design_detail, is_old_design, is_process, id_design_rev_from) "
+                            query = "INSERT INTO tb_m_design(design_name,design_display_name,design_code, design_code_import,id_uom,id_season, id_season_orign,id_ret_code,id_design_type, id_delivery, id_delivery_act, design_eos, design_fabrication, id_sample, id_design_ref, id_lookup_status_order, design_detail, is_old_design, is_process, id_design_rev_from,id_fabric_type) "
                             query += "VALUES('" + namex + "','" + display_name + "','" + code + "', " + code_import + ",'" + id_uom + "','" + id_season + "', '" + id_season_orign + "','" + design_ret_code + "','" + id_design_type + "', '" + id_delivery + "', '" + id_delivery_act + "', "
                             If design_eos = "-1" Then
                                 query += "NULL, "
@@ -1831,7 +1840,7 @@
                                 query += "'" + id_design_ref + "', "
                             End If
                             query += "'" + id_lookup_status_order + "', '" + design_detail + "' "
-                            query += ", '" + is_old_design + "', " + is_process + ", " + id_design_rev_from + ");SELECT LAST_INSERT_ID(); "
+                            query += ", '" + is_old_design + "', " + is_process + ", " + id_design_rev_from + ",'" & id_fabric_type & "');SELECT LAST_INSERT_ID(); "
                             id_design_tersimpan = execute_query(query, 0, True, "", "", "", "")
 
                             'save detil propose change design
@@ -1954,14 +1963,14 @@
                             End If
                             query += "id_active='" + id_active + "', "
                             query += "design_detail='" + design_detail + "', 
-                            id_fg_line_plan='" + id_fg_line_plan + "' "
+                            id_fg_line_plan='" + id_fg_line_plan + "',
+                            id_fabric_type='" + id_fabric_type + "' "
                             query += "WHERE id_design='{5}' "
                             query = String.Format(query, namex, display_name, code, id_uom, id_season, id_design, id_design_type, design_ret_code)
                             execute_non_query(query, True, "", "", "", "")
 
                             save_image_ori(PictureEdit1, product_image_path, id_design & ".jpg")
                             query = String.Format("DELETE FROM tb_m_design_code WHERE id_design='" & id_design & "'; ")
-
 
                             'codefication
                             For i As Integer = 0 To GVCode.RowCount - 1
@@ -1997,7 +2006,7 @@
                             Next
                             execute_non_query(query, True, "", "", "", "")
 
-                            'pdate product code
+                            'update product code
                             updProductCode(id_design)
 
                             If form_name = "FormMasterProduct" Then

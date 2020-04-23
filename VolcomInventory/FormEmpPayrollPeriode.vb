@@ -32,6 +32,8 @@
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles BtnSave.Click
         If formIsValid(ErrorProvider) Then
+            Dim is_thr As String = execute_query("SELECT is_thr FROM tb_emp_payroll_type WHERE id_payroll_type = " + LEPayrollType.EditValue.ToString, 0, True, "", "", "", "")
+
             Dim date_start As String = "NULL"
             Dim date_end As String = "NULL"
 
@@ -73,6 +75,10 @@
 
             Dim note As String = addSlashes(MEPayrollNote.Text)
             Dim id_payroll_type As String = LEPayrollType.EditValue.ToString
+
+            If is_thr = "1" Then
+                store_date_end = date_end
+            End If
 
             If id_payroll = "-1" Then
                 Dim query As String = "INSERT INTO tb_emp_payroll(periode_start,periode_end,ot_periode_start,ot_periode_end,store_periode_start,store_periode_end,note,last_upd,id_user_upd,id_payroll_type) VALUES(" & date_start & "," & date_end & "," & ot_date_start & "," & ot_date_end & "," & store_date_start & "," & store_date_end & ",'" & addSlashes(note) & "',NOW(),'" & id_user & "','" & id_payroll_type & "'); SELECT LAST_INSERT_ID();"

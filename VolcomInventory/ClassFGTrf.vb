@@ -75,6 +75,57 @@
 
             'save unreg unique
             execute_non_query("CALL generate_unreg_barcode(" + id_report_par + ",2)", True, "", "", "", "")
+
+            'update to shopify
+            Dim is_sync_stock As String = execute_query("
+                SELECT so.is_sync_stock
+                FROM tb_fg_trf AS trf
+                LEFT JOIN tb_sales_order AS so ON trf.id_sales_order = so.id_sales_order
+                WHERE trf.id_fg_trf = " + id_report_par + "
+            ", 0, True, "", "", "", "")
+
+            If is_sync_stock = "1" Then
+                Dim is_vsol_from As String = execute_query("SELECT IF(COUNT(*) = 0, 2, 1) AS is_vsol_from FROM tb_m_comp_volcom_ol WHERE id_comp IN (SELECT k.id_comp FROM tb_fg_trf AS f LEFT JOIN tb_m_comp_contact AS k ON f.id_comp_contact_from = k.id_comp_contact WHERE f.id_fg_trf = " + id_report_par + ")", 0, True, "", "", "", "")
+                Dim is_vsol_to As String = execute_query("SELECT IF(COUNT(*) = 0, 2, 1) AS is_vsol_to FROM tb_m_comp_volcom_ol WHERE id_comp IN (SELECT k.id_comp FROM tb_fg_trf AS f LEFT JOIN tb_m_comp_contact AS k ON f.id_comp_contact_to = k.id_comp_contact WHERE f.id_fg_trf = " + id_report_par + ")", 0, True, "", "", "", "")
+
+                If is_vsol_from = "1" Or is_vsol_to = "1" Then
+                    Dim cls As ClassShopifyApi = New ClassShopifyApi
+
+                    Dim location_id As String = cls.get_location_id()
+
+                    Dim erp_product As DataTable = execute_query("
+                        SELECT prod.product_full_code, trf_det.fg_trf_det_qty, shop.inventory_item_id
+                        FROM tb_fg_trf trf
+                        INNER JOIN tb_fg_trf_det trf_det ON trf_det.id_fg_trf = trf.id_fg_trf
+                        INNER JOIN tb_m_product prod ON prod.id_product = trf_det.id_product
+                        INNER JOIN tb_m_design dsg ON dsg.id_design = prod.id_design
+                        LEFT JOIN tb_m_product_shopify shop ON prod.product_full_code = shop.sku
+                        WHERE trf.id_fg_trf = " + id_report_par + " AND trf_det.fg_trf_det_qty > 0
+                    ", -1, True, "", "", "", "")
+
+                    For j = 0 To erp_product.Rows.Count - 1
+                        Dim msg As String = "OK"
+
+                        Dim qty As String = Decimal.Round(erp_product.Rows(j)("fg_trf_det_qty"), 0).ToString
+
+                        If is_vsol_from = "1" Then
+                            qty = "-" + qty
+                        End If
+
+                        If is_vsol_from = "1" And is_vsol_to = "1" Then
+                            qty = "0"
+                        End If
+
+                        Try
+                            cls.add_product(location_id, erp_product.Rows(j)("inventory_item_id").ToString, qty)
+                        Catch ex As Exception
+                            msg = ex.ToString
+                        End Try
+
+                        execute_non_query("INSERT INTO tb_shopify_api_log (report_mark_type, id_report, sku, message, date) VALUES (57, " + id_report_par + ", '" + erp_product.Rows(j)("product_full_code").ToString + "', '" + addSlashes(msg) + "', NOW())", True, "", "", "", "")
+                    Next
+                End If
+            End If
         ElseIf id_status_reportx_par = "5" Then
             'cancel unique
             Dim query_cancel As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_fg_trf_det_counting`,`id_pl_prod_order_rec_det_unique`,`id_type`,`unique_code`,

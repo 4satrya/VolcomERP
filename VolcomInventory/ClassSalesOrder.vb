@@ -406,4 +406,36 @@ Public Class ClassSalesOrder
         End Try
     End Sub
 
+    Sub setProceccedWebOrder(ByVal opt As String)
+        Dim query As String = "UPDATE tb_opt SET is_processed_order=" + opt + " "
+        execute_non_query(query, True, "", "", "", "")
+    End Sub
+
+    Sub insertLogWebOrder(ByVal id_order As String, ByVal note As String)
+        If id_order = "0" Then
+            id_order = "NULL"
+        End If
+        Dim query As String = "INSERT INTO tb_ol_store_order_log(id, log_date, log_note) VALUES(" + id_order + ", NOW(), '" + addSlashes(note) + "') "
+        execute_non_query(query, True, "", "", "", "")
+    End Sub
+
+    Sub createVolcomWebOrder()
+        ''activate processed
+        'setProceccedWebOrder("1")
+        'insertLogWebOrder("0", "Start")
+
+        ''get order yg belum diproses
+        'Dim qord As String = "SELECT o.id  FROM tb_ol_store_order o
+        'WHERE o.is_process=2
+        'GROUP BY o.id "
+        'Dim dord As DataTable = execute_query(qord, -1, True, "", "", "", "")
+        'If dord.Rows.Count > 0 Then
+        '    For i As Integer = 0 To dord.Rows.Count - 1
+
+        '    Next
+        'Else
+        '    setProceccedWebOrder("2")
+        '    insertLogWebOrder("0", "End")
+        'End If
+    End Sub
 End Class

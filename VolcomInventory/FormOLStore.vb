@@ -391,4 +391,96 @@
         End If
         Cursor = Cursors.Default
     End Sub
+
+    Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles BtnPrint.Click
+        Cursor = Cursors.WaitCursor
+        print_raw(GCVolcom, "")
+        Cursor = Cursors.Default
+    End Sub
+
+    Sub viewVolcomOrder(ByVal cond As String)
+        Dim query As String = "SELECT vo.id, vo.sales_order_ol_shop_number, vo.sales_order_ol_shop_date, vo.customer_name, vo.shipping_name, vo.shipping_address, vo.shipping_phone, vo.shipping_city, vo.shipping_post_code,
+        vo.shipping_region, vo.payment_method, vo.tracking_code, vo.ol_store_sku, vo.ol_store_id, vo.sku, vo.design_price, vo.sales_order_det_qty, vo.is_process, IF(vo.is_process=1,'Yes', 'No') AS `is_process_view`,
+        vo.note_price, vo.id_design_cat, vo.id_design_price, vo.id_product, vo.note_stock, 
+        vo.id_report_trf_order, vo.rmt_trf_order, trf_order.sales_order_number AS `trf_order_number`,
+        vo.id_report_trf, vo.rmt_trf, trf.fg_trf_number AS `trf_number`,
+        vo.id_report_order, vo.rmt_order , actual_order.sales_order_number
+        FROM tb_ol_store_order vo
+        LEFT JOIN tb_sales_order trf_order ON trf_order.id_sales_order = vo.id_report_trf_order
+        LEFT JOIN tb_sales_order actual_order ON actual_order.id_sales_order = vo.id_report_order
+        LEFT JOIN tb_fg_trf trf ON trf.id_fg_trf = vo.id_report_trf
+        WHERE 1=1 " + cond
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCVolcom.DataSource = data
+    End Sub
+
+    Private Sub BtnAllOrder_Click(sender As Object, e As EventArgs) Handles BtnAllOrder.Click
+        Cursor = Cursors.WaitCursor
+        viewVolcomOrder("")
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnPendingOrder_Click(sender As Object, e As EventArgs) Handles BtnPendingOrder.Click
+        Cursor = Cursors.WaitCursor
+        viewVolcomOrder("AND vo.is_process=2")
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnConfirmedOrder_Click(sender As Object, e As EventArgs) Handles BtnConfirmedOrder.Click
+        Cursor = Cursors.WaitCursor
+        viewVolcomOrder("AND vo.is_process=1")
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnSyncOrder_Click(sender As Object, e As EventArgs) Handles BtnSyncOrder.Click
+        Cursor = Cursors.WaitCursor
+        Dim is_processed_order As String = get_setup_field("is_processed_order")
+        If is_processed_order = "1" Then
+            stopCustom("Sync still running")
+        Else
+            SplashScreenManager1.ShowWaitForm()
+            Dim ord As New ClassSalesOrder()
+            ord.setProceccedWebOrder("1")
+            ord.insertLogWebOrder("0", "Start")
+
+            'get order from web
+            Dim err As String = ""
+            Try
+                Dim shop As New ClassShopifyApi()
+                shop.get_order_erp()
+            Catch ex As Exception
+                err = ex.ToString
+            End Try
+            ord.insertLogWebOrder("0", "Get order from website. " + err)
+
+            'get order yg belum diproses
+            Dim qord As String = "SELECT o.id, o.sales_order_ol_shop_number  FROM tb_ol_store_order o
+            WHERE o.is_process=2
+            GROUP BY o.id "
+            Dim dord As DataTable = execute_query(qord, -1, True, "", "", "", "")
+            If dord.Rows.Count > 0 Then
+                Try
+                    For i As Integer = 0 To dord.Rows.Count - 1
+                        SplashScreenManager1.SetWaitFormDescription("Checking order #" + dord.Rows(i)("sales_order_ol_shop_number").ToString)
+                        execute_non_query_long("CALL create_web_order(" + dord.Rows(i)("id").ToString + ");", True, "", "", "", "")
+                    Next
+                Catch ex As Exception
+                    stopCustom(ex.ToString)
+                End Try
+                ord.setProceccedWebOrder("2")
+                ord.insertLogWebOrder("0", "End")
+            Else
+                ord.setProceccedWebOrder("2")
+                ord.insertLogWebOrder("0", "End")
+            End If
+
+            If err = "" Then
+                infoCustom("Sync completed.")
+            Else
+                infoCustom("Problem get order from web. " + err)
+            End If
+            SplashScreenManager1.CloseWaitForm()
+        End If
+        Cursor = Cursors.Default
+    End Sub
 End Class

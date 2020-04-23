@@ -147,6 +147,10 @@
       <HintPath>..\packages\MySqlBackup.NET.2.0.12\lib\net40\MySqlBackup.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="NTwain, Version=3.0.0.0, Culture=neutral, PublicKeyToken=f9f7e0c5169536c8, processorArchitecture=MSIL">
       <HintPath>..\packages\NTwain.3.6.0\lib\net40-client\NTwain.dll</HintPath>
       <Private>True</Private>
@@ -276,6 +280,7 @@
     <Compile Include="ClassSamplePLtoWH.vb" />
     <Compile Include="ClassSampleReturnPL.vb" />
     <Compile Include="ClassSendEmail.vb" />
+    <Compile Include="ClassShopifyApi.vb" />
     <Compile Include="ClassShowPopUp.vb" />
     <Compile Include="ClassStock.vb" />
     <Compile Include="ClassUser.vb" />
@@ -2723,6 +2728,12 @@
       <DependentUpon>FormPopUpSalesDel.vb</DependentUpon>
     </Compile>
     <Compile Include="FormPopUpSalesDel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPriceForSync.Designer.vb">
+      <DependentUpon>FormPriceForSync.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormPriceForSync.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormProdClosing.Designer.vb">
@@ -9185,6 +9196,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormPopUpSalesDel.resx">
       <DependentUpon>FormPopUpSalesDel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPriceForSync.resx">
+      <DependentUpon>FormPriceForSync.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormProdClosing.resx">
       <DependentUpon>FormProdClosing.vb</DependentUpon>

@@ -93,7 +93,7 @@ Public Class FormSalesOrderDet
             'query view based on edit id's
             Dim query As String = "SELECT a.id_so_status, h.id_order_type, a.id_sales_order, a.id_store_contact_to, (d.id_comp) AS id_store,(d.comp_name) AS store_name_to, (d.comp_number) AS store_number_to, (d.address_primary) AS store_address_to, IFNULL(d.id_commerce_type,1) AS `id_commerce_type`, a.sales_order_ol_shop_number, a.sales_order_ol_shop_date, a.id_warehouse_contact_to, (wh.id_comp) AS id_comp_par,(wh.comp_name) AS warehouse_name_to, (wh.comp_number) AS warehouse_number_to, a.id_report_status, f.report_status, "
             query += "a.sales_order_note, a.sales_order_date, a.sales_order_note, a.sales_order_number, "
-            query += "DATE_FORMAT(a.sales_order_date,'%Y-%m-%d') AS sales_order_datex, a.id_so_type, IFNULL(an.fg_so_reff_number,'-') AS `fg_so_reff_number`, ps.id_prepare_status, ps.prepare_status, a.id_emp_uni_period, a.id_uni_type "
+            query += "DATE_FORMAT(a.sales_order_date,'%Y-%m-%d') AS sales_order_datex, a.id_so_type, IFNULL(an.fg_so_reff_number,'-') AS `fg_so_reff_number`, ps.id_prepare_status, ps.prepare_status, a.id_emp_uni_period, a.id_uni_type, a.is_sync_stock "
             query += "FROM tb_sales_order a "
             query += "INNER JOIN tb_m_comp_contact c ON c.id_comp_contact = a.id_store_contact_to "
             query += "INNER JOIN tb_m_comp d ON c.id_comp = d.id_comp "
@@ -131,6 +131,7 @@ Public Class FormSalesOrderDet
             LEPeriodx.ItemIndex = LEPeriodx.Properties.GetDataSourceRowIndex("id_emp_uni_period", data.Rows(0)("id_emp_uni_period").ToString)
             LEUniType.ItemIndex = LEUniType.Properties.GetDataSourceRowIndex("id_uni_type", data.Rows(0)("id_uni_type").ToString)
             TxtPackingStatus.Text = data.Rows(0)("prepare_status").ToString
+            CESync.Checked = If(data.Rows(0)("is_sync_stock").ToString = "1", True, False)
 
             'commertcce type
             id_commerce_type = data.Rows(0)("id_commerce_type").ToString
@@ -369,6 +370,31 @@ Public Class FormSalesOrderDet
             End If
         End If
 
+        'check sku shopify
+        If CESync.Checked Then
+            Dim sku_already As Boolean = True
+
+            For i = 0 To GVItemList.RowCount - 1
+                If GVItemList.IsValidRowHandle(i) Then
+                    Dim q_already As String = "SELECT COUNT(*) AS total FROM tb_m_product_shopify WHERE sku = " + GVItemList.GetRowCellValue(i, "code").ToString
+
+                    Dim d_already As String = execute_query(q_already, 0, True, "", "", "", "")
+
+                    If d_already = "0" Then
+                        sku_already = False
+                    End If
+                End If
+            Next
+
+            If Not sku_already Then
+                stopCustom("Please sync to shopify first.")
+
+                Cursor = Cursors.Default
+
+                Exit Sub
+            End If
+        End If
+
         If Not formIsValidInPanel(EPForm, PanelControlTopLeft) Or Not formIsValidInPanel(EPForm, PanelControlTopMain) Then
             errorInput()
         ElseIf Not cond_data Then
@@ -409,6 +435,7 @@ Public Class FormSalesOrderDet
             If id_commerce_type = "2" Then
                 sales_order_ol_shop_date = "'" + DateTime.Parse(DEOLShop.EditValue.ToString).ToString("yyyy-MM-dd") + "'"
             End If
+            Dim is_sync_stock As String = If(CESync.Checked, "1", "2")
 
             If action = "ins" Then
                 Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure to continue this process?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
@@ -416,8 +443,8 @@ Public Class FormSalesOrderDet
                     Cursor = Cursors.WaitCursor
                     sales_order_number = ""
                     'Main tbale
-                    Dim query As String = "INSERT INTO tb_sales_order(id_store_contact_to, id_warehouse_contact_to, sales_order_number, sales_order_date, sales_order_note, id_so_type, id_report_status, id_so_status, id_user_created, id_emp_uni_period, id_uni_type, sales_order_ol_shop_number, sales_order_ol_shop_date, is_transfer_data) "
-                    query += "VALUES('" + id_store_contact_to + "', '" + id_comp_contact_par + "', '" + sales_order_number + "', NOW(), '" + sales_order_note + "', '" + id_so_type + "', '" + id_report_status + "', '" + id_so_status + "', '" + id_user + "'," + id_emp_uni_period + ", " + id_uni_type + ",'" + sales_order_ol_shop_number + "', " + sales_order_ol_shop_date + ", '" + is_transfer_data + "'); SELECT LAST_INSERT_ID(); "
+                    Dim query As String = "INSERT INTO tb_sales_order(id_store_contact_to, id_warehouse_contact_to, sales_order_number, sales_order_date, sales_order_note, id_so_type, id_report_status, id_so_status, id_user_created, id_emp_uni_period, id_uni_type, sales_order_ol_shop_number, sales_order_ol_shop_date, is_transfer_data, is_sync_stock) "
+                    query += "VALUES('" + id_store_contact_to + "', '" + id_comp_contact_par + "', '" + sales_order_number + "', NOW(), '" + sales_order_note + "', '" + id_so_type + "', '" + id_report_status + "', '" + id_so_status + "', '" + id_user + "'," + id_emp_uni_period + ", " + id_uni_type + ",'" + sales_order_ol_shop_number + "', " + sales_order_ol_shop_date + ", '" + is_transfer_data + "', '" + is_sync_stock + "'); SELECT LAST_INSERT_ID(); "
                     id_sales_order = execute_query(query, 0, True, "", "", "", "")
 
                     'insert who prepared
@@ -473,7 +500,7 @@ Public Class FormSalesOrderDet
                     Cursor = Cursors.WaitCursor
                     sales_order_number = TxtSalesOrderNumber.Text
                     Dim query As String = "UPDATE tb_sales_order SET id_store_contact_to='" + id_store_contact_to + "', id_warehouse_contact_to='" + id_comp_contact_par + "', sales_order_number = '" + sales_order_number + "', sales_order_note='" + sales_order_note + "', id_so_type='" + id_so_type + "', id_so_status = '" + id_so_status + "', 
-                    id_emp_uni_period=" + id_emp_uni_period + ", id_uni_type=" + id_uni_type + ", sales_order_ol_shop_number='" + sales_order_ol_shop_number + "'
+                    id_emp_uni_period=" + id_emp_uni_period + ", id_uni_type=" + id_uni_type + ", sales_order_ol_shop_number='" + sales_order_ol_shop_number + "', is_sync_stock = '" + is_sync_stock + "'
                     WHERE id_sales_order='" + id_sales_order + "' "
                     execute_non_query(query, True, "", "", "", "")
 
@@ -826,12 +853,28 @@ Public Class FormSalesOrderDet
                     TxtNameCompTo.Text = data.Rows(0)("comp_name").ToString
                     MEAdrressCompTo.Text = data.Rows(0)("address_primary").ToString
                     TxtWHCodeTo.Focus()
+                    'check sync
+                    check_sync()
                 End If
                 Cursor = Cursors.Default
             End If
         Else
             'selain enter informasi store di reset
             resetStore()
+        End If
+    End Sub
+
+    Sub check_sync()
+        'cek sync
+        Dim q_sync As String = "SELECT * FROM tb_m_comp_volcom_ol
+WHERE id_comp IN (" & id_store & ", " & id_comp_par & ")"
+        Dim dt_sync As DataTable = execute_query(q_sync, -1, True, "", "", "", "")
+        If dt_sync.Rows.Count > 0 Then
+            'ol shop
+            CESync.Checked = True
+        Else
+            'bukan ol shop
+            CESync.Checked = False
         End If
     End Sub
 
@@ -911,6 +954,8 @@ Public Class FormSalesOrderDet
                 Else
                     LEStatusSO.Focus()
                 End If
+                'check sync
+                check_sync()
                 Cursor = Cursors.Default
             End If
         End If
@@ -1427,7 +1472,7 @@ Public Class FormSalesOrderDet
             End If
 
             'check coa for wholesale ol store
-            If id_store <> "-1" And LEStatusSO.EditValue.ToString = "14" Then
+            If id_store <> "-1" And LEStatusSO.EditValue.ToString = "14" And action = "ins" Then
                 If Not viewCheckCoa() Then
                     stopCustom("Account COA for this store is not found, please contact Accounting Dept.")
                     LEStatusSO.EditValue = LEStatusSO.OldEditValue
@@ -1501,4 +1546,16 @@ Public Class FormSalesOrderDet
             Return False
         End If
     End Function
+
+    Private Sub SBSyncShopify_Click(sender As Object, e As EventArgs) Handles SBSyncShopify.Click
+        Cursor = Cursors.WaitCursor
+
+        Dim cls As ClassShopifyApi = New ClassShopifyApi
+
+        cls.sync_sku()
+
+        Cursor = Cursors.Default
+
+        infoCustom("Sync complete.")
+    End Sub
 End Class

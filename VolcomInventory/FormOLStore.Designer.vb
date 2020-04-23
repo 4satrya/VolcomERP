@@ -154,6 +154,56 @@ Partial Class FormOLStore
         Me.GridView3 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.RepositoryItemLookUpEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit()
         Me.SplashScreenManager1 = New DevExpress.XtraSplashScreen.SplashScreenManager(Me, GetType(Global.VolcomMRP.WaitForm), True, True)
+        Me.XTCWorkplace = New DevExpress.XtraTab.XtraTabControl()
+        Me.XTPAllOnlineStoreOrders = New DevExpress.XtraTab.XtraTabPage()
+        Me.XTPManageOnlineStore = New DevExpress.XtraTab.XtraTabPage()
+        Me.XTCManageOnlineStore = New DevExpress.XtraTab.XtraTabControl()
+        Me.XTPVolcomOLStore = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCVolcom = New DevExpress.XtraGrid.GridControl()
+        Me.GVVolcom = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumnid = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnsales_order_ol_shop_number = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnsales_order_ol_shop_date = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumncustomer_name = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnshipping_name = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnshipping_address = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnshipping_phone = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnshipping_city = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnshipping_post_code = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnshipping_region = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnpayment_method = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumntracking_code = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnol_store_sku = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnol_store_id = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnsku = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumndesign_price = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnsales_order_det_qty = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnis_process = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnnote_price = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnid_design_cat = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnid_design_price = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnid_product = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnnote_stock = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnid_report_trf_order = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnrmt_trf_order = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnid_report_trf = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnrmt_trf = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnid_report_order = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnrmt_order = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumntrf_order_number = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LinkTrfNumber = New DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit()
+        Me.GridColumntrf_number = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LinkTrf = New DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit()
+        Me.GridColumnsales_order_number = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LinkSalesOrder = New DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit()
+        Me.GridColumn39 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
+        Me.BtnPrint = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnSyncOrder = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnConfirmedOrder = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnPendingOrder = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnAllOrder = New DevExpress.XtraEditors.SimpleButton()
+        Me.GridColumn = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
         CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -199,6 +249,20 @@ Partial Class FormOLStore
         CType(Me.RepositoryItemSearchLookUpEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemLookUpEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.XTCWorkplace, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTCWorkplace.SuspendLayout()
+        Me.XTPAllOnlineStoreOrders.SuspendLayout()
+        Me.XTPManageOnlineStore.SuspendLayout()
+        CType(Me.XTCManageOnlineStore, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTCManageOnlineStore.SuspendLayout()
+        Me.XTPVolcomOLStore.SuspendLayout()
+        CType(Me.GCVolcom, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVVolcom, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LinkTrfNumber, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LinkTrf, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LinkSalesOrder, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl3.SuspendLayout()
         Me.SuspendLayout()
         '
         'PanelControl2
@@ -214,7 +278,7 @@ Partial Class FormOLStore
         Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl2.Location = New System.Drawing.Point(0, 0)
         Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(888, 48)
+        Me.PanelControl2.Size = New System.Drawing.Size(1000, 48)
         Me.PanelControl2.TabIndex = 2
         '
         'BtnUpdateStt
@@ -335,7 +399,7 @@ Partial Class FormOLStore
         '
         Me.BtnExportToBOF.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnExportToBOF.Image = CType(resources.GetObject("BtnExportToBOF.Image"), System.Drawing.Image)
-        Me.BtnExportToBOF.Location = New System.Drawing.Point(669, 2)
+        Me.BtnExportToBOF.Location = New System.Drawing.Point(781, 2)
         Me.BtnExportToBOF.Name = "BtnExportToBOF"
         Me.BtnExportToBOF.Size = New System.Drawing.Size(114, 37)
         Me.BtnExportToBOF.TabIndex = 4
@@ -349,7 +413,7 @@ Partial Class FormOLStore
         Me.GCDetail.MainView = Me.GVDetail
         Me.GCDetail.Name = "GCDetail"
         Me.GCDetail.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemTextEdit2, Me.RepositoryItemImageEdit2, Me.RepositoryItemHyperLinkEdit2, Me.RepositoryItemCheckEdit2, Me.RepositoryItemSearchLookUpEdit1, Me.RepoAttachDetail, Me.RepositoryItemTextEdit1, Me.RepositoryItemCheckEdit3})
-        Me.GCDetail.Size = New System.Drawing.Size(882, 435)
+        Me.GCDetail.Size = New System.Drawing.Size(994, 433)
         Me.GCDetail.TabIndex = 3
         Me.GCDetail.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVDetail})
         '
@@ -713,7 +777,7 @@ Partial Class FormOLStore
         Me.XtraTabControl1.Location = New System.Drawing.Point(0, 48)
         Me.XtraTabControl1.Name = "XtraTabControl1"
         Me.XtraTabControl1.SelectedTabPage = Me.XTPOrderSummary
-        Me.XtraTabControl1.Size = New System.Drawing.Size(888, 463)
+        Me.XtraTabControl1.Size = New System.Drawing.Size(1000, 461)
         Me.XtraTabControl1.TabIndex = 4
         Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPOrderSummary, Me.XTPAllOrder, Me.XTPCancelled})
         '
@@ -726,7 +790,7 @@ Partial Class FormOLStore
         Me.XTPOrderSummary.Controls.Add(Me.GCSummary)
         Me.XTPOrderSummary.Controls.Add(Me.PanelControl1)
         Me.XTPOrderSummary.Name = "XTPOrderSummary"
-        Me.XTPOrderSummary.Size = New System.Drawing.Size(882, 435)
+        Me.XTPOrderSummary.Size = New System.Drawing.Size(994, 433)
         Me.XTPOrderSummary.Text = "Order Summary"
         '
         'GCSummary
@@ -737,7 +801,7 @@ Partial Class FormOLStore
         Me.GCSummary.MainView = Me.GVSummary
         Me.GCSummary.Name = "GCSummary"
         Me.GCSummary.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemProgressBar1, Me.RepositoryItemCheckEdit4, Me.RepositoryItemCheckEdit5})
-        Me.GCSummary.Size = New System.Drawing.Size(882, 394)
+        Me.GCSummary.Size = New System.Drawing.Size(994, 392)
         Me.GCSummary.TabIndex = 2
         Me.GCSummary.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVSummary, Me.GridView2})
         '
@@ -1055,9 +1119,9 @@ Partial Class FormOLStore
         Me.PanelControl1.Controls.Add(Me.BtnExportToBOF)
         Me.PanelControl1.Controls.Add(Me.BtnOrderConfirmation)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl1.Location = New System.Drawing.Point(0, 394)
+        Me.PanelControl1.Location = New System.Drawing.Point(0, 392)
         Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(882, 41)
+        Me.PanelControl1.Size = New System.Drawing.Size(994, 41)
         Me.PanelControl1.TabIndex = 0
         '
         'CESelAll
@@ -1072,7 +1136,7 @@ Partial Class FormOLStore
         '
         Me.BtnOrderConfirmation.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnOrderConfirmation.Image = CType(resources.GetObject("BtnOrderConfirmation.Image"), System.Drawing.Image)
-        Me.BtnOrderConfirmation.Location = New System.Drawing.Point(783, 2)
+        Me.BtnOrderConfirmation.Location = New System.Drawing.Point(895, 2)
         Me.BtnOrderConfirmation.Name = "BtnOrderConfirmation"
         Me.BtnOrderConfirmation.Size = New System.Drawing.Size(97, 37)
         Me.BtnOrderConfirmation.TabIndex = 5
@@ -1086,7 +1150,7 @@ Partial Class FormOLStore
         Me.XTPAllOrder.Appearance.Header.Options.UseForeColor = True
         Me.XTPAllOrder.Controls.Add(Me.GCDetail)
         Me.XTPAllOrder.Name = "XTPAllOrder"
-        Me.XTPAllOrder.Size = New System.Drawing.Size(882, 435)
+        Me.XTPAllOrder.Size = New System.Drawing.Size(994, 433)
         Me.XTPAllOrder.Text = "Active Order Details"
         '
         'XTPCancelled
@@ -1097,7 +1161,7 @@ Partial Class FormOLStore
         Me.XTPCancelled.Appearance.Header.Options.UseForeColor = True
         Me.XTPCancelled.Controls.Add(Me.GCCancellOrder)
         Me.XTPCancelled.Name = "XTPCancelled"
-        Me.XTPCancelled.Size = New System.Drawing.Size(882, 435)
+        Me.XTPCancelled.Size = New System.Drawing.Size(994, 433)
         Me.XTPCancelled.Text = "Cancelled Order Detail"
         '
         'GCCancellOrder
@@ -1107,7 +1171,7 @@ Partial Class FormOLStore
         Me.GCCancellOrder.MainView = Me.GVCancellOrder
         Me.GCCancellOrder.Name = "GCCancellOrder"
         Me.GCCancellOrder.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemTextEdit3, Me.RepositoryItemImageEdit1, Me.RepositoryItemHyperLinkEdit1, Me.RepositoryItemCheckEdit1, Me.RepositoryItemSearchLookUpEdit2, Me.RepositoryItemLookUpEdit1, Me.RepositoryItemTextEdit4})
-        Me.GCCancellOrder.Size = New System.Drawing.Size(882, 435)
+        Me.GCCancellOrder.Size = New System.Drawing.Size(994, 433)
         Me.GCCancellOrder.TabIndex = 4
         Me.GCCancellOrder.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVCancellOrder})
         '
@@ -1416,13 +1480,423 @@ Partial Class FormOLStore
         '
         Me.SplashScreenManager1.ClosingDelay = 500
         '
+        'XTCWorkplace
+        '
+        Me.XTCWorkplace.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.XTCWorkplace.HeaderLocation = DevExpress.XtraTab.TabHeaderLocation.Right
+        Me.XTCWorkplace.Location = New System.Drawing.Point(0, 0)
+        Me.XTCWorkplace.LookAndFeel.SkinName = "Metropolis"
+        Me.XTCWorkplace.LookAndFeel.UseDefaultLookAndFeel = False
+        Me.XTCWorkplace.Name = "XTCWorkplace"
+        Me.XTCWorkplace.SelectedTabPage = Me.XTPAllOnlineStoreOrders
+        Me.XTCWorkplace.Size = New System.Drawing.Size(1028, 511)
+        Me.XTCWorkplace.TabIndex = 5
+        Me.XTCWorkplace.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPAllOnlineStoreOrders, Me.XTPManageOnlineStore})
+        '
+        'XTPAllOnlineStoreOrders
+        '
+        Me.XTPAllOnlineStoreOrders.Appearance.Header.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.XTPAllOnlineStoreOrders.Appearance.Header.Options.UseFont = True
+        Me.XTPAllOnlineStoreOrders.Controls.Add(Me.XtraTabControl1)
+        Me.XTPAllOnlineStoreOrders.Controls.Add(Me.PanelControl2)
+        Me.XTPAllOnlineStoreOrders.Name = "XTPAllOnlineStoreOrders"
+        Me.XTPAllOnlineStoreOrders.Size = New System.Drawing.Size(1000, 509)
+        Me.XTPAllOnlineStoreOrders.Text = "All Online Store Orders"
+        '
+        'XTPManageOnlineStore
+        '
+        Me.XTPManageOnlineStore.Appearance.Header.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.XTPManageOnlineStore.Appearance.Header.Options.UseFont = True
+        Me.XTPManageOnlineStore.Controls.Add(Me.XTCManageOnlineStore)
+        Me.XTPManageOnlineStore.Name = "XTPManageOnlineStore"
+        Me.XTPManageOnlineStore.Size = New System.Drawing.Size(1000, 509)
+        Me.XTPManageOnlineStore.Text = "Manage Online Store"
+        '
+        'XTCManageOnlineStore
+        '
+        Me.XTCManageOnlineStore.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.XTCManageOnlineStore.HeaderLocation = DevExpress.XtraTab.TabHeaderLocation.Bottom
+        Me.XTCManageOnlineStore.Location = New System.Drawing.Point(0, 0)
+        Me.XTCManageOnlineStore.Name = "XTCManageOnlineStore"
+        Me.XTCManageOnlineStore.SelectedTabPage = Me.XTPVolcomOLStore
+        Me.XTCManageOnlineStore.Size = New System.Drawing.Size(1000, 509)
+        Me.XTCManageOnlineStore.TabIndex = 0
+        Me.XTCManageOnlineStore.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPVolcomOLStore})
+        '
+        'XTPVolcomOLStore
+        '
+        Me.XTPVolcomOLStore.Controls.Add(Me.GCVolcom)
+        Me.XTPVolcomOLStore.Controls.Add(Me.PanelControl3)
+        Me.XTPVolcomOLStore.Name = "XTPVolcomOLStore"
+        Me.XTPVolcomOLStore.Size = New System.Drawing.Size(994, 481)
+        Me.XTPVolcomOLStore.Text = "Volcom Online Store"
+        '
+        'GCVolcom
+        '
+        Me.GCVolcom.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCVolcom.Location = New System.Drawing.Point(0, 43)
+        Me.GCVolcom.MainView = Me.GVVolcom
+        Me.GCVolcom.Name = "GCVolcom"
+        Me.GCVolcom.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.LinkTrfNumber, Me.LinkTrf, Me.LinkSalesOrder})
+        Me.GCVolcom.Size = New System.Drawing.Size(994, 438)
+        Me.GCVolcom.TabIndex = 1
+        Me.GCVolcom.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVVolcom})
+        '
+        'GVVolcom
+        '
+        Me.GVVolcom.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnid, Me.GridColumnsales_order_ol_shop_number, Me.GridColumnsales_order_ol_shop_date, Me.GridColumncustomer_name, Me.GridColumnshipping_name, Me.GridColumnshipping_address, Me.GridColumnshipping_phone, Me.GridColumnshipping_city, Me.GridColumnshipping_post_code, Me.GridColumnshipping_region, Me.GridColumnpayment_method, Me.GridColumntracking_code, Me.GridColumnol_store_sku, Me.GridColumnol_store_id, Me.GridColumnsku, Me.GridColumndesign_price, Me.GridColumnsales_order_det_qty, Me.GridColumnis_process, Me.GridColumnnote_price, Me.GridColumnid_design_cat, Me.GridColumnid_design_price, Me.GridColumnid_product, Me.GridColumnnote_stock, Me.GridColumnid_report_trf_order, Me.GridColumnrmt_trf_order, Me.GridColumnid_report_trf, Me.GridColumnrmt_trf, Me.GridColumnid_report_order, Me.GridColumnrmt_order, Me.GridColumntrf_order_number, Me.GridColumntrf_number, Me.GridColumnsales_order_number, Me.GridColumn39, Me.GridColumn})
+        Me.GVVolcom.GridControl = Me.GCVolcom
+        Me.GVVolcom.Name = "GVVolcom"
+        Me.GVVolcom.OptionsBehavior.AutoExpandAllGroups = True
+        Me.GVVolcom.OptionsBehavior.ReadOnly = True
+        Me.GVVolcom.OptionsFind.AlwaysVisible = True
+        Me.GVVolcom.OptionsView.ColumnAutoWidth = False
+        Me.GVVolcom.OptionsView.ShowFooter = True
+        Me.GVVolcom.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumnid
+        '
+        Me.GridColumnid.Caption = "id"
+        Me.GridColumnid.FieldName = "id"
+        Me.GridColumnid.Name = "GridColumnid"
+        '
+        'GridColumnsales_order_ol_shop_number
+        '
+        Me.GridColumnsales_order_ol_shop_number.Caption = "Order Number"
+        Me.GridColumnsales_order_ol_shop_number.FieldName = "sales_order_ol_shop_number"
+        Me.GridColumnsales_order_ol_shop_number.Name = "GridColumnsales_order_ol_shop_number"
+        Me.GridColumnsales_order_ol_shop_number.Visible = True
+        Me.GridColumnsales_order_ol_shop_number.VisibleIndex = 0
+        '
+        'GridColumnsales_order_ol_shop_date
+        '
+        Me.GridColumnsales_order_ol_shop_date.Caption = "Order Date"
+        Me.GridColumnsales_order_ol_shop_date.DisplayFormat.FormatString = "dd MMMM yyyy HH:mm"
+        Me.GridColumnsales_order_ol_shop_date.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumnsales_order_ol_shop_date.FieldName = "sales_order_ol_shop_date"
+        Me.GridColumnsales_order_ol_shop_date.Name = "GridColumnsales_order_ol_shop_date"
+        Me.GridColumnsales_order_ol_shop_date.Visible = True
+        Me.GridColumnsales_order_ol_shop_date.VisibleIndex = 1
+        '
+        'GridColumncustomer_name
+        '
+        Me.GridColumncustomer_name.Caption = "Customer"
+        Me.GridColumncustomer_name.FieldName = "customer_name"
+        Me.GridColumncustomer_name.Name = "GridColumncustomer_name"
+        Me.GridColumncustomer_name.Visible = True
+        Me.GridColumncustomer_name.VisibleIndex = 2
+        '
+        'GridColumnshipping_name
+        '
+        Me.GridColumnshipping_name.Caption = "Shipping Name"
+        Me.GridColumnshipping_name.FieldName = "shipping_name"
+        Me.GridColumnshipping_name.Name = "GridColumnshipping_name"
+        Me.GridColumnshipping_name.Visible = True
+        Me.GridColumnshipping_name.VisibleIndex = 3
+        '
+        'GridColumnshipping_address
+        '
+        Me.GridColumnshipping_address.Caption = "Shipping Address"
+        Me.GridColumnshipping_address.FieldName = "shipping_address"
+        Me.GridColumnshipping_address.Name = "GridColumnshipping_address"
+        Me.GridColumnshipping_address.Visible = True
+        Me.GridColumnshipping_address.VisibleIndex = 4
+        '
+        'GridColumnshipping_phone
+        '
+        Me.GridColumnshipping_phone.Caption = "Shipping Phone"
+        Me.GridColumnshipping_phone.FieldName = "shipping_phone"
+        Me.GridColumnshipping_phone.Name = "GridColumnshipping_phone"
+        Me.GridColumnshipping_phone.Visible = True
+        Me.GridColumnshipping_phone.VisibleIndex = 5
+        '
+        'GridColumnshipping_city
+        '
+        Me.GridColumnshipping_city.Caption = "Shipping City"
+        Me.GridColumnshipping_city.FieldName = "shipping_city"
+        Me.GridColumnshipping_city.Name = "GridColumnshipping_city"
+        Me.GridColumnshipping_city.Visible = True
+        Me.GridColumnshipping_city.VisibleIndex = 6
+        '
+        'GridColumnshipping_post_code
+        '
+        Me.GridColumnshipping_post_code.Caption = "Postal Code"
+        Me.GridColumnshipping_post_code.FieldName = "shipping_post_code"
+        Me.GridColumnshipping_post_code.Name = "GridColumnshipping_post_code"
+        Me.GridColumnshipping_post_code.Visible = True
+        Me.GridColumnshipping_post_code.VisibleIndex = 7
+        '
+        'GridColumnshipping_region
+        '
+        Me.GridColumnshipping_region.Caption = "Shipping Region"
+        Me.GridColumnshipping_region.FieldName = "shipping_region"
+        Me.GridColumnshipping_region.Name = "GridColumnshipping_region"
+        Me.GridColumnshipping_region.Visible = True
+        Me.GridColumnshipping_region.VisibleIndex = 8
+        '
+        'GridColumnpayment_method
+        '
+        Me.GridColumnpayment_method.Caption = "Payment Method"
+        Me.GridColumnpayment_method.FieldName = "payment_method"
+        Me.GridColumnpayment_method.Name = "GridColumnpayment_method"
+        Me.GridColumnpayment_method.Visible = True
+        Me.GridColumnpayment_method.VisibleIndex = 9
+        '
+        'GridColumntracking_code
+        '
+        Me.GridColumntracking_code.Caption = "Tracking Code"
+        Me.GridColumntracking_code.FieldName = "tracking_code"
+        Me.GridColumntracking_code.Name = "GridColumntracking_code"
+        Me.GridColumntracking_code.Visible = True
+        Me.GridColumntracking_code.VisibleIndex = 10
+        '
+        'GridColumnol_store_sku
+        '
+        Me.GridColumnol_store_sku.Caption = "ID SKU"
+        Me.GridColumnol_store_sku.FieldName = "ol_store_sku"
+        Me.GridColumnol_store_sku.Name = "GridColumnol_store_sku"
+        Me.GridColumnol_store_sku.Visible = True
+        Me.GridColumnol_store_sku.VisibleIndex = 11
+        '
+        'GridColumnol_store_id
+        '
+        Me.GridColumnol_store_id.Caption = "OL Store ID"
+        Me.GridColumnol_store_id.FieldName = "ol_store_id"
+        Me.GridColumnol_store_id.Name = "GridColumnol_store_id"
+        Me.GridColumnol_store_id.Visible = True
+        Me.GridColumnol_store_id.VisibleIndex = 12
+        '
+        'GridColumnsku
+        '
+        Me.GridColumnsku.Caption = "SKU"
+        Me.GridColumnsku.FieldName = "sku"
+        Me.GridColumnsku.Name = "GridColumnsku"
+        Me.GridColumnsku.Visible = True
+        Me.GridColumnsku.VisibleIndex = 13
+        '
+        'GridColumndesign_price
+        '
+        Me.GridColumndesign_price.Caption = "Price"
+        Me.GridColumndesign_price.DisplayFormat.FormatString = "N0"
+        Me.GridColumndesign_price.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumndesign_price.FieldName = "design_price"
+        Me.GridColumndesign_price.Name = "GridColumndesign_price"
+        Me.GridColumndesign_price.Visible = True
+        Me.GridColumndesign_price.VisibleIndex = 14
+        '
+        'GridColumnsales_order_det_qty
+        '
+        Me.GridColumnsales_order_det_qty.Caption = "Qty"
+        Me.GridColumnsales_order_det_qty.DisplayFormat.FormatString = "N0"
+        Me.GridColumnsales_order_det_qty.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnsales_order_det_qty.FieldName = "sales_order_det_qty"
+        Me.GridColumnsales_order_det_qty.Name = "GridColumnsales_order_det_qty"
+        Me.GridColumnsales_order_det_qty.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_order_det_qty", "{0:N0}")})
+        Me.GridColumnsales_order_det_qty.Visible = True
+        Me.GridColumnsales_order_det_qty.VisibleIndex = 15
+        '
+        'GridColumnis_process
+        '
+        Me.GridColumnis_process.Caption = "Processed"
+        Me.GridColumnis_process.FieldName = "is_process"
+        Me.GridColumnis_process.Name = "GridColumnis_process"
+        '
+        'GridColumnnote_price
+        '
+        Me.GridColumnnote_price.Caption = "Note Price"
+        Me.GridColumnnote_price.FieldName = "note_price"
+        Me.GridColumnnote_price.Name = "GridColumnnote_price"
+        Me.GridColumnnote_price.Visible = True
+        Me.GridColumnnote_price.VisibleIndex = 16
+        '
+        'GridColumnid_design_cat
+        '
+        Me.GridColumnid_design_cat.Caption = "id_design_cat"
+        Me.GridColumnid_design_cat.FieldName = "id_design_cat"
+        Me.GridColumnid_design_cat.Name = "GridColumnid_design_cat"
+        '
+        'GridColumnid_design_price
+        '
+        Me.GridColumnid_design_price.Caption = "id_design_price"
+        Me.GridColumnid_design_price.FieldName = "id_design_price"
+        Me.GridColumnid_design_price.Name = "GridColumnid_design_price"
+        '
+        'GridColumnid_product
+        '
+        Me.GridColumnid_product.Caption = "id_product"
+        Me.GridColumnid_product.FieldName = "id_product"
+        Me.GridColumnid_product.Name = "GridColumnid_product"
+        '
+        'GridColumnnote_stock
+        '
+        Me.GridColumnnote_stock.Caption = "Note Stock"
+        Me.GridColumnnote_stock.FieldName = "note_stock"
+        Me.GridColumnnote_stock.Name = "GridColumnnote_stock"
+        Me.GridColumnnote_stock.Visible = True
+        Me.GridColumnnote_stock.VisibleIndex = 17
+        '
+        'GridColumnid_report_trf_order
+        '
+        Me.GridColumnid_report_trf_order.Caption = "id_report_trf_order"
+        Me.GridColumnid_report_trf_order.FieldName = "id_report_trf_order"
+        Me.GridColumnid_report_trf_order.Name = "GridColumnid_report_trf_order"
+        '
+        'GridColumnrmt_trf_order
+        '
+        Me.GridColumnrmt_trf_order.Caption = "rmt_trf_order"
+        Me.GridColumnrmt_trf_order.FieldName = "rmt_trf_order"
+        Me.GridColumnrmt_trf_order.Name = "GridColumnrmt_trf_order"
+        '
+        'GridColumnid_report_trf
+        '
+        Me.GridColumnid_report_trf.Caption = "id_report_trf"
+        Me.GridColumnid_report_trf.FieldName = "id_report_trf"
+        Me.GridColumnid_report_trf.Name = "GridColumnid_report_trf"
+        '
+        'GridColumnrmt_trf
+        '
+        Me.GridColumnrmt_trf.Caption = "rmt_trf"
+        Me.GridColumnrmt_trf.FieldName = "rmt_trf"
+        Me.GridColumnrmt_trf.Name = "GridColumnrmt_trf"
+        '
+        'GridColumnid_report_order
+        '
+        Me.GridColumnid_report_order.Caption = "id_report_order"
+        Me.GridColumnid_report_order.FieldName = "id_report_order"
+        Me.GridColumnid_report_order.Name = "GridColumnid_report_order"
+        '
+        'GridColumnrmt_order
+        '
+        Me.GridColumnrmt_order.Caption = "rmt_order"
+        Me.GridColumnrmt_order.FieldName = "rmt_order"
+        Me.GridColumnrmt_order.Name = "GridColumnrmt_order"
+        '
+        'GridColumntrf_order_number
+        '
+        Me.GridColumntrf_order_number.Caption = "Transfer Order"
+        Me.GridColumntrf_order_number.ColumnEdit = Me.LinkTrfNumber
+        Me.GridColumntrf_order_number.FieldName = "trf_order_number"
+        Me.GridColumntrf_order_number.Name = "GridColumntrf_order_number"
+        Me.GridColumntrf_order_number.Visible = True
+        Me.GridColumntrf_order_number.VisibleIndex = 18
+        '
+        'LinkTrfNumber
+        '
+        Me.LinkTrfNumber.AutoHeight = False
+        Me.LinkTrfNumber.Name = "LinkTrfNumber"
+        '
+        'GridColumntrf_number
+        '
+        Me.GridColumntrf_number.Caption = "Transfer"
+        Me.GridColumntrf_number.ColumnEdit = Me.LinkTrf
+        Me.GridColumntrf_number.FieldName = "trf_number"
+        Me.GridColumntrf_number.Name = "GridColumntrf_number"
+        Me.GridColumntrf_number.Visible = True
+        Me.GridColumntrf_number.VisibleIndex = 19
+        '
+        'LinkTrf
+        '
+        Me.LinkTrf.AutoHeight = False
+        Me.LinkTrf.Name = "LinkTrf"
+        '
+        'GridColumnsales_order_number
+        '
+        Me.GridColumnsales_order_number.Caption = "Sales Order"
+        Me.GridColumnsales_order_number.ColumnEdit = Me.LinkSalesOrder
+        Me.GridColumnsales_order_number.FieldName = "sales_order_number"
+        Me.GridColumnsales_order_number.Name = "GridColumnsales_order_number"
+        Me.GridColumnsales_order_number.Visible = True
+        Me.GridColumnsales_order_number.VisibleIndex = 20
+        '
+        'LinkSalesOrder
+        '
+        Me.LinkSalesOrder.AutoHeight = False
+        Me.LinkSalesOrder.Name = "LinkSalesOrder"
+        '
+        'GridColumn39
+        '
+        Me.GridColumn39.Caption = "Confirmed Order"
+        Me.GridColumn39.FieldName = "is_process_view"
+        Me.GridColumn39.Name = "GridColumn39"
+        Me.GridColumn39.Visible = True
+        Me.GridColumn39.VisibleIndex = 21
+        '
+        'PanelControl3
+        '
+        Me.PanelControl3.Controls.Add(Me.BtnPrint)
+        Me.PanelControl3.Controls.Add(Me.BtnSyncOrder)
+        Me.PanelControl3.Controls.Add(Me.BtnConfirmedOrder)
+        Me.PanelControl3.Controls.Add(Me.BtnPendingOrder)
+        Me.PanelControl3.Controls.Add(Me.BtnAllOrder)
+        Me.PanelControl3.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelControl3.Location = New System.Drawing.Point(0, 0)
+        Me.PanelControl3.Name = "PanelControl3"
+        Me.PanelControl3.Size = New System.Drawing.Size(994, 43)
+        Me.PanelControl3.TabIndex = 0
+        '
+        'BtnPrint
+        '
+        Me.BtnPrint.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnPrint.Image = CType(resources.GetObject("BtnPrint.Image"), System.Drawing.Image)
+        Me.BtnPrint.Location = New System.Drawing.Point(548, 2)
+        Me.BtnPrint.Name = "BtnPrint"
+        Me.BtnPrint.Size = New System.Drawing.Size(85, 39)
+        Me.BtnPrint.TabIndex = 1
+        Me.BtnPrint.Text = "Print"
+        '
+        'BtnSyncOrder
+        '
+        Me.BtnSyncOrder.Dock = System.Windows.Forms.DockStyle.Left
+        Me.BtnSyncOrder.Image = CType(resources.GetObject("BtnSyncOrder.Image"), System.Drawing.Image)
+        Me.BtnSyncOrder.Location = New System.Drawing.Point(2, 2)
+        Me.BtnSyncOrder.Name = "BtnSyncOrder"
+        Me.BtnSyncOrder.Size = New System.Drawing.Size(104, 39)
+        Me.BtnSyncOrder.TabIndex = 0
+        Me.BtnSyncOrder.Text = "Sync Order"
+        '
+        'BtnConfirmedOrder
+        '
+        Me.BtnConfirmedOrder.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnConfirmedOrder.Image = CType(resources.GetObject("BtnConfirmedOrder.Image"), System.Drawing.Image)
+        Me.BtnConfirmedOrder.Location = New System.Drawing.Point(633, 2)
+        Me.BtnConfirmedOrder.Name = "BtnConfirmedOrder"
+        Me.BtnConfirmedOrder.Size = New System.Drawing.Size(139, 39)
+        Me.BtnConfirmedOrder.TabIndex = 3
+        Me.BtnConfirmedOrder.Text = "Confirmed Orders"
+        '
+        'BtnPendingOrder
+        '
+        Me.BtnPendingOrder.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnPendingOrder.Image = CType(resources.GetObject("BtnPendingOrder.Image"), System.Drawing.Image)
+        Me.BtnPendingOrder.Location = New System.Drawing.Point(772, 2)
+        Me.BtnPendingOrder.Name = "BtnPendingOrder"
+        Me.BtnPendingOrder.Size = New System.Drawing.Size(121, 39)
+        Me.BtnPendingOrder.TabIndex = 2
+        Me.BtnPendingOrder.Text = "Pending Orders"
+        '
+        'BtnAllOrder
+        '
+        Me.BtnAllOrder.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnAllOrder.Image = CType(resources.GetObject("BtnAllOrder.Image"), System.Drawing.Image)
+        Me.BtnAllOrder.Location = New System.Drawing.Point(893, 2)
+        Me.BtnAllOrder.Name = "BtnAllOrder"
+        Me.BtnAllOrder.Size = New System.Drawing.Size(99, 39)
+        Me.BtnAllOrder.TabIndex = 4
+        Me.BtnAllOrder.Text = "All Orders"
+        '
+        'GridColumn
+        '
+        Me.GridColumn.Caption = "Financial Status"
+        Me.GridColumn.Name = "GridColumn"
+        Me.GridColumn.Visible = True
+        Me.GridColumn.VisibleIndex = 22
+        '
         'FormOLStore
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(888, 511)
-        Me.Controls.Add(Me.XtraTabControl1)
-        Me.Controls.Add(Me.PanelControl2)
+        Me.ClientSize = New System.Drawing.Size(1028, 511)
+        Me.Controls.Add(Me.XTCWorkplace)
         Me.Name = "FormOLStore"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Online Store Workplace"
@@ -1472,6 +1946,20 @@ Partial Class FormOLStore
         CType(Me.RepositoryItemSearchLookUpEdit2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemLookUpEdit1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.XTCWorkplace, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTCWorkplace.ResumeLayout(False)
+        Me.XTPAllOnlineStoreOrders.ResumeLayout(False)
+        Me.XTPManageOnlineStore.ResumeLayout(False)
+        CType(Me.XTCManageOnlineStore, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTCManageOnlineStore.ResumeLayout(False)
+        Me.XTPVolcomOLStore.ResumeLayout(False)
+        CType(Me.GCVolcom, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVVolcom, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LinkTrfNumber, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LinkTrf, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LinkSalesOrder, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl3.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -1609,4 +2097,54 @@ Partial Class FormOLStore
     Friend WithEvents GridColumnSizeActive As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnSizeCancelled As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnOLStoreOrderDate As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents XTCWorkplace As DevExpress.XtraTab.XtraTabControl
+    Friend WithEvents XTPAllOnlineStoreOrders As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents XTPManageOnlineStore As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents XTCManageOnlineStore As DevExpress.XtraTab.XtraTabControl
+    Friend WithEvents XTPVolcomOLStore As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents GCVolcom As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVVolcom As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents PanelControl3 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents BtnSyncOrder As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BtnPrint As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GridColumnid As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnsales_order_ol_shop_number As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnsales_order_ol_shop_date As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumncustomer_name As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnshipping_name As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnshipping_address As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnshipping_phone As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnshipping_city As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnshipping_post_code As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnshipping_region As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnpayment_method As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumntracking_code As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnol_store_sku As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnol_store_id As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnsku As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumndesign_price As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnsales_order_det_qty As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnis_process As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnnote_price As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnid_design_cat As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnid_design_price As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnid_product As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnnote_stock As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnid_report_trf_order As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnrmt_trf_order As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnid_report_trf As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnrmt_trf As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnid_report_order As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnrmt_order As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumntrf_order_number As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LinkTrfNumber As DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit
+    Friend WithEvents GridColumntrf_number As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LinkTrf As DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit
+    Friend WithEvents GridColumnsales_order_number As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LinkSalesOrder As DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit
+    Friend WithEvents BtnConfirmedOrder As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BtnPendingOrder As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BtnAllOrder As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GridColumn39 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn As DevExpress.XtraGrid.Columns.GridColumn
 End Class

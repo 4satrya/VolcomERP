@@ -38,6 +38,8 @@ Partial Class FormSalesOrderDet
         Me.BtnBrowseContactTo = New DevExpress.XtraEditors.SimpleButton()
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
         Me.PanelControlTopMain = New DevExpress.XtraEditors.PanelControl()
+        Me.SBSyncShopify = New DevExpress.XtraEditors.SimpleButton()
+        Me.CESync = New DevExpress.XtraEditors.CheckEdit()
         Me.LabelControl11 = New DevExpress.XtraEditors.LabelControl()
         Me.DEOLShop = New DevExpress.XtraEditors.DateEdit()
         Me.TxtOLShopNumber = New DevExpress.XtraEditors.TextEdit()
@@ -114,12 +116,12 @@ Partial Class FormSalesOrderDet
         Me.LEUniType = New DevExpress.XtraEditors.LookUpEdit()
         Me.LEPeriodx = New DevExpress.XtraEditors.LookUpEdit()
         Me.GroupControlAlloc = New DevExpress.XtraEditors.GroupControl()
-        Me.LabelControl12 = New DevExpress.XtraEditors.LabelControl()
         Me.SLEAccount = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn31 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn32 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn33 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl12 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
         CType(Me.PanelControlTopLeft, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -134,6 +136,7 @@ Partial Class FormSalesOrderDet
         CType(Me.TxtCodeCompTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControlTopMain, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlTopMain.SuspendLayout()
+        CType(Me.CESync.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEOLShop.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEOLShop.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtOLShopNumber.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -381,6 +384,8 @@ Partial Class FormSalesOrderDet
         'PanelControlTopMain
         '
         Me.PanelControlTopMain.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelControlTopMain.Controls.Add(Me.SBSyncShopify)
+        Me.PanelControlTopMain.Controls.Add(Me.CESync)
         Me.PanelControlTopMain.Controls.Add(Me.LabelControl11)
         Me.PanelControlTopMain.Controls.Add(Me.DEOLShop)
         Me.PanelControlTopMain.Controls.Add(Me.TxtOLShopNumber)
@@ -392,6 +397,23 @@ Partial Class FormSalesOrderDet
         Me.PanelControlTopMain.Name = "PanelControlTopMain"
         Me.PanelControlTopMain.Size = New System.Drawing.Size(254, 134)
         Me.PanelControlTopMain.TabIndex = 8897
+        '
+        'SBSyncShopify
+        '
+        Me.SBSyncShopify.Location = New System.Drawing.Point(161, 98)
+        Me.SBSyncShopify.Name = "SBSyncShopify"
+        Me.SBSyncShopify.Size = New System.Drawing.Size(77, 23)
+        Me.SBSyncShopify.TabIndex = 8899
+        Me.SBSyncShopify.Text = "Sync Product"
+        '
+        'CESync
+        '
+        Me.CESync.Enabled = False
+        Me.CESync.Location = New System.Drawing.Point(13, 100)
+        Me.CESync.Name = "CESync"
+        Me.CESync.Properties.Caption = "Update Stock to Website"
+        Me.CESync.Size = New System.Drawing.Size(142, 19)
+        Me.CESync.TabIndex = 8898
         '
         'LabelControl11
         '
@@ -1195,15 +1217,6 @@ Partial Class FormSalesOrderDet
         Me.GroupControlAlloc.TabIndex = 187
         Me.GroupControlAlloc.Visible = False
         '
-        'LabelControl12
-        '
-        Me.LabelControl12.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl12.Location = New System.Drawing.Point(31, 11)
-        Me.LabelControl12.Name = "LabelControl12"
-        Me.LabelControl12.Size = New System.Drawing.Size(74, 13)
-        Me.LabelControl12.TabIndex = 8895
-        Me.LabelControl12.Text = "Parent Account"
-        '
         'SLEAccount
         '
         Me.SLEAccount.Location = New System.Drawing.Point(121, 8)
@@ -1246,6 +1259,15 @@ Partial Class FormSalesOrderDet
         Me.GridColumn33.Visible = True
         Me.GridColumn33.VisibleIndex = 1
         '
+        'LabelControl12
+        '
+        Me.LabelControl12.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl12.Location = New System.Drawing.Point(31, 11)
+        Me.LabelControl12.Name = "LabelControl12"
+        Me.LabelControl12.Size = New System.Drawing.Size(74, 13)
+        Me.LabelControl12.TabIndex = 8895
+        Me.LabelControl12.Text = "Parent Account"
+        '
         'FormSalesOrderDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1278,6 +1300,7 @@ Partial Class FormSalesOrderDet
         CType(Me.PanelControlTopMain, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControlTopMain.ResumeLayout(False)
         Me.PanelControlTopMain.PerformLayout()
+        CType(Me.CESync.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEOLShop.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEOLShop.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtOLShopNumber.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1420,4 +1443,6 @@ Partial Class FormSalesOrderDet
     Friend WithEvents GridColumn31 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn32 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn33 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents CESync As DevExpress.XtraEditors.CheckEdit
+    Friend WithEvents SBSyncShopify As DevExpress.XtraEditors.SimpleButton
 End Class

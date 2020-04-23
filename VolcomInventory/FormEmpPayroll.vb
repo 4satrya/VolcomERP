@@ -1279,8 +1279,9 @@
         Dim id_payroll As String = GVPayrollPeriode.GetFocusedRowCellValue("id_payroll").ToString
         Dim id_payroll_type As String = GVPayrollPeriode.GetFocusedRowCellValue("id_payroll_type").ToString
         Dim is_thr As String = GVPayrollPeriode.GetFocusedRowCellValue("is_thr").ToString
+        Dim is_dw As String = GVPayrollPeriode.GetFocusedRowCellValue("is_dw").ToString
 
-        Dim where_dw As String = If(id_payroll_type = "4", "=", "<>")
+        Dim where_dw As String = If(is_dw = "1", "=", "<>")
 
         'not active
         Dim where_employee_not_active As String = ""

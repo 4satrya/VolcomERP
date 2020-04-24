@@ -1669,6 +1669,12 @@
     <Compile Include="FormEvaluation.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormFabricType.Designer.vb">
+      <DependentUpon>FormFabricType.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormFabricType.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormFGAdjReport.Designer.vb">
       <DependentUpon>FormFGAdjReport.vb</DependentUpon>
     </Compile>
@@ -8643,6 +8649,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormError.resx">
       <DependentUpon>FormError.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormFabricType.resx">
+      <DependentUpon>FormFabricType.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormFGAdjReport.resx">
       <DependentUpon>FormFGAdjReport.vb</DependentUpon>

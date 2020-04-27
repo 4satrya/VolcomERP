@@ -52,7 +52,7 @@ Partial Class FormFabricType
         Me.SimpleButton2.Dock = System.Windows.Forms.DockStyle.Right
         Me.SimpleButton2.Image = CType(resources.GetObject("SimpleButton2.Image"), System.Drawing.Image)
         Me.SimpleButton2.ImageIndex = 15
-        Me.SimpleButton2.Location = New System.Drawing.Point(651, 2)
+        Me.SimpleButton2.Location = New System.Drawing.Point(738, 2)
         Me.SimpleButton2.LookAndFeel.SkinName = "Metropolis"
         Me.SimpleButton2.Name = "SimpleButton2"
         Me.SimpleButton2.Size = New System.Drawing.Size(80, 36)
@@ -64,7 +64,7 @@ Partial Class FormFabricType
         Me.SimpleButton1.Dock = System.Windows.Forms.DockStyle.Right
         Me.SimpleButton1.Image = CType(resources.GetObject("SimpleButton1.Image"), System.Drawing.Image)
         Me.SimpleButton1.ImageIndex = 15
-        Me.SimpleButton1.Location = New System.Drawing.Point(731, 2)
+        Me.SimpleButton1.Location = New System.Drawing.Point(818, 2)
         Me.SimpleButton1.LookAndFeel.SkinName = "Metropolis"
         Me.SimpleButton1.Name = "SimpleButton1"
         Me.SimpleButton1.Size = New System.Drawing.Size(91, 36)
@@ -73,15 +73,15 @@ Partial Class FormFabricType
         '
         'BtnView
         '
-        Me.BtnView.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnView.Dock = System.Windows.Forms.DockStyle.Left
         Me.BtnView.Image = CType(resources.GetObject("BtnView.Image"), System.Drawing.Image)
         Me.BtnView.ImageIndex = 15
-        Me.BtnView.Location = New System.Drawing.Point(822, 2)
+        Me.BtnView.Location = New System.Drawing.Point(2, 2)
         Me.BtnView.LookAndFeel.SkinName = "Metropolis"
         Me.BtnView.Name = "BtnView"
-        Me.BtnView.Size = New System.Drawing.Size(87, 36)
+        Me.BtnView.Size = New System.Drawing.Size(106, 36)
         Me.BtnView.TabIndex = 94
-        Me.BtnView.Text = "View"
+        Me.BtnView.Text = "Refresh"
         '
         'GCData
         '

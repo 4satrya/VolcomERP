@@ -14649,7 +14649,10 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
     Private Sub NBFabricType_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBFabricType.LinkClicked
         Cursor = Cursors.WaitCursor
         Try
-
+            FormFabricType.MdiParent = Me
+            FormFabricType.Show()
+            FormFabricType.WindowState = FormWindowState.Maximized
+            FormFabricType.Focus()
         Catch ex As Exception
             errorProcess()
         End Try

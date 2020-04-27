@@ -1685,6 +1685,12 @@
       <DependentUpon>FormFabricType.vb</DependentUpon>
     </Compile>
     <Compile Include="FormFabricType.vb">
+        <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormFabricTypeDet.Designer.vb">
+      <DependentUpon>FormFabricTypeDet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormFabricTypeDet.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormFGAdjReport.Designer.vb">
@@ -8694,6 +8700,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormFabricType.resx">
       <DependentUpon>FormFabricType.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormFabricTypeDet.resx">
+      <DependentUpon>FormFabricTypeDet.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormFGAdjReport.resx">
       <DependentUpon>FormFGAdjReport.vb</DependentUpon>

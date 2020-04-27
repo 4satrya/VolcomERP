@@ -46,6 +46,7 @@
         data.Columns.Add("inventory_item_id", GetType(String))
         data.Columns.Add("compare_price", GetType(String))
         data.Columns.Add("design_price", GetType(String))
+        data.Columns.Add("inventory_quantity", GetType(String))
 
         Dim url As String = "https://" + username + ":" + password + "@" + shop + "/admin/api/2020-04/products.json"
 
@@ -74,7 +75,7 @@
                         since_id = row("id")
 
                         For Each row2 In row("variants").ToList
-                            data.Rows.Add(row2("id"), row2("product_id"), row2("sku"), row2("inventory_item_id"), row2("compare_at_price"), row2("price"))
+                            data.Rows.Add(row2("id"), row2("product_id"), row2("sku"), row2("inventory_item_id"), row2("compare_at_price"), row2("price"), row2("inventory_quantity"))
                         Next
                     Next
                 Else
@@ -123,11 +124,11 @@
         response.Close()
     End Sub
 
-    Sub sync_sku()
+    Function sync_sku() As Boolean
         Dim product As DataTable = get_product()
 
         For i = 0 To product.Rows.Count - 1
-            Dim query As String = "INSERT IGNORE INTO tb_m_product_shopify (variant_id, sku, product_id, inventory_item_id) VALUES ('" + product.Rows(i)("variant_id").ToString + "', '" + product.Rows(i)("sku").ToString + "', '" + product.Rows(i)("product_id").ToString + "', '" + product.Rows(i)("inventory_item_id").ToString + "')"
+            Dim query As String = "INSERT IGNORE INTO tb_m_product_shopify (variant_id, sku, product_id, inventory_item_id, date) VALUES ('" + product.Rows(i)("variant_id").ToString + "', '" + product.Rows(i)("sku").ToString + "', '" + product.Rows(i)("product_id").ToString + "', '" + product.Rows(i)("inventory_item_id").ToString + "', NOW())"
 
             execute_non_query(query, True, "", "", "", "")
 
@@ -135,7 +136,31 @@
 
             execute_non_query(q_price, True, "", "", "", "")
         Next
-    End Sub
+
+        'check duplicate
+        Dim query_d As String = "SELECT sku, COUNT(*) AS total FROM tb_m_product_shopify GROUP BY sku HAVING total > 1"
+
+        Dim data_d As DataTable = execute_query(query_d, -1, True, "", "", "", "")
+
+        Dim sku As String = ""
+
+        For i = 0 To data_d.Rows.Count - 1
+            sku += data_d.Rows(i)("sku").ToString + ", "
+
+            execute_non_query("
+                INSERT INTO tb_m_product_shopify_duplicate (variant_id, sku, product_id, inventory_item_id, `date`)
+                SELECT variant_id, sku, product_id, inventory_item_id, NOW() AS `date` FROM tb_m_product_shopify WHERE sku = '" + data_d.Rows(i)("sku").ToString + "';
+                
+                DELETE FROM tb_m_product_shopify WHERE sku = '" + data_d.Rows(i)("sku").ToString + "';
+            ", True, "", "", "", "")
+        Next
+
+        If Not sku = "" Then
+            warningCustom("Duplicate SKU: " + sku.Substring(0, sku.Length - 2) + ". Please make sure there are no duplicate sku on the website and Sync again.")
+        End If
+
+        Return If(sku = "", True, False)
+    End Function
 
 
     Sub get_order_erp()
@@ -149,7 +174,6 @@
         Dim since_id As String = execute_query("SELECT IFNULL(MAX(id),0) AS `since_id` FROM tb_ol_store_order ", 0, True, "", "", "", "")
 
         Dim url As String = "https://" + username + ":" + password + "@" + shop + "/admin/api/2020-04/orders.json?since_id=" + since_id + cond_order
-        Console.WriteLine(url)
         Dim request As Net.WebRequest = Net.WebRequest.Create(url)
         request.Method = "GET"
         request.Credentials = New Net.NetworkCredential(username, password)
@@ -196,7 +220,13 @@
                         shipping_name = ""
                     End Try
                     Try
-                        shipping_address = If(row("shipping_address")("address1") Is Nothing, "", row("shipping_address")("address1").ToString)
+                        shipping_address = row("shipping_address")("address1").ToString + " "
+                        shipping_address += row("shipping_address")("address2").ToString + " "
+                        shipping_address += row("shipping_address")("city").ToString + " "
+                        shipping_address += row("shipping_address")("province").ToString + " "
+                        shipping_address += row("shipping_address")("zip").ToString + " "
+                        shipping_address += row("shipping_address")("country").ToString + " "
+                        shipping_address += "Phone : " + row("shipping_address")("phone").ToString
                     Catch ex As Exception
                         shipping_address = ""
                     End Try
@@ -321,6 +351,16 @@ GROUP BY p.sku"
 }")
             Dim result_post As String = SendRequest("https://" & username & ":" & password & "@" & shop & "/admin/api/2020-04/variants/" & dt.Rows(i)("variant_id").ToString & ".json", data, "application/json", "PUT", username, password)
             'Console.WriteLine(result_post.ToString)
+        Next
+    End Sub
+
+    Sub sync_stock()
+        Dim product As DataTable = get_product()
+
+        For i = 0 To product.Rows.Count - 1
+            Dim q_price As String = "INSERT INTO tb_m_stock_shopify (sku, stock, date) VALUES ('" + product.Rows(i)("sku").ToString + "', '" + product.Rows(i)("inventory_quantity").ToString + "', NOW())"
+
+            execute_non_query(q_price, True, "", "", "", "")
         Next
     End Sub
 End Class

@@ -465,6 +465,7 @@
                         execute_non_query_long("CALL create_web_order(" + dord.Rows(i)("id").ToString + ");", True, "", "", "", "")
                     Next
                 Catch ex As Exception
+                    ord.insertLogWebOrder("0", ex.ToString)
                     stopCustom(ex.ToString)
                 End Try
                 ord.setProceccedWebOrder("2")
@@ -482,5 +483,37 @@
             SplashScreenManager1.CloseWaitForm()
         End If
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub LinkTrfOrder_Click(sender As Object, e As EventArgs) Handles LinkTrfOrder.Click
+        If GVVolcom.FocusedRowHandle >= 0 And GVVolcom.RowCount > 0 Then
+            viewOrderRef(GVVolcom.GetFocusedRowCellValue("rmt_trf_order").ToString, GVVolcom.GetFocusedRowCellValue("id_report_trf_order").ToString)
+        End If
+    End Sub
+
+    Sub viewOrderRef(ByVal rmt As String, ByVal id_report As String)
+        Cursor = Cursors.WaitCursor
+        Dim so As New ClassShowPopUp
+        so.report_mark_type = rmt
+        so.id_report = id_report
+        so.show()
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub LinkSalesOrder_Click(sender As Object, e As EventArgs) Handles LinkSalesOrder.Click
+        If GVVolcom.FocusedRowHandle >= 0 And GVVolcom.RowCount > 0 Then
+            viewOrderRef(GVVolcom.GetFocusedRowCellValue("rmt_order").ToString, GVVolcom.GetFocusedRowCellValue("id_report_order").ToString)
+        End If
+    End Sub
+
+    Private Sub LinkTrf_Click(sender As Object, e As EventArgs) Handles LinkTrf.Click
+        If GVVolcom.FocusedRowHandle >= 0 And GVVolcom.RowCount > 0 Then
+            Cursor = Cursors.WaitCursor
+            Dim so As New ClassShowPopUp
+            so.report_mark_type = GVVolcom.GetFocusedRowCellValue("rmt_trf").ToString
+            so.id_report = GVVolcom.GetFocusedRowCellValue("id_report_trf").ToString
+            so.show()
+            Cursor = Cursors.Default
+        End If
     End Sub
 End Class

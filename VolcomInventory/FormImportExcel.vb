@@ -3085,6 +3085,32 @@ Public Class FormImportExcel
             GVData.OptionsView.ShowFooter = True
             GVData.Columns("qty").SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum
             GVData.Columns("qty").SummaryItem.DisplayFormat = "{0:n0}"
+        ElseIf id_pop_up = "49" Then 'import tracking number collection
+            Dim queryx As String = "SELECT id_track_no,track_no FROM tb_3pl_track_no
+            WHERE `id_comp`='" & FormWHAwbillTrackCollection.SLECargo.EditValue.ToString & "' "
+            Dim dt As DataTable = execute_query(queryx, -1, True, "", "", "", "")
+            Dim tb1 = data_temp.AsEnumerable()
+            Dim tb2 = dt.AsEnumerable()
+
+            Dim query = From table1 In tb1
+                        Group Join table_tmp In tb2 On table1("track_no").ToString Equals table_tmp("track_no").ToString
+                            Into Group
+                        From y1 In Group.DefaultIfEmpty()
+                        Select New With
+                            {
+                                .Vendor = FormWHAwbillTrackCollection.SLECargo.Text,
+                                .track_no = table1("track_no"),
+                                .status = If(y1 Is Nothing, "OK", "Tracking Number already registered")
+                            }
+
+            GCData.DataSource = Nothing
+            GCData.DataSource = query.ToList()
+            GCData.RefreshDataSource()
+            GVData.PopulateColumns()
+
+            'Customize column
+            GVData.Columns("track_no").Caption = "Tracking Number"
+            GVData.Columns("status").Caption = "Description"
         End If
         data_temp.Dispose()
         oledbconn.Close()
@@ -5257,6 +5283,42 @@ Public Class FormImportExcel
                             PBC.PerformStep()
                             PBC.Update()
                         Next
+                        infoCustom("Import Success")
+                        Close()
+                    Else
+                        stopCustom("There is no data for import process, please make sure your input !")
+                        makeSafeGV(GVData)
+                    End If
+                End If
+            ElseIf id_pop_up = "49" Then 'import tracking number collection
+                Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Only 'OK' data will imported, continue?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+                If confirm = Windows.Forms.DialogResult.Yes Then
+                    makeSafeGV(GVData)
+                    GVData.ActiveFilterString = "[Status] = 'OK'"
+
+                    makeSafeGV(GVData)
+                    GVData.ActiveFilterString = "[Status] = 'OK'"
+
+                    If GVData.RowCount > 0 Then
+                        PBC.Properties.Minimum = 0
+                        PBC.Properties.Maximum = GVData.RowCount - 1
+                        PBC.Properties.Step = 1
+                        PBC.Properties.PercentView = True
+                        '
+                        Dim q As String = "INSERT INTO tb_3pl_track_no(id_comp,track_no) VALUES"
+
+                        For i As Integer = 0 To GVData.RowCount - 1
+                            If Not i = 0 Then
+                                q += ","
+                            End If
+                            '
+                            q += "('" & FormWHAwbillTrackCollection.SLECargo.EditValue.ToString & "','" & GVData.GetRowCellValue(i, "track_no").ToString & "')"
+                            '
+                            PBC.PerformStep()
+                            PBC.Update()
+                        Next
+
+                        execute_non_query(q, True, "", "", "", "")
                         infoCustom("Import Success")
                         Close()
                     Else

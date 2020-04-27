@@ -187,6 +187,26 @@
     End Sub
 
     Private Sub PenangguhanBankToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PenangguhanBankToolStripMenuItem.Click
+        FormMasterEmployeeNomorSurat.id_popup = "1"
+
+        FormMasterEmployeeNomorSurat.ShowDialog()
+    End Sub
+
+    Private Sub DiRumahkanToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DiRumahkanToolStripMenuItem.Click
+        FormMasterEmployeeNomorSurat.id_popup = "2"
+
+        FormMasterEmployeeNomorSurat.ShowDialog()
+    End Sub
+
+    Private Sub TugasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TugasToolStripMenuItem.Click
+        FormMasterEmployeeNomorSurat.id_popup = "3"
+
+        FormMasterEmployeeNomorSurat.ShowDialog()
+    End Sub
+
+    Private Sub BansosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BansosToolStripMenuItem.Click
+        FormMasterEmployeeNomorSurat.id_popup = "4"
+
         FormMasterEmployeeNomorSurat.ShowDialog()
     End Sub
 End Class

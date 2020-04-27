@@ -1552,10 +1552,12 @@ WHERE id_comp IN (" & id_store & ", " & id_comp_par & ")"
 
         Dim cls As ClassShopifyApi = New ClassShopifyApi
 
-        cls.sync_sku()
+        Dim no_duplicate As Boolean = cls.sync_sku()
 
         Cursor = Cursors.Default
 
-        infoCustom("Sync complete.")
+        If no_duplicate Then
+            infoCustom("Sync complete.")
+        End If
     End Sub
 End Class

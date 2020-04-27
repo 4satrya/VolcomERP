@@ -285,6 +285,18 @@
     <Compile Include="ClassStock.vb" />
     <Compile Include="ClassUser.vb" />
     <Compile Include="ClassValidEAN13.vb" />
+    <Compile Include="Form3plRate.Designer.vb">
+      <DependentUpon>Form3plRate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form3plRate.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form3plRateDet.Designer.vb">
+      <DependentUpon>Form3plRateDet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form3plRateDet.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormAccClosing.Designer.vb">
       <DependentUpon>FormAccClosing.vb</DependentUpon>
     </Compile>
@@ -6444,6 +6456,12 @@
     <Compile Include="FormWHAWBillInDet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormWHAwbillTrackCollection.Designer.vb">
+      <DependentUpon>FormWHAwbillTrackCollection.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormWHAwbillTrackCollection.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormWHCargoRate.designer.vb">
       <DependentUpon>FormWHCargoRate.vb</DependentUpon>
     </Compile>
@@ -7167,10 +7185,28 @@
     <Compile Include="ReportMasterCompanySingle.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ReportMasterEmployeeSuratKeputusanDirumahkan.Designer.vb">
+      <DependentUpon>ReportMasterEmployeeSuratKeputusanDirumahkan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportMasterEmployeeSuratKeputusanDirumahkan.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportMasterEmployeeSuratKeteranganBansos.Designer.vb">
+      <DependentUpon>ReportMasterEmployeeSuratKeteranganBansos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportMasterEmployeeSuratKeteranganBansos.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ReportMasterEmployeeSuratKeteranganPenangguhanBank.Designer.vb">
       <DependentUpon>ReportMasterEmployeeSuratKeteranganPenangguhanBank.vb</DependentUpon>
     </Compile>
     <Compile Include="ReportMasterEmployeeSuratKeteranganPenangguhanBank.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportMasterEmployeeSuratTugas.Designer.vb">
+      <DependentUpon>ReportMasterEmployeeSuratTugas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportMasterEmployeeSuratTugas.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ReportMasterPrice.Designer.vb">
@@ -7928,6 +7964,12 @@
     <EmbeddedResource Include="barcodeaa.resx">
       <DependentUpon>barcodeaa.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form3plRate.resx">
+      <DependentUpon>Form3plRate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form3plRateDet.resx">
+      <DependentUpon>Form3plRateDet.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormAccClosing.resx">
       <DependentUpon>FormAccClosing.vb</DependentUpon>
@@ -11475,6 +11517,9 @@
     <EmbeddedResource Include="FormWHAWBillInDet.resx">
       <DependentUpon>FormWHAWBillInDet.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormWHAwbillTrackCollection.resx">
+      <DependentUpon>FormWHAwbillTrackCollection.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormWHCargoRate.resx">
       <DependentUpon>FormWHCargoRate.vb</DependentUpon>
     </EmbeddedResource>
@@ -11857,8 +11902,17 @@
     <EmbeddedResource Include="ReportMasterCompanySingle.resx">
       <DependentUpon>ReportMasterCompanySingle.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportMasterEmployeeSuratKeputusanDirumahkan.resx">
+      <DependentUpon>ReportMasterEmployeeSuratKeputusanDirumahkan.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportMasterEmployeeSuratKeteranganBansos.resx">
+      <DependentUpon>ReportMasterEmployeeSuratKeteranganBansos.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportMasterEmployeeSuratKeteranganPenangguhanBank.resx">
       <DependentUpon>ReportMasterEmployeeSuratKeteranganPenangguhanBank.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportMasterEmployeeSuratTugas.resx">
+      <DependentUpon>ReportMasterEmployeeSuratTugas.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportMasterPrice.resx">
       <DependentUpon>ReportMasterPrice.vb</DependentUpon>

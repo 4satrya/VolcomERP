@@ -191,19 +191,19 @@ Partial Class FormOLStore
         Me.GridColumnid_report_order = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnrmt_order = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumntrf_order_number = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.LinkTrfNumber = New DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit()
+        Me.LinkTrfOrder = New DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit()
         Me.GridColumntrf_number = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LinkTrf = New DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit()
         Me.GridColumnsales_order_number = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LinkSalesOrder = New DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit()
         Me.GridColumn39 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
         Me.BtnPrint = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnSyncOrder = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnConfirmedOrder = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnPendingOrder = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnAllOrder = New DevExpress.XtraEditors.SimpleButton()
-        Me.GridColumn = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
         CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -258,7 +258,7 @@ Partial Class FormOLStore
         Me.XTPVolcomOLStore.SuspendLayout()
         CType(Me.GCVolcom, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVVolcom, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LinkTrfNumber, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LinkTrfOrder, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LinkTrf, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LinkSalesOrder, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1537,7 +1537,7 @@ Partial Class FormOLStore
         Me.GCVolcom.Location = New System.Drawing.Point(0, 43)
         Me.GCVolcom.MainView = Me.GVVolcom
         Me.GCVolcom.Name = "GCVolcom"
-        Me.GCVolcom.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.LinkTrfNumber, Me.LinkTrf, Me.LinkSalesOrder})
+        Me.GCVolcom.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.LinkTrfOrder, Me.LinkTrf, Me.LinkSalesOrder})
         Me.GCVolcom.Size = New System.Drawing.Size(994, 438)
         Me.GCVolcom.TabIndex = 1
         Me.GCVolcom.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVVolcom})
@@ -1707,7 +1707,7 @@ Partial Class FormOLStore
         Me.GridColumnnote_price.FieldName = "note_price"
         Me.GridColumnnote_price.Name = "GridColumnnote_price"
         Me.GridColumnnote_price.Visible = True
-        Me.GridColumnnote_price.VisibleIndex = 16
+        Me.GridColumnnote_price.VisibleIndex = 17
         '
         'GridColumnid_design_cat
         '
@@ -1733,7 +1733,7 @@ Partial Class FormOLStore
         Me.GridColumnnote_stock.FieldName = "note_stock"
         Me.GridColumnnote_stock.Name = "GridColumnnote_stock"
         Me.GridColumnnote_stock.Visible = True
-        Me.GridColumnnote_stock.VisibleIndex = 17
+        Me.GridColumnnote_stock.VisibleIndex = 18
         '
         'GridColumnid_report_trf_order
         '
@@ -1774,16 +1774,16 @@ Partial Class FormOLStore
         'GridColumntrf_order_number
         '
         Me.GridColumntrf_order_number.Caption = "Transfer Order"
-        Me.GridColumntrf_order_number.ColumnEdit = Me.LinkTrfNumber
+        Me.GridColumntrf_order_number.ColumnEdit = Me.LinkTrfOrder
         Me.GridColumntrf_order_number.FieldName = "trf_order_number"
         Me.GridColumntrf_order_number.Name = "GridColumntrf_order_number"
         Me.GridColumntrf_order_number.Visible = True
-        Me.GridColumntrf_order_number.VisibleIndex = 18
+        Me.GridColumntrf_order_number.VisibleIndex = 19
         '
-        'LinkTrfNumber
+        'LinkTrfOrder
         '
-        Me.LinkTrfNumber.AutoHeight = False
-        Me.LinkTrfNumber.Name = "LinkTrfNumber"
+        Me.LinkTrfOrder.AutoHeight = False
+        Me.LinkTrfOrder.Name = "LinkTrfOrder"
         '
         'GridColumntrf_number
         '
@@ -1792,7 +1792,7 @@ Partial Class FormOLStore
         Me.GridColumntrf_number.FieldName = "trf_number"
         Me.GridColumntrf_number.Name = "GridColumntrf_number"
         Me.GridColumntrf_number.Visible = True
-        Me.GridColumntrf_number.VisibleIndex = 19
+        Me.GridColumntrf_number.VisibleIndex = 20
         '
         'LinkTrf
         '
@@ -1806,7 +1806,7 @@ Partial Class FormOLStore
         Me.GridColumnsales_order_number.FieldName = "sales_order_number"
         Me.GridColumnsales_order_number.Name = "GridColumnsales_order_number"
         Me.GridColumnsales_order_number.Visible = True
-        Me.GridColumnsales_order_number.VisibleIndex = 20
+        Me.GridColumnsales_order_number.VisibleIndex = 21
         '
         'LinkSalesOrder
         '
@@ -1819,7 +1819,14 @@ Partial Class FormOLStore
         Me.GridColumn39.FieldName = "is_process_view"
         Me.GridColumn39.Name = "GridColumn39"
         Me.GridColumn39.Visible = True
-        Me.GridColumn39.VisibleIndex = 21
+        Me.GridColumn39.VisibleIndex = 22
+        '
+        'GridColumn
+        '
+        Me.GridColumn.Caption = "Financial Status"
+        Me.GridColumn.Name = "GridColumn"
+        Me.GridColumn.Visible = True
+        Me.GridColumn.VisibleIndex = 16
         '
         'PanelControl3
         '
@@ -1883,13 +1890,6 @@ Partial Class FormOLStore
         Me.BtnAllOrder.Size = New System.Drawing.Size(99, 39)
         Me.BtnAllOrder.TabIndex = 4
         Me.BtnAllOrder.Text = "All Orders"
-        '
-        'GridColumn
-        '
-        Me.GridColumn.Caption = "Financial Status"
-        Me.GridColumn.Name = "GridColumn"
-        Me.GridColumn.Visible = True
-        Me.GridColumn.VisibleIndex = 22
         '
         'FormOLStore
         '
@@ -1955,7 +1955,7 @@ Partial Class FormOLStore
         Me.XTPVolcomOLStore.ResumeLayout(False)
         CType(Me.GCVolcom, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVVolcom, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LinkTrfNumber, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LinkTrfOrder, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LinkTrf, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LinkSalesOrder, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).EndInit()
@@ -2137,7 +2137,7 @@ Partial Class FormOLStore
     Friend WithEvents GridColumnid_report_order As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnrmt_order As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumntrf_order_number As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents LinkTrfNumber As DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit
+    Friend WithEvents LinkTrfOrder As DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit
     Friend WithEvents GridColumntrf_number As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents LinkTrf As DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit
     Friend WithEvents GridColumnsales_order_number As DevExpress.XtraGrid.Columns.GridColumn

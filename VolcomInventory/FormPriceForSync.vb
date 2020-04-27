@@ -102,13 +102,15 @@
 
         Dim cls As New ClassShopifyApi()
 
-        cls.sync_sku()
+        Dim no_duplicate As Boolean = cls.sync_sku()
 
         Cursor = Cursors.Default
 
         FormPriceForSync_Load(Me, New EventArgs)
 
-        infoCustom("Sync Complete.")
+        If no_duplicate Then
+            infoCustom("Sync Complete.")
+        End If
 
         GVBrowsePrice.ActiveFilterString = ""
     End Sub

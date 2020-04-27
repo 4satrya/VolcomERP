@@ -227,13 +227,20 @@
             End If
 
             If id_report_status = "0" Then
-                autogenerate()
-
                 Dim query_l As String = "CALL view_payroll('" & GVPayrollPeriode.GetFocusedRowCellValue("id_payroll").ToString & "')"
 
-                Dim data_l As DataTable = execute_query(query_l, -1, True, "", "", "", "")
+                'autogenerate
+                autogenerate()
 
-                GCPayroll.DataSource = data_l
+                GCPayroll.DataSource = execute_query(query_l, -1, True, "", "", "", "")
+
+                adjustment_deduction_column("adjustment")
+                adjustment_deduction_column("deduction")
+
+                'autoadjustment
+                autoadjustment()
+
+                GCPayroll.DataSource = execute_query(query_l, -1, True, "", "", "", "")
 
                 adjustment_deduction_column("adjustment")
                 adjustment_deduction_column("deduction")
@@ -1600,5 +1607,31 @@
 
             execute_non_query(q_uded, True, "", "", "", "")
         Next
+    End Sub
+
+    Sub autoadjustment()
+        'thr
+        If GVPayrollPeriode.GetFocusedRowCellValue("is_thr").ToString = "1" Then
+            For i = 0 To GVPayroll.RowCount - 1
+                If GVPayroll.IsValidRowHandle(i) Then
+                    If GVPayroll.GetRowCellValue(i, "actual_workdays") < 1 Then
+                        Dim id_payroll As String = GVPayrollPeriode.GetFocusedRowCellValue("id_payroll").ToString
+                        Dim id_employee As String = GVPayroll.GetRowCellValue(i, "id_employee").ToString
+                        Dim total_days As String = (1 - GVPayroll.GetRowCellValue(i, "actual_workdays")).ToString
+                        Dim increase As String = GVPayroll.GetRowCellValue(i, "total_salary_thr").ToString
+                        Dim value As String = (GVPayroll.GetRowCellValue(i, "total_salary_thr") * (1 - GVPayroll.GetRowCellValue(i, "actual_workdays")))
+
+                        Dim query As String = "
+                            DELETE FROM tb_emp_payroll_adj WHERE id_salary_adj = 2 AND id_employee = " + id_employee + " AND id_payroll = " + id_payroll + ";
+                            INSERT INTO tb_emp_payroll_adj (id_payroll, id_salary_adj, id_employee, total_days, increase, `value`) VALUES (" + id_payroll + ", 2, " + id_employee + ", '-" + decimalSQL(total_days) + "', '" + increase + "', '-" + value + "');
+                        "
+
+                        execute_non_query(query, True, "", "", "", "")
+                    End If
+                End If
+            Next
+
+            infoCustom("Adjustment updated.")
+        End If
     End Sub
 End Class

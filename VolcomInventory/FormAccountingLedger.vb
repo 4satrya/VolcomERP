@@ -67,7 +67,7 @@
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
         'last balance
-        data.Columns.Add("last_balance", GetType(Long))
+        data.Columns.Add("last_balance", GetType(Decimal))
 
         Dim last_acc As String = data.Rows(0)("acc_name").ToString
 

@@ -22,6 +22,11 @@ Partial Class FormMasterEmployee
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMasterEmployee))
         Me.GCEmployee = New DevExpress.XtraGrid.GridControl()
+        Me.ContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.SuratKeteranganToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PenangguhanBankToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DiRumahkanToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TugasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GVEmployee = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridView()
         Me.gridBandGENERALNew = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         Me.GridColumnPic = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
@@ -135,10 +140,9 @@ Partial Class FormMasterEmployee
         Me.SplashScreenManager1 = New DevExpress.XtraSplashScreen.SplashScreenManager(Me, GetType(Global.VolcomMRP.WaitForm), True, True)
         Me.BAccept = New DevExpress.XtraEditors.SimpleButton()
         Me.BClone = New DevExpress.XtraEditors.SimpleButton()
-        Me.ContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.SuratKeteranganToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PenangguhanBankToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BansosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.GCEmployee, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ContextMenuStrip.SuspendLayout()
         CType(Me.GVEmployee, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemPictureEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -149,7 +153,6 @@ Partial Class FormMasterEmployee
         CType(Me.PanelOpt, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelOpt.SuspendLayout()
         CType(Me.CheckImg.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.ContextMenuStrip.SuspendLayout()
         Me.SuspendLayout()
         '
         'GCEmployee
@@ -163,6 +166,37 @@ Partial Class FormMasterEmployee
         Me.GCEmployee.Size = New System.Drawing.Size(764, 408)
         Me.GCEmployee.TabIndex = 0
         Me.GCEmployee.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVEmployee})
+        '
+        'ContextMenuStrip
+        '
+        Me.ContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SuratKeteranganToolStripMenuItem})
+        Me.ContextMenuStrip.Name = "ContextMenuStrip"
+        Me.ContextMenuStrip.Size = New System.Drawing.Size(165, 48)
+        '
+        'SuratKeteranganToolStripMenuItem
+        '
+        Me.SuratKeteranganToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PenangguhanBankToolStripMenuItem, Me.DiRumahkanToolStripMenuItem, Me.TugasToolStripMenuItem, Me.BansosToolStripMenuItem})
+        Me.SuratKeteranganToolStripMenuItem.Name = "SuratKeteranganToolStripMenuItem"
+        Me.SuratKeteranganToolStripMenuItem.Size = New System.Drawing.Size(164, 22)
+        Me.SuratKeteranganToolStripMenuItem.Text = "Surat Keterangan"
+        '
+        'PenangguhanBankToolStripMenuItem
+        '
+        Me.PenangguhanBankToolStripMenuItem.Name = "PenangguhanBankToolStripMenuItem"
+        Me.PenangguhanBankToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
+        Me.PenangguhanBankToolStripMenuItem.Text = "Penangguhan Bank"
+        '
+        'DiRumahkanToolStripMenuItem
+        '
+        Me.DiRumahkanToolStripMenuItem.Name = "DiRumahkanToolStripMenuItem"
+        Me.DiRumahkanToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
+        Me.DiRumahkanToolStripMenuItem.Text = "Dirumahkan"
+        '
+        'TugasToolStripMenuItem
+        '
+        Me.TugasToolStripMenuItem.Name = "TugasToolStripMenuItem"
+        Me.TugasToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
+        Me.TugasToolStripMenuItem.Text = "Tugas"
         '
         'GVEmployee
         '
@@ -1272,24 +1306,11 @@ Partial Class FormMasterEmployee
         Me.BClone.Text = "Clone"
         Me.BClone.Visible = False
         '
-        'ContextMenuStrip
+        'BansosToolStripMenuItem
         '
-        Me.ContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SuratKeteranganToolStripMenuItem})
-        Me.ContextMenuStrip.Name = "ContextMenuStrip"
-        Me.ContextMenuStrip.Size = New System.Drawing.Size(165, 26)
-        '
-        'SuratKeteranganToolStripMenuItem
-        '
-        Me.SuratKeteranganToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PenangguhanBankToolStripMenuItem})
-        Me.SuratKeteranganToolStripMenuItem.Name = "SuratKeteranganToolStripMenuItem"
-        Me.SuratKeteranganToolStripMenuItem.Size = New System.Drawing.Size(164, 22)
-        Me.SuratKeteranganToolStripMenuItem.Text = "Surat Keterangan"
-        '
-        'PenangguhanBankToolStripMenuItem
-        '
-        Me.PenangguhanBankToolStripMenuItem.Name = "PenangguhanBankToolStripMenuItem"
-        Me.PenangguhanBankToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
-        Me.PenangguhanBankToolStripMenuItem.Text = "Penangguhan Bank"
+        Me.BansosToolStripMenuItem.Name = "BansosToolStripMenuItem"
+        Me.BansosToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
+        Me.BansosToolStripMenuItem.Text = "Bansos"
         '
         'FormMasterEmployee
         '
@@ -1308,6 +1329,7 @@ Partial Class FormMasterEmployee
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Employee"
         CType(Me.GCEmployee, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ContextMenuStrip.ResumeLayout(False)
         CType(Me.GVEmployee, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemPictureEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1318,7 +1340,6 @@ Partial Class FormMasterEmployee
         CType(Me.PanelOpt, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelOpt.ResumeLayout(False)
         CType(Me.CheckImg.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ContextMenuStrip.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -1439,4 +1460,7 @@ Partial Class FormMasterEmployee
     Friend WithEvents ContextMenuStrip As ContextMenuStrip
     Friend WithEvents SuratKeteranganToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PenangguhanBankToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DiRumahkanToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents TugasToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents BansosToolStripMenuItem As ToolStripMenuItem
 End Class

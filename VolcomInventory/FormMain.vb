@@ -14632,4 +14632,27 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
         End Try
         Cursor = Cursors.Default
     End Sub
+
+    Private Sub NB3plRate_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NB3plRate.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            Form3plRate.MdiParent = Me
+            Form3plRate.Show()
+            Form3plRate.WindowState = FormWindowState.Maximized
+            Form3plRate.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBFabricType_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBFabricType.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
 End Class

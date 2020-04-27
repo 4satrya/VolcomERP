@@ -21,8 +21,8 @@ Partial Class FormFabricType
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormFabricType))
         Me.PanelControlNavLineList = New DevExpress.XtraEditors.PanelControl()
-        Me.SimpleButton2 = New DevExpress.XtraEditors.SimpleButton()
-        Me.SimpleButton1 = New DevExpress.XtraEditors.SimpleButton()
+        Me.BAdd = New DevExpress.XtraEditors.SimpleButton()
+        Me.BEdit = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnView = New DevExpress.XtraEditors.SimpleButton()
         Me.GCData = New DevExpress.XtraGrid.GridControl()
         Me.GVData = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -38,8 +38,8 @@ Partial Class FormFabricType
         '
         'PanelControlNavLineList
         '
-        Me.PanelControlNavLineList.Controls.Add(Me.SimpleButton2)
-        Me.PanelControlNavLineList.Controls.Add(Me.SimpleButton1)
+        Me.PanelControlNavLineList.Controls.Add(Me.BAdd)
+        Me.PanelControlNavLineList.Controls.Add(Me.BEdit)
         Me.PanelControlNavLineList.Controls.Add(Me.BtnView)
         Me.PanelControlNavLineList.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControlNavLineList.Location = New System.Drawing.Point(0, 0)
@@ -47,29 +47,29 @@ Partial Class FormFabricType
         Me.PanelControlNavLineList.Size = New System.Drawing.Size(911, 40)
         Me.PanelControlNavLineList.TabIndex = 4
         '
-        'SimpleButton2
+        'BAdd
         '
-        Me.SimpleButton2.Dock = System.Windows.Forms.DockStyle.Right
-        Me.SimpleButton2.Image = CType(resources.GetObject("SimpleButton2.Image"), System.Drawing.Image)
-        Me.SimpleButton2.ImageIndex = 15
-        Me.SimpleButton2.Location = New System.Drawing.Point(738, 2)
-        Me.SimpleButton2.LookAndFeel.SkinName = "Metropolis"
-        Me.SimpleButton2.Name = "SimpleButton2"
-        Me.SimpleButton2.Size = New System.Drawing.Size(80, 36)
-        Me.SimpleButton2.TabIndex = 96
-        Me.SimpleButton2.Text = "Add"
+        Me.BAdd.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BAdd.Image = CType(resources.GetObject("BAdd.Image"), System.Drawing.Image)
+        Me.BAdd.ImageIndex = 15
+        Me.BAdd.Location = New System.Drawing.Point(738, 2)
+        Me.BAdd.LookAndFeel.SkinName = "Metropolis"
+        Me.BAdd.Name = "BAdd"
+        Me.BAdd.Size = New System.Drawing.Size(80, 36)
+        Me.BAdd.TabIndex = 96
+        Me.BAdd.Text = "Add"
         '
-        'SimpleButton1
+        'BEdit
         '
-        Me.SimpleButton1.Dock = System.Windows.Forms.DockStyle.Right
-        Me.SimpleButton1.Image = CType(resources.GetObject("SimpleButton1.Image"), System.Drawing.Image)
-        Me.SimpleButton1.ImageIndex = 15
-        Me.SimpleButton1.Location = New System.Drawing.Point(818, 2)
-        Me.SimpleButton1.LookAndFeel.SkinName = "Metropolis"
-        Me.SimpleButton1.Name = "SimpleButton1"
-        Me.SimpleButton1.Size = New System.Drawing.Size(91, 36)
-        Me.SimpleButton1.TabIndex = 95
-        Me.SimpleButton1.Text = "Edit"
+        Me.BEdit.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BEdit.Image = CType(resources.GetObject("BEdit.Image"), System.Drawing.Image)
+        Me.BEdit.ImageIndex = 15
+        Me.BEdit.Location = New System.Drawing.Point(818, 2)
+        Me.BEdit.LookAndFeel.SkinName = "Metropolis"
+        Me.BEdit.Name = "BEdit"
+        Me.BEdit.Size = New System.Drawing.Size(91, 36)
+        Me.BEdit.TabIndex = 95
+        Me.BEdit.Text = "Edit"
         '
         'BtnView
         '
@@ -154,8 +154,8 @@ Partial Class FormFabricType
     End Sub
 
     Friend WithEvents PanelControlNavLineList As DevExpress.XtraEditors.PanelControl
-    Friend WithEvents SimpleButton2 As DevExpress.XtraEditors.SimpleButton
-    Friend WithEvents SimpleButton1 As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BAdd As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BEdit As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BtnView As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents GCData As DevExpress.XtraGrid.GridControl
     Friend WithEvents GVData As DevExpress.XtraGrid.Views.Grid.GridView

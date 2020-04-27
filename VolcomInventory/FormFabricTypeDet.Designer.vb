@@ -28,8 +28,8 @@ Partial Class FormFabricTypeDet
         Me.TEAge = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
-        Me.BSave = New DevExpress.XtraEditors.SimpleButton()
         Me.BCancel = New DevExpress.XtraEditors.SimpleButton()
+        Me.BSave = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.TEFabricType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEFabrication.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEAge.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -102,16 +102,6 @@ Partial Class FormFabricTypeDet
         Me.PanelControl1.Size = New System.Drawing.Size(499, 38)
         Me.PanelControl1.TabIndex = 7
         '
-        'BSave
-        '
-        Me.BSave.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BSave.Image = CType(resources.GetObject("BSave.Image"), System.Drawing.Image)
-        Me.BSave.Location = New System.Drawing.Point(394, 2)
-        Me.BSave.Name = "BSave"
-        Me.BSave.Size = New System.Drawing.Size(103, 34)
-        Me.BSave.TabIndex = 0
-        Me.BSave.Text = "Save"
-        '
         'BCancel
         '
         Me.BCancel.Dock = System.Windows.Forms.DockStyle.Right
@@ -121,6 +111,16 @@ Partial Class FormFabricTypeDet
         Me.BCancel.Size = New System.Drawing.Size(99, 34)
         Me.BCancel.TabIndex = 1
         Me.BCancel.Text = "Cancel"
+        '
+        'BSave
+        '
+        Me.BSave.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BSave.Image = CType(resources.GetObject("BSave.Image"), System.Drawing.Image)
+        Me.BSave.Location = New System.Drawing.Point(394, 2)
+        Me.BSave.Name = "BSave"
+        Me.BSave.Size = New System.Drawing.Size(103, 34)
+        Me.BSave.TabIndex = 0
+        Me.BSave.Text = "Save"
         '
         'FormFabricTypeDet
         '

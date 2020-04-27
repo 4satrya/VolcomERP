@@ -38,4 +38,16 @@
         GCData.DataSource = dt
         GVData.BestFitColumns()
     End Sub
+
+    Private Sub BAdd_Click(sender As Object, e As EventArgs) Handles BAdd.Click
+        FormFabricTypeDet.id = "-1"
+        FormFabricTypeDet.ShowDialog()
+    End Sub
+
+    Private Sub BEdit_Click(sender As Object, e As EventArgs) Handles BEdit.Click
+        If GVData.RowCount > 0 Then
+            FormFabricTypeDet.id = GVData.GetFocusedRowCellValue("id_fabric_type").ToString
+            FormFabricTypeDet.ShowDialog()
+        End If
+    End Sub
 End Class

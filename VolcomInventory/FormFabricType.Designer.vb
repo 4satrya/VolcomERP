@@ -112,7 +112,7 @@ Partial Class FormFabricType
         'GridColumncode
         '
         Me.GridColumncode.Caption = "Fabric Type"
-        Me.GridColumncode.FieldName = "fabric_type"
+        Me.GridColumncode.FieldName = "fabric_type_name"
         Me.GridColumncode.Name = "GridColumncode"
         Me.GridColumncode.Visible = True
         Me.GridColumncode.VisibleIndex = 0

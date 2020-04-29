@@ -154,8 +154,12 @@
 
         Dim sku As String = ""
 
+        Dim sku_copy As String = ""
+
         For i = 0 To data_d.Rows.Count - 1
             sku += data_d.Rows(i)("sku").ToString + ", "
+
+            sku_copy += data_d.Rows(i)("sku").ToString + Environment.NewLine
 
             execute_non_query("
                 INSERT INTO tb_m_product_shopify_duplicate (variant_id, sku, product_id, inventory_item_id, `date`)
@@ -167,6 +171,10 @@
 
         If Not sku = "" Then
             warningCustom("Duplicate SKU: " + sku.Substring(0, sku.Length - 2) + ". Please make sure there are no duplicate sku on the website and Sync again.")
+
+            My.Computer.Clipboard.SetText(sku_copy)
+
+            infoCustom("SKU copied to clipboard.")
         End If
 
         Return If(sku = "", True, False)

@@ -547,11 +547,16 @@ Public Class FormMain
                 FormMasterStateSingle.id_state = "-1"
                 FormMasterStateSingle.id_region = FormMasterArea.GVRegion.GetFocusedRowCellDisplayText("id_region").ToString
                 FormMasterStateSingle.ShowDialog()
-            Else
+            ElseIf FormMasterArea.XTCArea.SelectedTabPageIndex = 3 Then
                 'city
                 FormMasterCitySingle.id_city = "-1"
                 FormMasterCitySingle.id_state = FormMasterArea.GVState.GetFocusedRowCellDisplayText("id_state").ToString
                 FormMasterCitySingle.ShowDialog()
+            Else
+                'kecamatan
+                FormKecamatanSingle.id_sub_district = "-1"
+                FormKecamatanSingle.id_city = FormMasterArea.GVCity.GetFocusedRowCellDisplayText("id_city").ToString
+                FormKecamatanSingle.ShowDialog()
             End If
         ElseIf formName = "FormMasterCompany" Then
             'COMPANY
@@ -1786,11 +1791,16 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
                     FormMasterStateSingle.id_region = FormMasterArea.GVRegion.GetFocusedRowCellDisplayText("id_region").ToString
                     FormMasterStateSingle.id_state = FormMasterArea.GVState.GetFocusedRowCellDisplayText("id_state").ToString
                     FormMasterStateSingle.ShowDialog()
-                Else
+                ElseIf FormMasterArea.XTCArea.SelectedTabPageIndex = 3 Then
                     'city
                     FormMasterCitySingle.id_state = FormMasterArea.GVState.GetFocusedRowCellDisplayText("id_state").ToString
                     FormMasterCitySingle.id_city = FormMasterArea.GVCity.GetFocusedRowCellDisplayText("id_city").ToString
                     FormMasterCitySingle.ShowDialog()
+                Else
+                    'kecamatan
+                    FormKecamatanSingle.id_sub_district = FormMasterArea.GVKecamatan.GetFocusedRowCellDisplayText("id_sub_district").ToString
+                    FormKecamatanSingle.id_city = FormMasterArea.GVCity.GetFocusedRowCellDisplayText("id_city").ToString
+                    FormKecamatanSingle.ShowDialog()
                 End If
             ElseIf formName = "FormMasterCompany" Then
                 '
@@ -2985,7 +2995,7 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
                     End Try
                     Cursor = Cursors.Default
                 End If
-            Else
+            ElseIf FormMasterArea.XTCArea.SelectedTabPageIndex = 3 Then
                 'city
                 confirm = XtraMessageBox.Show("Are you sure want to delete this city?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
 
@@ -2998,6 +3008,22 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
                         FormMasterArea.view_city(FormMasterArea.GVState.GetFocusedRowCellDisplayText("id_state").ToString)
                     Catch ex As Exception
                         XtraMessageBox.Show("This city already used.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End Try
+                    Cursor = Cursors.Default
+                End If
+            Else
+                'kecamatan
+                confirm = XtraMessageBox.Show("Are you sure want to delete this sub district (kecamatan)?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+
+                Dim id_kecamatan As String = FormMasterArea.GVKecamatan.GetFocusedRowCellDisplayText("id_sub_district").ToString
+                If confirm = Windows.Forms.DialogResult.Yes Then
+                    Cursor = Cursors.WaitCursor
+                    Try
+                        query = String.Format("DELETE FROM tb_m_sub_district WHERE id_sub_district = '{0}'", id_kecamatan)
+                        execute_non_query(query, True, "", "", "", "")
+                        FormMasterArea.view_kecamatan(FormMasterArea.GVCity.GetFocusedRowCellDisplayText("id_city").ToString)
+                    Catch ex As Exception
+                        XtraMessageBox.Show("This sub district (kecamatan) already used.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     End Try
                     Cursor = Cursors.Default
                 End If
@@ -6262,11 +6288,17 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
                 'country
                 print(FormMasterArea.GCCountry, "List Country")
             ElseIf FormMasterArea.XTCArea.SelectedTabPageIndex = 1 Then
+                'region
+                print(FormMasterArea.GCRegion, "List Region of " & FormMasterArea.GVCountry.GetFocusedRowCellDisplayText("country").ToString)
+            ElseIf FormMasterArea.XTCArea.SelectedTabPageIndex = 2 Then
                 'state
-                print(FormMasterArea.GCState, "List State of " & FormMasterArea.GVCountry.GetFocusedRowCellDisplayText("country").ToString)
-            Else
+                print(FormMasterArea.GCState, "List State of " & FormMasterArea.GVRegion.GetFocusedRowCellDisplayText("region").ToString)
+            ElseIf FormMasterArea.XTCArea.SelectedTabPageIndex = 3 Then
                 'city
                 print(FormMasterArea.GCCity, "List City of " & FormMasterArea.GVState.GetFocusedRowCellDisplayText("state").ToString)
+            Else
+                'kecamatan
+                print(FormMasterArea.GCKecamatan, "List Sub District (Kecamatan) of " & FormMasterArea.GVCity.GetFocusedRowCellDisplayText("city").ToString)
             End If
         ElseIf formName = "FormMasterCompany" Then
             '
@@ -8989,6 +9021,9 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
         ElseIf formName = "FormCompareStockWebsite" Then
             FormCompareStockWebsite.Close()
             FormCompareStockWebsite.Dispose()
+        ElseIf formName = "FormItemTrf" Then
+            FormItemTrf.Close()
+            FormItemTrf.Dispose()
         Else
             RPSubMenu.Visible = False
         End If
@@ -14688,6 +14723,19 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             FormCompareStockWebsite.Show()
             FormCompareStockWebsite.WindowState = FormWindowState.Maximized
             FormCompareStockWebsite.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBItemTrf_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBItemTrf.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormItemTrf.MdiParent = Me
+            FormItemTrf.Show()
+            FormItemTrf.WindowState = FormWindowState.Maximized
+            FormItemTrf.Focus()
         Catch ex As Exception
             errorProcess()
         End Try

@@ -3430,7 +3430,7 @@
   <data name="NBTabunganMissing.SmallImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        EQAACxEBf2RfkQAAAA90RVh0VGl0bGUAQm9vaztSZWFky8MmvQAAAGZJREFUOE+lkkEOgDAIBPsn3uFr
+        EAAACxABrSO9dQAAAA90RVh0VGl0bGUAQm9vaztSZWFky8MmvQAAAGZJREFUOE+lkkEOgDAIBPsn3uFr
         fSAqkYN1Nummh6HJAsOlIzO3wNChSkSk4Hih3r36FTzvTA9jjwTnRA9TjgIHFNAllaPAAQV0SeUocEAB
         XVI5Chx+AmL5Jyp6mHq1W2UHDNfJcQFkR7DWidF8nwAAAABJRU5ErkJggg==
 </value>
@@ -4067,6 +4067,23 @@
         TH3oN4e0bZzSWoX3v9E0sS5QbLad9HNamkj37SkWzRyGmWVKYUlhRcGajbkyiXWlOm0D7cwZ8RL2kIDN
         Cp7NMzFw/x7J/2FWRBDmya6M8LLULTdbKKGx4XZGi1fO5MwnzQddZhQ2FHYUi+fug/wBGUEqEeczMV4A
         AAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="NBItemTrf.SmallImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAA0dEVYdFRpdGxlAFNxdWVlemU7VHJhbnNmb3JtO0ZpdDtTbWFsbDtEZWNyZWFzZTtDb2xsYXBz
+        ZTu/WMP9AAACbUlEQVQ4T42Q7UtTYRjGH+3F117+kCh7+yBa5KZuZ29nm5pp6eZ0Y1pmIxapNDkTjQwt
+        UHrT/GAlOIW+VPihTJdZopalBVKiCRYUaEH59eq+51jK+dKB65zD/fye3/WcIwBsCl1xlC2UrdFsiz55
+        FqfiVQMCW0P24WsDdrT1U0J2tIZsaOm1DrNIxasG1NgasuLn2ixW195HsrI2jSu9Zl7cruJVA4JaemWs
+        /HmLyaUgJpYULK4MoKnHyIsJKp5v8olzlBohF9awIKH5nhHff4/j1eIljC3U49OPB1C69SxItJ88L2zF
+        PmEt8m0QHD8TMBecFqb8KhYkBrslfP01ghefLyA878fHb10I3NGxIClSVlgtLLQnJjDZK2G0ewMGmzci
+        CHTqsLQ6iGdzNXg6dxbTyx2ovallQbJlvShgyqukrVGBweaBJHuglysC3FJ3Q0vH7seTDx48nnXj9UIT
+        /O3HIgIuMtq8MFg9/wQ6uRy5ForZpTDE8MxyJ0JT+eibzMPQnB++tiMsSJGsbkUvu6EjPibIMZUh21Sm
+        ZJucxIgUX9tRTHy5jvvjFoqZTlKF6pYMFqTmmstFDhXxnphAa3AqWoNDaCQHC1Krr2ZgdL4R3WM63H2p
+        w8N3Lnib01mwg4pEttFBexxKTKCRSkSWfj0MeS+n08+7iNthDW6Fs9A3VYiK4CEW7OQSjVQaYWOCjWGB
+        u/EwHs1UoeN5JtqHMtEzLqOs4WBEoOJVAxK4Gg5g4I2TPsFAnyCha1SP0vr9/y1IKvLvHSmtT0NJXRpO
+        UYpr96HAtydMa8kqXjUQIp5Byi7K7mj4nWfxm3mIv0isFsVjNsi+AAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="NBPurcPayment.SmallImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -8243,6 +8260,6 @@
     <value>1150, 17</value>
   </metadata>
   <metadata name="AdornerUIManager1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1260, 17</value>
+    <value>17, 56</value>
   </metadata>
 </root>

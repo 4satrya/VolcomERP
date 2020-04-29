@@ -57,6 +57,14 @@ Partial Class FormMasterArea
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.LState = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.XTKecamatan = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCKecamatan = New DevExpress.XtraGrid.GridControl()
+        Me.GVKecamatan = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.LCity = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XTCArea, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCArea.SuspendLayout()
@@ -77,6 +85,10 @@ Partial Class FormMasterArea
         CType(Me.GCCity, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVCity, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel3.SuspendLayout()
+        Me.XTKecamatan.SuspendLayout()
+        CType(Me.GCKecamatan, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVKecamatan, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel4.SuspendLayout()
         Me.SuspendLayout()
         '
         'LargeImageCollection
@@ -96,7 +108,7 @@ Partial Class FormMasterArea
         Me.XTCArea.SelectedTabPage = Me.XTCountry
         Me.XTCArea.Size = New System.Drawing.Size(807, 441)
         Me.XTCArea.TabIndex = 9
-        Me.XTCArea.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTCountry, Me.XTRegion, Me.XTState, Me.XTCity})
+        Me.XTCArea.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTCountry, Me.XTRegion, Me.XTState, Me.XTCity, Me.XTKecamatan})
         '
         'XTCountry
         '
@@ -400,6 +412,76 @@ Partial Class FormMasterArea
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "State : "
         '
+        'XTKecamatan
+        '
+        Me.XTKecamatan.Controls.Add(Me.GCKecamatan)
+        Me.XTKecamatan.Controls.Add(Me.Panel4)
+        Me.XTKecamatan.Name = "XTKecamatan"
+        Me.XTKecamatan.Size = New System.Drawing.Size(760, 435)
+        Me.XTKecamatan.Text = "Sub District (Kecamatan)"
+        '
+        'GCKecamatan
+        '
+        Me.GCKecamatan.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCKecamatan.Location = New System.Drawing.Point(0, 42)
+        Me.GCKecamatan.MainView = Me.GVKecamatan
+        Me.GCKecamatan.Name = "GCKecamatan"
+        Me.GCKecamatan.Size = New System.Drawing.Size(760, 393)
+        Me.GCKecamatan.TabIndex = 11
+        Me.GCKecamatan.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVKecamatan})
+        '
+        'GVKecamatan
+        '
+        Me.GVKecamatan.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2})
+        Me.GVKecamatan.GridControl = Me.GCKecamatan
+        Me.GVKecamatan.Name = "GVKecamatan"
+        Me.GVKecamatan.OptionsBehavior.Editable = False
+        Me.GVKecamatan.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn1
+        '
+        Me.GridColumn1.Caption = "ID"
+        Me.GridColumn1.FieldName = "id_sub_district"
+        Me.GridColumn1.Name = "GridColumn1"
+        '
+        'GridColumn2
+        '
+        Me.GridColumn2.Caption = "Sub District (Kecamatan)"
+        Me.GridColumn2.FieldName = "sub_district"
+        Me.GridColumn2.Name = "GridColumn2"
+        Me.GridColumn2.Visible = True
+        Me.GridColumn2.VisibleIndex = 0
+        '
+        'Panel4
+        '
+        Me.Panel4.Controls.Add(Me.LCity)
+        Me.Panel4.Controls.Add(Me.Label4)
+        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel4.Location = New System.Drawing.Point(0, 0)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(760, 42)
+        Me.Panel4.TabIndex = 10
+        '
+        'LCity
+        '
+        Me.LCity.AutoSize = True
+        Me.LCity.Font = New System.Drawing.Font("Calibri", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LCity.Location = New System.Drawing.Point(57, 8)
+        Me.LCity.Name = "LCity"
+        Me.LCity.Size = New System.Drawing.Size(18, 26)
+        Me.LCity.TabIndex = 2
+        Me.LCity.Text = "-"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Calibri", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(3, 8)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(61, 26)
+        Me.Label4.TabIndex = 1
+        Me.Label4.Text = "City : "
+        '
         'FormMasterArea
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -436,6 +518,11 @@ Partial Class FormMasterArea
         CType(Me.GVCity, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
+        Me.XTKecamatan.ResumeLayout(False)
+        CType(Me.GCKecamatan, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVKecamatan, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel4.ResumeLayout(False)
+        Me.Panel4.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -475,4 +562,12 @@ Partial Class FormMasterArea
     Friend WithEvents BtnDelete As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BtnEdit As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BtnAdd As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents XTKecamatan As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents GCKecamatan As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVKecamatan As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn2 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents Panel4 As Panel
+    Friend WithEvents LCity As Label
+    Friend WithEvents Label4 As Label
 End Class

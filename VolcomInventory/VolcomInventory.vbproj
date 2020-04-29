@@ -2328,6 +2328,12 @@
     <Compile Include="FormItemTrf.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormItemTrfAdd.Designer.vb">
+      <DependentUpon>FormItemTrfAdd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormItemTrfAdd.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormItemTrfDet.Designer.vb">
       <DependentUpon>FormItemTrfDet.vb</DependentUpon>
     </Compile>
@@ -9078,6 +9084,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormItemTrf.resx">
       <DependentUpon>FormItemTrf.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormItemTrfAdd.resx">
+      <DependentUpon>FormItemTrfAdd.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormItemTrfDet.resx">
       <DependentUpon>FormItemTrfDet.vb</DependentUpon>

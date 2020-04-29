@@ -58,7 +58,8 @@
         End If
 
         Dim stc As New ClassPurcItemStock()
-        Dim query As String = stc.queryGetStock(cond & " AND cat.is_only_transfer='2' ", "0", date_until_selected)
+        Dim id_wh_storage As String = get_purc_setup_field("id_comp_def_storage")
+        Dim query As String = stc.queryGetStock(cond & " AND cat.is_only_transfer='2' AND i.id_comp='" & id_wh_storage & "' ", "0", date_until_selected)
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
         'data

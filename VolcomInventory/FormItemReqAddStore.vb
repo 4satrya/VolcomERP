@@ -31,6 +31,7 @@
     Sub viewItem()
         Cursor = Cursors.WaitCursor
         Dim id_purc_store As String = get_purc_setup_field("id_purc_store")
+        Dim id_wh_storage As String = get_purc_setup_field("id_comp_def_storage")
 
         Dim id_item_cat As String = "-1"
 
@@ -53,6 +54,9 @@
             cond += " AND si.id_departement='" & id_departement & "' "
         End If
         '
+
+        cond += " AND si.id_comp='" & id_wh_storage & "' "
+
         Dim query As String = "SELECT si.id_item,i.`item_desc`,si.id_departement,SUM(IF(si.id_storage_category=1,si.storage_item_qty,-si.storage_item_qty)) AS qty, u.`uom`
 FROM tb_storage_item si
 INNER JOIN tb_item i ON i.`id_item`=si.`id_item`

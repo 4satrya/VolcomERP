@@ -10,9 +10,9 @@
             q_where += " AND cat.id_item_cat='" & cat & "' "
         End If
 
-        Dim query As String = "SELECT a.id_departement, cat.is_only_transfer, IFNULL(dept.departement,'All Departement') AS departement,a.id_item, im.item_desc, im.id_item_cat, cat.item_cat, SUM(a.qty) AS `qty`, 0.00 AS `qty_req`, IFNULL(cst.avg_cost,0) AS `value`, '' AS `remark`
+        Dim query As String = "SELECT a.id_departement, a.id_comp, cat.is_only_transfer, IFNULL(dept.departement,'All Departement') AS departement,a.id_item, im.item_desc, im.id_item_cat, cat.item_cat, SUM(a.qty) AS `qty`, 0.00 AS `qty_req`, IFNULL(cst.avg_cost,0) AS `value`, '' AS `remark`
         FROM (
-	        SELECT i.id_departement,i.id_item,
+	        SELECT i.id_comp,i.id_departement,i.id_item,
 	        SUM(IF(i.id_storage_category=2, CONCAT('-', i.storage_item_qty), i.storage_item_qty)) AS `qty`
 	        FROM tb_storage_item i
             INNER JOIN tb_item im ON im.id_item = i.id_item

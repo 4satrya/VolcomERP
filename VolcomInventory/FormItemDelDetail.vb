@@ -70,6 +70,8 @@
 
     Private Function getRmg(ByVal cond As String) As DataTable
         Dim id_purc_store As String = get_purc_setup_field("id_purc_store")
+        Dim id_wh_storage As String = get_purc_setup_field("id_comp_def_storage")
+
         Dim query As String = "SELECT rd.id_item_req_det, rd.id_item_req, rd.id_item, i.item_desc, u.uom, rd.id_prepare_status, ps.prepare_status, rd.final_reason, IF(rd.is_store_request=1,IF(si.qty>(rd.qty-IFNULL(dq.qty_del,0.0)),(rd.qty-IFNULL(dq.qty_del,0.0)),si.qty),(rd.qty-IFNULL(dq.qty_del,0.0))) AS `qty`,rd.qty AS `qty_request`,IFNULL(dq.qty_del,0.0) AS `qty_delivered`, 
                             IF(rd.is_store_request=1,IF(si.qty>(rd.qty-IFNULL(dq.qty_del,0.0)),(rd.qty-IFNULL(dq.qty_del,0.0)),si.qty),(rd.qty-IFNULL(dq.qty_del,0.0))) AS qty_limit,si.qty AS stok,
                             '' AS remark, '' AS `stt`,IF(rd.is_store_request=1,'yes','no') as is_store_request
@@ -88,6 +90,7 @@
                             (
 	                            SELECT id_departement,id_storage_category,id_item,SUM(IF(id_storage_category=1,storage_item_qty,-storage_item_qty)) AS qty
 	                            FROM `tb_storage_item` si
+                                WHERE si.id_comp='" & id_wh_storage & "'
 	                            GROUP BY si.`id_item`,si.`id_departement`
                             ) si ON si.id_departement=IF(rd.`is_store_request`=1," & id_purc_store & ",r.`id_departement`) AND si.id_item=rd.`id_item`
                             INNER JOIN tb_lookup_prepare_status ps ON ps.id_prepare_status = rd.id_prepare_status

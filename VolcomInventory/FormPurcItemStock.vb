@@ -9,6 +9,7 @@
         DESOHUntil.EditValue = dt
         DEFromSC.EditValue = dt
         DEUntilSC.EditValue = dt
+        view_storage()
         viewItem()
         viewDept()
         viewCat()
@@ -16,6 +17,13 @@
         '
         DEStart.EditValue = Now
         DEUntil.EditValue = Now
+    End Sub
+
+    Sub view_storage()
+        Dim q As String = "SELECT 0 as id_comp,'-' AS comp_number,'All Storage' as comp_name
+UNION
+SELECT id_comp,comp_number,comp_name FROM tb_m_comp WHERE id_comp_cat='9'"
+        viewSearchLookupQuery(SLEStorage, q, "id_comp", "comp_name", "id_comp")
     End Sub
 
     Sub viewItem()
@@ -74,17 +82,23 @@
         Catch ex As Exception
         End Try
 
+        Dim cond As String = ""
+
         Dim dept As String = LEDeptSum.EditValue.ToString
         Dim cat As String = LECat.EditValue.ToString
         '
         If dept <> "0" Then
-            dept = "AND i.id_departement=" + dept + ""
+            cond += "AND i.id_departement=" + dept + ""
         Else
-            dept = ""
+            cond += ""
+        End If
+
+        If Not SLEStorage.EditValue.ToString = "0" Then
+            cond += "AND i.id_comp=" + SLEStorage.EditValue.ToString + ""
         End If
 
         Dim stc As New ClassPurcItemStock()
-        Dim query As String = stc.queryGetStock(dept, cat, date_until_selected)
+        Dim query As String = stc.queryGetStock(cond, cat, date_until_selected)
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCSOH.DataSource = data
         GVSOH.BestFitColumns()

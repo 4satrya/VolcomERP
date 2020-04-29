@@ -60,6 +60,16 @@ Partial Class FormItemTrfDet
         Me.GridColumnQty = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnStt = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RICEPurcStorage = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.SLEDepFrom = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView3 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl7 = New DevExpress.XtraEditors.LabelControl()
+        Me.SLEDepTo = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView4 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl8 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.PanelControlBottom, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlBottom.SuspendLayout()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -84,6 +94,10 @@ Partial Class FormItemTrfDet
         CType(Me.GCData, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVData, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RICEPurcStorage, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SLEDepFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SLEDepTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControlBottom
@@ -208,6 +222,10 @@ Partial Class FormItemTrfDet
         '
         'PanelControl1
         '
+        Me.PanelControl1.Controls.Add(Me.SLEDepTo)
+        Me.PanelControl1.Controls.Add(Me.LabelControl8)
+        Me.PanelControl1.Controls.Add(Me.SLEDepFrom)
+        Me.PanelControl1.Controls.Add(Me.LabelControl7)
         Me.PanelControl1.Controls.Add(Me.SLEStorageTo)
         Me.PanelControl1.Controls.Add(Me.SLEStorageFrom)
         Me.PanelControl1.Controls.Add(Me.LabelControl2)
@@ -225,7 +243,7 @@ Partial Class FormItemTrfDet
         Me.SLEStorageTo.Name = "SLEStorageTo"
         Me.SLEStorageTo.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.SLEStorageTo.Properties.View = Me.GridView2
-        Me.SLEStorageTo.Size = New System.Drawing.Size(301, 20)
+        Me.SLEStorageTo.Size = New System.Drawing.Size(231, 20)
         Me.SLEStorageTo.TabIndex = 29
         '
         'GridView2
@@ -266,7 +284,7 @@ Partial Class FormItemTrfDet
         Me.SLEStorageFrom.Name = "SLEStorageFrom"
         Me.SLEStorageFrom.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.SLEStorageFrom.Properties.View = Me.GridView1
-        Me.SLEStorageFrom.Size = New System.Drawing.Size(301, 20)
+        Me.SLEStorageFrom.Size = New System.Drawing.Size(231, 20)
         Me.SLEStorageFrom.TabIndex = 28
         '
         'GridView1
@@ -480,6 +498,84 @@ Partial Class FormItemTrfDet
         Me.RICEPurcStorage.ValueChecked = "yes"
         Me.RICEPurcStorage.ValueUnchecked = "no"
         '
+        'SLEDepFrom
+        '
+        Me.SLEDepFrom.Location = New System.Drawing.Point(397, 10)
+        Me.SLEDepFrom.Name = "SLEDepFrom"
+        Me.SLEDepFrom.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEDepFrom.Properties.View = Me.GridView3
+        Me.SLEDepFrom.Size = New System.Drawing.Size(177, 20)
+        Me.SLEDepFrom.TabIndex = 8914
+        '
+        'GridView3
+        '
+        Me.GridView3.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn4, Me.GridColumn5})
+        Me.GridView3.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView3.Name = "GridView3"
+        Me.GridView3.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView3.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn4
+        '
+        Me.GridColumn4.Caption = "ID Departement"
+        Me.GridColumn4.FieldName = "id_departement"
+        Me.GridColumn4.Name = "GridColumn4"
+        '
+        'GridColumn5
+        '
+        Me.GridColumn5.Caption = "Departement"
+        Me.GridColumn5.FieldName = "departement"
+        Me.GridColumn5.Name = "GridColumn5"
+        Me.GridColumn5.Visible = True
+        Me.GridColumn5.VisibleIndex = 0
+        '
+        'LabelControl7
+        '
+        Me.LabelControl7.Location = New System.Drawing.Point(328, 13)
+        Me.LabelControl7.Name = "LabelControl7"
+        Me.LabelControl7.Size = New System.Drawing.Size(63, 13)
+        Me.LabelControl7.TabIndex = 8913
+        Me.LabelControl7.Text = "Departement"
+        '
+        'SLEDepTo
+        '
+        Me.SLEDepTo.Location = New System.Drawing.Point(397, 36)
+        Me.SLEDepTo.Name = "SLEDepTo"
+        Me.SLEDepTo.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEDepTo.Properties.View = Me.GridView4
+        Me.SLEDepTo.Size = New System.Drawing.Size(177, 20)
+        Me.SLEDepTo.TabIndex = 8916
+        '
+        'GridView4
+        '
+        Me.GridView4.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn6, Me.GridColumn7})
+        Me.GridView4.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView4.Name = "GridView4"
+        Me.GridView4.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView4.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn6
+        '
+        Me.GridColumn6.Caption = "ID Departement"
+        Me.GridColumn6.FieldName = "id_departement"
+        Me.GridColumn6.Name = "GridColumn6"
+        '
+        'GridColumn7
+        '
+        Me.GridColumn7.Caption = "Departement"
+        Me.GridColumn7.FieldName = "departement"
+        Me.GridColumn7.Name = "GridColumn7"
+        Me.GridColumn7.Visible = True
+        Me.GridColumn7.VisibleIndex = 0
+        '
+        'LabelControl8
+        '
+        Me.LabelControl8.Location = New System.Drawing.Point(328, 39)
+        Me.LabelControl8.Name = "LabelControl8"
+        Me.LabelControl8.Size = New System.Drawing.Size(63, 13)
+        Me.LabelControl8.TabIndex = 8915
+        Me.LabelControl8.Text = "Departement"
+        '
         'FormItemTrfDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -524,6 +620,10 @@ Partial Class FormItemTrfDet
         CType(Me.GCData, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVData, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RICEPurcStorage, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SLEDepFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SLEDepTo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -568,4 +668,14 @@ Partial Class FormItemTrfDet
     Friend WithEvents GridColumn12 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn13 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn14 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents SLEDepTo As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView4 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn7 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LabelControl8 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents SLEDepFrom As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView3 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LabelControl7 As DevExpress.XtraEditors.LabelControl
 End Class

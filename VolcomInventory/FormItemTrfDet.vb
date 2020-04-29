@@ -11,6 +11,14 @@
         viewSearchLookupQuery(SLEStorageTo, q, "id_comp", "comp_name", "id_comp")
     End Sub
 
+    Sub view_departement()
+        Dim query As String = "SELECT '0' AS id_departement,'Purchasing Storage' AS departement
+UNION
+SELECT id_departement,departement FROM tb_m_departement"
+        viewSearchLookupQuery(SLEDepFrom, query, "id_departement", "departement", "id_departement")
+        viewSearchLookupQuery(SLEDepTo, query, "id_departement", "departement", "id_departement")
+    End Sub
+
     Sub viewReportStatus()
         Dim query As String = "SELECT * FROM tb_lookup_report_status a ORDER BY a.id_report_status "
         'Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")

@@ -23,11 +23,14 @@
 
     Private Sub SBSync_Click(sender As Object, e As EventArgs) Handles SBSync.Click
         Cursor = Cursors.WaitCursor
+        FormMain.SplashScreenManager1.ShowWaitForm()
 
+        FormMain.SplashScreenManager1.SetWaitFormDescription("Get stock from website")
         Dim cls As ClassShopifyApi = New ClassShopifyApi
 
         cls.sync_stock()
 
+        FormMain.SplashScreenManager1.SetWaitFormDescription("Compare stock with ERP")
         Dim query As String = "CALL view_stock_compare_erp_shopify()"
 
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
@@ -35,7 +38,7 @@
         GridControlStock.DataSource = data
 
         GridViewStock.BestFitColumns()
-
+        FormMain.SplashScreenManager1.CloseWaitForm()
         Cursor = Cursors.Default
     End Sub
 

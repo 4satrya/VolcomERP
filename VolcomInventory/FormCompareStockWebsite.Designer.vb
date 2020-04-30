@@ -21,6 +21,7 @@ Partial Class FormCompareStockWebsite
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormCompareStockWebsite))
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.SBExport = New DevExpress.XtraEditors.SimpleButton()
         Me.SBSync = New DevExpress.XtraEditors.SimpleButton()
         Me.GridControlStock = New DevExpress.XtraGrid.GridControl()
         Me.GridViewStock = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -32,7 +33,6 @@ Partial Class FormCompareStockWebsite
         Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.SBExport = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.GridControlStock, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -48,6 +48,16 @@ Partial Class FormCompareStockWebsite
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(784, 40)
         Me.PanelControl1.TabIndex = 0
+        '
+        'SBExport
+        '
+        Me.SBExport.Dock = System.Windows.Forms.DockStyle.Right
+        Me.SBExport.Image = CType(resources.GetObject("SBExport.Image"), System.Drawing.Image)
+        Me.SBExport.Location = New System.Drawing.Point(551, 2)
+        Me.SBExport.Name = "SBExport"
+        Me.SBExport.Size = New System.Drawing.Size(94, 36)
+        Me.SBExport.TabIndex = 1
+        Me.SBExport.Text = "Export XLS"
         '
         'SBSync
         '
@@ -74,6 +84,9 @@ Partial Class FormCompareStockWebsite
         Me.GridViewStock.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumn7, Me.GridColumn8})
         Me.GridViewStock.GridControl = Me.GridControlStock
         Me.GridViewStock.Name = "GridViewStock"
+        Me.GridViewStock.OptionsBehavior.ReadOnly = True
+        Me.GridViewStock.OptionsFind.AlwaysVisible = True
+        Me.GridViewStock.OptionsView.ShowFooter = True
         Me.GridViewStock.OptionsView.ShowGroupPanel = False
         '
         'GridColumn1
@@ -103,32 +116,44 @@ Partial Class FormCompareStockWebsite
         'GridColumn4
         '
         Me.GridColumn4.Caption = "Qty (normal)"
+        Me.GridColumn4.DisplayFormat.FormatString = "N0"
+        Me.GridColumn4.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn4.FieldName = "qty_acc_normal"
         Me.GridColumn4.Name = "GridColumn4"
+        Me.GridColumn4.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_acc_normal", "{0:N0}")})
         Me.GridColumn4.Visible = True
         Me.GridColumn4.VisibleIndex = 3
         '
         'GridColumn5
         '
         Me.GridColumn5.Caption = "Qty (sale)"
+        Me.GridColumn5.DisplayFormat.FormatString = "N0"
+        Me.GridColumn5.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn5.FieldName = "qty_acc_sale"
         Me.GridColumn5.Name = "GridColumn5"
+        Me.GridColumn5.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_acc_sale", "{0:N0}")})
         Me.GridColumn5.Visible = True
         Me.GridColumn5.VisibleIndex = 4
         '
         'GridColumn6
         '
         Me.GridColumn6.Caption = "Qty (total)"
+        Me.GridColumn6.DisplayFormat.FormatString = "N0"
+        Me.GridColumn6.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn6.FieldName = "qty_acc_total"
         Me.GridColumn6.Name = "GridColumn6"
+        Me.GridColumn6.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_acc_total", "{0:N0}")})
         Me.GridColumn6.Visible = True
         Me.GridColumn6.VisibleIndex = 5
         '
         'GridColumn7
         '
         Me.GridColumn7.Caption = "Qty (web)"
+        Me.GridColumn7.DisplayFormat.FormatString = "N0"
+        Me.GridColumn7.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn7.FieldName = "qty_web"
         Me.GridColumn7.Name = "GridColumn7"
+        Me.GridColumn7.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_web", "{0:N0}")})
         Me.GridColumn7.Visible = True
         Me.GridColumn7.VisibleIndex = 6
         '
@@ -139,16 +164,6 @@ Partial Class FormCompareStockWebsite
         Me.GridColumn8.Name = "GridColumn8"
         Me.GridColumn8.Visible = True
         Me.GridColumn8.VisibleIndex = 7
-        '
-        'SBExport
-        '
-        Me.SBExport.Dock = System.Windows.Forms.DockStyle.Right
-        Me.SBExport.Image = CType(resources.GetObject("SBExport.Image"), System.Drawing.Image)
-        Me.SBExport.Location = New System.Drawing.Point(551, 2)
-        Me.SBExport.Name = "SBExport"
-        Me.SBExport.Size = New System.Drawing.Size(94, 36)
-        Me.SBExport.TabIndex = 1
-        Me.SBExport.Text = "Export XLS"
         '
         'FormCompareStockWebsite
         '

@@ -19,15 +19,16 @@ Partial Class FormMasterCompanySingle
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMasterCompanySingle))
-        Me.EPCompany = New System.Windows.Forms.ErrorProvider()
+        Me.EPCompany = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.GroupControl3 = New DevExpress.XtraEditors.GroupControl()
         Me.SLEAnnotation = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView3 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn19 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn20 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.BCPSetup = New DevExpress.XtraEditors.SimpleButton()
-        Me.LargeImageCollection = New DevExpress.Utils.ImageCollection()
+        Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
         Me.TECPEmail = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl36 = New DevExpress.XtraEditors.LabelControl()
         Me.TECPPosition = New DevExpress.XtraEditors.TextEdit()
@@ -55,7 +56,6 @@ Partial Class FormMasterCompanySingle
         Me.BCancel = New DevExpress.XtraEditors.SimpleButton()
         Me.BSave = New DevExpress.XtraEditors.SimpleButton()
         Me.GroupControl2 = New DevExpress.XtraEditors.GroupControl()
-        Me.LabelControl44 = New DevExpress.XtraEditors.LabelControl()
         Me.LEDistrict = New DevExpress.XtraEditors.LookUpEdit()
         Me.LabelControl43 = New DevExpress.XtraEditors.LabelControl()
         Me.LERegion = New DevExpress.XtraEditors.LookUpEdit()
@@ -319,9 +319,9 @@ Partial Class FormMasterCompanySingle
         Me.GroupControl3.Controls.Add(Me.TECPName)
         Me.GroupControl3.Controls.Add(Me.LabelControl10)
         Me.GroupControl3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GroupControl3.Location = New System.Drawing.Point(0, 511)
+        Me.GroupControl3.Location = New System.Drawing.Point(0, 505)
         Me.GroupControl3.Name = "GroupControl3"
-        Me.GroupControl3.Size = New System.Drawing.Size(639, 117)
+        Me.GroupControl3.Size = New System.Drawing.Size(639, 123)
         Me.GroupControl3.TabIndex = 14
         Me.GroupControl3.Text = "Contact Person"
         '
@@ -364,7 +364,7 @@ Partial Class FormMasterCompanySingle
         Me.BCPSetup.Appearance.Options.UseFont = True
         Me.BCPSetup.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.BCPSetup.ImageList = Me.LargeImageCollection
-        Me.BCPSetup.Location = New System.Drawing.Point(2, 90)
+        Me.BCPSetup.Location = New System.Drawing.Point(2, 96)
         Me.BCPSetup.Name = "BCPSetup"
         Me.BCPSetup.Size = New System.Drawing.Size(635, 25)
         Me.BCPSetup.TabIndex = 13
@@ -649,7 +649,6 @@ Partial Class FormMasterCompanySingle
         '
         'GroupControl2
         '
-        Me.GroupControl2.Controls.Add(Me.LabelControl44)
         Me.GroupControl2.Controls.Add(Me.LEDistrict)
         Me.GroupControl2.Controls.Add(Me.LabelControl43)
         Me.GroupControl2.Controls.Add(Me.LERegion)
@@ -669,56 +668,47 @@ Partial Class FormMasterCompanySingle
         Me.GroupControl2.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupControl2.Location = New System.Drawing.Point(0, 320)
         Me.GroupControl2.Name = "GroupControl2"
-        Me.GroupControl2.Size = New System.Drawing.Size(639, 191)
+        Me.GroupControl2.Size = New System.Drawing.Size(639, 185)
         Me.GroupControl2.TabIndex = 13
         Me.GroupControl2.Text = "Address"
         '
-        'LabelControl44
-        '
-        Me.LabelControl44.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl44.Location = New System.Drawing.Point(334, 165)
-        Me.LabelControl44.Name = "LabelControl44"
-        Me.LabelControl44.Size = New System.Drawing.Size(61, 13)
-        Me.LabelControl44.TabIndex = 25
-        Me.LabelControl44.Text = "(Kecamatan)"
-        '
         'LEDistrict
         '
-        Me.LEDistrict.Location = New System.Drawing.Point(398, 143)
+        Me.LEDistrict.Location = New System.Drawing.Point(443, 143)
         Me.LEDistrict.Name = "LEDistrict"
         Me.LEDistrict.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LEDistrict.Properties.Appearance.Options.UseFont = True
         Me.LEDistrict.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.LEDistrict.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_sub_district", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("sub_district", "Sub District")})
         Me.LEDistrict.Properties.NullText = ""
-        Me.LEDistrict.Size = New System.Drawing.Size(221, 20)
+        Me.LEDistrict.Size = New System.Drawing.Size(176, 20)
         Me.LEDistrict.TabIndex = 24
         '
         'LabelControl43
         '
         Me.LabelControl43.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl43.Location = New System.Drawing.Point(335, 146)
+        Me.LabelControl43.Location = New System.Drawing.Point(319, 146)
         Me.LabelControl43.Name = "LabelControl43"
-        Me.LabelControl43.Size = New System.Drawing.Size(54, 13)
+        Me.LabelControl43.Size = New System.Drawing.Size(118, 13)
         Me.LabelControl43.TabIndex = 23
-        Me.LabelControl43.Text = "Sub District"
+        Me.LabelControl43.Text = "Sub District (Kecamatan)"
         '
         'LERegion
         '
-        Me.LERegion.Location = New System.Drawing.Point(398, 58)
+        Me.LERegion.Location = New System.Drawing.Point(443, 58)
         Me.LERegion.Name = "LERegion"
         Me.LERegion.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LERegion.Properties.Appearance.Options.UseFont = True
         Me.LERegion.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.LERegion.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_region", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("region", "Region")})
         Me.LERegion.Properties.NullText = ""
-        Me.LERegion.Size = New System.Drawing.Size(221, 20)
+        Me.LERegion.Size = New System.Drawing.Size(176, 20)
         Me.LERegion.TabIndex = 16
         '
         'LabelControl18
         '
         Me.LabelControl18.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl18.Location = New System.Drawing.Point(335, 61)
+        Me.LabelControl18.Location = New System.Drawing.Point(319, 61)
         Me.LabelControl18.Name = "LabelControl18"
         Me.LabelControl18.Size = New System.Drawing.Size(33, 13)
         Me.LabelControl18.TabIndex = 22
@@ -726,44 +716,44 @@ Partial Class FormMasterCompanySingle
         '
         'LECity
         '
-        Me.LECity.Location = New System.Drawing.Point(398, 116)
+        Me.LECity.Location = New System.Drawing.Point(443, 116)
         Me.LECity.Name = "LECity"
         Me.LECity.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LECity.Properties.Appearance.Options.UseFont = True
         Me.LECity.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.LECity.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_city", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("city", "City")})
         Me.LECity.Properties.NullText = ""
-        Me.LECity.Size = New System.Drawing.Size(221, 20)
+        Me.LECity.Size = New System.Drawing.Size(176, 20)
         Me.LECity.TabIndex = 18
         '
         'LEState
         '
-        Me.LEState.Location = New System.Drawing.Point(398, 87)
+        Me.LEState.Location = New System.Drawing.Point(443, 87)
         Me.LEState.Name = "LEState"
         Me.LEState.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LEState.Properties.Appearance.Options.UseFont = True
         Me.LEState.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.LEState.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_state", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("state", "State")})
         Me.LEState.Properties.NullText = ""
-        Me.LEState.Size = New System.Drawing.Size(221, 20)
+        Me.LEState.Size = New System.Drawing.Size(176, 20)
         Me.LEState.TabIndex = 17
         '
         'LECountry
         '
-        Me.LECountry.Location = New System.Drawing.Point(398, 28)
+        Me.LECountry.Location = New System.Drawing.Point(443, 28)
         Me.LECountry.Name = "LECountry"
         Me.LECountry.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LECountry.Properties.Appearance.Options.UseFont = True
         Me.LECountry.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.LECountry.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_country", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("country", "Country")})
         Me.LECountry.Properties.NullText = ""
-        Me.LECountry.Size = New System.Drawing.Size(221, 20)
+        Me.LECountry.Size = New System.Drawing.Size(176, 20)
         Me.LECountry.TabIndex = 15
         '
         'LabelControl9
         '
         Me.LabelControl9.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl9.Location = New System.Drawing.Point(12, 119)
+        Me.LabelControl9.Location = New System.Drawing.Point(12, 146)
         Me.LabelControl9.Name = "LabelControl9"
         Me.LabelControl9.Size = New System.Drawing.Size(57, 13)
         Me.LabelControl9.TabIndex = 12
@@ -771,17 +761,17 @@ Partial Class FormMasterCompanySingle
         '
         'TEPostalCode
         '
-        Me.TEPostalCode.Location = New System.Drawing.Point(92, 116)
+        Me.TEPostalCode.Location = New System.Drawing.Point(92, 143)
         Me.TEPostalCode.Name = "TEPostalCode"
         Me.TEPostalCode.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TEPostalCode.Properties.Appearance.Options.UseFont = True
-        Me.TEPostalCode.Size = New System.Drawing.Size(230, 20)
+        Me.TEPostalCode.Size = New System.Drawing.Size(204, 20)
         Me.TEPostalCode.TabIndex = 19
         '
         'LabelControl8
         '
         Me.LabelControl8.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl8.Location = New System.Drawing.Point(335, 31)
+        Me.LabelControl8.Location = New System.Drawing.Point(319, 31)
         Me.LabelControl8.Name = "LabelControl8"
         Me.LabelControl8.Size = New System.Drawing.Size(39, 13)
         Me.LabelControl8.TabIndex = 10
@@ -790,7 +780,7 @@ Partial Class FormMasterCompanySingle
         'LabelControl7
         '
         Me.LabelControl7.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl7.Location = New System.Drawing.Point(335, 90)
+        Me.LabelControl7.Location = New System.Drawing.Point(319, 90)
         Me.LabelControl7.Name = "LabelControl7"
         Me.LabelControl7.Size = New System.Drawing.Size(26, 13)
         Me.LabelControl7.TabIndex = 7
@@ -799,7 +789,7 @@ Partial Class FormMasterCompanySingle
         'LabelControl6
         '
         Me.LabelControl6.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl6.Location = New System.Drawing.Point(335, 119)
+        Me.LabelControl6.Location = New System.Drawing.Point(319, 119)
         Me.LabelControl6.Name = "LabelControl6"
         Me.LabelControl6.Size = New System.Drawing.Size(19, 13)
         Me.LabelControl6.TabIndex = 6
@@ -807,17 +797,17 @@ Partial Class FormMasterCompanySingle
         '
         'MEOAddress
         '
-        Me.MEOAddress.Location = New System.Drawing.Point(92, 76)
+        Me.MEOAddress.Location = New System.Drawing.Point(92, 88)
         Me.MEOAddress.Name = "MEOAddress"
         Me.MEOAddress.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.MEOAddress.Properties.Appearance.Options.UseFont = True
-        Me.MEOAddress.Size = New System.Drawing.Size(230, 34)
+        Me.MEOAddress.Size = New System.Drawing.Size(204, 50)
         Me.MEOAddress.TabIndex = 14
         '
         'LabelControl5
         '
         Me.LabelControl5.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl5.Location = New System.Drawing.Point(11, 78)
+        Me.LabelControl5.Location = New System.Drawing.Point(11, 90)
         Me.LabelControl5.Name = "LabelControl5"
         Me.LabelControl5.Size = New System.Drawing.Size(70, 13)
         Me.LabelControl5.TabIndex = 4
@@ -829,7 +819,7 @@ Partial Class FormMasterCompanySingle
         Me.MEAddress.Name = "MEAddress"
         Me.MEAddress.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.MEAddress.Properties.Appearance.Options.UseFont = True
-        Me.MEAddress.Size = New System.Drawing.Size(230, 42)
+        Me.MEAddress.Size = New System.Drawing.Size(204, 54)
         Me.MEAddress.TabIndex = 13
         '
         'LabelControl3
@@ -2505,5 +2495,4 @@ Partial Class FormMasterCompanySingle
     Friend WithEvents GridColumn27 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents LEDistrict As DevExpress.XtraEditors.LookUpEdit
     Friend WithEvents LabelControl43 As DevExpress.XtraEditors.LabelControl
-    Friend WithEvents LabelControl44 As DevExpress.XtraEditors.LabelControl
 End Class

@@ -7985,7 +7985,11 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
 
             End If
         ElseIf formName = "FormReportEstWHInQty" Then
-            print(FormReportEstWHInQty.GCWorkOrder, "Estimate Qty to WH (" & Date.Parse(FormReportEstWHInQty.DEStart.EditValue.ToString).ToString("dd MMMM yyyy") & " - " & Date.Parse(FormReportEstWHInQty.DEEnd.EditValue.ToString).ToString("dd MMMM yyyy") & ")")
+            If FormReportEstWHInQty.XTCTimeline.SelectedTabPageIndex = 0 Then
+                print(FormReportEstWHInQty.GCWorkOrder, "Estimate Qty to WH (" & Date.Parse(FormReportEstWHInQty.DEStart.EditValue.ToString).ToString("dd MMMM yyyy") & " - " & Date.Parse(FormReportEstWHInQty.DEEnd.EditValue.ToString).ToString("dd MMMM yyyy") & ")")
+            ElseIf FormReportEstWHInQty.XTCTimeline.SelectedTabPageIndex = 1 Then
+                print(FormReportEstWHInQty.GCPD, "PD vs PO Material " & FormReportEstWHInQty.SLEReport.Text)
+            End If
         ElseIf formName = "FormProductionHO" Then
             If FormProductionHO.XTCHO.SelectedTabPageIndex = 0 Then
                 print_raw(FormProductionHO.GCList, "")

@@ -7321,19 +7321,19 @@ WHERE pocd.id_prod_order_close = '" & id_report & "'"
                     execute_non_query(qjd, True, "", "", "", "")
                 End If
                 ' update status 
-                If FormDebitNoteDet.id_dn_type = "1" Then 'claim reject
-                    query = String.Format("UPDATE tb_debit_note_det dnd
-                                            INNER JOIN tb_prod_order po ON po.id_prod_order=dnd.id_report AND dnd.report_mark_type='22' 
-                                            SET is_claimed_reject='1'
-                                            WHERE dnd.id_debit_note='{0}'", id_report)
-                    execute_non_query(query, True, "", "", "", "")
-                ElseIf FormDebitNoteDet.id_dn_type = "2" Then 'claim terlambat
-                    query = String.Format("UPDATE tb_debit_note_det dnd
-                                            INNER JOIN tb_prod_order_rec rec ON rec.id_prod_order_rec=dnd.id_report AND dnd.report_mark_type='28' 
-                                            SET is_claimed_late='1'
-                                            WHERE dnd.id_debit_note='{0}'", id_report)
-                    execute_non_query(query, True, "", "", "", "")
-                End If
+                'If FormDebitNoteDet.id_dn_type = "1" Then 'claim reject
+                '    query = String.Format("UPDATE tb_debit_note_det dnd
+                '                            INNER JOIN tb_prod_order po ON po.id_prod_order=dnd.id_report AND dnd.report_mark_type='22' 
+                '                            SET is_claimed_reject='1'
+                '                            WHERE dnd.id_debit_note='{0}'", id_report)
+                '    execute_non_query(query, True, "", "", "", "")
+                'ElseIf FormDebitNoteDet.id_dn_type = "2" Then 'claim terlambat
+                '    query = String.Format("UPDATE tb_debit_note_det dnd
+                '                            INNER JOIN tb_prod_order_rec rec ON rec.id_prod_order_rec=dnd.id_report AND dnd.report_mark_type='28' 
+                '                            SET is_claimed_late='1'
+                '                            WHERE dnd.id_debit_note='{0}'", id_report)
+                '    execute_non_query(query, True, "", "", "", "")
+                'End If
             End If
 
             'refresh view

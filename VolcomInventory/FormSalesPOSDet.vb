@@ -621,7 +621,7 @@ Public Class FormSalesPOSDet
                                     qs += ","
                                     id_prod += ","
                                 End If
-                                qs += "('" + id_user + "','" + GVItemList.GetRowCellValue(s, "code").ToString + "','" + GVItemList.GetRowCellValue(s, "name").ToString + "', '" + GVItemList.GetRowCellValue(s, "size").ToString + "', '" + GVItemList.GetRowCellValue(s, "id_product").ToString + "', '" + decimalSQL(GVItemList.GetRowCellValue(s, "sales_pos_det_qty").ToString) + "') "
+                                qs += "('" + id_user + "','" + GVItemList.GetRowCellValue(s, "code").ToString + "','" + addSlashes(GVItemList.GetRowCellValue(s, "name").ToString) + "', '" + GVItemList.GetRowCellValue(s, "size").ToString + "', '" + GVItemList.GetRowCellValue(s, "id_product").ToString + "', '" + decimalSQL(GVItemList.GetRowCellValue(s, "sales_pos_det_qty").ToString) + "') "
                                 id_prod += GVItemList.GetRowCellValue(s, "id_product").ToString
                             Next
                             qs += "; CALL view_validate_stock(" + id_user + ", " + id_comp + ", '" + id_prod + "',1); "

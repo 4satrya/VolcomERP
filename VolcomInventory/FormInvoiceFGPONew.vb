@@ -26,9 +26,68 @@ GROUP BY po.`id_prod_order`"
     End Sub
 
     Sub fill_grid()
-        If SLETypeInvoice.EditValue.ToString = "2" Then 'payment
-            'search qty order - qty after paid
-            Dim query As String = "SELECT pod.`id_prod_order`,SUM(pod.`prod_order_qty`)-IFNULL(pn.qty_rec_paid,0) AS qty_po
+        If CEPreRec.Checked = True Then
+            Dim q_where As String = ""
+
+            If SLETypeInvoice.EditValue.ToString = "2" Then 'payment
+                q_where = " AND rec.id_pl_category='1' "
+            ElseIf SLETypeInvoice.EditValue.ToString = "3" Then 'Extra hingga 2%
+                q_where = " AND rec.id_pl_category='5' "
+            ElseIf SLETypeInvoice.EditValue.ToString = "4" Then 'over memo
+                q_where = " AND rec.id_pl_category='6' "
+            ElseIf SLETypeInvoice.EditValue.ToString = "5" Then 'grade
+                q_where = " AND (rec.id_pl_category='2' OR rec.id_pl_category='3' OR rec.id_pl_category='4') "
+            End If
+
+            Dim query As String = "SELECT rec.`id_prod_order_rec` AS id_report,'28' AS report_mark_type,rec.prod_order_rec_number AS report_number,
+SUM(recd.`prod_order_rec_det_qty`)-IFNULL(pn.qty_rec_paid,0) AS qty_rec_remaining,
+SUM(recd.`prod_order_rec_det_qty`)-IFNULL(pn.qty_rec_paid,0) AS qty,
+((100-rec.claim_percent)/100)*prc.prod_order_wo_det_price AS val,
+((100-rec.claim_percent)/100)*prc.prod_order_wo_det_price*(SUM(recd.`prod_order_rec_det_qty`)-IFNULL(pn.qty_rec_paid,0)) AS value_bef_kurs,
+((100-rec.claim_percent)/100)*prc.prod_order_wo_det_price*(SUM(recd.`prod_order_rec_det_qty`)-IFNULL(pn.qty_rec_paid,0))*prc.kurs AS `value`,
+((100-rec.claim_percent)/100)*prc.prod_order_wo_det_price*(SUM(recd.`prod_order_rec_det_qty`)-IFNULL(pn.qty_rec_paid,0))*prc.kurs*(prc.prod_order_wo_vat/100) AS vat,
+prc.prod_order_wo_vat, prc.kurs
+,dsg.design_display_name AS info_design,prc.id_comp,prc.id_currency,prc.currency,prc.id_acc,plc.`pl_category`
+,'' AS inv_number,'' AS note
+FROM tb_prod_order_rec_det recd
+INNER JOIN tb_prod_order_rec rec ON rec.`id_prod_order_rec`=recd.`id_prod_order_rec` AND rec.`id_report_status`=6
+INNER JOIN tb_lookup_pl_category plc ON plc.`id_pl_category`=rec.`id_pl_category`
+LEFT JOIN
+(
+	SELECT pnd.`id_report`,SUM(pnd.`qty`) AS qty_rec_paid FROM tb_pn_fgpo_det pnd 
+	INNER JOIN tb_pn_fgpo pn ON pn.`id_pn_fgpo`=pnd.`id_pn_fgpo`
+	WHERE pn.`type`='2' AND pn.`id_report_status`!=5 AND pnd.`report_mark_type`='28'
+	GROUP BY pnd.`id_report`
+) pn ON pn.id_report=rec.id_prod_order_rec
+LEFT JOIN 
+(
+	SELECT wo.`id_prod_order`,IF(cou.is_domestic=1,(SELECT id_acc_hpp_dom FROM tb_opt_accounting),(SELECT id_acc_hpp_int FROM tb_opt_accounting)) AS `id_acc`,c.id_comp,wod.`prod_order_wo_det_price`,wo.`prod_order_wo_vat`,IF(wo.`id_currency`=1,1,wo.`prod_order_wo_kurs`) AS kurs,wo.`id_currency`,cur.currency
+	FROM tb_prod_order_wo_det wod
+	INNER JOIN tb_prod_order_wo wo ON wo.`id_prod_order_wo`=wod.`id_prod_order_wo`
+	INNER JOIN tb_m_ovh_price ovhp ON ovhp.`id_ovh_price`=wo.`id_ovh_price`
+	INNER JOIN tb_m_comp_contact cc ON cc.`id_comp_contact`=ovhp.`id_comp_contact`
+	INNER JOIN tb_m_comp c ON c.`id_comp`=cc.`id_comp`
+	INNER JOIN tb_m_city city ON city.id_city=c.id_city
+	INNER JOIN tb_m_state stte ON stte.id_state=city.id_state
+	INNER JOIN tb_m_region reg ON reg.id_region=stte.id_region
+	INNER JOIN tb_m_country cou ON cou.id_country=reg.id_country
+	INNER JOIN tb_lookup_currency cur ON cur.id_currency=wo.id_currency
+	WHERE wo.`is_main_vendor`=1 AND wo.`id_prod_order`='" & SLEFGPO.EditValue.ToString & "'
+	GROUP BY wo.`id_prod_order`
+)prc ON prc.id_prod_order=rec.`id_prod_order` 
+INNER JOIN tb_prod_order po ON po.id_prod_order=rec.id_prod_order
+INNER JOIN tb_prod_demand_design pdd ON pdd.id_prod_demand_design=po.id_prod_demand_design
+INNER JOIN tb_m_design dsg ON dsg.id_design=pdd.id_design
+WHERE rec.`id_prod_order`='" & SLEFGPO.EditValue.ToString & "' AND rec.is_over_tol=2 " & q_where & "
+GROUP BY rec.`id_prod_order_rec`
+HAVING qty_rec_remaining > 0"
+            Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+            GCInvoice.DataSource = data
+            GVInvoice.BestFitColumns()
+        Else
+            If SLETypeInvoice.EditValue.ToString = "2" Then 'payment
+                'search qty order - qty after paid
+                Dim query As String = "SELECT pod.`id_prod_order`,SUM(pod.`prod_order_qty`)-IFNULL(pn.qty_rec_paid,0) AS qty_po
 FROM tb_prod_order_det pod
 INNER JOIN tb_prod_order po ON po.`id_prod_order`=pod.`id_prod_order` AND po.`id_report_status`=6
 LEFT JOIN 
@@ -42,9 +101,9 @@ LEFT JOIN
 WHERE po.id_prod_order='" & SLEFGPO.EditValue.ToString & "'
 GROUP BY pod.`id_prod_order`
 HAVING qty_po > 0"
-            Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
-            If data.Rows(0)("qty_po") > 0 Then
-                Dim q_det As String = "-- normal
+                Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+                If data.Rows(0)("qty_po") > 0 Then
+                    Dim q_det As String = "-- normal
 SELECT rec.`id_prod_order_rec`,rec.prod_order_rec_number,SUM(recd.`prod_order_rec_det_qty`)-IFNULL(pn.qty_rec_paid,0) AS qty_rec_remaining ,prc.prod_order_wo_det_price, prc.prod_order_wo_vat, prc.kurs
 ,dsg.design_display_name,prc.id_comp,prc.id_currency,prc.currency,prc.id_acc
 FROM tb_prod_order_rec_det recd
@@ -78,73 +137,73 @@ INNER JOIN tb_m_design dsg ON dsg.id_design=pdd.id_design
 WHERE rec.`id_prod_order`='" & SLEFGPO.EditValue.ToString & "' AND rec.is_over_tol=2
 GROUP BY rec.`id_prod_order_rec`
 HAVING qty_rec_remaining > 0"
-                '
-                Dim dt_det As DataTable = execute_query(q_det, -1, True, "", "", "", "")
-                '
-                Dim qty_po As Integer = data.Rows(0)("qty_po")
-                Dim qty_rec As Integer = 0
-                '
-                Try
-                    For i As Integer = 0 To dt_det.Rows.Count - 1
-                        Dim qty_used As Integer = 0
+                    '
+                    Dim dt_det As DataTable = execute_query(q_det, -1, True, "", "", "", "")
+                    '
+                    Dim qty_po As Integer = data.Rows(0)("qty_po")
+                    Dim qty_rec As Integer = 0
+                    '
+                    Try
+                        For i As Integer = 0 To dt_det.Rows.Count - 1
+                            Dim qty_used As Integer = 0
 
-                        If (qty_po - dt_det.Rows(i)("qty_rec_remaining")) < 0 Then
-                            qty_used = dt_det.Rows(i)("qty_rec_remaining") - qty_po
-                        Else
-                            qty_used = dt_det.Rows(i)("qty_rec_remaining")
-                        End If
+                            If (qty_po - dt_det.Rows(i)("qty_rec_remaining")) < 0 Then
+                                qty_used = dt_det.Rows(i)("qty_rec_remaining") - qty_po
+                            Else
+                                qty_used = dt_det.Rows(i)("qty_rec_remaining")
+                            End If
 
-                        'input ke grid
-                        Dim newRow As DataRow = (TryCast(GCInvoice.DataSource, DataTable)).NewRow()
-                        newRow("id_report") = dt_det.Rows(i)("id_prod_order_rec").ToString
-                        newRow("id_comp") = dt_det.Rows(i)("id_comp").ToString
-                        newRow("id_acc") = dt_det.Rows(i)("id_acc").ToString
-                        newRow("report_mark_type") = "28"
-                        newRow("report_number") = dt_det.Rows(i)("prod_order_rec_number").ToString
-                        newRow("info_design") = dt_det.Rows(i)("design_display_name").ToString
-                        newRow("qty") = qty_used
-                        '
-                        newRow("id_currency") = dt_det.Rows(i)("id_currency").ToString
-                        newRow("currency") = dt_det.Rows(i)("currency").ToString
-                        newRow("kurs") = dt_det.Rows(i)("kurs").ToString
-                        newRow("value_bef_kurs") = qty_used * (dt_det.Rows(i)("prod_order_wo_det_price"))
-                        '
-                        newRow("value") = qty_used * (dt_det.Rows(i)("prod_order_wo_det_price") * dt_det.Rows(i)("kurs"))
-                        newRow("vat") = qty_used * ((dt_det.Rows(i)("prod_order_wo_det_price") * dt_det.Rows(i)("prod_order_wo_vat")) * (dt_det.Rows(i)("kurs") / 100))
-                        newRow("inv_number") = ""
-                        newRow("note") = ""
-                        TryCast(GCInvoice.DataSource, DataTable).Rows.Add(newRow)
-                        '
-                        qty_rec += qty_used
-                        qty_po = qty_po - dt_det.Rows(i)("qty_rec_remaining")
-                        If qty_po <= 0 Then
-                            Exit For
-                        End If
-                    Next
-                Catch ex As Exception
-                    MsgBox(ex.ToString)
-                End Try
+                            'input ke grid
+                            Dim newRow As DataRow = (TryCast(GCInvoice.DataSource, DataTable)).NewRow()
+                            newRow("id_report") = dt_det.Rows(i)("id_prod_order_rec").ToString
+                            newRow("id_comp") = dt_det.Rows(i)("id_comp").ToString
+                            newRow("id_acc") = dt_det.Rows(i)("id_acc").ToString
+                            newRow("report_mark_type") = "28"
+                            newRow("report_number") = dt_det.Rows(i)("prod_order_rec_number").ToString
+                            newRow("info_design") = dt_det.Rows(i)("design_display_name").ToString
+                            newRow("qty") = qty_used
+                            '
+                            newRow("id_currency") = dt_det.Rows(i)("id_currency").ToString
+                            newRow("currency") = dt_det.Rows(i)("currency").ToString
+                            newRow("kurs") = dt_det.Rows(i)("kurs").ToString
+                            newRow("value_bef_kurs") = qty_used * (dt_det.Rows(i)("prod_order_wo_det_price"))
+                            '
+                            newRow("value") = qty_used * (dt_det.Rows(i)("prod_order_wo_det_price") * dt_det.Rows(i)("kurs"))
+                            newRow("vat") = qty_used * ((dt_det.Rows(i)("prod_order_wo_det_price") * dt_det.Rows(i)("prod_order_wo_vat")) * (dt_det.Rows(i)("kurs") / 100))
+                            newRow("inv_number") = ""
+                            newRow("note") = ""
+                            TryCast(GCInvoice.DataSource, DataTable).Rows.Add(newRow)
+                            '
+                            qty_rec += qty_used
+                            qty_po = qty_po - dt_det.Rows(i)("qty_rec_remaining")
+                            If qty_po <= 0 Then
+                                Exit For
+                            End If
+                        Next
+                    Catch ex As Exception
+                        MsgBox(ex.ToString)
+                    End Try
 
-                '
-                'If qty_rec > 0 Then
-                '    FormInvoiceFGPODP.id_po = SLEFGPO.EditValue.ToString
-                '    Close()
-                'Else
-                '    warningCustom("There is no available qty receiving.")
-                'End If
-            Else
-                warningCustom("There is no remaining payment for this payment type.")
-            End If
-        ElseIf SLETypeInvoice.EditValue.ToString = "3" Then 'Extra hingga 2%
-            'search qty order - qty after paid
-            Dim query As String = "SELECT pod.`id_prod_order`,SUM(pod.`prod_order_qty`) AS qty_po
+                    '
+                    'If qty_rec > 0 Then
+                    '    FormInvoiceFGPODP.id_po = SLEFGPO.EditValue.ToString
+                    '    Close()
+                    'Else
+                    '    warningCustom("There is no available qty receiving.")
+                    'End If
+                Else
+                    warningCustom("There is no remaining payment for this payment type.")
+                End If
+            ElseIf SLETypeInvoice.EditValue.ToString = "3" Then 'Extra hingga 2%
+                'search qty order - qty after paid
+                Dim query As String = "SELECT pod.`id_prod_order`,SUM(pod.`prod_order_qty`) AS qty_po
 FROM tb_prod_order_det pod
 INNER JOIN tb_prod_order po ON po.`id_prod_order`=pod.`id_prod_order` AND po.`id_report_status`=6
 WHERE po.id_prod_order='" & SLEFGPO.EditValue.ToString & "'
 GROUP BY pod.`id_prod_order`"
-            Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
-            If data.Rows(0)("qty_po") > 0 Then
-                Dim q_det As String = "-- extra
+                Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+                If data.Rows(0)("qty_po") > 0 Then
+                    Dim q_det As String = "-- extra
 SELECT rec.`id_prod_order_rec`,rec.prod_order_rec_number,SUM(recd.`prod_order_rec_det_qty`)-IFNULL(pn.qty_rec_paid,0) AS qty_rec_remaining,(prc.prod_order_wo_det_price * 0.5) AS prod_order_wo_det_price, prc.prod_order_wo_vat AS prod_order_wo_vat, prc.kurs
 ,dsg.design_display_name,prc.id_comp,prc.id_currency,prc.currency,prc.id_acc
 FROM tb_prod_order_rec_det recd
@@ -178,61 +237,61 @@ INNER JOIN tb_m_design dsg ON dsg.id_design=pdd.id_design
 WHERE rec.`id_prod_order`='" & SLEFGPO.EditValue.ToString & "' AND rec.is_over_tol=2
 GROUP BY rec.`id_prod_order_rec`
 HAVING qty_rec_remaining > 0"
-                '
-                Dim dt_det As DataTable = execute_query(q_det, -1, True, "", "", "", "")
-                '
-                Dim qty_po As Integer = data.Rows(0)("qty_po")
-                Dim qty_po_old As Integer = 0
-                Dim qty_rec As Integer = 0
-                '
-                For i As Integer = 0 To dt_det.Rows.Count - 1
-                    Dim qty_used As Integer = 0
                     '
-                    qty_po_old = qty_po
-                    qty_po = qty_po - dt_det.Rows(i)("qty_rec_remaining")
+                    Dim dt_det As DataTable = execute_query(q_det, -1, True, "", "", "", "")
                     '
-                    If qty_po < 0 Then
-                        If qty_po_old >= 0 Then 'masih ada yang tidak extra
-                            qty_used = dt_det.Rows(i)("qty_rec_remaining") - qty_po_old
-                        Else 'extra only
-                            qty_used = dt_det.Rows(i)("qty_rec_remaining")
+                    Dim qty_po As Integer = data.Rows(0)("qty_po")
+                    Dim qty_po_old As Integer = 0
+                    Dim qty_rec As Integer = 0
+                    '
+                    For i As Integer = 0 To dt_det.Rows.Count - 1
+                        Dim qty_used As Integer = 0
+                        '
+                        qty_po_old = qty_po
+                        qty_po = qty_po - dt_det.Rows(i)("qty_rec_remaining")
+                        '
+                        If qty_po < 0 Then
+                            If qty_po_old >= 0 Then 'masih ada yang tidak extra
+                                qty_used = dt_det.Rows(i)("qty_rec_remaining") - qty_po_old
+                            Else 'extra only
+                                qty_used = dt_det.Rows(i)("qty_rec_remaining")
+                            End If
+                            'input ke grid
+                            Dim newRow As DataRow = (TryCast(GCInvoice.DataSource, DataTable)).NewRow()
+                            newRow("id_report") = dt_det.Rows(i)("id_prod_order_rec").ToString
+                            newRow("id_comp") = dt_det.Rows(i)("id_comp").ToString
+                            newRow("id_acc") = dt_det.Rows(i)("id_acc").ToString
+                            newRow("report_mark_type") = "28"
+                            newRow("report_number") = dt_det.Rows(i)("prod_order_rec_number").ToString
+                            newRow("info_design") = dt_det.Rows(i)("design_display_name").ToString
+                            newRow("qty") = qty_used
+                            '
+                            newRow("id_currency") = dt_det.Rows(i)("id_currency").ToString
+                            newRow("currency") = dt_det.Rows(i)("currency").ToString
+                            newRow("kurs") = dt_det.Rows(i)("kurs").ToString
+                            newRow("value_bef_kurs") = qty_used * (dt_det.Rows(i)("prod_order_wo_det_price"))
+                            '
+                            newRow("value") = qty_used * (dt_det.Rows(i)("prod_order_wo_det_price") * dt_det.Rows(i)("kurs"))
+                            newRow("vat") = qty_used * ((dt_det.Rows(i)("prod_order_wo_det_price") * dt_det.Rows(i)("prod_order_wo_vat")) * (dt_det.Rows(i)("kurs") / 100))
+                            newRow("inv_number") = ""
+                            newRow("note") = ""
+                            TryCast(GCInvoice.DataSource, DataTable).Rows.Add(newRow)
+                            '
+                            qty_rec += qty_used
                         End If
-                        'input ke grid
-                        Dim newRow As DataRow = (TryCast(GCInvoice.DataSource, DataTable)).NewRow()
-                        newRow("id_report") = dt_det.Rows(i)("id_prod_order_rec").ToString
-                        newRow("id_comp") = dt_det.Rows(i)("id_comp").ToString
-                        newRow("id_acc") = dt_det.Rows(i)("id_acc").ToString
-                        newRow("report_mark_type") = "28"
-                        newRow("report_number") = dt_det.Rows(i)("prod_order_rec_number").ToString
-                        newRow("info_design") = dt_det.Rows(i)("design_display_name").ToString
-                        newRow("qty") = qty_used
-                        '
-                        newRow("id_currency") = dt_det.Rows(i)("id_currency").ToString
-                        newRow("currency") = dt_det.Rows(i)("currency").ToString
-                        newRow("kurs") = dt_det.Rows(i)("kurs").ToString
-                        newRow("value_bef_kurs") = qty_used * (dt_det.Rows(i)("prod_order_wo_det_price"))
-                        '
-                        newRow("value") = qty_used * (dt_det.Rows(i)("prod_order_wo_det_price") * dt_det.Rows(i)("kurs"))
-                        newRow("vat") = qty_used * ((dt_det.Rows(i)("prod_order_wo_det_price") * dt_det.Rows(i)("prod_order_wo_vat")) * (dt_det.Rows(i)("kurs") / 100))
-                        newRow("inv_number") = ""
-                        newRow("note") = ""
-                        TryCast(GCInvoice.DataSource, DataTable).Rows.Add(newRow)
-                        '
-                        qty_rec += qty_used
-                    End If
-                Next
-                '
-                'If qty_rec > 0 Then
-                '    FormInvoiceFGPODP.id_po = SLEFGPO.EditValue.ToString
-                '    Close()
-                'Else
-                '    warningCustom("There is no available extra qty receiving to invoice.")
-                'End If
-            Else
-                warningCustom("There is 0 remaining qty for this payment type.")
-            End If
-        ElseIf SLETypeInvoice.EditValue.ToString = "4" Then 'over memo
-            Dim q_det As String = "-- extra
+                    Next
+                    '
+                    'If qty_rec > 0 Then
+                    '    FormInvoiceFGPODP.id_po = SLEFGPO.EditValue.ToString
+                    '    Close()
+                    'Else
+                    '    warningCustom("There is no available extra qty receiving to invoice.")
+                    'End If
+                Else
+                    warningCustom("There is 0 remaining qty for this payment type.")
+                End If
+            ElseIf SLETypeInvoice.EditValue.ToString = "4" Then 'over memo
+                Dim q_det As String = "-- extra
 SELECT rec.`id_prod_order_rec`,rec.prod_order_rec_number,SUM(recd.`prod_order_rec_det_qty`)-IFNULL(pn.qty_rec_paid,0) AS qty_rec_remaining, (prc.prod_order_wo_det_price) * (100-overd.discount/100) AS prod_order_wo_det_price, prc.prod_order_wo_vat AS prod_order_wo_vat, prc.kurs
 ,dsg.design_display_name,prc.id_comp,prc.id_currency,prc.currency,prc.id_acc
 FROM tb_prod_order_rec_det recd
@@ -268,43 +327,44 @@ INNER JOIN tb_m_design dsg ON dsg.id_design=pdd.id_design
 WHERE rec.`id_prod_order`='" & SLEFGPO.EditValue.ToString & "' AND rec.is_over_tol=1
 GROUP BY rec.`id_prod_order_rec`
 HAVING qty_rec_remaining > 0"
-            '
-            Dim dt_det As DataTable = execute_query(q_det, -1, True, "", "", "", "")
-            Dim qty_rec As Integer = 0
-            '
-            For i As Integer = 0 To dt_det.Rows.Count - 1
-                Dim qty_used As Integer = 0
-                qty_used = dt_det.Rows(i)("qty_rec_remaining")
                 '
-                Dim newRow As DataRow = (TryCast(GCInvoice.DataSource, DataTable)).NewRow()
-                newRow("id_report") = dt_det.Rows(i)("id_prod_order_rec").ToString
-                newRow("id_comp") = dt_det.Rows(i)("id_comp").ToString
-                newRow("id_acc") = dt_det.Rows(i)("id_acc").ToString
-                newRow("report_mark_type") = "28"
-                newRow("report_number") = dt_det.Rows(i)("prod_order_rec_number").ToString
-                newRow("info_design") = dt_det.Rows(i)("design_display_name").ToString
-                newRow("qty") = qty_used
+                Dim dt_det As DataTable = execute_query(q_det, -1, True, "", "", "", "")
+                Dim qty_rec As Integer = 0
                 '
-                newRow("id_currency") = dt_det.Rows(i)("id_currency").ToString
-                newRow("currency") = dt_det.Rows(i)("currency").ToString
-                newRow("kurs") = dt_det.Rows(i)("kurs").ToString
-                newRow("value_bef_kurs") = qty_used * (dt_det.Rows(i)("prod_order_wo_det_price"))
+                For i As Integer = 0 To dt_det.Rows.Count - 1
+                    Dim qty_used As Integer = 0
+                    qty_used = dt_det.Rows(i)("qty_rec_remaining")
+                    '
+                    Dim newRow As DataRow = (TryCast(GCInvoice.DataSource, DataTable)).NewRow()
+                    newRow("id_report") = dt_det.Rows(i)("id_prod_order_rec").ToString
+                    newRow("id_comp") = dt_det.Rows(i)("id_comp").ToString
+                    newRow("id_acc") = dt_det.Rows(i)("id_acc").ToString
+                    newRow("report_mark_type") = "28"
+                    newRow("report_number") = dt_det.Rows(i)("prod_order_rec_number").ToString
+                    newRow("info_design") = dt_det.Rows(i)("design_display_name").ToString
+                    newRow("qty") = qty_used
+                    '
+                    newRow("id_currency") = dt_det.Rows(i)("id_currency").ToString
+                    newRow("currency") = dt_det.Rows(i)("currency").ToString
+                    newRow("kurs") = dt_det.Rows(i)("kurs").ToString
+                    newRow("value_bef_kurs") = qty_used * (dt_det.Rows(i)("prod_order_wo_det_price"))
+                    '
+                    newRow("value") = qty_used * (dt_det.Rows(i)("prod_order_wo_det_price") * dt_det.Rows(i)("kurs"))
+                    newRow("vat") = qty_used * ((dt_det.Rows(i)("prod_order_wo_det_price") * dt_det.Rows(i)("prod_order_wo_vat")) * (dt_det.Rows(i)("kurs") / 100))
+                    newRow("inv_number") = ""
+                    newRow("note") = ""
+                    TryCast(GCInvoice.DataSource, DataTable).Rows.Add(newRow)
+                    '
+                    qty_rec += qty_used
+                Next
                 '
-                newRow("value") = qty_used * (dt_det.Rows(i)("prod_order_wo_det_price") * dt_det.Rows(i)("kurs"))
-                newRow("vat") = qty_used * ((dt_det.Rows(i)("prod_order_wo_det_price") * dt_det.Rows(i)("prod_order_wo_vat")) * (dt_det.Rows(i)("kurs") / 100))
-                newRow("inv_number") = ""
-                newRow("note") = ""
-                TryCast(GCInvoice.DataSource, DataTable).Rows.Add(newRow)
-                '
-                qty_rec += qty_used
-            Next
-            '
-            'If qty_rec > 0 Then
-            '    FormInvoiceFGPODP.id_po = SLEFGPO.EditValue.ToString
-            '    Close()
-            'Else
-            '    warningCustom("There is no available extra qty receiving to invoice.")
-            'End If
+                'If qty_rec > 0 Then
+                '    FormInvoiceFGPODP.id_po = SLEFGPO.EditValue.ToString
+                '    Close()
+                'Else
+                '    warningCustom("There is no available extra qty receiving to invoice.")
+                'End If
+            End If
         End If
     End Sub
 
@@ -508,5 +568,23 @@ WHERE pnd.`id_prod_order`='" & id_po & "' "
 
     Private Sub BPrintInfo_Click(sender As Object, e As EventArgs) Handles BPrintInfo.Click
         print(GCRec, SLEFGPO.Text)
+    End Sub
+
+    Private Sub BLoadPreRec_Click(sender As Object, e As EventArgs)
+        For i = GVInvoice.RowCount - 1 To 0 Step -1
+            GVInvoice.DeleteRow(i)
+        Next
+
+        GVInvoice.BestFitColumns()
+        'check if dp on process
+        Dim qdp As String = "SELECT * FROM tb_pn_fgpo_det pnd
+INNER JOIN tb_pn_fgpo pn ON pn.`id_pn_fgpo`=pnd.`id_pn_fgpo`
+WHERE pn.`type`=1 AND pnd.`id_prod_order`='" & SLEFGPO.EditValue.ToString & "' AND pn.`id_report_status`!=5 AND pn.`id_report_status`!=6"
+        Dim dtdp As DataTable = execute_query(qdp, -1, True, "", "", "", "")
+        If dtdp.Rows.Count > 0 Then
+            warningCustom("Please note there are BPL DP waiting to approve, DP will not show if not approved.")
+        End If
+        '
+        load_po()
     End Sub
 End Class

@@ -1,6 +1,9 @@
 ﻿Public Class FormChangeStatus
     Public id_pop_up As String = "-1"
     Public id_current As String = ""
+    Dim id_volcomstore_normal As String = "-1"
+    Dim id_volcomstore_sale As String = "-1"
+
     '1 = Finalize WH- Rec Prod
     '2 = Finalize WH- DO
     '3 = RETURN
@@ -13,8 +16,14 @@
         viewSearchLookupQuery(SLEStatusRec, query, "id_report_status", "report_status", "id_report_status")
     End Sub
 
+    Sub getOnlineStoreVolcom()
+        id_volcomstore_normal = execute_query("SELECT v.id_store FROM tb_m_comp_volcom_ol v WHERE v.id_design_cat=1", 0, True, "", "", "", "")
+        id_volcomstore_sale = execute_query("SELECT v.id_store FROM tb_m_comp_volcom_ol v WHERE v.id_design_cat=2", 0, True, "", "", "", "")
+    End Sub
+
     Private Sub FormChangeStatus_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewReportStatus()
+        getOnlineStoreVolcom()
     End Sub
 
     Private Sub BtnUpdateRec_Click(sender As Object, e As EventArgs) Handles BtnUpdateRec.Click
@@ -66,6 +75,25 @@
             Next
             If am <> "" Then
                 stopCustom("Some delivery number already created on Outbound Delivery Manifest" + System.Environment.NewLine + am)
+                Cursor = Cursors.Default
+                Exit Sub
+            End If
+        End If
+
+        'cek tracking code
+        If id_pop_up = "2" And SLEStatusRec.EditValue.ToString = "6" Then
+            Dim err_track_code As String = ""
+            For b As Integer = 0 To ((gv.RowCount - 1) - GetGroupRowCount(gv))
+                Dim del_number As String = gv.GetRowCellValue(b, "pl_sales_order_del_number").ToString
+                Dim id_store As String = gv.GetRowCellValue(b, "id_store").ToString
+                Dim track_code As String = gv.GetRowCellValue(b, "awbill_no").ToString
+                If track_code = "" And (id_store = id_volcomstore_normal Or id_store = id_volcomstore_sale) Then
+                    err_track_code = "Can't proceed this delivery : " + del_number + ". AWB number not found"
+                    Exit For
+                End If
+            Next
+            If err_track_code <> "" Then
+                stopCustom(err_track_code)
                 Cursor = Cursors.Default
                 Exit Sub
             End If
@@ -152,6 +180,7 @@
                                 insertFinalComment(report_mark_type, FormSalesOrderSvcLevel.GVSalesDelOrder.GetRowCellValue(i, "id_pl_sales_order_del").ToString, id_status_reportx, note)
                                 sendEmailConfirmation(FormSalesOrderSvcLevel.GVSalesDelOrder.GetRowCellValue(i, "id_commerce_type").ToString, FormSalesOrderSvcLevel.GVSalesDelOrder.GetRowCellValue(i, "id_pl_sales_order_del").ToString)
                                 sendEmailConfirmationforConceptStore(FormSalesOrderSvcLevel.GVSalesDelOrder.GetRowCellValue(i, "is_use_unique_code").ToString, FormSalesOrderSvcLevel.GVSalesDelOrder.GetRowCellValue(i, "id_pl_sales_order_del").ToString, "43")
+                                updateStatusOnlineStore(FormSalesOrderSvcLevel.GVSalesDelOrder.GetRowCellValue(i, "id_commerce_type").ToString, FormSalesOrderSvcLevel.GVSalesDelOrder.GetRowCellValue(i, "id_store").ToString, FormSalesOrderSvcLevel.GVSalesDelOrder.GetRowCellValue(i, "id_pl_sales_order_del").ToString, FormSalesOrderSvcLevel.GVSalesDelOrder.GetRowCellValue(i, "id_web_order").ToString)
                             Else
                                 'jika delivery combine
                                 Dim id_del As String = FormSalesOrderSvcLevel.GVSalesDelOrder.GetRowCellValue(i, "id_pl_sales_order_del").ToString
@@ -416,6 +445,55 @@
                 Dim d As New ClassSalesDelOrder()
                 d.sendDeliveryConfirmationOfflineStore(id_report, rmt)
             End If
+        End If
+    End Sub
+
+    Sub updateStatusOnlineStore(ByVal id_commerce_type As String, ByVal id_store As String, ByVal id_report As String, ByVal id_web_order As String)
+        If id_pop_up = "2" And id_commerce_type = "2" And (id_store = id_volcomstore_normal Or id_store = id_volcomstore_sale) Then
+            Dim so As New ClassSalesOrder
+            Try
+                Dim track_number As String = execute_query("SELECT m.awbill_no FROM tb_wh_awbill_det d INNER JOIN tb_wh_awbill m ON m.id_awbill = d.id_awbill WHERE d.id_pl_sales_order_del=" + id_report + "", 0, True, "", "", "", "")
+                Dim query As String = "SELECT sod.ol_store_id, CAST(SUM(sod.sales_order_det_qty) AS DECIMAL(10,0)) AS `qty`, so.id_sales_order_ol_shop AS `id_web_order`, o.shopify_location_id AS `location_id`
+                FROM tb_pl_sales_order_del_det d
+                INNER JOIN tb_sales_order_det sod ON sod.id_sales_order_det = d.id_sales_order_det
+                INNER JOIN tb_sales_order so ON so.id_sales_order = sod.id_sales_order
+                JOIN tb_opt o 
+                WHERE d.id_pl_sales_order_del=" + id_report + " AND sod.is_additional=2
+                GROUP BY sod.ol_store_id "
+                Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+                Dim val As String = ""
+                Dim location_id As String = ""
+                For i As Integer = 0 To data.Rows.Count - 1
+                    location_id = data.Rows(i)("location_id").ToString
+                    If i > 0 Then
+                        val += ","
+                    End If
+                    val += "{
+        ""id"": " + data.Rows(i)("ol_store_id").ToString + ",
+""quantity"": " + data.Rows(i)("qty").ToString + "
+      }"
+                Next
+                If val <> "" Then
+                    Dim shop As New ClassShopifyApi()
+                    shop.set_fullfill(id_web_order, location_id, track_number, val)
+                End If
+            Catch ex As Exception
+                so.insertLogWebOrder(id_web_order, "ID DEL:" + id_report + "; Error Set Fullfillment:" + ex.ToString)
+            End Try
+
+            Try
+                'insert status 
+                Dim qstt As String = "INSERT INTO tb_sales_order_det_status(id_sales_order_det, `status`, status_date, input_status_date)
+                SELECT sod.id_sales_order_det, 'shipped', NOW(), NOW()
+                FROM tb_pl_sales_order_del_det d
+                INNER JOIN tb_sales_order_det sod ON sod.id_sales_order_det = d.id_sales_order_det
+                INNER JOIN tb_sales_order so ON so.id_sales_order = sod.id_sales_order
+                JOIN tb_opt o 
+                WHERE d.id_pl_sales_order_del=" + id_report + " AND sod.is_additional=2 "
+                execute_non_query(qstt, True, "", "", "", "")
+            Catch ex As Exception
+                so.insertLogWebOrder(id_web_order, "ID DEL:" + id_report + "; Error Set Status:" + ex.ToString)
+            End Try
         End If
     End Sub
 End Class

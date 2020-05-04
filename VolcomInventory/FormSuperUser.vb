@@ -20,7 +20,7 @@
 
     Private Sub BtnOther_Click(sender As Object, e As EventArgs) Handles BtnOther.Click
         Dim a As New ClassShopifyApi()
-        a.get_order_erp()
+        a.get_product()
         'FormUniqueCode.Show()
         'FormStockUniS78New.ShowDialog()
         'FormTestCheckvb.ShowDialog()

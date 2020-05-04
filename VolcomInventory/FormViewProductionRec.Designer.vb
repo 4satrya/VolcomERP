@@ -21,6 +21,7 @@ Partial Class FormViewProductionRec
     Private Sub InitializeComponent()
         Me.GroupControl3 = New DevExpress.XtraEditors.GroupControl()
         Me.BtnAttachment = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnMemoOverTol = New DevExpress.XtraEditors.SimpleButton()
         Me.BMark = New DevExpress.XtraEditors.SimpleButton()
         Me.GroupGeneralHeader = New DevExpress.XtraEditors.GroupControl()
         Me.LabelControl11 = New DevExpress.XtraEditors.LabelControl()
@@ -49,6 +50,13 @@ Partial Class FormViewProductionRec
         Me.TEPONumber = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
         Me.GroupControl1 = New DevExpress.XtraEditors.GroupControl()
+        Me.LabelControl15 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl14 = New DevExpress.XtraEditors.LabelControl()
+        Me.TxtDiff = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl13 = New DevExpress.XtraEditors.LabelControl()
+        Me.TxtRec = New DevExpress.XtraEditors.TextEdit()
+        Me.TxtOrder = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl12 = New DevExpress.XtraEditors.LabelControl()
         Me.LEReportStatus = New DevExpress.XtraEditors.LookUpEdit()
         Me.LabelControl21 = New DevExpress.XtraEditors.LabelControl()
         Me.MENote = New DevExpress.XtraEditors.MemoEdit()
@@ -68,14 +76,11 @@ Partial Class FormViewProductionRec
         Me.RepositoryItemSpinEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
         Me.ColNote = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
-        Me.BtnMemoOverTol = New DevExpress.XtraEditors.SimpleButton()
-        Me.LabelControl12 = New DevExpress.XtraEditors.LabelControl()
-        Me.TxtOrder = New DevExpress.XtraEditors.TextEdit()
-        Me.TxtRec = New DevExpress.XtraEditors.TextEdit()
-        Me.LabelControl13 = New DevExpress.XtraEditors.LabelControl()
-        Me.TxtDiff = New DevExpress.XtraEditors.TextEdit()
-        Me.LabelControl14 = New DevExpress.XtraEditors.LabelControl()
-        Me.LabelControl15 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl16 = New DevExpress.XtraEditors.LabelControl()
+        Me.SLERecType = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GroupControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl3.SuspendLayout()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -97,6 +102,9 @@ Partial Class FormViewProductionRec
         CType(Me.TEPONumber.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl1.SuspendLayout()
+        CType(Me.TxtDiff.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtRec.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtOrder.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LEReportStatus.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.MENote.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GConListPurchase, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -105,9 +113,8 @@ Partial Class FormViewProductionRec
         CType(Me.GVListPurchase, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemSpinEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TxtOrder.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TxtRec.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TxtDiff.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SLERecType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupControl3
@@ -124,12 +131,22 @@ Partial Class FormViewProductionRec
         '
         'BtnAttachment
         '
-        Me.BtnAttachment.Dock = System.Windows.Forms.DockStyle.Top
+        Me.BtnAttachment.Dock = System.Windows.Forms.DockStyle.Fill
         Me.BtnAttachment.Location = New System.Drawing.Point(20, 61)
         Me.BtnAttachment.Name = "BtnAttachment"
-        Me.BtnAttachment.Size = New System.Drawing.Size(887, 30)
+        Me.BtnAttachment.Size = New System.Drawing.Size(887, 28)
         Me.BtnAttachment.TabIndex = 5
         Me.BtnAttachment.Text = "Attachment"
+        '
+        'BtnMemoOverTol
+        '
+        Me.BtnMemoOverTol.Dock = System.Windows.Forms.DockStyle.Top
+        Me.BtnMemoOverTol.Location = New System.Drawing.Point(20, 34)
+        Me.BtnMemoOverTol.Name = "BtnMemoOverTol"
+        Me.BtnMemoOverTol.Size = New System.Drawing.Size(887, 27)
+        Me.BtnMemoOverTol.TabIndex = 6
+        Me.BtnMemoOverTol.Text = "Memo Over Tolerance"
+        Me.BtnMemoOverTol.Visible = False
         '
         'BMark
         '
@@ -143,6 +160,8 @@ Partial Class FormViewProductionRec
         'GroupGeneralHeader
         '
         Me.GroupGeneralHeader.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupGeneralHeader.Controls.Add(Me.LabelControl16)
+        Me.GroupGeneralHeader.Controls.Add(Me.SLERecType)
         Me.GroupGeneralHeader.Controls.Add(Me.LabelControl11)
         Me.GroupGeneralHeader.Controls.Add(Me.DEArrive)
         Me.GroupGeneralHeader.Controls.Add(Me.LabelControl10)
@@ -432,6 +451,74 @@ Partial Class FormViewProductionRec
         Me.GroupControl1.Size = New System.Drawing.Size(909, 96)
         Me.GroupControl1.TabIndex = 63
         '
+        'LabelControl15
+        '
+        Me.LabelControl15.Location = New System.Drawing.Point(884, 64)
+        Me.LabelControl15.Name = "LabelControl15"
+        Me.LabelControl15.Size = New System.Drawing.Size(11, 13)
+        Me.LabelControl15.TabIndex = 175
+        Me.LabelControl15.Text = "%"
+        '
+        'LabelControl14
+        '
+        Me.LabelControl14.Location = New System.Drawing.Point(708, 64)
+        Me.LabelControl14.Name = "LabelControl14"
+        Me.LabelControl14.Size = New System.Drawing.Size(43, 13)
+        Me.LabelControl14.TabIndex = 174
+        Me.LabelControl14.Text = "Different"
+        '
+        'TxtDiff
+        '
+        Me.TxtDiff.EditValue = ""
+        Me.TxtDiff.Location = New System.Drawing.Point(773, 61)
+        Me.TxtDiff.Name = "TxtDiff"
+        Me.TxtDiff.Properties.DisplayFormat.FormatString = "n2"
+        Me.TxtDiff.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.TxtDiff.Properties.EditValueChangedDelay = 1
+        Me.TxtDiff.Properties.ReadOnly = True
+        Me.TxtDiff.Size = New System.Drawing.Size(105, 20)
+        Me.TxtDiff.TabIndex = 173
+        '
+        'LabelControl13
+        '
+        Me.LabelControl13.Location = New System.Drawing.Point(708, 38)
+        Me.LabelControl13.Name = "LabelControl13"
+        Me.LabelControl13.Size = New System.Drawing.Size(44, 13)
+        Me.LabelControl13.TabIndex = 172
+        Me.LabelControl13.Text = "Received"
+        '
+        'TxtRec
+        '
+        Me.TxtRec.EditValue = ""
+        Me.TxtRec.Location = New System.Drawing.Point(773, 35)
+        Me.TxtRec.Name = "TxtRec"
+        Me.TxtRec.Properties.DisplayFormat.FormatString = "n0"
+        Me.TxtRec.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.TxtRec.Properties.EditValueChangedDelay = 1
+        Me.TxtRec.Properties.ReadOnly = True
+        Me.TxtRec.Size = New System.Drawing.Size(122, 20)
+        Me.TxtRec.TabIndex = 171
+        '
+        'TxtOrder
+        '
+        Me.TxtOrder.EditValue = ""
+        Me.TxtOrder.Location = New System.Drawing.Point(773, 10)
+        Me.TxtOrder.Name = "TxtOrder"
+        Me.TxtOrder.Properties.DisplayFormat.FormatString = "n0"
+        Me.TxtOrder.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.TxtOrder.Properties.EditValueChangedDelay = 1
+        Me.TxtOrder.Properties.ReadOnly = True
+        Me.TxtOrder.Size = New System.Drawing.Size(122, 20)
+        Me.TxtOrder.TabIndex = 170
+        '
+        'LabelControl12
+        '
+        Me.LabelControl12.Location = New System.Drawing.Point(708, 13)
+        Me.LabelControl12.Name = "LabelControl12"
+        Me.LabelControl12.Size = New System.Drawing.Size(28, 13)
+        Me.LabelControl12.TabIndex = 170
+        Me.LabelControl12.Text = "Order"
+        '
         'LEReportStatus
         '
         Me.LEReportStatus.Enabled = False
@@ -625,83 +712,44 @@ Partial Class FormViewProductionRec
         Me.RepositoryItemCheckEdit1.AutoHeight = False
         Me.RepositoryItemCheckEdit1.Name = "RepositoryItemCheckEdit1"
         '
-        'BtnMemoOverTol
+        'LabelControl16
         '
-        Me.BtnMemoOverTol.Dock = System.Windows.Forms.DockStyle.Top
-        Me.BtnMemoOverTol.Location = New System.Drawing.Point(20, 34)
-        Me.BtnMemoOverTol.Name = "BtnMemoOverTol"
-        Me.BtnMemoOverTol.Size = New System.Drawing.Size(887, 27)
-        Me.BtnMemoOverTol.TabIndex = 6
-        Me.BtnMemoOverTol.Text = "Memo Over Tolerance"
-        Me.BtnMemoOverTol.Visible = False
+        Me.LabelControl16.Location = New System.Drawing.Point(486, 92)
+        Me.LabelControl16.Name = "LabelControl16"
+        Me.LabelControl16.Size = New System.Drawing.Size(45, 13)
+        Me.LabelControl16.TabIndex = 171
+        Me.LabelControl16.Text = "Rec Type"
         '
-        'LabelControl12
+        'SLERecType
         '
-        Me.LabelControl12.Location = New System.Drawing.Point(708, 13)
-        Me.LabelControl12.Name = "LabelControl12"
-        Me.LabelControl12.Size = New System.Drawing.Size(28, 13)
-        Me.LabelControl12.TabIndex = 170
-        Me.LabelControl12.Text = "Order"
+        Me.SLERecType.Location = New System.Drawing.Point(558, 89)
+        Me.SLERecType.Name = "SLERecType"
+        Me.SLERecType.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLERecType.Properties.View = Me.SearchLookUpEdit1View
+        Me.SLERecType.Size = New System.Drawing.Size(130, 20)
+        Me.SLERecType.TabIndex = 170
         '
-        'TxtOrder
+        'SearchLookUpEdit1View
         '
-        Me.TxtOrder.EditValue = ""
-        Me.TxtOrder.Location = New System.Drawing.Point(773, 10)
-        Me.TxtOrder.Name = "TxtOrder"
-        Me.TxtOrder.Properties.DisplayFormat.FormatString = "n0"
-        Me.TxtOrder.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.TxtOrder.Properties.EditValueChangedDelay = 1
-        Me.TxtOrder.Properties.ReadOnly = True
-        Me.TxtOrder.Size = New System.Drawing.Size(122, 20)
-        Me.TxtOrder.TabIndex = 170
+        Me.SearchLookUpEdit1View.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2})
+        Me.SearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.SearchLookUpEdit1View.Name = "SearchLookUpEdit1View"
+        Me.SearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.SearchLookUpEdit1View.OptionsView.ShowGroupPanel = False
         '
-        'TxtRec
+        'GridColumn1
         '
-        Me.TxtRec.EditValue = ""
-        Me.TxtRec.Location = New System.Drawing.Point(773, 35)
-        Me.TxtRec.Name = "TxtRec"
-        Me.TxtRec.Properties.DisplayFormat.FormatString = "n0"
-        Me.TxtRec.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.TxtRec.Properties.EditValueChangedDelay = 1
-        Me.TxtRec.Properties.ReadOnly = True
-        Me.TxtRec.Size = New System.Drawing.Size(122, 20)
-        Me.TxtRec.TabIndex = 171
+        Me.GridColumn1.Caption = "ID"
+        Me.GridColumn1.FieldName = "id_pl_category"
+        Me.GridColumn1.Name = "GridColumn1"
         '
-        'LabelControl13
+        'GridColumn2
         '
-        Me.LabelControl13.Location = New System.Drawing.Point(708, 38)
-        Me.LabelControl13.Name = "LabelControl13"
-        Me.LabelControl13.Size = New System.Drawing.Size(44, 13)
-        Me.LabelControl13.TabIndex = 172
-        Me.LabelControl13.Text = "Received"
-        '
-        'TxtDiff
-        '
-        Me.TxtDiff.EditValue = ""
-        Me.TxtDiff.Location = New System.Drawing.Point(773, 61)
-        Me.TxtDiff.Name = "TxtDiff"
-        Me.TxtDiff.Properties.DisplayFormat.FormatString = "n2"
-        Me.TxtDiff.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.TxtDiff.Properties.EditValueChangedDelay = 1
-        Me.TxtDiff.Properties.ReadOnly = True
-        Me.TxtDiff.Size = New System.Drawing.Size(105, 20)
-        Me.TxtDiff.TabIndex = 173
-        '
-        'LabelControl14
-        '
-        Me.LabelControl14.Location = New System.Drawing.Point(708, 64)
-        Me.LabelControl14.Name = "LabelControl14"
-        Me.LabelControl14.Size = New System.Drawing.Size(43, 13)
-        Me.LabelControl14.TabIndex = 174
-        Me.LabelControl14.Text = "Different"
-        '
-        'LabelControl15
-        '
-        Me.LabelControl15.Location = New System.Drawing.Point(884, 64)
-        Me.LabelControl15.Name = "LabelControl15"
-        Me.LabelControl15.Size = New System.Drawing.Size(11, 13)
-        Me.LabelControl15.TabIndex = 175
-        Me.LabelControl15.Text = "%"
+        Me.GridColumn2.Caption = "Category"
+        Me.GridColumn2.FieldName = "pl_category"
+        Me.GridColumn2.Name = "GridColumn2"
+        Me.GridColumn2.Visible = True
+        Me.GridColumn2.VisibleIndex = 0
         '
         'FormViewProductionRec
         '
@@ -742,6 +790,9 @@ Partial Class FormViewProductionRec
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControl1.ResumeLayout(False)
         Me.GroupControl1.PerformLayout()
+        CType(Me.TxtDiff.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtRec.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtOrder.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LEReportStatus.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.MENote.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GConListPurchase, System.ComponentModel.ISupportInitialize).EndInit()
@@ -750,9 +801,8 @@ Partial Class FormViewProductionRec
         CType(Me.GVListPurchase, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemSpinEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TxtOrder.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TxtRec.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TxtDiff.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SLERecType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -813,4 +863,9 @@ Partial Class FormViewProductionRec
     Friend WithEvents TxtRec As DevExpress.XtraEditors.TextEdit
     Friend WithEvents TxtOrder As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelControl12 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LabelControl16 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents SLERecType As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents SearchLookUpEdit1View As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn2 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

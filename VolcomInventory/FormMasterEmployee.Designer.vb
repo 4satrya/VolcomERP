@@ -27,6 +27,7 @@ Partial Class FormMasterEmployee
         Me.PenangguhanBankToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DiRumahkanToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TugasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BansosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GVEmployee = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridView()
         Me.gridBandGENERALNew = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         Me.GridColumnPic = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
@@ -140,7 +141,6 @@ Partial Class FormMasterEmployee
         Me.SplashScreenManager1 = New DevExpress.XtraSplashScreen.SplashScreenManager(Me, GetType(Global.VolcomMRP.WaitForm), True, True)
         Me.BAccept = New DevExpress.XtraEditors.SimpleButton()
         Me.BClone = New DevExpress.XtraEditors.SimpleButton()
-        Me.BansosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.GCEmployee, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip.SuspendLayout()
         CType(Me.GVEmployee, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -157,7 +157,6 @@ Partial Class FormMasterEmployee
         '
         'GCEmployee
         '
-        Me.GCEmployee.ContextMenuStrip = Me.ContextMenuStrip
         Me.GCEmployee.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GCEmployee.Location = New System.Drawing.Point(0, 35)
         Me.GCEmployee.MainView = Me.GVEmployee
@@ -171,7 +170,7 @@ Partial Class FormMasterEmployee
         '
         Me.ContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SuratKeteranganToolStripMenuItem})
         Me.ContextMenuStrip.Name = "ContextMenuStrip"
-        Me.ContextMenuStrip.Size = New System.Drawing.Size(165, 48)
+        Me.ContextMenuStrip.Size = New System.Drawing.Size(165, 26)
         '
         'SuratKeteranganToolStripMenuItem
         '
@@ -197,6 +196,12 @@ Partial Class FormMasterEmployee
         Me.TugasToolStripMenuItem.Name = "TugasToolStripMenuItem"
         Me.TugasToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
         Me.TugasToolStripMenuItem.Text = "Tugas"
+        '
+        'BansosToolStripMenuItem
+        '
+        Me.BansosToolStripMenuItem.Name = "BansosToolStripMenuItem"
+        Me.BansosToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
+        Me.BansosToolStripMenuItem.Text = "Bansos"
         '
         'GVEmployee
         '
@@ -1305,12 +1310,6 @@ Partial Class FormMasterEmployee
         Me.BClone.TabIndex = 139
         Me.BClone.Text = "Clone"
         Me.BClone.Visible = False
-        '
-        'BansosToolStripMenuItem
-        '
-        Me.BansosToolStripMenuItem.Name = "BansosToolStripMenuItem"
-        Me.BansosToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
-        Me.BansosToolStripMenuItem.Text = "Bansos"
         '
         'FormMasterEmployee
         '

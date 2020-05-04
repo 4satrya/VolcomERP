@@ -43,6 +43,18 @@ Partial Class FormPopUpRecQC
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridView3 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.BSearch = New DevExpress.XtraEditors.SimpleButton()
+        Me.SLESeason = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
+        Me.SLEDesignStockStore = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GVSLEDesgSearch = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumnCodeSearch = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl9 = New DevExpress.XtraEditors.LabelControl()
         Me.GCListPurchase = New DevExpress.XtraGrid.GridControl()
         Me.GVListPurchase = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.ColIdRecDet = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -60,19 +72,9 @@ Partial Class FormPopUpRecQC
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
         Me.BtnCancel = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnSave = New DevExpress.XtraEditors.SimpleButton()
-        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
-        Me.SLESeason = New DevExpress.XtraEditors.SearchLookUpEdit()
-        Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
-        Me.SLEDesignStockStore = New DevExpress.XtraEditors.SearchLookUpEdit()
-        Me.GVSLEDesgSearch = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.GridColumnCodeSearch = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.LabelControl9 = New DevExpress.XtraEditors.LabelControl()
-        Me.BSearch = New DevExpress.XtraEditors.SimpleButton()
+        Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.SplitContainerControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainerControl1.SuspendLayout()
         CType(Me.GroupGeneral, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -80,18 +82,18 @@ Partial Class FormPopUpRecQC
         CType(Me.GCProdRec, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVProdRec, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView3, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GCListPurchase, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GVListPurchase, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RepositoryItemSpinEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.PanelControl2.SuspendLayout()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.SLESeason.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLEDesignStockStore.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVSLEDesgSearch, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GCListPurchase, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVListPurchase, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemSpinEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl2.SuspendLayout()
         Me.SuspendLayout()
         '
         'SplitContainerControl1
@@ -105,7 +107,7 @@ Partial Class FormPopUpRecQC
         Me.SplitContainerControl1.Panel2.Controls.Add(Me.GCListPurchase)
         Me.SplitContainerControl1.Panel2.Text = "Panel2"
         Me.SplitContainerControl1.Size = New System.Drawing.Size(1051, 444)
-        Me.SplitContainerControl1.SplitterPosition = 317
+        Me.SplitContainerControl1.SplitterPosition = 284
         Me.SplitContainerControl1.TabIndex = 34
         Me.SplitContainerControl1.Text = "SplitContainerControl1"
         '
@@ -117,7 +119,7 @@ Partial Class FormPopUpRecQC
         Me.GroupGeneral.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupGeneral.Location = New System.Drawing.Point(0, 0)
         Me.GroupGeneral.Name = "GroupGeneral"
-        Me.GroupGeneral.Size = New System.Drawing.Size(1051, 317)
+        Me.GroupGeneral.Size = New System.Drawing.Size(1051, 284)
         Me.GroupGeneral.TabIndex = 16
         Me.GroupGeneral.Text = "Receive"
         '
@@ -127,17 +129,18 @@ Partial Class FormPopUpRecQC
         Me.GCProdRec.Location = New System.Drawing.Point(2, 62)
         Me.GCProdRec.MainView = Me.GVProdRec
         Me.GCProdRec.Name = "GCProdRec"
-        Me.GCProdRec.Size = New System.Drawing.Size(1047, 253)
+        Me.GCProdRec.Size = New System.Drawing.Size(1047, 220)
         Me.GCProdRec.TabIndex = 3
         Me.GCProdRec.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVProdRec, Me.GridView3})
         '
         'GVProdRec
         '
-        Me.GVProdRec.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ColIdPRodOrderRecPurc, Me.ColSeason, Me.ColRecNumber, Me.ColShipFrom, Me.ColShipTo, Me.ColRecDate, Me.ColDueDate, Me.ColPSONumber, Me.ColDONumber, Me.ColIDStatus, Me.ColStatus, Me.GridColumnIdDel, Me.GridColumnDelRec, Me.GridColumn2, Me.GridColumn1, Me.GridColumn3, Me.GridColumn6, Me.GridColumn5, Me.GridColumn4})
+        Me.GVProdRec.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ColIdPRodOrderRecPurc, Me.ColSeason, Me.ColRecNumber, Me.ColShipFrom, Me.ColShipTo, Me.GridColumn11, Me.ColRecDate, Me.ColDueDate, Me.ColPSONumber, Me.ColDONumber, Me.ColIDStatus, Me.ColStatus, Me.GridColumnIdDel, Me.GridColumnDelRec, Me.GridColumn2, Me.GridColumn1, Me.GridColumn3, Me.GridColumn6, Me.GridColumn5, Me.GridColumn4})
         Me.GVProdRec.GridControl = Me.GCProdRec
         Me.GVProdRec.Name = "GVProdRec"
         Me.GVProdRec.OptionsBehavior.Editable = False
         Me.GVProdRec.OptionsFind.AlwaysVisible = True
+        Me.GVProdRec.OptionsView.ColumnAutoWidth = False
         Me.GVProdRec.OptionsView.ShowGroupPanel = False
         '
         'ColIdPRodOrderRecPurc
@@ -151,8 +154,6 @@ Partial Class FormPopUpRecQC
         Me.ColSeason.Caption = "Season"
         Me.ColSeason.FieldName = "season"
         Me.ColSeason.Name = "ColSeason"
-        Me.ColSeason.Visible = True
-        Me.ColSeason.VisibleIndex = 0
         '
         'ColRecNumber
         '
@@ -160,7 +161,7 @@ Partial Class FormPopUpRecQC
         Me.ColRecNumber.FieldName = "prod_order_rec_number"
         Me.ColRecNumber.Name = "ColRecNumber"
         Me.ColRecNumber.Visible = True
-        Me.ColRecNumber.VisibleIndex = 2
+        Me.ColRecNumber.VisibleIndex = 0
         Me.ColRecNumber.Width = 99
         '
         'ColShipFrom
@@ -169,7 +170,7 @@ Partial Class FormPopUpRecQC
         Me.ColShipFrom.FieldName = "comp_from"
         Me.ColShipFrom.Name = "ColShipFrom"
         Me.ColShipFrom.Visible = True
-        Me.ColShipFrom.VisibleIndex = 10
+        Me.ColShipFrom.VisibleIndex = 9
         Me.ColShipFrom.Width = 125
         '
         'ColShipTo
@@ -187,7 +188,7 @@ Partial Class FormPopUpRecQC
         Me.ColRecDate.FieldName = "prod_order_rec_date"
         Me.ColRecDate.Name = "ColRecDate"
         Me.ColRecDate.Visible = True
-        Me.ColRecDate.VisibleIndex = 11
+        Me.ColRecDate.VisibleIndex = 10
         Me.ColRecDate.Width = 123
         '
         'ColDueDate
@@ -198,7 +199,7 @@ Partial Class FormPopUpRecQC
         Me.ColDueDate.FieldName = "delivery_order_date"
         Me.ColDueDate.Name = "ColDueDate"
         Me.ColDueDate.Visible = True
-        Me.ColDueDate.VisibleIndex = 9
+        Me.ColDueDate.VisibleIndex = 8
         Me.ColDueDate.Width = 126
         '
         'ColPSONumber
@@ -207,7 +208,7 @@ Partial Class FormPopUpRecQC
         Me.ColPSONumber.FieldName = "prod_order_number"
         Me.ColPSONumber.Name = "ColPSONumber"
         Me.ColPSONumber.Visible = True
-        Me.ColPSONumber.VisibleIndex = 3
+        Me.ColPSONumber.VisibleIndex = 2
         Me.ColPSONumber.Width = 65
         '
         'ColDONumber
@@ -216,7 +217,7 @@ Partial Class FormPopUpRecQC
         Me.ColDONumber.FieldName = "delivery_order_number"
         Me.ColDONumber.Name = "ColDONumber"
         Me.ColDONumber.Visible = True
-        Me.ColDONumber.VisibleIndex = 8
+        Me.ColDONumber.VisibleIndex = 7
         Me.ColDONumber.Width = 65
         '
         'ColIDStatus
@@ -236,8 +237,6 @@ Partial Class FormPopUpRecQC
         Me.GridColumnIdDel.Caption = "Del"
         Me.GridColumnIdDel.FieldName = "id_delivery"
         Me.GridColumnIdDel.Name = "GridColumnIdDel"
-        Me.GridColumnIdDel.Visible = True
-        Me.GridColumnIdDel.VisibleIndex = 1
         '
         'GridColumnDelRec
         '
@@ -252,7 +251,7 @@ Partial Class FormPopUpRecQC
         Me.GridColumn2.FieldName = "arrive_date"
         Me.GridColumn2.Name = "GridColumn2"
         Me.GridColumn2.Visible = True
-        Me.GridColumn2.VisibleIndex = 12
+        Me.GridColumn2.VisibleIndex = 11
         '
         'GridColumn1
         '
@@ -262,7 +261,7 @@ Partial Class FormPopUpRecQC
         Me.GridColumn1.FieldName = "est_rec_date"
         Me.GridColumn1.Name = "GridColumn1"
         Me.GridColumn1.Visible = True
-        Me.GridColumn1.VisibleIndex = 7
+        Me.GridColumn1.VisibleIndex = 6
         '
         'GridColumn3
         '
@@ -270,7 +269,7 @@ Partial Class FormPopUpRecQC
         Me.GridColumn3.FieldName = "design_display_name"
         Me.GridColumn3.Name = "GridColumn3"
         Me.GridColumn3.Visible = True
-        Me.GridColumn3.VisibleIndex = 5
+        Me.GridColumn3.VisibleIndex = 4
         '
         'GridColumn6
         '
@@ -278,7 +277,7 @@ Partial Class FormPopUpRecQC
         Me.GridColumn6.FieldName = "color"
         Me.GridColumn6.Name = "GridColumn6"
         Me.GridColumn6.Visible = True
-        Me.GridColumn6.VisibleIndex = 6
+        Me.GridColumn6.VisibleIndex = 5
         '
         'GridColumn5
         '
@@ -286,7 +285,7 @@ Partial Class FormPopUpRecQC
         Me.GridColumn5.FieldName = "design_code"
         Me.GridColumn5.Name = "GridColumn5"
         Me.GridColumn5.Visible = True
-        Me.GridColumn5.VisibleIndex = 4
+        Me.GridColumn5.VisibleIndex = 3
         '
         'GridColumn4
         '
@@ -294,12 +293,119 @@ Partial Class FormPopUpRecQC
         Me.GridColumn4.FieldName = "prod_order_rec_note"
         Me.GridColumn4.Name = "GridColumn4"
         Me.GridColumn4.Visible = True
-        Me.GridColumn4.VisibleIndex = 13
+        Me.GridColumn4.VisibleIndex = 12
         '
         'GridView3
         '
         Me.GridView3.GridControl = Me.GCProdRec
         Me.GridView3.Name = "GridView3"
+        '
+        'PanelControl1
+        '
+        Me.PanelControl1.Controls.Add(Me.BSearch)
+        Me.PanelControl1.Controls.Add(Me.SLESeason)
+        Me.PanelControl1.Controls.Add(Me.LabelControl1)
+        Me.PanelControl1.Controls.Add(Me.SLEDesignStockStore)
+        Me.PanelControl1.Controls.Add(Me.LabelControl9)
+        Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelControl1.Location = New System.Drawing.Point(2, 20)
+        Me.PanelControl1.Name = "PanelControl1"
+        Me.PanelControl1.Size = New System.Drawing.Size(1047, 42)
+        Me.PanelControl1.TabIndex = 4
+        '
+        'BSearch
+        '
+        Me.BSearch.Location = New System.Drawing.Point(459, 10)
+        Me.BSearch.Name = "BSearch"
+        Me.BSearch.Size = New System.Drawing.Size(59, 23)
+        Me.BSearch.TabIndex = 8909
+        Me.BSearch.Text = "Search"
+        '
+        'SLESeason
+        '
+        Me.SLESeason.Location = New System.Drawing.Point(290, 12)
+        Me.SLESeason.Name = "SLESeason"
+        Me.SLESeason.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SLESeason.Properties.Appearance.Options.UseFont = True
+        Me.SLESeason.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLESeason.Properties.View = Me.SearchLookUpEdit1View
+        Me.SLESeason.Size = New System.Drawing.Size(163, 20)
+        Me.SLESeason.TabIndex = 8908
+        '
+        'SearchLookUpEdit1View
+        '
+        Me.SearchLookUpEdit1View.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn7, Me.GridColumn8})
+        Me.SearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.SearchLookUpEdit1View.Name = "SearchLookUpEdit1View"
+        Me.SearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.SearchLookUpEdit1View.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn7
+        '
+        Me.GridColumn7.Caption = "Id Season"
+        Me.GridColumn7.FieldName = "id_season"
+        Me.GridColumn7.Name = "GridColumn7"
+        '
+        'GridColumn8
+        '
+        Me.GridColumn8.Caption = "Season"
+        Me.GridColumn8.FieldName = "season"
+        Me.GridColumn8.Name = "GridColumn8"
+        Me.GridColumn8.Visible = True
+        Me.GridColumn8.VisibleIndex = 0
+        '
+        'LabelControl1
+        '
+        Me.LabelControl1.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl1.Location = New System.Drawing.Point(249, 15)
+        Me.LabelControl1.Name = "LabelControl1"
+        Me.LabelControl1.Size = New System.Drawing.Size(35, 13)
+        Me.LabelControl1.TabIndex = 8907
+        Me.LabelControl1.Text = "Season"
+        '
+        'SLEDesignStockStore
+        '
+        Me.SLEDesignStockStore.Location = New System.Drawing.Point(48, 12)
+        Me.SLEDesignStockStore.Name = "SLEDesignStockStore"
+        Me.SLEDesignStockStore.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEDesignStockStore.Properties.View = Me.GVSLEDesgSearch
+        Me.SLEDesignStockStore.Size = New System.Drawing.Size(195, 20)
+        Me.SLEDesignStockStore.TabIndex = 8906
+        '
+        'GVSLEDesgSearch
+        '
+        Me.GVSLEDesgSearch.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn12, Me.GridColumn10, Me.GridColumnCodeSearch, Me.GridColumn9})
+        Me.GVSLEDesgSearch.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GVSLEDesgSearch.Name = "GVSLEDesgSearch"
+        Me.GVSLEDesgSearch.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GVSLEDesgSearch.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumnCodeSearch
+        '
+        Me.GridColumnCodeSearch.Caption = "Code"
+        Me.GridColumnCodeSearch.FieldName = "design_code"
+        Me.GridColumnCodeSearch.Name = "GridColumnCodeSearch"
+        Me.GridColumnCodeSearch.Visible = True
+        Me.GridColumnCodeSearch.VisibleIndex = 0
+        Me.GridColumnCodeSearch.Width = 186
+        '
+        'GridColumn9
+        '
+        Me.GridColumn9.Caption = "Description"
+        Me.GridColumn9.FieldName = "design_display_name"
+        Me.GridColumn9.Name = "GridColumn9"
+        Me.GridColumn9.Visible = True
+        Me.GridColumn9.VisibleIndex = 2
+        Me.GridColumn9.Width = 360
+        '
+        'LabelControl9
+        '
+        Me.LabelControl9.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl9.Location = New System.Drawing.Point(10, 15)
+        Me.LabelControl9.Name = "LabelControl9"
+        Me.LabelControl9.Size = New System.Drawing.Size(32, 13)
+        Me.LabelControl9.TabIndex = 8905
+        Me.LabelControl9.Text = "Design"
         '
         'GCListPurchase
         '
@@ -308,7 +414,7 @@ Partial Class FormPopUpRecQC
         Me.GCListPurchase.MainView = Me.GVListPurchase
         Me.GCListPurchase.Name = "GCListPurchase"
         Me.GCListPurchase.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckEdit1, Me.RepositoryItemSpinEdit1})
-        Me.GCListPurchase.Size = New System.Drawing.Size(1051, 122)
+        Me.GCListPurchase.Size = New System.Drawing.Size(1051, 155)
         Me.GCListPurchase.TabIndex = 2
         Me.GCListPurchase.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVListPurchase})
         '
@@ -472,125 +578,31 @@ Partial Class FormPopUpRecQC
         Me.BtnSave.TabIndex = 3
         Me.BtnSave.Text = "Choose"
         '
-        'PanelControl1
+        'GridColumn11
         '
-        Me.PanelControl1.Controls.Add(Me.BSearch)
-        Me.PanelControl1.Controls.Add(Me.SLESeason)
-        Me.PanelControl1.Controls.Add(Me.LabelControl1)
-        Me.PanelControl1.Controls.Add(Me.SLEDesignStockStore)
-        Me.PanelControl1.Controls.Add(Me.LabelControl9)
-        Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.PanelControl1.Location = New System.Drawing.Point(2, 20)
-        Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(1047, 42)
-        Me.PanelControl1.TabIndex = 4
-        '
-        'SLESeason
-        '
-        Me.SLESeason.Location = New System.Drawing.Point(290, 12)
-        Me.SLESeason.Name = "SLESeason"
-        Me.SLESeason.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SLESeason.Properties.Appearance.Options.UseFont = True
-        Me.SLESeason.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.SLESeason.Properties.View = Me.SearchLookUpEdit1View
-        Me.SLESeason.Size = New System.Drawing.Size(163, 20)
-        Me.SLESeason.TabIndex = 8908
-        '
-        'SearchLookUpEdit1View
-        '
-        Me.SearchLookUpEdit1View.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn7, Me.GridColumn8})
-        Me.SearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
-        Me.SearchLookUpEdit1View.Name = "SearchLookUpEdit1View"
-        Me.SearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = False
-        Me.SearchLookUpEdit1View.OptionsView.ShowGroupPanel = False
-        '
-        'GridColumn7
-        '
-        Me.GridColumn7.Caption = "Id Season"
-        Me.GridColumn7.FieldName = "id_season"
-        Me.GridColumn7.Name = "GridColumn7"
-        '
-        'GridColumn8
-        '
-        Me.GridColumn8.Caption = "Season"
-        Me.GridColumn8.FieldName = "season"
-        Me.GridColumn8.Name = "GridColumn8"
-        Me.GridColumn8.Visible = True
-        Me.GridColumn8.VisibleIndex = 0
-        '
-        'LabelControl1
-        '
-        Me.LabelControl1.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl1.Location = New System.Drawing.Point(249, 15)
-        Me.LabelControl1.Name = "LabelControl1"
-        Me.LabelControl1.Size = New System.Drawing.Size(35, 13)
-        Me.LabelControl1.TabIndex = 8907
-        Me.LabelControl1.Text = "Season"
-        '
-        'SLEDesignStockStore
-        '
-        Me.SLEDesignStockStore.Location = New System.Drawing.Point(48, 12)
-        Me.SLEDesignStockStore.Name = "SLEDesignStockStore"
-        Me.SLEDesignStockStore.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.SLEDesignStockStore.Properties.View = Me.GVSLEDesgSearch
-        Me.SLEDesignStockStore.Size = New System.Drawing.Size(195, 20)
-        Me.SLEDesignStockStore.TabIndex = 8906
-        '
-        'GVSLEDesgSearch
-        '
-        Me.GVSLEDesgSearch.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnCodeSearch, Me.GridColumn9, Me.GridColumn10})
-        Me.GVSLEDesgSearch.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
-        Me.GVSLEDesgSearch.Name = "GVSLEDesgSearch"
-        Me.GVSLEDesgSearch.OptionsSelection.EnableAppearanceFocusedCell = False
-        Me.GVSLEDesgSearch.OptionsView.ShowGroupPanel = False
-        '
-        'GridColumnCodeSearch
-        '
-        Me.GridColumnCodeSearch.Caption = "Code"
-        Me.GridColumnCodeSearch.FieldName = "design_code"
-        Me.GridColumnCodeSearch.Name = "GridColumnCodeSearch"
-        Me.GridColumnCodeSearch.Visible = True
-        Me.GridColumnCodeSearch.VisibleIndex = 0
-        Me.GridColumnCodeSearch.Width = 186
-        '
-        'GridColumn9
-        '
-        Me.GridColumn9.Caption = "Description"
-        Me.GridColumn9.FieldName = "display_name"
-        Me.GridColumn9.Name = "GridColumn9"
-        Me.GridColumn9.Visible = True
-        Me.GridColumn9.VisibleIndex = 1
-        Me.GridColumn9.Width = 360
+        Me.GridColumn11.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn11.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn11.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn11.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn11.Caption = "Type"
+        Me.GridColumn11.FieldName = "pl_category"
+        Me.GridColumn11.Name = "GridColumn11"
+        Me.GridColumn11.Visible = True
+        Me.GridColumn11.VisibleIndex = 1
         '
         'GridColumn10
         '
-        Me.GridColumn10.AppearanceCell.Options.UseTextOptions = True
-        Me.GridColumn10.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.GridColumn10.AppearanceHeader.Options.UseTextOptions = True
-        Me.GridColumn10.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.GridColumn10.Caption = "Color"
-        Me.GridColumn10.FieldName = "color"
+        Me.GridColumn10.Caption = "F.G. Purchase Order"
+        Me.GridColumn10.FieldName = "prod_order_number"
         Me.GridColumn10.Name = "GridColumn10"
         Me.GridColumn10.Visible = True
-        Me.GridColumn10.VisibleIndex = 2
-        Me.GridColumn10.Width = 146
+        Me.GridColumn10.VisibleIndex = 0
         '
-        'LabelControl9
+        'GridColumn12
         '
-        Me.LabelControl9.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl9.Location = New System.Drawing.Point(10, 15)
-        Me.LabelControl9.Name = "LabelControl9"
-        Me.LabelControl9.Size = New System.Drawing.Size(32, 13)
-        Me.LabelControl9.TabIndex = 8905
-        Me.LabelControl9.Text = "Design"
-        '
-        'BSearch
-        '
-        Me.BSearch.Location = New System.Drawing.Point(459, 10)
-        Me.BSearch.Name = "BSearch"
-        Me.BSearch.Size = New System.Drawing.Size(59, 23)
-        Me.BSearch.TabIndex = 8909
-        Me.BSearch.Text = "Search"
+        Me.GridColumn12.Caption = "ID"
+        Me.GridColumn12.FieldName = "id_design"
+        Me.GridColumn12.Name = "GridColumn12"
         '
         'FormPopUpRecQC
         '
@@ -613,12 +625,6 @@ Partial Class FormPopUpRecQC
         CType(Me.GCProdRec, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVProdRec, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView3, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GCListPurchase, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GVListPurchase, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RepositoryItemSpinEdit1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.PanelControl2.ResumeLayout(False)
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         Me.PanelControl1.PerformLayout()
@@ -626,6 +632,12 @@ Partial Class FormPopUpRecQC
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SLEDesignStockStore.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVSLEDesgSearch, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GCListPurchase, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVListPurchase, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemSpinEdit1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl2.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -680,7 +692,9 @@ Partial Class FormPopUpRecQC
     Friend WithEvents GVSLEDesgSearch As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumnCodeSearch As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn9 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn10 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents LabelControl9 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents BSearch As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GridColumn11 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn12 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn10 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

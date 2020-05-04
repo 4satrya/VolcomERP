@@ -421,6 +421,10 @@
     End Sub
 
     Private Sub BtnPendingOrder_Click(sender As Object, e As EventArgs) Handles BtnPendingOrder.Click
+        viewPendingOrders()
+    End Sub
+
+    Sub viewPendingOrders()
         Cursor = Cursors.WaitCursor
         viewVolcomOrder("AND vo.is_process=2")
         Cursor = Cursors.Default
@@ -439,6 +443,15 @@
             stopCustom("Sync still running")
         Else
             SplashScreenManager1.ShowWaitForm()
+
+            'cek allow
+            Dim is_must_ok_stock As String = "2"
+            If CEAllow.EditValue = False Then
+                is_must_ok_stock = "1"
+            Else
+                is_must_ok_stock = "2"
+            End If
+
             Dim ord As New ClassSalesOrder()
             ord.setProceccedWebOrder("1")
             ord.insertLogWebOrder("0", "Start")
@@ -462,7 +475,7 @@
                 Try
                     For i As Integer = 0 To dord.Rows.Count - 1
                         SplashScreenManager1.SetWaitFormDescription("Checking order #" + dord.Rows(i)("sales_order_ol_shop_number").ToString)
-                        execute_non_query_long("CALL create_web_order(" + dord.Rows(i)("id").ToString + ");", True, "", "", "", "")
+                        execute_non_query_long("CALL create_web_order(" + dord.Rows(i)("id").ToString + ", " + is_must_ok_stock + ");", True, "", "", "", "")
                     Next
                 Catch ex As Exception
                     ord.insertLogWebOrder("0", ex.ToString)
@@ -475,15 +488,31 @@
                 ord.insertLogWebOrder("0", "End")
             End If
 
+            SplashScreenManager1.CloseWaitForm()
             If err = "" Then
                 infoCustom("Sync completed.")
             Else
                 infoCustom("Problem get order from web. " + err)
             End If
-            SplashScreenManager1.CloseWaitForm()
+            GCVolcom.DataSource = Nothing
+            If orderNotProcessed() Then
+                stopCustom("Some orders cannot be processed")
+                viewPendingOrders()
+            End If
         End If
+        CEAllow.EditValue = False
         Cursor = Cursors.Default
     End Sub
+
+    Function orderNotProcessed()
+        Dim query As String="SELECT * FROM tb_ol_store_order od WHERE od.is_process=2 "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        If data.Rows.Count > 0 Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
 
     Private Sub LinkTrfOrder_Click(sender As Object, e As EventArgs) Handles LinkTrfOrder.Click
         If GVVolcom.FocusedRowHandle >= 0 And GVVolcom.RowCount > 0 Then

@@ -48,14 +48,14 @@
         data.Columns.Add("design_price", GetType(String))
         data.Columns.Add("inventory_quantity", GetType(String))
 
-        Dim url As String = "https://" + username + ":" + password + "@" + shop + "/admin/api/2020-04/products.json"
+        Dim url As String = "https://" + username + ":" + password + "@" + shop + "/admin/api/2020-04/products.json?limit=250"
 
-        Dim since_id As String = ""
+        Dim page_info As String = ""
 
         For i = 0 To 1000
-            Dim url_since_id As String = url + (If(Not since_id = "", "?since_id=" + since_id, ""))
+            Dim url_page_info As String = url + (If(Not page_info = "", "&page_info=" + page_info, ""))
 
-            Dim request As Net.WebRequest = Net.WebRequest.Create(url_since_id)
+            Dim request As Net.WebRequest = Net.WebRequest.Create(url_page_info)
 
             request.Method = "GET"
 
@@ -63,25 +63,35 @@
 
             Dim response As Net.WebResponse = request.GetResponse()
 
-            Using dataStream As IO.Stream = response.GetResponseStream()
-                Dim reader As IO.StreamReader = New IO.StreamReader(dataStream)
+            If Not page_info = "" Or i = 0 Then
+                Using dataStream As IO.Stream = response.GetResponseStream()
+                    Dim reader As IO.StreamReader = New IO.StreamReader(dataStream)
 
-                Dim responseFromServer As String = reader.ReadToEnd()
+                    Dim responseFromServer As String = reader.ReadToEnd()
 
-                Dim json As Newtonsoft.Json.Linq.JObject = Newtonsoft.Json.Linq.JObject.Parse(responseFromServer)
+                    Dim json As Newtonsoft.Json.Linq.JObject = Newtonsoft.Json.Linq.JObject.Parse(responseFromServer)
 
-                If json("products").Count > 0 Then
                     For Each row In json("products").ToList
-                        since_id = row("id")
-
                         For Each row2 In row("variants").ToList
                             data.Rows.Add(row2("id"), row2("product_id"), row2("sku"), row2("inventory_item_id"), row2("compare_at_price"), row2("price"), row2("inventory_quantity"))
                         Next
                     Next
-                Else
-                    Exit For
-                End If
-            End Using
+                End Using
+            Else
+                Exit For
+            End If
+
+            'get next page
+            Dim link As String() = response.Headers.GetValues(16)
+
+            Dim j1 As Integer = link(link.Count - 1).LastIndexOf(">; rel=""next")
+            Dim j2 As Integer = link(link.Count - 1).LastIndexOf("o=") + 2
+
+            If j1 > 0 And j2 > 0 Then
+                page_info = link(link.Count - 1).Substring(0, j1).Substring(j2)
+            Else
+                page_info = ""
+            End If
 
             response.Close()
         Next
@@ -144,8 +154,12 @@
 
         Dim sku As String = ""
 
+        Dim sku_copy As String = ""
+
         For i = 0 To data_d.Rows.Count - 1
             sku += data_d.Rows(i)("sku").ToString + ", "
+
+            sku_copy += data_d.Rows(i)("sku").ToString + Environment.NewLine
 
             execute_non_query("
                 INSERT INTO tb_m_product_shopify_duplicate (variant_id, sku, product_id, inventory_item_id, `date`)
@@ -157,6 +171,10 @@
 
         If Not sku = "" Then
             warningCustom("Duplicate SKU: " + sku.Substring(0, sku.Length - 2) + ". Please make sure there are no duplicate sku on the website and Sync again.")
+
+            My.Computer.Clipboard.SetText(sku_copy)
+
+            infoCustom("SKU copied to clipboard.")
         End If
 
         Return If(sku = "", True, False)
@@ -362,5 +380,18 @@ GROUP BY p.sku"
 
             execute_non_query(q_price, True, "", "", "", "")
         Next
+    End Sub
+
+    Sub set_fullfill(ByVal id_order As String, ByVal location_id As String, ByVal tracking_number As String, ByVal val As String)
+        Dim data = Text.Encoding.UTF8.GetBytes("{
+  ""fulfillment"": {
+    ""location_id"": " + location_id + ",
+    ""tracking_number"": " + tracking_number + ",
+    ""line_items"": [
+      " + val + "
+    ]
+  }
+}")
+        Dim result_post As String = SendRequest("https://" & username & ":" & password & "@" & shop & "/admin/api/2020-04/orders/" & id_order & "/fulfillments.json", data, "application/json", "POST", username, password)
     End Sub
 End Class

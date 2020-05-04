@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FormProductionRetInSingle
     Inherits DevExpress.XtraEditors.XtraForm
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         If disposing AndAlso components IsNot Nothing Then
             components.Dispose()
@@ -17,7 +17,7 @@ Partial Class FormProductionRetInSingle
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormProductionRetInSingle))
@@ -36,6 +36,8 @@ Partial Class FormProductionRetInSingle
         Me.MENote = New DevExpress.XtraEditors.MemoEdit()
         Me.LabelControl18 = New DevExpress.XtraEditors.LabelControl()
         Me.GroupGeneralHeader = New DevExpress.XtraEditors.GroupControl()
+        Me.LERetType = New DevExpress.XtraEditors.LookUpEdit()
+        Me.LabelControl10 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl8 = New DevExpress.XtraEditors.LabelControl()
         Me.TxtSeason = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
@@ -95,8 +97,7 @@ Partial Class FormProductionRetInSingle
         Me.BDelete = New DevExpress.XtraEditors.SimpleButton()
         Me.BStop = New DevExpress.XtraEditors.SimpleButton()
         Me.BScan = New DevExpress.XtraEditors.SimpleButton()
-        Me.LERetType = New DevExpress.XtraEditors.LookUpEdit()
-        Me.LabelControl10 = New DevExpress.XtraEditors.LabelControl()
+        Me.TERetOutNo = New DevExpress.XtraEditors.TextEdit()
         CType(Me.EPRet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl3.SuspendLayout()
@@ -107,6 +108,7 @@ Partial Class FormProductionRetInSingle
         CType(Me.MENote.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
+        CType(Me.LERetType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtSeason.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEDesign.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PEView.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -135,7 +137,7 @@ Partial Class FormProductionRetInSingle
         CType(Me.RepositoryItemSpinEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelNavBarcode, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelNavBarcode.SuspendLayout()
-        CType(Me.LERetType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TERetOutNo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'EPRet
@@ -296,6 +298,7 @@ Partial Class FormProductionRetInSingle
         'GroupGeneralHeader
         '
         Me.GroupGeneralHeader.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupGeneralHeader.Controls.Add(Me.TERetOutNo)
         Me.GroupGeneralHeader.Controls.Add(Me.LERetType)
         Me.GroupGeneralHeader.Controls.Add(Me.LabelControl10)
         Me.GroupGeneralHeader.Controls.Add(Me.LabelControl8)
@@ -326,6 +329,28 @@ Partial Class FormProductionRetInSingle
         Me.GroupGeneralHeader.Name = "GroupGeneralHeader"
         Me.GroupGeneralHeader.Size = New System.Drawing.Size(873, 125)
         Me.GroupGeneralHeader.TabIndex = 181
+        '
+        'LERetType
+        '
+        Me.LERetType.Location = New System.Drawing.Point(226, 9)
+        Me.LERetType.Name = "LERetType"
+        Me.LERetType.Properties.Appearance.Options.UseTextOptions = True
+        Me.LERetType.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near
+        Me.LERetType.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.LERetType.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_return_qc_type", "ID Type", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("return_qc_type", "Type")})
+        Me.LERetType.Properties.NullText = ""
+        Me.LERetType.Properties.ShowFooter = False
+        Me.LERetType.Size = New System.Drawing.Size(303, 20)
+        Me.LERetType.TabIndex = 10007
+        '
+        'LabelControl10
+        '
+        Me.LabelControl10.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl10.Location = New System.Drawing.Point(153, 12)
+        Me.LabelControl10.Name = "LabelControl10"
+        Me.LabelControl10.Size = New System.Drawing.Size(60, 13)
+        Me.LabelControl10.TabIndex = 10008
+        Me.LabelControl10.Text = "Return Type"
         '
         'LabelControl8
         '
@@ -419,11 +444,11 @@ Partial Class FormProductionRetInSingle
         'TxtOrderNumber
         '
         Me.TxtOrderNumber.EditValue = ""
-        Me.TxtOrderNumber.Location = New System.Drawing.Point(226, 35)
+        Me.TxtOrderNumber.Location = New System.Drawing.Point(345, 35)
         Me.TxtOrderNumber.Name = "TxtOrderNumber"
         Me.TxtOrderNumber.Properties.EditValueChangedDelay = 1
         Me.TxtOrderNumber.Properties.ReadOnly = True
-        Me.TxtOrderNumber.Size = New System.Drawing.Size(248, 20)
+        Me.TxtOrderNumber.Size = New System.Drawing.Size(129, 20)
         Me.TxtOrderNumber.TabIndex = 9999
         Me.TxtOrderNumber.TabStop = False
         '
@@ -442,9 +467,9 @@ Partial Class FormProductionRetInSingle
         Me.LabelControl4.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelControl4.Location = New System.Drawing.Point(154, 38)
         Me.LabelControl4.Name = "LabelControl4"
-        Me.LabelControl4.Size = New System.Drawing.Size(42, 13)
+        Me.LabelControl4.Size = New System.Drawing.Size(58, 13)
         Me.LabelControl4.TabIndex = 88
-        Me.LabelControl4.Text = "Prod No."
+        Me.LabelControl4.Text = "Ret Out No."
         '
         'LabelControl7
         '
@@ -954,27 +979,16 @@ Partial Class FormProductionRetInSingle
         Me.BScan.TabIndex = 4
         Me.BScan.Text = "Start Scan"
         '
-        'LERetType
+        'TERetOutNo
         '
-        Me.LERetType.Location = New System.Drawing.Point(226, 9)
-        Me.LERetType.Name = "LERetType"
-        Me.LERetType.Properties.Appearance.Options.UseTextOptions = True
-        Me.LERetType.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near
-        Me.LERetType.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.LERetType.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_return_qc_type", "ID Type", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("return_qc_type", "Type")})
-        Me.LERetType.Properties.NullText = ""
-        Me.LERetType.Properties.ShowFooter = False
-        Me.LERetType.Size = New System.Drawing.Size(303, 20)
-        Me.LERetType.TabIndex = 10007
-        '
-        'LabelControl10
-        '
-        Me.LabelControl10.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl10.Location = New System.Drawing.Point(153, 12)
-        Me.LabelControl10.Name = "LabelControl10"
-        Me.LabelControl10.Size = New System.Drawing.Size(60, 13)
-        Me.LabelControl10.TabIndex = 10008
-        Me.LabelControl10.Text = "Return Type"
+        Me.TERetOutNo.EditValue = ""
+        Me.TERetOutNo.Location = New System.Drawing.Point(226, 35)
+        Me.TERetOutNo.Name = "TERetOutNo"
+        Me.TERetOutNo.Properties.EditValueChangedDelay = 1
+        Me.TERetOutNo.Properties.ReadOnly = True
+        Me.TERetOutNo.Size = New System.Drawing.Size(113, 20)
+        Me.TERetOutNo.TabIndex = 10009
+        Me.TERetOutNo.TabStop = False
         '
         'FormProductionRetInSingle
         '
@@ -1004,6 +1018,7 @@ Partial Class FormProductionRetInSingle
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupGeneralHeader.ResumeLayout(False)
         Me.GroupGeneralHeader.PerformLayout()
+        CType(Me.LERetType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtSeason.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEDesign.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PEView.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1032,7 +1047,7 @@ Partial Class FormProductionRetInSingle
         CType(Me.RepositoryItemSpinEdit2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelNavBarcode, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelNavBarcode.ResumeLayout(False)
-        CType(Me.LERetType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TERetOutNo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1112,4 +1127,5 @@ Partial Class FormProductionRetInSingle
     Friend WithEvents GridColumnTo As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents LERetType As DevExpress.XtraEditors.LookUpEdit
     Friend WithEvents LabelControl10 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents TERetOutNo As DevExpress.XtraEditors.TextEdit
 End Class

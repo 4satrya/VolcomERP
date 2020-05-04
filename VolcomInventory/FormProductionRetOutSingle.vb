@@ -3,6 +3,7 @@ Public Class FormProductionRetOutSingle
     Public action As String
     Public id_prod_order_ret_out As String = "0"
     Public id_prod_order As String = "-1"
+    Public id_prod_order_rec As String = "-1"
     Public id_comp_contact_to As String
     Public id_comp_contact_from As String
     Public id_prod_order_det_list, id_prod_order_ret_out_det_list As New List(Of String)
@@ -77,10 +78,11 @@ INNER JOIN tb_m_comp c ON c.`id_comp`=cc.`id_comp`"
 
             'View data
             Dim query As String = "SELECT id_return_qc_type,id_ovh_price,DATE_FORMAT(a.prod_order_ret_out_date,'%Y-%m-%d') as prod_order_ret_out_datex, a.id_report_status, a.id_prod_order, a.id_prod_order_ret_out, a.prod_order_ret_out_date, "
-            query += "a.prod_order_ret_out_due_date, a.prod_order_ret_out_note, a.prod_order_ret_out_number,  "
+            query += "a.prod_order_ret_out_due_date, a.prod_order_ret_out_note, a.prod_order_ret_out_number, a.id_prod_order_rec,rec.prod_order_rec_number,  "
             query += "dsg.id_design, dsg.design_display_name,b.prod_order_number, (c.id_comp_contact) AS id_comp_contact_from, (d.comp_name) AS comp_name_contact_from, (d.comp_number) AS comp_code_contact_from, (d.address_primary) AS comp_address_contact_from, "
             query += "(e.id_comp_contact) AS id_comp_contact_to, (f.comp_name) AS comp_name_contact_to, (f.comp_number) AS comp_code_contact_to,(f.address_primary) AS comp_address_contact_to, dsg.id_sample, ss.season "
             query += "FROM tb_prod_order_ret_out a "
+            query += "LEFT JOIN tb_prod_order_rec rec ON rec.id_prod_order_rec=a.id_prod_order_rec "
             query += "INNER JOIN tb_prod_order b ON a.id_prod_order = b.id_prod_order "
             query += "INNER JOIN tb_season_delivery del ON del.id_delivery = b.id_delivery "
             query += "INNER JOIN tb_season ss ON ss.id_season = del.id_season "
@@ -95,6 +97,7 @@ INNER JOIN tb_m_comp c ON c.`id_comp`=cc.`id_comp`"
             TxtOrderNumber.Text = data.Rows(0)("prod_order_number").ToString
             id_comp_contact_from = data.Rows(0)("id_comp_contact_from").ToString
             TxtCodeCompFrom.Text = data.Rows(0)("comp_code_contact_from").ToString
+            TERecNumber.Text = data.Rows(0)("prod_order_rec_number").ToString
             TxtNameCompFrom.Text = data.Rows(0)("comp_name_contact_from").ToString
             id_comp_contact_to = data.Rows(0)("id_comp_contact_to").ToString
             TxtCodeCompTo.Text = data.Rows(0)("comp_code_contact_to").ToString
@@ -109,6 +112,7 @@ INNER JOIN tb_m_comp c ON c.`id_comp`=cc.`id_comp`"
             LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", data.Rows(0)("id_report_status").ToString)
             id_report_status = data.Rows(0)("id_report_status").ToString
             id_prod_order = data.Rows(0)("id_prod_order").ToString
+            id_prod_order_rec = data.Rows(0)("id_prod_order_rec").ToString
             id_design = data.Rows(0)("id_design").ToString
             TxtDesign.Text = data.Rows(0)("design_display_name").ToString
             TxtSeason.Text = data.Rows(0)("season").ToString
@@ -295,6 +299,8 @@ WHERE ovhp.id_ovh_price='" & SLEOvh.EditValue.ToString & "'"
     End Sub
     'Button
     Private Sub BtnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnSave.Click
+        Dim already_ret_out As Boolean = False
+
         ValidateChildren()
         makeSafeGV(GVRetDetail)
 
@@ -307,7 +313,12 @@ WHERE ovhp.id_ovh_price='" & SLEOvh.EditValue.ToString & "'"
         '        cond_qty = False
         '    End If
         'Next
-
+        'cek Receive itu udah ada ret out atau belum
+        Dim q As String = "SELECT * FROM tb_prod_order_ret_out WHERE id_prod_order_rec='" & id_prod_order_rec & "' AND (id_report_status!=5 OR id_report_status!=6) AND id_prod_order_ret_out!='" & id_prod_order_ret_out & "'"
+        Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
+        If dt.Rows.Count > 0 Then
+            already_ret_out = True
+        End If
         'cek dengan requisition di DB
         For i As Integer = 0 To ((GVRetDetail.RowCount - 1) - GetGroupRowCount(GVRetDetail))
             Dim id_prod_order_det_cekya As String = GVRetDetail.GetRowCellValue(i, "id_prod_order_det").ToString
@@ -326,6 +337,8 @@ WHERE ovhp.id_ovh_price='" & SLEOvh.EditValue.ToString & "'"
         ElseIf Not cond_check Then
             errorCustom("Product : '" + sample_check + "' cannot exceed " + allow_sum.ToString("F2") + ", please check in Info Qty ! ")
             infoQty()
+        ElseIf already_ret_out = True Then
+            errorCustom("Please check your pending return out for this receiving.")
         Else
             Dim query As String
             Dim prod_order_ret_out_number As String = ""
@@ -353,8 +366,8 @@ WHERE ovhp.id_ovh_price='" & SLEOvh.EditValue.ToString & "'"
                         prod_order_ret_out_number = header_number_prod("4")
 
                         'Main tbale
-                        query = "INSERT INTO tb_prod_order_ret_out(id_prod_order, prod_order_ret_out_number, id_comp_contact_to, id_comp_contact_from, prod_order_ret_out_date, prod_order_ret_out_due_date, prod_order_ret_out_note, id_report_status,id_ovh_price,id_return_qc_type) "
-                        query += "VALUES('" + id_prod_order + "', '" + prod_order_ret_out_number + "', '" + id_comp_contact_to + "', '" + id_comp_contact_from + "', NOW(), '" + prod_order_ret_out_due_date + "', '" + prod_order_ret_out_note + "', '" + id_report_status + "'," & id_ovh_price & ",'" & id_return_qc_type & "') ; SELECT LAST_INSERT_ID(); "
+                        query = "INSERT INTO tb_prod_order_ret_out(id_prod_order,id_prod_order_rec, prod_order_ret_out_number, id_comp_contact_to, id_comp_contact_from, prod_order_ret_out_date, prod_order_ret_out_due_date, prod_order_ret_out_note, id_report_status,id_ovh_price,id_return_qc_type) "
+                        query += "VALUES('" + id_prod_order + "','" + id_prod_order_rec + "', '" + prod_order_ret_out_number + "', '" + id_comp_contact_to + "', '" + id_comp_contact_from + "', NOW(), '" + prod_order_ret_out_due_date + "', '" + prod_order_ret_out_note + "', '" + id_report_status + "'," & id_ovh_price & ",'" & id_return_qc_type & "') ; SELECT LAST_INSERT_ID(); "
                         id_prod_order_ret_out = execute_query(query, 0, True, "", "", "", "")
 
                         'insert who prepared
@@ -399,7 +412,7 @@ WHERE ovhp.id_ovh_price='" & SLEOvh.EditValue.ToString & "'"
                         prod_order_ret_out_number = TxtRetOutNumber.Text
 
                         'edit main table
-                        query = "UPDATE tb_prod_order_ret_out SET id_prod_order = '" + id_prod_order + "', prod_order_ret_out_number = '" + prod_order_ret_out_number + "', id_comp_contact_to = '" + id_comp_contact_to + "', id_comp_contact_from = '" + id_comp_contact_from + "', prod_order_ret_out_due_date = '" + prod_order_ret_out_due_date + "', prod_order_ret_out_due_date = '" + prod_order_ret_out_due_date + "', id_report_status = '" + id_report_status + "', prod_order_ret_out_note = '" + prod_order_ret_out_note + "',id_ovh_price=" & id_ovh_price & ",id_return_qc_type='" & id_return_qc_type & "' WHERE id_prod_order_ret_out = '" + id_prod_order_ret_out + "' "
+                        query = "UPDATE tb_prod_order_ret_out SET id_prod_order = '" + id_prod_order + "',id_prod_order_rec = '" + id_prod_order_rec + "', prod_order_ret_out_number = '" + prod_order_ret_out_number + "', id_comp_contact_to = '" + id_comp_contact_to + "', id_comp_contact_from = '" + id_comp_contact_from + "', prod_order_ret_out_due_date = '" + prod_order_ret_out_due_date + "', prod_order_ret_out_due_date = '" + prod_order_ret_out_due_date + "', id_report_status = '" + id_report_status + "', prod_order_ret_out_note = '" + prod_order_ret_out_note + "',id_ovh_price=" & id_ovh_price & ",id_return_qc_type='" & id_return_qc_type & "' WHERE id_prod_order_ret_out = '" + id_prod_order_ret_out + "' "
                         execute_non_query(query, True, "", "", "", "")
 
                         'edit detail table
@@ -457,8 +470,10 @@ WHERE ovhp.id_ovh_price='" & SLEOvh.EditValue.ToString & "'"
         If LERetType.EditValue.ToString = "2" And SLEOvh.Text = "" Then
             warningCustom("Please select overhead first")
         Else
-            FormPopUpProd.id_pop_up = "2"
-            FormPopUpProd.ShowDialog()
+            'FormPopUpProd.id_pop_up = "2"
+            'FormPopUpProd.ShowDialog()
+            FormPopUpRecQC.id_pop_up = "3"
+            FormPopUpRecQC.ShowDialog()
         End If
     End Sub
     Private Sub BtnBrowseContactFrom_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnBrowseContactFrom.Click
@@ -787,9 +802,13 @@ WHERE ovhp.id_ovh_price='" & SLEOvh.EditValue.ToString & "'"
         cond_check = True
         qty_pl = Decimal.Parse(qty_plx.ToString)
         sample_check = sample_name
-        Dim query_check As String = "CALL view_stock_prod_rec('" + id_prod_order + "', '" + id_prod_order_det_cek + "', '" + id_prod_order_ret_out + "', '0','0', '0', '0') "
-        Dim data As DataTable = execute_query(query_check, -1, True, "", "", "", "")
-        allow_sum = Decimal.Parse(data.Rows(0)("qty"))
+
+        'Dim query_check As String = "CALL view_stock_prod_rec('" + id_prod_order + "', '" + id_prod_order_det_cek + "', '" + id_prod_order_ret_out + "', '0','0', '0', '0') "
+        'Dim data As DataTable = execute_query(query_check, -1, True, "", "", "", "")
+
+        Dim q_check As String = "CALL view_limit_prod_rec('" + id_prod_order_rec + "','" + id_prod_order + "', '" + id_prod_order_det_cek + "', '" + id_prod_order_ret_out + "', '0','0', '0', '0')"
+        Dim data As DataTable = execute_query(q_check, -1, True, "", "", "", "")
+        allow_sum = Decimal.Parse(Data.Rows(0)("qty"))
         If qty_pl > allow_sum Then
             cond_check = False
         End If
@@ -798,6 +817,7 @@ WHERE ovhp.id_ovh_price='" & SLEOvh.EditValue.ToString & "'"
     Sub infoQty()
         FormPopUpProdDet.id_pop_up = "1"
         FormPopUpProdDet.action = "ins"
+        FormPopUpProdDet.id_prod_order_rec = id_prod_order_rec
         FormPopUpProdDet.id_prod_order = id_prod_order
         FormPopUpProdDet.id_ret_out = id_prod_order_ret_out
         FormPopUpProdDet.BtnSave.Visible = False
@@ -844,7 +864,6 @@ WHERE ovhp.id_ovh_price='" & SLEOvh.EditValue.ToString & "'"
             GridColumnRemark.VisibleIndex = 5
             GVRetDetail.OptionsPrint.PrintFooter = False
             GVRetDetail.OptionsPrint.PrintHeader = False
-
 
             'export excel
             Dim path_root As String = ""

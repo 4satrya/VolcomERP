@@ -192,6 +192,9 @@ Partial Class FormSalesOrderSvcLevel
         Me.GridColumnUseUniqueCode = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdStore = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnidcommercetype = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnid_del_manifest = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnmanifest_number = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LinkManifest = New DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit()
         Me.GridView6 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GroupControl1 = New DevExpress.XtraEditors.GroupControl()
         Me.BtnUpdateDO = New DevExpress.XtraEditors.SimpleButton()
@@ -340,9 +343,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.DEFromNonStock = New DevExpress.XtraEditors.DateEdit()
         Me.LabelControl23 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl24 = New DevExpress.XtraEditors.LabelControl()
-        Me.GridColumnid_del_manifest = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnmanifest_number = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.LinkManifest = New DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit()
+        Me.GridColumnawbill_no = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GCFilter, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GCFilter.SuspendLayout()
         CType(Me.PanelSelect, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -401,6 +402,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.ViewPreDel.SuspendLayout()
         CType(Me.GVSalesDelOrder, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemCheckEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LinkManifest, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl1.SuspendLayout()
@@ -464,7 +466,6 @@ Partial Class FormSalesOrderSvcLevel
         CType(Me.DEUntilNonStock.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEFromNonStock.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEFromNonStock.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LinkManifest, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GCFilter
@@ -1858,7 +1859,7 @@ Partial Class FormSalesOrderSvcLevel
         '
         'GVSalesDelOrder
         '
-        Me.GVSalesDelOrder.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn20, Me.GridColumn21, Me.GridColumn22, Me.GridColumn23, Me.GridColumn24, Me.GridColumn25, Me.GridColumnOLStoreOrderDel, Me.GridColumnIdSalesDelOrder, Me.GridColumnWHName, Me.GridColumnCategory, Me.GridColumn26, Me.GridColumnUpdBy, Me.GridColumnSelect, Me.GridColumnTotalDel, Me.GridColumnSORemainign, Me.GridColumnCombineDel, Me.GridColumnPreparedDel, Me.GridColumnUseUniqueCode, Me.GridColumnIdStore, Me.GridColumnidcommercetype, Me.GridColumnid_del_manifest, Me.GridColumnmanifest_number})
+        Me.GVSalesDelOrder.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn20, Me.GridColumn21, Me.GridColumn22, Me.GridColumn23, Me.GridColumn24, Me.GridColumn25, Me.GridColumnOLStoreOrderDel, Me.GridColumnIdSalesDelOrder, Me.GridColumnWHName, Me.GridColumnCategory, Me.GridColumn26, Me.GridColumnUpdBy, Me.GridColumnSelect, Me.GridColumnTotalDel, Me.GridColumnSORemainign, Me.GridColumnCombineDel, Me.GridColumnPreparedDel, Me.GridColumnUseUniqueCode, Me.GridColumnIdStore, Me.GridColumnidcommercetype, Me.GridColumnid_del_manifest, Me.GridColumnmanifest_number, Me.GridColumnawbill_no})
         Me.GVSalesDelOrder.GridControl = Me.GCSalesDelOrder
         Me.GVSalesDelOrder.GroupCount = 1
         Me.GVSalesDelOrder.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total", Me.GridColumnTotalDel, "{0:n0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_remaining", Me.GridColumnSORemainign, "{0:n0}")})
@@ -2004,7 +2005,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.GridColumnSelect.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Right
         Me.GridColumnSelect.Name = "GridColumnSelect"
         Me.GridColumnSelect.Visible = True
-        Me.GridColumnSelect.VisibleIndex = 15
+        Me.GridColumnSelect.VisibleIndex = 16
         Me.GridColumnSelect.Width = 35
         '
         'RepositoryItemCheckEdit2
@@ -2084,6 +2085,29 @@ Partial Class FormSalesOrderSvcLevel
         Me.GridColumnidcommercetype.Caption = "id commerce type"
         Me.GridColumnidcommercetype.FieldName = "id_commerce_type"
         Me.GridColumnidcommercetype.Name = "GridColumnidcommercetype"
+        '
+        'GridColumnid_del_manifest
+        '
+        Me.GridColumnid_del_manifest.Caption = "id_del_manifest"
+        Me.GridColumnid_del_manifest.FieldName = "id_del_manifest"
+        Me.GridColumnid_del_manifest.Name = "GridColumnid_del_manifest"
+        Me.GridColumnid_del_manifest.OptionsColumn.AllowEdit = False
+        '
+        'GridColumnmanifest_number
+        '
+        Me.GridColumnmanifest_number.Caption = "Outbound Manifest"
+        Me.GridColumnmanifest_number.ColumnEdit = Me.LinkManifest
+        Me.GridColumnmanifest_number.FieldName = "manifest_number"
+        Me.GridColumnmanifest_number.Name = "GridColumnmanifest_number"
+        Me.GridColumnmanifest_number.OptionsColumn.ReadOnly = True
+        Me.GridColumnmanifest_number.Visible = True
+        Me.GridColumnmanifest_number.VisibleIndex = 14
+        Me.GridColumnmanifest_number.Width = 93
+        '
+        'LinkManifest
+        '
+        Me.LinkManifest.AutoHeight = False
+        Me.LinkManifest.Name = "LinkManifest"
         '
         'GridView6
         '
@@ -3502,28 +3526,13 @@ Partial Class FormSalesOrderSvcLevel
         Me.LabelControl24.TabIndex = 8892
         Me.LabelControl24.Text = "From"
         '
-        'GridColumnid_del_manifest
+        'GridColumnawbill_no
         '
-        Me.GridColumnid_del_manifest.Caption = "id_del_manifest"
-        Me.GridColumnid_del_manifest.FieldName = "id_del_manifest"
-        Me.GridColumnid_del_manifest.Name = "GridColumnid_del_manifest"
-        Me.GridColumnid_del_manifest.OptionsColumn.AllowEdit = False
-        '
-        'GridColumnmanifest_number
-        '
-        Me.GridColumnmanifest_number.Caption = "Outbound Manifest"
-        Me.GridColumnmanifest_number.ColumnEdit = Me.LinkManifest
-        Me.GridColumnmanifest_number.FieldName = "manifest_number"
-        Me.GridColumnmanifest_number.Name = "GridColumnmanifest_number"
-        Me.GridColumnmanifest_number.OptionsColumn.ReadOnly = True
-        Me.GridColumnmanifest_number.Visible = True
-        Me.GridColumnmanifest_number.VisibleIndex = 14
-        Me.GridColumnmanifest_number.Width = 93
-        '
-        'LinkManifest
-        '
-        Me.LinkManifest.AutoHeight = False
-        Me.LinkManifest.Name = "LinkManifest"
+        Me.GridColumnawbill_no.Caption = "AWB"
+        Me.GridColumnawbill_no.FieldName = "awbill_no"
+        Me.GridColumnawbill_no.Name = "GridColumnawbill_no"
+        Me.GridColumnawbill_no.Visible = True
+        Me.GridColumnawbill_no.VisibleIndex = 15
         '
         'FormSalesOrderSvcLevel
         '
@@ -3596,6 +3605,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.ViewPreDel.ResumeLayout(False)
         CType(Me.GVSalesDelOrder, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemCheckEdit2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LinkManifest, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControl1.ResumeLayout(False)
@@ -3664,7 +3674,6 @@ Partial Class FormSalesOrderSvcLevel
         CType(Me.DEUntilNonStock.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEFromNonStock.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEFromNonStock.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LinkManifest, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -3991,4 +4000,5 @@ Partial Class FormSalesOrderSvcLevel
     Friend WithEvents GridColumnid_del_manifest As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnmanifest_number As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents LinkManifest As DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit
+    Friend WithEvents GridColumnawbill_no As DevExpress.XtraGrid.Columns.GridColumn
 End Class

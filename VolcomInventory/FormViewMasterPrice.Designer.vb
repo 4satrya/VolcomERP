@@ -53,6 +53,7 @@ Partial Class FormViewMasterPrice
         Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.PanelControlNav = New DevExpress.XtraEditors.PanelControl()
         Me.BtnImport = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnExportToXLS = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.GroupControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl3.SuspendLayout()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -83,19 +84,20 @@ Partial Class FormViewMasterPrice
         '
         Me.GroupControl3.CaptionLocation = DevExpress.Utils.Locations.Left
         Me.GroupControl3.Controls.Add(Me.BtnAttachment)
+        Me.GroupControl3.Controls.Add(Me.BtnExportToXLS)
         Me.GroupControl3.Controls.Add(Me.BMark)
         Me.GroupControl3.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.GroupControl3.Location = New System.Drawing.Point(0, 591)
+        Me.GroupControl3.Location = New System.Drawing.Point(0, 569)
         Me.GroupControl3.Name = "GroupControl3"
-        Me.GroupControl3.Size = New System.Drawing.Size(951, 55)
+        Me.GroupControl3.Size = New System.Drawing.Size(951, 77)
         Me.GroupControl3.TabIndex = 193
         '
         'BtnAttachment
         '
         Me.BtnAttachment.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.BtnAttachment.Location = New System.Drawing.Point(20, 27)
+        Me.BtnAttachment.Location = New System.Drawing.Point(20, 52)
         Me.BtnAttachment.Name = "BtnAttachment"
-        Me.BtnAttachment.Size = New System.Drawing.Size(929, 26)
+        Me.BtnAttachment.Size = New System.Drawing.Size(929, 23)
         Me.BtnAttachment.TabIndex = 5
         Me.BtnAttachment.Text = "Attachment"
         '
@@ -196,7 +198,7 @@ Partial Class FormViewMasterPrice
         Me.GroupControl1.Controls.Add(Me.MENote)
         Me.GroupControl1.Controls.Add(Me.LabelControl18)
         Me.GroupControl1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.GroupControl1.Location = New System.Drawing.Point(0, 510)
+        Me.GroupControl1.Location = New System.Drawing.Point(0, 488)
         Me.GroupControl1.Name = "GroupControl1"
         Me.GroupControl1.Size = New System.Drawing.Size(951, 81)
         Me.GroupControl1.TabIndex = 195
@@ -259,7 +261,7 @@ Partial Class FormViewMasterPrice
         Me.GroupControlListItem.Enabled = False
         Me.GroupControlListItem.Location = New System.Drawing.Point(0, 74)
         Me.GroupControlListItem.Name = "GroupControlListItem"
-        Me.GroupControlListItem.Size = New System.Drawing.Size(951, 436)
+        Me.GroupControlListItem.Size = New System.Drawing.Size(951, 414)
         Me.GroupControlListItem.TabIndex = 196
         Me.GroupControlListItem.Text = "Item List"
         '
@@ -271,7 +273,7 @@ Partial Class FormViewMasterPrice
         Me.GCItemList.MainView = Me.GVItemList
         Me.GCItemList.Name = "GCItemList"
         Me.GCItemList.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemSpinEdit1, Me.RepositoryItemSpinEdit2, Me.RepositoryItemCheckEdit1})
-        Me.GCItemList.Size = New System.Drawing.Size(929, 397)
+        Me.GCItemList.Size = New System.Drawing.Size(929, 375)
         Me.GCItemList.TabIndex = 3
         Me.GCItemList.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVItemList})
         '
@@ -418,6 +420,15 @@ Partial Class FormViewMasterPrice
         Me.BtnImport.TabIndex = 3
         Me.BtnImport.Text = "Import from Excel"
         '
+        'BtnExportToXLS
+        '
+        Me.BtnExportToXLS.Dock = System.Windows.Forms.DockStyle.Top
+        Me.BtnExportToXLS.Location = New System.Drawing.Point(20, 27)
+        Me.BtnExportToXLS.Name = "BtnExportToXLS"
+        Me.BtnExportToXLS.Size = New System.Drawing.Size(929, 25)
+        Me.BtnExportToXLS.TabIndex = 6
+        Me.BtnExportToXLS.Text = "Export to XLS"
+        '
         'FormViewMasterPrice
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -497,4 +508,5 @@ Partial Class FormViewMasterPrice
     Friend WithEvents RepositoryItemCheckEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
     Friend WithEvents PanelControlNav As DevExpress.XtraEditors.PanelControl
     Friend WithEvents BtnImport As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BtnExportToXLS As DevExpress.XtraEditors.SimpleButton
 End Class

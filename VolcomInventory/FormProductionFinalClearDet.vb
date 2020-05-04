@@ -14,12 +14,18 @@ Public Class FormProductionFinalClearDet
     Public dt As New DataTable
     Dim dt_exist As New DataTable
     Dim is_use_qc_report As String = "-1"
+    Public id_prod_order_rec As String = "-1"
 
     Private Sub FormProductionFinalClearDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewReportStatus()
         viewPLCat()
         viewPLCatSub()
         actionLoad()
+    End Sub
+
+    Sub load_cat_rec()
+        Dim q As String = "SELECT id_pl_category,pl_category FROM tb_lookup_pl_category"
+        viewSearchLookupQuery(SLERecType, q, "id_pl_category", "pl_category", "id_pl_category")
     End Sub
 
     'View Data
@@ -49,6 +55,8 @@ Public Class FormProductionFinalClearDet
     End Sub
 
     Sub actionLoad()
+        load_cat_rec()
+
         Cursor = Cursors.WaitCursor
         If action = "ins" Then
             Try
@@ -69,12 +77,13 @@ Public Class FormProductionFinalClearDet
             DEForm.Text = view_date(0)
             TxtCodeCompFrom.Focus()
 
-            If id_prod_order <> "-1" Then
-                Dim query As String = "SELECT po.id_prod_order, po.prod_order_number, po.prod_order_date, 
+            If id_prod_order_rec <> "-1" Then
+                Dim query As String = "SELECT po.id_prod_order, po.prod_order_number,rec.prod_order_rec_number, po.prod_order_date, 
                 comp.comp_number AS `vendor_number`, comp.comp_name AS `vendor_name`, 
                 d.id_design, d.design_code, d.design_display_name, ss.season, del.delivery, po.id_report_status,
-                cfr.id_comp AS `id_comp_from`,cfr.comp_number as `comp_number_from`, cfr.comp_name AS `comp_name_from`, po.is_use_qc_report
-                FROM tb_prod_order po
+                cfr.id_comp AS `id_comp_from`,cfr.comp_number as `comp_number_from`, cfr.comp_name AS `comp_name_from`, po.is_use_qc_report, rec.id_pl_category
+                FROM tb_prod_order_rec rec 
+                INNER JOIN tb_prod_order po ON po.id_prod_order=rec.id_prod_order
                 INNER JOIN tb_prod_order_wo wo On wo.id_prod_order = po.id_prod_order AND wo.is_main_vendor='1' AND wo.id_report_status!=5
                 INNER JOIN tb_m_ovh_price ovh_p ON ovh_p.id_ovh_price = wo.id_ovh_price
                 INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact=ovh_p.id_comp_contact 
@@ -84,7 +93,7 @@ Public Class FormProductionFinalClearDet
                 INNER JOIN tb_season_delivery del ON del.id_delivery = po.id_delivery
                 INNER JOIN tb_season ss ON ss.id_season = del.id_season
                 INNER JOIN tb_m_comp cfr ON cfr.id_comp = 74
-                WHERE po.id_prod_order='" + id_prod_order + "' "
+                WHERE rec.id_prod_order_rec='" + id_prod_order_rec + "' "
                 Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
                 is_use_qc_report = data.Rows(0)("is_use_qc_report").ToString
                 id_design = data.Rows(0)("id_design").ToString
@@ -92,12 +101,17 @@ Public Class FormProductionFinalClearDet
                 TxtCodeCompFrom.Text = data.Rows(0)("comp_number_from").ToString
                 TxtNameCompFrom.Text = data.Rows(0)("comp_name_from").ToString
                 TxtOrder.Text = data.Rows(0)("prod_order_number").ToString
+                TERec.Text = data.Rows(0)("prod_order_rec_number").ToString
                 TxtSeason.Text = data.Rows(0)("season").ToString
                 TxtDel.Text = data.Rows(0)("delivery").ToString
                 TxtVendorCode.Text = data.Rows(0)("vendor_number").ToString
                 TxtVendorName.Text = data.Rows(0)("vendor_name").ToString
                 TxtStyleCode.Text = data.Rows(0)("design_code").ToString
                 TxtStyle.Text = data.Rows(0)("design_display_name").ToString
+                LEPLCategory.EditValue = data.Rows(0)("id_pl_category").ToString
+
+                SLERecType.EditValue = data.Rows(0)("id_pl_category").ToString
+
                 viewDetail()
                 view_barcode_list()
                 pre_viewImages("2", PEView, id_design, False)
@@ -112,6 +126,8 @@ Public Class FormProductionFinalClearDet
                     getLimitQty()
                     GridColumnQtySum.OptionsColumn.AllowEdit = True
                 End If
+                '
+                BtnInfoSrs.Enabled = True
             End If
         ElseIf action = "upd" Then
             GroupControlItemList.Enabled = True
@@ -132,6 +148,7 @@ Public Class FormProductionFinalClearDet
             Else
                 LECLaim.EditValue = Nothing
             End If
+            SLERecType.EditValue = data.Rows(0)("id_pl_category_rec").ToString
             TxtNumber.Text = data.Rows(0)("prod_fc_number").ToString
             DEForm.Text = view_date_from(data.Rows(0)("prod_fc_datex").ToString, 0)
             MENote.Text = data.Rows(0)("prod_fc_note").ToString
@@ -142,6 +159,7 @@ Public Class FormProductionFinalClearDet
             TxtCodeCompTo.Text = data.Rows(0)("comp_to_number").ToString
             TxtNameCompTo.Text = data.Rows(0)("comp_to_name").ToString
             TxtOrder.Text = data.Rows(0)("prod_order_number").ToString
+            TERec.Text = data.Rows(0)("prod_order_rec_number").ToString
             TxtSeason.Text = data.Rows(0)("season").ToString
             TxtDel.Text = data.Rows(0)("delivery").ToString
             TxtVendorCode.Text = data.Rows(0)("vendor_number").ToString
@@ -185,7 +203,6 @@ Public Class FormProductionFinalClearDet
             GCItemList.DataSource = data
             GVItemList.BestFitColumns()
         End If
-
     End Sub
 
     Sub view_barcode_list()
@@ -625,8 +642,8 @@ Public Class FormProductionFinalClearDet
                 If confirm = Windows.Forms.DialogResult.Yes Then
                     Cursor = Cursors.WaitCursor
                     Dim report_mark_type As String = If(id_pl_category = "1", "224", "105")
-                    Dim query As String = "INSERT INTO tb_prod_fc(id_prod_order, id_comp_from, id_comp_to, id_pl_category, id_pl_category_sub, prod_fc_number, prod_fc_date, prod_fc_note, id_report_status, report_mark_type) "
-                    query += "VALUES('" + id_prod_order + "','" + id_comp_from + "', '" + id_comp_to + "', '" + id_pl_category + "', '" + id_pl_category_sub + "', '" + header_number_prod("12") + "' , NOW(), '" + prod_fc_note + "', '1', '" + report_mark_type + "'); SELECT LAST_INSERT_ID(); "
+                    Dim query As String = "INSERT INTO tb_prod_fc(id_prod_order,id_prod_order_rec, id_comp_from, id_comp_to, id_pl_category, id_pl_category_sub, prod_fc_number, prod_fc_date, prod_fc_note, id_report_status, report_mark_type) "
+                    query += "VALUES('" + id_prod_order + "','" + id_prod_order_rec + "','" + id_comp_from + "', '" + id_comp_to + "', '" + id_pl_category + "', '" + id_pl_category_sub + "', '" + header_number_prod("12") + "' , NOW(), '" + prod_fc_note + "', '1', '" + report_mark_type + "'); SELECT LAST_INSERT_ID(); "
                     id_prod_fc = execute_query(query, 0, True, "", "", "", "")
                     increase_inc_prod("12")
 
@@ -720,11 +737,14 @@ Public Class FormProductionFinalClearDet
 
     Private Sub BtnBrowsePO_Click(sender As Object, e As EventArgs) Handles BtnBrowsePO.Click
         Cursor = Cursors.WaitCursor
-        FormPopUpProd.id_pop_up = "9"
-        FormPopUpProd.ShowDialog()
-        If id_prod_order <> "-1" Then
-            LEPLCategory.Focus()
-        End If
+        'FormPopUpProd.id_pop_up = "9"
+        'FormPopUpProd.ShowDialog()
+        'If id_prod_order <> "-1" Then
+        'LEPLCategory.Focus()
+        'End If
+        FormPopUpRecQC.id_pop_up = "3"
+        FormPopUpRecQC.ShowDialog()
+
         Cursor = Cursors.Default
     End Sub
 
@@ -776,12 +796,15 @@ Public Class FormProductionFinalClearDet
         If GVItemList.RowCount > 0 And GVItemList.FocusedRowHandle >= 0 Then
             Dim row_foc As Integer = e.RowHandle
             If e.Column.FieldName = "prod_fc_det_qty" Then
-                If e.Value > GVItemList.GetRowCellValue(row_foc, "qty_limit") Then
-                    stopCustom("Can't exceed " + GVItemList.GetRowCellValue(row_foc, "qty_limit").ToString)
-                    GVItemList.SetRowCellValue(row_foc, "prod_fc_det_qty", GVItemList.ActiveEditor.OldEditValue)
-                    GVItemList.BestFitColumns()
-                Else
-                    GVItemList.BestFitColumns()
+                If Not e.Value = 0 Then
+                    If e.Value > GVItemList.GetRowCellValue(row_foc, "qty_limit") Then
+                        stopCustom("Can't exceed " + GVItemList.GetRowCellValue(row_foc, "qty_limit").ToString)
+                        GVItemList.SetRowCellValue(row_foc, "prod_fc_det_qty", GVItemList.ActiveEditor.OldEditValue)
+                        GVItemList.BestFitColumns()
+                    Else
+                        GVItemList.BestFitColumns()
+                    End If
+
                 End If
             End If
         End If
@@ -909,6 +932,60 @@ Public Class FormProductionFinalClearDet
 
     Sub getLimitQty()
         Cursor = Cursors.WaitCursor
+        'Dim query As String = "SELECT pod.id_prod_order_det, pod.id_prod_order,pd_prod.id_product,
+        '    IFNULL(rec.prod_order_rec_det_qty,0) AS `total_rec`,
+        '    IFNULL(ro.tot_ret_out,0) AS `total_ret_out`, 
+        '    IFNULL(ri.tot_ret_in,0) AS `total_ret_in`, 
+        '    IFNULL(adj_in.tot_adj_in,0) AS `total_adj_in`,
+        '    IFNULL(adj_out.tot_adj_out,0) AS `total_adj_out`,
+        '    IFNULL(qcr.tot_qc_report,0) AS `total_qc_report`,
+        '    ((SELECT total_rec) - (SELECT total_ret_out) + (SELECT total_ret_in)  + (SELECT total_adj_in) - (SELECT total_adj_out) - (SELECT total_qc_report)) AS `qty_limit`
+        '    FROM tb_prod_order_det pod
+        '    INNER JOIN tb_prod_demand_product pd_prod ON pd_prod.id_prod_demand_product = pod.id_prod_demand_product
+        '    LEFT JOIN (
+        '     SELECT b1.id_prod_order_det, b2.id_prod_order_rec, SUM(b1.prod_order_rec_det_qty) AS  prod_order_rec_det_qty
+        '     FROM tb_prod_order_rec_det b1
+        '     INNER JOIN tb_prod_order_rec b2 ON b1.id_prod_order_rec = b2.id_prod_order_rec
+        '     WHERE b2.id_report_status =6 AND b2.id_prod_order=" + id_prod_order + "
+        '     GROUP BY b1.id_prod_order_det
+        '    ) rec ON rec.id_prod_order_det = pod.id_prod_order_det
+        '    LEFT JOIN (
+        '     SELECT d1.id_prod_order_det, d2.id_prod_order_ret_out, 
+        '     SUM(d1.prod_order_ret_out_det_qty) AS tot_ret_out 
+        '     FROM tb_prod_order_ret_out_det d1 
+        '     INNER JOIN tb_prod_order_ret_out d2 ON d1.id_prod_order_ret_out = d2.id_prod_order_ret_out 
+        '     WHERE d2.id_report_status !=5 AND d2.id_prod_order=" + id_prod_order + "
+        '     GROUP BY d1.id_prod_order_det
+        '    ) ro ON ro.id_prod_order_det = pod.id_prod_order_det 
+        '    LEFT JOIN(
+        '     SELECT e1.id_prod_order_det, e2.id_prod_order_ret_in,SUM(e1.prod_order_ret_in_det_qty) AS tot_ret_in 
+        '     FROM tb_prod_order_ret_in_det e1 
+        '     INNER JOIN tb_prod_order_ret_in e2 ON e1.id_prod_order_ret_in = e2.id_prod_order_ret_in 
+        '     WHERE e2.id_report_status =6 AND e2.id_prod_order=" + id_prod_order + "
+        '     GROUP BY e1.id_prod_order_det
+        '    ) ri ON ri.id_prod_order_det = pod.id_prod_order_det
+        '    LEFT JOIN(
+        '     SELECT adj_in_d.id_prod_order_det, adj_in_d.id_prod_order_qc_adj_in_det,SUM(adj_in_d.prod_order_qc_adj_in_det_qty) AS tot_adj_in
+        '     FROM tb_prod_order_qc_adj_in_det adj_in_d
+        '     INNER JOIN tb_prod_order_qc_adj_in adj_in ON adj_in_d.id_prod_order_qc_adj_in = adj_in.id_prod_order_qc_adj_in 
+        '     WHERE adj_in.id_report_status =6 AND adj_in.id_prod_order=" + id_prod_order + "
+        '     GROUP BY adj_in_d.id_prod_order_det
+        '    ) adj_in ON pod.id_prod_order_det = adj_in.id_prod_order_det
+        '    LEFT JOIN (
+        '     SELECT adj_out_d.id_prod_order_det, adj_out_d.id_prod_order_qc_adj_out_det,SUM(adj_out_d.prod_order_qc_adj_out_det_qty) AS tot_adj_out
+        '     FROM tb_prod_order_qc_adj_out_det adj_out_d
+        '     INNER JOIN tb_prod_order_qc_adj_out adj_out ON adj_out_d.id_prod_order_qc_adj_out = adj_out.id_prod_order_qc_adj_out 
+        '     WHERE adj_out.id_report_status !=5 AND adj_out.id_prod_order=" + id_prod_order + "
+        '     GROUP BY adj_out_d.id_prod_order_det
+        '    ) adj_out ON pod.id_prod_order_det = adj_out.id_prod_order_det
+        '    LEFT JOIN (
+        '     SELECT fd.id_prod_order_det, SUM(fd.prod_fc_det_qty) AS `tot_qc_report` 
+        '     FROM tb_prod_fc f
+        '     INNER JOIN tb_prod_fc_det fd ON fd.id_prod_fc = f.id_prod_fc
+        '     WHERE f.id_report_status!=5 AND f.id_prod_order=" + id_prod_order + "
+        '     GROUP BY fd.id_prod_order_det
+        '    ) qcr ON qcr.id_prod_order_det = pod.id_prod_order_det
+        '    WHERE pod.id_prod_order=" + id_prod_order + " "
         Dim query As String = "SELECT pod.id_prod_order_det, pod.id_prod_order,pd_prod.id_product,
             IFNULL(rec.prod_order_rec_det_qty,0) AS `total_rec`,
             IFNULL(ro.tot_ret_out,0) AS `total_ret_out`, 
@@ -920,47 +997,47 @@ Public Class FormProductionFinalClearDet
             FROM tb_prod_order_det pod
             INNER JOIN tb_prod_demand_product pd_prod ON pd_prod.id_prod_demand_product = pod.id_prod_demand_product
             LEFT JOIN (
-	            SELECT b1.id_prod_order_det, b2.id_prod_order_rec, SUM(b1.prod_order_rec_det_qty) AS  prod_order_rec_det_qty
-	            FROM tb_prod_order_rec_det b1
-	            INNER JOIN tb_prod_order_rec b2 ON b1.id_prod_order_rec = b2.id_prod_order_rec
-	            WHERE b2.id_report_status =6 AND b2.id_prod_order=" + id_prod_order + "
-	            GROUP BY b1.id_prod_order_det
+             SELECT b1.id_prod_order_det, b2.id_prod_order_rec, SUM(b1.prod_order_rec_det_qty) AS prod_order_rec_det_qty
+             FROM tb_prod_order_rec_det b1
+             INNER JOIN tb_prod_order_rec b2 ON b1.id_prod_order_rec = b2.id_prod_order_rec
+             WHERE b2.id_report_status =6 AND b2.id_prod_order=" + id_prod_order + " AND b2.id_prod_order_rec='" + id_prod_order_rec + "'
+             GROUP BY b1.id_prod_order_det
             ) rec ON rec.id_prod_order_det = pod.id_prod_order_det
             LEFT JOIN (
-	            SELECT d1.id_prod_order_det, d2.id_prod_order_ret_out, 
-	            SUM(d1.prod_order_ret_out_det_qty) AS tot_ret_out 
-	            FROM tb_prod_order_ret_out_det d1 
-	            INNER JOIN tb_prod_order_ret_out d2 ON d1.id_prod_order_ret_out = d2.id_prod_order_ret_out 
-	            WHERE d2.id_report_status !=5 AND d2.id_prod_order=" + id_prod_order + "
-	            GROUP BY d1.id_prod_order_det
+             SELECT d1.id_prod_order_det, d2.id_prod_order_ret_out, 
+             SUM(d1.prod_order_ret_out_det_qty) AS tot_ret_out 
+             FROM tb_prod_order_ret_out_det d1 
+             INNER JOIN tb_prod_order_ret_out d2 ON d1.id_prod_order_ret_out = d2.id_prod_order_ret_out 
+             WHERE d2.id_report_status !=5 AND d2.id_prod_order=" + id_prod_order + " AND d2.id_prod_order_rec='" + id_prod_order_rec + "'
+             GROUP BY d1.id_prod_order_det
             ) ro ON ro.id_prod_order_det = pod.id_prod_order_det 
             LEFT JOIN(
-	            SELECT e1.id_prod_order_det, e2.id_prod_order_ret_in,SUM(e1.prod_order_ret_in_det_qty) AS tot_ret_in 
-	            FROM tb_prod_order_ret_in_det e1 
-	            INNER JOIN tb_prod_order_ret_in e2 ON e1.id_prod_order_ret_in = e2.id_prod_order_ret_in 
-	            WHERE e2.id_report_status =6 AND e2.id_prod_order=" + id_prod_order + "
-	            GROUP BY e1.id_prod_order_det
+             SELECT e1.id_prod_order_det, e2.id_prod_order_ret_in,SUM(e1.prod_order_ret_in_det_qty) AS tot_ret_in 
+             FROM tb_prod_order_ret_in_det e1 
+             INNER JOIN tb_prod_order_ret_in e2 ON e1.id_prod_order_ret_in = e2.id_prod_order_ret_in 
+             WHERE e2.id_report_status =6 AND e2.id_prod_order=" + id_prod_order + " AND e2.id_prod_order_rec='" + id_prod_order_rec + "'
+             GROUP BY e1.id_prod_order_det
             ) ri ON ri.id_prod_order_det = pod.id_prod_order_det
             LEFT JOIN(
-	            SELECT adj_in_d.id_prod_order_det, adj_in_d.id_prod_order_qc_adj_in_det,SUM(adj_in_d.prod_order_qc_adj_in_det_qty) AS tot_adj_in
-	            FROM tb_prod_order_qc_adj_in_det adj_in_d
-	            INNER JOIN tb_prod_order_qc_adj_in adj_in ON adj_in_d.id_prod_order_qc_adj_in = adj_in.id_prod_order_qc_adj_in 
-	            WHERE adj_in.id_report_status =6 AND adj_in.id_prod_order=" + id_prod_order + "
-	            GROUP BY adj_in_d.id_prod_order_det
+             SELECT adj_in_d.id_prod_order_det, adj_in_d.id_prod_order_qc_adj_in_det,SUM(adj_in_d.prod_order_qc_adj_in_det_qty) AS tot_adj_in
+             FROM tb_prod_order_qc_adj_in_det adj_in_d
+             INNER JOIN tb_prod_order_qc_adj_in adj_in ON adj_in_d.id_prod_order_qc_adj_in = adj_in.id_prod_order_qc_adj_in 
+             WHERE adj_in.id_report_status =6 AND adj_in.id_prod_order=" + id_prod_order + "
+             GROUP BY adj_in_d.id_prod_order_det
             ) adj_in ON pod.id_prod_order_det = adj_in.id_prod_order_det
             LEFT JOIN (
-	            SELECT adj_out_d.id_prod_order_det, adj_out_d.id_prod_order_qc_adj_out_det,SUM(adj_out_d.prod_order_qc_adj_out_det_qty) AS tot_adj_out
-	            FROM tb_prod_order_qc_adj_out_det adj_out_d
-	            INNER JOIN tb_prod_order_qc_adj_out adj_out ON adj_out_d.id_prod_order_qc_adj_out = adj_out.id_prod_order_qc_adj_out 
-	            WHERE adj_out.id_report_status !=5 AND adj_out.id_prod_order=" + id_prod_order + "
-	            GROUP BY adj_out_d.id_prod_order_det
+             SELECT adj_out_d.id_prod_order_det, adj_out_d.id_prod_order_qc_adj_out_det,SUM(adj_out_d.prod_order_qc_adj_out_det_qty) AS tot_adj_out
+             FROM tb_prod_order_qc_adj_out_det adj_out_d
+             INNER JOIN tb_prod_order_qc_adj_out adj_out ON adj_out_d.id_prod_order_qc_adj_out = adj_out.id_prod_order_qc_adj_out 
+             WHERE adj_out.id_report_status !=5 AND adj_out.id_prod_order=" + id_prod_order + "
+             GROUP BY adj_out_d.id_prod_order_det
             ) adj_out ON pod.id_prod_order_det = adj_out.id_prod_order_det
             LEFT JOIN (
-	            SELECT fd.id_prod_order_det, SUM(fd.prod_fc_det_qty) AS `tot_qc_report` 
-	            FROM tb_prod_fc f
-	            INNER JOIN tb_prod_fc_det fd ON fd.id_prod_fc = f.id_prod_fc
-	            WHERE f.id_report_status!=5 AND f.id_prod_order=" + id_prod_order + "
-	            GROUP BY fd.id_prod_order_det
+             SELECT fd.id_prod_order_det, SUM(fd.prod_fc_det_qty) AS `tot_qc_report` 
+             FROM tb_prod_fc f
+             INNER JOIN tb_prod_fc_det fd ON fd.id_prod_fc = f.id_prod_fc
+             WHERE f.id_report_status!=5 AND f.id_prod_order=" + id_prod_order + "
+             GROUP BY fd.id_prod_order_det
             ) qcr ON qcr.id_prod_order_det = pod.id_prod_order_det
             WHERE pod.id_prod_order=" + id_prod_order + " "
         Dim dt_cek As DataTable = execute_query(query, -1, True, "", "", "", "")
@@ -1121,5 +1198,14 @@ Public Class FormProductionFinalClearDet
         WHERE q.id_prod_order=" + id_prod_order + " AND q.id_report_status!=5 AND d.is_old_design=2 "
         dt_exist = execute_query(query, -1, True, "", "", "", "")
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnInfoSrs_Click(sender As Object, e As EventArgs) Handles BtnInfoSrs.Click
+        FormPopUpProdDet.id_pop_up = "3"
+        FormPopUpProdDet.id_prod_order_rec = id_prod_order_rec
+        FormPopUpProdDet.id_prod_order = id_prod_order
+        FormPopUpProdDet.BtnSave.Visible = False
+        FormPopUpProdDet.is_info_form = True
+        FormPopUpProdDet.ShowDialog()
     End Sub
 End Class

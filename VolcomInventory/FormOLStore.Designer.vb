@@ -199,6 +199,7 @@ Partial Class FormOLStore
         Me.GridColumn39 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
+        Me.CEAllow = New DevExpress.XtraEditors.CheckEdit()
         Me.BtnPrint = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnSyncOrder = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnConfirmedOrder = New DevExpress.XtraEditors.SimpleButton()
@@ -263,6 +264,7 @@ Partial Class FormOLStore
         CType(Me.LinkSalesOrder, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl3.SuspendLayout()
+        CType(Me.CEAllow.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl2
@@ -1830,6 +1832,7 @@ Partial Class FormOLStore
         '
         'PanelControl3
         '
+        Me.PanelControl3.Controls.Add(Me.CEAllow)
         Me.PanelControl3.Controls.Add(Me.BtnPrint)
         Me.PanelControl3.Controls.Add(Me.BtnSyncOrder)
         Me.PanelControl3.Controls.Add(Me.BtnConfirmedOrder)
@@ -1840,6 +1843,18 @@ Partial Class FormOLStore
         Me.PanelControl3.Name = "PanelControl3"
         Me.PanelControl3.Size = New System.Drawing.Size(994, 43)
         Me.PanelControl3.TabIndex = 0
+        '
+        'CEAllow
+        '
+        Me.CEAllow.Location = New System.Drawing.Point(112, 12)
+        Me.CEAllow.Name = "CEAllow"
+        Me.CEAllow.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CEAllow.Properties.Appearance.ForeColor = System.Drawing.Color.DarkRed
+        Me.CEAllow.Properties.Appearance.Options.UseFont = True
+        Me.CEAllow.Properties.Appearance.Options.UseForeColor = True
+        Me.CEAllow.Properties.Caption = "Lewati item yang tidak memiliki stok"
+        Me.CEAllow.Size = New System.Drawing.Size(232, 19)
+        Me.CEAllow.TabIndex = 5
         '
         'BtnPrint
         '
@@ -1960,6 +1975,7 @@ Partial Class FormOLStore
         CType(Me.LinkSalesOrder, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl3.ResumeLayout(False)
+        CType(Me.CEAllow.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -2147,4 +2163,5 @@ Partial Class FormOLStore
     Friend WithEvents BtnAllOrder As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents GridColumn39 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents CEAllow As DevExpress.XtraEditors.CheckEdit
 End Class

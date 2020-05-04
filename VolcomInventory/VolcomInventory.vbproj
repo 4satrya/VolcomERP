@@ -889,6 +889,12 @@
     <Compile Include="FormCompanyEmailMappingDet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormCompareStockWebsite.Designer.vb">
+      <DependentUpon>FormCompareStockWebsite.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormCompareStockWebsite.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormCustomDialog.Designer.vb">
       <DependentUpon>FormCustomDialog.vb</DependentUpon>
     </Compile>
@@ -2322,6 +2328,42 @@
     <Compile Include="FormItemSubCatDet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormItemTrf.Designer.vb">
+      <DependentUpon>FormItemTrf.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormItemTrf.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormItemTrfAdd.Designer.vb">
+      <DependentUpon>FormItemTrfAdd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormItemTrfAdd.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormItemTrfDet.Designer.vb">
+      <DependentUpon>FormItemTrfDet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormItemTrfDet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormKecamatanSingle.Designer.vb">
+      <DependentUpon>FormKecamatanSingle.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormKecamatanSingle.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLetterOfStatement.Designer.vb">
+      <DependentUpon>FormLetterOfStatement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormLetterOfStatement.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLetterOfStatementDet.Designer.vb">
+      <DependentUpon>FormLetterOfStatementDet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormLetterOfStatementDet.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormLineList.Designer.vb">
       <DependentUpon>FormLineList.vb</DependentUpon>
     </Compile>
@@ -2746,6 +2788,12 @@
       <DependentUpon>FormPopUpOVH.vb</DependentUpon>
     </Compile>
     <Compile Include="FormPopUpOVH.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPopUpRetOut.Designer.vb">
+      <DependentUpon>FormPopUpRetOut.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormPopUpRetOut.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormPopUpSalesDel.designer.vb">
@@ -7209,6 +7257,12 @@
     <Compile Include="ReportMasterEmployeeSuratKeteranganPenangguhanBank.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ReportMasterEmployeeSuratReferensi.Designer.vb">
+      <DependentUpon>ReportMasterEmployeeSuratReferensi.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportMasterEmployeeSuratReferensi.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ReportMasterEmployeeSuratTugas.Designer.vb">
       <DependentUpon>ReportMasterEmployeeSuratTugas.vb</DependentUpon>
     </Compile>
@@ -8307,6 +8361,9 @@
     <EmbeddedResource Include="FormCompanyEmailMappingDet.resx">
       <DependentUpon>FormCompanyEmailMappingDet.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormCompareStockWebsite.resx">
+      <DependentUpon>FormCompareStockWebsite.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormCustomDialog.resx">
       <DependentUpon>FormCustomDialog.vb</DependentUpon>
     </EmbeddedResource>
@@ -9040,6 +9097,24 @@
     <EmbeddedResource Include="FormItemSubCatDet.resx">
       <DependentUpon>FormItemSubCatDet.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormItemTrf.resx">
+      <DependentUpon>FormItemTrf.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormItemTrfAdd.resx">
+      <DependentUpon>FormItemTrfAdd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormItemTrfDet.resx">
+      <DependentUpon>FormItemTrfDet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormKecamatanSingle.resx">
+      <DependentUpon>FormKecamatanSingle.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLetterOfStatement.resx">
+      <DependentUpon>FormLetterOfStatement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLetterOfStatementDet.resx">
+      <DependentUpon>FormLetterOfStatementDet.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormLineList.resx">
       <DependentUpon>FormLineList.vb</DependentUpon>
     </EmbeddedResource>
@@ -9253,6 +9328,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormPopUpOVH.resx">
       <DependentUpon>FormPopUpOVH.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPopUpRetOut.resx">
+      <DependentUpon>FormPopUpRetOut.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormPopUpSalesDel.resx">
       <DependentUpon>FormPopUpSalesDel.vb</DependentUpon>
@@ -11919,6 +11997,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportMasterEmployeeSuratKeteranganPenangguhanBank.resx">
       <DependentUpon>ReportMasterEmployeeSuratKeteranganPenangguhanBank.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportMasterEmployeeSuratReferensi.resx">
+      <DependentUpon>ReportMasterEmployeeSuratReferensi.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportMasterEmployeeSuratTugas.resx">
       <DependentUpon>ReportMasterEmployeeSuratTugas.vb</DependentUpon>

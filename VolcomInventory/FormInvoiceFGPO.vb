@@ -98,7 +98,7 @@ WHERE pnt.is_payment=2 " & query_where
                     Dim query As String = "SELECT 'no' AS is_check,c.id_acc_dp AS id_acc,dsg.design_code,dsg.design_display_name,po.`id_prod_order`,py.payment,c.comp_number,c.comp_name,po.`prod_order_number`
 ,SUM(wod.`prod_order_wo_det_qty`) AS qty
 ,CAST(wod.`prod_order_wo_det_price` * SUM(wod.`prod_order_wo_det_qty`) AS DECIMAL(15,2)) AS po_amount_bef_kurs
-,CAST(wod.`prod_order_wo_det_price` *(wo.prod_order_wo_vat/100)*SUM(wod.`prod_order_wo_det_qty`) AS DECIMAL(15,2)) AS po_amount_vat_bef_kurs
+,CAST(wod.`prod_order_wo_det_price` * (wo.prod_order_wo_vat/100)*SUM(wod.`prod_order_wo_det_qty`) AS DECIMAL(15,2)) AS po_amount_vat_bef_kurs
 ,CAST(wod.`prod_order_wo_det_price` * SUM(wod.`prod_order_wo_det_qty`) AS DECIMAL(15,2)) * wo.prod_order_wo_kurs AS po_amount
 ,CAST(wod.`prod_order_wo_det_price` * (wo.prod_order_wo_vat/100)*SUM(wod.`prod_order_wo_det_qty`) AS DECIMAL(15,2)) * wo.prod_order_wo_kurs AS po_amount_vat
 ,wo.id_currency,cur.currency,wo.prod_order_wo_kurs
@@ -156,8 +156,6 @@ WHERE pnt.is_payment=1 " & query_where
                 GVPayment.BestFitColumns()
             End If
         End If
-        '
-
     End Sub
 
     Private Sub BViewPayment_Click(sender As Object, e As EventArgs) Handles BViewPayment.Click

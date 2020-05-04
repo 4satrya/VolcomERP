@@ -103,6 +103,7 @@ Partial Class FormWHAWBill
         Me.XTCAwb = New DevExpress.XtraTab.XtraTabControl()
         Me.XTPOutbound = New DevExpress.XtraTab.XtraTabPage()
         Me.PCLock = New DevExpress.XtraEditors.PanelControl()
+        Me.SimpleButton1 = New DevExpress.XtraEditors.SimpleButton()
         Me.BReportInvoice = New DevExpress.XtraEditors.SimpleButton()
         Me.CESelectAll = New DevExpress.XtraEditors.CheckEdit()
         Me.BLock = New DevExpress.XtraEditors.SimpleButton()
@@ -1085,6 +1086,7 @@ Partial Class FormWHAWBill
         '
         'PCLock
         '
+        Me.PCLock.Controls.Add(Me.SimpleButton1)
         Me.PCLock.Controls.Add(Me.BReportInvoice)
         Me.PCLock.Controls.Add(Me.CESelectAll)
         Me.PCLock.Controls.Add(Me.BLock)
@@ -1093,6 +1095,16 @@ Partial Class FormWHAWBill
         Me.PCLock.Name = "PCLock"
         Me.PCLock.Size = New System.Drawing.Size(1273, 39)
         Me.PCLock.TabIndex = 3
+        '
+        'SimpleButton1
+        '
+        Me.SimpleButton1.Dock = System.Windows.Forms.DockStyle.Right
+        Me.SimpleButton1.Image = CType(resources.GetObject("SimpleButton1.Image"), System.Drawing.Image)
+        Me.SimpleButton1.Location = New System.Drawing.Point(949, 2)
+        Me.SimpleButton1.Name = "SimpleButton1"
+        Me.SimpleButton1.Size = New System.Drawing.Size(182, 35)
+        Me.SimpleButton1.TabIndex = 110
+        Me.SimpleButton1.Text = "Tracking Number Collection"
         '
         'BReportInvoice
         '
@@ -2109,4 +2121,5 @@ Partial Class FormWHAWBill
     Friend WithEvents gridBandInvoice As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents gbAirport As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents gbETALT As DevExpress.XtraGrid.Views.BandedGrid.GridBand
+    Friend WithEvents SimpleButton1 As DevExpress.XtraEditors.SimpleButton
 End Class

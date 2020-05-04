@@ -73,6 +73,7 @@ Partial Class FormMasterPriceSingle
         Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.PanelControlNav = New DevExpress.XtraEditors.PanelControl()
         Me.BtnImport = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnExportToXlsx = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
         CType(Me.DEEffDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -292,6 +293,7 @@ Partial Class FormMasterPriceSingle
         'PanelControl3
         '
         Me.PanelControl3.Controls.Add(Me.BtnAttachment)
+        Me.PanelControl3.Controls.Add(Me.BtnExportToXlsx)
         Me.PanelControl3.Controls.Add(Me.BtnTest)
         Me.PanelControl3.Controls.Add(Me.BMark)
         Me.PanelControl3.Controls.Add(Me.DDBPrint)
@@ -310,7 +312,7 @@ Partial Class FormMasterPriceSingle
         Me.BtnAttachment.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnAttachment.ImageIndex = 13
         Me.BtnAttachment.ImageList = Me.LargeImageCollection
-        Me.BtnAttachment.Location = New System.Drawing.Point(584, 2)
+        Me.BtnAttachment.Location = New System.Drawing.Point(461, 2)
         Me.BtnAttachment.Name = "BtnAttachment"
         Me.BtnAttachment.Size = New System.Drawing.Size(100, 33)
         Me.BtnAttachment.TabIndex = 11
@@ -618,6 +620,18 @@ Partial Class FormMasterPriceSingle
         Me.BtnImport.TabIndex = 3
         Me.BtnImport.Text = "Import from Excel"
         '
+        'BtnExportToXlsx
+        '
+        Me.BtnExportToXlsx.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnExportToXlsx.Image = CType(resources.GetObject("BtnExportToXlsx.Image"), System.Drawing.Image)
+        Me.BtnExportToXlsx.ImageIndex = 13
+        Me.BtnExportToXlsx.ImageList = Me.LargeImageCollection
+        Me.BtnExportToXlsx.Location = New System.Drawing.Point(561, 2)
+        Me.BtnExportToXlsx.Name = "BtnExportToXlsx"
+        Me.BtnExportToXlsx.Size = New System.Drawing.Size(123, 33)
+        Me.BtnExportToXlsx.TabIndex = 13
+        Me.BtnExportToXlsx.Text = "Export to XLS"
+        '
         'FormMasterPriceSingle
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -727,4 +741,5 @@ Partial Class FormMasterPriceSingle
     Friend WithEvents GridColumnCostPre As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents DEEffDate As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents BtnExportToXlsx As DevExpress.XtraEditors.SimpleButton
 End Class

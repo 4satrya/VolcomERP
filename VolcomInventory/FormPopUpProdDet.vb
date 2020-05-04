@@ -1,5 +1,6 @@
-﻿Public Class FormPopUpProdDet 
+﻿Public Class FormPopUpProdDet
     Public id_prod_order As String
+    Public id_prod_order_rec As String
     Public id_prod_order_det As String
     Public id_prod_order_det_edit As String
     Public id_pop_up As String
@@ -13,26 +14,30 @@
         Dim query As String = "SELECT * FROM tb_prod_order WHERE id_prod_order = '" + id_prod_order + "' "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         LabelSubTitle.Text = "Production Order No. :" + data.Rows(0)("prod_order_number").ToString
-        view_list_purchase(id_prod_order)
+        view_list_purchase()
 
         'prop column
         'If id_pop_up <> "3" Then
         GridColumnQtyAlloc.Visible = False
         'End If
     End Sub
-    Sub view_list_purchase(ByVal id_prod_order As String)
+    Sub view_list_purchase()
         Dim query As String = ""
         If id_pop_up = "1" Then
-            query = "CALL view_stock_prod_rec('" + id_prod_order + "', '0', '" + id_ret_out + "', '" + id_ret_in + "', '" + id_pl + "','0', '" + id_pd_alloc_par + "')"
+            'query = "CALL view_stock_prod_rec('" + id_prod_order + "', '0', '" + id_ret_out + "', '" + id_ret_in + "', '" + id_pl + "','0', '" + id_pd_alloc_par + "')"
+            query = "CALL view_limit_prod_rec('" + id_prod_order_rec + "','" + id_prod_order + "', '0', '" + id_ret_out + "', '" + id_ret_in + "', '" + id_pl + "','0', '" + id_pd_alloc_par + "')"
         ElseIf id_pop_up = "2" Then
-            query = "CALL view_stock_prod_ret_in_remain('" + id_prod_order + "', '0', '" + id_ret_out + "', '" + id_ret_in + "', '0')"
+            'query = "CALL view_stock_prod_ret_in_remain('" + id_prod_order + "', '0', '" + id_ret_out + "', '" + id_ret_in + "', '0')"
+            query = "CALL view_limit_ret_out('" + id_ret_out + "','" + id_ret_in + "', '1')"
         ElseIf id_pop_up = "3" Then
-            query = "CALL view_stock_prod_rec('" + id_prod_order + "', '0', '" + id_ret_out + "', '" + id_ret_in + "', '" + id_pl + "','0', '" + id_pd_alloc_par + "')"
+            'query = "CALL view_stock_prod_rec('" + id_prod_order + "', '0', '" + id_ret_out + "', '" + id_ret_in + "', '" + id_pl + "','0', '" + id_pd_alloc_par + "')"
+            query = "CALL view_limit_prod_rec('" + id_prod_order_rec + "','" + id_prod_order + "', '0', '" + id_ret_out + "', '" + id_ret_in + "', '" + id_pl + "','0', '" + id_pd_alloc_par + "')"
         ElseIf id_pop_up = "4" Then
             query = "CALL view_stock_prod_ret_in_remain('" + id_prod_order + "', '0', '" + id_ret_out + "', '" + id_ret_in + "', '0')"
         ElseIf id_pop_up = "5" Then
             query = "CALL view_stock_prod_ret_in_remain('" + id_prod_order + "', '0', '" + id_ret_out + "', '" + id_ret_in + "', '0')"
         End If
+        'Console.WriteLine(query)
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         If id_pop_up = "1" Then
             Dim i As Integer = data.Rows.Count - 1

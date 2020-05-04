@@ -141,6 +141,7 @@
             End If
             '
             Dim id_city As String = data.Rows(0)("id_city").ToString
+            Dim id_sub_district As String = data.Rows(0)("id_sub_district").ToString
             Dim company_name As String = data.Rows(0)("comp_name").ToString
             Dim company_code As String = data.Rows(0)("comp_number").ToString
             Dim company_printed_name As String = data.Rows(0)("comp_display_name").ToString
@@ -251,6 +252,10 @@
 
             LECity.EditValue = Nothing
             LECity.ItemIndex = LECity.Properties.GetDataSourceRowIndex("id_city", id_city)
+            view_district(LEDistrict, LECity.EditValue.ToString)
+
+            LEDistrict.EditValue = Nothing
+            LEDistrict.ItemIndex = LEDistrict.Properties.GetDataSourceRowIndex("id_sub_district", id_sub_district)
 
             LEStatus.EditValue = Nothing
             LEStatus.ItemIndex = LEStatus.Properties.GetDataSourceRowIndex("id_status", is_active)
@@ -353,6 +358,7 @@
                 LERegion.EditValue = Nothing
                 LEState.EditValue = Nothing
                 LECity.EditValue = Nothing
+                LEDistrict.EditValue = Nothing
                 view_region(LERegion, LECountry.EditValue)
                 'view_state(LEState, LERegion.EditValue)
                 'view_city(LECity, LEState.EditValue)
@@ -369,6 +375,7 @@
             If LERegion.EditValue <> Nothing Then
                 LEState.EditValue = Nothing
                 LECity.EditValue = Nothing
+                LEDistrict.EditValue = Nothing
                 view_state(LEState, LERegion.EditValue)
                 'view_city(LECity, LEState.EditValue)
             End If
@@ -383,6 +390,7 @@
         Try
             If LEState.EditValue <> Nothing Then
                 LECity.EditValue = Nothing
+                LEDistrict.EditValue = Nothing
                 view_city(LECity, LEState.EditValue)
             End If
         Catch ex As Exception
@@ -403,6 +411,7 @@
         Dim oaddress As String = addSlashes(MEOAddress.Text)
         Dim postal_code As String = addSlashes(TEPostalCode.Text)
         Dim id_city As String = LECity.EditValue.ToString
+        Dim id_sub_district As String = LEDistrict.EditValue.ToString
         Dim id_company_category As String = LECompanyCategory.EditValue.ToString
         Dim is_active As String = LEStatus.EditValue.ToString
         Dim email As String = addSlashes(TEEMail.Text)
@@ -498,8 +507,8 @@
                 errorInput()
             Else
                 'insert to company
-                query = "INSERT INTO tb_m_comp(comp_name,comp_display_name,comp_number,address_primary,address_other,postal_code,email,website,id_city,id_comp_cat,is_active,id_tax,npwp,fax,id_comp_group,awb_destination,awb_zone,awb_cargo_code, phone, id_vendor_type,id_bank,bank_rek,bank_attn_name,bank_address,npwp_name,npwp_address, id_departement, comp_commission, id_store_type, id_area, id_employee_rep, id_pd_alloc, id_wh_type, id_so_type, id_drawer_def,id_store_company) "
-                query += "VALUES('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}','{18}','{19}','{20}','{21}','{22}','{23}','{24}','{25}', "
+                query = "INSERT INTO tb_m_comp(comp_name,comp_display_name,comp_number,address_primary,address_other,postal_code,email,website,id_city,id_comp_cat,is_active,id_tax,npwp,fax,id_comp_group,awb_destination,awb_zone,awb_cargo_code, phone, id_vendor_type,id_bank,bank_rek,bank_attn_name,bank_address,npwp_name,npwp_address, id_departement, comp_commission, id_store_type, id_area, id_employee_rep, id_pd_alloc, id_wh_type, id_so_type, id_drawer_def,id_store_company,id_sub_district) "
+                query += "VALUES('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}','{18}','{19}','{20}','{21}','{22}','{23}','{24}','{25}',"
                 If id_dept = "0" Then
                     query += "NULL, "
                 Else
@@ -546,10 +555,11 @@
                     query += "'" + id_def_drawer + "', "
                 End If
                 If id_store_company = "0" Or id_store_company = "" Then
-                    query += "NULL "
+                    query += "NULL, "
                 Else
-                    query += "'" + id_store_company + "' "
+                    query += "'" + id_store_company + "', "
                 End If
+                query += "'" + id_sub_district + "' "
                 query += "); SELECT LAST_INSERT_ID(); "
                 query = String.Format(query, name, printed_name, code, address, oaddress, postal_code, email, web, id_city, id_company_category, is_active, id_tax, npwp, fax, id_comp_group, cargo_dest, cargo_zone, cargo_code, phone, id_vendor_type, id_bank, bank_rek, bank_atas_nama, bank_address, npwp_name, npwp_address)
 
@@ -649,10 +659,11 @@
                     query += "id_drawer_def = '" + id_def_drawer + "', "
                 End If
                 If id_store_company = "0" Or id_store_company = "" Then
-                    query += "id_store_company = NULL "
+                    query += "id_store_company = NULL, "
                 Else
-                    query += "id_store_company = '" + id_store_company + "' "
+                    query += "id_store_company = '" + id_store_company + "', "
                 End If
+                query += "id_sub_district='" + id_sub_district + "'"
                 query += "WHERE id_comp='" + id_company + "' "
                 query = String.Format(query, name, printed_name, code, address, oaddress, postal_code, email, web, id_city, id_company_category, is_active, id_tax, npwp, fax, id_comp_group, cargo_dest, cargo_zone, cargo_code, phone, id_vendor_type, id_bank, bank_rek, bank_atas_nama, bank_address, npwp_name, npwp_address)
                 execute_non_query(query, True, "", "", "", "")
@@ -794,6 +805,17 @@
         If data.Rows.Count > 0 Then
             view_city(LECity, lookup.EditValue)
         End If
+    End Sub
+    Private Sub view_district(ByVal lookup As DevExpress.XtraEditors.LookUpEdit, ByVal id_city As String)
+        Dim query As String = String.Format("SELECT id_sub_district,sub_district FROM tb_m_sub_district WHERE id_city='{0}'", id_city)
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+
+        lookup.Properties.DataSource = Nothing
+        lookup.Properties.DataSource = data
+
+        lookup.Properties.DisplayMember = "sub_district"
+        lookup.Properties.ValueMember = "id_sub_district"
+        lookup.ItemIndex = 0
     End Sub
     Private Sub view_city(ByVal lookup As DevExpress.XtraEditors.LookUpEdit, ByVal id_state As String)
         Dim query As String = String.Format("SELECT id_city,city FROM tb_m_city WHERE id_state='{0}'", id_state)
@@ -1267,5 +1289,18 @@ FROM tb_m_comp_cat ccat WHERE ccat.id_comp_cat='" & LECompanyCategory.EditValue.
 
     Private Sub TECompanyPrintedName_EditValueChanged(sender As Object, e As EventArgs) Handles TECompanyPrintedName.EditValueChanged
         TECompanyPrintedName.EditValue = trimSpace(TECompanyPrintedName.EditValue.ToString)
+    End Sub
+
+    Private Sub LECity_EditValueChanged(sender As Object, e As EventArgs) Handles LECity.EditValueChanged
+        Cursor = Cursors.WaitCursor
+        Try
+            If LECity.EditValue <> Nothing Then
+                LEDistrict.EditValue = Nothing
+                view_district(LEDistrict, LECity.EditValue)
+            End If
+        Catch ex As Exception
+            errorConnection()
+        End Try
+        Cursor = Cursors.Default
     End Sub
 End Class

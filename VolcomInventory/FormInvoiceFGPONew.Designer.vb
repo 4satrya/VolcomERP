@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FormInvoiceFGPONew
     Inherits DevExpress.XtraEditors.XtraForm
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         If disposing AndAlso components IsNot Nothing Then
             components.Dispose()
@@ -17,7 +17,7 @@ Partial Class FormInvoiceFGPONew
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormInvoiceFGPONew))
@@ -32,9 +32,11 @@ Partial Class FormInvoiceFGPONew
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn26 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
         Me.PCPick = New DevExpress.XtraEditors.PanelControl()
+        Me.BPrintInfo = New DevExpress.XtraEditors.SimpleButton()
         Me.BPickAll = New DevExpress.XtraEditors.SimpleButton()
         Me.BPick = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnCancel = New DevExpress.XtraEditors.SimpleButton()
@@ -96,8 +98,8 @@ Partial Class FormInvoiceFGPONew
         Me.GridColumn18 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn19 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.BLoadHistory = New DevExpress.XtraEditors.SimpleButton()
-        Me.GridColumn26 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.BPrintInfo = New DevExpress.XtraEditors.SimpleButton()
+        Me.CEPreRec = New DevExpress.XtraEditors.CheckEdit()
+        Me.GridColumn27 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.SLETypeInvoice.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLEFGPO.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -129,6 +131,7 @@ Partial Class FormInvoiceFGPONew
         Me.XTPHistory.SuspendLayout()
         CType(Me.GCPayment, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVPayment, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CEPreRec.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LabelControl1
@@ -145,7 +148,7 @@ Partial Class FormInvoiceFGPONew
         Me.SLETypeInvoice.Name = "SLETypeInvoice"
         Me.SLETypeInvoice.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.SLETypeInvoice.Properties.View = Me.SearchLookUpEdit1View
-        Me.SLETypeInvoice.Size = New System.Drawing.Size(292, 20)
+        Me.SLETypeInvoice.Size = New System.Drawing.Size(210, 20)
         Me.SLETypeInvoice.TabIndex = 1
         '
         'SearchLookUpEdit1View
@@ -220,6 +223,12 @@ Partial Class FormInvoiceFGPONew
         Me.GridColumn4.VisibleIndex = 2
         Me.GridColumn4.Width = 1035
         '
+        'GridColumn26
+        '
+        Me.GridColumn26.Caption = "View"
+        Me.GridColumn26.FieldName = "view_po"
+        Me.GridColumn26.Name = "GridColumn26"
+        '
         'LabelControl2
         '
         Me.LabelControl2.Location = New System.Drawing.Point(16, 15)
@@ -260,6 +269,18 @@ Partial Class FormInvoiceFGPONew
         Me.PCPick.Name = "PCPick"
         Me.PCPick.Size = New System.Drawing.Size(851, 40)
         Me.PCPick.TabIndex = 4
+        '
+        'BPrintInfo
+        '
+        Me.BPrintInfo.Dock = System.Windows.Forms.DockStyle.Left
+        Me.BPrintInfo.ImageIndex = 6
+        Me.BPrintInfo.ImageList = Me.LargeImageCollection
+        Me.BPrintInfo.Location = New System.Drawing.Point(2, 2)
+        Me.BPrintInfo.Name = "BPrintInfo"
+        Me.BPrintInfo.Size = New System.Drawing.Size(94, 36)
+        Me.BPrintInfo.TabIndex = 20
+        Me.BPrintInfo.TabStop = False
+        Me.BPrintInfo.Text = "Print Info"
         '
         'BPickAll
         '
@@ -319,7 +340,7 @@ Partial Class FormInvoiceFGPONew
         '
         'GVInvoice
         '
-        Me.GVInvoice.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdRec, Me.GridColumn7, Me.GridColumn8, Me.GridColumnNumber, Me.GridColumn10, Me.GridColumn9, Me.GridColumn12, Me.GridColumn24, Me.GridColumn23, Me.GridColumn25, Me.GridColumn22, Me.GridColumnPayment, Me.GridColumn13})
+        Me.GVInvoice.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdRec, Me.GridColumn7, Me.GridColumn8, Me.GridColumnNumber, Me.GridColumn27, Me.GridColumn10, Me.GridColumn9, Me.GridColumn12, Me.GridColumn24, Me.GridColumn23, Me.GridColumn25, Me.GridColumn22, Me.GridColumnPayment, Me.GridColumn13})
         Me.GVInvoice.GridControl = Me.GCInvoice
         Me.GVInvoice.Name = "GVInvoice"
         Me.GVInvoice.OptionsBehavior.AutoExpandAllGroups = True
@@ -355,7 +376,7 @@ Partial Class FormInvoiceFGPONew
         '
         'GridColumnNumber
         '
-        Me.GridColumnNumber.Caption = "FGPO Reff"
+        Me.GridColumnNumber.Caption = "Pre Receiving Reff"
         Me.GridColumnNumber.FieldName = "report_number"
         Me.GridColumnNumber.Name = "GridColumnNumber"
         Me.GridColumnNumber.OptionsColumn.AllowEdit = False
@@ -470,13 +491,13 @@ Partial Class FormInvoiceFGPONew
         Me.BLoad.Appearance.Options.UseBackColor = True
         Me.BLoad.Appearance.Options.UseFont = True
         Me.BLoad.Appearance.Options.UseForeColor = True
-        Me.BLoad.Location = New System.Drawing.Point(360, 9)
+        Me.BLoad.Location = New System.Drawing.Point(393, 9)
         Me.BLoad.LookAndFeel.SkinMaskColor = System.Drawing.Color.Blue
         Me.BLoad.LookAndFeel.SkinMaskColor2 = System.Drawing.Color.Blue
         Me.BLoad.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.UltraFlat
         Me.BLoad.LookAndFeel.UseDefaultLookAndFeel = False
         Me.BLoad.Name = "BLoad"
-        Me.BLoad.Size = New System.Drawing.Size(75, 22)
+        Me.BLoad.Size = New System.Drawing.Size(93, 22)
         Me.BLoad.TabIndex = 21
         Me.BLoad.Text = "Load"
         '
@@ -733,6 +754,7 @@ Partial Class FormInvoiceFGPONew
         '
         'PanelControl1
         '
+        Me.PanelControl1.Controls.Add(Me.CEPreRec)
         Me.PanelControl1.Controls.Add(Me.LabelControl1)
         Me.PanelControl1.Controls.Add(Me.SLETypeInvoice)
         Me.PanelControl1.Controls.Add(Me.BLoad)
@@ -928,23 +950,21 @@ Partial Class FormInvoiceFGPONew
         Me.BLoadHistory.TabIndex = 23
         Me.BLoadHistory.Text = "Load"
         '
-        'GridColumn26
+        'CEPreRec
         '
-        Me.GridColumn26.Caption = "View"
-        Me.GridColumn26.FieldName = "view_po"
-        Me.GridColumn26.Name = "GridColumn26"
+        Me.CEPreRec.Location = New System.Drawing.Point(278, 10)
+        Me.CEPreRec.Name = "CEPreRec"
+        Me.CEPreRec.Properties.Caption = "Pre Rec Category"
+        Me.CEPreRec.Size = New System.Drawing.Size(109, 19)
+        Me.CEPreRec.TabIndex = 22
         '
-        'BPrintInfo
+        'GridColumn27
         '
-        Me.BPrintInfo.Dock = System.Windows.Forms.DockStyle.Left
-        Me.BPrintInfo.ImageIndex = 6
-        Me.BPrintInfo.ImageList = Me.LargeImageCollection
-        Me.BPrintInfo.Location = New System.Drawing.Point(2, 2)
-        Me.BPrintInfo.Name = "BPrintInfo"
-        Me.BPrintInfo.Size = New System.Drawing.Size(94, 36)
-        Me.BPrintInfo.TabIndex = 20
-        Me.BPrintInfo.TabStop = False
-        Me.BPrintInfo.Text = "Print Info"
+        Me.GridColumn27.Caption = "Category"
+        Me.GridColumn27.FieldName = "pl_category"
+        Me.GridColumn27.Name = "GridColumn27"
+        Me.GridColumn27.Visible = True
+        Me.GridColumn27.VisibleIndex = 4
         '
         'FormInvoiceFGPONew
         '
@@ -992,6 +1012,7 @@ Partial Class FormInvoiceFGPONew
         Me.XTPHistory.ResumeLayout(False)
         CType(Me.GCPayment, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVPayment, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CEPreRec.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1073,4 +1094,6 @@ Partial Class FormInvoiceFGPONew
     Friend WithEvents GroupControl2 As DevExpress.XtraEditors.GroupControl
     Friend WithEvents GridColumn26 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents BPrintInfo As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents CEPreRec As DevExpress.XtraEditors.CheckEdit
+    Friend WithEvents GridColumn27 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

@@ -29,10 +29,6 @@ Partial Class Form3plRateDet
         Me.SLVCargo = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumnIdSeason = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnRange = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.SLECity = New DevExpress.XtraEditors.SearchLookUpEdit()
-        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.SLEInboundOutbound = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -48,7 +44,12 @@ Partial Class Form3plRateDet
         Me.TEMinWeight = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl8 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl9 = New DevExpress.XtraEditors.LabelControl()
-        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.SLESubDistrict = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -56,14 +57,14 @@ Partial Class Form3plRateDet
         Me.PanelControl1.SuspendLayout()
         CType(Me.SLECargo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLVCargo, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.SLECity.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLEInboundOutbound.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TECargoCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TERate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TELeadTime.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEMinWeight.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SLESubDistrict.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl1
@@ -71,7 +72,7 @@ Partial Class Form3plRateDet
         Me.PanelControl1.Controls.Add(Me.BCancel)
         Me.PanelControl1.Controls.Add(Me.BSave)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl1.Location = New System.Drawing.Point(0, 221)
+        Me.PanelControl1.Location = New System.Drawing.Point(0, 206)
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(466, 44)
         Me.PanelControl1.TabIndex = 0
@@ -108,9 +109,9 @@ Partial Class Form3plRateDet
         '
         Me.LabelControl2.Location = New System.Drawing.Point(12, 46)
         Me.LabelControl2.Name = "LabelControl2"
-        Me.LabelControl2.Size = New System.Drawing.Size(19, 13)
+        Me.LabelControl2.Size = New System.Drawing.Size(54, 13)
         Me.LabelControl2.TabIndex = 10
-        Me.LabelControl2.Text = "City"
+        Me.LabelControl2.Text = "Sub District"
         '
         'SLECargo
         '
@@ -123,7 +124,7 @@ Partial Class Form3plRateDet
         Me.SLECargo.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.SLECargo.Properties.NullText = "-"
         Me.SLECargo.Properties.View = Me.SLVCargo
-        Me.SLECargo.Size = New System.Drawing.Size(325, 20)
+        Me.SLECargo.Size = New System.Drawing.Size(359, 20)
         Me.SLECargo.TabIndex = 11
         '
         'SLVCargo
@@ -137,54 +138,17 @@ Partial Class Form3plRateDet
         '
         'GridColumnIdSeason
         '
-        Me.GridColumnIdSeason.Caption = "ID Cargo"
-        Me.GridColumnIdSeason.FieldName = "id_cargo"
+        Me.GridColumnIdSeason.Caption = "ID Comp"
+        Me.GridColumnIdSeason.FieldName = "id_comp"
         Me.GridColumnIdSeason.Name = "GridColumnIdSeason"
         '
         'GridColumnRange
         '
-        Me.GridColumnRange.Caption = "Cargo Name"
-        Me.GridColumnRange.FieldName = "cargo"
+        Me.GridColumnRange.Caption = "Vendor"
+        Me.GridColumnRange.FieldName = "comp_name"
         Me.GridColumnRange.Name = "GridColumnRange"
         Me.GridColumnRange.Visible = True
         Me.GridColumnRange.VisibleIndex = 0
-        '
-        'SLECity
-        '
-        Me.SLECity.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.SLECity.Location = New System.Drawing.Point(95, 43)
-        Me.SLECity.Name = "SLECity"
-        Me.SLECity.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SLECity.Properties.Appearance.Options.UseFont = True
-        Me.SLECity.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.SLECity.Properties.NullText = "-"
-        Me.SLECity.Properties.View = Me.GridView1
-        Me.SLECity.Size = New System.Drawing.Size(298, 20)
-        Me.SLECity.TabIndex = 12
-        '
-        'GridView1
-        '
-        Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn10, Me.GridColumn11, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6})
-        Me.GridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
-        Me.GridView1.Name = "GridView1"
-        Me.GridView1.OptionsBehavior.ReadOnly = True
-        Me.GridView1.OptionsSelection.EnableAppearanceFocusedCell = False
-        Me.GridView1.OptionsView.ShowGroupPanel = False
-        '
-        'GridColumn10
-        '
-        Me.GridColumn10.Caption = "ID City"
-        Me.GridColumn10.FieldName = "id_cargo"
-        Me.GridColumn10.Name = "GridColumn10"
-        '
-        'GridColumn11
-        '
-        Me.GridColumn11.Caption = "City"
-        Me.GridColumn11.FieldName = "cargo"
-        Me.GridColumn11.Name = "GridColumn11"
-        Me.GridColumn11.Visible = True
-        Me.GridColumn11.VisibleIndex = 0
         '
         'SLEInboundOutbound
         '
@@ -316,39 +280,90 @@ Partial Class Form3plRateDet
         Me.LabelControl9.TabIndex = 24
         Me.LabelControl9.Text = "Kg(s)"
         '
-        'GridColumn3
+        'SLESubDistrict
         '
-        Me.GridColumn3.Caption = "State"
-        Me.GridColumn3.Name = "GridColumn3"
-        Me.GridColumn3.Visible = True
-        Me.GridColumn3.VisibleIndex = 1
+        Me.SLESubDistrict.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.SLESubDistrict.Enabled = False
+        Me.SLESubDistrict.Location = New System.Drawing.Point(95, 43)
+        Me.SLESubDistrict.Name = "SLESubDistrict"
+        Me.SLESubDistrict.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SLESubDistrict.Properties.Appearance.Options.UseFont = True
+        Me.SLESubDistrict.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLESubDistrict.Properties.NullText = "-"
+        Me.SLESubDistrict.Properties.View = Me.GridView1
+        Me.SLESubDistrict.Size = New System.Drawing.Size(317, 20)
+        Me.SLESubDistrict.TabIndex = 94
+        '
+        'GridView1
+        '
+        Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn10, Me.GridColumn8, Me.GridColumn11, Me.GridColumn7, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6})
+        Me.GridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView1.Name = "GridView1"
+        Me.GridView1.OptionsBehavior.ReadOnly = True
+        Me.GridView1.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView1.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn10
+        '
+        Me.GridColumn10.Caption = "ID Sub District"
+        Me.GridColumn10.FieldName = "id_sub_district"
+        Me.GridColumn10.Name = "GridColumn10"
+        '
+        'GridColumn8
+        '
+        Me.GridColumn8.Caption = "Sub District"
+        Me.GridColumn8.FieldName = "sub_district"
+        Me.GridColumn8.Name = "GridColumn8"
+        Me.GridColumn8.Visible = True
+        Me.GridColumn8.VisibleIndex = 1
+        '
+        'GridColumn11
+        '
+        Me.GridColumn11.Caption = "City"
+        Me.GridColumn11.FieldName = "city"
+        Me.GridColumn11.Name = "GridColumn11"
+        Me.GridColumn11.Visible = True
+        Me.GridColumn11.VisibleIndex = 0
+        '
+        'GridColumn7
+        '
+        Me.GridColumn7.Caption = "State"
+        Me.GridColumn7.FieldName = "state"
+        Me.GridColumn7.Name = "GridColumn7"
+        Me.GridColumn7.Visible = True
+        Me.GridColumn7.VisibleIndex = 2
         '
         'GridColumn4
         '
         Me.GridColumn4.Caption = "Island"
+        Me.GridColumn4.FieldName = "island"
         Me.GridColumn4.Name = "GridColumn4"
         Me.GridColumn4.Visible = True
-        Me.GridColumn4.VisibleIndex = 2
+        Me.GridColumn4.VisibleIndex = 3
         '
         'GridColumn5
         '
         Me.GridColumn5.Caption = "Region"
+        Me.GridColumn5.FieldName = "region"
         Me.GridColumn5.Name = "GridColumn5"
         Me.GridColumn5.Visible = True
-        Me.GridColumn5.VisibleIndex = 3
+        Me.GridColumn5.VisibleIndex = 4
         '
         'GridColumn6
         '
         Me.GridColumn6.Caption = "Country"
+        Me.GridColumn6.FieldName = "country"
         Me.GridColumn6.Name = "GridColumn6"
         Me.GridColumn6.Visible = True
-        Me.GridColumn6.VisibleIndex = 4
+        Me.GridColumn6.VisibleIndex = 5
         '
         'Form3plRateDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(466, 265)
+        Me.ClientSize = New System.Drawing.Size(466, 250)
+        Me.Controls.Add(Me.SLESubDistrict)
         Me.Controls.Add(Me.LabelControl9)
         Me.Controls.Add(Me.LabelControl8)
         Me.Controls.Add(Me.TEMinWeight)
@@ -361,7 +376,6 @@ Partial Class Form3plRateDet
         Me.Controls.Add(Me.LabelControl4)
         Me.Controls.Add(Me.LabelControl3)
         Me.Controls.Add(Me.SLEInboundOutbound)
-        Me.Controls.Add(Me.SLECity)
         Me.Controls.Add(Me.SLECargo)
         Me.Controls.Add(Me.LabelControl2)
         Me.Controls.Add(Me.LabelControl1)
@@ -375,14 +389,14 @@ Partial Class Form3plRateDet
         Me.PanelControl1.ResumeLayout(False)
         CType(Me.SLECargo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SLVCargo, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.SLECity.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SLEInboundOutbound.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TECargoCode.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TERate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TELeadTime.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEMinWeight.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SLESubDistrict.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -397,10 +411,6 @@ Partial Class Form3plRateDet
     Friend WithEvents SLVCargo As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumnIdSeason As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnRange As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents SLECity As DevExpress.XtraEditors.SearchLookUpEdit
-    Friend WithEvents GridView1 As DevExpress.XtraGrid.Views.Grid.GridView
-    Friend WithEvents GridColumn10 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn11 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents SLEInboundOutbound As DevExpress.XtraEditors.SearchLookUpEdit
     Friend WithEvents GridView2 As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
@@ -416,7 +426,12 @@ Partial Class Form3plRateDet
     Friend WithEvents TEMinWeight As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelControl8 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LabelControl9 As DevExpress.XtraEditors.LabelControl
-    Friend WithEvents GridColumn3 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents SLESubDistrict As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView1 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn10 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn8 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn11 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn7 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn

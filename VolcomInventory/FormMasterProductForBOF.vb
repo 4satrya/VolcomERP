@@ -16,11 +16,11 @@ Public Class FormMasterProductForBOF
     End Sub
 
     Sub viewSeason()
-        Dim query As String = ""
+        Dim query As String = "SELECT 0 AS `id_season`, 'All Season' AS `season`, 0 AS `id_range`, 0 AS `range` UNION ALL "
         query += "Select a.id_season, a.season, b.id_range, b.`range`  "
         query += "From tb_season a "
         query += "INNER Join tb_range b ON a.id_range = b.id_range "
-        query += "ORDER BY `range` DESC "
+        query += "ORDER BY `range` ASC "
         viewSearchLookupQuery(SLESeason, query, "id_season", "season", "id_season")
     End Sub
 

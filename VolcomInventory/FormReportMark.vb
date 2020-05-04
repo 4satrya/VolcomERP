@@ -1043,8 +1043,7 @@
             If id_status_reportx = "3" Then
                 id_status_reportx = "6"
             End If
-            query = String.Format("UPDATE tb_sample_purc_rec SET id_report_status='{0}' WHERE id_sample_purc_rec='{1}'", id_status_reportx, id_report)
-            execute_non_query(query, True, "", "", "", "")
+
             If id_status_reportx = 6 Then 'Completed
                 Dim query_del As String = "DELETE FROM tb_sample_purc_rec_det WHERE id_sample_purc_rec='" + id_report + "' AND sample_purc_rec_det_qty <= 0"
                 execute_non_query(query_del, True, "", "", "", "")
@@ -1075,7 +1074,18 @@
                     Dim query_upd_stored As String = "UPDATE tb_sample_purc_rec_det SET sample_purc_rec_det_qty_stored = sample_purc_rec_det_qty WHERE id_sample_purc_rec_det='" & id_sample_purc_rec_det & "' "
                     execute_non_query(query_upd_stored, True, "", "", "", "")
                 Next
+            ElseIf id_status_reportx = "5" Then
+                query = String.Format("SELECT id_report_status FROM tb_sample_purc_rec WHERE id_sample_purc_rec ='{0}' AND id_report_status='6'", id_report)
+                Dim dt_c As DataTable = execute_query(query, -1, True, "", "", "", "")
+                If dt_c.Rows.Count > 0 Then
+                    'cancellation form
+                    Dim q_cancel As String = "DELETE FROM tb_storage_sample WHERE id_report='" & id_report & "' AND report_mark_type='" & report_mark_type & "'"
+                    execute_non_query(q_cancel, True, "", "", "", "")
+                End If
             End If
+            query = String.Format("UPDATE tb_sample_purc_rec SET id_report_status='{0}' WHERE id_sample_purc_rec='{1}'", id_status_reportx, id_report)
+            execute_non_query(query, True, "", "", "", "")
+
             'infoCustom("Status changed.")
             Try
                 FormSampleReceiveDet.LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", id_status_reportx)

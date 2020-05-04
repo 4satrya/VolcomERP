@@ -126,14 +126,14 @@ WHERE cl.`is_active`='1'"
                         ,rec_date.first_rec_date,ko.lead_time_prod,wo.prod_order_wo_del_date
                         ,DATE_ADD(wo.prod_order_wo_del_date, INTERVAL ko.lead_time_prod DAY) AS est_rec_date
                         ,IF(DATEDIFF(rec_date.first_rec_date,DATE_ADD(wo.prod_order_wo_del_date, INTERVAL ko.lead_time_prod DAY))<0,0,DATEDIFF(rec_date.first_rec_date,DATE_ADD(wo.prod_order_wo_del_date, INTERVAL ko.lead_time_prod DAY))) AS late
-                        ,IFNULL(qcr.qty_normal,0) AS qc_normal
+                        ,IF(IFNULL(pln.qty,0)>IFNULL(qcr.qty_normal,0),IFNULL(pln.qty,0),IFNULL(qcr.qty_normal,0)) AS qc_normal
                         ,IFNULL(qcr.qty_normal_minor,0) AS qc_normal_minor
                         ,IFNULL(qcr.qty_minor,0) AS qc_minor
                         ,IFNULL(qcr.qty_minor_major,0) AS qc_minor_major
                         ,IFNULL(qcr.qty_major,0) AS qc_major
                         ,IFNULL(qcr.qty_afkir,0) AS qc_afkir
-                        ,(IFNULL(qcr.qty_normal,0) + IFNULL(qcr.qty_normal_minor,0) + IFNULL(qcr.qty_minor,0) + IFNULL(qcr.qty_minor_major,0) + IFNULL(qcr.qty_major,0) + IFNULL(qcr.qty_afkir,0)) AS qc_total
-                        ,IFNULL(SUM(rec.prod_order_rec_det_qty),0) - (IFNULL(qcr.qty_normal,0) + IFNULL(qcr.qty_normal_minor,0) + IFNULL(qcr.qty_minor,0) + IFNULL(qcr.qty_minor_major,0) + IFNULL(qcr.qty_major,0) + IFNULL(qcr.qty_afkir,0)) AS qc_outstanding
+                        ,(IF(IFNULL(pln.qty,0)>IFNULL(qcr.qty_normal,0),IFNULL(pln.qty,0),IFNULL(qcr.qty_normal,0)) + IFNULL(qcr.qty_normal_minor,0) + IFNULL(qcr.qty_minor,0) + IFNULL(qcr.qty_minor_major,0) + IFNULL(qcr.qty_major,0) + IFNULL(qcr.qty_afkir,0)) AS qc_total
+                        ,IFNULL(SUM(rec.prod_order_rec_det_qty),0) - (IF(IFNULL(pln.qty,0)>IFNULL(qcr.qty_normal,0),IFNULL(pln.qty,0),IFNULL(qcr.qty_normal,0)) + IFNULL(qcr.qty_normal_minor,0) + IFNULL(qcr.qty_minor,0) + IFNULL(qcr.qty_minor_major,0) + IFNULL(qcr.qty_major,0) + IFNULL(qcr.qty_afkir,0)) AS qc_outstanding
                         FROM tb_prod_order a 
                         INNER JOIN tb_prod_order_det pod ON pod.id_prod_order=a.id_prod_order 
                         INNER JOIN tb_prod_demand_design b ON a.id_prod_demand_design = b.id_prod_demand_design 
@@ -169,6 +169,14 @@ WHERE cl.`is_active`='1'"
                             WHERE NOT ISNULL(fc.`id_pl_category_sub`)
                             GROUP BY fc.`id_prod_order`
                         )qcr ON qcr.id_prod_order=a.`id_prod_order`
+                        LEFT JOIN
+                        (
+                            SELECT id_prod_order,SUM(pl_prod_order_det_qty) AS qty
+                            FROM `tb_pl_prod_order_det` pld
+                            INNER JOIN tb_pl_prod_order pl ON pl.id_report_status=6 AND pl.id_pl_prod_order=pld.id_pl_prod_order
+                            WHERE id_pl_category='1'
+                            GROUP BY id_prod_order
+                        )pln ON pln.id_prod_order=a.id_prod_order
                         LEFT JOIN (
                             SELECT wo.id_prod_order, wo.prod_order_wo_del_date,wo.id_ovh_price,  cur.currency, wo.prod_order_wo_vat, wod.prod_order_wo_det_price, wo.`prod_order_wo_kurs`
                         FROM tb_prod_order_wo wo
@@ -196,7 +204,7 @@ WHERE cl.`is_active`='1'"
                             SELECT poc.id_prod_order_close,id_prod_order FROM tb_prod_order_close_det pocd
                             INNER JOIN tb_prod_order_close poc ON poc.id_report_status!=5 AND poc.id_prod_order_close=pocd.id_prod_order_close
                         ) poc ON poc.id_prod_order=a.id_prod_order
-                        WHERE a.is_closing_rec='2' AND ISNULL(poc.id_prod_order_close) " & query_where & "
+                        WHERE a.is_closing_rec='2' AND ISNULL(poc.id_prod_order_close) AND a.id_report_status=6 " & query_where & "
                         GROUP BY a.id_prod_order"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 

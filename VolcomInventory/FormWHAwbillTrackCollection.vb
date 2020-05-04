@@ -17,7 +17,7 @@
     End Sub
 
     Sub load_collection()
-        Dim q As String = "SELECT 3n.`id_track_no`,3n.`track_no`,IF(3n.is_use=1,'-','Used') AS used,c.`comp_name`
+        Dim q As String = "SELECT 3n.`id_track_no`,3n.`track_no`,IF(3n.is_use=1,'Used','-') AS used,c.`comp_name`
 FROM tb_3pl_track_no 3n
 INNER JOIN tb_m_comp c ON c.id_comp=3n.id_comp
 WHERE 3n.id_comp='" & SLECargo.EditValue.ToString & "'

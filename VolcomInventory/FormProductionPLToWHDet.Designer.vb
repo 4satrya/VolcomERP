@@ -470,9 +470,9 @@ Partial Class FormProductionPLToWHDet
         Me.LabelControl4.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelControl4.Location = New System.Drawing.Point(10, 62)
         Me.LabelControl4.Name = "LabelControl4"
-        Me.LabelControl4.Size = New System.Drawing.Size(66, 13)
+        Me.LabelControl4.Size = New System.Drawing.Size(38, 13)
         Me.LabelControl4.TabIndex = 88
-        Me.LabelControl4.Text = "Prod. Number"
+        Me.LabelControl4.Text = "Prod No"
         '
         'PanelControlTopRight
         '

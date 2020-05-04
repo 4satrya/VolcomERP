@@ -290,4 +290,53 @@
         Catch ex As Exception
         End Try
     End Sub
+
+    Private Sub GVProd_FocusedRowObjectChanged(sender As Object, e As DevExpress.XtraGrid.Views.Base.FocusedRowObjectChangedEventArgs) Handles GVProd.FocusedRowObjectChanged
+        If GVProd.RowCount > 0 Then
+            Dim q As String = "SELECT rec.`id_prod_order_rec`,rec.id_prod_order,rec.`prod_order_rec_number`,cat.`pl_category`,SUM(recd.`prod_order_rec_det_qty`) AS qty_rec,IFNULL(retout.qty,0) AS qty_ret_out,IFNULL(retin.qty,0) AS qty_ret_in
+,IFNULL(qcr.qty,0) AS qty_qr
+,SUM(recd.`prod_order_rec_det_qty`)-IFNULL(retout.qty,0)+IFNULL(retin.qty,0)-IFNULL(qcr.qty,0) AS qty_remaining
+FROM tb_prod_order_rec_det recd
+INNER JOIN tb_prod_order_rec rec ON rec.`id_prod_order_rec`=recd.`id_prod_order_rec`
+LEFT JOIN 
+(
+	SELECT id_prod_order_rec,SUM(retd.`prod_order_ret_in_det_qty`) AS qty
+	FROM tb_prod_order_ret_in_det retd 
+	INNER JOIN tb_prod_order_ret_in ret ON retd.`id_prod_order_ret_in`=ret.`id_prod_order_ret_in`
+	WHERE ret.`id_report_status`!=5
+	GROUP BY ret.`id_prod_order_rec`
+)retin ON retin.id_prod_order_rec=rec.`id_prod_order_rec`
+LEFT JOIN 
+(
+	SELECT id_prod_order_rec,SUM(retd.`prod_order_ret_out_det_qty`) AS qty
+	FROM tb_prod_order_ret_out_det retd 
+	INNER JOIN tb_prod_order_ret_out ret ON retd.`id_prod_order_ret_out`=ret.`id_prod_order_ret_out`
+	WHERE ret.`id_report_status`!=5
+	GROUP BY ret.`id_prod_order_rec`
+)retout ON retout.id_prod_order_rec=rec.`id_prod_order_rec`
+LEFT JOIN 
+(
+	SELECT id_prod_order_rec,SUM(fcd.`prod_fc_det_qty`) AS qty
+	FROM tb_prod_fc_det fcd 
+	INNER JOIN tb_prod_fc fc ON fcd.`id_prod_fc`=fc.`id_prod_fc`
+	WHERE fc.`id_report_status`!=5
+	GROUP BY fc.`id_prod_order_rec`
+)qcr ON qcr.id_prod_order_rec=rec.`id_prod_order_rec`
+INNER JOIN `tb_lookup_pl_category` cat ON cat.id_pl_category=rec.id_pl_category
+WHERE rec.id_report_status='6' AND rec.id_prod_order='" & GVProd.GetFocusedRowCellValue("id_prod_order").ToString & "'
+GROUP BY recd.`id_prod_order_rec`"
+            Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
+            GCRecQc.DataSource = dt
+            GVRecQc.BestFitColumns()
+        End If
+    End Sub
+
+    Private Sub GVRecQc_DoubleClick(sender As Object, e As EventArgs) Handles GVRecQc.DoubleClick
+        FormPopUpProdDet.id_pop_up = "3"
+        FormPopUpProdDet.id_prod_order_rec = GVRecQc.GetFocusedRowCellValue("id_prod_order_rec").ToString
+        FormPopUpProdDet.id_prod_order = GVRecQc.GetFocusedRowCellValue("id_prod_order").ToString
+        FormPopUpProdDet.BtnSave.Visible = False
+        FormPopUpProdDet.is_info_form = True
+        FormPopUpProdDet.ShowDialog()
+    End Sub
 End Class

@@ -11,6 +11,7 @@ Public Class FormProductionRecDet
     Public bof_column As String = get_setup_field("bof_column")
     Public bof_xls As String = get_setup_field("bof_xls_rcvqc")
     Dim total_min As Integer = 0
+    Dim total_order As Integer = 0
     Dim total_max As Integer = 0
     Dim total_rec As Integer = 0
     Dim is_special_rec As String = "-1"
@@ -23,16 +24,17 @@ Public Class FormProductionRecDet
         BShowOrder.Focus()
         allowDelete()
         view_report_status(LEReportStatus)
-        load_rec_type()
         actionLoad()
     End Sub
 
-    Sub load_rec_type()
+    Sub load_cat_rec()
         Dim q As String = "SELECT id_pl_category,pl_category FROM tb_lookup_pl_category"
         viewSearchLookupQuery(SLERecType, q, "id_pl_category", "pl_category", "id_pl_category")
     End Sub
 
     Sub actionLoad()
+        load_cat_rec()
+
         If id_receive = "-1" Then
             If Not id_order = "-1" Then 'from waiting list
                 view_list_purchase()
@@ -82,7 +84,7 @@ Public Class FormProductionRecDet
             BMark.Enabled = True
 
             Dim order_created As String
-            Dim query = "SELECT j.id_design,IF(a.delivery_order_date<>'0000-00-00', 'date_normal','date_null') as del_date_type, i.id_sample, (i.design_display_name) AS `design_name`, a.id_report_status,a.prod_order_rec_note,a.id_comp_contact_from as id_comp_from,b.id_prod_order,a.id_comp_contact_to as id_comp_to,g.season,a.id_prod_order_rec,a.prod_order_rec_number,DATE_FORMAT(b.prod_order_date,'%Y-%m-%d') as prod_order_datex,b.prod_order_lead_time, a.arrive_date,a.delivery_order_date,a.delivery_order_number,b.prod_order_number,DATE_FORMAT(a.prod_order_rec_date,'%Y-%m-%d') AS prod_order_rec_date, f.comp_name AS comp_from, f.comp_number AS comp_from_number,d.comp_name AS comp_to, d.comp_number AS comp_to_number, i.id_sample, po_type.po_type, a.is_over_tol, a.id_prod_over_memo "
+            Dim query = "SELECT j.id_design,IF(a.delivery_order_date<>'0000-00-00', 'date_normal','date_null') as del_date_type, i.id_sample, (i.design_display_name) AS `design_name`, a.id_report_status,a.prod_order_rec_note,a.id_comp_contact_from as id_comp_from,b.id_prod_order,a.id_comp_contact_to as id_comp_to,g.season,a.id_prod_order_rec,a.prod_order_rec_number,DATE_FORMAT(b.prod_order_date,'%Y-%m-%d') as prod_order_datex,b.prod_order_lead_time, a.arrive_date,a.delivery_order_date,a.delivery_order_number,b.prod_order_number,DATE_FORMAT(a.prod_order_rec_date,'%Y-%m-%d') AS prod_order_rec_date, f.comp_name AS comp_from, f.comp_number AS comp_from_number,d.comp_name AS comp_to, d.comp_number AS comp_to_number, i.id_sample, po_type.po_type, a.is_over_tol, a.id_prod_over_memo,a.id_pl_category "
             query += "FROM tb_prod_order_rec a "
             query += "INNER JOIN tb_prod_order b ON a.id_prod_order=b.id_prod_order "
             query += "INNER JOIN tb_m_comp_contact c ON c.id_comp_contact=a.id_comp_contact_to "
@@ -131,6 +133,8 @@ Public Class FormProductionRecDet
 
             LEReportStatus.EditValue = Nothing
             LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", data.Rows(0)("id_report_status").ToString)
+            SLERecType.EditValue = data.Rows(0)("id_pl_category").ToString
+
 
             MENote.Text = data.Rows(0)("prod_order_rec_note").ToString
             pre_viewImages("2", PEView, id_design, False)
@@ -163,7 +167,7 @@ Public Class FormProductionRecDet
         qty_limit = 0
 
         Dim query As String = "SELECT b.id_design,d.id_sample, d.design_name, d.design_display_name, a.id_report_status, a.prod_order_number, a.id_po_type, DATE_FORMAT(a.prod_order_date,'%Y-%m-%d') as prod_order_datex, "
-        query += "a.prod_order_lead_time, a.prod_order_note, g.po_type, get_total_po(" + id_order + ", 2) AS `total_min`, g.po_type, get_total_po(" + id_order + ", 3) AS `total_max`, get_total_po(" + id_order + ", 4) AS `total_rec`, a.is_special_rec, a.special_rec_memo "
+        query += "a.prod_order_lead_time, a.prod_order_note, g.po_type, get_total_po(" + id_order + ", 1) AS `total_order`, get_total_po(" + id_order + ", 2) AS `total_min`, g.po_type, get_total_po(" + id_order + ", 3) AS `total_max`, get_total_po(" + id_order + ", 4) AS `total_rec`, a.is_special_rec, a.special_rec_memo "
         query += "FROM tb_prod_order a "
         query += "INNER JOIN tb_prod_demand_design b ON a.id_prod_demand_design = b.id_prod_demand_design "
         query += "INNER JOIN tb_lookup_report_status c ON a.id_report_status = c.id_report_status "
@@ -183,6 +187,7 @@ Public Class FormProductionRecDet
         TEDesign.Text = data.Rows(0)("design_display_name").ToString
         TxtPOType.Text = data.Rows(0)("po_type").ToString
         is_special_rec = data.Rows(0)("is_special_rec").ToString
+        total_order = Integer.Parse(data.Rows(0)("total_order").ToString)
         total_min = Integer.Parse(data.Rows(0)("total_min").ToString)
         total_max = Integer.Parse(data.Rows(0)("total_max").ToString)
         total_rec = Integer.Parse(data.Rows(0)("total_rec").ToString)
@@ -200,6 +205,10 @@ Public Class FormProductionRecDet
         If dm.Rows.Count > 0 Then
             expired_date = dm.Rows(0)("expired_date")
             id_prod_over_memo = dm.Rows(0)("id_prod_over_memo").ToString
+            '
+            SLERecType.EditValue = "6"
+            SLERecType.Properties.ReadOnly = True
+            '
             qty_limit = dm.Rows(0)("qty")
         End If
     End Sub
@@ -449,7 +458,7 @@ GROUP BY rec.`id_prod_order`"
         ValidateChildren()
         Dim query As String = ""
         Dim err_txt As String = ""
-        Dim rec_number, rec_date, do_number, do_date, arrive_date, rec_note, rec_stats As String
+        Dim rec_number, rec_date, do_number, do_date, arrive_date, rec_note, rec_stats, id_pl_cat, claim_percent As String
         Dim id_rec_new As String
 
         rec_number = ""
@@ -459,6 +468,8 @@ GROUP BY rec.`id_prod_order`"
         rec_note = ""
         rec_stats = ""
         arrive_date = ""
+        id_pl_cat = ""
+        claim_percent = "0.00"
 
         makeSafeGV(GVListPurchase)
         makeSafeGV(GVBarcode)
@@ -489,8 +500,23 @@ GROUP BY rec.`id_prod_order`"
         do_number = TEDONumber.Text
         rec_note = MENote.Text
         rec_stats = LEReportStatus.EditValue
+        id_pl_cat = SLERecType.EditValue.ToString
 
+        Try
+            If id_pl_cat = "6" Then 'memo
+                Dim qclaim As String = "SELECT discount FROM tb_prod_over_memo_det WHERE id_prod_over_memo='" & id_prod_over_memo & "' AND id_prod_order='" & id_order & "'"
+                Dim dtclaim As DataTable = execute_query(qclaim, -1, True, "", "", "", "")
+                claim_percent = decimalSQL(Decimal.Parse(dtclaim.Rows(0)("discount").ToString).ToString)
+            Else
+                Dim qclaim As String = "SELECT claim_percent FROM tb_lookup_pl_category WHERE id_pl_category='" & id_pl_cat & "'"
+                Dim dtclaim As DataTable = execute_query(qclaim, -1, True, "", "", "", "")
+                claim_percent = decimalSQL(Decimal.Parse(dtclaim.Rows(0)("claim_percent").ToString).ToString)
+            End If
+        Catch ex As Exception
+            MsgBox("Claim not found." & ex.ToString)
+        End Try
 
+        'search claim percent
         For i As Integer = 0 To GVListPurchase.RowCount - 1
             Try
                 If GVListPurchase.GetRowCellValue(i, "id_prod_order_det").ToString = "" Then
@@ -529,10 +555,10 @@ GROUP BY rec.`id_prod_order`"
                     Try
                         'insert rec
                         If do_date = "0000-00-00" Then
-                            query = String.Format("INSERT INTO tb_prod_order_rec(id_prod_order, prod_order_rec_number, delivery_order_number, delivery_order_date, arrive_date, prod_order_rec_date, prod_order_rec_note ,id_report_status, id_comp_contact_to , id_comp_contact_from, is_over_tol, id_prod_over_memo) VALUES('{0}','{1}','{2}',NULL, '{3}',DATE(NOW()),'{4}','{5}','{6}', '{7}','{8}',{9}); SELECT LAST_INSERT_ID(); ", id_order, rec_number, do_number, arrive_date, rec_note, rec_stats, id_comp_to, id_comp_from, is_over_tol, id_prod_over_memo)
+                            query = String.Format("INSERT INTO tb_prod_order_rec(id_prod_order, prod_order_rec_number, delivery_order_number, delivery_order_date, arrive_date, prod_order_rec_date, prod_order_rec_note ,id_report_status, id_comp_contact_to , id_comp_contact_from, is_over_tol, id_prod_over_memo, id_pl_category,claim_percent) VALUES('{0}','{1}','{2}',NULL, '{3}',DATE(NOW()),'{4}','{5}','{6}', '{7}','{8}',{9},'{10}','{11}'); SELECT LAST_INSERT_ID(); ", id_order, rec_number, do_number, arrive_date, rec_note, rec_stats, id_comp_to, id_comp_from, is_over_tol, id_prod_over_memo, id_pl_cat, claim_percent)
                             id_rec_new = execute_query(query, 0, True, "", "", "", "")
                         Else
-                            query = String.Format("INSERT INTO tb_prod_order_rec(id_prod_order, prod_order_rec_number, delivery_order_number, delivery_order_date, arrive_date, prod_order_rec_date, prod_order_rec_note ,id_report_status, id_comp_contact_to , id_comp_contact_from, is_over_tol, id_prod_over_memo) VALUES('{0}','{1}','{2}','{3}', '{4}',DATE(NOW()),'{5}','{6}','{7}', '{8}', '{9}', {10}); SELECT LAST_INSERT_ID(); ", id_order, rec_number, do_number, do_date, arrive_date, rec_note, rec_stats, id_comp_to, id_comp_from, is_over_tol, id_prod_over_memo)
+                            query = String.Format("INSERT INTO tb_prod_order_rec(id_prod_order, prod_order_rec_number, delivery_order_number, delivery_order_date, arrive_date, prod_order_rec_date, prod_order_rec_note ,id_report_status, id_comp_contact_to , id_comp_contact_from, is_over_tol, id_prod_over_memo, id_pl_category,claim_percent) VALUES('{0}','{1}','{2}','{3}', '{4}',DATE(NOW()),'{5}','{6}','{7}', '{8}', '{9}', {10}, '{11}','{12}'); SELECT LAST_INSERT_ID(); ", id_order, rec_number, do_number, do_date, arrive_date, rec_note, rec_stats, id_comp_to, id_comp_from, is_over_tol, id_prod_over_memo, id_pl_cat, claim_percent)
                             id_rec_new = execute_query(query, 0, True, "", "", "", "")
                         End If
 
@@ -591,10 +617,10 @@ GROUP BY rec.`id_prod_order`"
                     Try
                         'UPDATE rec
                         If do_date = "0000-00-00" Then
-                            query = String.Format("UPDATE tb_prod_order_rec SET delivery_order_number='{0}',delivery_order_date=null, arrive_date='{1}',prod_order_rec_note='{2}',id_report_status='{3}',id_comp_contact_to='{4}', id_comp_contact_from = '{5}' WHERE id_prod_order_rec='{6}'", do_number, arrive_date, rec_note, rec_stats, id_comp_to, id_comp_from, id_receive)
+                            query = String.Format("UPDATE tb_prod_order_rec SET delivery_order_number='{0}',delivery_order_date=null, arrive_date='{1}',prod_order_rec_note='{2}',id_report_status='{3}',id_comp_contact_to='{4}', id_comp_contact_from = '{5}',id_pl_category='{7}',claim_percent='{8}' WHERE id_prod_order_rec='{6}'", do_number, arrive_date, rec_note, rec_stats, id_comp_to, id_comp_from, id_receive, id_pl_cat, claim_percent)
                             execute_non_query(query, True, "", "", "", "")
                         Else
-                            query = String.Format("UPDATE tb_prod_order_rec SET delivery_order_number='{0}',delivery_order_date='{1}', arrive_date='{2}',prod_order_rec_note='{3}',id_report_status='{4}',id_comp_contact_to='{5}', id_comp_contact_from = '{6}' WHERE id_prod_order_rec='{7}'", do_number, do_date, arrive_date, rec_note, rec_stats, id_comp_to, id_comp_from, id_receive)
+                            query = String.Format("UPDATE tb_prod_order_rec SET delivery_order_number='{0}',delivery_order_date='{1}', arrive_date='{2}',prod_order_rec_note='{3}',id_report_status='{4}',id_comp_contact_to='{5}', id_comp_contact_from = '{6}',id_pl_category='{8}',claim_percent='{9}' WHERE id_prod_order_rec='{7}'", do_number, do_date, arrive_date, rec_note, rec_stats, id_comp_to, id_comp_from, id_receive, id_pl_cat, claim_percent)
                             execute_non_query(query, True, "", "", "", "")
                         End If
 
@@ -680,6 +706,7 @@ GROUP BY rec.`id_prod_order`"
     Private Sub GVListPurchase_HiddenEditor(ByVal sender As System.Object, ByVal e As System.EventArgs)
         MsgBox("Hidden")
     End Sub
+
     'DeleteRows
     Sub deleteRows()
         GVBarcode.DeleteRow(GVBarcode.FocusedRowHandle)
@@ -753,6 +780,10 @@ GROUP BY rec.`id_prod_order`"
                 GVBarcode.ApplyFindFilter("")
                 countQty(id_prod_order_det)
             End If
+            '
+            If GVBarcode.RowCount = 0 Then
+                SLERecType.Properties.ReadOnly = False
+            End If
             'allowDelete()
         End If
     End Sub
@@ -780,18 +811,26 @@ GROUP BY rec.`id_prod_order`"
             GVBarcode.SetFocusedRowCellValue("ean_code", "")
             stopCustom("Data not found !")
         Else
-            If is_special_rec = "1" Then
+            If is_special_rec = "1" Then 'not used
                 GVBarcode.SetFocusedRowCellValue("is_fix", "2")
                 GVBarcode.SetFocusedRowCellValue("id_prod_order_det", id_prod_order_det)
                 countQty(id_prod_order_det)
                 newRows()
+                SLERecType.Properties.ReadOnly = True
             Else
-                If (total_rec + cur_total + 1) <= total_max Then
+                If (total_rec + cur_total + 1) <= total_order And SLERecType.EditValue.ToString = "1" Then 'batas order
                     GVBarcode.SetFocusedRowCellValue("is_fix", "2")
                     GVBarcode.SetFocusedRowCellValue("id_prod_order_det", id_prod_order_det)
                     countQty(id_prod_order_det)
                     newRows()
-                Else
+                    SLERecType.Properties.ReadOnly = True
+                ElseIf (total_rec + cur_total + 1) <= total_max And (SLERecType.EditValue.ToString = "5" Or SLERecType.EditValue.ToString = "2" Or SLERecType.EditValue.ToString = "3" Or SLERecType.EditValue.ToString = "4") Then 'batas 2%
+                    GVBarcode.SetFocusedRowCellValue("is_fix", "2")
+                    GVBarcode.SetFocusedRowCellValue("id_prod_order_det", id_prod_order_det)
+                    countQty(id_prod_order_det)
+                    newRows()
+                    SLERecType.Properties.ReadOnly = True
+                ElseIf SLERecType.EditValue.ToString = "6" Then 'batas memo
                     If id_prod_over_memo <> "NULL" Then 'jika ada memo
                         If getTimeDB() < expired_date Then 'jika masi ada waktu
                             If (cur_total + 1) <= qty_limit Then
@@ -800,6 +839,7 @@ GROUP BY rec.`id_prod_order`"
                                 GVBarcode.SetFocusedRowCellValue("id_prod_order_det", id_prod_order_det)
                                 countQty(id_prod_order_det)
                                 newRows()
+                                SLERecType.Properties.ReadOnly = True
                             Else
                                 GVBarcode.SetFocusedRowCellValue("ean_code", "")
                                 stopCustom("Received should be equal to " + qty_limit.ToString)
@@ -808,6 +848,15 @@ GROUP BY rec.`id_prod_order`"
                             GVBarcode.SetFocusedRowCellValue("ean_code", "")
                             stopCustom("Memo is expired !")
                         End If
+                    Else
+                        GVBarcode.SetFocusedRowCellValue("ean_code", "")
+                        'stopCustom("Maximum receive : " + (total_max - total_rec).ToString)
+                        stopCustom("Memo not found for this PO.")
+                    End If
+                Else
+                    If SLERecType.EditValue.ToString = "1" Then
+                        GVBarcode.SetFocusedRowCellValue("ean_code", "")
+                        stopCustom("Maximum receive : " + (total_order - total_rec).ToString)
                     Else
                         GVBarcode.SetFocusedRowCellValue("ean_code", "")
                         stopCustom("Maximum receive : " + (total_max - total_rec).ToString)

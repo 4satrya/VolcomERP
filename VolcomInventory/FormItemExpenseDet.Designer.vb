@@ -98,6 +98,12 @@ Partial Class FormItemExpenseDet
         Me.GridColumnBudgetTypeDesc = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnBudgetDesc = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemSpinEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
+        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RISLECC = New DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit()
+        Me.GridView3 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn14 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn15 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.LEPaymentMethod.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEDueDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEDueDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -138,6 +144,8 @@ Partial Class FormItemExpenseDet
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemSpinEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RISLECC, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LEPaymentMethod
@@ -631,7 +639,7 @@ Partial Class FormItemExpenseDet
         Me.GCData.Location = New System.Drawing.Point(0, 167)
         Me.GCData.MainView = Me.GVData
         Me.GCData.Name = "GCData"
-        Me.GCData.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemSearchLookUpEdit1, Me.RepositoryItemTextEdit1, Me.RepositoryItemSpinEdit1, Me.RISLEType, Me.RISLECatExpense})
+        Me.GCData.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemSearchLookUpEdit1, Me.RepositoryItemTextEdit1, Me.RepositoryItemSpinEdit1, Me.RISLEType, Me.RISLECatExpense, Me.RISLECC})
         Me.GCData.Size = New System.Drawing.Size(934, 288)
         Me.GCData.TabIndex = 18
         Me.GCData.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVData})
@@ -650,7 +658,7 @@ Partial Class FormItemExpenseDet
         '
         'GVData
         '
-        Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdAcc, Me.GridColumnNo, Me.GridColumnaccount, Me.GridColumnDescription, Me.GridColumnBudgetType, Me.GridColumnBudget, Me.GridColumnTaxPercent, Me.GridColumnTaxValue, Me.GridColumnAmount, Me.GridColumnAccountDescription, Me.GridColumnBudgetTypeDesc, Me.GridColumnBudgetDesc})
+        Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdAcc, Me.GridColumnNo, Me.GridColumnaccount, Me.GridColumnDescription, Me.GridColumn7, Me.GridColumnBudgetType, Me.GridColumnBudget, Me.GridColumnTaxPercent, Me.GridColumnTaxValue, Me.GridColumnAmount, Me.GridColumnAccountDescription, Me.GridColumnBudgetTypeDesc, Me.GridColumnBudgetDesc})
         Me.GVData.GridControl = Me.GCData
         Me.GVData.Name = "GVData"
         Me.GVData.OptionsView.ShowFooter = True
@@ -730,7 +738,7 @@ Partial Class FormItemExpenseDet
         Me.GridColumnDescription.FieldName = "description"
         Me.GridColumnDescription.Name = "GridColumnDescription"
         Me.GridColumnDescription.Visible = True
-        Me.GridColumnDescription.VisibleIndex = 4
+        Me.GridColumnDescription.VisibleIndex = 5
         Me.GridColumnDescription.Width = 123
         '
         'GridColumnBudgetType
@@ -744,7 +752,7 @@ Partial Class FormItemExpenseDet
         Me.GridColumnBudgetType.FieldName = "id_expense_type"
         Me.GridColumnBudgetType.Name = "GridColumnBudgetType"
         Me.GridColumnBudgetType.Visible = True
-        Me.GridColumnBudgetType.VisibleIndex = 2
+        Me.GridColumnBudgetType.VisibleIndex = 3
         Me.GridColumnBudgetType.Width = 123
         '
         'RISLEType
@@ -783,7 +791,7 @@ Partial Class FormItemExpenseDet
         Me.GridColumnBudget.FieldName = "id_b_expense"
         Me.GridColumnBudget.Name = "GridColumnBudget"
         Me.GridColumnBudget.Visible = True
-        Me.GridColumnBudget.VisibleIndex = 3
+        Me.GridColumnBudget.VisibleIndex = 4
         Me.GridColumnBudget.Width = 123
         '
         'RISLECatExpense
@@ -830,7 +838,7 @@ Partial Class FormItemExpenseDet
         Me.GridColumnTaxPercent.FieldName = "tax_percent"
         Me.GridColumnTaxPercent.Name = "GridColumnTaxPercent"
         Me.GridColumnTaxPercent.Visible = True
-        Me.GridColumnTaxPercent.VisibleIndex = 6
+        Me.GridColumnTaxPercent.VisibleIndex = 7
         Me.GridColumnTaxPercent.Width = 123
         '
         'RepositoryItemTextEdit1
@@ -854,7 +862,7 @@ Partial Class FormItemExpenseDet
         Me.GridColumnTaxValue.UnboundExpression = "[tax_percent] / 100 * [amount]"
         Me.GridColumnTaxValue.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
         Me.GridColumnTaxValue.Visible = True
-        Me.GridColumnTaxValue.VisibleIndex = 7
+        Me.GridColumnTaxValue.VisibleIndex = 8
         Me.GridColumnTaxValue.Width = 128
         '
         'GridColumnAmount
@@ -867,7 +875,7 @@ Partial Class FormItemExpenseDet
         Me.GridColumnAmount.Name = "GridColumnAmount"
         Me.GridColumnAmount.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount", "{0:N2}")})
         Me.GridColumnAmount.Visible = True
-        Me.GridColumnAmount.VisibleIndex = 5
+        Me.GridColumnAmount.VisibleIndex = 6
         Me.GridColumnAmount.Width = 123
         '
         'GridColumnAccountDescription
@@ -896,6 +904,53 @@ Partial Class FormItemExpenseDet
         Me.RepositoryItemSpinEdit1.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.RepositoryItemSpinEdit1.Mask.EditMask = "N2"
         Me.RepositoryItemSpinEdit1.Name = "RepositoryItemSpinEdit1"
+        '
+        'GridColumn7
+        '
+        Me.GridColumn7.Caption = "CC"
+        Me.GridColumn7.ColumnEdit = Me.RISLECC
+        Me.GridColumn7.FieldName = "cc"
+        Me.GridColumn7.Name = "GridColumn7"
+        Me.GridColumn7.Visible = True
+        Me.GridColumn7.VisibleIndex = 2
+        '
+        'RISLECC
+        '
+        Me.RISLECC.AutoHeight = False
+        Me.RISLECC.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.RISLECC.Name = "RISLECC"
+        Me.RISLECC.View = Me.GridView3
+        '
+        'GridView3
+        '
+        Me.GridView3.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn8, Me.GridColumn14, Me.GridColumn15})
+        Me.GridView3.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView3.Name = "GridView3"
+        Me.GridView3.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView3.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn8
+        '
+        Me.GridColumn8.Caption = "id"
+        Me.GridColumn8.Name = "GridColumn8"
+        '
+        'GridColumn14
+        '
+        Me.GridColumn14.Caption = "Code"
+        Me.GridColumn14.FieldName = "comp_number"
+        Me.GridColumn14.Name = "GridColumn14"
+        Me.GridColumn14.Visible = True
+        Me.GridColumn14.VisibleIndex = 0
+        Me.GridColumn14.Width = 327
+        '
+        'GridColumn15
+        '
+        Me.GridColumn15.Caption = "Company"
+        Me.GridColumn15.FieldName = "comp_name"
+        Me.GridColumn15.Name = "GridColumn15"
+        Me.GridColumn15.Visible = True
+        Me.GridColumn15.VisibleIndex = 1
+        Me.GridColumn15.Width = 1305
         '
         'FormItemExpenseDet
         '
@@ -956,6 +1011,8 @@ Partial Class FormItemExpenseDet
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemSpinEdit1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RISLECC, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1036,4 +1093,10 @@ Partial Class FormItemExpenseDet
     Friend WithEvents GridColumn13 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnBudgetTypeDesc As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnBudgetDesc As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn7 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RISLECC As DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit
+    Friend WithEvents GridView3 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn8 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn14 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn15 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

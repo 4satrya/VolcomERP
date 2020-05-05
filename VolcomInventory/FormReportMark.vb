@@ -5703,36 +5703,36 @@ WHERE copd.id_design_cop_propose='" & id_report & "';"
 
                 If FormItemExpenseDet.CEPayLater.EditValue = True Then
                     'utang
-                    Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number)
-                    SELECT " + id_acc_trans + ", ed.id_acc, IF(ed.amount<0,0,ed.amount) AS `debit`, IF(ed.amount<0,-ed.amount,0) AS `credit`, ed.description, 157, e.id_item_expense, e.`number`
+                    Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number, id_comp)
+                    SELECT " + id_acc_trans + ", ed.id_acc, IF(ed.amount<0,0,ed.amount) AS `debit`, IF(ed.amount<0,-ed.amount,0) AS `credit`, ed.description, 157, e.id_item_expense, e.`number`,ed.cc
                     FROM tb_item_expense e
                     INNER JOIN  tb_item_expense_det ed ON ed.id_item_expense = e.id_item_expense
                     WHERE e.id_item_expense=" + id_report + "
                     UNION ALL
-                    SELECT " + id_acc_trans + ", o.acc_coa_vat_in, e.vat_total AS `debit`, 0 AS `credit`, '' AS description, 157, e.id_item_expense, e.`number`
+                    SELECT " + id_acc_trans + ", o.acc_coa_vat_in, e.vat_total AS `debit`, 0 AS `credit`, '' AS description, 157, e.id_item_expense, e.`number`,1
                     FROM tb_item_expense e
                     JOIN tb_opt_purchasing o
                     WHERE e.id_item_expense=" + id_report + " AND e.vat_total>0
                     UNION ALL
-                    SELECT " + id_acc_trans + ", c.id_acc_ap, 0 AS `debit`, e.`total` AS `credit`, '' AS description, 157, e.id_item_expense, e.`number`
+                    SELECT " + id_acc_trans + ", c.id_acc_ap, 0 AS `debit`, e.`total` AS `credit`, '' AS description, 157, e.id_item_expense, e.`number`,1
                     FROM tb_item_expense e
                     INNER JOIN tb_m_comp c ON c.id_comp = e.id_comp
                     WHERE e.id_item_expense=" + id_report + " "
                     execute_non_query(qjd, True, "", "", "", "")
                 Else
                     'lansung biaya
-                    Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number)
-                    SELECT " + id_acc_trans + ", ed.id_acc,  IF(ed.amount<0,0,ed.amount) AS `debit`, IF(ed.amount<0,-ed.amount,0) AS `credit`, ed.description, 157, e.id_item_expense, e.`number`
+                    Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number,id_comp)
+                    SELECT " + id_acc_trans + ", ed.id_acc,  IF(ed.amount<0,0,ed.amount) AS `debit`, IF(ed.amount<0,-ed.amount,0) AS `credit`, ed.description, 157, e.id_item_expense, e.`number`,ed.cc
                     FROM tb_item_expense e
                     INNER JOIN  tb_item_expense_det ed ON ed.id_item_expense = e.id_item_expense
                     WHERE e.id_item_expense=" + id_report + "
                     UNION ALL
-                    SELECT " + id_acc_trans + ", o.acc_coa_vat_in, e.vat_total AS `debit`, 0 AS `credit`, '' AS description, 157, e.id_item_expense, e.`number`
+                    SELECT " + id_acc_trans + ", o.acc_coa_vat_in, e.vat_total AS `debit`, 0 AS `credit`, '' AS description, 157, e.id_item_expense, e.`number`,1
                     FROM tb_item_expense e
                     JOIN tb_opt_purchasing o
                     WHERE e.id_item_expense=" + id_report + " AND e.vat_total>0
                     UNION ALL
-                    SELECT " + id_acc_trans + ", e.id_acc_from, 0 AS `debit`, e.`total` AS `credit`, '' AS description, 157, e.id_item_expense, e.`number`
+                    SELECT " + id_acc_trans + ", e.id_acc_from, 0 AS `debit`, e.`total` AS `credit`, '' AS description, 157, e.id_item_expense, e.`number`,1
                     FROM tb_item_expense e
                     WHERE e.id_item_expense=" + id_report + " "
                     execute_non_query(qjd, True, "", "", "", "")

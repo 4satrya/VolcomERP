@@ -9,6 +9,7 @@
 
     Private Sub FormItemExpenseDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewReportStatus()
+        viewCCRepo()
         viewCOA()
         viewCOARepo()
         viewPaymentMethod()
@@ -22,6 +23,11 @@
     Sub view_repo_type()
         Dim q As String = "SELECT id_expense_type,expense_type FROM tb_lookup_expense_type"
         viewSearchLookupRepositoryQuery(RISLEType, q, 0, "expense_type", "id_expense_type")
+    End Sub
+
+    Sub viewCCRepo()
+        Dim q As String = "SELECT id_comp,comp_number,comp_name FROM tb_m_comp"
+        viewSearchLookupRepositoryQuery(RISLECC, q, 0, "comp_number", "id_comp")
     End Sub
 
     Sub view_repo_cat()
@@ -153,7 +159,7 @@ WHERE bo.`year`=YEAR(NOW()) AND bo.is_active='1'"
 
     Sub viewDetail()
         Cursor = Cursors.WaitCursor
-        Dim query As String = "SELECT ed.id_item_expense_det, ed.id_item_expense,ed.id_expense_type,ed.id_b_expense,bex.item_cat_main,typ.expense_type,
+        Dim query As String = "SELECT ed.id_item_expense_det,ed.cc, ed.id_item_expense,ed.id_expense_type,ed.id_b_expense,bex.item_cat_main,typ.expense_type,
         ed.id_acc, a.acc_description AS `coa_desc`, ed.description, "
         If action = "ins" Then
             query += "0.00 AS tax_percent,0.00 AS `amount` "
@@ -377,9 +383,10 @@ WHERE bo.`year`=YEAR(NOW()) AND bo.is_active='1'"
                 execute_non_query("CALL gen_number(" + id + ",157); ", True, "", "", "", "")
 
                 'query det
-                Dim qd As String = "INSERT INTO tb_item_expense_det(id_item_expense, id_acc, description, tax_percent, tax_value, amount, id_expense_type, id_b_expense) VALUES "
+                Dim qd As String = "INSERT INTO tb_item_expense_det(id_item_expense, id_acc,cc, description, tax_percent, tax_value, amount, id_expense_type, id_b_expense) VALUES "
                 For d As Integer = 0 To ((GVData.RowCount - 1) - GetGroupRowCount(GVData))
                     Dim id_acc As String = GVData.GetRowCellValue(d, "id_acc").ToString
+                    Dim cc As String = GVData.GetRowCellValue(d, "cc").ToString
                     Dim description As String = GVData.GetRowCellValue(d, "description").ToString
                     Dim tax_percent As String = decimalSQL(GVData.GetRowCellValue(d, "tax_percent").ToString)
                     Dim tax_value As String = decimalSQL(GVData.GetRowCellValue(d, "tax_value").ToString)
@@ -390,7 +397,7 @@ WHERE bo.`year`=YEAR(NOW()) AND bo.is_active='1'"
                     If d > 0 Then
                         qd += ", "
                     End If
-                    qd += "('" + id + "','" + id_acc + "', '" + description + "', '" + tax_percent + "', '" + tax_value + "', '" + amount + "', '" + id_expense_type + "', '" + id_b_expense + "') "
+                    qd += "('" + id + "','" + id_acc + "','" + cc + "', '" + description + "', '" + tax_percent + "', '" + tax_value + "', '" + amount + "', '" + id_expense_type + "', '" + id_b_expense + "') "
                 Next
                 If GVData.RowCount > 0 Then
                     execute_non_query(qd, True, "", "", "", "")

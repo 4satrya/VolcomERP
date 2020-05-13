@@ -40,6 +40,15 @@ Partial Class FormSalesReturnOrderOL
         Me.GridColumnWH = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnTotal = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.XTCROR = New DevExpress.XtraTab.XtraTabControl()
+        Me.XTPRORList = New DevExpress.XtraTab.XtraTabPage()
+        Me.XTPPendingList = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCPending = New DevExpress.XtraGrid.GridControl()
+        Me.GVPending = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumnsales_order_ol_shop_number = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumncustomer_name = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumncomp_number = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumncomp_name = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GCFilter, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GCFilter.SuspendLayout()
         CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -49,6 +58,12 @@ Partial Class FormSalesReturnOrderOL
         CType(Me.GCSalesReturnOrder, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVSalesReturnOrder, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.XTCROR, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTCROR.SuspendLayout()
+        Me.XTPRORList.SuspendLayout()
+        Me.XTPPendingList.SuspendLayout()
+        CType(Me.GCPending, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVPending, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GCFilter
@@ -64,7 +79,7 @@ Partial Class FormSalesReturnOrderOL
         Me.GCFilter.Dock = System.Windows.Forms.DockStyle.Top
         Me.GCFilter.Location = New System.Drawing.Point(0, 0)
         Me.GCFilter.Name = "GCFilter"
-        Me.GCFilter.Size = New System.Drawing.Size(696, 39)
+        Me.GCFilter.Size = New System.Drawing.Size(690, 39)
         Me.GCFilter.TabIndex = 6
         '
         'BtnView
@@ -144,7 +159,7 @@ Partial Class FormSalesReturnOrderOL
         Me.GCSalesReturnOrder.Location = New System.Drawing.Point(0, 39)
         Me.GCSalesReturnOrder.MainView = Me.GVSalesReturnOrder
         Me.GCSalesReturnOrder.Name = "GCSalesReturnOrder"
-        Me.GCSalesReturnOrder.Size = New System.Drawing.Size(696, 389)
+        Me.GCSalesReturnOrder.Size = New System.Drawing.Size(690, 361)
         Me.GCSalesReturnOrder.TabIndex = 7
         Me.GCSalesReturnOrder.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVSalesReturnOrder, Me.GridView2})
         '
@@ -155,6 +170,7 @@ Partial Class FormSalesReturnOrderOL
         Me.GVSalesReturnOrder.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_qty", Me.GridColumnTotal, "{0:n0}")})
         Me.GVSalesReturnOrder.Name = "GVSalesReturnOrder"
         Me.GVSalesReturnOrder.OptionsBehavior.ReadOnly = True
+        Me.GVSalesReturnOrder.OptionsFind.AlwaysVisible = True
         Me.GVSalesReturnOrder.OptionsView.ShowFooter = True
         Me.GVSalesReturnOrder.OptionsView.ShowGroupPanel = False
         '
@@ -256,13 +272,90 @@ Partial Class FormSalesReturnOrderOL
         Me.GridView2.GridControl = Me.GCSalesReturnOrder
         Me.GridView2.Name = "GridView2"
         '
+        'XTCROR
+        '
+        Me.XTCROR.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.XTCROR.HeaderLocation = DevExpress.XtraTab.TabHeaderLocation.Bottom
+        Me.XTCROR.Location = New System.Drawing.Point(0, 0)
+        Me.XTCROR.Name = "XTCROR"
+        Me.XTCROR.SelectedTabPage = Me.XTPRORList
+        Me.XTCROR.Size = New System.Drawing.Size(696, 428)
+        Me.XTCROR.TabIndex = 8
+        Me.XTCROR.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPRORList, Me.XTPPendingList})
+        '
+        'XTPRORList
+        '
+        Me.XTPRORList.Controls.Add(Me.GCSalesReturnOrder)
+        Me.XTPRORList.Controls.Add(Me.GCFilter)
+        Me.XTPRORList.Name = "XTPRORList"
+        Me.XTPRORList.Size = New System.Drawing.Size(690, 400)
+        Me.XTPRORList.Text = "ROR List"
+        '
+        'XTPPendingList
+        '
+        Me.XTPPendingList.Controls.Add(Me.GCPending)
+        Me.XTPPendingList.Name = "XTPPendingList"
+        Me.XTPPendingList.Size = New System.Drawing.Size(690, 400)
+        Me.XTPPendingList.Text = "Pending List"
+        '
+        'GCPending
+        '
+        Me.GCPending.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCPending.Location = New System.Drawing.Point(0, 0)
+        Me.GCPending.MainView = Me.GVPending
+        Me.GCPending.Name = "GCPending"
+        Me.GCPending.Size = New System.Drawing.Size(690, 400)
+        Me.GCPending.TabIndex = 1
+        Me.GCPending.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVPending})
+        '
+        'GVPending
+        '
+        Me.GVPending.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnsales_order_ol_shop_number, Me.GridColumncustomer_name, Me.GridColumncomp_number, Me.GridColumncomp_name})
+        Me.GVPending.GridControl = Me.GCPending
+        Me.GVPending.Name = "GVPending"
+        Me.GVPending.OptionsBehavior.AutoExpandAllGroups = True
+        Me.GVPending.OptionsBehavior.ReadOnly = True
+        Me.GVPending.OptionsFind.AlwaysVisible = True
+        Me.GVPending.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumnsales_order_ol_shop_number
+        '
+        Me.GridColumnsales_order_ol_shop_number.Caption = "Order Number"
+        Me.GridColumnsales_order_ol_shop_number.FieldName = "order_number"
+        Me.GridColumnsales_order_ol_shop_number.Name = "GridColumnsales_order_ol_shop_number"
+        Me.GridColumnsales_order_ol_shop_number.Visible = True
+        Me.GridColumnsales_order_ol_shop_number.VisibleIndex = 0
+        '
+        'GridColumncustomer_name
+        '
+        Me.GridColumncustomer_name.Caption = "Customer"
+        Me.GridColumncustomer_name.FieldName = "customer_name"
+        Me.GridColumncustomer_name.Name = "GridColumncustomer_name"
+        Me.GridColumncustomer_name.Visible = True
+        Me.GridColumncustomer_name.VisibleIndex = 1
+        '
+        'GridColumncomp_number
+        '
+        Me.GridColumncomp_number.Caption = "Account"
+        Me.GridColumncomp_number.FieldName = "comp_number"
+        Me.GridColumncomp_number.Name = "GridColumncomp_number"
+        Me.GridColumncomp_number.Visible = True
+        Me.GridColumncomp_number.VisibleIndex = 2
+        '
+        'GridColumncomp_name
+        '
+        Me.GridColumncomp_name.Caption = "Account Description"
+        Me.GridColumncomp_name.FieldName = "comp_name"
+        Me.GridColumncomp_name.Name = "GridColumncomp_name"
+        Me.GridColumncomp_name.Visible = True
+        Me.GridColumncomp_name.VisibleIndex = 3
+        '
         'FormSalesReturnOrderOL
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(696, 428)
-        Me.Controls.Add(Me.GCSalesReturnOrder)
-        Me.Controls.Add(Me.GCFilter)
+        Me.Controls.Add(Me.XTCROR)
         Me.Name = "FormSalesReturnOrderOL"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Return Order Online Store"
@@ -276,6 +369,12 @@ Partial Class FormSalesReturnOrderOL
         CType(Me.GCSalesReturnOrder, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVSalesReturnOrder, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.XTCROR, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTCROR.ResumeLayout(False)
+        Me.XTPRORList.ResumeLayout(False)
+        Me.XTPPendingList.ResumeLayout(False)
+        CType(Me.GCPending, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVPending, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -301,4 +400,13 @@ Partial Class FormSalesReturnOrderOL
     Friend WithEvents GridColumnOLStoreNo As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnWH As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnTotal As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents XTCROR As DevExpress.XtraTab.XtraTabControl
+    Friend WithEvents XTPRORList As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents XTPPendingList As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents GCPending As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVPending As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumnsales_order_ol_shop_number As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumncustomer_name As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumncomp_number As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumncomp_name As DevExpress.XtraGrid.Columns.GridColumn
 End Class

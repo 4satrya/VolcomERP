@@ -335,11 +335,19 @@ INNER JOIN tb_pl_sales_order_del_det_counting c ON c.id_pl_sales_order_del_det_c
     End Sub
 
     Private Sub BtnAttachment_Click(sender As Object, e As EventArgs) Handles BtnAttachment.Click
-
+        Cursor = Cursors.WaitCursor
+        FormDocumentUpload.report_mark_type = "245"
+        FormDocumentUpload.id_report = id_ret
+        If is_view = "1" Or id_report_status = "6" Or id_report_status = "5" Then
+            FormDocumentUpload.is_view = "1"
+        End If
+        FormDocumentUpload.ShowDialog()
+        Cursor = Cursors.Default
     End Sub
 
     Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles BtnPrint.Click
-
+        Cursor = Cursors.WaitCursor
+        Cursor = Cursors.Default
     End Sub
 
     Private Sub BtnSaveChanges_Click(sender As Object, e As EventArgs) Handles BtnSaveChanges.Click

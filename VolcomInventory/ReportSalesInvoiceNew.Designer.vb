@@ -331,7 +331,6 @@ Partial Public Class ReportSalesInvoiceNew
         Me.XLName3.SizeF = New System.Drawing.SizeF(143.8749!, 12.58334!)
         Me.XLName3.StylePriority.UseFont = False
         Me.XLName3.StylePriority.UseTextAlignment = False
-        Me.XLName3.Text = "[customer_name]"
         Me.XLName3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
         '
         'XLOLStoreNumber1
@@ -367,7 +366,6 @@ Partial Public Class ReportSalesInvoiceNew
         Me.XLOLStoreNumber3.SizeF = New System.Drawing.SizeF(143.8751!, 12.58334!)
         Me.XLOLStoreNumber3.StylePriority.UseFont = False
         Me.XLOLStoreNumber3.StylePriority.UseTextAlignment = False
-        Me.XLOLStoreNumber3.Text = "[sales_order_ol_shop_number]"
         Me.XLOLStoreNumber3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
         '
         'XrLabel18

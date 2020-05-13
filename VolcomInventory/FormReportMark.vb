@@ -3071,6 +3071,31 @@ WHERE a.id_adj_in_fg = '" & id_report & "'"
                 Dim stc_in As ClassSalesInv = New ClassSalesInv()
                 stc_in.insertUnique(id_report, report_mark_type)
                 stc_in.completeInStock(id_report, report_mark_type)
+
+                'return centre online store
+                If report_mark_type = "118" Then
+                    'update stt in return centre
+                    Try
+                        Dim qstt As String = "UPDATE tb_ol_store_ret_list main
+                        INNER JOIN (
+	                        SELECT d.id_ol_store_ret_list 
+	                        FROM tb_sales_pos_det d
+	                        WHERE d.id_sales_pos=" + id_report + "
+	                        GROUP BY d.id_ol_store_ret_list
+                        ) src ON src.id_ol_store_ret_list = main.id_ol_store_ret_list
+                        SET main.id_ol_store_ret_stt=7 "
+                        execute_non_query(qstt, True, "", "", "", "")
+                    Catch ex As Exception
+                        stopCustom("Error updating status in return centre. " + ex.ToString)
+                    End Try
+
+                    'send mail for ROR
+                    Try
+
+                    Catch ex As Exception
+
+                    End Try
+                End If
             End If
 
             query = String.Format("UPDATE tb_sales_pos SET id_report_status='{0}' WHERE id_sales_pos ='{1}'", id_status_reportx, id_report)
@@ -5811,14 +5836,14 @@ WHERE copd.id_design_cop_propose='" & id_report & "';"
                 If data_payment.Rows(0)("report_mark_type").ToString = "139" Or report_mark_type = "202" Then
                     'close pay in tb_purc_order
                     Dim qc As String = "UPDATE tb_purc_order po
-                                                INNER JOIN tb_pn_det pyd ON pyd.`id_report`=po.`id_purc_order` AND pyd.`id_pn`=" & id_report & "
+                                                INNER JOIN tb_pn_det pyd ON pyd.`id_report`=po.`id_purc_order` AND pyd.balance_due=pyd.`value` AND pyd.`id_pn`=" & id_report & "
                                                 SET po.is_close_pay='1'"
                     execute_non_query(qc, True, "", "", "", "")
                     'FormBankWithdrawal.load_po()
                 ElseIf data_payment.Rows(0)("report_mark_type").ToString = "157" Then
                     'close expense
                     Dim qc As String = "UPDATE tb_item_expense e
-                                                INNER JOIN tb_pn_det pyd ON pyd.`id_report`=e.`id_item_expense` AND pyd.`id_pn`=" & id_report & "
+                                                INNER JOIN tb_pn_det pyd ON pyd.`id_report`=e.`id_item_expense` AND pyd.balance_due=pyd.`value` AND pyd.`id_pn`=" & id_report & "
                                                 SET e.is_open='2'"
                     execute_non_query(qc, True, "", "", "", "")
                     'FormBankWithdrawal.load_expense()
@@ -5826,7 +5851,7 @@ WHERE copd.id_design_cop_propose='" & id_report & "';"
                     'Close FGPO
                     Dim qry As String = "SELECT pd.`id_report`,pd.`report_mark_type` 
 FROM tb_pn_det pd
-WHERE pd.`id_pn`='" & id_report & "'"
+WHERE pd.balance_due=pd.`value` AND pd.`id_pn`='" & id_report & "'"
                     Dim dt As DataTable = execute_query(qry, -1, True, "", "", "", "")
                     '
                     For i As Integer = 0 To dt.Rows.Count - 1
@@ -7826,7 +7851,7 @@ WHERE invd.`id_inv_mat`='" & id_report & "'"
             'update status
             query = String.Format("UPDATE tb_ol_store_ret SET id_report_status='{0}' WHERE id_ol_store_ret ='{1}'", id_status_reportx, id_report)
             execute_non_query(query, True, "", "", "", "")
-        ElseIf report_mark_type = "243" Then
+        ElseIf report_mark_type = "245" Then
             'return cust
             'auto completed
             If id_status_reportx = "3" Then

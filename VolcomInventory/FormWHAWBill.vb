@@ -5,6 +5,7 @@
     '
     Public is_lock As String = "2"
     '
+    Private open_file_import As String = ""
     Private Sub FormWHAWBill_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
         FormMain.show_rb(Name)
         check_but()
@@ -688,5 +689,142 @@
         End If
 
         GVAWBill.ActiveFilterString = ""
+    End Sub
+
+    Private Sub SBExportCsss_Click(sender As Object, e As EventArgs) Handles SBExportCsss.Click
+        GVAWBill.ActiveFilterString = "[is_check] = 'yes'"
+
+        If GVAWBill.RowCount > 0 Then
+            Dim q_in As String = ""
+
+            For i = 0 To GVAWBill.RowCount - 1
+                If GVAWBill.IsValidRowHandle(i) Then
+                    q_in += GVAWBill.GetRowCellValue(i, "id_awbill").ToString + ", "
+                End If
+            Next
+
+            Dim query As String = "
+                SELECT so.shipping_name, CONCAT(so.shipping_address1, ' ', so.shipping_address2) AS shipping_address, so.shipping_city, so.shipping_post_code, so.shipping_region, so.shipping_phone, sod.qty, aw.c_weight, opt.jne_good_desc, opt.jne_goods_value, opt.jne_special_instruction, opt.jne_service, CONCAT(aw_det.id_awbill, '#', so.sales_order_ol_shop_number) AS order_id, opt.jne_insurance, opt.jne_shipper_name, opt.jne_shipper_address, opt.jne_shipper_city, opt.jne_shipper_zip, opt.jne_shipper_region, opt.jne_shipper_contact, opt.jne_shipper_phone, '' AS destination_code
+                FROM tb_wh_awbill_det AS aw_det
+                LEFT JOIN tb_pl_sales_order_del AS pl_del ON aw_det.id_pl_sales_order_del = pl_del.id_pl_sales_order_del
+                LEFT JOIN tb_sales_order AS so ON pl_del.id_sales_order = so.id_sales_order
+                LEFT JOIN (
+                    SELECT id_sales_order, SUM(sales_order_det_qty) AS qty
+                    FROM tb_sales_order_det
+                    GROUP BY id_sales_order
+                ) AS sod ON so.id_sales_order = sod.id_sales_order
+                LEFT JOIN tb_wh_awbill AS aw ON aw_det.id_awbill = aw.id_awbill    
+                LEFT JOIN tb_opt AS opt ON aw_det.id_awbill = aw_det.id_awbill
+                WHERE aw_det.id_awbill IN (" + q_in.Substring(0, q_in.Length - 2) + ")
+            "
+
+            Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+
+            GCExportExcel.DataSource = data
+
+            Dim save As SaveFileDialog = New SaveFileDialog
+
+            save.Filter = "Excel File | *.xls"
+            save.ShowDialog()
+
+            If Not save.FileName = "" Then
+                Dim op As DevExpress.XtraPrinting.XlsExportOptionsEx = New DevExpress.XtraPrinting.XlsExportOptionsEx
+
+                op.ExportType = DevExpress.Export.ExportType.WYSIWYG
+
+                GVExportExcel.ExportToXls(save.FileName, op)
+
+                'resave
+                Dim app As Microsoft.Office.Interop.Excel.Application = New Microsoft.Office.Interop.Excel.Application
+
+                Dim awb As Microsoft.Office.Interop.Excel.Workbook = app.Workbooks.Open(save.FileName)
+
+                awb.Save()
+
+                awb.Close()
+
+                app.Quit()
+
+                infoCustom("File saved.")
+            End If
+        Else
+            errorCustom("No AWB selected.")
+        End If
+
+        GVAWBill.ActiveFilterString = ""
+    End Sub
+
+    Private Sub SBImportCsss_Click(sender As Object, e As EventArgs) Handles SBImportCsss.Click
+        Dim fdlg As OpenFileDialog = New OpenFileDialog()
+
+        fdlg.Title = "Select excel file To import"
+        fdlg.InitialDirectory = "C: \"
+        fdlg.Filter = "Excel File|*.xls; *.xlsx"
+        fdlg.FilterIndex = 0
+        fdlg.RestoreDirectory = True
+
+        If fdlg.ShowDialog() = DialogResult.OK Then
+            open_file_import = fdlg.FileName
+        End If
+
+        fdlg.Dispose()
+
+        If Not fdlg.FileName = "" Then
+            'resave
+            Dim awb_tmp As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments + "\awb_tmp.xls"
+
+            Dim app As Microsoft.Office.Interop.Excel.Application = New Microsoft.Office.Interop.Excel.Application
+
+            Dim awb As Microsoft.Office.Interop.Excel.Workbook = app.Workbooks.Open(fdlg.FileName)
+
+            awb.SaveAs(awb_tmp, Microsoft.Office.Interop.Excel.XlFileFormat.xlOpenXMLWorkbook)
+
+            awb.Close()
+
+            app.Quit()
+
+            Dim MyConnection As System.Data.OleDb.OleDbConnection
+            Dim DtSet As System.Data.DataSet
+            Dim MyCommand As System.Data.OleDb.OleDbDataAdapter
+
+            MyConnection = New System.Data.OleDb.OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0; Data Source='" + awb_tmp + "'; Extended Properties=""Excel 12.0 XML; IMEX=1; HDR=YES; TypeGuessRows=0; ImportMixedTypes=Text;""")
+
+            MyCommand = New System.Data.OleDb.OleDbDataAdapter("select * from [Outbound Transaction$]", MyConnection)
+
+            DtSet = New System.Data.DataSet
+
+            MyCommand.Fill(DtSet)
+
+            Dim dt As DataTable = DtSet.Tables(0)
+
+            Dim data As DataTable = New DataTable
+
+            data.Columns.Add("id_awbill", GetType(String))
+            data.Columns.Add("awbill", GetType(String))
+
+            Dim total As Integer = 0
+
+            For i = 2 To dt.Rows.Count - 1
+                Try
+                    Dim awbill_no As String = dt.Rows(i)(29).ToString.Replace("#", "")
+                    Dim id_awbill As String = dt.Rows(i)(1).ToString.Substring(0, dt.Rows(i)(1).ToString.IndexOf("#"))
+
+                    Dim already_awb As String = execute_query("SELECT COUNT(*) AS total FROM tb_wh_awbill WHERE id_awbill = '" + id_awbill + "'", 0, True, "", "", "", "")
+
+                    If Not already_awb = "0" Then
+                        Dim que As String = "UPDATE tb_wh_awbill SET awbill_no = '" + awbill_no + "' WHERE id_awbill = '" + id_awbill + "'"
+
+                        execute_non_query(que, True, "", "", "", "")
+
+                        total = total + 1
+                    End If
+                Catch ex As Exception
+                End Try
+            Next
+
+            MyConnection.Close()
+
+            infoCustom(total.ToString + " data imported.")
+        End If
     End Sub
 End Class

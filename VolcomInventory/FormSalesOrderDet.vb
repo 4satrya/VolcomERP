@@ -285,29 +285,55 @@ Public Class FormSalesOrderDet
         delNotFoundMyRow()
 
         'check stock
+        Dim dts As DataTable
         Dim cond_data As Boolean = True
-        getDataReference()
-        For c As Integer = 0 To ((GVItemList.RowCount - 1) - GetGroupRowCount(GVItemList))
-            Dim id_product_cek As String = GVItemList.GetRowCellValue(c, "id_product").ToString
-            Dim qty_cek As Integer = GVItemList.GetRowCellValue(c, "sales_order_det_qty")
-            Dim id_sales_order_det As String = GVItemList.GetRowCellValue(c, "id_sales_order_det").ToString
-            If id_sales_order_det = "0" Then
-                Dim data_filter_cek As DataRow() = dt.Select("[id_product]='" + id_product_cek + "' ")
-                If data_filter_cek.Length <= 0 Then
-                    GVItemList.SetRowCellValue(c, "error_status", "Product not found;")
-                    cond_data = False
-                Else
-                    If qty_cek > data_filter_cek(0)("total_allow") Then
-                        GVItemList.SetRowCellValue(c, "error_status", "Qty can't exceed " + data_filter_cek(0)("total_allow").ToString + ";")
+        If id_commerce_type = "1" Then
+            'offline store
+            getDataReference()
+            For c As Integer = 0 To ((GVItemList.RowCount - 1) - GetGroupRowCount(GVItemList))
+                Dim id_product_cek As String = GVItemList.GetRowCellValue(c, "id_product").ToString
+                Dim qty_cek As Integer = GVItemList.GetRowCellValue(c, "sales_order_det_qty")
+                Dim id_sales_order_det As String = GVItemList.GetRowCellValue(c, "id_sales_order_det").ToString
+                If id_sales_order_det = "0" Then
+                    Dim data_filter_cek As DataRow() = dt.Select("[id_product]='" + id_product_cek + "' ")
+                    If data_filter_cek.Length <= 0 Then
+                        GVItemList.SetRowCellValue(c, "error_status", "Product not found;")
                         cond_data = False
                     Else
-                        GVItemList.SetRowCellValue(c, "error_status", "")
+                        If qty_cek > data_filter_cek(0)("total_allow") Then
+                            GVItemList.SetRowCellValue(c, "error_status", "Qty can't exceed " + data_filter_cek(0)("total_allow").ToString + ";")
+                            cond_data = False
+                        Else
+                            GVItemList.SetRowCellValue(c, "error_status", "")
+                        End If
                     End If
                 End If
+            Next
+        ElseIf id_commerce_type = "2" Then
+            'online
+            If GVItemList.RowCount > 0 Then
+                Dim qs As String = "DELETE FROM tb_temp_val_stock WHERE id_user='" + id_user + "'; 
+                            INSERT INTO tb_temp_val_stock(id_user, code, name, size, id_product, qty) VALUES "
+                Dim id_prod As String = ""
+                For s As Integer = 0 To GVItemList.RowCount - 1
+                    If s > 0 Then
+                        qs += ","
+                        id_prod += ","
+                    End If
+                    qs += "('" + id_user + "','" + GVItemList.GetRowCellValue(s, "code").ToString + "','" + addSlashes(GVItemList.GetRowCellValue(s, "name").ToString) + "', '" + GVItemList.GetRowCellValue(s, "size").ToString + "', '" + GVItemList.GetRowCellValue(s, "id_product").ToString + "', '" + decimalSQL(GVItemList.GetRowCellValue(s, "sales_order_det_qty").ToString) + "') "
+                    id_prod += GVItemList.GetRowCellValue(s, "id_product").ToString
+                Next
+                qs += "; CALL view_validate_stock(" + id_user + ", " + id_comp_par + ", '" + id_prod + "',1); "
+                dts = execute_query(qs, -1, True, "", "", "", "")
+                If dts.Rows.Count > 0 Then
+                    Cursor = Cursors.Default
+                    cond_data = False
+                End If
             End If
-        Next
+        End If
         GCItemList.RefreshDataSource()
         GVItemList.RefreshData()
+
 
         'check account trf
         Dim cond_cat_trf As Boolean = True
@@ -398,9 +424,15 @@ Public Class FormSalesOrderDet
         If Not formIsValidInPanel(EPForm, PanelControlTopLeft) Or Not formIsValidInPanel(EPForm, PanelControlTopMain) Then
             errorInput()
         ElseIf Not cond_data Then
-            stopCustom("Please see error log in item list !")
-            GridColumnErr.Visible = True
-            GridColumnErr.VisibleIndex = 100
+            If id_commerce_type = "1" Then
+                stopCustom("Please see error log in item list !")
+                GridColumnErr.Visible = True
+                GridColumnErr.VisibleIndex = 100
+            ElseIf id_commerce_type = "2" Then
+                stopCustom("No stock available for some items.")
+                FormValidateStock.dt = dts
+                FormValidateStock.ShowDialog()
+            End If
         ElseIf Not cond_cat_trf Then
             stopCustom("Please select category 'Transfer' !")
         ElseIf Not cond_cat_str Then
@@ -905,12 +937,14 @@ WHERE id_comp IN (" & id_store & ", " & id_comp_par & ")"
             DEOLShop.Enabled = False
             GridColumnItemId.Visible = False
             GridColumnOLStoreId.Visible = False
+            RepositoryItemSpinEdit1.ReadOnly = False
         ElseIf id_commerce_type = "2" Then
             TxtOLShopNumber.Enabled = True
             DEOLShop.Enabled = True
             GridColumnItemId.VisibleIndex = 1
             GridColumnOLStoreId.VisibleIndex = 2
             GridColumnCode.VisibleIndex = 3
+            RepositoryItemSpinEdit1.ReadOnly = True
 
             'get own ol store comp
             Dim qol As String = "SELECT o.own_ol_store_normal, o.own_ol_store_sale FROM tb_opt o "
@@ -1112,7 +1146,7 @@ WHERE id_comp IN (" & id_store & ", " & id_comp_par & ")"
                     Else
                         Dim dt_dupe As DataTable = GCItemList.DataSource
                         Dim data_filter_dupe As DataRow() = dt_dupe.Select("[code]='" + code_pas + "' AND [is_found]='1' ")
-                        If data_filter_dupe.Length <= 0 Then
+                        If data_filter_dupe.Length <= 0 Or id_commerce_type = "2" Then
 
                             'untuk akun tujuan sale dan normal
                             If (id_account_type = "1" Or id_account_type = "2") And LEStatusSO.EditValue.ToString <> 8 Then
@@ -1162,6 +1196,9 @@ WHERE id_comp IN (" & id_store & ", " & id_comp_par & ")"
                             GVItemList.SetRowCellValue(rh, "error_status", "")
                             GVItemList.FocusedColumn = GridColumnQty
                             CType(GCItemList.DataSource, DataTable).AcceptChanges()
+                            If id_commerce_type = "2" Then
+                                GVItemList.SetRowCellValue(rh, "sales_order_det_qty", 1)
+                            End If
                         Else
                             GVItemList.SetFocusedRowCellValue("code", "")
                             GVItemList.ActiveFilterString = "[code]='" + code_pas + "'"

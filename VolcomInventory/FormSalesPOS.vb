@@ -137,8 +137,14 @@
         INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = d.id_store_contact_to
         INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp
         INNER JOIN tb_sales_order_det sod ON sod.id_sales_order_det = dd.id_sales_order_det
-        INNER JOIN tb_sales_order so ON so.id_sales_order = sod.id_sales_order
-        WHERE l.id_ol_store_ret_stt=6
+        INNER JOIN tb_sales_order so ON so.id_sales_order = sod.id_sales_order 
+        LEFT JOIN (
+	        SELECT spd.id_ol_store_ret_list FROM tb_sales_pos_det spd
+	        INNER JOIN tb_sales_pos sp ON sp.id_sales_pos = spd.id_sales_pos
+	        WHERE sp.id_report_status!=5 AND !ISNULL(spd.id_ol_store_ret_list)
+	        GROUP BY spd.id_ol_store_ret_list
+        ) e ON e.id_ol_store_ret_list = l.id_ol_store_ret_list 
+        WHERE l.id_ol_store_ret_stt=6 AND ISNULL(e.id_ol_store_ret_list)
         GROUP BY c.id_comp, so.sales_order_ol_shop_number "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCPendingCN.DataSource = data

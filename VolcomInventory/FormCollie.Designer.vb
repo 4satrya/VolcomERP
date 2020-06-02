@@ -36,6 +36,8 @@ Partial Class FormCollie
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.SLEDelType = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
         Me.BSubmit = New DevExpress.XtraEditors.SimpleButton()
@@ -61,8 +63,6 @@ Partial Class FormCollie
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdDelERP = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.SLESubDistrict.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -238,6 +238,20 @@ Partial Class FormCollie
         Me.SearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = False
         Me.SearchLookUpEdit1View.OptionsView.ShowGroupPanel = False
         '
+        'GridColumn9
+        '
+        Me.GridColumn9.Caption = "ID"
+        Me.GridColumn9.FieldName = "id_3pl_type"
+        Me.GridColumn9.Name = "GridColumn9"
+        '
+        'GridColumn12
+        '
+        Me.GridColumn12.Caption = "Type"
+        Me.GridColumn12.FieldName = "3pl_type"
+        Me.GridColumn12.Name = "GridColumn12"
+        Me.GridColumn12.Visible = True
+        Me.GridColumn12.VisibleIndex = 0
+        '
         'LabelControl1
         '
         Me.LabelControl1.Location = New System.Drawing.Point(12, 64)
@@ -306,8 +320,11 @@ Partial Class FormCollie
         '
         'TEBeratFinal
         '
+        Me.TEBeratFinal.Enabled = False
         Me.TEBeratFinal.Location = New System.Drawing.Point(463, 36)
         Me.TEBeratFinal.Name = "TEBeratFinal"
+        Me.TEBeratFinal.Properties.Appearance.Options.UseTextOptions = True
+        Me.TEBeratFinal.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
         Me.TEBeratFinal.Size = New System.Drawing.Size(77, 20)
         Me.TEBeratFinal.TabIndex = 11
         '
@@ -324,6 +341,8 @@ Partial Class FormCollie
         '
         Me.TEBerat.Location = New System.Drawing.Point(348, 36)
         Me.TEBerat.Name = "TEBerat"
+        Me.TEBerat.Properties.Appearance.Options.UseTextOptions = True
+        Me.TEBerat.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
         Me.TEBerat.Size = New System.Drawing.Size(77, 20)
         Me.TEBerat.TabIndex = 9
         '
@@ -347,8 +366,11 @@ Partial Class FormCollie
         '
         'TEVolume
         '
+        Me.TEVolume.Enabled = False
         Me.TEVolume.Location = New System.Drawing.Point(268, 36)
         Me.TEVolume.Name = "TEVolume"
+        Me.TEVolume.Properties.Appearance.Options.UseTextOptions = True
+        Me.TEVolume.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
         Me.TEVolume.Size = New System.Drawing.Size(74, 20)
         Me.TEVolume.TabIndex = 6
         '
@@ -356,6 +378,8 @@ Partial Class FormCollie
         '
         Me.TETinggi.Location = New System.Drawing.Point(164, 36)
         Me.TETinggi.Name = "TETinggi"
+        Me.TETinggi.Properties.Appearance.Options.UseTextOptions = True
+        Me.TETinggi.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
         Me.TETinggi.Size = New System.Drawing.Size(70, 20)
         Me.TETinggi.TabIndex = 5
         '
@@ -363,6 +387,8 @@ Partial Class FormCollie
         '
         Me.TELebar.Location = New System.Drawing.Point(88, 36)
         Me.TELebar.Name = "TELebar"
+        Me.TELebar.Properties.Appearance.Options.UseTextOptions = True
+        Me.TELebar.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
         Me.TELebar.Size = New System.Drawing.Size(70, 20)
         Me.TELebar.TabIndex = 4
         '
@@ -370,6 +396,8 @@ Partial Class FormCollie
         '
         Me.TEPanjang.Location = New System.Drawing.Point(12, 36)
         Me.TEPanjang.Name = "TEPanjang"
+        Me.TEPanjang.Properties.Appearance.Options.UseTextOptions = True
+        Me.TEPanjang.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
         Me.TEPanjang.Size = New System.Drawing.Size(70, 20)
         Me.TEPanjang.TabIndex = 3
         '
@@ -467,20 +495,6 @@ Partial Class FormCollie
         Me.GridColumnIdDelERP.FieldName = "id_pl_sales_order_del"
         Me.GridColumnIdDelERP.Name = "GridColumnIdDelERP"
         Me.GridColumnIdDelERP.OptionsColumn.AllowEdit = False
-        '
-        'GridColumn9
-        '
-        Me.GridColumn9.Caption = "ID"
-        Me.GridColumn9.FieldName = "id_3pl_type"
-        Me.GridColumn9.Name = "GridColumn9"
-        '
-        'GridColumn12
-        '
-        Me.GridColumn12.Caption = "Type"
-        Me.GridColumn12.FieldName = "3pl_type"
-        Me.GridColumn12.Name = "GridColumn12"
-        Me.GridColumn12.Visible = True
-        Me.GridColumn12.VisibleIndex = 0
         '
         'FormCollie
         '

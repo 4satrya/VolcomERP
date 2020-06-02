@@ -13,7 +13,7 @@
         INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = d.id_store_contact_to
         INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp
         WHERE c.id_commerce_type=2 AND c.id_comp_group=" + FormRequestRetOLStore.SLECompGroup.EditValue.ToString + "
-        GROUP BY so.sales_order_number "
+        GROUP BY so.sales_order_ol_shop_number "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCData.DataSource = data
         Cursor = Cursors.Default

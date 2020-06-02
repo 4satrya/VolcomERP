@@ -52,12 +52,12 @@
             Dim qd As String = "SELECT a.id_report ,a.report_mark_type, rmt.report_mark_type_name AS `trans_type`, a.trans_time, a.trans_number, a.id_report_status, rs.report_status
             FROM (
 	            -- so
-	            SELECT so.id_sales_order AS `id_report`,rm.report_mark_type,rm.report_mark_datetime AS `trans_time`, so.sales_order_number AS `trans_number`, so.id_report_status
+	            SELECT so.id_sales_order AS `id_report`,IFNULL(rm.report_mark_type,39) AS `report_mark_type`, IFNULL(rm.report_mark_datetime, so.sales_order_date) AS `trans_time`, so.sales_order_number AS `trans_number`, so.id_report_status
 	            FROM tb_sales_order so 
 	            INNER JOIN tb_m_comp_contact sc ON sc.id_comp_contact = so.id_store_contact_to
 	            INNER JOIN tb_m_comp s ON s.id_comp = sc.id_comp
 	            INNER JOIN tb_m_comp_group sg ON sg.id_comp_group = s.id_comp_group
-	            INNER JOIN tb_report_mark rm ON rm.id_report = so.id_sales_order AND rm.report_mark_type=39 AND rm.id_report_status=1
+	            LEFT JOIN tb_report_mark rm ON rm.id_report = so.id_sales_order AND rm.report_mark_type=39 AND rm.id_report_status=1
 	            WHERE so.sales_order_ol_shop_number='" + order_number + "' AND s.id_comp_group='" + id_comp_group + "' AND s.id_commerce_type=2 AND so.id_report_status=6
 	            UNION ALL 
 	            -- del
@@ -161,6 +161,40 @@
                 INNER JOIN tb_m_comp_group sg ON sg.id_comp_group = s.id_comp_group
                 INNER JOIN tb_sales_order so ON so.id_sales_order = del.id_sales_order
                 WHERE so.sales_order_ol_shop_number='" + order_number + "' AND s.id_comp_group='" + id_comp_group + "' AND p.id_report_status=6
+                UNION ALL
+                -- return request
+                SELECT t.id_ol_store_ret_req AS `id_report`,rm.report_mark_type,rm.report_mark_datetime AS `trans_time`, t.number AS `trans_number`, t.id_report_status
+                FROM tb_ol_store_ret_req t
+                INNER JOIN tb_report_mark rm ON rm.id_report = t.id_ol_store_ret_req AND rm.report_mark_type=246 AND rm.id_report_status=1
+                WHERE t.sales_order_ol_shop_number='" + order_number + "' AND t.id_comp_group='" + id_comp_group + "'
+                UNION ALL
+                -- pre return
+                SELECT t.id_ol_store_ret AS `id_report`,rm.report_mark_type,rm.report_mark_datetime AS `trans_time`, t.number AS `trans_number`, t.id_report_status
+                FROM tb_ol_store_ret t
+                INNER JOIN tb_report_mark rm ON rm.id_report = t.id_ol_store_ret AND rm.report_mark_type=243 AND rm.id_report_status=1
+                WHERE t.sales_order_ol_shop_number='" + order_number + "' AND t.id_comp_group='" + id_comp_group + "'
+                UNION ALL
+                -- return to customer
+                SELECT t.id_ol_store_cust_ret AS `id_report`,rm.report_mark_type,rm.report_mark_datetime AS `trans_time`, t.number AS `trans_number`, t.id_report_status
+                FROM tb_ol_store_cust_ret t
+                INNER JOIN tb_report_mark rm ON rm.id_report = t.id_ol_store_cust_ret AND rm.report_mark_type=245 AND rm.id_report_status=1
+                WHERE t.sales_order_ol_shop_number='" + order_number + "' AND t.id_comp_group='" + id_comp_group + "'
+                UNION ALL
+                -- refund
+                SELECT t.id_pn AS `id_report`,rm.report_mark_type,rm.report_mark_datetime AS `trans_time`, t.number AS `trans_number`, t.id_report_status
+                FROM tb_pn t
+                INNER JOIN tb_pn_det td ON td.id_pn = t.id_pn AND td.report_mark_type=118
+                INNER JOIN tb_sales_pos cn ON cn.id_sales_pos = td.id_report
+                INNER JOIN tb_sales_pos inv ON inv.id_sales_pos = cn.id_sales_pos_ref
+                INNER JOIN tb_sales_pos_det  invd ON invd.id_sales_pos = inv.id_sales_pos
+                INNER JOIN tb_pl_sales_order_del_det dd ON dd.id_pl_sales_order_del_det = invd.id_pl_sales_order_del_det
+                INNER JOIN tb_sales_order_det sod ON sod.id_sales_order_det = dd.id_sales_order_det
+                INNER JOIN tb_sales_order so ON so.id_sales_order = sod.id_sales_order
+                INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = so.id_store_contact_to
+                INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp
+                INNER JOIN tb_report_mark rm ON rm.id_report = t.id_pn AND rm.report_mark_type=159 AND rm.id_report_status=1
+                WHERE t.report_mark_type=118 AND so.sales_order_ol_shop_number='" + order_number + "' AND c.id_comp_group='" + id_comp_group + "'
+                GROUP BY t.id_pn
             ) a 
             INNER JOIN tb_lookup_report_mark_type rmt ON rmt.report_mark_type = a.report_mark_type
             INNER JOIN tb_lookup_report_status rs ON rs.id_report_status = a.id_report_status

@@ -71,7 +71,7 @@
             gridBandClass.VisibleIndex = 8
             gridBandColor.VisibleIndex = 9
 
-            query = "SELECT dr.design_code AS `code_view`, dr.design_display_name AS `name_view`,
+            query = "SELECT 0 AS RowHeight, dr.design_code AS `code_view`, dr.design_display_name AS `name_view`,
             pd.id_prod_demand, pd.prod_demand_number, po.id_prod_order, po.prod_order_number,
             dr.id_design, d.id_design AS `id_design_new`,
             dr.design_code AS `code`, d.design_code AS `code_new`,
@@ -444,5 +444,13 @@
         If e.Column.FieldName = "no" Then
             e.DisplayText = (e.ListSourceRowIndex + 1).ToString()
         End If
+    End Sub
+
+    Private Sub GVData_CalcRowHeight(sender As Object, e As DevExpress.XtraGrid.Views.Grid.RowHeightEventArgs) Handles GVData.CalcRowHeight
+        Dim dt As DataTable = GCData.DataSource
+
+        dt.Rows(e.RowHandle)("RowHeight") = e.RowHeight
+
+        GCData.DataSource = dt
     End Sub
 End Class

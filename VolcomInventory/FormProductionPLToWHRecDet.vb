@@ -1224,7 +1224,7 @@ Public Class FormProductionPLToWHRecDet
         Report.LabelPO.Text = TxtPONumber.Text
         Report.LabelVendor.Text = TxtVendorCode.Text + "-" + TxtVendor.Text
         Report.LabelSeason.Text = TxtSeason.Text
-
+        Report.LabelNote.Text = MENote.Text
 
         'Show the report's preview. 
         Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)

@@ -17,11 +17,11 @@
     Sub check_but()
         If XTCAwb.SelectedTabPageIndex = 0 Then
             If GVAWBill.RowCount > 0 Then
-                bnew_active = "1"
+                bnew_active = "0"
                 bedit_active = "1"
                 bdel_active = "1"
             Else
-                bnew_active = "1"
+                bnew_active = "0"
                 bedit_active = "0"
                 bdel_active = "0"
             End If
@@ -753,7 +753,7 @@ WHERE c.id_commerce_type='1' AND c.id_comp_cat='6'"
         GVAWBill.ActiveFilterString = ""
     End Sub
 
-    Private Sub SBExportCsss_Click(sender As Object, e As EventArgs) Handles SBExportCsss.Click
+    Private Sub SBExportCsss_Click(sender As Object, e As EventArgs)
         GVAWBill.ActiveFilterString = "[is_check] = 'yes'"
 
         If GVAWBill.RowCount > 0 Then
@@ -840,7 +840,7 @@ WHERE c.id_commerce_type='1' AND c.id_comp_cat='6'"
         GVAWBill.ActiveFilterString = ""
     End Sub
 
-    Private Sub SBImportCsss_Click(sender As Object, e As EventArgs) Handles SBImportCsss.Click
+    Private Sub SBImportCsss_Click(sender As Object, e As EventArgs)
         'Dim fdlg As OpenFileDialog = New OpenFileDialog()
 
         'fdlg.Title = "Select excel file To import"
@@ -1059,8 +1059,8 @@ SET so.is_export_awb = 1 WHERE CONCAT(cg.`description`,'#',so.`sales_order_ol_sh
 
         Dim q As String = "SELECT 'no' AS is_check,CONCAT(cg.`description`,'#',a.`sales_order_ol_shop_number`) AS stru, cg.description AS comp_group,a.id_store_contact_to, d.id_commerce_type,d.id_comp AS `id_store`, d.is_use_unique_code, d.id_store_type, d.comp_number AS `store_number`, d.comp_name AS `store`, d.address_primary AS `store_address`, CONCAT(d.comp_number,' - ',d.comp_name) AS store_name_to,a.id_report_status, f.report_status, a.id_warehouse_contact_to, CONCAT(wh.comp_number,' - ',wh.comp_name) AS warehouse_name_to, (wh.comp_number) AS warehouse_number_to,  (wh.comp_name) AS `warehouse`, wh.id_drawer_def AS `id_wh_drawer`, drw.wh_drawer_code, drw.wh_drawer, a.sales_order_note, a.sales_order_date, a.sales_order_note, a.sales_order_number, 
 a.sales_order_ol_shop_number, a.sales_order_ol_shop_date, (a.sales_order_date) AS sales_order_date, ps.id_prepare_status, ps.prepare_status, 
-('No') AS `is_select`, cat.id_so_status, cat.so_status, ot.order_type, del_cat.id_so_cat, del_cat.so_cat, 
- IFNULL(an.fg_so_reff_number,'-') AS `fg_so_reff_number`,
+('No') AS `is_select`, cat.id_so_status, cat.so_status, ot.order_type, del_cat.id_so_cat, del_cat.so_cat, a.customer_name, a.shipping_address,
+ IFNULL(an.fg_so_reff_number,'-') AS `fg_so_reff_number`,a.sales_order_date ,a.sales_order_ol_shop_date,logp.log_date,
 a.id_so_type,prep.id_user, prep.prepared_date, gen.id_sales_order_gen, IFNULL(gen.sales_order_gen_reff, '-') AS `sales_order_gen_reff`, a.final_comment, a.final_date, 
 eu.period_name, ut.uni_type, ube.employee_code, ube.employee_name,count(del.id_pl_sales_order_del) AS jml_del, SUM(so_item.sales_order_det_qty) AS tot_so,CEIL(SUM(so_item.grams)/1000) AS tot_weight
 FROM tb_sales_order a 
@@ -1074,6 +1074,12 @@ INNER JOIN tb_lookup_report_status f ON f.id_report_status = a.id_report_status
 INNER JOIN tb_lookup_prepare_status ps ON ps.id_prepare_status = a.id_prepare_status 
 INNER JOIN tb_lookup_so_status cat ON cat.id_so_status = a.id_so_status 
 INNER JOIN tb_lookup_order_type ot ON ot.id_order_type = cat.id_order_type
+LEFT JOIN 
+(
+    SELECT id_sales_order,MAX(log_date) AS log_date FROM
+    `tb_sales_order_log_print` logp
+    GROUP BY id_sales_order
+) logp ON logp.id_sales_order=a.id_sales_order
 LEFT JOIN( 
 	SELECT a.id_report, a.id_user, a.report_mark_datetime AS `prepared_date` 
 	FROM tb_report_mark a WHERE a.report_mark_type ='39' AND a.id_report_status='1' GROUP BY a.id_report 
@@ -1179,7 +1185,7 @@ ORDER BY a.id_sales_order DESC "
                     Dim comp_group_desc As String = dt.Rows(i)(1).ToString.Split("#")(0)
                     Dim ol_shop_order As String = dt.Rows(i)(1).ToString.Split("#")(1)
                     '
-                    Dim q As String = "SELECT awb.`id_awbill`
+                    Dim q As String = "SELECT awb.`id_awbill`,awb.awbill_no 
 FROM tb_wh_awbill awb
 INNER JOIN tb_wh_awbill_det awbd ON awbd.`id_awbill`=awb.`id_awbill`
 INNER JOIN tb_pl_sales_order_del del ON del.`id_pl_sales_order_del`=awbd.`id_pl_sales_order_del`
@@ -1221,6 +1227,10 @@ WHERE cg.`description`='" & comp_group_desc & "' AND so.`sales_order_ol_shop_num
     End Sub
 
     Private Sub BViewOutFromDO_Click(sender As Object, e As EventArgs) Handles BViewOutFromDO.Click
+        load_from_do()
+    End Sub
+
+    Sub load_from_do()
         Dim q_where As String = ""
 
         If Not SLEComp.EditValue.ToString = "0" Then
@@ -1237,12 +1247,15 @@ WHERE cg.`description`='" & comp_group_desc & "' AND so.`sales_order_ol_shop_num
         LEFT JOIN tb_pl_sales_order_del_det dd ON dd.id_pl_sales_order_del = d.id_pl_sales_order_del
         LEFT JOIN tb_wh_awbill_det awb ON awb.id_pl_sales_order_del = d.id_pl_sales_order_del
         INNER JOIN tb_lookup_report_status stt ON stt.id_report_status = d.id_report_status
-        WHERE (d.id_report_status=6) AND so.is_export_awb=2  AND ISNULL(awb.id_awbill) " & q_where & "
-        GROUP BY d.id_pl_sales_order_del "
+        WHERE (d.id_report_status=6 OR d.id_report_status=3) AND so.is_export_awb=2  AND ISNULL(awb.id_awbill) " & q_where & "
+        GROUP BY d.id_pl_sales_order_del 
+        ORDER BY d.id_pl_sales_order_del DESC "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GVDOERP.ActiveFilterString = ""
         GCDOERP.DataSource = data
         GVDOERP.BestFitColumns()
     End Sub
+
 
     Private Sub BGenerateKolie_Click(sender As Object, e As EventArgs) Handles BGenerateKolie.Click
         'check bukan dari toko berbeda
@@ -1253,10 +1266,18 @@ WHERE cg.`description`='" & comp_group_desc & "' AND so.`sales_order_ol_shop_num
             problem = True
         Else
             For i As Integer = 0 To GVDOERP.RowCount - 1
-                If Not GVDOERP.GetRowCellValue(i, "id_comp").ToString = GVDOERP.GetRowCellValue(0, "id_comp").ToString Then
-                    warningCustom("Pastikan semua tujuan toko sama.")
+                Dim qc As String = "SELECT * FROM `tb_wh_awbill_det` WHERE id_pl_sales_order_del='" & GVDOERP.GetRowCellValue(i, "id_pl_sales_order_del").ToString & "'"
+                Dim dtc As DataTable = execute_query(qc, -1, True, "", "", "", "")
+                If dtc.Rows.Count > 0 Then
+                    warningCustom("DO nomor " & GVDOERP.GetRowCellValue(i, "do_no").ToString & " sudah tergenerate ke dalam koli.")
                     problem = True
                     Exit For
+                Else
+                    If Not GVDOERP.GetRowCellValue(i, "id_comp").ToString = GVDOERP.GetRowCellValue(0, "id_comp").ToString Then
+                        warningCustom("Pastikan semua tujuan toko sama.")
+                        problem = True
+                        Exit For
+                    End If
                 End If
             Next
         End If
@@ -1333,20 +1354,32 @@ WHERE cg.`description`='" & comp_group_desc & "' AND so.`sales_order_ol_shop_num
         'checking
         Dim problem As Boolean = False
         For i As Integer = 0 To GVAWBill.RowCount - 1
-            If Not GVAWBill.GetRowCellValue(i, "id_store").ToString = GVAWBill.GetRowCellValue(0, "id_store").ToString Then
-                warningCustom("Different shipping location, please generate separate AWB")
-                problem = True
-                Exit For
-            ElseIf Not GVAWBill.GetRowCellValue(i, "id_cargo").ToString = GVAWBill.GetRowCellValue(0, "id_cargo").ToString Then
-                warningCustom("Different shipping vendor, please generate separate AWB")
-                problem = True
-                Exit For
-            ElseIf Not GVAWBill.GetRowCellValue(i, "awbill_no").ToString = "" Then
-                warningCustom("Some collie already have AWB")
-                problem = True
-                Exit For
-            ElseIf GVAWBill.GetRowCellValue(i, "id_commerce_type").ToString = "2" Then
-                warningCustom("Online shop cannot use AWB collection.")
+            Dim qc As String = "SELECT awbill_no FROM tb_wh_awbill WHERE id_awbill='" & GVAWBill.GetRowCellValue(i, "id_awbill").ToString & "'"
+            Dim dt_qc As DataTable = execute_query(qc, -1, True, "", "", "", "")
+            If dt_qc.Rows.Count > 0 Then
+                If Not GVAWBill.GetRowCellValue(i, "id_store").ToString = GVAWBill.GetRowCellValue(0, "id_store").ToString Then
+                    warningCustom("Different shipping location, please generate separate AWB")
+                    problem = True
+                    Exit For
+                ElseIf Not GVAWBill.GetRowCellValue(i, "id_cargo").ToString = GVAWBill.GetRowCellValue(0, "id_cargo").ToString Then
+                    warningCustom("Different shipping vendor, please generate separate AWB")
+                    problem = True
+                    Exit For
+                ElseIf Not GVAWBill.GetRowCellValue(i, "awbill_no").ToString = "" Then
+                    warningCustom("Some collie already have AWB")
+                    problem = True
+                    Exit For
+                ElseIf Not dt_qc.Rows(0)("awbill_no").ToString = "" Then
+                    warningCustom("Some collie already have AWB")
+                    problem = True
+                    Exit For
+                ElseIf GVAWBill.GetRowCellValue(i, "id_commerce_type").ToString = "2" Then
+                    warningCustom("Online shop cannot use AWB collection.")
+                    problem = True
+                    Exit For
+                End If
+            Else
+                infoCustom("Collie not found.")
                 problem = True
                 Exit For
             End If

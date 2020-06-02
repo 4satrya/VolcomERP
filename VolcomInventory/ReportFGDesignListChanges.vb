@@ -38,4 +38,10 @@
             e.DisplayText = (e.ListSourceRowIndex + 1).ToString()
         End If
     End Sub
+
+    Private Sub GVData_CalcRowHeight(sender As Object, e As DevExpress.XtraGrid.Views.Grid.RowHeightEventArgs) Handles GVData.CalcRowHeight
+        e.RowHeight = GVData.GetDataRow(e.RowHandle)("RowHeight")
+
+        Console.WriteLine(GVData.GetDataRow(e.RowHandle)("RowHeight"))
+    End Sub
 End Class

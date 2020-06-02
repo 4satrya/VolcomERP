@@ -312,7 +312,7 @@ Public Class FormSalesReturnDet
                 dt_cust.Clear()
             Catch ex As Exception
             End Try
-            Dim qry As String = "SELECT sod.item_id, sod.ol_store_id, CONCAT(p.product_full_code, dc.pl_sales_order_del_det_counting) AS `full_code`
+            Dim qry As String = "SELECT sod.item_id, sod.ol_store_id, CONCAT(p.product_full_code, dc.pl_sales_order_del_det_counting) AS `full_code`, '2' AS `is_used`
             FROM tb_sales_return_order_det rod
             INNER JOIN tb_sales_order_det sod ON sod.id_sales_order_det = rod.id_sales_order_det
             INNER JOIN tb_pl_sales_order_del_det dd ON dd.id_sales_order_det = sod.id_sales_order_det
@@ -736,6 +736,14 @@ Public Class FormSalesReturnDet
                 tot = GVItemList.GetFocusedRowCellValue("sales_return_det_qty") - 1
             End If
 
+            'update dt
+            Dim dtf As DataRow() = dt_cust.Select("[ol_store_id]='" + ol_store_id_param + "' AND [item_id]='" + item_id_param + "' ")
+            If action_scan_btn = "start" Then
+                dtf(0)("is_used") = "1"
+            ElseIf action_scan_btn = "delete" Then
+                dtf(0)("is_used") = "2"
+            End If
+
 
             Dim price As Decimal = Decimal.Parse(GVItemList.GetFocusedRowCellValue("design_price").ToString)
             GVItemList.SetFocusedRowCellValue("sales_return_det_amount", tot * price)
@@ -1030,6 +1038,32 @@ Public Class FormSalesReturnDet
             End If
             GVItemList.ActiveFilterString = ""
             makeSafeGV(GVItemList)
+        End If
+
+        'cek stok
+        If id_ret_type = "1" Or id_ret_type = "3" Then
+            If GVItemList.RowCount > 0 Then
+                Dim qs As String = "DELETE FROM tb_temp_val_stock WHERE id_user='" + id_user + "'; 
+                            INSERT INTO tb_temp_val_stock(id_user, code, name, size, id_product, qty) VALUES "
+                Dim id_prod As String = ""
+                For s As Integer = 0 To GVItemList.RowCount - 1
+                    If s > 0 Then
+                        qs += ","
+                        id_prod += ","
+                    End If
+                    qs += "('" + id_user + "','" + GVItemList.GetRowCellValue(s, "code").ToString + "','" + addSlashes(GVItemList.GetRowCellValue(s, "name").ToString) + "', '" + GVItemList.GetRowCellValue(s, "size").ToString + "', '" + GVItemList.GetRowCellValue(s, "id_product").ToString + "', '" + decimalSQL(GVItemList.GetRowCellValue(s, "sales_return_order_det_qty").ToString) + "') "
+                    id_prod += GVItemList.GetRowCellValue(s, "id_product").ToString
+                Next
+                qs += "; CALL view_validate_stock(" + id_user + ", " + id_store + ", '" + id_prod + "',1); "
+                Dim dts As DataTable = execute_query(qs, -1, True, "", "", "", "")
+                If dts.Rows.Count > 0 Then
+                    Cursor = Cursors.Default
+                    stopCustom("No stock available for some items.")
+                    FormValidateStock.dt = dts
+                    FormValidateStock.ShowDialog()
+                    Exit Sub
+                End If
+            End If
         End If
 
         If Not formIsValidInPanel(EPForm, PanelControlTopLeft) Or Not formIsValidInPanel(EPForm, PanelControlTopRight) Then
@@ -1719,12 +1753,15 @@ Public Class FormSalesReturnDet
 
             'check unik code custormer - ol store
             If id_ret_type = "4" Then
-                Dim dt_cust_filter As DataRow() = dt_cust.Select("[full_code]='" + code_check + "' ")
+                Dim condition_str As String = "[full_code]='" + code_check + "' AND [is_used]='2' "
+                Dim dt_cust_filter As DataRow() = dt_cust.Select(condition_str)
                 If dt_cust_filter.Length > 0 Then
                     ol_store_id = dt_cust_filter(0)("ol_store_id").ToString
                     item_id = dt_cust_filter(0)("item_id").ToString
                 End If
+                Console.WriteLine(condition_str)
             End If
+
 
             'get jum del & limit
             If id_commerce_type = "2" Then 'online store

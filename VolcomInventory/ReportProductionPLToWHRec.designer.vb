@@ -667,7 +667,7 @@ Partial Public Class ReportProductionPLToWHRec
         'LabelNote
         '
         Me.LabelNote.Borders = DevExpress.XtraPrinting.BorderSide.None
-        Me.LabelNote.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelNote.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelNote.LocationFloat = New DevExpress.Utils.PointFloat(61.59798!, 9.999974!)
         Me.LabelNote.Name = "LabelNote"
         Me.LabelNote.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)

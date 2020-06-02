@@ -117,9 +117,6 @@ Partial Class FormWHAWBill
         Me.XTPOutbound = New DevExpress.XtraTab.XtraTabPage()
         Me.XTCOutbound = New DevExpress.XtraTab.XtraTabControl()
         Me.XTPListOut = New DevExpress.XtraTab.XtraTabPage()
-        Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
-        Me.SBImportCsss = New DevExpress.XtraEditors.SimpleButton()
-        Me.SBExportCsss = New DevExpress.XtraEditors.SimpleButton()
         Me.GCExportExcel = New DevExpress.XtraGrid.GridControl()
         Me.GVExportExcel = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -293,6 +290,11 @@ Partial Class FormWHAWBill
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.TEInNoStart = New DevExpress.XtraEditors.TextEdit()
+        Me.GridColumn54 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn55 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn56 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn57 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn58 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GCAWBill, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVAWBill, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RICECheck, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -317,8 +319,6 @@ Partial Class FormWHAWBill
         CType(Me.XTCOutbound, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCOutbound.SuspendLayout()
         Me.XTPListOut.SuspendLayout()
-        CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.PanelControl3.SuspendLayout()
         CType(Me.GCExportExcel, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVExportExcel, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PCLock, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -373,11 +373,11 @@ Partial Class FormWHAWBill
         'GCAWBill
         '
         Me.GCAWBill.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCAWBill.Location = New System.Drawing.Point(0, 58)
+        Me.GCAWBill.Location = New System.Drawing.Point(0, 52)
         Me.GCAWBill.MainView = Me.GVAWBill
         Me.GCAWBill.Name = "GCAWBill"
         Me.GCAWBill.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RCICOD, Me.RIDERecStoreDate, Me.RICELock, Me.RICECheck})
-        Me.GCAWBill.Size = New System.Drawing.Size(1267, 387)
+        Me.GCAWBill.Size = New System.Drawing.Size(1267, 359)
         Me.GCAWBill.TabIndex = 0
         Me.GCAWBill.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVAWBill})
         '
@@ -1100,7 +1100,7 @@ Partial Class FormWHAWBill
         Me.XtraScrollableControl1.Dock = System.Windows.Forms.DockStyle.Top
         Me.XtraScrollableControl1.Location = New System.Drawing.Point(0, 0)
         Me.XtraScrollableControl1.Name = "XtraScrollableControl1"
-        Me.XtraScrollableControl1.Size = New System.Drawing.Size(1267, 58)
+        Me.XtraScrollableControl1.Size = New System.Drawing.Size(1267, 52)
         Me.XtraScrollableControl1.TabIndex = 110
         '
         'BtnDropQuickMenu
@@ -1152,7 +1152,7 @@ Partial Class FormWHAWBill
         '
         Me.barDockControlBottom.CausesValidation = False
         Me.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.barDockControlBottom.Location = New System.Drawing.Point(0, 540)
+        Me.barDockControlBottom.Location = New System.Drawing.Point(0, 506)
         Me.barDockControlBottom.Size = New System.Drawing.Size(1279, 0)
         '
         'barDockControlLeft
@@ -1160,14 +1160,14 @@ Partial Class FormWHAWBill
         Me.barDockControlLeft.CausesValidation = False
         Me.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left
         Me.barDockControlLeft.Location = New System.Drawing.Point(0, 0)
-        Me.barDockControlLeft.Size = New System.Drawing.Size(0, 540)
+        Me.barDockControlLeft.Size = New System.Drawing.Size(0, 506)
         '
         'barDockControlRight
         '
         Me.barDockControlRight.CausesValidation = False
         Me.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right
         Me.barDockControlRight.Location = New System.Drawing.Point(1279, 0)
-        Me.barDockControlRight.Size = New System.Drawing.Size(0, 540)
+        Me.barDockControlRight.Size = New System.Drawing.Size(0, 506)
         '
         'Panel1
         '
@@ -1310,7 +1310,7 @@ Partial Class FormWHAWBill
         Me.XTCAwb.Location = New System.Drawing.Point(0, 0)
         Me.XTCAwb.Name = "XTCAwb"
         Me.XTCAwb.SelectedTabPage = Me.XTPOutbound
-        Me.XTCAwb.Size = New System.Drawing.Size(1279, 540)
+        Me.XTCAwb.Size = New System.Drawing.Size(1279, 506)
         Me.XTCAwb.TabIndex = 2
         Me.XTCAwb.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPOutbound, Me.XTPInbound})
         '
@@ -1318,7 +1318,7 @@ Partial Class FormWHAWBill
         '
         Me.XTPOutbound.Controls.Add(Me.XTCOutbound)
         Me.XTPOutbound.Name = "XTPOutbound"
-        Me.XTPOutbound.Size = New System.Drawing.Size(1273, 512)
+        Me.XTPOutbound.Size = New System.Drawing.Size(1273, 478)
         Me.XTPOutbound.Text = "Outbound"
         '
         'XTCOutbound
@@ -1328,48 +1328,19 @@ Partial Class FormWHAWBill
         Me.XTCOutbound.Location = New System.Drawing.Point(0, 0)
         Me.XTCOutbound.Name = "XTCOutbound"
         Me.XTCOutbound.SelectedTabPage = Me.XTPListOut
-        Me.XTCOutbound.Size = New System.Drawing.Size(1273, 512)
+        Me.XTCOutbound.Size = New System.Drawing.Size(1273, 478)
         Me.XTCOutbound.TabIndex = 113
         Me.XTCOutbound.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPOrder, Me.XTPDO, Me.XTPRet, Me.XTPListOut})
         '
         'XTPListOut
         '
-        Me.XTPListOut.Controls.Add(Me.PanelControl3)
         Me.XTPListOut.Controls.Add(Me.GCAWBill)
         Me.XTPListOut.Controls.Add(Me.GCExportExcel)
         Me.XTPListOut.Controls.Add(Me.XtraScrollableControl1)
         Me.XTPListOut.Controls.Add(Me.PCLock)
         Me.XTPListOut.Name = "XTPListOut"
-        Me.XTPListOut.Size = New System.Drawing.Size(1267, 484)
+        Me.XTPListOut.Size = New System.Drawing.Size(1267, 450)
         Me.XTPListOut.Text = "List Outbound"
-        '
-        'PanelControl3
-        '
-        Me.PanelControl3.Controls.Add(Me.SBImportCsss)
-        Me.PanelControl3.Controls.Add(Me.SBExportCsss)
-        Me.PanelControl3.Dock = System.Windows.Forms.DockStyle.Top
-        Me.PanelControl3.Location = New System.Drawing.Point(0, 58)
-        Me.PanelControl3.Name = "PanelControl3"
-        Me.PanelControl3.Size = New System.Drawing.Size(1267, 39)
-        Me.PanelControl3.TabIndex = 111
-        Me.PanelControl3.Visible = False
-        '
-        'SBImportCsss
-        '
-        Me.SBImportCsss.Location = New System.Drawing.Point(19, 8)
-        Me.SBImportCsss.Name = "SBImportCsss"
-        Me.SBImportCsss.Size = New System.Drawing.Size(132, 23)
-        Me.SBImportCsss.TabIndex = 110
-        Me.SBImportCsss.Text = "Import AWB From CSSS"
-        '
-        'SBExportCsss
-        '
-        Me.SBExportCsss.Location = New System.Drawing.Point(156, 8)
-        Me.SBExportCsss.Name = "SBExportCsss"
-        Me.SBExportCsss.Size = New System.Drawing.Size(107, 23)
-        Me.SBExportCsss.TabIndex = 109
-        Me.SBExportCsss.Text = "Export to CSSS"
-        Me.SBExportCsss.Visible = False
         '
         'GCExportExcel
         '
@@ -1580,7 +1551,7 @@ Partial Class FormWHAWBill
         Me.PCLock.Controls.Add(Me.CESelectAll)
         Me.PCLock.Controls.Add(Me.BLock)
         Me.PCLock.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PCLock.Location = New System.Drawing.Point(0, 445)
+        Me.PCLock.Location = New System.Drawing.Point(0, 411)
         Me.PCLock.Name = "PCLock"
         Me.PCLock.Size = New System.Drawing.Size(1267, 39)
         Me.PCLock.TabIndex = 3
@@ -1626,7 +1597,7 @@ Partial Class FormWHAWBill
         Me.XTPOrder.Controls.Add(Me.GCSalesOrder)
         Me.XTPOrder.Controls.Add(Me.PanelControl1)
         Me.XTPOrder.Name = "XTPOrder"
-        Me.XTPOrder.Size = New System.Drawing.Size(1267, 484)
+        Me.XTPOrder.Size = New System.Drawing.Size(1267, 450)
         Me.XTPOrder.Text = "From Order Online"
         '
         'GCSalesOrder
@@ -1636,17 +1607,18 @@ Partial Class FormWHAWBill
         Me.GCSalesOrder.MainView = Me.GVSalesOrder
         Me.GCSalesOrder.Name = "GCSalesOrder"
         Me.GCSalesOrder.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemProgressBar1, Me.RICEPickSOR})
-        Me.GCSalesOrder.Size = New System.Drawing.Size(1267, 437)
+        Me.GCSalesOrder.Size = New System.Drawing.Size(1267, 403)
         Me.GCSalesOrder.TabIndex = 2
         Me.GCSalesOrder.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVSalesOrder, Me.GridView2})
         '
         'GVSalesOrder
         '
-        Me.GVSalesOrder.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnSalesTargetNumb, Me.GridColumnTotalOrder, Me.GridColumnOLStoreOrder, Me.GridColumn30, Me.GridColumn31, Me.GridColumn53})
+        Me.GVSalesOrder.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnSalesTargetNumb, Me.GridColumnTotalOrder, Me.GridColumnOLStoreOrder, Me.GridColumn58, Me.GridColumn57, Me.GridColumn55, Me.GridColumn56, Me.GridColumn54, Me.GridColumn30, Me.GridColumn31, Me.GridColumn53})
         Me.GVSalesOrder.GridControl = Me.GCSalesOrder
         Me.GVSalesOrder.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_order", Me.GridColumnTotalOrder, "{0:n0}")})
         Me.GVSalesOrder.Name = "GVSalesOrder"
         Me.GVSalesOrder.OptionsFind.AlwaysVisible = True
+        Me.GVSalesOrder.OptionsView.ColumnAutoWidth = False
         Me.GVSalesOrder.OptionsView.ShowFooter = True
         Me.GVSalesOrder.OptionsView.ShowGroupPanel = False
         '
@@ -1654,7 +1626,9 @@ Partial Class FormWHAWBill
         '
         Me.GridColumnSalesTargetNumb.Caption = "Store"
         Me.GridColumnSalesTargetNumb.FieldName = "comp_group"
+        Me.GridColumnSalesTargetNumb.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left
         Me.GridColumnSalesTargetNumb.Name = "GridColumnSalesTargetNumb"
+        Me.GridColumnSalesTargetNumb.OptionsColumn.AllowEdit = False
         Me.GridColumnSalesTargetNumb.OptionsColumn.ReadOnly = True
         Me.GridColumnSalesTargetNumb.Visible = True
         Me.GridColumnSalesTargetNumb.VisibleIndex = 1
@@ -1667,17 +1641,20 @@ Partial Class FormWHAWBill
         Me.GridColumnTotalOrder.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnTotalOrder.FieldName = "tot_so"
         Me.GridColumnTotalOrder.Name = "GridColumnTotalOrder"
+        Me.GridColumnTotalOrder.OptionsColumn.AllowEdit = False
         Me.GridColumnTotalOrder.OptionsColumn.ReadOnly = True
         Me.GridColumnTotalOrder.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_order", "{0:n0}")})
         Me.GridColumnTotalOrder.Visible = True
-        Me.GridColumnTotalOrder.VisibleIndex = 3
+        Me.GridColumnTotalOrder.VisibleIndex = 8
         Me.GridColumnTotalOrder.Width = 229
         '
         'GridColumnOLStoreOrder
         '
         Me.GridColumnOLStoreOrder.Caption = "OL Store Order#"
         Me.GridColumnOLStoreOrder.FieldName = "sales_order_ol_shop_number"
+        Me.GridColumnOLStoreOrder.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left
         Me.GridColumnOLStoreOrder.Name = "GridColumnOLStoreOrder"
+        Me.GridColumnOLStoreOrder.OptionsColumn.AllowEdit = False
         Me.GridColumnOLStoreOrder.OptionsColumn.ReadOnly = True
         Me.GridColumnOLStoreOrder.Visible = True
         Me.GridColumnOLStoreOrder.VisibleIndex = 2
@@ -1692,6 +1669,7 @@ Partial Class FormWHAWBill
         Me.GridColumn30.Caption = "*"
         Me.GridColumn30.ColumnEdit = Me.RICEPickSOR
         Me.GridColumn30.FieldName = "is_check"
+        Me.GridColumn30.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left
         Me.GridColumn30.Name = "GridColumn30"
         Me.GridColumn30.Visible = True
         Me.GridColumn30.VisibleIndex = 0
@@ -1709,9 +1687,10 @@ Partial Class FormWHAWBill
         Me.GridColumn31.Caption = "Total Weight (Kg)"
         Me.GridColumn31.FieldName = "tot_weight"
         Me.GridColumn31.Name = "GridColumn31"
+        Me.GridColumn31.OptionsColumn.AllowEdit = False
         Me.GridColumn31.OptionsColumn.ReadOnly = True
         Me.GridColumn31.Visible = True
-        Me.GridColumn31.VisibleIndex = 4
+        Me.GridColumn31.VisibleIndex = 9
         Me.GridColumn31.Width = 241
         '
         'GridColumn53
@@ -1723,8 +1702,10 @@ Partial Class FormWHAWBill
         Me.GridColumn53.Caption = "DO Created"
         Me.GridColumn53.FieldName = "jml_del"
         Me.GridColumn53.Name = "GridColumn53"
+        Me.GridColumn53.OptionsColumn.AllowEdit = False
+        Me.GridColumn53.OptionsColumn.ReadOnly = True
         Me.GridColumn53.Visible = True
-        Me.GridColumn53.VisibleIndex = 5
+        Me.GridColumn53.VisibleIndex = 10
         Me.GridColumn53.Width = 126
         '
         'RepositoryItemProgressBar1
@@ -1828,7 +1809,7 @@ Partial Class FormWHAWBill
         Me.XTPDO.Controls.Add(Me.GCDOERP)
         Me.XTPDO.Controls.Add(Me.PanelControl4)
         Me.XTPDO.Name = "XTPDO"
-        Me.XTPDO.Size = New System.Drawing.Size(1267, 484)
+        Me.XTPDO.Size = New System.Drawing.Size(1267, 450)
         Me.XTPDO.Text = "From DO"
         '
         'GCDOERP
@@ -1838,7 +1819,7 @@ Partial Class FormWHAWBill
         Me.GCDOERP.MainView = Me.GVDOERP
         Me.GCDOERP.Name = "GCDOERP"
         Me.GCDOERP.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckEdit1})
-        Me.GCDOERP.Size = New System.Drawing.Size(1267, 437)
+        Me.GCDOERP.Size = New System.Drawing.Size(1267, 403)
         Me.GCDOERP.TabIndex = 4
         Me.GCDOERP.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVDOERP})
         '
@@ -1849,11 +1830,9 @@ Partial Class FormWHAWBill
         Me.GVDOERP.Name = "GVDOERP"
         Me.GVDOERP.OptionsCustomization.AllowColumnMoving = False
         Me.GVDOERP.OptionsCustomization.AllowColumnResizing = False
-        Me.GVDOERP.OptionsCustomization.AllowFilter = False
         Me.GVDOERP.OptionsCustomization.AllowGroup = False
         Me.GVDOERP.OptionsCustomization.AllowQuickHideColumns = False
         Me.GVDOERP.OptionsCustomization.AllowRowSizing = True
-        Me.GVDOERP.OptionsCustomization.AllowSort = False
         Me.GVDOERP.OptionsCustomization.CustomizationFormSearchBoxVisible = True
         Me.GVDOERP.OptionsView.ShowGroupPanel = False
         '
@@ -2038,7 +2017,7 @@ Partial Class FormWHAWBill
         Me.XTPRet.Controls.Add(Me.GCRet)
         Me.XTPRet.Controls.Add(Me.PanelControl5)
         Me.XTPRet.Name = "XTPRet"
-        Me.XTPRet.Size = New System.Drawing.Size(1267, 484)
+        Me.XTPRet.Size = New System.Drawing.Size(1267, 450)
         Me.XTPRet.Text = "From Return Request"
         '
         'GCRet
@@ -2048,7 +2027,7 @@ Partial Class FormWHAWBill
         Me.GCRet.MainView = Me.GVRet
         Me.GCRet.Name = "GCRet"
         Me.GCRet.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckEdit2})
-        Me.GCRet.Size = New System.Drawing.Size(1267, 437)
+        Me.GCRet.Size = New System.Drawing.Size(1267, 403)
         Me.GCRet.TabIndex = 7
         Me.GCRet.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVRet})
         '
@@ -3079,11 +3058,68 @@ Partial Class FormWHAWBill
         Me.TEInNoStart.Size = New System.Drawing.Size(81, 20)
         Me.TEInNoStart.TabIndex = 2
         '
+        'GridColumn54
+        '
+        Me.GridColumn54.Caption = "Last Print Date"
+        Me.GridColumn54.DisplayFormat.FormatString = "dd MMMM yyyy HH:mm"
+        Me.GridColumn54.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn54.FieldName = "log_date"
+        Me.GridColumn54.Name = "GridColumn54"
+        Me.GridColumn54.OptionsColumn.AllowEdit = False
+        Me.GridColumn54.OptionsColumn.ReadOnly = True
+        Me.GridColumn54.Visible = True
+        Me.GridColumn54.VisibleIndex = 7
+        '
+        'GridColumn55
+        '
+        Me.GridColumn55.Caption = "SO Date"
+        Me.GridColumn55.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.GridColumn55.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn55.FieldName = "sales_order_date"
+        Me.GridColumn55.Name = "GridColumn55"
+        Me.GridColumn55.OptionsColumn.AllowEdit = False
+        Me.GridColumn55.OptionsColumn.ReadOnly = True
+        Me.GridColumn55.Visible = True
+        Me.GridColumn55.VisibleIndex = 5
+        '
+        'GridColumn56
+        '
+        Me.GridColumn56.Caption = "OL Store Date"
+        Me.GridColumn56.DisplayFormat.FormatString = "dd MMMM yyyy HH:mm"
+        Me.GridColumn56.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn56.FieldName = "sales_order_ol_shop_date"
+        Me.GridColumn56.Name = "GridColumn56"
+        Me.GridColumn56.OptionsColumn.AllowEdit = False
+        Me.GridColumn56.OptionsColumn.ReadOnly = True
+        Me.GridColumn56.Visible = True
+        Me.GridColumn56.VisibleIndex = 6
+        '
+        'GridColumn57
+        '
+        Me.GridColumn57.Caption = "Shipping Address"
+        Me.GridColumn57.FieldName = "shipping_address"
+        Me.GridColumn57.Name = "GridColumn57"
+        Me.GridColumn57.OptionsColumn.AllowEdit = False
+        Me.GridColumn57.OptionsColumn.ReadOnly = True
+        Me.GridColumn57.Visible = True
+        Me.GridColumn57.VisibleIndex = 4
+        '
+        'GridColumn58
+        '
+        Me.GridColumn58.Caption = "Customer name"
+        Me.GridColumn58.FieldName = "customer_name"
+        Me.GridColumn58.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left
+        Me.GridColumn58.Name = "GridColumn58"
+        Me.GridColumn58.OptionsColumn.AllowEdit = False
+        Me.GridColumn58.OptionsColumn.ReadOnly = True
+        Me.GridColumn58.Visible = True
+        Me.GridColumn58.VisibleIndex = 3
+        '
         'FormWHAWBill
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1279, 540)
+        Me.ClientSize = New System.Drawing.Size(1279, 506)
         Me.Controls.Add(Me.XTCAwb)
         Me.Controls.Add(Me.barDockControlLeft)
         Me.Controls.Add(Me.barDockControlRight)
@@ -3121,8 +3157,6 @@ Partial Class FormWHAWBill
         CType(Me.XTCOutbound, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XTCOutbound.ResumeLayout(False)
         Me.XTPListOut.ResumeLayout(False)
-        CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.PanelControl3.ResumeLayout(False)
         CType(Me.GCExportExcel, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVExportExcel, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PCLock, System.ComponentModel.ISupportInitialize).EndInit()
@@ -3344,9 +3378,6 @@ Partial Class FormWHAWBill
     Friend WithEvents gridBandInvoice As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents gbAirport As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents gbETALT As DevExpress.XtraGrid.Views.BandedGrid.GridBand
-    Friend WithEvents PanelControl3 As DevExpress.XtraEditors.PanelControl
-    Friend WithEvents SBImportCsss As DevExpress.XtraEditors.SimpleButton
-    Friend WithEvents SBExportCsss As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents GCExportExcel As DevExpress.XtraGrid.GridControl
     Friend WithEvents GVExportExcel As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
@@ -3453,4 +3484,9 @@ Partial Class FormWHAWBill
     Friend WithEvents GridColumn52 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents BGenerateAWBRef As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents GridColumn53 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn55 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn56 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn54 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn58 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn57 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

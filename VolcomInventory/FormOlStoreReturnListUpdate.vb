@@ -38,7 +38,7 @@ WHERE is_only_cs='1'"
                 INNER JOIN tb_pl_sales_order_del_det dd ON dd.id_sales_order_det = rd.id_sales_order_det
                 INNER JOIN tb_sales_pos_det id ON id.id_pl_sales_order_del_det = dd.id_pl_sales_order_del_det
                 INNER JOIN tb_sales_pos i ON i.id_sales_pos = id.id_sales_pos
-                WHERE l.id_ol_store_ret_list=" + id_ol_store_ret_list + " AND i.id_report_status!=5 "
+                WHERE l.id_ol_store_ret_list=" + id_ol_store_ret_list + " AND i.id_report_status=6 "
                 Dim dcek As DataTable = execute_query(qcek, -1, True, "", "", "", "")
                 Dim id_stt As String = ""
                 Dim name_stt As String = ""
@@ -54,8 +54,25 @@ WHERE is_only_cs='1'"
                 ('" + id_sales_order_det + "', '" + addSlashes(name_stt) + "', NOW(), NOW(), 1);"
             End If
         Next
+        'update statyus
         FormMain.SplashScreenManager1.SetWaitFormDescription("Updating status")
         execute_non_query(q, True, "", "", "", "")
+
+        'cek refund
+        If SLEStatus.EditValue.ToString = "2" Then
+            'creat obj
+            Dim rf As New ClassOLStoreRefund()
+
+            'cek CN
+            FormMain.SplashScreenManager1.SetWaitFormDescription("Checking credit note")
+            rf.createCN()
+
+
+            'cek ROR
+            FormMain.SplashScreenManager1.SetWaitFormDescription("Checking return order")
+            rf.createROR()
+        End If
+
         FormOlStoreReturnList.view_list()
         FormMain.SplashScreenManager1.CloseWaitForm()
         infoCustom("Update status completed")

@@ -167,88 +167,90 @@ INNER JOIN tb_m_country c ON c.`id_country`=reg.`id_country` " & filter
             BSave.Visible = False
         End If
         '
-        If opt = "From DO" Then
-            id_comp = FormWHAWBill.GVDOERP.GetRowCellValue(0, "id_comp").ToString
-            SLESubDistrict.EditValue = FormWHAWBill.GVDOERP.GetRowCellValue(0, "id_sub_district").ToString
-            TECompName.Text = FormWHAWBill.GVDOERP.GetRowCellValue(0, "store_name").ToString
-            TECompCode.Text = FormWHAWBill.GVDOERP.GetRowCellValue(0, "store_number").ToString
-            '
-            If FormWHAWBill.GVDOERP.GetRowCellValue(0, "id_commerce_type").ToString = "2" Then
-                SLESubDistrict.Enabled = True
-            Else
-                SLESubDistrict.Enabled = False
+        If id_awb = "-1" Then
+            If opt = "From DO" Then
+                id_comp = FormWHAWBill.GVDOERP.GetRowCellValue(0, "id_comp").ToString
+                SLESubDistrict.EditValue = FormWHAWBill.GVDOERP.GetRowCellValue(0, "id_sub_district").ToString
+                TECompName.Text = FormWHAWBill.GVDOERP.GetRowCellValue(0, "store_name").ToString
+                TECompCode.Text = FormWHAWBill.GVDOERP.GetRowCellValue(0, "store_number").ToString
+                '
+                If FormWHAWBill.GVDOERP.GetRowCellValue(0, "id_commerce_type").ToString = "2" Then
+                    SLESubDistrict.Enabled = True
+                Else
+                    SLESubDistrict.Enabled = False
+                End If
+                '
+                clear_do()
+                rate_table()
+
+                'masukkan DO
+                For i As Integer = 0 To FormWHAWBill.GVDOERP.RowCount - 1
+                    Dim newRow As DataRow = (TryCast(GCDO.DataSource, DataTable)).NewRow()
+                    newRow("id_pl_sales_order_del") = FormWHAWBill.GVDOERP.GetRowCellValue(i, "id_pl_sales_order_del").ToString
+                    newRow("do_no") = FormWHAWBill.GVDOERP.GetRowCellValue(i, "do_no").ToString
+                    newRow("qty") = FormWHAWBill.GVDOERP.GetRowCellValue(i, "qty")
+
+                    TryCast(GCDO.DataSource, DataTable).Rows.Add(newRow)
+                    GCDO.RefreshDataSource()
+                Next
+                '
+            ElseIf opt = "From DO AWB" Then
+                id_comp = FormWHAWBillReff.GVDOERP.GetRowCellValue(0, "id_comp").ToString
+                TECompName.Text = FormWHAWBillReff.GVDOERP.GetRowCellValue(0, "store_name").ToString
+                TECompCode.Text = FormWHAWBillReff.GVDOERP.GetRowCellValue(0, "store_number").ToString
+                '
+                load_sub_dsitrict_filter(" WHERE ct.city='" & FormWHAWBillReff.GVDOERP.GetRowCellValue(0, "shipping_city").ToString & "' ")
+                '
+                If FormWHAWBillReff.GVDOERP.GetRowCellValue(0, "id_commerce_type").ToString = "2" Then
+                    SLESubDistrict.Enabled = True
+                Else
+                    SLESubDistrict.Enabled = False
+                End If
+                '
+                clear_do()
+                rate_table()
+
+                'masukkan DO
+                For i As Integer = 0 To FormWHAWBillReff.GVDOERP.RowCount - 1
+                    Dim newRow As DataRow = (TryCast(GCDO.DataSource, DataTable)).NewRow()
+                    newRow("id_pl_sales_order_del") = FormWHAWBillReff.GVDOERP.GetRowCellValue(i, "id_pl_sales_order_del").ToString
+                    newRow("do_no") = FormWHAWBillReff.GVDOERP.GetRowCellValue(i, "do_no").ToString
+                    newRow("qty") = FormWHAWBillReff.GVDOERP.GetRowCellValue(i, "qty")
+
+                    TryCast(GCDO.DataSource, DataTable).Rows.Add(newRow)
+                    GCDO.RefreshDataSource()
+                Next
+                '
+            ElseIf opt = "From Return Customer" Then
+                id_comp = FormWHAWBill.GVRet.GetRowCellValue(0, "id_comp").ToString
+                TECompName.Text = FormWHAWBill.GVRet.GetRowCellValue(0, "comp_name").ToString
+                TECompCode.Text = FormWHAWBill.GVRet.GetRowCellValue(0, "comp_number").ToString
+                '
+                load_sub_dsitrict_filter(" WHERE ct.city='" & FormWHAWBill.GVRet.GetRowCellValue(0, "shipping_city").ToString & "' ")
+                '
+                If FormWHAWBill.GVRet.GetRowCellValue(0, "id_commerce_type").ToString = "2" Then
+                    SLESubDistrict.Enabled = True
+                Else
+                    SLESubDistrict.Enabled = False
+                End If
+                '
+                clear_do()
+                rate_table()
+
+                'masukkan DO
+                For i As Integer = 0 To FormWHAWBill.GVRet.RowCount - 1
+                    Dim newRow As DataRow = (TryCast(GCDO.DataSource, DataTable)).NewRow()
+                    newRow("id_ol_store_cust_ret") = FormWHAWBill.GVRet.GetRowCellValue(i, "id_ol_store_cust_ret").ToString
+                    newRow("do_no") = FormWHAWBill.GVRet.GetRowCellValue(i, "number").ToString
+                    newRow("qty") = FormWHAWBill.GVRet.GetRowCellValue(i, "qty")
+
+                    TryCast(GCDO.DataSource, DataTable).Rows.Add(newRow)
+                    GCDO.RefreshDataSource()
+                Next
+                '
+            ElseIf opt = "From AWB Reff" Then
+
             End If
-            '
-            clear_do()
-            rate_table()
-
-            'masukkan DO
-            For i As Integer = 0 To FormWHAWBill.GVDOERP.RowCount - 1
-                Dim newRow As DataRow = (TryCast(GCDO.DataSource, DataTable)).NewRow()
-                newRow("id_pl_sales_order_del") = FormWHAWBill.GVDOERP.GetRowCellValue(i, "id_pl_sales_order_del").ToString
-                newRow("do_no") = FormWHAWBill.GVDOERP.GetRowCellValue(i, "do_no").ToString
-                newRow("qty") = FormWHAWBill.GVDOERP.GetRowCellValue(i, "qty")
-
-                TryCast(GCDO.DataSource, DataTable).Rows.Add(newRow)
-                GCDO.RefreshDataSource()
-            Next
-            '
-        ElseIf opt = "From DO AWB" Then
-            id_comp = FormWHAWBillReff.GVDOERP.GetRowCellValue(0, "id_comp").ToString
-            TECompName.Text = FormWHAWBillReff.GVDOERP.GetRowCellValue(0, "store_name").ToString
-            TECompCode.Text = FormWHAWBillReff.GVDOERP.GetRowCellValue(0, "store_number").ToString
-            '
-            load_sub_dsitrict_filter(" WHERE ct.city='" & FormWHAWBillReff.GVDOERP.GetRowCellValue(0, "shipping_city").ToString & "' ")
-            '
-            If FormWHAWBillReff.GVDOERP.GetRowCellValue(0, "id_commerce_type").ToString = "2" Then
-                SLESubDistrict.Enabled = True
-            Else
-                SLESubDistrict.Enabled = False
-            End If
-            '
-            clear_do()
-            rate_table()
-
-            'masukkan DO
-            For i As Integer = 0 To FormWHAWBillReff.GVDOERP.RowCount - 1
-                Dim newRow As DataRow = (TryCast(GCDO.DataSource, DataTable)).NewRow()
-                newRow("id_pl_sales_order_del") = FormWHAWBillReff.GVDOERP.GetRowCellValue(i, "id_pl_sales_order_del").ToString
-                newRow("do_no") = FormWHAWBillReff.GVDOERP.GetRowCellValue(i, "do_no").ToString
-                newRow("qty") = FormWHAWBillReff.GVDOERP.GetRowCellValue(i, "qty")
-
-                TryCast(GCDO.DataSource, DataTable).Rows.Add(newRow)
-                GCDO.RefreshDataSource()
-            Next
-            '
-        ElseIf opt = "From Return Customer" Then
-            id_comp = FormWHAWBill.GVRet.GetRowCellValue(0, "id_comp").ToString
-            TECompName.Text = FormWHAWBill.GVRet.GetRowCellValue(0, "comp_name").ToString
-            TECompCode.Text = FormWHAWBill.GVRet.GetRowCellValue(0, "comp_number").ToString
-            '
-            load_sub_dsitrict_filter(" WHERE ct.city='" & FormWHAWBill.GVRet.GetRowCellValue(0, "shipping_city").ToString & "' ")
-            '
-            If FormWHAWBill.GVRet.GetRowCellValue(0, "id_commerce_type").ToString = "2" Then
-                SLESubDistrict.Enabled = True
-            Else
-                SLESubDistrict.Enabled = False
-            End If
-            '
-            clear_do()
-            rate_table()
-
-            'masukkan DO
-            For i As Integer = 0 To FormWHAWBill.GVRet.RowCount - 1
-                Dim newRow As DataRow = (TryCast(GCDO.DataSource, DataTable)).NewRow()
-                newRow("id_ol_store_cust_ret") = FormWHAWBill.GVRet.GetRowCellValue(i, "id_ol_store_cust_ret").ToString
-                newRow("do_no") = FormWHAWBill.GVRet.GetRowCellValue(i, "number").ToString
-                newRow("qty") = FormWHAWBill.GVRet.GetRowCellValue(i, "qty")
-
-                TryCast(GCDO.DataSource, DataTable).Rows.Add(newRow)
-                GCDO.RefreshDataSource()
-            Next
-            '
-        ElseIf opt = "From AWB Reff" Then
-
         End If
     End Sub
     Sub view_do()
@@ -333,7 +335,8 @@ INNER JOIN tb_m_country c ON c.`id_country`=reg.`id_country` " & filter
 ,comp.awb_rank
 FROM `tb_3pl_rate` AS rate
 INNER JOIN tb_m_comp comp ON comp.id_comp=rate.id_comp
-WHERE rate.id_sub_district='" + SLESubDistrict.EditValue.ToString + "' AND rate.id_type='" + id_awb_type + "'"
+WHERE rate.id_sub_district='" + SLESubDistrict.EditValue.ToString + "' AND rate.id_type='" + id_awb_type + "'
+ORDER BY amount ASC,comp.awb_rank ASC"
 
             Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
             GCCargoRate.DataSource = data
@@ -591,9 +594,12 @@ WHERE rate.id_sub_district='" + SLESubDistrict.EditValue.ToString + "' AND rate.
                 End If
 
                 load_awb()
-                Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Calculation saved. Do you want to create again ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
-                If confirm = Windows.Forms.DialogResult.Yes Then
-                    again_awb = "1"
+                'Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Calculation saved. Do you want to create again ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+                'If confirm = Windows.Forms.DialogResult.Yes Then
+                '    again_awb = "1"
+                'End If
+                If opt = "From DO AWB" Then
+                    FormWHAWBill.load_from_do()
                 End If
                 Close()
             Else 'edit
@@ -601,31 +607,31 @@ WHERE rate.id_sub_district='" + SLESubDistrict.EditValue.ToString + "' AND rate.
                 execute_non_query(query, True, "", "", "", "")
 
                 'detail
-                If Not isCreatedManifest()Then
-                    '
-                    query = "DELETE FROM tb_wh_awbill_det WHERE id_awbill='" + id_awb + "'"
-                    execute_non_query(query, True, "", "", "", "")
-                    '
-                    If GVDO.RowCount > 0 Then
-                        query = "INSERT INTO tb_wh_awbill_det(id_awbill,id_pl_sales_order_del,do_no,qty) VALUES"
-                        For i As Integer = 0 To GVDO.RowCount - 1
-                            Dim id_pl_sales_order_del As String = "NULL"
-                            Try
-                                id_pl_sales_order_del = GVDO.GetRowCellValue(i, "id_pl_sales_order_del").ToString
-                            Catch ex As Exception
-                            End Try
-                            If id_pl_sales_order_del = "" Then
-                                id_pl_sales_order_del = "NULL"
-                            End If
+                'If Not isCreatedManifest()Then
+                '    '
+                '    query = "DELETE FROM tb_wh_awbill_det WHERE id_awbill='" + id_awb + "'"
+                '    execute_non_query(query, True, "", "", "", "")
+                '    '
+                '    If GVDO.RowCount > 0 Then
+                '        query = "INSERT INTO tb_wh_awbill_det(id_awbill,id_pl_sales_order_del,do_no,qty) VALUES"
+                '        For i As Integer = 0 To GVDO.RowCount - 1
+                '            Dim id_pl_sales_order_del As String = "NULL"
+                '            Try
+                '                id_pl_sales_order_del = GVDO.GetRowCellValue(i, "id_pl_sales_order_del").ToString
+                '            Catch ex As Exception
+                '            End Try
+                '            If id_pl_sales_order_del = "" Then
+                '                id_pl_sales_order_del = "NULL"
+                '            End If
 
-                            If Not i = 0 Then
-                                query += ","
-                            End If
-                            query += "('" + id_awb + "'," + id_pl_sales_order_del + ",'" + GVDO.GetRowCellValue(i, "do_no").ToString + "','" + GVDO.GetRowCellValue(i, "qty").ToString + "')"
-                        Next
-                        execute_non_query(query, True, "", "", "", "")
-                    End If
-                End If
+                '            If Not i = 0 Then
+                '                query += ","
+                '            End If
+                '            query += "('" + id_awb + "'," + id_pl_sales_order_del + ",'" + GVDO.GetRowCellValue(i, "do_no").ToString + "','" + GVDO.GetRowCellValue(i, "qty").ToString + "')"
+                '        Next
+                '        execute_non_query(query, True, "", "", "", "")
+                '    End If
+                'End If
 
 
                 'infoCustom("AWB calculation updated.")

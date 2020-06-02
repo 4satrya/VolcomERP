@@ -70,7 +70,7 @@ SELECT cc.id_comp_contact,CONCAT(c.comp_number,' - ',c.comp_name) as comp_name
     Sub load_vendor_fgpo()
         Dim query As String = "SELECT c.id_comp,CONCAT(c.comp_number,' - ',c.comp_name) as comp_name  
                                 FROM tb_m_comp c
-                                WHERE c.id_comp_cat='1'"
+                                WHERE c.id_comp_cat='1' OR c.id_comp_cat='8' AND c.is_active=1"
         viewSearchLookupQuery(SLEFGPOVendor, query, "id_comp", "comp_name", "id_comp")
     End Sub
 
@@ -564,6 +564,8 @@ WHERE c.id_comp='" & SLEVendorExpense.EditValue & "'"
 
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
+
+
         GCBPJSKesehatan.DataSource = data
 
         GVBPJSKesehatan.BestFitColumns()
@@ -607,6 +609,8 @@ WHERE c.id_comp='" & SLEVendorExpense.EditValue & "'"
             view_bpjskesehatan()
         ElseIf XTCPO.SelectedTabPage.Name = "XTPTHR" Then
             view_thr()
+        ElseIf XTCPO.SelectedTabPage.Name = "XTPJamsostek" Then
+            view_jamsostek()
         End If
     End Sub
 
@@ -771,5 +775,56 @@ GROUP BY sr.`id_sales_return`"
                 load_refund()
             End If
         End If
+    End Sub
+
+    Sub view_jamsostek()
+        Dim query As String = "
+            SELECT 'no' AS is_check, p.id_payroll, p.report_number, DATE_FORMAT(p.periode_end, '%M %Y') AS payroll_periode, t.payroll_type, 0 AS amount, l.bpjstk
+            FROM tb_emp_payroll AS p
+            LEFT JOIN tb_emp_payroll_type AS t ON p.id_payroll_type = t.id_payroll_type
+            LEFT JOIN tb_emp_payroll_det AS d ON p.id_payroll = d.id_payroll
+            LEFT JOIN tb_m_employee AS e ON e.id_employee = d.id_employee
+            LEFT JOIN tb_m_departement_sub AS s ON e.id_departement_sub = s.id_departement_sub
+            LEFT JOIN tb_m_bpjs_location AS l ON s.id_bpjs_location = l.id_bpjs_location
+            WHERE p.id_report_status = 6 AND t.is_thr <> 1 AND p.is_close_pay_jamsostek = 2
+            GROUP BY s.id_bpjs_location, p.id_payroll
+            ORDER BY p.periode_end DESC, l.bpjstk ASC, p.id_payroll_type ASC
+        "
+
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+
+        'amount
+        For i = 0 To data.Rows.Count - 1
+            Dim data_bpjstk As DataTable = execute_query("CALL view_payroll_bpjstk(" + data.Rows(i)("id_payroll").ToString + ")", -1, True, "", "", "", "")
+
+            Dim total_contributtion As Integer = 0
+
+            For j = 0 To data_bpjstk.Rows.Count - 1
+                If data.Rows(i)("bpjstk").ToString = data_bpjstk.Rows(j)("bpjs_tk_location").ToString Then
+                    total_contributtion += data_bpjstk.Rows(j)("total_contribution")
+                End If
+            Next
+
+            data.Rows(i)("amount") = total_contributtion
+        Next
+
+        GCJamsostek.DataSource = data
+
+        GVJamsostek.BestFitColumns()
+    End Sub
+
+    Private Sub SBPayJamsostek_Click(sender As Object, e As EventArgs) Handles SBPayJamsostek.Click
+        GVJamsostek.ActiveFilterString = ""
+        GVJamsostek.ActiveFilterString = "[is_check]='yes'"
+
+        If GVJamsostek.RowCount > 0 Then
+            FormBankWithdrawalDet.id_pay_type = "2"
+            FormBankWithdrawalDet.report_mark_type = "247"
+            FormBankWithdrawalDet.ShowDialog()
+        Else
+            warningCustom("Please select item first.")
+        End If
+
+        GVJamsostek.ActiveFilterString = ""
     End Sub
 End Class

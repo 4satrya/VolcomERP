@@ -1142,6 +1142,7 @@ Partial Class FormWHAWBillDet
         Me.BBrowse.Size = New System.Drawing.Size(87, 23)
         Me.BBrowse.TabIndex = 1
         Me.BBrowse.Text = "Delivery Order"
+        Me.BBrowse.Visible = False
         '
         'PanelControl2
         '
@@ -1325,6 +1326,7 @@ Partial Class FormWHAWBillDet
         Me.BRemoveDO.Size = New System.Drawing.Size(21, 23)
         Me.BRemoveDO.TabIndex = 92
         Me.BRemoveDO.Text = "-"
+        Me.BRemoveDO.Visible = False
         '
         'Label8
         '

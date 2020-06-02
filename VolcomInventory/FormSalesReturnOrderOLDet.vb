@@ -378,7 +378,7 @@
             GridColumnErr.VisibleIndex = 100
         Else
             GridColumnErr.Visible = False
-            Dim sales_return_order_number As String = TxtSalesOrderNumber.Text
+            Dim sales_return_order_number As String = addSlashes(TxtSalesOrderNumber.Text)
             Dim sales_return_order_note As String = addSlashes(MENote.Text)
             Dim sales_return_order_est_date As String = DateTime.Parse(DERetDueDate.EditValue.ToString).ToString("yyyy-MM-dd")
             Dim id_report_status As String = LEReportStatus.EditValue
@@ -408,10 +408,10 @@
                         Dim id_design_price As String = GVItemList.GetRowCellValue(i, "id_design_price").ToString
                         Dim design_price As String = decimalSQL(GVItemList.GetRowCellValue(i, "design_price").ToString)
                         Dim sales_return_order_det_qty As String = decimalSQL(GVItemList.GetRowCellValue(i, "sales_return_order_det_qty").ToString)
-                        Dim sales_return_order_det_note As String = GVItemList.GetRowCellValue(i, "sales_return_order_det_note").ToString
+                        Dim sales_return_order_det_note As String = addSlashes(GVItemList.GetRowCellValue(i, "sales_return_order_det_note").ToString)
                         Dim id_return_cat As String = "1"
                         Dim id_ol_store_ret_list As String = GVItemList.GetRowCellValue(i, "id_ol_store_ret_list").ToString
-                        If id_ol_store_ret_list = "0" Then
+                        If id_ol_store_ret_list = "0" Or id_ol_store_ret_list = "" Then
                             id_ol_store_ret_list = "NULL"
                         End If
 

@@ -16,6 +16,10 @@
         view_comp_group()
         view_order()
         viewRequest()
+
+        If id_role_login = get_setup_field("id_role_super_admin") Then
+            BtnRefund.Visible = True
+        End If
     End Sub
 
     Sub view_comp_group()
@@ -140,5 +144,24 @@ LEFT JOIN tb_m_employee emp ON emp.`id_employee`=usr.`id_employee` " & q_where
             FormRequestRetOLStore.ShowDialog()
             Cursor = Cursors.Default
         End If
+    End Sub
+
+    Private Sub BtnRefund_Click(sender As Object, e As EventArgs) Handles BtnRefund.Click
+        FormMain.SplashScreenManager1.ShowWaitForm()
+
+        'creat obj
+        Dim rf As New ClassOLStoreRefund()
+
+        'cek CN
+        FormMain.SplashScreenManager1.SetWaitFormDescription("Checking credit note")
+        rf.createCN()
+
+
+        'cek ROR
+        FormMain.SplashScreenManager1.SetWaitFormDescription("Checking return order")
+        rf.createROR()
+
+        view_list()
+        FormMain.SplashScreenManager1.CloseWaitForm()
     End Sub
 End Class

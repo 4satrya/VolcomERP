@@ -1226,6 +1226,7 @@ GROUP BY rec.`id_prod_order`"
         ElseIf report_mark_type = "246" Then
             'request return
             FormRequestRetOLStore.id = id_report
+            FormRequestRetOLStore.action = "upd"
             FormRequestRetOLStore.is_view = "1"
             FormRequestRetOLStore.ShowDialog()
         Else

@@ -702,7 +702,9 @@ Public Class FormProductionRetInSingle
         sample_check = sample_name
         'MsgBox(id_prod_order_det_cek)
         'Dim query_check As String = "CALL view_stock_prod_ret_in_remain('" + id_prod_order + "', '" + id_prod_order_det_cek + "', '0', '" + id_prod_order_ret_in + "', '0') "
-        Dim query_check As String = "CALL view_limit_ret_out('" + id_ret_out + "','" + id_prod_order_ret_in + "', '1')"
+        'Dim query_check As String = "CALL view_limit_ret_out('" + id_ret_out + "','" + id_prod_order_ret_in + "', '1')"
+        Dim query_check As String = "CALL view_limit_ret_in('" + id_ret_out + "','" + id_prod_order_ret_in + "', '1','" & id_prod_order_det_cek & "')"
+
         Dim data As DataTable = execute_query(query_check, -1, True, "", "", "", "")
         allow_sum = Decimal.Parse(data.Rows(0)("qty"))
         If qty_pl > allow_sum Then

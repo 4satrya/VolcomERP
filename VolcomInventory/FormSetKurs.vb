@@ -58,7 +58,8 @@
 
             Dim webClient As New Net.WebClient
             Dim result As String = webClient.DownloadString("https://fiskal.kemenkeu.go.id/dw-kurs-db.asp")
-            Dim str_kurs_dec As String = Between(result, "Dolar Amerika Serikat (USD)</td><td class='text-right'>", " <img src='data/aimages").Replace(".", "").Replace(" ", "")
+            Dim str_kurs_dec As String = Between(result, "Dolar Amerika Serikat (USD)</td><td class='text-right'>", " <img src='data/aimages").Replace(".", "").Replace(" ", "").Replace(",", "")
+            str_kurs_dec = str_kurs_dec.Substring(0, str_kurs_dec.Length - 2) + "." + str_kurs_dec.Substring(str_kurs_dec.Length - 2, 2)
             '
             Dim query_sel As String = "SELECT CAST('" & str_kurs_dec & "' AS DECIMAL(13,2)) as kurs"
             Dim data_sel As DataTable = execute_query(query_sel, -1, True, "", "", "", "")

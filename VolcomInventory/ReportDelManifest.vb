@@ -79,70 +79,70 @@
 
             do_no.Text = dt.Rows(i)("combine_number").ToString
 
-            'number
-            'Dim number As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(3)
+            'awb number
+            Dim awbill_no As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(3)
 
-            'number.Text = dt.Rows(i)("pl_sales_order_del_number").ToString
+            awbill_no.Text = dt.Rows(i)("awbill_no").ToString
 
             'store account
-            Dim comp_number As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(3)
+            Dim comp_number As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(4)
 
             comp_number.Text = dt.Rows(i)("comp_number").ToString
 
             'store name
-            Dim comp_name As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(4)
+            Dim comp_name As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(5)
 
             comp_name.Text = dt.Rows(i)("comp_name").ToString
 
             'qty
-            Dim qty As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(5)
+            Dim qty As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(6)
 
             qty.Text = dt.Rows(i)("qty").ToString
             qty.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
 
             'destination
-            Dim city As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(6)
+            Dim city As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(7)
 
             city.Text = dt.Rows(i)("city").ToString
 
             'weight
-            Dim weight As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(7)
+            Dim weight As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(8)
 
             weight.Text = dt.Rows(i)("weight").ToString
             weight.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
 
             'p
-            Dim width As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(8)
+            Dim width As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(9)
 
             width.Text = Decimal.Round(dt.Rows(i)("width"), 2)
             width.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
 
             'l
-            Dim length As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(9)
+            Dim length As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(10)
 
             length.Text = Decimal.Round(dt.Rows(i)("length"), 2)
             length.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
 
             't
-            Dim height As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(10)
+            Dim height As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(11)
 
             height.Text = Decimal.Round(dt.Rows(i)("height"), 2)
             height.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
 
             'dim
-            Dim volume As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(11)
+            Dim volume As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(12)
 
             volume.Text = Decimal.Round(dt.Rows(i)("volume"), 2)
             volume.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
 
             'final weight
-            Dim c_weight As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(12)
+            Dim c_weight As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(13)
 
             c_weight.Text = Decimal.Round(dt.Rows(i)("c_weight"), 2)
             c_weight.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
 
             'remark
-            Dim remark As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(13)
+            Dim remark As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(14)
 
             last_collie = dt.Rows(i)("id_awbill").ToString
             last_combine = dt.Rows(i)("combine_number").ToString

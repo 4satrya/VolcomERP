@@ -276,7 +276,7 @@ Partial Class FormCollie
         Me.BSubmit.Name = "BSubmit"
         Me.BSubmit.Size = New System.Drawing.Size(565, 34)
         Me.BSubmit.TabIndex = 0
-        Me.BSubmit.Text = "Approve"
+        Me.BSubmit.Text = "Confirm and Approve"
         '
         'PCCalculation
         '
@@ -333,9 +333,9 @@ Partial Class FormCollie
         Me.Label6.AutoSize = True
         Me.Label6.Location = New System.Drawing.Point(349, 15)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(76, 13)
+        Me.Label6.Size = New System.Drawing.Size(71, 13)
         Me.Label6.TabIndex = 10
-        Me.Label6.Text = "manual weight"
+        Me.Label6.Text = "actual weight"
         '
         'TEBerat
         '
@@ -404,29 +404,29 @@ Partial Class FormCollie
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(191, 15)
+        Me.Label3.Location = New System.Drawing.Point(180, 15)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(11, 13)
+        Me.Label3.Size = New System.Drawing.Size(37, 13)
         Me.Label3.TabIndex = 2
-        Me.Label3.Text = "t"
+        Me.Label3.Text = "height"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(117, 15)
+        Me.Label2.Location = New System.Drawing.Point(108, 15)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(9, 13)
+        Me.Label2.Size = New System.Drawing.Size(33, 13)
         Me.Label2.TabIndex = 1
-        Me.Label2.Text = "l"
+        Me.Label2.Text = "width"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(41, 15)
+        Me.Label1.Location = New System.Drawing.Point(28, 15)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(13, 13)
+        Me.Label1.Size = New System.Drawing.Size(37, 13)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "p"
+        Me.Label1.Text = "length"
         '
         'PanelControl4
         '

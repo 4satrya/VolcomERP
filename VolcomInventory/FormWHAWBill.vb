@@ -1283,11 +1283,9 @@ WHERE cg.`description`='" & comp_group_desc & "' AND so.`sales_order_ol_shop_num
         End If
         '
         If Not problem Then
-            'FormWHAWBillDet.opt = "From DO"
-            'FormWHAWBillDet.id_awb_type = "1"
-            'FormWHAWBillDet.ShowDialog()
-            FormCollie.opt = "From DO"
-            FormCollie.ShowDialog()
+            FormWHAWBillDet.opt = "From DO"
+            FormWHAWBillDet.id_awb_type = "1"
+            FormWHAWBillDet.ShowDialog()
         Else
             GVDOERP.ActiveFilterString = ""
         End If

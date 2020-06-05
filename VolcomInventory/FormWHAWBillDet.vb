@@ -248,7 +248,7 @@ INNER JOIN tb_sales_order so ON so.`id_sales_order`=sod.`id_sales_order`
 INNER JOIN tb_m_comp_contact cc ON cc.`id_comp_contact`=so.`id_store_contact_to`
 INNER JOIN tb_m_comp c ON c.`id_comp`=cc.`id_comp` 
 INNER JOIN tb_m_comp_group cg ON cg.`id_comp_group`=c.`id_comp_group` 
-WHERE CONCAT('RET-',cg.`description`,'-',so.`sales_order_ol_shop_number`)='" & FormWHAWBill.GVRet.GetRowCellValue(0, "stru").ToString & "'
+WHERE CONCAT('RET-',cg.`comp_group`,'-',so.`sales_order_ol_shop_number`)='" & FormWHAWBill.GVRet.GetRowCellValue(0, "stru").ToString & "'
 GROUP BY r.id_ol_store_cust_ret"
                 Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
 

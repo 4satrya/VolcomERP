@@ -25,10 +25,11 @@
     Private Sub BConfirm_Click(sender As Object, e As EventArgs) Handles BConfirm.Click
         'header
         FormBankWithdrawalDet.SLEPayFrom.EditValue = SLEPayFrom.EditValue
-        FormBankWithdrawalDet.SLEVendor.EditValue = "0"
+        FormBankWithdrawalDet.SLEVendor.EditValue = "1"
         FormBankWithdrawalDet.SLEPayType.EditValue = "2"
         '
         FormBankWithdrawalDet.SLEReportType.EditValue = "159"
+        FormBankWithdrawalDet.report_mark_type = "159"
 
         Try
             Dim newRow As DataRow = (TryCast(FormBankWithdrawalDet.GCList.DataSource, DataTable)).NewRow()
@@ -59,8 +60,6 @@
             FormBankWithdrawalDet.GCList.RefreshDataSource()
             FormBankWithdrawalDet.GVList.RefreshData()
             FormBankWithdrawalDet.calculate_amount()
-
-
         Catch ex As Exception
             MsgBox(ex.ToString)
         End Try

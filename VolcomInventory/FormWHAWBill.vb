@@ -981,7 +981,7 @@ FROM tb_sales_order so
 INNER JOIN tb_m_comp_contact c ON c.id_comp_contact = so.id_store_contact_to 
 INNER JOIN tb_m_comp d ON c.id_comp = d.id_comp AND d.`id_commerce_type`='2'
 INNER JOIN tb_m_comp_group cg ON cg.`id_comp_group`=d.`id_comp_group`
-WHERE CONCAT(cg.`description`,'-',so.`sales_order_ol_shop_number`) IN (" + q_in.Substring(0, q_in.Length - 2) + ")", 0, True, "", "", "", "")
+WHERE CONCAT(cg.`comp_group`,'-',so.`sales_order_ol_shop_number`) IN (" + q_in.Substring(0, q_in.Length - 2) + ")", 0, True, "", "", "", "")
 
             If is_exported = "2" Then
                 Dim confirm As DialogResult
@@ -990,15 +990,15 @@ WHERE CONCAT(cg.`description`,'-',so.`sales_order_ol_shop_number`) IN (" + q_in.
 
                 If confirm = DialogResult.Yes Then
                     Dim query As String = "
-                        SELECT so.shipping_name, IF(so.shipping_address1='' OR isnull(so.shipping_address1),so.shipping_address,CONCAT(so.shipping_address1, ' ', so.shipping_address2)) AS shipping_address, so.shipping_city, so.shipping_post_code, so.shipping_region, so.shipping_phone, 1 AS qty, CEIL(SUM(sod.grams * sod.sales_order_det_qty)/1000) AS c_weight, opt.jne_good_desc, opt.jne_goods_value, opt.jne_special_instruction, opt.jne_service, CONCAT(cg.`description`,'#',so.`sales_order_ol_shop_number`) AS order_id, opt.jne_insurance, opt.jne_shipper_name, opt.jne_shipper_address, opt.jne_shipper_city, opt.jne_shipper_zip, opt.jne_shipper_region, opt.jne_shipper_contact, opt.jne_shipper_phone, '' AS destination_code
+                        SELECT so.shipping_name, IF(so.shipping_address1='' OR isnull(so.shipping_address1),so.shipping_address,CONCAT(so.shipping_address1, ' ', so.shipping_address2)) AS shipping_address, so.shipping_city, so.shipping_post_code, so.shipping_region, so.shipping_phone, 1 AS qty, CEIL(SUM(sod.grams * sod.sales_order_det_qty)/1000) AS c_weight, opt.jne_good_desc, opt.jne_goods_value, opt.jne_special_instruction, opt.jne_service, CONCAT(cg.`comp_group`,'-',so.`sales_order_ol_shop_number`) AS order_id, opt.jne_insurance, opt.jne_shipper_name, opt.jne_shipper_address, opt.jne_shipper_city, opt.jne_shipper_zip, opt.jne_shipper_region, opt.jne_shipper_contact, opt.jne_shipper_phone, '' AS destination_code
                         FROM tb_sales_order so
                         INNER JOIN tb_sales_order_det sod ON so.id_sales_order = sod.id_sales_order
                         INNER JOIN tb_opt AS opt 
                         INNER JOIN tb_m_comp_contact c ON c.id_comp_contact = so.id_store_contact_to 
                         INNER JOIN tb_m_comp d ON c.id_comp = d.id_comp AND d.`id_commerce_type`='2'
                         INNER JOIN tb_m_comp_group cg ON cg.`id_comp_group`=d.`id_comp_group`
-                        WHERE CONCAT(cg.`description`,'-',so.`sales_order_ol_shop_number`) IN  (" + q_in.Substring(0, q_in.Length - 2) + ")
-                        GROUP BY CONCAT(cg.`description`,'-',so.`sales_order_ol_shop_number`) "
+                        WHERE CONCAT(cg.`comp_group`,'-',so.`sales_order_ol_shop_number`) IN  (" + q_in.Substring(0, q_in.Length - 2) + ")
+                        GROUP BY CONCAT(cg.`comp_group`,'-',so.`sales_order_ol_shop_number`) "
 
                     Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
@@ -1030,7 +1030,7 @@ WHERE CONCAT(cg.`description`,'-',so.`sales_order_ol_shop_number`) IN (" + q_in.
 INNER JOIN tb_m_comp_contact c ON c.id_comp_contact = so.id_store_contact_to 
 INNER JOIN tb_m_comp d ON c.id_comp = d.id_comp AND d.`id_commerce_type`='2'
 INNER JOIN tb_m_comp_group cg ON cg.`id_comp_group`=d.`id_comp_group`
-SET so.is_export_awb = 1 WHERE CONCAT(cg.`description`,'-',so.`sales_order_ol_shop_number`) IN (" + q_in.Substring(0, q_in.Length - 2) + ") ", True, "", "", "", "")
+SET so.is_export_awb = 1 WHERE CONCAT(cg.`comp_group`,'-',so.`sales_order_ol_shop_number`) IN (" + q_in.Substring(0, q_in.Length - 2) + ") ", True, "", "", "", "")
 
                         infoCustom("File saved.")
                     End If
@@ -1057,7 +1057,7 @@ SET so.is_export_awb = 1 WHERE CONCAT(cg.`description`,'-',so.`sales_order_ol_sh
             q_where += " AND cg.id_comp_group='" & SLECompGroup.EditValue.ToString & "' "
         End If
 
-        Dim q As String = "SELECT 'no' AS is_check,CONCAT(cg.`description`,'-',a.`sales_order_ol_shop_number`) AS stru, cg.description AS comp_group,a.id_store_contact_to, d.id_commerce_type,d.id_comp AS `id_store`, d.is_use_unique_code, d.id_store_type, d.comp_number AS `store_number`, d.comp_name AS `store`, d.address_primary AS `store_address`, CONCAT(d.comp_number,' - ',d.comp_name) AS store_name_to,a.id_report_status, f.report_status, a.id_warehouse_contact_to, CONCAT(wh.comp_number,' - ',wh.comp_name) AS warehouse_name_to, (wh.comp_number) AS warehouse_number_to,  (wh.comp_name) AS `warehouse`, wh.id_drawer_def AS `id_wh_drawer`, drw.wh_drawer_code, drw.wh_drawer, a.sales_order_note, a.sales_order_date, a.sales_order_note, a.sales_order_number, 
+        Dim q As String = "SELECT 'no' AS is_check,CONCAT(cg.`comp_group`,'-',a.`sales_order_ol_shop_number`) AS stru, cg.description AS comp_group,a.id_store_contact_to, d.id_commerce_type,d.id_comp AS `id_store`, d.is_use_unique_code, d.id_store_type, d.comp_number AS `store_number`, d.comp_name AS `store`, d.address_primary AS `store_address`, CONCAT(d.comp_number,' - ',d.comp_name) AS store_name_to,a.id_report_status, f.report_status, a.id_warehouse_contact_to, CONCAT(wh.comp_number,' - ',wh.comp_name) AS warehouse_name_to, (wh.comp_number) AS warehouse_number_to,  (wh.comp_name) AS `warehouse`, wh.id_drawer_def AS `id_wh_drawer`, drw.wh_drawer_code, drw.wh_drawer, a.sales_order_note, a.sales_order_date, a.sales_order_note, a.sales_order_number, 
 a.sales_order_ol_shop_number, a.sales_order_ol_shop_date, (a.sales_order_date) AS sales_order_date, ps.id_prepare_status, ps.prepare_status, 
 ('No') AS `is_select`, cat.id_so_status, cat.so_status, ot.order_type, del_cat.id_so_cat, del_cat.so_cat, a.customer_name, a.shipping_address,
  IFNULL(an.fg_so_reff_number,'-') AS `fg_so_reff_number`,a.sales_order_date ,a.sales_order_ol_shop_date,logp.log_date,
@@ -1095,7 +1095,7 @@ LEFT JOIN tb_lookup_uni_type ut ON ut.id_uni_type = a.id_uni_type
 LEFT JOIN tb_emp_uni_budget ub ON ub.id_emp_uni_budget = a.id_emp_uni_budget
 LEFT JOIN tb_m_employee ube ON ube.id_employee = ub.id_employee 
 WHERE (a.id_report_status=6) AND a.is_export_awb=2 " & q_where & "
-GROUP BY CONCAT(cg.`description`,'-',a.`sales_order_ol_shop_number`) 
+GROUP BY CONCAT(cg.`comp_group`,'-',a.`sales_order_ol_shop_number`) 
 ORDER BY a.id_sales_order DESC "
         Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
         GCSalesOrder.DataSource = dt
@@ -1164,9 +1164,46 @@ ORDER BY a.id_sales_order DESC "
 
                 For i = 2 To dt.Rows.Count - 1
                     Try
-                        Dim id_awbill As String = dt.Rows(i)(1).ToString.Substring(0, dt.Rows(i)(1).ToString.IndexOf("#"))
+                        Dim comp_group As String = ""
+                        Dim ol_shop_order As String = ""
 
-                        Dim awbill_no As String = execute_query("SELECT awbill_no AS total FROM tb_wh_awbill WHERE id_awbill = '" + id_awbill + "'", 0, True, "", "", "", "")
+                        Dim awbill_no As String = ""
+
+                        Try
+                            If dt.Rows(i)(1).ToString.Contains("RET-") Then
+                                comp_group = dt.Rows(i)(1).ToString.Split("-")(1)
+                                ol_shop_order = dt.Rows(i)(1).ToString.Split("-")(2)
+                                '
+                                awbill_no = execute_query("SELECT awb.awbill_no 
+FROM tb_wh_awbill awb
+INNER JOIN tb_wh_awbill_det awbd ON awbd.`id_awbill`=awb.`id_awbill`
+INNER JOIN tb_ol_store_cust_ret r ON r.id_ol_store_cust_ret=awbd.id_ol_store_cust_ret
+INNER JOIN tb_ol_store_cust_ret_det rd ON rd.`id_ol_store_cust_ret`=awbd.`id_ol_store_cust_ret`
+INNER JOIN tb_ol_store_ret_list rl ON rl.`id_ol_store_ret_list`=rd.`id_ol_store_ret_list`
+INNER JOIN tb_ol_store_ret_det retd ON retd.`id_ol_store_ret_det`=rl.`id_ol_store_ret_det`
+INNER JOIN tb_sales_order_det sod ON sod.`id_sales_order_det`=retd.`id_sales_order_det`
+INNER JOIN tb_sales_order so ON so.`id_sales_order`=sod.`id_sales_order`
+INNER JOIN tb_m_comp_contact cc ON cc.`id_comp_contact`=so.`id_store_contact_to`
+INNER JOIN tb_m_comp c ON c.`id_comp`=cc.`id_comp` 
+INNER JOIN tb_m_comp_group cg ON cg.`id_comp_group`=c.`id_comp_group` 
+WHERE cg.`comp_group`='" & comp_group & "' AND so.`sales_order_ol_shop_number`='" & ol_shop_order & "' LIMIT 1", 0, True, "", "", "", "")
+                            Else
+                                comp_group = dt.Rows(i)(1).ToString.Split("-")(0)
+                                ol_shop_order = dt.Rows(i)(1).ToString.Split("-")(1)
+                                '
+                                awbill_no = execute_query("SELECT awb.awbill_no 
+FROM tb_wh_awbill awb
+INNER JOIN tb_wh_awbill_det awbd ON awbd.`id_awbill`=awb.`id_awbill`
+INNER JOIN tb_pl_sales_order_del del ON del.`id_pl_sales_order_del`=awbd.`id_pl_sales_order_del`
+INNER JOIN tb_sales_order so ON so.id_sales_order=del.`id_sales_order`
+INNER JOIN tb_m_comp_contact cc ON cc.`id_comp_contact`=so.`id_store_contact_to`
+INNER JOIN tb_m_comp c ON c.`id_comp`=cc.`id_comp`
+INNER JOIN tb_m_comp_group cg ON cg.`id_comp_group`=c.`id_comp_group`
+WHERE cg.`comp_group`='" & comp_group & "' AND so.`sales_order_ol_shop_number`='" & ol_shop_order & "' LIMIT 1", 0, True, "", "", "", "")
+                            End If
+                        Catch ex As Exception
+                        End Try
+
 
                         If Not awbill_no = "" Then
                             already_imported = True
@@ -1199,7 +1236,7 @@ INNER JOIN tb_sales_order so ON so.`id_sales_order`=sod.`id_sales_order`
 INNER JOIN tb_m_comp_contact cc ON cc.`id_comp_contact`=so.`id_store_contact_to`
 INNER JOIN tb_m_comp c ON c.`id_comp`=cc.`id_comp` 
 INNER JOIN tb_m_comp_group cg ON cg.`id_comp_group`=c.`id_comp_group` 
-WHERE cg.`description`='" & comp_group_desc & "' AND so.`sales_order_ol_shop_number`='" & ol_shop_order & "'"
+WHERE cg.`comp_group`='" & comp_group_desc & "' AND so.`sales_order_ol_shop_number`='" & ol_shop_order & "'"
                         Dim dt_awb As DataTable = execute_query(q, -1, True, "", "", "", "")
                         If dt_awb.Rows.Count = 0 Then
                             total_not_imported = total_not_imported + 1
@@ -1218,8 +1255,14 @@ WHERE cg.`description`='" & comp_group_desc & "' AND so.`sales_order_ol_shop_num
                             Next
                         End If
                     Else
-                        Dim comp_group_desc As String = dt.Rows(i)(1).ToString.Split("-")(0)
-                        Dim ol_shop_order As String = dt.Rows(i)(1).ToString.Split("-")(1)
+                        Dim comp_group As String = ""
+                        Dim ol_shop_order As String = ""
+
+                        Try
+                            comp_group = dt.Rows(i)(1).ToString.Split("-")(0)
+                            ol_shop_order = dt.Rows(i)(1).ToString.Split("-")(1)
+                        Catch ex As Exception
+                        End Try
                         '
                         Dim q As String = "SELECT awb.`id_awbill`,awb.awbill_no 
 FROM tb_wh_awbill awb
@@ -1229,7 +1272,7 @@ INNER JOIN tb_sales_order so ON so.id_sales_order=del.`id_sales_order`
 INNER JOIN tb_m_comp_contact cc ON cc.`id_comp_contact`=so.`id_store_contact_to`
 INNER JOIN tb_m_comp c ON c.`id_comp`=cc.`id_comp`
 INNER JOIN tb_m_comp_group cg ON cg.`id_comp_group`=c.`id_comp_group`
-WHERE cg.`description`='" & comp_group_desc & "' AND so.`sales_order_ol_shop_number`='" & ol_shop_order & "'"
+WHERE cg.`comp_group`='" & comp_group & "' AND so.`sales_order_ol_shop_number`='" & ol_shop_order & "'"
                         Dim dt_awb As DataTable = execute_query(q, -1, True, "", "", "", "")
                         If dt_awb.Rows.Count = 0 Then
                             total_not_imported = total_not_imported + 1
@@ -1336,7 +1379,8 @@ WHERE cg.`description`='" & comp_group_desc & "' AND so.`sales_order_ol_shop_num
         End If
 
         Dim query As String = "SELECT cr.*
-,CONCAT('RET-',cg.`description`,'-',so.`sales_order_ol_shop_number`) AS stru,cg.`comp_group`,so.id_comp,so.id_commerce_type,so.comp_number,so.comp_name,so.qty,'no' AS is_check
+,if(cr.is_export_awb=1,'Yes','Not yet') AS status
+,CONCAT('RET-',cg.`comp_group`,'-',so.`sales_order_ol_shop_number`) AS stru,cg.`comp_group`,so.id_comp,so.id_commerce_type,so.comp_number,so.comp_name,so.qty,'no' AS is_check
 ,IF(CEIL(SUM(so.tot_weight)/1000)=0,1,CEIL(SUM(so.tot_weight)/1000)) AS tot_weight
 FROM `tb_ol_store_cust_ret` cr
 INNER JOIN (
@@ -1353,11 +1397,11 @@ INNER JOIN (
 INNER JOIN tb_m_comp_group cg ON cg.`id_comp_group`=cr.`id_comp_group`
 LEFT JOIN tb_wh_awbill_det awb ON awb.id_ol_store_cust_ret = cr.id_ol_store_cust_ret
 WHERE cr.id_report_status=6 AND ISNULL(awb.id_awbill) " & q_where & "
-GROUP BY CONCAT('RET-',cg.`description`,'-',so.`sales_order_ol_shop_number`)   "
+GROUP BY CONCAT('RET-',cg.`comp_group`,'-',so.`sales_order_ol_shop_number`)   "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCRet.DataSource = data
         GVRet.BestFitColumns()
-
+        GVRet.ActiveFilterString = ""
     End Sub
 
     Private Sub BViewOutRetReq_Click(sender As Object, e As EventArgs) Handles BViewOutRetReq.Click
@@ -1440,7 +1484,7 @@ GROUP BY CONCAT('RET-',cg.`description`,'-',so.`sales_order_ol_shop_number`)   "
     End Sub
 
     Private Sub BExportCS3Return_Click(sender As Object, e As EventArgs) Handles BExportCS3Return.Click
-        GVRet.ActiveFilterString = "[is_check] = 'yes'"
+        GVRet.ActiveFilterString = "[is_check] = 'yes' AND [status]='Yes'"
 
         If GVRet.RowCount > 0 Then
             Dim q_in As String = ""
@@ -1461,7 +1505,7 @@ INNER JOIN tb_sales_order so ON so.`id_sales_order`=sod.`id_sales_order`
 INNER JOIN tb_m_comp_contact cc ON cc.`id_comp_contact`=so.`id_store_contact_to`
 INNER JOIN tb_m_comp c ON c.`id_comp`=cc.`id_comp` 
 INNER JOIN tb_m_comp_group cg ON cg.`id_comp_group`=c.`id_comp_group` 
-WHERE CONCAT('RET-',cg.`description`,'-',so.`sales_order_ol_shop_number`) IN (" + q_in.Substring(0, q_in.Length - 2) + ")", 0, True, "", "", "", "")
+WHERE CONCAT('RET-',cg.`comp_group`,'-',so.`sales_order_ol_shop_number`) IN (" + q_in.Substring(0, q_in.Length - 2) + ")", 0, True, "", "", "", "")
 
             If is_exported = "2" Then
                 Dim confirm As DialogResult
@@ -1470,7 +1514,7 @@ WHERE CONCAT('RET-',cg.`description`,'-',so.`sales_order_ol_shop_number`) IN (" 
 
                 If confirm = DialogResult.Yes Then
                     Dim query As String = "
-                        SELECT so.shipping_name, IF(so.shipping_address1='' OR isnull(so.shipping_address1),so.shipping_address,CONCAT(so.shipping_address1, ' ', so.shipping_address2)) AS shipping_address, so.shipping_city, so.shipping_post_code, so.shipping_region, so.shipping_phone, 1 AS qty, CEIL(SUM(sod.grams * sod.sales_order_det_qty)/1000) AS c_weight, opt.jne_good_desc, opt.jne_goods_value, opt.jne_special_instruction, opt.jne_service, CONCAT('RET-',cg.`description`,'-',so.`sales_order_ol_shop_number`) AS order_id, opt.jne_insurance, opt.jne_shipper_name, opt.jne_shipper_address, opt.jne_shipper_city, opt.jne_shipper_zip, opt.jne_shipper_region, opt.jne_shipper_contact, opt.jne_shipper_phone, '' AS destination_code
+                        SELECT so.shipping_name, IF(so.shipping_address1='' OR isnull(so.shipping_address1),so.shipping_address,CONCAT(so.shipping_address1, ' ', so.shipping_address2)) AS shipping_address, so.shipping_city, so.shipping_post_code, so.shipping_region, so.shipping_phone, 1 AS qty, CEIL(SUM(sod.grams * sod.sales_order_det_qty)/1000) AS c_weight, opt.jne_good_desc, opt.jne_goods_value, opt.jne_special_instruction, opt.jne_service, CONCAT('RET-',cg.`comp_group`,'-',so.`sales_order_ol_shop_number`) AS order_id, opt.jne_insurance, opt.jne_shipper_name, opt.jne_shipper_address, opt.jne_shipper_city, opt.jne_shipper_zip, opt.jne_shipper_region, opt.jne_shipper_contact, opt.jne_shipper_phone, '' AS destination_code
                         FROM tb_ol_store_cust_ret_det rd
                         INNER JOIN tb_ol_store_cust_ret r ON r.id_ol_store_cust_ret=rd.id_ol_store_cust_ret
                         INNER JOIN tb_ol_store_ret_list rl ON rl.`id_ol_store_ret_list`=rd.`id_ol_store_ret_list`
@@ -1481,8 +1525,8 @@ WHERE CONCAT('RET-',cg.`description`,'-',so.`sales_order_ol_shop_number`) IN (" 
                         INNER JOIN tb_m_comp_contact cc ON cc.`id_comp_contact`=so.`id_store_contact_to`
                         INNER JOIN tb_m_comp c ON c.`id_comp`=cc.`id_comp` 
                         INNER JOIN tb_m_comp_group cg ON cg.`id_comp_group`=c.`id_comp_group` 
-                        WHERE CONCAT('RET-',cg.`description`,'-',so.`sales_order_ol_shop_number`) IN  (" + q_in.Substring(0, q_in.Length - 2) + ")
-                        GROUP BY CONCAT('RET-',cg.`description`,'-',so.`sales_order_ol_shop_number`) "
+                        WHERE CONCAT('RET-',cg.`comp_group`,'-',so.`sales_order_ol_shop_number`) IN  (" + q_in.Substring(0, q_in.Length - 2) + ")
+                        GROUP BY CONCAT('RET-',cg.`comp_group`,'-',so.`sales_order_ol_shop_number`) "
 
                     Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
@@ -1520,7 +1564,7 @@ WHERE CONCAT('RET-',cg.`description`,'-',so.`sales_order_ol_shop_number`) IN (" 
                         INNER JOIN tb_m_comp_contact cc ON cc.`id_comp_contact`=so.`id_store_contact_to`
                         INNER JOIN tb_m_comp c ON c.`id_comp`=cc.`id_comp` 
                         INNER JOIN tb_m_comp_group cg ON cg.`id_comp_group`=c.`id_comp_group` 
-                        SET r.is_export_awb = 1 WHERE CONCAT('RET-',cg.`description`,'-',so.`sales_order_ol_shop_number`) IN (" + q_in.Substring(0, q_in.Length - 2) + ") ", True, "", "", "", "")
+                        SET r.is_export_awb = 1 WHERE CONCAT('RET-',cg.`comp_group`,'-',so.`sales_order_ol_shop_number`) IN (" + q_in.Substring(0, q_in.Length - 2) + ") ", True, "", "", "", "")
 
                         infoCustom("File saved.")
                     End If

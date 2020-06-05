@@ -709,7 +709,8 @@ sr.`id_sales_return`,c.`id_comp`,c.`comp_number`,c.`comp_name`,r.`rec_date`,sr.`
 ,SUM(posd.`design_price`) AS total
 ,IFNULL(payment.value,0) AS total_paid
 ,IFNULL(payment_pending.jml,0) AS total_pending
-,(SUM(posd.`design_price`) - IFNULL(payment.value,0)) AS diff
+,(SUM(posd.`design_price`) - IFNULL(payment.value,0)) AS diff,
+rq.rek_no, rq.rek_name, rq.rek_bank, rq.rek_branch
 FROM tb_sales_return_det srd
 INNER JOIN tb_sales_return sr ON sr.`id_sales_return`=srd.`id_sales_return` AND sr.`id_report_status`=6
 INNER JOIN tb_sales_return_order_det rord ON rord.`id_sales_return_order_det`=srd.`id_sales_return_order_det`
@@ -719,6 +720,7 @@ INNER JOIN tb_sales_pos pos ON pos.`id_sales_pos`=posd.id_sales_pos AND pos.`id_
 INNER JOIN tb_a_acc acc ON acc.id_acc=pos.`id_acc_ar`
 INNER JOIN tb_ol_store_ret_det rd ON rd.`id_ol_store_ret_det`=rl.`id_ol_store_ret_det`
 INNER JOIN tb_ol_store_ret r ON r.`id_ol_store_ret`=rd.`id_ol_store_ret`
+INNER JOIN tb_ol_store_ret_req rq ON rq.id_ol_store_ret_req = r.id_ol_store_ret_req
 INNER JOIN tb_m_comp_group cg ON cg.`id_comp_group`=r.`id_comp_group` AND cg.is_refund=1
 INNER JOIN tb_sales_order_det sod ON sod.`id_sales_order_det`=rd.`id_sales_order_det`
 INNER JOIN tb_sales_order so ON so.`id_sales_order`=sod.`id_sales_order`

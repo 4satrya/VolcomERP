@@ -5938,7 +5938,25 @@ WHERE pd.balance_due=pd.`value` AND pd.`id_pn`='" & id_report & "'"
                         If dt.Rows(i)("report_mark_type").ToString = "118" Then 'payment
                             Dim qc As String = "UPDATE tb_sales_pos 
                                                 SET is_close_rec_payment='1'
-                                                WHERE id_sales_pos='" & dt.Rows(i)("id_report").ToString & "'"
+                                                WHERE id_sales_pos='" & dt.Rows(i)("id_report").ToString & "';
+                            -- update stt
+                            UPDATE tb_ol_store_ret_list main
+                            INNER JOIN (
+                                SELECT spd.id_ol_store_ret_list
+                                FROM tb_sales_pos sp 
+                                INNER JOIN tb_sales_pos_det spd ON spd.id_sales_pos = sp.id_sales_pos
+                                WHERE sp.id_sales_pos='" & dt.Rows(i)("id_report").ToString & "'
+                                GROUP BY spd.id_ol_store_ret_list
+                            ) src ON src.id_ol_store_ret_list = main.id_ol_store_ret_list
+                            SET main.id_ol_store_ret_stt=3; 
+                            -- update stt order
+                            INSERT INTO tb_sales_order_det_status(id_sales_order_det, `status`, `status_date`, `input_status_date`, is_internal)
+                            SELECT rd.id_sales_order_det, stt.ol_store_ret_stt, NOW(), NOW(),1
+                            FROM tb_sales_pos_det d
+                            INNER JOIN tb_ol_store_ret_list rl ON rl.id_ol_store_ret_list = d.id_ol_store_ret_list
+                            INNER JOIN tb_ol_store_ret_det rd ON rd.id_ol_store_ret_det = rl.id_ol_store_ret_det
+                            JOIN tb_lookup_ol_store_ret_stt stt ON stt.id_ol_store_ret_stt=3
+                            WHERE d.id_sales_pos='" & dt.Rows(i)("id_report").ToString & "'; "
                             execute_non_query(qc, True, "", "", "", "")
                         End If
                     Next
@@ -7939,9 +7957,17 @@ WHERE invd.`id_inv_mat`='" & id_report & "'"
             If id_status_reportx = "6" Then
                 'action completed
                 Dim query_ins As String = "UPDATE `tb_ol_store_ret_list` rl
-INNER JOIN tb_ol_store_cust_ret_det rd ON rd.`id_ol_store_ret_list`=rl.`id_ol_store_ret_list`
-SET rl.`id_ol_store_ret_stt`='5'
-WHERE rd.`id_ol_store_cust_ret`='" & id_report & "'"
+                INNER JOIN tb_ol_store_cust_ret_det rd ON rd.`id_ol_store_ret_list`=rl.`id_ol_store_ret_list`
+                SET rl.`id_ol_store_ret_stt`='5'
+                WHERE rd.`id_ol_store_cust_ret`='" & id_report & "'; 
+                -- update status internal order
+                INSERT INTO tb_sales_order_det_status(id_sales_order_det, `status`, `status_date`, `input_status_date`, is_internal)
+                SELECT rd.id_sales_order_det, stt.ol_store_ret_stt, NOW(), NOW(),1
+                FROM tb_ol_store_cust_ret_det d
+                INNER JOIN tb_ol_store_ret_list rl ON rl.id_ol_store_ret_list = d.id_ol_store_ret_list
+                INNER JOIN tb_ol_store_ret_det rd ON rd.id_ol_store_ret_det = rl.id_ol_store_ret_det
+                JOIN tb_lookup_ol_store_ret_stt stt ON stt.id_ol_store_ret_stt=5
+                WHERE d.id_ol_store_cust_ret='" & id_report & "'; "
                 execute_non_query(query_ins, True, "", "", "", "")
             End If
 

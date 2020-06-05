@@ -1042,6 +1042,8 @@ Public Class FormSalesReturnDet
 
         'cek stok
         If id_ret_type = "1" Or id_ret_type = "3" Then
+            Cursor = Cursors.WaitCursor
+            GVItemList.ActiveFilterString = "[sales_return_det_qty]>0 "
             If GVItemList.RowCount > 0 Then
                 Dim qs As String = "DELETE FROM tb_temp_val_stock WHERE id_user='" + id_user + "'; 
                             INSERT INTO tb_temp_val_stock(id_user, code, name, size, id_product, qty) VALUES "
@@ -1051,7 +1053,7 @@ Public Class FormSalesReturnDet
                         qs += ","
                         id_prod += ","
                     End If
-                    qs += "('" + id_user + "','" + GVItemList.GetRowCellValue(s, "code").ToString + "','" + addSlashes(GVItemList.GetRowCellValue(s, "name").ToString) + "', '" + GVItemList.GetRowCellValue(s, "size").ToString + "', '" + GVItemList.GetRowCellValue(s, "id_product").ToString + "', '" + decimalSQL(GVItemList.GetRowCellValue(s, "sales_return_order_det_qty").ToString) + "') "
+                    qs += "('" + id_user + "','" + GVItemList.GetRowCellValue(s, "code").ToString + "','" + addSlashes(GVItemList.GetRowCellValue(s, "name").ToString) + "', '" + GVItemList.GetRowCellValue(s, "size").ToString + "', '" + GVItemList.GetRowCellValue(s, "id_product").ToString + "', '" + decimalSQL(GVItemList.GetRowCellValue(s, "sales_return_det_qty").ToString) + "') "
                     id_prod += GVItemList.GetRowCellValue(s, "id_product").ToString
                 Next
                 qs += "; CALL view_validate_stock(" + id_user + ", " + id_store + ", '" + id_prod + "',1); "
@@ -1064,6 +1066,8 @@ Public Class FormSalesReturnDet
                     Exit Sub
                 End If
             End If
+            makeSafeGV(GVItemList)
+            Cursor = Cursors.Default
         End If
 
         If Not formIsValidInPanel(EPForm, PanelControlTopLeft) Or Not formIsValidInPanel(EPForm, PanelControlTopRight) Then

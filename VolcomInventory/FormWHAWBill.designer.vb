@@ -212,6 +212,7 @@ Partial Class FormWHAWBill
         Me.GridColumn50 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn51 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn52 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn59 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControl5 = New DevExpress.XtraEditors.PanelControl()
         Me.BExportCS3Return = New DevExpress.XtraEditors.SimpleButton()
         Me.BGenKoliRetReq = New DevExpress.XtraEditors.SimpleButton()
@@ -2091,7 +2092,7 @@ Partial Class FormWHAWBill
         '
         'GVRet
         '
-        Me.GVRet.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn41, Me.GridColumn42, Me.GridColumn43, Me.GridColumn44, Me.GridColumn45, Me.GridColumn46, Me.GridColumn47, Me.GridColumn48, Me.GridColumn49, Me.GridColumn50, Me.GridColumn51, Me.GridColumn52})
+        Me.GVRet.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn41, Me.GridColumn42, Me.GridColumn43, Me.GridColumn44, Me.GridColumn45, Me.GridColumn46, Me.GridColumn47, Me.GridColumn48, Me.GridColumn49, Me.GridColumn50, Me.GridColumn51, Me.GridColumn52, Me.GridColumn59})
         Me.GVRet.GridControl = Me.GCRet
         Me.GVRet.Name = "GVRet"
         Me.GVRet.OptionsCustomization.AllowColumnMoving = False
@@ -2255,6 +2256,14 @@ Partial Class FormWHAWBill
         Me.GridColumn52.Name = "GridColumn52"
         Me.GridColumn52.Visible = True
         Me.GridColumn52.VisibleIndex = 5
+        '
+        'GridColumn59
+        '
+        Me.GridColumn59.Caption = "Exported to CS3"
+        Me.GridColumn59.FieldName = "status"
+        Me.GridColumn59.Name = "GridColumn59"
+        Me.GridColumn59.Visible = True
+        Me.GridColumn59.VisibleIndex = 10
         '
         'PanelControl5
         '
@@ -3498,4 +3507,5 @@ Partial Class FormWHAWBill
     Friend WithEvents GridColumn58 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn57 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents BExportCS3Return As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GridColumn59 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

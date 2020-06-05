@@ -2704,6 +2704,12 @@
     <Compile Include="FormOLStoreDet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormOlStoreDetailRefund.Designer.vb">
+      <DependentUpon>FormOlStoreDetailRefund.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormOlStoreDetailRefund.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormOLStoreDetCheckStockvb.Designer.vb">
       <DependentUpon>FormOLStoreDetCheckStockvb.vb</DependentUpon>
     </Compile>
@@ -9436,6 +9442,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormOLStoreDet.resx">
       <DependentUpon>FormOLStoreDet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormOlStoreDetailRefund.resx">
+      <DependentUpon>FormOlStoreDetailRefund.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormOLStoreDetCheckStockvb.resx">
       <DependentUpon>FormOLStoreDetCheckStockvb.vb</DependentUpon>

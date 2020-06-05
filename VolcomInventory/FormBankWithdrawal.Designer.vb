@@ -19,13 +19,14 @@ Partial Class FormBankWithdrawal
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormBankWithdrawal))
         Me.XTCPO = New DevExpress.XtraTab.XtraTabControl()
         Me.XTPPO = New DevExpress.XtraTab.XtraTabPage()
         Me.XTPPOList = New DevExpress.XtraTab.XtraTabControl()
         Me.XPOListActive = New DevExpress.XtraTab.XtraTabPage()
         Me.GCPOList = New DevExpress.XtraGrid.GridControl()
-        Me.ContextMenuStrip = New System.Windows.Forms.ContextMenuStrip()
+        Me.ContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ToolStripMenuItemAdd = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewBPLToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GVPOList = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -173,7 +174,7 @@ Partial Class FormBankWithdrawal
         Me.GridColumn38 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.XTPFGPO = New DevExpress.XtraTab.XtraTabPage()
         Me.GCFGPO = New DevExpress.XtraGrid.GridControl()
-        Me.ViewMenu = New System.Windows.Forms.ContextMenuStrip()
+        Me.ViewMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ViewDetailToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GVFGPO = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn44 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -281,6 +282,7 @@ Partial Class FormBankWithdrawal
         Me.GridColumn142 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemTextEdit4 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.PanelControl7 = New DevExpress.XtraEditors.PanelControl()
+        Me.CESelectAllCA = New DevExpress.XtraEditors.CheckEdit()
         Me.DECATo = New DevExpress.XtraEditors.DateEdit()
         Me.DECAFrom = New DevExpress.XtraEditors.DateEdit()
         Me.SBViewCashAdvance = New DevExpress.XtraEditors.SimpleButton()
@@ -302,9 +304,12 @@ Partial Class FormBankWithdrawal
         Me.RepositoryItemTextEdit3 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.RepositoryItemCheckEdit6 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.BloadWaiting = New DevExpress.XtraEditors.SimpleButton()
-        Me.ViewBPL = New System.Windows.Forms.ContextMenuStrip()
+        Me.ViewBPL = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.VDItemList = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CESelectAllCA = New DevExpress.XtraEditors.CheckEdit()
+        Me.GridColumnrek_no = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnrek_name = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnrek_bank = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnrek_branch = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XTCPO, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCPO.SuspendLayout()
         Me.XTPPO.SuspendLayout()
@@ -391,6 +396,7 @@ Partial Class FormBankWithdrawal
         CType(Me.RepositoryItemTextEdit4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl7, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl7.SuspendLayout()
+        CType(Me.CESelectAllCA.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DECATo.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DECATo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DECAFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -401,7 +407,6 @@ Partial Class FormBankWithdrawal
         CType(Me.RepositoryItemTextEdit3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemCheckEdit6, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ViewBPL.SuspendLayout()
-        CType(Me.CESelectAllCA.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'XTCPO
@@ -2715,7 +2720,7 @@ Partial Class FormBankWithdrawal
         '
         'GVRefund
         '
-        Me.GVRefund.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn101, Me.GridColumn102, Me.GridColumn103, Me.GridColumn117, Me.GridColumn106, Me.GridColumn108, Me.GridColumn109, Me.GridColumn110, Me.GridColumn111, Me.GridColumn113, Me.GridColumn114, Me.GridColumn116, Me.GridColumn107})
+        Me.GVRefund.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn101, Me.GridColumn102, Me.GridColumn103, Me.GridColumn117, Me.GridColumn106, Me.GridColumn108, Me.GridColumn109, Me.GridColumn110, Me.GridColumn111, Me.GridColumn113, Me.GridColumn114, Me.GridColumn116, Me.GridColumn107, Me.GridColumnrek_no, Me.GridColumnrek_name, Me.GridColumnrek_bank, Me.GridColumnrek_branch})
         Me.GVRefund.GridControl = Me.GCRefund
         Me.GVRefund.Name = "GVRefund"
         Me.GVRefund.OptionsFind.AlwaysVisible = True
@@ -2783,7 +2788,7 @@ Partial Class FormBankWithdrawal
         Me.GridColumn108.OptionsColumn.AllowEdit = False
         Me.GridColumn108.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total", "{0:N2}")})
         Me.GridColumn108.Visible = True
-        Me.GridColumn108.VisibleIndex = 7
+        Me.GridColumn108.VisibleIndex = 11
         '
         'GridColumn109
         '
@@ -2837,7 +2842,7 @@ Partial Class FormBankWithdrawal
         Me.GridColumn113.OptionsColumn.AllowEdit = False
         Me.GridColumn113.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_paid", "{0:N2}")})
         Me.GridColumn113.Visible = True
-        Me.GridColumn113.VisibleIndex = 8
+        Me.GridColumn113.VisibleIndex = 12
         '
         'GridColumn114
         '
@@ -2861,7 +2866,7 @@ Partial Class FormBankWithdrawal
         Me.GridColumn116.UnboundExpression = "[total] - [total_paid]"
         Me.GridColumn116.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
         Me.GridColumn116.Visible = True
-        Me.GridColumn116.VisibleIndex = 9
+        Me.GridColumn116.VisibleIndex = 13
         '
         'GridColumn107
         '
@@ -2873,7 +2878,7 @@ Partial Class FormBankWithdrawal
         Me.GridColumn107.FieldName = "total_pending"
         Me.GridColumn107.Name = "GridColumn107"
         Me.GridColumn107.Visible = True
-        Me.GridColumn107.VisibleIndex = 10
+        Me.GridColumn107.VisibleIndex = 14
         '
         'PanelControl5
         '
@@ -3086,6 +3091,14 @@ Partial Class FormBankWithdrawal
         Me.PanelControl7.Name = "PanelControl7"
         Me.PanelControl7.Size = New System.Drawing.Size(1091, 44)
         Me.PanelControl7.TabIndex = 29
+        '
+        'CESelectAllCA
+        '
+        Me.CESelectAllCA.Location = New System.Drawing.Point(12, 14)
+        Me.CESelectAllCA.Name = "CESelectAllCA"
+        Me.CESelectAllCA.Properties.Caption = "Select All"
+        Me.CESelectAllCA.Size = New System.Drawing.Size(75, 19)
+        Me.CESelectAllCA.TabIndex = 8919
         '
         'DECATo
         '
@@ -3304,13 +3317,37 @@ Partial Class FormBankWithdrawal
         Me.VDItemList.Size = New System.Drawing.Size(112, 22)
         Me.VDItemList.Text = "History"
         '
-        'CESelectAllCA
+        'GridColumnrek_no
         '
-        Me.CESelectAllCA.Location = New System.Drawing.Point(12, 14)
-        Me.CESelectAllCA.Name = "CESelectAllCA"
-        Me.CESelectAllCA.Properties.Caption = "Select All"
-        Me.CESelectAllCA.Size = New System.Drawing.Size(75, 19)
-        Me.CESelectAllCA.TabIndex = 8919
+        Me.GridColumnrek_no.Caption = "No Rek"
+        Me.GridColumnrek_no.FieldName = "rek_no"
+        Me.GridColumnrek_no.Name = "GridColumnrek_no"
+        Me.GridColumnrek_no.Visible = True
+        Me.GridColumnrek_no.VisibleIndex = 7
+        '
+        'GridColumnrek_name
+        '
+        Me.GridColumnrek_name.Caption = "Atas Nama"
+        Me.GridColumnrek_name.FieldName = "rek_name"
+        Me.GridColumnrek_name.Name = "GridColumnrek_name"
+        Me.GridColumnrek_name.Visible = True
+        Me.GridColumnrek_name.VisibleIndex = 8
+        '
+        'GridColumnrek_bank
+        '
+        Me.GridColumnrek_bank.Caption = "Bank"
+        Me.GridColumnrek_bank.FieldName = "rek_bank"
+        Me.GridColumnrek_bank.Name = "GridColumnrek_bank"
+        Me.GridColumnrek_bank.Visible = True
+        Me.GridColumnrek_bank.VisibleIndex = 9
+        '
+        'GridColumnrek_branch
+        '
+        Me.GridColumnrek_branch.Caption = "Cabang"
+        Me.GridColumnrek_branch.FieldName = "rek_branch"
+        Me.GridColumnrek_branch.Name = "GridColumnrek_branch"
+        Me.GridColumnrek_branch.Visible = True
+        Me.GridColumnrek_branch.VisibleIndex = 10
         '
         'FormBankWithdrawal
         '
@@ -3415,6 +3452,7 @@ Partial Class FormBankWithdrawal
         CType(Me.RepositoryItemTextEdit4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl7, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl7.ResumeLayout(False)
+        CType(Me.CESelectAllCA.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DECATo.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DECATo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DECAFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -3425,7 +3463,6 @@ Partial Class FormBankWithdrawal
         CType(Me.RepositoryItemTextEdit3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemCheckEdit6, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ViewBPL.ResumeLayout(False)
-        CType(Me.CESelectAllCA.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -3715,4 +3752,8 @@ Partial Class FormBankWithdrawal
     Friend WithEvents GridColumn142 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents BCreateBookTrf As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents CESelectAllCA As DevExpress.XtraEditors.CheckEdit
+    Friend WithEvents GridColumnrek_no As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnrek_name As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnrek_bank As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnrek_branch As DevExpress.XtraGrid.Columns.GridColumn
 End Class

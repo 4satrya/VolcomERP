@@ -9,7 +9,7 @@ Module Database
     Public app_password As String
     Public app_database As String
 
-    Public is_test As String = "1"
+    Public is_test As String = "2"
 
     Function execute_non_query(ByVal command_text As String, ByVal is_local As Boolean, ByVal host As String, ByVal username As String, ByVal password As String, ByVal database As String)
         If is_local = True Then

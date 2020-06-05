@@ -1785,8 +1785,18 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             FormLetterOfStatementDet.ShowDialog()
         ElseIf formName = "FormRetOlStore" Then
             If FormRetOlStore.XTCData.SelectedTabPageIndex = 1 Then
-                FormRetOLStoreDet.action = "ins"
-                FormRetOLStoreDet.ShowDialog()
+                'cek awb
+                Dim qcek As String = "SELECT d.id_awbill, m.awbill_no 
+                FROM tb_wh_awbill_det_in d 
+                INNER JOIN tb_wh_awbill m ON m.id_awbill = d.id_awbill
+                WHERE d.id_ol_store_ret_req='" + FormRetOlStore.GVOrderList.GetFocusedRowCellValue("id_ol_store_ret_req").ToString + "' AND m.awbill_no!='' "
+                Dim dcek As DataTable = execute_query(qcek, -1, True, "", "", "", "")
+                If dcek.Rows.Count > 0 Then
+                    FormRetOLStoreDet.action = "ins"
+                    FormRetOLStoreDet.ShowDialog()
+                Else
+                    stopCustom("Please input AWB number first.")
+                End If
             End If
         ElseIf formName = "FormRefundOLStore" Then
             If FormRefundOLStore.XTCData.SelectedTabPageIndex = 1 Then

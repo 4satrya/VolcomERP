@@ -379,6 +379,12 @@
     <Compile Include="FormBankWithdrawalAttachement.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormBankWithdrawalBookTransfer.Designer.vb">
+      <DependentUpon>FormBankWithdrawalBookTransfer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormBankWithdrawalBookTransfer.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormBudgetProdDemand.Designer.vb">
       <DependentUpon>FormBudgetProdDemand.vb</DependentUpon>
     </Compile>
@@ -2698,6 +2704,12 @@
     <Compile Include="FormOLStoreDet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormOlStoreDetailRefund.Designer.vb">
+      <DependentUpon>FormOlStoreDetailRefund.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormOlStoreDetailRefund.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormOLStoreDetCheckStockvb.Designer.vb">
       <DependentUpon>FormOLStoreDetCheckStockvb.vb</DependentUpon>
     </Compile>
@@ -2804,6 +2816,18 @@
       <DependentUpon>FormPaymentMissingDet.vb</DependentUpon>
     </Compile>
     <Compile Include="FormPaymentMissingDet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPayoutHistory.Designer.vb">
+      <DependentUpon>FormPayoutHistory.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormPayoutHistory.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPayoutHistoryDetail.Designer.vb">
+      <DependentUpon>FormPayoutHistoryDetail.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormPayoutHistoryDetail.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormPopUpDept.Designer.vb">
@@ -7537,6 +7561,12 @@
     <Compile Include="ReportPaymentMissing.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ReportPayout.Designer.vb">
+      <DependentUpon>ReportPayout.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportPayout.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ReportPayrollAll.Designer.vb">
       <DependentUpon>ReportPayrollAll.vb</DependentUpon>
     </Compile>
@@ -8199,6 +8229,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormBankWithdrawalAttachement.resx">
       <DependentUpon>FormBankWithdrawalAttachement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormBankWithdrawalBookTransfer.resx">
+      <DependentUpon>FormBankWithdrawalBookTransfer.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormBudgetProdDemand.resx">
       <DependentUpon>FormBudgetProdDemand.vb</DependentUpon>
@@ -9410,6 +9443,9 @@
     <EmbeddedResource Include="FormOLStoreDet.resx">
       <DependentUpon>FormOLStoreDet.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormOlStoreDetailRefund.resx">
+      <DependentUpon>FormOlStoreDetailRefund.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormOLStoreDetCheckStockvb.resx">
       <DependentUpon>FormOLStoreDetCheckStockvb.vb</DependentUpon>
     </EmbeddedResource>
@@ -9463,6 +9499,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormPaymentMissingDet.resx">
       <DependentUpon>FormPaymentMissingDet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPayoutHistory.resx">
+      <DependentUpon>FormPayoutHistory.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPayoutHistoryDetail.resx">
+      <DependentUpon>FormPayoutHistoryDetail.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormPopUpDept.resx">
       <DependentUpon>FormPopUpDept.vb</DependentUpon>
@@ -12284,6 +12326,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportPaymentMissing.resx">
       <DependentUpon>ReportPaymentMissing.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportPayout.resx">
+      <DependentUpon>ReportPayout.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportPayrollAll.resx">
       <DependentUpon>ReportPayrollAll.vb</DependentUpon>

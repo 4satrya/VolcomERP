@@ -321,7 +321,7 @@
         IFNULL(cn.id_sales_pos,0) AS `id_cn`, cn.sales_pos_number AS `cn_number`, cn.sales_pos_date AS `cn_date`, cn.report_status AS `cn_status`,
         IFNULL(rec_pay.id_rec_payment,0) AS `id_rec_pay`,rec_pay.`number` AS `rec_pay_number`, rec_pay.date_created AS `rec_pay_date`,IF(inv.is_close_rec_payment=1,'Paid','Pending') AS `rec_pay_status`,
         prt.`id_pre_return`, prt.`pre_return_number`, prt.`pre_return_date`, prt.`pre_return_status`,
-        ret_cust.`id_ret_cust`,ret_cust.`ret_cust_number`, ret_cust.`ret_cust_date`, ret_cust.`ret_cust_status`,
+        ret_cust.`id_ret_cust`,ret_cust.`ret_cust_number`, ret_cust.`ret_cust_date`, ret_cust.`ret_cust_status`, ret_cust.`ret_cust_awb`,
         ret_request.`id_ret_request`, ret_request.`ret_request_awb`,ret_request.`ret_request_number`, ret_request.`ret_request_created_date`,ret_request.`ret_request_date`, ret_request.`ret_request_status`,
         refund.`id_bbk`, refund.`bbk_number`, refund.`bbk_created_date`, refund.`bbk_status`,
         '0' AS `report_mark_type`, 
@@ -436,12 +436,19 @@
         ) prt ON prt.id_sales_order_det = sod.id_sales_order_det
         LEFT JOIN (
             SELECT rd.id_sales_order_det, c.id_ol_store_cust_ret AS `id_ret_cust`,
-            c.number AS `ret_cust_number`, c.created_date AS `ret_cust_date`, stt.id_report_status, stt.report_status AS `ret_cust_status`
+            c.number AS `ret_cust_number`, c.created_date AS `ret_cust_date`, stt.id_report_status, stt.report_status AS `ret_cust_status`, aw.awbill_no AS `ret_cust_awb`
             FROM tb_ol_store_cust_ret_det cd
             INNER JOIN tb_ol_store_ret_list l ON l.id_ol_store_ret_list = cd.id_ol_store_ret_list
             INNER JOIN tb_ol_store_ret_det rd ON rd.id_ol_store_ret_det = l.id_ol_store_ret_det
             INNER JOIN tb_ol_store_cust_ret c ON c.id_ol_store_cust_ret = cd.id_ol_store_cust_ret
             INNER JOIN tb_lookup_report_status stt ON stt.id_report_status = c.id_report_status
+            LEFT JOIN (
+                SELECT d.id_ol_store_cust_ret, m.awbill_no
+                FROM tb_wh_awbill_det d
+                INNER JOIN tb_wh_awbill m ON m.id_awbill = d.id_awbill
+                WHERE !ISNULL(d.id_ol_store_cust_ret)
+                GROUP BY d.id_ol_store_cust_ret
+            ) aw ON aw.id_ol_store_cust_ret = c.id_ol_store_cust_ret
             WHERE c.id_report_status!=5
             GROUP BY rd.id_sales_order_det
         ) ret_cust ON ret_cust.id_sales_order_det = sod.id_sales_order_det

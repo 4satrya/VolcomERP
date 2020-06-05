@@ -21,6 +21,12 @@ Partial Class FormWHAWBillReff
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormWHAWBillReff))
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.SLEComp = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView3 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn24 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn29 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn25 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.BLoad2 = New DevExpress.XtraEditors.SimpleButton()
         Me.BLoad = New DevExpress.XtraEditors.SimpleButton()
         Me.TEAWBReff = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
@@ -38,22 +44,16 @@ Partial Class FormWHAWBillReff
         Me.GridColumnreport_status = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
-        Me.BLoad2 = New DevExpress.XtraEditors.SimpleButton()
-        Me.SLEComp = New DevExpress.XtraEditors.SearchLookUpEdit()
-        Me.GridView3 = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.GridColumn24 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn29 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn25 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
+        CType(Me.SLEComp.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEAWBReff.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
         CType(Me.GCDOERP, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVDOERP, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.SLEComp.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GridView3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl1
@@ -68,6 +68,57 @@ Partial Class FormWHAWBillReff
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(857, 42)
         Me.PanelControl1.TabIndex = 0
+        '
+        'SLEComp
+        '
+        Me.SLEComp.Location = New System.Drawing.Point(386, 12)
+        Me.SLEComp.Name = "SLEComp"
+        Me.SLEComp.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEComp.Properties.View = Me.GridView3
+        Me.SLEComp.Size = New System.Drawing.Size(185, 20)
+        Me.SLEComp.TabIndex = 13
+        Me.SLEComp.Visible = False
+        '
+        'GridView3
+        '
+        Me.GridView3.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn24, Me.GridColumn29, Me.GridColumn25})
+        Me.GridView3.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView3.Name = "GridView3"
+        Me.GridView3.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView3.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn24
+        '
+        Me.GridColumn24.Caption = "ID Comp"
+        Me.GridColumn24.FieldName = "id_comp"
+        Me.GridColumn24.Name = "GridColumn24"
+        '
+        'GridColumn29
+        '
+        Me.GridColumn29.Caption = "Number"
+        Me.GridColumn29.FieldName = "comp_number"
+        Me.GridColumn29.Name = "GridColumn29"
+        Me.GridColumn29.Visible = True
+        Me.GridColumn29.VisibleIndex = 0
+        Me.GridColumn29.Width = 269
+        '
+        'GridColumn25
+        '
+        Me.GridColumn25.Caption = "Store"
+        Me.GridColumn25.FieldName = "comp_name"
+        Me.GridColumn25.Name = "GridColumn25"
+        Me.GridColumn25.Visible = True
+        Me.GridColumn25.VisibleIndex = 1
+        Me.GridColumn25.Width = 1363
+        '
+        'BLoad2
+        '
+        Me.BLoad2.Location = New System.Drawing.Point(577, 10)
+        Me.BLoad2.Name = "BLoad2"
+        Me.BLoad2.Size = New System.Drawing.Size(56, 23)
+        Me.BLoad2.TabIndex = 4
+        Me.BLoad2.Text = "load"
+        Me.BLoad2.Visible = False
         '
         'BLoad
         '
@@ -232,57 +283,6 @@ Partial Class FormWHAWBillReff
         Me.RepositoryItemCheckEdit1.ValueChecked = "yes"
         Me.RepositoryItemCheckEdit1.ValueUnchecked = "no"
         '
-        'BLoad2
-        '
-        Me.BLoad2.Location = New System.Drawing.Point(577, 10)
-        Me.BLoad2.Name = "BLoad2"
-        Me.BLoad2.Size = New System.Drawing.Size(56, 23)
-        Me.BLoad2.TabIndex = 4
-        Me.BLoad2.Text = "load"
-        Me.BLoad2.Visible = False
-        '
-        'SLEComp
-        '
-        Me.SLEComp.Location = New System.Drawing.Point(386, 12)
-        Me.SLEComp.Name = "SLEComp"
-        Me.SLEComp.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.SLEComp.Properties.View = Me.GridView3
-        Me.SLEComp.Size = New System.Drawing.Size(185, 20)
-        Me.SLEComp.TabIndex = 13
-        Me.SLEComp.Visible = False
-        '
-        'GridView3
-        '
-        Me.GridView3.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn24, Me.GridColumn29, Me.GridColumn25})
-        Me.GridView3.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
-        Me.GridView3.Name = "GridView3"
-        Me.GridView3.OptionsSelection.EnableAppearanceFocusedCell = False
-        Me.GridView3.OptionsView.ShowGroupPanel = False
-        '
-        'GridColumn24
-        '
-        Me.GridColumn24.Caption = "ID Comp"
-        Me.GridColumn24.FieldName = "id_comp"
-        Me.GridColumn24.Name = "GridColumn24"
-        '
-        'GridColumn29
-        '
-        Me.GridColumn29.Caption = "Number"
-        Me.GridColumn29.FieldName = "comp_number"
-        Me.GridColumn29.Name = "GridColumn29"
-        Me.GridColumn29.Visible = True
-        Me.GridColumn29.VisibleIndex = 0
-        Me.GridColumn29.Width = 269
-        '
-        'GridColumn25
-        '
-        Me.GridColumn25.Caption = "Store"
-        Me.GridColumn25.FieldName = "comp_name"
-        Me.GridColumn25.Name = "GridColumn25"
-        Me.GridColumn25.Visible = True
-        Me.GridColumn25.VisibleIndex = 1
-        Me.GridColumn25.Width = 1363
-        '
         'FormWHAWBillReff
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -300,14 +300,14 @@ Partial Class FormWHAWBillReff
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         Me.PanelControl1.PerformLayout()
+        CType(Me.SLEComp.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEAWBReff.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl2.ResumeLayout(False)
         CType(Me.GCDOERP, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVDOERP, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.SLEComp.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GridView3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

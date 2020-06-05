@@ -17,6 +17,10 @@
     End Sub
 
     Sub actionLoad()
+        view_currency()
+        TEBeforeKurs.EditValue = 0
+        TEKurs.EditValue = 1
+
         'focus
         ActiveControl = SLECOA
 
@@ -48,6 +52,10 @@
             SLEComp.EditValue = FormBankWithdrawalDet.GVList.GetFocusedRowCellValue("id_comp").ToString
             LEDK.ItemIndex = LEDK.Properties.GetDataSourceRowIndex("id_dc", FormBankWithdrawalDet.GVList.GetFocusedRowCellValue("id_dc").ToString)
             TxtAmount.EditValue = FormBankWithdrawalDet.GVList.GetFocusedRowCellValue("value_view")
+            '
+            LECurrency.ItemIndex = LECurrency.Properties.GetDataSourceRowIndex("id_currency", FormBankWithdrawalDet.GVList.GetFocusedRowCellValue("id_currency").ToString)
+            TEKurs.EditValue = FormBankWithdrawalDet.GVList.GetFocusedRowCellValue("kurs")
+            TEBeforeKurs.EditValue = FormBankWithdrawalDet.GVList.GetFocusedRowCellValue("val_bef_kurs")
         End If
     End Sub
 
@@ -109,10 +117,10 @@
                 newRow("value") = TxtAmount.EditValue
                 newRow("balance_due") = TxtAmount.EditValue
             End If
-            newRow("kurs") = 0
-            newRow("id_currency") = "1"
-            newRow("currency") = "Rp"
-            newRow("val_bef_kurs") = 0
+            newRow("kurs") = TEKurs.EditValue
+            newRow("id_currency") = LECurrency.EditValue
+            newRow("currency") = LECurrency.Text
+            newRow("val_bef_kurs") = TEBeforeKurs.EditValue
             newRow("note") = addSlashes(TxtDescription.Text)
             newRow("id_dc") = LEDK.EditValue.ToString
             newRow("dc_code") = LEDK.Text
@@ -146,11 +154,37 @@
             FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("note", addSlashes(TxtDescription.Text))
             FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("id_dc", LEDK.EditValue.ToString)
             FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("dc_code", LEDK.Text)
+
+            FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("id_currency", LECurrency.EditValue)
+            FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("currency", LECurrency.Text)
+            FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("val_bef_kurs", TEBeforeKurs.EditValue)
+            FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("kurs", TEKurs.EditValue)
+
             FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("value_view", TxtAmount.EditValue)
             FormBankWithdrawalDet.GCList.RefreshDataSource()
             FormBankWithdrawalDet.GVList.RefreshData()
             FormBankWithdrawalDet.calculate_amount()
             Close()
         End If
+    End Sub
+
+    Private Sub TEKurs_EditValueChanged(sender As Object, e As EventArgs) Handles TEKurs.EditValueChanged
+        calculate()
+    End Sub
+
+    Sub calculate()
+        Try
+            TxtAmount.EditValue = TEBeforeKurs.EditValue * TEKurs.EditValue
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Private Sub view_currency()
+        Dim query As String = "SELECT id_currency,currency FROM tb_lookup_currency"
+        viewLookupQuery(LECurrency, query, 0, "currency", "id_currency")
+    End Sub
+
+    Private Sub TEBeforeKurs_EditValueChanged(sender As Object, e As EventArgs) Handles TEBeforeKurs.EditValueChanged
+        calculate()
     End Sub
 End Class

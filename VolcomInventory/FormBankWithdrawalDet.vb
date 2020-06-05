@@ -4,6 +4,7 @@
     Public id_payment As String = "-1"
     '
     Public is_view As String = "-1"
+    Public is_book_transfer As Boolean = False
     '
     Private Sub FormBankWithdrawalDet_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
         Dispose()
@@ -28,7 +29,9 @@
             BMark.Visible = False
             BtnSave.Visible = True
             '
-            If report_mark_type = "159" Then 'BBK umum
+            If is_book_transfer = True Then
+                FormBankWithdrawalBookTransfer.ShowDialog()
+            ElseIf report_mark_type = "159" Then 'BBK umum
                 'load header
                 Try
                     SLEVendor.EditValue = FormBankWithdrawal.SLEVendorPayment.EditValue
@@ -781,6 +784,49 @@
                 MENote.Text = me_note
 
                 calculate_amount()
+            ElseIf report_mark_type = "167" Then 'cash advance
+                'load header
+                SLEVendor.EditValue = 1
+                SLEPayType.EditValue = id_pay_type
+                SLEReportType.EditValue = report_mark_type
+
+                Dim me_note As String = ""
+
+                Dim acc_jp As DataTable = execute_query("SELECT acc.id_acc, acc.acc_name, acc.acc_description, comp.comp_name As vendor, comp.id_comp, comp.comp_number FROM tb_a_acc As acc, tb_m_comp As comp WHERE acc.id_acc = 11 And comp.id_comp = 1", -1, True, "", "", "", "")
+
+                Dim id_acc_t_jk As Integer = acc_jp.Rows(0)("id_acc")
+                Dim acc_name_t_jk As String = acc_jp.Rows(0)("acc_name").ToString
+                Dim acc_description_t_jk As String = acc_jp.Rows(0)("acc_description").ToString
+                Dim vendor_t_jk As String = acc_jp.Rows(0)("vendor").ToString
+                Dim id_comp_t_jk As Integer = acc_jp.Rows(0)("id_comp")
+                Dim comp_number_t_jk As String = acc_jp.Rows(0)("comp_number").ToString
+
+                For i = 0 To FormBankWithdrawal.GVCashAdvance.RowCount - 1
+                    Dim newRow As DataRow = (TryCast(GCList.DataSource, DataTable)).NewRow()
+                    newRow("id_report") = FormBankWithdrawal.GVCashAdvance.GetRowCellValue(i, "id_cash_advance").ToString
+                    newRow("report_mark_type") = "167"
+                    newRow("id_acc") = id_acc_t_jk
+                    newRow("acc_name") = acc_name_t_jk
+                    newRow("acc_description") = acc_description_t_jk
+                    newRow("vendor") = vendor_t_jk
+                    newRow("id_dc") = "1"
+                    newRow("dc_code") = "D"
+                    newRow("id_comp") = id_comp_t_jk
+                    newRow("comp_number") = comp_number_t_jk
+                    newRow("number") = FormBankWithdrawal.GVCashAdvance.GetRowCellValue(i, "number").ToString
+                    newRow("total_pay") = 0
+                    newRow("value") = FormBankWithdrawal.GVCashAdvance.GetRowCellValue(i, "expense").ToString
+                    newRow("kurs") = 1
+                    newRow("id_currency") = "1"
+                    newRow("currency") = "Rp"
+                    newRow("val_bef_kurs") = FormBankWithdrawal.GVCashAdvance.GetRowCellValue(i, "expense").ToString
+                    newRow("value_view") = FormBankWithdrawal.GVCashAdvance.GetRowCellValue(i, "expense").ToString
+                    newRow("balance_due") = FormBankWithdrawal.GVCashAdvance.GetRowCellValue(i, "expense").ToString
+                    newRow("note") = FormBankWithdrawal.GVCashAdvance.GetRowCellValue(i, "note").ToString
+                    TryCast(GCList.DataSource, DataTable).Rows.Add(newRow)
+                Next
+
+                calculate_amount()
             End If
         Else
             PCAddDel.Visible = False
@@ -800,6 +846,11 @@
                 SLEVendor.EditValue = data.Rows(0)("id_comp_contact").ToString
                 SLEPayType.EditValue = data.Rows(0)("id_pay_type").ToString
                 SLEReportType.EditValue = data.Rows(0)("report_mark_type").ToString
+                If data.Rows(0)("is_book_transfer").ToString = "1" Then
+                    is_book_transfer = True
+                Else
+                    is_book_transfer = False
+                End If
                 '
                 If data.Rows(0)("id_report_status").ToString = "6" Then
                     BtnViewJournal.Visible = True
@@ -968,7 +1019,7 @@ WHERE pnd.id_pn='" & id_payment & "'"
         GridColumnCurrencyHide.VisibleIndex = -1
 
         'Parse val
-        Dim query As String = "SELECT py.number,acc.acc_name as acc_payfrom_name,acc.acc_description as acc_payfrom,py.`id_report_status`,sts.report_status,emp.employee_name AS created_by, DATE_FORMAT(py.date_created,'%d %M %Y') as date_created,DATE_FORMAT(py.date_payment,'%d %M %Y') as date_payment, py.`id_pn`,FORMAT(py.`value`,2,'id_ID') as total_amount,CONCAT(c.`comp_number`,' - ',c.`comp_name`) AS comp_name,rm.`report_mark_type_name`,pt.`pay_type`,py.note
+        Dim query As String = "SELECT py.number,py.kurs,acc.acc_name as acc_payfrom_name,acc.acc_description as acc_payfrom,py.`id_report_status`,sts.report_status,emp.employee_name AS created_by, DATE_FORMAT(py.date_created,'%d %M %Y') as date_created,DATE_FORMAT(py.date_payment,'%d %M %Y') as date_payment, py.`id_pn`,FORMAT(py.`value`,2,'id_ID') as total_amount,CONCAT(c.`comp_number`,' - ',c.`comp_name`) AS comp_name,rm.`report_mark_type_name`,pt.`pay_type`,py.note
 ,'" & ConvertCurrencyToIndonesian(TETotal.EditValue) & "' AS tot_say
 FROM tb_pn py
 INNER JOIN tb_m_comp_contact cc ON cc.`id_comp_contact`=py.`id_comp_contact`
@@ -988,7 +1039,23 @@ WHERE py.`id_pn`='" & id_payment & "'"
         Else
             Report.id_pre = "1"
         End If
-
+        '
+        If is_book_transfer Then
+            Report.LBookTrf.Visible = True
+        Else
+            Report.LBookTrf.Visible = True
+        End If
+        '
+        If TEKurs.EditValue = 1 Then
+            Report.LKurs.Visible = False
+            Report.LkursLabel.Visible = False
+            Report.LKursTitik.Visible = False
+        Else
+            Report.LKurs.Visible = False
+            Report.LkursLabel.Visible = False
+            Report.LKursTitik.Visible = False
+        End If
+        '
         'Show the report's preview. 
         Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
         Tool.ShowPreview()
@@ -1057,8 +1124,14 @@ WHERE py.`id_pn`='" & id_payment & "'"
                 warningCustom("You pay more than balance due.")
             Else
                 'header
-                Dim query As String = "INSERT INTO tb_pn(report_mark_type,kurs,id_acc_payfrom,id_comp_contact,id_pay_type,id_user_created,date_created,date_payment,value,note,id_report_status) 
-VALUES('" & report_mark_type & "','" & Decimal.Parse(TEKurs.EditValue.ToString) & "','" & SLEPayFrom.EditValue.ToString & "','" & SLEVendor.EditValue.ToString & "','" & SLEPayType.EditValue.ToString & "','" & id_user & "',NOW(),'" & Date.Parse(DEPayment.EditValue.ToString).ToString("yyyy-MM-dd") & "','" & decimalSQL(TETotal.EditValue.ToString) & "','" & addSlashes(MENote.Text) & "','1'); SELECT LAST_INSERT_ID(); "
+                Dim is_book_trf As String = "2"
+
+                If is_book_transfer Then
+                    is_book_transfer = "1"
+                End If
+
+                Dim query As String = "INSERT INTO tb_pn(report_mark_type,kurs,id_acc_payfrom,id_comp_contact,id_pay_type,id_user_created,date_created,date_payment,value,note,is_book_transfer,id_report_status) 
+VALUES('" & report_mark_type & "','" & Decimal.Parse(TEKurs.EditValue.ToString) & "','" & SLEPayFrom.EditValue.ToString & "','" & SLEVendor.EditValue.ToString & "','" & SLEPayType.EditValue.ToString & "','" & id_user & "',NOW(),'" & Date.Parse(DEPayment.EditValue.ToString).ToString("yyyy-MM-dd") & "','" & decimalSQL(TETotal.EditValue.ToString) & "','" & addSlashes(MENote.Text) & "','" & is_book_trf & "','1'); SELECT LAST_INSERT_ID(); "
                 id_payment = execute_query(query, 0, True, "", "", "", "")
                 'detail
                 Dim id_currency, kurs, val_bef_kurs As String

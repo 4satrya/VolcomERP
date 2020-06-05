@@ -68,6 +68,9 @@ Partial Public Class ReportItemExpense
         Me.XrLabel16 = New DevExpress.XtraReports.UI.XRLabel()
         Me.PageHeader = New DevExpress.XtraReports.UI.PageHeaderBand()
         Me.PageFooter = New DevExpress.XtraReports.UI.PageFooterBand()
+        Me.LInvNo = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel12 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel13 = New DevExpress.XtraReports.UI.XRLabel()
         CType(Me.GCData, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVData, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemSearchLookUpEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -175,7 +178,7 @@ Partial Public Class ReportItemExpense
         '
         'LabelNumber
         '
-        Me.LabelNumber.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelNumber.Font = New System.Drawing.Font("Segoe UI Emoji", 12.0!)
         Me.LabelNumber.LocationFloat = New DevExpress.Utils.PointFloat(456.1702!, 20.0!)
         Me.LabelNumber.Name = "LabelNumber"
         Me.LabelNumber.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -183,7 +186,7 @@ Partial Public Class ReportItemExpense
         Me.LabelNumber.StylePriority.UseFont = False
         Me.LabelNumber.StylePriority.UseTextAlignment = False
         Me.LabelNumber.Text = "0000000"
-        Me.LabelNumber.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
+        Me.LabelNumber.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
         '
         'LabelTitle
         '
@@ -334,10 +337,10 @@ Partial Public Class ReportItemExpense
         'LabelBeneficiary
         '
         Me.LabelBeneficiary.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelBeneficiary.LocationFloat = New DevExpress.Utils.PointFloat(144.4354!, 111.7714!)
+        Me.LabelBeneficiary.LocationFloat = New DevExpress.Utils.PointFloat(143.4357!, 96.37386!)
         Me.LabelBeneficiary.Name = "LabelBeneficiary"
         Me.LabelBeneficiary.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LabelBeneficiary.SizeF = New System.Drawing.SizeF(257.6064!, 16.18693!)
+        Me.LabelBeneficiary.SizeF = New System.Drawing.SizeF(258.6063!, 16.18694!)
         Me.LabelBeneficiary.StylePriority.UseFont = False
         Me.LabelBeneficiary.StylePriority.UseTextAlignment = False
         Me.LabelBeneficiary.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
@@ -345,10 +348,10 @@ Partial Public Class ReportItemExpense
         'LabelDotBeneficiary
         '
         Me.LabelDotBeneficiary.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelDotBeneficiary.LocationFloat = New DevExpress.Utils.PointFloat(125.6116!, 111.7714!)
+        Me.LabelDotBeneficiary.LocationFloat = New DevExpress.Utils.PointFloat(125.6116!, 96.37386!)
         Me.LabelDotBeneficiary.Name = "LabelDotBeneficiary"
         Me.LabelDotBeneficiary.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LabelDotBeneficiary.SizeF = New System.Drawing.SizeF(18.82391!, 16.18692!)
+        Me.LabelDotBeneficiary.SizeF = New System.Drawing.SizeF(17.82406!, 16.18693!)
         Me.LabelDotBeneficiary.StylePriority.UseFont = False
         Me.LabelDotBeneficiary.StylePriority.UseTextAlignment = False
         Me.LabelDotBeneficiary.Text = ":"
@@ -357,7 +360,7 @@ Partial Public Class ReportItemExpense
         'LabelTitleBeneficiary
         '
         Me.LabelTitleBeneficiary.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelTitleBeneficiary.LocationFloat = New DevExpress.Utils.PointFloat(2.000427!, 111.7714!)
+        Me.LabelTitleBeneficiary.LocationFloat = New DevExpress.Utils.PointFloat(2.000427!, 96.37387!)
         Me.LabelTitleBeneficiary.Name = "LabelTitleBeneficiary"
         Me.LabelTitleBeneficiary.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.LabelTitleBeneficiary.SizeF = New System.Drawing.SizeF(123.6111!, 16.18693!)
@@ -570,8 +573,8 @@ Partial Public Class ReportItemExpense
         '
         'PageHeader
         '
-        Me.PageHeader.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.LabelTitle, Me.LabelNumber, Me.XrPictureBox1, Me.XrLabel3, Me.XrLabel2, Me.LabelPaymentMethod, Me.LabelDUelDate, Me.LabelDotDueDate, Me.LabelTitleDueDate, Me.LabelTitleBeneficiary, Me.LabelDotBeneficiary, Me.LabelBeneficiary, Me.XrLabel1, Me.XrLabel5, Me.LabelPaymentStatus, Me.XrLabel7, Me.LabelDate, Me.XrLabel8, Me.LPayFrom, Me.XrLabel9, Me.XrLabel4})
-        Me.PageHeader.HeightF = 127.9583!
+        Me.PageHeader.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.LInvNo, Me.XrLabel12, Me.XrLabel13, Me.LabelTitle, Me.LabelNumber, Me.XrPictureBox1, Me.XrLabel3, Me.XrLabel2, Me.LabelPaymentMethod, Me.LabelDUelDate, Me.LabelDotDueDate, Me.LabelTitleDueDate, Me.LabelTitleBeneficiary, Me.LabelDotBeneficiary, Me.LabelBeneficiary, Me.XrLabel1, Me.XrLabel5, Me.LabelPaymentStatus, Me.XrLabel7, Me.LabelDate, Me.XrLabel8, Me.LPayFrom, Me.XrLabel9, Me.XrLabel4})
+        Me.PageHeader.HeightF = 137.5618!
         Me.PageHeader.Name = "PageHeader"
         '
         'PageFooter
@@ -579,6 +582,41 @@ Partial Public Class ReportItemExpense
         Me.PageFooter.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrPageInfo1})
         Me.PageFooter.HeightF = 18.71793!
         Me.PageFooter.Name = "PageFooter"
+        '
+        'LInvNo
+        '
+        Me.LInvNo.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LInvNo.LocationFloat = New DevExpress.Utils.PointFloat(143.4357!, 112.5608!)
+        Me.LInvNo.Name = "LInvNo"
+        Me.LInvNo.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LInvNo.SizeF = New System.Drawing.SizeF(258.6063!, 16.18694!)
+        Me.LInvNo.StylePriority.UseFont = False
+        Me.LInvNo.StylePriority.UseTextAlignment = False
+        Me.LInvNo.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        '
+        'XrLabel12
+        '
+        Me.XrLabel12.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.XrLabel12.LocationFloat = New DevExpress.Utils.PointFloat(125.6116!, 112.5608!)
+        Me.XrLabel12.Name = "XrLabel12"
+        Me.XrLabel12.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel12.SizeF = New System.Drawing.SizeF(17.82406!, 16.18693!)
+        Me.XrLabel12.StylePriority.UseFont = False
+        Me.XrLabel12.StylePriority.UseTextAlignment = False
+        Me.XrLabel12.Text = ":"
+        Me.XrLabel12.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        '
+        'XrLabel13
+        '
+        Me.XrLabel13.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.XrLabel13.LocationFloat = New DevExpress.Utils.PointFloat(2.000442!, 112.5608!)
+        Me.XrLabel13.Name = "XrLabel13"
+        Me.XrLabel13.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel13.SizeF = New System.Drawing.SizeF(123.6111!, 16.18693!)
+        Me.XrLabel13.StylePriority.UseFont = False
+        Me.XrLabel13.StylePriority.UseTextAlignment = False
+        Me.XrLabel13.Text = "INVOICE NO"
+        Me.XrLabel13.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         '
         'ReportItemExpense
         '
@@ -646,4 +684,7 @@ Partial Public Class ReportItemExpense
     Friend WithEvents XrLabel10 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents PageHeader As DevExpress.XtraReports.UI.PageHeaderBand
     Friend WithEvents PageFooter As DevExpress.XtraReports.UI.PageFooterBand
+    Friend WithEvents LInvNo As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents XrLabel12 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents XrLabel13 As DevExpress.XtraReports.UI.XRLabel
 End Class

@@ -4,6 +4,7 @@
     Dim bdel_active As String = "1"
 
     Dim id_pay_type_po As String = "-1"
+    Dim id_own_online_store As String = ""
     '
     Private Sub FormBankDeposit_Deactivate(sender As Object, e As EventArgs) Handles MyBase.Deactivate
         FormMain.hide_rb()
@@ -41,11 +42,17 @@
         DEFromList.EditValue = dt_now.Rows(0)("tgl")
         DEUntilList.EditValue = dt_now.Rows(0)("tgl")
 
+        'get id own online store
+        id_own_online_store = execute_query("SELECT GROUP_CONCAT(DISTINCT c.id_store) FROM tb_m_comp_volcom_ol c", 0, True, "", "", "", "")
+
         load_vendor()
         load_status_payment()
 
         'invoice list
         load_group_store()
+
+        'payout
+        load_payout()
     End Sub
 
     Sub load_status_payment()
@@ -98,7 +105,7 @@ SELECT cc.id_comp_contact,CONCAT(c.comp_number,' - ',c.comp_name) as comp_name
         SELECT cc.id_comp_contact,CONCAT(c.comp_number,' - ',c.comp_name) as comp_name  
                                 FROM tb_m_comp c
                                 INNER JOIN tb_m_comp_contact cc ON cc.`id_comp`=c.`id_comp` AND cc.`is_default`='1'
-                                WHERE c.id_comp_cat='6' " + cond_group + " "
+                                WHERE c.id_comp_cat='6' " + cond_group + " AND c.id_comp NOT IN (" + id_own_online_store + ") "
         viewSearchLookupQuery(SLEStoreInvoice, query, "id_comp_contact", "comp_name", "id_comp_contact")
         Cursor = Cursors.Default
     End Sub
@@ -197,10 +204,26 @@ WHERE 1=1 " & where_string & " ORDER BY rec_py.id_rec_payment DESC"
         ) pyd ON pyd.id_report = sp.id_sales_pos AND pyd.report_mark_type = sp.report_mark_type
         LEFT JOIN tb_a_acc coa ON coa.id_acc = " + var_acc + "
         INNER JOIN tb_m_comp cf ON cf.id_comp=1
-        WHERE sp.`id_report_status`='6' " & where_string & " GROUP BY sp.`id_sales_pos`"
+        WHERE sp.`id_report_status`='6' " & where_string & " 
+        AND c.id_comp NOT IN (" + id_own_online_store + ")
+        GROUP BY sp.`id_sales_pos`"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCInvoiceList.DataSource = data
         GVInvoiceList.BestFitColumns()
+    End Sub
+
+    Sub load_payout()
+        Cursor = Cursors.WaitCursor
+        Dim query As String = "SELECT t.id_list_payout_trans, t.number, SUM(p.payment) AS `amount`, SUM(p.trans_fee) AS `trans_fee`, SUM(p.payment)-SUM(p.trans_fee) AS `nett`
+        FROM tb_list_payout_trans t
+        INNER JOIN tb_list_payout p ON p.id_list_payout_trans = t.id_list_payout_trans
+        LEFT JOIN tb_rec_payment b ON b.id_list_payout_trans = t.id_list_payout_trans AND b.id_report_status!=5
+        WHERE ISNULL(b.id_rec_payment)
+        GROUP BY p.id_list_payout_trans "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCPayout.DataSource = data
+        GVPayout.BestFitColumns()
+        Cursor = Cursors.Default
     End Sub
 
     Private Sub GVInvoiceList_RowStyle(sender As Object, e As DevExpress.XtraGrid.Views.Grid.RowStyleEventArgs) Handles GVInvoiceList.RowStyle
@@ -292,10 +315,48 @@ WHERE 1=1 " & where_string & " ORDER BY rec_py.id_rec_payment DESC"
     End Sub
 
     Private Sub BImportPayout_Click(sender As Object, e As EventArgs) Handles BImportPayout.Click
-        If TEPayoutNumber.Text = "" Then
-
+        Cursor = Cursors.WaitCursor
+        Dim numb As String = addSlashes(TEPayoutNumber.Text).Trim
+        If numb = "" Then
+            warningCustom("Please input payout number")
+            Cursor = Cursors.Default
+        Else
+            'cek di table
+            Dim query As String = "SELECT * FROM tb_list_payout_trans p WHERE p.number='" + numb + "' "
+            Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+            If data.Rows.Count > 0 Then
+                warningCustom("Payout already exist")
+                Cursor = Cursors.Default
+            Else
+                FormImportExcel.id_pop_up = "50"
+                FormImportExcel.ShowDialog()
+                Cursor = Cursors.Default
+            End If
         End If
-        FormImportExcel.id_pop_up = "50"
-        FormImportExcel.ShowDialog()
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub SimpleButton1_Click(sender As Object, e As EventArgs) Handles SimpleButton1.Click
+        If GVPayout.RowCount > 0 And GVPayout.FocusedRowHandle >= 0 Then
+            Cursor = Cursors.WaitCursor
+            FormBankDepositDet.id_list_payout_trans = GVPayout.GetFocusedRowCellValue("id_list_payout_trans").ToString
+            FormBankDepositDet.ShowDialog()
+            Cursor = Cursors.Default
+        End If
+    End Sub
+
+    Private Sub GVPayout_DoubleClick(sender As Object, e As EventArgs) Handles GVPayout.DoubleClick
+        If GVPayout.RowCount > 0 And GVPayout.FocusedRowHandle >= 0 Then
+            Cursor = Cursors.WaitCursor
+            FormPayoutHistoryDetail.id = GVPayout.GetFocusedRowCellValue("id_list_payout_trans").ToString
+            FormPayoutHistoryDetail.ShowDialog()
+            Cursor = Cursors.Default
+        End If
+    End Sub
+
+    Private Sub BtnHistoryPayout_Click(sender As Object, e As EventArgs) Handles BtnHistoryPayout.Click
+        Cursor = Cursors.WaitCursor
+        FormPayoutHistory.ShowDialog()
+        Cursor = Cursors.Default
     End Sub
 End Class

@@ -47,6 +47,11 @@ Partial Class FormBankWithdrawalAdd
         Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.TxtCOA = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
+        Me.TEBeforeKurs = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl8 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl21 = New DevExpress.XtraEditors.LabelControl()
+        Me.TEKurs = New DevExpress.XtraEditors.TextEdit()
+        Me.LECurrency = New DevExpress.XtraEditors.LookUpEdit()
         CType(Me.TxtSupplier.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtAmount.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtComp.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -60,6 +65,9 @@ Partial Class FormBankWithdrawalAdd
         CType(Me.SLECOA.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtCOA.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TEBeforeKurs.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TEKurs.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LECurrency.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TxtSupplier
@@ -79,7 +87,8 @@ Partial Class FormBankWithdrawalAdd
         '
         'TxtAmount
         '
-        Me.TxtAmount.Location = New System.Drawing.Point(122, 254)
+        Me.TxtAmount.Enabled = False
+        Me.TxtAmount.Location = New System.Drawing.Point(122, 347)
         Me.TxtAmount.Name = "TxtAmount"
         Me.TxtAmount.Properties.DisplayFormat.FormatString = "N2"
         Me.TxtAmount.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
@@ -90,11 +99,11 @@ Partial Class FormBankWithdrawalAdd
         '
         'LabelControl6
         '
-        Me.LabelControl6.Location = New System.Drawing.Point(122, 235)
+        Me.LabelControl6.Location = New System.Drawing.Point(122, 328)
         Me.LabelControl6.Name = "LabelControl6"
-        Me.LabelControl6.Size = New System.Drawing.Size(37, 13)
+        Me.LabelControl6.Size = New System.Drawing.Size(64, 13)
         Me.LabelControl6.TabIndex = 8934
-        Me.LabelControl6.Text = "Amount"
+        Me.LabelControl6.Text = "Amount in Rp"
         '
         'TxtComp
         '
@@ -107,7 +116,7 @@ Partial Class FormBankWithdrawalAdd
         '
         'LabelControl5
         '
-        Me.LabelControl5.Location = New System.Drawing.Point(19, 235)
+        Me.LabelControl5.Location = New System.Drawing.Point(19, 328)
         Me.LabelControl5.Name = "LabelControl5"
         Me.LabelControl5.Size = New System.Drawing.Size(17, 13)
         Me.LabelControl5.TabIndex = 8933
@@ -115,7 +124,7 @@ Partial Class FormBankWithdrawalAdd
         '
         'LEDK
         '
-        Me.LEDK.Location = New System.Drawing.Point(19, 254)
+        Me.LEDK.Location = New System.Drawing.Point(19, 347)
         Me.LEDK.Name = "LEDK"
         Me.LEDK.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.LEDK.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_dc", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("dc_code", "D/K"), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("dc", "Description")})
@@ -205,7 +214,7 @@ Partial Class FormBankWithdrawalAdd
         Me.PanelControl1.Controls.Add(Me.BtnClose)
         Me.PanelControl1.Controls.Add(Me.BtnAdd)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl1.Location = New System.Drawing.Point(0, 290)
+        Me.PanelControl1.Location = New System.Drawing.Point(0, 382)
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(403, 45)
         Me.PanelControl1.TabIndex = 8932
@@ -288,11 +297,81 @@ Partial Class FormBankWithdrawalAdd
         Me.LabelControl1.TabIndex = 8919
         Me.LabelControl1.Text = "COA"
         '
+        'TEBeforeKurs
+        '
+        Me.TEBeforeKurs.EditValue = ""
+        Me.TEBeforeKurs.Location = New System.Drawing.Point(90, 254)
+        Me.TEBeforeKurs.Name = "TEBeforeKurs"
+        Me.TEBeforeKurs.Properties.Appearance.Options.UseTextOptions = True
+        Me.TEBeforeKurs.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.TEBeforeKurs.Properties.AppearanceReadOnly.Options.UseTextOptions = True
+        Me.TEBeforeKurs.Properties.AppearanceReadOnly.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.TEBeforeKurs.Properties.DisplayFormat.FormatString = "N2"
+        Me.TEBeforeKurs.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.TEBeforeKurs.Properties.EditValueChangedDelay = 1
+        Me.TEBeforeKurs.Properties.Mask.EditMask = "N2"
+        Me.TEBeforeKurs.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
+        Me.TEBeforeKurs.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.TEBeforeKurs.Size = New System.Drawing.Size(289, 20)
+        Me.TEBeforeKurs.TabIndex = 8937
+        '
+        'LabelControl8
+        '
+        Me.LabelControl8.Location = New System.Drawing.Point(19, 235)
+        Me.LabelControl8.Name = "LabelControl8"
+        Me.LabelControl8.Size = New System.Drawing.Size(56, 13)
+        Me.LabelControl8.TabIndex = 8940
+        Me.LabelControl8.Text = "Before Kurs"
+        '
+        'LabelControl21
+        '
+        Me.LabelControl21.Location = New System.Drawing.Point(19, 280)
+        Me.LabelControl21.Name = "LabelControl21"
+        Me.LabelControl21.Size = New System.Drawing.Size(21, 13)
+        Me.LabelControl21.TabIndex = 8939
+        Me.LabelControl21.Text = "Kurs"
+        '
+        'TEKurs
+        '
+        Me.TEKurs.Location = New System.Drawing.Point(18, 299)
+        Me.TEKurs.Name = "TEKurs"
+        Me.TEKurs.Properties.Appearance.Options.UseTextOptions = True
+        Me.TEKurs.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.TEKurs.Properties.EditValueChangedDelay = 1
+        Me.TEKurs.Properties.Mask.EditMask = "N2"
+        Me.TEKurs.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
+        Me.TEKurs.Properties.Mask.SaveLiteral = False
+        Me.TEKurs.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.TEKurs.Size = New System.Drawing.Size(361, 20)
+        Me.TEKurs.TabIndex = 8938
+        '
+        'LECurrency
+        '
+        Me.LECurrency.Location = New System.Drawing.Point(19, 254)
+        Me.LECurrency.Name = "LECurrency"
+        Me.LECurrency.Properties.Appearance.Options.UseTextOptions = True
+        Me.LECurrency.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near
+        Me.LECurrency.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.LECurrency.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Black
+        Me.LECurrency.Properties.AppearanceDisabled.Options.UseBackColor = True
+        Me.LECurrency.Properties.AppearanceDisabled.Options.UseForeColor = True
+        Me.LECurrency.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.LECurrency.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_currency", "Id Currency", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("currency", "Currency")})
+        Me.LECurrency.Properties.NullText = ""
+        Me.LECurrency.Properties.ShowFooter = False
+        Me.LECurrency.Size = New System.Drawing.Size(64, 20)
+        Me.LECurrency.TabIndex = 8936
+        '
         'FormBankWithdrawalAdd
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(403, 335)
+        Me.ClientSize = New System.Drawing.Size(403, 427)
+        Me.Controls.Add(Me.TEBeforeKurs)
+        Me.Controls.Add(Me.LabelControl8)
+        Me.Controls.Add(Me.LabelControl21)
+        Me.Controls.Add(Me.TEKurs)
+        Me.Controls.Add(Me.LECurrency)
         Me.Controls.Add(Me.TxtSupplier)
         Me.Controls.Add(Me.LabelControl7)
         Me.Controls.Add(Me.TxtAmount)
@@ -328,6 +407,9 @@ Partial Class FormBankWithdrawalAdd
         CType(Me.SLECOA.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtCOA.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TEBeforeKurs.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TEKurs.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LECurrency.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -360,4 +442,9 @@ Partial Class FormBankWithdrawalAdd
     Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents TxtCOA As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents TEBeforeKurs As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LabelControl8 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LabelControl21 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents TEKurs As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LECurrency As DevExpress.XtraEditors.LookUpEdit
 End Class

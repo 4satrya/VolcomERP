@@ -238,6 +238,20 @@ INNER JOIN tb_m_country c ON c.`id_country`=reg.`id_country` " & filter
                 rate_table()
 
                 'masukkan DO
+                Dim q As String = "SELECT r.id_ol_store_cust_ret,r.number,SUM(sod.sales_order_det_qty) AS qty
+FROM tb_ol_store_cust_ret_det rd
+INNER JOIN tb_ol_store_cust_ret r ON r.id_ol_store_cust_ret=rd.id_ol_store_cust_ret
+INNER JOIN tb_ol_store_ret_list rl ON rl.`id_ol_store_ret_list`=rd.`id_ol_store_ret_list`
+INNER JOIN tb_ol_store_ret_det retd ON retd.`id_ol_store_ret_det`=rl.`id_ol_store_ret_det`
+INNER JOIN tb_sales_order_det sod ON sod.`id_sales_order_det`=retd.`id_sales_order_det`
+INNER JOIN tb_sales_order so ON so.`id_sales_order`=sod.`id_sales_order`
+INNER JOIN tb_m_comp_contact cc ON cc.`id_comp_contact`=so.`id_store_contact_to`
+INNER JOIN tb_m_comp c ON c.`id_comp`=cc.`id_comp` 
+INNER JOIN tb_m_comp_group cg ON cg.`id_comp_group`=c.`id_comp_group` 
+WHERE CONCAT('RET-',cg.`comp_group`,'-',so.`sales_order_ol_shop_number`)='" & FormWHAWBill.GVRet.GetRowCellValue(0, "stru").ToString & "'
+GROUP BY r.id_ol_store_cust_ret"
+                Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
+
                 For i As Integer = 0 To FormWHAWBill.GVRet.RowCount - 1
                     Dim newRow As DataRow = (TryCast(GCDO.DataSource, DataTable)).NewRow()
                     newRow("id_ol_store_cust_ret") = FormWHAWBill.GVRet.GetRowCellValue(i, "id_ol_store_cust_ret").ToString

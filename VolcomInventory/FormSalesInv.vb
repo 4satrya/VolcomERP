@@ -195,7 +195,7 @@
             For i As Integer = 0 To GVByProduct.Columns.Count - 1
                 Try
                     If GVByProduct.Columns(i).OwnerBand.ToString = "SALES" Or GVByProduct.Columns(i).OwnerBand.ToString = "STOCK ON HAND" Then
-                        GVByProduct.Columns(i).Caption = GVByProduct.Columns(i).FieldName.ToString
+                        GVByProduct.Columns(i).Caption = GVByProduct.Columns(i).Caption.ToString.Replace(System.Environment.NewLine, " / ")
                     End If
                 Catch ex As Exception
                 End Try
@@ -451,7 +451,7 @@
             For i As Integer = 0 To GVByAccount.Columns.Count - 1
                 Try
                     If GVByAccount.Columns(i).OwnerBand.ToString = "SALES" Or GVByAccount.Columns(i).OwnerBand.ToString = "STOCK ON HAND" Then
-                        GVByAccount.Columns(i).Caption = GVByAccount.Columns(i).FieldName.ToString
+                        GVByAccount.Columns(i).Caption = GVByAccount.Columns(i).Caption.ToString.Replace(System.Environment.NewLine, " / ")
                     End If
                 Catch ex As Exception
 

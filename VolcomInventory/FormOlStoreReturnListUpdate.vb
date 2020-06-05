@@ -15,6 +15,21 @@ WHERE is_only_cs='1'"
     End Sub
 
     Private Sub BSetStatus_Click(sender As Object, e As EventArgs) Handles BSetStatus.Click
+        'cek kalo refund
+        Dim cond_info As Boolean = True
+        If SLEStatus.EditValue.ToString = "2" Then
+            For i As Integer = 0 To FormOlStoreReturnList.GVList.RowCount - 1
+                If FormOlStoreReturnList.GVList.GetFocusedRowCellValue("rek_no").ToString = "" Then
+                    cond_info = False
+                    warningCustom("Please complete bank information for refund process")
+                    Exit For
+                End If
+            Next
+        End If
+        If Not cond_info Then
+            Exit Sub
+        End If
+
         FormMain.SplashScreenManager1.ShowWaitForm()
 
         'get hide status

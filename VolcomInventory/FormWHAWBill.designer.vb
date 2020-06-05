@@ -153,6 +153,11 @@ Partial Class FormWHAWBill
         Me.GridColumnSalesTargetNumb = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnTotalOrder = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnOLStoreOrder = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn58 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn57 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn55 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn56 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn54 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn30 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RICEPickSOR = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.GridColumn31 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -207,7 +212,9 @@ Partial Class FormWHAWBill
         Me.GridColumn50 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn51 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn52 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn59 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControl5 = New DevExpress.XtraEditors.PanelControl()
+        Me.BExportCS3Return = New DevExpress.XtraEditors.SimpleButton()
         Me.BGenKoliRetReq = New DevExpress.XtraEditors.SimpleButton()
         Me.SLECompRetReq = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView4 = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -290,11 +297,6 @@ Partial Class FormWHAWBill
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.TEInNoStart = New DevExpress.XtraEditors.TextEdit()
-        Me.GridColumn54 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn55 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn56 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn57 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn58 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GCAWBill, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVAWBill, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RICECheck, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1660,6 +1662,63 @@ Partial Class FormWHAWBill
         Me.GridColumnOLStoreOrder.VisibleIndex = 2
         Me.GridColumnOLStoreOrder.Width = 269
         '
+        'GridColumn58
+        '
+        Me.GridColumn58.Caption = "Customer name"
+        Me.GridColumn58.FieldName = "customer_name"
+        Me.GridColumn58.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left
+        Me.GridColumn58.Name = "GridColumn58"
+        Me.GridColumn58.OptionsColumn.AllowEdit = False
+        Me.GridColumn58.OptionsColumn.ReadOnly = True
+        Me.GridColumn58.Visible = True
+        Me.GridColumn58.VisibleIndex = 3
+        '
+        'GridColumn57
+        '
+        Me.GridColumn57.Caption = "Shipping Address"
+        Me.GridColumn57.FieldName = "shipping_address"
+        Me.GridColumn57.Name = "GridColumn57"
+        Me.GridColumn57.OptionsColumn.AllowEdit = False
+        Me.GridColumn57.OptionsColumn.ReadOnly = True
+        Me.GridColumn57.Visible = True
+        Me.GridColumn57.VisibleIndex = 4
+        '
+        'GridColumn55
+        '
+        Me.GridColumn55.Caption = "SO Date"
+        Me.GridColumn55.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.GridColumn55.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn55.FieldName = "sales_order_date"
+        Me.GridColumn55.Name = "GridColumn55"
+        Me.GridColumn55.OptionsColumn.AllowEdit = False
+        Me.GridColumn55.OptionsColumn.ReadOnly = True
+        Me.GridColumn55.Visible = True
+        Me.GridColumn55.VisibleIndex = 5
+        '
+        'GridColumn56
+        '
+        Me.GridColumn56.Caption = "OL Store Date"
+        Me.GridColumn56.DisplayFormat.FormatString = "dd MMMM yyyy HH:mm"
+        Me.GridColumn56.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn56.FieldName = "sales_order_ol_shop_date"
+        Me.GridColumn56.Name = "GridColumn56"
+        Me.GridColumn56.OptionsColumn.AllowEdit = False
+        Me.GridColumn56.OptionsColumn.ReadOnly = True
+        Me.GridColumn56.Visible = True
+        Me.GridColumn56.VisibleIndex = 6
+        '
+        'GridColumn54
+        '
+        Me.GridColumn54.Caption = "Last Print Date"
+        Me.GridColumn54.DisplayFormat.FormatString = "dd MMMM yyyy HH:mm"
+        Me.GridColumn54.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn54.FieldName = "log_date"
+        Me.GridColumn54.Name = "GridColumn54"
+        Me.GridColumn54.OptionsColumn.AllowEdit = False
+        Me.GridColumn54.OptionsColumn.ReadOnly = True
+        Me.GridColumn54.Visible = True
+        Me.GridColumn54.VisibleIndex = 7
+        '
         'GridColumn30
         '
         Me.GridColumn30.AppearanceCell.Options.UseTextOptions = True
@@ -2033,7 +2092,7 @@ Partial Class FormWHAWBill
         '
         'GVRet
         '
-        Me.GVRet.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn41, Me.GridColumn42, Me.GridColumn43, Me.GridColumn44, Me.GridColumn45, Me.GridColumn46, Me.GridColumn47, Me.GridColumn48, Me.GridColumn49, Me.GridColumn50, Me.GridColumn51, Me.GridColumn52})
+        Me.GVRet.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn41, Me.GridColumn42, Me.GridColumn43, Me.GridColumn44, Me.GridColumn45, Me.GridColumn46, Me.GridColumn47, Me.GridColumn48, Me.GridColumn49, Me.GridColumn50, Me.GridColumn51, Me.GridColumn52, Me.GridColumn59})
         Me.GVRet.GridControl = Me.GCRet
         Me.GVRet.Name = "GVRet"
         Me.GVRet.OptionsCustomization.AllowColumnMoving = False
@@ -2064,7 +2123,7 @@ Partial Class FormWHAWBill
         Me.GridColumn42.OptionsColumn.AllowEdit = False
         Me.GridColumn42.OptionsColumn.AllowFocus = False
         Me.GridColumn42.Visible = True
-        Me.GridColumn42.VisibleIndex = 1
+        Me.GridColumn42.VisibleIndex = 2
         Me.GridColumn42.Width = 142
         '
         'GridColumn43
@@ -2077,7 +2136,7 @@ Partial Class FormWHAWBill
         Me.GridColumn43.OptionsColumn.AllowEdit = False
         Me.GridColumn43.OptionsColumn.AllowFocus = False
         Me.GridColumn43.Visible = True
-        Me.GridColumn43.VisibleIndex = 3
+        Me.GridColumn43.VisibleIndex = 4
         Me.GridColumn43.Width = 119
         '
         'GridColumn44
@@ -2092,7 +2151,7 @@ Partial Class FormWHAWBill
         Me.GridColumn44.OptionsColumn.AllowEdit = False
         Me.GridColumn44.OptionsColumn.AllowFocus = False
         Me.GridColumn44.Visible = True
-        Me.GridColumn44.VisibleIndex = 4
+        Me.GridColumn44.VisibleIndex = 1
         Me.GridColumn44.Width = 83
         '
         'GridColumn45
@@ -2102,8 +2161,6 @@ Partial Class FormWHAWBill
         Me.GridColumn45.Name = "GridColumn45"
         Me.GridColumn45.OptionsColumn.AllowEdit = False
         Me.GridColumn45.OptionsColumn.AllowFocus = False
-        Me.GridColumn45.Visible = True
-        Me.GridColumn45.VisibleIndex = 6
         Me.GridColumn45.Width = 201
         '
         'GridColumn46
@@ -2137,7 +2194,7 @@ Partial Class FormWHAWBill
         Me.GridColumn47.FieldName = "qty"
         Me.GridColumn47.Name = "GridColumn47"
         Me.GridColumn47.Visible = True
-        Me.GridColumn47.VisibleIndex = 10
+        Me.GridColumn47.VisibleIndex = 9
         '
         'GridColumn48
         '
@@ -2150,7 +2207,7 @@ Partial Class FormWHAWBill
         Me.GridColumn48.Name = "GridColumn48"
         Me.GridColumn48.OptionsColumn.AllowEdit = False
         Me.GridColumn48.Visible = True
-        Me.GridColumn48.VisibleIndex = 2
+        Me.GridColumn48.VisibleIndex = 3
         '
         'GridColumn49
         '
@@ -2162,7 +2219,7 @@ Partial Class FormWHAWBill
         Me.GridColumn49.FieldName = "shipping_address"
         Me.GridColumn49.Name = "GridColumn49"
         Me.GridColumn49.Visible = True
-        Me.GridColumn49.VisibleIndex = 7
+        Me.GridColumn49.VisibleIndex = 6
         '
         'GridColumn50
         '
@@ -2174,7 +2231,7 @@ Partial Class FormWHAWBill
         Me.GridColumn50.FieldName = "shipping_city"
         Me.GridColumn50.Name = "GridColumn50"
         Me.GridColumn50.Visible = True
-        Me.GridColumn50.VisibleIndex = 8
+        Me.GridColumn50.VisibleIndex = 7
         '
         'GridColumn51
         '
@@ -2186,7 +2243,7 @@ Partial Class FormWHAWBill
         Me.GridColumn51.FieldName = "shipping_region"
         Me.GridColumn51.Name = "GridColumn51"
         Me.GridColumn51.Visible = True
-        Me.GridColumn51.VisibleIndex = 9
+        Me.GridColumn51.VisibleIndex = 8
         '
         'GridColumn52
         '
@@ -2200,8 +2257,17 @@ Partial Class FormWHAWBill
         Me.GridColumn52.Visible = True
         Me.GridColumn52.VisibleIndex = 5
         '
+        'GridColumn59
+        '
+        Me.GridColumn59.Caption = "Exported to CS3"
+        Me.GridColumn59.FieldName = "status"
+        Me.GridColumn59.Name = "GridColumn59"
+        Me.GridColumn59.Visible = True
+        Me.GridColumn59.VisibleIndex = 10
+        '
         'PanelControl5
         '
+        Me.PanelControl5.Controls.Add(Me.BExportCS3Return)
         Me.PanelControl5.Controls.Add(Me.BGenKoliRetReq)
         Me.PanelControl5.Controls.Add(Me.SLECompRetReq)
         Me.PanelControl5.Controls.Add(Me.LabelControl3)
@@ -2212,9 +2278,17 @@ Partial Class FormWHAWBill
         Me.PanelControl5.Size = New System.Drawing.Size(1267, 47)
         Me.PanelControl5.TabIndex = 2
         '
+        'BExportCS3Return
+        '
+        Me.BExportCS3Return.Location = New System.Drawing.Point(301, 14)
+        Me.BExportCS3Return.Name = "BExportCS3Return"
+        Me.BExportCS3Return.Size = New System.Drawing.Size(89, 23)
+        Me.BExportCS3Return.TabIndex = 14
+        Me.BExportCS3Return.Text = "Export To CS3"
+        '
         'BGenKoliRetReq
         '
-        Me.BGenKoliRetReq.Location = New System.Drawing.Point(301, 14)
+        Me.BGenKoliRetReq.Location = New System.Drawing.Point(396, 14)
         Me.BGenKoliRetReq.Name = "BGenKoliRetReq"
         Me.BGenKoliRetReq.Size = New System.Drawing.Size(102, 23)
         Me.BGenKoliRetReq.TabIndex = 13
@@ -2283,7 +2357,7 @@ Partial Class FormWHAWBill
         Me.XTPInbound.Controls.Add(Me.PCLockIn)
         Me.XTPInbound.Controls.Add(Me.PanelControl2)
         Me.XTPInbound.Name = "XTPInbound"
-        Me.XTPInbound.Size = New System.Drawing.Size(1273, 512)
+        Me.XTPInbound.Size = New System.Drawing.Size(1273, 478)
         Me.XTPInbound.Text = "Inbound"
         '
         'GCAwbillIn
@@ -2293,7 +2367,7 @@ Partial Class FormWHAWBill
         Me.GCAwbillIn.MainView = Me.GVAwbillIn
         Me.GCAwbillIn.Name = "GCAwbillIn"
         Me.GCAwbillIn.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RICESelectInbound, Me.RICELockInbound})
-        Me.GCAwbillIn.Size = New System.Drawing.Size(1273, 434)
+        Me.GCAwbillIn.Size = New System.Drawing.Size(1273, 400)
         Me.GCAwbillIn.TabIndex = 2
         Me.GCAwbillIn.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVAwbillIn})
         '
@@ -2890,7 +2964,7 @@ Partial Class FormWHAWBill
         Me.PCLockIn.Controls.Add(Me.CESelAllInboud)
         Me.PCLockIn.Controls.Add(Me.BLockInbound)
         Me.PCLockIn.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PCLockIn.Location = New System.Drawing.Point(0, 473)
+        Me.PCLockIn.Location = New System.Drawing.Point(0, 439)
         Me.PCLockIn.Name = "PCLockIn"
         Me.PCLockIn.Size = New System.Drawing.Size(1273, 39)
         Me.PCLockIn.TabIndex = 4
@@ -3057,63 +3131,6 @@ Partial Class FormWHAWBill
         Me.TEInNoStart.Properties.Mask.UseMaskAsDisplayFormat = True
         Me.TEInNoStart.Size = New System.Drawing.Size(81, 20)
         Me.TEInNoStart.TabIndex = 2
-        '
-        'GridColumn54
-        '
-        Me.GridColumn54.Caption = "Last Print Date"
-        Me.GridColumn54.DisplayFormat.FormatString = "dd MMMM yyyy HH:mm"
-        Me.GridColumn54.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.GridColumn54.FieldName = "log_date"
-        Me.GridColumn54.Name = "GridColumn54"
-        Me.GridColumn54.OptionsColumn.AllowEdit = False
-        Me.GridColumn54.OptionsColumn.ReadOnly = True
-        Me.GridColumn54.Visible = True
-        Me.GridColumn54.VisibleIndex = 7
-        '
-        'GridColumn55
-        '
-        Me.GridColumn55.Caption = "SO Date"
-        Me.GridColumn55.DisplayFormat.FormatString = "dd MMMM yyyy"
-        Me.GridColumn55.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.GridColumn55.FieldName = "sales_order_date"
-        Me.GridColumn55.Name = "GridColumn55"
-        Me.GridColumn55.OptionsColumn.AllowEdit = False
-        Me.GridColumn55.OptionsColumn.ReadOnly = True
-        Me.GridColumn55.Visible = True
-        Me.GridColumn55.VisibleIndex = 5
-        '
-        'GridColumn56
-        '
-        Me.GridColumn56.Caption = "OL Store Date"
-        Me.GridColumn56.DisplayFormat.FormatString = "dd MMMM yyyy HH:mm"
-        Me.GridColumn56.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.GridColumn56.FieldName = "sales_order_ol_shop_date"
-        Me.GridColumn56.Name = "GridColumn56"
-        Me.GridColumn56.OptionsColumn.AllowEdit = False
-        Me.GridColumn56.OptionsColumn.ReadOnly = True
-        Me.GridColumn56.Visible = True
-        Me.GridColumn56.VisibleIndex = 6
-        '
-        'GridColumn57
-        '
-        Me.GridColumn57.Caption = "Shipping Address"
-        Me.GridColumn57.FieldName = "shipping_address"
-        Me.GridColumn57.Name = "GridColumn57"
-        Me.GridColumn57.OptionsColumn.AllowEdit = False
-        Me.GridColumn57.OptionsColumn.ReadOnly = True
-        Me.GridColumn57.Visible = True
-        Me.GridColumn57.VisibleIndex = 4
-        '
-        'GridColumn58
-        '
-        Me.GridColumn58.Caption = "Customer name"
-        Me.GridColumn58.FieldName = "customer_name"
-        Me.GridColumn58.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left
-        Me.GridColumn58.Name = "GridColumn58"
-        Me.GridColumn58.OptionsColumn.AllowEdit = False
-        Me.GridColumn58.OptionsColumn.ReadOnly = True
-        Me.GridColumn58.Visible = True
-        Me.GridColumn58.VisibleIndex = 3
         '
         'FormWHAWBill
         '
@@ -3489,4 +3506,6 @@ Partial Class FormWHAWBill
     Friend WithEvents GridColumn54 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn58 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn57 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BExportCS3Return As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GridColumn59 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

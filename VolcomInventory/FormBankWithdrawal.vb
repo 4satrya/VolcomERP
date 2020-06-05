@@ -35,6 +35,9 @@
         load_vendor_expense()
         load_vendor_fgpo()
         load_vendor_refund()
+
+        DECAFrom.EditValue = Date.Parse(Now)
+        DECATo.EditValue = Date.Parse(Now)
     End Sub
 
     Sub load_status_payment()
@@ -706,7 +709,8 @@ sr.`id_sales_return`,c.`id_comp`,c.`comp_number`,c.`comp_name`,r.`rec_date`,sr.`
 ,SUM(posd.`design_price`) AS total
 ,IFNULL(payment.value,0) AS total_paid
 ,IFNULL(payment_pending.jml,0) AS total_pending
-,(SUM(posd.`design_price`) - IFNULL(payment.value,0)) AS diff
+,(SUM(posd.`design_price`) - IFNULL(payment.value,0)) AS diff,
+rq.rek_no, rq.rek_name, rq.rek_bank, rq.rek_branch
 FROM tb_sales_return_det srd
 INNER JOIN tb_sales_return sr ON sr.`id_sales_return`=srd.`id_sales_return` AND sr.`id_report_status`=6
 INNER JOIN tb_sales_return_order_det rord ON rord.`id_sales_return_order_det`=srd.`id_sales_return_order_det`
@@ -716,6 +720,7 @@ INNER JOIN tb_sales_pos pos ON pos.`id_sales_pos`=posd.id_sales_pos AND pos.`id_
 INNER JOIN tb_a_acc acc ON acc.id_acc=pos.`id_acc_ar`
 INNER JOIN tb_ol_store_ret_det rd ON rd.`id_ol_store_ret_det`=rl.`id_ol_store_ret_det`
 INNER JOIN tb_ol_store_ret r ON r.`id_ol_store_ret`=rd.`id_ol_store_ret`
+INNER JOIN tb_ol_store_ret_req rq ON rq.id_ol_store_ret_req = r.id_ol_store_ret_req
 INNER JOIN tb_m_comp_group cg ON cg.`id_comp_group`=r.`id_comp_group` AND cg.is_refund=1
 INNER JOIN tb_sales_order_det sod ON sod.`id_sales_order_det`=rd.`id_sales_order_det`
 INNER JOIN tb_sales_order so ON so.`id_sales_order`=sod.`id_sales_order`
@@ -826,5 +831,69 @@ GROUP BY sr.`id_sales_return`"
         End If
 
         GVJamsostek.ActiveFilterString = ""
+    End Sub
+
+    Sub load_ca()
+        Dim date_from As String = ""
+        Dim date_to As String = ""
+
+        Try
+            date_from = DateTime.Parse(DECAFrom.EditValue.ToString).ToString("yyyy-MM-dd")
+            date_to = DateTime.Parse(DECATo.EditValue.ToString).ToString("yyyy-MM-dd")
+
+            Dim where_string As String = ""
+
+            Dim query As String = "CALL view_cash_advance_report_coa('" & date_from & "','" & date_to & "')"
+            Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+
+            Dim data_final As DataTable = data.Clone
+
+            For i = 0 To data.Rows.Count - 1
+                If data.Rows(i)("expense") > 0 And data.Rows(i)("is_bbk").ToString = "2" Then
+                    data_final.ImportRow(data.Rows(i))
+                End If
+            Next
+
+            GCCashAdvance.DataSource = data_final
+            GVCashAdvance.BestFitColumns()
+        Catch ex As Exception
+            stopCustom(ex.ToString)
+        End Try
+    End Sub
+
+    Private Sub SBViewCashAdvance_Click(sender As Object, e As EventArgs) Handles SBViewCashAdvance.Click
+        load_ca()
+    End Sub
+
+    Private Sub SBPayCashAdvance_Click(sender As Object, e As EventArgs) Handles SBPayCashAdvance.Click
+        GVCashAdvance.ActiveFilterString = ""
+        GVCashAdvance.ActiveFilterString = "[is_check]='yes'"
+
+        If GVCashAdvance.RowCount > 0 Then
+            FormBankWithdrawalDet.id_pay_type = "2"
+            FormBankWithdrawalDet.report_mark_type = "167"
+            FormBankWithdrawalDet.ShowDialog()
+        Else
+            warningCustom("Please select item first.")
+        End If
+
+        GVCashAdvance.ActiveFilterString = ""
+    End Sub
+
+    Private Sub CESelectAllCA_EditValueChanged(sender As Object, e As EventArgs) Handles CESelectAllCA.EditValueChanged
+        If CESelectAllCA.EditValue Then
+            For i = 0 To GVCashAdvance.RowCount - 1
+                GVCashAdvance.SetRowCellValue(i, "is_check", "yes")
+            Next
+        Else
+            For i = 0 To GVCashAdvance.RowCount - 1
+                GVCashAdvance.SetRowCellValue(i, "is_check", "no")
+            Next
+        End If
+    End Sub
+
+    Private Sub BCreateBookTrf_Click(sender As Object, e As EventArgs) Handles BCreateBookTrf.Click
+        FormBankWithdrawalDet.is_book_transfer = True
+        FormBankWithdrawalDet.ShowDialog()
     End Sub
 End Class

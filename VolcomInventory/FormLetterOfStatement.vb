@@ -35,7 +35,7 @@
 
     Sub form_print(ByVal id_letter_of_statement As String)
         Dim query As String = "
-            SELECT s.id_letter_of_statement, s.id_popup, p.popup, s.number, s.date, s.id_employee, e.employee_name, e.employee_code, e.address_primary, e.employee_pob, e.employee_dob, e.employee_position, d.departement, s.created_date, e.employee_actual_join_date, e.employee_last_date, e.id_sex
+            SELECT s.id_letter_of_statement, s.id_popup, p.popup, s.number, s.date, s.id_employee, e.employee_name, e.employee_code, e.address_primary, e.employee_pob, e.employee_dob, e.employee_position, e.id_departement, d.departement, s.created_date, e.employee_actual_join_date, e.employee_last_date, e.id_sex
             FROM tb_letter_of_statement AS s
             LEFT JOIN tb_letter_of_statement_popup AS p ON s.id_popup = p.id_letter_of_statement_popup
             LEFT JOIN tb_m_employee AS e ON s.id_employee = e.id_employee
@@ -91,6 +91,12 @@
             Report.L_date.Text = "Kuta, " + Date.Parse(data.Rows(0)("created_date").ToString).ToString("dd MMMM yyyy")
             Report.L_text.Text = Report.L_text.Text.Replace("[date]", Date.Parse(data.Rows(0)("date").ToString).ToString("dd MMMM yyyy"))
             Report.L_depthead.Text = depthead
+
+            If data.Rows(0)("id_departement").ToString = "8" Then
+                Report.XrLabel6.Visible = False
+                Report.L_depthead.Visible = False
+                Report.XrLabel17.Visible = False
+            End If
 
             Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
             Tool.ShowPreviewDialog()

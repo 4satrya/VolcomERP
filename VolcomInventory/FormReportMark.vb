@@ -3777,33 +3777,33 @@ WHERE a.id_adj_in_fg = '" & id_report & "'"
                 Dim compl As New ClassFGRepair()
                 compl.completedStock(id_report)
                 '
-                Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_fg_repair_det`,`id_type`,`unique_code`,
-                        `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
-                        SELECT c.id_comp, t.`id_wh_drawer_to`, td.id_product, td.id_pl_prod_order_rec_det_unique,  td.id_fg_repair_det, '8', 
-                        CONCAT(p.product_full_code,td.fg_repair_det_counting), sod.id_design_price, sod.design_price, 1, 1, NOW() 
-                        FROM tb_fg_repair_det td
-                        INNER JOIN tb_fg_repair t ON t.id_fg_repair = td.id_fg_repair
-                        INNER JOIN tb_m_wh_drawer drw_frm ON drw_frm.id_wh_drawer = t.id_wh_drawer_to  
-                        INNER JOIN tb_m_wh_rack rack_frm ON rack_frm.id_wh_rack = drw_frm.id_wh_rack  
-                        INNER JOIN tb_m_wh_locator loc_frm ON loc_frm.id_wh_locator = rack_frm.id_wh_locator  
-                        INNER JOIN tb_m_comp c ON c.id_comp = loc_frm.id_comp  
-                        INNER JOIN tb_m_product p ON p.id_product = td.id_product
-                        INNER JOIN tb_m_design d ON d.id_design = p.id_design
-                        LEFT JOIN( 
-                            SELECT * FROM ( 
-	                        SELECT price.id_design, price.design_price, price.design_price_date, price.id_design_price, 
-	                        price.id_design_price_type, price_type.design_price_type,
-	                        cat.id_design_cat, cat.design_cat
-	                        FROM tb_m_design_price price 
-	                        INNER JOIN tb_lookup_design_price_type price_type ON price.id_design_price_type = price_type.id_design_price_type 
-	                        INNER JOIN tb_lookup_design_cat cat ON cat.id_design_cat = price_type.id_design_cat
-	                        WHERE price.is_active_wh ='1' AND price.design_price_start_date <= NOW() 
-	                        ORDER BY price.design_price_start_date DESC, price.id_design_price DESC 
-                            ) a 
-                            GROUP BY a.id_design 
-                        ) sod ON sod.id_design = d.id_design 
-                                                WHERE t.id_fg_repair=" & id_report & " AND d.is_old_design=2  AND t.is_use_unique_code=1 "
-                execute_non_query(quniq, True, "", "", "", "")
+                'Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_fg_repair_det`,`id_type`,`unique_code`,
+                '        `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
+                '        SELECT c.id_comp, t.`id_wh_drawer_to`, td.id_product, td.id_pl_prod_order_rec_det_unique,  td.id_fg_repair_det, '8', 
+                '        CONCAT(p.product_full_code,td.fg_repair_det_counting), sod.id_design_price, sod.design_price, 1, 1, NOW() 
+                '        FROM tb_fg_repair_det td
+                '        INNER JOIN tb_fg_repair t ON t.id_fg_repair = td.id_fg_repair
+                '        INNER JOIN tb_m_wh_drawer drw_frm ON drw_frm.id_wh_drawer = t.id_wh_drawer_to  
+                '        INNER JOIN tb_m_wh_rack rack_frm ON rack_frm.id_wh_rack = drw_frm.id_wh_rack  
+                '        INNER JOIN tb_m_wh_locator loc_frm ON loc_frm.id_wh_locator = rack_frm.id_wh_locator  
+                '        INNER JOIN tb_m_comp c ON c.id_comp = loc_frm.id_comp  
+                '        INNER JOIN tb_m_product p ON p.id_product = td.id_product
+                '        INNER JOIN tb_m_design d ON d.id_design = p.id_design
+                '        LEFT JOIN( 
+                '            SELECT * FROM ( 
+                '         SELECT price.id_design, price.design_price, price.design_price_date, price.id_design_price, 
+                '         price.id_design_price_type, price_type.design_price_type,
+                '         cat.id_design_cat, cat.design_cat
+                '         FROM tb_m_design_price price 
+                '         INNER JOIN tb_lookup_design_price_type price_type ON price.id_design_price_type = price_type.id_design_price_type 
+                '         INNER JOIN tb_lookup_design_cat cat ON cat.id_design_cat = price_type.id_design_cat
+                '         WHERE price.is_active_wh ='1' AND price.design_price_start_date <= NOW() 
+                '         ORDER BY price.design_price_start_date DESC, price.id_design_price DESC 
+                '            ) a 
+                '            GROUP BY a.id_design 
+                '        ) sod ON sod.id_design = d.id_design 
+                '                                WHERE t.id_fg_repair=" & id_report & " AND d.is_old_design=2  AND t.is_use_unique_code=1 "
+                'execute_non_query(quniq, True, "", "", "", "")
             End If
 
             query = String.Format("UPDATE tb_fg_repair SET id_report_status='{0}' WHERE id_fg_repair ='{1}'", id_status_reportx, id_report)
@@ -3855,33 +3855,33 @@ WHERE a.id_adj_in_fg = '" & id_report & "'"
                 execute_non_query(quniq, True, "", "", "", "")
             ElseIf id_status_reportx = "5" Then
                 'cancel reserved unique code
-                Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_fg_repair_rec_det`,`id_type`,`unique_code`,
-                        `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
-                        SELECT c.id_comp, t.`id_wh_drawer_from`, td.id_product, td.id_pl_prod_order_rec_det_unique,  td.id_fg_repair_rec_det, '9', 
-                        CONCAT(p.product_full_code,td.fg_repair_rec_det_counting), sod.id_design_price, sod.design_price, 1, 1, NOW() 
-                        FROM tb_fg_repair_rec_det td
-                        INNER JOIN tb_fg_repair_rec t ON t.id_fg_repair_rec = td.id_fg_repair_rec
-                        INNER JOIN tb_m_wh_drawer drw_frm ON drw_frm.id_wh_drawer = t.id_wh_drawer_from  
-                        INNER JOIN tb_m_wh_rack rack_frm ON rack_frm.id_wh_rack = drw_frm.id_wh_rack  
-                        INNER JOIN tb_m_wh_locator loc_frm ON loc_frm.id_wh_locator = rack_frm.id_wh_locator  
-                        INNER JOIN tb_m_comp c ON c.id_comp = loc_frm.id_comp  
-                        INNER JOIN tb_m_product p ON p.id_product = td.id_product
-                        INNER JOIN tb_m_design d ON d.id_design = p.id_design
-                        LEFT JOIN( 
-                            SELECT * FROM ( 
-	                        SELECT price.id_design, price.design_price, price.design_price_date, price.id_design_price, 
-	                        price.id_design_price_type, price_type.design_price_type,
-	                        cat.id_design_cat, cat.design_cat
-	                        FROM tb_m_design_price price 
-	                        INNER JOIN tb_lookup_design_price_type price_type ON price.id_design_price_type = price_type.id_design_price_type 
-	                        INNER JOIN tb_lookup_design_cat cat ON cat.id_design_cat = price_type.id_design_cat
-	                        WHERE price.is_active_wh ='1' AND price.design_price_start_date <= NOW() 
-	                        ORDER BY price.design_price_start_date DESC, price.id_design_price DESC 
-                            ) a 
-                            GROUP BY a.id_design 
-                        ) sod ON sod.id_design = d.id_design 
-                        WHERE t.id_fg_repair_rec=" & id_report & " AND d.is_old_design=2 AND t.is_use_unique_code=1 "
-                execute_non_query(quniq, True, "", "", "", "")
+                'Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_fg_repair_rec_det`,`id_type`,`unique_code`,
+                '        `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
+                '        SELECT c.id_comp, t.`id_wh_drawer_from`, td.id_product, td.id_pl_prod_order_rec_det_unique,  td.id_fg_repair_rec_det, '9', 
+                '        CONCAT(p.product_full_code,td.fg_repair_rec_det_counting), sod.id_design_price, sod.design_price, 1, 1, NOW() 
+                '        FROM tb_fg_repair_rec_det td
+                '        INNER JOIN tb_fg_repair_rec t ON t.id_fg_repair_rec = td.id_fg_repair_rec
+                '        INNER JOIN tb_m_wh_drawer drw_frm ON drw_frm.id_wh_drawer = t.id_wh_drawer_from  
+                '        INNER JOIN tb_m_wh_rack rack_frm ON rack_frm.id_wh_rack = drw_frm.id_wh_rack  
+                '        INNER JOIN tb_m_wh_locator loc_frm ON loc_frm.id_wh_locator = rack_frm.id_wh_locator  
+                '        INNER JOIN tb_m_comp c ON c.id_comp = loc_frm.id_comp  
+                '        INNER JOIN tb_m_product p ON p.id_product = td.id_product
+                '        INNER JOIN tb_m_design d ON d.id_design = p.id_design
+                '        LEFT JOIN( 
+                '            SELECT * FROM ( 
+                '         SELECT price.id_design, price.design_price, price.design_price_date, price.id_design_price, 
+                '         price.id_design_price_type, price_type.design_price_type,
+                '         cat.id_design_cat, cat.design_cat
+                '         FROM tb_m_design_price price 
+                '         INNER JOIN tb_lookup_design_price_type price_type ON price.id_design_price_type = price_type.id_design_price_type 
+                '         INNER JOIN tb_lookup_design_cat cat ON cat.id_design_cat = price_type.id_design_cat
+                '         WHERE price.is_active_wh ='1' AND price.design_price_start_date <= NOW() 
+                '         ORDER BY price.design_price_start_date DESC, price.id_design_price DESC 
+                '            ) a 
+                '            GROUP BY a.id_design 
+                '        ) sod ON sod.id_design = d.id_design 
+                '        WHERE t.id_fg_repair_rec=" & id_report & " AND d.is_old_design=2 AND t.is_use_unique_code=1 "
+                'execute_non_query(quniq, True, "", "", "", "")
             End If
 
             query = String.Format("UPDATE tb_fg_repair_rec SET id_report_status='{0}' WHERE id_fg_repair_rec ='{1}'", id_status_reportx, id_report)
@@ -3939,33 +3939,33 @@ WHERE a.id_adj_in_fg = '" & id_report & "'"
                 compl.completedStock(id_report, report_mark_type)
 
                 'insert unique drawer to
-                Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_fg_repair_return_det`,`id_type`,`unique_code`,
-                        `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
-                        SELECT c.id_comp, t.`id_wh_drawer_to`, td.id_product, td.id_pl_prod_order_rec_det_unique, td.id_fg_repair_return_det, '10', 
-                        CONCAT(p.product_full_code,td.fg_repair_return_det_counting), sod.id_design_price, sod.design_price, 1, 1, NOW() 
-                        FROM tb_fg_repair_return_det td
-                        INNER JOIN tb_fg_repair_return t ON t.id_fg_repair_return = td.id_fg_repair_return
-                        INNER JOIN tb_m_wh_drawer drw_frm ON drw_frm.id_wh_drawer = t.id_wh_drawer_to  
-                        INNER JOIN tb_m_wh_rack rack_frm ON rack_frm.id_wh_rack = drw_frm.id_wh_rack  
-                        INNER JOIN tb_m_wh_locator loc_frm ON loc_frm.id_wh_locator = rack_frm.id_wh_locator  
-                        INNER JOIN tb_m_comp c ON c.id_comp = loc_frm.id_comp  
-                        INNER JOIN tb_m_product p ON p.id_product = td.id_product
-                        INNER JOIN tb_m_design d ON d.id_design = p.id_design
-                        LEFT JOIN( 
-                            SELECT * FROM ( 
-	                        SELECT price.id_design, price.design_price, price.design_price_date, price.id_design_price, 
-	                        price.id_design_price_type, price_type.design_price_type,
-	                        cat.id_design_cat, cat.design_cat
-	                        FROM tb_m_design_price price 
-	                        INNER JOIN tb_lookup_design_price_type price_type ON price.id_design_price_type = price_type.id_design_price_type 
-	                        INNER JOIN tb_lookup_design_cat cat ON cat.id_design_cat = price_type.id_design_cat
-	                        WHERE price.is_active_wh ='1' AND price.design_price_start_date <= NOW() 
-	                        ORDER BY price.design_price_start_date DESC, price.id_design_price DESC 
-                            ) a 
-                            GROUP BY a.id_design 
-                        ) sod ON sod.id_design = d.id_design 
-                        WHERE t.id_fg_repair_return=" & id_report & " AND d.is_old_design=2 AND t.is_use_unique_code=1 "
-                execute_non_query(quniq, True, "", "", "", "")
+                'Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_fg_repair_return_det`,`id_type`,`unique_code`,
+                '        `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
+                '        SELECT c.id_comp, t.`id_wh_drawer_to`, td.id_product, td.id_pl_prod_order_rec_det_unique, td.id_fg_repair_return_det, '10', 
+                '        CONCAT(p.product_full_code,td.fg_repair_return_det_counting), sod.id_design_price, sod.design_price, 1, 1, NOW() 
+                '        FROM tb_fg_repair_return_det td
+                '        INNER JOIN tb_fg_repair_return t ON t.id_fg_repair_return = td.id_fg_repair_return
+                '        INNER JOIN tb_m_wh_drawer drw_frm ON drw_frm.id_wh_drawer = t.id_wh_drawer_to  
+                '        INNER JOIN tb_m_wh_rack rack_frm ON rack_frm.id_wh_rack = drw_frm.id_wh_rack  
+                '        INNER JOIN tb_m_wh_locator loc_frm ON loc_frm.id_wh_locator = rack_frm.id_wh_locator  
+                '        INNER JOIN tb_m_comp c ON c.id_comp = loc_frm.id_comp  
+                '        INNER JOIN tb_m_product p ON p.id_product = td.id_product
+                '        INNER JOIN tb_m_design d ON d.id_design = p.id_design
+                '        LEFT JOIN( 
+                '            SELECT * FROM ( 
+                '         SELECT price.id_design, price.design_price, price.design_price_date, price.id_design_price, 
+                '         price.id_design_price_type, price_type.design_price_type,
+                '         cat.id_design_cat, cat.design_cat
+                '         FROM tb_m_design_price price 
+                '         INNER JOIN tb_lookup_design_price_type price_type ON price.id_design_price_type = price_type.id_design_price_type 
+                '         INNER JOIN tb_lookup_design_cat cat ON cat.id_design_cat = price_type.id_design_cat
+                '         WHERE price.is_active_wh ='1' AND price.design_price_start_date <= NOW() 
+                '         ORDER BY price.design_price_start_date DESC, price.id_design_price DESC 
+                '            ) a 
+                '            GROUP BY a.id_design 
+                '        ) sod ON sod.id_design = d.id_design 
+                '        WHERE t.id_fg_repair_return=" & id_report & " AND d.is_old_design=2 AND t.is_use_unique_code=1 "
+                'execute_non_query(quniq, True, "", "", "", "")
             End If
 
             query = String.Format("UPDATE tb_fg_repair_return SET id_report_status='{0}' WHERE id_fg_repair_return ='{1}'", id_status_reportx, id_report)
@@ -3990,11 +3990,11 @@ WHERE a.id_adj_in_fg = '" & id_report & "'"
                 'insert unique drawer to
                 Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_fg_repair_return_rec_det`,`id_type`,`unique_code`,
                         `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
-                        SELECT c.id_comp, t.`id_wh_drawer_to`, td.id_product, td.id_pl_prod_order_rec_det_unique, td.id_fg_repair_return_rec_det, '11', 
+                        SELECT c.id_comp, t.`id_wh_drawer_dest`, td.id_product, td.id_pl_prod_order_rec_det_unique, td.id_fg_repair_return_rec_det, '11', 
                         CONCAT(p.product_full_code,td.fg_repair_return_rec_det_counting), sod.id_design_price, sod.design_price, 1, 1, NOW() 
                         FROM tb_fg_repair_return_rec_det td
                         INNER JOIN tb_fg_repair_return_rec t ON t.id_fg_repair_return_rec = td.id_fg_repair_return_rec
-                        INNER JOIN tb_m_wh_drawer drw_frm ON drw_frm.id_wh_drawer = t.id_wh_drawer_to 
+                        INNER JOIN tb_m_wh_drawer drw_frm ON drw_frm.id_wh_drawer = t.id_wh_drawer_dest 
                         INNER JOIN tb_m_wh_rack rack_frm ON rack_frm.id_wh_rack = drw_frm.id_wh_rack  
                         INNER JOIN tb_m_wh_locator loc_frm ON loc_frm.id_wh_locator = rack_frm.id_wh_locator  
                         INNER JOIN tb_m_comp c ON c.id_comp = loc_frm.id_comp  
@@ -4017,33 +4017,33 @@ WHERE a.id_adj_in_fg = '" & id_report & "'"
                 execute_non_query(quniq, True, "", "", "", "")
             ElseIf id_status_reportx = "5" Then
                 'cancel reserved unique
-                Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique` ,`id_fg_repair_return_rec_det`,`id_type`,`unique_code`,
-                        `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
-                        SELECT c.id_comp, t.`id_wh_drawer_from`, td.id_product, td.id_pl_prod_order_rec_det_unique, td.id_fg_repair_return_rec_det, '11', 
-                        CONCAT(p.product_full_code,td.fg_repair_return_rec_det_counting), sod.id_design_price, sod.design_price, 1, 1, NOW() 
-                        FROM tb_fg_repair_return_rec_det td
-                        INNER JOIN tb_fg_repair_return_rec t ON t.id_fg_repair_return_rec = td.id_fg_repair_return_rec
-                        INNER JOIN tb_m_wh_drawer drw_frm ON drw_frm.id_wh_drawer = t.id_wh_drawer_from  
-                        INNER JOIN tb_m_wh_rack rack_frm ON rack_frm.id_wh_rack = drw_frm.id_wh_rack  
-                        INNER JOIN tb_m_wh_locator loc_frm ON loc_frm.id_wh_locator = rack_frm.id_wh_locator  
-                        INNER JOIN tb_m_comp c ON c.id_comp = loc_frm.id_comp  
-                        INNER JOIN tb_m_product p ON p.id_product = td.id_product
-                        INNER JOIN tb_m_design d ON d.id_design = p.id_design
-                        LEFT JOIN( 
-                            SELECT * FROM ( 
-	                        SELECT price.id_design, price.design_price, price.design_price_date, price.id_design_price, 
-	                        price.id_design_price_type, price_type.design_price_type,
-	                        cat.id_design_cat, cat.design_cat
-	                        FROM tb_m_design_price price 
-	                        INNER JOIN tb_lookup_design_price_type price_type ON price.id_design_price_type = price_type.id_design_price_type 
-	                        INNER JOIN tb_lookup_design_cat cat ON cat.id_design_cat = price_type.id_design_cat
-	                        WHERE price.is_active_wh ='1' AND price.design_price_start_date <= NOW() 
-	                        ORDER BY price.design_price_start_date DESC, price.id_design_price DESC 
-                            ) a 
-                            GROUP BY a.id_design 
-                        ) sod ON sod.id_design = d.id_design 
-                        WHERE t.id_fg_repair_return_rec=" & id_report & " AND d.is_old_design=2 AND t.is_use_unique_code=1 "
-                execute_non_query(quniq, True, "", "", "", "")
+                'Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique` ,`id_fg_repair_return_rec_det`,`id_type`,`unique_code`,
+                '        `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
+                '        SELECT c.id_comp, t.`id_wh_drawer_from`, td.id_product, td.id_pl_prod_order_rec_det_unique, td.id_fg_repair_return_rec_det, '11', 
+                '        CONCAT(p.product_full_code,td.fg_repair_return_rec_det_counting), sod.id_design_price, sod.design_price, 1, 1, NOW() 
+                '        FROM tb_fg_repair_return_rec_det td
+                '        INNER JOIN tb_fg_repair_return_rec t ON t.id_fg_repair_return_rec = td.id_fg_repair_return_rec
+                '        INNER JOIN tb_m_wh_drawer drw_frm ON drw_frm.id_wh_drawer = t.id_wh_drawer_from  
+                '        INNER JOIN tb_m_wh_rack rack_frm ON rack_frm.id_wh_rack = drw_frm.id_wh_rack  
+                '        INNER JOIN tb_m_wh_locator loc_frm ON loc_frm.id_wh_locator = rack_frm.id_wh_locator  
+                '        INNER JOIN tb_m_comp c ON c.id_comp = loc_frm.id_comp  
+                '        INNER JOIN tb_m_product p ON p.id_product = td.id_product
+                '        INNER JOIN tb_m_design d ON d.id_design = p.id_design
+                '        LEFT JOIN( 
+                '            SELECT * FROM ( 
+                '         SELECT price.id_design, price.design_price, price.design_price_date, price.id_design_price, 
+                '         price.id_design_price_type, price_type.design_price_type,
+                '         cat.id_design_cat, cat.design_cat
+                '         FROM tb_m_design_price price 
+                '         INNER JOIN tb_lookup_design_price_type price_type ON price.id_design_price_type = price_type.id_design_price_type 
+                '         INNER JOIN tb_lookup_design_cat cat ON cat.id_design_cat = price_type.id_design_cat
+                '         WHERE price.is_active_wh ='1' AND price.design_price_start_date <= NOW() 
+                '         ORDER BY price.design_price_start_date DESC, price.id_design_price DESC 
+                '            ) a 
+                '            GROUP BY a.id_design 
+                '        ) sod ON sod.id_design = d.id_design 
+                '        WHERE t.id_fg_repair_return_rec=" & id_report & " AND d.is_old_design=2 AND t.is_use_unique_code=1 "
+                'execute_non_query(quniq, True, "", "", "", "")
             End If
 
             query = String.Format("UPDATE tb_fg_repair_return_rec SET id_report_status='{0}' WHERE id_fg_repair_return_rec ='{1}'", id_status_reportx, id_report)

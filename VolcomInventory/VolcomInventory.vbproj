@@ -267,6 +267,7 @@
     <Compile Include="ClassRequestRetOLStore.vb" />
     <Compile Include="ClassRetOLStore.vb" />
     <Compile Include="ClassReturn.vb" />
+    <Compile Include="ClassSalesBranch.vb" />
     <Compile Include="ClassSalesDelOrder.vb" />
     <Compile Include="ClassSalesInv.vb" />
     <Compile Include="ClassSalesOrder.vb" />
@@ -9846,6 +9847,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormRevenue.resx">
       <DependentUpon>FormRevenue.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSalesBranch.resx">
+      <DependentUpon>FormSalesBranch.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormSalesCreditNote.resx">
       <DependentUpon>FormSalesCreditNote.vb</DependentUpon>

@@ -3461,6 +3461,12 @@
     <Compile Include="FormRevenue.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormSalesBranch.Designer.vb">
+      <DependentUpon>FormSalesBranch.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormSalesBranch.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormSalesCreditNote.designer.vb">
       <DependentUpon>FormSalesCreditNote.vb</DependentUpon>
     </Compile>

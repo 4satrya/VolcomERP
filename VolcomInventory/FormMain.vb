@@ -14908,4 +14908,17 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
         End Try
         Cursor = Cursors.Default
     End Sub
+
+    Private Sub NBSalesBranch_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBSalesBranch.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormSalesBranch.MdiParent = Me
+            FormSalesBranch.Show()
+            FormSalesBranch.WindowState = FormWindowState.Maximized
+            FormSalesBranch.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
 End Class

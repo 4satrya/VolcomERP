@@ -193,4 +193,12 @@ INNER JOIN tb_a_acc_trans at ON at.id_acc_trans=atd.id_acc_trans AND DATE(at.dat
 
         Cursor = Cursors.Default
     End Sub
+
+    Private Sub XTCBalanceSheet_SelectedPageChanged(sender As Object, e As DevExpress.XtraTab.TabPageChangedEventArgs) Handles XTCBalanceSheet.SelectedPageChanged
+        If XTCBalanceSheet.SelectedTabPageIndex = 0 Or XTCBalanceSheet.SelectedTabPageIndex = 2 Then
+            PCFilterUpper.Visible = True
+        Else
+            PCFilterUpper.Visible = False
+        End If
+    End Sub
 End Class

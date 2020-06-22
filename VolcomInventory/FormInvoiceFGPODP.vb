@@ -36,9 +36,21 @@
         viewSearchLookupQuery(SLEVatAcc, query, "id_acc", "acc_description", "id_acc")
     End Sub
 
+    Sub viewCOAPPH()
+        Dim query As String = "SELECT a.id_acc, a.acc_name, a.acc_description, a.id_acc_parent, 
+        a.id_acc_parent, a.id_acc_cat, a.id_is_det, a.id_status, a.id_comp
+        FROM tb_a_acc a WHERE a.id_status=1 AND a.id_is_det=2 AND LEFT(a.acc_name,4)='2111' "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        RISLECOAPPH.DataSource = Nothing
+        RISLECOAPPH.DataSource = data
+        RISLECOAPPH.DisplayMember = "acc_description"
+        RISLECOAPPH.ValueMember = "id_acc"
+    End Sub
+
     Private Sub FormInvoiceFGPODP_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         view_currency()
         view_coa()
+        viewCOAPPH()
         load_blank_draft()
         'check
         DEDateCreated.EditValue = Now
@@ -186,12 +198,13 @@ WHERE pn.`id_pn_fgpo`='" & id_invoice & "'"
                 '
                 id_report_status = data.Rows(0)("id_report_status").ToString
             End If
+            calculate()
         End If
     End Sub
 
     Sub load_det()
         Dim query As String = "
-Select pnd.`id_prod_order`,pnd.id_acc,pnd.`id_report` As id_report,pnd.report_mark_type, pnd.`report_number`, pnd.`info_design`, pnd.`id_pn_fgpo_det`, pnd.`qty`,pnd.`vat`, pnd.`inv_number`,pnd.value_bef_kurs,pnd.kurs,pnd.id_currency,cur.currency, pnd.`note` 
+Select pnd.pph_percent,pnd.id_acc_pph,pnd.`id_prod_order`,pnd.id_acc,pnd.`id_report` As id_report,pnd.report_mark_type, pnd.`report_number`, pnd.`info_design`, pnd.`id_pn_fgpo_det`, pnd.`qty`,pnd.`vat`, pnd.`inv_number`,pnd.value_bef_kurs,pnd.kurs,pnd.id_currency,cur.currency, pnd.`note` 
 FROM tb_pn_fgpo_det pnd
 INNER JOIN tb_lookup_currency cur ON cur.id_currency=pnd.id_currency
 WHERE pnd.`id_pn_fgpo`='" & id_invoice & "'"
@@ -258,7 +271,6 @@ WHERE c.id_comp='" + SLEVendor.EditValue.ToString + "' "
 
                     If found Then
                         GVDraft.SetRowCellValue(row_found, "debit", GVDraft.GetRowCellValue(row_found, "debit") + Math.Abs(GVList.GetRowCellValue(i, "valuex")))
-
                     Else
                         jum_row += 1
                         Dim newRow As DataRow = (TryCast(GCDraft.DataSource, DataTable)).NewRow()
@@ -278,10 +290,29 @@ WHERE c.id_comp='" + SLEVendor.EditValue.ToString + "' "
                         TryCast(GCDraft.DataSource, DataTable).Rows.Add(newRow)
                         GCDraft.RefreshDataSource()
                         GVDraft.RefreshData()
+
+                        'pph
+                        If GVList.GetRowCellValue(i, "pph_percent") > 0 Then
+                            jum_row += 1
+                            Dim newRowvat As DataRow = (TryCast(GCDraft.DataSource, DataTable)).NewRow()
+                            newRowvat("no") = jum_row
+                            Try
+                                newRowvat("acc_name") = get_acc(GVList.GetRowCellValue(i, "id_acc_pph").ToString, "1")
+                                newRowvat("acc_description") = get_acc(GVList.GetRowCellValue(i, "id_acc_pph").ToString, "2")
+                                newRowvat("note") = get_acc(GVList.GetRowCellValue(i, "id_acc_pph").ToString, "2") & " (PPH " & GVList.GetRowCellValue(i, "pph_percent").ToString & " %)"
+                            Catch ex As Exception
+                            End Try
+                            newRowvat("cc") = "000"
+                            newRowvat("report_number") = ""
+                            newRowvat("debit") = 0
+                            newRowvat("credit") = GVList.GetRowCellValue(i, "pph_value")
+                            TryCast(GCDraft.DataSource, DataTable).Rows.Add(newRowvat)
+                        End If
                     End If
                 Next
                 'vat
                 If TEVat.EditValue > 0 Then
+                    jum_row += 1
                     Dim newRowvat As DataRow = (TryCast(GCDraft.DataSource, DataTable)).NewRow()
                     newRowvat("no") = jum_row
                     newRowvat("acc_name") = get_acc(SLEVatAcc.EditValue, "1")
@@ -312,19 +343,32 @@ WHERE c.id_comp='" + SLEVendor.EditValue.ToString + "' "
         Dim tot_vat As Decimal = 0.0
         Dim grand_tot As Decimal = 0.0
 
+        Dim pph As Decimal = 0.00
+        Try
+            pph = GVList.Columns("pph_value").SummaryItem.SummaryValue
+        Catch ex As Exception
+            pph = 0.00
+        End Try
+        TETotalPPH.EditValue = pph
+
         Try
             tot = Decimal.Parse(GVList.Columns("valuex").SummaryItem.SummaryValue.ToString)
-
-            TETotal.EditValue = tot
-            tot_vat = Decimal.Parse(GVList.Columns("vat").SummaryItem.SummaryValue.ToString)
-            TEVat.EditValue = tot_vat
-            grand_tot = tot + tot_vat
-            TEGrandTotal.EditValue = grand_tot
-
-            GVList.BestFitColumns()
         Catch ex As Exception
-            Console.WriteLine(ex.ToString)
+            tot = 0.00
         End Try
+        TETotal.EditValue = tot
+
+        Try
+            tot_vat = Decimal.Parse(GVList.Columns("vat").SummaryItem.SummaryValue.ToString)
+        Catch ex As Exception
+            tot_vat = 0.00
+        End Try
+        TEVat.EditValue = tot_vat
+
+        grand_tot = tot + tot_vat - pph
+        TEGrandTotal.EditValue = grand_tot
+
+        GVList.BestFitColumns()
     End Sub
 
     Sub load_vendor()
@@ -414,8 +458,17 @@ VALUES ('" & SLEPayType.EditValue.ToString & "','" & SLEVatAcc.EditValue.ToStrin
                 'detail
                 query = ""
                 For i = 0 To GVList.RowCount - 1 '
-                    query += "INSERT INTO `tb_pn_fgpo_det`(`id_pn_fgpo`,id_prod_order,`id_acc`,`id_report`,`report_mark_type`,report_number,info_design,qty,id_currency,value_bef_kurs,kurs,`value`,`vat`,`inv_number`,`note`)
-VALUES('" & id_invoice & "','" & GVList.GetRowCellValue(i, "id_prod_order").ToString & "','" & GVList.GetRowCellValue(i, "id_acc").ToString & "','" & GVList.GetRowCellValue(i, "id_report").ToString & "','" & GVList.GetRowCellValue(i, "report_mark_type").ToString & "','" & GVList.GetRowCellValue(i, "report_number").ToString & "','" & addSlashes(GVList.GetRowCellValue(i, "info_design").ToString) & "','" & decimalSQL(GVList.GetRowCellValue(i, "qty").ToString) & "','" & GVList.GetRowCellValue(i, "id_currency").ToString & "','" & decimalSQL(GVList.GetRowCellValue(i, "value_bef_kurs").ToString) & "','" & decimalSQL(GVList.GetRowCellValue(i, "kurs").ToString) & "','" & decimalSQL(GVList.GetRowCellValue(i, "valuex").ToString) & "','" & decimalSQL(GVList.GetRowCellValue(i, "vat").ToString) & "','" & addSlashes(GVList.GetRowCellValue(i, "inv_number").ToString) & "','" & addSlashes(GVList.GetRowCellValue(i, "note").ToString) & "');"
+                    Dim id_acc_pph As String = "NULL"
+                    Dim pph_percent As String = "0"
+                    Dim pph As String = "0"
+
+                    If GVList.GetRowCellValue(i, "pph_percent") > 0 Then
+                        id_acc_pph = "'" & GVList.GetRowCellValue(i, "id_acc_pph").ToString & "'"
+                        pph_percent = decimalSQL(GVList.GetRowCellValue(i, "pph_percent").ToString)
+                        pph = decimalSQL(GVList.GetRowCellValue(i, "pph_value").ToString)
+                    End If
+                    query += "INSERT INTO `tb_pn_fgpo_det`(`id_pn_fgpo`,id_prod_order,`id_acc`,`id_report`,`report_mark_type`,report_number,info_design,qty,id_currency,value_bef_kurs,kurs,`value`,`vat`,`inv_number`,`note`, id_acc_pph, pph_percent, pph)
+VALUES('" & id_invoice & "','" & GVList.GetRowCellValue(i, "id_prod_order").ToString & "','" & GVList.GetRowCellValue(i, "id_acc").ToString & "','" & GVList.GetRowCellValue(i, "id_report").ToString & "','" & GVList.GetRowCellValue(i, "report_mark_type").ToString & "','" & GVList.GetRowCellValue(i, "report_number").ToString & "','" & addSlashes(GVList.GetRowCellValue(i, "info_design").ToString) & "','" & decimalSQL(GVList.GetRowCellValue(i, "qty").ToString) & "','" & GVList.GetRowCellValue(i, "id_currency").ToString & "','" & decimalSQL(GVList.GetRowCellValue(i, "value_bef_kurs").ToString) & "','" & decimalSQL(GVList.GetRowCellValue(i, "kurs").ToString) & "','" & decimalSQL(GVList.GetRowCellValue(i, "valuex").ToString) & "','" & decimalSQL(GVList.GetRowCellValue(i, "vat").ToString) & "','" & addSlashes(GVList.GetRowCellValue(i, "inv_number").ToString) & "','" & addSlashes(GVList.GetRowCellValue(i, "note").ToString) & "'," + id_acc_pph + ",'" + pph_percent + "','" + pph + "');"
                 Next
                 execute_non_query(query, True, "", "", "", "")
                 '
@@ -600,7 +653,7 @@ WHERE pnd.`id_pn_fgpo`='" & id_invoice & "' AND pnd.report_mark_type='199'"
     End Sub
 
     Private Sub GVList_CellValueChanged(sender As Object, e As DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs) Handles GVList.CellValueChanged
-        If e.Column.FieldName = "value_bef_kurs" Or e.Column.FieldName = "kurs" Or e.Column.FieldName = "vat" Then
+        If e.Column.FieldName = "value_bef_kurs" Or e.Column.FieldName = "kurs" Or e.Column.FieldName = "vat" Or e.Column.FieldName = "pph_percent" Then
             calculate()
         End If
     End Sub

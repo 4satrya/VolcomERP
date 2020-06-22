@@ -147,6 +147,7 @@ Partial Class FormBankWithdrawal
         Me.RepositoryItemTextEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.GridColumnSelectExpense = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.CESelectExpense = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.GridColumn187 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnTotalExpenseDP = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnTotalExpensePaid = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnPaymentPendingExpense = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -1637,7 +1638,7 @@ Partial Class FormBankWithdrawal
         '
         'GVExpense
         '
-        Me.GVExpense.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnId, Me.GridColumnNumber, Me.GridColumn39, Me.GridColumnCreatedByName, Me.GridColumnReortStt, Me.GridColumnPaidStt, Me.GridColumnBal, Me.GridColumntotalExpense, Me.GridColumnIdComp, Me.GridColumnBeneficiary, Me.GridColumnSelectExpense, Me.GridColumnTotalExpenseDP, Me.GridColumnTotalExpensePaid, Me.GridColumnPaymentPendingExpense, Me.GridColumnDueDateExpense, Me.GridColumnDiffExpense, Me.GridColumnDueDays, Me.GridColumnIsOpenExpense})
+        Me.GVExpense.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnId, Me.GridColumnNumber, Me.GridColumn39, Me.GridColumnCreatedByName, Me.GridColumnReortStt, Me.GridColumnPaidStt, Me.GridColumnBal, Me.GridColumntotalExpense, Me.GridColumnIdComp, Me.GridColumnBeneficiary, Me.GridColumnSelectExpense, Me.GridColumn187, Me.GridColumnTotalExpenseDP, Me.GridColumnTotalExpensePaid, Me.GridColumnPaymentPendingExpense, Me.GridColumnDueDateExpense, Me.GridColumnDiffExpense, Me.GridColumnDueDays, Me.GridColumnIsOpenExpense})
         Me.GVExpense.GridControl = Me.GCExpense
         Me.GVExpense.Name = "GVExpense"
         Me.GVExpense.OptionsFind.AlwaysVisible = True
@@ -1760,6 +1761,12 @@ Partial Class FormBankWithdrawal
         Me.CESelectExpense.Name = "CESelectExpense"
         Me.CESelectExpense.ValueChecked = "Yes"
         Me.CESelectExpense.ValueUnchecked = "No"
+        '
+        'GridColumn187
+        '
+        Me.GridColumn187.Caption = "Total PPH"
+        Me.GridColumn187.FieldName = "total_pph"
+        Me.GridColumn187.Name = "GridColumn187"
         '
         'GridColumnTotalExpenseDP
         '
@@ -4833,4 +4840,5 @@ Partial Class FormBankWithdrawal
     Friend WithEvents BViewDPKhususPay As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents TEKursDPKhusus As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelControl13 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents GridColumn187 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

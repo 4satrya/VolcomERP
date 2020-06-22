@@ -38,6 +38,8 @@ Partial Class FormItemExpenseDet
         Me.MENote = New DevExpress.XtraEditors.MemoEdit()
         Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
         Me.PanelControl4 = New DevExpress.XtraEditors.PanelControl()
+        Me.TEPPH = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl14 = New DevExpress.XtraEditors.LabelControl()
         Me.TxtTotal = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl12 = New DevExpress.XtraEditors.LabelControl()
         Me.TxtVAT = New DevExpress.XtraEditors.TextEdit()
@@ -102,6 +104,16 @@ Partial Class FormItemExpenseDet
         Me.RepositoryItemTextEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.GridColumnTaxValue = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnAmount = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn17 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RISLECOAPPH = New DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit()
+        Me.GridView4 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn18 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn19 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn20 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn16 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemTextEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
+        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemTextEdit3 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.GridColumnAccountDescription = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnBudgetTypeDesc = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnBudgetDesc = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -120,6 +132,7 @@ Partial Class FormItemExpenseDet
         Me.GridColumndebit_draft = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncredit_draft = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncc = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GrossUpPPHToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.LEPaymentMethod.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEDueDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEDueDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -131,6 +144,7 @@ Partial Class FormItemExpenseDet
         CType(Me.MENote.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl4.SuspendLayout()
+        CType(Me.TEPPH.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtTotal.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtVAT.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtSubTotal.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -162,6 +176,10 @@ Partial Class FormItemExpenseDet
         CType(Me.RISLECatExpense, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RISLECOAPPH, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView4, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemTextEdit3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemSpinEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XTPDraftJournal, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTPDraftJournal.SuspendLayout()
@@ -301,9 +319,9 @@ Partial Class FormItemExpenseDet
         Me.PanelControl3.Controls.Add(Me.LabelControl6)
         Me.PanelControl3.Controls.Add(Me.PanelControl4)
         Me.PanelControl3.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl3.Location = New System.Drawing.Point(0, 455)
+        Me.PanelControl3.Location = New System.Drawing.Point(0, 425)
         Me.PanelControl3.Name = "PanelControl3"
-        Me.PanelControl3.Size = New System.Drawing.Size(934, 165)
+        Me.PanelControl3.Size = New System.Drawing.Size(934, 195)
         Me.PanelControl3.TabIndex = 14
         '
         'LabelControl13
@@ -352,6 +370,8 @@ Partial Class FormItemExpenseDet
         'PanelControl4
         '
         Me.PanelControl4.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelControl4.Controls.Add(Me.TEPPH)
+        Me.PanelControl4.Controls.Add(Me.LabelControl14)
         Me.PanelControl4.Controls.Add(Me.TxtTotal)
         Me.PanelControl4.Controls.Add(Me.LabelControl12)
         Me.PanelControl4.Controls.Add(Me.TxtVAT)
@@ -361,13 +381,36 @@ Partial Class FormItemExpenseDet
         Me.PanelControl4.Dock = System.Windows.Forms.DockStyle.Right
         Me.PanelControl4.Location = New System.Drawing.Point(552, 2)
         Me.PanelControl4.Name = "PanelControl4"
-        Me.PanelControl4.Size = New System.Drawing.Size(380, 161)
+        Me.PanelControl4.Size = New System.Drawing.Size(380, 191)
         Me.PanelControl4.TabIndex = 6
+        '
+        'TEPPH
+        '
+        Me.TEPPH.Enabled = False
+        Me.TEPPH.Location = New System.Drawing.Point(11, 117)
+        Me.TEPPH.Name = "TEPPH"
+        Me.TEPPH.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TEPPH.Properties.Appearance.Options.UseFont = True
+        Me.TEPPH.Properties.DisplayFormat.FormatString = "N2"
+        Me.TEPPH.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.TEPPH.Properties.Mask.EditMask = "N2"
+        Me.TEPPH.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
+        Me.TEPPH.Size = New System.Drawing.Size(356, 20)
+        Me.TEPPH.TabIndex = 153
+        '
+        'LabelControl14
+        '
+        Me.LabelControl14.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl14.Location = New System.Drawing.Point(11, 98)
+        Me.LabelControl14.Name = "LabelControl14"
+        Me.LabelControl14.Size = New System.Drawing.Size(22, 13)
+        Me.LabelControl14.TabIndex = 152
+        Me.LabelControl14.Text = "PPH"
         '
         'TxtTotal
         '
         Me.TxtTotal.Enabled = False
-        Me.TxtTotal.Location = New System.Drawing.Point(10, 125)
+        Me.TxtTotal.Location = New System.Drawing.Point(10, 159)
         Me.TxtTotal.Name = "TxtTotal"
         Me.TxtTotal.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtTotal.Properties.Appearance.Options.UseFont = True
@@ -381,7 +424,7 @@ Partial Class FormItemExpenseDet
         'LabelControl12
         '
         Me.LabelControl12.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl12.Location = New System.Drawing.Point(10, 106)
+        Me.LabelControl12.Location = New System.Drawing.Point(10, 140)
         Me.LabelControl12.Name = "LabelControl12"
         Me.LabelControl12.Size = New System.Drawing.Size(36, 13)
         Me.LabelControl12.TabIndex = 150
@@ -681,26 +724,26 @@ Partial Class FormItemExpenseDet
         Me.GCData.Location = New System.Drawing.Point(0, 38)
         Me.GCData.MainView = Me.GVData
         Me.GCData.Name = "GCData"
-        Me.GCData.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemSearchLookUpEdit1, Me.RepositoryItemTextEdit1, Me.RepositoryItemSpinEdit1, Me.RISLEType, Me.RISLECatExpense, Me.RISLECC})
-        Me.GCData.Size = New System.Drawing.Size(928, 260)
+        Me.GCData.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemSearchLookUpEdit1, Me.RepositoryItemTextEdit1, Me.RepositoryItemSpinEdit1, Me.RISLEType, Me.RISLECatExpense, Me.RISLECC, Me.RISLECOAPPH, Me.RepositoryItemTextEdit2, Me.RepositoryItemTextEdit3})
+        Me.GCData.Size = New System.Drawing.Size(928, 230)
         Me.GCData.TabIndex = 18
         Me.GCData.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVData})
         '
         'ContextMenuStrip1
         '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DeleteToolStripMenuItem})
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DeleteToolStripMenuItem, Me.GrossUpPPHToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(108, 26)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(153, 70)
         '
         'DeleteToolStripMenuItem
         '
         Me.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem"
-        Me.DeleteToolStripMenuItem.Size = New System.Drawing.Size(107, 22)
+        Me.DeleteToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.DeleteToolStripMenuItem.Text = "Delete"
         '
         'GVData
         '
-        Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdAcc, Me.GridColumnNo, Me.GridColumnaccount, Me.GridColumnDescription, Me.GCCC, Me.GridColumnBudgetType, Me.GridColumnBudget, Me.GridColumnTaxPercent, Me.GridColumnTaxValue, Me.GridColumnAmount, Me.GridColumnAccountDescription, Me.GridColumnBudgetTypeDesc, Me.GridColumnBudgetDesc, Me.GCCCDesc})
+        Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdAcc, Me.GridColumnNo, Me.GridColumnaccount, Me.GridColumnDescription, Me.GCCC, Me.GridColumnBudgetType, Me.GridColumnBudget, Me.GridColumnTaxPercent, Me.GridColumnTaxValue, Me.GridColumnAmount, Me.GridColumn17, Me.GridColumn16, Me.GridColumn7, Me.GridColumnAccountDescription, Me.GridColumnBudgetTypeDesc, Me.GridColumnBudgetDesc, Me.GCCCDesc})
         Me.GVData.GridControl = Me.GCData
         Me.GVData.Name = "GVData"
         Me.GVData.OptionsView.ShowFooter = True
@@ -968,6 +1011,94 @@ Partial Class FormItemExpenseDet
         Me.GridColumnAmount.VisibleIndex = 6
         Me.GridColumnAmount.Width = 123
         '
+        'GridColumn17
+        '
+        Me.GridColumn17.Caption = "PPH COA"
+        Me.GridColumn17.ColumnEdit = Me.RISLECOAPPH
+        Me.GridColumn17.FieldName = "id_acc_pph"
+        Me.GridColumn17.Name = "GridColumn17"
+        Me.GridColumn17.Visible = True
+        Me.GridColumn17.VisibleIndex = 9
+        '
+        'RISLECOAPPH
+        '
+        Me.RISLECOAPPH.AutoHeight = False
+        Me.RISLECOAPPH.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.RISLECOAPPH.Name = "RISLECOAPPH"
+        Me.RISLECOAPPH.NullText = "- No PPH -"
+        Me.RISLECOAPPH.View = Me.GridView4
+        '
+        'GridView4
+        '
+        Me.GridView4.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn18, Me.GridColumn19, Me.GridColumn20})
+        Me.GridView4.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView4.Name = "GridView4"
+        Me.GridView4.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView4.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn18
+        '
+        Me.GridColumn18.Caption = "Id"
+        Me.GridColumn18.FieldName = "id_acc"
+        Me.GridColumn18.Name = "GridColumn18"
+        Me.GridColumn18.OptionsColumn.AllowEdit = False
+        '
+        'GridColumn19
+        '
+        Me.GridColumn19.Caption = "Account"
+        Me.GridColumn19.FieldName = "acc_name"
+        Me.GridColumn19.Name = "GridColumn19"
+        Me.GridColumn19.Visible = True
+        Me.GridColumn19.VisibleIndex = 0
+        '
+        'GridColumn20
+        '
+        Me.GridColumn20.Caption = "Description"
+        Me.GridColumn20.FieldName = "acc_description"
+        Me.GridColumn20.Name = "GridColumn20"
+        Me.GridColumn20.Visible = True
+        Me.GridColumn20.VisibleIndex = 1
+        '
+        'GridColumn16
+        '
+        Me.GridColumn16.Caption = "PPH (%)"
+        Me.GridColumn16.ColumnEdit = Me.RepositoryItemTextEdit2
+        Me.GridColumn16.FieldName = "pph_percent"
+        Me.GridColumn16.Name = "GridColumn16"
+        Me.GridColumn16.Visible = True
+        Me.GridColumn16.VisibleIndex = 10
+        '
+        'RepositoryItemTextEdit2
+        '
+        Me.RepositoryItemTextEdit2.AutoHeight = False
+        Me.RepositoryItemTextEdit2.Mask.EditMask = "N2"
+        Me.RepositoryItemTextEdit2.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
+        Me.RepositoryItemTextEdit2.Mask.UseMaskAsDisplayFormat = True
+        Me.RepositoryItemTextEdit2.Name = "RepositoryItemTextEdit2"
+        '
+        'GridColumn7
+        '
+        Me.GridColumn7.Caption = "PPH"
+        Me.GridColumn7.ColumnEdit = Me.RepositoryItemTextEdit3
+        Me.GridColumn7.DisplayFormat.FormatString = "N2"
+        Me.GridColumn7.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn7.FieldName = "pph_value"
+        Me.GridColumn7.Name = "GridColumn7"
+        Me.GridColumn7.OptionsColumn.AllowEdit = False
+        Me.GridColumn7.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "pph_value", "{0:N2}")})
+        Me.GridColumn7.UnboundExpression = "[pph_percent] / 100 * [amount]"
+        Me.GridColumn7.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
+        Me.GridColumn7.Visible = True
+        Me.GridColumn7.VisibleIndex = 11
+        '
+        'RepositoryItemTextEdit3
+        '
+        Me.RepositoryItemTextEdit3.AutoHeight = False
+        Me.RepositoryItemTextEdit3.Mask.EditMask = "N2"
+        Me.RepositoryItemTextEdit3.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
+        Me.RepositoryItemTextEdit3.Mask.UseMaskAsDisplayFormat = True
+        Me.RepositoryItemTextEdit3.Name = "RepositoryItemTextEdit3"
+        '
         'GridColumnAccountDescription
         '
         Me.GridColumnAccountDescription.Caption = "Account"
@@ -1011,7 +1142,7 @@ Partial Class FormItemExpenseDet
         Me.XTPDraftJournal.Location = New System.Drawing.Point(0, 129)
         Me.XTPDraftJournal.Name = "XTPDraftJournal"
         Me.XTPDraftJournal.SelectedTabPage = Me.XTPDetail
-        Me.XTPDraftJournal.Size = New System.Drawing.Size(934, 326)
+        Me.XTPDraftJournal.Size = New System.Drawing.Size(934, 296)
         Me.XTPDraftJournal.TabIndex = 19
         Me.XTPDraftJournal.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPDetail, Me.XTPDraft})
         '
@@ -1020,14 +1151,14 @@ Partial Class FormItemExpenseDet
         Me.XTPDetail.Controls.Add(Me.GCData)
         Me.XTPDetail.Controls.Add(Me.PanelControlNav)
         Me.XTPDetail.Name = "XTPDetail"
-        Me.XTPDetail.Size = New System.Drawing.Size(928, 298)
+        Me.XTPDetail.Size = New System.Drawing.Size(928, 268)
         Me.XTPDetail.Text = "Detail"
         '
         'XTPDraft
         '
         Me.XTPDraft.Controls.Add(Me.GCDraft)
         Me.XTPDraft.Name = "XTPDraft"
-        Me.XTPDraft.Size = New System.Drawing.Size(928, 298)
+        Me.XTPDraft.Size = New System.Drawing.Size(928, 268)
         Me.XTPDraft.Text = "Draft Journal"
         '
         'GCDraft
@@ -1036,7 +1167,7 @@ Partial Class FormItemExpenseDet
         Me.GCDraft.Location = New System.Drawing.Point(0, 0)
         Me.GCDraft.MainView = Me.GVDraft
         Me.GCDraft.Name = "GCDraft"
-        Me.GCDraft.Size = New System.Drawing.Size(928, 298)
+        Me.GCDraft.Size = New System.Drawing.Size(928, 268)
         Me.GCDraft.TabIndex = 2
         Me.GCDraft.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVDraft})
         '
@@ -1048,6 +1179,7 @@ Partial Class FormItemExpenseDet
         Me.GVDraft.OptionsBehavior.Editable = False
         Me.GVDraft.OptionsView.ShowFooter = True
         Me.GVDraft.OptionsView.ShowGroupPanel = False
+        Me.GVDraft.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumndebit_draft, DevExpress.Data.ColumnSortOrder.Descending)})
         '
         'GridColumnNoDraft
         '
@@ -1130,6 +1262,12 @@ Partial Class FormItemExpenseDet
         Me.GridColumncc.Visible = True
         Me.GridColumncc.VisibleIndex = 3
         '
+        'GrossUpPPHToolStripMenuItem
+        '
+        Me.GrossUpPPHToolStripMenuItem.Name = "GrossUpPPHToolStripMenuItem"
+        Me.GrossUpPPHToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.GrossUpPPHToolStripMenuItem.Text = "Gross up PPH"
+        '
         'FormItemExpenseDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1157,6 +1295,7 @@ Partial Class FormItemExpenseDet
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl4.ResumeLayout(False)
         Me.PanelControl4.PerformLayout()
+        CType(Me.TEPPH.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtTotal.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtVAT.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtSubTotal.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1190,6 +1329,10 @@ Partial Class FormItemExpenseDet
         CType(Me.RISLECatExpense, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RISLECOAPPH, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemTextEdit3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemSpinEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XTPDraftJournal, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XTPDraftJournal.ResumeLayout(False)
@@ -1299,4 +1442,17 @@ Partial Class FormItemExpenseDet
     Friend WithEvents GridColumndebit_draft As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumncredit_draft As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumncc As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn17 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn16 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn7 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RISLECOAPPH As DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit
+    Friend WithEvents GridView4 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn18 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn19 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn20 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RepositoryItemTextEdit2 As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
+    Friend WithEvents RepositoryItemTextEdit3 As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
+    Friend WithEvents TEPPH As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LabelControl14 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents GrossUpPPHToolStripMenuItem As ToolStripMenuItem
 End Class

@@ -3468,6 +3468,12 @@
     <Compile Include="FormSalesBranch.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormSalesBranchDet.Designer.vb">
+      <DependentUpon>FormSalesBranchDet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormSalesBranchDet.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormSalesCreditNote.designer.vb">
       <DependentUpon>FormSalesCreditNote.vb</DependentUpon>
     </Compile>
@@ -9850,6 +9856,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormSalesBranch.resx">
       <DependentUpon>FormSalesBranch.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSalesBranchDet.resx">
+      <DependentUpon>FormSalesBranchDet.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormSalesCreditNote.resx">
       <DependentUpon>FormSalesCreditNote.vb</DependentUpon>

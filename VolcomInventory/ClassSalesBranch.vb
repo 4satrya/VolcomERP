@@ -13,7 +13,9 @@
         End If
 
         Dim query As String = "SELECT b.id_sales_branch, b.id_coa_tag, ct.tag_description AS `unit`, b.created_date, b.transaction_date, 
-        b.id_report_status, stt.report_status, b.note, b.`value` 
+        b.id_report_status, stt.report_status, b.note, b.`value`,
+        b.rev_normal, b.rev_normal_ppn, b.rev_normal_before_ppn, b.comp_rev_normal, 
+        b.rev_sale, b.rev_sale_ppn, b.rev_sale_before_ppn, b.comp_rev_sale
         FROM tb_sales_branch b
         INNER JOIN tb_coa_tag ct ON ct.id_coa_tag = b.id_coa_tag
         INNER JOIN tb_lookup_report_status stt ON stt.id_report_status = b.id_report_status

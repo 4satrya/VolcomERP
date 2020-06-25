@@ -4,12 +4,32 @@
     Dim bdel_active As String = "1"
 
     Private Sub FormSalesBranch_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        viewData()
+        Dim dt_now As DataTable = execute_query("SELECT DATE(NOW()) as tgl", -1, True, "", "", "", "")
+        DEFromList.EditValue = dt_now.Rows(0)("tgl")
+        DEUntilList.EditValue = dt_now.Rows(0)("tgl")
     End Sub
 
     Sub viewData()
         Cursor = Cursors.WaitCursor
+        'date
+        Dim date_from_selected As String = "0000-01-01"
+        Dim date_until_selected As String = "9999-01-01"
+        Try
+            date_from_selected = DateTime.Parse(DEFromList.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+        Try
+            date_until_selected = DateTime.Parse(DEUntilList.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+        Dim where_string As String = "AND (DATE(created_date)>='" + date_from_selected + "' AND DATE(created_date)<='" + date_until_selected + "') "
 
+        Dim sb As New ClassSalesBranch()
+        Dim query As String = sb.queryMain(where_string, "2")
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCData.DataSource = data
+        GVData.BestFitColumns()
+        check_menu()
         Cursor = Cursors.Default
     End Sub
 
@@ -21,14 +41,14 @@
     Sub check_menu()
         If GVData.RowCount < 1 Then
             'hide all except new
-            bnew_active = "0"
+            bnew_active = "1"
             bedit_active = "0"
             bdel_active = "0"
             checkFormAccess(Name)
             button_main(bnew_active, bedit_active, bdel_active)
         Else
             'show all
-            bnew_active = "0"
+            bnew_active = "1"
             bedit_active = "1"
             bdel_active = "0"
             noManipulating()
@@ -56,5 +76,9 @@
 
     Private Sub FormSalesBranch_Deactivate(sender As Object, e As EventArgs) Handles MyBase.Deactivate
         FormMain.hide_rb()
+    End Sub
+
+    Private Sub BViewPayment_Click(sender As Object, e As EventArgs) Handles BViewPayment.Click
+        viewData()
     End Sub
 End Class

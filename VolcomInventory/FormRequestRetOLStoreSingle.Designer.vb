@@ -21,8 +21,6 @@ Partial Class FormRequestRetOLStoreSingle
     Private Sub InitializeComponent()
         Me.GCData = New DevExpress.XtraGrid.GridControl()
         Me.GVData = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
-        Me.BtnChoose = New DevExpress.XtraEditors.SimpleButton()
         Me.GridColumnid_sales_order_det = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncode = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnscanned_code = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -30,6 +28,10 @@ Partial Class FormRequestRetOLStoreSingle
         Me.GridColumnsize = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnol_store_id = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnitem_id = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.BtnChoose = New DevExpress.XtraEditors.SimpleButton()
+        Me.GridColumndesign_price = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumndesign_cat = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GCData, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVData, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -48,31 +50,13 @@ Partial Class FormRequestRetOLStoreSingle
         '
         'GVData
         '
-        Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnid_sales_order_det, Me.GridColumncode, Me.GridColumnscanned_code, Me.GridColumnname, Me.GridColumnsize, Me.GridColumnol_store_id, Me.GridColumnitem_id})
+        Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnid_sales_order_det, Me.GridColumncode, Me.GridColumnscanned_code, Me.GridColumnname, Me.GridColumnsize, Me.GridColumnol_store_id, Me.GridColumnitem_id, Me.GridColumndesign_price, Me.GridColumndesign_cat})
         Me.GVData.GridControl = Me.GCData
         Me.GVData.Name = "GVData"
         Me.GVData.OptionsBehavior.Editable = False
         Me.GVData.OptionsFind.AlwaysVisible = True
         Me.GVData.OptionsView.ColumnAutoWidth = False
         Me.GVData.OptionsView.ShowGroupPanel = False
-        '
-        'PanelControl1
-        '
-        Me.PanelControl1.Controls.Add(Me.BtnChoose)
-        Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl1.Location = New System.Drawing.Point(0, 303)
-        Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(658, 50)
-        Me.PanelControl1.TabIndex = 1
-        '
-        'BtnChoose
-        '
-        Me.BtnChoose.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.BtnChoose.Location = New System.Drawing.Point(2, 2)
-        Me.BtnChoose.Name = "BtnChoose"
-        Me.BtnChoose.Size = New System.Drawing.Size(654, 46)
-        Me.BtnChoose.TabIndex = 0
-        Me.BtnChoose.Text = "Choose"
         '
         'GridColumnid_sales_order_det
         '
@@ -118,7 +102,7 @@ Partial Class FormRequestRetOLStoreSingle
         Me.GridColumnol_store_id.FieldName = "ol_store_id"
         Me.GridColumnol_store_id.Name = "GridColumnol_store_id"
         Me.GridColumnol_store_id.Visible = True
-        Me.GridColumnol_store_id.VisibleIndex = 4
+        Me.GridColumnol_store_id.VisibleIndex = 6
         '
         'GridColumnitem_id
         '
@@ -126,7 +110,44 @@ Partial Class FormRequestRetOLStoreSingle
         Me.GridColumnitem_id.FieldName = "item_id"
         Me.GridColumnitem_id.Name = "GridColumnitem_id"
         Me.GridColumnitem_id.Visible = True
-        Me.GridColumnitem_id.VisibleIndex = 5
+        Me.GridColumnitem_id.VisibleIndex = 7
+        '
+        'PanelControl1
+        '
+        Me.PanelControl1.Controls.Add(Me.BtnChoose)
+        Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.PanelControl1.Location = New System.Drawing.Point(0, 303)
+        Me.PanelControl1.Name = "PanelControl1"
+        Me.PanelControl1.Size = New System.Drawing.Size(658, 50)
+        Me.PanelControl1.TabIndex = 1
+        '
+        'BtnChoose
+        '
+        Me.BtnChoose.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.BtnChoose.Location = New System.Drawing.Point(2, 2)
+        Me.BtnChoose.Name = "BtnChoose"
+        Me.BtnChoose.Size = New System.Drawing.Size(654, 46)
+        Me.BtnChoose.TabIndex = 0
+        Me.BtnChoose.Text = "Choose"
+        '
+        'GridColumndesign_price
+        '
+        Me.GridColumndesign_price.Caption = "Unit Price"
+        Me.GridColumndesign_price.DisplayFormat.FormatString = "N0"
+        Me.GridColumndesign_price.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumndesign_price.FieldName = "design_price"
+        Me.GridColumndesign_price.Name = "GridColumndesign_price"
+        Me.GridColumndesign_price.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "design_price", "{0:N0}")})
+        Me.GridColumndesign_price.Visible = True
+        Me.GridColumndesign_price.VisibleIndex = 5
+        '
+        'GridColumndesign_cat
+        '
+        Me.GridColumndesign_cat.Caption = "Status"
+        Me.GridColumndesign_cat.FieldName = "design_cat"
+        Me.GridColumndesign_cat.Name = "GridColumndesign_cat"
+        Me.GridColumndesign_cat.Visible = True
+        Me.GridColumndesign_cat.VisibleIndex = 4
         '
         'FormRequestRetOLStoreSingle
         '
@@ -160,4 +181,6 @@ Partial Class FormRequestRetOLStoreSingle
     Friend WithEvents GridColumnsize As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnol_store_id As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnitem_id As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumndesign_price As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumndesign_cat As DevExpress.XtraGrid.Columns.GridColumn
 End Class

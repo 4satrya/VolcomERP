@@ -27,6 +27,8 @@ Partial Class FormOLStoreBrowseOrder
         Me.GridColumnorder_date = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncustomer_name = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnrec_by_store_date = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnphone = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnaddress = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.GCData, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -63,7 +65,7 @@ Partial Class FormOLStoreBrowseOrder
         '
         'GVData
         '
-        Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnorder_number, Me.GridColumnorder_date, Me.GridColumncustomer_name, Me.GridColumnrec_by_store_date})
+        Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnorder_number, Me.GridColumnorder_date, Me.GridColumncustomer_name, Me.GridColumnrec_by_store_date, Me.GridColumnphone, Me.GridColumnaddress})
         Me.GVData.GridControl = Me.GCData
         Me.GVData.Name = "GVData"
         Me.GVData.OptionsBehavior.Editable = False
@@ -106,6 +108,18 @@ Partial Class FormOLStoreBrowseOrder
         Me.GridColumnrec_by_store_date.Visible = True
         Me.GridColumnrec_by_store_date.VisibleIndex = 3
         '
+        'GridColumnphone
+        '
+        Me.GridColumnphone.Caption = "Phone"
+        Me.GridColumnphone.FieldName = "phone"
+        Me.GridColumnphone.Name = "GridColumnphone"
+        '
+        'GridColumnaddress
+        '
+        Me.GridColumnaddress.Caption = "Address"
+        Me.GridColumnaddress.FieldName = "address"
+        Me.GridColumnaddress.Name = "GridColumnaddress"
+        '
         'FormOLStoreBrowseOrder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -133,4 +147,6 @@ Partial Class FormOLStoreBrowseOrder
     Friend WithEvents GridColumncustomer_name As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnrec_by_store_date As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents BtnChoose As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GridColumnphone As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnaddress As DevExpress.XtraGrid.Columns.GridColumn
 End Class

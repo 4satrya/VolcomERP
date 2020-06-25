@@ -5,7 +5,7 @@
 
     Sub viewData()
         Dim query As String = "SELECT sod.id_sales_order_det, dd.id_product,p.product_full_code AS `code` ,CONCAT(p.product_full_code,dc.pl_sales_order_del_det_counting) AS `scanned_code`, p.product_display_name AS `name`, cd.code_detail_name AS `size`,
-        sod.ol_store_id, sod.item_id
+        sod.ol_store_id, sod.item_id, dd.design_price, stt.design_cat
         FROM tb_sales_order so
         INNER JOIN tb_sales_order_det sod ON sod.id_sales_order = so.id_sales_order
         INNER JOIN tb_pl_sales_order_del_det dd ON dd.id_sales_order_det = sod.id_sales_order_det
@@ -22,6 +22,9 @@
 	        WHERE m.id_report_status!=5
 	        GROUP BY d.id_sales_order_det
         ) a ON a.id_sales_order_det = sod.id_sales_order_det
+        INNER JOIN tb_m_design_price prc ON prc.id_design_price = dd.id_design_price
+        INNER JOIN tb_lookup_design_price_type pt ON pt.id_design_price_type = prc.id_design_price_type
+        INNER JOIN tb_lookup_design_cat stt ON stt.id_design_cat = pt.id_design_cat
         WHERE so.sales_order_ol_shop_number='" + addSlashes(FormRequestRetOLStore.TxtOrderNumber.Text) + "' AND c.id_comp_group=" + FormRequestRetOLStore.SLECompGroup.EditValue.ToString + " AND ISNULL(a.id_sales_order_det) "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         Dim data_par As DataTable = FormRequestRetOLStore.GCData.DataSource
@@ -62,6 +65,8 @@
             newRow("size") = GVData.GetFocusedRowCellValue("size").ToString
             newRow("item_id") = GVData.GetFocusedRowCellValue("item_id").ToString
             newRow("ol_store_id") = GVData.GetFocusedRowCellValue("ol_store_id").ToString
+            newRow("design_cat") = GVData.GetFocusedRowCellValue("design_cat").ToString
+            newRow("design_price") = GVData.GetFocusedRowCellValue("design_price")
             TryCast(FormRequestRetOLStore.GCData.DataSource, DataTable).Rows.Add(newRow)
             FormRequestRetOLStore.GCData.RefreshDataSource()
             FormRequestRetOLStore.GVData.RefreshData()

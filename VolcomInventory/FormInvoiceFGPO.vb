@@ -123,7 +123,7 @@ LEFT JOIN
 	WHERE pn.id_report_status !=5 AND pn.doc_type=2 AND pn.type=1
 	GROUP BY id_prod_order
 )dp_paid ON dp_paid.id_prod_order=po.id_prod_order
-WHERE wo.`is_main_vendor`='1' AND po.`is_dp_paid`='2' AND ISNULL(dp_paid.id_prod_order) AND pn.doc_type <> 4 " & query_where & "
+WHERE wo.`is_main_vendor`='1' AND po.`is_dp_paid`='2' AND ISNULL(dp_paid.id_prod_order) " & query_where & "
 GROUP BY wo.`id_prod_order_wo`"
                     Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
                     GCDPFGPO.DataSource = data

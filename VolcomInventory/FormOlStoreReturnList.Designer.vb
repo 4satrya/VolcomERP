@@ -37,6 +37,8 @@ Partial Class FormOlStoreReturnList
         Me.GridColumn15 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.BSearch = New DevExpress.XtraEditors.SimpleButton()
         Me.GCList = New DevExpress.XtraGrid.GridControl()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.DetailRefundToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GVList = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -51,6 +53,12 @@ Partial Class FormOlStoreReturnList
         Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnid_comp_group = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnid_sales_order_det = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnrequest_ref = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnrek_no = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnrek_name = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnrek_bank = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnrek_branch = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnid_ol_store_ret_req_list = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.XTCData = New DevExpress.XtraTab.XtraTabControl()
         Me.XTPRequest = New DevExpress.XtraTab.XtraTabPage()
         Me.GCRequest = New DevExpress.XtraGrid.GridControl()
@@ -74,14 +82,10 @@ Partial Class FormOlStoreReturnList
         Me.BtnPrint = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnNew = New DevExpress.XtraEditors.SimpleButton()
         Me.XTPReceived = New DevExpress.XtraTab.XtraTabPage()
-        Me.GridColumnrequest_ref = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnrek_no = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnrek_name = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnrek_bank = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnrek_branch = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnid_ol_store_ret_req_list = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.DetailRefundToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.XTPFollowUp = New DevExpress.XtraTab.XtraTabPage()
+        Me.XTCFollowUp = New DevExpress.XtraTab.XtraTabControl()
+        Me.XTPList = New DevExpress.XtraTab.XtraTabPage()
+        Me.XTPRequestList = New DevExpress.XtraTab.XtraTabPage()
         CType(Me.RICECheck, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
@@ -90,6 +94,7 @@ Partial Class FormOlStoreReturnList
         CType(Me.SLEOrder.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GCList, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.GVList, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XTCData, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCData.SuspendLayout()
@@ -99,7 +104,9 @@ Partial Class FormOlStoreReturnList
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
         Me.XTPReceived.SuspendLayout()
-        Me.ContextMenuStrip1.SuspendLayout()
+        Me.XTPFollowUp.SuspendLayout()
+        CType(Me.XTCFollowUp, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTCFollowUp.SuspendLayout()
         Me.SuspendLayout()
         '
         'RICECheck
@@ -243,6 +250,18 @@ Partial Class FormOlStoreReturnList
         Me.GCList.TabIndex = 1
         Me.GCList.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVList})
         '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DetailRefundToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(146, 26)
+        '
+        'DetailRefundToolStripMenuItem
+        '
+        Me.DetailRefundToolStripMenuItem.Name = "DetailRefundToolStripMenuItem"
+        Me.DetailRefundToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.DetailRefundToolStripMenuItem.Text = "Detail Refund"
+        '
         'GVList
         '
         Me.GVList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn11, Me.GridColumn1, Me.GridColumn8, Me.GridColumn7, Me.GridColumn10, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn9, Me.GridColumn5, Me.GridColumn6, Me.GridColumnid_comp_group, Me.GridColumnid_sales_order_det, Me.GridColumnrequest_ref, Me.GridColumnrek_no, Me.GridColumnrek_name, Me.GridColumnrek_bank, Me.GridColumnrek_branch, Me.GridColumnid_ol_store_ret_req_list})
@@ -356,6 +375,51 @@ Partial Class FormOlStoreReturnList
         Me.GridColumnid_sales_order_det.Name = "GridColumnid_sales_order_det"
         Me.GridColumnid_sales_order_det.OptionsColumn.AllowEdit = False
         '
+        'GridColumnrequest_ref
+        '
+        Me.GridColumnrequest_ref.Caption = "Request Ref"
+        Me.GridColumnrequest_ref.FieldName = "request_ref"
+        Me.GridColumnrequest_ref.Name = "GridColumnrequest_ref"
+        Me.GridColumnrequest_ref.Width = 128
+        '
+        'GridColumnrek_no
+        '
+        Me.GridColumnrek_no.Caption = "No Rekening"
+        Me.GridColumnrek_no.FieldName = "rek_no"
+        Me.GridColumnrek_no.Name = "GridColumnrek_no"
+        Me.GridColumnrek_no.Visible = True
+        Me.GridColumnrek_no.VisibleIndex = 9
+        '
+        'GridColumnrek_name
+        '
+        Me.GridColumnrek_name.Caption = "Atas Nama"
+        Me.GridColumnrek_name.FieldName = "rek_name"
+        Me.GridColumnrek_name.Name = "GridColumnrek_name"
+        Me.GridColumnrek_name.Visible = True
+        Me.GridColumnrek_name.VisibleIndex = 10
+        '
+        'GridColumnrek_bank
+        '
+        Me.GridColumnrek_bank.Caption = "Bank"
+        Me.GridColumnrek_bank.FieldName = "rek_bank"
+        Me.GridColumnrek_bank.Name = "GridColumnrek_bank"
+        Me.GridColumnrek_bank.Visible = True
+        Me.GridColumnrek_bank.VisibleIndex = 11
+        '
+        'GridColumnrek_branch
+        '
+        Me.GridColumnrek_branch.Caption = "Cabang"
+        Me.GridColumnrek_branch.FieldName = "rek_branch"
+        Me.GridColumnrek_branch.Name = "GridColumnrek_branch"
+        Me.GridColumnrek_branch.Visible = True
+        Me.GridColumnrek_branch.VisibleIndex = 12
+        '
+        'GridColumnid_ol_store_ret_req_list
+        '
+        Me.GridColumnid_ol_store_ret_req_list.Caption = "id_ol_store_ret_req"
+        Me.GridColumnid_ol_store_ret_req_list.FieldName = "id_ol_store_ret_req"
+        Me.GridColumnid_ol_store_ret_req_list.Name = "GridColumnid_ol_store_ret_req_list"
+        '
         'XTCData
         '
         Me.XTCData.Dock = System.Windows.Forms.DockStyle.Fill
@@ -365,7 +429,7 @@ Partial Class FormOlStoreReturnList
         Me.XTCData.SelectedTabPage = Me.XTPRequest
         Me.XTCData.Size = New System.Drawing.Size(1164, 559)
         Me.XTCData.TabIndex = 2
-        Me.XTCData.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPRequest, Me.XTPReceived})
+        Me.XTCData.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPRequest, Me.XTPReceived, Me.XTPFollowUp})
         '
         'XTPRequest
         '
@@ -555,62 +619,36 @@ Partial Class FormOlStoreReturnList
         Me.XTPReceived.Size = New System.Drawing.Size(1158, 531)
         Me.XTPReceived.Text = "Received List"
         '
-        'GridColumnrequest_ref
+        'XTPFollowUp
         '
-        Me.GridColumnrequest_ref.Caption = "Request Ref"
-        Me.GridColumnrequest_ref.FieldName = "request_ref"
-        Me.GridColumnrequest_ref.Name = "GridColumnrequest_ref"
-        Me.GridColumnrequest_ref.Width = 128
+        Me.XTPFollowUp.Controls.Add(Me.XTCFollowUp)
+        Me.XTPFollowUp.Name = "XTPFollowUp"
+        Me.XTPFollowUp.Size = New System.Drawing.Size(1158, 531)
+        Me.XTPFollowUp.Text = "Follow Up"
         '
-        'GridColumnrek_no
+        'XTCFollowUp
         '
-        Me.GridColumnrek_no.Caption = "No Rekening"
-        Me.GridColumnrek_no.FieldName = "rek_no"
-        Me.GridColumnrek_no.Name = "GridColumnrek_no"
-        Me.GridColumnrek_no.Visible = True
-        Me.GridColumnrek_no.VisibleIndex = 9
+        Me.XTCFollowUp.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.XTCFollowUp.HeaderLocation = DevExpress.XtraTab.TabHeaderLocation.Right
+        Me.XTCFollowUp.Location = New System.Drawing.Point(0, 0)
+        Me.XTCFollowUp.Name = "XTCFollowUp"
+        Me.XTCFollowUp.SelectedTabPage = Me.XTPList
+        Me.XTCFollowUp.Size = New System.Drawing.Size(1158, 531)
+        Me.XTCFollowUp.TabIndex = 0
+        Me.XTCFollowUp.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPList, Me.XTPRequestList})
         '
-        'GridColumnrek_name
+        'XTPList
         '
-        Me.GridColumnrek_name.Caption = "Atas Nama"
-        Me.GridColumnrek_name.FieldName = "rek_name"
-        Me.GridColumnrek_name.Name = "GridColumnrek_name"
-        Me.GridColumnrek_name.Visible = True
-        Me.GridColumnrek_name.VisibleIndex = 10
+        Me.XTPList.Name = "XTPList"
+        Me.XTPList.Size = New System.Drawing.Size(1129, 525)
+        Me.XTPList.Text = "List"
+        Me.XTPList.UseWaitCursor = True
         '
-        'GridColumnrek_bank
+        'XTPRequestList
         '
-        Me.GridColumnrek_bank.Caption = "Bank"
-        Me.GridColumnrek_bank.FieldName = "rek_bank"
-        Me.GridColumnrek_bank.Name = "GridColumnrek_bank"
-        Me.GridColumnrek_bank.Visible = True
-        Me.GridColumnrek_bank.VisibleIndex = 11
-        '
-        'GridColumnrek_branch
-        '
-        Me.GridColumnrek_branch.Caption = "Cabang"
-        Me.GridColumnrek_branch.FieldName = "rek_branch"
-        Me.GridColumnrek_branch.Name = "GridColumnrek_branch"
-        Me.GridColumnrek_branch.Visible = True
-        Me.GridColumnrek_branch.VisibleIndex = 12
-        '
-        'GridColumnid_ol_store_ret_req_list
-        '
-        Me.GridColumnid_ol_store_ret_req_list.Caption = "id_ol_store_ret_req"
-        Me.GridColumnid_ol_store_ret_req_list.FieldName = "id_ol_store_ret_req"
-        Me.GridColumnid_ol_store_ret_req_list.Name = "GridColumnid_ol_store_ret_req_list"
-        '
-        'ContextMenuStrip1
-        '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DetailRefundToolStripMenuItem})
-        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(153, 48)
-        '
-        'DetailRefundToolStripMenuItem
-        '
-        Me.DetailRefundToolStripMenuItem.Name = "DetailRefundToolStripMenuItem"
-        Me.DetailRefundToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.DetailRefundToolStripMenuItem.Text = "Detail Refund"
+        Me.XTPRequestList.Name = "XTPRequestList"
+        Me.XTPRequestList.Size = New System.Drawing.Size(1129, 525)
+        Me.XTPRequestList.Text = "Requested List"
         '
         'FormOlStoreReturnList
         '
@@ -633,6 +671,7 @@ Partial Class FormOlStoreReturnList
         CType(Me.SLEOrder.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GCList, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ContextMenuStrip1.ResumeLayout(False)
         CType(Me.GVList, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XTCData, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XTCData.ResumeLayout(False)
@@ -642,7 +681,9 @@ Partial Class FormOlStoreReturnList
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl2.ResumeLayout(False)
         Me.XTPReceived.ResumeLayout(False)
-        Me.ContextMenuStrip1.ResumeLayout(False)
+        Me.XTPFollowUp.ResumeLayout(False)
+        CType(Me.XTCFollowUp, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTCFollowUp.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -708,4 +749,8 @@ Partial Class FormOlStoreReturnList
     Friend WithEvents GridColumnid_ol_store_ret_req_list As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
     Friend WithEvents DetailRefundToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents XTPFollowUp As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents XTCFollowUp As DevExpress.XtraTab.XtraTabControl
+    Friend WithEvents XTPList As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents XTPRequestList As DevExpress.XtraTab.XtraTabPage
 End Class

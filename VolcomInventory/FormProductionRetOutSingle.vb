@@ -314,7 +314,7 @@ WHERE ovhp.id_ovh_price='" & SLEOvh.EditValue.ToString & "'"
         '    End If
         'Next
         'cek Receive itu udah ada ret out atau belum
-        Dim q As String = "SELECT * FROM tb_prod_order_ret_out WHERE id_prod_order_rec='" & id_prod_order_rec & "' AND (id_report_status!=5) AND id_prod_order_ret_out!='" & id_prod_order_ret_out & "'"
+        Dim q As String = "SELECT * FROM tb_prod_order_ret_out WHERE id_prod_order_rec='" & id_prod_order_rec & "' AND id_report_status!=5 AND id_report_status!=6 AND id_prod_order_ret_out!='" & id_prod_order_ret_out & "'"
         Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
         If dt.Rows.Count > 0 Then
             already_ret_out = True

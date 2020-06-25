@@ -19,10 +19,13 @@ Partial Class FormReportBalanceSheet
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.PCFilterUpper = New DevExpress.XtraEditors.PanelControl()
         Me.BPrint = New DevExpress.XtraEditors.SimpleButton()
         Me.SLEUnit = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.BView = New DevExpress.XtraEditors.SimpleButton()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
@@ -119,11 +122,41 @@ Partial Class FormReportBalanceSheet
         Me.BandedGridColumn23 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumn24 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumn25 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
-        CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.PanelControl1.SuspendLayout()
+        Me.XTPPajak = New DevExpress.XtraTab.XtraTabPage()
+        Me.XTPTaxDetail = New DevExpress.XtraTab.XtraTabControl()
+        Me.XTPTaxSummary = New DevExpress.XtraTab.XtraTabPage()
+        Me.XTPTaxDetails = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCTaxReport = New DevExpress.XtraGrid.GridControl()
+        Me.GVTaxReport = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn13 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn14 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn15 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn16 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn17 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.PCPajak = New DevExpress.XtraEditors.PanelControl()
+        Me.SLETaxTagCOA = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn18 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn19 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn20 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
+        Me.DETaxUntil = New DevExpress.XtraEditors.DateEdit()
+        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
+        Me.BPrintPajak = New DevExpress.XtraEditors.SimpleButton()
+        Me.BViewPajak = New DevExpress.XtraEditors.SimpleButton()
+        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
+        Me.DETaxFrom = New DevExpress.XtraEditors.DateEdit()
+        CType(Me.PCFilterUpper, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PCFilterUpper.SuspendLayout()
         CType(Me.SLEUnit.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -156,21 +189,35 @@ Partial Class FormReportBalanceSheet
         Me.XTPPLReportView.SuspendLayout()
         CType(Me.GCProfitAndLoss, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVProfitAndLoss, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTPPajak.SuspendLayout()
+        CType(Me.XTPTaxDetail, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTPTaxDetail.SuspendLayout()
+        Me.XTPTaxDetails.SuspendLayout()
+        CType(Me.GCTaxReport, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVTaxReport, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PCPajak, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PCPajak.SuspendLayout()
+        CType(Me.SLETaxTagCOA.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DETaxUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DETaxUntil.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DETaxFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DETaxFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'PanelControl1
+        'PCFilterUpper
         '
-        Me.PanelControl1.Controls.Add(Me.BPrint)
-        Me.PanelControl1.Controls.Add(Me.SLEUnit)
-        Me.PanelControl1.Controls.Add(Me.LabelControl2)
-        Me.PanelControl1.Controls.Add(Me.BView)
-        Me.PanelControl1.Controls.Add(Me.LabelControl1)
-        Me.PanelControl1.Controls.Add(Me.DEUntil)
-        Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.PanelControl1.Location = New System.Drawing.Point(0, 0)
-        Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(900, 48)
-        Me.PanelControl1.TabIndex = 0
+        Me.PCFilterUpper.Controls.Add(Me.BPrint)
+        Me.PCFilterUpper.Controls.Add(Me.SLEUnit)
+        Me.PCFilterUpper.Controls.Add(Me.LabelControl2)
+        Me.PCFilterUpper.Controls.Add(Me.BView)
+        Me.PCFilterUpper.Controls.Add(Me.LabelControl1)
+        Me.PCFilterUpper.Controls.Add(Me.DEUntil)
+        Me.PCFilterUpper.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PCFilterUpper.Location = New System.Drawing.Point(0, 0)
+        Me.PCFilterUpper.Name = "PCFilterUpper"
+        Me.PCFilterUpper.Size = New System.Drawing.Size(900, 48)
+        Me.PCFilterUpper.TabIndex = 0
         '
         'BPrint
         '
@@ -196,6 +243,34 @@ Partial Class FormReportBalanceSheet
         Me.SearchLookUpEdit1View.Name = "SearchLookUpEdit1View"
         Me.SearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = False
         Me.SearchLookUpEdit1View.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn1
+        '
+        Me.GridColumn1.Caption = "id_comp"
+        Me.GridColumn1.FieldName = "id_comp"
+        Me.GridColumn1.Name = "GridColumn1"
+        '
+        'GridColumn3
+        '
+        Me.GridColumn3.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn3.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn3.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn3.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn3.Caption = "Number"
+        Me.GridColumn3.FieldName = "comp_number"
+        Me.GridColumn3.Name = "GridColumn3"
+        Me.GridColumn3.Visible = True
+        Me.GridColumn3.VisibleIndex = 0
+        Me.GridColumn3.Width = 281
+        '
+        'GridColumn2
+        '
+        Me.GridColumn2.Caption = "Unit"
+        Me.GridColumn2.FieldName = "comp_name"
+        Me.GridColumn2.Name = "GridColumn2"
+        Me.GridColumn2.Visible = True
+        Me.GridColumn2.VisibleIndex = 1
+        Me.GridColumn2.Width = 1351
         '
         'LabelControl2
         '
@@ -354,7 +429,7 @@ Partial Class FormReportBalanceSheet
         Me.XTCBalanceSheet.SelectedTabPage = Me.XTPGeneralLedger
         Me.XTCBalanceSheet.Size = New System.Drawing.Size(900, 472)
         Me.XTCBalanceSheet.TabIndex = 2
-        Me.XTCBalanceSheet.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPGeneralLedger, Me.XTPBalanceSheet, Me.XTPProfitAndLoss})
+        Me.XTCBalanceSheet.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPGeneralLedger, Me.XTPBalanceSheet, Me.XTPProfitAndLoss, Me.XTPPajak})
         '
         'XTPGeneralLedger
         '
@@ -1058,33 +1133,275 @@ Partial Class FormReportBalanceSheet
         Me.BandedGridColumn25.FieldName = "id_acc"
         Me.BandedGridColumn25.Name = "BandedGridColumn25"
         '
-        'GridColumn1
+        'XTPPajak
         '
-        Me.GridColumn1.Caption = "id_comp"
-        Me.GridColumn1.FieldName = "id_comp"
-        Me.GridColumn1.Name = "GridColumn1"
+        Me.XTPPajak.Controls.Add(Me.XTPTaxDetail)
+        Me.XTPPajak.Controls.Add(Me.PCPajak)
+        Me.XTPPajak.Name = "XTPPajak"
+        Me.XTPPajak.Size = New System.Drawing.Size(894, 444)
+        Me.XTPPajak.Text = "Tax Report"
         '
-        'GridColumn2
+        'XTPTaxDetail
         '
-        Me.GridColumn2.Caption = "Unit"
-        Me.GridColumn2.FieldName = "comp_name"
-        Me.GridColumn2.Name = "GridColumn2"
-        Me.GridColumn2.Visible = True
-        Me.GridColumn2.VisibleIndex = 1
-        Me.GridColumn2.Width = 1351
+        Me.XTPTaxDetail.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.XTPTaxDetail.HeaderLocation = DevExpress.XtraTab.TabHeaderLocation.Bottom
+        Me.XTPTaxDetail.Location = New System.Drawing.Point(0, 48)
+        Me.XTPTaxDetail.Name = "XTPTaxDetail"
+        Me.XTPTaxDetail.SelectedTabPage = Me.XTPTaxSummary
+        Me.XTPTaxDetail.Size = New System.Drawing.Size(894, 396)
+        Me.XTPTaxDetail.TabIndex = 3
+        Me.XTPTaxDetail.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPTaxSummary, Me.XTPTaxDetails})
         '
-        'GridColumn3
+        'XTPTaxSummary
         '
-        Me.GridColumn3.AppearanceCell.Options.UseTextOptions = True
-        Me.GridColumn3.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.GridColumn3.AppearanceHeader.Options.UseTextOptions = True
-        Me.GridColumn3.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.GridColumn3.Caption = "Number"
-        Me.GridColumn3.FieldName = "comp_number"
-        Me.GridColumn3.Name = "GridColumn3"
-        Me.GridColumn3.Visible = True
-        Me.GridColumn3.VisibleIndex = 0
-        Me.GridColumn3.Width = 281
+        Me.XTPTaxSummary.Name = "XTPTaxSummary"
+        Me.XTPTaxSummary.Size = New System.Drawing.Size(888, 368)
+        Me.XTPTaxSummary.Text = "Tax Summary"
+        '
+        'XTPTaxDetails
+        '
+        Me.XTPTaxDetails.Controls.Add(Me.GCTaxReport)
+        Me.XTPTaxDetails.Name = "XTPTaxDetails"
+        Me.XTPTaxDetails.Size = New System.Drawing.Size(888, 368)
+        Me.XTPTaxDetails.Text = "Tax Detail"
+        '
+        'GCTaxReport
+        '
+        Me.GCTaxReport.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCTaxReport.Location = New System.Drawing.Point(0, 0)
+        Me.GCTaxReport.MainView = Me.GVTaxReport
+        Me.GCTaxReport.Name = "GCTaxReport"
+        Me.GCTaxReport.Size = New System.Drawing.Size(888, 368)
+        Me.GCTaxReport.TabIndex = 2
+        Me.GCTaxReport.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVTaxReport})
+        '
+        'GVTaxReport
+        '
+        Me.GVTaxReport.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumn7, Me.GridColumn8, Me.GridColumn9, Me.GridColumn10, Me.GridColumn11, Me.GridColumn12, Me.GridColumn13, Me.GridColumn14, Me.GridColumn15, Me.GridColumn16, Me.GridColumn17})
+        Me.GVTaxReport.GridControl = Me.GCTaxReport
+        Me.GVTaxReport.Name = "GVTaxReport"
+        Me.GVTaxReport.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn4
+        '
+        Me.GridColumn4.Caption = "ID"
+        Me.GridColumn4.Name = "GridColumn4"
+        '
+        'GridColumn5
+        '
+        Me.GridColumn5.Caption = "Journal No."
+        Me.GridColumn5.Name = "GridColumn5"
+        Me.GridColumn5.Visible = True
+        Me.GridColumn5.VisibleIndex = 0
+        '
+        'GridColumn6
+        '
+        Me.GridColumn6.Caption = "Date"
+        Me.GridColumn6.Name = "GridColumn6"
+        Me.GridColumn6.Visible = True
+        Me.GridColumn6.VisibleIndex = 1
+        '
+        'GridColumn7
+        '
+        Me.GridColumn7.Caption = "Refference"
+        Me.GridColumn7.Name = "GridColumn7"
+        Me.GridColumn7.Visible = True
+        Me.GridColumn7.VisibleIndex = 2
+        '
+        'GridColumn8
+        '
+        Me.GridColumn8.Caption = "Description"
+        Me.GridColumn8.Name = "GridColumn8"
+        Me.GridColumn8.Visible = True
+        Me.GridColumn8.VisibleIndex = 3
+        '
+        'GridColumn9
+        '
+        Me.GridColumn9.Caption = "Vendor"
+        Me.GridColumn9.Name = "GridColumn9"
+        Me.GridColumn9.Visible = True
+        Me.GridColumn9.VisibleIndex = 4
+        '
+        'GridColumn10
+        '
+        Me.GridColumn10.Caption = "PPH"
+        Me.GridColumn10.Name = "GridColumn10"
+        Me.GridColumn10.Visible = True
+        Me.GridColumn10.VisibleIndex = 5
+        '
+        'GridColumn11
+        '
+        Me.GridColumn11.Caption = "Tarif"
+        Me.GridColumn11.Name = "GridColumn11"
+        Me.GridColumn11.Visible = True
+        Me.GridColumn11.VisibleIndex = 6
+        '
+        'GridColumn12
+        '
+        Me.GridColumn12.Caption = "DPP"
+        Me.GridColumn12.Name = "GridColumn12"
+        Me.GridColumn12.Visible = True
+        Me.GridColumn12.VisibleIndex = 7
+        '
+        'GridColumn13
+        '
+        Me.GridColumn13.Caption = "NPWP"
+        Me.GridColumn13.Name = "GridColumn13"
+        Me.GridColumn13.Visible = True
+        Me.GridColumn13.VisibleIndex = 8
+        '
+        'GridColumn14
+        '
+        Me.GridColumn14.Caption = "Kitas"
+        Me.GridColumn14.Name = "GridColumn14"
+        Me.GridColumn14.Visible = True
+        Me.GridColumn14.VisibleIndex = 9
+        '
+        'GridColumn15
+        '
+        Me.GridColumn15.Caption = "Nama di Identitas"
+        Me.GridColumn15.Name = "GridColumn15"
+        Me.GridColumn15.Visible = True
+        Me.GridColumn15.VisibleIndex = 10
+        '
+        'GridColumn16
+        '
+        Me.GridColumn16.Caption = "Alamat"
+        Me.GridColumn16.Name = "GridColumn16"
+        Me.GridColumn16.Visible = True
+        Me.GridColumn16.VisibleIndex = 11
+        '
+        'GridColumn17
+        '
+        Me.GridColumn17.Caption = "No Bukti Potong"
+        Me.GridColumn17.Name = "GridColumn17"
+        Me.GridColumn17.Visible = True
+        Me.GridColumn17.VisibleIndex = 12
+        '
+        'PCPajak
+        '
+        Me.PCPajak.Controls.Add(Me.SLETaxTagCOA)
+        Me.PCPajak.Controls.Add(Me.LabelControl5)
+        Me.PCPajak.Controls.Add(Me.DETaxUntil)
+        Me.PCPajak.Controls.Add(Me.LabelControl3)
+        Me.PCPajak.Controls.Add(Me.BPrintPajak)
+        Me.PCPajak.Controls.Add(Me.BViewPajak)
+        Me.PCPajak.Controls.Add(Me.LabelControl4)
+        Me.PCPajak.Controls.Add(Me.DETaxFrom)
+        Me.PCPajak.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PCPajak.Location = New System.Drawing.Point(0, 0)
+        Me.PCPajak.Name = "PCPajak"
+        Me.PCPajak.Size = New System.Drawing.Size(894, 48)
+        Me.PCPajak.TabIndex = 1
+        '
+        'SLETaxTagCOA
+        '
+        Me.SLETaxTagCOA.Location = New System.Drawing.Point(449, 16)
+        Me.SLETaxTagCOA.Name = "SLETaxTagCOA"
+        Me.SLETaxTagCOA.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLETaxTagCOA.Properties.View = Me.GridView1
+        Me.SLETaxTagCOA.Size = New System.Drawing.Size(168, 20)
+        Me.SLETaxTagCOA.TabIndex = 10
+        '
+        'GridView1
+        '
+        Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn18, Me.GridColumn19, Me.GridColumn20})
+        Me.GridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView1.Name = "GridView1"
+        Me.GridView1.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView1.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn18
+        '
+        Me.GridColumn18.Caption = "id_comp"
+        Me.GridColumn18.FieldName = "id_comp"
+        Me.GridColumn18.Name = "GridColumn18"
+        '
+        'GridColumn19
+        '
+        Me.GridColumn19.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn19.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn19.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn19.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn19.Caption = "Number"
+        Me.GridColumn19.FieldName = "comp_number"
+        Me.GridColumn19.Name = "GridColumn19"
+        Me.GridColumn19.Visible = True
+        Me.GridColumn19.VisibleIndex = 0
+        Me.GridColumn19.Width = 281
+        '
+        'GridColumn20
+        '
+        Me.GridColumn20.Caption = "Unit"
+        Me.GridColumn20.FieldName = "comp_name"
+        Me.GridColumn20.Name = "GridColumn20"
+        Me.GridColumn20.Visible = True
+        Me.GridColumn20.VisibleIndex = 1
+        Me.GridColumn20.Width = 1351
+        '
+        'LabelControl5
+        '
+        Me.LabelControl5.Location = New System.Drawing.Point(424, 19)
+        Me.LabelControl5.Name = "LabelControl5"
+        Me.LabelControl5.Size = New System.Drawing.Size(18, 13)
+        Me.LabelControl5.TabIndex = 9
+        Me.LabelControl5.Text = "Tag"
+        '
+        'DETaxUntil
+        '
+        Me.DETaxUntil.EditValue = Nothing
+        Me.DETaxUntil.Location = New System.Drawing.Point(245, 16)
+        Me.DETaxUntil.Name = "DETaxUntil"
+        Me.DETaxUntil.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DETaxUntil.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DETaxUntil.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.DETaxUntil.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DETaxUntil.Size = New System.Drawing.Size(173, 20)
+        Me.DETaxUntil.TabIndex = 8
+        '
+        'LabelControl3
+        '
+        Me.LabelControl3.Location = New System.Drawing.Point(219, 19)
+        Me.LabelControl3.Name = "LabelControl3"
+        Me.LabelControl3.Size = New System.Drawing.Size(20, 13)
+        Me.LabelControl3.TabIndex = 7
+        Me.LabelControl3.Text = "until"
+        '
+        'BPrintPajak
+        '
+        Me.BPrintPajak.Location = New System.Drawing.Point(679, 14)
+        Me.BPrintPajak.Name = "BPrintPajak"
+        Me.BPrintPajak.Size = New System.Drawing.Size(50, 23)
+        Me.BPrintPajak.TabIndex = 6
+        Me.BPrintPajak.Text = "print"
+        '
+        'BViewPajak
+        '
+        Me.BViewPajak.Location = New System.Drawing.Point(623, 14)
+        Me.BViewPajak.Name = "BViewPajak"
+        Me.BViewPajak.Size = New System.Drawing.Size(50, 23)
+        Me.BViewPajak.TabIndex = 3
+        Me.BViewPajak.Text = "view"
+        '
+        'LabelControl4
+        '
+        Me.LabelControl4.Location = New System.Drawing.Point(11, 19)
+        Me.LabelControl4.Name = "LabelControl4"
+        Me.LabelControl4.Size = New System.Drawing.Size(23, 13)
+        Me.LabelControl4.TabIndex = 2
+        Me.LabelControl4.Text = "Date"
+        '
+        'DETaxFrom
+        '
+        Me.DETaxFrom.EditValue = Nothing
+        Me.DETaxFrom.Location = New System.Drawing.Point(40, 16)
+        Me.DETaxFrom.Name = "DETaxFrom"
+        Me.DETaxFrom.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DETaxFrom.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DETaxFrom.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.DETaxFrom.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DETaxFrom.Size = New System.Drawing.Size(173, 20)
+        Me.DETaxFrom.TabIndex = 1
         '
         'FormReportBalanceSheet
         '
@@ -1092,16 +1409,16 @@ Partial Class FormReportBalanceSheet
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(900, 520)
         Me.Controls.Add(Me.XTCBalanceSheet)
-        Me.Controls.Add(Me.PanelControl1)
+        Me.Controls.Add(Me.PCFilterUpper)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FormReportBalanceSheet"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Accounting Report"
-        CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.PanelControl1.ResumeLayout(False)
-        Me.PanelControl1.PerformLayout()
+        CType(Me.PCFilterUpper, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PCFilterUpper.ResumeLayout(False)
+        Me.PCFilterUpper.PerformLayout()
         CType(Me.SLEUnit.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1134,11 +1451,26 @@ Partial Class FormReportBalanceSheet
         Me.XTPPLReportView.ResumeLayout(False)
         CType(Me.GCProfitAndLoss, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVProfitAndLoss, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTPPajak.ResumeLayout(False)
+        CType(Me.XTPTaxDetail, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTPTaxDetail.ResumeLayout(False)
+        Me.XTPTaxDetails.ResumeLayout(False)
+        CType(Me.GCTaxReport, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVTaxReport, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PCPajak, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PCPajak.ResumeLayout(False)
+        Me.PCPajak.PerformLayout()
+        CType(Me.SLETaxTagCOA.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DETaxUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DETaxUntil.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DETaxFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DETaxFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
 
-    Friend WithEvents PanelControl1 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents PCFilterUpper As DevExpress.XtraEditors.PanelControl
     Friend WithEvents TLBalanceSheet As DevExpress.XtraTreeList.TreeList
     Friend WithEvents XTCBalanceSheet As DevExpress.XtraTab.XtraTabControl
     Friend WithEvents XTPGeneralLedger As DevExpress.XtraTab.XtraTabPage
@@ -1241,4 +1573,37 @@ Partial Class FormReportBalanceSheet
     Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn2 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn3 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents XTPPajak As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents PCPajak As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents DETaxUntil As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents LabelControl3 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents BPrintPajak As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BViewPajak As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents LabelControl4 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents DETaxFrom As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents GCTaxReport As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVTaxReport As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents XTPTaxDetail As DevExpress.XtraTab.XtraTabControl
+    Friend WithEvents XTPTaxSummary As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents XTPTaxDetails As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn7 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn8 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn9 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn10 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn11 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn12 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn13 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn14 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn15 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn16 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn17 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents SLETaxTagCOA As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView1 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn18 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn19 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn20 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LabelControl5 As DevExpress.XtraEditors.LabelControl
 End Class

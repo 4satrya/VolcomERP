@@ -702,7 +702,7 @@ Partial Public Class ReportFGPODP
         Me.XrLabel6.StylePriority.UseFont = False
         Me.XrLabel6.StylePriority.UsePadding = False
         Me.XrLabel6.StylePriority.UseTextAlignment = False
-        Me.XrLabel6.Text = "DP (INCLUDE VAT)"
+        Me.XrLabel6.Text = "DP (EXCLUDE VAT)"
         Me.XrLabel6.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         '
         'XrLabel5

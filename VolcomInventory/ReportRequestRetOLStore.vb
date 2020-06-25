@@ -8,6 +8,8 @@
         'detail
         Dim row As DevExpress.XtraReports.UI.XRTableRow = XTRow
 
+        Dim total_design_price As Decimal = 0.00
+
         For i = 0 To data.Rows.Count - 1
             row = XTable.InsertRowBelow(row)
 
@@ -16,7 +18,8 @@
             'no
             Dim no As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(0)
             no.Text = (i + 1).ToString
-            no.BorderWidth = 0
+            no.BorderWidth = 1
+            no.Borders = DevExpress.XtraPrinting.BorderSide.Left
             no.Font = New Font(no.Font.FontFamily, no.Font.Size, FontStyle.Regular)
 
             'code
@@ -43,25 +46,42 @@
             size.BorderWidth = 0
             size.Font = New Font(size.Font.FontFamily, size.Font.Size, FontStyle.Regular)
 
+            'status
+            Dim design_cat As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(5)
+            design_cat.Text = data.Rows(i)("design_cat").ToString
+            design_cat.BorderWidth = 0
+            design_cat.Font = New Font(design_cat.Font.FontFamily, design_cat.Font.Size, FontStyle.Regular)
+
+            'unit price
+            Dim design_price As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(6)
+            design_price.Text = Format(data.Rows(i)("design_price"), "##,##0")
+            design_price.BorderWidth = 0
+            design_price.Font = New Font(design_price.Font.FontFamily, design_price.Font.Size, FontStyle.Regular)
+
             'item id
-            Dim item_id As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(5)
+            Dim item_id As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(7)
             item_id.Text = data.Rows(i)("item_id").ToString
             item_id.BorderWidth = 0
             item_id.Font = New Font(item_id.Font.FontFamily, item_id.Font.Size, FontStyle.Regular)
 
             'ol store id
-            Dim ol_store_id As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(6)
+            Dim ol_store_id As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(8)
             ol_store_id.Text = data.Rows(i)("ol_store_id").ToString
-            ol_store_id.BorderWidth = 0
+            ol_store_id.BorderWidth = 1
+            ol_store_id.Borders = DevExpress.XtraPrinting.BorderSide.Right
             ol_store_id.Font = New Font(ol_store_id.Font.FontFamily, ol_store_id.Font.Size, FontStyle.Regular)
+
+            total_design_price += data.Rows(i)("design_price")
         Next
+
+        XTCTotal.Text = Format(total_design_price, "##,##0")
+
+        XrRowTotal.HeightF = 25
 
         If id_pre = "-1" Then
             load_mark_horz(report_mark_type, id, "2", "1", XrTable)
         Else
             pre_load_mark_horz(report_mark_type, id, "2", "2", XrTable)
         End If
-
-        XRCompany.Text = execute_query("SELECT comp_name FROM tb_m_comp WHERE id_comp = (SELECT id_own_company FROM tb_opt LIMIT 1)", 0, True, "", "", "", "")
     End Sub
 End Class

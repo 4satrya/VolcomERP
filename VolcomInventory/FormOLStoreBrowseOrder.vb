@@ -5,7 +5,8 @@
 
     Sub viewBrowseOrder()
         Cursor = Cursors.WaitCursor
-        Dim query As String = "SELECT so.sales_order_ol_shop_number AS `order_number`, so.sales_order_ol_shop_date AS `order_date`, so.customer_name, a.rec_by_store_date
+        Dim query As String = "SELECT so.sales_order_ol_shop_number AS `order_number`, so.sales_order_ol_shop_date AS `order_date`, 
+        so.customer_name, a.rec_by_store_date, so.shipping_address AS `address`, so.shipping_phone AS `phone`, so.sales_order_ol_shop_date AS `order_date`
         FROM tb_wh_awbill a
         INNER JOIN tb_wh_awbill_det ad ON ad.id_awbill = a.id_awbill
         INNER JOIN tb_pl_sales_order_del d ON d.id_pl_sales_order_del = ad.id_pl_sales_order_del
@@ -32,6 +33,10 @@
         If GVData.GetFocusedRowCellValue("rec_by_store_date").ToString <> "" Then
             FormRequestRetOLStore.TxtOrderNumber.Text = GVData.GetFocusedRowCellValue("order_number").ToString
             FormRequestRetOLStore.DERecByCust.EditValue = GVData.GetFocusedRowCellValue("rec_by_store_date")
+            FormRequestRetOLStore.DEOrderDate.EditValue = GVData.GetFocusedRowCellValue("order_date")
+            FormRequestRetOLStore.TxtCustomer.Text = GVData.GetFocusedRowCellValue("customer_name")
+            FormRequestRetOLStore.TxtPhone.Text = GVData.GetFocusedRowCellValue("phone").ToString
+            FormRequestRetOLStore.MEAddress.Text = GVData.GetFocusedRowCellValue("address").ToString
             Close()
         Else
             stopCustom("Received date not found")

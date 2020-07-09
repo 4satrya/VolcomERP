@@ -348,6 +348,8 @@
         ElseIf Not cond_data Then
             GridColumnStt.VisibleIndex = 100
             warningCustom("Can't save, some item exceed limit qty")
+        ElseIf MENote.Text = "" Then
+            warningCustom("Please input some note")
         Else
             Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure you want to continue this process?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
             If confirm = Windows.Forms.DialogResult.Yes Then

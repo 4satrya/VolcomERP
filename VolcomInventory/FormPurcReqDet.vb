@@ -169,9 +169,10 @@ SELECT id_comp,comp_number,comp_name,address_primary FROM `tb_m_comp` WHERE is_a
     End Sub
 
     Sub load_det()
-        Dim query As String = "SELECT reqd.*,uom.uom,cat.`item_cat`,itm.item_desc,itm.`id_item_type`,IF(main.is_fixed_asset=1,'yes','no') AS is_fixed_asset
+        Dim query As String = "SELECT reqd.*,uom.uom,cat.`item_cat`,itm.item_desc,itm.`id_item_type`,IF(main.is_fixed_asset=1,'yes','no') AS is_fixed_asset,itt.item_type
                                 FROM tb_purc_req_det reqd 
                                 INNER JOIN tb_item itm ON reqd.`id_item`=itm.`id_item`
+                                INNER JOIN tb_lookup_purc_item_type itt ON itt.id_item_type=itm.id_item_type
                                 INNER JOIN tb_item_cat cat ON cat.`id_item_cat`=itm.`id_item_cat`
                                 INNER JOIN tb_item_cat_main main ON main.id_item_cat_main=cat.id_item_cat_main
                                 INNER JOIN tb_m_uom uom ON uom.`id_uom`=itm.`id_uom`
@@ -183,8 +184,9 @@ SELECT id_comp,comp_number,comp_name,address_primary FROM `tb_m_comp` WHERE is_a
     Sub load_item_pil()
         Dim query As String = ""
 
-        query = "SELECT it.id_item,IF(main.is_fixed_asset=1,'yes','no') AS is_fixed_asset,used.id_b_expense,used_opex.id_b_expense_opex,cat.`id_expense_type`,it.`id_item_cat`,it.item_desc,uom.uom,cat.item_cat,IFNULL(IF(cat.`id_expense_type`='2',used.value_expense,used_opex.value_expense),0) AS budget,IFNULL(IF(cat.`id_expense_type`='2',used.val,used_opex.val),0) AS budget_used,((SELECT budget)-(SELECT budget_used)) AS budget_remaining,it.`latest_price` 
+        query = "SELECT it.id_item,itt.item_type,IF(main.is_fixed_asset=1,'yes','no') AS is_fixed_asset,used.id_b_expense,used_opex.id_b_expense_opex,cat.`id_expense_type`,it.`id_item_cat`,it.item_desc,uom.uom,cat.item_cat,IFNULL(IF(cat.`id_expense_type`='2',used.value_expense,used_opex.value_expense),0) AS budget,IFNULL(IF(cat.`id_expense_type`='2',used.val,used_opex.val),0) AS budget_used,((SELECT budget)-(SELECT budget_used)) AS budget_remaining,it.`latest_price` 
                     FROM tb_item it
+                     INNER JOIN tb_lookup_purc_item_type itt ON itt.id_item_type=it.id_item_type
                     INNER JOIN tb_m_uom uom ON uom.id_uom=it.id_uom
                     INNER JOIN tb_item_cat cat ON cat.id_item_cat=it.id_item_cat
                     INNER JOIN tb_item_cat_main main ON main.id_item_cat_main=cat.id_item_cat_main
@@ -222,7 +224,8 @@ SELECT id_comp,comp_number,comp_name,address_primary FROM `tb_m_comp` WHERE is_a
     End Sub
 
     Sub load_item_pil_edit()
-        Dim query As String = "SELECT it.id_item,it.item_desc,cat.item_cat FROM tb_item it
+        Dim query As String = "SELECT it.id_item,it.item_desc,cat.item_cat,itt.item_type FROM tb_item it
+                                INNER JOIN tb_lookup_purc_item_type itt ON itt.id_item_type=it.id_item_type
                                 INNER JOIN tb_item_cat cat ON cat.id_item_cat=it.id_item_cat
                                 INNER JOIN tb_item_coa itc ON itc.id_item_cat=cat.id_item_cat AND itc.id_departement='" & id_departement & "'"
         viewSearchLookupRepositoryQuery(RISLEItem, query, "id_item", "item_desc", "id_item")
@@ -284,6 +287,7 @@ SELECT id_comp,comp_number,comp_name,address_primary FROM `tb_m_comp` WHERE is_a
             '    GVItemList.SetFocusedRowCellValue("value", sle.Properties.View.GetFocusedRowCellValue("latest_price"))
             'End If
 
+            GVItemList.SetFocusedRowCellValue("item_type", sle.Properties.View.GetFocusedRowCellValue("item_type").ToString())
             GVItemList.SetFocusedRowCellValue("item_detail", sle.Properties.View.GetFocusedRowCellValue("item_desc").ToString())
             GVItemList.SetFocusedRowCellValue("uom", sle.Properties.View.GetFocusedRowCellValue("uom").ToString())
             GVItemList.SetFocusedRowCellValue("item_cat", sle.Properties.View.GetFocusedRowCellValue("item_cat").ToString())

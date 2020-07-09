@@ -92,7 +92,7 @@
         Dim query As String = "SELECT a.id_pl_sales_order_del, a.id_sales_order, a.id_store_contact_to, d.id_commerce_type,(d.id_comp) AS `id_store`, d.id_comp_group,(d.comp_name) AS store_name_to, (d.comp_number) AS store_number_to, CONCAT(d.comp_number, ' - ', d.comp_name) AS `store`, (d.address_primary) AS store_address_to, d.id_so_type, a.id_report_status, f.report_status, "
         query += "a.pl_sales_order_del_note, a.pl_sales_order_del_date, DATE_FORMAT(a.pl_sales_order_del_date,'%Y-%m-%d') AS pl_sales_order_del_datex, a.pl_sales_order_del_number, b.sales_order_number, b.sales_order_ol_shop_number, b.customer_name, b.tracking_code, "
         query += "DATE_FORMAT(a.pl_sales_order_del_date,'%d %M %Y') AS pl_sales_order_del_date, a.id_comp_contact_from,(wh.id_comp) AS `id_wh`, (wh.comp_number) AS `wh_number`,(wh.comp_name) AS `wh_name`, CONCAT(wh.comp_number, ' - ', wh.comp_name) AS `wh`, a.id_wh_drawer, drw.wh_drawer_code, drw.wh_drawer, cat.id_so_status, cat.so_status, "
-        query += "a.last_update, getUserEmp(a.last_update_by, 1) AS `last_user`, ('No') AS `is_select`, IFNULL(det.`total`,0) AS `total`, eu.period_name, ut.uni_type, ube.employee_code, ube.employee_name, a.is_combine, IFNULL(a.id_combine,0) AS `id_combine`, IFNULL(comb.combine_number,'-') AS `combine_number`, b.sales_order_ol_shop_number, IFNULL(pb.prepared_by,'-') AS `prepared_by`, a.is_use_unique_code "
+        query += "a.last_update, getUserEmp(a.last_update_by, 1) AS `last_user`, ('No') AS `is_select`, IFNULL(det.`total`,0) AS `total`,  IFNULL(det.`total_amount`,0) AS `total_amount`, eu.period_name, ut.uni_type, ube.employee_code, ube.employee_name, a.is_combine, IFNULL(a.id_combine,0) AS `id_combine`, IFNULL(comb.combine_number,'-') AS `combine_number`, b.sales_order_ol_shop_number, IFNULL(pb.prepared_by,'-') AS `prepared_by`, a.is_use_unique_code "
         query += "FROM tb_pl_sales_order_del a "
         query += "INNER JOIN tb_sales_order b ON a.id_sales_order = b.id_sales_order "
         query += "INNER JOIN tb_m_comp_contact c ON c.id_comp_contact = a.id_store_contact_to "
@@ -103,7 +103,7 @@
         query += "INNER JOIN tb_lookup_so_status cat ON cat.id_so_status = b.id_so_status "
         query += "LEFT JOIN tb_m_wh_drawer drw ON drw.id_wh_drawer = a.id_wh_drawer "
         query += "LEFT JOIN( "
-        query += "SELECT del.id_pl_sales_order_del, SUM(det.pl_sales_order_del_det_qty) AS `total` "
+        query += "SELECT del.id_pl_sales_order_del, SUM(det.pl_sales_order_del_det_qty) AS `total`, SUM(det.pl_sales_order_del_det_qty * det.design_price) AS `total_amount` "
         query += "FROM tb_pl_sales_order_del del "
         query += "INNER JOIN tb_pl_sales_order_del_det det ON del.id_pl_sales_order_del = det.id_pl_sales_order_del "
         query += "GROUP BY del.id_pl_sales_order_del "
@@ -276,15 +276,16 @@
                 DATE(NOW()) AS sales_pos_date, 
                 '' AS sales_pos_note, 6 AS id_report_status, 0 AS id_so_type, 0 AS sales_pos_total, DATE_ADD(DATE(so.sales_order_ol_shop_date),INTERVAL IFNULL(sd.due,0) DAY) AS sales_pos_due_date, 
                 so.sales_order_ol_shop_date AS sales_pos_start_period,so.sales_order_ol_shop_date AS sales_pos_end_period,
-                c.comp_commission AS sales_pos_discount, 0 AS sales_pos_potongan, o.vat_inv_default AS sales_pos_vat, del.id_pl_sales_order_del, 1 AS id_memo_type,0 AS id_inv_type, NULL AS id_sales_pos_ref, 48 AS report_mark_type,o.is_use_unique_code_all AS is_use_unique_code, 
+                c.comp_commission AS sales_pos_discount, SUM(sod.discount) AS sales_pos_potongan, o.vat_inv_default AS sales_pos_vat, del.id_pl_sales_order_del, 1 AS id_memo_type,0 AS id_inv_type, NULL AS id_sales_pos_ref, 48 AS report_mark_type,o.is_use_unique_code_all AS is_use_unique_code, 
                 c.id_acc_ar, c.id_acc_sales, c.id_acc_sales_return 
                 FROM tb_pl_sales_order_del del 
                 INNER JOIN tb_sales_order so ON so.id_sales_order = del.id_sales_order
+                INNER JOIN tb_sales_order_det sod ON sod.id_sales_order = so.id_sales_order
                 JOIN tb_opt o
                 INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = del.id_store_contact_to
                 INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp
                 LEFT JOIN tb_store_due sd ON sd.id_comp = c.id_comp
-                WHERE del.id_pl_sales_order_del=" + id_report_par + "; SELECT LAST_INSERT_ID(); "
+                WHERE del.id_pl_sales_order_del=" + id_report_par + " GROUP BY del.id_pl_sales_order_del; SELECT LAST_INSERT_ID(); "
                 Dim id_sales_pos As String = execute_query(query_inv, 0, True, "", "", "", "")
                 'gen number
                 execute_non_query("CALL gen_number(" + id_sales_pos + ", 48);", True, "", "", "", "")

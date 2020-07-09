@@ -149,6 +149,7 @@ Partial Class FormPurcOrderDet
         Me.GridColumn18 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn19 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn20 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn31 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1397,7 +1398,7 @@ Partial Class FormPurcOrderDet
         Me.GVSummary.AppearancePrint.Row.Options.UseFont = True
         Me.GVSummary.AppearancePrint.Row.Options.UseTextOptions = True
         Me.GVSummary.AppearancePrint.Row.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
-        Me.GVSummary.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn26, Me.GridColumnPOIdItem, Me.GridColumnPOItemDesc, Me.GridColumn23, Me.GridColumn15, Me.GridColumnQtyPO, Me.GridColumnPOUOM, Me.GridColumnValQty, Me.GridColumnPOVal, Me.GridColumnPOSubTot, Me.GridColumnDiscPercent, Me.GridColumnDisc, Me.GridColumn7, Me.GridColumn30})
+        Me.GVSummary.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn26, Me.GridColumnPOIdItem, Me.GridColumnPOItemDesc, Me.GridColumn23, Me.GridColumn31, Me.GridColumn15, Me.GridColumnQtyPO, Me.GridColumnPOUOM, Me.GridColumnValQty, Me.GridColumnPOVal, Me.GridColumnPOSubTot, Me.GridColumnDiscPercent, Me.GridColumnDisc, Me.GridColumn7, Me.GridColumn30})
         Me.GVSummary.GridControl = Me.GCSummary
         Me.GVSummary.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sub_tot", Nothing, "{0:N2}")})
         Me.GVSummary.Name = "GVSummary"
@@ -1423,6 +1424,7 @@ Partial Class FormPurcOrderDet
         Me.GridColumn26.OptionsColumn.AllowEdit = False
         Me.GridColumn26.Visible = True
         Me.GridColumn26.VisibleIndex = 0
+        Me.GridColumn26.Width = 68
         '
         'GridColumnPOIdItem
         '
@@ -1461,7 +1463,7 @@ Partial Class FormPurcOrderDet
         Me.GridColumn23.OptionsColumn.AllowEdit = False
         Me.GridColumn23.Visible = True
         Me.GridColumn23.VisibleIndex = 1
-        Me.GridColumn23.Width = 801
+        Me.GridColumn23.Width = 722
         '
         'GridColumn15
         '
@@ -1483,8 +1485,8 @@ Partial Class FormPurcOrderDet
         Me.GridColumnQtyPO.OptionsColumn.AllowEdit = False
         Me.GridColumnQtyPO.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_po", "{0:N2}")})
         Me.GridColumnQtyPO.Visible = True
-        Me.GridColumnQtyPO.VisibleIndex = 2
-        Me.GridColumnQtyPO.Width = 105
+        Me.GridColumnQtyPO.VisibleIndex = 3
+        Me.GridColumnQtyPO.Width = 97
         '
         'GridColumnPOUOM
         '
@@ -1497,8 +1499,8 @@ Partial Class FormPurcOrderDet
         Me.GridColumnPOUOM.Name = "GridColumnPOUOM"
         Me.GridColumnPOUOM.OptionsColumn.AllowEdit = False
         Me.GridColumnPOUOM.Visible = True
-        Me.GridColumnPOUOM.VisibleIndex = 3
-        Me.GridColumnPOUOM.Width = 83
+        Me.GridColumnPOUOM.VisibleIndex = 4
+        Me.GridColumnPOUOM.Width = 77
         '
         'GridColumnValQty
         '
@@ -1522,8 +1524,8 @@ Partial Class FormPurcOrderDet
         Me.GridColumnPOVal.Name = "GridColumnPOVal"
         Me.GridColumnPOVal.OptionsColumn.AllowEdit = False
         Me.GridColumnPOVal.Visible = True
-        Me.GridColumnPOVal.VisibleIndex = 4
-        Me.GridColumnPOVal.Width = 309
+        Me.GridColumnPOVal.VisibleIndex = 5
+        Me.GridColumnPOVal.Width = 285
         '
         'RITEVal
         '
@@ -1546,8 +1548,8 @@ Partial Class FormPurcOrderDet
         Me.GridColumnPOSubTot.UnboundExpression = "([val_po] - [discount]) * [qty_po]"
         Me.GridColumnPOSubTot.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
         Me.GridColumnPOSubTot.Visible = True
-        Me.GridColumnPOSubTot.VisibleIndex = 5
-        Me.GridColumnPOSubTot.Width = 334
+        Me.GridColumnPOSubTot.VisibleIndex = 6
+        Me.GridColumnPOSubTot.Width = 315
         '
         'GridColumnDiscPercent
         '
@@ -1646,6 +1648,19 @@ Partial Class FormPurcOrderDet
         Me.GridColumn20.Name = "GridColumn20"
         Me.GridColumn20.Visible = True
         Me.GridColumn20.VisibleIndex = 2
+        '
+        'GridColumn31
+        '
+        Me.GridColumn31.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn31.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn31.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn31.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn31.Caption = "Type"
+        Me.GridColumn31.FieldName = "item_type"
+        Me.GridColumn31.Name = "GridColumn31"
+        Me.GridColumn31.Visible = True
+        Me.GridColumn31.VisibleIndex = 2
+        Me.GridColumn31.Width = 68
         '
         'FormPurcOrderDet
         '
@@ -1866,4 +1881,5 @@ Partial Class FormPurcOrderDet
     Friend WithEvents GridColumn29 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents CECashPurchase As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents GridColumn30 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn31 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

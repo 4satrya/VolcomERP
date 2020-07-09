@@ -616,19 +616,23 @@
 
             check_input = False
         ElseIf TERemainingLeaveAfter.EditValue < 0 Then
-            Dim confirm As DialogResult
+            'Dim confirm As DialogResult
 
-            confirm = DevExpress.XtraEditors.XtraMessageBox.Show("Sisa cuti tidak mencukupi, apakah anda ingin mengajukan unpaid leave?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+            'confirm = DevExpress.XtraEditors.XtraMessageBox.Show("Sisa cuti tidak mencukupi, apakah anda ingin mengajukan unpaid leave?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
 
-            'change to unpaid leave
-            If confirm = DialogResult.Yes Then
-                leave_type = "7"
-                TERemainingLeaveAfter.EditValue = TERemainingLeave.EditValue
+            ''change to unpaid leave
+            'If confirm = DialogResult.Yes Then
+            '    leave_type = "7"
+            '    TERemainingLeaveAfter.EditValue = TERemainingLeave.EditValue
 
-                check_input = True
-            Else
-                check_input = False
-            End If
+            '    check_input = True
+            'Else
+            '    check_input = False
+            'End If
+
+            stopCustom("Sisa cuti tidak mencukupi.")
+
+            check_input = False
         ElseIf leave_type = "2" And LEFormDC.EditValue.ToString = "1" Then
             stopCustom("Sakit harus menggunakan form atau DC.")
 

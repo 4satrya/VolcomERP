@@ -63,6 +63,8 @@
         viewProductStockStore()
         '
 
+        DEStockFrom.EditValue = Now
+        DEStockTo.EditValue = Now
     End Sub
 
     '==============FUNCTION==========================='
@@ -277,16 +279,16 @@
             'for information print
             label_mat_selected = label_mat_def
         Else
-            id_mat_image = view.GetRowCellValue(row_handle, "id_mat_det")
-            LabelLot.Text = view.GetRowCellValue(row_handle, "lot")
-            LabelColor.Text = view.GetRowCellValue(row_handle, "color")
-            LabelSizeSetting.Text = view.GetRowCellValue(row_handle, "size")
-            LabelYear.Text = view.GetRowCellValue(row_handle, "year")
+            id_mat_image = view.GetRowCellValue(row_handle, "id_mat_det").ToString
+            LabelLot.Text = view.GetRowCellValue(row_handle, "lot").ToString
+            LabelColor.Text = view.GetRowCellValue(row_handle, "color").ToString
+            LabelSizeSetting.Text = view.GetRowCellValue(row_handle, "size").ToString
+            LabelYear.Text = view.GetRowCellValue(row_handle, "year").ToString
             LabelMatCategory.Text = view.GetRowCellValue(row_handle, "mat_category").ToString
-            LUom.Text = view.GetRowCellValue(row_handle, "uom")
+            LUom.Text = view.GetRowCellValue(row_handle, "uom").ToString
 
             'for information print
-            label_mat_selected = view.GetRowCellValue(row_handle, "label_mat")
+            label_mat_selected = view.GetRowCellValue(row_handle, "label_mat").ToString
         End If
 
         If row_handle_wh < 0 Then
@@ -1022,6 +1024,23 @@
         Dim row_handle As Integer = view.FocusedRowHandle
 
         BGVStockRes.BestFitColumns()
+
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub SBStockView_Click(sender As Object, e As EventArgs) Handles SBStockView.Click
+        Cursor = Cursors.WaitCursor
+
+        Dim d_from As String = Date.Parse(DEStockFrom.EditValue.ToString).ToString("yyyy-MM-dd")
+        Dim d_to As String = Date.Parse(DEStockTo.EditValue.ToString).ToString("yyyy-MM-dd")
+
+        Dim data As DataTable = execute_query("CALL view_stock_report_mat('" + d_from + "', '" + d_to + "')", -1, True, "", "", "", "")
+
+        GCStockReport.DataSource = data
+
+        GVStockReport.BestFitColumns()
+
+        GroupControl6.Enabled = True
 
         Cursor = Cursors.Default
     End Sub

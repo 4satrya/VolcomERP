@@ -266,6 +266,7 @@
         GVJournalDet.AddNewRow()
         GVJournalDet.FocusedRowHandle = GVJournalDet.RowCount - 1
         GVJournalDet.SetRowCellValue(GVJournalDet.RowCount - 1, "id_comp", "1")
+        GVJournalDet.SetRowCellValue(GVJournalDet.RowCount - 1, "description", MENote.EditValue.ToString)
         check_but()
     End Sub
 
@@ -367,12 +368,12 @@
     End Sub
 
     Private Sub RSLECOA_EditValueChanged(sender As Object, e As EventArgs) Handles RSLECOA.EditValueChanged
-        Try
-            Dim sle As DevExpress.XtraEditors.SearchLookUpEdit = CType(sender, DevExpress.XtraEditors.SearchLookUpEdit)
-            GVJournalDet.SetFocusedRowCellValue("description", sle.Properties.View.GetFocusedRowCellValue("acc_description"))
-            GVJournalDet.SetFocusedRowCellValue("acc_description", sle.Properties.View.GetFocusedRowCellValue("acc_description"))
-        Catch ex As Exception
-        End Try
+        'Try
+        '    Dim sle As DevExpress.XtraEditors.SearchLookUpEdit = CType(sender, DevExpress.XtraEditors.SearchLookUpEdit)
+        '    GVJournalDet.SetFocusedRowCellValue("description", sle.Properties.View.GetFocusedRowCellValue("acc_description"))
+        '    GVJournalDet.SetFocusedRowCellValue("acc_description", sle.Properties.View.GetFocusedRowCellValue("acc_description"))
+        'Catch ex As Exception
+        'End Try
     End Sub
 
     Private Sub GVJournalDet_InitNewRow(sender As Object, e As DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs) Handles GVJournalDet.InitNewRow
@@ -393,7 +394,7 @@
 
                 check_lock()
 
-                Dim data As DataTable = execute_query("SELECT 0 AS id_cash_advance_report, 0 AS is_val_ca, NULL AS id_acc, '' AS description, '' AS note, " + decimalSQL(TECashInAdvance.EditValue) + " AS value", -1, True, "", "", "", "")
+                Dim data As DataTable = execute_query("SELECT 0 AS id_cash_advance_report, 0 AS is_val_ca, NULL AS id_acc, '" + addSlashes(MENote.EditValue.ToString) + "' AS description, '' AS note, " + decimalSQL(TECashInAdvance.EditValue) + " AS value", -1, True, "", "", "", "")
                 GCBankDeposit.DataSource = data
 
                 XTPWithdrawal.PageVisible = False
@@ -421,7 +422,7 @@
                     GCBankDeposit.DataSource = Nothing
 
                     If rest > 0 Then
-                        Dim data As DataTable = execute_query("SELECT 0 AS id_cash_advance_report, 0 AS is_val_ca, NULL AS id_acc, '' AS description, '' AS note, " + decimalSQL(rest) + " AS value", -1, True, "", "", "", "")
+                        Dim data As DataTable = execute_query("SELECT 0 AS id_cash_advance_report, 0 AS is_val_ca, NULL AS id_acc, '" + addSlashes(MENote.EditValue.ToString) + "' AS description, '' AS note, " + decimalSQL(rest) + " AS value", -1, True, "", "", "", "")
                         GCBankDeposit.DataSource = data
 
                         XTPWithdrawal.PageVisible = False
@@ -431,7 +432,7 @@
                     ElseIf rest < 0 Then
                         rest = Math.Abs(rest)
 
-                        Dim data As DataTable = execute_query("SELECT 0 AS id_cash_advance_report, 0 AS is_val_ca, NULL AS id_acc, '' AS description, '' AS note, " + decimalSQL(rest) + " AS value", -1, True, "", "", "", "")
+                        Dim data As DataTable = execute_query("SELECT 0 AS id_cash_advance_report, 0 AS is_val_ca, NULL AS id_acc, '" + addSlashes(MENote.EditValue.ToString) + "' AS description, '' AS note, " + decimalSQL(rest) + " AS value", -1, True, "", "", "", "")
                         GCBankWithdrawal.DataSource = data
 
                         XTPWithdrawal.PageVisible = True
@@ -455,21 +456,21 @@
     End Sub
 
     Private Sub RSLECOABW_EditValueChanged(sender As Object, e As EventArgs) Handles RSLECOABW.EditValueChanged
-        Try
-            Dim sle As DevExpress.XtraEditors.SearchLookUpEdit = CType(sender, DevExpress.XtraEditors.SearchLookUpEdit)
-            GVBankWithdrawal.SetFocusedRowCellValue("description", sle.Properties.View.GetFocusedRowCellValue("acc_description"))
-            GVBankWithdrawal.SetFocusedRowCellValue("acc_description", sle.Properties.View.GetFocusedRowCellValue("acc_description"))
-        Catch ex As Exception
-        End Try
+        'Try
+        '    Dim sle As DevExpress.XtraEditors.SearchLookUpEdit = CType(sender, DevExpress.XtraEditors.SearchLookUpEdit)
+        '    GVBankWithdrawal.SetFocusedRowCellValue("description", sle.Properties.View.GetFocusedRowCellValue("acc_description"))
+        '    GVBankWithdrawal.SetFocusedRowCellValue("acc_description", sle.Properties.View.GetFocusedRowCellValue("acc_description"))
+        'Catch ex As Exception
+        'End Try
     End Sub
 
     Private Sub RSLECOABD_EditValueChanged(sender As Object, e As EventArgs) Handles RSLECOABD.EditValueChanged
-        Try
-            Dim sle As DevExpress.XtraEditors.SearchLookUpEdit = CType(sender, DevExpress.XtraEditors.SearchLookUpEdit)
-            GVBankDeposit.SetFocusedRowCellValue("description", sle.Properties.View.GetFocusedRowCellValue("acc_description"))
-            GVBankDeposit.SetFocusedRowCellValue("acc_description", sle.Properties.View.GetFocusedRowCellValue("acc_description"))
-        Catch ex As Exception
-        End Try
+        'Try
+        '    Dim sle As DevExpress.XtraEditors.SearchLookUpEdit = CType(sender, DevExpress.XtraEditors.SearchLookUpEdit)
+        '    GVBankDeposit.SetFocusedRowCellValue("description", sle.Properties.View.GetFocusedRowCellValue("acc_description"))
+        '    GVBankDeposit.SetFocusedRowCellValue("acc_description", sle.Properties.View.GetFocusedRowCellValue("acc_description"))
+        'Catch ex As Exception
+        'End Try
     End Sub
 
     Private Sub BMark_Click(sender As Object, e As EventArgs) Handles BMark.Click
@@ -563,6 +564,7 @@
     Private Sub BAddBBK_Click(sender As Object, e As EventArgs) Handles BAddBBK.Click
         GVBankWithdrawal.AddNewRow()
         GVBankWithdrawal.FocusedRowHandle = GVBankWithdrawal.RowCount - 1
+        GVBankWithdrawal.SetRowCellValue(GVBankWithdrawal.RowCount - 1, "description", MENote.EditValue.ToString)
         check_but()
     End Sub
 
@@ -576,6 +578,7 @@
     Private Sub BAddBBM_Click(sender As Object, e As EventArgs) Handles BAddBBM.Click
         GVBankDeposit.AddNewRow()
         GVBankDeposit.FocusedRowHandle = GVBankWithdrawal.RowCount - 1
+        GVBankDeposit.SetRowCellValue(GVBankWithdrawal.RowCount - 1, "description", MENote.EditValue.ToString)
         check_but()
     End Sub
 
@@ -680,20 +683,20 @@
     End Sub
 
     Private Sub RSLECOABCFROM_EditValueChanged(sender As Object, e As EventArgs) Handles RSLECOABCFROM.EditValueChanged
-        Try
-            Dim sle As DevExpress.XtraEditors.SearchLookUpEdit = CType(sender, DevExpress.XtraEditors.SearchLookUpEdit)
-            GVCancel.SetFocusedRowCellValue("description_from", sle.Properties.View.GetFocusedRowCellValue("acc_description"))
-            GVCancel.SetFocusedRowCellValue("acc_description_from", sle.Properties.View.GetFocusedRowCellValue("acc_description"))
-        Catch ex As Exception
-        End Try
+        'Try
+        '    Dim sle As DevExpress.XtraEditors.SearchLookUpEdit = CType(sender, DevExpress.XtraEditors.SearchLookUpEdit)
+        '    GVCancel.SetFocusedRowCellValue("description_from", sle.Properties.View.GetFocusedRowCellValue("acc_description"))
+        '    GVCancel.SetFocusedRowCellValue("acc_description_from", sle.Properties.View.GetFocusedRowCellValue("acc_description"))
+        'Catch ex As Exception
+        'End Try
     End Sub
 
     Private Sub RSLECOABCTO_EditValueChanged(sender As Object, e As EventArgs) Handles RSLECOABCTO.EditValueChanged
-        Try
-            Dim sle As DevExpress.XtraEditors.SearchLookUpEdit = CType(sender, DevExpress.XtraEditors.SearchLookUpEdit)
-            GVCancel.SetFocusedRowCellValue("description_to", sle.Properties.View.GetFocusedRowCellValue("acc_description"))
-            GVCancel.SetFocusedRowCellValue("acc_description_to", sle.Properties.View.GetFocusedRowCellValue("acc_description"))
-        Catch ex As Exception
-        End Try
+        'Try
+        '    Dim sle As DevExpress.XtraEditors.SearchLookUpEdit = CType(sender, DevExpress.XtraEditors.SearchLookUpEdit)
+        '    GVCancel.SetFocusedRowCellValue("description_to", sle.Properties.View.GetFocusedRowCellValue("acc_description"))
+        '    GVCancel.SetFocusedRowCellValue("acc_description_to", sle.Properties.View.GetFocusedRowCellValue("acc_description"))
+        'Catch ex As Exception
+        'End Try
     End Sub
 End Class

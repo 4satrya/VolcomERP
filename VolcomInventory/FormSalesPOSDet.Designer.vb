@@ -148,6 +148,7 @@ Partial Class FormSalesPOSDet
         Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.GridColumnid_pos_combine_summary = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnLimit = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnid_ol_store_ret_list = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControlNav = New DevExpress.XtraEditors.PanelControl()
         Me.BtnLoadFromReturnCentre = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnLoadFromBOF = New DevExpress.XtraEditors.SimpleButton()
@@ -175,7 +176,7 @@ Partial Class FormSalesPOSDet
         Me.GridColumnIdDesignPriceCode = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnPriceCode = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
-        Me.GridColumnid_ol_store_ret_list = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.BtnViewJournal = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
         CType(Me.PanelControlTopLeft, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -815,9 +816,10 @@ Partial Class FormSalesPOSDet
         Me.PanelControl3.Controls.Add(Me.BtnAdd)
         Me.PanelControl3.Controls.Add(Me.BtnXlsBOF)
         Me.PanelControl3.Controls.Add(Me.BtnDraftJournal)
-        Me.PanelControl3.Controls.Add(Me.BtnAttachment)
         Me.PanelControl3.Controls.Add(Me.SimpleButton1)
         Me.PanelControl3.Controls.Add(Me.BMark)
+        Me.PanelControl3.Controls.Add(Me.BtnViewJournal)
+        Me.PanelControl3.Controls.Add(Me.BtnAttachment)
         Me.PanelControl3.Controls.Add(Me.BtnCancel)
         Me.PanelControl3.Controls.Add(Me.BtnSave)
         Me.PanelControl3.Dock = System.Windows.Forms.DockStyle.Bottom
@@ -835,7 +837,7 @@ Partial Class FormSalesPOSDet
         Me.PanelControl1.Controls.Add(Me.LabelControl12)
         Me.PanelControl1.Controls.Add(Me.LEPrintOpt)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PanelControl1.Location = New System.Drawing.Point(362, 2)
+        Me.PanelControl1.Location = New System.Drawing.Point(253, 2)
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(271, 34)
         Me.PanelControl1.TabIndex = 25
@@ -869,7 +871,7 @@ Partial Class FormSalesPOSDet
         Me.BtnPrint.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnPrint.ImageIndex = 6
         Me.BtnPrint.ImageList = Me.LargeImageCollection
-        Me.BtnPrint.Location = New System.Drawing.Point(633, 2)
+        Me.BtnPrint.Location = New System.Drawing.Point(524, 2)
         Me.BtnPrint.Name = "BtnPrint"
         Me.BtnPrint.Size = New System.Drawing.Size(75, 34)
         Me.BtnPrint.TabIndex = 9
@@ -942,7 +944,7 @@ Partial Class FormSalesPOSDet
         Me.BtnXlsBOF.Image = CType(resources.GetObject("BtnXlsBOF.Image"), System.Drawing.Image)
         Me.BtnXlsBOF.ImageIndex = 11
         Me.BtnXlsBOF.ImageList = Me.LargeImageCollection
-        Me.BtnXlsBOF.Location = New System.Drawing.Point(708, 2)
+        Me.BtnXlsBOF.Location = New System.Drawing.Point(599, 2)
         Me.BtnXlsBOF.Name = "BtnXlsBOF"
         Me.BtnXlsBOF.Size = New System.Drawing.Size(116, 34)
         Me.BtnXlsBOF.TabIndex = 24
@@ -955,7 +957,7 @@ Partial Class FormSalesPOSDet
         Me.BtnDraftJournal.Image = CType(resources.GetObject("BtnDraftJournal.Image"), System.Drawing.Image)
         Me.BtnDraftJournal.ImageIndex = 13
         Me.BtnDraftJournal.ImageList = Me.LargeImageCollection
-        Me.BtnDraftJournal.Location = New System.Drawing.Point(824, 2)
+        Me.BtnDraftJournal.Location = New System.Drawing.Point(715, 2)
         Me.BtnDraftJournal.Name = "BtnDraftJournal"
         Me.BtnDraftJournal.Size = New System.Drawing.Size(109, 34)
         Me.BtnDraftJournal.TabIndex = 14
@@ -1700,6 +1702,13 @@ Partial Class FormSalesPOSDet
         Me.GridColumnLimit.FieldName = "limit_qty"
         Me.GridColumnLimit.Name = "GridColumnLimit"
         '
+        'GridColumnid_ol_store_ret_list
+        '
+        Me.GridColumnid_ol_store_ret_list.Caption = "id_ol_store_ret_list"
+        Me.GridColumnid_ol_store_ret_list.FieldName = "id_ol_store_ret_list"
+        Me.GridColumnid_ol_store_ret_list.Name = "GridColumnid_ol_store_ret_list"
+        Me.GridColumnid_ol_store_ret_list.OptionsColumn.AllowEdit = False
+        '
         'PanelControlNav
         '
         Me.PanelControlNav.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
@@ -1955,12 +1964,18 @@ Partial Class FormSalesPOSDet
         Me.GridColumnPriceCode.Name = "GridColumnPriceCode"
         Me.GridColumnPriceCode.OptionsColumn.AllowEdit = False
         '
-        'GridColumnid_ol_store_ret_list
+        'BtnViewJournal
         '
-        Me.GridColumnid_ol_store_ret_list.Caption = "id_ol_store_ret_list"
-        Me.GridColumnid_ol_store_ret_list.FieldName = "id_ol_store_ret_list"
-        Me.GridColumnid_ol_store_ret_list.Name = "GridColumnid_ol_store_ret_list"
-        Me.GridColumnid_ol_store_ret_list.OptionsColumn.AllowEdit = False
+        Me.BtnViewJournal.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnViewJournal.Image = CType(resources.GetObject("BtnViewJournal.Image"), System.Drawing.Image)
+        Me.BtnViewJournal.ImageIndex = 13
+        Me.BtnViewJournal.ImageList = Me.LargeImageCollection
+        Me.BtnViewJournal.Location = New System.Drawing.Point(824, 2)
+        Me.BtnViewJournal.Name = "BtnViewJournal"
+        Me.BtnViewJournal.Size = New System.Drawing.Size(109, 34)
+        Me.BtnViewJournal.TabIndex = 26
+        Me.BtnViewJournal.TabStop = False
+        Me.BtnViewJournal.Text = "View Journal"
         '
         'FormSalesPOSDet
         '
@@ -2218,4 +2233,5 @@ Partial Class FormSalesPOSDet
     Friend WithEvents LabelName As Label
     Friend WithEvents BtnLoadFromReturnCentre As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents GridColumnid_ol_store_ret_list As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BtnViewJournal As DevExpress.XtraEditors.SimpleButton
 End Class

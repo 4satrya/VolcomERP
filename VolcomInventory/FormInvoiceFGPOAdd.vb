@@ -10,33 +10,34 @@
     Private Sub BPick_Click(sender As Object, e As EventArgs) Handles BPick.Click
         'Try
         Dim newRow As DataRow = (TryCast(FormInvoiceFGPODP.GCList.DataSource, DataTable)).NewRow()
-            '
-            If SLEReportType.EditValue.ToString = "22" Then
-                newRow("id_prod_order") = SLEReport.EditValue.ToString
-            Else
+        '
+        If SLEReportType.EditValue.ToString = "22" Then
+            newRow("id_prod_order") = SLEReport.EditValue.ToString
+        Else
             newRow("id_prod_order") = SLEReport.Properties.View.GetFocusedRowCellValue("id_prod_order").ToString
         End If
-            newRow("id_report") = SLEReport.EditValue.ToString
+        newRow("id_report") = SLEReport.EditValue.ToString
 
-            newRow("report_mark_type") = SLEReportType.EditValue.ToString
-            newRow("report_number") = SLEReport.Text
-            newRow("info_design") = TEInfoDesign.Text
-            '
-            newRow("qty") = TEQty.EditValue
-            newRow("id_currency") = LECurrency.EditValue.ToString
-            newRow("kurs") = TEKurs.EditValue
-            newRow("value_bef_kurs") = TEBeforeKurs.EditValue
-            '
-            newRow("vat") = TEVat.EditValue
-            newRow("inv_number") = ""
-            newRow("note") = ""
+        newRow("report_mark_type") = SLEReportType.EditValue.ToString
+        newRow("report_number") = SLEReport.Text
+        newRow("info_design") = TEInfoDesign.Text
+        '
+        newRow("qty") = TEQty.EditValue
+        newRow("id_currency") = LECurrency.EditValue.ToString
+        newRow("kurs") = TEKurs.EditValue
+        newRow("value_bef_kurs") = TEBeforeKurs.EditValue
+        '
+        newRow("pph_percent") = 0
+        newRow("vat") = TEVat.EditValue
+        newRow("inv_number") = ""
+        newRow("note") = ""
 
-            TryCast(FormInvoiceFGPODP.GCList.DataSource, DataTable).Rows.Add(newRow)
-            FormInvoiceFGPODP.calculate()
-            'Catch ex As Exception
-            '    MsgBox(ex.ToString)
-            'End Try
-            Close()
+        TryCast(FormInvoiceFGPODP.GCList.DataSource, DataTable).Rows.Add(newRow)
+        FormInvoiceFGPODP.calculate()
+        'Catch ex As Exception
+        '    MsgBox(ex.ToString)
+        'End Try
+        Close()
     End Sub
 
     Sub load_kurs()

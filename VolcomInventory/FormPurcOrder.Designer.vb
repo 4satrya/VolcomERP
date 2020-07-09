@@ -89,6 +89,8 @@ Partial Class FormPurcOrder
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.XTPPO = New DevExpress.XtraTab.XtraTabPage()
         Me.GCPO = New DevExpress.XtraGrid.GridControl()
+        Me.MenuGCPO = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.CloseReceivingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GVPO = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -185,8 +187,6 @@ Partial Class FormPurcOrder
         Me.BBSubOther = New DevExpress.XtraBars.BarSubItem()
         Me.BBSetAddPrc = New DevExpress.XtraBars.BarButtonItem()
         Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
-        Me.MenuGCPO = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.CloseReceivingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.XTCPO, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCPO.SuspendLayout()
         Me.XTPRequest.SuspendLayout()
@@ -209,6 +209,7 @@ Partial Class FormPurcOrder
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTPPO.SuspendLayout()
         CType(Me.GCPO, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.MenuGCPO.SuspendLayout()
         CType(Me.GVPO, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RPBRec, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RICEIsCheckPO, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -238,7 +239,6 @@ Partial Class FormPurcOrder
         CType(Me.PopupMenu1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.MenuGCPO.SuspendLayout()
         Me.SuspendLayout()
         '
         'XTCPO
@@ -326,7 +326,7 @@ Partial Class FormPurcOrder
         Me.GridColumn9.OptionsColumn.AllowEdit = False
         Me.GridColumn9.OptionsColumn.AllowFocus = False
         Me.GridColumn9.Visible = True
-        Me.GridColumn9.VisibleIndex = 4
+        Me.GridColumn9.VisibleIndex = 7
         Me.GridColumn9.Width = 98
         '
         'GridColumn72
@@ -345,7 +345,7 @@ Partial Class FormPurcOrder
         Me.GridColumn71.OptionsColumn.AllowEdit = False
         Me.GridColumn71.OptionsColumn.AllowFocus = False
         Me.GridColumn71.Visible = True
-        Me.GridColumn71.VisibleIndex = 3
+        Me.GridColumn71.VisibleIndex = 2
         '
         'GridColumn20
         '
@@ -363,7 +363,7 @@ Partial Class FormPurcOrder
         Me.GridColumn21.OptionsColumn.AllowEdit = False
         Me.GridColumn21.OptionsColumn.AllowFocus = False
         Me.GridColumn21.Visible = True
-        Me.GridColumn21.VisibleIndex = 7
+        Me.GridColumn21.VisibleIndex = 3
         Me.GridColumn21.Width = 78
         '
         'GridColumn34
@@ -374,7 +374,7 @@ Partial Class FormPurcOrder
         Me.GridColumn34.OptionsColumn.AllowEdit = False
         Me.GridColumn34.OptionsColumn.AllowFocus = False
         Me.GridColumn34.Visible = True
-        Me.GridColumn34.VisibleIndex = 9
+        Me.GridColumn34.VisibleIndex = 6
         Me.GridColumn34.Width = 51
         '
         'GridColumn22
@@ -387,7 +387,7 @@ Partial Class FormPurcOrder
         Me.GridColumn22.OptionsColumn.AllowEdit = False
         Me.GridColumn22.OptionsColumn.AllowFocus = False
         Me.GridColumn22.Visible = True
-        Me.GridColumn22.VisibleIndex = 11
+        Me.GridColumn22.VisibleIndex = 5
         Me.GridColumn22.Width = 83
         '
         'GridColumn33
@@ -444,7 +444,7 @@ Partial Class FormPurcOrder
         Me.GridColumn23.OptionsColumn.AllowEdit = False
         Me.GridColumn23.OptionsColumn.AllowFocus = False
         Me.GridColumn23.Visible = True
-        Me.GridColumn23.VisibleIndex = 10
+        Me.GridColumn23.VisibleIndex = 11
         '
         'GridColumn18
         '
@@ -467,7 +467,7 @@ Partial Class FormPurcOrder
         Me.GridColumn10.OptionsColumn.AllowEdit = False
         Me.GridColumn10.OptionsColumn.AllowFocus = False
         Me.GridColumn10.Visible = True
-        Me.GridColumn10.VisibleIndex = 2
+        Me.GridColumn10.VisibleIndex = 10
         Me.GridColumn10.Width = 81
         '
         'GridColumn11
@@ -498,7 +498,7 @@ Partial Class FormPurcOrder
         Me.GridColumn47.OptionsColumn.AllowEdit = False
         Me.GridColumn47.OptionsColumn.AllowFocus = False
         Me.GridColumn47.Visible = True
-        Me.GridColumn47.VisibleIndex = 5
+        Me.GridColumn47.VisibleIndex = 8
         Me.GridColumn47.Width = 107
         '
         'GridColumn48
@@ -509,7 +509,7 @@ Partial Class FormPurcOrder
         Me.GridColumn48.OptionsColumn.AllowEdit = False
         Me.GridColumn48.OptionsColumn.AllowFocus = False
         Me.GridColumn48.Visible = True
-        Me.GridColumn48.VisibleIndex = 6
+        Me.GridColumn48.VisibleIndex = 9
         Me.GridColumn48.Width = 92
         '
         'GridColumn12
@@ -607,7 +607,7 @@ Partial Class FormPurcOrder
         Me.GridColumn73.OptionsColumn.AllowEdit = False
         Me.GridColumn73.OptionsColumn.AllowFocus = False
         Me.GridColumn73.Visible = True
-        Me.GridColumn73.VisibleIndex = 8
+        Me.GridColumn73.VisibleIndex = 4
         Me.GridColumn73.Width = 140
         '
         'RICECheck
@@ -895,6 +895,18 @@ Partial Class FormPurcOrder
         Me.GCPO.Size = New System.Drawing.Size(1145, 428)
         Me.GCPO.TabIndex = 0
         Me.GCPO.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVPO})
+        '
+        'MenuGCPO
+        '
+        Me.MenuGCPO.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CloseReceivingToolStripMenuItem})
+        Me.MenuGCPO.Name = "MenuGCPO"
+        Me.MenuGCPO.Size = New System.Drawing.Size(158, 26)
+        '
+        'CloseReceivingToolStripMenuItem
+        '
+        Me.CloseReceivingToolStripMenuItem.Name = "CloseReceivingToolStripMenuItem"
+        Me.CloseReceivingToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
+        Me.CloseReceivingToolStripMenuItem.Text = "Close Receiving"
         '
         'GVPO
         '
@@ -1783,18 +1795,6 @@ Partial Class FormPurcOrder
         Me.LargeImageCollection.Images.SetKeyName(18, "estimate_icon32.png")
         Me.LargeImageCollection.Images.SetKeyName(19, "copy_icon.png")
         '
-        'MenuGCPO
-        '
-        Me.MenuGCPO.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CloseReceivingToolStripMenuItem})
-        Me.MenuGCPO.Name = "MenuGCPO"
-        Me.MenuGCPO.Size = New System.Drawing.Size(158, 26)
-        '
-        'CloseReceivingToolStripMenuItem
-        '
-        Me.CloseReceivingToolStripMenuItem.Name = "CloseReceivingToolStripMenuItem"
-        Me.CloseReceivingToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
-        Me.CloseReceivingToolStripMenuItem.Text = "Close Receiving"
-        '
         'FormPurcOrder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1834,6 +1834,7 @@ Partial Class FormPurcOrder
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XTPPO.ResumeLayout(False)
         CType(Me.GCPO, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.MenuGCPO.ResumeLayout(False)
         CType(Me.GVPO, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RPBRec, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RICEIsCheckPO, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1865,7 +1866,6 @@ Partial Class FormPurcOrder
         CType(Me.PopupMenu1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BarManager1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.MenuGCPO.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

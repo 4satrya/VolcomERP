@@ -288,6 +288,29 @@
     End Sub
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles BtnSave.Click
+        Dim id_dep As String = "-1"
+        If get_opt_purchasing_field("is_can_all_dep") = "1" And Not FormItemReq.SLEDepartement.EditValue.ToString = "0" Then
+            id_dep = FormItemReq.SLEDepartement.EditValue.ToString
+        Else
+            id_dep = id_departement_user
+        End If
+
+        Dim biaya_ok As Boolean = True
+        Dim biaya_ok_note As String = ""
+
+        'cek coa biaya
+        For k = 0 To GVData.RowCount - 1
+            Dim qc As String = "SELECT cat.item_cat FROM tb_item_coa ic
+INNER JOIN tb_item_cat cat ON cat.id_item_cat=ic.id_item_cat
+INNER JOIN tb_item i ON ic.id_item_cat=i.id_item_cat AND ic.id_departement='" & id_dep & "' AND i.id_item='" & GVData.GetRowCellValue(k, "id_item").ToString & "'"
+            Dim dtc As DataTable = execute_query(qc, -1, True, "", "", "", "")
+            If dtc.Rows.Count <= 0 Then
+                biaya_ok = False
+                biaya_ok_note += Environment.NewLine & "- Mapping " & dtc.Rows(0)("item_cat").ToString & " Departement " & TxtDept.Text
+                Exit For
+            End If
+        Next
+
         'cek stok
         Cursor = Cursors.WaitCursor
         XTCRequest.SelectedTabPageIndex = 0
@@ -295,12 +318,7 @@
         makeSafeGV(GVData)
         '
         Dim id_purc_store As String = get_purc_setup_field("id_purc_store")
-        Dim id_dep As String = "-1"
-        If get_opt_purchasing_field("is_can_all_dep") = "1" And Not FormItemReq.SLEDepartement.EditValue.ToString = "0" Then
-            id_dep = FormItemReq.SLEDepartement.EditValue.ToString
-        Else
-            id_dep = id_departement_user
-        End If
+
         Dim cond_data As Boolean = True
         Dim st As New ClassPurcItemStock()
         Dim qst As String = st.queryGetStock("AND (i.id_departement='" + id_dep + "' OR i.id_departement='" + id_purc_store + "') ", "0", "9999-12-31")
@@ -336,6 +354,8 @@
             GridColumnStt.VisibleIndex = 20
             GVData.BestFitColumns()
             warningCustom("Can't save, some item exceed limit qty")
+        ElseIf Not biaya_ok Then
+            warningCustom("Please contact accounting to setup : " & biaya_ok_note)
         Else
             Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure you want to continue this process?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
             If confirm = Windows.Forms.DialogResult.Yes Then

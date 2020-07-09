@@ -159,6 +159,7 @@ Public Class FormSalesPOSDet
             BtnPrint.Enabled = False
             BtnAttachment.Enabled = False
             BtnDraftJournal.Enabled = False
+            BtnViewJournal.Enabled = False
             BMark.Enabled = False
             DEForm.Text = view_date(0)
             GCItemList.DataSource = Nothing
@@ -248,6 +249,7 @@ Public Class FormSalesPOSDet
             '
             BtnAttachment.Enabled = True
             BtnDraftJournal.Enabled = True
+            BtnViewJournal.Enabled = True
             BMark.Enabled = True
             GridColumnNote.Visible = False
 
@@ -2657,6 +2659,31 @@ Public Class FormSalesPOSDet
         GCItemList.RefreshDataSource()
         GVItemList.RefreshData()
         calculate()
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnViewJournal_Click(sender As Object, e As EventArgs) Handles BtnViewJournal.Click
+        Cursor = Cursors.WaitCursor
+        Dim id_acc_trans As String = ""
+        Try
+            id_acc_trans = execute_query("SELECT ad.id_acc_trans FROM tb_a_acc_trans_det ad
+            WHERE ad.report_mark_type=" + report_mark_type + " AND ad.id_report=" + id_sales_pos + "
+            GROUP BY ad.id_acc_trans ", 0, True, "", "", "", "")
+        Catch ex As Exception
+            id_acc_trans = ""
+        End Try
+
+        If id_acc_trans <> "" Then
+            Dim s As New ClassShowPopUp()
+            FormViewJournal.is_enable_view_doc = False
+            FormViewJournal.BMark.Visible = False
+            FormViewJournal.show_trans_number = True
+            s.id_report = id_acc_trans
+            s.report_mark_type = "36"
+            s.show()
+        Else
+            warningCustom("Auto journal not found.")
+        End If
         Cursor = Cursors.Default
     End Sub
 End Class

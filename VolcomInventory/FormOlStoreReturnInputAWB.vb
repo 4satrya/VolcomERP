@@ -37,7 +37,7 @@
 	            WHERE i.`id_ol_store_ret_req` IS NOT NULL
 	            GROUP BY i.`id_ol_store_ret_req`, a.`id_store`
             ) AS qt ON d.`id_ol_store_ret_req` = qt.id_ol_store_ret_req AND c.`id_comp` = qt.id_store
-            WHERE c.id_comp = '" + FormWHAWBillIn.id_comp + "' AND d.id_ol_store_ret_req NOT IN (" + w_in.Substring(0, w_in.Length - 2) + ")
+            WHERE m.id_report_status=6 AND c.id_comp = '" + FormWHAWBillIn.id_comp + "' AND d.id_ol_store_ret_req NOT IN (" + w_in.Substring(0, w_in.Length - 2) + ")
             GROUP BY d.id_ol_store_ret_req, c.id_comp
             HAVING qty_fisik > 0
         "

@@ -439,6 +439,7 @@ GROUP BY m_ovh_p.id_ovh_price"
 
     Private Sub BAddWO_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BAddWO.Click
         FormProductionWO.id_wo = "-1"
+        FormProductionWO.is_manual_add = "1"
         FormProductionWO.id_po = id_prod_order
         FormProductionWO.ShowDialog()
     End Sub

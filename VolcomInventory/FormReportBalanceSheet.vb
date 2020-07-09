@@ -209,6 +209,9 @@ INNER JOIN tb_a_acc_trans at ON at.id_acc_trans=atd.id_acc_trans AND DATE(at.dat
     End Sub
 
     Private Sub BViewPajak_Click(sender As Object, e As EventArgs) Handles BViewPajak.Click
-
+        Dim q As String = "SELECT * FROM tb_a_acc_trans_det trxd
+INNER JOIN tb_a_acc_trans trx ON trx.`id_acc_trans`=trxd.`id_acc_trans`
+INNER JOIN tb_a_acc acc ON acc.`id_acc`=trxd.`id_acc` AND acc.`is_tax_report`=1 AND acc.`id_tax_report`=3
+WHERE trx.`date_reference` >= '2020-05-01' AND trx.`date_reference` <= '2020-05-30'"
     End Sub
 End Class

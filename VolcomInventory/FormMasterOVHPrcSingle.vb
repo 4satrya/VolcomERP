@@ -27,7 +27,7 @@
     'View Vendor
     Sub viewVendor()
         Dim query As String = "SELECT *, CONCAT_WS('-', a.comp_number, a.comp_name) AS vendor_select FROM tb_m_comp a "
-        query += "INNER JOIN tb_m_comp_cat b ON a.id_comp_cat = b.id_comp_cat AND b.id_comp_cat='1' "
+        query += "INNER JOIN tb_m_comp_cat b ON a.id_comp_cat = b.id_comp_cat AND (b.id_comp_cat='1' OR b.id_comp_cat='8') "
         query += "ORDER BY comp_number ASC"
         viewSearchLookupQuery(SLEVendor, query, "id_comp", "vendor_select", "id_comp")
     End Sub

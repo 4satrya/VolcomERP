@@ -323,7 +323,7 @@ Partial Class FormItemDelDetail
         '
         'MENote
         '
-        Me.MENote.Location = New System.Drawing.Point(57, 11)
+        Me.MENote.Location = New System.Drawing.Point(53, 11)
         Me.MENote.Name = "MENote"
         Me.MENote.Size = New System.Drawing.Size(335, 43)
         Me.MENote.TabIndex = 146

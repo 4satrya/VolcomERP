@@ -1,7 +1,21 @@
 ﻿Public Class FormEmpPayrollReportBPJSTK
     Public id_payroll As String = "-1"
 
+    Private data_payroll As DataTable = New DataTable
+
     Private Sub FormEmpPayrollReportBPJSTK_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If id_payroll = "-1" Then
+            id_payroll = FormEmpPayroll.GVPayrollPeriode.GetFocusedRowCellValue("id_payroll").ToString
+        End If
+
+        data_payroll = execute_query("
+            SELECT 'no' AS is_check, pr.*,emp.`employee_name`,type.payroll_type as payroll_type_name,DATE_FORMAT(pr.periode_end,'%M %Y') AS payroll_name, IFNULL((SELECT report_status FROM tb_lookup_report_status WHERE id_report_status = pr.id_report_status), 'Not Submitted') AS report_status, type.is_thr, type.is_dw FROM tb_emp_payroll pr
+            INNER JOIn tb_emp_payroll_type type ON type.id_payroll_type=pr.id_payroll_type
+            INNER JOIN tb_m_user usr ON usr.id_user=pr.id_user_upd
+            INNER JOIN tb_m_employee emp ON emp.`id_employee`=usr.id_employee
+            WHERE pr.id_payroll = '" + id_payroll + "'
+        ", -1, True, "", "", "", "")
+
         '== all ==
         Dim query_all As String = "CALL view_payroll_bpjstk(" + id_payroll + ")"
 
@@ -19,8 +33,8 @@
         GVAllDepartements.BestFitColumns()
 
         '== detail ==
-        GCEmployeeSalary.Caption = "Upah " + Date.Parse(FormEmpPayroll.GVPayrollPeriode.GetFocusedRowCellValue("periode_end").ToString).ToString("MMMM yyyy")
-        GCEmployeeSalaryBefore.Caption = "Upah " + Date.Parse(FormEmpPayroll.GVPayrollPeriode.GetFocusedRowCellValue("periode_end").ToString).AddMonths(-1).ToString("MMMM yyyy")
+        GCEmployeeSalary.Caption = "Upah " + Date.Parse(data_payroll.Rows(0)("periode_end").ToString).ToString("MMMM yyyy")
+        GCEmployeeSalaryBefore.Caption = "Upah " + Date.Parse(data_payroll.Rows(0)("periode_end").ToString).AddMonths(-1).ToString("MMMM yyyy")
 
         Dim query As String = "CALL view_payroll_bpjstk_detail(" + id_payroll + ")"
 
@@ -59,7 +73,7 @@
 
         report.PrintingSystem.ContinuousPageNumbering = False
 
-        report.XLPeriod.Text = Date.Parse(FormEmpPayroll.GVPayrollPeriode.GetFocusedRowCellValue("periode_end").ToString).ToString("MMMM yyyy").ToUpper
+        report.XLPeriod.Text = Date.Parse(data_payroll.Rows(0)("periode_end").ToString).ToString("MMMM yyyy").ToUpper
 
         report.id_pre = If(id_report_status = "6", "-1", "1")
         report.id_payroll = id_payroll
@@ -93,7 +107,7 @@
 
             report_detail.PrintingSystem.ContinuousPageNumbering = False
 
-            report_detail.XLPeriod.Text = Date.Parse(FormEmpPayroll.GVPayrollPeriode.GetFocusedRowCellValue("periode_end").ToString).ToString("MMMM yyyy").ToUpper
+            report_detail.XLPeriod.Text = Date.Parse(data_payroll.Rows(0)("periode_end").ToString).ToString("MMMM yyyy").ToUpper
 
             report_detail.id_pre = If(id_report_status = "6", "-1", "1")
             report_detail.id_payroll = id_payroll
@@ -101,8 +115,8 @@
 
             report_detail.XLLocation.Text = "PT. VOLCOM INDONESIA (" + location(i).ToString + ")"
 
-            report_detail.XrTableCell15.Text = "UPAH " + Environment.NewLine + Date.Parse(FormEmpPayroll.GVPayrollPeriode.GetFocusedRowCellValue("periode_end").ToString).ToString("MMMM yyyy").ToUpper
-            report_detail.XrTableCell11.Text = "UPAH " + Environment.NewLine + Date.Parse(FormEmpPayroll.GVPayrollPeriode.GetFocusedRowCellValue("periode_end").ToString).AddMonths(-1).ToString("MMMM yyyy").ToUpper
+            report_detail.XrTableCell15.Text = "UPAH " + Environment.NewLine + Date.Parse(data_payroll.Rows(0)("periode_end").ToString).ToString("MMMM yyyy").ToUpper
+            report_detail.XrTableCell11.Text = "UPAH " + Environment.NewLine + Date.Parse(data_payroll.Rows(0)("periode_end").ToString).AddMonths(-1).ToString("MMMM yyyy").ToUpper
 
             report_detail.CreateDocument()
 

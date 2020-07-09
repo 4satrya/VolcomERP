@@ -299,7 +299,7 @@ Public Class FormSalesReturnDet
             id_comp_user = id_store
             setDefDrawer()
         ElseIf id_ret_type = "4" Then 'for ol store
-            BtnBrowseContactTo.Enabled = False
+            BtnBrowseContactTo.Enabled = True
             BPickDrawer.Enabled = False
             TxtOLStoreOrder.Text = data.Rows(0)("sales_order_ol_shop_number").ToString
             id_comp_contact_to = data.Rows(0)("id_wh_contact_to").ToString
@@ -948,6 +948,7 @@ Public Class FormSalesReturnDet
         FormPopUpContact.id_pop_up = "41"
         FormPopUpContact.is_must_active = "1"
         FormPopUpContact.id_departement = id_departement_user
+        FormPopUpContact.id_cat = "5"
         FormPopUpContact.ShowDialog()
     End Sub
 

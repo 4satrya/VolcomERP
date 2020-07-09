@@ -208,6 +208,31 @@ Partial Class FormMatStock
         Me.GridColumn67 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.BViewMatRes = New DevExpress.XtraEditors.SimpleButton()
         Me.LabelControl27 = New DevExpress.XtraEditors.LabelControl()
+        Me.XTPStockReport = New DevExpress.XtraTab.XtraTabPage()
+        Me.GroupControl6 = New DevExpress.XtraEditors.GroupControl()
+        Me.GCStockReport = New DevExpress.XtraGrid.GridControl()
+        Me.GVStockReport = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn69 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn78 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn71 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn72 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn70 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn73 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn79 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn74 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn80 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn75 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn81 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn76 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn82 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn77 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn83 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GroupControl1 = New DevExpress.XtraEditors.GroupControl()
+        Me.DEStockTo = New DevExpress.XtraEditors.DateEdit()
+        Me.DEStockFrom = New DevExpress.XtraEditors.DateEdit()
+        Me.LabelControl28 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl31 = New DevExpress.XtraEditors.LabelControl()
+        Me.SBStockView = New DevExpress.XtraEditors.SimpleButton()
         Me.ViewMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.SMViewDel = New System.Windows.Forms.ToolStripMenuItem()
         Me.GridColumn30 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -302,6 +327,17 @@ Partial Class FormMatStock
         Me.GroupControl3.SuspendLayout()
         CType(Me.SLEResMat.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView4, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTPStockReport.SuspendLayout()
+        CType(Me.GroupControl6, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupControl6.SuspendLayout()
+        CType(Me.GCStockReport, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVStockReport, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupControl1.SuspendLayout()
+        CType(Me.DEStockTo.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEStockTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEStockFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEStockFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ViewMenu.SuspendLayout()
         Me.ViewMenuWO.SuspendLayout()
         Me.SuspendLayout()
@@ -315,7 +351,7 @@ Partial Class FormMatStock
         Me.XTCFGStock.SelectedTabPage = Me.XTPFGStockWHSum
         Me.XTCFGStock.Size = New System.Drawing.Size(1160, 488)
         Me.XTCFGStock.TabIndex = 1
-        Me.XTCFGStock.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPFGStockWHSum, Me.XTPFGStockCardWH, Me.XTPStockMatWO, Me.XTPTrackingBOM, Me.XTPStockCardReserved})
+        Me.XTCFGStock.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPFGStockWHSum, Me.XTPFGStockCardWH, Me.XTPStockMatWO, Me.XTPTrackingBOM, Me.XTPStockCardReserved, Me.XTPStockReport})
         '
         'XTPFGStockWHSum
         '
@@ -409,7 +445,7 @@ Partial Class FormMatStock
         Me.GridColumn7.FieldName = "mat_name"
         Me.GridColumn7.Name = "GridColumn7"
         Me.GridColumn7.Visible = True
-        Me.GridColumn7.VisibleIndex = 1
+        Me.GridColumn7.VisibleIndex = 0
         Me.GridColumn7.Width = 133
         '
         'GridColumn1
@@ -418,7 +454,7 @@ Partial Class FormMatStock
         Me.GridColumn1.FieldName = "label_mat"
         Me.GridColumn1.Name = "GridColumn1"
         Me.GridColumn1.Visible = True
-        Me.GridColumn1.VisibleIndex = 2
+        Me.GridColumn1.VisibleIndex = 1
         Me.GridColumn1.Width = 151
         '
         'GridColumn2
@@ -427,7 +463,7 @@ Partial Class FormMatStock
         Me.GridColumn2.FieldName = "size"
         Me.GridColumn2.Name = "GridColumn2"
         Me.GridColumn2.Visible = True
-        Me.GridColumn2.VisibleIndex = 3
+        Me.GridColumn2.VisibleIndex = 2
         Me.GridColumn2.Width = 53
         '
         'GridColumn3
@@ -436,7 +472,7 @@ Partial Class FormMatStock
         Me.GridColumn3.FieldName = "color"
         Me.GridColumn3.Name = "GridColumn3"
         Me.GridColumn3.Visible = True
-        Me.GridColumn3.VisibleIndex = 4
+        Me.GridColumn3.VisibleIndex = 3
         Me.GridColumn3.Width = 53
         '
         'GridColumn4
@@ -452,7 +488,7 @@ Partial Class FormMatStock
         Me.GridColumn5.FieldName = "year"
         Me.GridColumn5.Name = "GridColumn5"
         Me.GridColumn5.Visible = True
-        Me.GridColumn5.VisibleIndex = 5
+        Me.GridColumn5.VisibleIndex = 4
         Me.GridColumn5.Width = 53
         '
         'GridColumn6
@@ -461,7 +497,7 @@ Partial Class FormMatStock
         Me.GridColumn6.FieldName = "lot"
         Me.GridColumn6.Name = "GridColumn6"
         Me.GridColumn6.Visible = True
-        Me.GridColumn6.VisibleIndex = 6
+        Me.GridColumn6.VisibleIndex = 5
         Me.GridColumn6.Width = 71
         '
         'LabelControl8
@@ -1098,7 +1134,7 @@ Partial Class FormMatStock
         Me.GridColumn8.FieldName = "mat_name"
         Me.GridColumn8.Name = "GridColumn8"
         Me.GridColumn8.Visible = True
-        Me.GridColumn8.VisibleIndex = 1
+        Me.GridColumn8.VisibleIndex = 0
         Me.GridColumn8.Width = 133
         '
         'GridColumn9
@@ -1107,7 +1143,7 @@ Partial Class FormMatStock
         Me.GridColumn9.FieldName = "label_mat"
         Me.GridColumn9.Name = "GridColumn9"
         Me.GridColumn9.Visible = True
-        Me.GridColumn9.VisibleIndex = 2
+        Me.GridColumn9.VisibleIndex = 1
         Me.GridColumn9.Width = 151
         '
         'GridColumn10
@@ -1116,7 +1152,7 @@ Partial Class FormMatStock
         Me.GridColumn10.FieldName = "size"
         Me.GridColumn10.Name = "GridColumn10"
         Me.GridColumn10.Visible = True
-        Me.GridColumn10.VisibleIndex = 3
+        Me.GridColumn10.VisibleIndex = 2
         Me.GridColumn10.Width = 53
         '
         'GridColumn11
@@ -1125,7 +1161,7 @@ Partial Class FormMatStock
         Me.GridColumn11.FieldName = "color"
         Me.GridColumn11.Name = "GridColumn11"
         Me.GridColumn11.Visible = True
-        Me.GridColumn11.VisibleIndex = 4
+        Me.GridColumn11.VisibleIndex = 3
         Me.GridColumn11.Width = 53
         '
         'GridColumn12
@@ -1141,7 +1177,7 @@ Partial Class FormMatStock
         Me.GridColumn13.FieldName = "year"
         Me.GridColumn13.Name = "GridColumn13"
         Me.GridColumn13.Visible = True
-        Me.GridColumn13.VisibleIndex = 5
+        Me.GridColumn13.VisibleIndex = 4
         Me.GridColumn13.Width = 53
         '
         'GridColumn14
@@ -1150,7 +1186,7 @@ Partial Class FormMatStock
         Me.GridColumn14.FieldName = "lot"
         Me.GridColumn14.Name = "GridColumn14"
         Me.GridColumn14.Visible = True
-        Me.GridColumn14.VisibleIndex = 6
+        Me.GridColumn14.VisibleIndex = 5
         Me.GridColumn14.Width = 71
         '
         'GridColumnIdMatDet
@@ -1778,7 +1814,7 @@ Partial Class FormMatStock
         Me.GridColumn55.FieldName = "mat_name"
         Me.GridColumn55.Name = "GridColumn55"
         Me.GridColumn55.Visible = True
-        Me.GridColumn55.VisibleIndex = 1
+        Me.GridColumn55.VisibleIndex = 0
         Me.GridColumn55.Width = 133
         '
         'GridColumn56
@@ -1787,7 +1823,7 @@ Partial Class FormMatStock
         Me.GridColumn56.FieldName = "label_mat"
         Me.GridColumn56.Name = "GridColumn56"
         Me.GridColumn56.Visible = True
-        Me.GridColumn56.VisibleIndex = 2
+        Me.GridColumn56.VisibleIndex = 1
         Me.GridColumn56.Width = 151
         '
         'GridColumn57
@@ -1796,7 +1832,7 @@ Partial Class FormMatStock
         Me.GridColumn57.FieldName = "size"
         Me.GridColumn57.Name = "GridColumn57"
         Me.GridColumn57.Visible = True
-        Me.GridColumn57.VisibleIndex = 3
+        Me.GridColumn57.VisibleIndex = 2
         Me.GridColumn57.Width = 53
         '
         'GridColumn58
@@ -1805,7 +1841,7 @@ Partial Class FormMatStock
         Me.GridColumn58.FieldName = "color"
         Me.GridColumn58.Name = "GridColumn58"
         Me.GridColumn58.Visible = True
-        Me.GridColumn58.VisibleIndex = 4
+        Me.GridColumn58.VisibleIndex = 3
         Me.GridColumn58.Width = 53
         '
         'GridColumn59
@@ -1821,7 +1857,7 @@ Partial Class FormMatStock
         Me.GridColumn60.FieldName = "year"
         Me.GridColumn60.Name = "GridColumn60"
         Me.GridColumn60.Visible = True
-        Me.GridColumn60.VisibleIndex = 5
+        Me.GridColumn60.VisibleIndex = 4
         Me.GridColumn60.Width = 53
         '
         'GridColumn61
@@ -1830,7 +1866,7 @@ Partial Class FormMatStock
         Me.GridColumn61.FieldName = "lot"
         Me.GridColumn61.Name = "GridColumn61"
         Me.GridColumn61.Visible = True
-        Me.GridColumn61.VisibleIndex = 6
+        Me.GridColumn61.VisibleIndex = 5
         Me.GridColumn61.Width = 71
         '
         'GridColumn62
@@ -1982,7 +2018,7 @@ Partial Class FormMatStock
         Me.GridColumn52.FieldName = "mat_name"
         Me.GridColumn52.Name = "GridColumn52"
         Me.GridColumn52.Visible = True
-        Me.GridColumn52.VisibleIndex = 1
+        Me.GridColumn52.VisibleIndex = 0
         Me.GridColumn52.Width = 133
         '
         'GridColumn53
@@ -1991,7 +2027,7 @@ Partial Class FormMatStock
         Me.GridColumn53.FieldName = "label_mat"
         Me.GridColumn53.Name = "GridColumn53"
         Me.GridColumn53.Visible = True
-        Me.GridColumn53.VisibleIndex = 2
+        Me.GridColumn53.VisibleIndex = 1
         Me.GridColumn53.Width = 151
         '
         'GridColumn54
@@ -2000,7 +2036,7 @@ Partial Class FormMatStock
         Me.GridColumn54.FieldName = "size"
         Me.GridColumn54.Name = "GridColumn54"
         Me.GridColumn54.Visible = True
-        Me.GridColumn54.VisibleIndex = 3
+        Me.GridColumn54.VisibleIndex = 2
         Me.GridColumn54.Width = 53
         '
         'GridColumn63
@@ -2009,7 +2045,7 @@ Partial Class FormMatStock
         Me.GridColumn63.FieldName = "color"
         Me.GridColumn63.Name = "GridColumn63"
         Me.GridColumn63.Visible = True
-        Me.GridColumn63.VisibleIndex = 4
+        Me.GridColumn63.VisibleIndex = 3
         Me.GridColumn63.Width = 53
         '
         'GridColumn64
@@ -2025,7 +2061,7 @@ Partial Class FormMatStock
         Me.GridColumn65.FieldName = "year"
         Me.GridColumn65.Name = "GridColumn65"
         Me.GridColumn65.Visible = True
-        Me.GridColumn65.VisibleIndex = 5
+        Me.GridColumn65.VisibleIndex = 4
         Me.GridColumn65.Width = 53
         '
         'GridColumn66
@@ -2034,7 +2070,7 @@ Partial Class FormMatStock
         Me.GridColumn66.FieldName = "lot"
         Me.GridColumn66.Name = "GridColumn66"
         Me.GridColumn66.Visible = True
-        Me.GridColumn66.VisibleIndex = 6
+        Me.GridColumn66.VisibleIndex = 5
         Me.GridColumn66.Width = 71
         '
         'GridColumn67
@@ -2058,6 +2094,284 @@ Partial Class FormMatStock
         Me.LabelControl27.Size = New System.Drawing.Size(38, 13)
         Me.LabelControl27.TabIndex = 5
         Me.LabelControl27.Text = "Material"
+        '
+        'XTPStockReport
+        '
+        Me.XTPStockReport.Controls.Add(Me.GroupControl6)
+        Me.XTPStockReport.Controls.Add(Me.GroupControl1)
+        Me.XTPStockReport.Name = "XTPStockReport"
+        Me.XTPStockReport.Size = New System.Drawing.Size(1154, 460)
+        Me.XTPStockReport.Text = "Stock Report"
+        '
+        'GroupControl6
+        '
+        Me.GroupControl6.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupControl6.Controls.Add(Me.GCStockReport)
+        Me.GroupControl6.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupControl6.Enabled = False
+        Me.GroupControl6.Location = New System.Drawing.Point(0, 54)
+        Me.GroupControl6.Name = "GroupControl6"
+        Me.GroupControl6.Size = New System.Drawing.Size(1154, 406)
+        Me.GroupControl6.TabIndex = 20
+        Me.GroupControl6.Text = "Raw Material"
+        '
+        'GCStockReport
+        '
+        Me.GCStockReport.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCStockReport.Location = New System.Drawing.Point(20, 2)
+        Me.GCStockReport.MainView = Me.GVStockReport
+        Me.GCStockReport.Name = "GCStockReport"
+        Me.GCStockReport.Size = New System.Drawing.Size(1132, 402)
+        Me.GCStockReport.TabIndex = 38
+        Me.GCStockReport.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVStockReport})
+        '
+        'GVStockReport
+        '
+        Me.GVStockReport.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn69, Me.GridColumn78, Me.GridColumn71, Me.GridColumn72, Me.GridColumn70, Me.GridColumn73, Me.GridColumn79, Me.GridColumn74, Me.GridColumn80, Me.GridColumn75, Me.GridColumn81, Me.GridColumn76, Me.GridColumn82, Me.GridColumn77, Me.GridColumn83})
+        Me.GVStockReport.GridControl = Me.GCStockReport
+        Me.GVStockReport.GroupCount = 1
+        Me.GVStockReport.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_beg", Me.GridColumn72, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount_beg", Me.GridColumn70, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_receive", Me.GridColumn73, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount_receive", Me.GridColumn79, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_mrs", Me.GridColumn74, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount_mrs", Me.GridColumn80, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_retur", Me.GridColumn75, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount_retur", Me.GridColumn81, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_adj", Me.GridColumn76, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount_adj", Me.GridColumn82, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_ending", Me.GridColumn77, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount_ending", Me.GridColumn83, "{0:N2}")})
+        Me.GVStockReport.Name = "GVStockReport"
+        Me.GVStockReport.OptionsBehavior.AutoExpandAllGroups = True
+        Me.GVStockReport.OptionsBehavior.ReadOnly = True
+        Me.GVStockReport.OptionsView.ColumnAutoWidth = False
+        Me.GVStockReport.OptionsView.ShowFooter = True
+        Me.GVStockReport.OptionsView.ShowGroupPanel = False
+        Me.GVStockReport.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumn69, DevExpress.Data.ColumnSortOrder.Ascending)})
+        '
+        'GridColumn69
+        '
+        Me.GridColumn69.Caption = "Category"
+        Me.GridColumn69.FieldName = "mat_cat"
+        Me.GridColumn69.Name = "GridColumn69"
+        Me.GridColumn69.Visible = True
+        Me.GridColumn69.VisibleIndex = 0
+        '
+        'GridColumn78
+        '
+        Me.GridColumn78.Caption = "Code"
+        Me.GridColumn78.FieldName = "mat_det_code"
+        Me.GridColumn78.Name = "GridColumn78"
+        Me.GridColumn78.Visible = True
+        Me.GridColumn78.VisibleIndex = 0
+        '
+        'GridColumn71
+        '
+        Me.GridColumn71.Caption = "Product"
+        Me.GridColumn71.FieldName = "mat_det_display_name"
+        Me.GridColumn71.Name = "GridColumn71"
+        Me.GridColumn71.Visible = True
+        Me.GridColumn71.VisibleIndex = 1
+        '
+        'GridColumn72
+        '
+        Me.GridColumn72.Caption = "Begin Qty"
+        Me.GridColumn72.DisplayFormat.FormatString = "N2"
+        Me.GridColumn72.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn72.FieldName = "qty_beg"
+        Me.GridColumn72.Name = "GridColumn72"
+        Me.GridColumn72.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_beg", "{0:N2}")})
+        Me.GridColumn72.Visible = True
+        Me.GridColumn72.VisibleIndex = 2
+        '
+        'GridColumn70
+        '
+        Me.GridColumn70.Caption = "Begin Amount"
+        Me.GridColumn70.DisplayFormat.FormatString = "N2"
+        Me.GridColumn70.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn70.FieldName = "amount_beg"
+        Me.GridColumn70.Name = "GridColumn70"
+        Me.GridColumn70.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount_beg", "{0:N2}")})
+        Me.GridColumn70.Visible = True
+        Me.GridColumn70.VisibleIndex = 3
+        '
+        'GridColumn73
+        '
+        Me.GridColumn73.Caption = "Receive Qty"
+        Me.GridColumn73.DisplayFormat.FormatString = "N2"
+        Me.GridColumn73.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn73.FieldName = "qty_receive"
+        Me.GridColumn73.Name = "GridColumn73"
+        Me.GridColumn73.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_receive", "{0:N2}")})
+        Me.GridColumn73.Visible = True
+        Me.GridColumn73.VisibleIndex = 4
+        '
+        'GridColumn79
+        '
+        Me.GridColumn79.Caption = "Receive Amount"
+        Me.GridColumn79.DisplayFormat.FormatString = "N2"
+        Me.GridColumn79.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn79.FieldName = "amount_receive"
+        Me.GridColumn79.Name = "GridColumn79"
+        Me.GridColumn79.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount_receive", "{0:N2}")})
+        Me.GridColumn79.Visible = True
+        Me.GridColumn79.VisibleIndex = 5
+        '
+        'GridColumn74
+        '
+        Me.GridColumn74.Caption = "MIS Qty"
+        Me.GridColumn74.DisplayFormat.FormatString = "N2"
+        Me.GridColumn74.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn74.FieldName = "qty_mrs"
+        Me.GridColumn74.Name = "GridColumn74"
+        Me.GridColumn74.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_mrs", "{0:N2}")})
+        Me.GridColumn74.Visible = True
+        Me.GridColumn74.VisibleIndex = 6
+        '
+        'GridColumn80
+        '
+        Me.GridColumn80.Caption = "MIS Amount"
+        Me.GridColumn80.DisplayFormat.FormatString = "N2"
+        Me.GridColumn80.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn80.FieldName = "amount_mrs"
+        Me.GridColumn80.Name = "GridColumn80"
+        Me.GridColumn80.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount_mrs", "{0:N2}")})
+        Me.GridColumn80.Visible = True
+        Me.GridColumn80.VisibleIndex = 7
+        '
+        'GridColumn75
+        '
+        Me.GridColumn75.Caption = "Retur Qty"
+        Me.GridColumn75.DisplayFormat.FormatString = "N2"
+        Me.GridColumn75.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn75.FieldName = "qty_retur"
+        Me.GridColumn75.Name = "GridColumn75"
+        Me.GridColumn75.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_retur", "{0:N2}")})
+        Me.GridColumn75.Visible = True
+        Me.GridColumn75.VisibleIndex = 8
+        '
+        'GridColumn81
+        '
+        Me.GridColumn81.Caption = "Retur Amount"
+        Me.GridColumn81.DisplayFormat.FormatString = "N2"
+        Me.GridColumn81.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn81.FieldName = "amount_retur"
+        Me.GridColumn81.Name = "GridColumn81"
+        Me.GridColumn81.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount_retur", "{0:N2}")})
+        Me.GridColumn81.Visible = True
+        Me.GridColumn81.VisibleIndex = 9
+        '
+        'GridColumn76
+        '
+        Me.GridColumn76.Caption = "Adjust Qty"
+        Me.GridColumn76.DisplayFormat.FormatString = "N2"
+        Me.GridColumn76.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn76.FieldName = "qty_adj"
+        Me.GridColumn76.Name = "GridColumn76"
+        Me.GridColumn76.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_adj", "{0:N2}")})
+        Me.GridColumn76.Visible = True
+        Me.GridColumn76.VisibleIndex = 10
+        '
+        'GridColumn82
+        '
+        Me.GridColumn82.Caption = "Adjust Amount"
+        Me.GridColumn82.DisplayFormat.FormatString = "N2"
+        Me.GridColumn82.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn82.FieldName = "amount_adj"
+        Me.GridColumn82.Name = "GridColumn82"
+        Me.GridColumn82.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount_adj", "{0:N2}")})
+        Me.GridColumn82.Visible = True
+        Me.GridColumn82.VisibleIndex = 11
+        '
+        'GridColumn77
+        '
+        Me.GridColumn77.Caption = "Ending Qty"
+        Me.GridColumn77.DisplayFormat.FormatString = "N2"
+        Me.GridColumn77.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn77.FieldName = "qty_ending"
+        Me.GridColumn77.Name = "GridColumn77"
+        Me.GridColumn77.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_ending", "{0:N2}")})
+        Me.GridColumn77.Visible = True
+        Me.GridColumn77.VisibleIndex = 12
+        '
+        'GridColumn83
+        '
+        Me.GridColumn83.Caption = "Ending Amount"
+        Me.GridColumn83.DisplayFormat.FormatString = "N2"
+        Me.GridColumn83.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn83.FieldName = "amount_ending"
+        Me.GridColumn83.Name = "GridColumn83"
+        Me.GridColumn83.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount_ending", "{0:N2}")})
+        Me.GridColumn83.Visible = True
+        Me.GridColumn83.VisibleIndex = 13
+        '
+        'GroupControl1
+        '
+        Me.GroupControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.UltraFlat
+        Me.GroupControl1.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupControl1.Controls.Add(Me.DEStockTo)
+        Me.GroupControl1.Controls.Add(Me.DEStockFrom)
+        Me.GroupControl1.Controls.Add(Me.LabelControl28)
+        Me.GroupControl1.Controls.Add(Me.LabelControl31)
+        Me.GroupControl1.Controls.Add(Me.SBStockView)
+        Me.GroupControl1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.GroupControl1.Location = New System.Drawing.Point(0, 0)
+        Me.GroupControl1.Name = "GroupControl1"
+        Me.GroupControl1.Size = New System.Drawing.Size(1154, 54)
+        Me.GroupControl1.TabIndex = 19
+        Me.GroupControl1.Text = "Filter"
+        '
+        'DEStockTo
+        '
+        Me.DEStockTo.EditValue = Nothing
+        Me.DEStockTo.Location = New System.Drawing.Point(216, 24)
+        Me.DEStockTo.Name = "DEStockTo"
+        Me.DEStockTo.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[False]
+        Me.DEStockTo.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEStockTo.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEStockTo.Properties.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.DEStockTo.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEStockTo.Properties.EditFormat.FormatString = "dd MMMM yyyy"
+        Me.DEStockTo.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEStockTo.Properties.Mask.EditMask = "dd MMMM yyyy"
+        Me.DEStockTo.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.DEStockTo.Size = New System.Drawing.Size(176, 20)
+        Me.DEStockTo.TabIndex = 13
+        '
+        'DEStockFrom
+        '
+        Me.DEStockFrom.EditValue = Nothing
+        Me.DEStockFrom.Location = New System.Drawing.Point(23, 24)
+        Me.DEStockFrom.Name = "DEStockFrom"
+        Me.DEStockFrom.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[False]
+        Me.DEStockFrom.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEStockFrom.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEStockFrom.Properties.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.DEStockFrom.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEStockFrom.Properties.EditFormat.FormatString = "dd MMMM yyyy"
+        Me.DEStockFrom.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEStockFrom.Properties.Mask.EditMask = "dd MMMM yyyy"
+        Me.DEStockFrom.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.DEStockFrom.Size = New System.Drawing.Size(176, 20)
+        Me.DEStockFrom.TabIndex = 12
+        '
+        'LabelControl28
+        '
+        Me.LabelControl28.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl28.Location = New System.Drawing.Point(27, 5)
+        Me.LabelControl28.Name = "LabelControl28"
+        Me.LabelControl28.Size = New System.Drawing.Size(24, 13)
+        Me.LabelControl28.TabIndex = 11
+        Me.LabelControl28.Text = "From"
+        '
+        'LabelControl31
+        '
+        Me.LabelControl31.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl31.Location = New System.Drawing.Point(216, 5)
+        Me.LabelControl31.Name = "LabelControl31"
+        Me.LabelControl31.Size = New System.Drawing.Size(12, 13)
+        Me.LabelControl31.TabIndex = 2
+        Me.LabelControl31.Text = "To"
+        '
+        'SBStockView
+        '
+        Me.SBStockView.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SBStockView.Appearance.Options.UseFont = True
+        Me.SBStockView.Location = New System.Drawing.Point(398, 22)
+        Me.SBStockView.Name = "SBStockView"
+        Me.SBStockView.Size = New System.Drawing.Size(60, 23)
+        Me.SBStockView.TabIndex = 6
+        Me.SBStockView.Text = "View"
         '
         'ViewMenu
         '
@@ -2281,6 +2595,18 @@ Partial Class FormMatStock
         Me.GroupControl3.PerformLayout()
         CType(Me.SLEResMat.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView4, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTPStockReport.ResumeLayout(False)
+        CType(Me.GroupControl6, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupControl6.ResumeLayout(False)
+        CType(Me.GCStockReport, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVStockReport, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupControl1.ResumeLayout(False)
+        Me.GroupControl1.PerformLayout()
+        CType(Me.DEStockTo.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEStockTo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEStockFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEStockFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ViewMenu.ResumeLayout(False)
         Me.ViewMenuWO.ResumeLayout(False)
         Me.ResumeLayout(False)
@@ -2492,4 +2818,29 @@ Partial Class FormMatStock
     Friend WithEvents GridColumn67 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents BViewMatRes As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents LabelControl27 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents XTPStockReport As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents GroupControl1 As DevExpress.XtraEditors.GroupControl
+    Friend WithEvents SBStockView As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents LabelControl28 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LabelControl31 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents DEStockTo As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents DEStockFrom As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents GroupControl6 As DevExpress.XtraEditors.GroupControl
+    Friend WithEvents GCStockReport As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVStockReport As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn69 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn78 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn71 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn72 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn73 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn74 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn75 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn76 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn77 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn70 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn79 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn80 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn81 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn82 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn83 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

@@ -19,6 +19,7 @@ Partial Class FormOLStore
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormOLStore))
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
         Me.BtnUpdateStt = New DevExpress.XtraEditors.SimpleButton()
@@ -36,7 +37,7 @@ Partial Class FormOLStore
         Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
         Me.BtnExportToBOF = New DevExpress.XtraEditors.SimpleButton()
         Me.GCDetail = New DevExpress.XtraGrid.GridControl()
-        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GVDetail = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -77,7 +78,7 @@ Partial Class FormOLStore
         Me.XtraTabControl1 = New DevExpress.XtraTab.XtraTabControl()
         Me.XTPOrderSummary = New DevExpress.XtraTab.XtraTabPage()
         Me.GCSummary = New DevExpress.XtraGrid.GridControl()
-        Me.ContextMenuStripSum = New System.Windows.Forms.ContextMenuStrip()
+        Me.ContextMenuStripSum = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ViewDetailToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FileAttachmentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GVSummary = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -199,6 +200,7 @@ Partial Class FormOLStore
         Me.LinkSalesOrder = New DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit()
         Me.GridColumn39 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnFailReason = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControl4 = New DevExpress.XtraEditors.PanelControl()
         Me.SBCloseOrder = New DevExpress.XtraEditors.SimpleButton()
         Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
@@ -208,9 +210,9 @@ Partial Class FormOLStore
         Me.BtnConfirmedOrder = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnPendingOrder = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnAllOrder = New DevExpress.XtraEditors.SimpleButton()
-        Me.ContextMenuStripOwnOlStore = New System.Windows.Forms.ContextMenuStrip()
+        Me.ContextMenuStripOwnOlStore = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.CantProceedToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GridColumnFailReason = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnnote_promo = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
         CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1557,7 +1559,7 @@ Partial Class FormOLStore
         '
         'GVVolcom
         '
-        Me.GVVolcom.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIsCheck, Me.GridColumnid, Me.GridColumnsales_order_ol_shop_number, Me.GridColumnsales_order_ol_shop_date, Me.GridColumncustomer_name, Me.GridColumnshipping_name, Me.GridColumnshipping_address, Me.GridColumnshipping_phone, Me.GridColumnshipping_city, Me.GridColumnshipping_post_code, Me.GridColumnshipping_region, Me.GridColumnpayment_method, Me.GridColumntracking_code, Me.GridColumnol_store_sku, Me.GridColumnol_store_id, Me.GridColumnsku, Me.GridColumndesign_price, Me.GridColumnsales_order_det_qty, Me.GridColumnis_process, Me.GridColumnnote_price, Me.GridColumnid_design_cat, Me.GridColumnid_design_price, Me.GridColumnid_product, Me.GridColumnnote_stock, Me.GridColumnid_report_trf_order, Me.GridColumnrmt_trf_order, Me.GridColumnid_report_trf, Me.GridColumnrmt_trf, Me.GridColumnid_report_order, Me.GridColumnrmt_order, Me.GridColumntrf_order_number, Me.GridColumntrf_number, Me.GridColumnsales_order_number, Me.GridColumn39, Me.GridColumn, Me.GridColumnFailReason})
+        Me.GVVolcom.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIsCheck, Me.GridColumnid, Me.GridColumnsales_order_ol_shop_number, Me.GridColumnsales_order_ol_shop_date, Me.GridColumncustomer_name, Me.GridColumnshipping_name, Me.GridColumnshipping_address, Me.GridColumnshipping_phone, Me.GridColumnshipping_city, Me.GridColumnshipping_post_code, Me.GridColumnshipping_region, Me.GridColumnpayment_method, Me.GridColumntracking_code, Me.GridColumnol_store_sku, Me.GridColumnol_store_id, Me.GridColumnsku, Me.GridColumndesign_price, Me.GridColumnsales_order_det_qty, Me.GridColumnis_process, Me.GridColumnnote_price, Me.GridColumnid_design_cat, Me.GridColumnid_design_price, Me.GridColumnid_product, Me.GridColumnnote_stock, Me.GridColumnid_report_trf_order, Me.GridColumnrmt_trf_order, Me.GridColumnid_report_trf, Me.GridColumnrmt_trf, Me.GridColumnid_report_order, Me.GridColumnrmt_order, Me.GridColumntrf_order_number, Me.GridColumntrf_number, Me.GridColumnsales_order_number, Me.GridColumn39, Me.GridColumn, Me.GridColumnFailReason, Me.GridColumnnote_promo})
         Me.GVVolcom.GridControl = Me.GCVolcom
         Me.GVVolcom.Name = "GVVolcom"
         Me.GVVolcom.OptionsBehavior.AutoExpandAllGroups = True
@@ -1836,7 +1838,7 @@ Partial Class FormOLStore
         Me.GridColumntrf_order_number.Name = "GridColumntrf_order_number"
         Me.GridColumntrf_order_number.OptionsColumn.ReadOnly = True
         Me.GridColumntrf_order_number.Visible = True
-        Me.GridColumntrf_order_number.VisibleIndex = 20
+        Me.GridColumntrf_order_number.VisibleIndex = 21
         '
         'LinkTrfOrder
         '
@@ -1851,7 +1853,7 @@ Partial Class FormOLStore
         Me.GridColumntrf_number.Name = "GridColumntrf_number"
         Me.GridColumntrf_number.OptionsColumn.ReadOnly = True
         Me.GridColumntrf_number.Visible = True
-        Me.GridColumntrf_number.VisibleIndex = 21
+        Me.GridColumntrf_number.VisibleIndex = 22
         '
         'LinkTrf
         '
@@ -1866,7 +1868,7 @@ Partial Class FormOLStore
         Me.GridColumnsales_order_number.Name = "GridColumnsales_order_number"
         Me.GridColumnsales_order_number.OptionsColumn.ReadOnly = True
         Me.GridColumnsales_order_number.Visible = True
-        Me.GridColumnsales_order_number.VisibleIndex = 22
+        Me.GridColumnsales_order_number.VisibleIndex = 23
         '
         'LinkSalesOrder
         '
@@ -1880,7 +1882,7 @@ Partial Class FormOLStore
         Me.GridColumn39.Name = "GridColumn39"
         Me.GridColumn39.OptionsColumn.ReadOnly = True
         Me.GridColumn39.Visible = True
-        Me.GridColumn39.VisibleIndex = 23
+        Me.GridColumn39.VisibleIndex = 24
         '
         'GridColumn
         '
@@ -1889,6 +1891,15 @@ Partial Class FormOLStore
         Me.GridColumn.OptionsColumn.ReadOnly = True
         Me.GridColumn.Visible = True
         Me.GridColumn.VisibleIndex = 17
+        '
+        'GridColumnFailReason
+        '
+        Me.GridColumnFailReason.Caption = "Fail Reason"
+        Me.GridColumnFailReason.FieldName = "fail_reason"
+        Me.GridColumnFailReason.Name = "GridColumnFailReason"
+        Me.GridColumnFailReason.OptionsColumn.ReadOnly = True
+        Me.GridColumnFailReason.Visible = True
+        Me.GridColumnFailReason.VisibleIndex = 25
         '
         'PanelControl4
         '
@@ -1998,14 +2009,13 @@ Partial Class FormOLStore
         Me.CantProceedToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
         Me.CantProceedToolStripMenuItem.Text = "Can't proceed"
         '
-        'GridColumnFailReason
+        'GridColumnnote_promo
         '
-        Me.GridColumnFailReason.Caption = "Fail Reason"
-        Me.GridColumnFailReason.FieldName = "fail_reason"
-        Me.GridColumnFailReason.Name = "GridColumnFailReason"
-        Me.GridColumnFailReason.OptionsColumn.ReadOnly = True
-        Me.GridColumnFailReason.Visible = True
-        Me.GridColumnFailReason.VisibleIndex = 24
+        Me.GridColumnnote_promo.Caption = "Note Promo"
+        Me.GridColumnnote_promo.FieldName = "note_promo"
+        Me.GridColumnnote_promo.Name = "GridColumnnote_promo"
+        Me.GridColumnnote_promo.Visible = True
+        Me.GridColumnnote_promo.VisibleIndex = 20
         '
         'FormOLStore
         '
@@ -2277,4 +2287,5 @@ Partial Class FormOLStore
     Friend WithEvents PanelControl4 As DevExpress.XtraEditors.PanelControl
     Friend WithEvents SBCloseOrder As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents GridColumnFailReason As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnnote_promo As DevExpress.XtraGrid.Columns.GridColumn
 End Class

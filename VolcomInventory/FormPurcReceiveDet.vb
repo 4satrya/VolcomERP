@@ -67,8 +67,27 @@ WHERE pod.`id_purc_order`='1' AND ISNULL(coa.id_item_coa)"
                 cond_coa_vendor = False
             End If
 
-            If Not cond_coa Or Not cond_coa_vendor Or Not cond_coa_biaya Then
-                warningCustom("Please contact Accounting Department to setup these COA : " + System.Environment.NewLine + err_coa)
+            'cek PPH jika dia ada jasa
+            Dim cond_pph As Boolean = True
+            Dim q_cek_pph As String = "SELECT po.`id_purc_order`,po.`purc_order_number`,emp.`employee_name` AS emp_created,c.comp_name,cc.`contact_person`,cc.`contact_number`,po.`date_created`
+FROM tb_purc_order_det pod
+INNER JOIN tb_purc_order po ON po.`id_purc_order`=pod.`id_purc_order` AND po.`id_report_status`=6 AND po.`id_purc_order`='" & id_purc_order & "'
+INNER JOIN tb_m_comp_contact cc ON po.`id_comp_contact`=cc.`id_comp_contact`
+INNER JOIN tb_m_comp c ON c.`id_comp`=cc.`id_comp`
+INNER JOIN tb_m_user usr ON usr.`id_user`=po.`created_by`
+INNER JOIN tb_m_employee emp ON emp.id_employee=usr.`id_employee`
+INNER JOIN tb_purc_req_det prd ON prd.`id_purc_req_det`=pod.`id_purc_req_det`
+INNER JOIN tb_item it ON it.`id_item`=prd.`id_item`
+WHERE it.id_item_type='2' AND po.`is_active_payment`=2 AND po.`is_close_pay`=2
+GROUP BY pod.`id_purc_order`"
+            Dim dpph As DataTable = execute_query(q_cek_pph, -1, True, "", "", "", "")
+            If dpph.Rows.Count > 0 Then
+                err_coa += "- PPH " + System.Environment.NewLine
+                cond_pph = False
+            End If
+
+            If Not cond_coa Or Not cond_coa_vendor Or Not cond_coa_biaya Or Not cond_pph Then
+                warningCustom("Please contact Accounting Department to setup : " + System.Environment.NewLine + err_coa)
                 Close()
             End If
 
@@ -274,7 +293,7 @@ WHERE pn.`id_report_status`!=6 AND pn.`id_report_status`!=5 AND pnd.`report_mark
     End Sub
 
     Private Sub BtnCancell_Click(sender As Object, e As EventArgs) Handles BtnCancell.Click
-        Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure you want to cancell this process ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+        Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure you want to cancel this process ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
         If confirm = Windows.Forms.DialogResult.Yes Then
             Cursor = Cursors.WaitCursor
             Dim query As String = "UPDATE tb_purc_rec SET id_report_status=5 WHERE id_purc_rec='" + id + "'"

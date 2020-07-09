@@ -1803,6 +1803,14 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
                 FormRefundOLStoreDet.action = "ins"
                 FormRefundOLStoreDet.ShowDialog()
             End If
+        ElseIf formName = "FormPromoCollection" Then
+            FormPromoCollectionNew.ShowDialog()
+        ElseIf formName = "FormExternalUser" Then
+            FormExternalUserDet.id_user = "-1"
+            FormExternalUserDet.ShowDialog()
+        ElseIf formName = "FormMasterStore" Then
+            FormMasterStoreDet.id_store = "-1"
+            FormMasterStoreDet.ShowDialog()
         Else
             RPSubMenu.Visible = False
         End If
@@ -2985,6 +2993,16 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
                     FormRefundOLStoreDet.action = "upd"
                     FormRefundOLStoreDet.ShowDialog()
                 End If
+            ElseIf formName = "FormPromoCollection" Then
+                FormPromoCollectionDet.action = "upd"
+                FormPromoCollectionDet.id = FormPromoCollection.GVData.GetFocusedRowCellValue("id_ol_promo_collection").ToString
+                FormPromoCollectionDet.ShowDialog()
+            ElseIf formName = "FormExternalUser" Then
+                FormExternalUserDet.id_user = FormExternalUser.GVExternalUser.GetFocusedRowCellValue("id_user").ToString
+                FormExternalUserDet.ShowDialog()
+            ElseIf formName = "FormMasterStore" Then
+                FormMasterStoreDet.id_store = FormMasterStore.GVMasterStore.GetFocusedRowCellValue("id_store").ToString
+                FormMasterStoreDet.ShowDialog()
             Else
                 RPSubMenu.Visible = False
             End If
@@ -7175,6 +7193,33 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
                     Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
                     Tool.ShowPreview()
                 End If
+            ElseIf FormMatStock.XTCFGStock.SelectedTabPageIndex = 5 Then 'STOCK REPORT
+                If FormMatStock.GroupControl6.Enabled = False Then 'not yet
+                    stopCustom("Data not found.")
+                Else
+                    'modify period
+                    Dim period_from As String = ""
+                    Dim period_until As String = ""
+                    period_from = Date.Parse(FormMatStock.DEStockFrom.EditValue.ToString).ToString("dd MMM yyyy")
+                    period_until = Date.Parse(FormMatStock.DEStockTo.EditValue.ToString).ToString("dd MMM yyyy")
+
+                    '... 
+                    ' creating and saving the view's layout to a new memory stream 
+                    Dim str As System.IO.Stream
+                    str = New System.IO.MemoryStream()
+                    FormMatStock.GVStockReport.SaveLayoutToStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+                    str.Seek(0, System.IO.SeekOrigin.Begin)
+                    ReportMatStockReport.dt = FormMatStock.GCStockReport.DataSource
+                    Dim Report As New ReportMatStockReport()
+                    Report.LabelPeriod.Text = period_from + " / " + period_until
+                    Report.GVStockReport.RestoreLayoutFromStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+                    str.Seek(0, System.IO.SeekOrigin.Begin)
+                    ReportStyleGridview(Report.GVStockReport)
+
+                    ' Show the report's preview. 
+                    Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
+                    Tool.ShowPreview()
+                End If
             End If
             Cursor = Cursors.Default
         ElseIf formName = "FormAccountingSummary" Then
@@ -7795,6 +7840,8 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
                 print_raw(FormOLStoreSummary.GCData, "")
             ElseIf FormOLStoreSummary.XTCOLStore.SelectedTabPageIndex = 1 Then
                 print_raw(FormOLStoreSummary.GCDetail, "")
+            ElseIf FormOLStoreSummary.XTCOLStore.SelectedTabPageIndex = 2 Then
+                print_raw(FormOLStoreSummary.GCPromo, "")
             End If
         ElseIf formName = "FormFGAging" Then
             print_raw(FormFGAging.GCDesign, "")
@@ -8228,6 +8275,8 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             print(FormRetOlStore.GCData, "Pre Return List")
         ElseIf formName = "FormRefundOLStore" Then
             print(FormRefundOLStore.GCData, "Accepted Refund List")
+        ElseIf formName = "FormPromoCollection" Then
+            print(FormPromoCollection.GCData, "Promo Collection List")
         Else
             RPSubMenu.Visible = False
         End If
@@ -9111,6 +9160,18 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
         ElseIf formName = "FormRefundOLStore" Then
             FormRefundOLStore.Close()
             FormRefundOLStore.Dispose()
+        ElseIf formName = "FormPromoCollection" Then
+            FormPromoCollection.Close()
+            FormPromoCollection.Dispose()
+        ElseIf formName = "FormExternalUser" Then
+            FormExternalUser.Close()
+            FormExternalUser.Dispose()
+        ElseIf formName = "FormMasterStore" Then
+            FormMasterStore.Close()
+            FormMasterStore.Dispose()
+        ElseIf formName = "FormMappingStore" Then
+            FormMappingStore.Close()
+            FormMappingStore.Dispose()
         Else
             RPSubMenu.Visible = False
         End If
@@ -9888,7 +9949,11 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             End If
         ElseIf formName = "FormBankWithdrawal" Then
             If FormBankWithdrawal.XTCPO.SelectedTabPageIndex = 0 Then
-                FormBankWithdrawal.load_payment()
+                If FormBankWithdrawal.XTCBBKList.SelectedTabPageIndex = 0 Then
+                    FormBankWithdrawal.load_payment()
+                Else
+                    FormBankWithdrawal.view_sum()
+                End If
             ElseIf FormBankWithdrawal.XTCPO.SelectedTabPageIndex = 1 Then
                 FormBankWithdrawal.load_po()
             End If
@@ -10028,6 +10093,14 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             FormRetOlStore.viewData()
         ElseIf formName = "FormRefundOLStore" Then
             FormRefundOLStore.viewData()
+        ElseIf formName = "FormPromoCollection" Then
+            FormPromoCollection.viewPropose()
+        ElseIf formName = "FormExternalUser" Then
+            FormExternalUser.load_form()
+        ElseIf formName = "FormMasterStore" Then
+            FormMasterStore.form_load()
+        ElseIf formName = "FormMappingStore" Then
+            FormMappingStore.form_load()
         End If
     End Sub
     'Switch
@@ -14916,6 +14989,58 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             FormSalesBranch.Show()
             FormSalesBranch.WindowState = FormWindowState.Maximized
             FormSalesBranch.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBPromoCollection_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBPromoCollection.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormPromoCollection.MdiParent = Me
+            FormPromoCollection.Show()
+            FormPromoCollection.WindowState = FormWindowState.Maximized
+            FormPromoCollection.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBExternalUser_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBExternalUser.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormExternalUser.MdiParent = Me
+            FormExternalUser.Show()
+            FormExternalUser.WindowState = FormWindowState.Maximized
+            FormExternalUser.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBMappingStore_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBMappingStore.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormMappingStore.MdiParent = Me
+            FormMappingStore.Show()
+            FormMappingStore.WindowState = FormWindowState.Maximized
+            FormMappingStore.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBMasterStore_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBMasterStore.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormMasterStore.MdiParent = Me
+            FormMasterStore.Show()
+            FormMasterStore.WindowState = FormWindowState.Maximized
+            FormMasterStore.Focus()
         Catch ex As Exception
             errorProcess()
         End Try

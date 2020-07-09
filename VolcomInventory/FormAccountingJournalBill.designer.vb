@@ -33,7 +33,7 @@ Partial Class FormAccountingJournalBill
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnDebit = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemTextEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemTextEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
@@ -175,7 +175,7 @@ Partial Class FormAccountingJournalBill
         '
         'GVJournalDet
         '
-        Me.GVJournalDet.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn6, Me.GridColumn7, Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumnStatus, Me.GridColumnIdReport, Me.GridColumnReportMarkType, Me.GridColumnReff, Me.GridColumn14, Me.GridColumn9, Me.GridColumnNumberReff, Me.GridColumnIdCompany, Me.GridColumnIdAccSrc, Me.GridColumn8})
+        Me.GVJournalDet.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn6, Me.GridColumn7, Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumnDebit, Me.GridColumn5, Me.GridColumnStatus, Me.GridColumnIdReport, Me.GridColumnReportMarkType, Me.GridColumnReff, Me.GridColumn14, Me.GridColumn9, Me.GridColumnNumberReff, Me.GridColumnIdCompany, Me.GridColumnIdAccSrc, Me.GridColumn8})
         Me.GVJournalDet.GridControl = Me.GCJournalDet
         Me.GVJournalDet.Name = "GVJournalDet"
         Me.GVJournalDet.OptionsLayout.Columns.StoreAllOptions = True
@@ -231,33 +231,28 @@ Partial Class FormAccountingJournalBill
         Me.GridColumn3.VisibleIndex = 4
         Me.GridColumn3.Width = 300
         '
-        'GridColumn4
+        'GridColumnDebit
         '
-        Me.GridColumn4.AppearanceCell.Options.UseTextOptions = True
-        Me.GridColumn4.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumn4.AppearanceHeader.Options.UseTextOptions = True
-        Me.GridColumn4.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumn4.Caption = "Debit"
-        Me.GridColumn4.ColumnEdit = Me.RepositoryItemTextEdit1
-        Me.GridColumn4.DisplayFormat.FormatString = "N2"
-        Me.GridColumn4.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn4.FieldName = "debit"
-        Me.GridColumn4.Name = "GridColumn4"
-        Me.GridColumn4.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "debit", "{0:N2}")})
-        Me.GridColumn4.Visible = True
-        Me.GridColumn4.VisibleIndex = 5
-        Me.GridColumn4.Width = 138
+        Me.GridColumnDebit.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumnDebit.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumnDebit.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumnDebit.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumnDebit.Caption = "Debit"
+        Me.GridColumnDebit.ColumnEdit = Me.RepositoryItemTextEdit1
+        Me.GridColumnDebit.DisplayFormat.FormatString = "N2"
+        Me.GridColumnDebit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnDebit.FieldName = "debit"
+        Me.GridColumnDebit.Name = "GridColumnDebit"
+        Me.GridColumnDebit.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "debit", "{0:N2}")})
+        Me.GridColumnDebit.Visible = True
+        Me.GridColumnDebit.VisibleIndex = 5
+        Me.GridColumnDebit.Width = 138
         '
         'RepositoryItemTextEdit1
         '
         Me.RepositoryItemTextEdit1.AutoHeight = False
         Me.RepositoryItemTextEdit1.DisplayFormat.FormatString = "N2"
         Me.RepositoryItemTextEdit1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.RepositoryItemTextEdit1.EditFormat.FormatString = "N2"
-        Me.RepositoryItemTextEdit1.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.RepositoryItemTextEdit1.Mask.EditMask = "N2"
-        Me.RepositoryItemTextEdit1.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
-        Me.RepositoryItemTextEdit1.Mask.UseMaskAsDisplayFormat = True
         Me.RepositoryItemTextEdit1.Name = "RepositoryItemTextEdit1"
         '
         'GridColumn5
@@ -282,11 +277,6 @@ Partial Class FormAccountingJournalBill
         Me.RepositoryItemTextEdit2.AutoHeight = False
         Me.RepositoryItemTextEdit2.DisplayFormat.FormatString = "N2"
         Me.RepositoryItemTextEdit2.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.RepositoryItemTextEdit2.EditFormat.FormatString = "N2"
-        Me.RepositoryItemTextEdit2.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.RepositoryItemTextEdit2.Mask.EditMask = "N2"
-        Me.RepositoryItemTextEdit2.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
-        Me.RepositoryItemTextEdit2.Mask.UseMaskAsDisplayFormat = True
         Me.RepositoryItemTextEdit2.Name = "RepositoryItemTextEdit2"
         '
         'GridColumnStatus
@@ -470,6 +460,7 @@ Partial Class FormAccountingJournalBill
         '
         Me.MENote.Location = New System.Drawing.Point(55, 8)
         Me.MENote.Name = "MENote"
+        Me.MENote.Properties.MaxLength = 250
         Me.MENote.Size = New System.Drawing.Size(317, 40)
         Me.MENote.TabIndex = 4
         '
@@ -502,7 +493,7 @@ Partial Class FormAccountingJournalBill
         Me.BDelMat.Size = New System.Drawing.Size(91, 32)
         Me.BDelMat.TabIndex = 16
         Me.BDelMat.TabStop = False
-        Me.BDelMat.Text = "Delete"
+        Me.BDelMat.Text = "Delete (-)"
         '
         'BAddMat
         '
@@ -514,7 +505,7 @@ Partial Class FormAccountingJournalBill
         Me.BAddMat.Size = New System.Drawing.Size(85, 32)
         Me.BAddMat.TabIndex = 17
         Me.BAddMat.TabStop = False
-        Me.BAddMat.Text = "Add"
+        Me.BAddMat.Text = "Add (+)"
         '
         'BtnRef
         '
@@ -748,6 +739,7 @@ Partial Class FormAccountingJournalBill
         Me.Controls.Add(Me.PanelControl2)
         Me.Controls.Add(Me.PCGeneralheader)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.KeyPreview = True
         Me.MinimizeBox = False
         Me.Name = "FormAccountingJournalBill"
         Me.ShowInTaskbar = False
@@ -805,7 +797,7 @@ Partial Class FormAccountingJournalBill
     Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn2 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn3 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnDebit As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RepositoryItemTextEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
     Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RepositoryItemTextEdit2 As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit

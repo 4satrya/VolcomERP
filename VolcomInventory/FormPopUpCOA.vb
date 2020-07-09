@@ -303,8 +303,13 @@ Public Class FormPopUpCOA
                 FormAccountingJournalBill.GCJournalDet.RefreshDataSource()
                 ' FormAccountingJournalDet.check_but()
                 FormAccountingJournalBill.but_check()
-                FormAccountingJournalBill.GVJournalDet.FocusedRowHandle = 0
+                FormAccountingJournalBill.GVJournalDet.FocusedRowHandle = FormAccountingJournalBill.GVJournalDet.RowCount - 1
                 FormAccountingJournalBill.GVJournalDet.BestFitColumns()
+                FormAccountingJournalBill.GVJournalDet.FocusedColumn = FormAccountingJournalBill.GridColumnDebit
+                '
+                FormAccountingJournalBill.GCJournalDet.Focus()
+                FormAccountingJournalBill.GVJournalDet.Focus()
+                FormAccountingJournalBill.GVJournalDet.ShowEditor()
                 Close()
             End If
         ElseIf id_pop_up = "7" Then 'Mapping in company single
@@ -443,9 +448,10 @@ Public Class FormPopUpCOA
         query += "LEFT JOIN tb_m_comp comp ON comp.id_comp=a.id_comp 
         WHERE a.id_status=1 "
 
-        If id_pop_up = "8" Or id_pop_up = "9" Or id_pop_up = "10" Then
+        If id_pop_up = "8" Or id_pop_up = "9" Or id_pop_up = "10" Or id_pop_up = "6" Then
             query += "AND a.id_is_det=2 "
         End If
+
 
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCAcc.DataSource = data
@@ -472,6 +478,19 @@ Public Class FormPopUpCOA
             Dim id_acc As String = "-1"
             id_acc = GVAcc.GetFocusedRowCellValue("id_acc").ToString
             TreeList1.SetFocusedNode(TreeList1.FindNodeByFieldValue("id_acc", id_acc))
+        End If
+    End Sub
+
+    Private Sub FormPopUpCOA_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        GVAcc.ShowFindPanel()
+        GVAcc.ShowFindPanel()
+    End Sub
+
+    Private Sub FormPopUpCOA_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+        If (e.KeyCode = Keys.Enter) AndAlso (TypeOf Me.ActiveControl Is DevExpress.XtraGrid.Controls.FindControl) Then
+            pick_acc()
+        ElseIf (e.KeyCode = Keys.Enter) AndAlso (TypeOf Me.ActiveControl Is DevExpress.XtraGrid.GridControl) Then
+            pick_acc()
         End If
     End Sub
 End Class

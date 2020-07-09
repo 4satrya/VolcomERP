@@ -160,7 +160,8 @@
             id_mail_invoice, mail_invoice_no, mail_invoice_date, mail_invoice_status,
             bbm.`id_bbm`,bbm.`bbm_number`, bbm.`bbm_value`, bbm.`bbm_created_date`, bbm.`bbm_received_date`, IFNULL(pyd_op.total_pending, 0) AS `bbm_on_process`,
             IFNULL(bbk.`id_bbk`,0) AS `id_bbk`, bbk.`bbk_number`, bbk.`bbk_created_date`, bbk.`bbk_payment_date`, bbk.`bbk_value`, bbk.`bbk_status`,
-            IFNULL(sp.id_propose_delay_payment,0) AS `id_propose_delay_payment`, mem.number AS `memo_number`, sp.propose_delay_payment_due_date
+            IFNULL(sp.id_propose_delay_payment,0) AS `id_propose_delay_payment`, mem.number AS `memo_number`, sp.propose_delay_payment_due_date,
+            so.sales_order_ol_shop_number AS `ol_store_order`
             FROM tb_sales_pos sp 
             INNER JOIN tb_m_comp_contact cc ON cc.`id_comp_contact`= IF(sp.id_memo_type=8 OR sp.id_memo_type=9, sp.id_comp_contact_bill,sp.`id_store_contact_from`)
             INNER JOIN tb_lookup_report_mark_type rmt ON rmt.report_mark_type=sp.report_mark_type
@@ -252,6 +253,8 @@
                 GROUP BY bbk.id_report
             ) bbk ON bbk.id_report = sp.id_sales_pos
             LEFT JOIN tb_propose_delay_payment mem ON mem.id_propose_delay_payment = sp.id_propose_delay_payment
+            LEFT JOIN tb_pl_sales_order_del del ON del.id_pl_sales_order_del = sp.id_pl_sales_order_del
+            LEFT JOIN tb_sales_order so ON so.id_sales_order = del.id_sales_order
             WHERE sp.`id_report_status`='6' 
             " + cond_group + " 
             " + cond_store + "
@@ -273,7 +276,7 @@
             0 AS id_mail_invoice, '' AS mail_invoice_no, NULL AS mail_invoice_date, '' AS mail_invoice_status,
             bbm.`id_bbm`,bbm.`bbm_number`, bbm.`bbm_value`, bbm.`bbm_created_date`, bbm.`bbm_received_date`, IFNULL(pyd_op.total_pending, 0) AS `bbm_on_process`,
             0 AS `id_bbk`,'' AS `bbk_number`, NULL AS `bbk_created_date`, NULL AS `bbk_payment_date`, 0 AS `bbk_value`, '' AS `bbk_status`,
-            0 AS `id_propose_delay_payment`, '' AS `memo_number`, NULL AS propose_delay_payment_due_date
+            0 AS `id_propose_delay_payment`, '' AS `memo_number`, NULL AS propose_delay_payment_due_date, od.ol_store_order
             FROM tb_invoice_ship sp
             INNER JOIN tb_m_comp_contact cc ON cc.`id_comp_contact`= sp.id_comp_contact
             INNER JOIN tb_lookup_report_mark_type rmt ON rmt.report_mark_type=sp.report_mark_type
@@ -310,7 +313,11 @@
                ) rm
                GROUP BY rm.id_report
             ) bbm ON bbm.id_report = sp.id_invoice_ship
-             WHERE sp.`id_report_status`='6' 
+            LEFT JOIN (
+               SELECT od.id, od.sales_order_ol_shop_number AS `ol_store_order` FROM tb_ol_store_order od
+               GROUP BY od.id
+            ) od ON od.id = sp.id_report
+            WHERE sp.`id_report_status`='6' 
             " + cond_group + " 
             " + cond_store + "
             " + cond_status2 + "

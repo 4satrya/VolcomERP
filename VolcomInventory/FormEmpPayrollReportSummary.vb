@@ -1,8 +1,20 @@
 ﻿Public Class FormEmpPayrollReportSummary
     Public id_payroll As String = ""
 
+    Private data_payroll As DataTable = New DataTable
+
     Private Sub FormEmpPayrollReportSummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        id_payroll = FormEmpPayroll.GVPayrollPeriode.GetFocusedRowCellValue("id_payroll").ToString
+        If id_payroll = "" Then
+            id_payroll = FormEmpPayroll.GVPayrollPeriode.GetFocusedRowCellValue("id_payroll").ToString
+        End If
+
+        data_payroll = execute_query("
+            SELECT 'no' AS is_check, pr.*,emp.`employee_name`,type.payroll_type as payroll_type_name,DATE_FORMAT(pr.periode_end,'%M %Y') AS payroll_name, IFNULL((SELECT report_status FROM tb_lookup_report_status WHERE id_report_status = pr.id_report_status), 'Not Submitted') AS report_status, type.is_thr, type.is_dw FROM tb_emp_payroll pr
+            INNER JOIn tb_emp_payroll_type type ON type.id_payroll_type=pr.id_payroll_type
+            INNER JOIN tb_m_user usr ON usr.id_user=pr.id_user_upd
+            INNER JOIN tb_m_employee emp ON emp.`id_employee`=usr.id_employee
+            WHERE pr.id_payroll = '" + id_payroll + "'
+        ", -1, True, "", "", "", "")
 
         load_sum()
 
@@ -26,7 +38,7 @@
             SBPrint.Enabled = True
         End If
 
-        Dim is_thr As String = execute_query("SELECT is_thr FROM tb_emp_payroll_type WHERE id_payroll_type = " + FormEmpPayroll.GVPayrollPeriode.GetFocusedRowCellValue("id_payroll_type").ToString, 0, True, "", "", "", "")
+        Dim is_thr As String = execute_query("SELECT is_thr FROM tb_emp_payroll_type WHERE id_payroll_type = " + data_payroll.Rows(0)("id_payroll_type").ToString, 0, True, "", "", "", "")
 
         If is_thr = "1" Then
             GVSummary.Columns("salary").Visible = False
@@ -122,7 +134,7 @@
     Private Sub SBPrint_Click(sender As Object, e As EventArgs) Handles SBPrint.Click
         Dim data As DataTable = GCSummary.DataSource
 
-        Dim id_report_status As String = execute_query("SELECT id_report_status FROM tb_emp_payroll WHERE id_payroll = " + FormEmpPayroll.GVPayrollPeriode.GetFocusedRowCellValue("id_payroll").ToString, 0, True, "", "", "", "")
+        Dim id_report_status As String = execute_query("SELECT id_report_status FROM tb_emp_payroll WHERE id_payroll = " + data_payroll.Rows(0)("id_payroll").ToString, 0, True, "", "", "", "")
 
         Dim already_office As Boolean = False
         Dim already_store As Boolean = False
@@ -173,7 +185,7 @@
             End If
         Next
 
-        Dim is_thr As String = execute_query("SELECT is_thr FROM tb_emp_payroll_type WHERE id_payroll_type = " + FormEmpPayroll.GVPayrollPeriode.GetFocusedRowCellValue("id_payroll_type").ToString, 0, True, "", "", "", "")
+        Dim is_thr As String = execute_query("SELECT is_thr FROM tb_emp_payroll_type WHERE id_payroll_type = " + data_payroll.Rows(0)("id_payroll_type").ToString, 0, True, "", "", "", "")
 
         Dim report As ReportEmpPayrollReportAllDepartement = New ReportEmpPayrollReportAllDepartement
 
@@ -191,19 +203,19 @@
         '    report.XrTable1.SizeF = New SizeF(733, 25)
         'End If
 
-        report.id_payroll = FormEmpPayroll.GVPayrollPeriode.GetFocusedRowCellValue("id_payroll").ToString
+        report.id_payroll = data_payroll.Rows(0)("id_payroll").ToString
         report.data = total_all(data)
         report.data_office = data_payroll_1
         report.data_store = data_payroll_2
         report.id_pre = If(id_report_status = "6", "-1", "1")
-        report.type = FormEmpPayroll.GVPayrollPeriode.GetFocusedRowCellValue("id_payroll_type").ToString
+        report.type = data_payroll.Rows(0)("id_payroll_type").ToString
 
-        report.XLPeriod.Text = Date.Parse(FormEmpPayroll.GVPayrollPeriode.GetFocusedRowCellValue("periode_end").ToString).ToString("MMMM yyyy")
-        report.XLType.Text = FormEmpPayroll.GVPayrollPeriode.GetFocusedRowCellValue("payroll_type_name").ToString
+        report.XLPeriod.Text = Date.Parse(data_payroll.Rows(0)("periode_end").ToString).ToString("MMMM yyyy")
+        report.XLType.Text = data_payroll.Rows(0)("payroll_type_name").ToString
 
         If is_thr = "1" Then
             report.XLTitle.Text = "Summary THR"
-            report.XLPeriod.Text = "Period " + Date.Parse(FormEmpPayroll.GVPayrollPeriode.GetFocusedRowCellValue("periode_end").ToString).ToString("yyyy")
+            report.XLPeriod.Text = "Period " + Date.Parse(data_payroll.Rows(0)("periode_end").ToString).ToString("yyyy")
         End If
 
         Dim tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(report)
@@ -212,7 +224,7 @@
     End Sub
 
     Function total_all(data_ori As DataTable) As DataTable
-        Dim is_thr As String = execute_query("SELECT is_thr FROM tb_emp_payroll_type WHERE id_payroll_type = " + FormEmpPayroll.GVPayrollPeriode.GetFocusedRowCellValue("id_payroll_type").ToString, 0, True, "", "", "", "")
+        Dim is_thr As String = execute_query("SELECT is_thr FROM tb_emp_payroll_type WHERE id_payroll_type = " + data_payroll.Rows(0)("id_payroll_type").ToString, 0, True, "", "", "", "")
 
         Dim data As DataTable = New DataTable
 
@@ -223,8 +235,8 @@
         data.Columns.Add("kuta_square", GetType(Decimal))
         data.Columns.Add("seminyak", GetType(Decimal))
 
-        data.Rows.Add("TRANSFER BCA EFEKTIF " + Date.Parse(FormEmpPayroll.GVPayrollPeriode.GetFocusedRowCellValue("eff_trans_date").ToString).ToString("dd MMMM yyyy").ToUpper, 0, 0, 0, 0, 0)
-        data.Rows.Add("CASH EFEKTIF " + Date.Parse(FormEmpPayroll.GVPayrollPeriode.GetFocusedRowCellValue("eff_trans_date").ToString).ToString("dd MMMM yyyy").ToUpper, 0, 0, 0, 0, 0)
+        data.Rows.Add("TRANSFER BCA EFEKTIF " + Date.Parse(data_payroll.Rows(0)("eff_trans_date").ToString).ToString("dd MMMM yyyy").ToUpper, 0, 0, 0, 0, 0)
+        data.Rows.Add("CASH EFEKTIF " + Date.Parse(data_payroll.Rows(0)("eff_trans_date").ToString).ToString("dd MMMM yyyy").ToUpper, 0, 0, 0, 0, 0)
         If is_thr = "2" Then
             data.Rows.Add("Cooperative ", 0, 0, 0, 0, 0)
         End If

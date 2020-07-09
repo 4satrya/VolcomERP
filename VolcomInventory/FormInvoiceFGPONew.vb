@@ -170,6 +170,7 @@ HAVING qty_rec_remaining > 0"
                             newRow("value_bef_kurs") = qty_used * (dt_det.Rows(i)("prod_order_wo_det_price"))
                             '
                             newRow("value") = qty_used * (dt_det.Rows(i)("prod_order_wo_det_price") * dt_det.Rows(i)("kurs"))
+                            newRow("pph_percent") = 0
                             newRow("vat") = qty_used * ((dt_det.Rows(i)("prod_order_wo_det_price") * dt_det.Rows(i)("prod_order_wo_vat")) * (dt_det.Rows(i)("kurs") / 100))
                             newRow("inv_number") = ""
                             newRow("note") = ""
@@ -273,6 +274,7 @@ HAVING qty_rec_remaining > 0"
                             newRow("value_bef_kurs") = qty_used * (dt_det.Rows(i)("prod_order_wo_det_price"))
                             '
                             newRow("value") = qty_used * (dt_det.Rows(i)("prod_order_wo_det_price") * dt_det.Rows(i)("kurs"))
+                            newRow("pph_percent") = 0
                             newRow("vat") = qty_used * ((dt_det.Rows(i)("prod_order_wo_det_price") * dt_det.Rows(i)("prod_order_wo_vat")) * (dt_det.Rows(i)("kurs") / 100))
                             newRow("inv_number") = ""
                             newRow("note") = ""
@@ -351,6 +353,7 @@ HAVING qty_rec_remaining > 0"
                     newRow("value_bef_kurs") = qty_used * (dt_det.Rows(i)("prod_order_wo_det_price"))
                     '
                     newRow("value") = qty_used * (dt_det.Rows(i)("prod_order_wo_det_price") * dt_det.Rows(i)("kurs"))
+                    newRow("pph_percent") = 0
                     newRow("vat") = qty_used * ((dt_det.Rows(i)("prod_order_wo_det_price") * dt_det.Rows(i)("prod_order_wo_vat")) * (dt_det.Rows(i)("kurs") / 100))
                     newRow("inv_number") = ""
                     newRow("note") = ""
@@ -385,6 +388,7 @@ HAVING qty_rec_remaining > 0"
                 newRow("kurs") = GVInvoice.GetFocusedRowCellValue("kurs")
                 newRow("value_bef_kurs") = GVInvoice.GetFocusedRowCellValue("value_bef_kurs")
                 '
+                newRow("pph_percent") = 0
                 newRow("vat") = GVInvoice.GetFocusedRowCellValue("vat")
                 newRow("inv_number") = ""
                 newRow("note") = ""
@@ -454,6 +458,7 @@ WHERE pn.`type`=1 AND pnd.`id_prod_order`='" & SLEFGPO.EditValue.ToString & "' A
                     newRow("kurs") = GVInvoice.GetRowCellValue(i, "kurs")
                     newRow("value_bef_kurs") = GVInvoice.GetRowCellValue(i, "value_bef_kurs")
                     '
+                    newRow("pph_percent") = 0
                     newRow("vat") = GVInvoice.GetRowCellValue(i, "vat")
                     newRow("inv_number") = ""
                     newRow("note") = ""

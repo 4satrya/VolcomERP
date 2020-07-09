@@ -117,6 +117,7 @@ Partial Class FormViewSalesPOS
         Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdDesignPriceCode = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnPriceCode = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.BtnViewJournal = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
         CType(Me.TXTName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -608,6 +609,7 @@ Partial Class FormViewSalesPOS
         '
         Me.GroupControl3.CaptionLocation = DevExpress.Utils.Locations.Left
         Me.GroupControl3.Controls.Add(Me.BtnAttachment)
+        Me.GroupControl3.Controls.Add(Me.BtnViewJournal)
         Me.GroupControl3.Controls.Add(Me.BtnDraft)
         Me.GroupControl3.Controls.Add(Me.BMark)
         Me.GroupControl3.Dock = System.Windows.Forms.DockStyle.Bottom
@@ -619,18 +621,18 @@ Partial Class FormViewSalesPOS
         'BtnAttachment
         '
         Me.BtnAttachment.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.BtnAttachment.Location = New System.Drawing.Point(637, 2)
+        Me.BtnAttachment.Location = New System.Drawing.Point(670, 2)
         Me.BtnAttachment.Name = "BtnAttachment"
-        Me.BtnAttachment.Size = New System.Drawing.Size(315, 32)
+        Me.BtnAttachment.Size = New System.Drawing.Size(282, 32)
         Me.BtnAttachment.TabIndex = 5
         Me.BtnAttachment.Text = "Attachment"
         '
         'BtnDraft
         '
         Me.BtnDraft.Dock = System.Windows.Forms.DockStyle.Left
-        Me.BtnDraft.Location = New System.Drawing.Point(288, 2)
+        Me.BtnDraft.Location = New System.Drawing.Point(257, 2)
         Me.BtnDraft.Name = "BtnDraft"
-        Me.BtnDraft.Size = New System.Drawing.Size(349, 32)
+        Me.BtnDraft.Size = New System.Drawing.Size(208, 32)
         Me.BtnDraft.TabIndex = 6
         Me.BtnDraft.Text = "Draft Journal"
         '
@@ -639,7 +641,7 @@ Partial Class FormViewSalesPOS
         Me.BMark.Dock = System.Windows.Forms.DockStyle.Left
         Me.BMark.Location = New System.Drawing.Point(21, 2)
         Me.BMark.Name = "BMark"
-        Me.BMark.Size = New System.Drawing.Size(267, 32)
+        Me.BMark.Size = New System.Drawing.Size(236, 32)
         Me.BMark.TabIndex = 4
         Me.BMark.Text = "Mark"
         '
@@ -1134,7 +1136,7 @@ Partial Class FormViewSalesPOS
         '
         Me.XTPDetail.Controls.Add(Me.GCCode)
         Me.XTPDetail.Name = "XTPDetail"
-        Me.XTPDetail.Size = New System.Drawing.Size(948, 261)
+        Me.XTPDetail.Size = New System.Drawing.Size(948, 198)
         Me.XTPDetail.Text = "Detail Unique Code"
         '
         'GCCode
@@ -1143,7 +1145,7 @@ Partial Class FormViewSalesPOS
         Me.GCCode.Location = New System.Drawing.Point(0, 0)
         Me.GCCode.MainView = Me.GVCode
         Me.GCCode.Name = "GCCode"
-        Me.GCCode.Size = New System.Drawing.Size(948, 261)
+        Me.GCCode.Size = New System.Drawing.Size(948, 198)
         Me.GCCode.TabIndex = 1
         Me.GCCode.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVCode})
         '
@@ -1241,6 +1243,15 @@ Partial Class FormViewSalesPOS
         Me.GridColumnPriceCode.FieldName = "design_price"
         Me.GridColumnPriceCode.Name = "GridColumnPriceCode"
         Me.GridColumnPriceCode.OptionsColumn.AllowEdit = False
+        '
+        'BtnViewJournal
+        '
+        Me.BtnViewJournal.Dock = System.Windows.Forms.DockStyle.Left
+        Me.BtnViewJournal.Location = New System.Drawing.Point(465, 2)
+        Me.BtnViewJournal.Name = "BtnViewJournal"
+        Me.BtnViewJournal.Size = New System.Drawing.Size(205, 32)
+        Me.BtnViewJournal.TabIndex = 7
+        Me.BtnViewJournal.Text = "Posted Journal"
         '
         'FormViewSalesPOS
         '
@@ -1414,4 +1425,5 @@ Partial Class FormViewSalesPOS
     Friend WithEvents LabelControl13 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents TXTName As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelName As Label
+    Friend WithEvents BtnViewJournal As DevExpress.XtraEditors.SimpleButton
 End Class

@@ -219,6 +219,7 @@
                         Dim checkout_id As String = ""
                         Dim tracking_code As String = ""
                         Dim financial_status As String = ""
+                        Dim total_discounts As String = ""
 
                         id = row("id").ToString
                         sales_order_ol_shop_number = row("order_number").ToString
@@ -227,6 +228,7 @@
                         tracking_code = ""
                         financial_status = row("financial_status").ToString
                         checkout_id = row("checkout_id").ToString
+                        total_discounts = decimalSQL(row("total_discounts").ToString)
 
                         'data customer
                         Dim customer_name As String = ""
@@ -296,13 +298,14 @@
 
                         'detail line item
                         Dim qins As String = "INSERT tb_ol_store_order(id, sales_order_ol_shop_number, sales_order_ol_shop_date, customer_name, shipping_name, shipping_address,shipping_address1,shipping_address2, shipping_phone, 
-                    shipping_city, shipping_post_code, shipping_region, payment_method, tracking_code, ol_store_sku, ol_store_id, sku, design_price, sales_order_det_qty, grams, financial_status,checkout_id, shipping_price) VALUES "
+                    shipping_city, shipping_post_code, shipping_region, payment_method, tracking_code, ol_store_sku, ol_store_id, sku, design_price, sales_order_det_qty, grams, financial_status, total_disc_order, discount_allocations_amo,checkout_id, shipping_price) VALUES "
                         Dim ol_store_sku As String = ""
                         Dim ol_store_id As String = ""
                         Dim sku As String = ""
                         Dim design_price As String = ""
                         Dim sales_order_det_qty As String = ""
                         Dim grams As String = ""
+                        Dim discount_allocations_amo As String = "0"
                         Dim i As Integer = 0
                         For Each row_item In row("line_items").ToList
                             ol_store_sku = row_item("sku").ToString.Replace("-GWP", "").Trim
@@ -312,11 +315,21 @@
                             sales_order_det_qty = decimalSQL(row_item("quantity").ToString)
                             grams = decimalSQL(row_item("grams").ToString)
 
+                            'discount allocation
+                            If row_item("discount_allocations").Count > 0 Then
+                                For Each row_disc_aloc In row_item("discount_allocations").ToList
+                                    discount_allocations_amo = decimalSQL(row_disc_aloc("amount").ToString)
+                                    Exit For
+                                Next
+                            Else
+                                discount_allocations_amo = "0"
+                            End If
+
                             If i > 0 Then
                                 qins += ","
                             End If
                             qins += "('" + id + "', '" + sales_order_ol_shop_number + "', '" + sales_order_ol_shop_date + "', '" + addSlashes(customer_name) + "', '" + addSlashes(shipping_name) + "', '" + addSlashes(shipping_address) + "','" + addSlashes(shipping_address1) + "','" + addSlashes(shipping_address2) + "', '" + addSlashes(shipping_phone) + "', 
-                        '" + addSlashes(shipping_city) + "', '" + addSlashes(shipping_post_code) + "', '" + addSlashes(shipping_region) + "', '" + payment_method + "', '" + tracking_code + "', '" + ol_store_sku + "', '" + ol_store_id + "', '" + sku + "', '" + design_price + "', '" + sales_order_det_qty + "','" + grams + "', '" + addSlashes(financial_status) + "','" + addSlashes(checkout_id) + "', '" + shipping_price + "') "
+                        '" + addSlashes(shipping_city) + "', '" + addSlashes(shipping_post_code) + "', '" + addSlashes(shipping_region) + "', '" + payment_method + "', '" + tracking_code + "', '" + ol_store_sku + "', '" + ol_store_id + "', '" + sku + "', '" + design_price + "', '" + sales_order_det_qty + "','" + grams + "', '" + addSlashes(financial_status) + "', '" + total_discounts + "', '" + discount_allocations_amo + "','" + addSlashes(checkout_id) + "', '" + shipping_price + "') "
                             i += 1
                         Next
 
@@ -565,5 +578,43 @@ GROUP BY p.sku"
 }")
         'Console.WriteLine(tracking_url + tracking_number)
         Dim result_post As String = SendRequest("https://" & username & ":" & password & "@" & shop & "/admin/api/2020-04/orders/" & id_order & "/fulfillments.json", data, "application/json", "POST", username, password)
+    End Sub
+
+    Function get_tag(ByVal product_id As String) As String
+        Net.ServicePointManager.Expect100Continue = True
+        Net.ServicePointManager.SecurityProtocol = CType(3072, Net.SecurityProtocolType)
+
+        Dim url As String = "https://" + username + ":" + password + "@" + shop + "/admin/api/2020-04/products/" + product_id + ".json?fields=tags"
+        Console.WriteLine(url)
+        Dim request As Net.WebRequest = Net.WebRequest.Create(url)
+        request.Method = "GET"
+        request.Credentials = New Net.NetworkCredential(username, password)
+        Dim response As Net.WebResponse = request.GetResponse()
+
+        Dim tags As String = ""
+        Using dataStream As IO.Stream = response.GetResponseStream()
+            Dim reader As IO.StreamReader = New IO.StreamReader(dataStream)
+
+            Dim responseFromServer As String = reader.ReadToEnd()
+            Dim json As Newtonsoft.Json.Linq.JObject = Newtonsoft.Json.Linq.JObject.Parse(responseFromServer)
+            tags = json("product")("tags").ToString
+            'For Each row In json("product").ToList
+            '    tags = row("tags").ToString
+            'Next
+        End Using
+
+        response.Close()
+        Return tags
+    End Function
+
+    Sub set_tag(ByVal product_id As String, ByVal new_tag As String)
+        Dim data = Text.Encoding.UTF8.GetBytes("{
+  ""product"": {
+    ""id"": " + product_id + ",
+    ""tags"": """ + new_tag + """
+  }
+}")
+        'Console.WriteLine(tracking_url + tracking_number)
+        Dim result_post As String = SendRequest("https://" & username & ":" & password & "@" & shop & "/admin/api/2020-04/products/" + product_id + ".json", data, "application/json", "PUT", username, password)
     End Sub
 End Class

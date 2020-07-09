@@ -310,6 +310,8 @@
         Dim query = "SELECT a.id_report_status,h.report_status, g.id_season,g.season,a.id_prod_order_rec,a.prod_order_rec_number, "
         query += "(a.delivery_order_date) AS delivery_order_date,a.delivery_order_number, a.arrive_date,b.prod_order_number, "
         query += "(a.prod_order_rec_date) AS prod_order_rec_date, CONCAT(f.comp_number,' - ',f.comp_name) AS comp_from, CONCAT(d.comp_number,' - ',d.comp_name) AS comp_to, dsg.design_code AS `code`,(dsg.design_display_name) AS name, SUM(ad.prod_order_rec_det_qty) AS `qty`, po_type.po_type "
+        query += ",DATE_ADD(IFNULL(wo.prod_order_wo_del_date,b.prod_order_date), INTERVAL IF(ISNULL(ko.lead_time_prod),IFNULL(wo.prod_order_wo_lead_time,0),ko.lead_time_prod) DAY) AS est_qc_date
+,DATEDIFF(DATE_ADD(IFNULL(wo.prod_order_wo_del_date,b.prod_order_date), INTERVAL IF(ISNULL(ko.lead_time_prod),IFNULL(wo.prod_order_wo_lead_time,0),ko.lead_time_prod) DAY), a.arrive_date) AS diff_day "
         query += "FROM tb_prod_order_rec a  "
         query += "INNER JOIN tb_prod_order_rec_det ad ON ad.id_prod_order_rec = a.id_prod_order_rec "
         query += "INNER JOIN tb_prod_order b ON a.id_prod_order=b.id_prod_order "
@@ -323,6 +325,19 @@
         query += "INNER JOIN tb_prod_demand_design pd_dsg ON pd_dsg.id_prod_demand_design = b.id_prod_demand_design "
         query += "INNER JOIN tb_m_design dsg ON dsg.id_design = pd_dsg.id_design "
         query += "INNER JOIN tb_lookup_po_type po_type ON po_type.id_po_type = b.id_po_type "
+        query += "LEFT JOIN 
+( 
+    SELECT id_prod_order,prod_order_wo_lead_time,prod_order_wo_del_date
+    FROM tb_prod_order_wo
+    WHERE id_report_status=6 AND is_main_vendor=1
+) wo ON wo.id_prod_order=b.id_prod_order "
+        query += "LEFT JOIN (
+                    SELECT * FROM (
+	                    SELECT kod.* FROM tb_prod_order_ko_det kod
+	                    INNER JOIN tb_prod_order_ko ko ON ko.id_prod_order_ko=kod.id_prod_order_ko AND ko.is_void=2
+	                    ORDER BY id_prod_order_ko_det DESC
+                    )ko GROUP BY ko.id_prod_order
+                ) ko ON ko.id_prod_order=a.id_prod_order "
         query += query_where
         query += "GROUP BY a.id_prod_order_rec "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
@@ -343,6 +358,8 @@
         Dim query = "SELECT a.id_report_status,h.report_status, g.id_season,g.season,a.id_prod_order_rec,a.prod_order_rec_number, "
         query += "(a.delivery_order_date) AS delivery_order_date,a.delivery_order_number, a.arrive_date,b.prod_order_number, "
         query += "(a.prod_order_rec_date) AS prod_order_rec_date, CONCAT(f.comp_number,' - ',f.comp_name) AS comp_from, CONCAT(d.comp_number,' - ',d.comp_name) AS comp_to, dsg.design_code AS `code`,(dsg.design_display_name) AS name, SUM(ad.prod_order_rec_det_qty) AS `qty`, po_type.po_type "
+        query += ",DATE_ADD(IFNULL(wo.prod_order_wo_del_date,b.prod_order_date), INTERVAL IF(ISNULL(ko.lead_time_prod),IFNULL(wo.prod_order_wo_lead_time,0),ko.lead_time_prod) DAY) AS est_qc_date
+,DATEDIFF(DATE_ADD(IFNULL(wo.prod_order_wo_del_date,b.prod_order_date), INTERVAL IF(ISNULL(ko.lead_time_prod),IFNULL(wo.prod_order_wo_lead_time,0),ko.lead_time_prod) DAY), a.arrive_date) AS diff_day "
         query += "FROM tb_prod_order_rec a  "
         query += "INNER JOIN tb_prod_order_rec_det ad ON ad.id_prod_order_rec = a.id_prod_order_rec "
         query += "INNER JOIN tb_prod_order b ON a.id_prod_order=b.id_prod_order "
@@ -356,6 +373,19 @@
         query += "INNER JOIN tb_prod_demand_design pd_dsg ON pd_dsg.id_prod_demand_design = b.id_prod_demand_design "
         query += "INNER JOIN tb_m_design dsg ON dsg.id_design = pd_dsg.id_design "
         query += "INNER JOIN tb_lookup_po_type po_type ON po_type.id_po_type = b.id_po_type "
+        query += "LEFT JOIN 
+( 
+    SELECT id_prod_order,prod_order_wo_lead_time,prod_order_wo_del_date
+    FROM tb_prod_order_wo
+    WHERE id_report_status=6 AND is_main_vendor=1
+) wo ON wo.id_prod_order=b.id_prod_order "
+        query += "LEFT JOIN (
+                    SELECT * FROM (
+	                    SELECT kod.* FROM tb_prod_order_ko_det kod
+	                    INNER JOIN tb_prod_order_ko ko ON ko.id_prod_order_ko=kod.id_prod_order_ko AND ko.is_void=2
+	                    ORDER BY id_prod_order_ko_det DESC
+                    )ko GROUP BY ko.id_prod_order
+                ) ko ON ko.id_prod_order=a.id_prod_order "
         query += query_where
         query += "GROUP BY a.id_prod_order_rec "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
@@ -371,5 +401,16 @@
             FormProductionRecTargetHO.id_rec = GVProdRec.GetFocusedRowCellValue("id_prod_order_rec").ToString
             FormProductionRecTargetHO.ShowDialog()
         End If
+    End Sub
+
+    Private Sub GVProdRec_RowStyle(sender As Object, e As DevExpress.XtraGrid.Views.Grid.RowStyleEventArgs) Handles GVProdRec.RowStyle
+        Try
+            If GVProdRec.GetRowCellValue(e.RowHandle, "diff_day").ToString < 0 Then
+                e.Appearance.BackColor = Color.Crimson
+                e.Appearance.ForeColor = Color.White
+                e.Appearance.FontStyleDelta = FontStyle.Bold
+            End If
+        Catch ex As Exception
+        End Try
     End Sub
 End Class

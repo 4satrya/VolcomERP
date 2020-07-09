@@ -774,7 +774,7 @@ WHERE c.id_commerce_type='1' AND c.id_comp_cat='6'"
 
                 If confirm = DialogResult.Yes Then
                     Dim query As String = "
-                        SELECT so.shipping_name, CONCAT(so.shipping_address1, ' ', so.shipping_address2) AS shipping_address, so.shipping_city, so.shipping_post_code, so.shipping_region, so.shipping_phone, sod.qty, aw.c_weight, opt.jne_good_desc, opt.jne_goods_value, opt.jne_special_instruction, opt.jne_service, CONCAT(aw_det.id_awbill, '-', so.sales_order_ol_shop_number) AS order_id, opt.jne_insurance, opt.jne_shipper_name, opt.jne_shipper_address, opt.jne_shipper_city, opt.jne_shipper_zip, opt.jne_shipper_region, opt.jne_shipper_contact, opt.jne_shipper_phone, '' AS destination_code
+                        SELECT so.shipping_name, CONCAT(so.shipping_address1, ' ', so.shipping_address2) AS shipping_address, so.shipping_city, so.shipping_post_code, so.shipping_region,SUBSTRING_INDEX(REPLACE(REPLACE(so.shipping_phone,' ',''),'-',''),'/',1) AS shipping_phone, sod.qty, aw.c_weight, opt.jne_good_desc, opt.jne_goods_value, opt.jne_special_instruction, opt.jne_service, CONCAT(aw_det.id_awbill, '-', so.sales_order_ol_shop_number) AS order_id, opt.jne_insurance, opt.jne_shipper_name, opt.jne_shipper_address, opt.jne_shipper_city, opt.jne_shipper_zip, opt.jne_shipper_region, opt.jne_shipper_contact, opt.jne_shipper_phone, '' AS destination_code
                         FROM tb_wh_awbill_det AS aw_det
                         INNER JOIN tb_pl_sales_order_del AS pl_del ON aw_det.id_pl_sales_order_del = pl_del.id_pl_sales_order_del
                         INNER JOIN tb_sales_order AS so ON pl_del.id_sales_order = so.id_sales_order
@@ -789,7 +789,7 @@ WHERE c.id_commerce_type='1' AND c.id_comp_cat='6'"
                 
                         UNION ALL
 
-                        SELECT cust_ret.shipping_name, cust_ret.shipping_address, cust_ret.shipping_city, cust_ret.shipping_post_code, cust_ret.shipping_region, cust_ret.shipping_phone, aw_det.qty, aw.c_weight, opt.jne_good_desc, opt.jne_goods_value, opt.jne_special_instruction, opt.jne_service, CONCAT(aw_det.id_awbill, '-', cust_ret.sales_order_ol_shop_number) AS order_id, opt.jne_insurance, opt.jne_shipper_name, opt.jne_shipper_address, opt.jne_shipper_city, opt.jne_shipper_zip, opt.jne_shipper_region, opt.jne_shipper_contact, opt.jne_shipper_phone, '' AS destination_code
+                        SELECT cust_ret.shipping_name, cust_ret.shipping_address, cust_ret.shipping_city, cust_ret.shipping_post_code, cust_ret.shipping_region, SUBSTRING_INDEX(REPLACE(REPLACE(cust_ret.shipping_phone,' ',''),'-',''),'/',1) AS shipping_phone, aw_det.qty, aw.c_weight, opt.jne_good_desc, opt.jne_goods_value, opt.jne_special_instruction, opt.jne_service, CONCAT(aw_det.id_awbill, '-', cust_ret.sales_order_ol_shop_number) AS order_id, opt.jne_insurance, opt.jne_shipper_name, opt.jne_shipper_address, opt.jne_shipper_city, opt.jne_shipper_zip, opt.jne_shipper_region, opt.jne_shipper_contact, opt.jne_shipper_phone, '' AS destination_code
                         FROM tb_wh_awbill_det AS aw_det
                         INNER JOIN tb_ol_store_cust_ret AS cust_ret ON aw_det.id_ol_store_cust_ret = cust_ret.id_ol_store_cust_ret
                         INNER JOIN tb_wh_awbill AS aw ON aw_det.id_awbill = aw.id_awbill    
@@ -990,7 +990,7 @@ WHERE CONCAT(cg.`comp_group`,'-',so.`sales_order_ol_shop_number`) IN (" + q_in.S
 
                 If confirm = DialogResult.Yes Then
                     Dim query As String = "
-                        SELECT so.shipping_name, IF(so.shipping_address1='' OR isnull(so.shipping_address1),so.shipping_address,CONCAT(so.shipping_address1, ' ', so.shipping_address2)) AS shipping_address, so.shipping_city, so.shipping_post_code, so.shipping_region, so.shipping_phone, 1 AS qty, CEIL(SUM(sod.grams * sod.sales_order_det_qty)/1000) AS c_weight, opt.jne_good_desc, opt.jne_goods_value, opt.jne_special_instruction, opt.jne_service, CONCAT(cg.`comp_group`,'-',so.`sales_order_ol_shop_number`) AS order_id, opt.jne_insurance, opt.jne_shipper_name, opt.jne_shipper_address, opt.jne_shipper_city, opt.jne_shipper_zip, opt.jne_shipper_region, opt.jne_shipper_contact, opt.jne_shipper_phone, '' AS destination_code
+                        SELECT so.shipping_name, IF(so.shipping_address1='' OR isnull(so.shipping_address1),so.shipping_address,CONCAT(so.shipping_address1, ' ', so.shipping_address2)) AS shipping_address, so.shipping_city, so.shipping_post_code, so.shipping_region, SUBSTRING_INDEX(REPLACE(REPLACE(so.shipping_phone,' ',''),'-',''),'/',1) AS shipping_phone, 1 AS qty, CEIL(SUM(sod.grams * sod.sales_order_det_qty)/1000) AS c_weight, opt.jne_good_desc, opt.jne_goods_value, opt.jne_special_instruction, opt.jne_service, CONCAT(cg.`comp_group`,'-',so.`sales_order_ol_shop_number`) AS order_id, opt.jne_insurance, opt.jne_shipper_name, opt.jne_shipper_address, opt.jne_shipper_city, opt.jne_shipper_zip, opt.jne_shipper_region, opt.jne_shipper_contact, opt.jne_shipper_phone, '' AS destination_code
                         FROM tb_sales_order so
                         INNER JOIN tb_sales_order_det sod ON so.id_sales_order = sod.id_sales_order
                         INNER JOIN tb_opt AS opt 
@@ -1218,7 +1218,7 @@ WHERE cg.`comp_group`='" & comp_group & "' AND so.`sales_order_ol_shop_number`='
                 Dim total_not_imported As Integer = 0
 
                 For i = 2 To dt.Rows.Count - 1
-                    Dim awbill_no As String = dt.Rows(i)(29).ToString.Replace("#", "")
+                    Dim awbill_no As String = dt.Rows(i)(30).ToString.Replace("#", "")
 
                     If dt.Rows(i)(1).ToString.Contains("RET-") Then
                         Dim comp_group_desc As String = dt.Rows(i)(1).ToString.Split("-")(1)
@@ -1514,7 +1514,7 @@ WHERE CONCAT('RET-',cg.`comp_group`,'-',so.`sales_order_ol_shop_number`) IN (" +
 
                 If confirm = DialogResult.Yes Then
                     Dim query As String = "
-                        SELECT so.shipping_name, IF(so.shipping_address1='' OR isnull(so.shipping_address1),so.shipping_address,CONCAT(so.shipping_address1, ' ', so.shipping_address2)) AS shipping_address, so.shipping_city, so.shipping_post_code, so.shipping_region, so.shipping_phone, 1 AS qty, CEIL(SUM(sod.grams * sod.sales_order_det_qty)/1000) AS c_weight, opt.jne_good_desc, opt.jne_goods_value, opt.jne_special_instruction, opt.jne_service, CONCAT('RET-',cg.`comp_group`,'-',so.`sales_order_ol_shop_number`) AS order_id, opt.jne_insurance, opt.jne_shipper_name, opt.jne_shipper_address, opt.jne_shipper_city, opt.jne_shipper_zip, opt.jne_shipper_region, opt.jne_shipper_contact, opt.jne_shipper_phone, '' AS destination_code
+                        SELECT so.shipping_name, IF(so.shipping_address1='' OR isnull(so.shipping_address1),so.shipping_address,CONCAT(so.shipping_address1, ' ', so.shipping_address2)) AS shipping_address, so.shipping_city, so.shipping_post_code, so.shipping_region,SUBSTRING_INDEX(REPLACE(REPLACE(so.shipping_phone,' ',''),'-',''),'/',1) AS shipping_phone, 1 AS qty, CEIL(SUM(sod.grams * sod.sales_order_det_qty)/1000) AS c_weight, opt.jne_good_desc, opt.jne_goods_value, opt.jne_special_instruction, opt.jne_service, CONCAT('RET-',cg.`comp_group`,'-',so.`sales_order_ol_shop_number`) AS order_id, opt.jne_insurance, opt.jne_shipper_name, opt.jne_shipper_address, opt.jne_shipper_city, opt.jne_shipper_zip, opt.jne_shipper_region, opt.jne_shipper_contact, opt.jne_shipper_phone, '' AS destination_code
                         FROM tb_ol_store_cust_ret_det rd
                         INNER JOIN tb_ol_store_cust_ret r ON r.id_ol_store_cust_ret=rd.id_ol_store_cust_ret
                         INNER JOIN tb_ol_store_ret_list rl ON rl.`id_ol_store_ret_list`=rd.`id_ol_store_ret_list`

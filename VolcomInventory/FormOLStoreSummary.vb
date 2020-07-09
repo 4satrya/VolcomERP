@@ -23,6 +23,7 @@
         viewComp()
         viewCompGroup()
         viewCompDetail()
+        viewPromo()
     End Sub
 
     Sub viewCompGroup()
@@ -56,6 +57,23 @@
         INNER JOIN tb_m_comp_contact cc ON cc.id_comp = c.id_comp AND cc.is_default=1 
         WHERE c.id_commerce_type=2 AND c.is_active=1 " + If(SLECompGroup.EditValue.ToString = "0", "", "AND c.id_comp_group = " + SLECompGroup.EditValue.ToString)
         viewSearchLookupQuery(SLECompDetail, query, "id_comp", "comp_name", "id_comp")
+    End Sub
+
+    Sub viewPromo()
+        Cursor = Cursors.WaitCursor
+        Dim prm As New ClassPromoCollection()
+        Dim query As String = "SELECT 0 AS id_ol_promo_collection, 0 AS id_promo, 'All' AS promo, '' AS `number`,
+        NOW() AS start_period, NOW() AS end_period
+        UNION ALL 
+        SELECT p.id_ol_promo_collection, prm.id_promo, prm.promo, p.`number`,
+        p.start_period, p.end_period
+        FROM tb_ol_promo_collection p
+        INNER JOIN tb_promo prm ON prm.id_promo = p.id_promo
+        WHERE p.id_report_status=6
+        ORDER BY id_ol_promo_collection DESC "
+        viewSearchLookupQuery(SLEPromo, query, "id_ol_promo_collection", "promo", "id_ol_promo_collection")
+        SLEPromo.EditValue = 0
+        Cursor = Cursors.Default
     End Sub
 
     Private Sub BtnView_Click(sender As Object, e As EventArgs) Handles BtnView.Click
@@ -313,7 +331,7 @@
 
         Dim query As String = "SELECT c.id_comp, c.comp_number, c.comp_name,
         IFNULL(so.id_sales_order,0) AS `id_order`, so.sales_order_number AS `order_number`, so.sales_order_ol_shop_number AS `ol_store_order_number`, so.sales_order_date AS `order_date`, cg.description AS `store_group`,CONCAT(c.comp_number,' - ', c.comp_name) AS `store`, CONCAT(w.comp_number,' - ', w.comp_name) AS `wh`,
-        sod.id_sales_order_det, sod.item_id, sod.ol_store_id, sod.id_product, prod.product_full_code AS `code`, prod.product_display_name AS `name`, sz.code_detail_name AS `size`, sod.id_design_price, sod.design_price, sod.sales_order_det_qty AS `order_qty`, sod.sales_order_det_note,
+        sod.id_sales_order_det, sod.item_id, sod.ol_store_id, sod.id_product, prod.product_full_code AS `code`, prod.product_display_name AS `name`, sz.code_detail_name AS `size`, sod.id_design_price, sod.design_price, sod.sales_order_det_qty AS `order_qty`, sod.sales_order_det_note, sod.discount, prm_master.promo, prm.number AS `propose_promo_number`, prm.id_ol_promo_collection,
         IFNULL(del.id_pl_sales_order_del,0) AS `id_del`,del.pl_sales_order_del_number AS `del_number`, del.pl_sales_order_del_date AS `del_date`, del.report_status AS `del_status`, awb_del.awbill_no, awb_del.del_received_date, awb_del.del_received_by,
         IFNULL(ro.id_sales_return_order,0) AS `id_ro`, ro.sales_return_order_number AS `ro_number`, ro.sales_return_order_date as `ro_date`, ro.report_status AS `ro_status`,
         IFNULL(ret.id_sales_return,0) AS `id_ret`,ret.sales_return_number AS `ret_number`, ret.sales_return_date AS `ret_date`, ret.report_status AS `ret_status`,
@@ -324,6 +342,8 @@
         ret_cust.`id_ret_cust`,ret_cust.`ret_cust_number`, ret_cust.`ret_cust_date`, ret_cust.`ret_cust_status`, ret_cust.`ret_cust_awb`,
         ret_request.`id_ret_request`, ret_request.`ret_request_awb`,ret_request.`ret_request_number`, ret_request.`ret_request_created_date`,ret_request.`ret_request_date`, ret_request.`ret_request_status`,
         refund.`id_bbk`, refund.`bbk_number`, refund.`bbk_created_date`, refund.`bbk_status`,
+        ish.id_invoice_ship, ish.`invoice_ship_number`, 
+        ish.`invoice_ship_status`, ish.`invoice_ship_date`,
         '0' AS `report_mark_type`, 
         IFNULL(stt.`status`, 'Pending') AS `ol_store_status`, IFNULL(stt.status_date, sales_order_ol_shop_date) AS `ol_store_date`,
         IFNULL(stt_internal.`status`, '-') AS `ol_store_status_internal`, IFNULL(stt_internal.status_date, sales_order_ol_shop_date) AS `ol_store_date_internal`,
@@ -331,6 +351,9 @@
         so.`shipping_post_code` , so.`shipping_region` , so.`payment_method`, so.`tracking_code`, cg.lead_time_return
         FROM tb_sales_order so
         INNER JOIN tb_sales_order_det sod ON sod.id_sales_order = so.id_sales_order
+        LEFT JOIN tb_ol_promo_collection_sku prm_det ON prm_det.id_ol_promo_collection_sku = sod.id_ol_promo_collection_sku
+        LEFT JOIN tb_ol_promo_collection prm ON prm.id_ol_promo_collection = prm_det.id_ol_promo_collection
+        LEFT JOIN tb_promo prm_master ON prm_master.id_promo = prm.id_promo
         LEFT JOIN (
             SELECT * FROM (
 	            SELECT stt.id_sales_order_det, stt.`status`, stt.status_date 
@@ -504,6 +527,14 @@
             ) bbk
             GROUP BY bbk.id_sales_order_det
         ) refund ON refund.id_sales_order_det = sod.id_sales_order_det
+        LEFT JOIN (
+            SELECT ish.id_report,ish.id_invoice_ship, ish.`number` AS `invoice_ship_number`, 
+            stt.report_status AS `invoice_ship_status`, ish.created_date AS `invoice_ship_date`
+            FROM tb_invoice_ship ish
+            INNER JOIN tb_lookup_report_status stt ON stt.id_report_status = ish.id_report_status
+            WHERE ish.id_report_status=6 
+            GROUP BY ish.id_report
+        ) ish ON ish.id_report = so.id_sales_order_ol_shop
         INNER JOIN tb_m_comp_contact socc ON socc.id_comp_contact = so.id_store_contact_to
         INNER JOIN tb_m_comp c ON c.id_comp = socc.id_comp
         INNER JOIN tb_m_comp_group cg ON cg.id_comp_group = c.id_comp_group
@@ -741,6 +772,142 @@
             m.id_report = GVDetail.GetFocusedRowCellValue("id_bbk").ToString
             m.show()
             Cursor = Cursors.Default
+        End If
+    End Sub
+
+    Private Sub LinkProposedPromo_Click(sender As Object, e As EventArgs) Handles LinkProposedPromo.Click
+        If GVDetail.RowCount > 0 And GVDetail.FocusedRowHandle >= 0 Then
+            Cursor = Cursors.WaitCursor
+            Dim id_ol_promo_collection As String = ""
+            Try
+                id_ol_promo_collection = GVDetail.GetFocusedRowCellValue("id_ol_promo_collection").ToString
+            Catch ex As Exception
+            End Try
+            Dim s As New ClassShowPopUp
+            s.id_report = id_ol_promo_collection
+            s.report_mark_type = "250"
+            s.show()
+            Cursor = Cursors.Default
+        End If
+    End Sub
+
+    Private Sub BtnViewPromo_Click(sender As Object, e As EventArgs) Handles BtnViewPromo.Click
+        viewPromoList()
+    End Sub
+
+    Sub viewPromoList()
+        Cursor = Cursors.WaitCursor
+
+        'filter promo
+        Dim id_ol_promo_collection As String = SLEPromo.EditValue.ToString
+        Dim cond_promo As String = ""
+        If id_ol_promo_collection <> "0" Then
+            cond_promo = "AND p.id_ol_promo_collection=" + id_ol_promo_collection + " "
+        End If
+
+        Dim query As String = "SELECT prod.id_product, d.id_design, prod.product_full_code, d.design_code, d.design_display_name AS `name`,cd.code_detail_name AS `size`, 
+        sod.sales_order_det_qty, sod.design_price, (sod.sales_order_det_qty * sod.design_price) AS `amount`, sod.discount, ((SELECT amount) - sod.discount)  AS `nett`,
+        p.id_ol_promo_collection,prm.promo, p.`number` AS `proposed_number`, p.start_period, p.end_period,
+        so.id_sales_order_ol_shop, so.sales_order_ol_shop_number, so.sales_order_ol_shop_date, 
+        so.id_sales_order, so.sales_order_number, so.sales_order_date, so.customer_name, so.shipping_name, so.shipping_address, so.shipping_city, so.shipping_region, so.shipping_phone
+        FROM tb_sales_order_det sod
+        INNER JOIN tb_sales_order so ON so.id_sales_order = sod.id_sales_order
+        INNER JOIN tb_ol_promo_collection_sku pd ON pd.id_ol_promo_collection_sku = sod.id_ol_promo_collection_sku
+        INNER JOIN tb_ol_promo_collection p ON p.id_ol_promo_collection = pd.id_ol_promo_collection
+        INNER JOIN tb_promo prm ON prm.id_promo = p.id_promo
+        INNER JOIN tb_m_product prod ON prod.id_product = sod.id_product
+        INNER JOIN tb_m_product_code prod_code ON prod_code.id_product = prod.id_product
+        INNER JOIN tb_m_code_detail cd ON cd.id_code_detail = prod_code.id_code_detail
+        INNER JOIN tb_m_design d ON d.id_design = prod.id_design
+        WHERE so.id_report_status=6 AND !ISNULL(sod.id_ol_promo_collection_sku)
+        " + cond_promo + "
+        ORDER BY so.id_sales_order_ol_shop "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCPromo.DataSource = data
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub LinkSO_Click(sender As Object, e As EventArgs) Handles LinkSO.Click
+        If GVPromo.RowCount > 0 And GVPromo.FocusedRowHandle >= 0 Then
+            Dim m As New ClassShowPopUp()
+            m.id_report = GVPromo.GetFocusedRowCellValue("id_sales_order").ToString
+            m.report_mark_type = "39"
+            m.show()
+        End If
+    End Sub
+
+    Private Sub LinkPromoPropose_Click(sender As Object, e As EventArgs) Handles LinkPromoPropose.Click
+        If GVPromo.RowCount > 0 And GVPromo.FocusedRowHandle >= 0 Then
+            Dim m As New ClassShowPopUp()
+            m.id_report = GVPromo.GetFocusedRowCellValue("id_ol_promo_collection").ToString
+            m.report_mark_type = "250"
+            m.show()
+        End If
+    End Sub
+
+    Private Sub SLEPromo_EditValueChanged(sender As Object, e As EventArgs) Handles SLEPromo.EditValueChanged
+        GCPromo.DataSource = Nothing
+    End Sub
+
+    Sub exportToXLS(ByVal path_par As String, ByVal sheet_name_par As String, ByVal gc_par As DevExpress.XtraGrid.GridControl)
+        Cursor = Cursors.WaitCursor
+        Dim path As String = path_par
+
+        ' Customize export options 
+        CType(gc_par.MainView, DevExpress.XtraGrid.Views.Grid.GridView).OptionsPrint.PrintHeader = True
+        Dim advOptions As DevExpress.XtraPrinting.XlsxExportOptionsEx = New DevExpress.XtraPrinting.XlsxExportOptionsEx()
+        advOptions.AllowSortingAndFiltering = DevExpress.Utils.DefaultBoolean.False
+        advOptions.ShowGridLines = DevExpress.Utils.DefaultBoolean.False
+        advOptions.AllowGrouping = DevExpress.Utils.DefaultBoolean.False
+        advOptions.ShowTotalSummaries = DevExpress.Utils.DefaultBoolean.False
+        advOptions.SheetName = sheet_name_par
+        advOptions.ExportType = DevExpress.Export.ExportType.DataAware
+
+        Try
+            gc_par.ExportToXlsx(path, advOptions)
+            Process.Start(path)
+            ' Open the created XLSX file with the default application. 
+        Catch ex As Exception
+            stopCustom(ex.ToString)
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnExportToXLS_Click(sender As Object, e As EventArgs) Handles BtnExportToXLS.Click
+        If GVDetail.RowCount > 0 Then
+            Cursor = Cursors.WaitCursor
+            Dim path As String = Application.StartupPath & "\download\"
+            'create directory if not exist
+            If Not IO.Directory.Exists(path) Then
+                System.IO.Directory.CreateDirectory(path)
+            End If
+            path = path + "ol_store_report_detail.xlsx"
+            exportToXLS(path, "ol_store_report_detail", GCDetail)
+            Cursor = Cursors.Default
+        End If
+    End Sub
+
+    Private Sub BtnExportToXLSPromo_Click(sender As Object, e As EventArgs) Handles BtnExportToXLSPromo.Click
+        If GVPromo.RowCount > 0 Then
+            Cursor = Cursors.WaitCursor
+            Dim path As String = Application.StartupPath & "\download\"
+            'create directory if not exist
+            If Not IO.Directory.Exists(path) Then
+                System.IO.Directory.CreateDirectory(path)
+            End If
+            path = path + "ol_store_report_prm.xlsx"
+            exportToXLS(path, "ol_store_report_prm", GCPromo)
+            Cursor = Cursors.Default
+        End If
+    End Sub
+
+    Private Sub RepoBtnInvoiceShip_Click(sender As Object, e As EventArgs) Handles RepoBtnInvoiceShip.Click
+        If GVDetail.RowCount > 0 And GVDetail.FocusedRowHandle >= 0 Then
+            Dim m As New ClassShowPopUp()
+            Dim id As String = GVDetail.GetFocusedRowCellValue("id_invoice_ship").ToString
+            m.id_report = id
+            m.report_mark_type = "249"
+            m.show()
         End If
     End Sub
 End Class

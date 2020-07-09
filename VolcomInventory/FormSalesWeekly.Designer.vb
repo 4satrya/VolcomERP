@@ -582,10 +582,11 @@ Partial Class FormSalesWeekly
         '
         'GridColumnRemark
         '
-        Me.GridColumnRemark.Caption = "Remark"
+        Me.GridColumnRemark.Caption = "REMARK"
         Me.GridColumnRemark.FieldName = "sales_pos_note"
         Me.GridColumnRemark.Name = "GridColumnRemark"
-        Me.GridColumnRemark.OptionsColumn.ShowInCustomizationForm = False
+        Me.GridColumnRemark.Visible = True
+        Me.GridColumnRemark.VisibleIndex = 15
         '
         'GridColumnstore_number
         '

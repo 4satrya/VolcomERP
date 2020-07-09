@@ -98,6 +98,7 @@
     Dim first_load_card As Boolean = True
     Public show_cost As Boolean = False
     Public id_design_soh As String = "-1"
+    Dim id_super_admin As String = get_setup_field("id_role_super_admin")
 
     Private Sub FormFGStock_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         For Each t As DevExpress.XtraTab.XtraTabPage In XTCFGStock.TabPages
@@ -126,6 +127,10 @@
         DEUntilStockQC.EditValue = data_dt.Rows(0)("dt")
         DEUntilAcc.EditValue = data_dt.Rows(0)("dt")
         ActiveControl = TxtDesignCode
+
+        If id_role_login <> id_super_admin Then
+            XTPFGStockWHSum.PageEnabled = False
+        End If
     End Sub
 
     Sub viewGroupType()

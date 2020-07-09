@@ -1085,9 +1085,10 @@ Public Class FormFGTrfNewDet
                     Dim fg_trf_number As String = header_number_sales("15")
 
                     Dim query_main As String = "INSERT tb_fg_trf(id_sales_order, fg_trf_number, id_comp_contact_from, id_comp_contact_to, fg_trf_date, fg_trf_date_rec, fg_trf_note, id_report_status,id_report_status_rec,id_wh_drawer, last_update, last_update_by, is_use_unique_code) "
-                    query_main += "VALUES('" + id_sales_order + "','" + fg_trf_number + "', '" + id_comp_contact_from + "', '" + id_comp_contact_to + "', NOW(), NOW(), '" + fg_trf_note + "', '1','1', '" + id_wh_drawer_to + "', NOW(), " + id_user + ", '" + is_use_unique_code_wh + "'); SELECT LAST_INSERT_ID(); "
+                    query_main += "VALUES('" + id_sales_order + "','', '" + id_comp_contact_from + "', '" + id_comp_contact_to + "', NOW(), NOW(), '" + fg_trf_note + "', '1','1', '" + id_wh_drawer_to + "', NOW(), " + id_user + ", '" + is_use_unique_code_wh + "'); SELECT LAST_INSERT_ID(); "
                     id_fg_trf = execute_query(query_main, 0, True, "", "", "", "")
-                    increase_inc_sales("15")
+                    execute_non_query("CALL gen_number(" + id_fg_trf + ", 57)", True, "", "", "", "")
+                    'increase_inc_sales("15")
 
                     'insert who prepared
                     insert_who_prepared("57", id_fg_trf, id_user)

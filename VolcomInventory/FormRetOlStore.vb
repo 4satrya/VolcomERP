@@ -34,7 +34,7 @@
 FROM tb_sales_order so
 INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = so.id_store_contact_to
 INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp
-INNER JOIN `tb_ol_store_ret_req` req ON req.sales_order_ol_shop_number=so.sales_order_ol_shop_number
+INNER JOIN `tb_ol_store_ret_req` req ON req.sales_order_ol_shop_number=so.sales_order_ol_shop_number AND req.id_report_status=6
 WHERE so.id_report_status=6 AND c.id_commerce_type=2 AND c.id_comp_group='" + SLECompGroup.EditValue.ToString + "'
 GROUP BY so.sales_order_ol_shop_number "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")

@@ -91,80 +91,86 @@
     End Sub
 
     Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles BtnAdd.Click
-        If action = "ins" Then
-            Dim newRow As DataRow = (TryCast(FormBankWithdrawalDet.GCList.DataSource, DataTable)).NewRow()
-            newRow("id_report") = "0"
-            newRow("report_mark_type") = "0"
-            newRow("id_acc") = SLECOA.EditValue.ToString
-            newRow("vendor") = TxtSupplier.Text
-            If TxtComp.Text = "" Then
-                newRow("id_comp") = "1"
-                newRow("comp_number") = "000"
-            Else
-                newRow("id_comp") = SLEComp.EditValue.ToString
-                newRow("comp_number") = TxtComp.Text
-            End If
-
-            newRow("acc_name") = TxtCOA.Text
-            newRow("acc_description") = SLECOA.Text
-            newRow("number") = addSlashes(TxtReff.Text)
-            newRow("total_pay") = 0
-
-            If LEDK.EditValue.ToString = "2" Then
-                newRow("value") = TxtAmount.EditValue * -1
-                newRow("balance_due") = TxtAmount.EditValue * -1
-            Else
-                newRow("value") = TxtAmount.EditValue
-                newRow("balance_due") = TxtAmount.EditValue
-            End If
-            newRow("kurs") = TEKurs.EditValue
-            newRow("id_currency") = LECurrency.EditValue
-            newRow("currency") = LECurrency.Text
-            newRow("val_bef_kurs") = TEBeforeKurs.EditValue
-            newRow("note") = addSlashes(TxtDescription.Text)
-            newRow("id_dc") = LEDK.EditValue.ToString
-            newRow("dc_code") = LEDK.Text
-            newRow("value_view") = TxtAmount.EditValue
-            TryCast(FormBankWithdrawalDet.GCList.DataSource, DataTable).Rows.Add(newRow)
-            FormBankWithdrawalDet.GCList.RefreshDataSource()
-            FormBankWithdrawalDet.GVList.RefreshData()
-            FormBankWithdrawalDet.calculate_amount()
-            actionLoad()
+        If LEDK.EditValue.ToString = "1" And TxtAmount.EditValue < 0 Then
+            stopCustom("Debit must be positive value")
+        ElseIf LEDK.EditValue.ToString = "2" And TxtAmount.EditValue > 0 Then
+            stopCustom("Credit must be negative value")
         Else
-            'update
-            FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("number", addSlashes(TxtReff.Text))
-            If TxtComp.Text = "" Then
-                FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("id_comp", "0")
-            Else
-                FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("id_comp", SLEComp.EditValue.ToString)
-            End If
-            FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("vendor", TxtSupplier.Text)
-            FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("id_acc", SLECOA.EditValue.ToString)
-            FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("acc_name", TxtCOA.Text)
-            FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("acc_description", SLECOA.Text)
-            FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("comp_number", TxtComp.Text)
-            FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("total_rec", 0)
-            If LEDK.EditValue.ToString = "2" Then
-                FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("value", TxtAmount.EditValue * -1)
-                FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("balance_due", TxtAmount.EditValue * -1)
-            Else
-                FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("value", TxtAmount.EditValue)
-                FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("balance_due", TxtAmount.EditValue)
-            End If
-            FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("note", addSlashes(TxtDescription.Text))
-            FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("id_dc", LEDK.EditValue.ToString)
-            FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("dc_code", LEDK.Text)
+            If action = "ins" Then
+                Dim newRow As DataRow = (TryCast(FormBankWithdrawalDet.GCList.DataSource, DataTable)).NewRow()
+                newRow("id_report") = "0"
+                newRow("report_mark_type") = "0"
+                newRow("id_acc") = SLECOA.EditValue.ToString
+                newRow("vendor") = TxtSupplier.Text
+                If TxtComp.Text = "" Then
+                    newRow("id_comp") = "1"
+                    newRow("comp_number") = "000"
+                Else
+                    newRow("id_comp") = SLEComp.EditValue.ToString
+                    newRow("comp_number") = TxtComp.Text
+                End If
 
-            FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("id_currency", LECurrency.EditValue)
-            FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("currency", LECurrency.Text)
-            FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("val_bef_kurs", TEBeforeKurs.EditValue)
-            FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("kurs", TEKurs.EditValue)
+                newRow("acc_name") = TxtCOA.Text
+                newRow("acc_description") = SLECOA.Text
+                newRow("number") = addSlashes(TxtReff.Text)
+                newRow("total_pay") = 0
 
-            FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("value_view", TxtAmount.EditValue)
-            FormBankWithdrawalDet.GCList.RefreshDataSource()
-            FormBankWithdrawalDet.GVList.RefreshData()
-            FormBankWithdrawalDet.calculate_amount()
-            Close()
+                If LEDK.EditValue.ToString = "2" Then
+                    newRow("value") = TxtAmount.EditValue * -1
+                    newRow("balance_due") = TxtAmount.EditValue * -1
+                Else
+                    newRow("value") = TxtAmount.EditValue
+                    newRow("balance_due") = TxtAmount.EditValue
+                End If
+                newRow("kurs") = TEKurs.EditValue
+                newRow("id_currency") = LECurrency.EditValue
+                newRow("currency") = LECurrency.Text
+                newRow("val_bef_kurs") = TEBeforeKurs.EditValue
+                newRow("note") = addSlashes(TxtDescription.Text)
+                newRow("id_dc") = LEDK.EditValue.ToString
+                newRow("dc_code") = LEDK.Text
+                newRow("value_view") = TxtAmount.EditValue
+                TryCast(FormBankWithdrawalDet.GCList.DataSource, DataTable).Rows.Add(newRow)
+                FormBankWithdrawalDet.GCList.RefreshDataSource()
+                FormBankWithdrawalDet.GVList.RefreshData()
+                FormBankWithdrawalDet.calculate_amount()
+                actionLoad()
+            Else
+                'update
+                FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("number", addSlashes(TxtReff.Text))
+                If TxtComp.Text = "" Then
+                    FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("id_comp", "0")
+                Else
+                    FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("id_comp", SLEComp.EditValue.ToString)
+                End If
+                FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("vendor", TxtSupplier.Text)
+                FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("id_acc", SLECOA.EditValue.ToString)
+                FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("acc_name", TxtCOA.Text)
+                FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("acc_description", SLECOA.Text)
+                FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("comp_number", TxtComp.Text)
+                FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("total_rec", 0)
+                If LEDK.EditValue.ToString = "2" Then
+                    FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("value", TxtAmount.EditValue * -1)
+                    FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("balance_due", TxtAmount.EditValue * -1)
+                Else
+                    FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("value", TxtAmount.EditValue)
+                    FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("balance_due", TxtAmount.EditValue)
+                End If
+                FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("note", addSlashes(TxtDescription.Text))
+                FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("id_dc", LEDK.EditValue.ToString)
+                FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("dc_code", LEDK.Text)
+
+                FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("id_currency", LECurrency.EditValue)
+                FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("currency", LECurrency.Text)
+                FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("val_bef_kurs", TEBeforeKurs.EditValue)
+                FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("kurs", TEKurs.EditValue)
+
+                FormBankWithdrawalDet.GVList.SetFocusedRowCellValue("value_view", TxtAmount.EditValue)
+                FormBankWithdrawalDet.GCList.RefreshDataSource()
+                FormBankWithdrawalDet.GVList.RefreshData()
+                FormBankWithdrawalDet.calculate_amount()
+                Close()
+            End If
         End If
     End Sub
 

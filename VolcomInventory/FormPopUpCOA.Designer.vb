@@ -398,7 +398,7 @@ Partial Class FormPopUpCOA
         Me.BPickTable.Name = "BPickTable"
         Me.BPickTable.Size = New System.Drawing.Size(92, 36)
         Me.BPickTable.TabIndex = 18
-        Me.BPickTable.Text = "Pick"
+        Me.BPickTable.Text = "Pick (Enter)"
         '
         'XTPAccount
         '
@@ -628,6 +628,7 @@ Partial Class FormPopUpCOA
         Me.ClientSize = New System.Drawing.Size(815, 405)
         Me.Controls.Add(Me.XtraTabControl1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.KeyPreview = True
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FormPopUpCOA"

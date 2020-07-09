@@ -285,6 +285,7 @@ WHERE bdg.`id_b_expense`='" & GVPurcReq.GetRowCellValue(i, "id_b_expense").ToStr
                 newRow("item_desc") = GVPurcReq.GetRowCellValue(i, "item_desc").ToString
                 newRow("item_desc_full") = GVPurcReq.GetRowCellValue(i, "item_desc").ToString & vbNewLine & "Note : " & GVPurcReq.GetRowCellValue(i, "item_detail").ToString
                 newRow("item_detail") = GVPurcReq.GetRowCellValue(i, "item_detail").ToString
+                newRow("item_type") = GVPurcReq.GetRowCellValue(i, "item_type").ToString
                 newRow("uom") = GVPurcReq.GetRowCellValue(i, "uom")
                 newRow("qty_po") = GVPurcReq.GetRowCellValue(i, "qty_po")
                 '
@@ -300,12 +301,13 @@ WHERE bdg.`id_b_expense`='" & GVPurcReq.GetRowCellValue(i, "id_b_expense").ToStr
 
     Sub load_det()
         is_process = "1"
-        Dim query As String = "SELECT pod.`id_item`,IF(pod.budget_status=1,'Budget Ok','No Budget') AS budget_status,prd.item_detail,ic.id_expense_type,icd.`id_vendor_type`,prd.id_b_expense,prd.id_b_expense_opex,dep.`departement`,icd.id_item_cat_detail,vt.vendor_type,prd.`id_purc_req_det`,pr.`purc_req_number`,pr.`date_created` AS pr_created,item.`item_desc`,uom.`uom`,prd.`qty` AS qty_pr,prd.`value` AS val_pr,pod.`qty` AS qty_po,pod.`value` AS val_po,pod.`discount`,pod.`discount_percent`
+        Dim query As String = "SELECT pod.`id_item`,itt.item_type,IF(pod.budget_status=1,'Budget Ok','No Budget') AS budget_status,prd.item_detail,ic.id_expense_type,icd.`id_vendor_type`,prd.id_b_expense,prd.id_b_expense_opex,dep.`departement`,icd.id_item_cat_detail,vt.vendor_type,prd.`id_purc_req_det`,pr.`purc_req_number`,pr.`date_created` AS pr_created,item.`item_desc`,uom.`uom`,prd.`qty` AS qty_pr,prd.`value` AS val_pr,pod.`qty` AS qty_po,pod.`value` AS val_po,pod.`discount`,pod.`discount_percent`
                                 FROM tb_purc_order_det pod
                                 INNER JOIN tb_purc_req_det prd ON prd.`id_purc_req_det`=pod.`id_purc_req_det`
                                 INNER JOIN tb_purc_req pr ON pr.`id_purc_req`=prd.`id_purc_req`
                                 INNER JOIN tb_m_departement dep ON dep.`id_departement`=pr.`id_departement`
                                 INNER JOIN `tb_item` item ON item.`id_item`=pod.`id_item`
+                                INNER JOIN tb_lookup_purc_item_type itt ON itt.id_item_type=item.id_item_type
                                 INNER JOIN `tb_item_cat` ic ON item.`id_item_cat`=ic.`id_item_cat`
                                 INNER JOIN tb_item_cat_detail icd ON icd.`id_item_cat_detail`=item.`id_item_cat_detail`
                                 INNER JOIN tb_vendor_type vt ON vt.id_vendor_type=icd.id_vendor_type
@@ -316,7 +318,7 @@ WHERE bdg.`id_b_expense`='" & GVPurcReq.GetRowCellValue(i, "id_b_expense").ToStr
         GVPurcReq.BestFitColumns()
 
         'summary_query
-        Dim query_sum As String = "SELECT '' AS no,'' AS id_item,'' AS item_desc,'' AS item_desc_full,'' AS item_detail,0.00 AS qty_po,0.00 AS discount,'' AS uom,0.00 AS val_po,0.00 as discount_percent,0.00 as discount"
+        Dim query_sum As String = "SELECT '' AS no,'' AS id_item,'' AS item_type,'' AS item_desc,'' AS item_desc_full,'' AS item_detail,0.00 AS qty_po,0.00 AS discount,'' AS uom,0.00 AS val_po,0.00 as discount_percent,0.00 as discount"
         Dim data_sum As DataTable = execute_query(query_sum, -1, True, "", "", "", "")
         GCSummary.DataSource = data_sum
         is_process = "2"

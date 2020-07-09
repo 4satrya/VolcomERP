@@ -119,6 +119,7 @@
                             newRow("kurs") = FormInvoiceFGPO.GVDPFGPO.GetRowCellValue(i, "prod_order_wo_kurs")
                             newRow("value_bef_kurs") = FormInvoiceFGPO.GVDPFGPO.GetRowCellValue(i, "dp_amount_bef_kurs")
                             '
+                            newRow("pph_percent") = 0
                             newRow("vat") = FormInvoiceFGPO.GVDPFGPO.GetRowCellValue(i, "dp_amount_vat")
                             newRow("inv_number") = ""
                             newRow("note") = ""
@@ -568,7 +569,7 @@ WHERE pnd.`id_pn_fgpo`='" & id_invoice & "' AND pnd.report_mark_type!='199'"
         GCPORef.VisibleIndex = 1
         '
         GridColumnPPHCOA.VisibleIndex = -1
-        GridColumnPPHDesc.VisibleIndex = 10
+        'GridColumnPPHDesc.VisibleIndex = 10
 
         Dim str As System.IO.Stream
         str = New System.IO.MemoryStream()
@@ -587,8 +588,8 @@ WHERE pnd.`id_pn_fgpo`='" & id_invoice & "' AND pnd.report_mark_type!='199'"
         GridColumnNote.VisibleIndex = 10
         GCPORef.VisibleIndex = -1
         '
-        GridColumnPPHCOA.VisibleIndex = -1
-        GridColumnPPHDesc.VisibleIndex = 11
+        GridColumnPPHCOA.VisibleIndex = 11
+        'GridColumnPPHDesc.VisibleIndex = 11
 
         'search total
         Dim tot As String = Decimal.Parse("0").ToString("N2")
@@ -654,6 +655,7 @@ WHERE pnd.`id_pn_fgpo`='" & id_invoice & "' AND pnd.report_mark_type='199'"
 
         newRow("value_bef_kurs") = 0
         '
+        newRow("pph_percent") = 0
         newRow("vat") = 0
         newRow("inv_number") = ""
         newRow("note") = ""

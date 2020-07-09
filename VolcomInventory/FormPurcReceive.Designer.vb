@@ -31,6 +31,7 @@ Partial Class FormPurcReceive
         Me.GridColumn37 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn36 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdComp = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -57,7 +58,6 @@ Partial Class FormPurcReceive
         Me.GridColumnStatus = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnVendor = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnDOVENDOR = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XTCRec, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCRec.SuspendLayout()
         Me.XTPOrder.SuspendLayout()
@@ -171,6 +171,16 @@ Partial Class FormPurcReceive
         Me.GridColumn4.Name = "GridColumn4"
         Me.GridColumn4.Visible = True
         Me.GridColumn4.VisibleIndex = 4
+        '
+        'GridColumn8
+        '
+        Me.GridColumn8.Caption = "Est Receive Date"
+        Me.GridColumn8.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.GridColumn8.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn8.FieldName = "est_date_receive"
+        Me.GridColumn8.Name = "GridColumn8"
+        Me.GridColumn8.Visible = True
+        Me.GridColumn8.VisibleIndex = 8
         '
         'GridColumn5
         '
@@ -383,16 +393,6 @@ Partial Class FormPurcReceive
         Me.GridColumnDOVENDOR.Name = "GridColumnDOVENDOR"
         Me.GridColumnDOVENDOR.Visible = True
         Me.GridColumnDOVENDOR.VisibleIndex = 1
-        '
-        'GridColumn8
-        '
-        Me.GridColumn8.Caption = "Est Receive Date"
-        Me.GridColumn8.DisplayFormat.FormatString = "dd MMMM yyyy"
-        Me.GridColumn8.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.GridColumn8.FieldName = "est_date_receive"
-        Me.GridColumn8.Name = "GridColumn8"
-        Me.GridColumn8.Visible = True
-        Me.GridColumn8.VisibleIndex = 8
         '
         'FormPurcReceive
         '

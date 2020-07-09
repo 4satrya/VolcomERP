@@ -19,49 +19,49 @@ Partial Class FormAccountingJournalDet
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormAccountingJournalDet))
         Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
-        Me.GCJournalDet = New DevExpress.XtraGrid.GridControl
-        Me.GVJournalDet = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.RepositoryItemTextEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
-        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.RepositoryItemTextEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
-        Me.GridColumnStatus = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.RSLEStatusOpen = New DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit
-        Me.RepositoryItemSearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.GridColumnIdReport = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnReportMarkType = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnReff = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.RepositoryItemComboBox1 = New DevExpress.XtraEditors.Repository.RepositoryItemComboBox
-        Me.PanelControl4 = New DevExpress.XtraEditors.PanelControl
-        Me.MENote = New DevExpress.XtraEditors.MemoEdit
-        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl
-        Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl
-        Me.BDelMat = New DevExpress.XtraEditors.SimpleButton
-        Me.BAddMat = New DevExpress.XtraEditors.SimpleButton
-        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl
-        Me.BMark = New DevExpress.XtraEditors.SimpleButton
+        Me.GCJournalDet = New DevExpress.XtraGrid.GridControl()
+        Me.GVJournalDet = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemTextEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
+        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemTextEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
+        Me.GridColumnStatus = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RSLEStatusOpen = New DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit()
+        Me.RepositoryItemSearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumnIdReport = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnReportMarkType = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnReff = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemComboBox1 = New DevExpress.XtraEditors.Repository.RepositoryItemComboBox()
+        Me.PanelControl4 = New DevExpress.XtraEditors.PanelControl()
+        Me.MENote = New DevExpress.XtraEditors.MemoEdit()
+        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
+        Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
+        Me.BDelMat = New DevExpress.XtraEditors.SimpleButton()
+        Me.BAddMat = New DevExpress.XtraEditors.SimpleButton()
+        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
+        Me.BMark = New DevExpress.XtraEditors.SimpleButton()
         Me.ImgBut = New DevExpress.Utils.ImageCollection(Me.components)
-        Me.Bprint = New DevExpress.XtraEditors.SimpleButton
-        Me.BCancel = New DevExpress.XtraEditors.SimpleButton
-        Me.BSave = New DevExpress.XtraEditors.SimpleButton
-        Me.PCGeneralheader = New DevExpress.XtraEditors.PanelControl
-        Me.TEUserEntry = New DevExpress.XtraEditors.TextEdit
-        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl
-        Me.TENumber = New DevExpress.XtraEditors.TextEdit
-        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl
-        Me.TEDate = New DevExpress.XtraEditors.TextEdit
-        Me.LTransNo = New DevExpress.XtraEditors.LabelControl
+        Me.Bprint = New DevExpress.XtraEditors.SimpleButton()
+        Me.BCancel = New DevExpress.XtraEditors.SimpleButton()
+        Me.BSave = New DevExpress.XtraEditors.SimpleButton()
+        Me.PCGeneralheader = New DevExpress.XtraEditors.PanelControl()
+        Me.TEUserEntry = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
+        Me.TENumber = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
+        Me.TEDate = New DevExpress.XtraEditors.TextEdit()
+        Me.LTransNo = New DevExpress.XtraEditors.LabelControl()
         Me.EPJournal = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.BalanceMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.SMBalance = New System.Windows.Forms.ToolStripMenuItem
+        Me.SMBalance = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GCJournalDet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVJournalDet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -98,11 +98,11 @@ Partial Class FormAccountingJournalDet
         'GCJournalDet
         '
         Me.GCJournalDet.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCJournalDet.Location = New System.Drawing.Point(0, 111)
+        Me.GCJournalDet.Location = New System.Drawing.Point(0, 116)
         Me.GCJournalDet.MainView = Me.GVJournalDet
         Me.GCJournalDet.Name = "GCJournalDet"
         Me.GCJournalDet.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemTextEdit1, Me.RepositoryItemTextEdit2, Me.RepositoryItemComboBox1, Me.RSLEStatusOpen})
-        Me.GCJournalDet.Size = New System.Drawing.Size(826, 289)
+        Me.GCJournalDet.Size = New System.Drawing.Size(826, 284)
         Me.GCJournalDet.TabIndex = 11
         Me.GCJournalDet.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVJournalDet})
         '
@@ -303,7 +303,7 @@ Partial Class FormAccountingJournalDet
         Me.PanelControl3.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl3.Location = New System.Drawing.Point(0, 75)
         Me.PanelControl3.Name = "PanelControl3"
-        Me.PanelControl3.Size = New System.Drawing.Size(826, 36)
+        Me.PanelControl3.Size = New System.Drawing.Size(826, 41)
         Me.PanelControl3.TabIndex = 12
         '
         'BDelMat
@@ -313,7 +313,7 @@ Partial Class FormAccountingJournalDet
         Me.BDelMat.ImageList = Me.LargeImageCollection
         Me.BDelMat.Location = New System.Drawing.Point(642, 2)
         Me.BDelMat.Name = "BDelMat"
-        Me.BDelMat.Size = New System.Drawing.Size(91, 32)
+        Me.BDelMat.Size = New System.Drawing.Size(91, 37)
         Me.BDelMat.TabIndex = 16
         Me.BDelMat.Text = "Delete"
         '
@@ -324,7 +324,7 @@ Partial Class FormAccountingJournalDet
         Me.BAddMat.ImageList = Me.LargeImageCollection
         Me.BAddMat.Location = New System.Drawing.Point(733, 2)
         Me.BAddMat.Name = "BAddMat"
-        Me.BAddMat.Size = New System.Drawing.Size(91, 32)
+        Me.BAddMat.Size = New System.Drawing.Size(91, 37)
         Me.BAddMat.TabIndex = 17
         Me.BAddMat.Text = "Add"
         '

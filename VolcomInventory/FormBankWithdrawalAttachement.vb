@@ -97,11 +97,13 @@
             confirm = DevExpress.XtraEditors.XtraMessageBox.Show("All data will be locked. Are you sure want to set ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
 
             If confirm = DialogResult.Yes Then
-                Dim query As String = "UPDATE tb_purc_order SET due_date = '" + Date.Parse(DateEditDueDate.EditValue.ToString).ToString("yyyy-MM-dd") + "', is_active_payment = 1, pph_total = " + decimalSQL(TEPPH.EditValue.ToString) + ", pph_account = " + If(SLEPPHAccount.EditValue.ToString = "0", "NULL", SLEPPHAccount.EditValue.ToString) + " WHERE id_purc_order = " + id_purc_order
+                For i = 0 To GVPurcReq.RowCount - 1
+                    execute_non_query("UPDATE tb_purc_order_det SET pph_percent='" & decimalSQL(GVPurcReq.GetRowCellValue(i, "pph_percent").ToString) & "' WHERE id_purc_order_det='" & GVPurcReq.GetRowCellValue(i, "id_purc_order_det").ToString & "'", True, "", "", "", "")
+                Next
+
+                Dim query As String = "UPDATE tb_purc_order SET pph_total = " + decimalSQL(TEPPH.EditValue.ToString) + ",due_date = '" + Date.Parse(DateEditDueDate.EditValue.ToString).ToString("yyyy-MM-dd") + "', is_active_payment = 1, pph_total = " + decimalSQL(TEPPH.EditValue.ToString) + ", pph_account = " + If(SLEPPHAccount.EditValue.ToString = "0", "NULL", SLEPPHAccount.EditValue.ToString) + " WHERE id_purc_order = " + id_purc_order
 
                 execute_non_query(query, True, "", "", "", "")
-
-                execute_non_query("UPDATE tb_purc_order SET pph_total = " + decimalSQL(TEPPH.EditValue.ToString) + " WHERE id_purc_order =" + id_purc_order, True, "", "", "", "")
 
                 FormBankWithdrawal.buttonView_click()
 

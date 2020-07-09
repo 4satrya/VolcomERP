@@ -15,15 +15,16 @@
         Dim q As String = ""
 
         If is_accounting Then
-            q = "SELECT tb_m_comp.id_comp AS id_comp, tb_m_comp.comp_number AS comp_number, tb_m_comp.comp_name AS comp_name, tb_m_comp.address_primary AS address_primary, tb_m_comp.is_active AS is_active, tb_m_comp_cat.comp_cat_name AS company_category, (SELECT comp_status FROM tb_lookup_comp_status WHERE tb_m_comp.is_active = id_comp_status) AS comp_status, tb_m_comp_contact.contact_person, tb_m_comp_contact.contact_number, tb_m_comp_contact.email AS contact_email
+            q = "SELECT tb_m_comp.id_comp AS id_comp, tb_m_comp.comp_number AS comp_number, tb_m_comp.comp_name AS comp_name, tb_m_comp.address_primary AS address_primary, tb_m_comp.is_active AS is_active, tb_m_comp_cat.comp_cat_name AS company_category, (SELECT comp_status FROM tb_lookup_comp_status WHERE tb_m_comp.is_active = id_comp_status) AS comp_status, tb_m_comp_contact.contact_person, tb_m_comp_contact.contact_number, tb_m_comp_contact.email AS contact_email, tb_m_sub_district.sub_district
 FROM tb_m_comp
 INNER JOIN tb_m_comp_cat ON tb_m_comp.`id_comp_cat`=tb_m_comp.id_comp_cat
 INNER JOIN (SELECT * FROM tb_m_comp_contact WHERE is_default = 1) AS tb_m_comp_contact ON tb_m_comp_contact.`id_comp`=tb_m_comp.`id_comp`
+LEFT JOIN tb_m_sub_district ON tb_m_comp.id_sub_district = tb_m_sub_district.id_sub_district
 WHERE tb_m_comp.id_comp_cat = tb_m_comp_cat.id_comp_cat AND tb_m_comp.id_comp = tb_m_comp_contact.id_comp AND tb_m_comp.`is_active`='3' AND (ISNULL(tb_m_comp.`id_acc_ap`) OR ISNULL(tb_m_comp.`id_acc_dp`) OR ISNULL(tb_m_comp.`id_acc_ar`))
 ORDER BY tb_m_comp.comp_name"
         Else
-            q = "SELECT tb_m_comp.id_comp as id_comp, tb_m_comp.comp_number as comp_number, tb_m_comp.comp_name as comp_name, tb_m_comp.address_primary as address_primary, tb_m_comp.is_active as is_active, tb_m_comp_cat.comp_cat_name as company_category, (SELECT comp_status FROM tb_lookup_comp_status WHERE tb_m_comp.is_active = id_comp_status) AS comp_status, tb_m_comp_contact.contact_person, tb_m_comp_contact.contact_number, tb_m_comp_contact.email AS contact_email
-            FROM tb_m_comp, tb_m_comp_cat, (SELECT * FROM tb_m_comp_contact WHERE is_default = 1) AS tb_m_comp_contact WHERE tb_m_comp.id_comp_cat = tb_m_comp_cat.id_comp_cat AND tb_m_comp.id_comp = tb_m_comp_contact.id_comp
+            q = "SELECT tb_m_comp.id_comp as id_comp, tb_m_comp.comp_number as comp_number, tb_m_comp.comp_name as comp_name, tb_m_comp.address_primary as address_primary, tb_m_comp.is_active as is_active, tb_m_comp_cat.comp_cat_name as company_category, (SELECT comp_status FROM tb_lookup_comp_status WHERE tb_m_comp.is_active = id_comp_status) AS comp_status, tb_m_comp_contact.contact_person, tb_m_comp_contact.contact_number, tb_m_comp_contact.email AS contact_email, tb_m_sub_district.sub_district
+            FROM tb_m_comp, tb_m_comp_cat, (SELECT * FROM tb_m_comp_contact WHERE is_default = 1) AS tb_m_comp_contact, tb_m_sub_district WHERE tb_m_comp.id_comp_cat = tb_m_comp_cat.id_comp_cat AND tb_m_comp.id_comp = tb_m_comp_contact.id_comp AND tb_m_sub_district.id_sub_district = tb_m_comp.id_sub_district
             ORDER BY comp_name"
         End If
 

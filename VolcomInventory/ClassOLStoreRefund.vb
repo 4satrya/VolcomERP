@@ -117,17 +117,19 @@
 
     Sub createROR()
         Dim report_mark_type As String = "119"
-        Dim id_wh_contact_normal As String = get_setup_field("id_wh_contact_normal")
-        Dim id_wh_contact_sale As String = get_setup_field("id_wh_contact_sale")
+        'Dim id_wh_contact_normal As String = get_setup_field("id_wh_contact_normal")
+        'Dim id_wh_contact_sale As String = get_setup_field("id_wh_contact_sale")
         Dim id_user_prepared As String = get_opt_sales_field("default_so_online_prepared_by")
         Dim query As String = "SELECT so.id_sales_order,so.sales_order_ol_shop_number AS `order_number`, so.customer_name, 
-        c.comp_number, c.comp_name, c.id_comp, cc.id_comp_contact, c.id_drawer_def, IF(c.id_store_type=3, 2, c.id_store_type) AS `id_store_type`
+        c.comp_number, c.comp_name, c.id_comp, cc.id_comp_contact, c.id_drawer_def, IF(c.id_store_type=3, 2, c.id_store_type) AS `id_store_type`,
+        cg.id_wh_contact_normal, cg.id_wh_contact_sale
         FROM tb_ol_store_ret_list l
         INNER JOIN tb_ol_store_ret_det rd ON rd.id_ol_store_ret_det = l.id_ol_store_ret_det
         INNER JOIN tb_pl_sales_order_del_det dd ON dd.id_sales_order_det = rd.id_sales_order_det
         INNER JOIN tb_pl_sales_order_del d ON d.id_pl_sales_order_del = dd.id_pl_sales_order_del
         INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = d.id_store_contact_to
         INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp
+        INNER JOIN tb_m_comp_group cg ON cg.id_comp_group = c.id_comp_group
         INNER JOIN tb_lookup_store_type t ON t.id_store_type = c.id_store_type
         INNER JOIN tb_sales_order_det sod ON sod.id_sales_order_det = dd.id_sales_order_det
         INNER JOIN tb_sales_order so ON so.id_sales_order = sod.id_sales_order 
@@ -150,9 +152,9 @@
                     'cek wh
                     Dim id_wh_contact_to As String = ""
                     If data.Rows(i)("id_store_type").ToString = "1" Then
-                        id_wh_contact_to = id_wh_contact_normal
+                        id_wh_contact_to = data.Rows(i)("id_wh_contact_normal").ToString
                     Else
-                        id_wh_contact_to = id_wh_contact_sale
+                        id_wh_contact_to = data.Rows(i)("id_wh_contact_sale").ToString
                     End If
                     'Main tbale
                     Dim query_ins As String = "INSERT INTO tb_sales_return_order(id_store_contact_to, id_wh_contact_to, id_sales_order, sales_return_order_number, sales_return_order_date, sales_return_order_note, id_report_status, sales_return_order_est_date, id_order_type) "

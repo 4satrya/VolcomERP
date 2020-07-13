@@ -178,9 +178,9 @@ Partial Class FormSalesBranchDet
         Me.PanelControl8.Controls.Add(Me.PanelControl9)
         Me.PanelControl8.Controls.Add(Me.PanelControl10)
         Me.PanelControl8.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl8.Location = New System.Drawing.Point(0, 393)
+        Me.PanelControl8.Location = New System.Drawing.Point(0, 287)
         Me.PanelControl8.Name = "PanelControl8"
-        Me.PanelControl8.Size = New System.Drawing.Size(850, 78)
+        Me.PanelControl8.Size = New System.Drawing.Size(850, 184)
         Me.PanelControl8.TabIndex = 5
         '
         'PanelControl9
@@ -191,13 +191,13 @@ Partial Class FormSalesBranchDet
         Me.PanelControl9.Dock = System.Windows.Forms.DockStyle.Right
         Me.PanelControl9.Location = New System.Drawing.Point(446, 2)
         Me.PanelControl9.Name = "PanelControl9"
-        Me.PanelControl9.Size = New System.Drawing.Size(402, 74)
+        Me.PanelControl9.Size = New System.Drawing.Size(402, 180)
         Me.PanelControl9.TabIndex = 166
         '
         'TETotal
         '
         Me.TETotal.EditValue = ""
-        Me.TETotal.Location = New System.Drawing.Point(90, 9)
+        Me.TETotal.Location = New System.Drawing.Point(101, 9)
         Me.TETotal.Name = "TETotal"
         Me.TETotal.Properties.AppearanceReadOnly.Options.UseTextOptions = True
         Me.TETotal.Properties.AppearanceReadOnly.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
@@ -205,7 +205,7 @@ Partial Class FormSalesBranchDet
         Me.TETotal.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.TETotal.Properties.EditValueChangedDelay = 1
         Me.TETotal.Properties.ReadOnly = True
-        Me.TETotal.Size = New System.Drawing.Size(296, 20)
+        Me.TETotal.Size = New System.Drawing.Size(285, 20)
         Me.TETotal.TabIndex = 8906
         Me.TETotal.TabStop = False
         '
@@ -213,9 +213,9 @@ Partial Class FormSalesBranchDet
         '
         Me.LabelControl6.Location = New System.Drawing.Point(13, 11)
         Me.LabelControl6.Name = "LabelControl6"
-        Me.LabelControl6.Size = New System.Drawing.Size(71, 13)
+        Me.LabelControl6.Size = New System.Drawing.Size(52, 13)
         Me.LabelControl6.TabIndex = 8905
-        Me.LabelControl6.Text = "Total Received"
+        Me.LabelControl6.Text = "Sales Total"
         '
         'PanelControl10
         '
@@ -225,7 +225,7 @@ Partial Class FormSalesBranchDet
         Me.PanelControl10.Dock = System.Windows.Forms.DockStyle.Left
         Me.PanelControl10.Location = New System.Drawing.Point(2, 2)
         Me.PanelControl10.Name = "PanelControl10"
-        Me.PanelControl10.Size = New System.Drawing.Size(390, 74)
+        Me.PanelControl10.Size = New System.Drawing.Size(390, 180)
         Me.PanelControl10.TabIndex = 165
         '
         'LabelControl1
@@ -414,7 +414,7 @@ Partial Class FormSalesBranchDet
         Me.GCData.Location = New System.Drawing.Point(0, 113)
         Me.GCData.MainView = Me.GVData
         Me.GCData.Name = "GCData"
-        Me.GCData.Size = New System.Drawing.Size(850, 280)
+        Me.GCData.Size = New System.Drawing.Size(850, 174)
         Me.GCData.TabIndex = 7
         Me.GCData.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVData})
         '

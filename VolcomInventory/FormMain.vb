@@ -1811,6 +1811,9 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
         ElseIf formName = "FormMasterStore" Then
             FormMasterStoreDet.id_store = "-1"
             FormMasterStoreDet.ShowDialog()
+        ElseIf formName = "FormSalesBranch" Then
+            FormSalesBranchDet.action = "ins"
+            FormSalesBranchDet.ShowDialog()
         Else
             RPSubMenu.Visible = False
         End If
@@ -3003,6 +3006,10 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             ElseIf formName = "FormMasterStore" Then
                 FormMasterStoreDet.id_store = FormMasterStore.GVMasterStore.GetFocusedRowCellValue("id_store").ToString
                 FormMasterStoreDet.ShowDialog()
+            ElseIf formName = "FormSalesBranch" Then
+                FormSalesBranchDet.id = FormSalesBranch.GVData.GetFocusedRowCellValue("id_sales_branch").ToString
+                FormSalesBranchDet.action = "upd"
+                FormSalesBranchDet.ShowDialog()
             Else
                 RPSubMenu.Visible = False
             End If
@@ -8277,6 +8284,8 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             print(FormRefundOLStore.GCData, "Accepted Refund List")
         ElseIf formName = "FormPromoCollection" Then
             print(FormPromoCollection.GCData, "Promo Collection List")
+        ElseIf formName = "FormSalesBranch" Then
+            print(FormSalesBranch.GCData, "Volcom Store Sales")
         Else
             RPSubMenu.Visible = False
         End If
@@ -9172,6 +9181,9 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
         ElseIf formName = "FormMappingStore" Then
             FormMappingStore.Close()
             FormMappingStore.Dispose()
+        ElseIf formName = "FormSalesBranch" Then
+            FormSalesBranch.Close()
+            FormSalesBranch.Dispose()
         Else
             RPSubMenu.Visible = False
         End If
@@ -10101,6 +10113,8 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             FormMasterStore.form_load()
         ElseIf formName = "FormMappingStore" Then
             FormMappingStore.form_load()
+        ElseIf formName = "FormSalesBranch" Then
+            FormSalesBranch.viewData()
         End If
     End Sub
     'Switch

@@ -8240,6 +8240,12 @@
     <Compile Include="ReportShipInvoice.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ReportStockQCSummary.Designer.vb">
+      <DependentUpon>ReportStockQCSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportStockQCSummary.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ReportSummaryInvoice.Designer.vb">
       <DependentUpon>ReportSummaryInvoice.vb</DependentUpon>
     </Compile>
@@ -12835,6 +12841,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportShipInvoice.resx">
       <DependentUpon>ReportShipInvoice.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportStockQCSummary.resx">
+      <DependentUpon>ReportStockQCSummary.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportSummaryInvoice.resx">
       <DependentUpon>ReportSummaryInvoice.vb</DependentUpon>

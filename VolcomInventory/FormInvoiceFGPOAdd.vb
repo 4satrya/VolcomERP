@@ -124,6 +124,15 @@ INNER JOIN tb_prod_demand_design pdd ON pdd.`id_prod_demand_design`=po.`id_prod_
 INNER JOIN tb_m_design dsg ON dsg.`id_design`=pdd.`id_design`
 WHERE po.`id_report_status`='6'
 GROUP BY wo.`id_prod_order_wo`"
+        ElseIf SLEReportType.EditValue.ToString = "1" Then 'purchase sample
+            query = "SELECT sp.`id_sample_purc` AS id_report,0 AS id_prod_order,sp.`sample_purc_number` AS report_number,'Purchase Sample' AS description,c.comp_name AS info
+,sp.id_currency,sp.sample_purc_kurs AS kurs,sp.sample_purc_vat AS vat,SUM(spd.sample_purc_det_price*spd.sample_purc_det_qty) AS po_val
+FROM `tb_sample_purc` sp
+INNER JOIN tb_sample_purc_det spd ON spd.`id_sample_purc`=sp.`id_sample_purc`
+INNER JOIN tb_m_comp_contact cc ON cc.`id_comp_contact`=sp.`id_comp_contact_to`
+INNER JOIN tb_m_comp c ON c.`id_comp`=cc.`id_comp`
+WHERE sp.`id_report_status`='6'
+GROUP BY sp.`id_sample_purc`"
         End If
 
         viewSearchLookupQuery(SLEReport, query, "id_report", "report_number", "id_report")

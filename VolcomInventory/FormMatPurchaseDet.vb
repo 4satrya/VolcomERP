@@ -347,6 +347,7 @@ GROUP BY pl.`id_mat_purc_list`"
 
     Private Sub BSearchCompTo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BSearchCompTo.Click
         FormPopUpContact.id_pop_up = "14"
+        FormPopUpContact.is_must_active = "1"
         FormPopUpContact.id_cat = "1,8"
         FormPopUpContact.ShowDialog()
     End Sub

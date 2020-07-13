@@ -303,6 +303,7 @@
     End Sub
 
     Private Sub BtnMark_Click(sender As Object, e As EventArgs) Handles BtnMark.Click
+        'rmt = 166 or 156
         Cursor = Cursors.WaitCursor
         FormReportMark.report_mark_type = rmt
         FormReportMark.id_report = id

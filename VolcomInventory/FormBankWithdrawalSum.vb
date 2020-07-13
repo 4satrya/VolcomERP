@@ -191,6 +191,8 @@ VALUES('" & Date.Parse(DEPayment.EditValue.ToString).ToString("yyyy-MM-dd") & "'
                 q = "CALL gen_number('" & id_sum & "','251')"
                 execute_non_query(q, True, "", "", "", "")
 
+                submit_who_prepared("251", id_sum, id_user)
+
                 FormBankWithdrawal.view_sum()
                 Close()
             End If

@@ -706,7 +706,12 @@ Public Class FormProductionRetInSingle
         Dim query_check As String = "CALL view_limit_ret_in('" + id_ret_out + "','" + id_prod_order_ret_in + "', '1','" & id_prod_order_det_cek & "')"
 
         Dim data As DataTable = execute_query(query_check, -1, True, "", "", "", "")
-        allow_sum = Decimal.Parse(data.Rows(0)("qty"))
+        If data.Rows.Count > 0 Then
+            allow_sum = Decimal.Parse(data.Rows(0)("qty"))
+        Else
+            allow_sum = 0
+        End If
+
         If qty_pl > allow_sum Then
             cond_check = False
         End If

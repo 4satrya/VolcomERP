@@ -194,11 +194,11 @@
             cond = "AND d.is_combine=1 AND d.id_combine=" + id + " "
         End If
         Dim query As String = ""
-        If is_use_unique_code = "1" Then
-            query = del.queryDelConceptStore(cond, id_store)
-        Else
-            query = del.queryDelRegular(cond, id_store)
-        End If
+        'If is_use_unique_code = "1" Then
+        'query = del.queryDelConceptStore(cond, id_store)
+        'Else
+        query = del.queryDelRegular(cond, id_store)
+        'End If
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         'GCItemList.DataSource = data
 

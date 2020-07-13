@@ -261,7 +261,7 @@ WHERE tb_m_ovh_price.id_ovh = '" & id_ovhx & "' ORDER BY tb_m_ovh_price.id_ovh_p
             stopCustom("Please choose overhead with proper price.")
         ElseIf Not TEQty.EditValue > 0 Then
             stopCustom("Please insert qty of overhead.")
-        ElseIf Not GVOVHPrice.GetFocusedRowCellDisplayText("id_comp_cat").ToString = "1" And CEOVHMain.Checked = True Then
+        ElseIf Not GVOVHPrice.GetFocusedRowCellvalue("id_comp_cat").ToString = "1" And CEOVHMain.Checked = True Then
             stopCustom("Only production vendor can be used")
         Else
             Dim is_ovh_main As Integer

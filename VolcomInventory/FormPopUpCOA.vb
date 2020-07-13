@@ -157,6 +157,7 @@ Public Class FormPopUpCOA
                     FormAccountingJournalDet.GVJournalDet.SetRowCellValue(FormAccountingJournalDet.GVJournalDet.FocusedRowHandle, "id_acc", TreeList1.FocusedNode("id_acc").ToString())
                     FormAccountingJournalDet.GVJournalDet.SetRowCellValue(FormAccountingJournalDet.GVJournalDet.FocusedRowHandle, "acc_name", TreeList1.FocusedNode("acc_name").ToString())
                     FormAccountingJournalDet.GVJournalDet.SetRowCellValue(FormAccountingJournalDet.GVJournalDet.FocusedRowHandle, "note", TreeList1.FocusedNode("acc_description").ToString())
+                    FormAccountingJournalDet.GVJournalDet.SetRowCellValue(FormAccountingJournalDet.GVJournalDet.FocusedRowHandle, "report_mark_type", "36")
                     FormAccountingJournalDet.GVJournalDet.SetRowCellValue(FormAccountingJournalDet.GVJournalDet.FocusedRowHandle, "debit", 0)
                     FormAccountingJournalDet.GVJournalDet.SetRowCellValue(FormAccountingJournalDet.GVJournalDet.FocusedRowHandle, "credit", 0)
                     FormAccountingJournalDet.GVJournalDet.SetRowCellValue(FormAccountingJournalDet.GVJournalDet.FocusedRowHandle, "id_status_open", 1)
@@ -184,6 +185,7 @@ Public Class FormPopUpCOA
                     newRow("id_acc") = TreeList1.FocusedNode("id_acc").ToString()
                     newRow("acc_name") = TreeList1.FocusedNode("acc_name").ToString()
                     newRow("note") = TreeList1.FocusedNode("acc_description").ToString()
+                    newRow("debit") = "36"
                     newRow("debit") = 0
                     newRow("credit") = 0
                     newRow("id_status_open") = 1

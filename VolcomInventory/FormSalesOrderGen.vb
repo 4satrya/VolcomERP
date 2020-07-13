@@ -268,12 +268,18 @@
     End Sub
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles BtnSave.Click
+        Dim sales_order_gen_reff As String = addSlashes(TxtReff.Text.ToString)
+        Dim sales_order_gen_note As String = addSlashes(MENote.Text.ToString)
+        Dim id_so_status As String = LEStatusSO.EditValue.ToString
+
+        'check multiple number
+        Dim is_multiple As String = execute_query("SELECT IFNULL((SELECT sales_order_gen_reff FROM tb_sales_order_gen WHERE sales_order_gen_reff = '" + sales_order_gen_reff + "' AND id_report_status <> 5), '-1')", 0, True, "", "", "", "")
+
         If TxtReff.Text.ToString = "" Then
             stopCustom("Reference number can't blank !")
+        ElseIf Not is_multiple = "-1" Then
+            stopCustom("Reference number already used !")
         Else
-            Dim sales_order_gen_reff As String = addSlashes(TxtReff.Text.ToString)
-            Dim sales_order_gen_note As String = addSlashes(MENote.Text.ToString)
-            Dim id_so_status As String = LEStatusSO.EditValue.ToString
             If action = "ins" Then
                 Cursor = Cursors.WaitCursor
                 'query main

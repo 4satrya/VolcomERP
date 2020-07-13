@@ -11,6 +11,9 @@
         Dim dt As DateTime = getTimeDB()
         DEDate.EditValue = dt
 
+        DEStockFrom.EditValue = Now
+        DEStockTo.EditValue = Now
+
         viewVendor()
         viewSeason()
     End Sub
@@ -224,5 +227,45 @@
 
     Private Sub BtnBrowsePOSC_Click(sender As Object, e As EventArgs) Handles BtnBrowsePOSC.Click
         FormStockQCBrowsePO.ShowDialog()
+    End Sub
+
+    Private Sub SBStockView_Click(sender As Object, e As EventArgs) Handles SBStockView.Click
+        Cursor = Cursors.WaitCursor
+
+        Dim d_from As String = Date.Parse(DEStockFrom.EditValue.ToString).ToString("yyyy-MM-dd")
+        Dim d_to As String = Date.Parse(DEStockTo.EditValue.ToString).ToString("yyyy-MM-dd")
+
+        Dim data As DataTable = execute_query("CALL view_stock_summary_qc('" + d_from + "', '" + d_to + "')", -1, True, "", "", "", "")
+
+        GCStockReport.DataSource = data
+
+        GVStockReport.BestFitColumns()
+
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub SBPrintStock_Click(sender As Object, e As EventArgs) Handles SBPrintStock.Click
+        'modify period
+        Dim period_from As String = ""
+        Dim period_until As String = ""
+        period_from = Date.Parse(DEStockFrom.EditValue.ToString).ToString("dd MMM yyyy")
+        period_until = Date.Parse(DEStockTo.EditValue.ToString).ToString("dd MMM yyyy")
+
+        '... 
+        ' creating and saving the view's layout to a new memory stream 
+        Dim str As System.IO.Stream
+        str = New System.IO.MemoryStream()
+        GVStockReport.SaveLayoutToStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+        str.Seek(0, System.IO.SeekOrigin.Begin)
+        ReportStockQCSummary.dt = GCStockReport.DataSource
+        Dim Report As New ReportStockQCSummary()
+        Report.LabelPeriod.Text = period_from + " / " + period_until
+        Report.GVStockReport.RestoreLayoutFromStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+        str.Seek(0, System.IO.SeekOrigin.Begin)
+        ReportStyleGridview(Report.GVStockReport)
+
+        ' Show the report's preview. 
+        Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
+        Tool.ShowPreview()
     End Sub
 End Class

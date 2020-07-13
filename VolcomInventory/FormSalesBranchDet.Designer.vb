@@ -40,17 +40,19 @@ Partial Class FormSalesBranchDet
         Me.LabelControl21 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
         Me.DESalesDate = New DevExpress.XtraEditors.DateEdit()
-        Me.DEDateCreated = New DevExpress.XtraEditors.DateEdit()
+        Me.DECreatedDate = New DevExpress.XtraEditors.DateEdit()
         Me.LabelControl7 = New DevExpress.XtraEditors.LabelControl()
         Me.LEReportStatus = New DevExpress.XtraEditors.LookUpEdit()
         Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
         Me.SLEUnit = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.GridColumn13 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn14 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnid_coa_tag = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumncoa_tag = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.TEPayNumber = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
+        Me.GCData = New DevExpress.XtraGrid.GridControl()
+        Me.GVData = New DevExpress.XtraGrid.Views.Grid.GridView()
         CType(Me.PanelControl7, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl7.SuspendLayout()
         CType(Me.PanelControlPreview, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -70,14 +72,16 @@ Partial Class FormSalesBranchDet
         Me.PanelControl6.SuspendLayout()
         CType(Me.DESalesDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DESalesDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DEDateCreated.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DEDateCreated.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DECreatedDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DECreatedDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LEReportStatus.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl3.SuspendLayout()
         CType(Me.SLEUnit.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEPayNumber.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GCData, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVData, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl7
@@ -174,9 +178,9 @@ Partial Class FormSalesBranchDet
         Me.PanelControl8.Controls.Add(Me.PanelControl9)
         Me.PanelControl8.Controls.Add(Me.PanelControl10)
         Me.PanelControl8.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl8.Location = New System.Drawing.Point(0, 375)
+        Me.PanelControl8.Location = New System.Drawing.Point(0, 393)
         Me.PanelControl8.Name = "PanelControl8"
-        Me.PanelControl8.Size = New System.Drawing.Size(850, 96)
+        Me.PanelControl8.Size = New System.Drawing.Size(850, 78)
         Me.PanelControl8.TabIndex = 5
         '
         'PanelControl9
@@ -187,7 +191,7 @@ Partial Class FormSalesBranchDet
         Me.PanelControl9.Dock = System.Windows.Forms.DockStyle.Right
         Me.PanelControl9.Location = New System.Drawing.Point(446, 2)
         Me.PanelControl9.Name = "PanelControl9"
-        Me.PanelControl9.Size = New System.Drawing.Size(402, 92)
+        Me.PanelControl9.Size = New System.Drawing.Size(402, 74)
         Me.PanelControl9.TabIndex = 166
         '
         'TETotal
@@ -221,7 +225,7 @@ Partial Class FormSalesBranchDet
         Me.PanelControl10.Dock = System.Windows.Forms.DockStyle.Left
         Me.PanelControl10.Location = New System.Drawing.Point(2, 2)
         Me.PanelControl10.Name = "PanelControl10"
-        Me.PanelControl10.Size = New System.Drawing.Size(390, 92)
+        Me.PanelControl10.Size = New System.Drawing.Size(390, 74)
         Me.PanelControl10.TabIndex = 165
         '
         'LabelControl1
@@ -238,7 +242,7 @@ Partial Class FormSalesBranchDet
         Me.MENote.Location = New System.Drawing.Point(55, 10)
         Me.MENote.Name = "MENote"
         Me.MENote.Properties.MaxLength = 199
-        Me.MENote.Size = New System.Drawing.Size(320, 68)
+        Me.MENote.Size = New System.Drawing.Size(320, 48)
         Me.MENote.TabIndex = 0
         '
         'PanelControl2
@@ -248,14 +252,14 @@ Partial Class FormSalesBranchDet
         Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl2.Location = New System.Drawing.Point(0, 0)
         Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(850, 102)
+        Me.PanelControl2.Size = New System.Drawing.Size(850, 113)
         Me.PanelControl2.TabIndex = 6
         '
         'PanelControl6
         '
         Me.PanelControl6.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
         Me.PanelControl6.Controls.Add(Me.LabelControl21)
-        Me.PanelControl6.Controls.Add(Me.DEDateCreated)
+        Me.PanelControl6.Controls.Add(Me.DECreatedDate)
         Me.PanelControl6.Controls.Add(Me.TEPayNumber)
         Me.PanelControl6.Controls.Add(Me.LabelControl7)
         Me.PanelControl6.Controls.Add(Me.LabelControl5)
@@ -263,7 +267,7 @@ Partial Class FormSalesBranchDet
         Me.PanelControl6.Dock = System.Windows.Forms.DockStyle.Right
         Me.PanelControl6.Location = New System.Drawing.Point(547, 2)
         Me.PanelControl6.Name = "PanelControl6"
-        Me.PanelControl6.Size = New System.Drawing.Size(301, 98)
+        Me.PanelControl6.Size = New System.Drawing.Size(301, 109)
         Me.PanelControl6.TabIndex = 166
         '
         'LabelControl21
@@ -296,18 +300,18 @@ Partial Class FormSalesBranchDet
         Me.DESalesDate.Size = New System.Drawing.Size(264, 20)
         Me.DESalesDate.TabIndex = 165
         '
-        'DEDateCreated
+        'DECreatedDate
         '
-        Me.DEDateCreated.EditValue = Nothing
-        Me.DEDateCreated.Location = New System.Drawing.Point(101, 38)
-        Me.DEDateCreated.Name = "DEDateCreated"
-        Me.DEDateCreated.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.DEDateCreated.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.DEDateCreated.Properties.DisplayFormat.FormatString = "dd MMMM yyyy"
-        Me.DEDateCreated.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.DEDateCreated.Properties.ReadOnly = True
-        Me.DEDateCreated.Size = New System.Drawing.Size(189, 20)
-        Me.DEDateCreated.TabIndex = 164
+        Me.DECreatedDate.EditValue = Nothing
+        Me.DECreatedDate.Location = New System.Drawing.Point(101, 38)
+        Me.DECreatedDate.Name = "DECreatedDate"
+        Me.DECreatedDate.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DECreatedDate.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DECreatedDate.Properties.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.DECreatedDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DECreatedDate.Properties.ReadOnly = True
+        Me.DECreatedDate.Size = New System.Drawing.Size(189, 20)
+        Me.DECreatedDate.TabIndex = 164
         '
         'LabelControl7
         '
@@ -342,7 +346,7 @@ Partial Class FormSalesBranchDet
         Me.PanelControl3.Dock = System.Windows.Forms.DockStyle.Left
         Me.PanelControl3.Location = New System.Drawing.Point(2, 2)
         Me.PanelControl3.Name = "PanelControl3"
-        Me.PanelControl3.Size = New System.Drawing.Size(375, 98)
+        Me.PanelControl3.Size = New System.Drawing.Size(375, 109)
         Me.PanelControl3.TabIndex = 165
         '
         'SLEUnit
@@ -350,32 +354,31 @@ Partial Class FormSalesBranchDet
         Me.SLEUnit.Location = New System.Drawing.Point(93, 12)
         Me.SLEUnit.Name = "SLEUnit"
         Me.SLEUnit.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.SLEUnit.Properties.ReadOnly = True
         Me.SLEUnit.Properties.View = Me.GridView2
         Me.SLEUnit.Size = New System.Drawing.Size(264, 20)
         Me.SLEUnit.TabIndex = 8914
         '
         'GridView2
         '
-        Me.GridView2.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn13, Me.GridColumn14})
+        Me.GridView2.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnid_coa_tag, Me.GridColumncoa_tag})
         Me.GridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
         Me.GridView2.Name = "GridView2"
         Me.GridView2.OptionsSelection.EnableAppearanceFocusedCell = False
         Me.GridView2.OptionsView.ShowGroupPanel = False
         '
-        'GridColumn13
+        'GridColumnid_coa_tag
         '
-        Me.GridColumn13.Caption = "ID Company Contact"
-        Me.GridColumn13.FieldName = "id_comp_contact"
-        Me.GridColumn13.Name = "GridColumn13"
+        Me.GridColumnid_coa_tag.Caption = "id_coa_tag"
+        Me.GridColumnid_coa_tag.FieldName = "id_coa_tag"
+        Me.GridColumnid_coa_tag.Name = "GridColumnid_coa_tag"
         '
-        'GridColumn14
+        'GridColumncoa_tag
         '
-        Me.GridColumn14.Caption = "Vendor"
-        Me.GridColumn14.FieldName = "comp_name"
-        Me.GridColumn14.Name = "GridColumn14"
-        Me.GridColumn14.Visible = True
-        Me.GridColumn14.VisibleIndex = 0
+        Me.GridColumncoa_tag.Caption = "Unit"
+        Me.GridColumncoa_tag.FieldName = "coa_tag"
+        Me.GridColumncoa_tag.Name = "GridColumncoa_tag"
+        Me.GridColumncoa_tag.Visible = True
+        Me.GridColumncoa_tag.VisibleIndex = 0
         '
         'TEPayNumber
         '
@@ -405,11 +408,32 @@ Partial Class FormSalesBranchDet
         Me.LabelControl5.TabIndex = 162
         Me.LabelControl5.Text = "Number"
         '
+        'GCData
+        '
+        Me.GCData.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCData.Location = New System.Drawing.Point(0, 113)
+        Me.GCData.MainView = Me.GVData
+        Me.GCData.Name = "GCData"
+        Me.GCData.Size = New System.Drawing.Size(850, 280)
+        Me.GCData.TabIndex = 7
+        Me.GCData.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVData})
+        '
+        'GVData
+        '
+        Me.GVData.GridControl = Me.GCData
+        Me.GVData.Name = "GVData"
+        Me.GVData.OptionsBehavior.AllowPixelScrolling = DevExpress.Utils.DefaultBoolean.[True]
+        Me.GVData.OptionsBehavior.AutoExpandAllGroups = True
+        Me.GVData.OptionsDetail.EnableMasterViewMode = False
+        Me.GVData.OptionsView.ShowFooter = True
+        Me.GVData.OptionsView.ShowGroupPanel = False
+        '
         'FormSalesBranchDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(850, 511)
+        Me.Controls.Add(Me.GCData)
         Me.Controls.Add(Me.PanelControl2)
         Me.Controls.Add(Me.PanelControl8)
         Me.Controls.Add(Me.PanelControl7)
@@ -440,8 +464,8 @@ Partial Class FormSalesBranchDet
         Me.PanelControl6.PerformLayout()
         CType(Me.DESalesDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DESalesDate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DEDateCreated.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DEDateCreated.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DECreatedDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DECreatedDate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LEReportStatus.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl3.ResumeLayout(False)
@@ -449,6 +473,8 @@ Partial Class FormSalesBranchDet
         CType(Me.SLEUnit.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEPayNumber.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GCData, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVData, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -470,7 +496,7 @@ Partial Class FormSalesBranchDet
     Friend WithEvents PanelControl2 As DevExpress.XtraEditors.PanelControl
     Friend WithEvents PanelControl6 As DevExpress.XtraEditors.PanelControl
     Friend WithEvents LabelControl21 As DevExpress.XtraEditors.LabelControl
-    Friend WithEvents DEDateCreated As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents DECreatedDate As DevExpress.XtraEditors.DateEdit
     Friend WithEvents TEPayNumber As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelControl7 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LabelControl5 As DevExpress.XtraEditors.LabelControl
@@ -478,9 +504,11 @@ Partial Class FormSalesBranchDet
     Friend WithEvents PanelControl3 As DevExpress.XtraEditors.PanelControl
     Friend WithEvents SLEUnit As DevExpress.XtraEditors.SearchLookUpEdit
     Friend WithEvents GridView2 As DevExpress.XtraGrid.Views.Grid.GridView
-    Friend WithEvents GridColumn13 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn14 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnid_coa_tag As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumncoa_tag As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents LabelControl3 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents DESalesDate As DevExpress.XtraEditors.DateEdit
     Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents GCData As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVData As DevExpress.XtraGrid.Views.Grid.GridView
 End Class

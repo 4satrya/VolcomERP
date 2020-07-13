@@ -17,12 +17,18 @@
     End Sub
 
     Sub viewCoaTag()
-        Dim query As String = "SELECT ct.id_coa_tag, ct.tag_code, ct.tag_description 
+        Dim query As String = "SELECT ct.id_coa_tag, ct.tag_code, ct.tag_description, CONCAT(ct.tag_code,' - ', ct.tag_description)  AS `coa_tag`
         FROM tb_coa_tag ct WHERE ct.id_coa_tag>1 ORDER BY ct.id_coa_tag ASC "
-        viewSearchLookupQuery()
+        viewSearchLookupQuery(SLEUnit, query, "id_coa_tag", "tag_description", "id_coa_tag")
     End Sub
 
     Sub actionLoad()
+        If action = "ins" Then
+            Dim now_dt As DateTime = getTimeDB()
+            DESalesDate.EditValue = now_dt
+            DECreatedDate.EditValue = now_dt
+        Else
 
+        End If
     End Sub
 End Class

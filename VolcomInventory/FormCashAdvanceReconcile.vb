@@ -645,25 +645,37 @@
 
     Private Sub SBCancel_Click(sender As Object, e As EventArgs) Handles SBCancel.Click
         If XTPCancel.PageVisible Then
-            Dim confirm As DialogResult
+            Dim is_continue As Boolean = True
 
-            confirm = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+            For i = 0 To GVCancel.RowCount - 1
+                If GVCancel.GetRowCellValue(i, "id_acc_to").ToString = "" Then
+                    is_continue = False
+                End If
+            Next
 
-            If confirm = Windows.Forms.DialogResult.Yes Then
-                Dim query As String = "INSERT INTO tb_cash_advance_cancel (id_cash_advance, id_report_status, created_at) VALUES (" + id_ca + ", 1, NOW()); SELECT LAST_INSERT_ID();"
+            If is_continue Then
+                Dim confirm As DialogResult
 
-                Dim id_cl As String = execute_query(query, 0, True, "", "", "", "")
+                confirm = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
 
-                'detail
-                For i = 0 To GVCancel.RowCount - 1
-                    query = "INSERT INTO tb_cash_advance_cancel_det (id_cash_advance_cancel, id_cash_advance_report, id_acc_to, description_to, value) VALUES (" + id_cl + ", " + GVCancel.GetRowCellValue(i, "id_cash_advance_report").ToString + ", " + GVCancel.GetRowCellValue(i, "id_acc_to").ToString + ", '" + GVCancel.GetRowCellValue(i, "description_to").ToString + "', " + decimalSQL(GVCancel.GetRowCellValue(i, "value").ToString) + ")"
+                If confirm = Windows.Forms.DialogResult.Yes Then
+                    Dim query As String = "INSERT INTO tb_cash_advance_cancel (id_cash_advance, id_report_status, created_at) VALUES (" + id_ca + ", 1, NOW()); SELECT LAST_INSERT_ID();"
 
-                    execute_non_query(query, True, "", "", "", "")
-                Next
+                    Dim id_cl As String = execute_query(query, 0, True, "", "", "", "")
 
-                submit_who_prepared("242", id_ca, id_user)
+                    'detail
+                    For i = 0 To GVCancel.RowCount - 1
+                        query = "INSERT INTO tb_cash_advance_cancel_det (id_cash_advance_cancel, id_cash_advance_report, id_acc_to, description_to, value) VALUES (" + id_cl + ", " + GVCancel.GetRowCellValue(i, "id_cash_advance_report").ToString + ", " + GVCancel.GetRowCellValue(i, "id_acc_to").ToString + ", '" + GVCancel.GetRowCellValue(i, "description_to").ToString + "', " + decimalSQL(GVCancel.GetRowCellValue(i, "value").ToString) + ")"
 
-                Close()
+                        execute_non_query(query, True, "", "", "", "")
+                    Next
+
+                    submit_who_prepared("242", id_ca, id_user)
+
+                    Close()
+                End If
+            Else
+                stopCustom("Please select account to.")
             End If
         Else
             XTPCancel.PageVisible = True
@@ -683,20 +695,20 @@
     End Sub
 
     Private Sub RSLECOABCFROM_EditValueChanged(sender As Object, e As EventArgs) Handles RSLECOABCFROM.EditValueChanged
-        'Try
-        '    Dim sle As DevExpress.XtraEditors.SearchLookUpEdit = CType(sender, DevExpress.XtraEditors.SearchLookUpEdit)
-        '    GVCancel.SetFocusedRowCellValue("description_from", sle.Properties.View.GetFocusedRowCellValue("acc_description"))
-        '    GVCancel.SetFocusedRowCellValue("acc_description_from", sle.Properties.View.GetFocusedRowCellValue("acc_description"))
-        'Catch ex As Exception
-        'End Try
+        Try
+            Dim sle As DevExpress.XtraEditors.SearchLookUpEdit = CType(sender, DevExpress.XtraEditors.SearchLookUpEdit)
+            GVCancel.SetFocusedRowCellValue("description_from", sle.Properties.View.GetFocusedRowCellValue("acc_description"))
+            GVCancel.SetFocusedRowCellValue("acc_description_from", sle.Properties.View.GetFocusedRowCellValue("acc_description"))
+        Catch ex As Exception
+        End Try
     End Sub
 
     Private Sub RSLECOABCTO_EditValueChanged(sender As Object, e As EventArgs) Handles RSLECOABCTO.EditValueChanged
-        'Try
-        '    Dim sle As DevExpress.XtraEditors.SearchLookUpEdit = CType(sender, DevExpress.XtraEditors.SearchLookUpEdit)
-        '    GVCancel.SetFocusedRowCellValue("description_to", sle.Properties.View.GetFocusedRowCellValue("acc_description"))
-        '    GVCancel.SetFocusedRowCellValue("acc_description_to", sle.Properties.View.GetFocusedRowCellValue("acc_description"))
-        'Catch ex As Exception
-        'End Try
+        Try
+            Dim sle As DevExpress.XtraEditors.SearchLookUpEdit = CType(sender, DevExpress.XtraEditors.SearchLookUpEdit)
+            GVCancel.SetFocusedRowCellValue("description_to", sle.Properties.View.GetFocusedRowCellValue("acc_description"))
+            GVCancel.SetFocusedRowCellValue("acc_description_to", sle.Properties.View.GetFocusedRowCellValue("acc_description"))
+        Catch ex As Exception
+        End Try
     End Sub
 End Class

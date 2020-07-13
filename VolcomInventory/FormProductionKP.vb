@@ -211,12 +211,16 @@ WHERE id_prod_order_kp='" & SLERevision.EditValue.ToString & "'"
         Dim check As String = "SELECT * FROM tb_prod_order_kp WHERE number='" & addSlashes(TEKPNumber.Text) & "' ORDER BY id_prod_order_kp DESC"
         Dim data_check As DataTable = execute_query(check, -1, True, "", "", "", "")
         If id_kp = data_check.Rows(0)("id_prod_order_kp").ToString Then
-            Dim query As String = "INSERT INTO tb_prod_order_kp(`id_prod_order_kp_reff`,`number`,`revision`,`id_comp_contact`,`date_created`,`created_by`,`id_user_purc_mngr`,`id_user_asst_prod_mngr`,`is_purc_mat`)
+            'check attachment
+            Dim qc As String = "SELECT * FROM `tb_doc` WHERE id_report='" & id_kp & "' AND report_mark_type='253'"
+            Dim dtc As DataTable = execute_query(qc, -1, True, "", "", "", "")
+            If dtc.Rows.Count > 0 Then
+                Dim query As String = "INSERT INTO tb_prod_order_kp(`id_prod_order_kp_reff`,`number`,`revision`,`id_comp_contact`,`date_created`,`created_by`,`id_user_purc_mngr`,`id_user_asst_prod_mngr`,`is_purc_mat`)
 SELECT `id_prod_order_kp_reff`,`number`,(SELECT COUNT(id_prod_order_kp) FROM tb_prod_order_kp WHERE id_prod_order_kp_reff=(SELECT id_prod_order_kp_reff FROM tb_prod_order_kp WHERE id_prod_order_kp='" & id_kp & "')),`id_comp_contact`,`date_created`,`created_by`,`id_user_purc_mngr`,`id_user_asst_prod_mngr`,`is_purc_mat` FROM tb_prod_order_kp WHERE id_prod_order_kp='" & id_kp & "'; SELECT LAST_INSERT_ID(); "
-            Dim new_id_kp As String = execute_query(query, 0, True, "", "", "", "")
-            'det
-            'loop
-            Dim q_det As String = "SELECT kpd.`revision`,kpd.`id_prod_order`,kpd.`id_purc_order`,IF(ISNULL(kpd.id_prod_order),IFNULL(kopurc.lead_time_prod,kpd.lead_time_prod),IFNULL(koprod.lead_time_prod,kpd.lead_time_prod)) AS lead_time_prod,kpd.`sample_proto_2`
+                Dim new_id_kp As String = execute_query(query, 0, True, "", "", "", "")
+                'det
+                'loop
+                Dim q_det As String = "SELECT kpd.`revision`,kpd.`id_prod_order`,kpd.`id_purc_order`,IF(ISNULL(kpd.id_prod_order),IFNULL(kopurc.lead_time_prod,kpd.lead_time_prod),IFNULL(koprod.lead_time_prod,kpd.lead_time_prod)) AS lead_time_prod,kpd.`sample_proto_2`
 FROM tb_prod_order_kp_det kpd
 LEFT JOIN (
 	SELECT lead_time_prod,id_prod_order FROM (
@@ -231,24 +235,27 @@ LEFT JOIN (
 	)ko GROUP BY ko.id_purc_order
 )kopurc ON kopurc.id_purc_order=kpd.id_purc_order
 WHERE id_prod_order_kp='" & id_kp & "'"
-            Dim data_det As DataTable = execute_query(q_det, -1, True, "", "", "", "")
-            query = ""
-            For i As Integer = 0 To data_det.Rows.Count - 1
-                If Not i = 0 Then
-                    query += ","
-                End If
-                query += "('" & new_id_kp & "','" & data_det.Rows(i)("revision").ToString & "','" & data_det.Rows(i)("id_prod_order").ToString & "','" & data_det.Rows(i)("id_purc_order").ToString & "','" & data_det.Rows(i)("lead_time_prod").ToString & "','" & Date.Parse(data_det.Rows(i)("sample_proto_2").ToString).ToString("yyyy-MM-dd") & "')"
-            Next
+                Dim data_det As DataTable = execute_query(q_det, -1, True, "", "", "", "")
+                query = ""
+                For i As Integer = 0 To data_det.Rows.Count - 1
+                    If Not i = 0 Then
+                        query += ","
+                    End If
+                    query += "('" & new_id_kp & "','" & data_det.Rows(i)("revision").ToString & "','" & data_det.Rows(i)("id_prod_order").ToString & "','" & data_det.Rows(i)("id_purc_order").ToString & "','" & data_det.Rows(i)("lead_time_prod").ToString & "','" & Date.Parse(data_det.Rows(i)("sample_proto_2").ToString).ToString("yyyy-MM-dd") & "')"
+                Next
 
-            If Not query = "" Then
-                query = "INSERT INTO tb_prod_order_kp_det(`id_prod_order_kp`,`revision`,`id_prod_order`,`id_purc_order`,`lead_time_prod`,`sample_proto_2`)
+                If Not query = "" Then
+                    query = "INSERT INTO tb_prod_order_kp_det(`id_prod_order_kp`,`revision`,`id_prod_order`,`id_purc_order`,`lead_time_prod`,`sample_proto_2`)
 VALUES" + query
-                execute_non_query(query, True, "", "", "", "")
+                    execute_non_query(query, True, "", "", "", "")
+                End If
+                '
+                infoCustom("kp revised")
+                id_kp = new_id_kp
+                action_load()
+            Else
+                warningCustom("Please attach SKP file first")
             End If
-            '
-            infoCustom("kp revised")
-            id_kp = new_id_kp
-            action_load()
         Else
             warningCustom("This is not the latest revision")
         End If
@@ -258,5 +265,13 @@ VALUES" + query
         SLERevision.Refresh()
         id_kp = SLERevision.EditValue.ToString
         load_head()
+    End Sub
+
+    Private Sub BAttachment_Click(sender As Object, e As EventArgs) Handles BAttachment.Click
+        Cursor = Cursors.WaitCursor
+        FormDocumentUpload.id_report = id_kp
+        FormDocumentUpload.report_mark_type = "253"
+        FormDocumentUpload.ShowDialog()
+        Cursor = Cursors.Default
     End Sub
 End Class

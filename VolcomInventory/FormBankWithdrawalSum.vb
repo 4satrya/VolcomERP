@@ -3,6 +3,7 @@
     Public id_report_status As String = "-1"
     Public is_view As String = "-1"
     Private Sub FormBankWithdrawalSum_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        TETotal.EditValue = 0.0
         load_type()
         DEDateCreated.EditValue = Now
         DEPayment.EditValue = Now
@@ -86,6 +87,8 @@ INNER JOIN tb_pn_summary_det pnsd ON pnsd.`id_pn`=pyd.`id_pn` AND pnsd.`id_pn_su
         Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
         GCList.DataSource = dt
         GVList.BestFitColumns()
+
+        TETotal.EditValue = GVList.Columns("value").SummaryItem.SummaryValue
     End Sub
 
     Sub load_type()
@@ -133,6 +136,7 @@ WHERE py.`id_report_status`!='5' AND py.`id_report_status`!='6' AND  DATE(py.`da
             Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
             GCList.DataSource = dt
             GVList.BestFitColumns()
+            TETotal.EditValue = GVList.Columns("value").SummaryItem.SummaryValue
             DEPayment.Enabled = False
             SLEType.ReadOnly = True
             '
@@ -160,6 +164,7 @@ WHERE py.id_pn='-1'"
         Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
         GCList.DataSource = dt
         GVList.BestFitColumns()
+        TETotal.EditValue = GVList.Columns("value").SummaryItem.SummaryValue
         DEPayment.Enabled = True
         SLEType.ReadOnly = False
         '

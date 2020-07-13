@@ -90,6 +90,7 @@ Partial Class FormProductionKP
         Me.GridColumnProto2Sample = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RIDESampleProto2 = New DevExpress.XtraEditors.Repository.RepositoryItemDateEdit()
         Me.RIPictureEdit = New DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit()
+        Me.BAttachment = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -416,6 +417,7 @@ Partial Class FormProductionKP
         '
         'PanelControl2
         '
+        Me.PanelControl2.Controls.Add(Me.BAttachment)
         Me.PanelControl2.Controls.Add(Me.BPrintKP)
         Me.PanelControl2.Controls.Add(Me.BUpdate)
         Me.PanelControl2.Controls.Add(Me.BLock)
@@ -822,6 +824,17 @@ Partial Class FormProductionKP
         Me.RIPictureEdit.Name = "RIPictureEdit"
         Me.RIPictureEdit.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch
         '
+        'BAttachment
+        '
+        Me.BAttachment.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BAttachment.ImageIndex = 16
+        Me.BAttachment.ImageList = Me.ImageCollection
+        Me.BAttachment.Location = New System.Drawing.Point(475, 2)
+        Me.BAttachment.Name = "BAttachment"
+        Me.BAttachment.Size = New System.Drawing.Size(96, 37)
+        Me.BAttachment.TabIndex = 8913
+        Me.BAttachment.Text = "Attachment"
+        '
         'FormProductionKP
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -940,4 +953,5 @@ Partial Class FormProductionKP
     Friend WithEvents RIPictureEdit As DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit
     Friend WithEvents GridColumnProto2Sample As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RIDESampleProto2 As DevExpress.XtraEditors.Repository.RepositoryItemDateEdit
+    Friend WithEvents BAttachment As DevExpress.XtraEditors.SimpleButton
 End Class

@@ -107,6 +107,7 @@ Partial Class FormProductionKO
         Me.LabelControl19 = New DevExpress.XtraEditors.LabelControl()
         Me.PCDel = New DevExpress.XtraEditors.PanelControl()
         Me.Bdel = New DevExpress.XtraEditors.SimpleButton()
+        Me.BAttachment = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -498,6 +499,7 @@ Partial Class FormProductionKO
         '
         'PanelControl2
         '
+        Me.PanelControl2.Controls.Add(Me.BAttachment)
         Me.PanelControl2.Controls.Add(Me.BPrintKO)
         Me.PanelControl2.Controls.Add(Me.BUpdate)
         Me.PanelControl2.Controls.Add(Me.BLock)
@@ -1041,6 +1043,17 @@ Partial Class FormProductionKO
         Me.Bdel.TabIndex = 17
         Me.Bdel.Text = "Delete"
         '
+        'BAttachment
+        '
+        Me.BAttachment.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BAttachment.ImageIndex = 16
+        Me.BAttachment.ImageList = Me.ImageCollection
+        Me.BAttachment.Location = New System.Drawing.Point(475, 2)
+        Me.BAttachment.Name = "BAttachment"
+        Me.BAttachment.Size = New System.Drawing.Size(96, 37)
+        Me.BAttachment.TabIndex = 8912
+        Me.BAttachment.Text = "Attachment"
+        '
         'FormProductionKO
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1188,4 +1201,5 @@ Partial Class FormProductionKO
     Friend WithEvents GridColumn22 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents PCDel As DevExpress.XtraEditors.PanelControl
     Friend WithEvents Bdel As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BAttachment As DevExpress.XtraEditors.SimpleButton
 End Class

@@ -4,7 +4,8 @@
         Dim q As String = "SELECT logpn.id_pn_log_date_payment,logpn.log_date,logpn.from_date,logpn.to_date,emp.employee_name
 FROM tb_pn_log_date_payment logpn
 INNER JOIN tb_m_user usr ON usr.id_user=logpn.log_by
-INNER JOIN tb_m_employee emp ON emp.id_employee=usr.id_employee"
+INNER JOIN tb_m_employee emp ON emp.id_employee=usr.id_employee
+WHERE logpn.id_pn='" & id_pn & "'"
         Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
         GCLog.DataSource = dt
         GVLog.BestFitColumns()

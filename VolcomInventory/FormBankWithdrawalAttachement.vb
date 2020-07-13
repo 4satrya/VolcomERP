@@ -105,7 +105,7 @@
 
                 execute_non_query(query, True, "", "", "", "")
 
-                FormBankWithdrawal.buttonView_click()
+                'FormBankWithdrawal.buttonView_click()
 
                 Close()
             End If

@@ -168,6 +168,7 @@
                 newRow("note") = TxtDescription.Text
                 newRow("value") = TxtAmount.EditValue
                 newRow("id_report") = "0"
+                newRow("number") = TxtReff.Text
                 newRow("report_mark_type") = "0"
                 TryCast(FormSalesBranchDet.GCData.DataSource, DataTable).Rows.Add(newRow)
                 FormSalesBranchDet.GCData.RefreshDataSource()
@@ -187,6 +188,7 @@
                 FormSalesBranchDet.GVData.SetFocusedRowCellValue("note", TxtDescription.Text)
                 FormSalesBranchDet.GVData.SetFocusedRowCellValue("value", TxtAmount.EditValue)
                 FormSalesBranchDet.GVData.SetFocusedRowCellValue("id_report", "0")
+                FormSalesBranchDet.GVData.SetFocusedRowCellValue("number", TxtReff.Text)
                 FormSalesBranchDet.GVData.SetFocusedRowCellValue("report_mark_type", "0")
                 FormSalesBranchDet.GCData.RefreshDataSource()
                 FormSalesBranchDet.GVData.RefreshData()

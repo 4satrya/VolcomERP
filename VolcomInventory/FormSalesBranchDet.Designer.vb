@@ -124,12 +124,6 @@ Partial Class FormSalesBranchDet
         Me.GroupControl4 = New DevExpress.XtraEditors.GroupControl()
         Me.GCData = New DevExpress.XtraGrid.GridControl()
         Me.GVData = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.PanelControlNav = New DevExpress.XtraEditors.PanelControl()
-        Me.BtnDelete = New DevExpress.XtraEditors.SimpleButton()
-        Me.BtnAdd = New DevExpress.XtraEditors.SimpleButton()
-        Me.XTCData = New DevExpress.XtraTab.XtraTabControl()
-        Me.XTPDetail = New DevExpress.XtraTab.XtraTabPage()
-        Me.XTPDraftJournal = New DevExpress.XtraTab.XtraTabPage()
         Me.GridColumnid_sales_branch_det = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnid_sales_branch = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnid_acc = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -141,6 +135,25 @@ Partial Class FormSalesBranchDet
         Me.GridColumnnote = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnvalue = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnno = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.PanelControlNav = New DevExpress.XtraEditors.PanelControl()
+        Me.BtnDelete = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnAdd = New DevExpress.XtraEditors.SimpleButton()
+        Me.XTCData = New DevExpress.XtraTab.XtraTabControl()
+        Me.XTPDetail = New DevExpress.XtraTab.XtraTabPage()
+        Me.XTPDraftJournal = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCDraft = New DevExpress.XtraGrid.GridControl()
+        Me.GVDraft = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumnNoDraft = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnacc_name_Draft = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnacc_description_draft = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnreport_number_draft = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnnote_draft = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumndebit_draft = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumncredit_draft = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumncc = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumncomp_number = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnid_report = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnreport_number = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl7, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl7.SuspendLayout()
         CType(Me.PanelControlPreview, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -209,6 +222,9 @@ Partial Class FormSalesBranchDet
         CType(Me.XTCData, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCData.SuspendLayout()
         Me.XTPDetail.SuspendLayout()
+        Me.XTPDraftJournal.SuspendLayout()
+        CType(Me.GCDraft, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVDraft, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl7
@@ -502,6 +518,8 @@ Partial Class FormSalesBranchDet
         Me.DESalesDate.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.DESalesDate.Properties.DisplayFormat.FormatString = "dd MMMM yyyy"
         Me.DESalesDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DESalesDate.Properties.EditFormat.FormatString = ""
+        Me.DESalesDate.Properties.Mask.EditMask = "D"
         Me.DESalesDate.Size = New System.Drawing.Size(264, 20)
         Me.DESalesDate.TabIndex = 165
         '
@@ -565,6 +583,8 @@ Partial Class FormSalesBranchDet
         Me.SLEAccAPNormal.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SLEAccAPNormal.Properties.Appearance.Options.UseFont = True
         Me.SLEAccAPNormal.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEAccAPNormal.Properties.NullText = "- Select COA -"
+        Me.SLEAccAPNormal.Properties.ShowClearButton = False
         Me.SLEAccAPNormal.Properties.View = Me.GridView3
         Me.SLEAccAPNormal.Size = New System.Drawing.Size(189, 20)
         Me.SLEAccAPNormal.TabIndex = 8940
@@ -656,6 +676,8 @@ Partial Class FormSalesBranchDet
         Me.SLEAccRevNormal.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SLEAccRevNormal.Properties.Appearance.Options.UseFont = True
         Me.SLEAccRevNormal.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEAccRevNormal.Properties.NullText = "- Select COA -"
+        Me.SLEAccRevNormal.Properties.ShowClearButton = False
         Me.SLEAccRevNormal.Properties.View = Me.GridView1
         Me.SLEAccRevNormal.Size = New System.Drawing.Size(189, 20)
         Me.SLEAccRevNormal.TabIndex = 8933
@@ -698,6 +720,7 @@ Partial Class FormSalesBranchDet
         Me.TxtRevNormal.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.TxtRevNormal.Properties.Mask.EditMask = "N2"
         Me.TxtRevNormal.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
+        Me.TxtRevNormal.Properties.ReadOnly = True
         Me.TxtRevNormal.Size = New System.Drawing.Size(188, 20)
         Me.TxtRevNormal.TabIndex = 8932
         '
@@ -748,6 +771,8 @@ Partial Class FormSalesBranchDet
         Me.SLEAccPPNNormal.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SLEAccPPNNormal.Properties.Appearance.Options.UseFont = True
         Me.SLEAccPPNNormal.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEAccPPNNormal.Properties.NullText = "- Select COA -"
+        Me.SLEAccPPNNormal.Properties.ShowClearButton = False
         Me.SLEAccPPNNormal.Properties.View = Me.SearchLookUpEdit2View
         Me.SLEAccPPNNormal.Size = New System.Drawing.Size(189, 20)
         Me.SLEAccPPNNormal.TabIndex = 8930
@@ -905,6 +930,8 @@ Partial Class FormSalesBranchDet
         Me.SLEAccAPSale.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SLEAccAPSale.Properties.Appearance.Options.UseFont = True
         Me.SLEAccAPSale.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEAccAPSale.Properties.NullText = "- Select COA -"
+        Me.SLEAccAPSale.Properties.ShowClearButton = False
         Me.SLEAccAPSale.Properties.View = Me.GridView4
         Me.SLEAccAPSale.Size = New System.Drawing.Size(189, 20)
         Me.SLEAccAPSale.TabIndex = 8940
@@ -996,6 +1023,8 @@ Partial Class FormSalesBranchDet
         Me.SLEAccRevSale.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SLEAccRevSale.Properties.Appearance.Options.UseFont = True
         Me.SLEAccRevSale.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEAccRevSale.Properties.NullText = "- Select COA -"
+        Me.SLEAccRevSale.Properties.ShowClearButton = False
         Me.SLEAccRevSale.Properties.View = Me.GridView5
         Me.SLEAccRevSale.Size = New System.Drawing.Size(189, 20)
         Me.SLEAccRevSale.TabIndex = 8933
@@ -1038,6 +1067,7 @@ Partial Class FormSalesBranchDet
         Me.TxtRevSale.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.TxtRevSale.Properties.Mask.EditMask = "N2"
         Me.TxtRevSale.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
+        Me.TxtRevSale.Properties.ReadOnly = True
         Me.TxtRevSale.Size = New System.Drawing.Size(188, 20)
         Me.TxtRevSale.TabIndex = 8932
         '
@@ -1088,6 +1118,8 @@ Partial Class FormSalesBranchDet
         Me.SLEAccPPNSale.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SLEAccPPNSale.Properties.Appearance.Options.UseFont = True
         Me.SLEAccPPNSale.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEAccPPNSale.Properties.NullText = "- Select COA -"
+        Me.SLEAccPPNSale.Properties.ShowClearButton = False
         Me.SLEAccPPNSale.Properties.View = Me.GridView7
         Me.SLEAccPPNSale.Size = New System.Drawing.Size(189, 20)
         Me.SLEAccPPNSale.TabIndex = 8930
@@ -1204,10 +1236,105 @@ Partial Class FormSalesBranchDet
         '
         'GVData
         '
-        Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnid_sales_branch_det, Me.GridColumnid_sales_branch, Me.GridColumnid_acc, Me.GridColumncoa_account, Me.GridColumncoa_description, Me.GridColumnid_dc, Me.GridColumndc_code, Me.GridColumnid_comp_det, Me.GridColumnnote, Me.GridColumnvalue, Me.GridColumnno})
+        Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnid_sales_branch_det, Me.GridColumnid_sales_branch, Me.GridColumnid_acc, Me.GridColumncoa_account, Me.GridColumncoa_description, Me.GridColumnid_dc, Me.GridColumndc_code, Me.GridColumnid_comp_det, Me.GridColumnnote, Me.GridColumnvalue, Me.GridColumnno, Me.GridColumncomp_number, Me.GridColumnid_report, Me.GridColumnreport_number})
         Me.GVData.GridControl = Me.GCData
         Me.GVData.Name = "GVData"
+        Me.GVData.OptionsView.ShowFooter = True
         Me.GVData.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumnid_sales_branch_det
+        '
+        Me.GridColumnid_sales_branch_det.Caption = "id_sales_branch_det"
+        Me.GridColumnid_sales_branch_det.FieldName = "id_sales_branch_det"
+        Me.GridColumnid_sales_branch_det.Name = "GridColumnid_sales_branch_det"
+        Me.GridColumnid_sales_branch_det.OptionsColumn.ReadOnly = True
+        '
+        'GridColumnid_sales_branch
+        '
+        Me.GridColumnid_sales_branch.Caption = "id_sales_branch"
+        Me.GridColumnid_sales_branch.FieldName = "id_sales_branch"
+        Me.GridColumnid_sales_branch.Name = "GridColumnid_sales_branch"
+        Me.GridColumnid_sales_branch.OptionsColumn.ReadOnly = True
+        '
+        'GridColumnid_acc
+        '
+        Me.GridColumnid_acc.Caption = "id_acc"
+        Me.GridColumnid_acc.FieldName = "id_acc"
+        Me.GridColumnid_acc.Name = "GridColumnid_acc"
+        Me.GridColumnid_acc.OptionsColumn.ReadOnly = True
+        Me.GridColumnid_acc.Width = 318
+        '
+        'GridColumncoa_account
+        '
+        Me.GridColumncoa_account.Caption = "COA"
+        Me.GridColumncoa_account.FieldName = "coa_account"
+        Me.GridColumncoa_account.Name = "GridColumncoa_account"
+        Me.GridColumncoa_account.OptionsColumn.ReadOnly = True
+        Me.GridColumncoa_account.Visible = True
+        Me.GridColumncoa_account.VisibleIndex = 1
+        Me.GridColumncoa_account.Width = 163
+        '
+        'GridColumncoa_description
+        '
+        Me.GridColumncoa_description.Caption = "COA Name"
+        Me.GridColumncoa_description.FieldName = "coa_description"
+        Me.GridColumncoa_description.Name = "GridColumncoa_description"
+        Me.GridColumncoa_description.OptionsColumn.ReadOnly = True
+        '
+        'GridColumnid_dc
+        '
+        Me.GridColumnid_dc.Caption = "id_dc"
+        Me.GridColumnid_dc.FieldName = "id_dc"
+        Me.GridColumnid_dc.Name = "GridColumnid_dc"
+        Me.GridColumnid_dc.OptionsColumn.ReadOnly = True
+        '
+        'GridColumndc_code
+        '
+        Me.GridColumndc_code.Caption = "D/K"
+        Me.GridColumndc_code.FieldName = "dc_code"
+        Me.GridColumndc_code.Name = "GridColumndc_code"
+        Me.GridColumndc_code.OptionsColumn.ReadOnly = True
+        Me.GridColumndc_code.Visible = True
+        Me.GridColumndc_code.VisibleIndex = 5
+        Me.GridColumndc_code.Width = 47
+        '
+        'GridColumnid_comp_det
+        '
+        Me.GridColumnid_comp_det.Caption = "id_comp"
+        Me.GridColumnid_comp_det.FieldName = "id_comp"
+        Me.GridColumnid_comp_det.Name = "GridColumnid_comp_det"
+        Me.GridColumnid_comp_det.OptionsColumn.ReadOnly = True
+        '
+        'GridColumnnote
+        '
+        Me.GridColumnnote.Caption = "Description"
+        Me.GridColumnnote.FieldName = "note"
+        Me.GridColumnnote.Name = "GridColumnnote"
+        Me.GridColumnnote.Visible = True
+        Me.GridColumnnote.VisibleIndex = 4
+        Me.GridColumnnote.Width = 1099
+        '
+        'GridColumnvalue
+        '
+        Me.GridColumnvalue.Caption = "Amount"
+        Me.GridColumnvalue.DisplayFormat.FormatString = "N2"
+        Me.GridColumnvalue.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnvalue.FieldName = "value"
+        Me.GridColumnvalue.Name = "GridColumnvalue"
+        Me.GridColumnvalue.OptionsColumn.ReadOnly = True
+        Me.GridColumnvalue.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "value", "{0:N2}")})
+        Me.GridColumnvalue.Visible = True
+        Me.GridColumnvalue.VisibleIndex = 6
+        Me.GridColumnvalue.Width = 202
+        '
+        'GridColumnno
+        '
+        Me.GridColumnno.Caption = "No"
+        Me.GridColumnno.FieldName = "no"
+        Me.GridColumnno.Name = "GridColumnno"
+        Me.GridColumnno.Visible = True
+        Me.GridColumnno.VisibleIndex = 0
+        Me.GridColumnno.Width = 65
         '
         'PanelControlNav
         '
@@ -1261,103 +1388,129 @@ Partial Class FormSalesBranchDet
         '
         'XTPDraftJournal
         '
+        Me.XTPDraftJournal.Controls.Add(Me.GCDraft)
         Me.XTPDraftJournal.Name = "XTPDraftJournal"
-        Me.XTPDraftJournal.Size = New System.Drawing.Size(980, 687)
+        Me.XTPDraftJournal.Size = New System.Drawing.Size(980, 681)
         Me.XTPDraftJournal.Text = "Draft Journal"
         '
-        'GridColumnid_sales_branch_det
+        'GCDraft
         '
-        Me.GridColumnid_sales_branch_det.Caption = "id_sales_branch_det"
-        Me.GridColumnid_sales_branch_det.FieldName = "id_sales_branch_det"
-        Me.GridColumnid_sales_branch_det.Name = "GridColumnid_sales_branch_det"
-        Me.GridColumnid_sales_branch_det.OptionsColumn.ReadOnly = True
+        Me.GCDraft.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCDraft.Location = New System.Drawing.Point(0, 0)
+        Me.GCDraft.MainView = Me.GVDraft
+        Me.GCDraft.Name = "GCDraft"
+        Me.GCDraft.Size = New System.Drawing.Size(980, 681)
+        Me.GCDraft.TabIndex = 1
+        Me.GCDraft.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVDraft})
         '
-        'GridColumnid_sales_branch
+        'GVDraft
         '
-        Me.GridColumnid_sales_branch.Caption = "id_sales_branch"
-        Me.GridColumnid_sales_branch.FieldName = "id_sales_branch"
-        Me.GridColumnid_sales_branch.Name = "GridColumnid_sales_branch"
-        Me.GridColumnid_sales_branch.OptionsColumn.ReadOnly = True
+        Me.GVDraft.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNoDraft, Me.GridColumnacc_name_Draft, Me.GridColumnacc_description_draft, Me.GridColumnreport_number_draft, Me.GridColumnnote_draft, Me.GridColumndebit_draft, Me.GridColumncredit_draft, Me.GridColumncc})
+        Me.GVDraft.GridControl = Me.GCDraft
+        Me.GVDraft.Name = "GVDraft"
+        Me.GVDraft.OptionsBehavior.Editable = False
+        Me.GVDraft.OptionsView.ShowFooter = True
+        Me.GVDraft.OptionsView.ShowGroupPanel = False
         '
-        'GridColumnid_acc
+        'GridColumnNoDraft
         '
-        Me.GridColumnid_acc.Caption = "id_acc"
-        Me.GridColumnid_acc.FieldName = "id_acc"
-        Me.GridColumnid_acc.Name = "GridColumnid_acc"
-        Me.GridColumnid_acc.OptionsColumn.ReadOnly = True
-        Me.GridColumnid_acc.Width = 318
+        Me.GridColumnNoDraft.Caption = "No"
+        Me.GridColumnNoDraft.FieldName = "no"
+        Me.GridColumnNoDraft.Name = "GridColumnNoDraft"
+        Me.GridColumnNoDraft.Visible = True
+        Me.GridColumnNoDraft.VisibleIndex = 0
+        Me.GridColumnNoDraft.Width = 59
         '
-        'GridColumncoa_account
+        'GridColumnacc_name_Draft
         '
-        Me.GridColumncoa_account.Caption = "COA"
-        Me.GridColumncoa_account.FieldName = "coa_account"
-        Me.GridColumncoa_account.Name = "GridColumncoa_account"
-        Me.GridColumncoa_account.OptionsColumn.ReadOnly = True
-        Me.GridColumncoa_account.Visible = True
-        Me.GridColumncoa_account.VisibleIndex = 1
-        Me.GridColumncoa_account.Width = 171
+        Me.GridColumnacc_name_Draft.Caption = "Account"
+        Me.GridColumnacc_name_Draft.FieldName = "acc_name"
+        Me.GridColumnacc_name_Draft.Name = "GridColumnacc_name_Draft"
+        Me.GridColumnacc_name_Draft.Visible = True
+        Me.GridColumnacc_name_Draft.VisibleIndex = 1
+        Me.GridColumnacc_name_Draft.Width = 194
         '
-        'GridColumncoa_description
+        'GridColumnacc_description_draft
         '
-        Me.GridColumncoa_description.Caption = "COA Name"
-        Me.GridColumncoa_description.FieldName = "coa_description"
-        Me.GridColumncoa_description.Name = "GridColumncoa_description"
-        Me.GridColumncoa_description.OptionsColumn.ReadOnly = True
+        Me.GridColumnacc_description_draft.Caption = "COA"
+        Me.GridColumnacc_description_draft.FieldName = "acc_description"
+        Me.GridColumnacc_description_draft.Name = "GridColumnacc_description_draft"
+        Me.GridColumnacc_description_draft.Visible = True
+        Me.GridColumnacc_description_draft.VisibleIndex = 2
+        Me.GridColumnacc_description_draft.Width = 126
         '
-        'GridColumnid_dc
+        'GridColumnreport_number_draft
         '
-        Me.GridColumnid_dc.Caption = "id_dc"
-        Me.GridColumnid_dc.FieldName = "id_dc"
-        Me.GridColumnid_dc.Name = "GridColumnid_dc"
-        Me.GridColumnid_dc.OptionsColumn.ReadOnly = True
+        Me.GridColumnreport_number_draft.Caption = "Reference"
+        Me.GridColumnreport_number_draft.FieldName = "report_number"
+        Me.GridColumnreport_number_draft.Name = "GridColumnreport_number_draft"
+        Me.GridColumnreport_number_draft.Visible = True
+        Me.GridColumnreport_number_draft.VisibleIndex = 4
+        Me.GridColumnreport_number_draft.Width = 125
         '
-        'GridColumndc_code
+        'GridColumnnote_draft
         '
-        Me.GridColumndc_code.Caption = "D/K"
-        Me.GridColumndc_code.FieldName = "dc_code"
-        Me.GridColumndc_code.Name = "GridColumndc_code"
-        Me.GridColumndc_code.OptionsColumn.ReadOnly = True
-        Me.GridColumndc_code.Visible = True
-        Me.GridColumndc_code.VisibleIndex = 3
-        Me.GridColumndc_code.Width = 50
+        Me.GridColumnnote_draft.Caption = "Description"
+        Me.GridColumnnote_draft.FieldName = "note"
+        Me.GridColumnnote_draft.Name = "GridColumnnote_draft"
+        Me.GridColumnnote_draft.Visible = True
+        Me.GridColumnnote_draft.VisibleIndex = 5
+        Me.GridColumnnote_draft.Width = 547
         '
-        'GridColumnid_comp_det
+        'GridColumndebit_draft
         '
-        Me.GridColumnid_comp_det.Caption = "id_comp"
-        Me.GridColumnid_comp_det.FieldName = "id_comp"
-        Me.GridColumnid_comp_det.Name = "GridColumnid_comp_det"
-        Me.GridColumnid_comp_det.OptionsColumn.ReadOnly = True
+        Me.GridColumndebit_draft.Caption = "Debit"
+        Me.GridColumndebit_draft.DisplayFormat.FormatString = "N2"
+        Me.GridColumndebit_draft.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumndebit_draft.FieldName = "debit"
+        Me.GridColumndebit_draft.Name = "GridColumndebit_draft"
+        Me.GridColumndebit_draft.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "debit", "{0:N2}")})
+        Me.GridColumndebit_draft.Visible = True
+        Me.GridColumndebit_draft.VisibleIndex = 6
+        Me.GridColumndebit_draft.Width = 267
         '
-        'GridColumnnote
+        'GridColumncredit_draft
         '
-        Me.GridColumnnote.Caption = "Description"
-        Me.GridColumnnote.FieldName = "note"
-        Me.GridColumnnote.Name = "GridColumnnote"
-        Me.GridColumnnote.Visible = True
-        Me.GridColumnnote.VisibleIndex = 2
-        Me.GridColumnnote.Width = 1137
+        Me.GridColumncredit_draft.Caption = "Credit"
+        Me.GridColumncredit_draft.DisplayFormat.FormatString = "N2"
+        Me.GridColumncredit_draft.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumncredit_draft.FieldName = "credit"
+        Me.GridColumncredit_draft.Name = "GridColumncredit_draft"
+        Me.GridColumncredit_draft.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "credit", "{0:N2}")})
+        Me.GridColumncredit_draft.Visible = True
+        Me.GridColumncredit_draft.VisibleIndex = 7
+        Me.GridColumncredit_draft.Width = 314
         '
-        'GridColumnvalue
+        'GridColumncc
         '
-        Me.GridColumnvalue.Caption = "Amount"
-        Me.GridColumnvalue.DisplayFormat.FormatString = "N2"
-        Me.GridColumnvalue.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumnvalue.FieldName = "value"
-        Me.GridColumnvalue.Name = "GridColumnvalue"
-        Me.GridColumnvalue.OptionsColumn.ReadOnly = True
-        Me.GridColumnvalue.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "value", "{0:N2}")})
-        Me.GridColumnvalue.Visible = True
-        Me.GridColumnvalue.VisibleIndex = 4
-        Me.GridColumnvalue.Width = 206
+        Me.GridColumncc.Caption = "CC"
+        Me.GridColumncc.FieldName = "cc"
+        Me.GridColumncc.Name = "GridColumncc"
+        Me.GridColumncc.Visible = True
+        Me.GridColumncc.VisibleIndex = 3
         '
-        'GridColumnno
+        'GridColumncomp_number
         '
-        Me.GridColumnno.Caption = "No"
-        Me.GridColumnno.FieldName = "no"
-        Me.GridColumnno.Name = "GridColumnno"
-        Me.GridColumnno.Visible = True
-        Me.GridColumnno.VisibleIndex = 0
-        Me.GridColumnno.Width = 68
+        Me.GridColumncomp_number.Caption = "CC"
+        Me.GridColumncomp_number.FieldName = "comp_number"
+        Me.GridColumncomp_number.Name = "GridColumncomp_number"
+        Me.GridColumncomp_number.Visible = True
+        Me.GridColumncomp_number.VisibleIndex = 2
+        Me.GridColumncomp_number.Width = 56
+        '
+        'GridColumnid_report
+        '
+        Me.GridColumnid_report.Caption = "id_report"
+        Me.GridColumnid_report.FieldName = "id_report"
+        Me.GridColumnid_report.Name = "GridColumnid_report"
+        '
+        'GridColumnreport_number
+        '
+        Me.GridColumnreport_number.Caption = "Reff"
+        Me.GridColumnreport_number.FieldName = "report_number"
+        Me.GridColumnreport_number.Name = "GridColumnreport_number"
+        Me.GridColumnreport_number.Visible = True
+        Me.GridColumnreport_number.VisibleIndex = 3
         '
         'FormSalesBranchDet
         '
@@ -1445,6 +1598,9 @@ Partial Class FormSalesBranchDet
         CType(Me.XTCData, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XTCData.ResumeLayout(False)
         Me.XTPDetail.ResumeLayout(False)
+        Me.XTPDraftJournal.ResumeLayout(False)
+        CType(Me.GCDraft, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVDraft, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1569,4 +1725,17 @@ Partial Class FormSalesBranchDet
     Friend WithEvents GridColumnnote As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnvalue As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnno As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GCDraft As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVDraft As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumnNoDraft As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnacc_name_Draft As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnacc_description_draft As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnreport_number_draft As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnnote_draft As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumndebit_draft As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumncredit_draft As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumncc As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumncomp_number As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnid_report As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnreport_number As DevExpress.XtraGrid.Columns.GridColumn
 End Class

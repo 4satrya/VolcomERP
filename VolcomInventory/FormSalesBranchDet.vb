@@ -75,10 +75,14 @@
 
             'load default coa
             Dim query_opt_acc As String = "SELECT IFNULL(a.id_acc_hutang_ppn_cabang,0) AS `id_acc_ppn`, ppn.acc_description AS `acc_ppn_description`, 
-            IFNULL(a.id_acc_hutang_dagang_cabang,0) AS `id_acc_hutang_dagang`, hd.acc_description AS `acc_hutang_dagang`
+            IFNULL(a.id_acc_hutang_dagang_cabang,0) AS `id_acc_hutang_dagang`, hd.acc_description AS `acc_hutang_dagang`,
+            IFNULL(a.id_acc_pendapatan_cabang_normal,0) AS `id_acc_pendapatan_normal`,pend_normal.acc_description AS `acc_pendapatan_normal`,
+            IFNULL(a.id_acc_pendapatan_cabang_sale,0) AS `id_acc_pendapatan_sale`, pend_sale.acc_description AS `acc_pendapatan_sale`
             FROM tb_opt_accounting a 
             LEFT JOIN tb_a_acc ppn ON ppn.id_acc = a.id_acc_hutang_ppn_cabang 
             LEFT JOIN tb_a_acc hd ON hd.id_acc = a.id_acc_hutang_dagang_cabang 
+            LEFT JOIN tb_a_acc pend_normal ON pend_normal.id_acc = a.id_acc_pendapatan_cabang_normal
+            LEFT JOIN tb_a_acc pend_sale ON pend_sale.id_acc = a.id_acc_pendapatan_cabang_sale
             "
             Dim data_opt_acc As DataTable = execute_query(query_opt_acc, -1, True, "", "", "", "")
             If data_opt_acc.Rows(0)("id_acc_ppn").ToString <> "0" Then
@@ -92,6 +96,14 @@
                 TxtAPNoteNormal.Text = data_opt_acc.Rows(0)("acc_hutang_dagang").ToString
                 SLEAccAPSale.EditValue = data_opt_acc.Rows(0)("id_acc_hutang_dagang").ToString
                 TxtAPNoteSale.Text = data_opt_acc.Rows(0)("acc_hutang_dagang").ToString
+            End If
+            If data_opt_acc.Rows(0)("id_acc_pendapatan_normal").ToString <> "0" Then
+                SLEAccRevNormal.EditValue = data_opt_acc.Rows(0)("id_acc_pendapatan_normal").ToString
+                TxtRevNoteNormal.Text = data_opt_acc.Rows(0)("acc_pendapatan_normal").ToString
+            End If
+            If data_opt_acc.Rows(0)("id_acc_pendapatan_sale").ToString <> "0" Then
+                SLEAccRevSale.EditValue = data_opt_acc.Rows(0)("id_acc_pendapatan_sale").ToString
+                TxtRevNoteSale.Text = data_opt_acc.Rows(0)("acc_pendapatan_sale").ToString
             End If
 
             ' store acc

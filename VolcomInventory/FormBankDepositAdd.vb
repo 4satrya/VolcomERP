@@ -154,11 +154,11 @@
             If action = "ins" Then
                 Dim newRow As DataRow = (TryCast(FormSalesBranchDet.GCData.DataSource, DataTable)).NewRow()
                 newRow("id_sales_branch_det") = "0"
-                newRow("id_sales_branch ") = "0"
-                newRow("id_acc ") = SLECOA.EditValue.ToString
+                newRow("id_sales_branch") = "0"
+                newRow("id_acc") = SLECOA.EditValue.ToString
                 newRow("coa_account") = TxtCOA.Text
                 newRow("coa_description") = SLECOA.Text
-                newRow("id_dc ") = LEDK.EditValue.ToString
+                newRow("id_dc") = LEDK.EditValue.ToString
                 newRow("dc_code") = LEDK.Text.ToString
                 If TxtComp.Text = "" Then
                     newRow("id_comp") = "0"

@@ -135,6 +135,9 @@ Partial Class FormSalesBranchDet
         Me.GridColumnnote = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnvalue = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnno = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumncomp_number = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnid_report = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnreport_number = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControlNav = New DevExpress.XtraEditors.PanelControl()
         Me.BtnDelete = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnAdd = New DevExpress.XtraEditors.SimpleButton()
@@ -151,9 +154,6 @@ Partial Class FormSalesBranchDet
         Me.GridColumndebit_draft = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncredit_draft = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncc = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumncomp_number = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnid_report = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnreport_number = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl7, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl7.SuspendLayout()
         CType(Me.PanelControlPreview, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -518,8 +518,9 @@ Partial Class FormSalesBranchDet
         Me.DESalesDate.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.DESalesDate.Properties.DisplayFormat.FormatString = "dd MMMM yyyy"
         Me.DESalesDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.DESalesDate.Properties.EditFormat.FormatString = ""
-        Me.DESalesDate.Properties.Mask.EditMask = "D"
+        Me.DESalesDate.Properties.EditFormat.FormatString = "dd MMMM yyyy"
+        Me.DESalesDate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DESalesDate.Properties.Mask.EditMask = "dd MMMM yyyy"
         Me.DESalesDate.Size = New System.Drawing.Size(264, 20)
         Me.DESalesDate.TabIndex = 165
         '
@@ -1336,6 +1337,29 @@ Partial Class FormSalesBranchDet
         Me.GridColumnno.VisibleIndex = 0
         Me.GridColumnno.Width = 65
         '
+        'GridColumncomp_number
+        '
+        Me.GridColumncomp_number.Caption = "CC"
+        Me.GridColumncomp_number.FieldName = "comp_number"
+        Me.GridColumncomp_number.Name = "GridColumncomp_number"
+        Me.GridColumncomp_number.Visible = True
+        Me.GridColumncomp_number.VisibleIndex = 2
+        Me.GridColumncomp_number.Width = 56
+        '
+        'GridColumnid_report
+        '
+        Me.GridColumnid_report.Caption = "id_report"
+        Me.GridColumnid_report.FieldName = "id_report"
+        Me.GridColumnid_report.Name = "GridColumnid_report"
+        '
+        'GridColumnreport_number
+        '
+        Me.GridColumnreport_number.Caption = "Reff"
+        Me.GridColumnreport_number.FieldName = "report_number"
+        Me.GridColumnreport_number.Name = "GridColumnreport_number"
+        Me.GridColumnreport_number.Visible = True
+        Me.GridColumnreport_number.VisibleIndex = 3
+        '
         'PanelControlNav
         '
         Me.PanelControlNav.Controls.Add(Me.BtnDelete)
@@ -1488,29 +1512,6 @@ Partial Class FormSalesBranchDet
         Me.GridColumncc.Name = "GridColumncc"
         Me.GridColumncc.Visible = True
         Me.GridColumncc.VisibleIndex = 3
-        '
-        'GridColumncomp_number
-        '
-        Me.GridColumncomp_number.Caption = "CC"
-        Me.GridColumncomp_number.FieldName = "comp_number"
-        Me.GridColumncomp_number.Name = "GridColumncomp_number"
-        Me.GridColumncomp_number.Visible = True
-        Me.GridColumncomp_number.VisibleIndex = 2
-        Me.GridColumncomp_number.Width = 56
-        '
-        'GridColumnid_report
-        '
-        Me.GridColumnid_report.Caption = "id_report"
-        Me.GridColumnid_report.FieldName = "id_report"
-        Me.GridColumnid_report.Name = "GridColumnid_report"
-        '
-        'GridColumnreport_number
-        '
-        Me.GridColumnreport_number.Caption = "Reff"
-        Me.GridColumnreport_number.FieldName = "report_number"
-        Me.GridColumnreport_number.Name = "GridColumnreport_number"
-        Me.GridColumnreport_number.Visible = True
-        Me.GridColumnreport_number.VisibleIndex = 3
         '
         'FormSalesBranchDet
         '

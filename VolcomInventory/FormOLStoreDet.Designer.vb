@@ -64,6 +64,7 @@ Partial Class FormOLStoreDet
         Me.GridColumnCost = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdWHDrawer = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnOLStoreOrderDate = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnol_store_sku = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemImageEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemImageEdit()
         Me.RepositoryItemHyperLinkEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit()
         Me.RepositoryItemCheckEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
@@ -87,7 +88,12 @@ Partial Class FormOLStoreDet
         Me.GridColumn16 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn17 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnProdStatus = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnol_store_sku = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnid_design_cat = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnid_comp_contact_from = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnid_store_contact_to = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnid_design_price = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumndesign_price = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnid_comp = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.SLECompGroup.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -497,6 +503,15 @@ Partial Class FormOLStoreDet
         Me.GridColumnOLStoreOrderDate.VisibleIndex = 3
         Me.GridColumnOLStoreOrderDate.Width = 144
         '
+        'GridColumnol_store_sku
+        '
+        Me.GridColumnol_store_sku.Caption = "OL Store SKU"
+        Me.GridColumnol_store_sku.FieldName = "ol_store_sku"
+        Me.GridColumnol_store_sku.Name = "GridColumnol_store_sku"
+        Me.GridColumnol_store_sku.OptionsColumn.ReadOnly = True
+        Me.GridColumnol_store_sku.Visible = True
+        Me.GridColumnol_store_sku.VisibleIndex = 11
+        '
         'RepositoryItemImageEdit2
         '
         Me.RepositoryItemImageEdit2.AutoHeight = False
@@ -619,7 +634,7 @@ Partial Class FormOLStoreDet
         '
         'GVProduct
         '
-        Me.GVProduct.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn10, Me.GridColumn11, Me.GridColumn12, Me.GridColumn13, Me.GridColumn15, Me.GridColumn16, Me.GridColumn17, Me.GridColumnProdStatus})
+        Me.GVProduct.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn10, Me.GridColumn11, Me.GridColumn12, Me.GridColumn13, Me.GridColumn15, Me.GridColumn16, Me.GridColumn17, Me.GridColumnProdStatus, Me.GridColumnid_design_cat, Me.GridColumnid_comp_contact_from, Me.GridColumnid_store_contact_to, Me.GridColumnid_design_price, Me.GridColumndesign_price, Me.GridColumnid_comp})
         Me.GVProduct.GridControl = Me.GCProduct
         Me.GVProduct.Name = "GVProduct"
         Me.GVProduct.OptionsBehavior.AutoExpandAllGroups = True
@@ -688,14 +703,45 @@ Partial Class FormOLStoreDet
         Me.GridColumnProdStatus.FieldName = "status"
         Me.GridColumnProdStatus.Name = "GridColumnProdStatus"
         '
-        'GridColumnol_store_sku
+        'GridColumnid_design_cat
         '
-        Me.GridColumnol_store_sku.Caption = "OL Store SKU"
-        Me.GridColumnol_store_sku.FieldName = "ol_store_sku"
-        Me.GridColumnol_store_sku.Name = "GridColumnol_store_sku"
-        Me.GridColumnol_store_sku.OptionsColumn.ReadOnly = True
-        Me.GridColumnol_store_sku.Visible = True
-        Me.GridColumnol_store_sku.VisibleIndex = 11
+        Me.GridColumnid_design_cat.Caption = "id_design_cat"
+        Me.GridColumnid_design_cat.FieldName = "id_design_cat"
+        Me.GridColumnid_design_cat.Name = "GridColumnid_design_cat"
+        '
+        'GridColumnid_comp_contact_from
+        '
+        Me.GridColumnid_comp_contact_from.Caption = "id_comp_contact_from"
+        Me.GridColumnid_comp_contact_from.FieldName = "id_comp_contact_from"
+        Me.GridColumnid_comp_contact_from.Name = "GridColumnid_comp_contact_from"
+        '
+        'GridColumnid_store_contact_to
+        '
+        Me.GridColumnid_store_contact_to.Caption = "id_store_contact_to"
+        Me.GridColumnid_store_contact_to.FieldName = "id_store_contact_to"
+        Me.GridColumnid_store_contact_to.Name = "GridColumnid_store_contact_to"
+        '
+        'GridColumnid_design_price
+        '
+        Me.GridColumnid_design_price.Caption = "id_design_price"
+        Me.GridColumnid_design_price.FieldName = "id_design_price"
+        Me.GridColumnid_design_price.Name = "GridColumnid_design_price"
+        '
+        'GridColumndesign_price
+        '
+        Me.GridColumndesign_price.Caption = "Price"
+        Me.GridColumndesign_price.DisplayFormat.FormatString = "N0"
+        Me.GridColumndesign_price.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumndesign_price.FieldName = "design_price"
+        Me.GridColumndesign_price.Name = "GridColumndesign_price"
+        Me.GridColumndesign_price.Visible = True
+        Me.GridColumndesign_price.VisibleIndex = 5
+        '
+        'GridColumnid_comp
+        '
+        Me.GridColumnid_comp.Caption = "id_comp"
+        Me.GridColumnid_comp.FieldName = "id_comp"
+        Me.GridColumnid_comp.Name = "GridColumnid_comp"
         '
         'FormOLStoreDet
         '
@@ -805,4 +851,10 @@ Partial Class FormOLStoreDet
     Friend WithEvents GridColumnIdWHDrawer As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnOLStoreOrderDate As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnol_store_sku As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnid_design_cat As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnid_comp_contact_from As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnid_store_contact_to As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnid_design_price As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumndesign_price As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnid_comp As DevExpress.XtraGrid.Columns.GridColumn
 End Class

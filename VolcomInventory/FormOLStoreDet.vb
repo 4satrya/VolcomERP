@@ -1,4 +1,13 @@
 ﻿Public Class FormOLStoreDet
+    Dim id_wh_induk_normal As String = "-1"
+    Dim id_wh_induk_normal_cc As String = "-1"
+    Dim id_wh_induk_sale As String = "-1"
+    Dim id_wh_induk_sale_cc As String = "-1"
+    Dim is_use_virtual_account As String = "2"
+    Dim id_user_prepared As String = "-1"
+    Dim id_drawer_online_normal As String = "-1"
+    Dim id_drawer_online_sale As String = "-1"
+
     Private Sub BtnBrowseFile_Click(sender As Object, e As EventArgs) Handles BtnBrowseFile.Click
         Cursor = Cursors.WaitCursor
         FormImportExcel.id_pop_up = "41"
@@ -44,10 +53,35 @@
         Close()
     End Sub
 
+    Function dataWHInduk(ByVal id_store_type_par As String) As DataTable
+        Dim query As String = "SELECT wh.id_comp, whc.id_comp_contact, wh.comp_number, wh.id_drawer_def
+        FROM tb_m_comp c 
+        INNER JOIN tb_m_comp whv ON whv.id_comp = c.id_wh
+        INNER JOIN tb_m_comp wh ON wh.id_comp = whv.id_wh_group
+        INNER JOIN tb_m_comp_contact whc ON whc.id_comp = wh.id_comp AND whc.is_default=1
+        WHERE c.id_comp_group='" + SLECompGroup.EditValue.ToString + "' AND c.id_store_type=" + id_store_type_par + " AND c.is_active=1 "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        Return data
+    End Function
+
     Dim id_so_created As String = ""
     Private Sub BtnCreate_Click(sender As Object, e As EventArgs) Handles BtnCreate.Click
         Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure you want to create order?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
         If confirm = Windows.Forms.DialogResult.Yes Then
+            'load gudang induk
+            is_use_virtual_account = get_setup_field("is_use_virtual_account")
+            If is_use_virtual_account = "1" Then
+                Dim dt_normal As DataTable = dataWHInduk("1")
+                id_wh_induk_normal = dt_normal.Rows(0)("id_comp").ToString
+                id_wh_induk_normal_cc = dt_normal(0)("id_comp_contact").ToString
+                id_drawer_online_normal = dt_normal.Rows(0)("id_drawer_def").ToString
+                Dim dt_sale As DataTable = dataWHInduk("2")
+                id_wh_induk_sale = dt_sale.Rows(0)("id_comp").ToString
+                id_wh_induk_sale_cc = dt_sale.Rows(0)("id_comp_contact").ToString
+                id_drawer_online_sale = dt_sale.Rows(0)("id_drawer_def").ToString
+                id_user_prepared = get_opt_sales_field("default_so_online_prepared_by")
+            End If
+
             'temp bof declare
             id_so_created = ""
             Dim bof_column As String = get_setup_field("bof_column")
@@ -114,9 +148,108 @@
         Dim id_order_last As String = ""
         Dim order_last As String = ""
 
+        'virtual ada trf alokasi
+        If is_use_virtual_account = "1" Then
+            makeSafeGV(GVProduct)
+            Dim is_error As String = "2"
+            Dim id_order_trf As String = "-1"
+            Dim id_trf As String = "-1"
+
+            'delete storage jika sebelumnya ada eror trf
+            Dim qcek As String = "SELECT * FROM tb_ol_store_order_log_generate WHERE is_delete=2"
+            Dim dcek As DataTable = execute_query(qcek, -1, True, "", "", "", "")
+            If dcek.Rows.Count > 0 Then
+                'delete stok
+                FormMain.SplashScreenManager1.SetWaitFormDescription("Clean data allocation transfer")
+                For d As Integer = 0 To dcek.Rows.Count - 1
+                    Dim qdel As String = "DELETE FROM tb_storage_fg WHERE report_mark_type=57 AND id_report=" + dcek.Rows(d)("id_trf").ToString + ";
+                    UPDATE tb_ol_store_order_log_generate SET is_delete=1 WHERE id_log='" + dcek.Rows(d)("id_log").ToString + "'; "
+                    execute_non_query(qdel, True, "", "", "", "")
+                Next
+            End If
+
+            Try
+                Dim id_contact_to As String = ""
+                If id_store_type = "1" Then
+                    FormMain.SplashScreenManager1.SetWaitFormDescription("Create transfer alloction for Normal Product")
+                    id_contact_to = id_wh_induk_normal_cc
+                Else
+                    FormMain.SplashScreenManager1.SetWaitFormDescription("Create transfer alloction for Sale Product")
+                    id_contact_to = id_wh_induk_sale_cc
+                End If
+                GVProduct.ActiveFilterString = "[id_design_cat]=" + id_store_type + ""
+
+
+                For p As Integer = 0 To GVProduct.RowCount - 1
+                    If p = 0 Then
+                        'create header order trf
+                        Dim id_warehouse_contact_to As String = GVProduct.GetRowCellValue(p, "id_comp_contact_from").ToString
+                        Dim qord As String = "INSERT INTO tb_sales_order(id_store_contact_to, id_warehouse_contact_to, sales_order_number, sales_order_date, sales_order_note, id_so_type, id_report_status, id_so_status, id_user_created, is_transfer_data) 
+                        VALUES('" + id_contact_to + "', '" + id_warehouse_contact_to + "', '', NOW(), 'Order Trf for Order Zalora by ERP', 0, 1, 5, '" + id_user_prepared + "',1); SELECT LAST_INSERT_ID(); "
+                        id_order_trf = execute_query(qord, 0, True, "", "", "", "")
+
+                        'create header trf
+                        Dim qtrf As String = "INSERT INTO tb_fg_trf(id_comp_contact_from, id_comp_contact_to, id_sales_order, fg_trf_number, fg_trf_date, fg_trf_date_rec, fg_trf_note, id_report_status, id_report_status_rec, id_wh_drawer, last_update, last_update_by)
+                        VALUES('" + id_warehouse_contact_to + "', '" + id_contact_to + "', '" + id_order_trf + "','',NOW(), NOW(),'Trf for Order Zalora by ERP',1,1,getCompByContact(" + id_contact_to + ", 4),NOW(), '" + id_user_prepared + "'); SELECT LAST_INSERT_ID(); "
+                        id_trf = execute_query(qtrf, 0, True, "", "", "", "")
+                        execute_non_query("CALL gen_number(" + id_trf + ", 57);", True, "", "", "", "")
+                    End If
+
+                    'detail insert order trf
+                    Dim id_product As String = GVProduct.GetRowCellValue(p, "id_product").ToString
+                    Dim id_design_price As String = GVProduct.GetRowCellValue(p, "id_design_price").ToString
+                    Dim design_price As String = decimalSQL(GVProduct.GetRowCellValue(p, "design_price").ToString)
+                    Dim qty As String = decimalSQL(GVProduct.GetRowCellValue(p, "qty").ToString)
+                    Dim note As String = ""
+                    Dim qord_detail As String = "INSERT INTO tb_sales_order_det(id_sales_order, id_product, id_design_price, design_price, sales_order_det_qty, sales_order_det_note, item_id, ol_store_id) 
+                    VALUES('" + id_order_trf + "', '" + id_product + "', '" + id_design_price + "', '" + design_price + "', '" + qty + "', '" + note + "', '',''); SELECT LAST_INSERT_ID(); "
+                    Dim id_order_detail As String = execute_query(qord_detail, 0, True, "", "", "", "")
+
+                    'detail insert trf
+                    Dim qtrf_detail As String = "INSERT INTO tb_fg_trf_det(id_fg_trf, id_product, id_sales_order_det, fg_trf_det_qty, fg_trf_det_qty_rec, fg_trf_det_qty_stored, fg_trf_det_note)
+                    VALUES('" + id_trf + "', '" + id_product + "', '" + id_order_detail + "', '" + qty + "', '" + qty + "', '" + qty + "', '');"
+                    execute_non_query(qtrf_detail, True, "", "", "", "")
+                Next
+                If id_trf <> "-1" Then
+                    Dim qry_complete_trf As String = "
+                    -- manajemen stok
+	                DELETE FROM tb_storage_fg WHERE report_mark_type=57 AND id_report=" + id_trf + ";
+                    INSERT INTO tb_storage_fg(id_wh_drawer, id_storage_category, id_product, bom_unit_price, report_mark_type, id_report, storage_product_qty, storage_product_datetime, storage_product_notes, id_stock_status, report_mark_type_ref, id_report_ref)
+	                SELECT (getCompByContact(trf.id_comp_contact_from, 4)) AS `drawer`, '2', trf_det.id_product, IFNULL(dsg.design_cop,0), '57' AS `report_mark_type`, trf.id_fg_trf AS `id_report`, trf_det.fg_trf_det_qty, NOW(), '', '1', NULL, NULL 
+	                FROM tb_fg_trf trf 
+	                INNER JOIN tb_fg_trf_det trf_det ON trf_det.id_fg_trf = trf.id_fg_trf 
+	                INNER JOIN tb_m_product prod ON prod.id_product = trf_det.id_product 
+	                INNER JOIN tb_m_design dsg ON dsg.id_design = prod.id_design 
+	                WHERE trf.id_fg_trf=" + id_trf + " AND trf_det.fg_trf_det_qty>0
+                    UNION ALL 
+	                SELECT (trf.id_wh_drawer) AS `drawer`, '1', trf_det.id_product, IFNULL(dsg.design_cop,0), '57' AS `report_mark_type`, trf.id_fg_trf AS `id_report`, trf_det.fg_trf_det_qty, NOW(), '', '1', NULL, NULL 
+	                FROM tb_fg_trf trf 
+	                INNER JOIN tb_fg_trf_det trf_det ON trf_det.id_fg_trf = trf.id_fg_trf 
+	                INNER JOIN tb_m_product prod ON prod.id_product = trf_det.id_product 
+	                INNER JOIN tb_m_design dsg ON dsg.id_design = prod.id_design 
+	                WHERE trf.id_fg_trf=" + id_trf + " AND trf_det.fg_trf_det_qty>0;
+                    -- update order trf & trf status
+                    UPDATE tb_sales_order SET id_report_status=6 WHERE id_sales_order = " + id_order_trf + ";
+                    UPDATE tb_fg_trf SET id_report_status=6 WHERE id_fg_trf=" + id_trf + "; "
+                    execute_non_query(qry_complete_trf, True, "", "", "", "")
+                End If
+            Catch ex As Exception
+                is_error = "1"
+                execute_non_query("INSERT INTO tb_ol_store_order_log_generate(log, log_time, id_trf) VALUES('" + addSlashes(ex.ToString) + "', NOW(), '" + id_trf + "')", True, "", "", "", "")
+            End Try
+            GVProduct.ActiveFilterString = ""
+
+            If is_error = "1" Then
+                FormMain.SplashScreenManager1.CloseWaitForm()
+                Cursor = Cursors.Default
+                stopCustom("Problem with allocation transfer. Please try again later")
+                Exit Sub
+            End If
+        End If
+
         makeSafeGV(GVDetail)
         GVDetail.ActiveFilterString = "[id_design_cat]='" + id_store_type + "' "
-        GridColumnOrderNumber.SortOrder = DevExpress.Data.ColumnSortOrder.Ascending
+                GridColumnOrderNumber.SortOrder = DevExpress.Data.ColumnSortOrder.Ascending
         For i As Integer = 0 To GVDetail.RowCount - 1
             If id_store_type = "1" Then
                 FormMain.SplashScreenManager1.SetWaitFormDescription("Normal account : " + (i + 1).ToString + " of " + GVDetail.RowCount.ToString)
@@ -124,8 +257,26 @@
                 FormMain.SplashScreenManager1.SetWaitFormDescription("Sale account : " + (i + 1).ToString + " of " + GVDetail.RowCount.ToString)
             End If
 
-            Dim id_wh_drawer As String = GVDetail.GetRowCellValue(i, "id_wh_drawer").ToString
-            Dim id_warehouse_contact_to As String = GVDetail.GetRowCellValue(i, "id_warehouse_contact_to").ToString
+            Dim id_wh_drawer As String = ""
+            If is_use_virtual_account = "1" Then
+                If id_store_type = "1" Then
+                    id_wh_drawer = id_drawer_online_normal
+                Else
+                    id_wh_drawer = id_drawer_online_sale
+                End If
+            Else
+                id_wh_drawer = GVDetail.GetRowCellValue(i, "id_wh_drawer").ToString
+            End If
+            Dim id_warehouse_contact_to As String = ""
+            If is_use_virtual_account = "1" Then
+                If id_store_type = "1" Then
+                    id_warehouse_contact_to = id_wh_induk_normal_cc
+                Else
+                    id_warehouse_contact_to = id_wh_induk_sale_cc
+                End If
+            Else
+                id_warehouse_contact_to = GVDetail.GetRowCellValue(i, "id_warehouse_contact_to").ToString
+            End If
             Dim id_store_contact_to As String = GVDetail.GetRowCellValue(i, "id_store_contact_to").ToString
             Dim sales_order_ol_shop_number As String = GVDetail.GetRowCellValue(i, "sales_order_ol_shop_number").ToString.Trim
             Dim sales_order_ol_shop_date As String = DateTime.Parse(GVDetail.GetRowCellValue(i, "sales_order_ol_shop_date").ToString).ToString("yyyy-MM-dd HH:mm:ss")

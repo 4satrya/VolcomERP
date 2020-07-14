@@ -1133,7 +1133,7 @@ INNER JOIN tb_m_user usr ON usr.`id_user`=po.`created_by`
 INNER JOIN tb_m_employee emp ON emp.id_employee=usr.`id_employee`
 INNER JOIN tb_purc_req_det prd ON prd.`id_purc_req_det`=pod.`id_purc_req_det`
 INNER JOIN tb_item it ON it.`id_item`=prd.`id_item`
-WHERE it.id_item_type='2' AND po.`is_active_payment`=2 AND po.`is_close_pay`=2
+WHERE po.`is_active_payment`=2 AND po.`is_close_pay`=2
 GROUP BY pod.`id_purc_order`
 ORDER BY pod.id_purc_order DESC"
         Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")

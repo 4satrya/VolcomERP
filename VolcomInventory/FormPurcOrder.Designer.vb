@@ -326,7 +326,7 @@ Partial Class FormPurcOrder
         Me.GridColumn9.OptionsColumn.AllowEdit = False
         Me.GridColumn9.OptionsColumn.AllowFocus = False
         Me.GridColumn9.Visible = True
-        Me.GridColumn9.VisibleIndex = 7
+        Me.GridColumn9.VisibleIndex = 1
         Me.GridColumn9.Width = 98
         '
         'GridColumn72
@@ -345,7 +345,7 @@ Partial Class FormPurcOrder
         Me.GridColumn71.OptionsColumn.AllowEdit = False
         Me.GridColumn71.OptionsColumn.AllowFocus = False
         Me.GridColumn71.Visible = True
-        Me.GridColumn71.VisibleIndex = 2
+        Me.GridColumn71.VisibleIndex = 7
         '
         'GridColumn20
         '
@@ -478,7 +478,7 @@ Partial Class FormPurcOrder
         Me.GridColumn11.OptionsColumn.AllowEdit = False
         Me.GridColumn11.OptionsColumn.AllowFocus = False
         Me.GridColumn11.Visible = True
-        Me.GridColumn11.VisibleIndex = 1
+        Me.GridColumn11.VisibleIndex = 2
         Me.GridColumn11.Width = 81
         '
         'GridColumn43

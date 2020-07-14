@@ -21,6 +21,7 @@ Partial Public Class ReportMasterEmployeeSuratReferensi
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ReportMasterEmployeeSuratReferensi))
         Me.Detail = New DevExpress.XtraReports.UI.DetailBand()
+        Me.L_text = New DevExpress.XtraReports.UI.XRRichText()
         Me.XrLabel1 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XLNumber = New DevExpress.XtraReports.UI.XRLabel()
         Me.L_employee_name = New DevExpress.XtraReports.UI.XRLabel()
@@ -36,7 +37,6 @@ Partial Public Class ReportMasterEmployeeSuratReferensi
         Me.XrLabel12 = New DevExpress.XtraReports.UI.XRLabel()
         Me.TopMargin = New DevExpress.XtraReports.UI.TopMarginBand()
         Me.BottomMargin = New DevExpress.XtraReports.UI.BottomMarginBand()
-        Me.L_text = New DevExpress.XtraReports.UI.XRRichText()
         CType(Me.L_text, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         '
@@ -47,6 +47,15 @@ Partial Public Class ReportMasterEmployeeSuratReferensi
         Me.Detail.Name = "Detail"
         Me.Detail.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
         Me.Detail.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+        '
+        'L_text
+        '
+        Me.L_text.Font = New System.Drawing.Font("Calibri", 11.25!)
+        Me.L_text.LocationFloat = New DevExpress.Utils.PointFloat(0.0003034418!, 212.0!)
+        Me.L_text.Name = "L_text"
+        Me.L_text.SerializableRtfString = resources.GetString("L_text.SerializableRtfString")
+        Me.L_text.SizeF = New System.Drawing.SizeF(650.0002!, 195.7941!)
+        Me.L_text.StylePriority.UseFont = False
         '
         'XrLabel1
         '
@@ -157,7 +166,6 @@ Partial Public Class ReportMasterEmployeeSuratReferensi
         Me.L_hrd_employee_name2.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.L_hrd_employee_name2.SizeF = New System.Drawing.SizeF(650.0!, 23.0!)
         Me.L_hrd_employee_name2.StylePriority.UseFont = False
-        Me.L_hrd_employee_name2.Text = "Johannes Paulus Lazarus Handoko"
         '
         'L_hrd_employee_position2
         '
@@ -168,7 +176,6 @@ Partial Public Class ReportMasterEmployeeSuratReferensi
         Me.L_hrd_employee_position2.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.L_hrd_employee_position2.SizeF = New System.Drawing.SizeF(650.0!, 23.0!)
         Me.L_hrd_employee_position2.StylePriority.UseFont = False
-        Me.L_hrd_employee_position2.Text = "HR & Compliance Manager"
         '
         'L_date
         '
@@ -204,15 +211,6 @@ Partial Public Class ReportMasterEmployeeSuratReferensi
         Me.BottomMargin.Name = "BottomMargin"
         Me.BottomMargin.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
         Me.BottomMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
-        '
-        'L_text
-        '
-        Me.L_text.Font = New System.Drawing.Font("Calibri", 11.25!)
-        Me.L_text.LocationFloat = New DevExpress.Utils.PointFloat(0.0003034418!, 212.0!)
-        Me.L_text.Name = "L_text"
-        Me.L_text.SerializableRtfString = resources.GetString("L_text.SerializableRtfString")
-        Me.L_text.SizeF = New System.Drawing.SizeF(650.0002!, 195.7941!)
-        Me.L_text.StylePriority.UseFont = False
         '
         'ReportMasterEmployeeSuratReferensi
         '

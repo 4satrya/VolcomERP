@@ -45,23 +45,37 @@
 
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
+        Dim director As DataTable = execute_query("
+            SELECT tb_m_employee.id_employee, tb_m_employee.employee_name, tb_m_employee.employee_position
+            FROM tb_m_employee 
+            WHERE tb_m_employee.id_employee = (SELECT id_emp_director FROM tb_opt LIMIT 1)
+        ", -1, True, "", "", "", "")
+
+        Dim hrd_manager As DataTable = execute_query("
+            SELECT tb_m_user.id_employee, tb_m_employee.employee_name, tb_m_employee.employee_position
+            FROM tb_m_departement 
+            LEFT JOIN tb_m_user ON tb_m_departement.id_user_head = tb_m_user.id_user 
+            LEFT JOIN tb_m_employee ON tb_m_user.id_employee = tb_m_employee.id_employee
+            WHERE tb_m_departement.id_departement = 8
+        ", -1, True, "", "", "", "")
+
         If data.Rows(0)("id_popup").ToString = "1" Then
             Dim Report As New ReportMasterEmployeeSuratKeteranganPenangguhanBank()
 
             Report.XLNumber.Text = Report.XLNumber.Text.Replace("[number]", data.Rows(0)("number").ToString)
 
-            If data.Rows(0)("id_employee").ToString = "132" Then
-                Report.L_hrd_employee_name1.Text = "Marissa Bridgitt Kasih"
-                Report.L_hrd_employee_position1.Text = "Director"
+            If data.Rows(0)("id_employee").ToString = hrd_manager.Rows(0)("id_employee").ToString Then
+                Report.L_hrd_employee_name1.Text = director.Rows(0)("employee_name").ToString
+                Report.L_hrd_employee_position1.Text = director.Rows(0)("employee_position").ToString
 
-                Report.L_hrd_employee_name2.Text = "Marissa Bridgitt Kasih"
-                Report.L_hrd_employee_position2.Text = "Director"
+                Report.L_hrd_employee_name2.Text = director.Rows(0)("employee_name").ToString
+                Report.L_hrd_employee_position2.Text = director.Rows(0)("employee_position").ToString
             Else
-                Report.L_hrd_employee_name1.Text = "Johannes Paulus Lazarus Handoko"
-                Report.L_hrd_employee_position1.Text = "HR & Compliance Manager"
+                Report.L_hrd_employee_name1.Text = hrd_manager.Rows(0)("employee_name").ToString
+                Report.L_hrd_employee_position1.Text = hrd_manager.Rows(0)("employee_position").ToString
 
-                Report.L_hrd_employee_name2.Text = "Johannes Paulus Lazarus Handoko"
-                Report.L_hrd_employee_position2.Text = "HR & Compliance Manager"
+                Report.L_hrd_employee_name2.Text = hrd_manager.Rows(0)("employee_name").ToString
+                Report.L_hrd_employee_position2.Text = hrd_manager.Rows(0)("employee_position").ToString
             End If
             Report.L_employee_name.Text = data.Rows(0)("employee_name").ToString
             Report.L_employee_code.Text = data.Rows(0)("employee_code").ToString
@@ -91,6 +105,8 @@
             Report.L_date.Text = "Kuta, " + Date.Parse(data.Rows(0)("created_date").ToString).ToString("dd MMMM yyyy")
             Report.L_text.Text = Report.L_text.Text.Replace("[date]", Date.Parse(data.Rows(0)("date").ToString).ToString("dd MMMM yyyy"))
             Report.L_depthead.Text = depthead
+            Report.L_hrd_employee_name2.Text = hrd_manager.Rows(0)("employee_name").ToString
+            Report.L_hrd_employee_position2.Text = hrd_manager.Rows(0)("employee_position").ToString
 
             If data.Rows(0)("id_departement").ToString = "8" Then
                 Report.XrLabel6.Visible = False
@@ -105,14 +121,12 @@
 
             Report.XLNumber.Text = Report.XLNumber.Text.Replace("[number]", data.Rows(0)("number").ToString)
 
-            'future update : jadikan opt
-
-            If data.Rows(0)("id_employee").ToString = "132" Then
-                Report.L_hrd_employee_name2.Text = "Marissa Bridgitt Kasih"
-                Report.L_hrd_employee_position2.Text = "Director"
+            If data.Rows(0)("id_employee").ToString = hrd_manager.Rows(0)("id_employee").ToString Then
+                Report.L_hrd_employee_name2.Text = director.Rows(0)("employee_name").ToString
+                Report.L_hrd_employee_position2.Text = director.Rows(0)("employee_position").ToString
             Else
-                Report.L_hrd_employee_name2.Text = "Johannes Paulus Lazarus Handoko"
-                Report.L_hrd_employee_position2.Text = "HR & Compliance Manager"
+                Report.L_hrd_employee_name2.Text = hrd_manager.Rows(0)("employee_name").ToString
+                Report.L_hrd_employee_position2.Text = hrd_manager.Rows(0)("employee_position").ToString
             End If
 
             Report.L_employee_name.Text = data.Rows(0)("employee_name").ToString
@@ -158,6 +172,13 @@ cc.
             Report.L_employee_pob_dob.Text = data.Rows(0)("employee_pob").ToString + ", " + Date.Parse(data.Rows(0)("employee_dob").ToString).ToString("dd MMMM yyyy")
             Report.L_date.Text = "Kuta, " + Date.Parse(data.Rows(0)("created_date").ToString).ToString("dd MMMM yyyy")
             Report.L_text.Text = Report.L_text.Text.Replace("[date]", Date.Parse(data.Rows(0)("date").ToString).ToString("dd MMMM yyyy"))
+            If data.Rows(0)("id_employee").ToString = hrd_manager.Rows(0)("id_employee").ToString Then
+                Report.L_hrd_employee_name2.Text = director.Rows(0)("employee_name").ToString
+                Report.L_hrd_employee_position2.Text = director.Rows(0)("employee_position").ToString
+            Else
+                Report.L_hrd_employee_name2.Text = hrd_manager.Rows(0)("employee_name").ToString
+                Report.L_hrd_employee_position2.Text = hrd_manager.Rows(0)("employee_position").ToString
+            End If
 
             Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
             Tool.ShowPreviewDialog()
@@ -171,6 +192,14 @@ cc.
                 <p style=""font-family: Calibri; text-align: justify;"">During the time we find " + If(data.Rows(0)("id_sex").ToString = "1", "him", "her") + " to be loyal, diligent and responsible to " + If(data.Rows(0)("id_sex").ToString = "1", "his", "her") + " duties and capable in coordination with the others.</p>
                 <p style=""font-family: Calibri; text-align: justify;"">We would like to express our thanks for the services rendered to PT. Volcom Indonesia and have no hesitation in recommending " + If(data.Rows(0)("id_sex").ToString = "1", "him", "her") + " for any job opportunity " + If(data.Rows(0)("id_sex").ToString = "1", "he", "she") + " may apply for. We hope " + If(data.Rows(0)("id_sex").ToString = "1", "he", "she") + " will reach success in the field that " + If(data.Rows(0)("id_sex").ToString = "1", "he", "she") + " takes in the future.</p>
             "
+
+            If data.Rows(0)("id_employee").ToString = hrd_manager.Rows(0)("id_employee").ToString Then
+                Report.L_hrd_employee_name2.Text = director.Rows(0)("employee_name").ToString
+                Report.L_hrd_employee_position2.Text = director.Rows(0)("employee_position").ToString
+            Else
+                Report.L_hrd_employee_name2.Text = hrd_manager.Rows(0)("employee_name").ToString
+                Report.L_hrd_employee_position2.Text = hrd_manager.Rows(0)("employee_position").ToString
+            End If
 
             Report.L_employee_name.Text = data.Rows(0)("employee_name").ToString
             Report.L_address_primary.Text = data.Rows(0)("address_primary").ToString

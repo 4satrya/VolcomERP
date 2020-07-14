@@ -104,12 +104,17 @@ Partial Class FormStockQC
         Me.GridColumn15 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn17 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GroupControl1 = New DevExpress.XtraEditors.GroupControl()
+        Me.SBPrintStock = New DevExpress.XtraEditors.SimpleButton()
         Me.DEStockTo = New DevExpress.XtraEditors.DateEdit()
         Me.DEStockFrom = New DevExpress.XtraEditors.DateEdit()
         Me.LabelControl28 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl31 = New DevExpress.XtraEditors.LabelControl()
         Me.SBStockView = New DevExpress.XtraEditors.SimpleButton()
-        Me.SBPrintStock = New DevExpress.XtraEditors.SimpleButton()
+        Me.LabelControl9 = New DevExpress.XtraEditors.LabelControl()
+        Me.SLEType = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn18 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn19 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XTCStock, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCStock.SuspendLayout()
         Me.XTPSOH.SuspendLayout()
@@ -149,6 +154,8 @@ Partial Class FormStockQC
         CType(Me.DEStockTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEStockFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEStockFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SLEType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'XTCStock
@@ -952,6 +959,8 @@ Partial Class FormStockQC
         '
         Me.GroupControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.UltraFlat
         Me.GroupControl1.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupControl1.Controls.Add(Me.LabelControl9)
+        Me.GroupControl1.Controls.Add(Me.SLEType)
         Me.GroupControl1.Controls.Add(Me.SBPrintStock)
         Me.GroupControl1.Controls.Add(Me.DEStockTo)
         Me.GroupControl1.Controls.Add(Me.DEStockFrom)
@@ -965,10 +974,20 @@ Partial Class FormStockQC
         Me.GroupControl1.TabIndex = 20
         Me.GroupControl1.Text = "Filter"
         '
+        'SBPrintStock
+        '
+        Me.SBPrintStock.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SBPrintStock.Appearance.Options.UseFont = True
+        Me.SBPrintStock.Location = New System.Drawing.Point(632, 26)
+        Me.SBPrintStock.Name = "SBPrintStock"
+        Me.SBPrintStock.Size = New System.Drawing.Size(60, 23)
+        Me.SBPrintStock.TabIndex = 14
+        Me.SBPrintStock.Text = "Print"
+        '
         'DEStockTo
         '
         Me.DEStockTo.EditValue = Nothing
-        Me.DEStockTo.Location = New System.Drawing.Point(216, 24)
+        Me.DEStockTo.Location = New System.Drawing.Point(384, 28)
         Me.DEStockTo.Name = "DEStockTo"
         Me.DEStockTo.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[False]
         Me.DEStockTo.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
@@ -985,7 +1004,7 @@ Partial Class FormStockQC
         'DEStockFrom
         '
         Me.DEStockFrom.EditValue = Nothing
-        Me.DEStockFrom.Location = New System.Drawing.Point(23, 24)
+        Me.DEStockFrom.Location = New System.Drawing.Point(191, 28)
         Me.DEStockFrom.Name = "DEStockFrom"
         Me.DEStockFrom.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[False]
         Me.DEStockFrom.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
@@ -1002,7 +1021,7 @@ Partial Class FormStockQC
         'LabelControl28
         '
         Me.LabelControl28.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl28.Location = New System.Drawing.Point(27, 5)
+        Me.LabelControl28.Location = New System.Drawing.Point(195, 9)
         Me.LabelControl28.Name = "LabelControl28"
         Me.LabelControl28.Size = New System.Drawing.Size(24, 13)
         Me.LabelControl28.TabIndex = 11
@@ -1011,7 +1030,7 @@ Partial Class FormStockQC
         'LabelControl31
         '
         Me.LabelControl31.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl31.Location = New System.Drawing.Point(216, 5)
+        Me.LabelControl31.Location = New System.Drawing.Point(384, 9)
         Me.LabelControl31.Name = "LabelControl31"
         Me.LabelControl31.Size = New System.Drawing.Size(12, 13)
         Me.LabelControl31.TabIndex = 2
@@ -1021,21 +1040,54 @@ Partial Class FormStockQC
         '
         Me.SBStockView.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SBStockView.Appearance.Options.UseFont = True
-        Me.SBStockView.Location = New System.Drawing.Point(398, 22)
+        Me.SBStockView.Location = New System.Drawing.Point(566, 26)
         Me.SBStockView.Name = "SBStockView"
         Me.SBStockView.Size = New System.Drawing.Size(60, 23)
         Me.SBStockView.TabIndex = 6
         Me.SBStockView.Text = "View"
         '
-        'SBPrintStock
+        'LabelControl9
         '
-        Me.SBPrintStock.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SBPrintStock.Appearance.Options.UseFont = True
-        Me.SBPrintStock.Location = New System.Drawing.Point(464, 22)
-        Me.SBPrintStock.Name = "SBPrintStock"
-        Me.SBPrintStock.Size = New System.Drawing.Size(60, 23)
-        Me.SBPrintStock.TabIndex = 14
-        Me.SBPrintStock.Text = "Print"
+        Me.LabelControl9.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl9.Location = New System.Drawing.Point(32, 11)
+        Me.LabelControl9.Name = "LabelControl9"
+        Me.LabelControl9.Size = New System.Drawing.Size(31, 13)
+        Me.LabelControl9.TabIndex = 8905
+        Me.LabelControl9.Text = "Status"
+        '
+        'SLEType
+        '
+        Me.SLEType.Location = New System.Drawing.Point(32, 28)
+        Me.SLEType.Name = "SLEType"
+        Me.SLEType.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SLEType.Properties.Appearance.Options.UseFont = True
+        Me.SLEType.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEType.Properties.ShowClearButton = False
+        Me.SLEType.Properties.View = Me.GridView1
+        Me.SLEType.Size = New System.Drawing.Size(153, 20)
+        Me.SLEType.TabIndex = 8906
+        '
+        'GridView1
+        '
+        Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn18, Me.GridColumn19})
+        Me.GridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView1.Name = "GridView1"
+        Me.GridView1.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView1.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn18
+        '
+        Me.GridColumn18.Caption = "Id Type"
+        Me.GridColumn18.FieldName = "id_cop_status"
+        Me.GridColumn18.Name = "GridColumn18"
+        '
+        'GridColumn19
+        '
+        Me.GridColumn19.Caption = "Type"
+        Me.GridColumn19.FieldName = "cop_status"
+        Me.GridColumn19.Name = "GridColumn19"
+        Me.GridColumn19.Visible = True
+        Me.GridColumn19.VisibleIndex = 0
         '
         'FormStockQC
         '
@@ -1089,6 +1141,8 @@ Partial Class FormStockQC
         CType(Me.DEStockTo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEStockFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEStockFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SLEType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1183,4 +1237,9 @@ Partial Class FormStockQC
     Friend WithEvents GridColumn15 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn17 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents SBPrintStock As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents LabelControl9 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents SLEType As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView1 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn18 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn19 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

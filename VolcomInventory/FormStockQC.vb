@@ -16,6 +16,7 @@
 
         viewVendor()
         viewSeason()
+        viewType()
     End Sub
 
     Private Sub FormStockQC_Deactivate(sender As Object, e As EventArgs) Handles MyBase.Deactivate
@@ -155,6 +156,11 @@
         viewSearchLookupQuery(SLESeason, query, "id_season", "season", "id_season")
     End Sub
 
+    Sub viewType()
+        Dim query As String = "SELECT id_cop_status, cop_status FROM tb_lookup_cop_status"
+        viewSearchLookupQuery(SLEType, query, "id_cop_status", "cop_status", "id_cop_status")
+    End Sub
+
     Sub resetNew()
         GCSOH.DataSource = Nothing
         id_dsg = "-1"
@@ -235,7 +241,7 @@
         Dim d_from As String = Date.Parse(DEStockFrom.EditValue.ToString).ToString("yyyy-MM-dd")
         Dim d_to As String = Date.Parse(DEStockTo.EditValue.ToString).ToString("yyyy-MM-dd")
 
-        Dim data As DataTable = execute_query("CALL view_stock_summary_qc('" + d_from + "', '" + d_to + "')", -1, True, "", "", "", "")
+        Dim data As DataTable = execute_query("CALL view_stock_summary_qc('" + d_from + "', '" + d_to + "', '" + SLEType.EditValue.ToString + "')", -1, True, "", "", "", "")
 
         GCStockReport.DataSource = data
 
@@ -259,6 +265,7 @@
         str.Seek(0, System.IO.SeekOrigin.Begin)
         ReportStockQCSummary.dt = GCStockReport.DataSource
         Dim Report As New ReportStockQCSummary()
+        Report.XrLabel2.Text = SLEType.Text
         Report.LabelPeriod.Text = period_from + " / " + period_until
         Report.GVStockReport.RestoreLayoutFromStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
         str.Seek(0, System.IO.SeekOrigin.Begin)

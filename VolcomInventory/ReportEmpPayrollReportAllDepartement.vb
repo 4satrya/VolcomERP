@@ -15,6 +15,7 @@
         GVSummaryOffice.Columns("d_cooperative_contribution").Caption = "Cooperative" + Environment.NewLine + "Contribution"
         GVSummaryOffice.Columns("d_missing").Caption = "Saving" + Environment.NewLine + "Missing"
         GVSummaryOffice.Columns("d_meditation_cash").Caption = "Meditation" + Environment.NewLine + "/ Cash Receipt"
+        GVSummaryOffice.Columns("balance_before").Caption = "Balance" + Environment.NewLine + FormEmpPayrollReportSummary.GVSummary.Columns("balance_before").Caption.Replace("Balance ", "")
 
         GCSummaryOffice.DataSource = data_office
 
@@ -26,6 +27,7 @@
         GVSummaryStore.Columns("d_cooperative_contribution").Caption = "Cooperative" + Environment.NewLine + "Contribution"
         GVSummaryStore.Columns("d_missing").Caption = "Saving" + Environment.NewLine + "Missing"
         GVSummaryStore.Columns("d_meditation_cash").Caption = "Meditation" + Environment.NewLine + "/ Cash Receipt"
+        GVSummaryStore.Columns("balance_before").Caption = "Balance" + Environment.NewLine + FormEmpPayrollReportSummary.GVSummary.Columns("balance_before").Caption.Replace("Balance ", "")
 
         GCSummaryStore.DataSource = data_store
 
@@ -59,6 +61,7 @@
             GVSummaryOffice.Columns("d_missing").Visible = False
             GVSummaryOffice.Columns("d_meditation_cash").Visible = False
             GVSummaryOffice.Columns("d_other").Visible = False
+            GVSummaryOffice.Columns("balance_before").Visible = False
 
             GVSummaryOffice.Columns("balance").Caption = "Total THR"
 
@@ -72,6 +75,7 @@
             GVSummaryStore.Columns("d_missing").Visible = False
             GVSummaryStore.Columns("d_meditation_cash").Visible = False
             GVSummaryStore.Columns("d_other").Visible = False
+            GVSummaryStore.Columns("balance_before").Visible = False
 
             GVSummaryStore.Columns("balance").Caption = "Total THR"
         End If
@@ -240,6 +244,19 @@
         End If
 
         If item.FieldName.ToString = "balance" Then
+            Select Case e.SummaryProcess
+                Case DevExpress.Data.CustomSummaryProcess.Start
+                    tot_balance = 0
+                Case DevExpress.Data.CustomSummaryProcess.Calculate
+                    If Not GVSummaryStore.GetRowCellValue(e.RowHandle, "no").ToString = "" Then
+                        tot_balance += e.FieldValue
+                    End If
+                Case DevExpress.Data.CustomSummaryProcess.Finalize
+                    e.TotalValue = Format(tot_balance, "##,##0")
+            End Select
+        End If
+
+        If item.FieldName.ToString = "balance_before" Then
             Select Case e.SummaryProcess
                 Case DevExpress.Data.CustomSummaryProcess.Start
                     tot_balance = 0

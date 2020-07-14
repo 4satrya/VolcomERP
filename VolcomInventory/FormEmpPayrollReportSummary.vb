@@ -19,12 +19,20 @@
         load_sum()
 
         'number
+        Dim num As Integer = 0
+
         For i = 0 To GVSummary.RowCount - 1
             If GVSummary.IsValidRowHandle(i) Then
-                GVSummary.SetRowCellValue(i, "no", i + 1)
-
                 If GVSummary.GetRowCellValue(i, "id_departement").ToString = "17" Then
-                    Exit For
+                    If GVSummary.GetRowCellValue(i, "id_departement_sub").ToString = "" Then
+                        num = num + 1
+
+                        GVSummary.SetRowCellValue(i, "no", num)
+                    End If
+                Else
+                    num = num + 1
+
+                    GVSummary.SetRowCellValue(i, "no", num)
                 End If
             End If
         Next
@@ -51,6 +59,7 @@
             GVSummary.Columns("d_missing").Visible = False
             GVSummary.Columns("d_meditation_cash").Visible = False
             GVSummary.Columns("d_other").Visible = False
+            GVSummary.Columns("balance_before").Visible = False
 
             GVSummary.Columns("balance").Caption = "Total THR"
         End If
@@ -120,8 +129,16 @@
             row("d_meditation_cash") = d_meditation_cash
             row("d_other") = d_other
             row("total_cash") = total_cash
+            row("balance_before") = 0
 
             data.Rows.InsertAt(row, index)
+        End If
+
+        'load balance before
+        Dim is_thr As String = execute_query("SELECT is_thr FROM tb_emp_payroll_type WHERE id_payroll_type = " + data_payroll.Rows(0)("id_payroll_type").ToString, 0, True, "", "", "", "")
+
+        If Not is_thr = "1" Then
+            load_sum_before()
         End If
 
         GVSummary.BestFitColumns()
@@ -167,21 +184,19 @@
         'store
         Dim data_payroll_2 As DataTable = data.Clone
 
-        no = 0
-
         For j = 0 To data.Rows.Count - 1
             If data.Rows(j)("is_office_payroll").ToString = "2" Then
                 data_payroll_2.ImportRow(data.Rows(j))
             End If
         Next
 
+        no = 0
+
         For i = 0 To data_payroll_2.Rows.Count - 1
-            data_payroll_2.Rows(no)("no") = no + 1
+            If Not data_payroll_2.Rows(i)("no").ToString = "" Then
+                data_payroll_2.Rows(i)("no") = no + 1
 
-            no += 1
-
-            If data_payroll_2.Rows(i)("id_departement").ToString = "17" Then
-                Exit For
+                no += 1
             End If
         Next
 
@@ -463,5 +478,151 @@
                     e.TotalValue = Format(tot_balance, "##,##0")
             End Select
         End If
+
+        If item.FieldName.ToString = "balance_before" Then
+            Select Case e.SummaryProcess
+                Case DevExpress.Data.CustomSummaryProcess.Start
+                    tot_balance = 0
+                Case DevExpress.Data.CustomSummaryProcess.Calculate
+                    If Not GVSummary.GetRowCellValue(e.RowHandle, "no").ToString = "" Then
+                        tot_balance += e.FieldValue
+                    End If
+                Case DevExpress.Data.CustomSummaryProcess.Finalize
+                    e.TotalValue = Format(tot_balance, "##,##0")
+            End Select
+        End If
+    End Sub
+
+    Sub load_sum_before()
+        Dim id_payroll_before As String = execute_query("SELECT id_payroll FROM tb_emp_payroll WHERE MONTH(periode_end) = (SELECT MONTH(periode_end - INTERVAL 1 MONTH) FROM tb_emp_payroll WHERE id_payroll = '" & id_payroll & "') AND YEAR(periode_end) = (SELECT YEAR(periode_end - INTERVAL 1 MONTH) FROM tb_emp_payroll WHERE id_payroll = '" & id_payroll & "') AND id_payroll_type = (SELECT id_payroll_type FROM tb_emp_payroll WHERE id_payroll = '" & id_payroll & "')", 0, True, "", "", "", "")
+
+        'title
+        Dim period_month_year As String = execute_query("SELECT DATE_FORMAT(periode_end, '%M %Y') AS period_month_year FROM tb_emp_payroll WHERE id_payroll = '" + id_payroll_before + "'", 0, True, "", "", "", "")
+
+        GVSummary.Columns("balance_before").Caption = "Balance (" + period_month_year + ")"
+
+        Dim query As String = "CALL view_payroll_sum('" & id_payroll_before & "')"
+
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+
+        'separate sogo
+        Dim index As Integer = 0
+
+        Dim salary As Decimal = 0
+        Dim event_overtime As Decimal = 0
+        Dim d_cooperative_loan As Decimal = 0
+        Dim d_bpjskes As Decimal = 0
+        Dim d_jaminan_pensiun As Decimal = 0
+        Dim d_bpjstk As Decimal = 0
+        Dim d_cooperative_contributtion As Decimal = 0
+        Dim d_missing As Decimal = 0
+        Dim d_meditation_cash As Decimal = 0
+        Dim d_other As Decimal = 0
+        Dim total_cash As Decimal = 0
+
+        For i = 0 To data.Rows.Count - 1
+            If data.Rows(i)("departement").ToString().Contains("SOGO") Then
+                If index = 0 Then
+                    index = i
+                End If
+
+                data.Rows(i)("departement") = "     " + data.Rows(i)("departement_sub").ToString()
+
+                salary += data.Rows(i)("salary")
+                event_overtime += data.Rows(i)("event_overtime")
+                d_cooperative_loan += data.Rows(i)("d_cooperative_loan")
+                d_bpjskes += data.Rows(i)("d_bpjskes")
+                d_jaminan_pensiun += data.Rows(i)("d_jaminan_pensiun")
+                d_bpjstk += data.Rows(i)("d_bpjstk")
+                d_cooperative_contributtion += data.Rows(i)("d_cooperative_contribution")
+                d_missing += data.Rows(i)("d_missing")
+                d_meditation_cash += data.Rows(i)("d_meditation_cash")
+                d_other += data.Rows(i)("d_other")
+                total_cash += data.Rows(i)("total_cash")
+            End If
+        Next
+
+        If Not index = 0 Then
+            Dim row As DataRow = data.NewRow()
+
+            row("group_report") = "STORE"
+            row("is_office_payroll") = 2
+            row("no") = 0
+            row("id_departement") = 17
+            row("departement") = "VOLCOM SOGO"
+            row("departement_sub") = "VOLCOM SOGO"
+            row("salary") = salary
+            row("event_overtime") = event_overtime
+            row("d_cooperative_loan") = d_cooperative_loan
+            row("d_bpjskes") = d_bpjskes
+            row("d_jaminan_pensiun") = d_jaminan_pensiun
+            row("d_bpjstk") = d_bpjstk
+            row("d_cooperative_contribution") = d_cooperative_contributtion
+            row("d_missing") = d_missing
+            row("d_meditation_cash") = d_meditation_cash
+            row("d_other") = d_other
+            row("total_cash") = total_cash
+            row("balance_before") = 0
+
+            data.Rows.InsertAt(row, index)
+        End If
+
+        'add to gv
+        For j = 0 To data.Rows.Count - 1
+            Dim balance As Integer = (data.Rows(j)("salary") + data.Rows(j)("event_overtime") - data.Rows(j)("d_cooperative_loan") - data.Rows(j)("d_bpjskes") - data.Rows(j)("d_jaminan_pensiun") - data.Rows(j)("d_bpjstk") - data.Rows(j)("d_cooperative_contribution") - data.Rows(j)("d_missing") - data.Rows(j)("d_meditation_cash") - data.Rows(j)("d_other"))
+            Dim already_in As Boolean = False
+
+            For i = 0 To GVSummary.RowCount - 1
+                If GVSummary.IsValidRowHandle(i) Then
+                    If GVSummary.GetRowCellValue(i, "id_departement_sub").ToString = data.Rows(j)("id_departement_sub").ToString Then
+                        If GVSummary.GetRowCellValue(i, "id_departement").ToString = "17" Then
+                            If GVSummary.GetRowCellValue(i, "id_departement_sub").ToString = data.Rows(j)("id_departement_sub").ToString Then
+                                already_in = True
+
+                                GVSummary.SetRowCellValue(i, "balance_before", balance)
+
+                                Exit For
+                            End If
+                        Else
+                            already_in = True
+
+                            GVSummary.SetRowCellValue(i, "balance_before", balance)
+
+                            Exit For
+                        End If
+                    End If
+                End If
+            Next
+
+            If Not already_in Then
+                GVSummary.AddNewRow()
+
+                GVSummary.SetRowCellValue(GVSummary.FocusedRowHandle, "group_report", data.Rows(j)("group_report").ToString)
+                GVSummary.SetRowCellValue(GVSummary.FocusedRowHandle, "is_office_payroll", data.Rows(j)("is_office_payroll").ToString)
+                If data.Rows(j)("id_departement").ToString = "17" And Not data.Rows(j)("id_departement_sub").ToString = "" Then
+                    GVSummary.SetRowCellValue(GVSummary.FocusedRowHandle, "no", "")
+                Else
+                    GVSummary.SetRowCellValue(GVSummary.FocusedRowHandle, "no", 0)
+                End If
+                GVSummary.SetRowCellValue(GVSummary.FocusedRowHandle, "id_departement", data.Rows(j)("id_departement").ToString)
+                GVSummary.SetRowCellValue(GVSummary.FocusedRowHandle, "departement", data.Rows(j)("departement").ToString)
+                GVSummary.SetRowCellValue(GVSummary.FocusedRowHandle, "id_departement_sub", data.Rows(j)("id_departement_sub").ToString)
+                GVSummary.SetRowCellValue(GVSummary.FocusedRowHandle, "departement_sub", data.Rows(j)("departement_sub").ToString)
+                GVSummary.SetRowCellValue(GVSummary.FocusedRowHandle, "salary", 0)
+                GVSummary.SetRowCellValue(GVSummary.FocusedRowHandle, "event_overtime", 0)
+                GVSummary.SetRowCellValue(GVSummary.FocusedRowHandle, "d_cooperative_loan", 0)
+                GVSummary.SetRowCellValue(GVSummary.FocusedRowHandle, "d_bpjskes", 0)
+                GVSummary.SetRowCellValue(GVSummary.FocusedRowHandle, "d_jaminan_pensiun", 0)
+                GVSummary.SetRowCellValue(GVSummary.FocusedRowHandle, "d_bpjstk", 0)
+                GVSummary.SetRowCellValue(GVSummary.FocusedRowHandle, "d_cooperative_contribution", 0)
+                GVSummary.SetRowCellValue(GVSummary.FocusedRowHandle, "d_missing", 0)
+                GVSummary.SetRowCellValue(GVSummary.FocusedRowHandle, "d_meditation_cash", 0)
+                GVSummary.SetRowCellValue(GVSummary.FocusedRowHandle, "d_other", 0)
+                GVSummary.SetRowCellValue(GVSummary.FocusedRowHandle, "total_cash", 0)
+                GVSummary.SetRowCellValue(GVSummary.FocusedRowHandle, "balance_before", balance)
+            End If
+        Next
+
+        GVSummary.FocusedRowHandle = 0
     End Sub
 End Class

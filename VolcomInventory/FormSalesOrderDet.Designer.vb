@@ -38,6 +38,8 @@ Partial Class FormSalesOrderDet
         Me.BtnBrowseContactTo = New DevExpress.XtraEditors.SimpleButton()
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
         Me.PanelControlTopMain = New DevExpress.XtraEditors.PanelControl()
+        Me.TxtCustName = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl13 = New DevExpress.XtraEditors.LabelControl()
         Me.SBSyncShopify = New DevExpress.XtraEditors.SimpleButton()
         Me.CESync = New DevExpress.XtraEditors.CheckEdit()
         Me.LabelControl11 = New DevExpress.XtraEditors.LabelControl()
@@ -123,8 +125,6 @@ Partial Class FormSalesOrderDet
         Me.GridColumn32 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn33 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl12 = New DevExpress.XtraEditors.LabelControl()
-        Me.TxtCustName = New DevExpress.XtraEditors.TextEdit()
-        Me.LabelControl13 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
         CType(Me.PanelControlTopLeft, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -139,6 +139,7 @@ Partial Class FormSalesOrderDet
         CType(Me.TxtCodeCompTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControlTopMain, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlTopMain.SuspendLayout()
+        CType(Me.TxtCustName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CESync.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEOLShop.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEOLShop.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -175,7 +176,6 @@ Partial Class FormSalesOrderDet
         Me.GroupControlAlloc.SuspendLayout()
         CType(Me.SLEAccount.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TxtCustName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupGeneralHeader
@@ -403,6 +403,24 @@ Partial Class FormSalesOrderDet
         Me.PanelControlTopMain.Name = "PanelControlTopMain"
         Me.PanelControlTopMain.Size = New System.Drawing.Size(254, 154)
         Me.PanelControlTopMain.TabIndex = 8897
+        '
+        'TxtCustName
+        '
+        Me.TxtCustName.EditValue = ""
+        Me.TxtCustName.Enabled = False
+        Me.TxtCustName.Location = New System.Drawing.Point(73, 88)
+        Me.TxtCustName.Name = "TxtCustName"
+        Me.TxtCustName.Size = New System.Drawing.Size(165, 20)
+        Me.TxtCustName.TabIndex = 8901
+        '
+        'LabelControl13
+        '
+        Me.LabelControl13.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl13.Location = New System.Drawing.Point(13, 91)
+        Me.LabelControl13.Name = "LabelControl13"
+        Me.LabelControl13.Size = New System.Drawing.Size(56, 13)
+        Me.LabelControl13.TabIndex = 8900
+        Me.LabelControl13.Text = "Cust. Name"
         '
         'SBSyncShopify
         '
@@ -1286,24 +1304,6 @@ Partial Class FormSalesOrderDet
         Me.LabelControl12.TabIndex = 8895
         Me.LabelControl12.Text = "Parent Account"
         '
-        'TxtCustName
-        '
-        Me.TxtCustName.EditValue = ""
-        Me.TxtCustName.Enabled = False
-        Me.TxtCustName.Location = New System.Drawing.Point(73, 88)
-        Me.TxtCustName.Name = "TxtCustName"
-        Me.TxtCustName.Size = New System.Drawing.Size(165, 20)
-        Me.TxtCustName.TabIndex = 8901
-        '
-        'LabelControl13
-        '
-        Me.LabelControl13.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl13.Location = New System.Drawing.Point(13, 91)
-        Me.LabelControl13.Name = "LabelControl13"
-        Me.LabelControl13.Size = New System.Drawing.Size(56, 13)
-        Me.LabelControl13.TabIndex = 8900
-        Me.LabelControl13.Text = "Cust. Name"
-        '
         'FormSalesOrderDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1336,6 +1336,7 @@ Partial Class FormSalesOrderDet
         CType(Me.PanelControlTopMain, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControlTopMain.ResumeLayout(False)
         Me.PanelControlTopMain.PerformLayout()
+        CType(Me.TxtCustName.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CESync.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEOLShop.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEOLShop.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1377,7 +1378,6 @@ Partial Class FormSalesOrderDet
         Me.GroupControlAlloc.PerformLayout()
         CType(Me.SLEAccount.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TxtCustName.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

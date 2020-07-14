@@ -33,10 +33,9 @@ Partial Public Class ReportMasterEmployeeSuratKeputusanDirumahkan
         Me.XrLabel21 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel12 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel3 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel16 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.L_hrd_employee_position2 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel17 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel18 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel8 = New DevExpress.XtraReports.UI.XRLabel()
         Me.L_depthead = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel13 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel7 = New DevExpress.XtraReports.UI.XRLabel()
@@ -61,11 +60,12 @@ Partial Public Class ReportMasterEmployeeSuratKeputusanDirumahkan
         Me.XrLabel19 = New DevExpress.XtraReports.UI.XRLabel()
         Me.TopMargin = New DevExpress.XtraReports.UI.TopMarginBand()
         Me.BottomMargin = New DevExpress.XtraReports.UI.BottomMarginBand()
+        Me.L_hrd_employee_name2 = New DevExpress.XtraReports.UI.XRLabel()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         '
         'Detail
         '
-        Me.Detail.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel30, Me.XrLabel28, Me.XrLabel29, Me.XrLabel26, Me.XrLabel27, Me.XrLabel24, Me.XrLabel25, Me.XrLabel22, Me.XrLabel23, Me.XrLabel21, Me.XrLabel12, Me.XrLabel3, Me.XrLabel16, Me.XrLabel17, Me.XrLabel18, Me.XrLabel8, Me.L_depthead, Me.XrLabel13, Me.XrLabel7, Me.XrLabel6, Me.XrLabel5, Me.L_date, Me.XrLabel4, Me.XLNumber, Me.L_text, Me.XrLabel1, Me.XrLabel2, Me.L_employee_pob_dob, Me.XrLabel15, Me.XrLabel14, Me.L_employee_code, Me.L_employee_name, Me.XrLabel11, Me.XrLabel10, Me.XrLabel9, Me.L_address_primary, Me.XrLabel20, Me.XrLabel19})
+        Me.Detail.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel30, Me.XrLabel28, Me.XrLabel29, Me.XrLabel26, Me.XrLabel27, Me.XrLabel24, Me.XrLabel25, Me.XrLabel22, Me.XrLabel23, Me.XrLabel21, Me.XrLabel12, Me.XrLabel3, Me.L_hrd_employee_position2, Me.XrLabel17, Me.XrLabel18, Me.L_hrd_employee_name2, Me.L_depthead, Me.XrLabel13, Me.XrLabel7, Me.XrLabel6, Me.XrLabel5, Me.L_date, Me.XrLabel4, Me.XLNumber, Me.L_text, Me.XrLabel1, Me.XrLabel2, Me.L_employee_pob_dob, Me.XrLabel15, Me.XrLabel14, Me.L_employee_code, Me.L_employee_name, Me.XrLabel11, Me.XrLabel10, Me.XrLabel9, Me.L_address_primary, Me.XrLabel20, Me.XrLabel19})
         Me.Detail.HeightF = 787.7292!
         Me.Detail.Name = "Detail"
         Me.Detail.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
@@ -228,18 +228,17 @@ Partial Public Class ReportMasterEmployeeSuratKeputusanDirumahkan
         Me.XrLabel3.Text = "Adapun karyawan yang dirumahkan akan mendapatkan tunjangan sebagai berikut:"
         Me.XrLabel3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopJustify
         '
-        'XrLabel16
+        'L_hrd_employee_position2
         '
-        Me.XrLabel16.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel16.LocationFloat = New DevExpress.Utils.PointFloat(0!, 764.7292!)
-        Me.XrLabel16.Multiline = True
-        Me.XrLabel16.Name = "XrLabel16"
-        Me.XrLabel16.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel16.SizeF = New System.Drawing.SizeF(226.0417!, 23.0!)
-        Me.XrLabel16.StylePriority.UseFont = False
-        Me.XrLabel16.StylePriority.UseTextAlignment = False
-        Me.XrLabel16.Text = "HR & Compliance Manager"
-        Me.XrLabel16.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopJustify
+        Me.L_hrd_employee_position2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.L_hrd_employee_position2.LocationFloat = New DevExpress.Utils.PointFloat(0!, 764.7292!)
+        Me.L_hrd_employee_position2.Multiline = True
+        Me.L_hrd_employee_position2.Name = "L_hrd_employee_position2"
+        Me.L_hrd_employee_position2.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.L_hrd_employee_position2.SizeF = New System.Drawing.SizeF(226.0417!, 23.0!)
+        Me.L_hrd_employee_position2.StylePriority.UseFont = False
+        Me.L_hrd_employee_position2.StylePriority.UseTextAlignment = False
+        Me.L_hrd_employee_position2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopJustify
         '
         'XrLabel17
         '
@@ -266,19 +265,6 @@ Partial Public Class ReportMasterEmployeeSuratKeputusanDirumahkan
         Me.XrLabel18.StylePriority.UseTextAlignment = False
         Me.XrLabel18.Text = "Director"
         Me.XrLabel18.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopJustify
-        '
-        'XrLabel8
-        '
-        Me.XrLabel8.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel8.LocationFloat = New DevExpress.Utils.PointFloat(0!, 741.7291!)
-        Me.XrLabel8.Multiline = True
-        Me.XrLabel8.Name = "XrLabel8"
-        Me.XrLabel8.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel8.SizeF = New System.Drawing.SizeF(226.0417!, 23.0!)
-        Me.XrLabel8.StylePriority.UseFont = False
-        Me.XrLabel8.StylePriority.UseTextAlignment = False
-        Me.XrLabel8.Text = "Johannes Paulus Lazarus Handoko"
-        Me.XrLabel8.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
         '
         'L_depthead
         '
@@ -574,6 +560,18 @@ Partial Public Class ReportMasterEmployeeSuratKeputusanDirumahkan
         Me.BottomMargin.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
         Me.BottomMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
         '
+        'L_hrd_employee_name2
+        '
+        Me.L_hrd_employee_name2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.L_hrd_employee_name2.LocationFloat = New DevExpress.Utils.PointFloat(0!, 741.7291!)
+        Me.L_hrd_employee_name2.Multiline = True
+        Me.L_hrd_employee_name2.Name = "L_hrd_employee_name2"
+        Me.L_hrd_employee_name2.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.L_hrd_employee_name2.SizeF = New System.Drawing.SizeF(226.0417!, 23.0!)
+        Me.L_hrd_employee_name2.StylePriority.UseFont = False
+        Me.L_hrd_employee_name2.StylePriority.UseTextAlignment = False
+        Me.L_hrd_employee_name2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+        '
         'ReportMasterEmployeeSuratKeputusanDirumahkan
         '
         Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.Detail, Me.TopMargin, Me.BottomMargin})
@@ -604,10 +602,9 @@ Partial Public Class ReportMasterEmployeeSuratKeputusanDirumahkan
     Friend WithEvents XLNumber As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents L_date As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel5 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel16 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents L_hrd_employee_position2 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel17 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel18 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel8 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents L_depthead As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel13 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel7 As DevExpress.XtraReports.UI.XRLabel
@@ -624,4 +621,5 @@ Partial Public Class ReportMasterEmployeeSuratKeputusanDirumahkan
     Friend WithEvents XrLabel12 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel3 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel30 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents L_hrd_employee_name2 As DevExpress.XtraReports.UI.XRLabel
 End Class

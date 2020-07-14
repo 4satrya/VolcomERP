@@ -34,12 +34,21 @@ Partial Class FormItemExpense
         Me.GridColumnBeneficiary = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemTextEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.PanelControlNav = New DevExpress.XtraEditors.PanelControl()
+        Me.DEBBKTo = New DevExpress.XtraEditors.DateEdit()
+        Me.LabelControl19 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl18 = New DevExpress.XtraEditors.LabelControl()
+        Me.DEBBKFrom = New DevExpress.XtraEditors.DateEdit()
+        Me.BViewPayment = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnBankWithdrawal = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.GCData, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVData, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControlNav, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlNav.SuspendLayout()
+        CType(Me.DEBBKTo.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEBBKTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEBBKFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEBBKFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GCData
@@ -156,12 +165,65 @@ Partial Class FormItemExpense
         '
         'PanelControlNav
         '
+        Me.PanelControlNav.Controls.Add(Me.DEBBKTo)
+        Me.PanelControlNav.Controls.Add(Me.LabelControl19)
+        Me.PanelControlNav.Controls.Add(Me.LabelControl18)
+        Me.PanelControlNav.Controls.Add(Me.DEBBKFrom)
+        Me.PanelControlNav.Controls.Add(Me.BViewPayment)
         Me.PanelControlNav.Controls.Add(Me.BtnBankWithdrawal)
         Me.PanelControlNav.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControlNav.Location = New System.Drawing.Point(0, 0)
         Me.PanelControlNav.Name = "PanelControlNav"
         Me.PanelControlNav.Size = New System.Drawing.Size(783, 46)
         Me.PanelControlNav.TabIndex = 1
+        '
+        'DEBBKTo
+        '
+        Me.DEBBKTo.EditValue = Nothing
+        Me.DEBBKTo.Location = New System.Drawing.Point(224, 13)
+        Me.DEBBKTo.Name = "DEBBKTo"
+        Me.DEBBKTo.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEBBKTo.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEBBKTo.Properties.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.DEBBKTo.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEBBKTo.Size = New System.Drawing.Size(158, 20)
+        Me.DEBBKTo.TabIndex = 8930
+        '
+        'LabelControl19
+        '
+        Me.LabelControl19.Location = New System.Drawing.Point(206, 16)
+        Me.LabelControl19.Name = "LabelControl19"
+        Me.LabelControl19.Size = New System.Drawing.Size(12, 13)
+        Me.LabelControl19.TabIndex = 8929
+        Me.LabelControl19.Text = "To"
+        '
+        'LabelControl18
+        '
+        Me.LabelControl18.Location = New System.Drawing.Point(12, 16)
+        Me.LabelControl18.Name = "LabelControl18"
+        Me.LabelControl18.Size = New System.Drawing.Size(24, 13)
+        Me.LabelControl18.TabIndex = 8928
+        Me.LabelControl18.Text = "From"
+        '
+        'DEBBKFrom
+        '
+        Me.DEBBKFrom.EditValue = Nothing
+        Me.DEBBKFrom.Location = New System.Drawing.Point(42, 13)
+        Me.DEBBKFrom.Name = "DEBBKFrom"
+        Me.DEBBKFrom.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEBBKFrom.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEBBKFrom.Properties.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.DEBBKFrom.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEBBKFrom.Size = New System.Drawing.Size(158, 20)
+        Me.DEBBKFrom.TabIndex = 8927
+        '
+        'BViewPayment
+        '
+        Me.BViewPayment.Location = New System.Drawing.Point(388, 11)
+        Me.BViewPayment.Name = "BViewPayment"
+        Me.BViewPayment.Size = New System.Drawing.Size(60, 23)
+        Me.BViewPayment.TabIndex = 8926
+        Me.BViewPayment.Text = "view"
         '
         'BtnBankWithdrawal
         '
@@ -188,6 +250,11 @@ Partial Class FormItemExpense
         CType(Me.RepositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControlNav, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControlNav.ResumeLayout(False)
+        Me.PanelControlNav.PerformLayout()
+        CType(Me.DEBBKTo.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEBBKTo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEBBKFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEBBKFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -207,4 +274,9 @@ Partial Class FormItemExpense
     Friend WithEvents RepositoryItemTextEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
     Friend WithEvents PanelControlNav As DevExpress.XtraEditors.PanelControl
     Friend WithEvents BtnBankWithdrawal As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents DEBBKTo As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents LabelControl19 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LabelControl18 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents DEBBKFrom As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents BViewPayment As DevExpress.XtraEditors.SimpleButton
 End Class

@@ -1649,4 +1649,15 @@ WHERE id_comp IN (" & id_store & ", " & id_comp_par & ")"
             SBViewLog.Visible = False
         End If
     End Sub
+
+    Private Sub SLEAccount_EditValueChanged(sender As Object, e As EventArgs) Handles SLEAccount.EditValueChanged
+        'reset store
+        resetStore()
+        TxtCodeCompTo.Text = ""
+        'reset wh
+        id_comp_par = "-1"
+        id_comp_contact_par = "-1"
+        TxtWHNameTo.Text = ""
+        TxtWHCodeTo.Text = ""
+    End Sub
 End Class

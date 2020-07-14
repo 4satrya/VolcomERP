@@ -306,6 +306,8 @@
                                         If GVAttendance.GetRowCellValue(i, "id_employee").ToString = GVEmployee.GetRowCellValue(j, "id_employee").ToString Then
                                             GVAttendance.SetRowCellValue(i, "is_valid", "yes")
                                             GVAttendance.SetRowCellValue(i, "ot_note", GVEmployee.GetRowCellValue(j, "ot_note").ToString)
+
+                                            GVAttendance.SetRowCellValue(i, "conversion_type", GVEmployee.GetRowCellValue(j, "conversion_type").ToString)
                                         End If
                                     ElseIf before_work >= ot_min And before_work_ot >= ot_min Then
                                         GVAttendance.SetRowCellValue(i, "ot_potention", "1")
@@ -321,6 +323,8 @@
                                         If GVAttendance.GetRowCellValue(i, "id_employee").ToString = GVEmployee.GetRowCellValue(j, "id_employee").ToString Then
                                             GVAttendance.SetRowCellValue(i, "is_valid", "yes")
                                             GVAttendance.SetRowCellValue(i, "ot_note", GVEmployee.GetRowCellValue(j, "ot_note").ToString)
+
+                                            GVAttendance.SetRowCellValue(i, "conversion_type", GVEmployee.GetRowCellValue(j, "conversion_type").ToString)
                                         End If
                                     End If
 
@@ -338,6 +342,8 @@
 
                                         GVAttendance.SetRowCellValue(i, "is_valid", "yes")
                                         GVAttendance.SetRowCellValue(i, "ot_note", GVEmployee.GetRowCellValue(j, "ot_note").ToString)
+
+                                        GVAttendance.SetRowCellValue(i, "conversion_type", GVEmployee.GetRowCellValue(j, "conversion_type").ToString)
                                     End If
                                 Else
                                     If work_hours >= ot_min Then
@@ -354,6 +360,8 @@
                                         If GVAttendance.GetRowCellValue(i, "id_employee").ToString = GVEmployee.GetRowCellValue(j, "id_employee").ToString Then
                                             GVAttendance.SetRowCellValue(i, "is_valid", "yes")
                                             GVAttendance.SetRowCellValue(i, "ot_note", GVEmployee.GetRowCellValue(j, "ot_note").ToString)
+
+                                            GVAttendance.SetRowCellValue(i, "conversion_type", GVEmployee.GetRowCellValue(j, "conversion_type").ToString)
                                         End If
                                     End If
                                 End If
@@ -378,6 +386,8 @@
 
                                             GVAttendance.SetRowCellValue(i, "is_valid", "yes")
                                             GVAttendance.SetRowCellValue(i, "ot_note", GVEmployee.GetRowCellValue(j, "ot_note").ToString)
+
+                                            GVAttendance.SetRowCellValue(i, "conversion_type", GVEmployee.GetRowCellValue(j, "conversion_type").ToString)
                                         End If
                                     End If
                                 End If

@@ -28,6 +28,9 @@
     End Sub
 
     Private Sub FormBankWithdrawal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        DEBBKFrom.EditValue = Now
+        DEBBKTo.EditValue = Now
+        '
         DEFromSum.EditValue = Now
         DEToSum.EditValue = Now
         '
@@ -170,7 +173,8 @@ INNER JOIN `tb_lookup_pay_type` pt ON pt.`id_pay_type`=py.`id_pay_type`
 INNER JOIN tb_m_user usr ON usr.id_user=py.id_user_created
 INNER JOIN tb_m_employee emp ON emp.id_employee=usr.id_employee
 INNER JOIN tb_lookup_report_status sts ON sts.id_report_status=py.id_report_status
-WHERE 1=1 " & where_string & " ORDER BY py.id_pn DESC"
+WHERE DATE(py.date_payment) >= '" & Date.Parse(DEBBKFrom.EditValue.ToString).ToString("yyyy-MM-dd") & "' AND DATE(py.date_payment) <= '" & Date.Parse(DEBBKTo.EditValue.ToString).ToString("yyyy-MM-dd") & "'
+" & where_string & " ORDER BY py.id_pn DESC"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCList.DataSource = data
         GVList.BestFitColumns()
@@ -1219,5 +1223,9 @@ GROUP BY pns.`id_pn_summary`"
         Else
             warningCustom("No BBK selected")
         End If
+    End Sub
+
+    Private Sub DEBBKFrom_EditValueChanged(sender As Object, e As EventArgs) Handles DEBBKFrom.EditValueChanged
+        DEBBKTo.Properties.MinValue = DEBBKFrom.EditValue
     End Sub
 End Class

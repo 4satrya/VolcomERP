@@ -21,8 +21,7 @@ Partial Public Class ReportMasterEmployeeSuratKeteranganBansos
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ReportMasterEmployeeSuratKeteranganBansos))
         Me.Detail = New DevExpress.XtraReports.UI.DetailBand()
-        Me.TopMargin = New DevExpress.XtraReports.UI.TopMarginBand()
-        Me.BottomMargin = New DevExpress.XtraReports.UI.BottomMarginBand()
+        Me.XrLabel3 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel19 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel20 = New DevExpress.XtraReports.UI.XRLabel()
         Me.L_address_primary = New DevExpress.XtraReports.UI.XRLabel()
@@ -41,32 +40,32 @@ Partial Public Class ReportMasterEmployeeSuratKeteranganBansos
         Me.XrLabel4 = New DevExpress.XtraReports.UI.XRLabel()
         Me.L_date = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel5 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel8 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel16 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel3 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.L_hrd_employee_name2 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.L_hrd_employee_position2 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.TopMargin = New DevExpress.XtraReports.UI.TopMarginBand()
+        Me.BottomMargin = New DevExpress.XtraReports.UI.BottomMarginBand()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         '
         'Detail
         '
-        Me.Detail.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel3, Me.XrLabel19, Me.XrLabel20, Me.L_address_primary, Me.XrLabel9, Me.XrLabel10, Me.XrLabel11, Me.L_employee_name, Me.L_employee_code, Me.XrLabel14, Me.XrLabel15, Me.L_employee_pob_dob, Me.XrLabel2, Me.XrLabel1, Me.L_text, Me.XLNumber, Me.XrLabel4, Me.L_date, Me.XrLabel5, Me.XrLabel8, Me.XrLabel16})
+        Me.Detail.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel3, Me.XrLabel19, Me.XrLabel20, Me.L_address_primary, Me.XrLabel9, Me.XrLabel10, Me.XrLabel11, Me.L_employee_name, Me.L_employee_code, Me.XrLabel14, Me.XrLabel15, Me.L_employee_pob_dob, Me.XrLabel2, Me.XrLabel1, Me.L_text, Me.XLNumber, Me.XrLabel4, Me.L_date, Me.XrLabel5, Me.L_hrd_employee_name2, Me.L_hrd_employee_position2})
         Me.Detail.HeightF = 764.5208!
         Me.Detail.Name = "Detail"
         Me.Detail.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
         Me.Detail.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
         '
-        'TopMargin
+        'XrLabel3
         '
-        Me.TopMargin.HeightF = 215.0!
-        Me.TopMargin.Name = "TopMargin"
-        Me.TopMargin.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
-        Me.TopMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
-        '
-        'BottomMargin
-        '
-        Me.BottomMargin.HeightF = 50.0!
-        Me.BottomMargin.Name = "BottomMargin"
-        Me.BottomMargin.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
-        Me.BottomMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+        Me.XrLabel3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.XrLabel3.LocationFloat = New DevExpress.Utils.PointFloat(0!, 700.4791!)
+        Me.XrLabel3.Multiline = True
+        Me.XrLabel3.Name = "XrLabel3"
+        Me.XrLabel3.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel3.SizeF = New System.Drawing.SizeF(150.0!, 64.04163!)
+        Me.XrLabel3.StylePriority.UseFont = False
+        Me.XrLabel3.StylePriority.UseTextAlignment = False
+        Me.XrLabel3.Text = "cc." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "- HRD" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "- F&A" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        Me.XrLabel3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopJustify
         '
         'XrLabel19
         '
@@ -296,44 +295,43 @@ Partial Public Class ReportMasterEmployeeSuratKeteranganBansos
         Me.XrLabel5.Text = "Hormat Kami,"
         Me.XrLabel5.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopJustify
         '
-        'XrLabel8
+        'L_hrd_employee_name2
         '
-        Me.XrLabel8.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel8.LocationFloat = New DevExpress.Utils.PointFloat(0!, 629.4791!)
-        Me.XrLabel8.Multiline = True
-        Me.XrLabel8.Name = "XrLabel8"
-        Me.XrLabel8.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel8.SizeF = New System.Drawing.SizeF(226.0417!, 23.0!)
-        Me.XrLabel8.StylePriority.UseFont = False
-        Me.XrLabel8.StylePriority.UseTextAlignment = False
-        Me.XrLabel8.Text = "Johannes Paulus Lazarus Handoko"
-        Me.XrLabel8.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+        Me.L_hrd_employee_name2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.L_hrd_employee_name2.LocationFloat = New DevExpress.Utils.PointFloat(0!, 629.4791!)
+        Me.L_hrd_employee_name2.Multiline = True
+        Me.L_hrd_employee_name2.Name = "L_hrd_employee_name2"
+        Me.L_hrd_employee_name2.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.L_hrd_employee_name2.SizeF = New System.Drawing.SizeF(226.0417!, 23.0!)
+        Me.L_hrd_employee_name2.StylePriority.UseFont = False
+        Me.L_hrd_employee_name2.StylePriority.UseTextAlignment = False
+        Me.L_hrd_employee_name2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
         '
-        'XrLabel16
+        'L_hrd_employee_position2
         '
-        Me.XrLabel16.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel16.LocationFloat = New DevExpress.Utils.PointFloat(0!, 652.4791!)
-        Me.XrLabel16.Multiline = True
-        Me.XrLabel16.Name = "XrLabel16"
-        Me.XrLabel16.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel16.SizeF = New System.Drawing.SizeF(226.0417!, 23.0!)
-        Me.XrLabel16.StylePriority.UseFont = False
-        Me.XrLabel16.StylePriority.UseTextAlignment = False
-        Me.XrLabel16.Text = "HR & Compliance Manager"
-        Me.XrLabel16.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopJustify
+        Me.L_hrd_employee_position2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.L_hrd_employee_position2.LocationFloat = New DevExpress.Utils.PointFloat(0!, 652.4791!)
+        Me.L_hrd_employee_position2.Multiline = True
+        Me.L_hrd_employee_position2.Name = "L_hrd_employee_position2"
+        Me.L_hrd_employee_position2.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.L_hrd_employee_position2.SizeF = New System.Drawing.SizeF(226.0417!, 23.0!)
+        Me.L_hrd_employee_position2.StylePriority.UseFont = False
+        Me.L_hrd_employee_position2.StylePriority.UseTextAlignment = False
+        Me.L_hrd_employee_position2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopJustify
         '
-        'XrLabel3
+        'TopMargin
         '
-        Me.XrLabel3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel3.LocationFloat = New DevExpress.Utils.PointFloat(0!, 700.4791!)
-        Me.XrLabel3.Multiline = True
-        Me.XrLabel3.Name = "XrLabel3"
-        Me.XrLabel3.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel3.SizeF = New System.Drawing.SizeF(150.0!, 64.04163!)
-        Me.XrLabel3.StylePriority.UseFont = False
-        Me.XrLabel3.StylePriority.UseTextAlignment = False
-        Me.XrLabel3.Text = "cc." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "- HRD" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "- F&A" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
-        Me.XrLabel3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopJustify
+        Me.TopMargin.HeightF = 215.0!
+        Me.TopMargin.Name = "TopMargin"
+        Me.TopMargin.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
+        Me.TopMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+        '
+        'BottomMargin
+        '
+        Me.BottomMargin.HeightF = 50.0!
+        Me.BottomMargin.Name = "BottomMargin"
+        Me.BottomMargin.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
+        Me.BottomMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
         '
         'ReportMasterEmployeeSuratKeteranganBansos
         '
@@ -365,7 +363,7 @@ Partial Public Class ReportMasterEmployeeSuratKeteranganBansos
     Friend WithEvents XrLabel4 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents L_date As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel5 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel8 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel16 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents L_hrd_employee_name2 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents L_hrd_employee_position2 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel3 As DevExpress.XtraReports.UI.XRLabel
 End Class

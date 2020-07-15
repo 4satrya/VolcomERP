@@ -21,15 +21,23 @@
         'focus
         ActiveControl = SLECOA
 
+        'option
+        If id_pop_up = "1" Then
+            'bpj toko cabang
+            SLEComp.Enabled = False
+        End If
+
         If action = "ins" Then
             'coa
             Dim id_acc As String = SLECOA.EditValue.ToString
             TxtCOA.Text = execute_query("SELECT acc_name FROM tb_a_acc WHERE id_acc='" + id_acc + "' ", 0, True, "", "", "", "")
 
             'comp
-            SLEComp.EditValue = "-1"
-            TxtComp.Text = ""
-            SLEComp.EditValue = "1"
+            If id_pop_up = "-1" Then
+                SLEComp.EditValue = "-1"
+                TxtComp.Text = ""
+                SLEComp.EditValue = "1"
+            End If
             TxtComp.Text = execute_query("SELECT comp_number FROM tb_m_comp WHERE id_comp='" + SLEComp.EditValue.ToString + "' ", 0, True, "", "", "", "")
 
             TxtReff.Text = ""
@@ -60,7 +68,11 @@
     End Sub
 
     Sub viewComp()
-        Dim query As String = "SELECT c.id_comp, c.comp_number,c.comp_name FROM tb_m_comp c"
+        Dim query As String = "SELECT c.id_comp, c.comp_number,c.comp_name FROM tb_m_comp c WHERE 1=1 "
+        If id_pop_up = "1" Then
+            Dim id_comp_tag As String = execute_query("SELECT id_comp FROM tb_coa_tag WHERE id_coa_tag='" + FormSalesBranchDet.SLEUnit.EditValue.ToString + "' ", 0, True, "", "", "", "")
+            query += "AND c.id_comp='" + id_comp_tag + "' "
+        End If
         viewSearchLookupQuery(SLEComp, query, "id_comp", "comp_name", "id_comp")
     End Sub
 

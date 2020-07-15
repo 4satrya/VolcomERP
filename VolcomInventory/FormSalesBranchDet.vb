@@ -177,6 +177,7 @@
 
     Private Sub SLEUnit_EditValueChanged(sender As Object, e As EventArgs) Handles SLEUnit.EditValueChanged
         getStoreAccount()
+        viewDetail()
     End Sub
 
     Sub getStoreAccount()

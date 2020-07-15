@@ -3,6 +3,7 @@
     Public action As String = "-1"
     Public rmt As String = "254"
     Public id_report_status As String = "1"
+    Public is_view As String = "-1"
 
     Private Sub FormSalesBranchDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewReportStatus()
@@ -111,6 +112,40 @@
 
             'detail
             viewDetail()
+        Else
+            Dim sb As New ClassSalesBranch()
+            Dim query As String = sb.queryMain("AND b.id_sales_branch=" + id + "", "1")
+            Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+            SLEUnit.EditValue = data.Rows(0)("id_coa_tag").ToString
+            DESalesDate.EditValue = data.Rows(0)("transaction_date")
+            id_report_status = data.Rows(0)("id_report_status")
+            LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", data.Rows(0)("id_report_status").ToString)
+            MENote.Text = data.Rows(0)("note").ToString
+            TxtTotal.EditValue = data.Rows(0)("value")
+            'normal
+            SLEStoreNormal.EditValue = data.Rows(0)("id_store_normal").ToString
+            TxtRevGrossNormal.EditValue = data.Rows(0)("rev_normal")
+            TxtProsPPNNormal.EditValue = data.Rows(0)("rev_normal_ppn_pros")
+            TxtPPNNormal.EditValue = data.Rows(0)("rev_normal_ppn")
+            SLEAccPPNNormal.EditValue = data.Rows(0)("id_coa_ppn_normal").ToString
+            TxtRevNormal.EditValue = data.Rows(0)("rev_normal_net")
+            SLEAccRevNormal.EditValue = data.Rows(0)("id_coa_pend_normal").ToString
+            TxtAPNormal.EditValue = data.Rows(0)("comp_rev_normal")
+            SLEAccAPNormal.EditValue = data.Rows(0)("id_coa_hd_normal")
+            'sale
+            SLEStoreSale.EditValue = data.Rows(0)("id_store_sale").ToString
+            TxtRevGrossSale.EditValue = data.Rows(0)("rev_sale")
+            TxtProsPPNSale.EditValue = data.Rows(0)("rev_sale_ppn_pros")
+            TxtPPNSale.EditValue = data.Rows(0)("rev_sale_ppn")
+            SLEAccPPNSale.EditValue = data.Rows(0)("id_coa_ppn_sale").ToString
+            TxtRevSale.EditValue = data.Rows(0)("rev_sale_net")
+            SLEAccRevSale.EditValue = data.Rows(0)("id_coa_pend_sale").ToString
+            TxtAPSale.EditValue = data.Rows(0)("comp_rev_sale")
+            SLEAccAPSale.EditValue = data.Rows(0)("id_coa_hd_sale")
+
+            'detail
+            viewDetail()
+            allowStatus()
         End If
     End Sub
 
@@ -127,7 +162,7 @@
         Cursor = Cursors.WaitCursor
         Dim query As String = "SELECT d.id_sales_branch_det, d.id_sales_branch, 
         d.id_acc, coa.acc_name AS `coa_account`, coa.acc_description AS `coa_description`,
-        d.id_dc, dc.dc_code, d.id_comp, c.comp_number, d.note, d.`value`, d.id_report, d.number, d.report_mark_type
+        d.id_dc, dc.dc_code, d.id_comp, c.comp_number, d.note, d.`value`, d.id_report, d.number, d.report_mark_type, d.vendor
         FROM tb_sales_branch_det d
         INNER JOIN tb_a_acc coa ON coa.id_acc = d.id_acc
         INNER JOIN tb_lookup_dc dc ON dc.id_dc = d.id_dc
@@ -233,25 +268,25 @@
         TxtPPNNoteNormal.Text = getCOADescription(SLEAccPPNNormal)
     End Sub
 
-    'Private Sub SLEAccRevNormal_EditValueChanged(sender As Object, e As EventArgs) Handles SLEAccRevNormal.EditValueChanged
-    '    TxtRevNoteNormal.Text = getCOADescription(SLEAccRevNormal)
-    'End Sub
+    Private Sub SLEAccRevNormal_EditValueChanged(sender As Object, e As EventArgs) Handles SLEAccRevNormal.EditValueChanged
+        TxtRevNoteNormal.Text = getCOADescription(SLEAccRevNormal)
+    End Sub
 
-    'Private Sub SLEAccAPNormal_EditValueChanged(sender As Object, e As EventArgs) Handles SLEAccAPNormal.EditValueChanged
-    '    TxtAPNoteNormal.Text = getCOADescription(SLEAccAPNormal)
-    'End Sub
+    Private Sub SLEAccAPNormal_EditValueChanged(sender As Object, e As EventArgs) Handles SLEAccAPNormal.EditValueChanged
+        TxtAPNoteNormal.Text = getCOADescription(SLEAccAPNormal)
+    End Sub
 
-    'Private Sub SLEAccPPNSale_EditValueChanged(sender As Object, e As EventArgs) Handles SLEAccPPNSale.EditValueChanged
-    '    TxtPPNNoteSale.Text = getCOADescription(SLEAccPPNSale)
-    'End Sub
+    Private Sub SLEAccPPNSale_EditValueChanged(sender As Object, e As EventArgs) Handles SLEAccPPNSale.EditValueChanged
+        TxtPPNNoteSale.Text = getCOADescription(SLEAccPPNSale)
+    End Sub
 
-    'Private Sub SLEAccRevSale_EditValueChanged(sender As Object, e As EventArgs) Handles SLEAccRevSale.EditValueChanged
-    '    TxtRevNoteSale.Text = getCOADescription(SLEAccRevSale)
-    'End Sub
+    Private Sub SLEAccRevSale_EditValueChanged(sender As Object, e As EventArgs) Handles SLEAccRevSale.EditValueChanged
+        TxtRevNoteSale.Text = getCOADescription(SLEAccRevSale)
+    End Sub
 
-    'Private Sub SLEAccAPSale_EditValueChanged(sender As Object, e As EventArgs) Handles SLEAccAPSale.EditValueChanged
-    '    TxtAPNoteSale.Text = getCOADescription(SLEAccAPSale)
-    'End Sub
+    Private Sub SLEAccAPSale_EditValueChanged(sender As Object, e As EventArgs) Handles SLEAccAPSale.EditValueChanged
+        TxtAPNoteSale.Text = getCOADescription(SLEAccAPSale)
+    End Sub
 
     Private Sub FormSalesBranchDet_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
         Dispose()
@@ -399,5 +434,235 @@
         End If
         GVDraft.BestFitColumns()
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub GVData_DoubleClick(sender As Object, e As EventArgs) Handles GVData.DoubleClick
+        If id = "-1" And GVData.FocusedRowHandle >= 0 Then
+            If GVData.GetFocusedRowCellValue("id_report") = "0" Then
+                Cursor = Cursors.WaitCursor
+                FormBankDepositAdd.id_pop_up = "1"
+                FormBankDepositAdd.action = "upd"
+                FormBankDepositAdd.ShowDialog()
+                Cursor = Cursors.Default
+            End If
+        End If
+    End Sub
+
+    Private Sub GVData_CustomColumnDisplayText(sender As Object, e As DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs) Handles GVData.CustomColumnDisplayText
+        If e.Column.FieldName = "no" Then
+            e.DisplayText = (e.ListSourceRowIndex + 1).ToString()
+        End If
+    End Sub
+
+    Private Sub GVDraft_CustomColumnDisplayText(sender As Object, e As DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs) Handles GVDraft.CustomColumnDisplayText
+        If e.Column.FieldName = "no" Then
+            e.DisplayText = (e.ListSourceRowIndex + 1).ToString()
+        End If
+    End Sub
+
+    Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles BtnSave.Click
+        makeSafeGV(GVData)
+        GCData.RefreshDataSource()
+        GVData.RefreshData()
+        calculate()
+
+        'cek balance journal
+        Dim cond_bal As Boolean = True
+        XTCData.SelectedTabPageIndex = 1
+        makeSafeGV(GVDraft)
+        If GVDraft.Columns("debit").SummaryItem.SummaryValue = GVDraft.Columns("credit").SummaryItem.SummaryValue Then
+            cond_bal = True
+            XTCData.SelectedTabPageIndex = 0
+        Else
+            cond_bal = False
+        End If
+
+        If Not cond_bal Then
+            warningCustom("Journal not balance please check your input")
+
+        Else
+            Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure want to save this data ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+            If confirm = Windows.Forms.DialogResult.Yes Then
+                Dim id_coa_tag As String = SLEUnit.EditValue.ToString
+                Dim transaction_date As String = DateTime.Parse(DESalesDate.EditValue.ToString).ToString("yyyy-MM-dd")
+                Dim note As String = addSlashes(MENote.Text)
+                Dim value As String = decimalSQL(TxtTotal.EditValue.ToString)
+                Dim rev_normal As String = decimalSQL(TxtRevGrossNormal.EditValue.ToString)
+                Dim rev_normal_ppn_pros As String = decimalSQL(TxtProsPPNNormal.EditValue.ToString)
+                Dim rev_normal_ppn As String = decimalSQL(TxtPPNNormal.EditValue.ToString)
+                Dim rev_normal_ppn_acc As String = SLEAccPPNNormal.EditValue.ToString
+                Dim rev_normal_net As String = decimalSQL(TxtRevNormal.EditValue.ToString)
+                Dim rev_normal_net_acc As String = SLEAccRevNormal.EditValue.ToString
+                Dim comp_rev_normal As String = decimalSQL(TxtAPNormal.EditValue.ToString)
+                Dim comp_rev_normal_acc As String = SLEAccAPNormal.EditValue.ToString
+                Dim rev_sale As String = decimalSQL(TxtRevGrossSale.EditValue.ToString)
+                Dim rev_sale_ppn_pros As String = decimalSQL(TxtProsPPNSale.EditValue.ToString)
+                Dim rev_sale_ppn As String = decimalSQL(TxtPPNSale.EditValue.ToString)
+                Dim rev_sale_ppn_acc As String = SLEAccPPNSale.EditValue.ToString
+                Dim rev_sale_nett As String = decimalSQL(TxtRevSale.EditValue.ToString)
+                Dim rev_sale_net_acc As String = SLEAccRevSale.EditValue.ToString
+                Dim comp_rev_sale As String = decimalSQL(TxtAPSale.EditValue.ToString)
+                Dim comp_rev_sale_acc As String = SLEAccAPSale.EditValue.ToString
+                Dim query As String = "INSERT INTO tb_sales_branch(`id_coa_tag`,
+                `created_date`,
+                `transaction_date`,
+                `id_report_status`,
+                `note`
+                `value` ,
+                `pros_normal`,
+                `pros_normal_comp`,
+                `rev_normal`,
+                `rev_normal_ppn_pros`,
+                `rev_normal_ppn`,
+                `rev_normal_ppn_acc`,
+                `rev_normal_net`,
+                `rev_normal_net_acc`,
+                `comp_rev_normal`,
+                `comp_rev_normal_acc`,
+                `pros_sale`,
+                `pros_sale_comp`,
+                `rev_sale`,
+                `rev_sale_ppn_pros`,
+                `rev_sale_ppn`,
+                `rev_sale_ppn_acc`,
+                `rev_sale_nett`,
+                `rev_sale_net_acc`,
+                `comp_rev_sale`,
+                `comp_rev_sale_acc`)
+                VALUES
+                ('" + id_coa_tag + "',
+                NOW()
+                '" + transaction_date + "',
+                '" + id_report_status + "',
+                '" + note + "',
+                '" + value + "' ,
+                '0',
+                '0',
+                '" + rev_normal + "',
+                '" + rev_normal_ppn_pros + "',
+                '" + rev_normal_ppn + "',
+                '" + rev_normal_ppn_acc + "',
+                '" + rev_normal_net + "',
+                '" + rev_normal_net_acc + "',
+                '" + comp_rev_normal + "',
+                '" + comp_rev_normal_acc + "',
+                '0',
+                '0',
+                '" + rev_sale + "',
+                '" + rev_sale_ppn_pros + "',
+                '" + rev_sale_ppn + "',
+                '" + rev_sale_ppn_acc + "',
+                '" + rev_sale_nett + "',
+                '" + rev_sale_net_acc + "',
+                '" + comp_rev_sale + "',
+                '" + comp_rev_sale_acc + "' ); SELECT LAST_INSERT_ID(); "
+                id = execute_query(query, 0, True, "", "", "", "")
+
+                'detail
+                Dim query_det As String = "INSERT INTO tb_sales_branch_det(id_sales_branch, id_acc, id_dc, id_comp, note, value, id_report, number, report_mark_type,vendor) "
+                For i As Integer = 0 To GVData.RowCount - 1
+                    Dim id_acc As String = GVData.GetRowCellValue(i, "id_acc").ToString
+                    Dim id_dc As String = GVData.GetRowCellValue(i, "id_dc").ToString
+                    Dim id_comp As String = GVData.GetRowCellValue(i, "id_comp").ToString
+                    If id_comp = "0" Then
+                        id_comp = "NULL"
+                    End If
+                    Dim note_detail As String = addSlashes(GVData.GetRowCellValue(i, "note_detail").ToString)
+                    Dim value_detail As String = decimalSQL(GVData.GetRowCellValue(i, "value").ToString)
+                    Dim id_report As String = GVData.GetRowCellValue(i, "id_report").ToString
+                    If id_report = "0" Then
+                        id_report = "NULL"
+                    End If
+                    Dim number As String = addSlashes(GVData.GetRowCellValue(i, "number").ToString)
+                    Dim report_mark_type As String = GVData.GetRowCellValue(i, "report_mark_type").ToString
+                    If report_mark_type = "0" Then
+                        report_mark_type = "NULL"
+                    End If
+                    Dim vendor As String = addSlashes(GVData.GetRowCellValue(i, "vendor").ToString)
+
+                    If i > 0 Then
+                        query_det += ","
+                    End If
+                    query_det += "('" + id + "', '" + id_acc + "', '" + id_dc + "', " + id_comp + ", '" + note_detail + "', '" + value_detail + "', " + id_report + ", '" + number + "', " + report_mark_type + ", '" + vendor + "') "
+                Next
+                If GVData.RowCount > 0 Then
+                    execute_non_query(query_det, True, "", "", "", "")
+                End If
+
+                'generate number
+                execute_non_query("CALL gen_number('" & id & "','" + rmt + "')", True, "", "", "", "")
+
+                'add mark
+                submit_who_prepared(rmt, id, id_user)
+
+                'done
+                infoCustom("Sales created. Waiting for approval")
+
+                'refresh
+                FormSalesBranch.GVData.FocusedRowHandle = find_row(FormSalesBranch.GVData, "id_sales_branch", id)
+                FormSalesBranch.viewData()
+                action = "upd"
+                actionLoad()
+            End If
+        End If
+    End Sub
+
+    Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles BtnCancel.Click
+        Close()
+    End Sub
+
+    Private Sub BtnViewJournal_Click(sender As Object, e As EventArgs) Handles BtnViewJournal.Click
+        Cursor = Cursors.WaitCursor
+        Dim id_acc_trans As String = ""
+        Try
+            id_acc_trans = execute_query("SELECT ad.id_acc_trans FROM tb_a_acc_trans_det ad
+            WHERE ad.report_mark_type=" + rmt + " AND ad.id_report=" + id + "
+            GROUP BY ad.id_acc_trans ", 0, True, "", "", "", "")
+        Catch ex As Exception
+            id_acc_trans = ""
+        End Try
+
+        If id_acc_trans <> "" Then
+            Dim s As New ClassShowPopUp()
+            FormViewJournal.is_enable_view_doc = False
+            FormViewJournal.BMark.Visible = False
+            FormViewJournal.show_trans_number = True
+            s.id_report = id_acc_trans
+            s.report_mark_type = "36"
+            s.show()
+        Else
+            warningCustom("Auto journal not found.")
+        End If
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles BtnPrint.Click
+        'Cursor = Cursors.WaitCursor
+        'ReportBankDepositNew.id = id_deposit
+        'ReportBankDepositNew.id_report_status = id_report_status
+        'ReportBankDepositNew.rmt = "162"
+        'Dim Report As New ReportBankDepositNew()
+
+        'If CEPrintPreview.EditValue = True Then
+        '    Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
+        '    Tool.ShowPreviewDialog()
+        'Else
+        '    Dim instance As New Printing.PrinterSettings
+        '    Dim DefaultPrinter As String = instance.PrinterName
+
+        '    ' THIS IS TO PRINT THE REPORT
+        '    Report.PrinterName = DefaultPrinter
+        '    Report.CreateDocument()
+        '    Report.PrintingSystem.ShowMarginsWarning = False
+        '    Report.Print()
+        'End If
+        'Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BMark_Click(sender As Object, e As EventArgs) Handles BMark.Click
+        FormReportMark.report_mark_type = rmt
+        FormReportMark.is_view = is_view
+        FormReportMark.id_report = id
+        FormReportMark.ShowDialog()
     End Sub
 End Class

@@ -138,6 +138,7 @@ Partial Class FormSalesBranchDet
         Me.GridColumncomp_number = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnid_report = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnreport_number = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnvendor = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControlNav = New DevExpress.XtraEditors.PanelControl()
         Me.BtnDelete = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnAdd = New DevExpress.XtraEditors.SimpleButton()
@@ -319,7 +320,7 @@ Partial Class FormSalesBranchDet
         Me.BtnSave.Location = New System.Drawing.Point(909, 2)
         Me.BtnSave.Name = "BtnSave"
         Me.BtnSave.Size = New System.Drawing.Size(75, 42)
-        Me.BtnSave.TabIndex = 16
+        Me.BtnSave.TabIndex = 8944
         Me.BtnSave.TabStop = False
         Me.BtnSave.Text = "Save"
         '
@@ -364,7 +365,7 @@ Partial Class FormSalesBranchDet
         Me.MENote.Name = "MENote"
         Me.MENote.Properties.MaxLength = 199
         Me.MENote.Size = New System.Drawing.Size(755, 48)
-        Me.MENote.TabIndex = 0
+        Me.MENote.TabIndex = 8943
         '
         'PanelControl2
         '
@@ -567,7 +568,7 @@ Partial Class FormSalesBranchDet
         Me.TxtAPNoteNormal.Location = New System.Drawing.Point(553, 116)
         Me.TxtAPNoteNormal.Name = "TxtAPNoteNormal"
         Me.TxtAPNoteNormal.Size = New System.Drawing.Size(335, 20)
-        Me.TxtAPNoteNormal.TabIndex = 8942
+        Me.TxtAPNoteNormal.TabIndex = 8933
         '
         'LabelControl14
         '
@@ -588,7 +589,7 @@ Partial Class FormSalesBranchDet
         Me.SLEAccAPNormal.Properties.ShowClearButton = False
         Me.SLEAccAPNormal.Properties.View = Me.GridView3
         Me.SLEAccAPNormal.Size = New System.Drawing.Size(189, 20)
-        Me.SLEAccAPNormal.TabIndex = 8940
+        Me.SLEAccAPNormal.TabIndex = 8932
         '
         'GridView3
         '
@@ -633,7 +634,7 @@ Partial Class FormSalesBranchDet
         Me.TxtRevNoteNormal.Location = New System.Drawing.Point(553, 90)
         Me.TxtRevNoteNormal.Name = "TxtRevNoteNormal"
         Me.TxtRevNoteNormal.Size = New System.Drawing.Size(335, 20)
-        Me.TxtRevNoteNormal.TabIndex = 8938
+        Me.TxtRevNoteNormal.TabIndex = 8930
         '
         'LabelControl10
         '
@@ -649,7 +650,7 @@ Partial Class FormSalesBranchDet
         Me.TxtPPNNoteNormal.Location = New System.Drawing.Point(553, 64)
         Me.TxtPPNNoteNormal.Name = "TxtPPNNoteNormal"
         Me.TxtPPNNoteNormal.Size = New System.Drawing.Size(335, 20)
-        Me.TxtPPNNoteNormal.TabIndex = 8936
+        Me.TxtPPNNoteNormal.TabIndex = 8928
         '
         'LabelControl12
         '
@@ -668,7 +669,7 @@ Partial Class FormSalesBranchDet
         Me.TxtAPNormal.Properties.Mask.EditMask = "N2"
         Me.TxtAPNormal.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
         Me.TxtAPNormal.Size = New System.Drawing.Size(188, 20)
-        Me.TxtAPNormal.TabIndex = 8934
+        Me.TxtAPNormal.TabIndex = 8931
         '
         'SLEAccRevNormal
         '
@@ -681,7 +682,7 @@ Partial Class FormSalesBranchDet
         Me.SLEAccRevNormal.Properties.ShowClearButton = False
         Me.SLEAccRevNormal.Properties.View = Me.GridView1
         Me.SLEAccRevNormal.Size = New System.Drawing.Size(189, 20)
-        Me.SLEAccRevNormal.TabIndex = 8933
+        Me.SLEAccRevNormal.TabIndex = 8929
         '
         'GridView1
         '
@@ -776,7 +777,7 @@ Partial Class FormSalesBranchDet
         Me.SLEAccPPNNormal.Properties.ShowClearButton = False
         Me.SLEAccPPNNormal.Properties.View = Me.SearchLookUpEdit2View
         Me.SLEAccPPNNormal.Size = New System.Drawing.Size(189, 20)
-        Me.SLEAccPPNNormal.TabIndex = 8930
+        Me.SLEAccPPNNormal.TabIndex = 8927
         '
         'SearchLookUpEdit2View
         '
@@ -856,7 +857,7 @@ Partial Class FormSalesBranchDet
         Me.TxtProsPPNNormal.Properties.Mask.EditMask = "N2"
         Me.TxtProsPPNNormal.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
         Me.TxtProsPPNNormal.Size = New System.Drawing.Size(46, 20)
-        Me.TxtProsPPNNormal.TabIndex = 8928
+        Me.TxtProsPPNNormal.TabIndex = 8926
         '
         'LabelControl9
         '
@@ -935,7 +936,7 @@ Partial Class FormSalesBranchDet
         Me.SLEAccAPSale.Properties.ShowClearButton = False
         Me.SLEAccAPSale.Properties.View = Me.GridView4
         Me.SLEAccAPSale.Size = New System.Drawing.Size(189, 20)
-        Me.SLEAccAPSale.TabIndex = 8940
+        Me.SLEAccAPSale.TabIndex = 8941
         '
         'GridView4
         '
@@ -980,7 +981,7 @@ Partial Class FormSalesBranchDet
         Me.TxtRevNoteSale.Location = New System.Drawing.Point(553, 90)
         Me.TxtRevNoteSale.Name = "TxtRevNoteSale"
         Me.TxtRevNoteSale.Size = New System.Drawing.Size(335, 20)
-        Me.TxtRevNoteSale.TabIndex = 8938
+        Me.TxtRevNoteSale.TabIndex = 8939
         '
         'LabelControl17
         '
@@ -996,7 +997,7 @@ Partial Class FormSalesBranchDet
         Me.TxtPPNNoteSale.Location = New System.Drawing.Point(553, 64)
         Me.TxtPPNNoteSale.Name = "TxtPPNNoteSale"
         Me.TxtPPNNoteSale.Size = New System.Drawing.Size(335, 20)
-        Me.TxtPPNNoteSale.TabIndex = 8936
+        Me.TxtPPNNoteSale.TabIndex = 8937
         '
         'LabelControl18
         '
@@ -1015,7 +1016,7 @@ Partial Class FormSalesBranchDet
         Me.TxtAPSale.Properties.Mask.EditMask = "N2"
         Me.TxtAPSale.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
         Me.TxtAPSale.Size = New System.Drawing.Size(188, 20)
-        Me.TxtAPSale.TabIndex = 8934
+        Me.TxtAPSale.TabIndex = 8940
         '
         'SLEAccRevSale
         '
@@ -1028,7 +1029,7 @@ Partial Class FormSalesBranchDet
         Me.SLEAccRevSale.Properties.ShowClearButton = False
         Me.SLEAccRevSale.Properties.View = Me.GridView5
         Me.SLEAccRevSale.Size = New System.Drawing.Size(189, 20)
-        Me.SLEAccRevSale.TabIndex = 8933
+        Me.SLEAccRevSale.TabIndex = 8938
         '
         'GridView5
         '
@@ -1123,7 +1124,7 @@ Partial Class FormSalesBranchDet
         Me.SLEAccPPNSale.Properties.ShowClearButton = False
         Me.SLEAccPPNSale.Properties.View = Me.GridView7
         Me.SLEAccPPNSale.Size = New System.Drawing.Size(189, 20)
-        Me.SLEAccPPNSale.TabIndex = 8930
+        Me.SLEAccPPNSale.TabIndex = 8936
         '
         'GridView7
         '
@@ -1184,7 +1185,7 @@ Partial Class FormSalesBranchDet
         Me.TxtRevGrossSale.Properties.Mask.EditMask = "N2"
         Me.TxtRevGrossSale.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
         Me.TxtRevGrossSale.Size = New System.Drawing.Size(379, 20)
-        Me.TxtRevGrossSale.TabIndex = 8925
+        Me.TxtRevGrossSale.TabIndex = 8934
         '
         'LabelControl22
         '
@@ -1203,7 +1204,7 @@ Partial Class FormSalesBranchDet
         Me.TxtProsPPNSale.Properties.Mask.EditMask = "N2"
         Me.TxtProsPPNSale.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
         Me.TxtProsPPNSale.Size = New System.Drawing.Size(46, 20)
-        Me.TxtProsPPNSale.TabIndex = 8928
+        Me.TxtProsPPNSale.TabIndex = 8935
         '
         'LabelControl23
         '
@@ -1237,7 +1238,7 @@ Partial Class FormSalesBranchDet
         '
         'GVData
         '
-        Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnid_sales_branch_det, Me.GridColumnid_sales_branch, Me.GridColumnid_acc, Me.GridColumncoa_account, Me.GridColumncoa_description, Me.GridColumnid_dc, Me.GridColumndc_code, Me.GridColumnid_comp_det, Me.GridColumnnote, Me.GridColumnvalue, Me.GridColumnno, Me.GridColumncomp_number, Me.GridColumnid_report, Me.GridColumnreport_number})
+        Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnid_sales_branch_det, Me.GridColumnid_sales_branch, Me.GridColumnid_acc, Me.GridColumncoa_account, Me.GridColumncoa_description, Me.GridColumnid_dc, Me.GridColumndc_code, Me.GridColumnid_comp_det, Me.GridColumnnote, Me.GridColumnvalue, Me.GridColumnno, Me.GridColumncomp_number, Me.GridColumnid_report, Me.GridColumnreport_number, Me.GridColumnvendor})
         Me.GVData.GridControl = Me.GCData
         Me.GVData.Name = "GVData"
         Me.GVData.OptionsView.ShowFooter = True
@@ -1273,7 +1274,7 @@ Partial Class FormSalesBranchDet
         Me.GridColumncoa_account.OptionsColumn.ReadOnly = True
         Me.GridColumncoa_account.Visible = True
         Me.GridColumncoa_account.VisibleIndex = 1
-        Me.GridColumncoa_account.Width = 163
+        Me.GridColumncoa_account.Width = 155
         '
         'GridColumncoa_description
         '
@@ -1297,7 +1298,7 @@ Partial Class FormSalesBranchDet
         Me.GridColumndc_code.OptionsColumn.ReadOnly = True
         Me.GridColumndc_code.Visible = True
         Me.GridColumndc_code.VisibleIndex = 5
-        Me.GridColumndc_code.Width = 47
+        Me.GridColumndc_code.Width = 44
         '
         'GridColumnid_comp_det
         '
@@ -1313,7 +1314,7 @@ Partial Class FormSalesBranchDet
         Me.GridColumnnote.Name = "GridColumnnote"
         Me.GridColumnnote.Visible = True
         Me.GridColumnnote.VisibleIndex = 4
-        Me.GridColumnnote.Width = 1099
+        Me.GridColumnnote.Width = 1067
         '
         'GridColumnvalue
         '
@@ -1326,7 +1327,7 @@ Partial Class FormSalesBranchDet
         Me.GridColumnvalue.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "value", "{0:N2}")})
         Me.GridColumnvalue.Visible = True
         Me.GridColumnvalue.VisibleIndex = 6
-        Me.GridColumnvalue.Width = 202
+        Me.GridColumnvalue.Width = 204
         '
         'GridColumnno
         '
@@ -1335,7 +1336,7 @@ Partial Class FormSalesBranchDet
         Me.GridColumnno.Name = "GridColumnno"
         Me.GridColumnno.Visible = True
         Me.GridColumnno.VisibleIndex = 0
-        Me.GridColumnno.Width = 65
+        Me.GridColumnno.Width = 54
         '
         'GridColumncomp_number
         '
@@ -1344,7 +1345,7 @@ Partial Class FormSalesBranchDet
         Me.GridColumncomp_number.Name = "GridColumncomp_number"
         Me.GridColumncomp_number.Visible = True
         Me.GridColumncomp_number.VisibleIndex = 2
-        Me.GridColumncomp_number.Width = 56
+        Me.GridColumncomp_number.Width = 53
         '
         'GridColumnid_report
         '
@@ -1359,6 +1360,13 @@ Partial Class FormSalesBranchDet
         Me.GridColumnreport_number.Name = "GridColumnreport_number"
         Me.GridColumnreport_number.Visible = True
         Me.GridColumnreport_number.VisibleIndex = 3
+        Me.GridColumnreport_number.Width = 55
+        '
+        'GridColumnvendor
+        '
+        Me.GridColumnvendor.Caption = "Vendor"
+        Me.GridColumnvendor.FieldName = "vendor"
+        Me.GridColumnvendor.Name = "GridColumnvendor"
         '
         'PanelControlNav
         '
@@ -1739,4 +1747,5 @@ Partial Class FormSalesBranchDet
     Friend WithEvents GridColumncomp_number As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnid_report As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnreport_number As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnvendor As DevExpress.XtraGrid.Columns.GridColumn
 End Class

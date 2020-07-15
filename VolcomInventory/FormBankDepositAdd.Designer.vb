@@ -48,6 +48,7 @@ Partial Class FormBankDepositAdd
         Me.BtnClearComp = New DevExpress.XtraEditors.SimpleButton()
         Me.LabelControl7 = New DevExpress.XtraEditors.LabelControl()
         Me.TxtSupplier = New DevExpress.XtraEditors.TextEdit()
+        Me.TxtAutoFill = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.SLECOA.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtCOA.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -133,12 +134,13 @@ Partial Class FormBankDepositAdd
         '
         'BtnClose
         '
+        Me.BtnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.BtnClose.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnClose.Image = CType(resources.GetObject("BtnClose.Image"), System.Drawing.Image)
         Me.BtnClose.Location = New System.Drawing.Point(244, 2)
         Me.BtnClose.Name = "BtnClose"
         Me.BtnClose.Size = New System.Drawing.Size(82, 41)
-        Me.BtnClose.TabIndex = 30
+        Me.BtnClose.TabIndex = 31
         Me.BtnClose.Text = "Close"
         '
         'BtnAdd
@@ -148,7 +150,7 @@ Partial Class FormBankDepositAdd
         Me.BtnAdd.Location = New System.Drawing.Point(326, 2)
         Me.BtnAdd.Name = "BtnAdd"
         Me.BtnAdd.Size = New System.Drawing.Size(75, 41)
-        Me.BtnAdd.TabIndex = 29
+        Me.BtnAdd.TabIndex = 30
         Me.BtnAdd.Text = "OK"
         '
         'LabelControl2
@@ -170,7 +172,7 @@ Partial Class FormBankDepositAdd
         '
         Me.TxtDescription.Location = New System.Drawing.Point(19, 171)
         Me.TxtDescription.Name = "TxtDescription"
-        Me.TxtDescription.Size = New System.Drawing.Size(360, 20)
+        Me.TxtDescription.Size = New System.Drawing.Size(307, 20)
         Me.TxtDescription.TabIndex = 25
         '
         'LabelControl3
@@ -235,7 +237,7 @@ Partial Class FormBankDepositAdd
         Me.LEDK.Name = "LEDK"
         Me.LEDK.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.LEDK.Size = New System.Drawing.Size(100, 20)
-        Me.LEDK.TabIndex = 27
+        Me.LEDK.TabIndex = 28
         '
         'LabelControl5
         '
@@ -271,7 +273,7 @@ Partial Class FormBankDepositAdd
         Me.TxtAmount.Properties.Mask.EditMask = "N2"
         Me.TxtAmount.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
         Me.TxtAmount.Size = New System.Drawing.Size(257, 20)
-        Me.TxtAmount.TabIndex = 28
+        Me.TxtAmount.TabIndex = 29
         '
         'BtnClearComp
         '
@@ -295,13 +297,23 @@ Partial Class FormBankDepositAdd
         Me.TxtSupplier.Location = New System.Drawing.Point(19, 216)
         Me.TxtSupplier.Name = "TxtSupplier"
         Me.TxtSupplier.Size = New System.Drawing.Size(360, 20)
-        Me.TxtSupplier.TabIndex = 26
+        Me.TxtSupplier.TabIndex = 27
+        '
+        'TxtAutoFill
+        '
+        Me.TxtAutoFill.Location = New System.Drawing.Point(332, 169)
+        Me.TxtAutoFill.Name = "TxtAutoFill"
+        Me.TxtAutoFill.Size = New System.Drawing.Size(47, 23)
+        Me.TxtAutoFill.TabIndex = 26
+        Me.TxtAutoFill.Text = "auto"
         '
         'FormBankDepositAdd
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.CancelButton = Me.BtnClose
         Me.ClientSize = New System.Drawing.Size(403, 355)
+        Me.Controls.Add(Me.TxtAutoFill)
         Me.Controls.Add(Me.TxtSupplier)
         Me.Controls.Add(Me.LabelControl7)
         Me.Controls.Add(Me.BtnClearComp)
@@ -371,4 +383,5 @@ Partial Class FormBankDepositAdd
     Friend WithEvents GridColumncomp_number As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents LabelControl7 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents TxtSupplier As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents TxtAutoFill As DevExpress.XtraEditors.SimpleButton
 End Class

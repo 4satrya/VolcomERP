@@ -48,15 +48,29 @@
             LEDK.ItemIndex = LEDK.Properties.GetDataSourceRowIndex("id_dc", "1")
             TxtAmount.EditValue = 0.00
         Else
-            SLECOA.EditValue = FormBankDepositDet.GVList.GetFocusedRowCellValue("id_acc").ToString
-            TxtCOA.Text = FormBankDepositDet.GVList.GetFocusedRowCellValue("acc_name").ToString
-            TxtReff.Text = FormBankDepositDet.GVList.GetFocusedRowCellValue("number").ToString
-            TxtDescription.Text = FormBankDepositDet.GVList.GetFocusedRowCellValue("note").ToString
-            TxtSupplier.Text = FormBankDepositDet.GVList.GetFocusedRowCellValue("vendor").ToString
-            TxtComp.Text = FormBankDepositDet.GVList.GetFocusedRowCellValue("comp_number").ToString
-            SLEComp.EditValue = FormBankDepositDet.GVList.GetFocusedRowCellValue("id_comp").ToString
-            LEDK.ItemIndex = LEDK.Properties.GetDataSourceRowIndex("id_dc", FormBankDepositDet.GVList.GetFocusedRowCellValue("id_dc").ToString)
-            TxtAmount.EditValue = FormBankDepositDet.GVList.GetFocusedRowCellValue("value_view")
+            If id_pop_up = "-1" Then
+                'BBM
+                SLECOA.EditValue = FormBankDepositDet.GVList.GetFocusedRowCellValue("id_acc").ToString
+                TxtCOA.Text = FormBankDepositDet.GVList.GetFocusedRowCellValue("acc_name").ToString
+                TxtReff.Text = FormBankDepositDet.GVList.GetFocusedRowCellValue("number").ToString
+                TxtDescription.Text = FormBankDepositDet.GVList.GetFocusedRowCellValue("note").ToString
+                TxtSupplier.Text = FormBankDepositDet.GVList.GetFocusedRowCellValue("vendor").ToString
+                TxtComp.Text = FormBankDepositDet.GVList.GetFocusedRowCellValue("comp_number").ToString
+                SLEComp.EditValue = FormBankDepositDet.GVList.GetFocusedRowCellValue("id_comp").ToString
+                LEDK.ItemIndex = LEDK.Properties.GetDataSourceRowIndex("id_dc", FormBankDepositDet.GVList.GetFocusedRowCellValue("id_dc").ToString)
+                TxtAmount.EditValue = FormBankDepositDet.GVList.GetFocusedRowCellValue("value_view")
+            ElseIf id_pop_up = "1" Then
+                'BPJ Toko
+                SLECOA.EditValue = FormSalesBranchDet.GVData.GetFocusedRowCellValue("id_acc").ToString
+                TxtCOA.Text = FormSalesBranchDet.GVData.GetFocusedRowCellValue("coa_account").ToString
+                TxtReff.Text = FormSalesBranchDet.GVData.GetFocusedRowCellValue("number").ToString
+                TxtDescription.Text = FormSalesBranchDet.GVData.GetFocusedRowCellValue("note").ToString
+                TxtSupplier.Text = FormSalesBranchDet.GVData.GetFocusedRowCellValue("vendor").ToString
+                TxtComp.Text = FormSalesBranchDet.GVData.GetFocusedRowCellValue("comp_number").ToString
+                SLEComp.EditValue = FormSalesBranchDet.GVData.GetFocusedRowCellValue("id_comp").ToString
+                LEDK.ItemIndex = LEDK.Properties.GetDataSourceRowIndex("id_dc", FormSalesBranchDet.GVData.GetFocusedRowCellValue("id_dc").ToString)
+                TxtAmount.EditValue = FormSalesBranchDet.GVData.GetFocusedRowCellValue("value")
+            End If
         End If
     End Sub
 
@@ -177,11 +191,13 @@
                 Else
                     newRow("id_comp") = SLEComp.EditValue.ToString
                 End If
+                newRow("comp_number") = TxtComp.Text
                 newRow("note") = TxtDescription.Text
                 newRow("value") = TxtAmount.EditValue
                 newRow("id_report") = "0"
                 newRow("number") = TxtReff.Text
                 newRow("report_mark_type") = "0"
+                newRow("vendor") = TxtSupplier.Text
                 TryCast(FormSalesBranchDet.GCData.DataSource, DataTable).Rows.Add(newRow)
                 FormSalesBranchDet.GCData.RefreshDataSource()
                 FormSalesBranchDet.GVData.RefreshData()
@@ -197,11 +213,13 @@
                 Else
                     FormSalesBranchDet.GVData.SetFocusedRowCellValue("id_comp", SLEComp.EditValue.ToString)
                 End If
+                FormSalesBranchDet.GVData.SetFocusedRowCellValue("comp_number", TxtComp.Text)
                 FormSalesBranchDet.GVData.SetFocusedRowCellValue("note", TxtDescription.Text)
                 FormSalesBranchDet.GVData.SetFocusedRowCellValue("value", TxtAmount.EditValue)
                 FormSalesBranchDet.GVData.SetFocusedRowCellValue("id_report", "0")
                 FormSalesBranchDet.GVData.SetFocusedRowCellValue("number", TxtReff.Text)
                 FormSalesBranchDet.GVData.SetFocusedRowCellValue("report_mark_type", "0")
+                FormSalesBranchDet.GVData.SetFocusedRowCellValue("vendor", TxtSupplier.Text)
                 FormSalesBranchDet.GCData.RefreshDataSource()
                 FormSalesBranchDet.GVData.RefreshData()
                 Close()
@@ -212,5 +230,9 @@
     Private Sub BtnClearComp_Click(sender As Object, e As EventArgs) Handles BtnClearComp.Click
         TxtComp.Text = ""
         SLEComp.EditValue = Nothing
+    End Sub
+
+    Private Sub TxtAutoFill_Click(sender As Object, e As EventArgs) Handles TxtAutoFill.Click
+        TxtDescription.Text = SLECOA.Text
     End Sub
 End Class

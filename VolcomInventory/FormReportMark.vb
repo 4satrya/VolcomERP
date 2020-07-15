@@ -8211,6 +8211,29 @@ WHERE invd.`id_inv_mat`='" & id_report & "'"
             'update status
             query = String.Format("UPDATE tb_pn_summary SET id_report_status='{0}' WHERE id_pn_summary ='{1}'", id_status_reportx, id_report)
             execute_non_query(query, True, "", "", "", "")
+        ElseIf report_mark_type = "254" Then
+            'volcom store sales
+            'auto completed
+            If id_status_reportx = "3" Then
+                id_status_reportx = "6"
+            End If
+
+            'completed
+            If id_status_reportx = "6" Then
+
+            End If
+
+            'update
+            query = String.Format("UPDATE tb_sales_branch SET id_report_status='{0}' WHERE id_sales_branch ='{1}'", id_status_reportx, id_report)
+            execute_non_query(query, True, "", "", "", "")
+
+            'refresh view
+            Try
+                FormSalesBranchDet.actionLoad()
+                FormSalesBranch.viewData()
+                FormSalesBranch.GVData.FocusedRowHandle = find_row(FormSalesBranch.GVData, "id_sales_branch", id_report)
+            Catch ex As Exception
+            End Try
         End If
 
             'adding lead time

@@ -36,7 +36,7 @@ Partial Class FormSalesBranchDet
         Me.PanelControl6 = New DevExpress.XtraEditors.PanelControl()
         Me.LabelControl21 = New DevExpress.XtraEditors.LabelControl()
         Me.DECreatedDate = New DevExpress.XtraEditors.DateEdit()
-        Me.TEPayNumber = New DevExpress.XtraEditors.TextEdit()
+        Me.TxtNumber = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl7 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
         Me.LEReportStatus = New DevExpress.XtraEditors.LookUpEdit()
@@ -168,7 +168,7 @@ Partial Class FormSalesBranchDet
         Me.PanelControl6.SuspendLayout()
         CType(Me.DECreatedDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DECreatedDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TEPayNumber.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtNumber.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LEReportStatus.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl3.SuspendLayout()
@@ -382,7 +382,7 @@ Partial Class FormSalesBranchDet
         Me.PanelControl6.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
         Me.PanelControl6.Controls.Add(Me.LabelControl21)
         Me.PanelControl6.Controls.Add(Me.DECreatedDate)
-        Me.PanelControl6.Controls.Add(Me.TEPayNumber)
+        Me.PanelControl6.Controls.Add(Me.TxtNumber)
         Me.PanelControl6.Controls.Add(Me.LabelControl7)
         Me.PanelControl6.Controls.Add(Me.LabelControl5)
         Me.PanelControl6.Controls.Add(Me.LEReportStatus)
@@ -413,16 +413,16 @@ Partial Class FormSalesBranchDet
         Me.DECreatedDate.Size = New System.Drawing.Size(189, 20)
         Me.DECreatedDate.TabIndex = 164
         '
-        'TEPayNumber
+        'TxtNumber
         '
-        Me.TEPayNumber.EditValue = ""
-        Me.TEPayNumber.Location = New System.Drawing.Point(101, 12)
-        Me.TEPayNumber.Name = "TEPayNumber"
-        Me.TEPayNumber.Properties.EditValueChangedDelay = 1
-        Me.TEPayNumber.Properties.ReadOnly = True
-        Me.TEPayNumber.Size = New System.Drawing.Size(189, 20)
-        Me.TEPayNumber.TabIndex = 161
-        Me.TEPayNumber.TabStop = False
+        Me.TxtNumber.EditValue = ""
+        Me.TxtNumber.Location = New System.Drawing.Point(101, 12)
+        Me.TxtNumber.Name = "TxtNumber"
+        Me.TxtNumber.Properties.EditValueChangedDelay = 1
+        Me.TxtNumber.Properties.ReadOnly = True
+        Me.TxtNumber.Size = New System.Drawing.Size(189, 20)
+        Me.TxtNumber.TabIndex = 161
+        Me.TxtNumber.TabStop = False
         '
         'LabelControl7
         '
@@ -1548,7 +1548,7 @@ Partial Class FormSalesBranchDet
         Me.PanelControl6.PerformLayout()
         CType(Me.DECreatedDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DECreatedDate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TEPayNumber.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtNumber.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LEReportStatus.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl3.ResumeLayout(False)
@@ -1629,7 +1629,7 @@ Partial Class FormSalesBranchDet
     Friend WithEvents PanelControl6 As DevExpress.XtraEditors.PanelControl
     Friend WithEvents LabelControl21 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents DECreatedDate As DevExpress.XtraEditors.DateEdit
-    Friend WithEvents TEPayNumber As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents TxtNumber As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelControl7 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LabelControl5 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LEReportStatus As DevExpress.XtraEditors.LookUpEdit

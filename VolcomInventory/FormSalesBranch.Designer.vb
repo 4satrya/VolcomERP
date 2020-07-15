@@ -41,6 +41,7 @@ Partial Class FormSalesBranch
         Me.GridColumn29 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.BViewPayment = New DevExpress.XtraEditors.SimpleButton()
+        Me.GridColumnnumber = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GCData, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVData, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -65,7 +66,7 @@ Partial Class FormSalesBranch
         '
         'GVData
         '
-        Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnid_sales_branch, Me.GridColumnid_coa_tag, Me.GridColumnunit, Me.GridColumncreated_date, Me.GridColumntransaction_date, Me.GridColumnid_report_status, Me.GridColumnreport_status, Me.GridColumnnote, Me.GridColumnvalue})
+        Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnid_sales_branch, Me.GridColumnid_coa_tag, Me.GridColumnunit, Me.GridColumncreated_date, Me.GridColumntransaction_date, Me.GridColumnid_report_status, Me.GridColumnreport_status, Me.GridColumnnote, Me.GridColumnvalue, Me.GridColumnnumber})
         Me.GVData.GridControl = Me.GCData
         Me.GVData.Name = "GVData"
         Me.GVData.OptionsBehavior.AutoExpandAllGroups = True
@@ -93,7 +94,7 @@ Partial Class FormSalesBranch
         Me.GridColumnunit.FieldName = "unit"
         Me.GridColumnunit.Name = "GridColumnunit"
         Me.GridColumnunit.Visible = True
-        Me.GridColumnunit.VisibleIndex = 0
+        Me.GridColumnunit.VisibleIndex = 1
         '
         'GridColumncreated_date
         '
@@ -103,7 +104,7 @@ Partial Class FormSalesBranch
         Me.GridColumncreated_date.FieldName = "created_date"
         Me.GridColumncreated_date.Name = "GridColumncreated_date"
         Me.GridColumncreated_date.Visible = True
-        Me.GridColumncreated_date.VisibleIndex = 1
+        Me.GridColumncreated_date.VisibleIndex = 2
         '
         'GridColumntransaction_date
         '
@@ -113,7 +114,7 @@ Partial Class FormSalesBranch
         Me.GridColumntransaction_date.FieldName = "transaction_date"
         Me.GridColumntransaction_date.Name = "GridColumntransaction_date"
         Me.GridColumntransaction_date.Visible = True
-        Me.GridColumntransaction_date.VisibleIndex = 2
+        Me.GridColumntransaction_date.VisibleIndex = 3
         '
         'GridColumnid_report_status
         '
@@ -127,7 +128,7 @@ Partial Class FormSalesBranch
         Me.GridColumnreport_status.FieldName = "report_status"
         Me.GridColumnreport_status.Name = "GridColumnreport_status"
         Me.GridColumnreport_status.Visible = True
-        Me.GridColumnreport_status.VisibleIndex = 3
+        Me.GridColumnreport_status.VisibleIndex = 4
         '
         'GridColumnnote
         '
@@ -135,7 +136,7 @@ Partial Class FormSalesBranch
         Me.GridColumnnote.FieldName = "note"
         Me.GridColumnnote.Name = "GridColumnnote"
         Me.GridColumnnote.Visible = True
-        Me.GridColumnnote.VisibleIndex = 4
+        Me.GridColumnnote.VisibleIndex = 5
         '
         'GridColumnvalue
         '
@@ -146,7 +147,7 @@ Partial Class FormSalesBranch
         Me.GridColumnvalue.Name = "GridColumnvalue"
         Me.GridColumnvalue.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "value", "{0:N2}")})
         Me.GridColumnvalue.Visible = True
-        Me.GridColumnvalue.VisibleIndex = 5
+        Me.GridColumnvalue.VisibleIndex = 6
         '
         'PanelControl2
         '
@@ -254,6 +255,14 @@ Partial Class FormSalesBranch
         Me.BViewPayment.TabIndex = 8916
         Me.BViewPayment.Text = "view"
         '
+        'GridColumnnumber
+        '
+        Me.GridColumnnumber.Caption = "Number"
+        Me.GridColumnnumber.FieldName = "number"
+        Me.GridColumnnumber.Name = "GridColumnnumber"
+        Me.GridColumnnumber.Visible = True
+        Me.GridColumnnumber.VisibleIndex = 0
+        '
         'FormSalesBranch
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -302,4 +311,5 @@ Partial Class FormSalesBranch
     Friend WithEvents GridColumn29 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents BViewPayment As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GridColumnnumber As DevExpress.XtraGrid.Columns.GridColumn
 End Class

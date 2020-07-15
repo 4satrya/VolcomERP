@@ -597,6 +597,9 @@
         ElseIf report_mark_type = "251" Then
             'bbk summary
             query = String.Format("SELECT id_report_status,number as report_number FROM tb_pn_summary WHERE id_pn_summary = '{0}'", id_report)
+        ElseIf report_mark_type = "254" Then
+            ' sales volcom store
+            query = String.Format("SELECT id_report_status,number as report_number FROM tb_sales_branch WHERE id_sales_branch = '{0}'", id_report)
         End If
 
         data = execute_query(query, -1, True, "", "", "", "")

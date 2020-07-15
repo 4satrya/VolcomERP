@@ -116,6 +116,8 @@
             Dim sb As New ClassSalesBranch()
             Dim query As String = sb.queryMain("AND b.id_sales_branch=" + id + "", "1")
             Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+            TxtNumber.Text = data.Rows(0)("number").ToString
+            DECreatedDate.EditValue = data.Rows(0)("created_date")
             SLEUnit.EditValue = data.Rows(0)("id_coa_tag").ToString
             DESalesDate.EditValue = data.Rows(0)("transaction_date")
             id_report_status = data.Rows(0)("id_report_status")

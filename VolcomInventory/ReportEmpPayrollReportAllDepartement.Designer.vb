@@ -104,8 +104,6 @@ Partial Public Class ReportEmpPayrollReportAllDepartement
         Me.Detail2 = New DevExpress.XtraReports.UI.DetailBand()
         Me.DetailReport2 = New DevExpress.XtraReports.UI.DetailReportBand()
         Me.Detail3 = New DevExpress.XtraReports.UI.DetailBand()
-        Me.GridColumn40 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn41 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GCSummaryAll, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVSummaryAll, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GCSummaryOffice, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -385,7 +383,7 @@ Partial Public Class ReportEmpPayrollReportAllDepartement
         Me.GVSummaryOffice.AppearancePrint.Row.Font = New System.Drawing.Font("Tahoma", 7.25!)
         Me.GVSummaryOffice.AppearancePrint.Row.Options.UseFont = True
         Me.GVSummaryOffice.ColumnPanelRowHeight = 32
-        Me.GVSummaryOffice.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumn7, Me.GridColumn8, Me.GridColumn9, Me.GridColumn10, Me.GridColumn11, Me.GridColumn12, Me.GridColumn13, Me.GridColumn40})
+        Me.GVSummaryOffice.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumn7, Me.GridColumn8, Me.GridColumn9, Me.GridColumn10, Me.GridColumn11, Me.GridColumn12, Me.GridColumn13})
         Me.GVSummaryOffice.GridControl = Me.GCSummaryOffice
         Me.GVSummaryOffice.Name = "GVSummaryOffice"
         Me.GVSummaryOffice.OptionsBehavior.Editable = False
@@ -655,7 +653,7 @@ Partial Public Class ReportEmpPayrollReportAllDepartement
         Me.GVSummaryStore.AppearancePrint.Row.Options.UseBorderColor = True
         Me.GVSummaryStore.AppearancePrint.Row.Options.UseFont = True
         Me.GVSummaryStore.ColumnPanelRowHeight = 32
-        Me.GVSummaryStore.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn27, Me.GridColumn28, Me.GridColumn29, Me.GridColumn30, Me.GridColumn31, Me.GridColumn32, Me.GridColumn33, Me.GridColumn34, Me.GridColumn35, Me.GridColumn36, Me.GridColumn37, Me.GridColumn38, Me.GridColumn39, Me.GridColumn41})
+        Me.GVSummaryStore.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn27, Me.GridColumn28, Me.GridColumn29, Me.GridColumn30, Me.GridColumn31, Me.GridColumn32, Me.GridColumn33, Me.GridColumn34, Me.GridColumn35, Me.GridColumn36, Me.GridColumn37, Me.GridColumn38, Me.GridColumn39})
         Me.GVSummaryStore.GridControl = Me.GCSummaryStore
         Me.GVSummaryStore.Name = "GVSummaryStore"
         Me.GVSummaryStore.OptionsBehavior.Editable = False
@@ -1320,38 +1318,6 @@ Partial Public Class ReportEmpPayrollReportAllDepartement
         Me.Detail3.HeightF = 180.0!
         Me.Detail3.Name = "Detail3"
         '
-        'GridColumn40
-        '
-        Me.GridColumn40.AppearanceCell.Options.UseTextOptions = True
-        Me.GridColumn40.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumn40.AppearanceHeader.Options.UseTextOptions = True
-        Me.GridColumn40.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumn40.Caption = "Balance"
-        Me.GridColumn40.DisplayFormat.FormatString = "N0"
-        Me.GridColumn40.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn40.FieldName = "balance_before"
-        Me.GridColumn40.Name = "GridColumn40"
-        Me.GridColumn40.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "balance_before", "{0:N0}")})
-        Me.GridColumn40.Visible = True
-        Me.GridColumn40.VisibleIndex = 13
-        Me.GridColumn40.Width = 62
-        '
-        'GridColumn41
-        '
-        Me.GridColumn41.AppearanceCell.Options.UseTextOptions = True
-        Me.GridColumn41.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumn41.AppearanceHeader.Options.UseTextOptions = True
-        Me.GridColumn41.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumn41.Caption = "Balance"
-        Me.GridColumn41.DisplayFormat.FormatString = "N0"
-        Me.GridColumn41.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn41.FieldName = "balance_before"
-        Me.GridColumn41.Name = "GridColumn41"
-        Me.GridColumn41.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom)})
-        Me.GridColumn41.Visible = True
-        Me.GridColumn41.VisibleIndex = 13
-        Me.GridColumn41.Width = 62
-        '
         'ReportEmpPayrollReportAllDepartement
         '
         Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.Detail, Me.TopMargin, Me.BottomMargin, Me.ReportHeader, Me.ReportFooter, Me.DetailReport, Me.DetailReport1, Me.DetailReport2})
@@ -1457,6 +1423,4 @@ Partial Public Class ReportEmpPayrollReportAllDepartement
     Friend WithEvents Detail3 As DevExpress.XtraReports.UI.DetailBand
     Friend WithEvents GCVCINSOGO As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents XrPageInfo1 As DevExpress.XtraReports.UI.XRPageInfo
-    Friend WithEvents GridColumn40 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn41 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

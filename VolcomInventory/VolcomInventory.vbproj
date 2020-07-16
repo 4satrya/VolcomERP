@@ -1466,6 +1466,12 @@
     <Compile Include="FormEmpPayrollReportSummary.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormEmpPayrollReportSummaryCompare.Designer.vb">
+      <DependentUpon>FormEmpPayrollReportSummaryCompare.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormEmpPayrollReportSummaryCompare.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormEmpPayrollSetup.Designer.vb">
       <DependentUpon>FormEmpPayrollSetup.vb</DependentUpon>
     </Compile>
@@ -7108,6 +7114,12 @@
     <Compile Include="ReportEmpPayrollReportAllDepartement.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ReportEmpPayrollReportAllDepartementCompare.Designer.vb">
+      <DependentUpon>ReportEmpPayrollReportAllDepartementCompare.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportEmpPayrollReportAllDepartementCompare.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ReportEmpPayrollReportBPJSKesehatan.Designer.vb">
       <DependentUpon>ReportEmpPayrollReportBPJSKesehatan.vb</DependentUpon>
     </Compile>
@@ -8938,6 +8950,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormEmpPayrollReportSummary.resx">
       <DependentUpon>FormEmpPayrollReportSummary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmpPayrollReportSummaryCompare.resx">
+      <DependentUpon>FormEmpPayrollReportSummaryCompare.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormEmpPayrollSetup.resx">
       <DependentUpon>FormEmpPayrollSetup.vb</DependentUpon>
@@ -12198,6 +12213,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportEmpPayrollReportAllDepartement.resx">
       <DependentUpon>ReportEmpPayrollReportAllDepartement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportEmpPayrollReportAllDepartementCompare.resx">
+      <DependentUpon>ReportEmpPayrollReportAllDepartementCompare.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportEmpPayrollReportBPJSKesehatan.resx">
       <DependentUpon>ReportEmpPayrollReportBPJSKesehatan.vb</DependentUpon>

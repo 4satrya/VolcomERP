@@ -40,7 +40,7 @@
     Function queryDept(ByVal include_all As Boolean) As String
         Dim query As String = ""
         If include_all Then
-            query += "SELECT 0 as id_departement, 'All departement' as departement UNION  "
+            query += "SELECT -1 as id_departement, 'All departement' as departement UNION  SELECT 0 as id_departement, 'Purchasing Storage' as departement UNION "
         End If
         query += "(SELECT id_departement,departement FROM tb_m_departement a ORDER BY a.departement ASC) "
         Return query
@@ -77,10 +77,10 @@
         Dim dept As String = LEDeptSum.EditValue.ToString
         Dim cat As String = LECat.EditValue.ToString
         '
-        If dept <> "0" Then
-            dept = "AND i.id_departement=" + dept + ""
-        Else
+        If dept = "-1" Then
             dept = ""
+        Else
+            dept = "AND i.id_departement=" + dept + ""
         End If
 
         Dim stc As New ClassPurcItemStock()
@@ -140,10 +140,10 @@
         Dim dept As String = LEDeptSum.EditValue.ToString
         Dim cat As String = LECat.EditValue.ToString
 
-        If dept <> "0" Then
-            dept = "AND i.id_departement=" + dept + ""
-        Else
+        If dept = "-1" Then
             dept = ""
+        Else
+            dept = "AND i.id_departement=" + dept + ""
         End If
 
         Dim stc As New ClassPurcItemStock()

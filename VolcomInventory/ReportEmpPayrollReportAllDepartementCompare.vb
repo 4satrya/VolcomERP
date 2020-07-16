@@ -1,4 +1,4 @@
-﻿Public Class ReportEmpPayrollReportAllDepartement
+﻿Public Class ReportEmpPayrollReportAllDepartementCompare
     Public type As String = ""
     Public id_payroll As String = ""
     Public id_pre As String
@@ -6,7 +6,7 @@
     Public data_office As DataTable
     Public data_store As DataTable
 
-    Private Sub ReportEmpPayrollReportAllDepartement_BeforePrint(sender As Object, e As Printing.PrintEventArgs) Handles MyBase.BeforePrint
+    Private Sub ReportEmpPayrollReportAllDepartementCompare_BeforePrint(sender As Object, e As Printing.PrintEventArgs) Handles MyBase.BeforePrint
         'office
         GVSummaryOffice.Columns("event_overtime").Caption = "Overtime" + Environment.NewLine + "Event"
         GVSummaryOffice.Columns("d_cooperative_loan").Caption = "Cooperative" + Environment.NewLine + "Loan"
@@ -15,6 +15,7 @@
         GVSummaryOffice.Columns("d_cooperative_contribution").Caption = "Cooperative" + Environment.NewLine + "Contribution"
         GVSummaryOffice.Columns("d_missing").Caption = "Saving" + Environment.NewLine + "Missing"
         GVSummaryOffice.Columns("d_meditation_cash").Caption = "Meditation" + Environment.NewLine + "/ Cash Receipt"
+        'GVSummaryOffice.Columns("balance_before").Caption = "Balance" + Environment.NewLine + FormEmpPayrollReportSummaryCompare.GVSummary.Columns("balance_before").Caption.Replace("Balance ", "")
 
         GCSummaryOffice.DataSource = data_office
 
@@ -26,6 +27,7 @@
         GVSummaryStore.Columns("d_cooperative_contribution").Caption = "Cooperative" + Environment.NewLine + "Contribution"
         GVSummaryStore.Columns("d_missing").Caption = "Saving" + Environment.NewLine + "Missing"
         GVSummaryStore.Columns("d_meditation_cash").Caption = "Meditation" + Environment.NewLine + "/ Cash Receipt"
+        'GVSummaryStore.Columns("balance_before").Caption = "Balance" + Environment.NewLine + FormEmpPayrollReportSummaryCompare.GVSummary.Columns("balance_before").Caption.Replace("Balance ", "")
 
         GCSummaryStore.DataSource = data_store
 
@@ -37,6 +39,7 @@
         GVSummaryAll.Columns("bemo_corner").Caption = "BEMO CORNER" + Environment.NewLine + "(VCOM)"
         GVSummaryAll.Columns("kuta_square").Caption = "KUTA SQUARE" + Environment.NewLine + "(VOCM)"
         GVSummaryAll.Columns("seminyak").Caption = "SEMINYAK" + Environment.NewLine + "(PTVI)"
+        'GVSummaryAll.Columns("total_before").Caption = "TOTAL" + Environment.NewLine + FormEmpPayrollReportSummaryCompare.GVSummary.Columns("balance_before").Caption.Replace("Balance ", "").ToUpper
 
         'mark
         If id_pre = "-1" Then
@@ -240,6 +243,32 @@
         End If
 
         If item.FieldName.ToString = "balance" Then
+            Select Case e.SummaryProcess
+                Case DevExpress.Data.CustomSummaryProcess.Start
+                    tot_balance = 0
+                Case DevExpress.Data.CustomSummaryProcess.Calculate
+                    If Not GVSummaryStore.GetRowCellValue(e.RowHandle, "no").ToString = "" Then
+                        tot_balance += e.FieldValue
+                    End If
+                Case DevExpress.Data.CustomSummaryProcess.Finalize
+                    e.TotalValue = Format(tot_balance, "##,##0")
+            End Select
+        End If
+
+        If item.FieldName.ToString = "balance_before" Then
+            Select Case e.SummaryProcess
+                Case DevExpress.Data.CustomSummaryProcess.Start
+                    tot_balance = 0
+                Case DevExpress.Data.CustomSummaryProcess.Calculate
+                    If Not GVSummaryStore.GetRowCellValue(e.RowHandle, "no").ToString = "" Then
+                        tot_balance += e.FieldValue
+                    End If
+                Case DevExpress.Data.CustomSummaryProcess.Finalize
+                    e.TotalValue = Format(tot_balance, "##,##0")
+            End Select
+        End If
+
+        If item.FieldName.ToString = "difference" Then
             Select Case e.SummaryProcess
                 Case DevExpress.Data.CustomSummaryProcess.Start
                     tot_balance = 0

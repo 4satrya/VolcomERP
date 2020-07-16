@@ -25,11 +25,22 @@
         viewSearchLookupQuery(SLETaxTagCOA, q, "id_coa_tag", "tag_description", "id_coa_tag")
     End Sub
 
+    Sub load_tax_type()
+        Dim q As String = "SELECT '0' AS id_tax_report,'ALL' AS tax_report
+UNION ALL 
+SELECT id_tax_report,tax_report FROM tb_lookup_tax_report"
+        viewSearchLookupQuery(SLETaxCat, q, "id_tax_report", "tax_report", "id_tax_report")
+    End Sub
+
     Private Sub FormReportBalanceSheet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        DETaxFrom.EditValue = Now
+        DETaxUntil.EditValue = Now
+        '
         DEUntil.EditValue = New DateTime(Now.Year, Now.Month, Date.DaysInMonth(Now.Year, Now.Month))
         load_unit()
         load_tag_coa()
-
+        load_tax_type()
+        '
         Try
             CreateNodes(TLLedger, "", Date.Parse(DEUntil.EditValue.ToString), SLEUnit.EditValue.ToString)
         Catch ex As Exception
@@ -209,9 +220,73 @@ INNER JOIN tb_a_acc_trans at ON at.id_acc_trans=atd.id_acc_trans AND DATE(at.dat
     End Sub
 
     Private Sub BViewPajak_Click(sender As Object, e As EventArgs) Handles BViewPajak.Click
-        Dim q As String = "SELECT * FROM tb_a_acc_trans_det trxd
-INNER JOIN tb_a_acc_trans trx ON trx.`id_acc_trans`=trxd.`id_acc_trans`
-INNER JOIN tb_a_acc acc ON acc.`id_acc`=trxd.`id_acc` AND acc.`is_tax_report`=1 AND acc.`id_tax_report`=3
-WHERE trx.`date_reference` >= '2020-05-01' AND trx.`date_reference` <= '2020-05-30'"
+        Dim q_where As String = ""
+        If Not SLETaxCat.EditValue.ToString = "0" Then
+            q_where += " AND acc_pph.id_tax_report='" & SLETaxCat.EditValue.ToString & "' "
+        End If
+
+        If Not SLETaxTagCOA.EditValue.ToString = "0" Then
+            q_where += " AND atx.id_coa_tag='" & SLETaxTagCOA.EditValue.ToString & "' "
+        End If
+
+        Dim q As String = ""
+        q = "-- expense
+SELECT atx.acc_trans_number AS jurnal_no,ie.`id_item_expense` AS id_report,c.`comp_number`,c.`comp_name`,c.`npwp_name`,c.`npwp`,c.`npwp_address`,ie.`number`,atx.`date_reference`,ied.`description`,ied.`id_acc_pph`,ie.`due_date`,acc_pph.`acc_name`,acc_pph.`acc_description`,ied.`pph_percent` AS pph_percent,ied.`amount` AS dpp,ied.`pph` AS pph 
+FROM tb_item_expense_det ied
+INNER JOIN tb_item_expense ie ON ie.`id_item_expense`=ied.`id_item_expense` AND ie.`id_report_status`=6
+INNER JOIN tb_a_acc acc_pph ON acc_pph.`id_acc`=ied.`id_acc_pph`
+INNER JOIN tb_m_comp c ON c.`id_comp`=ie.`id_comp`
+LEFT JOIN
+( 
+	SELECT atd.id_report,tr.`acc_trans_number`,tr.date_reference,atd.id_coa_tag
+	FROM tb_a_acc_trans_det atd 
+	INNER JOIN tb_a_acc_trans tr ON tr.`id_acc_trans`=atd.`id_acc_trans`
+	INNER JOIN tb_a_acc a ON a.id_acc=atd.id_acc AND a.is_tax_report=1
+	WHERE atd.`report_mark_type`='157'
+	GROUP BY atd.`id_report`,atd.`id_acc_trans`
+) atx ON atx.id_report=ie.`id_item_expense`
+WHERE DATE(atx.`date_reference`)>='" + Date.Parse(DETaxFrom.EditValue.ToString).ToString("yyyy-MM-dd") + "' AND DATE(atx.`date_reference`)<='" + Date.Parse(DETaxUntil.EditValue.ToString).ToString("yyyy-MM-dd") + "' " + q_where + "
+UNION ALL
+-- bpl
+SELECT atx.acc_trans_number AS jurnal_no,ie.`id_pn_fgpo` AS id_report,c.`comp_number`,c.`comp_name`,c.`npwp_name`,c.`npwp`,c.`npwp_address`,ie.`number`,atx.`date_reference`,ied.info_design AS description,ied.`id_acc_pph`,ie.`due_date`,acc_pph.`acc_name`,acc_pph.`acc_description`,ied.`pph_percent` AS pph_percent,ied.`value` AS dpp,ied.`pph` AS pph 
+FROM tb_pn_fgpo_det ied
+INNER JOIN tb_pn_fgpo ie ON ie.`id_pn_fgpo`=ied.`id_pn_fgpo` AND ie.`id_report_status`=6
+INNER JOIN tb_a_acc acc_pph ON acc_pph.`id_acc`=ied.`id_acc_pph`
+INNER JOIN tb_m_comp c ON c.`id_comp`=ie.`id_comp`
+LEFT JOIN
+( 
+	SELECT atd.id_report,tr.`acc_trans_number`,tr.date_reference,atd.id_coa_tag
+	FROM tb_a_acc_trans_det atd 
+	INNER JOIN tb_a_acc_trans tr ON tr.`id_acc_trans`=atd.`id_acc_trans`
+	INNER JOIN tb_a_acc a ON a.id_acc=atd.id_acc AND a.is_tax_report=1
+	WHERE atd.`report_mark_type`='189'
+	GROUP BY atd.`id_report`,atd.`id_acc_trans`
+) atx ON atx.id_report=ie.`id_pn_fgpo`
+WHERE DATE(atx.`date_reference`)>='" + Date.Parse(DETaxFrom.EditValue.ToString).ToString("yyyy-MM-dd") + "' AND DATE(atx.`date_reference`)<='" + Date.Parse(DETaxUntil.EditValue.ToString).ToString("yyyy-MM-dd") + "' " + q_where + "
+UNION ALL
+-- OG
+SELECT atx.acc_trans_number AS jurnal_no,ie.`id_purc_order` AS id_report,c.`comp_number`,c.`comp_name`,c.`npwp_name`,c.`npwp`,c.`npwp_address`,ie.`purc_order_number` AS number,atx.`date_reference`,rd.item_detail AS description,ie.`pph_account`,ie.`due_date`,acc_pph.`acc_name`,acc_pph.`acc_description`,ied.`pph_percent` AS pph_percent,SUM(recd.qty*ied.`value`) AS dpp,SUM(recd.qty*ied.`value`*(ied.`pph_percent`/100)) AS pph 
+FROM tb_purc_rec_det recd
+INNER JOIN tb_purc_order_det ied ON ied.id_purc_order_det=recd.id_purc_order_det
+INNER JOIN tb_purc_req_det rd ON rd.id_purc_req_det=ied.id_purc_req_det
+INNER JOIN `tb_purc_order` ie ON ie.id_purc_order=ied.id_purc_order AND ied.`pph_percent` > 0 
+INNER JOIN tb_a_acc acc_pph ON acc_pph.`id_acc`=ie.`pph_account` AND ie.`id_report_status`=6 AND ie.is_close_rec=1
+INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact=ie.id_comp_contact
+INNER JOIN tb_m_comp c ON c.`id_comp`=cc.`id_comp`
+LEFT JOIN
+( 
+	SELECT atd.id_report,tr.`acc_trans_number`,tr.date_reference,atd.id_coa_tag
+	FROM tb_a_acc_trans_det atd 
+	INNER JOIN tb_a_acc_trans tr ON tr.`id_acc_trans`=atd.`id_acc_trans`
+	INNER JOIN tb_a_acc a ON a.id_acc=atd.id_acc AND a.is_tax_report=1
+	WHERE atd.`report_mark_type`='148'
+	GROUP BY atd.`id_report`,atd.`id_acc_trans`
+) atx ON atx.id_report=recd.`id_purc_rec`
+WHERE DATE(atx.`date_reference`)>='" + Date.Parse(DETaxFrom.EditValue.ToString).ToString("yyyy-MM-dd") + "' AND DATE(atx.`date_reference`)<='" + Date.Parse(DETaxUntil.EditValue.ToString).ToString("yyyy-MM-dd") + "' " + q_where + "
+GROUP BY ied.id_purc_order_det
+HAVING NOT ISNULL(jurnal_no)"
+        Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
+        GCTaxReport.DataSource = dt
+        GVTaxReport.BestFitColumns()
     End Sub
 End Class

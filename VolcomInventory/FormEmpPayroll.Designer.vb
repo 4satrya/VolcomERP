@@ -49,6 +49,7 @@ Partial Class FormEmpPayroll
         Me.BBIBPJSKesehatan = New DevExpress.XtraBars.BarButtonItem()
         Me.BBIBPJSTK = New DevExpress.XtraBars.BarButtonItem()
         Me.BBIPajak = New DevExpress.XtraBars.BarButtonItem()
+        Me.BarButtonItem4 = New DevExpress.XtraBars.BarButtonItem()
         Me.GCPayrollPeriode = New DevExpress.XtraGrid.GridControl()
         Me.GVPayrollPeriode = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumnID = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -88,6 +89,7 @@ Partial Class FormEmpPayroll
         Me.GridColumnWorkingDays = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumnActWorkdays = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.RITEActWorkdays = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
+        Me.BandedGridColumnActWorkhours = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumnOvertimeHours = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.GBSalary = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         Me.GridColumnBasicSalary = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
@@ -162,7 +164,6 @@ Partial Class FormEmpPayroll
         Me.BGetEmployee = New DevExpress.XtraEditors.SimpleButton()
         Me.BOvertime = New DevExpress.XtraEditors.SimpleButton()
         Me.BSetting = New DevExpress.XtraEditors.SimpleButton()
-        Me.BandedGridColumnActWorkhours = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         CType(Me.XTCPayroll, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCPayroll.SuspendLayout()
         Me.XTPPeriode.SuspendLayout()
@@ -277,8 +278,8 @@ Partial Class FormEmpPayroll
         Me.BarManager1.DockControls.Add(Me.barDockControlLeft)
         Me.BarManager1.DockControls.Add(Me.barDockControlRight)
         Me.BarManager1.Form = Me
-        Me.BarManager1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.BBPD, Me.BBProposePrice, Me.BBMasterSeason, Me.BBDs, Me.BBPrepEstPrice, Me.BtnImportEstPrice, Me.BBSubEstPrice, Me.BBSubOther, Me.BarButtonItem1, Me.BarButtonItem2, Me.BarButtonItem3, Me.BBBcaFormat, Me.BBIBPJSKesehatan, Me.BBIBPJSTK, Me.BBIPajak})
-        Me.BarManager1.MaxItemId = 19
+        Me.BarManager1.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.BBPD, Me.BBProposePrice, Me.BBMasterSeason, Me.BBDs, Me.BBPrepEstPrice, Me.BtnImportEstPrice, Me.BBSubEstPrice, Me.BBSubOther, Me.BarButtonItem1, Me.BarButtonItem2, Me.BarButtonItem3, Me.BBBcaFormat, Me.BBIBPJSKesehatan, Me.BBIBPJSTK, Me.BBIPajak, Me.BarButtonItem4})
+        Me.BarManager1.MaxItemId = 20
         '
         'barDockControlTop
         '
@@ -400,6 +401,12 @@ Partial Class FormEmpPayroll
         Me.BBIPajak.Caption = "Report Pajak"
         Me.BBIPajak.Id = 18
         Me.BBIPajak.Name = "BBIPajak"
+        '
+        'BarButtonItem4
+        '
+        Me.BarButtonItem4.Caption = "Report All Departements Comparison"
+        Me.BarButtonItem4.Id = 19
+        Me.BarButtonItem4.Name = "BarButtonItem4"
         '
         'GCPayrollPeriode
         '
@@ -786,6 +793,16 @@ Partial Class FormEmpPayroll
         Me.RITEActWorkdays.DisplayFormat.FormatString = "N1"
         Me.RITEActWorkdays.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.RITEActWorkdays.Name = "RITEActWorkdays"
+        '
+        'BandedGridColumnActWorkhours
+        '
+        Me.BandedGridColumnActWorkhours.Caption = "Actual Working Hours"
+        Me.BandedGridColumnActWorkhours.DisplayFormat.FormatString = "N1"
+        Me.BandedGridColumnActWorkhours.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumnActWorkhours.FieldName = "actual_working_hours"
+        Me.BandedGridColumnActWorkhours.Name = "BandedGridColumnActWorkhours"
+        Me.BandedGridColumnActWorkhours.Visible = True
+        Me.BandedGridColumnActWorkhours.Width = 113
         '
         'BandedGridColumnOvertimeHours
         '
@@ -1476,7 +1493,7 @@ Partial Class FormEmpPayroll
         '
         'PopupMenu1
         '
-        Me.PopupMenu1.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.BarButtonItem1), New DevExpress.XtraBars.LinkPersistInfo(Me.BBIBPJSTK), New DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.None, False, Me.BBIBPJSKesehatan, False), New DevExpress.XtraBars.LinkPersistInfo(Me.BBIPajak), New DevExpress.XtraBars.LinkPersistInfo(Me.BBBcaFormat), New DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.None, False, Me.BarButtonItem2, False)})
+        Me.PopupMenu1.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.BarButtonItem1), New DevExpress.XtraBars.LinkPersistInfo(Me.BarButtonItem4), New DevExpress.XtraBars.LinkPersistInfo(Me.BBIBPJSTK), New DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.None, False, Me.BBIBPJSKesehatan, False), New DevExpress.XtraBars.LinkPersistInfo(Me.BBIPajak), New DevExpress.XtraBars.LinkPersistInfo(Me.BBBcaFormat), New DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.None, False, Me.BarButtonItem2, False)})
         Me.PopupMenu1.Manager = Me.BarManager1
         Me.PopupMenu1.Name = "PopupMenu1"
         '
@@ -1677,16 +1694,6 @@ Partial Class FormEmpPayroll
         Me.BSetting.TabIndex = 0
         Me.BSetting.Text = "Setting"
         '
-        'BandedGridColumnActWorkhours
-        '
-        Me.BandedGridColumnActWorkhours.Caption = "Actual Working Hours"
-        Me.BandedGridColumnActWorkhours.DisplayFormat.FormatString = "N1"
-        Me.BandedGridColumnActWorkhours.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.BandedGridColumnActWorkhours.FieldName = "actual_working_hours"
-        Me.BandedGridColumnActWorkhours.Name = "BandedGridColumnActWorkhours"
-        Me.BandedGridColumnActWorkhours.Visible = True
-        Me.BandedGridColumnActWorkhours.Width = 113
-        '
         'FormEmpPayroll
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1885,4 +1892,5 @@ Partial Class FormEmpPayroll
     Friend WithEvents LCTitle As DevExpress.XtraEditors.LabelControl
     Friend WithEvents BandedGridColumn2 As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents BandedGridColumnActWorkhours As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BarButtonItem4 As DevExpress.XtraBars.BarButtonItem
 End Class

@@ -2157,6 +2157,27 @@ WHERE note='Closing End'"
         componentLink.CreateDocument()
         componentLink.ShowPreview()
     End Sub
+    Sub print_custom(ByVal GridControlHere As DevExpress.XtraGrid.GridControl, ByVal title_here As String)
+        title_print = ""
+        title_print = title_here
+        Dim componentLink As New PrintableComponentLink(New PrintingSystem())
+        componentLink.Component = GridControlHere
+        componentLink.Landscape = True
+        AddHandler componentLink.CreateMarginalHeaderArea, AddressOf CreateMarginalHeaderArea
+        AddHandler componentLink.CreateReportHeaderArea, AddressOf CreateReportHeaderAreaCustom
+        Dim phf As PageHeaderFooter = TryCast(componentLink.PageHeaderFooter, PageHeaderFooter)
+
+        ' Clear the PageHeaderFooter's contents.
+        phf.Header.Content.Clear()
+
+        ' Add custom information to the link's header.
+        phf.Footer.Content.AddRange(New String() _
+            {"Printed By: " + name_user + "", "", "Date: [Date Printed]"})
+        phf.Footer.LineAlignment = BrickAlignment.Near
+
+        componentLink.CreateDocument()
+        componentLink.ShowPreview()
+    End Sub
 
     Sub print_treelist(ByVal treelist As DevExpress.XtraTreeList.TreeList, ByVal title_here As String)
         title_print = ""
@@ -2245,6 +2266,13 @@ WHERE note='Closing End'"
         Dim reportHeader As String = title_print
         e.Graph.StringFormat = New BrickStringFormat(StringAlignment.Center)
         e.Graph.Font = New Font("Tahoma", 11, FontStyle.Bold)
+        Dim rec As RectangleF = New RectangleF(0, 20, e.Graph.ClientPageSize.Width, 50)
+        e.Graph.DrawString(reportHeader, Color.Black, rec, BorderSide.None)
+    End Sub
+    Sub CreateReportHeaderAreaCustom(ByVal sender As System.Object, ByVal e As CreateAreaEventArgs)
+        Dim reportHeader As String = title_print
+        e.Graph.StringFormat = New BrickStringFormat(StringAlignment.Near)
+        e.Graph.Font = New Font("Tahoma", 9, FontStyle.Bold)
         Dim rec As RectangleF = New RectangleF(0, 20, e.Graph.ClientPageSize.Width, 50)
         e.Graph.DrawString(reportHeader, Color.Black, rec, BorderSide.None)
     End Sub

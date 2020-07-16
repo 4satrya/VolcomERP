@@ -193,6 +193,8 @@
                 BBonusAdjustment.Text = "Bonus / Adjustment"
                 BandedGridColumnTotalAdjustment.Caption = "Total Bonus / Adjustment"
                 GBBonusAdjustment.Caption = "Bonus / Adjustment"
+
+                BarButtonItem4.Visibility = DevExpress.XtraBars.BarItemVisibility.Always
             Else
                 GBWorkingDays.Visible = False
                 GBSalary.Visible = True
@@ -220,6 +222,8 @@
                 BBonusAdjustment.Text = "Adjustment"
                 BandedGridColumnTotalAdjustment.Caption = "Total Adjustment"
                 GBBonusAdjustment.Caption = "Adjustment"
+
+                BarButtonItem4.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
             End If
 
             If id_report_status = "0" Then
@@ -1755,5 +1759,9 @@
         If message <> "" Then
             infoCustom(message)
         End If
+    End Sub
+
+    Private Sub BarButtonItem4_ItemClick_1(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem4.ItemClick
+        FormEmpPayrollReportSummaryCompare.ShowDialog()
     End Sub
 End Class

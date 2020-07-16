@@ -14,7 +14,7 @@
     End Sub
 
     Sub viewStores()
-        Dim query As String = "SELECT c.id_comp, CONCAT(c.comp_number,' - ', c.comp_name) AS `comp`
+        Dim query As String = "SELECT c.id_comp, CONCAT(c.comp_number) AS `comp`
         FROM tb_m_comp c WHERE c.id_comp_cat=6
         ORDER BY c.comp_number ASC "
         viewSearchLookupQuery(SLEStoreNormal, query, "id_comp", "comp", "id_comp")
@@ -130,20 +130,26 @@
             TxtProsPPNNormal.EditValue = data.Rows(0)("rev_normal_ppn_pros")
             TxtPPNNormal.EditValue = data.Rows(0)("rev_normal_ppn")
             SLEAccPPNNormal.EditValue = data.Rows(0)("id_coa_ppn_normal").ToString
+            TxtPPNNoteNormal.Text = data.Rows(0)("rev_normal_ppn_note").ToString
             TxtRevNormal.EditValue = data.Rows(0)("rev_normal_net")
             SLEAccRevNormal.EditValue = data.Rows(0)("id_coa_pend_normal").ToString
+            TxtRevNoteNormal.Text = data.Rows(0)("rev_normal_net_note").ToString
             TxtAPNormal.EditValue = data.Rows(0)("comp_rev_normal")
             SLEAccAPNormal.EditValue = data.Rows(0)("id_coa_hd_normal")
+            TxtAPNoteNormal.Text = data.Rows(0)("comp_rev_normal_note").ToString
             'sale
             SLEStoreSale.EditValue = data.Rows(0)("id_store_sale").ToString
             TxtRevGrossSale.EditValue = data.Rows(0)("rev_sale")
             TxtProsPPNSale.EditValue = data.Rows(0)("rev_sale_ppn_pros")
             TxtPPNSale.EditValue = data.Rows(0)("rev_sale_ppn")
+            TxtPPNNoteSale.Text = data.Rows(0)("rev_sale_ppn_note").ToString
             SLEAccPPNSale.EditValue = data.Rows(0)("id_coa_ppn_sale").ToString
             TxtRevSale.EditValue = data.Rows(0)("rev_sale_net")
             SLEAccRevSale.EditValue = data.Rows(0)("id_coa_pend_sale").ToString
+            TxtRevNoteSale.Text = data.Rows(0)("rev_sale_net_note").ToString
             TxtAPSale.EditValue = data.Rows(0)("comp_rev_sale")
             SLEAccAPSale.EditValue = data.Rows(0)("id_coa_hd_sale")
+            TxtAPNoteSale.Text = data.Rows(0)("comp_rev_sale_note").ToString
 
             'detail
             viewDetail()
@@ -153,10 +159,11 @@
 
     Sub calculate()
         'normal ppn
-        TxtPPNNormal.EditValue = (100 / (100 + TxtProsPPNNormal.EditValue)) * TxtRevGrossNormal.EditValue
-        TxtRevNormal.EditValue = TxtRevGrossNormal.EditValue - TxtPPNNormal.EditValue
-        TxtPPNSale.EditValue = (100 / (100 + TxtProsPPNSale.EditValue)) * TxtRevGrossSale.EditValue
-        TxtRevSale.EditValue = TxtRevGrossSale.EditValue - TxtPPNSale.EditValue
+        TxtRevNormal.EditValue = (100 / (100 + TxtProsPPNNormal.EditValue)) * TxtRevGrossNormal.EditValue
+        TxtPPNNormal.EditValue = TxtRevNormal.EditValue * (TxtProsPPNNormal.EditValue / 100)
+
+        TxtRevSale.EditValue = (100 / (100 + TxtProsPPNSale.EditValue)) * TxtRevGrossSale.EditValue
+        TxtPPNSale.EditValue = TxtRevSale.EditValue * (TxtProsPPNSale.EditValue / 100)
         TxtTotal.EditValue = TxtRevGrossNormal.EditValue + TxtAPNormal.EditValue + TxtRevGrossSale.EditValue + TxtAPSale.EditValue
     End Sub
 
@@ -177,9 +184,10 @@
     End Sub
 
     Sub allowStatus()
+        BMark.Enabled = True
         BtnSave.Enabled = False
         BtnPrint.Enabled = True
-        BMark.Enabled = False
+        PanelControlPreview.Visible = True
         PanelControlNav.Visible = False
         SLEUnit.Enabled = False
         DESalesDate.Enabled = False
@@ -267,27 +275,39 @@
     End Function
 
     Private Sub SLEAccPPNNormal_EditValueChanged(sender As Object, e As EventArgs) Handles SLEAccPPNNormal.EditValueChanged
-        TxtPPNNoteNormal.Text = getCOADescription(SLEAccPPNNormal)
+        If action = "ins" Then
+            TxtPPNNoteNormal.Text = getCOADescription(SLEAccPPNNormal)
+        End If
     End Sub
 
     Private Sub SLEAccRevNormal_EditValueChanged(sender As Object, e As EventArgs) Handles SLEAccRevNormal.EditValueChanged
-        TxtRevNoteNormal.Text = getCOADescription(SLEAccRevNormal)
+        If action = "ins" Then
+            TxtRevNoteNormal.Text = getCOADescription(SLEAccRevNormal)
+        End If
     End Sub
 
     Private Sub SLEAccAPNormal_EditValueChanged(sender As Object, e As EventArgs) Handles SLEAccAPNormal.EditValueChanged
-        TxtAPNoteNormal.Text = getCOADescription(SLEAccAPNormal)
+        If action = "ins" Then
+            TxtAPNoteNormal.Text = getCOADescription(SLEAccAPNormal)
+        End If
     End Sub
 
     Private Sub SLEAccPPNSale_EditValueChanged(sender As Object, e As EventArgs) Handles SLEAccPPNSale.EditValueChanged
-        TxtPPNNoteSale.Text = getCOADescription(SLEAccPPNSale)
+        If action = "ins" Then
+            TxtPPNNoteSale.Text = getCOADescription(SLEAccPPNSale)
+        End If
     End Sub
 
     Private Sub SLEAccRevSale_EditValueChanged(sender As Object, e As EventArgs) Handles SLEAccRevSale.EditValueChanged
-        TxtRevNoteSale.Text = getCOADescription(SLEAccRevSale)
+        If action = "ins" Then
+            TxtRevNoteSale.Text = getCOADescription(SLEAccRevSale)
+        End If
     End Sub
 
     Private Sub SLEAccAPSale_EditValueChanged(sender As Object, e As EventArgs) Handles SLEAccAPSale.EditValueChanged
-        TxtAPNoteSale.Text = getCOADescription(SLEAccAPSale)
+        If action = "ins" Then
+            TxtAPNoteSale.Text = getCOADescription(SLEAccAPSale)
+        End If
     End Sub
 
     Private Sub FormSalesBranchDet_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
@@ -339,49 +359,56 @@
             Next
         End If
 
+        'get coa description
+        Dim qcd As String = "SELECT * FROM tb_a_acc a WHERE a.id_acc IN(" + SLEAccPPNNormal.EditValue.ToString + "," + SLEAccRevNormal.EditValue.ToString + "," + SLEAccAPNormal.EditValue.ToString + "," + SLEAccPPNSale.EditValue.ToString + "," + SLEAccRevSale.EditValue.ToString + "," + SLEAccAPSale.EditValue.ToString + ")"
+        Dim dcd As DataTable = execute_query(qcd, -1, True, "", "", "", "")
+        Dim dcd_filter As DataRow()
         'header normal
         If TxtRevNormal.EditValue > 0 Then
             'revenue
             jum_row += 1
+            dcd_filter = dcd.Select("[id_acc]='" + SLEAccRevNormal.EditValue.ToString + "' ")
             Dim newRow As DataRow = (TryCast(GCDraft.DataSource, DataTable)).NewRow()
             newRow("no") = jum_row
             newRow("acc_name") = SLEAccRevNormal.Text
-            newRow("acc_description") = getCOADescription(SLEAccRevNormal)
+            newRow("acc_description") = dcd_filter(0)("acc_description").ToString
             newRow("cc") = SLEStoreNormal.Text
             newRow("report_number") = ""
             newRow("note") = TxtRevNoteNormal.Text
             newRow("debit") = 0
-            newRow("credit") = TxtRevNormal.EditValue
+            newRow("credit") = Math.Round(TxtRevNormal.EditValue, 2)
             TryCast(GCDraft.DataSource, DataTable).Rows.Add(newRow)
             GCDraft.RefreshDataSource()
             GVDraft.RefreshData()
 
             'ppn
             jum_row += 1
+            dcd_filter = dcd.Select("[id_acc]='" + SLEAccPPNNormal.EditValue.ToString + "' ")
             Dim newRowPPN As DataRow = (TryCast(GCDraft.DataSource, DataTable)).NewRow()
             newRowPPN("no") = jum_row
             newRowPPN("acc_name") = SLEAccPPNNormal.Text
-            newRowPPN("acc_description") = getCOADescription(SLEAccPPNNormal)
+            newRowPPN("acc_description") = dcd_filter(0)("acc_description").ToString
             newRowPPN("cc") = SLEStoreNormal.Text
             newRowPPN("report_number") = ""
             newRowPPN("note") = TxtPPNNoteNormal.Text
             newRowPPN("debit") = 0
-            newRowPPN("credit") = TxtPPNNormal.EditValue
+            newRowPPN("credit") = Math.Round(TxtPPNNormal.EditValue, 2)
             TryCast(GCDraft.DataSource, DataTable).Rows.Add(newRowPPN)
             GCDraft.RefreshDataSource()
             GVDraft.RefreshData()
 
             'hutang dagang
             jum_row += 1
+            dcd_filter = dcd.Select("[id_acc]='" + SLEAccAPNormal.EditValue.ToString + "' ")
             Dim newRowHD As DataRow = (TryCast(GCDraft.DataSource, DataTable)).NewRow()
             newRowHD("no") = jum_row
             newRowHD("acc_name") = SLEAccAPNormal.Text
-            newRowHD("acc_description") = getCOADescription(SLEAccAPNormal)
+            newRowHD("acc_description") = dcd_filter(0)("acc_description").ToString
             newRowHD("cc") = SLEStoreNormal.Text
             newRowHD("report_number") = ""
             newRowHD("note") = TxtAPNoteNormal.Text
             newRowHD("debit") = 0
-            newRowHD("credit") = TxtAPNoteNormal.EditValue
+            newRowHD("credit") = Math.Round(TxtAPNormal.EditValue, 2)
             TryCast(GCDraft.DataSource, DataTable).Rows.Add(newRowHD)
             GCDraft.RefreshDataSource()
             GVDraft.RefreshData()
@@ -391,45 +418,48 @@
         If TxtRevSale.EditValue > 0 Then
             'revenue
             jum_row += 1
+            dcd_filter = dcd.Select("[id_acc]='" + SLEAccRevSale.EditValue.ToString + "' ")
             Dim newRow As DataRow = (TryCast(GCDraft.DataSource, DataTable)).NewRow()
             newRow("no") = jum_row
             newRow("acc_name") = SLEAccRevSale.Text
-            newRow("acc_description") = getCOADescription(SLEAccRevSale)
+            newRow("acc_description") = dcd_filter(0)("acc_description").ToString
             newRow("cc") = SLEStoreSale.Text
             newRow("report_number") = ""
             newRow("note") = TxtRevNoteSale.Text
             newRow("debit") = 0
-            newRow("credit") = TxtRevSale.EditValue
+            newRow("credit") = Math.Round(TxtRevSale.EditValue, 2)
             TryCast(GCDraft.DataSource, DataTable).Rows.Add(newRow)
             GCDraft.RefreshDataSource()
             GVDraft.RefreshData()
 
             'ppn
             jum_row += 1
+            dcd_filter = dcd.Select("[id_acc]='" + SLEAccPPNSale.EditValue.ToString + "' ")
             Dim newRowPPN As DataRow = (TryCast(GCDraft.DataSource, DataTable)).NewRow()
             newRowPPN("no") = jum_row
             newRowPPN("acc_name") = SLEAccPPNSale.Text
-            newRowPPN("acc_description") = getCOADescription(SLEAccPPNSale)
+            newRowPPN("acc_description") = dcd_filter(0)("acc_description").ToString
             newRowPPN("cc") = SLEStoreSale.Text
             newRowPPN("report_number") = ""
             newRowPPN("note") = TxtPPNNoteSale.Text
             newRowPPN("debit") = 0
-            newRowPPN("credit") = TxtPPNSale.EditValue
+            newRowPPN("credit") = Math.Round(TxtPPNSale.EditValue, 2)
             TryCast(GCDraft.DataSource, DataTable).Rows.Add(newRowPPN)
             GCDraft.RefreshDataSource()
             GVDraft.RefreshData()
 
             'hutang dagang
             jum_row += 1
+            dcd_filter = dcd.Select("[id_acc]='" + SLEAccAPSale.EditValue.ToString + "' ")
             Dim newRowHD As DataRow = (TryCast(GCDraft.DataSource, DataTable)).NewRow()
             newRowHD("no") = jum_row
             newRowHD("acc_name") = SLEAccAPSale.Text
-            newRowHD("acc_description") = getCOADescription(SLEAccAPSale)
+            newRowHD("acc_description") = dcd_filter(0)("acc_description").ToString
             newRowHD("cc") = SLEStoreSale.Text
             newRowHD("report_number") = ""
             newRowHD("note") = TxtAPNoteSale.Text
             newRowHD("debit") = 0
-            newRowHD("credit") = TxtAPNoteSale.EditValue
+            newRowHD("credit") = Math.Round(TxtAPSale.EditValue, 2)
             TryCast(GCDraft.DataSource, DataTable).Rows.Add(newRowHD)
             GCDraft.RefreshDataSource()
             GVDraft.RefreshData()
@@ -472,6 +502,8 @@
         Dim cond_bal As Boolean = True
         XTCData.SelectedTabPageIndex = 1
         makeSafeGV(GVDraft)
+        Console.WriteLine(GVDraft.Columns("debit").SummaryItem.SummaryValue)
+        Console.WriteLine(GVDraft.Columns("credit").SummaryItem.SummaryValue)
         If GVDraft.Columns("debit").SummaryItem.SummaryValue = GVDraft.Columns("credit").SummaryItem.SummaryValue Then
             cond_bal = True
             XTCData.SelectedTabPageIndex = 0
@@ -489,79 +521,106 @@
                 Dim transaction_date As String = DateTime.Parse(DESalesDate.EditValue.ToString).ToString("yyyy-MM-dd")
                 Dim note As String = addSlashes(MENote.Text)
                 Dim value As String = decimalSQL(TxtTotal.EditValue.ToString)
+                Dim id_comp_normal As String = SLEStoreNormal.EditValue.ToString
                 Dim rev_normal As String = decimalSQL(TxtRevGrossNormal.EditValue.ToString)
                 Dim rev_normal_ppn_pros As String = decimalSQL(TxtProsPPNNormal.EditValue.ToString)
                 Dim rev_normal_ppn As String = decimalSQL(TxtPPNNormal.EditValue.ToString)
                 Dim rev_normal_ppn_acc As String = SLEAccPPNNormal.EditValue.ToString
+                Dim rev_normal_ppn_note As String = addSlashes(TxtPPNNoteNormal.Text)
                 Dim rev_normal_net As String = decimalSQL(TxtRevNormal.EditValue.ToString)
                 Dim rev_normal_net_acc As String = SLEAccRevNormal.EditValue.ToString
+                Dim rev_normal_net_note As String = addSlashes(TxtRevNoteNormal.Text)
                 Dim comp_rev_normal As String = decimalSQL(TxtAPNormal.EditValue.ToString)
                 Dim comp_rev_normal_acc As String = SLEAccAPNormal.EditValue.ToString
+                Dim comp_rev_normal_note As String = addSlashes(TxtAPNoteNormal.Text)
+                Dim id_comp_sale As String = SLEStoreSale.EditValue.ToString
                 Dim rev_sale As String = decimalSQL(TxtRevGrossSale.EditValue.ToString)
                 Dim rev_sale_ppn_pros As String = decimalSQL(TxtProsPPNSale.EditValue.ToString)
                 Dim rev_sale_ppn As String = decimalSQL(TxtPPNSale.EditValue.ToString)
                 Dim rev_sale_ppn_acc As String = SLEAccPPNSale.EditValue.ToString
-                Dim rev_sale_nett As String = decimalSQL(TxtRevSale.EditValue.ToString)
+                Dim rev_sale_ppn_note As String = addSlashes(TxtPPNNoteSale.Text)
+                Dim rev_sale_net As String = decimalSQL(TxtRevSale.EditValue.ToString)
                 Dim rev_sale_net_acc As String = SLEAccRevSale.EditValue.ToString
+                Dim rev_sale_net_note As String = addSlashes(TxtRevNoteSale.Text)
                 Dim comp_rev_sale As String = decimalSQL(TxtAPSale.EditValue.ToString)
                 Dim comp_rev_sale_acc As String = SLEAccAPSale.EditValue.ToString
+                Dim comp_rev_sale_note As String = addSlashes(TxtAPNoteSale.Text)
                 Dim query As String = "INSERT INTO tb_sales_branch(`id_coa_tag`,
                 `created_date`,
                 `transaction_date`,
                 `id_report_status`,
-                `note`
+                `note`,
                 `value` ,
+                `id_comp_normal`,
                 `pros_normal`,
                 `pros_normal_comp`,
                 `rev_normal`,
                 `rev_normal_ppn_pros`,
                 `rev_normal_ppn`,
                 `rev_normal_ppn_acc`,
+                `rev_normal_ppn_note`,
                 `rev_normal_net`,
                 `rev_normal_net_acc`,
+                `rev_normal_net_note`,
                 `comp_rev_normal`,
                 `comp_rev_normal_acc`,
+                `comp_rev_normal_note`,
+                `id_comp_sale`,
                 `pros_sale`,
                 `pros_sale_comp`,
                 `rev_sale`,
                 `rev_sale_ppn_pros`,
                 `rev_sale_ppn`,
                 `rev_sale_ppn_acc`,
-                `rev_sale_nett`,
+                `rev_sale_ppn_note`,
+                `rev_sale_net`,
                 `rev_sale_net_acc`,
+                `rev_sale_net_note`,
                 `comp_rev_sale`,
-                `comp_rev_sale_acc`)
+                `comp_rev_sale_acc`,
+                `comp_rev_sale_note`)
                 VALUES
                 ('" + id_coa_tag + "',
-                NOW()
+                NOW(),
                 '" + transaction_date + "',
                 '" + id_report_status + "',
                 '" + note + "',
                 '" + value + "' ,
+                '" + id_comp_normal + "',
                 '0',
                 '0',
-                '" + rev_normal + "',
+                ROUND('" + rev_normal + "',2),
                 '" + rev_normal_ppn_pros + "',
-                '" + rev_normal_ppn + "',
+                ROUND('" + rev_normal_ppn + "',2),
                 '" + rev_normal_ppn_acc + "',
-                '" + rev_normal_net + "',
+                '" + rev_normal_ppn_note + "',
+                ROUND('" + rev_normal_net + "',2),
                 '" + rev_normal_net_acc + "',
-                '" + comp_rev_normal + "',
+                '" + rev_normal_net_note + "',
+                ROUND('" + comp_rev_normal + "',2),
                 '" + comp_rev_normal_acc + "',
+                '" + comp_rev_normal_note + "',
+                '" + id_comp_sale + "',
                 '0',
                 '0',
-                '" + rev_sale + "',
+                ROUND('" + rev_sale + "',2),
                 '" + rev_sale_ppn_pros + "',
-                '" + rev_sale_ppn + "',
+                ROUND('" + rev_sale_ppn + "',2),
                 '" + rev_sale_ppn_acc + "',
-                '" + rev_sale_nett + "',
+                '" + rev_sale_ppn_note + "',
+                ROUND('" + rev_sale_net + "',2),
                 '" + rev_sale_net_acc + "',
-                '" + comp_rev_sale + "',
-                '" + comp_rev_sale_acc + "' ); SELECT LAST_INSERT_ID(); "
+                '" + rev_sale_net_note + "',
+                ROUND('" + comp_rev_sale + "',2),
+                '" + comp_rev_sale_acc + "',
+                '" + comp_rev_sale_note + "'); SELECT LAST_INSERT_ID(); "
                 id = execute_query(query, 0, True, "", "", "", "")
 
+                'generate number
+                execute_non_query("CALL gen_number('" & id & "','" + rmt + "')", True, "", "", "", "")
+
                 'detail
-                Dim query_det As String = "INSERT INTO tb_sales_branch_det(id_sales_branch, id_acc, id_dc, id_comp, note, value, id_report, number, report_mark_type,vendor) "
+                Dim query_det As String = "INSERT INTO tb_sales_branch_det(id_sales_branch, id_acc, id_dc, id_comp, note, value, id_report, number, report_mark_type,vendor) VALUES "
                 For i As Integer = 0 To GVData.RowCount - 1
                     Dim id_acc As String = GVData.GetRowCellValue(i, "id_acc").ToString
                     Dim id_dc As String = GVData.GetRowCellValue(i, "id_dc").ToString
@@ -569,7 +628,7 @@
                     If id_comp = "0" Then
                         id_comp = "NULL"
                     End If
-                    Dim note_detail As String = addSlashes(GVData.GetRowCellValue(i, "note_detail").ToString)
+                    Dim note_detail As String = addSlashes(GVData.GetRowCellValue(i, "note").ToString)
                     Dim value_detail As String = decimalSQL(GVData.GetRowCellValue(i, "value").ToString)
                     Dim id_report As String = GVData.GetRowCellValue(i, "id_report").ToString
                     If id_report = "0" Then
@@ -590,9 +649,6 @@
                 If GVData.RowCount > 0 Then
                     execute_non_query(query_det, True, "", "", "", "")
                 End If
-
-                'generate number
-                execute_non_query("CALL gen_number('" & id & "','" + rmt + "')", True, "", "", "", "")
 
                 'add mark
                 submit_who_prepared(rmt, id, id_user)

@@ -1297,7 +1297,7 @@ Partial Class FormSalesBranchDet
         Me.GridColumndc_code.Name = "GridColumndc_code"
         Me.GridColumndc_code.OptionsColumn.ReadOnly = True
         Me.GridColumndc_code.Visible = True
-        Me.GridColumndc_code.VisibleIndex = 5
+        Me.GridColumndc_code.VisibleIndex = 4
         Me.GridColumndc_code.Width = 44
         '
         'GridColumnid_comp_det
@@ -1313,7 +1313,7 @@ Partial Class FormSalesBranchDet
         Me.GridColumnnote.FieldName = "note"
         Me.GridColumnnote.Name = "GridColumnnote"
         Me.GridColumnnote.Visible = True
-        Me.GridColumnnote.VisibleIndex = 4
+        Me.GridColumnnote.VisibleIndex = 3
         Me.GridColumnnote.Width = 1067
         '
         'GridColumnvalue
@@ -1326,7 +1326,7 @@ Partial Class FormSalesBranchDet
         Me.GridColumnvalue.OptionsColumn.ReadOnly = True
         Me.GridColumnvalue.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "value", "{0:N2}")})
         Me.GridColumnvalue.Visible = True
-        Me.GridColumnvalue.VisibleIndex = 6
+        Me.GridColumnvalue.VisibleIndex = 5
         Me.GridColumnvalue.Width = 204
         '
         'GridColumnno
@@ -1358,8 +1358,6 @@ Partial Class FormSalesBranchDet
         Me.GridColumnreport_number.Caption = "Reff"
         Me.GridColumnreport_number.FieldName = "report_number"
         Me.GridColumnreport_number.Name = "GridColumnreport_number"
-        Me.GridColumnreport_number.Visible = True
-        Me.GridColumnreport_number.VisibleIndex = 3
         Me.GridColumnreport_number.Width = 55
         '
         'GridColumnvendor
@@ -1476,8 +1474,6 @@ Partial Class FormSalesBranchDet
         Me.GridColumnreport_number_draft.Caption = "Reference"
         Me.GridColumnreport_number_draft.FieldName = "report_number"
         Me.GridColumnreport_number_draft.Name = "GridColumnreport_number_draft"
-        Me.GridColumnreport_number_draft.Visible = True
-        Me.GridColumnreport_number_draft.VisibleIndex = 4
         Me.GridColumnreport_number_draft.Width = 125
         '
         'GridColumnnote_draft
@@ -1486,7 +1482,7 @@ Partial Class FormSalesBranchDet
         Me.GridColumnnote_draft.FieldName = "note"
         Me.GridColumnnote_draft.Name = "GridColumnnote_draft"
         Me.GridColumnnote_draft.Visible = True
-        Me.GridColumnnote_draft.VisibleIndex = 5
+        Me.GridColumnnote_draft.VisibleIndex = 4
         Me.GridColumnnote_draft.Width = 547
         '
         'GridColumndebit_draft
@@ -1498,7 +1494,7 @@ Partial Class FormSalesBranchDet
         Me.GridColumndebit_draft.Name = "GridColumndebit_draft"
         Me.GridColumndebit_draft.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "debit", "{0:N2}")})
         Me.GridColumndebit_draft.Visible = True
-        Me.GridColumndebit_draft.VisibleIndex = 6
+        Me.GridColumndebit_draft.VisibleIndex = 5
         Me.GridColumndebit_draft.Width = 267
         '
         'GridColumncredit_draft
@@ -1510,7 +1506,7 @@ Partial Class FormSalesBranchDet
         Me.GridColumncredit_draft.Name = "GridColumncredit_draft"
         Me.GridColumncredit_draft.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "credit", "{0:N2}")})
         Me.GridColumncredit_draft.Visible = True
-        Me.GridColumncredit_draft.VisibleIndex = 7
+        Me.GridColumncredit_draft.VisibleIndex = 6
         Me.GridColumncredit_draft.Width = 314
         '
         'GridColumncc

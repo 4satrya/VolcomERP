@@ -7942,6 +7942,12 @@
     <Compile Include="ReportSalarySlip.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ReportSalesBranch.Designer.vb">
+      <DependentUpon>ReportSalesBranch.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportSalesBranch.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ReportSalesCreditNote.designer.vb">
       <DependentUpon>ReportSalesCreditNote.vb</DependentUpon>
     </Compile>
@@ -12678,6 +12684,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportSalarySlip.resx">
       <DependentUpon>ReportSalarySlip.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportSalesBranch.resx">
+      <DependentUpon>ReportSalesBranch.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportSalesCreditNote.resx">
       <DependentUpon>ReportSalesCreditNote.vb</DependentUpon>

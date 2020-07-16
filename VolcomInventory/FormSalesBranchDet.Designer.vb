@@ -256,7 +256,7 @@ Partial Class FormSalesBranchDet
         'CEPrintPreview
         '
         Me.CEPrintPreview.EditValue = True
-        Me.CEPrintPreview.Location = New System.Drawing.Point(3, 8)
+        Me.CEPrintPreview.Location = New System.Drawing.Point(6, 11)
         Me.CEPrintPreview.Name = "CEPrintPreview"
         Me.CEPrintPreview.Properties.Caption = "Preview"
         Me.CEPrintPreview.Size = New System.Drawing.Size(60, 19)

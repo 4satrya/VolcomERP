@@ -360,7 +360,7 @@
         ElseIf report_mark_type = "251" Then
             FormBankWithdrawalSum.Close()
         ElseIf report_mark_type = "254" Then
-            FormSalesBranch.Close()
+            FormSalesBranchDet.Close()
         End If
     End Sub
     Sub show()

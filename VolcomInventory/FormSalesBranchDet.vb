@@ -1,4 +1,6 @@
-﻿Public Class FormSalesBranchDet
+﻿Imports DevExpress.XtraReports.UI
+
+Public Class FormSalesBranchDet
     Public id As String = "-1"
     Public action As String = "-1"
     Public rmt As String = "254"
@@ -195,6 +197,10 @@
         GroupControlNormalAccount.Enabled = False
         GroupControlSaleAccount.Enabled = False
         GroupControlNote.Enabled = False
+        If id_report_status = "6" Then
+            BtnViewJournal.Visible = True
+            BtnViewJournal.Enabled = True
+        End If
     End Sub
 
     Private Sub BtnDelete_Click(sender As Object, e As EventArgs) Handles BtnDelete.Click
@@ -695,26 +701,26 @@
     End Sub
 
     Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles BtnPrint.Click
-        'Cursor = Cursors.WaitCursor
-        'ReportBankDepositNew.id = id_deposit
-        'ReportBankDepositNew.id_report_status = id_report_status
-        'ReportBankDepositNew.rmt = "162"
-        'Dim Report As New ReportBankDepositNew()
+        Cursor = Cursors.WaitCursor
+        ReportSalesBranch.id = id
+        ReportSalesBranch.id_report_status = id_report_status
+        ReportSalesBranch.rmt = rmt
+        Dim Report As New ReportSalesBranch()
 
-        'If CEPrintPreview.EditValue = True Then
-        '    Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
-        '    Tool.ShowPreviewDialog()
-        'Else
-        '    Dim instance As New Printing.PrinterSettings
-        '    Dim DefaultPrinter As String = instance.PrinterName
+        If CEPrintPreview.EditValue = True Then
+            Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
+            Tool.ShowPreviewDialog()
+        Else
+            Dim instance As New Printing.PrinterSettings
+            Dim DefaultPrinter As String = instance.PrinterName
 
-        '    ' THIS IS TO PRINT THE REPORT
-        '    Report.PrinterName = DefaultPrinter
-        '    Report.CreateDocument()
-        '    Report.PrintingSystem.ShowMarginsWarning = False
-        '    Report.Print()
-        'End If
-        'Cursor = Cursors.Default
+            ' THIS IS TO PRINT THE REPORT
+            Report.PrinterName = DefaultPrinter
+            Report.CreateDocument()
+            Report.PrintingSystem.ShowMarginsWarning = False
+            Report.Print()
+        End If
+        Cursor = Cursors.Default
     End Sub
 
     Private Sub BMark_Click(sender As Object, e As EventArgs) Handles BMark.Click

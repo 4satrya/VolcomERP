@@ -78,6 +78,7 @@ Partial Class FormPurcReqDet
         Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn16 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn32 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn20 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn31 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnBudgetRemaining = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -118,7 +119,6 @@ Partial Class FormPurcReqDet
         Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
         Me.BSetShipping = New DevExpress.XtraEditors.SimpleButton()
-        Me.GridColumn32 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.TENoteIA.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -769,6 +769,14 @@ Partial Class FormPurcReqDet
         Me.GridColumn16.Visible = True
         Me.GridColumn16.VisibleIndex = 6
         '
+        'GridColumn32
+        '
+        Me.GridColumn32.Caption = "Type"
+        Me.GridColumn32.FieldName = "item_type"
+        Me.GridColumn32.Name = "GridColumn32"
+        Me.GridColumn32.Visible = True
+        Me.GridColumn32.VisibleIndex = 7
+        '
         'GridColumn20
         '
         Me.GridColumn20.Caption = "Item Detail"
@@ -1101,7 +1109,7 @@ Partial Class FormPurcReqDet
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.MENote.Location = New System.Drawing.Point(103, 7)
         Me.MENote.Name = "MENote"
-        Me.MENote.Properties.MaxLength = 100
+        Me.MENote.Properties.MaxLength = 700
         Me.MENote.Size = New System.Drawing.Size(303, 85)
         Me.MENote.TabIndex = 6
         '
@@ -1189,14 +1197,6 @@ Partial Class FormPurcReqDet
         Me.BSetShipping.TabIndex = 13
         Me.BSetShipping.TabStop = False
         Me.BSetShipping.Text = "Set blank shipping destination to Volcom"
-        '
-        'GridColumn32
-        '
-        Me.GridColumn32.Caption = "Type"
-        Me.GridColumn32.FieldName = "item_type"
-        Me.GridColumn32.Name = "GridColumn32"
-        Me.GridColumn32.Visible = True
-        Me.GridColumn32.VisibleIndex = 7
         '
         'FormPurcReqDet
         '

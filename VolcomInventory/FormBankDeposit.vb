@@ -53,6 +53,10 @@
 
         'payout
         load_payout()
+
+        'VS sales
+        viewCoaTag()
+        load_status_sales()
     End Sub
 
     Sub load_status_payment()
@@ -64,6 +68,13 @@ SELECT 3 AS id_status_payment,'Overdue' AS status_payment
 UNION
 SELECT 4 AS id_status_payment,'Overdue H-7' AS status_payment"
         viewSearchLookupQuery(SLEStatusInvoice, query, "id_status_payment", "status_payment", "id_status_payment")
+    End Sub
+
+    Sub load_status_sales()
+        Dim query As String = "SELECT 1 AS id_status_payment,'Open' AS status_payment
+        UNION
+        SELECT 2 AS id_status_payment,'Close' AS status_payment "
+        viewSearchLookupQuery(SLEStatusSales, query, "id_status_payment", "status_payment", "id_status_payment")
     End Sub
 
     Sub load_vendor()
@@ -224,6 +235,12 @@ WHERE 1=1 " & where_string & " ORDER BY rec_py.id_rec_payment DESC"
         GCPayout.DataSource = data
         GVPayout.BestFitColumns()
         Cursor = Cursors.Default
+    End Sub
+
+    Sub viewCoaTag()
+        Dim query As String = "SELECT ct.id_coa_tag, ct.tag_code, ct.tag_description, CONCAT(ct.tag_code,' - ', ct.tag_description)  AS `coa_tag`
+        FROM tb_coa_tag ct WHERE ct.id_coa_tag>1 ORDER BY ct.id_coa_tag ASC "
+        viewSearchLookupQuery(SLEUnit, query, "id_coa_tag", "tag_description", "id_coa_tag")
     End Sub
 
     Private Sub GVInvoiceList_RowStyle(sender As Object, e As DevExpress.XtraGrid.Views.Grid.RowStyleEventArgs) Handles GVInvoiceList.RowStyle

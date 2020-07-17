@@ -119,7 +119,7 @@ Partial Class FormBankDeposit
         Me.GCSales = New DevExpress.XtraGrid.GridControl()
         Me.GVSales = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.PanelControl4 = New DevExpress.XtraEditors.PanelControl()
-        Me.SearchLookUpEdit1 = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.SLEStatusSales = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView6 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn30 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn31 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -168,7 +168,7 @@ Partial Class FormBankDeposit
         CType(Me.GVSales, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl4.SuspendLayout()
-        CType(Me.SearchLookUpEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SLEStatusSales.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLEUnit.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1100,7 +1100,7 @@ Partial Class FormBankDeposit
         '
         'PanelControl4
         '
-        Me.PanelControl4.Controls.Add(Me.SearchLookUpEdit1)
+        Me.PanelControl4.Controls.Add(Me.SLEStatusSales)
         Me.PanelControl4.Controls.Add(Me.LabelControl8)
         Me.PanelControl4.Controls.Add(Me.SimpleButton2)
         Me.PanelControl4.Controls.Add(Me.SLEUnit)
@@ -1111,14 +1111,14 @@ Partial Class FormBankDeposit
         Me.PanelControl4.Size = New System.Drawing.Size(1186, 49)
         Me.PanelControl4.TabIndex = 0
         '
-        'SearchLookUpEdit1
+        'SLEStatusSales
         '
-        Me.SearchLookUpEdit1.Location = New System.Drawing.Point(352, 15)
-        Me.SearchLookUpEdit1.Name = "SearchLookUpEdit1"
-        Me.SearchLookUpEdit1.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.SearchLookUpEdit1.Properties.View = Me.GridView6
-        Me.SearchLookUpEdit1.Size = New System.Drawing.Size(123, 20)
-        Me.SearchLookUpEdit1.TabIndex = 8920
+        Me.SLEStatusSales.Location = New System.Drawing.Point(352, 15)
+        Me.SLEStatusSales.Name = "SLEStatusSales"
+        Me.SLEStatusSales.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEStatusSales.Properties.View = Me.GridView6
+        Me.SLEStatusSales.Size = New System.Drawing.Size(123, 20)
+        Me.SLEStatusSales.TabIndex = 8920
         '
         'GridView6
         '
@@ -1251,7 +1251,7 @@ Partial Class FormBankDeposit
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl4.ResumeLayout(False)
         Me.PanelControl4.PerformLayout()
-        CType(Me.SearchLookUpEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SLEStatusSales.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SLEUnit.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView4, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1364,7 +1364,7 @@ Partial Class FormBankDeposit
     Friend WithEvents LabelControl7 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents GCSales As DevExpress.XtraGrid.GridControl
     Friend WithEvents GVSales As DevExpress.XtraGrid.Views.Grid.GridView
-    Friend WithEvents SearchLookUpEdit1 As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents SLEStatusSales As DevExpress.XtraEditors.SearchLookUpEdit
     Friend WithEvents GridView6 As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumn30 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn31 As DevExpress.XtraGrid.Columns.GridColumn

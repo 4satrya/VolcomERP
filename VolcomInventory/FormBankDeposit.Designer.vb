@@ -150,6 +150,12 @@ Partial Class FormBankDeposit
         Me.GridColumnid_coa_tag = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncoa_tag = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl7 = New DevExpress.XtraEditors.LabelControl()
+        Me.GridColumnunit = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.SLEUnitView = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView7 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn33 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn34 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl9 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.XTCPO, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCPO.SuspendLayout()
         Me.XTPInvoice.SuspendLayout()
@@ -193,6 +199,8 @@ Partial Class FormBankDeposit
         CType(Me.GridView6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLEUnit.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView4, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SLEUnitView.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView7, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'XTCPO
@@ -714,7 +722,7 @@ Partial Class FormBankDeposit
         '
         'GVList
         '
-        Me.GVList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn8, Me.GridColumn9, Me.GridColumn11, Me.GridColumn15, Me.GridColumn20, Me.GridColumn5, Me.GridColumn22, Me.GridColumn18, Me.GridColumn21, Me.GridColumndate_received, Me.GridColumnlast_approved_by})
+        Me.GVList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn8, Me.GridColumn9, Me.GridColumn11, Me.GridColumn15, Me.GridColumn20, Me.GridColumn5, Me.GridColumn22, Me.GridColumn18, Me.GridColumn21, Me.GridColumndate_received, Me.GridColumnlast_approved_by, Me.GridColumnunit})
         Me.GVList.GridControl = Me.GCList
         Me.GVList.Name = "GVList"
         Me.GVList.OptionsBehavior.AutoExpandAllGroups = True
@@ -747,7 +755,7 @@ Partial Class FormBankDeposit
         Me.GridColumn11.Name = "GridColumn11"
         Me.GridColumn11.OptionsColumn.AllowEdit = False
         Me.GridColumn11.Visible = True
-        Me.GridColumn11.VisibleIndex = 1
+        Me.GridColumn11.VisibleIndex = 2
         Me.GridColumn11.Width = 107
         '
         'GridColumn15
@@ -757,7 +765,7 @@ Partial Class FormBankDeposit
         Me.GridColumn15.Name = "GridColumn15"
         Me.GridColumn15.OptionsColumn.AllowEdit = False
         Me.GridColumn15.Visible = True
-        Me.GridColumn15.VisibleIndex = 3
+        Me.GridColumn15.VisibleIndex = 4
         Me.GridColumn15.Width = 109
         '
         'GridColumn20
@@ -773,7 +781,7 @@ Partial Class FormBankDeposit
         Me.GridColumn20.Name = "GridColumn20"
         Me.GridColumn20.OptionsColumn.AllowEdit = False
         Me.GridColumn20.Visible = True
-        Me.GridColumn20.VisibleIndex = 4
+        Me.GridColumn20.VisibleIndex = 5
         Me.GridColumn20.Width = 120
         '
         'GridColumn5
@@ -788,7 +796,7 @@ Partial Class FormBankDeposit
         Me.GridColumn5.FieldName = "val_need_pay"
         Me.GridColumn5.Name = "GridColumn5"
         Me.GridColumn5.Visible = True
-        Me.GridColumn5.VisibleIndex = 5
+        Me.GridColumn5.VisibleIndex = 6
         Me.GridColumn5.Width = 136
         '
         'GridColumn22
@@ -798,7 +806,7 @@ Partial Class FormBankDeposit
         Me.GridColumn22.Name = "GridColumn22"
         Me.GridColumn22.OptionsColumn.AllowEdit = False
         Me.GridColumn22.Visible = True
-        Me.GridColumn22.VisibleIndex = 7
+        Me.GridColumn22.VisibleIndex = 8
         Me.GridColumn22.Width = 109
         '
         'GridColumn18
@@ -808,7 +816,7 @@ Partial Class FormBankDeposit
         Me.GridColumn18.Name = "GridColumn18"
         Me.GridColumn18.OptionsColumn.AllowEdit = False
         Me.GridColumn18.Visible = True
-        Me.GridColumn18.VisibleIndex = 6
+        Me.GridColumn18.VisibleIndex = 7
         '
         'GridColumn21
         '
@@ -826,7 +834,7 @@ Partial Class FormBankDeposit
         Me.GridColumndate_received.FieldName = "date_received"
         Me.GridColumndate_received.Name = "GridColumndate_received"
         Me.GridColumndate_received.Visible = True
-        Me.GridColumndate_received.VisibleIndex = 2
+        Me.GridColumndate_received.VisibleIndex = 3
         Me.GridColumndate_received.Width = 137
         '
         'GridColumnlast_approved_by
@@ -835,7 +843,7 @@ Partial Class FormBankDeposit
         Me.GridColumnlast_approved_by.FieldName = "last_approved_by"
         Me.GridColumnlast_approved_by.Name = "GridColumnlast_approved_by"
         Me.GridColumnlast_approved_by.Visible = True
-        Me.GridColumnlast_approved_by.VisibleIndex = 8
+        Me.GridColumnlast_approved_by.VisibleIndex = 9
         Me.GridColumnlast_approved_by.Width = 127
         '
         'RepositoryItemCheckEdit1
@@ -847,6 +855,8 @@ Partial Class FormBankDeposit
         '
         'PanelControl2
         '
+        Me.PanelControl2.Controls.Add(Me.SLEUnitView)
+        Me.PanelControl2.Controls.Add(Me.LabelControl9)
         Me.PanelControl2.Controls.Add(Me.DEUntilList)
         Me.PanelControl2.Controls.Add(Me.DEFromList)
         Me.PanelControl2.Controls.Add(Me.LabelControl4)
@@ -863,7 +873,7 @@ Partial Class FormBankDeposit
         'DEUntilList
         '
         Me.DEUntilList.EditValue = Nothing
-        Me.DEUntilList.Location = New System.Drawing.Point(190, 12)
+        Me.DEUntilList.Location = New System.Drawing.Point(493, 13)
         Me.DEUntilList.Name = "DEUntilList"
         Me.DEUntilList.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[False]
         Me.DEUntilList.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
@@ -877,7 +887,7 @@ Partial Class FormBankDeposit
         'DEFromList
         '
         Me.DEFromList.EditValue = Nothing
-        Me.DEFromList.Location = New System.Drawing.Point(46, 12)
+        Me.DEFromList.Location = New System.Drawing.Point(349, 13)
         Me.DEFromList.Name = "DEFromList"
         Me.DEFromList.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[False]
         Me.DEFromList.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
@@ -890,7 +900,7 @@ Partial Class FormBankDeposit
         '
         'LabelControl4
         '
-        Me.LabelControl4.Location = New System.Drawing.Point(163, 15)
+        Me.LabelControl4.Location = New System.Drawing.Point(466, 16)
         Me.LabelControl4.Name = "LabelControl4"
         Me.LabelControl4.Size = New System.Drawing.Size(21, 13)
         Me.LabelControl4.TabIndex = 8920
@@ -898,7 +908,7 @@ Partial Class FormBankDeposit
         '
         'LabelControl6
         '
-        Me.LabelControl6.Location = New System.Drawing.Point(16, 15)
+        Me.LabelControl6.Location = New System.Drawing.Point(319, 16)
         Me.LabelControl6.Name = "LabelControl6"
         Me.LabelControl6.Size = New System.Drawing.Size(24, 13)
         Me.LabelControl6.TabIndex = 8919
@@ -945,7 +955,7 @@ Partial Class FormBankDeposit
         '
         'BViewPayment
         '
-        Me.BViewPayment.Location = New System.Drawing.Point(307, 12)
+        Me.BViewPayment.Location = New System.Drawing.Point(610, 13)
         Me.BViewPayment.Name = "BViewPayment"
         Me.BViewPayment.Size = New System.Drawing.Size(60, 19)
         Me.BViewPayment.TabIndex = 8916
@@ -1404,6 +1414,53 @@ Partial Class FormBankDeposit
         Me.LabelControl7.TabIndex = 8915
         Me.LabelControl7.Text = "Unit"
         '
+        'GridColumnunit
+        '
+        Me.GridColumnunit.Caption = "Unit"
+        Me.GridColumnunit.FieldName = "unit"
+        Me.GridColumnunit.Name = "GridColumnunit"
+        Me.GridColumnunit.Visible = True
+        Me.GridColumnunit.VisibleIndex = 1
+        '
+        'SLEUnitView
+        '
+        Me.SLEUnitView.Location = New System.Drawing.Point(48, 13)
+        Me.SLEUnitView.Name = "SLEUnitView"
+        Me.SLEUnitView.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEUnitView.Properties.View = Me.GridView7
+        Me.SLEUnitView.Size = New System.Drawing.Size(264, 20)
+        Me.SLEUnitView.TabIndex = 8924
+        '
+        'GridView7
+        '
+        Me.GridView7.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn33, Me.GridColumn34})
+        Me.GridView7.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView7.Name = "GridView7"
+        Me.GridView7.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView7.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn33
+        '
+        Me.GridColumn33.Caption = "id_coa_tag"
+        Me.GridColumn33.FieldName = "id_coa_tag"
+        Me.GridColumn33.Name = "GridColumn33"
+        '
+        'GridColumn34
+        '
+        Me.GridColumn34.Caption = "Unit"
+        Me.GridColumn34.FieldName = "coa_tag"
+        Me.GridColumn34.Name = "GridColumn34"
+        Me.GridColumn34.Visible = True
+        Me.GridColumn34.VisibleIndex = 0
+        '
+        'LabelControl9
+        '
+        Me.LabelControl9.Location = New System.Drawing.Point(19, 16)
+        Me.LabelControl9.Name = "LabelControl9"
+        Me.LabelControl9.Size = New System.Drawing.Size(19, 13)
+        Me.LabelControl9.TabIndex = 8923
+        Me.LabelControl9.Text = "Unit"
+        '
         'FormBankDeposit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1463,6 +1520,8 @@ Partial Class FormBankDeposit
         CType(Me.GridView6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SLEUnit.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SLEUnitView.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView7, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1597,4 +1656,10 @@ Partial Class FormBankDeposit
     Friend WithEvents RepositoryItemCheckEdit3 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
     Friend WithEvents BtnCreateBBMforVS As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents GridColumntotal_pending As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnunit As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents SLEUnitView As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView7 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn33 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn34 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LabelControl9 As DevExpress.XtraEditors.LabelControl
 End Class

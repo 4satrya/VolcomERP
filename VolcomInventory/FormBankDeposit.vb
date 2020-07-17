@@ -56,6 +56,7 @@
 
         'VS sales
         viewCoaTag()
+        viewCoaTagAll()
         load_status_sales()
     End Sub
 
@@ -129,6 +130,10 @@ SELECT cc.id_comp_contact,CONCAT(c.comp_number,' - ',c.comp_name) as comp_name
             where_string = " AND rec_py.id_comp_contact='" & SLEStoreDeposit.EditValue.ToString & "'"
         End If
 
+        If SLEUnitView.EditValue.ToString <> "0" Then
+            where_string += " AND rec_py.id_coa_tag='" + SLEUnitView.EditValue.ToString + "'"
+        End If
+
         'date
         Dim date_from_selected As String = "0000-01-01"
         Dim date_until_selected As String = "9999-01-01"
@@ -145,7 +150,7 @@ SELECT cc.id_comp_contact,CONCAT(c.comp_number,' - ',c.comp_name) as comp_name
         'Left Join tb_m_comp_contact cc ON cc.`id_comp_contact`=rec_py.`id_comp_contact`
         'Left Join tb_m_comp c ON c.`id_comp`=cc.`id_comp`
         ',CONCAT(c.`comp_number`,' - ',c.`comp_name`) AS comp_name
-        Dim query As String = "SELECT rec_py.number,sts.report_status,emp.employee_name AS created_by, rec_py.date_created, rec_py.date_received, rec_py.val_need_pay, rec_py.`id_rec_payment`,rec_py.`value` ,rec_py.note, la.employee_name AS `last_approved_by`
+        Dim query As String = "SELECT rec_py.number,sts.report_status,emp.employee_name AS created_by, rec_py.date_created, rec_py.date_received, rec_py.val_need_pay, rec_py.`id_rec_payment`,rec_py.`value` ,rec_py.note, la.employee_name AS `last_approved_by`, t.tag_description AS `unit`
 FROM tb_rec_payment rec_py
 INNER JOIN tb_m_user usr ON usr.id_user=rec_py.id_user_created
 INNER JOIN tb_m_employee emp ON emp.id_employee=usr.id_employee
@@ -162,6 +167,7 @@ LEFT JOIN (
 	) a
 	GROUP BY a.id_report
 ) la ON la.id_report = rec_py.`id_rec_payment`
+INNER JOIN tb_coa_tag t ON t.id_coa_tag = rec_py.id_coa_tag
 WHERE 1=1 " & where_string & " ORDER BY rec_py.id_rec_payment DESC"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCList.DataSource = data
@@ -242,6 +248,15 @@ WHERE 1=1 " & where_string & " ORDER BY rec_py.id_rec_payment DESC"
         Dim query As String = "SELECT ct.id_coa_tag, ct.tag_code, ct.tag_description, CONCAT(ct.tag_code,' - ', ct.tag_description)  AS `coa_tag`
         FROM tb_coa_tag ct WHERE ct.id_coa_tag>1 ORDER BY ct.id_coa_tag ASC "
         viewSearchLookupQuery(SLEUnit, query, "id_coa_tag", "tag_description", "id_coa_tag")
+    End Sub
+
+    Sub viewCoaTagAll()
+        Dim query As String = "
+        SELECT 0 AS id_coa_tag, 'All' AS `tag_code`, 'All' AS `tag_description`, 'All' AS `coa_tag`
+        UNION
+        SELECT ct.id_coa_tag, ct.tag_code, ct.tag_description, CONCAT(ct.tag_code,' - ', ct.tag_description)  AS `coa_tag`
+        FROM tb_coa_tag ct ORDER BY id_coa_tag ASC "
+        viewSearchLookupQuery(SLEUnitView, query, "id_coa_tag", "tag_description", "id_coa_tag")
     End Sub
 
     Sub load_sales()

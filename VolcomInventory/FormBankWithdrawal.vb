@@ -1228,4 +1228,8 @@ GROUP BY pns.`id_pn_summary`"
     Private Sub DEBBKFrom_EditValueChanged(sender As Object, e As EventArgs) Handles DEBBKFrom.EditValueChanged
         DEBBKTo.Properties.MinValue = DEBBKFrom.EditValue
     End Sub
+
+    Private Sub BBuyValas_Click(sender As Object, e As EventArgs) Handles BBuyValas.Click
+
+    End Sub
 End Class

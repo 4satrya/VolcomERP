@@ -388,6 +388,12 @@
     <Compile Include="FormBankWithdrawalBookTransfer.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormBankWithdrawalBuyValas.Designer.vb">
+      <DependentUpon>FormBankWithdrawalBuyValas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormBankWithdrawalBuyValas.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormBankWithdrawalDP.Designer.vb">
       <DependentUpon>FormBankWithdrawalDP.vb</DependentUpon>
     </Compile>
@@ -1032,6 +1038,24 @@
       <DependentUpon>FormDeptHeadSurveyDet.vb</DependentUpon>
     </Compile>
     <Compile Include="FormDeptHeadSurveyDet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDesignColumn.Designer.vb">
+      <DependentUpon>FormDesignColumn.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormDesignColumn.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDesignColumnDet.Designer.vb">
+      <DependentUpon>FormDesignColumnDet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormDesignColumnDet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDesignColumnValue.Designer.vb">
+      <DependentUpon>FormDesignColumnValue.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormDesignColumnValue.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormDocTracking.Designer.vb">
@@ -8386,6 +8410,9 @@
     <EmbeddedResource Include="FormBankWithdrawalBookTransfer.resx">
       <DependentUpon>FormBankWithdrawalBookTransfer.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormBankWithdrawalBuyValas.resx">
+      <DependentUpon>FormBankWithdrawalBuyValas.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormBankWithdrawalDP.resx">
       <DependentUpon>FormBankWithdrawalDP.vb</DependentUpon>
     </EmbeddedResource>
@@ -8743,6 +8770,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormDeptHeadSurveyDet.resx">
       <DependentUpon>FormDeptHeadSurveyDet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDesignColumn.resx">
+      <DependentUpon>FormDesignColumn.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDesignColumnDet.resx">
+      <DependentUpon>FormDesignColumnDet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDesignColumnValue.resx">
+      <DependentUpon>FormDesignColumnValue.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormDocTracking.resx">
       <DependentUpon>FormDocTracking.vb</DependentUpon>

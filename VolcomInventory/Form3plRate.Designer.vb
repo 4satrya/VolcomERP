@@ -21,6 +21,10 @@ Partial Class Form3plRate
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form3plRate))
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.SLEDelType = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn14 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn15 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.SLEInboundOutbound = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -33,7 +37,6 @@ Partial Class Form3plRate
         Me.GridColumnRange = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.BAdd = New DevExpress.XtraEditors.SimpleButton()
         Me.BEdit = New DevExpress.XtraEditors.SimpleButton()
-        Me.BDelete = New DevExpress.XtraEditors.SimpleButton()
         Me.GCListRate = New DevExpress.XtraGrid.GridControl()
         Me.GVListRate = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -47,20 +50,16 @@ Partial Class Form3plRate
         Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.SLEDelType = New DevExpress.XtraEditors.SearchLookUpEdit()
-        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.GridColumn14 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn15 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
+        CType(Me.SLEDelType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLEInboundOutbound.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLECargo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLVCargo, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GCListRate, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVListRate, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.SLEDelType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl1
@@ -72,12 +71,45 @@ Partial Class Form3plRate
         Me.PanelControl1.Controls.Add(Me.SLECargo)
         Me.PanelControl1.Controls.Add(Me.BAdd)
         Me.PanelControl1.Controls.Add(Me.BEdit)
-        Me.PanelControl1.Controls.Add(Me.BDelete)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl1.Location = New System.Drawing.Point(0, 0)
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(1121, 45)
         Me.PanelControl1.TabIndex = 0
+        '
+        'SLEDelType
+        '
+        Me.SLEDelType.Location = New System.Drawing.Point(257, 13)
+        Me.SLEDelType.Name = "SLEDelType"
+        Me.SLEDelType.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SLEDelType.Properties.Appearance.Options.UseFont = True
+        Me.SLEDelType.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEDelType.Properties.NullText = "-"
+        Me.SLEDelType.Properties.View = Me.GridView1
+        Me.SLEDelType.Size = New System.Drawing.Size(172, 20)
+        Me.SLEDelType.TabIndex = 15
+        '
+        'GridView1
+        '
+        Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn14, Me.GridColumn15})
+        Me.GridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView1.Name = "GridView1"
+        Me.GridView1.OptionsBehavior.ReadOnly = True
+        Me.GridView1.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView1.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn14
+        '
+        Me.GridColumn14.FieldName = "id_del_type"
+        Me.GridColumn14.Name = "GridColumn14"
+        '
+        'GridColumn15
+        '
+        Me.GridColumn15.Caption = "Delivery Type"
+        Me.GridColumn15.FieldName = "del_type"
+        Me.GridColumn15.Name = "GridColumn15"
+        Me.GridColumn15.Visible = True
+        Me.GridColumn15.VisibleIndex = 0
         '
         'SLEInboundOutbound
         '
@@ -169,7 +201,7 @@ Partial Class Form3plRate
         '
         Me.BAdd.Dock = System.Windows.Forms.DockStyle.Right
         Me.BAdd.Image = CType(resources.GetObject("BAdd.Image"), System.Drawing.Image)
-        Me.BAdd.Location = New System.Drawing.Point(848, 2)
+        Me.BAdd.Location = New System.Drawing.Point(943, 2)
         Me.BAdd.Name = "BAdd"
         Me.BAdd.Size = New System.Drawing.Size(88, 41)
         Me.BAdd.TabIndex = 1
@@ -179,21 +211,11 @@ Partial Class Form3plRate
         '
         Me.BEdit.Dock = System.Windows.Forms.DockStyle.Right
         Me.BEdit.Image = CType(resources.GetObject("BEdit.Image"), System.Drawing.Image)
-        Me.BEdit.Location = New System.Drawing.Point(936, 2)
+        Me.BEdit.Location = New System.Drawing.Point(1031, 2)
         Me.BEdit.Name = "BEdit"
         Me.BEdit.Size = New System.Drawing.Size(88, 41)
         Me.BEdit.TabIndex = 2
         Me.BEdit.Text = "Edit"
-        '
-        'BDelete
-        '
-        Me.BDelete.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BDelete.Image = CType(resources.GetObject("BDelete.Image"), System.Drawing.Image)
-        Me.BDelete.Location = New System.Drawing.Point(1024, 2)
-        Me.BDelete.Name = "BDelete"
-        Me.BDelete.Size = New System.Drawing.Size(95, 41)
-        Me.BDelete.TabIndex = 0
-        Me.BDelete.Text = "Delete"
         '
         'GCListRate
         '
@@ -307,40 +329,6 @@ Partial Class Form3plRate
         Me.GridColumn9.Visible = True
         Me.GridColumn9.VisibleIndex = 8
         '
-        'SLEDelType
-        '
-        Me.SLEDelType.Location = New System.Drawing.Point(257, 13)
-        Me.SLEDelType.Name = "SLEDelType"
-        Me.SLEDelType.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SLEDelType.Properties.Appearance.Options.UseFont = True
-        Me.SLEDelType.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.SLEDelType.Properties.NullText = "-"
-        Me.SLEDelType.Properties.View = Me.GridView1
-        Me.SLEDelType.Size = New System.Drawing.Size(172, 20)
-        Me.SLEDelType.TabIndex = 15
-        '
-        'GridView1
-        '
-        Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn14, Me.GridColumn15})
-        Me.GridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
-        Me.GridView1.Name = "GridView1"
-        Me.GridView1.OptionsBehavior.ReadOnly = True
-        Me.GridView1.OptionsSelection.EnableAppearanceFocusedCell = False
-        Me.GridView1.OptionsView.ShowGroupPanel = False
-        '
-        'GridColumn14
-        '
-        Me.GridColumn14.FieldName = "id_del_type"
-        Me.GridColumn14.Name = "GridColumn14"
-        '
-        'GridColumn15
-        '
-        Me.GridColumn15.Caption = "Delivery Type"
-        Me.GridColumn15.FieldName = "del_type"
-        Me.GridColumn15.Name = "GridColumn15"
-        Me.GridColumn15.Visible = True
-        Me.GridColumn15.VisibleIndex = 0
-        '
         'Form3plRate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -357,14 +345,14 @@ Partial Class Form3plRate
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         Me.PanelControl1.PerformLayout()
+        CType(Me.SLEDelType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SLEInboundOutbound.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SLECargo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SLVCargo, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GCListRate, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVListRate, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.SLEDelType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -372,7 +360,6 @@ Partial Class Form3plRate
     Friend WithEvents PanelControl1 As DevExpress.XtraEditors.PanelControl
     Friend WithEvents BAdd As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BEdit As DevExpress.XtraEditors.SimpleButton
-    Friend WithEvents BDelete As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BView As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents SLECargo As DevExpress.XtraEditors.SearchLookUpEdit

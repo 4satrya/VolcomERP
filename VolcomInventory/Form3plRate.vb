@@ -57,7 +57,7 @@ INNER JOIN tb_m_state state ON state.`id_state`=ct.`id_state`
 INNER JOIN tb_m_comp c ON c.`id_comp`=3pl.`id_comp`
 INNER JOIN tb_m_user usr ON usr.`id_user`=3pl.`created_by`
 INNER JOIN tb_m_employee emp ON emp.`id_employee`=usr.`id_employee`
-WHERE 3pl.id_del_type = '" + SLEDelType.EditValue.ToString + "' AND 3pl.id_comp='" & SLECargo.EditValue.ToString & "' AND 3pl.id_type='" & SLEInboundOutbound.EditValue.ToString & "'"
+WHERE 3pl.id_del_type = '" + SLEDelType.EditValue.ToString + "' AND 3pl.is_active=1 AND 3pl.id_comp='" & SLECargo.EditValue.ToString & "' AND 3pl.id_type='" & SLEInboundOutbound.EditValue.ToString & "'"
         Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
         GCListRate.DataSource = dt
         GVListRate.BestFitColumns()
@@ -72,9 +72,5 @@ WHERE 3pl.id_del_type = '" + SLEDelType.EditValue.ToString + "' AND 3pl.id_comp=
             Form3plRateDet.id_rate = GVListRate.GetFocusedRowCellValue("id_3pl_rate").ToString
             Form3plRateDet.ShowDialog()
         End If
-    End Sub
-
-    Private Sub BDelete_Click(sender As Object, e As EventArgs) Handles BDelete.Click
-
     End Sub
 End Class

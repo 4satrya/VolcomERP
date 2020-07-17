@@ -79,6 +79,28 @@ Partial Class FormBankWithdrawal
         Me.LabelControl16 = New DevExpress.XtraEditors.LabelControl()
         Me.BViewBBKSum = New DevExpress.XtraEditors.SimpleButton()
         Me.BCreateToday = New DevExpress.XtraEditors.SimpleButton()
+        Me.XTPBBKValas = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCValas = New DevExpress.XtraGrid.GridControl()
+        Me.GVValas = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn209 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn210 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn212 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn213 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn214 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn215 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn216 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn217 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn218 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn219 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn220 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemCheckEdit13 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.PanelControl10 = New DevExpress.XtraEditors.PanelControl()
+        Me.DateEdit1 = New DevExpress.XtraEditors.DateEdit()
+        Me.LabelControl20 = New DevExpress.XtraEditors.LabelControl()
+        Me.DateEdit2 = New DevExpress.XtraEditors.DateEdit()
+        Me.LabelControl21 = New DevExpress.XtraEditors.LabelControl()
+        Me.SimpleButton1 = New DevExpress.XtraEditors.SimpleButton()
+        Me.BBuyValas = New DevExpress.XtraEditors.SimpleButton()
         Me.XTPPO = New DevExpress.XtraTab.XtraTabPage()
         Me.XTPPOList = New DevExpress.XtraTab.XtraTabControl()
         Me.XPOListActive = New DevExpress.XtraTab.XtraTabPage()
@@ -475,6 +497,16 @@ Partial Class FormBankWithdrawal
         CType(Me.DEToSum.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEFromSum.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEFromSum.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTPBBKValas.SuspendLayout()
+        CType(Me.GCValas, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVValas, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemCheckEdit13, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl10, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl10.SuspendLayout()
+        CType(Me.DateEdit1.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DateEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DateEdit2.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DateEdit2.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTPPO.SuspendLayout()
         CType(Me.XTPPOList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTPPOList.SuspendLayout()
@@ -617,7 +649,7 @@ Partial Class FormBankWithdrawal
         Me.XTCBBKList.SelectedTabPage = Me.XTPBBKList
         Me.XTCBBKList.Size = New System.Drawing.Size(1091, 485)
         Me.XTCBBKList.TabIndex = 20
-        Me.XTCBBKList.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPBBKList, Me.XTPBBKSUmmary})
+        Me.XTCBBKList.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPBBKList, Me.XTPBBKSUmmary, Me.XTPBBKValas})
         '
         'XTPBBKList
         '
@@ -1168,6 +1200,240 @@ Partial Class FormBankWithdrawal
         Me.BCreateToday.Size = New System.Drawing.Size(1085, 32)
         Me.BCreateToday.TabIndex = 20
         Me.BCreateToday.Text = "Create Summary"
+        '
+        'XTPBBKValas
+        '
+        Me.XTPBBKValas.Controls.Add(Me.GCValas)
+        Me.XTPBBKValas.Controls.Add(Me.PanelControl10)
+        Me.XTPBBKValas.Controls.Add(Me.BBuyValas)
+        Me.XTPBBKValas.Name = "XTPBBKValas"
+        Me.XTPBBKValas.Size = New System.Drawing.Size(1085, 457)
+        Me.XTPBBKValas.Text = "Beli Valas"
+        '
+        'GCValas
+        '
+        Me.GCValas.ContextMenuStrip = Me.CMBBKList
+        Me.GCValas.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCValas.Location = New System.Drawing.Point(0, 44)
+        Me.GCValas.MainView = Me.GVValas
+        Me.GCValas.Name = "GCValas"
+        Me.GCValas.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckEdit13})
+        Me.GCValas.Size = New System.Drawing.Size(1085, 381)
+        Me.GCValas.TabIndex = 24
+        Me.GCValas.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVValas})
+        '
+        'GVValas
+        '
+        Me.GVValas.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn209, Me.GridColumn210, Me.GridColumn212, Me.GridColumn213, Me.GridColumn214, Me.GridColumn215, Me.GridColumn216, Me.GridColumn217, Me.GridColumn218, Me.GridColumn219, Me.GridColumn220})
+        Me.GVValas.GridControl = Me.GCValas
+        Me.GVValas.Name = "GVValas"
+        Me.GVValas.OptionsBehavior.AutoExpandAllGroups = True
+        Me.GVValas.OptionsView.ColumnAutoWidth = False
+        Me.GVValas.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn209
+        '
+        Me.GridColumn209.Caption = "ID"
+        Me.GridColumn209.FieldName = "id_pn"
+        Me.GridColumn209.Name = "GridColumn209"
+        Me.GridColumn209.OptionsColumn.AllowEdit = False
+        '
+        'GridColumn210
+        '
+        Me.GridColumn210.Caption = "Number"
+        Me.GridColumn210.FieldName = "number"
+        Me.GridColumn210.Name = "GridColumn210"
+        Me.GridColumn210.OptionsColumn.AllowEdit = False
+        Me.GridColumn210.Visible = True
+        Me.GridColumn210.VisibleIndex = 1
+        Me.GridColumn210.Width = 117
+        '
+        'GridColumn212
+        '
+        Me.GridColumn212.Caption = "Created Date"
+        Me.GridColumn212.DisplayFormat.FormatString = "dd MMMM yyyy \/ HH:mm"
+        Me.GridColumn212.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn212.FieldName = "date_created"
+        Me.GridColumn212.Name = "GridColumn212"
+        Me.GridColumn212.OptionsColumn.AllowEdit = False
+        Me.GridColumn212.Visible = True
+        Me.GridColumn212.VisibleIndex = 5
+        Me.GridColumn212.Width = 107
+        '
+        'GridColumn213
+        '
+        Me.GridColumn213.Caption = "Created By"
+        Me.GridColumn213.FieldName = "created_by"
+        Me.GridColumn213.Name = "GridColumn213"
+        Me.GridColumn213.OptionsColumn.AllowEdit = False
+        Me.GridColumn213.Visible = True
+        Me.GridColumn213.VisibleIndex = 6
+        Me.GridColumn213.Width = 109
+        '
+        'GridColumn214
+        '
+        Me.GridColumn214.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn214.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn214.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn214.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn214.Caption = "Value"
+        Me.GridColumn214.DisplayFormat.FormatString = "N2"
+        Me.GridColumn214.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn214.FieldName = "value"
+        Me.GridColumn214.Name = "GridColumn214"
+        Me.GridColumn214.OptionsColumn.AllowEdit = False
+        Me.GridColumn214.Visible = True
+        Me.GridColumn214.VisibleIndex = 7
+        '
+        'GridColumn215
+        '
+        Me.GridColumn215.Caption = "Approval Status"
+        Me.GridColumn215.FieldName = "report_status"
+        Me.GridColumn215.Name = "GridColumn215"
+        Me.GridColumn215.OptionsColumn.AllowEdit = False
+        Me.GridColumn215.Visible = True
+        Me.GridColumn215.VisibleIndex = 9
+        Me.GridColumn215.Width = 87
+        '
+        'GridColumn216
+        '
+        Me.GridColumn216.Caption = "Note"
+        Me.GridColumn216.FieldName = "note"
+        Me.GridColumn216.Name = "GridColumn216"
+        Me.GridColumn216.OptionsColumn.AllowEdit = False
+        Me.GridColumn216.Visible = True
+        Me.GridColumn216.VisibleIndex = 8
+        '
+        'GridColumn217
+        '
+        Me.GridColumn217.Caption = "Vendor"
+        Me.GridColumn217.FieldName = "comp_name"
+        Me.GridColumn217.Name = "GridColumn217"
+        Me.GridColumn217.OptionsColumn.AllowEdit = False
+        Me.GridColumn217.Visible = True
+        Me.GridColumn217.VisibleIndex = 0
+        Me.GridColumn217.Width = 103
+        '
+        'GridColumn218
+        '
+        Me.GridColumn218.Caption = "Payment Type"
+        Me.GridColumn218.FieldName = "pay_type"
+        Me.GridColumn218.Name = "GridColumn218"
+        Me.GridColumn218.OptionsColumn.AllowEdit = False
+        Me.GridColumn218.Visible = True
+        Me.GridColumn218.VisibleIndex = 3
+        Me.GridColumn218.Width = 92
+        '
+        'GridColumn219
+        '
+        Me.GridColumn219.Caption = "Report Type"
+        Me.GridColumn219.FieldName = "report_mark_type_name"
+        Me.GridColumn219.Name = "GridColumn219"
+        Me.GridColumn219.OptionsColumn.AllowEdit = False
+        Me.GridColumn219.Visible = True
+        Me.GridColumn219.VisibleIndex = 2
+        '
+        'GridColumn220
+        '
+        Me.GridColumn220.Caption = "Payment Date"
+        Me.GridColumn220.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.GridColumn220.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn220.FieldName = "date_payment"
+        Me.GridColumn220.Name = "GridColumn220"
+        Me.GridColumn220.OptionsColumn.AllowEdit = False
+        Me.GridColumn220.Visible = True
+        Me.GridColumn220.VisibleIndex = 4
+        Me.GridColumn220.Width = 78
+        '
+        'RepositoryItemCheckEdit13
+        '
+        Me.RepositoryItemCheckEdit13.AutoHeight = False
+        Me.RepositoryItemCheckEdit13.Name = "RepositoryItemCheckEdit13"
+        Me.RepositoryItemCheckEdit13.ValueChecked = "yes"
+        Me.RepositoryItemCheckEdit13.ValueUnchecked = "no"
+        '
+        'PanelControl10
+        '
+        Me.PanelControl10.Controls.Add(Me.DateEdit1)
+        Me.PanelControl10.Controls.Add(Me.LabelControl20)
+        Me.PanelControl10.Controls.Add(Me.DateEdit2)
+        Me.PanelControl10.Controls.Add(Me.LabelControl21)
+        Me.PanelControl10.Controls.Add(Me.SimpleButton1)
+        Me.PanelControl10.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelControl10.Location = New System.Drawing.Point(0, 0)
+        Me.PanelControl10.Name = "PanelControl10"
+        Me.PanelControl10.Size = New System.Drawing.Size(1085, 44)
+        Me.PanelControl10.TabIndex = 23
+        '
+        'DateEdit1
+        '
+        Me.DateEdit1.EditValue = Nothing
+        Me.DateEdit1.Location = New System.Drawing.Point(239, 12)
+        Me.DateEdit1.Name = "DateEdit1"
+        Me.DateEdit1.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DateEdit1.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DateEdit1.Properties.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.DateEdit1.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DateEdit1.Size = New System.Drawing.Size(175, 20)
+        Me.DateEdit1.TabIndex = 8920
+        '
+        'LabelControl20
+        '
+        Me.LabelControl20.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl20.Location = New System.Drawing.Point(221, 15)
+        Me.LabelControl20.Name = "LabelControl20"
+        Me.LabelControl20.Size = New System.Drawing.Size(12, 13)
+        Me.LabelControl20.TabIndex = 8919
+        Me.LabelControl20.Text = "To"
+        '
+        'DateEdit2
+        '
+        Me.DateEdit2.EditValue = Nothing
+        Me.DateEdit2.Location = New System.Drawing.Point(40, 12)
+        Me.DateEdit2.Name = "DateEdit2"
+        Me.DateEdit2.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DateEdit2.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DateEdit2.Properties.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.DateEdit2.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DateEdit2.Size = New System.Drawing.Size(175, 20)
+        Me.DateEdit2.TabIndex = 8918
+        '
+        'LabelControl21
+        '
+        Me.LabelControl21.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl21.Location = New System.Drawing.Point(10, 15)
+        Me.LabelControl21.Name = "LabelControl21"
+        Me.LabelControl21.Size = New System.Drawing.Size(24, 13)
+        Me.LabelControl21.TabIndex = 8917
+        Me.LabelControl21.Text = "From"
+        '
+        'SimpleButton1
+        '
+        Me.SimpleButton1.Location = New System.Drawing.Point(420, 10)
+        Me.SimpleButton1.Name = "SimpleButton1"
+        Me.SimpleButton1.Size = New System.Drawing.Size(60, 23)
+        Me.SimpleButton1.TabIndex = 8916
+        Me.SimpleButton1.Text = "view"
+        '
+        'BBuyValas
+        '
+        Me.BBuyValas.Appearance.BackColor = System.Drawing.Color.CornflowerBlue
+        Me.BBuyValas.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.BBuyValas.Appearance.ForeColor = System.Drawing.Color.White
+        Me.BBuyValas.Appearance.Options.UseBackColor = True
+        Me.BBuyValas.Appearance.Options.UseFont = True
+        Me.BBuyValas.Appearance.Options.UseForeColor = True
+        Me.BBuyValas.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.BBuyValas.Location = New System.Drawing.Point(0, 425)
+        Me.BBuyValas.LookAndFeel.SkinMaskColor = System.Drawing.Color.Blue
+        Me.BBuyValas.LookAndFeel.SkinMaskColor2 = System.Drawing.Color.Blue
+        Me.BBuyValas.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.UltraFlat
+        Me.BBuyValas.LookAndFeel.UseDefaultLookAndFeel = False
+        Me.BBuyValas.Name = "BBuyValas"
+        Me.BBuyValas.Size = New System.Drawing.Size(1085, 32)
+        Me.BBuyValas.TabIndex = 20
+        Me.BBuyValas.Text = "Create Purchase"
+        Me.BBuyValas.Visible = False
         '
         'XTPPO
         '
@@ -4888,6 +5154,17 @@ Partial Class FormBankWithdrawal
         CType(Me.DEToSum.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEFromSum.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEFromSum.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTPBBKValas.ResumeLayout(False)
+        CType(Me.GCValas, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVValas, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemCheckEdit13, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl10, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl10.ResumeLayout(False)
+        Me.PanelControl10.PerformLayout()
+        CType(Me.DateEdit1.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DateEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DateEdit2.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DateEdit2.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XTPPO.ResumeLayout(False)
         CType(Me.XTPPOList, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XTPPOList.ResumeLayout(False)
@@ -5435,4 +5712,26 @@ Partial Class FormBankWithdrawal
     Friend WithEvents LabelControl19 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LabelControl18 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents DEBBKFrom As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents XTPBBKValas As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents BBuyValas As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GCValas As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVValas As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn209 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn210 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn212 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn213 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn214 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn215 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn216 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn217 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn218 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn219 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn220 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RepositoryItemCheckEdit13 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+    Friend WithEvents PanelControl10 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents DateEdit1 As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents LabelControl20 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents DateEdit2 As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents LabelControl21 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents SimpleButton1 As DevExpress.XtraEditors.SimpleButton
 End Class

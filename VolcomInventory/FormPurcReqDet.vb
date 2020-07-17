@@ -597,4 +597,10 @@ GROUP BY req.`id_purc_req`"
             GVItemList.ActiveEditor.Properties.ReadOnly = False
         End If
     End Sub
+
+    Private Sub GVItemList_CustomColumnDisplayText(sender As Object, e As DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs) Handles GVItemList.CustomColumnDisplayText
+        If e.Column.FieldName = "no" Then
+            e.DisplayText = (e.ListSourceRowIndex + 1).ToString()
+        End If
+    End Sub
 End Class

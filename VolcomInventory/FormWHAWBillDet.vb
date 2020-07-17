@@ -349,7 +349,7 @@ GROUP BY r.id_ol_store_cust_ret"
 ,comp.awb_rank
 FROM `tb_3pl_rate` AS rate
 INNER JOIN tb_m_comp comp ON comp.id_comp=rate.id_comp
-WHERE rate.id_sub_district='" + SLESubDistrict.EditValue.ToString + "' AND rate.id_type='" + id_awb_type + "'
+WHERE rate.id_sub_district='" + SLESubDistrict.EditValue.ToString + "' AND rate.is_active=1 AND rate.id_type='" + id_awb_type + "'
 ORDER BY amount ASC,comp.awb_rank ASC"
 
             Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
@@ -372,7 +372,7 @@ ORDER BY amount ASC,comp.awb_rank ASC"
 ,comp.awb_rank
 FROM `tb_3pl_rate` AS rate
 INNER JOIN tb_m_comp comp ON comp.id_comp=rate.id_comp
-WHERE rate.id_sub_district='" + SLESubDistrict.EditValue.ToString + "' AND rate.id_type='" + id_awb_type + "'"
+WHERE rate.id_sub_district='" + SLESubDistrict.EditValue.ToString + "' AND rate.is_active=1 AND rate.id_type='" + id_awb_type + "'"
                 query += " ORDER BY amount ASC,awb_rank ASC"
             Else
                 query = "SELECT awb.id_cargo,awb.id_store,comp_c.comp_name AS cargo,awb.cargo_min_weight,awb.cargo_rate

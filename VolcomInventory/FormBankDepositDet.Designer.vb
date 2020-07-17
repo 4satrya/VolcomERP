@@ -106,6 +106,7 @@ Partial Class FormBankDepositDet
         Me.GridColumndebit_draft = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncredit_draft = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncc = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnid_report_det = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -224,7 +225,7 @@ Partial Class FormBankDepositDet
         Me.Label1.Font = New System.Drawing.Font("Segoe UI", 12.0!)
         Me.Label1.Location = New System.Drawing.Point(6, 14)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(149, 21)
+        Me.Label1.Size = New System.Drawing.Size(146, 21)
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "Receive Payment To"
         '
@@ -665,7 +666,7 @@ Partial Class FormBankDepositDet
         '
         'GVList
         '
-        Me.GVList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdRec, Me.GridColumnNumber, Me.GridColumn1, Me.GridColumnNote, Me.GridColumnAlreadyReceived, Me.GridColumnReceive, Me.GridColumnReceiveView, Me.GridColumnBBaldue, Me.GridColumnno, Me.GridColumnCOA, Me.GridColumncomp_number, Me.GridColumnid_comp, Me.GridColumnid_acc, Me.GridColumndc_code, Me.GridColumnid_dc, Me.GridColumnacc_description, Me.GridColumnvendor})
+        Me.GVList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdRec, Me.GridColumnid_report_det, Me.GridColumnNumber, Me.GridColumn1, Me.GridColumnNote, Me.GridColumnAlreadyReceived, Me.GridColumnReceive, Me.GridColumnReceiveView, Me.GridColumnBBaldue, Me.GridColumnno, Me.GridColumnCOA, Me.GridColumncomp_number, Me.GridColumnid_comp, Me.GridColumnid_acc, Me.GridColumndc_code, Me.GridColumnid_dc, Me.GridColumnacc_description, Me.GridColumnvendor})
         Me.GVList.GridControl = Me.GCList
         Me.GVList.Name = "GVList"
         Me.GVList.OptionsBehavior.AutoExpandAllGroups = True
@@ -1018,6 +1019,12 @@ Partial Class FormBankDepositDet
         Me.GridColumncc.Visible = True
         Me.GridColumncc.VisibleIndex = 3
         '
+        'GridColumnid_report_det
+        '
+        Me.GridColumnid_report_det.Caption = "id_report_det"
+        Me.GridColumnid_report_det.FieldName = "id_report_det"
+        Me.GridColumnid_report_det.Name = "GridColumnid_report_det"
+        '
         'FormBankDepositDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1176,4 +1183,5 @@ Partial Class FormBankDepositDet
     Friend WithEvents GridColumncredit_draft As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnvendor As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumncc As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnid_report_det As DevExpress.XtraGrid.Columns.GridColumn
 End Class

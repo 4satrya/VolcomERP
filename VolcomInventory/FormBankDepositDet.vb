@@ -41,6 +41,7 @@ Public Class FormBankDepositDet
                         'id_report,number,total,balance due
                         Dim newRow As DataRow = (TryCast(GCList.DataSource, DataTable)).NewRow()
                         newRow("id_report") = FormBankDeposit.GVInvoiceList.GetRowCellValue(i, "id_sales_pos").ToString
+                        newRow("id_report_det") = "0"
                         newRow("report_mark_type") = FormBankDeposit.GVInvoiceList.GetRowCellValue(i, "report_mark_type").ToString
                         newRow("report_mark_type_name") = FormBankDeposit.GVInvoiceList.GetRowCellValue(i, "report_mark_type_name").ToString
                         newRow("number") = FormBankDeposit.GVInvoiceList.GetRowCellValue(i, "sales_pos_number").ToString
@@ -60,7 +61,7 @@ Public Class FormBankDepositDet
                         TryCast(GCList.DataSource, DataTable).Rows.Add(newRow)
                     Next
                 ElseIf FormBankDeposit.XTCPO.SelectedTabPageIndex = 2 Then
-                    Dim query_view_payout As String = "SELECT sp.`id_sales_pos` AS `id_report`,
+                    Dim query_view_payout As String = "SELECT sp.`id_sales_pos` AS `id_report`, 0 AS `id_report_det`,
                     sp.report_mark_type,rmt.report_mark_type_name,
                     sp.`sales_pos_number` AS `number`, 
                     cf.id_comp AS `id_comp`, 
@@ -221,7 +222,7 @@ Public Class FormBankDepositDet
     End Sub
 
     Sub load_det()
-        Dim query As String = "SELECT recd.id_rec_payment_det,recd.id_report,recd.report_mark_type,
+        Dim query As String = "SELECT recd.id_rec_payment_det,recd.id_report, recd.id_report_det,recd.report_mark_type,
         rmt.report_mark_type_name,recd.number,recd.total_rec,recd.`value`,recd.balance_due,recd.note,
         if(recd.id_dc=1, recd.`value`*-1, recd.`value`) AS `value_view`,
         recd.id_comp, c.comp_number, c.comp_name, recd.id_acc, coa.acc_name, coa.acc_description, coa.acc_description, 
@@ -415,11 +416,15 @@ Public Class FormBankDepositDet
                     id_deposit = execute_query(query, 0, True, "", "", "", "")
 
                     'detail
-                    query = "INSERT INTO tb_rec_payment_det(`id_rec_payment`,`id_report`,`report_mark_type`,`number`,`total_rec`,`value`,`balance_due`,`note`, id_comp, id_acc, id_dc, vendor) VALUES"
+                    query = "INSERT INTO tb_rec_payment_det(`id_rec_payment`,`id_report`,`id_report_det`,`report_mark_type`,`number`,`total_rec`,`value`,`balance_due`,`note`, id_comp, id_acc, id_dc, vendor) VALUES"
                     For i As Integer = 0 To GVList.RowCount - 1
                         Dim id_report As String = GVList.GetRowCellValue(i, "id_report").ToString
                         If id_report = "0" Then
                             id_report = "NULL"
+                        End If
+                        Dim id_report_det As String = GVList.GetRowCellValue(i, "id_report_det").ToString
+                        If id_report_det = "0" Then
+                            id_report_det = "NULL"
                         End If
                         Dim report_mark_type As String = GVList.GetRowCellValue(i, "report_mark_type").ToString
                         If report_mark_type = "0" Then
@@ -436,7 +441,7 @@ Public Class FormBankDepositDet
                         If Not i = 0 Then
                             query += ","
                         End If
-                        query += "('" & id_deposit & "'," + id_report + "," + report_mark_type + ",'" & GVList.GetRowCellValue(i, "number").ToString & "','" & decimalSQL(GVList.GetRowCellValue(i, "total_rec").ToString) & "','" & decimalSQL(GVList.GetRowCellValue(i, "value").ToString) & "','" & decimalSQL(GVList.GetRowCellValue(i, "balance_due").ToString) & "','" & addSlashes(GVList.GetRowCellValue(i, "note").ToString) & "', " + id_comp + ", " + id_acc + ", " + id_dc + ", '" + vendor + "') "
+                        query += "('" & id_deposit & "'," + id_report + ", " + id_report_det + "," + report_mark_type + ",'" & GVList.GetRowCellValue(i, "number").ToString & "','" & decimalSQL(GVList.GetRowCellValue(i, "total_rec").ToString) & "','" & decimalSQL(GVList.GetRowCellValue(i, "value").ToString) & "','" & decimalSQL(GVList.GetRowCellValue(i, "balance_due").ToString) & "','" & addSlashes(GVList.GetRowCellValue(i, "note").ToString) & "', " + id_comp + ", " + id_acc + ", " + id_dc + ", '" + vendor + "') "
                     Next
                     execute_non_query(query, True, "", "", "", "")
 

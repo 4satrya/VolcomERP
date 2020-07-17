@@ -115,6 +115,8 @@ Partial Class FormBankDeposit
         Me.LabelControl10 = New DevExpress.XtraEditors.LabelControl()
         Me.BImportPayout = New DevExpress.XtraEditors.SimpleButton()
         Me.SimpleButton1 = New DevExpress.XtraEditors.SimpleButton()
+        Me.XTPVS = New DevExpress.XtraTab.XtraTabPage()
+        Me.PanelControl4 = New DevExpress.XtraEditors.PanelControl()
         CType(Me.XTCPO, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCPO.SuspendLayout()
         Me.XTPInvoice.SuspendLayout()
@@ -148,6 +150,8 @@ Partial Class FormBankDeposit
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl3.SuspendLayout()
         CType(Me.TEPayoutNumber.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTPVS.SuspendLayout()
+        CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'XTCPO
@@ -159,7 +163,7 @@ Partial Class FormBankDeposit
         Me.XTCPO.SelectedTabPage = Me.XTPInvoice
         Me.XTCPO.Size = New System.Drawing.Size(1192, 561)
         Me.XTCPO.TabIndex = 3
-        Me.XTCPO.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPDeposit, Me.XTPInvoice, Me.XTPPayout})
+        Me.XTCPO.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPDeposit, Me.XTPInvoice, Me.XTPPayout, Me.XTPVS})
         '
         'XTPInvoice
         '
@@ -1046,6 +1050,21 @@ Partial Class FormBankDeposit
         Me.SimpleButton1.TabIndex = 19
         Me.SimpleButton1.Text = "Receive Payment"
         '
+        'XTPVS
+        '
+        Me.XTPVS.Controls.Add(Me.PanelControl4)
+        Me.XTPVS.Name = "XTPVS"
+        Me.XTPVS.Size = New System.Drawing.Size(1186, 533)
+        Me.XTPVS.Text = "Volcom Store Sales"
+        '
+        'PanelControl4
+        '
+        Me.PanelControl4.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelControl4.Location = New System.Drawing.Point(0, 0)
+        Me.PanelControl4.Name = "PanelControl4"
+        Me.PanelControl4.Size = New System.Drawing.Size(1186, 59)
+        Me.PanelControl4.TabIndex = 0
+        '
         'FormBankDeposit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1094,6 +1113,8 @@ Partial Class FormBankDeposit
         Me.PanelControl3.ResumeLayout(False)
         Me.PanelControl3.PerformLayout()
         CType(Me.TEPayoutNumber.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTPVS.ResumeLayout(False)
+        CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1193,4 +1214,6 @@ Partial Class FormBankDeposit
     Friend WithEvents GridColumntrans_fee As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnnett As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents BtnHistoryPayout As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents XTPVS As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents PanelControl4 As DevExpress.XtraEditors.PanelControl
 End Class

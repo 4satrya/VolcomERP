@@ -71,9 +71,10 @@ SELECT 4 AS id_status_payment,'Overdue H-7' AS status_payment"
     End Sub
 
     Sub load_status_sales()
-        Dim query As String = "SELECT 1 AS id_status_payment,'Open' AS status_payment
+        Dim query As String = "SELECT 1 AS id_status_payment,'Close' AS status_payment
         UNION
-        SELECT 2 AS id_status_payment,'Close' AS status_payment "
+        SELECT 2 AS id_status_payment,'Open' AS status_payment 
+        ORDER BY id_status_payment DESC "
         viewSearchLookupQuery(SLEStatusSales, query, "id_status_payment", "status_payment", "id_status_payment")
     End Sub
 
@@ -243,6 +244,40 @@ WHERE 1=1 " & where_string & " ORDER BY rec_py.id_rec_payment DESC"
         viewSearchLookupQuery(SLEUnit, query, "id_coa_tag", "tag_description", "id_coa_tag")
     End Sub
 
+    Sub load_sales()
+        Cursor = Cursors.WaitCursor
+
+        'get company tag
+        Dim id_comp_tag As String = execute_query("SELECT id_comp FROM tb_coa_tag WHERE id_coa_tag='" + SLEUnit.EditValue.ToString + "'", 0, True, "", "", "", "")
+
+        Dim query As String = "SELECT 'no' AS `is_select`,d.id_sales_branch_det AS `id_report_det`,d.id_sales_branch AS `id_report`,rmt.report_mark_type, rmt.report_mark_type_name, m.number AS `report_number`,
+        d.id_acc, coa.acc_name , coa.acc_description, d.id_comp, comp.comp_number, d.vendor, 2 AS `id_dc`, 'K' AS `dc_code`, d.note,
+        d.value AS `amount`, IFNULL(pyd.total_rec,0.00) AS `total_rec`, (d.value - IFNULL(pyd.total_rec,0)) AS `total_due`, IFNULL(pyd.on_process,0) AS `total_pending`
+        FROM tb_sales_branch_det d
+        INNER JOIN tb_sales_branch m ON m.id_sales_branch = d.id_sales_branch
+        INNER JOIN tb_a_acc coa ON coa.id_acc = d.id_acc
+        INNER JOIN tb_m_comp comp ON comp.id_comp = " + id_comp_tag + "
+        INNER JOIN tb_lookup_report_mark_type rmt ON rmt.report_mark_type = 254
+        LEFT JOIN (
+	        SELECT rd.id_report_det , SUM(rd.value) AS `total_rec`, COUNT(IF(r.id_report_status<5,1,NULL)) AS `on_process`
+	        FROM tb_rec_payment_det rd
+	        INNER JOIN tb_rec_payment r ON r.id_rec_payment = rd.id_rec_payment
+	        WHERE r.id_report_status!=5 AND rd.report_mark_type=254
+	        GROUP BY rd.id_report_det
+        ) pyd ON pyd.id_report_det = d.id_sales_branch_det
+        WHERE m.id_report_status=6 AND d.id_dc=1 AND d.is_close='" + SLEStatusSales.EditValue.ToString + "' AND m.id_coa_tag='" + SLEUnit.EditValue.ToString + "' "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCSales.DataSource = data
+        GVSales.ExpandAllGroups()
+        GVSales.BestFitColumns()
+        If SLEStatusSales.EditValue.ToString = "2" And GVSales.RowCount > 0 Then
+            BtnCreateBBMforVS.Visible = True
+        Else
+            BtnCreateBBMforVS.Visible = False
+        End If
+        Cursor = Cursors.Default
+    End Sub
+
     Private Sub GVInvoiceList_RowStyle(sender As Object, e As DevExpress.XtraGrid.Views.Grid.RowStyleEventArgs) Handles GVInvoiceList.RowStyle
         Try
             If GVInvoiceList.GetRowCellValue(e.RowHandle, "is_close_rec_payment") = "2" Then
@@ -329,6 +364,11 @@ WHERE 1=1 " & where_string & " ORDER BY rec_py.id_rec_payment DESC"
 
     Private Sub XTCPO_SelectedPageChanged(sender As Object, e As DevExpress.XtraTab.TabPageChangedEventArgs) Handles XTCPO.SelectedPageChanged
         check_menu()
+        If XTCPO.SelectedTabPageIndex = 0 Then
+            GCInvoiceList.DataSource = Nothing
+            GCPayout.DataSource = Nothing
+            resetViewSales()
+        End If
     End Sub
 
     Private Sub BImportPayout_Click(sender As Object, e As EventArgs) Handles BImportPayout.Click
@@ -375,5 +415,54 @@ WHERE 1=1 " & where_string & " ORDER BY rec_py.id_rec_payment DESC"
         Cursor = Cursors.WaitCursor
         FormPayoutHistory.ShowDialog()
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub SimpleButton2_Click(sender As Object, e As EventArgs) Handles SimpleButton2.Click
+        load_sales()
+    End Sub
+
+    Private Sub BtnCreateBBMforVS_Click(sender As Object, e As EventArgs) Handles BtnCreateBBMforVS.Click
+        makeSafeGV(GVSales)
+
+        'check pending doc
+        GVSales.ActiveFilterString = "[is_select]='yes' AND [total_pending]>0"
+        If GVSales.RowCount > 0 Then
+            Dim err_pending As String = ""
+            For i As Integer = 0 To GVSales.RowCount - 1
+                If i > 0 Then
+                    err_pending += System.Environment.NewLine
+                End If
+                err_pending += "- " + GVSales.GetRowCellValue(i, "report_number").ToString
+            Next
+            warningCustom("Please process all pending receive payment for invoice number : " + System.Environment.NewLine + err_pending)
+            GVSales.ActiveFilterString = ""
+            Exit Sub
+        End If
+
+        'process
+        GVSales.ActiveFilterString = "[is_select]='yes'"
+        If GVSales.RowCount > 0 Then
+            Cursor = Cursors.WaitCursor
+            FormBankDepositDet.id_coa_tag = SLEUnit.EditValue.ToString
+            FormBankDepositDet.type_rec = "3"
+            FormBankDepositDet.ShowDialog()
+            Cursor = Cursors.Default
+        Else
+            warningCustom("No data selected")
+        End If
+        GVSales.ActiveFilterString = ""
+    End Sub
+
+    Private Sub SLEUnit_EditValueChanged(sender As Object, e As EventArgs) Handles SLEUnit.EditValueChanged
+        resetViewSales()
+    End Sub
+
+    Private Sub SLEStatusSales_EditValueChanged(sender As Object, e As EventArgs) Handles SLEStatusSales.EditValueChanged
+        resetViewSales()
+    End Sub
+
+    Sub resetViewSales()
+        GCSales.DataSource = Nothing
+        BtnCreateBBMforVS.Visible = False
     End Sub
 End Class

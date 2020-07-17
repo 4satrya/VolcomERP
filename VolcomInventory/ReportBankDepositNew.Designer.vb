@@ -24,6 +24,7 @@ Partial Public Class ReportBankDepositNew
         Me.XTRow = New DevExpress.XtraReports.UI.XRTableRow()
         Me.XrTableCell2 = New DevExpress.XtraReports.UI.XRTableCell()
         Me.XrTableCell8 = New DevExpress.XtraReports.UI.XRTableCell()
+        Me.XrTableCell16 = New DevExpress.XtraReports.UI.XRTableCell()
         Me.XrTableCell1 = New DevExpress.XtraReports.UI.XRTableCell()
         Me.XrTableCell3 = New DevExpress.XtraReports.UI.XRTableCell()
         Me.XrTableCell6 = New DevExpress.XtraReports.UI.XRTableCell()
@@ -45,7 +46,7 @@ Partial Public Class ReportBankDepositNew
         Me.XrLabel13 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel14 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel15 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel1 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LabelUnit = New DevExpress.XtraReports.UI.XRLabel()
         Me.LabelTitle = New DevExpress.XtraReports.UI.XRLabel()
         Me.LabelTitleNumber = New DevExpress.XtraReports.UI.XRLabel()
         Me.BottomMargin = New DevExpress.XtraReports.UI.BottomMarginBand()
@@ -57,7 +58,6 @@ Partial Public Class ReportBankDepositNew
         Me.XrTableCell4 = New DevExpress.XtraReports.UI.XRTableCell()
         Me.LabelSay = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrPageInfo1 = New DevExpress.XtraReports.UI.XRPageInfo()
-        Me.XrTableCell16 = New DevExpress.XtraReports.UI.XRTableCell()
         CType(Me.XTable, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XrTable1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -127,6 +127,20 @@ Partial Public Class ReportBankDepositNew
         Me.XrTableCell8.Text = "COA"
         Me.XrTableCell8.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         Me.XrTableCell8.Weight = 1.8998549981671724R
+        '
+        'XrTableCell16
+        '
+        Me.XrTableCell16.BorderDashStyle = DevExpress.XtraPrinting.BorderDashStyle.[Double]
+        Me.XrTableCell16.Borders = CType((DevExpress.XtraPrinting.BorderSide.Top Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.XrTableCell16.Font = New System.Drawing.Font("Tahoma", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.XrTableCell16.Name = "XrTableCell16"
+        Me.XrTableCell16.StylePriority.UseBorderDashStyle = False
+        Me.XrTableCell16.StylePriority.UseBorders = False
+        Me.XrTableCell16.StylePriority.UseFont = False
+        Me.XrTableCell16.StylePriority.UseTextAlignment = False
+        Me.XrTableCell16.Text = "CC"
+        Me.XrTableCell16.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        Me.XrTableCell16.Weight = 0.75994198500424559R
         '
         'XrTableCell1
         '
@@ -200,7 +214,7 @@ Partial Public Class ReportBankDepositNew
         '
         'TopMargin
         '
-        Me.TopMargin.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel12, Me.XrLabel11, Me.XrLabel7, Me.XrLabel10, Me.XrLabel9, Me.XrLabel8, Me.LabelAmount, Me.XrLabel6, Me.XrLabel5, Me.XrLabel4, Me.XrLabel3, Me.XrLabel2, Me.XrLabel13, Me.XrLabel14, Me.XrLabel15, Me.XrLabel1, Me.LabelTitle, Me.LabelTitleNumber})
+        Me.TopMargin.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel12, Me.XrLabel11, Me.XrLabel7, Me.XrLabel10, Me.XrLabel9, Me.XrLabel8, Me.LabelAmount, Me.XrLabel6, Me.XrLabel5, Me.XrLabel4, Me.XrLabel3, Me.XrLabel2, Me.XrLabel13, Me.XrLabel14, Me.XrLabel15, Me.LabelUnit, Me.LabelTitle, Me.LabelTitleNumber})
         Me.TopMargin.HeightF = 126.5!
         Me.TopMargin.Name = "TopMargin"
         Me.TopMargin.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
@@ -386,17 +400,17 @@ Partial Public Class ReportBankDepositNew
         Me.XrLabel15.Text = ":"
         Me.XrLabel15.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
         '
-        'XrLabel1
+        'LabelUnit
         '
-        Me.XrLabel1.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 24.39583!)
-        Me.XrLabel1.Name = "XrLabel1"
-        Me.XrLabel1.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel1.SizeF = New System.Drawing.SizeF(233.4583!, 23.0!)
-        Me.XrLabel1.StylePriority.UseFont = False
-        Me.XrLabel1.StylePriority.UseTextAlignment = False
-        Me.XrLabel1.Text = "[own_comp_name]"
-        Me.XrLabel1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        Me.LabelUnit.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelUnit.LocationFloat = New DevExpress.Utils.PointFloat(0!, 24.39583!)
+        Me.LabelUnit.Name = "LabelUnit"
+        Me.LabelUnit.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LabelUnit.SizeF = New System.Drawing.SizeF(538.5414!, 23.0!)
+        Me.LabelUnit.StylePriority.UseFont = False
+        Me.LabelUnit.StylePriority.UseTextAlignment = False
+        Me.LabelUnit.Text = "UNIT NAME"
+        Me.LabelUnit.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         '
         'LabelTitle
         '
@@ -517,20 +531,6 @@ Partial Public Class ReportBankDepositNew
         Me.XrPageInfo1.StylePriority.UseTextAlignment = False
         Me.XrPageInfo1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight
         '
-        'XrTableCell16
-        '
-        Me.XrTableCell16.BorderDashStyle = DevExpress.XtraPrinting.BorderDashStyle.[Double]
-        Me.XrTableCell16.Borders = CType((DevExpress.XtraPrinting.BorderSide.Top Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
-        Me.XrTableCell16.Font = New System.Drawing.Font("Tahoma", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrTableCell16.Name = "XrTableCell16"
-        Me.XrTableCell16.StylePriority.UseBorderDashStyle = False
-        Me.XrTableCell16.StylePriority.UseBorders = False
-        Me.XrTableCell16.StylePriority.UseFont = False
-        Me.XrTableCell16.StylePriority.UseTextAlignment = False
-        Me.XrTableCell16.Text = "CC"
-        Me.XrTableCell16.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
-        Me.XrTableCell16.Weight = 0.75994198500424559R
-        '
         'ReportBankDepositNew
         '
         Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.Detail, Me.TopMargin, Me.BottomMargin, Me.PageFooter})
@@ -547,7 +547,7 @@ Partial Public Class ReportBankDepositNew
     Friend WithEvents Detail As DevExpress.XtraReports.UI.DetailBand
     Friend WithEvents TopMargin As DevExpress.XtraReports.UI.TopMarginBand
     Friend WithEvents BottomMargin As DevExpress.XtraReports.UI.BottomMarginBand
-    Friend WithEvents XrLabel1 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents LabelUnit As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents LabelTitle As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents LabelTitleNumber As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel13 As DevExpress.XtraReports.UI.XRLabel

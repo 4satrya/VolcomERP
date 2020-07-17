@@ -72,6 +72,7 @@ Partial Class FormBankDepositDet
         Me.GCList = New DevExpress.XtraGrid.GridControl()
         Me.GVList = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumnIdRec = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnid_report_det = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnNumber = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnNote = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -106,7 +107,11 @@ Partial Class FormBankDepositDet
         Me.GridColumndebit_draft = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncredit_draft = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncc = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnid_report_det = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.SLEUnit = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView4 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumnid_coa_tag = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumncoa_tag = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -156,6 +161,8 @@ Partial Class FormBankDepositDet
         Me.XTPDraft.SuspendLayout()
         CType(Me.GCDraft, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVDraft, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SLEUnit.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl1
@@ -170,17 +177,19 @@ Partial Class FormBankDepositDet
         'PanelControl4
         '
         Me.PanelControl4.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelControl4.Controls.Add(Me.SLEUnit)
+        Me.PanelControl4.Controls.Add(Me.Label2)
         Me.PanelControl4.Controls.Add(Me.SLEPayRecTo)
         Me.PanelControl4.Controls.Add(Me.Label1)
-        Me.PanelControl4.Dock = System.Windows.Forms.DockStyle.Left
+        Me.PanelControl4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelControl4.Location = New System.Drawing.Point(2, 2)
         Me.PanelControl4.Name = "PanelControl4"
-        Me.PanelControl4.Size = New System.Drawing.Size(502, 55)
+        Me.PanelControl4.Size = New System.Drawing.Size(955, 55)
         Me.PanelControl4.TabIndex = 166
         '
         'SLEPayRecTo
         '
-        Me.SLEPayRecTo.Location = New System.Drawing.Point(161, 11)
+        Me.SLEPayRecTo.Location = New System.Drawing.Point(531, 11)
         Me.SLEPayRecTo.Name = "SLEPayRecTo"
         Me.SLEPayRecTo.Properties.Appearance.Font = New System.Drawing.Font("Segoe UI", 12.0!)
         Me.SLEPayRecTo.Properties.Appearance.Options.UseFont = True
@@ -223,7 +232,7 @@ Partial Class FormBankDepositDet
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Segoe UI", 12.0!)
-        Me.Label1.Location = New System.Drawing.Point(6, 14)
+        Me.Label1.Location = New System.Drawing.Point(381, 14)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(146, 21)
         Me.Label1.TabIndex = 1
@@ -680,6 +689,12 @@ Partial Class FormBankDepositDet
         Me.GridColumnIdRec.Name = "GridColumnIdRec"
         Me.GridColumnIdRec.OptionsColumn.AllowEdit = False
         '
+        'GridColumnid_report_det
+        '
+        Me.GridColumnid_report_det.Caption = "id_report_det"
+        Me.GridColumnid_report_det.FieldName = "id_report_det"
+        Me.GridColumnid_report_det.Name = "GridColumnid_report_det"
+        '
         'GridColumnNumber
         '
         Me.GridColumnNumber.Caption = "Reference"
@@ -1019,11 +1034,48 @@ Partial Class FormBankDepositDet
         Me.GridColumncc.Visible = True
         Me.GridColumncc.VisibleIndex = 3
         '
-        'GridColumnid_report_det
+        'Label2
         '
-        Me.GridColumnid_report_det.Caption = "id_report_det"
-        Me.GridColumnid_report_det.FieldName = "id_report_det"
-        Me.GridColumnid_report_det.Name = "GridColumnid_report_det"
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.Label2.Location = New System.Drawing.Point(10, 14)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(39, 21)
+        Me.Label2.TabIndex = 168
+        Me.Label2.Text = "Unit"
+        '
+        'SLEUnit
+        '
+        Me.SLEUnit.Location = New System.Drawing.Point(55, 11)
+        Me.SLEUnit.Name = "SLEUnit"
+        Me.SLEUnit.Properties.Appearance.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SLEUnit.Properties.Appearance.Options.UseFont = True
+        Me.SLEUnit.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEUnit.Properties.View = Me.GridView4
+        Me.SLEUnit.Size = New System.Drawing.Size(320, 28)
+        Me.SLEUnit.TabIndex = 8917
+        '
+        'GridView4
+        '
+        Me.GridView4.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnid_coa_tag, Me.GridColumncoa_tag})
+        Me.GridView4.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView4.Name = "GridView4"
+        Me.GridView4.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView4.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumnid_coa_tag
+        '
+        Me.GridColumnid_coa_tag.Caption = "id_coa_tag"
+        Me.GridColumnid_coa_tag.FieldName = "id_coa_tag"
+        Me.GridColumnid_coa_tag.Name = "GridColumnid_coa_tag"
+        '
+        'GridColumncoa_tag
+        '
+        Me.GridColumncoa_tag.Caption = "Unit"
+        Me.GridColumncoa_tag.FieldName = "coa_tag"
+        Me.GridColumncoa_tag.Name = "GridColumncoa_tag"
+        Me.GridColumncoa_tag.Visible = True
+        Me.GridColumncoa_tag.VisibleIndex = 0
         '
         'FormBankDepositDet
         '
@@ -1094,6 +1146,8 @@ Partial Class FormBankDepositDet
         Me.XTPDraft.ResumeLayout(False)
         CType(Me.GCDraft, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVDraft, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SLEUnit.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1184,4 +1238,9 @@ Partial Class FormBankDepositDet
     Friend WithEvents GridColumnvendor As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumncc As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnid_report_det As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents Label2 As Label
+    Friend WithEvents SLEUnit As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView4 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumnid_coa_tag As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumncoa_tag As DevExpress.XtraGrid.Columns.GridColumn
 End Class

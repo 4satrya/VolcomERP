@@ -8012,6 +8012,8 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
                 print_raw_no_export(FormBankDeposit.GCInvoiceList)
             ElseIf FormBankDeposit.XTCPO.SelectedTabPageIndex = 2 Then
                 print_raw_no_export(FormBankDeposit.GCPayout)
+            ElseIf FormBankDeposit.XTCPO.SelectedTabPageIndex = 3 Then
+                print_raw_no_export(FormBankDeposit.GCSales)
             End If
         ElseIf formName = "FormPurcAsset" Then
             If FormPurcAsset.XTCAsset.SelectedTabPageIndex = 0 Then
@@ -9976,6 +9978,8 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
                 FormBankDeposit.load_invoice()
             ElseIf FormBankDeposit.XTCPO.SelectedTabPageIndex = 2 Then
                 FormBankDeposit.load_payout()
+            ElseIf FormBankDeposit.XTCPO.SelectedTabPageIndex = 3 Then
+                FormBankDeposit.load_sales()
             End If
         ElseIf formName = "FormPurcAsset" Then
             If FormPurcAsset.XTCAsset.SelectedTabPageIndex = 0 Then

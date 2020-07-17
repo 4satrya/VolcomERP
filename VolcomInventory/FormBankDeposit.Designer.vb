@@ -118,6 +118,26 @@ Partial Class FormBankDeposit
         Me.XTPVS = New DevExpress.XtraTab.XtraTabPage()
         Me.GCSales = New DevExpress.XtraGrid.GridControl()
         Me.GVSales = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumnid_report_det = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnid_report = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnreport_mark_type = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnreport_mark_type_name = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnreport_number = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnid_acc_vs = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnacc_name = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnacc_description = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnid_comp_vs = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumncomp_number = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnvendor_vs = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnid_dc_vs = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumndc_code_vs = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnamount_vs = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumntotal_rec_vs = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumntotal_due = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnis_select_vs = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemCheckEdit3 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.GridColumntotal_pending = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.BtnCreateBBMforVS = New DevExpress.XtraEditors.SimpleButton()
         Me.PanelControl4 = New DevExpress.XtraEditors.PanelControl()
         Me.SLEStatusSales = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView6 = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -166,6 +186,7 @@ Partial Class FormBankDeposit
         Me.XTPVS.SuspendLayout()
         CType(Me.GCSales, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVSales, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemCheckEdit3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl4.SuspendLayout()
         CType(Me.SLEStatusSales.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1073,6 +1094,7 @@ Partial Class FormBankDeposit
         'XTPVS
         '
         Me.XTPVS.Controls.Add(Me.GCSales)
+        Me.XTPVS.Controls.Add(Me.BtnCreateBBMforVS)
         Me.XTPVS.Controls.Add(Me.PanelControl4)
         Me.XTPVS.Name = "XTPVS"
         Me.XTPVS.Size = New System.Drawing.Size(1186, 533)
@@ -1084,19 +1106,204 @@ Partial Class FormBankDeposit
         Me.GCSales.Location = New System.Drawing.Point(0, 49)
         Me.GCSales.MainView = Me.GVSales
         Me.GCSales.Name = "GCSales"
-        Me.GCSales.Size = New System.Drawing.Size(1186, 484)
+        Me.GCSales.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckEdit3})
+        Me.GCSales.Size = New System.Drawing.Size(1186, 452)
         Me.GCSales.TabIndex = 1
         Me.GCSales.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVSales})
         '
         'GVSales
         '
+        Me.GVSales.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnid_report_det, Me.GridColumnid_report, Me.GridColumnreport_mark_type, Me.GridColumnreport_mark_type_name, Me.GridColumnreport_number, Me.GridColumnid_acc_vs, Me.GridColumnacc_name, Me.GridColumnacc_description, Me.GridColumnid_comp_vs, Me.GridColumncomp_number, Me.GridColumnvendor_vs, Me.GridColumnid_dc_vs, Me.GridColumndc_code_vs, Me.GridColumnamount_vs, Me.GridColumntotal_rec_vs, Me.GridColumntotal_due, Me.GridColumnis_select_vs, Me.GridColumntotal_pending})
         Me.GVSales.GridControl = Me.GCSales
+        Me.GVSales.GroupCount = 1
+        Me.GVSales.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount", Me.GridColumnamount_vs, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_rec", Me.GridColumntotal_rec_vs, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_due", Me.GridColumntotal_due, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_pending", Me.GridColumntotal_pending, "{0:N0}")})
         Me.GVSales.Name = "GVSales"
         Me.GVSales.OptionsBehavior.AutoExpandAllGroups = True
         Me.GVSales.OptionsFind.AlwaysVisible = True
         Me.GVSales.OptionsView.ColumnAutoWidth = False
+        Me.GVSales.OptionsView.GroupFooterShowMode = DevExpress.XtraGrid.Views.Grid.GroupFooterShowMode.VisibleAlways
         Me.GVSales.OptionsView.ShowFooter = True
+        Me.GVSales.OptionsView.ShowGroupedColumns = True
         Me.GVSales.OptionsView.ShowGroupPanel = False
+        Me.GVSales.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumnreport_number, DevExpress.Data.ColumnSortOrder.Ascending)})
+        '
+        'GridColumnid_report_det
+        '
+        Me.GridColumnid_report_det.Caption = "id_report_det"
+        Me.GridColumnid_report_det.FieldName = "id_report_det"
+        Me.GridColumnid_report_det.Name = "GridColumnid_report_det"
+        Me.GridColumnid_report_det.OptionsColumn.ReadOnly = True
+        '
+        'GridColumnid_report
+        '
+        Me.GridColumnid_report.Caption = "id_report"
+        Me.GridColumnid_report.FieldName = "id_report"
+        Me.GridColumnid_report.Name = "GridColumnid_report"
+        Me.GridColumnid_report.OptionsColumn.ReadOnly = True
+        '
+        'GridColumnreport_mark_type
+        '
+        Me.GridColumnreport_mark_type.Caption = "report_mark_type"
+        Me.GridColumnreport_mark_type.FieldName = "report_mark_type"
+        Me.GridColumnreport_mark_type.Name = "GridColumnreport_mark_type"
+        Me.GridColumnreport_mark_type.OptionsColumn.ReadOnly = True
+        '
+        'GridColumnreport_mark_type_name
+        '
+        Me.GridColumnreport_mark_type_name.Caption = "Type"
+        Me.GridColumnreport_mark_type_name.FieldName = "report_mark_type_name"
+        Me.GridColumnreport_mark_type_name.Name = "GridColumnreport_mark_type_name"
+        Me.GridColumnreport_mark_type_name.OptionsColumn.ReadOnly = True
+        Me.GridColumnreport_mark_type_name.Visible = True
+        Me.GridColumnreport_mark_type_name.VisibleIndex = 2
+        '
+        'GridColumnreport_number
+        '
+        Me.GridColumnreport_number.Caption = "Number"
+        Me.GridColumnreport_number.FieldName = "report_number"
+        Me.GridColumnreport_number.Name = "GridColumnreport_number"
+        Me.GridColumnreport_number.OptionsColumn.ReadOnly = True
+        Me.GridColumnreport_number.Visible = True
+        Me.GridColumnreport_number.VisibleIndex = 1
+        '
+        'GridColumnid_acc_vs
+        '
+        Me.GridColumnid_acc_vs.Caption = "id_acc"
+        Me.GridColumnid_acc_vs.FieldName = "id_acc"
+        Me.GridColumnid_acc_vs.Name = "GridColumnid_acc_vs"
+        Me.GridColumnid_acc_vs.OptionsColumn.ReadOnly = True
+        '
+        'GridColumnacc_name
+        '
+        Me.GridColumnacc_name.Caption = "COA"
+        Me.GridColumnacc_name.FieldName = "acc_name"
+        Me.GridColumnacc_name.Name = "GridColumnacc_name"
+        Me.GridColumnacc_name.OptionsColumn.ReadOnly = True
+        '
+        'GridColumnacc_description
+        '
+        Me.GridColumnacc_description.Caption = "COA Desc."
+        Me.GridColumnacc_description.FieldName = "acc_description"
+        Me.GridColumnacc_description.Name = "GridColumnacc_description"
+        Me.GridColumnacc_description.OptionsColumn.ReadOnly = True
+        '
+        'GridColumnid_comp_vs
+        '
+        Me.GridColumnid_comp_vs.Caption = "id_comp"
+        Me.GridColumnid_comp_vs.FieldName = "id_comp"
+        Me.GridColumnid_comp_vs.Name = "GridColumnid_comp_vs"
+        Me.GridColumnid_comp_vs.OptionsColumn.ReadOnly = True
+        '
+        'GridColumncomp_number
+        '
+        Me.GridColumncomp_number.Caption = "CC"
+        Me.GridColumncomp_number.FieldName = "comp_number"
+        Me.GridColumncomp_number.Name = "GridColumncomp_number"
+        Me.GridColumncomp_number.OptionsColumn.ReadOnly = True
+        '
+        'GridColumnvendor_vs
+        '
+        Me.GridColumnvendor_vs.Caption = "Vendor"
+        Me.GridColumnvendor_vs.FieldName = "vendor"
+        Me.GridColumnvendor_vs.Name = "GridColumnvendor_vs"
+        Me.GridColumnvendor_vs.OptionsColumn.ReadOnly = True
+        '
+        'GridColumnid_dc_vs
+        '
+        Me.GridColumnid_dc_vs.Caption = "id_dc"
+        Me.GridColumnid_dc_vs.FieldName = "id_dc"
+        Me.GridColumnid_dc_vs.Name = "GridColumnid_dc_vs"
+        Me.GridColumnid_dc_vs.OptionsColumn.ReadOnly = True
+        '
+        'GridColumndc_code_vs
+        '
+        Me.GridColumndc_code_vs.Caption = "dc_code"
+        Me.GridColumndc_code_vs.FieldName = "dc_code"
+        Me.GridColumndc_code_vs.Name = "GridColumndc_code_vs"
+        Me.GridColumndc_code_vs.OptionsColumn.ReadOnly = True
+        '
+        'GridColumnamount_vs
+        '
+        Me.GridColumnamount_vs.Caption = "Amount"
+        Me.GridColumnamount_vs.DisplayFormat.FormatString = "N2"
+        Me.GridColumnamount_vs.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnamount_vs.FieldName = "amount"
+        Me.GridColumnamount_vs.Name = "GridColumnamount_vs"
+        Me.GridColumnamount_vs.OptionsColumn.ReadOnly = True
+        Me.GridColumnamount_vs.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount", "{0:N2}")})
+        Me.GridColumnamount_vs.Visible = True
+        Me.GridColumnamount_vs.VisibleIndex = 3
+        '
+        'GridColumntotal_rec_vs
+        '
+        Me.GridColumntotal_rec_vs.Caption = "Total Received"
+        Me.GridColumntotal_rec_vs.DisplayFormat.FormatString = "N2"
+        Me.GridColumntotal_rec_vs.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumntotal_rec_vs.FieldName = "total_rec"
+        Me.GridColumntotal_rec_vs.Name = "GridColumntotal_rec_vs"
+        Me.GridColumntotal_rec_vs.OptionsColumn.ReadOnly = True
+        Me.GridColumntotal_rec_vs.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_rec", "{0:N2}")})
+        Me.GridColumntotal_rec_vs.Visible = True
+        Me.GridColumntotal_rec_vs.VisibleIndex = 4
+        '
+        'GridColumntotal_due
+        '
+        Me.GridColumntotal_due.Caption = "Balance Due"
+        Me.GridColumntotal_due.DisplayFormat.FormatString = "N2"
+        Me.GridColumntotal_due.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumntotal_due.FieldName = "total_due"
+        Me.GridColumntotal_due.Name = "GridColumntotal_due"
+        Me.GridColumntotal_due.OptionsColumn.ReadOnly = True
+        Me.GridColumntotal_due.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_due", "{0:N2}")})
+        Me.GridColumntotal_due.Visible = True
+        Me.GridColumntotal_due.VisibleIndex = 5
+        '
+        'GridColumnis_select_vs
+        '
+        Me.GridColumnis_select_vs.Caption = "Select"
+        Me.GridColumnis_select_vs.ColumnEdit = Me.RepositoryItemCheckEdit3
+        Me.GridColumnis_select_vs.FieldName = "is_select"
+        Me.GridColumnis_select_vs.Name = "GridColumnis_select_vs"
+        Me.GridColumnis_select_vs.Visible = True
+        Me.GridColumnis_select_vs.VisibleIndex = 0
+        '
+        'RepositoryItemCheckEdit3
+        '
+        Me.RepositoryItemCheckEdit3.AutoHeight = False
+        Me.RepositoryItemCheckEdit3.Name = "RepositoryItemCheckEdit3"
+        Me.RepositoryItemCheckEdit3.ValueChecked = "yes"
+        Me.RepositoryItemCheckEdit3.ValueUnchecked = "no"
+        '
+        'GridColumntotal_pending
+        '
+        Me.GridColumntotal_pending.Caption = "On Process"
+        Me.GridColumntotal_pending.DisplayFormat.FormatString = "N0"
+        Me.GridColumntotal_pending.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumntotal_pending.FieldName = "total_pending"
+        Me.GridColumntotal_pending.Name = "GridColumntotal_pending"
+        Me.GridColumntotal_pending.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_pending", "{0:N0}")})
+        Me.GridColumntotal_pending.Visible = True
+        Me.GridColumntotal_pending.VisibleIndex = 6
+        '
+        'BtnCreateBBMforVS
+        '
+        Me.BtnCreateBBMforVS.Appearance.BackColor = System.Drawing.Color.CornflowerBlue
+        Me.BtnCreateBBMforVS.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.BtnCreateBBMforVS.Appearance.ForeColor = System.Drawing.Color.White
+        Me.BtnCreateBBMforVS.Appearance.Options.UseBackColor = True
+        Me.BtnCreateBBMforVS.Appearance.Options.UseFont = True
+        Me.BtnCreateBBMforVS.Appearance.Options.UseForeColor = True
+        Me.BtnCreateBBMforVS.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.BtnCreateBBMforVS.Location = New System.Drawing.Point(0, 501)
+        Me.BtnCreateBBMforVS.LookAndFeel.SkinMaskColor = System.Drawing.Color.Blue
+        Me.BtnCreateBBMforVS.LookAndFeel.SkinMaskColor2 = System.Drawing.Color.Blue
+        Me.BtnCreateBBMforVS.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.UltraFlat
+        Me.BtnCreateBBMforVS.LookAndFeel.UseDefaultLookAndFeel = False
+        Me.BtnCreateBBMforVS.Name = "BtnCreateBBMforVS"
+        Me.BtnCreateBBMforVS.Size = New System.Drawing.Size(1186, 32)
+        Me.BtnCreateBBMforVS.TabIndex = 20
+        Me.BtnCreateBBMforVS.Text = "Receive Payment"
+        Me.BtnCreateBBMforVS.Visible = False
         '
         'PanelControl4
         '
@@ -1248,6 +1455,7 @@ Partial Class FormBankDeposit
         Me.XTPVS.ResumeLayout(False)
         CType(Me.GCSales, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVSales, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemCheckEdit3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl4.ResumeLayout(False)
         Me.PanelControl4.PerformLayout()
@@ -1369,4 +1577,24 @@ Partial Class FormBankDeposit
     Friend WithEvents GridColumn30 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn31 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents LabelControl8 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents GridColumnid_report_det As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnid_report As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnreport_mark_type As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnreport_mark_type_name As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnreport_number As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnid_acc_vs As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnacc_name As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnacc_description As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnid_comp_vs As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumncomp_number As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnvendor_vs As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnid_dc_vs As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumndc_code_vs As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnamount_vs As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumntotal_rec_vs As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumntotal_due As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnis_select_vs As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RepositoryItemCheckEdit3 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+    Friend WithEvents BtnCreateBBMforVS As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GridColumntotal_pending As DevExpress.XtraGrid.Columns.GridColumn
 End Class

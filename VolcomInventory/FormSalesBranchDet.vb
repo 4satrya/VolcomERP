@@ -123,13 +123,15 @@ Public Class FormSalesBranchDet
             ' store acc
             getStoreAccount()
 
-            'detail
-            viewDetail()
-
-            'action credit note
-            If rmt = "256" Then
+            If rmt = "254" Then
+                'sales
+                'detail
+                viewDetail()
+            ElseIf rmt = "256" Then
+                'action credit note
                 BtnAdd.Visible = False
                 GridColumnvalue.OptionsColumn.AllowEdit = True
+                viewDetailCN()
             End If
         Else
             Dim sb As New ClassSalesBranch()
@@ -374,24 +376,12 @@ Public Class FormSalesBranchDet
                 newRow("cc") = GVData.GetRowCellValue(i, "comp_number").ToString
                 newRow("report_number") = GVData.GetRowCellValue(i, "number").ToString
                 newRow("note") = GVData.GetRowCellValue(i, "note").ToString
-                If rmt = "254" Then
-                    'sales
-                    If GVData.GetRowCellValue(i, "id_dc").ToString = "1" Then
-                        newRow("debit") = Math.Abs(GVData.GetRowCellValue(i, "value"))
-                        newRow("credit") = 0
-                    Else
-                        newRow("debit") = 0
-                        newRow("credit") = GVData.GetRowCellValue(i, "value")
-                    End If
-                ElseIf rmt = "256" Then
-                    'cn
-                    If GVData.GetRowCellValue(i, "id_dc").ToString = "1" Then
-                        newRow("debit") = 0
-                        newRow("credit") = Math.Abs(GVData.GetRowCellValue(i, "value"))
-                    Else
-                        newRow("debit") = GVData.GetRowCellValue(i, "value")
-                        newRow("credit") = 0
-                    End If
+                If GVData.GetRowCellValue(i, "id_dc").ToString = "1" Then
+                    newRow("debit") = Math.Abs(GVData.GetRowCellValue(i, "value"))
+                    newRow("credit") = 0
+                Else
+                    newRow("debit") = 0
+                    newRow("credit") = GVData.GetRowCellValue(i, "value")
                 End If
 
                 TryCast(GCDraft.DataSource, DataTable).Rows.Add(newRow)
@@ -536,7 +526,7 @@ Public Class FormSalesBranchDet
     End Sub
 
     Private Sub GVData_DoubleClick(sender As Object, e As EventArgs) Handles GVData.DoubleClick
-        If id = "-1" And GVData.FocusedRowHandle >= 0 Then
+        If id = "-1" And GVData.FocusedRowHandle >= 0 And rmt = "254" Then
             If GVData.GetFocusedRowCellValue("id_report") = "0" Then
                 Cursor = Cursors.WaitCursor
                 FormBankDepositAdd.id_pop_up = "1"

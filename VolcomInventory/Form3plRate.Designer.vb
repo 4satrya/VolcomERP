@@ -21,6 +21,7 @@ Partial Class Form3plRate
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form3plRate))
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.BImport = New DevExpress.XtraEditors.SimpleButton()
         Me.SLEDelType = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn14 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -64,6 +65,7 @@ Partial Class Form3plRate
         '
         'PanelControl1
         '
+        Me.PanelControl1.Controls.Add(Me.BImport)
         Me.PanelControl1.Controls.Add(Me.SLEDelType)
         Me.PanelControl1.Controls.Add(Me.SLEInboundOutbound)
         Me.PanelControl1.Controls.Add(Me.BView)
@@ -76,6 +78,17 @@ Partial Class Form3plRate
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(1121, 45)
         Me.PanelControl1.TabIndex = 0
+        '
+        'BImport
+        '
+        Me.BImport.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BImport.Image = CType(resources.GetObject("BImport.Image"), System.Drawing.Image)
+        Me.BImport.Location = New System.Drawing.Point(842, 2)
+        Me.BImport.Name = "BImport"
+        Me.BImport.Size = New System.Drawing.Size(101, 41)
+        Me.BImport.TabIndex = 16
+        Me.BImport.Text = "Import"
+        Me.BImport.Visible = False
         '
         'SLEDelType
         '
@@ -387,4 +400,5 @@ Partial Class Form3plRate
     Friend WithEvents GridView1 As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumn14 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn15 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BImport As DevExpress.XtraEditors.SimpleButton
 End Class

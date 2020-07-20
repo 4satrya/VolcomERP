@@ -117,6 +117,7 @@
 
     Private Sub SLEUnit_EditValueChanged(sender As Object, e As EventArgs) Handles SLEUnit.EditValueChanged
         GCSales.DataSource = Nothing
+        BCreateCN.Visible = False
     End Sub
 
     Private Sub BtnViewSalesList_Click(sender As Object, e As EventArgs) Handles BtnViewSalesList.Click
@@ -144,6 +145,9 @@
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCSales.DataSource = data
         GVSales.BestFitColumns()
+        If GVSales.RowCount > 0 Then
+            BCreateCN.Visible = True
+        End If
         Cursor = Cursors.Default
     End Sub
 End Class

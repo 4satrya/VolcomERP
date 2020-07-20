@@ -391,6 +391,7 @@ Partial Class FormSalesBranch
         Me.BCreateCN.Size = New System.Drawing.Size(782, 32)
         Me.BCreateCN.TabIndex = 19
         Me.BCreateCN.Text = "Create Credit Note"
+        Me.BCreateCN.Visible = False
         '
         'GCSales
         '

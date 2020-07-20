@@ -9973,7 +9973,7 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             End If
         ElseIf formName = "FormBankDeposit" Then
             If FormBankDeposit.XTCPO.SelectedTabPageIndex = 0 Then
-                FormBankDeposit.load_deposit()
+                FormBankDeposit.load_deposit(False)
             ElseIf FormBankDeposit.XTCPO.SelectedTabPageIndex = 1 Then
                 FormBankDeposit.load_invoice()
             ElseIf FormBankDeposit.XTCPO.SelectedTabPageIndex = 2 Then

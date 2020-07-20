@@ -495,7 +495,7 @@ Public Class FormBankDepositDet
                     'FormBankDeposit.load_invoice()
                     'FormBankDeposit.SLEStoreDeposit.EditValue = SLEStore.EditValue
                     FormBankDeposit.GCInvoiceList.DataSource = Nothing
-                    FormBankDeposit.load_deposit()
+                    FormBankDeposit.load_deposit(True)
                     If id_list_payout_trans <> "-1" Then
                         FormBankDeposit.load_payout()
                     End If

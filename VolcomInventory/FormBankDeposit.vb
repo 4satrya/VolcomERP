@@ -123,8 +123,12 @@ SELECT cc.id_comp_contact,CONCAT(c.comp_number,' - ',c.comp_name) as comp_name
         Cursor = Cursors.Default
     End Sub
 
-    Sub load_deposit()
+    Sub load_deposit(ByVal is_show_all As Boolean)
         Dim where_string As String = ""
+
+        If is_show_all Then
+            SLEUnitView.EditValue = "0"
+        End If
 
         If Not SLEStoreDeposit.EditValue.ToString = "0" Then
             where_string = " AND rec_py.id_comp_contact='" & SLEStoreDeposit.EditValue.ToString & "'"
@@ -362,7 +366,7 @@ WHERE 1=1 " & where_string & " ORDER BY rec_py.id_rec_payment DESC"
     End Sub
 
     Private Sub BViewPayment_Click(sender As Object, e As EventArgs) Handles BViewPayment.Click
-        load_deposit()
+        load_deposit(False)
         check_menu()
     End Sub
 

@@ -6272,6 +6272,14 @@ WHERE pd.balance_due=pd.`value` AND pd.`id_pn`='" & id_report & "'"
                             End Try
                         End If
                     End If
+                ElseIf FormBankDepositDet.type_rec = "3" Then
+                    'penjualan toko volcom
+                    Dim qjd_upd = "/*closing invoice*/
+                    UPDATE tb_sales_branch_det d
+                    INNER JOIN tb_rec_payment_det pyd ON pyd.id_report_det = d.id_sales_branch_det AND pyd.report_mark_type=254
+                    SET d.is_close=1
+                    WHERE pyd.id_rec_payment = '" + id_report + "' AND pyd.`value`=balance_due AND pyd.`value`!= 0; "
+                    execute_non_query(qjd_upd, True, "", "", "", "")
                 End If
             End If
 
@@ -6282,7 +6290,7 @@ WHERE pd.balance_due=pd.`value` AND pd.`id_pn`='" & id_report & "'"
             'refresh view
             FormBankDepositDet.form_load()
             Try
-                FormBankDeposit.load_deposit()
+                FormBankDeposit.load_deposit(True)
                 FormBankDeposit.GVList.FocusedRowHandle = find_row(FormBankWithdrawal.GVList, "id_payment", id_report)
                 FormBankDeposit.load_invoice()
             Catch ex As Exception

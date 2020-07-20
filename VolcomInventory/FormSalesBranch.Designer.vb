@@ -46,6 +46,15 @@ Partial Class FormSalesBranch
         Me.XTPCreatedList = New DevExpress.XtraTab.XtraTabPage()
         Me.XTPCN = New DevExpress.XtraTab.XtraTabPage()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.SLEUnit = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumncoa_tag = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
+        Me.BtnViewSalesList = New DevExpress.XtraEditors.SimpleButton()
+        Me.BCreateCN = New DevExpress.XtraEditors.SimpleButton()
+        Me.GCSales = New DevExpress.XtraGrid.GridControl()
+        Me.GVSales = New DevExpress.XtraGrid.Views.Grid.GridView()
         CType(Me.GCData, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVData, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -61,6 +70,11 @@ Partial Class FormSalesBranch
         Me.XTPCreatedList.SuspendLayout()
         Me.XTPCN.SuspendLayout()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl1.SuspendLayout()
+        CType(Me.SLEUnit.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GCSales, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVSales, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GCData
@@ -293,18 +307,111 @@ Partial Class FormSalesBranch
         '
         'XTPCN
         '
+        Me.XTPCN.Controls.Add(Me.GCSales)
+        Me.XTPCN.Controls.Add(Me.BCreateCN)
         Me.XTPCN.Controls.Add(Me.PanelControl1)
         Me.XTPCN.Name = "XTPCN"
+        Me.XTPCN.PageVisible = False
         Me.XTPCN.Size = New System.Drawing.Size(782, 468)
         Me.XTPCN.Text = "Sales List"
         '
         'PanelControl1
         '
+        Me.PanelControl1.Controls.Add(Me.BtnViewSalesList)
+        Me.PanelControl1.Controls.Add(Me.SLEUnit)
+        Me.PanelControl1.Controls.Add(Me.LabelControl2)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl1.Location = New System.Drawing.Point(0, 0)
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(782, 48)
         Me.PanelControl1.TabIndex = 0
+        '
+        'SLEUnit
+        '
+        Me.SLEUnit.Location = New System.Drawing.Point(42, 13)
+        Me.SLEUnit.Name = "SLEUnit"
+        Me.SLEUnit.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEUnit.Properties.View = Me.GridView2
+        Me.SLEUnit.Size = New System.Drawing.Size(264, 20)
+        Me.SLEUnit.TabIndex = 8916
+        '
+        'GridView2
+        '
+        Me.GridView2.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn2, Me.GridColumncoa_tag})
+        Me.GridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView2.Name = "GridView2"
+        Me.GridView2.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView2.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn2
+        '
+        Me.GridColumn2.Caption = "id_coa_tag"
+        Me.GridColumn2.FieldName = "id_coa_tag"
+        Me.GridColumn2.Name = "GridColumn2"
+        '
+        'GridColumncoa_tag
+        '
+        Me.GridColumncoa_tag.Caption = "Unit"
+        Me.GridColumncoa_tag.FieldName = "coa_tag"
+        Me.GridColumncoa_tag.Name = "GridColumncoa_tag"
+        Me.GridColumncoa_tag.Visible = True
+        Me.GridColumncoa_tag.VisibleIndex = 0
+        '
+        'LabelControl2
+        '
+        Me.LabelControl2.Location = New System.Drawing.Point(14, 16)
+        Me.LabelControl2.Name = "LabelControl2"
+        Me.LabelControl2.Size = New System.Drawing.Size(19, 13)
+        Me.LabelControl2.TabIndex = 8915
+        Me.LabelControl2.Text = "Unit"
+        '
+        'BtnViewSalesList
+        '
+        Me.BtnViewSalesList.Location = New System.Drawing.Point(311, 14)
+        Me.BtnViewSalesList.Name = "BtnViewSalesList"
+        Me.BtnViewSalesList.Size = New System.Drawing.Size(60, 19)
+        Me.BtnViewSalesList.TabIndex = 8917
+        Me.BtnViewSalesList.Text = "view"
+        '
+        'BCreateCN
+        '
+        Me.BCreateCN.Appearance.BackColor = System.Drawing.Color.CornflowerBlue
+        Me.BCreateCN.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.BCreateCN.Appearance.ForeColor = System.Drawing.Color.White
+        Me.BCreateCN.Appearance.Options.UseBackColor = True
+        Me.BCreateCN.Appearance.Options.UseFont = True
+        Me.BCreateCN.Appearance.Options.UseForeColor = True
+        Me.BCreateCN.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.BCreateCN.Location = New System.Drawing.Point(0, 436)
+        Me.BCreateCN.LookAndFeel.SkinMaskColor = System.Drawing.Color.Blue
+        Me.BCreateCN.LookAndFeel.SkinMaskColor2 = System.Drawing.Color.Blue
+        Me.BCreateCN.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.UltraFlat
+        Me.BCreateCN.LookAndFeel.UseDefaultLookAndFeel = False
+        Me.BCreateCN.Name = "BCreateCN"
+        Me.BCreateCN.Size = New System.Drawing.Size(782, 32)
+        Me.BCreateCN.TabIndex = 19
+        Me.BCreateCN.Text = "Create Credit Note"
+        '
+        'GCSales
+        '
+        Me.GCSales.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCSales.Location = New System.Drawing.Point(0, 48)
+        Me.GCSales.MainView = Me.GVSales
+        Me.GCSales.Name = "GCSales"
+        Me.GCSales.Size = New System.Drawing.Size(782, 388)
+        Me.GCSales.TabIndex = 20
+        Me.GCSales.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVSales})
+        '
+        'GVSales
+        '
+        Me.GVSales.GridControl = Me.GCSales
+        Me.GVSales.Name = "GVSales"
+        Me.GVSales.OptionsBehavior.AutoExpandAllGroups = True
+        Me.GVSales.OptionsBehavior.Editable = False
+        Me.GVSales.OptionsFind.AlwaysVisible = True
+        Me.GVSales.OptionsView.ColumnAutoWidth = False
+        Me.GVSales.OptionsView.ShowFooter = True
+        Me.GVSales.OptionsView.ShowGroupPanel = False
         '
         'FormSalesBranch
         '
@@ -332,6 +439,12 @@ Partial Class FormSalesBranch
         Me.XTPCreatedList.ResumeLayout(False)
         Me.XTPCN.ResumeLayout(False)
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl1.ResumeLayout(False)
+        Me.PanelControl1.PerformLayout()
+        CType(Me.SLEUnit.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GCSales, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVSales, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -363,4 +476,13 @@ Partial Class FormSalesBranch
     Friend WithEvents XTPCreatedList As DevExpress.XtraTab.XtraTabPage
     Friend WithEvents XTPCN As DevExpress.XtraTab.XtraTabPage
     Friend WithEvents PanelControl1 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents BtnViewSalesList As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents SLEUnit As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView2 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn2 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumncoa_tag As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents BCreateCN As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GCSales As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVSales As DevExpress.XtraGrid.Views.Grid.GridView
 End Class

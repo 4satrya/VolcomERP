@@ -8,6 +8,17 @@
         Dim dt_now As DataTable = execute_query("SELECT DATE(NOW()) as tgl", -1, True, "", "", "", "")
         DEFromList.EditValue = dt_now.Rows(0)("tgl")
         DEUntilList.EditValue = dt_now.Rows(0)("tgl")
+
+        viewCoaTag()
+        If XTCData.SelectedTabPageIndex = "256" Then
+            XTPCN.PageVisible = True
+        End If
+    End Sub
+
+    Sub viewCoaTag()
+        Dim query As String = "SELECT ct.id_coa_tag, ct.tag_code, ct.tag_description, CONCAT(ct.tag_code,' - ', ct.tag_description)  AS `coa_tag`
+        FROM tb_coa_tag ct WHERE ct.id_coa_tag>1 ORDER BY ct.id_coa_tag ASC "
+        viewSearchLookupQuery(SLEUnit, query, "id_coa_tag", "tag_description", "id_coa_tag")
     End Sub
 
     Sub viewData()
@@ -102,5 +113,37 @@
 
     Private Sub XTCData_SelectedPageChanged(sender As Object, e As DevExpress.XtraTab.TabPageChangedEventArgs) Handles XTCData.SelectedPageChanged
         check_menu()
+    End Sub
+
+    Private Sub SLEUnit_EditValueChanged(sender As Object, e As EventArgs) Handles SLEUnit.EditValueChanged
+        GCSales.DataSource = Nothing
+    End Sub
+
+    Private Sub BtnViewSalesList_Click(sender As Object, e As EventArgs) Handles BtnViewSalesList.Click
+        Cursor = Cursors.WaitCursor
+        'minimum date
+        Dim query_closing As String = "SELECT DATE_FORMAT(l.date_until,'%Y-%m-%d') AS `closing_date` FROM tb_closing_log l WHERE l.note='Closing End' ORDER BY l.id DESC LIMIT 1 "
+        Dim closing_date As String = execute_query(query_closing, 0, True, "", "", "", "")
+        Dim query As String = "SELECT m.id_sales_branch, m.number, m.transaction_date
+        FROM (
+	        SELECT d.id_sales_branch_det, d.value-IFNULL(cn.amount_cn,0.00) AS `amount_limit`, m.id_sales_branch, m.number, m.transaction_date, m.id_coa_tag
+	        FROM tb_sales_branch_det d
+	        INNER JOIN tb_sales_branch m ON m.id_sales_branch = d.id_sales_branch
+	        LEFT JOIN (
+		        SELECT d.id_sales_branch_ref_det, SUM(d.value) AS `amount_cn`
+		        FROM tb_sales_branch_det d
+		        INNER JOIN tb_sales_branch m ON m.id_sales_branch = d.id_sales_branch
+		        WHERE m.id_report_status!=5 
+		        GROUP BY d.id_sales_branch_ref_det
+	        ) cn ON cn.id_sales_branch_ref_det = d.id_sales_branch_det
+	        WHERE m.id_report_status=6 AND m.report_mark_type=254 AND d.is_close=2 
+	        HAVING amount_limit>0
+        ) m
+        WHERE m.transaction_date>'" + closing_date + "' AND m.id_coa_tag='" + SLEUnit.EditValue.ToString + "'
+        GROUP BY m.id_sales_branch "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCSales.DataSource = data
+        GVSales.BestFitColumns()
+        Cursor = Cursors.Default
     End Sub
 End Class

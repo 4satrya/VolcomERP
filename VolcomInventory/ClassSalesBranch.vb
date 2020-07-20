@@ -12,8 +12,8 @@
             condition = ""
         End If
 
-        Dim query As String = "SELECT b.id_sales_branch, b.number, b.id_coa_tag, ct.tag_description AS `unit`, b.created_date, b.transaction_date, 
-        b.id_report_status, stt.report_status, b.note, b.`value`,
+        Dim query As String = "SELECT b.id_sales_branch, b.id_sales_branch_ref, b.number, b.id_coa_tag, ct.tag_description AS `unit`, b.created_date, b.transaction_date, 
+        b.id_report_status, stt.report_status, b.report_mark_type, b.id_memo_type, b.note, b.`value`,
         store_normal.id_comp AS `id_store_normal`,b.pros_normal, b.pros_normal_comp,b.rev_normal,
         b.rev_normal_ppn_pros, b.rev_normal_ppn, b.rev_normal_ppn_acc AS `id_coa_ppn_normal`, coa_ppn_normal.acc_name AS `coa_ppn_normal`, coa_ppn_normal.acc_description AS `coa_ppn_normal_desc`, b.rev_normal_ppn_note,
         b.rev_normal_net,  b.rev_normal_net_acc AS `id_coa_pend_normal`, coa_pend_normal.acc_name AS `coa_pend_normal`, coa_pend_normal.acc_description AS `coa_pend_normal_desc`, b.rev_normal_net_note,

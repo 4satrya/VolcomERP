@@ -359,7 +359,7 @@
             FormPromoCollectionDet.Close()
         ElseIf report_mark_type = "251" Then
             FormBankWithdrawalSum.Close()
-        ElseIf report_mark_type = "254" Then
+        ElseIf report_mark_type = "254" Or report_mark_type = "256" Then
             FormSalesBranchDet.Close()
         End If
     End Sub
@@ -1249,7 +1249,7 @@ GROUP BY rec.`id_prod_order`"
             FormBankWithdrawalSum.id_sum = id_report
             FormBankWithdrawalSum.is_view = "1"
             FormBankWithdrawalSum.ShowDialog()
-        ElseIf report_mark_type = "254" Then
+        ElseIf report_mark_type = "254" Or report_mark_type = "256" Then
             FormSalesBranchDet.action = "upd"
             FormSalesBranchDet.id = id_report
             FormSalesBranchDet.is_view = "1"
@@ -2249,7 +2249,7 @@ GROUP BY rec.`id_prod_order`"
             field_id = "id_pn_summary"
             field_number = "number"
             field_date = "created_date"
-        ElseIf report_mark_type = "254" Then
+        ElseIf report_mark_type = "254" Or report_mark_type = "256" Then
             'sales volcom store
             table_name = "tb_sales_branch"
             field_id = "id_sales_branch"

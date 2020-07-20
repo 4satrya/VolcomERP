@@ -597,7 +597,7 @@
         ElseIf report_mark_type = "251" Then
             'bbk summary
             query = String.Format("SELECT id_report_status,number as report_number FROM tb_pn_summary WHERE id_pn_summary = '{0}'", id_report)
-        ElseIf report_mark_type = "254" Then
+        ElseIf report_mark_type = "254" Or report_mark_type = "256" Then
             ' sales volcom store
             query = String.Format("SELECT id_report_status,number as report_number FROM tb_sales_branch WHERE id_sales_branch = '{0}'", id_report)
         End If
@@ -8277,6 +8277,81 @@ WHERE invd.`id_inv_mat`='" & id_report & "'"
                 WHERE m.id_sales_branch='" + id_report + "'
                 UNION ALL
                 SELECT '" + id_acc_trans + "', m.comp_rev_sale_acc, m.id_comp_sale, 0, 0.00 AS `debit`, m.comp_rev_sale AS `credit`, m.comp_rev_sale_note, '254', '" + id_report + "',
+                '" + report_number + "', '', m.id_coa_tag
+                FROM tb_sales_branch m
+                WHERE m.id_sales_branch='" + id_report + "'; "
+                execute_non_query(qjd, True, "", "", "", "")
+            End If
+
+            'update
+            query = String.Format("UPDATE tb_sales_branch Set id_report_status='{0}' WHERE id_sales_branch ='{1}'", id_status_reportx, id_report)
+            execute_non_query(query, True, "", "", "", "")
+
+            'refresh view
+            Try
+                FormSalesBranchDet.actionLoad()
+                FormSalesBranch.viewData()
+                FormSalesBranch.GVData.FocusedRowHandle = find_row(FormSalesBranch.GVData, "id_sales_branch", id_report)
+            Catch ex As Exception
+            End Try
+        ElseIf report_mark_type = "256" Then
+            'volcom store CN
+            'auto completed
+            If id_status_reportx = "3" Then
+                id_status_reportx = "6"
+            End If
+
+            'completed
+            If id_status_reportx = "6" Then
+                'auto jurnal
+                'Select user prepared
+                Dim qu As String = "SELECT rm.id_user, rm.report_number FROM tb_report_mark rm WHERE rm.report_mark_type=" + report_mark_type + " AND rm.id_report='" + id_report + "' AND rm.id_report_status=1 "
+                Dim du As DataTable = execute_query(qu, -1, True, "", "", "", "")
+                Dim id_user_prepared As String = du.Rows(0)("id_user").ToString
+                Dim report_number As String = du.Rows(0)("report_number").ToString
+
+                'main journal
+                Dim date_reference As String = DateTime.Parse(FormSalesBranchDet.DESalesDate.EditValue.ToString).ToString("yyyy-MM-dd")
+                Dim date_created As String = DateTime.Parse(FormSalesBranchDet.DECreatedDate.EditValue.ToString).ToString("yyyy-MM-dd")
+                Dim qjm As String = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created, date_reference, acc_trans_note, id_report_status)
+                VALUES ('" + header_number_acc("1") + "','" + report_number + "','13','" + id_user_prepared + "', '" + date_created + "','" + date_reference + "',  'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
+                Dim id_acc_trans As String = execute_query(qjm, 0, True, "", "", "", "")
+                increase_inc_acc("1")
+
+                'det journal
+                Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_comp, qty, credit,debit, acc_trans_det_note, report_mark_type, id_report, report_number, vendor, id_coa_tag) 
+                SELECT '" + id_acc_trans + "', d.id_acc, d.id_comp, 0, IF(d.id_dc=2, ABS(d.value), 0) AS `credit`, IF(d.id_dc=1, ABS(d.value), 0) AS `debit`, d.note, '256', '" + id_report + "', 
+                '" + report_number + "', d.vendor, m.id_coa_tag
+                FROM tb_sales_branch_det d
+                INNER JOIN tb_sales_branch m ON m.id_sales_branch = d.id_sales_branch
+                WHERE d.id_sales_branch='" + id_report + "'
+                UNION ALL 
+                SELECT '" + id_acc_trans + "', m.rev_normal_net_acc, m.id_comp_normal, 0, 0.00 AS `credit`, m.rev_normal_net AS `debit`, m.rev_normal_net_note, '256', '" + id_report + "',
+                '" + report_number + "', '', m.id_coa_tag
+                FROM tb_sales_branch m
+                WHERE m.id_sales_branch='" + id_report + "'
+                UNION ALL
+                SELECT '" + id_acc_trans + "', m.rev_normal_ppn_acc, m.id_comp_normal, 0, 0.00 AS `credit`, m.rev_normal_ppn AS `debit`, m.rev_normal_ppn_note, '256', '" + id_report + "',
+                '" + report_number + "', '', m.id_coa_tag
+                FROM tb_sales_branch m
+                WHERE m.id_sales_branch='" + id_report + "'
+                UNION ALL
+                SELECT '" + id_acc_trans + "', m.comp_rev_normal_acc, m.id_comp_normal, 0, 0.00 AS `credit`, m.comp_rev_normal AS `debit`, m.comp_rev_normal_note, '256', '" + id_report + "',
+                '" + report_number + "', '', m.id_coa_tag
+                FROM tb_sales_branch m
+                WHERE m.id_sales_branch='" + id_report + "'
+                UNION ALL
+                SELECT '" + id_acc_trans + "', m.rev_sale_net_acc, m.id_comp_sale, 0, 0.00 AS `credit`, m.rev_sale_net AS `debit`, m.rev_sale_net_note, '256', '" + id_report + "',
+                '" + report_number + "', '', m.id_coa_tag
+                FROM tb_sales_branch m
+                WHERE m.id_sales_branch='" + id_report + "'
+                UNION ALL
+                SELECT '" + id_acc_trans + "', m.rev_sale_ppn_acc, m.id_comp_sale, 0, 0.00 AS `credit`, m.rev_sale_ppn AS `debit`, m.rev_sale_ppn_note, '256', '" + id_report + "',
+                '" + report_number + "', '', m.id_coa_tag
+                FROM tb_sales_branch m
+                WHERE m.id_sales_branch='" + id_report + "'
+                UNION ALL
+                SELECT '" + id_acc_trans + "', m.comp_rev_sale_acc, m.id_comp_sale, 0, 0.00 AS `credit`, m.comp_rev_sale AS `debit`, m.comp_rev_sale_note, '256', '" + id_report + "',
                 '" + report_number + "', '', m.id_coa_tag
                 FROM tb_sales_branch m
                 WHERE m.id_sales_branch='" + id_report + "'; "

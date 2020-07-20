@@ -30,6 +30,7 @@ Partial Class FormSalesBranch
         Me.GridColumnreport_status = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnnote = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnvalue = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnnumber = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
         Me.DEUntilList = New DevExpress.XtraEditors.DateEdit()
         Me.DEFromList = New DevExpress.XtraEditors.DateEdit()
@@ -41,7 +42,10 @@ Partial Class FormSalesBranch
         Me.GridColumn29 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.BViewPayment = New DevExpress.XtraEditors.SimpleButton()
-        Me.GridColumnnumber = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.XTCData = New DevExpress.XtraTab.XtraTabControl()
+        Me.XTPCreatedList = New DevExpress.XtraTab.XtraTabPage()
+        Me.XTPCN = New DevExpress.XtraTab.XtraTabPage()
+        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
         CType(Me.GCData, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVData, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -52,6 +56,11 @@ Partial Class FormSalesBranch
         CType(Me.DEFromList.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLEStoreDeposit.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.XTCData, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTCData.SuspendLayout()
+        Me.XTPCreatedList.SuspendLayout()
+        Me.XTPCN.SuspendLayout()
+        CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GCData
@@ -60,7 +69,7 @@ Partial Class FormSalesBranch
         Me.GCData.Location = New System.Drawing.Point(0, 48)
         Me.GCData.MainView = Me.GVData
         Me.GCData.Name = "GCData"
-        Me.GCData.Size = New System.Drawing.Size(788, 448)
+        Me.GCData.Size = New System.Drawing.Size(782, 420)
         Me.GCData.TabIndex = 0
         Me.GCData.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVData})
         '
@@ -149,6 +158,14 @@ Partial Class FormSalesBranch
         Me.GridColumnvalue.Visible = True
         Me.GridColumnvalue.VisibleIndex = 6
         '
+        'GridColumnnumber
+        '
+        Me.GridColumnnumber.Caption = "Number"
+        Me.GridColumnnumber.FieldName = "number"
+        Me.GridColumnnumber.Name = "GridColumnnumber"
+        Me.GridColumnnumber.Visible = True
+        Me.GridColumnnumber.VisibleIndex = 0
+        '
         'PanelControl2
         '
         Me.PanelControl2.Controls.Add(Me.DEUntilList)
@@ -161,7 +178,7 @@ Partial Class FormSalesBranch
         Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl2.Location = New System.Drawing.Point(0, 0)
         Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(788, 48)
+        Me.PanelControl2.Size = New System.Drawing.Size(782, 48)
         Me.PanelControl2.TabIndex = 15
         '
         'DEUntilList
@@ -255,21 +272,46 @@ Partial Class FormSalesBranch
         Me.BViewPayment.TabIndex = 8916
         Me.BViewPayment.Text = "view"
         '
-        'GridColumnnumber
+        'XTCData
         '
-        Me.GridColumnnumber.Caption = "Number"
-        Me.GridColumnnumber.FieldName = "number"
-        Me.GridColumnnumber.Name = "GridColumnnumber"
-        Me.GridColumnnumber.Visible = True
-        Me.GridColumnnumber.VisibleIndex = 0
+        Me.XTCData.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.XTCData.HeaderLocation = DevExpress.XtraTab.TabHeaderLocation.Bottom
+        Me.XTCData.Location = New System.Drawing.Point(0, 0)
+        Me.XTCData.Name = "XTCData"
+        Me.XTCData.SelectedTabPage = Me.XTPCreatedList
+        Me.XTCData.Size = New System.Drawing.Size(788, 496)
+        Me.XTCData.TabIndex = 16
+        Me.XTCData.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPCreatedList, Me.XTPCN})
+        '
+        'XTPCreatedList
+        '
+        Me.XTPCreatedList.Controls.Add(Me.GCData)
+        Me.XTPCreatedList.Controls.Add(Me.PanelControl2)
+        Me.XTPCreatedList.Name = "XTPCreatedList"
+        Me.XTPCreatedList.Size = New System.Drawing.Size(782, 468)
+        Me.XTPCreatedList.Text = "Created List"
+        '
+        'XTPCN
+        '
+        Me.XTPCN.Controls.Add(Me.PanelControl1)
+        Me.XTPCN.Name = "XTPCN"
+        Me.XTPCN.Size = New System.Drawing.Size(782, 468)
+        Me.XTPCN.Text = "Sales List"
+        '
+        'PanelControl1
+        '
+        Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelControl1.Location = New System.Drawing.Point(0, 0)
+        Me.PanelControl1.Name = "PanelControl1"
+        Me.PanelControl1.Size = New System.Drawing.Size(782, 48)
+        Me.PanelControl1.TabIndex = 0
         '
         'FormSalesBranch
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(788, 496)
-        Me.Controls.Add(Me.GCData)
-        Me.Controls.Add(Me.PanelControl2)
+        Me.Controls.Add(Me.XTCData)
         Me.MinimizeBox = False
         Me.Name = "FormSalesBranch"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -285,6 +327,11 @@ Partial Class FormSalesBranch
         CType(Me.DEFromList.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SLEStoreDeposit.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.XTCData, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTCData.ResumeLayout(False)
+        Me.XTPCreatedList.ResumeLayout(False)
+        Me.XTPCN.ResumeLayout(False)
+        CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -312,4 +359,8 @@ Partial Class FormSalesBranch
     Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents BViewPayment As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents GridColumnnumber As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents XTCData As DevExpress.XtraTab.XtraTabControl
+    Friend WithEvents XTPCreatedList As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents XTPCN As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents PanelControl1 As DevExpress.XtraEditors.PanelControl
 End Class

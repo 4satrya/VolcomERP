@@ -4,6 +4,13 @@
     Public Shared id_report_status As String = "-1"
 
     Private Sub ReportSalesBranch_BeforePrint(sender As Object, e As Printing.PrintEventArgs) Handles MyBase.BeforePrint
+        'header
+        If rmt = "254" Then
+            LabelTitle.Text = "BUKTI PENJUALAN"
+        ElseIf rmt = "256" Then
+            LabelTitle.Text = "BUKTI CREDIT NOTE"
+        End If
+
         Dim query As String = "SELECT py.id_sales_branch, py.number AS `report_number`, 
         DATE_FORMAT(py.created_date,'%d-%m-%Y') AS `created_date`,
         DATE_FORMAT(py.transaction_date,'%d-%m-%Y') AS `sales_date`,

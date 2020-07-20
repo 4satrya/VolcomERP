@@ -6,8 +6,19 @@ Public Class FormSalesBranchDet
     Public rmt As String = "254"
     Public id_report_status As String = "1"
     Public is_view As String = "-1"
+    Public id_memo_type As String = "1"
+    Public id_sales_branch_ref As String = "-1"
 
     Private Sub FormSalesBranchDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'general
+        Dim menu_name As String = execute_query("SELECT report_mark_type_name FROM tb_lookup_report_mark_type WHERE report_mark_type='" + rmt + "' ", 0, True, "", "", "", "")
+        Text = menu_name
+
+        'minimum date
+        Dim query_closing As String = "SELECT DATE_ADD(l.date_until,INTERVAL 1 DAY) AS `first_date` FROM tb_closing_log l WHERE l.note='Closing End' ORDER BY l.id DESC LIMIT 1 "
+        Dim data_closing As DataTable = execute_query(query_closing, -1, True, "", "", "", "")
+        DESalesDate.Properties.MinValue = data_closing(0)("first_date")
+
         viewReportStatus()
         viewCoaTag()
         viewStores()
@@ -114,6 +125,12 @@ Public Class FormSalesBranchDet
 
             'detail
             viewDetail()
+
+            'action credit note
+            If rmt = "256" Then
+                BtnAdd.Visible = False
+                GridColumnvalue.OptionsColumn.AllowEdit = True
+            End If
         Else
             Dim sb As New ClassSalesBranch()
             Dim query As String = sb.queryMain("AND b.id_sales_branch=" + id + "", "1")
@@ -152,6 +169,9 @@ Public Class FormSalesBranchDet
             TxtAPSale.EditValue = data.Rows(0)("comp_rev_sale")
             SLEAccAPSale.EditValue = data.Rows(0)("id_coa_hd_sale")
             TxtAPNoteSale.Text = data.Rows(0)("comp_rev_sale_note").ToString
+            rmt = data.Rows(0)("report_mark_type").ToString
+            id_memo_type = data.Rows(0)("id_memo_type").ToString
+            id_sales_branch_ref = data.Rows(0)("id_sales_branch_ref").ToString
 
             'detail
             viewDetail()
@@ -171,9 +191,9 @@ Public Class FormSalesBranchDet
 
     Sub viewDetail()
         Cursor = Cursors.WaitCursor
-        Dim query As String = "SELECT d.id_sales_branch_det, d.id_sales_branch, 
+        Dim query As String = "SELECT d.id_sales_branch_det, d.id_sales_branch_ref_det, d.id_sales_branch, 
         d.id_acc, coa.acc_name AS `coa_account`, coa.acc_description AS `coa_description`,
-        d.id_dc, dc.dc_code, d.id_comp, c.comp_number, d.note, d.`value`, d.id_report, d.number, d.report_mark_type, d.vendor
+        d.id_dc, dc.dc_code, d.id_comp, c.comp_number, d.note, d.`value`, d.id_report, d.number, d.report_mark_type, d.vendor, 0.00 AS `amount_limit`
         FROM tb_sales_branch_det d
         INNER JOIN tb_a_acc coa ON coa.id_acc = d.id_acc
         INNER JOIN tb_lookup_dc dc ON dc.id_dc = d.id_dc
@@ -323,7 +343,11 @@ Public Class FormSalesBranchDet
     Private Sub XTCData_SelectedPageChanged(sender As Object, e As DevExpress.XtraTab.TabPageChangedEventArgs) Handles XTCData.SelectedPageChanged
         If XTCData.SelectedTabPageIndex = 1 Then
             viewBlankJournal()
-            viewDraftJournal()
+            If rmt = "254" Then
+                viewDraftJournal()
+            ElseIf rmt = "256" Then
+                viewDraftJournalCN()
+            End If
         End If
     End Sub
 
@@ -337,9 +361,7 @@ Public Class FormSalesBranchDet
         Cursor = Cursors.Default
     End Sub
 
-    Sub viewDraftJournal()
-        Cursor = Cursors.WaitCursor
-        Dim jum_row As Integer = 0
+    Sub viewDraftJournalDetail()
         If GVData.RowCount > 0 Then
             makeSafeGV(GVData)
             'detil
@@ -352,19 +374,34 @@ Public Class FormSalesBranchDet
                 newRow("cc") = GVData.GetRowCellValue(i, "comp_number").ToString
                 newRow("report_number") = GVData.GetRowCellValue(i, "number").ToString
                 newRow("note") = GVData.GetRowCellValue(i, "note").ToString
-                If GVData.GetRowCellValue(i, "id_dc").ToString = "1" Then
-                    newRow("debit") = Math.Abs(GVData.GetRowCellValue(i, "value"))
-                    newRow("credit") = 0
-                Else
-                    newRow("debit") = 0
-                    newRow("credit") = GVData.GetRowCellValue(i, "value")
+                If rmt = "254" Then
+                    'sales
+                    If GVData.GetRowCellValue(i, "id_dc").ToString = "1" Then
+                        newRow("debit") = Math.Abs(GVData.GetRowCellValue(i, "value"))
+                        newRow("credit") = 0
+                    Else
+                        newRow("debit") = 0
+                        newRow("credit") = GVData.GetRowCellValue(i, "value")
+                    End If
+                ElseIf rmt = "256" Then
+                    'cn
+                    If GVData.GetRowCellValue(i, "id_dc").ToString = "1" Then
+                        newRow("debit") = 0
+                        newRow("credit") = Math.Abs(GVData.GetRowCellValue(i, "value"))
+                    Else
+                        newRow("debit") = GVData.GetRowCellValue(i, "value")
+                        newRow("credit") = 0
+                    End If
                 End If
+
                 TryCast(GCDraft.DataSource, DataTable).Rows.Add(newRow)
                 GCDraft.RefreshDataSource()
                 GVDraft.RefreshData()
             Next
         End If
+    End Sub
 
+    Sub viewDraftJournalHeader()
         'get coa description
         Dim qcd As String = "SELECT * FROM tb_a_acc a WHERE a.id_acc IN(" + SLEAccPPNNormal.EditValue.ToString + "," + SLEAccRevNormal.EditValue.ToString + "," + SLEAccAPNormal.EditValue.ToString + "," + SLEAccPPNSale.EditValue.ToString + "," + SLEAccRevSale.EditValue.ToString + "," + SLEAccAPSale.EditValue.ToString + ")"
         Dim dcd As DataTable = execute_query(qcd, -1, True, "", "", "", "")
@@ -471,6 +508,30 @@ Public Class FormSalesBranchDet
             GVDraft.RefreshData()
         End If
         GVDraft.BestFitColumns()
+    End Sub
+
+    Dim jum_row As Integer = 0
+    Sub viewDraftJournal()
+        Cursor = Cursors.WaitCursor
+        jum_row = 0
+
+        'detail
+        viewDraftJournalDetail()
+
+        'header
+        viewDraftJournalHeader()
+        Cursor = Cursors.Default
+    End Sub
+
+    Sub viewDraftJournalCN()
+        Cursor = Cursors.WaitCursor
+        jum_row = 0
+
+        'header
+        viewDraftJournalHeader()
+
+        'detail
+        viewDraftJournalDetail()
         Cursor = Cursors.Default
     End Sub
 
@@ -517,9 +578,48 @@ Public Class FormSalesBranchDet
             cond_bal = False
         End If
 
+        'cek limit
+        Dim cond_allow_limit As Boolean = True
+        If rmt = "254" Then
+            cond_allow_limit = True
+        ElseIf rmt = "256" Then
+            'cn cek limit qty
+            Cursor = Cursors.WaitCursor
+            Dim ql As String = "SELECT d.id_sales_branch_det, d.value-IFNULL(cn.amount_cn,0.00) AS `amount_limit`
+            FROM tb_sales_branch_det d
+            LEFT JOIN (
+	            SELECT d.id_sales_branch_ref_det, SUM(d.value) AS `amount_cn`
+	            FROM tb_sales_branch_det d
+	            INNER JOIN tb_sales_branch m ON m.id_sales_branch = d.id_sales_branch
+	            WHERE m.id_report_status!=5 AND m.id_sales_branch_ref=" + id_sales_branch_ref + "
+	            GROUP BY d.id_sales_branch_ref_det
+            ) cn ON cn.id_sales_branch_ref_det = d.id_sales_branch_det
+            WHERE d.id_sales_branch=" + id_sales_branch_ref + " AND d.is_close=2 "
+            Dim dl As DataTable = execute_query(ql, -1, True, "", "", "", "")
+            For d As Integer = 0 To GVData.RowCount - 1
+                Dim id_detail As String = GVData.GetRowCellValue(d, "id_sales_branch_ref_det").ToString
+                Dim dl_filter As DataRow() = dl.Select("[id_sales_branch_ref_det]='" + id_detail + "' ")
+                If dl_filter.Count > 0 Then
+                    GVData.SetRowCellValue(d, "amount", dl_filter(0)("amount_limit"))
+                Else
+                    GVData.SetRowCellValue(d, "amount", 0.00)
+                End If
+            Next
+            GVData.ActiveFilterString = "[amount]>[amount_limit]"
+            If GVData.RowCount > 0 Then
+                cond_allow_limit = False
+            Else
+                cond_allow_limit = True
+            End If
+            GVData.ActiveFilterString = ""
+            Cursor = Cursors.Default
+        End If
+
         If Not cond_bal Then
             warningCustom("Journal not balance please check your input")
-
+        ElseIf Not cond_allow_limit Then
+            warningCustom("Can't exceed amount limit")
+            GridColumnamount_limit.VisibleIndex = 20
         Else
             Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure want to save this data ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
             If confirm = Windows.Forms.DialogResult.Yes Then
@@ -551,6 +651,9 @@ Public Class FormSalesBranchDet
                 Dim comp_rev_sale As String = decimalSQL(TxtAPSale.EditValue.ToString)
                 Dim comp_rev_sale_acc As String = SLEAccAPSale.EditValue.ToString
                 Dim comp_rev_sale_note As String = addSlashes(TxtAPNoteSale.Text)
+                If id_sales_branch_ref = "-1" Then
+                    id_sales_branch_ref = "NULL"
+                End If
                 Dim query As String = "INSERT INTO tb_sales_branch(`id_coa_tag`,
                 `created_date`,
                 `transaction_date`,
@@ -584,7 +687,7 @@ Public Class FormSalesBranchDet
                 `rev_sale_net_note`,
                 `comp_rev_sale`,
                 `comp_rev_sale_acc`,
-                `comp_rev_sale_note`)
+                `comp_rev_sale_note`, `report_mark_type`, `id_memo_type`, `id_sales_branch_ref`)
                 VALUES
                 ('" + id_coa_tag + "',
                 NOW(),
@@ -619,14 +722,14 @@ Public Class FormSalesBranchDet
                 '" + rev_sale_net_note + "',
                 ROUND('" + comp_rev_sale + "',2),
                 '" + comp_rev_sale_acc + "',
-                '" + comp_rev_sale_note + "'); SELECT LAST_INSERT_ID(); "
+                '" + comp_rev_sale_note + "', '" + rmt + "', '" + id_memo_type + "', " + id_sales_branch_ref + "); SELECT LAST_INSERT_ID(); "
                 id = execute_query(query, 0, True, "", "", "", "")
 
                 'generate number
                 execute_non_query("CALL gen_number('" & id & "','" + rmt + "')", True, "", "", "", "")
 
                 'detail
-                Dim query_det As String = "INSERT INTO tb_sales_branch_det(id_sales_branch, id_acc, id_dc, id_comp, note, value, id_report, number, report_mark_type,vendor) VALUES "
+                Dim query_det As String = "INSERT INTO tb_sales_branch_det(id_sales_branch, id_acc, id_dc, id_comp, note, value, id_report, number, report_mark_type,vendor, id_sales_branch_ref_det) VALUES "
                 For i As Integer = 0 To GVData.RowCount - 1
                     Dim id_acc As String = GVData.GetRowCellValue(i, "id_acc").ToString
                     Dim id_dc As String = GVData.GetRowCellValue(i, "id_dc").ToString
@@ -646,11 +749,15 @@ Public Class FormSalesBranchDet
                         report_mark_type = "NULL"
                     End If
                     Dim vendor As String = addSlashes(GVData.GetRowCellValue(i, "vendor").ToString)
+                    Dim id_sales_branch_ref_det As String = GVData.GetRowCellValue(i, "id_sales_branch_ref_det").ToString
+                    If id_sales_branch_ref_det = "0" Then
+                        id_sales_branch_ref_det = "NULL"
+                    End If
 
                     If i > 0 Then
                         query_det += ","
                     End If
-                    query_det += "('" + id + "', '" + id_acc + "', '" + id_dc + "', " + id_comp + ", '" + note_detail + "', '" + value_detail + "', " + id_report + ", '" + number + "', " + report_mark_type + ", '" + vendor + "') "
+                    query_det += "('" + id + "', '" + id_acc + "', '" + id_dc + "', " + id_comp + ", '" + note_detail + "', '" + value_detail + "', " + id_report + ", '" + number + "', " + report_mark_type + ", '" + vendor + "'," + id_sales_branch_ref_det + ") "
                 Next
                 If GVData.RowCount > 0 Then
                     execute_non_query(query_det, True, "", "", "", "")
@@ -660,7 +767,7 @@ Public Class FormSalesBranchDet
                 submit_who_prepared(rmt, id, id_user)
 
                 'done
-                infoCustom("Sales created. Waiting for approval")
+                infoCustom("Transaction created. Waiting for approval")
 
                 'refresh
                 FormSalesBranch.GVData.FocusedRowHandle = find_row(FormSalesBranch.GVData, "id_sales_branch", id)

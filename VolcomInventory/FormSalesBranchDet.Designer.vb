@@ -155,6 +155,8 @@ Partial Class FormSalesBranchDet
         Me.GridColumndebit_draft = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncredit_draft = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncc = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnid_sales_branch_ref_det = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnamount_limit = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl7, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl7.SuspendLayout()
         CType(Me.PanelControlPreview, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1238,7 +1240,7 @@ Partial Class FormSalesBranchDet
         '
         'GVData
         '
-        Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnid_sales_branch_det, Me.GridColumnid_sales_branch, Me.GridColumnid_acc, Me.GridColumncoa_account, Me.GridColumncoa_description, Me.GridColumnid_dc, Me.GridColumndc_code, Me.GridColumnid_comp_det, Me.GridColumnnote, Me.GridColumnvalue, Me.GridColumnno, Me.GridColumncomp_number, Me.GridColumnid_report, Me.GridColumnreport_number, Me.GridColumnvendor})
+        Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnid_sales_branch_det, Me.GridColumnid_sales_branch, Me.GridColumnid_acc, Me.GridColumncoa_account, Me.GridColumncoa_description, Me.GridColumnid_dc, Me.GridColumndc_code, Me.GridColumnid_comp_det, Me.GridColumnnote, Me.GridColumnvalue, Me.GridColumnno, Me.GridColumncomp_number, Me.GridColumnid_report, Me.GridColumnreport_number, Me.GridColumnvendor, Me.GridColumnid_sales_branch_ref_det, Me.GridColumnamount_limit})
         Me.GVData.GridControl = Me.GCData
         Me.GVData.Name = "GVData"
         Me.GVData.OptionsView.ShowFooter = True
@@ -1517,6 +1519,21 @@ Partial Class FormSalesBranchDet
         Me.GridColumncc.Visible = True
         Me.GridColumncc.VisibleIndex = 3
         '
+        'GridColumnid_sales_branch_ref_det
+        '
+        Me.GridColumnid_sales_branch_ref_det.Caption = "id_sales_branch_ref_det"
+        Me.GridColumnid_sales_branch_ref_det.FieldName = "id_sales_branch_ref_det"
+        Me.GridColumnid_sales_branch_ref_det.Name = "GridColumnid_sales_branch_ref_det"
+        '
+        'GridColumnamount_limit
+        '
+        Me.GridColumnamount_limit.Caption = "Limit Amount"
+        Me.GridColumnamount_limit.DisplayFormat.FormatString = "N2"
+        Me.GridColumnamount_limit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnamount_limit.FieldName = "amount_limit"
+        Me.GridColumnamount_limit.Name = "GridColumnamount_limit"
+        Me.GridColumnamount_limit.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount_limit", "{0:N2}")})
+        '
         'FormSalesBranchDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1744,4 +1761,6 @@ Partial Class FormSalesBranchDet
     Friend WithEvents GridColumnid_report As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnreport_number As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnvendor As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnid_sales_branch_ref_det As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnamount_limit As DevExpress.XtraGrid.Columns.GridColumn
 End Class

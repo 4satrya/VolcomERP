@@ -129,8 +129,11 @@ Public Class FormSalesBranchDet
                 viewDetail()
             ElseIf rmt = "256" Then
                 'action credit note
+                SLEUnit.EditValue = FormSalesBranch.SLEUnit.EditValue.ToString
+                SLEUnit.Enabled = False
+                TxtNumberRef.Text = FormSalesBranch.GVSales.GetFocusedRowCellValue("number").ToString
                 BtnAdd.Visible = False
-                GridColumnvalue.OptionsColumn.AllowEdit = True
+                GridColumnvalue.OptionsColumn.ReadOnly = False
                 viewDetailCN()
             End If
         Else
@@ -138,6 +141,7 @@ Public Class FormSalesBranchDet
             Dim query As String = sb.queryMain("AND b.id_sales_branch=" + id + "", "1")
             Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
             TxtNumber.Text = data.Rows(0)("number").ToString
+            TxtNumberRef.Text = data.Rows(0)("ref_number").ToString
             DECreatedDate.EditValue = data.Rows(0)("created_date")
             SLEUnit.EditValue = data.Rows(0)("id_coa_tag").ToString
             DESalesDate.EditValue = data.Rows(0)("transaction_date")
@@ -212,7 +216,9 @@ Public Class FormSalesBranchDet
         Dim query As String = "SELECT 0 AS `id_sales_branch_det`, d.id_sales_branch_det AS `id_sales_branch_ref_det`, 0 AS `id_sales_branch`,
         d.id_acc, coa.acc_name AS `coa_account`, coa.acc_description AS `coa_description`,
         IF(d.id_dc=1,2,IF(d.id_dc=2,1,0)) AS `id_dc`, IF(d.id_dc=1,'K',IF(d.id_dc=2,'D','-')) AS `dc_code`,
-        d.id_comp, c.comp_number, d.note, d.value-IFNULL(cn.amount_cn,0.00)-IFNULL(rec.value,0.00) AS `value`, 
+        d.id_comp, c.comp_number, d.note, 
+        d.value-IFNULL(cn.amount_cn,0.00)-IFNULL(rec.value,0.00) AS `value`, 
+        d.value-IFNULL(cn.amount_cn,0.00)-IFNULL(rec.value,0.00) AS `amount_limit`, 
         0 AS `id_report`, d.`number`, 0 AS `report_mark_type`, d.vendor
         FROM tb_sales_branch_det d
         LEFT JOIN (
@@ -439,8 +445,14 @@ Public Class FormSalesBranchDet
             newRow("cc") = SLEStoreNormal.Text
             newRow("report_number") = ""
             newRow("note") = TxtRevNoteNormal.Text
-            newRow("debit") = 0
-            newRow("credit") = Math.Round(TxtRevNormal.EditValue, 2)
+            If rmt = "254" Then
+                newRow("debit") = 0
+                newRow("credit") = Math.Round(TxtRevNormal.EditValue, 2)
+            ElseIf rmt = "256" Then
+                newRow("debit") = Math.Round(TxtRevNormal.EditValue, 2)
+                newRow("credit") = 0
+            End If
+
             TryCast(GCDraft.DataSource, DataTable).Rows.Add(newRow)
             GCDraft.RefreshDataSource()
             GVDraft.RefreshData()
@@ -455,8 +467,14 @@ Public Class FormSalesBranchDet
             newRowPPN("cc") = SLEStoreNormal.Text
             newRowPPN("report_number") = ""
             newRowPPN("note") = TxtPPNNoteNormal.Text
-            newRowPPN("debit") = 0
-            newRowPPN("credit") = Math.Round(TxtPPNNormal.EditValue, 2)
+            If rmt = "254" Then
+                newRowPPN("debit") = 0
+                newRowPPN("credit") = Math.Round(TxtPPNNormal.EditValue, 2)
+            ElseIf rmt = "256" Then
+                newRowPPN("debit") = Math.Round(TxtPPNNormal.EditValue, 2)
+                newRowPPN("credit") = 0
+            End If
+
             TryCast(GCDraft.DataSource, DataTable).Rows.Add(newRowPPN)
             GCDraft.RefreshDataSource()
             GVDraft.RefreshData()
@@ -471,8 +489,14 @@ Public Class FormSalesBranchDet
             newRowHD("cc") = SLEStoreNormal.Text
             newRowHD("report_number") = ""
             newRowHD("note") = TxtAPNoteNormal.Text
-            newRowHD("debit") = 0
-            newRowHD("credit") = Math.Round(TxtAPNormal.EditValue, 2)
+            If rmt = "254" Then
+                newRowHD("debit") = 0
+                newRowHD("credit") = Math.Round(TxtAPNormal.EditValue, 2)
+            ElseIf rmt = "256" Then
+                newRowHD("debit") = Math.Round(TxtAPNormal.EditValue, 2)
+                newRowHD("credit") = 0
+            End If
+
             TryCast(GCDraft.DataSource, DataTable).Rows.Add(newRowHD)
             GCDraft.RefreshDataSource()
             GVDraft.RefreshData()
@@ -490,8 +514,14 @@ Public Class FormSalesBranchDet
             newRow("cc") = SLEStoreSale.Text
             newRow("report_number") = ""
             newRow("note") = TxtRevNoteSale.Text
-            newRow("debit") = 0
-            newRow("credit") = Math.Round(TxtRevSale.EditValue, 2)
+            If rmt = "254" Then
+                newRow("debit") = 0
+                newRow("credit") = Math.Round(TxtRevSale.EditValue, 2)
+            ElseIf rmt = "256" Then
+                newRow("debit") = Math.Round(TxtRevSale.EditValue, 2)
+                newRow("credit") = 0
+            End If
+
             TryCast(GCDraft.DataSource, DataTable).Rows.Add(newRow)
             GCDraft.RefreshDataSource()
             GVDraft.RefreshData()
@@ -506,8 +536,14 @@ Public Class FormSalesBranchDet
             newRowPPN("cc") = SLEStoreSale.Text
             newRowPPN("report_number") = ""
             newRowPPN("note") = TxtPPNNoteSale.Text
-            newRowPPN("debit") = 0
-            newRowPPN("credit") = Math.Round(TxtPPNSale.EditValue, 2)
+            If rmt = "254" Then
+                newRowPPN("debit") = 0
+                newRowPPN("credit") = Math.Round(TxtPPNSale.EditValue, 2)
+            ElseIf rmt = "256" Then
+                newRowPPN("debit") = Math.Round(TxtPPNSale.EditValue, 2)
+                newRowPPN("credit") = 0
+            End If
+
             TryCast(GCDraft.DataSource, DataTable).Rows.Add(newRowPPN)
             GCDraft.RefreshDataSource()
             GVDraft.RefreshData()
@@ -522,8 +558,14 @@ Public Class FormSalesBranchDet
             newRowHD("cc") = SLEStoreSale.Text
             newRowHD("report_number") = ""
             newRowHD("note") = TxtAPNoteSale.Text
-            newRowHD("debit") = 0
-            newRowHD("credit") = Math.Round(TxtAPSale.EditValue, 2)
+            If rmt = "254" Then
+                newRowHD("debit") = 0
+                newRowHD("credit") = Math.Round(TxtAPSale.EditValue, 2)
+            ElseIf rmt = "256" Then
+                newRowHD("debit") = Math.Round(TxtAPSale.EditValue, 2)
+                newRowHD("credit") = 0
+            End If
+
             TryCast(GCDraft.DataSource, DataTable).Rows.Add(newRowHD)
             GCDraft.RefreshDataSource()
             GVDraft.RefreshData()
@@ -626,14 +668,14 @@ Public Class FormSalesBranchDet
             Dim dl As DataTable = execute_query(ql, -1, True, "", "", "", "")
             For d As Integer = 0 To GVData.RowCount - 1
                 Dim id_detail As String = GVData.GetRowCellValue(d, "id_sales_branch_ref_det").ToString
-                Dim dl_filter As DataRow() = dl.Select("[id_sales_branch_ref_det]='" + id_detail + "' ")
+                Dim dl_filter As DataRow() = dl.Select("[id_sales_branch_det]='" + id_detail + "' ")
                 If dl_filter.Count > 0 Then
-                    GVData.SetRowCellValue(d, "amount", dl_filter(0)("amount_limit"))
+                    GVData.SetRowCellValue(d, "amount_limit", dl_filter(0)("amount_limit"))
                 Else
-                    GVData.SetRowCellValue(d, "amount", 0.00)
+                    GVData.SetRowCellValue(d, "amount_limit", 0.00)
                 End If
             Next
-            GVData.ActiveFilterString = "[amount]>[amount_limit]"
+            GVData.ActiveFilterString = "[value]>[amount_limit]"
             If GVData.RowCount > 0 Then
                 cond_allow_limit = False
             Else

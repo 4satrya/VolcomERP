@@ -139,6 +139,8 @@ Partial Class FormSalesBranchDet
         Me.GridColumnid_report = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnreport_number = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnvendor = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnid_sales_branch_ref_det = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnamount_limit = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControlNav = New DevExpress.XtraEditors.PanelControl()
         Me.BtnDelete = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnAdd = New DevExpress.XtraEditors.SimpleButton()
@@ -155,8 +157,8 @@ Partial Class FormSalesBranchDet
         Me.GridColumndebit_draft = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncredit_draft = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncc = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnid_sales_branch_ref_det = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnamount_limit = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.TxtNumberRef = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl24 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.PanelControl7, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl7.SuspendLayout()
         CType(Me.PanelControlPreview, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -228,6 +230,7 @@ Partial Class FormSalesBranchDet
         Me.XTPDraftJournal.SuspendLayout()
         CType(Me.GCDraft, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVDraft, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtNumberRef.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl7
@@ -376,12 +379,14 @@ Partial Class FormSalesBranchDet
         Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl2.Location = New System.Drawing.Point(0, 0)
         Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(986, 107)
+        Me.PanelControl2.Size = New System.Drawing.Size(986, 129)
         Me.PanelControl2.TabIndex = 6
         '
         'PanelControl6
         '
         Me.PanelControl6.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelControl6.Controls.Add(Me.LabelControl24)
+        Me.PanelControl6.Controls.Add(Me.TxtNumberRef)
         Me.PanelControl6.Controls.Add(Me.LabelControl21)
         Me.PanelControl6.Controls.Add(Me.DECreatedDate)
         Me.PanelControl6.Controls.Add(Me.TxtNumber)
@@ -391,12 +396,12 @@ Partial Class FormSalesBranchDet
         Me.PanelControl6.Dock = System.Windows.Forms.DockStyle.Right
         Me.PanelControl6.Location = New System.Drawing.Point(683, 2)
         Me.PanelControl6.Name = "PanelControl6"
-        Me.PanelControl6.Size = New System.Drawing.Size(301, 103)
+        Me.PanelControl6.Size = New System.Drawing.Size(301, 125)
         Me.PanelControl6.TabIndex = 166
         '
         'LabelControl21
         '
-        Me.LabelControl21.Location = New System.Drawing.Point(16, 67)
+        Me.LabelControl21.Location = New System.Drawing.Point(16, 93)
         Me.LabelControl21.Name = "LabelControl21"
         Me.LabelControl21.Size = New System.Drawing.Size(31, 13)
         Me.LabelControl21.TabIndex = 168
@@ -405,7 +410,7 @@ Partial Class FormSalesBranchDet
         'DECreatedDate
         '
         Me.DECreatedDate.EditValue = Nothing
-        Me.DECreatedDate.Location = New System.Drawing.Point(101, 38)
+        Me.DECreatedDate.Location = New System.Drawing.Point(101, 64)
         Me.DECreatedDate.Name = "DECreatedDate"
         Me.DECreatedDate.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.DECreatedDate.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
@@ -429,7 +434,7 @@ Partial Class FormSalesBranchDet
         'LabelControl7
         '
         Me.LabelControl7.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl7.Location = New System.Drawing.Point(16, 41)
+        Me.LabelControl7.Location = New System.Drawing.Point(16, 67)
         Me.LabelControl7.Name = "LabelControl7"
         Me.LabelControl7.Size = New System.Drawing.Size(65, 13)
         Me.LabelControl7.TabIndex = 163
@@ -447,7 +452,7 @@ Partial Class FormSalesBranchDet
         'LEReportStatus
         '
         Me.LEReportStatus.Enabled = False
-        Me.LEReportStatus.Location = New System.Drawing.Point(101, 64)
+        Me.LEReportStatus.Location = New System.Drawing.Point(101, 90)
         Me.LEReportStatus.Name = "LEReportStatus"
         Me.LEReportStatus.Properties.Appearance.Options.UseTextOptions = True
         Me.LEReportStatus.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near
@@ -468,7 +473,7 @@ Partial Class FormSalesBranchDet
         Me.PanelControl3.Dock = System.Windows.Forms.DockStyle.Left
         Me.PanelControl3.Location = New System.Drawing.Point(2, 2)
         Me.PanelControl3.Name = "PanelControl3"
-        Me.PanelControl3.Size = New System.Drawing.Size(375, 103)
+        Me.PanelControl3.Size = New System.Drawing.Size(375, 125)
         Me.PanelControl3.TabIndex = 165
         '
         'SLEUnit
@@ -559,7 +564,7 @@ Partial Class FormSalesBranchDet
         Me.GroupControlNormalAccount.Controls.Add(Me.TxtProsPPNNormal)
         Me.GroupControlNormalAccount.Controls.Add(Me.LabelControl9)
         Me.GroupControlNormalAccount.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.GroupControlNormalAccount.Location = New System.Drawing.Point(0, 272)
+        Me.GroupControlNormalAccount.Location = New System.Drawing.Point(0, 250)
         Me.GroupControlNormalAccount.Name = "GroupControlNormalAccount"
         Me.GroupControlNormalAccount.Size = New System.Drawing.Size(980, 151)
         Me.GroupControlNormalAccount.TabIndex = 8909
@@ -877,7 +882,7 @@ Partial Class FormSalesBranchDet
         Me.GroupControlNote.Controls.Add(Me.LabelControl6)
         Me.GroupControlNote.Controls.Add(Me.MENote)
         Me.GroupControlNote.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.GroupControlNote.Location = New System.Drawing.Point(0, 576)
+        Me.GroupControlNote.Location = New System.Drawing.Point(0, 554)
         Me.GroupControlNote.Name = "GroupControlNote"
         Me.GroupControlNote.Size = New System.Drawing.Size(980, 105)
         Me.GroupControlNote.TabIndex = 8910
@@ -906,7 +911,7 @@ Partial Class FormSalesBranchDet
         Me.GroupControlSaleAccount.Controls.Add(Me.TxtProsPPNSale)
         Me.GroupControlSaleAccount.Controls.Add(Me.LabelControl23)
         Me.GroupControlSaleAccount.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.GroupControlSaleAccount.Location = New System.Drawing.Point(0, 423)
+        Me.GroupControlSaleAccount.Location = New System.Drawing.Point(0, 401)
         Me.GroupControlSaleAccount.Name = "GroupControlSaleAccount"
         Me.GroupControlSaleAccount.Size = New System.Drawing.Size(980, 153)
         Me.GroupControlSaleAccount.TabIndex = 8911
@@ -1224,7 +1229,7 @@ Partial Class FormSalesBranchDet
         Me.GroupControl4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupControl4.Location = New System.Drawing.Point(0, 0)
         Me.GroupControl4.Name = "GroupControl4"
-        Me.GroupControl4.Size = New System.Drawing.Size(980, 272)
+        Me.GroupControl4.Size = New System.Drawing.Size(980, 250)
         Me.GroupControl4.TabIndex = 8912
         Me.GroupControl4.Text = "Detail Payments"
         '
@@ -1234,7 +1239,7 @@ Partial Class FormSalesBranchDet
         Me.GCData.Location = New System.Drawing.Point(20, 44)
         Me.GCData.MainView = Me.GVData
         Me.GCData.Name = "GCData"
-        Me.GCData.Size = New System.Drawing.Size(958, 226)
+        Me.GCData.Size = New System.Drawing.Size(958, 204)
         Me.GCData.TabIndex = 0
         Me.GCData.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVData})
         '
@@ -1368,6 +1373,21 @@ Partial Class FormSalesBranchDet
         Me.GridColumnvendor.FieldName = "vendor"
         Me.GridColumnvendor.Name = "GridColumnvendor"
         '
+        'GridColumnid_sales_branch_ref_det
+        '
+        Me.GridColumnid_sales_branch_ref_det.Caption = "id_sales_branch_ref_det"
+        Me.GridColumnid_sales_branch_ref_det.FieldName = "id_sales_branch_ref_det"
+        Me.GridColumnid_sales_branch_ref_det.Name = "GridColumnid_sales_branch_ref_det"
+        '
+        'GridColumnamount_limit
+        '
+        Me.GridColumnamount_limit.Caption = "Limit Amount"
+        Me.GridColumnamount_limit.DisplayFormat.FormatString = "N2"
+        Me.GridColumnamount_limit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnamount_limit.FieldName = "amount_limit"
+        Me.GridColumnamount_limit.Name = "GridColumnamount_limit"
+        Me.GridColumnamount_limit.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount_limit", "{0:N2}")})
+        '
         'PanelControlNav
         '
         Me.PanelControlNav.Controls.Add(Me.BtnDelete)
@@ -1401,10 +1421,10 @@ Partial Class FormSalesBranchDet
         'XTCData
         '
         Me.XTCData.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.XTCData.Location = New System.Drawing.Point(0, 107)
+        Me.XTCData.Location = New System.Drawing.Point(0, 129)
         Me.XTCData.Name = "XTCData"
         Me.XTCData.SelectedTabPage = Me.XTPDetail
-        Me.XTCData.Size = New System.Drawing.Size(986, 709)
+        Me.XTCData.Size = New System.Drawing.Size(986, 687)
         Me.XTCData.TabIndex = 8913
         Me.XTCData.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPDetail, Me.XTPDraftJournal})
         '
@@ -1415,7 +1435,7 @@ Partial Class FormSalesBranchDet
         Me.XTPDetail.Controls.Add(Me.GroupControlSaleAccount)
         Me.XTPDetail.Controls.Add(Me.GroupControlNote)
         Me.XTPDetail.Name = "XTPDetail"
-        Me.XTPDetail.Size = New System.Drawing.Size(980, 681)
+        Me.XTPDetail.Size = New System.Drawing.Size(980, 659)
         Me.XTPDetail.Text = "Detail Transaction"
         '
         'XTPDraftJournal
@@ -1519,20 +1539,25 @@ Partial Class FormSalesBranchDet
         Me.GridColumncc.Visible = True
         Me.GridColumncc.VisibleIndex = 3
         '
-        'GridColumnid_sales_branch_ref_det
+        'TxtNumberRef
         '
-        Me.GridColumnid_sales_branch_ref_det.Caption = "id_sales_branch_ref_det"
-        Me.GridColumnid_sales_branch_ref_det.FieldName = "id_sales_branch_ref_det"
-        Me.GridColumnid_sales_branch_ref_det.Name = "GridColumnid_sales_branch_ref_det"
+        Me.TxtNumberRef.EditValue = ""
+        Me.TxtNumberRef.Location = New System.Drawing.Point(101, 38)
+        Me.TxtNumberRef.Name = "TxtNumberRef"
+        Me.TxtNumberRef.Properties.EditValueChangedDelay = 1
+        Me.TxtNumberRef.Properties.ReadOnly = True
+        Me.TxtNumberRef.Size = New System.Drawing.Size(189, 20)
+        Me.TxtNumberRef.TabIndex = 169
+        Me.TxtNumberRef.TabStop = False
         '
-        'GridColumnamount_limit
+        'LabelControl24
         '
-        Me.GridColumnamount_limit.Caption = "Limit Amount"
-        Me.GridColumnamount_limit.DisplayFormat.FormatString = "N2"
-        Me.GridColumnamount_limit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumnamount_limit.FieldName = "amount_limit"
-        Me.GridColumnamount_limit.Name = "GridColumnamount_limit"
-        Me.GridColumnamount_limit.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount_limit", "{0:N2}")})
+        Me.LabelControl24.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl24.Location = New System.Drawing.Point(16, 41)
+        Me.LabelControl24.Name = "LabelControl24"
+        Me.LabelControl24.Size = New System.Drawing.Size(50, 13)
+        Me.LabelControl24.TabIndex = 170
+        Me.LabelControl24.Text = "Reference"
         '
         'FormSalesBranchDet
         '
@@ -1623,6 +1648,7 @@ Partial Class FormSalesBranchDet
         Me.XTPDraftJournal.ResumeLayout(False)
         CType(Me.GCDraft, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVDraft, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtNumberRef.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1763,4 +1789,6 @@ Partial Class FormSalesBranchDet
     Friend WithEvents GridColumnvendor As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnid_sales_branch_ref_det As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnamount_limit As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LabelControl24 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents TxtNumberRef As DevExpress.XtraEditors.TextEdit
 End Class

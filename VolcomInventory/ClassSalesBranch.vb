@@ -12,7 +12,7 @@
             condition = ""
         End If
 
-        Dim query As String = "SELECT b.id_sales_branch, b.id_sales_branch_ref, b.number, b.id_coa_tag, ct.tag_description AS `unit`, b.created_date, b.transaction_date, 
+        Dim query As String = "SELECT b.id_sales_branch, b.id_sales_branch_ref, b.number, ref.number AS `ref_number`, b.id_coa_tag, ct.tag_description AS `unit`, b.created_date, b.transaction_date, 
         b.id_report_status, stt.report_status, b.report_mark_type, b.id_memo_type, b.note, b.`value`,
         store_normal.id_comp AS `id_store_normal`,b.pros_normal, b.pros_normal_comp,b.rev_normal,
         b.rev_normal_ppn_pros, b.rev_normal_ppn, b.rev_normal_ppn_acc AS `id_coa_ppn_normal`, coa_ppn_normal.acc_name AS `coa_ppn_normal`, coa_ppn_normal.acc_description AS `coa_ppn_normal_desc`, b.rev_normal_ppn_note,
@@ -33,6 +33,7 @@
         INNER JOIN tb_a_acc coa_pend_sale ON coa_pend_sale.id_acc = b.rev_sale_net_acc
         INNER JOIN tb_a_acc coa_hd_sale ON coa_hd_sale.id_acc = b.comp_rev_sale_acc
         INNER JOIN tb_m_comp store_sale ON store_sale.id_comp = b.id_comp_sale
+        LEFT JOIN tb_sales_branch ref ON ref.id_sales_branch = b.id_sales_branch_ref
         WHERE b.id_sales_branch>0 "
         query += condition + " "
         query += "ORDER BY b.id_sales_branch " + order_type

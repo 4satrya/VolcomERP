@@ -45,16 +45,19 @@ Partial Class FormSalesBranch
         Me.XTCData = New DevExpress.XtraTab.XtraTabControl()
         Me.XTPCreatedList = New DevExpress.XtraTab.XtraTabPage()
         Me.XTPCN = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCSales = New DevExpress.XtraGrid.GridControl()
+        Me.GVSales = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumnid_sales_branch_cn = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnnumber_cn = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumntransaction_date_cn = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.BCreateCN = New DevExpress.XtraEditors.SimpleButton()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.BtnViewSalesList = New DevExpress.XtraEditors.SimpleButton()
         Me.SLEUnit = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncoa_tag = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
-        Me.BtnViewSalesList = New DevExpress.XtraEditors.SimpleButton()
-        Me.BCreateCN = New DevExpress.XtraEditors.SimpleButton()
-        Me.GCSales = New DevExpress.XtraGrid.GridControl()
-        Me.GVSales = New DevExpress.XtraGrid.Views.Grid.GridView()
         CType(Me.GCData, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVData, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -69,12 +72,12 @@ Partial Class FormSalesBranch
         Me.XTCData.SuspendLayout()
         Me.XTPCreatedList.SuspendLayout()
         Me.XTPCN.SuspendLayout()
+        CType(Me.GCSales, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVSales, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.SLEUnit.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GCSales, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GVSales, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GCData
@@ -315,6 +318,73 @@ Partial Class FormSalesBranch
         Me.XTPCN.Size = New System.Drawing.Size(782, 468)
         Me.XTPCN.Text = "Sales List"
         '
+        'GCSales
+        '
+        Me.GCSales.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCSales.Location = New System.Drawing.Point(0, 48)
+        Me.GCSales.MainView = Me.GVSales
+        Me.GCSales.Name = "GCSales"
+        Me.GCSales.Size = New System.Drawing.Size(782, 388)
+        Me.GCSales.TabIndex = 20
+        Me.GCSales.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVSales})
+        '
+        'GVSales
+        '
+        Me.GVSales.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnid_sales_branch_cn, Me.GridColumnnumber_cn, Me.GridColumntransaction_date_cn})
+        Me.GVSales.GridControl = Me.GCSales
+        Me.GVSales.Name = "GVSales"
+        Me.GVSales.OptionsBehavior.AutoExpandAllGroups = True
+        Me.GVSales.OptionsBehavior.Editable = False
+        Me.GVSales.OptionsFind.AlwaysVisible = True
+        Me.GVSales.OptionsView.ColumnAutoWidth = False
+        Me.GVSales.OptionsView.ShowFooter = True
+        Me.GVSales.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumnid_sales_branch_cn
+        '
+        Me.GridColumnid_sales_branch_cn.Caption = "id_sales_branch"
+        Me.GridColumnid_sales_branch_cn.FieldName = "id_sales_branch"
+        Me.GridColumnid_sales_branch_cn.Name = "GridColumnid_sales_branch_cn"
+        '
+        'GridColumnnumber_cn
+        '
+        Me.GridColumnnumber_cn.Caption = "Number"
+        Me.GridColumnnumber_cn.FieldName = "number"
+        Me.GridColumnnumber_cn.Name = "GridColumnnumber_cn"
+        Me.GridColumnnumber_cn.Visible = True
+        Me.GridColumnnumber_cn.VisibleIndex = 0
+        '
+        'GridColumntransaction_date_cn
+        '
+        Me.GridColumntransaction_date_cn.Caption = "Sales Date"
+        Me.GridColumntransaction_date_cn.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.GridColumntransaction_date_cn.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumntransaction_date_cn.FieldName = "transaction_date"
+        Me.GridColumntransaction_date_cn.Name = "GridColumntransaction_date_cn"
+        Me.GridColumntransaction_date_cn.Visible = True
+        Me.GridColumntransaction_date_cn.VisibleIndex = 1
+        Me.GridColumntransaction_date_cn.Width = 172
+        '
+        'BCreateCN
+        '
+        Me.BCreateCN.Appearance.BackColor = System.Drawing.Color.CornflowerBlue
+        Me.BCreateCN.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.BCreateCN.Appearance.ForeColor = System.Drawing.Color.White
+        Me.BCreateCN.Appearance.Options.UseBackColor = True
+        Me.BCreateCN.Appearance.Options.UseFont = True
+        Me.BCreateCN.Appearance.Options.UseForeColor = True
+        Me.BCreateCN.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.BCreateCN.Location = New System.Drawing.Point(0, 436)
+        Me.BCreateCN.LookAndFeel.SkinMaskColor = System.Drawing.Color.Blue
+        Me.BCreateCN.LookAndFeel.SkinMaskColor2 = System.Drawing.Color.Blue
+        Me.BCreateCN.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.UltraFlat
+        Me.BCreateCN.LookAndFeel.UseDefaultLookAndFeel = False
+        Me.BCreateCN.Name = "BCreateCN"
+        Me.BCreateCN.Size = New System.Drawing.Size(782, 32)
+        Me.BCreateCN.TabIndex = 19
+        Me.BCreateCN.Text = "Create Credit Note"
+        Me.BCreateCN.Visible = False
+        '
         'PanelControl1
         '
         Me.PanelControl1.Controls.Add(Me.BtnViewSalesList)
@@ -325,6 +395,14 @@ Partial Class FormSalesBranch
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(782, 48)
         Me.PanelControl1.TabIndex = 0
+        '
+        'BtnViewSalesList
+        '
+        Me.BtnViewSalesList.Location = New System.Drawing.Point(311, 14)
+        Me.BtnViewSalesList.Name = "BtnViewSalesList"
+        Me.BtnViewSalesList.Size = New System.Drawing.Size(60, 19)
+        Me.BtnViewSalesList.TabIndex = 8917
+        Me.BtnViewSalesList.Text = "view"
         '
         'SLEUnit
         '
@@ -365,55 +443,6 @@ Partial Class FormSalesBranch
         Me.LabelControl2.TabIndex = 8915
         Me.LabelControl2.Text = "Unit"
         '
-        'BtnViewSalesList
-        '
-        Me.BtnViewSalesList.Location = New System.Drawing.Point(311, 14)
-        Me.BtnViewSalesList.Name = "BtnViewSalesList"
-        Me.BtnViewSalesList.Size = New System.Drawing.Size(60, 19)
-        Me.BtnViewSalesList.TabIndex = 8917
-        Me.BtnViewSalesList.Text = "view"
-        '
-        'BCreateCN
-        '
-        Me.BCreateCN.Appearance.BackColor = System.Drawing.Color.CornflowerBlue
-        Me.BCreateCN.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
-        Me.BCreateCN.Appearance.ForeColor = System.Drawing.Color.White
-        Me.BCreateCN.Appearance.Options.UseBackColor = True
-        Me.BCreateCN.Appearance.Options.UseFont = True
-        Me.BCreateCN.Appearance.Options.UseForeColor = True
-        Me.BCreateCN.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.BCreateCN.Location = New System.Drawing.Point(0, 436)
-        Me.BCreateCN.LookAndFeel.SkinMaskColor = System.Drawing.Color.Blue
-        Me.BCreateCN.LookAndFeel.SkinMaskColor2 = System.Drawing.Color.Blue
-        Me.BCreateCN.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.UltraFlat
-        Me.BCreateCN.LookAndFeel.UseDefaultLookAndFeel = False
-        Me.BCreateCN.Name = "BCreateCN"
-        Me.BCreateCN.Size = New System.Drawing.Size(782, 32)
-        Me.BCreateCN.TabIndex = 19
-        Me.BCreateCN.Text = "Create Credit Note"
-        Me.BCreateCN.Visible = False
-        '
-        'GCSales
-        '
-        Me.GCSales.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCSales.Location = New System.Drawing.Point(0, 48)
-        Me.GCSales.MainView = Me.GVSales
-        Me.GCSales.Name = "GCSales"
-        Me.GCSales.Size = New System.Drawing.Size(782, 388)
-        Me.GCSales.TabIndex = 20
-        Me.GCSales.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVSales})
-        '
-        'GVSales
-        '
-        Me.GVSales.GridControl = Me.GCSales
-        Me.GVSales.Name = "GVSales"
-        Me.GVSales.OptionsBehavior.AutoExpandAllGroups = True
-        Me.GVSales.OptionsBehavior.Editable = False
-        Me.GVSales.OptionsFind.AlwaysVisible = True
-        Me.GVSales.OptionsView.ColumnAutoWidth = False
-        Me.GVSales.OptionsView.ShowFooter = True
-        Me.GVSales.OptionsView.ShowGroupPanel = False
-        '
         'FormSalesBranch
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -439,13 +468,13 @@ Partial Class FormSalesBranch
         Me.XTCData.ResumeLayout(False)
         Me.XTPCreatedList.ResumeLayout(False)
         Me.XTPCN.ResumeLayout(False)
+        CType(Me.GCSales, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVSales, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         Me.PanelControl1.PerformLayout()
         CType(Me.SLEUnit.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GCSales, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GVSales, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -486,4 +515,7 @@ Partial Class FormSalesBranch
     Friend WithEvents BCreateCN As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents GCSales As DevExpress.XtraGrid.GridControl
     Friend WithEvents GVSales As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumnid_sales_branch_cn As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnnumber_cn As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumntransaction_date_cn As DevExpress.XtraGrid.Columns.GridColumn
 End Class

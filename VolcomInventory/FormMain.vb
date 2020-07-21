@@ -1812,8 +1812,10 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             FormMasterStoreDet.id_store = "-1"
             FormMasterStoreDet.ShowDialog()
         ElseIf formName = "FormSalesBranch" Then
-            FormSalesBranchDet.action = "ins"
-            FormSalesBranchDet.ShowDialog()
+            If FormSalesBranch.rmt = "254" Then
+                FormSalesBranchDet.action = "ins"
+                FormSalesBranchDet.ShowDialog()
+            End If
         Else
             RPSubMenu.Visible = False
         End If
@@ -15084,6 +15086,16 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
     End Sub
 
     Private Sub NBCNSalesBranch_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBCNSalesBranch.LinkClicked
-
+        Cursor = Cursors.WaitCursor
+        Try
+            FormSalesBranch.MdiParent = Me
+            FormSalesBranch.rmt = "256"
+            FormSalesBranch.Show()
+            FormSalesBranch.WindowState = FormWindowState.Maximized
+            FormSalesBranch.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
     End Sub
 End Class

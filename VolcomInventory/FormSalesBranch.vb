@@ -10,7 +10,7 @@
         DEUntilList.EditValue = dt_now.Rows(0)("tgl")
 
         viewCoaTag()
-        If XTCData.SelectedTabPageIndex = "256" Then
+        If rmt = "256" Then
             XTPCN.PageVisible = True
         End If
     End Sub
@@ -34,7 +34,7 @@
             date_until_selected = DateTime.Parse(DEUntilList.EditValue.ToString).ToString("yyyy-MM-dd")
         Catch ex As Exception
         End Try
-        Dim where_string As String = "AND (DATE(created_date)>='" + date_from_selected + "' AND DATE(created_date)<='" + date_until_selected + "') "
+        Dim where_string As String = "AND (DATE(b.created_date)>='" + date_from_selected + "' AND DATE(b.created_date)<='" + date_until_selected + "') "
 
         'rmt
         where_string += "AND b.report_mark_type='" + rmt + "' "
@@ -148,6 +148,15 @@
         If GVSales.RowCount > 0 Then
             BCreateCN.Visible = True
         End If
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BCreateCN_Click(sender As Object, e As EventArgs) Handles BCreateCN.Click
+        Cursor = Cursors.WaitCursor
+        FormSalesBranchDet.id_sales_branch_ref = GVSales.GetFocusedRowCellValue("id_sales_branch").ToString
+        FormSalesBranchDet.rmt = "256"
+        FormSalesBranchDet.action = "ins"
+        FormSalesBranchDet.ShowDialog()
         Cursor = Cursors.Default
     End Sub
 End Class

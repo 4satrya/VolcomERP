@@ -207,6 +207,37 @@ Public Class FormSalesBranchDet
         Cursor = Cursors.Default
     End Sub
 
+    Sub viewDetailCN()
+        Cursor = Cursors.WaitCursor
+        Dim query As String = "SELECT 0 AS `id_sales_branch_det`, d.id_sales_branch_det AS `id_sales_branch_ref_det`, 0 AS `id_sales_branch`,
+        d.id_acc, coa.acc_name AS `coa_account`, coa.acc_description AS `coa_description`,
+        IF(d.id_dc=1,2,IF(d.id_dc=2,1,0)) AS `id_dc`, IF(d.id_dc=1,'K',IF(d.id_dc=2,'D','-')) AS `dc_code`,
+        d.id_comp, c.comp_number, d.note, d.value-IFNULL(cn.amount_cn,0.00)-IFNULL(rec.value,0.00) AS `value`, 
+        0 AS `id_report`, d.`number`, 0 AS `report_mark_type`, d.vendor
+        FROM tb_sales_branch_det d
+        LEFT JOIN (
+           SELECT d.id_sales_branch_ref_det, SUM(d.value) AS `amount_cn`
+           FROM tb_sales_branch_det d
+           INNER JOIN tb_sales_branch m ON m.id_sales_branch = d.id_sales_branch
+           WHERE m.id_report_status!=5 AND m.id_sales_branch_ref=" + id_sales_branch_ref + "
+           GROUP BY d.id_sales_branch_ref_det
+        ) cn ON cn.id_sales_branch_ref_det = d.id_sales_branch_det
+        LEFT JOIN (
+	        SELECT d.id_report_det, SUM(d.value) AS `value`
+	        FROM tb_rec_payment_det d
+	        INNER JOIN tb_rec_payment h ON h.id_rec_payment = d.id_rec_payment
+	        WHERE h.id_report_status!=5 AND d.report_mark_type=254 AND d.id_report=" + id_sales_branch_ref + "
+	        GROUP BY d.id_report_det
+        ) rec ON rec.id_report_det = d.id_sales_branch_det
+        INNER JOIN tb_a_acc coa ON coa.id_acc = d.id_acc
+        INNER JOIN tb_m_comp c ON c.id_comp = d.id_comp
+        WHERE d.id_sales_branch=" + id_sales_branch_ref + " AND d.is_close=2 "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCData.DataSource = data
+        GVData.BestFitColumns()
+        Cursor = Cursors.Default
+    End Sub
+
     Sub allowStatus()
         BMark.Enabled = True
         BtnSave.Enabled = False
@@ -575,7 +606,7 @@ Public Class FormSalesBranchDet
         ElseIf rmt = "256" Then
             'cn cek limit qty
             Cursor = Cursors.WaitCursor
-            Dim ql As String = "SELECT d.id_sales_branch_det, d.value-IFNULL(cn.amount_cn,0.00) AS `amount_limit`
+            Dim ql As String = "SELECT d.id_sales_branch_det, d.value-IFNULL(cn.amount_cn,0.00)-IFNULL(rec.value,0.00) AS `amount_limit`
             FROM tb_sales_branch_det d
             LEFT JOIN (
 	            SELECT d.id_sales_branch_ref_det, SUM(d.value) AS `amount_cn`
@@ -584,6 +615,13 @@ Public Class FormSalesBranchDet
 	            WHERE m.id_report_status!=5 AND m.id_sales_branch_ref=" + id_sales_branch_ref + "
 	            GROUP BY d.id_sales_branch_ref_det
             ) cn ON cn.id_sales_branch_ref_det = d.id_sales_branch_det
+            LEFT JOIN (
+	            SELECT d.id_report_det, SUM(d.value) AS `value`
+	            FROM tb_rec_payment_det d
+	            INNER JOIN tb_rec_payment h ON h.id_rec_payment = d.id_rec_payment
+	            WHERE h.id_report_status!=5 AND d.report_mark_type=254 AND d.id_report=" + id_sales_branch_ref + "
+	            GROUP BY d.id_report_det
+            ) rec ON rec.id_report_det = d.id_sales_branch_det
             WHERE d.id_sales_branch=" + id_sales_branch_ref + " AND d.is_close=2 "
             Dim dl As DataTable = execute_query(ql, -1, True, "", "", "", "")
             For d As Integer = 0 To GVData.RowCount - 1

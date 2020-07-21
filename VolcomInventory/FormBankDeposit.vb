@@ -271,7 +271,7 @@ WHERE 1=1 " & where_string & " ORDER BY rec_py.id_rec_payment DESC"
 
         Dim query As String = "SELECT 'no' AS `is_select`,d.id_sales_branch_det AS `id_report_det`,d.id_sales_branch AS `id_report`,rmt.report_mark_type, rmt.report_mark_type_name, m.number AS `report_number`,
         d.id_acc, coa.acc_name , coa.acc_description, d.id_comp, comp.comp_number, d.vendor, 2 AS `id_dc`, 'K' AS `dc_code`, d.note,
-        d.value AS `amount`, IFNULL(pyd.total_rec,0.00) AS `total_rec`, (d.value - IFNULL(pyd.total_rec,0)) AS `total_due`, IFNULL(pyd.on_process,0) AS `total_pending`
+        d.value AS `amount`, IFNULL(pyd.total_rec,0.00) AS `total_rec`, IFNULL(cn.amount_cn,0.00) AS `total_cn`, (d.value - IFNULL(pyd.total_rec,0) - IFNULL(cn.amount_cn,0.00)) AS `total_due`, IFNULL(pyd.on_process,0) AS `total_pending`
         FROM tb_sales_branch_det d
         INNER JOIN tb_sales_branch m ON m.id_sales_branch = d.id_sales_branch
         INNER JOIN tb_a_acc coa ON coa.id_acc = d.id_acc
@@ -284,6 +284,13 @@ WHERE 1=1 " & where_string & " ORDER BY rec_py.id_rec_payment DESC"
 	        WHERE r.id_report_status!=5 AND rd.report_mark_type=254
 	        GROUP BY rd.id_report_det
         ) pyd ON pyd.id_report_det = d.id_sales_branch_det
+        LEFT JOIN (
+           SELECT d.id_sales_branch_ref_det, SUM(d.value) AS `amount_cn`
+           FROM tb_sales_branch_det d
+           INNER JOIN tb_sales_branch m ON m.id_sales_branch = d.id_sales_branch
+           WHERE m.id_report_status!=5 
+           GROUP BY d.id_sales_branch_ref_det
+        ) cn ON cn.id_sales_branch_ref_det = d.id_sales_branch_det
         WHERE m.id_report_status=6 AND d.id_dc=1 AND d.is_close='" + SLEStatusSales.EditValue.ToString + "' AND m.id_coa_tag='" + SLEUnit.EditValue.ToString + "' "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCSales.DataSource = data

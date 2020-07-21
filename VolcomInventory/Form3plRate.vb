@@ -73,4 +73,11 @@ WHERE 3pl.id_del_type = '" + SLEDelType.EditValue.ToString + "' AND 3pl.is_activ
             Form3plRateDet.ShowDialog()
         End If
     End Sub
+
+    Private Sub BImport_Click(sender As Object, e As EventArgs) Handles BImport.Click
+        Cursor = Cursors.WaitCursor
+        FormImportExcel.id_pop_up = "52"
+        FormImportExcel.ShowDialog()
+        Cursor = Cursors.Default
+    End Sub
 End Class

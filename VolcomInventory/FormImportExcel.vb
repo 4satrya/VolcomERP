@@ -121,6 +121,8 @@ Public Class FormImportExcel
             MyCommand = New OleDbDataAdapter("select [awb] AS awb_no,[inv no] as inv_no,[berat kargo] as a_weight from [" & CBWorksheetName.SelectedItem.ToString & "] where not ([awb]='') ", oledbconn)
         ElseIf id_pop_up = "50" Then
             MyCommand = New OleDbDataAdapter("select * from [" & CBWorksheetName.SelectedItem.ToString & "] where not ([Order]='') ", oledbconn)
+        ElseIf id_pop_up = "52" Then
+            MyCommand = New OleDbDataAdapter("select city,`sub district`,`minimum weight`,`lead time`,`rate` from [" & CBWorksheetName.SelectedItem.ToString & "] GROUP BY `city`,`sub district` ", oledbconn)
         Else
             MyCommand = New OleDbDataAdapter("select * from [" & CBWorksheetName.SelectedItem.ToString & "]", oledbconn)
         End If
@@ -3295,6 +3297,36 @@ Public Class FormImportExcel
             'display format
             GVData.Columns("design_price").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
             GVData.Columns("design_price").DisplayFormat.FormatString = "N0"
+        ElseIf id_pop_up = "52" Then 'import rate
+            Dim queryx As String = "SELECT sd.`id_sub_district`,ct.`city`,sd.`sub_district`
+FROM tb_m_sub_district sd 
+INNER JOIN tb_m_city ct ON ct.`id_city`=sd.`id_city`"
+            Dim dt As DataTable = execute_query(queryx, -1, True, "", "", "", "")
+            Dim tb1 = data_temp.AsEnumerable()
+            Dim tb2 = dt.AsEnumerable()
+
+            Dim query = From table1 In tb1
+                        Group Join table_tmp In tb2 On table1("city").ToString Equals table_tmp("city").ToString And table1("sub_district").ToString Equals table_tmp("sub district").ToString
+                            Into Group
+                        From y1 In Group.DefaultIfEmpty()
+                        Select New With
+                            {
+                                .id_sub_district = FormWHAwbillTrackCollection.SLECargo.Text,
+                                .min_weight = table1("minimum weight"),
+                                .city = If(y1 Is Nothing, "", y1("city").ToString),
+                                .sub_district = If(y1 Is Nothing, "", y1("sub_district").ToString),
+                                .lead_time = table1("lead time"),
+                                .rate = table1("rate"),
+                                .status = If(y1 Is Nothing, "Sub District not found", "OK")
+                            }
+
+            GCData.DataSource = Nothing
+            GCData.DataSource = query.ToList()
+            GCData.RefreshDataSource()
+            GVData.PopulateColumns()
+
+            'Customize column
+            GVData.Columns("id_sub_district").Visible = False
         End If
         data_temp.Dispose()
         oledbconn.Close()

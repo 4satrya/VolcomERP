@@ -5920,9 +5920,12 @@ WHERE copd.id_design_cop_propose='" & id_report & "';"
             End If
 
             'refresh view
-            FormItemExpenseDet.actionLoad()
-            FormItemExpense.viewData()
-            FormItemExpense.GVData.FocusedRowHandle = find_row(FormItemExpense.GVData, "id_item_expense", id_report)
+            Try
+                FormItemExpenseDet.actionLoad()
+                FormItemExpense.viewData()
+                FormItemExpense.GVData.FocusedRowHandle = find_row(FormItemExpense.GVData, "id_item_expense", id_report)
+            Catch ex As Exception
+            End Try
         ElseIf report_mark_type = "159" Then
             'Payment
             'auto completed on summary

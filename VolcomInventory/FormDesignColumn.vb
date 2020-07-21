@@ -23,16 +23,19 @@
             ORDER BY id_code_detail ASC
         ", -1, True, "", "", "", "")
 
-        'set code detail
-        column_type_front = data_division.Rows(0)("id_code_detail").ToString
-        column_type_end = data_subcategory.Rows(0)("id_code_detail").ToString
-
         'combine
         Dim data As DataTable = New DataTable
 
         data.Columns.Add("code", GetType(String))
         data.Columns.Add("id_code_detail_front", GetType(Integer))
         data.Columns.Add("id_code_detail_end", GetType(Integer))
+
+        'add all
+        data.Rows.Add(
+            "ALL",
+            Nothing,
+            Nothing
+        )
 
         For i = 0 To data_division.Rows.Count - 1
             For j = 0 To data_subcategory.Rows.Count - 1
@@ -77,7 +80,7 @@
             SELECT tb_design_column_value.id_design_column, tb_design_column.column_name, tb_design_column_value.id_design_column_value, tb_design_column_value.value
             FROM tb_design_column_value
             LEFT JOIN tb_design_column ON tb_design_column_value.id_design_column = tb_design_column.id_design_column
-            WHERE tb_design_column_value.column_type_front = '" + column_type_front + "' AND tb_design_column_value.column_type_end = '" + column_type_end + "'
+            WHERE tb_design_column_value.column_type_front " + If(column_type_front = "", "IS NULL", "= " + column_type_front) + " AND tb_design_column_value.column_type_end " + If(column_type_end = "", "IS NULL", "= " + column_type_end) + "
         ", -1, True, "", "", "", "")
 
         If data_row.Rows.Count = 0 Then
@@ -211,5 +214,15 @@
             FormDesignColumnDet.ShowDialog()
         Catch ex As Exception
         End Try
+    End Sub
+
+    Private Sub FormDesignColumn_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
+        FormMain.show_rb(Name)
+        checkFormAccess(Name)
+        button_main("0", "0", "0")
+    End Sub
+
+    Private Sub FormDesignColumn_Deactivate(sender As Object, e As EventArgs) Handles MyBase.Deactivate
+        FormMain.hide_rb()
     End Sub
 End Class

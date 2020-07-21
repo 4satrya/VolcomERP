@@ -105,7 +105,7 @@
 
     Private Sub BtnEditCode_ButtonClick(ByVal sender As System.Object, ByVal e As DevExpress.XtraEditors.Controls.ButtonPressedEventArgs) Handles BtnEditCode.ButtonClick
         Cursor = Cursors.WaitCursor
-        FormPopUpProductUnique.ShowDialog()
+        'FormPopUpProductUnique.ShowDialog()
         Cursor = Cursors.Default
     End Sub
 

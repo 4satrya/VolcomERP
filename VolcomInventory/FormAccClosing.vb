@@ -131,14 +131,14 @@ WHERE r.pl_sales_order_del_date<='" & Date.Parse(DEUntil.EditValue.ToString).ToS
 
         'det journal bulanan
         Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number,id_comp)
-                            SELECT " + id_acc_trans + " AS `id_trans`,coal.`id_acc`,1 AS qty,0 AS debit,SUM((IF(acc.id_dc=1,1,-1)*trxd.debit)+(IF(acc.id_dc=1,-1,1)*trxd.credit)) AS credit,'' AS note,0 AS rmt,0 AS id_report,'' AS number, trxd.id_comp
+        SELECT " + id_acc_trans + " AS `id_trans`,coal.`id_acc`,1 AS qty,IF(SUM(((IF(acc.id_dc=1,1,-1)*trxd.debit)+(IF(acc.id_dc=1,-1,1)*trxd.credit))*(IF(acc.id_dc=1,1,-1)))<0,0,SUM(((IF(acc.id_dc=1,1,-1)*trxd.debit)+(IF(acc.id_dc=1,-1,1)*trxd.credit))*(IF(acc.id_dc=1,1,-1)))) AS debit,IF(SUM(((IF(acc.id_dc=1,1,-1)*trxd.debit)+(IF(acc.id_dc=1,-1,1)*trxd.credit))*(IF(acc.id_dc=1,1,-1)))<0,SUM(((IF(acc.id_dc=1,1,-1)*trxd.debit)+(IF(acc.id_dc=1,-1,1)*trxd.credit))*(IF(acc.id_dc=1,1,-1)))*-1,0) AS credit,'' AS note,0 AS rmt,0 AS id_report,'' AS number, trxd.id_comp
         FROM tb_a_acc_trans_det trxd
         INNER JOIN tb_a_acc_trans trx ON trx.`id_acc_trans`=trxd.`id_acc_trans`
         INNER JOIN tb_a_acc acc ON acc.id_acc=trxd.id_acc AND (LEFT(acc.acc_name,1)='3' OR LEFT(acc.acc_name,1)='4')
         INNER JOIN tb_lookup_coa_laba coal ON coal.id_month=MONTH('" & Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-01") & "')
         WHERE trx.`is_close`='2' AND trx.id_report_status!=5 AND DATE(trx.`date_reference`)<='" & Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd") & "' AND DATE(trx.`date_reference`)>='" & Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-01") & "' 
         GROUP BY trxd.id_comp
-        HAVING credit>0"
+        HAVING (credit+debit)>0"
         execute_non_query(qjd, True, "", "", "", "")
         'posting tahunan
         If month_str = "12" Then

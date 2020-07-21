@@ -118,14 +118,16 @@
                 If LEDK.EditValue.ToString = "2" Then
                     newRow("value") = TxtAmount.EditValue * -1
                     newRow("balance_due") = TxtAmount.EditValue * -1
+                    newRow("val_bef_kurs") = TEBeforeKurs.EditValue * -1
                 Else
                     newRow("value") = TxtAmount.EditValue
                     newRow("balance_due") = TxtAmount.EditValue
+                    newRow("val_bef_kurs") = TEBeforeKurs.EditValue
                 End If
                 newRow("kurs") = TEKurs.EditValue
                 newRow("id_currency") = LECurrency.EditValue
                 newRow("currency") = LECurrency.Text
-                newRow("val_bef_kurs") = TEBeforeKurs.EditValue
+
                 newRow("note") = addSlashes(TxtDescription.Text)
                 newRow("id_dc") = LEDK.EditValue.ToString
                 newRow("dc_code") = LEDK.Text

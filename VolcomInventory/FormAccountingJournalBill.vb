@@ -99,7 +99,7 @@
     End Sub
 
     Sub view_det()
-        Dim query As String = "SELECT a.id_acc_trans_det,a.id_acc,b.acc_name,b.acc_description,CAST(a.debit AS DECIMAL(13,2)) as debit,CAST(a.credit AS DECIMAL(13,2)) as credit,a.acc_trans_det_note as note,a.id_status_open,a.id_acc_src,IFNULL(a.id_comp, 0) AS id_comp,a.report_mark_type,a.id_report,a.report_number,a.id_report_ref,a.report_number_ref,a.report_mark_type_ref FROM tb_a_acc_trans_det a INNER JOIN tb_a_acc b ON a.id_acc=b.id_acc LEFT JOIN tb_a_acc_trans_det d ON a.id_acc_src=d.id_acc_trans_det WHERE a.id_acc_trans='" & id_trans & "'"
+        Dim query As String = "SELECT a.id_acc_trans_det,a.id_acc,b.acc_name,b.acc_description,a.debit,a.credit,a.acc_trans_det_note as note,a.id_status_open,a.id_acc_src,IFNULL(a.id_comp, 0) AS id_comp,a.report_mark_type,a.id_report,a.report_number,a.id_report_ref,a.report_number_ref,a.report_mark_type_ref FROM tb_a_acc_trans_det a INNER JOIN tb_a_acc b ON a.id_acc=b.id_acc LEFT JOIN tb_a_acc_trans_det d ON a.id_acc_src=d.id_acc_trans_det WHERE a.id_acc_trans='" & id_trans & "'"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCJournalDet.DataSource = data
         GVJournalDet.BestFitColumns()

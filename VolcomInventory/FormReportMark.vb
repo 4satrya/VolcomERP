@@ -8359,6 +8359,34 @@ WHERE invd.`id_inv_mat`='" & id_report & "'"
                 FROM tb_sales_branch m
                 WHERE m.id_sales_branch='" + id_report + "'; "
                 execute_non_query(qjd, True, "", "", "", "")
+
+                'get id ref
+                Dim id_ref As String = execute_query("SELECT b.id_sales_branch_ref FROM tb_sales_branch b WHERE b.id_sales_branch=" + id_report + "", 0, True, "", "", "", "")
+                Dim qcl As String = "UPDATE tb_sales_branch_det main
+                INNER JOIN (
+	                SELECT d.id_sales_branch_det, d.value-IFNULL(cn.amount_cn,0.00)-IFNULL(rec.value,0.00) AS `bal`
+	                FROM tb_sales_branch_det d
+	                LEFT JOIN (
+	                  SELECT d.id_sales_branch_ref_det, SUM(d.value) AS `amount_cn`
+	                  FROM tb_sales_branch_det d
+	                  INNER JOIN tb_sales_branch m ON m.id_sales_branch = d.id_sales_branch
+	                  WHERE m.id_report_status!=5 AND m.id_sales_branch_ref=" + id_ref + "
+	                  GROUP BY d.id_sales_branch_ref_det
+	                ) cn ON cn.id_sales_branch_ref_det = d.id_sales_branch_det
+	                LEFT JOIN (
+	                  SELECT d.id_report_det, SUM(d.value) AS `value`
+	                  FROM tb_rec_payment_det d
+	                  INNER JOIN tb_rec_payment h ON h.id_rec_payment = d.id_rec_payment
+	                  WHERE h.id_report_status!=5 AND d.report_mark_type=254 AND d.id_report=" + id_ref + "
+	                  GROUP BY d.id_report_det
+	                ) rec ON rec.id_report_det = d.id_sales_branch_det
+	                INNER JOIN tb_a_acc coa ON coa.id_acc = d.id_acc
+	                INNER JOIN tb_m_comp c ON c.id_comp = d.id_comp
+	                WHERE d.id_sales_branch=" + id_ref + " AND d.is_close=2
+	                HAVING bal=0
+                ) src ON src.id_sales_branch_det = main.id_sales_branch_det
+                SET main.is_close=1; "
+                execute_non_query(qcl, True, "", "", "", "")
             End If
 
             'update

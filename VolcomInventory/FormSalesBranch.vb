@@ -153,10 +153,19 @@
 
     Private Sub BCreateCN_Click(sender As Object, e As EventArgs) Handles BCreateCN.Click
         Cursor = Cursors.WaitCursor
-        FormSalesBranchDet.id_sales_branch_ref = GVSales.GetFocusedRowCellValue("id_sales_branch").ToString
-        FormSalesBranchDet.rmt = "256"
-        FormSalesBranchDet.action = "ins"
-        FormSalesBranchDet.ShowDialog()
+
+        'cek pending
+        Dim id_ref As String = GVSales.GetFocusedRowCellValue("id_sales_branch").ToString
+        Dim qcek As String = "SELECT * FROM tb_sales_branch b WHERE b.id_sales_branch_ref='" + id_ref + "' AND b.id_report_status<5 "
+        Dim dcek As DataTable = execute_query(qcek, -1, True, "", "", "", "")
+        If dcek.Rows.Count > 0 Then
+            warningCustom("Please complete all pending document for : " + GVSales.GetFocusedRowCellValue("number").ToString)
+        Else
+            FormSalesBranchDet.id_sales_branch_ref = id_ref
+            FormSalesBranchDet.rmt = "256"
+            FormSalesBranchDet.action = "ins"
+            FormSalesBranchDet.ShowDialog()
+        End If
         Cursor = Cursors.Default
     End Sub
 End Class

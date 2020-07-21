@@ -271,7 +271,7 @@ WHERE 1=1 " & where_string & " ORDER BY rec_py.id_rec_payment DESC"
 
         Dim query As String = "SELECT 'no' AS `is_select`,d.id_sales_branch_det AS `id_report_det`,d.id_sales_branch AS `id_report`,rmt.report_mark_type, rmt.report_mark_type_name, m.number AS `report_number`,
         d.id_acc, coa.acc_name , coa.acc_description, d.id_comp, comp.comp_number, d.vendor, 2 AS `id_dc`, 'K' AS `dc_code`, d.note,
-        d.value AS `amount`, IFNULL(pyd.total_rec,0.00) AS `total_rec`, IFNULL(cn.amount_cn,0.00) AS `total_cn`, (d.value - IFNULL(pyd.total_rec,0) - IFNULL(cn.amount_cn,0.00)) AS `total_due`, IFNULL(pyd.on_process,0) AS `total_pending`
+        d.value AS `amount`, IFNULL(pyd.total_rec,0.00) AS `total_rec`, IFNULL(cn.amount_cn,0.00) AS `total_cn`, (d.value - IFNULL(pyd.total_rec,0) - IFNULL(cn.amount_cn,0.00)) AS `total_due`, IFNULL(pyd.on_process,0) AS `total_pending`,IFNULL(cn.total_cn_pending,0) AS `total_cn_pending`
         FROM tb_sales_branch_det d
         INNER JOIN tb_sales_branch m ON m.id_sales_branch = d.id_sales_branch
         INNER JOIN tb_a_acc coa ON coa.id_acc = d.id_acc
@@ -285,7 +285,7 @@ WHERE 1=1 " & where_string & " ORDER BY rec_py.id_rec_payment DESC"
 	        GROUP BY rd.id_report_det
         ) pyd ON pyd.id_report_det = d.id_sales_branch_det
         LEFT JOIN (
-           SELECT d.id_sales_branch_ref_det, SUM(d.value) AS `amount_cn`
+           SELECT d.id_sales_branch_ref_det, SUM(d.value) AS `amount_cn`, COUNT(IF(m.id_report_status<5,1,NULL)) AS `total_cn_pending`
            FROM tb_sales_branch_det d
            INNER JOIN tb_sales_branch m ON m.id_sales_branch = d.id_sales_branch
            WHERE m.id_report_status!=5 
@@ -451,7 +451,7 @@ WHERE 1=1 " & where_string & " ORDER BY rec_py.id_rec_payment DESC"
         makeSafeGV(GVSales)
 
         'check pending doc
-        GVSales.ActiveFilterString = "[is_select]='yes' AND [total_pending]>0"
+        GVSales.ActiveFilterString = "[is_select]='yes' AND ([total_pending]>0 OR [total_cn_pending]>0 )"
         If GVSales.RowCount > 0 Then
             Dim err_pending As String = ""
             For i As Integer = 0 To GVSales.RowCount - 1
@@ -460,8 +460,9 @@ WHERE 1=1 " & where_string & " ORDER BY rec_py.id_rec_payment DESC"
                 End If
                 err_pending += "- " + GVSales.GetRowCellValue(i, "report_number").ToString
             Next
-            warningCustom("Please process all pending receive payment for invoice number : " + System.Environment.NewLine + err_pending)
+            warningCustom("Please process all pending receive payment/credit note for document number : " + System.Environment.NewLine + err_pending)
             GVSales.ActiveFilterString = ""
+            GridColumnreport_number.GroupIndex = 0
             Exit Sub
         End If
 
@@ -477,6 +478,7 @@ WHERE 1=1 " & where_string & " ORDER BY rec_py.id_rec_payment DESC"
             warningCustom("No data selected")
         End If
         GVSales.ActiveFilterString = ""
+        GridColumnreport_number.GroupIndex = 0
     End Sub
 
     Private Sub SLEUnit_EditValueChanged(sender As Object, e As EventArgs) Handles SLEUnit.EditValueChanged

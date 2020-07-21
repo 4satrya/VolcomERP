@@ -41,9 +41,11 @@
     Sub viewDetail()
         Dim row As DevExpress.XtraReports.UI.XRTableRow = New DevExpress.XtraReports.UI.XRTableRow
         Dim query As String = "(SELECT 0 AS `id_det`,'1' AS `is_header`, 0 AS `id_reff`,a.acc_name AS `coa`, '' AS `reff`, py.note, '' AS `vendor`,
-        '000' AS `cc`, 'D' AS `type`, py.value AS `amount`
+        ctc.comp_number AS `cc`, 'D' AS `type`, py.value AS `amount`
         FROM tb_rec_payment py
         INNER JOIN tb_a_acc a ON a.id_acc = py.id_acc_pay_rec
+        INNER JOIN tb_coa_tag ct ON ct.id_coa_tag = py.id_coa_tag
+        INNER JOIN tb_m_comp ctc ON ctc.id_comp = ct.id_comp
         WHERE py.id_rec_payment=" + id + " AND py.`value` > 0)
         UNION ALL
         (SELECT pyd.id_rec_payment_det AS `id_det`,'2' AS `is_header`, pyd.id_report AS `id_reff`, a.acc_name AS `coa`, pyd.number AS `reff`, pyd.note, pyd.vendor,

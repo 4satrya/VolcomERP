@@ -143,6 +143,7 @@ Partial Class FormBankDeposit
         Me.GridColumnis_select_vs = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemCheckEdit3 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.GridColumntotal_pending = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumntotal_cn = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.BtnCreateBBMforVS = New DevExpress.XtraEditors.SimpleButton()
         Me.PanelControl4 = New DevExpress.XtraEditors.PanelControl()
         Me.SLEStatusSales = New DevExpress.XtraEditors.SearchLookUpEdit()
@@ -156,7 +157,7 @@ Partial Class FormBankDeposit
         Me.GridColumnid_coa_tag = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncoa_tag = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl7 = New DevExpress.XtraEditors.LabelControl()
-        Me.GridColumntotal_cn = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumntotal_cn_pending = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XTCPO, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCPO.SuspendLayout()
         Me.XTPInvoice.SuspendLayout()
@@ -1171,10 +1172,10 @@ Partial Class FormBankDeposit
         '
         'GVSales
         '
-        Me.GVSales.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnid_report_det, Me.GridColumnid_report, Me.GridColumnreport_mark_type, Me.GridColumnreport_mark_type_name, Me.GridColumnreport_number, Me.GridColumnid_acc_vs, Me.GridColumnacc_name, Me.GridColumnacc_description, Me.GridColumnid_comp_vs, Me.GridColumncomp_number, Me.GridColumnvendor_vs, Me.GridColumnid_dc_vs, Me.GridColumndc_code_vs, Me.GridColumnamount_vs, Me.GridColumntotal_rec_vs, Me.GridColumntotal_due, Me.GridColumnis_select_vs, Me.GridColumntotal_pending, Me.GridColumntotal_cn})
+        Me.GVSales.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnid_report_det, Me.GridColumnid_report, Me.GridColumnreport_mark_type, Me.GridColumnreport_mark_type_name, Me.GridColumnreport_number, Me.GridColumnid_acc_vs, Me.GridColumnacc_name, Me.GridColumnacc_description, Me.GridColumnid_comp_vs, Me.GridColumncomp_number, Me.GridColumnvendor_vs, Me.GridColumnid_dc_vs, Me.GridColumndc_code_vs, Me.GridColumnamount_vs, Me.GridColumntotal_rec_vs, Me.GridColumntotal_due, Me.GridColumnis_select_vs, Me.GridColumntotal_pending, Me.GridColumntotal_cn, Me.GridColumntotal_cn_pending})
         Me.GVSales.GridControl = Me.GCSales
         Me.GVSales.GroupCount = 1
-        Me.GVSales.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount", Me.GridColumnamount_vs, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_rec", Me.GridColumntotal_rec_vs, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_due", Me.GridColumntotal_due, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_pending", Me.GridColumntotal_pending, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_cn", Me.GridColumntotal_cn, "{0:N2}")})
+        Me.GVSales.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount", Me.GridColumnamount_vs, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_rec", Me.GridColumntotal_rec_vs, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_due", Me.GridColumntotal_due, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_pending", Me.GridColumntotal_pending, "{0:N0}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_cn", Me.GridColumntotal_cn, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_cn_pending", Me.GridColumntotal_cn_pending, "{0:N0}")})
         Me.GVSales.Name = "GVSales"
         Me.GVSales.OptionsBehavior.AutoExpandAllGroups = True
         Me.GVSales.OptionsFind.AlwaysVisible = True
@@ -1335,7 +1336,7 @@ Partial Class FormBankDeposit
         '
         'GridColumntotal_pending
         '
-        Me.GridColumntotal_pending.Caption = "On Process"
+        Me.GridColumntotal_pending.Caption = "BBM On Process"
         Me.GridColumntotal_pending.DisplayFormat.FormatString = "N0"
         Me.GridColumntotal_pending.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumntotal_pending.FieldName = "total_pending"
@@ -1343,6 +1344,18 @@ Partial Class FormBankDeposit
         Me.GridColumntotal_pending.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_pending", "{0:N0}")})
         Me.GridColumntotal_pending.Visible = True
         Me.GridColumntotal_pending.VisibleIndex = 7
+        '
+        'GridColumntotal_cn
+        '
+        Me.GridColumntotal_cn.Caption = "Total CN"
+        Me.GridColumntotal_cn.DisplayFormat.FormatString = "N2"
+        Me.GridColumntotal_cn.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumntotal_cn.FieldName = "total_cn"
+        Me.GridColumntotal_cn.Name = "GridColumntotal_cn"
+        Me.GridColumntotal_cn.OptionsColumn.ReadOnly = True
+        Me.GridColumntotal_cn.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_cn", "{0:N2}")})
+        Me.GridColumntotal_cn.Visible = True
+        Me.GridColumntotal_cn.VisibleIndex = 5
         '
         'BtnCreateBBMforVS
         '
@@ -1463,17 +1476,16 @@ Partial Class FormBankDeposit
         Me.LabelControl7.TabIndex = 8915
         Me.LabelControl7.Text = "Unit"
         '
-        'GridColumntotal_cn
+        'GridColumntotal_cn_pending
         '
-        Me.GridColumntotal_cn.Caption = "Total CN"
-        Me.GridColumntotal_cn.DisplayFormat.FormatString = "N2"
-        Me.GridColumntotal_cn.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumntotal_cn.FieldName = "total_cn"
-        Me.GridColumntotal_cn.Name = "GridColumntotal_cn"
-        Me.GridColumntotal_cn.OptionsColumn.ReadOnly = True
-        Me.GridColumntotal_cn.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_cn", "{0:N2}")})
-        Me.GridColumntotal_cn.Visible = True
-        Me.GridColumntotal_cn.VisibleIndex = 5
+        Me.GridColumntotal_cn_pending.Caption = "CN On Process"
+        Me.GridColumntotal_cn_pending.DisplayFormat.FormatString = "N0"
+        Me.GridColumntotal_cn_pending.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumntotal_cn_pending.FieldName = "total_cn_pending"
+        Me.GridColumntotal_cn_pending.Name = "GridColumntotal_cn_pending"
+        Me.GridColumntotal_cn_pending.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_cn_pending", "{0:N0}")})
+        Me.GridColumntotal_cn_pending.Visible = True
+        Me.GridColumntotal_cn_pending.VisibleIndex = 8
         '
         'FormBankDeposit
         '
@@ -1677,4 +1689,5 @@ Partial Class FormBankDeposit
     Friend WithEvents GridColumn34 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents LabelControl9 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents GridColumntotal_cn As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumntotal_cn_pending As DevExpress.XtraGrid.Columns.GridColumn
 End Class

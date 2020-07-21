@@ -11,13 +11,14 @@
             LabelTitle.Text = "BUKTI CREDIT NOTE"
         End If
 
-        Dim query As String = "SELECT py.id_sales_branch, py.number AS `report_number`, 
+        Dim query As String = "SELECT py.id_sales_branch, py.number AS `report_number`, pyref.number AS `ref_number`,
         DATE_FORMAT(py.created_date,'%d-%m-%Y') AS `created_date`,
         DATE_FORMAT(py.transaction_date,'%d-%m-%Y') AS `sales_date`,
         py.value AS `amount`,
         py.note AS `note`, d.report_status, t.tag_description AS `own_comp_name`, 
         DATE_FORMAT(NOW(),'%d-%m-%Y %H:%i:%s') AS `printed_date`, eusr.employee_name AS `printed_by`
         FROM tb_sales_branch py
+        LEFT JOIN tb_sales_branch pyref ON pyref.id_sales_branch = py.id_sales_branch_ref
         JOIN tb_opt o
         INNER JOIN tb_coa_tag t ON t.id_coa_tag = py.id_coa_tag
         INNER JOIN tb_lookup_report_status d ON d.id_report_status = py.id_report_status 

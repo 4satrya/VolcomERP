@@ -19,7 +19,6 @@ Partial Class FormFGTracking
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormFGTracking))
         Me.GroupControlFilter = New DevExpress.XtraEditors.GroupControl()
         Me.BtnViewLess = New DevExpress.XtraEditors.SimpleButton()
@@ -66,7 +65,7 @@ Partial Class FormFGTracking
         Me.BtnViewImg = New DevExpress.XtraEditors.SimpleButton()
         Me.GroupControlTraccking = New DevExpress.XtraEditors.GroupControl()
         Me.GCTracking = New DevExpress.XtraGrid.GridControl()
-        Me.ViewMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ViewMenu = New System.Windows.Forms.ContextMenuStrip()
         Me.SMViewDel = New System.Windows.Forms.ToolStripMenuItem()
         Me.GVTracking = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumnTransNumber = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -123,7 +122,7 @@ Partial Class FormFGTracking
         Me.BtnViewLess.Name = "BtnViewLess"
         Me.BtnViewLess.Size = New System.Drawing.Size(91, 23)
         Me.BtnViewLess.TabIndex = 8893
-        Me.BtnViewLess.Text = "View (Trial)"
+        Me.BtnViewLess.Text = "View"
         '
         'PanelControlList
         '
@@ -171,11 +170,12 @@ Partial Class FormFGTracking
         '
         'BtnTracking
         '
-        Me.BtnTracking.Location = New System.Drawing.Point(747, 29)
+        Me.BtnTracking.Location = New System.Drawing.Point(803, 29)
         Me.BtnTracking.Name = "BtnTracking"
         Me.BtnTracking.Size = New System.Drawing.Size(75, 23)
         Me.BtnTracking.TabIndex = 2
-        Me.BtnTracking.Text = "View"
+        Me.BtnTracking.Text = "View (Hide)"
+        Me.BtnTracking.Visible = False
         '
         'BtnEditCode
         '

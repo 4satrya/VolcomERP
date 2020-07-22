@@ -5836,7 +5836,6 @@ WHERE copd.id_design_cop_propose='" & id_report & "';"
             query = String.Format("UPDATE tb_item_expense SET id_report_status='{0}' WHERE id_item_expense ='{1}'", id_status_reportx, id_report)
             execute_non_query(query, True, "", "", "", "")
 
-
             If id_status_reportx = "6" Then
                 ' select user prepared
                 Dim qu As String = "SELECT rm.id_user, rm.report_number FROM tb_report_mark rm WHERE rm.report_mark_type=" + report_mark_type + " AND rm.id_report='" + id_report + "' AND rm.id_report_status=1 "
@@ -5920,12 +5919,12 @@ WHERE copd.id_design_cop_propose='" & id_report & "';"
             End If
 
             'refresh view
-            Try
-                FormItemExpenseDet.actionLoad()
-                FormItemExpense.viewData()
-                FormItemExpense.GVData.FocusedRowHandle = find_row(FormItemExpense.GVData, "id_item_expense", id_report)
-            Catch ex As Exception
-            End Try
+            'Try
+            'FormItemExpenseDet.actionLoad()
+            'FormItemExpense.viewData()
+            'FormItemExpense.GVData.FocusedRowHandle = find_row(FormItemExpense.GVData, "id_item_expense", id_report)
+            'Catch ex As Exception
+            'End Try
         ElseIf report_mark_type = "159" Then
             'Payment
             'auto completed on summary

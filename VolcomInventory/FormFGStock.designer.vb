@@ -19,7 +19,6 @@ Partial Class FormFGStock
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormFGStock))
         Me.XTCFGStock = New DevExpress.XtraTab.XtraTabControl()
         Me.XTPFGStockWHSum = New DevExpress.XtraTab.XtraTabPage()
@@ -78,7 +77,7 @@ Partial Class FormFGStock
         Me.XTPFGStockCardWH = New DevExpress.XtraTab.XtraTabPage()
         Me.GroupControlTraccking = New DevExpress.XtraEditors.GroupControl()
         Me.GCFGStockCard = New DevExpress.XtraGrid.GridControl()
-        Me.ViewMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ViewMenu = New System.Windows.Forms.ContextMenuStrip()
         Me.SMViewDel = New System.Windows.Forms.ToolStripMenuItem()
         Me.BandedGridViewFGStockCard = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridView()
         Me.BandedGridColumn1 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
@@ -229,15 +228,19 @@ Partial Class FormFGStock
         Me.XTPByCodeSOH = New DevExpress.XtraTab.XtraTabPage()
         Me.GCSOHCode = New DevExpress.XtraGrid.GridControl()
         Me.GVSOHCode = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridView()
+        Me.GridBand5 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         Me.BandedGridColumncode = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumnname = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.gridBand6 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         Me.BandedGridColumnclass = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnseason_code = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumnstt = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumncomp_number = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumncomp_name = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumngroup_store = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumndesign_first_rec_wh_code = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumnsize_type = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.gridBand7 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         Me.BandedGridColumnavl_qty1 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumnavl_qty2 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumnavl_qty3 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
@@ -249,6 +252,7 @@ Partial Class FormFGStock
         Me.BandedGridColumnavl_qty9 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumnavl_qty0 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumnavl_qty = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.gridBand8 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         Me.BandedGridColumnrsv_qty1 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumnrsv_qty2 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumnrsv_qty3 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
@@ -260,6 +264,7 @@ Partial Class FormFGStock
         Me.BandedGridColumnrsv_qty9 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumnrsv_qty0 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumnrsv_qty = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.gridBandTotal = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         Me.BandedGridColumnttl_qty1 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumnttl_qty2 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumnttl_qty3 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
@@ -284,6 +289,7 @@ Partial Class FormFGStock
         Me.BandedGridColumnunit_cost = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumnamount_normal = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumnamount_cost = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnrange_code = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BtnShowFilter = New DevExpress.XtraEditors.SimpleButton()
         Me.PanelControlSOH = New DevExpress.XtraEditors.PanelControl()
         Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
@@ -308,13 +314,6 @@ Partial Class FormFGStock
         Me.DEUntilAcc = New DevExpress.XtraEditors.DateEdit()
         Me.LabelControl35 = New DevExpress.XtraEditors.LabelControl()
         Me.GridColumn51 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.BandedGridColumnseason_code = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.BandedGridColumnrange_code = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.GridBand5 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
-        Me.gridBand6 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
-        Me.gridBand7 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
-        Me.gridBand8 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
-        Me.gridBandTotal = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         CType(Me.XTCFGStock, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCFGStock.SuspendLayout()
         Me.XTPFGStockWHSum.SuspendLayout()
@@ -1257,7 +1256,7 @@ Partial Class FormFGStock
         '
         'BtnExportToXLSStockCard
         '
-        Me.BtnExportToXLSStockCard.Location = New System.Drawing.Point(921, 29)
+        Me.BtnExportToXLSStockCard.Location = New System.Drawing.Point(852, 30)
         Me.BtnExportToXLSStockCard.LookAndFeel.SkinName = "Blue"
         Me.BtnExportToXLSStockCard.Name = "BtnExportToXLSStockCard"
         Me.BtnExportToXLSStockCard.Size = New System.Drawing.Size(92, 20)
@@ -1280,7 +1279,7 @@ Partial Class FormFGStock
         Me.BtnViewStockCard.Name = "BtnViewStockCard"
         Me.BtnViewStockCard.Size = New System.Drawing.Size(77, 20)
         Me.BtnViewStockCard.TabIndex = 8907
-        Me.BtnViewStockCard.Text = "View (trial)"
+        Me.BtnViewStockCard.Text = "View"
         '
         'TxtCodeDsgSC
         '
@@ -1364,11 +1363,12 @@ Partial Class FormFGStock
         '
         'BtnTracking
         '
-        Me.BtnTracking.Location = New System.Drawing.Point(852, 30)
+        Me.BtnTracking.Location = New System.Drawing.Point(1082, 31)
         Me.BtnTracking.Name = "BtnTracking"
         Me.BtnTracking.Size = New System.Drawing.Size(63, 20)
         Me.BtnTracking.TabIndex = 2
-        Me.BtnTracking.Text = "View"
+        Me.BtnTracking.Text = "View (Hide)"
+        Me.BtnTracking.Visible = False
         '
         'LabelControl3
         '
@@ -2487,6 +2487,15 @@ Partial Class FormFGStock
         Me.GVSOHCode.OptionsView.ShowFooter = True
         Me.GVSOHCode.OptionsView.ShowGroupPanel = False
         '
+        'GridBand5
+        '
+        Me.GridBand5.Columns.Add(Me.BandedGridColumncode)
+        Me.GridBand5.Columns.Add(Me.BandedGridColumnname)
+        Me.GridBand5.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left
+        Me.GridBand5.Name = "GridBand5"
+        Me.GridBand5.VisibleIndex = 0
+        Me.GridBand5.Width = 241
+        '
         'BandedGridColumncode
         '
         Me.BandedGridColumncode.Caption = "Code"
@@ -2503,6 +2512,20 @@ Partial Class FormFGStock
         Me.BandedGridColumnname.Visible = True
         Me.BandedGridColumnname.Width = 164
         '
+        'gridBand6
+        '
+        Me.gridBand6.Columns.Add(Me.BandedGridColumnclass)
+        Me.gridBand6.Columns.Add(Me.BandedGridColumnseason_code)
+        Me.gridBand6.Columns.Add(Me.BandedGridColumnstt)
+        Me.gridBand6.Columns.Add(Me.BandedGridColumncomp_number)
+        Me.gridBand6.Columns.Add(Me.BandedGridColumncomp_name)
+        Me.gridBand6.Columns.Add(Me.BandedGridColumngroup_store)
+        Me.gridBand6.Columns.Add(Me.BandedGridColumndesign_first_rec_wh_code)
+        Me.gridBand6.Columns.Add(Me.BandedGridColumnsize_type)
+        Me.gridBand6.Name = "gridBand6"
+        Me.gridBand6.VisibleIndex = 1
+        Me.gridBand6.Width = 622
+        '
         'BandedGridColumnclass
         '
         Me.BandedGridColumnclass.Caption = "Class"
@@ -2510,6 +2533,13 @@ Partial Class FormFGStock
         Me.BandedGridColumnclass.Name = "BandedGridColumnclass"
         Me.BandedGridColumnclass.Visible = True
         Me.BandedGridColumnclass.Width = 70
+        '
+        'BandedGridColumnseason_code
+        '
+        Me.BandedGridColumnseason_code.Caption = "Season"
+        Me.BandedGridColumnseason_code.FieldName = "season"
+        Me.BandedGridColumnseason_code.Name = "BandedGridColumnseason_code"
+        Me.BandedGridColumnseason_code.Visible = True
         '
         'BandedGridColumnstt
         '
@@ -2558,6 +2588,24 @@ Partial Class FormFGStock
         Me.BandedGridColumnsize_type.FieldName = "size_type"
         Me.BandedGridColumnsize_type.Name = "BandedGridColumnsize_type"
         Me.BandedGridColumnsize_type.Visible = True
+        '
+        'gridBand7
+        '
+        Me.gridBand7.Caption = "AVAILABLE"
+        Me.gridBand7.Columns.Add(Me.BandedGridColumnavl_qty1)
+        Me.gridBand7.Columns.Add(Me.BandedGridColumnavl_qty2)
+        Me.gridBand7.Columns.Add(Me.BandedGridColumnavl_qty3)
+        Me.gridBand7.Columns.Add(Me.BandedGridColumnavl_qty4)
+        Me.gridBand7.Columns.Add(Me.BandedGridColumnavl_qty5)
+        Me.gridBand7.Columns.Add(Me.BandedGridColumnavl_qty6)
+        Me.gridBand7.Columns.Add(Me.BandedGridColumnavl_qty7)
+        Me.gridBand7.Columns.Add(Me.BandedGridColumnavl_qty8)
+        Me.gridBand7.Columns.Add(Me.BandedGridColumnavl_qty9)
+        Me.gridBand7.Columns.Add(Me.BandedGridColumnavl_qty0)
+        Me.gridBand7.Columns.Add(Me.BandedGridColumnavl_qty)
+        Me.gridBand7.Name = "gridBand7"
+        Me.gridBand7.VisibleIndex = 2
+        Me.gridBand7.Width = 825
         '
         'BandedGridColumnavl_qty1
         '
@@ -2669,6 +2717,24 @@ Partial Class FormFGStock
         Me.BandedGridColumnavl_qty.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "avl_qty", "{0:N0}")})
         Me.BandedGridColumnavl_qty.Visible = True
         '
+        'gridBand8
+        '
+        Me.gridBand8.Caption = "RESERVED"
+        Me.gridBand8.Columns.Add(Me.BandedGridColumnrsv_qty1)
+        Me.gridBand8.Columns.Add(Me.BandedGridColumnrsv_qty2)
+        Me.gridBand8.Columns.Add(Me.BandedGridColumnrsv_qty3)
+        Me.gridBand8.Columns.Add(Me.BandedGridColumnrsv_qty4)
+        Me.gridBand8.Columns.Add(Me.BandedGridColumnrsv_qty5)
+        Me.gridBand8.Columns.Add(Me.BandedGridColumnrsv_qty6)
+        Me.gridBand8.Columns.Add(Me.BandedGridColumnrsv_qty7)
+        Me.gridBand8.Columns.Add(Me.BandedGridColumnrsv_qty8)
+        Me.gridBand8.Columns.Add(Me.BandedGridColumnrsv_qty9)
+        Me.gridBand8.Columns.Add(Me.BandedGridColumnrsv_qty0)
+        Me.gridBand8.Columns.Add(Me.BandedGridColumnrsv_qty)
+        Me.gridBand8.Name = "gridBand8"
+        Me.gridBand8.VisibleIndex = 3
+        Me.gridBand8.Width = 825
+        '
         'BandedGridColumnrsv_qty1
         '
         Me.BandedGridColumnrsv_qty1.Caption = "rsv_qty1"
@@ -2778,6 +2844,27 @@ Partial Class FormFGStock
         Me.BandedGridColumnrsv_qty.Name = "BandedGridColumnrsv_qty"
         Me.BandedGridColumnrsv_qty.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "rsv_qty", "{0:N0}")})
         Me.BandedGridColumnrsv_qty.Visible = True
+        '
+        'gridBandTotal
+        '
+        Me.gridBandTotal.Caption = "TOTAL"
+        Me.gridBandTotal.Columns.Add(Me.BandedGridColumnttl_qty1)
+        Me.gridBandTotal.Columns.Add(Me.BandedGridColumnttl_qty2)
+        Me.gridBandTotal.Columns.Add(Me.BandedGridColumnttl_qty3)
+        Me.gridBandTotal.Columns.Add(Me.BandedGridColumnttl_qty4)
+        Me.gridBandTotal.Columns.Add(Me.BandedGridColumnttl_qty5)
+        Me.gridBandTotal.Columns.Add(Me.BandedGridColumnttl_qty6)
+        Me.gridBandTotal.Columns.Add(Me.BandedGridColumnttl_qty7)
+        Me.gridBandTotal.Columns.Add(Me.BandedGridColumnttl_qty8)
+        Me.gridBandTotal.Columns.Add(Me.BandedGridColumnttl_qty9)
+        Me.gridBandTotal.Columns.Add(Me.BandedGridColumnttl_qty0)
+        Me.gridBandTotal.Columns.Add(Me.BandedGridColumnttl_qty)
+        Me.gridBandTotal.Columns.Add(Me.BandedGridColumnprice_type)
+        Me.gridBandTotal.Columns.Add(Me.BandedGridColumnunit_price)
+        Me.gridBandTotal.Columns.Add(Me.BandedGridColumnamount)
+        Me.gridBandTotal.Name = "gridBandTotal"
+        Me.gridBandTotal.VisibleIndex = 4
+        Me.gridBandTotal.Width = 1050
         '
         'BandedGridColumnttl_qty1
         '
@@ -2987,6 +3074,13 @@ Partial Class FormFGStock
         Me.BandedGridColumnamount_cost.Name = "BandedGridColumnamount_cost"
         Me.BandedGridColumnamount_cost.OptionsColumn.ShowInCustomizationForm = False
         Me.BandedGridColumnamount_cost.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount_cost", "{0:N2}")})
+        '
+        'BandedGridColumnrange_code
+        '
+        Me.BandedGridColumnrange_code.Caption = "Range"
+        Me.BandedGridColumnrange_code.FieldName = "range"
+        Me.BandedGridColumnrange_code.Name = "BandedGridColumnrange_code"
+        Me.BandedGridColumnrange_code.Visible = True
         '
         'BtnShowFilter
         '
@@ -3229,100 +3323,6 @@ Partial Class FormFGStock
         Me.GridColumn51.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_cost", "{0:n2}")})
         Me.GridColumn51.Visible = True
         Me.GridColumn51.VisibleIndex = 0
-        '
-        'BandedGridColumnseason_code
-        '
-        Me.BandedGridColumnseason_code.Caption = "Season"
-        Me.BandedGridColumnseason_code.FieldName = "season"
-        Me.BandedGridColumnseason_code.Name = "BandedGridColumnseason_code"
-        Me.BandedGridColumnseason_code.Visible = True
-        '
-        'BandedGridColumnrange_code
-        '
-        Me.BandedGridColumnrange_code.Caption = "Range"
-        Me.BandedGridColumnrange_code.FieldName = "range"
-        Me.BandedGridColumnrange_code.Name = "BandedGridColumnrange_code"
-        Me.BandedGridColumnrange_code.Visible = True
-        '
-        'GridBand5
-        '
-        Me.GridBand5.Columns.Add(Me.BandedGridColumncode)
-        Me.GridBand5.Columns.Add(Me.BandedGridColumnname)
-        Me.GridBand5.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left
-        Me.GridBand5.Name = "GridBand5"
-        Me.GridBand5.VisibleIndex = 0
-        Me.GridBand5.Width = 241
-        '
-        'gridBand6
-        '
-        Me.gridBand6.Columns.Add(Me.BandedGridColumnclass)
-        Me.gridBand6.Columns.Add(Me.BandedGridColumnseason_code)
-        Me.gridBand6.Columns.Add(Me.BandedGridColumnstt)
-        Me.gridBand6.Columns.Add(Me.BandedGridColumncomp_number)
-        Me.gridBand6.Columns.Add(Me.BandedGridColumncomp_name)
-        Me.gridBand6.Columns.Add(Me.BandedGridColumngroup_store)
-        Me.gridBand6.Columns.Add(Me.BandedGridColumndesign_first_rec_wh_code)
-        Me.gridBand6.Columns.Add(Me.BandedGridColumnsize_type)
-        Me.gridBand6.Name = "gridBand6"
-        Me.gridBand6.VisibleIndex = 1
-        Me.gridBand6.Width = 622
-        '
-        'gridBand7
-        '
-        Me.gridBand7.Caption = "AVAILABLE"
-        Me.gridBand7.Columns.Add(Me.BandedGridColumnavl_qty1)
-        Me.gridBand7.Columns.Add(Me.BandedGridColumnavl_qty2)
-        Me.gridBand7.Columns.Add(Me.BandedGridColumnavl_qty3)
-        Me.gridBand7.Columns.Add(Me.BandedGridColumnavl_qty4)
-        Me.gridBand7.Columns.Add(Me.BandedGridColumnavl_qty5)
-        Me.gridBand7.Columns.Add(Me.BandedGridColumnavl_qty6)
-        Me.gridBand7.Columns.Add(Me.BandedGridColumnavl_qty7)
-        Me.gridBand7.Columns.Add(Me.BandedGridColumnavl_qty8)
-        Me.gridBand7.Columns.Add(Me.BandedGridColumnavl_qty9)
-        Me.gridBand7.Columns.Add(Me.BandedGridColumnavl_qty0)
-        Me.gridBand7.Columns.Add(Me.BandedGridColumnavl_qty)
-        Me.gridBand7.Name = "gridBand7"
-        Me.gridBand7.VisibleIndex = 2
-        Me.gridBand7.Width = 825
-        '
-        'gridBand8
-        '
-        Me.gridBand8.Caption = "RESERVED"
-        Me.gridBand8.Columns.Add(Me.BandedGridColumnrsv_qty1)
-        Me.gridBand8.Columns.Add(Me.BandedGridColumnrsv_qty2)
-        Me.gridBand8.Columns.Add(Me.BandedGridColumnrsv_qty3)
-        Me.gridBand8.Columns.Add(Me.BandedGridColumnrsv_qty4)
-        Me.gridBand8.Columns.Add(Me.BandedGridColumnrsv_qty5)
-        Me.gridBand8.Columns.Add(Me.BandedGridColumnrsv_qty6)
-        Me.gridBand8.Columns.Add(Me.BandedGridColumnrsv_qty7)
-        Me.gridBand8.Columns.Add(Me.BandedGridColumnrsv_qty8)
-        Me.gridBand8.Columns.Add(Me.BandedGridColumnrsv_qty9)
-        Me.gridBand8.Columns.Add(Me.BandedGridColumnrsv_qty0)
-        Me.gridBand8.Columns.Add(Me.BandedGridColumnrsv_qty)
-        Me.gridBand8.Name = "gridBand8"
-        Me.gridBand8.VisibleIndex = 3
-        Me.gridBand8.Width = 825
-        '
-        'gridBandTotal
-        '
-        Me.gridBandTotal.Caption = "TOTAL"
-        Me.gridBandTotal.Columns.Add(Me.BandedGridColumnttl_qty1)
-        Me.gridBandTotal.Columns.Add(Me.BandedGridColumnttl_qty2)
-        Me.gridBandTotal.Columns.Add(Me.BandedGridColumnttl_qty3)
-        Me.gridBandTotal.Columns.Add(Me.BandedGridColumnttl_qty4)
-        Me.gridBandTotal.Columns.Add(Me.BandedGridColumnttl_qty5)
-        Me.gridBandTotal.Columns.Add(Me.BandedGridColumnttl_qty6)
-        Me.gridBandTotal.Columns.Add(Me.BandedGridColumnttl_qty7)
-        Me.gridBandTotal.Columns.Add(Me.BandedGridColumnttl_qty8)
-        Me.gridBandTotal.Columns.Add(Me.BandedGridColumnttl_qty9)
-        Me.gridBandTotal.Columns.Add(Me.BandedGridColumnttl_qty0)
-        Me.gridBandTotal.Columns.Add(Me.BandedGridColumnttl_qty)
-        Me.gridBandTotal.Columns.Add(Me.BandedGridColumnprice_type)
-        Me.gridBandTotal.Columns.Add(Me.BandedGridColumnunit_price)
-        Me.gridBandTotal.Columns.Add(Me.BandedGridColumnamount)
-        Me.gridBandTotal.Name = "gridBandTotal"
-        Me.gridBandTotal.VisibleIndex = 4
-        Me.gridBandTotal.Width = 1050
         '
         'FormFGStock
         '

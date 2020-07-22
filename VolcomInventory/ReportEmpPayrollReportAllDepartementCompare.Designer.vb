@@ -1067,7 +1067,7 @@ Partial Public Class ReportEmpPayrollReportAllDepartementCompare
         Me.GCTotal.UnboundExpression = "[volcom_indonesia] +[volcom_sogo]+ [bemo_corner] + [kuta_square] + [seminyak]"
         Me.GCTotal.UnboundType = DevExpress.Data.UnboundColumnType.[Integer]
         Me.GCTotal.Visible = True
-        Me.GCTotal.VisibleIndex = 1
+        Me.GCTotal.VisibleIndex = 2
         Me.GCTotal.Width = 175
         '
         'GCTotalBefore
@@ -1085,7 +1085,7 @@ Partial Public Class ReportEmpPayrollReportAllDepartementCompare
         Me.GCTotalBefore.Name = "GCTotalBefore"
         Me.GCTotalBefore.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_before", "{0:N0}")})
         Me.GCTotalBefore.Visible = True
-        Me.GCTotalBefore.VisibleIndex = 2
+        Me.GCTotalBefore.VisibleIndex = 1
         Me.GCTotalBefore.Width = 175
         '
         'GCDifference

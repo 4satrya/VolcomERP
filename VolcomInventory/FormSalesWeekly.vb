@@ -68,6 +68,16 @@
         viewDay()
         viewFilterMonth()
         viewFilterYear()
+        viewCoaTag()
+    End Sub
+
+    Sub viewCoaTag()
+        Dim query As String = "
+        SELECT 0 AS id_coa_tag, 'All' AS `tag_code`, 'All' AS `tag_description`, 'All' AS `coa_tag`
+        UNION
+        SELECT ct.id_coa_tag, ct.tag_code, ct.tag_description, CONCAT(ct.tag_code,' - ', ct.tag_description)  AS `coa_tag`
+        FROM tb_coa_tag ct ORDER BY id_coa_tag ASC "
+        viewSearchLookupQuery(SLEUnit, query, "id_coa_tag", "tag_description", "id_coa_tag")
     End Sub
 
     Sub load_group_store()
@@ -144,13 +154,13 @@
         Dim id_comp_group As String = SLEStoreGroup.EditValue.ToString
         Dim cond_group As String = ""
         If id_comp_group <> "0" Then
-            cond_group = "AND c.id_comp_group=" + id_comp_group + " "
+            cond_group = "AND a.id_comp_group=" + id_comp_group + " "
         End If
 
         'selected store
         Dim cond_store As String = ""
         If id_store_selected <> "0" Then
-            cond_store = "AND c.id_comp=''" + id_store_selected + "'' "
+            cond_store = "AND a.id_comp=''" + id_store_selected + "'' "
         End If
 
         'filter promo
@@ -160,12 +170,18 @@
             cond_promo = ""
             cond_promo_trans = ""
         Else
-            cond_promo = "AND a.sales_pos_total>0 "
+            cond_promo = "AND a.sales_pos_total_retail!=0 "
             cond_promo_trans = "AND a.report_mark_type!=116"
         End If
 
+        'filter unit
+        Dim cond_unit As String = ""
+        If SLEUnit.EditValue <> "0" Then
+            cond_unit += "AND a.id_unit=" + SLEUnit.EditValue.ToString + ""
+        End If
+
         Dim query_c As ClassSalesInv = New ClassSalesInv()
-        Dim query As String = query_c.queryMainReport("AND a.id_report_status=6 " + cond_group + " " + cond_store + " " + cond_promo + " " + cond_promo_trans + " AND (a.sales_pos_end_period >=''" + date_from_selected + "'' AND a.sales_pos_end_period <=''" + date_until_selected + "'') ", "1")
+        Dim query As String = query_c.queryMainReport("AND a.id_report_status=6 " + cond_unit + " " + cond_group + " " + cond_store + " " + cond_promo + " " + cond_promo_trans + " AND (a.sales_pos_end_period >=''" + date_from_selected + "'' AND a.sales_pos_end_period <=''" + date_until_selected + "'') ", "1")
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCSalesPOS.DataSource = data
         dt = data

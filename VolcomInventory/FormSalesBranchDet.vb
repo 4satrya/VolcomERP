@@ -14,6 +14,11 @@ Public Class FormSalesBranchDet
         Dim menu_name As String = execute_query("SELECT report_mark_type_name FROM tb_lookup_report_mark_type WHERE report_mark_type='" + rmt + "' ", 0, True, "", "", "", "")
         Text = menu_name
 
+        'def date
+        Dim now_dt As DateTime = getTimeDB()
+        DESalesDate.EditValue = now_dt
+        DEDueDate.EditValue = now_dt
+
         'minimum date
         Dim query_closing As String = "SELECT DATE_ADD(l.date_until,INTERVAL 1 DAY) AS `first_date` FROM tb_closing_log l WHERE l.note='Closing End' ORDER BY l.id DESC LIMIT 1 "
         Dim data_closing As DataTable = execute_query(query_closing, -1, True, "", "", "", "")
@@ -145,6 +150,7 @@ Public Class FormSalesBranchDet
             DECreatedDate.EditValue = data.Rows(0)("created_date")
             SLEUnit.EditValue = data.Rows(0)("id_coa_tag").ToString
             DESalesDate.EditValue = data.Rows(0)("transaction_date")
+            DEDueDate.EditValue = data.Rows(0)("due_date")
             id_report_status = data.Rows(0)("id_report_status")
             LEReportStatus.ItemIndex = LEReportStatus.Properties.GetDataSourceRowIndex("id_report_status", data.Rows(0)("id_report_status").ToString)
             MENote.Text = data.Rows(0)("note").ToString
@@ -695,6 +701,7 @@ Public Class FormSalesBranchDet
             If confirm = Windows.Forms.DialogResult.Yes Then
                 Dim id_coa_tag As String = SLEUnit.EditValue.ToString
                 Dim transaction_date As String = DateTime.Parse(DESalesDate.EditValue.ToString).ToString("yyyy-MM-dd")
+                Dim due_date As String = DateTime.Parse(DEDueDate.EditValue.ToString).ToString("yyyy-MM-dd")
                 Dim note As String = addSlashes(MENote.Text)
                 Dim value As String = decimalSQL(TxtTotal.EditValue.ToString)
                 Dim id_comp_normal As String = SLEStoreNormal.EditValue.ToString
@@ -727,6 +734,7 @@ Public Class FormSalesBranchDet
                 Dim query As String = "INSERT INTO tb_sales_branch(`id_coa_tag`,
                 `created_date`,
                 `transaction_date`,
+                `due_date`,
                 `id_report_status`,
                 `note`,
                 `value` ,
@@ -762,6 +770,7 @@ Public Class FormSalesBranchDet
                 ('" + id_coa_tag + "',
                 NOW(),
                 '" + transaction_date + "',
+                '" + due_date + "',
                 '" + id_report_status + "',
                 '" + note + "',
                 '" + value + "' ,

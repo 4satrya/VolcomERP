@@ -34,6 +34,8 @@ Partial Class FormSalesBranchDet
         Me.MENote = New DevExpress.XtraEditors.MemoEdit()
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
         Me.PanelControl6 = New DevExpress.XtraEditors.PanelControl()
+        Me.LabelControl24 = New DevExpress.XtraEditors.LabelControl()
+        Me.TxtNumberRef = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl21 = New DevExpress.XtraEditors.LabelControl()
         Me.DECreatedDate = New DevExpress.XtraEditors.DateEdit()
         Me.TxtNumber = New DevExpress.XtraEditors.TextEdit()
@@ -157,8 +159,8 @@ Partial Class FormSalesBranchDet
         Me.GridColumndebit_draft = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncredit_draft = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncc = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.TxtNumberRef = New DevExpress.XtraEditors.TextEdit()
-        Me.LabelControl24 = New DevExpress.XtraEditors.LabelControl()
+        Me.DEDueDate = New DevExpress.XtraEditors.DateEdit()
+        Me.LabelControl25 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.PanelControl7, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl7.SuspendLayout()
         CType(Me.PanelControlPreview, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -170,6 +172,7 @@ Partial Class FormSalesBranchDet
         Me.PanelControl2.SuspendLayout()
         CType(Me.PanelControl6, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl6.SuspendLayout()
+        CType(Me.TxtNumberRef.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DECreatedDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DECreatedDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtNumber.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -230,7 +233,8 @@ Partial Class FormSalesBranchDet
         Me.XTPDraftJournal.SuspendLayout()
         CType(Me.GCDraft, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVDraft, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TxtNumberRef.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEDueDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEDueDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl7
@@ -399,6 +403,26 @@ Partial Class FormSalesBranchDet
         Me.PanelControl6.Size = New System.Drawing.Size(301, 125)
         Me.PanelControl6.TabIndex = 166
         '
+        'LabelControl24
+        '
+        Me.LabelControl24.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl24.Location = New System.Drawing.Point(16, 41)
+        Me.LabelControl24.Name = "LabelControl24"
+        Me.LabelControl24.Size = New System.Drawing.Size(50, 13)
+        Me.LabelControl24.TabIndex = 170
+        Me.LabelControl24.Text = "Reference"
+        '
+        'TxtNumberRef
+        '
+        Me.TxtNumberRef.EditValue = ""
+        Me.TxtNumberRef.Location = New System.Drawing.Point(101, 38)
+        Me.TxtNumberRef.Name = "TxtNumberRef"
+        Me.TxtNumberRef.Properties.EditValueChangedDelay = 1
+        Me.TxtNumberRef.Properties.ReadOnly = True
+        Me.TxtNumberRef.Size = New System.Drawing.Size(189, 20)
+        Me.TxtNumberRef.TabIndex = 169
+        Me.TxtNumberRef.TabStop = False
+        '
         'LabelControl21
         '
         Me.LabelControl21.Location = New System.Drawing.Point(16, 93)
@@ -466,6 +490,8 @@ Partial Class FormSalesBranchDet
         'PanelControl3
         '
         Me.PanelControl3.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelControl3.Controls.Add(Me.LabelControl25)
+        Me.PanelControl3.Controls.Add(Me.DEDueDate)
         Me.PanelControl3.Controls.Add(Me.SLEUnit)
         Me.PanelControl3.Controls.Add(Me.LabelControl3)
         Me.PanelControl3.Controls.Add(Me.DESalesDate)
@@ -1442,7 +1468,7 @@ Partial Class FormSalesBranchDet
         '
         Me.XTPDraftJournal.Controls.Add(Me.GCDraft)
         Me.XTPDraftJournal.Name = "XTPDraftJournal"
-        Me.XTPDraftJournal.Size = New System.Drawing.Size(980, 681)
+        Me.XTPDraftJournal.Size = New System.Drawing.Size(980, 659)
         Me.XTPDraftJournal.Text = "Draft Journal"
         '
         'GCDraft
@@ -1451,7 +1477,7 @@ Partial Class FormSalesBranchDet
         Me.GCDraft.Location = New System.Drawing.Point(0, 0)
         Me.GCDraft.MainView = Me.GVDraft
         Me.GCDraft.Name = "GCDraft"
-        Me.GCDraft.Size = New System.Drawing.Size(980, 681)
+        Me.GCDraft.Size = New System.Drawing.Size(980, 659)
         Me.GCDraft.TabIndex = 1
         Me.GCDraft.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVDraft})
         '
@@ -1539,25 +1565,30 @@ Partial Class FormSalesBranchDet
         Me.GridColumncc.Visible = True
         Me.GridColumncc.VisibleIndex = 3
         '
-        'TxtNumberRef
+        'DEDueDate
         '
-        Me.TxtNumberRef.EditValue = ""
-        Me.TxtNumberRef.Location = New System.Drawing.Point(101, 38)
-        Me.TxtNumberRef.Name = "TxtNumberRef"
-        Me.TxtNumberRef.Properties.EditValueChangedDelay = 1
-        Me.TxtNumberRef.Properties.ReadOnly = True
-        Me.TxtNumberRef.Size = New System.Drawing.Size(189, 20)
-        Me.TxtNumberRef.TabIndex = 169
-        Me.TxtNumberRef.TabStop = False
+        Me.DEDueDate.EditValue = Nothing
+        Me.DEDueDate.Location = New System.Drawing.Point(93, 64)
+        Me.DEDueDate.Name = "DEDueDate"
+        Me.DEDueDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.[False]
+        Me.DEDueDate.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEDueDate.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEDueDate.Properties.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.DEDueDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEDueDate.Properties.EditFormat.FormatString = "dd MMMM yyyy"
+        Me.DEDueDate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEDueDate.Properties.Mask.EditMask = "dd MMMM yyyy"
+        Me.DEDueDate.Size = New System.Drawing.Size(264, 20)
+        Me.DEDueDate.TabIndex = 8915
         '
-        'LabelControl24
+        'LabelControl25
         '
-        Me.LabelControl24.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl24.Location = New System.Drawing.Point(16, 41)
-        Me.LabelControl24.Name = "LabelControl24"
-        Me.LabelControl24.Size = New System.Drawing.Size(50, 13)
-        Me.LabelControl24.TabIndex = 170
-        Me.LabelControl24.Text = "Reference"
+        Me.LabelControl25.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl25.Location = New System.Drawing.Point(16, 67)
+        Me.LabelControl25.Name = "LabelControl25"
+        Me.LabelControl25.Size = New System.Drawing.Size(44, 13)
+        Me.LabelControl25.TabIndex = 8916
+        Me.LabelControl25.Text = "Due date"
         '
         'FormSalesBranchDet
         '
@@ -1584,6 +1615,7 @@ Partial Class FormSalesBranchDet
         CType(Me.PanelControl6, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl6.ResumeLayout(False)
         Me.PanelControl6.PerformLayout()
+        CType(Me.TxtNumberRef.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DECreatedDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DECreatedDate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtNumber.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1648,7 +1680,8 @@ Partial Class FormSalesBranchDet
         Me.XTPDraftJournal.ResumeLayout(False)
         CType(Me.GCDraft, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVDraft, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TxtNumberRef.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEDueDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEDueDate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1791,4 +1824,6 @@ Partial Class FormSalesBranchDet
     Friend WithEvents GridColumnamount_limit As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents LabelControl24 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents TxtNumberRef As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LabelControl25 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents DEDueDate As DevExpress.XtraEditors.DateEdit
 End Class

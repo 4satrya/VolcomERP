@@ -14,6 +14,7 @@
         Dim query As String = "SELECT py.id_sales_branch, py.number AS `report_number`, pyref.number AS `ref_number`,
         DATE_FORMAT(py.created_date,'%d-%m-%Y') AS `created_date`,
         DATE_FORMAT(py.transaction_date,'%d-%m-%Y') AS `sales_date`,
+        DATE_FORMAT(py.due_date,'%d-%m-%Y') AS `due_date`,
         py.value AS `amount`,
         py.note AS `note`, d.report_status, t.tag_description AS `own_comp_name`, 
         DATE_FORMAT(NOW(),'%d-%m-%Y %H:%i:%s') AS `printed_date`, eusr.employee_name AS `printed_by`

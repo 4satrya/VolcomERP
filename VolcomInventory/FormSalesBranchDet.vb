@@ -134,6 +134,7 @@ Public Class FormSalesBranchDet
                 viewDetail()
             ElseIf rmt = "256" Then
                 'action credit note
+                id_memo_type = "2"
                 SLEUnit.EditValue = FormSalesBranch.SLEUnit.EditValue.ToString
                 SLEUnit.Enabled = False
                 TxtNumberRef.Text = FormSalesBranch.GVSales.GetFocusedRowCellValue("number").ToString

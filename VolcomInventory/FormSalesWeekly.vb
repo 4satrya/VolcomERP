@@ -78,6 +78,7 @@
         SELECT ct.id_coa_tag, ct.tag_code, ct.tag_description, CONCAT(ct.tag_code,' - ', ct.tag_description)  AS `coa_tag`
         FROM tb_coa_tag ct ORDER BY id_coa_tag ASC "
         viewSearchLookupQuery(SLEUnit, query, "id_coa_tag", "tag_description", "id_coa_tag")
+        viewSearchLookupQuery(SLEUnitWeekly, query, "id_coa_tag", "tag_description", "id_coa_tag")
     End Sub
 
     Sub load_group_store()
@@ -1081,8 +1082,11 @@
             include_promo = "2"
         End If
 
+        'tag unit
+        Dim id_coa_tag As String = SLEUnitWeekly.EditValue.ToString
+
         'excecute query
-        Dim query As String = "CALL view_sales_weekly_by_date('" + date_from_weekdate_selected + "', '" + date_until_weekdate_selected + "', " + include_promo + ")"
+        Dim query As String = "CALL view_sales_weekly_by_date('" + date_from_weekdate_selected + "', '" + date_until_weekdate_selected + "', " + include_promo + ", '" + id_coa_tag + "')"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         For i As Integer = 0 To data.Columns.Count - 1
             If data.Columns(i).ColumnName.ToString.Contains("_Qty") Then

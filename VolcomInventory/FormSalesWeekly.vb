@@ -69,6 +69,11 @@
         viewFilterMonth()
         viewFilterYear()
         viewCoaTag()
+
+        'set Tag
+        SLEUnit.EditValue = "1"
+        SLEUnitWeekly.EditValue = "1"
+        SLEUnitMonthlyDetail.EditValue = "1"
     End Sub
 
     Sub viewCoaTag()
@@ -79,6 +84,7 @@
         FROM tb_coa_tag ct ORDER BY id_coa_tag ASC "
         viewSearchLookupQuery(SLEUnit, query, "id_coa_tag", "tag_description", "id_coa_tag")
         viewSearchLookupQuery(SLEUnitWeekly, query, "id_coa_tag", "tag_description", "id_coa_tag")
+        viewSearchLookupQuery(SLEUnitMonthlyDetail, query, "id_coa_tag", "tag_description", "id_coa_tag")
     End Sub
 
     Sub load_group_store()
@@ -371,8 +377,12 @@
                 include_promo = "2"
             End If
 
+            'cond unit 
+            Dim id_unit As String = SLEUnitMonthlyDetail.EditValue.ToString
+
+
             'excecute query
-            Dim query As String = "CALL view_sales_weekly('" + date_from_weekly_selected + "', '" + date_until_weekly_selected + "', '" + id_day_weekly_selected + "', " + include_promo + ")"
+            Dim query As String = "CALL view_sales_weekly('" + date_from_weekly_selected + "', '" + date_until_weekly_selected + "', '" + id_day_weekly_selected + "', " + include_promo + ", " + id_unit + ")"
             Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
             For i As Integer = 0 To data.Columns.Count - 1
                 If data.Columns(i).ColumnName.ToString = "id_store_contact_from" Or data.Columns(i).ColumnName.ToString = "id_store" _

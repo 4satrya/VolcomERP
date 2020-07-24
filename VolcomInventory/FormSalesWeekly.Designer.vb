@@ -131,6 +131,11 @@ Partial Class FormSalesWeekly
         Me.GroupControl1 = New DevExpress.XtraEditors.GroupControl()
         Me.BtnExportToXLSWeekly = New DevExpress.XtraEditors.SimpleButton()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.SLEUnitMonthlyDetail = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView4 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl17 = New DevExpress.XtraEditors.LabelControl()
         Me.DEEndWeekly = New DevExpress.XtraEditors.DateEdit()
         Me.LabelControl7 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
@@ -212,6 +217,8 @@ Partial Class FormSalesWeekly
         Me.GroupControl1.SuspendLayout()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
+        CType(Me.SLEUnitMonthlyDetail.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEEndWeekly.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEEndWeekly.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEFromWeekly.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1233,9 +1240,9 @@ Partial Class FormSalesWeekly
         Me.GroupControlWeeklySales.Controls.Add(Me.GCSalesPOSWeekly)
         Me.GroupControlWeeklySales.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupControlWeeklySales.Enabled = False
-        Me.GroupControlWeeklySales.Location = New System.Drawing.Point(0, 52)
+        Me.GroupControlWeeklySales.Location = New System.Drawing.Point(0, 82)
         Me.GroupControlWeeklySales.Name = "GroupControlWeeklySales"
-        Me.GroupControlWeeklySales.Size = New System.Drawing.Size(1103, 428)
+        Me.GroupControlWeeklySales.Size = New System.Drawing.Size(1103, 398)
         Me.GroupControlWeeklySales.TabIndex = 4
         '
         'GCSalesPOSWeekly
@@ -1244,7 +1251,7 @@ Partial Class FormSalesWeekly
         Me.GCSalesPOSWeekly.Location = New System.Drawing.Point(20, 2)
         Me.GCSalesPOSWeekly.MainView = Me.BGVSalesPOSWeekly
         Me.GCSalesPOSWeekly.Name = "GCSalesPOSWeekly"
-        Me.GCSalesPOSWeekly.Size = New System.Drawing.Size(1081, 424)
+        Me.GCSalesPOSWeekly.Size = New System.Drawing.Size(1081, 394)
         Me.GCSalesPOSWeekly.TabIndex = 3
         Me.GCSalesPOSWeekly.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.BGVSalesPOSWeekly})
         '
@@ -1270,12 +1277,12 @@ Partial Class FormSalesWeekly
         Me.GroupControl1.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupControl1.Location = New System.Drawing.Point(0, 0)
         Me.GroupControl1.Name = "GroupControl1"
-        Me.GroupControl1.Size = New System.Drawing.Size(1103, 52)
+        Me.GroupControl1.Size = New System.Drawing.Size(1103, 82)
         Me.GroupControl1.TabIndex = 2
         '
         'BtnExportToXLSWeekly
         '
-        Me.BtnExportToXLSWeekly.Location = New System.Drawing.Point(681, 16)
+        Me.BtnExportToXLSWeekly.Location = New System.Drawing.Point(610, 29)
         Me.BtnExportToXLSWeekly.LookAndFeel.SkinName = "Blue"
         Me.BtnExportToXLSWeekly.Name = "BtnExportToXLSWeekly"
         Me.BtnExportToXLSWeekly.Size = New System.Drawing.Size(92, 20)
@@ -1284,6 +1291,8 @@ Partial Class FormSalesWeekly
         '
         'PanelControl1
         '
+        Me.PanelControl1.Controls.Add(Me.SLEUnitMonthlyDetail)
+        Me.PanelControl1.Controls.Add(Me.LabelControl17)
         Me.PanelControl1.Controls.Add(Me.DEEndWeekly)
         Me.PanelControl1.Controls.Add(Me.LabelControl7)
         Me.PanelControl1.Controls.Add(Me.LabelControl6)
@@ -1294,8 +1303,47 @@ Partial Class FormSalesWeekly
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Left
         Me.PanelControl1.Location = New System.Drawing.Point(20, 2)
         Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(574, 48)
+        Me.PanelControl1.Size = New System.Drawing.Size(502, 78)
         Me.PanelControl1.TabIndex = 8933
+        '
+        'SLEUnitMonthlyDetail
+        '
+        Me.SLEUnitMonthlyDetail.Location = New System.Drawing.Point(42, 40)
+        Me.SLEUnitMonthlyDetail.Name = "SLEUnitMonthlyDetail"
+        Me.SLEUnitMonthlyDetail.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEUnitMonthlyDetail.Properties.View = Me.GridView4
+        Me.SLEUnitMonthlyDetail.Size = New System.Drawing.Size(340, 20)
+        Me.SLEUnitMonthlyDetail.TabIndex = 8937
+        '
+        'GridView4
+        '
+        Me.GridView4.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn7, Me.GridColumn8})
+        Me.GridView4.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView4.Name = "GridView4"
+        Me.GridView4.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView4.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn7
+        '
+        Me.GridColumn7.Caption = "id_coa_tag"
+        Me.GridColumn7.FieldName = "id_coa_tag"
+        Me.GridColumn7.Name = "GridColumn7"
+        '
+        'GridColumn8
+        '
+        Me.GridColumn8.Caption = "Unit"
+        Me.GridColumn8.FieldName = "coa_tag"
+        Me.GridColumn8.Name = "GridColumn8"
+        Me.GridColumn8.Visible = True
+        Me.GridColumn8.VisibleIndex = 0
+        '
+        'LabelControl17
+        '
+        Me.LabelControl17.Location = New System.Drawing.Point(12, 43)
+        Me.LabelControl17.Name = "LabelControl17"
+        Me.LabelControl17.Size = New System.Drawing.Size(19, 13)
+        Me.LabelControl17.TabIndex = 8936
+        Me.LabelControl17.Text = "Unit"
         '
         'DEEndWeekly
         '
@@ -1358,7 +1406,7 @@ Partial Class FormSalesWeekly
         '
         'CEPromoWeekly
         '
-        Me.CEPromoWeekly.Location = New System.Drawing.Point(483, 14)
+        Me.CEPromoWeekly.Location = New System.Drawing.Point(388, 40)
         Me.CEPromoWeekly.Name = "CEPromoWeekly"
         Me.CEPromoWeekly.Properties.Caption = "Include Promo"
         Me.CEPromoWeekly.Size = New System.Drawing.Size(89, 19)
@@ -1384,7 +1432,7 @@ Partial Class FormSalesWeekly
         '
         'BtnViewWeeklySales
         '
-        Me.BtnViewWeeklySales.Location = New System.Drawing.Point(602, 16)
+        Me.BtnViewWeeklySales.Location = New System.Drawing.Point(531, 29)
         Me.BtnViewWeeklySales.LookAndFeel.SkinName = "Blue"
         Me.BtnViewWeeklySales.Name = "BtnViewWeeklySales"
         Me.BtnViewWeeklySales.Size = New System.Drawing.Size(75, 20)
@@ -1596,6 +1644,8 @@ Partial Class FormSalesWeekly
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         Me.PanelControl1.PerformLayout()
+        CType(Me.SLEUnitMonthlyDetail.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEEndWeekly.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEEndWeekly.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEFromWeekly.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1755,4 +1805,9 @@ Partial Class FormSalesWeekly
     Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents LabelControl16 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents SLEUnitMonthlyDetail As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView4 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn7 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn8 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LabelControl17 As DevExpress.XtraEditors.LabelControl
 End Class

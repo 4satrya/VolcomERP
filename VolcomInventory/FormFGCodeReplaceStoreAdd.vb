@@ -51,7 +51,7 @@
     Private Sub TxtStoreCode_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtStoreCode.KeyDown
         If e.KeyCode = Keys.Enter Then
             Dim code As String = addSlashes(TxtStoreCode.Text)
-            Dim data As DataTable = get_company_by_code(code, "AND (comp.id_comp_cat = 6 OR comp.id_comp_cat =5) ")
+            Dim data As DataTable = get_company_by_code(code, "AND (comp.id_comp_cat = 6 OR comp.id_comp_cat =5) AND comp.is_only_for_alloc=2 ")
             If data.Rows.Count > 0 Then
                 If data.Rows.Count > 1 Then
                     FormMasterCompanyDouble.dt = data

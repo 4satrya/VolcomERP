@@ -223,7 +223,28 @@
                 'propose schedule
                 Dim qupd As String = "UPDATE tb_emp_assign_sch SET id_report_status=5 WHERE id_assign_sch=" + id_report + " "
                 execute_non_query(qupd, True, "", "", "", "")
+            ElseIf report_mark_type = "157" Then
+                'expense
+                Dim qupd As String = "UPDATE tb_item_expense SET id_report_status=5 WHERE id_item_expense=" + id_report + " "
+                execute_non_query(qupd, True, "", "", "", "")
+            ElseIf report_mark_type = "189" Then
+                'bukti pembelian
+                Dim qupd As String = "UPDATE tb_pn_fgpo SET id_report_status=5 WHERE id_pn_fgpo=" + id_report + " "
+                execute_non_query(qupd, True, "", "", "", "")
+            ElseIf report_mark_type = "159" Then
+                'BBK
+                Dim qupd As String = "UPDATE tb_pn SET id_report_status=5 WHERE id_pn=" + id_report + " "
+                execute_non_query(qupd, True, "", "", "", "")
+            ElseIf report_mark_type = "36" Then
+                'Entry Journal
+                Dim qupd As String = "UPDATE tb_a_acc_trans SET id_report_status=5 WHERE id_acc_trans=" + id_report + " "
+                execute_non_query(qupd, True, "", "", "", "")
+            ElseIf report_mark_type = "137" Or report_mark_type = "201" Or report_mark_type = "218" Then
+                'Purchase Request
+                Dim qupd As String = "UPDATE tb_purc_req SET id_report_status=5 WHERE id_purc_req=" + id_report + " "
+                execute_non_query(qupd, True, "", "", "", "")
             End If
+
             FormReportMark.sendNotif("2")
             close_form(FormReportMark.report_mark_type)
             FormReportMark.Close()

@@ -1552,7 +1552,7 @@ Public Class FormSalesPOSDet
             SELECT so.id_sales_order, so.sales_order_ol_shop_number , so.sales_order_number
             FROM tb_sales_order so
             INNER JOIN tb_pl_sales_order_del del ON del.id_sales_order = so.id_sales_order
-            WHERE so.id_report_status=6 AND del.id_report_status=6 AND so.sales_order_ol_shop_number!='' AND so.id_store_contact_to='" + id_store_contact_from + "'
+            WHERE so.id_report_status=6 AND del.id_report_status=6 AND so.sales_order_ol_shop_number!='' AND so.id_store_contact_to='" + id_store_contact_from + "' AND (so.id_so_status!=15)
             GROUP BY so.id_sales_order
         ) so ON so.sales_order_ol_shop_number = o.`order`
         LEFT JOIN tb_pl_sales_order_del del ON del.id_sales_order = so.id_sales_order AND del.id_report_status=6
@@ -1596,7 +1596,7 @@ Public Class FormSalesPOSDet
         FROM tb_pl_sales_order_del_det dd
         INNER JOIN tb_pl_sales_order_del d ON d.id_pl_sales_order_del = dd.id_pl_sales_order_del
         INNER JOIN tb_sales_order_det sod ON sod.id_sales_order_det = dd.id_sales_order_det
-        INNER JOIN tb_sales_order so ON so.id_sales_order = sod.id_sales_order
+        INNER JOIN tb_sales_order so ON so.id_sales_order = sod.id_sales_order AND so.id_so_status!=15
         LEFT JOIN (
 	        SELECT ind.id_sales_pos_det, ind.id_pl_sales_order_del_det
 	        FROM tb_sales_pos_det ind 
@@ -1954,7 +1954,7 @@ Public Class FormSalesPOSDet
             INNER JOIN tb_m_wh_rack rck ON rck.id_wh_rack = drw.id_wh_rack 
             INNER JOIN tb_m_wh_locator loc ON loc.id_wh_locator = rck.id_wh_locator "
             query += " LEFT JOIN tb_sales_pos sp ON sp.id_pl_sales_order_del=pldel.id_pl_sales_order_del AND sp.id_report_status !=5 "
-            query += " WHERE pldel.id_report_status='6' AND pldel.is_combine='2' AND pldel.pl_sales_order_del_number='" + addSlashes(TEDO.Text) + "' " + so_cat + " "
+            query += " WHERE pldel.id_report_status='6' AND pldel.pl_sales_order_del_number='" + addSlashes(TEDO.Text) + "' " + so_cat + " "
             Dim data As DataTable = execute_query(query, "-1", True, "", "", "", "")
 
             If data.Rows.Count <= 0 Then

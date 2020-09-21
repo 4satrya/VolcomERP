@@ -15,7 +15,7 @@
         End If
 
         GCPO.DataSource = execute_query("
-            SELECT po.est_date_receive, po.id_purc_order, c.comp_number, c.comp_name, po.purc_order_number, (SUM(pod.qty * (pod.value - pod.discount)) - po.disc_value + po.vat_value) AS total_po, IF(ISNULL(rec.id_purc_order_det), 0, SUM(rec.qty * (pod.value - pod.discount)) - (SUM(rec.qty * (pod.value - pod.discount)) / SUM(pod.qty * (pod.value - pod.discount)) * po.disc_value) + (SUM(rec.qty * (pod.value - pod.discount)) / SUM(pod.qty * (pod.value - pod.discount)) * po.vat_value)) AS total_rec, (IFNULL(SUM(rec.qty * pod.value), 0) / SUM(pod.qty * pod.value)) * 100 AS rec_progress, IF(po.is_close_rec = 1, 'Closed', IF((IFNULL(SUM(rec.qty), 0) / SUM(pod.qty)) <= 0, 'Waiting', IF((IFNULL(SUM(rec.qty), 0) / SUM(pod.qty)) < 1, 'Partial', 'Complete'))) AS rec_status, '' AS close_rec_reason, '' AS to_est_date_receive
+            SELECT po.est_date_receive, po.id_purc_order, c.comp_number, c.comp_name, po.purc_order_number, (SUM(pod.qty * (pod.value - pod.discount)) - po.disc_value + po.vat_value) AS total_po, IF(ISNULL(rec.id_purc_order_det), 0, SUM(rec.qty * (pod.value - pod.discount)) - (SUM(rec.qty * (pod.value - pod.discount)) / SUM(pod.qty * (pod.value - pod.discount)) * po.disc_value) + (SUM(rec.qty * (pod.value - pod.discount)) / SUM(pod.qty * (pod.value - pod.discount)) * po.vat_value)) AS total_rec, SUM(pod.qty) AS po_qty, IFNULL(SUM(rec.qty), 0) AS rec_qty, (IFNULL(SUM(rec.qty * pod.value), 0) / SUM(pod.qty * pod.value)) * 100 AS rec_progress, IF(po.is_close_rec = 1, 'Closed', IF((IFNULL(SUM(rec.qty), 0) / SUM(pod.qty)) <= 0, 'Waiting', IF((IFNULL(SUM(rec.qty), 0) / SUM(pod.qty)) < 1, 'Partial', 'Complete'))) AS rec_status, '' AS close_rec_reason, '' AS to_est_date_receive
             FROM tb_purc_order po
             INNER JOIN tb_purc_order_det pod ON pod.`id_purc_order` = po.`id_purc_order`
             INNER JOIN tb_m_user usr_cre ON usr_cre.id_user = po.created_by
@@ -61,6 +61,8 @@
         n_row("total_rec") = GVPO.GetFocusedRowCellValue("total_rec").ToString
         n_row("rec_progress") = GVPO.GetFocusedRowCellValue("rec_progress").ToString
         n_row("rec_status") = GVPO.GetFocusedRowCellValue("rec_status").ToString
+        n_row("po_qty") = GVPO.GetFocusedRowCellValue("po_qty").ToString
+        n_row("rec_qty") = GVPO.GetFocusedRowCellValue("rec_qty").ToString
         n_row("close_rec_reason") = ""
         n_row("to_est_date_receive") = DBNull.Value
 

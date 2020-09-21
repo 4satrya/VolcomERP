@@ -620,6 +620,7 @@ Public Class FormFGRepairDet
                 Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Stock qty will be updated after this process. Are you sure to continue this process?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
                 If confirm = Windows.Forms.DialogResult.Yes Then
                     Cursor = Cursors.WaitCursor
+                    BtnSave.Enabled = False
                     'main query
                     Dim is_to_vendor As String = ""
                     If FormFGRepair.is_to_vendor = True Then

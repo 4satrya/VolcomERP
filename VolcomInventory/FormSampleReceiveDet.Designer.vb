@@ -305,7 +305,7 @@ Partial Class FormSampleReceiveDet
         '
         'BShipTo
         '
-        Me.BShipTo.Location = New System.Drawing.Point(441, 35)
+        Me.BShipTo.Location = New System.Drawing.Point(270, 61)
         Me.BShipTo.Name = "BShipTo"
         Me.BShipTo.Size = New System.Drawing.Size(23, 20)
         Me.BShipTo.TabIndex = 141

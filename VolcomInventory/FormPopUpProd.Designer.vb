@@ -19,46 +19,46 @@ Partial Class FormPopUpProd
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.SCCProd = New DevExpress.XtraEditors.SplitContainerControl
-        Me.GroupControlProd = New DevExpress.XtraEditors.GroupControl
-        Me.GCProd = New DevExpress.XtraGrid.GridControl
-        Me.GVProd = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.GridColumnProdNo = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnReportStatus = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnIdReportStatus = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnProdDate = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnLeadTime = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnPOType = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnTerm = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnDesign = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnCode = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnIdPO = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnIdSeason = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnSeason = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnIdDelivery = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnDelivery = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.RIPictureEdit = New DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit
-        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GroupControlListProd = New DevExpress.XtraEditors.GroupControl
-        Me.GCListProduct = New DevExpress.XtraGrid.GridControl
-        Me.GVListProduct = New DevExpress.XtraGrid.Views.Grid.GridView
-        Me.ColIdPurcDet = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColIdMat = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColNo = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColCode = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColName = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColPrice = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColQty = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnQtyReceived = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.GridColumnRemainingQty = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColSubtotal = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColNote = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColColor = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.ColSize = New DevExpress.XtraGrid.Columns.GridColumn
-        Me.PCNav = New DevExpress.XtraEditors.PanelControl
-        Me.BCancel = New DevExpress.XtraEditors.SimpleButton
-        Me.BSave = New DevExpress.XtraEditors.SimpleButton
+        Me.SCCProd = New DevExpress.XtraEditors.SplitContainerControl()
+        Me.GroupControlProd = New DevExpress.XtraEditors.GroupControl()
+        Me.GCProd = New DevExpress.XtraGrid.GridControl()
+        Me.GVProd = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumnProdNo = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnReportStatus = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnIdReportStatus = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnProdDate = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnLeadTime = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnPOType = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnTerm = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnDesign = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnCode = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnIdPO = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnIdSeason = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnSeason = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnIdDelivery = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnDelivery = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RIPictureEdit = New DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit()
+        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GroupControlListProd = New DevExpress.XtraEditors.GroupControl()
+        Me.GCListProduct = New DevExpress.XtraGrid.GridControl()
+        Me.GVListProduct = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.ColIdPurcDet = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColIdMat = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColNo = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColCode = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColName = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColPrice = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColQty = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnQtyReceived = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnRemainingQty = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColSubtotal = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColNote = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColColor = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColSize = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.PCNav = New DevExpress.XtraEditors.PanelControl()
+        Me.BCancel = New DevExpress.XtraEditors.SimpleButton()
+        Me.BSave = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.SCCProd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SCCProd.SuspendLayout()
         CType(Me.GroupControlProd, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -84,7 +84,7 @@ Partial Class FormPopUpProd
         Me.SCCProd.Panel1.Text = "Panel1"
         Me.SCCProd.Panel2.Controls.Add(Me.GroupControlListProd)
         Me.SCCProd.Panel2.Text = "Panel2"
-        Me.SCCProd.Size = New System.Drawing.Size(926, 529)
+        Me.SCCProd.Size = New System.Drawing.Size(926, 519)
         Me.SCCProd.SplitterPosition = 241
         Me.SCCProd.TabIndex = 3
         Me.SCCProd.Text = "SplitContainerControl1"
@@ -102,11 +102,11 @@ Partial Class FormPopUpProd
         'GCProd
         '
         Me.GCProd.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCProd.Location = New System.Drawing.Point(2, 22)
+        Me.GCProd.Location = New System.Drawing.Point(2, 21)
         Me.GCProd.MainView = Me.GVProd
         Me.GCProd.Name = "GCProd"
         Me.GCProd.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RIPictureEdit})
-        Me.GCProd.Size = New System.Drawing.Size(922, 217)
+        Me.GCProd.Size = New System.Drawing.Size(922, 218)
         Me.GCProd.TabIndex = 3
         Me.GCProd.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVProd})
         '
@@ -256,18 +256,18 @@ Partial Class FormPopUpProd
         Me.GroupControlListProd.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupControlListProd.Location = New System.Drawing.Point(0, 0)
         Me.GroupControlListProd.Name = "GroupControlListProd"
-        Me.GroupControlListProd.Size = New System.Drawing.Size(926, 282)
+        Me.GroupControlListProd.Size = New System.Drawing.Size(926, 272)
         Me.GroupControlListProd.TabIndex = 1
         Me.GroupControlListProd.Text = "List Production Order"
         '
         'GCListProduct
         '
         Me.GCListProduct.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCListProduct.Location = New System.Drawing.Point(2, 22)
+        Me.GCListProduct.Location = New System.Drawing.Point(2, 21)
         Me.GCListProduct.MainView = Me.GVListProduct
         Me.GCListProduct.Margin = New System.Windows.Forms.Padding(0)
         Me.GCListProduct.Name = "GCListProduct"
-        Me.GCListProduct.Size = New System.Drawing.Size(922, 258)
+        Me.GCListProduct.Size = New System.Drawing.Size(922, 249)
         Me.GCListProduct.TabIndex = 1
         Me.GCListProduct.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVListProduct})
         '
@@ -438,11 +438,11 @@ Partial Class FormPopUpProd
         Me.PCNav.Controls.Add(Me.BCancel)
         Me.PCNav.Controls.Add(Me.BSave)
         Me.PCNav.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PCNav.Location = New System.Drawing.Point(0, 529)
+        Me.PCNav.Location = New System.Drawing.Point(0, 519)
         Me.PCNav.LookAndFeel.SkinName = "Blue"
         Me.PCNav.LookAndFeel.UseDefaultLookAndFeel = False
         Me.PCNav.Name = "PCNav"
-        Me.PCNav.Size = New System.Drawing.Size(926, 30)
+        Me.PCNav.Size = New System.Drawing.Size(926, 40)
         Me.PCNav.TabIndex = 2
         '
         'BCancel
@@ -451,7 +451,7 @@ Partial Class FormPopUpProd
         Me.BCancel.Dock = System.Windows.Forms.DockStyle.Right
         Me.BCancel.Location = New System.Drawing.Point(784, 2)
         Me.BCancel.Name = "BCancel"
-        Me.BCancel.Size = New System.Drawing.Size(70, 26)
+        Me.BCancel.Size = New System.Drawing.Size(70, 36)
         Me.BCancel.TabIndex = 4
         Me.BCancel.Text = "Cancel"
         '
@@ -460,7 +460,7 @@ Partial Class FormPopUpProd
         Me.BSave.Dock = System.Windows.Forms.DockStyle.Right
         Me.BSave.Location = New System.Drawing.Point(854, 2)
         Me.BSave.Name = "BSave"
-        Me.BSave.Size = New System.Drawing.Size(70, 26)
+        Me.BSave.Size = New System.Drawing.Size(70, 36)
         Me.BSave.TabIndex = 3
         Me.BSave.Text = "Choose"
         '

@@ -1171,8 +1171,10 @@
             '
             If GVCompany.GetFocusedRowCellValue("id_tax").ToString = "2" Then
                 FormPurcOrderDet.TEVATPercent.ReadOnly = False
+                FormPurcOrderDet.TEDPPPercent.ReadOnly = False
             Else
                 FormPurcOrderDet.TEVATPercent.ReadOnly = True
+                FormPurcOrderDet.TEDPPPercent.ReadOnly = True
             End If
             '
             FormPurcOrderDet.TEVendorAttn.Text = GVCompanyContactList.GetFocusedRowCellValue("contact_person").ToString

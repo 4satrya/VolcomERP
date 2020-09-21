@@ -211,7 +211,7 @@
             Dim id_so As String = dso.Rows(0)("id_sales_order").ToString
             Dim id_so_status As String = dso.Rows(0)("id_so_status").ToString
 
-            If id_so_status <> "14" Then
+            If id_so_status <> "14" And id_so_status <> "15" Then
                 'reguler
                 Dim query_complete As String = "
                 -- delete so first (strage)
@@ -329,13 +329,15 @@
                     stopCustom("Automatic journal failed. Please contact administrator. " + System.Environment.NewLine + ex.ToString)
                 End Try
                 'shipping invoice
-                Try
-                    Dim shp As New ClassShipInvoice()
-                    shp.id_invoice_ship = "-1"
-                    shp.create(id_report_par)
-                Catch ex As Exception
+                If id_so_status = "14" Then
+                    Try
+                        Dim shp As New ClassShipInvoice()
+                        shp.id_invoice_ship = "-1"
+                        shp.create(id_report_par)
+                    Catch ex As Exception
 
-                End Try
+                    End Try
+                End If
             End If
 
             'unique

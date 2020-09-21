@@ -173,7 +173,16 @@ ORDER BY po.`id_prod_order` ASC"
     End Sub
 
     Private Sub BPrintkp_Click(sender As Object, e As EventArgs) Handles BPrintKP.Click
-        Dim query As String = "SELECT c.phone,c.fax,kp.number,cc.`contact_person`,c.`comp_number`,c.`comp_name`,c.`address_primary`,DATE_FORMAT(kp.`date_created`,'%d %M %Y') AS date_created,LPAD(kp.`revision`,2,'0') AS revision
+        'check copy proto 2 first
+        Dim q As String = "SELECT po.cps2_verify 
+FROM `tb_prod_order_kp_det` kpd
+INNER JOIN tb_prod_order po ON po.`id_prod_order`=kpd.`id_prod_order`
+WHERE po.cps2_verify=2 AND kpd.`id_prod_order_kp`='" & SLERevision.EditValue.ToString & "' AND po.is_need_cps2_verify=1"
+        Dim dtc As DataTable = execute_query(q, -1, True, "", "", "", "")
+        If dtc.Rows.Count > 0 Then
+            warningCustom("Copy Proto 2 belum terverifikasi.")
+        Else
+            Dim query As String = "SELECT c.phone,c.fax,kp.number,cc.`contact_person`,c.`comp_number`,c.`comp_name`,c.`address_primary`,DATE_FORMAT(kp.`date_created`,'%d %M %Y') AS date_created,LPAD(kp.`revision`,2,'0') AS revision
 ,emp_created.employee_name AS emp_name_created,emp_created.`employee_position` AS created_pos
 ,emp_purc_mngr.employee_name AS emp_name_purc_mngr,rl_purc_mngr.`role` AS purc_mngr_pos
 ,emp_ast_mngr.employee_name AS emp_name_asst_prod_mngr,rl_asst_mngr.`role` AS asst_prod_mngr_pos
@@ -189,22 +198,23 @@ INNER JOIN tb_m_employee emp_ast_mngr ON emp_ast_mngr.`id_employee`=usr_ast_mngr
 INNER JOIN tb_m_role rl_purc_mngr ON rl_purc_mngr.id_role=usr_purc_mngr.id_role
 INNER JOIN tb_m_role rl_asst_mngr ON rl_asst_mngr.id_role=usr_ast_mngr.id_role
 WHERE id_prod_order_kp='" & SLERevision.EditValue.ToString & "'"
-        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
-        ReportProductionKP.dt_head = data
-        '
-        ReportProductionKP.dt_det = GCProd.DataSource
+            Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+            ReportProductionKP.dt_head = data
+            '
+            ReportProductionKP.dt_det = GCProd.DataSource
 
 
-        Dim Report As New ReportProductionKP()
-        Report.LQtyOrder.Text = Decimal.Parse(GVProd.Columns("qty_order").SummaryItem.SummaryValue.ToString).ToString("N0")
-        '
-        Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
-        If Not is_locked = "1" Then
-            Tool.PrintingSystem.SetCommandVisibility(DevExpress.XtraPrinting.PrintingSystemCommand.Print, DevExpress.XtraPrinting.CommandVisibility.None)
-            Tool.PrintingSystem.SetCommandVisibility(DevExpress.XtraPrinting.PrintingSystemCommand.PrintDirect, DevExpress.XtraPrinting.CommandVisibility.None)
-            Tool.PrintingSystem.SetCommandVisibility(DevExpress.XtraPrinting.PrintingSystemCommand.SendFile, DevExpress.XtraPrinting.CommandVisibility.None)
+            Dim Report As New ReportProductionKP()
+            Report.LQtyOrder.Text = Decimal.Parse(GVProd.Columns("qty_order").SummaryItem.SummaryValue.ToString).ToString("N0")
+            '
+            Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
+            If Not is_locked = "1" Then
+                Tool.PrintingSystem.SetCommandVisibility(DevExpress.XtraPrinting.PrintingSystemCommand.Print, DevExpress.XtraPrinting.CommandVisibility.None)
+                Tool.PrintingSystem.SetCommandVisibility(DevExpress.XtraPrinting.PrintingSystemCommand.PrintDirect, DevExpress.XtraPrinting.CommandVisibility.None)
+                Tool.PrintingSystem.SetCommandVisibility(DevExpress.XtraPrinting.PrintingSystemCommand.SendFile, DevExpress.XtraPrinting.CommandVisibility.None)
+            End If
+            Tool.ShowPreview()
         End If
-        Tool.ShowPreview()
     End Sub
 
     Private Sub BRevise_Click(sender As Object, e As EventArgs) Handles BRevise.Click

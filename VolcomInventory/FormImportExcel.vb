@@ -3122,12 +3122,12 @@ Public Class FormImportExcel
             GVData.Columns("status").Caption = "Description"
         ElseIf id_pop_up = "50" Then
             Dim queryx As String = "SELECT ol.id_list_payout, ol.id AS `id_order`, ol.checkout_id,ol.sales_order_ol_shop_number, ol.payment AS curr_payout,
-            ol.trans_fee AS curr_fee,ol.pay_type AS curr_pay_type,SUM(((pos.`sales_pos_total`*((100-pos.sales_pos_discount)/100))-pos.`sales_pos_potongan`))+IFNULL(sh.ship_amo,0)+IFNULL(ol.other_price,0.00) AS amount,IFNULL(ol.other_price,0.00) AS `other_price`
+            ol.trans_fee AS curr_fee,ol.pay_type AS curr_pay_type,SUM(((pos.`sales_pos_total`*((100-pos.sales_pos_discount)/100))-pos.`sales_pos_potongan`))+IFNULL(sh.ship_amo,0)+IFNULL(ol.other_price_sum,0.00) AS amount,IFNULL(ol.other_price_sum,0.00) AS `other_price`,
             GROUP_CONCAT(DISTINCT(pos.`sales_pos_number`)) AS inv_number, sh.ship_number AS `ship_inv_number`,
             GROUP_CONCAT(DISTINCT(pos.`id_sales_pos`)) AS id_sales_pos, IFNULL(sh.id_invoice_ship,0) AS `id_invoice_ship`
             FROM
             (
-	            SELECT ol.*,lp.`payment`,lp.`trans_fee`,lp.pay_type, lp.id_list_payout, ol.other_price
+	            SELECT ol.*,lp.`payment`,lp.`trans_fee`,lp.pay_type, lp.id_list_payout, SUM(ol.other_price * ol.sales_order_det_qty) AS `other_price_sum`
 	            FROM tb_ol_store_order ol
 	            LEFT JOIN tb_list_payout lp ON lp.id=ol.`id`
 	            WHERE NOT ISNULL(ol.`checkout_id`)
@@ -3386,13 +3386,13 @@ INNER JOIN tb_m_city ct ON ct.`id_city`=sd.`id_city`"
             'Customize column
             GVData.Columns("id_sub_district").Visible = False
         ElseIf id_pop_up = "53" Then 'import VA BBM
-            Dim queryx As String = "SELECT ol.id_virtual_acc_trans, ol.id AS `id_order`, ol.checkout_id, IFNULL(ol.other_price,0.00) AS `other_price`,ol.sales_order_ol_shop_number,
-            SUM(CAST(((pos.`sales_pos_total`*((100-pos.sales_pos_discount)/100))-pos.`sales_pos_potongan`) AS DECIMAL(15,2)))+IFNULL(sh.ship_amo,0)+IFNULL(ol.other_price,0.00) AS amount,
+            Dim queryx As String = "SELECT ol.id_virtual_acc_trans, ol.id AS `id_order`, ol.checkout_id, IFNULL(ol.other_price_sum,0.00) AS `other_price`,ol.sales_order_ol_shop_number,
+            SUM(CAST(((pos.`sales_pos_total`*((100-pos.sales_pos_discount)/100))-pos.`sales_pos_potongan`) AS DECIMAL(15,2)))+IFNULL(sh.ship_amo,0)+IFNULL(ol.other_price_sum,0.00) AS amount,
             GROUP_CONCAT(DISTINCT(pos.`sales_pos_number`)) AS inv_number, sh.ship_number AS `ship_inv_number`,
             GROUP_CONCAT(DISTINCT(pos.`id_sales_pos`)) AS id_sales_pos, IFNULL(sh.id_invoice_ship,0) AS `id_invoice_ship`
             FROM (
 	            SELECT ol.id, ol.checkout_id,ol.sales_order_ol_shop_number,
-	            IFNULL(lp.id_virtual_acc_trans,0) AS `id_virtual_acc_trans`, ol.other_price
+	            IFNULL(lp.id_virtual_acc_trans,0) AS `id_virtual_acc_trans`, SUM(ol.other_price * ol.sales_order_det_qty) AS `other_price_sum`
 	            FROM tb_ol_store_order ol
 	            LEFT JOIN tb_virtual_acc_trans_det lp ON lp.id =ol.`id`
 	            WHERE NOT ISNULL(ol.`checkout_id`)

@@ -681,8 +681,8 @@ GROUP BY p.sku"
                             Dim json_diskon As Newtonsoft.Json.Linq.JObject = Newtonsoft.Json.Linq.JObject.Parse(responseFromServerDc)
                             If json_diskon("discount_codes").Count > 0 Then
                                 Dim j As Integer = 0
+                                Dim id_ol_promo_collection As String = ""
                                 For Each row_diskon In json_diskon("discount_codes").ToList
-                                    Dim id_ol_promo_collection As String = ""
                                     If j = 0 Then
                                         'insert to promo
                                         discount_title = addSlashes(row("title").ToString)

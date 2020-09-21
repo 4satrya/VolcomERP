@@ -436,6 +436,7 @@ Public Class FormFGRepairRecDet
                 Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure to continue this process?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
                 If confirm = Windows.Forms.DialogResult.Yes Then
                     Cursor = Cursors.WaitCursor
+                    BtnSave.Enabled = False
                     'main query
                     Dim query As String = "INSERT INTO tb_fg_repair_rec(id_fg_repair,id_wh_drawer_from, id_wh_drawer_to, fg_repair_rec_number, fg_repair_rec_date, fg_repair_rec_note, id_report_status ,is_use_unique_code) 
                                            VALUES('" + id_fg_repair_select + "','" + id_wh_drawer_from + "', '" + id_wh_drawer_to + "','" + header_number_sales("28") + "', NOW(), '" + fg_repair_rec_note + "', '1','" + is_use_unique_code_wh + "'); SELECT LAST_INSERT_ID(); "

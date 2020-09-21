@@ -66,6 +66,10 @@ Partial Class FormProductionSampleOrder
         Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnDesign = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RISLESize = New DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit()
+        Me.GVSize = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn14 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnDescription = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnColor = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnOrderQty = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -89,6 +93,7 @@ Partial Class FormProductionSampleOrder
         Me.GridColumnProto2Sample = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RIDESampleProto2 = New DevExpress.XtraEditors.Repository.RepositoryItemDateEdit()
         Me.RIPictureEdit = New DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit()
+        Me.GridColumn15 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.ImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
@@ -113,6 +118,8 @@ Partial Class FormProductionSampleOrder
         Me.PCDel.SuspendLayout()
         CType(Me.GCProd, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVProd, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RISLESize, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVSize, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RIDESampleProto2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RIDESampleProto2.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RIPictureEdit, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -476,7 +483,7 @@ Partial Class FormProductionSampleOrder
         Me.GCProd.Location = New System.Drawing.Point(0, 210)
         Me.GCProd.MainView = Me.GVProd
         Me.GCProd.Name = "GCProd"
-        Me.GCProd.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RIPictureEdit, Me.RIDESampleProto2})
+        Me.GCProd.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RIPictureEdit, Me.RIDESampleProto2, Me.RISLESize})
         Me.GCProd.Size = New System.Drawing.Size(1011, 336)
         Me.GCProd.TabIndex = 22
         Me.GCProd.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVProd})
@@ -490,7 +497,7 @@ Partial Class FormProductionSampleOrder
         Me.GVProd.AppearancePrint.HeaderPanel.Options.UseTextOptions = True
         Me.GVProd.AppearancePrint.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
         Me.GVProd.ColumnPanelRowHeight = 50
-        Me.GVProd.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn18, Me.GridColumnNo, Me.GridColumnPOType, Me.GridColumnCompName, Me.GridColumn1, Me.GridColumnProdNo, Me.GridColumnTerm, Me.GridColumn10, Me.GridColumn9, Me.GridColumnDesign, Me.GridColumnDescription, Me.GridColumnColor, Me.GridColumnOrderQty, Me.GridColumnRecQty, Me.GridColumnIdPO, Me.GridColumnRange, Me.GridColumnIdDelivery, Me.GridColumnDelivery, Me.GridColumn17, Me.GridColumnLeadTime, Me.GridColumn2, Me.GridColumn11, Me.GridColumn4, Me.GridColumn5, Me.GridColumn7, Me.GridColumn12, Me.GridColumnPOCurr, Me.GridColumnPOAmount, Me.GridColumnPOKurs, Me.GridColumn13, Me.GridColumnProto2Sample})
+        Me.GVProd.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn18, Me.GridColumnNo, Me.GridColumnPOType, Me.GridColumnCompName, Me.GridColumn1, Me.GridColumnProdNo, Me.GridColumnTerm, Me.GridColumn10, Me.GridColumn9, Me.GridColumnDesign, Me.GridColumn3, Me.GridColumnDescription, Me.GridColumnColor, Me.GridColumnOrderQty, Me.GridColumnRecQty, Me.GridColumnIdPO, Me.GridColumnRange, Me.GridColumnIdDelivery, Me.GridColumnDelivery, Me.GridColumn17, Me.GridColumnLeadTime, Me.GridColumn2, Me.GridColumn11, Me.GridColumn4, Me.GridColumn5, Me.GridColumn7, Me.GridColumn12, Me.GridColumnPOCurr, Me.GridColumnPOAmount, Me.GridColumnPOKurs, Me.GridColumn13, Me.GridColumnProto2Sample})
         Me.GVProd.GridControl = Me.GCProd
         Me.GVProd.Name = "GVProd"
         Me.GVProd.OptionsSelection.EnableAppearanceFocusedRow = False
@@ -580,6 +587,42 @@ Partial Class FormProductionSampleOrder
         Me.GridColumnDesign.OptionsColumn.AllowEdit = False
         Me.GridColumnDesign.Width = 121
         '
+        'GridColumn3
+        '
+        Me.GridColumn3.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn3.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn3.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn3.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn3.Caption = "Size"
+        Me.GridColumn3.ColumnEdit = Me.RISLESize
+        Me.GridColumn3.FieldName = "size"
+        Me.GridColumn3.Name = "GridColumn3"
+        Me.GridColumn3.Visible = True
+        Me.GridColumn3.VisibleIndex = 3
+        '
+        'RISLESize
+        '
+        Me.RISLESize.AutoHeight = False
+        Me.RISLESize.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.RISLESize.Name = "RISLESize"
+        Me.RISLESize.View = Me.GVSize
+        '
+        'GVSize
+        '
+        Me.GVSize.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn15, Me.GridColumn14})
+        Me.GVSize.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GVSize.Name = "GVSize"
+        Me.GVSize.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GVSize.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn14
+        '
+        Me.GridColumn14.Caption = "Size"
+        Me.GridColumn14.FieldName = "size"
+        Me.GridColumn14.Name = "GridColumn14"
+        Me.GridColumn14.Visible = True
+        Me.GridColumn14.VisibleIndex = 0
+        '
         'GridColumnDescription
         '
         Me.GridColumnDescription.Caption = "Description"
@@ -618,7 +661,7 @@ Partial Class FormProductionSampleOrder
         Me.GridColumnOrderQty.OptionsColumn.AllowEdit = False
         Me.GridColumnOrderQty.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_order", "{0:N0}")})
         Me.GridColumnOrderQty.Visible = True
-        Me.GridColumnOrderQty.VisibleIndex = 3
+        Me.GridColumnOrderQty.VisibleIndex = 4
         Me.GridColumnOrderQty.Width = 93
         '
         'GridColumnRecQty
@@ -794,7 +837,7 @@ Partial Class FormProductionSampleOrder
         Me.GridColumnProto2Sample.FieldName = "eta_copy_proto_2"
         Me.GridColumnProto2Sample.Name = "GridColumnProto2Sample"
         Me.GridColumnProto2Sample.Visible = True
-        Me.GridColumnProto2Sample.VisibleIndex = 4
+        Me.GridColumnProto2Sample.VisibleIndex = 5
         Me.GridColumnProto2Sample.Width = 135
         '
         'RIDESampleProto2
@@ -808,6 +851,12 @@ Partial Class FormProductionSampleOrder
         '
         Me.RIPictureEdit.Name = "RIPictureEdit"
         Me.RIPictureEdit.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch
+        '
+        'GridColumn15
+        '
+        Me.GridColumn15.Caption = "ID Prod Order"
+        Me.GridColumn15.FieldName = "id_prod_order"
+        Me.GridColumn15.Name = "GridColumn15"
         '
         'FormProductionSampleOrder
         '
@@ -850,6 +899,8 @@ Partial Class FormProductionSampleOrder
         Me.PCDel.ResumeLayout(False)
         CType(Me.GCProd, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVProd, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RISLESize, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVSize, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RIDESampleProto2.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RIDESampleProto2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RIPictureEdit, System.ComponentModel.ISupportInitialize).EndInit()
@@ -925,4 +976,9 @@ Partial Class FormProductionSampleOrder
     Friend WithEvents GridColumnProto2Sample As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RIDESampleProto2 As DevExpress.XtraEditors.Repository.RepositoryItemDateEdit
     Friend WithEvents RIPictureEdit As DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit
+    Friend WithEvents GridColumn3 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RISLESize As DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit
+    Friend WithEvents GridColumn14 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GVSize As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn15 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

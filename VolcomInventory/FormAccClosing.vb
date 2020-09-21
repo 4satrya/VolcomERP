@@ -20,9 +20,16 @@
         button_main(bnew_active, bedit_active, bdel_active)
     End Sub
 
+    Sub viewCoaType()
+        Dim query As String = "SELECT * FROM tb_coa_type t ORDER BY t.id_coa_type ASC "
+        viewLookupQuery(LECOAType, query, 0, "coa_type", "id_coa_type")
+    End Sub
+
     Private Sub FormAccClosing_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        viewCoaType()
+
         DEUntil.EditValue = New DateTime(Now.Year, Now.Month, Date.DaysInMonth(Now.Year, Now.Month))
-        set_min_date_reference(DEUntil)
+        set_min_date_reference(DEUntil, LECOAType.EditValue.ToString)
     End Sub
 
     Private Sub DEUntil_EditValueChanged(sender As Object, e As EventArgs) Handles DEUntil.EditValueChanged
@@ -78,6 +85,14 @@ FROM tb_pl_sales_order_del r
 INNER JOIN tb_lookup_report_status rs ON rs.id_report_status = r.id_report_status
 INNER JOIN tb_lookup_report_mark_type rmt ON rmt.report_mark_type = 43
 WHERE r.pl_sales_order_del_date<='" & Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd") & "' AND r.id_report_status !=5 AND r.id_report_status !=6"
+        'Entry Journal
+        query += " UNION
+SELECT r.id_acc_trans AS id_report,rmt.report_mark_type AS report_mark_type,r.date_reference AS date_reference,rmt.report_mark_type_name AS `type`
+,rs.report_status AS report_status,r.date_created AS date_created, r.acc_trans_number AS report_number 
+FROM tb_a_acc_trans r
+INNER JOIN tb_lookup_report_status rs ON rs.id_report_status = r.id_report_status
+INNER JOIN tb_lookup_report_mark_type rmt ON rmt.report_mark_type = 36
+WHERE r.date_reference<='" & Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd") & "' AND r.id_report_status !=5 AND r.id_report_status !=6 "
 
 
         Dim data_report As DataTable = execute_query(query, -1, True, "", "", "", "")
@@ -115,7 +130,7 @@ WHERE r.pl_sales_order_del_date<='" & Date.Parse(DEUntil.EditValue.ToString).ToS
     Private Sub BClosing_Click(sender As Object, e As EventArgs) Handles BClosing.Click
         'log start
         Dim month_str = Date.Parse(DEUntil.EditValue.ToString).ToString("MM")
-        Dim query As String = "INSERT INTO `tb_closing_log`(date_until,date_closing,note) VALUES('" & Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd") & "',NOW(),'Closing Start')"
+        Dim query As String = "INSERT INTO `tb_closing_log`(date_until,date_closing,note,id_coa_type) VALUES('" & Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd") & "',NOW(),'Closing Start','" & LECOAType.EditValue.ToString & "')"
         execute_non_query(query, True, "", "", "", "")
 
         'pindah saldo profit and loss ke laba tahun berjalan (kredit), jika akhir tahun pindah ke laba ditahan
@@ -130,14 +145,14 @@ WHERE r.pl_sales_order_del_date<='" & Date.Parse(DEUntil.EditValue.ToString).ToS
         increase_inc_acc("1")
 
         'det journal bulanan
-        Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number,id_comp)
-        SELECT " + id_acc_trans + " AS `id_trans`,coal.`id_acc`,1 AS qty,IF(SUM(((IF(acc.id_dc=1,1,-1)*trxd.debit)+(IF(acc.id_dc=1,-1,1)*trxd.credit))*(IF(acc.id_dc=1,1,-1)))<0,0,SUM(((IF(acc.id_dc=1,1,-1)*trxd.debit)+(IF(acc.id_dc=1,-1,1)*trxd.credit))*(IF(acc.id_dc=1,1,-1)))) AS debit,IF(SUM(((IF(acc.id_dc=1,1,-1)*trxd.debit)+(IF(acc.id_dc=1,-1,1)*trxd.credit))*(IF(acc.id_dc=1,1,-1)))<0,SUM(((IF(acc.id_dc=1,1,-1)*trxd.debit)+(IF(acc.id_dc=1,-1,1)*trxd.credit))*(IF(acc.id_dc=1,1,-1)))*-1,0) AS credit,'' AS note,0 AS rmt,0 AS id_report,'' AS number, trxd.id_comp
+        Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number,id_coa_tag)
+        SELECT " + id_acc_trans + " AS `id_trans`,coal.`id_acc`,1 AS qty,IF(SUM(((IF(acc.id_dc=1,1,-1)*trxd.debit)+(IF(acc.id_dc=1,-1,1)*trxd.credit))*(IF(acc.id_dc=1,1,-1)))<0,0,SUM(((IF(acc.id_dc=1,1,-1)*trxd.debit)+(IF(acc.id_dc=1,-1,1)*trxd.credit))*(IF(acc.id_dc=1,1,-1)))) AS debit,IF(SUM(((IF(acc.id_dc=1,1,-1)*trxd.debit)+(IF(acc.id_dc=1,-1,1)*trxd.credit))*(IF(acc.id_dc=1,1,-1)))<0,SUM(((IF(acc.id_dc=1,1,-1)*trxd.debit)+(IF(acc.id_dc=1,-1,1)*trxd.credit))*(IF(acc.id_dc=1,1,-1)))*-1,0) AS credit,'' AS note,0 AS rmt,0 AS id_report,'' AS number, trxd.id_coa_tag
         FROM tb_a_acc_trans_det trxd
         INNER JOIN tb_a_acc_trans trx ON trx.`id_acc_trans`=trxd.`id_acc_trans`
         INNER JOIN tb_a_acc acc ON acc.id_acc=trxd.id_acc AND (LEFT(acc.acc_name,1)='3' OR LEFT(acc.acc_name,1)='4')
         INNER JOIN tb_lookup_coa_laba coal ON coal.id_month=MONTH('" & Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-01") & "')
-        WHERE trx.`is_close`='2' AND trx.id_report_status!=5 AND DATE(trx.`date_reference`)<='" & Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd") & "' AND DATE(trx.`date_reference`)>='" & Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-01") & "' 
-        GROUP BY trxd.id_comp
+        WHERE trx.`is_close`='2' AND trx.id_report_status!=5 AND DATE(trx.`date_reference`)<='" & Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd") & "' AND DATE(trx.`date_reference`)>='" & Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-01") & "' AND acc.`id_coa_type`='" & LECOAType.EditValue.ToString & "'
+        GROUP BY trxd.id_coa_tag
         HAVING (credit+debit)>0"
         execute_non_query(qjd, True, "", "", "", "")
         'posting tahunan
@@ -158,28 +173,31 @@ WHERE r.pl_sales_order_del_date<='" & Date.Parse(DEUntil.EditValue.ToString).ToS
             id_acc_trans = execute_query(qjm, 0, True, "", "", "", "")
             increase_inc_acc("1")
             '
-            q = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number,id_comp)
-                 SELECT " + id_acc_trans + " AS `id_trans`," + id_acc_laba + ",1 AS qty,0 AS debit,SUM((IF(acc.id_dc=1,1,-1)*trxd.debit)+(IF(acc.id_dc=1,-1,1)*trxd.credit)) AS credit,'Pindah laba berjalan ke laba ditahan' AS note,0 AS rmt,0 AS id_report,'' AS number, trxd.id_comp
+            q = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number,id_coa_tag)
+                 SELECT " + id_acc_trans + " AS `id_trans`," + id_acc_laba + ",1 AS qty,0 AS debit,SUM((IF(acc.id_dc=1,1,-1)*trxd.debit)+(IF(acc.id_dc=1,-1,1)*trxd.credit)) AS credit,'Pindah laba berjalan ke laba ditahan' AS note,0 AS rmt,0 AS id_report,'' AS number, trxd.id_coa_tag
 FROM tb_a_acc_trans_det trxd
 INNER JOIN tb_a_acc_trans trx ON trx.id_acc_trans=trxd.id_acc_trans
 INNER JOIN tb_a_acc acc ON acc.id_acc=trxd.id_acc AND LEFT(acc.acc_name,7)='2214111'
 WHERE YEAR(trx.date_reference)='" & Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy") & "'
-GROUP BY trxd.id_comp"
+GROUP BY trxd.id_coa_tag"
             execute_non_query(q, True, "", "", "", "")
         End If
 
         'closing
-        query = "UPDATE tb_a_acc_trans trx SET trx.is_close='1' WHERE trx.`is_close`='2' AND trx.`date_reference`<='" & Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd") & "'  AND DATE(trx.`date_reference`)>='" & Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-01") & "'"
+        query = "UPDATE tb_a_acc_trans trx
+INNER JOIN tb_a_acc_trans_det trxd ON trxd.id_acc_trans=trx.id_acc_trans
+INNER JOIN tb_a_acc acc ON acc.id_acc=trxd.id_acc AND acc.id_coa_type='" & LECOAType.EditValue.ToString & "'
+SET trx.is_close='1' WHERE trx.`is_close`='2' AND trx.`date_reference`<='" & Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd") & "'  AND DATE(trx.`date_reference`)>='" & Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-01") & "'"
         execute_non_query(query, True, "", "", "", "")
 
         'log end
-        query = "INSERT INTO `tb_closing_log`(date_until,date_closing,note) VALUES('" & Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd") & "',NOW(),'Closing End')"
+        query = "INSERT INTO `tb_closing_log`(date_until,date_closing,note,id_coa_type) VALUES('" & Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd") & "',NOW(),'Closing End','" & LECOAType.EditValue.ToString & "')"
         execute_non_query(query, True, "", "", "", "")
 
         '
         infoCustom("Closing complete")
         DEUntil.Enabled = True
-        set_min_date_reference(DEUntil)
+        set_min_date_reference(DEUntil, LECOAType.EditValue.ToString)
         BClosing.Visible = False
     End Sub
 
@@ -198,5 +216,9 @@ GROUP BY trxd.id_comp"
         End Try
 
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub LECOAType_EditValueChanged(sender As Object, e As EventArgs) Handles LECOAType.EditValueChanged
+
     End Sub
 End Class

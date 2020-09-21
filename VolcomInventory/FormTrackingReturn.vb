@@ -12,9 +12,11 @@
         If for_update Then
             SBUpdate.Visible = True
             GBSelect.Visible = True
+            CheckEdit.Visible = True
         Else
             SBUpdate.Visible = False
             GBSelect.Visible = False
+            CheckEdit.Visible = False
         End If
     End Sub
 
@@ -89,5 +91,23 @@
         End If
 
         GVList.ActiveFilterString = ""
+    End Sub
+
+    Private Sub RepositoryItemCheckEdit_EditValueChanging(sender As Object, e As DevExpress.XtraEditors.Controls.ChangingEventArgs) Handles RepositoryItemCheckEdit.EditValueChanging
+        If GVList.GetFocusedRowCellValue("is_active").ToString = "2" Then
+            e.Cancel = True
+        End If
+    End Sub
+
+    Private Sub CheckEdit_EditValueChanged(sender As Object, e As EventArgs) Handles CheckEdit.EditValueChanged
+        For i = 0 To GVList.RowCount - 1
+            If CheckEdit.EditValue Then
+                If GVList.GetRowCellValue(i, "is_active").ToString = "1" Then
+                    GVList.SetRowCellValue(i, "is_select", "yes")
+                End If
+            Else
+                GVList.SetRowCellValue(i, "is_select", "no")
+            End If
+        Next
     End Sub
 End Class

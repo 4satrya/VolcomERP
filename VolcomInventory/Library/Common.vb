@@ -41,9 +41,9 @@ Module Common
         emp_image_path = get_setup_field("pic_path_emp") & "\"
     End Sub
 
-    Sub set_min_date_reference(ByRef date_edit As DateEdit)
+    Sub set_min_date_reference(ByRef date_edit As DateEdit, ByVal coa_type As String)
         Dim q As String = "SELECT DATE_ADD(MAX(date_until),INTERVAL 1 DAY) AS min_date FROM `tb_closing_log` 
-WHERE note='Closing End'"
+WHERE note='Closing End' AND id_coa_type='" & coa_type & "'"
         Dim min_date As Date = Date.Parse(execute_query(q, 0, True, "", "", "", "").ToString)
         date_edit.Properties.MinValue = min_date
     End Sub
@@ -3036,7 +3036,7 @@ WHERE b.report_mark_type='" & report_mark_type & "' ORDER BY b.id_report_status,
                 id_user_mark = data.Rows(i)("id_user").ToString
             End If
             '
-            If Not id_user_mark = "" Then
+            If Not id_user_mark = "" And Not id_user_mark = "0" Then
                 If data.Rows(i)("id_report_status").ToString() = data.Rows(0)("id_report_status").ToString() Then
                     'set lead time
                     If data.Rows(i)("level").ToString() = "1" Then
@@ -7275,5 +7275,17 @@ SELECT id_bill_type,bill_type FROM tb_lookup_bill_type WHERE is_active='1'"
             End If
         Next
 
+    End Function
+
+    Public Function AllowOpenMark(ByVal rmt As String, ByVal id As String, ByVal id_stt As String) As Boolean
+        Dim res As Boolean = Nothing
+        Dim query As String = "SELECT * FROM tb_report_mark WHERE id_report='" + id + "' AND report_mark_type='" + rmt + "' "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        If data.Rows.Count <= 0 And (id_stt = "5" Or id_stt = "6") Then
+            res = False
+        Else
+            res = True
+        End If
+        Return res
     End Function
 End Module

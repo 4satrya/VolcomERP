@@ -21,6 +21,8 @@ Partial Class FormAccClosing
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
+        Me.LECOAType = New DevExpress.XtraEditors.LookUpEdit()
         Me.BClosing = New DevExpress.XtraEditors.SimpleButton()
         Me.BView = New DevExpress.XtraEditors.SimpleButton()
         Me.DEUntil = New DevExpress.XtraEditors.DateEdit()
@@ -44,6 +46,8 @@ Partial Class FormAccClosing
         Me.GroupControl2 = New DevExpress.XtraEditors.GroupControl()
         Me.GroupControl1 = New DevExpress.XtraEditors.GroupControl()
         Me.GCReport = New DevExpress.XtraGrid.GridControl()
+        Me.ViewMenuBottom = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.TSViewReport = New System.Windows.Forms.ToolStripMenuItem()
         Me.GVReport = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn20 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -52,10 +56,9 @@ Partial Class FormAccClosing
         Me.GridColumn14 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn17 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn19 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.ViewMenuBottom = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.TSViewReport = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
+        CType(Me.LECOAType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEUntil.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GCClosing, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -68,12 +71,14 @@ Partial Class FormAccClosing
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl1.SuspendLayout()
         CType(Me.GCReport, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GVReport, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ViewMenuBottom.SuspendLayout()
+        CType(Me.GVReport, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl1
         '
+        Me.PanelControl1.Controls.Add(Me.LabelControl2)
+        Me.PanelControl1.Controls.Add(Me.LECOAType)
         Me.PanelControl1.Controls.Add(Me.BClosing)
         Me.PanelControl1.Controls.Add(Me.BView)
         Me.PanelControl1.Controls.Add(Me.DEUntil)
@@ -84,9 +89,25 @@ Partial Class FormAccClosing
         Me.PanelControl1.Size = New System.Drawing.Size(1194, 38)
         Me.PanelControl1.TabIndex = 0
         '
+        'LabelControl2
+        '
+        Me.LabelControl2.Location = New System.Drawing.Point(12, 13)
+        Me.LabelControl2.Name = "LabelControl2"
+        Me.LabelControl2.Size = New System.Drawing.Size(24, 13)
+        Me.LabelControl2.TabIndex = 3
+        Me.LabelControl2.Text = "Type"
+        '
+        'LECOAType
+        '
+        Me.LECOAType.Location = New System.Drawing.Point(42, 10)
+        Me.LECOAType.Name = "LECOAType"
+        Me.LECOAType.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.LECOAType.Size = New System.Drawing.Size(178, 20)
+        Me.LECOAType.TabIndex = 124
+        '
         'BClosing
         '
-        Me.BClosing.Location = New System.Drawing.Point(311, 7)
+        Me.BClosing.Location = New System.Drawing.Point(525, 8)
         Me.BClosing.Name = "BClosing"
         Me.BClosing.Size = New System.Drawing.Size(50, 23)
         Me.BClosing.TabIndex = 4
@@ -95,7 +116,7 @@ Partial Class FormAccClosing
         '
         'BView
         '
-        Me.BView.Location = New System.Drawing.Point(255, 7)
+        Me.BView.Location = New System.Drawing.Point(469, 8)
         Me.BView.Name = "BView"
         Me.BView.Size = New System.Drawing.Size(50, 23)
         Me.BView.TabIndex = 4
@@ -104,7 +125,7 @@ Partial Class FormAccClosing
         'DEUntil
         '
         Me.DEUntil.EditValue = Nothing
-        Me.DEUntil.Location = New System.Drawing.Point(76, 9)
+        Me.DEUntil.Location = New System.Drawing.Point(290, 10)
         Me.DEUntil.Name = "DEUntil"
         Me.DEUntil.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.DEUntil.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
@@ -115,7 +136,7 @@ Partial Class FormAccClosing
         '
         'LabelControl1
         '
-        Me.LabelControl1.Location = New System.Drawing.Point(12, 12)
+        Me.LabelControl1.Location = New System.Drawing.Point(226, 13)
         Me.LabelControl1.Name = "LabelControl1"
         Me.LabelControl1.Size = New System.Drawing.Size(58, 13)
         Me.LabelControl1.TabIndex = 0
@@ -315,6 +336,18 @@ Partial Class FormAccClosing
         Me.GCReport.TabIndex = 2
         Me.GCReport.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVReport})
         '
+        'ViewMenuBottom
+        '
+        Me.ViewMenuBottom.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TSViewReport})
+        Me.ViewMenuBottom.Name = "ContextMenuStripYM"
+        Me.ViewMenuBottom.Size = New System.Drawing.Size(138, 26)
+        '
+        'TSViewReport
+        '
+        Me.TSViewReport.Name = "TSViewReport"
+        Me.TSViewReport.Size = New System.Drawing.Size(137, 22)
+        Me.TSViewReport.Text = "View Report"
+        '
         'GVReport
         '
         Me.GVReport.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn11, Me.GridColumn20, Me.GridColumn21, Me.GridColumn13, Me.GridColumn14, Me.GridColumn17, Me.GridColumn19})
@@ -395,18 +428,6 @@ Partial Class FormAccClosing
         Me.GridColumn19.VisibleIndex = 3
         Me.GridColumn19.Width = 324
         '
-        'ViewMenuBottom
-        '
-        Me.ViewMenuBottom.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TSViewReport})
-        Me.ViewMenuBottom.Name = "ContextMenuStripYM"
-        Me.ViewMenuBottom.Size = New System.Drawing.Size(138, 26)
-        '
-        'TSViewReport
-        '
-        Me.TSViewReport.Name = "TSViewReport"
-        Me.TSViewReport.Size = New System.Drawing.Size(137, 22)
-        Me.TSViewReport.Text = "View Report"
-        '
         'FormAccClosing
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -422,6 +443,7 @@ Partial Class FormAccClosing
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         Me.PanelControl1.PerformLayout()
+        CType(Me.LECOAType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEUntil.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GCClosing, System.ComponentModel.ISupportInitialize).EndInit()
@@ -434,8 +456,8 @@ Partial Class FormAccClosing
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControl1.ResumeLayout(False)
         CType(Me.GCReport, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GVReport, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ViewMenuBottom.ResumeLayout(False)
+        CType(Me.GVReport, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -474,4 +496,6 @@ Partial Class FormAccClosing
     Friend WithEvents GridColumn19 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ViewMenuBottom As ContextMenuStrip
     Friend WithEvents TSViewReport As ToolStripMenuItem
+    Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LECOAType As DevExpress.XtraEditors.LookUpEdit
 End Class

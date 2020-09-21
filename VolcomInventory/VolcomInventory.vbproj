@@ -8140,6 +8140,12 @@
     <Compile Include="ReportPurcOrder.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ReportPurcOrderCloseReceiving.Designer.vb">
+      <DependentUpon>ReportPurcOrderCloseReceiving.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportPurcOrderCloseReceiving.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ReportPurcReceive.Designer.vb">
       <DependentUpon>ReportPurcReceive.vb</DependentUpon>
     </Compile>
@@ -13020,6 +13026,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportPurcOrder.resx">
       <DependentUpon>ReportPurcOrder.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportPurcOrderCloseReceiving.resx">
+      <DependentUpon>ReportPurcOrderCloseReceiving.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportPurcReceive.resx">
       <DependentUpon>ReportPurcReceive.vb</DependentUpon>

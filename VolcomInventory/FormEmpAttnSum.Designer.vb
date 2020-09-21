@@ -145,6 +145,9 @@ Partial Class FormEmpAttnSum
         Me.GridColumn100 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn91 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn92 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.XTPAttnDetail = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCAttnDetail = New DevExpress.XtraGrid.GridControl()
+        Me.GVAttnDetail = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
         Me.XtraScrollableControl1 = New DevExpress.XtraEditors.XtraScrollableControl()
@@ -192,6 +195,9 @@ Partial Class FormEmpAttnSum
         Me.XTPSumMonthly.SuspendLayout()
         CType(Me.GCSumMonthly, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVSumMonthly, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTPAttnDetail.SuspendLayout()
+        CType(Me.GCAttnDetail, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVAttnDetail, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
@@ -217,7 +223,7 @@ Partial Class FormEmpAttnSum
         Me.XTCReportAttendance.SelectedTabPage = Me.XTPMonthly
         Me.XTCReportAttendance.Size = New System.Drawing.Size(1166, 270)
         Me.XTCReportAttendance.TabIndex = 0
-        Me.XTCReportAttendance.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPMonthly, Me.XTPD2D, Me.XTPSchedule, Me.XTPScheduleTable, Me.XTPSumMonthly})
+        Me.XTCReportAttendance.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPMonthly, Me.XTPD2D, Me.XTPSchedule, Me.XTPScheduleTable, Me.XTPSumMonthly, Me.XTPAttnDetail})
         '
         'XTPMonthly
         '
@@ -1352,6 +1358,32 @@ Partial Class FormEmpAttnSum
         Me.GridColumn92.VisibleIndex = 14
         Me.GridColumn92.Width = 71
         '
+        'XTPAttnDetail
+        '
+        Me.XTPAttnDetail.Controls.Add(Me.GCAttnDetail)
+        Me.XTPAttnDetail.Name = "XTPAttnDetail"
+        Me.XTPAttnDetail.Size = New System.Drawing.Size(1160, 242)
+        Me.XTPAttnDetail.Text = "Attendance Detail"
+        '
+        'GCAttnDetail
+        '
+        Me.GCAttnDetail.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCAttnDetail.Location = New System.Drawing.Point(0, 0)
+        Me.GCAttnDetail.MainView = Me.GVAttnDetail
+        Me.GCAttnDetail.Name = "GCAttnDetail"
+        Me.GCAttnDetail.Size = New System.Drawing.Size(1160, 242)
+        Me.GCAttnDetail.TabIndex = 5
+        Me.GCAttnDetail.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVAttnDetail})
+        '
+        'GVAttnDetail
+        '
+        Me.GVAttnDetail.GridControl = Me.GCAttnDetail
+        Me.GVAttnDetail.Name = "GVAttnDetail"
+        Me.GVAttnDetail.OptionsBehavior.AutoExpandAllGroups = True
+        Me.GVAttnDetail.OptionsBehavior.Editable = False
+        Me.GVAttnDetail.OptionsView.ColumnAutoWidth = False
+        Me.GVAttnDetail.OptionsView.ShowGroupPanel = False
+        '
         'LargeImageCollection
         '
         Me.LargeImageCollection.ImageSize = New System.Drawing.Size(24, 24)
@@ -1657,6 +1689,9 @@ Partial Class FormEmpAttnSum
         Me.XTPSumMonthly.ResumeLayout(False)
         CType(Me.GCSumMonthly, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVSumMonthly, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTPAttnDetail.ResumeLayout(False)
+        CType(Me.GCAttnDetail, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVAttnDetail, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl2.ResumeLayout(False)
@@ -1831,4 +1866,7 @@ Partial Class FormEmpAttnSum
     Friend WithEvents barDockControlLeft As DevExpress.XtraBars.BarDockControl
     Friend WithEvents barDockControlRight As DevExpress.XtraBars.BarDockControl
     Friend WithEvents BBIDetailLate As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents XTPAttnDetail As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents GCAttnDetail As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVAttnDetail As DevExpress.XtraGrid.Views.Grid.GridView
 End Class

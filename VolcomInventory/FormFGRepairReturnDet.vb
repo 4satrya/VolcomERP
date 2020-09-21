@@ -704,6 +704,7 @@ Public Class FormFGRepairReturnDet
                 Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Stock qty will be updated after this process. Are you sure to continue this process?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
                 If confirm = Windows.Forms.DialogResult.Yes Then
                     Cursor = Cursors.WaitCursor
+                    BtnSave.Enabled = False
                     'main query
                     Dim query As String = "INSERT INTO tb_fg_repair_return(id_wh_drawer_from, id_wh_drawer_to, fg_repair_return_number, fg_repair_return_date, fg_repair_return_note, id_report_status, is_from_vendor, is_use_unique_code) 
                                            VALUES('" + id_wh_drawer_from + "', '" + id_wh_drawer_to + "','" + header_number_sales("29") + "', NOW(), '" + fg_repair_return_note + "', '1', " + is_from_vendor + ", '" + is_use_unique_code_wh + "'); SELECT LAST_INSERT_ID(); "
@@ -746,9 +747,9 @@ Public Class FormFGRepairReturnDet
                     'reserved unique code
                     If is_use_unique_code_wh = "1" Then
                         Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_fg_repair_return_det`,`id_type`,`unique_code`,
-                        `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
+                        `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`, report_mark_type, id_report, id_report_status) 
                         SELECT c.id_comp, t.`id_wh_drawer_from`, td.id_product, td.id_pl_prod_order_rec_det_unique, td.id_fg_repair_return_det, '10', 
-                        CONCAT(p.product_full_code,td.fg_repair_return_det_counting), sod.id_design_price, sod.design_price, -1, 1, NOW() 
+                        CONCAT(p.product_full_code,td.fg_repair_return_det_counting), sod.id_design_price, sod.design_price, -1, 1, NOW(), '" + rmt + "', td.id_fg_repair_return, 1
                         FROM tb_fg_repair_return_det td
                         INNER JOIN tb_fg_repair_return t ON t.id_fg_repair_return = td.id_fg_repair_return
                         INNER JOIN tb_m_wh_drawer drw_frm ON drw_frm.id_wh_drawer = t.id_wh_drawer_from  

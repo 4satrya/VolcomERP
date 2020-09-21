@@ -22,6 +22,7 @@
         TEDiscTotal.EditValue = 0.00
         TEVATPercent.EditValue = 0.00
         TEVATValue.EditValue = 0.00
+        TEDPPPercent.EditValue = 100
 
         load_payment_term()
         load_order_term()
@@ -81,7 +82,7 @@
         Else 'edit
             'load header
             Dim query As String = "SELECT c.comp_name,c.id_tax,tax.tax,c.comp_number,c.address_primary,c.fax,c.email,c.comp_number,po.is_cash_purchase,po.pay_due_date,cc.contact_number,cc.contact_person,po.vat_percent,po.vat_value,emp.employee_name,po.id_payment_purchasing,po.purc_order_number,po.id_comp_contact,po.note,po.est_date_receive,po.date_created,po.created_by,po.id_report_status,po.is_disc_percent,po.disc_percent,po.disc_value 
-,po.id_order_term,po.id_shipping_method,po.ship_destination,po.ship_address,po.id_expense_type,po.is_submit
+,po.id_order_term,po.id_shipping_method,po.ship_destination,po.ship_address,po.id_expense_type,po.is_submit,po.dpp_percent,po.dpp_value
 FROM tb_purc_order po
 INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact=po.id_comp_contact
 INNER JOIN tb_m_comp c ON cc.id_comp=c.`id_comp`
@@ -105,8 +106,10 @@ WHERE po.id_purc_order='" & id_po & "'"
                 '
                 If id_vendor_tax = "2" Then
                     TEVATPercent.ReadOnly = False
+                    TEDPPPercent.ReadOnly = False
                 Else
                     TEVATPercent.ReadOnly = True
+                    TEDPPPercent.ReadOnly = True
                 End If
                 TEPKP.Text = data.Rows(0)("tax").ToString
                 '
@@ -138,6 +141,9 @@ WHERE po.id_purc_order='" & id_po & "'"
                 check_budget()
 
                 TETotal.EditValue = GVSummary.Columns("sub_total").SummaryItem.SummaryValue
+
+                TEDPPPercent.EditValue = data.Rows(0)("dpp_percent")
+                TEDPP.EditValue = data.Rows(0)("dpp_value")
 
                 TEVATPercent.EditValue = data.Rows(0)("vat_percent")
                 TEVATValue.EditValue = data.Rows(0)("vat_value")
@@ -397,8 +403,8 @@ WHERE bdg.`id_b_expense`='" & GVPurcReq.GetRowCellValue(i, "id_b_expense").ToStr
                     is_check = "2"
                 End If
 
-                Dim query As String = "INSERT INTO `tb_purc_order`(`id_comp_contact`,is_cash_purchase,id_payment_purchasing,`note`,`date_created`,est_date_receive,pay_due_date,`created_by`,`last_update`,`last_update_by`,`id_report_status`,is_disc_percent,disc_percent,disc_value,vat_percent,vat_value,ship_destination,ship_address,id_expense_type)
-                                    VALUES('" & id_vendor_contact & "','" & is_cash_purchase & "','" & LEPaymentTerm.EditValue.ToString & "','" & addSlashes(MENote.Text) & "',NOW(),'" & Date.Parse(DEEstReceiveDate.EditValue.ToString).ToString("yyyy-MM-dd") & "','" & Date.Parse(DEDueDate.EditValue.ToString).ToString("yyyy-MM-dd") & "','" & id_user & "',NOW(),'" & id_user & "','1','" & is_check & "','" & decimalSQL(TEDiscPercent.EditValue.ToString) & "','" & decimalSQL(TEDiscTotal.EditValue.ToString) & "','" & decimalSQL(TEVATPercent.EditValue.ToString) & "','" & decimalSQL(TEVATValue.EditValue.ToString) & "','" & addSlashes(TEShipDestination.Text) & "','" & addSlashes(MESHipAddress.Text) & "','" & SLEPurcType.EditValue.ToString & "'); SELECT LAST_INSERT_ID(); "
+                Dim query As String = "INSERT INTO `tb_purc_order`(`id_comp_contact`,is_cash_purchase,id_payment_purchasing,`note`,`date_created`,est_date_receive,pay_due_date,`created_by`,`last_update`,`last_update_by`,`id_report_status`,is_disc_percent,disc_percent,disc_value,dpp_percent,dpp_value,vat_percent,vat_value,ship_destination,ship_address,id_expense_type)
+                                    VALUES('" & id_vendor_contact & "','" & is_cash_purchase & "','" & LEPaymentTerm.EditValue.ToString & "','" & addSlashes(MENote.Text) & "',NOW(),'" & Date.Parse(DEEstReceiveDate.EditValue.ToString).ToString("yyyy-MM-dd") & "','" & Date.Parse(DEDueDate.EditValue.ToString).ToString("yyyy-MM-dd") & "','" & id_user & "',NOW(),'" & id_user & "','1','" & is_check & "','" & decimalSQL(TEDiscPercent.EditValue.ToString) & "','" & decimalSQL(TEDiscTotal.EditValue.ToString) & "','" & decimalSQL(TEDPPPercent.EditValue.ToString) & "','" & decimalSQL(TEDPP.EditValue.ToString) & "','" & decimalSQL(TEVATPercent.EditValue.ToString) & "','" & decimalSQL(TEVATValue.EditValue.ToString) & "','" & addSlashes(TEShipDestination.Text) & "','" & addSlashes(MESHipAddress.Text) & "','" & SLEPurcType.EditValue.ToString & "'); SELECT LAST_INSERT_ID(); "
                 id_po = execute_query(query, 0, True, "", "", "", "")
 
                 'detail
@@ -445,6 +451,8 @@ WHERE bdg.`id_b_expense`='" & GVPurcReq.GetRowCellValue(i, "id_b_expense").ToStr
                                         is_disc_percent='" & is_check & "',
                                         disc_percent='" & decimalSQL(TEDiscPercent.EditValue.ToString) & "',
                                         disc_value='" & decimalSQL(TEDiscTotal.EditValue.ToString) & "',
+                                        dpp_percent='" & decimalSQL(TEDPPPercent.EditValue.ToString) & "',
+                                        dpp_value='" & decimalSQL(TEDPP.EditValue.ToString) & "',
                                         vat_percent='" & decimalSQL(TEVATPercent.EditValue.ToString) & "',
                                         vat_value='" & decimalSQL(TEVATValue.EditValue.ToString) & "',
                                         ship_destination='" & addSlashes(TEShipDestination.Text) & "',
@@ -637,7 +645,8 @@ WHERE bdg.`id_b_expense`='" & GVPurcReq.GetRowCellValue(i, "id_b_expense").ToStr
 
     Sub calculate_grand_total()
         Try
-            TEVATValue.EditValue = (TETotal.EditValue - TEDiscTotal.EditValue) * (TEVATPercent.EditValue / 100)
+            TEDPP.EditValue = (TETotal.EditValue - TEDiscTotal.EditValue) * (TEDPPPercent.EditValue / 100)
+            TEVATValue.EditValue = TEDPP.EditValue * (TEVATPercent.EditValue / 100)
             TEGrandTotal.EditValue = TETotal.EditValue - TEDiscTotal.EditValue + TEVATValue.EditValue
         Catch ex As Exception
             TEGrandTotal.EditValue = 0.00
@@ -859,6 +868,13 @@ WHERE bdg.`id_b_expense`='" & GVPurcReq.GetRowCellValue(i, "id_b_expense").ToStr
             DEDueDate.EditValue = DateAdd(DateInterval.Day, val_day, Date.Parse(DEDateCreated.EditValue.ToString))
         Catch ex As Exception
             Console.WriteLine(ex.ToString)
+        End Try
+    End Sub
+
+    Private Sub TEDPPPercent_EditValueChanged(sender As Object, e As EventArgs) Handles TEDPPPercent.EditValueChanged
+        Try
+            calculate_grand_total()
+        Catch ex As Exception
         End Try
     End Sub
 End Class

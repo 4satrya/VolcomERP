@@ -20,7 +20,7 @@
     End Sub
     Sub view_sample_purc()
         Dim query = "SELECT "
-        query += "a.id_prod_order,d.id_sample, d.id_season, a.prod_order_number, (d.design_display_name) AS `design_name` , d.design_code, h.term_production, g.po_type, "
+        query += "a.is_need_cps2_verify,a.cps2_verify,a.id_prod_order,d.id_sample, d.id_season, a.prod_order_number, (d.design_display_name) AS `design_name` , d.design_code, h.term_production, g.po_type, "
         query += "DATE_FORMAT(a.prod_order_date,'%d %M %Y') AS prod_order_date,a.id_report_status,c.report_status, "
         query += "b.id_design,b.id_delivery, e.delivery, f.season, e.id_season, "
         query += "DATE_FORMAT(a.prod_order_date,'%d %M %Y') AS prod_order_date, "
@@ -82,13 +82,16 @@
     Private Sub BSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BSave.Click
         Cursor = Cursors.WaitCursor
         If id_pop_up = "1" Then
-            FormProductionRecDet.id_order = GVProd.GetFocusedRowCellValue("id_prod_order").ToString
-            '
+            'If GVProd.GetFocusedRowCellValue("is_need_cps2_verify").ToString = "1" And GVProd.GetFocusedRowCellValue("cps2_verify").ToString = "2" Then
+            '    warningCustom("Copy Prototype Sample 2 still not verified. Please contact sample.")
+            'Else
+            'End If
             Dim query As String = String.Format("SELECT id_report_status,id_delivery,prod_order_number,id_po_type,DATE_FORMAT(prod_order_date,'%Y-%m-%d') as prod_order_datex,prod_order_lead_time,prod_order_note FROM tb_prod_order WHERE id_prod_order = '{0}'", GVProd.GetFocusedRowCellValue("id_prod_order").ToString)
             Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
             Dim date_created As String = ""
 
             If data.Rows.Count > 0 Then
+                FormProductionRecDet.id_order = GVProd.GetFocusedRowCellValue("id_prod_order").ToString
                 FormProductionRecDet.TEPONumber.Text = data.Rows(0)("prod_order_number").ToString
 
                 date_created = data.Rows(0)("prod_order_datex").ToString

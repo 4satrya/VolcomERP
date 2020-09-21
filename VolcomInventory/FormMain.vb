@@ -1055,6 +1055,12 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
                 FormProductionRecDet.ShowDialog()
             Else 'based on PO
                 If FormProductionRec.GVProd.RowCount > 0 And FormProductionRec.GVProd.FocusedRowHandle >= 0 Then
+                    'If FormProductionRec.GVProd.GetFocusedRowCellValue("is_need_cps2_verify").ToString = "1" And FormProductionRec.GVProd.GetFocusedRowCellValue("cps2_verify").ToString = "2" Then
+                    '    warningCustom("Copy Prototype Sample 2 still not verified. Please contact Sample Departement.")
+                    'Else
+                    '    FormProductionRecDet.id_order = FormProductionRec.GVProd.GetFocusedRowCellValue("id_prod_order").ToString
+                    '    FormProductionRecDet.ShowDialog()
+                    'End If
                     FormProductionRecDet.id_order = FormProductionRec.GVProd.GetFocusedRowCellValue("id_prod_order").ToString
                     FormProductionRecDet.ShowDialog()
                 End If
@@ -8366,6 +8372,8 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             print(FormPayoutReport.GCData, "Payout Report")
         ElseIf formName = "FormSalesBranch" Then
             print(FormSalesBranch.GCData, "Volcom Store Sales")
+        ElseIf formName = "FormABGRoyaltyZone" Then
+            print(FormABGRoyaltyZone.GCData, "ABG Royalty Zone")
         Else
             RPSubMenu.Visible = False
         End If
@@ -9291,6 +9299,9 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
         ElseIf formName = "FormMaterialRequisition" Then
             FormMaterialRequisition.Close()
             FormMaterialRequisition.Dispose()
+        ElseIf formName = "FormABGRoyaltyZone" Then
+            FormABGRoyaltyZone.Close()
+            FormABGRoyaltyZone.Dispose()
         Else
             RPSubMenu.Visible = False
         End If
@@ -10250,6 +10261,8 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
         ElseIf formName = "FormMaterialRequisition" Then
             FormMaterialRequisition.view_mrs()
             FormMaterialRequisition.show_but_mrs()
+        ElseIf formName = "FormABGRoyaltyZone" Then
+            FormABGRoyaltyZone.viewData()
         End If
     End Sub
     'Switch

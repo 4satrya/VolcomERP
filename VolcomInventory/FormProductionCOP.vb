@@ -59,7 +59,7 @@ rate_management,prod_order_cop_kurs_mng,prod_order_cop_mng,prod_order_cop_mng_ad
 
             If LEStatus.EditValue.ToString = "1" Then
                 'prefinal
-                BPrintCOPMan.Visible = False
+                'BPrintCOPMan.Visible = False
                 '
                 TEUnitPrice.EditValue = data.Rows(0)("prod_order_cop_mng") - data.Rows(0)("prod_order_cop_mng_addcost")
                 TEAddCost.EditValue = data.Rows(0)("prod_order_cop_mng_addcost")
@@ -460,6 +460,8 @@ rate_management,prod_order_cop_kurs_mng,prod_order_cop_mng,prod_order_cop_mng_ad
         ReportProdCOP.id_design = id_design
 
         Dim Report As New ReportProdCOP()
+
+        Report.id_cop_status = LEStatus.EditValue.ToString
         Report.kursx = TEKursMan.EditValue
         Report.LTitle.Text = "COST OF PRODUCTION"
         Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)

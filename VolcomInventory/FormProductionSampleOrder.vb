@@ -72,9 +72,11 @@ WHERE id_prod_order_cps2='" & id & "'"
         Else
             GridColumnProto2Sample.OptionsColumn.ReadOnly = False
         End If
+        '
     End Sub
 
     Sub load_det()
+        load_size()
         Dim query As String = ""
 
         If is_purc_mat = "1" Then
@@ -104,8 +106,10 @@ WHERE id_prod_order_cps2='" & id & "'"
         Else
             query = "SELECT kpd.eta_copy_proto_2,kpd.revision,kpd.id_prod_order_cps2_det,'' AS `no`,po.`prod_order_number`,LEFT(dsg.design_display_name,LENGTH(dsg.design_display_name)-3) AS class_dsg,RIGHT(dsg.design_display_name,3) AS color
 ,IFNULL(revtimes.revision_times,0) AS revision_times
+,kpd.id_prod_order
 ,kpd.eta_copy_proto_2
 ,kpd.qty_order
+,kpd.size
 FROM `tb_prod_order_cps2_det` kpd
 INNER JOIN tb_prod_order po ON po.id_prod_order=kpd.id_prod_order
 INNER JOIN tb_prod_demand_design pdd ON po.`id_prod_demand_design`=pdd.`id_prod_demand_design`
@@ -134,7 +138,8 @@ ORDER BY po.`id_prod_order` ASC"
         Dim query As String = ""
         For i As Integer = 0 To GVProd.RowCount - 1
             Dim eta_copy_proto_2 As String = Date.Parse(GVProd.GetRowCellValue(i, "eta_copy_proto_2").ToString).ToString("yyyy-MM-dd")
-            query = "UPDATE tb_prod_order_cps2_det SET eta_copy_proto_2='" & eta_copy_proto_2 & "' WHERE id_prod_order_cps2_det='" & GVProd.GetRowCellValue(i, "id_prod_order_cps2_det").ToString & "'"
+            Dim size As String = GVProd.GetRowCellValue(i, "size").ToString
+            query = "UPDATE tb_prod_order_cps2_det SET eta_copy_proto_2='" & eta_copy_proto_2 & "',size='" & addSlashes(size) & "' WHERE id_prod_order_cps2_det='" & GVProd.GetRowCellValue(i, "id_prod_order_cps2_det").ToString & "'"
             execute_non_query(query, True, "", "", "", "")
         Next
         infoCustom("Order updated")
@@ -142,10 +147,22 @@ ORDER BY po.`id_prod_order` ASC"
     End Sub
 
     Private Sub BLock_Click(sender As Object, e As EventArgs) Handles BLock.Click
-        Dim query As String = "UPDATE tb_prod_order_cps2 SET is_locked='1' WHERE id_prod_order_cps2='" & id & "'"
-        execute_non_query(query, True, "", "", "", "")
-        infoCustom("Order locked")
-        load_head()
+        'check size
+        Dim size_ok As Boolean = True
+        For i As Integer = 0 To GVProd.RowCount - 1
+            If GVProd.GetRowCellValue(i, "size").ToString = "" Then
+                size_ok = False
+                Exit For
+            End If
+        Next
+        If size_ok Then
+            Dim query As String = "UPDATE tb_prod_order_cps2 SET is_locked='1' WHERE id_prod_order_cps2='" & id & "'"
+            execute_non_query(query, True, "", "", "", "")
+            infoCustom("Order locked")
+            load_head()
+        Else
+            warningCustom("Please fill all data")
+        End If
     End Sub
 
     Private Sub SLERevision_EditValueChanged(sender As Object, e As EventArgs) Handles SLERevision.EditValueChanged
@@ -175,7 +192,7 @@ SELECT `id_prod_order_cps2_reff`,`number`,(SELECT COUNT(id_prod_order_cps2) FROM
                 Dim new_id_cps2 As String = execute_query(query, 0, True, "", "", "", "")
                 'det
                 'loop
-                Dim q_det As String = "SELECT cps2d.`revision`,cps2d.`id_prod_order`,cps2d.`id_purc_order`,2 AS qty_order,cps2d.`eta_copy_proto_2`
+                Dim q_det As String = "SELECT cps2d.`revision`,cps2d.`id_prod_order`,cps2d.`id_purc_order`,2 AS qty_order,cps2d.size,cps2d.`eta_copy_proto_2`
 FROM tb_prod_order_cps2_det cps2d
 WHERE id_prod_order_cps2='" & id & "'"
                 Dim data_det As DataTable = execute_query(q_det, -1, True, "", "", "", "")
@@ -184,11 +201,11 @@ WHERE id_prod_order_cps2='" & id & "'"
                     If Not i = 0 Then
                         query += ","
                     End If
-                    query += "('" & new_id_cps2 & "','" & data_det.Rows(i)("revision").ToString & "','" & data_det.Rows(i)("id_prod_order").ToString & "','" & data_det.Rows(i)("id_purc_order").ToString & "','" & data_det.Rows(i)("qty_order").ToString & "','" & Date.Parse(data_det.Rows(i)("eta_copy_proto_2").ToString).ToString("yyyy-MM-dd") & "')"
+                    query += "('" & new_id_cps2 & "','" & data_det.Rows(i)("revision").ToString & "','" & data_det.Rows(i)("id_prod_order").ToString & "','" & data_det.Rows(i)("id_purc_order").ToString & "','" & data_det.Rows(i)("size").ToString & "','" & data_det.Rows(i)("qty_order").ToString & "','" & Date.Parse(data_det.Rows(i)("eta_copy_proto_2").ToString).ToString("yyyy-MM-dd") & "')"
                 Next
 
                 If Not query = "" Then
-                    query = "INSERT INTO tb_prod_order_cps2_det(`id_prod_order_cps2`,`revision`,`id_prod_order`,`id_purc_order`,`qty_order`,`eta_copy_proto_2`)
+                    query = "INSERT INTO tb_prod_order_cps2_det(`id_prod_order_cps2`,`revision`,`id_prod_order`,`id_purc_order`,`size`,`qty_order`,`eta_copy_proto_2`)
 VALUES" + query
                     execute_non_query(query, True, "", "", "", "")
                 End If
@@ -245,5 +262,27 @@ WHERE id_prod_order_cps2='" & SLERevision.EditValue.ToString & "'"
             Tool.PrintingSystem.SetCommandVisibility(DevExpress.XtraPrinting.PrintingSystemCommand.SendFile, DevExpress.XtraPrinting.CommandVisibility.None)
         End If
         Tool.ShowPreview()
+    End Sub
+
+    Private Sub GVProd_ShownEditor(sender As Object, e As EventArgs) Handles GVProd.ShownEditor
+
+    End Sub
+
+    Private Sub RepositoryItemSearchLookUpEdit1_Popup(sender As Object, e As EventArgs) Handles RISLESize.Popup
+        Dim editor As DevExpress.XtraEditors.SearchLookUpEdit = TryCast(GVProd.ActiveEditor, DevExpress.XtraEditors.SearchLookUpEdit)
+        editor.Properties.View.ActiveFilterString = "[id_prod_order] = '" + GVProd.GetFocusedRowCellValue("id_prod_order").ToString + "'"
+    End Sub
+
+    Sub load_size()
+        Dim q As String = "SELECT cpsd.`id_prod_order`,cd.`display_name` AS size 
+FROM tb_prod_order_cps2_det cpsd
+INNER JOIN tb_prod_order_det pod ON pod.`id_prod_order`=cpsd.`id_prod_order`
+INNER JOIN tb_prod_demand_product pdp ON pdp.`id_prod_demand_product`=pod.`id_prod_demand_product`
+INNER JOIN tb_m_product p ON p.`id_product`=pdp.`id_product`
+INNER JOIN tb_m_product_code pc ON pc.`id_product`=p.`id_product`
+INNER JOIN tb_m_code_detail cd ON cd.`id_code_detail`=pc.`id_code_detail` AND cd.`id_code` ='33'
+WHERE cpsd.id_prod_order_cps2='" & id & "'
+GROUP BY cd.`display_name`,cpsd.`id_prod_order`"
+        viewSearchLookupRepositoryQuery(RISLESize, q, 0, "size", "size")
     End Sub
 End Class

@@ -40,6 +40,7 @@ Partial Class FormTrackingReturn
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GCList = New DevExpress.XtraGrid.GridControl()
         Me.GVList = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridView()
+        Me.GridBand1 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         Me.BandedGridColumn17 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumn1 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumn2 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
@@ -47,9 +48,11 @@ Partial Class FormTrackingReturn
         Me.BandedGridColumn4 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumn5 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumn6 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.gridBand2 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         Me.BandedGridColumn7 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumn8 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumn9 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.gridBand3 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         Me.BandedGridColumn10 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumn11 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumn12 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
@@ -57,18 +60,17 @@ Partial Class FormTrackingReturn
         Me.BandedGridColumn14 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumn15 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumn16 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.gridBand4 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
+        Me.BandedGridColumn22 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumn20 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumn21 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.GBSelect = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         Me.BandedGridColumn18 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.RepositoryItemCheckEdit = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.BandedGridColumn19 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.BandedGridColumn20 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.BandedGridColumn21 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.BandedGridColumn22 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumn23 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.GridBand1 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
-        Me.gridBand2 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
-        Me.gridBand3 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
-        Me.gridBand4 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
-        Me.GBSelect = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
+        Me.BandedGridColumn24 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.CheckEdit = New DevExpress.XtraEditors.CheckEdit()
         CType(Me.PanelControlFilter, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlFilter.SuspendLayout()
         CType(Me.DETo.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -82,10 +84,12 @@ Partial Class FormTrackingReturn
         CType(Me.GCList, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVList, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemCheckEdit, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CheckEdit.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControlFilter
         '
+        Me.PanelControlFilter.Controls.Add(Me.CheckEdit)
         Me.PanelControlFilter.Controls.Add(Me.SBUpdate)
         Me.PanelControlFilter.Controls.Add(Me.DETo)
         Me.PanelControlFilter.Controls.Add(Me.DEFrom)
@@ -98,13 +102,13 @@ Partial Class FormTrackingReturn
         Me.PanelControlFilter.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControlFilter.Location = New System.Drawing.Point(0, 0)
         Me.PanelControlFilter.Name = "PanelControlFilter"
-        Me.PanelControlFilter.Size = New System.Drawing.Size(1008, 45)
+        Me.PanelControlFilter.Size = New System.Drawing.Size(1086, 45)
         Me.PanelControlFilter.TabIndex = 0
         '
         'SBUpdate
         '
         Me.SBUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.SBUpdate.Location = New System.Drawing.Point(909, 10)
+        Me.SBUpdate.Location = New System.Drawing.Point(987, 10)
         Me.SBUpdate.Name = "SBUpdate"
         Me.SBUpdate.Size = New System.Drawing.Size(87, 23)
         Me.SBUpdate.TabIndex = 8928
@@ -265,14 +269,14 @@ Partial Class FormTrackingReturn
         Me.GCList.MainView = Me.GVList
         Me.GCList.Name = "GCList"
         Me.GCList.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckEdit})
-        Me.GCList.Size = New System.Drawing.Size(1008, 684)
+        Me.GCList.Size = New System.Drawing.Size(1086, 684)
         Me.GCList.TabIndex = 1
         Me.GCList.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVList})
         '
         'GVList
         '
         Me.GVList.Bands.AddRange(New DevExpress.XtraGrid.Views.BandedGrid.GridBand() {Me.GridBand1, Me.gridBand2, Me.gridBand3, Me.gridBand4, Me.GBSelect})
-        Me.GVList.Columns.AddRange(New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn() {Me.BandedGridColumn19, Me.BandedGridColumn17, Me.BandedGridColumn1, Me.BandedGridColumn2, Me.BandedGridColumn3, Me.BandedGridColumn4, Me.BandedGridColumn5, Me.BandedGridColumn6, Me.BandedGridColumn7, Me.BandedGridColumn8, Me.BandedGridColumn9, Me.BandedGridColumn10, Me.BandedGridColumn11, Me.BandedGridColumn12, Me.BandedGridColumn13, Me.BandedGridColumn14, Me.BandedGridColumn15, Me.BandedGridColumn16, Me.BandedGridColumn23, Me.BandedGridColumn22, Me.BandedGridColumn21, Me.BandedGridColumn20, Me.BandedGridColumn18})
+        Me.GVList.Columns.AddRange(New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn() {Me.BandedGridColumn19, Me.BandedGridColumn17, Me.BandedGridColumn1, Me.BandedGridColumn2, Me.BandedGridColumn3, Me.BandedGridColumn24, Me.BandedGridColumn4, Me.BandedGridColumn5, Me.BandedGridColumn6, Me.BandedGridColumn7, Me.BandedGridColumn8, Me.BandedGridColumn9, Me.BandedGridColumn10, Me.BandedGridColumn11, Me.BandedGridColumn12, Me.BandedGridColumn13, Me.BandedGridColumn14, Me.BandedGridColumn15, Me.BandedGridColumn16, Me.BandedGridColumn23, Me.BandedGridColumn22, Me.BandedGridColumn21, Me.BandedGridColumn20, Me.BandedGridColumn18})
         Me.GVList.GridControl = Me.GCList
         Me.GVList.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty", Me.BandedGridColumn4, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "act_qty", Me.BandedGridColumn5, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "diff_qty", Me.BandedGridColumn6, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_det_qty", Me.BandedGridColumn7, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_problem_qty", Me.BandedGridColumn8, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "diff_qty_ret", Me.BandedGridColumn9, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_qc_det_qty_g78", Me.BandedGridColumn10, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_qc_det_qty_s78", Me.BandedGridColumn11, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_qc_det_qty_rm2", Me.BandedGridColumn12, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_qc_det_qty_gc1", Me.BandedGridColumn13, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_trf", Me.BandedGridColumn14, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "diff_return", Me.BandedGridColumn15, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "diff_sj_fisik", Me.BandedGridColumn16, "{0:N2}")})
         Me.GVList.Name = "GVList"
@@ -281,6 +285,21 @@ Partial Class FormTrackingReturn
         Me.GVList.OptionsView.ColumnAutoWidth = False
         Me.GVList.OptionsView.ShowFooter = True
         Me.GVList.OptionsView.ShowGroupPanel = False
+        '
+        'GridBand1
+        '
+        Me.GridBand1.Caption = "Surat Jalan Toko"
+        Me.GridBand1.Columns.Add(Me.BandedGridColumn17)
+        Me.GridBand1.Columns.Add(Me.BandedGridColumn1)
+        Me.GridBand1.Columns.Add(Me.BandedGridColumn2)
+        Me.GridBand1.Columns.Add(Me.BandedGridColumn3)
+        Me.GridBand1.Columns.Add(Me.BandedGridColumn24)
+        Me.GridBand1.Columns.Add(Me.BandedGridColumn4)
+        Me.GridBand1.Columns.Add(Me.BandedGridColumn5)
+        Me.GridBand1.Columns.Add(Me.BandedGridColumn6)
+        Me.GridBand1.Name = "GridBand1"
+        Me.GridBand1.VisibleIndex = 0
+        Me.GridBand1.Width = 612
         '
         'BandedGridColumn17
         '
@@ -351,6 +370,16 @@ Partial Class FormTrackingReturn
         Me.BandedGridColumn6.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
         Me.BandedGridColumn6.Visible = True
         '
+        'gridBand2
+        '
+        Me.gridBand2.Caption = "Return"
+        Me.gridBand2.Columns.Add(Me.BandedGridColumn7)
+        Me.gridBand2.Columns.Add(Me.BandedGridColumn8)
+        Me.gridBand2.Columns.Add(Me.BandedGridColumn9)
+        Me.gridBand2.Name = "gridBand2"
+        Me.gridBand2.VisibleIndex = 1
+        Me.gridBand2.Width = 225
+        '
         'BandedGridColumn7
         '
         Me.BandedGridColumn7.Caption = "Return"
@@ -385,6 +414,20 @@ Partial Class FormTrackingReturn
         Me.BandedGridColumn9.UnboundExpression = "[sales_return_det_qty] - [act_qty]"
         Me.BandedGridColumn9.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
         Me.BandedGridColumn9.Visible = True
+        '
+        'gridBand3
+        '
+        Me.gridBand3.Caption = "Return Transfer"
+        Me.gridBand3.Columns.Add(Me.BandedGridColumn10)
+        Me.gridBand3.Columns.Add(Me.BandedGridColumn11)
+        Me.gridBand3.Columns.Add(Me.BandedGridColumn12)
+        Me.gridBand3.Columns.Add(Me.BandedGridColumn13)
+        Me.gridBand3.Columns.Add(Me.BandedGridColumn14)
+        Me.gridBand3.Columns.Add(Me.BandedGridColumn15)
+        Me.gridBand3.Columns.Add(Me.BandedGridColumn16)
+        Me.gridBand3.Name = "gridBand3"
+        Me.gridBand3.VisibleIndex = 2
+        Me.gridBand3.Width = 525
         '
         'BandedGridColumn10
         '
@@ -470,6 +513,49 @@ Partial Class FormTrackingReturn
         Me.BandedGridColumn16.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
         Me.BandedGridColumn16.Visible = True
         '
+        'gridBand4
+        '
+        Me.gridBand4.Caption = "Status"
+        Me.gridBand4.Columns.Add(Me.BandedGridColumn22)
+        Me.gridBand4.Columns.Add(Me.BandedGridColumn20)
+        Me.gridBand4.Columns.Add(Me.BandedGridColumn21)
+        Me.gridBand4.Name = "gridBand4"
+        Me.gridBand4.VisibleIndex = 3
+        Me.gridBand4.Width = 225
+        '
+        'BandedGridColumn22
+        '
+        Me.BandedGridColumn22.Caption = "Status"
+        Me.BandedGridColumn22.FieldName = "active_status"
+        Me.BandedGridColumn22.Name = "BandedGridColumn22"
+        Me.BandedGridColumn22.OptionsColumn.ReadOnly = True
+        Me.BandedGridColumn22.Visible = True
+        '
+        'BandedGridColumn20
+        '
+        Me.BandedGridColumn20.Caption = "Updated By"
+        Me.BandedGridColumn20.FieldName = "updated_by"
+        Me.BandedGridColumn20.Name = "BandedGridColumn20"
+        Me.BandedGridColumn20.OptionsColumn.ReadOnly = True
+        Me.BandedGridColumn20.Visible = True
+        '
+        'BandedGridColumn21
+        '
+        Me.BandedGridColumn21.Caption = "Updated Date"
+        Me.BandedGridColumn21.DisplayFormat.FormatString = "dd MMMM yyyy HH:mm:ss"
+        Me.BandedGridColumn21.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.BandedGridColumn21.FieldName = "updated_date"
+        Me.BandedGridColumn21.Name = "BandedGridColumn21"
+        Me.BandedGridColumn21.OptionsColumn.ReadOnly = True
+        Me.BandedGridColumn21.Visible = True
+        '
+        'GBSelect
+        '
+        Me.GBSelect.Columns.Add(Me.BandedGridColumn18)
+        Me.GBSelect.Name = "GBSelect"
+        Me.GBSelect.VisibleIndex = 4
+        Me.GBSelect.Width = 75
+        '
         'BandedGridColumn18
         '
         Me.BandedGridColumn18.AppearanceHeader.Options.UseTextOptions = True
@@ -493,32 +579,6 @@ Partial Class FormTrackingReturn
         Me.BandedGridColumn19.FieldName = "id_wh_awb_det"
         Me.BandedGridColumn19.Name = "BandedGridColumn19"
         '
-        'BandedGridColumn20
-        '
-        Me.BandedGridColumn20.Caption = "Updated By"
-        Me.BandedGridColumn20.FieldName = "updated_by"
-        Me.BandedGridColumn20.Name = "BandedGridColumn20"
-        Me.BandedGridColumn20.OptionsColumn.ReadOnly = True
-        Me.BandedGridColumn20.Visible = True
-        '
-        'BandedGridColumn21
-        '
-        Me.BandedGridColumn21.Caption = "Updated Date"
-        Me.BandedGridColumn21.DisplayFormat.FormatString = "dd MMMM yyyy HH:mm:ss"
-        Me.BandedGridColumn21.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.BandedGridColumn21.FieldName = "updated_date"
-        Me.BandedGridColumn21.Name = "BandedGridColumn21"
-        Me.BandedGridColumn21.OptionsColumn.ReadOnly = True
-        Me.BandedGridColumn21.Visible = True
-        '
-        'BandedGridColumn22
-        '
-        Me.BandedGridColumn22.Caption = "Status"
-        Me.BandedGridColumn22.FieldName = "active_status"
-        Me.BandedGridColumn22.Name = "BandedGridColumn22"
-        Me.BandedGridColumn22.OptionsColumn.ReadOnly = True
-        Me.BandedGridColumn22.Visible = True
-        '
         'BandedGridColumn23
         '
         Me.BandedGridColumn23.Caption = "BandedGridColumn23"
@@ -526,66 +586,30 @@ Partial Class FormTrackingReturn
         Me.BandedGridColumn23.Name = "BandedGridColumn23"
         Me.BandedGridColumn23.OptionsColumn.ReadOnly = True
         '
-        'GridBand1
+        'BandedGridColumn24
         '
-        Me.GridBand1.Caption = "Surat Jalan Toko"
-        Me.GridBand1.Columns.Add(Me.BandedGridColumn17)
-        Me.GridBand1.Columns.Add(Me.BandedGridColumn1)
-        Me.GridBand1.Columns.Add(Me.BandedGridColumn2)
-        Me.GridBand1.Columns.Add(Me.BandedGridColumn3)
-        Me.GridBand1.Columns.Add(Me.BandedGridColumn4)
-        Me.GridBand1.Columns.Add(Me.BandedGridColumn5)
-        Me.GridBand1.Columns.Add(Me.BandedGridColumn6)
-        Me.GridBand1.Name = "GridBand1"
-        Me.GridBand1.VisibleIndex = 0
-        Me.GridBand1.Width = 537
+        Me.BandedGridColumn24.Caption = "Input Date"
+        Me.BandedGridColumn24.DisplayFormat.FormatString = "dd MMMM yyyy HH:mm:ss"
+        Me.BandedGridColumn24.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.BandedGridColumn24.FieldName = "awbill_date"
+        Me.BandedGridColumn24.Name = "BandedGridColumn24"
+        Me.BandedGridColumn24.OptionsColumn.ReadOnly = True
+        Me.BandedGridColumn24.Visible = True
         '
-        'gridBand2
+        'CheckEdit
         '
-        Me.gridBand2.Caption = "Return"
-        Me.gridBand2.Columns.Add(Me.BandedGridColumn7)
-        Me.gridBand2.Columns.Add(Me.BandedGridColumn8)
-        Me.gridBand2.Columns.Add(Me.BandedGridColumn9)
-        Me.gridBand2.Name = "gridBand2"
-        Me.gridBand2.VisibleIndex = 1
-        Me.gridBand2.Width = 225
-        '
-        'gridBand3
-        '
-        Me.gridBand3.Caption = "Return Transfer"
-        Me.gridBand3.Columns.Add(Me.BandedGridColumn10)
-        Me.gridBand3.Columns.Add(Me.BandedGridColumn11)
-        Me.gridBand3.Columns.Add(Me.BandedGridColumn12)
-        Me.gridBand3.Columns.Add(Me.BandedGridColumn13)
-        Me.gridBand3.Columns.Add(Me.BandedGridColumn14)
-        Me.gridBand3.Columns.Add(Me.BandedGridColumn15)
-        Me.gridBand3.Columns.Add(Me.BandedGridColumn16)
-        Me.gridBand3.Name = "gridBand3"
-        Me.gridBand3.VisibleIndex = 2
-        Me.gridBand3.Width = 525
-        '
-        'gridBand4
-        '
-        Me.gridBand4.Caption = "Status"
-        Me.gridBand4.Columns.Add(Me.BandedGridColumn22)
-        Me.gridBand4.Columns.Add(Me.BandedGridColumn20)
-        Me.gridBand4.Columns.Add(Me.BandedGridColumn21)
-        Me.gridBand4.Name = "gridBand4"
-        Me.gridBand4.VisibleIndex = 3
-        Me.gridBand4.Width = 225
-        '
-        'GBSelect
-        '
-        Me.GBSelect.Columns.Add(Me.BandedGridColumn18)
-        Me.GBSelect.Name = "GBSelect"
-        Me.GBSelect.VisibleIndex = 4
-        Me.GBSelect.Width = 75
+        Me.CheckEdit.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.CheckEdit.Location = New System.Drawing.Point(913, 12)
+        Me.CheckEdit.Name = "CheckEdit"
+        Me.CheckEdit.Properties.Caption = "Select All"
+        Me.CheckEdit.Size = New System.Drawing.Size(65, 19)
+        Me.CheckEdit.TabIndex = 8929
         '
         'FormTrackingReturn
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1008, 729)
+        Me.ClientSize = New System.Drawing.Size(1086, 729)
         Me.Controls.Add(Me.GCList)
         Me.Controls.Add(Me.PanelControlFilter)
         Me.Name = "FormTrackingReturn"
@@ -604,6 +628,7 @@ Partial Class FormTrackingReturn
         CType(Me.GCList, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVList, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemCheckEdit, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CheckEdit.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -658,4 +683,6 @@ Partial Class FormTrackingReturn
     Friend WithEvents BandedGridColumn21 As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents GBSelect As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents BandedGridColumn23 As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BandedGridColumn24 As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents CheckEdit As DevExpress.XtraEditors.CheckEdit
 End Class

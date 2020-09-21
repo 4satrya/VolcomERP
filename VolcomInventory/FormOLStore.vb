@@ -301,11 +301,14 @@
         GVSummary.ActiveFilterString = "[is_select]='Yes'"
         If GVSummary.RowCount > 0 Then
             Dim id_so As String = ""
+            Dim id_so_in As String = ""
             For i As Integer = 0 To GVSummary.RowCount - 1
                 If i > 0 Then
                     id_so += "OR "
+                    id_so_in += ","
                 End If
                 id_so += "so.id_sales_order='" + GVSummary.GetRowCellValue(i, "id_order").ToString + "' "
+                id_so_in += GVSummary.GetRowCellValue(i, "id_order").ToString
             Next
 
             'cek order
@@ -379,6 +382,27 @@
                         Next
                     End If
                     makeSafeGV(GVSummary)
+
+                    'GWP for zalora
+                    Try
+                        Dim qcg As String = "SELECT * FROM tb_ol_store_gwp g WHERE g.is_active=1 AND (NOW()>=g.start_period AND NOW()<=g.end_period) "
+                        Dim dcg As DataTable = execute_query(qcg, -1, True, "", "", "", "")
+                        If dcg.Rows.Count > 0 Then
+                            Dim qog As String = "SELECT so.id_sales_order, s.id_comp_group, so.sales_order_ol_shop_number AS `order_no`
+                            FROM tb_sales_order so
+                            INNER JOIN tb_m_comp_contact sc ON sc.id_comp_contact = so.id_store_contact_to
+                            INNER JOIN tb_m_comp s ON s.id_comp = sc.id_comp AND s.id_commerce_type=2
+                            WHERE so.id_report_status=6 AND so.id_sales_order IN (" + id_so_in + ") "
+                            Dim dog As DataTable = execute_query(qog, -1, True, "", "", "", "")
+                            For j As Integer = 0 To dog.Rows.Count - 1
+                                FormMain.SplashScreenManager1.SetWaitFormDescription("Processing GWP order : " + (j + 1).ToString + " of " + dog.Rows.Count.ToString)
+                                execute_non_query_long("CALL create_ol_gwp_order(" + dog.Rows(j)("id_comp_group").ToString + ", '" + dog.Rows(j)("order_no").ToString + "')", True, "", "", "", "")
+                            Next
+                        End If
+                    Catch ex As Exception
+                        errorCustom("Problem with GWP Order" + System.Environment.NewLine.ToString + ex.ToString)
+                    End Try
+
                     viewSummary()
                     FormMain.SplashScreenManager1.CloseWaitForm()
                 Else

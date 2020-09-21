@@ -166,6 +166,25 @@ Partial Class FormReportBalanceSheet
         Me.BViewPajak = New DevExpress.XtraEditors.SimpleButton()
         Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
         Me.DETaxFrom = New DevExpress.XtraEditors.DateEdit()
+        Me.XTPPendingTransaction = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCTaxPending = New DevExpress.XtraGrid.GridControl()
+        Me.GVTaxPending = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn16 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn25 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn26 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn27 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn28 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn29 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn30 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn31 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn32 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn33 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn34 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn35 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PCFilterUpper, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PCFilterUpper.SuspendLayout()
         CType(Me.SLEUnit.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -217,6 +236,9 @@ Partial Class FormReportBalanceSheet
         CType(Me.DETaxUntil.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DETaxFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DETaxFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTPPendingTransaction.SuspendLayout()
+        CType(Me.GCTaxPending, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVTaxPending, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PCFilterUpper
@@ -1164,7 +1186,7 @@ Partial Class FormReportBalanceSheet
         Me.XTPTaxDetail.SelectedTabPage = Me.XTPTaxDetails
         Me.XTPTaxDetail.Size = New System.Drawing.Size(894, 396)
         Me.XTPTaxDetail.TabIndex = 3
-        Me.XTPTaxDetail.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPTaxDetails})
+        Me.XTPTaxDetail.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPTaxDetails, Me.XTPPendingTransaction})
         '
         'XTPTaxDetails
         '
@@ -1576,6 +1598,215 @@ Partial Class FormReportBalanceSheet
         Me.DETaxFrom.Size = New System.Drawing.Size(173, 20)
         Me.DETaxFrom.TabIndex = 1
         '
+        'XTPPendingTransaction
+        '
+        Me.XTPPendingTransaction.Controls.Add(Me.GCTaxPending)
+        Me.XTPPendingTransaction.Name = "XTPPendingTransaction"
+        Me.XTPPendingTransaction.Size = New System.Drawing.Size(888, 368)
+        Me.XTPPendingTransaction.Text = "Pending Tax Transaction"
+        '
+        'GCTaxPending
+        '
+        Me.GCTaxPending.ContextMenuStrip = Me.ViewMenu
+        Me.GCTaxPending.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCTaxPending.Location = New System.Drawing.Point(0, 0)
+        Me.GCTaxPending.MainView = Me.GVTaxPending
+        Me.GCTaxPending.Name = "GCTaxPending"
+        Me.GCTaxPending.Size = New System.Drawing.Size(888, 368)
+        Me.GCTaxPending.TabIndex = 3
+        Me.GCTaxPending.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVTaxPending})
+        '
+        'GVTaxPending
+        '
+        Me.GVTaxPending.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn8, Me.GridColumn9, Me.GridColumn11, Me.GridColumn12, Me.GridColumn16, Me.GridColumn25, Me.GridColumn26, Me.GridColumn27, Me.GridColumn28, Me.GridColumn29, Me.GridColumn30, Me.GridColumn31, Me.GridColumn32, Me.GridColumn33, Me.GridColumn34, Me.GridColumn35})
+        Me.GVTaxPending.GridControl = Me.GCTaxPending
+        Me.GVTaxPending.GroupCount = 1
+        Me.GVTaxPending.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "pph", Me.GridColumn29, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "dpp", Me.GridColumn30, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Max, "tax_report", Me.GridColumn25, "Total {0} :")})
+        Me.GVTaxPending.LevelIndent = 0
+        Me.GVTaxPending.Name = "GVTaxPending"
+        Me.GVTaxPending.OptionsView.ColumnAutoWidth = False
+        Me.GVTaxPending.OptionsView.GroupFooterShowMode = DevExpress.XtraGrid.Views.Grid.GroupFooterShowMode.VisibleAlways
+        Me.GVTaxPending.OptionsView.ShowFooter = True
+        Me.GVTaxPending.OptionsView.ShowGroupPanel = False
+        Me.GVTaxPending.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumn8, DevExpress.Data.ColumnSortOrder.Ascending)})
+        '
+        'GridColumn8
+        '
+        Me.GridColumn8.Caption = "Tax Category"
+        Me.GridColumn8.FieldName = "tax_report"
+        Me.GridColumn8.MinWidth = 55
+        Me.GridColumn8.Name = "GridColumn8"
+        Me.GridColumn8.OptionsColumn.AllowEdit = False
+        Me.GridColumn8.OptionsColumn.ReadOnly = True
+        Me.GridColumn8.Visible = True
+        Me.GridColumn8.VisibleIndex = 0
+        '
+        'GridColumn9
+        '
+        Me.GridColumn9.Caption = "ID"
+        Me.GridColumn9.FieldName = "id_acc_trans_det"
+        Me.GridColumn9.Name = "GridColumn9"
+        Me.GridColumn9.OptionsColumn.AllowEdit = False
+        Me.GridColumn9.OptionsColumn.ReadOnly = True
+        '
+        'GridColumn11
+        '
+        Me.GridColumn11.Caption = "Date Reff"
+        Me.GridColumn11.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.GridColumn11.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn11.FieldName = "date_reference"
+        Me.GridColumn11.MinWidth = 70
+        Me.GridColumn11.Name = "GridColumn11"
+        Me.GridColumn11.OptionsColumn.AllowEdit = False
+        Me.GridColumn11.OptionsColumn.ReadOnly = True
+        Me.GridColumn11.Visible = True
+        Me.GridColumn11.VisibleIndex = 1
+        Me.GridColumn11.Width = 80
+        '
+        'GridColumn12
+        '
+        Me.GridColumn12.Caption = "Reff"
+        Me.GridColumn12.FieldName = "number"
+        Me.GridColumn12.MinWidth = 60
+        Me.GridColumn12.Name = "GridColumn12"
+        Me.GridColumn12.OptionsColumn.AllowEdit = False
+        Me.GridColumn12.OptionsColumn.ReadOnly = True
+        Me.GridColumn12.Visible = True
+        Me.GridColumn12.VisibleIndex = 2
+        '
+        'GridColumn16
+        '
+        Me.GridColumn16.Caption = "Inv Number"
+        Me.GridColumn16.FieldName = "inv_number"
+        Me.GridColumn16.MinWidth = 100
+        Me.GridColumn16.Name = "GridColumn16"
+        Me.GridColumn16.OptionsColumn.AllowEdit = False
+        Me.GridColumn16.OptionsColumn.ReadOnly = True
+        Me.GridColumn16.Visible = True
+        Me.GridColumn16.VisibleIndex = 3
+        Me.GridColumn16.Width = 100
+        '
+        'GridColumn25
+        '
+        Me.GridColumn25.Caption = "Description"
+        Me.GridColumn25.FieldName = "description"
+        Me.GridColumn25.Name = "GridColumn25"
+        Me.GridColumn25.OptionsColumn.AllowEdit = False
+        Me.GridColumn25.OptionsColumn.ReadOnly = True
+        Me.GridColumn25.Visible = True
+        Me.GridColumn25.VisibleIndex = 4
+        '
+        'GridColumn26
+        '
+        Me.GridColumn26.Caption = "Vendor Code"
+        Me.GridColumn26.FieldName = "comp_number"
+        Me.GridColumn26.Name = "GridColumn26"
+        Me.GridColumn26.OptionsColumn.AllowEdit = False
+        Me.GridColumn26.OptionsColumn.ReadOnly = True
+        '
+        'GridColumn27
+        '
+        Me.GridColumn27.Caption = "Vendor"
+        Me.GridColumn27.FieldName = "comp_name"
+        Me.GridColumn27.MinWidth = 70
+        Me.GridColumn27.Name = "GridColumn27"
+        Me.GridColumn27.OptionsColumn.AllowEdit = False
+        Me.GridColumn27.OptionsColumn.ReadOnly = True
+        Me.GridColumn27.Visible = True
+        Me.GridColumn27.VisibleIndex = 5
+        Me.GridColumn27.Width = 160
+        '
+        'GridColumn28
+        '
+        Me.GridColumn28.Caption = "(%)"
+        Me.GridColumn28.DisplayFormat.FormatString = "{0:N1} %"
+        Me.GridColumn28.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn28.FieldName = "pph_percent"
+        Me.GridColumn28.MinWidth = 35
+        Me.GridColumn28.Name = "GridColumn28"
+        Me.GridColumn28.OptionsColumn.AllowEdit = False
+        Me.GridColumn28.OptionsColumn.ReadOnly = True
+        Me.GridColumn28.Visible = True
+        Me.GridColumn28.VisibleIndex = 6
+        '
+        'GridColumn29
+        '
+        Me.GridColumn29.Caption = "Tarif"
+        Me.GridColumn29.DisplayFormat.FormatString = "N2"
+        Me.GridColumn29.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn29.FieldName = "pph"
+        Me.GridColumn29.MinWidth = 70
+        Me.GridColumn29.Name = "GridColumn29"
+        Me.GridColumn29.OptionsColumn.AllowEdit = False
+        Me.GridColumn29.OptionsColumn.ReadOnly = True
+        Me.GridColumn29.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "pph", "{0:N2}")})
+        Me.GridColumn29.Visible = True
+        Me.GridColumn29.VisibleIndex = 7
+        Me.GridColumn29.Width = 80
+        '
+        'GridColumn30
+        '
+        Me.GridColumn30.Caption = "DPP"
+        Me.GridColumn30.DisplayFormat.FormatString = "N2"
+        Me.GridColumn30.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn30.FieldName = "dpp"
+        Me.GridColumn30.MinWidth = 70
+        Me.GridColumn30.Name = "GridColumn30"
+        Me.GridColumn30.OptionsColumn.AllowEdit = False
+        Me.GridColumn30.OptionsColumn.ReadOnly = True
+        Me.GridColumn30.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "dpp", "{0:N2}")})
+        Me.GridColumn30.Visible = True
+        Me.GridColumn30.VisibleIndex = 8
+        Me.GridColumn30.Width = 80
+        '
+        'GridColumn31
+        '
+        Me.GridColumn31.Caption = "NPWP"
+        Me.GridColumn31.FieldName = "npwp"
+        Me.GridColumn31.MinWidth = 80
+        Me.GridColumn31.Name = "GridColumn31"
+        Me.GridColumn31.OptionsColumn.AllowEdit = False
+        Me.GridColumn31.OptionsColumn.ReadOnly = True
+        Me.GridColumn31.Visible = True
+        Me.GridColumn31.VisibleIndex = 9
+        Me.GridColumn31.Width = 80
+        '
+        'GridColumn32
+        '
+        Me.GridColumn32.Caption = "Kitas"
+        Me.GridColumn32.Name = "GridColumn32"
+        Me.GridColumn32.OptionsColumn.AllowEdit = False
+        Me.GridColumn32.OptionsColumn.ReadOnly = True
+        '
+        'GridColumn33
+        '
+        Me.GridColumn33.Caption = "Nama di Identitas"
+        Me.GridColumn33.FieldName = "npwp_name"
+        Me.GridColumn33.MinWidth = 110
+        Me.GridColumn33.Name = "GridColumn33"
+        Me.GridColumn33.OptionsColumn.AllowEdit = False
+        Me.GridColumn33.OptionsColumn.ReadOnly = True
+        Me.GridColumn33.Visible = True
+        Me.GridColumn33.VisibleIndex = 10
+        Me.GridColumn33.Width = 140
+        '
+        'GridColumn34
+        '
+        Me.GridColumn34.Caption = "Alamat"
+        Me.GridColumn34.FieldName = "npwp_address"
+        Me.GridColumn34.Name = "GridColumn34"
+        Me.GridColumn34.OptionsColumn.AllowEdit = False
+        Me.GridColumn34.OptionsColumn.ReadOnly = True
+        Me.GridColumn34.Visible = True
+        Me.GridColumn34.VisibleIndex = 11
+        '
+        'GridColumn35
+        '
+        Me.GridColumn35.Caption = "No Bukti Potong"
+        Me.GridColumn35.Name = "GridColumn35"
+        Me.GridColumn35.OptionsColumn.AllowEdit = False
+        Me.GridColumn35.OptionsColumn.ReadOnly = True
+        '
         'FormReportBalanceSheet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1642,6 +1873,9 @@ Partial Class FormReportBalanceSheet
         CType(Me.DETaxUntil.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DETaxFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DETaxFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTPPendingTransaction.ResumeLayout(False)
+        CType(Me.GCTaxPending, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVTaxPending, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1792,4 +2026,23 @@ Partial Class FormReportBalanceSheet
     Friend WithEvents ViewDetailToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ViewJournalToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents GridColumnTaxCat As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents XTPPendingTransaction As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents GCTaxPending As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVTaxPending As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn8 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn9 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn11 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn12 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn16 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn25 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn26 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn27 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn28 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn29 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn30 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn31 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn32 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn33 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn34 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn35 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

@@ -10,6 +10,8 @@
     Dim id_coa_tag As String = "1"
 
     Private Sub FormItemExpenseDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        DEDateReff.EditValue = Now()
+
         viewReportStatus()
         viewCCRepo()
         viewCOAPPH()
@@ -162,6 +164,7 @@ WHERE bo.`year`=YEAR(NOW()) AND bo.is_active='1'"
                 TxtCompNumber.Text = data.Rows(0)("comp_number").ToString
                 TxtCompName.Text = data.Rows(0)("comp_name").ToString
                 DEDueDate.EditValue = data.Rows(0)("due_date")
+                DEDateReff.EditValue = data.Rows(0)("date_reff")
                 CEPayLater.EditValue = True
             Else
                 CEPayLater.EditValue = False
@@ -443,6 +446,8 @@ WHERE bo.`year`=YEAR(NOW()) AND bo.is_active='1'"
             warningCustom("Please use only same currency with same kurs")
         ElseIf MENote.Text = "" Then
             warningCustom("Please put some note")
+        ElseIf DEDateReff.Text = "" Then
+            warningCustom("Please put refference date")
         Else
             GVData.ActiveFilterString = ""
             'check invoice duplicate
@@ -462,13 +467,15 @@ WHERE bo.`year`=YEAR(NOW()) AND bo.is_active='1'"
                     Dim note As String = addSlashes(MENote.Text)
                     Dim is_pay_later As String = ""
                     Dim due_date As String = ""
+                    Dim date_reff As String = ""
                     Dim sub_total As String = decimalSQL(TxtSubTotal.EditValue.ToString)
                     Dim vat_total As String = decimalSQL(TxtVAT.EditValue.ToString)
                     Dim total As String = decimalSQL(TxtTotal.EditValue.ToString)
                     Dim is_open As String = ""
                     If CEPayLater.EditValue = True Then
                         is_pay_later = "1"
-                        due_date = "'" + DateTime.Parse(DEDueDate.EditValue.ToString).ToString("yyyy-MM-dd") + "'"
+                        due_date = "'" + Date.Parse(DEDueDate.EditValue.ToString).ToString("yyyy-MM-dd") + "'"
+                        date_reff = "" + Date.Parse(DEDateReff.EditValue.ToString).ToString("yyyy-MM-dd") + ""
                         is_open = "1"
                     Else
                         is_pay_later = "2"
@@ -476,8 +483,8 @@ WHERE bo.`year`=YEAR(NOW()) AND bo.is_active='1'"
                         due_date = "NULL"
                         is_open = "2"
                     End If
-                    Dim qm As String = "INSERT INTO tb_item_expense(id_comp,inv_number, created_date, due_date, created_by, id_acc_from, id_payment_purchasing, id_report_status, note, sub_total, vat_total, total, is_pay_later, is_open) VALUES 
-                (" + id_comp + ",'" + inv_no + "', NOW()," + due_date + ", '" + id_user + "', '" + id_acc_from + "', '" + id_payment_purchasing + "', 1, '" + note + "','" + sub_total + "', '" + vat_total + "', '" + total + "', '" + is_pay_later + "', '" + is_open + "'); SELECT LAST_INSERT_ID(); "
+                    Dim qm As String = "INSERT INTO tb_item_expense(id_comp,inv_number, created_date, due_date, created_by, id_acc_from, id_payment_purchasing, id_report_status, note, sub_total, vat_total, total, is_pay_later, is_open, date_reff) VALUES 
+                (" + id_comp + ",'" + inv_no + "', NOW()," + due_date + ", '" + id_user + "', '" + id_acc_from + "', '" + id_payment_purchasing + "', 1, '" + note + "','" + sub_total + "', '" + vat_total + "', '" + total + "', '" + is_pay_later + "', '" + is_open + "', '" + date_reff + "'); SELECT LAST_INSERT_ID(); "
                     id = execute_query(qm, 0, True, "", "", "", "")
                     execute_non_query("CALL gen_number(" + id + ",157); ", True, "", "", "", "")
 

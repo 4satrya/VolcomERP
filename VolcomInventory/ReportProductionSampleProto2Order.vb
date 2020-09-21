@@ -38,7 +38,7 @@
             Dim tb_desc As New DevExpress.XtraReports.UI.XRLabel
 
             tb_desc.Text = dt_det.Rows(i)("class_dsg").ToString
-            tb_desc.SizeF = New Size(220, 20)
+            tb_desc.SizeF = New Size(175, 20)
             tb_desc.LocationF = New Point(172, po_height)
             tb_desc.Font = New Font("Calibri", 11, FontStyle.Bold)
             tb_desc.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
@@ -52,13 +52,26 @@
 
             tb_color.Text = dt_det.Rows(i)("color").ToString
             tb_color.SizeF = New Size(45, 20)
-            tb_color.LocationF = New Point(392, po_height)
+            tb_color.LocationF = New Point(347, po_height)
             tb_color.Font = New Font("Calibri", 11, FontStyle.Bold)
             tb_color.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
             tb_color.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0)
             tb_color.Borders = DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom
 
             Me.XPTableAmount.Controls.Add(tb_color)
+
+            'column Size
+            Dim tb_size As New DevExpress.XtraReports.UI.XRLabel
+
+            tb_size.Text = dt_det.Rows(i)("size").ToString
+            tb_size.SizeF = New Size(45, 20)
+            tb_size.LocationF = New Point(392, po_height)
+            tb_size.Font = New Font("Calibri", 11, FontStyle.Bold)
+            tb_size.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+            tb_size.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0)
+            tb_size.Borders = DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom
+
+            Me.XPTableAmount.Controls.Add(tb_size)
 
             'column qty order
             Dim tb_qty As New DevExpress.XtraReports.UI.XRLabel

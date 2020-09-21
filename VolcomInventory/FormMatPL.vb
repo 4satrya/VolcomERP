@@ -141,7 +141,7 @@
                     (
 	                    SELECT COUNT(id_pl_mrs) AS jum_pl,id_prod_order_mrs FROM tb_pl_mrs WHERE id_report_status!=5 GROUP BY id_prod_order_mrs
                     ) AS jum_pl ON jum_pl.id_prod_order_mrs=a.id_prod_order_mrs
-                    WHERE (a.id_report_status = '3' OR a.id_report_status='4')  " & query_status & " AND NOT ISNULL(a.id_prod_order)"
+                    WHERE (a.id_report_status = '6')  " & query_status & " AND NOT ISNULL(a.id_prod_order)"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCMRS.DataSource = data
         '
@@ -174,7 +174,7 @@
                     (
 	                    SELECT COUNT(id_pl_mrs) AS jum_pl,id_prod_order_mrs FROM tb_pl_mrs WHERE id_report_status!=5 GROUP BY id_prod_order_mrs
                     ) AS jum_pl ON jum_pl.id_prod_order_mrs=a.id_prod_order_mrs
-                    WHERE (a.id_report_status = '3' OR a.id_report_status='4') AND ISNULL(a.id_prod_order) AND a.mrs_type='1' " & query_status
+                    WHERE (a.id_report_status = '6') AND ISNULL(a.id_prod_order) AND a.mrs_type='1' " & query_status
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCMRSOther.DataSource = data
         '
@@ -192,7 +192,7 @@
         query += "INNER JOIN tb_m_comp_contact e ON a.id_comp_contact_req_to = e.id_comp_contact "
         query += "INNER JOIN tb_m_comp f ON e.id_comp = f.id_comp "
         query += "INNER JOIN tb_lookup_report_status h ON h.id_report_status = a.id_report_status "
-        query += "WHERE (a.id_report_status = '3' OR a.id_report_status='4') AND a.mrs_type='2'"
+        query += "WHERE (a.id_report_status = '6') AND a.mrs_type='2'"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCMRSwo.DataSource = data
     End Sub

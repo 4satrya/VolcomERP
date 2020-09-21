@@ -342,10 +342,10 @@ Partial Class FormEmpPayrollReportBPJSTK
         '
         Me.gridBand2.Caption = "Dibayar Oleh Perusahaan"
         Me.gridBand2.Columns.Add(Me.GCCompanyContribution1)
-        Me.gridBand2.Columns.Add(Me.GCEmployeeContribution1)
+        Me.gridBand2.Columns.Add(Me.GCCompanyContribution2)
         Me.gridBand2.Name = "gridBand2"
         Me.gridBand2.VisibleIndex = 1
-        Me.gridBand2.Width = 232
+        Me.gridBand2.Width = 200
         '
         'GCCompanyContribution1
         '
@@ -372,11 +372,11 @@ Partial Class FormEmpPayrollReportBPJSTK
         'gridBand3
         '
         Me.gridBand3.Caption = "Dibayar Oleh Karyawan"
-        Me.gridBand3.Columns.Add(Me.GCCompanyContribution2)
+        Me.gridBand3.Columns.Add(Me.GCEmployeeContribution1)
         Me.gridBand3.Columns.Add(Me.GCEmployeeContribution2)
         Me.gridBand3.Name = "gridBand3"
         Me.gridBand3.VisibleIndex = 2
-        Me.gridBand3.Width = 150
+        Me.gridBand3.Width = 182
         '
         'GCCompanyContribution2
         '

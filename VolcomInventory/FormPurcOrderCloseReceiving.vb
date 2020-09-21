@@ -5,6 +5,8 @@
     Public id_close_receiving As String = "0"
     Public id_receive_date As String = "0"
 
+    Private id_report_status As String = ""
+
     Private Sub FormPurcOrderCloseReceiving_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         form_load()
     End Sub
@@ -44,11 +46,12 @@
         TECreatedDate.EditValue = data.Rows(0)("created_date").ToString
         TECreatedBy.EditValue = data.Rows(0)("created_by").ToString
         TEReportStatus.EditValue = data.Rows(0)("report_status").ToString
+        id_report_status = data.Rows(0)("id_report_status").ToString
 
         'details
         If change_type = "close" Then
             GCPO.DataSource = execute_query("
-                SELECT po.est_date_receive, po.id_purc_order, c.comp_number, c.comp_name, po.purc_order_number, (SUM(pod.qty * (pod.value - pod.discount)) - po.disc_value + po.vat_value) AS total_po, IF(ISNULL(rec.id_purc_order_det), 0, SUM(rec.qty * (pod.value - pod.discount)) - (SUM(rec.qty * (pod.value - pod.discount)) / SUM(pod.qty * (pod.value - pod.discount)) * po.disc_value) + (SUM(rec.qty * (pod.value - pod.discount)) / SUM(pod.qty * (pod.value-pod.discount)) * po.vat_value)) AS total_rec, (IFNULL(SUM(rec.qty * pod.value), 0) / SUM(pod.qty * pod.value)) * 100 AS rec_progress, IF(po.is_close_rec = 1, 'Closed', IF((IFNULL(SUM(rec.qty), 0) / SUM(pod.qty)) <= 0, 'Waiting', IF((IFNULL(SUM(rec.qty), 0) / SUM(pod.qty)) < 1, 'Partial', 'Complete'))) AS rec_status, cl_d.close_rec_reason AS close_rec_reason, '' AS to_est_date_receive
+                SELECT po.est_date_receive, po.id_purc_order, c.comp_number, c.comp_name, po.purc_order_number, (SUM(pod.qty * (pod.value - pod.discount)) - po.disc_value + po.vat_value) AS total_po, IF(ISNULL(rec.id_purc_order_det), 0, SUM(rec.qty * (pod.value - pod.discount)) - (SUM(rec.qty * (pod.value - pod.discount)) / SUM(pod.qty * (pod.value - pod.discount)) * po.disc_value) + (SUM(rec.qty * (pod.value - pod.discount)) / SUM(pod.qty * (pod.value-pod.discount)) * po.vat_value)) AS total_rec, (IFNULL(SUM(rec.qty * pod.value), 0) / SUM(pod.qty * pod.value)) * 100 AS rec_progress, IFNULL(SUM(rec.qty), 0) AS rec_qty, SUM(pod.qty) AS po_qty, IF(po.is_close_rec = 1, 'Closed', IF((IFNULL(SUM(rec.qty), 0) / SUM(pod.qty)) <= 0, 'Waiting', IF((IFNULL(SUM(rec.qty), 0) / SUM(pod.qty)) < 1, 'Partial', 'Complete'))) AS rec_status, cl_d.close_rec_reason AS close_rec_reason, '' AS to_est_date_receive
                 FROM tb_purc_order_close_det cl_d
                 INNER JOIN tb_purc_order po ON cl_d.id_purc_order = po.id_purc_order
                 INNER JOIN tb_purc_order_det pod ON pod.`id_purc_order` = po.`id_purc_order`
@@ -76,7 +79,7 @@
             GVPO.Columns("to_est_date_receive").Visible = False
         ElseIf change_type = "move" Then
             GCPO.DataSource = execute_query("
-                SELECT m_d.est_date_receive, po.id_purc_order, c.comp_number, c.comp_name, po.purc_order_number, (SUM(pod.qty * (pod.value - pod.discount)) - po.disc_value + po.vat_value) AS total_po, IF(ISNULL(rec.id_purc_order_det), 0, SUM(rec.qty * (pod.value - pod.discount)) - (SUM(rec.qty * (pod.value - pod.discount)) / SUM(pod.qty * (pod.value - pod.discount)) * po.disc_value) + (SUM(rec.qty * (pod.value - pod.discount)) / SUM(pod.qty * (pod.value-pod.discount)) * po.vat_value)) AS total_rec, (IFNULL(SUM(rec.qty * pod.value), 0) / SUM(pod.qty * pod.value)) * 100 AS rec_progress, IF(po.is_close_rec = 1, 'Closed', IF((IFNULL(SUM(rec.qty), 0) / SUM(pod.qty)) <= 0, 'Waiting', IF((IFNULL(SUM(rec.qty), 0) / SUM(pod.qty)) < 1, 'Partial', 'Complete'))) AS rec_status, '' AS close_rec_reason, m_d.to_est_date_receive
+                SELECT m_d.est_date_receive, po.id_purc_order, c.comp_number, c.comp_name, po.purc_order_number, (SUM(pod.qty * (pod.value - pod.discount)) - po.disc_value + po.vat_value) AS total_po, IF(ISNULL(rec.id_purc_order_det), 0, SUM(rec.qty * (pod.value - pod.discount)) - (SUM(rec.qty * (pod.value - pod.discount)) / SUM(pod.qty * (pod.value - pod.discount)) * po.disc_value) + (SUM(rec.qty * (pod.value - pod.discount)) / SUM(pod.qty * (pod.value-pod.discount)) * po.vat_value)) AS total_rec, (IFNULL(SUM(rec.qty * pod.value), 0) / SUM(pod.qty * pod.value)) * 100 AS rec_progress, IFNULL(SUM(rec.qty), 0) AS rec_qty, SUM(pod.qty) AS po_qty, IF(po.is_close_rec = 1, 'Closed', IF((IFNULL(SUM(rec.qty), 0) / SUM(pod.qty)) <= 0, 'Waiting', IF((IFNULL(SUM(rec.qty), 0) / SUM(pod.qty)) < 1, 'Partial', 'Complete'))) AS rec_status, '' AS close_rec_reason, m_d.to_est_date_receive
                 FROM tb_purc_order_move_date_det m_d
                 INNER JOIN tb_purc_order po ON m_d.id_purc_order = po.id_purc_order
                 INNER JOIN tb_purc_order_det pod ON pod.`id_purc_order` = po.`id_purc_order`
@@ -107,20 +110,23 @@
         GVPO.BestFitColumns()
 
         'controls
-        If data.Rows(0)("id_report_status").ToString = "0" Then
+        If id_report_status = "0" Then
             'new
             SBAdd.Enabled = True
             SBRemove.Enabled = True
             SBSave.Visible = True
             SBMark.Visible = False
+            SBPrint.Visible = False
         Else
             'submitted
             SBAdd.Enabled = False
             SBRemove.Enabled = False
             SBSave.Visible = False
             SBMark.Visible = True
+            SBPrint.Visible = True
 
             SBClose.Location = New Point(686, 15)
+            SBPrint.Location = New Point(594, 15)
         End If
     End Sub
 
@@ -198,7 +204,7 @@
 
                     infoCustom("Saved.")
 
-                    Close()
+                    form_load()
                 End If
             Else
                 If change_type = "close" Then
@@ -235,5 +241,27 @@
         End If
 
         Dispose()
+    End Sub
+
+    Private Sub SBPrint_Click(sender As Object, e As EventArgs) Handles SBPrint.Click
+        Dim Report As New ReportPurcOrderCloseReceiving()
+
+        Report.id = If(change_type = "close", id_close_receiving, id_receive_date)
+        Report.data = GCPO.DataSource
+        Report.id_pre = If(id_report_status = "6", "-1", "1")
+        Report.report_mark_type = If(change_type = "close", "259", "260")
+
+        Report.XLNumber.Text = TENumber.EditValue.ToString
+        Report.XLCreatedAt.Text = TECreatedDate.EditValue.ToString
+        Report.XLCreatedBy.Text = TECreatedBy.EditValue.ToString
+
+        If change_type = "close" Then
+            Report.GVPO.Columns("to_est_date_receive").Visible = False
+        Else
+            Report.GVPO.Columns("close_rec_reason").Visible = False
+        End If
+
+        Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
+        Tool.ShowPreviewDialog()
     End Sub
 End Class

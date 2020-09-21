@@ -1271,10 +1271,12 @@ GROUP BY rec.`id_prod_order`"
             FormSalesBranchDet.ShowDialog()
         ElseIf report_mark_type = "259" Then
             'close receiving
+            FormPurcOrderCloseReceiving.change_type = "close"
             FormPurcOrderCloseReceiving.id_close_receiving = id_report
             FormPurcOrderCloseReceiving.ShowDialog()
         ElseIf report_mark_type = "260" Then
             'move est. date receive
+            FormPurcOrderCloseReceiving.change_type = "move"
             FormPurcOrderCloseReceiving.id_receive_date = id_report
             FormPurcOrderCloseReceiving.ShowDialog()
         Else

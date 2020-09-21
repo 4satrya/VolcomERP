@@ -2345,6 +2345,13 @@ WHERE adjd.id_adj_out_mat='" & id_report & "'"
 
             query = String.Format("UPDATE tb_sales_order SET id_report_status='{0}' WHERE id_sales_order ='{1}'", id_status_reportx, id_report)
             execute_non_query(query, True, "", "", "", "")
+
+            'jika online store cek GWP
+            If FormSalesOrderDet.id_commerce_type = "2" And id_status_reportx = "6" Then
+                Dim id_store_group As String = execute_query("SELECT id_comp_group FROM tb_m_comp WHERE id_comp='" + FormSalesOrderDet.id_store + "'", 0, True, "", "", "", "")
+                execute_non_query("CALL create_ol_gwp_order(" + id_store_group + ", '" + addSlashes(FormSalesOrderDet.TxtOLShopNumber.Text) + "')", True, "", "", "", "")
+            End If
+
             'infoCustom("Status changed.")
             'Try
             If form_origin = "FormSalesOrderDet" Then
@@ -3927,9 +3934,9 @@ WHERE a.id_adj_in_fg = '" & id_report & "'"
                 compl.completedStock(id_report)
                 'put unique code wh drawer to
                 Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_fg_repair_rec_det`,`id_type`,`unique_code`,
-                        `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
+                        `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`, report_mark_type, id_report, id_report_status) 
                         SELECT c.id_comp, t.`id_wh_drawer_to`, td.id_product, td.id_pl_prod_order_rec_det_unique,  td.id_fg_repair_rec_det, '9', 
-                        CONCAT(p.product_full_code,td.fg_repair_rec_det_counting), sod.id_design_price, sod.design_price, 1, 1, NOW() 
+                        CONCAT(p.product_full_code,td.fg_repair_rec_det_counting), sod.id_design_price, sod.design_price, 1, 1, NOW(), 92,t.id_fg_repair_rec, '6' 
                         FROM tb_fg_repair_rec_det td
                         INNER JOIN tb_fg_repair_rec t ON t.id_fg_repair_rec = td.id_fg_repair_rec
                         INNER JOIN tb_m_wh_drawer drw_frm ON drw_frm.id_wh_drawer = t.id_wh_drawer_to  
@@ -4008,9 +4015,9 @@ WHERE a.id_adj_in_fg = '" & id_report & "'"
                 End If
                 'cancel reserved unique
                 Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_fg_repair_return_det`,`id_type`,`unique_code`,
-                        `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
+                        `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`, report_mark_type, id_report, id_report_status) 
                         SELECT c.id_comp, t.`id_wh_drawer_from`, td.id_product, td.id_pl_prod_order_rec_det_unique, td.id_fg_repair_return_det, '10', 
-                        CONCAT(p.product_full_code,td.fg_repair_return_det_counting), sod.id_design_price, sod.design_price, 1, 1, NOW() 
+                        CONCAT(p.product_full_code,td.fg_repair_return_det_counting), sod.id_design_price, sod.design_price, 1, 1, NOW(), '" + report_mark_type + "', td.id_fg_repair_return, 5
                         FROM tb_fg_repair_return_det td
                         INNER JOIN tb_fg_repair_return t ON t.id_fg_repair_return = td.id_fg_repair_return
                         INNER JOIN tb_m_wh_drawer drw_frm ON drw_frm.id_wh_drawer = t.id_wh_drawer_from  
@@ -4093,9 +4100,9 @@ WHERE a.id_adj_in_fg = '" & id_report & "'"
                 compl.completedStock(id_report)
                 'insert unique drawer to
                 Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_fg_repair_return_rec_det`,`id_type`,`unique_code`,
-                        `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
+                        `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`, report_mark_type, id_report, id_report_status) 
                         SELECT c.id_comp, t.`id_wh_drawer_dest`, td.id_product, td.id_pl_prod_order_rec_det_unique, td.id_fg_repair_return_rec_det, '11', 
-                        CONCAT(p.product_full_code,td.fg_repair_return_rec_det_counting), sod.id_design_price, sod.design_price, 1, 1, NOW() 
+                        CONCAT(p.product_full_code,td.fg_repair_return_rec_det_counting), sod.id_design_price, sod.design_price, 1, 1, NOW() ,'" + report_mark_type + "', td.id_fg_repair_return_rec,6
                         FROM tb_fg_repair_return_rec_det td
                         INNER JOIN tb_fg_repair_return_rec t ON t.id_fg_repair_return_rec = td.id_fg_repair_return_rec
                         INNER JOIN tb_m_wh_drawer drw_frm ON drw_frm.id_wh_drawer = t.id_wh_drawer_dest 
@@ -5433,7 +5440,7 @@ FROM
                 /* total biaya jasa atau non inventory tanpa diskon */
                 SELECT " + id_acc_trans + " AS id_acc_trans,o.id_coa_out AS `id_acc`, IF(reqd.ship_to=0,1,reqd.ship_to) AS id_comp,  SUM(rd.qty) AS `qty`,
                 SUM(rd.qty * pod.`value`) AS `debit`,
-                0 AS `credit`,i.item_desc AS `note`,148 AS report_mark_type,rd.id_purc_rec AS id_report, r.purc_rec_number AS report_number, IF(po.id_expense_type=1,139,202) as rmt_reff,  po.id_purc_order AS id_report_reff, po.purc_order_number AS report_number_reff
+                0 AS `credit`,i.item_desc AS `note`,148 AS report_mark_type,rd.id_purc_rec AS id_report, r.purc_rec_number AS report_number, IF(po.id_expense_type=1,139,202) AS rmt_reff,  po.id_purc_order AS id_report_reff, po.purc_order_number AS report_number_reff
                 FROM tb_purc_rec_det rd
                 INNER JOIN tb_purc_rec r ON r.id_purc_rec = rd.id_purc_rec
                 INNER JOIN tb_purc_order po ON po.id_purc_order = r.id_purc_order
@@ -5459,7 +5466,7 @@ FROM
                 /*total value item inventory tanpa diskon*/
                 SELECT " + id_acc_trans + " AS id_acc_trans,o.acc_coa_receive AS `id_acc`, dep.id_main_comp,  SUM(rd.qty) AS `qty`,
                 SUM(rd.qty * (pod.`value`)) AS `debit`,
-                0 AS `credit`,i.item_desc AS `note`,148,rd.id_purc_rec, r.purc_rec_number, IF(po.id_expense_type=1,139,202) as rmt_reff,  po.id_purc_order, po.purc_order_number
+                0 AS `credit`,i.item_desc AS `note`,148,rd.id_purc_rec, r.purc_rec_number, IF(po.id_expense_type=1,139,202) AS rmt_reff,  po.id_purc_order, po.purc_order_number
                 FROM tb_purc_rec_det rd
                 INNER JOIN tb_purc_rec r ON r.id_purc_rec = rd.id_purc_rec
                 INNER JOIN tb_purc_order po ON po.id_purc_order = r.id_purc_order
@@ -5536,8 +5543,8 @@ FROM
                 UNION ALL
                 /*total vat in*/
                 SELECT " + id_acc_trans + " AS id_acc_trans,o.acc_coa_vat_in AS `id_acc`, dep.id_main_comp,  SUM(rd.qty) AS `qty`,
-                (po.vat_percent/100)*(SUM(rd.qty * (pod.`value`-pod.discount))-((SUM(rd.qty * (pod.`value`-pod.discount))/(poall.`value`))*poall.disc_value)) AS `debit`,
-                0 AS `credit`,i.item_desc AS `note`,148,rd.id_purc_rec, r.purc_rec_number, IF(po.id_expense_type=1,139,202) as rmt_reff,  po.id_purc_order, po.purc_order_number
+                (po.vat_percent/100)*(po.dpp_percent/100)*(SUM(rd.qty * (pod.`value`-pod.discount))-((SUM(rd.qty * (pod.`value`-pod.discount))/(poall.`value`))*poall.disc_value)) AS `debit`,
+                0 AS `credit`,i.item_desc AS `note`,148,rd.id_purc_rec, r.purc_rec_number, IF(po.id_expense_type=1,139,202) AS rmt_reff,  po.id_purc_order, po.purc_order_number
                 FROM tb_purc_rec_det rd
                 INNER JOIN tb_purc_rec r ON r.id_purc_rec = rd.id_purc_rec
                 INNER JOIN tb_purc_order po ON po.id_purc_order = r.id_purc_order
@@ -5560,8 +5567,8 @@ FROM
                 UNION ALL
                 /* Total value item inventory + total value item asset + vat in ke AP */
                 SELECT " + id_acc_trans + " AS id_acc_trans, comp.id_acc_ap AS `id_acc`, dep.id_main_comp, SUM(rd.qty) AS `qty`, 0 AS `debit`,
-                SUM(rd.qty * (pod.`value`-pod.discount))-((SUM(rd.qty * (pod.`value`-pod.discount))/(poall.`value`))*poall.disc_value) + ((po.vat_percent/100)*(SUM(rd.qty * (pod.`value`-pod.discount))-((SUM(rd.qty * (pod.`value`-pod.discount))/(poall.`value`))*poall.disc_value))) AS `credit`,
-                i.item_desc AS `note`, 148, rd.id_purc_rec, r.purc_rec_number, IF(po.id_expense_type=1,139,202) as rmt_reff,  po.id_purc_order, po.purc_order_number
+                SUM(rd.qty * (pod.`value`-pod.discount))-((SUM(rd.qty * (pod.`value`-pod.discount))/(poall.`value`))*poall.disc_value) + ((po.vat_percent/100)*(po.dpp_percent/100)*(SUM(rd.qty * (pod.`value`-pod.discount))-((SUM(rd.qty * (pod.`value`-pod.discount))/(poall.`value`))*poall.disc_value))) AS `credit`,
+                i.item_desc AS `note`, 148, rd.id_purc_rec, r.purc_rec_number, IF(po.id_expense_type=1,139,202) AS rmt_reff,  po.id_purc_order, po.purc_order_number
                 FROM tb_purc_rec_det rd
                 INNER JOIN tb_purc_rec r ON r.id_purc_rec = rd.id_purc_rec
                 INNER JOIN tb_purc_order po ON po.id_purc_order = r.id_purc_order
@@ -5593,7 +5600,7 @@ FROM
                 INNER JOIN tb_m_comp comp ON comp.id_comp = cont.id_comp
                 LEFT JOIN 
                 (
-	                SELECT rec.id_purc_order ,SUM(recd.`qty`*pod.`value`*((100+po.`vat_percent`)/100)) AS rec_val
+	                SELECT rec.id_purc_order ,SUM(recd.`qty`*pod.`value`*(po.dpp_percent/100)*((100+po.`vat_percent`)/100)) AS rec_val
 	                FROM tb_purc_rec_det recd
 	                INNER JOIN tb_purc_rec rec ON rec.`id_purc_rec`=recd.`id_purc_rec` AND rec.`id_report_status`=6  AND rec.`id_purc_rec`!='" + id_report + "' AND rec.`id_purc_order`='" + FormPurcReceiveDet.id_purc_order + "'
 	                INNER JOIN tb_purc_order_det pod ON pod.`id_purc_order_det`=recd.`id_purc_order_det`
@@ -5602,7 +5609,7 @@ FROM
                 )already_rec ON already_rec.id_purc_order=pnd.id_report
                 LEFT JOIN 
                 (
-	                SELECT rec.id_purc_order ,SUM(recd.`qty`*pod.`value`*((100+po.`vat_percent`)/100)) AS rec_val
+	                SELECT rec.id_purc_order ,SUM(recd.`qty`*pod.`value`*(po.dpp_percent/100)*((100+po.`vat_percent`)/100)) AS rec_val
 	                FROM tb_purc_rec_det recd
 	                INNER JOIN tb_purc_rec rec ON rec.`id_purc_rec`=recd.`id_purc_rec` AND rec.`id_purc_rec`='" + id_report + "'
 	                INNER JOIN tb_purc_order_det pod ON pod.`id_purc_order_det`=recd.`id_purc_order_det`
@@ -5624,7 +5631,7 @@ FROM
                 INNER JOIN tb_m_comp comp ON comp.id_comp = cont.id_comp
                 LEFT JOIN 
                 (
-	                SELECT rec.id_purc_order ,SUM(recd.`qty`*pod.`value`*((100+po.`vat_percent`)/100)) AS rec_val
+	                SELECT rec.id_purc_order ,SUM(recd.`qty`*pod.`value`*(po.dpp_percent/100)*((100+po.`vat_percent`)/100)) AS rec_val
 	                FROM tb_purc_rec_det recd
 	                INNER JOIN tb_purc_rec rec ON rec.`id_purc_rec`=recd.`id_purc_rec` AND rec.`id_report_status`=6  AND rec.`id_purc_rec`!='" + id_report + "' AND rec.`id_purc_order`='" + FormPurcReceiveDet.id_purc_order + "'
 	                INNER JOIN tb_purc_order_det pod ON pod.`id_purc_order_det`=recd.`id_purc_order_det`
@@ -5633,7 +5640,7 @@ FROM
                 )already_rec ON already_rec.id_purc_order=pnd.id_report
                 LEFT JOIN 
                 (
-	                SELECT rec.id_purc_order ,SUM(recd.`qty`*pod.`value`*((100+po.`vat_percent`)/100)) AS rec_val
+	                SELECT rec.id_purc_order ,SUM(recd.`qty`*pod.`value`*(po.dpp_percent/100)*((100+po.`vat_percent`)/100)) AS rec_val
 	                FROM tb_purc_rec_det recd
 	                INNER JOIN tb_purc_rec rec ON rec.`id_purc_rec`=recd.`id_purc_rec` AND rec.`id_purc_rec`='" + id_report + "'
 	                INNER JOIN tb_purc_order_det pod ON pod.`id_purc_order_det`=recd.`id_purc_order_det`
@@ -6003,9 +6010,9 @@ WHERE copd.id_design_cop_propose='" & id_report & "';"
                 Dim id_user_prepared As String = du.Rows(0)("id_user").ToString
                 Dim report_number As String = du.Rows(0)("report_number").ToString
 
-                Dim qe As String = "SELECT created_date FROM tb_item_expense WHERE id_item_expense='" & id_report & "'"
+                Dim qe As String = "SELECT created_date,date_reff FROM tb_item_expense WHERE id_item_expense='" & id_report & "'"
                 Dim de As DataTable = execute_query(qe, -1, True, "", "", "", "")
-                Dim date_reff As String = Date.Parse(de.Rows(0)("created_date").ToString).ToString("yyyy-MM-dd")
+                Dim date_reff As String = Date.Parse(de.Rows(0)("date_reff").ToString).ToString("yyyy-MM-dd")
 
                 'main journal
                 Dim qjm As String = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created, date_reference, acc_trans_note, id_report_status)
@@ -6315,10 +6322,10 @@ WHERE pd.balance_due=pd.`value` AND pd.`id_pn`='" & id_report & "'"
                     increase_inc_acc("1")
 
                     'det journal
-                    Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_comp, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number, report_mark_type_ref, id_report_ref, report_number_ref, vendor)
+                    Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_comp, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number, report_mark_type_ref, id_report_ref, report_number_ref, vendor, id_coa_tag)
                     SELECT '" & id_acc_trans & "' AS id_acc_trans,py.id_acc_pay_rec AS `id_acc`, cc.id_comp,  0 AS `qty`,
                     py.value AS `debit`, 0 AS `credit`,
-                    py.note AS `note`,162,py.id_rec_payment, py.number, NULL, NULL, NULL, '' AS `vendor`
+                    py.note AS `note`,162,py.id_rec_payment, py.number, NULL, NULL, NULL, '' AS `vendor`, py.id_coa_tag
                     FROM tb_rec_payment py
                     INNER JOIN tb_coa_tag ct ON ct.id_coa_tag = py.id_coa_tag
                     INNER JOIN tb_m_comp cc ON cc.id_comp = ct.id_comp
@@ -6328,7 +6335,7 @@ WHERE pd.balance_due=pd.`value` AND pd.`id_pn`='" & id_report & "'"
                     IF(pyd.id_dc=1, ABS(pyd.value), 0) AS `debit`, IF(pyd.id_dc=2, pyd.value, 0) AS `credit`,
                     pyd.note AS `note`, 
                     162, py.id_rec_payment, py.number,
-                    pyd.report_mark_type, pyd.id_report, pyd.number, pyd.vendor
+                    pyd.report_mark_type, pyd.id_report, pyd.number, pyd.vendor, py.id_coa_tag
                     FROM tb_rec_payment_det pyd
                     INNER JOIN tb_rec_payment py ON py.id_rec_payment = pyd.id_rec_payment
                     INNER JOIN tb_lookup_dc dc ON dc.id_dc = pyd.id_dc

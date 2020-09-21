@@ -21,6 +21,7 @@ Partial Class FormEmpAttnAssignShift
     Private Sub InitializeComponent()
         Me.GCShift = New DevExpress.XtraGrid.GridControl()
         Me.GVShift = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnId = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -29,7 +30,6 @@ Partial Class FormEmpAttnAssignShift
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GCShift, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVShift, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -40,7 +40,7 @@ Partial Class FormEmpAttnAssignShift
         Me.GCShift.Location = New System.Drawing.Point(0, 0)
         Me.GCShift.MainView = Me.GVShift
         Me.GCShift.Name = "GCShift"
-        Me.GCShift.Size = New System.Drawing.Size(784, 312)
+        Me.GCShift.Size = New System.Drawing.Size(1008, 561)
         Me.GCShift.TabIndex = 3
         Me.GCShift.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVShift})
         '
@@ -50,7 +50,16 @@ Partial Class FormEmpAttnAssignShift
         Me.GVShift.GridControl = Me.GCShift
         Me.GVShift.Name = "GVShift"
         Me.GVShift.OptionsBehavior.ReadOnly = True
+        Me.GVShift.OptionsFind.AlwaysVisible = True
         Me.GVShift.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn8
+        '
+        Me.GridColumn8.Caption = "Shift Code"
+        Me.GridColumn8.FieldName = "shift_code"
+        Me.GridColumn8.Name = "GridColumn8"
+        Me.GridColumn8.Visible = True
+        Me.GridColumn8.VisibleIndex = 0
         '
         'GridColumnId
         '
@@ -114,19 +123,11 @@ Partial Class FormEmpAttnAssignShift
         Me.GridColumn7.Visible = True
         Me.GridColumn7.VisibleIndex = 7
         '
-        'GridColumn8
-        '
-        Me.GridColumn8.Caption = "Shift Code"
-        Me.GridColumn8.FieldName = "shift_code"
-        Me.GridColumn8.Name = "GridColumn8"
-        Me.GridColumn8.Visible = True
-        Me.GridColumn8.VisibleIndex = 0
-        '
         'FormEmpAttnAssignShift
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(784, 312)
+        Me.ClientSize = New System.Drawing.Size(1008, 561)
         Me.Controls.Add(Me.GCShift)
         Me.MaximizeBox = False
         Me.MinimizeBox = False

@@ -1696,6 +1696,7 @@ Partial Class FormPurcOrder
         Me.BtnDropQuickMenu.Size = New System.Drawing.Size(111, 33)
         Me.BtnDropQuickMenu.TabIndex = 107
         Me.BtnDropQuickMenu.Text = "Quick Menu"
+        Me.BtnDropQuickMenu.Visible = False
         '
         'ViewMenu
         '

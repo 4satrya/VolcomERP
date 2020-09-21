@@ -720,7 +720,15 @@
                     End If
 
                     If type = "complete" Then
-                        FormReportMark.report_mark_type = execute_query("SELECT report_mark_type FROM tb_ot_verification WHERE id_ot_verification = " + id, 0, True, "", "", "", "")
+                        Dim rmt As String = execute_query("SELECT report_mark_type FROM tb_ot_verification WHERE id_ot_verification = " + id, 0, True, "", "", "", "")
+
+                        Dim id_report_mark As String = execute_query("SELECT id_report_mark FROM tb_report_mark WHERE report_mark_type = " + rmt + " AND id_report = " + id + " AND id_user = " + id_user + " AND id_report_status = 3", 0, True, "", "", "", "")
+
+                        reset_is_use_mark(id_report_mark, "2")
+
+                        execute_non_query("UPDATE tb_report_mark SET id_mark = 2, is_use = 1, report_mark_datetime = NOW() WHERE id_report_mark = " + id_report_mark, True, "", "", "", "")
+
+                        FormReportMark.report_mark_type = rmt
                         FormReportMark.id_report = id
                         FormReportMark.change_status("6")
                     End If

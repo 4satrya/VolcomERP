@@ -32,6 +32,8 @@ Partial Class FormPurcOrderCloseReceivingList
         Me.GridColumn54 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn58 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RICEIsCheckPO = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GCPO, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVPO, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RPBRec, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -51,7 +53,7 @@ Partial Class FormPurcOrderCloseReceivingList
         '
         'GVPO
         '
-        Me.GVPO.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn7, Me.GridColumn1, Me.GridColumn35, Me.GridColumn3, Me.GridColumnTotPO, Me.GridColumnRecAmo, Me.GridColumn53, Me.GridColumn54, Me.GridColumn58})
+        Me.GVPO.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn7, Me.GridColumn1, Me.GridColumn35, Me.GridColumn3, Me.GridColumn2, Me.GridColumnTotPO, Me.GridColumn4, Me.GridColumnRecAmo, Me.GridColumn53, Me.GridColumn54, Me.GridColumn58})
         Me.GVPO.GridControl = Me.GCPO
         Me.GVPO.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_po", Me.GridColumnTotPO, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_rec", Me.GridColumnRecAmo, "{0:N2}")})
         Me.GVPO.Name = "GVPO"
@@ -83,7 +85,7 @@ Partial Class FormPurcOrderCloseReceivingList
         Me.GridColumn35.Name = "GridColumn35"
         Me.GridColumn35.OptionsColumn.AllowEdit = False
         Me.GridColumn35.Visible = True
-        Me.GridColumn35.VisibleIndex = 3
+        Me.GridColumn35.VisibleIndex = 2
         '
         'GridColumn3
         '
@@ -92,7 +94,7 @@ Partial Class FormPurcOrderCloseReceivingList
         Me.GridColumn3.Name = "GridColumn3"
         Me.GridColumn3.OptionsColumn.AllowEdit = False
         Me.GridColumn3.Visible = True
-        Me.GridColumn3.VisibleIndex = 2
+        Me.GridColumn3.VisibleIndex = 1
         '
         'GridColumnTotPO
         '
@@ -108,7 +110,7 @@ Partial Class FormPurcOrderCloseReceivingList
         Me.GridColumnTotPO.OptionsColumn.AllowEdit = False
         Me.GridColumnTotPO.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_po", "{0:N2}")})
         Me.GridColumnTotPO.Visible = True
-        Me.GridColumnTotPO.VisibleIndex = 10
+        Me.GridColumnTotPO.VisibleIndex = 4
         '
         'GridColumnRecAmo
         '
@@ -124,7 +126,8 @@ Partial Class FormPurcOrderCloseReceivingList
         Me.GridColumnRecAmo.OptionsColumn.AllowEdit = False
         Me.GridColumnRecAmo.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_rec", "{0:N2}")})
         Me.GridColumnRecAmo.Visible = True
-        Me.GridColumnRecAmo.VisibleIndex = 11
+        Me.GridColumnRecAmo.VisibleIndex = 6
+        Me.GridColumnRecAmo.Width = 88
         '
         'GridColumn53
         '
@@ -134,7 +137,7 @@ Partial Class FormPurcOrderCloseReceivingList
         Me.GridColumn53.Name = "GridColumn53"
         Me.GridColumn53.OptionsColumn.AllowEdit = False
         Me.GridColumn53.Visible = True
-        Me.GridColumn53.VisibleIndex = 5
+        Me.GridColumn53.VisibleIndex = 7
         Me.GridColumn53.Width = 93
         '
         'RPBRec
@@ -154,7 +157,7 @@ Partial Class FormPurcOrderCloseReceivingList
         Me.GridColumn54.Name = "GridColumn54"
         Me.GridColumn54.OptionsColumn.AllowEdit = False
         Me.GridColumn54.Visible = True
-        Me.GridColumn54.VisibleIndex = 14
+        Me.GridColumn54.VisibleIndex = 9
         Me.GridColumn54.Width = 82
         '
         'GridColumn58
@@ -166,7 +169,7 @@ Partial Class FormPurcOrderCloseReceivingList
         Me.GridColumn58.Name = "GridColumn58"
         Me.GridColumn58.OptionsColumn.AllowEdit = False
         Me.GridColumn58.Visible = True
-        Me.GridColumn58.VisibleIndex = 13
+        Me.GridColumn58.VisibleIndex = 8
         Me.GridColumn58.Width = 96
         '
         'RICEIsCheckPO
@@ -175,6 +178,30 @@ Partial Class FormPurcOrderCloseReceivingList
         Me.RICEIsCheckPO.Name = "RICEIsCheckPO"
         Me.RICEIsCheckPO.ValueChecked = "yes"
         Me.RICEIsCheckPO.ValueUnchecked = "no"
+        '
+        'GridColumn2
+        '
+        Me.GridColumn2.Caption = "PO Qty"
+        Me.GridColumn2.DisplayFormat.FormatString = "N0"
+        Me.GridColumn2.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn2.FieldName = "po_qty"
+        Me.GridColumn2.Name = "GridColumn2"
+        Me.GridColumn2.OptionsColumn.AllowEdit = False
+        Me.GridColumn2.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "po_qty", "{0:N0}")})
+        Me.GridColumn2.Visible = True
+        Me.GridColumn2.VisibleIndex = 3
+        '
+        'GridColumn4
+        '
+        Me.GridColumn4.Caption = "Receive Qty"
+        Me.GridColumn4.DisplayFormat.FormatString = "N0"
+        Me.GridColumn4.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn4.FieldName = "rec_qty"
+        Me.GridColumn4.Name = "GridColumn4"
+        Me.GridColumn4.OptionsColumn.AllowEdit = False
+        Me.GridColumn4.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "rec_qty", "{0:N0}")})
+        Me.GridColumn4.Visible = True
+        Me.GridColumn4.VisibleIndex = 5
         '
         'FormPurcOrderCloseReceivingList
         '
@@ -206,4 +233,6 @@ Partial Class FormPurcOrderCloseReceivingList
     Friend WithEvents GridColumn54 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn58 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RICEIsCheckPO As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+    Friend WithEvents GridColumn2 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

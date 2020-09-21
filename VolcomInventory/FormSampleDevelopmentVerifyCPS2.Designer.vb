@@ -21,8 +21,8 @@ Partial Class FormSampleDevelopmentVerifyCPS2
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormSampleDevelopmentVerifyCPS2))
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
-        Me.BUpdate = New DevExpress.XtraEditors.SimpleButton()
         Me.SimpleButton1 = New DevExpress.XtraEditors.SimpleButton()
+        Me.BUpdate = New DevExpress.XtraEditors.SimpleButton()
         Me.TEDesignName = New DevExpress.XtraEditors.TextEdit()
         Me.MENote = New DevExpress.XtraEditors.MemoEdit()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
@@ -55,17 +55,6 @@ Partial Class FormSampleDevelopmentVerifyCPS2
         Me.PanelControl2.Size = New System.Drawing.Size(511, 40)
         Me.PanelControl2.TabIndex = 3
         '
-        'BUpdate
-        '
-        Me.BUpdate.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BUpdate.Image = CType(resources.GetObject("BUpdate.Image"), System.Drawing.Image)
-        Me.BUpdate.ImageIndex = 7
-        Me.BUpdate.Location = New System.Drawing.Point(311, 2)
-        Me.BUpdate.Name = "BUpdate"
-        Me.BUpdate.Size = New System.Drawing.Size(198, 36)
-        Me.BUpdate.TabIndex = 8911
-        Me.BUpdate.Text = "Verify Copy Prototype Sample 2"
-        '
         'SimpleButton1
         '
         Me.SimpleButton1.Dock = System.Windows.Forms.DockStyle.Right
@@ -76,6 +65,17 @@ Partial Class FormSampleDevelopmentVerifyCPS2
         Me.SimpleButton1.Size = New System.Drawing.Size(99, 36)
         Me.SimpleButton1.TabIndex = 8912
         Me.SimpleButton1.Text = "Cancel"
+        '
+        'BUpdate
+        '
+        Me.BUpdate.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BUpdate.Image = CType(resources.GetObject("BUpdate.Image"), System.Drawing.Image)
+        Me.BUpdate.ImageIndex = 7
+        Me.BUpdate.Location = New System.Drawing.Point(311, 2)
+        Me.BUpdate.Name = "BUpdate"
+        Me.BUpdate.Size = New System.Drawing.Size(198, 36)
+        Me.BUpdate.TabIndex = 8911
+        Me.BUpdate.Text = "Verify Copy Prototype Sample 2"
         '
         'TEDesignName
         '
@@ -155,6 +155,8 @@ Partial Class FormSampleDevelopmentVerifyCPS2
         Me.DEVerifyDate.Name = "DEVerifyDate"
         Me.DEVerifyDate.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.DEVerifyDate.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEVerifyDate.Properties.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.DEVerifyDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.DEVerifyDate.Size = New System.Drawing.Size(253, 20)
         Me.DEVerifyDate.TabIndex = 13
         '

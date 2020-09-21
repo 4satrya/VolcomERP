@@ -875,10 +875,14 @@ Public Class FormSalesOrderDet
 
     Private Sub BMark_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BMark.Click
         Cursor = Cursors.WaitCursor
-        FormReportMark.id_report = id_sales_order
-        FormReportMark.report_mark_type = "39"
-        FormReportMark.form_origin = Name
-        FormReportMark.ShowDialog()
+        If AllowOpenMark("39", id_sales_order, id_report_status) Then
+            FormReportMark.id_report = id_sales_order
+            FormReportMark.report_mark_type = "39"
+            FormReportMark.form_origin = Name
+            FormReportMark.ShowDialog()
+        Else
+            stopCustom("Data not found")
+        End If
         Cursor = Cursors.Default
     End Sub
 

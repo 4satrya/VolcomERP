@@ -1,10 +1,9 @@
-﻿Imports DevExpress.XtraReports.UI
-Imports DevExpress.XtraReports.UI.PivotGrid
-Imports DevExpress.XtraPivotGrid
-
-Public Class ReportProdCOP
+﻿Public Class ReportProdCOP
     Public Shared id_design As String = "-1"
     Public kursx As Decimal = 0
+    '
+    Public id_cop_status As String = "-1"
+
     Sub view_list_prod()
         Dim query = "CALL view_desg_rec('" & id_design & "')"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
@@ -12,7 +11,12 @@ Public Class ReportProdCOP
         GVListProd.ExpandAllGroups()
     End Sub
     Sub view_list_cost()
-        Dim query = "CALL view_cop_design('" & id_design & "')"
+        Dim query = ""
+        If id_cop_status = "1" Then
+            query = "CALL view_cop_design_po('" & id_design & "')"
+        Else
+            query = "CALL view_cop_design('" & id_design & "')"
+        End If
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCCost.DataSource = data
     End Sub
@@ -32,7 +36,11 @@ Public Class ReportProdCOP
         total = 0.0
         unit_price = 0.0
         Try
-            qty = GVListProd.Columns("receive_created_qty").SummaryItem.SummaryValue
+            If id_cop_status = "1" Then
+                qty = GVListProd.Columns("prod_order_qty").SummaryItem.SummaryValue
+            Else
+                qty = GVListProd.Columns("receive_created_qty").SummaryItem.SummaryValue
+            End If
             total = GVCost.Columns("total_price").SummaryItem.SummaryValue
             Lqty.Text = qty.ToString("N0")
             LTotal.Text = total.ToString("N2")

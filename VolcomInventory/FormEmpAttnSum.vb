@@ -456,6 +456,8 @@
             load_schedule_table()
         ElseIf XTCReportAttendance.SelectedTabPageIndex = 4 Then
             load_report_sum_month("")
+        ElseIf XTCReportAttendance.SelectedTabPageIndex = 5 Then
+            load_report_attn_detail("")
         End If
         Cursor = Cursors.Default
     End Sub
@@ -1072,6 +1074,8 @@
             print(GCScheduleTable, title + "(" + Date.Parse(DEStartSum.EditValue.ToString).ToString("dd MMM yyyy") + " - " + Date.Parse(DEUntilSum.EditValue.ToString).ToString("dd MMM yyyy") + ")")
         ElseIf XTCReportAttendance.SelectedTabPageIndex = 4 Then
             getReportSumMonth()
+        ElseIf XTCReportAttendance.SelectedTabPageIndex = 5 Then
+            print(GCAttnDetail, title + "(" + Date.Parse(DEStartSum.EditValue.ToString).ToString("dd MMM yyyy") + " - " + Date.Parse(DEUntilSum.EditValue.ToString).ToString("dd MMM yyyy") + ")")
         End If
     End Sub
 
@@ -1262,6 +1266,113 @@
             FormEmpAttnSumDetailLate.month = Date.Parse(GVSumMonthly.GetFocusedRowCellValue("month_year").ToString)
 
             FormEmpAttnSumDetailLate.ShowDialog()
+        End If
+    End Sub
+
+    Sub load_report_attn_detail(opt As String)
+        Dim date_start, date_until, dept, status, employee As String
+
+        date_start = Date.Parse(DEStartSum.EditValue.ToString).ToString("yyyy-MM-dd")
+        date_until = Date.Parse(DEUntilSum.EditValue.ToString).ToString("yyyy-MM-dd")
+
+        If LEDeptSum.EditValue.ToString = "0" Then
+            dept = "%%"
+        Else
+            dept = LEDeptSum.EditValue.ToString
+        End If
+
+        If LEEmployeeStatus.EditValue.ToString = "0" Then
+            status = "%%"
+        Else
+            status = LEEmployeeStatus.EditValue.ToString
+        End If
+
+        If SLUEEmployee.EditValue.ToString = "0" Then
+            employee = "%%"
+        Else
+            employee = SLUEEmployee.EditValue.ToString
+        End If
+
+        Dim query As String = "
+            SELECT e.id_departement, d.departement, s.id_employee, e.employee_name, e.employee_position, s.date, IF(s.date < DATE(NOW()), s.shift_code, '') AS shift_code, IF(s.date < DATE(NOW()) AND s.id_leave_type IS NULL, IF(s.id_schedule_type = 1, IF(s.att_in IS NULL OR s.att_out IS NULL, 'yellow', 'blank'), 'green'), 'blank') AS color
+            FROM tb_emp_schedule AS s
+            LEFT JOIN tb_m_employee AS e ON s.id_employee = e.id_employee
+            LEFT JOIN tb_m_departement AS d ON e.id_departement = d.id_departement
+            WHERE e.id_departement LIKE '" & dept & "' AND s.date >= '" & date_start & "' AND s.date <= '" & date_until & "' AND e.id_employee_active LIKE '" & status & "' AND e.id_employee LIKE '" & employee & "'
+        "
+
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+
+        'pivot
+        Dim out As DataTable = New DataTable
+
+        out.Columns.Add("Departement", GetType(String))
+        out.Columns.Add("Employee", GetType(String))
+        out.Columns.Add("Employee Position", GetType(String))
+
+        Dim start_day As Date = DEStartSum.EditValue
+        Dim until_day As Date = DEUntilSum.EditValue
+
+        While start_day <= until_day
+            out.Columns.Add(Date.Parse(start_day.ToString).ToString("dd MMMM yyyy"), GetType(String))
+
+            start_day = start_day.AddDays(1)
+        End While
+
+        Dim last_employee As String = ""
+
+        Dim row As DataRow = out.NewRow
+
+        For i = 0 To data.Rows.Count - 1
+            If Not data.Rows(i)("id_employee").ToString = last_employee Then
+                If Not i = 0 Then
+                    out.Rows.Add(row)
+                End If
+
+                row = out.NewRow
+
+                row("Departement") = data.Rows(i)("departement").ToString
+                row("Employee") = data.Rows(i)("employee_name").ToString
+                row("Employee Position") = data.Rows(i)("employee_position").ToString
+            End If
+
+            row(Date.Parse(data.Rows(i)("date").ToString).ToString("dd MMMM yyyy")) = data.Rows(i)("color").ToString + "-" + data.Rows(i)("shift_code").ToString
+
+            last_employee = data.Rows(i)("id_employee").ToString
+
+            If i = (data.Rows.Count - 1) Then
+                out.Rows.Add(row)
+            End If
+        Next
+
+        GVAttnDetail.Columns.Clear()
+
+        GCAttnDetail.DataSource = out
+
+        GVAttnDetail.Columns("Departement").GroupIndex = 0
+
+        GVAttnDetail.BestFitColumns()
+    End Sub
+
+    Private Sub GVAttnDetail_RowCellStyle(sender As Object, e As DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs) Handles GVAttnDetail.RowCellStyle
+        If (Not e.Column.FieldName = "Departement") And (Not e.Column.FieldName = "Employee") And (Not e.Column.FieldName = "Employee Position") Then
+            Dim value() As String = e.CellValue.ToString.Split("-")
+
+            If value(0) = "yellow" Then
+                e.Appearance.BackColor = Color.Yellow
+            ElseIf value(0) = "green" Then
+                e.Appearance.BackColor = Color.Green
+            End If
+        End If
+    End Sub
+
+    Private Sub GVAttnDetail_CustomColumnDisplayText(sender As Object, e As DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs) Handles GVAttnDetail.CustomColumnDisplayText
+        If (Not e.Column.FieldName = "Departement") And (Not e.Column.FieldName = "Employee") And (Not e.Column.FieldName = "Employee Position") Then
+            Dim value() As String = e.Value.ToString.Split("-")
+
+            If value.Length > 1 Then
+                e.DisplayText = value(1)
+            End If
         End If
     End Sub
 End Class

@@ -117,6 +117,7 @@ Partial Class FormItemReqAdd
         Me.GVSOH.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty", Me.GridColumnQty, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount", Me.GridColumnAmount, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_req", Me.GridColumnQtyReq, "{0:N2}")})
         Me.GVSOH.Name = "GVSOH"
         Me.GVSOH.OptionsBehavior.AutoExpandAllGroups = True
+        Me.GVSOH.OptionsFind.AlwaysVisible = True
         Me.GVSOH.OptionsView.ShowFooter = True
         Me.GVSOH.OptionsView.ShowGroupedColumns = True
         Me.GVSOH.OptionsView.ShowGroupPanel = False

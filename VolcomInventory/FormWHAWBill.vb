@@ -1218,13 +1218,22 @@ WHERE cg.`comp_group`='" & comp_group & "' AND so.`sales_order_ol_shop_number`='
                 Dim total_not_imported As Integer = 0
 
                 For i = 2 To dt.Rows.Count - 1
-                    Dim awbill_no As String = dt.Rows(i)(30).ToString.Replace("#", "")
+                    Dim i_col As Integer = 0
 
-                    If dt.Rows(i)(1).ToString.Contains("RET-") Then
-                        Dim comp_group_desc As String = dt.Rows(i)(1).ToString.Split("-")(1)
-                        Dim ol_shop_order As String = dt.Rows(i)(1).ToString.Split("-")(2)
-                        '
-                        Dim q As String = "SELECT awb.`id_awbill`,awb.awbill_no 
+                    For j = 0 To dt.Columns.Count - 1
+                        If dt.Rows(1)(j).ToString = "Airwaybill" Then
+                            i_col = j
+                        End If
+                    Next
+
+                    If Not i_col = 0 Then
+                        Dim awbill_no As String = dt.Rows(i)(i_col).ToString.Replace("#", "")
+
+                        If dt.Rows(i)(1).ToString.Contains("RET-") Then
+                            Dim comp_group_desc As String = dt.Rows(i)(1).ToString.Split("-")(1)
+                            Dim ol_shop_order As String = dt.Rows(i)(1).ToString.Split("-")(2)
+                            '
+                            Dim q As String = "SELECT awb.`id_awbill`,awb.awbill_no 
 FROM tb_wh_awbill awb
 INNER JOIN tb_wh_awbill_det awbd ON awbd.`id_awbill`=awb.`id_awbill`
 INNER JOIN tb_ol_store_cust_ret r ON r.id_ol_store_cust_ret=awbd.id_ol_store_cust_ret
@@ -1237,34 +1246,34 @@ INNER JOIN tb_m_comp_contact cc ON cc.`id_comp_contact`=so.`id_store_contact_to`
 INNER JOIN tb_m_comp c ON c.`id_comp`=cc.`id_comp` 
 INNER JOIN tb_m_comp_group cg ON cg.`id_comp_group`=c.`id_comp_group` 
 WHERE cg.`comp_group`='" & comp_group_desc & "' AND so.`sales_order_ol_shop_number`='" & ol_shop_order & "'"
-                        Dim dt_awb As DataTable = execute_query(q, -1, True, "", "", "", "")
-                        If dt_awb.Rows.Count = 0 Then
-                            total_not_imported = total_not_imported + 1
+                            Dim dt_awb As DataTable = execute_query(q, -1, True, "", "", "", "")
+                            If dt_awb.Rows.Count = 0 Then
+                                total_not_imported = total_not_imported + 1
+                            Else
+                                For j As Integer = 0 To dt_awb.Rows.Count - 1
+                                    Dim id_awbill As String = dt_awb.Rows(j)("id_awbill").ToString
+                                    If dt_awb.Rows(j)("awbill_no").ToString = "" Then
+                                        'update
+                                        Dim que As String = "UPDATE tb_wh_awbill SET awbill_no = '" + awbill_no + "' WHERE id_awbill = '" + id_awbill + "'"
+
+                                        execute_non_query(que, True, "", "", "", "")
+                                        total_imported = total_imported + 1
+                                    Else
+                                        total_already_imported = total_already_imported + 1
+                                    End If
+                                Next
+                            End If
                         Else
-                            For j As Integer = 0 To dt_awb.Rows.Count - 1
-                                Dim id_awbill As String = dt_awb.Rows(j)("id_awbill").ToString
-                                If dt_awb.Rows(j)("awbill_no").ToString = "" Then
-                                    'update
-                                    Dim que As String = "UPDATE tb_wh_awbill SET awbill_no = '" + awbill_no + "' WHERE id_awbill = '" + id_awbill + "'"
+                            Dim comp_group As String = ""
+                            Dim ol_shop_order As String = ""
 
-                                    execute_non_query(que, True, "", "", "", "")
-                                    total_imported = total_imported + 1
-                                Else
-                                    total_already_imported = total_already_imported + 1
-                                End If
-                            Next
-                        End If
-                    Else
-                        Dim comp_group As String = ""
-                        Dim ol_shop_order As String = ""
-
-                        Try
-                            comp_group = dt.Rows(i)(1).ToString.Split("-")(0)
-                            ol_shop_order = dt.Rows(i)(1).ToString.Split("-")(1)
-                        Catch ex As Exception
-                        End Try
-                        '
-                        Dim q As String = "SELECT awb.`id_awbill`,awb.awbill_no 
+                            Try
+                                comp_group = dt.Rows(i)(1).ToString.Split("-")(0)
+                                ol_shop_order = dt.Rows(i)(1).ToString.Split("-")(1)
+                            Catch ex As Exception
+                            End Try
+                            '
+                            Dim q As String = "SELECT awb.`id_awbill`,awb.awbill_no 
 FROM tb_wh_awbill awb
 INNER JOIN tb_wh_awbill_det awbd ON awbd.`id_awbill`=awb.`id_awbill`
 INNER JOIN tb_pl_sales_order_del del ON del.`id_pl_sales_order_del`=awbd.`id_pl_sales_order_del`
@@ -1273,23 +1282,28 @@ INNER JOIN tb_m_comp_contact cc ON cc.`id_comp_contact`=so.`id_store_contact_to`
 INNER JOIN tb_m_comp c ON c.`id_comp`=cc.`id_comp`
 INNER JOIN tb_m_comp_group cg ON cg.`id_comp_group`=c.`id_comp_group`
 WHERE cg.`comp_group`='" & comp_group & "' AND so.`sales_order_ol_shop_number`='" & ol_shop_order & "'"
-                        Dim dt_awb As DataTable = execute_query(q, -1, True, "", "", "", "")
-                        If dt_awb.Rows.Count = 0 Then
-                            total_not_imported = total_not_imported + 1
-                        Else
-                            For j As Integer = 0 To dt_awb.Rows.Count - 1
-                                Dim id_awbill As String = dt_awb.Rows(j)("id_awbill").ToString
-                                If dt_awb.Rows(j)("awbill_no").ToString = "" Then
-                                    'update
-                                    Dim que As String = "UPDATE tb_wh_awbill SET awbill_no = '" + awbill_no + "' WHERE id_awbill = '" + id_awbill + "'"
+                            Dim dt_awb As DataTable = execute_query(q, -1, True, "", "", "", "")
+                            If dt_awb.Rows.Count = 0 Then
+                                total_not_imported = total_not_imported + 1
+                            Else
+                                For j As Integer = 0 To dt_awb.Rows.Count - 1
+                                    Dim id_awbill As String = dt_awb.Rows(j)("id_awbill").ToString
+                                    If dt_awb.Rows(j)("awbill_no").ToString = "" Then
+                                        'update
+                                        Dim que As String = "UPDATE tb_wh_awbill SET awbill_no = '" + awbill_no + "' WHERE id_awbill = '" + id_awbill + "'"
 
-                                    execute_non_query(que, True, "", "", "", "")
-                                    total_imported = total_imported + 1
-                                Else
-                                    total_already_imported = total_already_imported + 1
-                                End If
-                            Next
+                                        execute_non_query(que, True, "", "", "", "")
+                                        total_imported = total_imported + 1
+                                    Else
+                                        total_already_imported = total_already_imported + 1
+                                    End If
+                                Next
+                            End If
                         End If
+                    Else
+                        stopCustom("Column Airwaybill not found.")
+
+                        Exit For
                     End If
                 Next
 

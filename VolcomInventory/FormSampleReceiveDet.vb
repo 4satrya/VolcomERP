@@ -5,6 +5,12 @@
     Public id_comp_to As String = "-1"
     Dim sample_purc_rec_det_qty_inp As Decimal
 
+    'Dim dt As New DataTable
+    'Dim is_use_unique As String = get_setup_field("is_use_unique_sample")
+    'Dim id_wh As String = "-1"
+    'Dim id_wh_drawer As String = "-1"
+    'Dim id_product_param_comma As String = "-1"
+
     Private Sub FormSampleReceiveDet_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'checkFormAccess(Name)
         If Not id_order = "-1" Then
@@ -90,6 +96,37 @@
         End If
         allow_status()
     End Sub
+
+    'Sub codeAvailableIns()
+    '    'unique
+    '    dt.Clear()
+    '    Dim query As String = ""
+    '    If is_use_unique = "1" Then
+    '        query = "CALL view_stock_unique_sample('" + id_product_param_comma + "', '" + id_wh + "', '" + id_wh_drawer + "')"
+    '    Else
+    '        'query = "CALL view_stock_fg_unique_del('" + id_product_param + "') "
+    '    End If
+    '    Dim datax As DataTable = execute_query(query, -1, True, "", "", "", "")
+    '    dt = datax
+
+
+    'not unique 
+    '    Dim query_not As String = "SELECT s.`id_sample`,s.`sample_display_name`,s.`sample_code`,su.unique_code AS `product_full_code`,SUM(su.qty) AS `qty`,
+    ' FROM tb_sample_unique su
+    ' INNER JOIN tb_m_sample s ON s.`id_sample`=su.`id_sample`
+    ' WHERE 1=1 AND s.is_use_unique=1"
+    '    Dim data_not As DataTable = execute_query(query_not, -1, True, "", "", "", "")
+
+    '    'merge with not unique
+    '    If data_not.Rows.Count > 0 Then
+    '        If dt.Rows.Count = 0 Then
+    '            dt = data_not
+    '        Else
+    '            dt.Merge(data_not, True, MissingSchemaAction.Ignore)
+    '        End If
+    '    End If
+    'End Sub
+
     'view company
     Sub viewComp()
         Dim query As String = "SELECT * FROM tb_m_comp a "
@@ -101,16 +138,20 @@
         query += "GROUP BY a.id_comp ORDER BY comp_number ASC "
         viewSearchLookupQuery(SLEStorage, query, "id_comp", "comp_name", "id_comp")
     End Sub
+
     'Rekursif Comp-Locator
     Private Sub SLEStorage_EditValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SLEStorage.EditValueChanged
         viewLoactor()
     End Sub
+
     Private Sub SLELocator_EditValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SLELocator.EditValueChanged
         viewRack()
     End Sub
+
     Private Sub SLERack_EditValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SLERack.EditValueChanged
         viewDrawer()
     End Sub
+
     'View Locator
     Sub viewLoactor()
         Dim id_comp As String = ""
@@ -123,6 +164,7 @@
         query = "SELECT * FROM tb_m_wh_locator a WHERE id_comp = '" + id_comp + "'"
         viewSearchLookupQuery(SLELocator, query, "id_wh_locator", "wh_locator", "id_wh_locator")
     End Sub
+
     'View Rack
     Sub viewRack()
         Dim id_locator As String = ""
@@ -134,6 +176,7 @@
         Dim query As String = "SELECT * FROM tb_m_wh_rack a WHERE id_wh_locator = '" + id_locator + "'"
         viewSearchLookupQuery(SLERack, query, "id_wh_rack", "wh_rack", "id_wh_rack")
     End Sub
+
     'View Drawer
     Sub viewDrawer()
         Dim id_rack As String = ""
@@ -145,6 +188,7 @@
         Dim query As String = "SELECT * FROM tb_m_wh_drawer a WHERE id_wh_rack = '" + id_rack + "'"
         viewSearchLookupQuery(SLEDrawer, query, "id_wh_drawer", "wh_drawer", "id_wh_drawer")
     End Sub
+
     Private Sub BShowOrder_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BShowOrder.Click
         FormPopUpPurchase.id_purc = id_order
         FormPopUpPurchase.id_pop_up = "1"

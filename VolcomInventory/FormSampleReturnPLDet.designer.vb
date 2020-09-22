@@ -637,15 +637,15 @@ Partial Class FormSampleReturnPLDet
         Me.PanelBottomRight.Controls.Add(Me.LEReportStatus)
         Me.PanelBottomRight.Controls.Add(Me.LabelControl21)
         Me.PanelBottomRight.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PanelBottomRight.Location = New System.Drawing.Point(507, 2)
+        Me.PanelBottomRight.Location = New System.Drawing.Point(560, 2)
         Me.PanelBottomRight.Name = "PanelBottomRight"
-        Me.PanelBottomRight.Size = New System.Drawing.Size(350, 77)
+        Me.PanelBottomRight.Size = New System.Drawing.Size(297, 77)
         Me.PanelBottomRight.TabIndex = 139
         '
         'LEReportStatus
         '
         Me.LEReportStatus.Enabled = False
-        Me.LEReportStatus.Location = New System.Drawing.Point(130, 6)
+        Me.LEReportStatus.Location = New System.Drawing.Point(53, 6)
         Me.LEReportStatus.Name = "LEReportStatus"
         Me.LEReportStatus.Properties.Appearance.Options.UseTextOptions = True
         Me.LEReportStatus.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near
@@ -653,12 +653,12 @@ Partial Class FormSampleReturnPLDet
         Me.LEReportStatus.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_report_status", "ID Report Status", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("report_status", "Report Status")})
         Me.LEReportStatus.Properties.NullText = ""
         Me.LEReportStatus.Properties.ShowFooter = False
-        Me.LEReportStatus.Size = New System.Drawing.Size(211, 20)
+        Me.LEReportStatus.Size = New System.Drawing.Size(238, 20)
         Me.LEReportStatus.TabIndex = 7
         '
         'LabelControl21
         '
-        Me.LabelControl21.Location = New System.Drawing.Point(80, 9)
+        Me.LabelControl21.Location = New System.Drawing.Point(16, 9)
         Me.LabelControl21.Name = "LabelControl21"
         Me.LabelControl21.Size = New System.Drawing.Size(31, 13)
         Me.LabelControl21.TabIndex = 144

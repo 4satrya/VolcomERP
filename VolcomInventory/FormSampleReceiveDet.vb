@@ -427,6 +427,19 @@
                         End Try
                     Next
 
+                    'save unique
+                    query = String.Format("DELETE FROM tb_sample_purc_rec_unique WHERE id_sample_purc_rec='{0}'", id_sample_rec_new)
+                    execute_non_query(query, True, "", "", "", "")
+                    For i As Integer = 0 To GVListPurchase.RowCount - 1
+                        Try
+                            If Not GVListPurchase.GetRowCellValue(i, "id_sample_purc_det").ToString = "" And isDecimal(nominalWrite(GVListPurchase.GetRowCellValue(i, "sample_purc_rec_det_qty").ToString)) Then
+                                query = String.Format("INSERT INTO tb_sample_purc_rec_det(id_sample_purc_det,id_sample_purc_rec,sample_purc_rec_det_qty,fob_price_update,sample_purc_rec_det_note) VALUES('{0}','{1}','{2}','{3}','{4}')", GVListPurchase.GetRowCellValue(i, "id_sample_purc_det").ToString, id_sample_rec_new, decimalSQL(GVListPurchase.GetRowCellValue(i, "sample_purc_rec_det_qty").ToString), decimalSQL(GVListPurchase.GetRowCellValue(i, "fob_price_update").ToString), GVListPurchase.GetRowCellValue(i, "sample_purc_rec_det_note").ToString)
+                                execute_non_query(query, True, "", "", "", "")
+                            End If
+                        Catch ex As Exception
+                        End Try
+                    Next
+
                     'end insert who prepared
                     FormSampleReceive.view_sample_rec()
                     FormSampleReceive.GVSampleReceive.FocusedRowHandle = find_row(FormSampleReceive.GVSampleReceive, "id_sample_purc_rec", id_sample_rec_new)
@@ -676,14 +689,18 @@ WHERE pru.sample_unique='" & code_unique & "'"
         Dim query As String = ""
         If id_receive = "-1" Then 'new
             query = "SELECT ('0') AS id_sample, ('') AS code, ('') AS no, ('1') AS is_fix "
+            Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+            GCBarcode.DataSource = data
+            GVBarcode.DeleteSelectedRows()
+            GVBarcode.BestFitColumns()
         Else 'update
             query = "SELECT id_sample,sample_unique AS `code`, '' AS `No`,'2' AS is_fix
 FROM tb_sample_purc_rec_unique
 WHERE id_sample_purc_rec='" & id_receive & "'"
+            Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+            GCBarcode.DataSource = data
+            GVBarcode.BestFitColumns()
         End If
-        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
-        GCBarcode.DataSource = data
-        GVBarcode.DeleteSelectedRows()
     End Sub
 
     Sub allowDelete()

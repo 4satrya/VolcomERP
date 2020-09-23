@@ -988,6 +988,55 @@ SELECT 1 AS id,'Yes' AS auto_debet"
                     newRowTJp("balance_due") = balance_t_jp
                     newRowTJp("note") = "J Pensiun " + period + " (dibayar karyawan)"
                     TryCast(GCList.DataSource, DataTable).Rows.Add(newRowTJp)
+
+                    'adjustment
+                    Dim adjustment As String = execute_query("
+                        SELECT IFNULL((SELECT total_adjustment FROM tb_emp_payroll_bpjstk_adj WHERE id_payroll = " + FormBankWithdrawal.GVJamsostek.GetRowCellValue(i, "id_payroll").ToString + " AND id_bpjs_location = " + FormBankWithdrawal.GVJamsostek.GetRowCellValue(i, "id_bpjs_location").ToString + " LIMIT 1), 0) AS adjustment
+                    ", 0, True, "", "", "", "")
+
+                    If Not adjustment = "0" Then
+                        Dim data_adj As DataTable = execute_query("
+                            SELECT adj.id_acc, acc.acc_name, acc.acc_description, comp.comp_name AS vendor, adj.id_comp, comp.comp_number, IFNULL(adj.acc_adjustment, 0) AS acc_adjustment, adj.note
+                            FROM tb_emp_payroll_bpjstk_adj AS adj
+                            LEFT JOIN tb_a_acc AS acc ON adj.id_acc = acc.id_acc
+                            LEFT JOIN tb_m_comp AS comp ON adj.id_comp = comp.id_comp
+                            WHERE adj.id_payroll = " + FormBankWithdrawal.GVJamsostek.GetRowCellValue(i, "id_payroll").ToString + " AND adj.id_bpjs_location = " + FormBankWithdrawal.GVJamsostek.GetRowCellValue(i, "id_bpjs_location").ToString + "
+                        ", -1, True, "", "", "", "")
+
+                        For k = 0 To data_adj.Rows.Count - 1
+                            Dim id_acc_adj As Integer = data_adj.Rows(k)("id_acc")
+                            Dim acc_name_adj As String = data_adj.Rows(k)("acc_name").ToString
+                            Dim acc_description_adj As String = data_adj.Rows(k)("acc_description").ToString
+                            Dim vendor_adj As String = data_adj.Rows(k)("vendor").ToString
+                            Dim id_comp_adj As Integer = data_adj.Rows(k)("id_comp")
+                            Dim comp_number_adj As String = data_adj.Rows(k)("comp_number").ToString
+                            Dim balance_adj As Integer = data_adj.Rows(k)("acc_adjustment")
+                            Dim note As String = data_adj.Rows(k)("note").ToString
+
+                            Dim newRowAdj As DataRow = (TryCast(GCList.DataSource, DataTable)).NewRow()
+                            newRowAdj("id_report") = FormBankWithdrawal.GVJamsostek.GetRowCellValue(i, "id_payroll").ToString
+                            newRowAdj("report_mark_type") = "247"
+                            newRowAdj("id_acc") = id_acc_adj
+                            newRowAdj("acc_name") = acc_name_adj
+                            newRowAdj("acc_description") = acc_description_adj
+                            newRowAdj("vendor") = vendor_adj
+                            newRowAdj("id_dc") = "2"
+                            newRowAdj("dc_code") = If(balance_adj < 0, "K", "D")
+                            newRowAdj("id_comp") = id_comp_adj
+                            newRowAdj("comp_number") = comp_number_adj
+                            newRowAdj("number") = FormBankWithdrawal.GVJamsostek.GetRowCellValue(i, "report_number").ToString
+                            newRowAdj("total_pay") = 0
+                            newRowAdj("value") = balance_adj
+                            newRowAdj("kurs") = 1
+                            newRowAdj("id_currency") = "1"
+                            newRowAdj("currency") = "Rp"
+                            newRowAdj("val_bef_kurs") = balance_adj
+                            newRowAdj("value_view") = balance_adj
+                            newRowAdj("balance_due") = balance_adj
+                            newRowAdj("note") = note
+                            TryCast(GCList.DataSource, DataTable).Rows.Add(newRowAdj)
+                        Next
+                    End If
                 Next
 
                 MENote.Text = me_note

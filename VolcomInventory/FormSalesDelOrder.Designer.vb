@@ -82,6 +82,7 @@ Partial Class FormSalesDelOrder
         Me.GridColumnPrintedDate = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnOLStoreDate = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnorder_type = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnindeks_order = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
         Me.BtnSyncOrder = New DevExpress.XtraEditors.SimpleButton()
@@ -89,6 +90,8 @@ Partial Class FormSalesDelOrder
         Me.BtnShowUniform = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnShowAll = New DevExpress.XtraEditors.SimpleButton()
         Me.PanelControlNavPrepare = New DevExpress.XtraEditors.PanelControl()
+        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
+        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
         Me.CheckEditRefresh = New DevExpress.XtraEditors.CheckEdit()
         Me.XTPSORef = New DevExpress.XtraTab.XtraTabPage()
         Me.GCNewPrepare = New DevExpress.XtraGrid.GridControl()
@@ -99,9 +102,6 @@ Partial Class FormSalesDelOrder
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.TimerMonitor = New System.Windows.Forms.Timer(Me.components)
         Me.ServiceController1 = New System.ServiceProcess.ServiceController()
-        Me.GridColumnindeks_order = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
-        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.XTCSalesDelOrder, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCSalesDelOrder.SuspendLayout()
         Me.XTPListDel.SuspendLayout()
@@ -127,6 +127,7 @@ Partial Class FormSalesDelOrder
         Me.PanelControl1.SuspendLayout()
         CType(Me.PanelControlNavPrepare, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlNavPrepare.SuspendLayout()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CheckEditRefresh.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTPSORef.SuspendLayout()
         CType(Me.GCNewPrepare, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -134,7 +135,6 @@ Partial Class FormSalesDelOrder
         CType(Me.PanelControlNavNewProd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlNavNewProd.SuspendLayout()
         CType(Me.TxtNoParam.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'XTCSalesDelOrder
@@ -701,6 +701,12 @@ Partial Class FormSalesDelOrder
         Me.GridColumnorder_type.Visible = True
         Me.GridColumnorder_type.VisibleIndex = 1
         '
+        'GridColumnindeks_order
+        '
+        Me.GridColumnindeks_order.Caption = "indeks_order"
+        Me.GridColumnindeks_order.FieldName = "indeks_order"
+        Me.GridColumnindeks_order.Name = "GridColumnindeks_order"
+        '
         'GridView2
         '
         Me.GridView2.GridControl = Me.GCSalesOrder
@@ -805,6 +811,30 @@ Partial Class FormSalesDelOrder
         Me.PanelControlNavPrepare.Size = New System.Drawing.Size(793, 22)
         Me.PanelControlNavPrepare.TabIndex = 4
         '
+        'LabelControl4
+        '
+        Me.LabelControl4.Appearance.Font = New System.Drawing.Font("Segoe UI", 6.75!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl4.Appearance.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.LabelControl4.Location = New System.Drawing.Point(35, 5)
+        Me.LabelControl4.Name = "LabelControl4"
+        Me.LabelControl4.Size = New System.Drawing.Size(64, 12)
+        Me.LabelControl4.TabIndex = 144
+        Me.LabelControl4.Text = "Priority Orders"
+        '
+        'PanelControl2
+        '
+        Me.PanelControl2.Appearance.BackColor = System.Drawing.Color.Yellow
+        Me.PanelControl2.Appearance.BorderColor = System.Drawing.Color.White
+        Me.PanelControl2.Appearance.Options.UseBackColor = True
+        Me.PanelControl2.Appearance.Options.UseBorderColor = True
+        Me.PanelControl2.Location = New System.Drawing.Point(9, 5)
+        Me.PanelControl2.LookAndFeel.SkinMaskColor = System.Drawing.Color.Yellow
+        Me.PanelControl2.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.UltraFlat
+        Me.PanelControl2.LookAndFeel.UseDefaultLookAndFeel = False
+        Me.PanelControl2.Name = "PanelControl2"
+        Me.PanelControl2.Size = New System.Drawing.Size(24, 13)
+        Me.PanelControl2.TabIndex = 143
+        '
         'CheckEditRefresh
         '
         Me.CheckEditRefresh.Dock = System.Windows.Forms.DockStyle.Right
@@ -881,36 +911,6 @@ Partial Class FormSalesDelOrder
         Me.TimerMonitor.Enabled = True
         Me.TimerMonitor.Interval = 10000
         '
-        'GridColumnindeks_order
-        '
-        Me.GridColumnindeks_order.Caption = "indeks_order"
-        Me.GridColumnindeks_order.FieldName = "indeks_order"
-        Me.GridColumnindeks_order.Name = "GridColumnindeks_order"
-        '
-        'PanelControl2
-        '
-        Me.PanelControl2.Appearance.BackColor = System.Drawing.Color.Yellow
-        Me.PanelControl2.Appearance.BorderColor = System.Drawing.Color.White
-        Me.PanelControl2.Appearance.Options.UseBackColor = True
-        Me.PanelControl2.Appearance.Options.UseBorderColor = True
-        Me.PanelControl2.Location = New System.Drawing.Point(9, 5)
-        Me.PanelControl2.LookAndFeel.SkinMaskColor = System.Drawing.Color.Yellow
-        Me.PanelControl2.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.UltraFlat
-        Me.PanelControl2.LookAndFeel.UseDefaultLookAndFeel = False
-        Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(24, 13)
-        Me.PanelControl2.TabIndex = 143
-        '
-        'LabelControl4
-        '
-        Me.LabelControl4.Appearance.Font = New System.Drawing.Font("Segoe UI", 6.75!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl4.Appearance.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.LabelControl4.Location = New System.Drawing.Point(35, 5)
-        Me.LabelControl4.Name = "LabelControl4"
-        Me.LabelControl4.Size = New System.Drawing.Size(64, 12)
-        Me.LabelControl4.TabIndex = 144
-        Me.LabelControl4.Text = "Priority Orders"
-        '
         'FormSalesDelOrder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -951,6 +951,7 @@ Partial Class FormSalesDelOrder
         CType(Me.PanelControlNavPrepare, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControlNavPrepare.ResumeLayout(False)
         Me.PanelControlNavPrepare.PerformLayout()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CheckEditRefresh.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XTPSORef.ResumeLayout(False)
         CType(Me.GCNewPrepare, System.ComponentModel.ISupportInitialize).EndInit()
@@ -959,7 +960,6 @@ Partial Class FormSalesDelOrder
         Me.PanelControlNavNewProd.ResumeLayout(False)
         Me.PanelControlNavNewProd.PerformLayout()
         CType(Me.TxtNoParam.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

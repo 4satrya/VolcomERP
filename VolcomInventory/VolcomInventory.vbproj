@@ -252,6 +252,13 @@
     <Compile Include="ClassMailManage.vb" />
     <Compile Include="ClassOLStoreRefund.vb" />
     <Compile Include="ClassOwnMenu.vb" />
+    <Compile Include="ClassPayout.Designer.vb">
+      <DependentUpon>ClassPayout.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ClassPayout.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClassPayoutVer.vb" />
     <Compile Include="ClassProdDemand.vb" />
     <Compile Include="ClassProdOverMemo.vb" />
     <Compile Include="ClassProductionAssembly.vb" />
@@ -3017,6 +3024,18 @@
       <DependentUpon>FormPayoutReport.vb</DependentUpon>
     </Compile>
     <Compile Include="FormPayoutReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPayoutVerAdd.Designer.vb">
+      <DependentUpon>FormPayoutVerAdd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormPayoutVerAdd.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPayoutVerDet.Designer.vb">
+      <DependentUpon>FormPayoutVerDet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormPayoutVerDet.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormPopUpDept.Designer.vb">
@@ -9997,6 +10016,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormPayoutReport.resx">
       <DependentUpon>FormPayoutReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPayoutVerAdd.resx">
+      <DependentUpon>FormPayoutVerAdd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPayoutVerDet.resx">
+      <DependentUpon>FormPayoutVerDet.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormPopUpDept.resx">
       <DependentUpon>FormPopUpDept.vb</DependentUpon>

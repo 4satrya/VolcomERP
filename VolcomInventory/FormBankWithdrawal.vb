@@ -954,7 +954,7 @@ GROUP BY sr.`id_sales_return`"
 
     Sub view_jamsostek()
         Dim query As String = "
-            SELECT 'no' AS is_check, p.id_payroll, p.report_number, DATE_FORMAT(p.periode_end, '%M %Y') AS payroll_periode, t.payroll_type, 0 AS amount, l.bpjstk
+            SELECT 'no' AS is_check, p.id_payroll, p.report_number, DATE_FORMAT(p.periode_end, '%M %Y') AS payroll_periode, t.payroll_type, 0 AS amount, l.bpjstk, l.id_bpjs_location
             FROM tb_emp_payroll AS p
             LEFT JOIN tb_emp_payroll_type AS t ON p.id_payroll_type = t.id_payroll_type
             LEFT JOIN tb_emp_payroll_det AS d ON p.id_payroll = d.id_payroll

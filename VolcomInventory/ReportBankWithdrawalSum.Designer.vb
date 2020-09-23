@@ -213,6 +213,7 @@ Partial Public Class ReportBankWithdrawalSum
         Me.XrLabel11.StylePriority.UseTextAlignment = False
         Me.XrLabel11.Text = "[nama_bank]"
         Me.XrLabel11.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        Me.XrLabel11.Visible = False
         '
         'XrLabel10
         '
@@ -225,6 +226,7 @@ Partial Public Class ReportBankWithdrawalSum
         Me.XrLabel10.StylePriority.UseTextAlignment = False
         Me.XrLabel10.Text = "[bank_no]"
         Me.XrLabel10.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        Me.XrLabel10.Visible = False
         '
         'XrLabel8
         '
@@ -237,6 +239,7 @@ Partial Public Class ReportBankWithdrawalSum
         Me.XrLabel8.StylePriority.UseTextAlignment = False
         Me.XrLabel8.Text = "[bank_attn]"
         Me.XrLabel8.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        Me.XrLabel8.Visible = False
         '
         'XrLabel7
         '
@@ -249,6 +252,7 @@ Partial Public Class ReportBankWithdrawalSum
         Me.XrLabel7.StylePriority.UseTextAlignment = False
         Me.XrLabel7.Text = ":"
         Me.XrLabel7.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        Me.XrLabel7.Visible = False
         '
         'XrLabel5
         '
@@ -261,6 +265,7 @@ Partial Public Class ReportBankWithdrawalSum
         Me.XrLabel5.StylePriority.UseTextAlignment = False
         Me.XrLabel5.Text = ":"
         Me.XrLabel5.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        Me.XrLabel5.Visible = False
         '
         'XrLabel4
         '
@@ -273,6 +278,7 @@ Partial Public Class ReportBankWithdrawalSum
         Me.XrLabel4.StylePriority.UseTextAlignment = False
         Me.XrLabel4.Text = ":"
         Me.XrLabel4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        Me.XrLabel4.Visible = False
         '
         'XrLabel3
         '
@@ -285,6 +291,7 @@ Partial Public Class ReportBankWithdrawalSum
         Me.XrLabel3.StylePriority.UseTextAlignment = False
         Me.XrLabel3.Text = "a/n"
         Me.XrLabel3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        Me.XrLabel3.Visible = False
         '
         'XrLabel2
         '
@@ -297,6 +304,7 @@ Partial Public Class ReportBankWithdrawalSum
         Me.XrLabel2.StylePriority.UseTextAlignment = False
         Me.XrLabel2.Text = "Acc No "
         Me.XrLabel2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        Me.XrLabel2.Visible = False
         '
         'XrLabel1
         '
@@ -309,6 +317,7 @@ Partial Public Class ReportBankWithdrawalSum
         Me.XrLabel1.StylePriority.UseTextAlignment = False
         Me.XrLabel1.Text = "Bank"
         Me.XrLabel1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        Me.XrLabel1.Visible = False
         '
         'XrLabel15
         '

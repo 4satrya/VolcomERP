@@ -62,10 +62,10 @@ Partial Class FormBankWithdrawalSum
         Me.GridColumn21 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn100 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.BGenerate = New DevExpress.XtraEditors.SimpleButton()
-        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -268,7 +268,7 @@ Partial Class FormBankWithdrawalSum
         Me.PanelControl8.Controls.Add(Me.PanelControl9)
         Me.PanelControl8.Controls.Add(Me.PanelControl10)
         Me.PanelControl8.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl8.Location = New System.Drawing.Point(0, 427)
+        Me.PanelControl8.Location = New System.Drawing.Point(0, 454)
         Me.PanelControl8.Name = "PanelControl8"
         Me.PanelControl8.Size = New System.Drawing.Size(936, 96)
         Me.PanelControl8.TabIndex = 5
@@ -345,7 +345,7 @@ Partial Class FormBankWithdrawalSum
         Me.PanelControl7.Controls.Add(Me.BtnCancel)
         Me.PanelControl7.Controls.Add(Me.BtnSave)
         Me.PanelControl7.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl7.Location = New System.Drawing.Point(0, 523)
+        Me.PanelControl7.Location = New System.Drawing.Point(0, 550)
         Me.PanelControl7.Name = "PanelControl7"
         Me.PanelControl7.Size = New System.Drawing.Size(936, 48)
         Me.PanelControl7.TabIndex = 4
@@ -442,7 +442,7 @@ Partial Class FormBankWithdrawalSum
         Me.GCList.MainView = Me.GVList
         Me.GCList.Name = "GCList"
         Me.GCList.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckEdit1, Me.RICECheck})
-        Me.GCList.Size = New System.Drawing.Size(936, 267)
+        Me.GCList.Size = New System.Drawing.Size(936, 294)
         Me.GCList.TabIndex = 19
         Me.GCList.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVList})
         '
@@ -545,6 +545,14 @@ Partial Class FormBankWithdrawalSum
         Me.GridColumn10.Visible = True
         Me.GridColumn10.VisibleIndex = 3
         '
+        'GridColumn4
+        '
+        Me.GridColumn4.Caption = "Status"
+        Me.GridColumn4.FieldName = "report_status"
+        Me.GridColumn4.Name = "GridColumn4"
+        Me.GridColumn4.Visible = True
+        Me.GridColumn4.VisibleIndex = 7
+        '
         'GridColumn100
         '
         Me.GridColumn100.Caption = "Payment Date"
@@ -566,26 +574,18 @@ Partial Class FormBankWithdrawalSum
         '
         Me.BGenerate.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.BGenerate.ImageIndex = 7
-        Me.BGenerate.Location = New System.Drawing.Point(0, 389)
+        Me.BGenerate.Location = New System.Drawing.Point(0, 416)
         Me.BGenerate.Name = "BGenerate"
         Me.BGenerate.Size = New System.Drawing.Size(936, 38)
         Me.BGenerate.TabIndex = 20
         Me.BGenerate.TabStop = False
         Me.BGenerate.Text = "Generate"
         '
-        'GridColumn4
-        '
-        Me.GridColumn4.Caption = "Status"
-        Me.GridColumn4.FieldName = "report_status"
-        Me.GridColumn4.Name = "GridColumn4"
-        Me.GridColumn4.Visible = True
-        Me.GridColumn4.VisibleIndex = 7
-        '
         'FormBankWithdrawalSum
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(936, 571)
+        Me.ClientSize = New System.Drawing.Size(936, 598)
         Me.Controls.Add(Me.GCList)
         Me.Controls.Add(Me.BGenerate)
         Me.Controls.Add(Me.PanelControl8)

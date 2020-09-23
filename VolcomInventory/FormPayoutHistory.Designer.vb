@@ -29,14 +29,19 @@ Partial Class FormPayoutHistory
         Me.GridColumnamount = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumntrans_fee = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnnett = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
+        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.GCPayout, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVPayout, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl1
         '
+        Me.PanelControl1.Controls.Add(Me.LabelControl4)
+        Me.PanelControl1.Controls.Add(Me.PanelControl2)
         Me.PanelControl1.Controls.Add(Me.BtnPrint)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl1.Location = New System.Drawing.Point(0, 0)
@@ -122,6 +127,30 @@ Partial Class FormPayoutHistory
         Me.GridColumnnett.Visible = True
         Me.GridColumnnett.VisibleIndex = 3
         '
+        'LabelControl4
+        '
+        Me.LabelControl4.Appearance.Font = New System.Drawing.Font("Segoe UI", 6.75!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl4.Appearance.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.LabelControl4.Location = New System.Drawing.Point(40, 21)
+        Me.LabelControl4.Name = "LabelControl4"
+        Me.LabelControl4.Size = New System.Drawing.Size(18, 12)
+        Me.LabelControl4.TabIndex = 146
+        Me.LabelControl4.Text = "BAP"
+        '
+        'PanelControl2
+        '
+        Me.PanelControl2.Appearance.BackColor = System.Drawing.Color.Yellow
+        Me.PanelControl2.Appearance.BorderColor = System.Drawing.Color.White
+        Me.PanelControl2.Appearance.Options.UseBackColor = True
+        Me.PanelControl2.Appearance.Options.UseBorderColor = True
+        Me.PanelControl2.Location = New System.Drawing.Point(14, 21)
+        Me.PanelControl2.LookAndFeel.SkinMaskColor = System.Drawing.Color.Yellow
+        Me.PanelControl2.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.UltraFlat
+        Me.PanelControl2.LookAndFeel.UseDefaultLookAndFeel = False
+        Me.PanelControl2.Name = "PanelControl2"
+        Me.PanelControl2.Size = New System.Drawing.Size(24, 13)
+        Me.PanelControl2.TabIndex = 145
+        '
         'FormPayoutHistory
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -135,8 +164,10 @@ Partial Class FormPayoutHistory
         Me.Text = "Payout History"
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
+        Me.PanelControl1.PerformLayout()
         CType(Me.GCPayout, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVPayout, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -150,4 +181,6 @@ Partial Class FormPayoutHistory
     Friend WithEvents GridColumnamount As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumntrans_fee As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnnett As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LabelControl4 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents PanelControl2 As DevExpress.XtraEditors.PanelControl
 End Class

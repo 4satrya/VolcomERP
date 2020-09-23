@@ -606,6 +606,12 @@
         ElseIf report_mark_type = "260" Then
             'move est. date receive
             query = String.Format("SELECT id_report_status,number as report_number FROM tb_purc_order_move_date WHERE id_receive_date = '{0}'", id_report)
+        ElseIf report_mark_type = "264" Then
+            'rekonsil payout
+            query = String.Format("SELECT id_report_status,number as report_number FROM tb_list_payout_trans WHERE id_list_payout_trans = '{0}'", id_report)
+        ElseIf report_mark_type = "265" Then
+            'rekonsil payout VA
+            query = String.Format("SELECT id_report_status,number as report_number FROM tb_virtual_acc_trans WHERE id_virtual_acc_trans = '{0}'", id_report)
         End If
 
         data = execute_query(query, -1, True, "", "", "", "")
@@ -8680,10 +8686,24 @@ WHERE invd.`id_inv_mat`='" & id_report & "'"
             'update status
             query = String.Format("UPDATE tb_purc_order_move_date SET id_report_status='{0}' WHERE id_receive_date ='{1}'", id_status_reportx, id_report)
             execute_non_query(query, True, "", "", "", "")
+        ElseIf report_mark_type = "264" Then
+            If id_status_reportx = "3" Then
+                id_status_reportx = "6"
+            End If
+            'update status
+            query = String.Format("UPDATE tb_list_payout_trans SET id_report_status='{0}' WHERE id_list_payout_trans ='{1}'", id_status_reportx, id_report)
+            execute_non_query(query, True, "", "", "", "")
+        ElseIf report_mark_type = "265" Then
+            If id_status_reportx = "3" Then
+                id_status_reportx = "6"
+            End If
+            'update status
+            query = String.Format("UPDATE tb_virtual_acc_trans SET id_report_status='{0}' WHERE id_virtual_acc_trans ='{1}'", id_status_reportx, id_report)
+            execute_non_query(query, True, "", "", "", "")
         End If
 
-            'adding lead time
-            Dim query_auto As String = "SELECT DISTINCT(id_report_status) as id_report_status FROM tb_report_mark  WHERE id_report='" & id_report & "' AND report_mark_type='" & report_mark_type & "' AND id_report_status>'" & id_status_reportx & "' ORDER BY id_report_status LIMIT 1"
+        'adding lead time
+        Dim query_auto As String = "SELECT DISTINCT(id_report_status) as id_report_status FROM tb_report_mark  WHERE id_report='" & id_report & "' AND report_mark_type='" & report_mark_type & "' AND id_report_status>'" & id_status_reportx & "' ORDER BY id_report_status LIMIT 1"
         Dim data_auto As DataTable = execute_query(query_auto, -1, True, "", "", "", "")
         If data_auto.Rows.Count > 0 Then
             Dim query_set As String = "SELECT * FROM tb_report_mark WHERE id_report='" & id_report & "' AND report_mark_type='" & report_mark_type & "' AND id_report_status>'" & id_status_reportx & "' AND id_report_status='" & data_auto.Rows(0)("id_report_status").ToString & "' ORDER BY level"

@@ -157,6 +157,8 @@ Partial Class FormBankDeposit
         Me.GridColumntotal_pending = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumntotal_cn = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumntotal_cn_pending = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnacc_name_vs = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnnote_vs = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.BtnCreateBBMforVS = New DevExpress.XtraEditors.SimpleButton()
         Me.PanelControl5 = New DevExpress.XtraEditors.PanelControl()
         Me.SLEStatusSales = New DevExpress.XtraEditors.SearchLookUpEdit()
@@ -170,8 +172,6 @@ Partial Class FormBankDeposit
         Me.GridColumnid_coa_tag = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncoa_tag = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl11 = New DevExpress.XtraEditors.LabelControl()
-        Me.GridColumnacc_name_vs = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnnote_vs = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XTCPO, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCPO.SuspendLayout()
         Me.XTPInvoice.SuspendLayout()
@@ -1516,6 +1516,23 @@ Partial Class FormBankDeposit
         Me.GridColumntotal_cn_pending.Visible = True
         Me.GridColumntotal_cn_pending.VisibleIndex = 10
         '
+        'GridColumnacc_name_vs
+        '
+        Me.GridColumnacc_name_vs.Caption = "Account"
+        Me.GridColumnacc_name_vs.FieldName = "acc_name"
+        Me.GridColumnacc_name_vs.Name = "GridColumnacc_name_vs"
+        Me.GridColumnacc_name_vs.Visible = True
+        Me.GridColumnacc_name_vs.VisibleIndex = 3
+        '
+        'GridColumnnote_vs
+        '
+        Me.GridColumnnote_vs.Caption = "Description"
+        Me.GridColumnnote_vs.FieldName = "note"
+        Me.GridColumnnote_vs.Name = "GridColumnnote_vs"
+        Me.GridColumnnote_vs.Visible = True
+        Me.GridColumnnote_vs.VisibleIndex = 4
+        Me.GridColumnnote_vs.Width = 197
+        '
         'BtnCreateBBMforVS
         '
         Me.BtnCreateBBMforVS.Appearance.BackColor = System.Drawing.Color.CornflowerBlue
@@ -1634,23 +1651,6 @@ Partial Class FormBankDeposit
         Me.LabelControl11.Size = New System.Drawing.Size(19, 13)
         Me.LabelControl11.TabIndex = 8915
         Me.LabelControl11.Text = "Unit"
-        '
-        'GridColumnacc_name_vs
-        '
-        Me.GridColumnacc_name_vs.Caption = "Account"
-        Me.GridColumnacc_name_vs.FieldName = "acc_name"
-        Me.GridColumnacc_name_vs.Name = "GridColumnacc_name_vs"
-        Me.GridColumnacc_name_vs.Visible = True
-        Me.GridColumnacc_name_vs.VisibleIndex = 3
-        '
-        'GridColumnnote_vs
-        '
-        Me.GridColumnnote_vs.Caption = "Description"
-        Me.GridColumnnote_vs.FieldName = "note"
-        Me.GridColumnnote_vs.Name = "GridColumnnote_vs"
-        Me.GridColumnnote_vs.Visible = True
-        Me.GridColumnnote_vs.VisibleIndex = 4
-        Me.GridColumnnote_vs.Width = 197
         '
         'FormBankDeposit
         '

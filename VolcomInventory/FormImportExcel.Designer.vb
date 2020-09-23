@@ -19,6 +19,7 @@ Partial Class FormImportExcel
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.GroupControl1 = New DevExpress.XtraEditors.GroupControl()
         Me.GCData = New DevExpress.XtraGrid.GridControl()
         Me.GVData = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -36,6 +37,8 @@ Partial Class FormImportExcel
         Me.TBFileAddress = New DevExpress.XtraEditors.TextEdit()
         Me.LWorksheetName = New DevExpress.XtraEditors.LabelControl()
         Me.BBrowse = New DevExpress.XtraEditors.SimpleButton()
+        Me.CMSImport = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.OtherActionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl1.SuspendLayout()
         CType(Me.GCData, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -48,6 +51,7 @@ Partial Class FormImportExcel
         Me.PanelControl1.SuspendLayout()
         CType(Me.CBWorksheetName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TBFileAddress.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.CMSImport.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupControl1
@@ -212,6 +216,18 @@ Partial Class FormImportExcel
         Me.BBrowse.TabIndex = 88
         Me.BBrowse.Text = "Browse"
         '
+        'CMSImport
+        '
+        Me.CMSImport.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OtherActionToolStripMenuItem})
+        Me.CMSImport.Name = "CMSImport"
+        Me.CMSImport.Size = New System.Drawing.Size(153, 48)
+        '
+        'OtherActionToolStripMenuItem
+        '
+        Me.OtherActionToolStripMenuItem.Name = "OtherActionToolStripMenuItem"
+        Me.OtherActionToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.OtherActionToolStripMenuItem.Text = "Other Action"
+        '
         'FormImportExcel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -240,6 +256,7 @@ Partial Class FormImportExcel
         Me.PanelControl1.PerformLayout()
         CType(Me.CBWorksheetName.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TBFileAddress.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.CMSImport.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -260,4 +277,6 @@ Partial Class FormImportExcel
     Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents BtnPrint As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BtnAction As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents CMSImport As ContextMenuStrip
+    Friend WithEvents OtherActionToolStripMenuItem As ToolStripMenuItem
 End Class

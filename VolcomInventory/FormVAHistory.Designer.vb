@@ -29,14 +29,20 @@ Partial Class FormVAHistory
         Me.GridColumnbank = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumngenerate_date = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnamountva = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnnumber = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
+        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.GCVA, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVVA, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl1
         '
+        Me.PanelControl1.Controls.Add(Me.LabelControl4)
+        Me.PanelControl1.Controls.Add(Me.PanelControl2)
         Me.PanelControl1.Controls.Add(Me.BtnPrint)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl1.Location = New System.Drawing.Point(0, 0)
@@ -66,7 +72,7 @@ Partial Class FormVAHistory
         '
         'GVVA
         '
-        Me.GVVA.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnid_virtual_acc_trans, Me.GridColumntransaction_date, Me.GridColumnbank, Me.GridColumngenerate_date, Me.GridColumnamountva})
+        Me.GVVA.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnid_virtual_acc_trans, Me.GridColumntransaction_date, Me.GridColumnbank, Me.GridColumngenerate_date, Me.GridColumnamountva, Me.GridColumnnumber})
         Me.GVVA.GridControl = Me.GCVA
         Me.GVVA.Name = "GVVA"
         Me.GVVA.OptionsBehavior.ReadOnly = True
@@ -88,7 +94,7 @@ Partial Class FormVAHistory
         Me.GridColumntransaction_date.FieldName = "transaction_date"
         Me.GridColumntransaction_date.Name = "GridColumntransaction_date"
         Me.GridColumntransaction_date.Visible = True
-        Me.GridColumntransaction_date.VisibleIndex = 0
+        Me.GridColumntransaction_date.VisibleIndex = 1
         '
         'GridColumnbank
         '
@@ -96,7 +102,7 @@ Partial Class FormVAHistory
         Me.GridColumnbank.FieldName = "bank"
         Me.GridColumnbank.Name = "GridColumnbank"
         Me.GridColumnbank.Visible = True
-        Me.GridColumnbank.VisibleIndex = 1
+        Me.GridColumnbank.VisibleIndex = 2
         '
         'GridColumngenerate_date
         '
@@ -115,7 +121,39 @@ Partial Class FormVAHistory
         Me.GridColumnamountva.Name = "GridColumnamountva"
         Me.GridColumnamountva.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount", "{0:N2}")})
         Me.GridColumnamountva.Visible = True
-        Me.GridColumnamountva.VisibleIndex = 2
+        Me.GridColumnamountva.VisibleIndex = 3
+        '
+        'GridColumnnumber
+        '
+        Me.GridColumnnumber.Caption = "Number"
+        Me.GridColumnnumber.FieldName = "number"
+        Me.GridColumnnumber.Name = "GridColumnnumber"
+        Me.GridColumnnumber.Visible = True
+        Me.GridColumnnumber.VisibleIndex = 0
+        '
+        'LabelControl4
+        '
+        Me.LabelControl4.Appearance.Font = New System.Drawing.Font("Segoe UI", 6.75!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl4.Appearance.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.LabelControl4.Location = New System.Drawing.Point(40, 21)
+        Me.LabelControl4.Name = "LabelControl4"
+        Me.LabelControl4.Size = New System.Drawing.Size(18, 12)
+        Me.LabelControl4.TabIndex = 148
+        Me.LabelControl4.Text = "BAP"
+        '
+        'PanelControl2
+        '
+        Me.PanelControl2.Appearance.BackColor = System.Drawing.Color.Yellow
+        Me.PanelControl2.Appearance.BorderColor = System.Drawing.Color.White
+        Me.PanelControl2.Appearance.Options.UseBackColor = True
+        Me.PanelControl2.Appearance.Options.UseBorderColor = True
+        Me.PanelControl2.Location = New System.Drawing.Point(14, 21)
+        Me.PanelControl2.LookAndFeel.SkinMaskColor = System.Drawing.Color.Yellow
+        Me.PanelControl2.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.UltraFlat
+        Me.PanelControl2.LookAndFeel.UseDefaultLookAndFeel = False
+        Me.PanelControl2.Name = "PanelControl2"
+        Me.PanelControl2.Size = New System.Drawing.Size(24, 13)
+        Me.PanelControl2.TabIndex = 147
         '
         'FormVAHistory
         '
@@ -130,8 +168,10 @@ Partial Class FormVAHistory
         Me.Text = "Import History"
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
+        Me.PanelControl1.PerformLayout()
         CType(Me.GCVA, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVVA, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -145,4 +185,7 @@ Partial Class FormVAHistory
     Friend WithEvents GridColumnbank As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumngenerate_date As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnamountva As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnnumber As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LabelControl4 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents PanelControl2 As DevExpress.XtraEditors.PanelControl
 End Class

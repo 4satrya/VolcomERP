@@ -194,6 +194,7 @@ Partial Class FormBankWithdrawal
         Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn13 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn14 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn226 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.XTPExpense = New DevExpress.XtraTab.XtraTabPage()
         Me.GCExpense = New DevExpress.XtraGrid.GridControl()
@@ -495,7 +496,7 @@ Partial Class FormBankWithdrawal
         Me.BloadWaiting = New DevExpress.XtraEditors.SimpleButton()
         Me.ViewBPL = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.VDItemList = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GridColumn226 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn227 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XTCPO, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCPO.SuspendLayout()
         Me.XTPPayment.SuspendLayout()
@@ -2396,6 +2397,15 @@ Partial Class FormBankWithdrawal
         Me.GridColumn14.VisibleIndex = 0
         Me.GridColumn14.Width = 1243
         '
+        'GridColumn226
+        '
+        Me.GridColumn226.Caption = "Status"
+        Me.GridColumn226.FieldName = "comp_status"
+        Me.GridColumn226.Name = "GridColumn226"
+        Me.GridColumn226.Visible = True
+        Me.GridColumn226.VisibleIndex = 1
+        Me.GridColumn226.Width = 389
+        '
         'LabelControl2
         '
         Me.LabelControl2.Location = New System.Drawing.Point(215, 14)
@@ -3462,7 +3472,7 @@ Partial Class FormBankWithdrawal
         '
         'GVJamsostek
         '
-        Me.GVJamsostek.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn127, Me.GridColumn128, Me.GridColumn129, Me.GridColumn130, Me.GridColumn131, Me.GridColumn133, Me.GridColumn132})
+        Me.GVJamsostek.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn127, Me.GridColumn227, Me.GridColumn128, Me.GridColumn129, Me.GridColumn130, Me.GridColumn131, Me.GridColumn133, Me.GridColumn132})
         Me.GVJamsostek.GridControl = Me.GCJamsostek
         Me.GVJamsostek.Name = "GVJamsostek"
         Me.GVJamsostek.OptionsView.ShowFooter = True
@@ -3470,7 +3480,6 @@ Partial Class FormBankWithdrawal
         '
         'GridColumn127
         '
-        Me.GridColumn127.Caption = "ID"
         Me.GridColumn127.FieldName = "id_payroll"
         Me.GridColumn127.Name = "GridColumn127"
         Me.GridColumn127.OptionsColumn.AllowEdit = False
@@ -5414,14 +5423,13 @@ Partial Class FormBankWithdrawal
         Me.VDItemList.Size = New System.Drawing.Size(112, 22)
         Me.VDItemList.Text = "History"
         '
-        'GridColumn226
+        'GridColumn227
         '
-        Me.GridColumn226.Caption = "Status"
-        Me.GridColumn226.FieldName = "comp_status"
-        Me.GridColumn226.Name = "GridColumn226"
-        Me.GridColumn226.Visible = True
-        Me.GridColumn226.VisibleIndex = 1
-        Me.GridColumn226.Width = 389
+        Me.GridColumn227.FieldName = "id_bpjs_location"
+        Me.GridColumn227.Name = "GridColumn227"
+        Me.GridColumn227.OptionsColumn.AllowEdit = False
+        Me.GridColumn227.OptionsColumn.AllowFocus = False
+        Me.GridColumn227.OptionsColumn.ReadOnly = True
         '
         'FormBankWithdrawal
         '
@@ -6086,4 +6094,5 @@ Partial Class FormBankWithdrawal
     Friend WithEvents GridColumnis_check_vs As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RepositoryItemCheckEdit15 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
     Friend WithEvents GridColumn226 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn227 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

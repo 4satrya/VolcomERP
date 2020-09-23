@@ -21,32 +21,37 @@ Partial Class FormPayoutHistoryDetail
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormPayoutHistoryDetail))
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.BtnMark = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnClose = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnPrint = New DevExpress.XtraEditors.SimpleButton()
         Me.DECreated = New DevExpress.XtraEditors.DateEdit()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.TxtNumber = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
-        Me.BtnClose = New DevExpress.XtraEditors.SimpleButton()
-        Me.BtnPrint = New DevExpress.XtraEditors.SimpleButton()
         Me.GCData = New DevExpress.XtraGrid.GridControl()
         Me.GVData = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridView()
+        Me.GridBand1 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         Me.BandedGridColumnno = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumncheckout_id = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumnsales_order_ol_shop_number = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumncustomer_name = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumnsettlement_date = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumnpay_type = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumnbank = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.gridBandPaymentGate = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         Me.BandedGridColumnpayment = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumntrans_fee = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.gridBandERP = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         Me.BandedGridColumninvoice = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumnship_invoice_number = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumninvoice_amount = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumncalculate_fee = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.BandedGridColumnid_order = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.BandedGridColumncheckout_id = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumnother_price = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.GridBand1 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
-        Me.gridBandPaymentGate = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
-        Me.gridBandERP = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
+        Me.gridBand2 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
+        Me.BandedGridColumnreconcile_number = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.RepositoryItemHyperLinkEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit()
+        Me.BandedGridColumnid_order = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.DECreated.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -54,14 +59,14 @@ Partial Class FormPayoutHistoryDetail
         CType(Me.TxtNumber.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GCData, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVData, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemHyperLinkEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl2.SuspendLayout()
         Me.SuspendLayout()
         '
         'PanelControl1
         '
-        Me.PanelControl1.Controls.Add(Me.DECreated)
-        Me.PanelControl1.Controls.Add(Me.LabelControl2)
-        Me.PanelControl1.Controls.Add(Me.TxtNumber)
-        Me.PanelControl1.Controls.Add(Me.LabelControl1)
+        Me.PanelControl1.Controls.Add(Me.BtnMark)
         Me.PanelControl1.Controls.Add(Me.BtnClose)
         Me.PanelControl1.Controls.Add(Me.BtnPrint)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Bottom
@@ -70,42 +75,15 @@ Partial Class FormPayoutHistoryDetail
         Me.PanelControl1.Size = New System.Drawing.Size(771, 50)
         Me.PanelControl1.TabIndex = 0
         '
-        'DECreated
+        'BtnMark
         '
-        Me.DECreated.EditValue = Nothing
-        Me.DECreated.Enabled = False
-        Me.DECreated.Location = New System.Drawing.Point(310, 15)
-        Me.DECreated.Name = "DECreated"
-        Me.DECreated.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.DECreated.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.DECreated.Properties.DisplayFormat.FormatString = "dd MMMM yyyy HH:mm:ss"
-        Me.DECreated.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.DECreated.Size = New System.Drawing.Size(201, 20)
-        Me.DECreated.TabIndex = 1
-        '
-        'LabelControl2
-        '
-        Me.LabelControl2.Location = New System.Drawing.Point(239, 18)
-        Me.LabelControl2.Name = "LabelControl2"
-        Me.LabelControl2.Size = New System.Drawing.Size(65, 13)
-        Me.LabelControl2.TabIndex = 3
-        Me.LabelControl2.Text = "Created Date"
-        '
-        'TxtNumber
-        '
-        Me.TxtNumber.Location = New System.Drawing.Point(92, 15)
-        Me.TxtNumber.Name = "TxtNumber"
-        Me.TxtNumber.Properties.ReadOnly = True
-        Me.TxtNumber.Size = New System.Drawing.Size(141, 20)
-        Me.TxtNumber.TabIndex = 1
-        '
-        'LabelControl1
-        '
-        Me.LabelControl1.Location = New System.Drawing.Point(12, 18)
-        Me.LabelControl1.Name = "LabelControl1"
-        Me.LabelControl1.Size = New System.Drawing.Size(74, 13)
-        Me.LabelControl1.TabIndex = 2
-        Me.LabelControl1.Text = "Payout Number"
+        Me.BtnMark.Dock = System.Windows.Forms.DockStyle.Left
+        Me.BtnMark.Image = CType(resources.GetObject("BtnMark.Image"), System.Drawing.Image)
+        Me.BtnMark.Location = New System.Drawing.Point(2, 2)
+        Me.BtnMark.Name = "BtnMark"
+        Me.BtnMark.Size = New System.Drawing.Size(90, 46)
+        Me.BtnMark.TabIndex = 2
+        Me.BtnMark.Text = "Mark"
         '
         'BtnClose
         '
@@ -127,20 +105,58 @@ Partial Class FormPayoutHistoryDetail
         Me.BtnPrint.TabIndex = 0
         Me.BtnPrint.Text = "Print"
         '
+        'DECreated
+        '
+        Me.DECreated.EditValue = Nothing
+        Me.DECreated.Enabled = False
+        Me.DECreated.Location = New System.Drawing.Point(313, 12)
+        Me.DECreated.Name = "DECreated"
+        Me.DECreated.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DECreated.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DECreated.Properties.DisplayFormat.FormatString = "dd MMMM yyyy HH:mm:ss"
+        Me.DECreated.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DECreated.Size = New System.Drawing.Size(201, 20)
+        Me.DECreated.TabIndex = 1
+        '
+        'LabelControl2
+        '
+        Me.LabelControl2.Location = New System.Drawing.Point(242, 15)
+        Me.LabelControl2.Name = "LabelControl2"
+        Me.LabelControl2.Size = New System.Drawing.Size(65, 13)
+        Me.LabelControl2.TabIndex = 3
+        Me.LabelControl2.Text = "Created Date"
+        '
+        'TxtNumber
+        '
+        Me.TxtNumber.Location = New System.Drawing.Point(95, 12)
+        Me.TxtNumber.Name = "TxtNumber"
+        Me.TxtNumber.Properties.ReadOnly = True
+        Me.TxtNumber.Size = New System.Drawing.Size(141, 20)
+        Me.TxtNumber.TabIndex = 1
+        '
+        'LabelControl1
+        '
+        Me.LabelControl1.Location = New System.Drawing.Point(15, 15)
+        Me.LabelControl1.Name = "LabelControl1"
+        Me.LabelControl1.Size = New System.Drawing.Size(74, 13)
+        Me.LabelControl1.TabIndex = 2
+        Me.LabelControl1.Text = "Payout Number"
+        '
         'GCData
         '
         Me.GCData.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCData.Location = New System.Drawing.Point(0, 0)
+        Me.GCData.Location = New System.Drawing.Point(0, 45)
         Me.GCData.MainView = Me.GVData
         Me.GCData.Name = "GCData"
-        Me.GCData.Size = New System.Drawing.Size(771, 397)
+        Me.GCData.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemHyperLinkEdit1})
+        Me.GCData.Size = New System.Drawing.Size(771, 352)
         Me.GCData.TabIndex = 1
         Me.GCData.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVData})
         '
         'GVData
         '
-        Me.GVData.Bands.AddRange(New DevExpress.XtraGrid.Views.BandedGrid.GridBand() {Me.GridBand1, Me.gridBandPaymentGate, Me.gridBandERP})
-        Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn() {Me.BandedGridColumnsettlement_date, Me.BandedGridColumnpay_type, Me.BandedGridColumnbank, Me.BandedGridColumnid_order, Me.BandedGridColumnsales_order_ol_shop_number, Me.BandedGridColumncustomer_name, Me.BandedGridColumncheckout_id, Me.BandedGridColumnpayment, Me.BandedGridColumntrans_fee, Me.BandedGridColumninvoice, Me.BandedGridColumninvoice_amount, Me.BandedGridColumncalculate_fee, Me.BandedGridColumnno, Me.BandedGridColumnship_invoice_number, Me.BandedGridColumnother_price})
+        Me.GVData.Bands.AddRange(New DevExpress.XtraGrid.Views.BandedGrid.GridBand() {Me.GridBand1, Me.gridBandPaymentGate, Me.gridBandERP, Me.gridBand2})
+        Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn() {Me.BandedGridColumnsettlement_date, Me.BandedGridColumnpay_type, Me.BandedGridColumnbank, Me.BandedGridColumnid_order, Me.BandedGridColumnsales_order_ol_shop_number, Me.BandedGridColumncustomer_name, Me.BandedGridColumncheckout_id, Me.BandedGridColumnpayment, Me.BandedGridColumntrans_fee, Me.BandedGridColumninvoice, Me.BandedGridColumninvoice_amount, Me.BandedGridColumncalculate_fee, Me.BandedGridColumnno, Me.BandedGridColumnship_invoice_number, Me.BandedGridColumnother_price, Me.BandedGridColumnreconcile_number})
         Me.GVData.GridControl = Me.GCData
         Me.GVData.Name = "GVData"
         Me.GVData.OptionsBehavior.AutoExpandAllGroups = True
@@ -150,6 +166,19 @@ Partial Class FormPayoutHistoryDetail
         Me.GVData.OptionsView.ShowFooter = True
         Me.GVData.OptionsView.ShowGroupPanel = False
         '
+        'GridBand1
+        '
+        Me.GridBand1.Columns.Add(Me.BandedGridColumnno)
+        Me.GridBand1.Columns.Add(Me.BandedGridColumncheckout_id)
+        Me.GridBand1.Columns.Add(Me.BandedGridColumnsales_order_ol_shop_number)
+        Me.GridBand1.Columns.Add(Me.BandedGridColumncustomer_name)
+        Me.GridBand1.Columns.Add(Me.BandedGridColumnsettlement_date)
+        Me.GridBand1.Columns.Add(Me.BandedGridColumnpay_type)
+        Me.GridBand1.Columns.Add(Me.BandedGridColumnbank)
+        Me.GridBand1.Name = "GridBand1"
+        Me.GridBand1.VisibleIndex = 0
+        Me.GridBand1.Width = 579
+        '
         'BandedGridColumnno
         '
         Me.BandedGridColumnno.Caption = "No"
@@ -157,6 +186,13 @@ Partial Class FormPayoutHistoryDetail
         Me.BandedGridColumnno.Name = "BandedGridColumnno"
         Me.BandedGridColumnno.Visible = True
         Me.BandedGridColumnno.Width = 45
+        '
+        'BandedGridColumncheckout_id
+        '
+        Me.BandedGridColumncheckout_id.Caption = "Checkout Id"
+        Me.BandedGridColumncheckout_id.FieldName = "checkout_id"
+        Me.BandedGridColumncheckout_id.Name = "BandedGridColumncheckout_id"
+        Me.BandedGridColumncheckout_id.Visible = True
         '
         'BandedGridColumnsales_order_ol_shop_number
         '
@@ -197,6 +233,15 @@ Partial Class FormPayoutHistoryDetail
         Me.BandedGridColumnbank.Name = "BandedGridColumnbank"
         Me.BandedGridColumnbank.Visible = True
         '
+        'gridBandPaymentGate
+        '
+        Me.gridBandPaymentGate.Caption = "Payment Gateway"
+        Me.gridBandPaymentGate.Columns.Add(Me.BandedGridColumnpayment)
+        Me.gridBandPaymentGate.Columns.Add(Me.BandedGridColumntrans_fee)
+        Me.gridBandPaymentGate.Name = "gridBandPaymentGate"
+        Me.gridBandPaymentGate.VisibleIndex = 1
+        Me.gridBandPaymentGate.Width = 270
+        '
         'BandedGridColumnpayment
         '
         Me.BandedGridColumnpayment.Caption = "Amount"
@@ -218,6 +263,18 @@ Partial Class FormPayoutHistoryDetail
         Me.BandedGridColumntrans_fee.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "trans_fee", "{0:N2}")})
         Me.BandedGridColumntrans_fee.Visible = True
         Me.BandedGridColumntrans_fee.Width = 135
+        '
+        'gridBandERP
+        '
+        Me.gridBandERP.Caption = "ERP"
+        Me.gridBandERP.Columns.Add(Me.BandedGridColumninvoice)
+        Me.gridBandERP.Columns.Add(Me.BandedGridColumnship_invoice_number)
+        Me.gridBandERP.Columns.Add(Me.BandedGridColumninvoice_amount)
+        Me.gridBandERP.Columns.Add(Me.BandedGridColumncalculate_fee)
+        Me.gridBandERP.Columns.Add(Me.BandedGridColumnother_price)
+        Me.gridBandERP.Name = "gridBandERP"
+        Me.gridBandERP.VisibleIndex = 2
+        Me.gridBandERP.Width = 483
         '
         'BandedGridColumninvoice
         '
@@ -257,18 +314,6 @@ Partial Class FormPayoutHistoryDetail
         Me.BandedGridColumncalculate_fee.Visible = True
         Me.BandedGridColumncalculate_fee.Width = 104
         '
-        'BandedGridColumnid_order
-        '
-        Me.BandedGridColumnid_order.Caption = "id_order"
-        Me.BandedGridColumnid_order.FieldName = "id_order"
-        Me.BandedGridColumnid_order.Name = "BandedGridColumnid_order"
-        '
-        'BandedGridColumncheckout_id
-        '
-        Me.BandedGridColumncheckout_id.Caption = "Checkout Id"
-        Me.BandedGridColumncheckout_id.FieldName = "checkout_id"
-        Me.BandedGridColumncheckout_id.Name = "BandedGridColumncheckout_id"
-        '
         'BandedGridColumnother_price
         '
         Me.BandedGridColumnother_price.Caption = "Other Income/Expense"
@@ -280,38 +325,44 @@ Partial Class FormPayoutHistoryDetail
         Me.BandedGridColumnother_price.Visible = True
         Me.BandedGridColumnother_price.Width = 89
         '
-        'GridBand1
+        'gridBand2
         '
-        Me.GridBand1.Columns.Add(Me.BandedGridColumnno)
-        Me.GridBand1.Columns.Add(Me.BandedGridColumnsales_order_ol_shop_number)
-        Me.GridBand1.Columns.Add(Me.BandedGridColumncustomer_name)
-        Me.GridBand1.Columns.Add(Me.BandedGridColumnsettlement_date)
-        Me.GridBand1.Columns.Add(Me.BandedGridColumnpay_type)
-        Me.GridBand1.Columns.Add(Me.BandedGridColumnbank)
-        Me.GridBand1.Name = "GridBand1"
-        Me.GridBand1.VisibleIndex = 0
-        Me.GridBand1.Width = 504
+        Me.gridBand2.Columns.Add(Me.BandedGridColumnreconcile_number)
+        Me.gridBand2.Name = "gridBand2"
+        Me.gridBand2.VisibleIndex = 3
+        Me.gridBand2.Width = 108
         '
-        'gridBandPaymentGate
+        'BandedGridColumnreconcile_number
         '
-        Me.gridBandPaymentGate.Caption = "Payment Gateway"
-        Me.gridBandPaymentGate.Columns.Add(Me.BandedGridColumnpayment)
-        Me.gridBandPaymentGate.Columns.Add(Me.BandedGridColumntrans_fee)
-        Me.gridBandPaymentGate.Name = "gridBandPaymentGate"
-        Me.gridBandPaymentGate.VisibleIndex = 1
-        Me.gridBandPaymentGate.Width = 270
+        Me.BandedGridColumnreconcile_number.Caption = "Reconcile No."
+        Me.BandedGridColumnreconcile_number.ColumnEdit = Me.RepositoryItemHyperLinkEdit1
+        Me.BandedGridColumnreconcile_number.FieldName = "reconcile_number"
+        Me.BandedGridColumnreconcile_number.Name = "BandedGridColumnreconcile_number"
+        Me.BandedGridColumnreconcile_number.Visible = True
+        Me.BandedGridColumnreconcile_number.Width = 108
         '
-        'gridBandERP
+        'RepositoryItemHyperLinkEdit1
         '
-        Me.gridBandERP.Caption = "ERP"
-        Me.gridBandERP.Columns.Add(Me.BandedGridColumninvoice)
-        Me.gridBandERP.Columns.Add(Me.BandedGridColumnship_invoice_number)
-        Me.gridBandERP.Columns.Add(Me.BandedGridColumninvoice_amount)
-        Me.gridBandERP.Columns.Add(Me.BandedGridColumncalculate_fee)
-        Me.gridBandERP.Columns.Add(Me.BandedGridColumnother_price)
-        Me.gridBandERP.Name = "gridBandERP"
-        Me.gridBandERP.VisibleIndex = 2
-        Me.gridBandERP.Width = 483
+        Me.RepositoryItemHyperLinkEdit1.AutoHeight = False
+        Me.RepositoryItemHyperLinkEdit1.Name = "RepositoryItemHyperLinkEdit1"
+        '
+        'BandedGridColumnid_order
+        '
+        Me.BandedGridColumnid_order.Caption = "id_order"
+        Me.BandedGridColumnid_order.FieldName = "id_order"
+        Me.BandedGridColumnid_order.Name = "BandedGridColumnid_order"
+        '
+        'PanelControl2
+        '
+        Me.PanelControl2.Controls.Add(Me.DECreated)
+        Me.PanelControl2.Controls.Add(Me.LabelControl2)
+        Me.PanelControl2.Controls.Add(Me.LabelControl1)
+        Me.PanelControl2.Controls.Add(Me.TxtNumber)
+        Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelControl2.Location = New System.Drawing.Point(0, 0)
+        Me.PanelControl2.Name = "PanelControl2"
+        Me.PanelControl2.Size = New System.Drawing.Size(771, 45)
+        Me.PanelControl2.TabIndex = 2
         '
         'FormPayoutHistoryDetail
         '
@@ -319,6 +370,7 @@ Partial Class FormPayoutHistoryDetail
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(771, 447)
         Me.Controls.Add(Me.GCData)
+        Me.Controls.Add(Me.PanelControl2)
         Me.Controls.Add(Me.PanelControl1)
         Me.MinimizeBox = False
         Me.Name = "FormPayoutHistoryDetail"
@@ -327,12 +379,15 @@ Partial Class FormPayoutHistoryDetail
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
-        Me.PanelControl1.PerformLayout()
         CType(Me.DECreated.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DECreated.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtNumber.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GCData, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVData, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemHyperLinkEdit1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl2.ResumeLayout(False)
+        Me.PanelControl2.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -360,8 +415,13 @@ Partial Class FormPayoutHistoryDetail
     Friend WithEvents BandedGridColumncheckout_id As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents BandedGridColumnno As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents BandedGridColumnship_invoice_number As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BandedGridColumnother_price As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BtnMark As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents PanelControl2 As DevExpress.XtraEditors.PanelControl
     Friend WithEvents GridBand1 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents gridBandPaymentGate As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents gridBandERP As DevExpress.XtraGrid.Views.BandedGrid.GridBand
-    Friend WithEvents BandedGridColumnother_price As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents gridBand2 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
+    Friend WithEvents BandedGridColumnreconcile_number As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents RepositoryItemHyperLinkEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit
 End Class

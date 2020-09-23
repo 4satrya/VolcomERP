@@ -582,37 +582,64 @@
     Private Sub GVBarcode_HiddenEditor(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GVBarcode.HiddenEditor
         'CEK BARCODE
         Cursor = Cursors.WaitCursor
-        Dim code_check As String = GVBarcode.GetFocusedRowCellValue("code").ToString
-        Dim code_found As Boolean = False
-        Dim id_sample As String = ""
-        Dim index_atas As Integer = 0
-
-        'check available code
-        For i As Integer = 0 To (GVListPurchase.RowCount - 1)
-            Dim code As String = GVListPurchase.GetRowCellValue(i, "code").ToString
-            id_sample = GVListPurchase.GetRowCellValue(i, "id_sample").ToString
-            If code = code_check Then
-                'cek qty
-                index_atas = i
-                code_found = True
-                Exit For
-            End If
-        Next
-
-        If Not code_found Then
-            GVBarcode.SetFocusedRowCellValue("code", "")
-            stopCustom("Data not found or duplicate!")
+        If GVBarcode.GetFocusedRowCellValue("code").ToString.Length < 16 Then
+            warningCustom("Please only use 16 digit")
         Else
-            If GVListPurchase.GetRowCellValue(index_atas, "sample_purc_rec_det_qty") >= GVListPurchase.GetRowCellValue(index_atas, "qty") Then
+            Dim code_check As String = Microsoft.VisualBasic.Left(GVBarcode.GetFocusedRowCellValue("code").ToString, 12)
+            Dim code_unique As String = GVBarcode.GetFocusedRowCellValue("code").ToString
+            Dim code_found As Boolean = False
+            Dim code_duplicate As Boolean = False
+            Dim id_sample As String = ""
+            Dim index_atas As Integer = 0
+
+            'check available code
+            For i As Integer = 0 To (GVListPurchase.RowCount - 1)
+                Dim code As String = GVListPurchase.GetRowCellValue(i, "code").ToString
+                id_sample = GVListPurchase.GetRowCellValue(i, "id_sample").ToString
+                If code = code_check Then
+                    'cek qty
+                    index_atas = i
+                    code_found = True
+                    Exit For
+                End If
+            Next
+
+            'check unique on row
+            For i As Integer = 0 To GVBarcode.RowCount - 1
+                If GVBarcode.GetRowCellValue(i, "code").ToString = code_unique And Not i = GVBarcode.FocusedRowHandle Then
+                    code_duplicate = True
+                End If
+            Next
+
+            'check unique on other receiving document
+            Dim q As String = "SELECT * 
+FROM `tb_sample_purc_rec_unique` pru
+INNER JOIN tb_sample_purc_rec pr ON pr.id_sample_purc_rec=pru.id_sample_purc_rec AND pr.id_report_status!=5 AND pr.id_sample_purc_rec!='" & id_receive & "' 
+WHERE pru.sample_unique='" & code_unique & "'"
+            Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
+            If dt.Rows.Count > 0 Then
+                code_duplicate = True
+            End If
+
+            If Not code_found Then
                 GVBarcode.SetFocusedRowCellValue("code", "")
-                stopCustom("Sample quantity received more than quantity ordered.")
+                stopCustom("Sample not found !")
+            ElseIf code_duplicate Then
+                GVBarcode.SetFocusedRowCellValue("code", "")
+                warningCustom("Unique Code duplicate")
             Else
-                GVBarcode.SetFocusedRowCellValue("is_fix", "2")
-                GVBarcode.SetFocusedRowCellValue("id_sample", id_sample)
-                countQty(id_sample)
-                newRowsBc()
+                If GVListPurchase.GetRowCellValue(index_atas, "sample_purc_rec_det_qty") >= GVListPurchase.GetRowCellValue(index_atas, "qty") Then
+                    GVBarcode.SetFocusedRowCellValue("code", "")
+                    stopCustom("Sample quantity received more than quantity ordered.")
+                Else
+                    GVBarcode.SetFocusedRowCellValue("is_fix", "2")
+                    GVBarcode.SetFocusedRowCellValue("id_sample", id_sample)
+                    countQty(id_sample)
+                    newRowsBc()
+                End If
             End If
         End If
+
         Cursor = Cursors.Default
     End Sub
 

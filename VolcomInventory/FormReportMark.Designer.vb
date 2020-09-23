@@ -44,6 +44,8 @@ Partial Class FormReportMark
         Me.GridColumnReportMarkType = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdReport = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnSort = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnIsNeedPrint = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnIsNeedUpload = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GroupControl2 = New DevExpress.XtraEditors.GroupControl()
         Me.BReset = New DevExpress.XtraEditors.SimpleButton()
         Me.PBC = New DevExpress.XtraEditors.ProgressBarControl()
@@ -65,8 +67,6 @@ Partial Class FormReportMark
         Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
         Me.XTCMark = New DevExpress.XtraTab.XtraTabControl()
         Me.XTPApproval = New DevExpress.XtraTab.XtraTabPage()
-        Me.GridColumnIsNeedPrint = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnIsNeedUpload = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl1.SuspendLayout()
         CType(Me.GCMark, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -276,6 +276,18 @@ Partial Class FormReportMark
         '
         Me.GridColumnSort.FieldName = "id_sort"
         Me.GridColumnSort.Name = "GridColumnSort"
+        '
+        'GridColumnIsNeedPrint
+        '
+        Me.GridColumnIsNeedPrint.Caption = "Need Print"
+        Me.GridColumnIsNeedPrint.FieldName = "is_need_print"
+        Me.GridColumnIsNeedPrint.Name = "GridColumnIsNeedPrint"
+        '
+        'GridColumnIsNeedUpload
+        '
+        Me.GridColumnIsNeedUpload.Caption = "Need Upload"
+        Me.GridColumnIsNeedUpload.FieldName = "is_need_upload"
+        Me.GridColumnIsNeedUpload.Name = "GridColumnIsNeedUpload"
         '
         'GroupControl2
         '
@@ -503,18 +515,6 @@ Partial Class FormReportMark
         Me.XTPApproval.Name = "XTPApproval"
         Me.XTPApproval.Size = New System.Drawing.Size(929, 402)
         Me.XTPApproval.Text = "Approval"
-        '
-        'GridColumnIsNeedPrint
-        '
-        Me.GridColumnIsNeedPrint.Caption = "Need Print"
-        Me.GridColumnIsNeedPrint.FieldName = "is_need_print"
-        Me.GridColumnIsNeedPrint.Name = "GridColumnIsNeedPrint"
-        '
-        'GridColumnIsNeedUpload
-        '
-        Me.GridColumnIsNeedUpload.Caption = "Need Upload"
-        Me.GridColumnIsNeedUpload.FieldName = "is_need_upload"
-        Me.GridColumnIsNeedUpload.Name = "GridColumnIsNeedUpload"
         '
         'FormReportMark
         '

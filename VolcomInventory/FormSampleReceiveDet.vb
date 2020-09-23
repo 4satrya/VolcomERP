@@ -424,6 +424,7 @@
                                 execute_non_query(query, True, "", "", "", "")
                             End If
                         Catch ex As Exception
+                            Console.WriteLine(ex.ToString)
                         End Try
                     Next
 
@@ -439,7 +440,7 @@
                     Next
 
                     Try
-                        query = String.Format("INSERT INTO tb_sample_purc_rec_unique(id_sample_purc,id_sample,sample_unique) VALUES {0}", query)
+                        query = String.Format("INSERT INTO tb_sample_purc_rec_unique(id_sample_purc_rec,id_sample,sample_unique) VALUES {0}", query)
                         execute_non_query(query, True, "", "", "", "")
                     Catch ex As Exception
                     End Try

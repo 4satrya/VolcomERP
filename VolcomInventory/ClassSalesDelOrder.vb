@@ -369,7 +369,7 @@
                     AND d.is_old_design=2 AND t.is_use_unique_code=1 "
                 execute_non_query(quniq, True, "", "", "", "")
             Catch ex As Exception
-                stopCustom("failed insert unique :" + ex.ToString)
+                stopCustom("Failed insert unique :" + ex.ToString)
             End Try
 
             'save unreg unique

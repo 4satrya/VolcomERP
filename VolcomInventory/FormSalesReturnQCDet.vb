@@ -90,7 +90,7 @@ Public Class FormSalesReturnQCDet
             BtnBrowseContactTo.Enabled = False
             DDBPrint.Enabled = True
             BtnPrintDetailScan.Enabled = True
-            BMark.Enabled = True
+            BMark.Enabled = False
 
             'query view based on edit id's
             Dim query As String = "SELECT drw.wh_drawer_code, (a.id_wh_drawer) AS id_wh_drawer_to,b.id_sales_return,b.id_wh_drawer, (c2.id_comp) AS id_comp_to_return,(b.id_comp_contact_to) AS id_comp_contact_to_return,a.id_store_contact_from, a.id_comp_contact_to, (d.comp_name) AS store_name_from, (d1.comp_name) AS comp_name_to, (d2.comp_name) AS comp_name_to_return, (d.comp_number) AS store_number_from, IFNULL(d1.id_wh_type,0) AS `id_wh_type`,(d1.comp_number) AS comp_number_to, (d2.comp_number) AS comp_number_to_return,(d.address_primary) AS store_address_from, a.id_report_status, f.report_status, "
@@ -1821,5 +1821,12 @@ Public Class FormSalesReturnQCDet
         Cursor = Cursors.WaitCursor
         printingDetailScan()
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub FormSalesReturnQCDet_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+        If e.KeyCode = Keys.F7 Then
+            FormMenuAuth.type = "8"
+            FormMenuAuth.ShowDialog()
+        End If
     End Sub
 End Class

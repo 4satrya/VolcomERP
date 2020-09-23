@@ -75,17 +75,7 @@
         GVList.ActiveFilterString = "[is_select] = 'yes'"
 
         If GVList.RowCount > 0 Then
-            For i = 0 To GVList.RowCount - 1
-                If GVList.IsValidRowHandle(i) Then
-                    Dim query As String = "UPDATE tb_wh_awbill_det_in SET is_active = 2, updated_date = NOW(), updated_by = " + id_user + " WHERE id_wh_awb_det = " + GVList.GetRowCellValue(i, "id_wh_awb_det").ToString
-
-                    execute_non_query(query, True, "", "", "", "")
-                End If
-            Next
-
-            infoCustom("Status updated.")
-
-            load_form()
+            FormTrackingReturnClosingReason.ShowDialog()
         Else
             stopCustom("Please select surat jalan.")
         End If

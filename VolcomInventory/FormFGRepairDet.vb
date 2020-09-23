@@ -47,7 +47,7 @@ Public Class FormFGRepairDet
             XTPSummary.PageVisible = True
             XtraTabControl1.SelectedTabPageIndex = 1
             GVScan.OptionsBehavior.AutoExpandAllGroups = True
-            BMark.Enabled = True
+            BMark.Enabled = False
             DDBPrint.Enabled = True
 
             'query view based on edit id's
@@ -621,90 +621,118 @@ Public Class FormFGRepairDet
                 If confirm = Windows.Forms.DialogResult.Yes Then
                     Cursor = Cursors.WaitCursor
                     BtnSave.Enabled = False
-                    'main query
-                    Dim is_to_vendor As String = ""
-                    If FormFGRepair.is_to_vendor = True Then
-                        is_to_vendor = "1"
-                    Else
-                        is_to_vendor = "2"
-                    End If
-                    Dim query As String = "INSERT INTO tb_fg_repair(id_wh_drawer_from, id_wh_drawer_to, fg_repair_number, fg_repair_date, fg_repair_note, id_report_status, is_to_vendor,is_use_unique_code) 
-                                           VALUES('" + id_wh_drawer_from + "', '" + id_wh_drawer_to + "','" + header_number_sales("27") + "', NOW(), '" + fg_repair_note + "', '1', '" + is_to_vendor + "','" & is_use_unique_code_wh & "'); SELECT LAST_INSERT_ID(); "
-                    id_fg_repair = execute_query(query, 0, True, "", "", "", "")
-                    increase_inc_sales("27")
+                    Dim err As String = ""
 
-                    'insert who prepared
-                    submit_who_prepared(rmt, id_fg_repair, id_user)
+                    'main query
+                    Try
+                        Dim is_to_vendor As String = ""
+                        If FormFGRepair.is_to_vendor = True Then
+                            is_to_vendor = "1"
+                        Else
+                            is_to_vendor = "2"
+                        End If
+                        Dim query As String = "INSERT INTO tb_fg_repair(id_wh_drawer_from, id_wh_drawer_to, fg_repair_number, fg_repair_date, fg_repair_note, id_report_status, is_to_vendor,is_use_unique_code) 
+                                           VALUES('" + id_wh_drawer_from + "', '" + id_wh_drawer_to + "','" + header_number_sales("27") + "', NOW(), '" + fg_repair_note + "', '1', '" + is_to_vendor + "','" & is_use_unique_code_wh & "'); SELECT LAST_INSERT_ID(); "
+                        id_fg_repair = execute_query(query, 0, True, "", "", "", "")
+                        increase_inc_sales("27")
+                    Catch ex As Exception
+                        err += "[header]:" + ex.ToString + ";"
+                    End Try
+
+
 
                     'Detail 
-                    Dim jum_ins_j As Integer = 0
-                    Dim query_detail As String = ""
-                    If GVScan.RowCount > 0 Then
-                        query_detail = "INSERT tb_fg_repair_det(id_fg_repair, id_product, id_pl_prod_order_rec_det_unique, fg_repair_det_counting) VALUES "
-                    End If
-                    For j As Integer = 0 To ((GVScan.RowCount - 1) - GetGroupRowCount(GVScan))
-                        Dim id_product = GVScan.GetRowCellValue(j, "id_product").ToString
-                        Dim id_pl_prod_order_rec_det_unique = GVScan.GetRowCellValue(j, "id_pl_prod_order_rec_det_unique").ToString
-                        If id_pl_prod_order_rec_det_unique = "0" Then
-                            id_pl_prod_order_rec_det_unique = "NULL"
+                    Try
+                        Dim jum_ins_j As Integer = 0
+                        Dim query_detail As String = ""
+                        If GVScan.RowCount > 0 Then
+                            query_detail = "INSERT tb_fg_repair_det(id_fg_repair, id_product, id_pl_prod_order_rec_det_unique, fg_repair_det_counting) VALUES "
                         End If
-                        Dim fg_repair_det_counting As String = GVScan.GetRowCellValue(j, "fg_repair_det_counting").ToString
+                        For j As Integer = 0 To ((GVScan.RowCount - 1) - GetGroupRowCount(GVScan))
+                            Dim id_product = GVScan.GetRowCellValue(j, "id_product").ToString
+                            Dim id_pl_prod_order_rec_det_unique = GVScan.GetRowCellValue(j, "id_pl_prod_order_rec_det_unique").ToString
+                            If id_pl_prod_order_rec_det_unique = "0" Then
+                                id_pl_prod_order_rec_det_unique = "NULL"
+                            End If
+                            Dim fg_repair_det_counting As String = GVScan.GetRowCellValue(j, "fg_repair_det_counting").ToString
 
+                            If jum_ins_j > 0 Then
+                                query_detail += ", "
+                            End If
+                            query_detail += "('" + id_fg_repair + "', '" + id_product + "', " + id_pl_prod_order_rec_det_unique + ", '" + fg_repair_det_counting + "') "
+                            jum_ins_j = jum_ins_j + 1
+                        Next
                         If jum_ins_j > 0 Then
-                            query_detail += ", "
+                            execute_non_query(query_detail, True, "", "", "", "")
                         End If
-                        query_detail += "('" + id_fg_repair + "', '" + id_product + "', " + id_pl_prod_order_rec_det_unique + ", '" + fg_repair_det_counting + "') "
-                        jum_ins_j = jum_ins_j + 1
-                    Next
-                    If jum_ins_j > 0 Then
-                        execute_non_query(query_detail, True, "", "", "", "")
-                    End If
+                    Catch ex As Exception
+                        err += "[detail]:" + ex.ToString + ";"
+                    End Try
+
 
                     'reserved stock
-                    Dim rsv_stock As ClassFGRepair = New ClassFGRepair()
-                    rsv_stock.reservedStock(id_fg_repair)
+                    Try
+                        Dim rsv_stock As ClassFGRepair = New ClassFGRepair()
+                        rsv_stock.reservedStock(id_fg_repair)
+                    Catch ex As Exception
+                        err += "[reserved_stock]:" + ex.ToString + ";"
+                    End Try
+
 
                     'reserved unique code
-                    If is_use_unique_code_wh = "1" Then
-                        Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`,`id_pl_prod_order_rec_det_unique`, `id_fg_repair_det`,`id_type`,`unique_code`,
-                        `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
-                        SELECT c.id_comp, t.`id_wh_drawer_from`, td.id_product, td.id_pl_prod_order_rec_det_unique,  td.id_fg_repair_det, '8', 
-                        CONCAT(p.product_full_code,td.fg_repair_det_counting), sod.id_design_price, sod.design_price, -1, 1, NOW() 
-                        FROM tb_fg_repair_det td
-                        INNER JOIN tb_fg_repair t ON t.id_fg_repair = td.id_fg_repair
-                        INNER JOIN tb_m_wh_drawer drw_frm ON drw_frm.id_wh_drawer = t.id_wh_drawer_from  
-                        INNER JOIN tb_m_wh_rack rack_frm ON rack_frm.id_wh_rack = drw_frm.id_wh_rack  
-                        INNER JOIN tb_m_wh_locator loc_frm ON loc_frm.id_wh_locator = rack_frm.id_wh_locator  
-                        INNER JOIN tb_m_comp c ON c.id_comp = loc_frm.id_comp  
-                        INNER JOIN tb_m_product p ON p.id_product = td.id_product
-                        INNER JOIN tb_m_design d ON d.id_design = p.id_design
-                        LEFT JOIN( 
-                            SELECT * FROM ( 
-	                        SELECT price.id_design, price.design_price, price.design_price_date, price.id_design_price, 
-	                        price.id_design_price_type, price_type.design_price_type,
-	                        cat.id_design_cat, cat.design_cat
-	                        FROM tb_m_design_price price 
-	                        INNER JOIN tb_lookup_design_price_type price_type ON price.id_design_price_type = price_type.id_design_price_type 
-	                        INNER JOIN tb_lookup_design_cat cat ON cat.id_design_cat = price_type.id_design_cat
-	                        WHERE price.is_active_wh ='1' AND price.design_price_start_date <= NOW() 
-	                        ORDER BY price.design_price_start_date DESC, price.id_design_price DESC 
-                            ) a 
-                            GROUP BY a.id_design 
-                        ) sod ON sod.id_design = d.id_design 
-                                                WHERE t.id_fg_repair=" & id_fg_repair & " AND d.is_old_design=2  AND t.is_use_unique_code=1 "
-                        execute_non_query(quniq, True, "", "", "", "")
+                    Try
+                        If is_use_unique_code_wh = "1" Then
+                            Dim quniq As String = "INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`,`id_pl_prod_order_rec_det_unique`, `id_fg_repair_det`,`id_type`,`unique_code`,
+                            `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`) 
+                            SELECT c.id_comp, t.`id_wh_drawer_from`, td.id_product, td.id_pl_prod_order_rec_det_unique,  td.id_fg_repair_det, '8', 
+                            CONCAT(p.product_full_code,td.fg_repair_det_counting), sod.id_design_price, sod.design_price, -1, 1, NOW() 
+                            FROM tb_fg_repair_det td
+                            INNER JOIN tb_fg_repair t ON t.id_fg_repair = td.id_fg_repair
+                            INNER JOIN tb_m_wh_drawer drw_frm ON drw_frm.id_wh_drawer = t.id_wh_drawer_from  
+                            INNER JOIN tb_m_wh_rack rack_frm ON rack_frm.id_wh_rack = drw_frm.id_wh_rack  
+                            INNER JOIN tb_m_wh_locator loc_frm ON loc_frm.id_wh_locator = rack_frm.id_wh_locator  
+                            INNER JOIN tb_m_comp c ON c.id_comp = loc_frm.id_comp  
+                            INNER JOIN tb_m_product p ON p.id_product = td.id_product
+                            INNER JOIN tb_m_design d ON d.id_design = p.id_design
+                            LEFT JOIN( 
+                                SELECT * FROM ( 
+	                            SELECT price.id_design, price.design_price, price.design_price_date, price.id_design_price, 
+	                            price.id_design_price_type, price_type.design_price_type,
+	                            cat.id_design_cat, cat.design_cat
+	                            FROM tb_m_design_price price 
+	                            INNER JOIN tb_lookup_design_price_type price_type ON price.id_design_price_type = price_type.id_design_price_type 
+	                            INNER JOIN tb_lookup_design_cat cat ON cat.id_design_cat = price_type.id_design_cat
+	                            WHERE price.is_active_wh ='1' AND price.design_price_start_date <= NOW() 
+	                            ORDER BY price.design_price_start_date DESC, price.id_design_price DESC 
+                                ) a 
+                                GROUP BY a.id_design 
+                            ) sod ON sod.id_design = d.id_design 
+                            WHERE t.id_fg_repair=" & id_fg_repair & " AND d.is_old_design=2  AND t.is_use_unique_code=1 "
+                            execute_non_query(quniq, True, "", "", "", "")
+                        End If
+                    Catch ex As Exception
+                        err += "[unique_master]:" + ex.ToString + ";"
+                    End Try
+
+                    If err = "" Then
+                        'insert who prepared
+                        submit_who_prepared(rmt, id_fg_repair, id_user)
+
+                        'refresh data
+                        FormFGRepair.viewData()
+                        FormFGRepair.GVRepair.FocusedRowHandle = find_row(FormFGRepair.GVRepair, "id_fg_repair", id_fg_repair)
+                        action = "upd"
+                        actionLoad()
+
+                        'bof
+                        exportToBOF(False)
+
+                        infoCustom("Document #" + TxtNumber.Text + " was created successfully.")
+                    Else
+                        execute_non_query("INSERT INTO tb_log_trans(id_report, report_mark_type, id_user, log_date, log) VALUES('" + id_fg_repair + "', '" + rmt + "','" + id_user + "',NOW(),'" + addSlashes(err) + "');", True, "", "", "", "")
+                        stopCustom("Save failed. Please contact Administrator.")
                     End If
 
-                    'refresh data
-                    FormFGRepair.viewData()
-                    FormFGRepair.GVRepair.FocusedRowHandle = find_row(FormFGRepair.GVRepair, "id_fg_repair", id_fg_repair)
-                    action = "upd"
-                    actionLoad()
-
-                    'bof
-                    exportToBOF(False)
-
-                    infoCustom("Document #" + TxtNumber.Text + " was created successfully.")
                     Cursor = Cursors.Default
                 End If
             Else 'update
@@ -855,4 +883,10 @@ Public Class FormFGRepairDet
         End Try
     End Sub
 
+    Private Sub FormFGRepairDet_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+        If e.KeyCode = Keys.F7 Then
+            FormMenuAuth.type = "9"
+            FormMenuAuth.ShowDialog()
+        End If
+    End Sub
 End Class

@@ -20,6 +20,7 @@ Partial Class FormTrackingReturn
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.PanelControlFilter = New DevExpress.XtraEditors.PanelControl()
+        Me.CheckEdit = New DevExpress.XtraEditors.CheckEdit()
         Me.SBUpdate = New DevExpress.XtraEditors.SimpleButton()
         Me.DETo = New DevExpress.XtraEditors.DateEdit()
         Me.DEFrom = New DevExpress.XtraEditors.DateEdit()
@@ -45,6 +46,7 @@ Partial Class FormTrackingReturn
         Me.BandedGridColumn1 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumn2 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumn3 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumn24 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumn4 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumn5 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumn6 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
@@ -69,10 +71,10 @@ Partial Class FormTrackingReturn
         Me.RepositoryItemCheckEdit = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.BandedGridColumn19 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumn23 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.BandedGridColumn24 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.CheckEdit = New DevExpress.XtraEditors.CheckEdit()
+        Me.BandedGridColumn25 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         CType(Me.PanelControlFilter, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlFilter.SuspendLayout()
+        CType(Me.CheckEdit.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DETo.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DETo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -84,7 +86,6 @@ Partial Class FormTrackingReturn
         CType(Me.GCList, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVList, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemCheckEdit, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.CheckEdit.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControlFilter
@@ -104,6 +105,15 @@ Partial Class FormTrackingReturn
         Me.PanelControlFilter.Name = "PanelControlFilter"
         Me.PanelControlFilter.Size = New System.Drawing.Size(1086, 45)
         Me.PanelControlFilter.TabIndex = 0
+        '
+        'CheckEdit
+        '
+        Me.CheckEdit.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.CheckEdit.Location = New System.Drawing.Point(913, 12)
+        Me.CheckEdit.Name = "CheckEdit"
+        Me.CheckEdit.Properties.Caption = "Select All"
+        Me.CheckEdit.Size = New System.Drawing.Size(65, 19)
+        Me.CheckEdit.TabIndex = 8929
         '
         'SBUpdate
         '
@@ -276,7 +286,7 @@ Partial Class FormTrackingReturn
         'GVList
         '
         Me.GVList.Bands.AddRange(New DevExpress.XtraGrid.Views.BandedGrid.GridBand() {Me.GridBand1, Me.gridBand2, Me.gridBand3, Me.gridBand4, Me.GBSelect})
-        Me.GVList.Columns.AddRange(New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn() {Me.BandedGridColumn19, Me.BandedGridColumn17, Me.BandedGridColumn1, Me.BandedGridColumn2, Me.BandedGridColumn3, Me.BandedGridColumn24, Me.BandedGridColumn4, Me.BandedGridColumn5, Me.BandedGridColumn6, Me.BandedGridColumn7, Me.BandedGridColumn8, Me.BandedGridColumn9, Me.BandedGridColumn10, Me.BandedGridColumn11, Me.BandedGridColumn12, Me.BandedGridColumn13, Me.BandedGridColumn14, Me.BandedGridColumn15, Me.BandedGridColumn16, Me.BandedGridColumn23, Me.BandedGridColumn22, Me.BandedGridColumn21, Me.BandedGridColumn20, Me.BandedGridColumn18})
+        Me.GVList.Columns.AddRange(New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn() {Me.BandedGridColumn19, Me.BandedGridColumn17, Me.BandedGridColumn1, Me.BandedGridColumn2, Me.BandedGridColumn3, Me.BandedGridColumn24, Me.BandedGridColumn4, Me.BandedGridColumn5, Me.BandedGridColumn6, Me.BandedGridColumn7, Me.BandedGridColumn8, Me.BandedGridColumn9, Me.BandedGridColumn10, Me.BandedGridColumn11, Me.BandedGridColumn12, Me.BandedGridColumn13, Me.BandedGridColumn14, Me.BandedGridColumn15, Me.BandedGridColumn16, Me.BandedGridColumn23, Me.BandedGridColumn22, Me.BandedGridColumn21, Me.BandedGridColumn20, Me.BandedGridColumn25, Me.BandedGridColumn18})
         Me.GVList.GridControl = Me.GCList
         Me.GVList.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty", Me.BandedGridColumn4, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "act_qty", Me.BandedGridColumn5, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "diff_qty", Me.BandedGridColumn6, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_det_qty", Me.BandedGridColumn7, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_problem_qty", Me.BandedGridColumn8, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "diff_qty_ret", Me.BandedGridColumn9, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_qc_det_qty_g78", Me.BandedGridColumn10, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_qc_det_qty_s78", Me.BandedGridColumn11, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_qc_det_qty_rm2", Me.BandedGridColumn12, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_qc_det_qty_gc1", Me.BandedGridColumn13, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_trf", Me.BandedGridColumn14, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "diff_return", Me.BandedGridColumn15, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "diff_sj_fisik", Me.BandedGridColumn16, "{0:N2}")})
         Me.GVList.Name = "GVList"
@@ -334,6 +344,16 @@ Partial Class FormTrackingReturn
         Me.BandedGridColumn3.OptionsColumn.ReadOnly = True
         Me.BandedGridColumn3.Visible = True
         Me.BandedGridColumn3.Width = 84
+        '
+        'BandedGridColumn24
+        '
+        Me.BandedGridColumn24.Caption = "Input Date"
+        Me.BandedGridColumn24.DisplayFormat.FormatString = "dd MMMM yyyy HH:mm:ss"
+        Me.BandedGridColumn24.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.BandedGridColumn24.FieldName = "awbill_date"
+        Me.BandedGridColumn24.Name = "BandedGridColumn24"
+        Me.BandedGridColumn24.OptionsColumn.ReadOnly = True
+        Me.BandedGridColumn24.Visible = True
         '
         'BandedGridColumn4
         '
@@ -517,11 +537,12 @@ Partial Class FormTrackingReturn
         '
         Me.gridBand4.Caption = "Status"
         Me.gridBand4.Columns.Add(Me.BandedGridColumn22)
+        Me.gridBand4.Columns.Add(Me.BandedGridColumn25)
         Me.gridBand4.Columns.Add(Me.BandedGridColumn20)
         Me.gridBand4.Columns.Add(Me.BandedGridColumn21)
         Me.gridBand4.Name = "gridBand4"
         Me.gridBand4.VisibleIndex = 3
-        Me.gridBand4.Width = 225
+        Me.gridBand4.Width = 300
         '
         'BandedGridColumn22
         '
@@ -586,24 +607,13 @@ Partial Class FormTrackingReturn
         Me.BandedGridColumn23.Name = "BandedGridColumn23"
         Me.BandedGridColumn23.OptionsColumn.ReadOnly = True
         '
-        'BandedGridColumn24
+        'BandedGridColumn25
         '
-        Me.BandedGridColumn24.Caption = "Input Date"
-        Me.BandedGridColumn24.DisplayFormat.FormatString = "dd MMMM yyyy HH:mm:ss"
-        Me.BandedGridColumn24.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.BandedGridColumn24.FieldName = "awbill_date"
-        Me.BandedGridColumn24.Name = "BandedGridColumn24"
-        Me.BandedGridColumn24.OptionsColumn.ReadOnly = True
-        Me.BandedGridColumn24.Visible = True
-        '
-        'CheckEdit
-        '
-        Me.CheckEdit.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.CheckEdit.Location = New System.Drawing.Point(913, 12)
-        Me.CheckEdit.Name = "CheckEdit"
-        Me.CheckEdit.Properties.Caption = "Select All"
-        Me.CheckEdit.Size = New System.Drawing.Size(65, 19)
-        Me.CheckEdit.TabIndex = 8929
+        Me.BandedGridColumn25.Caption = "Remark"
+        Me.BandedGridColumn25.FieldName = "remark"
+        Me.BandedGridColumn25.Name = "BandedGridColumn25"
+        Me.BandedGridColumn25.OptionsColumn.ReadOnly = True
+        Me.BandedGridColumn25.Visible = True
         '
         'FormTrackingReturn
         '
@@ -617,6 +627,7 @@ Partial Class FormTrackingReturn
         CType(Me.PanelControlFilter, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControlFilter.ResumeLayout(False)
         Me.PanelControlFilter.PerformLayout()
+        CType(Me.CheckEdit.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DETo.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DETo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -628,7 +639,6 @@ Partial Class FormTrackingReturn
         CType(Me.GCList, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVList, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemCheckEdit, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.CheckEdit.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -685,4 +695,5 @@ Partial Class FormTrackingReturn
     Friend WithEvents BandedGridColumn23 As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents BandedGridColumn24 As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents CheckEdit As DevExpress.XtraEditors.CheckEdit
+    Friend WithEvents BandedGridColumn25 As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
 End Class

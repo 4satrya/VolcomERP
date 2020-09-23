@@ -893,6 +893,7 @@ Partial Class FormFGRepairReturnRecDet
         Me.Controls.Add(Me.barDockControlRight)
         Me.Controls.Add(Me.barDockControlBottom)
         Me.Controls.Add(Me.barDockControlTop)
+        Me.KeyPreview = True
         Me.Name = "FormFGRepairReturnRecDet"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Receive Return Repair Product"

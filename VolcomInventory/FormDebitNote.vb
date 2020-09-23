@@ -230,7 +230,7 @@ GROUP BY rd.`id_prod_order_rec`"
                                 ) dn ON dn.id_reff=fc.id_prod_fc
                                 WHERE fc.id_report_status = '6' AND ISNULL(dn.id_reff) " & q_where & "
                                 GROUP BY fc.`id_prod_fc`
-                                HAVING (amo_claim_minor + amo_claim_major + amo_claim_afkir) > 0"
+                                HAVING (amo_claim_minor + amo_claim_major + amo_claim_afkir) >= 0"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCSumClaimReject.DataSource = data
         GVSumClaimReject.BestFitColumns()

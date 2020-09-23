@@ -67,6 +67,7 @@ Partial Class FormFGRepairDet
         Me.GridColumnCode = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnStyle = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnSize = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnIsOldDesign = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelNavBarcode = New DevExpress.XtraEditors.PanelControl()
         Me.TxtScannedCode = New DevExpress.XtraEditors.TextEdit()
         Me.LblScannedCode = New DevExpress.XtraEditors.LabelControl()
@@ -88,7 +89,6 @@ Partial Class FormFGRepairDet
         Me.GridColumnStatus = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.EPForm = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.SplashScreenManager1 = New DevExpress.XtraSplashScreen.SplashScreenManager(Me, GetType(Global.VolcomMRP.WaitForm), True, True)
-        Me.GridColumnIsOldDesign = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
         CType(Me.TxtNameCompTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -605,6 +605,13 @@ Partial Class FormFGRepairDet
         Me.GridColumnSize.VisibleIndex = 4
         Me.GridColumnSize.Width = 66
         '
+        'GridColumnIsOldDesign
+        '
+        Me.GridColumnIsOldDesign.Caption = "Is Old Design"
+        Me.GridColumnIsOldDesign.FieldName = "is_old_design"
+        Me.GridColumnIsOldDesign.Name = "GridColumnIsOldDesign"
+        Me.GridColumnIsOldDesign.OptionsColumn.AllowEdit = False
+        '
         'PanelNavBarcode
         '
         Me.PanelNavBarcode.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
@@ -812,13 +819,6 @@ Partial Class FormFGRepairDet
         '
         Me.SplashScreenManager1.ClosingDelay = 500
         '
-        'GridColumnIsOldDesign
-        '
-        Me.GridColumnIsOldDesign.Caption = "Is Old Design"
-        Me.GridColumnIsOldDesign.FieldName = "is_old_design"
-        Me.GridColumnIsOldDesign.Name = "GridColumnIsOldDesign"
-        Me.GridColumnIsOldDesign.OptionsColumn.AllowEdit = False
-        '
         'FormFGRepairDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -832,6 +832,7 @@ Partial Class FormFGRepairDet
         Me.Controls.Add(Me.barDockControlRight)
         Me.Controls.Add(Me.barDockControlBottom)
         Me.Controls.Add(Me.barDockControlTop)
+        Me.KeyPreview = True
         Me.MinimizeBox = False
         Me.Name = "FormFGRepairDet"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

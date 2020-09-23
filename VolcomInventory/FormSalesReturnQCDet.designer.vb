@@ -1654,6 +1654,7 @@ Partial Class FormSalesReturnQCDet
         Me.Controls.Add(Me.barDockControlRight)
         Me.Controls.Add(Me.barDockControlBottom)
         Me.Controls.Add(Me.barDockControlTop)
+        Me.KeyPreview = True
         Me.LookAndFeel.SkinName = "Office 2010 Blue"
         Me.LookAndFeel.UseDefaultLookAndFeel = False
         Me.MinimizeBox = False

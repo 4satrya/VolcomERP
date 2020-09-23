@@ -85,7 +85,7 @@ Public Class FormSalesDelOrderDet
             BtnBrowseSO.Enabled = False
             BtnInfoSrs.Enabled = True
             XTPOutboundScanNew.PageEnabled = True
-            BMark.Enabled = True
+            BMark.Enabled = False
             DDBPrint.Enabled = True
 
             'query view based on edit id's
@@ -1777,5 +1777,12 @@ Public Class FormSalesDelOrderDet
         FormSalesDelOrderSlip.ShowDialog()
         Close()
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub FormSalesDelOrderDet_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+        If e.KeyCode = Keys.F7 Then
+            FormMenuAuth.type = "13"
+            FormMenuAuth.ShowDialog()
+        End If
     End Sub
 End Class

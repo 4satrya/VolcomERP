@@ -45,7 +45,7 @@ Public Class FormFGRepairReturnRecDet
             XTPSummary.PageVisible = True
             XtraTabControl1.SelectedTabPageIndex = 1
             GVScan.OptionsBehavior.AutoExpandAllGroups = True
-            BMark.Enabled = True
+            BMark.Enabled = False
             DDBPrint.Enabled = True
 
             'query view based on edit id's
@@ -812,5 +812,12 @@ Public Class FormFGRepairReturnRecDet
         FormPopUpContact.id_departement = id_departement_user
         FormPopUpContact.ShowDialog()
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub FormFGRepairReturnRecDet_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+        If e.KeyCode = Keys.F7 Then
+            FormMenuAuth.type = "10"
+            FormMenuAuth.ShowDialog()
+        End If
     End Sub
 End Class

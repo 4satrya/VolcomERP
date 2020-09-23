@@ -76,6 +76,7 @@ Partial Class FormProductionPLToWHRecDet
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnCategoryComp = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnAddress = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnCompNumber = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.SLEDrawer = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView4 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -151,7 +152,6 @@ Partial Class FormProductionPLToWHRecDet
         Me.BStop = New DevExpress.XtraEditors.SimpleButton()
         Me.BScan = New DevExpress.XtraEditors.SimpleButton()
         Me.EPRet = New System.Windows.Forms.ErrorProvider(Me.components)
-        Me.GridColumnCompNumber = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl3.SuspendLayout()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -806,6 +806,15 @@ Partial Class FormProductionPLToWHRecDet
         Me.GridColumnAddress.Visible = True
         Me.GridColumnAddress.VisibleIndex = 3
         Me.GridColumnAddress.Width = 347
+        '
+        'GridColumnCompNumber
+        '
+        Me.GridColumnCompNumber.Caption = "Code"
+        Me.GridColumnCompNumber.FieldName = "comp_number"
+        Me.GridColumnCompNumber.Name = "GridColumnCompNumber"
+        Me.GridColumnCompNumber.Visible = True
+        Me.GridColumnCompNumber.VisibleIndex = 1
+        Me.GridColumnCompNumber.Width = 107
         '
         'SLEDrawer
         '
@@ -1563,15 +1572,6 @@ Partial Class FormProductionPLToWHRecDet
         '
         Me.EPRet.ContainerControl = Me
         '
-        'GridColumnCompNumber
-        '
-        Me.GridColumnCompNumber.Caption = "Code"
-        Me.GridColumnCompNumber.FieldName = "comp_number"
-        Me.GridColumnCompNumber.Name = "GridColumnCompNumber"
-        Me.GridColumnCompNumber.Visible = True
-        Me.GridColumnCompNumber.VisibleIndex = 1
-        Me.GridColumnCompNumber.Width = 107
-        '
         'FormProductionPLToWHRecDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1585,6 +1585,7 @@ Partial Class FormProductionPLToWHRecDet
         Me.Controls.Add(Me.barDockControlRight)
         Me.Controls.Add(Me.barDockControlBottom)
         Me.Controls.Add(Me.barDockControlTop)
+        Me.KeyPreview = True
         Me.LookAndFeel.SkinName = "Office 2010 Blue"
         Me.LookAndFeel.UseDefaultLookAndFeel = False
         Me.MinimizeBox = False

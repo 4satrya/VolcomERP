@@ -129,6 +129,8 @@ Partial Class FormSalesDelOrderDet
         Me.GridColumnIdProductScan = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnBarcodeName = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnBarcodeSize = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnol_store_id_bar = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnitem_id_bar = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemCheckEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.RepositoryItemSpinEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
         Me.PanelNavBarcode = New DevExpress.XtraEditors.PanelControl()
@@ -151,8 +153,6 @@ Partial Class FormSalesDelOrderDet
         Me.XtraTabPage1 = New DevExpress.XtraTab.XtraTabPage()
         Me.GCTest = New DevExpress.XtraGrid.GridControl()
         Me.GVTest = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.GridColumnol_store_id_bar = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnitem_id_bar = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
         CType(Me.PanelControlTopLeft, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1376,6 +1376,20 @@ Partial Class FormSalesDelOrderDet
         Me.GridColumnBarcodeSize.VisibleIndex = 3
         Me.GridColumnBarcodeSize.Width = 80
         '
+        'GridColumnol_store_id_bar
+        '
+        Me.GridColumnol_store_id_bar.Caption = "OL Store Id"
+        Me.GridColumnol_store_id_bar.FieldName = "ol_store_id"
+        Me.GridColumnol_store_id_bar.Name = "GridColumnol_store_id_bar"
+        Me.GridColumnol_store_id_bar.OptionsColumn.AllowEdit = False
+        '
+        'GridColumnitem_id_bar
+        '
+        Me.GridColumnitem_id_bar.Caption = "Item Id"
+        Me.GridColumnitem_id_bar.FieldName = "item_id"
+        Me.GridColumnitem_id_bar.Name = "GridColumnitem_id_bar"
+        Me.GridColumnitem_id_bar.OptionsColumn.AllowEdit = False
+        '
         'RepositoryItemCheckEdit2
         '
         Me.RepositoryItemCheckEdit2.AutoHeight = False
@@ -1596,20 +1610,6 @@ Partial Class FormSalesDelOrderDet
         Me.GVTest.GridControl = Me.GCTest
         Me.GVTest.Name = "GVTest"
         '
-        'GridColumnol_store_id_bar
-        '
-        Me.GridColumnol_store_id_bar.Caption = "OL Store Id"
-        Me.GridColumnol_store_id_bar.FieldName = "ol_store_id"
-        Me.GridColumnol_store_id_bar.Name = "GridColumnol_store_id_bar"
-        Me.GridColumnol_store_id_bar.OptionsColumn.AllowEdit = False
-        '
-        'GridColumnitem_id_bar
-        '
-        Me.GridColumnitem_id_bar.Caption = "Item Id"
-        Me.GridColumnitem_id_bar.FieldName = "item_id"
-        Me.GridColumnitem_id_bar.Name = "GridColumnitem_id_bar"
-        Me.GridColumnitem_id_bar.OptionsColumn.AllowEdit = False
-        '
         'FormSalesDelOrderDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1622,6 +1622,7 @@ Partial Class FormSalesDelOrderDet
         Me.Controls.Add(Me.barDockControlRight)
         Me.Controls.Add(Me.barDockControlBottom)
         Me.Controls.Add(Me.barDockControlTop)
+        Me.KeyPreview = True
         Me.LookAndFeel.SkinName = "Office 2010 Blue"
         Me.LookAndFeel.UseDefaultLookAndFeel = False
         Me.MinimizeBox = False

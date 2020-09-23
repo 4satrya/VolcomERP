@@ -79,7 +79,7 @@ Public Class FormProductionPLToWHRecDet
             GroupControlRet.Enabled = True
             GroupControlListBarcode.Enabled = True
             BtnInfoSrs.Enabled = True
-            BMark.Enabled = True
+            BMark.Enabled = False
             BtnAttachment.Enabled = True
             DDBPrint.Enabled = True
 
@@ -1382,6 +1382,13 @@ Public Class FormProductionPLToWHRecDet
             e.Value = SLEStorage.Text.Split("-")(0).ToString
         ElseIf e.Column.FieldName = "number" AndAlso e.IsGetData Then
             e.Value = TxtRetOutNumber.Text.ToString
+        End If
+    End Sub
+
+    Private Sub FormProductionPLToWHRecDet_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+        If e.KeyCode = Keys.F7 Then
+            FormMenuAuth.type = "11"
+            FormMenuAuth.ShowDialog()
         End If
     End Sub
 

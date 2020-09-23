@@ -6362,6 +6362,12 @@
     <Compile Include="FormTrackingReturn.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormTrackingReturnClosingReason.Designer.vb">
+      <DependentUpon>FormTrackingReturnClosingReason.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormTrackingReturnClosingReason.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormUniqueCode.Designer.vb">
       <DependentUpon>FormUniqueCode.vb</DependentUpon>
     </Compile>
@@ -12031,6 +12037,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormTrackingReturn.resx">
       <DependentUpon>FormTrackingReturn.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTrackingReturnClosingReason.resx">
+      <DependentUpon>FormTrackingReturnClosingReason.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormUniqueCode.resx">
       <DependentUpon>FormUniqueCode.vb</DependentUpon>

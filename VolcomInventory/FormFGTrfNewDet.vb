@@ -82,7 +82,7 @@ Public Class FormFGTrfNewDet
             GVItemList.OptionsBehavior.AutoExpandAllGroups = True
             XTPOutboundScanNew.PageEnabled = True
             BtnBrowseSO.Enabled = False
-            BMark.Enabled = True
+            BMark.Enabled = False
             DDBPrint.Enabled = True
 
             'query view based on edit id's
@@ -1669,4 +1669,11 @@ Public Class FormFGTrfNewDet
         End If
         Return stt
     End Function
+
+    Private Sub FormFGTrfNewDet_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+        If e.KeyCode = Keys.F7 Then
+            FormMenuAuth.type = "12"
+            FormMenuAuth.ShowDialog()
+        End If
+    End Sub
 End Class

@@ -137,6 +137,8 @@ Partial Class FormSalesReturnDet
         Me.GridColumnNameBC = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnSizeBC = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn15 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnol_store_id_bar = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnitem_id_bar = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemCheckEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.RepositoryItemSpinEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
         Me.PanelNavBarcode = New DevExpress.XtraEditors.PanelControl()
@@ -251,8 +253,6 @@ Partial Class FormSalesReturnDet
         Me.TxtCombineFrom = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl11 = New DevExpress.XtraEditors.LabelControl()
         Me.BtnCombineReturn = New DevExpress.XtraEditors.SimpleButton()
-        Me.GridColumnol_store_id_bar = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnitem_id_bar = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
         CType(Me.PanelControlTopRight, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1573,6 +1573,20 @@ Partial Class FormSalesReturnDet
         Me.GridColumn15.FieldName = "is_unique_report"
         Me.GridColumn15.Name = "GridColumn15"
         '
+        'GridColumnol_store_id_bar
+        '
+        Me.GridColumnol_store_id_bar.Caption = "OL Store Id"
+        Me.GridColumnol_store_id_bar.FieldName = "ol_store_id"
+        Me.GridColumnol_store_id_bar.Name = "GridColumnol_store_id_bar"
+        Me.GridColumnol_store_id_bar.OptionsColumn.AllowEdit = False
+        '
+        'GridColumnitem_id_bar
+        '
+        Me.GridColumnitem_id_bar.Caption = "Item Id"
+        Me.GridColumnitem_id_bar.FieldName = "item_id"
+        Me.GridColumnitem_id_bar.Name = "GridColumnitem_id_bar"
+        Me.GridColumnitem_id_bar.OptionsColumn.AllowEdit = False
+        '
         'RepositoryItemCheckEdit2
         '
         Me.RepositoryItemCheckEdit2.AutoHeight = False
@@ -2644,20 +2658,6 @@ Partial Class FormSalesReturnDet
         Me.BtnCombineReturn.TabIndex = 0
         Me.BtnCombineReturn.Text = "Combine Return"
         '
-        'GridColumnol_store_id_bar
-        '
-        Me.GridColumnol_store_id_bar.Caption = "OL Store Id"
-        Me.GridColumnol_store_id_bar.FieldName = "ol_store_id"
-        Me.GridColumnol_store_id_bar.Name = "GridColumnol_store_id_bar"
-        Me.GridColumnol_store_id_bar.OptionsColumn.AllowEdit = False
-        '
-        'GridColumnitem_id_bar
-        '
-        Me.GridColumnitem_id_bar.Caption = "Item Id"
-        Me.GridColumnitem_id_bar.FieldName = "item_id"
-        Me.GridColumnitem_id_bar.Name = "GridColumnitem_id_bar"
-        Me.GridColumnitem_id_bar.OptionsColumn.AllowEdit = False
-        '
         'FormSalesReturnDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2671,6 +2671,7 @@ Partial Class FormSalesReturnDet
         Me.Controls.Add(Me.barDockControlRight)
         Me.Controls.Add(Me.barDockControlBottom)
         Me.Controls.Add(Me.barDockControlTop)
+        Me.KeyPreview = True
         Me.LookAndFeel.SkinName = "Office 2007 Green"
         Me.MinimizeBox = False
         Me.Name = "FormSalesReturnDet"

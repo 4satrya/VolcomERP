@@ -113,7 +113,7 @@ Public Class FormSalesReturnDet
             GVItemList.OptionsBehavior.AutoExpandAllGroups = True
             BtnBrowseRO.Enabled = False
             BtnInfoSrs.Enabled = True
-            BMark.Enabled = True
+            BMark.Enabled = False
             BtnCreateReturn.Visible = True
             BtnCreateReturnNonList.Visible = True
             BtnCreateNonStock.Visible = True
@@ -1092,6 +1092,7 @@ Public Class FormSalesReturnDet
                 BtnSave.Enabled = False
                 Dim sales_return_store_number As String = TxtStoreReturnNumber.Text
                 Dim sales_return_note As String = addSlashes(MENote.Text)
+                Dim err As String = ""
 
                 If action = "ins" Then
                     'query main table
@@ -1110,105 +1111,121 @@ Public Class FormSalesReturnDet
                         id_wh_awb_det_simpan = id_wh_awb_det
                     End If
 
-                    Dim query_main As String = "INSERT tb_sales_return(id_store_contact_from, id_comp_contact_to, id_sales_return_order, sales_return_number, sales_return_store_number, sales_return_date, sales_return_note,id_wh_drawer ,id_report_status, last_update, last_update_by, id_ret_type, is_use_unique_code, is_non_list, id_wh_awb_det) "
-                    query_main += "VALUES('" + id_store_contact_from + "', '" + id_comp_contact_to + "', '" + id_sales_return_order + "', '" + sales_return_number + "', '" + sales_return_store_number + "', NOW(), '" + sales_return_note + "','" + id_drawer + "', '1', NOW(), " + id_user + ",'" + id_ret_type + "', '" + is_use_unique_code + "', '" + is_non_list + "', " + id_wh_awb_det_simpan + ");SELECT LAST_INSERT_ID(); "
-                    id_sales_return = execute_query(query_main, 0, True, "", "", "", "")
+                    'header
+                    Try
+                        Dim query_main As String = "INSERT tb_sales_return(id_store_contact_from, id_comp_contact_to, id_sales_return_order, sales_return_number, sales_return_store_number, sales_return_date, sales_return_note,id_wh_drawer ,id_report_status, last_update, last_update_by, id_ret_type, is_use_unique_code, is_non_list, id_wh_awb_det) "
+                        query_main += "VALUES('" + id_store_contact_from + "', '" + id_comp_contact_to + "', '" + id_sales_return_order + "', '" + sales_return_number + "', '" + sales_return_store_number + "', NOW(), '" + sales_return_note + "','" + id_drawer + "', '1', NOW(), " + id_user + ",'" + id_ret_type + "', '" + is_use_unique_code + "', '" + is_non_list + "', " + id_wh_awb_det_simpan + ");SELECT LAST_INSERT_ID(); "
+                        id_sales_return = execute_query(query_main, 0, True, "", "", "", "")
 
-                    If id_ret_type = "1" Then
-                        increase_inc_sales("5")
-                        'insert who prepared
-                        insert_who_prepared("46", id_sales_return, id_user)
-                    ElseIf id_ret_type = "3" Then
-                        increase_inc_sales("5")
-                        'insert who prepared
-                        insert_who_prepared("113", id_sales_return, id_user)
-                    ElseIf id_ret_type = "4" Then
-                        increase_inc_sales("5")
-                        'insert who prepared
-                        insert_who_prepared("120", id_sales_return, id_user)
-                    Else
-                        increase_inc_sales("32")
-                        'insert who prepared
-                        insert_who_prepared("111", id_sales_return, id_user)
-                    End If
+                        If id_ret_type = "1" Then
+                            increase_inc_sales("5")
+                            'insert who prepared
+                            insert_who_prepared("46", id_sales_return, id_user)
+                        ElseIf id_ret_type = "3" Then
+                            increase_inc_sales("5")
+                            'insert who prepared
+                            insert_who_prepared("113", id_sales_return, id_user)
+                        ElseIf id_ret_type = "4" Then
+                            increase_inc_sales("5")
+                            'insert who prepared
+                            insert_who_prepared("120", id_sales_return, id_user)
+                        Else
+                            increase_inc_sales("32")
+                            'insert who prepared
+                            insert_who_prepared("111", id_sales_return, id_user)
+                        End If
+                    Catch ex As Exception
+                        err += "[header]:" + ex.ToString + ";"
+                    End Try
+
 
 
                     'Detail return
-                    Dim jum_ins_j As Integer = 0
-                    Dim query_detail As String = ""
-                    GVItemList.ActiveFilterString = "[sales_return_det_qty]>0 "
-                    If GVItemList.RowCount > 0 Then
-                        query_detail = "INSERT tb_sales_return_det(id_sales_return, id_sales_return_order_det, id_product, id_design_price, design_price, sales_return_det_qty, sales_return_det_note) VALUES "
-                    End If
-                    For j As Integer = 0 To ((GVItemList.RowCount - 1) - GetGroupRowCount(GVItemList))
-                        Try
-                            Dim id_sales_return_order_det As String = GVItemList.GetRowCellValue(j, "id_sales_return_order_det").ToString
-                            Dim id_product As String = GVItemList.GetRowCellValue(j, "id_product").ToString
-                            Dim id_design_price As String = GVItemList.GetRowCellValue(j, "id_design_price").ToString
-                            Dim design_price As String = decimalSQL(GVItemList.GetRowCellValue(j, "design_price").ToString)
-                            Dim sales_return_det_qty As String = decimalSQL(GVItemList.GetRowCellValue(j, "sales_return_det_qty").ToString)
-                            Dim sales_return_det_note As String = GVItemList.GetRowCellValue(j, "sales_return_det_note").ToString
+                    Try
+                        Dim jum_ins_j As Integer = 0
+                        Dim query_detail As String = ""
+                        GVItemList.ActiveFilterString = "[sales_return_det_qty]>0 "
+                        If GVItemList.RowCount > 0 Then
+                            query_detail = "INSERT tb_sales_return_det(id_sales_return, id_sales_return_order_det, id_product, id_design_price, design_price, sales_return_det_qty, sales_return_det_note) VALUES "
+                        End If
+                        For j As Integer = 0 To ((GVItemList.RowCount - 1) - GetGroupRowCount(GVItemList))
+                            Try
+                                Dim id_sales_return_order_det As String = GVItemList.GetRowCellValue(j, "id_sales_return_order_det").ToString
+                                Dim id_product As String = GVItemList.GetRowCellValue(j, "id_product").ToString
+                                Dim id_design_price As String = GVItemList.GetRowCellValue(j, "id_design_price").ToString
+                                Dim design_price As String = decimalSQL(GVItemList.GetRowCellValue(j, "design_price").ToString)
+                                Dim sales_return_det_qty As String = decimalSQL(GVItemList.GetRowCellValue(j, "sales_return_det_qty").ToString)
+                                Dim sales_return_det_note As String = GVItemList.GetRowCellValue(j, "sales_return_det_note").ToString
 
-                            If jum_ins_j > 0 Then
-                                query_detail += ", "
-                            End If
-                            query_detail += "('" + id_sales_return + "', '" + id_sales_return_order_det + "', '" + id_product + "', '" + id_design_price + "', '" + design_price + "', '" + sales_return_det_qty + "', '" + sales_return_det_note + "') "
-                            jum_ins_j = jum_ins_j + 1
-                        Catch ex As Exception
-                        End Try
-                    Next
-                    If jum_ins_j > 0 Then
-                        execute_non_query(query_detail, True, "", "", "", "")
-                    End If
-                    GVItemList.ActiveFilterString = ""
+                                If jum_ins_j > 0 Then
+                                    query_detail += ", "
+                                End If
+                                query_detail += "('" + id_sales_return + "', '" + id_sales_return_order_det + "', '" + id_product + "', '" + id_design_price + "', '" + design_price + "', '" + sales_return_det_qty + "', '" + sales_return_det_note + "') "
+                                jum_ins_j = jum_ins_j + 1
+                            Catch ex As Exception
+                            End Try
+                        Next
+                        If jum_ins_j > 0 Then
+                            execute_non_query(query_detail, True, "", "", "", "")
+                        End If
+                        GVItemList.ActiveFilterString = ""
+                    Catch ex As Exception
+                        err += "[detil]:" + ex.ToString + ";"
+                    End Try
+
 
                     'get all detail id
-                    Dim query_get_detail_id As String = ""
-                    If id_ret_type = "4" Then
-                        'online store
-                        query_get_detail_id += "SELECT a.id_sales_return_det, a.id_product, a.id_design_price, a.design_price, sod.ol_store_id, sod.item_id "
-                        query_get_detail_id += "FROM tb_sales_return_det a "
-                        query_get_detail_id += "INNER JOIN tb_sales_return_order_det rod ON rod.id_sales_return_order_det = a.id_sales_return_order_det 
+                    Try
+                        Dim query_get_detail_id As String = ""
+                        If id_ret_type = "4" Then
+                            'online store
+                            query_get_detail_id += "SELECT a.id_sales_return_det, a.id_product, a.id_design_price, a.design_price, sod.ol_store_id, sod.item_id "
+                            query_get_detail_id += "FROM tb_sales_return_det a "
+                            query_get_detail_id += "INNER JOIN tb_sales_return_order_det rod ON rod.id_sales_return_order_det = a.id_sales_return_order_det 
                         INNER JOIN tb_sales_order_det sod ON sod.id_sales_order_det = rod.id_sales_order_det "
-                        query_get_detail_id += "WHERE a.id_sales_return = '" + id_sales_return + "' "
-                    Else
-                        'offline store
-                        query_get_detail_id += "SELECT a.id_sales_return_det, a.id_product, a.id_design_price, a.design_price, '' AS `ol_store_id`, '' AS `item_id` "
-                        query_get_detail_id += "FROM tb_sales_return_det a "
-                        query_get_detail_id += "WHERE a.id_sales_return = '" + id_sales_return + "' "
-                    End If
-                    Dim data_get_detail_id As DataTable = execute_query(query_get_detail_id, -1, True, "", "", "", "")
-
-                    'counting
-                    Dim jum_ins_p As Integer = 0
-                    Dim query_counting As String = ""
-                    If GVBarcode.RowCount > 0 Then
-                        query_counting = "INSERT INTO tb_sales_return_det_counting(id_sales_return_det, id_pl_prod_order_rec_det_unique, sales_return_det_counting, is_unique_report) VALUES "
-                    End If
-                    For p As Integer = 0 To (GVBarcode.RowCount - 1)
-                        Dim id_product_counting As String = GVBarcode.GetRowCellValue(p, "id_product").ToString
-                        Dim id_pl_prod_order_rec_det_unique As String = GVBarcode.GetRowCellValue(p, "id_pl_prod_order_rec_det_unique").ToString
-                        If id_pl_prod_order_rec_det_unique = "0" Then
-                            id_pl_prod_order_rec_det_unique = "NULL "
+                            query_get_detail_id += "WHERE a.id_sales_return = '" + id_sales_return + "' "
+                        Else
+                            'offline store
+                            query_get_detail_id += "SELECT a.id_sales_return_det, a.id_product, a.id_design_price, a.design_price, '' AS `ol_store_id`, '' AS `item_id` "
+                            query_get_detail_id += "FROM tb_sales_return_det a "
+                            query_get_detail_id += "WHERE a.id_sales_return = '" + id_sales_return + "' "
                         End If
-                        Dim sales_return_det_counting As String = GVBarcode.GetRowCellValue(p, "counting_code").ToString
-                        Dim is_unique_report As String = GVBarcode.GetRowCellValue(p, "is_unique_report").ToString
-                        Dim ol_store_id_counting As String = GVBarcode.GetRowCellValue(p, "ol_store_id").ToString
-                        Dim item_id_counting As String = GVBarcode.GetRowCellValue(p, "item_id").ToString
-                        For p1 As Integer = 0 To (data_get_detail_id.Rows.Count - 1)
-                            If id_product_counting = data_get_detail_id.Rows(p1)("id_product").ToString And ol_store_id_counting = data_get_detail_id.Rows(p1)("ol_store_id").ToString And item_id_counting = data_get_detail_id.Rows(p1)("item_id").ToString Then
-                                If jum_ins_p > 0 Then
-                                    query_counting += ", "
-                                End If
-                                query_counting += "('" + data_get_detail_id.Rows(p1)("id_sales_return_det").ToString + "', " + id_pl_prod_order_rec_det_unique + ", '" + sales_return_det_counting + "', '" + is_unique_report + "') "
-                                jum_ins_p = jum_ins_p + 1
-                                Exit For
+                        Dim data_get_detail_id As DataTable = execute_query(query_get_detail_id, -1, True, "", "", "", "")
+
+                        'counting
+                        Dim jum_ins_p As Integer = 0
+                        Dim query_counting As String = ""
+                        If GVBarcode.RowCount > 0 Then
+                            query_counting = "INSERT INTO tb_sales_return_det_counting(id_sales_return_det, id_pl_prod_order_rec_det_unique, sales_return_det_counting, is_unique_report) VALUES "
+                        End If
+                        For p As Integer = 0 To (GVBarcode.RowCount - 1)
+                            Dim id_product_counting As String = GVBarcode.GetRowCellValue(p, "id_product").ToString
+                            Dim id_pl_prod_order_rec_det_unique As String = GVBarcode.GetRowCellValue(p, "id_pl_prod_order_rec_det_unique").ToString
+                            If id_pl_prod_order_rec_det_unique = "0" Then
+                                id_pl_prod_order_rec_det_unique = "NULL "
                             End If
+                            Dim sales_return_det_counting As String = GVBarcode.GetRowCellValue(p, "counting_code").ToString
+                            Dim is_unique_report As String = GVBarcode.GetRowCellValue(p, "is_unique_report").ToString
+                            Dim ol_store_id_counting As String = GVBarcode.GetRowCellValue(p, "ol_store_id").ToString
+                            Dim item_id_counting As String = GVBarcode.GetRowCellValue(p, "item_id").ToString
+                            For p1 As Integer = 0 To (data_get_detail_id.Rows.Count - 1)
+                                If id_product_counting = data_get_detail_id.Rows(p1)("id_product").ToString And ol_store_id_counting = data_get_detail_id.Rows(p1)("ol_store_id").ToString And item_id_counting = data_get_detail_id.Rows(p1)("item_id").ToString Then
+                                    If jum_ins_p > 0 Then
+                                        query_counting += ", "
+                                    End If
+                                    query_counting += "('" + data_get_detail_id.Rows(p1)("id_sales_return_det").ToString + "', " + id_pl_prod_order_rec_det_unique + ", '" + sales_return_det_counting + "', '" + is_unique_report + "') "
+                                    jum_ins_p = jum_ins_p + 1
+                                    Exit For
+                                End If
+                            Next
                         Next
-                    Next
-                    If jum_ins_p > 0 Then
-                        execute_non_query(query_counting, True, "", "", "", "")
-                    End If
+                        If jum_ins_p > 0 Then
+                            execute_non_query(query_counting, True, "", "", "", "")
+                        End If
+                    Catch ex As Exception
+                        err += "[unique_trans]:" + ex.ToString + ";"
+                    End Try
+
 
                     'unik record
                     'If is_use_unique_code = "1" Then
@@ -1217,79 +1234,99 @@ Public Class FormSalesReturnDet
                     'End If
 
                     'reserved unique code
-                    If is_use_unique_code = "1" Then
-                        Dim quniq As String = "DELETE FROM tb_m_unique_code WHERE id_report=" + id_sales_return + " AND report_mark_type=46 AND id_report_status=1;
-                        INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_sales_return_det_counting`,`id_type`,`unique_code`,
-                        `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`, `id_report`, `report_mark_type`, `id_report_status`) 
-                        SELECT cc.id_comp, '" + id_wh_drawer_store + "', td.id_product, tc.id_pl_prod_order_rec_det_unique,tc.id_sales_return_det_counting, '4', 
-                        CONCAT(p.product_full_code,tc.sales_return_det_counting), td.id_design_price, td.design_price, -1, tc.is_unique_report, NOW(),
-                        td.id_sales_return, 46, 1
-                        FROM tb_sales_return_det td
-                        INNER JOIN tb_sales_return t ON t.id_sales_return = td.id_sales_return
-                        INNER JOIN tb_sales_return_det_counting tc ON tc.id_sales_return_det = td.id_sales_return_det
-                        INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact =  t.id_store_contact_from
-                        INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp
-                        INNER JOIN tb_m_product p ON p.id_product = td.id_product
-                        INNER JOIN tb_m_design d ON d.id_design = p.id_design
-                        WHERE t.id_sales_return=" + id_sales_return + "
-                        AND d.is_old_design=2 
-                        AND t.is_use_unique_code=1 "
-                        execute_non_query(quniq, True, "", "", "", "")
-                    End If
+                    Try
+                        If is_use_unique_code = "1" Then
+                            Dim quniq As String = "DELETE FROM tb_m_unique_code WHERE id_report=" + id_sales_return + " AND report_mark_type=46 AND id_report_status=1;
+                            INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_sales_return_det_counting`,`id_type`,`unique_code`,
+                            `id_design_price`,`design_price`,`qty`,`is_unique_report`,`input_date`, `id_report`, `report_mark_type`, `id_report_status`) 
+                            SELECT cc.id_comp, '" + id_wh_drawer_store + "', td.id_product, tc.id_pl_prod_order_rec_det_unique,tc.id_sales_return_det_counting, '4', 
+                            CONCAT(p.product_full_code,tc.sales_return_det_counting), td.id_design_price, td.design_price, -1, tc.is_unique_report, NOW(),
+                            td.id_sales_return, 46, 1
+                            FROM tb_sales_return_det td
+                            INNER JOIN tb_sales_return t ON t.id_sales_return = td.id_sales_return
+                            INNER JOIN tb_sales_return_det_counting tc ON tc.id_sales_return_det = td.id_sales_return_det
+                            INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact =  t.id_store_contact_from
+                            INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp
+                            INNER JOIN tb_m_product p ON p.id_product = td.id_product
+                            INNER JOIN tb_m_design d ON d.id_design = p.id_design
+                            WHERE t.id_sales_return=" + id_sales_return + "
+                            AND d.is_old_design=2 
+                            AND t.is_use_unique_code=1 "
+                            execute_non_query(quniq, True, "", "", "", "")
+                        End If
+                    Catch ex As Exception
+                        err += "[unique_master]:" + ex.ToString + ";"
+                    End Try
+
 
                     'code problem scan
-                    Dim jum_ins_k As Integer = 0
-                    Dim query_problem_stock As String = ""
-                    If GVBarcodeProb.RowCount > 0 Then
-                        query_problem_stock = "INSERT INTO tb_sales_return_problem(id_sales_return, id_product, scanned_code, remark, is_unique_not_found, is_no_stock, id_scan_type) VALUES "
-                    End If
-                    For k As Integer = 0 To ((GVBarcodeProb.RowCount - 1) - GetGroupRowCount(GVBarcodeProb))
-                        Dim id_product As String = GVBarcodeProb.GetRowCellValue(k, "id_product").ToString
-                        Dim scanned_code As String = GVBarcodeProb.GetRowCellValue(k, "code").ToString
-                        Dim remark As String = addSlashes(GVBarcodeProb.GetRowCellValue(k, "remark").ToString)
-                        Dim is_unique_not_found As String = addSlashes(GVBarcodeProb.GetRowCellValue(k, "is_unique_not_found").ToString)
-                        Dim is_no_stock As String = addSlashes(GVBarcodeProb.GetRowCellValue(k, "is_no_stock").ToString)
-                        Dim id_scan_type As String = addSlashes(GVBarcodeProb.GetRowCellValue(k, "id_scan_type").ToString)
-
-                        If jum_ins_k > 0 Then
-                            query_problem_stock += ", "
+                    Try
+                        Dim jum_ins_k As Integer = 0
+                        Dim query_problem_stock As String = ""
+                        If GVBarcodeProb.RowCount > 0 Then
+                            query_problem_stock = "INSERT INTO tb_sales_return_problem(id_sales_return, id_product, scanned_code, remark, is_unique_not_found, is_no_stock, id_scan_type) VALUES "
                         End If
-                        query_problem_stock += "('" + id_sales_return + "','" + id_product + "','" + scanned_code + "', '" + remark + "', " + is_unique_not_found + ", " + is_no_stock + ", " + id_scan_type + ") "
-                        jum_ins_k = jum_ins_k + 1
-                    Next
-                    If jum_ins_k > 0 Then
-                        execute_non_query(query_problem_stock, True, "", "", "", "")
-                    End If
+                        For k As Integer = 0 To ((GVBarcodeProb.RowCount - 1) - GetGroupRowCount(GVBarcodeProb))
+                            Dim id_product As String = GVBarcodeProb.GetRowCellValue(k, "id_product").ToString
+                            Dim scanned_code As String = GVBarcodeProb.GetRowCellValue(k, "code").ToString
+                            Dim remark As String = addSlashes(GVBarcodeProb.GetRowCellValue(k, "remark").ToString)
+                            Dim is_unique_not_found As String = addSlashes(GVBarcodeProb.GetRowCellValue(k, "is_unique_not_found").ToString)
+                            Dim is_no_stock As String = addSlashes(GVBarcodeProb.GetRowCellValue(k, "is_no_stock").ToString)
+                            Dim id_scan_type As String = addSlashes(GVBarcodeProb.GetRowCellValue(k, "id_scan_type").ToString)
+
+                            If jum_ins_k > 0 Then
+                                query_problem_stock += ", "
+                            End If
+                            query_problem_stock += "('" + id_sales_return + "','" + id_product + "','" + scanned_code + "', '" + remark + "', " + is_unique_not_found + ", " + is_no_stock + ", " + id_scan_type + ") "
+                            jum_ins_k = jum_ins_k + 1
+                        Next
+                        If jum_ins_k > 0 Then
+                            execute_non_query(query_problem_stock, True, "", "", "", "")
+                        End If
+                    Catch ex As Exception
+                        err += "[detail_no_stock]:" + ex.ToString + ";"
+                    End Try
+
 
                     'reserved stock
-                    If id_ret_type <> "4" Then 'ol store reserved di ro
-                        Dim stc_rev As ClassSalesReturn = New ClassSalesReturn()
-                        stc_rev.reservedStock(id_sales_return)
-                    End If
+                    Try
+                        If id_ret_type <> "4" Then 'ol store reserved di ro
+                            Dim stc_rev As ClassSalesReturn = New ClassSalesReturn()
+                            stc_rev.reservedStock(id_sales_return)
+                        End If
+                    Catch ex As Exception
+                        err += "[reserved_stock]:" + ex.ToString + ";"
+                    End Try
 
 
-                    If id_ret_type = "1" Then
-                        'submit who prepared
-                        submit_who_prepared("46", id_sales_return, id_user)
-                    ElseIf id_ret_type = "3" Then
-                        'submit who prepared
-                        submit_who_prepared("113", id_sales_return, id_user)
-                    ElseIf id_ret_type = "4" Then
-                        'submit who prepared
-                        submit_who_prepared("120", id_sales_return, id_user)
+                    If err = "" Then
+                        If id_ret_type = "1" Then
+                            'submit who prepared
+                            submit_who_prepared("46", id_sales_return, id_user)
+                        ElseIf id_ret_type = "3" Then
+                            'submit who prepared
+                            submit_who_prepared("113", id_sales_return, id_user)
+                        ElseIf id_ret_type = "4" Then
+                            'submit who prepared
+                            submit_who_prepared("120", id_sales_return, id_user)
+                        Else
+                            'submit who prepared
+                            submit_who_prepared("111", id_sales_return, id_user)
+                        End If
+
+
+                        FormSalesReturn.viewSalesReturn()
+                        FormSalesReturn.viewSalesReturnOrder()
+                        FormSalesReturn.GVSalesReturn.FocusedRowHandle = find_row(FormSalesReturn.GVSalesReturn, "id_sales_return", id_sales_return)
+                        action = "upd"
+                        actionLoad()
+                        exportToBOF(False)
+                        infoCustom("Return #" + sales_return_number + " was created successfully ")
                     Else
-                        'submit who prepared
-                        submit_who_prepared("111", id_sales_return, id_user)
+                        execute_non_query("INSERT INTO tb_log_trans(id_report, report_mark_type, id_user, log_date, log) VALUES('" + id_sales_return + "', '46','" + id_user + "',NOW(),'" + addSlashes(err) + "');", True, "", "", "", "")
+                        stopCustom("Save failed. Please contact Administrator.")
                     End If
 
-
-                    FormSalesReturn.viewSalesReturn()
-                    FormSalesReturn.viewSalesReturnOrder()
-                    FormSalesReturn.GVSalesReturn.FocusedRowHandle = find_row(FormSalesReturn.GVSalesReturn, "id_sales_return", id_sales_return)
-                    action = "upd"
-                    actionLoad()
-                    exportToBOF(False)
-                    infoCustom("Return #" + sales_return_number + " was created successfully ")
                 ElseIf action = "upd" Then
                     'update main table
                     Dim sales_return_number As String = TxtSalesReturnNumber.Text
@@ -2972,5 +3009,12 @@ Public Class FormSalesReturnDet
         "
 
         viewLookupQuery(LUETypeScan, query, 0, "scan_type", "id_scan_type")
+    End Sub
+
+    Private Sub FormSalesReturnDet_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+        If e.KeyCode = Keys.F7 Then
+            FormMenuAuth.type = "7"
+            FormMenuAuth.ShowDialog()
+        End If
     End Sub
 End Class

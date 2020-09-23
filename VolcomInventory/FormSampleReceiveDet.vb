@@ -214,15 +214,15 @@
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCListPurchase.DataSource = data
         If data.Rows.Count > 0 Then
-            For i As Integer = 0 To data.Rows.Count - 1
-                For j As Integer = 0 To data.Rows(i)("sample_purc_rec_det_qty") - 1
-                    GVBarcode.AddNewRow()
-                    GVBarcode.SetFocusedRowCellValue("id_sample", data.Rows(i)("id_sample"))
-                    GVBarcode.SetFocusedRowCellValue("code", data.Rows(i)("code"))
-                    GVBarcode.SetFocusedRowCellValue("is_fix", "2")
-                Next
-            Next
-            GCListPurchase.DataSource = data
+            'For i As Integer = 0 To data.Rows.Count - 1
+            '    For j As Integer = 0 To data.Rows(i)("sample_purc_rec_det_qty") - 1
+            '        GVBarcode.AddNewRow()
+            '        GVBarcode.SetFocusedRowCellValue("id_sample", data.Rows(i)("id_sample"))
+            '        GVBarcode.SetFocusedRowCellValue("code", data.Rows(i)("code"))
+            '        GVBarcode.SetFocusedRowCellValue("is_fix", "2")
+            '    Next
+            'Next
+            viewDetailBC()
             GCBarcode.RefreshDataSource()
             GVBarcode.RefreshData()
         End If
@@ -673,7 +673,14 @@ WHERE pru.sample_unique='" & code_unique & "'"
     End Sub
 
     Sub viewDetailBC()
-        Dim query As String = "SELECT ('0') AS id_sample, ('') AS code, ('') AS no, ('1') AS is_fix "
+        Dim query As String = ""
+        If id_receive = "-1" Then 'new
+            query = "SELECT ('0') AS id_sample, ('') AS code, ('') AS no, ('1') AS is_fix "
+        Else 'update
+            query = "SELECT id_sample,sample_unique AS `code`, '' AS `No`,'2' AS is_fix
+FROM tb_sample_purc_rec_unique
+WHERE id_sample_purc_rec='" & id_receive & "'"
+        End If
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCBarcode.DataSource = data
         GVBarcode.DeleteSelectedRows()
@@ -703,7 +710,6 @@ WHERE pru.sample_unique='" & code_unique & "'"
             If id_sample <> "" Or id_sample <> Nothing Then
                 GVBarcode.ApplyFindFilter("")
                 countQty(id_sample)
-                warningCustom("tes")
             End If
 
             allowDelete()

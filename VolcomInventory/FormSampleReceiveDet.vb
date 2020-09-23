@@ -430,15 +430,19 @@
                     'save unique
                     query = String.Format("DELETE FROM tb_sample_purc_rec_unique WHERE id_sample_purc_rec='{0}'", id_sample_rec_new)
                     execute_non_query(query, True, "", "", "", "")
-                    For i As Integer = 0 To GVListPurchase.RowCount - 1
-                        Try
-                            If Not GVListPurchase.GetRowCellValue(i, "id_sample_purc_det").ToString = "" And isDecimal(nominalWrite(GVListPurchase.GetRowCellValue(i, "sample_purc_rec_det_qty").ToString)) Then
-                                query = String.Format("INSERT INTO tb_sample_purc_rec_det(id_sample_purc_det,id_sample_purc_rec,sample_purc_rec_det_qty,fob_price_update,sample_purc_rec_det_note) VALUES('{0}','{1}','{2}','{3}','{4}')", GVListPurchase.GetRowCellValue(i, "id_sample_purc_det").ToString, id_sample_rec_new, decimalSQL(GVListPurchase.GetRowCellValue(i, "sample_purc_rec_det_qty").ToString), decimalSQL(GVListPurchase.GetRowCellValue(i, "fob_price_update").ToString), GVListPurchase.GetRowCellValue(i, "sample_purc_rec_det_note").ToString)
-                                execute_non_query(query, True, "", "", "", "")
-                            End If
-                        Catch ex As Exception
-                        End Try
+                    query = ""
+                    For i As Integer = 0 To GVBarcode.RowCount - 1
+                        If Not i = 0 Then
+                            query += ","
+                        End If
+                        query += "('" & id_sample_rec_new & "','" & GVBarcode.GetRowCellValue(i, "id_sample").ToString & "','" & GVBarcode.GetRowCellValue(i, "code").ToString & "')"
                     Next
+
+                    Try
+                        query = String.Format("INSERT INTO tb_sample_purc_rec_unique(id_sample_purc,id_sample,sample_unique) VALUES {0}", query)
+                        execute_non_query(query, True, "", "", "", "")
+                    Catch ex As Exception
+                    End Try
 
                     'end insert who prepared
                     FormSampleReceive.view_sample_rec()
@@ -470,6 +474,24 @@
 
                         End Try
                     Next
+
+                    'save unique
+                    query = String.Format("DELETE FROM tb_sample_purc_rec_unique WHERE id_sample_purc_rec='{0}'", id_receive)
+                    execute_non_query(query, True, "", "", "", "")
+                    query = ""
+                    For i As Integer = 0 To GVBarcode.RowCount - 1
+                        If Not i = 0 Then
+                            query += ","
+                        End If
+                        query += "('" & id_receive & "','" & GVBarcode.GetRowCellValue(i, "id_sample").ToString & "','" & GVBarcode.GetRowCellValue(i, "code").ToString & "')"
+                    Next
+
+                    Try
+                        query = String.Format("INSERT INTO tb_sample_purc_rec_unique(id_sample_purc,id_sample,sample_unique) VALUES {0}", query)
+                        execute_non_query(query, True, "", "", "", "")
+                    Catch ex As Exception
+                    End Try
+                    '
 
                     FormSampleReceive.view_sample_rec()
                     FormSampleReceive.GVSampleReceive.FocusedRowHandle = find_row(FormSampleReceive.GVSampleReceive, "id_sample_purc_rec", id_receive)

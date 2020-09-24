@@ -515,4 +515,49 @@
             e.Appearance.BackColor = Color.Empty
         End If
     End Sub
+
+    Private Sub DownloadShippingLabelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DownloadShippingLabelToolStripMenuItem.Click
+        Cursor = Cursors.WaitCursor
+
+        'check store
+        Dim id_sod As String = GVSalesOrder.GetFocusedRowCellValue("id_sales_order").ToString
+
+        Dim id_cg As String = execute_query("
+            SELECT cm.id_comp_group
+            FROM tb_sales_order AS so
+            LEFT JOIN tb_m_comp_contact AS ct ON so.id_store_contact_to = ct.id_comp_contact
+            LEFT JOIN tb_m_comp AS cm ON ct.id_comp = cm.id_comp
+            WHERE so.id_sales_order = " + id_sod + "
+        ", 0, True, "", "", "", "")
+
+        If id_cg = "75" Then
+            Dim item_id As String = execute_query("
+                SELECT item_id
+                FROM tb_sales_order_det
+                WHERE id_sales_order = " + GVSalesOrder.GetFocusedRowCellValue("id_sales_order").ToString + "
+                LIMIT 1
+            ", 0, True, "", "", "", "")
+
+            FormSalesOrderShippingLabelPdf.ol_store = "blibli"
+            FormSalesOrderShippingLabelPdf.order_id = item_id
+
+            FormSalesOrderShippingLabelPdf.ShowDialog()
+        ElseIf id_cg = "64" Then
+            Dim item_id As String = execute_query("
+                SELECT item_id
+                FROM tb_sales_order_det
+                WHERE id_sales_order = " + GVSalesOrder.GetFocusedRowCellValue("id_sales_order").ToString + "
+                LIMIT 1
+            ", 0, True, "", "", "", "")
+
+            FormSalesOrderShippingLabelPdf.ol_store = "zalora"
+            FormSalesOrderShippingLabelPdf.order_id = item_id
+
+            FormSalesOrderShippingLabelPdf.ShowDialog()
+        Else
+            stopCustom("Not found.")
+        End If
+
+        Cursor = Cursors.Default
+    End Sub
 End Class

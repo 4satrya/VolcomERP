@@ -408,10 +408,9 @@
         IFNULL(stt.`status`, 'Pending') AS `ol_store_status`, IFNULL(stt.status_date, sales_order_ol_shop_date) AS `ol_store_date`,
         IFNULL(stt_internal.`status`, '-') AS `ol_store_status_internal`, IFNULL(stt_internal.status_date, sales_order_ol_shop_date) AS `ol_store_date_internal`,
         so.sales_order_ol_shop_date,  so.`customer_name` , so.`shipping_name` , so.`shipping_address`, so.`shipping_phone` , so.`shipping_city` , 
-        so.`shipping_post_code` , so.`shipping_region` , so.`payment_method`, so.`tracking_code`, cg.lead_time_return, so.id_so_status,so_cat.so_status
+        so.`shipping_post_code` , so.`shipping_region` , so.`payment_method`, so.`tracking_code`, cg.lead_time_return, '' AS view_shipping_label
         FROM tb_sales_order so
         INNER JOIN tb_sales_order_det sod ON sod.id_sales_order = so.id_sales_order
-        INNER JOIN tb_lookup_so_status so_cat ON so_cat.id_so_status = so.id_so_status
         LEFT JOIN tb_ol_promo_collection prm ON prm.id_ol_promo_collection = sod.id_ol_promo_collection
         LEFT JOIN (
             SELECT * FROM (
@@ -1134,5 +1133,36 @@
 
     Private Sub BtnViewPromoDetail_Click(sender As Object, e As EventArgs) Handles BtnViewPromoDetail.Click
         viewDetailPromo()
+    End Sub
+
+    Private Sub RepoBtnViewShippingLabel_Click(sender As Object, e As EventArgs) Handles RepoBtnViewShippingLabel.Click
+        Cursor = Cursors.WaitCursor
+
+        'check store
+        Dim id_sod As String = GVDetail.GetFocusedRowCellValue("id_order").ToString
+
+        Dim id_cg As String = execute_query("
+            SELECT cm.id_comp_group
+            FROM tb_sales_order AS so
+            LEFT JOIN tb_m_comp_contact AS ct ON so.id_store_contact_to = ct.id_comp_contact
+            LEFT JOIN tb_m_comp AS cm ON ct.id_comp = cm.id_comp
+            WHERE so.id_sales_order = " + id_sod + "
+        ", 0, True, "", "", "", "")
+
+        If id_cg = "75" Then
+            FormSalesOrderShippingLabelPdf.ol_store = "blibli"
+            FormSalesOrderShippingLabelPdf.order_id = GVDetail.GetFocusedRowCellValue("item_id").ToString
+
+            FormSalesOrderShippingLabelPdf.ShowDialog()
+        ElseIf id_cg = "64" Then
+            FormSalesOrderShippingLabelPdf.ol_store = "zalora"
+            FormSalesOrderShippingLabelPdf.order_id = GVDetail.GetFocusedRowCellValue("item_id").ToString
+
+            FormSalesOrderShippingLabelPdf.ShowDialog()
+        Else
+            stopCustom("Not found.")
+        End If
+
+        Cursor = Cursors.Default
     End Sub
 End Class

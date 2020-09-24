@@ -217,6 +217,17 @@ WHERE pd.`id_report_status` != '5' AND pdd.`id_design`='" & id_design & "' AND p
                 query = String.Format("UPDATE tb_m_design SET prod_order_cop_pd='{1}',prod_order_cop_pd_addcost='{5}',prod_order_cop_kurs_pd='{2}',prod_order_cop_pd_vendor={3},prod_order_cop_pd_curr='{4}',is_cold_storage='{6}' WHERE id_design='{0}'", id_design, decimalSQL((TEEcop.EditValue + TEAdditionalCost.EditValue).ToString), decimalSQL(TEKurs.EditValue.ToString), id_c, LECurrency.EditValue.ToString, decimalSQL(TEAdditionalCost.EditValue.ToString), SLEColdStorage.EditValue.ToString)
                 execute_non_query(query, True, "", "", "", "")
                 infoCustom("ECOP entry success.")
+                'send email
+                Try
+                    Dim nm As New ClassSendEmail
+                    nm.par1 = id_design
+                    nm.report_mark_type = "267"
+                    nm.send_email()
+                Catch ex As Exception
+                    execute_query("INSERT INTO tb_error_mail(date,description) VALUES(NOW(),'Failed send COP PD id_design = " & id_design & "')", -1, True, "", "", "", "")
+                End Try
+
+
                 FormMasterDesignCOP.view_design()
                 FormMasterDesignCOP.BGVDesign.FocusedRowHandle = find_row_as_is(FormMasterDesignCOP.BGVDesign, "id_design", id_design)
                 Close()

@@ -203,13 +203,14 @@
     Public Sub changeStatus(ByVal id_report_par As String, ByVal id_status_reportx_par As String)
         'rollback stock if cancelled and complerted
         If id_status_reportx_par = "6" Then
-            Dim qso As String = "SELECT d.id_sales_order, so.id_so_status 
+            Dim qso As String = "SELECT d.id_sales_order, so.id_so_status, IFNULL(so.sales_order_ol_shop_date,NOW()) AS `order_date`
             FROM tb_pl_sales_order_del d 
             INNER JOIN tb_sales_order so ON so.id_sales_order = d.id_sales_order
             WHERE d.id_pl_sales_order_del='" + id_report_par + "' "
             Dim dso As DataTable = execute_query(qso, -1, True, "", "", "", "")
             Dim id_so As String = dso.Rows(0)("id_sales_order").ToString
             Dim id_so_status As String = dso.Rows(0)("id_so_status").ToString
+            Dim ol_order_date As String = DateTime.Parse(dso.Rows(0)("order_date").ToString).ToString("yyyy-MM-dd")
 
             If id_so_status <> "14" And id_so_status <> "15" Then
                 'reguler
@@ -270,14 +271,24 @@
                 execute_non_query(query_complete, True, "", "", "", "")
 
                 'INVOCIE
+                'get kurs trans
+                Dim query_kurs As String = "SELECT * FROM tb_kurs_trans a WHERE DATE(a.created_date) <= '" + ol_order_date + "' ORDER BY a.created_date DESC LIMIT 1"
+                Dim data_kurs As DataTable = execute_query(query_kurs, -1, True, "", "", "", "")
+                Dim kurs_trans As String = ""
+                If Not data_kurs.Rows.Count > 0 Then
+                    kurs_trans = "0"
+                Else
+                    kurs_trans = decimalSQL(data_kurs.Rows(0)("kurs_trans").ToString)
+                End If
+
                 'main
-                Dim query_inv As String = "INSERT INTO tb_sales_pos(id_store_contact_from,id_comp_contact_bill , sales_pos_number, sales_pos_date, sales_pos_note, id_report_status, id_so_type, sales_pos_total, sales_pos_due_date, sales_pos_start_period, sales_pos_end_period, sales_pos_discount, sales_pos_potongan, sales_pos_vat, id_pl_sales_order_del,id_memo_type,id_inv_type, id_sales_pos_ref, report_mark_type, is_use_unique_code, id_acc_ar, id_acc_sales, id_acc_sales_return) 
+                Dim query_inv As String = "INSERT INTO tb_sales_pos(id_store_contact_from,id_comp_contact_bill , sales_pos_number, sales_pos_date, sales_pos_note, id_report_status, id_so_type, sales_pos_total, sales_pos_due_date, sales_pos_start_period, sales_pos_end_period, sales_pos_discount, sales_pos_potongan, sales_pos_vat, id_pl_sales_order_del,id_memo_type,id_inv_type, id_sales_pos_ref, report_mark_type, is_use_unique_code, id_acc_ar, id_acc_sales, id_acc_sales_return, kurs_trans) 
                 SELECT del.id_store_contact_to AS id_store_contact_from,NULL AS id_comp_contact_bill , '" + header_number_sales("6") + "' AS sales_pos_number, 
                 DATE(NOW()) AS sales_pos_date, 
                 '' AS sales_pos_note, 6 AS id_report_status, 0 AS id_so_type, 0 AS sales_pos_total, DATE_ADD(DATE(so.sales_order_ol_shop_date),INTERVAL IFNULL(sd.due,0) DAY) AS sales_pos_due_date, 
                 so.sales_order_ol_shop_date AS sales_pos_start_period,so.sales_order_ol_shop_date AS sales_pos_end_period,
                 c.comp_commission AS sales_pos_discount, SUM(sod.discount) AS sales_pos_potongan, o.vat_inv_default AS sales_pos_vat, del.id_pl_sales_order_del, 1 AS id_memo_type,0 AS id_inv_type, NULL AS id_sales_pos_ref, 48 AS report_mark_type,o.is_use_unique_code_all AS is_use_unique_code, 
-                c.id_acc_ar, c.id_acc_sales, c.id_acc_sales_return 
+                c.id_acc_ar, c.id_acc_sales, c.id_acc_sales_return, '" + kurs_trans + "'
                 FROM tb_pl_sales_order_del del 
                 INNER JOIN tb_sales_order so ON so.id_sales_order = del.id_sales_order
                 INNER JOIN tb_sales_order_det sod ON sod.id_sales_order = so.id_sales_order

@@ -49,6 +49,7 @@ Partial Class FormBuktiPickupPick
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
         Me.SBClose = New DevExpress.XtraEditors.SimpleButton()
         Me.SBAdd = New DevExpress.XtraEditors.SimpleButton()
+        Me.GridColumnTrackingCode = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.SLUECompany.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -189,7 +190,7 @@ Partial Class FormBuktiPickupPick
         '
         'GVList
         '
-        Me.GVList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnSelect, Me.GridColumnIdDel, Me.GridColumnNumber, Me.GridColumnCombinedDelivery, Me.GridColumnWarehouse, Me.GridColumnStore, Me.GridColumnStoreGroup, Me.GridColumnPrepareOrder, Me.GridColumnOLStoreOrder, Me.GridColumnCategory, Me.GridColumnTotalDelivery, Me.GridColumnCreatedDate})
+        Me.GVList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnSelect, Me.GridColumnIdDel, Me.GridColumnNumber, Me.GridColumnCombinedDelivery, Me.GridColumnWarehouse, Me.GridColumnStore, Me.GridColumnStoreGroup, Me.GridColumnPrepareOrder, Me.GridColumnOLStoreOrder, Me.GridColumnCategory, Me.GridColumnTotalDelivery, Me.GridColumnCreatedDate, Me.GridColumnTrackingCode})
         Me.GVList.GridControl = Me.GCList
         Me.GVList.Name = "GVList"
         Me.GVList.OptionsFind.AlwaysVisible = True
@@ -238,6 +239,7 @@ Partial Class FormBuktiPickupPick
         Me.GridColumnCombinedDelivery.OptionsColumn.AllowEdit = False
         Me.GridColumnCombinedDelivery.Visible = True
         Me.GridColumnCombinedDelivery.VisibleIndex = 2
+        Me.GridColumnCombinedDelivery.Width = 99
         '
         'GridColumnWarehouse
         '
@@ -246,7 +248,7 @@ Partial Class FormBuktiPickupPick
         Me.GridColumnWarehouse.Name = "GridColumnWarehouse"
         Me.GridColumnWarehouse.OptionsColumn.AllowEdit = False
         Me.GridColumnWarehouse.Visible = True
-        Me.GridColumnWarehouse.VisibleIndex = 3
+        Me.GridColumnWarehouse.VisibleIndex = 4
         '
         'GridColumnStore
         '
@@ -255,7 +257,7 @@ Partial Class FormBuktiPickupPick
         Me.GridColumnStore.Name = "GridColumnStore"
         Me.GridColumnStore.OptionsColumn.AllowEdit = False
         Me.GridColumnStore.Visible = True
-        Me.GridColumnStore.VisibleIndex = 4
+        Me.GridColumnStore.VisibleIndex = 5
         '
         'GridColumnStoreGroup
         '
@@ -264,7 +266,7 @@ Partial Class FormBuktiPickupPick
         Me.GridColumnStoreGroup.Name = "GridColumnStoreGroup"
         Me.GridColumnStoreGroup.OptionsColumn.AllowEdit = False
         Me.GridColumnStoreGroup.Visible = True
-        Me.GridColumnStoreGroup.VisibleIndex = 5
+        Me.GridColumnStoreGroup.VisibleIndex = 6
         '
         'GridColumnPrepareOrder
         '
@@ -273,7 +275,8 @@ Partial Class FormBuktiPickupPick
         Me.GridColumnPrepareOrder.Name = "GridColumnPrepareOrder"
         Me.GridColumnPrepareOrder.OptionsColumn.AllowEdit = False
         Me.GridColumnPrepareOrder.Visible = True
-        Me.GridColumnPrepareOrder.VisibleIndex = 6
+        Me.GridColumnPrepareOrder.VisibleIndex = 7
+        Me.GridColumnPrepareOrder.Width = 90
         '
         'GridColumnOLStoreOrder
         '
@@ -282,7 +285,8 @@ Partial Class FormBuktiPickupPick
         Me.GridColumnOLStoreOrder.Name = "GridColumnOLStoreOrder"
         Me.GridColumnOLStoreOrder.OptionsColumn.AllowEdit = False
         Me.GridColumnOLStoreOrder.Visible = True
-        Me.GridColumnOLStoreOrder.VisibleIndex = 7
+        Me.GridColumnOLStoreOrder.VisibleIndex = 8
+        Me.GridColumnOLStoreOrder.Width = 83
         '
         'GridColumnCategory
         '
@@ -291,7 +295,7 @@ Partial Class FormBuktiPickupPick
         Me.GridColumnCategory.Name = "GridColumnCategory"
         Me.GridColumnCategory.OptionsColumn.AllowEdit = False
         Me.GridColumnCategory.Visible = True
-        Me.GridColumnCategory.VisibleIndex = 8
+        Me.GridColumnCategory.VisibleIndex = 9
         '
         'GridColumnTotalDelivery
         '
@@ -303,7 +307,8 @@ Partial Class FormBuktiPickupPick
         Me.GridColumnTotalDelivery.OptionsColumn.AllowEdit = False
         Me.GridColumnTotalDelivery.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total", "{0:N0}")})
         Me.GridColumnTotalDelivery.Visible = True
-        Me.GridColumnTotalDelivery.VisibleIndex = 9
+        Me.GridColumnTotalDelivery.VisibleIndex = 10
+        Me.GridColumnTotalDelivery.Width = 76
         '
         'GridColumnCreatedDate
         '
@@ -314,7 +319,7 @@ Partial Class FormBuktiPickupPick
         Me.GridColumnCreatedDate.Name = "GridColumnCreatedDate"
         Me.GridColumnCreatedDate.OptionsColumn.AllowEdit = False
         Me.GridColumnCreatedDate.Visible = True
-        Me.GridColumnCreatedDate.VisibleIndex = 10
+        Me.GridColumnCreatedDate.VisibleIndex = 11
         '
         'PanelControl2
         '
@@ -345,6 +350,16 @@ Partial Class FormBuktiPickupPick
         Me.SBAdd.Size = New System.Drawing.Size(90, 45)
         Me.SBAdd.TabIndex = 3
         Me.SBAdd.Text = "Add"
+        '
+        'GridColumnTrackingCode
+        '
+        Me.GridColumnTrackingCode.Caption = "Tracking Code"
+        Me.GridColumnTrackingCode.FieldName = "tracking_code"
+        Me.GridColumnTrackingCode.Name = "GridColumnTrackingCode"
+        Me.GridColumnTrackingCode.OptionsColumn.AllowEdit = False
+        Me.GridColumnTrackingCode.Visible = True
+        Me.GridColumnTrackingCode.VisibleIndex = 3
+        Me.GridColumnTrackingCode.Width = 78
         '
         'FormBuktiPickupPick
         '
@@ -405,4 +420,5 @@ Partial Class FormBuktiPickupPick
     Friend WithEvents SearchLookUpEdit1View As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GCIdComp As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GCCompany As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnTrackingCode As DevExpress.XtraGrid.Columns.GridColumn
 End Class

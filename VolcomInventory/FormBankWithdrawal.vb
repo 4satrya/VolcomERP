@@ -705,14 +705,14 @@ WHERE c.id_comp='" & SLEVendorExpense.EditValue & "'"
                 End Try
             Next
 
-            'cooperative
-            Dim data_cooperative As DataTable = execute_query("CALL view_payroll_sum('" + data.Rows(i)("id_payroll").ToString + "')", -1, True, "", "", "", "")
+            Dim data_salary As DataTable = execute_query("CALL view_payroll_sum('" + data.Rows(i)("id_payroll").ToString + "')", -1, True, "", "", "", "")
 
+            'cooperative
             Dim total_cooperative As Integer = 0
 
-            For j = 0 To data_cooperative.Rows.Count - 1
+            For j = 0 To data_salary.Rows.Count - 1
                 Try
-                    total_cooperative += data_cooperative.Rows(j)("d_cooperative_contribution") + data_cooperative.Rows(j)("d_cooperative_loan")
+                    total_cooperative += data_salary.Rows(j)("d_cooperative_contribution") + data_salary.Rows(j)("d_cooperative_loan")
                 Catch ex As Exception
                 End Try
             Next
@@ -734,11 +734,35 @@ WHERE c.id_comp='" & SLEVendorExpense.EditValue & "'"
                 row_cooperative("amount") = total_cooperative
 
                 data.Rows.Add(row_cooperative)
+            End If
 
-                'data.Rows.InsertAt(row_cooperative, i + 1)
+            'cash
+            Dim total_cash As Integer = 0
 
-                'i += 1
-                'r += 2
+            For j = 0 To data_salary.Rows.Count - 1
+                Try
+                    total_cash += data_salary.Rows(j)("total_cash")
+                Catch ex As Exception
+                End Try
+            Next
+
+            If total_cash > 0 Then
+                total = total - total_cash
+            End If
+
+            data.Rows(i)("amount") = total
+
+            If total_cash > 0 Then
+                Dim row_cash As DataRow = data.NewRow
+
+                row_cash("is_check") = "no"
+                row_cash("id_payroll") = data.Rows(i)("id_payroll")
+                row_cash("report_number") = data.Rows(i)("report_number").ToString
+                row_cash("payroll_periode") = data.Rows(i)("payroll_periode").ToString
+                row_cash("payroll_type") = data.Rows(i)("payroll_type").ToString + " (Cash)"
+                row_cash("amount") = total_cash
+
+                data.Rows.Add(row_cash)
             End If
 
             i += 1

@@ -3640,6 +3640,12 @@
     <Compile Include="FormReportBalanceSheet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormReportBalanceSheetTax.Designer.vb">
+      <DependentUpon>FormReportBalanceSheetTax.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormReportBalanceSheetTax.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormReportBudget.Designer.vb">
       <DependentUpon>FormReportBudget.vb</DependentUpon>
     </Compile>
@@ -10337,6 +10343,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormReportBalanceSheet.resx">
       <DependentUpon>FormReportBalanceSheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormReportBalanceSheetTax.resx">
+      <DependentUpon>FormReportBalanceSheetTax.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormReportBudget.resx">
       <DependentUpon>FormReportBudget.vb</DependentUpon>

@@ -64,6 +64,7 @@ Partial Class FormTrackingReturn
         Me.BandedGridColumn16 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.gridBand4 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         Me.BandedGridColumn22 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumn25 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumn20 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumn21 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.GBSelect = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
@@ -71,7 +72,6 @@ Partial Class FormTrackingReturn
         Me.RepositoryItemCheckEdit = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.BandedGridColumn19 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumn23 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.BandedGridColumn25 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         CType(Me.PanelControlFilter, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlFilter.SuspendLayout()
         CType(Me.CheckEdit.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -358,34 +358,34 @@ Partial Class FormTrackingReturn
         'BandedGridColumn4
         '
         Me.BandedGridColumn4.Caption = "Qty  SJ"
-        Me.BandedGridColumn4.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumn4.DisplayFormat.FormatString = "N0"
         Me.BandedGridColumn4.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.BandedGridColumn4.FieldName = "qty"
         Me.BandedGridColumn4.Name = "BandedGridColumn4"
         Me.BandedGridColumn4.OptionsColumn.ReadOnly = True
-        Me.BandedGridColumn4.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty", "{0:N2}")})
+        Me.BandedGridColumn4.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty", "{0:N0}")})
         Me.BandedGridColumn4.Visible = True
         '
         'BandedGridColumn5
         '
         Me.BandedGridColumn5.Caption = "Qty Fisik"
-        Me.BandedGridColumn5.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumn5.DisplayFormat.FormatString = "N0"
         Me.BandedGridColumn5.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.BandedGridColumn5.FieldName = "act_qty"
         Me.BandedGridColumn5.Name = "BandedGridColumn5"
         Me.BandedGridColumn5.OptionsColumn.ReadOnly = True
-        Me.BandedGridColumn5.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "act_qty", "{0:N2}")})
+        Me.BandedGridColumn5.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "act_qty", "{0:N0}")})
         Me.BandedGridColumn5.Visible = True
         '
         'BandedGridColumn6
         '
         Me.BandedGridColumn6.Caption = "Diff Qty"
-        Me.BandedGridColumn6.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumn6.DisplayFormat.FormatString = "N0"
         Me.BandedGridColumn6.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.BandedGridColumn6.FieldName = "diff_qty"
         Me.BandedGridColumn6.Name = "BandedGridColumn6"
         Me.BandedGridColumn6.OptionsColumn.ReadOnly = True
-        Me.BandedGridColumn6.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "diff_qty", "{0:N2}")})
+        Me.BandedGridColumn6.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "diff_qty", "{0:N0}")})
         Me.BandedGridColumn6.UnboundExpression = "[act_qty] - [qty]"
         Me.BandedGridColumn6.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
         Me.BandedGridColumn6.Visible = True
@@ -403,34 +403,34 @@ Partial Class FormTrackingReturn
         'BandedGridColumn7
         '
         Me.BandedGridColumn7.Caption = "Return"
-        Me.BandedGridColumn7.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumn7.DisplayFormat.FormatString = "N0"
         Me.BandedGridColumn7.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.BandedGridColumn7.FieldName = "sales_return_det_qty"
         Me.BandedGridColumn7.Name = "BandedGridColumn7"
         Me.BandedGridColumn7.OptionsColumn.ReadOnly = True
-        Me.BandedGridColumn7.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_det_qty", "{0:N2}")})
+        Me.BandedGridColumn7.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_det_qty", "{0:N0}")})
         Me.BandedGridColumn7.Visible = True
         '
         'BandedGridColumn8
         '
         Me.BandedGridColumn8.Caption = "No Stock"
-        Me.BandedGridColumn8.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumn8.DisplayFormat.FormatString = "N0"
         Me.BandedGridColumn8.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.BandedGridColumn8.FieldName = "sales_return_problem_qty"
         Me.BandedGridColumn8.Name = "BandedGridColumn8"
         Me.BandedGridColumn8.OptionsColumn.ReadOnly = True
-        Me.BandedGridColumn8.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_problem_qty", "{0:N2}")})
+        Me.BandedGridColumn8.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_problem_qty", "{0:N0}")})
         Me.BandedGridColumn8.Visible = True
         '
         'BandedGridColumn9
         '
         Me.BandedGridColumn9.Caption = "Diff Qty"
-        Me.BandedGridColumn9.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumn9.DisplayFormat.FormatString = "N0"
         Me.BandedGridColumn9.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.BandedGridColumn9.FieldName = "diff_qty_ret"
         Me.BandedGridColumn9.Name = "BandedGridColumn9"
         Me.BandedGridColumn9.OptionsColumn.ReadOnly = True
-        Me.BandedGridColumn9.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "diff_qty_ret", "{0:N2}")})
+        Me.BandedGridColumn9.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "diff_qty_ret", "{0:N0}")})
         Me.BandedGridColumn9.UnboundExpression = "[sales_return_det_qty] - [act_qty]"
         Me.BandedGridColumn9.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
         Me.BandedGridColumn9.Visible = True
@@ -452,56 +452,56 @@ Partial Class FormTrackingReturn
         'BandedGridColumn10
         '
         Me.BandedGridColumn10.Caption = "G78"
-        Me.BandedGridColumn10.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumn10.DisplayFormat.FormatString = "N0"
         Me.BandedGridColumn10.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.BandedGridColumn10.FieldName = "sales_return_qc_det_qty_g78"
         Me.BandedGridColumn10.Name = "BandedGridColumn10"
         Me.BandedGridColumn10.OptionsColumn.ReadOnly = True
-        Me.BandedGridColumn10.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_qc_det_qty_g78", "{0:N2}")})
+        Me.BandedGridColumn10.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_qc_det_qty_g78", "{0:N0}")})
         Me.BandedGridColumn10.Visible = True
         '
         'BandedGridColumn11
         '
         Me.BandedGridColumn11.Caption = "S78"
-        Me.BandedGridColumn11.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumn11.DisplayFormat.FormatString = "N0"
         Me.BandedGridColumn11.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.BandedGridColumn11.FieldName = "sales_return_qc_det_qty_s78"
         Me.BandedGridColumn11.Name = "BandedGridColumn11"
         Me.BandedGridColumn11.OptionsColumn.ReadOnly = True
-        Me.BandedGridColumn11.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_qc_det_qty_s78", "{0:N2}")})
+        Me.BandedGridColumn11.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_qc_det_qty_s78", "{0:N0}")})
         Me.BandedGridColumn11.Visible = True
         '
         'BandedGridColumn12
         '
         Me.BandedGridColumn12.Caption = "RM2"
-        Me.BandedGridColumn12.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumn12.DisplayFormat.FormatString = "N0"
         Me.BandedGridColumn12.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.BandedGridColumn12.FieldName = "sales_return_qc_det_qty_rm2"
         Me.BandedGridColumn12.Name = "BandedGridColumn12"
         Me.BandedGridColumn12.OptionsColumn.ReadOnly = True
-        Me.BandedGridColumn12.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_qc_det_qty_rm2", "{0:N2}")})
+        Me.BandedGridColumn12.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_qc_det_qty_rm2", "{0:N0}")})
         Me.BandedGridColumn12.Visible = True
         '
         'BandedGridColumn13
         '
         Me.BandedGridColumn13.Caption = "GC1"
-        Me.BandedGridColumn13.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumn13.DisplayFormat.FormatString = "N0"
         Me.BandedGridColumn13.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.BandedGridColumn13.FieldName = "sales_return_qc_det_qty_gc1"
         Me.BandedGridColumn13.Name = "BandedGridColumn13"
         Me.BandedGridColumn13.OptionsColumn.ReadOnly = True
-        Me.BandedGridColumn13.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_qc_det_qty_gc1", "{0:N2}")})
+        Me.BandedGridColumn13.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_qc_det_qty_gc1", "{0:N0}")})
         Me.BandedGridColumn13.Visible = True
         '
         'BandedGridColumn14
         '
         Me.BandedGridColumn14.Caption = "Total Trf"
-        Me.BandedGridColumn14.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumn14.DisplayFormat.FormatString = "N0"
         Me.BandedGridColumn14.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.BandedGridColumn14.FieldName = "total_trf"
         Me.BandedGridColumn14.Name = "BandedGridColumn14"
         Me.BandedGridColumn14.OptionsColumn.ReadOnly = True
-        Me.BandedGridColumn14.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_trf", "{0:N2}")})
+        Me.BandedGridColumn14.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_trf", "{0:N0}")})
         Me.BandedGridColumn14.UnboundExpression = "[sales_return_qc_det_qty_g78] + [sales_return_qc_det_qty_s78] + [sales_return_qc_" &
     "det_qty_rm2] + [sales_return_qc_det_qty_gc1]"
         Me.BandedGridColumn14.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
@@ -510,12 +510,12 @@ Partial Class FormTrackingReturn
         'BandedGridColumn15
         '
         Me.BandedGridColumn15.Caption = "Diff Return"
-        Me.BandedGridColumn15.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumn15.DisplayFormat.FormatString = "N0"
         Me.BandedGridColumn15.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.BandedGridColumn15.FieldName = "diff_return"
         Me.BandedGridColumn15.Name = "BandedGridColumn15"
         Me.BandedGridColumn15.OptionsColumn.ReadOnly = True
-        Me.BandedGridColumn15.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "diff_return", "{0:N2}")})
+        Me.BandedGridColumn15.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "diff_return", "{0:N0}")})
         Me.BandedGridColumn15.UnboundExpression = "[total_trf] - [sales_return_det_qty]"
         Me.BandedGridColumn15.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
         Me.BandedGridColumn15.Visible = True
@@ -523,12 +523,12 @@ Partial Class FormTrackingReturn
         'BandedGridColumn16
         '
         Me.BandedGridColumn16.Caption = "Diff SJ Fisik"
-        Me.BandedGridColumn16.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumn16.DisplayFormat.FormatString = "N0"
         Me.BandedGridColumn16.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.BandedGridColumn16.FieldName = "diff_sj_fisik"
         Me.BandedGridColumn16.Name = "BandedGridColumn16"
         Me.BandedGridColumn16.OptionsColumn.ReadOnly = True
-        Me.BandedGridColumn16.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "diff_sj_fisik", "{0:N2}")})
+        Me.BandedGridColumn16.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "diff_sj_fisik", "{0:N0}")})
         Me.BandedGridColumn16.UnboundExpression = "[total_trf] - [act_qty]"
         Me.BandedGridColumn16.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
         Me.BandedGridColumn16.Visible = True
@@ -551,6 +551,14 @@ Partial Class FormTrackingReturn
         Me.BandedGridColumn22.Name = "BandedGridColumn22"
         Me.BandedGridColumn22.OptionsColumn.ReadOnly = True
         Me.BandedGridColumn22.Visible = True
+        '
+        'BandedGridColumn25
+        '
+        Me.BandedGridColumn25.Caption = "Remark"
+        Me.BandedGridColumn25.FieldName = "remark"
+        Me.BandedGridColumn25.Name = "BandedGridColumn25"
+        Me.BandedGridColumn25.OptionsColumn.ReadOnly = True
+        Me.BandedGridColumn25.Visible = True
         '
         'BandedGridColumn20
         '
@@ -606,14 +614,6 @@ Partial Class FormTrackingReturn
         Me.BandedGridColumn23.FieldName = "is_active"
         Me.BandedGridColumn23.Name = "BandedGridColumn23"
         Me.BandedGridColumn23.OptionsColumn.ReadOnly = True
-        '
-        'BandedGridColumn25
-        '
-        Me.BandedGridColumn25.Caption = "Remark"
-        Me.BandedGridColumn25.FieldName = "remark"
-        Me.BandedGridColumn25.Name = "BandedGridColumn25"
-        Me.BandedGridColumn25.OptionsColumn.ReadOnly = True
-        Me.BandedGridColumn25.Visible = True
         '
         'FormTrackingReturn
         '

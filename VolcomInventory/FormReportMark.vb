@@ -1103,12 +1103,14 @@
                     'update storage
                     query_upd_storage += "VALUES('" + id_wh_drawer + "', '1', '" + id_sample + "', '" + sample_return_det_qty + "', NOW(), 'Completed, Sample Receive No. : " + sample_return_number + "','" + id_report + "','" + report_mark_type + "','1','" + id_sample_price + "','" + decimalSQL(sample_price.ToString) + "')"
                     execute_non_query(query_upd_storage, True, "", "", "", "")
+
                     'update stored
                     Dim query_upd_stored As String = "UPDATE tb_sample_purc_rec_det SET sample_purc_rec_det_qty_stored = sample_purc_rec_det_qty WHERE id_sample_purc_rec_det='" & id_sample_purc_rec_det & "' "
                     execute_non_query(query_upd_stored, True, "", "", "", "")
 
                     'update unique
-
+                    Dim q As String = ""
+                    execute_non_query(q, True, "", "", "", "")
                 Next
 
                 'email notifikasi
@@ -3887,7 +3889,7 @@ WHERE a.id_adj_in_fg = '" & id_report & "'"
                             ) a 
                             GROUP BY a.id_design 
                         ) sod ON sod.id_design = d.id_design 
-                                                WHERE t.id_fg_repair=" & id_report & " AND d.is_old_design=2  AND t.is_use_unique_code=1 "
+                        WHERE t.id_fg_repair=" & id_report & " AND d.is_old_design=2  AND t.is_use_unique_code=1 "
                 execute_non_query(quniq, True, "", "", "", "")
             ElseIf id_status_reportx = "6" Then
                 Dim compl As New ClassFGRepair()

@@ -176,6 +176,7 @@ Partial Class FormABGRoyaltyZone
         Me.GridColumnquarter.Caption = "QUARTER"
         Me.GridColumnquarter.FieldName = "quarter"
         Me.GridColumnquarter.Name = "GridColumnquarter"
+        Me.GridColumnquarter.OptionsFilter.FilterPopupMode = DevExpress.XtraGrid.Columns.FilterPopupMode.CheckedList
         Me.GridColumnquarter.Visible = True
         Me.GridColumnquarter.VisibleIndex = 0
         '
@@ -186,6 +187,7 @@ Partial Class FormABGRoyaltyZone
         Me.GridColumninvoice_date.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.GridColumninvoice_date.FieldName = "invoice_date"
         Me.GridColumninvoice_date.Name = "GridColumninvoice_date"
+        Me.GridColumninvoice_date.OptionsFilter.FilterPopupMode = DevExpress.XtraGrid.Columns.FilterPopupMode.CheckedList
         Me.GridColumninvoice_date.Visible = True
         Me.GridColumninvoice_date.VisibleIndex = 1
         '
@@ -194,6 +196,7 @@ Partial Class FormABGRoyaltyZone
         Me.GridColumncustomer.Caption = "Customer"
         Me.GridColumncustomer.FieldName = "customer"
         Me.GridColumncustomer.Name = "GridColumncustomer"
+        Me.GridColumncustomer.OptionsFilter.FilterPopupMode = DevExpress.XtraGrid.Columns.FilterPopupMode.CheckedList
         Me.GridColumncustomer.Visible = True
         Me.GridColumncustomer.VisibleIndex = 2
         '
@@ -202,6 +205,7 @@ Partial Class FormABGRoyaltyZone
         Me.GridColumnsku.Caption = "SKU"
         Me.GridColumnsku.FieldName = "sku"
         Me.GridColumnsku.Name = "GridColumnsku"
+        Me.GridColumnsku.OptionsFilter.FilterPopupMode = DevExpress.XtraGrid.Columns.FilterPopupMode.CheckedList
         Me.GridColumnsku.Visible = True
         Me.GridColumnsku.VisibleIndex = 3
         '
@@ -210,6 +214,7 @@ Partial Class FormABGRoyaltyZone
         Me.GridColumnteritory.Caption = "Teritory"
         Me.GridColumnteritory.FieldName = "teritory"
         Me.GridColumnteritory.Name = "GridColumnteritory"
+        Me.GridColumnteritory.OptionsFilter.FilterPopupMode = DevExpress.XtraGrid.Columns.FilterPopupMode.CheckedList
         Me.GridColumnteritory.Visible = True
         Me.GridColumnteritory.VisibleIndex = 4
         '
@@ -218,6 +223,7 @@ Partial Class FormABGRoyaltyZone
         Me.GridColumndistribution_method.Caption = "Distribution Method"
         Me.GridColumndistribution_method.FieldName = "distribution_method"
         Me.GridColumndistribution_method.Name = "GridColumndistribution_method"
+        Me.GridColumndistribution_method.OptionsFilter.FilterPopupMode = DevExpress.XtraGrid.Columns.FilterPopupMode.CheckedList
         Me.GridColumndistribution_method.Visible = True
         Me.GridColumndistribution_method.VisibleIndex = 5
         '
@@ -226,6 +232,7 @@ Partial Class FormABGRoyaltyZone
         Me.GridColumnproperty.Caption = "PROPERTY"
         Me.GridColumnproperty.FieldName = "property"
         Me.GridColumnproperty.Name = "GridColumnproperty"
+        Me.GridColumnproperty.OptionsFilter.FilterPopupMode = DevExpress.XtraGrid.Columns.FilterPopupMode.CheckedList
         Me.GridColumnproperty.Visible = True
         Me.GridColumnproperty.VisibleIndex = 6
         '
@@ -234,6 +241,7 @@ Partial Class FormABGRoyaltyZone
         Me.GridColumncategory.Caption = "CATEGORY"
         Me.GridColumncategory.FieldName = "category"
         Me.GridColumncategory.Name = "GridColumncategory"
+        Me.GridColumncategory.OptionsFilter.FilterPopupMode = DevExpress.XtraGrid.Columns.FilterPopupMode.CheckedList
         Me.GridColumncategory.Visible = True
         Me.GridColumncategory.VisibleIndex = 7
         '
@@ -244,6 +252,7 @@ Partial Class FormABGRoyaltyZone
         Me.GridColumnqty.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnqty.FieldName = "qty"
         Me.GridColumnqty.Name = "GridColumnqty"
+        Me.GridColumnqty.OptionsFilter.FilterPopupMode = DevExpress.XtraGrid.Columns.FilterPopupMode.CheckedList
         Me.GridColumnqty.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty", "{0:N0}")})
         Me.GridColumnqty.Visible = True
         Me.GridColumnqty.VisibleIndex = 8
@@ -255,6 +264,7 @@ Partial Class FormABGRoyaltyZone
         Me.GridColumnunit_price.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnunit_price.FieldName = "unit_price"
         Me.GridColumnunit_price.Name = "GridColumnunit_price"
+        Me.GridColumnunit_price.OptionsFilter.FilterPopupMode = DevExpress.XtraGrid.Columns.FilterPopupMode.CheckedList
         '
         'GridColumnunit_price_usd
         '
@@ -263,6 +273,7 @@ Partial Class FormABGRoyaltyZone
         Me.GridColumnunit_price_usd.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnunit_price_usd.FieldName = "unit_price_usd"
         Me.GridColumnunit_price_usd.Name = "GridColumnunit_price_usd"
+        Me.GridColumnunit_price_usd.OptionsFilter.FilterPopupMode = DevExpress.XtraGrid.Columns.FilterPopupMode.CheckedList
         Me.GridColumnunit_price_usd.Visible = True
         Me.GridColumnunit_price_usd.VisibleIndex = 9
         Me.GridColumnunit_price_usd.Width = 104
@@ -274,6 +285,7 @@ Partial Class FormABGRoyaltyZone
         Me.GridColumngross_sales.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumngross_sales.FieldName = "gross_sales"
         Me.GridColumngross_sales.Name = "GridColumngross_sales"
+        Me.GridColumngross_sales.OptionsFilter.FilterPopupMode = DevExpress.XtraGrid.Columns.FilterPopupMode.CheckedList
         Me.GridColumngross_sales.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "gross_sales", "{0:N0}")})
         '
         'GridColumngross_sales_usd
@@ -283,6 +295,7 @@ Partial Class FormABGRoyaltyZone
         Me.GridColumngross_sales_usd.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumngross_sales_usd.FieldName = "gross_sales_usd"
         Me.GridColumngross_sales_usd.Name = "GridColumngross_sales_usd"
+        Me.GridColumngross_sales_usd.OptionsFilter.FilterPopupMode = DevExpress.XtraGrid.Columns.FilterPopupMode.CheckedList
         Me.GridColumngross_sales_usd.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "gross_sales_usd", "{0:N2}")})
         Me.GridColumngross_sales_usd.Visible = True
         Me.GridColumngross_sales_usd.VisibleIndex = 10
@@ -295,6 +308,7 @@ Partial Class FormABGRoyaltyZone
         Me.GridColumnsales_tax_or_disc.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnsales_tax_or_disc.FieldName = "sales_tax_or_disc"
         Me.GridColumnsales_tax_or_disc.Name = "GridColumnsales_tax_or_disc"
+        Me.GridColumnsales_tax_or_disc.OptionsFilter.FilterPopupMode = DevExpress.XtraGrid.Columns.FilterPopupMode.CheckedList
         Me.GridColumnsales_tax_or_disc.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_tax_or_disc", "{0:N0}")})
         Me.GridColumnsales_tax_or_disc.Width = 119
         '
@@ -305,6 +319,7 @@ Partial Class FormABGRoyaltyZone
         Me.GridColumnsales_tax_usd.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnsales_tax_usd.FieldName = "sales_tax_usd"
         Me.GridColumnsales_tax_usd.Name = "GridColumnsales_tax_usd"
+        Me.GridColumnsales_tax_usd.OptionsFilter.FilterPopupMode = DevExpress.XtraGrid.Columns.FilterPopupMode.CheckedList
         Me.GridColumnsales_tax_usd.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_tax_usd", "{0:N2}")})
         Me.GridColumnsales_tax_usd.Visible = True
         Me.GridColumnsales_tax_usd.VisibleIndex = 11
@@ -315,6 +330,7 @@ Partial Class FormABGRoyaltyZone
         Me.GridColumnallowance_mkd.Caption = "Allowance/Markdowns"
         Me.GridColumnallowance_mkd.FieldName = "allowance_mkd"
         Me.GridColumnallowance_mkd.Name = "GridColumnallowance_mkd"
+        Me.GridColumnallowance_mkd.OptionsFilter.FilterPopupMode = DevExpress.XtraGrid.Columns.FilterPopupMode.CheckedList
         Me.GridColumnallowance_mkd.Visible = True
         Me.GridColumnallowance_mkd.VisibleIndex = 12
         '
@@ -325,6 +341,7 @@ Partial Class FormABGRoyaltyZone
         Me.GridColumnnet_sales.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnnet_sales.FieldName = "net_sales"
         Me.GridColumnnet_sales.Name = "GridColumnnet_sales"
+        Me.GridColumnnet_sales.OptionsFilter.FilterPopupMode = DevExpress.XtraGrid.Columns.FilterPopupMode.CheckedList
         Me.GridColumnnet_sales.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "net_sales", "{0:N2}")})
         '
         'GridColumnnet_sales_usd
@@ -334,6 +351,7 @@ Partial Class FormABGRoyaltyZone
         Me.GridColumnnet_sales_usd.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnnet_sales_usd.FieldName = "net_sales_usd"
         Me.GridColumnnet_sales_usd.Name = "GridColumnnet_sales_usd"
+        Me.GridColumnnet_sales_usd.OptionsFilter.FilterPopupMode = DevExpress.XtraGrid.Columns.FilterPopupMode.CheckedList
         Me.GridColumnnet_sales_usd.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "net_sales_usd", "{0:N2}")})
         Me.GridColumnnet_sales_usd.Visible = True
         Me.GridColumnnet_sales_usd.VisibleIndex = 13
@@ -343,6 +361,7 @@ Partial Class FormABGRoyaltyZone
         Me.GridColumnroyalty_rate.Caption = "Royalty Rate"
         Me.GridColumnroyalty_rate.FieldName = "royalty_rate"
         Me.GridColumnroyalty_rate.Name = "GridColumnroyalty_rate"
+        Me.GridColumnroyalty_rate.OptionsFilter.FilterPopupMode = DevExpress.XtraGrid.Columns.FilterPopupMode.CheckedList
         Me.GridColumnroyalty_rate.Visible = True
         Me.GridColumnroyalty_rate.VisibleIndex = 14
         '
@@ -351,6 +370,7 @@ Partial Class FormABGRoyaltyZone
         Me.GridColumnearned_royalty.Caption = "Earned Royalties "
         Me.GridColumnearned_royalty.FieldName = "earned_royalty"
         Me.GridColumnearned_royalty.Name = "GridColumnearned_royalty"
+        Me.GridColumnearned_royalty.OptionsFilter.FilterPopupMode = DevExpress.XtraGrid.Columns.FilterPopupMode.CheckedList
         Me.GridColumnearned_royalty.Visible = True
         Me.GridColumnearned_royalty.VisibleIndex = 15
         '
@@ -359,6 +379,7 @@ Partial Class FormABGRoyaltyZone
         Me.GridColumncmf_rate.Caption = "CMF Rate"
         Me.GridColumncmf_rate.FieldName = "cmf_rate"
         Me.GridColumncmf_rate.Name = "GridColumncmf_rate"
+        Me.GridColumncmf_rate.OptionsFilter.FilterPopupMode = DevExpress.XtraGrid.Columns.FilterPopupMode.CheckedList
         Me.GridColumncmf_rate.Visible = True
         Me.GridColumncmf_rate.VisibleIndex = 16
         '
@@ -367,6 +388,7 @@ Partial Class FormABGRoyaltyZone
         Me.GridColumnearned_cmf.Caption = "Earned CMF"
         Me.GridColumnearned_cmf.FieldName = "earned_cmf"
         Me.GridColumnearned_cmf.Name = "GridColumnearned_cmf"
+        Me.GridColumnearned_cmf.OptionsFilter.FilterPopupMode = DevExpress.XtraGrid.Columns.FilterPopupMode.CheckedList
         Me.GridColumnearned_cmf.Visible = True
         Me.GridColumnearned_cmf.VisibleIndex = 17
         '
@@ -375,6 +397,7 @@ Partial Class FormABGRoyaltyZone
         Me.GridColumntotal_earned_royalties.Caption = "Total Earned Royalties)"
         Me.GridColumntotal_earned_royalties.FieldName = "total_earned_royalties"
         Me.GridColumntotal_earned_royalties.Name = "GridColumntotal_earned_royalties"
+        Me.GridColumntotal_earned_royalties.OptionsFilter.FilterPopupMode = DevExpress.XtraGrid.Columns.FilterPopupMode.CheckedList
         Me.GridColumntotal_earned_royalties.Visible = True
         Me.GridColumntotal_earned_royalties.VisibleIndex = 18
         '
@@ -383,6 +406,7 @@ Partial Class FormABGRoyaltyZone
         Me.GridColumnexemption_reason.Caption = "Exemption Reason"
         Me.GridColumnexemption_reason.FieldName = "exemption_reason"
         Me.GridColumnexemption_reason.Name = "GridColumnexemption_reason"
+        Me.GridColumnexemption_reason.OptionsFilter.FilterPopupMode = DevExpress.XtraGrid.Columns.FilterPopupMode.CheckedList
         Me.GridColumnexemption_reason.Visible = True
         Me.GridColumnexemption_reason.VisibleIndex = 19
         '
@@ -391,6 +415,7 @@ Partial Class FormABGRoyaltyZone
         Me.GridColumnfob.Caption = "FOB"
         Me.GridColumnfob.FieldName = "fob"
         Me.GridColumnfob.Name = "GridColumnfob"
+        Me.GridColumnfob.OptionsFilter.FilterPopupMode = DevExpress.XtraGrid.Columns.FilterPopupMode.CheckedList
         Me.GridColumnfob.Visible = True
         Me.GridColumnfob.VisibleIndex = 20
         '
@@ -399,6 +424,7 @@ Partial Class FormABGRoyaltyZone
         Me.GridColumncurrency.Caption = "Currency"
         Me.GridColumncurrency.FieldName = "currency"
         Me.GridColumncurrency.Name = "GridColumncurrency"
+        Me.GridColumncurrency.OptionsFilter.FilterPopupMode = DevExpress.XtraGrid.Columns.FilterPopupMode.CheckedList
         Me.GridColumncurrency.Visible = True
         Me.GridColumncurrency.VisibleIndex = 21
         '

@@ -163,7 +163,7 @@ RIGHT(d.design_display_name,3) AS color,LEFT(d.design_display_name,LENGTH(d.desi
 ,NOW() as date_now
 ,IF(a.cps2_verify=2,'Not verified','Verified') AS sts_verify,a.cps2_verify_note,a.cps2_verify_date
 FROM tb_prod_order a 
-INNER JOIN tb_prod_order_det pod ON pod.id_prod_order=a.id_prod_order 
+INNER JOIN tb_prod_order_det pod ON pod.id_prod_order=a.id_prod_order AND a.id_report_status!=5 
 INNER JOIN tb_prod_demand_design b ON a.id_prod_demand_design = b.id_prod_demand_design 
 INNER JOIN tb_lookup_report_status c ON a.id_report_status = c.id_report_status 
 INNER JOIN tb_m_design d ON b.id_design = d.id_design 
@@ -230,66 +230,72 @@ GROUP BY a.id_prod_order"
         Dim is_ok As Boolean = True
 
         GVProd.ActiveFilterString = "[is_check]='yes'"
-        GridColumnSeasonView.GroupIndex = -1
-        GridColumnDelivery.GroupIndex = -1
 
-        If GVProd.RowCount > 1 Then
-            For i As Integer = 0 To GVProd.RowCount - 1
-                If Not GVProd.IsGroupRow(i) Then
-                    'Console.WriteLine(GVProd.GetRowCellValue(0, "id_comp_contact").ToString & " - " & GVProd.GetRowCellValue(i, "id_comp_contact").ToString)
-                    If Not GVProd.GetRowCellValue(0, "id_comp_contact").ToString = GVProd.GetRowCellValue(i, "id_comp_contact").ToString Then
-                        is_ok = False
-                        warningCustom("Different vendor contact selected")
-                        Exit For
+        'confimation
+        Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure you want to continue this process ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+        If confirm = Windows.Forms.DialogResult.Yes Then
+            GridColumnSeasonView.GroupIndex = -1
+            GridColumnDelivery.GroupIndex = -1
+
+            If GVProd.RowCount > 1 Then
+                For i As Integer = 0 To GVProd.RowCount - 1
+                    If Not GVProd.IsGroupRow(i) Then
+                        'Console.WriteLine(GVProd.GetRowCellValue(0, "id_comp_contact").ToString & " - " & GVProd.GetRowCellValue(i, "id_comp_contact").ToString)
+                        If Not GVProd.GetRowCellValue(0, "id_comp_contact").ToString = GVProd.GetRowCellValue(i, "id_comp_contact").ToString Then
+                            is_ok = False
+                            warningCustom("Different vendor contact selected")
+                            Exit For
+                        End If
                     End If
-                End If
-            Next
-            '
-        ElseIf GVProd.RowCount < 1 Then
-            is_ok = False
-            warningCustom("No FGPO selected")
-        End If
+                Next
+                '
+            ElseIf GVProd.RowCount < 1 Then
+                is_ok = False
+                warningCustom("No FGPO selected")
+            End If
 
-        If is_ok Then
-            '
-            Dim id_user_purc_mngr As String = execute_query("SELECT usr.id_user 
+            If is_ok Then
+                '
+                Dim id_user_purc_mngr As String = execute_query("SELECT usr.id_user 
 FROM tb_m_departement dep
 INNER JOIN tb_m_user usr ON usr.`id_user`=dep.id_user_head
 WHERE dep.id_departement=4", 0, True, "", "", "", "")
 
-            Dim id_user_sample_mngr As String = get_opt_prod_field("id_user_sample_mngr")
-            Dim id_user_sample As String = get_opt_prod_field("id_user_sample")
+                Dim id_user_sample_mngr As String = get_opt_prod_field("id_user_sample_mngr")
+                Dim id_user_sample As String = get_opt_prod_field("id_user_sample")
 
-            Dim query_copy_proto2 As String = "INSERT INTO tb_prod_order_cps2(`revision`,`id_comp_contact`,`date_created`,`created_by`,id_user_purc_mngr,id_user_sample,id_user_sample_mngr) VALUES('0','" & GVProd.GetFocusedRowCellValue("id_comp_contact").ToString & "',NOW(),'" & id_user & "','" & id_user_purc_mngr & "','" & id_user_sample & "','" & id_user_sample_mngr & "'); SELECT LAST_INSERT_ID(); "
-            Dim id_copy_proto2 As String = execute_query(query_copy_proto2, 0, True, "", "", "", "")
-            'insert po
-            Dim query_kpd As String = "INSERT INTO tb_prod_order_cps2_det(`id_prod_order_cps2`,`revision`,`id_prod_order`,`eta_copy_proto_2`) VALUES"
-            For i As Integer = 0 To GVProd.RowCount - 1
-                If Not i = 0 Then
-                    query_kpd += ","
-                End If
-                '
-                query_kpd += "('" & id_copy_proto2 & "','0','" & GVProd.GetRowCellValue(i, "id_prod_order").ToString & "',DATE(NOW()))"
-            Next
+                Dim query_copy_proto2 As String = "INSERT INTO tb_prod_order_cps2(`revision`,`id_comp_contact`,`date_created`,`created_by`,id_user_purc_mngr,id_user_sample,id_user_sample_mngr) VALUES('0','" & GVProd.GetFocusedRowCellValue("id_comp_contact").ToString & "',NOW(),'" & id_user & "','" & id_user_purc_mngr & "','" & id_user_sample & "','" & id_user_sample_mngr & "'); SELECT LAST_INSERT_ID(); "
+                Dim id_copy_proto2 As String = execute_query(query_copy_proto2, 0, True, "", "", "", "")
+                'insert po
+                Dim query_kpd As String = "INSERT INTO tb_prod_order_cps2_det(`id_prod_order_cps2`,`revision`,`id_prod_order`,`eta_copy_proto_2`) VALUES"
+                For i As Integer = 0 To GVProd.RowCount - 1
+                    If Not i = 0 Then
+                        query_kpd += ","
+                    End If
+                    '
+                    query_kpd += "('" & id_copy_proto2 & "','0','" & GVProd.GetRowCellValue(i, "id_prod_order").ToString & "',DATE(NOW()))"
+                Next
 
-            execute_non_query(query_kpd, True, "", "", "", "")
-            'generate cps2 number
-            query_copy_proto2 = "SELECT COUNT(*)+1+IF(YEAR(CURRENT_DATE())<'2020',1,0) 
+                execute_non_query(query_kpd, True, "", "", "", "")
+                'generate cps2 number
+                query_copy_proto2 = "SELECT COUNT(*)+1+IF(YEAR(CURRENT_DATE())<'2020',1,0) 
 INTO @number_report 
 FROM 
 (SELECT * FROM `tb_prod_order_cps2` WHERE YEAR(date_created) = YEAR(CURRENT_DATE()) GROUP BY id_prod_order_cps2_reff) kp
 WHERE kp.id_prod_order_cps2_reff < '" & id_copy_proto2 & "' AND kp.id_prod_order_cps2_reff != 0;
 SELECT CONCAT(LPAD(@number_report,3,'0'),'/EXT/PRL-SR/',convert_romawi(DATE_FORMAT(NOW(),'%m')),'/',DATE_FORMAT(NOW(),'%y')) INTO @report_number;
 UPDATE tb_prod_order_cps2 SET `id_prod_order_cps2_reff`='" & id_copy_proto2 & "',number=@report_number WHERE id_prod_order_cps2='" & id_copy_proto2 & "'"
-            execute_non_query(query_copy_proto2, True, "", "", "", "")
-            'show cps2 form
-            FormProductionSampleOrder.id = id_copy_proto2
-            FormProductionSampleOrder.ShowDialog()
+                execute_non_query(query_copy_proto2, True, "", "", "", "")
+                'show cps2 form
+                FormProductionSampleOrder.id = id_copy_proto2
+                FormProductionSampleOrder.ShowDialog()
+            End If
+
+            GridColumnSeasonView.GroupIndex = 0
+            GridColumnDelivery.GroupIndex = 1
         End If
 
-        GridColumnSeasonView.GroupIndex = 0
-        GridColumnDelivery.GroupIndex = 1
-        GVProd.ActiveFilterString = "[is_check]='no'"
+        GVProd.ActiveFilterString = ""
     End Sub
 
     Private Sub BSearchCopyProto2_Click(sender As Object, e As EventArgs) Handles BSearchCopyProto2.Click

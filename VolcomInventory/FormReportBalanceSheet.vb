@@ -1145,9 +1145,12 @@ WHERE DATE(atx.`date_tax_report`)>='" + Date.Parse(DETaxFrom.EditValue.ToString)
             If XTPTaxDetail.SelectedTabPageIndex = 0 Then
                 showpopup.report_mark_type = GVTaxReport.GetFocusedRowCellValue("report_mark_type").ToString
                 showpopup.id_report = GVTaxReport.GetFocusedRowCellValue("id_report").ToString
-            Else
+            ElseIf XTPTaxDetail.selectedtabpageindex = 1 Then
                 showpopup.report_mark_type = GVTaxPending.GetFocusedRowCellValue("report_mark_type").ToString
                 showpopup.id_report = GVTaxPending.GetFocusedRowCellValue("id_report").ToString
+            ElseIf XTPTaxDetail.SelectedTabPageIndex = 2 Then
+                showpopup.report_mark_type = GVActiveTax.GetFocusedRowCellValue("report_mark_type").ToString
+                showpopup.id_report = GVActiveTax.GetFocusedRowCellValue("id_report").ToString
             End If
             showpopup.show()
         Catch ex As Exception

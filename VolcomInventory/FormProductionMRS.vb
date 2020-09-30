@@ -217,7 +217,7 @@
                         End If
 
                         'insert who prepared
-                        insert_who_prepared("29", last_id, id_user)
+                        submit_who_prepared("29", last_id, id_user)
                         'end insert who prepared
                         increase_inc_prod("6")
 

@@ -874,7 +874,6 @@ WHERE c.id_comp='" + id_comp + "' "
         End If
     End Sub
 
-
     Private Sub RISLECurrency_EditValueChanging(sender As Object, e As DevExpress.XtraEditors.Controls.ChangingEventArgs) Handles RISLECurrency.EditValueChanging
         GCData.RefreshDataSource()
         GVData.RefreshData()

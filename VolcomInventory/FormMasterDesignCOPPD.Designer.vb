@@ -695,7 +695,7 @@ Partial Class FormMasterDesignCOPPD
         Me.GCCOPComponent.MainView = Me.GVCOPComponent
         Me.GCCOPComponent.Name = "GCCOPComponent"
         Me.GCCOPComponent.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RISLEComp})
-        Me.GCCOPComponent.Size = New System.Drawing.Size(817, 274)
+        Me.GCCOPComponent.Size = New System.Drawing.Size(817, 271)
         Me.GCCOPComponent.TabIndex = 0
         Me.GCCOPComponent.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVCOPComponent})
         '
@@ -853,9 +853,9 @@ Partial Class FormMasterDesignCOPPD
         'BUpdateCOP
         '
         Me.BUpdateCOP.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.BUpdateCOP.Location = New System.Drawing.Point(0, 314)
+        Me.BUpdateCOP.Location = New System.Drawing.Point(0, 311)
         Me.BUpdateCOP.Name = "BUpdateCOP"
-        Me.BUpdateCOP.Size = New System.Drawing.Size(817, 29)
+        Me.BUpdateCOP.Size = New System.Drawing.Size(817, 32)
         Me.BUpdateCOP.TabIndex = 2
         Me.BUpdateCOP.Text = "Update"
         '

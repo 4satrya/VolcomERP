@@ -790,7 +790,7 @@ WHERE c.id_comp='" + id_comp + "' "
                         End Try
                         newRowvat("cc") = "000"
                         newRowvat("report_number") = ""
-                        newRowvat("debit") = GVData.GetRowCellValue(i, "pph_percent") * GVData.GetRowCellValue(i, "amount")
+                        newRowvat("debit") = (GVData.GetRowCellValue(i, "pph_percent") / 100) * GVData.GetRowCellValue(i, "amount")
                         newRowvat("credit") = 0
                         TryCast(GCDraft.DataSource, DataTable).Rows.Add(newRowvat)
 
@@ -807,7 +807,7 @@ WHERE c.id_comp='" + id_comp + "' "
                         newRowvat("cc") = "000"
                         newRowvat("report_number") = ""
                         newRowvat("debit") = 0
-                        newRowvat("credit") = GVData.GetRowCellValue(i, "pph_percent") * GVData.GetRowCellValue(i, "amount")
+                        newRowvat("credit") = (GVData.GetRowCellValue(i, "pph_percent") / 100) * GVData.GetRowCellValue(i, "amount")
                         TryCast(GCDraft.DataSource, DataTable).Rows.Add(newRowvat)
                     ElseIf GVData.GetRowCellValue(i, "pph_percent") > 0 Then
                         jum_row += 1

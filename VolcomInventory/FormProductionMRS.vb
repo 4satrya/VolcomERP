@@ -22,6 +22,7 @@
             'new
             TEMRSNumber.Text = header_number_prod("6")
             TEDate.Text = view_date(0)
+            TECreatedBy.Text = get_emp(id_user, "3")
             id_report_status_g = 1
             BSave.Enabled = True
             BMark.Enabled = False
@@ -40,6 +41,10 @@
             TEDate.Text = view_date_from(data.Rows(0)("prod_order_mrs_datex").ToString, 0)
 
             MENote.Text = data.Rows(0)("prod_order_mrs_note").ToString
+
+            If Not data.Rows(0)("created_by").ToString = "" Then
+                TECreatedBy.Text = get_emp(data.Rows(0)("created_by").ToString, "3")
+            End If
 
             allow_status()
             BMark.Enabled = True
@@ -203,7 +208,7 @@
                     End If
 
                     If proceed = True Then
-                        query = String.Format("INSERT INTO tb_prod_order_mrs(id_prod_order,prod_order_mrs_number,id_comp_contact_req_to,id_comp_contact_req_from,prod_order_mrs_date,prod_order_mrs_note) VALUES('{0}','{1}','{2}','{3}',NOW(),'{4}');SELECT LAST_INSERT_ID()", id_prod_order, TEMRSNumber.Text, id_comp_req_to, id_comp_req_from, MENote.Text)
+                        query = String.Format("INSERT INTO tb_prod_order_mrs(id_prod_order,prod_order_mrs_number,id_comp_contact_req_to,id_comp_contact_req_from,prod_order_mrs_date,prod_order_mrs_note, created_by) VALUES('{0}','{1}','{2}','{3}',NOW(),'{4}','{5}');SELECT LAST_INSERT_ID()", id_prod_order, TEMRSNumber.Text, id_comp_req_to, id_comp_req_from, MENote.Text, id_user)
                         Dim last_id As String = execute_query(query, 0, True, "", "", "", "")
 
                         If GVMat.RowCount > 0 Then

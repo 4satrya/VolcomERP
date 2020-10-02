@@ -6037,19 +6037,19 @@ WHERE copd.id_design_cop_propose='" & id_report & "';"
                 If FormItemExpenseDet.CEPayLater.EditValue = True Then
                     'utang
                     Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number, id_comp, report_number_ref)
-                    SELECT " + id_acc_trans + ", ed.id_acc_pph,IF(ed.amount<0,(ed.pph_percent/100)*-ed.amount,0) AS `debit`, IF(ed.amount<0,0,(ed.pph_percent/100)*ed.amount) AS `credit`, ed.description, 157, e.id_item_expense, e.`number`,ed.cc
+                    SELECT " + id_acc_trans + ", ed.id_acc_pph,IF(ed.amount<0,-ed.pph,0) AS `debit`, IF(ed.amount<0,0,ed.pph) AS `credit`, ed.description, 157, e.id_item_expense, e.`number`,ed.cc
                     ,e.inv_number
                     FROM tb_item_expense e
                     INNER JOIN  tb_item_expense_det ed ON ed.id_item_expense = e.id_item_expense
                     WHERE e.id_item_expense=" + id_report + " AND pph_percent>0 AND ed.`id_acc_pph` != (SELECT id_acc_skbp FROM tb_opt_accounting)
                     UNION ALL
-                    SELECT " + id_acc_trans + ", ed.id_acc_pph,IF(ed.amount<0,(ed.pph_percent/100)*-ed.amount,0) AS `debit`, IF(ed.amount<0,0,(ed.pph_percent/100)*ed.amount) AS `credit`, ed.description, 157, e.id_item_expense, e.`number`,ed.cc
+                    SELECT " + id_acc_trans + ", ed.id_acc_pph,IF(ed.amount<0,-ed.pph,0) AS `debit`, IF(ed.amount<0,0,ed.pph) AS `credit`, ed.description, 157, e.id_item_expense, e.`number`,ed.cc
                     ,e.inv_number
                     FROM tb_item_expense e
                     INNER JOIN  tb_item_expense_det ed ON ed.id_item_expense = e.id_item_expense
                     WHERE e.id_item_expense=" + id_report + " AND pph_percent>0 AND ed.`id_acc_pph` = (SELECT id_acc_skbp FROM tb_opt_accounting)
                     UNION ALL
-                    SELECT " + id_acc_trans + ", ed.id_acc_pph,IF(ed.amount<0,0,(ed.pph_percent/100)*ed.amount) AS `debit`, IF(ed.amount<0,(ed.pph_percent/100)*-ed.amount,0) AS `credit`, ed.description, 157, e.id_item_expense, e.`number`,ed.cc
+                    SELECT " + id_acc_trans + ", ed.id_acc_pph,IF(ed.amount<0,0,ed.pph) AS `debit`, IF(ed.amount<0,-ed.pph,0) AS `credit`, ed.description, 157, e.id_item_expense, e.`number`,ed.cc
                     ,e.inv_number
                     FROM tb_item_expense e
                     INNER JOIN  tb_item_expense_det ed ON ed.id_item_expense = e.id_item_expense

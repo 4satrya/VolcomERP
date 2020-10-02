@@ -25,7 +25,7 @@
         '
         actionLoad()
         '
-        GridColumnPPH.UnboundExpression = "Iif([id_acc_pph] = " & get_opt_acc_field("id_acc_skbp") & ", 0, [pph_percent] / 100 * [amount])"
+        GridColumnPPH.UnboundExpression = "Iif([id_acc_pph] = " & get_opt_acc_field("id_acc_skbp") & ", 0, floor([pph_percent] / 100 * [amount]))"
         CEPayLater.Checked = True
         CEPayLater.Enabled = False
     End Sub

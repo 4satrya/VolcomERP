@@ -109,7 +109,7 @@
 
             If confirm = DialogResult.Yes Then
                 For i = 0 To GVPurcReq.RowCount - 1
-                    execute_non_query("UPDATE tb_purc_order_det SET pph_percent='" & decimalSQL(GVPurcReq.GetRowCellValue(i, "pph_percent").ToString) & "',gross_up_value='" & decimalSQL(GVPurcReq.GetRowCellValue(i, "gross_up_value").ToString) & "' WHERE id_purc_order_det='" & GVPurcReq.GetRowCellValue(i, "id_purc_order_det").ToString & "'", True, "", "", "", "")
+                    execute_non_query("UPDATE tb_purc_order_det SET pph_percent='" & decimalSQL(GVPurcReq.GetRowCellValue(i, "pph_percent").ToString) & "',pph='" & decimalSQL(GVPurcReq.GetRowCellValue(i, "pph").ToString) & "',gross_up_value='" & decimalSQL(GVPurcReq.GetRowCellValue(i, "gross_up_value").ToString) & "' WHERE id_purc_order_det='" & GVPurcReq.GetRowCellValue(i, "id_purc_order_det").ToString & "'", True, "", "", "", "")
                 Next
 
                 Dim query As String = "UPDATE tb_purc_order SET pph_total = " + decimalSQL(TEPPH.EditValue.ToString) + ",due_date = '" + Date.Parse(DateEditDueDate.EditValue.ToString).ToString("yyyy-MM-dd") + "', is_active_payment = 1, pph_total = " + decimalSQL(TEPPH.EditValue.ToString) + ", pph_account = " + If(SLEPPHAccount.EditValue.ToString = "0", "NULL", SLEPPHAccount.EditValue.ToString) + ",inv_number='" & addSlashes(TEInvNumber.Text) & "' WHERE id_purc_order = " + id_purc_order
@@ -128,7 +128,7 @@
                         query = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_comp, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number, report_mark_type_ref, id_report_ref, report_number_ref)
 SELECT " + id_acc_trans + " AS id_acc_trans, po.`pph_account` AS `id_acc`, dep.id_main_comp, SUM(rd.qty) AS `qty`,
 0 AS `debit`,
-SUM(rd.`qty` * (pod.`value`-pod.`discount`) * (pod.`pph_percent`/100)) AS `credit`,
+SUM(pod.pph) AS `credit`,
 i.item_desc AS `note`, 148, rd.id_purc_rec, r.purc_rec_number, IF(po.id_expense_type=1,139,202) AS rmt_reff,  po.id_purc_order, po.purc_order_number
 FROM tb_purc_rec_det rd
 INNER JOIN tb_purc_rec r ON r.id_purc_rec = rd.id_purc_rec
@@ -144,7 +144,7 @@ WHERE po.id_purc_order=" & id_purc_order & " AND po.`is_close_rec`=1 AND pod.gro
 GROUP BY po.id_purc_order,dep.id_main_comp
 UNION ALL
 SELECT " + id_acc_trans + " AS id_acc_trans, po.`pph_account` AS `id_acc`, dep.id_main_comp, SUM(rd.qty) AS `qty`,
-SUM(rd.`qty` * (pod.`value`-pod.`discount`) * (pod.`pph_percent`/100)) AS `debit`,
+SUM(pod.pph) AS `debit`,
 0 AS `credit`,
 i.item_desc AS `note`, 148, rd.id_purc_rec, r.purc_rec_number, IF(po.id_expense_type=1,139,202) AS rmt_reff,  po.id_purc_order, po.purc_order_number
 FROM tb_purc_rec_det rd
@@ -201,7 +201,7 @@ GROUP BY po.id_purc_order,dep.id_main_comp
 UNION ALL
 -- hutang non grossup
 SELECT " + id_acc_trans + " AS id_acc_trans, comp.id_acc_ap AS `id_acc`, dep.id_main_comp, SUM(rd.qty) AS `qty`,
-SUM(rd.`qty` * (pod.`value`-pod.`discount`) * (pod.`pph_percent`/100)) AS `debit`,
+SUM(pod.pph) AS `debit`,
 0 AS `credit`,
 i.item_desc AS `note`, 148, rd.id_purc_rec, r.purc_rec_number, IF(po.id_expense_type=1,139,202) AS rmt_reff,  po.id_purc_order, po.purc_order_number
 FROM tb_purc_rec_det rd
@@ -220,7 +220,7 @@ UNION ALL
 -- pph non grossup
 SELECT " + id_acc_trans + " AS id_acc_trans, po.`pph_account` AS `id_acc`, dep.id_main_comp, SUM(rd.qty) AS `qty`,
 0 AS `debit`,
-SUM(rd.`qty` * (pod.`value`-pod.`discount`) * (pod.`pph_percent`/100)) AS `credit`,
+SUM(pod.pph) AS `credit`,
 i.item_desc AS `note`, 148, rd.id_purc_rec, r.purc_rec_number, IF(po.id_expense_type=1,139,202) AS rmt_reff,  po.id_purc_order, po.purc_order_number
 FROM tb_purc_rec_det rd
 INNER JOIN tb_purc_rec r ON r.id_purc_rec = rd.id_purc_rec
@@ -257,7 +257,7 @@ GROUP BY po.id_purc_order,dep.id_main_comp"
 
         For i = 0 To GVPurcReq.RowCount - 1
             If GVPurcReq.IsValidRowHandle(i) Then
-                pph += (GVPurcReq.GetRowCellValue(i, "pph_percent") * (GVPurcReq.GetRowCellValue(i, "amount") + GVPurcReq.GetRowCellValue(i, "gross_up_value")) / 100)
+                pph += Math.Floor(GVPurcReq.GetRowCellValue(i, "pph_percent") * (GVPurcReq.GetRowCellValue(i, "amount") + GVPurcReq.GetRowCellValue(i, "gross_up_value")) / 100)
             End If
         Next
 

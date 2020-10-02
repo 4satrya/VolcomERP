@@ -69,6 +69,7 @@ Partial Class FormBankWithdrawalAttachement
         Me.LabelControl10 = New DevExpress.XtraEditors.LabelControl()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
         Me.PanelControl4 = New DevExpress.XtraEditors.PanelControl()
+        Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.RepositoryItemTextEditPph, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DateEditDueDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DateEditDueDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -466,12 +467,12 @@ Partial Class FormBankWithdrawalAttachement
         'GrossUpPPHToolStripMenuItem
         '
         Me.GrossUpPPHToolStripMenuItem.Name = "GrossUpPPHToolStripMenuItem"
-        Me.GrossUpPPHToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.GrossUpPPHToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.GrossUpPPHToolStripMenuItem.Text = "Gross up PPH"
         '
         'GVPurcReq
         '
-        Me.GVPurcReq.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn8, Me.GridColumn21, Me.GridColumn33, Me.GridColumn4, Me.GridColumn2, Me.GridColumn1, Me.GridColumn7})
+        Me.GVPurcReq.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn8, Me.GridColumn21, Me.GridColumn33, Me.GridColumn4, Me.GridColumn2, Me.GridColumn1, Me.GridColumn7, Me.GridColumn9})
         Me.GVPurcReq.GridControl = Me.GCPurcReq
         Me.GVPurcReq.Name = "GVPurcReq"
         Me.GVPurcReq.OptionsFind.AllowFindPanel = False
@@ -545,7 +546,7 @@ Partial Class FormBankWithdrawalAttachement
         Me.GridColumn1.FieldName = "pph_percent"
         Me.GridColumn1.Name = "GridColumn1"
         Me.GridColumn1.Visible = True
-        Me.GridColumn1.VisibleIndex = 5
+        Me.GridColumn1.VisibleIndex = 4
         '
         'GridColumn7
         '
@@ -559,7 +560,7 @@ Partial Class FormBankWithdrawalAttachement
         Me.GridColumn7.OptionsColumn.AllowFocus = False
         Me.GridColumn7.OptionsColumn.ReadOnly = True
         Me.GridColumn7.Visible = True
-        Me.GridColumn7.VisibleIndex = 4
+        Me.GridColumn7.VisibleIndex = 6
         '
         'RITEGrossupValue
         '
@@ -619,6 +620,19 @@ Partial Class FormBankWithdrawalAttachement
         Me.PanelControl4.Name = "PanelControl4"
         Me.PanelControl4.Size = New System.Drawing.Size(492, 38)
         Me.PanelControl4.TabIndex = 11
+        '
+        'GridColumn9
+        '
+        Me.GridColumn9.Caption = "PPH"
+        Me.GridColumn9.DisplayFormat.FormatString = "N2"
+        Me.GridColumn9.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn9.FieldName = "pph"
+        Me.GridColumn9.Name = "GridColumn9"
+        Me.GridColumn9.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "pph", "{0:N2}")})
+        Me.GridColumn9.UnboundExpression = "Floor(([amount] + [gross_up_value]) * ([pph_percent] / 100))"
+        Me.GridColumn9.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
+        Me.GridColumn9.Visible = True
+        Me.GridColumn9.VisibleIndex = 5
         '
         'FormBankWithdrawalAttachement
         '
@@ -713,4 +727,5 @@ Partial Class FormBankWithdrawalAttachement
     Friend WithEvents RITEGrossupValue As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
     Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
     Friend WithEvents GrossUpPPHToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents GridColumn9 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

@@ -103,6 +103,7 @@ Partial Class FormInvoiceFGPODP
         Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn19 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn20 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnPPHDesc = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RICECheckReceive = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
@@ -127,7 +128,6 @@ Partial Class FormInvoiceFGPODP
         Me.GridColumndebit_draft = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncredit_draft = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncc = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnPPHDesc = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl7, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl7.SuspendLayout()
@@ -1018,6 +1018,12 @@ Partial Class FormInvoiceFGPODP
         Me.GridColumn20.Visible = True
         Me.GridColumn20.VisibleIndex = 1
         '
+        'GridColumnPPHDesc
+        '
+        Me.GridColumnPPHDesc.Caption = "COA PPH"
+        Me.GridColumnPPHDesc.FieldName = "coa_desc_pph"
+        Me.GridColumnPPHDesc.Name = "GridColumnPPHDesc"
+        '
         'GridColumn9
         '
         Me.GridColumn9.AppearanceCell.Options.UseTextOptions = True
@@ -1046,7 +1052,7 @@ Partial Class FormInvoiceFGPODP
         Me.GridColumn10.Name = "GridColumn10"
         Me.GridColumn10.OptionsColumn.AllowEdit = False
         Me.GridColumn10.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "pph_value", "{0:N2}")})
-        Me.GridColumn10.UnboundExpression = "[valuex] * ([pph_percent] / 100)"
+        Me.GridColumn10.UnboundExpression = "Floor([valuex] * ([pph_percent] / 100))"
         Me.GridColumn10.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
         Me.GridColumn10.Visible = True
         Me.GridColumn10.VisibleIndex = 12
@@ -1251,12 +1257,6 @@ Partial Class FormInvoiceFGPODP
         Me.GridColumncc.Visible = True
         Me.GridColumncc.VisibleIndex = 1
         Me.GridColumncc.Width = 39
-        '
-        'GridColumnPPHDesc
-        '
-        Me.GridColumnPPHDesc.Caption = "COA PPH"
-        Me.GridColumnPPHDesc.FieldName = "coa_desc_pph"
-        Me.GridColumnPPHDesc.Name = "GridColumnPPHDesc"
         '
         'FormInvoiceFGPODP
         '

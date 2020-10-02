@@ -496,7 +496,7 @@ WHERE ISNULL(atx.`date_tax_report`) AND DATE(atx.`date_reference`)>='" + Date.Pa
 GROUP BY ie.id_pn_fgpo,ied.id_acc_pph
 UNION ALL
 -- OG
-SELECT 'no' AS is_check,rpt.tax_report,148 AS report_mark_type,atx.id_acc_trans,ie.inv_number AS inv_number,atx.acc_trans_number AS jurnal_no,rec.`id_purc_rec` AS id_report,c.`comp_number`,c.`comp_name`,c.`npwp_name`,c.`npwp`,c.`npwp_address`,ie.`purc_order_number` AS number,atx.`date_reference`,rd.item_detail AS description,ie.`pph_account`,ie.`due_date`,acc_pph.`acc_name`,acc_pph.`acc_description`,ied.`pph_percent` AS pph_percent,SUM((recd.qty*(ied.`value`))+ied.`gross_up_value`) AS dpp, SUM((recd.qty*(ied.`value`)+ied.`gross_up_value`)*(ied.`pph_percent`/100)) AS pph 
+SELECT 'no' AS is_check,rpt.tax_report,148 AS report_mark_type,atx.id_acc_trans,ie.inv_number AS inv_number,atx.acc_trans_number AS jurnal_no,rec.`id_purc_rec` AS id_report,c.`comp_number`,c.`comp_name`,c.`npwp_name`,c.`npwp`,c.`npwp_address`,ie.`purc_order_number` AS number,atx.`date_reference`,rd.item_detail AS description,ie.`pph_account`,ie.`due_date`,acc_pph.`acc_name`,acc_pph.`acc_description`,ied.`pph_percent` AS pph_percent,SUM((recd.qty*(ied.`value`))+ied.`gross_up_value`) AS dpp, SUM(ied.pph) AS pph 
 FROM tb_purc_rec_det recd
 INNER JOIN tb_purc_rec rec ON rec.id_purc_rec=recd.id_purc_rec
 INNER JOIN tb_purc_order_det ied ON ied.id_purc_order_det=recd.id_purc_order_det
@@ -524,7 +524,7 @@ HAVING NOT ISNULL(jurnal_no)
 UNION ALL
 -- BUM
 SELECT 'no' AS is_check,rpt.tax_report,36 AS report_mark_type,tr.id_acc_trans,atx.`report_number_ref` AS inv_number,tr.acc_trans_number AS jurnal_no,atx.`id_acc_trans` AS id_report,atx.`vendor` AS `comp_number`,atx.`vendor` AS `comp_name`,'' AS `npwp_name`,'' AS `npwp`,'' AS `npwp_address`
-,tr.acc_trans_number AS `number`,tr.`date_reference`,atx.`acc_trans_det_note` AS description,atx.`id_acc`,tr.`date_reference` AS `due_date`,acc_pph.`acc_name`,acc_pph.`acc_description`,100 AS pph_percent,IF(acc_pph.`id_dc`=1,atx.`debit`,atx.`credit`) AS dpp,IF(acc_pph.`id_dc`=1,atx.`debit`,atx.`credit`) AS pph 
+,tr.acc_trans_number AS `number`,tr.`date_reference`,atx.`acc_trans_det_note` AS description,atx.`id_acc`,tr.`date_reference` AS `due_date`,acc_pph.`acc_name`,acc_pph.`acc_description`,100 AS pph_percent,(-atx.`debit`+atx.`credit`) AS dpp,(-atx.`debit`+atx.`credit`) AS pph 
 FROM tb_a_acc_trans_det atx
 INNER JOIN tb_a_acc_trans tr ON tr.`id_acc_trans`=atx.`id_acc_trans` AND tr.id_report_status=6
 INNER JOIN tb_a_acc acc_pph ON acc_pph.id_acc=atx.id_acc AND acc_pph.is_tax_report=1 AND tr.`id_bill_type`=25
@@ -557,7 +557,7 @@ UNION ALL
 SELECT 'no' AS is_check,rpt.tax_report,159 AS report_mark_type,atx.id_acc_trans,ied.number AS inv_number,atx.acc_trans_number AS jurnal_no,ie.`id_pn` AS id_report,ied.`vendor` AS `comp_number`,ied.`vendor` AS  `comp_name`,'' AS `npwp_name`,'' AS `npwp`,'' AS `npwp_address`,ie.`number`,atx.`date_reference`,ied.note AS description,ied.id_acc AS `id_acc_pph`,ie.`date_payment` AS due_date,acc_pph.`acc_name`,acc_pph.`acc_description`,100 AS pph_percent,ABS(ied.`value`) AS dpp,ABS(ied.`value`) AS pph 
 FROM tb_pn_det ied
 INNER JOIN tb_pn ie ON ie.`id_pn`=ied.`id_pn` AND ie.`id_report_status`=6
-INNER JOIN tb_a_acc acc_pph ON acc_pph.`id_acc`=ied.`id_acc` AND acc_pph.`is_tax_report`='1' AND ied.id_dc=1
+INNER JOIN tb_a_acc acc_pph ON acc_pph.`id_acc`=ied.`id_acc` AND acc_pph.`is_tax_report`='1' AND ied.id_dc=2
 INNER JOIN tb_lookup_tax_report rpt ON rpt.id_tax_report=acc_pph.id_tax_report AND rpt.id_type=1
 LEFT JOIN
 ( 
@@ -992,7 +992,7 @@ WHERE DATE(atx.`date_tax_report`)>='" + Date.Parse(DETaxFrom.EditValue.ToString)
 GROUP BY ie.id_pn_fgpo,ied.id_acc_pph
 UNION ALL
 -- OG
-SELECT 'no' AS is_check,rpt.tax_report,148 AS report_mark_type,atx.id_acc_trans,ie.inv_number AS inv_number,atx.acc_trans_number AS jurnal_no,rec.`id_purc_rec` AS id_report,c.`comp_number`,c.`comp_name`,c.`npwp_name`,c.`npwp`,c.`npwp_address`,ie.`purc_order_number` AS number,atx.`date_reference`,rd.item_detail AS description,ie.`pph_account`,ie.`due_date`,acc_pph.`acc_name`,acc_pph.`acc_description`,ied.`pph_percent` AS pph_percent,SUM((recd.qty*(ied.`value`))+ied.`gross_up_value`) AS dpp, SUM((recd.qty*(ied.`value`)+ied.`gross_up_value`)*(ied.`pph_percent`/100)) AS pph 
+SELECT 'no' AS is_check,rpt.tax_report,148 AS report_mark_type,atx.id_acc_trans,ie.inv_number AS inv_number,atx.acc_trans_number AS jurnal_no,rec.`id_purc_rec` AS id_report,c.`comp_number`,c.`comp_name`,c.`npwp_name`,c.`npwp`,c.`npwp_address`,ie.`purc_order_number` AS number,atx.`date_reference`,rd.item_detail AS description,ie.`pph_account`,ie.`due_date`,acc_pph.`acc_name`,acc_pph.`acc_description`,ied.`pph_percent` AS pph_percent,SUM((recd.qty*(ied.`value`))+ied.`gross_up_value`) AS dpp, SUM(ied.pph) AS pph 
 FROM tb_purc_rec_det recd
 INNER JOIN tb_purc_rec rec ON rec.id_purc_rec=recd.id_purc_rec
 INNER JOIN tb_purc_order_det ied ON ied.id_purc_order_det=recd.id_purc_order_det
@@ -1020,7 +1020,7 @@ HAVING NOT ISNULL(jurnal_no)
 UNION ALL
 -- BUM
 SELECT 'no' AS is_check,rpt.tax_report,36 AS report_mark_type,tr.id_acc_trans,atx.`report_number_ref` AS inv_number,tr.acc_trans_number AS jurnal_no,atx.`id_acc_trans` AS id_report,atx.`vendor` AS `comp_number`,atx.`vendor` AS `comp_name`,'' AS `npwp_name`,'' AS `npwp`,'' AS `npwp_address`
-,tr.acc_trans_number AS `number`,tr.`date_reference`,atx.`acc_trans_det_note` AS description,atx.`id_acc`,tr.`date_reference` AS `due_date`,acc_pph.`acc_name`,acc_pph.`acc_description`,100 AS pph_percent,IF(acc_pph.`id_dc`=1,atx.`debit`,atx.`credit`) AS dpp,IF(acc_pph.`id_dc`=1,atx.`debit`,atx.`credit`) AS pph 
+,tr.acc_trans_number AS `number`,tr.`date_reference`,atx.`acc_trans_det_note` AS description,atx.`id_acc`,tr.`date_reference` AS `due_date`,acc_pph.`acc_name`,acc_pph.`acc_description`,100 AS pph_percent,(-atx.`debit`+atx.`credit`) AS dpp,(-atx.`debit`+atx.`credit`) AS pph 
 FROM tb_a_acc_trans_det atx
 INNER JOIN tb_a_acc_trans tr ON tr.`id_acc_trans`=atx.`id_acc_trans` AND tr.id_report_status=6
 INNER JOIN tb_a_acc acc_pph ON acc_pph.id_acc=atx.id_acc AND acc_pph.is_tax_report=1 AND tr.`id_bill_type`=25

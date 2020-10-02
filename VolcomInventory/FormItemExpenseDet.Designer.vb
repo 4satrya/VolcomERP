@@ -48,18 +48,20 @@ Partial Class FormItemExpenseDet
         Me.LabelControl10 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl8 = New DevExpress.XtraEditors.LabelControl()
         Me.PanelControlPay = New DevExpress.XtraEditors.PanelControl()
+        Me.LabelControl9 = New DevExpress.XtraEditors.LabelControl()
         Me.SLEPayFrom = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.TEInvNo = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.CEPayLater = New DevExpress.XtraEditors.CheckEdit()
         Me.TxtCompName = New DevExpress.XtraEditors.TextEdit()
         Me.BtnBrowse = New DevExpress.XtraEditors.SimpleButton()
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
-        Me.LabelControl9 = New DevExpress.XtraEditors.LabelControl()
-        Me.TEInvNo = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl15 = New DevExpress.XtraEditors.LabelControl()
+        Me.DEDateReff = New DevExpress.XtraEditors.DateEdit()
         Me.TxtPaymentStatus = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
@@ -142,8 +144,6 @@ Partial Class FormItemExpenseDet
         Me.GridColumndebit_draft = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncredit_draft = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncc = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.LabelControl15 = New DevExpress.XtraEditors.LabelControl()
-        Me.DEDateReff = New DevExpress.XtraEditors.DateEdit()
         CType(Me.LEPaymentMethod.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEDueDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEDueDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -163,11 +163,13 @@ Partial Class FormItemExpenseDet
         Me.PanelControlPay.SuspendLayout()
         CType(Me.SLEPayFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TEInvNo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CEPayLater.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtCompName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
-        CType(Me.TEInvNo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEDateReff.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEDateReff.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtPaymentStatus.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DECreated.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DECreated.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -200,8 +202,6 @@ Partial Class FormItemExpenseDet
         Me.XTPDraft.SuspendLayout()
         CType(Me.GCDraft, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVDraft, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DEDateReff.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DEDateReff.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LEPaymentMethod
@@ -524,6 +524,15 @@ Partial Class FormItemExpenseDet
         Me.PanelControlPay.Size = New System.Drawing.Size(1052, 129)
         Me.PanelControlPay.TabIndex = 16
         '
+        'LabelControl9
+        '
+        Me.LabelControl9.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl9.Location = New System.Drawing.Point(284, 94)
+        Me.LabelControl9.Name = "LabelControl9"
+        Me.LabelControl9.Size = New System.Drawing.Size(75, 13)
+        Me.LabelControl9.TabIndex = 21
+        Me.LabelControl9.Text = "Invoice Number"
+        '
         'SLEPayFrom
         '
         Me.SLEPayFrom.Location = New System.Drawing.Point(109, 13)
@@ -565,6 +574,14 @@ Partial Class FormItemExpenseDet
         Me.GridColumn6.Name = "GridColumn6"
         Me.GridColumn6.Visible = True
         Me.GridColumn6.VisibleIndex = 1
+        '
+        'TEInvNo
+        '
+        Me.TEInvNo.Enabled = False
+        Me.TEInvNo.Location = New System.Drawing.Point(376, 91)
+        Me.TEInvNo.Name = "TEInvNo"
+        Me.TEInvNo.Size = New System.Drawing.Size(153, 20)
+        Me.TEInvNo.TabIndex = 20
         '
         'LabelControl1
         '
@@ -619,22 +636,28 @@ Partial Class FormItemExpenseDet
         Me.PanelControl2.Size = New System.Drawing.Size(292, 125)
         Me.PanelControl2.TabIndex = 5
         '
-        'LabelControl9
+        'LabelControl15
         '
-        Me.LabelControl9.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl9.Location = New System.Drawing.Point(284, 94)
-        Me.LabelControl9.Name = "LabelControl9"
-        Me.LabelControl9.Size = New System.Drawing.Size(75, 13)
-        Me.LabelControl9.TabIndex = 21
-        Me.LabelControl9.Text = "Invoice Number"
+        Me.LabelControl15.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl15.Location = New System.Drawing.Point(13, 66)
+        Me.LabelControl15.Name = "LabelControl15"
+        Me.LabelControl15.Size = New System.Drawing.Size(47, 13)
+        Me.LabelControl15.TabIndex = 11
+        Me.LabelControl15.Text = "Reff Date"
         '
-        'TEInvNo
+        'DEDateReff
         '
-        Me.TEInvNo.Enabled = False
-        Me.TEInvNo.Location = New System.Drawing.Point(376, 91)
-        Me.TEInvNo.Name = "TEInvNo"
-        Me.TEInvNo.Size = New System.Drawing.Size(153, 20)
-        Me.TEInvNo.TabIndex = 20
+        Me.DEDateReff.EditValue = Nothing
+        Me.DEDateReff.Location = New System.Drawing.Point(105, 63)
+        Me.DEDateReff.Name = "DEDateReff"
+        Me.DEDateReff.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DEDateReff.Properties.Appearance.Options.UseFont = True
+        Me.DEDateReff.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEDateReff.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEDateReff.Properties.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.DEDateReff.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEDateReff.Size = New System.Drawing.Size(174, 20)
+        Me.DEDateReff.TabIndex = 10
         '
         'TxtPaymentStatus
         '
@@ -1180,7 +1203,7 @@ Partial Class FormItemExpenseDet
         Me.GridColumnPPH.Name = "GridColumnPPH"
         Me.GridColumnPPH.OptionsColumn.AllowEdit = False
         Me.GridColumnPPH.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "pph_value", "{0:N2}")})
-        Me.GridColumnPPH.UnboundExpression = "Iif([id_acc_pph] = 948, 0, [pph_percent] / 100 * [amount])"
+        Me.GridColumnPPH.UnboundExpression = "Iif([id_acc_pph] = 948, 0, Floor([pph_percent] / 100 * [amount]))"
         Me.GridColumnPPH.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
         Me.GridColumnPPH.Visible = True
         Me.GridColumnPPH.VisibleIndex = 14
@@ -1360,29 +1383,6 @@ Partial Class FormItemExpenseDet
         Me.GridColumncc.Visible = True
         Me.GridColumncc.VisibleIndex = 3
         '
-        'LabelControl15
-        '
-        Me.LabelControl15.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl15.Location = New System.Drawing.Point(13, 66)
-        Me.LabelControl15.Name = "LabelControl15"
-        Me.LabelControl15.Size = New System.Drawing.Size(47, 13)
-        Me.LabelControl15.TabIndex = 11
-        Me.LabelControl15.Text = "Reff Date"
-        '
-        'DEDateReff
-        '
-        Me.DEDateReff.EditValue = Nothing
-        Me.DEDateReff.Location = New System.Drawing.Point(105, 63)
-        Me.DEDateReff.Name = "DEDateReff"
-        Me.DEDateReff.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DEDateReff.Properties.Appearance.Options.UseFont = True
-        Me.DEDateReff.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.DEDateReff.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.DEDateReff.Properties.DisplayFormat.FormatString = "dd MMMM yyyy"
-        Me.DEDateReff.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.DEDateReff.Size = New System.Drawing.Size(174, 20)
-        Me.DEDateReff.TabIndex = 10
-        '
         'FormItemExpenseDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1419,12 +1419,14 @@ Partial Class FormItemExpenseDet
         Me.PanelControlPay.PerformLayout()
         CType(Me.SLEPayFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TEInvNo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CEPayLater.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtCompName.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl2.ResumeLayout(False)
         Me.PanelControl2.PerformLayout()
-        CType(Me.TEInvNo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEDateReff.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEDateReff.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtPaymentStatus.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DECreated.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DECreated.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1457,8 +1459,6 @@ Partial Class FormItemExpenseDet
         Me.XTPDraft.ResumeLayout(False)
         CType(Me.GCDraft, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVDraft, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DEDateReff.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DEDateReff.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

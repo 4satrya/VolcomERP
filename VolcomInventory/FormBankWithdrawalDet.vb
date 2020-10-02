@@ -496,41 +496,41 @@ SELECT 1 AS id,'Yes' AS auto_debet"
                 Next
 
                 'selisih kerugian
-                Dim selisih As Decimal = total_actual - total_before
+                'Dim selisih As Decimal = total_actual - total_before
 
-                If selisih > 0 Then
-                    Dim query_s As String = "
-                        SELECT acc.id_acc, acc.acc_name, acc.acc_description, comp.id_comp, comp.comp_number, comp.comp_name AS vendor
-                        FROM tb_a_acc AS acc
-                        LEFT JOIN tb_m_comp AS comp ON comp.id_comp = 1
-                        WHERE acc.id_acc = 2968
-                    "
+                'If selisih > 0 Then
+                '    Dim query_s As String = "
+                '        SELECT acc.id_acc, acc.acc_name, acc.acc_description, comp.id_comp, comp.comp_number, comp.comp_name AS vendor
+                '        FROM tb_a_acc AS acc
+                '        LEFT JOIN tb_m_comp AS comp ON comp.id_comp = 1
+                '        WHERE acc.id_acc = 2968
+                '    "
 
-                    Dim data_s As DataTable = execute_query(query_s, -1, True, "", "", "", "")
+                '    Dim data_s As DataTable = execute_query(query_s, -1, True, "", "", "", "")
 
-                    Dim newRow As DataRow = (TryCast(GCList.DataSource, DataTable)).NewRow()
-                    newRow("id_report") = FormBankWithdrawal.GVBPJSKesehatan.GetRowCellValue(0, "id_pay_bpjs_kesehatan").ToString
-                    newRow("report_mark_type") = "223"
-                    newRow("id_acc") = data_s.Rows(0)("id_acc")
-                    newRow("acc_name") = data_s.Rows(0)("acc_name").ToString
-                    newRow("acc_description") = data_s.Rows(0)("acc_description").ToString
-                    newRow("vendor") = data_s.Rows(0)("vendor").ToString
-                    newRow("id_dc") = "1"
-                    newRow("dc_code") = "D"
-                    newRow("id_comp") = data_s.Rows(0)("id_comp")
-                    newRow("comp_number") = data_s.Rows(0)("comp_number").ToString
-                    newRow("number") = FormBankWithdrawal.GVBPJSKesehatan.GetRowCellValue(0, "number").ToString
-                    newRow("total_pay") = 0
-                    newRow("value") = selisih
-                    newRow("kurs") = 1
-                    newRow("id_currency") = "1"
-                    newRow("currency") = "Rp"
-                    newRow("val_bef_kurs") = selisih
-                    newRow("value_view") = selisih
-                    newRow("balance_due") = selisih
-                    newRow("note") = "Pembulatan"
-                    TryCast(GCList.DataSource, DataTable).Rows.Add(newRow)
-                End If
+                '    Dim newRow As DataRow = (TryCast(GCList.DataSource, DataTable)).NewRow()
+                '    newRow("id_report") = FormBankWithdrawal.GVBPJSKesehatan.GetRowCellValue(0, "id_pay_bpjs_kesehatan").ToString
+                '    newRow("report_mark_type") = "223"
+                '    newRow("id_acc") = data_s.Rows(0)("id_acc")
+                '    newRow("acc_name") = data_s.Rows(0)("acc_name").ToString
+                '    newRow("acc_description") = data_s.Rows(0)("acc_description").ToString
+                '    newRow("vendor") = data_s.Rows(0)("vendor").ToString
+                '    newRow("id_dc") = "1"
+                '    newRow("dc_code") = "D"
+                '    newRow("id_comp") = data_s.Rows(0)("id_comp")
+                '    newRow("comp_number") = data_s.Rows(0)("comp_number").ToString
+                '    newRow("number") = FormBankWithdrawal.GVBPJSKesehatan.GetRowCellValue(0, "number").ToString
+                '    newRow("total_pay") = 0
+                '    newRow("value") = selisih
+                '    newRow("kurs") = 1
+                '    newRow("id_currency") = "1"
+                '    newRow("currency") = "Rp"
+                '    newRow("val_bef_kurs") = selisih
+                '    newRow("value_view") = selisih
+                '    newRow("balance_due") = selisih
+                '    newRow("note") = "Pembulatan"
+                '    TryCast(GCList.DataSource, DataTable).Rows.Add(newRow)
+                'End If
 
                 calculate_amount()
             ElseIf report_mark_type = "192" Then 'payroll

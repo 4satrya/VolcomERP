@@ -106,6 +106,8 @@ Public Class FormSalesPOSDet
             BtnImportOLStore.Visible = False
             BtnLoadFromBOF.Visible = False
             BtnSelectDiscount.Enabled = False
+            QtyToolStripMenuItem.Enabled = False
+            PriceToolStripMenuItem.Enabled = False
         ElseIf id_menu = "3" Then
             Text = "Invoice Missing Promo"
             LEInvType.Enabled = False

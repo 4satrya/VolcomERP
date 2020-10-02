@@ -632,6 +632,10 @@
             TxtAllowCar.EditValue = If(data.Rows(0)("allow_car").ToString = "", "0,00", data.Rows(0)("allow_car").ToString)
             TETotal.EditValue = Decimal.Parse(If(data.Rows(0)("basic_salary").ToString = "", "0", data.Rows(0)("basic_salary").ToString)) + Decimal.Parse(If(data.Rows(0)("allow_job").ToString = "", "0", data.Rows(0)("allow_job").ToString)) + Decimal.Parse(If(data.Rows(0)("allow_meal").ToString = "", "0", data.Rows(0)("allow_meal").ToString)) + Decimal.Parse(If(data.Rows(0)("allow_trans").ToString = "", "0", data.Rows(0)("allow_trans").ToString)) + Decimal.Parse(If(data.Rows(0)("allow_house").ToString = "", "0", data.Rows(0)("allow_house").ToString)) + Decimal.Parse(If(data.Rows(0)("allow_car").ToString = "", "0", data.Rows(0)("allow_car").ToString))
             DESalary.EditValue = data.Rows(0)("salary_date")
+
+            If Not data.Rows(0)("start_period").ToString = "" Then
+                DEEmployeeStatusEnd.Properties.MinValue = DEEmployeeStatusStart.EditValue
+            End If
         Else
             If Not id_pps = "-1" Then
                 query = "SELECT *, TIMESTAMPDIFF(YEAR, employee_dob, DATE(NOW())) AS age FROM tb_employee_pps WHERE id_employee_pps = '" + id_pps + "'"
@@ -2453,6 +2457,12 @@
             If Not image Is Nothing Then
                 PEEdit.EditValue = image
             End If
+        End If
+    End Sub
+
+    Private Sub DEEmployeeStatusStart_EditValueChanged(sender As Object, e As EventArgs) Handles DEEmployeeStatusStart.EditValueChanged
+        If load_all Then
+            DEEmployeeStatusEnd.Properties.MinValue = DEEmployeeStatusStart.EditValue
         End If
     End Sub
 End Class

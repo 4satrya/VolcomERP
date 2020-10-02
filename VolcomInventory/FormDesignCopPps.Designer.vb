@@ -25,7 +25,9 @@ Partial Class FormDesignCopPps
         Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
         Me.BtnCancel = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnSave = New DevExpress.XtraEditors.SimpleButton()
-        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.PCPurchasing = New DevExpress.XtraEditors.PanelControl()
+        Me.TEPPSNumber = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl8 = New DevExpress.XtraEditors.LabelControl()
         Me.SLEColdStorage = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn21 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -36,10 +38,9 @@ Partial Class FormDesignCopPps
         Me.BtnBrowseContactFrom = New DevExpress.XtraEditors.SimpleButton()
         Me.TETargetCost = New DevExpress.XtraEditors.TextEdit()
         Me.TEVendorName = New DevExpress.XtraEditors.TextEdit()
-        Me.BUpdateVendor = New DevExpress.XtraEditors.SimpleButton()
         Me.TEVendor = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
-        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
+        Me.LVendor = New DevExpress.XtraEditors.LabelControl()
         Me.TEAdditionalCost = New DevExpress.XtraEditors.TextEdit()
         Me.TECode = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
@@ -49,8 +50,6 @@ Partial Class FormDesignCopPps
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
         Me.LECurrency = New DevExpress.XtraEditors.LookUpEdit()
         Me.TEKurs = New DevExpress.XtraEditors.TextEdit()
-        Me.LabelControl8 = New DevExpress.XtraEditors.LabelControl()
-        Me.TextEdit1 = New DevExpress.XtraEditors.TextEdit()
         Me.XTCCOPPD = New DevExpress.XtraTab.XtraTabControl()
         Me.XTPUpdateCOP = New DevExpress.XtraTab.XtraTabPage()
         Me.GCCOPComponent = New DevExpress.XtraGrid.GridControl()
@@ -72,11 +71,15 @@ Partial Class FormDesignCopPps
         Me.TETodayKurs = New DevExpress.XtraEditors.TextEdit()
         Me.BDelete = New DevExpress.XtraEditors.SimpleButton()
         Me.BAdd = New DevExpress.XtraEditors.SimpleButton()
+        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
+        Me.TextEdit1 = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl3.SuspendLayout()
-        CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.PanelControl1.SuspendLayout()
+        CType(Me.PCPurchasing, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PCPurchasing.SuspendLayout()
+        CType(Me.TEPPSNumber.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLEColdStorage.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEDesc.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -88,7 +91,6 @@ Partial Class FormDesignCopPps
         CType(Me.TEEcop.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LECurrency.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEKurs.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TextEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XTCCOPPD, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCCOPPD.SuspendLayout()
         Me.XTPUpdateCOP.SuspendLayout()
@@ -99,6 +101,9 @@ Partial Class FormDesignCopPps
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl4.SuspendLayout()
         CType(Me.TETodayKurs.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl2.SuspendLayout()
+        CType(Me.TextEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LargeImageCollection
@@ -158,35 +163,49 @@ Partial Class FormDesignCopPps
         Me.BtnSave.TabIndex = 6
         Me.BtnSave.Text = "Save"
         '
-        'PanelControl1
+        'PCPurchasing
         '
-        Me.PanelControl1.Controls.Add(Me.TextEdit1)
-        Me.PanelControl1.Controls.Add(Me.LabelControl8)
-        Me.PanelControl1.Controls.Add(Me.SLEColdStorage)
-        Me.PanelControl1.Controls.Add(Me.LabelControl9)
-        Me.PanelControl1.Controls.Add(Me.TEDesc)
-        Me.PanelControl1.Controls.Add(Me.LabelControl6)
-        Me.PanelControl1.Controls.Add(Me.BtnBrowseContactFrom)
-        Me.PanelControl1.Controls.Add(Me.TETargetCost)
-        Me.PanelControl1.Controls.Add(Me.TEVendorName)
-        Me.PanelControl1.Controls.Add(Me.BUpdateVendor)
-        Me.PanelControl1.Controls.Add(Me.TEVendor)
-        Me.PanelControl1.Controls.Add(Me.LabelControl5)
-        Me.PanelControl1.Controls.Add(Me.LabelControl1)
-        Me.PanelControl1.Controls.Add(Me.TEAdditionalCost)
-        Me.PanelControl1.Controls.Add(Me.TECode)
-        Me.PanelControl1.Controls.Add(Me.LabelControl4)
-        Me.PanelControl1.Controls.Add(Me.LabelControl2)
-        Me.PanelControl1.Controls.Add(Me.TEEcop)
-        Me.PanelControl1.Controls.Add(Me.LabelControl7)
-        Me.PanelControl1.Controls.Add(Me.LabelControl3)
-        Me.PanelControl1.Controls.Add(Me.LECurrency)
-        Me.PanelControl1.Controls.Add(Me.TEKurs)
-        Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.PanelControl1.Location = New System.Drawing.Point(0, 0)
-        Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(896, 172)
-        Me.PanelControl1.TabIndex = 8911
+        Me.PCPurchasing.Controls.Add(Me.TEPPSNumber)
+        Me.PCPurchasing.Controls.Add(Me.LabelControl8)
+        Me.PCPurchasing.Controls.Add(Me.SLEColdStorage)
+        Me.PCPurchasing.Controls.Add(Me.LabelControl9)
+        Me.PCPurchasing.Controls.Add(Me.TEDesc)
+        Me.PCPurchasing.Controls.Add(Me.BtnBrowseContactFrom)
+        Me.PCPurchasing.Controls.Add(Me.TEVendorName)
+        Me.PCPurchasing.Controls.Add(Me.TEVendor)
+        Me.PCPurchasing.Controls.Add(Me.LabelControl5)
+        Me.PCPurchasing.Controls.Add(Me.LVendor)
+        Me.PCPurchasing.Controls.Add(Me.TEAdditionalCost)
+        Me.PCPurchasing.Controls.Add(Me.TECode)
+        Me.PCPurchasing.Controls.Add(Me.LabelControl4)
+        Me.PCPurchasing.Controls.Add(Me.LabelControl2)
+        Me.PCPurchasing.Controls.Add(Me.TEEcop)
+        Me.PCPurchasing.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PCPurchasing.Location = New System.Drawing.Point(0, 71)
+        Me.PCPurchasing.Name = "PCPurchasing"
+        Me.PCPurchasing.Size = New System.Drawing.Size(896, 127)
+        Me.PCPurchasing.TabIndex = 8911
+        '
+        'TEPPSNumber
+        '
+        Me.TEPPSNumber.EditValue = ""
+        Me.TEPPSNumber.Location = New System.Drawing.Point(136, 9)
+        Me.TEPPSNumber.Name = "TEPPSNumber"
+        Me.TEPPSNumber.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TEPPSNumber.Properties.Appearance.Options.UseFont = True
+        Me.TEPPSNumber.Properties.EditValueChangedDelay = 1
+        Me.TEPPSNumber.Properties.ReadOnly = True
+        Me.TEPPSNumber.Size = New System.Drawing.Size(320, 20)
+        Me.TEPPSNumber.TabIndex = 8913
+        Me.TEPPSNumber.TabStop = False
+        '
+        'LabelControl8
+        '
+        Me.LabelControl8.Location = New System.Drawing.Point(12, 12)
+        Me.LabelControl8.Name = "LabelControl8"
+        Me.LabelControl8.Size = New System.Drawing.Size(79, 13)
+        Me.LabelControl8.TabIndex = 8912
+        Me.LabelControl8.Text = "Propose Number"
         '
         'SLEColdStorage
         '
@@ -247,18 +266,18 @@ Partial Class FormDesignCopPps
         'LabelControl6
         '
         Me.LabelControl6.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl6.Location = New System.Drawing.Point(12, 116)
+        Me.LabelControl6.Location = New System.Drawing.Point(12, 17)
         Me.LabelControl6.Name = "LabelControl6"
-        Me.LabelControl6.Size = New System.Drawing.Size(57, 13)
+        Me.LabelControl6.Size = New System.Drawing.Size(83, 13)
         Me.LabelControl6.TabIndex = 8909
-        Me.LabelControl6.Text = "Target Cost"
+        Me.LabelControl6.Text = "Target Cost (MD)"
         '
         'BtnBrowseContactFrom
         '
         Me.BtnBrowseContactFrom.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnBrowseContactFrom.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnBrowseContactFrom.Appearance.Options.UseFont = True
-        Me.BtnBrowseContactFrom.Location = New System.Drawing.Point(767, 61)
+        Me.BtnBrowseContactFrom.Location = New System.Drawing.Point(861, 93)
         Me.BtnBrowseContactFrom.Name = "BtnBrowseContactFrom"
         Me.BtnBrowseContactFrom.Size = New System.Drawing.Size(23, 20)
         Me.BtnBrowseContactFrom.TabIndex = 8890
@@ -268,7 +287,7 @@ Partial Class FormDesignCopPps
         'TETargetCost
         '
         Me.TETargetCost.EditValue = ""
-        Me.TETargetCost.Location = New System.Drawing.Point(136, 113)
+        Me.TETargetCost.Location = New System.Drawing.Point(136, 14)
         Me.TETargetCost.Name = "TETargetCost"
         Me.TETargetCost.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TETargetCost.Properties.Appearance.Options.UseFont = True
@@ -281,7 +300,7 @@ Partial Class FormDesignCopPps
         Me.TETargetCost.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
         Me.TETargetCost.Properties.Mask.UseMaskAsDisplayFormat = True
         Me.TETargetCost.Properties.ReadOnly = True
-        Me.TETargetCost.Size = New System.Drawing.Size(226, 20)
+        Me.TETargetCost.Size = New System.Drawing.Size(259, 20)
         Me.TETargetCost.TabIndex = 8908
         '
         'TEVendorName
@@ -289,32 +308,20 @@ Partial Class FormDesignCopPps
         Me.TEVendorName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TEVendorName.EditValue = ""
-        Me.TEVendorName.Location = New System.Drawing.Point(270, 61)
+        Me.TEVendorName.Location = New System.Drawing.Point(270, 87)
         Me.TEVendorName.Name = "TEVendorName"
         Me.TEVendorName.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TEVendorName.Properties.Appearance.Options.UseFont = True
         Me.TEVendorName.Properties.EditValueChangedDelay = 1
         Me.TEVendorName.Properties.ReadOnly = True
-        Me.TEVendorName.Size = New System.Drawing.Size(491, 20)
+        Me.TEVendorName.Size = New System.Drawing.Size(585, 20)
         Me.TEVendorName.TabIndex = 8892
         Me.TEVendorName.TabStop = False
-        '
-        'BUpdateVendor
-        '
-        Me.BUpdateVendor.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BUpdateVendor.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BUpdateVendor.Appearance.Options.UseFont = True
-        Me.BUpdateVendor.Location = New System.Drawing.Point(796, 61)
-        Me.BUpdateVendor.Name = "BUpdateVendor"
-        Me.BUpdateVendor.Size = New System.Drawing.Size(88, 20)
-        Me.BUpdateVendor.TabIndex = 8907
-        Me.BUpdateVendor.TabStop = False
-        Me.BUpdateVendor.Text = "update vendor"
         '
         'TEVendor
         '
         Me.TEVendor.EditValue = ""
-        Me.TEVendor.Location = New System.Drawing.Point(136, 61)
+        Me.TEVendor.Location = New System.Drawing.Point(136, 87)
         Me.TEVendor.Name = "TEVendor"
         Me.TEVendor.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TEVendor.Properties.Appearance.Options.UseFont = True
@@ -325,25 +332,25 @@ Partial Class FormDesignCopPps
         'LabelControl5
         '
         Me.LabelControl5.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl5.Location = New System.Drawing.Point(373, 142)
+        Me.LabelControl5.Location = New System.Drawing.Point(373, 64)
         Me.LabelControl5.Name = "LabelControl5"
         Me.LabelControl5.Size = New System.Drawing.Size(72, 13)
         Me.LabelControl5.TabIndex = 8906
         Me.LabelControl5.Text = "Additional Cost"
         '
-        'LabelControl1
+        'LVendor
         '
-        Me.LabelControl1.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl1.Location = New System.Drawing.Point(12, 64)
-        Me.LabelControl1.Name = "LabelControl1"
-        Me.LabelControl1.Size = New System.Drawing.Size(34, 13)
-        Me.LabelControl1.TabIndex = 8891
-        Me.LabelControl1.Text = "Vendor"
+        Me.LVendor.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LVendor.Location = New System.Drawing.Point(12, 90)
+        Me.LVendor.Name = "LVendor"
+        Me.LVendor.Size = New System.Drawing.Size(34, 13)
+        Me.LVendor.TabIndex = 8891
+        Me.LVendor.Text = "Vendor"
         '
         'TEAdditionalCost
         '
         Me.TEAdditionalCost.EditValue = ""
-        Me.TEAdditionalCost.Location = New System.Drawing.Point(451, 139)
+        Me.TEAdditionalCost.Location = New System.Drawing.Point(451, 61)
         Me.TEAdditionalCost.Name = "TEAdditionalCost"
         Me.TEAdditionalCost.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TEAdditionalCost.Properties.Appearance.Options.UseFont = True
@@ -375,7 +382,7 @@ Partial Class FormDesignCopPps
         'LabelControl4
         '
         Me.LabelControl4.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl4.Location = New System.Drawing.Point(12, 142)
+        Me.LabelControl4.Location = New System.Drawing.Point(12, 64)
         Me.LabelControl4.Name = "LabelControl4"
         Me.LabelControl4.Size = New System.Drawing.Size(99, 13)
         Me.LabelControl4.TabIndex = 8903
@@ -393,7 +400,7 @@ Partial Class FormDesignCopPps
         'TEEcop
         '
         Me.TEEcop.EditValue = ""
-        Me.TEEcop.Location = New System.Drawing.Point(136, 139)
+        Me.TEEcop.Location = New System.Drawing.Point(136, 61)
         Me.TEEcop.Name = "TEEcop"
         Me.TEEcop.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TEEcop.Properties.Appearance.Options.UseFont = True
@@ -411,7 +418,7 @@ Partial Class FormDesignCopPps
         '
         'LabelControl7
         '
-        Me.LabelControl7.Location = New System.Drawing.Point(373, 116)
+        Me.LabelControl7.Location = New System.Drawing.Point(12, 42)
         Me.LabelControl7.Name = "LabelControl7"
         Me.LabelControl7.Size = New System.Drawing.Size(44, 13)
         Me.LabelControl7.TabIndex = 8898
@@ -421,7 +428,7 @@ Partial Class FormDesignCopPps
         'LabelControl3
         '
         Me.LabelControl3.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl3.Location = New System.Drawing.Point(12, 90)
+        Me.LabelControl3.Location = New System.Drawing.Point(319, 42)
         Me.LabelControl3.Name = "LabelControl3"
         Me.LabelControl3.Size = New System.Drawing.Size(21, 13)
         Me.LabelControl3.TabIndex = 8901
@@ -429,7 +436,7 @@ Partial Class FormDesignCopPps
         '
         'LECurrency
         '
-        Me.LECurrency.Location = New System.Drawing.Point(451, 113)
+        Me.LECurrency.Location = New System.Drawing.Point(136, 39)
         Me.LECurrency.Name = "LECurrency"
         Me.LECurrency.Properties.Appearance.Options.UseTextOptions = True
         Me.LECurrency.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near
@@ -443,7 +450,7 @@ Partial Class FormDesignCopPps
         'TEKurs
         '
         Me.TEKurs.EditValue = ""
-        Me.TEKurs.Location = New System.Drawing.Point(136, 87)
+        Me.TEKurs.Location = New System.Drawing.Point(346, 39)
         Me.TEKurs.Name = "TEKurs"
         Me.TEKurs.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TEKurs.Properties.Appearance.Options.UseFont = True
@@ -455,35 +462,14 @@ Partial Class FormDesignCopPps
         Me.TEKurs.Size = New System.Drawing.Size(226, 20)
         Me.TEKurs.TabIndex = 3
         '
-        'LabelControl8
-        '
-        Me.LabelControl8.Location = New System.Drawing.Point(12, 12)
-        Me.LabelControl8.Name = "LabelControl8"
-        Me.LabelControl8.Size = New System.Drawing.Size(79, 13)
-        Me.LabelControl8.TabIndex = 8912
-        Me.LabelControl8.Text = "Propose Number"
-        '
-        'TextEdit1
-        '
-        Me.TextEdit1.EditValue = ""
-        Me.TextEdit1.Location = New System.Drawing.Point(136, 9)
-        Me.TextEdit1.Name = "TextEdit1"
-        Me.TextEdit1.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextEdit1.Properties.Appearance.Options.UseFont = True
-        Me.TextEdit1.Properties.EditValueChangedDelay = 1
-        Me.TextEdit1.Properties.ReadOnly = True
-        Me.TextEdit1.Size = New System.Drawing.Size(320, 20)
-        Me.TextEdit1.TabIndex = 8913
-        Me.TextEdit1.TabStop = False
-        '
         'XTCCOPPD
         '
         Me.XTCCOPPD.Dock = System.Windows.Forms.DockStyle.Fill
         Me.XTCCOPPD.HeaderLocation = DevExpress.XtraTab.TabHeaderLocation.Bottom
-        Me.XTCCOPPD.Location = New System.Drawing.Point(0, 172)
+        Me.XTCCOPPD.Location = New System.Drawing.Point(0, 198)
         Me.XTCCOPPD.Name = "XTCCOPPD"
         Me.XTCCOPPD.SelectedTabPage = Me.XTPUpdateCOP
-        Me.XTCCOPPD.Size = New System.Drawing.Size(896, 363)
+        Me.XTCCOPPD.Size = New System.Drawing.Size(896, 337)
         Me.XTCCOPPD.TabIndex = 8912
         Me.XTCCOPPD.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPUpdateCOP})
         '
@@ -492,7 +478,7 @@ Partial Class FormDesignCopPps
         Me.XTPUpdateCOP.Controls.Add(Me.GCCOPComponent)
         Me.XTPUpdateCOP.Controls.Add(Me.PanelControl4)
         Me.XTPUpdateCOP.Name = "XTPUpdateCOP"
-        Me.XTPUpdateCOP.Size = New System.Drawing.Size(890, 335)
+        Me.XTPUpdateCOP.Size = New System.Drawing.Size(890, 309)
         Me.XTPUpdateCOP.Text = "Input COP"
         '
         'GCCOPComponent
@@ -502,7 +488,7 @@ Partial Class FormDesignCopPps
         Me.GCCOPComponent.MainView = Me.GVCOPComponent
         Me.GCCOPComponent.Name = "GCCOPComponent"
         Me.GCCOPComponent.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RISLEComp})
-        Me.GCCOPComponent.Size = New System.Drawing.Size(890, 295)
+        Me.GCCOPComponent.Size = New System.Drawing.Size(890, 269)
         Me.GCCOPComponent.TabIndex = 0
         Me.GCCOPComponent.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVCOPComponent})
         '
@@ -713,14 +699,59 @@ Partial Class FormDesignCopPps
         Me.BAdd.TabIndex = 0
         Me.BAdd.Text = "Add"
         '
+        'PanelControl2
+        '
+        Me.PanelControl2.Controls.Add(Me.TextEdit1)
+        Me.PanelControl2.Controls.Add(Me.LabelControl1)
+        Me.PanelControl2.Controls.Add(Me.TETargetCost)
+        Me.PanelControl2.Controls.Add(Me.LabelControl6)
+        Me.PanelControl2.Controls.Add(Me.LECurrency)
+        Me.PanelControl2.Controls.Add(Me.TEKurs)
+        Me.PanelControl2.Controls.Add(Me.LabelControl3)
+        Me.PanelControl2.Controls.Add(Me.LabelControl7)
+        Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelControl2.Location = New System.Drawing.Point(0, 0)
+        Me.PanelControl2.Name = "PanelControl2"
+        Me.PanelControl2.Size = New System.Drawing.Size(896, 71)
+        Me.PanelControl2.TabIndex = 8913
+        '
+        'TextEdit1
+        '
+        Me.TextEdit1.EditValue = ""
+        Me.TextEdit1.Location = New System.Drawing.Point(490, 14)
+        Me.TextEdit1.Name = "TextEdit1"
+        Me.TextEdit1.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextEdit1.Properties.Appearance.Options.UseFont = True
+        Me.TextEdit1.Properties.DisplayFormat.FormatString = "N2"
+        Me.TextEdit1.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.TextEdit1.Properties.EditFormat.FormatString = "N2"
+        Me.TextEdit1.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.TextEdit1.Properties.EditValueChangedDelay = 1
+        Me.TextEdit1.Properties.Mask.EditMask = "N2"
+        Me.TextEdit1.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
+        Me.TextEdit1.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.TextEdit1.Properties.ReadOnly = True
+        Me.TextEdit1.Size = New System.Drawing.Size(259, 20)
+        Me.TextEdit1.TabIndex = 8910
+        '
+        'LabelControl1
+        '
+        Me.LabelControl1.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl1.Location = New System.Drawing.Point(401, 17)
+        Me.LabelControl1.Name = "LabelControl1"
+        Me.LabelControl1.Size = New System.Drawing.Size(83, 13)
+        Me.LabelControl1.TabIndex = 8911
+        Me.LabelControl1.Text = "Target Cost (MD)"
+        '
         'FormDesignCopPps
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(896, 573)
         Me.Controls.Add(Me.XTCCOPPD)
-        Me.Controls.Add(Me.PanelControl1)
+        Me.Controls.Add(Me.PCPurchasing)
         Me.Controls.Add(Me.PanelControl3)
+        Me.Controls.Add(Me.PanelControl2)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FormDesignCopPps"
@@ -729,9 +760,10 @@ Partial Class FormDesignCopPps
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl3.ResumeLayout(False)
-        CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.PanelControl1.ResumeLayout(False)
-        Me.PanelControl1.PerformLayout()
+        CType(Me.PCPurchasing, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PCPurchasing.ResumeLayout(False)
+        Me.PCPurchasing.PerformLayout()
+        CType(Me.TEPPSNumber.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SLEColdStorage.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEDesc.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -743,7 +775,6 @@ Partial Class FormDesignCopPps
         CType(Me.TEEcop.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LECurrency.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEKurs.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TextEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XTCCOPPD, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XTCCOPPD.ResumeLayout(False)
         Me.XTPUpdateCOP.ResumeLayout(False)
@@ -755,6 +786,10 @@ Partial Class FormDesignCopPps
         Me.PanelControl4.ResumeLayout(False)
         Me.PanelControl4.PerformLayout()
         CType(Me.TETodayKurs.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl2.ResumeLayout(False)
+        Me.PanelControl2.PerformLayout()
+        CType(Me.TextEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -763,7 +798,7 @@ Partial Class FormDesignCopPps
     Friend WithEvents PanelControl3 As DevExpress.XtraEditors.PanelControl
     Friend WithEvents BtnCancel As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BtnSave As DevExpress.XtraEditors.SimpleButton
-    Friend WithEvents PanelControl1 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents PCPurchasing As DevExpress.XtraEditors.PanelControl
     Friend WithEvents SLEColdStorage As DevExpress.XtraEditors.SearchLookUpEdit
     Friend WithEvents SearchLookUpEdit1View As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumn21 As DevExpress.XtraGrid.Columns.GridColumn
@@ -774,10 +809,9 @@ Partial Class FormDesignCopPps
     Friend WithEvents BtnBrowseContactFrom As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents TETargetCost As DevExpress.XtraEditors.TextEdit
     Friend WithEvents TEVendorName As DevExpress.XtraEditors.TextEdit
-    Friend WithEvents BUpdateVendor As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents TEVendor As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelControl5 As DevExpress.XtraEditors.LabelControl
-    Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LVendor As DevExpress.XtraEditors.LabelControl
     Friend WithEvents TEAdditionalCost As DevExpress.XtraEditors.TextEdit
     Friend WithEvents TECode As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelControl4 As DevExpress.XtraEditors.LabelControl
@@ -788,7 +822,7 @@ Partial Class FormDesignCopPps
     Friend WithEvents LECurrency As DevExpress.XtraEditors.LookUpEdit
     Friend WithEvents TEKurs As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelControl8 As DevExpress.XtraEditors.LabelControl
-    Friend WithEvents TextEdit1 As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents TEPPSNumber As DevExpress.XtraEditors.TextEdit
     Friend WithEvents XTCCOPPD As DevExpress.XtraTab.XtraTabControl
     Friend WithEvents XTPUpdateCOP As DevExpress.XtraTab.XtraTabPage
     Friend WithEvents GCCOPComponent As DevExpress.XtraGrid.GridControl
@@ -810,4 +844,7 @@ Partial Class FormDesignCopPps
     Friend WithEvents TETodayKurs As DevExpress.XtraEditors.TextEdit
     Friend WithEvents BDelete As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BAdd As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents PanelControl2 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents TextEdit1 As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
 End Class

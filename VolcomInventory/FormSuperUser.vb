@@ -1,4 +1,7 @@
-﻿Public Class FormSuperUser
+﻿Imports Pechkin
+Imports Pechkin.Synchronized
+
+Public Class FormSuperUser
 
     Private Sub BtnConn_Click(sender As Object, e As EventArgs) Handles BtnConn.Click
         Close()
@@ -19,6 +22,40 @@
     End Function
 
     Private Sub BtnOther_Click(sender As Object, e As EventArgs) Handles BtnOther.Click
+        'config
+        Dim gc As GlobalConfig = New GlobalConfig()
+        gc.SetPaperOrientation(True)
+        gc.SetPaperSize(Printing.PaperKind.A4)
+
+        'converter
+        Dim pc As SynchronizedPechkin = New SynchronizedPechkin(gc)
+        'html setting
+        Dim os As ObjectConfig = New ObjectConfig()
+        os.SetPageUri("D:\zalorafile.html")
+
+        Dim result As Byte() = pc.Convert(os)
+        IO.File.WriteAllBytes("D:/hello.pdf", result)
+
+        'Dim doc As HtmlToPdfDocument = New HtmlToPdfDocument()
+
+        'doc = Nothing
+
+        'doc.GlobalSettings.PaperSize = Printing.PaperKind.A4
+        'doc.GlobalSettings.Orientation = GlobalSettings.PaperOrientation.Landscape
+
+        'Dim os As ObjectSettings = New ObjectSettings()
+        'os.HtmlText = str
+        'os.WebSettings.PrintBackground = True
+        'os.WebSettings.PrintMediaType = True
+
+
+        'Dim converter As IConverter = New StandardConverter(New PdfToolset(New Win32EmbeddedDeployment(New TempFolderDeployment())))
+        'Dim result As Byte() = converter.Convert(doc)
+
+        'IO.File.WriteAllBytes("D:/hello.pdf", result)
+
+
+
         'cek blibli api
         'Dim bli As New ClassBliBliApi()
         'bli.get_order_list()

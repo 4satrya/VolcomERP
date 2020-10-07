@@ -395,9 +395,9 @@ Partial Class FormMasterDesignCOPPD
         Me.LabelControl6.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelControl6.Location = New System.Drawing.Point(10, 99)
         Me.LabelControl6.Name = "LabelControl6"
-        Me.LabelControl6.Size = New System.Drawing.Size(57, 13)
+        Me.LabelControl6.Size = New System.Drawing.Size(83, 13)
         Me.LabelControl6.TabIndex = 8909
-        Me.LabelControl6.Text = "Target Cost"
+        Me.LabelControl6.Text = "Target Cost (MD)"
         '
         'TETargetCost
         '

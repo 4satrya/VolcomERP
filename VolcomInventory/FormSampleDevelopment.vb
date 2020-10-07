@@ -367,4 +367,9 @@ ORDER BY kp.id_prod_order_cps2 DESC"
             End If
         End If
     End Sub
+
+    Private Sub EntryECOPToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EntryECOPToolStripMenuItem.Click
+        FormDesignCopPps.id_design = GVDesign.GetFocusedRowCellValue("id_design").ToString
+        FormDesignCopPps.ShowDialog()
+    End Sub
 End Class

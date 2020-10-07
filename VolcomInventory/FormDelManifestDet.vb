@@ -362,7 +362,7 @@
         Else
             Dim data_view As DataView = New DataView(GCList.DataSource)
 
-            data_view.Sort = "comp_number ASC, id_awbill ASC, combine_number ASC"
+            data_view.Sort = "comp_number ASC, id_awbill ASC, awbill_no ASC, combine_number ASC"
 
             Dim report As ReportDelManifest = New ReportDelManifest
 

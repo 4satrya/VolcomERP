@@ -14,7 +14,7 @@
         query += "d.comp_name AS comp_name_req_from,c.id_comp_contact AS id_comp_name_req_from, "
         query += "f.comp_name AS comp_name_req_to,e.id_comp_contact AS id_comp_name_req_to, "
         query += "a.prod_order_mrs_date, "
-        query += "p.id_prod_order, p.prod_order_number, ds.design_code, ds.design_display_name "
+        query += "p.id_prod_order, p.prod_order_number, ds.design_code, ds.design_display_name, emp.employee_name AS created_by "
         query += "FROM tb_prod_order_mrs a "
         query += "LEFT JOIN tb_prod_order p ON p.id_prod_order = a.id_prod_order "
         query += "LEFT JOIN tb_prod_demand_design pd ON p.id_prod_demand_design = pd.id_prod_demand_design "
@@ -25,11 +25,13 @@
         query += "INNER JOIN tb_m_comp_contact e ON a.id_comp_contact_req_to = e.id_comp_contact "
         query += "INNER JOIN tb_m_comp f ON e.id_comp = f.id_comp "
         query += "INNER JOIN tb_lookup_report_status h ON h.id_report_status = a.id_report_status "
+        query += "LEFT JOIN tb_m_user AS usr ON a.created_by = usr.id_user "
+        query += "LEFT JOIN tb_m_employee AS emp ON usr.id_employee = emp.id_employee "
         query += "WHERE a.id_prod_order IS NOT NULL "
         query += "ORDER BY a.id_prod_order_mrs DESC"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCMRS.DataSource = data
-
+        GVMRS.BestFitColumns()
         show_but_mrs()
     End Sub
 

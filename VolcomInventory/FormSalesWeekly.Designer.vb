@@ -71,27 +71,30 @@ Partial Class FormSalesWeekly
         Me.XTPSummary = New DevExpress.XtraTab.XtraTabPage()
         Me.XTPDetail = New DevExpress.XtraTab.XtraTabPage()
         Me.GCFilter = New DevExpress.XtraEditors.GroupControl()
+        Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
+        Me.CEAllUnit = New DevExpress.XtraEditors.CheckEdit()
+        Me.PanelControl4 = New DevExpress.XtraEditors.PanelControl()
+        Me.BtnView = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnExportToXLSDaily = New DevExpress.XtraEditors.SimpleButton()
+        Me.CEPromo = New DevExpress.XtraEditors.CheckEdit()
         Me.LabelControl8 = New DevExpress.XtraEditors.LabelControl()
+        Me.SLEStore = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumnStoreLabel = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.SLEStoreGroup = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView3 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumnid_comp_group = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncomp_group = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumndescription = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.BtnExportToXLSDaily = New DevExpress.XtraEditors.SimpleButton()
-        Me.CEPromo = New DevExpress.XtraEditors.CheckEdit()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
+        Me.DEFrom = New DevExpress.XtraEditors.DateEdit()
+        Me.DEUntil = New DevExpress.XtraEditors.DateEdit()
         Me.LEOptionView = New DevExpress.XtraEditors.LookUpEdit()
         Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
         Me.BHide = New DevExpress.XtraEditors.SimpleButton()
         Me.BExpand = New DevExpress.XtraEditors.SimpleButton()
-        Me.BtnView = New DevExpress.XtraEditors.SimpleButton()
-        Me.DEUntil = New DevExpress.XtraEditors.DateEdit()
-        Me.DEFrom = New DevExpress.XtraEditors.DateEdit()
-        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
-        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
-        Me.SLEStore = New DevExpress.XtraEditors.SearchLookUpEdit()
-        Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.GridColumnStoreLabel = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.XTPWeeklySales = New DevExpress.XtraTab.XtraTabPage()
         Me.GCSalesWeeklyByDate = New DevExpress.XtraGrid.GridControl()
         Me.BGVSalesWeeklyByDate = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridView()
@@ -156,16 +159,21 @@ Partial Class FormSalesWeekly
         Me.XTPSummary.SuspendLayout()
         CType(Me.GCFilter, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GCFilter.SuspendLayout()
-        CType(Me.SLEStoreGroup.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GridView3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl3.SuspendLayout()
+        CType(Me.CEAllUnit.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl4.SuspendLayout()
         CType(Me.CEPromo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LEOptionView.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DEUntil.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DEFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DEFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLEStore.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SLEStoreGroup.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEUntil.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LEOptionView.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTPWeeklySales.SuspendLayout()
         CType(Me.GCSalesWeeklyByDate, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BGVSalesWeeklyByDate, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -422,7 +430,7 @@ Partial Class FormSalesWeekly
         Me.GCSalesPOS.Location = New System.Drawing.Point(0, 0)
         Me.GCSalesPOS.MainView = Me.GVSalesPOS
         Me.GCSalesPOS.Name = "GCSalesPOS"
-        Me.GCSalesPOS.Size = New System.Drawing.Size(1081, 426)
+        Me.GCSalesPOS.Size = New System.Drawing.Size(1081, 344)
         Me.GCSalesPOS.TabIndex = 0
         Me.GCSalesPOS.ToolTipController = Me.ToolTipControllerNew
         Me.GCSalesPOS.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVSalesPOS, Me.GVSalesPOSDet})
@@ -659,9 +667,9 @@ Partial Class FormSalesWeekly
         Me.GCView.CaptionLocation = DevExpress.Utils.Locations.Left
         Me.GCView.Controls.Add(Me.XTCDailySales)
         Me.GCView.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCView.Location = New System.Drawing.Point(0, 50)
+        Me.GCView.Location = New System.Drawing.Point(0, 132)
         Me.GCView.Name = "GCView"
-        Me.GCView.Size = New System.Drawing.Size(1132, 436)
+        Me.GCView.Size = New System.Drawing.Size(1132, 354)
         Me.GCView.TabIndex = 3
         '
         'XTCDailySales
@@ -671,7 +679,7 @@ Partial Class FormSalesWeekly
         Me.XTCDailySales.Location = New System.Drawing.Point(20, 2)
         Me.XTCDailySales.Name = "XTCDailySales"
         Me.XTCDailySales.SelectedTabPage = Me.XTPSummary
-        Me.XTCDailySales.Size = New System.Drawing.Size(1110, 432)
+        Me.XTCDailySales.Size = New System.Drawing.Size(1110, 350)
         Me.XTCDailySales.TabIndex = 1
         Me.XTCDailySales.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPSummary, Me.XTPDetail})
         '
@@ -679,51 +687,129 @@ Partial Class FormSalesWeekly
         '
         Me.XTPSummary.Controls.Add(Me.GCSalesPOS)
         Me.XTPSummary.Name = "XTPSummary"
-        Me.XTPSummary.Size = New System.Drawing.Size(1081, 426)
+        Me.XTPSummary.Size = New System.Drawing.Size(1081, 344)
         Me.XTPSummary.Text = "Summary"
         '
         'XTPDetail
         '
         Me.XTPDetail.Name = "XTPDetail"
         Me.XTPDetail.PageVisible = False
-        Me.XTPDetail.Size = New System.Drawing.Size(1081, 426)
+        Me.XTPDetail.Size = New System.Drawing.Size(1081, 344)
         Me.XTPDetail.Text = "Detail"
         '
         'GCFilter
         '
         Me.GCFilter.CaptionLocation = DevExpress.Utils.Locations.Left
-        Me.GCFilter.Controls.Add(Me.LabelControl8)
-        Me.GCFilter.Controls.Add(Me.SLEStoreGroup)
-        Me.GCFilter.Controls.Add(Me.BtnExportToXLSDaily)
-        Me.GCFilter.Controls.Add(Me.CEPromo)
+        Me.GCFilter.Controls.Add(Me.PanelControl3)
         Me.GCFilter.Controls.Add(Me.LEOptionView)
         Me.GCFilter.Controls.Add(Me.LabelControl4)
         Me.GCFilter.Controls.Add(Me.BHide)
         Me.GCFilter.Controls.Add(Me.BExpand)
-        Me.GCFilter.Controls.Add(Me.BtnView)
-        Me.GCFilter.Controls.Add(Me.DEUntil)
-        Me.GCFilter.Controls.Add(Me.DEFrom)
-        Me.GCFilter.Controls.Add(Me.LabelControl2)
-        Me.GCFilter.Controls.Add(Me.LabelControl3)
-        Me.GCFilter.Controls.Add(Me.SLEStore)
-        Me.GCFilter.Controls.Add(Me.LabelControl1)
         Me.GCFilter.Dock = System.Windows.Forms.DockStyle.Top
         Me.GCFilter.Location = New System.Drawing.Point(0, 0)
         Me.GCFilter.Name = "GCFilter"
-        Me.GCFilter.Size = New System.Drawing.Size(1132, 50)
+        Me.GCFilter.Size = New System.Drawing.Size(1132, 132)
         Me.GCFilter.TabIndex = 2
+        '
+        'PanelControl3
+        '
+        Me.PanelControl3.Controls.Add(Me.CEAllUnit)
+        Me.PanelControl3.Controls.Add(Me.PanelControl4)
+        Me.PanelControl3.Controls.Add(Me.CEPromo)
+        Me.PanelControl3.Controls.Add(Me.LabelControl8)
+        Me.PanelControl3.Controls.Add(Me.SLEStore)
+        Me.PanelControl3.Controls.Add(Me.SLEStoreGroup)
+        Me.PanelControl3.Controls.Add(Me.LabelControl1)
+        Me.PanelControl3.Controls.Add(Me.LabelControl3)
+        Me.PanelControl3.Controls.Add(Me.LabelControl2)
+        Me.PanelControl3.Controls.Add(Me.DEFrom)
+        Me.PanelControl3.Controls.Add(Me.DEUntil)
+        Me.PanelControl3.Dock = System.Windows.Forms.DockStyle.Left
+        Me.PanelControl3.Location = New System.Drawing.Point(20, 2)
+        Me.PanelControl3.Name = "PanelControl3"
+        Me.PanelControl3.Size = New System.Drawing.Size(464, 128)
+        Me.PanelControl3.TabIndex = 8930
+        '
+        'CEAllUnit
+        '
+        Me.CEAllUnit.Location = New System.Drawing.Point(235, 64)
+        Me.CEAllUnit.Name = "CEAllUnit"
+        Me.CEAllUnit.Properties.Caption = "Include Branch Sales"
+        Me.CEAllUnit.Size = New System.Drawing.Size(121, 19)
+        Me.CEAllUnit.TabIndex = 8930
+        '
+        'PanelControl4
+        '
+        Me.PanelControl4.Controls.Add(Me.BtnView)
+        Me.PanelControl4.Controls.Add(Me.BtnExportToXLSDaily)
+        Me.PanelControl4.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.PanelControl4.Location = New System.Drawing.Point(2, 90)
+        Me.PanelControl4.Name = "PanelControl4"
+        Me.PanelControl4.Size = New System.Drawing.Size(460, 36)
+        Me.PanelControl4.TabIndex = 0
+        '
+        'BtnView
+        '
+        Me.BtnView.Location = New System.Drawing.Point(370, 9)
+        Me.BtnView.LookAndFeel.SkinName = "Blue"
+        Me.BtnView.Name = "BtnView"
+        Me.BtnView.Size = New System.Drawing.Size(75, 20)
+        Me.BtnView.TabIndex = 8896
+        Me.BtnView.Text = "View"
+        '
+        'BtnExportToXLSDaily
+        '
+        Me.BtnExportToXLSDaily.Location = New System.Drawing.Point(272, 9)
+        Me.BtnExportToXLSDaily.LookAndFeel.SkinName = "Blue"
+        Me.BtnExportToXLSDaily.Name = "BtnExportToXLSDaily"
+        Me.BtnExportToXLSDaily.Size = New System.Drawing.Size(92, 20)
+        Me.BtnExportToXLSDaily.TabIndex = 8927
+        Me.BtnExportToXLSDaily.Text = "Export to XLS"
+        '
+        'CEPromo
+        '
+        Me.CEPromo.Location = New System.Drawing.Point(358, 64)
+        Me.CEPromo.Name = "CEPromo"
+        Me.CEPromo.Properties.Caption = "Include Promo"
+        Me.CEPromo.Size = New System.Drawing.Size(89, 19)
+        Me.CEPromo.TabIndex = 8926
         '
         'LabelControl8
         '
-        Me.LabelControl8.Location = New System.Drawing.Point(26, 17)
+        Me.LabelControl8.Location = New System.Drawing.Point(15, 15)
         Me.LabelControl8.Name = "LabelControl8"
         Me.LabelControl8.Size = New System.Drawing.Size(58, 13)
         Me.LabelControl8.TabIndex = 8928
         Me.LabelControl8.Text = "Store Group"
         '
+        'SLEStore
+        '
+        Me.SLEStore.Location = New System.Drawing.Point(261, 12)
+        Me.SLEStore.Name = "SLEStore"
+        Me.SLEStore.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEStore.Properties.View = Me.SearchLookUpEdit1View
+        Me.SLEStore.Size = New System.Drawing.Size(186, 20)
+        Me.SLEStore.TabIndex = 1
+        '
+        'SearchLookUpEdit1View
+        '
+        Me.SearchLookUpEdit1View.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnStoreLabel})
+        Me.SearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.SearchLookUpEdit1View.Name = "SearchLookUpEdit1View"
+        Me.SearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.SearchLookUpEdit1View.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumnStoreLabel
+        '
+        Me.GridColumnStoreLabel.Caption = "Store"
+        Me.GridColumnStoreLabel.FieldName = "comp_name_label"
+        Me.GridColumnStoreLabel.Name = "GridColumnStoreLabel"
+        Me.GridColumnStoreLabel.Visible = True
+        Me.GridColumnStoreLabel.VisibleIndex = 0
+        '
         'SLEStoreGroup
         '
-        Me.SLEStoreGroup.Location = New System.Drawing.Point(90, 14)
+        Me.SLEStoreGroup.Location = New System.Drawing.Point(79, 12)
         Me.SLEStoreGroup.Name = "SLEStoreGroup"
         Me.SLEStoreGroup.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.SLEStoreGroup.Properties.View = Me.GridView3
@@ -760,26 +846,57 @@ Partial Class FormSalesWeekly
         Me.GridColumndescription.Visible = True
         Me.GridColumndescription.VisibleIndex = 1
         '
-        'BtnExportToXLSDaily
+        'LabelControl1
         '
-        Me.BtnExportToXLSDaily.Location = New System.Drawing.Point(941, 14)
-        Me.BtnExportToXLSDaily.LookAndFeel.SkinName = "Blue"
-        Me.BtnExportToXLSDaily.Name = "BtnExportToXLSDaily"
-        Me.BtnExportToXLSDaily.Size = New System.Drawing.Size(92, 20)
-        Me.BtnExportToXLSDaily.TabIndex = 8927
-        Me.BtnExportToXLSDaily.Text = "Export to XLS"
+        Me.LabelControl1.Location = New System.Drawing.Point(229, 15)
+        Me.LabelControl1.Name = "LabelControl1"
+        Me.LabelControl1.Size = New System.Drawing.Size(26, 13)
+        Me.LabelControl1.TabIndex = 0
+        Me.LabelControl1.Text = "Store"
         '
-        'CEPromo
+        'LabelControl3
         '
-        Me.CEPromo.Location = New System.Drawing.Point(765, 14)
-        Me.CEPromo.Name = "CEPromo"
-        Me.CEPromo.Properties.Caption = "Include Promo"
-        Me.CEPromo.Size = New System.Drawing.Size(89, 19)
-        Me.CEPromo.TabIndex = 8926
+        Me.LabelControl3.Location = New System.Drawing.Point(15, 41)
+        Me.LabelControl3.Name = "LabelControl3"
+        Me.LabelControl3.Size = New System.Drawing.Size(24, 13)
+        Me.LabelControl3.TabIndex = 8892
+        Me.LabelControl3.Text = "From"
+        '
+        'LabelControl2
+        '
+        Me.LabelControl2.Location = New System.Drawing.Point(229, 41)
+        Me.LabelControl2.Name = "LabelControl2"
+        Me.LabelControl2.Size = New System.Drawing.Size(21, 13)
+        Me.LabelControl2.TabIndex = 8893
+        Me.LabelControl2.Text = "Until"
+        '
+        'DEFrom
+        '
+        Me.DEFrom.EditValue = Nothing
+        Me.DEFrom.Location = New System.Drawing.Point(79, 38)
+        Me.DEFrom.Name = "DEFrom"
+        Me.DEFrom.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEFrom.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.DEFrom.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.DEFrom.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEFrom.Size = New System.Drawing.Size(144, 20)
+        Me.DEFrom.TabIndex = 8894
+        '
+        'DEUntil
+        '
+        Me.DEUntil.EditValue = Nothing
+        Me.DEUntil.Location = New System.Drawing.Point(261, 38)
+        Me.DEUntil.Name = "DEUntil"
+        Me.DEUntil.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEUntil.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.DEUntil.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.DEUntil.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEUntil.Size = New System.Drawing.Size(186, 20)
+        Me.DEUntil.TabIndex = 8895
         '
         'LEOptionView
         '
-        Me.LEOptionView.Location = New System.Drawing.Point(94, 134)
+        Me.LEOptionView.Location = New System.Drawing.Point(105, 199)
         Me.LEOptionView.Name = "LEOptionView"
         Me.LEOptionView.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.LEOptionView.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_option_view", "Id Option View", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("option_view", "Option View")})
@@ -788,7 +905,7 @@ Partial Class FormSalesWeekly
         '
         'LabelControl4
         '
-        Me.LabelControl4.Location = New System.Drawing.Point(31, 137)
+        Me.LabelControl4.Location = New System.Drawing.Point(42, 202)
         Me.LabelControl4.Name = "LabelControl4"
         Me.LabelControl4.Size = New System.Drawing.Size(57, 13)
         Me.LabelControl4.TabIndex = 8899
@@ -797,7 +914,7 @@ Partial Class FormSalesWeekly
         'BHide
         '
         Me.BHide.ImageIndex = 9
-        Me.BHide.Location = New System.Drawing.Point(330, 134)
+        Me.BHide.Location = New System.Drawing.Point(341, 199)
         Me.BHide.Name = "BHide"
         Me.BHide.Size = New System.Drawing.Size(104, 20)
         Me.BHide.TabIndex = 8898
@@ -807,94 +924,12 @@ Partial Class FormSalesWeekly
         'BExpand
         '
         Me.BExpand.ImageIndex = 8
-        Me.BExpand.Location = New System.Drawing.Point(227, 134)
+        Me.BExpand.Location = New System.Drawing.Point(238, 199)
         Me.BExpand.Name = "BExpand"
         Me.BExpand.Size = New System.Drawing.Size(99, 20)
         Me.BExpand.TabIndex = 8897
         Me.BExpand.Text = "Expand All Detail"
         Me.BExpand.Visible = False
-        '
-        'BtnView
-        '
-        Me.BtnView.Location = New System.Drawing.Point(860, 14)
-        Me.BtnView.LookAndFeel.SkinName = "Blue"
-        Me.BtnView.Name = "BtnView"
-        Me.BtnView.Size = New System.Drawing.Size(75, 20)
-        Me.BtnView.TabIndex = 8896
-        Me.BtnView.Text = "View"
-        '
-        'DEUntil
-        '
-        Me.DEUntil.EditValue = Nothing
-        Me.DEUntil.Location = New System.Drawing.Point(648, 14)
-        Me.DEUntil.Name = "DEUntil"
-        Me.DEUntil.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.DEUntil.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
-        Me.DEUntil.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
-        Me.DEUntil.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.DEUntil.Size = New System.Drawing.Size(111, 20)
-        Me.DEUntil.TabIndex = 8895
-        '
-        'DEFrom
-        '
-        Me.DEFrom.EditValue = Nothing
-        Me.DEFrom.Location = New System.Drawing.Point(494, 14)
-        Me.DEFrom.Name = "DEFrom"
-        Me.DEFrom.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.DEFrom.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
-        Me.DEFrom.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
-        Me.DEFrom.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.DEFrom.Size = New System.Drawing.Size(121, 20)
-        Me.DEFrom.TabIndex = 8894
-        '
-        'LabelControl2
-        '
-        Me.LabelControl2.Location = New System.Drawing.Point(621, 17)
-        Me.LabelControl2.Name = "LabelControl2"
-        Me.LabelControl2.Size = New System.Drawing.Size(21, 13)
-        Me.LabelControl2.TabIndex = 8893
-        Me.LabelControl2.Text = "Until"
-        '
-        'LabelControl3
-        '
-        Me.LabelControl3.Location = New System.Drawing.Point(464, 17)
-        Me.LabelControl3.Name = "LabelControl3"
-        Me.LabelControl3.Size = New System.Drawing.Size(24, 13)
-        Me.LabelControl3.TabIndex = 8892
-        Me.LabelControl3.Text = "From"
-        '
-        'SLEStore
-        '
-        Me.SLEStore.Location = New System.Drawing.Point(272, 14)
-        Me.SLEStore.Name = "SLEStore"
-        Me.SLEStore.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.SLEStore.Properties.View = Me.SearchLookUpEdit1View
-        Me.SLEStore.Size = New System.Drawing.Size(186, 20)
-        Me.SLEStore.TabIndex = 1
-        '
-        'SearchLookUpEdit1View
-        '
-        Me.SearchLookUpEdit1View.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnStoreLabel})
-        Me.SearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
-        Me.SearchLookUpEdit1View.Name = "SearchLookUpEdit1View"
-        Me.SearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = False
-        Me.SearchLookUpEdit1View.OptionsView.ShowGroupPanel = False
-        '
-        'GridColumnStoreLabel
-        '
-        Me.GridColumnStoreLabel.Caption = "Store"
-        Me.GridColumnStoreLabel.FieldName = "comp_name_label"
-        Me.GridColumnStoreLabel.Name = "GridColumnStoreLabel"
-        Me.GridColumnStoreLabel.Visible = True
-        Me.GridColumnStoreLabel.VisibleIndex = 0
-        '
-        'LabelControl1
-        '
-        Me.LabelControl1.Location = New System.Drawing.Point(240, 17)
-        Me.LabelControl1.Name = "LabelControl1"
-        Me.LabelControl1.Size = New System.Drawing.Size(26, 13)
-        Me.LabelControl1.TabIndex = 0
-        Me.LabelControl1.Text = "Store"
         '
         'XTPWeeklySales
         '
@@ -1433,16 +1468,22 @@ Partial Class FormSalesWeekly
         CType(Me.GCFilter, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GCFilter.ResumeLayout(False)
         Me.GCFilter.PerformLayout()
-        CType(Me.SLEStoreGroup.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GridView3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl3.ResumeLayout(False)
+        Me.PanelControl3.PerformLayout()
+        CType(Me.CEAllUnit.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl4.ResumeLayout(False)
         CType(Me.CEPromo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LEOptionView.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DEUntil.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DEFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DEFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SLEStore.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SLEStoreGroup.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEUntil.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LEOptionView.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XTPWeeklySales.ResumeLayout(False)
         CType(Me.GCSalesWeeklyByDate, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BGVSalesWeeklyByDate, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1620,4 +1661,7 @@ Partial Class FormSalesWeekly
     Friend WithEvents GridColumnid_comp_group As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumncomp_group As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumndescription As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents PanelControl3 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents PanelControl4 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents CEAllUnit As DevExpress.XtraEditors.CheckEdit
 End Class

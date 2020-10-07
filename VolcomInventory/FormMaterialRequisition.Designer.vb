@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FormMaterialRequisition
     Inherits DevExpress.XtraEditors.XtraForm
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         If disposing AndAlso components IsNot Nothing Then
             components.Dispose()
@@ -17,7 +17,7 @@ Partial Class FormMaterialRequisition
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.GCMRS = New DevExpress.XtraGrid.GridControl()
         Me.GVMRS = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -32,6 +32,10 @@ Partial Class FormMaterialRequisition
         Me.GridColumnWONumber = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnMRSNumber = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnIdReportStatus = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnPONumber = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnDesign = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnCode = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnCreatedBy = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemProgressBar1 = New DevExpress.XtraEditors.Repository.RepositoryItemProgressBar()
         CType(Me.GCMRS, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVMRS, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -51,7 +55,7 @@ Partial Class FormMaterialRequisition
         '
         'GVMRS
         '
-        Me.GVMRS.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdMRS, Me.GridColumnIdWO, Me.GridColumnIdCompReqFrom, Me.GridColumnCompReqFrom, Me.GridColumnIdCompReqTo, Me.GridColumnCompReqTo, Me.GridColumnDate, Me.GridColumnStatus, Me.GridColumnWONumber, Me.GridColumnMRSNumber, Me.GridColumnIdReportStatus})
+        Me.GVMRS.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdMRS, Me.GridColumnIdWO, Me.GridColumnIdCompReqFrom, Me.GridColumnCompReqFrom, Me.GridColumnIdCompReqTo, Me.GridColumnCompReqTo, Me.GridColumnDate, Me.GridColumnStatus, Me.GridColumnWONumber, Me.GridColumnMRSNumber, Me.GridColumnIdReportStatus, Me.GridColumnPONumber, Me.GridColumnCode, Me.GridColumnDesign, Me.GridColumnCreatedBy})
         Me.GVMRS.GridControl = Me.GCMRS
         Me.GVMRS.Name = "GVMRS"
         Me.GVMRS.OptionsBehavior.Editable = False
@@ -83,7 +87,7 @@ Partial Class FormMaterialRequisition
         Me.GridColumnCompReqFrom.Name = "GridColumnCompReqFrom"
         Me.GridColumnCompReqFrom.Visible = True
         Me.GridColumnCompReqFrom.VisibleIndex = 1
-        Me.GridColumnCompReqFrom.Width = 214
+        Me.GridColumnCompReqFrom.Width = 95
         '
         'GridColumnIdCompReqTo
         '
@@ -98,7 +102,7 @@ Partial Class FormMaterialRequisition
         Me.GridColumnCompReqTo.Name = "GridColumnCompReqTo"
         Me.GridColumnCompReqTo.Visible = True
         Me.GridColumnCompReqTo.VisibleIndex = 2
-        Me.GridColumnCompReqTo.Width = 214
+        Me.GridColumnCompReqTo.Width = 108
         '
         'GridColumnDate
         '
@@ -109,7 +113,7 @@ Partial Class FormMaterialRequisition
         Me.GridColumnDate.Name = "GridColumnDate"
         Me.GridColumnDate.Visible = True
         Me.GridColumnDate.VisibleIndex = 3
-        Me.GridColumnDate.Width = 129
+        Me.GridColumnDate.Width = 94
         '
         'GridColumnStatus
         '
@@ -118,7 +122,7 @@ Partial Class FormMaterialRequisition
         Me.GridColumnStatus.Name = "GridColumnStatus"
         Me.GridColumnStatus.Visible = True
         Me.GridColumnStatus.VisibleIndex = 4
-        Me.GridColumnStatus.Width = 96
+        Me.GridColumnStatus.Width = 84
         '
         'GridColumnWONumber
         '
@@ -134,13 +138,49 @@ Partial Class FormMaterialRequisition
         Me.GridColumnMRSNumber.Name = "GridColumnMRSNumber"
         Me.GridColumnMRSNumber.Visible = True
         Me.GridColumnMRSNumber.VisibleIndex = 0
-        Me.GridColumnMRSNumber.Width = 150
+        Me.GridColumnMRSNumber.Width = 104
         '
         'GridColumnIdReportStatus
         '
         Me.GridColumnIdReportStatus.Caption = "Id Report Status"
         Me.GridColumnIdReportStatus.FieldName = "id_report_status"
         Me.GridColumnIdReportStatus.Name = "GridColumnIdReportStatus"
+        '
+        'GridColumnPONumber
+        '
+        Me.GridColumnPONumber.Caption = "PO Number"
+        Me.GridColumnPONumber.FieldName = "prod_order_number"
+        Me.GridColumnPONumber.Name = "GridColumnPONumber"
+        Me.GridColumnPONumber.Visible = True
+        Me.GridColumnPONumber.VisibleIndex = 5
+        Me.GridColumnPONumber.Width = 67
+        '
+        'GridColumnDesign
+        '
+        Me.GridColumnDesign.Caption = "Design"
+        Me.GridColumnDesign.FieldName = "design_display_name"
+        Me.GridColumnDesign.Name = "GridColumnDesign"
+        Me.GridColumnDesign.Visible = True
+        Me.GridColumnDesign.VisibleIndex = 7
+        Me.GridColumnDesign.Width = 67
+        '
+        'GridColumnCode
+        '
+        Me.GridColumnCode.Caption = "Code"
+        Me.GridColumnCode.FieldName = "design_code"
+        Me.GridColumnCode.Name = "GridColumnCode"
+        Me.GridColumnCode.Visible = True
+        Me.GridColumnCode.VisibleIndex = 6
+        Me.GridColumnCode.Width = 67
+        '
+        'GridColumnCreatedBy
+        '
+        Me.GridColumnCreatedBy.Caption = "Created By"
+        Me.GridColumnCreatedBy.FieldName = "created_by"
+        Me.GridColumnCreatedBy.Name = "GridColumnCreatedBy"
+        Me.GridColumnCreatedBy.Visible = True
+        Me.GridColumnCreatedBy.VisibleIndex = 8
+        Me.GridColumnCreatedBy.Width = 80
         '
         'RepositoryItemProgressBar1
         '
@@ -183,4 +223,8 @@ Partial Class FormMaterialRequisition
     Friend WithEvents GridColumnMRSNumber As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnIdReportStatus As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RepositoryItemProgressBar1 As DevExpress.XtraEditors.Repository.RepositoryItemProgressBar
+    Friend WithEvents GridColumnPONumber As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnDesign As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnCode As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnCreatedBy As DevExpress.XtraGrid.Columns.GridColumn
 End Class

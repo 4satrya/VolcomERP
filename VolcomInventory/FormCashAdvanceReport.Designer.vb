@@ -49,6 +49,7 @@ Partial Class FormCashAdvanceReport
         Me.GridColumnStatus = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnOverdue = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.BSummaryReport = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.DateTo.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -63,6 +64,7 @@ Partial Class FormCashAdvanceReport
         '
         'PanelControl1
         '
+        Me.PanelControl1.Controls.Add(Me.BSummaryReport)
         Me.PanelControl1.Controls.Add(Me.BPrintDefault)
         Me.PanelControl1.Controls.Add(Me.BPrintAdvance)
         Me.PanelControl1.Controls.Add(Me.BPrint)
@@ -79,7 +81,7 @@ Partial Class FormCashAdvanceReport
         '
         'BPrintDefault
         '
-        Me.BPrintDefault.Location = New System.Drawing.Point(723, 10)
+        Me.BPrintDefault.Location = New System.Drawing.Point(860, 10)
         Me.BPrintDefault.Name = "BPrintDefault"
         Me.BPrintDefault.Size = New System.Drawing.Size(48, 23)
         Me.BPrintDefault.TabIndex = 8940
@@ -398,6 +400,14 @@ Partial Class FormCashAdvanceReport
         Me.RepositoryItemCheckEdit1.ValueChecked = "yes"
         Me.RepositoryItemCheckEdit1.ValueUnchecked = "no"
         '
+        'BSummaryReport
+        '
+        Me.BSummaryReport.Location = New System.Drawing.Point(723, 10)
+        Me.BSummaryReport.Name = "BSummaryReport"
+        Me.BSummaryReport.Size = New System.Drawing.Size(131, 23)
+        Me.BSummaryReport.TabIndex = 8941
+        Me.BSummaryReport.Text = "Print Summary Report"
+        '
         'FormCashAdvanceReport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -456,4 +466,5 @@ Partial Class FormCashAdvanceReport
     Friend WithEvents GridColumnCOADesc As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnCoaExpense As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RepositoryItemMemoEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit
+    Friend WithEvents BSummaryReport As DevExpress.XtraEditors.SimpleButton
 End Class

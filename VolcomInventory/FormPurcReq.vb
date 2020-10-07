@@ -160,7 +160,7 @@ WHERE ext.id_user='" & id_user & "' "
             where_dep = " WHERE dep.id_departement='" & SLEDepartement.EditValue.ToString() & "'"
         End If
         '
-        Dim query As String = "SELECT pr.`id_purc_req`,pr.requirement_date,sts.report_status,et.expense_type,pr.id_report_status,dep.`departement`,et.pr_report_mark_type,pr.`purc_req_number`,pr.`note`,empc.`employee_name` AS created_by,pr.`date_created`,empu.`employee_name` AS last_upd_by,pr.`date_last_upd` FROM `tb_purc_req` pr
+        Dim query As String = "SELECT pr.`id_purc_req`,pr.requirement_date,sts.report_status,et.expense_type,pr.id_report_status,dep.`departement`,et.pr_report_mark_type,pr.`purc_req_number`,pr.`note`,empc.`employee_name` AS created_by,pr.`date_created`,empu.`employee_name` AS last_upd_by,pr.`date_last_upd`, pr.`id_report_status` FROM `tb_purc_req` pr
                                 INNER JOIN tb_lookup_expense_type et ON et.id_expense_type=pr.id_expense_type
                                 INNER JOIN tb_m_departement dep ON dep.id_departement=pr.id_departement
                                 INNER JOIN tb_m_user usrc ON usrc.`id_user`=pr.`id_user_created`
@@ -254,6 +254,20 @@ WHERE bex.`id_b_expense` = '" & GVItemReqList.GetRowCellValue(i, "id_b_expense")
 
     Private Sub GVPurcReq_DoubleClick(sender As Object, e As EventArgs) Handles GVPurcReq.DoubleClick
         FormPurcReqDet.id_req = GVPurcReq.GetFocusedRowCellValue("id_purc_req").ToString
+        FormPurcReqDet.ShowDialog()
+    End Sub
+
+    Private Sub GVPurcReq_PopupMenuShowing(sender As Object, e As DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs) Handles GVPurcReq.PopupMenuShowing
+        If GVPurcReq.GetFocusedRowCellValue("id_report_status").ToString = "5" Then
+            DuplicateToolStripMenuItem.Visible = True
+        Else
+            DuplicateToolStripMenuItem.Visible = False
+        End If
+    End Sub
+
+    Private Sub DuplicateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DuplicateToolStripMenuItem.Click
+        FormPurcReqDet.id_req = GVPurcReq.GetFocusedRowCellValue("id_purc_req").ToString
+        FormPurcReqDet.is_duplicate = "1"
         FormPurcReqDet.ShowDialog()
     End Sub
 End Class

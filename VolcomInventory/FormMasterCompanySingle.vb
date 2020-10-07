@@ -476,6 +476,7 @@ WHERE comp.id_comp = '{0}'", id_company)
         EP_TE_cant_blank(EPCompany, TECPName)
         EP_TE_cant_blank(EPCompany, TECPPhone)
 
+        TECompanyCode_Validating(TECompanyCode, New System.ComponentModel.CancelEventArgs)
 
         Dim query As String
         Dim name As String = addSlashes(TECompanyName.Text)
@@ -1188,33 +1189,51 @@ WHERE c.id_comp='" & id_company & "'"
                     If dt_pkp.Rows(0)("id_tax").ToString = "2" And dt_pkp.Rows(0)("legal").ToString = "0" Then
                         warningCustom("Please upload PPKP")
                     Else
-                        Dim q As String = "SELECT id_comp_cat FROM tb_m_comp WHERE id_comp='" & id_company & "'"
-                        Dim id_cat As String = execute_query(q, 0, True, "", "", "", "")
-                        If id_cat = "1" Or id_cat = "8" Then
-                            'cek attachment already have or not
-                            Dim query As String = "SELECT c.`id_comp`,c.`comp_name`,lt.`id_legal_type`,lt.`legal_type`,cl.`id_comp_legal` FROM tb_m_comp c
+                        EP_TE_cant_blank(EPCompany, TECompanyName)
+                        EP_TE_cant_blank(EPCompany, TECompanyCode)
+                        EP_TE_cant_blank(EPCompany, TECompanyPrintedName)
+
+                        EP_TE_cant_blank(EPCompany, TEPhoneComp)
+                        EP_TE_cant_blank(EPCompany, TEEMail)
+                        EP_ME_cant_blank(EPCompany, MEAddress)
+
+                        EP_TE_cant_blank(EPCompany, TECPEmail)
+                        EP_TE_cant_blank(EPCompany, TECPName)
+                        EP_TE_cant_blank(EPCompany, TECPPhone)
+
+                        TECompanyCode_Validating(TECompanyCode, New System.ComponentModel.CancelEventArgs)
+
+                        If Not formIsValidInGroup(EPCompany, GroupControlDesc) Or Not formIsValidInGroup(EPCompany, GCAddress) Or Not formIsValidInGroup(EPCompany, GCCP) Then
+                            errorInput()
+                        Else
+                            Dim q As String = "SELECT id_comp_cat FROM tb_m_comp WHERE id_comp='" & id_company & "'"
+                            Dim id_cat As String = execute_query(q, 0, True, "", "", "", "")
+                            If id_cat = "1" Or id_cat = "8" Then
+                                'cek attachment already have or not
+                                Dim query As String = "SELECT c.`id_comp`,c.`comp_name`,lt.`id_legal_type`,lt.`legal_type`,cl.`id_comp_legal` FROM tb_m_comp c
 INNER JOIN tb_vendor_type_legal vtl ON vtl.`id_vendor_type`=c.`id_vendor_type` AND c.id_comp_cat=vtl.id_comp_cat
 INNER JOIN `tb_lookup_legal_type` lt ON lt.`id_legal_type`=vtl.`id_legal_type`
 LEFT JOIN tb_m_comp_legal cl ON cl.`id_comp`=c.`id_comp` AND vtl.`id_legal_type`=cl.`id_legal_Type`
 WHERE c.id_comp='" & id_company & "' AND ISNULL(cl.`id_comp_legal`)"
-                            Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
-                            If data.Rows.Count = 0 Then
+                                Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+                                If data.Rows.Count = 0 Then
+                                    FormReportMark.id_report = id_company
+                                    FormReportMark.report_mark_type = "153"
+                                    FormReportMark.is_view = is_view
+                                    FormReportMark.ShowDialog()
+                                Else
+                                    Dim str_missing As String = "Please upload this remaining document : "
+                                    For i As Integer = 0 To data.Rows.Count - 1
+                                        str_missing += vbNewLine & " - " & data.Rows(i)("legal_type").ToString
+                                    Next
+                                    warningCustom(str_missing)
+                                End If
+                            Else
                                 FormReportMark.id_report = id_company
                                 FormReportMark.report_mark_type = "153"
                                 FormReportMark.is_view = is_view
                                 FormReportMark.ShowDialog()
-                            Else
-                                Dim str_missing As String = "Please upload this remaining document : "
-                                For i As Integer = 0 To data.Rows.Count - 1
-                                    str_missing += vbNewLine & " - " & data.Rows(i)("legal_type").ToString
-                                Next
-                                warningCustom(str_missing)
                             End If
-                        Else
-                            FormReportMark.id_report = id_company
-                            FormReportMark.report_mark_type = "153"
-                            FormReportMark.is_view = is_view
-                            FormReportMark.ShowDialog()
                         End If
                     End If
                 End If
@@ -1294,6 +1313,8 @@ WHERE c.id_comp='" & id_company & "' AND ISNULL(cl.`id_comp_legal`)"
 
     Private Sub LECompanyCategory_EditValueChanged(sender As Object, e As EventArgs) Handles LECompanyCategory.EditValueChanged
         Try
+            TECompanyCode_Validating(TECompanyCode, New System.ComponentModel.CancelEventArgs)
+
             If LECompanyCategory.EditValue.ToString = "1" Or LECompanyCategory.EditValue.ToString = "8" Then
                 LVendorType.Visible = True
                 SLEVendorType.Visible = True

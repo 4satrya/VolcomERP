@@ -2,12 +2,22 @@
     Private Sub FormOLStore_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         setDateNow()
         viewComp()
+        viewOLStore()
     End Sub
 
     Sub setDateNow()
         Dim data_dt As DataTable = execute_query("SELECT DATE(NOW()) AS `dt`", -1, True, "", "", "", "")
         DEFrom.EditValue = data_dt.Rows(0)("dt")
         DEUntil.EditValue = data_dt.Rows(0)("dt")
+    End Sub
+
+    Sub viewOLStore()
+        Cursor = Cursors.WaitCursor
+        Dim query As String = "SELECT cg.id_comp_group, cg.description 
+        FROM tb_m_comp_group cg WHERE cg.is_use_api=1
+        ORDER BY cg.idx_prior_order ASC "
+        viewSearchLookupQuery(SLEOLStore, query, "id_comp_group", "description", "id_comp_group")
+        Cursor = Cursors.Default
     End Sub
 
     Sub viewComp()
@@ -428,11 +438,12 @@
         vo.note_price, vo.id_design_cat, vo.id_design_price, vo.id_product, vo.note_stock, vo.note_promo,
         vo.id_report_trf_order, vo.rmt_trf_order, trf_order.sales_order_number AS `trf_order_number`,
         vo.id_report_trf, vo.rmt_trf, trf.fg_trf_number AS `trf_number`,
-        vo.id_report_order, vo.rmt_order , actual_order.sales_order_number, vo.fail_reason
+        vo.id_report_order, vo.rmt_order , actual_order.sales_order_number, vo.fail_reason, vo.id_comp_group, cg.comp_group, cg.description AS `comp_group_name`
         FROM tb_ol_store_order vo
         LEFT JOIN tb_sales_order trf_order ON trf_order.id_sales_order = vo.id_report_trf_order
         LEFT JOIN tb_sales_order actual_order ON actual_order.id_sales_order = vo.id_report_order
         LEFT JOIN tb_fg_trf trf ON trf.id_fg_trf = vo.id_report_trf
+        LEFT JOIN tb_m_comp_group cg ON cg.id_comp_group = vo.id_comp_group
         WHERE 1=1 " + cond
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCVolcom.DataSource = data
@@ -460,14 +471,20 @@
         Cursor = Cursors.Default
     End Sub
 
+
     Private Sub BtnSyncOrder_Click(sender As Object, e As EventArgs) Handles BtnSyncOrder.Click
         Cursor = Cursors.WaitCursor
+        'initial general
+        Dim err As String = ""
 
         'cek freeze
-        Dim qf As String = "SELECT c.id_comp ,cm.comp_number, cm.comp_name
-        FROM tb_m_comp_volcom_ol c
-        INNER JOIN tb_m_comp cm ON cm.id_comp = c.id_comp
-        WHERE cm.is_active=2 "
+        Dim id_comp_group As String = SLEOLStore.EditValue.ToString
+        Dim id_comp_in As String = execute_query("SELECT CONCAT(cc1.id_comp, ',',cc2.id_comp) AS `id_comp_all` 
+        FROM tb_m_comp_group c 
+        INNER JOIN tb_m_comp_contact cc1 ON cc1.id_comp_contact = c.id_wh_order_contact_normal
+        INNER JOIN tb_m_comp_contact cc2 ON cc2.id_comp_contact = c.id_wh_order_contact_sale
+        WHERE c.id_comp_group='" + id_comp_group + "'", 0, True, "", "", "", "")
+        Dim qf As String = "SELECT * FROM tb_m_comp c WHERE c.id_comp IN (" + id_comp_in + ") AND c.is_active=2 "
         Dim df As DataTable = execute_query(qf, -1, True, "", "", "", "")
         If df.Rows.Count > 0 Then
             Cursor = Cursors.Default
@@ -480,6 +497,9 @@
             stopCustom("Sync still running")
         Else
             SplashScreenManager1.ShowWaitForm()
+            Dim ord As New ClassSalesOrder()
+            ord.setProceccedWebOrder("1")
+            ord.insertLogWebOrder("0", "Start", "0")
 
             'cek allow
             Dim is_must_ok_stock As String = "2"
@@ -489,42 +509,52 @@
                 is_must_ok_stock = "2"
             End If
 
-            Dim ord As New ClassSalesOrder()
-            ord.setProceccedWebOrder("1")
-            ord.insertLogWebOrder("0", "Start")
+            'get api type
+            Dim dt_grp As DataTable = execute_query("SELECT cg.id_api_type, cg.comp_group FROM tb_m_comp_group cg WHERE cg.id_comp_group='" + id_comp_group + "' ", -1, True, "", "", "", "")
+            Dim id_api_type As String = dt_grp.Rows(0)("id_api_type").ToString
+            Dim comp_group As String = dt_grp.Rows(0)("comp_group").ToString.ToUpper
 
             'get order from web
-            Dim err As String = ""
-            Try
-                Dim shop As New ClassShopifyApi()
-                shop.get_order_erp()
-            Catch ex As Exception
-                err = ex.ToString
-            End Try
-            ord.insertLogWebOrder("0", "Get order from website. " + err)
+            ord.insertLogWebOrder("0", "Get order from website. " + err, id_comp_group)
+            If id_api_type = "1" Then
+                'SHOPIFY
+                Try
+                    Dim shop As New ClassShopifyApi()
+                    shop.get_order_erp()
+                Catch ex As Exception
+                    err = ex.ToString
+                End Try
+            ElseIf id_api_type = "2" Then
+                'ZALORA
+            ElseIf id_api_type = "3" Then
+                'BLIBLI
+                Try
+                    Dim shop As New ClassBliBliApi()
+                    shop.get_order_list()
+                Catch ex As Exception
+                    err = ex.ToString
+                End Try
+            End If
 
             'get order yg belum diproses
             Dim qord As String = "SELECT o.id, o.sales_order_ol_shop_number  FROM tb_ol_store_order o
-            WHERE o.is_process=2
+            WHERE o.is_process=2 AND o.id_comp_group='" + id_comp_group + "'
             GROUP BY o.id "
             Dim dord As DataTable = execute_query(qord, -1, True, "", "", "", "")
             If dord.Rows.Count > 0 Then
                 Try
                     For i As Integer = 0 To dord.Rows.Count - 1
-                        SplashScreenManager1.SetWaitFormDescription("Checking order #" + dord.Rows(i)("sales_order_ol_shop_number").ToString)
-                        execute_non_query_long("CALL create_web_order(" + dord.Rows(i)("id").ToString + ", " + is_must_ok_stock + ");", True, "", "", "", "")
+                        SplashScreenManager1.SetWaitFormDescription(comp_group + " ORDER : #" + dord.Rows(i)("sales_order_ol_shop_number").ToString)
+                        execute_non_query_long("CALL create_web_order_grp(" + dord.Rows(i)("id").ToString + ", " + is_must_ok_stock + ",'" + id_comp_group + "');", True, "", "", "", "")
                     Next
                 Catch ex As Exception
-                    ord.insertLogWebOrder("0", ex.ToString)
+                    ord.insertLogWebOrder("0", ex.ToString, id_comp_group)
                     stopCustom(ex.ToString)
                 End Try
-                ord.setProceccedWebOrder("2")
-                ord.insertLogWebOrder("0", "End")
-            Else
-                ord.setProceccedWebOrder("2")
-                ord.insertLogWebOrder("0", "End")
             End If
 
+            ord.insertLogWebOrder("0", "End", "0")
+            ord.setProceccedWebOrder("2")
             SplashScreenManager1.CloseWaitForm()
             If err = "" Then
                 infoCustom("Sync completed.")
@@ -540,6 +570,7 @@
         CEAllow.EditValue = False
         Cursor = Cursors.Default
     End Sub
+
 
     Function orderNotProcessed()
         Dim query As String="SELECT * FROM tb_ol_store_order od WHERE od.is_process=2 "

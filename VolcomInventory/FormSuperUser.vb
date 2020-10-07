@@ -19,6 +19,10 @@
     End Function
 
     Private Sub BtnOther_Click(sender As Object, e As EventArgs) Handles BtnOther.Click
+        'cek blibli api
+        'Dim bli As New ClassBliBliApi()
+        'bli.get_order_list()
+
         'manual fullfilled
         'Dim q As String = "SELECT d.id_pl_sales_order_del AS `id_report`,c.id_commerce_type, c.id_comp AS `id_store`, so.id_sales_order_ol_shop AS `id_web_order`
         'FROM tb_pl_sales_order_del d 
@@ -34,9 +38,12 @@
         'f.id_volcomstore_normal = id_volcomstore_normal
         'f.id_volcomstore_sale = id_volcomstore_sale
         'f.updateStatusOnlineStore(data.Rows(0)("id_commerce_type").ToString, data.Rows(0)("id_store").ToString, data.Rows(0)("id_report").ToString, data.Rows(0)("id_web_order").ToString)
+
+        'create ship invoice
         'Dim shp As New ClassShipInvoice()
         'shp.id_invoice_ship = "-1"
         'shp.create("25081")
+
         'Dim a As New ClassShopifyApi()
         'a.get_product()
 

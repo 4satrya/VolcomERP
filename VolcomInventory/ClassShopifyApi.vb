@@ -199,6 +199,8 @@
         request.Credentials = New Net.NetworkCredential(username, password)
         Dim response As Net.WebResponse = request.GetResponse()
 
+        Dim data_payment_gateway As DataTable = execute_query("SELECT ol_store_pay FROM tb_ol_store_pay", -1, True, "", "", "", "")
+
         Using dataStream As IO.Stream = response.GetResponseStream()
             Dim reader As IO.StreamReader = New IO.StreamReader(dataStream)
 
@@ -208,146 +210,160 @@
 
             If json("orders").Count > 0 Then
                 For Each row In json("orders").ToList
-                    'check first
-                    Dim q_check As String = "SELECT * FROM tb_ol_store_order WHERE id='" & row("id").ToString & "'"
-                    Dim dt_check As DataTable = execute_query(q_check, -1, True, "", "", "", "")
-                    If Not dt_check.Rows.Count > 0 Then
-                        'var data general
-                        Dim id As String = ""
-                        Dim sales_order_ol_shop_number As String = ""
-                        Dim sales_order_ol_shop_date As String = ""
-                        Dim payment_method As String = ""
-                        Dim checkout_id As String = ""
-                        Dim tracking_code As String = ""
-                        Dim financial_status As String = ""
-                        Dim total_discounts As String = ""
+                    'check payment
+                    Dim is_valid_payment As Boolean = True
+                    For Each row_payment In row("payment_gateway_names").ToList
+                        Dim view_payment_gateway As DataView = New DataView(data_payment_gateway)
 
-                        id = row("id").ToString
-                        sales_order_ol_shop_number = row("order_number").ToString
-                        sales_order_ol_shop_date = DateTime.Parse(row("created_at").ToString).ToString("yyyy-MM-dd HH:mm:ss")
-                        payment_method = row("gateway").ToString
-                        tracking_code = ""
-                        financial_status = row("financial_status").ToString
-                        checkout_id = row("checkout_id").ToString
-                        total_discounts = decimalSQL(row("total_discounts").ToString)
+                        view_payment_gateway.RowFilter = "ol_store_pay = '" + row_payment.ToString + "'"
 
-                        'discount codes
-                        Dim discount_code As String = ""
-                        If row("discount_codes").Count > 0 Then
-                            For Each row_disc_codes In row("discount_codes").ToList
-                                discount_code = row_disc_codes("code").ToString
-                                Exit For
-                            Next
-                        Else
-                            discount_code = ""
+                        If view_payment_gateway.Count <= 0 Then
+                            is_valid_payment = False
                         End If
+                    Next
 
-                        'data customer
-                        Dim customer_name As String = ""
-                        customer_name = row("customer")("first_name").ToString + " " + row("customer")("last_name").ToString
+                    If is_valid_payment Then
+                        'check first
+                        Dim q_check As String = "SELECT * FROM tb_ol_store_order WHERE id='" & row("id").ToString & "'"
+                        Dim dt_check As DataTable = execute_query(q_check, -1, True, "", "", "", "")
+                        If Not dt_check.Rows.Count > 0 Then
+                            'var data general
+                            Dim id As String = ""
+                            Dim sales_order_ol_shop_number As String = ""
+                            Dim sales_order_ol_shop_date As String = ""
+                            Dim payment_method As String = ""
+                            Dim checkout_id As String = ""
+                            Dim tracking_code As String = ""
+                            Dim financial_status As String = ""
+                            Dim total_discounts As String = ""
 
-                        'data shipping
-                        Dim shipping_name As String = ""
-                        Dim shipping_address As String = ""
-                        Dim shipping_address1 As String = ""
-                        Dim shipping_address2 As String = ""
-                        Dim shipping_phone As String = ""
-                        Dim shipping_city As String = ""
-                        Dim shipping_post_code As String = ""
-                        Dim shipping_region As String = ""
-                        Try
-                            shipping_name = If(row("shipping_address")("name") Is Nothing, "", row("shipping_address")("name").ToString)
-                        Catch ex As Exception
-                            shipping_name = ""
-                        End Try
-                        Try
-                            shipping_address = row("shipping_address")("address1").ToString + " "
-                            shipping_address += row("shipping_address")("address2").ToString + " "
-                            shipping_address += row("shipping_address")("city").ToString + " "
-                            shipping_address += row("shipping_address")("province").ToString + " "
-                            shipping_address += row("shipping_address")("zip").ToString + " "
-                            shipping_address += row("shipping_address")("country").ToString + " "
-                            shipping_address += "Phone : " + row("shipping_address")("phone").ToString
-                        Catch ex As Exception
-                            shipping_address = ""
-                        End Try
-                        Try
-                            shipping_address1 = If(row("shipping_address")("address1") Is Nothing, "", row("shipping_address")("address1").ToString)
-                        Catch ex As Exception
-                            shipping_address1 = ""
-                        End Try
-                        Try
-                            shipping_address2 = If(row("shipping_address")("address2") Is Nothing, "", row("shipping_address")("address2").ToString)
-                        Catch ex As Exception
-                            shipping_address2 = ""
-                        End Try
-                        Try
-                            shipping_phone = If(row("shipping_address")("phone") Is Nothing, "", row("shipping_address")("phone").ToString)
-                        Catch ex As Exception
-                            shipping_phone = ""
-                        End Try
-                        Try
-                            shipping_city = If(row("shipping_address")("city") Is Nothing, "", row("shipping_address")("city").ToString)
-                        Catch ex As Exception
-                            shipping_city = ""
-                        End Try
-                        Try
-                            shipping_post_code = If(row("shipping_address")("zip") Is Nothing, "", row("shipping_address")("zip").ToString)
-                        Catch ex As Exception
-                            shipping_post_code = ""
-                        End Try
-                        Try
-                            shipping_region = If(row("shipping_address")("province") Is Nothing, "", row("shipping_address")("province").ToString)
-                        Catch ex As Exception
-                            shipping_region = ""
-                        End Try
+                            id = row("id").ToString
+                            sales_order_ol_shop_number = row("order_number").ToString
+                            sales_order_ol_shop_date = DateTime.Parse(row("created_at").ToString).ToString("yyyy-MM-dd HH:mm:ss")
+                            payment_method = row("gateway").ToString
+                            tracking_code = ""
+                            financial_status = row("financial_status").ToString
+                            checkout_id = row("checkout_id").ToString
+                            total_discounts = decimalSQL(row("total_discounts").ToString)
 
-                        'detail shipping
-                        Dim shipping_price As String = ""
-                        For Each row_ship In row("shipping_lines").ToList
-                            shipping_price = decimalSQL(row_ship("price").ToString)
-                        Next
-
-                        'detail line item
-                        Dim qins As String = "INSERT tb_ol_store_order(id, sales_order_ol_shop_number, sales_order_ol_shop_date, customer_name, shipping_name, shipping_address,shipping_address1,shipping_address2, shipping_phone, 
-                    shipping_city, shipping_post_code, shipping_region, payment_method, tracking_code, ol_store_sku, ol_store_id, sku, design_price, sales_order_det_qty, grams, financial_status, total_disc_order, discount_allocations_amo,checkout_id, shipping_price, discount_code, id_comp_group) VALUES "
-                        Dim ol_store_sku As String = ""
-                        Dim ol_store_id As String = ""
-                        Dim sku As String = ""
-                        Dim design_price As String = ""
-                        Dim sales_order_det_qty As String = ""
-                        Dim grams As String = ""
-                        Dim discount_allocations_amo As String = "0"
-                        Dim i As Integer = 0
-                        For Each row_item In row("line_items").ToList
-                            ol_store_sku = row_item("sku").ToString.Replace("-GWP", "").Trim
-                            ol_store_id = row_item("id").ToString
-                            sku = row_item("sku").ToString.Replace("-GWP", "").Trim
-                            design_price = decimalSQL(row_item("price").ToString)
-                            sales_order_det_qty = decimalSQL(row_item("quantity").ToString)
-                            grams = decimalSQL(row_item("grams").ToString)
-
-                            'discount allocation
-                            If row_item("discount_allocations").Count > 0 Then
-                                For Each row_disc_aloc In row_item("discount_allocations").ToList
-                                    discount_allocations_amo = decimalSQL(row_disc_aloc("amount").ToString)
+                            'discount codes
+                            Dim discount_code As String = ""
+                            If row("discount_codes").Count > 0 Then
+                                For Each row_disc_codes In row("discount_codes").ToList
+                                    discount_code = row_disc_codes("code").ToString
                                     Exit For
                                 Next
                             Else
-                                discount_allocations_amo = "0"
+                                discount_code = ""
                             End If
 
-                            If i > 0 Then
-                                qins += ","
-                            End If
-                            qins += "('" + id + "', '" + sales_order_ol_shop_number + "', '" + sales_order_ol_shop_date + "', '" + addSlashes(customer_name) + "', '" + addSlashes(shipping_name) + "', '" + addSlashes(shipping_address) + "','" + addSlashes(shipping_address1) + "','" + addSlashes(shipping_address2) + "', '" + addSlashes(shipping_phone) + "', 
+                            'data customer
+                            Dim customer_name As String = ""
+                            customer_name = row("customer")("first_name").ToString + " " + row("customer")("last_name").ToString
+
+                            'data shipping
+                            Dim shipping_name As String = ""
+                            Dim shipping_address As String = ""
+                            Dim shipping_address1 As String = ""
+                            Dim shipping_address2 As String = ""
+                            Dim shipping_phone As String = ""
+                            Dim shipping_city As String = ""
+                            Dim shipping_post_code As String = ""
+                            Dim shipping_region As String = ""
+                            Try
+                                shipping_name = If(row("shipping_address")("name") Is Nothing, "", row("shipping_address")("name").ToString)
+                            Catch ex As Exception
+                                shipping_name = ""
+                            End Try
+                            Try
+                                shipping_address = row("shipping_address")("address1").ToString + " "
+                                shipping_address += row("shipping_address")("address2").ToString + " "
+                                shipping_address += row("shipping_address")("city").ToString + " "
+                                shipping_address += row("shipping_address")("province").ToString + " "
+                                shipping_address += row("shipping_address")("zip").ToString + " "
+                                shipping_address += row("shipping_address")("country").ToString + " "
+                                shipping_address += "Phone : " + row("shipping_address")("phone").ToString
+                            Catch ex As Exception
+                                shipping_address = ""
+                            End Try
+                            Try
+                                shipping_address1 = If(row("shipping_address")("address1") Is Nothing, "", row("shipping_address")("address1").ToString)
+                            Catch ex As Exception
+                                shipping_address1 = ""
+                            End Try
+                            Try
+                                shipping_address2 = If(row("shipping_address")("address2") Is Nothing, "", row("shipping_address")("address2").ToString)
+                            Catch ex As Exception
+                                shipping_address2 = ""
+                            End Try
+                            Try
+                                shipping_phone = If(row("shipping_address")("phone") Is Nothing, "", row("shipping_address")("phone").ToString)
+                            Catch ex As Exception
+                                shipping_phone = ""
+                            End Try
+                            Try
+                                shipping_city = If(row("shipping_address")("city") Is Nothing, "", row("shipping_address")("city").ToString)
+                            Catch ex As Exception
+                                shipping_city = ""
+                            End Try
+                            Try
+                                shipping_post_code = If(row("shipping_address")("zip") Is Nothing, "", row("shipping_address")("zip").ToString)
+                            Catch ex As Exception
+                                shipping_post_code = ""
+                            End Try
+                            Try
+                                shipping_region = If(row("shipping_address")("province") Is Nothing, "", row("shipping_address")("province").ToString)
+                            Catch ex As Exception
+                                shipping_region = ""
+                            End Try
+
+                            'detail shipping
+                            Dim shipping_price As String = ""
+                            For Each row_ship In row("shipping_lines").ToList
+                                shipping_price = decimalSQL(row_ship("price").ToString)
+                            Next
+
+                            'detail line item
+                            Dim qins As String = "INSERT tb_ol_store_order(id, sales_order_ol_shop_number, sales_order_ol_shop_date, customer_name, shipping_name, shipping_address,shipping_address1,shipping_address2, shipping_phone, 
+                    shipping_city, shipping_post_code, shipping_region, payment_method, tracking_code, ol_store_sku, ol_store_id, sku, design_price, sales_order_det_qty, grams, financial_status, total_disc_order, discount_allocations_amo,checkout_id, shipping_price, discount_code, id_comp_group) VALUES "
+                            Dim ol_store_sku As String = ""
+                            Dim ol_store_id As String = ""
+                            Dim sku As String = ""
+                            Dim design_price As String = ""
+                            Dim sales_order_det_qty As String = ""
+                            Dim grams As String = ""
+                            Dim discount_allocations_amo As String = "0"
+                            Dim i As Integer = 0
+                            For Each row_item In row("line_items").ToList
+                                ol_store_sku = row_item("sku").ToString.Replace("-GWP", "").Trim
+                                ol_store_id = row_item("id").ToString
+                                sku = row_item("sku").ToString.Replace("-GWP", "").Trim
+                                design_price = decimalSQL(row_item("price").ToString)
+                                sales_order_det_qty = decimalSQL(row_item("quantity").ToString)
+                                grams = decimalSQL(row_item("grams").ToString)
+
+                                'discount allocation
+                                If row_item("discount_allocations").Count > 0 Then
+                                    For Each row_disc_aloc In row_item("discount_allocations").ToList
+                                        discount_allocations_amo = decimalSQL(row_disc_aloc("amount").ToString)
+                                        Exit For
+                                    Next
+                                Else
+                                    discount_allocations_amo = "0"
+                                End If
+
+                                If i > 0 Then
+                                    qins += ","
+                                End If
+                                qins += "('" + id + "', '" + sales_order_ol_shop_number + "', '" + sales_order_ol_shop_date + "', '" + addSlashes(customer_name) + "', '" + addSlashes(shipping_name) + "', '" + addSlashes(shipping_address) + "','" + addSlashes(shipping_address1) + "','" + addSlashes(shipping_address2) + "', '" + addSlashes(shipping_phone) + "', 
                         '" + addSlashes(shipping_city) + "', '" + addSlashes(shipping_post_code) + "', '" + addSlashes(shipping_region) + "', '" + payment_method + "', '" + tracking_code + "', '" + ol_store_sku + "', '" + ol_store_id + "', '" + sku + "', '" + design_price + "', '" + sales_order_det_qty + "','" + grams + "', '" + addSlashes(financial_status) + "', '" + total_discounts + "', '" + discount_allocations_amo + "','" + addSlashes(checkout_id) + "', '" + shipping_price + "', '" + discount_code + "', '" + id_comp_group + "') "
-                            i += 1
-                        Next
+                                i += 1
+                            Next
 
-                        'insert ortder
-                        If i > 0 Then
-                            execute_non_query(qins, True, "", "", "", "")
+                            'insert ortder
+                            If i > 0 Then
+                                execute_non_query(qins, True, "", "", "", "")
+                            End If
                         End If
                     End If
                 Next

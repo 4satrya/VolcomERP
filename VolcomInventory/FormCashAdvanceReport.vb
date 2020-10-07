@@ -124,4 +124,26 @@
         GridColumnCashOnHandOut.VisibleIndex = 14
         GridColumnOverdue.VisibleIndex = 15
     End Sub
+
+    Private Sub BSummaryReport_Click(sender As Object, e As EventArgs) Handles BSummaryReport.Click
+        load_ca()
+
+        Dim saldo_awal As Decimal = Decimal.Parse(get_opt_acc_field("saldo_awal_report_cash_advance"))
+
+        Dim report As ReportCashAdvanceSummary = New ReportCashAdvanceSummary
+
+        report.XLPeriod.Text = "PERIODE " + Date.Parse(DateFrom.EditValue.ToString).ToString("dd MMMM yyyy").ToUpper + " - " + Date.Parse(DateTo.EditValue.ToString).ToString("dd MMMM yyyy").ToUpper
+
+        report.XTCLabelSaldoAkhir.Text = report.XTCLabelSaldoAkhir.Text.Replace("[period_end]", Date.Parse(DateTo.EditValue.ToString).ToString("dd MMMM yyyy"))
+
+        report.XTCSaldoAwal.Text = Format(saldo_awal, "##,##0")
+        report.XTCExpense.Text = Format(Decimal.Parse(GridColumnExpense.SummaryItem.SummaryValue.ToString), "##,##0")
+        report.XTCSaldoAkhir.Text = Format(Decimal.Parse(saldo_awal) - Decimal.Parse(GridColumnExpense.SummaryItem.SummaryValue.ToString), "##,##0")
+        report.XTCAdvance.Text = Format(Decimal.Parse(GridColumnAdvance.SummaryItem.SummaryValue.ToString), "##,##0")
+        report.XTCCashOnHand.Text = Format((Decimal.Parse(saldo_awal) - Decimal.Parse(GridColumnExpense.SummaryItem.SummaryValue.ToString)) - Decimal.Parse(GridColumnAdvance.SummaryItem.SummaryValue.ToString), "##,##0")
+
+        Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(report)
+
+        Tool.ShowPreviewDialog()
+    End Sub
 End Class

@@ -3120,7 +3120,7 @@ WHERE b.report_mark_type='" & report_mark_type & "' ORDER BY b.id_report_status,
                 id_user_mark = data.Rows(i)("id_user").ToString
             End If
             '
-            If Not id_user_mark = "" Then
+            If Not id_user_mark = "" And Not id_user_mark = "0" Then
                 If data.Rows(i)("id_report_status").ToString() = data.Rows(0)("id_report_status").ToString() Then
                     'set lead time
                     If data.Rows(i)("level").ToString() = "1" Then
@@ -7287,5 +7287,11 @@ SELECT id_bill_type,bill_type FROM tb_lookup_bill_type WHERE is_active='1'"
             res = True
         End If
         Return res
+    End Function
+
+    Function unixMiliSecondsToDatetime(ByVal unix_time As Double) As DateTime
+        Dim dt As DateTime = New DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+        dt = dt.AddMilliseconds(unix_time).AddHours(8)
+        Return dt
     End Function
 End Module

@@ -1151,7 +1151,7 @@
 
         If id_cg = "75" Then
             FormSalesOrderShippingLabelPdf.ol_store = "blibli"
-            FormSalesOrderShippingLabelPdf.order_id = GVDetail.GetFocusedRowCellValue("item_id").ToString
+            FormSalesOrderShippingLabelPdf.order_id = GVDetail.GetFocusedRowCellValue("ol_store_id").ToString
 
             FormSalesOrderShippingLabelPdf.ShowDialog()
         ElseIf id_cg = "64" Then

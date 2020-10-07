@@ -111,11 +111,31 @@
             weight.Text = dt.Rows(i)("weight").ToString
             weight.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
 
+            'remove border top
+            If Not i = 0 Then
+                If last_collie = dt.Rows(i)("id_awbill").ToString Then
+                    weight.Text = ""
+                    weight.Borders = DevExpress.XtraPrinting.BorderSide.Left
+                Else
+                    weight.Borders = DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top
+                End If
+            End If
+
             'p
             Dim width As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(9)
 
             width.Text = Decimal.Round(dt.Rows(i)("width"), 2)
             width.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
+
+            'remove border top
+            If Not i = 0 Then
+                If last_collie = dt.Rows(i)("id_awbill").ToString Then
+                    width.Text = ""
+                    width.Borders = DevExpress.XtraPrinting.BorderSide.Left
+                Else
+                    width.Borders = DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top
+                End If
+            End If
 
             'l
             Dim length As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(10)
@@ -123,11 +143,31 @@
             length.Text = Decimal.Round(dt.Rows(i)("length"), 2)
             length.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
 
+            'remove border top
+            If Not i = 0 Then
+                If last_collie = dt.Rows(i)("id_awbill").ToString Then
+                    length.Text = ""
+                    length.Borders = DevExpress.XtraPrinting.BorderSide.Left
+                Else
+                    length.Borders = DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top
+                End If
+            End If
+
             't
             Dim height As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(11)
 
             height.Text = Decimal.Round(dt.Rows(i)("height"), 2)
             height.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
+
+            'remove border top
+            If Not i = 0 Then
+                If last_collie = dt.Rows(i)("id_awbill").ToString Then
+                    height.Text = ""
+                    height.Borders = DevExpress.XtraPrinting.BorderSide.Left
+                Else
+                    height.Borders = DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top
+                End If
+            End If
 
             'dim
             Dim volume As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(12)
@@ -135,11 +175,31 @@
             volume.Text = Decimal.Round(dt.Rows(i)("volume"), 2)
             volume.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
 
+            'remove border top
+            If Not i = 0 Then
+                If last_collie = dt.Rows(i)("id_awbill").ToString Then
+                    volume.Text = ""
+                    volume.Borders = DevExpress.XtraPrinting.BorderSide.Left
+                Else
+                    volume.Borders = DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top
+                End If
+            End If
+
             'final weight
             Dim c_weight As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(13)
 
             c_weight.Text = Decimal.Round(dt.Rows(i)("c_weight"), 2)
             c_weight.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
+
+            'remove border top
+            If Not i = 0 Then
+                If last_collie = dt.Rows(i)("id_awbill").ToString Then
+                    c_weight.Text = ""
+                    c_weight.Borders = DevExpress.XtraPrinting.BorderSide.Left
+                Else
+                    c_weight.Borders = DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top
+                End If
+            End If
 
             'remark
             Dim remark As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(14)
@@ -154,7 +214,7 @@
 
         XTCCollie.Text = total_qty
 
-        XrLabelJumlahKoli.Text = number.ToString
+        'XrLabelJumlahKoli.Text = number.ToString
 
         If id_pre = "1" Then
             XrLabelDraft.Text = "DRAFT"

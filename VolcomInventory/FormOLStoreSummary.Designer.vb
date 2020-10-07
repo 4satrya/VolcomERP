@@ -1152,7 +1152,7 @@ Partial Class FormOLStoreSummary
         Me.GridBandOrder.Columns.Add(Me.BandedGridColumnShippingLabel)
         Me.GridBandOrder.Name = "GridBandOrder"
         Me.GridBandOrder.VisibleIndex = 2
-        Me.GridBandOrder.Width = 1445
+        Me.GridBandOrder.Width = 1520
         '
         'GridColumn6
         '
@@ -1375,6 +1375,7 @@ Partial Class FormOLStoreSummary
         Me.BandedGridColumnShippingLabel.ColumnEdit = Me.RepoBtnViewShippingLabel
         Me.BandedGridColumnShippingLabel.FieldName = "view_shipping_label"
         Me.BandedGridColumnShippingLabel.Name = "BandedGridColumnShippingLabel"
+        Me.BandedGridColumnShippingLabel.Visible = True
         '
         'RepoBtnViewShippingLabel
         '

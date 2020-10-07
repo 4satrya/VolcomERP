@@ -66,6 +66,8 @@ Partial Class FormPurcReq
         Me.GridColumn25 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RICEUnableToFulfill = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.GridColumn26 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn18 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn30 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn27 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn24 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
@@ -87,8 +89,8 @@ Partial Class FormPurcReq
         Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl()
         Me.BarButtonItem1 = New DevExpress.XtraBars.BarButtonItem()
         Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
-        Me.GridColumn18 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn30 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.DuplicateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.SLEDepartement.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -113,6 +115,7 @@ Partial Class FormPurcReq
         CType(Me.PUDD, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BMDD, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ContextMenuStrip.SuspendLayout()
         Me.SuspendLayout()
         '
         'PanelControl1
@@ -175,6 +178,7 @@ Partial Class FormPurcReq
         '
         'GCPurcReq
         '
+        Me.GCPurcReq.ContextMenuStrip = Me.ContextMenuStrip
         Me.GCPurcReq.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GCPurcReq.Location = New System.Drawing.Point(0, 0)
         Me.GCPurcReq.MainView = Me.GVPurcReq
@@ -517,6 +521,27 @@ Partial Class FormPurcReq
         Me.GridColumn26.FieldName = "is_unable_fulfill"
         Me.GridColumn26.Name = "GridColumn26"
         '
+        'GridColumn18
+        '
+        Me.GridColumn18.Caption = "Estimate Receive Date"
+        Me.GridColumn18.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.GridColumn18.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn18.FieldName = "est_rec_date"
+        Me.GridColumn18.Name = "GridColumn18"
+        Me.GridColumn18.Visible = True
+        Me.GridColumn18.VisibleIndex = 9
+        Me.GridColumn18.Width = 134
+        '
+        'GridColumn30
+        '
+        Me.GridColumn30.Caption = "PO Created Date"
+        Me.GridColumn30.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.GridColumn30.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn30.FieldName = "po_date"
+        Me.GridColumn30.Name = "GridColumn30"
+        Me.GridColumn30.Visible = True
+        Me.GridColumn30.VisibleIndex = 6
+        '
         'GridColumn27
         '
         Me.GridColumn27.Caption = "Reason"
@@ -678,26 +703,17 @@ Partial Class FormPurcReq
         Me.LargeImageCollection.Images.SetKeyName(3, "safari (4).png")
         Me.LargeImageCollection.Images.SetKeyName(4, "31-Document_32x32.png")
         '
-        'GridColumn18
+        'ContextMenuStrip
         '
-        Me.GridColumn18.Caption = "Estimate Receive Date"
-        Me.GridColumn18.DisplayFormat.FormatString = "dd MMMM yyyy"
-        Me.GridColumn18.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.GridColumn18.FieldName = "est_rec_date"
-        Me.GridColumn18.Name = "GridColumn18"
-        Me.GridColumn18.Visible = True
-        Me.GridColumn18.VisibleIndex = 9
-        Me.GridColumn18.Width = 134
+        Me.ContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DuplicateToolStripMenuItem})
+        Me.ContextMenuStrip.Name = "ContextMenuStrip"
+        Me.ContextMenuStrip.Size = New System.Drawing.Size(125, 26)
         '
-        'GridColumn30
+        'DuplicateToolStripMenuItem
         '
-        Me.GridColumn30.Caption = "PO Created Date"
-        Me.GridColumn30.DisplayFormat.FormatString = "dd MMMM yyyy"
-        Me.GridColumn30.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.GridColumn30.FieldName = "po_date"
-        Me.GridColumn30.Name = "GridColumn30"
-        Me.GridColumn30.Visible = True
-        Me.GridColumn30.VisibleIndex = 6
+        Me.DuplicateToolStripMenuItem.Name = "DuplicateToolStripMenuItem"
+        Me.DuplicateToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.DuplicateToolStripMenuItem.Text = "Duplicate"
         '
         'FormPurcReq
         '
@@ -742,6 +758,7 @@ Partial Class FormPurcReq
         CType(Me.PUDD, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BMDD, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ContextMenuStrip.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -815,4 +832,6 @@ Partial Class FormPurcReq
     Friend WithEvents GridColumn29 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn18 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn30 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ContextMenuStrip As ContextMenuStrip
+    Friend WithEvents DuplicateToolStripMenuItem As ToolStripMenuItem
 End Class

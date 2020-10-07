@@ -864,8 +864,11 @@ WHERE c.id_comp='" + id_comp + "' "
                 Dim dpp As Decimal = Decimal.Parse(GVData.GetFocusedRowCellValue("amount").ToString)
                 Dim pph As Decimal = Decimal.Parse(GVData.GetFocusedRowCellValue("pph_percent").ToString)
                 '
+                Dim kurs As Decimal = Decimal.Parse(GVData.GetFocusedRowCellValue("kurs").ToString)
+                '
                 Dim grossup_val As Decimal = 0.00
                 grossup_val = (100 / (100 - pph)) * dpp
+                GVData.SetFocusedRowCellValue("amount_before", grossup_val / kurs)
                 GVData.SetFocusedRowCellValue("amount", grossup_val)
                 calculate()
             Catch ex As Exception

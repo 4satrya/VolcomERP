@@ -26,6 +26,7 @@ Partial Public Class ReportDelManifest
         Me.XrTableCell1 = New DevExpress.XtraReports.UI.XRTableCell()
         Me.XrTableCell4 = New DevExpress.XtraReports.UI.XRTableCell()
         Me.XrTableCell5 = New DevExpress.XtraReports.UI.XRTableCell()
+        Me.XrTableCell36 = New DevExpress.XtraReports.UI.XRTableCell()
         Me.XrTableCell2 = New DevExpress.XtraReports.UI.XRTableCell()
         Me.XrTableCell3 = New DevExpress.XtraReports.UI.XRTableCell()
         Me.XrTableCell6 = New DevExpress.XtraReports.UI.XRTableCell()
@@ -110,7 +111,6 @@ Partial Public Class ReportDelManifest
         Me.XrPictureBox1 = New DevExpress.XtraReports.UI.XRPictureBox()
         Me.PageHeader = New DevExpress.XtraReports.UI.PageHeaderBand()
         Me.XrLabelDraft = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrTableCell36 = New DevExpress.XtraReports.UI.XRTableCell()
         CType(Me.XrTable, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XrTable4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XrTable1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -178,6 +178,16 @@ Partial Public Class ReportDelManifest
         Me.XrTableCell5.StylePriority.UsePadding = False
         Me.XrTableCell5.Text = "DELIVERY SLIP"
         Me.XrTableCell5.Weight = 0.838792261416158R
+        '
+        'XrTableCell36
+        '
+        Me.XrTableCell36.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top), DevExpress.XtraPrinting.BorderSide)
+        Me.XrTableCell36.Name = "XrTableCell36"
+        Me.XrTableCell36.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrTableCell36.StylePriority.UseBorders = False
+        Me.XrTableCell36.StylePriority.UsePadding = False
+        Me.XrTableCell36.Text = "AWB NUMBER"
+        Me.XrTableCell36.Weight = 0.838792261416158R
         '
         'XrTableCell2
         '
@@ -288,7 +298,7 @@ Partial Public Class ReportDelManifest
         Me.XrTableCell14.StylePriority.UseBorders = False
         Me.XrTableCell14.StylePriority.UsePadding = False
         Me.XrTableCell14.Text = "REMARK"
-        Me.XrTableCell14.Weight = 0.71678932412784313R
+        Me.XrTableCell14.Weight = 0.716789324127843R
         '
         'XrTableRowTotal
         '
@@ -304,7 +314,7 @@ Partial Public Class ReportDelManifest
         Me.XrTableCell38.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrTableCell38.StylePriority.UseBorders = False
         Me.XrTableCell38.StylePriority.UsePadding = False
-        Me.XrTableCell38.Weight = 3.43615277218971R
+        Me.XrTableCell38.Weight = 3.863351889121815R
         '
         'XTCCollie
         '
@@ -316,7 +326,7 @@ Partial Public Class ReportDelManifest
         Me.XTCCollie.StylePriority.UsePadding = False
         Me.XTCCollie.StylePriority.UseTextAlignment = False
         Me.XTCCollie.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
-        Me.XTCCollie.Weight = 0.333967339375017R
+        Me.XTCCollie.Weight = 0.30340472283650477R
         '
         'XrTableCell47
         '
@@ -327,7 +337,7 @@ Partial Public Class ReportDelManifest
         Me.XrTableCell47.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrTableCell47.StylePriority.UseBorders = False
         Me.XrTableCell47.StylePriority.UsePadding = False
-        Me.XrTableCell47.Weight = 3.5925014417326295R
+        Me.XrTableCell47.Weight = 3.1958649413390372R
         '
         'TopMargin
         '
@@ -954,16 +964,6 @@ Partial Public Class ReportDelManifest
         Me.XrLabelDraft.StylePriority.UseFont = False
         Me.XrLabelDraft.StylePriority.UseTextAlignment = False
         Me.XrLabelDraft.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        '
-        'XrTableCell36
-        '
-        Me.XrTableCell36.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top), DevExpress.XtraPrinting.BorderSide)
-        Me.XrTableCell36.Name = "XrTableCell36"
-        Me.XrTableCell36.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrTableCell36.StylePriority.UseBorders = False
-        Me.XrTableCell36.StylePriority.UsePadding = False
-        Me.XrTableCell36.Text = "AWB NUMBER"
-        Me.XrTableCell36.Weight = 0.838792261416158R
         '
         'ReportDelManifest
         '

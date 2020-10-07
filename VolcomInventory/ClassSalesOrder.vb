@@ -411,11 +411,14 @@ Public Class ClassSalesOrder
         execute_non_query(query, True, "", "", "", "")
     End Sub
 
-    Sub insertLogWebOrder(ByVal id_order As String, ByVal note As String)
+    Sub insertLogWebOrder(ByVal id_order As String, ByVal note As String, ByVal id_grp As String)
         If id_order = "0" Then
             id_order = "NULL"
         End If
-        Dim query As String = "INSERT INTO tb_ol_store_order_log(id, log_date, log_note) VALUES(" + id_order + ", NOW(), '" + addSlashes(note) + "') "
+        If id_grp = "0" Then
+            id_grp = "NULL"
+        End If
+        Dim query As String = "INSERT INTO tb_ol_store_order_log(id, log_date, log_note, id_comp_group) VALUES(" + id_order + ", NOW(), '" + addSlashes(note) + "'," + id_grp + ") "
         execute_non_query(query, True, "", "", "", "")
     End Sub
 

@@ -247,6 +247,7 @@ INNER JOIN tb_a_acc_trans at ON at.id_acc_trans=atd.id_acc_trans AND DATE(at.dat
                 GridColumnPPNPPH.Caption = "PPN (%)"
                 Dim q_where As String = ""
                 Dim q_where_atx As String = ""
+                q_where_atx += " AND a.id_acc !='" & get_opt_acc_field("id_acc_skbp") & "' "
                 If Not SLETaxCat.EditValue.ToString = "0" And Not SLETaxCat.EditValue.ToString = "-1" Then
                     q_where += " AND acc_pph.id_tax_report='" & SLETaxCat.EditValue.ToString & "' "
                     q_where_atx += " AND a.id_tax_report='" & SLETaxCat.EditValue.ToString & "'"
@@ -424,7 +425,7 @@ WHERE ISNULL(atx.`date_tax_report`) AND DATE(atx.`date_reference`)>='" + Date.Pa
                 GridColumnPPNPPH.Caption = "PPH (%)"
                 Dim q_where As String = ""
                 Dim q_where_atx As String = ""
-
+                q_where_atx += " AND a.id_acc !='" & get_opt_acc_field("id_acc_skbp") & "' "
                 If Not SLETaxCat.EditValue.ToString = "0" And Not SLETaxCat.EditValue.ToString = "-1" Then
                     q_where += " AND acc_pph.id_tax_report='" & SLETaxCat.EditValue.ToString & "' "
                     q_where_atx += " AND a.id_tax_report='" & SLETaxCat.EditValue.ToString & "'"
@@ -582,6 +583,7 @@ WHERE ISNULL(atx.`date_tax_report`) AND DATE(atx.`date_reference`)>='" + Date.Pa
                 GridColumnPPNPPH.Caption = "PPN (%)"
                 Dim q_where As String = ""
                 Dim q_where_atx As String = ""
+                q_where_atx += " AND a.id_acc !='" & get_opt_acc_field("id_acc_skbp") & "' "
                 If Not SLETaxCat.EditValue.ToString = "0" And Not SLETaxCat.EditValue.ToString = "-1" Then
                     q_where += " AND acc_pph.id_tax_report='" & SLETaxCat.EditValue.ToString & "' "
                     q_where_atx += " AND a.id_tax_report='" & SLETaxCat.EditValue.ToString & "'"
@@ -668,7 +670,7 @@ WHERE DATE(ie.`date_payment`)>='" + Date.Parse(DETaxFrom.EditValue.ToString).ToS
                 GridColumnPPNPPH.Caption = "PPH (%)"
                 Dim q_where As String = ""
                 Dim q_where_atx As String = ""
-
+                q_where_atx += " AND a.id_acc !='" & get_opt_acc_field("id_acc_skbp") & "' "
                 If Not SLETaxCat.EditValue.ToString = "0" And Not SLETaxCat.EditValue.ToString = "-1" Then
                     q_where += " AND acc_pph.id_tax_report='" & SLETaxCat.EditValue.ToString & "' "
                     q_where_atx += " AND a.id_tax_report='" & SLETaxCat.EditValue.ToString & "'"
@@ -743,6 +745,7 @@ WHERE DATE(ie.`date_payment`)>='" + Date.Parse(DETaxFrom.EditValue.ToString).ToS
                 GridColumnPPNPPH.Caption = "PPN (%)"
                 Dim q_where As String = ""
                 Dim q_where_atx As String = ""
+                q_where_atx += " AND a.id_acc !='" & get_opt_acc_field("id_acc_skbp") & "' "
                 If Not SLETaxCat.EditValue.ToString = "0" And Not SLETaxCat.EditValue.ToString = "-1" Then
                     q_where += " AND acc_pph.id_tax_report='" & SLETaxCat.EditValue.ToString & "' "
                     q_where_atx += " AND a.id_tax_report='" & SLETaxCat.EditValue.ToString & "'"
@@ -920,7 +923,7 @@ WHERE DATE(atx.`date_tax_report`)>='" + Date.Parse(DETaxFrom.EditValue.ToString)
                 GridColumnPPNPPH.Caption = "PPH (%)"
                 Dim q_where As String = ""
                 Dim q_where_atx As String = ""
-
+                q_where_atx += " AND a.id_acc !='" & get_opt_acc_field("id_acc_skbp") & "' "
                 If Not SLETaxCat.EditValue.ToString = "0" And Not SLETaxCat.EditValue.ToString = "-1" Then
                     q_where += " AND acc_pph.id_tax_report='" & SLETaxCat.EditValue.ToString & "' "
                     q_where_atx += " AND a.id_tax_report='" & SLETaxCat.EditValue.ToString & "'"

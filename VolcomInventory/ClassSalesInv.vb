@@ -4,8 +4,8 @@
         Return query
     End Function
 
-    Public Function queryMainReport(ByVal condition_param As String, ByVal order_type_param As String) As String
-        Dim query As String = "CALL view_sales_inv_report('" + condition_param + "', '" + order_type_param + "') "
+    Public Function queryMainReport(ByVal condition_param As String, ByVal order_type_param As String, ByVal is_all_unit_param As String) As String
+        Dim query As String = "CALL view_sales_inv_daily('" + condition_param + "', '" + order_type_param + "', '" + is_all_unit_param + "') "
         Return query
     End Function
 

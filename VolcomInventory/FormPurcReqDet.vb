@@ -14,6 +14,9 @@
     Public rmt As String = "-1"
     Public id_report_status = "-1"
     '
+    Public is_duplicate As String = "-1"
+    Private id_req_temp As String = "-1"
+    '
     Sub load_approval_ic_ia()
         Dim query As String = "SELECT '1' AS id_approval,'No Action' AS approval
 UNION
@@ -34,7 +37,15 @@ SELECT '3' AS id_approval,'Not Approve' AS approval"
         '
 
         '
+        If is_duplicate = "1" Then
+            id_req_temp = id_req
+            id_req = "-1"
+        End If
+
         If id_req = "-1" Then 'new
+            id_req = id_req_temp
+            id_req_temp = "-1"
+
             If FormPurcReq.SLEDepartement.EditValue.ToString = "0" Then
                 TEDep.Text = get_departement_x(id_departement_user, "1")
                 id_departement = id_departement_user
@@ -59,6 +70,24 @@ SELECT '3' AS id_approval,'Not Approve' AS approval"
             Dim query As String = "SELECT NOW() as time_server"
             Dim dt As DataTable = execute_query(query, -1, True, "", "", "", "")
             DERequirementDate.Properties.MinValue = Date.Parse(dt.Rows(0)("time_server")).AddDays(7)
+
+            If is_duplicate = "1" Then
+                Dim data As DataTable = execute_query("SELECT id_expense_type, is_store_purchase, note FROM tb_purc_req WHERE id_purc_req = '" & id_req & "'", -1, True, "", "", "", "")
+
+                MENote.Text = data.Rows(0)("note").ToString
+                SLEPurcType.EditValue = data.Rows(0)("id_expense_type").ToString
+
+                If data.Rows(0)("is_store_purchase").ToString = "1" Then
+                    CEStoreRequest.Checked = True
+                Else
+                    CEStoreRequest.Checked = False
+                End If
+
+                SLEPurcType.Properties.ReadOnly = True
+            End If
+
+            id_req_temp = "-1"
+            id_req = "-1"
         Else 'edit
             BtnAttachment.Visible = True
             BSetShipping.Visible = False
@@ -198,6 +227,21 @@ SELECT id_comp,comp_number,comp_name,address_primary FROM `tb_m_comp` WHERE is_a
                                 INNER JOIN tb_m_uom uom ON uom.`id_uom`=itm.`id_uom`
                                 WHERE reqd.id_purc_req='" & id_req & "'"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+
+        If is_duplicate = "1" Then
+            Dim data_list As DataTable = RISLEItem.DataSource
+
+            For i = 0 To data.Rows.Count - 1
+                For j = 0 To data_list.Rows.Count - 1
+                    If data.Rows(i)("id_item").ToString = data_list.Rows(j)("id_item").ToString Then
+                        data.Rows(i)("budget_remaining") = data_list.Rows(j)("budget_remaining")
+
+                        Exit For
+                    End If
+                Next
+            Next
+        End If
+
         GCItemList.DataSource = data
     End Sub
 

@@ -8742,17 +8742,63 @@ WHERE invd.`id_inv_mat`='" & id_report & "'"
             End If
 
             If id_status_reportx = "6" Then
-                Dim data_odr As DataTable = execute_query("SELECT id_purc_order, est_date_receive, to_est_date_receive FROM tb_purc_order_move_date_det WHERE id_receive_date = " + id_report, -1, True, "", "", "", "")
+                'insert into ecop
+                Dim q As String = "SELECT pps.is_production_dept,ppsd.kurs,pps.id_design,SUM(IF(ppsd.id_currency=1,ppsd.before_kurs,ppsd.before_kurs*ppsd.kurs)) AS cop,SUM(ppsd.additional) AS additional_cop,pps.id_comp_contact
+FROM tb_design_ecop_pps_det ppsd
+INNER JOIN tb_design_ecop_pps pps ON pps.id_design_ecop_pps=ppsd.id_design_ecop_pps AND pps.id_design_ecop_pps='" & id_report & "'
+GROUP BY pps.id_design"
+                Dim dtq As DataTable = execute_query(q, -1, True, "", "", "", "")
 
-                For i = 0 To data_odr.Rows.Count - 1
-                    Dim query_update As String = "UPDATE tb_purc_order SET est_date_receive = '" + Date.Parse(data_odr.Rows(i)("to_est_date_receive").ToString).ToString("yyyy-MM-dd") + "' WHERE id_purc_order = " + data_odr.Rows(i)("id_purc_order").ToString
+                If Not dtq.Rows(0)("is_production_dept").ToString = "1" Then
+                    'production
+                    Dim qu As String = "UPDATE tb_m_design_cop SET is_active=2 WHERE id_design='" & dtq.Rows(0)("id_design").ToString & "' AND is_production_dept='" & dtq.Rows(0)("is_production_dept").ToString & "';
+INSERT INTO `tb_m_design_cop`(description,id_design,date_created,id_currency,kurs,before_kurs,additional,is_active,is_production_dept)
+SELECT ecopd.description,ecop.id_design,NOW(),ecopd.id_currency,ecopd.kurs,ecopd.before_kurs,ecopd.additional,1 AS is_active,ecop.is_production_dept
+FROM `tb_design_ecop_pps_det` ecopd
+INNER JOIN tb_design_ecop_pps ecop ON ecop.id_design_ecop_pps=ecopd.id_design_ecop_pps
+WHERE ecop.id_design_ecop_pps='" & id_report & "';"
+                    execute_non_query(qu, True, "", "", "", "")
+                    'check if lower than target cost then continue
+                    'target cost
+                    Dim target_cost As Decimal = 0.00
+                    Dim target_cost_sample As Decimal = 0.00
+                    Dim ecop As Decimal = dtq.Rows(0)("cop")
+                    Dim id_c As String = ""
 
-                    execute_non_query(query_update, True, "", "", "", "")
-                Next
+                    'MD
+                    Dim query_target As String = "SELECT dsg.id_fg_line_plan,(fg_lp.`target_price`/fg_lp.`mark_up`) AS target_cost
+FROM tb_m_design dsg
+INNER JOIN tb_fg_line_plan fg_lp ON fg_lp.`id_fg_line_plan`=dsg.`id_fg_line_plan` 
+WHERE dsg.id_design='" & dtq.Rows(0)("id_design").ToString & "'"
+                    Dim plan_dt As DataTable = execute_query(query_target, -1, True, "", "", "", "")
+                    target_cost = plan_dt.Rows(0)("target_cost")
+                    'Sample
+                    query_target = "SELECT SUM(IF(id_currency=1,before_kurs,before_kurs*kurs)) AS cop,SUM(additional) AS additional_cop
+FROM tb_m_design_cop
+WHERE is_production_dept=2 AND is_active=1 AND id_design='1'"
+                    plan_dt = execute_query(query_target, -1, True, "", "", "", "")
+                    target_cost_sample = plan_dt.Rows(0)("cop")
+                    '
+                    If ecop > target_cost Or ecop > target_cost_sample Then
+                        'nothing happen
+                    Else
+                        'update to COP PD
+                        qu = String.Format("UPDATE tb_m_design SET prod_order_cop_pd='{1}',prod_order_cop_pd_addcost='{5}',prod_order_cop_kurs_pd='{2}',prod_order_cop_pd_vendor={3},prod_order_cop_pd_curr='{4}' WHERE id_design='{0}'", dtq.Rows(0)("id_design").ToString, decimalSQL((dtq.Rows(0)("cop") + dtq.Rows(0)("additional_cop")).ToString), decimalSQL(dtq.Rows(0)("kurs").ToString), dtq.Rows(0)("id_comp_contact").ToString, "1", decimalSQL(dtq.Rows(0)("additional_cop").ToString))
+                        execute_non_query(qu, True, "", "", "", "")
+                    End If
+                Else
+                    Dim qu As String = "UPDATE tb_m_design_cop SET is_active=2 WHERE id_design='" & dtq.Rows(0)("id_design").ToString & "' AND is_production_dept='" & dtq.Rows(0)("is_production_dept").ToString & "';
+INSERT INTO `tb_m_design_cop`(description,id_design,date_created,id_currency,kurs,before_kurs,additional,is_active,is_production_dept)
+SELECT ecopd.description,ecop.id_design,NOW(),ecopd.id_currency,ecopd.kurs,ecopd.before_kurs,ecopd.additional,1 AS is_active,ecop.is_production_dept
+FROM `tb_design_ecop_pps_det` ecopd
+INNER JOIN tb_design_ecop_pps ecop ON ecop.id_design_ecop_pps=ecopd.id_design_ecop_pps
+WHERE ecop.id_design_ecop_pps='" & id_report & "';"
+                    execute_non_query(qu, True, "", "", "", "")
+                End If
             End If
 
             'update status
-            query = String.Format("UPDATE tb_purc_order_move_date SET id_report_status='{0}' WHERE id_receive_date ='{1}'", id_status_reportx, id_report)
+            query = String.Format("UPDATE tb_design_ecop_pps SET id_report_status='{0}' WHERE id_design_ecop_pps ='{1}'", id_status_reportx, id_report)
             execute_non_query(query, True, "", "", "", "")
         End If
 

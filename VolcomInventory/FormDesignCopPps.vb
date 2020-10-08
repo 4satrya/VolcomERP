@@ -119,7 +119,7 @@ INNER JOIN tb_m_employee emp ON emp.`id_employee`=usr.`id_employee`
 WHERE id_design_ecop_pps='" & id_pps & "'"
             Dim dts As DataTable = execute_query(qs, -1, True, "", "", "", "")
             '
-            is_production = dts.Rows(0)("is_production").ToString
+            is_production = dts.Rows(0)("is_production_dept").ToString
             id_report_status = dts.Rows(0)("id_report_status").ToString
             '
             load_form_input()

@@ -46,6 +46,7 @@
         query += "INNER JOIN tb_range b ON a.id_range = b.id_range "
         query += "ORDER BY b.range ASC)"
         viewSearchLookupQuery(SLESeasonPO, query, "id_season", "season", "id_season")
+        viewSearchLookupQuery(SLESeasonEcopPPS, query, "id_season", "season", "id_season")
     End Sub
 
     Sub viewDesign()
@@ -370,6 +371,32 @@ ORDER BY kp.id_prod_order_cps2 DESC"
 
     Private Sub EntryECOPToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EntryECOPToolStripMenuItem.Click
         FormDesignCopPps.id_design = GVDesign.GetFocusedRowCellValue("id_design").ToString
+        FormDesignCopPps.id_pps = "-1"
         FormDesignCopPps.ShowDialog()
+    End Sub
+
+    Private Sub BViewEstECOPPPS_Click(sender As Object, e As EventArgs) Handles BViewEstECOPPPS.Click
+        load_pps()
+    End Sub
+
+    Sub load_pps()
+        Dim q As String = "SELECT id_design_ecop_pps,pps.`number`,d.id_design,d.`design_code`,d.`design_display_name` ,emp.`employee_name` AS created_by,pps.`created_date`
+FROM `tb_design_ecop_pps` pps
+INNER JOIN tb_m_design d ON d.`id_design`=pps.`id_design`
+INNER JOIN tb_m_user usr ON usr.`id_user`=pps.`created_by`
+INNER JOIN tb_m_employee emp ON emp.`id_employee`=usr.`id_employee`
+INNER JOIN tb_lookup_report_status sts ON sts.id_report_status=pps.id_report_status
+ORDER BY pps.id_design_ecop_pps DESC"
+        Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
+        GCEcopPPS.DataSource = dt
+        GVEcopPPS.BestFitColumns()
+    End Sub
+
+    Private Sub GVEcopPPS_DoubleClick(sender As Object, e As EventArgs) Handles GVEcopPPS.DoubleClick
+        If GVEcopPPS.RowCount > 0 Then
+            FormDesignCopPps.id_design = GVEcopPPS.GetFocusedRowCellValue("id_design").ToString
+            FormDesignCopPps.id_pps = GVEcopPPS.GetFocusedRowCellValue("id_design_ecop_pps").ToString
+            FormDesignCopPps.ShowDialog()
+        End If
     End Sub
 End Class

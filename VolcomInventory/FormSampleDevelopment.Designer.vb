@@ -169,6 +169,27 @@ Partial Class FormSampleDevelopment
         Me.BSearchCopyProto2 = New DevExpress.XtraEditors.SimpleButton()
         Me.LabelControl13 = New DevExpress.XtraEditors.LabelControl()
         Me.XTPECOP = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCEcopPPS = New DevExpress.XtraGrid.GridControl()
+        Me.GVEcopPPS = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn21 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn22 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn26 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemMemoEdit6 = New DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit()
+        Me.GridColumn28 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn23 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn25 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn24 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemProgressBar1 = New DevExpress.XtraEditors.Repository.RepositoryItemProgressBar()
+        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
+        Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
+        Me.PanelControl4 = New DevExpress.XtraEditors.PanelControl()
+        Me.SLESeasonEcopPPS = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView3 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn18 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn19 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn20 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
+        Me.BViewEstECOPPPS = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.PanelControlNavLineList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlNavLineList.SuspendLayout()
         CType(Me.PCNavLineList, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -226,6 +247,19 @@ Partial Class FormSampleDevelopment
         Me.PanelControl7.SuspendLayout()
         CType(Me.SLEVendorCopyProto2.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView8, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTPECOP.SuspendLayout()
+        CType(Me.GCEcopPPS, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVEcopPPS, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemMemoEdit6, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemProgressBar1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl2.SuspendLayout()
+        CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl3.SuspendLayout()
+        CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl4.SuspendLayout()
+        CType(Me.SLESeasonEcopPPS.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControlNavLineList
@@ -347,18 +381,18 @@ Partial Class FormSampleDevelopment
         '
         Me.ViewMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewDetailToolStripMenuItem, Me.EntryECOPToolStripMenuItem})
         Me.ViewMenu.Name = "ContextMenuStripYM"
-        Me.ViewMenu.Size = New System.Drawing.Size(153, 70)
+        Me.ViewMenu.Size = New System.Drawing.Size(215, 48)
         '
         'ViewDetailToolStripMenuItem
         '
         Me.ViewDetailToolStripMenuItem.Name = "ViewDetailToolStripMenuItem"
-        Me.ViewDetailToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.ViewDetailToolStripMenuItem.Text = "View History"
+        Me.ViewDetailToolStripMenuItem.Size = New System.Drawing.Size(214, 22)
+        Me.ViewDetailToolStripMenuItem.Text = "View Development History"
         '
         'EntryECOPToolStripMenuItem
         '
         Me.EntryECOPToolStripMenuItem.Name = "EntryECOPToolStripMenuItem"
-        Me.EntryECOPToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.EntryECOPToolStripMenuItem.Size = New System.Drawing.Size(214, 22)
         Me.EntryECOPToolStripMenuItem.Text = "Entry ECOP"
         '
         'GVDesign
@@ -1658,9 +1692,201 @@ Partial Class FormSampleDevelopment
         '
         'XTPECOP
         '
+        Me.XTPECOP.Controls.Add(Me.GCEcopPPS)
+        Me.XTPECOP.Controls.Add(Me.PanelControl2)
         Me.XTPECOP.Name = "XTPECOP"
         Me.XTPECOP.Size = New System.Drawing.Size(1117, 437)
         Me.XTPECOP.Text = "Propose Estimasi COP"
+        '
+        'GCEcopPPS
+        '
+        Me.GCEcopPPS.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCEcopPPS.Location = New System.Drawing.Point(0, 44)
+        Me.GCEcopPPS.MainView = Me.GVEcopPPS
+        Me.GCEcopPPS.Name = "GCEcopPPS"
+        Me.GCEcopPPS.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemProgressBar1, Me.RepositoryItemMemoEdit6})
+        Me.GCEcopPPS.Size = New System.Drawing.Size(1117, 393)
+        Me.GCEcopPPS.TabIndex = 15
+        Me.GCEcopPPS.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVEcopPPS})
+        '
+        'GVEcopPPS
+        '
+        Me.GVEcopPPS.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn21, Me.GridColumn22, Me.GridColumn26, Me.GridColumn28, Me.GridColumn23, Me.GridColumn25, Me.GridColumn24})
+        Me.GVEcopPPS.GridControl = Me.GCEcopPPS
+        Me.GVEcopPPS.Name = "GVEcopPPS"
+        Me.GVEcopPPS.OptionsBehavior.Editable = False
+        Me.GVEcopPPS.OptionsFind.AlwaysVisible = True
+        Me.GVEcopPPS.OptionsView.ColumnAutoWidth = False
+        Me.GVEcopPPS.OptionsView.RowAutoHeight = True
+        Me.GVEcopPPS.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn21
+        '
+        Me.GridColumn21.Caption = "ID"
+        Me.GridColumn21.FieldName = "id_design_ecop_pps"
+        Me.GridColumn21.Name = "GridColumn21"
+        '
+        'GridColumn22
+        '
+        Me.GridColumn22.Caption = "Number"
+        Me.GridColumn22.FieldName = "number"
+        Me.GridColumn22.Name = "GridColumn22"
+        Me.GridColumn22.Visible = True
+        Me.GridColumn22.VisibleIndex = 0
+        '
+        'GridColumn26
+        '
+        Me.GridColumn26.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn26.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn26.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn26.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn26.Caption = "Design"
+        Me.GridColumn26.ColumnEdit = Me.RepositoryItemMemoEdit6
+        Me.GridColumn26.FieldName = "design_display_name"
+        Me.GridColumn26.Name = "GridColumn26"
+        Me.GridColumn26.Visible = True
+        Me.GridColumn26.VisibleIndex = 2
+        '
+        'RepositoryItemMemoEdit6
+        '
+        Me.RepositoryItemMemoEdit6.Name = "RepositoryItemMemoEdit6"
+        '
+        'GridColumn28
+        '
+        Me.GridColumn28.Caption = "Design Code"
+        Me.GridColumn28.Name = "GridColumn28"
+        Me.GridColumn28.Visible = True
+        Me.GridColumn28.VisibleIndex = 1
+        '
+        'GridColumn23
+        '
+        Me.GridColumn23.Caption = "Report Status"
+        Me.GridColumn23.FieldName = "report_status"
+        Me.GridColumn23.Name = "GridColumn23"
+        Me.GridColumn23.Visible = True
+        Me.GridColumn23.VisibleIndex = 5
+        '
+        'GridColumn25
+        '
+        Me.GridColumn25.Caption = "Created Date"
+        Me.GridColumn25.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.GridColumn25.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn25.FieldName = "date_created"
+        Me.GridColumn25.Name = "GridColumn25"
+        Me.GridColumn25.Visible = True
+        Me.GridColumn25.VisibleIndex = 3
+        '
+        'GridColumn24
+        '
+        Me.GridColumn24.Caption = "Created By"
+        Me.GridColumn24.FieldName = "created_by"
+        Me.GridColumn24.Name = "GridColumn24"
+        Me.GridColumn24.Visible = True
+        Me.GridColumn24.VisibleIndex = 4
+        '
+        'RepositoryItemProgressBar1
+        '
+        Me.RepositoryItemProgressBar1.Appearance.BackColor = System.Drawing.Color.Lime
+        Me.RepositoryItemProgressBar1.EndColor = System.Drawing.Color.Green
+        Me.RepositoryItemProgressBar1.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat
+        Me.RepositoryItemProgressBar1.LookAndFeel.UseDefaultLookAndFeel = False
+        Me.RepositoryItemProgressBar1.Name = "RepositoryItemProgressBar1"
+        Me.RepositoryItemProgressBar1.ProgressViewStyle = DevExpress.XtraEditors.Controls.ProgressViewStyle.Solid
+        Me.RepositoryItemProgressBar1.ShowTitle = True
+        Me.RepositoryItemProgressBar1.StartColor = System.Drawing.Color.Green
+        Me.RepositoryItemProgressBar1.Step = 1
+        '
+        'PanelControl2
+        '
+        Me.PanelControl2.Controls.Add(Me.PanelControl3)
+        Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelControl2.Location = New System.Drawing.Point(0, 0)
+        Me.PanelControl2.Name = "PanelControl2"
+        Me.PanelControl2.Size = New System.Drawing.Size(1117, 44)
+        Me.PanelControl2.TabIndex = 14
+        '
+        'PanelControl3
+        '
+        Me.PanelControl3.Controls.Add(Me.PanelControl4)
+        Me.PanelControl3.Controls.Add(Me.BViewEstECOPPPS)
+        Me.PanelControl3.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelControl3.Location = New System.Drawing.Point(2, 2)
+        Me.PanelControl3.Name = "PanelControl3"
+        Me.PanelControl3.Size = New System.Drawing.Size(1113, 40)
+        Me.PanelControl3.TabIndex = 4
+        '
+        'PanelControl4
+        '
+        Me.PanelControl4.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelControl4.Controls.Add(Me.SLESeasonEcopPPS)
+        Me.PanelControl4.Controls.Add(Me.LabelControl2)
+        Me.PanelControl4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PanelControl4.Location = New System.Drawing.Point(2, 2)
+        Me.PanelControl4.Name = "PanelControl4"
+        Me.PanelControl4.Size = New System.Drawing.Size(1029, 36)
+        Me.PanelControl4.TabIndex = 105
+        '
+        'SLESeasonEcopPPS
+        '
+        Me.SLESeasonEcopPPS.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.SLESeasonEcopPPS.Location = New System.Drawing.Point(47, 7)
+        Me.SLESeasonEcopPPS.Name = "SLESeasonEcopPPS"
+        Me.SLESeasonEcopPPS.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SLESeasonEcopPPS.Properties.Appearance.Options.UseFont = True
+        Me.SLESeasonEcopPPS.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLESeasonEcopPPS.Properties.View = Me.GridView3
+        Me.SLESeasonEcopPPS.Size = New System.Drawing.Size(976, 20)
+        Me.SLESeasonEcopPPS.TabIndex = 95
+        '
+        'GridView3
+        '
+        Me.GridView3.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn18, Me.GridColumn19, Me.GridColumn20})
+        Me.GridView3.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView3.Name = "GridView3"
+        Me.GridView3.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView3.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn18
+        '
+        Me.GridColumn18.Caption = "Id Season"
+        Me.GridColumn18.FieldName = "id_season"
+        Me.GridColumn18.Name = "GridColumn18"
+        '
+        'GridColumn19
+        '
+        Me.GridColumn19.Caption = "Range"
+        Me.GridColumn19.FieldName = "range"
+        Me.GridColumn19.Name = "GridColumn19"
+        Me.GridColumn19.Visible = True
+        Me.GridColumn19.VisibleIndex = 0
+        '
+        'GridColumn20
+        '
+        Me.GridColumn20.Caption = "Season"
+        Me.GridColumn20.FieldName = "season"
+        Me.GridColumn20.Name = "GridColumn20"
+        Me.GridColumn20.Visible = True
+        Me.GridColumn20.VisibleIndex = 1
+        '
+        'LabelControl2
+        '
+        Me.LabelControl2.Location = New System.Drawing.Point(6, 10)
+        Me.LabelControl2.Name = "LabelControl2"
+        Me.LabelControl2.Size = New System.Drawing.Size(35, 13)
+        Me.LabelControl2.TabIndex = 90
+        Me.LabelControl2.Text = "Season"
+        '
+        'BViewEstECOPPPS
+        '
+        Me.BViewEstECOPPPS.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BViewEstECOPPPS.ImageIndex = 15
+        Me.BViewEstECOPPPS.Location = New System.Drawing.Point(1031, 2)
+        Me.BViewEstECOPPPS.LookAndFeel.SkinName = "Metropolis"
+        Me.BViewEstECOPPPS.Name = "BViewEstECOPPPS"
+        Me.BViewEstECOPPPS.Size = New System.Drawing.Size(80, 36)
+        Me.BViewEstECOPPPS.TabIndex = 94
+        Me.BViewEstECOPPPS.Text = "View"
         '
         'FormSampleDevelopment
         '
@@ -1734,6 +1960,20 @@ Partial Class FormSampleDevelopment
         Me.PanelControl7.PerformLayout()
         CType(Me.SLEVendorCopyProto2.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView8, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTPECOP.ResumeLayout(False)
+        CType(Me.GCEcopPPS, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVEcopPPS, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemMemoEdit6, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemProgressBar1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl2.ResumeLayout(False)
+        CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl3.ResumeLayout(False)
+        CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl4.ResumeLayout(False)
+        Me.PanelControl4.PerformLayout()
+        CType(Me.SLESeasonEcopPPS.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1886,4 +2126,25 @@ Partial Class FormSampleDevelopment
     Friend WithEvents GBProto2 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents GBCopyProto2 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents EntryECOPToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents GCEcopPPS As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVEcopPPS As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn22 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn23 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn25 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn26 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RepositoryItemMemoEdit6 As DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit
+    Friend WithEvents RepositoryItemProgressBar1 As DevExpress.XtraEditors.Repository.RepositoryItemProgressBar
+    Friend WithEvents PanelControl2 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents PanelControl3 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents PanelControl4 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents SLESeasonEcopPPS As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView3 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn18 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn19 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn20 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents BViewEstECOPPPS As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GridColumn21 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn28 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn24 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

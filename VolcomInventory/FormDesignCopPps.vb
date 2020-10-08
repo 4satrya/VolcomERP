@@ -1,8 +1,10 @@
 ﻿Public Class FormDesignCopPps
-    Dim id_pps As String = "-1"
+    Public id_pps As String = "-1"
     Public id_design As String = "-1"
-    Dim is_production As String = "-1"
+    Dim is_production As String = "2"
     Public id_comp_contact As String = "-1"
+    Public is_view As String = "-1"
+    Dim id_report_status As String = "-1"
 
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles BtnCancel.Click
         Close()
@@ -29,7 +31,12 @@
     End Sub
 
     Sub load_det_input()
-        Dim query As String = "SELECT description,id_currency," & decimalSQL(TETodayKurs.EditValue.ToString) & " AS kurs,before_kurs,additional FROM tb_design_ecop_pps_det"
+        Dim query As String = ""
+        If id_pps = "-1" Then
+            query = "SELECT description,id_currency," & decimalSQL(TETodayKurs.EditValue.ToString) & " AS kurs,before_kurs,additional FROM tb_design_ecop_pps_det"
+        Else
+            query = "SELECT description,id_currency,kurs,before_kurs,additional FROM tb_design_ecop_pps_det WHERE id_design_ecop_pps='" & id_pps & "'"
+        End If
         Dim dt As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCCOPComponent.DataSource = dt
         GVCOPComponent.BestFitColumns()
@@ -68,7 +75,7 @@ WHERE dsg.id_design='" & id_design & "'"
         End If
     End Sub
 
-    Private Sub FormDesignCopPps_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Sub load_form()
         load_target_cost()
         view_currency(LECurrency)
         view_currency_grid()
@@ -104,8 +111,27 @@ WHERE pd.`id_report_status` != '5' AND pdd.`id_design`='" & id_design & "' AND p
             End If
         Else
             'edit
-            BCancelPropose.Visible = True
+            Dim qs As String = "SELECT id_design_ecop_pps,pps.`number`,d.`design_code`,d.`design_display_name` ,emp.`employee_name` AS created_by,pps.`created_date`,pps.`is_production_dept`,pps.`id_report_status`
+FROM `tb_design_ecop_pps` pps
+INNER JOIN tb_m_design d ON d.`id_design`=pps.`id_design`
+INNER JOIN tb_m_user usr ON usr.`id_user`=pps.`created_by`
+INNER JOIN tb_m_employee emp ON emp.`id_employee`=usr.`id_employee`
+WHERE id_design_ecop_pps='" & id_pps & "'"
+            Dim dts As DataTable = execute_query(qs, -1, True, "", "", "", "")
+            '
+            is_production = dts.Rows(0)("is_production").ToString
+            id_report_status = dts.Rows(0)("id_report_status").ToString
+            '
+            load_form_input()
+            '
             BMark.Visible = True
+            If id_report_status! = "5" And id_report_status! = "6" Then
+                BCancelPropose.Visible = True
+                BtnSave.Visible = True
+            Else
+                BCancelPropose.Visible = False
+                BtnSave.Visible = False
+            End If
         End If
         '
         If is_production = "1" Then
@@ -113,6 +139,10 @@ WHERE pd.`id_report_status` != '5' AND pdd.`id_design`='" & id_design & "' AND p
         Else
             PCPurchasing.Visible = False
         End If
+    End Sub
+
+    Private Sub FormDesignCopPps_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        load_form()
     End Sub
 
     Private Sub view_currency_grid()
@@ -167,9 +197,6 @@ WHERE pd.`id_report_status` != '5' AND pdd.`id_design`='" & id_design & "' AND p
     End Sub
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles BtnSave.Click
-        'If id_comp = "-1" Or id_comp = "" Then
-        'stopCustom("Please select vendor first")
-        'Else
         Dim id_season As Integer = FormMasterDesignCOP.BGVDesign.GetFocusedRowCellValue("id_season")
         Dim is_more_than_limit As Boolean = False
 
@@ -203,53 +230,111 @@ WHERE pd.`id_report_status` != '5' AND pdd.`id_design`='" & id_design & "' AND p
         End If
 
         If cont Then
-            Dim query As String = ""
-            'check 
-            query = "SELECT pdd.`id_prod_demand`,pd.`id_report_status`,pdd.`id_design` FROM tb_prod_demand_design pdd
+            If id_pps = "-1" Then 'new
+                Dim query As String = ""
+                'check 
+                query = "SELECT pdd.`id_prod_demand`,pd.`id_report_status`,pdd.`id_design` FROM tb_prod_demand_design pdd
 INNER JOIN tb_prod_demand pd ON pd.`id_prod_demand`=pdd.`id_prod_demand`
 WHERE pd.`id_report_status` != '5' AND pdd.`id_design`='" & id_design & "' AND pd.is_pd='1'"
-            Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
-            If data.Rows.Count > 0 Then
-                warningCustom("ECOP already locked.")
-            Else
-                Dim id_c As String = ""
-                If id_comp_contact = "-1" Or id_comp_contact = "" Then
-                    id_c = "NULL"
+                Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+                If data.Rows.Count > 0 Then
+                    warningCustom("ECOP already locked.")
                 Else
-                    id_c = "'" & id_comp_contact & "'"
-                End If
-
-                Dim qi As String = ""
-                qi = "INSERT INTO `tb_design_ecop_pps`(id_comp_contact,id_design,created_by,created_date,id_report_status,is_production_dept,note)
-VALUES('" & id_comp_contact & "','" & id_design & "','" & id_user & "',NOW(),'1','" & is_production & "',''); SELECT LAST_INSERT_ID();"
-                id_pps = execute_query(qi, 0, True, "", "", "", "")
-
-                qi = "CALL gen_number('" & id_pps & "',270)"
-                execute_non_query(qi, True, "", "", "", "")
-                'detail
-                qi = "INSERT INTO tb_design_ecop_pps_det(`id_design_ecop_pps`,`description`,`id_currency`,`kurs`,`before_kurs`,`additional`) VALUES"
-                For i As Integer = 0 To GVCOPComponent.RowCount - 1
-                    If Not i = 0 Then
-                        qi += ","
+                    Dim id_c As String = ""
+                    If id_comp_contact = "-1" Or id_comp_contact = "" Then
+                        id_c = "NULL"
+                    Else
+                        id_c = "'" & id_comp_contact & "'"
                     End If
-                    qi += "('" & id_pps & "','" & addSlashes(GVCOPComponent.GetRowCellValue(i, "description").ToString) & "','" & GVCOPComponent.GetRowCellValue(i, "id_currency").ToString & "','" & decimalSQL(GVCOPComponent.GetRowCellValue(i, "kurs").ToString) & "','" & decimalSQL(GVCOPComponent.GetRowCellValue(i, "before_kurs").ToString) & "','" & decimalSQL(GVCOPComponent.GetRowCellValue(i, "additional").ToString) & "')"
-                Next
-                execute_non_query(qi, True, "", "", "", "")
 
-                submit_who_prepared("270", id_pps, id_user)
+                    Dim qi As String = ""
+                    qi = "INSERT INTO `tb_design_ecop_pps`(id_comp_contact,id_design,created_by,created_date,id_report_status,is_production_dept,note)
+VALUES('" & id_comp_contact & "','" & id_design & "','" & id_user & "',NOW(),'1','" & is_production & "',''); SELECT LAST_INSERT_ID();"
+                    id_pps = execute_query(qi, 0, True, "", "", "", "")
 
-                infoCustom("Entry ECOP success")
+                    qi = "CALL gen_number('" & id_pps & "',270)"
+                    execute_non_query(qi, True, "", "", "", "")
+                    'detail
+                    qi = "INSERT INTO tb_design_ecop_pps_det(`id_design_ecop_pps`,`description`,`id_currency`,`kurs`,`before_kurs`,`additional`) VALUES"
+                    For i As Integer = 0 To GVCOPComponent.RowCount - 1
+                        If Not i = 0 Then
+                            qi += ","
+                        End If
+                        qi += "('" & id_pps & "','" & addSlashes(GVCOPComponent.GetRowCellValue(i, "description").ToString) & "','" & GVCOPComponent.GetRowCellValue(i, "id_currency").ToString & "','" & decimalSQL(GVCOPComponent.GetRowCellValue(i, "kurs").ToString) & "','" & decimalSQL(GVCOPComponent.GetRowCellValue(i, "before_kurs").ToString) & "','" & decimalSQL(GVCOPComponent.GetRowCellValue(i, "additional").ToString) & "')"
+                    Next
+                    execute_non_query(qi, True, "", "", "", "")
 
-                Close()
+                    submit_who_prepared("270", id_pps, id_user)
+
+                    infoCustom("Entry ECOP success")
+
+                    Close()
+                End If
+            Else
+                Dim query As String = ""
+                'check 
+                query = "SELECT pdd.`id_prod_demand`,pd.`id_report_status`,pdd.`id_design` FROM tb_prod_demand_design pdd
+INNER JOIN tb_prod_demand pd ON pd.`id_prod_demand`=pdd.`id_prod_demand`
+WHERE pd.`id_report_status` != '5' AND pdd.`id_design`='" & id_design & "' AND pd.is_pd='1'"
+                Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+                If data.Rows.Count > 0 Then
+                    warningCustom("ECOP already locked.")
+                Else
+                    Dim id_c As String = ""
+                    If id_comp_contact = "-1" Or id_comp_contact = "" Then
+                        id_c = "NULL"
+                    Else
+                        id_c = "'" & id_comp_contact & "'"
+                    End If
+
+                    Dim qi As String = ""
+                    qi = "UPDATE `tb_design_ecop_pps` SET id_comp_contact='" & id_comp_contact & "',id_design='" & id_design & "',last_update_by='" & id_user & "',last_update_date=NOW() WHERE id_design_ecop_pps='" & id_pps & "'"
+                    execute_non_query(qi, True, "", "", "", "")
+                    'detail
+                    'hapus detail
+                    qi = "DELETE FROM tb_design_ecop_pps_det WHERE id_design_ecop_pps='" & id_pps & "'"
+                    execute_non_query(qi, True, "", "", "", "")
+                    'insert detail
+                    qi = "INSERT INTO tb_design_ecop_pps_det(`id_design_ecop_pps`,`description`,`id_currency`,`kurs`,`before_kurs`,`additional`) VALUES"
+                    For i As Integer = 0 To GVCOPComponent.RowCount - 1
+                        If Not i = 0 Then
+                            qi += ","
+                        End If
+                        qi += "('" & id_pps & "','" & addSlashes(GVCOPComponent.GetRowCellValue(i, "description").ToString) & "','" & GVCOPComponent.GetRowCellValue(i, "id_currency").ToString & "','" & decimalSQL(GVCOPComponent.GetRowCellValue(i, "kurs").ToString) & "','" & decimalSQL(GVCOPComponent.GetRowCellValue(i, "before_kurs").ToString) & "','" & decimalSQL(GVCOPComponent.GetRowCellValue(i, "additional").ToString) & "')"
+                    Next
+                    execute_non_query(qi, True, "", "", "", "")
+
+                    infoCustom("Update ECOP success")
+                    Close()
+                End If
             End If
         End If
     End Sub
 
     Private Sub BMark_Click(sender As Object, e As EventArgs) Handles BMark.Click
-
+        FormReportMark.id_report = id_pps
+        FormReportMark.report_mark_type = "270"
+        FormReportMark.is_view = is_view
+        FormReportMark.form_origin = Name
+        FormReportMark.ShowDialog()
     End Sub
 
     Private Sub BCancelPropose_Click(sender As Object, e As EventArgs) Handles BCancelPropose.Click
+        If id_report_status! = "5" And id_report_status! = "6" Then
+            Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure you want to cancel ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+            If confirm = Windows.Forms.DialogResult.Yes Then
+                Cursor = Cursors.WaitCursor
+                Dim query As String = "UPDATE tb_design_ecop_pps SET id_report_status=5 WHERE id_design_ecop_pps='" + id_pps + "'"
+                execute_non_query(query, True, "", "", "", "")
 
+                'nonaktif mark
+                Dim queryrm = String.Format("UPDATE tb_report_mark SET report_mark_lead_time=NULL,report_mark_start_datetime=NULL WHERE report_mark_type='{0}' AND id_report='{1}' AND id_report_status>'1'", "270", id_pps)
+                execute_non_query(queryrm, True, "", "", "", "")
+
+                load_form()
+
+                Cursor = Cursors.Default
+            End If
+        End If
     End Sub
 End Class

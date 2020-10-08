@@ -355,9 +355,12 @@
         If check_print_report_status(id_report_status_g) Then
             ReportProductionMRS.is_pre = "-1"
         Else
+            FormProdDemandPrintOpt.rmt = "29"
+            FormProdDemandPrintOpt.id = id_mrs
+            FormProdDemandPrintOpt.ShowDialog()
+
             ReportProductionMRS.is_pre = "1"
         End If
-
         Dim Report As New ReportProductionMRS()
         Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
         Tool.ShowPreview()

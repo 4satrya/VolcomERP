@@ -618,6 +618,9 @@
         ElseIf report_mark_type = "269" Then
             'Material & Trims Stock Summary Report
             query = String.Format("SELECT id_report_status,number as report_number FROM tb_mat_summary WHERE id_mat_summary = '{0}'", id_report)
+        ElseIf report_mark_type = "270" Then
+            'propose ECOP
+            query = String.Format("SELECT id_report_status,number as report_number FROM tb_design_ecop_pps WHERE id_design_ecop_pps = '{0}'", id_report)
         End If
 
         data = execute_query(query, -1, True, "", "", "", "")
@@ -8731,6 +8734,25 @@ WHERE invd.`id_inv_mat`='" & id_report & "'"
 
             'update status
             query = String.Format("UPDATE tb_mat_summary SET id_report_status='{0}' WHERE id_mat_summary ='{1}'", id_status_reportx, id_report)
+            execute_non_query(query, True, "", "", "", "")
+        ElseIf report_mark_type = "270" Then
+            'move est. receive date
+            If id_status_reportx = "3" Then
+                id_status_reportx = "6"
+            End If
+
+            If id_status_reportx = "6" Then
+                Dim data_odr As DataTable = execute_query("SELECT id_purc_order, est_date_receive, to_est_date_receive FROM tb_purc_order_move_date_det WHERE id_receive_date = " + id_report, -1, True, "", "", "", "")
+
+                For i = 0 To data_odr.Rows.Count - 1
+                    Dim query_update As String = "UPDATE tb_purc_order SET est_date_receive = '" + Date.Parse(data_odr.Rows(i)("to_est_date_receive").ToString).ToString("yyyy-MM-dd") + "' WHERE id_purc_order = " + data_odr.Rows(i)("id_purc_order").ToString
+
+                    execute_non_query(query_update, True, "", "", "", "")
+                Next
+            End If
+
+            'update status
+            query = String.Format("UPDATE tb_purc_order_move_date SET id_report_status='{0}' WHERE id_receive_date ='{1}'", id_status_reportx, id_report)
             execute_non_query(query, True, "", "", "", "")
         End If
 

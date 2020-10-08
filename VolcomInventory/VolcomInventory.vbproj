@@ -2850,6 +2850,12 @@
     <Compile Include="FormMatPurcView.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormMatStockSummary.Designer.vb">
+      <DependentUpon>FormMatStockSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMatStockSummary.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormMenuAuth.Designer.vb">
       <DependentUpon>FormMenuAuth.vb</DependentUpon>
     </Compile>
@@ -2974,6 +2980,12 @@
       <DependentUpon>FormOLStoreTracking.vb</DependentUpon>
     </Compile>
     <Compile Include="FormOLStoreTracking.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormOLStoreUpdateStatus.Designer.vb">
+      <DependentUpon>FormOLStoreUpdateStatus.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormOLStoreUpdateStatus.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormOpt.Designer.vb">
@@ -6330,6 +6342,12 @@
     <Compile Include="FormStockQCBrowsePO.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormStockQCStockReportSummary.Designer.vb">
+      <DependentUpon>FormStockQCStockReportSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormStockQCStockReportSummary.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormStockUniS78New.Designer.vb">
       <DependentUpon>FormStockUniS78New.vb</DependentUpon>
     </Compile>
@@ -7935,6 +7953,12 @@
     <Compile Include="ReportMatStockSum.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ReportMatStockSummary.Designer.vb">
+      <DependentUpon>ReportMatStockSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportMatStockSummary.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ReportMatStockWO.designer.vb">
       <DependentUpon>ReportMatStockWO.vb</DependentUpon>
     </Compile>
@@ -8573,6 +8597,12 @@
       <DependentUpon>ReportShipInvoice.vb</DependentUpon>
     </Compile>
     <Compile Include="ReportShipInvoice.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportStockQCStockReportSummary.Designer.vb">
+      <DependentUpon>ReportStockQCStockReportSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportStockQCStockReportSummary.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ReportStockQCSummary.Designer.vb">
@@ -9976,6 +10006,9 @@
     <EmbeddedResource Include="FormMatPurcView.resx">
       <DependentUpon>FormMatPurcView.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormMatStockSummary.resx">
+      <DependentUpon>FormMatStockSummary.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormMenuAuth.resx">
       <DependentUpon>FormMenuAuth.vb</DependentUpon>
     </EmbeddedResource>
@@ -10038,6 +10071,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormOLStoreTracking.resx">
       <DependentUpon>FormOLStoreTracking.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormOLStoreUpdateStatus.resx">
+      <DependentUpon>FormOLStoreUpdateStatus.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormOpt.resx">
       <DependentUpon>FormOpt.vb</DependentUpon>
@@ -12062,6 +12098,9 @@
     <EmbeddedResource Include="FormStockQCBrowsePO.resx">
       <DependentUpon>FormStockQCBrowsePO.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormStockQCStockReportSummary.resx">
+      <DependentUpon>FormStockQCStockReportSummary.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormStockUniS78New.resx">
       <DependentUpon>FormStockUniS78New.vb</DependentUpon>
     </EmbeddedResource>
@@ -12972,6 +13011,9 @@
       <DependentUpon>ReportMatStockSum.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportMatStockSummary.resx">
+      <DependentUpon>ReportMatStockSummary.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportMatStockWO.resx">
       <DependentUpon>ReportMatStockWO.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -13332,6 +13374,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportShipInvoice.resx">
       <DependentUpon>ReportShipInvoice.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportStockQCStockReportSummary.resx">
+      <DependentUpon>ReportStockQCStockReportSummary.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportStockQCSummary.resx">
       <DependentUpon>ReportStockQCSummary.vb</DependentUpon>

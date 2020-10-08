@@ -22,6 +22,7 @@ Partial Class FormOLStore
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormOLStore))
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
+        Me.BtnUpdateStatusVIAAPI = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnUpdateStt = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnViewDetail = New DevExpress.XtraEditors.SimpleButton()
         Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
@@ -202,6 +203,7 @@ Partial Class FormOLStore
         Me.GridColumn = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnFailReason = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnnote_promo = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumncomp_group_name = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControl4 = New DevExpress.XtraEditors.PanelControl()
         Me.CEAllow = New DevExpress.XtraEditors.CheckEdit()
         Me.SBCloseOrder = New DevExpress.XtraEditors.SimpleButton()
@@ -219,7 +221,6 @@ Partial Class FormOLStore
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.ContextMenuStripOwnOlStore = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.CantProceedToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GridColumncomp_group_name = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
         CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -292,6 +293,7 @@ Partial Class FormOLStore
         '
         'PanelControl2
         '
+        Me.PanelControl2.Controls.Add(Me.BtnUpdateStatusVIAAPI)
         Me.PanelControl2.Controls.Add(Me.BtnUpdateStt)
         Me.PanelControl2.Controls.Add(Me.BtnViewDetail)
         Me.PanelControl2.Controls.Add(Me.LabelControl4)
@@ -306,14 +308,23 @@ Partial Class FormOLStore
         Me.PanelControl2.Size = New System.Drawing.Size(1000, 48)
         Me.PanelControl2.TabIndex = 2
         '
+        'BtnUpdateStatusVIAAPI
+        '
+        Me.BtnUpdateStatusVIAAPI.Image = CType(resources.GetObject("BtnUpdateStatusVIAAPI.Image"), System.Drawing.Image)
+        Me.BtnUpdateStatusVIAAPI.Location = New System.Drawing.Point(796, 14)
+        Me.BtnUpdateStatusVIAAPI.Name = "BtnUpdateStatusVIAAPI"
+        Me.BtnUpdateStatusVIAAPI.Size = New System.Drawing.Size(109, 20)
+        Me.BtnUpdateStatusVIAAPI.TabIndex = 4
+        Me.BtnUpdateStatusVIAAPI.Text = "Update Status"
+        '
         'BtnUpdateStt
         '
         Me.BtnUpdateStt.Image = CType(resources.GetObject("BtnUpdateStt.Image"), System.Drawing.Image)
         Me.BtnUpdateStt.Location = New System.Drawing.Point(658, 14)
         Me.BtnUpdateStt.Name = "BtnUpdateStt"
-        Me.BtnUpdateStt.Size = New System.Drawing.Size(102, 20)
+        Me.BtnUpdateStt.Size = New System.Drawing.Size(132, 20)
         Me.BtnUpdateStt.TabIndex = 0
-        Me.BtnUpdateStt.Text = "Update Status"
+        Me.BtnUpdateStt.Text = "Update Status (XLS)"
         '
         'BtnViewDetail
         '
@@ -1920,6 +1931,15 @@ Partial Class FormOLStore
         Me.GridColumnnote_promo.Visible = True
         Me.GridColumnnote_promo.VisibleIndex = 21
         '
+        'GridColumncomp_group_name
+        '
+        Me.GridColumncomp_group_name.Caption = "Store"
+        Me.GridColumncomp_group_name.FieldName = "comp_group_name"
+        Me.GridColumncomp_group_name.Name = "GridColumncomp_group_name"
+        Me.GridColumncomp_group_name.OptionsColumn.ReadOnly = True
+        Me.GridColumncomp_group_name.Visible = True
+        Me.GridColumncomp_group_name.VisibleIndex = 1
+        '
         'PanelControl4
         '
         Me.PanelControl4.Controls.Add(Me.CEAllow)
@@ -2079,15 +2099,6 @@ Partial Class FormOLStore
         Me.CantProceedToolStripMenuItem.Name = "CantProceedToolStripMenuItem"
         Me.CantProceedToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
         Me.CantProceedToolStripMenuItem.Text = "Can't proceed"
-        '
-        'GridColumncomp_group_name
-        '
-        Me.GridColumncomp_group_name.Caption = "Store"
-        Me.GridColumncomp_group_name.FieldName = "comp_group_name"
-        Me.GridColumncomp_group_name.Name = "GridColumncomp_group_name"
-        Me.GridColumncomp_group_name.OptionsColumn.ReadOnly = True
-        Me.GridColumncomp_group_name.Visible = True
-        Me.GridColumncomp_group_name.VisibleIndex = 1
         '
         'FormOLStore
         '
@@ -2372,4 +2383,5 @@ Partial Class FormOLStore
     Friend WithEvents GridColumnid_comp_group As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumndescription As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumncomp_group_name As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BtnUpdateStatusVIAAPI As DevExpress.XtraEditors.SimpleButton
 End Class

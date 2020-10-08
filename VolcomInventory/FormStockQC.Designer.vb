@@ -115,6 +115,18 @@ Partial Class FormStockQC
         Me.LabelControl28 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl31 = New DevExpress.XtraEditors.LabelControl()
         Me.SBStockView = New DevExpress.XtraEditors.SimpleButton()
+        Me.XTPSummary = New DevExpress.XtraTab.XtraTabPage()
+        Me.GridControlSummary = New DevExpress.XtraGrid.GridControl()
+        Me.GridViewSummary = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn20 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn21 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn22 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn23 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn24 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn25 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn26 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.PanelControl5 = New DevExpress.XtraEditors.PanelControl()
+        Me.SBCreateSummary = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.XTCStock, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCStock.SuspendLayout()
         Me.XTPSOH.SuspendLayout()
@@ -156,6 +168,11 @@ Partial Class FormStockQC
         CType(Me.DEStockTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEStockFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEStockFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTPSummary.SuspendLayout()
+        CType(Me.GridControlSummary, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridViewSummary, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl5, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl5.SuspendLayout()
         Me.SuspendLayout()
         '
         'XTCStock
@@ -167,7 +184,7 @@ Partial Class FormStockQC
         Me.XTCStock.SelectedTabPage = Me.XTPSOH
         Me.XTCStock.Size = New System.Drawing.Size(1072, 528)
         Me.XTCStock.TabIndex = 0
-        Me.XTCStock.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPSOH, Me.XTPSC, Me.XTPStock})
+        Me.XTCStock.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPSOH, Me.XTPSC, Me.XTPStock, Me.XTPSummary})
         '
         'XTPSOH
         '
@@ -1088,6 +1105,112 @@ Partial Class FormStockQC
         Me.SBStockView.TabIndex = 6
         Me.SBStockView.Text = "View"
         '
+        'XTPSummary
+        '
+        Me.XTPSummary.Controls.Add(Me.GridControlSummary)
+        Me.XTPSummary.Controls.Add(Me.PanelControl5)
+        Me.XTPSummary.Name = "XTPSummary"
+        Me.XTPSummary.Size = New System.Drawing.Size(1066, 500)
+        Me.XTPSummary.Text = "Summary Report"
+        '
+        'GridControlSummary
+        '
+        Me.GridControlSummary.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GridControlSummary.Location = New System.Drawing.Point(0, 45)
+        Me.GridControlSummary.MainView = Me.GridViewSummary
+        Me.GridControlSummary.Name = "GridControlSummary"
+        Me.GridControlSummary.Size = New System.Drawing.Size(1066, 455)
+        Me.GridControlSummary.TabIndex = 40
+        Me.GridControlSummary.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridViewSummary})
+        '
+        'GridViewSummary
+        '
+        Me.GridViewSummary.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn20, Me.GridColumn21, Me.GridColumn22, Me.GridColumn23, Me.GridColumn24, Me.GridColumn25, Me.GridColumn26})
+        Me.GridViewSummary.GridControl = Me.GridControlSummary
+        Me.GridViewSummary.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_beg", Nothing, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount_beg", Nothing, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_receive", Nothing, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount_receive", Nothing, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_mrs", Nothing, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount_mrs", Nothing, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_retur", Nothing, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount_retur", Nothing, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_adj", Nothing, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount_adj", Nothing, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_ending", Nothing, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount_ending", Nothing, "{0:N2}")})
+        Me.GridViewSummary.Name = "GridViewSummary"
+        Me.GridViewSummary.OptionsBehavior.ReadOnly = True
+        Me.GridViewSummary.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn20
+        '
+        Me.GridColumn20.Caption = "Number"
+        Me.GridColumn20.FieldName = "number"
+        Me.GridColumn20.Name = "GridColumn20"
+        Me.GridColumn20.Visible = True
+        Me.GridColumn20.VisibleIndex = 0
+        '
+        'GridColumn21
+        '
+        Me.GridColumn21.Caption = "Start Period"
+        Me.GridColumn21.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.GridColumn21.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn21.FieldName = "start_period"
+        Me.GridColumn21.Name = "GridColumn21"
+        Me.GridColumn21.Visible = True
+        Me.GridColumn21.VisibleIndex = 1
+        '
+        'GridColumn22
+        '
+        Me.GridColumn22.Caption = "End Period"
+        Me.GridColumn22.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.GridColumn22.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn22.FieldName = "end_period"
+        Me.GridColumn22.Name = "GridColumn22"
+        Me.GridColumn22.Visible = True
+        Me.GridColumn22.VisibleIndex = 2
+        '
+        'GridColumn23
+        '
+        Me.GridColumn23.Caption = "Created Date"
+        Me.GridColumn23.DisplayFormat.FormatString = "dd MMMM yyyy HH:mm:ss"
+        Me.GridColumn23.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn23.FieldName = "created_date"
+        Me.GridColumn23.Name = "GridColumn23"
+        Me.GridColumn23.Visible = True
+        Me.GridColumn23.VisibleIndex = 3
+        '
+        'GridColumn24
+        '
+        Me.GridColumn24.Caption = "Created By"
+        Me.GridColumn24.FieldName = "created_by"
+        Me.GridColumn24.Name = "GridColumn24"
+        Me.GridColumn24.Visible = True
+        Me.GridColumn24.VisibleIndex = 4
+        '
+        'GridColumn25
+        '
+        Me.GridColumn25.Caption = "Report Status"
+        Me.GridColumn25.FieldName = "report_status"
+        Me.GridColumn25.Name = "GridColumn25"
+        Me.GridColumn25.Visible = True
+        Me.GridColumn25.VisibleIndex = 5
+        '
+        'GridColumn26
+        '
+        Me.GridColumn26.Caption = "GridColumn26"
+        Me.GridColumn26.FieldName = "id_wip_summary"
+        Me.GridColumn26.Name = "GridColumn26"
+        '
+        'PanelControl5
+        '
+        Me.PanelControl5.Controls.Add(Me.SBCreateSummary)
+        Me.PanelControl5.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelControl5.Location = New System.Drawing.Point(0, 0)
+        Me.PanelControl5.Name = "PanelControl5"
+        Me.PanelControl5.Size = New System.Drawing.Size(1066, 45)
+        Me.PanelControl5.TabIndex = 41
+        '
+        'SBCreateSummary
+        '
+        Me.SBCreateSummary.Dock = System.Windows.Forms.DockStyle.Right
+        Me.SBCreateSummary.Image = CType(resources.GetObject("SBCreateSummary.Image"), System.Drawing.Image)
+        Me.SBCreateSummary.Location = New System.Drawing.Point(926, 2)
+        Me.SBCreateSummary.Name = "SBCreateSummary"
+        Me.SBCreateSummary.Size = New System.Drawing.Size(138, 41)
+        Me.SBCreateSummary.TabIndex = 0
+        Me.SBCreateSummary.Text = "Create Summary"
+        '
         'FormStockQC
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1142,6 +1265,11 @@ Partial Class FormStockQC
         CType(Me.DEStockTo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEStockFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEStockFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTPSummary.ResumeLayout(False)
+        CType(Me.GridControlSummary, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridViewSummary, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl5, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl5.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -1241,4 +1369,16 @@ Partial Class FormStockQC
     Friend WithEvents GridView1 As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumn18 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn19 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents XTPSummary As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents GridControlSummary As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GridViewSummary As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents PanelControl5 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents SBCreateSummary As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GridColumn20 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn21 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn22 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn23 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn24 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn25 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn26 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

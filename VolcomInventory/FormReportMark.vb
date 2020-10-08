@@ -612,6 +612,12 @@
         ElseIf report_mark_type = "265" Then
             'rekonsil payout VA
             query = String.Format("SELECT id_report_status,number as report_number FROM tb_virtual_acc_trans WHERE id_virtual_acc_trans = '{0}'", id_report)
+        ElseIf report_mark_type = "268" Then
+            'WIP Stock Summary Report
+            query = String.Format("SELECT id_report_status,number as report_number FROM tb_wip_summary WHERE id_wip_summary = '{0}'", id_report)
+        ElseIf report_mark_type = "269" Then
+            'Material & Trims Stock Summary Report
+            query = String.Format("SELECT id_report_status,number as report_number FROM tb_mat_summary WHERE id_mat_summary = '{0}'", id_report)
         End If
 
         data = execute_query(query, -1, True, "", "", "", "")
@@ -5765,9 +5771,9 @@ HAVING debit!=credit"
                 query = "UPDATE tb_m_design dsg
 INNER JOIN `tb_design_cop_propose_det` copd ON copd.id_design=dsg.id_design AND copd.`id_design_cop_propose`='" & id_report & "'
 SET dsg.`prod_order_cop_pd_curr`=copd.`id_currency`,dsg.`prod_order_cop_kurs_pd`=copd.`kurs`,dsg.`prod_order_cop_pd`=copd.`design_cop`,dsg.`prod_order_cop_pd_vendor`=copd.`id_comp_contact`,dsg.`prod_order_cop_pd_addcost`=copd.`add_cost`,dsg.is_cold_storage=copd.is_cold_storage ;
-UPDATE tb_m_design_cop SET is_active='2' WHERE id_design IN (SELECT id_design FROM tb_design_cop_propose_det WHERE id_design_cop_propose='" & id_report & "');
-INSERT INTO `tb_m_design_cop`(description,id_design,date_created,id_currency,kurs,before_kurs,additional,is_active)
-SELECT cmp.description,copd.id_design,NOW(),cmp.id_currency,cmp.kurs,cmp.before_kurs,cmp.additional,1 FROM tb_design_cop_propose_comp cmp
+UPDATE tb_m_design_cop SET is_active='2' WHERE id_design IN (SELECT id_design FROM tb_design_cop_propose_det WHERE id_design_cop_propose='" & id_report & "') AND is_production_dept=1;
+INSERT INTO `tb_m_design_cop`(description,id_design,date_created,id_currency,kurs,before_kurs,additional,is_active,is_production_dept)
+SELECT cmp.description,copd.id_design,NOW(),cmp.id_currency,cmp.kurs,cmp.before_kurs,cmp.additional,1,1 FROM tb_design_cop_propose_comp cmp
 INNER JOIN `tb_design_cop_propose_det` copd ON copd.id_design_cop_propose_det=cmp.id_design_cop_propose_det
 WHERE copd.id_design_cop_propose='" & id_report & "';"
                 execute_non_query(query, True, "", "", "", "")
@@ -8707,6 +8713,24 @@ WHERE invd.`id_inv_mat`='" & id_report & "'"
             End If
             'update status
             query = String.Format("UPDATE tb_virtual_acc_trans SET id_report_status='{0}' WHERE id_virtual_acc_trans ='{1}'", id_status_reportx, id_report)
+            execute_non_query(query, True, "", "", "", "")
+        ElseIf report_mark_type = "268" Then
+            'WIP Stock Summary Report
+            If id_status_reportx = "3" Then
+                id_status_reportx = "6"
+            End If
+
+            'update status
+            query = String.Format("UPDATE tb_wip_summary SET id_report_status='{0}' WHERE id_wip_summary ='{1}'", id_status_reportx, id_report)
+            execute_non_query(query, True, "", "", "", "")
+        ElseIf report_mark_type = "269" Then
+            'Material & Trims Stock Summary Report
+            If id_status_reportx = "3" Then
+                id_status_reportx = "6"
+            End If
+
+            'update status
+            query = String.Format("UPDATE tb_mat_summary SET id_report_status='{0}' WHERE id_mat_summary ='{1}'", id_status_reportx, id_report)
             execute_non_query(query, True, "", "", "", "")
         End If
 

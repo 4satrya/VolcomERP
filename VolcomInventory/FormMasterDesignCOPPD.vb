@@ -105,7 +105,7 @@ WHERE dsg.id_design='" & id_design & "'"
     End Function
 
     Sub load_det_current()
-        Dim query As String = "SELECT description,id_currency,kurs,before_kurs,additional FROM tb_m_design_cop WHERE is_active='1' AND id_design='" & id_design & "'"
+        Dim query As String = "SELECT description,id_currency,kurs,before_kurs,additional FROM tb_m_design_cop WHERE is_active='1' AND is_production_dept=1 AND id_design='" & id_design & "'"
         Dim dt As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCCOPCurrent.DataSource = dt
         GVCOPComponent.BestFitColumns()
@@ -326,7 +326,7 @@ INNER JOIN tb_m_code_detail cd ON dsgc.`id_code_detail`=cd.`id_code_detail` AND 
     End Sub
 
     Sub load_det_input()
-        Dim query As String = "SELECT description,id_currency," & decimalSQL(TETodayKurs.EditValue.ToString) & " AS kurs,before_kurs,additional FROM tb_m_design_cop WHERE is_active='1' AND id_design='" & id_design & "'"
+        Dim query As String = "SELECT description,id_currency," & decimalSQL(TETodayKurs.EditValue.ToString) & " AS kurs,before_kurs,additional FROM tb_m_design_cop WHERE is_active='1' AND is_production_dept=1 AND id_design='" & id_design & "'"
         Dim dt As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCCOPComponent.DataSource = dt
         GVCOPComponent.BestFitColumns()
@@ -391,7 +391,7 @@ WHERE pd.`id_report_status` != '5' AND pdd.`id_design`='" & id_design & "' AND p
                 End If
 
                 'detail first
-                query = "UPDATE tb_m_design_cop SET is_active=2 WHERE id_design='" & id_design & "';INSERT INTO tb_m_design_cop(id_design,description,date_created,id_currency,kurs,before_kurs,additional,is_active) VALUES"
+                query = "UPDATE tb_m_design_cop SET is_active=2 WHERE id_design='" & id_design & "' AND is_production_dept=1;INSERT INTO tb_m_design_cop(id_design,description,date_created,id_currency,kurs,before_kurs,additional,is_active) VALUES"
                 For i As Integer = 0 To GVCOPComponent.RowCount - 1
                     If Not i = 0 Then
                         query += ","

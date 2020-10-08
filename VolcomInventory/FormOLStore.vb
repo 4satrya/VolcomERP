@@ -643,4 +643,10 @@
             EditToolStripMenuItem.Visible = False
         End If
     End Sub
+
+    Private Sub BtnUpdateStatusVIAAPI_Click(sender As Object, e As EventArgs) Handles BtnUpdateStatusVIAAPI.Click
+        Cursor = Cursors.WaitCursor
+        FormOLStoreUpdateStatus.ShowDialog()
+        Cursor = Cursors.Default
+    End Sub
 End Class

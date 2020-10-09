@@ -1716,7 +1716,6 @@ Partial Class FormSampleDevelopment
         Me.GVEcopPPS.Name = "GVEcopPPS"
         Me.GVEcopPPS.OptionsBehavior.Editable = False
         Me.GVEcopPPS.OptionsFind.AlwaysVisible = True
-        Me.GVEcopPPS.OptionsView.ColumnAutoWidth = False
         Me.GVEcopPPS.OptionsView.RowAutoHeight = True
         Me.GVEcopPPS.OptionsView.ShowGroupPanel = False
         '

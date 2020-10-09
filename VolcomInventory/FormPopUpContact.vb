@@ -235,7 +235,7 @@
         End If
         '
 
-        If id_pop_up = "68" Then 'production complience only
+        If id_pop_up = "68" Or id_pop_up = "68pps" Then 'production complience only
             query += "AND tb_m_comp.is_active=1 "
         End If
 
@@ -978,6 +978,12 @@
             FormMasterDesignCOPPD.TEVendor.Text = get_company_x(GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString, "2")
             FormMasterDesignCOPPD.id_comp_contact = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
             FormMasterDesignCOPPD.id_comp = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
+            Close()
+        ElseIf id_pop_up = "68pps" Then
+            'Design COP PD Propose
+            FormDesignCopPps.TEVendorName.Text = get_company_x(GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString, "1")
+            FormDesignCopPps.TEVendor.Text = get_company_x(GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString, "2")
+            FormDesignCopPps.id_comp_contact = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
             Close()
         ElseIf id_pop_up = "69" Then
             'REPAIR FROM

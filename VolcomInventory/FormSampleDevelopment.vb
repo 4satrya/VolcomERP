@@ -372,6 +372,7 @@ ORDER BY kp.id_prod_order_cps2 DESC"
     Private Sub EntryECOPToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EntryECOPToolStripMenuItem.Click
         FormDesignCopPps.id_design = GVDesign.GetFocusedRowCellValue("id_design").ToString
         FormDesignCopPps.id_pps = "-1"
+        FormDesignCopPps.is_production = "2"
         FormDesignCopPps.ShowDialog()
     End Sub
 
@@ -380,12 +381,13 @@ ORDER BY kp.id_prod_order_cps2 DESC"
     End Sub
 
     Sub load_pps()
-        Dim q As String = "SELECT id_design_ecop_pps,pps.`number`,d.id_design,d.`design_code`,d.`design_display_name` ,emp.`employee_name` AS created_by,pps.`created_date`
+        Dim q As String = "SELECT id_design_ecop_pps,pps.`number`,d.id_design,d.`design_code`,d.`design_display_name` ,emp.`employee_name` AS created_by,pps.`created_date`,sts.report_status
 FROM `tb_design_ecop_pps` pps
 INNER JOIN tb_m_design d ON d.`id_design`=pps.`id_design`
 INNER JOIN tb_m_user usr ON usr.`id_user`=pps.`created_by`
 INNER JOIN tb_m_employee emp ON emp.`id_employee`=usr.`id_employee`
 INNER JOIN tb_lookup_report_status sts ON sts.id_report_status=pps.id_report_status
+WHERE pps.is_production_dept='2'
 ORDER BY pps.id_design_ecop_pps DESC"
         Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
         GCEcopPPS.DataSource = dt

@@ -241,7 +241,6 @@ Partial Class FormDesignCopPps
         Me.SLEColdStorage.Properties.View = Me.SearchLookUpEdit1View
         Me.SLEColdStorage.Size = New System.Drawing.Size(194, 20)
         Me.SLEColdStorage.TabIndex = 8911
-        Me.SLEColdStorage.Visible = False
         '
         'SearchLookUpEdit1View
         '
@@ -272,7 +271,6 @@ Partial Class FormDesignCopPps
         Me.LColdStorage.Size = New System.Drawing.Size(93, 13)
         Me.LColdStorage.TabIndex = 8910
         Me.LColdStorage.Text = "Room/Cool Storage"
-        Me.LColdStorage.Visible = False
         '
         'BtnBrowseContactFrom
         '

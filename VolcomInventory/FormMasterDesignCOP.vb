@@ -4,6 +4,7 @@
     Dim bdel_active As String = "1"
 
     Private Sub FormMasterDesignCOP_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        viewDesign()
         viewSeason()
     End Sub
 
@@ -14,6 +15,12 @@
                                 ORDER BY b.range ASC)"
         viewSearchLookupQuery(SLESeason, query, "id_season", "season", "id_season")
         viewSearchLookupQuery(SLESeasonByCode, query, "range", "season", "range")
+    End Sub
+
+    Sub viewDesign()
+        Dim query As String = ""
+        query = "CALL view_design_order(TRUE)"
+        viewSearchLookupQuery(SLEDesign, query, "id_design", "design_display_name", "id_design")
     End Sub
 
     Sub view_design()
@@ -125,11 +132,15 @@ WHERE pdd.`id_design`='" & BGVDesign.GetFocusedRowCellValue("id_design").ToStrin
     End Sub
 
     Private Sub SMEditEcopPD_Click(sender As Object, e As EventArgs) Handles SMEditEcopPD.Click
-        FormMasterDesignCOPPD.id_design = BGVDesign.GetFocusedRowCellValue("id_design").ToString
-        FormMasterDesignCOPPD.TECode.Text = BGVDesign.GetFocusedRowCellValue("design_code").ToString
-        FormMasterDesignCOPPD.TEDesc.Text = BGVDesign.GetFocusedRowCellValue("design_display_name").ToString
-        '
-        FormMasterDesignCOPPD.ShowDialog()
+        'FormMasterDesignCOPPD.id_design = BGVDesign.GetFocusedRowCellValue("id_design").ToString
+        'FormMasterDesignCOPPD.TECode.Text = BGVDesign.GetFocusedRowCellValue("design_code").ToString
+        'FormMasterDesignCOPPD.TEDesc.Text = BGVDesign.GetFocusedRowCellValue("design_display_name").ToString
+        ''
+        'FormMasterDesignCOPPD.ShowDialog()
+        FormDesignCopPps.id_design = BGVDesign.GetFocusedRowCellValue("id_design").ToString
+        FormDesignCopPps.id_pps = "-1"
+        FormDesignCopPps.is_production = "1"
+        FormDesignCopPps.ShowDialog()
     End Sub
 
     Private Sub BGVDesign_PopupMenuShowing(sender As Object, e As DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs) Handles BGVDesign.PopupMenuShowing
@@ -271,5 +282,33 @@ WHERE pdd.`id_design`='" & BGVDesign.GetFocusedRowCellValue("id_design").ToStrin
     Private Sub GVCostPropose_DoubleClick(sender As Object, e As EventArgs) Handles GVCostPropose.DoubleClick
         FormMasterDesignCOPPropose.id_propose = GVCostPropose.GetFocusedRowCellValue("id_design_cop_propose").ToString
         FormMasterDesignCOPPropose.ShowDialog()
+    End Sub
+
+    Private Sub BSearchProposeECOP_Click(sender As Object, e As EventArgs) Handles BSearchProposeECOP.Click
+        Dim q_where As String = ""
+
+        If Not SLEDesign.EditValue.ToString = "0" Then
+            q_where = " AND d.id_design='" & SLEDesign.EditValue.ToString & "' "
+        End If
+
+        Dim q As String = "SELECT id_design_ecop_pps,pps.`number`,d.id_design,d.`design_code`,d.`design_display_name` ,emp.`employee_name` AS created_by,pps.`created_date`,sts.report_status
+FROM `tb_design_ecop_pps` pps
+INNER JOIN tb_m_design d ON d.`id_design`=pps.`id_design` " & q_where & "
+INNER JOIN tb_m_user usr ON usr.`id_user`=pps.`created_by`
+INNER JOIN tb_m_employee emp ON emp.`id_employee`=usr.`id_employee`
+INNER JOIN tb_lookup_report_status sts ON sts.id_report_status=pps.id_report_status
+WHERE pps.is_production_dept='1'
+ORDER BY pps.id_design_ecop_pps DESC"
+        Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
+        GCEcopPPS.DataSource = dt
+        GVEcopPPS.BestFitColumns()
+    End Sub
+
+    Private Sub GVEcopPPS_DoubleClick(sender As Object, e As EventArgs) Handles GVEcopPPS.DoubleClick
+        If GVEcopPPS.RowCount > 0 Then
+            FormDesignCopPps.id_design = GVEcopPPS.GetFocusedRowCellValue("id_design").ToString
+            FormDesignCopPps.id_pps = GVEcopPPS.GetFocusedRowCellValue("id_design_ecop_pps").ToString
+            FormDesignCopPps.ShowDialog()
+        End If
     End Sub
 End Class

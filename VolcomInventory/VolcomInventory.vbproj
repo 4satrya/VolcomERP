@@ -12181,6 +12181,9 @@
     <EmbeddedResource Include="FormValidateStock.resx">
       <DependentUpon>FormValidateStock.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormVerifyECOP.resx">
+      <DependentUpon>FormVerifyECOP.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormVerifyMaster.resx">
       <DependentUpon>FormVerifyMaster.vb</DependentUpon>
     </EmbeddedResource>

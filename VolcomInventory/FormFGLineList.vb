@@ -1355,4 +1355,8 @@ Public Class FormFGLineList
             Next
         End If
     End Sub
+
+    Private Sub BVerifyCOP_Click(sender As Object, e As EventArgs) Handles BVerifyCOP.Click
+        FormVerifyECOP.ShowDialog()
+    End Sub
 End Class

@@ -62,6 +62,7 @@ Partial Class FormFGLineList
         Me.GridBand1 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.PanelControlNavLineListBottom = New DevExpress.XtraEditors.PanelControl()
+        Me.BVerifyCOP = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnCreateNewPD = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnSetActualInStoreDate = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnPlanStatus = New DevExpress.XtraEditors.SimpleButton()
@@ -86,7 +87,6 @@ Partial Class FormFGLineList
         Me.SMViewCostHist = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewHistoryProposeChangesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProposeChangesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.BVerifyCOP = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.PanelControlNavLineList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlNavLineList.SuspendLayout()
         CType(Me.PCNavLineList, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -488,6 +488,17 @@ Partial Class FormFGLineList
         Me.PanelControlNavLineListBottom.Size = New System.Drawing.Size(1753, 42)
         Me.PanelControlNavLineListBottom.TabIndex = 2
         '
+        'BVerifyCOP
+        '
+        Me.BVerifyCOP.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BVerifyCOP.ImageIndex = 18
+        Me.BVerifyCOP.ImageList = Me.LargeImageCollection
+        Me.BVerifyCOP.Location = New System.Drawing.Point(413, 2)
+        Me.BVerifyCOP.Name = "BVerifyCOP"
+        Me.BVerifyCOP.Size = New System.Drawing.Size(114, 38)
+        Me.BVerifyCOP.TabIndex = 117
+        Me.BVerifyCOP.Text = "Verify ECOP"
+        '
         'BtnCreateNewPD
         '
         Me.BtnCreateNewPD.Dock = System.Windows.Forms.DockStyle.Right
@@ -701,17 +712,6 @@ Partial Class FormFGLineList
         Me.ProposeChangesToolStripMenuItem.Name = "ProposeChangesToolStripMenuItem"
         Me.ProposeChangesToolStripMenuItem.Size = New System.Drawing.Size(235, 22)
         Me.ProposeChangesToolStripMenuItem.Text = "[changes]"
-        '
-        'BVerifyCOP
-        '
-        Me.BVerifyCOP.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BVerifyCOP.ImageIndex = 18
-        Me.BVerifyCOP.ImageList = Me.LargeImageCollection
-        Me.BVerifyCOP.Location = New System.Drawing.Point(413, 2)
-        Me.BVerifyCOP.Name = "BVerifyCOP"
-        Me.BVerifyCOP.Size = New System.Drawing.Size(114, 38)
-        Me.BVerifyCOP.TabIndex = 117
-        Me.BVerifyCOP.Text = "Verify ECOP"
         '
         'FormFGLineList
         '

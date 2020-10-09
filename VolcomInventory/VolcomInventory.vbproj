@@ -6504,6 +6504,12 @@
     <Compile Include="FormVerificationMasterOLDet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormVerifyECOP.Designer.vb">
+      <DependentUpon>FormVerifyECOP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormVerifyECOP.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormVerifyMaster.Designer.vb">
       <DependentUpon>FormVerifyMaster.vb</DependentUpon>
     </Compile>

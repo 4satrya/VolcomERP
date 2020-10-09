@@ -51,6 +51,7 @@
             SBSubmit.Enabled = True
             SBPrint.Enabled = False
             SBMark.Enabled = False
+            SBAttachment.Enabled = False
 
             DEStartPeriod.ReadOnly = False
             DEEndPeriod.ReadOnly = False
@@ -60,6 +61,7 @@
             SBSubmit.Enabled = False
             SBPrint.Enabled = True
             SBMark.Enabled = True
+            SBAttachment.Enabled = True
 
             DEStartPeriod.ReadOnly = True
             DEEndPeriod.ReadOnly = True
@@ -218,5 +220,12 @@
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
         GridControlSummary.DataSource = data
+    End Sub
+
+    Private Sub SBAttachment_Click(sender As Object, e As EventArgs) Handles SBAttachment.Click
+        FormDocumentUpload.is_no_delete = "1"
+        FormDocumentUpload.id_report = id_mat_summary
+        FormDocumentUpload.report_mark_type = "269"
+        FormDocumentUpload.ShowDialog()
     End Sub
 End Class

@@ -8394,12 +8394,10 @@ WHERE invd.`id_inv_mat`='" & id_report & "'"
                 FormMain.SplashScreenManager1.CloseWaitForm()
 
                 'cek log
-                Dim qlog As String = "SELECT * FROM tb_ol_promo_collection_log l WHERE l.id_ol_promo_collection=1 AND l.log<>'OK'"
+                Dim qlog As String = "SELECT * FROM tb_ol_promo_collection_log l WHERE l.id_ol_promo_collection=" + id_report + " AND l.log<>'OK'"
                 Dim dlog As DataTable = execute_query(qlog, -1, True, "", "", "", "")
                 If dlog.Rows.Count > 0 Then
-                    stopCustom("Can't complete this propose, because some product failed to sync")
-                    Cursor = Cursors.Default
-                    Exit Sub
+                    stopCustom("Some product failed to sync. Please contact administrator")
                 End If
             End If
 

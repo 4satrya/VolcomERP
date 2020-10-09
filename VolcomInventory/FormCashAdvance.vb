@@ -75,8 +75,8 @@ SELECT id_employee,employee_name FROM tb_m_employee"
         Dim date_to As String = ""
 
         Try
-            date_from = DateTime.Parse(DateFrom.EditValue.ToString).ToString("yyyy-MM-dd")
-            date_to = DateTime.Parse(DateTo.EditValue.ToString).ToString("yyyy-MM-dd")
+            date_from = DateTime.Parse(DateFrom.EditValue.ToString).ToString("yyyy-MM-dd 00:00:00")
+            date_to = DateTime.Parse(DateTo.EditValue.ToString).ToString("yyyy-MM-dd 23:59:59")
         Catch ex As Exception
         End Try
 

@@ -63,6 +63,7 @@ Partial Class FormMatStockSummary
         Me.gridBand9 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         Me.BandedGridColumn11 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumn12 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.SBAttachment = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -82,6 +83,7 @@ Partial Class FormMatStockSummary
         '
         'PanelControl2
         '
+        Me.PanelControl2.Controls.Add(Me.SBAttachment)
         Me.PanelControl2.Controls.Add(Me.SBPrint)
         Me.PanelControl2.Controls.Add(Me.SBMark)
         Me.PanelControl2.Controls.Add(Me.SBClose)
@@ -551,6 +553,18 @@ Partial Class FormMatStockSummary
         Me.BandedGridColumn12.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount_ending", "{0:N2}")})
         Me.BandedGridColumn12.Visible = True
         '
+        'SBAttachment
+        '
+        Me.SBAttachment.Dock = System.Windows.Forms.DockStyle.Right
+        Me.SBAttachment.Image = CType(resources.GetObject("SBAttachment.Image"), System.Drawing.Image)
+        Me.SBAttachment.ImageIndex = 10
+        Me.SBAttachment.Location = New System.Drawing.Point(626, 2)
+        Me.SBAttachment.Name = "SBAttachment"
+        Me.SBAttachment.Size = New System.Drawing.Size(110, 41)
+        Me.SBAttachment.TabIndex = 115
+        Me.SBAttachment.TabStop = False
+        Me.SBAttachment.Text = "Attachment"
+        '
         'FormMatStockSummary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -625,4 +639,5 @@ Partial Class FormMatStockSummary
     Friend WithEvents gridBand7 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents gridBand8 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents gridBand9 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
+    Friend WithEvents SBAttachment As DevExpress.XtraEditors.SimpleButton
 End Class

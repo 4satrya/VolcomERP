@@ -56,6 +56,7 @@ Partial Class FormStockQCStockReportSummary
         Me.SBMark = New DevExpress.XtraEditors.SimpleButton()
         Me.SBClose = New DevExpress.XtraEditors.SimpleButton()
         Me.SBSubmit = New DevExpress.XtraEditors.SimpleButton()
+        Me.SBAttachment = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.TENumber.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -430,6 +431,7 @@ Partial Class FormStockQCStockReportSummary
         '
         'PanelControl2
         '
+        Me.PanelControl2.Controls.Add(Me.SBAttachment)
         Me.PanelControl2.Controls.Add(Me.SBPrint)
         Me.PanelControl2.Controls.Add(Me.SBMark)
         Me.PanelControl2.Controls.Add(Me.SBClose)
@@ -479,6 +481,18 @@ Partial Class FormStockQCStockReportSummary
         Me.SBSubmit.Size = New System.Drawing.Size(90, 41)
         Me.SBSubmit.TabIndex = 0
         Me.SBSubmit.Text = "Submit"
+        '
+        'SBAttachment
+        '
+        Me.SBAttachment.Dock = System.Windows.Forms.DockStyle.Right
+        Me.SBAttachment.Image = CType(resources.GetObject("SBAttachment.Image"), System.Drawing.Image)
+        Me.SBAttachment.ImageIndex = 10
+        Me.SBAttachment.Location = New System.Drawing.Point(626, 2)
+        Me.SBAttachment.Name = "SBAttachment"
+        Me.SBAttachment.Size = New System.Drawing.Size(110, 41)
+        Me.SBAttachment.TabIndex = 116
+        Me.SBAttachment.TabStop = False
+        Me.SBAttachment.Text = "Attachment"
         '
         'FormStockQCStockReportSummary
         '
@@ -548,4 +562,5 @@ Partial Class FormStockQCStockReportSummary
     Friend WithEvents GridColumn11 As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents GridColumn12 As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents SBGenerateSummary As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents SBAttachment As DevExpress.XtraEditors.SimpleButton
 End Class

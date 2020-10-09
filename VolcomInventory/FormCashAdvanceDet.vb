@@ -84,7 +84,7 @@
 
 
     Sub load_type()
-        Dim query As String = "SELECT id_cash_advance_type,cash_advance_type,day_limit FROM tb_lookup_cash_advance_type"
+        Dim query As String = "SELECT id_cash_advance_type,cash_advance_type,day_limit FROM tb_lookup_cash_advance_type ORDER BY id_cash_advance_type DESC"
         viewSearchLookupQuery(SLEType, query, "id_cash_advance_type", "cash_advance_type", "id_cash_advance_type")
     End Sub
 

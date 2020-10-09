@@ -603,7 +603,7 @@ GROUP BY pl.`id_mat_purc_list`"
 
             Dim Report As New ReportMatPurchase()
             '
-            GridColumnColor.Visible = False
+            'GridColumnColor.Visible = False
             GridColumnDiscount.Visible = False
             GVListPurchase.BestFitColumns()
             '

@@ -160,6 +160,7 @@ WHERE id_design_ecop_pps='" & id_pps & "'"
             TEVendorName.Text = dts.Rows(0)("comp_name").ToString
             is_production = dts.Rows(0)("is_production_dept").ToString
             id_report_status = dts.Rows(0)("id_report_status").ToString
+            SLEColdStorage.EditValue = dts.Rows(0)("is_cool_storage").ToString
             '
             load_form_input()
             '

@@ -8752,8 +8752,8 @@ GROUP BY pps.id_design"
                 If Not dtq.Rows(0)("is_production_dept").ToString = "1" Then
                     'production
                     Dim qu As String = "UPDATE tb_m_design_cop SET is_active=2 WHERE id_design='" & dtq.Rows(0)("id_design").ToString & "' AND is_production_dept='" & dtq.Rows(0)("is_production_dept").ToString & "';
-INSERT INTO `tb_m_design_cop`(description,id_design,date_created,id_currency,kurs,before_kurs,additional,is_active,is_production_dept)
-SELECT ecopd.description,ecop.id_design,NOW(),ecopd.id_currency,ecopd.kurs,ecopd.before_kurs,ecopd.additional,1 AS is_active,ecop.is_production_dept
+INSERT INTO `tb_m_design_cop`(description,id_design,date_created,id_currency,kurs,before_kurs,additional,is_active,is_production_dept,is_cool_storage)
+SELECT ecopd.description,ecop.id_design,NOW(),ecopd.id_currency,ecopd.kurs,ecopd.before_kurs,ecopd.additional,1 AS is_active,ecop.is_production_dept,ecop.is_cool_storage
 FROM `tb_design_ecop_pps_det` ecopd
 INNER JOIN tb_design_ecop_pps ecop ON ecop.id_design_ecop_pps=ecopd.id_design_ecop_pps
 WHERE ecop.id_design_ecop_pps='" & id_report & "';"
@@ -8781,7 +8781,9 @@ WHERE is_production_dept=2 AND is_active=1 AND id_design='1'"
                     target_cost_sample = plan_dt.Rows(0)("cop")
                     '
                     If ecop > target_cost Or ecop > target_cost_sample Then
-                        'nothing happen mail notif
+                        'need verify
+                        qu = String.Format("UPDATE tb_design_ecop_pps SET need_verify='1' WHERE id_design_ecop_pps='{0}'", id_report)
+                        execute_non_query(qu, True, "", "", "", "")
                     Else
                         'update to COP PD
                         qu = String.Format("UPDATE tb_m_design SET prod_order_cop_pd='{1}',prod_order_cop_pd_addcost='{5}',prod_order_cop_kurs_pd='{2}',prod_order_cop_pd_vendor={3},prod_order_cop_pd_curr='{4}',is_cold_storage='{6}' WHERE id_design='{0}'", dtq.Rows(0)("id_design").ToString, decimalSQL((dtq.Rows(0)("cop") + dtq.Rows(0)("additional_cop")).ToString), decimalSQL(dtq.Rows(0)("kurs").ToString), dtq.Rows(0)("id_comp_contact").ToString, "1", decimalSQL(dtq.Rows(0)("additional_cop").ToString), dtq.Rows(0)("is_cool_storage").ToString)
@@ -8789,8 +8791,8 @@ WHERE is_production_dept=2 AND is_active=1 AND id_design='1'"
                     End If
                 Else
                     Dim qu As String = "UPDATE tb_m_design_cop SET is_active=2 WHERE id_design='" & dtq.Rows(0)("id_design").ToString & "' AND is_production_dept='" & dtq.Rows(0)("is_production_dept").ToString & "';
-INSERT INTO `tb_m_design_cop`(description,id_design,date_created,id_currency,kurs,before_kurs,additional,is_active,is_production_dept)
-SELECT ecopd.description,ecop.id_design,NOW(),ecopd.id_currency,ecopd.kurs,ecopd.before_kurs,ecopd.additional,1 AS is_active,ecop.is_production_dept
+INSERT INTO `tb_m_design_cop`(description,id_design,date_created,id_currency,kurs,before_kurs,additional,is_active,is_production_dept,is_cool_storage)
+SELECT ecopd.description,ecop.id_design,NOW(),ecopd.id_currency,ecopd.kurs,ecopd.before_kurs,ecopd.additional,1 AS is_active,ecop.is_production_dept,ecop.is_cool_storage
 FROM `tb_design_ecop_pps_det` ecopd
 INNER JOIN tb_design_ecop_pps ecop ON ecop.id_design_ecop_pps=ecopd.id_design_ecop_pps
 WHERE ecop.id_design_ecop_pps='" & id_report & "';"

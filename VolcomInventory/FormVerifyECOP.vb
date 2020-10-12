@@ -109,7 +109,12 @@ Failed to update this propose because already hit reclaculation limit : " & vbNe
 
                 If suc > 0 Then
                     'email need recalculate
-
+                    For i As Integer = 0 To GVEcopPPS.RowCount - 1
+                        Dim mail As ClassSendEmail = New ClassSendEmail()
+                        mail.id_report = GVEcopPPS.GetRowCellValue(i, "id_design_ecop_pps").ToString
+                        mail.report_mark_type = "271"
+                        mail.send_email()
+                    Next
                 End If
 
                 view_pps()

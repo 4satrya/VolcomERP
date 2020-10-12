@@ -16,7 +16,7 @@
             q_where = " AND pps.id_design='" & SLEDesign.EditValue.ToString & "'"
         End If
 
-        Dim query As String = "SELECT 'no' AS is_check,pps.id_design_ecop_pps,pps.number,dsg.design_code,dsg.design_display_name,SUM(IF(id_currency=1,ppsd.`before_kurs`,ppsd.`before_kurs`*ppsd.`kurs`)) AS total_ecop_purc,SUM(ppsd.`additional`) AS total_additional_purc
+        Dim query As String = "SELECT 'no' AS is_check,pps.id_design,pps.id_design_ecop_pps,pps.number,dsg.design_code,dsg.design_display_name,SUM(IF(id_currency=1,ppsd.`before_kurs`,ppsd.`before_kurs`*ppsd.`kurs`)) AS total_ecop_purc,SUM(ppsd.`additional`) AS total_additional_purc
 ,(fg_lp.`target_price`/fg_lp.`mark_up`) AS target_cost
 ,cop_sample.total_sample,cop_sample.total_additional_sample
 ,IFNULL(jml_cal.jml,0) AS jml_recal
@@ -84,6 +84,10 @@ WHERE pps.need_verify=1 AND pps.verify_status=0 AND pps.id_report_status=6 " & q
                         'update continue
                         qu = String.Format("UPDATE tb_design_ecop_pps SET is_need_recalculate=1,verify_status='2',verify_by='{1}',verify_date=NOW(),verify_comment='{2}' WHERE id_design_ecop_pps='{0}'", GVEcopPPS.GetRowCellValue(i, "id_design_ecop_pps").ToString, id_user, addSlashes(TEComment.Text))
                         execute_non_query(qu, True, "", "", "", "")
+                        '
+                        qu = String.Format("UPDATE tb_m_design_cop SET is_active='2' WHERE id_design='{0}'", GVEcopPPS.GetRowCellValue(i, "id_design").ToString)
+                        execute_non_query(qu, True, "", "", "", "")
+                        '
                         suc += 1
                     Else
                         'tidak bisa karena limit
@@ -101,6 +105,11 @@ WHERE pps.need_verify=1 AND pps.verify_status=0 AND pps.id_report_status=6 " & q
 Failed to update this propose because already hit reclaculation limit : " & vbNewLine & number_error)
                 Else
                     infoCustom("Total ECOP recalculate issued : " & suc.ToString & "")
+                End If
+
+                If suc > 0 Then
+                    'email need recalculate
+
                 End If
 
                 view_pps()

@@ -8747,7 +8747,7 @@ INNER JOIN tb_design_ecop_pps pps ON pps.id_design_ecop_pps=ppsd.id_design_ecop_
 GROUP BY pps.id_design"
                 Dim dtq As DataTable = execute_query(q, -1, True, "", "", "", "")
 
-                If Not dtq.Rows(0)("is_production_dept").ToString = "1" Then
+                If dtq.Rows(0)("is_production_dept").ToString = "1" Then
                     'production
                     Dim qu As String = "UPDATE tb_m_design_cop SET is_active=2 WHERE id_design='" & dtq.Rows(0)("id_design").ToString & "' AND is_production_dept='" & dtq.Rows(0)("is_production_dept").ToString & "';
 INSERT INTO `tb_m_design_cop`(description,id_design,date_created,id_currency,kurs,before_kurs,additional,is_active,is_production_dept,is_cool_storage)
@@ -8782,6 +8782,11 @@ WHERE is_production_dept=2 AND is_active=1 AND id_design='1'"
                         'need verify
                         qu = String.Format("UPDATE tb_design_ecop_pps SET need_verify='1' WHERE id_design_ecop_pps='{0}'", id_report)
                         execute_non_query(qu, True, "", "", "", "")
+                        'email
+                        Dim mail As ClassSendEmail = New ClassSendEmail()
+                        mail.id_report = id_report
+                        mail.report_mark_type = report_mark_type
+                        mail.send_email()
                     Else
                         'update to COP PD
                         qu = String.Format("UPDATE tb_m_design SET prod_order_cop_pd='{1}',prod_order_cop_pd_addcost='{5}',prod_order_cop_kurs_pd='{2}',prod_order_cop_pd_vendor={3},prod_order_cop_pd_curr='{4}',is_cold_storage='{6}' WHERE id_design='{0}'", dtq.Rows(0)("id_design").ToString, decimalSQL((dtq.Rows(0)("cop") + dtq.Rows(0)("additional_cop")).ToString), decimalSQL(dtq.Rows(0)("kurs").ToString), dtq.Rows(0)("id_comp_contact").ToString, "1", decimalSQL(dtq.Rows(0)("additional_cop").ToString), dtq.Rows(0)("is_cool_storage").ToString)

@@ -24,6 +24,8 @@ Partial Class FormVerifyECOP
         Me.GCEcopPPS = New DevExpress.XtraGrid.GridControl()
         Me.GVEcopPPS = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn21 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RICESelectPPS = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.GridColumn22 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn26 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemMemoEdit6 = New DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit()
@@ -46,11 +48,14 @@ Partial Class FormVerifyECOP
         Me.PCSelAll = New DevExpress.XtraEditors.PanelControl()
         Me.CheckEditSelAll = New DevExpress.XtraEditors.CheckEdit()
         Me.XTPHistory = New DevExpress.XtraTab.XtraTabPage()
+        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XtraTabControl1.SuspendLayout()
         Me.XTPVerifyCOP.SuspendLayout()
         CType(Me.GCEcopPPS, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVEcopPPS, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RICESelectPPS, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemMemoEdit6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemProgressBar1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl5, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -68,36 +73,35 @@ Partial Class FormVerifyECOP
         '
         Me.XtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.XtraTabControl1.HeaderLocation = DevExpress.XtraTab.TabHeaderLocation.Bottom
-        Me.XtraTabControl1.Location = New System.Drawing.Point(0, 0)
+        Me.XtraTabControl1.Location = New System.Drawing.Point(0, 38)
         Me.XtraTabControl1.Name = "XtraTabControl1"
         Me.XtraTabControl1.SelectedTabPage = Me.XTPVerifyCOP
-        Me.XtraTabControl1.Size = New System.Drawing.Size(944, 567)
+        Me.XtraTabControl1.Size = New System.Drawing.Size(1013, 529)
         Me.XtraTabControl1.TabIndex = 0
         Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPVerifyCOP, Me.XTPHistory})
         '
         'XTPVerifyCOP
         '
         Me.XTPVerifyCOP.Controls.Add(Me.GCEcopPPS)
-        Me.XTPVerifyCOP.Controls.Add(Me.PanelControl5)
         Me.XTPVerifyCOP.Controls.Add(Me.PanelControl1)
         Me.XTPVerifyCOP.Name = "XTPVerifyCOP"
-        Me.XTPVerifyCOP.Size = New System.Drawing.Size(938, 539)
+        Me.XTPVerifyCOP.Size = New System.Drawing.Size(1007, 501)
         Me.XTPVerifyCOP.Text = "Verify ECOP"
         '
         'GCEcopPPS
         '
         Me.GCEcopPPS.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCEcopPPS.Location = New System.Drawing.Point(0, 38)
+        Me.GCEcopPPS.Location = New System.Drawing.Point(0, 0)
         Me.GCEcopPPS.MainView = Me.GVEcopPPS
         Me.GCEcopPPS.Name = "GCEcopPPS"
-        Me.GCEcopPPS.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemProgressBar1, Me.RepositoryItemMemoEdit6})
-        Me.GCEcopPPS.Size = New System.Drawing.Size(938, 463)
+        Me.GCEcopPPS.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemProgressBar1, Me.RepositoryItemMemoEdit6, Me.RICESelectPPS})
+        Me.GCEcopPPS.Size = New System.Drawing.Size(1007, 463)
         Me.GCEcopPPS.TabIndex = 17
         Me.GCEcopPPS.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVEcopPPS})
         '
         'GVEcopPPS
         '
-        Me.GVEcopPPS.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn21, Me.GridColumn22, Me.GridColumn26, Me.GridColumn28, Me.GridColumn1, Me.GridColumn2, Me.GridColumn3})
+        Me.GVEcopPPS.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn21, Me.GridColumn4, Me.GridColumn22, Me.GridColumn26, Me.GridColumn28, Me.GridColumn1, Me.GridColumn2, Me.GridColumn5, Me.GridColumn3, Me.GridColumn6})
         Me.GVEcopPPS.GridControl = Me.GCEcopPPS
         Me.GVEcopPPS.Name = "GVEcopPPS"
         Me.GVEcopPPS.OptionsBehavior.Editable = False
@@ -110,14 +114,38 @@ Partial Class FormVerifyECOP
         Me.GridColumn21.Caption = "ID"
         Me.GridColumn21.FieldName = "id_design_ecop_pps"
         Me.GridColumn21.Name = "GridColumn21"
+        Me.GridColumn21.OptionsColumn.AllowEdit = False
+        Me.GridColumn21.OptionsColumn.ReadOnly = True
+        '
+        'GridColumn4
+        '
+        Me.GridColumn4.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn4.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn4.Caption = "*"
+        Me.GridColumn4.ColumnEdit = Me.RICESelectPPS
+        Me.GridColumn4.FieldName = "is_check"
+        Me.GridColumn4.Name = "GridColumn4"
+        Me.GridColumn4.Visible = True
+        Me.GridColumn4.VisibleIndex = 0
+        Me.GridColumn4.Width = 55
+        '
+        'RICESelectPPS
+        '
+        Me.RICESelectPPS.AutoHeight = False
+        Me.RICESelectPPS.Name = "RICESelectPPS"
+        Me.RICESelectPPS.ValueChecked = "yes"
+        Me.RICESelectPPS.ValueUnchecked = "no"
         '
         'GridColumn22
         '
         Me.GridColumn22.Caption = "Number"
         Me.GridColumn22.FieldName = "number"
         Me.GridColumn22.Name = "GridColumn22"
+        Me.GridColumn22.OptionsColumn.AllowEdit = False
+        Me.GridColumn22.OptionsColumn.ReadOnly = True
         Me.GridColumn22.Visible = True
-        Me.GridColumn22.VisibleIndex = 0
+        Me.GridColumn22.VisibleIndex = 1
+        Me.GridColumn22.Width = 122
         '
         'GridColumn26
         '
@@ -125,8 +153,11 @@ Partial Class FormVerifyECOP
         Me.GridColumn26.ColumnEdit = Me.RepositoryItemMemoEdit6
         Me.GridColumn26.FieldName = "design_display_name"
         Me.GridColumn26.Name = "GridColumn26"
+        Me.GridColumn26.OptionsColumn.AllowEdit = False
+        Me.GridColumn26.OptionsColumn.ReadOnly = True
         Me.GridColumn26.Visible = True
-        Me.GridColumn26.VisibleIndex = 2
+        Me.GridColumn26.VisibleIndex = 3
+        Me.GridColumn26.Width = 122
         '
         'RepositoryItemMemoEdit6
         '
@@ -135,30 +166,46 @@ Partial Class FormVerifyECOP
         'GridColumn28
         '
         Me.GridColumn28.Caption = "Design Code"
+        Me.GridColumn28.FieldName = "design_code"
         Me.GridColumn28.Name = "GridColumn28"
+        Me.GridColumn28.OptionsColumn.AllowEdit = False
+        Me.GridColumn28.OptionsColumn.ReadOnly = True
         Me.GridColumn28.Visible = True
-        Me.GridColumn28.VisibleIndex = 1
+        Me.GridColumn28.VisibleIndex = 2
+        Me.GridColumn28.Width = 122
         '
         'GridColumn1
         '
         Me.GridColumn1.Caption = "Target Cost"
+        Me.GridColumn1.FieldName = "target_cost"
         Me.GridColumn1.Name = "GridColumn1"
+        Me.GridColumn1.OptionsColumn.AllowEdit = False
+        Me.GridColumn1.OptionsColumn.ReadOnly = True
         Me.GridColumn1.Visible = True
-        Me.GridColumn1.VisibleIndex = 3
+        Me.GridColumn1.VisibleIndex = 4
+        Me.GridColumn1.Width = 122
         '
         'GridColumn2
         '
-        Me.GridColumn2.Caption = "ECOP Sample"
+        Me.GridColumn2.Caption = "ECOP (Sample)"
+        Me.GridColumn2.FieldName = "total_sample"
         Me.GridColumn2.Name = "GridColumn2"
+        Me.GridColumn2.OptionsColumn.AllowEdit = False
+        Me.GridColumn2.OptionsColumn.ReadOnly = True
         Me.GridColumn2.Visible = True
-        Me.GridColumn2.VisibleIndex = 4
+        Me.GridColumn2.VisibleIndex = 5
+        Me.GridColumn2.Width = 122
         '
         'GridColumn3
         '
-        Me.GridColumn3.Caption = "ECOP Purchasing"
+        Me.GridColumn3.Caption = "ECOP (Purchasing)"
+        Me.GridColumn3.FieldName = "total_ecop_purc"
         Me.GridColumn3.Name = "GridColumn3"
+        Me.GridColumn3.OptionsColumn.AllowEdit = False
+        Me.GridColumn3.OptionsColumn.ReadOnly = True
         Me.GridColumn3.Visible = True
-        Me.GridColumn3.VisibleIndex = 5
+        Me.GridColumn3.VisibleIndex = 7
+        Me.GridColumn3.Width = 68
         '
         'RepositoryItemProgressBar1
         '
@@ -180,7 +227,7 @@ Partial Class FormVerifyECOP
         Me.PanelControl5.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl5.Location = New System.Drawing.Point(0, 0)
         Me.PanelControl5.Name = "PanelControl5"
-        Me.PanelControl5.Size = New System.Drawing.Size(938, 38)
+        Me.PanelControl5.Size = New System.Drawing.Size(1013, 38)
         Me.PanelControl5.TabIndex = 7
         '
         'SLEDesign
@@ -254,9 +301,9 @@ Partial Class FormVerifyECOP
         Me.PanelControl1.Controls.Add(Me.BRecalculate)
         Me.PanelControl1.Controls.Add(Me.PCSelAll)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl1.Location = New System.Drawing.Point(0, 501)
+        Me.PanelControl1.Location = New System.Drawing.Point(0, 463)
         Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(938, 38)
+        Me.PanelControl1.Size = New System.Drawing.Size(1007, 38)
         Me.PanelControl1.TabIndex = 0
         '
         'BContinue
@@ -264,7 +311,7 @@ Partial Class FormVerifyECOP
         Me.BContinue.Dock = System.Windows.Forms.DockStyle.Fill
         Me.BContinue.Location = New System.Drawing.Point(537, 2)
         Me.BContinue.Name = "BContinue"
-        Me.BContinue.Size = New System.Drawing.Size(399, 34)
+        Me.BContinue.Size = New System.Drawing.Size(468, 34)
         Me.BContinue.TabIndex = 1
         Me.BContinue.Text = "Keep And Continue"
         '
@@ -275,7 +322,7 @@ Partial Class FormVerifyECOP
         Me.BRecalculate.Name = "BRecalculate"
         Me.BRecalculate.Size = New System.Drawing.Size(436, 34)
         Me.BRecalculate.TabIndex = 0
-        Me.BRecalculate.Text = "Recalculate"
+        Me.BRecalculate.Text = "Issue Recalculate"
         '
         'PCSelAll
         '
@@ -301,22 +348,43 @@ Partial Class FormVerifyECOP
         Me.XTPHistory.Size = New System.Drawing.Size(938, 539)
         Me.XTPHistory.Text = "History"
         '
+        'GridColumn5
+        '
+        Me.GridColumn5.Caption = "Additional ECOP (Sample)"
+        Me.GridColumn5.FieldName = "total_additional_sample"
+        Me.GridColumn5.Name = "GridColumn5"
+        Me.GridColumn5.Visible = True
+        Me.GridColumn5.VisibleIndex = 6
+        Me.GridColumn5.Width = 150
+        '
+        'GridColumn6
+        '
+        Me.GridColumn6.Caption = "Additional ECOP (Purchasing)"
+        Me.GridColumn6.FieldName = "total_additional_purc"
+        Me.GridColumn6.Name = "GridColumn6"
+        Me.GridColumn6.Visible = True
+        Me.GridColumn6.VisibleIndex = 8
+        Me.GridColumn6.Width = 37
+        '
         'FormVerifyECOP
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(944, 567)
+        Me.ClientSize = New System.Drawing.Size(1013, 567)
         Me.Controls.Add(Me.XtraTabControl1)
+        Me.Controls.Add(Me.PanelControl5)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FormVerifyECOP"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Verify COP"
+        Me.Text = "Verify ECOP"
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XtraTabControl1.ResumeLayout(False)
         Me.XTPVerifyCOP.ResumeLayout(False)
         CType(Me.GCEcopPPS, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVEcopPPS, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RICESelectPPS, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemMemoEdit6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemProgressBar1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl5, System.ComponentModel.ISupportInitialize).EndInit()
@@ -360,4 +428,8 @@ Partial Class FormVerifyECOP
     Friend WithEvents GridColumn3 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents PCSelAll As DevExpress.XtraEditors.PanelControl
     Friend WithEvents CheckEditSelAll As DevExpress.XtraEditors.CheckEdit
+    Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RICESelectPPS As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+    Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

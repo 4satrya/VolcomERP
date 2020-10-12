@@ -2907,11 +2907,11 @@ WHERE pps.`id_design_ecop_pps`='" & id_report & "'"
                               <th>Additional ECOP (Purchasing)</th>
                             </tr> 
                             <tr>
-                                <td>" + dt.Rows(0)("target_cost").ToString + "</td>
-                                <td>" + dt.Rows(0)("total_cop_sample").ToString + "</td>
-                                <td>" + dt.Rows(0)("total_additional_cop_sample").ToString + "</td>
-                                <td>" + dt.Rows(0)("total_ecop_purc").ToString + "</td>
-                                <td>" + dt.Rows(0)("total_additional_purc").ToString + "</td>
+                                <td style='text-align:center'>" + Decimal.Parse(dt.Rows(0)("target_cost").ToString).ToString("N2") + "</td>
+                                <td style='text-align:center'>" + Decimal.Parse(dt.Rows(0)("total_cop_sample").ToString).ToString("N2") + "</td>
+                                <td style='text-align:center'>" + Decimal.Parse(dt.Rows(0)("total_additional_cop_sample").ToString).ToString("N2") + "</td>
+                                <td style='text-align:center'>" + Decimal.Parse(dt.Rows(0)("total_ecop_purc").ToString).ToString("N2") + "</td>
+                                <td style='text-align:center'>" + Decimal.Parse(dt.Rows(0)("total_additional_purc").ToString).ToString("N2") + "</td>
                             </tr> 
                         </table>
                     </td>
@@ -2919,7 +2919,7 @@ WHERE pps.`id_design_ecop_pps`='" & id_report & "'"
                 <tr>
                   <td style='padding:15.0pt 15.0pt 5.0pt 15.0pt' colspan='3'>
                   <div>
-                  <p class='MsoNormal' style='line-height:14.25pt'><span style='font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060'>Need verification from MD because ECOP higher than target cost or ECOP by Sample. </span><span style='font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060;letter-spacing:.4pt'><u></u><u></u></span></p>
+                  <p class='MsoNormal' style='line-height:14.25pt'><span style='font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060'>Need verification from MD because ECOP from Purchasing is higher than target cost or ECOP by Sample. </span><span style='font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060;letter-spacing:.4pt'><u></u><u></u></span></p>
                   </div>
                   </td>
                  </tr>

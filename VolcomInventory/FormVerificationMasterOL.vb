@@ -11,11 +11,15 @@
         Dim query_in As String = ""
 
         If id_departement_user = "11" Then
-            query_in = "653, 1177"
+            query_in = "653, 1177, 1286"
         ElseIf id_departement_user = "9" Then
             query_in = "1212"
         Else
             query_in = "0"
+        End If
+
+        If id_role_login = "1" Then
+            query_in = "653, 1177, 1286, 1212"
         End If
 
         Dim query As String = "

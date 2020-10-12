@@ -169,10 +169,10 @@ GROUP BY pl.`id_mat_purc_list`"
             id_rev = data.Rows(0)("id_mat_purc_rev").ToString
 
             TEPONumber.Text = data.Rows(0)("mat_purc_number").ToString
-            TEKurs.Text = data.Rows(0)("mat_purc_kurs").ToString
+
 
             LECurrency.ItemIndex = LECurrency.Properties.GetDataSourceRowIndex("id_currency", data.Rows(0)("id_currency").ToString)
-
+            TEKurs.Text = data.Rows(0)("mat_purc_kurs").ToString
             LEpayment.ItemIndex = LEpayment.Properties.GetDataSourceRowIndex("id_payment", data.Rows(0)("id_payment").ToString)
 
             id_report_status_g = data.Rows(0)("id_report_status").ToString

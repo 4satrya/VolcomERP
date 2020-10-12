@@ -73,7 +73,7 @@
 
                         If packageCreated = "True" Then
                             'check first
-                            Dim q_check As String = "SELECT * FROM tb_ol_store_order WHERE ol_store_id='" & row("orderItemNo").ToString & "'"
+                            Dim q_check As String = "SELECT * FROM tb_ol_store_order WHERE ol_store_id='" & row("orderItemNo").ToString & "' AND id_comp_group='" + id_store_group + "' "
                             Dim dt_check As DataTable = execute_query(q_check, -1, True, "", "", "", "")
                             If Not dt_check.Rows.Count > 0 Then
                                 get_order_detail(row("orderNo").ToString, row("orderItemNo").ToString)

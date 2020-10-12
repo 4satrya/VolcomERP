@@ -2958,6 +2958,180 @@ WHERE pps.`id_design_ecop_pps`='" & id_report & "'"
         </table> "
             mail.Body = body_temp
             client.Send(mail)
+        ElseIf report_mark_type = "271" Then
+            ' Propose ECOP need recalculate
+            Dim from_mail As MailAddress = New MailAddress("system@volcom.co.id", "ECOP need to recalculate - Volcom ERP")
+            Dim mail As MailMessage = New MailMessage()
+            mail.From = from_mail
+
+            'Send to
+            Dim query_send_mail As String = "SELECT emp.`email_external`,emp.`employee_name` FROM tb_mail_to md
+                                                INNER JOIN tb_m_user usr ON usr.`id_user`=md.id_user
+                                                INNER JOIN tb_m_employee emp ON emp.`id_employee`=usr.`id_employee`
+                                              WHERE md.report_mark_type='" & report_mark_type & "' AND is_to='1'"
+            Dim data_send_mail As DataTable = execute_query(query_send_mail, -1, True, "", "", "", "")
+            For i As Integer = 0 To data_send_mail.Rows.Count - 1
+                Dim to_mail As MailAddress = New MailAddress(data_send_mail.Rows(i)("email_external").ToString, data_send_mail.Rows(i)("employee_name").ToString)
+                mail.To.Add(to_mail)
+            Next
+
+            'Send CC
+            Dim query_send_cc As String = "SELECT emp.`email_external`,emp.`employee_name` FROM tb_mail_to md
+                                                 INNER JOIN tb_m_user usr ON usr.`id_user`=md.id_user
+                                                INNER JOIN tb_m_employee emp ON emp.`id_employee`=usr.`id_employee`
+                                              WHERE md.report_mark_type='" & report_mark_type & "' AND is_to='2'"
+            Dim data_send_cc As DataTable = execute_query(query_send_cc, -1, True, "", "", "", "")
+            For i As Integer = 0 To data_send_cc.Rows.Count - 1
+                Dim to_mail As MailAddress = New MailAddress(data_send_cc.Rows(i)("email_external").ToString, data_send_cc.Rows(i)("employee_name").ToString)
+                mail.CC.Add(to_mail)
+            Next
+            '
+            Dim q As String = "SELECT pps.number,dsg.design_code,dsg.design_display_name,SUM(IF(id_currency=1,ppsd.`before_kurs`,ppsd.`before_kurs`*ppsd.`kurs`)) AS total_ecop_purc,SUM(ppsd.`additional`) AS total_additional_purc
+,(fg_lp.`target_price`/fg_lp.`mark_up`) AS target_cost
+,cop_sample.total_cop_sample,cop_sample.total_additional_cop_sample
+FROM `tb_design_ecop_pps_det` ppsd
+INNER JOIN `tb_design_ecop_pps` pps ON pps.`id_design_ecop_pps`=ppsd.`id_design_ecop_pps`
+LEFT JOIN(
+	SELECT cop.`id_design`,SUM(IF(cop.id_currency=1,cop.before_kurs,(cop.before_kurs*cop.kurs))) AS total_cop_sample,SUM(cop.`additional`) AS total_additional_cop_sample
+	FROM tb_m_design_cop cop
+	WHERE cop.is_active=1 AND cop.`is_production_dept`=2
+	GROUP BY cop.id_design
+) cop_sample ON cop_sample.id_design = pps.id_design
+INNER JOIN tb_m_design dsg ON dsg.`id_design`=pps.`id_design`
+INNER JOIN tb_fg_line_plan fg_lp ON fg_lp.`id_fg_line_plan`=dsg.`id_fg_line_plan`
+WHERE pps.`id_design_ecop_pps`='" & id_report & "'"
+            Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
+            '
+            mail.Subject = dt.Rows(0)("design_code").ToString & " - " & dt.Rows(0)("design_display_name").ToString & " - " & " ECOP need to recalculate"
+            mail.IsBodyHtml = True
+            mail.Body = ""
+            '
+            Dim body_temp As String = " <table class='m_1811720018273078822MsoNormalTable' border='0' cellspacing='0' cellpadding='0' width='100%' style='width:100.0%;background:#eeeeee'>
+            <tbody><tr>
+              <td style='padding:30.0pt 30.0pt 30.0pt 30.0pt'>
+              <div align='center'>
+
+              <table class='m_1811720018273078822MsoNormalTable' border='0' cellspacing='0' cellpadding='0' width='600' style='width:6.25in;background:white'>
+               <tbody><tr>
+                <td style='padding:0in 0in 0in 0in'></td>
+               </tr>
+               <tr>
+                <td style='padding:0in 0in 0in 0in'>
+                <p class='MsoNormal' align='center' style='text-align:center'><a href='http://www.volcom.co.id/' title='Volcom' target='_blank' data-saferedirecturl='https://www.google.com/url?hl=en&amp;q=http://www.volcom.co.id/&amp;source=gmail&amp;ust=1480121870771000&amp;usg=AFQjCNEjXvEZWgDdR-Wlke7nn0fmc1ZUuA'><span style='text-decoration:none'><img border='0' width='180' id='m_1811720018273078822_x0000_i1025' src='https://ci3.googleusercontent.com/proxy/x-zXDZUS-2knkEkbTh3HzgyAAusw1Wz7dqV-lbnl39W_4F6T97fJ2_b9doP3nYi0B6KHstdb-tK8VAF_kOaLt2OH=s0-d-e1-ft#http://www.volcom.co.id/enews/img/volcom.jpg' alt='Volcom' class='CToWUd'></span></a><u></u><u></u></p>
+                </td>
+               </tr>
+               <tr>
+                <td style='padding:0in 0in 0in 0in'></td>
+               </tr>
+               <tr>
+                <td style='padding:0in 0in 0in 0in'>
+                <table class='m_1811720018273078822MsoNormalTable' border='0' cellspacing='0' cellpadding='0' width='600' style='width:6.25in;background:white'>
+                 <tbody><tr>
+                  <td style='padding:0in 0in 0in 0in'>
+
+                  </td>
+                 </tr>
+                </tbody></table>
+
+
+                <p class='MsoNormal' style='background-color:#eff0f1'><span style='display:block;background-color:#eff0f1;height: 5px;'><u></u>&nbsp;<u></u></span></p>
+                <p class='MsoNormal'><span style='display:none'><u></u>&nbsp;<u></u></span></p>
+                
+
+                <!-- start body -->
+                <table width='100%' class='m_1811720018273078822MsoNormalTable' border='0' cellspacing='0' cellpadding='0' style='background:white'>
+                 <tbody>
+                 <tr>
+                  <td style='padding:15.0pt 15.0pt 5.0pt 15.0pt' colspan='3'>
+                  <div>
+                  <p class='MsoNormal' style='line-height:14.25pt'><span style='font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060'>Design with details below : </span><span style='font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060;letter-spacing:.4pt'><u></u><u></u></span></p>
+                  </div>
+                  </td>
+                 </tr>
+
+                 <tr>
+                 	<td colspan='3'>
+	                  	<table width='100%' style='padding:5.0pt 5.0pt 0.0pt 14.0pt; font-size:10.0pt; font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060; border-spacing:0 7px;' border='0'>
+		                  	<tr>
+		                  		<td width='25%'>Propose Number</td>
+		                  		<td width='2%'>:</td>
+		                  		<td width='73%'>" + dt.Rows(0)("number").ToString + "</td>
+		                  	</tr>
+                            <tr>
+		                  		<td width='25%'>Design Code</td>
+		                  		<td width='2%'>:</td>
+		                  		<td width='73%'>" + dt.Rows(0)("design_code").ToString + "</td>
+		                  	</tr>
+                            <tr>
+		                  		<td width='25%'>Description</td>
+		                  		<td width='2%'>:</td>
+		                  		<td width='73%'>" + dt.Rows(0)("design_display_name").ToString + "</td>
+		                  	</tr>
+	                  	</table>
+	                 </td>
+                 </tr>
+                 <tr>
+                    <td style='padding:1.0pt 15.0pt 15.0pt 15.0pt' colspan='3'>
+                        <table width='100%' class='m_1811720018273078822MsoNormalTable' border='1' cellspacing='0' cellpadding='5' style='background:white; font-size: 12px; font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060'>
+                            <tr>
+                              <th>Target Cost</th>
+                              <th>ECOP (Sample)</th>
+                              <th>Additional ECOP (Sample)</th>
+                              <th>ECOP (Purchasing)</th>
+                              <th>Additional ECOP (Purchasing)</th>
+                            </tr> 
+                            <tr>
+                                <td>" + dt.Rows(0)("target_cost").ToString + "</td>
+                                <td>" + dt.Rows(0)("total_cop_sample").ToString + "</td>
+                                <td>" + dt.Rows(0)("total_additional_cop_sample").ToString + "</td>
+                                <td>" + dt.Rows(0)("total_ecop_purc").ToString + "</td>
+                                <td>" + dt.Rows(0)("total_additional_purc").ToString + "</td>
+                            </tr> 
+                        </table>
+                    </td>
+                 </tr>
+                <tr>
+                  <td style='padding:15.0pt 15.0pt 5.0pt 15.0pt' colspan='3'>
+                  <div>
+                  <p class='MsoNormal' style='line-height:14.25pt'><span style='font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060'>MD issued to recalculate the ECOP. </span><span style='font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060;letter-spacing:.4pt'><u></u><u></u></span></p>
+                  </div>
+                  </td>
+                 </tr>
+          <tr>
+                  <td style='padding:15.0pt 15.0pt 15.0pt 15.0pt' colspan='3'>
+                  <div>
+                  <p class='MsoNormal' style='line-height:14.25pt'><span style='font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#606060;letter-spacing:.4pt'>Thank you<br /><b>Volcom ERP</b><u></u><u></u></span></p>
+
+                  </div>
+                  </td>
+                 </tr>
+                </tbody>
+              </table>
+              <!-- end body -->
+
+
+                <p class='MsoNormal' style='background-color:#eff0f1'><span style='display:block;height: 10px;'><u></u>&nbsp;<u></u></span></p>
+                <p class='MsoNormal'><span style='display:none'><u></u>&nbsp;<u></u></span></p>
+                <div align='center'>
+                <table class='m_1811720018273078822MsoNormalTable' border='0' cellspacing='0' cellpadding='0' style='background:white'>
+                 <tbody><tr>
+                  <td style='padding:6.0pt 6.0pt 6.0pt 6.0pt;text-align:center;'>
+                    <span style='text-align:center;font-size:7.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#a0a0a0;letter-spacing:.4pt;'>This email send directly from system. Do not reply.</b><u></u><u></u></span>
+                  <p class='MsoNormal' align='center' style='margin-bottom:12.0pt;text-align:center;padding-top:0px;'><img border='0' width='300' id='m_1811720018273078822_x0000_i1028' src='https://ci6.googleusercontent.com/proxy/xq6o45mp_D9Z7DHCK5WT7GKuQ2QDaLg1hyMxoHX5ofUIv_m7GwasoczpbAOn6l6Ze-UfLuIUAndSokPvO633nnO9=s0-d-e1-ft#http://www.volcom.co.id/enews/img/footer.jpg' class='CToWUd'><u></u><u></u></p>
+                  </td>
+                 </tr>
+                </tbody></table>
+                </div>
+                </td>
+               </tr>
+              </tbody></table>	
+              </div>
+              </td>
+             </tr>
+            </tbody>
+        </table> "
+            mail.Body = body_temp
+            client.Send(mail)
         End If
     End Sub
 

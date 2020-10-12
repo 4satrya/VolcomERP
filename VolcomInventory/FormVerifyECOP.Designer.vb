@@ -32,8 +32,20 @@ Partial Class FormVerifyECOP
         Me.GridColumn28 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemProgressBar1 = New DevExpress.XtraEditors.Repository.RepositoryItemProgressBar()
+        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
+        Me.TEComment = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
+        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.BContinue = New DevExpress.XtraEditors.SimpleButton()
+        Me.BRecalculate = New DevExpress.XtraEditors.SimpleButton()
+        Me.PCSelAll = New DevExpress.XtraEditors.PanelControl()
+        Me.CheckEditSelAll = New DevExpress.XtraEditors.CheckEdit()
+        Me.XTPHistory = New DevExpress.XtraTab.XtraTabPage()
         Me.PanelControl5 = New DevExpress.XtraEditors.PanelControl()
         Me.SLEDesign = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GVSLEDesgSearch = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -42,14 +54,6 @@ Partial Class FormVerifyECOP
         Me.GridColumn14 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl9 = New DevExpress.XtraEditors.LabelControl()
         Me.BSearchProposeECOP = New DevExpress.XtraEditors.SimpleButton()
-        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
-        Me.BContinue = New DevExpress.XtraEditors.SimpleButton()
-        Me.BRecalculate = New DevExpress.XtraEditors.SimpleButton()
-        Me.PCSelAll = New DevExpress.XtraEditors.PanelControl()
-        Me.CheckEditSelAll = New DevExpress.XtraEditors.CheckEdit()
-        Me.XTPHistory = New DevExpress.XtraTab.XtraTabPage()
-        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XtraTabControl1.SuspendLayout()
         Me.XTPVerifyCOP.SuspendLayout()
@@ -58,15 +62,18 @@ Partial Class FormVerifyECOP
         CType(Me.RICESelectPPS, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemMemoEdit6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemProgressBar1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PanelControl5, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.PanelControl5.SuspendLayout()
-        CType(Me.SLEDesign.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GVSLEDesgSearch, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl2.SuspendLayout()
+        CType(Me.TEComment.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.PCSelAll, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PCSelAll.SuspendLayout()
         CType(Me.CheckEditSelAll.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl5, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl5.SuspendLayout()
+        CType(Me.SLEDesign.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVSLEDesgSearch, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'XtraTabControl1
@@ -83,6 +90,7 @@ Partial Class FormVerifyECOP
         'XTPVerifyCOP
         '
         Me.XTPVerifyCOP.Controls.Add(Me.GCEcopPPS)
+        Me.XTPVerifyCOP.Controls.Add(Me.PanelControl2)
         Me.XTPVerifyCOP.Controls.Add(Me.PanelControl1)
         Me.XTPVerifyCOP.Name = "XTPVerifyCOP"
         Me.XTPVerifyCOP.Size = New System.Drawing.Size(1007, 501)
@@ -95,16 +103,15 @@ Partial Class FormVerifyECOP
         Me.GCEcopPPS.MainView = Me.GVEcopPPS
         Me.GCEcopPPS.Name = "GCEcopPPS"
         Me.GCEcopPPS.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemProgressBar1, Me.RepositoryItemMemoEdit6, Me.RICESelectPPS})
-        Me.GCEcopPPS.Size = New System.Drawing.Size(1007, 463)
+        Me.GCEcopPPS.Size = New System.Drawing.Size(1007, 418)
         Me.GCEcopPPS.TabIndex = 17
         Me.GCEcopPPS.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVEcopPPS})
         '
         'GVEcopPPS
         '
-        Me.GVEcopPPS.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn21, Me.GridColumn4, Me.GridColumn22, Me.GridColumn26, Me.GridColumn28, Me.GridColumn1, Me.GridColumn2, Me.GridColumn5, Me.GridColumn3, Me.GridColumn6})
+        Me.GVEcopPPS.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn21, Me.GridColumn4, Me.GridColumn22, Me.GridColumn26, Me.GridColumn28, Me.GridColumn1, Me.GridColumn2, Me.GridColumn5, Me.GridColumn3, Me.GridColumn6, Me.GridColumn7})
         Me.GVEcopPPS.GridControl = Me.GCEcopPPS
         Me.GVEcopPPS.Name = "GVEcopPPS"
-        Me.GVEcopPPS.OptionsBehavior.Editable = False
         Me.GVEcopPPS.OptionsFind.AlwaysVisible = True
         Me.GVEcopPPS.OptionsView.RowAutoHeight = True
         Me.GVEcopPPS.OptionsView.ShowGroupPanel = False
@@ -176,7 +183,13 @@ Partial Class FormVerifyECOP
         '
         'GridColumn1
         '
+        Me.GridColumn1.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn1.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn1.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn1.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GridColumn1.Caption = "Target Cost"
+        Me.GridColumn1.DisplayFormat.FormatString = "N2"
+        Me.GridColumn1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn1.FieldName = "target_cost"
         Me.GridColumn1.Name = "GridColumn1"
         Me.GridColumn1.OptionsColumn.AllowEdit = False
@@ -187,7 +200,13 @@ Partial Class FormVerifyECOP
         '
         'GridColumn2
         '
+        Me.GridColumn2.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn2.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn2.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn2.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GridColumn2.Caption = "ECOP (Sample)"
+        Me.GridColumn2.DisplayFormat.FormatString = "N2"
+        Me.GridColumn2.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn2.FieldName = "total_sample"
         Me.GridColumn2.Name = "GridColumn2"
         Me.GridColumn2.OptionsColumn.AllowEdit = False
@@ -196,9 +215,30 @@ Partial Class FormVerifyECOP
         Me.GridColumn2.VisibleIndex = 5
         Me.GridColumn2.Width = 122
         '
+        'GridColumn5
+        '
+        Me.GridColumn5.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn5.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn5.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn5.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn5.Caption = "Additional ECOP (Sample)"
+        Me.GridColumn5.DisplayFormat.FormatString = "N2"
+        Me.GridColumn5.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn5.FieldName = "total_additional_sample"
+        Me.GridColumn5.Name = "GridColumn5"
+        Me.GridColumn5.Visible = True
+        Me.GridColumn5.VisibleIndex = 6
+        Me.GridColumn5.Width = 150
+        '
         'GridColumn3
         '
+        Me.GridColumn3.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn3.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn3.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn3.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GridColumn3.Caption = "ECOP (Purchasing)"
+        Me.GridColumn3.DisplayFormat.FormatString = "N2"
+        Me.GridColumn3.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn3.FieldName = "total_ecop_purc"
         Me.GridColumn3.Name = "GridColumn3"
         Me.GridColumn3.OptionsColumn.AllowEdit = False
@@ -206,6 +246,33 @@ Partial Class FormVerifyECOP
         Me.GridColumn3.Visible = True
         Me.GridColumn3.VisibleIndex = 7
         Me.GridColumn3.Width = 68
+        '
+        'GridColumn6
+        '
+        Me.GridColumn6.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn6.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn6.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn6.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn6.Caption = "Additional ECOP (Purchasing)"
+        Me.GridColumn6.DisplayFormat.FormatString = "N2"
+        Me.GridColumn6.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn6.FieldName = "total_additional_purc"
+        Me.GridColumn6.Name = "GridColumn6"
+        Me.GridColumn6.Visible = True
+        Me.GridColumn6.VisibleIndex = 8
+        Me.GridColumn6.Width = 37
+        '
+        'GridColumn7
+        '
+        Me.GridColumn7.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn7.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn7.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn7.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn7.Caption = "Times Recalculate"
+        Me.GridColumn7.FieldName = "jml_recal"
+        Me.GridColumn7.Name = "GridColumn7"
+        Me.GridColumn7.Visible = True
+        Me.GridColumn7.VisibleIndex = 9
         '
         'RepositoryItemProgressBar1
         '
@@ -218,6 +285,84 @@ Partial Class FormVerifyECOP
         Me.RepositoryItemProgressBar1.ShowTitle = True
         Me.RepositoryItemProgressBar1.StartColor = System.Drawing.Color.Green
         Me.RepositoryItemProgressBar1.Step = 1
+        '
+        'PanelControl2
+        '
+        Me.PanelControl2.Controls.Add(Me.TEComment)
+        Me.PanelControl2.Controls.Add(Me.LabelControl1)
+        Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.PanelControl2.Location = New System.Drawing.Point(0, 418)
+        Me.PanelControl2.Name = "PanelControl2"
+        Me.PanelControl2.Size = New System.Drawing.Size(1007, 45)
+        Me.PanelControl2.TabIndex = 18
+        '
+        'TEComment
+        '
+        Me.TEComment.Location = New System.Drawing.Point(62, 14)
+        Me.TEComment.Name = "TEComment"
+        Me.TEComment.Size = New System.Drawing.Size(938, 20)
+        Me.TEComment.TabIndex = 1
+        '
+        'LabelControl1
+        '
+        Me.LabelControl1.Location = New System.Drawing.Point(11, 17)
+        Me.LabelControl1.Name = "LabelControl1"
+        Me.LabelControl1.Size = New System.Drawing.Size(45, 13)
+        Me.LabelControl1.TabIndex = 0
+        Me.LabelControl1.Text = "Comment"
+        '
+        'PanelControl1
+        '
+        Me.PanelControl1.Controls.Add(Me.BContinue)
+        Me.PanelControl1.Controls.Add(Me.BRecalculate)
+        Me.PanelControl1.Controls.Add(Me.PCSelAll)
+        Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.PanelControl1.Location = New System.Drawing.Point(0, 463)
+        Me.PanelControl1.Name = "PanelControl1"
+        Me.PanelControl1.Size = New System.Drawing.Size(1007, 38)
+        Me.PanelControl1.TabIndex = 0
+        '
+        'BContinue
+        '
+        Me.BContinue.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.BContinue.Location = New System.Drawing.Point(537, 2)
+        Me.BContinue.Name = "BContinue"
+        Me.BContinue.Size = New System.Drawing.Size(468, 34)
+        Me.BContinue.TabIndex = 1
+        Me.BContinue.Text = "Keep And Continue"
+        '
+        'BRecalculate
+        '
+        Me.BRecalculate.Dock = System.Windows.Forms.DockStyle.Left
+        Me.BRecalculate.Location = New System.Drawing.Point(101, 2)
+        Me.BRecalculate.Name = "BRecalculate"
+        Me.BRecalculate.Size = New System.Drawing.Size(436, 34)
+        Me.BRecalculate.TabIndex = 0
+        Me.BRecalculate.Text = "Issue Recalculate"
+        '
+        'PCSelAll
+        '
+        Me.PCSelAll.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PCSelAll.Controls.Add(Me.CheckEditSelAll)
+        Me.PCSelAll.Dock = System.Windows.Forms.DockStyle.Left
+        Me.PCSelAll.Location = New System.Drawing.Point(2, 2)
+        Me.PCSelAll.Name = "PCSelAll"
+        Me.PCSelAll.Size = New System.Drawing.Size(99, 34)
+        Me.PCSelAll.TabIndex = 104
+        '
+        'CheckEditSelAll
+        '
+        Me.CheckEditSelAll.Location = New System.Drawing.Point(5, 7)
+        Me.CheckEditSelAll.Name = "CheckEditSelAll"
+        Me.CheckEditSelAll.Properties.Caption = "Select All Item"
+        Me.CheckEditSelAll.Size = New System.Drawing.Size(92, 19)
+        Me.CheckEditSelAll.TabIndex = 102
+        '
+        'XTPHistory
+        '
+        Me.XTPHistory.Name = "XTPHistory"
+        Me.XTPHistory.Size = New System.Drawing.Size(1007, 501)
+        Me.XTPHistory.Text = "History"
         '
         'PanelControl5
         '
@@ -295,77 +440,6 @@ Partial Class FormVerifyECOP
         Me.BSearchProposeECOP.TabIndex = 8908
         Me.BSearchProposeECOP.Text = "Search"
         '
-        'PanelControl1
-        '
-        Me.PanelControl1.Controls.Add(Me.BContinue)
-        Me.PanelControl1.Controls.Add(Me.BRecalculate)
-        Me.PanelControl1.Controls.Add(Me.PCSelAll)
-        Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl1.Location = New System.Drawing.Point(0, 463)
-        Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(1007, 38)
-        Me.PanelControl1.TabIndex = 0
-        '
-        'BContinue
-        '
-        Me.BContinue.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.BContinue.Location = New System.Drawing.Point(537, 2)
-        Me.BContinue.Name = "BContinue"
-        Me.BContinue.Size = New System.Drawing.Size(468, 34)
-        Me.BContinue.TabIndex = 1
-        Me.BContinue.Text = "Keep And Continue"
-        '
-        'BRecalculate
-        '
-        Me.BRecalculate.Dock = System.Windows.Forms.DockStyle.Left
-        Me.BRecalculate.Location = New System.Drawing.Point(101, 2)
-        Me.BRecalculate.Name = "BRecalculate"
-        Me.BRecalculate.Size = New System.Drawing.Size(436, 34)
-        Me.BRecalculate.TabIndex = 0
-        Me.BRecalculate.Text = "Issue Recalculate"
-        '
-        'PCSelAll
-        '
-        Me.PCSelAll.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
-        Me.PCSelAll.Controls.Add(Me.CheckEditSelAll)
-        Me.PCSelAll.Dock = System.Windows.Forms.DockStyle.Left
-        Me.PCSelAll.Location = New System.Drawing.Point(2, 2)
-        Me.PCSelAll.Name = "PCSelAll"
-        Me.PCSelAll.Size = New System.Drawing.Size(99, 34)
-        Me.PCSelAll.TabIndex = 104
-        '
-        'CheckEditSelAll
-        '
-        Me.CheckEditSelAll.Location = New System.Drawing.Point(5, 7)
-        Me.CheckEditSelAll.Name = "CheckEditSelAll"
-        Me.CheckEditSelAll.Properties.Caption = "Select All Item"
-        Me.CheckEditSelAll.Size = New System.Drawing.Size(92, 19)
-        Me.CheckEditSelAll.TabIndex = 102
-        '
-        'XTPHistory
-        '
-        Me.XTPHistory.Name = "XTPHistory"
-        Me.XTPHistory.Size = New System.Drawing.Size(938, 539)
-        Me.XTPHistory.Text = "History"
-        '
-        'GridColumn5
-        '
-        Me.GridColumn5.Caption = "Additional ECOP (Sample)"
-        Me.GridColumn5.FieldName = "total_additional_sample"
-        Me.GridColumn5.Name = "GridColumn5"
-        Me.GridColumn5.Visible = True
-        Me.GridColumn5.VisibleIndex = 6
-        Me.GridColumn5.Width = 150
-        '
-        'GridColumn6
-        '
-        Me.GridColumn6.Caption = "Additional ECOP (Purchasing)"
-        Me.GridColumn6.FieldName = "total_additional_purc"
-        Me.GridColumn6.Name = "GridColumn6"
-        Me.GridColumn6.Visible = True
-        Me.GridColumn6.VisibleIndex = 8
-        Me.GridColumn6.Width = 37
-        '
         'FormVerifyECOP
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -387,16 +461,20 @@ Partial Class FormVerifyECOP
         CType(Me.RICESelectPPS, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemMemoEdit6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemProgressBar1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PanelControl5, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.PanelControl5.ResumeLayout(False)
-        Me.PanelControl5.PerformLayout()
-        CType(Me.SLEDesign.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GVSLEDesgSearch, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl2.ResumeLayout(False)
+        Me.PanelControl2.PerformLayout()
+        CType(Me.TEComment.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         CType(Me.PCSelAll, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PCSelAll.ResumeLayout(False)
         CType(Me.CheckEditSelAll.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl5, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl5.ResumeLayout(False)
+        Me.PanelControl5.PerformLayout()
+        CType(Me.SLEDesign.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVSLEDesgSearch, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -432,4 +510,8 @@ Partial Class FormVerifyECOP
     Friend WithEvents RICESelectPPS As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
     Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents PanelControl2 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents TEComment As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents GridColumn7 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

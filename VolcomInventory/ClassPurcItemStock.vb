@@ -10,7 +10,7 @@
             q_where += " AND cat.id_item_cat='" & cat & "' "
         End If
 
-        Dim query As String = "SELECT a.id_departement, IFNULL(dept.departement,'Purchasing Storage') AS departement,a.id_item, im.item_desc, im.id_item_cat, cat.item_cat, SUM(a.qty) AS `qty`, 0.00 AS `qty_req`, IFNULL(cst.avg_cost,0) AS `value`, '' AS `remark`
+        Dim query As String = "SELECT uom.uom,a.id_departement, IFNULL(dept.departement,'Purchasing Storage') AS departement,a.id_item, im.item_desc, im.id_item_cat, cat.item_cat, SUM(a.qty) AS `qty`, 0.00 AS `qty_req`, IFNULL(cst.avg_cost,0) AS `value`, '' AS `remark`
         FROM (
 	        SELECT i.id_departement,i.id_item,
 	        SUM(IF(i.id_storage_category=2, CONCAT('-', i.storage_item_qty), i.storage_item_qty)) AS `qty`
@@ -30,6 +30,7 @@
 	        GROUP BY a.id_item
         ) cst ON cst.id_item = a.id_item
         INNER JOIN tb_item im ON im.id_item = a.id_item
+        INNER JOIN tb_m_uom uom ON uom.id_uom=im.id_uom
         INNER JOIN tb_item_cat cat ON cat.id_item_cat = im.id_item_cat
         LEFT JOIN tb_m_departement dept ON dept.id_departement = a.id_departement
         GROUP BY a.id_item, a.id_departement HAVING qty>0 "

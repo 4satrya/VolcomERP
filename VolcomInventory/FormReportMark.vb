@@ -8734,14 +8734,14 @@ WHERE invd.`id_inv_mat`='" & id_report & "'"
             query = String.Format("UPDATE tb_mat_summary SET id_report_status='{0}' WHERE id_mat_summary ='{1}'", id_status_reportx, id_report)
             execute_non_query(query, True, "", "", "", "")
         ElseIf report_mark_type = "270" Then
-            'move est. receive date
+            'Propose ECOP
             If id_status_reportx = "3" Then
                 id_status_reportx = "6"
             End If
 
             If id_status_reportx = "6" Then
                 'insert into ecop
-                Dim q As String = "SELECT pps.is_cool_storage,pps.is_production_dept,ppsd.kurs,pps.id_design,SUM(IF(ppsd.id_currency=1,ppsd.before_kurs,ppsd.before_kurs*ppsd.kurs)) AS cop,SUM(ppsd.additional) AS additional_cop,pps.id_comp_contact
+                Dim q As String = "SELECT pps.is_cool_storage,pps.id_design,pps.is_production_dept,ppsd.kurs,pps.id_design,SUM(IF(ppsd.id_currency=1,ppsd.before_kurs,ppsd.before_kurs*ppsd.kurs)) AS cop,SUM(ppsd.additional) AS additional_cop,pps.id_comp_contact
 FROM tb_design_ecop_pps_det ppsd
 INNER JOIN tb_design_ecop_pps pps ON pps.id_design_ecop_pps=ppsd.id_design_ecop_pps AND pps.id_design_ecop_pps='" & id_report & "'
 GROUP BY pps.id_design"
@@ -8791,6 +8791,15 @@ WHERE is_production_dept=2 AND is_active=1 AND id_design='1'"
                         'update to COP PD
                         qu = String.Format("UPDATE tb_m_design SET prod_order_cop_pd='{1}',prod_order_cop_pd_addcost='{5}',prod_order_cop_kurs_pd='{2}',prod_order_cop_pd_vendor={3},prod_order_cop_pd_curr='{4}',is_cold_storage='{6}' WHERE id_design='{0}'", dtq.Rows(0)("id_design").ToString, decimalSQL((dtq.Rows(0)("cop") + dtq.Rows(0)("additional_cop")).ToString), decimalSQL(dtq.Rows(0)("kurs").ToString), dtq.Rows(0)("id_comp_contact").ToString, "1", decimalSQL(dtq.Rows(0)("additional_cop").ToString), dtq.Rows(0)("is_cool_storage").ToString)
                         execute_non_query(qu, True, "", "", "", "")
+                        'email ECOP
+                        Try
+                            Dim nm As New ClassSendEmail
+                            nm.par1 = dtq.Rows(0)("id_design").ToString
+                            nm.report_mark_type = "267"
+                            nm.send_email()
+                        Catch ex As Exception
+                            execute_query("INSERT INTO tb_error_mail(date,description) VALUES(NOW(),'Failed send COP PD id_design = " & dtq.Rows(0)("id_design").ToString & "')", -1, True, "", "", "", "")
+                        End Try
                     End If
                 Else
                     Dim qu As String = "UPDATE tb_m_design_cop SET is_active=2 WHERE id_design='" & dtq.Rows(0)("id_design").ToString & "' AND is_production_dept='" & dtq.Rows(0)("is_production_dept").ToString & "';

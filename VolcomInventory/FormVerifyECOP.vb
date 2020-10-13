@@ -151,6 +151,14 @@ GROUP BY pps.id_design"
                     qu = String.Format("UPDATE tb_m_design SET prod_order_cop_pd='{1}',prod_order_cop_pd_addcost='{5}',prod_order_cop_kurs_pd='{2}',prod_order_cop_pd_vendor={3},prod_order_cop_pd_curr='{4}',is_cold_storage='{6}' WHERE id_design='{0}'", dtq.Rows(0)("id_design").ToString, decimalSQL((dtq.Rows(0)("cop") + dtq.Rows(0)("additional_cop")).ToString), decimalSQL(dtq.Rows(0)("kurs").ToString), dtq.Rows(0)("id_comp_contact").ToString, "1", decimalSQL(dtq.Rows(0)("additional_cop").ToString), dtq.Rows(0)("is_cool_storage").ToString)
                     execute_non_query(qu, True, "", "", "", "")
                     'email ECOP
+                    Try
+                        Dim nm As New ClassSendEmail
+                        nm.par1 = dtq.Rows(0)("id_design").ToString
+                        nm.report_mark_type = "267"
+                        nm.send_email()
+                    Catch ex As Exception
+                        execute_query("INSERT INTO tb_error_mail(date,description) VALUES(NOW(),'Failed send COP PD id_design = " & dtq.Rows(0)("id_design").ToString & "')", -1, True, "", "", "", "")
+                    End Try
 
                     'update continue
                     qu = String.Format("UPDATE tb_design_ecop_pps SET verify_status='1',verify_by='{1}',verify_date=NOW(),verify_comment='{2}' WHERE id_design_ecop_pps='{0}'", GVEcopPPS.GetRowCellValue(i, "id_design_ecop_pps").ToString, id_user, addSlashes(TEComment.Text))

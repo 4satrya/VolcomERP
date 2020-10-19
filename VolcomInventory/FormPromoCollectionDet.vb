@@ -6,10 +6,12 @@
     Dim is_confirm As String = "-1"
     Dim rmt As String = "250"
     Public dt As DataTable
+    Dim is_use_discount_code As String = "-1"
 
     Private Sub FormPromoCollectionDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewReportStatus()
         viewPromoType()
+        viewDiscountCodeList()
         actionLoad()
     End Sub
 
@@ -60,6 +62,9 @@
             id_report_status = data.Rows(0)("id_report_status").ToString
             is_confirm = data.Rows(0)("is_confirm").ToString
             TxtPromoName.Text = data.Rows(0)("promo_name").ToString
+            TxtUseDiscountCode.Text = data.Rows(0)("use_discount_code").ToString
+            TxtDiscountTitle.Text = data.Rows(0)("discount_title").ToString
+            is_use_discount_code = data.Rows(0)("is_use_discount_code").ToString
 
             'properti
             If is_confirm = "2" Then
@@ -201,8 +206,13 @@
             MENote.Enabled = True
             GVData.OptionsBehavior.ReadOnly = False
             SLEPromoType.Enabled = True
-            DEStart.Enabled = True
-            DEEnd.Enabled = True
+            If is_use_discount_code = "1" Then
+                DEStart.Enabled = False
+                DEEnd.Enabled = False
+            Else
+                DEStart.Enabled = True
+                DEEnd.Enabled = True
+            End If
             TxtPromoName.Enabled = True
         Else
             BtnConfirm.Visible = False
@@ -404,9 +414,12 @@
             ElseIf XTCData.SelectedTabPageIndex = 1 Then
                 gv = GVProduct
                 ReportPromoCollection.dt = GCProduct.DataSource
-            Else
+            ElseIf XTCData.SelectedTabPageIndex = 2 Then
                 gv = GVBySizeType
                 ReportPromoCollection.dt = GCBySizeType.DataSource
+            ElseIf XTCData.SelectedTabPageIndex = 3 Then
+                gv = GVDiscountCode
+                ReportPromoCollection.dt = GCDiscountCode.DataSource
             End If
             ReportPromoCollection.id = id
             If id_report_status <> "6" Then
@@ -465,6 +478,7 @@
             Report.LabelDate.Text = DECreated.Text.ToUpper
             Report.LabelStatus.Text = LEReportStatus.Text.ToUpper
             Report.LNote.Text = MENote.Text.ToUpper
+            Report.LabelDiscountCode.Text = TxtUseDiscountCode.Text.ToUpper + If(is_use_discount_code = "1", " - ", "") + TxtDiscountTitle.Text.ToUpper
 
             ' Show the report's preview. 
             Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
@@ -571,5 +585,15 @@
         WHERE id_ol_promo_collection='" + id + "' "
         Dim dt_log As DataTable = execute_query(qlog, -1, True, "", "", "", "")
         showLog(dt_log)
+    End Sub
+
+    Sub viewDiscountCodeList()
+        Dim query As String = "SELECT disc_code FROM tb_ol_promo_collection_disc_code WHERE id_ol_promo_collection = " + id
+
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+
+        GCDiscountCode.DataSource = data
+
+        GVDiscountCode.BestFitColumns()
     End Sub
 End Class

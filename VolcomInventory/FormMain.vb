@@ -3049,6 +3049,11 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
                 FormProductionMRS.TEDesign.Text = FormMaterialRequisition.GVMRS.GetFocusedRowCellValue("design_display_name").ToString
                 FormProductionMRS.TEDesignCode.Text = FormMaterialRequisition.GVMRS.GetFocusedRowCellValue("design_code").ToString
                 FormProductionMRS.ShowDialog()
+            ElseIf formName = "FormMailManageReturn" Then
+                FormMailManageReturnDet.action = "upd"
+                FormMailManageReturnDet.id = FormMailManageReturn.GVData.GetFocusedRowCellValue("id_mail_manage").ToString
+                FormMailManageReturnDet.rmt = "45"
+                FormMailManageReturnDet.ShowDialog()
             Else
                 RPSubMenu.Visible = False
             End If
@@ -8374,6 +8379,12 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             print(FormSalesBranch.GCData, "Volcom Store Sales")
         ElseIf formName = "FormABGRoyaltyZone" Then
             print(FormABGRoyaltyZone.GCData, "ABG Royalty Zone")
+        ElseIf formName = "FormMailManageReturn" Then
+            If FormMailManageReturn.XTCMailManage.SelectedTabPageIndex = 0 Then
+                print_raw(FormMailManageReturn.GCData, "")
+            ElseIf FormMailManageReturn.XTCMailManage.SelectedTabPageIndex = 1 Then
+                print_raw(FormMailManageReturn.GCReturnOrder, "")
+            End If
         Else
             RPSubMenu.Visible = False
         End If
@@ -9302,6 +9313,9 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
         ElseIf formName = "FormABGRoyaltyZone" Then
             FormABGRoyaltyZone.Close()
             FormABGRoyaltyZone.Dispose()
+        ElseIf formName = "FormMailManageReturn" Then
+            FormMailManageReturn.Close()
+            FormMailManageReturn.Dispose()
         Else
             RPSubMenu.Visible = False
         End If
@@ -15367,6 +15381,19 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             FormMaterialRequisition.Show()
             FormMaterialRequisition.WindowState = FormWindowState.Maximized
             FormMaterialRequisition.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBSendEmailReturn_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBSendEmailReturn.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormMailManageReturn.MdiParent = Me
+            FormMailManageReturn.Show()
+            FormMailManageReturn.WindowState = FormWindowState.Maximized
+            FormMailManageReturn.Focus()
         Catch ex As Exception
             errorProcess()
         End Try

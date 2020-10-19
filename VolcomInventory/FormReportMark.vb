@@ -621,6 +621,9 @@
         ElseIf report_mark_type = "270" Then
             'propose ECOP
             query = String.Format("SELECT id_report_status,number as report_number FROM tb_design_ecop_pps WHERE id_design_ecop_pps = '{0}'", id_report)
+        ElseIf report_mark_type = "273" Then
+            'propose material
+            query = String.Format("SELECT id_report_status,mat_det_code as report_number FROM tb_m_mat_det_pps WHERE id_mat_det_pps = '{0}'", id_report)
         End If
 
         data = execute_query(query, -1, True, "", "", "", "")
@@ -8814,6 +8817,41 @@ WHERE ecop.id_design_ecop_pps='" & id_report & "';"
 
             'update status
             query = String.Format("UPDATE tb_design_ecop_pps SET id_report_status='{0}' WHERE id_design_ecop_pps ='{1}'", id_status_reportx, id_report)
+            execute_non_query(query, True, "", "", "", "")
+        ElseIf report_mark_type = "273" Then
+            '
+            If id_status_reportx = "3" Then
+                id_status_reportx = "6"
+            End If
+
+            If id_status_reportx = "6" Then
+                Dim material_image_path As String = get_setup_field("pic_path_mat") & "\"
+                Dim id_mat_det As String = ""
+                Dim qi As String = ""
+                qi = "INSERT INTO tb_m_mat_det(id_mat, mat_det_display_name, mat_det_name, mat_det_code, id_method, lifetime, mat_det_date, allow_design, id_fab_type, gramasi,id_range) "
+                qi += "SELECT pps.id_mat, pps.mat_det_display_name, pps.mat_det_name, pps.mat_det_code, pps.id_method, pps.lifetime, NOW() AS mat_det_date, 2 AS allow_design, NULL AS id_fab_type, 0 AS gramasi,pps.id_range
+FROM tb_m_mat_det_pps pps
+WHERE pps.`id_mat_det_pps`='" & id_report & "';SELECT LAST_INSERT_ID() "
+
+                id_mat_det = execute_query(qi, 0, True, "", "", "", "")
+
+                'fob price
+                qi = String.Format("INSERT INTO tb_m_mat_det_price(id_mat_det,mat_det_price_name,id_currency,id_comp_contact,mat_det_price,mat_det_price_date,is_default_cost,is_default_po) VALUES('{0}','Default Price','1',1,(SELECT fob_price FROM tb_m_mat_det_pps WHERE id_mat_det_pps='{1}'),DATE(NOW()),'2','1')", id_mat_det, id_report)
+                execute_non_query(qi, True, "", "", "", "")
+
+                'image
+                If Not FormMasterRawMatPps.PictureEdit1.EditValue Is Nothing Then
+                    save_image_ori(FormMasterRawMatPps.PictureEdit1, material_image_path, id_mat_det & ".jpg")
+                End If
+
+                qi = String.Format("DELETE FROM tb_m_mat_det_code WHERE id_mat_det='{0}'", id_mat_det)
+                execute_non_query(query, True, "", "", "", "")
+                qi = String.Format("INSERT INTO tb_m_mat_det_code(id_mat_det, id_code_detail) SELECT '{0}' AS id_mat_det,id_code_detail FROM tb_m_mat_det_code_pps WHERE id_mat_det_pps='{1}'", id_mat_det, id_report)
+                execute_non_query(query, True, "", "", "", "")
+            End If
+
+            'update status
+            query = String.Format("UPDATE tb_m_mat_det_pps SET id_report_status='{0}' WHERE id_mat_det_pps ='{1}'", id_status_reportx, id_report)
             execute_non_query(query, True, "", "", "", "")
         End If
 

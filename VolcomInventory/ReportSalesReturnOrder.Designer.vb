@@ -25,6 +25,12 @@ Partial Public Class ReportSalesReturnOrder
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.TopMargin = New DevExpress.XtraReports.UI.TopMarginBand()
         Me.XrPanel1 = New DevExpress.XtraReports.UI.XRPanel()
+        Me.LabelOLStoreOrder = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LabelOLStoreOrderDot = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LabelOLStoreOrderTitle = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LabelWHTitle = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LabelWHDot = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LabelWH = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel15 = New DevExpress.XtraReports.UI.XRLabel()
         Me.LabelEstReturn = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel21 = New DevExpress.XtraReports.UI.XRLabel()
@@ -49,12 +55,28 @@ Partial Public Class ReportSalesReturnOrder
         Me.XrLabel9 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel14 = New DevExpress.XtraReports.UI.XRLabel()
         Me.ReportFooter = New DevExpress.XtraReports.UI.ReportFooterBand()
-        Me.LabelWH = New DevExpress.XtraReports.UI.XRLabel()
-        Me.LabelWHDot = New DevExpress.XtraReports.UI.XRLabel()
-        Me.LabelWHTitle = New DevExpress.XtraReports.UI.XRLabel()
-        Me.LabelOLStoreOrderTitle = New DevExpress.XtraReports.UI.XRLabel()
-        Me.LabelOLStoreOrderDot = New DevExpress.XtraReports.UI.XRLabel()
-        Me.LabelOLStoreOrder = New DevExpress.XtraReports.UI.XRLabel()
+        Me.GridColumnNo = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnCode = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnName = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnSize = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnQty = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnPrice = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnAmount = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnRemark = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnIdSalesTarget = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnUOM = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnReturnCategory = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnIdDesign = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnIdProduct = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnIdSample = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnIdSalesOrderDet = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnProductName = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnIdReturnCat = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnIdDesignPrice = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnPriceType = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnQtyAvail = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnFound = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnid_detail_on_hold = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XrTable1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -88,8 +110,15 @@ Partial Public Class ReportSalesReturnOrder
         '
         'GridView1
         '
+        Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnNo, Me.GridColumnCode, Me.GridColumnName, Me.GridColumnSize, Me.GridColumnQty, Me.GridColumnPrice, Me.GridColumnAmount, Me.GridColumnRemark, Me.GridColumnIdSalesTarget, Me.GridColumnUOM, Me.GridColumnReturnCategory, Me.GridColumnIdDesign, Me.GridColumnIdProduct, Me.GridColumnIdSample, Me.GridColumnIdSalesOrderDet, Me.GridColumnProductName, Me.GridColumnIdReturnCat, Me.GridColumnIdDesignPrice, Me.GridColumnPriceType, Me.GridColumnQtyAvail, Me.GridColumnFound, Me.GridColumnid_detail_on_hold})
         Me.GridView1.GridControl = Me.GridControl1
+        Me.GridView1.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_order_det_qty", Me.GridColumnQty, "{0:f2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount", Me.GridColumnAmount, "{0:n2}")})
         Me.GridView1.Name = "GridView1"
+        Me.GridView1.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[True]
+        Me.GridView1.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.[True]
+        Me.GridView1.OptionsCustomization.AllowQuickHideColumns = False
+        Me.GridView1.OptionsView.ShowFooter = True
+        Me.GridView1.OptionsView.ShowGroupPanel = False
         '
         'TopMargin
         '
@@ -111,6 +140,74 @@ Partial Public Class ReportSalesReturnOrder
         Me.XrPanel1.SizeF = New System.Drawing.SizeF(780.9999!, 116.5834!)
         Me.XrPanel1.StylePriority.UseBorderColor = False
         Me.XrPanel1.StylePriority.UseBorders = False
+        '
+        'LabelOLStoreOrder
+        '
+        Me.LabelOLStoreOrder.Borders = DevExpress.XtraPrinting.BorderSide.None
+        Me.LabelOLStoreOrder.Font = New System.Drawing.Font("Times New Roman", 9.75!)
+        Me.LabelOLStoreOrder.LocationFloat = New DevExpress.Utils.PointFloat(578.8332!, 15.58326!)
+        Me.LabelOLStoreOrder.Name = "LabelOLStoreOrder"
+        Me.LabelOLStoreOrder.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LabelOLStoreOrder.SizeF = New System.Drawing.SizeF(192.1669!, 13.58337!)
+        Me.LabelOLStoreOrder.StylePriority.UseBorders = False
+        Me.LabelOLStoreOrder.StylePriority.UseFont = False
+        Me.LabelOLStoreOrder.Visible = False
+        '
+        'LabelOLStoreOrderDot
+        '
+        Me.LabelOLStoreOrderDot.Borders = DevExpress.XtraPrinting.BorderSide.None
+        Me.LabelOLStoreOrderDot.LocationFloat = New DevExpress.Utils.PointFloat(567.3748!, 15.58326!)
+        Me.LabelOLStoreOrderDot.Name = "LabelOLStoreOrderDot"
+        Me.LabelOLStoreOrderDot.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LabelOLStoreOrderDot.SizeF = New System.Drawing.SizeF(11.45837!, 13.58337!)
+        Me.LabelOLStoreOrderDot.StylePriority.UseBorders = False
+        Me.LabelOLStoreOrderDot.Text = ":"
+        Me.LabelOLStoreOrderDot.Visible = False
+        '
+        'LabelOLStoreOrderTitle
+        '
+        Me.LabelOLStoreOrderTitle.Borders = DevExpress.XtraPrinting.BorderSide.None
+        Me.LabelOLStoreOrderTitle.LocationFloat = New DevExpress.Utils.PointFloat(450.7083!, 15.58337!)
+        Me.LabelOLStoreOrderTitle.Name = "LabelOLStoreOrderTitle"
+        Me.LabelOLStoreOrderTitle.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LabelOLStoreOrderTitle.SizeF = New System.Drawing.SizeF(116.6666!, 13.58337!)
+        Me.LabelOLStoreOrderTitle.StylePriority.UseBorders = False
+        Me.LabelOLStoreOrderTitle.Text = "OL Store Order#"
+        Me.LabelOLStoreOrderTitle.Visible = False
+        '
+        'LabelWHTitle
+        '
+        Me.LabelWHTitle.Borders = DevExpress.XtraPrinting.BorderSide.None
+        Me.LabelWHTitle.LocationFloat = New DevExpress.Utils.PointFloat(2.000014!, 69.91679!)
+        Me.LabelWHTitle.Name = "LabelWHTitle"
+        Me.LabelWHTitle.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LabelWHTitle.SizeF = New System.Drawing.SizeF(82.2916!, 13.58335!)
+        Me.LabelWHTitle.StylePriority.UseBorders = False
+        Me.LabelWHTitle.Text = "Warehouse"
+        Me.LabelWHTitle.Visible = False
+        '
+        'LabelWHDot
+        '
+        Me.LabelWHDot.Borders = DevExpress.XtraPrinting.BorderSide.None
+        Me.LabelWHDot.LocationFloat = New DevExpress.Utils.PointFloat(84.29162!, 69.91679!)
+        Me.LabelWHDot.Name = "LabelWHDot"
+        Me.LabelWHDot.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LabelWHDot.SizeF = New System.Drawing.SizeF(11.45834!, 13.58335!)
+        Me.LabelWHDot.StylePriority.UseBorders = False
+        Me.LabelWHDot.Text = ":"
+        Me.LabelWHDot.Visible = False
+        '
+        'LabelWH
+        '
+        Me.LabelWH.Borders = DevExpress.XtraPrinting.BorderSide.None
+        Me.LabelWH.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelWH.LocationFloat = New DevExpress.Utils.PointFloat(95.74995!, 69.91679!)
+        Me.LabelWH.Name = "LabelWH"
+        Me.LabelWH.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LabelWH.SizeF = New System.Drawing.SizeF(295.8334!, 13.58335!)
+        Me.LabelWH.StylePriority.UseBorders = False
+        Me.LabelWH.StylePriority.UseFont = False
+        Me.LabelWH.Visible = False
         '
         'XrLabel15
         '
@@ -364,73 +461,208 @@ Partial Public Class ReportSalesReturnOrder
         Me.ReportFooter.HeightF = 72.91666!
         Me.ReportFooter.Name = "ReportFooter"
         '
-        'LabelWH
+        'GridColumnNo
         '
-        Me.LabelWH.Borders = DevExpress.XtraPrinting.BorderSide.None
-        Me.LabelWH.Font = New System.Drawing.Font("Times New Roman", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelWH.LocationFloat = New DevExpress.Utils.PointFloat(95.74995!, 69.91679!)
-        Me.LabelWH.Name = "LabelWH"
-        Me.LabelWH.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LabelWH.SizeF = New System.Drawing.SizeF(295.8334!, 13.58335!)
-        Me.LabelWH.StylePriority.UseBorders = False
-        Me.LabelWH.StylePriority.UseFont = False
-        Me.LabelWH.Visible = False
+        Me.GridColumnNo.Caption = "No"
+        Me.GridColumnNo.FieldName = "no"
+        Me.GridColumnNo.Name = "GridColumnNo"
+        Me.GridColumnNo.OptionsColumn.AllowEdit = False
+        Me.GridColumnNo.Visible = True
+        Me.GridColumnNo.VisibleIndex = 0
+        Me.GridColumnNo.Width = 41
         '
-        'LabelWHDot
+        'GridColumnCode
         '
-        Me.LabelWHDot.Borders = DevExpress.XtraPrinting.BorderSide.None
-        Me.LabelWHDot.LocationFloat = New DevExpress.Utils.PointFloat(84.29162!, 69.91679!)
-        Me.LabelWHDot.Name = "LabelWHDot"
-        Me.LabelWHDot.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LabelWHDot.SizeF = New System.Drawing.SizeF(11.45834!, 13.58335!)
-        Me.LabelWHDot.StylePriority.UseBorders = False
-        Me.LabelWHDot.Text = ":"
-        Me.LabelWHDot.Visible = False
+        Me.GridColumnCode.Caption = "Code"
+        Me.GridColumnCode.FieldName = "code"
+        Me.GridColumnCode.Name = "GridColumnCode"
+        Me.GridColumnCode.Visible = True
+        Me.GridColumnCode.VisibleIndex = 1
+        Me.GridColumnCode.Width = 55
         '
-        'LabelWHTitle
+        'GridColumnName
         '
-        Me.LabelWHTitle.Borders = DevExpress.XtraPrinting.BorderSide.None
-        Me.LabelWHTitle.LocationFloat = New DevExpress.Utils.PointFloat(2.000014!, 69.91679!)
-        Me.LabelWHTitle.Name = "LabelWHTitle"
-        Me.LabelWHTitle.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LabelWHTitle.SizeF = New System.Drawing.SizeF(82.2916!, 13.58335!)
-        Me.LabelWHTitle.StylePriority.UseBorders = False
-        Me.LabelWHTitle.Text = "Warehouse"
-        Me.LabelWHTitle.Visible = False
+        Me.GridColumnName.Caption = "Description"
+        Me.GridColumnName.FieldName = "name"
+        Me.GridColumnName.FieldNameSortGroup = "id_design"
+        Me.GridColumnName.Name = "GridColumnName"
+        Me.GridColumnName.Visible = True
+        Me.GridColumnName.VisibleIndex = 2
+        Me.GridColumnName.Width = 103
         '
-        'LabelOLStoreOrderTitle
+        'GridColumnSize
         '
-        Me.LabelOLStoreOrderTitle.Borders = DevExpress.XtraPrinting.BorderSide.None
-        Me.LabelOLStoreOrderTitle.LocationFloat = New DevExpress.Utils.PointFloat(450.7083!, 15.58337!)
-        Me.LabelOLStoreOrderTitle.Name = "LabelOLStoreOrderTitle"
-        Me.LabelOLStoreOrderTitle.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LabelOLStoreOrderTitle.SizeF = New System.Drawing.SizeF(116.6666!, 13.58337!)
-        Me.LabelOLStoreOrderTitle.StylePriority.UseBorders = False
-        Me.LabelOLStoreOrderTitle.Text = "OL Store Order#"
-        Me.LabelOLStoreOrderTitle.Visible = False
+        Me.GridColumnSize.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumnSize.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumnSize.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumnSize.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumnSize.Caption = "Size"
+        Me.GridColumnSize.FieldName = "size"
+        Me.GridColumnSize.Name = "GridColumnSize"
+        Me.GridColumnSize.OptionsColumn.AllowEdit = False
+        Me.GridColumnSize.Visible = True
+        Me.GridColumnSize.VisibleIndex = 3
+        Me.GridColumnSize.Width = 43
         '
-        'LabelOLStoreOrderDot
+        'GridColumnQty
         '
-        Me.LabelOLStoreOrderDot.Borders = DevExpress.XtraPrinting.BorderSide.None
-        Me.LabelOLStoreOrderDot.LocationFloat = New DevExpress.Utils.PointFloat(567.3748!, 15.58326!)
-        Me.LabelOLStoreOrderDot.Name = "LabelOLStoreOrderDot"
-        Me.LabelOLStoreOrderDot.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LabelOLStoreOrderDot.SizeF = New System.Drawing.SizeF(11.45837!, 13.58337!)
-        Me.LabelOLStoreOrderDot.StylePriority.UseBorders = False
-        Me.LabelOLStoreOrderDot.Text = ":"
-        Me.LabelOLStoreOrderDot.Visible = False
+        Me.GridColumnQty.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumnQty.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumnQty.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumnQty.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumnQty.Caption = "Qty"
+        Me.GridColumnQty.DisplayFormat.FormatString = "N0"
+        Me.GridColumnQty.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnQty.FieldName = "sales_return_order_det_qty"
+        Me.GridColumnQty.Name = "GridColumnQty"
+        Me.GridColumnQty.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.[False]
+        Me.GridColumnQty.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_return_order_det_qty", "{0:n0}")})
+        Me.GridColumnQty.Visible = True
+        Me.GridColumnQty.VisibleIndex = 4
+        Me.GridColumnQty.Width = 74
         '
-        'LabelOLStoreOrder
+        'GridColumnPrice
         '
-        Me.LabelOLStoreOrder.Borders = DevExpress.XtraPrinting.BorderSide.None
-        Me.LabelOLStoreOrder.Font = New System.Drawing.Font("Times New Roman", 9.75!)
-        Me.LabelOLStoreOrder.LocationFloat = New DevExpress.Utils.PointFloat(578.8332!, 15.58326!)
-        Me.LabelOLStoreOrder.Name = "LabelOLStoreOrder"
-        Me.LabelOLStoreOrder.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LabelOLStoreOrder.SizeF = New System.Drawing.SizeF(192.1669!, 13.58337!)
-        Me.LabelOLStoreOrder.StylePriority.UseBorders = False
-        Me.LabelOLStoreOrder.StylePriority.UseFont = False
-        Me.LabelOLStoreOrder.Visible = False
+        Me.GridColumnPrice.Caption = "Price"
+        Me.GridColumnPrice.DisplayFormat.FormatString = "{0:n2}"
+        Me.GridColumnPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnPrice.FieldName = "design_price"
+        Me.GridColumnPrice.Name = "GridColumnPrice"
+        Me.GridColumnPrice.OptionsColumn.AllowEdit = False
+        Me.GridColumnPrice.Visible = True
+        Me.GridColumnPrice.VisibleIndex = 5
+        Me.GridColumnPrice.Width = 89
+        '
+        'GridColumnAmount
+        '
+        Me.GridColumnAmount.Caption = "Amount"
+        Me.GridColumnAmount.DisplayFormat.FormatString = "{0:n2}"
+        Me.GridColumnAmount.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnAmount.FieldName = "amount"
+        Me.GridColumnAmount.Name = "GridColumnAmount"
+        Me.GridColumnAmount.OptionsColumn.AllowEdit = False
+        Me.GridColumnAmount.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount", "{0:n2}")})
+        Me.GridColumnAmount.Visible = True
+        Me.GridColumnAmount.VisibleIndex = 6
+        Me.GridColumnAmount.Width = 103
+        '
+        'GridColumnRemark
+        '
+        Me.GridColumnRemark.Caption = "Remark"
+        Me.GridColumnRemark.FieldName = "sales_return_order_det_note"
+        Me.GridColumnRemark.Name = "GridColumnRemark"
+        Me.GridColumnRemark.Visible = True
+        Me.GridColumnRemark.VisibleIndex = 7
+        Me.GridColumnRemark.Width = 155
+        '
+        'GridColumnIdSalesTarget
+        '
+        Me.GridColumnIdSalesTarget.Caption = "ID Sales Target"
+        Me.GridColumnIdSalesTarget.FieldName = "id_sales_return_order"
+        Me.GridColumnIdSalesTarget.Name = "GridColumnIdSalesTarget"
+        Me.GridColumnIdSalesTarget.OptionsColumn.AllowEdit = False
+        '
+        'GridColumnUOM
+        '
+        Me.GridColumnUOM.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumnUOM.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumnUOM.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumnUOM.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumnUOM.Caption = "UOM"
+        Me.GridColumnUOM.FieldName = "uom"
+        Me.GridColumnUOM.Name = "GridColumnUOM"
+        Me.GridColumnUOM.OptionsColumn.AllowEdit = False
+        Me.GridColumnUOM.Width = 71
+        '
+        'GridColumnReturnCategory
+        '
+        Me.GridColumnReturnCategory.Caption = "Return Category"
+        Me.GridColumnReturnCategory.FieldName = "return_cat"
+        Me.GridColumnReturnCategory.Name = "GridColumnReturnCategory"
+        Me.GridColumnReturnCategory.OptionsColumn.AllowEdit = False
+        Me.GridColumnReturnCategory.Width = 90
+        '
+        'GridColumnIdDesign
+        '
+        Me.GridColumnIdDesign.Caption = "id design"
+        Me.GridColumnIdDesign.FieldName = "id_design"
+        Me.GridColumnIdDesign.Name = "GridColumnIdDesign"
+        Me.GridColumnIdDesign.OptionsColumn.AllowEdit = False
+        Me.GridColumnIdDesign.OptionsColumn.ShowInCustomizationForm = False
+        '
+        'GridColumnIdProduct
+        '
+        Me.GridColumnIdProduct.Caption = "Id Product"
+        Me.GridColumnIdProduct.FieldName = "id_product"
+        Me.GridColumnIdProduct.Name = "GridColumnIdProduct"
+        Me.GridColumnIdProduct.OptionsColumn.AllowEdit = False
+        Me.GridColumnIdProduct.OptionsColumn.ShowInCustomizationForm = False
+        '
+        'GridColumnIdSample
+        '
+        Me.GridColumnIdSample.Caption = "Id Sample"
+        Me.GridColumnIdSample.FieldName = "id_sample"
+        Me.GridColumnIdSample.Name = "GridColumnIdSample"
+        Me.GridColumnIdSample.OptionsColumn.AllowEdit = False
+        Me.GridColumnIdSample.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.[False]
+        Me.GridColumnIdSample.OptionsColumn.ShowInCustomizationForm = False
+        '
+        'GridColumnIdSalesOrderDet
+        '
+        Me.GridColumnIdSalesOrderDet.Caption = "Id Sales Order Det"
+        Me.GridColumnIdSalesOrderDet.FieldName = "id_sales_return_order_det"
+        Me.GridColumnIdSalesOrderDet.Name = "GridColumnIdSalesOrderDet"
+        Me.GridColumnIdSalesOrderDet.OptionsColumn.AllowEdit = False
+        Me.GridColumnIdSalesOrderDet.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.[False]
+        Me.GridColumnIdSalesOrderDet.OptionsColumn.ShowInCustomizationForm = False
+        '
+        'GridColumnProductName
+        '
+        Me.GridColumnProductName.Caption = "Product Name"
+        Me.GridColumnProductName.FieldName = "product_name"
+        Me.GridColumnProductName.Name = "GridColumnProductName"
+        Me.GridColumnProductName.OptionsColumn.AllowEdit = False
+        '
+        'GridColumnIdReturnCat
+        '
+        Me.GridColumnIdReturnCat.Caption = "GridColumnIdReturnCat"
+        Me.GridColumnIdReturnCat.FieldName = "id_return_cat"
+        Me.GridColumnIdReturnCat.Name = "GridColumnIdReturnCat"
+        Me.GridColumnIdReturnCat.OptionsColumn.AllowEdit = False
+        '
+        'GridColumnIdDesignPrice
+        '
+        Me.GridColumnIdDesignPrice.Caption = "Id Design Price"
+        Me.GridColumnIdDesignPrice.FieldName = "id_design_price"
+        Me.GridColumnIdDesignPrice.Name = "GridColumnIdDesignPrice"
+        Me.GridColumnIdDesignPrice.OptionsColumn.AllowEdit = False
+        '
+        'GridColumnPriceType
+        '
+        Me.GridColumnPriceType.Caption = "Price Type"
+        Me.GridColumnPriceType.FieldName = "design_price_type"
+        Me.GridColumnPriceType.Name = "GridColumnPriceType"
+        Me.GridColumnPriceType.OptionsColumn.AllowEdit = False
+        '
+        'GridColumnQtyAvail
+        '
+        Me.GridColumnQtyAvail.Caption = "Limit Qty"
+        Me.GridColumnQtyAvail.DisplayFormat.FormatString = "{0:n0}"
+        Me.GridColumnQtyAvail.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnQtyAvail.FieldName = "qty_avail"
+        Me.GridColumnQtyAvail.Name = "GridColumnQtyAvail"
+        '
+        'GridColumnFound
+        '
+        Me.GridColumnFound.Caption = "Found"
+        Me.GridColumnFound.FieldName = "is_found"
+        Me.GridColumnFound.Name = "GridColumnFound"
+        '
+        'GridColumnid_detail_on_hold
+        '
+        Me.GridColumnid_detail_on_hold.Caption = "Id Detail On Hold"
+        Me.GridColumnid_detail_on_hold.FieldName = "id_detail_on_hold"
+        Me.GridColumnid_detail_on_hold.Name = "GridColumnid_detail_on_hold"
         '
         'ReportSalesReturnOrder
         '
@@ -482,4 +714,26 @@ Partial Public Class ReportSalesReturnOrder
     Friend WithEvents LabelOLStoreOrder As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents LabelOLStoreOrderDot As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents LabelOLStoreOrderTitle As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents GridColumnNo As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnCode As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnName As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnSize As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnQty As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnPrice As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnAmount As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnRemark As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnIdSalesTarget As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnUOM As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnReturnCategory As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnIdDesign As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnIdProduct As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnIdSample As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnIdSalesOrderDet As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnProductName As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnIdReturnCat As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnIdDesignPrice As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnPriceType As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnQtyAvail As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnFound As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnid_detail_on_hold As DevExpress.XtraGrid.Columns.GridColumn
 End Class

@@ -7,7 +7,7 @@
 
     Private Sub FormPromoCollectionNew_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'cek on process
-        Dim qcek As String = "SELECT * FROM tb_ol_promo_collection c WHERE c.id_report_status<5"
+        Dim qcek As String = "SELECT * FROM tb_ol_promo_collection c WHERE c.id_report_status<5 AND c.is_use_discount_code=2 "
         Dim dcek As DataTable = execute_query(qcek, -1, True, "", "", "", "")
         If dcek.Rows.Count > 0 Then
             stopCustom("Please complete all pending propose first")
@@ -17,7 +17,7 @@
         viewPromoType()
         'cek date
         Dim min_date As DateTime
-        Dim qmin As String = "SELECT DATE(DATE_ADD(c.end_period,INTERVAL 1 DAY)) AS `min_date` FROM tb_ol_promo_collection c WHERE c.id_report_status=6 ORDER BY c.id_ol_promo_collection DESC LIMIT 1 "
+        Dim qmin As String = "SELECT DATE(DATE_ADD(c.end_period,INTERVAL 1 DAY)) AS `min_date` FROM tb_ol_promo_collection c WHERE c.id_report_status=6 AND c.is_use_discount_code=2 ORDER BY c.id_ol_promo_collection DESC LIMIT 1 "
         Dim dmin As DataTable = execute_query(qmin, -1, True, "", "", "", "")
         If dmin.Rows.Count > 0 Then
             min_date = dmin.Rows(0)("min_date")

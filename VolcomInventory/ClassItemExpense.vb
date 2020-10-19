@@ -65,7 +65,7 @@
         " + join_pay_pending + "
         LEFT JOIN tb_m_comp c ON c.id_comp = e.id_comp 
         " + q_join + "
-        WHERE e.id_item_expense>0 AND e.id_report_status!=5  "
+        WHERE e.id_item_expense>0 AND e.id_report_status!=5 "
         query += condition + " "
         query += "GROUP BY ed.id_item_expense ORDER BY e.id_item_expense " + order_type
         Return query

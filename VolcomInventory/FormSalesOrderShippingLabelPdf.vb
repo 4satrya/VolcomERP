@@ -4,6 +4,10 @@
 
     Private is_not_found As Boolean = False
 
+    Private browser_blibli As DevExpress.XtraPdfViewer.PdfViewer = New DevExpress.XtraPdfViewer.PdfViewer
+    Private browser_zalora_invoice As DevExpress.XtraPdfViewer.PdfViewer = New DevExpress.XtraPdfViewer.PdfViewer
+    Private browser_zalora_shippinglabel As DevExpress.XtraPdfViewer.PdfViewer = New DevExpress.XtraPdfViewer.PdfViewer
+
     Private Sub FormSalesOrderShippingLabelPdf_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim path As String = Application.StartupPath & "\download\"
 
@@ -60,13 +64,38 @@
 
                 writer.Close()
 
-                Dim browser As WebBrowser = New WebBrowser
+                'panel
+                Dim panel As DevExpress.XtraEditors.PanelControl = New DevExpress.XtraEditors.PanelControl
 
-                browser.Dock = DockStyle.Fill
+                panel.Dock = DockStyle.Bottom
 
-                browser.Url = New Uri(full_path_shippinglabel)
+                panel.Height = 45
 
-                Controls.Add(browser)
+                Controls.Add(panel)
+
+                'button
+                Dim button As DevExpress.XtraEditors.SimpleButton = New DevExpress.XtraEditors.SimpleButton
+
+                button.Dock = DockStyle.Right
+
+                button.Width = 100
+
+                button.Text = "Print"
+
+                AddHandler button.Click, AddressOf button_blibli_print
+
+                panel.Controls.Add(button)
+
+                'browser
+                browser_blibli.Dock = DockStyle.Fill
+
+                Dim file As IO.Stream = New IO.FileStream(full_path_shippinglabel, IO.FileMode.Open)
+
+                browser_blibli.LoadDocument(file)
+
+                Controls.Add(browser_blibli)
+
+                browser_blibli.BringToFront()
             Else
                 is_not_found = True
             End If
@@ -134,23 +163,72 @@
 
                 IO.File.WriteAllBytes(full_path_shippinglabel.Replace(".html", ".pdf"), result_shippinglabel)
 
+                'panel
+                Dim panel_invoice As DevExpress.XtraEditors.PanelControl = New DevExpress.XtraEditors.PanelControl
+
+                panel_invoice.Dock = DockStyle.Bottom
+
+                panel_invoice.Height = 45
+
+                tab.TabPages.Item(0).Controls.Add(panel_invoice)
+
+                'button
+                Dim button_invoice As DevExpress.XtraEditors.SimpleButton = New DevExpress.XtraEditors.SimpleButton
+
+                button_invoice.Dock = DockStyle.Right
+
+                button_invoice.Width = 100
+
+                button_invoice.Text = "Print"
+
+                AddHandler button_invoice.Click, AddressOf button_zalora_invoice_print
+
+                panel_invoice.Controls.Add(button_invoice)
+
                 'browser
-                Dim browser_invoice As WebBrowser = New WebBrowser
+                browser_zalora_invoice.Dock = DockStyle.Fill
 
-                browser_invoice.Dock = DockStyle.Fill
+                Dim file_invoice As IO.Stream = New IO.FileStream(full_path_invoice.Replace(".html", ".pdf"), IO.FileMode.Open)
 
-                browser_invoice.Url = New Uri(full_path_invoice.Replace(".html", ".pdf"))
+                browser_zalora_invoice.LoadDocument(file_invoice)
 
-                Dim browser_shippinglabel As WebBrowser = New WebBrowser
+                tab.TabPages.Item(0).Controls.Add(browser_zalora_invoice)
 
-                browser_shippinglabel.Dock = DockStyle.Fill
+                'panel
+                Dim panel_shippinglabel As DevExpress.XtraEditors.PanelControl = New DevExpress.XtraEditors.PanelControl
 
-                browser_shippinglabel.Url = New Uri(full_path_shippinglabel.Replace(".html", ".pdf"))
+                panel_shippinglabel.Dock = DockStyle.Bottom
 
-                tab.TabPages.Item(0).Controls.Add(browser_invoice)
-                tab.TabPages.Item(1).Controls.Add(browser_shippinglabel)
+                panel_shippinglabel.Height = 45
+
+                tab.TabPages.Item(1).Controls.Add(panel_shippinglabel)
+
+                'button
+                Dim button_shippinglabel As DevExpress.XtraEditors.SimpleButton = New DevExpress.XtraEditors.SimpleButton
+
+                button_shippinglabel.Dock = DockStyle.Right
+
+                button_shippinglabel.Width = 100
+
+                button_shippinglabel.Text = "Print"
+
+                AddHandler button_shippinglabel.Click, AddressOf button_zalora_shippinglabel_print
+
+                panel_shippinglabel.Controls.Add(button_shippinglabel)
+
+                'browser
+                browser_zalora_shippinglabel.Dock = DockStyle.Fill
+
+                Dim file_shippinglabel As IO.Stream = New IO.FileStream(full_path_shippinglabel.Replace(".html", ".pdf"), IO.FileMode.Open)
+
+                browser_zalora_shippinglabel.LoadDocument(file_shippinglabel)
+
+                tab.TabPages.Item(1).Controls.Add(browser_zalora_shippinglabel)
 
                 Controls.Add(tab)
+
+                browser_zalora_invoice.BringToFront()
+                browser_zalora_shippinglabel.BringToFront()
             Else
                 is_not_found = True
             End If
@@ -167,5 +245,17 @@
 
             Close()
         End If
+    End Sub
+
+    Sub button_blibli_print(ByVal sender As Object, ByVal e As EventArgs)
+        browser_blibli.Print()
+    End Sub
+
+    Sub button_zalora_invoice_print(ByVal sender As Object, ByVal e As EventArgs)
+        browser_zalora_invoice.Print()
+    End Sub
+
+    Sub button_zalora_shippinglabel_print(ByVal sender As Object, ByVal e As EventArgs)
+        browser_zalora_shippinglabel.Print()
     End Sub
 End Class

@@ -383,6 +383,9 @@
         ElseIf report_mark_type = "269" Then
             'Material & Trims Stock Summary Report
             FormMatStockSummary.Close()
+        ElseIf report_mark_type = "273" Then
+            'Propose raw material
+            FormMasterRawMatPps.Close()
         End If
     End Sub
     Sub show()
@@ -1306,6 +1309,10 @@ GROUP BY rec.`id_prod_order`"
             'Material & Trims Stock Summary Report
             FormMatStockSummary.id_mat_summary = id_report
             FormMatStockSummary.ShowDialog()
+        ElseIf report_mark_type = "273" Then
+            'raw material propose
+            FormMasterRawMatPps.id_pps = id_report
+            FormMasterRawMatPps.ShowDialog()
         Else
             'MsgBox(id_report)
             stopCustom("Document Not Found")
@@ -2339,6 +2346,11 @@ GROUP BY rec.`id_prod_order`"
             field_id = "id_mat_summary"
             field_number = "number"
             field_date = "created_date"
+        ElseIf report_mark_type = "273" Then
+            table_name = "tb_m_mat_det_pps"
+            field_id = "id_mat_det_pps"
+            field_number = "mat_det_code"
+            field_date = "mat_det_date"
         Else
             query = "Select '-' AS report_number, NOW() as report_date"
         End If

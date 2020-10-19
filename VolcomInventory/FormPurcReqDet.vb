@@ -680,7 +680,7 @@ GROUP BY req.`id_purc_req`"
         FormDocumentUpload.report_mark_type = rmt
         FormDocumentUpload.id_report = id_req
 
-        If is_view = "1" Or Not id_report_status = "1" Then
+        If is_view = "1" Or id_report_status = "6" Or id_report_status = "5" Then
             FormDocumentUpload.is_view = "1"
         End If
 

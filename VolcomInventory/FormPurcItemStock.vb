@@ -22,7 +22,7 @@
         Cursor = Cursors.WaitCursor
         Dim query As String = "SELECT i.id_item, i.item_desc, cat.id_item_cat, cat.item_cat,uom.uom
         FROM tb_item i
-        INNER JOIN tb_m_uom uom ON uom.id_uom=i.id_uom
+        INNER JOIN tb_m_uom uom ON uom.id_uom=i.id_uom_stock
         INNER JOIN tb_item_cat cat ON cat.id_item_cat = i.id_item_cat 
         ORDER BY i.item_desc ASC "
         viewSearchLookupQuery(SLEITem, query, "id_item", "item_desc", "id_item")

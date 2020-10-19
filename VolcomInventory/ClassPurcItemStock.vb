@@ -30,7 +30,7 @@
 	        GROUP BY a.id_item
         ) cst ON cst.id_item = a.id_item
         INNER JOIN tb_item im ON im.id_item = a.id_item
-        INNER JOIN tb_m_uom uom ON uom.id_uom=im.id_uom
+        INNER JOIN tb_m_uom uom ON uom.id_uom=im.id_uom_stock
         INNER JOIN tb_item_cat cat ON cat.id_item_cat = im.id_item_cat
         LEFT JOIN tb_m_departement dept ON dept.id_departement = a.id_departement
         GROUP BY a.id_item, a.id_departement HAVING qty>0 "

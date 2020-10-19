@@ -41,20 +41,24 @@ Partial Class FormPromoCollection
         Me.GridColumnid_report_status = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnreport_status = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnnote = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumndiscount_title_propose = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnis_use_discount_code = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnuse_discount_code = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.XTCPromo = New DevExpress.XtraTab.XtraTabControl()
         Me.XTPPromoProposed = New DevExpress.XtraTab.XtraTabPage()
         Me.XTPDiscountCodes = New DevExpress.XtraTab.XtraTabPage()
         Me.GCDC = New DevExpress.XtraGrid.GridControl()
         Me.GVDC = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
-        Me.BtnSync = New DevExpress.XtraEditors.SimpleButton()
-        Me.BtnRefresh = New DevExpress.XtraEditors.SimpleButton()
-        Me.BtnPrint = New DevExpress.XtraEditors.SimpleButton()
         Me.GridColumnid_ol_promo_collection_dc = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumndiscount_title = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumndisc_code = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnstart_period_dc = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnend_period_dc = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.BtnSync = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnRefresh = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnPrint = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnCreateUseDiscount = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.GCFilter, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GCFilter.SuspendLayout()
         CType(Me.DEUntilList.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -76,6 +80,7 @@ Partial Class FormPromoCollection
         'GCFilter
         '
         Me.GCFilter.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GCFilter.Controls.Add(Me.BtnCreateUseDiscount)
         Me.GCFilter.Controls.Add(Me.BtnViewList)
         Me.GCFilter.Controls.Add(Me.BHide)
         Me.GCFilter.Controls.Add(Me.BExpand)
@@ -175,7 +180,7 @@ Partial Class FormPromoCollection
         '
         'GVData
         '
-        Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnid_ol_promo_collection, Me.GridColumnid_promo, Me.GridColumnpromo, Me.GridColumnnumber, Me.GridColumncreated_date, Me.GridColumncreated_by_name, Me.GridColumnstart_period, Me.GridColumnend_period, Me.GridColumnid_report_status, Me.GridColumnreport_status, Me.GridColumnnote})
+        Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnid_ol_promo_collection, Me.GridColumnid_promo, Me.GridColumnpromo, Me.GridColumnnumber, Me.GridColumncreated_date, Me.GridColumncreated_by_name, Me.GridColumnstart_period, Me.GridColumnend_period, Me.GridColumnid_report_status, Me.GridColumnreport_status, Me.GridColumnnote, Me.GridColumndiscount_title_propose, Me.GridColumnis_use_discount_code, Me.GridColumnuse_discount_code})
         Me.GVData.GridControl = Me.GCData
         Me.GVData.Name = "GVData"
         Me.GVData.OptionsBehavior.ReadOnly = True
@@ -201,7 +206,7 @@ Partial Class FormPromoCollection
         Me.GridColumnpromo.FieldName = "promo_name"
         Me.GridColumnpromo.Name = "GridColumnpromo"
         Me.GridColumnpromo.Visible = True
-        Me.GridColumnpromo.VisibleIndex = 1
+        Me.GridColumnpromo.VisibleIndex = 2
         '
         'GridColumnnumber
         '
@@ -219,7 +224,7 @@ Partial Class FormPromoCollection
         Me.GridColumncreated_date.FieldName = "created_date"
         Me.GridColumncreated_date.Name = "GridColumncreated_date"
         Me.GridColumncreated_date.Visible = True
-        Me.GridColumncreated_date.VisibleIndex = 2
+        Me.GridColumncreated_date.VisibleIndex = 4
         '
         'GridColumncreated_by_name
         '
@@ -227,7 +232,7 @@ Partial Class FormPromoCollection
         Me.GridColumncreated_by_name.FieldName = "created_by_name"
         Me.GridColumncreated_by_name.Name = "GridColumncreated_by_name"
         Me.GridColumncreated_by_name.Visible = True
-        Me.GridColumncreated_by_name.VisibleIndex = 3
+        Me.GridColumncreated_by_name.VisibleIndex = 5
         '
         'GridColumnstart_period
         '
@@ -237,7 +242,7 @@ Partial Class FormPromoCollection
         Me.GridColumnstart_period.FieldName = "start_period"
         Me.GridColumnstart_period.Name = "GridColumnstart_period"
         Me.GridColumnstart_period.Visible = True
-        Me.GridColumnstart_period.VisibleIndex = 4
+        Me.GridColumnstart_period.VisibleIndex = 6
         '
         'GridColumnend_period
         '
@@ -247,7 +252,7 @@ Partial Class FormPromoCollection
         Me.GridColumnend_period.FieldName = "end_period"
         Me.GridColumnend_period.Name = "GridColumnend_period"
         Me.GridColumnend_period.Visible = True
-        Me.GridColumnend_period.VisibleIndex = 5
+        Me.GridColumnend_period.VisibleIndex = 7
         '
         'GridColumnid_report_status
         '
@@ -261,13 +266,37 @@ Partial Class FormPromoCollection
         Me.GridColumnreport_status.FieldName = "report_status"
         Me.GridColumnreport_status.Name = "GridColumnreport_status"
         Me.GridColumnreport_status.Visible = True
-        Me.GridColumnreport_status.VisibleIndex = 6
+        Me.GridColumnreport_status.VisibleIndex = 8
         '
         'GridColumnnote
         '
         Me.GridColumnnote.Caption = "Note"
         Me.GridColumnnote.FieldName = "note"
         Me.GridColumnnote.Name = "GridColumnnote"
+        '
+        'GridColumndiscount_title_propose
+        '
+        Me.GridColumndiscount_title_propose.Caption = "Group Discount"
+        Me.GridColumndiscount_title_propose.FieldName = "discount_title"
+        Me.GridColumndiscount_title_propose.Name = "GridColumndiscount_title_propose"
+        Me.GridColumndiscount_title_propose.Visible = True
+        Me.GridColumndiscount_title_propose.VisibleIndex = 3
+        '
+        'GridColumnis_use_discount_code
+        '
+        Me.GridColumnis_use_discount_code.Caption = "is_use_discount_code"
+        Me.GridColumnis_use_discount_code.FieldName = "is_use_discount_code"
+        Me.GridColumnis_use_discount_code.Name = "GridColumnis_use_discount_code"
+        Me.GridColumnis_use_discount_code.OptionsColumn.Printable = DevExpress.Utils.DefaultBoolean.[False]
+        Me.GridColumnis_use_discount_code.OptionsColumn.ReadOnly = True
+        '
+        'GridColumnuse_discount_code
+        '
+        Me.GridColumnuse_discount_code.Caption = "Use Discount Code"
+        Me.GridColumnuse_discount_code.FieldName = "use_discount_code"
+        Me.GridColumnuse_discount_code.Name = "GridColumnuse_discount_code"
+        Me.GridColumnuse_discount_code.Visible = True
+        Me.GridColumnuse_discount_code.VisibleIndex = 1
         '
         'XTCPromo
         '
@@ -318,6 +347,48 @@ Partial Class FormPromoCollection
         Me.GVDC.OptionsView.ShowGroupPanel = False
         Me.GVDC.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumndiscount_title, DevExpress.Data.ColumnSortOrder.Ascending)})
         '
+        'GridColumnid_ol_promo_collection_dc
+        '
+        Me.GridColumnid_ol_promo_collection_dc.Caption = "id_ol_promo_collection"
+        Me.GridColumnid_ol_promo_collection_dc.FieldName = "id_ol_promo_collection"
+        Me.GridColumnid_ol_promo_collection_dc.Name = "GridColumnid_ol_promo_collection_dc"
+        '
+        'GridColumndiscount_title
+        '
+        Me.GridColumndiscount_title.Caption = "Title"
+        Me.GridColumndiscount_title.FieldName = "discount_title"
+        Me.GridColumndiscount_title.Name = "GridColumndiscount_title"
+        Me.GridColumndiscount_title.Visible = True
+        Me.GridColumndiscount_title.VisibleIndex = 0
+        '
+        'GridColumndisc_code
+        '
+        Me.GridColumndisc_code.Caption = "Discount Code"
+        Me.GridColumndisc_code.FieldName = "disc_code"
+        Me.GridColumndisc_code.Name = "GridColumndisc_code"
+        Me.GridColumndisc_code.Visible = True
+        Me.GridColumndisc_code.VisibleIndex = 0
+        '
+        'GridColumnstart_period_dc
+        '
+        Me.GridColumnstart_period_dc.Caption = "Start"
+        Me.GridColumnstart_period_dc.DisplayFormat.FormatString = "dd MMMM yyyy HH:mm:ss"
+        Me.GridColumnstart_period_dc.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumnstart_period_dc.FieldName = "start_period"
+        Me.GridColumnstart_period_dc.Name = "GridColumnstart_period_dc"
+        Me.GridColumnstart_period_dc.Visible = True
+        Me.GridColumnstart_period_dc.VisibleIndex = 1
+        '
+        'GridColumnend_period_dc
+        '
+        Me.GridColumnend_period_dc.Caption = "End"
+        Me.GridColumnend_period_dc.DisplayFormat.FormatString = "dd MMMM yyyy HH:mm:ss"
+        Me.GridColumnend_period_dc.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumnend_period_dc.FieldName = "end_period"
+        Me.GridColumnend_period_dc.Name = "GridColumnend_period_dc"
+        Me.GridColumnend_period_dc.Visible = True
+        Me.GridColumnend_period_dc.VisibleIndex = 2
+        '
         'PanelControl1
         '
         Me.PanelControl1.Controls.Add(Me.BtnSync)
@@ -360,47 +431,15 @@ Partial Class FormPromoCollection
         Me.BtnPrint.TabIndex = 2
         Me.BtnPrint.Text = "Print"
         '
-        'GridColumnid_ol_promo_collection_dc
+        'BtnCreateUseDiscount
         '
-        Me.GridColumnid_ol_promo_collection_dc.Caption = "id_ol_promo_collection"
-        Me.GridColumnid_ol_promo_collection_dc.FieldName = "id_ol_promo_collection"
-        Me.GridColumnid_ol_promo_collection_dc.Name = "GridColumnid_ol_promo_collection_dc"
-        '
-        'GridColumndiscount_title
-        '
-        Me.GridColumndiscount_title.Caption = "Title"
-        Me.GridColumndiscount_title.FieldName = "discount_title"
-        Me.GridColumndiscount_title.Name = "GridColumndiscount_title"
-        Me.GridColumndiscount_title.Visible = True
-        Me.GridColumndiscount_title.VisibleIndex = 0
-        '
-        'GridColumndisc_code
-        '
-        Me.GridColumndisc_code.Caption = "Discount Code"
-        Me.GridColumndisc_code.FieldName = "disc_code"
-        Me.GridColumndisc_code.Name = "GridColumndisc_code"
-        Me.GridColumndisc_code.Visible = True
-        Me.GridColumndisc_code.VisibleIndex = 0
-        '
-        'GridColumnstart_period_dc
-        '
-        Me.GridColumnstart_period_dc.Caption = "Start"
-        Me.GridColumnstart_period_dc.DisplayFormat.FormatString = "dd MMMM yyyy HH:mm:ss"
-        Me.GridColumnstart_period_dc.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.GridColumnstart_period_dc.FieldName = "start_period"
-        Me.GridColumnstart_period_dc.Name = "GridColumnstart_period_dc"
-        Me.GridColumnstart_period_dc.Visible = True
-        Me.GridColumnstart_period_dc.VisibleIndex = 1
-        '
-        'GridColumnend_period_dc
-        '
-        Me.GridColumnend_period_dc.Caption = "End"
-        Me.GridColumnend_period_dc.DisplayFormat.FormatString = "dd MMMM yyyy HH:mm:ss"
-        Me.GridColumnend_period_dc.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.GridColumnend_period_dc.FieldName = "end_period"
-        Me.GridColumnend_period_dc.Name = "GridColumnend_period_dc"
-        Me.GridColumnend_period_dc.Visible = True
-        Me.GridColumnend_period_dc.VisibleIndex = 2
+        Me.BtnCreateUseDiscount.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnCreateUseDiscount.Image = CType(resources.GetObject("BtnCreateUseDiscount.Image"), System.Drawing.Image)
+        Me.BtnCreateUseDiscount.Location = New System.Drawing.Point(612, 2)
+        Me.BtnCreateUseDiscount.Name = "BtnCreateUseDiscount"
+        Me.BtnCreateUseDiscount.Size = New System.Drawing.Size(185, 41)
+        Me.BtnCreateUseDiscount.TabIndex = 8899
+        Me.BtnCreateUseDiscount.Text = "Propose Use Discount Code"
         '
         'FormPromoCollection
         '
@@ -466,4 +505,8 @@ Partial Class FormPromoCollection
     Friend WithEvents GridColumndisc_code As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnstart_period_dc As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnend_period_dc As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumndiscount_title_propose As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnis_use_discount_code As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnuse_discount_code As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BtnCreateUseDiscount As DevExpress.XtraEditors.SimpleButton
 End Class

@@ -29,7 +29,7 @@
             date_until_selected = DateTime.Parse(DEUntilList.EditValue.ToString).ToString("yyyy-MM-dd")
         Catch ex As Exception
         End Try
-        Dim cond As String = "AND p.is_use_discount_code=2 AND (p.created_date>='" + date_from_selected + "' AND p.created_date<='" + date_until_selected + "') "
+        Dim cond As String = "AND (p.created_date>='" + date_from_selected + "' AND p.created_date<='" + date_until_selected + "') "
 
         Dim query_c As ClassPromoCollection = New ClassPromoCollection()
         Dim query As String = query_c.queryMain(cond, "2")
@@ -129,5 +129,26 @@
 
     Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles BtnPrint.Click
         print(GCDC, "Discount Code List")
+    End Sub
+
+    Private Sub BtnCreateUseDiscount_Click(sender As Object, e As EventArgs) Handles BtnCreateUseDiscount.Click
+        Cursor = Cursors.WaitCursor
+        If Not FormMain.SplashScreenManager1.IsSplashFormVisible Then
+            FormMain.SplashScreenManager1.ShowWaitForm()
+        End If
+        Try
+            FormMain.SplashScreenManager1.SetWaitFormDescription("Sync group discount")
+            Dim s As New ClassShopifyApi()
+            s.get_discount_code()
+        Catch ex As Exception
+            stopCustom(ex.ToString)
+        End Try
+        FormMain.SplashScreenManager1.CloseWaitForm()
+        Cursor = Cursors.Default
+
+        'pilih discount code
+        Cursor = Cursors.WaitCursor
+        FormPromoCollectionDiscCode.ShowDialog()
+        Cursor = Cursors.Default
     End Sub
 End Class

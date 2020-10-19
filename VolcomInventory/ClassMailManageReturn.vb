@@ -1,4 +1,4 @@
-﻿Public Class ClassMailManage
+﻿Public Class ClassMailManageReturn
     Public id_mail_manage As String = "-1"
     Public mail_subject As String = ""
     Public mail_title As String = ""
@@ -38,7 +38,7 @@
 	        FROM tb_mail_manage_member m WHERE m.id_mail_member_type=2 
 	        GROUP BY m.id_mail_manage
         ) mto ON mto.id_mail_manage = m.id_mail_manage
-        WHERE m.id_mail_manage>0 AND m.report_mark_type <> 45 "
+        WHERE m.id_mail_manage>0 AND m.report_mark_type = 45 "
         query += condition + " "
         query += "ORDER BY m.id_mail_manage " + order_type
         Return query

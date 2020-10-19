@@ -28,6 +28,13 @@
         FormLetterOfStatementDet.TEAllowHouse.EditValue = GVList.GetFocusedRowCellValue("allow_house")
         FormLetterOfStatementDet.TEAllowCar.EditValue = GVList.GetFocusedRowCellValue("allow_car")
 
+        FormLetterOfStatementDet.basic_salary = GVList.GetFocusedRowCellValue("basic_salary").ToString
+        FormLetterOfStatementDet.allow_job = GVList.GetFocusedRowCellValue("allow_job").ToString
+        FormLetterOfStatementDet.allow_meal = GVList.GetFocusedRowCellValue("allow_meal").ToString
+        FormLetterOfStatementDet.allow_trans = GVList.GetFocusedRowCellValue("allow_trans").ToString
+        FormLetterOfStatementDet.allow_house = GVList.GetFocusedRowCellValue("allow_house").ToString
+        FormLetterOfStatementDet.allow_car = GVList.GetFocusedRowCellValue("allow_car").ToString
+
         Close()
     End Sub
 

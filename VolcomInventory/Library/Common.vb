@@ -3316,6 +3316,21 @@ WHERE b.report_mark_type='" & report_mark_type_to_cancel & "' AND a.id_mark_asg!
 
         Return status
     End Function
+
+    Function check_already_submit(ByVal report_mark_type As String, ByVal id_report As String)
+        Dim status As Boolean = True
+
+        Dim query As String = ""
+        query = String.Format("SELECT id_report_mark FROM tb_report_mark WHERE report_mark_type='{0}' AND id_report='{1}' ", report_mark_type, id_report)
+        Dim dt As DataTable = execute_query(query, -1, True, "", "", "", "")
+
+        If dt.Rows.Count > 0 Then
+            status = False
+        End If
+
+        Return status
+    End Function
+
     Function check_edit_report_status(ByVal id_report_status As String, ByVal report_mark_type As String, ByVal id_report As String)
         Dim status As Boolean = True
 

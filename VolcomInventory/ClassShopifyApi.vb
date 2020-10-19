@@ -718,8 +718,8 @@ GROUP BY p.sku"
                                         End Try
                                         start_period = DateTime.Parse(row("starts_at").ToString).ToString("yyyy-MM-dd HH:mm:ss")
                                         end_period = DateTime.Parse(row("ends_at").ToString).ToString("yyyy-MM-dd HH:mm:ss")
-                                        Dim query_prm_head As String = "INSERT INTO tb_ol_promo_collection(id_promo, price_rule_id, promo_name, discount_title, value_type, value, once_per_customer,usage_limit,is_use_discount_code, created_date, start_period, end_period, id_report_status, is_confirm) 
-                                        VALUES('0', '" + price_rule_id + "', '" + discount_title + "', '" + discount_title + "', '" + value_type + "', '" + value + "', '" + once_per_customer + "', '" + usage_limit + "', '1', NOW(), '" + start_period + "', '" + end_period + "','6','1');SELECT LAST_INSERT_ID(); "
+                                        Dim query_prm_head As String = "INSERT INTO tb_ol_promo_collection(id_promo, price_rule_id, promo_name, discount_title, value_type, value, once_per_customer,usage_limit,is_use_discount_code, created_date, created_by, start_period, end_period, id_report_status, is_confirm) 
+                                        VALUES('0', '" + price_rule_id + "', '" + discount_title + "', '" + discount_title + "', '" + value_type + "', '" + value + "', '" + once_per_customer + "', '" + usage_limit + "', '1', NOW(), '" + id_user + "', '" + start_period + "', '" + end_period + "','1','2');SELECT LAST_INSERT_ID(); "
                                         id_ol_promo_collection = execute_query(query_prm_head, 0, True, "", "", "", "")
                                         Dim rmt As String = "250"
                                         execute_non_query("CALL gen_number(" + id_ol_promo_collection + ", " + rmt + ")", True, "", "", "", "")

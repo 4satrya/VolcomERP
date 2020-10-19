@@ -87,8 +87,18 @@
             TEReffNumber.Properties.ReadOnly = True
             TENumber.Properties.ReadOnly = True
             '
-            LEBilling.Enabled = False
-            PCButton.Enabled = False
+            If check_edit_report_status(id_report_status_g, "36", id_trans) Then
+
+            Else
+                GVJournalDet.OptionsBehavior.Editable = False
+                MENote.Properties.ReadOnly = True
+                BAddMat.Enabled = False
+                BDelMat.Enabled = False
+                '
+                LEBilling.Enabled = False
+                PCButton.Enabled = False
+            End If
+
             view_det()
             allow_status()
             but_check()
@@ -381,10 +391,6 @@
     End Sub
 
     Sub allow_status()
-        GVJournalDet.OptionsBehavior.Editable = False
-        MENote.Properties.ReadOnly = True
-        BAddMat.Enabled = False
-        BDelMat.Enabled = False
         If check_print_report_status(id_report_status_g) Then
             DERefDate.Enabled = False
             BSave.Enabled = False

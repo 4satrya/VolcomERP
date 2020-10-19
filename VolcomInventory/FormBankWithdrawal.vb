@@ -221,6 +221,8 @@ WHERE DATE(py.date_payment) >= '" & Date.Parse(DEBBKFrom.EditValue.ToString).ToS
         Dim q_join_acc As String = ""
         Dim having_string As String = ""
 
+        Dim q_dp As String = ""
+
         If Not SLEVendor.EditValue.ToString = "0" Then
             where_string += " AND po.id_comp_contact='" & SLEVendor.EditValue.ToString & "'"
         End If
@@ -229,9 +231,11 @@ WHERE DATE(py.date_payment) >= '" & Date.Parse(DEBBKFrom.EditValue.ToString).ToS
             q_acc = ",acc.id_acc,acc.acc_name,acc.acc_description "
             q_join_acc = " INNER JOIN tb_a_acc acc ON acc.id_acc=c.id_acc_ap "
             where_string += " AND po.is_close_rec='1'"
+            q_dp = "-(payment.value)"
         ElseIf SLEPayType.EditValue.ToString = "1" Then 'DP
             q_acc = ",acc.id_acc,acc.acc_name,acc.acc_description "
             q_join_acc = " INNER JOIN tb_a_acc acc ON acc.id_acc=c.id_acc_dp "
+            q_dp = "*(payment_purc.dp_percent/100)"
         End If
 
         id_pay_type_po = SLEPayType.EditValue.ToString
@@ -261,7 +265,7 @@ WHERE DATE(py.date_payment) >= '" & Date.Parse(DEBBKFrom.EditValue.ToString).ToS
         Dim query As String = "SELECT 'no' AS is_check
 ,po.inv_number
 ,po.report_mark_type,po.is_close_pay,po.pay_due_date,po.due_date,po.id_purc_order,c.comp_number,c.comp_name,cc.contact_person,cc.contact_number,po.purc_order_number,po.date_created,emp_cre.employee_name AS emp_created,po.last_update,emp_upd.employee_name AS emp_updated,po.note
-,SUM(pod.qty) AS qty_po,(SUM(pod.qty*(pod.value-pod.discount))-po.disc_value+((SUM(pod.qty*(pod.value-pod.discount))-po.disc_value)*(po.vat_percent/100))) AS total_po
+,SUM(pod.qty) AS qty_po,((SUM(pod.qty*(pod.value-pod.discount))-po.disc_value+((SUM(pod.qty*(pod.value-pod.discount))-po.disc_value)*(po.vat_percent/100)))" + q_dp + ") AS total_po
 ,SUM(pod.qty*(pod.value-pod.discount))-po.disc_value AS amo_po
 ,((SUM(pod.qty*(pod.value-pod.discount))-po.disc_value)*(po.vat_percent/100)) AS amo_vat
 ,IFNULL(SUM(rec.qty),0) AS qty_rec,IF(ISNULL(rec.id_purc_order_det),0,SUM(rec.qty*(pod.value-pod.discount))-(SUM(rec.qty*(pod.value-pod.discount))/SUM(pod.qty*(pod.value-pod.discount))*po.disc_value)+(SUM(rec.qty*(pod.value-pod.discount))/SUM(pod.qty*(pod.value-pod.discount))*((SUM(pod.qty*(pod.value-pod.discount))-po.disc_value)*(po.vat_percent/100)))) AS total_rec
@@ -271,7 +275,7 @@ WHERE DATE(py.date_payment) >= '" & Date.Parse(DEBBKFrom.EditValue.ToString).ToS
 ,IF(po.pph_account=(SELECT id_acc_skbp FROM tb_opt_accounting),0,po.pph_total) AS pph_total,IFNULL(po.pph_account,'') AS pph_account,coa.acc_name AS pph_acc_name,coa.acc_description AS pph_acc_description
 ,IF(po.is_close_rec=1,
 	IF(ISNULL(rec.id_purc_order_det),0,SUM(rec.qty*(pod.value-pod.discount))-(SUM(rec.qty*(pod.value-pod.discount))/SUM(pod.qty*(pod.value-pod.discount))*po.disc_value)+(SUM(rec.qty*(pod.value-pod.discount))/SUM(pod.qty*(pod.value-pod.discount))*((SUM(pod.qty*(pod.value-pod.discount))-po.disc_value)*(po.vat_percent/100))))
-	,(SUM(pod.qty*(pod.value-pod.discount))-po.disc_value+((SUM(pod.qty*(pod.value-pod.discount))-po.disc_value)*(po.vat_percent/100))))-IFNULL(payment.value,0)-IF(po.pph_account=(SELECT id_acc_skbp FROM tb_opt_accounting),0,po.pph_total) AS total_due
+	,((SUM(pod.qty*(pod.value-pod.discount))-po.disc_value+((SUM(pod.qty*(pod.value-pod.discount))-po.disc_value)*(po.vat_percent/100))))" + q_dp + ")-IFNULL(payment.value,0)-IF(po.pph_account=(SELECT id_acc_skbp FROM tb_opt_accounting),0,po.pph_total) AS total_due
 ,IFNULL(payment_dp.value,0) as total_dp
 ,IFNULL(payment_pending.jml,0) as total_pending
 ,DATEDIFF(po.`due_date`,NOW()) AS due_days
@@ -317,6 +321,7 @@ LEFT JOIN
 	INNER JOIN tb_pn py ON py.id_pn=pyd.id_pn AND py.id_report_status!=6 AND py.id_report_status!=5 AND (pyd.report_mark_type='139' OR pyd.report_mark_type='202')
 	GROUP BY pyd.id_report, py.id_coa_tag
 )payment_pending ON payment_pending.id_report=po.id_purc_order AND payment_pending.id_coa_tag = tag.id_coa_tag
+LEFT JOIN tb_lookup_payment_purchasing AS payment_purc ON po.id_payment_purchasing = payment_purc.id_payment_purchasing
 WHERE po.is_cash_purchase=2 " & where_string & " {query_active} GROUP BY c_tag.id_coa_tag, po.id_purc_order " & having_string
         If XTPPOList.SelectedTabPageIndex = 0 Then
             'active
@@ -624,6 +629,12 @@ WHERE c.id_comp='" & SLEVendorExpense.EditValue & "'"
             BView.Location = New Point(438, 9)
 
             BCreatePO.Visible = False
+
+            PanelControl1.Enabled = True
+            BCreatePO.Enabled = True
+        ElseIf XTPPOList.SelectedTabPageIndex = 2 Then
+            PanelControl1.Enabled = False
+            BCreatePO.Enabled = False
         Else
             LabelControl5.Visible = True
             SLEStatusPayment.Visible = True
@@ -631,6 +642,9 @@ WHERE c.id_comp='" & SLEVendorExpense.EditValue & "'"
             BCreatePO.Visible = True
 
             BView.Location = New Point(649, 9)
+
+            PanelControl1.Enabled = True
+            BCreatePO.Enabled = True
         End If
     End Sub
 

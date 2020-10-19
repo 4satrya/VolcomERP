@@ -135,4 +135,41 @@
     Private Sub XTCList_SelectedPageChanged(sender As Object, e As DevExpress.XtraTab.TabPageChangedEventArgs) Handles XTCList.SelectedPageChanged
         pageChanged()
     End Sub
+
+    Private Sub BProposeMat_Click(sender As Object, e As EventArgs) Handles BProposeMat.Click
+        FormMasterRawMatPps.action = "ins"
+
+        'FormMasterRawMaterialDetSingle.id_mat = FormMasterRawMaterial.GVRawMat.GetFocusedRowCellValue("id_mat").ToString
+        'FormMasterRawMaterialDetSingle.LabelPrintedName.Text = FormMasterRawMaterial.GVRawMat.GetFocusedRowCellDisplayText("mat_display_name").ToString
+        'FormMasterRawMaterialDetSingle.TxtMaterialTypeCode.Text = FormMasterRawMaterial.GVRawMat.GetFocusedRowCellDisplayText("mat_code").ToString
+
+        FormMasterRawMatPps.ShowDialog()
+    End Sub
+
+    Private Sub BRefreshPPS_Click(sender As Object, e As EventArgs) Handles BRefreshPPS.Click
+        view_refresh_pps()
+    End Sub
+
+    Sub view_refresh_pps()
+        Dim q As String = "SELECT mat.mat_code,sts.report_status,pps.fob_price,pps.`id_mat_det_pps`,pps.`mat_det_code`,mat.`mat_display_name`,pps.`mat_det_display_name`,uom.`uom`,pps.`mat_det_date`,emp.`employee_name`,emp_u.`employee_name` AS emp_update,pps.`mat_det_date`,pps.`last_update_date`
+FROM `tb_m_mat_det_pps` pps
+INNER JOIN tb_m_mat mat ON mat.`id_mat`=pps.`id_mat`
+INNER JOIN tb_m_uom uom ON uom.`id_uom`=mat.`id_uom`
+INNER JOIN tb_lookup_report_status sts ON sts.id_report_status=pps.id_report_status
+LEFT JOIN tb_m_user usr ON usr.`id_user`=pps.`created_by`
+LEFT JOIN tb_m_employee emp ON emp.`employee_name`=usr.`id_user`
+LEFT JOIN tb_m_user usr_u ON usr_u.`id_user`=pps.`last_update_by`
+LEFT JOIN tb_m_employee emp_u ON emp_u.`id_employee`=usr_u.`id_employee`"
+        Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
+        GCPropose.DataSource = dt
+        GVPropose.BestFitColumns()
+    End Sub
+
+    Private Sub GVPropose_DoubleClick(sender As Object, e As EventArgs) Handles GVPropose.DoubleClick
+        If GVPropose.RowCount > 0 Then
+            FormMasterRawMatPps.action = "upd"
+            FormMasterRawMatPps.id_pps = GVPropose.GetFocusedRowCellValue("id_mat_det_pps").ToString
+            FormMasterRawMatPps.ShowDialog()
+        End If
+    End Sub
 End Class

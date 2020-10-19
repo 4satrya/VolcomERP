@@ -120,6 +120,18 @@
                             FormMasterRawMaterialDetSingle.data_insert_parameter.Rows.Add(data_insert_parameter_temp.Rows(i)("code").ToString, data_insert_parameter_temp.Rows(i)("value").ToString)
                         Next
                     End If
+                ElseIf id_pop_up = "4pps" Then
+                    data_insert_parameter_temp = FormMasterRawMatPps.data_insert_parameter.Copy()
+
+                    FormMasterRawMatPps.loadIsiParam()
+                    FormMasterRawMatPps.load_template(FormMasterRawMatPps.LETemplate.EditValue)
+
+                    FormMasterRawMatPps.data_insert_parameter.Clear()
+                    If Not data_insert_parameter_temp.Rows.Count = 0 Then
+                        For i As Integer = 0 To data_insert_parameter_temp.Rows.Count - 1
+                            FormMasterRawMatPps.data_insert_parameter.Rows.Add(data_insert_parameter_temp.Rows(i)("code").ToString, data_insert_parameter_temp.Rows(i)("value").ToString)
+                        Next
+                    End If
                 ElseIf id_pop_up = "5" Then 'raw mat
 
                     data_insert_parameter_temp = FormMasterRawMaterialSingle.data_insert_parameter.Copy()

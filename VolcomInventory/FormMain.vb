@@ -658,13 +658,13 @@ Public Class FormMain
                 FormMasterRawMaterialSingle.action = "ins"
                 FormMasterRawMaterialSingle.ShowDialog()
             ElseIf FormMasterRawMaterial.XTCMaterialType.SelectedTabPageIndex = 1 Then 'new raw material detail
-                FormMasterRawMaterialDetSingle.action = "ins"
+                'FormMasterRawMaterialDetSingle.action = "ins"
 
-                FormMasterRawMaterialDetSingle.id_mat = FormMasterRawMaterial.GVRawMat.GetFocusedRowCellValue("id_mat").ToString
-                FormMasterRawMaterialDetSingle.LabelPrintedName.Text = FormMasterRawMaterial.GVRawMat.GetFocusedRowCellDisplayText("mat_display_name").ToString
-                FormMasterRawMaterialDetSingle.TxtMaterialTypeCode.Text = FormMasterRawMaterial.GVRawMat.GetFocusedRowCellDisplayText("mat_code").ToString
+                'FormMasterRawMaterialDetSingle.id_mat = FormMasterRawMaterial.GVRawMat.GetFocusedRowCellValue("id_mat").ToString
+                'FormMasterRawMaterialDetSingle.LabelPrintedName.Text = FormMasterRawMaterial.GVRawMat.GetFocusedRowCellDisplayText("mat_display_name").ToString
+                'FormMasterRawMaterialDetSingle.TxtMaterialTypeCode.Text = FormMasterRawMaterial.GVRawMat.GetFocusedRowCellDisplayText("mat_code").ToString
 
-                FormMasterRawMaterialDetSingle.ShowDialog()
+                'FormMasterRawMaterialDetSingle.ShowDialog()
             End If
         ElseIf formName = "FormMasterOVH" Then
             'OVH

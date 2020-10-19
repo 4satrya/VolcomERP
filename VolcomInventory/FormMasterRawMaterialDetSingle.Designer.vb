@@ -24,6 +24,7 @@ Partial Class FormMasterRawMaterialDetSingle
         Me.RepositoryItemSearchLookUpEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit()
         Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
         Me.PCLotTitle = New DevExpress.XtraEditors.PanelControl()
+        Me.BRevise = New DevExpress.XtraEditors.SimpleButton()
         Me.LabelPrintedName = New DevExpress.XtraEditors.LabelControl()
         Me.LabelDetailMaterial = New DevExpress.XtraEditors.LabelControl()
         Me.XTCDetSample = New DevExpress.XtraTab.XtraTabControl()
@@ -177,6 +178,7 @@ Partial Class FormMasterRawMaterialDetSingle
         Me.PCLotTitle.Appearance.BorderColor = System.Drawing.Color.White
         Me.PCLotTitle.Appearance.Options.UseBackColor = True
         Me.PCLotTitle.Appearance.Options.UseBorderColor = True
+        Me.PCLotTitle.Controls.Add(Me.BRevise)
         Me.PCLotTitle.Controls.Add(Me.LabelPrintedName)
         Me.PCLotTitle.Controls.Add(Me.LabelDetailMaterial)
         Me.PCLotTitle.Dock = System.Windows.Forms.DockStyle.Top
@@ -185,6 +187,16 @@ Partial Class FormMasterRawMaterialDetSingle
         Me.PCLotTitle.Name = "PCLotTitle"
         Me.PCLotTitle.Size = New System.Drawing.Size(979, 46)
         Me.PCLotTitle.TabIndex = 12
+        '
+        'BRevise
+        '
+        Me.BRevise.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BRevise.Image = CType(resources.GetObject("BRevise.Image"), System.Drawing.Image)
+        Me.BRevise.Location = New System.Drawing.Point(872, 2)
+        Me.BRevise.Name = "BRevise"
+        Me.BRevise.Size = New System.Drawing.Size(105, 42)
+        Me.BRevise.TabIndex = 10
+        Me.BRevise.Text = "Revise"
         '
         'LabelPrintedName
         '
@@ -368,7 +380,7 @@ Partial Class FormMasterRawMaterialDetSingle
         '
         'BGenerate
         '
-        Me.BGenerate.Location = New System.Drawing.Point(278, 0)
+        Me.BGenerate.Location = New System.Drawing.Point(278, 6)
         Me.BGenerate.Name = "BGenerate"
         Me.BGenerate.Size = New System.Drawing.Size(86, 23)
         Me.BGenerate.TabIndex = 8
@@ -376,11 +388,13 @@ Partial Class FormMasterRawMaterialDetSingle
         '
         'BSave
         '
-        Me.BSave.Location = New System.Drawing.Point(370, 0)
+        Me.BSave.Enabled = False
+        Me.BSave.Location = New System.Drawing.Point(370, 6)
         Me.BSave.Name = "BSave"
         Me.BSave.Size = New System.Drawing.Size(70, 23)
         Me.BSave.TabIndex = 9
         Me.BSave.Text = "Save"
+        Me.BSave.Visible = False
         '
         'PanC1
         '
@@ -695,6 +709,7 @@ Partial Class FormMasterRawMaterialDetSingle
         Me.BSetPrice.Size = New System.Drawing.Size(149, 44)
         Me.BSetPrice.TabIndex = 14
         Me.BSetPrice.Text = "Set Default PO Price"
+        Me.BSetPrice.Visible = False
         '
         'BSetDefault
         '
@@ -728,6 +743,7 @@ Partial Class FormMasterRawMaterialDetSingle
         '
         'BtnDelete
         '
+        Me.BtnDelete.Enabled = False
         Me.BtnDelete.ImageIndex = 4
         Me.BtnDelete.ImageList = Me.LargeImageCollection
         Me.BtnDelete.Location = New System.Drawing.Point(568, 12)
@@ -735,6 +751,7 @@ Partial Class FormMasterRawMaterialDetSingle
         Me.BtnDelete.Size = New System.Drawing.Size(91, 44)
         Me.BtnDelete.TabIndex = 2
         Me.BtnDelete.Text = "Delete"
+        Me.BtnDelete.Visible = False
         '
         'XtraTabControl1
         '
@@ -1121,4 +1138,5 @@ Partial Class FormMasterRawMaterialDetSingle
     Friend WithEvents GridColumnDescRange As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents BSetPrice As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents GridColumn12 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BRevise As DevExpress.XtraEditors.SimpleButton
 End Class

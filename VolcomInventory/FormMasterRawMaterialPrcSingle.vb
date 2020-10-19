@@ -3,6 +3,7 @@
     Public id_mat_det_price As String
     Public is_can_edit_cost As Boolean = True
     Public is_can_edit_bulk As Boolean = True
+    Public is_can_edit_price As Boolean = True
     'Form Load
     Private Sub FormRawMaterialPrcSingle_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Dim def_dec As Decimal = 0.0
@@ -30,6 +31,14 @@
         Else
             TEQtyinBulk.Enabled = False
             TEUnit.Enabled = False
+        End If
+
+        If Not is_can_edit_price Then
+            LECurrency.Enabled = False
+            TxtPrice.Enabled = False
+            TxtPriceName.Enabled = False
+            SLEVendor.Enabled = False
+            SLEVendorContact.Enabled = False
         End If
     End Sub
     'ActionLoad

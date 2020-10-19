@@ -19,28 +19,62 @@ Partial Class FormMasterRawMatPps
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMasterRawMatPps))
         Me.PCLotTitle = New DevExpress.XtraEditors.PanelControl()
         Me.LabelPrintedName = New DevExpress.XtraEditors.LabelControl()
         Me.LabelDetailMaterial = New DevExpress.XtraEditors.LabelControl()
         Me.PCSave = New DevExpress.XtraEditors.PanelControl()
+        Me.BMark = New DevExpress.XtraEditors.SimpleButton()
+        Me.BClose = New DevExpress.XtraEditors.SimpleButton()
         Me.BSave = New DevExpress.XtraEditors.SimpleButton()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
-        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
-        Me.BClose = New DevExpress.XtraEditors.SimpleButton()
+        Me.SLECurrency = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView4 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn13 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.SLEVendor = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView3 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColIdComp = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColCompNumber = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColCompName = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColCompAddress = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColCompCat = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.TEUOM = New DevExpress.XtraEditors.TextEdit()
+        Me.TEFOBPrice = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
+        Me.SLERange = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnDescRange = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl9 = New DevExpress.XtraEditors.LabelControl()
+        Me.BViewImage = New DevExpress.XtraEditors.SimpleButton()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
+        Me.SLEMaterialCategory = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.TxtLifetime = New DevExpress.XtraEditors.SpinEdit()
+        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
+        Me.PictureEdit1 = New DevExpress.XtraEditors.PictureEdit()
         Me.TxtDisplayName = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl8 = New DevExpress.XtraEditors.LabelControl()
         Me.TxtName = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControlUpdateName = New DevExpress.XtraEditors.LabelControl()
-        Me.PictureEdit1 = New DevExpress.XtraEditors.PictureEdit()
-        Me.LEMethod = New DevExpress.XtraEditors.LookUpEdit()
-        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
-        Me.TxtLifetime = New DevExpress.XtraEditors.SpinEdit()
-        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
-        Me.SLEMaterialCategory = New DevExpress.XtraEditors.SearchLookUpEdit()
-        Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
-        Me.BViewImage = New DevExpress.XtraEditors.SimpleButton()
+        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
+        Me.BGenerate = New DevExpress.XtraEditors.SimpleButton()
+        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
+        Me.TxtMaterialFullCode = New DevExpress.XtraEditors.TextEdit()
+        Me.GCCodeMaterial = New DevExpress.XtraGrid.GridControl()
+        Me.GVCodeMaterial = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.ColCodeParam = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.ColCodeValue = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanC1 = New DevExpress.XtraEditors.PanelControl()
         Me.BRefreshCode = New DevExpress.XtraEditors.SimpleButton()
         Me.BeditCode = New DevExpress.XtraEditors.SimpleButton()
@@ -51,47 +85,39 @@ Partial Class FormMasterRawMatPps
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.TxtMaterialTypeCode = New DevExpress.XtraEditors.TextEdit()
-        Me.GCCodeMaterial = New DevExpress.XtraGrid.GridControl()
-        Me.GVCodeMaterial = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.ColCodeParam = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.ColCodeValue = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.SLERange = New DevExpress.XtraEditors.SearchLookUpEdit()
-        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnDescRange = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.LabelControl9 = New DevExpress.XtraEditors.LabelControl()
-        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
-        Me.TxtMaterialFullCode = New DevExpress.XtraEditors.TextEdit()
-        Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
-        Me.TEFOBPrice = New DevExpress.XtraEditors.TextEdit()
-        Me.BMark = New DevExpress.XtraEditors.SimpleButton()
+        Me.EPMaterial = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.LREvise = New DevExpress.XtraEditors.LabelControl()
         CType(Me.PCLotTitle, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PCLotTitle.SuspendLayout()
         CType(Me.PCSave, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PCSave.SuspendLayout()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
-        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.PanelControl2.SuspendLayout()
-        CType(Me.TxtDisplayName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TxtName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LEMethod.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TxtLifetime.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SLECurrency.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView4, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SLEVendor.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TEUOM.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TEFOBPrice.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SLERange.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLEMaterialCategory.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtLifetime.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtDisplayName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl2.SuspendLayout()
+        CType(Me.TxtMaterialFullCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GCCodeMaterial, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVCodeMaterial, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanC1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanC1.SuspendLayout()
         CType(Me.LETemplate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtMaterialTypeCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GCCodeMaterial, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GVCodeMaterial, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.SLERange.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TxtMaterialFullCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TEFOBPrice.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.EPMaterial, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PCLotTitle
@@ -101,6 +127,7 @@ Partial Class FormMasterRawMatPps
         Me.PCLotTitle.Appearance.BorderColor = System.Drawing.Color.White
         Me.PCLotTitle.Appearance.Options.UseBackColor = True
         Me.PCLotTitle.Appearance.Options.UseBorderColor = True
+        Me.PCLotTitle.Controls.Add(Me.LREvise)
         Me.PCLotTitle.Controls.Add(Me.LabelPrintedName)
         Me.PCLotTitle.Controls.Add(Me.LabelDetailMaterial)
         Me.PCLotTitle.Dock = System.Windows.Forms.DockStyle.Top
@@ -140,6 +167,26 @@ Partial Class FormMasterRawMatPps
         Me.PCSave.Size = New System.Drawing.Size(892, 42)
         Me.PCSave.TabIndex = 14
         '
+        'BMark
+        '
+        Me.BMark.Dock = System.Windows.Forms.DockStyle.Left
+        Me.BMark.Image = CType(resources.GetObject("BMark.Image"), System.Drawing.Image)
+        Me.BMark.Location = New System.Drawing.Point(0, 0)
+        Me.BMark.Name = "BMark"
+        Me.BMark.Size = New System.Drawing.Size(97, 42)
+        Me.BMark.TabIndex = 11
+        Me.BMark.Text = "Mark"
+        '
+        'BClose
+        '
+        Me.BClose.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BClose.Image = CType(resources.GetObject("BClose.Image"), System.Drawing.Image)
+        Me.BClose.Location = New System.Drawing.Point(701, 0)
+        Me.BClose.Name = "BClose"
+        Me.BClose.Size = New System.Drawing.Size(97, 42)
+        Me.BClose.TabIndex = 10
+        Me.BClose.Text = "Close"
+        '
         'BSave
         '
         Me.BSave.Dock = System.Windows.Forms.DockStyle.Right
@@ -153,6 +200,9 @@ Partial Class FormMasterRawMatPps
         'PanelControl1
         '
         Me.PanelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelControl1.Controls.Add(Me.SLECurrency)
+        Me.PanelControl1.Controls.Add(Me.SLEVendor)
+        Me.PanelControl1.Controls.Add(Me.TEUOM)
         Me.PanelControl1.Controls.Add(Me.TEFOBPrice)
         Me.PanelControl1.Controls.Add(Me.LabelControl5)
         Me.PanelControl1.Controls.Add(Me.SLERange)
@@ -162,7 +212,6 @@ Partial Class FormMasterRawMatPps
         Me.PanelControl1.Controls.Add(Me.SLEMaterialCategory)
         Me.PanelControl1.Controls.Add(Me.TxtLifetime)
         Me.PanelControl1.Controls.Add(Me.LabelControl3)
-        Me.PanelControl1.Controls.Add(Me.LEMethod)
         Me.PanelControl1.Controls.Add(Me.LabelControl4)
         Me.PanelControl1.Controls.Add(Me.PictureEdit1)
         Me.PanelControl1.Controls.Add(Me.TxtDisplayName)
@@ -175,28 +224,306 @@ Partial Class FormMasterRawMatPps
         Me.PanelControl1.Size = New System.Drawing.Size(430, 359)
         Me.PanelControl1.TabIndex = 15
         '
-        'PanelControl2
+        'SLECurrency
         '
-        Me.PanelControl2.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
-        Me.PanelControl2.Controls.Add(Me.LabelControl2)
-        Me.PanelControl2.Controls.Add(Me.TxtMaterialFullCode)
-        Me.PanelControl2.Controls.Add(Me.GCCodeMaterial)
-        Me.PanelControl2.Controls.Add(Me.PanC1)
-        Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PanelControl2.Location = New System.Drawing.Point(430, 46)
-        Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(462, 359)
-        Me.PanelControl2.TabIndex = 16
+        Me.SLECurrency.Location = New System.Drawing.Point(209, 329)
+        Me.SLECurrency.Name = "SLECurrency"
+        Me.SLECurrency.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLECurrency.Properties.NullText = ""
+        Me.SLECurrency.Properties.ShowFooter = False
+        Me.SLECurrency.Properties.View = Me.GridView4
+        Me.SLECurrency.Size = New System.Drawing.Size(55, 20)
+        Me.SLECurrency.TabIndex = 107
         '
-        'BClose
+        'GridView4
         '
-        Me.BClose.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BClose.Image = CType(resources.GetObject("BClose.Image"), System.Drawing.Image)
-        Me.BClose.Location = New System.Drawing.Point(701, 0)
-        Me.BClose.Name = "BClose"
-        Me.BClose.Size = New System.Drawing.Size(97, 42)
-        Me.BClose.TabIndex = 10
-        Me.BClose.Text = "Close"
+        Me.GridView4.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn9, Me.GridColumn13})
+        Me.GridView4.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView4.Name = "GridView4"
+        Me.GridView4.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView4.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn9
+        '
+        Me.GridColumn9.Caption = "ID"
+        Me.GridColumn9.FieldName = "id_currency"
+        Me.GridColumn9.Name = "GridColumn9"
+        '
+        'GridColumn13
+        '
+        Me.GridColumn13.Caption = "Currency"
+        Me.GridColumn13.FieldName = "currency"
+        Me.GridColumn13.Name = "GridColumn13"
+        Me.GridColumn13.Visible = True
+        Me.GridColumn13.VisibleIndex = 0
+        '
+        'SLEVendor
+        '
+        Me.SLEVendor.Location = New System.Drawing.Point(12, 329)
+        Me.SLEVendor.Name = "SLEVendor"
+        Me.SLEVendor.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEVendor.Properties.NullText = ""
+        Me.SLEVendor.Properties.ShowFooter = False
+        Me.SLEVendor.Properties.View = Me.GridView3
+        Me.SLEVendor.Size = New System.Drawing.Size(191, 20)
+        Me.SLEVendor.TabIndex = 106
+        '
+        'GridView3
+        '
+        Me.GridView3.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn8, Me.ColIdComp, Me.ColCompNumber, Me.ColCompName, Me.ColCompAddress, Me.ColCompCat, Me.GridColumn7})
+        Me.GridView3.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView3.Name = "GridView3"
+        Me.GridView3.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView3.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn8
+        '
+        Me.GridColumn8.Caption = "ID"
+        Me.GridColumn8.FieldName = "id_comp_contact"
+        Me.GridColumn8.Name = "GridColumn8"
+        '
+        'ColIdComp
+        '
+        Me.ColIdComp.Caption = "Id Company"
+        Me.ColIdComp.FieldName = "id_comp"
+        Me.ColIdComp.Name = "ColIdComp"
+        '
+        'ColCompNumber
+        '
+        Me.ColCompNumber.Caption = "Code"
+        Me.ColCompNumber.FieldName = "comp_number"
+        Me.ColCompNumber.Name = "ColCompNumber"
+        Me.ColCompNumber.Visible = True
+        Me.ColCompNumber.VisibleIndex = 0
+        '
+        'ColCompName
+        '
+        Me.ColCompName.Caption = "Company"
+        Me.ColCompName.FieldName = "comp_name"
+        Me.ColCompName.Name = "ColCompName"
+        Me.ColCompName.Visible = True
+        Me.ColCompName.VisibleIndex = 1
+        '
+        'ColCompAddress
+        '
+        Me.ColCompAddress.Caption = "Address"
+        Me.ColCompAddress.FieldName = "address_primary"
+        Me.ColCompAddress.Name = "ColCompAddress"
+        Me.ColCompAddress.Visible = True
+        Me.ColCompAddress.VisibleIndex = 2
+        '
+        'ColCompCat
+        '
+        Me.ColCompCat.Caption = "Category"
+        Me.ColCompCat.FieldName = "comp_cat_name"
+        Me.ColCompCat.Name = "ColCompCat"
+        Me.ColCompCat.Visible = True
+        Me.ColCompCat.VisibleIndex = 3
+        '
+        'GridColumn7
+        '
+        Me.GridColumn7.Caption = "Contact Person"
+        Me.GridColumn7.FieldName = "contact_person"
+        Me.GridColumn7.Name = "GridColumn7"
+        Me.GridColumn7.Visible = True
+        Me.GridColumn7.VisibleIndex = 4
+        '
+        'TEUOM
+        '
+        Me.TEUOM.Location = New System.Drawing.Point(12, 182)
+        Me.TEUOM.Name = "TEUOM"
+        Me.TEUOM.Properties.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TEUOM.Properties.Appearance.Options.UseFont = True
+        Me.TEUOM.Properties.MaxLength = 50
+        Me.TEUOM.Properties.ReadOnly = True
+        Me.TEUOM.Size = New System.Drawing.Size(191, 22)
+        Me.TEUOM.TabIndex = 105
+        Me.TEUOM.ToolTip = "Max : 30 character."
+        Me.TEUOM.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Information
+        Me.TEUOM.ToolTipTitle = "Info"
+        '
+        'TEFOBPrice
+        '
+        Me.TEFOBPrice.Location = New System.Drawing.Point(270, 329)
+        Me.TEFOBPrice.Name = "TEFOBPrice"
+        Me.TEFOBPrice.Properties.Appearance.Options.UseTextOptions = True
+        Me.TEFOBPrice.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.TEFOBPrice.Properties.DisplayFormat.FormatString = "n2"
+        Me.TEFOBPrice.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.TEFOBPrice.Properties.Mask.EditMask = "n2"
+        Me.TEFOBPrice.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
+        Me.TEFOBPrice.Size = New System.Drawing.Size(142, 20)
+        Me.TEFOBPrice.TabIndex = 104
+        '
+        'LabelControl5
+        '
+        Me.LabelControl5.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl5.Location = New System.Drawing.Point(14, 308)
+        Me.LabelControl5.Name = "LabelControl5"
+        Me.LabelControl5.Size = New System.Drawing.Size(53, 15)
+        Me.LabelControl5.TabIndex = 103
+        Me.LabelControl5.Text = "FOB Price"
+        '
+        'SLERange
+        '
+        Me.SLERange.Location = New System.Drawing.Point(12, 280)
+        Me.SLERange.Name = "SLERange"
+        Me.SLERange.Properties.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SLERange.Properties.Appearance.Options.UseFont = True
+        Me.SLERange.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLERange.Properties.NullText = ""
+        Me.SLERange.Properties.ShowFooter = False
+        Me.SLERange.Properties.View = Me.GridView1
+        Me.SLERange.Size = New System.Drawing.Size(190, 22)
+        Me.SLERange.TabIndex = 100
+        '
+        'GridView1
+        '
+        Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn10, Me.GridColumn11, Me.GridColumnDescRange})
+        Me.GridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView1.Name = "GridView1"
+        Me.GridView1.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView1.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn10
+        '
+        Me.GridColumn10.Caption = "Id Range"
+        Me.GridColumn10.FieldName = "id_range"
+        Me.GridColumn10.Name = "GridColumn10"
+        '
+        'GridColumn11
+        '
+        Me.GridColumn11.Caption = "Range"
+        Me.GridColumn11.FieldName = "range"
+        Me.GridColumn11.Name = "GridColumn11"
+        Me.GridColumn11.Visible = True
+        Me.GridColumn11.VisibleIndex = 0
+        '
+        'GridColumnDescRange
+        '
+        Me.GridColumnDescRange.Caption = "Description"
+        Me.GridColumnDescRange.FieldName = "description_range"
+        Me.GridColumnDescRange.Name = "GridColumnDescRange"
+        Me.GridColumnDescRange.Visible = True
+        Me.GridColumnDescRange.VisibleIndex = 1
+        '
+        'LabelControl9
+        '
+        Me.LabelControl9.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl9.Location = New System.Drawing.Point(12, 259)
+        Me.LabelControl9.Name = "LabelControl9"
+        Me.LabelControl9.Size = New System.Drawing.Size(33, 15)
+        Me.LabelControl9.TabIndex = 99
+        Me.LabelControl9.Text = "Range"
+        '
+        'BViewImage
+        '
+        Me.BViewImage.Enabled = False
+        Me.BViewImage.Location = New System.Drawing.Point(223, 279)
+        Me.BViewImage.Name = "BViewImage"
+        Me.BViewImage.Size = New System.Drawing.Size(189, 23)
+        Me.BViewImage.TabIndex = 102
+        Me.BViewImage.Text = "View Image"
+        '
+        'LabelControl1
+        '
+        Me.LabelControl1.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl1.Location = New System.Drawing.Point(14, 16)
+        Me.LabelControl1.Name = "LabelControl1"
+        Me.LabelControl1.Size = New System.Drawing.Size(48, 15)
+        Me.LabelControl1.TabIndex = 101
+        Me.LabelControl1.Text = "Category"
+        '
+        'SLEMaterialCategory
+        '
+        Me.SLEMaterialCategory.Location = New System.Drawing.Point(12, 37)
+        Me.SLEMaterialCategory.Name = "SLEMaterialCategory"
+        Me.SLEMaterialCategory.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEMaterialCategory.Properties.View = Me.SearchLookUpEdit1View
+        Me.SLEMaterialCategory.Size = New System.Drawing.Size(190, 20)
+        Me.SLEMaterialCategory.TabIndex = 100
+        '
+        'SearchLookUpEdit1View
+        '
+        Me.SearchLookUpEdit1View.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn3, Me.GridColumn6, Me.GridColumn4, Me.GridColumn5})
+        Me.SearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.SearchLookUpEdit1View.Name = "SearchLookUpEdit1View"
+        Me.SearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.SearchLookUpEdit1View.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn3
+        '
+        Me.GridColumn3.Caption = "ID"
+        Me.GridColumn3.FieldName = "id_mat"
+        Me.GridColumn3.Name = "GridColumn3"
+        '
+        'GridColumn6
+        '
+        Me.GridColumn6.Caption = "Code"
+        Me.GridColumn6.FieldName = "mat_code"
+        Me.GridColumn6.Name = "GridColumn6"
+        Me.GridColumn6.Visible = True
+        Me.GridColumn6.VisibleIndex = 0
+        Me.GridColumn6.Width = 168
+        '
+        'GridColumn4
+        '
+        Me.GridColumn4.Caption = "Material"
+        Me.GridColumn4.FieldName = "mat_display_name"
+        Me.GridColumn4.Name = "GridColumn4"
+        Me.GridColumn4.Visible = True
+        Me.GridColumn4.VisibleIndex = 1
+        Me.GridColumn4.Width = 1281
+        '
+        'GridColumn5
+        '
+        Me.GridColumn5.Caption = "UOM"
+        Me.GridColumn5.FieldName = "uom"
+        Me.GridColumn5.Name = "GridColumn5"
+        Me.GridColumn5.Visible = True
+        Me.GridColumn5.VisibleIndex = 2
+        Me.GridColumn5.Width = 183
+        '
+        'TxtLifetime
+        '
+        Me.TxtLifetime.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.TxtLifetime.Location = New System.Drawing.Point(12, 231)
+        Me.TxtLifetime.Name = "TxtLifetime"
+        Me.TxtLifetime.Properties.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtLifetime.Properties.Appearance.Options.UseFont = True
+        Me.TxtLifetime.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.TxtLifetime.Properties.IsFloatValue = False
+        Me.TxtLifetime.Properties.Mask.EditMask = "N00"
+        Me.TxtLifetime.Properties.MaxValue = New Decimal(New Integer() {2147483647, 0, 0, 0})
+        Me.TxtLifetime.Size = New System.Drawing.Size(190, 22)
+        Me.TxtLifetime.TabIndex = 98
+        '
+        'LabelControl3
+        '
+        Me.LabelControl3.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl3.Location = New System.Drawing.Point(12, 210)
+        Me.LabelControl3.Name = "LabelControl3"
+        Me.LabelControl3.Size = New System.Drawing.Size(74, 15)
+        Me.LabelControl3.TabIndex = 99
+        Me.LabelControl3.Text = "Lifetime (day)"
+        '
+        'LabelControl4
+        '
+        Me.LabelControl4.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl4.Location = New System.Drawing.Point(12, 161)
+        Me.LabelControl4.Name = "LabelControl4"
+        Me.LabelControl4.Size = New System.Drawing.Size(28, 15)
+        Me.LabelControl4.TabIndex = 97
+        Me.LabelControl4.Text = "UOM"
+        '
+        'PictureEdit1
+        '
+        Me.PictureEdit1.Location = New System.Drawing.Point(223, 9)
+        Me.PictureEdit1.Name = "PictureEdit1"
+        Me.PictureEdit1.Properties.PictureStoreMode = DevExpress.XtraEditors.Controls.PictureStoreMode.Image
+        Me.PictureEdit1.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch
+        Me.PictureEdit1.Size = New System.Drawing.Size(189, 265)
+        Me.PictureEdit1.TabIndex = 95
         '
         'TxtDisplayName
         '
@@ -242,94 +569,87 @@ Partial Class FormMasterRawMatPps
         Me.LabelControlUpdateName.TabIndex = 85
         Me.LabelControlUpdateName.Text = "Description"
         '
-        'PictureEdit1
+        'PanelControl2
         '
-        Me.PictureEdit1.Location = New System.Drawing.Point(223, 9)
-        Me.PictureEdit1.Name = "PictureEdit1"
-        Me.PictureEdit1.Properties.PictureStoreMode = DevExpress.XtraEditors.Controls.PictureStoreMode.Image
-        Me.PictureEdit1.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch
-        Me.PictureEdit1.Size = New System.Drawing.Size(189, 265)
-        Me.PictureEdit1.TabIndex = 95
+        Me.PanelControl2.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelControl2.Controls.Add(Me.BGenerate)
+        Me.PanelControl2.Controls.Add(Me.LabelControl2)
+        Me.PanelControl2.Controls.Add(Me.TxtMaterialFullCode)
+        Me.PanelControl2.Controls.Add(Me.GCCodeMaterial)
+        Me.PanelControl2.Controls.Add(Me.PanC1)
+        Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PanelControl2.Location = New System.Drawing.Point(430, 46)
+        Me.PanelControl2.Name = "PanelControl2"
+        Me.PanelControl2.Size = New System.Drawing.Size(462, 359)
+        Me.PanelControl2.TabIndex = 16
         '
-        'LEMethod
+        'BGenerate
         '
-        Me.LEMethod.Location = New System.Drawing.Point(12, 182)
-        Me.LEMethod.Name = "LEMethod"
-        Me.LEMethod.Properties.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LEMethod.Properties.Appearance.Options.UseFont = True
-        Me.LEMethod.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.LEMethod.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("Id Method", "ID", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("method", "Method")})
-        Me.LEMethod.Size = New System.Drawing.Size(190, 22)
-        Me.LEMethod.TabIndex = 96
-        Me.LEMethod.ToolTip = "Optional Filled"
-        Me.LEMethod.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Information
-        Me.LEMethod.ToolTipTitle = "Info"
+        Me.BGenerate.Location = New System.Drawing.Point(344, 328)
+        Me.BGenerate.Name = "BGenerate"
+        Me.BGenerate.Size = New System.Drawing.Size(106, 23)
+        Me.BGenerate.TabIndex = 98
+        Me.BGenerate.Text = "Generate Code"
         '
-        'LabelControl4
+        'LabelControl2
         '
-        Me.LabelControl4.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl4.Location = New System.Drawing.Point(12, 161)
-        Me.LabelControl4.Name = "LabelControl4"
-        Me.LabelControl4.Size = New System.Drawing.Size(97, 15)
-        Me.LabelControl4.TabIndex = 97
-        Me.LabelControl4.Text = "Inventory Method"
+        Me.LabelControl2.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl2.Location = New System.Drawing.Point(12, 308)
+        Me.LabelControl2.Name = "LabelControl2"
+        Me.LabelControl2.Size = New System.Drawing.Size(78, 15)
+        Me.LabelControl2.TabIndex = 97
+        Me.LabelControl2.Text = "Material Code"
         '
-        'TxtLifetime
+        'TxtMaterialFullCode
         '
-        Me.TxtLifetime.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.TxtLifetime.Location = New System.Drawing.Point(12, 231)
-        Me.TxtLifetime.Name = "TxtLifetime"
-        Me.TxtLifetime.Properties.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtLifetime.Properties.Appearance.Options.UseFont = True
-        Me.TxtLifetime.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
-        Me.TxtLifetime.Properties.IsFloatValue = False
-        Me.TxtLifetime.Properties.Mask.EditMask = "N00"
-        Me.TxtLifetime.Properties.MaxValue = New Decimal(New Integer() {2147483647, 0, 0, 0})
-        Me.TxtLifetime.Size = New System.Drawing.Size(190, 22)
-        Me.TxtLifetime.TabIndex = 98
+        Me.TxtMaterialFullCode.Location = New System.Drawing.Point(12, 329)
+        Me.TxtMaterialFullCode.Name = "TxtMaterialFullCode"
+        Me.TxtMaterialFullCode.Properties.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtMaterialFullCode.Properties.Appearance.Options.UseFont = True
+        Me.TxtMaterialFullCode.Size = New System.Drawing.Size(326, 22)
+        Me.TxtMaterialFullCode.TabIndex = 96
         '
-        'LabelControl3
+        'GCCodeMaterial
         '
-        Me.LabelControl3.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl3.Location = New System.Drawing.Point(12, 210)
-        Me.LabelControl3.Name = "LabelControl3"
-        Me.LabelControl3.Size = New System.Drawing.Size(74, 15)
-        Me.LabelControl3.TabIndex = 99
-        Me.LabelControl3.Text = "Lifetime (day)"
+        Me.GCCodeMaterial.Location = New System.Drawing.Point(11, 68)
+        Me.GCCodeMaterial.MainView = Me.GVCodeMaterial
+        Me.GCCodeMaterial.Name = "GCCodeMaterial"
+        Me.GCCodeMaterial.Size = New System.Drawing.Size(440, 234)
+        Me.GCCodeMaterial.TabIndex = 9
+        Me.GCCodeMaterial.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVCodeMaterial})
         '
-        'SLEMaterialCategory
+        'GVCodeMaterial
         '
-        Me.SLEMaterialCategory.Location = New System.Drawing.Point(12, 37)
-        Me.SLEMaterialCategory.Name = "SLEMaterialCategory"
-        Me.SLEMaterialCategory.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.SLEMaterialCategory.Properties.View = Me.SearchLookUpEdit1View
-        Me.SLEMaterialCategory.Size = New System.Drawing.Size(190, 20)
-        Me.SLEMaterialCategory.TabIndex = 100
+        Me.GVCodeMaterial.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ColCodeParam, Me.ColCodeValue})
+        Me.GVCodeMaterial.GridControl = Me.GCCodeMaterial
+        Me.GVCodeMaterial.Name = "GVCodeMaterial"
+        Me.GVCodeMaterial.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[True]
+        Me.GVCodeMaterial.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.[True]
+        Me.GVCodeMaterial.OptionsCustomization.AllowColumnMoving = False
+        Me.GVCodeMaterial.OptionsCustomization.AllowFilter = False
+        Me.GVCodeMaterial.OptionsCustomization.AllowQuickHideColumns = False
+        Me.GVCodeMaterial.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GVCodeMaterial.OptionsView.EnableAppearanceEvenRow = True
+        Me.GVCodeMaterial.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never
+        Me.GVCodeMaterial.OptionsView.ShowGroupPanel = False
+        Me.GVCodeMaterial.OptionsView.ShowIndicator = False
         '
-        'SearchLookUpEdit1View
+        'ColCodeParam
         '
-        Me.SearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
-        Me.SearchLookUpEdit1View.Name = "SearchLookUpEdit1View"
-        Me.SearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = False
-        Me.SearchLookUpEdit1View.OptionsView.ShowGroupPanel = False
+        Me.ColCodeParam.Caption = "Category"
+        Me.ColCodeParam.FieldName = "code"
+        Me.ColCodeParam.Name = "ColCodeParam"
+        Me.ColCodeParam.OptionsColumn.ReadOnly = True
+        Me.ColCodeParam.Visible = True
+        Me.ColCodeParam.VisibleIndex = 0
         '
-        'LabelControl1
+        'ColCodeValue
         '
-        Me.LabelControl1.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl1.Location = New System.Drawing.Point(14, 16)
-        Me.LabelControl1.Name = "LabelControl1"
-        Me.LabelControl1.Size = New System.Drawing.Size(48, 15)
-        Me.LabelControl1.TabIndex = 101
-        Me.LabelControl1.Text = "Category"
-        '
-        'BViewImage
-        '
-        Me.BViewImage.Enabled = False
-        Me.BViewImage.Location = New System.Drawing.Point(223, 279)
-        Me.BViewImage.Name = "BViewImage"
-        Me.BViewImage.Size = New System.Drawing.Size(189, 23)
-        Me.BViewImage.TabIndex = 102
-        Me.BViewImage.Text = "View Image"
+        Me.ColCodeValue.Caption = "Value"
+        Me.ColCodeValue.FieldName = "value"
+        Me.ColCodeValue.Name = "ColCodeValue"
+        Me.ColCodeValue.Visible = True
+        Me.ColCodeValue.VisibleIndex = 1
         '
         'PanC1
         '
@@ -426,147 +746,19 @@ Partial Class FormMasterRawMatPps
         Me.TxtMaterialTypeCode.Size = New System.Drawing.Size(138, 22)
         Me.TxtMaterialTypeCode.TabIndex = 4
         '
-        'GCCodeMaterial
+        'EPMaterial
         '
-        Me.GCCodeMaterial.Location = New System.Drawing.Point(11, 68)
-        Me.GCCodeMaterial.MainView = Me.GVCodeMaterial
-        Me.GCCodeMaterial.Name = "GCCodeMaterial"
-        Me.GCCodeMaterial.Size = New System.Drawing.Size(440, 234)
-        Me.GCCodeMaterial.TabIndex = 9
-        Me.GCCodeMaterial.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVCodeMaterial})
+        Me.EPMaterial.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink
+        Me.EPMaterial.ContainerControl = Me
         '
-        'GVCodeMaterial
+        'LREvise
         '
-        Me.GVCodeMaterial.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ColCodeParam, Me.ColCodeValue})
-        Me.GVCodeMaterial.GridControl = Me.GCCodeMaterial
-        Me.GVCodeMaterial.Name = "GVCodeMaterial"
-        Me.GVCodeMaterial.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[True]
-        Me.GVCodeMaterial.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.[True]
-        Me.GVCodeMaterial.OptionsCustomization.AllowColumnMoving = False
-        Me.GVCodeMaterial.OptionsCustomization.AllowFilter = False
-        Me.GVCodeMaterial.OptionsCustomization.AllowQuickHideColumns = False
-        Me.GVCodeMaterial.OptionsSelection.EnableAppearanceFocusedCell = False
-        Me.GVCodeMaterial.OptionsView.EnableAppearanceEvenRow = True
-        Me.GVCodeMaterial.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never
-        Me.GVCodeMaterial.OptionsView.ShowGroupPanel = False
-        Me.GVCodeMaterial.OptionsView.ShowIndicator = False
-        '
-        'ColCodeParam
-        '
-        Me.ColCodeParam.Caption = "Category"
-        Me.ColCodeParam.FieldName = "code"
-        Me.ColCodeParam.Name = "ColCodeParam"
-        Me.ColCodeParam.OptionsColumn.ReadOnly = True
-        Me.ColCodeParam.Visible = True
-        Me.ColCodeParam.VisibleIndex = 0
-        '
-        'ColCodeValue
-        '
-        Me.ColCodeValue.Caption = "Value"
-        Me.ColCodeValue.FieldName = "value"
-        Me.ColCodeValue.Name = "ColCodeValue"
-        Me.ColCodeValue.Visible = True
-        Me.ColCodeValue.VisibleIndex = 1
-        '
-        'SLERange
-        '
-        Me.SLERange.Location = New System.Drawing.Point(12, 280)
-        Me.SLERange.Name = "SLERange"
-        Me.SLERange.Properties.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SLERange.Properties.Appearance.Options.UseFont = True
-        Me.SLERange.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.SLERange.Properties.NullText = ""
-        Me.SLERange.Properties.ShowFooter = False
-        Me.SLERange.Properties.View = Me.GridView1
-        Me.SLERange.Size = New System.Drawing.Size(190, 22)
-        Me.SLERange.TabIndex = 100
-        '
-        'GridView1
-        '
-        Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn10, Me.GridColumn11, Me.GridColumnDescRange})
-        Me.GridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
-        Me.GridView1.Name = "GridView1"
-        Me.GridView1.OptionsSelection.EnableAppearanceFocusedCell = False
-        Me.GridView1.OptionsView.ShowGroupPanel = False
-        '
-        'GridColumn10
-        '
-        Me.GridColumn10.Caption = "Id Range"
-        Me.GridColumn10.FieldName = "id_range"
-        Me.GridColumn10.Name = "GridColumn10"
-        '
-        'GridColumn11
-        '
-        Me.GridColumn11.Caption = "Range"
-        Me.GridColumn11.FieldName = "range"
-        Me.GridColumn11.Name = "GridColumn11"
-        Me.GridColumn11.Visible = True
-        Me.GridColumn11.VisibleIndex = 0
-        '
-        'GridColumnDescRange
-        '
-        Me.GridColumnDescRange.Caption = "Description"
-        Me.GridColumnDescRange.FieldName = "description_range"
-        Me.GridColumnDescRange.Name = "GridColumnDescRange"
-        Me.GridColumnDescRange.Visible = True
-        Me.GridColumnDescRange.VisibleIndex = 1
-        '
-        'LabelControl9
-        '
-        Me.LabelControl9.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl9.Location = New System.Drawing.Point(12, 259)
-        Me.LabelControl9.Name = "LabelControl9"
-        Me.LabelControl9.Size = New System.Drawing.Size(33, 15)
-        Me.LabelControl9.TabIndex = 99
-        Me.LabelControl9.Text = "Range"
-        '
-        'LabelControl2
-        '
-        Me.LabelControl2.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl2.Location = New System.Drawing.Point(12, 308)
-        Me.LabelControl2.Name = "LabelControl2"
-        Me.LabelControl2.Size = New System.Drawing.Size(78, 15)
-        Me.LabelControl2.TabIndex = 97
-        Me.LabelControl2.Text = "Material Code"
-        '
-        'TxtMaterialFullCode
-        '
-        Me.TxtMaterialFullCode.Location = New System.Drawing.Point(12, 329)
-        Me.TxtMaterialFullCode.Name = "TxtMaterialFullCode"
-        Me.TxtMaterialFullCode.Properties.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtMaterialFullCode.Properties.Appearance.Options.UseFont = True
-        Me.TxtMaterialFullCode.Size = New System.Drawing.Size(439, 22)
-        Me.TxtMaterialFullCode.TabIndex = 96
-        '
-        'LabelControl5
-        '
-        Me.LabelControl5.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl5.Location = New System.Drawing.Point(14, 308)
-        Me.LabelControl5.Name = "LabelControl5"
-        Me.LabelControl5.Size = New System.Drawing.Size(53, 15)
-        Me.LabelControl5.TabIndex = 103
-        Me.LabelControl5.Text = "FOB Price"
-        '
-        'TEFOBPrice
-        '
-        Me.TEFOBPrice.Location = New System.Drawing.Point(12, 329)
-        Me.TEFOBPrice.Name = "TEFOBPrice"
-        Me.TEFOBPrice.Properties.DisplayFormat.FormatString = "n2"
-        Me.TEFOBPrice.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.TEFOBPrice.Properties.Mask.EditMask = "n2"
-        Me.TEFOBPrice.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
-        Me.TEFOBPrice.Size = New System.Drawing.Size(400, 20)
-        Me.TEFOBPrice.TabIndex = 104
-        '
-        'BMark
-        '
-        Me.BMark.Dock = System.Windows.Forms.DockStyle.Left
-        Me.BMark.Image = CType(resources.GetObject("BMark.Image"), System.Drawing.Image)
-        Me.BMark.Location = New System.Drawing.Point(0, 0)
-        Me.BMark.Name = "BMark"
-        Me.BMark.Size = New System.Drawing.Size(97, 42)
-        Me.BMark.TabIndex = 11
-        Me.BMark.Text = "Mark"
+        Me.LREvise.Appearance.Font = New System.Drawing.Font("Calibri", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LREvise.Location = New System.Drawing.Point(832, 10)
+        Me.LREvise.Name = "LREvise"
+        Me.LREvise.Size = New System.Drawing.Size(48, 26)
+        Me.LREvise.TabIndex = 5
+        Me.LREvise.Text = "Revisi"
         '
         'FormMasterRawMatPps
         '
@@ -591,28 +783,33 @@ Partial Class FormMasterRawMatPps
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         Me.PanelControl1.PerformLayout()
+        CType(Me.SLECurrency.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SLEVendor.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TEUOM.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TEFOBPrice.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SLERange.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SLEMaterialCategory.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtLifetime.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtDisplayName.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtName.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl2.ResumeLayout(False)
         Me.PanelControl2.PerformLayout()
-        CType(Me.TxtDisplayName.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TxtName.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LEMethod.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TxtLifetime.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.SLEMaterialCategory.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtMaterialFullCode.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GCCodeMaterial, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVCodeMaterial, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanC1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanC1.ResumeLayout(False)
         Me.PanC1.PerformLayout()
         CType(Me.LETemplate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtMaterialTypeCode.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GCCodeMaterial, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GVCodeMaterial, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.SLERange.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TxtMaterialFullCode.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TEFOBPrice.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.EPMaterial, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -630,7 +827,6 @@ Partial Class FormMasterRawMatPps
     Friend WithEvents TxtName As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelControlUpdateName As DevExpress.XtraEditors.LabelControl
     Friend WithEvents PictureEdit1 As DevExpress.XtraEditors.PictureEdit
-    Friend WithEvents LEMethod As DevExpress.XtraEditors.LookUpEdit
     Friend WithEvents LabelControl4 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents SLEMaterialCategory As DevExpress.XtraEditors.SearchLookUpEdit
@@ -663,4 +859,25 @@ Partial Class FormMasterRawMatPps
     Friend WithEvents TxtMaterialFullCode As DevExpress.XtraEditors.TextEdit
     Friend WithEvents TEFOBPrice As DevExpress.XtraEditors.TextEdit
     Friend WithEvents BMark As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents TEUOM As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents GridColumn3 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BGenerate As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents EPMaterial As ErrorProvider
+    Friend WithEvents SLEVendor As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView3 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents ColIdComp As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ColCompNumber As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ColCompName As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ColCompAddress As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents ColCompCat As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn8 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn7 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents SLECurrency As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView4 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn9 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn13 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LREvise As DevExpress.XtraEditors.LabelControl
 End Class

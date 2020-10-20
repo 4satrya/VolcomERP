@@ -238,7 +238,7 @@
     Private Sub BtnViewRet_Click(sender As Object, e As EventArgs) Handles BtnViewRet.Click
         Cursor = Cursors.WaitCursor
         viewReturnOrder()
-        noEdit(8)
+        'noEdit(8)
         Cursor = Cursors.Default
     End Sub
 
@@ -837,11 +837,11 @@
     End Sub
 
     Private Sub GVSalesReturnOrder_ColumnFilterChanged(sender As Object, e As EventArgs) Handles GVSalesReturnOrder.ColumnFilterChanged
-        noEdit(8)
+        'noEdit(8)
     End Sub
 
     Private Sub GVSalesReturnOrder_FocusedRowChanged(sender As Object, e As DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs) Handles GVSalesReturnOrder.FocusedRowChanged
-        noEdit(8)
+        'noEdit(8)
     End Sub
 
     Private Sub CheckEdit1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckEdit1.CheckedChanged
@@ -867,8 +867,27 @@
             stopCustom("Please select order first.")
             GVSalesReturnOrder.ActiveFilterString = ""
         Else
-            FormSalesOrderPacking.id_pop_up = "5"
-            FormSalesOrderPacking.ShowDialog()
+            'check
+            Dim is_valid As Boolean = True
+
+            For i = 0 To GVSalesReturnOrder.RowCount - 1
+                Dim alloc_cek As String = GVSalesReturnOrder.GetRowCellValue(i, "id_prepare_status").ToString
+                Dim ots As Integer = GVSalesReturnOrder.GetRowCellValue(i, "outstanding").ToString
+                If alloc_cek = "2" Then
+                    is_valid = False
+                Else
+                    If Not ots = 0 Then
+                        is_valid = False
+                    End If
+                End If
+            Next
+
+            If is_valid Then
+                FormSalesOrderPacking.id_pop_up = "5"
+                FormSalesOrderPacking.ShowDialog()
+            Else
+                stopCustom("Some order can't close.")
+            End If
         End If
         GVSalesReturnOrder.ActiveFilterString = ""
         Cursor = Cursors.Default
@@ -1106,5 +1125,52 @@
     Private Sub FormSalesOrderSvcLevel_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
         Dispose()
         FormTrackingReturn.Close()
+    End Sub
+
+    Private Sub SBInputTanggalPickup_Click(sender As Object, e As EventArgs) Handles SBInputTanggalPickup.Click
+        Cursor = Cursors.WaitCursor
+        GVSalesReturnOrder.ActiveFilterString = ""
+        GVSalesReturnOrder.ActiveFilterString = "[is_select]='Yes' "
+        If GVSalesReturnOrder.RowCount = 0 Then
+            stopCustom("Please select order first.")
+            GVSalesReturnOrder.ActiveFilterString = ""
+        Else
+            'check
+            Dim is_valid As Boolean = True
+
+            For i = 0 To GVSalesReturnOrder.RowCount - 1
+                Dim pickup_date As String = GVSalesReturnOrder.GetRowCellValue(i, "pickup_date").ToString
+                Dim pickup_date_updated_by As String = GVSalesReturnOrder.GetRowCellValue(i, "pickup_date_updated_by").ToString
+                Dim pickup_date_updated_at As String = GVSalesReturnOrder.GetRowCellValue(i, "pickup_date_updated_at").ToString
+
+                If Not pickup_date = "-" Or Not pickup_date_updated_by = "-" Or Not pickup_date_updated_at = "-" Then
+                    is_valid = False
+                End If
+            Next
+
+            If is_valid Then
+                FormSalesReturnInputTanggalPickup.ShowDialog()
+            Else
+                stopCustom("Some order can't input pickup date.")
+            End If
+        End If
+        GVSalesReturnOrder.ActiveFilterString = ""
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub SBViewAllPickupDate_Click(sender As Object, e As EventArgs) Handles SBViewAllPickupDate.Click
+        Cursor = Cursors.WaitCursor
+        viewReturnOrderPickupDate()
+        'noEdit(8)
+        Cursor = Cursors.Default
+    End Sub
+
+    Sub viewReturnOrderPickupDate()
+        'return query
+        Dim query_c As ClassReturn = New ClassReturn()
+        Dim query As String = query_c.queryMain("AND a.id_report_status='6' AND mail.id_report IS NOT NULL ", "1")
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCSalesReturnOrder.DataSource = data
+        GVSalesReturnOrder.BestFitColumns()
     End Sub
 End Class

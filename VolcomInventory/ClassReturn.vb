@@ -21,7 +21,7 @@
         query += "IFNULL(g.created_return,0) AS created_return, IFNULL(h.order_qty,0) AS order_qty, IFNULL(i.return_qty,0) AS return_qty, "
         query += "(a.sales_return_order_est_date) AS sales_return_order_est_date_org, "
         query += "DATE(NOW()) AS sales_return_order_date_current, a.id_prepare_status,stt_ord.prepare_status, "
-        query += "((IFNULL(i.return_qty,0)/IFNULL(h.order_qty,0))*100) AS `svc_level`, 'No' as `is_select`, IFNULL(ots.outstanding,0) AS `outstanding`, a.final_comment, a.final_date, fe.employee_name AS `final_by_name`, IFNULL(a.id_sales_order,0) AS `id_sales_order`, so.sales_order_ol_shop_number, ot.order_type  "
+        query += "((IFNULL(i.return_qty,0)/IFNULL(h.order_qty,0))*100) AS `svc_level`, 'No' as `is_select`, IFNULL(ots.outstanding,0) AS `outstanding`, a.final_comment, a.final_date, fe.employee_name AS `final_by_name`, IFNULL(a.id_sales_order,0) AS `id_sales_order`, so.sales_order_ol_shop_number, ot.order_type, IFNULL(DATE_FORMAT(a.pickup_date, '%d %M %Y'), '-') AS pickup_date, IFNULL(epd.employee_name, '-') AS pickup_date_updated_by, IFNULL(DATE_FORMAT(a.pickup_date_updated_at, '%d %M %Y/%H:%i:%s'), '-') AS pickup_date_updated_at "
         query += "FROM tb_sales_return_order a "
         query += "INNER JOIN tb_m_comp_contact c ON c.id_comp_contact = a.id_store_contact_to "
         query += "INNER JOIN tb_m_comp d ON c.id_comp = d.id_comp "
@@ -57,6 +57,14 @@
         query += "LEFT JOIN tb_m_employee fe ON fe.id_employee = fu.id_employee "
         query += "LEFT JOIN tb_sales_order so ON so.id_sales_order = a.id_sales_order "
         query += "LEFT JOIN tb_lookup_order_type ot ON ot.id_order_type = a.id_order_type "
+        query += "LEFT JOIN tb_m_user upd ON upd.id_user = a.pickup_date_updated_by "
+        query += "LEFT JOIN tb_m_employee epd ON epd.id_employee = upd.id_employee "
+        query += "LEFT JOIN (
+            SELECT id_report 
+            FROM tb_mail_manage_det AS d 
+            LEFT JOIN tb_mail_manage AS h ON d.id_mail_manage = h.id_mail_manage
+            WHERE h.report_mark_type = 45 AND h.id_mail_status = 2
+        ) mail ON a.id_sales_return_order = mail.id_report "
         query += "WHERE a.id_sales_return_order>0 " + condition
         query += "ORDER BY a.id_sales_return_order " + order_type
         Return query

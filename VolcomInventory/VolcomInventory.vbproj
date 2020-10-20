@@ -5443,6 +5443,12 @@
     <Compile Include="FormSalesReturnDetProblem.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormSalesReturnInputTanggalPickup.Designer.vb">
+      <DependentUpon>FormSalesReturnInputTanggalPickup.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormSalesReturnInputTanggalPickup.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormSalesReturnNonListDet.Designer.vb">
       <DependentUpon>FormSalesReturnNonListDet.vb</DependentUpon>
     </Compile>
@@ -11582,6 +11588,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormSalesReturnDetProblem.resx">
       <DependentUpon>FormSalesReturnDetProblem.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSalesReturnInputTanggalPickup.resx">
+      <DependentUpon>FormSalesReturnInputTanggalPickup.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormSalesReturnNonListDet.resx">
       <DependentUpon>FormSalesReturnNonListDet.vb</DependentUpon>

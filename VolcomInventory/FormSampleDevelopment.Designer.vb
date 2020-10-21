@@ -190,6 +190,7 @@ Partial Class FormSampleDevelopment
         Me.GridColumn20 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.BViewEstECOPPPS = New DevExpress.XtraEditors.SimpleButton()
+        Me.EntryProductionComponentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.PanelControlNavLineList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlNavLineList.SuspendLayout()
         CType(Me.PCNavLineList, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -379,20 +380,20 @@ Partial Class FormSampleDevelopment
         '
         'ViewMenu
         '
-        Me.ViewMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewDetailToolStripMenuItem, Me.EntryECOPToolStripMenuItem})
+        Me.ViewMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewDetailToolStripMenuItem, Me.EntryProductionComponentToolStripMenuItem, Me.EntryECOPToolStripMenuItem})
         Me.ViewMenu.Name = "ContextMenuStripYM"
-        Me.ViewMenu.Size = New System.Drawing.Size(215, 48)
+        Me.ViewMenu.Size = New System.Drawing.Size(231, 92)
         '
         'ViewDetailToolStripMenuItem
         '
         Me.ViewDetailToolStripMenuItem.Name = "ViewDetailToolStripMenuItem"
-        Me.ViewDetailToolStripMenuItem.Size = New System.Drawing.Size(214, 22)
+        Me.ViewDetailToolStripMenuItem.Size = New System.Drawing.Size(230, 22)
         Me.ViewDetailToolStripMenuItem.Text = "View Development History"
         '
         'EntryECOPToolStripMenuItem
         '
         Me.EntryECOPToolStripMenuItem.Name = "EntryECOPToolStripMenuItem"
-        Me.EntryECOPToolStripMenuItem.Size = New System.Drawing.Size(214, 22)
+        Me.EntryECOPToolStripMenuItem.Size = New System.Drawing.Size(230, 22)
         Me.EntryECOPToolStripMenuItem.Text = "Entry ECOP"
         '
         'GVDesign
@@ -1887,6 +1888,12 @@ Partial Class FormSampleDevelopment
         Me.BViewEstECOPPPS.TabIndex = 94
         Me.BViewEstECOPPPS.Text = "View"
         '
+        'EntryProductionComponentToolStripMenuItem
+        '
+        Me.EntryProductionComponentToolStripMenuItem.Name = "EntryProductionComponentToolStripMenuItem"
+        Me.EntryProductionComponentToolStripMenuItem.Size = New System.Drawing.Size(230, 22)
+        Me.EntryProductionComponentToolStripMenuItem.Text = "Entry Production Component"
+        '
         'FormSampleDevelopment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2146,4 +2153,5 @@ Partial Class FormSampleDevelopment
     Friend WithEvents GridColumn21 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn28 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn24 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents EntryProductionComponentToolStripMenuItem As ToolStripMenuItem
 End Class

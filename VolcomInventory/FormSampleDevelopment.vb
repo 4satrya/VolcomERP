@@ -401,4 +401,11 @@ ORDER BY pps.id_design_ecop_pps DESC"
             FormDesignCopPps.ShowDialog()
         End If
     End Sub
+
+    Private Sub EntryProductionComponentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EntryProductionComponentToolStripMenuItem.Click
+        If GVDesign.RowCount > 0 Then
+            FormFabricConsumption.id_design = GVDesign.GetFocusedRowCellValue("id_design").ToString
+            FormFabricConsumption.ShowDialog()
+        End If
+    End Sub
 End Class

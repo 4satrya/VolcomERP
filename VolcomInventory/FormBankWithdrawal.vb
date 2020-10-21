@@ -231,7 +231,7 @@ WHERE DATE(py.date_payment) >= '" & Date.Parse(DEBBKFrom.EditValue.ToString).ToS
             q_acc = ",acc.id_acc,acc.acc_name,acc.acc_description "
             q_join_acc = " INNER JOIN tb_a_acc acc ON acc.id_acc=c.id_acc_ap "
             where_string += " AND po.is_close_rec='1'"
-            q_dp = "-(payment.value)"
+            q_dp = "-IFNULL(payment.value,0)"
         ElseIf SLEPayType.EditValue.ToString = "1" Then 'DP
             q_acc = ",acc.id_acc,acc.acc_name,acc.acc_description "
             q_join_acc = " INNER JOIN tb_a_acc acc ON acc.id_acc=c.id_acc_dp "

@@ -22,6 +22,10 @@ Partial Class FormOLStore
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormOLStore))
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
+        Me.SLEGroup = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView5 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn40 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn41 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.BtnUpdateStatusVIAAPI = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnUpdateStt = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnViewDetail = New DevExpress.XtraEditors.SimpleButton()
@@ -208,6 +212,7 @@ Partial Class FormOLStore
         Me.CEAllow = New DevExpress.XtraEditors.CheckEdit()
         Me.SBCloseOrder = New DevExpress.XtraEditors.SimpleButton()
         Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
+        Me.BtnXLSSyncOrder = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnPrint = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnSyncOrder = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnConfirmedOrder = New DevExpress.XtraEditors.SimpleButton()
@@ -223,6 +228,8 @@ Partial Class FormOLStore
         Me.CantProceedToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
+        CType(Me.SLEGroup.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView5, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEUntil.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLECompDetail.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -293,6 +300,7 @@ Partial Class FormOLStore
         '
         'PanelControl2
         '
+        Me.PanelControl2.Controls.Add(Me.SLEGroup)
         Me.PanelControl2.Controls.Add(Me.BtnUpdateStatusVIAAPI)
         Me.PanelControl2.Controls.Add(Me.BtnUpdateStt)
         Me.PanelControl2.Controls.Add(Me.BtnViewDetail)
@@ -305,13 +313,45 @@ Partial Class FormOLStore
         Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl2.Location = New System.Drawing.Point(0, 0)
         Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(1000, 48)
+        Me.PanelControl2.Size = New System.Drawing.Size(1000, 79)
         Me.PanelControl2.TabIndex = 2
+        '
+        'SLEGroup
+        '
+        Me.SLEGroup.Location = New System.Drawing.Point(62, 14)
+        Me.SLEGroup.Name = "SLEGroup"
+        Me.SLEGroup.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEGroup.Properties.ShowClearButton = False
+        Me.SLEGroup.Properties.View = Me.GridView5
+        Me.SLEGroup.Size = New System.Drawing.Size(107, 20)
+        Me.SLEGroup.TabIndex = 6
+        '
+        'GridView5
+        '
+        Me.GridView5.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn40, Me.GridColumn41})
+        Me.GridView5.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView5.Name = "GridView5"
+        Me.GridView5.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView5.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn40
+        '
+        Me.GridColumn40.Caption = "id_comp_group"
+        Me.GridColumn40.FieldName = "id_comp_group"
+        Me.GridColumn40.Name = "GridColumn40"
+        '
+        'GridColumn41
+        '
+        Me.GridColumn41.Caption = "Store"
+        Me.GridColumn41.FieldName = "description"
+        Me.GridColumn41.Name = "GridColumn41"
+        Me.GridColumn41.Visible = True
+        Me.GridColumn41.VisibleIndex = 0
         '
         'BtnUpdateStatusVIAAPI
         '
         Me.BtnUpdateStatusVIAAPI.Image = CType(resources.GetObject("BtnUpdateStatusVIAAPI.Image"), System.Drawing.Image)
-        Me.BtnUpdateStatusVIAAPI.Location = New System.Drawing.Point(796, 14)
+        Me.BtnUpdateStatusVIAAPI.Location = New System.Drawing.Point(650, 27)
         Me.BtnUpdateStatusVIAAPI.Name = "BtnUpdateStatusVIAAPI"
         Me.BtnUpdateStatusVIAAPI.Size = New System.Drawing.Size(109, 20)
         Me.BtnUpdateStatusVIAAPI.TabIndex = 4
@@ -320,7 +360,7 @@ Partial Class FormOLStore
         'BtnUpdateStt
         '
         Me.BtnUpdateStt.Image = CType(resources.GetObject("BtnUpdateStt.Image"), System.Drawing.Image)
-        Me.BtnUpdateStt.Location = New System.Drawing.Point(658, 14)
+        Me.BtnUpdateStt.Location = New System.Drawing.Point(512, 27)
         Me.BtnUpdateStt.Name = "BtnUpdateStt"
         Me.BtnUpdateStt.Size = New System.Drawing.Size(132, 20)
         Me.BtnUpdateStt.TabIndex = 0
@@ -329,7 +369,7 @@ Partial Class FormOLStore
         'BtnViewDetail
         '
         Me.BtnViewDetail.Image = CType(resources.GetObject("BtnViewDetail.Image"), System.Drawing.Image)
-        Me.BtnViewDetail.Location = New System.Drawing.Point(579, 14)
+        Me.BtnViewDetail.Location = New System.Drawing.Point(431, 27)
         Me.BtnViewDetail.LookAndFeel.SkinName = "Blue"
         Me.BtnViewDetail.Name = "BtnViewDetail"
         Me.BtnViewDetail.Size = New System.Drawing.Size(75, 20)
@@ -338,7 +378,7 @@ Partial Class FormOLStore
         '
         'LabelControl4
         '
-        Me.LabelControl4.Location = New System.Drawing.Point(288, 17)
+        Me.LabelControl4.Location = New System.Drawing.Point(20, 43)
         Me.LabelControl4.Name = "LabelControl4"
         Me.LabelControl4.Size = New System.Drawing.Size(24, 13)
         Me.LabelControl4.TabIndex = 2
@@ -347,23 +387,23 @@ Partial Class FormOLStore
         'DEUntil
         '
         Me.DEUntil.EditValue = Nothing
-        Me.DEUntil.Location = New System.Drawing.Point(462, 14)
+        Me.DEUntil.Location = New System.Drawing.Point(251, 40)
         Me.DEUntil.Name = "DEUntil"
         Me.DEUntil.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.DEUntil.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.DEUntil.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
         Me.DEUntil.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.DEUntil.Properties.Mask.EditMask = "dd\/MM\/yyyy"
-        Me.DEUntil.Size = New System.Drawing.Size(111, 20)
+        Me.DEUntil.Size = New System.Drawing.Size(170, 20)
         Me.DEUntil.TabIndex = 2
         '
         'SLECompDetail
         '
-        Me.SLECompDetail.Location = New System.Drawing.Point(61, 14)
+        Me.SLECompDetail.Location = New System.Drawing.Point(175, 14)
         Me.SLECompDetail.Name = "SLECompDetail"
         Me.SLECompDetail.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.SLECompDetail.Properties.View = Me.GridView1
-        Me.SLECompDetail.Size = New System.Drawing.Size(220, 20)
+        Me.SLECompDetail.Size = New System.Drawing.Size(246, 20)
         Me.SLECompDetail.TabIndex = 0
         '
         'GridView1
@@ -404,7 +444,7 @@ Partial Class FormOLStore
         '
         'LabelControl5
         '
-        Me.LabelControl5.Location = New System.Drawing.Point(435, 17)
+        Me.LabelControl5.Location = New System.Drawing.Point(224, 43)
         Me.LabelControl5.Name = "LabelControl5"
         Me.LabelControl5.Size = New System.Drawing.Size(21, 13)
         Me.LabelControl5.TabIndex = 2
@@ -413,14 +453,14 @@ Partial Class FormOLStore
         'DEFrom
         '
         Me.DEFrom.EditValue = Nothing
-        Me.DEFrom.Location = New System.Drawing.Point(318, 14)
+        Me.DEFrom.Location = New System.Drawing.Point(62, 40)
         Me.DEFrom.Name = "DEFrom"
         Me.DEFrom.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.DEFrom.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
         Me.DEFrom.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
         Me.DEFrom.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.DEFrom.Properties.Mask.EditMask = "dd\/MM\/yyyy"
-        Me.DEFrom.Size = New System.Drawing.Size(111, 20)
+        Me.DEFrom.Size = New System.Drawing.Size(156, 20)
         Me.DEFrom.TabIndex = 1
         '
         'LabelControl6
@@ -449,7 +489,7 @@ Partial Class FormOLStore
         Me.GCDetail.MainView = Me.GVDetail
         Me.GCDetail.Name = "GCDetail"
         Me.GCDetail.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemTextEdit2, Me.RepositoryItemImageEdit2, Me.RepositoryItemHyperLinkEdit2, Me.RepositoryItemCheckEdit2, Me.RepositoryItemSearchLookUpEdit1, Me.RepoAttachDetail, Me.RepositoryItemTextEdit1, Me.RepositoryItemCheckEdit3})
-        Me.GCDetail.Size = New System.Drawing.Size(994, 433)
+        Me.GCDetail.Size = New System.Drawing.Size(994, 396)
         Me.GCDetail.TabIndex = 3
         Me.GCDetail.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVDetail})
         '
@@ -810,10 +850,10 @@ Partial Class FormOLStore
         '
         Me.XtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.XtraTabControl1.HeaderLocation = DevExpress.XtraTab.TabHeaderLocation.Bottom
-        Me.XtraTabControl1.Location = New System.Drawing.Point(0, 48)
+        Me.XtraTabControl1.Location = New System.Drawing.Point(0, 79)
         Me.XtraTabControl1.Name = "XtraTabControl1"
         Me.XtraTabControl1.SelectedTabPage = Me.XTPOrderSummary
-        Me.XtraTabControl1.Size = New System.Drawing.Size(1000, 461)
+        Me.XtraTabControl1.Size = New System.Drawing.Size(1000, 430)
         Me.XtraTabControl1.TabIndex = 4
         Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPOrderSummary, Me.XTPAllOrder, Me.XTPCancelled})
         '
@@ -826,7 +866,7 @@ Partial Class FormOLStore
         Me.XTPOrderSummary.Controls.Add(Me.GCSummary)
         Me.XTPOrderSummary.Controls.Add(Me.PanelControl1)
         Me.XTPOrderSummary.Name = "XTPOrderSummary"
-        Me.XTPOrderSummary.Size = New System.Drawing.Size(994, 433)
+        Me.XTPOrderSummary.Size = New System.Drawing.Size(994, 402)
         Me.XTPOrderSummary.Text = "Order Summary"
         '
         'GCSummary
@@ -837,7 +877,7 @@ Partial Class FormOLStore
         Me.GCSummary.MainView = Me.GVSummary
         Me.GCSummary.Name = "GCSummary"
         Me.GCSummary.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemProgressBar1, Me.RepositoryItemCheckEdit4, Me.RepositoryItemCheckEdit5})
-        Me.GCSummary.Size = New System.Drawing.Size(994, 392)
+        Me.GCSummary.Size = New System.Drawing.Size(994, 361)
         Me.GCSummary.TabIndex = 2
         Me.GCSummary.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVSummary, Me.GridView2})
         '
@@ -1155,7 +1195,7 @@ Partial Class FormOLStore
         Me.PanelControl1.Controls.Add(Me.BtnExportToBOF)
         Me.PanelControl1.Controls.Add(Me.BtnOrderConfirmation)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl1.Location = New System.Drawing.Point(0, 392)
+        Me.PanelControl1.Location = New System.Drawing.Point(0, 361)
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(994, 41)
         Me.PanelControl1.TabIndex = 0
@@ -1186,7 +1226,7 @@ Partial Class FormOLStore
         Me.XTPAllOrder.Appearance.Header.Options.UseForeColor = True
         Me.XTPAllOrder.Controls.Add(Me.GCDetail)
         Me.XTPAllOrder.Name = "XTPAllOrder"
-        Me.XTPAllOrder.Size = New System.Drawing.Size(994, 433)
+        Me.XTPAllOrder.Size = New System.Drawing.Size(994, 396)
         Me.XTPAllOrder.Text = "Active Order Details"
         '
         'XTPCancelled
@@ -1197,7 +1237,7 @@ Partial Class FormOLStore
         Me.XTPCancelled.Appearance.Header.Options.UseForeColor = True
         Me.XTPCancelled.Controls.Add(Me.GCCancellOrder)
         Me.XTPCancelled.Name = "XTPCancelled"
-        Me.XTPCancelled.Size = New System.Drawing.Size(994, 433)
+        Me.XTPCancelled.Size = New System.Drawing.Size(994, 396)
         Me.XTPCancelled.Text = "Cancelled Order Detail"
         '
         'GCCancellOrder
@@ -1207,7 +1247,7 @@ Partial Class FormOLStore
         Me.GCCancellOrder.MainView = Me.GVCancellOrder
         Me.GCCancellOrder.Name = "GCCancellOrder"
         Me.GCCancellOrder.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemTextEdit3, Me.RepositoryItemImageEdit1, Me.RepositoryItemHyperLinkEdit1, Me.RepositoryItemCheckEdit1, Me.RepositoryItemSearchLookUpEdit2, Me.RepositoryItemLookUpEdit1, Me.RepositoryItemTextEdit4})
-        Me.GCCancellOrder.Size = New System.Drawing.Size(994, 433)
+        Me.GCCancellOrder.Size = New System.Drawing.Size(994, 396)
         Me.GCCancellOrder.TabIndex = 4
         Me.GCCancellOrder.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVCancellOrder})
         '
@@ -1975,6 +2015,7 @@ Partial Class FormOLStore
         '
         'PanelControl3
         '
+        Me.PanelControl3.Controls.Add(Me.BtnXLSSyncOrder)
         Me.PanelControl3.Controls.Add(Me.BtnPrint)
         Me.PanelControl3.Controls.Add(Me.BtnSyncOrder)
         Me.PanelControl3.Controls.Add(Me.BtnConfirmedOrder)
@@ -1986,6 +2027,16 @@ Partial Class FormOLStore
         Me.PanelControl3.Name = "PanelControl3"
         Me.PanelControl3.Size = New System.Drawing.Size(994, 43)
         Me.PanelControl3.TabIndex = 0
+        '
+        'BtnXLSSyncOrder
+        '
+        Me.BtnXLSSyncOrder.Dock = System.Windows.Forms.DockStyle.Left
+        Me.BtnXLSSyncOrder.Image = CType(resources.GetObject("BtnXLSSyncOrder.Image"), System.Drawing.Image)
+        Me.BtnXLSSyncOrder.Location = New System.Drawing.Point(354, 2)
+        Me.BtnXLSSyncOrder.Name = "BtnXLSSyncOrder"
+        Me.BtnXLSSyncOrder.Size = New System.Drawing.Size(129, 39)
+        Me.BtnXLSSyncOrder.TabIndex = 6
+        Me.BtnXLSSyncOrder.Text = "Import XLS Order"
         '
         'BtnPrint
         '
@@ -2113,6 +2164,8 @@ Partial Class FormOLStore
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl2.ResumeLayout(False)
         Me.PanelControl2.PerformLayout()
+        CType(Me.SLEGroup.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView5, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEUntil.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SLECompDetail.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -2384,4 +2437,9 @@ Partial Class FormOLStore
     Friend WithEvents GridColumndescription As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumncomp_group_name As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents BtnUpdateStatusVIAAPI As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BtnXLSSyncOrder As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents SLEGroup As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView5 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn40 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn41 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

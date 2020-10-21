@@ -36,6 +36,7 @@
         If id_ca = "-1" Then 'new
             BMark.Enabled = False
             BPrint.Enabled = False
+            SLEPayFrom.EditValue = get_opt_acc_field("id_acc_kas_kecil_accounting")
         Else 'edit
             Dim query As String = "SELECT * FROM tb_cash_advance WHERE id_cash_advance='" & id_ca & "'"
             Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")

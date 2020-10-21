@@ -1832,6 +1832,12 @@
     <Compile Include="FormExternalUserDet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormFabricConsumption.Designer.vb">
+      <DependentUpon>FormFabricConsumption.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormFabricConsumption.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormFabricTypeDet.Designer.vb">
       <DependentUpon>FormFabricTypeDet.vb</DependentUpon>
     </Compile>
@@ -2957,6 +2963,12 @@
       <DependentUpon>FormOLStoreDiscountCode.vb</DependentUpon>
     </Compile>
     <Compile Include="FormOLStoreDiscountCode.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormOLStoreImportXLS.Designer.vb">
+      <DependentUpon>FormOLStoreImportXLS.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormOLStoreImportXLS.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormOLStoreOrderId.Designer.vb">
@@ -9524,6 +9536,9 @@
     <EmbeddedResource Include="FormExternalUserDet.resx">
       <DependentUpon>FormExternalUserDet.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormFabricConsumption.resx">
+      <DependentUpon>FormFabricConsumption.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormFabricTypeDet.resx">
       <DependentUpon>FormFabricTypeDet.vb</DependentUpon>
     </EmbeddedResource>
@@ -10108,6 +10123,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormOLStoreDiscountCode.resx">
       <DependentUpon>FormOLStoreDiscountCode.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormOLStoreImportXLS.resx">
+      <DependentUpon>FormOLStoreImportXLS.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormOLStoreOrderId.resx">
       <DependentUpon>FormOLStoreOrderId.vb</DependentUpon>

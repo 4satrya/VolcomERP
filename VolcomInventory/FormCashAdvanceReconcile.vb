@@ -394,7 +394,7 @@
 
                 check_lock()
 
-                Dim data As DataTable = execute_query("SELECT 0 AS id_cash_advance_report, 0 AS is_val_ca, NULL AS id_acc, '" + addSlashes(MENote.EditValue.ToString) + "' AS description, '' AS note, " + decimalSQL(TECashInAdvance.EditValue) + " AS value", -1, True, "", "", "", "")
+                Dim data As DataTable = execute_query("SELECT 0 AS id_cash_advance_report, 0 AS is_val_ca, (SELECT id_acc_kas_kecil_accounting FROM tb_opt_accounting LIMIT 1) AS id_acc, '" + addSlashes(MENote.EditValue.ToString) + "' AS description, '' AS note, " + decimalSQL(TECashInAdvance.EditValue) + " AS value", -1, True, "", "", "", "")
                 GCBankDeposit.DataSource = data
 
                 XTPWithdrawal.PageVisible = False
@@ -422,7 +422,7 @@
                     GCBankDeposit.DataSource = Nothing
 
                     If rest > 0 Then
-                        Dim data As DataTable = execute_query("SELECT 0 AS id_cash_advance_report, 0 AS is_val_ca, NULL AS id_acc, '" + addSlashes(MENote.EditValue.ToString) + "' AS description, '' AS note, " + decimalSQL(rest) + " AS value", -1, True, "", "", "", "")
+                        Dim data As DataTable = execute_query("SELECT 0 AS id_cash_advance_report, 0 AS is_val_ca, (SELECT id_acc_kas_kecil_accounting FROM tb_opt_accounting LIMIT 1) AS id_acc, '" + addSlashes(MENote.EditValue.ToString) + "' AS description, '' AS note, " + decimalSQL(rest) + " AS value", -1, True, "", "", "", "")
                         GCBankDeposit.DataSource = data
 
                         XTPWithdrawal.PageVisible = False
@@ -432,7 +432,7 @@
                     ElseIf rest < 0 Then
                         rest = Math.Abs(rest)
 
-                        Dim data As DataTable = execute_query("SELECT 0 AS id_cash_advance_report, 0 AS is_val_ca, NULL AS id_acc, '" + addSlashes(MENote.EditValue.ToString) + "' AS description, '' AS note, " + decimalSQL(rest) + " AS value", -1, True, "", "", "", "")
+                        Dim data As DataTable = execute_query("SELECT 0 AS id_cash_advance_report, 0 AS is_val_ca, (SELECT id_acc_kas_kecil_accounting FROM tb_opt_accounting LIMIT 1) AS id_acc, '" + addSlashes(MENote.EditValue.ToString) + "' AS description, '' AS note, " + decimalSQL(rest) + " AS value", -1, True, "", "", "", "")
                         GCBankWithdrawal.DataSource = data
 
                         XTPWithdrawal.PageVisible = True
@@ -684,7 +684,7 @@
 
             For i = 0 To GVJournalDet.RowCount - 1
                 If GVJournalDet.IsValidRowHandle(i) Then
-                    dt.Rows.Add(GVJournalDet.GetRowCellValue(i, "id_cash_advance_report"), GVJournalDet.GetRowCellValue(i, "id_acc"), GVJournalDet.GetRowCellValue(i, "description"), "", "", GVJournalDet.GetRowCellValue(i, "value"))
+                    dt.Rows.Add(GVJournalDet.GetRowCellValue(i, "id_cash_advance_report"), GVJournalDet.GetRowCellValue(i, "id_acc"), GVJournalDet.GetRowCellValue(i, "description"), get_opt_acc_field("id_acc_kas_kecil_accounting"), GVJournalDet.GetRowCellValue(i, "description"), GVJournalDet.GetRowCellValue(i, "value"))
                 End If
             Next
 

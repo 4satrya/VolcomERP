@@ -8104,9 +8104,13 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             End If
         ElseIf formName = "FormPurcAsset" Then
             If FormPurcAsset.XTCAsset.SelectedTabPageIndex = 0 Then
-                print_raw_no_export(FormPurcAsset.GCPending)
+                'print_raw_no_export(FormPurcAsset.GCPending)
+                'permintaan pak agung
+                print(FormPurcAsset.GCPending, "Fixed Asset (Pending Asset)")
             ElseIf FormPurcAsset.XTCAsset.SelectedTabPageIndex = 1 Then
-                print_raw_no_export(FormPurcAsset.GCActive)
+                'print_raw_no_export(FormPurcAsset.GCActive)
+                'permintaan pak agung
+                print(FormPurcAsset.GCActive, "Fixed Asset (Active Asset)")
             End If
         ElseIf formName = "FormItemExpense" Then
             print_raw_no_export(FormItemExpense.GCData)

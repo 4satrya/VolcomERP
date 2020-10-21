@@ -207,6 +207,7 @@
         Dim q As String = "SELECT it.`id_item`,it.`item_desc`,IFNULL(beg.min_date,rec.min_date) AS min_date,uom.uom
 ,IFNULL(beg.qty_beg,0) AS qty_beg,IFNULL(beg.harga_satuan_beg,0) AS harga_satuan_beg,IF(IFNULL(beg.qty_beg,0)=0,0,IFNULL(beg.amount_beg,0)) AS amount_beg
 ,IFNULL(rec.qty_rec,0) AS qty_rec,IFNULL(rec.harga_satuan_rec,0) AS harga_satuan_rec,IFNULL(rec.amount_rec,0) AS amount_rec
+,IFNULL(req.qty_used,0) AS qty_req,IFNULL(req.harga_satuan_used,0) AS harga_satuan_req,IFNULL(req.amount_used,0) AS amount_req
 ,IFNULL(used.qty_used,0) AS qty_used,IFNULL(used.harga_satuan_used,0) AS harga_satuan_used,IFNULL(used.amount_used,0) AS amount_used
 ,IFNULL(rem.qty_rem,0) AS qty_rem,IFNULL(rem.harga_satuan_rem,0) AS harga_satuan_rem,IFNULL(rem.amount_rem,0) AS amount_rem
 ,itc.item_cat
@@ -236,7 +237,16 @@ LEFT JOIN (
 	,SUM(IF(id_storage_category=2,storage_item_qty,-storage_item_qty)*`value`)/SUM(IF(id_storage_category=2,storage_item_qty,-storage_item_qty)) AS harga_satuan_used
 	,SUM(IF(id_storage_category=2,storage_item_qty,-storage_item_qty)*`value`) AS amount_used
 	FROM `tb_storage_item`
-	WHERE DATE(storage_item_datetime)>='" & date_start & "' AND DATE(storage_item_datetime)<='" & date_until & "' AND NOT report_mark_type='148'
+	WHERE DATE(storage_item_datetime)>='" & date_start & "' AND DATE(storage_item_datetime)<='" & date_until & "' AND (report_mark_type='154' OR report_mark_type='163')
+	GROUP BY id_item
+	HAVING qty_used!=0
+)req ON req.id_item=it.id_item
+LEFT JOIN (
+	SELECT id_item,SUM(IF(id_storage_category=2,storage_item_qty,-storage_item_qty)) AS qty_used
+	,SUM(IF(id_storage_category=2,storage_item_qty,-storage_item_qty)*`value`)/SUM(IF(id_storage_category=2,storage_item_qty,-storage_item_qty)) AS harga_satuan_used
+	,SUM(IF(id_storage_category=2,storage_item_qty,-storage_item_qty)*`value`) AS amount_used
+	FROM `tb_storage_item`
+	WHERE DATE(storage_item_datetime)>='" & date_start & "' AND DATE(storage_item_datetime)<='" & date_until & "' AND NOT report_mark_type='148' AND NOT report_mark_type='154' AND NOT report_mark_type='163'
 	GROUP BY id_item
 	HAVING qty_used!=0
 )used ON used.id_item=it.id_item

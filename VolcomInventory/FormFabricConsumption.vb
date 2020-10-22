@@ -28,10 +28,23 @@ WHERE d.id_design='" & id_design & "'"
         End If
         '
         load_mat()
+
         load_fab()
         load_acc()
+        load_work()
 
         allow_but()
+    End Sub
+
+    Sub load_work()
+        Dim q As String = "SELECT ovhp.`id_ovh_price`,c.`id_comp`,c.`comp_name`,ovh.`overhead`,ovhp.`ovh_price_name`,ovhp.`ovh_price`
+FROM tb_m_ovh_price ovhp
+INNER JOIN tb_m_ovh ovh ON ovh.`id_ovh`=ovhp.`id_ovh`
+INNER JOIN tb_m_comp_contact cc ON cc.`id_comp_contact`=ovhp.`id_comp_contact`
+INNER JOIN tb_m_comp c ON c.`id_comp`=cc.`id_comp`
+WHERE ovhp.`is_enable_component`=1
+ORDER BY c.`comp_name`"
+        viewSearchLookupRepositoryQuery(RISLEACC, q, 0, "mat_det_name", "id_mat_det")
     End Sub
 
     Sub load_fab()
@@ -110,12 +123,14 @@ WHERE dc.`id_design`='" & id_design & "' AND dc.`id_cat`='2'"
         Dim q As String = ""
         Dim dt As DataTable
         '1.Fabric
+        delete_all_row(GVFabCons)
         q = "Select id_component,description,qty FROM tb_design_component_template WHERE id_cat='1'"
         dt = execute_query(q, -1, True, "", "", "", "")
         For i As Integer = 0 To dt.Rows.Count - 1
             new_row(GVFabCons, dt.Rows(i)("id_component").ToString, dt.Rows(i)("description").ToString, dt.Rows(i)("qty"))
         Next
         '2.Acc
+        delete_all_row(GVACC)
         q = "Select id_component,description,qty FROM tb_design_component_template WHERE id_cat='2'"
         dt = execute_query(q, -1, True, "", "", "", "")
         For i As Integer = 0 To dt.Rows.Count - 1
@@ -126,6 +141,12 @@ WHERE dc.`id_design`='" & id_design & "' AND dc.`id_cat`='2'"
         GVACC.BestFitColumns()
         allow_but()
         Cursor = Cursors.Default
+    End Sub
+
+    Sub delete_all_row(ByVal gv As DevExpress.XtraGrid.Views.Grid.GridView)
+        For i = gv.RowCount - 1 To 0 Step -1
+            gv.DeleteRow(i)
+        Next
     End Sub
 
     Sub new_row(ByVal gv As DevExpress.XtraGrid.Views.Grid.GridView, ByVal id As String, ByVal desc As String, ByVal qty As Decimal)

@@ -43,36 +43,46 @@ Partial Class FormFabricConsumption
         Me.XTCComponent = New DevExpress.XtraTab.XtraTabControl()
         Me.XTPFabric = New DevExpress.XtraTab.XtraTabPage()
         Me.XTPAcc = New DevExpress.XtraTab.XtraTabPage()
-        Me.XTPWork = New DevExpress.XtraTab.XtraTabPage()
-        Me.GCOVH = New DevExpress.XtraGrid.GridControl()
-        Me.GVOVH = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.GridColumn15 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn16 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn17 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.RepositoryItemSearchLookUpEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit()
-        Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.GridColumn18 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn19 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn20 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn21 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GCACC = New DevExpress.XtraGrid.GridControl()
         Me.GVACC = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RISLEACC = New DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit()
         Me.GridView4 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn13 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn14 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemTextEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
+        Me.XTPWork = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCOVH = New DevExpress.XtraGrid.GridControl()
+        Me.GVOVH = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.RepositoryItemSearchLookUpEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit()
+        Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn18 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn19 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn20 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
-        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
-        Me.TEDesignName = New DevExpress.XtraEditors.TextEdit()
-        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
-        Me.TESeason = New DevExpress.XtraEditors.TextEdit()
         Me.TEDesignCode = New DevExpress.XtraEditors.TextEdit()
+        Me.TESeason = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
+        Me.TEDesignName = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
+        Me.GridColumn22 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn14 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn23 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn15 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn16 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn17 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn21 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn24 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RISLETechWork = New DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit()
+        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn25 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn26 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn27 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn28 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn29 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.GCFabCons, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -86,21 +96,23 @@ Partial Class FormFabricConsumption
         Me.XTCComponent.SuspendLayout()
         Me.XTPFabric.SuspendLayout()
         Me.XTPAcc.SuspendLayout()
-        Me.XTPWork.SuspendLayout()
-        CType(Me.GCOVH, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GVOVH, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RepositoryItemSearchLookUpEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GCACC, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVACC, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RISLEACC, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTPWork.SuspendLayout()
+        CType(Me.GCOVH, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVOVH, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemSearchLookUpEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
-        CType(Me.TEDesignName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TESeason.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEDesignCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TESeason.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TEDesignName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RISLETechWork, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl1
@@ -146,7 +158,7 @@ Partial Class FormFabricConsumption
         '
         'GVFabCons
         '
-        Me.GVFabCons.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn7, Me.GridColumn2, Me.GridColumn3})
+        Me.GVFabCons.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn7, Me.GridColumn2, Me.GridColumn22, Me.GridColumn3})
         Me.GVFabCons.GridControl = Me.GCFabCons
         Me.GVFabCons.Name = "GVFabCons"
         Me.GVFabCons.OptionsView.ShowGroupPanel = False
@@ -154,17 +166,16 @@ Partial Class FormFabricConsumption
         'GridColumn1
         '
         Me.GridColumn1.Caption = "ID det"
-        Me.GridColumn1.FieldName = "id_design_component"
+        Me.GridColumn1.FieldName = "id_fab_consumption"
         Me.GridColumn1.Name = "GridColumn1"
         '
         'GridColumn7
         '
         Me.GridColumn7.Caption = "Category"
-        Me.GridColumn7.FieldName = "description"
         Me.GridColumn7.Name = "GridColumn7"
         Me.GridColumn7.Visible = True
         Me.GridColumn7.VisibleIndex = 0
-        Me.GridColumn7.Width = 333
+        Me.GridColumn7.Width = 233
         '
         'GridColumn2
         '
@@ -174,7 +185,7 @@ Partial Class FormFabricConsumption
         Me.GridColumn2.Name = "GridColumn2"
         Me.GridColumn2.Visible = True
         Me.GridColumn2.VisibleIndex = 1
-        Me.GridColumn2.Width = 422
+        Me.GridColumn2.Width = 282
         '
         'RISLEMatDet
         '
@@ -217,19 +228,12 @@ Partial Class FormFabricConsumption
         '
         'GridColumn3
         '
-        Me.GridColumn3.AppearanceCell.Options.UseTextOptions = True
-        Me.GridColumn3.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumn3.AppearanceHeader.Options.UseTextOptions = True
-        Me.GridColumn3.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GridColumn3.Caption = "Qty"
         Me.GridColumn3.ColumnEdit = Me.RITEQty
-        Me.GridColumn3.DisplayFormat.FormatString = "N4"
-        Me.GridColumn3.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn3.FieldName = "qty"
         Me.GridColumn3.Name = "GridColumn3"
         Me.GridColumn3.Visible = True
-        Me.GridColumn3.VisibleIndex = 2
-        Me.GridColumn3.Width = 117
+        Me.GridColumn3.VisibleIndex = 3
+        Me.GridColumn3.Width = 190
         '
         'RITEQty
         '
@@ -316,102 +320,6 @@ Partial Class FormFabricConsumption
         Me.XTPAcc.Size = New System.Drawing.Size(890, 325)
         Me.XTPAcc.Text = "Accesoris"
         '
-        'XTPWork
-        '
-        Me.XTPWork.Controls.Add(Me.GCOVH)
-        Me.XTPWork.Name = "XTPWork"
-        Me.XTPWork.Size = New System.Drawing.Size(890, 408)
-        Me.XTPWork.Text = "Techincal Work"
-        '
-        'GCOVH
-        '
-        Me.GCOVH.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCOVH.Location = New System.Drawing.Point(0, 0)
-        Me.GCOVH.MainView = Me.GVOVH
-        Me.GCOVH.Name = "GCOVH"
-        Me.GCOVH.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemSearchLookUpEdit2})
-        Me.GCOVH.Size = New System.Drawing.Size(890, 408)
-        Me.GCOVH.TabIndex = 3
-        Me.GCOVH.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVOVH})
-        '
-        'GVOVH
-        '
-        Me.GVOVH.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn15, Me.GridColumn16, Me.GridColumn17, Me.GridColumn21})
-        Me.GVOVH.GridControl = Me.GCOVH
-        Me.GVOVH.Name = "GVOVH"
-        Me.GVOVH.OptionsView.ShowGroupPanel = False
-        '
-        'GridColumn15
-        '
-        Me.GridColumn15.Caption = "ID det"
-        Me.GridColumn15.FieldName = "id_fab_consumption"
-        Me.GridColumn15.Name = "GridColumn15"
-        '
-        'GridColumn16
-        '
-        Me.GridColumn16.Caption = "Category"
-        Me.GridColumn16.Name = "GridColumn16"
-        Me.GridColumn16.Visible = True
-        Me.GridColumn16.VisibleIndex = 0
-        Me.GridColumn16.Width = 255
-        '
-        'GridColumn17
-        '
-        Me.GridColumn17.Caption = "Material"
-        Me.GridColumn17.ColumnEdit = Me.RepositoryItemSearchLookUpEdit2
-        Me.GridColumn17.FieldName = "id_mat_det"
-        Me.GridColumn17.Name = "GridColumn17"
-        Me.GridColumn17.Visible = True
-        Me.GridColumn17.VisibleIndex = 1
-        Me.GridColumn17.Width = 309
-        '
-        'RepositoryItemSearchLookUpEdit2
-        '
-        Me.RepositoryItemSearchLookUpEdit2.AutoHeight = False
-        Me.RepositoryItemSearchLookUpEdit2.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.RepositoryItemSearchLookUpEdit2.Name = "RepositoryItemSearchLookUpEdit2"
-        Me.RepositoryItemSearchLookUpEdit2.View = Me.GridView2
-        '
-        'GridView2
-        '
-        Me.GridView2.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn18, Me.GridColumn19, Me.GridColumn20})
-        Me.GridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
-        Me.GridView2.Name = "GridView2"
-        Me.GridView2.OptionsSelection.EnableAppearanceFocusedCell = False
-        Me.GridView2.OptionsView.ShowGroupPanel = False
-        '
-        'GridColumn18
-        '
-        Me.GridColumn18.Caption = "ID"
-        Me.GridColumn18.FieldName = "id_mat_det"
-        Me.GridColumn18.Name = "GridColumn18"
-        '
-        'GridColumn19
-        '
-        Me.GridColumn19.Caption = "Code"
-        Me.GridColumn19.FieldName = "mat_det_code"
-        Me.GridColumn19.Name = "GridColumn19"
-        Me.GridColumn19.Visible = True
-        Me.GridColumn19.VisibleIndex = 0
-        Me.GridColumn19.Width = 341
-        '
-        'GridColumn20
-        '
-        Me.GridColumn20.Caption = "Material"
-        Me.GridColumn20.FieldName = "mat_det_name"
-        Me.GridColumn20.Name = "GridColumn20"
-        Me.GridColumn20.Visible = True
-        Me.GridColumn20.VisibleIndex = 1
-        Me.GridColumn20.Width = 1291
-        '
-        'GridColumn21
-        '
-        Me.GridColumn21.Caption = "Qty"
-        Me.GridColumn21.Name = "GridColumn21"
-        Me.GridColumn21.Visible = True
-        Me.GridColumn21.VisibleIndex = 2
-        Me.GridColumn21.Width = 314
-        '
         'GCACC
         '
         Me.GCACC.Dock = System.Windows.Forms.DockStyle.Fill
@@ -425,35 +333,10 @@ Partial Class FormFabricConsumption
         '
         'GVACC
         '
-        Me.GVACC.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn8, Me.GridColumn9, Me.GridColumn10, Me.GridColumn14})
+        Me.GVACC.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn8, Me.GridColumn9, Me.GridColumn10, Me.GridColumn14, Me.GridColumn23})
         Me.GVACC.GridControl = Me.GCACC
         Me.GVACC.Name = "GVACC"
         Me.GVACC.OptionsView.ShowGroupPanel = False
-        '
-        'GridColumn8
-        '
-        Me.GridColumn8.Caption = "ID det"
-        Me.GridColumn8.FieldName = "id_design_component"
-        Me.GridColumn8.Name = "GridColumn8"
-        '
-        'GridColumn9
-        '
-        Me.GridColumn9.Caption = "Category"
-        Me.GridColumn9.FieldName = "description"
-        Me.GridColumn9.Name = "GridColumn9"
-        Me.GridColumn9.Visible = True
-        Me.GridColumn9.VisibleIndex = 0
-        Me.GridColumn9.Width = 333
-        '
-        'GridColumn10
-        '
-        Me.GridColumn10.Caption = "Material"
-        Me.GridColumn10.ColumnEdit = Me.RISLEACC
-        Me.GridColumn10.FieldName = "id_mat_det"
-        Me.GridColumn10.Name = "GridColumn10"
-        Me.GridColumn10.Visible = True
-        Me.GridColumn10.VisibleIndex = 1
-        Me.GridColumn10.Width = 422
         '
         'RISLEACC
         '
@@ -494,22 +377,6 @@ Partial Class FormFabricConsumption
         Me.GridColumn13.VisibleIndex = 1
         Me.GridColumn13.Width = 1291
         '
-        'GridColumn14
-        '
-        Me.GridColumn14.AppearanceCell.Options.UseTextOptions = True
-        Me.GridColumn14.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumn14.AppearanceHeader.Options.UseTextOptions = True
-        Me.GridColumn14.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumn14.Caption = "Qty"
-        Me.GridColumn14.ColumnEdit = Me.RepositoryItemTextEdit1
-        Me.GridColumn14.DisplayFormat.FormatString = "N4"
-        Me.GridColumn14.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn14.FieldName = "qty"
-        Me.GridColumn14.Name = "GridColumn14"
-        Me.GridColumn14.Visible = True
-        Me.GridColumn14.VisibleIndex = 2
-        Me.GridColumn14.Width = 117
-        '
         'RepositoryItemTextEdit1
         '
         Me.RepositoryItemTextEdit1.AutoHeight = False
@@ -517,6 +384,70 @@ Partial Class FormFabricConsumption
         Me.RepositoryItemTextEdit1.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
         Me.RepositoryItemTextEdit1.Mask.UseMaskAsDisplayFormat = True
         Me.RepositoryItemTextEdit1.Name = "RepositoryItemTextEdit1"
+        '
+        'XTPWork
+        '
+        Me.XTPWork.Controls.Add(Me.GCOVH)
+        Me.XTPWork.Name = "XTPWork"
+        Me.XTPWork.Size = New System.Drawing.Size(890, 325)
+        Me.XTPWork.Text = "Techincal Work"
+        '
+        'GCOVH
+        '
+        Me.GCOVH.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCOVH.Location = New System.Drawing.Point(0, 0)
+        Me.GCOVH.MainView = Me.GVOVH
+        Me.GCOVH.Name = "GCOVH"
+        Me.GCOVH.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemSearchLookUpEdit2, Me.RISLETechWork})
+        Me.GCOVH.Size = New System.Drawing.Size(890, 325)
+        Me.GCOVH.TabIndex = 3
+        Me.GCOVH.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVOVH})
+        '
+        'GVOVH
+        '
+        Me.GVOVH.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn15, Me.GridColumn16, Me.GridColumn17, Me.GridColumn21, Me.GridColumn24})
+        Me.GVOVH.GridControl = Me.GCOVH
+        Me.GVOVH.Name = "GVOVH"
+        Me.GVOVH.OptionsView.ShowGroupPanel = False
+        '
+        'RepositoryItemSearchLookUpEdit2
+        '
+        Me.RepositoryItemSearchLookUpEdit2.AutoHeight = False
+        Me.RepositoryItemSearchLookUpEdit2.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.RepositoryItemSearchLookUpEdit2.Name = "RepositoryItemSearchLookUpEdit2"
+        Me.RepositoryItemSearchLookUpEdit2.View = Me.GridView2
+        '
+        'GridView2
+        '
+        Me.GridView2.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn18, Me.GridColumn19, Me.GridColumn20})
+        Me.GridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView2.Name = "GridView2"
+        Me.GridView2.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView2.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn18
+        '
+        Me.GridColumn18.Caption = "ID"
+        Me.GridColumn18.FieldName = "id_mat_det"
+        Me.GridColumn18.Name = "GridColumn18"
+        '
+        'GridColumn19
+        '
+        Me.GridColumn19.Caption = "Code"
+        Me.GridColumn19.FieldName = "mat_det_code"
+        Me.GridColumn19.Name = "GridColumn19"
+        Me.GridColumn19.Visible = True
+        Me.GridColumn19.VisibleIndex = 0
+        Me.GridColumn19.Width = 341
+        '
+        'GridColumn20
+        '
+        Me.GridColumn20.Caption = "Material"
+        Me.GridColumn20.FieldName = "mat_det_name"
+        Me.GridColumn20.Name = "GridColumn20"
+        Me.GridColumn20.Visible = True
+        Me.GridColumn20.VisibleIndex = 1
+        Me.GridColumn20.Width = 1291
         '
         'PanelControl2
         '
@@ -531,29 +462,13 @@ Partial Class FormFabricConsumption
         Me.PanelControl2.Size = New System.Drawing.Size(896, 83)
         Me.PanelControl2.TabIndex = 4
         '
-        'LabelControl1
+        'TEDesignCode
         '
-        Me.LabelControl1.Location = New System.Drawing.Point(12, 12)
-        Me.LabelControl1.Name = "LabelControl1"
-        Me.LabelControl1.Size = New System.Drawing.Size(32, 13)
-        Me.LabelControl1.TabIndex = 0
-        Me.LabelControl1.Text = "Design"
-        '
-        'TEDesignName
-        '
-        Me.TEDesignName.Enabled = False
-        Me.TEDesignName.Location = New System.Drawing.Point(209, 9)
-        Me.TEDesignName.Name = "TEDesignName"
-        Me.TEDesignName.Size = New System.Drawing.Size(281, 20)
-        Me.TEDesignName.TabIndex = 1
-        '
-        'LabelControl2
-        '
-        Me.LabelControl2.Location = New System.Drawing.Point(12, 44)
-        Me.LabelControl2.Name = "LabelControl2"
-        Me.LabelControl2.Size = New System.Drawing.Size(35, 13)
-        Me.LabelControl2.TabIndex = 2
-        Me.LabelControl2.Text = "Season"
+        Me.TEDesignCode.Enabled = False
+        Me.TEDesignCode.Location = New System.Drawing.Point(50, 9)
+        Me.TEDesignCode.Name = "TEDesignCode"
+        Me.TEDesignCode.Size = New System.Drawing.Size(153, 20)
+        Me.TEDesignCode.TabIndex = 4
         '
         'TESeason
         '
@@ -563,13 +478,180 @@ Partial Class FormFabricConsumption
         Me.TESeason.Size = New System.Drawing.Size(256, 20)
         Me.TESeason.TabIndex = 3
         '
-        'TEDesignCode
+        'LabelControl2
         '
-        Me.TEDesignCode.Enabled = False
-        Me.TEDesignCode.Location = New System.Drawing.Point(50, 9)
-        Me.TEDesignCode.Name = "TEDesignCode"
-        Me.TEDesignCode.Size = New System.Drawing.Size(153, 20)
-        Me.TEDesignCode.TabIndex = 4
+        Me.LabelControl2.Location = New System.Drawing.Point(12, 44)
+        Me.LabelControl2.Name = "LabelControl2"
+        Me.LabelControl2.Size = New System.Drawing.Size(35, 13)
+        Me.LabelControl2.TabIndex = 2
+        Me.LabelControl2.Text = "Season"
+        '
+        'TEDesignName
+        '
+        Me.TEDesignName.Enabled = False
+        Me.TEDesignName.Location = New System.Drawing.Point(209, 9)
+        Me.TEDesignName.Name = "TEDesignName"
+        Me.TEDesignName.Size = New System.Drawing.Size(281, 20)
+        Me.TEDesignName.TabIndex = 1
+        '
+        'LabelControl1
+        '
+        Me.LabelControl1.Location = New System.Drawing.Point(12, 12)
+        Me.LabelControl1.Name = "LabelControl1"
+        Me.LabelControl1.Size = New System.Drawing.Size(32, 13)
+        Me.LabelControl1.TabIndex = 0
+        Me.LabelControl1.Text = "Design"
+        '
+        'GridColumn22
+        '
+        Me.GridColumn22.Caption = "FOB Price"
+        Me.GridColumn22.DisplayFormat.FormatString = "N4"
+        Me.GridColumn22.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn22.FieldName = "price"
+        Me.GridColumn22.Name = "GridColumn22"
+        Me.GridColumn22.Visible = True
+        Me.GridColumn22.VisibleIndex = 2
+        Me.GridColumn22.Width = 167
+        '
+        'GridColumn8
+        '
+        Me.GridColumn8.Caption = "ID det"
+        Me.GridColumn8.FieldName = "id_fab_consumption"
+        Me.GridColumn8.Name = "GridColumn8"
+        '
+        'GridColumn9
+        '
+        Me.GridColumn9.Caption = "Category"
+        Me.GridColumn9.Name = "GridColumn9"
+        Me.GridColumn9.Visible = True
+        Me.GridColumn9.VisibleIndex = 0
+        Me.GridColumn9.Width = 233
+        '
+        'GridColumn10
+        '
+        Me.GridColumn10.Caption = "Material"
+        Me.GridColumn10.FieldName = "id_mat_det"
+        Me.GridColumn10.Name = "GridColumn10"
+        Me.GridColumn10.Visible = True
+        Me.GridColumn10.VisibleIndex = 1
+        Me.GridColumn10.Width = 282
+        '
+        'GridColumn14
+        '
+        Me.GridColumn14.Caption = "FOB Price"
+        Me.GridColumn14.DisplayFormat.FormatString = "N4"
+        Me.GridColumn14.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn14.FieldName = "price"
+        Me.GridColumn14.Name = "GridColumn14"
+        Me.GridColumn14.Visible = True
+        Me.GridColumn14.VisibleIndex = 2
+        Me.GridColumn14.Width = 167
+        '
+        'GridColumn23
+        '
+        Me.GridColumn23.Caption = "Qty"
+        Me.GridColumn23.Name = "GridColumn23"
+        Me.GridColumn23.Visible = True
+        Me.GridColumn23.VisibleIndex = 3
+        Me.GridColumn23.Width = 190
+        '
+        'GridColumn15
+        '
+        Me.GridColumn15.Caption = "ID det"
+        Me.GridColumn15.FieldName = "id_fab_consumption"
+        Me.GridColumn15.Name = "GridColumn15"
+        '
+        'GridColumn16
+        '
+        Me.GridColumn16.Caption = "Category"
+        Me.GridColumn16.Name = "GridColumn16"
+        Me.GridColumn16.Visible = True
+        Me.GridColumn16.VisibleIndex = 0
+        Me.GridColumn16.Width = 233
+        '
+        'GridColumn17
+        '
+        Me.GridColumn17.Caption = "Technical work"
+        Me.GridColumn17.ColumnEdit = Me.RISLETechWork
+        Me.GridColumn17.FieldName = "id_ovh_price"
+        Me.GridColumn17.Name = "GridColumn17"
+        Me.GridColumn17.Visible = True
+        Me.GridColumn17.VisibleIndex = 1
+        Me.GridColumn17.Width = 282
+        '
+        'GridColumn21
+        '
+        Me.GridColumn21.Caption = "Price"
+        Me.GridColumn21.DisplayFormat.FormatString = "N4"
+        Me.GridColumn21.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn21.FieldName = "price"
+        Me.GridColumn21.Name = "GridColumn21"
+        Me.GridColumn21.Visible = True
+        Me.GridColumn21.VisibleIndex = 2
+        Me.GridColumn21.Width = 167
+        '
+        'GridColumn24
+        '
+        Me.GridColumn24.Caption = "Qty"
+        Me.GridColumn24.Name = "GridColumn24"
+        Me.GridColumn24.Visible = True
+        Me.GridColumn24.VisibleIndex = 3
+        Me.GridColumn24.Width = 190
+        '
+        'RISLETechWork
+        '
+        Me.RISLETechWork.AutoHeight = False
+        Me.RISLETechWork.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.RISLETechWork.Name = "RISLETechWork"
+        Me.RISLETechWork.View = Me.GridView1
+        '
+        'GridView1
+        '
+        Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn25, Me.GridColumn26, Me.GridColumn27, Me.GridColumn28, Me.GridColumn29})
+        Me.GridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView1.Name = "GridView1"
+        Me.GridView1.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView1.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn25
+        '
+        Me.GridColumn25.Caption = "ID"
+        Me.GridColumn25.FieldName = "id_ovh_price"
+        Me.GridColumn25.Name = "GridColumn25"
+        '
+        'GridColumn26
+        '
+        Me.GridColumn26.Caption = "Vendor"
+        Me.GridColumn26.FieldName = "comp_name"
+        Me.GridColumn26.Name = "GridColumn26"
+        Me.GridColumn26.Visible = True
+        Me.GridColumn26.VisibleIndex = 0
+        '
+        'GridColumn27
+        '
+        Me.GridColumn27.Caption = "Work"
+        Me.GridColumn27.FieldName = "overhead"
+        Me.GridColumn27.Name = "GridColumn27"
+        Me.GridColumn27.Visible = True
+        Me.GridColumn27.VisibleIndex = 1
+        '
+        'GridColumn28
+        '
+        Me.GridColumn28.Caption = "Description"
+        Me.GridColumn28.FieldName = "ovh_price_name"
+        Me.GridColumn28.Name = "GridColumn28"
+        Me.GridColumn28.Visible = True
+        Me.GridColumn28.VisibleIndex = 2
+        '
+        'GridColumn29
+        '
+        Me.GridColumn29.Caption = "FOB Price"
+        Me.GridColumn29.DisplayFormat.FormatString = "N2"
+        Me.GridColumn29.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn29.FieldName = "ovh_price"
+        Me.GridColumn29.Name = "GridColumn29"
+        Me.GridColumn29.Visible = True
+        Me.GridColumn29.VisibleIndex = 3
         '
         'FormFabricConsumption
         '
@@ -599,22 +681,24 @@ Partial Class FormFabricConsumption
         Me.XTCComponent.ResumeLayout(False)
         Me.XTPFabric.ResumeLayout(False)
         Me.XTPAcc.ResumeLayout(False)
-        Me.XTPWork.ResumeLayout(False)
-        CType(Me.GCOVH, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GVOVH, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RepositoryItemSearchLookUpEdit2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GCACC, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVACC, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RISLEACC, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTPWork.ResumeLayout(False)
+        CType(Me.GCOVH, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVOVH, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemSearchLookUpEdit2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl2.ResumeLayout(False)
         Me.PanelControl2.PerformLayout()
-        CType(Me.TEDesignName.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TESeason.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEDesignCode.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TESeason.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TEDesignName.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RISLETechWork, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -644,27 +728,19 @@ Partial Class FormFabricConsumption
     Friend WithEvents XTPWork As DevExpress.XtraTab.XtraTabPage
     Friend WithEvents GCOVH As DevExpress.XtraGrid.GridControl
     Friend WithEvents GVOVH As DevExpress.XtraGrid.Views.Grid.GridView
-    Friend WithEvents GridColumn15 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn16 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn17 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RepositoryItemSearchLookUpEdit2 As DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit
     Friend WithEvents GridView2 As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumn18 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn19 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn20 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn21 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RITEQty As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
     Friend WithEvents GCACC As DevExpress.XtraGrid.GridControl
     Friend WithEvents GVACC As DevExpress.XtraGrid.Views.Grid.GridView
-    Friend WithEvents GridColumn8 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn9 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn10 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RISLEACC As DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit
     Friend WithEvents GridView4 As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumn11 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn12 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn13 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn14 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RepositoryItemTextEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
     Friend WithEvents PanelControl2 As DevExpress.XtraEditors.PanelControl
     Friend WithEvents TESeason As DevExpress.XtraEditors.TextEdit
@@ -672,4 +748,22 @@ Partial Class FormFabricConsumption
     Friend WithEvents TEDesignName As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents TEDesignCode As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents GridColumn22 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn8 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn9 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn10 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn14 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn23 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn15 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn16 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn17 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn21 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn24 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RISLETechWork As DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit
+    Friend WithEvents GridView1 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn25 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn26 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn27 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn28 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn29 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

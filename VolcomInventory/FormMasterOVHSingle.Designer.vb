@@ -308,9 +308,9 @@ Partial Class FormMasterOVHSingle
         Me.BEnable.ImageList = Me.LargeImageCollection
         Me.BEnable.Location = New System.Drawing.Point(7, 12)
         Me.BEnable.Name = "BEnable"
-        Me.BEnable.Size = New System.Drawing.Size(147, 42)
+        Me.BEnable.Size = New System.Drawing.Size(180, 42)
         Me.BEnable.TabIndex = 3
-        Me.BEnable.Text = "Show in Component"
+        Me.BEnable.Text = "Toggle Show in Component"
         '
         'BtnAdd
         '

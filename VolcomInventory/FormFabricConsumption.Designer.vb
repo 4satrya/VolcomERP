@@ -33,6 +33,7 @@ Partial Class FormFabricConsumption
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn22 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RITEQty = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.PCNew = New DevExpress.XtraEditors.PanelControl()
@@ -45,15 +46,32 @@ Partial Class FormFabricConsumption
         Me.XTPAcc = New DevExpress.XtraTab.XtraTabPage()
         Me.GCACC = New DevExpress.XtraGrid.GridControl()
         Me.GVACC = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RISLEACC = New DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit()
         Me.GridView4 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn13 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn14 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn23 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemTextEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.XTPWork = New DevExpress.XtraTab.XtraTabPage()
         Me.GCOVH = New DevExpress.XtraGrid.GridControl()
         Me.GVOVH = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn15 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn16 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn17 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RISLETechWork = New DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit()
+        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn25 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn26 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn27 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn28 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn29 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn21 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn24 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemSearchLookUpEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit()
         Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn18 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -65,24 +83,6 @@ Partial Class FormFabricConsumption
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.TEDesignName = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
-        Me.GridColumn22 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn14 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn23 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn15 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn16 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn17 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn21 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn24 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.RISLETechWork = New DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit()
-        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.GridColumn25 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn26 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn27 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn28 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn29 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.GCFabCons, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -104,6 +104,8 @@ Partial Class FormFabricConsumption
         Me.XTPWork.SuspendLayout()
         CType(Me.GCOVH, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVOVH, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RISLETechWork, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemSearchLookUpEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -111,8 +113,6 @@ Partial Class FormFabricConsumption
         CType(Me.TEDesignCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TESeason.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEDesignName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RISLETechWork, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl1
@@ -172,6 +172,7 @@ Partial Class FormFabricConsumption
         'GridColumn7
         '
         Me.GridColumn7.Caption = "Category"
+        Me.GridColumn7.FieldName = "description"
         Me.GridColumn7.Name = "GridColumn7"
         Me.GridColumn7.Visible = True
         Me.GridColumn7.VisibleIndex = 0
@@ -226,10 +227,22 @@ Partial Class FormFabricConsumption
         Me.GridColumn5.VisibleIndex = 1
         Me.GridColumn5.Width = 1291
         '
+        'GridColumn22
+        '
+        Me.GridColumn22.Caption = "FOB Price"
+        Me.GridColumn22.DisplayFormat.FormatString = "N4"
+        Me.GridColumn22.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn22.FieldName = "price"
+        Me.GridColumn22.Name = "GridColumn22"
+        Me.GridColumn22.Visible = True
+        Me.GridColumn22.VisibleIndex = 2
+        Me.GridColumn22.Width = 167
+        '
         'GridColumn3
         '
         Me.GridColumn3.Caption = "Qty"
         Me.GridColumn3.ColumnEdit = Me.RITEQty
+        Me.GridColumn3.FieldName = "price"
         Me.GridColumn3.Name = "GridColumn3"
         Me.GridColumn3.Visible = True
         Me.GridColumn3.VisibleIndex = 3
@@ -338,6 +351,31 @@ Partial Class FormFabricConsumption
         Me.GVACC.Name = "GVACC"
         Me.GVACC.OptionsView.ShowGroupPanel = False
         '
+        'GridColumn8
+        '
+        Me.GridColumn8.Caption = "ID det"
+        Me.GridColumn8.FieldName = "id_fab_consumption"
+        Me.GridColumn8.Name = "GridColumn8"
+        '
+        'GridColumn9
+        '
+        Me.GridColumn9.Caption = "Category"
+        Me.GridColumn9.FieldName = "description"
+        Me.GridColumn9.Name = "GridColumn9"
+        Me.GridColumn9.Visible = True
+        Me.GridColumn9.VisibleIndex = 0
+        Me.GridColumn9.Width = 233
+        '
+        'GridColumn10
+        '
+        Me.GridColumn10.Caption = "Material"
+        Me.GridColumn10.ColumnEdit = Me.RISLEACC
+        Me.GridColumn10.FieldName = "id_mat_det"
+        Me.GridColumn10.Name = "GridColumn10"
+        Me.GridColumn10.Visible = True
+        Me.GridColumn10.VisibleIndex = 1
+        Me.GridColumn10.Width = 282
+        '
         'RISLEACC
         '
         Me.RISLEACC.AutoHeight = False
@@ -377,6 +415,28 @@ Partial Class FormFabricConsumption
         Me.GridColumn13.VisibleIndex = 1
         Me.GridColumn13.Width = 1291
         '
+        'GridColumn14
+        '
+        Me.GridColumn14.Caption = "FOB Price"
+        Me.GridColumn14.DisplayFormat.FormatString = "N4"
+        Me.GridColumn14.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn14.FieldName = "price"
+        Me.GridColumn14.Name = "GridColumn14"
+        Me.GridColumn14.Visible = True
+        Me.GridColumn14.VisibleIndex = 2
+        Me.GridColumn14.Width = 167
+        '
+        'GridColumn23
+        '
+        Me.GridColumn23.Caption = "Qty"
+        Me.GridColumn23.DisplayFormat.FormatString = "N4"
+        Me.GridColumn23.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn23.FieldName = "qty"
+        Me.GridColumn23.Name = "GridColumn23"
+        Me.GridColumn23.Visible = True
+        Me.GridColumn23.VisibleIndex = 3
+        Me.GridColumn23.Width = 190
+        '
         'RepositoryItemTextEdit1
         '
         Me.RepositoryItemTextEdit1.AutoHeight = False
@@ -409,6 +469,108 @@ Partial Class FormFabricConsumption
         Me.GVOVH.GridControl = Me.GCOVH
         Me.GVOVH.Name = "GVOVH"
         Me.GVOVH.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn15
+        '
+        Me.GridColumn15.Caption = "ID det"
+        Me.GridColumn15.FieldName = "id_fab_consumption"
+        Me.GridColumn15.Name = "GridColumn15"
+        '
+        'GridColumn16
+        '
+        Me.GridColumn16.Caption = "Category"
+        Me.GridColumn16.FieldName = "description"
+        Me.GridColumn16.Name = "GridColumn16"
+        Me.GridColumn16.Visible = True
+        Me.GridColumn16.VisibleIndex = 0
+        Me.GridColumn16.Width = 233
+        '
+        'GridColumn17
+        '
+        Me.GridColumn17.Caption = "Technical work"
+        Me.GridColumn17.ColumnEdit = Me.RISLETechWork
+        Me.GridColumn17.FieldName = "id_ovh_price"
+        Me.GridColumn17.Name = "GridColumn17"
+        Me.GridColumn17.Visible = True
+        Me.GridColumn17.VisibleIndex = 1
+        Me.GridColumn17.Width = 282
+        '
+        'RISLETechWork
+        '
+        Me.RISLETechWork.AutoHeight = False
+        Me.RISLETechWork.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.RISLETechWork.Name = "RISLETechWork"
+        Me.RISLETechWork.View = Me.GridView1
+        '
+        'GridView1
+        '
+        Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn25, Me.GridColumn26, Me.GridColumn27, Me.GridColumn28, Me.GridColumn29})
+        Me.GridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView1.Name = "GridView1"
+        Me.GridView1.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView1.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn25
+        '
+        Me.GridColumn25.Caption = "ID"
+        Me.GridColumn25.FieldName = "id_ovh_price"
+        Me.GridColumn25.Name = "GridColumn25"
+        '
+        'GridColumn26
+        '
+        Me.GridColumn26.Caption = "Vendor"
+        Me.GridColumn26.FieldName = "comp_name"
+        Me.GridColumn26.Name = "GridColumn26"
+        Me.GridColumn26.Visible = True
+        Me.GridColumn26.VisibleIndex = 0
+        '
+        'GridColumn27
+        '
+        Me.GridColumn27.Caption = "Work"
+        Me.GridColumn27.FieldName = "overhead"
+        Me.GridColumn27.Name = "GridColumn27"
+        Me.GridColumn27.Visible = True
+        Me.GridColumn27.VisibleIndex = 1
+        '
+        'GridColumn28
+        '
+        Me.GridColumn28.Caption = "Description"
+        Me.GridColumn28.FieldName = "ovh_price_name"
+        Me.GridColumn28.Name = "GridColumn28"
+        Me.GridColumn28.Visible = True
+        Me.GridColumn28.VisibleIndex = 2
+        '
+        'GridColumn29
+        '
+        Me.GridColumn29.Caption = "FOB Price"
+        Me.GridColumn29.DisplayFormat.FormatString = "N2"
+        Me.GridColumn29.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn29.FieldName = "ovh_price"
+        Me.GridColumn29.Name = "GridColumn29"
+        Me.GridColumn29.Visible = True
+        Me.GridColumn29.VisibleIndex = 3
+        '
+        'GridColumn21
+        '
+        Me.GridColumn21.Caption = "Price"
+        Me.GridColumn21.DisplayFormat.FormatString = "N4"
+        Me.GridColumn21.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn21.FieldName = "price"
+        Me.GridColumn21.Name = "GridColumn21"
+        Me.GridColumn21.Visible = True
+        Me.GridColumn21.VisibleIndex = 2
+        Me.GridColumn21.Width = 167
+        '
+        'GridColumn24
+        '
+        Me.GridColumn24.Caption = "Qty"
+        Me.GridColumn24.DisplayFormat.FormatString = "N4"
+        Me.GridColumn24.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn24.FieldName = "qty"
+        Me.GridColumn24.Name = "GridColumn24"
+        Me.GridColumn24.Visible = True
+        Me.GridColumn24.VisibleIndex = 3
+        Me.GridColumn24.Width = 190
         '
         'RepositoryItemSearchLookUpEdit2
         '
@@ -502,157 +664,6 @@ Partial Class FormFabricConsumption
         Me.LabelControl1.TabIndex = 0
         Me.LabelControl1.Text = "Design"
         '
-        'GridColumn22
-        '
-        Me.GridColumn22.Caption = "FOB Price"
-        Me.GridColumn22.DisplayFormat.FormatString = "N4"
-        Me.GridColumn22.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn22.FieldName = "price"
-        Me.GridColumn22.Name = "GridColumn22"
-        Me.GridColumn22.Visible = True
-        Me.GridColumn22.VisibleIndex = 2
-        Me.GridColumn22.Width = 167
-        '
-        'GridColumn8
-        '
-        Me.GridColumn8.Caption = "ID det"
-        Me.GridColumn8.FieldName = "id_fab_consumption"
-        Me.GridColumn8.Name = "GridColumn8"
-        '
-        'GridColumn9
-        '
-        Me.GridColumn9.Caption = "Category"
-        Me.GridColumn9.Name = "GridColumn9"
-        Me.GridColumn9.Visible = True
-        Me.GridColumn9.VisibleIndex = 0
-        Me.GridColumn9.Width = 233
-        '
-        'GridColumn10
-        '
-        Me.GridColumn10.Caption = "Material"
-        Me.GridColumn10.FieldName = "id_mat_det"
-        Me.GridColumn10.Name = "GridColumn10"
-        Me.GridColumn10.Visible = True
-        Me.GridColumn10.VisibleIndex = 1
-        Me.GridColumn10.Width = 282
-        '
-        'GridColumn14
-        '
-        Me.GridColumn14.Caption = "FOB Price"
-        Me.GridColumn14.DisplayFormat.FormatString = "N4"
-        Me.GridColumn14.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn14.FieldName = "price"
-        Me.GridColumn14.Name = "GridColumn14"
-        Me.GridColumn14.Visible = True
-        Me.GridColumn14.VisibleIndex = 2
-        Me.GridColumn14.Width = 167
-        '
-        'GridColumn23
-        '
-        Me.GridColumn23.Caption = "Qty"
-        Me.GridColumn23.Name = "GridColumn23"
-        Me.GridColumn23.Visible = True
-        Me.GridColumn23.VisibleIndex = 3
-        Me.GridColumn23.Width = 190
-        '
-        'GridColumn15
-        '
-        Me.GridColumn15.Caption = "ID det"
-        Me.GridColumn15.FieldName = "id_fab_consumption"
-        Me.GridColumn15.Name = "GridColumn15"
-        '
-        'GridColumn16
-        '
-        Me.GridColumn16.Caption = "Category"
-        Me.GridColumn16.Name = "GridColumn16"
-        Me.GridColumn16.Visible = True
-        Me.GridColumn16.VisibleIndex = 0
-        Me.GridColumn16.Width = 233
-        '
-        'GridColumn17
-        '
-        Me.GridColumn17.Caption = "Technical work"
-        Me.GridColumn17.ColumnEdit = Me.RISLETechWork
-        Me.GridColumn17.FieldName = "id_ovh_price"
-        Me.GridColumn17.Name = "GridColumn17"
-        Me.GridColumn17.Visible = True
-        Me.GridColumn17.VisibleIndex = 1
-        Me.GridColumn17.Width = 282
-        '
-        'GridColumn21
-        '
-        Me.GridColumn21.Caption = "Price"
-        Me.GridColumn21.DisplayFormat.FormatString = "N4"
-        Me.GridColumn21.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn21.FieldName = "price"
-        Me.GridColumn21.Name = "GridColumn21"
-        Me.GridColumn21.Visible = True
-        Me.GridColumn21.VisibleIndex = 2
-        Me.GridColumn21.Width = 167
-        '
-        'GridColumn24
-        '
-        Me.GridColumn24.Caption = "Qty"
-        Me.GridColumn24.Name = "GridColumn24"
-        Me.GridColumn24.Visible = True
-        Me.GridColumn24.VisibleIndex = 3
-        Me.GridColumn24.Width = 190
-        '
-        'RISLETechWork
-        '
-        Me.RISLETechWork.AutoHeight = False
-        Me.RISLETechWork.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.RISLETechWork.Name = "RISLETechWork"
-        Me.RISLETechWork.View = Me.GridView1
-        '
-        'GridView1
-        '
-        Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn25, Me.GridColumn26, Me.GridColumn27, Me.GridColumn28, Me.GridColumn29})
-        Me.GridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
-        Me.GridView1.Name = "GridView1"
-        Me.GridView1.OptionsSelection.EnableAppearanceFocusedCell = False
-        Me.GridView1.OptionsView.ShowGroupPanel = False
-        '
-        'GridColumn25
-        '
-        Me.GridColumn25.Caption = "ID"
-        Me.GridColumn25.FieldName = "id_ovh_price"
-        Me.GridColumn25.Name = "GridColumn25"
-        '
-        'GridColumn26
-        '
-        Me.GridColumn26.Caption = "Vendor"
-        Me.GridColumn26.FieldName = "comp_name"
-        Me.GridColumn26.Name = "GridColumn26"
-        Me.GridColumn26.Visible = True
-        Me.GridColumn26.VisibleIndex = 0
-        '
-        'GridColumn27
-        '
-        Me.GridColumn27.Caption = "Work"
-        Me.GridColumn27.FieldName = "overhead"
-        Me.GridColumn27.Name = "GridColumn27"
-        Me.GridColumn27.Visible = True
-        Me.GridColumn27.VisibleIndex = 1
-        '
-        'GridColumn28
-        '
-        Me.GridColumn28.Caption = "Description"
-        Me.GridColumn28.FieldName = "ovh_price_name"
-        Me.GridColumn28.Name = "GridColumn28"
-        Me.GridColumn28.Visible = True
-        Me.GridColumn28.VisibleIndex = 2
-        '
-        'GridColumn29
-        '
-        Me.GridColumn29.Caption = "FOB Price"
-        Me.GridColumn29.DisplayFormat.FormatString = "N2"
-        Me.GridColumn29.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn29.FieldName = "ovh_price"
-        Me.GridColumn29.Name = "GridColumn29"
-        Me.GridColumn29.Visible = True
-        Me.GridColumn29.VisibleIndex = 3
-        '
         'FormFabricConsumption
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -689,6 +700,8 @@ Partial Class FormFabricConsumption
         Me.XTPWork.ResumeLayout(False)
         CType(Me.GCOVH, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVOVH, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RISLETechWork, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemSearchLookUpEdit2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
@@ -697,8 +710,6 @@ Partial Class FormFabricConsumption
         CType(Me.TEDesignCode.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TESeason.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEDesignName.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RISLETechWork, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

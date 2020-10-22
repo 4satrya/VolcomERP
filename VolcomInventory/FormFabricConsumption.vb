@@ -48,7 +48,7 @@ ORDER BY c.`comp_name`"
     End Sub
 
     Sub load_fab()
-        Dim q As String = "SELECT dc.`id_design_component`,md.`id_mat_det`,dc.`description`,dc.`qty`
+        Dim q As String = "SELECT dc.`id_design_component`,md.`id_mat_det`,dc.`description`,dc.`qty`,dc.price
 FROM `tb_design_component` dc
 INNER JOIN tb_m_mat_det md ON md.`id_mat_det`=dc.`id_mat_det`
 WHERE dc.`id_design`='" & id_design & "' AND dc.`id_cat`='1'"
@@ -58,7 +58,7 @@ WHERE dc.`id_design`='" & id_design & "' AND dc.`id_cat`='1'"
     End Sub
 
     Sub load_acc()
-        Dim q As String = "SELECT dc.`id_design_component`,md.`id_mat_det`,dc.`description`,dc.`qty`
+        Dim q As String = "SELECT dc.`id_design_component`,md.`id_mat_det`,dc.`description`,dc.`qty`,dc.price
 FROM `tb_design_component` dc
 INNER JOIN tb_m_mat_det md ON md.`id_mat_det`=dc.`id_mat_det`
 WHERE dc.`id_design`='" & id_design & "' AND dc.`id_cat`='2'"
@@ -68,10 +68,10 @@ WHERE dc.`id_design`='" & id_design & "' AND dc.`id_cat`='2'"
     End Sub
 
     Sub load_ovh()
-        Dim q As String = "SELECT dc.`id_design_component`,md.`id_ovh`,dc.`description`,dc.`qty`
+        Dim q As String = "SELECT dc.`id_design_component`,dc.`id_ovh_price`,dc.`description`,dc.`qty`,dc.price
 FROM `tb_design_component` dc
-INNER JOIN tb_m_mat_det md ON md.`id_mat_det`=dc.`id_mat_det`
-WHERE dc.`id_design`='" & id_design & "' AND dc.`id_cat`='2'"
+INNER JOIN tb_m_ovh_price ovhp ON ovhp.`id_ovh_price`=dc.`id_ovh_price`
+WHERE dc.`id_design`='" & id_design & "' AND dc.`id_cat`='3'"
         Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
         GCOVH.DataSource = dt
         GVOVH.BestFitColumns()
@@ -173,5 +173,13 @@ WHERE dc.`id_design`='" & id_design & "' AND dc.`id_cat`='2'"
 
     Private Sub XTCComponent_SelectedPageChanged(sender As Object, e As DevExpress.XtraTab.TabPageChangedEventArgs) Handles XTCComponent.SelectedPageChanged
         allow_but()
+    End Sub
+
+    Private Sub RISLEMatDet_EditValueChanged(sender As Object, e As EventArgs) Handles RISLEMatDet.EditValueChanged
+        Try
+            GVOVH.SetFocusedRowCellValue("price", RISLEMatDet.View.GetFocusedRowCellValue("ovh_price"))
+        Catch ex As Exception
+
+        End Try
     End Sub
 End Class

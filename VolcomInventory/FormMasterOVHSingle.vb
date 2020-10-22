@@ -99,7 +99,7 @@
     '---------PRICE------------------
     Sub viewPrice()
         Try
-            Dim query As String = "SELECT * FROM tb_m_ovh_price a "
+            Dim query As String = "SELECT a.id_ovh_price,a.id_ovh,c.comp_name,d.currency,d.id_currency,c.id_comp,b.id_comp_contact,a.ovh_price,IF(a.is_enable_component=1,'yes','no') AS is_enable_component,a.ovh_price_name,a.ovh_price_date FROM tb_m_ovh_price a "
             query += "INNER JOIN tb_m_comp_contact b ON a.id_comp_contact = b.id_comp_contact "
             query += "INNER JOIN tb_m_comp c ON c.id_comp = b.id_comp "
             query += "INNER JOIN tb_lookup_currency d ON a.id_currency = d.id_currency "
@@ -145,5 +145,18 @@
         FormMasterOVHPrcSingle.action = "upd"
         FormMasterOVHPrcSingle.id_ovh_price = GVPrice.GetFocusedRowCellDisplayText("id_ovh_price").ToString
         FormMasterOVHPrcSingle.ShowDialog()
+    End Sub
+
+    Private Sub BEnable_Click(sender As Object, e As EventArgs) Handles BEnable.Click
+        If GVPrice.RowCount > 0 Then
+            If GVPrice.GetFocusedRowCellValue("is_enable_component").ToString = "yes" Then
+                Dim q As String = "UPDATE tb_m_ovh_price SET is_enable_component=2 WHERE id_ovh_price='" & GVPrice.GetFocusedRowCellValue("id_ovh_price").ToString & "'"
+                execute_non_query(q, True, "", "", "", "")
+            ElseIf GVPrice.GetFocusedRowCellValue("is_enable_component").ToString = "no" Then
+                Dim q As String = "UPDATE tb_m_ovh_price SET is_enable_component=1 WHERE id_ovh_price='" & GVPrice.GetFocusedRowCellValue("id_ovh_price").ToString & "'"
+                execute_non_query(q, True, "", "", "", "")
+            End If
+            viewPrice()
+        End If
     End Sub
 End Class

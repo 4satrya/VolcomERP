@@ -15,8 +15,19 @@
     End Sub
 
     Private Sub FormFabricConsumption_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim q As String = "SELECT d.design_code,d.design_display_name,s.season FROM tb_m_design d 
+INNER JOIN tb_season_delivery sd ON sd.`id_delivery`=d.`id_delivery`
+INNER JOIN tb_season s ON s.`id_season`=sd.`id_season`
+WHERE d.id_design='" & id_design & "'"
+        Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
+        '
+        If dt.Rows.Count > 0 Then
+            TEDesignCode.Text = dt.Rows(0)("design_code").ToString
+            TEDesignName.Text = dt.Rows(0)("design_code").ToString
+            TESeason.Text = dt.Rows(0)("season").ToString
+        End If
+        '
         load_mat()
-
         load_fab()
         load_acc()
 
@@ -41,6 +52,16 @@ WHERE dc.`id_design`='" & id_design & "' AND dc.`id_cat`='2'"
         Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
         GCACC.DataSource = dt
         GVACC.BestFitColumns()
+    End Sub
+
+    Sub load_ovh()
+        Dim q As String = "SELECT dc.`id_design_component`,md.`id_ovh`,dc.`description`,dc.`qty`
+FROM `tb_design_component` dc
+INNER JOIN tb_m_mat_det md ON md.`id_mat_det`=dc.`id_mat_det`
+WHERE dc.`id_design`='" & id_design & "' AND dc.`id_cat`='2'"
+        Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
+        GCOVH.DataSource = dt
+        GVOVH.BestFitColumns()
     End Sub
 
     Private Sub BSave_Click(sender As Object, e As EventArgs) Handles BSave.Click
@@ -119,6 +140,12 @@ WHERE dc.`id_design`='" & id_design & "' AND dc.`id_cat`='2'"
         If XTCComponent.SelectedTabPageIndex = 0 Then
             GVFabCons.AddNewRow()
             GVFabCons.FocusedRowHandle = GVFabCons.RowCount - 1
+        ElseIf XTCComponent.SelectedTabPageIndex = 1 Then
+            GVFabCons.AddNewRow()
+            GVFabCons.FocusedRowHandle = GVFabCons.RowCount - 1
+        ElseIf XTCComponent.SelectedTabPageIndex = 2 Then
+            GVOVH.AddNewRow()
+            GVOVH.FocusedRowHandle = GVFabCons.RowCount - 1
         End If
         allow_but()
     End Sub

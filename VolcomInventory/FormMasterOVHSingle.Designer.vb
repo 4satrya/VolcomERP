@@ -41,6 +41,7 @@ Partial Class FormMasterOVHSingle
         Me.BtnCancel = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnSave = New DevExpress.XtraEditors.SimpleButton()
         Me.XTPPrice = New DevExpress.XtraTab.XtraTabPage()
+        Me.BEnable = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnAdd = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnEdit = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnDelete = New DevExpress.XtraEditors.SimpleButton()
@@ -54,6 +55,8 @@ Partial Class FormMasterOVHSingle
         Me.GridColumnCurrency = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ColPrice = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ColDate = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RICEComponent = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.GridView4 = New DevExpress.XtraGrid.Views.Grid.GridView()
         CType(Me.ErrorProviderOVH, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PCLotTitle, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -77,6 +80,7 @@ Partial Class FormMasterOVHSingle
         Me.XtraTabPage1.SuspendLayout()
         CType(Me.GCPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVPrice, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RICEComponent, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -120,7 +124,7 @@ Partial Class FormMasterOVHSingle
         Me.XTCDetSample.LookAndFeel.SkinName = "Xmas 2008 Blue"
         Me.XTCDetSample.Name = "XTCDetSample"
         Me.XTCDetSample.SelectedTabPage = Me.XTPGeneral
-        Me.XTCDetSample.Size = New System.Drawing.Size(704, 314)
+        Me.XTCDetSample.Size = New System.Drawing.Size(704, 359)
         Me.XTCDetSample.TabIndex = 46
         Me.XTCDetSample.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPGeneral, Me.XTPPrice})
         '
@@ -142,7 +146,7 @@ Partial Class FormMasterOVHSingle
         Me.XTPGeneral.Controls.Add(Me.PanelControl1)
         Me.XTPGeneral.ImageIndex = 3
         Me.XTPGeneral.Name = "XTPGeneral"
-        Me.XTPGeneral.Size = New System.Drawing.Size(612, 308)
+        Me.XTPGeneral.Size = New System.Drawing.Size(612, 353)
         Me.XTPGeneral.Text = "General"
         '
         'PCGeneral
@@ -261,7 +265,7 @@ Partial Class FormMasterOVHSingle
         Me.PanelControl1.Controls.Add(Me.BtnCancel)
         Me.PanelControl1.Controls.Add(Me.BtnSave)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl1.Location = New System.Drawing.Point(0, 247)
+        Me.PanelControl1.Location = New System.Drawing.Point(0, 292)
         Me.PanelControl1.LookAndFeel.SkinName = "Lilian"
         Me.PanelControl1.LookAndFeel.UseDefaultLookAndFeel = False
         Me.PanelControl1.Name = "PanelControl1"
@@ -287,6 +291,7 @@ Partial Class FormMasterOVHSingle
         '
         'XTPPrice
         '
+        Me.XTPPrice.Controls.Add(Me.BEnable)
         Me.XTPPrice.Controls.Add(Me.BtnAdd)
         Me.XTPPrice.Controls.Add(Me.BtnEdit)
         Me.XTPPrice.Controls.Add(Me.BtnDelete)
@@ -294,8 +299,18 @@ Partial Class FormMasterOVHSingle
         Me.XTPPrice.ImageIndex = 1
         Me.XTPPrice.Name = "XTPPrice"
         Me.XTPPrice.PageVisible = False
-        Me.XTPPrice.Size = New System.Drawing.Size(612, 308)
+        Me.XTPPrice.Size = New System.Drawing.Size(612, 353)
         Me.XTPPrice.Text = "Price"
+        '
+        'BEnable
+        '
+        Me.BEnable.Image = CType(resources.GetObject("BEnable.Image"), System.Drawing.Image)
+        Me.BEnable.ImageList = Me.LargeImageCollection
+        Me.BEnable.Location = New System.Drawing.Point(7, 12)
+        Me.BEnable.Name = "BEnable"
+        Me.BEnable.Size = New System.Drawing.Size(147, 42)
+        Me.BEnable.TabIndex = 3
+        Me.BEnable.Text = "Show in Component"
         '
         'BtnAdd
         '
@@ -320,6 +335,7 @@ Partial Class FormMasterOVHSingle
         '
         'BtnDelete
         '
+        Me.BtnDelete.Enabled = False
         Me.BtnDelete.ImageIndex = 4
         Me.BtnDelete.ImageList = Me.LargeImageCollection
         Me.BtnDelete.Location = New System.Drawing.Point(319, 12)
@@ -331,10 +347,10 @@ Partial Class FormMasterOVHSingle
         '
         'XtraTabControl1
         '
-        Me.XtraTabControl1.Location = New System.Drawing.Point(11, 39)
+        Me.XtraTabControl1.Location = New System.Drawing.Point(6, 69)
         Me.XtraTabControl1.Name = "XtraTabControl1"
         Me.XtraTabControl1.SelectedTabPage = Me.XtraTabPage1
-        Me.XtraTabControl1.Size = New System.Drawing.Size(591, 223)
+        Me.XtraTabControl1.Size = New System.Drawing.Size(591, 262)
         Me.XtraTabControl1.TabIndex = 0
         Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XtraTabPage1})
         '
@@ -342,7 +358,7 @@ Partial Class FormMasterOVHSingle
         '
         Me.XtraTabPage1.Controls.Add(Me.GCPrice)
         Me.XtraTabPage1.Name = "XtraTabPage1"
-        Me.XtraTabPage1.Size = New System.Drawing.Size(585, 195)
+        Me.XtraTabPage1.Size = New System.Drawing.Size(585, 234)
         Me.XtraTabPage1.Text = "Price From Vendor"
         '
         'GCPrice
@@ -351,13 +367,14 @@ Partial Class FormMasterOVHSingle
         Me.GCPrice.Location = New System.Drawing.Point(0, 0)
         Me.GCPrice.MainView = Me.GVPrice
         Me.GCPrice.Name = "GCPrice"
-        Me.GCPrice.Size = New System.Drawing.Size(585, 195)
+        Me.GCPrice.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RICEComponent})
+        Me.GCPrice.Size = New System.Drawing.Size(585, 234)
         Me.GCPrice.TabIndex = 2
         Me.GCPrice.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVPrice, Me.GridView4})
         '
         'GVPrice
         '
-        Me.GVPrice.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ColIdOVHPrice, Me.ColCompany, Me.ColPriceName, Me.GridColumnCurrency, Me.ColPrice, Me.ColDate})
+        Me.GVPrice.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ColIdOVHPrice, Me.ColCompany, Me.ColPriceName, Me.GridColumnCurrency, Me.ColPrice, Me.ColDate, Me.GridColumn1})
         Me.GVPrice.GridControl = Me.GCPrice
         Me.GVPrice.Name = "GVPrice"
         Me.GVPrice.OptionsBehavior.Editable = False
@@ -413,6 +430,26 @@ Partial Class FormMasterOVHSingle
         Me.ColDate.Visible = True
         Me.ColDate.VisibleIndex = 4
         '
+        'GridColumn1
+        '
+        Me.GridColumn1.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn1.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn1.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn1.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn1.Caption = "Show in Component"
+        Me.GridColumn1.ColumnEdit = Me.RICEComponent
+        Me.GridColumn1.FieldName = "is_enable_component"
+        Me.GridColumn1.Name = "GridColumn1"
+        Me.GridColumn1.Visible = True
+        Me.GridColumn1.VisibleIndex = 5
+        '
+        'RICEComponent
+        '
+        Me.RICEComponent.AutoHeight = False
+        Me.RICEComponent.Name = "RICEComponent"
+        Me.RICEComponent.ValueChecked = "yes"
+        Me.RICEComponent.ValueUnchecked = "no"
+        '
         'GridView4
         '
         Me.GridView4.GridControl = Me.GCPrice
@@ -424,7 +461,7 @@ Partial Class FormMasterOVHSingle
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.BtnCancel
-        Me.ClientSize = New System.Drawing.Size(704, 360)
+        Me.ClientSize = New System.Drawing.Size(704, 405)
         Me.Controls.Add(Me.XTCDetSample)
         Me.Controls.Add(Me.PCLotTitle)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
@@ -458,6 +495,7 @@ Partial Class FormMasterOVHSingle
         Me.XtraTabPage1.ResumeLayout(False)
         CType(Me.GCPrice, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVPrice, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RICEComponent, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -496,4 +534,7 @@ Partial Class FormMasterOVHSingle
     Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LEOVHCat As DevExpress.XtraEditors.LookUpEdit
     Friend WithEvents LabelControl3 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents BEnable As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RICEComponent As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
 End Class

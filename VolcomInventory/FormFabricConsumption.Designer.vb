@@ -29,7 +29,7 @@ Partial Class FormFabricConsumption
         Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RISLEMatDet = New DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit()
-        Me.RepositoryItemSearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.RVMatDet = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -83,12 +83,13 @@ Partial Class FormFabricConsumption
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.TEDesignName = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
+        Me.GridColumn30 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.GCFabCons, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVFabCons, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RISLEMatDet, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RepositoryItemSearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RVMatDet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RITEQty, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PCNew, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PCNew.SuspendLayout()
@@ -193,15 +194,15 @@ Partial Class FormFabricConsumption
         Me.RISLEMatDet.AutoHeight = False
         Me.RISLEMatDet.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.RISLEMatDet.Name = "RISLEMatDet"
-        Me.RISLEMatDet.View = Me.RepositoryItemSearchLookUpEdit1View
+        Me.RISLEMatDet.View = Me.RVMatDet
         '
-        'RepositoryItemSearchLookUpEdit1View
+        'RVMatDet
         '
-        Me.RepositoryItemSearchLookUpEdit1View.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn4, Me.GridColumn6, Me.GridColumn5})
-        Me.RepositoryItemSearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
-        Me.RepositoryItemSearchLookUpEdit1View.Name = "RepositoryItemSearchLookUpEdit1View"
-        Me.RepositoryItemSearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = False
-        Me.RepositoryItemSearchLookUpEdit1View.OptionsView.ShowGroupPanel = False
+        Me.RVMatDet.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn4, Me.GridColumn6, Me.GridColumn5, Me.GridColumn30})
+        Me.RVMatDet.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.RVMatDet.Name = "RVMatDet"
+        Me.RVMatDet.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.RVMatDet.OptionsView.ShowGroupPanel = False
         '
         'GridColumn4
         '
@@ -242,7 +243,7 @@ Partial Class FormFabricConsumption
         '
         Me.GridColumn3.Caption = "Qty"
         Me.GridColumn3.ColumnEdit = Me.RITEQty
-        Me.GridColumn3.FieldName = "price"
+        Me.GridColumn3.FieldName = "qty"
         Me.GridColumn3.Name = "GridColumn3"
         Me.GridColumn3.Visible = True
         Me.GridColumn3.VisibleIndex = 3
@@ -664,6 +665,16 @@ Partial Class FormFabricConsumption
         Me.LabelControl1.TabIndex = 0
         Me.LabelControl1.Text = "Design"
         '
+        'GridColumn30
+        '
+        Me.GridColumn30.Caption = "Price"
+        Me.GridColumn30.DisplayFormat.FormatString = "N4"
+        Me.GridColumn30.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn30.FieldName = "mat_det_price"
+        Me.GridColumn30.Name = "GridColumn30"
+        Me.GridColumn30.Visible = True
+        Me.GridColumn30.VisibleIndex = 2
+        '
         'FormFabricConsumption
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -684,7 +695,7 @@ Partial Class FormFabricConsumption
         CType(Me.GCFabCons, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVFabCons, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RISLEMatDet, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RepositoryItemSearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RVMatDet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RITEQty, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PCNew, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PCNew.ResumeLayout(False)
@@ -720,7 +731,7 @@ Partial Class FormFabricConsumption
     Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn2 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RISLEMatDet As DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit
-    Friend WithEvents RepositoryItemSearchLookUpEdit1View As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents RVMatDet As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
@@ -777,4 +788,5 @@ Partial Class FormFabricConsumption
     Friend WithEvents GridColumn27 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn28 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn29 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn30 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

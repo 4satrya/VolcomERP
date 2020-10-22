@@ -28,10 +28,11 @@ WHERE d.id_design='" & id_design & "'"
         End If
         '
         load_mat()
+        load_work()
 
         load_fab()
         load_acc()
-        load_work()
+        load_ovh()
 
         allow_but()
     End Sub
@@ -44,7 +45,7 @@ INNER JOIN tb_m_comp_contact cc ON cc.`id_comp_contact`=ovhp.`id_comp_contact`
 INNER JOIN tb_m_comp c ON c.`id_comp`=cc.`id_comp`
 WHERE ovhp.`is_enable_component`=1
 ORDER BY c.`comp_name`"
-        viewSearchLookupRepositoryQuery(RISLEACC, q, 0, "mat_det_name", "id_mat_det")
+        viewSearchLookupRepositoryQuery(RISLETechWork, q, 0, "overhead", "id_ovh_price")
     End Sub
 
     Sub load_fab()
@@ -176,10 +177,17 @@ WHERE dc.`id_design`='" & id_design & "' AND dc.`id_cat`='3'"
     End Sub
 
     Private Sub RISLEMatDet_EditValueChanged(sender As Object, e As EventArgs) Handles RISLEMatDet.EditValueChanged
-        Try
-            GVOVH.SetFocusedRowCellValue("price", RISLEMatDet.View.GetFocusedRowCellValue("ovh_price"))
-        Catch ex As Exception
+        Dim sle As DevExpress.XtraEditors.SearchLookUpEdit = CType(sender, DevExpress.XtraEditors.SearchLookUpEdit)
+        GVFabCons.SetFocusedRowCellValue("price", sle.Properties.View.GetFocusedRowCellValue("mat_det_price").ToString())
+    End Sub
 
-        End Try
+    Private Sub RISLEACC_EditValueChanged(sender As Object, e As EventArgs) Handles RISLEACC.EditValueChanged
+        Dim sle As DevExpress.XtraEditors.SearchLookUpEdit = CType(sender, DevExpress.XtraEditors.SearchLookUpEdit)
+        GVACC.SetFocusedRowCellValue("price", sle.Properties.View.GetFocusedRowCellValue("mat_det_price").ToString())
+    End Sub
+
+    Private Sub RISLETechWork_EditValueChanged(sender As Object, e As EventArgs) Handles RISLETechWork.EditValueChanged
+        Dim sle As DevExpress.XtraEditors.SearchLookUpEdit = CType(sender, DevExpress.XtraEditors.SearchLookUpEdit)
+        GVOVH.SetFocusedRowCellValue("price", sle.Properties.View.GetFocusedRowCellValue("ovh_price").ToString())
     End Sub
 End Class

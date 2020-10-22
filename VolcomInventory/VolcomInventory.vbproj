@@ -430,6 +430,12 @@
     <Compile Include="FormBankWithdrawalBuyValas.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormBankWithdrawalCompen.Designer.vb">
+      <DependentUpon>FormBankWithdrawalCompen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormBankWithdrawalCompen.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormBankWithdrawalDP.Designer.vb">
       <DependentUpon>FormBankWithdrawalDP.vb</DependentUpon>
     </Compile>
@@ -8805,6 +8811,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormBankWithdrawalBuyValas.resx">
       <DependentUpon>FormBankWithdrawalBuyValas.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormBankWithdrawalCompen.resx">
+      <DependentUpon>FormBankWithdrawalCompen.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormBankWithdrawalDP.resx">
       <DependentUpon>FormBankWithdrawalDP.vb</DependentUpon>

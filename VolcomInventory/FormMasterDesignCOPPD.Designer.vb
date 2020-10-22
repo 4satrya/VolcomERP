@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FormMasterDesignCOPPD
     Inherits DevExpress.XtraEditors.XtraForm
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         If disposing AndAlso components IsNot Nothing Then
             components.Dispose()
@@ -17,7 +17,7 @@ Partial Class FormMasterDesignCOPPD
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMasterDesignCOPPD))
@@ -45,11 +45,6 @@ Partial Class FormMasterDesignCOPPD
         Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
         Me.TETargetCost = New DevExpress.XtraEditors.TextEdit()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
-        Me.SLEColdStorage = New DevExpress.XtraEditors.SearchLookUpEdit()
-        Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.GridColumn21 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn22 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.LabelControl9 = New DevExpress.XtraEditors.LabelControl()
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
         Me.XTCCOPPD = New DevExpress.XtraTab.XtraTabControl()
         Me.XTPCurrent = New DevExpress.XtraTab.XtraTabPage()
@@ -102,8 +97,6 @@ Partial Class FormMasterDesignCOPPD
         CType(Me.TETargetCost.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
-        CType(Me.SLEColdStorage.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
         CType(Me.XTCCOPPD, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -272,7 +265,7 @@ Partial Class FormMasterDesignCOPPD
         Me.TEDesc.Properties.Appearance.Options.UseFont = True
         Me.TEDesc.Properties.EditValueChangedDelay = 1
         Me.TEDesc.Properties.ReadOnly = True
-        Me.TEDesc.Size = New System.Drawing.Size(247, 20)
+        Me.TEDesc.Size = New System.Drawing.Size(545, 20)
         Me.TEDesc.TabIndex = 8897
         Me.TEDesc.TabStop = False
         '
@@ -420,8 +413,6 @@ Partial Class FormMasterDesignCOPPD
         '
         'PanelControl1
         '
-        Me.PanelControl1.Controls.Add(Me.SLEColdStorage)
-        Me.PanelControl1.Controls.Add(Me.LabelControl9)
         Me.PanelControl1.Controls.Add(Me.TEDesc)
         Me.PanelControl1.Controls.Add(Me.LabelControl6)
         Me.PanelControl1.Controls.Add(Me.BtnBrowseContactFrom)
@@ -445,45 +436,6 @@ Partial Class FormMasterDesignCOPPD
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(827, 151)
         Me.PanelControl1.TabIndex = 8910
-        '
-        'SLEColdStorage
-        '
-        Me.SLEColdStorage.Location = New System.Drawing.Point(621, 18)
-        Me.SLEColdStorage.Name = "SLEColdStorage"
-        Me.SLEColdStorage.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.SLEColdStorage.Properties.View = Me.SearchLookUpEdit1View
-        Me.SLEColdStorage.Size = New System.Drawing.Size(194, 20)
-        Me.SLEColdStorage.TabIndex = 8911
-        '
-        'SearchLookUpEdit1View
-        '
-        Me.SearchLookUpEdit1View.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn21, Me.GridColumn22})
-        Me.SearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
-        Me.SearchLookUpEdit1View.Name = "SearchLookUpEdit1View"
-        Me.SearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = False
-        Me.SearchLookUpEdit1View.OptionsView.ShowGroupPanel = False
-        '
-        'GridColumn21
-        '
-        Me.GridColumn21.Caption = "Id"
-        Me.GridColumn21.FieldName = "id"
-        Me.GridColumn21.Name = "GridColumn21"
-        '
-        'GridColumn22
-        '
-        Me.GridColumn22.Caption = "Description"
-        Me.GridColumn22.FieldName = "cold_desc"
-        Me.GridColumn22.Name = "GridColumn22"
-        Me.GridColumn22.Visible = True
-        Me.GridColumn22.VisibleIndex = 0
-        '
-        'LabelControl9
-        '
-        Me.LabelControl9.Location = New System.Drawing.Point(523, 21)
-        Me.LabelControl9.Name = "LabelControl9"
-        Me.LabelControl9.Size = New System.Drawing.Size(93, 13)
-        Me.LabelControl9.TabIndex = 8910
-        Me.LabelControl9.Text = "Room/Cool Storage"
         '
         'PanelControl2
         '
@@ -945,8 +897,6 @@ Partial Class FormMasterDesignCOPPD
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         Me.PanelControl1.PerformLayout()
-        CType(Me.SLEColdStorage.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl2.ResumeLayout(False)
         CType(Me.XTCCOPPD, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1031,9 +981,4 @@ Partial Class FormMasterDesignCOPPD
     Friend WithEvents GridView1 As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumn19 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn20 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents LabelControl9 As DevExpress.XtraEditors.LabelControl
-    Friend WithEvents SLEColdStorage As DevExpress.XtraEditors.SearchLookUpEdit
-    Friend WithEvents SearchLookUpEdit1View As DevExpress.XtraGrid.Views.Grid.GridView
-    Friend WithEvents GridColumn21 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn22 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

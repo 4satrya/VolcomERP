@@ -455,7 +455,7 @@ Partial Class FormMasterDesignCOPPropose
         Me.GBBefore.Columns.Add(Me.BandedGridColumn2)
         Me.GBBefore.Name = "GBBefore"
         Me.GBBefore.VisibleIndex = 1
-        Me.GBBefore.Width = 619
+        Me.GBBefore.Width = 544
         '
         'GridColumnVendorCodeBefore
         '
@@ -537,7 +537,6 @@ Partial Class FormMasterDesignCOPPropose
         Me.BandedGridColumn2.Caption = "Cool Storage"
         Me.BandedGridColumn2.FieldName = "cold_storage_before"
         Me.BandedGridColumn2.Name = "BandedGridColumn2"
-        Me.BandedGridColumn2.Visible = True
         '
         'GBAfter
         '
@@ -553,7 +552,7 @@ Partial Class FormMasterDesignCOPPropose
         Me.GBAfter.Columns.Add(Me.BandedGridColumn3)
         Me.GBAfter.Name = "GBAfter"
         Me.GBAfter.VisibleIndex = 2
-        Me.GBAfter.Width = 600
+        Me.GBAfter.Width = 525
         '
         'GridColumnVendorCode
         '
@@ -635,7 +634,6 @@ Partial Class FormMasterDesignCOPPropose
         Me.BandedGridColumn3.Caption = "Cool Storage"
         Me.BandedGridColumn3.FieldName = "cold_storage_after"
         Me.BandedGridColumn3.Name = "BandedGridColumn3"
-        Me.BandedGridColumn3.Visible = True
         '
         'BandedGridColumnIdCompContact
         '

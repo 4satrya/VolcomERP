@@ -209,7 +209,9 @@
 ,IFNULL(rec.qty_rec,0) AS qty_rec,IFNULL(rec.harga_satuan_rec,0) AS harga_satuan_rec,IFNULL(rec.amount_rec,0) AS amount_rec
 ,IFNULL(req.qty_used,0) AS qty_req,IFNULL(req.harga_satuan_used,0) AS harga_satuan_req,IFNULL(req.amount_used,0) AS amount_req
 ,IFNULL(used.qty_used,0) AS qty_used,IFNULL(used.harga_satuan_used,0) AS harga_satuan_used,IFNULL(used.amount_used,0) AS amount_used
-,IFNULL(rem.qty_rem,0) AS qty_rem,IFNULL(rem.harga_satuan_rem,0) AS harga_satuan_rem,IFNULL(rem.amount_rem,0) AS amount_rem
+-- ,IFNULL(rem.qty_rem,0) AS qty_rem,IFNULL(rem.harga_satuan_rem,0) AS harga_satuan_rem,IFNULL(rem.amount_rem,0) AS amount_rem
+,IFNULL(rem.qty_rem,0) AS qty_rem,(IF(IFNULL(beg.qty_beg,0)=0,0,IFNULL(beg.amount_beg,0))+IFNULL(rec.amount_rec,0)-IFNULL(used.amount_used,0))/IFNULL(rem.qty_rem,0) AS harga_satuan_rem,(IF(IFNULL(beg.qty_beg,0)=0,0,IFNULL(beg.amount_beg,0))+IFNULL(rec.amount_rec,0)-IFNULL(used.amount_used,0)) AS amount_rem
+,IFNULL(rem_book.qty_rem,0) AS qty_rem_book,IFNULL(rem_book.harga_satuan_rem,0) AS harga_satuan_rem_book,IFNULL(rem_book.amount_rem,0) AS amount_rem_book
 ,itc.item_cat
 FROM tb_item it
 INNER JOIN tb_item_cat itc ON itc.id_item_cat=it.id_item_cat
@@ -255,10 +257,19 @@ LEFT JOIN (
 	,SUM(IF(id_storage_category=1,storage_item_qty,-storage_item_qty)*`value`)/SUM(IF(id_storage_category=1,storage_item_qty,-storage_item_qty)) AS harga_satuan_rem
 	,SUM(IF(id_storage_category=1,storage_item_qty,-storage_item_qty)*`value`) AS amount_rem
 	FROM `tb_storage_item`
-	WHERE DATE(storage_item_datetime)<='" & date_until & "'
+	WHERE DATE(storage_item_datetime)<='" & date_until & "' AND NOT report_mark_type='154' AND NOT report_mark_type='163'
 	GROUP BY id_item
 	HAVING qty_rem!=0
 )rem ON rem.id_item=it.id_item
+LEFT JOIN (
+	SELECT id_item,SUM(IF(id_storage_category=1,storage_item_qty,-storage_item_qty)) AS qty_rem
+	,SUM(IF(id_storage_category=1,storage_item_qty,-storage_item_qty)*`value`)/SUM(IF(id_storage_category=1,storage_item_qty,-storage_item_qty)) AS harga_satuan_rem
+	,SUM(IF(id_storage_category=1,storage_item_qty,-storage_item_qty)*`value`) AS amount_rem
+	FROM `tb_storage_item`
+	WHERE DATE(storage_item_datetime)<='" & date_until & "' 
+	GROUP BY id_item
+	HAVING qty_rem!=0
+)rem_book ON rem_book.id_item=it.id_item
 WHERE NOT ISNULL(beg.id_item) OR NOT ISNULL(rec.id_item) OR NOT ISNULL(used.id_item) OR NOT ISNULL(rem.id_item)"
         Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
         GCPemakaian.DataSource = dt
@@ -281,6 +292,16 @@ WHERE NOT ISNULL(beg.id_item) OR NOT ISNULL(rec.id_item) OR NOT ISNULL(used.id_i
             SLEITem.EditValue = GVPemakaian.GetFocusedRowCellValue("id_item").ToString
             XTCStock.SelectedTabPageIndex = 1
             viewStockCard()
+        End If
+    End Sub
+
+    Private Sub BToggleBooking_Click(sender As Object, e As EventArgs) Handles BToggleBooking.Click
+        If gridBandBooking.Visible = True Then
+            gridBandBooking.Visible = False
+            gridBandrembooking.Visible = False
+        Else
+            gridBandBooking.Visible = True
+            gridBandrembooking.Visible = True
         End If
     End Sub
 End Class

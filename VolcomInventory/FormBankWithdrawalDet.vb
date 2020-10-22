@@ -1674,4 +1674,10 @@ VALUES('" & report_mark_type & "','" & decimalSQL(Decimal.Parse(TEKurs.EditValue
         FormBankWithdrawalDP.id_comp_contact = SLEVendor.EditValue.ToString
         FormBankWithdrawalDP.ShowDialog()
     End Sub
+
+    Private Sub BCompen_Click(sender As Object, e As EventArgs) Handles BCompen.Click
+        'FormBankWithdrawalCompen.id_comp = SLEVendor.EditValue.ToString
+        FormBankWithdrawalCompen.id_comp = "444"
+        FormBankWithdrawalCompen.ShowDialog()
+    End Sub
 End Class

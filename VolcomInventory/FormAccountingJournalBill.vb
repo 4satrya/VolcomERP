@@ -282,7 +282,7 @@
                         infoCustom("Journal saved.")
                     Else
                         'edit
-                        Dim query As String = String.Format("UPDATE tb_a_acc_trans SET acc_trans_note='{0}',date_reference='{2}' WHERE id_acc_trans='{1}'", MENote.Text, id_trans, date_reference)
+                        Dim query As String = String.Format("UPDATE tb_a_acc_trans SET acc_trans_note='{0}',date_reference='{2}' WHERE id_acc_trans='{1}'", addSlashes(MENote.Text), id_trans, date_reference)
                         execute_non_query(query, True, "", "", "", "")
                         'delete first
                         Dim sp_check As Boolean = False
@@ -310,15 +310,73 @@
                             Next
                         End If
                         '
+                        Dim id_reportd As String = ""
+                        Dim rreport_number As String = ""
+                        Dim report_mark_typed As String = ""
+                        Dim id_acc_srcd As String = ""
+                        Dim id_compd As String = ""
+                        Dim vend As String = ""
+                        Dim id_report_ref As String = ""
+                        Dim report_number_ref As String = ""
+                        Dim report_mark_type_ref As String = ""
+
                         For i As Integer = 0 To GVJournalDet.RowCount - 1
+                            '
+                            If GVJournalDet.GetRowCellValue(i, "id_report").ToString = "" Then
+                                'id_reportd = "NULL"
+                                id_reportd = id_trans
+                            Else
+                                id_reportd = "'" + GVJournalDet.GetRowCellValue(i, "id_report").ToString + "'"
+                            End If
+                            If GVJournalDet.GetRowCellValue(i, "report_mark_type").ToString = "" Then
+                                report_mark_typed = "NULL"
+                            Else
+                                report_mark_typed = "'" + GVJournalDet.GetRowCellValue(i, "report_mark_type").ToString + "'"
+                            End If
+                            If GVJournalDet.GetRowCellValue(i, "id_comp").ToString = "0" Then
+                                id_compd = "NULL"
+                            Else
+                                id_compd = "'" + GVJournalDet.GetRowCellValue(i, "id_comp").ToString + "'"
+                            End If
+                            If GVJournalDet.GetRowCellValue(i, "id_acc_src").ToString = "" Then
+                                id_acc_srcd = "NULL"
+                            Else
+                                id_acc_srcd = "'" + GVJournalDet.GetRowCellValue(i, "id_acc_src").ToString + "'"
+                            End If
+                            If GVJournalDet.GetRowCellValue(i, "id_report_ref").ToString = "" Then
+                                id_report_ref = "NULL"
+                            Else
+                                id_report_ref = "'" + GVJournalDet.GetRowCellValue(i, "id_report_ref").ToString + "'"
+                            End If
+                            If GVJournalDet.GetRowCellValue(i, "report_number_ref").ToString = "" Then
+                                report_number_ref = "NULL"
+                            Else
+                                report_number_ref = "'" + addSlashes(GVJournalDet.GetRowCellValue(i, "report_number_ref").ToString) + "'"
+                            End If
+                            If GVJournalDet.GetRowCellValue(i, "id_comp").ToString = "0" Then
+                                vend = "NULL"
+                            Else
+                                vend = "'" + execute_query("SELECT comp_number FROM tb_m_comp WHERE id_comp = " + id_compd, 0, True, "", "", "", "") + "'"
+                            End If
+                            If GVJournalDet.GetRowCellValue(i, "report_number").ToString = "" Then
+                                rreport_number = addSlashes(TENumber.Text)
+                            Else
+                                rreport_number = addSlashes(GVJournalDet.GetRowCellValue(i, "report_number").ToString)
+                            End If
+                            If GVJournalDet.GetRowCellValue(i, "report_mark_type_ref").ToString = "" Then
+                                report_mark_type_ref = "NULL"
+                            Else
+                                report_mark_type_ref = addSlashes(GVJournalDet.GetRowCellValue(i, "report_mark_type_ref").ToString)
+                            End If
+                            '
                             If Not GVJournalDet.GetRowCellValue(i, "id_acc").ToString = "" Then
                                 If GVJournalDet.GetRowCellValue(i, "id_acc_trans_det").ToString = "" Then
                                     'insert new
-                                    query = String.Format("INSERT INTO tb_a_acc_trans_det(id_acc_trans,id_acc,debit,credit,acc_trans_det_note,id_status_open) VALUES('{0}','{1}','{2}','{3}','{4}','{5}')", id_trans, GVJournalDet.GetRowCellValue(i, "id_acc").ToString, decimalSQL(GVJournalDet.GetRowCellValue(i, "debit").ToString), decimalSQL(GVJournalDet.GetRowCellValue(i, "credit").ToString), GVJournalDet.GetRowCellValue(i, "note").ToString, GVJournalDet.GetRowCellValue(i, "id_status_open").ToString)
+                                    query = String.Format("INSERT INTO tb_a_acc_trans_det(id_acc_trans,id_acc,debit,credit,acc_trans_det_note,id_status_open,report_mark_type,id_report,report_number,id_comp, id_acc_src, id_report_ref, report_number_ref,report_mark_type_ref,vendor) VALUES('{0}','{1}','{2}','{3}','{4}','{5}',{6},{7},'{8}',{9},{10},{11},{12},{13},{14})", id_trans, GVJournalDet.GetRowCellValue(i, "id_acc").ToString, decimalSQL(GVJournalDet.GetRowCellValue(i, "debit").ToString), decimalSQL(GVJournalDet.GetRowCellValue(i, "credit").ToString), addSlashes(GVJournalDet.GetRowCellValue(i, "note").ToString), GVJournalDet.GetRowCellValue(i, "id_status_open").ToString, report_mark_typed, id_reportd, rreport_number, id_compd, id_acc_srcd, id_report_ref, report_number_ref, report_mark_type_ref, vend)
                                     execute_non_query(query, True, "", "", "", "")
                                 Else
                                     'update
-                                    query = String.Format("UPDATE tb_a_acc_trans_det SET id_acc='{0}',debit='{1}',credit='{2}',acc_trans_det_note='{3}',id_status_open='{5}' WHERE id_acc_trans_det='{4}'", GVJournalDet.GetRowCellValue(i, "id_acc").ToString, decimalSQL(GVJournalDet.GetRowCellValue(i, "debit").ToString), decimalSQL(GVJournalDet.GetRowCellValue(i, "credit").ToString), GVJournalDet.GetRowCellValue(i, "note").ToString, GVJournalDet.GetRowCellValue(i, "id_acc_trans_det").ToString, GVJournalDet.GetRowCellValue(i, "id_status_open").ToString)
+                                    query = String.Format("UPDATE tb_a_acc_trans_det SET id_acc='{0}',debit='{1}',credit='{2}',acc_trans_det_note='{3}',id_status_open='{5}',report_mark_type={6},id_report={7},report_number='{8}',id_comp={9}, id_acc_src={10}, id_report_ref={11}, report_number_ref={12},report_mark_type_ref={13},vendor={14} WHERE id_acc_trans_det='{4}'", GVJournalDet.GetRowCellValue(i, "id_acc").ToString, decimalSQL(GVJournalDet.GetRowCellValue(i, "debit").ToString), decimalSQL(GVJournalDet.GetRowCellValue(i, "credit").ToString), addSlashes(GVJournalDet.GetRowCellValue(i, "note").ToString), GVJournalDet.GetRowCellValue(i, "id_acc_trans_det").ToString, GVJournalDet.GetRowCellValue(i, "id_status_open").ToString, report_mark_typed, id_reportd, rreport_number, id_compd, id_acc_srcd, id_report_ref, report_number_ref, report_mark_type_ref, vend)
                                     execute_non_query(query, True, "", "", "", "")
                                 End If
                             End If

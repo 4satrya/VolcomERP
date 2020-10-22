@@ -15,6 +15,12 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_0076B1E311A241BAB40EA0A25AFC576A"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_00F0F4F087140949E52726695C1A9B02"
         "OwnerKey" = "8:_C6AD0EC03A38D1F26B5B41AE94DEBF21"
         "MsmSig" = "8:_UNDEFINED"
@@ -95,6 +101,12 @@
         {
         "MsmKey" = "8:_034DE093818A1ACC8D9FE9BA967D5EA2"
         "OwnerKey" = "8:_E62098FBC5BABEB04648895F8AB48CFB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_0557195A4722BF4B7006606C078F134B"
+        "OwnerKey" = "8:_52A36FD2270A4A45947D0E923EB3DB1B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -189,6 +201,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_30E172EDA36AC711B0880B059828B28F"
+        "OwnerKey" = "8:_52A36FD2270A4A45947D0E923EB3DB1B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_31AFA3BF9DF1202D8F4C6E1AB1A06768"
         "OwnerKey" = "8:_52A36FD2270A4A45947D0E923EB3DB1B"
         "MsmSig" = "8:_UNDEFINED"
@@ -214,6 +232,12 @@
         "Entry"
         {
         "MsmKey" = "8:_377C329452B845B88198A2EF0FDAF2A3"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_396B5B8A8BF945E1814FF470A140A112"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -561,6 +585,30 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_74A9195574214AE88EC0B7B6E0919B78"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_7784C79FC34FEC6C1B6186B6916E856C"
+        "OwnerKey" = "8:_52A36FD2270A4A45947D0E923EB3DB1B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_7784C79FC34FEC6C1B6186B6916E856C"
+        "OwnerKey" = "8:_30E172EDA36AC711B0880B059828B28F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_7784C79FC34FEC6C1B6186B6916E856C"
+        "OwnerKey" = "8:_AEE1B0B3726E2257D3771F9132849210"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_802D8677D285D1520087F646CE8A666E"
         "OwnerKey" = "8:_0E89CD3F5BBDE9B79CD2DE4703D42C12"
         "MsmSig" = "8:_UNDEFINED"
@@ -611,6 +659,12 @@
         {
         "MsmKey" = "8:_802D8677D285D1520087F646CE8A666E"
         "OwnerKey" = "8:_C6AD0EC03A38D1F26B5B41AE94DEBF21"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_889937F38D4841B28BAA88F1743B3483"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -868,6 +922,24 @@
         "Entry"
         {
         "MsmKey" = "8:_A7FAB1175B8CF8A5AB9FF8C92C774A48"
+        "OwnerKey" = "8:_52A36FD2270A4A45947D0E923EB3DB1B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_AEE1B0B3726E2257D3771F9132849210"
+        "OwnerKey" = "8:_52A36FD2270A4A45947D0E923EB3DB1B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_AEE1B0B3726E2257D3771F9132849210"
+        "OwnerKey" = "8:_30E172EDA36AC711B0880B059828B28F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B1F616D1DF50AA913F69038E381CA6E1"
         "OwnerKey" = "8:_52A36FD2270A4A45947D0E923EB3DB1B"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1437,6 +1509,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_EFBBF879A8BD46B2AE75D5FCCB905370"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_FCF1F019FA6F08A9AFEDCED7004992E6"
         "OwnerKey" = "8:_ED86522A678F809149D152ADE9BDB7E4"
         "MsmSig" = "8:_UNDEFINED"
@@ -1468,6 +1546,30 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_B1F616D1DF50AA913F69038E381CA6E1"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_0557195A4722BF4B7006606C078F134B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_30E172EDA36AC711B0880B059828B28F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_AEE1B0B3726E2257D3771F9132849210"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_1A3BBEC31FE8E34B7940B9246D4FBC3F"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1487,6 +1589,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_A1F57B1D0E185FDFFAF87CEE81373E1D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_7784C79FC34FEC6C1B6186B6916E856C"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1824,6 +1932,26 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0076B1E311A241BAB40EA0A25AFC576A"
+            {
+            "SourcePath" = "8:..\\VolcomInventory\\libeay32.dll"
+            "TargetName" = "8:libeay32.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_F16FA54EC747462EA86465608EF63805"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_00F0F4F087140949E52726695C1A9B02"
             {
             "AssemblyRegister" = "3:1"
@@ -1900,6 +2028,37 @@
                     }
                 }
             "SourcePath" = "8:DevExpress.Xpo.v15.1.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_F16FA54EC747462EA86465608EF63805"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_0557195A4722BF4B7006606C078F134B"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:TuesPechkin, Version=2.1.1.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_0557195A4722BF4B7006606C078F134B"
+                    {
+                    "Name" = "8:TuesPechkin.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:TuesPechkin.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_F16FA54EC747462EA86465608EF63805"
@@ -2132,6 +2291,37 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_30E172EDA36AC711B0880B059828B28F"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Pechkin.Synchronized, Version=0.5.8.1, Culture=neutral, processorArchitecture=x86"
+                "ScatterAssemblies"
+                {
+                    "_30E172EDA36AC711B0880B059828B28F"
+                    {
+                    "Name" = "8:Pechkin.Synchronized.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Pechkin.Synchronized.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_F16FA54EC747462EA86465608EF63805"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_31AFA3BF9DF1202D8F4C6E1AB1A06768"
             {
             "AssemblyRegister" = "3:1"
@@ -2198,6 +2388,26 @@
             {
             "SourcePath" = "8:..\\installer_package\\notify.wav"
             "TargetName" = "8:notify.wav"
+            "Tag" = "8:"
+            "Folder" = "8:_F16FA54EC747462EA86465608EF63805"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_396B5B8A8BF945E1814FF470A140A112"
+            {
+            "SourcePath" = "8:..\\VolcomInventory\\wkhtmltox0.dll"
+            "TargetName" = "8:wkhtmltox0.dll"
             "Tag" = "8:"
             "Folder" = "8:_F16FA54EC747462EA86465608EF63805"
             "Condition" = "8:"
@@ -2502,6 +2712,57 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_74A9195574214AE88EC0B7B6E0919B78"
+            {
+            "SourcePath" = "8:..\\VolcomInventory\\ssleay32.dll"
+            "TargetName" = "8:ssleay32.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_F16FA54EC747462EA86465608EF63805"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_7784C79FC34FEC6C1B6186B6916E856C"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Common.Logging, Version=2.1.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_7784C79FC34FEC6C1B6186B6916E856C"
+                    {
+                    "Name" = "8:Common.Logging.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Common.Logging.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_F16FA54EC747462EA86465608EF63805"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_802D8677D285D1520087F646CE8A666E"
             {
             "AssemblyRegister" = "3:1"
@@ -2531,6 +2792,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_889937F38D4841B28BAA88F1743B3483"
+            {
+            "SourcePath" = "8:..\\VolcomInventory\\mingwm10.dll"
+            "TargetName" = "8:mingwm10.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_F16FA54EC747462EA86465608EF63805"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_897B20A0BA421E0020BD045373677765"
@@ -2857,6 +3138,68 @@
                     }
                 }
             "SourcePath" = "8:DevExpress.XtraPdfViewer.v15.1.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_F16FA54EC747462EA86465608EF63805"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_AEE1B0B3726E2257D3771F9132849210"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Pechkin, Version=0.5.8.1, Culture=neutral, processorArchitecture=x86"
+                "ScatterAssemblies"
+                {
+                    "_AEE1B0B3726E2257D3771F9132849210"
+                    {
+                    "Name" = "8:Pechkin.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Pechkin.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_F16FA54EC747462EA86465608EF63805"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B1F616D1DF50AA913F69038E381CA6E1"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:TuesPechkin.Wkhtmltox.Win32, Version=0.12.2.1, Culture=neutral, processorArchitecture=x86"
+                "ScatterAssemblies"
+                {
+                    "_B1F616D1DF50AA913F69038E381CA6E1"
+                    {
+                    "Name" = "8:TuesPechkin.Wkhtmltox.Win32.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:TuesPechkin.Wkhtmltox.Win32.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_F16FA54EC747462EA86465608EF63805"
@@ -3317,6 +3660,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EFBBF879A8BD46B2AE75D5FCCB905370"
+            {
+            "SourcePath" = "8:..\\VolcomInventory\\libgcc_s_dw2-1.dll"
+            "TargetName" = "8:libgcc_s_dw2-1.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_F16FA54EC747462EA86465608EF63805"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_FCF1F019FA6F08A9AFEDCED7004992E6"
             {
             "AssemblyRegister" = "3:1"
@@ -3415,15 +3778,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Volcom ERP"
-        "ProductCode" = "8:{35A60348-2545-494A-9BBB-E9181C10AEB0}"
-        "PackageCode" = "8:{1CF17CE9-64E9-43D0-9B79-0A1C5A57762C}"
+        "ProductCode" = "8:{F772027C-AC06-43F5-8C1D-8AE024755962}"
+        "PackageCode" = "8:{88D7F420-5139-4520-B618-09774427E1B9}"
         "UpgradeCode" = "8:{B935ACC3-A740-4AE5-A4D6-12DE2DFD30B2}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:01.02.76"
+        "ProductVersion" = "8:01.03.10"
         "Manufacturer" = "8:Volcom Indonesia"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

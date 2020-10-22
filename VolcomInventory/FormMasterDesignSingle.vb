@@ -2125,7 +2125,7 @@
                         Else
                             query += "'" + id_design_ref + "', "
                         End If
-                        query += "'" + id_lookup_status_order + "', '" + design_detail + "', '" + approved + "' , '" + is_old_design + "' "
+                        query += "'" + id_lookup_status_order + "', '" + design_detail + "', '" + approved + "' , '" + is_old_design + "', "
                         query += SLUECoolStorage.EditValue.ToString + ","
                         query += "'" + addSlashes(TEPrimaryName.EditValue.ToString) + "'"
                         query += ");SELECT LAST_INSERT_ID(); "

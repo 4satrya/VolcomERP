@@ -113,6 +113,7 @@ Partial Class FormBankWithdrawalDet
         Me.XTCBBK = New DevExpress.XtraTab.XtraTabControl()
         Me.XTPPayment = New DevExpress.XtraTab.XtraTabPage()
         Me.PCAddDel = New DevExpress.XtraEditors.PanelControl()
+        Me.BCompen = New DevExpress.XtraEditors.SimpleButton()
         Me.BPickDP = New DevExpress.XtraEditors.SimpleButton()
         Me.TEKurs = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
@@ -1117,6 +1118,7 @@ Partial Class FormBankWithdrawalDet
         '
         'PCAddDel
         '
+        Me.PCAddDel.Controls.Add(Me.BCompen)
         Me.PCAddDel.Controls.Add(Me.BPickDP)
         Me.PCAddDel.Controls.Add(Me.TEKurs)
         Me.PCAddDel.Controls.Add(Me.LabelControl4)
@@ -1127,6 +1129,16 @@ Partial Class FormBankWithdrawalDet
         Me.PCAddDel.Name = "PCAddDel"
         Me.PCAddDel.Size = New System.Drawing.Size(939, 47)
         Me.PCAddDel.TabIndex = 19
+        '
+        'BCompen
+        '
+        Me.BCompen.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BCompen.Image = CType(resources.GetObject("BCompen.Image"), System.Drawing.Image)
+        Me.BCompen.Location = New System.Drawing.Point(523, 2)
+        Me.BCompen.Name = "BCompen"
+        Me.BCompen.Size = New System.Drawing.Size(141, 43)
+        Me.BCompen.TabIndex = 8910
+        Me.BCompen.Text = "Pick Sales Invoice"
         '
         'BPickDP
         '
@@ -1497,4 +1509,5 @@ Partial Class FormBankWithdrawalDet
     Friend WithEvents GridView5 As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumn30 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn31 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BCompen As DevExpress.XtraEditors.SimpleButton
 End Class

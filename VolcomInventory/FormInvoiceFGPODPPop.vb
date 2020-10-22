@@ -26,7 +26,7 @@
                             newRow("qty") = GVList.GetRowCellValue(i, "qty")
                             '
                             newRow("id_currency") = GVList.GetRowCellValue(i, "id_currency").ToString
-                            newRow("kurs") = GVList.GetRowCellValue(i, "kurs")
+                            newRow("kurs") = Decimal.Parse(GVList.GetRowCellValue(i, "kurs").ToString)
                             newRow("value_bef_kurs") = GVList.GetRowCellValue(i, "value_bef_kurs") * -1
                             '
                             newRow("pph_percent") = 0
@@ -45,7 +45,7 @@
                             newRow("qty") = GVList.GetRowCellValue(i, "qty")
                             '
                             newRow("id_currency") = GVList.GetRowCellValue(i, "id_currency").ToString
-                            newRow("kurs") = GVList.GetRowCellValue(i, "kurs")
+                            newRow("kurs") = Decimal.Parse(GVList.GetRowCellValue(i, "kurs").ToString)
                             newRow("value_bef_kurs") = GVList.GetRowCellValue(i, "value_bef_kurs") * -1
                             '
                             newRow("pph_percent") = 0

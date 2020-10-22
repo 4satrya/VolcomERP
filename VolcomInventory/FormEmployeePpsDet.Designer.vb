@@ -1263,7 +1263,7 @@ Partial Class FormEmployeePpsDet
         Me.LabelControl27.Name = "LabelControl27"
         Me.LabelControl27.Size = New System.Drawing.Size(100, 26)
         Me.LabelControl27.TabIndex = 128
-        Me.LabelControl27.Text = "Effective Date (position)"
+        Me.LabelControl27.Text = "Effective Date (departement, level && position)"
         '
         'DEEffectiveDate
         '
@@ -3329,7 +3329,7 @@ Partial Class FormEmployeePpsDet
         Me.LabelControl5.Name = "LabelControl5"
         Me.LabelControl5.Size = New System.Drawing.Size(100, 26)
         Me.LabelControl5.TabIndex = 8936
-        Me.LabelControl5.Text = "Effective Date (position)"
+        Me.LabelControl5.Text = "Effective Date (departement, level && position)"
         '
         'LabelControl6
         '

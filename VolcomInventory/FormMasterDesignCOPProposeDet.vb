@@ -4,13 +4,7 @@
     Public id_det As String = "-1"
     Public is_view As String = "2"
 
-    Sub load_cold_storage()
-        Dim q As String = "SELECT id_cool_storage AS id,cool_storage AS cold_desc FROM tb_lookup_cool_storage ORDER BY id_cool_storage DESC"
-        viewSearchLookupQuery(SLEColdStorage, q, "id", "cold_desc", "id")
-    End Sub
-
     Private Sub FormMasterDesignCOPProposeDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        load_cold_storage()
         'check kurs first
         Dim query_kurs As String = "SELECT * FROM tb_kurs_trans WHERE DATE(DATE_ADD(created_date, INTERVAL 6 DAY)) >= DATE(NOW()) ORDER BY id_kurs_trans DESC LIMIT 1"
         Dim data_kurs As DataTable = execute_query(query_kurs, -1, True, "", "", "", "")
@@ -262,14 +256,12 @@ WHERE pd.`id_report_status` != '5' AND pdd.`id_design`='" & BGVItemList.GetFocus
                         Dim cop_before As String = ""
                         Dim id_contact_before As String = ""
                         Dim add_cost_before As String = ""
-                        Dim is_cold_storage_before As String = ""
                         '
                         Dim id_cur_after As String = ""
                         Dim kurs_after As String = ""
                         Dim cop_after As String = ""
                         Dim id_contact_after As String = ""
                         Dim add_cost_after As String = ""
-                        Dim is_cold_storage_after As String = ""
 
                         'before
                         If FormMasterDesignCOPPropose.LECOPType.EditValue.ToString = "1" Then
@@ -278,14 +270,12 @@ WHERE pd.`id_report_status` != '5' AND pdd.`id_design`='" & BGVItemList.GetFocus
                             kurs_before = "'" & decimalSQL(BGVItemList.GetFocusedRowCellValue("prod_order_cop_kurs_pd").ToString) & "'"
                             cop_before = "'" & decimalSQL(BGVItemList.GetFocusedRowCellValue("prod_order_cop_pd").ToString) & "'"
                             add_cost_before = "'" & decimalSQL(BGVItemList.GetFocusedRowCellValue("prod_order_cop_pd_addcost").ToString) & "'"
-                            is_cold_storage_before = "'" & decimalSQL(BGVItemList.GetFocusedRowCellValue("is_cold_storage").ToString) & "'"
                         Else
                             id_contact_before = "NULL"
                             id_cur_before = "NULL"
                             kurs_before = "NULL"
                             cop_before = "NULL"
                             add_cost_before = "NULL"
-                            is_cold_storage_before = "NULL"
                         End If
 
                         'after
@@ -307,11 +297,10 @@ WHERE pd.`id_report_status` != '5' AND pdd.`id_design`='" & BGVItemList.GetFocus
                         End If
                         add_cost_after = decimalSQL(TEAdditionalCost.EditValue.ToString)
 
-                        is_cold_storage_after = SLEColdStorage.EditValue.ToString
 
                         Dim query As String = ""
-                        query = "INSERT INTO tb_design_cop_propose_det(id_design_cop_propose,target_cost,id_design,id_currency_before,kurs_before,design_cop_before,id_comp_contact_before,add_cost_before,is_cold_storage_before,id_currency,kurs,design_cop,id_comp_contact,add_cost,is_cold_storage) VALUES"
-                        query += "('" & id_propose & "','" & target_cost & "','" & id_design & "'," & id_cur_before & "," & kurs_before & "," & cop_before & "," & id_contact_before & "," & add_cost_before & "," & is_cold_storage_before & ",'" & id_cur_after & "','" & kurs_after & "','" & cop_after & "', " & id_contact_after & " ,'" & add_cost_after & "','" & is_cold_storage_after & "'); SELECT LAST_INSERT_ID(); "
+                        query = "INSERT INTO tb_design_cop_propose_det(id_design_cop_propose,target_cost,id_design,id_currency_before,kurs_before,design_cop_before,id_comp_contact_before,add_cost_before,id_currency,kurs,design_cop,id_comp_contact,add_cost) VALUES"
+                        query += "('" & id_propose & "','" & target_cost & "','" & id_design & "'," & id_cur_before & "," & kurs_before & "," & cop_before & "," & id_contact_before & "," & add_cost_before & ",'" & id_cur_after & "','" & kurs_after & "','" & cop_after & "', " & id_contact_after & " ,'" & add_cost_after & "'); SELECT LAST_INSERT_ID(); "
                         id_det = execute_query(query, 0, True, "", "", "", "")
 
                         'insert component

@@ -46,11 +46,12 @@ WHERE d.id_design='" & id_design & "'"
     End Sub
 
     Sub load_work()
-        Dim q As String = "SELECT ovhp.`id_ovh_price`,c.`id_comp`,c.`comp_name`,ovh.`overhead`,ovhp.`ovh_price_name`,ovhp.`ovh_price`,ovhp.id_currency
+        Dim q As String = "SELECT ovhp.`id_ovh_price`,c.`id_comp`,c.`comp_name`,ovh.`overhead`,ovhp.`ovh_price_name`,ovhp.`ovh_price`,ovhp.id_currency,cur.currency
 FROM tb_m_ovh_price ovhp
 INNER JOIN tb_m_ovh ovh ON ovh.`id_ovh`=ovhp.`id_ovh`
 INNER JOIN tb_m_comp_contact cc ON cc.`id_comp_contact`=ovhp.`id_comp_contact`
 INNER JOIN tb_m_comp c ON c.`id_comp`=cc.`id_comp`
+INNER JOIN tb_lookup_currency cur ON cur.id_currency=ovhp.id_currency
 WHERE ovhp.`is_enable_component`=1
 ORDER BY c.`comp_name`"
         viewSearchLookupRepositoryQuery(RISLETechWork, q, 0, "overhead", "id_ovh_price")
@@ -105,7 +106,7 @@ WHERE dc.`id_design`='" & id_design & "' AND dc.`id_cat`='3'"
         If blank_val Then
             warningCustom("Please fill all value")
         Else
-            q = "INSERT INTO `tb_design_component`(id_cat,id_design,description,id_mat_det,id_ovh_price,id_currency,price,qty,date_created) VALUES"
+            q = "DELETE FROM tb_design_component WHERE id_design='" & id_design & "';INSERT INTO `tb_design_component`(id_cat,id_design,description,id_mat_det,id_ovh_price,id_currency,price,qty,date_created) VALUES"
             For i = 0 To GVFabCons.RowCount - 1
                 If Not qins = "" Then
                     qins += ","

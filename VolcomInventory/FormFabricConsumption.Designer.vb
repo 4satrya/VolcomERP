@@ -91,7 +91,14 @@ Partial Class FormFabricConsumption
         Me.GridColumn26 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn27 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn28 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn49 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn48 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn29 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn45 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RISLECurOvh = New DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit()
+        Me.GridView5 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn46 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn47 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn21 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RITEPriceOvh = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.GridColumn24 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -107,11 +114,6 @@ Partial Class FormFabricConsumption
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.TEDesignName = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
-        Me.GridColumn45 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.RISLECurOvh = New DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit()
-        Me.GridView5 = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.GridColumn46 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn47 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.GCFabCons, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -142,6 +144,8 @@ Partial Class FormFabricConsumption
         CType(Me.GVOVH, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RISLETechWork, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RISLECurOvh, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView5, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RITEPriceOvh, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemSearchLookUpEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -151,8 +155,6 @@ Partial Class FormFabricConsumption
         CType(Me.TEDesignCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TESeason.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEDesignName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RISLECurOvh, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GridView5, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl1
@@ -751,7 +753,7 @@ Partial Class FormFabricConsumption
         '
         'GridView1
         '
-        Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn25, Me.GridColumn26, Me.GridColumn27, Me.GridColumn28, Me.GridColumn29})
+        Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn25, Me.GridColumn26, Me.GridColumn27, Me.GridColumn28, Me.GridColumn49, Me.GridColumn48, Me.GridColumn29})
         Me.GridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
         Me.GridView1.Name = "GridView1"
         Me.GridView1.OptionsSelection.EnableAppearanceFocusedCell = False
@@ -770,6 +772,7 @@ Partial Class FormFabricConsumption
         Me.GridColumn26.Name = "GridColumn26"
         Me.GridColumn26.Visible = True
         Me.GridColumn26.VisibleIndex = 0
+        Me.GridColumn26.Width = 326
         '
         'GridColumn27
         '
@@ -778,6 +781,7 @@ Partial Class FormFabricConsumption
         Me.GridColumn27.Name = "GridColumn27"
         Me.GridColumn27.Visible = True
         Me.GridColumn27.VisibleIndex = 1
+        Me.GridColumn27.Width = 326
         '
         'GridColumn28
         '
@@ -786,6 +790,22 @@ Partial Class FormFabricConsumption
         Me.GridColumn28.Name = "GridColumn28"
         Me.GridColumn28.Visible = True
         Me.GridColumn28.VisibleIndex = 2
+        Me.GridColumn28.Width = 424
+        '
+        'GridColumn49
+        '
+        Me.GridColumn49.Caption = "ID"
+        Me.GridColumn49.FieldName = "id_currency"
+        Me.GridColumn49.Name = "GridColumn49"
+        '
+        'GridColumn48
+        '
+        Me.GridColumn48.Caption = "Currency"
+        Me.GridColumn48.FieldName = "currency"
+        Me.GridColumn48.Name = "GridColumn48"
+        Me.GridColumn48.Visible = True
+        Me.GridColumn48.VisibleIndex = 3
+        Me.GridColumn48.Width = 110
         '
         'GridColumn29
         '
@@ -795,7 +815,49 @@ Partial Class FormFabricConsumption
         Me.GridColumn29.FieldName = "ovh_price"
         Me.GridColumn29.Name = "GridColumn29"
         Me.GridColumn29.Visible = True
-        Me.GridColumn29.VisibleIndex = 3
+        Me.GridColumn29.VisibleIndex = 4
+        Me.GridColumn29.Width = 446
+        '
+        'GridColumn45
+        '
+        Me.GridColumn45.Caption = "Currency"
+        Me.GridColumn45.ColumnEdit = Me.RISLECurOvh
+        Me.GridColumn45.FieldName = "id_currency"
+        Me.GridColumn45.Name = "GridColumn45"
+        Me.GridColumn45.OptionsColumn.AllowEdit = False
+        Me.GridColumn45.OptionsColumn.AllowFocus = False
+        Me.GridColumn45.Visible = True
+        Me.GridColumn45.VisibleIndex = 2
+        Me.GridColumn45.Width = 141
+        '
+        'RISLECurOvh
+        '
+        Me.RISLECurOvh.AutoHeight = False
+        Me.RISLECurOvh.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.RISLECurOvh.Name = "RISLECurOvh"
+        Me.RISLECurOvh.View = Me.GridView5
+        '
+        'GridView5
+        '
+        Me.GridView5.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn46, Me.GridColumn47})
+        Me.GridView5.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView5.Name = "GridView5"
+        Me.GridView5.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView5.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn46
+        '
+        Me.GridColumn46.Caption = "ID"
+        Me.GridColumn46.FieldName = "id_currency"
+        Me.GridColumn46.Name = "GridColumn46"
+        '
+        'GridColumn47
+        '
+        Me.GridColumn47.Caption = "Currency"
+        Me.GridColumn47.FieldName = "currency"
+        Me.GridColumn47.Name = "GridColumn47"
+        Me.GridColumn47.Visible = True
+        Me.GridColumn47.VisibleIndex = 0
         '
         'GridColumn21
         '
@@ -805,6 +867,8 @@ Partial Class FormFabricConsumption
         Me.GridColumn21.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn21.FieldName = "price"
         Me.GridColumn21.Name = "GridColumn21"
+        Me.GridColumn21.OptionsColumn.AllowEdit = False
+        Me.GridColumn21.OptionsColumn.AllowFocus = False
         Me.GridColumn21.Visible = True
         Me.GridColumn21.VisibleIndex = 3
         Me.GridColumn21.Width = 287
@@ -929,45 +993,6 @@ Partial Class FormFabricConsumption
         Me.LabelControl1.TabIndex = 0
         Me.LabelControl1.Text = "Design"
         '
-        'GridColumn45
-        '
-        Me.GridColumn45.Caption = "Currency"
-        Me.GridColumn45.ColumnEdit = Me.RISLECurOvh
-        Me.GridColumn45.FieldName = "id_currency"
-        Me.GridColumn45.Name = "GridColumn45"
-        Me.GridColumn45.Visible = True
-        Me.GridColumn45.VisibleIndex = 2
-        Me.GridColumn45.Width = 141
-        '
-        'RISLECurOvh
-        '
-        Me.RISLECurOvh.AutoHeight = False
-        Me.RISLECurOvh.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.RISLECurOvh.Name = "RISLECurOvh"
-        Me.RISLECurOvh.View = Me.GridView5
-        '
-        'GridView5
-        '
-        Me.GridView5.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn46, Me.GridColumn47})
-        Me.GridView5.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
-        Me.GridView5.Name = "GridView5"
-        Me.GridView5.OptionsSelection.EnableAppearanceFocusedCell = False
-        Me.GridView5.OptionsView.ShowGroupPanel = False
-        '
-        'GridColumn46
-        '
-        Me.GridColumn46.Caption = "ID"
-        Me.GridColumn46.FieldName = "id_currency"
-        Me.GridColumn46.Name = "GridColumn46"
-        '
-        'GridColumn47
-        '
-        Me.GridColumn47.Caption = "Currency"
-        Me.GridColumn47.FieldName = "currency"
-        Me.GridColumn47.Name = "GridColumn47"
-        Me.GridColumn47.Visible = True
-        Me.GridColumn47.VisibleIndex = 0
-        '
         'FormFabricConsumption
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1013,6 +1038,8 @@ Partial Class FormFabricConsumption
         CType(Me.GVOVH, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RISLETechWork, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RISLECurOvh, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView5, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RITEPriceOvh, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemSearchLookUpEdit2, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1023,8 +1050,6 @@ Partial Class FormFabricConsumption
         CType(Me.TEDesignCode.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TESeason.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEDesignName.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RISLECurOvh, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GridView5, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1121,4 +1146,6 @@ Partial Class FormFabricConsumption
     Friend WithEvents GridView5 As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumn46 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn47 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn49 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn48 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

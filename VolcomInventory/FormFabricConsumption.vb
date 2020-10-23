@@ -14,6 +14,12 @@
         viewSearchLookupRepositoryQuery(RISLEACC, q, 0, "mat_det_name", "id_mat_det")
     End Sub
 
+    Sub load_cur()
+        Dim q As String = "SELECT id_currency,currency FROM tb_lookup_currency"
+        viewSearchLookupRepositoryQuery(RISLECurrencyFab, q, 0, "currency", "id_currency")
+        viewSearchLookupRepositoryQuery(RISLECurAcc, q, 0, "currency", "id_currency")
+    End Sub
+
     Private Sub FormFabricConsumption_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim q As String = "SELECT d.design_code,d.design_display_name,s.season FROM tb_m_design d 
 INNER JOIN tb_season_delivery sd ON sd.`id_delivery`=d.`id_delivery`
@@ -27,6 +33,7 @@ WHERE d.id_design='" & id_design & "'"
             TESeason.Text = dt.Rows(0)("season").ToString
         End If
         '
+        load_cur()
         load_mat()
         load_work()
 
@@ -38,7 +45,7 @@ WHERE d.id_design='" & id_design & "'"
     End Sub
 
     Sub load_work()
-        Dim q As String = "SELECT ovhp.`id_ovh_price`,c.`id_comp`,c.`comp_name`,ovh.`overhead`,ovhp.`ovh_price_name`,ovhp.`ovh_price`
+        Dim q As String = "SELECT ovhp.`id_ovh_price`,c.`id_comp`,c.`comp_name`,ovh.`overhead`,ovhp.`ovh_price_name`,ovhp.`ovh_price`,ovhp.id_currency
 FROM tb_m_ovh_price ovhp
 INNER JOIN tb_m_ovh ovh ON ovh.`id_ovh`=ovhp.`id_ovh`
 INNER JOIN tb_m_comp_contact cc ON cc.`id_comp_contact`=ovhp.`id_comp_contact`
@@ -49,9 +56,11 @@ ORDER BY c.`comp_name`"
     End Sub
 
     Sub load_fab()
-        Dim q As String = "SELECT dc.`id_design_component`,md.`id_mat_det`,dc.`description`,dc.`qty`,dc.price
+        Dim q As String = "SELECT dc.`id_design_component`,md.`id_mat_det`,dc.`description`,dc.`qty`,dc.id_currency,dc.price,uom.uom
 FROM `tb_design_component` dc
 INNER JOIN tb_m_mat_det md ON md.`id_mat_det`=dc.`id_mat_det`
+INNER JOIN tb_m_mat m ON m.id_mat=md.id_mat
+INNER JOIN tb_m_uom uom ON uom.id_uom=m.id_uom
 WHERE dc.`id_design`='" & id_design & "' AND dc.`id_cat`='1'"
         Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
         GCFabCons.DataSource = dt
@@ -59,9 +68,11 @@ WHERE dc.`id_design`='" & id_design & "' AND dc.`id_cat`='1'"
     End Sub
 
     Sub load_acc()
-        Dim q As String = "SELECT dc.`id_design_component`,md.`id_mat_det`,dc.`description`,dc.`qty`,dc.price
+        Dim q As String = "SELECT dc.`id_design_component`,md.`id_mat_det`,dc.`description`,dc.`qty`,dc.id_currency,dc.price,uom.uom
 FROM `tb_design_component` dc
 INNER JOIN tb_m_mat_det md ON md.`id_mat_det`=dc.`id_mat_det`
+INNER JOIN tb_m_mat m ON m.id_mat=md.id_mat
+INNER JOIN tb_m_uom uom ON uom.id_uom=m.id_uom
 WHERE dc.`id_design`='" & id_design & "' AND dc.`id_cat`='2'"
         Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
         GCACC.DataSource = dt
@@ -69,7 +80,7 @@ WHERE dc.`id_design`='" & id_design & "' AND dc.`id_cat`='2'"
     End Sub
 
     Sub load_ovh()
-        Dim q As String = "SELECT dc.`id_design_component`,dc.`id_ovh_price`,dc.`description`,dc.`qty`,dc.price
+        Dim q As String = "SELECT dc.`id_design_component`,dc.`id_ovh_price`,dc.`description`,dc.`qty`,dc.id_currency,dc.price
 FROM `tb_design_component` dc
 INNER JOIN tb_m_ovh_price ovhp ON ovhp.`id_ovh_price`=dc.`id_ovh_price`
 WHERE dc.`id_design`='" & id_design & "' AND dc.`id_cat`='3'"
@@ -79,7 +90,46 @@ WHERE dc.`id_design`='" & id_design & "' AND dc.`id_cat`='3'"
     End Sub
 
     Private Sub BSave_Click(sender As Object, e As EventArgs) Handles BSave.Click
+        Dim q As String = ""
+        'check first
+        Dim blank_val As Boolean = False
 
+        For i = 0 To GVFabCons.RowCount - 1
+            If GVFabCons.GetRowCellValue(i, "description").ToString = "" Or GVFabCons.GetRowCellValue(i, "id_mat_det").ToString = "" Or GVFabCons.GetRowCellValue(i, "price") <= 0 Or GVFabCons.GetRowCellValue(i, "qty") <= 0 Then
+                blank_val = True
+            End If
+        Next
+
+        If blank_val Then
+            warningCustom("Please fill all value")
+        Else
+            If id_design = "-1" Then
+                'new
+                q = "INSERT INTO `tb_design_component`(id_cat,id_design,description,id_mat_det,id_ovh_price,id_currency,price,qty,date_created) VALUES"
+                For i = 0 To GVFabCons.RowCount - 1
+                    If Not q = "" Then
+                        q += ","
+                    End If
+                    q += "('1','" & id_design & "','" & addSlashes(GVFabCons.GetRowCellValue(i, "description").ToString) & "','" & GVFabCons.GetRowCellValue(i, "id_mat_det").ToString & "',NULL,'" & GVFabCons.GetRowCellValue(i, "id_currency").ToString & "','" & decimalSQL(Decimal.Parse(GVFabCons.GetRowCellValue(i, "price").ToString)) & "','" & decimalSQL(Decimal.Parse(GVFabCons.GetRowCellValue(i, "qty").ToString)) & "',NOW())"
+                Next
+                For i = 0 To GVACC.RowCount - 1
+                    If Not q = "" Then
+                        q += ","
+                    End If
+                    q += "('2','" & id_design & "','" & addSlashes(GVACC.GetRowCellValue(i, "description").ToString) & "','" & GVACC.GetRowCellValue(i, "id_mat_det").ToString & "',NULL,'" & GVACC.GetRowCellValue(i, "id_currency").ToString & "','" & decimalSQL(Decimal.Parse(GVACC.GetRowCellValue(i, "price").ToString)) & "','" & decimalSQL(Decimal.Parse(GVACC.GetRowCellValue(i, "qty").ToString)) & "',NOW())"
+                Next
+                For i = 0 To GVOVH.RowCount - 1
+                    If Not q = "" Then
+                        q += ","
+                    End If
+                    q += "('3','" & id_design & "','" & addSlashes(GVOVH.GetRowCellValue(i, "description").ToString) & "',NULL," & GVOVH.GetRowCellValue(i, "id_ovh_price").ToString & ",'" & GVOVH.GetRowCellValue(i, "id_currency").ToString & "','" & decimalSQL(Decimal.Parse(GVOVH.GetRowCellValue(i, "price").ToString)) & "','" & decimalSQL(Decimal.Parse(GVOVH.GetRowCellValue(i, "qty").ToString)) & "',NOW())"
+                Next
+                execute_non_query(q, True, "", "", "", "")
+            Else
+                'edit
+
+            End If
+        End If
     End Sub
 
     Sub allow_but()
@@ -155,6 +205,7 @@ WHERE dc.`id_design`='" & id_design & "' AND dc.`id_cat`='3'"
         gv.FocusedRowHandle = gv.RowCount - 1
         gv.SetRowCellValue(gv.RowCount - 1, "id_component", id)
         gv.SetRowCellValue(gv.RowCount - 1, "description", desc)
+        gv.SetRowCellValue(gv.RowCount - 1, "price", 0.0000)
         gv.SetRowCellValue(gv.RowCount - 1, "qty", qty)
     End Sub
 
@@ -179,15 +230,20 @@ WHERE dc.`id_design`='" & id_design & "' AND dc.`id_cat`='3'"
     Private Sub RISLEMatDet_EditValueChanged(sender As Object, e As EventArgs) Handles RISLEMatDet.EditValueChanged
         Dim sle As DevExpress.XtraEditors.SearchLookUpEdit = CType(sender, DevExpress.XtraEditors.SearchLookUpEdit)
         GVFabCons.SetFocusedRowCellValue("price", sle.Properties.View.GetFocusedRowCellValue("mat_det_price").ToString())
+        GVFabCons.SetFocusedRowCellValue("id_currency", sle.Properties.View.GetFocusedRowCellValue("id_currency").ToString())
+        GVFabCons.SetFocusedRowCellValue("uom", sle.Properties.View.GetFocusedRowCellValue("uom").ToString())
     End Sub
 
     Private Sub RISLEACC_EditValueChanged(sender As Object, e As EventArgs) Handles RISLEACC.EditValueChanged
         Dim sle As DevExpress.XtraEditors.SearchLookUpEdit = CType(sender, DevExpress.XtraEditors.SearchLookUpEdit)
         GVACC.SetFocusedRowCellValue("price", sle.Properties.View.GetFocusedRowCellValue("mat_det_price").ToString())
+        GVACC.SetFocusedRowCellValue("id_currency", sle.Properties.View.GetFocusedRowCellValue("id_currency").ToString())
+        GVACC.SetFocusedRowCellValue("uom", sle.Properties.View.GetFocusedRowCellValue("uom").ToString())
     End Sub
 
     Private Sub RISLETechWork_EditValueChanged(sender As Object, e As EventArgs) Handles RISLETechWork.EditValueChanged
         Dim sle As DevExpress.XtraEditors.SearchLookUpEdit = CType(sender, DevExpress.XtraEditors.SearchLookUpEdit)
         GVOVH.SetFocusedRowCellValue("price", sle.Properties.View.GetFocusedRowCellValue("ovh_price").ToString())
+        GVOVH.SetFocusedRowCellValue("id_currency", sle.Properties.View.GetFocusedRowCellValue("id_currency").ToString())
     End Sub
 End Class

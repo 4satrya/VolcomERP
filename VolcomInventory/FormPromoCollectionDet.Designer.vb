@@ -128,8 +128,9 @@ Partial Class FormPromoCollectionDet
         Me.XTPDiscountCode = New DevExpress.XtraTab.XtraTabPage()
         Me.GCDiscountCode = New DevExpress.XtraGrid.GridControl()
         Me.GVDiscountCode = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.GridColumn14 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.GridColumn15 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GroupControlHead, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControlHead.SuspendLayout()
         CType(Me.TxtDiscountTitle.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1219,7 +1220,7 @@ Partial Class FormPromoCollectionDet
         '
         'GVDiscountCode
         '
-        Me.GVDiscountCode.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn14})
+        Me.GVDiscountCode.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn15, Me.GridColumn14})
         Me.GVDiscountCode.GridControl = Me.GCDiscountCode
         Me.GVDiscountCode.Name = "GVDiscountCode"
         Me.GVDiscountCode.OptionsBehavior.ReadOnly = True
@@ -1228,13 +1229,6 @@ Partial Class FormPromoCollectionDet
         Me.GVDiscountCode.OptionsView.ShowFooter = True
         Me.GVDiscountCode.OptionsView.ShowGroupPanel = False
         '
-        'RepositoryItemCheckEdit1
-        '
-        Me.RepositoryItemCheckEdit1.AutoHeight = False
-        Me.RepositoryItemCheckEdit1.Name = "RepositoryItemCheckEdit1"
-        Me.RepositoryItemCheckEdit1.ValueChecked = "Yes"
-        Me.RepositoryItemCheckEdit1.ValueUnchecked = "No"
-        '
         'GridColumn14
         '
         Me.GridColumn14.Caption = "Discount Code"
@@ -1242,8 +1236,23 @@ Partial Class FormPromoCollectionDet
         Me.GridColumn14.Name = "GridColumn14"
         Me.GridColumn14.OptionsColumn.ReadOnly = True
         Me.GridColumn14.Visible = True
-        Me.GridColumn14.VisibleIndex = 0
+        Me.GridColumn14.VisibleIndex = 1
         Me.GridColumn14.Width = 79
+        '
+        'RepositoryItemCheckEdit1
+        '
+        Me.RepositoryItemCheckEdit1.AutoHeight = False
+        Me.RepositoryItemCheckEdit1.Name = "RepositoryItemCheckEdit1"
+        Me.RepositoryItemCheckEdit1.ValueChecked = "Yes"
+        Me.RepositoryItemCheckEdit1.ValueUnchecked = "No"
+        '
+        'GridColumn15
+        '
+        Me.GridColumn15.Caption = "No"
+        Me.GridColumn15.FieldName = "no"
+        Me.GridColumn15.Name = "GridColumn15"
+        Me.GridColumn15.Visible = True
+        Me.GridColumn15.VisibleIndex = 0
         '
         'FormPromoCollectionDet
         '
@@ -1417,4 +1426,5 @@ Partial Class FormPromoCollectionDet
     Friend WithEvents GVDiscountCode As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumn14 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RepositoryItemCheckEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+    Friend WithEvents GridColumn15 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

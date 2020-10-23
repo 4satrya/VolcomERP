@@ -214,30 +214,43 @@
 
     Private Sub SBAdd_Click(sender As Object, e As EventArgs) Handles SBAdd.Click
         If Not TEAdd.Text = "" Then
-            'column
-            Dim col As DevExpress.XtraGrid.Columns.GridColumn = New DevExpress.XtraGrid.Columns.GridColumn
+            'check duplicate
+            Dim is_duplicate As Boolean = False
 
-            col.Caption = TEAdd.EditValue.ToString
-            col.FieldName = TEAdd.EditValue.ToString.Replace(" ", "")
-            col.Tag = "0"
-            col.MinWidth = 200
-            col.ColumnEdit = RepositoryItemMemoEdit
-            col.Visible = True
+            For i = 0 To GVColumn.Columns.Count - 1
+                If GVColumn.Columns(i).Caption = TEAdd.EditValue.ToString Then
+                    is_duplicate = True
+                End If
+            Next
 
-            GVColumn.Columns.Add(col)
+            If Not is_duplicate Then
+                'column
+                Dim col As DevExpress.XtraGrid.Columns.GridColumn = New DevExpress.XtraGrid.Columns.GridColumn
 
-            'datasource
-            Dim data As DataTable = GCColumn.DataSource
+                col.Caption = TEAdd.EditValue.ToString
+                col.FieldName = TEAdd.EditValue.ToString.Replace(" ", "")
+                col.Tag = "0"
+                col.MinWidth = 200
+                col.ColumnEdit = RepositoryItemMemoEdit
+                col.Visible = True
 
-            data.Columns.Add(TEAdd.EditValue.ToString.Replace(" ", ""), GetType(String))
+                GVColumn.Columns.Add(col)
 
-            GCColumn.DataSource = data
+                'datasource
+                Dim data As DataTable = GCColumn.DataSource
 
-            GVColumn.BestFitColumns()
+                data.Columns.Add(TEAdd.EditValue.ToString.Replace(" ", ""), GetType(String))
 
-            TEAdd.EditValue = ""
+                GCColumn.DataSource = data
 
-            edited = True
+                GVColumn.BestFitColumns()
+
+                TEAdd.EditValue = ""
+
+                edited = True
+            Else
+                stopCustom("Duplicate column '" + TEAdd.EditValue.ToString + "'")
+            End If
         Else
             stopCustom("Please add column name.")
         End If
@@ -296,6 +309,8 @@
 
             If confirm = DialogResult.No Then
                 e.Cancel = True
+            Else
+                edited = False
             End If
         End If
     End Sub

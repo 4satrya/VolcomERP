@@ -568,6 +568,12 @@
                 End Try
             ElseIf id_api_type = "2" Then
                 'ZALORA
+                Try
+                    Dim shop As New ClassZaloraApi()
+                    shop.get_order_list()
+                Catch ex As Exception
+                    err = ex.ToString
+                End Try
             ElseIf id_api_type = "3" Then
                 'BLIBLI
                 Try
@@ -583,11 +589,16 @@
             WHERE o.is_process=2 AND o.id_comp_group='" + id_comp_group + "'
             GROUP BY o.id "
             Dim dord As DataTable = execute_query(qord, -1, True, "", "", "", "")
+            Dim id_order_in As String = ""
             If dord.Rows.Count > 0 Then
                 Try
                     For i As Integer = 0 To dord.Rows.Count - 1
                         SplashScreenManager1.SetWaitFormDescription(comp_group + " ORDER : #" + dord.Rows(i)("sales_order_ol_shop_number").ToString)
                         execute_non_query_long("CALL create_web_order_grp(" + dord.Rows(i)("id").ToString + ", " + is_must_ok_stock + ",'" + id_comp_group + "');", True, "", "", "", "")
+                        If i > 0 Then
+                            id_order_in += ","
+                        End If
+                        id_order_in += dord.Rows(i)("id").ToString
                     Next
                 Catch ex As Exception
                     ord.insertLogWebOrder("0", ex.ToString, id_comp_group)
@@ -595,13 +606,41 @@
                 End Try
             End If
 
+            'other action after created order
+            Dim err_other_act As String = ""
+            If id_api_type = "2" Then
+                'ZALORA
+                Dim query_item As String = "SELECT od.id,od.sales_order_ol_shop_number AS `order_number`, GROUP_CONCAT(DISTINCT od.item_id ORDER BY od.item_id ASC) AS `item_id`, od.tracking_code, od.shipment_provider
+                FROM tb_sales_order so
+                INNER JOIN tb_m_comp_contact sc ON sc.id_comp_contact = so.id_store_contact_to
+                INNER JOIN tb_m_comp s ON s.id_comp = sc.id_comp
+                INNER JOIN tb_ol_store_order od ON od.id = so.id_sales_order_ol_shop AND od.id_comp_group= s.id_comp_group
+                WHERE so.id_report_status=6 AND s.id_commerce_type=2 AND !ISNULL(od.item_id) AND od.tracking_code!=''
+                AND s.id_comp_group IN (SELECT o.zalora_comp_group FROM tb_opt o)
+                AND so.id_sales_order_ol_shop IN (" + id_order_in + ")
+                GROUP BY od.sales_order_ol_shop_number "
+                Dim data_item As DataTable = execute_query(query_item, -1, True, "", "", "", "")
+                If data_item.Rows.Count > 0 Then
+                    For t As Integer = 0 To data_item.Rows.Count - 1
+                        Try
+                            SplashScreenManager1.SetWaitFormDescription("Set status (rts) : #" + data_item.Rows(t)("order_number").ToString)
+                            Dim zal_stt As New ClassZaloraApi()
+                            zal_stt.setReadyToShip(data_item.Rows(t)("item_id").ToString, data_item.Rows(t)("shipment_provider").ToString, data_item.Rows(t)("tracking_code").ToString)
+                        Catch ex As Exception
+                            err_other_act = addSlashes(ex.ToString)
+                            ord.insertLogWebOrder(data_item.Rows(t)("id").ToString, "Error set status rts : " + err_other_act, id_comp_group)
+                        End Try
+                    Next
+                End If
+            End If
+
             ord.insertLogWebOrder("0", "End", "0")
             ord.setProceccedWebOrder("2")
             SplashScreenManager1.CloseWaitForm()
-            If err = "" Then
+            If err = "" And err_other_act = "" Then
                 infoCustom("Sync completed.")
             Else
-                infoCustom("Problem get order from web. " + err)
+                infoCustom("Problem get order from web : " + System.Environment.NewLine + "- " + err + System.Environment.NewLine + "- " + err_other_act)
             End If
             GCVolcom.DataSource = Nothing
             If orderNotProcessed() Then

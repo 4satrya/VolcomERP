@@ -68,6 +68,7 @@ Partial Class FormCodeTemplateEdit
         'BDelete
         '
         Me.BDelete.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BDelete.Enabled = False
         Me.BDelete.ImageIndex = 1
         Me.BDelete.ImageList = Me.LargeImageCollection
         Me.BDelete.Location = New System.Drawing.Point(449, 2)
@@ -76,6 +77,7 @@ Partial Class FormCodeTemplateEdit
         Me.BDelete.Size = New System.Drawing.Size(81, 42)
         Me.BDelete.TabIndex = 2
         Me.BDelete.Text = "Delete"
+        Me.BDelete.Visible = False
         '
         'LargeImageCollection
         '

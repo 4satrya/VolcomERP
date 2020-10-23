@@ -170,7 +170,7 @@ INNER JOIN (
 ) det ON det.id_pn_fgpo=pn.`id_pn_fgpo`
 INNER JOIN tb_pn_type pnt ON pnt.id_type=pn.type
 INNER JOIN tb_lookup_report_status sts ON sts.id_report_status=pn.id_report_status
-WHERE 1=1 AND pn.doc_type = 4 " & query_where
+WHERE 1=1 AND pn.doc_type = 4 " & query_where & " ORDER BY pn.created_date DESC"
                 Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
                 GCDPKhusus.DataSource = data
                 GVDPKhusus.BestFitColumns()

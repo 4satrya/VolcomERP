@@ -1526,4 +1526,10 @@ FROM tb_m_comp_cat ccat WHERE ccat.id_comp_cat='" & LECompanyCategory.EditValue.
         Catch ex As Exception
         End Try
     End Sub
+
+    Private Sub SLEBankAccount_EditValueChanged(sender As Object, e As EventArgs) Handles SLEBankAccount.EditValueChanged
+        If SLEBankAccount.EditValue = Nothing Then
+            SLEBankAccount.EditValue = "0"
+        End If
+    End Sub
 End Class

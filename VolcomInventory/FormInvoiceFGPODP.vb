@@ -682,6 +682,10 @@ WHERE pnd.`id_pn_fgpo`='" & id_invoice & "' AND pnd.report_mark_type='199'"
 
     Private Sub GVList_CellValueChanged(sender As Object, e As DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs) Handles GVList.CellValueChanged
         If e.Column.FieldName = "value_bef_kurs" Or e.Column.FieldName = "kurs" Or e.Column.FieldName = "vat" Or e.Column.FieldName = "pph_percent" Then
+            If doc_type = "4" And e.Column.FieldName = "value_bef_kurs" Then
+                GVList.SetFocusedRowCellValue("vat", Decimal.Round(GVList.GetFocusedRowCellValue("valuex") * (Decimal.Parse(get_setup_field("vat_inv_default")) / 100)))
+            End If
+
             calculate()
         End If
     End Sub

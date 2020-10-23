@@ -224,7 +224,7 @@
 
                     If is_valid_payment Then
                         'check first
-                        Dim q_check As String = "SELECT * FROM tb_ol_store_order WHERE id='" & row("id").ToString & "'"
+                        Dim q_check As String = "SELECT * FROM tb_ol_store_order WHERE id='" & row("id").ToString & "' AND id_comp_group=" + id_comp_group + " "
                         Dim dt_check As DataTable = execute_query(q_check, -1, True, "", "", "", "")
                         If Not dt_check.Rows.Count > 0 Then
                             'var data general

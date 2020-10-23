@@ -259,7 +259,7 @@ WHERE dnd.id_debit_note='" & id_dn & "'"
         Dim is_ok As Boolean = True
         '
         For i As Integer = 0 To GVItemList.RowCount - 1
-            If GVItemList.GetRowCellValue(i, "claim_amo") <= 0 Then
+            If GVItemList.GetRowCellValue(i, "claim_amo") < 0 Then
                 is_ok = False
             End If
         Next
@@ -288,7 +288,6 @@ WHERE dnd.id_debit_note='" & id_dn & "'"
                 execute_non_query(q_det, True, "", "", "", "")
 
                 submit_who_prepared("221", id_dn, id_user)
-
                 FormDebitNote.load_form()
                 Close()
             Else 'edit

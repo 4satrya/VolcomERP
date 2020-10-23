@@ -588,9 +588,13 @@
     End Sub
 
     Sub viewDiscountCodeList()
-        Dim query As String = "SELECT disc_code FROM tb_ol_promo_collection_disc_code WHERE id_ol_promo_collection = " + id
+        Dim query As String = "SELECT 0 AS no, disc_code FROM tb_ol_promo_collection_disc_code WHERE id_ol_promo_collection = " + id
 
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+
+        For i = 0 To data.Rows.Count - 1
+            data.Rows(i)("no") = i + 1
+        Next
 
         GCDiscountCode.DataSource = data
 

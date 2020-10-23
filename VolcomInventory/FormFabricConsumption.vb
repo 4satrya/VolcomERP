@@ -18,6 +18,7 @@
         Dim q As String = "SELECT id_currency,currency FROM tb_lookup_currency"
         viewSearchLookupRepositoryQuery(RISLECurrencyFab, q, 0, "currency", "id_currency")
         viewSearchLookupRepositoryQuery(RISLECurAcc, q, 0, "currency", "id_currency")
+        viewSearchLookupRepositoryQuery(RISLECurOvh, q, 0, "currency", "id_currency")
     End Sub
 
     Private Sub FormFabricConsumption_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -91,6 +92,7 @@ WHERE dc.`id_design`='" & id_design & "' AND dc.`id_cat`='3'"
 
     Private Sub BSave_Click(sender As Object, e As EventArgs) Handles BSave.Click
         Dim q As String = ""
+        Dim qins As String = ""
         'check first
         Dim blank_val As Boolean = False
 
@@ -103,32 +105,26 @@ WHERE dc.`id_design`='" & id_design & "' AND dc.`id_cat`='3'"
         If blank_val Then
             warningCustom("Please fill all value")
         Else
-            If id_design = "-1" Then
-                'new
-                q = "INSERT INTO `tb_design_component`(id_cat,id_design,description,id_mat_det,id_ovh_price,id_currency,price,qty,date_created) VALUES"
-                For i = 0 To GVFabCons.RowCount - 1
-                    If Not q = "" Then
-                        q += ","
-                    End If
-                    q += "('1','" & id_design & "','" & addSlashes(GVFabCons.GetRowCellValue(i, "description").ToString) & "','" & GVFabCons.GetRowCellValue(i, "id_mat_det").ToString & "',NULL,'" & GVFabCons.GetRowCellValue(i, "id_currency").ToString & "','" & decimalSQL(Decimal.Parse(GVFabCons.GetRowCellValue(i, "price").ToString)) & "','" & decimalSQL(Decimal.Parse(GVFabCons.GetRowCellValue(i, "qty").ToString)) & "',NOW())"
-                Next
-                For i = 0 To GVACC.RowCount - 1
-                    If Not q = "" Then
-                        q += ","
-                    End If
-                    q += "('2','" & id_design & "','" & addSlashes(GVACC.GetRowCellValue(i, "description").ToString) & "','" & GVACC.GetRowCellValue(i, "id_mat_det").ToString & "',NULL,'" & GVACC.GetRowCellValue(i, "id_currency").ToString & "','" & decimalSQL(Decimal.Parse(GVACC.GetRowCellValue(i, "price").ToString)) & "','" & decimalSQL(Decimal.Parse(GVACC.GetRowCellValue(i, "qty").ToString)) & "',NOW())"
-                Next
-                For i = 0 To GVOVH.RowCount - 1
-                    If Not q = "" Then
-                        q += ","
-                    End If
-                    q += "('3','" & id_design & "','" & addSlashes(GVOVH.GetRowCellValue(i, "description").ToString) & "',NULL," & GVOVH.GetRowCellValue(i, "id_ovh_price").ToString & ",'" & GVOVH.GetRowCellValue(i, "id_currency").ToString & "','" & decimalSQL(Decimal.Parse(GVOVH.GetRowCellValue(i, "price").ToString)) & "','" & decimalSQL(Decimal.Parse(GVOVH.GetRowCellValue(i, "qty").ToString)) & "',NOW())"
-                Next
-                execute_non_query(q, True, "", "", "", "")
-            Else
-                'edit
-
-            End If
+            q = "INSERT INTO `tb_design_component`(id_cat,id_design,description,id_mat_det,id_ovh_price,id_currency,price,qty,date_created) VALUES"
+            For i = 0 To GVFabCons.RowCount - 1
+                If Not qins = "" Then
+                    qins += ","
+                End If
+                qins += "('1','" & id_design & "','" & addSlashes(GVFabCons.GetRowCellValue(i, "description").ToString) & "','" & GVFabCons.GetRowCellValue(i, "id_mat_det").ToString & "',NULL,'" & GVFabCons.GetRowCellValue(i, "id_currency").ToString & "','" & decimalSQL(Decimal.Parse(GVFabCons.GetRowCellValue(i, "price").ToString)) & "','" & decimalSQL(Decimal.Parse(GVFabCons.GetRowCellValue(i, "qty").ToString)) & "',NOW())"
+            Next
+            For i = 0 To GVACC.RowCount - 1
+                If Not qins = "" Then
+                    qins += ","
+                End If
+                qins += "('2','" & id_design & "','" & addSlashes(GVACC.GetRowCellValue(i, "description").ToString) & "','" & GVACC.GetRowCellValue(i, "id_mat_det").ToString & "',NULL,'" & GVACC.GetRowCellValue(i, "id_currency").ToString & "','" & decimalSQL(Decimal.Parse(GVACC.GetRowCellValue(i, "price").ToString)) & "','" & decimalSQL(Decimal.Parse(GVACC.GetRowCellValue(i, "qty").ToString)) & "',NOW())"
+            Next
+            For i = 0 To GVOVH.RowCount - 1
+                If Not qins = "" Then
+                    qins += ","
+                End If
+                qins += "('3','" & id_design & "','" & addSlashes(GVOVH.GetRowCellValue(i, "description").ToString) & "',NULL," & GVOVH.GetRowCellValue(i, "id_ovh_price").ToString & ",'" & GVOVH.GetRowCellValue(i, "id_currency").ToString & "','" & decimalSQL(Decimal.Parse(GVOVH.GetRowCellValue(i, "price").ToString)) & "','" & decimalSQL(Decimal.Parse(GVOVH.GetRowCellValue(i, "qty").ToString)) & "',NOW())"
+            Next
+            execute_non_query(q & qins, True, "", "", "", "")
         End If
     End Sub
 
@@ -160,9 +156,14 @@ WHERE dc.`id_design`='" & id_design & "' AND dc.`id_cat`='3'"
                 GVFabCons.DeleteSelectedRows()
                 allow_but()
             End If
-        Else
+        ElseIf XTCComponent.SelectedTabPageIndex = 1 Then
             If GVACC.RowCount > 0 Then
                 GVACC.DeleteSelectedRows()
+                allow_but()
+            End If
+        ElseIf XTCComponent.SelectedTabPageIndex = 2 Then
+            If GVOVH.RowCount > 0 Then
+                GVOVH.DeleteSelectedRows()
                 allow_but()
             End If
         End If
@@ -213,12 +214,18 @@ WHERE dc.`id_design`='" & id_design & "' AND dc.`id_cat`='3'"
         If XTCComponent.SelectedTabPageIndex = 0 Then
             GVFabCons.AddNewRow()
             GVFabCons.FocusedRowHandle = GVFabCons.RowCount - 1
+            GVFabCons.SetRowCellValue(GVFabCons.RowCount - 1, "price", 0.0000)
+            GVFabCons.SetRowCellValue(GVFabCons.RowCount - 1, "qty", 1.0)
         ElseIf XTCComponent.SelectedTabPageIndex = 1 Then
-            GVFabCons.AddNewRow()
-            GVFabCons.FocusedRowHandle = GVFabCons.RowCount - 1
+            GVACC.AddNewRow()
+            GVACC.FocusedRowHandle = GVACC.RowCount - 1
+            GVACC.SetRowCellValue(GVACC.RowCount - 1, "price", 0.0000)
+            GVACC.SetRowCellValue(GVACC.RowCount - 1, "qty", 1.0)
         ElseIf XTCComponent.SelectedTabPageIndex = 2 Then
             GVOVH.AddNewRow()
-            GVOVH.FocusedRowHandle = GVFabCons.RowCount - 1
+            GVOVH.FocusedRowHandle = GVOVH.RowCount - 1
+            GVOVH.SetRowCellValue(GVOVH.RowCount - 1, "price", 0.0000)
+            GVOVH.SetRowCellValue(GVOVH.RowCount - 1, "qty", 1.0)
         End If
         allow_but()
     End Sub

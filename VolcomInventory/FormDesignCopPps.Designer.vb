@@ -30,11 +30,6 @@ Partial Class FormDesignCopPps
         Me.PCPurchasing = New DevExpress.XtraEditors.PanelControl()
         Me.TECostSample = New DevExpress.XtraEditors.TextEdit()
         Me.LTargetCostSample = New DevExpress.XtraEditors.LabelControl()
-        Me.SLEColdStorage = New DevExpress.XtraEditors.SearchLookUpEdit()
-        Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.GridColumn21 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn22 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.LColdStorage = New DevExpress.XtraEditors.LabelControl()
         Me.BtnBrowseContactFrom = New DevExpress.XtraEditors.SimpleButton()
         Me.TEVendorName = New DevExpress.XtraEditors.TextEdit()
         Me.TEVendor = New DevExpress.XtraEditors.TextEdit()
@@ -82,8 +77,6 @@ Partial Class FormDesignCopPps
         CType(Me.PCPurchasing, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PCPurchasing.SuspendLayout()
         CType(Me.TECostSample.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.SLEColdStorage.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEVendorName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEVendor.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEPPSNumber.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -193,8 +186,6 @@ Partial Class FormDesignCopPps
         '
         Me.PCPurchasing.Controls.Add(Me.TECostSample)
         Me.PCPurchasing.Controls.Add(Me.LTargetCostSample)
-        Me.PCPurchasing.Controls.Add(Me.SLEColdStorage)
-        Me.PCPurchasing.Controls.Add(Me.LColdStorage)
         Me.PCPurchasing.Controls.Add(Me.BtnBrowseContactFrom)
         Me.PCPurchasing.Controls.Add(Me.TEVendorName)
         Me.PCPurchasing.Controls.Add(Me.TEVendor)
@@ -202,7 +193,7 @@ Partial Class FormDesignCopPps
         Me.PCPurchasing.Dock = System.Windows.Forms.DockStyle.Top
         Me.PCPurchasing.Location = New System.Drawing.Point(0, 148)
         Me.PCPurchasing.Name = "PCPurchasing"
-        Me.PCPurchasing.Size = New System.Drawing.Size(730, 99)
+        Me.PCPurchasing.Size = New System.Drawing.Size(730, 77)
         Me.PCPurchasing.TabIndex = 8911
         '
         'TECostSample
@@ -233,51 +224,12 @@ Partial Class FormDesignCopPps
         Me.LTargetCostSample.TabIndex = 8911
         Me.LTargetCostSample.Text = "Target Cost (Sample)"
         '
-        'SLEColdStorage
-        '
-        Me.SLEColdStorage.Location = New System.Drawing.Point(136, 42)
-        Me.SLEColdStorage.Name = "SLEColdStorage"
-        Me.SLEColdStorage.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.SLEColdStorage.Properties.View = Me.SearchLookUpEdit1View
-        Me.SLEColdStorage.Size = New System.Drawing.Size(194, 20)
-        Me.SLEColdStorage.TabIndex = 8911
-        '
-        'SearchLookUpEdit1View
-        '
-        Me.SearchLookUpEdit1View.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn21, Me.GridColumn22})
-        Me.SearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
-        Me.SearchLookUpEdit1View.Name = "SearchLookUpEdit1View"
-        Me.SearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = False
-        Me.SearchLookUpEdit1View.OptionsView.ShowGroupPanel = False
-        '
-        'GridColumn21
-        '
-        Me.GridColumn21.Caption = "Id"
-        Me.GridColumn21.FieldName = "id"
-        Me.GridColumn21.Name = "GridColumn21"
-        '
-        'GridColumn22
-        '
-        Me.GridColumn22.Caption = "Description"
-        Me.GridColumn22.FieldName = "cold_desc"
-        Me.GridColumn22.Name = "GridColumn22"
-        Me.GridColumn22.Visible = True
-        Me.GridColumn22.VisibleIndex = 0
-        '
-        'LColdStorage
-        '
-        Me.LColdStorage.Location = New System.Drawing.Point(9, 45)
-        Me.LColdStorage.Name = "LColdStorage"
-        Me.LColdStorage.Size = New System.Drawing.Size(93, 13)
-        Me.LColdStorage.TabIndex = 8910
-        Me.LColdStorage.Text = "Room/Cool Storage"
-        '
         'BtnBrowseContactFrom
         '
         Me.BtnBrowseContactFrom.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnBrowseContactFrom.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnBrowseContactFrom.Appearance.Options.UseFont = True
-        Me.BtnBrowseContactFrom.Location = New System.Drawing.Point(605, 68)
+        Me.BtnBrowseContactFrom.Location = New System.Drawing.Point(605, 42)
         Me.BtnBrowseContactFrom.Name = "BtnBrowseContactFrom"
         Me.BtnBrowseContactFrom.Size = New System.Drawing.Size(23, 20)
         Me.BtnBrowseContactFrom.TabIndex = 8890
@@ -289,7 +241,7 @@ Partial Class FormDesignCopPps
         Me.TEVendorName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TEVendorName.EditValue = ""
-        Me.TEVendorName.Location = New System.Drawing.Point(270, 68)
+        Me.TEVendorName.Location = New System.Drawing.Point(270, 42)
         Me.TEVendorName.Name = "TEVendorName"
         Me.TEVendorName.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TEVendorName.Properties.Appearance.Options.UseFont = True
@@ -302,7 +254,7 @@ Partial Class FormDesignCopPps
         'TEVendor
         '
         Me.TEVendor.EditValue = ""
-        Me.TEVendor.Location = New System.Drawing.Point(136, 68)
+        Me.TEVendor.Location = New System.Drawing.Point(136, 42)
         Me.TEVendor.Name = "TEVendor"
         Me.TEVendor.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TEVendor.Properties.Appearance.Options.UseFont = True
@@ -313,7 +265,7 @@ Partial Class FormDesignCopPps
         'LVendor
         '
         Me.LVendor.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LVendor.Location = New System.Drawing.Point(10, 71)
+        Me.LVendor.Location = New System.Drawing.Point(10, 45)
         Me.LVendor.Name = "LVendor"
         Me.LVendor.Size = New System.Drawing.Size(34, 13)
         Me.LVendor.TabIndex = 8891
@@ -510,10 +462,10 @@ Partial Class FormDesignCopPps
         '
         Me.XTCCOPPD.Dock = System.Windows.Forms.DockStyle.Fill
         Me.XTCCOPPD.HeaderLocation = DevExpress.XtraTab.TabHeaderLocation.Bottom
-        Me.XTCCOPPD.Location = New System.Drawing.Point(0, 247)
+        Me.XTCCOPPD.Location = New System.Drawing.Point(0, 225)
         Me.XTCCOPPD.Name = "XTCCOPPD"
         Me.XTCCOPPD.SelectedTabPage = Me.XTPUpdateCOP
-        Me.XTCCOPPD.Size = New System.Drawing.Size(730, 288)
+        Me.XTCCOPPD.Size = New System.Drawing.Size(730, 310)
         Me.XTCCOPPD.TabIndex = 8912
         Me.XTCCOPPD.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPUpdateCOP})
         '
@@ -522,7 +474,7 @@ Partial Class FormDesignCopPps
         Me.XTPUpdateCOP.Controls.Add(Me.GCCOPComponent)
         Me.XTPUpdateCOP.Controls.Add(Me.PanelControl4)
         Me.XTPUpdateCOP.Name = "XTPUpdateCOP"
-        Me.XTPUpdateCOP.Size = New System.Drawing.Size(724, 260)
+        Me.XTPUpdateCOP.Size = New System.Drawing.Size(724, 282)
         Me.XTPUpdateCOP.Text = "Input COP"
         '
         'GCCOPComponent
@@ -532,7 +484,7 @@ Partial Class FormDesignCopPps
         Me.GCCOPComponent.MainView = Me.GVCOPComponent
         Me.GCCOPComponent.Name = "GCCOPComponent"
         Me.GCCOPComponent.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RISLEComp})
-        Me.GCCOPComponent.Size = New System.Drawing.Size(724, 220)
+        Me.GCCOPComponent.Size = New System.Drawing.Size(724, 242)
         Me.GCCOPComponent.TabIndex = 0
         Me.GCCOPComponent.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVCOPComponent})
         '
@@ -787,8 +739,6 @@ Partial Class FormDesignCopPps
         Me.PCPurchasing.ResumeLayout(False)
         Me.PCPurchasing.PerformLayout()
         CType(Me.TECostSample.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.SLEColdStorage.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEVendorName.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEVendor.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEPPSNumber.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -822,11 +772,6 @@ Partial Class FormDesignCopPps
     Friend WithEvents BtnCancel As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BtnSave As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents PCPurchasing As DevExpress.XtraEditors.PanelControl
-    Friend WithEvents SLEColdStorage As DevExpress.XtraEditors.SearchLookUpEdit
-    Friend WithEvents SearchLookUpEdit1View As DevExpress.XtraGrid.Views.Grid.GridView
-    Friend WithEvents GridColumn21 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn22 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents LColdStorage As DevExpress.XtraEditors.LabelControl
     Friend WithEvents TEDesc As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelControl6 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents BtnBrowseContactFrom As DevExpress.XtraEditors.SimpleButton

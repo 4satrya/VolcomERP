@@ -105,7 +105,6 @@ WHERE dsg.id_design='" & id_design & "'"
         '
         view_currency(LECurrency)
         view_currency_grid()
-        load_cold_storage()
         '
         TECostSample.EditValue = 0.0
         TEEcop.EditValue = 0.00
@@ -146,7 +145,7 @@ WHERE pd.`id_report_status` != '5' AND pdd.`id_design`='" & id_design & "' AND p
             End If
         Else
             'edit
-            Dim qs As String = "SELECT pps.id_comp_contact,c.comp_number,c.comp_name,pps.is_cool_storage,id_design_ecop_pps,pps.`number`,d.`design_code`,d.`design_display_name` ,emp.`employee_name` AS created_by,pps.`created_date`,pps.`is_production_dept`,pps.`id_report_status`
+            Dim qs As String = "SELECT pps.id_comp_contact,c.comp_number,c.comp_name,id_design_ecop_pps,pps.`number`,d.`design_code`,d.`design_display_name` ,emp.`employee_name` AS created_by,pps.`created_date`,pps.`is_production_dept`,pps.`id_report_status`
 FROM `tb_design_ecop_pps` pps
 INNER JOIN tb_m_design d ON d.`id_design`=pps.`id_design`
 INNER JOIN tb_m_user usr ON usr.`id_user`=pps.`created_by`
@@ -160,7 +159,6 @@ WHERE id_design_ecop_pps='" & id_pps & "'"
             TEVendorName.Text = dts.Rows(0)("comp_name").ToString
             is_production = dts.Rows(0)("is_production_dept").ToString
             id_report_status = dts.Rows(0)("id_report_status").ToString
-            SLEColdStorage.EditValue = dts.Rows(0)("is_cool_storage").ToString
             '
             load_form_input()
             '
@@ -192,11 +190,6 @@ WHERE id_design_ecop_pps='" & id_pps & "'"
             viewSearchLookupRepositoryQuery(RISLEComp, query, 0, "currency", "id_currency")
         Catch ex As Exception
         End Try
-    End Sub
-
-    Sub load_cold_storage()
-        Dim q As String = "SELECT id_cool_storage AS id,cool_storage AS cold_desc FROM tb_lookup_cool_storage ORDER BY id_cool_storage DESC"
-        viewSearchLookupQuery(SLEColdStorage, q, "id", "cold_desc", "id")
     End Sub
 
     Private Sub view_currency(ByVal lookup As DevExpress.XtraEditors.LookUpEdit)
@@ -289,8 +282,8 @@ WHERE pd.`id_report_status` != '5' AND pdd.`id_design`='" & id_design & "' AND p
                     End If
 
                     Dim qi As String = ""
-                    qi = "INSERT INTO `tb_design_ecop_pps`(id_comp_contact,id_design,created_by,created_date,id_report_status,is_production_dept,is_cool_storage,note)
-VALUES('" & id_comp_contact & "','" & id_design & "','" & id_user & "',NOW(),'1','" & is_production & "','" & SLEColdStorage.EditValue.ToString & "',''); SELECT LAST_INSERT_ID();"
+                    qi = "INSERT INTO `tb_design_ecop_pps`(id_comp_contact,id_design,created_by,created_date,id_report_status,is_production_dept,note)
+VALUES('" & id_comp_contact & "','" & id_design & "','" & id_user & "',NOW(),'1','" & is_production & "',''); SELECT LAST_INSERT_ID();"
                     id_pps = execute_query(qi, 0, True, "", "", "", "")
 
                     qi = "CALL gen_number('" & id_pps & "',270)"
@@ -329,7 +322,7 @@ WHERE pd.`id_report_status` != '5' AND pdd.`id_design`='" & id_design & "' AND p
                     End If
 
                     Dim qi As String = ""
-                    qi = "UPDATE `tb_design_ecop_pps` SET id_comp_contact='" & id_comp_contact & "',id_design='" & id_design & "',last_update_by='" & id_user & "',last_update_date=NOW(),is_cool_storage='" & SLEColdStorage.EditValue.ToString & "' WHERE id_design_ecop_pps='" & id_pps & "'"
+                    qi = "UPDATE `tb_design_ecop_pps` SET id_comp_contact='" & id_comp_contact & "',id_design='" & id_design & "',last_update_by='" & id_user & "',last_update_date=NOW() WHERE id_design_ecop_pps='" & id_pps & "'"
                     execute_non_query(qi, True, "", "", "", "")
                     'detail
                     'hapus detail

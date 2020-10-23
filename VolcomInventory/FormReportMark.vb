@@ -8751,7 +8751,7 @@ WHERE invd.`id_inv_mat`='" & id_report & "'"
 
             If id_status_reportx = "6" Then
                 'insert into ecop
-                Dim q As String = "SELECT pps.is_cool_storage,pps.id_design,pps.is_production_dept,ppsd.kurs,pps.id_design,SUM(IF(ppsd.id_currency=1,ppsd.before_kurs,ppsd.before_kurs*ppsd.kurs)) AS cop,SUM(ppsd.additional) AS additional_cop,pps.id_comp_contact
+                Dim q As String = "SELECT pps.id_design,pps.is_production_dept,ppsd.kurs,pps.id_design,SUM(IF(ppsd.id_currency=1,ppsd.before_kurs,ppsd.before_kurs*ppsd.kurs)) AS cop,SUM(ppsd.additional) AS additional_cop,pps.id_comp_contact
 FROM tb_design_ecop_pps_det ppsd
 INNER JOIN tb_design_ecop_pps pps ON pps.id_design_ecop_pps=ppsd.id_design_ecop_pps AND pps.id_design_ecop_pps='" & id_report & "'
 GROUP BY pps.id_design"
@@ -8760,8 +8760,8 @@ GROUP BY pps.id_design"
                 If dtq.Rows(0)("is_production_dept").ToString = "1" Then
                     'production
                     Dim qu As String = "UPDATE tb_m_design_cop SET is_active=2 WHERE id_design='" & dtq.Rows(0)("id_design").ToString & "' AND is_production_dept='" & dtq.Rows(0)("is_production_dept").ToString & "';
-INSERT INTO `tb_m_design_cop`(description,id_design,date_created,id_currency,kurs,before_kurs,additional,is_active,is_production_dept,is_cool_storage)
-SELECT ecopd.description,ecop.id_design,NOW(),ecopd.id_currency,ecopd.kurs,ecopd.before_kurs,ecopd.additional,1 AS is_active,ecop.is_production_dept,ecop.is_cool_storage
+INSERT INTO `tb_m_design_cop`(description,id_design,date_created,id_currency,kurs,before_kurs,additional,is_active,is_production_dept)
+SELECT ecopd.description,ecop.id_design,NOW(),ecopd.id_currency,ecopd.kurs,ecopd.before_kurs,ecopd.additional,1 AS is_active,ecop.is_production_dept
 FROM `tb_design_ecop_pps_det` ecopd
 INNER JOIN tb_design_ecop_pps ecop ON ecop.id_design_ecop_pps=ecopd.id_design_ecop_pps
 WHERE ecop.id_design_ecop_pps='" & id_report & "';"
@@ -8799,7 +8799,7 @@ WHERE is_production_dept=2 AND is_active=1 AND id_design='1'"
                         mail.send_email()
                     Else
                         'update to COP PD
-                        qu = String.Format("UPDATE tb_m_design SET prod_order_cop_pd='{1}',prod_order_cop_pd_addcost='{5}',prod_order_cop_kurs_pd='{2}',prod_order_cop_pd_vendor={3},prod_order_cop_pd_curr='{4}',is_cold_storage='{6}' WHERE id_design='{0}'", dtq.Rows(0)("id_design").ToString, decimalSQL((dtq.Rows(0)("cop") + dtq.Rows(0)("additional_cop")).ToString), decimalSQL(dtq.Rows(0)("kurs").ToString), dtq.Rows(0)("id_comp_contact").ToString, "1", decimalSQL(dtq.Rows(0)("additional_cop").ToString), dtq.Rows(0)("is_cool_storage").ToString)
+                        qu = String.Format("UPDATE tb_m_design SET prod_order_cop_pd='{1}',prod_order_cop_pd_addcost='{5}',prod_order_cop_kurs_pd='{2}',prod_order_cop_pd_vendor={3},prod_order_cop_pd_curr='{4}' WHERE id_design='{0}'", dtq.Rows(0)("id_design").ToString, decimalSQL((dtq.Rows(0)("cop") + dtq.Rows(0)("additional_cop")).ToString), decimalSQL(dtq.Rows(0)("kurs").ToString), dtq.Rows(0)("id_comp_contact").ToString, "1", decimalSQL(dtq.Rows(0)("additional_cop").ToString))
                         execute_non_query(qu, True, "", "", "", "")
                         'email ECOP
                         Try
@@ -8813,8 +8813,8 @@ WHERE is_production_dept=2 AND is_active=1 AND id_design='1'"
                     End If
                 Else
                     Dim qu As String = "UPDATE tb_m_design_cop SET is_active=2 WHERE id_design='" & dtq.Rows(0)("id_design").ToString & "' AND is_production_dept='" & dtq.Rows(0)("is_production_dept").ToString & "';
-INSERT INTO `tb_m_design_cop`(description,id_design,date_created,id_currency,kurs,before_kurs,additional,is_active,is_production_dept,is_cool_storage)
-SELECT ecopd.description,ecop.id_design,NOW(),ecopd.id_currency,ecopd.kurs,ecopd.before_kurs,ecopd.additional,1 AS is_active,ecop.is_production_dept,ecop.is_cool_storage
+INSERT INTO `tb_m_design_cop`(description,id_design,date_created,id_currency,kurs,before_kurs,additional,is_active,is_production_dept)
+SELECT ecopd.description,ecop.id_design,NOW(),ecopd.id_currency,ecopd.kurs,ecopd.before_kurs,ecopd.additional,1 AS is_active,ecop.is_production_dept
 FROM `tb_design_ecop_pps_det` ecopd
 INNER JOIN tb_design_ecop_pps ecop ON ecop.id_design_ecop_pps=ecopd.id_design_ecop_pps
 WHERE ecop.id_design_ecop_pps='" & id_report & "';"

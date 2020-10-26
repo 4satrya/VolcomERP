@@ -440,12 +440,13 @@
     End Sub
 
     Sub sendEmailConfirmationforConceptStore(ByVal is_use_unique_code As String, ByVal id_report As String, ByVal rmt As String)
-        If id_pop_up = "2" Then
-            If is_use_unique_code = "1" And SLEStatusRec.EditValue.ToString = "6" Then
-                Dim d As New ClassSalesDelOrder()
-                d.sendDeliveryConfirmationOfflineStore(id_report, rmt)
-            End If
-        End If
+        'sementara belum dipake
+        'If id_pop_up = "2" Then
+        '    If is_use_unique_code = "1" And SLEStatusRec.EditValue.ToString = "6" Then
+        '        Dim d As New ClassSalesDelOrder()
+        '        d.sendDeliveryConfirmationOfflineStore(id_report, rmt)
+        '    End If
+        'End If
     End Sub
 
     Sub updateStatusOnlineStore(ByVal id_commerce_type As String, ByVal id_store As String, ByVal id_report As String, ByVal id_web_order As String)

@@ -45,6 +45,7 @@
 	            WHERE cl.id_design_column_type = " + SLUEStore.EditValue.ToString + "
             ) AS cm ON cl.id_design_column_list = cm.id_design_column_list
             WHERE cl.id_design_column_type = " + SLUEStore.EditValue.ToString + "
+            ORDER BY cl.sort ASC, cl.id_design_column_list ASC
         ", -1, True, "", "", "", "")
 
         Dim data As DataTable = New DataTable
@@ -100,6 +101,7 @@
 	            WHERE cl.id_design_column_type = " + id_store + "
             ) AS cm ON cl.id_design_column_list = cm.id_design_column_list
             WHERE cl.id_design_column_type = " + id_store + "
+            ORDER BY cl.sort ASC, cl.id_design_column_list ASC
         ", -1, True, "", "", "", "")
 
         For i = 0 To data_column.Rows.Count - 1
@@ -266,7 +268,10 @@
 
             If id_design_column_list = "0" Then
                 'add column list
-                id_design_column_list = execute_query("INSERT INTO tb_design_column_list (id_design_column_type, column_list) VALUES (" + SLUEStore.EditValue.ToString + ", '" + addSlashes(GVColumn.Columns(i).Caption) + "'); SELECT LAST_INSERT_ID();", 0, True, "", "", "", "")
+                id_design_column_list = execute_query("INSERT INTO tb_design_column_list (id_design_column_type, column_list, sort) VALUES (" + SLUEStore.EditValue.ToString + ", '" + addSlashes(GVColumn.Columns(i).Caption) + "', " + GVColumn.Columns(i).AbsoluteIndex.ToString + "); SELECT LAST_INSERT_ID();", 0, True, "", "", "", "")
+            Else
+                'update sort
+                execute_non_query("UPDATE tb_design_column_list SET sort = " + GVColumn.Columns(i).AbsoluteIndex.ToString + " WHERE id_design_column_list = " + id_design_column_list, True, "", "", "", "")
             End If
 
             execute_non_query("DELETE FROM tb_design_column_mapping WHERE id_design_column_list = " + id_design_column_list, True, "", "", "", "")
@@ -421,6 +426,14 @@
     End Sub
 
     Private Sub RepositoryItemMemoEdit_KeyUp(sender As Object, e As KeyEventArgs) Handles RepositoryItemMemoEdit.KeyUp
+        edited = True
+    End Sub
+
+    Private Sub GVColumn_ColumnPositionChanged(sender As Object, e As EventArgs) Handles GVColumn.ColumnPositionChanged
+        Dim column As DevExpress.XtraGrid.Columns.GridColumn = CType(sender, DevExpress.XtraGrid.Columns.GridColumn)
+
+        GVColumn.Columns(column.FieldName).AbsoluteIndex = column.VisibleIndex
+
         edited = True
     End Sub
 End Class

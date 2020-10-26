@@ -19,6 +19,7 @@ Partial Class FormInvoiceFGPO
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormInvoiceFGPO))
         Me.XTCInvoiceFGPO = New DevExpress.XtraTab.XtraTabControl()
         Me.XTPBPL = New DevExpress.XtraTab.XtraTabPage()
@@ -38,11 +39,11 @@ Partial Class FormInvoiceFGPO
         Me.GridColumn30 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
         Me.BtnDropQuickMenu = New DevExpress.XtraEditors.DropDownButton()
-        Me.PopupMenu1 = New DevExpress.XtraBars.PopupMenu()
+        Me.PopupMenu1 = New DevExpress.XtraBars.PopupMenu(Me.components)
         Me.BBBPLUmum = New DevExpress.XtraBars.BarButtonItem()
         Me.BBDPFGPO = New DevExpress.XtraBars.BarButtonItem()
         Me.BBPaymentFGPO = New DevExpress.XtraBars.BarButtonItem()
-        Me.BarManager1 = New DevExpress.XtraBars.BarManager()
+        Me.BarManager1 = New DevExpress.XtraBars.BarManager(Me.components)
         Me.barDockControlTop = New DevExpress.XtraBars.BarDockControl()
         Me.barDockControlBottom = New DevExpress.XtraBars.BarDockControl()
         Me.barDockControlLeft = New DevExpress.XtraBars.BarDockControl()

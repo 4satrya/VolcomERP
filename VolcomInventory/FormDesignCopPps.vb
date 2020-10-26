@@ -156,11 +156,12 @@ FROM `tb_design_ecop_pps` pps
 INNER JOIN tb_m_design d ON d.`id_design`=pps.`id_design`
 INNER JOIN tb_m_user usr ON usr.`id_user`=pps.`created_by`
 INNER JOIN tb_m_employee emp ON emp.`id_employee`=usr.`id_employee`
-INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact=pps.id_comp_contact
-INNER JOIN tb_m_comp c ON c.id_comp=cc.id_comp
+LEFT JOIN tb_m_comp_contact cc ON cc.id_comp_contact=pps.id_comp_contact
+LEFT JOIN tb_m_comp c ON c.id_comp=cc.id_comp
 WHERE id_design_ecop_pps='" & id_pps & "'"
             Dim dts As DataTable = execute_query(qs, -1, True, "", "", "", "")
             '
+            TEPPSNumber.Text = dts.Rows(0)("number").ToString
             TEVendor.Text = dts.Rows(0)("comp_number").ToString
             TEVendorName.Text = dts.Rows(0)("comp_name").ToString
             is_production = dts.Rows(0)("is_production_dept").ToString

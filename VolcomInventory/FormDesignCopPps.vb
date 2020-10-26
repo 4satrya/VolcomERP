@@ -33,7 +33,13 @@
     Sub load_det_input()
         Dim query As String = ""
         If id_pps = "-1" Then
-            query = "SELECT description,id_currency," & decimalSQL(TETodayKurs.EditValue.ToString) & " AS kurs,before_kurs,additional FROM tb_design_ecop_pps_det WHERE id_design_ecop_pps='" & id_pps & "'"
+            'query = "SELECT description,id_currency," & decimalSQL(TETodayKurs.EditValue.ToString) & " AS kurs,before_kurs,additional FROM tb_design_ecop_pps_det WHERE id_design_ecop_pps='" & id_pps & "'"
+            query = "SELECT CONCAT(dsgc.description,' - ',IFNULL(ovh.overhead,md.mat_det_name)) AS description,dsgc.id_currency," & decimalSQL(TETodayKurs.EditValue.ToString) & " AS kurs,(dsgc.price*dsgc.qty) AS before_kurs,0 AS additional
+FROM tb_design_component dsgc
+LEFT JOIN tb_m_ovh_price ovhp ON ovhp.id_ovh_price=dsgc.id_ovh_price
+LEFT JOIN tb_m_ovh ovh ON ovh.id_ovh=ovhp.id_ovh
+LEFT JOIN tb_m_mat_det md ON md.id_mat_det=dsgc.id_mat_det
+WHERE dsgc.id_design='" & id_design & "'"
         Else
             query = "SELECT description,id_currency,kurs,before_kurs,additional FROM tb_design_ecop_pps_det WHERE id_design_ecop_pps='" & id_pps & "'"
         End If

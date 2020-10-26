@@ -126,6 +126,7 @@ WHERE dc.`id_design`='" & id_design & "' AND dc.`id_cat`='3'"
                 qins += "('3','" & id_design & "','" & addSlashes(GVOVH.GetRowCellValue(i, "description").ToString) & "',NULL," & GVOVH.GetRowCellValue(i, "id_ovh_price").ToString & ",'" & GVOVH.GetRowCellValue(i, "id_currency").ToString & "','" & decimalSQL(Decimal.Parse(GVOVH.GetRowCellValue(i, "price").ToString)) & "','" & decimalSQL(Decimal.Parse(GVOVH.GetRowCellValue(i, "qty").ToString)) & "',NOW())"
             Next
             execute_non_query(q & qins, True, "", "", "", "")
+            infoCustom("Detail saved")
         End If
     End Sub
 

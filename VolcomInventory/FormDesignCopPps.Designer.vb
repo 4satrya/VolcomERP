@@ -134,7 +134,7 @@ Partial Class FormDesignCopPps
         Me.PanelControl3.LookAndFeel.SkinName = "Blue"
         Me.PanelControl3.LookAndFeel.UseDefaultLookAndFeel = False
         Me.PanelControl3.Name = "PanelControl3"
-        Me.PanelControl3.Size = New System.Drawing.Size(730, 38)
+        Me.PanelControl3.Size = New System.Drawing.Size(939, 38)
         Me.PanelControl3.TabIndex = 6
         Me.PanelControl3.TabStop = True
         '
@@ -165,7 +165,7 @@ Partial Class FormDesignCopPps
         Me.BtnCancel.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnCancel.ImageIndex = 5
         Me.BtnCancel.ImageList = Me.LargeImageCollection
-        Me.BtnCancel.Location = New System.Drawing.Point(578, 2)
+        Me.BtnCancel.Location = New System.Drawing.Point(787, 2)
         Me.BtnCancel.Name = "BtnCancel"
         Me.BtnCancel.Size = New System.Drawing.Size(75, 34)
         Me.BtnCancel.TabIndex = 7
@@ -176,7 +176,7 @@ Partial Class FormDesignCopPps
         Me.BtnSave.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnSave.ImageIndex = 7
         Me.BtnSave.ImageList = Me.LargeImageCollection
-        Me.BtnSave.Location = New System.Drawing.Point(653, 2)
+        Me.BtnSave.Location = New System.Drawing.Point(862, 2)
         Me.BtnSave.Name = "BtnSave"
         Me.BtnSave.Size = New System.Drawing.Size(75, 34)
         Me.BtnSave.TabIndex = 6
@@ -193,7 +193,7 @@ Partial Class FormDesignCopPps
         Me.PCPurchasing.Dock = System.Windows.Forms.DockStyle.Top
         Me.PCPurchasing.Location = New System.Drawing.Point(0, 148)
         Me.PCPurchasing.Name = "PCPurchasing"
-        Me.PCPurchasing.Size = New System.Drawing.Size(730, 77)
+        Me.PCPurchasing.Size = New System.Drawing.Size(939, 77)
         Me.PCPurchasing.TabIndex = 8911
         '
         'TECostSample
@@ -229,7 +229,7 @@ Partial Class FormDesignCopPps
         Me.BtnBrowseContactFrom.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnBrowseContactFrom.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnBrowseContactFrom.Appearance.Options.UseFont = True
-        Me.BtnBrowseContactFrom.Location = New System.Drawing.Point(605, 42)
+        Me.BtnBrowseContactFrom.Location = New System.Drawing.Point(814, 42)
         Me.BtnBrowseContactFrom.Name = "BtnBrowseContactFrom"
         Me.BtnBrowseContactFrom.Size = New System.Drawing.Size(23, 20)
         Me.BtnBrowseContactFrom.TabIndex = 8890
@@ -247,7 +247,7 @@ Partial Class FormDesignCopPps
         Me.TEVendorName.Properties.Appearance.Options.UseFont = True
         Me.TEVendorName.Properties.EditValueChangedDelay = 1
         Me.TEVendorName.Properties.ReadOnly = True
-        Me.TEVendorName.Size = New System.Drawing.Size(329, 20)
+        Me.TEVendorName.Size = New System.Drawing.Size(538, 20)
         Me.TEVendorName.TabIndex = 8892
         Me.TEVendorName.TabStop = False
         '
@@ -303,7 +303,7 @@ Partial Class FormDesignCopPps
         Me.TEDesc.Properties.Appearance.Options.UseFont = True
         Me.TEDesc.Properties.EditValueChangedDelay = 1
         Me.TEDesc.Properties.ReadOnly = True
-        Me.TEDesc.Size = New System.Drawing.Size(150, 20)
+        Me.TEDesc.Size = New System.Drawing.Size(359, 20)
         Me.TEDesc.TabIndex = 8897
         Me.TEDesc.TabStop = False
         '
@@ -465,7 +465,7 @@ Partial Class FormDesignCopPps
         Me.XTCCOPPD.Location = New System.Drawing.Point(0, 225)
         Me.XTCCOPPD.Name = "XTCCOPPD"
         Me.XTCCOPPD.SelectedTabPage = Me.XTPUpdateCOP
-        Me.XTCCOPPD.Size = New System.Drawing.Size(730, 310)
+        Me.XTCCOPPD.Size = New System.Drawing.Size(939, 310)
         Me.XTCCOPPD.TabIndex = 8912
         Me.XTCCOPPD.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPUpdateCOP})
         '
@@ -474,7 +474,7 @@ Partial Class FormDesignCopPps
         Me.XTPUpdateCOP.Controls.Add(Me.GCCOPComponent)
         Me.XTPUpdateCOP.Controls.Add(Me.PanelControl4)
         Me.XTPUpdateCOP.Name = "XTPUpdateCOP"
-        Me.XTPUpdateCOP.Size = New System.Drawing.Size(724, 282)
+        Me.XTPUpdateCOP.Size = New System.Drawing.Size(933, 282)
         Me.XTPUpdateCOP.Text = "Input COP"
         '
         'GCCOPComponent
@@ -484,7 +484,7 @@ Partial Class FormDesignCopPps
         Me.GCCOPComponent.MainView = Me.GVCOPComponent
         Me.GCCOPComponent.Name = "GCCOPComponent"
         Me.GCCOPComponent.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RISLEComp})
-        Me.GCCOPComponent.Size = New System.Drawing.Size(724, 242)
+        Me.GCCOPComponent.Size = New System.Drawing.Size(933, 242)
         Me.GCCOPComponent.TabIndex = 0
         Me.GCCOPComponent.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVCOPComponent})
         '
@@ -648,7 +648,7 @@ Partial Class FormDesignCopPps
         Me.PanelControl4.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl4.Location = New System.Drawing.Point(0, 0)
         Me.PanelControl4.Name = "PanelControl4"
-        Me.PanelControl4.Size = New System.Drawing.Size(724, 40)
+        Me.PanelControl4.Size = New System.Drawing.Size(933, 40)
         Me.PanelControl4.TabIndex = 1
         '
         'LabelControl10
@@ -679,7 +679,7 @@ Partial Class FormDesignCopPps
         '
         Me.BDelete.Dock = System.Windows.Forms.DockStyle.Right
         Me.BDelete.Image = CType(resources.GetObject("BDelete.Image"), System.Drawing.Image)
-        Me.BDelete.Location = New System.Drawing.Point(566, 2)
+        Me.BDelete.Location = New System.Drawing.Point(775, 2)
         Me.BDelete.Name = "BDelete"
         Me.BDelete.Size = New System.Drawing.Size(81, 36)
         Me.BDelete.TabIndex = 1
@@ -689,7 +689,7 @@ Partial Class FormDesignCopPps
         '
         Me.BAdd.Dock = System.Windows.Forms.DockStyle.Right
         Me.BAdd.Image = CType(resources.GetObject("BAdd.Image"), System.Drawing.Image)
-        Me.BAdd.Location = New System.Drawing.Point(647, 2)
+        Me.BAdd.Location = New System.Drawing.Point(856, 2)
         Me.BAdd.Name = "BAdd"
         Me.BAdd.Size = New System.Drawing.Size(75, 36)
         Me.BAdd.TabIndex = 0
@@ -715,14 +715,14 @@ Partial Class FormDesignCopPps
         Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl2.Location = New System.Drawing.Point(0, 0)
         Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(730, 148)
+        Me.PanelControl2.Size = New System.Drawing.Size(939, 148)
         Me.PanelControl2.TabIndex = 8913
         '
         'FormDesignCopPps
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(730, 573)
+        Me.ClientSize = New System.Drawing.Size(939, 573)
         Me.Controls.Add(Me.XTCCOPPD)
         Me.Controls.Add(Me.PCPurchasing)
         Me.Controls.Add(Me.PanelControl3)

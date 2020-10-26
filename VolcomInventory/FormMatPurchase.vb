@@ -422,6 +422,7 @@ DATE_ADD(a.mat_purc_date,INTERVAL (a.mat_purc_top+a.mat_purc_lead_time) DAY) AS 
 ,SUM(mpd.`mat_purc_det_qty`) AS qty_order
 ,SUM(IF(a.`id_currency`=1,1,a.`mat_purc_kurs`) * mpd.`mat_purc_det_price` * mpd.`mat_purc_det_qty`) * ((100 + a.mat_purc_vat)/100) AS po_amount_rp
 ,uom.`uom`
+,SUM(mpd.`mat_purc_det_qty`) AS qty_po,IFNULL(SUM(rec.qty_rec),0) AS qty_rec
 FROM tb_mat_purc a INNER JOIN tb_season_delivery i ON a.id_delivery = i.id_delivery 
 INNER JOIN tb_season b ON i.id_season = b.id_season 
 INNER JOIN tb_m_comp_contact c ON a.id_comp_contact_to = c.id_comp_contact 
@@ -440,6 +441,13 @@ INNER JOIN tb_m_mat_det_price prc ON prc.`id_mat_det_price`=mpd.`id_mat_det_pric
 INNER JOIN tb_m_mat_det md ON md.`id_mat_det`=prc.`id_mat_det`
 INNER JOIN tb_m_mat mat ON mat.`id_mat`=md.`id_mat`
 INNER JOIN tb_m_uom uom ON uom.`id_uom`=mat.`id_uom`
+LEFT JOIN 
+(
+	SELECT recd.id_mat_purc_det,SUM(mat_purc_rec_det_qty) AS qty_rec
+	FROM `tb_mat_purc_rec_det` recd 
+	INNER JOIN `tb_mat_purc_rec` rec ON rec.id_mat_purc_rec=recd.id_mat_purc_rec AND rec.id_report_status=6
+	GROUP BY recd.id_mat_purc_det
+)rec ON rec.id_mat_purc_det=mpd.id_mat_purc_det
 WHERE 1=1 " & q_where & "
 GROUP BY mpd.`id_mat_purc`"
         Return query

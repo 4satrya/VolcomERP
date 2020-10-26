@@ -134,7 +134,7 @@ LEFT JOIN (
     GROUP BY dnd.id_report
 ) dn ON dn.id_report=r.id_prod_order_rec
 INNER JOIN tb_m_claim_late_det ld ON DATEDIFF(r.`arrive_date`,DATE_ADD(wo.prod_order_wo_del_date, INTERVAL IFNULL(ko.lead_time_prod,wo.`prod_order_wo_lead_time`) DAY))>=ld.`min_late` AND IF(ld.max_late=0,TRUE,DATEDIFF(r.`arrive_date`,DATE_ADD(wo.prod_order_wo_del_date, INTERVAL IFNULL(ko.lead_time_prod,wo.`prod_order_wo_lead_time`) DAY))<=ld.max_late)
-WHERE cl.`id_report_status`='6' AND  ld.`claim_percent` > 0  AND ISNULL(dn.id_report) " & q_where & "
+WHERE ld.`claim_percent` > 0  AND ISNULL(dn.id_report) " & q_where & "
 GROUP BY rd.`id_prod_order_rec`"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCClaimLate.DataSource = data
@@ -153,7 +153,7 @@ GROUP BY rd.`id_prod_order_rec`"
             q_where = " AND wo_price.id_comp='" & SLEVendor.EditValue.ToString & "'"
         End If
 
-        Dim query As String = "SELECT 'no' AS is_check,'22' AS report_mark_type,fc.`id_prod_fc`,fc.`prod_fc_number`,po.`id_prod_order`,dsg.`design_code`,dsg.`design_name`,po.`prod_order_number`,plc.`pl_category_sub`,fcd.*,
+        Dim query As String = "SELECT 'no' AS is_check,fcs.id_prod_fc_sum,'22' AS report_mark_type,fc.`id_prod_fc`,fc.`prod_fc_number`,po.`id_prod_order`,dsg.`design_code`,dsg.`design_name`,po.`prod_order_number`,plc.`pl_category_sub`,fcd.*,
                                 SUM(IF(fc.id_pl_category_sub=1,fcd.prod_fc_det_qty,0)) AS qc_normal,
                                 get_claim_reject_percent(ko.`id_claim_reject`,1) AS p_normal,
                                 SUM(IF(fc.id_pl_category_sub=2,fcd.prod_fc_det_qty,0)) AS qc_normal_minor,
@@ -285,5 +285,12 @@ GROUP BY rd.`id_prod_order_rec`"
                 End If
             Next
         End If
+    End Sub
+
+    Private Sub ViewQCSummaryReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ViewQCSummaryReportToolStripMenuItem.Click
+        Dim qcp As New ClassShowPopUp
+        qcp.id_report = GVSumClaimReject.GetFocusedRowCellValue("id_prod_fc_sum").ToString
+        qcp.report_mark_type = "222"
+        qcp.show()
     End Sub
 End Class

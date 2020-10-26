@@ -19,6 +19,7 @@ Partial Class FormDebitNote
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.XtraTabControl1 = New DevExpress.XtraTab.XtraTabControl()
         Me.XTPListDebitNote = New DevExpress.XtraTab.XtraTabPage()
         Me.GCDebitNote = New DevExpress.XtraGrid.GridControl()
@@ -130,6 +131,8 @@ Partial Class FormDebitNote
         Me.GridColumn28 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn29 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
+        Me.CMViewAttachment = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ViewQCSummaryReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XtraTabControl1.SuspendLayout()
         Me.XTPListDebitNote.SuspendLayout()
@@ -165,6 +168,7 @@ Partial Class FormDebitNote
         Me.PanelControl1.SuspendLayout()
         CType(Me.SLEVendor.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView6, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.CMViewAttachment.SuspendLayout()
         Me.SuspendLayout()
         '
         'XtraTabControl1
@@ -280,6 +284,7 @@ Partial Class FormDebitNote
         '
         'GCSumClaimReject
         '
+        Me.GCSumClaimReject.ContextMenuStrip = Me.CMViewAttachment
         Me.GCSumClaimReject.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GCSumClaimReject.Location = New System.Drawing.Point(0, 0)
         Me.GCSumClaimReject.MainView = Me.GVSumClaimReject
@@ -1367,6 +1372,18 @@ Partial Class FormDebitNote
         Me.LabelControl2.TabIndex = 8913
         Me.LabelControl2.Text = "Vendor"
         '
+        'CMViewAttachment
+        '
+        Me.CMViewAttachment.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewQCSummaryReportToolStripMenuItem})
+        Me.CMViewAttachment.Name = "CMViewAttachment"
+        Me.CMViewAttachment.Size = New System.Drawing.Size(212, 26)
+        '
+        'ViewQCSummaryReportToolStripMenuItem
+        '
+        Me.ViewQCSummaryReportToolStripMenuItem.Name = "ViewQCSummaryReportToolStripMenuItem"
+        Me.ViewQCSummaryReportToolStripMenuItem.Size = New System.Drawing.Size(211, 22)
+        Me.ViewQCSummaryReportToolStripMenuItem.Text = "View QC Summary Report"
+        '
         'FormDebitNote
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1416,6 +1433,7 @@ Partial Class FormDebitNote
         Me.PanelControl1.PerformLayout()
         CType(Me.SLEVendor.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView6, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.CMViewAttachment.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -1531,4 +1549,6 @@ Partial Class FormDebitNote
     Friend WithEvents gridBand7 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents gridBand2 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents gridBand3 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
+    Friend WithEvents CMViewAttachment As ContextMenuStrip
+    Friend WithEvents ViewQCSummaryReportToolStripMenuItem As ToolStripMenuItem
 End Class

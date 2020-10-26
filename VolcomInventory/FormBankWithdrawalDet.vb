@@ -175,6 +175,7 @@ SELECT 1 AS id,'Yes' AS auto_debet"
                     Dim id_comp_contact As String = get_company_x(id_comp, 6)
                     SLEVendor.EditValue = id_comp_contact
                     SLEReportType.EditValue = report_mark_type
+                    SLEPayType.EditValue = "2"
                     SLEPayType.Visible = False
                     Dim selisih_kurs As Decimal = 0.00
                     'load detail
@@ -1679,5 +1680,19 @@ VALUES('" & report_mark_type & "','" & decimalSQL(Decimal.Parse(TEKurs.EditValue
         'FormBankWithdrawalCompen.id_comp = SLEVendor.EditValue.ToString
         FormBankWithdrawalCompen.id_comp = "444"
         FormBankWithdrawalCompen.ShowDialog()
+    End Sub
+
+    Private Sub ViewDetailToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ViewDetailToolStripMenuItem.Click
+        If GVList.RowCount > 0 Then
+            Try
+                Dim showpopup As ClassShowPopUp = New ClassShowPopUp()
+                showpopup.opt = "Buku Besar"
+                showpopup.report_mark_type = GVList.GetFocusedRowCellValue("report_mark_type").ToString
+                showpopup.id_report = GVList.GetFocusedRowCellValue("id_report").ToString
+                showpopup.show()
+            Catch ex As Exception
+                warningCustom("No details")
+            End Try
+        End If
     End Sub
 End Class

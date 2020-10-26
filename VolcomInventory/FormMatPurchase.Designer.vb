@@ -142,6 +142,9 @@ Partial Class FormMatPurchase
         Me.GridColumn48 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.BViewKO = New DevExpress.XtraEditors.SimpleButton()
         Me.LabelControl10 = New DevExpress.XtraEditors.LabelControl()
+        Me.GridColumn41 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn42 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn43 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XTCPurcMat, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCPurcMat.SuspendLayout()
         Me.XTPPurchaseMat.SuspendLayout()
@@ -226,7 +229,7 @@ Partial Class FormMatPurchase
         '
         'GVMatPurchase
         '
-        Me.GVMatPurchase.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ColIdMatPurchase, Me.GridColumn2, Me.ColSeason, Me.ColDelivery, Me.ColPONumber, Me.ColShipFrom, Me.ColShipTo, Me.ColSamplePurcDate, Me.ColRecDate, Me.ColDueDate, Me.ColPayment, Me.ColStatus, Me.ColIDStatus, Me.ColIdDelivery, Me.ColIdSeason, Me.GridColumn5, Me.GridColumn1})
+        Me.GVMatPurchase.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ColIdMatPurchase, Me.GridColumn2, Me.ColSeason, Me.ColDelivery, Me.ColPONumber, Me.ColShipFrom, Me.ColShipTo, Me.ColSamplePurcDate, Me.ColRecDate, Me.ColDueDate, Me.ColPayment, Me.ColStatus, Me.ColIDStatus, Me.ColIdDelivery, Me.ColIdSeason, Me.GridColumn5, Me.GridColumn1, Me.GridColumn41, Me.GridColumn42, Me.GridColumn43})
         Me.GVMatPurchase.GridControl = Me.GCMatPurchase
         Me.GVMatPurchase.GroupCount = 2
         Me.GVMatPurchase.Name = "GVMatPurchase"
@@ -1341,6 +1344,50 @@ Partial Class FormMatPurchase
         Me.LabelControl10.TabIndex = 8901
         Me.LabelControl10.Text = "Vendor"
         '
+        'GridColumn41
+        '
+        Me.GridColumn41.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn41.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn41.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn41.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn41.Caption = "Qty Order"
+        Me.GridColumn41.DisplayFormat.FormatString = "N4"
+        Me.GridColumn41.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn41.FieldName = "qty_po"
+        Me.GridColumn41.Name = "GridColumn41"
+        Me.GridColumn41.Visible = True
+        Me.GridColumn41.VisibleIndex = 10
+        '
+        'GridColumn42
+        '
+        Me.GridColumn42.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn42.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn42.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn42.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn42.Caption = "Qty Receiving"
+        Me.GridColumn42.DisplayFormat.FormatString = "N4"
+        Me.GridColumn42.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn42.FieldName = "qty_rec"
+        Me.GridColumn42.Name = "GridColumn42"
+        Me.GridColumn42.Visible = True
+        Me.GridColumn42.VisibleIndex = 11
+        '
+        'GridColumn43
+        '
+        Me.GridColumn43.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn43.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn43.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn43.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn43.Caption = "Different"
+        Me.GridColumn43.DisplayFormat.FormatString = "N4"
+        Me.GridColumn43.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn43.FieldName = "qty_diff"
+        Me.GridColumn43.Name = "GridColumn43"
+        Me.GridColumn43.UnboundExpression = "[qty_po] - [qty_rec]"
+        Me.GridColumn43.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
+        Me.GridColumn43.Visible = True
+        Me.GridColumn43.VisibleIndex = 12
+        '
         'FormMatPurchase
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1532,4 +1579,7 @@ Partial Class FormMatPurchase
     Friend WithEvents ViewPOToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents GridColumn39 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn40 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn41 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn42 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn43 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

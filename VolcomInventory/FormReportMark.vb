@@ -6239,6 +6239,22 @@ WHERE pd.balance_due=pd.`value` AND pd.`id_pn`='" & id_report & "'"
                                                 SET is_open='2'
                                                 WHERE id_debit_note='" & dt.Rows(i)("id_report").ToString & "'"
                             execute_non_query(qc, True, "", "", "", "")
+                            'update claim reject / late
+                            Dim quc As String = "SELECT id_dn_type FROM tb_debit_note WHERE id_debit_note='" & dt.Rows(i)("id_report").ToString & "'"
+                            Dim dtc As DataTable = execute_query(quc, -1, True, "", "", "", "")
+                            If dtc.Rows(0)("id_dn_type").ToString = "1" Then 'claim reject
+                                query = String.Format("UPDATE tb_debit_note_det dnd
+                                                        INNER JOIN tb_prod_order po ON po.id_prod_order=dnd.id_report AND dnd.report_mark_type='22' 
+                                                        SET po.is_claimed_reject='1'
+                                                        WHERE dnd.id_debit_note='{0}'", dt.Rows(i)("id_report").ToString)
+                                execute_non_query(query, True, "", "", "", "")
+                            ElseIf dtc.Rows(0)("id_dn_type").ToString = "2" Then 'claim terlambat
+                                query = String.Format("UPDATE tb_debit_note_det dnd
+                                                        INNER JOIN tb_prod_order_rec rec ON rec.id_prod_order_rec=dnd.id_report AND dnd.report_mark_type='28' 
+                                                        SET rec.is_claimed_late='1'
+                                                        WHERE dnd.id_debit_note='{0}'", dt.Rows(i)("id_report").ToString)
+                                execute_non_query(query, True, "", "", "", "")
+                            End If
                         ElseIf dt.Rows(i)("report_mark_type").ToString = "231" Then 'inv mat
                             Dim qc As String = "UPDATE tb_inv_mat 
                                                 SET is_open='2'

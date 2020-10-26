@@ -176,7 +176,7 @@ WHERE pn.`id_report_status`= '6' AND pn.id_comp='" & FormInvoiceFGPODP.SLEVendor
     Sub load_dp_khusus()
         Dim query As String = "
             SELECT * FROM (
-                SELECT 'no' AS is_check, pn.*, pnt.pn_type, sts.report_status, emp.`employee_name`, c.`comp_number`, c.`comp_name`, (det.amount - IFNULL(paid.value, 0.00)) AS amount, det.report_number, det.inv_number, det.id_acc, det.qty, det.id_currency, CAST(det.kurs AS DECIMAL(7,2)) AS kurs, det.info_design
+                SELECT 'no' AS is_check, pn.*, pnt.pn_type, sts.report_status, emp.`employee_name`, c.`comp_number`, c.`comp_name`, (det.amount - IFNULL(ABS(paid.value), 0.00)) AS amount, det.report_number, det.inv_number, det.id_acc, det.qty, det.id_currency, CAST(det.kurs AS DECIMAL(7,2)) AS kurs, det.info_design
                 FROM tb_pn_fgpo pn
                 INNER JOIN tb_m_user usr ON usr.`id_user`=pn.`created_by`
                 INNER JOIN tb_m_employee emp ON emp.`id_employee`=usr.`id_employee`
@@ -189,10 +189,11 @@ WHERE pn.`id_report_status`= '6' AND pn.id_comp='" & FormInvoiceFGPODP.SLEVendor
                 INNER JOIN tb_pn_type pnt ON pnt.id_type=pn.type
                 INNER JOIN tb_lookup_report_status sts ON sts.id_report_status=pn.id_report_status
                 LEFT JOIN (
-                    SELECT d.id_report, d.value
+                    SELECT d.id_report, SUM(d.value) AS `value`
                     FROM tb_pn_fgpo_det AS d
                     LEFT JOIN tb_pn_fgpo AS h ON d.id_pn_fgpo = h.id_pn_fgpo
                     WHERE h.id_report_status <> 5 AND d.id_prod_order = 0 AND d.report_mark_type = 0 AND d.id_report <> 0
+                    GROUP BY d.id_report
                 ) paid ON pn.id_pn_fgpo = paid.id_report
                 WHERE pn.doc_type = 4 AND pn.id_report_status = 6
             ) AS tb

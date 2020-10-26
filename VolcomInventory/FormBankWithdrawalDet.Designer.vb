@@ -131,6 +131,8 @@ Partial Class FormBankWithdrawalDet
         Me.GridColumncredit_draft = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncc = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn17 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.CMViewDetail = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ViewDetailToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.SLEReportType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -187,6 +189,7 @@ Partial Class FormBankWithdrawalDet
         Me.XTPJournal.SuspendLayout()
         CType(Me.GCDraft, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVDraft, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.CMViewDetail.SuspendLayout()
         Me.SuspendLayout()
         '
         'PanelControl1
@@ -778,6 +781,7 @@ Partial Class FormBankWithdrawalDet
         '
         'GCList
         '
+        Me.GCList.ContextMenuStrip = Me.CMViewDetail
         Me.GCList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GCList.Location = New System.Drawing.Point(0, 47)
         Me.GCList.MainView = Me.GVList
@@ -1317,6 +1321,18 @@ Partial Class FormBankWithdrawalDet
         Me.GridColumn17.FieldName = "value_view"
         Me.GridColumn17.Name = "GridColumn17"
         '
+        'CMViewDetail
+        '
+        Me.CMViewDetail.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewDetailToolStripMenuItem})
+        Me.CMViewDetail.Name = "CMViewDetail"
+        Me.CMViewDetail.Size = New System.Drawing.Size(133, 26)
+        '
+        'ViewDetailToolStripMenuItem
+        '
+        Me.ViewDetailToolStripMenuItem.Name = "ViewDetailToolStripMenuItem"
+        Me.ViewDetailToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ViewDetailToolStripMenuItem.Text = "View Detail"
+        '
         'FormBankWithdrawalDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1396,6 +1412,7 @@ Partial Class FormBankWithdrawalDet
         Me.XTPJournal.ResumeLayout(False)
         CType(Me.GCDraft, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVDraft, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.CMViewDetail.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -1510,4 +1527,6 @@ Partial Class FormBankWithdrawalDet
     Friend WithEvents GridColumn30 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn31 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents BCompen As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents CMViewDetail As ContextMenuStrip
+    Friend WithEvents ViewDetailToolStripMenuItem As ToolStripMenuItem
 End Class

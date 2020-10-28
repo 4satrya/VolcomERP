@@ -24,6 +24,7 @@ Partial Class FormPayoutVerDet
         Me.BtnClose = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnAttachment = New DevExpress.XtraEditors.SimpleButton()
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
+        Me.BtnUpdate = New DevExpress.XtraEditors.SimpleButton()
         Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
         Me.TxtNumber = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
@@ -48,7 +49,6 @@ Partial Class FormPayoutVerDet
         Me.GridColumnid_dc = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumndc_code = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnvalue = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.BtnUpdate = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -110,6 +110,14 @@ Partial Class FormPayoutVerDet
         Me.PanelControl2.Name = "PanelControl2"
         Me.PanelControl2.Size = New System.Drawing.Size(634, 99)
         Me.PanelControl2.TabIndex = 1
+        '
+        'BtnUpdate
+        '
+        Me.BtnUpdate.Location = New System.Drawing.Point(226, 7)
+        Me.BtnUpdate.Name = "BtnUpdate"
+        Me.BtnUpdate.Size = New System.Drawing.Size(50, 23)
+        Me.BtnUpdate.TabIndex = 3
+        Me.BtnUpdate.Text = "update"
         '
         'PanelControl3
         '
@@ -199,7 +207,6 @@ Partial Class FormPayoutVerDet
         '
         Me.TxtOrderNumber.Location = New System.Drawing.Point(101, 9)
         Me.TxtOrderNumber.Name = "TxtOrderNumber"
-        Me.TxtOrderNumber.Properties.ReadOnly = True
         Me.TxtOrderNumber.Size = New System.Drawing.Size(123, 20)
         Me.TxtOrderNumber.TabIndex = 1
         '
@@ -316,14 +323,6 @@ Partial Class FormPayoutVerDet
         Me.GridColumnvalue.Name = "GridColumnvalue"
         Me.GridColumnvalue.Visible = True
         Me.GridColumnvalue.VisibleIndex = 3
-        '
-        'BtnUpdate
-        '
-        Me.BtnUpdate.Location = New System.Drawing.Point(226, 7)
-        Me.BtnUpdate.Name = "BtnUpdate"
-        Me.BtnUpdate.Size = New System.Drawing.Size(50, 23)
-        Me.BtnUpdate.TabIndex = 3
-        Me.BtnUpdate.Text = "update"
         '
         'FormPayoutVerDet
         '

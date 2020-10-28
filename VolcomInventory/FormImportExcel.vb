@@ -3166,7 +3166,7 @@ Public Class FormImportExcel
 	            FROM tb_list_payout_ver v 
 	            INNER JOIN tb_list_payout_ver_det d ON d.id_list_payout_ver = v.id_list_payout_ver
 	            LEFT JOIN tb_list_payout lp ON lp.checkout_id = v.checkout_id
-	            WHERE v.is_existing_order=2 
+	            WHERE v.is_existing_order=2 AND v.type_ver=1
 	            GROUP BY v.checkout_id
             ) ol
             GROUP BY ol.checkout_id) "
@@ -3451,11 +3451,11 @@ INNER JOIN tb_m_city ct ON ct.`id_city`=sd.`id_city`"
             0 AS id_sales_pos, 0 AS `id_invoice_ship`, IFNULL(ol.id_list_payout_ver,0) AS `id_list_payout_ver`
             FROM (
                 SELECT v.*,lp.`amount`,
-                lp.id_virtual_acc_trans, SUM(IF(d.id_dc=1,(d.value * -1),d.value)) AS `value`
+                IFNULL(lp.id_virtual_acc_trans,0) AS `id_virtual_acc_trans`, SUM(IF(d.id_dc=1,(d.value * -1),d.value)) AS `value`
                 FROM tb_list_payout_ver v 
                 INNER JOIN tb_list_payout_ver_det d ON d.id_list_payout_ver = v.id_list_payout_ver
                 LEFT JOIN tb_virtual_acc_trans_det lp ON lp.checkout_id = v.checkout_id
-                WHERE v.is_existing_order=2 
+                WHERE v.is_existing_order=2 AND v.type_ver=2
                 GROUP BY v.checkout_id
             ) ol
             GROUP BY ol.checkout_id) "
@@ -6264,7 +6264,7 @@ INNER JOIN tb_m_city ct ON ct.`id_city`=sd.`id_city`"
             Dim status_import As String = GVData.GetFocusedRowCellValue("Status").ToString
 
             'cek sudah ada ato belum
-            Dim qex As String = "SELECT * FROM tb_list_payout_ver v WHERE v.order_number='" + order_number + "' "
+            Dim qex As String = "SELECT * FROM tb_list_payout_ver v WHERE v.checkout_id='" + checkout_id + "' AND type_ver='" + type_ver + "' "
             Dim dex As DataTable = execute_query(qex, -1, True, "", "", "", "")
             If dex.Rows.Count <= 0 Then
                 If status_import <> "OK" Then

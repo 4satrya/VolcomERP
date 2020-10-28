@@ -64,12 +64,12 @@ Partial Class FormBankWithdrawalAttachement
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RITEGrossupValue = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
+        Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
         Me.TEInvNumber = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl10 = New DevExpress.XtraEditors.LabelControl()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
         Me.PanelControl4 = New DevExpress.XtraEditors.PanelControl()
-        Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.RepositoryItemTextEditPph, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DateEditDueDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DateEditDueDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -276,6 +276,7 @@ Partial Class FormBankWithdrawalAttachement
         Me.TEPPH.Properties.DisplayFormat.FormatString = "N2"
         Me.TEPPH.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.TEPPH.Properties.EditValueChangedDelay = 1
+        Me.TEPPH.Properties.ReadOnly = True
         Me.TEPPH.Size = New System.Drawing.Size(274, 20)
         Me.TEPPH.TabIndex = 8906
         Me.TEPPH.TabStop = False
@@ -467,7 +468,7 @@ Partial Class FormBankWithdrawalAttachement
         'GrossUpPPHToolStripMenuItem
         '
         Me.GrossUpPPHToolStripMenuItem.Name = "GrossUpPPHToolStripMenuItem"
-        Me.GrossUpPPHToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.GrossUpPPHToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.GrossUpPPHToolStripMenuItem.Text = "Gross up PPH"
         '
         'GVPurcReq
@@ -567,6 +568,19 @@ Partial Class FormBankWithdrawalAttachement
         Me.RITEGrossupValue.AutoHeight = False
         Me.RITEGrossupValue.Name = "RITEGrossupValue"
         '
+        'GridColumn9
+        '
+        Me.GridColumn9.Caption = "PPH"
+        Me.GridColumn9.DisplayFormat.FormatString = "N2"
+        Me.GridColumn9.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn9.FieldName = "pph"
+        Me.GridColumn9.Name = "GridColumn9"
+        Me.GridColumn9.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "pph", "{0:N2}")})
+        Me.GridColumn9.UnboundExpression = "Floor(([amount] + [gross_up_value]) * ([pph_percent] / 100))"
+        Me.GridColumn9.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
+        Me.GridColumn9.Visible = True
+        Me.GridColumn9.VisibleIndex = 5
+        '
         'PanelControl3
         '
         Me.PanelControl3.Controls.Add(Me.TEInvNumber)
@@ -620,19 +634,6 @@ Partial Class FormBankWithdrawalAttachement
         Me.PanelControl4.Name = "PanelControl4"
         Me.PanelControl4.Size = New System.Drawing.Size(492, 38)
         Me.PanelControl4.TabIndex = 11
-        '
-        'GridColumn9
-        '
-        Me.GridColumn9.Caption = "PPH"
-        Me.GridColumn9.DisplayFormat.FormatString = "N2"
-        Me.GridColumn9.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn9.FieldName = "pph"
-        Me.GridColumn9.Name = "GridColumn9"
-        Me.GridColumn9.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "pph", "{0:N2}")})
-        Me.GridColumn9.UnboundExpression = "Floor(([amount] + [gross_up_value]) * ([pph_percent] / 100))"
-        Me.GridColumn9.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
-        Me.GridColumn9.Visible = True
-        Me.GridColumn9.VisibleIndex = 5
         '
         'FormBankWithdrawalAttachement
         '

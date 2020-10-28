@@ -651,6 +651,7 @@
         Dim report As ReportFormInvoiceTracking = New ReportFormInvoiceTracking
 
         report.data = GCUnpaid.DataSource
+        report.fs = GVUnpaid.ActiveFilterString
 
         report.XLStoreGroup.Text = SLEStoreGroup.Text
         report.XLStore.Text = SLEStoreInvoice.Text

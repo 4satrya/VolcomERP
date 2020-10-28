@@ -23,6 +23,11 @@
         'Dim bli As New ClassBliBliApi()
         'bli.get_order_list()
         'Dim za As New ClassZaloraApi()
+        'Dim dt As DataTable = za.get_order_detail("3742719")
+        'For d As Integer = 0 To dt.Rows.Count - 1
+        '    Console.WriteLine("Item id : " + dt.Rows(d)("item_id").ToString + "; Status : " + dt.Rows(d)("status").ToString + "; Updated At : " + dt.Rows(d)("updated_at").ToString)
+        'Next
+        'za.getOrder2020()
         'za.setTrackingNumber("3727702")
         'za.setInvoiceNumber("3727702", "218433179")
         'za.setReadyToShip("6214692", "RPX - MARKETPLACE", "799938234220")

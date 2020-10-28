@@ -153,7 +153,7 @@
 
     Private Sub BtnUpdate_Click(sender As Object, e As EventArgs) Handles BtnUpdate.Click
         Cursor = Cursors.WaitCursor
-        Dim query As String = "UPDATE tb_list_payout_ver v SET number='" + addSlashes(TxtNumber.Text) + "' WHERE id_list_payout_ver='" + id + "' "
+        Dim query As String = "UPDATE tb_list_payout_ver v SET order_number='" + addSlashes(TxtOrderNumber.Text) + "' WHERE id_list_payout_ver='" + id + "' "
         execute_non_query(query, True, "", "", "", "")
         Cursor = Cursors.Default
     End Sub

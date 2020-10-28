@@ -3081,11 +3081,11 @@ WHERE pps.`id_design_ecop_pps`='" & id_report & "'"
                               <th>Additional ECOP (Purchasing)</th>
                             </tr> 
                             <tr>
-                                <td>" + dt.Rows(0)("target_cost").ToString + "</td>
-                                <td>" + dt.Rows(0)("total_cop_sample").ToString + "</td>
-                                <td>" + dt.Rows(0)("total_additional_cop_sample").ToString + "</td>
-                                <td>" + dt.Rows(0)("total_ecop_purc").ToString + "</td>
-                                <td>" + dt.Rows(0)("total_additional_purc").ToString + "</td>
+                                <td style='text-align:center'>" + Decimal.Parse(dt.Rows(0)("target_cost").ToString).ToString("N2") + "</td>
+                                <td style='text-align:center'>" + Decimal.Parse(dt.Rows(0)("total_cop_sample").ToString).ToString("N2") + "</td>
+                                <td style='text-align:center'>" + Decimal.Parse(dt.Rows(0)("total_additional_cop_sample").ToString).ToString("N2") + "</td>
+                                <td style='text-align:center'>" + Decimal.Parse(dt.Rows(0)("total_ecop_purc").ToString).ToString("N2") + "</td>
+                                <td style='text-align:center'>" + Decimal.Parse(dt.Rows(0)("total_additional_purc").ToString).ToString("N2") + "</td>
                             </tr> 
                         </table>
                     </td>

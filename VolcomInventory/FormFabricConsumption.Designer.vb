@@ -446,6 +446,7 @@ Partial Class FormFabricConsumption
         Me.BTemplatePick.Size = New System.Drawing.Size(160, 39)
         Me.BTemplatePick.TabIndex = 0
         Me.BTemplatePick.Text = "Historical Template"
+        Me.BTemplatePick.Visible = False
         '
         'XTCComponent
         '
@@ -699,7 +700,7 @@ Partial Class FormFabricConsumption
         Me.XTPWork.Controls.Add(Me.GCOVH)
         Me.XTPWork.Name = "XTPWork"
         Me.XTPWork.Size = New System.Drawing.Size(890, 325)
-        Me.XTPWork.Text = "Techincal Work"
+        Me.XTPWork.Text = "WIP"
         '
         'GCOVH
         '

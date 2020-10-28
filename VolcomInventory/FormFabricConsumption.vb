@@ -181,14 +181,21 @@ WHERE dc.`id_design`='" & id_design & "' AND dc.`id_cat`='3'"
         q = "Select id_component,description,qty FROM tb_design_component_template WHERE id_cat='1'"
         dt = execute_query(q, -1, True, "", "", "", "")
         For i As Integer = 0 To dt.Rows.Count - 1
-            new_row(GVFabCons, dt.Rows(i)("id_component").ToString, dt.Rows(i)("description").ToString, dt.Rows(i)("qty"))
+            new_row(GVFabCons, "id_mat_det", dt.Rows(i)("id_component").ToString, dt.Rows(i)("description").ToString, dt.Rows(i)("qty"))
         Next
         '2.Acc
         delete_all_row(GVACC)
         q = "Select id_component,description,qty FROM tb_design_component_template WHERE id_cat='2'"
         dt = execute_query(q, -1, True, "", "", "", "")
         For i As Integer = 0 To dt.Rows.Count - 1
-            new_row(GVACC, dt.Rows(i)("id_component").ToString, dt.Rows(i)("description").ToString, dt.Rows(i)("qty"))
+            new_row(GVACC, "id_mat_det", dt.Rows(i)("id_component").ToString, dt.Rows(i)("description").ToString, dt.Rows(i)("qty"))
+        Next
+        '3.Wip
+        delete_all_row(GVOVH)
+        q = "Select id_component,description,qty FROM tb_design_component_template WHERE id_cat='3'"
+        dt = execute_query(q, -1, True, "", "", "", "")
+        For i As Integer = 0 To dt.Rows.Count - 1
+            new_row(GVOVH, "id_ovh_price", dt.Rows(i)("id_component").ToString, dt.Rows(i)("description").ToString, dt.Rows(i)("qty"))
         Next
 
         GVFabCons.BestFitColumns()
@@ -203,10 +210,10 @@ WHERE dc.`id_design`='" & id_design & "' AND dc.`id_cat`='3'"
         Next
     End Sub
 
-    Sub new_row(ByVal gv As DevExpress.XtraGrid.Views.Grid.GridView, ByVal id As String, ByVal desc As String, ByVal qty As Decimal)
+    Sub new_row(ByVal gv As DevExpress.XtraGrid.Views.Grid.GridView, ByVal column_name As String, ByVal id As String, ByVal desc As String, ByVal qty As Decimal)
         gv.AddNewRow()
         gv.FocusedRowHandle = gv.RowCount - 1
-        gv.SetRowCellValue(gv.RowCount - 1, "id_component", id)
+        gv.SetRowCellValue(gv.RowCount - 1, column_name, id)
         gv.SetRowCellValue(gv.RowCount - 1, "description", desc)
         gv.SetRowCellValue(gv.RowCount - 1, "price", 0.0000)
         gv.SetRowCellValue(gv.RowCount - 1, "qty", qty)

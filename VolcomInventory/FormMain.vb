@@ -1834,6 +1834,9 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
 
             FormProductionMRS.id_mrs = "-1"
             FormProductionMRS.ShowDialog()
+        ElseIf formName = "FormAdditionalCost" Then
+            FormAdditionalCostDet.id_pps = "1"
+            FormAdditionalCostDet.ShowDialog()
         Else
             RPSubMenu.Visible = False
         End If
@@ -3054,6 +3057,9 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
                 FormMailManageReturnDet.id = FormMailManageReturn.GVData.GetFocusedRowCellValue("id_mail_manage").ToString
                 FormMailManageReturnDet.rmt = "45"
                 FormMailManageReturnDet.ShowDialog()
+            ElseIf formName = "FormAdditionalCost" Then
+                FormAdditionalCostDet.id_pps = "upd"
+                FormAdditionalCostDet.ShowDialog()
             Else
                 RPSubMenu.Visible = False
             End If

@@ -358,6 +358,18 @@
     <Compile Include="FormAccountingWorksheet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormAdditionalCost.Designer.vb">
+      <DependentUpon>FormAdditionalCost.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormAdditionalCost.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAdditionalCostDet.Designer.vb">
+      <DependentUpon>FormAdditionalCostDet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormAdditionalCostDet.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormAllocationHist.Designer.vb">
       <DependentUpon>FormAllocationHist.vb</DependentUpon>
     </Compile>
@@ -5485,6 +5497,18 @@
     <Compile Include="FormSalesReturnOrderDetEdit.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormSalesReturnOrderMail.Designer.vb">
+      <DependentUpon>FormSalesReturnOrderMail.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormSalesReturnOrderMail.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSalesReturnOrderMailDet.Designer.vb">
+      <DependentUpon>FormSalesReturnOrderMailDet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormSalesReturnOrderMailDet.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormSalesReturnOrderOL.Designer.vb">
       <DependentUpon>FormSalesReturnOrderOL.vb</DependentUpon>
     </Compile>
@@ -8776,6 +8800,12 @@
     <EmbeddedResource Include="FormAccountingWorksheet.resx">
       <DependentUpon>FormAccountingWorksheet.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormAdditionalCost.resx">
+      <DependentUpon>FormAdditionalCost.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAdditionalCostDet.resx">
+      <DependentUpon>FormAdditionalCostDet.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormAllocationHist.resx">
       <DependentUpon>FormAllocationHist.vb</DependentUpon>
     </EmbeddedResource>
@@ -11627,6 +11657,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormSalesReturnOrderDetEdit.resx">
       <DependentUpon>FormSalesReturnOrderDetEdit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSalesReturnOrderMail.resx">
+      <DependentUpon>FormSalesReturnOrderMail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSalesReturnOrderMailDet.resx">
+      <DependentUpon>FormSalesReturnOrderMailDet.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormSalesReturnOrderOL.resx">
       <DependentUpon>FormSalesReturnOrderOL.vb</DependentUpon>

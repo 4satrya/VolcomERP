@@ -8389,6 +8389,8 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             ElseIf FormMailManageReturn.XTCMailManage.SelectedTabPageIndex = 1 Then
                 print_raw(FormMailManageReturn.GCReturnOrder, "")
             End If
+        ElseIf formName = "FormAdditionalCost" Then
+            print(FormAdditionalCost.GCAdditionalCost, "Additional Cost Propose List")
         Else
             RPSubMenu.Visible = False
         End If
@@ -9320,6 +9322,9 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
         ElseIf formName = "FormMailManageReturn" Then
             FormMailManageReturn.Close()
             FormMailManageReturn.Dispose()
+        ElseIf formName = "FormAdditionalCost" Then
+            FormAdditionalCost.Close()
+            FormAdditionalCost.Dispose()
         Else
             RPSubMenu.Visible = False
         End If
@@ -10283,6 +10288,8 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             FormABGRoyaltyZone.viewData()
         ElseIf formName = "FormMasterCompany" Then
             FormMasterCompany.view_company()
+        ElseIf formName = "FormAdditionalCost" Then
+            FormAdditionalCost.load_view()
         End If
     End Sub
     'Switch
@@ -15398,6 +15405,18 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             FormMailManageReturn.Show()
             FormMailManageReturn.WindowState = FormWindowState.Maximized
             FormMailManageReturn.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+    Private Sub NBAdditionalCost_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBAdditionalCost.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormAdditionalCost.MdiParent = Me
+            FormAdditionalCost.Show()
+            FormAdditionalCost.WindowState = FormWindowState.Maximized
+            FormAdditionalCost.Focus()
         Catch ex As Exception
             errorProcess()
         End Try

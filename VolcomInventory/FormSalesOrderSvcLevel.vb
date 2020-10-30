@@ -52,8 +52,14 @@
         End If
 
         'return query
+        Dim where_id_comp As String = ""
+
+        If Not SLUEStore.EditValue.ToString = "0" Then
+            where_id_comp = " AND d.id_comp = " + SLUEStore.EditValue.ToString + " "
+        End If
+
         Dim query_c As ClassReturn = New ClassReturn()
-        Dim query As String = query_c.queryMain("AND a.id_report_status='6' AND (a.sales_return_order_date>='" + date_from_selected + "' AND a.sales_return_order_date<='" + date_until_selected + "') " + cond_status, "1")
+        Dim query As String = query_c.queryMain("AND a.id_report_status='6' AND (a.sales_return_order_date>='" + date_from_selected + "' AND a.sales_return_order_date<='" + date_until_selected + "') " + cond_status + where_id_comp, "1")
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCSalesReturnOrder.DataSource = data
         GVSalesReturnOrder.BestFitColumns()
@@ -245,6 +251,7 @@
     Private Sub FormSalesOrderSvcLevel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewPackingStatus()
         viewReportStatus()
+        view_store()
 
         'date now
         Dim data_dt As DataTable = execute_query("SELECT DATE(NOW()) AS `dt`", -1, True, "", "", "", "")
@@ -1151,7 +1158,7 @@
             If is_valid Then
                 FormSalesReturnInputTanggalPickup.ShowDialog()
             Else
-                stopCustom("Some order can't input pickup date.")
+                stopCustom("Some order can't input pick up date.")
             End If
         End If
         GVSalesReturnOrder.ActiveFilterString = ""
@@ -1168,9 +1175,68 @@
     Sub viewReturnOrderPickupDate()
         'return query
         Dim query_c As ClassReturn = New ClassReturn()
-        Dim query As String = query_c.queryMain("AND a.id_report_status='6' AND mail.id_report IS NOT NULL ", "1")
+        Dim query As String = query_c.queryMain("AND a.id_report_status='6' AND mail.id_report IS NOT NULL AND a.pickup_date IS NULL ", "1")
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCSalesReturnOrder.DataSource = data
         GVSalesReturnOrder.BestFitColumns()
+    End Sub
+
+    Sub view_store()
+        Dim query As String = "
+            (SELECT 0 AS id_comp, 'ALL' AS comp_name)
+            UNION ALL
+            (SELECT id_comp, CONCAT(comp_number, ' - ', comp_name) AS comp_name
+            FROM tb_m_comp
+            WHERE id_comp_cat = 6)
+        "
+
+        viewSearchLookupQuery(SLUEStore, query, "id_comp", "comp_name", "id_comp")
+    End Sub
+
+    Private Sub SLUEStore_EditValueChanged(sender As Object, e As EventArgs) Handles SLUEStore.EditValueChanged
+        GCSalesReturnOrder.DataSource = Nothing
+    End Sub
+
+    Private Sub BarButtonItem1_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem1.ItemClick
+        If Not SLUEStore.EditValue.ToString = "0" Then
+            GVSalesReturnOrder.ActiveFilterString = "[is_select]='Yes' "
+
+            If GVSalesReturnOrder.RowCount > 0 Then
+                Dim already_pickup_date As Boolean = True
+                Dim empty_3pl As Boolean = True
+
+                For i = 0 To GVSalesReturnOrder.RowCount - 1
+                    If GVSalesReturnOrder.GetRowCellValue(i, "pickup_date").ToString = "-" Then
+                        already_pickup_date = False
+                    End If
+
+                    If GVSalesReturnOrder.GetRowCellValue(i, "id_3pl_status").ToString = "2" Or GVSalesReturnOrder.GetRowCellValue(i, "id_3pl_status").ToString = "3" Then
+                        empty_3pl = False
+                    End If
+                Next
+
+                If already_pickup_date Then
+                    If empty_3pl Then
+                        FormSalesReturnOrderMailDet.id_mail_3pl = "-1"
+                        FormSalesReturnOrderMailDet.id_store = SLUEStore.EditValue.ToString
+                        FormSalesReturnOrderMailDet.ShowDialog()
+                    Else
+                        stopCustom("Some order already have 3pl or still waiting.")
+                    End If
+                Else
+                    stopCustom("Some order have empty pick up date.")
+                End If
+            Else
+                stopCustom("Please select order.")
+            End If
+
+            GVSalesReturnOrder.ActiveFilterString = ""
+        Else
+            stopCustom("Please select specific store.")
+        End If
+    End Sub
+
+    Private Sub BarButtonItem2_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem2.ItemClick
+        FormSalesReturnOrderMail.ShowDialog()
     End Sub
 End Class

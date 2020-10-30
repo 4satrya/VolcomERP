@@ -21,7 +21,7 @@
         query += "IFNULL(g.created_return,0) AS created_return, IFNULL(h.order_qty,0) AS order_qty, IFNULL(i.return_qty,0) AS return_qty, "
         query += "(a.sales_return_order_est_date) AS sales_return_order_est_date_org, "
         query += "DATE(NOW()) AS sales_return_order_date_current, a.id_prepare_status,stt_ord.prepare_status, "
-        query += "((IFNULL(i.return_qty,0)/IFNULL(h.order_qty,0))*100) AS `svc_level`, 'No' as `is_select`, IFNULL(ots.outstanding,0) AS `outstanding`, a.final_comment, a.final_date, fe.employee_name AS `final_by_name`, IFNULL(a.id_sales_order,0) AS `id_sales_order`, so.sales_order_ol_shop_number, ot.order_type, IFNULL(DATE_FORMAT(a.pickup_date, '%d %M %Y'), '-') AS pickup_date, IFNULL(epd.employee_name, '-') AS pickup_date_updated_by, IFNULL(DATE_FORMAT(a.pickup_date_updated_at, '%d %M %Y/%H:%i:%s'), '-') AS pickup_date_updated_at "
+        query += "((IFNULL(i.return_qty,0)/IFNULL(h.order_qty,0))*100) AS `svc_level`, 'No' as `is_select`, IFNULL(ots.outstanding,0) AS `outstanding`, a.final_comment, a.final_date, fe.employee_name AS `final_by_name`, IFNULL(a.id_sales_order,0) AS `id_sales_order`, so.sales_order_ol_shop_number, ot.order_type, IFNULL(DATE_FORMAT(a.pickup_date, '%d %M %Y'), '-') AS pickup_date, IFNULL(epd.employee_name, '-') AS pickup_date_updated_by, IFNULL(DATE_FORMAT(a.pickup_date_updated_at, '%d %M %Y/%H:%i:%s'), '-') AS pickup_date_updated_at, 3pl.id_status AS id_3pl_status, IFNULL(3pl.comp_name, '-') AS 3pl_name, IFNULL(3pl.status, '-') AS 3pl_status "
         query += "FROM tb_sales_return_order a "
         query += "INNER JOIN tb_m_comp_contact c ON c.id_comp_contact = a.id_store_contact_to "
         query += "INNER JOIN tb_m_comp d ON c.id_comp = d.id_comp "
@@ -65,6 +65,18 @@
             LEFT JOIN tb_mail_manage AS h ON d.id_mail_manage = h.id_mail_manage
             WHERE h.report_mark_type = 45 AND h.id_mail_status = 2
         ) mail ON a.id_sales_return_order = mail.id_report "
+        query += "LEFT JOIN (
+            SELECT tb.id_sales_order_return, tb.comp_name, tb.id_status, tb.status
+            FROM (
+                SELECT d.id_mail_3pl_det, d.id_sales_order_return, c.comp_name, l.id_status, l.status
+                FROM tb_sales_return_order_mail_3pl_det AS d
+                LEFT JOIN tb_sales_return_order_mail_3pl AS h ON d.id_mail_3pl = h.id_mail_3pl
+                LEFT JOIN tb_lookup_ror_mail_3pl_status_lookup AS l ON h.id_status = l.id_status
+                LEFT JOIN tb_m_comp AS c ON h.id_3pl = c.id_comp
+                ORDER BY d.id_mail_3pl_det DESC
+            ) AS tb
+            GROUP BY tb.id_sales_order_return
+        ) 3pl ON a.id_sales_return_order = 3pl.id_sales_order_return "
         query += "WHERE a.id_sales_return_order>0 " + condition
         query += "ORDER BY a.id_sales_return_order " + order_type
         Return query

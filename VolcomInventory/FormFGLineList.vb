@@ -1103,6 +1103,14 @@ Public Class FormFGLineList
                         End If
                     End If
 
+                    'cek jika kids
+                    For l As Integer = 0 To ((BGVLineList.RowCount - 1) - GetGroupRowCount(BGVLineList))
+                        If BGVLineList.GetRowCellValue(l, "ADDITIONAL COST_Prc") = 0 And BGVLineList.GetRowCellValue(l, "DIVISION").ToString = "KID" Then
+                            warningCustom("Some Kids article dont have aditional cost")
+                            Exit Sub
+                        End If
+                    Next
+
                     Try
                         FormProdDemand.MdiParent = FormMain
                         FormProdDemand.Show()

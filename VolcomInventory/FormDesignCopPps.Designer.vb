@@ -315,6 +315,7 @@ Partial Class FormDesignCopPps
         Me.LabelControl5.Size = New System.Drawing.Size(72, 13)
         Me.LabelControl5.TabIndex = 8906
         Me.LabelControl5.Text = "Additional Cost"
+        Me.LabelControl5.Visible = False
         '
         'TEAdditionalCost
         '
@@ -334,6 +335,7 @@ Partial Class FormDesignCopPps
         Me.TEAdditionalCost.Properties.ReadOnly = True
         Me.TEAdditionalCost.Size = New System.Drawing.Size(177, 20)
         Me.TEAdditionalCost.TabIndex = 8905
+        Me.TEAdditionalCost.Visible = False
         '
         'TECode
         '
@@ -615,8 +617,6 @@ Partial Class FormDesignCopPps
         Me.GridColumn7.FieldName = "additional"
         Me.GridColumn7.Name = "GridColumn7"
         Me.GridColumn7.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "additional", "{0:N2}")})
-        Me.GridColumn7.Visible = True
-        Me.GridColumn7.VisibleIndex = 5
         Me.GridColumn7.Width = 113
         '
         'GridColumn8
@@ -636,7 +636,7 @@ Partial Class FormDesignCopPps
         Me.GridColumn8.UnboundExpression = "[after_kurs] + [additional]"
         Me.GridColumn8.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
         Me.GridColumn8.Visible = True
-        Me.GridColumn8.VisibleIndex = 6
+        Me.GridColumn8.VisibleIndex = 5
         Me.GridColumn8.Width = 175
         '
         'PanelControl4

@@ -2902,16 +2902,12 @@ WHERE pps.`id_design_ecop_pps`='" & id_report & "'"
                             <tr>
                               <th>Target Cost</th>
                               <th>ECOP (Sample)</th>
-                              <th>Additional ECOP (Sample)</th>
                               <th>ECOP (Purchasing)</th>
-                              <th>Additional ECOP (Purchasing)</th>
                             </tr> 
                             <tr>
                                 <td style='text-align:center'>" + Decimal.Parse(dt.Rows(0)("target_cost").ToString).ToString("N2") + "</td>
                                 <td style='text-align:center'>" + Decimal.Parse(dt.Rows(0)("total_cop_sample").ToString).ToString("N2") + "</td>
-                                <td style='text-align:center'>" + Decimal.Parse(dt.Rows(0)("total_additional_cop_sample").ToString).ToString("N2") + "</td>
                                 <td style='text-align:center'>" + Decimal.Parse(dt.Rows(0)("total_ecop_purc").ToString).ToString("N2") + "</td>
-                                <td style='text-align:center'>" + Decimal.Parse(dt.Rows(0)("total_additional_purc").ToString).ToString("N2") + "</td>
                             </tr> 
                         </table>
                     </td>
@@ -3076,16 +3072,12 @@ WHERE pps.`id_design_ecop_pps`='" & id_report & "'"
                             <tr>
                               <th>Target Cost</th>
                               <th>ECOP (Sample)</th>
-                              <th>Additional ECOP (Sample)</th>
                               <th>ECOP (Purchasing)</th>
-                              <th>Additional ECOP (Purchasing)</th>
                             </tr> 
                             <tr>
                                 <td style='text-align:center'>" + Decimal.Parse(dt.Rows(0)("target_cost").ToString).ToString("N2") + "</td>
                                 <td style='text-align:center'>" + Decimal.Parse(dt.Rows(0)("total_cop_sample").ToString).ToString("N2") + "</td>
-                                <td style='text-align:center'>" + Decimal.Parse(dt.Rows(0)("total_additional_cop_sample").ToString).ToString("N2") + "</td>
                                 <td style='text-align:center'>" + Decimal.Parse(dt.Rows(0)("total_ecop_purc").ToString).ToString("N2") + "</td>
-                                <td style='text-align:center'>" + Decimal.Parse(dt.Rows(0)("total_additional_purc").ToString).ToString("N2") + "</td>
                             </tr> 
                         </table>
                     </td>

@@ -115,36 +115,39 @@
             Dim s_line() As String = value.Split(vbLf)
 
             For j = 0 To s_line.Count - 1
-                'get `column`
-                Dim matched As System.Text.RegularExpressions.MatchCollection = System.Text.RegularExpressions.Regex.Matches(s_line(j), "\`(.*?)\`")
+                'list all string
+                Dim l_list_all As List(Of String) = New List(Of String)
 
-                'replace `column` with [n]
+                'split by string
+                Dim matched As System.Text.RegularExpressions.MatchCollection = System.Text.RegularExpressions.Regex.Matches(s_line(j), "(.)")
+
+                'combine `column`
+                Dim is_new_line As Boolean = True
+
                 For k = 0 To matched.Count - 1
-                    s_line(j) = s_line(j).Replace(matched(k).Value, "[" + k.ToString + "]")
-                Next
+                    Dim vchar As String = matched(k).Value
 
-                'split by space
-                Dim s_space() As String = s_line(j).Split(" ")
+                    If is_new_line Then
+                        l_list_all.Add(vchar)
+                    Else
+                        l_list_all(l_list_all.Count - 1) += vchar
+                    End If
 
-                'replace [n] column
-                For k = 0 To s_space.Count - 1
-                    For l = 0 To matched.Count - 1
-                        If s_space(k) = "[" + l.ToString + "]" Then
-                            s_space(k) = matched(l).Value
+                    If vchar = "`" Then
+                        If is_new_line Then
+                            is_new_line = False
+                        Else
+                            is_new_line = True
                         End If
-                    Next
+                    End If
                 Next
 
                 'build concat
-                For k = 0 To s_space.Count - 1
-                    If s_space(k).Contains("`") Then
-                        q_concat += "IFNULL(" + s_space(k) + ", ''), "
+                For k = 0 To l_list_all.Count - 1
+                    If l_list_all(k).Contains("`") Then
+                        q_concat += "IFNULL(" + l_list_all(k) + ", ''), "
                     Else
-                        q_concat += "'" + s_space(k) + "', "
-                    End If
-
-                    If k < (s_space.Count - 1) Then
-                        q_concat += "' ', "
+                        q_concat += "'" + l_list_all(k) + "', "
                     End If
                 Next
 
@@ -153,7 +156,7 @@
                 End If
             Next
 
-            q_concat = q_concat.Substring(0, q_concat.Length - 2) + ") AS `" + data_column.Rows(i)("column_list").ToString + "`"
+            q_concat = If(q_concat = "CONCAT(", "CONCAT(''", q_concat.Substring(0, q_concat.Length - 2)) + ") AS `" + data_column.Rows(i)("column_list").ToString + "`"
 
             q_select += q_concat + ", "
         Next

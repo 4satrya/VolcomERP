@@ -6,7 +6,20 @@
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles BtnSave.Click
         If XtraTabControl1.SelectedTabPage.Name = "XTPDP" Then
             GVList.ActiveFilterString = "[is_check]='yes'"
-            If GVList.RowCount > 0 Then
+            Dim is_ok As Boolean = True
+
+            For k = 0 To GVList.RowCount - 1
+                If GVList.GetRowCellValue(k, "value_bef_kurs") > GVList.GetRowCellValue(k, "value_bef_kurs_rem") Then
+                    is_ok = False
+                    Exit Sub
+                End If
+            Next
+
+            If GVList.RowCount = 0 Then
+                warningCustom("Please select DP first")
+            ElseIf Not is_ok Then
+                warningCustom("Value is more than DP paid")
+            Else
                 For i = 0 To GVList.RowCount - 1
                     Try
                         'check
@@ -37,6 +50,7 @@
                                 newRow("inv_number") = GVList.GetRowCellValue(i, "inv_number").ToString
                                 newRow("note") = GVList.GetRowCellValue(i, "note").ToString
                                 TryCast(FormInvoiceFGPODP.GCList.DataSource, DataTable).Rows.Add(newRow)
+
                             Else
                                 Dim newRow As DataRow = (TryCast(FormInvoiceFGPODP.GCList.DataSource, DataTable)).NewRow()
                                 newRow("id_prod_order") = "0"
@@ -62,10 +76,14 @@
                         warningCustom(ex.ToString)
                     End Try
                 Next
+
+                'kurs fixing
+                For j As Integer = 0 To FormInvoiceFGPODP.GVList.RowCount - 1
+                    FormInvoiceFGPODP.GVList.SetRowCellValue(j, "kurs", GVList.GetRowCellValue(0, "kurs"))
+                Next
+
                 FormInvoiceFGPODP.calculate()
                 Close()
-            Else
-                warningCustom("Please select DP first")
             End If
             GVList.ActiveFilterString = ""
         ElseIf XtraTabControl1.SelectedTabPage.Name = "XTPDPKhusus" Then
@@ -130,7 +148,8 @@
     Sub load_dp()
         Dim query As String = ""
         If FormInvoiceFGPODP.doc_type = "2" Then
-            query = "SELECT 'no' AS is_check, pnd.id_pn_fgpo_det,pnd.qty, pn.`id_pn_fgpo`,pn.`number`,pnd.id_currency,cur.currency,pnd.kurs,pnd.`value_bef_kurs`,pnd.`vat`,pnd.`inv_number`,pnd.`note` 
+            query = "SELECT 'no' AS is_check, pnd.id_pn_fgpo_det,pnd.qty, pn.`id_pn_fgpo`,pn.`number`,pnd.id_currency,cur.currency,pnd.kurs,(pnd.`value_bef_kurs`+IFNULL(used.val_bef_kurs,0)) AS value_bef_kurs_rem,(pnd.`value_bef_kurs`+IFNULL(used.val_bef_kurs,0)) AS value_bef_kurs
+,pnd.`vat`,pnd.`inv_number`,pnd.`note` 
 ,dsg.`design_code`,dsg.`design_display_name`, wo.id_comp,wo.comp_name, wo.id_acc_dp AS id_acc
 FROM `tb_pn_fgpo_det` pnd
 INNER JOIN tb_pn_fgpo pn ON pn.`id_pn_fgpo`=pnd.`id_pn_fgpo`
@@ -147,13 +166,16 @@ LEFT JOIN
 )wo ON wo.id_prod_order=po.id_prod_order
 LEFT JOIN
 (
-    SELECT id_report FROM `tb_pn_fgpo_det` pnd
+    SELECT id_report,SUM(pnd.`value_bef_kurs`) AS val_bef_kurs
+    FROM `tb_pn_fgpo_det` pnd
     INNER JOIN tb_pn_fgpo pn ON pn.`id_pn_fgpo`=pnd.`id_pn_fgpo`
     WHERE pnd.`report_mark_type`='199' AND pn.id_report_status!=5 AND pnd.id_prod_order='" & id_po & "'
-)used ON used.id_report=pnd.id_pn_fgpo
+    GROUP BY pnd.`id_report`
+)used ON used.id_report=pnd.id_pn_fgpo 
 INNER JOIN `tb_prod_demand_design` pdd ON pdd.`id_prod_demand_design`=po.`id_prod_demand_design`
 INNER JOIN tb_m_design dsg ON dsg.`id_design`=pdd.`id_design`
-WHERE pn.`id_report_status`= '6' AND pnd.`id_report`='" & id_po & "' AND pnd.report_mark_type='22' AND pn.`type`='1' AND ISNULL(used.id_report) AND pn.doc_type='2'"
+WHERE pn.`id_report_status`= '6' AND pnd.`id_report`='" & id_po & "' AND pnd.report_mark_type='22' AND pn.`type`='1'  AND pn.doc_type='2' 
+AND (pnd.`value_bef_kurs`+IFNULL(used.val_bef_kurs,0)) > 0"
         Else
             query = "SELECT 'no' AS is_check, pnd.id_pn_fgpo_det,pnd.qty, pn.`id_pn_fgpo`,pn.`number`,pnd.id_currency,cur.currency,pnd.kurs,pnd.`value_bef_kurs`,pnd.`vat`,pnd.`inv_number`,pnd.`note` 
 , pn.id_comp,com.comp_name, com.id_acc_dp AS id_acc
@@ -180,7 +202,7 @@ WHERE pn.`id_report_status`= '6' AND pn.id_comp='" & FormInvoiceFGPODP.SLEVendor
                 FROM tb_pn_fgpo pn
                 INNER JOIN tb_m_user usr ON usr.`id_user`=pn.`created_by`
                 INNER JOIN tb_m_employee emp ON emp.`id_employee`=usr.`id_employee`
-                INNER JOIN tb_m_comp c ON c.`id_comp`=pn.`id_comp`
+                INNER JOIN tb_m_comp c ON c.`id_comp`=pn.`id_comp` AND c.id_comp='" & FormInvoiceFGPODP.SLEVendor.EditValue.ToString & "'
                 INNER JOIN (
                     SELECT id_pn_fgpo,SUM(`value`) AS amount,GROUP_CONCAT(pnd.report_number) AS report_number,GROUP_CONCAT(pnd.inv_number) AS inv_number, GROUP_CONCAT(DISTINCT(id_acc)) AS id_acc, SUM(qty) AS qty, GROUP_CONCAT(DISTINCT(id_currency)) AS id_currency, GROUP_CONCAT(DISTINCT(kurs)) AS kurs,GROUP_CONCAT(DISTINCT(info_design)) AS info_design
                     FROM tb_pn_fgpo_det pnd 

@@ -437,12 +437,10 @@
 
         'to
         data_to = execute_query("
-            (SELECT 'I Putu Agus Friastana' AS name, 'friastana@gmail.com' AS email)
-            UNION ALL
-            (SELECT c.comp_name AS name, cc.email
+            SELECT c.comp_name AS name, cc.email
             FROM tb_m_comp_contact AS cc
             LEFT JOIN tb_m_comp AS c ON cc.id_comp = c.id_comp
-            WHERE cc.id_comp = " + SLUE3PL.EditValue.ToString + " AND cc.is_default = 1)
+            WHERE cc.id_comp = " + SLUE3PL.EditValue.ToString + " AND cc.is_default = 1
         ", -1, True, "", "", "", "")
 
         'cc

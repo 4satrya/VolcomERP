@@ -52,7 +52,7 @@ Partial Class FormProductionCOPOVHLog
         Me.GCLog.MainView = Me.GVLog
         Me.GCLog.Name = "GCLog"
         Me.GCLog.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RICE})
-        Me.GCLog.Size = New System.Drawing.Size(688, 289)
+        Me.GCLog.Size = New System.Drawing.Size(924, 289)
         Me.GCLog.TabIndex = 0
         Me.GCLog.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVLog})
         '
@@ -106,18 +106,24 @@ Partial Class FormProductionCOPOVHLog
         Me.GridColumn10.Caption = "Old Currency"
         Me.GridColumn10.FieldName = "old_curr"
         Me.GridColumn10.Name = "GridColumn10"
+        Me.GridColumn10.Visible = True
+        Me.GridColumn10.VisibleIndex = 3
         '
         'GridColumn9
         '
         Me.GridColumn9.Caption = "Old Kurs"
         Me.GridColumn9.FieldName = "old_kurs"
         Me.GridColumn9.Name = "GridColumn9"
+        Me.GridColumn9.Visible = True
+        Me.GridColumn9.VisibleIndex = 5
         '
         'GridColumn6
         '
         Me.GridColumn6.Caption = "Old Price"
         Me.GridColumn6.FieldName = "old_price"
         Me.GridColumn6.Name = "GridColumn6"
+        Me.GridColumn6.Visible = True
+        Me.GridColumn6.VisibleIndex = 4
         '
         'GridColumn12
         '
@@ -125,7 +131,7 @@ Partial Class FormProductionCOPOVHLog
         Me.GridColumn12.FieldName = "new_curr"
         Me.GridColumn12.Name = "GridColumn12"
         Me.GridColumn12.Visible = True
-        Me.GridColumn12.VisibleIndex = 3
+        Me.GridColumn12.VisibleIndex = 6
         '
         'GridColumn11
         '
@@ -135,7 +141,7 @@ Partial Class FormProductionCOPOVHLog
         Me.GridColumn11.FieldName = "new_kurs"
         Me.GridColumn11.Name = "GridColumn11"
         Me.GridColumn11.Visible = True
-        Me.GridColumn11.VisibleIndex = 5
+        Me.GridColumn11.VisibleIndex = 8
         '
         'GridColumn7
         '
@@ -145,7 +151,7 @@ Partial Class FormProductionCOPOVHLog
         Me.GridColumn7.FieldName = "new_price"
         Me.GridColumn7.Name = "GridColumn7"
         Me.GridColumn7.Visible = True
-        Me.GridColumn7.VisibleIndex = 4
+        Me.GridColumn7.VisibleIndex = 7
         '
         'GridColumn8
         '
@@ -154,7 +160,7 @@ Partial Class FormProductionCOPOVHLog
         Me.GridColumn8.FieldName = "is_download"
         Me.GridColumn8.Name = "GridColumn8"
         Me.GridColumn8.Visible = True
-        Me.GridColumn8.VisibleIndex = 6
+        Me.GridColumn8.VisibleIndex = 9
         '
         'RICE
         '
@@ -194,7 +200,7 @@ Partial Class FormProductionCOPOVHLog
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(688, 289)
+        Me.ClientSize = New System.Drawing.Size(924, 289)
         Me.Controls.Add(Me.GCLog)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MinimizeBox = False

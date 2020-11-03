@@ -3559,11 +3559,11 @@ INNER JOIN tb_m_city ct ON ct.`id_city`=sd.`id_city`"
                                 .product_name = table1("Nama Produk").ToString,
                                 .size = table1("Nama Variasi").ToString,
                                 .sku = table1("SKU Induk").ToString + If(s1 Is Nothing, "", s1("code").ToString),
-                                .design_price = Decimal.Parse(Trim(table1("Harga Awal").ToString.Replace("Rp", "").Replace(".", "").Replace(",", ""))),
+                                .design_price = Decimal.Parse(Trim(table1("Harga Setelah Diskon").ToString.Replace("Rp", "").Replace(".", "").Replace(",", ""))),
                                 .sales_order_det_qty = Decimal.Parse(table1("Jumlah").ToString),
                                 .grams = Decimal.Parse(table1("Berat Produk").ToString.Replace("gr", "").Replace(".", "").Replace(",", "").Trim),
                                 .total_disc_order = Decimal.Parse(Trim(table1("Total Diskon").ToString.Replace("Rp", "").Replace(".", "").Replace(",", ""))),
-                                .discount_allocations_amo = Decimal.Parse(Trim(table1("Diskon Dari Penjual").ToString.Replace("Rp", "").Replace(".", "").Replace(",", ""))),
+                                .discount_allocations_amo = 0,
                                 .discount_allocations_ol_shop = Decimal.Parse(Trim(table1("Diskon Dari Shopee").ToString.Replace("Rp", "").Replace(".", "").Replace(",", ""))),
                                 .customer_name = table1("Username (Pembeli)").ToString,
                                 .shipping_name = table1("Nama Penerima").ToString,
@@ -3578,6 +3578,8 @@ INNER JOIN tb_m_city ct ON ct.`id_city`=sd.`id_city`"
                                 .payment_method = "",
                                 .Status = If(s1 Is Nothing Or Not o1 Is Nothing, If(s1 Is Nothing, "Size not found;", "") + If(Not o1 Is Nothing, "Order already exist;", ""), "OK")
                             }
+                '.discount_allocations_amo = Decimal.Parse(Trim(table1("Diskon Dari Penjual").ToString.Replace("Rp", "").Replace(".", "").Replace(",", ""))),
+
                 GCData.DataSource = Nothing
                 GCData.DataSource = query.ToList()
                 GCData.RefreshDataSource()

@@ -173,6 +173,7 @@ SELECT 1 AS id,'Yes' AS auto_debet"
                     'load header
                     Dim id_comp As String = FormBankWithdrawal.SLEFGPOVendor.EditValue
                     Dim id_comp_contact As String = get_company_x(id_comp, 6)
+
                     SLEVendor.EditValue = id_comp_contact
                     SLEReportType.EditValue = report_mark_type
                     SLEPayType.EditValue = "2"
@@ -181,28 +182,77 @@ SELECT 1 AS id,'Yes' AS auto_debet"
                     'load detail
                     For i As Integer = 0 To FormBankWithdrawal.GVFGPO.RowCount - 1
                         'id_report, number, total, balance due
-                        Dim newRow As DataRow = (TryCast(GCList.DataSource, DataTable)).NewRow()
-                        newRow("id_report") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "id_report").ToString
-                        newRow("report_mark_type") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "report_mark_type").ToString
-                        newRow("id_acc") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "id_acc").ToString
-                        newRow("acc_name") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "acc_name").ToString
-                        newRow("acc_description") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "acc_description").ToString
-                        newRow("vendor") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "comp_number").ToString
-                        newRow("id_dc") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "is_dc").ToString
-                        newRow("dc_code") = If(FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "is_dc").ToString = "1", "D", "K")
-                        newRow("id_comp") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "id_comp_default").ToString
-                        newRow("comp_number") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "comp_number_default").ToString
-                        newRow("number") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "number").ToString
-                        newRow("total_pay") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "total_paid")
-                        newRow("value") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "balance")
-                        newRow("kurs") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "kurs")
-                        newRow("id_currency") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "id_currency").ToString
-                        newRow("currency") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "currency").ToString
-                        newRow("val_bef_kurs") = If(FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "id_currency").ToString = "1", FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "balance"), FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "value_bef_kurs"))
-                        newRow("value_view") = If(FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "balance") < 0, -FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "balance"), FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "balance"))
-                        newRow("balance_due") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "balance")
-                        newRow("note") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "type").ToString & " - " & FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "inv_number").ToString
-                        TryCast(GCList.DataSource, DataTable).Rows.Add(newRow)
+
+                        Dim qd As String = "SELECT IF(pn.type='1','DP',IF(pn.type='2','Payment','Extra')) AS `type`,pnd.id_pn_fgpo,1 AS is_dc,'189' AS report_mark_type,GROUP_CONCAT(DISTINCT(po.prod_order_number)) AS po_number,GROUP_CONCAT(DISTINCT(pnd.inv_number)) AS inv_number
+,SUM(pnd.`value`+pnd.`vat`-IF(pnd.id_currency=2,0,pnd.`pph`)) AS amount
+,SUM(pnd.`vat`) AS vat
+,SUM(pnd.`value_bef_kurs`-IF(pnd.id_currency=2,0,pnd.`pph`)) AS value_bef_kurs
+,CAST(SUM(IF(pnd.id_currency=2,(pnd.`value_bef_kurs`*pnd.`kurs`)-(pnd.`value_bef_kurs`*" & decimalSQL(FormBankWithdrawal.TEKurs.EditValue.ToString) & "),0)) AS DECIMAL(13,2)) AS amount_selisih_kurs 
+,CAST(SUM(IF(pnd.id_currency=2,((pnd.`value_bef_kurs`*" & decimalSQL(FormBankWithdrawal.TEKurs.EditValue.ToString) & ")+pnd.`vat`),(pnd.`value`+pnd.`vat`))-IF(pnd.id_currency=2,0,pnd.`pph`)) AS DECIMAL(13,2)) AS amount_now_kurs 
+,cur.`id_currency`,cur.`currency`,pnd.`kurs`
+,acc.id_acc,acc.acc_name,acc.acc_description
+,c.`comp_number`,pn.number
+,0 AS total_paid,cur.currency
+,SUM(pnd.`value`+pnd.`vat`-IF(pnd.id_currency=2,0,pnd.`pph`)) AS total_pending
+,SUM(pnd.`value`+pnd.`vat`-IF(pnd.id_currency=2,0,pnd.`pph`)) AS balance
+FROM tb_pn_fgpo_det pnd
+LEFT JOIN tb_prod_order po ON po.id_prod_order=pnd.id_prod_order
+INNER JOIN tb_pn_fgpo pn ON pn.`id_pn_fgpo`=pnd.`id_pn_fgpo` AND pn.`is_open`='1' AND pn.`id_report_status`=6 AND pn.`id_pn_fgpo`='" & FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "id_report").ToString & "'
+INNER JOIN tb_lookup_currency cur ON cur.`id_currency`=pnd.`id_currency`
+INNER JOIN tb_m_comp c ON c.id_comp=pn.id_comp 
+INNER JOIN tb_a_acc acc ON acc.id_acc=c.id_acc_ap
+INNER JOIN tb_lookup_currency cur ON cur.id_currency=pnd.id_currency
+GROUP BY pnd.kurs"
+                        Dim dtd As DataTable = execute_query(qd, -1, True, "", "", "", "")
+                        For k = 0 To dtd.Rows.Count - 1
+                            Dim newRow As DataRow = (TryCast(GCList.DataSource, DataTable)).NewRow()
+                            newRow("id_report") = dtd.Rows(k)("id_pn_fgpo").ToString
+                            newRow("report_mark_type") = dtd.Rows(k)("report_mark_type").ToString
+                            newRow("id_acc") = dtd.Rows(k)("id_acc").ToString
+                            newRow("acc_name") = dtd.Rows(k)("acc_name").ToString
+                            newRow("acc_description") = dtd.Rows(k)("acc_description").ToString
+                            newRow("vendor") = dtd.Rows(k)("comp_number").ToString
+                            newRow("id_dc") = dtd.Rows(k)("is_dc").ToString
+                            newRow("dc_code") = If(dtd.Rows(k)("is_dc").ToString = "1", "D", "K")
+                            newRow("id_comp") = dtd.Rows(k)("id_comp_default").ToString
+                            newRow("comp_number") = dtd.Rows(k)("comp_number_default").ToString
+                            newRow("number") = dtd.Rows(k)("number").ToString
+                            newRow("total_pay") = dtd.Rows(k)("total_paid")
+                            newRow("value") = dtd.Rows(k)("balance")
+                            newRow("kurs") = dtd.Rows(k)("kurs")
+                            newRow("id_currency") = dtd.Rows(k)("id_currency").ToString
+                            newRow("currency") = dtd.Rows(k)("currency").ToString
+                            newRow("val_bef_kurs") = If(dtd.Rows(k)("id_currency").ToString = "1", dtd.Rows(k)("balance"), dtd.Rows(k)("value_bef_kurs"))
+                            newRow("value_view") = If(dtd.Rows(k)("balance") < 0, -dtd.Rows(k)("balance"), dtd.Rows(k)("balance"))
+                            newRow("balance_due") = dtd.Rows(k)("balance")
+                            newRow("note") = dtd.Rows(k)("type").ToString & " - " & dtd.Rows(k)("inv_number").ToString
+                            TryCast(GCList.DataSource, DataTable).Rows.Add(newRow)
+                        Next
+
+                        'Dim newRow As DataRow = (TryCast(GCList.DataSource, DataTable)).NewRow()
+                        'newRow("id_report") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "id_report").ToString
+                        'newRow("report_mark_type") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "report_mark_type").ToString
+                        'newRow("id_acc") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "id_acc").ToString
+                        'newRow("acc_name") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "acc_name").ToString
+                        'newRow("acc_description") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "acc_description").ToString
+                        'newRow("vendor") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "comp_number").ToString
+                        'newRow("id_dc") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "is_dc").ToString
+                        'newRow("dc_code") = If(FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "is_dc").ToString = "1", "D", "K")
+                        'newRow("id_comp") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "id_comp_default").ToString
+                        'newRow("comp_number") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "comp_number_default").ToString
+                        'newRow("number") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "number").ToString
+                        'newRow("total_pay") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "total_paid")
+                        'newRow("value") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "balance")
+                        'newRow("kurs") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "kurs")
+                        'newRow("id_currency") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "id_currency").ToString
+                        'newRow("currency") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "currency").ToString
+                        'newRow("val_bef_kurs") = If(FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "id_currency").ToString = "1", FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "balance"), FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "value_bef_kurs"))
+                        'newRow("value_view") = If(FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "balance") < 0, -FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "balance"), FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "balance"))
+                        'newRow("balance_due") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "balance")
+                        'newRow("note") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "type").ToString & " - " & FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "inv_number").ToString
+                        'TryCast(GCList.DataSource, DataTable).Rows.Add(newRow)
+
+
                         If FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "total_paid") = 0 Then
                             selisih_kurs += FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "total") - FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "total_bpl")
                         End If
@@ -1346,7 +1396,7 @@ WHERE pnd.id_pn='" & id_payment & "'"
         GridColumnCurrencyHide.VisibleIndex = -1
 
         'Parse val
-        Dim query As String = "Select py.number,If(py.is_auto_debet=1,'- Auto Debet','') AS auto_debet,FORMAT(py.`trf_fee`,2,'id_ID') AS trf_fee,py.kurs,acc.acc_name as acc_payfrom_name,acc.acc_description as acc_payfrom,py.`id_report_status`,sts.report_status,emp.employee_name AS created_by, DATE_FORMAT(py.date_created,'%d %M %Y') as date_created,DATE_FORMAT(py.date_payment,'%d %M %Y') as date_payment, py.`id_pn`,FORMAT(py.`value`,2,'id_ID') as total_amount,CONCAT(c.`comp_number`,' - ',c.`comp_name`) AS comp_name,rm.`report_mark_type_name`,pt.`pay_type`,py.note
+        Dim query As String = "Select py.number,If(py.is_auto_debet=1,'- Auto Debet','') AS auto_debet,FORMAT(py.`trf_fee`,2,'id_ID') AS trf_fee,FORMAT(py.`kurs`,2,'id_ID') AS kurs,acc.acc_name as acc_payfrom_name,acc.acc_description as acc_payfrom,py.`id_report_status`,sts.report_status,emp.employee_name AS created_by, DATE_FORMAT(py.date_created,'%d %M %Y') as date_created,DATE_FORMAT(py.date_payment,'%d %M %Y') as date_payment, py.`id_pn`,FORMAT(py.`value`,2,'id_ID') as total_amount,CONCAT(c.`comp_number`,' - ',c.`comp_name`) AS comp_name,rm.`report_mark_type_name`,pt.`pay_type`,py.note
 ,'" & ConvertCurrencyToIndonesian(TETotal.EditValue) & "' AS tot_say, CONCAT(tag.tag_code, ' - ', tag.tag_description) AS tag
 FROM tb_pn py
 INNER JOIN tb_m_comp_contact cc ON cc.`id_comp_contact`=py.`id_comp_contact`

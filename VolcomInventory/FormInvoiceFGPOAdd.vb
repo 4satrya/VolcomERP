@@ -24,7 +24,7 @@
         '
         newRow("qty") = TEQty.EditValue
         newRow("id_currency") = LECurrency.EditValue.ToString
-        newRow("kurs") = TEKurs.EditValue
+        newRow("kurs") = Decimal.Parse(TEKurs.EditValue.ToString)
         newRow("value_bef_kurs") = TEBeforeKurs.EditValue
         '
         newRow("pph_percent") = 0

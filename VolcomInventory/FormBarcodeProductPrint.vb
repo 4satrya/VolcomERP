@@ -30,6 +30,9 @@ Public Class FormBarcodeProductPrint
             TEColor.EditValue = FormBarcodeProduct.GVProdList.GetFocusedRowCellValue("Color_display").ToString
             TERetCode.EditValue = FormBarcodeProduct.GVProdList.GetFocusedRowCellValue("ret_code").ToString
 
+            TEQtyOrder.EditValue = FormBarcodeProduct.GVProdList.GetFocusedRowCellValue("qty_order").ToString
+            TEQtyRec.EditValue = FormBarcodeProduct.GVProdList.GetFocusedRowCellValue("qty_rec").ToString
+
             pre_viewImages("2", PEView, id_design, False)
 
             For i As Integer = 0 To FormBarcodeProduct.GVProdList.GetFocusedRowCellValue("digit_code") - 1

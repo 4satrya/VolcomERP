@@ -7480,6 +7480,21 @@ SELECT '" & data_det.Rows(i)("id_sample_purc_budget").ToString & "' AS id_det,id
                 '                    )trx WHERE trx.debit != 0 OR trx.credit != 0"
                 'End If
                 execute_non_query(qjd, True, "", "", "", "")
+                'check if hutang dagang 0
+                Dim qc As String = "SELECT comp.id_acc_ap AS `id_acc`, cf.id_comp,0 AS `qty`,IF(SUM(pnd.value + pnd.vat - pnd.pph)>0,0,-SUM(pnd.value + pnd.vat - pnd.pph)) AS `debit`,IF(SUM(pnd.value + pnd.vat)<0,0,SUM(pnd.value + pnd.vat - pnd.pph)) AS `credit`,pnd.id_currency,pnd.kurs,IF(pnd.id_currency=1,0,IF(SUM(pnd.value_bef_kurs + pnd.vat)>0,0,-SUM(pnd.value_bef_kurs + pnd.vat - pnd.pph))) AS `debit_valas`,IF(pnd.id_currency=1,0,IF(SUM(pnd.value_bef_kurs + pnd.vat - pnd.pph)<0,0,SUM(pnd.value_bef_kurs + pnd.vat - pnd.pph))) AS `credit_valas`,CONCAT(pnd.`info_design`,' (Invoice no : ',pnd.inv_number,')') AS `note`,189,pn.id_pn_fgpo, pn.number, pnd.report_mark_type, pnd.id_report, pnd.report_number, comp.comp_number
+FROM tb_pn_fgpo_det pnd
+INNER JOIN tb_m_comp cf ON cf.id_comp=1
+INNER JOIN tb_pn_fgpo pn ON pnd.id_pn_fgpo=pn.id_pn_fgpo
+INNER JOIN tb_m_comp comp ON comp.id_comp=pn.id_comp
+WHERE pn.id_pn_fgpo=" & id_report & "
+GROUP BY pn.id_pn_fgpo"
+                Dim dtc As DataTable = execute_query(qc, -1, True, "", "", "", "")
+                If dtc.Rows.Count > 0 Then
+                    If dtc.Rows(0)("debit") = 0 And dtc.Rows(0)("credit") = 0 Then
+                        query = String.Format("UPDATE tb_pn_fgpo SET is_open='2' WHERE id_pn_fgpo ='{0}'", id_report)
+                        execute_non_query(query, True, "", "", "", "")
+                    End If
+                End If
             End If
 
             'update

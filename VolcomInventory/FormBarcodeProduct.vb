@@ -50,7 +50,7 @@
     'End Sub
 
     Sub viewProd()
-        Dim query As String = "CALL view_product_opt(1,'WHERE e.id_season=" & SLESeason.EditValue.ToString & "')"
+        Dim query As String = "CALL view_product_opt(1,' WHERE e.id_season=" & SLESeason.EditValue.ToString & " AND IFNULL(qtyq.qty_order,0)>0 ')"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCProdList.DataSource = data
         GVProdList.ExpandAllGroups()

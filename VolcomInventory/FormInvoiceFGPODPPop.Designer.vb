@@ -52,6 +52,7 @@ Partial Class FormInvoiceFGPODPPop
         Me.GridColumn15 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn16 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemTextEdit = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
+        Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl7, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl7.SuspendLayout()
         CType(Me.GCList, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -116,7 +117,7 @@ Partial Class FormInvoiceFGPODPPop
         '
         'GVList
         '
-        Me.GVList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumnIdRec, Me.GridColumn6, Me.GridColumn5, Me.GridColumn3, Me.GridColumn11, Me.GridColumnNote, Me.GridColumnPayment, Me.GridColumn4, Me.GridColumn2, Me.GridColumn9})
+        Me.GVList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumnIdRec, Me.GridColumn6, Me.GridColumn5, Me.GridColumn10, Me.GridColumn3, Me.GridColumn11, Me.GridColumnNote, Me.GridColumnPayment, Me.GridColumn4, Me.GridColumn2, Me.GridColumn9})
         Me.GVList.GridControl = Me.GCList
         Me.GVList.Name = "GVList"
         Me.GVList.OptionsBehavior.AutoExpandAllGroups = True
@@ -135,7 +136,7 @@ Partial Class FormInvoiceFGPODPPop
         Me.GridColumn1.Name = "GridColumn1"
         Me.GridColumn1.Visible = True
         Me.GridColumn1.VisibleIndex = 0
-        Me.GridColumn1.Width = 66
+        Me.GridColumn1.Width = 33
         '
         'RICECheckDP
         '
@@ -165,7 +166,7 @@ Partial Class FormInvoiceFGPODPPop
         Me.GridColumn5.Name = "GridColumn5"
         Me.GridColumn5.Visible = True
         Me.GridColumn5.VisibleIndex = 2
-        Me.GridColumn5.Width = 80
+        Me.GridColumn5.Width = 40
         '
         'GridColumn3
         '
@@ -176,7 +177,7 @@ Partial Class FormInvoiceFGPODPPop
         Me.GridColumn3.OptionsColumn.AllowFocus = False
         Me.GridColumn3.Visible = True
         Me.GridColumn3.VisibleIndex = 1
-        Me.GridColumn3.Width = 322
+        Me.GridColumn3.Width = 161
         '
         'GridColumn11
         '
@@ -184,8 +185,8 @@ Partial Class FormInvoiceFGPODPPop
         Me.GridColumn11.FieldName = "inv_number"
         Me.GridColumn11.Name = "GridColumn11"
         Me.GridColumn11.Visible = True
-        Me.GridColumn11.VisibleIndex = 7
-        Me.GridColumn11.Width = 171
+        Me.GridColumn11.VisibleIndex = 8
+        Me.GridColumn11.Width = 81
         '
         'GridColumnNote
         '
@@ -193,8 +194,8 @@ Partial Class FormInvoiceFGPODPPop
         Me.GridColumnNote.FieldName = "note"
         Me.GridColumnNote.Name = "GridColumnNote"
         Me.GridColumnNote.Visible = True
-        Me.GridColumnNote.VisibleIndex = 8
-        Me.GridColumnNote.Width = 359
+        Me.GridColumnNote.VisibleIndex = 9
+        Me.GridColumnNote.Width = 183
         '
         'GridColumnPayment
         '
@@ -208,12 +209,10 @@ Partial Class FormInvoiceFGPODPPop
         Me.GridColumnPayment.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnPayment.FieldName = "value_bef_kurs"
         Me.GridColumnPayment.Name = "GridColumnPayment"
-        Me.GridColumnPayment.OptionsColumn.AllowEdit = False
-        Me.GridColumnPayment.OptionsColumn.AllowFocus = False
         Me.GridColumnPayment.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "value", "{0:N2}")})
         Me.GridColumnPayment.Visible = True
-        Me.GridColumnPayment.VisibleIndex = 3
-        Me.GridColumnPayment.Width = 231
+        Me.GridColumnPayment.VisibleIndex = 4
+        Me.GridColumnPayment.Width = 110
         '
         'RITEDecimal
         '
@@ -234,8 +233,8 @@ Partial Class FormInvoiceFGPODPPop
         Me.GridColumn4.FieldName = "kurs"
         Me.GridColumn4.Name = "GridColumn4"
         Me.GridColumn4.Visible = True
-        Me.GridColumn4.VisibleIndex = 4
-        Me.GridColumn4.Width = 112
+        Me.GridColumn4.VisibleIndex = 5
+        Me.GridColumn4.Width = 53
         '
         'GridColumn2
         '
@@ -251,8 +250,8 @@ Partial Class FormInvoiceFGPODPPop
         Me.GridColumn2.UnboundExpression = "[value_bef_kurs] * [kurs]"
         Me.GridColumn2.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
         Me.GridColumn2.Visible = True
-        Me.GridColumn2.VisibleIndex = 5
-        Me.GridColumn2.Width = 161
+        Me.GridColumn2.VisibleIndex = 6
+        Me.GridColumn2.Width = 76
         '
         'GridColumn9
         '
@@ -269,8 +268,8 @@ Partial Class FormInvoiceFGPODPPop
         Me.GridColumn9.OptionsColumn.AllowFocus = False
         Me.GridColumn9.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "vat", "{0:N2}")})
         Me.GridColumn9.Visible = True
-        Me.GridColumn9.VisibleIndex = 6
-        Me.GridColumn9.Width = 130
+        Me.GridColumn9.VisibleIndex = 7
+        Me.GridColumn9.Width = 62
         '
         'RICECheckReceive
         '
@@ -413,6 +412,21 @@ Partial Class FormInvoiceFGPODPPop
         Me.RepositoryItemTextEdit.Mask.UseMaskAsDisplayFormat = True
         Me.RepositoryItemTextEdit.Name = "RepositoryItemTextEdit"
         '
+        'GridColumn10
+        '
+        Me.GridColumn10.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn10.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn10.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn10.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn10.Caption = "Qty"
+        Me.GridColumn10.DisplayFormat.FormatString = "N0"
+        Me.GridColumn10.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn10.FieldName = "qty"
+        Me.GridColumn10.Name = "GridColumn10"
+        Me.GridColumn10.Visible = True
+        Me.GridColumn10.VisibleIndex = 3
+        Me.GridColumn10.Width = 57
+        '
         'FormInvoiceFGPODPPop
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -476,4 +490,5 @@ Partial Class FormInvoiceFGPODPPop
     Friend WithEvents GridColumn15 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn16 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RepositoryItemTextEdit As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
+    Friend WithEvents GridColumn10 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

@@ -1837,6 +1837,8 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
         ElseIf formName = "FormAdditionalCost" Then
             FormAdditionalCostDet.id_pps = "1"
             FormAdditionalCostDet.ShowDialog()
+        ElseIf formName = "FormDesignImages" Then
+            FormDesignImages.browse_images()
         Else
             RPSubMenu.Visible = False
         End If
@@ -6443,6 +6445,8 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
                     Cursor = Cursors.Default
                 End If
             End If
+        ElseIf formName = "FormDesignImages" Then
+            FormDesignImages.delete_images()
         Else
             RPSubMenu.Visible = False
         End If
@@ -8397,6 +8401,8 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             End If
         ElseIf formName = "FormAdditionalCost" Then
             print(FormAdditionalCost.GCAdditionalCost, "Additional Cost Propose List")
+        ElseIf formName = "FormDesignImages" Then
+            FormDesignImages.print_images()
         Else
             RPSubMenu.Visible = False
         End If
@@ -9331,6 +9337,9 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
         ElseIf formName = "FormAdditionalCost" Then
             FormAdditionalCost.Close()
             FormAdditionalCost.Dispose()
+        ElseIf formName = "FormDesignImages" Then
+            FormDesignImages.Close()
+            FormDesignImages.Dispose()
         Else
             RPSubMenu.Visible = False
         End If
@@ -10296,6 +10305,8 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             FormMasterCompany.view_company()
         ElseIf formName = "FormAdditionalCost" Then
             FormAdditionalCost.load_view()
+        ElseIf formName = "FormDesignImages" Then
+            FormDesignImages.view_images()
         End If
     End Sub
     'Switch
@@ -15423,6 +15434,19 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             FormAdditionalCost.Show()
             FormAdditionalCost.WindowState = FormWindowState.Maximized
             FormAdditionalCost.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBDesignImages_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBDesignImages.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormDesignImages.MdiParent = Me
+            FormDesignImages.Show()
+            FormDesignImages.WindowState = FormWindowState.Maximized
+            FormDesignImages.Focus()
         Catch ex As Exception
             errorProcess()
         End Try

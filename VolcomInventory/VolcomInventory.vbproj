@@ -1136,6 +1136,12 @@
     <Compile Include="FormDesignCopPps.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormDesignImages.Designer.vb">
+      <DependentUpon>FormDesignImages.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormDesignImages.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormDocTracking.Designer.vb">
       <DependentUpon>FormDocTracking.vb</DependentUpon>
     </Compile>
@@ -9223,6 +9229,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormDesignCopPps.resx">
       <DependentUpon>FormDesignCopPps.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDesignImages.resx">
+      <DependentUpon>FormDesignImages.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormDocTracking.resx">
       <DependentUpon>FormDocTracking.vb</DependentUpon>

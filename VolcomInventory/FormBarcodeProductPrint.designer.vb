@@ -39,6 +39,8 @@ Partial Class FormBarcodeProductPrint
         Me.LabelControl7 = New DevExpress.XtraEditors.LabelControl()
         Me.PEView = New DevExpress.XtraEditors.PictureEdit()
         Me.GroupControl1 = New DevExpress.XtraEditors.GroupControl()
+        Me.BSetHorizontalError = New DevExpress.XtraEditors.SimpleButton()
+        Me.TEHorizontalError = New DevExpress.XtraEditors.TextEdit()
         Me.BSetHeightError = New DevExpress.XtraEditors.SimpleButton()
         Me.TEHeightError = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl13 = New DevExpress.XtraEditors.LabelControl()
@@ -60,8 +62,10 @@ Partial Class FormBarcodeProductPrint
         Me.BtnPrintFront = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnPrintBack = New DevExpress.XtraEditors.SimpleButton()
         Me.BPrint = New DevExpress.XtraEditors.SimpleButton()
-        Me.BSetHorizontalError = New DevExpress.XtraEditors.SimpleButton()
-        Me.TEHorizontalError = New DevExpress.XtraEditors.TextEdit()
+        Me.TEQtyOrder = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl14 = New DevExpress.XtraEditors.LabelControl()
+        Me.TEQtyRec = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl15 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
         CType(Me.TEPrice.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -75,6 +79,7 @@ Partial Class FormBarcodeProductPrint
         CType(Me.PEView.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl1.SuspendLayout()
+        CType(Me.TEHorizontalError.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEHeightError.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LEPrinter.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SEQtyPrint.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -86,12 +91,17 @@ Partial Class FormBarcodeProductPrint
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TEHorizontalError.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TEQtyOrder.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TEQtyRec.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupGeneralHeader
         '
         Me.GroupGeneralHeader.CaptionLocation = DevExpress.Utils.Locations.Left
+        Me.GroupGeneralHeader.Controls.Add(Me.TEQtyRec)
+        Me.GroupGeneralHeader.Controls.Add(Me.LabelControl15)
+        Me.GroupGeneralHeader.Controls.Add(Me.TEQtyOrder)
+        Me.GroupGeneralHeader.Controls.Add(Me.LabelControl14)
         Me.GroupGeneralHeader.Controls.Add(Me.TEPrice)
         Me.GroupGeneralHeader.Controls.Add(Me.TECurPrice)
         Me.GroupGeneralHeader.Controls.Add(Me.LabelControl12)
@@ -111,7 +121,7 @@ Partial Class FormBarcodeProductPrint
         Me.GroupGeneralHeader.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupGeneralHeader.Location = New System.Drawing.Point(0, 0)
         Me.GroupGeneralHeader.Name = "GroupGeneralHeader"
-        Me.GroupGeneralHeader.Size = New System.Drawing.Size(752, 201)
+        Me.GroupGeneralHeader.Size = New System.Drawing.Size(752, 211)
         Me.GroupGeneralHeader.TabIndex = 34
         '
         'TEPrice
@@ -270,7 +280,7 @@ Partial Class FormBarcodeProductPrint
         Me.PEView.Properties.LookAndFeel.SkinName = "Office 2010 Silver"
         Me.PEView.Properties.ShowMenu = False
         Me.PEView.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch
-        Me.PEView.Size = New System.Drawing.Size(169, 197)
+        Me.PEView.Size = New System.Drawing.Size(169, 207)
         Me.PEView.TabIndex = 4
         '
         'GroupControl1
@@ -294,10 +304,28 @@ Partial Class FormBarcodeProductPrint
         Me.GroupControl1.Controls.Add(Me.TEProdBarcode)
         Me.GroupControl1.Controls.Add(Me.LabelControl1)
         Me.GroupControl1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.GroupControl1.Location = New System.Drawing.Point(0, 201)
+        Me.GroupControl1.Location = New System.Drawing.Point(0, 211)
         Me.GroupControl1.Name = "GroupControl1"
         Me.GroupControl1.Size = New System.Drawing.Size(752, 139)
         Me.GroupControl1.TabIndex = 35
+        '
+        'BSetHorizontalError
+        '
+        Me.BSetHorizontalError.Location = New System.Drawing.Point(384, 107)
+        Me.BSetHorizontalError.Name = "BSetHorizontalError"
+        Me.BSetHorizontalError.Size = New System.Drawing.Size(112, 23)
+        Me.BSetHorizontalError.TabIndex = 171
+        Me.BSetHorizontalError.Text = "Set Horizontal Error"
+        '
+        'TEHorizontalError
+        '
+        Me.TEHorizontalError.EditValue = ""
+        Me.TEHorizontalError.Location = New System.Drawing.Point(277, 109)
+        Me.TEHorizontalError.Name = "TEHorizontalError"
+        Me.TEHorizontalError.Properties.EditValueChangedDelay = 1
+        Me.TEHorizontalError.Size = New System.Drawing.Size(101, 20)
+        Me.TEHorizontalError.TabIndex = 170
+        Me.TEHorizontalError.TabStop = False
         '
         'BSetHeightError
         '
@@ -479,9 +507,9 @@ Partial Class FormBarcodeProductPrint
         Me.PanelControl1.Controls.Add(Me.BtnPrintBack)
         Me.PanelControl1.Controls.Add(Me.BPrint)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PanelControl1.Location = New System.Drawing.Point(0, 340)
+        Me.PanelControl1.Location = New System.Drawing.Point(0, 350)
         Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(752, 40)
+        Me.PanelControl1.Size = New System.Drawing.Size(752, 43)
         Me.PanelControl1.TabIndex = 36
         '
         'BLogUnique
@@ -491,7 +519,7 @@ Partial Class FormBarcodeProductPrint
         Me.BLogUnique.ImageList = Me.LargeImageCollection
         Me.BLogUnique.Location = New System.Drawing.Point(2, 2)
         Me.BLogUnique.Name = "BLogUnique"
-        Me.BLogUnique.Size = New System.Drawing.Size(101, 36)
+        Me.BLogUnique.Size = New System.Drawing.Size(101, 39)
         Me.BLogUnique.TabIndex = 15
         Me.BLogUnique.Text = "Log Unique"
         '
@@ -519,7 +547,7 @@ Partial Class FormBarcodeProductPrint
         Me.BtnPrintFront.ImageList = Me.LargeImageCollection
         Me.BtnPrintFront.Location = New System.Drawing.Point(445, 2)
         Me.BtnPrintFront.Name = "BtnPrintFront"
-        Me.BtnPrintFront.Size = New System.Drawing.Size(114, 36)
+        Me.BtnPrintFront.Size = New System.Drawing.Size(114, 39)
         Me.BtnPrintFront.TabIndex = 14
         Me.BtnPrintFront.Text = "Print Front Only"
         '
@@ -530,7 +558,7 @@ Partial Class FormBarcodeProductPrint
         Me.BtnPrintBack.ImageList = Me.LargeImageCollection
         Me.BtnPrintBack.Location = New System.Drawing.Point(559, 2)
         Me.BtnPrintBack.Name = "BtnPrintBack"
-        Me.BtnPrintBack.Size = New System.Drawing.Size(109, 36)
+        Me.BtnPrintBack.Size = New System.Drawing.Size(109, 39)
         Me.BtnPrintBack.TabIndex = 13
         Me.BtnPrintBack.Text = "Print Back Only"
         '
@@ -541,33 +569,53 @@ Partial Class FormBarcodeProductPrint
         Me.BPrint.ImageList = Me.LargeImageCollection
         Me.BPrint.Location = New System.Drawing.Point(668, 2)
         Me.BPrint.Name = "BPrint"
-        Me.BPrint.Size = New System.Drawing.Size(82, 36)
+        Me.BPrint.Size = New System.Drawing.Size(82, 39)
         Me.BPrint.TabIndex = 12
         Me.BPrint.Text = "Print"
         '
-        'BSetHorizontalError
+        'TEQtyOrder
         '
-        Me.BSetHorizontalError.Location = New System.Drawing.Point(384, 107)
-        Me.BSetHorizontalError.Name = "BSetHorizontalError"
-        Me.BSetHorizontalError.Size = New System.Drawing.Size(112, 23)
-        Me.BSetHorizontalError.TabIndex = 171
-        Me.BSetHorizontalError.Text = "Set Horizontal Error"
+        Me.TEQtyOrder.EditValue = ""
+        Me.TEQtyOrder.Location = New System.Drawing.Point(559, 179)
+        Me.TEQtyOrder.Name = "TEQtyOrder"
+        Me.TEQtyOrder.Properties.EditValueChangedDelay = 1
+        Me.TEQtyOrder.Properties.ReadOnly = True
+        Me.TEQtyOrder.Size = New System.Drawing.Size(97, 20)
+        Me.TEQtyOrder.TabIndex = 174
+        Me.TEQtyOrder.TabStop = False
         '
-        'TEHorizontalError
+        'LabelControl14
         '
-        Me.TEHorizontalError.EditValue = ""
-        Me.TEHorizontalError.Location = New System.Drawing.Point(277, 109)
-        Me.TEHorizontalError.Name = "TEHorizontalError"
-        Me.TEHorizontalError.Properties.EditValueChangedDelay = 1
-        Me.TEHorizontalError.Size = New System.Drawing.Size(101, 20)
-        Me.TEHorizontalError.TabIndex = 170
-        Me.TEHorizontalError.TabStop = False
+        Me.LabelControl14.Location = New System.Drawing.Point(559, 160)
+        Me.LabelControl14.Name = "LabelControl14"
+        Me.LabelControl14.Size = New System.Drawing.Size(48, 13)
+        Me.LabelControl14.TabIndex = 173
+        Me.LabelControl14.Text = "Qty FGPO"
+        '
+        'TEQtyRec
+        '
+        Me.TEQtyRec.EditValue = ""
+        Me.TEQtyRec.Location = New System.Drawing.Point(662, 179)
+        Me.TEQtyRec.Name = "TEQtyRec"
+        Me.TEQtyRec.Properties.EditValueChangedDelay = 1
+        Me.TEQtyRec.Properties.ReadOnly = True
+        Me.TEQtyRec.Size = New System.Drawing.Size(78, 20)
+        Me.TEQtyRec.TabIndex = 176
+        Me.TEQtyRec.TabStop = False
+        '
+        'LabelControl15
+        '
+        Me.LabelControl15.Location = New System.Drawing.Point(662, 160)
+        Me.LabelControl15.Name = "LabelControl15"
+        Me.LabelControl15.Size = New System.Drawing.Size(67, 13)
+        Me.LabelControl15.TabIndex = 175
+        Me.LabelControl15.Text = "Qty Receiving"
         '
         'FormBarcodeProductPrint
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(752, 380)
+        Me.ClientSize = New System.Drawing.Size(752, 393)
         Me.Controls.Add(Me.PanelControl1)
         Me.Controls.Add(Me.GroupControl1)
         Me.Controls.Add(Me.GroupGeneralHeader)
@@ -593,6 +641,7 @@ Partial Class FormBarcodeProductPrint
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControl1.ResumeLayout(False)
         Me.GroupControl1.PerformLayout()
+        CType(Me.TEHorizontalError.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEHeightError.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LEPrinter.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SEQtyPrint.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -604,7 +653,8 @@ Partial Class FormBarcodeProductPrint
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TEHorizontalError.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TEQtyOrder.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TEQtyRec.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -649,4 +699,8 @@ Partial Class FormBarcodeProductPrint
     Friend WithEvents TEHeightError As DevExpress.XtraEditors.TextEdit
     Friend WithEvents BSetHorizontalError As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents TEHorizontalError As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents TEQtyRec As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LabelControl15 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents TEQtyOrder As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LabelControl14 As DevExpress.XtraEditors.LabelControl
 End Class

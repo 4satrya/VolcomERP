@@ -19,6 +19,7 @@ Partial Class FormSalesOrderSvcLevel
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormSalesOrderSvcLevel))
         Me.GCFilter = New DevExpress.XtraEditors.GroupControl()
         Me.PanelSelect = New DevExpress.XtraEditors.PanelControl()
@@ -64,7 +65,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.GridColumn62 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnorder_type = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.ViewMenu = New System.Windows.Forms.ContextMenuStrip()
+        Me.ViewMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.SMView = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewDetailOrderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PrintPrepareOrderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -114,10 +115,10 @@ Partial Class FormSalesOrderSvcLevel
         Me.GridColumn67 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl25 = New DevExpress.XtraEditors.LabelControl()
         Me.DropDownButton1 = New DevExpress.XtraEditors.DropDownButton()
-        Me.PopupMenu3PLMail = New DevExpress.XtraBars.PopupMenu()
+        Me.PopupMenu3PLMail = New DevExpress.XtraBars.PopupMenu(Me.components)
         Me.BarButtonItem1 = New DevExpress.XtraBars.BarButtonItem()
         Me.BarButtonItem2 = New DevExpress.XtraBars.BarButtonItem()
-        Me.BarManager3PLMail = New DevExpress.XtraBars.BarManager()
+        Me.BarManager3PLMail = New DevExpress.XtraBars.BarManager(Me.components)
         Me.barDockControlTop = New DevExpress.XtraBars.BarDockControl()
         Me.barDockControlBottom = New DevExpress.XtraBars.BarDockControl()
         Me.barDockControlLeft = New DevExpress.XtraBars.BarDockControl()
@@ -139,7 +140,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.CheckEdit1 = New DevExpress.XtraEditors.CheckEdit()
         Me.XTPRec = New DevExpress.XtraTab.XtraTabPage()
         Me.GCPL = New DevExpress.XtraGrid.GridControl()
-        Me.ViewRevProduct = New System.Windows.Forms.ContextMenuStrip()
+        Me.ViewRevProduct = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.PrintUniqueCodeToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.GVPL = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumnNo = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -183,7 +184,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.LabelControl9 = New DevExpress.XtraEditors.LabelControl()
         Me.XTPDelOrder = New DevExpress.XtraTab.XtraTabPage()
         Me.GCSalesDelOrder = New DevExpress.XtraGrid.GridControl()
-        Me.ViewPreDel = New System.Windows.Forms.ContextMenuStrip()
+        Me.ViewPreDel = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ViewDetailToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewCombinedDeliveryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CancellCombinedDeliveryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -232,7 +233,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.LabelControl12 = New DevExpress.XtraEditors.LabelControl()
         Me.XTPReturn = New DevExpress.XtraTab.XtraTabPage()
         Me.GCSalesReturn = New DevExpress.XtraGrid.GridControl()
-        Me.ViewPreReturn = New System.Windows.Forms.ContextMenuStrip()
+        Me.ViewPreReturn = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.CancelCombineToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GVSalesReturn = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -271,7 +272,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.LabelControl15 = New DevExpress.XtraEditors.LabelControl()
         Me.XTPReturnQC = New DevExpress.XtraTab.XtraTabPage()
         Me.GCSalesReturnQC = New DevExpress.XtraGrid.GridControl()
-        Me.ViewPreReturnTransfer = New System.Windows.Forms.ContextMenuStrip()
+        Me.ViewPreReturnTransfer = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.GVSalesReturnQC = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumnSalesReturnQCNumber = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -303,7 +304,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.LabelControl18 = New DevExpress.XtraEditors.LabelControl()
         Me.XTPTrf = New DevExpress.XtraTab.XtraTabPage()
         Me.GCFGTrf = New DevExpress.XtraGrid.GridControl()
-        Me.ViewPreTransfer = New System.Windows.Forms.ContextMenuStrip()
+        Me.ViewPreTransfer = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
         Me.GVFGTrf = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumnFGTrfNumber = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -1243,7 +1244,7 @@ Partial Class FormSalesOrderSvcLevel
         '
         'GridColumn63
         '
-        Me.GridColumn63.Caption = "Pickup Date"
+        Me.GridColumn63.Caption = "Store Pick Up Date"
         Me.GridColumn63.FieldName = "pickup_date"
         Me.GridColumn63.Name = "GridColumn63"
         Me.GridColumn63.OptionsColumn.AllowEdit = False
@@ -1252,7 +1253,7 @@ Partial Class FormSalesOrderSvcLevel
         '
         'GridColumn64
         '
-        Me.GridColumn64.Caption = "Pickup Date Updated By"
+        Me.GridColumn64.Caption = "Store Pick Up Date Updated By"
         Me.GridColumn64.FieldName = "pickup_date_updated_by"
         Me.GridColumn64.Name = "GridColumn64"
         Me.GridColumn64.OptionsColumn.AllowEdit = False
@@ -1261,7 +1262,7 @@ Partial Class FormSalesOrderSvcLevel
         '
         'GridColumn65
         '
-        Me.GridColumn65.Caption = "Pickup Date Updated At"
+        Me.GridColumn65.Caption = "Store Pick Up Date Updated At"
         Me.GridColumn65.FieldName = "pickup_date_updated_at"
         Me.GridColumn65.Name = "GridColumn65"
         Me.GridColumn65.OptionsColumn.AllowEdit = False
@@ -1432,9 +1433,9 @@ Partial Class FormSalesOrderSvcLevel
         Me.SBViewAllPickupDate.Location = New System.Drawing.Point(1181, 12)
         Me.SBViewAllPickupDate.LookAndFeel.SkinName = "Blue"
         Me.SBViewAllPickupDate.Name = "SBViewAllPickupDate"
-        Me.SBViewAllPickupDate.Size = New System.Drawing.Size(155, 20)
+        Me.SBViewAllPickupDate.Size = New System.Drawing.Size(176, 20)
         Me.SBViewAllPickupDate.TabIndex = 8904
-        Me.SBViewAllPickupDate.Text = "View All Empty Pickup Date"
+        Me.SBViewAllPickupDate.Text = "View All Empty Store Pick Up Date"
         '
         'LabelControl6
         '
@@ -1451,7 +1452,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.SBInputTanggalPickup.Name = "SBInputTanggalPickup"
         Me.SBInputTanggalPickup.Size = New System.Drawing.Size(128, 20)
         Me.SBInputTanggalPickup.TabIndex = 8903
-        Me.SBInputTanggalPickup.Text = "Input Pickup Date"
+        Me.SBInputTanggalPickup.Text = "Input Store Pickup Date"
         '
         'LabelControl5
         '
@@ -1551,7 +1552,7 @@ Partial Class FormSalesOrderSvcLevel
         Me.PanelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
         Me.PanelControl1.Controls.Add(Me.CheckEdit1)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PanelControl1.Location = New System.Drawing.Point(1336, 0)
+        Me.PanelControl1.Location = New System.Drawing.Point(1357, 0)
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(86, 51)
         Me.PanelControl1.TabIndex = 8902

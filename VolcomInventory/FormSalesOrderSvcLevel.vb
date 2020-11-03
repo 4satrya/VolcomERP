@@ -1158,7 +1158,7 @@
             If is_valid Then
                 FormSalesReturnInputTanggalPickup.ShowDialog()
             Else
-                stopCustom("Some order can't input pick up date.")
+                stopCustom("Some order can't input store pick up date.")
             End If
         End If
         GVSalesReturnOrder.ActiveFilterString = ""

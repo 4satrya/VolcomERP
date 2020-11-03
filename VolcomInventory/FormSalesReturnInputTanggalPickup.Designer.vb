@@ -47,9 +47,9 @@ Partial Class FormSalesReturnInputTanggalPickup
         '
         Me.LabelControl1.Location = New System.Drawing.Point(12, 17)
         Me.LabelControl1.Name = "LabelControl1"
-        Me.LabelControl1.Size = New System.Drawing.Size(56, 13)
+        Me.LabelControl1.Size = New System.Drawing.Size(89, 13)
         Me.LabelControl1.TabIndex = 1
-        Me.LabelControl1.Text = "Pickup Date"
+        Me.LabelControl1.Text = "Store Pick Up Date"
         '
         'SBSave
         '
@@ -78,7 +78,7 @@ Partial Class FormSalesReturnInputTanggalPickup
         Me.Controls.Add(Me.DETanggalInput)
         Me.Name = "FormSalesReturnInputTanggalPickup"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Input Pickup Date"
+        Me.Text = "Input Store Pick Up Date"
         CType(Me.DETanggalInput.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DETanggalInput.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)

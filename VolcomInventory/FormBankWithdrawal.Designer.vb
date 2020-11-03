@@ -301,6 +301,7 @@ Partial Class FormBankWithdrawal
         Me.GCJamsostek = New DevExpress.XtraGrid.GridControl()
         Me.GVJamsostek = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn127 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn227 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn128 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemCheckEdit7 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.GridColumn129 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -496,7 +497,6 @@ Partial Class FormBankWithdrawal
         Me.BloadWaiting = New DevExpress.XtraEditors.SimpleButton()
         Me.ViewBPL = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.VDItemList = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GridColumn227 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XTCPO, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCPO.SuspendLayout()
         Me.XTPPayment.SuspendLayout()
@@ -3058,8 +3058,6 @@ Partial Class FormBankWithdrawal
         Me.GridColumn56.Name = "GridColumn56"
         Me.GridColumn56.OptionsColumn.AllowEdit = False
         Me.GridColumn56.OptionsColumn.AllowFocus = False
-        Me.GridColumn56.Visible = True
-        Me.GridColumn56.VisibleIndex = 6
         Me.GridColumn56.Width = 81
         '
         'GridColumn57
@@ -3076,7 +3074,7 @@ Partial Class FormBankWithdrawal
         Me.GridColumn57.OptionsColumn.AllowEdit = False
         Me.GridColumn57.OptionsColumn.AllowFocus = False
         Me.GridColumn57.Visible = True
-        Me.GridColumn57.VisibleIndex = 7
+        Me.GridColumn57.VisibleIndex = 6
         Me.GridColumn57.Width = 81
         '
         'GridColumn60
@@ -3094,7 +3092,7 @@ Partial Class FormBankWithdrawal
         Me.GridColumn60.OptionsColumn.AllowFocus = False
         Me.GridColumn60.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_bpl", "{0:N2}")})
         Me.GridColumn60.Visible = True
-        Me.GridColumn60.VisibleIndex = 8
+        Me.GridColumn60.VisibleIndex = 7
         Me.GridColumn60.Width = 160
         '
         'GridColumn49
@@ -3113,7 +3111,7 @@ Partial Class FormBankWithdrawal
         Me.GridColumn49.OptionsColumn.ReadOnly = True
         Me.GridColumn49.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total", "{0:N2}")})
         Me.GridColumn49.Visible = True
-        Me.GridColumn49.VisibleIndex = 9
+        Me.GridColumn49.VisibleIndex = 8
         Me.GridColumn49.Width = 189
         '
         'GridColumn53
@@ -3131,7 +3129,7 @@ Partial Class FormBankWithdrawal
         Me.GridColumn53.OptionsColumn.AllowFocus = False
         Me.GridColumn53.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_paid", "{0:N2}")})
         Me.GridColumn53.Visible = True
-        Me.GridColumn53.VisibleIndex = 12
+        Me.GridColumn53.VisibleIndex = 11
         Me.GridColumn53.Width = 134
         '
         'GridColumn41
@@ -3149,7 +3147,7 @@ Partial Class FormBankWithdrawal
         Me.GridColumn41.OptionsColumn.AllowFocus = False
         Me.GridColumn41.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "balance", "{0:N2}")})
         Me.GridColumn41.Visible = True
-        Me.GridColumn41.VisibleIndex = 11
+        Me.GridColumn41.VisibleIndex = 10
         Me.GridColumn41.Width = 141
         '
         'GridColumn54
@@ -3164,7 +3162,7 @@ Partial Class FormBankWithdrawal
         Me.GridColumn54.OptionsColumn.AllowEdit = False
         Me.GridColumn54.OptionsColumn.AllowFocus = False
         Me.GridColumn54.Visible = True
-        Me.GridColumn54.VisibleIndex = 10
+        Me.GridColumn54.VisibleIndex = 9
         Me.GridColumn54.Width = 177
         '
         'GridColumn50
@@ -3193,7 +3191,7 @@ Partial Class FormBankWithdrawal
         Me.GridColumn224.FieldName = "inv_number"
         Me.GridColumn224.Name = "GridColumn224"
         Me.GridColumn224.Visible = True
-        Me.GridColumn224.VisibleIndex = 13
+        Me.GridColumn224.VisibleIndex = 12
         '
         'GridColumn221
         '
@@ -3201,7 +3199,7 @@ Partial Class FormBankWithdrawal
         Me.GridColumn221.FieldName = "extra_note"
         Me.GridColumn221.Name = "GridColumn221"
         Me.GridColumn221.Visible = True
-        Me.GridColumn221.VisibleIndex = 14
+        Me.GridColumn221.VisibleIndex = 13
         '
         'BCreatePaymentFGPO
         '
@@ -3485,6 +3483,14 @@ Partial Class FormBankWithdrawal
         Me.GridColumn127.OptionsColumn.AllowEdit = False
         Me.GridColumn127.OptionsColumn.AllowFocus = False
         Me.GridColumn127.OptionsColumn.ReadOnly = True
+        '
+        'GridColumn227
+        '
+        Me.GridColumn227.FieldName = "id_bpjs_location"
+        Me.GridColumn227.Name = "GridColumn227"
+        Me.GridColumn227.OptionsColumn.AllowEdit = False
+        Me.GridColumn227.OptionsColumn.AllowFocus = False
+        Me.GridColumn227.OptionsColumn.ReadOnly = True
         '
         'GridColumn128
         '
@@ -5422,14 +5428,6 @@ Partial Class FormBankWithdrawal
         Me.VDItemList.Name = "VDItemList"
         Me.VDItemList.Size = New System.Drawing.Size(112, 22)
         Me.VDItemList.Text = "History"
-        '
-        'GridColumn227
-        '
-        Me.GridColumn227.FieldName = "id_bpjs_location"
-        Me.GridColumn227.Name = "GridColumn227"
-        Me.GridColumn227.OptionsColumn.AllowEdit = False
-        Me.GridColumn227.OptionsColumn.AllowFocus = False
-        Me.GridColumn227.OptionsColumn.ReadOnly = True
         '
         'FormBankWithdrawal
         '

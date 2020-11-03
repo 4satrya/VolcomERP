@@ -1,5 +1,8 @@
 ﻿Public Class FormMaterialRequisition
     Private Sub FormMaterialRequisition_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        DEStart.EditValue = Now
+        DEUntil.EditValue = Now
+        '
         view_mrs()
         show_but_mrs()
     End Sub
@@ -27,7 +30,7 @@
         query += "INNER JOIN tb_lookup_report_status h ON h.id_report_status = a.id_report_status "
         query += "LEFT JOIN tb_m_user AS usr ON a.created_by = usr.id_user "
         query += "LEFT JOIN tb_m_employee AS emp ON usr.id_employee = emp.id_employee "
-        query += "WHERE a.id_prod_order IS NOT NULL "
+        query += "WHERE a.id_prod_order IS NOT NULL AND DATE(a.prod_order_mrs_date)>=DATE('" & Date.Parse(DEStart.EditValue.ToString).ToString("yyyy-MM-dd") & "') AND DATE(a.prod_order_mrs_date)<=DATE('" & Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd") & "') "
         query += "ORDER BY a.id_prod_order_mrs DESC"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCMRS.DataSource = data
@@ -55,5 +58,23 @@
 
     Private Sub GVMRS_DoubleClick(sender As Object, e As EventArgs) Handles GVMRS.DoubleClick
         FormMain.but_edit()
+    End Sub
+
+    Private Sub BView_Click(sender As Object, e As EventArgs) Handles BView.Click
+        view_mrs()
+    End Sub
+
+    Private Sub DEStart_EditValueChanged(sender As Object, e As EventArgs) Handles DEStart.EditValueChanged
+        Try
+            DEUntil.Properties.MinValue = DEStart.EditValue
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Private Sub DEUntil_EditValueChanged(sender As Object, e As EventArgs) Handles DEUntil.EditValueChanged
+        Try
+            DEStart.Properties.MaxValue = DEUntil.EditValue
+        Catch ex As Exception
+        End Try
     End Sub
 End Class

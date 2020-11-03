@@ -1367,4 +1367,29 @@ Public Class FormFGLineList
     Private Sub BVerifyCOP_Click(sender As Object, e As EventArgs) Handles BVerifyCOP.Click
         FormVerifyECOP.ShowDialog()
     End Sub
+
+    Private Sub BProposeSNI_Click(sender As Object, e As EventArgs) Handles BProposeSNI.Click
+        Cursor = Cursors.WaitCursor
+
+        Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Only Kids and empty additional cop will proposed, continue ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+        If confirm = Windows.Forms.DialogResult.Yes Then
+            If BGVLineList.RowCount > 0 Then
+                For l = 0 To BGVLineList.RowCount - 1
+                    If BGVLineList.GetRowCellValue(l, "Select_sct") = "Yes" Then
+                        'check its kids
+                        If BGVLineList.GetRowCellValue(l, "ADDITIONAL COST_Prc") = 0 And BGVLineList.GetRowCellValue(l, "DIVISION").ToString = "KID" Then
+                            Dim qc As String = "SELECT * FROM tb_additional_cost_need WHERE id_design='" & BGVLineList.GetRowCellValue(l, "id_design").ToString & "'"
+                            Dim dtc As DataTable = execute_query(qc, -1, True, "", "", "", "")
+                            If Not dtc.Rows.Count > 0 Then
+                                execute_non_query("INSERT INTO tb_additional_cost_need(id_design,propose_by,propose_date) VALUES('" & BGVLineList.GetRowCellValue(l, "id_design").ToString & "','" & id_user & "',NOW())", True, "", "", "", "")
+                            End If
+                        End If
+                    End If
+                Next
+            End If
+            infoCustom("SNI Proposed")
+        End If
+
+        Cursor = Cursors.Default
+    End Sub
 End Class

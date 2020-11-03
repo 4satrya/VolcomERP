@@ -87,6 +87,7 @@ Partial Class FormFGLineList
         Me.SMViewCostHist = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewHistoryProposeChangesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProposeChangesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BProposeSNI = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.PanelControlNavLineList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlNavLineList.SuspendLayout()
         CType(Me.PCNavLineList, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -468,6 +469,7 @@ Partial Class FormFGLineList
         '
         'PanelControlNavLineListBottom
         '
+        Me.PanelControlNavLineListBottom.Controls.Add(Me.BProposeSNI)
         Me.PanelControlNavLineListBottom.Controls.Add(Me.BVerifyCOP)
         Me.PanelControlNavLineListBottom.Controls.Add(Me.BtnCreateNewPD)
         Me.PanelControlNavLineListBottom.Controls.Add(Me.BtnSetActualInStoreDate)
@@ -713,6 +715,17 @@ Partial Class FormFGLineList
         Me.ProposeChangesToolStripMenuItem.Size = New System.Drawing.Size(235, 22)
         Me.ProposeChangesToolStripMenuItem.Text = "[changes]"
         '
+        'BProposeSNI
+        '
+        Me.BProposeSNI.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BProposeSNI.ImageIndex = 14
+        Me.BProposeSNI.ImageList = Me.LargeImageCollection
+        Me.BProposeSNI.Location = New System.Drawing.Point(299, 2)
+        Me.BProposeSNI.Name = "BProposeSNI"
+        Me.BProposeSNI.Size = New System.Drawing.Size(114, 38)
+        Me.BProposeSNI.TabIndex = 118
+        Me.BProposeSNI.Text = "Propose SNI"
+        '
         'FormFGLineList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -833,4 +846,5 @@ Partial Class FormFGLineList
     Friend WithEvents BBQuickUpdate As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents BtnSetActualInStoreDate As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BVerifyCOP As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BProposeSNI As DevExpress.XtraEditors.SimpleButton
 End Class

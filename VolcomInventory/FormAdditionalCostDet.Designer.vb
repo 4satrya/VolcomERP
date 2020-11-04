@@ -39,6 +39,7 @@ Partial Class FormAdditionalCostDet
         Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
         Me.BCalculateSampleCOP = New DevExpress.XtraEditors.SimpleButton()
         Me.BDel = New DevExpress.XtraEditors.SimpleButton()
@@ -52,27 +53,26 @@ Partial Class FormAdditionalCostDet
         Me.BtnCancel = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnSave = New DevExpress.XtraEditors.SimpleButton()
         Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
-        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
-        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
-        Me.TextEdit1 = New DevExpress.XtraEditors.TextEdit()
         Me.TextEdit2 = New DevExpress.XtraEditors.TextEdit()
-        Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.TextEdit1 = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.PanelControl4 = New DevExpress.XtraEditors.PanelControl()
-        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
-        Me.MemoEdit1 = New DevExpress.XtraEditors.MemoEdit()
-        Me.TextEdit3 = New DevExpress.XtraEditors.TextEdit()
-        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl8 = New DevExpress.XtraEditors.LabelControl()
+        Me.TextEdit7 = New DevExpress.XtraEditors.TextEdit()
+        Me.TextEdit6 = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl7 = New DevExpress.XtraEditors.LabelControl()
+        Me.TextEdit5 = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
         Me.TextEdit4 = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
+        Me.TextEdit3 = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
+        Me.MemoEdit1 = New DevExpress.XtraEditors.MemoEdit()
+        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
         Me.XtraTabControl1 = New DevExpress.XtraTab.XtraTabControl()
         Me.XTPDesignList = New DevExpress.XtraTab.XtraTabPage()
         Me.XTPCostList = New DevExpress.XtraTab.XtraTabPage()
-        Me.TextEdit5 = New DevExpress.XtraEditors.TextEdit()
-        Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
-        Me.TextEdit6 = New DevExpress.XtraEditors.TextEdit()
-        Me.LabelControl7 = New DevExpress.XtraEditors.LabelControl()
-        Me.TextEdit7 = New DevExpress.XtraEditors.TextEdit()
-        Me.LabelControl8 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl1.SuspendLayout()
         CType(Me.GCDesignList, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -88,20 +88,20 @@ Partial Class FormAdditionalCostDet
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl3.SuspendLayout()
-        CType(Me.TextEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TextEdit2.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TextEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl4.SuspendLayout()
-        CType(Me.MemoEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TextEdit3.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TextEdit7.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TextEdit6.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TextEdit5.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TextEdit4.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TextEdit3.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.MemoEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XtraTabControl1.SuspendLayout()
         Me.XTPDesignList.SuspendLayout()
         Me.XTPCostList.SuspendLayout()
-        CType(Me.TextEdit5.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TextEdit6.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TextEdit7.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupControl1
@@ -289,6 +289,7 @@ Partial Class FormAdditionalCostDet
         'GridColumn10
         '
         Me.GridColumn10.Caption = "Detail"
+        Me.GridColumn10.FieldName = "description"
         Me.GridColumn10.Name = "GridColumn10"
         Me.GridColumn10.Visible = True
         Me.GridColumn10.VisibleIndex = 0
@@ -297,6 +298,7 @@ Partial Class FormAdditionalCostDet
         'GridColumn9
         '
         Me.GridColumn9.Caption = "Qty"
+        Me.GridColumn9.FieldName = "qty"
         Me.GridColumn9.Name = "GridColumn9"
         Me.GridColumn9.Visible = True
         Me.GridColumn9.VisibleIndex = 1
@@ -305,10 +307,28 @@ Partial Class FormAdditionalCostDet
         'GridColumn11
         '
         Me.GridColumn11.Caption = "Price"
+        Me.GridColumn11.FieldName = "value_est"
         Me.GridColumn11.Name = "GridColumn11"
         Me.GridColumn11.Visible = True
         Me.GridColumn11.VisibleIndex = 2
         Me.GridColumn11.Width = 173
+        '
+        'GridColumn12
+        '
+        Me.GridColumn12.Caption = "Sub Total"
+        Me.GridColumn12.DisplayFormat.FormatString = "N2"
+        Me.GridColumn12.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn12.FieldName = "sub_total"
+        Me.GridColumn12.Name = "GridColumn12"
+        Me.GridColumn12.OptionsColumn.AllowEdit = False
+        Me.GridColumn12.OptionsColumn.AllowFocus = False
+        Me.GridColumn12.OptionsColumn.ReadOnly = True
+        Me.GridColumn12.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sub_total", "{0:N2}")})
+        Me.GridColumn12.UnboundExpression = "[qty] * [value_est]"
+        Me.GridColumn12.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
+        Me.GridColumn12.Visible = True
+        Me.GridColumn12.VisibleIndex = 3
+        Me.GridColumn12.Width = 181
         '
         'PanelControl2
         '
@@ -468,13 +488,19 @@ Partial Class FormAdditionalCostDet
         Me.PanelControl3.Size = New System.Drawing.Size(995, 67)
         Me.PanelControl3.TabIndex = 3
         '
-        'LabelControl1
+        'TextEdit2
         '
-        Me.LabelControl1.Location = New System.Drawing.Point(14, 14)
-        Me.LabelControl1.Name = "LabelControl1"
-        Me.LabelControl1.Size = New System.Drawing.Size(37, 13)
-        Me.LabelControl1.TabIndex = 0
-        Me.LabelControl1.Text = "Number"
+        Me.TextEdit2.Location = New System.Drawing.Point(72, 37)
+        Me.TextEdit2.Name = "TextEdit2"
+        Me.TextEdit2.Size = New System.Drawing.Size(256, 20)
+        Me.TextEdit2.TabIndex = 3
+        '
+        'TextEdit1
+        '
+        Me.TextEdit1.Location = New System.Drawing.Point(72, 11)
+        Me.TextEdit1.Name = "TextEdit1"
+        Me.TextEdit1.Size = New System.Drawing.Size(172, 20)
+        Me.TextEdit1.TabIndex = 2
         '
         'LabelControl2
         '
@@ -484,34 +510,13 @@ Partial Class FormAdditionalCostDet
         Me.LabelControl2.TabIndex = 1
         Me.LabelControl2.Text = "Created By"
         '
-        'TextEdit1
+        'LabelControl1
         '
-        Me.TextEdit1.Location = New System.Drawing.Point(72, 11)
-        Me.TextEdit1.Name = "TextEdit1"
-        Me.TextEdit1.Size = New System.Drawing.Size(172, 20)
-        Me.TextEdit1.TabIndex = 2
-        '
-        'TextEdit2
-        '
-        Me.TextEdit2.Location = New System.Drawing.Point(72, 37)
-        Me.TextEdit2.Name = "TextEdit2"
-        Me.TextEdit2.Size = New System.Drawing.Size(256, 20)
-        Me.TextEdit2.TabIndex = 3
-        '
-        'GridColumn12
-        '
-        Me.GridColumn12.Caption = "Sub Total"
-        Me.GridColumn12.DisplayFormat.FormatString = "N2"
-        Me.GridColumn12.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn12.FieldName = "sub_total"
-        Me.GridColumn12.Name = "GridColumn12"
-        Me.GridColumn12.OptionsColumn.AllowEdit = False
-        Me.GridColumn12.OptionsColumn.AllowFocus = False
-        Me.GridColumn12.OptionsColumn.ReadOnly = True
-        Me.GridColumn12.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sub_total", "{0:N2}")})
-        Me.GridColumn12.Visible = True
-        Me.GridColumn12.VisibleIndex = 3
-        Me.GridColumn12.Width = 181
+        Me.LabelControl1.Location = New System.Drawing.Point(14, 14)
+        Me.LabelControl1.Name = "LabelControl1"
+        Me.LabelControl1.Size = New System.Drawing.Size(37, 13)
+        Me.LabelControl1.TabIndex = 0
+        Me.LabelControl1.Text = "Number"
         '
         'PanelControl4
         '
@@ -533,20 +538,65 @@ Partial Class FormAdditionalCostDet
         Me.PanelControl4.Size = New System.Drawing.Size(995, 104)
         Me.PanelControl4.TabIndex = 4
         '
-        'LabelControl3
+        'LabelControl8
         '
-        Me.LabelControl3.Location = New System.Drawing.Point(14, 16)
-        Me.LabelControl3.Name = "LabelControl3"
-        Me.LabelControl3.Size = New System.Drawing.Size(23, 13)
-        Me.LabelControl3.TabIndex = 1
-        Me.LabelControl3.Text = "Note"
+        Me.LabelControl8.Location = New System.Drawing.Point(804, 42)
+        Me.LabelControl8.Name = "LabelControl8"
+        Me.LabelControl8.Size = New System.Drawing.Size(11, 13)
+        Me.LabelControl8.TabIndex = 12
+        Me.LabelControl8.Text = "%"
         '
-        'MemoEdit1
+        'TextEdit7
         '
-        Me.MemoEdit1.Location = New System.Drawing.Point(96, 14)
-        Me.MemoEdit1.Name = "MemoEdit1"
-        Me.MemoEdit1.Size = New System.Drawing.Size(567, 58)
-        Me.MemoEdit1.TabIndex = 2
+        Me.TextEdit7.Location = New System.Drawing.Point(821, 39)
+        Me.TextEdit7.Name = "TextEdit7"
+        Me.TextEdit7.Size = New System.Drawing.Size(162, 20)
+        Me.TextEdit7.TabIndex = 11
+        '
+        'TextEdit6
+        '
+        Me.TextEdit6.Location = New System.Drawing.Point(744, 65)
+        Me.TextEdit6.Name = "TextEdit6"
+        Me.TextEdit6.Size = New System.Drawing.Size(239, 20)
+        Me.TextEdit6.TabIndex = 10
+        '
+        'LabelControl7
+        '
+        Me.LabelControl7.Location = New System.Drawing.Point(693, 68)
+        Me.LabelControl7.Name = "LabelControl7"
+        Me.LabelControl7.Size = New System.Drawing.Size(45, 13)
+        Me.LabelControl7.TabIndex = 9
+        Me.LabelControl7.Text = "Sub Total"
+        '
+        'TextEdit5
+        '
+        Me.TextEdit5.Location = New System.Drawing.Point(744, 39)
+        Me.TextEdit5.Name = "TextEdit5"
+        Me.TextEdit5.Size = New System.Drawing.Size(54, 20)
+        Me.TextEdit5.TabIndex = 8
+        '
+        'LabelControl6
+        '
+        Me.LabelControl6.Location = New System.Drawing.Point(693, 42)
+        Me.LabelControl6.Name = "LabelControl6"
+        Me.LabelControl6.Size = New System.Drawing.Size(19, 13)
+        Me.LabelControl6.TabIndex = 7
+        Me.LabelControl6.Text = "VAT"
+        '
+        'TextEdit4
+        '
+        Me.TextEdit4.Location = New System.Drawing.Point(744, 13)
+        Me.TextEdit4.Name = "TextEdit4"
+        Me.TextEdit4.Size = New System.Drawing.Size(239, 20)
+        Me.TextEdit4.TabIndex = 6
+        '
+        'LabelControl5
+        '
+        Me.LabelControl5.Location = New System.Drawing.Point(693, 16)
+        Me.LabelControl5.Name = "LabelControl5"
+        Me.LabelControl5.Size = New System.Drawing.Size(45, 13)
+        Me.LabelControl5.TabIndex = 5
+        Me.LabelControl5.Text = "Sub Total"
         '
         'TextEdit3
         '
@@ -563,20 +613,20 @@ Partial Class FormAdditionalCostDet
         Me.LabelControl4.TabIndex = 3
         Me.LabelControl4.Text = "Cost Per Unit"
         '
-        'TextEdit4
+        'MemoEdit1
         '
-        Me.TextEdit4.Location = New System.Drawing.Point(744, 13)
-        Me.TextEdit4.Name = "TextEdit4"
-        Me.TextEdit4.Size = New System.Drawing.Size(239, 20)
-        Me.TextEdit4.TabIndex = 6
+        Me.MemoEdit1.Location = New System.Drawing.Point(96, 14)
+        Me.MemoEdit1.Name = "MemoEdit1"
+        Me.MemoEdit1.Size = New System.Drawing.Size(567, 58)
+        Me.MemoEdit1.TabIndex = 2
         '
-        'LabelControl5
+        'LabelControl3
         '
-        Me.LabelControl5.Location = New System.Drawing.Point(693, 16)
-        Me.LabelControl5.Name = "LabelControl5"
-        Me.LabelControl5.Size = New System.Drawing.Size(45, 13)
-        Me.LabelControl5.TabIndex = 5
-        Me.LabelControl5.Text = "Sub Total"
+        Me.LabelControl3.Location = New System.Drawing.Point(14, 16)
+        Me.LabelControl3.Name = "LabelControl3"
+        Me.LabelControl3.Size = New System.Drawing.Size(23, 13)
+        Me.LabelControl3.TabIndex = 1
+        Me.LabelControl3.Text = "Note"
         '
         'XtraTabControl1
         '
@@ -602,51 +652,6 @@ Partial Class FormAdditionalCostDet
         Me.XTPCostList.Name = "XTPCostList"
         Me.XTPCostList.Size = New System.Drawing.Size(989, 338)
         Me.XTPCostList.Text = "Breakdown Cost"
-        '
-        'TextEdit5
-        '
-        Me.TextEdit5.Location = New System.Drawing.Point(744, 39)
-        Me.TextEdit5.Name = "TextEdit5"
-        Me.TextEdit5.Size = New System.Drawing.Size(54, 20)
-        Me.TextEdit5.TabIndex = 8
-        '
-        'LabelControl6
-        '
-        Me.LabelControl6.Location = New System.Drawing.Point(693, 42)
-        Me.LabelControl6.Name = "LabelControl6"
-        Me.LabelControl6.Size = New System.Drawing.Size(19, 13)
-        Me.LabelControl6.TabIndex = 7
-        Me.LabelControl6.Text = "VAT"
-        '
-        'TextEdit6
-        '
-        Me.TextEdit6.Location = New System.Drawing.Point(744, 65)
-        Me.TextEdit6.Name = "TextEdit6"
-        Me.TextEdit6.Size = New System.Drawing.Size(239, 20)
-        Me.TextEdit6.TabIndex = 10
-        '
-        'LabelControl7
-        '
-        Me.LabelControl7.Location = New System.Drawing.Point(693, 68)
-        Me.LabelControl7.Name = "LabelControl7"
-        Me.LabelControl7.Size = New System.Drawing.Size(45, 13)
-        Me.LabelControl7.TabIndex = 9
-        Me.LabelControl7.Text = "Sub Total"
-        '
-        'TextEdit7
-        '
-        Me.TextEdit7.Location = New System.Drawing.Point(821, 39)
-        Me.TextEdit7.Name = "TextEdit7"
-        Me.TextEdit7.Size = New System.Drawing.Size(162, 20)
-        Me.TextEdit7.TabIndex = 11
-        '
-        'LabelControl8
-        '
-        Me.LabelControl8.Location = New System.Drawing.Point(804, 42)
-        Me.LabelControl8.Name = "LabelControl8"
-        Me.LabelControl8.Size = New System.Drawing.Size(11, 13)
-        Me.LabelControl8.TabIndex = 12
-        Me.LabelControl8.Text = "%"
         '
         'FormAdditionalCostDet
         '
@@ -679,21 +684,21 @@ Partial Class FormAdditionalCostDet
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl3.ResumeLayout(False)
         Me.PanelControl3.PerformLayout()
-        CType(Me.TextEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TextEdit2.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TextEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl4.ResumeLayout(False)
         Me.PanelControl4.PerformLayout()
-        CType(Me.MemoEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TextEdit3.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TextEdit7.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TextEdit6.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TextEdit5.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TextEdit4.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TextEdit3.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.MemoEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XtraTabControl1.ResumeLayout(False)
         Me.XTPDesignList.ResumeLayout(False)
         Me.XTPCostList.ResumeLayout(False)
-        CType(Me.TextEdit5.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TextEdit6.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TextEdit7.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

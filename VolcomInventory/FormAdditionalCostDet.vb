@@ -1,8 +1,35 @@
 ﻿Public Class FormAdditionalCostDet
     Public id_pps As String = "-1"
+    Public id_type As String = "1" '1 = est , 2 = realization
 
     Private Sub FormAdditionalCostDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        load_det_cost()
+    End Sub
 
+    Sub load_det_cost()
+        Dim q As String = ""
+
+        If id_type = "1" Then
+            q = "SELECT description,qty_est AS qty,value_est AS `value`
+FROM `tb_additional_cost_pps_det` 
+WHERE id_additional_cost_pps='" & id_pps & "'"
+        Else
+            q = "SELECT description,qty AS qty,value AS `value`
+FROM `tb_additional_cost_pps_det` 
+WHERE id_additional_cost_pps='" & id_pps & "'"
+        End If
+
+        Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
+        GCCostList.DataSource = dt
+        check_button()
+    End Sub
+
+    Sub check_button()
+        If GVCostList.RowCount > 0 Then
+            BDel.Visible = True
+        Else
+            BDel.Visible = False
+        End If
     End Sub
 
     Private Sub BPickArticle_Click(sender As Object, e As EventArgs) Handles BPickArticle.Click
@@ -54,16 +81,29 @@ GROUP BY pdd.`id_prod_demand_design`"
     Private Sub BCalculateSampleCOP_Click(sender As Object, e As EventArgs) Handles BCalculateSampleCOP.Click
         For i = 0 To GVDesignList.RowCount - 1
             If GVDesignList.GetRowCellValue(i, "qty_sampling") > 0 Then
-
+                Dim newRow As DataRow = (TryCast(GCCostList.DataSource, DataTable)).NewRow()
+                newRow("description") = GVDesignList.GetRowCellValue(i, "design_display_name").ToString
+                newRow("qty") = FormBankWithdrawal.GVExpense.GetRowCellValue(i, "qty_sampling")
+                newRow("value") = FormBankWithdrawal.GVExpense.GetRowCellValue(i, "prod_order_cop_pd")
+                TryCast(GCCostList.DataSource, DataTable).Rows.Add(newRow)
             End If
         Next
+        check_button()
     End Sub
 
     Private Sub BDel_Click(sender As Object, e As EventArgs) Handles BDel.Click
-
+        If GVCostList.RowCount > 0 Then
+            GVCostList.DeleteSelectedRows()
+            check_button()
+        End If
     End Sub
 
     Private Sub BAdd_Click(sender As Object, e As EventArgs) Handles BAdd.Click
-
+        Dim newRow As DataRow = (TryCast(GCCostList.DataSource, DataTable)).NewRow()
+        newRow("description") = ""
+        newRow("qty") = 1
+        newRow("value") = 0
+        TryCast(GCCostList.DataSource, DataTable).Rows.Add(newRow)
+        check_button()
     End Sub
 End Class

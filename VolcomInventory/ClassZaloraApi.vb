@@ -560,7 +560,7 @@
         If variation < "10" Then
             variation = variation
         Else
-            variation = If(variation = "One Size", "ALL", variation.Replace("in", ""))
+            variation = If(variation = "One Size", "One Size", variation.Replace("in", ""))
         End If
         Dim data_size_cek As DataRow() = data_size.Select("[code_detail_name]='" + variation + "' ")
         Dim code_size As String = ""

@@ -70,6 +70,7 @@ Partial Class FormBankWithdrawalAttachement
         Me.LabelControl10 = New DevExpress.XtraEditors.LabelControl()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
         Me.PanelControl4 = New DevExpress.XtraEditors.PanelControl()
+        Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.RepositoryItemTextEditPph, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DateEditDueDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DateEditDueDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -473,7 +474,7 @@ Partial Class FormBankWithdrawalAttachement
         '
         'GVPurcReq
         '
-        Me.GVPurcReq.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn8, Me.GridColumn21, Me.GridColumn33, Me.GridColumn4, Me.GridColumn2, Me.GridColumn1, Me.GridColumn7, Me.GridColumn9})
+        Me.GVPurcReq.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn8, Me.GridColumn21, Me.GridColumn10, Me.GridColumn33, Me.GridColumn4, Me.GridColumn2, Me.GridColumn1, Me.GridColumn7, Me.GridColumn9})
         Me.GVPurcReq.GridControl = Me.GCPurcReq
         Me.GVPurcReq.Name = "GVPurcReq"
         Me.GVPurcReq.OptionsFind.AllowFindPanel = False
@@ -509,7 +510,7 @@ Partial Class FormBankWithdrawalAttachement
         Me.GridColumn33.OptionsColumn.AllowEdit = False
         Me.GridColumn33.OptionsColumn.ReadOnly = True
         Me.GridColumn33.Visible = True
-        Me.GridColumn33.VisibleIndex = 1
+        Me.GridColumn33.VisibleIndex = 2
         '
         'GridColumn4
         '
@@ -521,7 +522,7 @@ Partial Class FormBankWithdrawalAttachement
         Me.GridColumn4.OptionsColumn.AllowEdit = False
         Me.GridColumn4.OptionsColumn.ReadOnly = True
         Me.GridColumn4.Visible = True
-        Me.GridColumn4.VisibleIndex = 2
+        Me.GridColumn4.VisibleIndex = 3
         '
         'GridColumn2
         '
@@ -536,7 +537,7 @@ Partial Class FormBankWithdrawalAttachement
         Me.GridColumn2.UnboundExpression = "[qty_po] * [val_po]"
         Me.GridColumn2.UnboundType = DevExpress.Data.UnboundColumnType.[Integer]
         Me.GridColumn2.Visible = True
-        Me.GridColumn2.VisibleIndex = 3
+        Me.GridColumn2.VisibleIndex = 4
         '
         'GridColumn1
         '
@@ -547,7 +548,7 @@ Partial Class FormBankWithdrawalAttachement
         Me.GridColumn1.FieldName = "pph_percent"
         Me.GridColumn1.Name = "GridColumn1"
         Me.GridColumn1.Visible = True
-        Me.GridColumn1.VisibleIndex = 4
+        Me.GridColumn1.VisibleIndex = 5
         '
         'GridColumn7
         '
@@ -561,7 +562,7 @@ Partial Class FormBankWithdrawalAttachement
         Me.GridColumn7.OptionsColumn.AllowFocus = False
         Me.GridColumn7.OptionsColumn.ReadOnly = True
         Me.GridColumn7.Visible = True
-        Me.GridColumn7.VisibleIndex = 6
+        Me.GridColumn7.VisibleIndex = 7
         '
         'RITEGrossupValue
         '
@@ -579,7 +580,7 @@ Partial Class FormBankWithdrawalAttachement
         Me.GridColumn9.UnboundExpression = "Floor(([amount] + [gross_up_value]) * ([pph_percent] / 100))"
         Me.GridColumn9.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
         Me.GridColumn9.Visible = True
-        Me.GridColumn9.VisibleIndex = 5
+        Me.GridColumn9.VisibleIndex = 6
         '
         'PanelControl3
         '
@@ -634,6 +635,14 @@ Partial Class FormBankWithdrawalAttachement
         Me.PanelControl4.Name = "PanelControl4"
         Me.PanelControl4.Size = New System.Drawing.Size(492, 38)
         Me.PanelControl4.TabIndex = 11
+        '
+        'GridColumn10
+        '
+        Me.GridColumn10.Caption = "Type"
+        Me.GridColumn10.FieldName = "item_type"
+        Me.GridColumn10.Name = "GridColumn10"
+        Me.GridColumn10.Visible = True
+        Me.GridColumn10.VisibleIndex = 1
         '
         'FormBankWithdrawalAttachement
         '
@@ -729,4 +738,5 @@ Partial Class FormBankWithdrawalAttachement
     Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
     Friend WithEvents GrossUpPPHToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents GridColumn9 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn10 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

@@ -25,12 +25,13 @@
 
         'item
         Dim query_item As String = "
-            SELECT pod.`id_purc_order_det`, item.`item_desc`, pod.`qty` AS qty_po, pod.`value` AS val_po, pod.pph_percent, pod.gross_up_value
+            SELECT pod.`id_purc_order_det`, item.`item_desc`,itt.id_item_type,itt.item_type, pod.`qty` AS qty_po, pod.`value` AS val_po, pod.pph_percent, pod.gross_up_value
             FROM tb_purc_order_det pod
             INNER JOIN tb_purc_req_det prd ON prd.`id_purc_req_det`=pod.`id_purc_req_det`
             INNER JOIN tb_purc_req pr ON pr.`id_purc_req`=prd.`id_purc_req`
             INNER JOIN `tb_item` item ON item.`id_item`=pod.`id_item`
             INNER JOIN tb_m_uom uom ON uom.`id_uom`=item.`id_uom`
+            INNER JOIN tb_lookup_purc_item_type itt ON itt.id_item_type=item.id_item_type
             WHERE pod.`id_purc_order`=" + id_purc_order + "
         "
 
@@ -92,9 +93,15 @@
 
         If TEPPH.EditValue > 0 Then
             If SLEPPHAccount.EditValue.ToString = "0" Then
-                cek_pph = "Please add PPH Account"
+                cek_pph = "Please select PPH Account"
             End If
         End If
+
+        For i As Integer = 0 To GVPurcReq.RowCount - 1
+            If GVPurcReq.GetRowCellValue(i, "id_item_type").ToString = "2" And GVPurcReq.GetRowCellValue(i, "pph_percent") = 0 Then
+                cek_pph = "Please add PPH for Jasa"
+            End If
+        Next
 
         If Not cek_attachment = "" Then
             errorCustom(cek_attachment)

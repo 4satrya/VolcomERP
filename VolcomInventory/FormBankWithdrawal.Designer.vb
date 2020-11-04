@@ -497,6 +497,7 @@ Partial Class FormBankWithdrawal
         Me.BloadWaiting = New DevExpress.XtraEditors.SimpleButton()
         Me.ViewBPL = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.VDItemList = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GridColumn228 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XTCPO, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCPO.SuspendLayout()
         Me.XTPPayment.SuspendLayout()
@@ -3282,7 +3283,7 @@ Partial Class FormBankWithdrawal
         '
         'GridView10
         '
-        Me.GridView10.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn42, Me.GridColumn43})
+        Me.GridView10.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn42, Me.GridColumn43, Me.GridColumn228})
         Me.GridView10.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
         Me.GridView10.Name = "GridView10"
         Me.GridView10.OptionsSelection.EnableAppearanceFocusedCell = False
@@ -5429,6 +5430,14 @@ Partial Class FormBankWithdrawal
         Me.VDItemList.Size = New System.Drawing.Size(112, 22)
         Me.VDItemList.Text = "History"
         '
+        'GridColumn228
+        '
+        Me.GridColumn228.Caption = "Status"
+        Me.GridColumn228.FieldName = "comp_status"
+        Me.GridColumn228.Name = "GridColumn228"
+        Me.GridColumn228.Visible = True
+        Me.GridColumn228.VisibleIndex = 1
+        '
         'FormBankWithdrawal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -6093,4 +6102,5 @@ Partial Class FormBankWithdrawal
     Friend WithEvents RepositoryItemCheckEdit15 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
     Friend WithEvents GridColumn226 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn227 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn228 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

@@ -122,9 +122,10 @@ SELECT cc.id_comp_contact,CONCAT(c.comp_number,' - ',c.comp_name) as comp_name
     End Sub
 
     Sub load_vendor_fgpo()
-        Dim query As String = "SELECT c.id_comp,CONCAT(c.comp_number,' - ',c.comp_name) as comp_name  
+        Dim query As String = "SELECT c.id_comp,CONCAT(c.comp_number,' - ',c.comp_name) as comp_name,sts.comp_status  
                                 FROM tb_m_comp c
-                                WHERE c.id_comp_cat='1' OR c.id_comp_cat='8' AND c.is_active=1"
+                                INNER JOIN tb_lookup_comp_status sts ON sts.id_comp_status=c.is_active
+                                WHERE c.id_comp_cat='1' OR c.id_comp_cat='8' AND (c.is_active='1' OR c.is_active='2') "
         viewSearchLookupQuery(SLEFGPOVendor, query, "id_comp", "comp_name", "id_comp")
     End Sub
 

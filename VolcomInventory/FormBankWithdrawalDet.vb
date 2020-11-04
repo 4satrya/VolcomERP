@@ -195,13 +195,14 @@ SELECT 1 AS id,'Yes' AS auto_debet"
 ,0 AS total_paid,cur.currency
 ,SUM(pnd.`value`+pnd.`vat`-IF(pnd.id_currency=2,0,pnd.`pph`)) AS total_pending
 ,SUM(pnd.`value`+pnd.`vat`-IF(pnd.id_currency=2,0,pnd.`pph`)) AS balance
+,cf.id_comp AS `id_comp_default`, cf.comp_number AS `comp_number_default`
 FROM tb_pn_fgpo_det pnd
 LEFT JOIN tb_prod_order po ON po.id_prod_order=pnd.id_prod_order
 INNER JOIN tb_pn_fgpo pn ON pn.`id_pn_fgpo`=pnd.`id_pn_fgpo` AND pn.`is_open`='1' AND pn.`id_report_status`=6 AND pn.`id_pn_fgpo`='" & FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "id_report").ToString & "'
 INNER JOIN tb_lookup_currency cur ON cur.`id_currency`=pnd.`id_currency`
 INNER JOIN tb_m_comp c ON c.id_comp=pn.id_comp 
 INNER JOIN tb_a_acc acc ON acc.id_acc=c.id_acc_ap
-INNER JOIN tb_lookup_currency cur ON cur.id_currency=pnd.id_currency
+INNER JOIN tb_m_comp cf ON cf.id_comp=1
 GROUP BY pnd.kurs"
                         Dim dtd As DataTable = execute_query(qd, -1, True, "", "", "", "")
                         For k = 0 To dtd.Rows.Count - 1

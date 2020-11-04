@@ -67,6 +67,8 @@ GROUP BY pdd.`id_prod_demand_design`"
             For j = GVCostList.RowCount - 1 To 0 Step -1
                 GVCostList.DeleteRow(j)
             Next
+            '
+
         End If
     End Sub
 
@@ -83,8 +85,8 @@ GROUP BY pdd.`id_prod_demand_design`"
             If GVDesignList.GetRowCellValue(i, "qty_sampling") > 0 Then
                 Dim newRow As DataRow = (TryCast(GCCostList.DataSource, DataTable)).NewRow()
                 newRow("description") = GVDesignList.GetRowCellValue(i, "design_display_name").ToString
-                newRow("qty") = FormBankWithdrawal.GVExpense.GetRowCellValue(i, "qty_sampling")
-                newRow("value") = FormBankWithdrawal.GVExpense.GetRowCellValue(i, "prod_order_cop_pd")
+                newRow("qty") = GVDesignList.GetRowCellValue(i, "qty_sampling")
+                newRow("value") = GVDesignList.GetRowCellValue(i, "prod_order_cop_pd")
                 TryCast(GCCostList.DataSource, DataTable).Rows.Add(newRow)
             End If
         Next
@@ -105,5 +107,9 @@ GROUP BY pdd.`id_prod_demand_design`"
         newRow("value") = 0
         TryCast(GCCostList.DataSource, DataTable).Rows.Add(newRow)
         check_button()
+    End Sub
+
+    Private Sub TECostPerUnit_EditValueChanged(sender As Object, e As EventArgs) Handles TECostPerUnit.EditValueChanged
+
     End Sub
 End Class

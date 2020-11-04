@@ -53,8 +53,8 @@ Partial Class FormAdditionalCostDet
         Me.BtnCancel = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnSave = New DevExpress.XtraEditors.SimpleButton()
         Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
-        Me.TextEdit2 = New DevExpress.XtraEditors.TextEdit()
-        Me.TextEdit1 = New DevExpress.XtraEditors.TextEdit()
+        Me.TECreatedBy = New DevExpress.XtraEditors.TextEdit()
+        Me.TENumber = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.PanelControl4 = New DevExpress.XtraEditors.PanelControl()
@@ -66,13 +66,15 @@ Partial Class FormAdditionalCostDet
         Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
         Me.TextEdit4 = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
-        Me.TextEdit3 = New DevExpress.XtraEditors.TextEdit()
+        Me.TECostPerUnit = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
         Me.MemoEdit1 = New DevExpress.XtraEditors.MemoEdit()
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
         Me.XtraTabControl1 = New DevExpress.XtraTab.XtraTabControl()
         Me.XTPDesignList = New DevExpress.XtraTab.XtraTabPage()
         Me.XTPCostList = New DevExpress.XtraTab.XtraTabPage()
+        Me.LabelControl9 = New DevExpress.XtraEditors.LabelControl()
+        Me.TETotQty = New DevExpress.XtraEditors.TextEdit()
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl1.SuspendLayout()
         CType(Me.GCDesignList, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -88,20 +90,21 @@ Partial Class FormAdditionalCostDet
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl3.SuspendLayout()
-        CType(Me.TextEdit2.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TextEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TECreatedBy.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TENumber.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl4.SuspendLayout()
         CType(Me.TextEdit7.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TextEdit6.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TextEdit5.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TextEdit4.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TextEdit3.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TECostPerUnit.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.MemoEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XtraTabControl1.SuspendLayout()
         Me.XTPDesignList.SuspendLayout()
         Me.XTPCostList.SuspendLayout()
+        CType(Me.TETotQty.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupControl1
@@ -307,7 +310,9 @@ Partial Class FormAdditionalCostDet
         'GridColumn11
         '
         Me.GridColumn11.Caption = "Price"
-        Me.GridColumn11.FieldName = "value_est"
+        Me.GridColumn11.DisplayFormat.FormatString = "N2"
+        Me.GridColumn11.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn11.FieldName = "value"
         Me.GridColumn11.Name = "GridColumn11"
         Me.GridColumn11.Visible = True
         Me.GridColumn11.VisibleIndex = 2
@@ -324,7 +329,7 @@ Partial Class FormAdditionalCostDet
         Me.GridColumn12.OptionsColumn.AllowFocus = False
         Me.GridColumn12.OptionsColumn.ReadOnly = True
         Me.GridColumn12.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sub_total", "{0:N2}")})
-        Me.GridColumn12.UnboundExpression = "[qty] * [value_est]"
+        Me.GridColumn12.UnboundExpression = "[qty] * [value]"
         Me.GridColumn12.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
         Me.GridColumn12.Visible = True
         Me.GridColumn12.VisibleIndex = 3
@@ -478,8 +483,8 @@ Partial Class FormAdditionalCostDet
         '
         'PanelControl3
         '
-        Me.PanelControl3.Controls.Add(Me.TextEdit2)
-        Me.PanelControl3.Controls.Add(Me.TextEdit1)
+        Me.PanelControl3.Controls.Add(Me.TECreatedBy)
+        Me.PanelControl3.Controls.Add(Me.TENumber)
         Me.PanelControl3.Controls.Add(Me.LabelControl2)
         Me.PanelControl3.Controls.Add(Me.LabelControl1)
         Me.PanelControl3.Dock = System.Windows.Forms.DockStyle.Top
@@ -488,19 +493,19 @@ Partial Class FormAdditionalCostDet
         Me.PanelControl3.Size = New System.Drawing.Size(995, 67)
         Me.PanelControl3.TabIndex = 3
         '
-        'TextEdit2
+        'TECreatedBy
         '
-        Me.TextEdit2.Location = New System.Drawing.Point(72, 37)
-        Me.TextEdit2.Name = "TextEdit2"
-        Me.TextEdit2.Size = New System.Drawing.Size(256, 20)
-        Me.TextEdit2.TabIndex = 3
+        Me.TECreatedBy.Location = New System.Drawing.Point(72, 37)
+        Me.TECreatedBy.Name = "TECreatedBy"
+        Me.TECreatedBy.Size = New System.Drawing.Size(256, 20)
+        Me.TECreatedBy.TabIndex = 3
         '
-        'TextEdit1
+        'TENumber
         '
-        Me.TextEdit1.Location = New System.Drawing.Point(72, 11)
-        Me.TextEdit1.Name = "TextEdit1"
-        Me.TextEdit1.Size = New System.Drawing.Size(172, 20)
-        Me.TextEdit1.TabIndex = 2
+        Me.TENumber.Location = New System.Drawing.Point(72, 11)
+        Me.TENumber.Name = "TENumber"
+        Me.TENumber.Size = New System.Drawing.Size(172, 20)
+        Me.TENumber.TabIndex = 2
         '
         'LabelControl2
         '
@@ -520,6 +525,8 @@ Partial Class FormAdditionalCostDet
         '
         'PanelControl4
         '
+        Me.PanelControl4.Controls.Add(Me.TETotQty)
+        Me.PanelControl4.Controls.Add(Me.LabelControl9)
         Me.PanelControl4.Controls.Add(Me.LabelControl8)
         Me.PanelControl4.Controls.Add(Me.TextEdit7)
         Me.PanelControl4.Controls.Add(Me.TextEdit6)
@@ -528,7 +535,7 @@ Partial Class FormAdditionalCostDet
         Me.PanelControl4.Controls.Add(Me.LabelControl6)
         Me.PanelControl4.Controls.Add(Me.TextEdit4)
         Me.PanelControl4.Controls.Add(Me.LabelControl5)
-        Me.PanelControl4.Controls.Add(Me.TextEdit3)
+        Me.PanelControl4.Controls.Add(Me.TECostPerUnit)
         Me.PanelControl4.Controls.Add(Me.LabelControl4)
         Me.PanelControl4.Controls.Add(Me.MemoEdit1)
         Me.PanelControl4.Controls.Add(Me.LabelControl3)
@@ -598,16 +605,16 @@ Partial Class FormAdditionalCostDet
         Me.LabelControl5.TabIndex = 5
         Me.LabelControl5.Text = "Sub Total"
         '
-        'TextEdit3
+        'TECostPerUnit
         '
-        Me.TextEdit3.Location = New System.Drawing.Point(96, 78)
-        Me.TextEdit3.Name = "TextEdit3"
-        Me.TextEdit3.Size = New System.Drawing.Size(102, 20)
-        Me.TextEdit3.TabIndex = 4
+        Me.TECostPerUnit.Location = New System.Drawing.Point(288, 78)
+        Me.TECostPerUnit.Name = "TECostPerUnit"
+        Me.TECostPerUnit.Size = New System.Drawing.Size(129, 20)
+        Me.TECostPerUnit.TabIndex = 4
         '
         'LabelControl4
         '
-        Me.LabelControl4.Location = New System.Drawing.Point(12, 81)
+        Me.LabelControl4.Location = New System.Drawing.Point(219, 81)
         Me.LabelControl4.Name = "LabelControl4"
         Me.LabelControl4.Size = New System.Drawing.Size(63, 13)
         Me.LabelControl4.TabIndex = 3
@@ -653,6 +660,21 @@ Partial Class FormAdditionalCostDet
         Me.XTPCostList.Size = New System.Drawing.Size(989, 338)
         Me.XTPCostList.Text = "Breakdown Cost"
         '
+        'LabelControl9
+        '
+        Me.LabelControl9.Location = New System.Drawing.Point(14, 81)
+        Me.LabelControl9.Name = "LabelControl9"
+        Me.LabelControl9.Size = New System.Drawing.Size(45, 13)
+        Me.LabelControl9.TabIndex = 13
+        Me.LabelControl9.Text = "Total Qty"
+        '
+        'TETotQty
+        '
+        Me.TETotQty.Location = New System.Drawing.Point(96, 78)
+        Me.TETotQty.Name = "TETotQty"
+        Me.TETotQty.Size = New System.Drawing.Size(117, 20)
+        Me.TETotQty.TabIndex = 14
+        '
         'FormAdditionalCostDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -684,8 +706,8 @@ Partial Class FormAdditionalCostDet
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl3.ResumeLayout(False)
         Me.PanelControl3.PerformLayout()
-        CType(Me.TextEdit2.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TextEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TECreatedBy.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TENumber.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl4.ResumeLayout(False)
         Me.PanelControl4.PerformLayout()
@@ -693,12 +715,13 @@ Partial Class FormAdditionalCostDet
         CType(Me.TextEdit6.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TextEdit5.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TextEdit4.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TextEdit3.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TECostPerUnit.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.MemoEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XtraTabControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XtraTabControl1.ResumeLayout(False)
         Me.XTPDesignList.ResumeLayout(False)
         Me.XTPCostList.ResumeLayout(False)
+        CType(Me.TETotQty.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -734,8 +757,8 @@ Partial Class FormAdditionalCostDet
     Friend WithEvents GridColumn9 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn11 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents PanelControl3 As DevExpress.XtraEditors.PanelControl
-    Friend WithEvents TextEdit2 As DevExpress.XtraEditors.TextEdit
-    Friend WithEvents TextEdit1 As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents TECreatedBy As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents TENumber As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents GridColumn12 As DevExpress.XtraGrid.Columns.GridColumn
@@ -750,9 +773,11 @@ Partial Class FormAdditionalCostDet
     Friend WithEvents LabelControl6 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents TextEdit4 As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelControl5 As DevExpress.XtraEditors.LabelControl
-    Friend WithEvents TextEdit3 As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents TECostPerUnit As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelControl4 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents XtraTabControl1 As DevExpress.XtraTab.XtraTabControl
     Friend WithEvents XTPDesignList As DevExpress.XtraTab.XtraTabPage
     Friend WithEvents XTPCostList As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents TETotQty As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LabelControl9 As DevExpress.XtraEditors.LabelControl
 End Class

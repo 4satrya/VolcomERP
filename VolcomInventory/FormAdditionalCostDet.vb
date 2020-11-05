@@ -3,6 +3,8 @@
     Public id_type As String = "1" '1 = est , 2 = realization
 
     Private Sub FormAdditionalCostDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        TEVatPercent.EditValue = 0.00
+
         load_det_cost()
     End Sub
 
@@ -68,7 +70,7 @@ GROUP BY pdd.`id_prod_demand_design`"
                 GVCostList.DeleteRow(j)
             Next
             '
-
+            calculate()
         End If
     End Sub
 
@@ -90,12 +92,14 @@ GROUP BY pdd.`id_prod_demand_design`"
                 TryCast(GCCostList.DataSource, DataTable).Rows.Add(newRow)
             End If
         Next
+        calculate()
         check_button()
     End Sub
 
     Private Sub BDel_Click(sender As Object, e As EventArgs) Handles BDel.Click
         If GVCostList.RowCount > 0 Then
             GVCostList.DeleteSelectedRows()
+            calculate()
             check_button()
         End If
     End Sub
@@ -109,7 +113,155 @@ GROUP BY pdd.`id_prod_demand_design`"
         check_button()
     End Sub
 
-    Private Sub TECostPerUnit_EditValueChanged(sender As Object, e As EventArgs) Handles TECostPerUnit.EditValueChanged
+    Sub calculate()
+        Dim total_qty_order As Decimal = 0
+        Dim total_cost As Decimal = 0.00
+        Dim vat As Decimal = 0.00
+        Dim vat_percent As Decimal = 0.00
 
+        Try
+            GVCostList.RefreshData()
+            total_cost = GVCostList.Columns("sub_total").SummaryItem.SummaryValue
+            total_qty_order = GVDesignList.Columns("qty").SummaryItem.SummaryValue
+            '
+            TETotQty.EditValue = total_qty_order
+            TECostPerUnit.EditValue = total_cost / total_qty_order
+            TESubTotal.EditValue = total_cost
+            TEVat.EditValue = (TEVatPercent.EditValue / 100) * total_cost
+            TEGrandTotal.EditValue = total_cost + ((TEVatPercent.EditValue / 100) * total_cost)
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub GVCostList_CellValueChanged(sender As Object, e As DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs) Handles GVCostList.CellValueChanged
+        If e.Column.FieldName = "qty" Or e.Column.FieldName = "value" Then
+            calculate()
+        End If
+    End Sub
+
+    Private Sub TEVatPercent_EditValueChanged(sender As Object, e As EventArgs) Handles TEVatPercent.EditValueChanged
+        calculate()
+    End Sub
+
+    Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles BtnSave.Click
+        Dim is_ok As Boolean = True
+
+        For i As Integer = 0 To GVCostList.RowCount - 1
+            If GVCostList.GetRowCellValue(i, "qty") <= 0 Or GVCostList.GetRowCellValue(i, "value") <= 0 Then
+                warningCustom("Please put qty and cost price correctly")
+                is_ok = False
+                Exit For
+            End If
+        Next
+        '
+        If GVDesignList.RowCount = 0 Or GVCostList.RowCount = 0 Then
+            warningCustom("Please load design first and put the cost list.")
+            is_ok = False
+        End If
+        '
+        If is_ok Then
+            If id_type = "1" Then 'propose
+                If id_pps = "1" Then 'new
+                    Dim q As String = "INSERT INTO `tb_additional_cost_pps`(id_type,created_by,created_date,update_by,update_date,note,vat_percent,id_report_status)
+VALUES('1','" & id_user & "',NOW(),'" & id_user & "',NOW(),'" & addSlashes(MENote.Text) & "','" & decimalSQL(Decimal.Parse(TEVatPercent.EditValue.ToString)) & "','1'); SELECT LAST_INSERT_ID(); "
+
+                    id_pps = execute_query(q, 0, True, "", "", "", "")
+                    'design
+                    q = "INSERT INTO `tb_additional_cost_pps_design`(`id_additional_cost_pps`,`id_design`,`qty_order`,`qty_sample`,`ecop`) VALUES"
+                    For i = 0 To GVDesignList.RowCount - 1
+                        If Not i = 0 Then
+                            q += ","
+                        End If
+                        q += "('" & id_pps & "','" & GVDesignList.GetRowCellValue(i, "id_design").ToString & "','" & decimalSQL(Decimal.Parse(GVDesignList.GetRowCellValue(i, "qty").ToString).ToString) & "','" & decimalSQL(Decimal.Parse(GVDesignList.GetRowCellValue(i, "qty_sampling").ToString).ToString) & "','" & decimalSQL(Decimal.Parse(GVDesignList.GetRowCellValue(i, "prod_order_cop_pd").ToString).ToString) & "')"
+                    Next
+                    execute_non_query(q, True, "", "", "", "")
+                    'detail
+                    q = "INSERT INTO `tb_additional_cost_pps_det`(`id_additional_cost_pps`,`description`,`qty_est`,`value_est`) VALUES"
+                    For i = 0 To GVDesignList.RowCount - 1
+                        If Not i = 0 Then
+                            q += ","
+                        End If
+                        q += "('" & id_pps & "','" & addSlashes(GVDesignList.GetRowCellValue(i, "description").ToString) & "','" & decimalSQL(Decimal.Parse(GVDesignList.GetRowCellValue(i, "qty").ToString).ToString) & "','" & decimalSQL(Decimal.Parse(GVDesignList.GetRowCellValue(i, "value").ToString).ToString) & "')"
+                    Next
+                    execute_non_query(q, True, "", "", "", "")
+                Else 'edit
+                    Dim q As String = "UPDATE `tb_additional_cost_pps` SET update_by='" & id_user & "',update_date=NOW(),note='" & addSlashes(MENote.Text) & "',vat_percent='" & decimalSQL(Decimal.Parse(TEVatPercent.EditValue.ToString)) & "' WHERE id_additional_cost_pps='" & id_pps & "'"
+                    id_pps = execute_query(q, 0, True, "", "", "", "")
+                    'design
+                    q = "DELETE FROM tb_additional_cost_pps_design WHERE id_additional_cost_pps='" & id_pps & "'"
+                    execute_non_query(q, True, "", "", "", "")
+                    q = "INSERT INTO `tb_additional_cost_pps_design`(`id_additional_cost_pps`,`id_design`,`qty_order`,`qty_sample`,`ecop`) VALUES"
+                    For i = 0 To GVDesignList.RowCount - 1
+                        If Not i = 0 Then
+                            q += ","
+                        End If
+                        q += "('" & id_pps & "','" & GVDesignList.GetRowCellValue(i, "id_design").ToString & "','" & decimalSQL(Decimal.Parse(GVDesignList.GetRowCellValue(i, "qty").ToString).ToString) & "','" & decimalSQL(Decimal.Parse(GVDesignList.GetRowCellValue(i, "qty_sampling").ToString).ToString) & "','" & decimalSQL(Decimal.Parse(GVDesignList.GetRowCellValue(i, "prod_order_cop_pd").ToString).ToString) & "')"
+                    Next
+                    execute_non_query(q, True, "", "", "", "")
+                    'detail
+                    q = "DELETE FROM tb_additional_cost_pps_det WHERE id_additional_cost_pps='" & id_pps & "'"
+                    execute_non_query(q, True, "", "", "", "")
+                    q = "INSERT INTO `tb_additional_cost_pps_det`(`id_additional_cost_pps`,`description`,`qty_est`,`value_est`) VALUES"
+                    For i = 0 To GVDesignList.RowCount - 1
+                        If Not i = 0 Then
+                            q += ","
+                        End If
+                        q += "('" & id_pps & "','" & addSlashes(GVDesignList.GetRowCellValue(i, "description").ToString) & "','" & decimalSQL(Decimal.Parse(GVDesignList.GetRowCellValue(i, "qty").ToString).ToString) & "','" & decimalSQL(Decimal.Parse(GVDesignList.GetRowCellValue(i, "value").ToString).ToString) & "')"
+                    Next
+                    execute_non_query(q, True, "", "", "", "")
+                End If
+            ElseIf id_type = "2" Then 'realization
+                If id_pps = "1" Then 'new
+                    Dim q As String = "INSERT INTO `tb_additional_cost_pps`(id_type,created_by,created_date,update_by,update_date,note,vat_percent,id_report_status)
+VALUES('2','" & id_user & "',NOW(),'" & id_user & "',NOW(),'" & addSlashes(MENote.Text) & "','" & decimalSQL(Decimal.Parse(TEVatPercent.EditValue.ToString)) & "','1'); SELECT LAST_INSERT_ID(); "
+
+                    id_pps = execute_query(q, 0, True, "", "", "", "")
+                    'design
+                    q = "INSERT INTO `tb_additional_cost_pps_design`(`id_additional_cost_pps`,`id_design`,`qty_order`,`qty_sample`,`ecop`) VALUES"
+                    For i = 0 To GVDesignList.RowCount - 1
+                        If Not i = 0 Then
+                            q += ","
+                        End If
+                        q += "('" & id_pps & "','" & GVDesignList.GetRowCellValue(i, "id_design").ToString & "','" & decimalSQL(Decimal.Parse(GVDesignList.GetRowCellValue(i, "qty").ToString).ToString) & "','" & decimalSQL(Decimal.Parse(GVDesignList.GetRowCellValue(i, "qty_sampling").ToString).ToString) & "','" & decimalSQL(Decimal.Parse(GVDesignList.GetRowCellValue(i, "prod_order_cop_pd").ToString).ToString) & "')"
+                    Next
+                    execute_non_query(q, True, "", "", "", "")
+                    'detail
+                    q = "INSERT INTO `tb_additional_cost_pps_det`(`id_additional_cost_pps`,`description`,`qty`,`value`) VALUES"
+                    For i = 0 To GVDesignList.RowCount - 1
+                        If Not i = 0 Then
+                            q += ","
+                        End If
+                        q += "('" & id_pps & "','" & addSlashes(GVDesignList.GetRowCellValue(i, "description").ToString) & "','" & decimalSQL(Decimal.Parse(GVDesignList.GetRowCellValue(i, "qty").ToString).ToString) & "','" & decimalSQL(Decimal.Parse(GVDesignList.GetRowCellValue(i, "value").ToString).ToString) & "')"
+                    Next
+                    execute_non_query(q, True, "", "", "", "")
+                Else 'edit
+                    Dim q As String = "UPDATE `tb_additional_cost_pps` SET update_by='" & id_user & "',update_date=NOW(),note='" & addSlashes(MENote.Text) & "',vat_percent='" & decimalSQL(Decimal.Parse(TEVatPercent.EditValue.ToString)) & "' WHERE id_additional_cost_pps='" & id_pps & "'"
+                    id_pps = execute_query(q, 0, True, "", "", "", "")
+                    'design
+                    q = "DELETE FROM tb_additional_cost_pps_design WHERE id_additional_cost_pps='" & id_pps & "'"
+                    execute_non_query(q, True, "", "", "", "")
+                    q = "INSERT INTO `tb_additional_cost_pps_design`(`id_additional_cost_pps`,`id_design`,`qty_order`,`qty_sample`,`ecop`) VALUES"
+                    For i = 0 To GVDesignList.RowCount - 1
+                        If Not i = 0 Then
+                            q += ","
+                        End If
+                        q += "('" & id_pps & "','" & GVDesignList.GetRowCellValue(i, "id_design").ToString & "','" & decimalSQL(Decimal.Parse(GVDesignList.GetRowCellValue(i, "qty").ToString).ToString) & "','" & decimalSQL(Decimal.Parse(GVDesignList.GetRowCellValue(i, "qty_sampling").ToString).ToString) & "','" & decimalSQL(Decimal.Parse(GVDesignList.GetRowCellValue(i, "prod_order_cop_pd").ToString).ToString) & "')"
+                    Next
+                    execute_non_query(q, True, "", "", "", "")
+                    'detail
+                    q = "DELETE FROM tb_additional_cost_pps_det WHERE id_additional_cost_pps='" & id_pps & "'"
+                    execute_non_query(q, True, "", "", "", "")
+                    q = "INSERT INTO `tb_additional_cost_pps_det`(`id_additional_cost_pps`,`description`,`qty`,`value`) VALUES"
+                    For i = 0 To GVDesignList.RowCount - 1
+                        If Not i = 0 Then
+                            q += ","
+                        End If
+                        q += "('" & id_pps & "','" & addSlashes(GVDesignList.GetRowCellValue(i, "description").ToString) & "','" & decimalSQL(Decimal.Parse(GVDesignList.GetRowCellValue(i, "qty").ToString).ToString) & "','" & decimalSQL(Decimal.Parse(GVDesignList.GetRowCellValue(i, "value").ToString).ToString) & "')"
+                    Next
+                    execute_non_query(q, True, "", "", "", "")
+                End If
+            End If
+        End If
     End Sub
 End Class
